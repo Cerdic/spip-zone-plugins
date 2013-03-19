@@ -1,0 +1,666 @@
+Seulement dans formidable_1_0/action: exporter_analyse_reponses.php
+diff -r -U4 -x CVS formidable_1_0.orig/formidable_autorisations.php formidable_1_0/formidable_autorisations.php
+--- formidable_1_0.orig/formidable_autorisations.php	2012-09-06 14:00:04.000000000 +0200
++++ formidable_1_0/formidable_autorisations.php	2013-03-19 15:47:51.681294328 +0100
+@@ -27,10 +27,12 @@
+  * @param  array  $opt   Options de cette autorisation
+  * @return bool          true s'il a le droit, false sinon
+ **/
+ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
+-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
+-	else return false;
++    if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and
++        (!$qui['restreint']) or $GLOBALS['formulaires']['autoriser_admin_restreint'])
++            return true;
++    else return false;
+ }
+ 
+ /**
+  * Autorisation de voir la liste des formulaires formidable
+@@ -92,9 +94,9 @@
+ 				return true;
+ 			else{
+ 				include_spip('inc/formidable');
+ 				// Si la personne n'a jamais répondu, c'est bon
+-				if (!formidable_verifier_reponse_formulaire($id, $options['identification']))
++				if (!formidable_verifier_reponse_formulaire($id))
+ 					return true;
+ 				else
+ 					return false;
+ 			}
+diff -r -U4 -x CVS formidable_1_0.orig/formidable_options.php formidable_1_0/formidable_options.php
+--- formidable_1_0.orig/formidable_options.php	2012-10-12 11:00:03.000000000 +0200
++++ formidable_1_0/formidable_options.php	2013-03-19 15:56:57.877287434 +0100
+@@ -83,8 +83,19 @@
+ 		)
+ 	)
+ );
+ 
++/* déclaration des différentes variables utilisées pour effectuer l'anonymisation */
++$GLOBALS['formulaires']['variables_anonymisation'] = array(
++	'remote_user' => '$_SERVER["REMOTE_USER"]',
++	'php_auth_user' => '$_SERVER["PHP_AUTH_USER"]',
++);
++
++$GLOBALS['formulaires']['passwd'] = array(
++	'interne' => 'palabresecreta',
++);
++
++$GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
+ 
+ if (!function_exists('array_fill_keys')) {
+ 	/**
+ 	 * Remplit un tableau avec des valeurs, en spécifiant les clés
+diff -r -U4 -x CVS formidable_1_0.orig/formulaires/formidable.html formidable_1_0/formulaires/formidable.html
+--- formidable_1_0.orig/formulaires/formidable.html	2012-09-06 15:00:08.000000000 +0200
++++ formidable_1_0/formulaires/formidable.html	2013-03-19 15:58:24.837286337 +0100
+@@ -1,8 +1,13 @@
+ <BOUCLE_remplacer_le_formulaire(CONDITION){si #ENV{_remplacer_formulaire}}>
+ 	[(#REM) Afficher du HTML si prévu par un plugin ou pour les stats ]
+ 	[(#ENV**{_remplacer_formulaire})]
+ </BOUCLE_remplacer_le_formulaire>
++<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#ENV{id}}>
++	[(#SET{enregistrement,[(#TRAITEMENTS**|unserialize|table_valeur{'enregistrement'})]})]
++	[(#SET{anonymiser,[(#GET{enregistrement}|table_valeur{'anonymiser'})]})]
++	[(#GET{anonymiser}|=={on}|oui)<h3><:formidable:formulaire_anonyme_explication:>]</h3>
++</BOUCLE_formulaire>
+ <div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+ 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+ 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+ 
+diff -r -U4 -x CVS formidable_1_0.orig/formulaires/formidable.php formidable_1_0/formulaires/formidable.php
+--- formidable_1_0.orig/formulaires/formidable.php	2012-10-12 11:00:07.000000000 +0200
++++ formidable_1_0/formulaires/formidable.php	2013-03-19 15:47:51.781294328 +0100
+@@ -94,10 +94,10 @@
+ 				// la dernière réponse si elle existe
+ 				if ($options = $traitements['enregistrement']
+ 					and !$options['multiple']
+ 					and $options['modifiable']
+-					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'])
+-				){
++					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options)
++				) {
+ 					$id_formulaires_reponse = array_pop($reponses);
+ 					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+ 
+ 					// On ajoute un hidden pour dire que c'est une modif
+diff -r -U4 -x CVS formidable_1_0.orig/inc/formidable.php formidable_1_0/inc/formidable.php
+--- formidable_1_0.orig/inc/formidable.php	2012-09-06 14:00:10.000000000 +0200
++++ formidable_1_0/inc/formidable.php	2013-03-19 15:47:51.945294326 +0100
+@@ -93,36 +93,47 @@
+ /*
+  * Vérifie si le visiteur a déjà répondu à un formulaire
+  *
+  * @param int $id_formulaire L'identifiant du formulaire
+- * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
++ * @param string $options : options du formulaire definies dans l'espace prive
+  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
+  */
+-function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie'){
++function formidable_verifier_reponse_formulaire($id_formulaire, $options){
+ 	global $auteur_session;
+ 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+ 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
+ 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
+ 
++	$anonymiser = isset($options['anonymiser']) ? $options['anonymiser'] : false;
++	$anonymiser_variable = isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : '';
++
++	// traitement de l'anonymisation
++	if ($anonymiser != false) {
++	    // mod de l'id_auteur
++	    $variables_anonymisation =
++	            $GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
++	    $id = eval("return $variables_anonymisation;");
++	    $id_auteur = formidable_scramble($id);
++	}
+ 	// ni cookie ni id, on ne peut rien faire
+ 	if (!$cookie and !$id_auteur) {
+ 		return false;
+ 	}
+ 	
+ 	// priorite sur le cookie
+ 	if ($choix_identification == 'cookie' or !$choix_identification) {
+ 		if ($cookie)
+-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
++			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
+ 		else
+-			$where = 'id_auteur='.intval($id_auteur);
++			$where = 'id_auteur='.$id_auteur;
+ 	}
+ 	
+ 	// sinon sur l'id_auteur
+ 	else {
+ 		if ($id_auteur)
+-			$where = 'id_auteur='.intval($id_auteur);		
++			$where = 'id_auteur='.$id_auteur;
+ 		else
+-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
++			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
+ 	}
+ 	
+ 	$reponses = sql_allfetsel(
+ 		'id_formulaires_reponse',
+@@ -148,9 +159,9 @@
+  * @param array $saisie Un tableau décrivant une saisie
+  * @param array $env L'environnement, contenant normalement la réponse à la saisie
+  * @return string Retour le HTML des vues
+  */
+-function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0){
++function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0, $format_brut=false) {
+ 	// Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
+ 	if (!is_array($saisie) or (isset($saisie['saisies']) and $saisie['saisies']))
+ 		return '';
+ 	
+@@ -176,12 +187,106 @@
+ 		$contexte['valeurs'] = array();
+ 	}
+ 	
+ 	// On génère la saisie
+-	return recuperer_fond(
+-		'saisies-analyses/_base',
+-		$contexte
+-	);
++    if ($format_brut) {
++        return analyser_saisie($contexte);
++    } else {
++        return recuperer_fond(
++            'saisies-analyses/_base',
++            $contexte
++        );
++    }
++}
++
++/*
++ * Renvoie une ligne de réponse sous la forme d'un tableau
++ *
++ * @param array $saisie Un tableau décrivant une saisie
++ * @return array Tableau contenant une ligne
++ */
++function analyser_saisie($saisie) {
++    if (!isset($saisie['type_saisie']) or $saisie['type_saisie'] == '')
++        return '';
++
++    $ligne = array();
++
++    switch($saisie['type_saisie']) {
++        case 'selecteur_rubrique' :
++        case 'selecteur_rubrique_article' :
++        case 'selecteur_article' :
++            $ligne['plein'] = count(array_filter($saisie['valeurs']));
++            $ligne['vide'] = count(array_diff_key($saisie['valeurs']
++                , array_filter($saisie['valeurs'])));
++        break;
++        case 'radio' :
++        case 'selection' :
++        case 'selection_multiple' :
++        case 'checkbox' :
++            $stats = array();
++            foreach($saisie['valeurs'] as $valeur) {
++                if (is_array($valeur)) {
++                    foreach($valeur as $choix) {
++                        if (isset($stats["choix-$choix"]))
++                            $stats["choix-$choix"]++;
++                        else $stats["choix-$choix"] = 1;
++                    }
++                } else {
++                    if (isset($stats["choix-$valeur"]))
++                            $stats["choix-$valeur"]++;
++                        else $stats["choix-$valeur"] = 1;
++                }
++            }
++            $datas = is_string($saisie['datas'])
++                ? saisies_chaine2tableau($saisie['datas'])
++                : $saisie['datas'];
++            foreach($datas as $key => $val) {
++                $nb = (isset($stats["choix-$key"]))
++                    ? $stats["choix-$key"]
++                    : 0;
++                $ligne[$val] = $nb;
++            }
++        break;
++        case 'destinataires' :
++            $stats = array();
++            foreach($saisie['valeurs'] as $valeur) {
++                foreach($valeur as $choix) {
++                    if (isset($stats["choix-$choix"]))
++                        $stats["choix-$choix"]++;
++                    else $stats["choix-$choix"] = 1;
++                }
++            }
++            foreach($stats as $key => $val) {
++                $key = str_replace('choix-', '', $key);
++                if ($key == '') $key = '<valeur vide>';
++                $auteur = sql_getfetsel('nom','spip_auteurs',"id_auteur=$key");
++                $ligne[$auteur] = $val;
++            }
++        break;
++    }
++
++    $vide = 0;
++    foreach($saisie['valeurs'] as $valeur) {
++        if ($valeur == '') $vide++;
++        switch($saisie['type_saisie']) {
++            case 'case' :
++            case 'oui_non' :
++                if(isset($ligne['oui']) == false) $ligne['oui'] = 0;
++                if(isset($ligne['non']) == false) $ligne['non'] = 0;
++                if ($valeur) $ligne['oui']++; else $ligne['non']++;
++            break;
++            case 'input' :
++            case 'hidden' :
++            case 'explication' :
++            break;
++        }
++    }
++    $ligne['sans_reponse'] = $vide;
++    $ligne['header'] = $saisie['label'] != ''
++        ? $saisie['label']
++        : $saisie['type_saisie'];
++
++    return $ligne;
+ }
+ 
+ 
+ /**
+@@ -222,5 +327,51 @@
+ 	if ($nb == 1) return _T('formidable:reponse_une');
+ 	return _T('formidable:reponses_nb', array('nb' => $nb));
+ }
+ 
++/**
++ * Transforme le hash MD5 en une valeur numérique unique
++ *
++ * trouvé ici : http://stackoverflow.com/questions/1422725/represent-md5-hash-as-an-integer
++ * @param string $hex_str La valeur alphanumérique à transformer
++ * @return string Valeur numérique
++*/
++function md5_hex_to_dec($hex_str) {
++	$arr = str_split($hex_str, 4);
++	foreach ($arr as $grp) {
++	    $dec[] = str_pad(hexdec($grp), 5, '0', STR_PAD_LEFT);
++	}
++
++	/* on s'assure que $result ne commence pas par un zero */
++	$result = implode('', $dec);
++	for ($cpt = 0 ; $cpt < strlen($result) ; $cpt++) {
++	    if ($result[$cpt] != '0') break;
++	}
++	$result = substr($result, $cpt);
++	return $result;
++}
++
++/**
++ * Transforme un login en une valeur numérique de 19 caractères
++ *
++ * NOTE: il devient impossible de retrouver la valeur d'origine car le HASH
++ * est coupé à 19cars et est donc incomplet. L'unicité n'est pas garantie mais
++ * les chances pour que deux logins tombent sur le même HASH sont de 1 sur
++ * 10 milliards de milliards
++ * A la fin, on recherche et supprime les éventuels zéros de début
++ * @param string $login Login à transformer
++ * @param string $passwd Chaîne 'secrète' ajoutée au login et id_formulaire pour éviter
++ *  les recoupements d'identité entre plusieurs formulaires
++ * @return string Un nombre de 19 chiffres
++*/
++function formidable_scramble($login, $passwd = '') {
++	$id_form = (isset($flux['args']['id_form']) ? $flux['args']['id_form'] : '');
++	if ($passwd == '')
++	    $passwd = $GLOBALS['formulaires']['passwd']['interne'];
++	$login_md5 = md5("$login$passwd$id_form");
++	$login_num = md5_hex_to_dec($login_md5);
++	$login_num = substr($login_num, 0, 19);
++
++	return $login_num;
++}
++
+ ?>
+diff -r -U4 -x CVS formidable_1_0.orig/lang/formidable_de.php formidable_1_0/lang/formidable_de.php
+--- formidable_1_0.orig/lang/formidable_de.php	2012-09-07 04:00:18.000000000 +0200
++++ formidable_1_0/lang/formidable_de.php	2013-03-19 15:47:51.993294324 +0100
+@@ -14,8 +14,9 @@
+ 	'analyse_sans_reponse' => 'Leere Antworten',
+ 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
+ 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
+ 	'aucun_traitement' => 'Aucun traitement', # NEW
++    'analyse_exporter' => 'Analyse exportieren',
+ 
+ 	// B
+ 	'bouton_formulaires' => 'Formulare',
+ 
+@@ -25,8 +26,9 @@
+ 		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+ 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
+ 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
+ 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
++    'champ' => 'Feld',
+ 
+ 	// E
+ 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
+ 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
+@@ -61,8 +63,9 @@
+ 	'erreur_importer_yaml' => 'Fehler beim Importieren des Formulars aus YAML',
+ 	'erreur_inexistant' => 'Formular nicht vorhanden.',
+ 
+ 	// F
++	'formulaire_anonyme_explication' => "Diese Form ist anonym, dh die Identität des Benutzers nicht registriert ist.",
+ 	'formulaires_aucun' => 'Kein Formular vorhanden.',
+ 	'formulaires_dupliquer' => 'Formular kopieren',
+ 	'formulaires_dupliquer_copie' => '(Kopie)',
+ 	'formulaires_introduction' => 'Erstellen und bearbeiten sie Formulare für ihre Website.',
+@@ -106,8 +109,11 @@
+ 	'reponses_nb' => '@nb@ réponses', # NEW
+ 	'reponses_voir_detail' => 'Antwort anzeigen',
+ 	'retour_aucun_traitement' => 'Ihre Antwort wurde gesendet, jedoch wurde keine Verarbeitungsoption für das Formular festgelegt. Deshalb geschieht mit den Daten aus diesem Formular überhaupt nichts. :)',
+ 
++    // S
++    'sans_reponses' => 'Unbeantwortet',
++
+ 	// T
+ 	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
+ 	'traitements_actives' => 'Traitements activés', # NEW
+ 	'traitements_aide_memoire' => 'Merkzettel:',
+@@ -137,8 +143,13 @@
+ 	'traiter_email_sujet' => '@nom@ hat ihnen geschrieben.',
+ 	'traiter_email_sujet_accuse' => 'Danke für ihre Antwort.',
+ 	'traiter_email_titre' => 'Per Mail senden',
+ 	'traiter_email_url_enregistrement' => 'Sie könen die Antworten <a href="@url@">auf dieser Seite verwalten</a>.',
++	'traiter_enregistrement_option_anonymiser_label' => "Anonymisierter Form",
++	'traiter_enregistrement_option_anonymiser_explication' => "Stellen die Ergebnisse der anonymen Form (nicht halten Trace-Kennung der Befragten).')",
++	'traiter_enregistrement_option_choix_select_label' => "W&auml;hlen eine Variable von denen zur Verf&uuml;gung.",
++	'traiter_enregistrement_option_anonymiser_variable_label' => "Variable aus dem anonymisierter Form.",
++	'traiter_enregistrement_option_anonymiser_variable_explication' => "Welches System Variable verwendet, um einen einzelnen Wert f&uuml;r jeden Autor ohne Offenlegung seiner Identit&auml;t zu berechnen.",
+ 	'traiter_enregistrement_description' => 'Einträge in das Formular in der Datenbank speichern',
+ 	'traiter_enregistrement_erreur_base' => 'Beim Speichern in der Datenbank ist ein Fehler aufgetreten',
+ 	'traiter_enregistrement_erreur_deja_repondu' => 'Sie haben dieses Formular bereits ausgefüllt.',
+ 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.', # NEW
+Seulement dans formidable_1_0.orig/lang: formidable_en.php
+diff -r -U4 -x CVS formidable_1_0.orig/lang/formidable_fr.php formidable_1_0/lang/formidable_fr.php
+--- formidable_1_0.orig/lang/formidable_fr.php	2012-09-07 04:00:18.000000000 +0200
++++ formidable_1_0/lang/formidable_fr.php	2013-03-19 16:01:12.685284218 +0100
+@@ -12,8 +12,9 @@
+ 	'analyse_sans_reponse' => 'Laissés blanc',
+ 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
+ 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.',
+ 	'aucun_traitement' => 'Aucun traitement',
++    'analyse_exporter' => 'Exporter l\'analyse',
+ 
+ 	// B
+ 	'bouton_formulaires' => 'Formulaires',
+ 
+@@ -23,8 +24,9 @@
+ 		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
+ 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
+ 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
+ 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses',
++    'champ' => 'Champ',
+ 
+ 	// E
+ 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
+ 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
+@@ -59,8 +61,9 @@
+ 	'erreur_importer_yaml' => 'Erreur durant l\'importation du fichier YAML',
+ 	'erreur_inexistant' => 'Le formulaire n\'existe pas.',
+ 
+ 	// F
++	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistr&eacute;e.',
+ 	'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
+ 	'formulaires_dupliquer' => 'Dupliquer le formulaire',
+ 	'formulaires_dupliquer_copie' => '(copie)',
+ 	'formulaires_introduction' => 'Créez et configurez ici les formulaires de votre site.',
+@@ -104,8 +107,11 @@
+ 	'reponses_nb' => '@nb@ réponses',
+ 	'reponses_voir_detail' => 'Voir la réponse',
+ 	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n\'a été défini pour ce formulaire. Il ne fait donc rien. :)',
+ 
++    // S
++    'sans_reponses' => 'Sans réponse',
++
+ 	// T
+ 	'titre_cadre_raccourcis' => 'Raccourcis',
+ 	'traitements_actives' => 'Traitements activés',
+ 	'traitements_aide_memoire' => 'Aide mémoire :',
+@@ -135,8 +141,13 @@
+ 	'traiter_email_sujet' => '@nom@ vous a écrit.',
+ 	'traiter_email_sujet_accuse' => 'Merci de votre réponse.',
+ 	'traiter_email_titre' => 'Envoyer par courriel',
+ 	'traiter_email_url_enregistrement' => 'Vous pouvez gérer les réponses <a href="@url@">sur cette page</a>.',
++	'traiter_enregistrement_option_anonymiser_label' => "Anonymiser le formulaire",
++	'traiter_enregistrement_option_anonymiser_explication' => "Rendre les r&eacute;sultats du formulaire anonymes (ne pas garder de traces de l'identifiant des personnes ayant r&eacute;pondu.)",
++	'traiter_enregistrement_option_choix_select_label' => "Choisir une variable parmi celles propos&eacute;es",
++	'traiter_enregistrement_option_anonymiser_variable_label' => "Variable &agrave; partir de laquelle anonymiser le formulaire",
++	'traiter_enregistrement_option_anonymiser_variable_explication' => "Quelle variable syst&egrave;me utiliser pour calculer une valeur unique pour chaque auteur sans pour autant r&eacute;v&eacute;ler son identit&eacute;.",
+ 	'traiter_enregistrement_description' => 'Enregistre les résultats du formulaire dans la base de données',
+ 	'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement en base de données',
+ 	'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez déjà répondu à ce formulaire.',
+ 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.',
+diff -r -U4 -x CVS formidable_1_0.orig/lang/formidable_it.php formidable_1_0/lang/formidable_it.php
+--- formidable_1_0.orig/lang/formidable_it.php	2012-09-07 04:00:18.000000000 +0200
++++ formidable_1_0/lang/formidable_it.php	2013-03-19 15:47:52.009294324 +0100
+@@ -14,8 +14,9 @@
+ 	'analyse_sans_reponse' => 'Risposte vuote',
+ 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
+ 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
+ 	'aucun_traitement' => 'Aucun traitement', # NEW
++    'analyse_exporter' => 'Esporta l\'analisi',
+ 
+ 	// B
+ 	'bouton_formulaires' => 'Moduli',
+ 
+@@ -25,8 +26,9 @@
+ 		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
+ 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
+ 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
+ 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
++    'champ' => 'Campo',
+ 
+ 	// E
+ 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
+ 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
+@@ -106,8 +108,11 @@
+ 	'reponses_nb' => '@nb@ réponses', # NEW
+ 	'reponses_voir_detail' => 'Vedi la risposta',
+ 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
+ 
++    // S
++    'sans_reponses' => 'Senza risposta',
++
+ 	// T
+ 	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
+ 	'traitements_actives' => 'Traitements activés', # NEW
+ 	'traitements_aide_memoire' => 'Promemoria:',
+diff -r -U4 -x CVS formidable_1_0.orig/lang/formidable_sk.php formidable_1_0/lang/formidable_sk.php
+--- formidable_1_0.orig/lang/formidable_sk.php	2012-09-17 04:00:06.000000000 +0200
++++ formidable_1_0/lang/formidable_sk.php	2013-03-19 15:47:52.017294325 +0100
+@@ -14,8 +14,9 @@
+ 	'analyse_sans_reponse' => 'Nevyplnené',
+ 	'analyse_une_reponse_total' => 'Na tento formulár odpovedal jeden človek.',
+ 	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.',
+ 	'aucun_traitement' => 'Žiadne spracovanie',
++    'analyse_exporter' => 'Exportovať analýzu',
+ 
+ 	// B
+ 	'bouton_formulaires' => 'Formuláre',
+ 
+@@ -25,8 +26,9 @@
+ 		<code>oranžový,</code> <code>zelený</code> alebo akýkoľvek iný stĺpec!',
+ 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
+ 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
+ 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
++    'champ' => 'Pol\'a',
+ 
+ 	// E
+ 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
+ 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
+@@ -106,8 +108,11 @@
+ 	'reponses_nb' => '@nb@ odpovedí',
+ 	'reponses_voir_detail' => 'Zobraziť odpoveď',
+ 	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
+ 
++    // S
++    'sans_reponses' => 'Neriešiteľný',
++
+ 	// T
+ 	'titre_cadre_raccourcis' => 'Skratky',
+ 	'traitements_actives' => 'Aktívne spracovanie',
+ 	'traitements_aide_memoire' => 'Pomocná pamäť:',
+diff -r -U4 -x CVS formidable_1_0.orig/lang/formidable.xml formidable_1_0/lang/formidable.xml
+--- formidable_1_0.orig/lang/formidable.xml	2013-01-21 04:00:22.000000000 +0100
++++ formidable_1_0/lang/formidable.xml	2013-03-19 15:47:52.001294324 +0100
+@@ -1,10 +1,6 @@
+ <traduction module="formidable" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
+ 	<langue code="de" />
+-	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en">
+-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+-	</langue>
+ 	<langue code="fr" />
+ 	<langue code="it" />
+ 	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk">
+ 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+diff -r -U4 -x CVS formidable_1_0.orig/modeles/formulaire_analyse.html formidable_1_0/modeles/formulaire_analyse.html
+--- formidable_1_0.orig/modeles/formulaire_analyse.html	2013-03-12 19:00:08.000000000 +0100
++++ formidable_1_0/modeles/formulaire_analyse.html	2013-03-19 15:47:52.057294325 +0100
+@@ -3,9 +3,9 @@
+ [(#REM) On fait un tableau qui contient toutes les réponses, classées par champ ]
+ #SET{valeurs,#ARRAY}
+ #SET{reponses_total,0}
+ <BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+-<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}{nom ?= #ENV{nom}>
++<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+ #SET_MERGE{liste_valeurs, #GET{valeurs}|table_valeur{#NOM}|sinon{#ARRAY}, #ARRAY{0,#VALEUR|tenter_unserialize}}
+ #SET_MERGE{valeurs, #ARRAY{#NOM,#GET{liste_valeurs}}}
+ </BOUCLE_champs>
+ </BOUCLE_reponses>
+@@ -18,11 +18,9 @@
+ <//B_reponses>
+ 
+ <BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
+ [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+-  [(#CLE|=={#ENV{nom,#CLE}}|oui)
+ 	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}, #GET{reponses_total}})]
+-  ]
+ ]
+ </BOUCLE_saisies>
+ 
+ </div><!-- formidable_analyse -->
+@@ -61,5 +59,5 @@
+ </script>
+ <style type='text/css'>
+ <INCLURE{fond=css/formidable_analyse.css} />
+ </style>
+-</BOUCLE_formulaire>
+\ Pas de fin de ligne à la fin du fichier
++</BOUCLE_formulaire>
+diff -r -U4 -x CVS formidable_1_0.orig/paquet.xml formidable_1_0/paquet.xml
+--- formidable_1_0.orig/paquet.xml	2013-03-11 21:00:08.000000000 +0100
++++ formidable_1_0/paquet.xml	2013-03-19 15:47:52.117294324 +0100
+@@ -1,8 +1,8 @@
+ <paquet
+ 	prefix="formidable"
+ 	categorie="communication"
+-	version="1.3.5"
++	version="1.3.4"
+ 	etat="dev"
+ 	compatibilite="[3.0.0-dev;3.0.99]"
+ 	logo="images/formidable-64.png"
+ 	schema="0.5.1"
+Seulement dans formidable_1_0/prive/squelettes/extra: formulaires_analyse.html
+diff -r -U4 -x CVS formidable_1_0.orig/saisies-analyses/checkbox.html formidable_1_0/saisies-analyses/checkbox.html
+--- formidable_1_0.orig/saisies-analyses/checkbox.html	2013-03-12 04:00:06.000000000 +0100
++++ formidable_1_0/saisies-analyses/checkbox.html	2013-03-19 15:47:52.477294318 +0100
+@@ -5,9 +5,9 @@
+ 	</BOUCLE_choix>
+ </BOUCLE_reponses>
+ 
+ [(#REM) datas peut être une chaine qu'on sait décomposer ]
+-#SET{datas, #ENV*{datas}}
++#SET{datas, #ENV{datas}}
+ #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+ 
+ <BOUCLE_datas(POUR){tableau #GET{datas}}>
+ [(#SET{nb,[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]})]
+diff -r -U4 -x CVS formidable_1_0.orig/saisies-analyses/radio.html formidable_1_0/saisies-analyses/radio.html
+--- formidable_1_0.orig/saisies-analyses/radio.html	2013-03-12 04:00:06.000000000 +0100
++++ formidable_1_0/saisies-analyses/radio.html	2013-03-19 15:47:52.449294319 +0100
+@@ -5,9 +5,9 @@
+ 	]
+ </BOUCLE_reponses>
+ 
+ [(#REM) datas peut être une chaine qu'on sait décomposer ]
+-#SET{datas, #ENV*{datas}}
++#SET{datas, #ENV{datas}}
+ #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+ 
+ <BOUCLE_datas(POUR){tableau #GET{datas}}>
+ [(#SET{nb,[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]})]
+diff -r -U4 -x CVS formidable_1_0.orig/svn.revision formidable_1_0/svn.revision
+--- formidable_1_0.orig/svn.revision	2013-03-12 18:28:10.000000000 +0100
++++ formidable_1_0/svn.revision	2013-03-19 15:47:52.529294319 +0100
+@@ -1,10 +1,10 @@
+ <svn_revision>
+ <text_version>
+ Origine: file:///home/svn/repository/spip-zone/_plugins_/formidable/trunk
+-Revision: 70631
+-Dernier commit: 2013-03-12 18:28:10 +0100 
++Revision: 66722
++Dernier commit: 2012-10-12 11:00:03 +0200 
+ </text_version>
+ <origine>file:///home/svn/repository/spip-zone/_plugins_/formidable/trunk</origine>
+-<revision>70631</revision>
+-<commit>2013-03-12 18:28:10 +0100 </commit>
++<revision>66722</revision>
++<commit>2012-10-12 11:00:03 +0200 </commit>
+ </svn_revision>
+\ Pas de fin de ligne à la fin du fichier
+diff -r -U4 -x CVS formidable_1_0.orig/traiter/enregistrement.php formidable_1_0/traiter/enregistrement.php
+--- formidable_1_0.orig/traiter/enregistrement.php	2012-01-22 11:00:13.000000000 +0100
++++ formidable_1_0/traiter/enregistrement.php	2013-03-19 15:47:52.545294317 +0100
+@@ -15,8 +15,17 @@
+ 	// La personne a-t-elle un compte ?
+ 	global $auteur_session;
+ 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+ 	
++    // traitement de l'anonymisation
++    if ($options['anonymiser'] == 'on') {
++        // mod de l'id_auteur
++        $variables_anonymisation =
++                $GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
++        $id = eval("return $variables_anonymisation;");
++        $id_auteur = formidable_scramble($id);
++    }
++
+ 	// On cherche le cookie et sinon on le crée
+ 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
+ 	if (isset($_COOKIE[$nom_cookie]))
+ 		$cookie = $_COOKIE[$nom_cookie];
+diff -r -U4 -x CVS formidable_1_0.orig/traiter/enregistrement.yaml formidable_1_0/traiter/enregistrement.yaml
+--- formidable_1_0.orig/traiter/enregistrement.yaml	2012-03-18 16:00:30.000000000 +0100
++++ formidable_1_0/traiter/enregistrement.yaml	2013-03-19 15:47:52.557294317 +0100
+@@ -26,8 +26,26 @@
+         cookie: '<:formidable:identification_par_cookie:>'
+         id_auteur: '<:formidable:identification_par_id_auteur:>'
+       defaut: 'cookie'
+   -
++    saisie: 'oui_non'
++    options:
++      nom: 'anonymiser'
++      label: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
++      explication: '<:formidable:traiter_enregistrement_option_anonymiser_explication:>'
++      defaut: ''
++  -
++    saisie: 'selection'
++    options:
++      option_intro: '<:formidable:traiter_enregistrement_option_choix_select_label:>'
++      nom: 'anonymiser_variable'
++      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_label:>'
++      explication: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
++      datas:
++        remote_user: "Variable serveur : REMOTE_USER"
++        php_auth_user: "Variable serveur : PHP_AUTH_USER"
++      defaut: ''
++  -
+     saisie: 'radio'
+     options:
+       nom: 'moderation'
+       label: '<:formidable:traiter_enregistrement_option_moderation_label:>'
