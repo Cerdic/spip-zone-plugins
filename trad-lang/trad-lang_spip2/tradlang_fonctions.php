@@ -171,9 +171,10 @@ function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
 	if (!isset($boucle->modificateur['tout'])
-	&& !isset($boucle->modificateur['criteres']['module'])
-	&& !isset($boucle->modificateur['criteres']['id_tradlang'])
-	&& !isset($boucle->modificateur['criteres']['id_tradlang_module'])) {
+		&& !isset($boucle->modificateur['criteres']['module'])
+		&& !isset($boucle->modificateur['criteres']['id_tradlang'])
+		&& !isset($boucle->modificateur['criteres']['id_tradlang_module'])
+	) {
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"%attic\"'"));
 		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
