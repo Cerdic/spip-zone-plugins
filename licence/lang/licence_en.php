@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'License',
 
 	// D
-	'description_art_libre' => 'Free Art License', # MODIF
+	'description_art_libre' => 'Free Art License',
 	'description_cc0' => 'Creative Common - Public Domain Dedication', # MODIF
 	'description_cc_by' => 'Creative Commons - Attribution', # MODIF
 	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial', # MODIF
@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_select_licence' => 'Choose a license',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal/en', # MODIF
-	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/', # MODIF
+	'lien_art_libre' => 'http://artlibre.org/licence/lal/en',
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.en',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.en',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en',
