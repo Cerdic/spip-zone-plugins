@@ -8,13 +8,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_tradlang_creer_langue_cible_dist(){
-	$config = @unserialize($GLOBALS['meta']['tradlang']);
-	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!preg_match(",^(\w+)$,", $arg, $r)) {
+	if (!preg_match(",^(\w+)$,", $arg, $r))
 		spip_log("action_tradlang_creer_langue_cible $arg pas compris");
-	}
+
 	$id_tradlang_module = intval($arg);
 
 	include_spip('inc/autoriser');
@@ -31,9 +29,9 @@ function action_tradlang_creer_langue_cible_dist(){
 		/**
 		 * Le cache est invalidé dans $ajouter_code_langue
 		 */
-	}else{
+	}else
 		spip_log("action_tradlang_creer_langue_cible : Module $module_nom inexistant","tradlang");
-	}
+
 	$redirect = _request('redirect');
 	if($redirect){
 		$redirect = parametre_url($redirect,'var_lang_crea',$lang_crea,'&');

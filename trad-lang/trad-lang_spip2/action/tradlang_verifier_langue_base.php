@@ -13,9 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_tradlang_verifier_langue_base(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!preg_match(",^(\w+)\/(\w+)$,", $arg, $r)) {
+	if (!preg_match(",^(\w+)\/(\w+)$,", $arg, $r))
 		spip_log("action_tradlang_verifier_langue_base $arg pas compris",'tradlang');
-	}
 	else {
 		$module = $r[1];
 		$lang = $r[2];
