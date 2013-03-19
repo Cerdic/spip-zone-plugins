@@ -5,22 +5,18 @@
 
 [(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',[(#GET{titre}|attribut_html)]})]
 
-<p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
+<p><a href="[(#SELF|parametre_url{langue_modules,''})]" class="btn"><:tradlang:lien_trier_langue_non:></a></p>
 
 [(#SESSION{id_auteur}|>={1}|et{#PLUGIN{mesfavoris}|oui}|oui)
-	<div class="actions">
-		<p><:tradlang:message_afficher_vos_modules:></p>
-		[(#ENV{mesfavoris,oui}|=={oui}|non)
-		[<a href="(#SELF|parametre_url{mesfavoris,oui})" class="bouton ajax"><:tradlang:bouton_vos_favoris_oui:></a>]
-		]
-		[(#ENV{mesfavoris,oui}|=={non}|non)
-		[<a href="(#SELF|parametre_url{mesfavoris,non})" class="bouton ajax"><:tradlang:bouton_vos_favoris_non:></a>]
-		]
-		[(#ENV{mesfavoris,oui}|=={aucun}|non)
-		[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]
-		]
-	</div>
-]
+<div class="actions">
+	<p><:tradlang:message_afficher_vos_modules:></p>
+	[(#ENV{mesfavoris,oui}|=={oui}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,oui})" class="bouton ajax"><:tradlang:bouton_vos_favoris_oui:></a>]]
+	[(#ENV{mesfavoris,oui}|=={non}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,non})" class="bouton ajax"><:tradlang:bouton_vos_favoris_non:></a>]]
+	[(#ENV{mesfavoris,oui}|=={aucun}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]]
+</div>]
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>
 [(#SET{total_ok_full,0})]
 [(#SET{total_modif_full,0})]
