@@ -134,7 +134,7 @@ function objet_associer_simples($objets_source, $objets_lies, $qualif=null) {
 				foreach ($inserts as $is) {
 					foreach ($insertl as $il) {
 						// pipeline pre_edition_lien_simple ?
-						if (!sql_getfetsel($_id_objets, $table_liaison, array('$_id_objets='.sql_quote($is), '$_id_objetl='.sql_quote($il)))) {
+						if (!sql_getfetsel($_id_objets, $table_liaison, array("$_id_objets=".sql_quote($is), "$_id_objetl=".sql_quote($il)))) {
 							$e = sql_insertq($table_liaison, array($_id_objets=>$is, $_id_objetl=>$il));
 							if ($e!==false) {
 								$ins++;
