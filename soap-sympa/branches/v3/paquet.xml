@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/soapsympa-128.png"
 	schema="0.1.5"
 	documentation="http://www.spip-contrib.net/Spip-ML-SYMPA"
-	
+	>	
 	<nom>soapsympa_nom</nom>
 	<slogan>soapsympa_slogan</slogan>
 	<auteur>Thomas Weiss</auteur>	
