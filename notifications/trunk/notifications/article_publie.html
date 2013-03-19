@@ -13,7 +13,7 @@
 <div class="header">
 <h1><:notifications:article_valide_titre|trim|trim{-}:></h1>
 <p>
-[(#SET{titre,[<a href="(#URL_ARTICLE|url_absolue)"><strong>(#TITRE)</strong></a>]})]
+[(#SET{titre,[<a href="[(#URL_ARTICLE|url_absolue)]"><strong>(#TITRE)</strong></a>]})]
 [(#VAL{notifications:article_publie_detail}|_T{#ARRAY{titre,#GET{titre},connect_nom,#SESSION{nom}}})]
 </p>
 <hr />
