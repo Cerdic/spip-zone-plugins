@@ -133,10 +133,10 @@ function formulaires_fusion_spip_traiter_dist() {
 		}
 
 		// mise à jour des liens internes [...->...]
-		fusion_spip_maj_liens_internes($principales, $auxiliaires, $connect);
+		fusion_spip_maj_liens_internes($principales, $connect);
 
 		// mise à jour des modèles <docXX> <imgXX> <embXX> ...
-		fusion_spip_maj_modeles($principales, $auxiliaires, $connect);
+		fusion_spip_maj_modeles($principales, $connect);
 
 		// déclarer les url uniques importées avec "perma=1"
 		fusion_spip_maj_perma_urls($connect);

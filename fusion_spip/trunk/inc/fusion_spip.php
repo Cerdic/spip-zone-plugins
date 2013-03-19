@@ -515,14 +515,13 @@ function fusion_spip_import_documents($img_dir, $connect) {
 /** Mise à jour des liens internes [...->...]
  *
  * @param array $principales tables principales
- * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function fusion_spip_maj_liens_internes($principales, $auxiliaires, $connect) {
+function fusion_spip_maj_liens_internes($principales, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$objets_sources = fusion_spip_determiner_champs_texte(array_merge($principales, $auxiliaires));
+	$objets_sources = fusion_spip_determiner_champs_texte($principales);
 
 	// liens possibles et objets auxquels ils se rapportent
 	$objets_liens = array(
@@ -604,14 +603,13 @@ function fusion_spip_maj_liens_internes($principales, $auxiliaires, $connect) {
 /** Mise à jour des modèles <docXX> <imgXX> <embXX> ...
  *
  * @param array $principales tables principales
- * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function fusion_spip_maj_modeles($principales, $auxiliaires, $connect) {
+function fusion_spip_maj_modeles($principales, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$objets_sources = fusion_spip_determiner_champs_texte(array_merge($principales, $auxiliaires));
+	$objets_sources = fusion_spip_determiner_champs_texte($principales);
 
 	if (function_exists('medias_declarer_tables_objets_sql')) {
 		// obtenir la liste des modeles dans la table spip_documents
