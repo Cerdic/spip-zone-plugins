@@ -13,7 +13,11 @@ include_spip('inc/texte');
  * @return string
  */
 function seo_insere_remplace_metas($head,$contexte){
-	$append = "";
+	$append = "<!--seo_insere-->";
+	// on ne fait rien si deja insere
+	if (strpos($head,$append)!==false)
+		return $head;
+
 	include_spip('inc/config');
 	$config = lire_config('seo/');
 	$is_sommaire = (
@@ -50,39 +54,40 @@ function seo_insere_remplace_metas($head,$contexte){
 	if (isset($config['webmaster_tools'])
 	  AND $config['webmaster_tools']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= seo_generer_webmaster_tools();
+		$append .= "\n" . seo_generer_webmaster_tools();
 	}
 
 	if (isset($config['bing'])
 	  AND $config['bing']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= seo_generer_bing();
+		$append .= "\n" . seo_generer_bing();
 	}
 
 	/* CANONICAL URL */
 	if (isset($config['canonical_url'])
 	  AND $config['canonical_url']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= seo_generer_urls_canoniques();
+		$append .= "\n" . seo_generer_urls_canoniques();
 	}
 
 	/* GOOGLE ANALYTICS */
 	if (isset($config['analytics'])
 		AND $config['analytics']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= seo_generer_google_analytics();
+		$append .= "\n" . seo_generer_google_analytics();
 	}
 
 	/* ALEXA */
 	if (isset($config['alexa'])
 	  AND $config['alexa']['activate']=='yes'
 	  AND $is_sommaire){
-		$append .= seo_generer_alexa();
+		$append .= "\n" . seo_generer_alexa();
 	}
 
 	if ($append){
+		$append = "\n$append\n";
 		// sinon ajouter en fin de </head>
-		if ($p=stripos($head,"</head>",$head))
+		if ($p=stripos($head,"</head>"))
 			$head = substr_replace($head,$append,$p,0);
 		else
 			$head .= $append;
@@ -266,7 +271,7 @@ function seo_generer_meta_brute($nom){
 function seo_generer_webmaster_tools(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/webmaster_tools/id'))
-		return '<meta name="google-site-verification" content="' . texte_script($id) . '" />'."\n";
+		return '<meta name="google-site-verification" content="' . texte_script($id) . '" />';
 }
 
 
@@ -277,7 +282,7 @@ function seo_generer_webmaster_tools(){
 function seo_generer_bing(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/bing/id'))
-		return '<meta name="msvalidate.01" content="' . texte_script($id) . '" />'."\n";
+		return '<meta name="msvalidate.01" content="' . texte_script($id) . '" />';
 }
 
 /**
@@ -287,7 +292,7 @@ function seo_generer_bing(){
 function seo_generer_alexa(){
 	include_spip('inc/config');
 	if ($id=lire_config('seo/alexa/id'))
-		return '<meta name="alexaVerifyID" content="' . texte_script($id) . '"/>'."\n";
+		return '<meta name="alexaVerifyID" content="' . texte_script($id) . '" />';
 }
 
 /**

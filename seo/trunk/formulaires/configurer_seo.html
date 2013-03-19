@@ -6,38 +6,37 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<!-- Insert Head -->
-			<fieldset>
-				<legend><:seo:insert_head:></legend>
-				<ul>
-					#SET{name,insert_head/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<p class="explication"><:seo:insert_head_descriptif:></p>
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:insert_head_activate:></label>
-							</div>
-					</li>
-					#SET{name,forcer_squelette}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]<p class="explication"><:seo:forcer_squelette_descriptif:></p>
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="#GET{name}" value="#GET{val_non}" />
-								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="#GET{name}_#GET{val}"><:seo:forcer_squelette_label:></label>
-							</div>
-					</li>
-				</ul>
-			</fieldset>
+			<!-- Insertion auto -->
+			<ul>
+				#SET{name,insert_head/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<p class="explication"><:seo:insert_head_descriptif:><br /><:seo:forcer_squelette_descriptif:></p>
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:insert_head_activate:></label>
+						</div>
+				</li>
+				[(#REM)
+				#SET{name,forcer_squelette}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<p class="explication"><:seo:forcer_squelette_descriptif:></p>
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="#GET{name}" value="#GET{val_non}" />
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:seo:forcer_squelette_label:></label>
+						</div>
+				</li>
+				]
+			</ul>
 
 			<!-- Meta tags -->
 			<fieldset>

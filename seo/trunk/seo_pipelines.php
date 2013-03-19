@@ -42,7 +42,7 @@ function seo_affichage_final($flux){
 	if ($GLOBALS['html']
 		AND stripos($flux,'<head>')!==false
 	  AND include_spip('inc/config')
-		AND lire_config('seo/forcer_squelette', 'no')=="yes"
+		AND lire_config('seo/insert_head/activate', 'no')=="yes"
 		AND preg_match('/<head>(.*)<\/head>/Uims', $flux, $head)){
 		$head = $head[1];
 
