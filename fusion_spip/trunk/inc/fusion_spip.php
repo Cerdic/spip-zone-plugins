@@ -27,6 +27,7 @@ function fusion_spip_lister_tables_principales() {
  *
  * @param boolean $stats importer les tables visites
  * @param boolean $referers importer les tables referers
+ * @param boolean $versions importer les versions
  *
  * @return array liste des tables
  */
