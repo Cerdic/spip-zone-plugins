@@ -44,15 +44,10 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	}
 	
 	/**
-	 * On invalide
-	 */
-	include_spip('inc/invalideur');
-	suivre_invalideur('1');
-	
-	/**
 	 * On génère le fichier correspondant si la configuration de tradlang le demande
 	 */
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	if((lire_config('tradlang/sauvegarde_locale') == 'on') && (lire_config('tradlang/sauvegarde_post_edition') == 'on')){
 		include_spip('tradlang_fonctions');
 		if($dir_lang = tradlang_dir_lang()){
@@ -60,6 +55,19 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 			$sauvegarder_module($module,$lang,$dir_lang);
 		}
 	}
+	
+	/**
+	 * On ajoute un job tout de suite pour générer les premières révisions
+	 */
+	$job_description = _T('tradlang:job_creation_revisions_modules',array('module' => $module['module']));
+	spip_log('Ajouter job suite à ajout de code base','revisions_cron');
+	job_queue_add("tradlang_creer_premieres_revisions", $job_description, array('module'=>$module['module'],'lang'=>$lang),'inc/', false, 0, 10);
+	
+	/**
+	 * On invalide
+	 */
+	include_spip('inc/invalideur');
+	suivre_invalideur('1');
 	return true;
 }
 ?>
