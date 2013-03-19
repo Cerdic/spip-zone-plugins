@@ -292,14 +292,15 @@ function fusion_spip_liaisons_table_principale($nom_table, $shema, $cles_primair
 		fusion_spip_mettre_a_jour_liaisons_par_objet($nom_table, $objet, $cleprimaire, $connect);
 	}
 
-	// cas particulier : pour les rubriques, mettre à jour l'id_parent
+	// cas particulier : pour les rubriques, mettre à jour id_parent
 	if ($objet == 'rubrique') {
 		fusion_spip_mettre_a_jour_liaisons('spip_rubriques', 'rubrique', 'id_rubrique', 'rubrique', 'id_parent', $connect);
 	}
 
-	// cas particulier : pour les forums, mettre à jour l'id_parent
+	// cas particulier : pour les forums, mettre à jour id_parent et id_thread
 	if ($objet == 'forum') {
 		fusion_spip_mettre_a_jour_liaisons('spip_forum', 'forum', 'id_forum', 'forum', 'id_parent', $connect);
+		fusion_spip_mettre_a_jour_liaisons('spip_forum', 'forum', 'id_forum', 'forum', 'id_thread', $connect);
 	}
 
 	$time_end = microtime(true);
