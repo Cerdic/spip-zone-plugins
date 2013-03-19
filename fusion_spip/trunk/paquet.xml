@@ -1,5 +1,5 @@
 <paquet
-	prefix="assemblage"
+	prefix="fusion_spip"
 	categorie="maintenance"
 	version="0.1.0"
 	etat="dev"
@@ -8,14 +8,14 @@
 	schema="1.0.0"
 >	
 
-	<nom>Assemblage</nom>
+	<nom>Fusion de sites Spip</nom>
 	
 	<auteur mail="mailto:nicolas.dorigny@gmail.com">Nico D.</auteur>
 
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-    <pipeline nom="declarer_tables_principales" inclure="base/assemblage_tables.php" />
+    <pipeline nom="declarer_tables_principales" inclure="base/fusion_spip_tables.php" />
 
-    <menu nom="assemblage" titre="assemblage:titre_assemblage" parent="menu_administration" icone="images/base-add-16.png" />
+    <menu nom="fusion_spip" titre="fusion_spip:titre_fusion_spip" parent="menu_administration" icone="images/base-add-16.png" />
 
 </paquet>
