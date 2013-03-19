@@ -250,15 +250,26 @@ var geocoder;]
 			}
 		});]
 		[(#ENV{nodraw}|oui)
+		// option nodraw, l'objet est un point
+		$('#champ_#ENV{champ_type,type}').val('Point');
 		// mettre a jour les coordonnees quand on clique la carte
 		form_map.on('click', function(e) {
 			maj_inputs(form_map,e.latlng,'click');
-			$('#champ_#ENV{champ_type,type}').val('Point');
 			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
 		});
+		// mettre à jour les coordonnées quand on déplace le marker
 		marker.on("dragend", function(e){
 			maj_inputs(form_map,e.target._latlng,'click');
 			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
+		});
+		// mettre à jour le champ geosjon et le marker quand on change les valeur de lat ou lon
+		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').change(function(){
+			var new_lat = $('#champ_#ENV{champ_lat,lat}').val();
+			var new_lon = $('#champ_#ENV{champ_lon,lon}').val();
+			var new_center = new L.LatLng(new_lat, new_lon);
+			marker.setLatLng(new_center);
+			form_map.panTo(new_center);
+			$('#champ_#ENV{champ_geojson,geojson}').val('{"type":"Point","coordinates":\['+ new_lon +','+ new_lat +'\]}');
 		});]
 		<//B_gis>
 		
