@@ -211,7 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
 	'message_changement_lang_orig' => 'La langue d\'origine de traduction choisie ("@lang_orig@") n\'est pas assez traduite, elle est remplacée par la langue "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'La langue d\'origine de traduction choisie ("@lang_orig@") est inexistante, elle est remplacée par la langue "@lang_nouvelle@".',
-	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"',
+	'message_changement_statut' => 'Modification du statut de "@statut_old@" en "@statut_new@"',
 	'message_confirm_redirection' => 'Vous allez être redirigé vers la modification du module',
 	'message_demande_update_langues_cible_mere' => 'Vous pouvez demander à un administrateur de resynchroniser cette langue avec la langue principale.',
 	'message_info_choisir_langues_profiles' => 'Vous pouvez séléctionner vos langues préférées <a href="@url_profil@">dans votre profil</a> pour les afficher par défaut.',
