@@ -131,9 +131,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => 'Falta un ítem en este idioma (en relación al idioma de origen)',
 	'items_en_trop' => 'Hay @nb@ items de más en este idioma (en relación con el idioma de origen)',
 	'items_manquants' => 'Hay @nb@ items de menos en este idioma (en relación al idioma de origen)',
-	'items_modif' => 'Items modificados',
-	'items_new' => 'Nuevos items',
-	'items_total_nb' => 'Número total de items',
+	'items_modif' => 'Items modificados', # MODIF
+	'items_new' => 'Nuevos items', # MODIF
+	'items_total_nb' => 'Número total de items', # MODIF
 
 	// L
 	'label_fichier_langue' => 'Archivo de idioma para cargar',
@@ -213,9 +213,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'Este módulo está disponible en todos los idiomas posibles',
 	'message_changement_lang_orig' => 'El idioma de origen de traducción elegido ("@lang_orig@") no se encuentra suficientemente traducido, éste es reemplazado por el idioma "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'El idioma de origen de traducción elegido ("@lang_orig@") no existe, éste es reemplazado por "@lang_nouvelle@".',
+	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
 	'message_confirm_redirection' => 'Usted va a ser redirigido a la modificación del módulo',
 	'message_demande_update_langues_cible_mere' => 'Usted puede solicitar a un administrador resincronizar este idioma con el idioma principal.',
 	'message_info_choisir_langues_profiles' => 'Usted puede seleccionar sus idiomas preferentes <a href="@url_profil@">en su perfil</a> para mostrarlos por defecto.',
+	'message_lang_cible_selectionnee_auto_preferees' => 'La langue vers laquelle vous allez traduire a été sélectionnée automatiquement ("@lang@") à partir de vos langues préférées. Vous pouvez la changer en utilisant le formulaire de sélection de modules.', # NEW
 	'message_langues_choisies_affichees' => 'Solamente los idiomas que usted ha elegido son mostrados: @langues@.',
 	'message_langues_preferees_affichees' => 'Solamente sus idiomas preferentes son mostrados: @langues@.',
 	'message_langues_utilisees_affichees' => 'Solamente los @nb@ idiomas más utilizados son mostrados: @langues@.',

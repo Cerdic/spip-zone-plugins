@@ -131,9 +131,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => 'v tomto jazyku chýba jedna položka (z jazyka autora)',
 	'items_en_trop' => 'v tomto jazyku je naviac @nb@ položiek (oproti jazyku autora)',
 	'items_manquants' => 'v tomto jazyku chýba @nb@ položiek (z jazyka autora)',
-	'items_modif' => 'Zmenených položiek',
-	'items_new' => 'Nových položiek',
-	'items_total_nb' => 'Celkový počet položiek',
+	'items_modif' => 'Zmenených položiek', # MODIF
+	'items_new' => 'Nových položiek', # MODIF
+	'items_total_nb' => 'Celkový počet položiek', # MODIF
 
 	// L
 	'label_fichier_langue' => 'Jazykový súbor, ktorý chcete nahrať',
@@ -213,9 +213,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'Tento modul je dostupný vo všetkých jazykoch',
 	'message_changement_lang_orig' => 'Vybraný jazyk originálu ("@lang_orig@") nie je preložený dostatočne, bude nahradený jazykom "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'Vybraný jazyk originálu ("@lang_orig@") neexistuje, bude nahradený jazykom "@lang_nouvelle@".',
+	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
 	'message_confirm_redirection' => 'Budete presmerovaný na zmenu modulu',
 	'message_demande_update_langues_cible_mere' => 'Môžete požiadať administrátora o opätovnú synchronizáciu tohto jazyka s hlavným jazykom.',
 	'message_info_choisir_langues_profiles' => '<a href="@url_profil@">Vo svojom profile</a> si môžete vybrať obľúbené jazyky a používať ich ako predvolené.',
+	'message_lang_cible_selectionnee_auto_preferees' => 'La langue vers laquelle vous allez traduire a été sélectionnée automatiquement ("@lang@") à partir de vos langues préférées. Vous pouvez la changer en utilisant le formulaire de sélection de modules.', # NEW
 	'message_langues_choisies_affichees' => 'Zobrazené sú len jazyky, ktoré ste si vybrali: @langues@.',
 	'message_langues_preferees_affichees' => 'Zobrazené sú len vaše obľúbené jazyky: @langues@.',
 	'message_langues_utilisees_affichees' => 'Zobrazených je len @nb@ najpoužívanejších jazykov: @langues@.',

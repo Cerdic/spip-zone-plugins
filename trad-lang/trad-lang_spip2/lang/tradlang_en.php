@@ -131,9 +131,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => '1 item is missing in this language (compared to the parent language)',
 	'items_en_trop' => '@nb@ too many items in this language (compared to the parent language)',
 	'items_manquants' => '@nb@ items are missing in that language (from the parent language)',
-	'items_modif' => 'Modified items',
-	'items_new' => 'New items',
-	'items_total_nb' => 'Total number of items',
+	'items_modif' => 'Modified items', # MODIF
+	'items_new' => 'New items', # MODIF
+	'items_total_nb' => 'Total number of items', # MODIF
 
 	// L
 	'label_fichier_langue' => 'Language file to upload',
@@ -213,10 +213,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
 	'message_changement_lang_orig' => 'The original language of translation selected ("@lang_orig@") is not sufficiently translated, it is replaced by the language "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'The original language of translation selected ("@lang_orig@") does not exist, it is replaced by the language "@lang_nouvelle@".',
+	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
 	'message_confirm_redirection' => 'You will be redirected to the modification of the module',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
 	'message_info_choisir_langues_profiles' => 'You can select your favorites languages <a href="@url_profil@">in your profile</a> to use them as default.',
+	'message_lang_cible_selectionnee_auto_preferees' => 'La langue vers laquelle vous allez traduire a été sélectionnée automatiquement ("@lang@") à partir de vos langues préférées. Vous pouvez la changer en utilisant le formulaire de sélection de modules.', # NEW
 	'message_langues_choisies_affichees' => 'Only the languages ​​you have chosen are displayed: @langues@.',
 	'message_langues_preferees_affichees' => 'Only your favorites languages are displayed: @langues@.',
 	'message_langues_utilisees_affichees' => 'Only the @nb@ most used languages ​​are displayed: @langues@.',
