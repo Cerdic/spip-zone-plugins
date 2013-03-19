@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_#FORM">
-	<h3 class="titrem"><:assemblage:titre_assemblage:></h3>
+	<h3 class="titrem"><:fusion_spip:titre_fusion_spip:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -9,7 +9,7 @@
 		<ul>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
 			<li class="editer_base obligatoire[ (#GET{erreurs}|oui)erreur]">
-				<label for="base"><:assemblage:base:></label>
+				<label for="base"><:fusion_spip:base:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select name="base" id="base">
 					<option value=""></option>
@@ -17,18 +17,18 @@
 					<option value="#CLE" [(#ENV{base}|=={#CLE}|oui)selected="selected"] >#VALEUR</option>
 					</BOUCLE_bases>
 				</select>
-				<p><:assemblage:base_desc:></p>
+				<p><:fusion_spip:base_desc:></p>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{img_dir}}
 			<li class="editer_img_dir [ (#GET{erreurs}|oui)erreur]">
-				<label for="img_dir"><:assemblage:img_dir:></label>
+				<label for="img_dir"><:fusion_spip:img_dir:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type="text" name="img_dir" class="text" id="img_dir" value="#ENV{img_dir}" />
-				<p><:assemblage:img_dir_desc:></p>
+				<p><:fusion_spip:img_dir_desc:></p>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{secteur}}
 			<li class="editer_secteur [ (#GET{erreurs}|oui)erreur]">
-				<label for="secteur"><:assemblage:secteur:></label>
+				<label for="secteur"><:fusion_spip:secteur:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select name="secteur" id="secteur">
 					<option value=""></option>
@@ -36,30 +36,30 @@
 					<option value="#ID_RUBRIQUE" [(#ENV{secteur}|=={#ID_RUBRIQUE}|oui)selected="selected"] >#TITRE</option>
 					</BOUCLE_secteurs>
 				</select>
-				<p><:assemblage:secteur_desc:></p>
+				<p><:fusion_spip:secteur_desc:></p>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{stats}}
 			<li class="editer_stats [ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type="checkbox" name="stats" id="stats" [(#ENV{stats}|=={on}|oui) checked="checked" ] />
-				<label for="stats"><:assemblage:stats:></label>
+				<label for="stats"><:fusion_spip:stats:></label>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{referers}}
 			<li class="editer_referers [ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
-				<label for="referers"><:assemblage:referers:></label>
+				<label for="referers"><:fusion_spip:referers:></label>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{versions}}
 			<li class="editer_versions [ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type="checkbox" name="versions" id="versions" [(#ENV{versions}|=={on}|oui) checked="checked" ] />
-				<label for="referers"><:assemblage:versions:></label>
+				<label for="referers"><:fusion_spip:versions:></label>
 			</li>
 		</ul>
 
 		<p class='boutons'>
-			<input type='submit' class='submit' value='<:assemblage:bouton_importer:>' />
+			<input type='submit' class='submit' value='<:fusion_spip:bouton_importer:>' />
 		</p>
 	</div></form>
 </div>

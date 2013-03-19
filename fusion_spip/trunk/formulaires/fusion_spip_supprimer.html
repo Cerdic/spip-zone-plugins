@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_#FORM">
-	<h3 class="titrem"><:assemblage:titre_assemblage_suppression:></h3>
+	<h3 class="titrem"><:fusion_spip:titre_fusion_spip_suppression:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -9,7 +9,7 @@
 		<ul>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
 			<li class="editer_base obligatoire[ (#GET{erreurs}|oui)erreur]">
-				<label for="base"><:assemblage:base:></label>
+				<label for="base"><:fusion_spip:base:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select name="base" id="base">
 					<option value=""></option>
@@ -21,7 +21,7 @@
 		</ul>
 
 		<p class='boutons'>
-			<input type='submit' class='submit' value='<:assemblage:bouton_supprimer:>' />
+			<input type='submit' class='submit' value='<:fusion_spip:bouton_supprimer:>' />
 		</p>
 	</div></form>
 </div>

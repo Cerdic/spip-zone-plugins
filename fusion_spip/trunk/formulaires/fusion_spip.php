@@ -5,13 +5,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour l'appel à bases_referencees()
 include_spip('inc/install');
 
-include_spip('inc/assemblage');
+include_spip('inc/fusion_spip');
 
 /**
  * Charger
  * @return array
  */
-function formulaires_assemblage_charger_dist() {
+function formulaires_fusion_spip_charger_dist() {
 
 	// liste des bases déclarées sauf la base "locale"
 	$bases = bases_referencees(_FILE_CONNECT_TMP);
@@ -36,7 +36,7 @@ function formulaires_assemblage_charger_dist() {
  * Verifier
  * @return array
  */
-function formulaires_assemblage_verifier_dist() {
+function formulaires_fusion_spip_verifier_dist() {
 	$erreurs = array();
 
 	$traite_stats = (_request('stats') == 'on' ? true : false);
@@ -48,7 +48,7 @@ function formulaires_assemblage_verifier_dist() {
 		$erreurs['base'] = _T('info_obligatoire');
 	} // vérifier la conformité du shéma de la base source
 	else {
-		$erreurs_shema = assemblage_comparer_shemas(_request('base'), $traite_stats, $traite_referers, $traite_versions);
+		$erreurs_shema = fusion_spip_comparer_shemas(_request('base'), $traite_stats, $traite_referers, $traite_versions);
 		if (count($erreurs_shema)) {
 			$erreurs['base'] = '- '.join('<br>- ', $erreurs_shema);
 		}
@@ -62,7 +62,7 @@ function formulaires_assemblage_verifier_dist() {
  * Traiter
  * @return array
  */
-function formulaires_assemblage_traiter_dist() {
+function formulaires_fusion_spip_traiter_dist() {
 	$erreurs = array();
 
 	// @todo: afficher une alerte sur formulaire_charger si max_execution_time ne peut pas être modifié
@@ -81,10 +81,10 @@ function formulaires_assemblage_traiter_dist() {
 	// vérifier que le répertoire donné existe et soit lisible
 	if ($img_dir) {
 		if (!file_exists($img_dir)) {
-			$erreurs[] = _T('assemblage:dossier_existe_pas', array('dossier' => $img_dir));
+			$erreurs[] = _T('fusion_spip:dossier_existe_pas', array('dossier' => $img_dir));
 		} else {
 			if (!is_readable($img_dir)) {
-				$erreurs[] = _T('assemblage:dossier_pas_lisible', array('dossier' => $img_dir));
+				$erreurs[] = _T('fusion_spip:dossier_pas_lisible', array('dossier' => $img_dir));
 			}
 		}
 	}
@@ -92,31 +92,31 @@ function formulaires_assemblage_traiter_dist() {
 	if (count($erreurs)) {
 		$retour = array(
 			'message_erreur' =>
-			_T('assemblage:message_import_nok')
+			_T('fusion_spip:message_import_nok')
 				.'<br/>&bull;&nbsp;'.join('<br/>&bull;&nbsp;', $erreurs)
 		);
 	} else {
 
 		$time_start = microtime(true);
-		spip_log('Démarrage de l\'assemblage', 'assemblage_'.$connect);
+		spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
 
-		$principales = assemblage_lister_tables_principales();
-		$auxiliaires = assemblage_lister_tables_auxiliaires($traite_stats, $traite_referers, $traite_versions);
-		$cles_primaires = assemblage_lister_cles_primaires($principales);
+		$principales = fusion_spip_lister_tables_principales();
+		$auxiliaires = fusion_spip_lister_tables_auxiliaires($traite_stats, $traite_referers, $traite_versions);
+		$cles_primaires = fusion_spip_lister_cles_primaires($principales);
 
 		// insérer les objets principaux
 		foreach ($principales as $nom_table => $shema) {
-			assemblage_inserer_table_principale($nom_table, $shema, $secteur, $connect);
+			fusion_spip_inserer_table_principale($nom_table, $shema, $secteur, $connect);
 		}
 
 		// mettre à jour les liens entre objets principaux
 		foreach ($principales as $nom_table => $shema) {
-			assemblage_liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect);
+			fusion_spip_liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect);
 		}
 
 		// mise à jour des liaisons de vignettes de documents
-		assemblage_vignettes_documents($connect);
+		fusion_spip_vignettes_documents($connect);
 
 		// mise à jour des statuts des rubriques
 		include_spip('inc/rubriques');
@@ -124,29 +124,29 @@ function formulaires_assemblage_traiter_dist() {
 
 		// insérer les tables auxiliaires
 		foreach ($auxiliaires as $nom_table => $shema) {
-			assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect);
+			fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect);
 		}
 
 		// importer un par un les documents et logos de la source
 		if ($img_dir) {
-			assemblage_import_documents($img_dir, $connect);
+			fusion_spip_import_documents($img_dir, $connect);
 		}
 
 		// mise à jour des liens internes [...->...]
-		assemblage_maj_liens_internes($principales, $auxiliaires, $connect);
+		fusion_spip_maj_liens_internes($principales, $auxiliaires, $connect);
 
 		// mise à jour des modèles <docXX> <imgXX> <embXX> ...
-		assemblage_maj_modeles($principales, $auxiliaires, $connect);
+		fusion_spip_maj_modeles($principales, $auxiliaires, $connect);
 
 		// déclarer les url uniques importées avec "perma=1"
-		assemblage_maj_perma_urls($connect);
+		fusion_spip_maj_perma_urls($connect);
 
 		$time_end = microtime(true);
 		$time = $time_end - $time_start;
-		spip_log('Assemblage terminé : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+		spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 		$retour = array(
-			'message_ok' => _T('assemblage:message_import_ok')
+			'message_ok' => _T('fusion_spip:message_import_ok')
 		);
 	}
 

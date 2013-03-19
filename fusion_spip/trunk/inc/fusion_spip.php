@@ -5,7 +5,7 @@
  *
  * @return array liste des tables
  */
-function assemblage_lister_tables_principales() {
+function fusion_spip_lister_tables_principales() {
 
 	// @todo : lire les descriptions des tables sources plutot que locales ?
 	// comment dissocier principales/auxiliares/jointures de la base source ?
@@ -13,7 +13,7 @@ function assemblage_lister_tables_principales() {
 
 	// ne pas importer certaines tables
 	unset($tables['spip_jobs']);
-	unset($tables['spip_assemblage']);
+	unset($tables['spip_fusion_spip']);
 	unset($tables['spip_depots']);
 	unset($tables['spip_plugins']);
 	unset($tables['spip_paquets']);
@@ -30,7 +30,7 @@ function assemblage_lister_tables_principales() {
  *
  * @return array liste des tables
  */
-function assemblage_lister_tables_auxiliaires($stats = false, $referers = false, $versions = false) {
+function fusion_spip_lister_tables_auxiliaires($stats = false, $referers = false, $versions = false) {
 
 	// @todo : lire les descriptions des tables sources plutot que locales ?
 	// comment dissocier principales/auxiliares/jointures de la base source ?
@@ -64,7 +64,7 @@ function assemblage_lister_tables_auxiliaires($stats = false, $referers = false,
  * @param array $tables
  * @return array
  */
-function assemblage_lister_cles_primaires($tables) {
+function fusion_spip_lister_cles_primaires($tables) {
 	$cles_primaires = array();
 	foreach ($tables as $nom_table => $shema) {
 		$cles_primaires[$nom_table] = $shema['key']['PRIMARY KEY'];
@@ -83,12 +83,12 @@ function assemblage_lister_cles_primaires($tables) {
  * @param integer $base identifiant de la connection
  * @return array liste des erreurs
  */
-function assemblage_comparer_shemas($base, $traite_stats, $traite_referers) {
+function fusion_spip_comparer_shemas($base, $traite_stats, $traite_referers) {
 	$erreurs = array();
 	$bases = bases_referencees(_FILE_CONNECT_TMP);
 	$connect = $bases[$base];
 
-	$tables = array_merge(assemblage_lister_tables_principales(), assemblage_lister_tables_auxiliaires($traite_stats, $traite_referers));
+	$tables = array_merge(fusion_spip_lister_tables_principales(), fusion_spip_lister_tables_auxiliaires($traite_stats, $traite_referers));
 	foreach ($tables as $nom_table => $shema_table) {
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
 		if ($shema_source = sql_showtable($nom_table, false, $connect)) {
@@ -111,7 +111,7 @@ function assemblage_comparer_shemas($base, $traite_stats, $traite_referers) {
  * @param int $secteur id du secteur dans lequel importer
  * @param string $connect nom du connecteur
  */
-function assemblage_inserer_table_principale($nom_table, $shema, $secteur, $connect) {
+function fusion_spip_inserer_table_principale($nom_table, $shema, $secteur, $connect) {
 	$time_start = microtime(true);
 
 	// liste des champs à recopier
@@ -125,7 +125,7 @@ function assemblage_inserer_table_principale($nom_table, $shema, $secteur, $conn
 	// selectionner tous les objets d'une table à importer
 	$res = sql_select($champs_select, $nom_table, '', '', '', '', '', $connect);
 	$count = sql_count($res, $connect);
-	$assemblages = array();
+	$fusion_spips = array();
 	while ($obj_import = sql_fetch($res, $connect)) {
 
 		// garder l'id original
@@ -151,7 +151,7 @@ function assemblage_inserer_table_principale($nom_table, $shema, $secteur, $conn
 		// inserer localement l'objet
 		$id_final = sql_insertq($nom_table, $obj_import);
 
-		$assemblages[] = array(
+		$fusion_spips[] = array(
 			'site_origine' => $connect,
 			'objet' => $objet,
 			'id_origine' => $id_origine,
@@ -160,13 +160,13 @@ function assemblage_inserer_table_principale($nom_table, $shema, $secteur, $conn
 
 	}
 	// garder les traces id_origine / id_final
-	if (count($assemblages)) {
-		sql_insertq_multi('spip_assemblage', $assemblages);
+	if (count($fusion_spips)) {
+		sql_insertq_multi('spip_fusion_spip', $fusion_spips);
 	}
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Table '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Table '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -178,7 +178,7 @@ function assemblage_inserer_table_principale($nom_table, $shema, $secteur, $conn
  * @param array $cles_primaires clés primaires des tables principales
  * @param string $connect nom du connecteur
  */
-function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect) {
+function fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect) {
 	$time_start = microtime(true);
 
 	// liste des champs à recopier
@@ -195,7 +195,7 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 		// retrouver l'id_final de l'objet lié
 		foreach ($shema['field'] as $nom_champ => $valeur_champ) {
 			if (in_array($nom_champ, $cles_primaires)) {
-				$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import[$nom_champ]).' and objet='._q(objet_type($nom_champ)));
+				$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import[$nom_champ]).' and objet='._q(objet_type($nom_champ)));
 				// mettre à jour l'id de l'objet lié
 				if ($nouveau_id['id_final']) {
 					$obj_import[$nom_champ] = $nouveau_id['id_final'];
@@ -209,7 +209,7 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 		// si la table utilise une liaison par id_objet / objet
 		// retrouver l'id_final de l'objet lié
 		if ($shema['field']['id_objet'] && $shema['field']['objet']) {
-			$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['objet']));
+			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['objet']));
 			// mettre à jour l'id de l'objet lié
 			if ($nouveau_id['id_final']) {
 				$obj_import['id_objet'] = $nouveau_id['id_final'];
@@ -221,7 +221,7 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 
 		// cas particulier pour spip_urls (id_objet / type au lieu de id_objet / objet)
 		if ($nom_table == 'spip_urls' && $shema['field']['id_objet'] && $shema['field']['type']) {
-			$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['type']));
+			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['type']));
 			// mettre à jour l'id de l'objet lié
 			if ($nouveau_id['id_final']) {
 				$obj_import['id_objet'] = $nouveau_id['id_final'];
@@ -250,7 +250,7 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -262,7 +262,7 @@ function assemblage_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires
  * @param array $cles_primaires clés primaires des tables principales
  * @param string $connect nom du connecteur
  */
-function assemblage_liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect) {
+function fusion_spip_liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect) {
 	$time_start = microtime(true);
 
 	$objet = objet_type($nom_table);
@@ -281,7 +281,7 @@ function assemblage_liaisons_table_principale($nom_table, $shema, $cles_primaire
 		if (in_array($nom_champ, $cles_primaires)) {
 			$objet_liaison = objet_type($nom_champ);
 			$cle_liaison = $nom_champ;
-			assemblage_mettre_a_jour_liaisons($nom_table, $objet, $cleprimaire, $objet_liaison, $cle_liaison, $connect);
+			fusion_spip_mettre_a_jour_liaisons($nom_table, $objet, $cleprimaire, $objet_liaison, $cle_liaison, $connect);
 		}
 
 	}
@@ -289,22 +289,22 @@ function assemblage_liaisons_table_principale($nom_table, $shema, $cles_primaire
 	// si la table utilise une liaison par id_objet / objet
 	// mettre à jour les liaisons (par exemple spip_forum)
 	if ($shema['field']['id_objet'] && $shema['field']['objet']) {
-		assemblage_mettre_a_jour_liaisons_par_objet($nom_table, $objet, $cleprimaire, $connect);
+		fusion_spip_mettre_a_jour_liaisons_par_objet($nom_table, $objet, $cleprimaire, $connect);
 	}
 
 	// cas particulier : pour les rubriques, mettre à jour l'id_parent
 	if ($objet == 'rubrique') {
-		assemblage_mettre_a_jour_liaisons('spip_rubriques', 'rubrique', 'id_rubrique', 'rubrique', 'id_parent', $connect);
+		fusion_spip_mettre_a_jour_liaisons('spip_rubriques', 'rubrique', 'id_rubrique', 'rubrique', 'id_parent', $connect);
 	}
 
 	// cas particulier : pour les forums, mettre à jour l'id_parent
 	if ($objet == 'forum') {
-		assemblage_mettre_a_jour_liaisons('spip_forum', 'forum', 'id_forum', 'forum', 'id_parent', $connect);
+		fusion_spip_mettre_a_jour_liaisons('spip_forum', 'forum', 'id_forum', 'forum', 'id_parent', $connect);
 	}
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Liaisons '.$nom_table.' traitées : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Liaisons '.$nom_table.' traitées : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -320,15 +320,15 @@ function assemblage_liaisons_table_principale($nom_table, $shema, $cles_primaire
  * @param string $cle_liaison
  * @param string $connect
  */
-function assemblage_mettre_a_jour_liaisons($table, $objet, $cle_primaire, $objet_liaison, $cle_liaison, $connect) {
+function fusion_spip_mettre_a_jour_liaisons($table, $objet, $cle_primaire, $objet_liaison, $cle_liaison, $connect) {
 
-	$res = sql_select('id_origine,id_final', 'spip_assemblage', 'objet='._q($objet).' and site_origine='._q($connect));
+	$res = sql_select('id_origine,id_final', 'spip_fusion_spip', 'objet='._q($objet).' and site_origine='._q($connect));
 	while ($obj_import = sql_fetch($res)) {
 		// retrouver l'id_liaison original
 		$ancien_id = sql_fetsel($cle_liaison, $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
 		if ($ancien_id[$cle_liaison]) {
 			// déterminer le nouveau lien
-			$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id[$cle_liaison]).' and objet='._q($objet_liaison));
+			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id[$cle_liaison]).' and objet='._q($objet_liaison));
 			// mettre à jour l'objet importé
 			if ($nouveau_id['id_final']) {
 				sql_updateq(
@@ -352,15 +352,15 @@ function assemblage_mettre_a_jour_liaisons($table, $objet, $cle_primaire, $objet
  * @param string $cle_liaison
  * @param string $connect
  */
-function assemblage_mettre_a_jour_liaisons_par_objet($table, $objet, $cle_primaire, $connect) {
+function fusion_spip_mettre_a_jour_liaisons_par_objet($table, $objet, $cle_primaire, $connect) {
 
-	$res = sql_select('id_origine,id_final', 'spip_assemblage', 'objet='._q($objet).' and site_origine='._q($connect));
+	$res = sql_select('id_origine,id_final', 'spip_fusion_spip', 'objet='._q($objet).' and site_origine='._q($connect));
 	while ($obj_import = sql_fetch($res)) {
 		// retrouver l'id_liaison original
 		$ancien_id = sql_fetsel(array('id_objet', 'objet'), $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
 		if ($ancien_id['id_objet']) {
 			// déterminer le nouveau lien
-			$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id['id_objet']).' and objet='._q($ancien_id['objet']));
+			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id['id_objet']).' and objet='._q($ancien_id['objet']));
 			// mettre à jour l'objet importé
 			if ($nouveau_id['id_final']) {
 				sql_updateq(
@@ -381,8 +381,8 @@ function assemblage_mettre_a_jour_liaisons_par_objet($table, $objet, $cle_primai
  *
  * @param string $connect base source
  */
-function assemblage_maj_perma_urls($connect) {
-	$res = sql_select('id_origine, objet, id_final', 'spip_assemblage', 'site_origine='._q($connect));
+function fusion_spip_maj_perma_urls($connect) {
+	$res = sql_select('id_origine, objet, id_final', 'spip_fusion_spip', 'site_origine='._q($connect));
 	while ($obj_import = sql_fetch($res)) {
 		$urls = sql_allfetsel('*', 'spip_urls', 'id_objet='._q($obj_import['id_final']).' and type='._q($obj_import['objet']));
 		if (count($urls) == 1) {
@@ -395,16 +395,16 @@ function assemblage_maj_perma_urls($connect) {
 	}
 }
 
-function assemblage_vignettes_documents($connect) {
+function fusion_spip_vignettes_documents($connect) {
 	$time_start = microtime(true);
 
 	$res = sql_select(
 		'a.id_final, d.id_vignette',
-		'spip_assemblage a join spip_documents d on (a.id_final = d.id_document)',
+		'spip_fusion_spip a join spip_documents d on (a.id_final = d.id_document)',
 		'objet="document" and site_origine='._q($connect).' and id_vignette <> 0'
 	);
 	while ($obj_import = sql_fetch($res)) {
-		$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_vignette']).' and objet="document"');
+		$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_vignette']).' and objet="document"');
 		if ($nouveau_id) {
 			sql_updateq(
 				'spip_documents',
@@ -423,7 +423,7 @@ function assemblage_vignettes_documents($connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Vignettes documents mises à jour : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Vignettes documents mises à jour : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 /**
@@ -432,7 +432,7 @@ function assemblage_vignettes_documents($connect) {
  * @param string $img_dir répertoire IMG source
  * @param string $connect base source
  */
-function assemblage_import_documents($img_dir, $connect) {
+function fusion_spip_import_documents($img_dir, $connect) {
 	include_spip('inc/documents');
 	$time_start = microtime(true);
 
@@ -445,7 +445,7 @@ function assemblage_import_documents($img_dir, $connect) {
 
 	$res = sql_select(
 		'a.id_final, d.fichier',
-		'spip_assemblage a join spip_documents d on (a.id_final = d.id_document)',
+		'spip_fusion_spip a join spip_documents d on (a.id_final = d.id_document)',
 		'objet="document" and site_origine='._q($connect)
 	);
 	while ($obj_import = sql_fetch($res)) {
@@ -461,9 +461,9 @@ function assemblage_import_documents($img_dir, $connect) {
 			// @todo: traiter les fichiers déja existant (les renommer)
 			if (file_exists($source_doc) && copy($source_doc, $dest_doc)) {
 				$documents_importes++;
-				//spip_log('Document copié : '.$source_doc.' > '.$dest_doc, 'assemblage_documents_'.$connect);
+				//spip_log('Document copié : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
 			} else {
-				//spip_log('Document échec : '.$source_doc.' > '.$dest_doc, 'assemblage_documents_'.$connect);
+				//spip_log('Document échec : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
 			}
 		}
 	}
@@ -490,25 +490,25 @@ function assemblage_import_documents($img_dir, $connect) {
 		$objet_logo = $logos_racines[$type_logo];
 		$id_objet = preg_replace('#([^0-9])*#', '', basename($logo));
 
-		$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'site_origine = '._q($connect).' and id_origine = '._q($id_objet).' and objet='._q($objet_logo));
+		$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($id_objet).' and objet='._q($objet_logo));
 		if ($nouveau_id) {
 			$dest_logo = _DIR_IMG.$type_logo.$nouveau_id['id_final'].'.'.$ext_logo;
 			// @todo: il existe surement mieux que copy() ?
 			if (copy($logo, $dest_logo)) {
 				$logos_importes++;
-				//spip_log('Logo copié : '.$logo.' > '.$dest_logo, 'assemblage_documents_'.$connect);
+				//spip_log('Logo copié : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
 			} else {
-				//spip_log('Logo échec : '.$logo.' > '.$dest_logo, 'assemblage_documents_'.$connect);
+				//spip_log('Logo échec : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
 			}
 		} else {
 			// objet lié pas trouvé ? logo obsolète, on ne fait rien
-			//spip_log($logo.' : liaison pas trouvée', 'assemblage_documents_'.$connect);
+			//spip_log($logo.' : liaison pas trouvée', 'fusion_spip_documents_'.$connect);
 		}
 	}
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Documents importés ('.$documents_importes.' docs / '.$logos_importes.' logos) : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Documents importés ('.$documents_importes.' docs / '.$logos_importes.' logos) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 
@@ -518,11 +518,11 @@ function assemblage_import_documents($img_dir, $connect) {
  * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
+function fusion_spip_maj_liens_internes($principales, $auxiliaires, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$objets_sources = assemblage_determiner_champs_texte(array_merge($principales, $auxiliaires));
+	$objets_sources = fusion_spip_determiner_champs_texte(array_merge($principales, $auxiliaires));
 
 	// liens possibles et objets auxquels ils se rapportent
 	$objets_liens = array(
@@ -560,7 +560,7 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 		$where = join(' or ', $where);
 		$objets_import = sql_allfetsel(
 			'o.'.$cle_primaire.', '.$select,
-			'spip_assemblage a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
+			'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
 			$where
 		);
 
@@ -576,7 +576,7 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 						$id_origine_lien = preg_replace('#[a-z]*#', '', $lien_trouve[4]);
 						$type_lien = preg_replace('#[0-9]*#', '', $lien_trouve[4]);
 						$objet_lien = $objets_liens[$type_lien];
-						$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
+						$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
 						if ($nouveau_id['id_final']) {
 							$pattern_cherche = '#\[([^][]*?([[]\w*[]][^][]*)*)->'.$type_lien.$id_origine_lien.'\]#';
 							// ajouter une signature pour éviter les remplacements en cascade
@@ -597,7 +597,7 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Liens internes mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Liens internes mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -607,11 +607,11 @@ function assemblage_maj_liens_internes($principales, $auxiliaires, $connect) {
  * @param array $auxiliaires tables auxiliaires
  * @param string $connect base source
  */
-function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
+function fusion_spip_maj_modeles($principales, $auxiliaires, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$objets_sources = assemblage_determiner_champs_texte(array_merge($principales, $auxiliaires));
+	$objets_sources = fusion_spip_determiner_champs_texte(array_merge($principales, $auxiliaires));
 
 	if (function_exists('medias_declarer_tables_objets_sql')) {
 		// obtenir la liste des modeles dans la table spip_documents
@@ -641,7 +641,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 
 		$res = sql_select(
 			'o.'.$cle_primaire.', '.$select,
-			'spip_assemblage a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
+			'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
 			$where
 		);
 		while ($obj_import = sql_fetch($res)) {
@@ -654,7 +654,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 					foreach ($liens_trouves as $lien_trouve) {
 						$id_origine_lien = $lien_trouve[2];
 						$modele = $lien_trouve[1];
-						$nouveau_id = sql_fetsel('id_final', 'spip_assemblage', 'id_origine='._q($id_origine_lien).' and objet="document" and site_origine="'.$connect.'"');
+						$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="document" and site_origine="'.$connect.'"');
 						if ($nouveau_id['id_final']) {
 							$pattern_cherche = '#<'.$modele.$id_origine_lien.'#';
 							$pattern_remplace = '<'.$modele.$nouveau_id['id_final'];
@@ -673,7 +673,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Modèles mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'assemblage_'.$connect);
+	spip_log('Modèles mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 /**
@@ -682,7 +682,7 @@ function assemblage_maj_modeles($principales, $auxiliaires, $connect) {
  * @param array $tables liste des tables à examiner
  * @return array
  */
-function assemblage_determiner_champs_texte($tables) {
+function fusion_spip_determiner_champs_texte($tables) {
 	$objets = array();
 	foreach ($tables as $nom_table => $shema_table) {
 		$champs = array();

@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'stats' => 'Traiter les tables de statistiques',
 
 	// T
-	'titre_assemblage' => 'Assemblage',
-	'titre_assemblage_suppression' => 'Suppression',
+	'titre_fusion_spip' => 'Fusion de sites Spip',
+	'titre_fusion_spip_suppression' => 'Suppression',
 
 	// V
 	'versions' => 'Traiter les tables de révisions (versions et fragments)',
