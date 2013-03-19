@@ -1,2 +1,2 @@
-[(#ENV*{head}|seo_insere_remplace_metas{#ENV*{contexte}}|replace{'\s+<(meta|script|link|style)','
+[(#ENV**{head}|seo_insere_remplace_metas{#ENV*{contexte}}|replace{'\s+<(meta|script|link|style)','
 <$1'})]

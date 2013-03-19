@@ -4,6 +4,48 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte');
 
+function seo_interprete_contexte($contexte){
+	static $infos;
+	$s = serialize($contexte);
+	if (isset($infos[$s]))
+		return $infos[$s];
+	$infos[$s] = array('objet'=>'sommaire');
+	if (isset($contexte['type-page'])){
+		$infos[$s]['objet'] = $contexte['type-page'];
+		if ($infos[$s]['objet']!=='sommaire'
+			AND $primary = id_table_objet($infos[$s]['objet'])
+			AND isset($contexte[$primary])){
+			$infos[$s]['id_objet'] = $contexte[$primary];
+			$infos[$s]['primary'] = $primary;
+			$infos[$s]['table_sql'] = table_objet_sql($infos[$s]['objet']);
+		}
+		return $infos[$s];
+	}
+	// d'abord les rubriques
+	if (isset($contexte['id_rubrique'])){
+		$infos[$s] = array('objet'=>'rubrique','id_objet'=>$contexte['id_rubrique'],'primary'=>'id_rubrique','table_sql'=>'spip_rubriques');
+	}
+	// puis voyons si on trouve un objet plus precis
+	$tables = lister_tables_objets_sql();
+	foreach ($tables as $t=>$d){
+		if (
+			$t!=='spip_rubriques' AND isset($d['key']['PRIMARY KEY'])
+		  AND
+			($infos[$s]['objet']!=='rubrique' OR isset($d['field']['id_rubrique']))
+		){
+			$primary = $d['key']['PRIMARY KEY'];
+			if (isset($contexte[$primary])){
+				$infos[$s]['objet'] = $d['type'];
+				$infos[$s]['id_objet'] = $contexte[$primary];
+				$infos[$s]['primary'] = $primary;
+				$infos[$s]['table_sql'] = $t;
+			}
+			return $infos[$s];
+		}
+	}
+	return $infos[$s];
+}
+
 /**
  * Remplace les meta du head par celles calculees par le plugin
  * utilise par le squelette inclure/seo-head
@@ -13,6 +55,7 @@ include_spip('inc/texte');
  * @return string
  */
 function seo_insere_remplace_metas($head,$contexte){
+
 	$append = "<!--seo_insere-->";
 	// on ne fait rien si deja insere
 	if (strpos($head,$append)!==false)
@@ -20,10 +63,8 @@ function seo_insere_remplace_metas($head,$contexte){
 
 	include_spip('inc/config');
 	$config = lire_config('seo/');
-	$is_sommaire = (
-	  (isset($contexte['type-page']) AND $contexte['type-page']=='sommaire')
-	  OR (!isset($contexte['id_article']) AND !isset($contexte['id_rubrique']))
-	);
+	$i = seo_interprete_contexte($contexte);
+	$is_sommaire = ($i['objet']=='sommaire');
 
 	if (isset($config['meta_tags']['activate']) AND $config['meta_tags']['activate']=='yes'){
 		/* d'abord les meta tags */
@@ -166,36 +207,20 @@ function seo_calculer_meta_tags($contexte=null){
 
 	if (is_null($contexte))
 		$contexte = $GLOBALS['contexte'];
-
-	if (isset($contexte['id_article'])){
-		$id_objet = $contexte['id_article'];
-		$objet = 'article';
-		$table = "spip_articles";
-		$id_table_objet = "id_article";
-	} elseif (isset($contexte['id_rubrique'])) {
-		$id_objet = $contexte['id_rubrique'];
-		$objet = 'rubrique';
-		$table = "spip_rubriques";
-		$id_table_objet = "id_rubrique";
-	} else {
-		$objet = 'sommaire';
-	}
+	$i = seo_interprete_contexte($contexte);
 
 	/* META TAGS */
 
 	// If the meta tags configuration is activate
 	$meta_tags = array();
 
-	switch ($objet) {
+	switch ($i['objet']) {
 		case 'sommaire':
 			$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 			break;
 		default:
-			if (!$table){
-				$table = table_objet_sql($objet);
-				$id_table_objet = id_table_objet($objet);
-			}
-			$row = sql_fetsel("titre,descriptif,texte", $table, "$id_table_objet=" . intval($id_objet));
+			// TODO : definir les champs utile pour cette table
+			$row = sql_fetsel("titre,descriptif,texte", $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
 			$tag = array();
 			$tag['title'] = couper($row['titre'], 64);
 			unset($row['titre']);
@@ -218,9 +243,8 @@ function seo_calculer_meta_tags($contexte=null){
 
 			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
 			if (isset($config['meta_tags']['activate_editing'])
-				AND $config['meta_tags']['activate_editing']=='yes'
-				AND in_array($objet,array('article','rubrique'))){
-				$result = sql_select("*", "spip_seo", "id_objet=" . intval($id_objet) . " AND objet=" . sql_quote($objet));
+				AND $config['meta_tags']['activate_editing']=='yes'){
+				$result = sql_select("*", "spip_seo", "id_objet=" . intval($i['id_objet']) . " AND objet=" . sql_quote($i['objet']));
 				while ($r = sql_fetch($result)){
 					if ($r['meta_content']!='')
 						$meta_tags[$r['meta_name']] = $r['meta_content'];

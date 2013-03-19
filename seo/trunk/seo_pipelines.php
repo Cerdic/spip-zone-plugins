@@ -21,10 +21,20 @@ function autoriser_seo_bouton_dist($faire, $type, $id, $qui, $opt){
 	return $connect_statut && $connect_toutes_rubriques;
 }
 
-
+/**
+ * Insertion dans le squelette head/truc de Z si dispo
+ * Remplace/ajoute des metas et title a celles du squelette
+ *
+ * @param string $flux
+ *     Le contenu de la page
+ * @return string
+ *     Le contenu de la page modifié
+ */
 function seo_recuperer_fond($flux){
 	if (strncmp($flux['args']['fond'],"head/",5)==0
+	AND false
 	  AND strpos($flux['data']['texte'],"<!--seo_insere-->")===false
+		AND strpos($flux['data']['texte'],"<title")!==false
 	  AND include_spip('inc/config')
 	  AND lire_config('seo/insert_head/activate', 'no')=="yes"
 	){
@@ -35,8 +45,7 @@ function seo_recuperer_fond($flux){
 
 /**
  * Insertion dans le pipeline affichage_final (SPIP)
- * Remplacement des métas et title dans le <head>
- * Remplace les métas et title du squelette et celles insérées via insert_head également
+ * Remplace/ajoute des metas et title a celles du <head>
  *
  * @param string $flux
  *     Le contenu de la page
