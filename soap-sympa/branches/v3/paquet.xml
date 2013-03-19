@@ -1,31 +1,31 @@
 <paquet 
-	prefix="soapsympa"
-	categorie="communication"
-	version="0.1.4"
-	etat="stable"
-	compatibilite="[3.0.*]"
-	logo="prive/themes/spip/images/soapsympa-128.png"
-	schema="0.1.5"
-	documentation="http://www.spip-contrib.net/Spip-ML-SYMPA"
-	>	
-	<nom>soapsympa_nom</nom>
-	<slogan>soapsympa_slogan</slogan>
-	<auteur>Thomas Weiss</auteur>	
-	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	        prefix="soapsympa"
+		        categorie="communication"
+			        version="0.1.4"
+				        etat="stable"
+					        compatibilite="[3.0.*]"
+						        logo="prive/themes/spip/images/soapsympa-128.png"
+							        schema="0.1.5"
+								        documentation="http://www.spip-contrib.net/Spip-ML-SYMPA"
+									        >       
+										        <nom>soapsympa_nom</nom>
+											        
+											        <auteur>Thomas Weiss</auteur>   
+												        <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
-	<!-- Autorisations -->
-	<pipeline nom="autoriser" inclure="soapsympa_autorisations.php" />
+													        <!-- Autorisations -->
+														        <pipeline nom="autoriser" inclure="soapsympa_autorisations.php" />
 
- 	<!-- elements d'interface-->
-	<pipeline nom="affiche_milieu" inclure="soapsympa_pipeline.php" />	
-	<pipeline nom="header_prive" inclure="soapsympa_header_prive.php" />
+															        <!-- elements d'interface-->
+																        <pipeline nom="affiche_milieu" inclure="soapsympa_pipeline.php" />      
+																	        <pipeline nom="header_prive" inclure="soapsympa_header_prive.php" />
 
-	
-	<necessite nom="saisies" compatibilite="[1.5.0;]" />
-	<necessite nom="spip_bonux" compatibilite="[1.0;]" />
+																		        
+																		        <necessite nom="saisies" compatibilite="[1.5.0;]" />
+																			        <necessite nom="spip_bonux" compatibilite="[1.0;]" />
 
-	<menu nom="edition_listes" titre="soapsympa:edition_soapsympa" parent="menu_edition" icone="images/soapsympa-16.png" action="edition_soapsympa" />
-	<menu nom="configurer_soapsympa" titre="soapsympa:configurer_soapsympa" parent="menu_configuration" icone="images/soapsympa-16.png" action="configurer_soapsympa" />
+																				        <menu nom="edition_listes" titre="soapsympa:edition_soapsympa" parent="menu_edition" icone="images/soapsympa-16.png" action="edition_soapsympa" />
+																					        <menu nom="configurer_soapsympa" titre="soapsympa:configurer_soapsympa" parent="menu_configuration" icone="images/soapsympa-16.png" action="configurer_soapsympa" />
 
-</paquet>
+																					</paquet>
 
