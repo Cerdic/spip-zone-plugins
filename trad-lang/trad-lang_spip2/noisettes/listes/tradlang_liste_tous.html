@@ -1,9 +1,9 @@
 <BOUCLE_module(TRADLANG_MODULES){id_tradlang_module?}{module?}>
-#SET{lang_orig,#ENV{lang_orig,#LANG_MERE}}
-#SET{str_mere,#ARRAY}
-#SET{str_cible,#ARRAY}
-#SET{str_statut,#ARRAY}
-#SET{langue_longue,#ENV{lang_cible}|traduire_nom_langue}
+[(#SET{lang_orig,#ENV{lang_orig,#LANG_MERE}})]
+[(#SET{str_mere,#ARRAY})]
+[(#SET{str_cible,#ARRAY})]
+[(#SET{str_statut,#ARRAY})]
+[(#SET{langue_longue,#ENV{lang_cible}|traduire_nom_langue})]
 [(#SET{defaut_tri,#ARRAY{statut,#ENV{statut_sens,1},id,1,str,1,maj,-1}})]
 
 <BOUCLE_revise(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
@@ -135,19 +135,19 @@
 			[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]
 		</div>]
 		[(#ENV{lang_cible}|langue_possible|non)
-		<div class="error">
+		#BOITE_OUVRIR{'',error}
 			<:tradlang:erreur_langue_activer_impossible{lang=#ENV{lang_cible}}:>
-		</div>]
+		#BOITE_FERMER]
 	]
 ]
 
 [(#GET{total_inexistants}|=={#GET{total_mere}}|non)
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#AUTORISER{modifier,tradlang}|oui)
-	<div class="actions">
+	#BOITE_OUVRIR{'',error}
 		[(#SET{arg,#MODULE|concat{/#ENV{lang_cible}}})]
 		[(#BOUTON_ACTION{<:tradlang:label_update_langues_cible_mere:>,[(#URL_ACTION_AUTEUR{tradlang_verifier_langue_base,#GET{arg},#SELF})]})]
-	</div>]
+	#BOITE_FERMER]
 ]
 <table class="spip liste_traductions tablesorter">
 	<thead>
@@ -249,7 +249,7 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANGS tradlang_modules){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+	<BOUCLE_revise_cible(TRADLANGS){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANGS){module}{id=#ID}{lang=#GET{lang_orig,#LANG_MERE}}>
@@ -271,7 +271,7 @@
 </B_module>
 [(#REM)
 	Le module n'existe pas
-]<div class="error">
+]#BOITE_OUVRIR{'',error}
 	<:tradlang:erreur_module_inconnu:>
-</div>
+#BOITE_FERMER
 <//B_module>
