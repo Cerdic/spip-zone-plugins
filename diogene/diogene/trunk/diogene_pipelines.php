@@ -420,9 +420,14 @@ function diogene_formulaire_traiter($flux){
 					$url = generer_url_entite($id_objet,$objet);
 					$flux['data']['message_ok'] .= '<br />'._T('diogene:message_objet_mis_a_jour_lien',array('url'=>$url));
 				}
-				$flux['data']['message_ok'] .= '<script type="text/javascript">if (window.jQuery) jQuery(".description_'.$objet.',.diogene_'.$id_diogene.'").ajaxReload();</script>';
-				$flux['data']['editable'] = true;
-				$flux['data']['redirect'] = false;
+				if (!defined('_DIOGENE_REDIRIGE_PUBLICATION')) { // TODO : à ajouter dans infos_supp du diogene
+					$flux['data']['message_ok'] .= '<script type="text/javascript">if (window.jQuery) jQuery(".description_'.$objet.',.diogene_'.$id_diogene.'").ajaxReload();</script>';
+					$flux['data']['editable'] = true;
+					$flux['data']['redirect'] = false;
+				} else {
+					$flux['data']['editable'] = false;
+					$flux['data']['redirect'] = $url;
+				}
 			}
 		}else{
 			$flux['data']['message_ok'] = _T('diogene:message_objet_cree',array('titre'=>$titre));

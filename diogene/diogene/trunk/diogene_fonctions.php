@@ -74,11 +74,13 @@ function diogene_nombre_attente($id_diogene){
 	}
 }
 
-if(!test_espace_prive()){
+// TODO : passer le define dans une valeur de config
+if (!test_espace_prive() AND (defined('_DIOGENE_MODIFIER_PUBLIC') ? _DIOGENE_MODIFIER_PUBLIC : true)) {
 	function generer_url_ecrire_article($id, $args, $ancre, $public, $connect){
 		return url_absolue(generer_url_publier($id,article,'article',false));
 	}
 }
+
 /**
  * Génération d'une url vers la page de publication d'un objet
  * 
