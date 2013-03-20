@@ -12,29 +12,6 @@
 			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
 				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
-			[(#ENV{id_objet}|oui)
-				<li class="editer editer_type saisie_selection">
-					<label for="champ_type"><:coordonnees:label_type_numero:></label>
-					<select name="type" id="champ_type">
-						<option value=""></option>
-						<option value="voice"[(#ENV{type}|=={voice}|oui)selected="selected"]><:coordonnees:type_tel_voice:></option>
-						<option value="work"[(#ENV{type}|=={work}|oui)selected="selected"]><:coordonnees:type_tel_work:></option>
-						<option value="home"[(#ENV{type}|=={home}|oui) selected="selected"]><:coordonnees:type_tel_home:></option>
-						<option value="msg"[(#ENV{type}|=={msg}|oui)selected="selected"]><:coordonnees:type_tel_msg:></option>
-						<option value="pref"[(#ENV{type}|=={pref}|oui) selected="selected"]><:coordonnees:type_tel_pref:></option>
-						<option value="fax"[(#ENV{type}|=={fax}|oui) selected="selected"]><:coordonnees:type_tel_fax:></option>
-						<option value="cell"[(#ENV{type}|=={cell}|oui) selected="selected"]><:coordonnees:type_tel_cell:></option>
-						<option value="dsl"[(#ENV{type}|=={dsl}|oui) selected="selected"]><:coordonnees:type_tel_dsl:></option>
-						<option value="video"[(#ENV{type}|=={video}|oui) selected="selected"]><:coordonnees:type_tel_video:></option>
-						<option value="pager"[(#ENV{type}|=={pager}|oui) selected="selected"]><:coordonnees:type_tel_pager:></option>
-						<option value="bbs"[(#ENV{type}|=={bbs}|oui) selected="selected"]><:coordonnees:type_tel_bbs:></option>
-						<option value="modem"[(#ENV{type}|=={modem}|oui) selected="selected"]><:coordonnees:type_tel_modem:></option>
-						<option value="car"[(#ENV{type}|=={car}|oui) selected="selected"]><:coordonnees:type_tel_car:></option>
-						<option value="isdn"[(#ENV{type}|=={isdn}|oui) selected="selected"]><:coordonnees:type_tel_isdn:></option>
-						<option value="pcs"[(#ENV{type}|=={pcs}|oui) selected="selected"]><:coordonnees:type_tel_pcs:></option>
-					</select>
-				</li>
-			]
 				[(#SAISIE{input, numero, label=<:coordonnees:label_numero:>})]
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
