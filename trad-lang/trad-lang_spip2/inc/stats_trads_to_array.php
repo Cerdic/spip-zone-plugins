@@ -28,7 +28,6 @@ function inc_stats_trads_to_array_dist($unite, $duree, $id_tradlang_module, $opt
 
 	$where = implode(" AND ",$where);
 	$format = ($unite=='jour'?'%Y-%m-%d':'%Y-%m-01');
-	spip_log($where,'test.'._LOG_ERREUR);
 	$res = sql_select("COUNT(*) AS v, DATE_FORMAT($order,'$format') AS d", $table, $where, "d", "d", "",'',$serveur);
 	
 	$format = str_replace('%','',$format);
