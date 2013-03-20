@@ -17,20 +17,20 @@ function inc_stats_trads_to_array_dist($unite, $duree, $id_tradlang_module, $opt
 
 	$table = "spip_versions";
 	$order = "date";
-	$where = array();
+	$where = array(
+		'objet = "tradlang"',
+		'id_version > 0',
+		'id_auteur > 0'
+	);
+	
 	if ($duree)
 		$where[] = sql_date_proche($order,-$duree,'day',$serveur);
 
-	if ($id_article) {
-			$table = "spip_visites_articles";
-			$where[] = "id_article=".intval($id_article);
-	}
-
 	$where = implode(" AND ",$where);
 	$format = ($unite=='jour'?'%Y-%m-%d':'%Y-%m-01');
-
+	spip_log($where,'test.'._LOG_ERREUR);
 	$res = sql_select("COUNT(*) AS v, DATE_FORMAT($order,'$format') AS d", $table, $where, "d", "d", "",'',$serveur);
-
+	
 	$format = str_replace('%','',$format);
 	$periode = ($unite=='jour'?24*3600:365*24*3600/12);
 	$step = intval(round($periode*1.1,0));
