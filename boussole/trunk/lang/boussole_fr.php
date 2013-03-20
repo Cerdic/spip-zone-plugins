@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
 	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>',
-	'info_configurer_boussole' => 'Ce formulaire vous permez de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
+	'info_configurer_boussole' => 'Ce formulaire vous permet de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
