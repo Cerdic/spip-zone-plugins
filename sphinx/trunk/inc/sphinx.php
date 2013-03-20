@@ -189,10 +189,6 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	# agir enfonction de la selection demandee :
 	if ($selection == 'ecrire') {
 		# espace prive
-		if (defined('_SPHINX_ECRIRE_SOURCE')) {
-			$cl->SetFilter ( "source", array(_SPHINX_ECRIRE_SOURCE) );
-		}
-
 		$cl->SetLimits(0,500);
 	}
 	else if (function_exists($f = 'sphinx_selection_'.$selection)) {
@@ -236,18 +232,21 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 			}
 		}
 	}
-	if ($GLOBALS['_SPHINX_RELAX']>1) {
-		# utiliser la syntaxe "mot1 mot2 mot3"/2
-		$query2 = '"'.$query.'"/'.($GLOBALS['_SPHINX_RELAX']-1);
-		$cl->SetLimits(0, 20);
-		$res = $cl->Query ( $query2, $sources );
-		if (!isset($res['matches']))
-			$GLOBALS['_SPHINX_RELAX'] = 1;
-	}
-	if ($GLOBALS['_SPHINX_RELAX'] == 1) {
-		$cl->SetMatchMode( SPH_MATCH_ANY );
-		$cl->SetLimits(0, 20);
-		$res = $cl->Query ( $query, $sources );
+
+	# relax
+	if ($GLOBALS['_SPHINX_RELAX']) {
+		if ($GLOBALS['_SPHINX_RELAX']>1) {
+			# utiliser la syntaxe "mot1 mot2 mot3"/2
+			$query2 = '"'.$query.'"/'.($GLOBALS['_SPHINX_RELAX']-1);
+			$res = $cl->Query ( $query2, $sources );
+			if (!isset($res['matches']))
+				$GLOBALS['_SPHINX_RELAX'] = 1;
+		}
+
+		if ($GLOBALS['_SPHINX_RELAX'] == 1) {
+			$cl->SetMatchMode( SPH_MATCH_ANY );
+			$res = $cl->Query ( $query, $sources );
+		}
 	}
 
 	if (isset($res['matches'])) {
