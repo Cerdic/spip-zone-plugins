@@ -151,9 +151,15 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	return $rempl.'</' . $englobant . '>';
 }
 
+/**
+ * Est-ce à Geshi de traiter les codes et cadres ou on utilise les fonctions natives de SPIP
+ * 
+ * @param array $regs
+ * @return string $ret
+ */
 function cadre_ou_code($regs) {
 	$ret = false;
-// pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
+	// pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
 	if (!preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)
 	|| !($ret = coloration_code_color($regs[3], $matches[3], $regs[1]))) {
 		$ret = $regs[1] == 'code' ? traiter_echap_code_dist($regs)
@@ -162,10 +168,24 @@ function cadre_ou_code($regs) {
 	return $ret;
 }
 
+/**
+ * Surcharge de la fonction traiter_echap_code_dist native de SPIP 
+ * cf : ecrire/inc/texte_mini
+ * 
+ * @param array $regs
+ * @return string 
+ */
 function traiter_echap_code($regs) {
 	return cadre_ou_code($regs);
 }
 
+/**
+ * Surcharge de la fonction traiter_echap_cadre_dist native de SPIP 
+ * cf : ecrire/inc/texte_mini
+ * 
+ * @param array $regs
+ * @return string 
+ */
 function traiter_echap_cadre($regs) {
 	return cadre_ou_code($regs);
 }

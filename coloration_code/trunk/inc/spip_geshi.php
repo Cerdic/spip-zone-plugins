@@ -5,6 +5,8 @@
  * 
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('geshi/geshi');
 
 // a la sauce GESHI
