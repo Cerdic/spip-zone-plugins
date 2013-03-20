@@ -1,14 +1,17 @@
 <?php
-
+/** 
+ * Crayons plugin for spip (c) Fil, toggg 2006-2013 -- licence GPL
+ * 
+ * @package SPIP\Crayons\Fonctions
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* inserer le css et le js externes pour Crayons dans le <head>
- *
- *  Crayons plugin for spip (c) Fil, toggg 2006-2013 -- licence GPL
+/**
+ * Débuguer les crayons
+ * mettre a true dans mes_options pour avoir les crayons non compresses
  */
-
-# mettre a true dans mes_options pour avoir les crayons non compresses
-@define('_DEBUG_CRAYONS', false);
+if(!defined('_DEBUG_CRAYONS'))
+	define('_DEBUG_CRAYONS', false);
 
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {

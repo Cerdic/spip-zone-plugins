@@ -556,12 +556,13 @@ function &crayons_get_table($type, &$nom_table) {
 	if (!isset($return[$table])) {
 		$try = array(table_objet_sql($table), 'spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
 
-		// premiere possibilite (1.9.3) : regarder directement la base
+		// premiere possibilite (à partir de 1.9.3) : regarder directement la base
 		if (function_exists('sql_showtable')) {
 			foreach ($try as $nom) {
 				if ($q = sql_showtable($nom , !$distant , $distant)) {
 					$noms[$table] = $nom;
 					$return[$table] = $q;
+					break;
 				}
 			}
 		}
