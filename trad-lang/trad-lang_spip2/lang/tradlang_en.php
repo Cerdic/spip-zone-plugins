@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Revisions',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text of the language string',
+	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
 	'info_traduire_module_lang' => 'Translate the module "@module@" in @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Information on translations',
 	'item_creer_langue_cible' => 'Create a new target language',

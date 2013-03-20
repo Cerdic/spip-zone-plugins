@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'Items modifiés :',
 	'items_new' => 'Nouveaux items :',
 	'items_total_nb' => 'Nombre total d\'items :',
-	
+
 	// L
 	'label_fichier_langue' => 'Fichier de langue à mettre en ligne',
 	'label_id_tradlang' => 'Identifiant de la chaîne',

@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'التعديلات',
 	'info_status_ok' => 'موافق',
 	'info_str' => 'نص سلسلة اللغة',
+	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
 	'info_traduire_module_lang' => 'ترجمة الوحدة «@module@» الى @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'معلومات حول الترجمات',
 	'item_creer_langue_cible' => 'إنشاء هدف جديد',

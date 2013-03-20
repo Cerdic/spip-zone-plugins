@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Zmeny',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text jazykového reťazca',
+	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
 	'info_traduire_module_lang' => 'Preložiť modul "@module@" do @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informácie o prekladoch',
 	'item_creer_langue_cible' => 'Vytvoriť nový cieľový jazyk',
