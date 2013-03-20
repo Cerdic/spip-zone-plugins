@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'canonical_url' => 'Kanonická podoba adries',
-	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries',
+	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries', # MODIF
 
 	// F
 	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred hlavičkami meta, ktoré vygenerujú šablóny',
@@ -30,16 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'google_analytics' => 'Google Analytics',
-	'google_analytics_activate' => 'Aktivovať Google Analytics',
+	'google_analytics_activate' => 'Aktivovať Google Analytics', # MODIF
 	'google_analytics_id' => 'ID webového objektu Google Analytics ',
 	'google_webmaster_tools' => 'Nástroje Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Aktivovať Google Webmaster Tools',
+	'google_webmaster_tools_activate' => 'Aktivovať Nástroje pre webmastera', # MODIF
 	'google_webmaster_tools_id' => 'Kontrolný kód',
 
 	// I
 	'insert_head' => 'Automatické vkladanie do #INSERT_HEAD',
 	'insert_head_activate' => 'Aktivovať automatické vkladanie',
-	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;head&gt;',
+	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;hlavičky&gt;', # MODIF
 
 	// M
 	'meta_author' => 'Autor(ka):',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Roboty:',
 	'meta_sommaire_value' => 'Hodnota tagu Zhrnutie',
 	'meta_tags' => 'Meta tagy',
-	'meta_tags_activate' => 'Aktivovať meta tagy',
+	'meta_tags_activate' => 'Aktivovať meta tagy', # MODIF
 	'meta_tags_default' => 'Predvolená hodnota meta tagov (pre články a rubriky)',
 	'meta_tags_edit_activate' => 'Aktivovať úpravu meta tagov v rubrikách a článkoch',
 	'meta_tags_editing' => 'Úprava meta tagov',
