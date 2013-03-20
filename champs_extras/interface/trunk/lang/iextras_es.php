@@ -97,7 +97,7 @@ El coeficiente aplicado sobre los campos extras es 2 por defecto. Para que se ha
 	'precisions_pour_restrictions_secteurs' => 'Identificadores de sectores para restringir (separador «:»)',
 	'precisions_pour_saisie' => 'Mostrar una entrada de tipo:',
 	'precisions_pour_traitements' => 'Aplicar automáticamente un tratamiento para la etiqueta #NOM_DU_CHAMP resultante:',
-	'precisions_pour_versionner' => 'El versionado se aplicará únicamente si el plugin «revisiones» está activo y si el objeto editorial del campo está en sí mismo versionado', # MODIF
+	'precisions_pour_versionner' => 'El versionado se aplicará únicamente si el plugin «revisiones» está activo y si el objeto editorial del campo está en sí mismo versionado',
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Solamente los administradores',
