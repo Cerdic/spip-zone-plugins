@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'email_bonjour' => 'Buenos días @nom@,',
-	'erreur_chaine_valide' => 'Inserte por favor una cadena de caracteres', # MODIF
+	'erreur_chaine_valide' => 'Inserte por favor una cadena de caracteres',
 	'erreur_chainelettre' => '(compuesto sólo por letras)',
 	'erreur_chainenombre' => '(compuesta de letras y/o cifras)',
 	'erreur_champ_obligatoire' => 'Este campo es obligatorio',
