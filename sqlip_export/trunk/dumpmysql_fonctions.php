@@ -1,5 +1,4 @@
 <?php
-
 // la cle primaire est declaree avec le reste du sql => recuperer sa seule declaration
 function cle_prim($val) {
 if ($position_cle=strpos($val,"PRIMARY")) {
@@ -30,6 +29,4 @@ function mysql_prep($value) {
     $text_mysql = addslashes($value);
     return $text_mysql;
 }
-
 ?>
-

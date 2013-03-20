@@ -1,26 +1,12 @@
 <plugin>
-	<nom>SQL export pour SPIP</nom>
-	<slogan>Des dump SQL pour diff&#233;rents moteurs de base de donn&#233;es</slogan>
+	<nom>Sqlite export pour SPIP</nom>
+	<slogan>Un dump MySQL de votre base en Sqlite</slogan>
 	<auteur>Suske</auteur>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<etat>experimental</etat>
-	<description>Appliqué sur un site installé en SQLite, ce plugin permet de télécharger un fichier mysql-dump.csv importable sur un site installé en MySQL. Il utilise un squelette et les it&#233;rateurs pour produire ce fichier contenant les d&#233;finitions de tables et les contenus du site en SQLite. Le tout se passe en CHARSET "UTF-8".
-
-Pour lancer le téléchargement, le webmestre doit appeler [->../spip.php?page=sqlite-mysql]</description>
-	<lien>http://www.spip.net</lien>
-	<prefix>sqlip_export</prefix>
-	<options></options>
-	<pipeline>
-		<nom></nom>
-		<action></action>
-		<inclure></inclure>
-	</pipeline>
-	<pipeline>
-		<nom></nom>
-		<action></action>
-		<inclure></inclure>
-	</pipeline>
-
+	<description>Appliqu&#233; sur un site install&#233; en SQLite, ce plugin tente de cr&#233;er un fichier mysql-dump.csv à importer dans une base MySQL. Il utilise un squelette et les it&#233;rateurs pour produire ce fichier contenant les d&#233;finitions de tables et les contenus du site en SQLite. Pour lancer le téléchargement, le webmestre doit appeler [->../spip.php?page=dumpmysql]</description>
+	<lien>http://contrib.spip.net/sqlexport</lien>
+	<prefix>sqlipexport</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.*]" />
 	<necessite id="Iterateurs" version="[0.6.1;[" />
 	<categorie>maintenance</categorie>
