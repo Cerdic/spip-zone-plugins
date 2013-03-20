@@ -6,25 +6,23 @@
 #CACHE{0}
 <B_a>
 <BOUCLE_a(TRADLANGS tradlang_modules){id_tradlang}>
-<fieldset>
+<fieldset style="width:#ENV{largeur}px">
 <legend>TRADLANG ##ID_TRADLANG</legend>
 <ul>
 	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
 	<li class="editer original">
-		<div>
-		<label><:tradlang:label_version_originale{lang=#LANG}:></label>
-		<textarea readonly="readonly" id="str_orig_#_a:ID_TRADLANG" class="crayon-active readonly" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
-		</div>
+		<label for="str_orig_#_a:ID_TRADLANG"><:tradlang:label_version_originale{lang=#LANG}:></label>
+		<textarea readonly="readonly" title="<:tradlang:info_textarea_readonly|attribut_html:>" id="str_orig_#_a:ID_TRADLANG" rows="4" class="crayon-active readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</li>
 	</BOUCLE_orig>
 	<li class="editer editer_str">
-		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str:></label>
-		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
-		 style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str{lang=#LANG}:></label>
+		<textarea class="crayon-active" name="#ENV{name_str}" rows="4" id="str_#ID_TRADLANG"
+		 style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</li>
 	<li class="editer editer_statut">
 		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
-		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="width:#ENV{largeur}px;text-align:#LANG_LEFT;" dir="#LANG_DIR">
+		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">
 			<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
 			<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
@@ -38,6 +36,10 @@
 	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
 	var id = me.crayon().find('form');
 	var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
+	$('.formulaire_crayon .readonly').unbind('focus').focus(function(e){
+		e.preventDefault();
+		$(this).blur();
+	});
 	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
 		var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 		if(vars){
