@@ -20,6 +20,7 @@ Le brouteur ne voit pas non plus les objets dedans
 (même s'ils sont lies à une rubrique).
 
 - lorsqu'un objet est dans une rubrique, il faut ajouter le pipeline "objet_compte_entants"
+et "boite_infos"
 
 - lorsqu'on lie un objet à une rubrique vide,
 la rubrique ne se publie pas et peut être supprimée.
