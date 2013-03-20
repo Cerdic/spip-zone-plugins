@@ -1,14 +1,29 @@
 <?php
-
+/**
+ * Plugin Piwik
+ * 
+ * @package SPIP\Piwik\Pipelines
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline insert_head
- *
- * @param object $flux
- * @return
+ * Insertion dans le pipeline insert_head (SPIP)
+ * 
+ * Ajout du code de piwik dans le head si configuré comme tel
+ * 
+ * @param string $flux
+ * 		Le contenu de la balise #INSERT_HEAD
+ * @return string $flux
+ * 		Le contenu de la balise #INSERT_HEAD modifié
+ * 
  */
 function piwik_insert_head($flux){
+	$options = array();
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
 	if(lire_config('piwik/mode_insertion') == 'pipeline'){
 		$options['type'] = 'public';
 		$flux .= piwik_head_js($options);
@@ -18,12 +33,21 @@ function piwik_insert_head($flux){
 }
 
 /**
- * Insertion dans le pipeline header_prive
+ * Insertion dans le pipeline header_prive (SPIP)
+ * 
+ * Insertion du code de Piwik dans l'espace privé si configuré comme tel
  *
- * @param object $flux
- * @return
+ * @param string $flux
+ * 		Le contenu du head privé
+ * @return string $flux
+ * 		Le contenu du head privé modifié
  */
 function piwik_header_prive($flux){
+	$options = array();
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
 	if(lire_config('piwik/piwik_prive')){
 		if(is_array(lire_config('piwik/restreindre_statut_prive'))){
 			$options['statuts_restreints'] = lire_config('piwik/restreindre_statut_prive');
@@ -40,11 +64,15 @@ function piwik_header_prive($flux){
 /**
  * La fonction de génération du code du tracker javascript
  *
- * @param object $options [optional]
+ * @param array $options [optional]
+ * 		
  * @return
  */
 function piwik_head_js($options=array()){
-	$config = lire_config('piwik',array());
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+
+	$config = lire_config('piwik',array('id_piwik'=>false,'urlpiwik'=>false));
 	$id_piwik = $config['idpiwik'];
 	$url_piwik = $config['urlpiwik'];
 	$afficher_js = true;
@@ -52,14 +80,15 @@ function piwik_head_js($options=array()){
 	$ret = '';
 
 	if($url_piwik && $id_piwik){
-		if($options['statut_restreint']){
-			$statut = $GLOBALS['visiteur_session']['statut'];
-			$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+		if((isset($options['statut_restreint']) && $options['statut_restreint']) || (isset($options['auteurs_restreints']) && $options['auteurs_restreints'])){
+			$statut = isset($GLOBALS['visiteur_session']['statut']) ? $GLOBALS['visiteur_session']['statut'] : '';
+			$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : '';
 			if(in_array($statut,$options['statuts_restreints'])){
-				if(in_array($id_auteur,$options['auteurs_restreints'])){
-					$afficher_js = false;
-				}
-			};
+				$afficher_js = false;
+			}
+			if($afficher_js && in_array($id_auteur,$options['auteurs_restreints'])){
+				$afficher_js = false;
+			}
 		}
 
 		if($afficher_js){

@@ -1,14 +1,21 @@
 <?php
+/**
+ * Plugin Piwik
+ * 
+ * @package SPIP\Piwik\Installation
+ */
 
-// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
 /**
  * Action d'installation et de mise à jour
- * @param float $nom_meta_version_base
+ * 
+ * @param string $nom_meta_version_base
+ * 		Le nom de la méta de version dans spip_meta
  * @param float $version_cible
+ * 		Le numéro de version vers laquelle effectuer la maj
  */
 function piwik_upgrade($nom_meta_version_base, $version_cible){
 
