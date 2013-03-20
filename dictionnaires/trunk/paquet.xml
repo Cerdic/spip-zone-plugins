@@ -1,7 +1,7 @@
 <paquet
 	prefix="dictionnaires"
 	categorie="divers"
-	version="0.5.1"
+	version="0.5.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/dictionnaire-32.png"
@@ -15,6 +15,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="lister_definitions" action="" />
 	<pipeline nom="autoriser" inclure="dictionnaires_autoriser.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/dictionnaires_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/dictionnaires_tables.php" />
