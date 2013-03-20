@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond &agrave l\'alias « @alias@ »',
+	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond à l\'alias « @alias@ »',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_ecriture_bdd' => 'Erreur d\'écriture en base de données (table @table@)',
 	'message_nok_xml_introuvable' => 'Le fichier « @fichier@ » est introuvable',
