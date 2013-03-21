@@ -22,8 +22,8 @@ function varnish_affichage_entetes_final($entetes) {
 	# * par defaut, on autorise varnish a les cacher pour une duree = #CACHE
 	# * si on veut bypasser ce default, utiliser
 	#    #HTTP_HEADER{X-Varnish-TTL: xxx}
-	if (isset($entetes['X-Spip-Cache']) AND !isset($entetes['X-Varnish-TTL']))
-		$entetes['X-Varnish-TTL'] = $entetes['X-Spip-Cache'];
+	if (isset($entetes['X-Spip-Cache']) AND !isset($entetes['X-Varnish-Ttl']))
+		$entetes['X-Varnish-Ttl'] = $entetes['X-Spip-Cache'];
 
 
 	// Apparition d'un nouvel article post-date ?
