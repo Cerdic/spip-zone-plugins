@@ -5,10 +5,10 @@
 	<version>0.2.0</version>
 	<etat>experimental</etat>
 	<description>Appliqu&#233; sur un site install&#233; en SQLite, ce plugin tente de cr&#233;er un fichier mysql-dump.csv à importer dans une base MySQL. Il utilise un squelette et les it&#233;rateurs pour produire ce fichier contenant les d&#233;finitions de tables et les contenus du site en SQLite. Pour lancer le téléchargement, le webmestre doit appeler [->../spip.php?page=dumpmysql]</description>
-	<lien>http://contrib.spip.net/sqlexport</lien>
 	<prefix>sqlipexport</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.*]" />
 	<necessite id="Iterateurs" version="[0.6.1;[" />
 	<categorie>maintenance</categorie>
+	<lien>http://contrib.spip.net/Sqlite-export-pour-SPIP</lien>
 </plugin>
 

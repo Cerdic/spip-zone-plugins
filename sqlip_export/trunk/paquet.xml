@@ -3,7 +3,8 @@
    categorie='maintenance'
    version='0.2.0'
    etat='experimental'
-   compatibilite="[3.0.6;3.0.*]"
+   compatibilite='[3.0.6;3.0.*]'
+   documentation='http://contrib.spip.net/Sqlite-export-pour-SPIP'
 >
     <nom>Sqlite export pour SPIP</nom>
     <auteur lien="http://lapsuske.brubel.net" mail="suske@brubel.net">Suske</auteur>
