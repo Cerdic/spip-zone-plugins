@@ -187,8 +187,8 @@ function balise_SI_PAGE_dist($p) {
 	$p->code =
 		  "((\n\t"
 		. "((\$zp=$_page) AND isset(\$Pile[0][_SPIP_PAGE]) AND (\$Pile[0][_SPIP_PAGE]==\$zp))\n\t"
-		. "OR (\$Pile[0]['type-page']==\$zp)\n\t"
-		. "OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type-page']=='page'))?' ':'')\n";
+		. "OR (isset(\$Pile[0]['type-page']) AND \$Pile[0]['type-page']==\$zp)\n\t"
+		. "OR (isset(\$Pile[0]['composition']) AND \$Pile[0]['composition']==\$zp AND \$Pile[0]['type-page']=='page'))?' ':'')\n";
 	$p->interdire_scripts = false;
 	return $p;
 }
