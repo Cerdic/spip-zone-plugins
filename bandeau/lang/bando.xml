@@ -22,8 +22,8 @@
 	</langue>
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fr_tu">
-		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/bando?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
