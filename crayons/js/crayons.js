@@ -488,14 +488,20 @@ $.fn.iconecrayon = function(){
 
 // initialise les crayons
 $.fn.initcrayon = function(){
+	var me=this;
+	var editme = function(e){
+		timeme=null;
+		$(me).opencrayon(e,
+			// calcul du "percent" du click par rapport a la hauteur totale du div
+			((e.pageY ? e.pageY : e.clientY) - document.body.scrollTop - me.offsetTop)
+			/ me.clientHeight);
+	};
+	var timeme;
 	this
 	.addClass('crayon-autorise')
-	.dblclick(function(e){
-		$(this).opencrayon(e,
-			// calcul du "percent" du click par rapport a la hauteur totale du div
-			((e.pageY ? e.pageY : e.clientY) - document.body.scrollTop - this.offsetTop)
-			/ this.clientHeight);
-	})
+	.dblclick(editme)
+	.bind("touchstart",function(e){timeme=setTimeout(function(){editme(e);},800);})
+	.bind("touchend",function(e){if (timeme) {clearTimeout(timeme);timeme=null;}})
 	.iconecrayon()
 	.hover(	// :hover pour MSIE
 		function(){
@@ -533,12 +539,14 @@ $.fn.crayonsstart = function() {
 	// demarrer les crayons
 	if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false)) {
 		$('.crayon:not(.crayon-init)')
-		.live('mouseover', function() {
+		.live('mouseover touchstart', function(e) {
 			$(this)
 			.addClass('crayon-init')
 			.filter(configCrayons.droits)
 			.initcrayon()
 			.trigger('mouseover');
+			if (e.type=='touchstart')
+				$(this).trigger('touchstart');
 		});
 	}
 
