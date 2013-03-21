@@ -30,16 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Page of a compass detailled information.',
 
 	// I
-	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display in your public pages.<br />A compass is described by an XML file containing informations on the compass and the websites.<br /><br />If the compass already exist, the form allow to update it while keeping the same display configuration.', # MODIF
+	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display them in your public pages.<br />If the compass already exists, this form allows to update it while keeping the same display configuration.',
 	'info_boite_boussoles_gerer' => '<strong>This page can be accessed by webmasters only.</strong><p>There, you can add, update and delate compasses. You can also go to the configuration page of each compass display.</p>',
-	'info_configurer_boussole' => 'This form allow you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
+	'info_configurer_boussole' => 'This form allow you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.', # MODIF
 	'info_fichier_boussole' => 'Enter the url of your compass description file.',
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
 	'info_site_boussole' => 'This website belongs to the compass :',
 	'info_site_boussoles' => 'This website belongs to the compasses :',
 
 	// L
-	'label_1_boussole' => '@nb@ boussole', # NEW
+	'label_1_boussole' => '@nb@ compass',
 	'label_1_site' => '@nb@ websites',
 	'label_a_class' => 'Class of the anchor including the logo',
 	'label_actualise_le' => 'Updated on',
@@ -60,9 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_articles' => 'Maximum number of articles displayed by website',
 	'label_max_sites' => 'Maximum number of websites',
 	'label_mode' => 'Choose a compass',
-	'label_mode_standard' => '« @boussole@ », official compass of SPIP websites', # MODIF
+	'label_mode_standard' => '"@boussole@", official compass of SPIP websites',
 	'label_modele' => 'Display model',
-	'label_n_boussoles' => '@nb@ boussoles', # NEW
+	'label_n_boussoles' => '@nb@ compasses',
 	'label_n_sites' => '@nb@ websites',
 	'label_nom' => 'Name',
 	'label_p_class' => 'Paragraph class including the description',
@@ -82,9 +82,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
-	'message_nok_boussole_inconnue' => 'No compass correspond to the alias « @alias@ »',
+	'message_nok_boussole_inconnue' => 'No compass correspond to the alias « @alias@ »', # MODIF
 	'message_nok_champ_obligatoire' => 'Mandatory field',
-	'message_nok_ecriture_bdd' => 'Database writing error', # MODIF
+	'message_nok_ecriture_bdd' => 'Database writing error (table @table@)',
 	'message_nok_xml_introuvable' => 'The file « @fichier@ » cannot be found',
 	'message_nok_xml_invalide' => 'The XML description file « @fichier@ » of the compass is not conform to the DTD',
 	'message_ok_boussole_actualisee' => 'The compass « @fichier@ » has been updated.',

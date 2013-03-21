@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete mať možnosť využívať šablóny na zobrazenie verejne prístupných stránok.<br />Kompas opisuje súbor XML, ktorý obsahuje údaje o kompase a jeho stránkach.<br /><br />Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.', # MODIF
 	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať kompasy. Môžete navštíviť aj stránku s nastaveniami zobrazenia každého kompasu.</p>',
-	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňom a sivým písmom.',
+	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňom a sivým písmom.', # MODIF
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
+	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"', # MODIF
 	'message_nok_champ_obligatoire' => 'Toto pole je povinné',
 	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy', # MODIF
 	'message_nok_xml_introuvable' => 'Súbor "@fichier@" sa nenašiel',
