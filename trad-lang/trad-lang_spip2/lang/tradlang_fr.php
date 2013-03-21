@@ -137,7 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// J
 	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"',
-	
+
 	// L
 	'label_fichier_langue' => 'Fichier de langue à mettre en ligne',
 	'label_id_tradlang' => 'Identifiant de la chaîne',

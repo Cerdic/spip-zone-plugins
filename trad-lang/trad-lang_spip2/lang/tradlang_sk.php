@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Zmeny',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text jazykového reťazca',
+	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
 	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
 	'info_traduire_module_lang' => 'Preložiť modul "@module@" do @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informácie o prekladoch',
@@ -135,6 +136,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'Zmenených položiek', # MODIF
 	'items_new' => 'Nových položiek', # MODIF
 	'items_total_nb' => 'Celkový počet položiek', # MODIF
+
+	// J
+	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
 
 	// L
 	'label_fichier_langue' => 'Jazykový súbor, ktorý chcete nahrať',
@@ -159,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Popis modulu',
 	'label_tradlang_comm' => 'Kommentár',
 	'label_tradlang_status' => 'Stav prekladu',
-	'label_tradlang_str' => 'Preložený reťazec',
+	'label_tradlang_str' => 'Preložený reťazec', # MODIF
 	'label_update_langues_cible_mere' => 'Aktualizovať tento jazyk v databáze',
 	'label_valeur_fichier' => 'Vo vašom súbore',
 	'label_valeur_fichier_valider' => 'Potvrďte zmenu vo svojom súbore',

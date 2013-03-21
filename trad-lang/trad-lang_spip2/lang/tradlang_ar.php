@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'التعديلات',
 	'info_status_ok' => 'موافق',
 	'info_str' => 'نص سلسلة اللغة',
+	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
 	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
 	'info_traduire_module_lang' => 'ترجمة الوحدة «@module@» الى @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'معلومات حول الترجمات',
@@ -135,6 +136,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'البنود المعدلة', # MODIF
 	'items_new' => 'البنود الجديدة', # MODIF
 	'items_total_nb' => 'العدد الإجمالي للبنود', # MODIF
+
+	// J
+	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
 
 	// L
 	'label_fichier_langue' => 'ملف اللغة المطلوب وضعه في الموقع',
@@ -159,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'وصف الوحدة',
 	'label_tradlang_comm' => 'تعليق',
 	'label_tradlang_status' => 'وضعية الترجمة',
-	'label_tradlang_str' => 'سلسلة مترجمة',
+	'label_tradlang_str' => 'سلسلة مترجمة', # MODIF
 	'label_update_langues_cible_mere' => 'تحديث هذه اللغة في قاعدة البيانات',
 	'label_valeur_fichier' => 'في ملفك',
 	'label_valeur_fichier_valider' => 'التصديق على تعديل ملفك',

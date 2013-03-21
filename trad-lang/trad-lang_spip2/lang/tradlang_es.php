@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Revisiones',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Texto de la cadena de idioma',
+	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
 	'info_tradlangs_sans_version' => '@nb@ cadenas de idioma no han creado una primera revisión (estas primeras revisiones son creadas por CRON).',
 	'info_traduire_module_lang' => 'Traducir el módulo "@module@" en @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informaciones acerca de las traducciones',
@@ -135,6 +136,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'Items modificados:',
 	'items_new' => 'Nuevos items:',
 	'items_total_nb' => 'Número total de items:',
+
+	// J
+	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
 
 	// L
 	'label_fichier_langue' => 'Archivo de idioma para cargar',
@@ -159,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Descripción del módulo',
 	'label_tradlang_comm' => 'Comentario',
 	'label_tradlang_status' => 'Estatus de la traducción ',
-	'label_tradlang_str' => 'Cadena traducida',
+	'label_tradlang_str' => 'Cadena traducida', # MODIF
 	'label_update_langues_cible_mere' => 'Actualizar este idioma en la base de datos',
 	'label_valeur_fichier' => 'En su archivo',
 	'label_valeur_fichier_valider' => 'Validar la modificación de su archivo',
