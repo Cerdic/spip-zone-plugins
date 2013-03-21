@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									3. At the end of each season, you have to update the CSA members list and archive into the appropriate sections, the dates of last season, this is needed for a proper functioning of this plugin.<br />
 
 									4. Update the basket type and the subscriptions on each author page, or no basket  delivery will be attributed.<br />
-									<p><strong>NON RESPECT OF THOSE RULES WILL RESULT IN THE PLUGIN DYSFUNCTION</strong></p>', # MODIF
+									<p><b>NON RESPECT OF THOSE RULES WILL RESULT IN THE PLUGIN DYSFUNCTION</b></p>',
 	'aucun_panier_pour_nom' => 'There is no basket for @nom@.',
 	'aucun_panier_produit_par_nom' => 'There is no basket made by @nom@.',
 	'autorise_envoie_email_explication' => 'Sending e-mails is used for availability and recovering baskets. "No" is adviced for huge CSA, instead you can use the management interface.', # MODIF
@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_responsables' => 'People in charge list',
 	'livraison' => 'Delivery',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.', # NEW
-	'livraison_explication' => 'On, this page, there is a previous delivery list. This table of this table can be seen on <a href="@url@"><b>this page</b></a>.', # MODIF
+	'livraison_explication' => 'On this page you will find the list of the delivery which you already have to make. This table is affichable on the site via an article by putting the code &lt;liste|livraison&gt;.',
 
 	// M
 	'manque_fpdf_imprimer' => 'The plugin "fpdf" is missing to print your baskets lists.',
