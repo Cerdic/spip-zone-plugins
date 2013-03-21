@@ -5,5 +5,5 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * On définit le chemin du répertoire _DIR_LIB_ZEROCLIPBOARD
  */
-define('_DIR_LIB_ZEROCLIPBOARD','lib/zeroclipboard-1.0.8/');
+define('_DIR_LIB_ZEROCLIPBOARD',_DIR_RACINE.'lib/zeroclipboard-1.0.8/');
 ?>
