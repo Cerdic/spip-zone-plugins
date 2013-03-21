@@ -1,0 +1,38 @@
+[(#REM)<!--
+Saisie de type de numero telephonique de la RFC-vCard
+Adaptation pour fonctionner avec le plugin "coordonnees".
+Appel direct : [(#INCLURE{fond=inc/saisie_type_numero})]
+
+Parametres :
+- class : classe(s) css ajoutes au select
+- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+- cacher_option_intro : pas de premier option vide  (defaut:"")
+- type : valeur selectionnee (nom du champ qu'utilise le plugin "coordonnees")
+- readonly : indiquer champ a valeur non modifiable (mais transmis)
+- disable : indiquer champ inactif (non transmis)
+- explication_type : explication/aide de/a la saisie
+
+maj:2013-03-21 -->]
+<li class="editer editer_type saisie_selection">
+	<label for="champ_type"><:coordonnees:label_type_numero:></label>
+	[<span class="erreur">(#ENV**{erreurs}|table_valeur{type})</span>]
+	<select name="type" id="champ_type"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+		[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+		<option value="voice"[(#ENV{type}|=={voice}|oui)selected="selected"]><:coordonnees:type_tel_voice:></option>
+		<option value="work"[(#ENV{type}|=={work}|oui) selected="selected"]><:coordonnees:type_tel_work:></option>
+		<option value="home"[(#ENV{type}|=={home}|oui) selected="selected"]><:coordonnees:type_tel_home:></option>
+		<option value="msg"[(#ENV{type}|=={msg}|oui)selected="selected"]><:coordonnees:type_tel_msg:></option>
+		<option value="pref"[(#ENV{type}|=={pref}|oui) selected="selected"]><:coordonnees:type_tel_pref:></option>
+		<option value="fax"[(#ENV{type}|=={fax}|oui) selected="selected"]><:coordonnees:type_tel_fax:></option>
+		<option value="cell"[(#ENV{type}|=={cell}|oui) selected="selected"]><:coordonnees:type_tel_cell:></option>
+		<option value="dsl"[(#ENV{type}|=={dsl}|oui) selected="selected"]><:coordonnees:type_tel_dsl:></option>
+		<option value="video"[(#ENV{type}|=={video}|oui) selected="selected"]><:coordonnees:type_tel_video:></option>
+		<option value="pager"[(#ENV{type}|=={pager}|oui) selected="selected"]><:coordonnees:type_tel_pager:></option>
+		<option value="bbs"[(#ENV{type}|=={bbs}|oui) selected="selected"]><:coordonnees:type_tel_bbs:></option>
+		<option value="modem"[(#ENV{type}|=={modem}|oui) selected="selected"]><:coordonnees:type_tel_modem:></option>
+		<option value="car"[(#ENV{type}|=={car}|oui) selected="selected"]><:coordonnees:type_tel_car:></option>
+		<option value="isdn"[(#ENV{type}|=={isdn}|oui) selected="selected"]><:coordonnees:type_tel_isdn:></option>
+		<option value="pcs"[(#ENV{type}|=={pcs}|oui) selected="selected"]><:coordonnees:type_tel_pcs:></option>
+	</select>
+	[<em class="explication">(#ENV{explication_type})</em>]
+</li>

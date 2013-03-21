@@ -1,0 +1,25 @@
+[(#REM)<!--
+Saisie de type d'adresse electronique de la RFC-vCard
+Adaptation pour fonctionner avec le plugin "coordonnees".
+Appel direct : [(#INCLURE{fond=inc/saisie_type_mel})]
+
+Parametres :
+- class : classe(s) css ajoutes au select
+- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+- cacher_option_intro : pas de premier option vide  (defaut:"")
+- type : valeur selectionnee (nom du champ qu'utilise le plugin "coordonnees")
+- readonly : indiquer champ a valeur non modifiable (mais transmis)
+- disable : indiquer champ inactif (non transmis)
+- explication_type : explication/aide de/a la saisie
+
+maj:2013-03-21 -->]
+<li class="editer editer_type saisie_selection">
+	<label for="champ_type"><:coordonnees:label_type_email:></label>
+	[<span class="erreur">(#ENV**{erreurs}|table_valeur{type})</span>]
+	<select name="type" id="champ_type"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+		[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+		<option value="work"[(#ENV{type}|=={work}|oui) selected="selected"]><:coordonnees:type_mel_work:></option>
+		<option value="home"[(#ENV{type}|=={home}|oui) selected="selected"]><:coordonnees:type_mel_home:></option>
+	</select>
+	[<em class="explication">(#ENV{explication_type})</em>]
+</li>

@@ -12,6 +12,9 @@
 			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
 				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
+			[(#ENV{id_objet}|oui)
+				[(#INCLURE{fond=inc/saisie_type_email})]
+			]
 				[(#SAISIE{input, email, label=<:coordonnees:label_email:>})]
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
