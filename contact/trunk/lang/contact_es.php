@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Título personalizado',
 
 	// P
-	'par' => 'Por: ',
+	'par_qui' => 'Por: ',
 	'preselection' => 'Desmarcar todos los items de la lista de destinatarios',
 
 	// S

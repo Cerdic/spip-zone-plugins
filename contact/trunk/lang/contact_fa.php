@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'تيتر شخصي',
 
 	// P
-	'par' => 'به وسيله‌ي:',
+	'par_qui' => 'به وسيله‌ي: ',
 	'preselection' => 'انداختن تمام اقلام از ليست دريافت‌ كنندگان ',
 
 	// S
