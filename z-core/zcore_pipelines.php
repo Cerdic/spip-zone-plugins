@@ -80,6 +80,7 @@ function zcore_recuperer_fond($flux){
 		}
 	}
 	elseif (!test_espace_prive()){
+		$z_nlength = 0;
 		if (!isset($z_contenu)) {
 			if (!function_exists("z_blocs"))
 				$styliser_par_z = charger_fonction('styliser_par_z','public');
@@ -183,7 +184,11 @@ function filtre_introduction($descriptif, $texte, $longueur, $connect) {
 if (!function_exists('balise_SI_PAGE_dist')){
 function balise_SI_PAGE_dist($p) {
 	$_page = interprete_argument_balise(1,$p);
-	$p->code = "(((\$Pile[0][_SPIP_PAGE]==(\$zp=$_page)) OR (\$Pile[0]['type-page']==\$zp) OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type-page']=='page'))?' ':'')";
+	$p->code =
+		  "((\n\t"
+		. "((\$zp=$_page) AND isset(\$Pile[0][_SPIP_PAGE]) AND (\$Pile[0][_SPIP_PAGE]==\$zp))\n\t"
+		. "OR (\$Pile[0]['type-page']==\$zp)\n\t"
+		. "OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type-page']=='page'))?' ':'')\n";
 	$p->interdire_scripts = false;
 	return $p;
 }
