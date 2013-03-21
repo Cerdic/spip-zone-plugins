@@ -154,7 +154,8 @@ function polyhier_editer_contenu_objet($flux){
  * @return array
  */
 function polyhier_pre_edition($flux){
-	$objet = $flux['args']['type'];
+	$objet = isset($flux['args']['type']) ? $flux['args']['type'] : '';
+
 	if (_request('_polyhier')
 		AND in_array($objet,array('article','rubrique'))
 		AND $flux['args']['action'] !== 'controler'){
@@ -205,7 +206,8 @@ function polyhier_post_edition($flux){
 		AND $statut = $flux['data']['statut']){
 
 		$id_objet = $flux['args']['id_objet'];
-		$serveur = $flux['args']['serveur'];
+		$serveur = isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '';
+
 		include_spip('inc/polyhier');
 		$id_parents = polyhier_get_parents($id_objet,$objet,$serveur);
 		$postdate = (isset($flux['data']['date']) AND strtotime($flux['data']['date'])>time());
@@ -229,11 +231,17 @@ function polyhier_objet_compte_enfants($flux) {
 		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 			" AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
+		if (!isset($flux['data']['articles_indirects'])) {
+			$flux['data']['articles_indirects'] = 0;
+			$flux['data']['rubriques_indirectes'] = 0;
+		}
+
 		$flux['data']['articles_indirects']+= sql_countsel(
 						"spip_rubriques_liens as RL join spip_articles as A ON (RL.objet='article' AND RL.id_objet=A.id_article)",
 						'RL.id_parent='.$flux['args']['id_objet'].$statut.$postdates);
 
 		$statut = (isset($flux['args']['statut'])?" AND R.statut=".sql_quote($flux['args']['statut']):"");
+
 		$flux['data']['rubriques_indirectes']+= sql_countsel(
 						"spip_rubriques_liens as RL join spip_rubriques as R ON (RL.objet='rubrique' AND RL.id_objet=R.id_rubrique)",
 						'RL.id_parent='.$flux['args']['id_objet'].$statut);
