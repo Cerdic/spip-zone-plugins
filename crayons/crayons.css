@@ -4,10 +4,10 @@ em.crayon-img-changed { display: none; }
 em.crayon-edit,
 em.crayon-crayon { display: none; }
 .crayon-boutons,
-.crayon-searching { float: right;padding:0;}
-.crayon-boutons button { width: 40px; height: 20px; border: 0; text-indent: -3000em; cursor: pointer;display:block;float:left; }
-.crayon-boutons .crayon-submit { background: transparent url(images/ok.png) right top no-repeat; float:right;padding:0;}
-.crayon-boutons .crayon-cancel { background: transparent url(images/cancel.png) center top no-repeat;padding:0;margin-right:10px;}
+.crayon-searching { float: right;padding:0;text-align: right;}
+.crayon-boutons button { border:1px solid; cursor: pointer;display:inline-block; }
+.crayon-boutons .crayon-submit { background: #e6efc2; color: #264409; border-color: #c6d880;float:right;margin-bottom: 0.5em;margin-left:0.5em}
+.crayon-boutons .crayon-cancel { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4;}
 .crayon-icones { float: right; width: 20px; text-align: right; position: relative; top:0; left:0; z-index:4999; }
 .crayon-icones span,.crayon-icones em { position:absolute; left:0; }
 em.crayon-edit,
