@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -14,82 +14,92 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Récupération des métadonnées via MediaInfo
  * 
- * @param string $chemin : le chemin du fichier à analyser
- * @return array $infos : un tableau des informations récupérées
+ * @param string $chemin
+ * 		le chemin du fichier à analyser
+ * @return array $infos
+ * 		Un tableau des informations récupérées
  */
 function inc_spipmotion_mediainfo_dist($chemin){
 	include_spip('inc/filtres');
+	include_spip('inc/charset');
 	$infos = array('hasaudio'=>'non','hasvideo' => 'non');
 	if(file_exists($chemin)){
 		ob_start();
-		passthru("mediainfo -f --Output=XML '$chemin'");
-		$metadatas=ob_get_contents();
+		passthru("mediainfo -f --Output=XML '$chemin' --LogFile=$chemin.txt");
 		ob_end_clean();
-		include_spip('inc/xml');
-		$arbre = spip_xml_parse($metadatas);
-		spip_xml_match_nodes(",^track type,",$arbre, $tracks);
-		foreach($tracks as $track => $info){
-			$metas[$track] = $info;
-			if($track == 'track type="General"'){
-				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
-				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
-				if($infos['descriptif'] == ''){
-					if(isset($info[0]['Performer'][0]))
-						$infos['descriptif'] .= utf8_encode($info[0]['Performer'][0])."\n";
-					if(isset($info[0]['Album'][0]))
-						$infos['descriptif'] .= utf8_encode($info[0]['Album'][0])."\n";
-					if(isset($info[0]['Recorded_date'][0]))
-						$infos['descriptif'] .= utf8_encode($info[0]['Recorded_date'][0])."\n";
-					if(isset($info[0]['Genre'][0]))
-						$infos['descriptif'] .= utf8_encode($info[0]['Genre'][0])."\n";
-					if(isset($info[0]['Track_name_Position'][0]))
-						$infos['descriptif'] .= $info[0]['Track_name_Position'][0].($info[0]['Track_name_Total'][0] ? '/'.$info[0]['Track_name_Total'][0]:'')."\n";
-					if(isset($info[0]['Performer_Url'][0]))
-						$infos['descriptif'] .= "\n".utf8_encode($info[0]['Performer_Url'][0])."\n";
-				}
-				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
-				$infos['duree'] = $info[0]['Duration'][0] / 1000;
-				if(!$infos['duree'])
-					$infos['duree'] = isset($info[0]['duration'][0]) ? (($info[0]['duration'][0] > 1000) ? ($info[0]['duration'][0]/1000) :$info[0]['duration'][0]) : '';
-				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
-				$infos['encodeur'] = $info[0]['Writing_library'][0];
-				if(!$infos['encodeur'])
-					$infos['encodeur'] = $info[0]['Writing_application'][0];
-				/**
-				 * Récupération de la cover
-				 */
-				if($info[0]['Cover_Data'][0]){
-					$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
-					switch ($mime) {
-						case 'image/jpg':
-							$ext = 'jpg';
-							break;
-					 	case 'image/png':
-							$ext = 'png';
-							break;
-						case 'image/gif':
-							$ext = 'gif';
-							break;
-						default:
-							$ext = 'jpg';
+
+		if(file_exists($chemin.'.txt')){
+			$lire_fichier = lire_fichier($chemin.'.txt',$metadatas);
+		
+			include_spip('inc/xml');
+			$arbre = spip_xml_parse($metadatas);
+			spip_xml_match_nodes(",^track type,",$arbre, $tracks);
+			foreach($tracks as $track => $info){
+				$metas[$track] = $info;
+				if($track == 'track type="General"'){
+					$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
+					$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
+					if($infos['descriptif'] == ''){
+						if(isset($info[0]['Performer'][0]))
+							$infos['descriptif'] .= unicode_to_utf_8($info[0]['Performer'][0])."\n";
+						if(isset($info[0]['Album'][0]))
+							$infos['descriptif'] .= unicode_to_utf_8($info[0]['Album'][0])."\n";
+						if(isset($info[0]['Recorded_date'][0]))
+							$infos['descriptif'] .= unicode_to_utf_8($info[0]['Recorded_date'][0])."\n";
+						if(isset($info[0]['Genre'][0]))
+							$infos['descriptif'] .= unicode_to_utf_8($info[0]['Genre'][0])."\n";
+						if(isset($info[0]['Track_name_Position'][0]))
+							$infos['descriptif'] .= $info[0]['Track_name_Position'][0].($info[0]['Track_name_Total'][0] ? '/'.$info[0]['Track_name_Total'][0]:'')."\n";
+						if(isset($info[0]['Performer_Url'][0]))
+							$infos['descriptif'] .= "\n".utf8_encode($info[0]['Performer_Url'][0])."\n";
 					}
-					$tmp_file = 'spipmotion-'.str_replace('.','_',str_replace(':','_',str_replace(' ','_',$infos['titre']))).'.'.$ext;
-		            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo');
-					$dest = $dest.$tmp_file;
-					if ($ok = ecrire_fichier($dest, base64_decode(array_shift(explode(' / ',$info[0]['Cover_Data'][0]))))){
-						include_spip('inc/joindre_document');
-						$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-			
-						list($extension,$arg) = fixer_extension_document($dest);
-						$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
-						$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
-			
-						if (is_numeric(reset($ajoute))
-						  AND $id_vignette = reset($ajoute)){
-						  	$infos['id_vignette'] = $id_vignette;
+					$infos['credits'] .= $info[0]['Performer'][0]? unicode_to_utf_8($info[0]['Performer'][0]).($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
+					$infos['duree'] = $info[0]['Duration'][0] / 1000;
+					if(!$infos['duree'])
+						$infos['duree'] = isset($info[0]['duration'][0]) ? (($info[0]['duration'][0] > 1000) ? ($info[0]['duration'][0]/1000) :$info[0]['duration'][0]) : '';
+					$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
+					$infos['encodeur'] = $info[0]['Writing_library'][0];
+					if(!$infos['encodeur'])
+						$infos['encodeur'] = $info[0]['Writing_application'][0];
+					/**
+					 * Récupération de la cover
+					 */
+					if($info[0]['Cover_Data'][0]){
+						$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
+						spip_log($mime,'tickets');
+						switch ($mime) {
+							case 'image/jpg':
+								$ext = 'jpg';
+								break;
+							case 'image/jpeg':
+								$ext = 'jpeg';
+								break;
+						 	case 'image/png':
+								$ext = 'png';
+								break;
+							case 'image/gif':
+								$ext = 'gif';
+								break;
+							default:
+								$ext = 'jpg';
+						}
+						$tmp_file = 'spipmotion-'.str_replace('.','_',str_replace(':','_',str_replace(' ','_',$infos['titre']))).'.'.$ext;
+			            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo');
+						$dest = $dest.$tmp_file;
+						if ($ok = ecrire_fichier($dest, base64_decode($info[0]['Cover_Data'][0]))){
+							include_spip('inc/joindre_document');
+							$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+				
+							list($extension,$arg) = fixer_extension_document($dest);
+							$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
+							$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
+				
+							if (is_numeric(reset($ajoute))
+							  AND $id_vignette = reset($ajoute)){
+							  	$infos['id_vignette'] = $id_vignette;
+							}
 						}
 					}
-					
 					/**
 					 * On tente de trouver une date correcte?
 					 * 
@@ -139,72 +149,72 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						}
 					}
 				}
-			}
-			if($track == 'track type="Video"'){
-				if(!$infos['titre'])
-					$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : '';
-				$infos['videobitrate'] = $info[0]['Bit_rate'][0] ? $info[0]['Bit_rate'][0] : ($info[0]['Nominal_bit_rate'][0] ? $info[0]['Nominal_bit_rate'][0] : '');
-				$infos['hauteur'] = $info[0]['Original_height'][0] ? $info[0]['Original_height'][0] : $info[0]['Height'][0];
-				$infos['largeur'] = $info[0]['Original_width'][0] ? $info[0]['Original_width'][0] : $info[0]['Width'][0];
-				$infos['videocodec'] = $info[0]['Format'][0];
-				$infos['videocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Format'][0]);
-				if($infos['videocodecid'] == 'avc1'){
-					if(isset($info[0]['Format_profile'][0])){
-						if(preg_match('/^Baseline.*/',$info[0]['Format_profile'][0]))
-							$infos['videocodecid'] = 'avc1.42E01E';
-						if(preg_match('/^Main.*/',$info[0]['Format_profile'][0]))
-							$infos['videocodecid'] = 'avc1.4D401E';
-						if(preg_match('/^High.*/',$info[0]['Format_profile'][0]))
-							$infos['videocodecid'] = 'avc1.64001E';
+				if($track == 'track type="Video"'){
+					if(!$infos['titre'])
+						$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : '';
+					$infos['videobitrate'] = $info[0]['Bit_rate'][0] ? $info[0]['Bit_rate'][0] : ($info[0]['Nominal_bit_rate'][0] ? $info[0]['Nominal_bit_rate'][0] : '');
+					$infos['hauteur'] = $info[0]['Original_height'][0] ? $info[0]['Original_height'][0] : $info[0]['Height'][0];
+					$infos['largeur'] = $info[0]['Original_width'][0] ? $info[0]['Original_width'][0] : $info[0]['Width'][0];
+					$infos['videocodec'] = $info[0]['Format'][0];
+					$infos['videocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Format'][0]);
+					if($infos['videocodecid'] == 'avc1'){
+						if(isset($info[0]['Format_profile'][0])){
+							if(preg_match('/^Baseline.*/',$info[0]['Format_profile'][0]))
+								$infos['videocodecid'] = 'avc1.42E01E';
+							if(preg_match('/^Main.*/',$info[0]['Format_profile'][0]))
+								$infos['videocodecid'] = 'avc1.4D401E';
+							if(preg_match('/^High.*/',$info[0]['Format_profile'][0]))
+								$infos['videocodecid'] = 'avc1.64001E';
+						}
+					}else if($infos['videocodec'] == 'Sorenson Spark'){
+						$infos['videocodecid'] = 'h263';
 					}
-				}else if($infos['videocodec'] == 'Sorenson Spark'){
-					$infos['videocodecid'] = 'h263';
+					$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
+					
+					/**
+					 * On a un display aspect ratio
+					 * 
+					 * Si le ration de width / height est vraiment trop différent de celui qui est dans les metas,
+					 * c'est un truc étrange de la vidéo
+					 * 
+					 * On doit donc recréer une largeur en fonction de la hauteur qui soit valable, sinon les encodages auront des problèmes de ratio,
+					 * notamment lors de la lecture en flash
+					 */
+					if(($infos['aspect_ratio'] != '') && (($infos['aspect_ratio'] - ($infos['largeur']/$infos['hauteur'])) > '0.1')){
+						$infos['largeur'] = round($infos['hauteur']*$infos['aspect_ratio']);
+					}
+					$infos['framerate'] = $info[0]['Frame_rate'][0];
+					$infos['framecount'] = $info[0]['Frame_count'][0];
+					$infos['rotation'] = intval($info[0]['Rotation'][0]);
+					$infos['hasvideo'] = 'oui';
 				}
-				$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
-				
-				/**
-				 * On a un display aspect ratio
-				 * 
-				 * Si le ration de width / height est vraiment trop différent de celui qui est dans les metas,
-				 * c'est un truc étrange de la vidéo
-				 * 
-				 * On doit donc recréer une largeur en fonction de la hauteur qui soit valable, sinon les encodages auront des problèmes de ratio,
-				 * notamment lors de la lecture en flash
-				 */
-				if(($infos['aspect_ratio'] != '') && (($infos['aspect_ratio'] - ($infos['largeur']/$infos['hauteur'])) > '0.1')){
-					$infos['largeur'] = round($infos['hauteur']*$infos['aspect_ratio']);
-				}
-				$infos['framerate'] = $info[0]['Frame_rate'][0];
-				$infos['framecount'] = $info[0]['Frame_count'][0];
-				$infos['rotation'] = intval($info[0]['Rotation'][0]);
-				$infos['hasvideo'] = 'oui';
-			}
-			if($track == 'track type="Audio"'){
-				$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
-				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
-				$infos['audiochannels'] = $info[0]['Channel_s_'][0];
-				$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
-				$infos['audiocodec'] = $info[0]['Codec'][0];
-				$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
-				if($infos['audiocodec'] == 'AAC LC'){
-					$infos['audiocodecid'] = 'mp4a.40.2';
-				}else if($infos['audiocodec'] == 'MPA1L3'){
-					$infos['audiocodecid'] = 'mp3a';
-				}else{
-					$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
-				}
-				if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode']){
-					$infos['hasaudio'] = 'oui';
+				if($track == 'track type="Audio"'){
+					$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
+					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
+					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
+					$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
+					$infos['audiocodec'] = $info[0]['Codec'][0];
+					$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
+					if($infos['audiocodec'] == 'AAC LC'){
+						$infos['audiocodecid'] = 'mp4a.40.2';
+					}else if($infos['audiocodec'] == 'MPA1L3'){
+						$infos['audiocodecid'] = 'mp3a';
+					}else{
+						$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
+					}
+					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode']){
+						$infos['hasaudio'] = 'oui';
+					}
 				}
 			}
+			spip_unlink($chemin.'.txt');
 		}
 	}
 	else{
 		spip_log('fichier_non_existant','elix_deja_base');
 	}
-
 	$metas['Retrieved infos in database'] = $infos;
-	$infos['metadatas'] = serialize($metas);
+	//$infos['metadatas'] = serialize($metas);
 	return $infos;
 }
 ?>
