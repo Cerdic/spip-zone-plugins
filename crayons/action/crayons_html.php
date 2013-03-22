@@ -124,7 +124,7 @@ function controleur_dist($regs, $c=null) {
 	}
 
 	$crayon = new Crayon($nomcrayon, $valeur, $options, $c);
-	$inputAttrs['style'] = join($crayon->styles);
+	$inputAttrs['style'] = implode('',$crayon->styles);
 
 	if (!$controleur) {
 		$inputAttrs['style'] .= 'width:' . $crayon->largeur . 'px;' .
