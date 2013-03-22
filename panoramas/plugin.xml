@@ -5,7 +5,7 @@
 	<version>3.1.0</version>
 	<licence>GNU/GPL</licence>
 	<etat>dev</etat>
-	<description>Ce plugin s’applique sur les documents et images ins&#233;r&#233;es dans le texte de vos articles, rubriques ou br&#234;ves en pr&#233;cisant lors de l'insertion <code><embXX|panorama></code> ou <code><imgXX|panorama></code></description>
+	<description>Ce plugin s'applique sur les documents et images ins&#233;r&#233;es dans le texte de vos articles, rubriques ou br&#234;ves en pr&#233;cisant lors de l'insertion <code><embXX|panorama></code> ou <code><imgXX|panorama></code></description>
 	<prefix>panoramas</prefix>
 	<lien>http://www.spip-contrib.net/Plugin-Panoramas-360o</lien>
 	<options> <!-- fichier charge a chaque hit -->
@@ -36,7 +36,7 @@
 	</pipeline>
 	<install>base/panoramas_upgrade.php</install>
 
-	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="medias" version="[1.5.0;]" />
 	<categorie>multimedia</categorie>
 </plugin>
