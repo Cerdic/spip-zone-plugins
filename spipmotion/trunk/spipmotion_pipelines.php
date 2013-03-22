@@ -79,13 +79,14 @@ function spipmotion_post_edition($flux){
 			&& ($infos_doc['hasvideo'] == 'oui')
 		){
 			include_spip('inc/documents');
-			spip_log('On renomme de ogg en ogv','spipmotion.'._LOG_ERREUR);
 			$rep_ogv = creer_repertoire_documents('ogv');
 			
 			$new_file = str_replace('.ogg','.ogv',basename($infos_doc['fichier']));
 			$renomme = rename(get_spip_doc($infos_doc['fichier']),$rep_ogv.$new_file);
 			if($renomme){
-				sql_updateq('spip_documents',array('media'=>'video','extension'=>'ogv','fichier'=> set_spip_doc($rep_ogv.$new_file)),'id_document ='.intval($id_document));
+				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
+				$id_vignette = $recuperer_logo($id_document,1,$file,$metas,true);
+				sql_updateq('spip_documents',array('id_vignette'=>$id_vignette,'media'=>'video','extension'=>'ogv','fichier'=> set_spip_doc($rep_ogv.$new_file)),'id_document ='.intval($id_document));
 				$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 			}
 		}
