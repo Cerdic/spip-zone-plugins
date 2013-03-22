@@ -123,8 +123,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'Revisions',
 	'info_status_ok' => 'OK',
 	'info_str' => 'Text of the language string',
-	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
-	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
+	'info_textarea_readonly' => 'This text field is read only',
+	'info_tradlangs_sans_version' => '@nb@ language strings do not have a first revision( first revisions are created by CRON).',
 	'info_traduire_module_lang' => 'Translate the module "@module@" in @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Information on translations',
 	'item_creer_langue_cible' => 'Create a new target language',
@@ -133,12 +133,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => '1 item is missing in this language (compared to the parent language)',
 	'items_en_trop' => '@nb@ too many items in this language (compared to the parent language)',
 	'items_manquants' => '@nb@ items are missing in that language (from the parent language)',
-	'items_modif' => 'Modified items', # MODIF
-	'items_new' => 'New items', # MODIF
-	'items_total_nb' => 'Total number of items', # MODIF
+	'items_modif' => 'Modified items:',
+	'items_new' => 'New items:',
+	'items_total_nb' => 'Total number of items:',
 
 	// J
-	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
+	'job_creation_revisions_modules' => 'Creating original revisions of module "@module@"',
 
 	// L
 	'label_fichier_langue' => 'Language file to upload',
@@ -163,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Description of the module',
 	'label_tradlang_comm' => 'Comment',
 	'label_tradlang_status' => 'Status of the translation',
-	'label_tradlang_str' => 'Translated string', # MODIF
+	'label_tradlang_str' => 'Translated string (@lang@)',
 	'label_update_langues_cible_mere' => 'Update this language in the database',
 	'label_valeur_fichier' => 'In your file',
 	'label_valeur_fichier_valider' => 'Validate the modification of your file',
@@ -218,12 +218,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
 	'message_changement_lang_orig' => 'The original language of translation selected ("@lang_orig@") is not sufficiently translated, it is replaced by the language "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'The original language of translation selected ("@lang_orig@") does not exist, it is replaced by the language "@lang_nouvelle@".',
-	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
+	'message_changement_statut' => 'Modification of status from "@statut_old@" to ""@statut_new@"',
 	'message_confirm_redirection' => 'You will be redirected to the modification of the module',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
 	'message_info_choisir_langues_profiles' => 'You can select your favorites languages <a href="@url_profil@">in your profile</a> to use them as default.',
-	'message_lang_cible_selectionnee_auto_preferees' => 'La langue vers laquelle vous allez traduire a été sélectionnée automatiquement ("@lang@") à partir de vos langues préférées. Vous pouvez la changer en utilisant le formulaire de sélection de modules.', # NEW
+	'message_lang_cible_selectionnee_auto_preferees' => 'The language you are going to translate to was picked up automatically ("@lang@") from your favourite languages. You can change it through the modules selection form.',
 	'message_langues_choisies_affichees' => 'Only the languages ​​you have chosen are displayed: @langues@.',
 	'message_langues_preferees_affichees' => 'Only your favorites languages are displayed: @langues@.',
 	'message_langues_utilisees_affichees' => 'Only the @nb@ most used languages ​​are displayed: @langues@.',

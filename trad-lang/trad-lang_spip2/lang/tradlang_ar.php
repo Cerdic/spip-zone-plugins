@@ -123,8 +123,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_revisions_stats' => 'التعديلات',
 	'info_status_ok' => 'موافق',
 	'info_str' => 'نص سلسلة اللغة',
-	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
-	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
+	'info_textarea_readonly' => 'هذا الحقل ممنوع من الكتابة (قراءة فقط)',
+	'info_tradlangs_sans_version' => '@nb@ سلسلة لغة ليس لها أية مراجعة أولى (المراجعات الأولى ناتجة عن وظيفة CRON).',
 	'info_traduire_module_lang' => 'ترجمة الوحدة «@module@» الى @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'معلومات حول الترجمات',
 	'item_creer_langue_cible' => 'إنشاء هدف جديد',
@@ -133,12 +133,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => 'هناك بند واحد ناقص في هذه اللغة (بالنسبة الى اللغة الأم)',
 	'items_en_trop' => 'هناك @nb@ بند زائد في هذه اللغة (بالنسبة الى اللغة الأم)',
 	'items_manquants' => 'هناك @nb@ بند ناقص في هذه اللغة (بالنسبة الى اللغة الأم)',
-	'items_modif' => 'البنود المعدلة', # MODIF
-	'items_new' => 'البنود الجديدة', # MODIF
-	'items_total_nb' => 'العدد الإجمالي للبنود', # MODIF
+	'items_modif' => 'البنود المعدلة:',
+	'items_new' => 'البنود الجديدة:',
+	'items_total_nb' => 'العدد الإجمالي للبنود:',
 
 	// J
-	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
+	'job_creation_revisions_modules' => 'أنشاء مراجعات الأصل لوحدة «@module@»',
 
 	// L
 	'label_fichier_langue' => 'ملف اللغة المطلوب وضعه في الموقع',
@@ -163,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'وصف الوحدة',
 	'label_tradlang_comm' => 'تعليق',
 	'label_tradlang_status' => 'وضعية الترجمة',
-	'label_tradlang_str' => 'سلسلة مترجمة', # MODIF
+	'label_tradlang_str' => 'سلسلة مترجمة (@lang@)',
 	'label_update_langues_cible_mere' => 'تحديث هذه اللغة في قاعدة البيانات',
 	'label_valeur_fichier' => 'في ملفك',
 	'label_valeur_fichier_valider' => 'التصديق على تعديل ملفك',
@@ -218,11 +218,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'هذه الوحدة متوافرة في كل اللغات الممكنة',
 	'message_changement_lang_orig' => 'لغة مصدر الترجمة المحددة («@lang_orig@») غير مترجمة بما فيه الكفاية، تم تبديلها باللغة «@lang_nouvelle@».',
 	'message_changement_lang_orig_inexistante' => 'لغة مصدر الترجمة المحددة («@lang_orig@») غير موجودة، تم تبديلها باللغة «@lang_nouvelle@».',
-	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
+	'message_changement_statut' => 'تغيير وضعية «@statut_old@» لتصبح «@statut_new@»',
 	'message_confirm_redirection' => 'ستتم إعادة توجيهك الى تعديل الوحدة',
 	'message_demande_update_langues_cible_mere' => 'يمكنك الطلب من مدير إعادة تزامن هذه اللغة مع اللغة الأساسية.',
 	'message_info_choisir_langues_profiles' => 'يمكنك تحديد لغاتك المفضلة <a href="@url_profil@">في صفحة سيرتك</a> لعرضها افتراضياً.',
-	'message_lang_cible_selectionnee_auto_preferees' => 'La langue vers laquelle vous allez traduire a été sélectionnée automatiquement ("@lang@") à partir de vos langues préférées. Vous pouvez la changer en utilisant le formulaire de sélection de modules.', # NEW
+	'message_lang_cible_selectionnee_auto_preferees' => 'تم اختيار اللغة التي ستترجم اليها («@lang@») من بين لغابك المفضلة. يمكنك تغييرها باستخدام استمارة اختيار الوحدات.',
 	'message_langues_choisies_affichees' => 'اللغات التي اخترها هي المعروضة فقط: @langues@.',
 	'message_langues_preferees_affichees' => 'لغاتك المفضلة هي المعروضة فقط: @langues@.',
 	'message_langues_utilisees_affichees' => 'اللغات الـ@nb@ الأكثر استخداماً هي المعروضة فقط: @langues@.',
