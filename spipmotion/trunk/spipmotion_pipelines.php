@@ -3,10 +3,11 @@
  * SPIPmotion
  * Gestion de l'encodage et des métadonnées de vidéos directement dans spip
  *
- * Auteurs :
+ * Auteur :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * 2008-2013 - Distribué sous licence GNU/GPL
  *
+ * @package SPIP\SPIPmotion\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -210,11 +211,6 @@ function spipmotion_formulaire_traiter($flux){
 		if(count($erreurs) > 0){
 			include_spip('inc/invalideur');
 			suivre_invalideur('1');
-	
-			/**
-			 * On force le rechargement de la page car on a récupéré de nouvelles infos sur ffmpeg
-			 */
-			//$flux['data']['redirect'] = self();
 		}
 	}
 	return $flux;

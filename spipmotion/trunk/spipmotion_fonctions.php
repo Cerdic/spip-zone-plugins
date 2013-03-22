@@ -5,8 +5,9 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
+ * @package SPIP\SPIPmotion\Fonctions
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -14,8 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Transforme l'id d'un codec audio d'un fichier flv
  * en chaine de caractère lisible
- * @param string $type
- * @return string La chaine de caractère lisible
+ * 
+ * @param int $type
+ * 		Le numéro du codec
+ * @return string 
+ * 		La chaine de caractère lisible correspondant au codec
  */
 function flv_audio_codec_type_to_type($type=null){
 	$trans = array(
@@ -34,8 +38,11 @@ function flv_audio_codec_type_to_type($type=null){
 /**
  * Transforme l'id d'un codec video d'un fichier flv
  * en chaine de caractère lisible
- * @param string $type
- * @return string La chaine de caractère lisible
+ * 
+ * @param int $type
+ * 		Le numéro du codec
+ * @return string 
+ * 		La chaine de caractère lisible
  */
 function flv_video_codec_type_to_type($type=null){
 	$trans = array(
@@ -48,10 +55,13 @@ function flv_video_codec_type_to_type($type=null){
 }
 
 /**
- * Converti une durée en secondes en une durée affichable et lisible hh:mm:ss ou mm:ss
+ * Converti une durée en secondes en une durée affichable et lisible 
+ * hh:mm:ss ou mm:ss
  * 
- * @param $temps_secondes int|float
- * 		le nombre de secondes
+ * @param int|float $temps_secondes 
+ * 		Le nombre de secondes
+ * @return string $str
+ * 		Le temps sous forme de chaîne de caractère
  */
 function spipmotion_duree($temps_secondes){
 	$diff_hours = floor($temps_secondes/3600);
