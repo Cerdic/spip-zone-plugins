@@ -20,17 +20,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Un tableau des informations récupérées
  */
 function inc_spipmotion_mediainfo_dist($chemin){
-	include_spip('inc/filtres');
-	include_spip('inc/charset');
 	$infos = array('hasaudio'=>'non','hasvideo' => 'non');
 	if(file_exists($chemin)){
+		include_spip('inc/filtres');
+		include_spip('inc/charset');
+		
 		ob_start();
-		passthru("mediainfo -f --Output=XML '$chemin' --LogFile=$chemin.txt");
+		passthru("mediainfo -f --Output=XML '$chemin' --LogFile=$chemin.xml");
 		ob_end_clean();
 
-		if(file_exists($chemin.'.txt')){
-			$lire_fichier = lire_fichier($chemin.'.txt',$metadatas);
-		
+		if(file_exists($chemin.'.xml')){
+			$lire_fichier = lire_fichier($chemin.'.xml',$metadatas);
 			include_spip('inc/xml');
 			$arbre = spip_xml_parse($metadatas);
 			spip_xml_match_nodes(",^track type,",$arbre, $tracks);
@@ -98,6 +98,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							  AND $id_vignette = reset($ajoute)){
 							  	$infos['id_vignette'] = $id_vignette;
 							}
+							spip_unlink($dest);
 						}
 					}
 					/**
@@ -207,7 +208,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					}
 				}
 			}
-			spip_unlink($chemin.'.txt');
+			spip_unlink($chemin.'.xml');
 		}
 	}
 	else{
