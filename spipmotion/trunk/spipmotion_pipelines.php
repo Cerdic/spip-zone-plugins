@@ -49,6 +49,9 @@ function spipmotion_taches_generales_cron($taches_generales){
  * Intervient à chaque modification d'un objet de SPIP
  * notamment lors de l'ajout d'un document
  * 
+ * Lors de l'ajout d'un document, si c'est un ogg, on vérifie bien que le document n'est qu'un fichier audio,
+ * si c'est une vidéo, on le renome en .ogv et on update la base de donnée
+ * 
  * Lors de la suppression de document, supprime les versions encodées créées par spipmotion s'il y a lieu
  *
  * @return $flux Le contexte de pipeline complété
@@ -57,11 +60,40 @@ function spipmotion_taches_generales_cron($taches_generales){
 function spipmotion_post_edition($flux){
 	if(isset($flux['args']['operation']) && in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
 		$id_document = isset($flux['args']['id_objet']) ? intval($flux['args']['id_objet']) : 0;
+		$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+		
+		/**
+		 * Si on ajoute le document et que :
+		 * -* son extension est ogg
+		 * -* il a une piste vidéo
+		 * 
+		 * On le renomme en ogv et on update son media en video
+		 * 
+		 * On refait la requête pour les infos du document
+		 * 
+		 * Correction du ticket http://www.mediaspip.net/ticket/les-conteneurs-sons-et-videos-n
+		 */
+		if(
+			($flux['args']['operation'] == 'ajouter_document')
+			&& ($infos_doc['extension'] == 'ogg')
+			&& ($infos_doc['hasvideo'] == 'oui')
+		){
+			include_spip('inc/documents');
+			spip_log('On renomme de ogg en ogv','spipmotion.'._LOG_ERREUR);
+			$rep_ogv = creer_repertoire_documents('ogv');
+			
+			$new_file = str_replace('.ogg','.ogv',basename($infos_doc['fichier']));
+			$renomme = rename(get_spip_doc($infos_doc['fichier']),$rep_ogv.$new_file);
+			if($renomme){
+				sql_updateq('spip_documents',array('media'=>'video','extension'=>'ogv','fichier'=> set_spip_doc($rep_ogv.$new_file)),'id_document ='.intval($id_document));
+				$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+			}
+		}
 		/**
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette ni d'un document distant
 		 * ni ses infos.
 		 */
-		$infos_doc = sql_fetsel('mode,distant,extension','spip_documents','id_document='.intval($id_document));
+		
 		if(($infos_doc['mode'] != 'vignette') && ($infos_doc['distant'] == 'non')){
 			include_spip('inc/config');
 			/**
