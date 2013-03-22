@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Vlastný názov',
 
 	// P
-	'par_qui' => 'Pre: ',
+	'par_qui' => 'Par : ', # NEW
 	'preselection' => 'Odznačiť všetky položky v zozname príjemcov', # NEW
 
 	// S
