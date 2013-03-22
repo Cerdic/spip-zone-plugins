@@ -68,19 +68,34 @@ function ticket_modifier($id_ticket, $set=null) {
 		),
 		$c))
 		return $err;
-
-	// Ajouter un document
-	if (isset($_FILES['ajouter_document'])
-	AND $_FILES['ajouter_document']['tmp_name']
-	AND defined('_DIR_PLUGIN_MEDIAS')) {
+	
+	/**
+	 * Ajout d'un document
+	 */
+	if (($files = ($_FILES ? $_FILES : $HTTP_POST_FILES))
+		&& isset($_FILES['ajouter_document'])
+		&& $_FILES['ajouter_document']['tmp_name']
+		&& defined('_DIR_PLUGIN_MEDIAS')) {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		$ajouter_documents('',
-			$_FILES, 'ticket', $id_ticket,
-			'document');
-		// supprimer le temporaire et ses meta donnees
-		spip_unlink($_FILES['ajouter_document']['tmp_name']);
-		spip_unlink(preg_replace(',\.bin$,',
-			'.txt', $_FILES['ajouter_document']['tmp_name']));
+		spip_log("$id_document,'ticket',$id_ticket,'document'",'tickets');
+		
+		/**
+		 * On enlève le titre du post du ticket pour éviter d'avoir des conflits d'édition
+		 * si une fonction de métadata essaie d'écrire le titre
+		 */
+		$titre_ticket = _request('titre');
+		$ctr_titre_ticket = _request('ctr_titre');
+		set_request('titre',false);
+		set_request('ctr_titre',false);
+		$id_document = $ajouter_documents($id_document,$files,'ticket',$id_ticket,'document');
+		if(intval(reset($id_document)))
+			$id_document = reset($id_document);
+		
+		/**
+		 * On remet le titre
+		 */
+		set_request('titre',$titre_ticket);
+		set_request('ctr_titre',$ctr_titre_ticket);
 	}
 	
 	// Invalider les caches

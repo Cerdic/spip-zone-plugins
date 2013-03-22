@@ -8,8 +8,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline affiche_aguche
- * @param object $flux
+ * Insertion dans le pipeline affiche_aguche (SPIP)
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
  * @return
  */
 function tickets_affiche_gauche ($flux) {
