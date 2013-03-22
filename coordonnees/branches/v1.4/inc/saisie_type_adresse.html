@@ -4,27 +4,26 @@ Adaptation pour fonctionner avec le plugin "coordonnees".
 Appel direct : [(#INCLURE{fond=inc/saisie_type_adresse})]
 
 Parametres :
-- class : classe(s) css ajoutes au select
 - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
 - cacher_option_intro : pas de premier option vide  (defaut:"")
 - type : valeur selectionnee (nom du champ qu'utilise le plugin "coordonnees")
-- readonly : indiquer champ a valeur non modifiable (mais transmis)
-- disable : indiquer champ inactif (non transmis)
 - explication_type : explication/aide de/a la saisie
+- defaut : la selection par defaut...
+- puis les attributs classiques pour un select (class, readonly, disabled, size, etc.)
 
-maj:2013-03-21 -->]
+maj:2013-03-22 -->]
 <li class="editer editer_type saisie_selection">
 	<label for="champ_type"><:coordonnees:label_type_adresse:></label>
 	[<span class="erreur">(#ENV**{erreurs}|table_valeur{type})</span>]
-	<select name="type" id="champ_type"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+	<select name="type" id="champ_type"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
 		[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-		<option value="work"[(#ENV{type}|=={work}|oui) selected="selected"]><:coordonnees:type_adr_work:></option>
-		<option value="home"[(#ENV{type}|=={home}|oui) selected="selected"]><:coordonnees:type_adr_home:></option>
-		<option value="pref"[(#ENV{type}|=={pref}|oui) selected="selected"]><:coordonnees:type_adr_pref:></option>
-		<option value="postal"[(#ENV{type}|=={postal}|oui) selected="selected"]><:coordonnees:type_adr_postal:></option>
-		<option value="dom"[(#ENV{type}|=={dom}|oui) selected="selected"]><:coordonnees:type_adr_dom:></option>
-		<option value="intl"[(#ENV{type}|=={intl}|oui) selected="selected"]><:coordonnees:type_adr_intl:></option>
-		<option value="parcel"[(#ENV{type}|=={parcel}|oui) selected="selected"]><:coordonnees:type_adr_parcel:></option>
+		<option value="work"[(#ENV{type,#ENV{defaut}}|=={work}|oui) selected="selected"]><:coordonnees:type_adr_work:></option>
+		<option value="home"[(#ENV{type,#ENV{defaut}}|=={home}|oui) selected="selected"]><:coordonnees:type_adr_home:></option>
+		<option value="pref"[(#ENV{type,#ENV{defaut}}|=={pref}|oui) selected="selected"]><:coordonnees:type_adr_pref:></option>
+		<option value="postal"[(#ENV{type,#ENV{defaut}}|=={postal}|oui) selected="selected"]><:coordonnees:type_adr_postal:></option>
+		<option value="dom"[(#ENV{type,#ENV{defaut}}|=={dom}|oui) selected="selected"]><:coordonnees:type_adr_dom:></option>
+		<option value="intl"[(#ENV{type,#ENV{defaut}}|=={intl}|oui) selected="selected"]><:coordonnees:type_adr_intl:></option>
+		<option value="parcel"[(#ENV{type,#ENV{defaut}}|=={parcel}|oui) selected="selected"]><:coordonnees:type_adr_parcel:></option>
 	</select>
 	[<em class="explication">(#ENV{explication_type})</em>]
 </li>

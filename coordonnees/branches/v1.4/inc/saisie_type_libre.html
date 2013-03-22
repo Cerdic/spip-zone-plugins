@@ -4,16 +4,16 @@ Appel direct : [(#INCLURE{fond=inc/saisie_type_libre})]
 
 Parametres :
 - label_type : le code de langue sans le prefixe "label_type_"
-- class : classe(s) css ajoutes a l'input
-- type : valeur selectionnee (nom du champ qu'utilise le plugin "coordonnees")
-- readonly : indiquer champ a valeur non modifiable (mais transmis)
-- disable : indiquer champ inactif (non transmis)
+- type : valeur saisie (nom en dur du champ utilise par le plugin "coordonnees")
 - explication_type : explication/aide a la saisie
+- defaut : la valeur par defaut...
+- plus les attributs classiques d'un INPUT (class, maxlength, size, readonly, disabled, readonly, placeholder, requiered, list, autocomplete, etc.)
 
-maj:2013-03-21 -->]
+maj:2013-03-22 -->]
 <li class="editer editer_type saisie_selection">
-	<label for="champ_type">(#VAL{coordonnees:label_type_#ENV{label_type}}|_T)]</label>
+	<label for="champ_type">[(#VAL{coordonnees:label_type_#ENV{label_type}}|_T)]</label>
 	[<span class="erreur">(#ENV**{erreurs}|table_valeur{type})</span>]
-	<input name="type" id="champ_type"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ value="(#ENV{type})"] />
+	<input type="text" name="type" id="champ_type" maxlength="#ENV{maxlength,25}"[ value="(#ENV{type,#ENV{defaut}})"][ class="(#ENV{class})"][ size="(#ENV{size})"][ disabled="(#ENV{disabled})"][ readonly="(#ENV{readonly})"][ required="(#ENV{required})"][ placeholder="(#ENV{placeholder})"][ autocomplete="(#ENV{autocomplete})"][ list="(#ENV{list})"][ (#ENV*{attributs})] />
 	[<em class="explication">(#ENV{explication_type})</em>]
 </li>
+
