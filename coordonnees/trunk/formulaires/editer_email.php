@@ -24,14 +24,10 @@ function formulaires_editer_email_saisies_dist(){
 			)
 		),
 		array (
-			'saisie' => 'selection',
+			'saisie' => 'type_mel',
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('email:label_type'),
-				'datas' => array (
-					'home' => _T('email:type_mel_home'),
-					'work' => _T('email:type_mel_work')
-				)
 			)
 		),
 		array (
@@ -91,7 +87,7 @@ function formulaires_editer_email_verifier_dist($id_email='new', $retour='', $as
  */
 function formulaires_editer_email_traiter_dist($id_email='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('email',$id_email,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_email = $res['id_email']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);

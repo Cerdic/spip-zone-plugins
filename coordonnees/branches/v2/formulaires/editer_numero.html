@@ -13,7 +13,7 @@
 			<ul>
 				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
 			[(#ENV{id_objet}|oui)
-				[(#SAISIE{selection, type, label=<:coordonnees:label_type_numero:>, defaut=#ENV{type}, datas=#ARRAY{voice,<:coordonnees:type_tel_voice:>, work,<:coordonnees:type_tel_work:>, home,<:coordonnees:type_tel_home:>, msg,<:coordonnees:type_tel_msg:>, pref,<:coordonnees:type_tel_pref:>, fax,<:coordonnees:type_tel_fax:>, cell,<:coordonnees:type_tel_cell:>, dsl,<:coordonnees:type_tel_dsl:>, video,<:coordonnees:type_tel_video:>, pager,<:coordonnees:type_tel_pager:>, bbs,<:coordonnees:type_tel_bbs:>, modem,<:coordonnees:type_tel_modem:>, car,<:coordonnees:type_tel_car:>, isdn,<:coordonnees:type_tel_isdn:>, pcs,<:coordonnees:type_tel_pcs:> } })]
+				[(#INCLURE{fond=inclure/saisie_type_numero})]
 			]
 				[(#SAISIE{input, numero, label=<:coordonnees:label_numero:>})]
 			</ul>

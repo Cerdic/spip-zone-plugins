@@ -24,27 +24,10 @@ function formulaires_editer_numero_saisies_dist(){
 			)
 		),
 		array (
-			'saisie' => 'selection',
+			'saisie' => 'type_tel',
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('numero:label_type'),
-				'datas' => array (
-					'home' => _T('numero:type_tel_home'),
-					'work' => _T('numero:type_tel_work'),
-					'cell' => _T('numero:type_tel_cell'),
-					'pref' => _T('numero:type_tel_pref'),
-					'voice' => _T('numero:type_tel_voice'),
-					'msg' => _T('numero:type_tel_msg'),
-					'fax' => _T('numero:type_tel_fax'),
-					'dsl' => _T('numero:type_tel_dsl'),
-					'video' => _T('numero:type_tel_video'),
-					'pager' => _T('numero:type_tel_pager'),
-					'bbs' => _T('numero:type_tel_bbs'),
-					'modem' => _T('numero:type_tel_modem'),
-					'car' => _T('numero:type_tel_car'),
-					'isdn' => _T('numero:type_tel_isdn'),
-					'pcs' => _T('numero:type_tel_pcs')
-				)
 			)
 		),
 		array (
@@ -56,7 +39,7 @@ function formulaires_editer_numero_saisies_dist(){
 			),
 			// decommenter ces lignes quand les numeros
 			// internationaux seront pris en compte par 'verifier'
-			/*'verifier' => array ( 
+			/*'verifier' => array (
 				'type' => 'telephone'
 			)*/
 		),
@@ -101,7 +84,7 @@ function formulaires_editer_numero_verifier_dist($id_numero='new', $retour='', $
  */
 function formulaires_editer_numero_traiter_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('numero',$id_numero,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_numero = $res['id_numero']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);

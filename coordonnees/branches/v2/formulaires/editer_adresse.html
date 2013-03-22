@@ -12,7 +12,7 @@
 			<ul>
 				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
 			[(#ENV{id_objet}|oui)
-				[(#SAISIE{selection, type, label=<:coordonnees:label_type_adresse:>, defaut=#ENV{type}, datas=#ARRAY{work,<:coordonnees:type_adr_work:>, home,<:coordonnees:type_adr_home:>, pref,<:coordonnees:type_adr_pref:>, postal,<:coordonnees:type_adr_postal:>, dom,<:coordonnees:type_adr_dom:>, intl,<:coordonnees:type_adr_intl:>, parcel,<:coordonnees:type_adr_parcel:> } })]
+				[(#INCLURE{fond=inclure/saisie_type_adresse})]
 			]
 				[(#SAISIE{input, voie, label=<:coordonnees:label_voie:>})]
 				[(#SAISIE{input, complement, label=<:coordonnees:label_complement:>})]

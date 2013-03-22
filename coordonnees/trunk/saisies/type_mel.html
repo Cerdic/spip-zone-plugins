@@ -1,0 +1,20 @@
+[(#REM)<!--
+Saisie de type d'adresse electronique de la RFC-vCard
+Adaptation pour fonctionner avec le plugin "coordonnees".
+Appel par plugin "saisies" : [(#SAISIE{type_mel, type, label=<:coordonnees:label_type_email:>})]
+/!\ boucle POUR (spip Bonux) et balise #LISTE (Iterateurs) inside
+
+Parametres :
+- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+- cacher_option_intro : pas de premier option vide  (defaut:"")
+- defaut : la selection par defaut...
+- puis les attributs classiques pour un SELECT (class, readonly, disabled, size, etc.)
+
+maj:2013-03-22 -->]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+#SET{datas, #LISTE{work,home}}
+<BOUCLE_selection(POUR){tableau #GET{datas}}>
+		<option value="#VALEUR"[(#ENV{valeur,#ENV{defaut}}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{email:type_mel_#VALEUR}|_T)]</option>
+</BOUCLE_selection>
+</select>

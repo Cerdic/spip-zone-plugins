@@ -1,0 +1,30 @@
+[(#REM)<!--
+Saisie de type de numero telephonique de la RFC-vCard
+Adaptation pour fonctionner avec le plugin "coordonnees".
+Appel par plugin "saisies" : [(#SAISIE{type_tel, type, label=<:coordonnees:label_type_numero:>})]
+
+Parametres :
+- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+- cacher_option_intro : pas de premier option vide  (defaut:"")
+- defaut : la selection par defaut...
+- puis les attributs classiques pour un SELECT (class, readonly, disabled, size, etc.)
+
+maj:2013-03-21 -->]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+	<option value="voice"[(#ENV{valeur,#ENV{defaut}}|=={voice}|oui) selected="selected"]><:coordonnees:type_tel_voice:></option>
+	<option value="work"[(#ENV{valeur,#ENV{defaut}}|=={work}|oui) selected="selected"]><:coordonnees:type_tel_work:></option>
+	<option value="home"[(#ENV{valeur,#ENV{defaut}}|=={home}|oui) selected="selected"]><:coordonnees:type_tel_home:></option>
+	<option value="msg"[(#ENV{valeur,#ENV{defaut}}|=={msg}|oui) selected="selected"]><:coordonnees:type_tel_msg:></option>
+	<option value="pref"[(#ENV{valeur,#ENV{defaut}}|=={pref}|oui) selected="selected"]><:coordonnees:type_tel_pref:></option>
+	<option value="fax"[(#ENV{valeur,#ENV{defaut}}|=={fax}|oui) selected="selected"]><:coordonnees:type_tel_fax:></option>
+	<option value="cell"[(#ENV{valeur,#ENV{defaut}}|=={cell}|oui) selected="selected"]><:coordonnees:type_tel_cell:></option>
+	<option value="dsl"[(#ENV{valeur,#ENV{defaut}}|=={dsl}|oui) selected="selected"]><:coordonnees:type_tel_dsl:></option>
+	<option value="video"[(#ENV{valeur,#ENV{defaut}}|=={video}|oui) selected="selected"]><:coordonnees:type_tel_video:></option>
+	<option value="pager"[(#ENV{valeur,#ENV{defaut}}|=={pager}|oui) selected="selected"]><:coordonnees:type_tel_pager:></option>
+	<option value="bbs"[(#ENV{valeur,#ENV{defaut}}|=={bbs}|oui) selected="selected"]><:coordonnees:type_tel_bbs:></option>
+	<option value="modem"[(#ENV{valeur,#ENV{defaut}}|=={modem}|oui) selected="selected"]><:coordonnees:type_tel_modem:></option>
+	<option value="car"[(#ENV{valeur,#ENV{defaut}}|=={car}|oui) selected="selected"]><:coordonnees:type_tel_car:></option>
+	<option value="isdn"[(#ENV{valeur,#ENV{defaut}}|=={isdn}|oui) selected="selected"]><:coordonnees:type_tel_isdn:></option>
+	<option value="pcs"[(#ENV{valeur,#ENV{defaut}}|=={pcs}|oui) selected="selected"]><:coordonnees:type_tel_pcs:></option>
+</select>

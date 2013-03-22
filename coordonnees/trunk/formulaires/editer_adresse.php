@@ -23,19 +23,10 @@ function formulaires_editer_adresse_saisies_dist(){
 			)
 		),
 		array (
-			'saisie' => 'selection',
+			'saisie' => 'type_adr',
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('adresse:label_type'),
-				'datas' => array (
-					'home' => _T('adresse:type_adr_home'),
-					'work' => _T('adresse:type_adr_work'),
-					'dom'=> _T('adresse:type_adr_dom'),
-					'pref' => _T('adresse:type_adr_pref'),
-					'postal' => _T('adresse:type_adr_postal'),
-					'intl' => _T('adresse:type_adr_intl'),
-					'parcel' => _T('adresse:type_adr_parcel')
-				)
 			)
 		),
 		array (
@@ -68,7 +59,7 @@ function formulaires_editer_adresse_saisies_dist(){
 			),
 			// decommenter ces lignes quand les codes postaux
 			// internationaux seront pris en compte par 'verifier'
-			/*'verifier' => array ( 
+			/*'verifier' => array (
 				'type' => 'code_postal'
 			)*/
 		),
@@ -138,7 +129,7 @@ function formulaires_editer_adresse_verifier_dist($id_adresse='new', $retour='',
  */
 function formulaires_editer_adresse_traiter_dist($id_adresse='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('adresse',$id_adresse,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_adresse = $res['id_adresse']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
