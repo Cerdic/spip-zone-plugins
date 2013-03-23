@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
 
 	// B
-	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
+	'bouton_changer_pass' => 'Change my password',
 	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
 	'breve_propose_detail' => 'The news item "@titre@" is proposed for publication since',
 	'breve_propose_sujet' => '[@nom_site_spip@] Proposed: @titre@',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'You are not allowed to moderate this message',
 	'info_moderation_lien_titre' => 'Moderate this message from the private area',
 	'info_moderation_url_perimee' => 'This moderation link is not valid anymore.',
-	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
+	'info_nouveau_commentaire' => 'New comment',
 	'inscription' => 'Editors registration',
 	'inscription_admins' => 'Administrators',
 	'inscription_explication' => 'Which authors receive notifications when registering new editors?',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message to confirm:',
-	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
+	'message_spam_a_confirmer' => 'SPAM to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
 	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
