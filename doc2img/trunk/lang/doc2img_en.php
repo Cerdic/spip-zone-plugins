@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_convertir_serie' => 'Convertir en une série d\'images', # NEW
-	'bouton_convertir_vignette' => 'Convertir la première page en vignette', # NEW
+	'bouton_convertir_vignette' => 'Convert the first page as thumbnail',
 
 	// C
 	'cfg_explication_compression' => 'Set the compression quality of the final output files (in percentage)',
@@ -40,12 +40,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_doc2img' => 'This plugin allows you to convert certain types of documents in a single or a serie of images to view them.',
 
 	// I
-	'info_alt_image' => '@titre@, page @page@', # NEW
+	'info_alt_image' => '@titre@, page @page@',
 	'info_desc_page' => 'This document is composed by one sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 	'info_nb_pages' => 'Number of pages:',
 	'info_nb_pages_converties' => '@nb@ pages converties liées', # NEW
-	'info_une_page_convertie' => 'Une page convertie liée' # NEW
+	'info_une_page_convertie' => 'One linke converted page'
 );
 
 ?>
