@@ -49,7 +49,14 @@ function HideSpipUI(editor_id){
 			.css('background-color','white');
 		item=$(crayon+' div.edition');
 	} else {
-		item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+		var editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
+		if (editor_id_light) {
+			editor_id_light = editor_id_light[1] ;
+		} else {
+			editor_id_light = editor_id ;
+		}
+
+		item=$(editor_id).parents().find('div.edition:has('+editor_id_light+')');
 	}
 	item.each(function() {
 		if ($(this).find(editor_id_light).length == 1) {
@@ -120,7 +127,6 @@ function SpipEditor2CKEditor(editor_id){
 	$(editor_id).attr('disabled',true);
 	var EdConfig={};$.extend(EdConfig,CKEDITOR.ckConfig) ;
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
-	HideSpipUI(editor_id);
 	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
 		if (stack[editor_id].editor) {
 			var instance = CKEDITOR.instances[stack[editor_id].editor] ;
@@ -134,6 +140,7 @@ function SpipEditor2CKEditor(editor_id){
 	}
 	try { 
 	$(editor_id).ckeditor(function(){
+		HideSpipUI(editor_id);
 		stack[editor_id].n='#'+this.container.getId();
 		stack[editor_id].editor=this.name ;
 

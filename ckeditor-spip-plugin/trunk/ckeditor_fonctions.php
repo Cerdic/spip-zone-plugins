@@ -623,6 +623,14 @@ function loadCKEditor() {
 			ajaxload[i][0]='#'+prefix_id+' '+ajaxload[i][0];
 		});
 	}
+	$.each(ajaxload, function(i){
+		$(ajaxload[i][0]).each(function(i){
+			var temp_id = this.id;
+			var hEd = CKEDITOR.instances[temp_id];
+			if (hEd)
+				hEd.destroy();
+		});
+	});        
 	fullInitCKEDITOR(ajaxload) ;
 }
 $(window).load(function(){
