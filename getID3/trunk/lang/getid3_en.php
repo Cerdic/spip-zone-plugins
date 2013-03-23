@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible:',
 	'erreur_logiciels_indisponibles' => 'You won\'t be able to write tags on all possible formats. On or more software is not usable.',
 	'erreur_necessite' => 'needs @soft@',
-	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.', # MODIF
+	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is activated, the id3 artwork tags will also be updated.',
 
 	// F
 	'formulaire_modifier_id3' => 'Edit metadatas of:',
