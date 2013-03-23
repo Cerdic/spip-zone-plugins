@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display them in your public pages.<br />If the compass already exists, this form allows to update it while keeping the same display configuration.',
 	'info_boite_boussoles_gerer' => '<strong>This page can be accessed by webmasters only.</strong><p>There, you can add, update and delate compasses. You can also go to the configuration page of each compass display.</p>',
-	'info_configurer_boussole' => 'This form allow you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.', # MODIF
+	'info_configurer_boussole' => 'This form allows you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
 	'info_fichier_boussole' => 'Enter the url of your compass description file.',
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
 	'info_site_boussole' => 'This website belongs to the compass :',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
-	'message_nok_boussole_inconnue' => 'No compass correspond to the alias « @alias@ »', # MODIF
+	'message_nok_boussole_inconnue' => 'No compass correspond to the alias "@alias@"',
 	'message_nok_champ_obligatoire' => 'Mandatory field',
 	'message_nok_ecriture_bdd' => 'Database writing error (table @table@)',
 	'message_nok_xml_introuvable' => 'The file « @fichier@ » cannot be found',
