@@ -11,74 +11,58 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function formulaires_imprimer_etiquettes_charger_dist() {
-	include_spip('base/abstract_sql');
-	include_spip('association_options');
-	$valeurs = array(
-		'statut_interne'=>association_passeparam_statut('interne'),
-		'filtre_email'=>TRUE,
+function action_pdf_etiquettes() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	// initialisation des parametres de mise en page
+	$tab_meta_eti = array(
+		'etiquette_espace_etiquettesl' => 5,
+		'etiquette_nb_colonne' => 3,
+		'etiquette_nb_ligne' => 7,
+		'etiquette_largeur_page' => 210,
+		'etiquette_hauteur_page' => 297,
+		'etiquette_marge_haut_etiquette' => 10,
+		'etiquette_marge_gauche_etiquette' => 3,
+		'etiquette_marge_droite_etiquette' => 10,
+		'etiquette_marge_haut_page' => 10,
+		'etiquette_marge_bas_page' => 10,
+		'etiquette_marge_gauche_page' => 10,
+		'etiquette_marge_droite_page' => 10,
+		'etiquette_espace_etiquettesh' => 0,
 	);
-
-	// on peut faire beaucoup mieux mais comment ?
-	if(!$GLOBALS['association_metas']['etiquette_nb_colonne'])
-		$tab_meta_eti['etiquette_nb_colonne'] = 3;
-	if(!$GLOBALS['association_metas']['etiquette_nb_ligne'])
-		$tab_meta_eti['etiquette_nb_ligne'] = 7;
-	if(!$GLOBALS['association_metas']['etiquette_largeur_page'])
-		$tab_meta_eti['etiquette_largeur_page'] = 210;
-	if(!$GLOBALS['association_metas']['etiquette_hauteur_page'])
-		$tab_meta_eti['etiquette_hauteur_page'] = 297;
-	if(!$GLOBALS['association_metas']['etiquette_marge_haut_etiquette'])
-		$tab_meta_eti['etiquette_marge_haut_etiquette'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_marge_gauche_etiquette'])
-		$tab_meta_eti['etiquette_marge_gauche_etiquette'] = 3;
-	if(!$GLOBALS['association_metas']['etiquette_marge_droite_etiquette'])
-		$tab_meta_eti['etiquette_marge_droite_etiquette'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_marge_haut_page'])
-		$tab_meta_eti['etiquette_marge_haut_page'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_marge_bas_page'])
-		$tab_meta_eti['etiquette_marge_bas_page'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_marge_gauche_page'])
-		$tab_meta_eti['etiquette_marge_gauche_page'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_marge_droite_page'])
-		$tab_meta_eti['etiquette_marge_droite_page'] = 10;
-	if(!$GLOBALS['association_metas']['etiquette_espace_etiquettesh'])
-		$tab_meta_eti['etiquette_espace_etiquettesh'] = 0;
-	if(!$GLOBALS['association_metas']['etiquette_espace_etiquettesl'])
-		$tab_meta_eti['etiquette_espace_etiquettesl'] = 5;
 	foreach($tab_meta_eti as $key=>$value) {
-		ecrire_meta($key, $value, NULL, 'association_metas');
+		if(!$GLOBALS['association_metas'][$key])
+			ecrire_meta($key, $value, NULL, 'association_metas');
 	}
-
-	return $valeurs;
-}
-
-function formulaires_imprimer_etiquettes_verifier_dist() {
-	$erreurs = array();
-
-	// Verifier si il a au moins une selection
-	if(_request('statut_interne')=='') {
-		$erreurs['etiquette'] = _T('asso:etiquette_aucun_choix');
-		$erreurs['message_erreur'] = _T('asso:erreur_titre');
-    }
-
-    return $erreurs;
-}
-
-function formulaires_imprimer_etiquettes_traiter_dist() {
-	include_spip('base/abstract_sql');
-	include_spip('inc/acces');
-	include_spip('pdf/extends');
-	include_spip('association_options');
+	// initialisation de la mise en page
 	$pas_horizontal = (($GLOBALS['association_metas']['etiquette_largeur_page']-$GLOBALS['association_metas']['etiquette_marge_gauche_page']-$GLOBALS['association_metas']['etiquette_marge_droite_page']-($GLOBALS['association_metas']['etiquette_nb_colonne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesl'])/$GLOBALS['association_metas']['etiquette_nb_colonne'])+$GLOBALS['association_metas']['etiquette_espace_etiquettesl'];
 	$pas_vertical = ($GLOBALS['association_metas']['etiquette_hauteur_page']-$GLOBALS['association_metas']['etiquette_marge_haut_page']-$GLOBALS['association_metas']['etiquette_marge_bas_page']-($GLOBALS['association_metas']['etiquette_nb_ligne']-1)*$GLOBALS['association_metas']['etiquette_espace_etiquettesh'])/$GLOBALS['association_metas']['etiquette_nb_ligne']+$GLOBALS['association_metas']['etiquette_espace_etiquettesh'];
+	// initialisation des compteurs
 	$tab_etiquette = array();
 	$indice_colonne = 0;
 	$indice_ligne = 0;
 	$num_page = 1;
+	// on recupere les criteres des id_auteur
+	$where = htmlspecialchars_decode(_request('where_adherents'));
+	$jointure = _request('jointure_adherents');
+	$filtre_email = _request('filtre_email');
+	if($filtre_email) { // restreindre aux auteurs sans email principal
+		$where .= " AND a.email='' ";
+		$jointure .= " LEFT JOIN spip_auteurs a ON m.id_auteur=a.id_auteur ";
+	}
+	// on genere la requete des id_auteur
+	$query = sql_select('m.id_auteur AS id_auteur', "spip_asso_membres m $jointure", $where, '', 'm.nom_famille,m.prenom');
+	// on construit le tableau des id_auteur
+	$liste_id_auteurs = array();
+	while ($data = sql_fetch($query)) {
+		$liste_id_auteurs[] = $data['id_auteur'];
+	}
 
+	include_spip('pdf/extends');
 	$pdf = new PDF(FALSE, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
-	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
+	$statut = _request('statut_interne');
+	$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
 	$pdf->Open();
 	$pdf->AddPage();
 	$pdf->SetAutoPageBreak(0 ,0);
@@ -87,21 +71,8 @@ function formulaires_imprimer_etiquettes_traiter_dist() {
 
 	$affiche_civilite = $GLOBALS['association_metas']['etiquette_avec_civilite'];
 
-	$table = array('m'=>'spip_asso_membres', 'al'=>'spip_adresses_liens','a'=>'spip_adresses');
-	$where = "al.objet='auteur' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') )";
-
-	list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
-	if ($critere) $where .= ' AND ' . $critere;
-	$filtre_categorie = intval(_request('categorie'));
-	if ($filtre_categorie) {
-		$where .= ' AND id_categorie= '.sql_quote($filtre_categorie);
-	}
-	$filtre_email = _request('filtre_email');
-	if($filtre_email) {
-		$table['auteur'] = 'spip_auteurs';
-		$where .= " AND m.id_auteur=auteur.id_auteur AND auteur.email=''";
-	}
-	$res = sql_select('*',$table, $where,'','nom_famille,prenom');
+	$where = "l.objet='auteur' AND ( (code_postal<>'' AND ville<>'') OR (boite_postale<>'') ) AND ". sql_in('l.id_objet', $liste_id_auteurs);
+	$res = sql_select('*','spip_asso_adresses_liens l INNER JOIN spip_adresses a ON l.id_adresse=a.id_adresse', $where,'','nom_famille,prenom');
 	$indice = 0;
 	include_spip('filtres','inc'); // http://doc.spip.org/@extraire_multi
 	while($val = sql_fetch($res)) {
@@ -156,7 +127,7 @@ function formulaires_imprimer_etiquettes_traiter_dist() {
 	if ($indice==0) {
 		$message .= _T('asso:etiquette_aucune_impression');
 	} else {
-		$nom_fic = 'etiquettes_'.$statut_interne.'_'. $filtre_categorie .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
+		$nom_fic = 'etiquettes_'. _request('suffixe') .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 	}

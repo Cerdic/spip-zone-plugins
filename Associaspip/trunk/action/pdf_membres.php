@@ -12,27 +12,24 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function action_pdf_membres() {
-	        $securiser_action = charger_fonction('securiser_action', 'inc');
+		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-		include_spip('pdf/extends');
+
 		// on recupere ce qu'il faut pour faire la requete SQL pour generer la liste d'id_auteurs dont on a besoin pour recuperer les adresses et telephones
 		$where = htmlspecialchars_decode(_request('where_adherents'));
 		$jointure = _request('jointure_adherents');
-		$statut = _request('statut_interne');
 		// la requete de base
-		$query = sql_select('a.id_auteur AS id_auteur','spip_asso_membres' .  " a $jointure", $where, '', 'nom_famille ');
+		$query = sql_select('m.id_auteur AS id_auteur',"spip_asso_membres m $jointure", $where, '', 'm.nom_famille,m.prenom ');
 		// tableau des resultats
 		$liste_id_auteurs = array();
 		while ($data = sql_fetch($query)) {
 			$liste_id_auteurs[] = $data['id_auteur'];
 		}
 
+		include_spip('pdf/extends');
 		$pdf = new PDF();
-		if ($statut) {
-			$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
-		} else {
-			$pdf->titre = _T('asso:adherent_titre_liste_actifs');
-		}
+		$statut = _request('statut_interne');
+		$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
 		$pdf->Open();
 		$pdf->AddPage();
 
@@ -69,7 +66,9 @@ function action_pdf_membres() {
 			$telephones = association_formater_telephones($liste_id_auteurs, 'auteur', '', '', '', "\n");
 		}
 		$order = 'id_auteur';
-		if ($sent['nom_famille']=='on')
+		if ($sent['prenom'])
+			$order = 'prenom' . ",$order";
+		if ($sent['nom_famille'])
 			$order = 'nom_famille' . ",$order";
 		$adresses_tels = array();
 		foreach($liste_id_auteurs as $id_auteur) {
@@ -84,7 +83,8 @@ function action_pdf_membres() {
 		}
 
 		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.id_categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $adresses_tels, 'id_auteur');
-		$pdf->Output();
+		$nom_fic = 'membres_'. _request('suffixe') .'.pdf';
+		$pdf->Output($nom_fic, 'D');
 }
 
 ?>

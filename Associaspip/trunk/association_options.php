@@ -1444,18 +1444,11 @@ function association_selectionner_statut($sel='', $exec='', $plus='') {
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>') : $res;
 }
 
-/* Meme fonction que la precedente, mais en donnat l'ID */
-
-function association_selectionner_statut_id($sel, $id) {
-	$res = association_selectionner_statut($sel);
-	return str_replace("id='statut_interne'", "id='$id'", $res);
-}
-
 /**
  * Zone de saisie de numero de membre
  */
 function association_selectionner_id($sel='', $exec='', $plus='') {
-    $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'. ($sel?$sel:_T('asso:entete_id')) .'" />'.$plus;
+	    $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'.$sel.'" title="'. _T('asso:entete_id') .'" placeholder="'. _T('asso:entete_id') .'" />'.$plus;
     return $exec ? generer_form_ecrire($exec, $res.'<noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>') : $res;
 }
 
@@ -2031,7 +2024,8 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
  *   correspondant a une table avec le nom de l'objet suffixe de "s" et prefixe
  *   de "spip_asso" (cela exclu quand meme les tables du plugin qui n'ont pas de
  *   "s" final !)
- * @param string $params
+ * @param array $params
+ *   Tableau de cle=>valeur supplementaires transmis par le formulaire (champs caches).
  * @param string $prefixeLibelle
  *   Prefixe rajoute au nom du champ pour former la chaine de langue (dont le
  *   nommage est systematise dans "Associaspip")
@@ -2043,22 +2037,27 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
  * @param bool $coords
  *   Indique s'il faut (vrai) prendre en compte ou pas (faux) le plugin "Coordonnees"
  * @return string $res
- *   Form HTML complet dans un cadre. Ce formulaire sera traite par l'exec de
+ *   Form HTML complet dans un cadre. Ce formulaire sera traite par l'action de
  *   l'objet prefixe de "pdf_"
  */
 function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true) {
+	$frm = '<div>'; //l2.1
+	foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
+		$frm .= '<input type="hidden" name="'.$k.'" value="'. htmlspecialchars($v, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />'; // http://stackoverflow.com/questions/46483/htmlentities-vs-htmlspecialchars
+	}
+	$frm .= '</div>'; //l2.1
 	$champsExtras = association_trouver_iextras("asso_$objet");
 	$desc_table = charger_fonction('trouver_table', 'base'); // http://doc.spip.org/@description_table deprecier donc preferer http://programmer.spip.net/trouver_table,620
 	$champsPresents = $desc_table("spip_asso_${objet}s");
-	$frm = '<ul><li class="edit_champs">';
+	$frm .= '<ul><li class="edit_champs">'; //l2.2
 	foreach ($champsPresents['field'] as $k => $v) { // donner le menu des choix
 		if ( !in_array($k, $champsExclus) ) { // affichable/selectionnable (champ ayant un libelle declare et connu)
 				$lang_clef = $prefixeLibelle.$k;
 				$lang_texte = association_langue($lang_clef);
 				if ( $lang_clef!=str_replace(' ', '_', $lang_texte) ) { // champ natif du plugin
-					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$lang_texte</label></div>";
+					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$lang_texte</label></div>"; //l3.x
 				} elseif( array_key_exists($k,$champsExtras) ) { // champs rajoute via cextra
-					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$champsExtras[$k]</label></div>";
+					$frm .= "<div class='choix'><input type='checkbox' name='champs[$k]' id='liste_${objet}s_$k' /><label for='liste_${objet}s_$k'>$champsExtras[$k]</label></div>"; //l3.x
 				}
 			}
 	}
@@ -2069,13 +2068,14 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 				$frm .= '<div class="choix"><input type="checkbox" name="champs[telephone]" id="liste_'.$objet.'_s_telephone" /><label for="liste_'.$objet.'_s_telephone">'. _T('coordonnees:numeros') .'</label></div>'; // on ajoute aussi le numero de telephone (table spip_numeros)
 			}
 	}
-	foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
-		$frm .= '<input type="hidden" name="'.$k.'" value="'. htmlspecialchars($v, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />'; // http://stackoverflow.com/questions/46483/htmlentities-vs-htmlspecialchars
-	}
-	$frm .= '</li></ul>';
-	$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>';
+	$frm .= '</li></ul>'; //l2.2
+	$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>'; //l2.3
 
-	return $frm;
+	$res = '<h3>'. _T('plugins_vue_liste') .'</h3>'; //l1.1
+	$res .= '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">'; //l1.2
+	$res .= generer_action_auteur('pdf_'.$objet.'s', 0, '', $frm, '', '');
+	$res .= '</div>'; //l1.2
+	return $res;
 }
 
 /**
