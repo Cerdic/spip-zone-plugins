@@ -131,7 +131,7 @@ Followed by the name of the banner you want to display. The tag is replaced by a
 	'erreur_url_no_response' => 'The address entered does not respond ... Are you sure that it is valid ?',
 	'erreur_url_not_url' => 'The address entered does not seem to be a web address ...',
 	'error_dimensions_missing_empl' => 'You must specify the dimensions for your banner',
-	'error_dimensions_numeric_empl' => 'Il semble qu\'il y ait eu une erreur de dimensions', # NEW
+	'error_dimensions_numeric_empl' => 'It seems there was an error in dimensions',
 	'error_global' => 'An error seems to have occurred...',
 	'error_refresh_numeric_empl' => 'It seems that there has been an value error, you must specify a number of seconds',
 	'error_titre_empl' => 'You must specify a title for your banner',
