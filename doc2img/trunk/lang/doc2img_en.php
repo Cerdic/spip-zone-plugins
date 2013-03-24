@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_convertir_serie' => 'Convertir en une série d\'images', # NEW
+	'bouton_convertir_serie' => 'Convert as a serie of images',
 	'bouton_convertir_vignette' => 'Convert the first page as thumbnail',
 
 	// C
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_reconvertir_doc' => '(Re)convert this document to a serie of images',
 
 	// E
-	'erreur_class_imagick' => 'Vous ne disposez pas de la class PHP Imagick. Vous ne pouvez donc pas utiliser ce plugin.', # NEW
+	'erreur_class_imagick' => 'You do not have the PHP Imagick class. You can not use this plugin.',
 	'erreur_format_document' => 'A document format can not be used: @type@',
 	'erreur_formats_documents' => 'Several document formats can not be used: @types@',
 	'explication_doc2img' => 'This plugin allows you to convert certain types of documents in a single or a serie of images to view them.',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_desc_page' => 'This document is composed by one sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 	'info_nb_pages' => 'Number of pages:',
-	'info_nb_pages_converties' => '@nb@ pages converties liées', # NEW
+	'info_nb_pages_converties' => '@nb@ of converted pages related',
 	'info_une_page_convertie' => 'One linke converted page'
 );
 
