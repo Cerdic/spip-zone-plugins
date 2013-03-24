@@ -1,7 +1,7 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="0.16.7"
+	version="0.16.8"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/ckspip-logo.png"
@@ -17,7 +17,7 @@
 	<credit>Les icones des onglets de configuration sont créées par Patricia Clausnitzer (http://pc.de/icons/pc.de-berlin-icon-pack.zip)</credit>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GNU/GPL v2</licence>
-	<copyright>2009-2012</copyright>
+	<copyright>2009-2013</copyright>
 
 	<menu nom="configurer_ckeditor" titre="ckeditor:ckeditor_titre" parent="menu_configuration"  icone="images/ckspip-logo-16.png" />
 
