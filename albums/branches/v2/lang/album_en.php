@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_associer' => 'Bind', # ou alors : link associate ?
 	'bouton_dissocier' => 'Unbind',
-	'bouton_valider_deplacer_documents' => 'Enregistrer les changements', # NEW
+	'bouton_valider_deplacer_documents' => 'Save changes',
 
 	// C
 	'c_albums_info' => 'Album library', # ou alors : Albums management ?
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_albums' => 'Albums',
 
 	// E
-	'erreur_deplacement' => 'Le traitement n\'a pas pu être effectué', # NEW
+	'erreur_deplacement' => 'Treatment could not be performed',
 
 	// F
 	'filtre_avec_contenu' => 'filled',
@@ -92,12 +92,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_titre' => 'Custom title',
 	'label_modele_variante' => 'Variant',
 	'label_modele_variante_defaut' => 'Thumbnails (default)',
-	'label_modifier_balise' => 'Modifier la balise', # NEW
+	'label_modifier_balise' => 'Edit Tag',
 	'label_titre' => 'Title',
 	'label_utiliser_titre_defaut' => 'Title of a new album',
 
 	// M
-	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte', # NEW
+	'message_balise_inseree_succes' => 'The tag was inserted in the text',
 
 	// O
 	'onglet_associer_album' => 'Bind',
