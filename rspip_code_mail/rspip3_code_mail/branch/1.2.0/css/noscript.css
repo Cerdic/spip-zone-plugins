@@ -1,0 +1,19 @@
+
+DIV.rspipcm_noscript {
+   border: 1px dotted black;
+   margin: 3px;
+   padding: 5px;
+   }
+   
+DIV.rspipcm_avert_mails_en_clair {
+	border: 2px dotted black;
+	background-color: yellow;
+	padding: 1%;
+	width: 97%;
+	margin: auto;
+}
+
+DIV.rspipcm_avert_mails_en_clair H1 {
+	font-weight: bold;
+	margin-bottom: 0px;
+}
