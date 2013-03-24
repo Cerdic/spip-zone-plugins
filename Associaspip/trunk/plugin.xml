@@ -13,7 +13,7 @@
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
 	<lien>http://contrib.spip.net/Associaspip</lien>
-	<icon>img_pack/annonce.gif</icon>
+	<icon>img_pack/asso-96.png</icon>
 
 	<options>association_options.php</options>
 
@@ -58,13 +58,13 @@
 	</pipeline>
 
 	<bouton id="association_bando" parent="bando_reactions">
-		<icone>img_pack/annonce.gif</icone>
+		<icone>img_pack/asso-24.png</icone>
 		<titre>Associaspip</titre>
 		<url>association</url>
 	</bouton>
 
 	<bouton id="association" parent="naviguer">
-		<icone>img_pack/annonce.gif</icone>
+		<icone>img_pack/asso-24.png</icone>
 		<titre>Associaspip</titre>
 	</bouton>
 
