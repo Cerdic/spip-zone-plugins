@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									<p><b>NON RESPECT OF THOSE RULES WILL RESULT IN THE PLUGIN DYSFUNCTION</b></p>',
 	'aucun_panier_pour_nom' => 'There is no basket for @nom@.',
 	'aucun_panier_produit_par_nom' => 'There is no basket made by @nom@.',
-	'autorise_envoie_email_explication' => 'Sending e-mails is used for availability and recovering baskets. "No" is adviced for huge CSA, instead you can use the management interface.', # MODIF
+	'autorise_envoie_email_explication' => 'Sending e-mails is used for availability and recovering baskets. "No" is adviced for huge CSA, instead you can use the management interface.',
 	'autorise_envoie_email_label' => 'Do you want to send mails ?',
 	'avant_le' => 'before',
 
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_distribution' => 'Giving date',
 	'date_livraison' => 'Delivery date',
 	'depuis_le' => 'since',
-	'disponible' => 'Disponible', # NEW
+	'disponible' => 'Available',
 	'distribution_paniers' => 'Basket delivery of @nb@',
 	'distribution_paniers_mois' => 'Distribution of the baskets from @date_debut@ to @date_fin@',
 
@@ -67,28 +67,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_explication' => 'Only the dates with at least 1 basket are clickable and open a new window.',
 	'impression_paniers_fonction_date' => 'Printing baskets per date :',
 	'impression_paniers_fonction_mois' => 'Printing baskets per month :',
-	'impression_responsables_fonction_mois' => 'Impression des responsables en fonction d\'un mois :', # NEW
+	'impression_responsables_fonction_mois' => 'Printing responsible people according to a month:',
 	'information_amap' => 'CSA information',
 
 	// L
-	'la_responsabilite' => 'La responsabilité de', # NEW
-	'le_panier' => 'Le panier de', # NEW
-	'le_panier_vendu' => 'Le panier vendu par', # NEW
+	'la_responsabilite' => 'The responsability of',
+	'le_panier' => 'The basket of',
+	'le_panier_vendu' => 'The basket sold by',
 	'les_livraisons' => 'Deliveries',
 	'les_livraisons_effectuees' => 'Past deliveries',
-	'les_paniers' => 'The basket of @nom@', # MODIF
+	'les_paniers' => 'The @nb@ baskets of',
 	'les_paniers_dispo' => 'Available baskets of @nom@',
-	'les_paniers_vendu' => 'Les @nb@ paniers vendu par', # NEW
-	'les_responsabilites' => 'Responsibilities of @nom@', # MODIF
+	'les_paniers_vendu' => 'The @nb@ baskets sold by',
+	'les_responsabilites' => 'The @nb@ responsibilities of',
 	'liste_amapiens' => 'CSA members list',
 	'liste_amapiens_enregistres' => 'registered CSA members list',
 	'liste_livraisons' => 'Deliveries list',
 	'liste_paniers' => 'Baskets list',
 	'liste_paniers_distribuer_le' => 'Basket list to deliver on',
-	'liste_paniers_vendu' => 'Liste des paniers vendu', # NEW
+	'liste_paniers_vendu' => 'List of the baskets sold',
 	'liste_responsables' => 'People in charge list',
 	'livraison' => 'Delivery',
-	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribuer des paniers pour pouvoir enregistré via ce formulaire des contenus de livraison.', # NEW
+	'livraison_enregistre_explication' => 'You must have already distribute baskets to register via this content delivery form.',
 	'livraison_explication' => 'On this page you will find the list of the delivery which you already have to make. This table is affichable on the site via an article by putting the code &lt;liste|livraison&gt;.',
 
 	// M
@@ -101,10 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'NAME',
-	'non' => 'Non', # NEW
+	'non' => 'No',
 
 	// O
-	'oui' => 'Oui', # NEW
+	'oui' => 'Yes',
 
 	// P
 	'panier' => 'Basket',
@@ -117,13 +117,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 The basket of @date_distribution@ is at disposal, please follow this link @lien@ to get it
 @panier_dispo_plus@
 @nom_adherent@',
-	'panier_dispo_interface' => 'Panier disponible', # NEW
+	'panier_dispo_interface' => 'Available basket',
 	'panier_dispo_plus' => 'Extra infos to give (It will be added in the mail sent before your name)',
-	'panier_disposition' => 'You have 1 available basket', # MODIF
+	'panier_disposition' => 'There is 1 available basket',
 	'panier_distribuer' => 'basket to deliver',
-	'panier_explication' => 'On this page, you will find the list of the baskets that you have to deliver, You can modify or delete them. Every modification send a mail to all the subscribers and producers.', # MODIF
-	'panier_explication_email' => 'Toutes modifications entraîne un envoie de mail en masse à tous les adhérents et les producteurs de l\'association.', # NEW
-	'panier_explication_interface' => 'Aucun mail n\'est envoyé, il est rajouté sur l\'interface de disponibilité.', # NEW
+	'panier_explication' => 'On this page, you will find the list of the baskets that you have to deliver, You can modify or delete them. Once the date will be passed, you will automatically not see them anymore.',
+	'panier_explication_email' => 'Any change results in sending mass mail to all members and producers of the association.',
+	'panier_explication_interface' => 'No email is sent, it is added to the availability interface.',
 	'panier_liste' => 'Baskets list',
 	'panier_livraison' => 'Basket content',
 	'panier_recupere' => 'Transaction of the @date_distribution@ basket done',
@@ -131,15 +131,15 @@ The basket of @date_distribution@ is at disposal, please follow this link @lien@
 	'panier_recupere_auteur_mail' => 'Hello,
 I will get the basket of the @date_distribution@ produced by @nom_producteur@
 @nom_adherent@',
-	'panier_vous_bien_attribuer' => 'Le panier vous a bien été attribuer', # NEW
+	'panier_vous_bien_attribuer' => 'The basket has been assigned to you',
 	'paniers_deja_vendu' => 'You have sold @nb@ basket(s)',
 	'paniers_disponibles' => 'Available baskets',
-	'paniers_disposition' => 'You made @nb@ baskets available', # MODIF
+	'paniers_disposition' => 'There are @nb@ baskets available',
 	'paniers_distribuer' => 'baskets to deliver',
 	'pas_connecte_ou_reconnu' => 'You are not logged in or not identified.',
 	'pas_date_distributions' => 'No distribution date are filled in.',
 	'pas_paniers' => 'You do not have any basket for this season, no contract has been done concerning you',
-	'pas_paniers_disponible' => 'Nous avons pas de panier disponible à vous proposer actuellement.', # NEW
+	'pas_paniers_disponible' => 'We have no available basket to propose today.',
 	'pas_producteur_amap' => 'ou do not have any producer in your CSA.',
 	'pas_responsable_distribution' => 'You are not in charge for this season deliveries.',
 	'pas_responsable_pour_nom' => '@nom@ is not in charge for deliveries.',
@@ -155,7 +155,7 @@ I will get the basket of the @date_distribution@ produced by @nom_producteur@
 	'recupere_panier' => 'Recover the basket',
 	'responsables' => 'People in charge',
 	'responsables_distribution_paniers_mois' => 'In charge for deliveries from @date_debut@ to @date_fin@',
-	'responsables_explication' => 'On, this page, there is a people in charge list with distribution dates. This table can be displayed on the website by using the code <liste|distributions>', # MODIF
+	'responsables_explication' => 'On this page, you will find the in charge people list with the distribution dates to which they are associated.',
 	'reste_panier_distribuer' => 'We still have 1 basket to deliver',
 	'reste_panier_recuperer' => 'You still have 1 basket to get',
 	'reste_paniers_distribuer' => 'We still have @nb@ baskets to deliver',
