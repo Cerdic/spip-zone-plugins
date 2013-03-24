@@ -12,7 +12,7 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://contrib.spip.net/Associaspip</lien>
+	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
 	<icon>img_pack/asso-96.png</icon>
 
 	<options>association_options.php</options>
