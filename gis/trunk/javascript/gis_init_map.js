@@ -133,7 +133,7 @@ var gis_init_map = function(mapcfg) {
 				if (mapcfg['autocenterandzoom'])
 					map.fitBounds(geojson.getBounds());
 				if (mapcfg['open_id'].length)
-					gis_focus_marker(mapcfg['open_id'],map_container);
+					gis_focus_marker(mapcfg['open_id'],map_container.substring(3));
 
 				if (typeof map.geojsons=="undefined") map.geojsons = [];
 				map.geojsons.push(geojson);
