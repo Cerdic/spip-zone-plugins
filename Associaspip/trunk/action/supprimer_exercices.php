@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_supprimer_exercice() {
+function action_supprimer_exercices() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_exercice = $securiser_action();
