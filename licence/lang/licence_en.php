@@ -15,16 +15,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Free Art License',
-	'description_cc0' => 'Creative Common - Public Domain Dedication', # MODIF
-	'description_cc_by' => 'Creative Commons - Attribution', # MODIF
-	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial', # MODIF
-	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives', # MODIF
-	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives', # MODIF
-	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike', # MODIF
+	'description_cc0' => 'Creative Common - Public Domain Dedication',
+	'description_cc_by' => 'Creative Commons - Attribution',
+	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
+	'description_cc_by_nc_nd' => 'Creative Commons - Attribution Non-Commercial No Derivatives',
+	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
+	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
+	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
 	'description_copyright' => '© copyright the article\'s author',
-	'description_gfdl' => 'Licence de documentation libre GNU', # NEW
-	'description_gpl' => 'GNU/GPL License', # MODIF
+	'description_gfdl' => 'GNU Free Documentation License',
+	'description_gpl' => 'GNU/GPL License',
 	'description_wtfpl' => 'Do What The Fuck You Want To Public License ',
 
 	// L
