@@ -401,7 +401,7 @@ Arguments disponibles: {zona}, {format} i/o {id}.',
 	// I
 	'icone_visiter:description' => 'Substitueix la imatge del botó estàndard «<:icone_visiter_site:>» (a dalt a la dreta d\'aquesta pàgina) pel logotip del lloc, si existeix.
 
-Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>» fent un clic damunt del botó «<:icone_configuration_site:>».',
+Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>» fent un clic damunt del botó «<:icone_configuration_site:>».', # MODIF
 	'icone_visiter:nom' => '« <:icone_visiter_site:> »',
 	'insert_head:description' => 'Activa automàticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gràcies a aquesta opció, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',

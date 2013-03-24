@@ -398,7 +398,7 @@ Available arguments: {zone}, {format} and/or {id}.',
 	// I
 	'icone_visiter:description' => 'Replaces the standard "<:icone_visiter_site:>" button (top right on this page) with the site logo, if there is one.
 
-To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.',
+To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.', # MODIF
 	'icone_visiter:nom' => '"<:icone_visiter_site:>" button',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
@@ -421,7 +421,7 @@ _ See this page for examples: [->http://www.malsup.com/jquery/corner/].
 
 Make a list below of the elements in your templates which are to be rounded by using the CSS syntax (.class, #id, etc. ). Use the sign " = " to specify the jQuery command to apply, and a double slash (" // ") for any comments. If no equals sign is provided, rounded corners equivalent to <code>.my_class = .corner()</code> will be applied.[[%jcorner_classes%]]
 
-N.B. This tool requires the {Round Corners} jQuery plugin in order to function. The Swiss Army Knife plugin can install it for you automatically if you check this box. [[%jcorner_plugin%]]', # MODIF
+N.B. This tool requires the {Round Corners} jQuery plugin in order to function. If the remote file is properly installed,  the Swiss Army Knife plugin can activate it automatically if you check this box. [[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Pretty Corners',
 	'jcorner_plugin' => '" Round Corners plugin "',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -553,7 +553,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',
-	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
+	'local_ko' => 'The automatic update of local file «@file@» failed. If the tool malfunctions, try a manual update.',
 	'log_brut' => 'Data written in raw format (no HTML)',
 	'log_fileline' => 'Extra debug information',
 
@@ -562,15 +562,15 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Also consider the #EMAIL tag of your skeletons',
 	'mailcrypt_fonds' => 'Do not protect the following backgrounds :<br /><q4>{Separate them by two points «~:~» and make sure that these backgrounds remain inaccessible to web robots.}</q4>',
-	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
+	'maj_actualise_ok' => 'The plugin « @plugin@ » has not officially changed its version, but the files have been updated to take advantage of the latest revision of code.',
 	'maj_auto:description' => 'This tool is used to help you easily manage the updates of your various plugins, specifically by retrieving the version number located in your various local <code>svn.revision</code> files and comparing them with those found on the <code>zone.spip.org</code> site.
 
 The list above offers the possibility of running SPIP\'s automatic update process for each of the plugins already installed in the  <code>plugins/auto/</code> directory. The other plugins located in the  <code>plugins/</code> directory are simply listed for information purposes. If the remote version can not be located, then try to proceed with updating the plugin manually.
 
 Note: since the <code>.zip</code> files are not always instantly reconstructed, you might have to wait a while before you can carry out the total update of a very recently modified plugin.',
 	'maj_auto:nom' => 'Automatic updates',
-	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
-	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
+	'maj_fichier_ko' => 'The file « @file@ » can not be found!',
+	'maj_librairies_ko' => 'Libraries not found!',
 	'masquer:description' => 'This tool is used for hiding specific editorial content (sections or articles) tagged with the keyword specified below from the public site, without requiring any other modifications to your templates. If a section is hidden, then so is its entire sub-branch.[[%mot_masquer%]]
 
 To override and force the display of such hidden content, just add the <code>{tout_voir}</code> (view all) criterion to the loops in your template(s).
@@ -770,7 +770,8 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 [[Only keep %nombre_de_logs% file (s), each having %taille_des_logs% Ko maximum size <br/> <q3>{Reset one of these two boxes disables logs input.}</ q3>]]
  [[Other settings :->@puce@ folder where the logs are stored (leave empty by default):<q1> %dir_log% {Currently:} @DIR_LOG@</q1>]] [[->@puce@ File by default : %file_log%]] [[->@puce@ Extension : %file_log_suffix%]][[->@puce@ for each hit: %max_log% maximum file access]]',
 	'spip_log:description2' => '@puce@ the SPIP severity filter allows you to select the level of maximum importance to be considered before starting a data log. Level 8 allows for example to store all the messages sent by SPIP. The default level is level 5.',
-	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».', # MODIF
+	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».
+@puce@ jet lag used by the functions date / time can be configured here: «[.->timezone]» {(PHP 5.1 minimum)}.',
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
 	'statuts_spip' => 'Only the following SPIP status:',
@@ -787,14 +788,14 @@ _ Useful not to not forget any!
 
 @puce@ A test :',
 	'test_i18n:nom' => 'Missing translations',
-	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
-_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
+	'timezone:description' => 'Since PHP 5.1.0, each call to a date/time function generates an alert level E_NOTICE if the time zone is not valid and / or a E_WARNING alert if you use system configurations, or the environment variable TZ.
+_ Since PHP 5.4.0, the TZ environment variable and information available via the operating system is no longer used to guess the time difference.
 
-Réglage actuellement détecté : @_CS_TZ@.
+Setting currently detected: @_CS_TZ@.
 
-@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
-[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
-	'timezone:nom' => 'Décalage horaire', # NEW
+@puce@ {{Set below the jetlag to use on this site.}}
+[[%timezone%<q3> Complete list of timezones: : [->http://www.php.net/manual/en/timezones.php].</q3>]].',
+	'timezone:nom' => 'Jet lag',
 	'titre' => 'The Swiss Army Knife',
 	'titre_parent:description' => 'Within a loop, it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objects (articles, sections, news items, etc.) it gives the title of the parent section (if one such exists).
 

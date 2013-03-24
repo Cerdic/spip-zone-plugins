@@ -387,7 +387,7 @@ _ • [Celý zásuvný modul|Nastaviť na pôvodné nastavenia zásuvného modul
 	// I
 	'icone_visiter:description' => 'Nahradí štandardné tlačidlo  "Navštíviť" (vpravo hore na tejto stránke) logom stránky, ak existuje.
 
-Ak chcete toto logo nastaviť, choďte na "Konfiguráciu stránky" kliknutím na tlačidlo "Konfigurácia".',
+Ak chcete toto logo nastaviť, choďte na "Konfiguráciu stránky" kliknutím na tlačidlo "Konfigurácia".', # MODIF
 	'icone_visiter:nom' => 'Tlačidlo "Navštíviť"',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between <head> et </head>. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => 'Tag #INSERT_HEAD',

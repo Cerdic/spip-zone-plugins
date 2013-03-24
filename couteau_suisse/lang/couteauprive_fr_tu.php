@@ -399,7 +399,7 @@ Arguments disponibles : {zone}, {format} et/ou {id}.',
 	// I
 	'icone_visiter:description' => 'Remplace l\'image du bouton standard «<:icone_visiter_site:>» (en haut à droite sur cette page)  par le logo du site, s\'il existe.
 
-Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».',
+Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».', # MODIF
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »',
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
