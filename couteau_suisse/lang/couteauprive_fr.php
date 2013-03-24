@@ -395,7 +395,7 @@ Arguments disponibles : {zone}, {format} et/ou {id}.',
 	'horloge:nom' => 'Horloge',
 
 	// I
-	'icone_visiter:description' => 'Remplace l\'image du bouton standard «<:icone_visiter_site:>» (en haut à droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Insère le logo du site (s\'il existe) dans le menu de l\'espace privé en haut à droite de la page, afin de mieux identifier le site consulté.
 
 Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».',
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »',

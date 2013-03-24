@@ -1,4 +1,4 @@
-// variable modifiable afin d'initialiser l'ouverture d'un bloc (simple ou numerote)
+// variables modifiables afin d'initialiser l'ouverture d'un bloc (simple ou numerote)
 if(typeof(bloc_actif)=='undefined') var bloc_actif = '';
 if(typeof(bloc_actif_num)=='undefined') var bloc_actif_num = '';
 
@@ -91,7 +91,7 @@ function blocs_init() {
 	// activation de blocs numerotes grace a l'url
 	var blocs = blocs_get_blocs(window.location, true);
 	if(blocs && (this==document)) blocs_clic_blocs(blocs, true);
-	// activation de blocs simples grace a l'url
+	// activation de blocs simples (numerotes sur la base zero) grace a l'url
 	blocs = blocs_get_blocs(window.location);
 	if(blocs && (this==document)) blocs_clic_blocs(blocs);
 	// clic vers une note dans un bloc

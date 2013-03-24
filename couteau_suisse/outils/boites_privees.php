@@ -21,7 +21,7 @@ if(!defined('_SPIP19300')) {
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function boites_privees_installe_dist(){
-	tri_auteurs_verifie_table(); // OPTIM : ne le faire qu'a l'activation de la lame ou de la boite ?
+	tri_auteurs_verifie_table(); // OPTIM : ne le faire qu'a l'activation de la lame ou de la boite ? upgrade de SPIP ?
 	return false;
 }
 
