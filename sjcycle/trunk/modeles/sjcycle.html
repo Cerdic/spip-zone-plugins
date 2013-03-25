@@ -17,7 +17,7 @@
 [(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
 
 [(#REM) largeur div = largeur image + 2*bordure ]
-[(#SET{div_width,  			#GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+[(#SET{div_width,			#GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
 [(#SET{btn_pre,        		[(#ENV{btn_precedent,        	0})]})]
 [(#SET{btn_suiv,        	[(#ENV{btn_suivant,        		0})]})]
 
@@ -26,7 +26,6 @@
 	 
 [(#ENV{width}|ou{#ENV{height}}|oui)#SET{class,no_image_filtrer}]
 [(#ENV{width}|ou{#ENV{height}}|non)#SET{class,image_filtrer}]
-
 
 [(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
 			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
