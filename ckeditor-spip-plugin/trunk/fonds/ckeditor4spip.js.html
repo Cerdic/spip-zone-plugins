@@ -49,14 +49,14 @@ function HideSpipUI(editor_id){
 			.css('background-color','white');
 		item=$(crayon+' div.edition');
 	} else {
-		var editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
+		editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
 		if (editor_id_light) {
 			editor_id_light = editor_id_light[1] ;
 		} else {
 			editor_id_light = editor_id ;
 		}
 
-		item=$(editor_id).parents().find('div.edition:has('+editor_id_light+')');
+		item=$(editor_id_light).parents().find('div.forum, div.edition:has('+editor_id_light+')');
 	}
 	item.each(function() {
 		if ($(this).find(editor_id_light).length == 1) {
@@ -87,7 +87,7 @@ function ShowSpipUI(editor_id){
 	if(crayon) {
 		item=$(crayon+' div.edition');
 	} else {
-		item=$(editor_id).parents().find('div.edition:has('+editor_id+')');
+		item=$(editor_id).parents().find('div.forum, div.edition:has('+editor_id+')');
 	}
 	item.each(function() {
 		if (editor_id.match(/^#formulaire_forum\s/)) {
@@ -173,6 +173,11 @@ function SpipEditor2CKEditor(editor_id){
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
 		this.setReadOnly(false);
 		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
+		var ckeditor = this ;
+		$(editor_id).parents().find('input[class=submit]').click(function() {
+			CKEditor2SpipEditor(editor_id) ; // ça c'est sub-optimal, mais ça fonctionne
+			//ckeditor.updateElement() ; // ça c'est ce qu'il me semble qu'il faurait faire, mais ça ne fonctionne pas ...
+		}) ;
 	},EdConfig);
 	} catch (E) {
 		alert("Erreur non prévue : \n"+E) ;
@@ -345,13 +350,21 @@ function fullInitCKEDITOR(editor_ids){
 				var div ;
 				var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
 				if (crayon) {
-					div = $(editor_id).closest('.formulaire_crayon') ;
+					div = $('textarea.crayon-active').closest('.formulaire_crayon') ;
 				} else {
-					div = $(editor_id).closest('.markItUpContainer') ;
+					editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
+					if (editor_id_light) {
+						editor_id_light = editor_id_light[1] ;
+					} else {
+						editor_id_light = editor_id ;
+					}
+
+					div = $(editor_id_light).closest('.markItUpContainer') ;
 					if (div.length == 0) { [(#REM) // cas où le porteplume n'est pas là... ]
 						div = $(editor_id).siblings('label:first') ;
 						style = "width;100%;text-align:right;position:relative;top:-8px;height:0px;" ;
 					}
+					
 				}
 				if (div.length != 0) {
 					div.prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="'+style+'"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');

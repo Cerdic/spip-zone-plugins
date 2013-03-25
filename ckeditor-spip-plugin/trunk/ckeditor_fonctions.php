@@ -72,7 +72,7 @@ function ckeditor_prepare_champs($type, $default_tb = 'Full') {
 	$champs = array() ;
 	foreach($type as $item) {
 		if ($item) {
-			if (preg_match("~^(.*)\s*\|\s*basi(c|que)\si*$~", $item, $match)) {
+			if (preg_match("~^(.*)\s*\|\s*basi(c|que)\s*$~si", $item, $match)) {
 				$tb = 'Basic' ;
 				$item = $match[1] ;
 				} else {
