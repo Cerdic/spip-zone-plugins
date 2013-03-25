@@ -14,11 +14,19 @@
 [(#SET{div_margin,     		[(#ENV{div_margin,   	 	#CONFIG{sjcycle/div_margin}})]})]
 [(#SET{img_bordure,    		[(#ENV{border_width,   		#CONFIG{sjcycle/img_bordure}})]})]
 [(#SET{legende,        		[(#ENV{legende,        		0})]})]
-[(#SET{liens_individuels,  [(#ENV{liens_individuels,	0})]})]
+[(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
+
 [(#REM) largeur div = largeur image + 2*bordure ]
-[(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+[(#SET{div_width,  			#GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
 [(#SET{btn_pre,        		[(#ENV{btn_precedent,        	0})]})]
-[(#SET{btn_suiv,        		[(#ENV{btn_suivant,        		0})]})]
+[(#SET{btn_suiv,        	[(#ENV{btn_suivant,        		0})]})]
+
+[(#REM)
+	 Ceci permet de surclasser la taille définie sur un éventuel filtre image placé sur la balise #TEXTE.]
+	 
+[(#ENV{width}|ou{#ENV{height}}|oui)#SET{class,no_image_filtrer}]
+[(#ENV{width}|ou{#ENV{height}}|non)#SET{class,image_filtrer}]
+
 
 [(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
 			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
@@ -138,7 +146,8 @@
                                       #GET{img_position},
                                       #GET{img_background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
-                      |inserer_attribut{style,"display:block;"})]
+                      |inserer_attribut{style,"display:block;"}
+                      |inserer_attribut{class,#GET{class}})]
          ]
          [(#GET{img_background}|=={'transparent'}|non)
             [(#FICHIER|image_passe_partout{ #GET{img_width},
@@ -148,7 +157,8 @@
                                       #GET{img_position},
                                       #GET{img_background}}
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
-                      |inserer_attribut{style,"display:block;"})]
+                      |inserer_attribut{style,"display:block;"}
+                      |inserer_attribut{class,#GET{class}})]
          ]
          [(#GET{fermer_a}|=={oui}|oui)
          	</a>
