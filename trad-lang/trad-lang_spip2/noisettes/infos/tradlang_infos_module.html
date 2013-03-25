@@ -14,16 +14,12 @@
 		<p class="items_new"><:tradlang:items_new:> #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
 		<BOUCLE_total_item_langue_mere_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG_MERE}> </BOUCLE_total_item_langue_mere_modif>
 		<p class="items_modif"><:tradlang:items_modif:> #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
-		[(#GET{sauvegarde_locale}|=={oui}|oui)
-		[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG_MERE})]})]
-		[(#GET{sync}|oui)
-			<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>
-		]
+		[(#GET{sauvegarde_locale}|=={oui}|oui)[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG_MERE})]})]
+		[(#GET{sync}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
 		[(#GET{sync}|non)
 			<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 			[(#GET{auth_trad}|oui)
-				[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#MODULE,#SELF}})]
-			]
+				[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#MODULE,#SELF}})]]
 		]]
 		</li>
 	</ul>
@@ -31,47 +27,38 @@
 	<ul class="menu-items infos">
 	#ANCRE_PAGINATION
 	<BOUCLE_langues(TRADLANGS){module}{fusion lang}{lang !IN #LANG_MERE}{par lang}{pagination 10}>
-	#SET{str_cible,#ARRAY}
-	#SET{total,0}
+	[(#SET{str_cible,#ARRAY})][(#SET{total,0})]
 	<li class="menu-entree item [(#COMPTEUR_BOUCLE|alterner{even,odd})]">
-		#SET{update,non}
-		#SET{str_cible,#ARRAY}
+		[(#SET{update,non})][(#SET{str_cible,#ARRAY})]
 		<strong><span class="lang" dir="#LANG_DIR">[[(#LANG)]]</span>[ (#LANG|traduire_nom_langue)]</strong>
 		<BOUCLE_total_item(TRADLANGS){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
-		#SET{total,#TOTAL_BOUCLE}</B_total_item>
+		[(#SET{total,#TOTAL_BOUCLE})]</B_total_item>
 		<BOUCLE_total_item_ok(TRADLANGS){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
-		#SET{total_ok,#GRAND_TOTAL}
-		</B_total_item_ok>#SET{total_ok,0}<//B_total_item_ok>
+		[(#SET{total_ok,#GRAND_TOTAL})]</B_total_item_ok>[(#SET{total_ok,0})]<//B_total_item_ok>
 		<BOUCLE_total_item_new(TRADLANGS){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
-		#SET{total_new,#GRAND_TOTAL}
-		</B_total_item_new>#SET{total_new,0}<//B_total_item_new>
+		[(#SET{total_new,#GRAND_TOTAL})]
+		</B_total_item_new>[(#SET{total_new,0})]<//B_total_item_new>
 		<BOUCLE_total_item_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
-		#SET{total_modif,#GRAND_TOTAL}
-		</B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
-		#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor}
-		#SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor}
-		#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}}
-		<span class="valeur_traduit">#GET{percent_ok}%</span>
+		[(#SET{total_modif,#GRAND_TOTAL})]</B_total_item_modif>[(#SET{total_modif,0})]<//B_total_item_modif>
+		[(#SET{percent_ok,[(#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor)]})][(#SET{percent_modif,[(#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor)]})][(#SET{percent_new,[(#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}})]})]
+		<span class="valeur_traduit">[(#GET{percent_ok})%]</span>
 		<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
-			<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-			<div class="modif" style="left: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
-			<div class="new" style="left: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+			<div class="ok"[ style="width:(#GET{percent_ok})px"]> </div>
+			<div class="modif" style="[left:(#GET{percent_ok})px;][width: (#GET{percent_modif})px]"></div>
+			<div class="new" style="[left:(#GET{percent_ok}|plus{#GET{percent_modif}})px];[width:(#GET{percent_new})px]"> </div>
 		</div>
 		<BOUCLE_revise_inexistants(TRADLANGS){module}{!id IN #GET{str_cible}}{lang=#LANG_MERE}> </BOUCLE_revise_inexistants>
 		[(#SET{nb_manquant,#TOTAL_BOUCLE})]  #SET{update,oui}
-		<div class="notice">[(#GET{nb_manquant}|singulier_ou_pluriel{tradlang:item_manquant,tradlang:items_manquants})]</div>
-		</B_revise_inexistants>
+		<div class="notice">[(#GET{nb_manquant}|singulier_ou_pluriel{tradlang:item_manquant,tradlang:items_manquants})]</div></B_revise_inexistants>
 		<BOUCLE_total_item_trop(TRADLANGS){module}{id !IN #GET{str_mere}}{lang=#LANG}> </BOUCLE_total_item_trop>
-		#SET{nb_trop,#TOTAL_BOUCLE} #SET{update,oui}
+		[(#SET{nb_trop,#TOTAL_BOUCLE})][(#SET{update,oui})]
 		<div class="notice"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></div></B_total_item_trop>
 		[(#GET{update}|=={oui}|oui)
 			[(#GET{auth_trad}|oui)
 				[(#BOUTON_ACTION{<:tradlang:label_update_langues_cible_mere:>,[(#URL_ACTION_AUTEUR{tradlang_verifier_langue_base,#MODULE/#LANG,[(#SELF|ancre_url{menu_infos_trad})]})]})]
 			]
 			[(#GET{auth_trad}|non)
-				<p><:tradlang:message_demande_update_langues_cible_mere:></p>
-			]
-		]
+				<p><:tradlang:message_demande_update_langues_cible_mere:></p>]]
 		[(#GET{sauvegarde_locale}|=={oui}|oui)
 		[(#SET{sync,[(#_module:ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG})]})]
 		[(#GET{sync}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
@@ -88,3 +75,4 @@
 	</B_langues>
 </div>
 </BOUCLE_module>
+#FILTRE{trim}
