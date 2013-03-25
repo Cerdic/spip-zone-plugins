@@ -210,13 +210,11 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt)){
+	if(autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt))
 		return autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt);
-	}
 	
-	if(!function_exists('lire_config')){
-		include_spip('inc/config');	
-	}
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	
 	$type = lire_config('tradlang/voir_type');
 	if($type){
