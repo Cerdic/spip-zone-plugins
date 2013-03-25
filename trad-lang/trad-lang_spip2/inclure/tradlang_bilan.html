@@ -1,6 +1,6 @@
-#SET{langues,#ARRAY}
-#SET{langues_vides,#ARRAY}
-#SET{langues_preferees_auteur,#INFO_LANGUES_PREFEREES{auteur,#SESSION{id_auteur}}|unserialize}
+[(#SET{langues,#ARRAY})]
+[(#SET{langues_vides,#ARRAY})]
+[(#SET{langues_preferees_auteur,#INFO_LANGUES_PREFEREES{auteur,#SESSION{id_auteur}}|unserialize})]
 <BOUCLE_si_pas_langues(CONDITION){si #ENV{langues_choisies,#GET{langues_preferees_auteur}}|is_array|non|ou{#ENV{langues_choisies,#GET{langues_preferees_auteur}}|count|>{1}|non}|et{#CONFIG{tradlang/limiter_langues_bilan}|=={on}|oui}|oui}>
 #SET{langues_utilisees,#ARRAY} 
 #SET{nb_utilisees,#CONFIG{tradlang/limiter_langues_bilan_nb,10}}
@@ -14,8 +14,7 @@
 [(#TOTAL_BOUCLE|>{2}|oui)
 #SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#TOTAL_BOUCLE}}}]
 [(#TOTAL_BOUCLE|>{2}|non)
-#SET{langues_vides,#GET{langues_vides}|push{#LANG}}
-]
+[(#SET{langues_vides,#GET{langues_vides}|push{#LANG}})]]
 </B_strings_ok>
 #SET{langues_vides,#GET{langues_vides}|push{#LANG}}
 <//B_strings_ok>
@@ -23,34 +22,29 @@
 
 [(#ENV{afficher_form}|!={non}|oui)
 [(#ENV{langues_choisies}|is_array|oui)
-	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
-	<div class="notice">
-		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#ENV{langues_choisies},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
-		<:tradlang:message_langues_choisies_affichees{langues=#GET{langues_string}}:>
-	</div>
-]
+[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
+[(#BOITE_OUVRIR{'',notice})]
+	[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#ENV{langues_choisies},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
+	<:tradlang:message_langues_choisies_affichees{langues=#GET{langues_string}}:>
+[(#BOITE_FERMER)]]
 
 [(#ENV{langues_choisies}|is_array|non)
 [(#GET{langues_preferees_auteur}|is_array|oui)
 [(#GET{langues_preferees_auteur}|count|>{0}|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_preferees_auteur}}|implode{', '})]})]
-	<div class="notice">
+	[(#BOITE_OUVRIR{'',notice})]
 		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_preferees_auteur},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',' '})]
 		<:tradlang:message_langues_preferees_affichees{langues=#GET{langues_string}}:>
-	</div>]
-]]
-[(#ENV{langues_choisies}|is_array|non)
-[(#GET{langues_preferees_auteur}|is_array|non|ou{#GET{langues_preferees_auteur}|count|>{0}|non})
+	[(#BOITE_FERMER)]]]]
+[(#ENV{langues_choisies}|is_array|non|et{#GET{langues_preferees_auteur}|is_array|non|ou{#GET{langues_preferees_auteur}|count|>{0}|non}|oui})
 [(#GET{langues_utilisees}|is_array|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_utilisees}}|implode{', '})]})]
-	<div class="notice">
+	[(#BOITE_OUVRIR{'',notice})]
 		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_utilisees},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
 		<:tradlang:message_langues_utilisees_affichees{langues=#GET{langues_string},nb=#GET{nb_utilisees}}:>
-		[(#SESSION{id_auteur}|oui)
-		#SET{url_profil,#URL_AUTEUR{#SESSION{id_auteur}}|parametre_url{vue,profil}}
+		[(#SESSION{id_auteur}|oui)#SET{url_profil,#URL_AUTEUR{#SESSION{id_auteur}}|parametre_url{vue,profil}}
 		<br /><:tradlang:message_info_choisir_langues_profiles{url_profil=#GET{url_profil}}:>]
-	</div>
-]]]
+	[(#BOITE_FERMER)]]]
 ]
 </B_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
@@ -62,70 +56,48 @@
 	<thead>
 		<tr class="row_first">
 			<th><:tradlang:th_module:></th>
-			<th><:tradlang:th_langue_mere:></th>
-			<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
-			[(#SET{total_#CLE,0})]
-			<th class="lang #CLE">
-				[(#SET{langue_longue,[(#CLE|traduire_nom_langue)]})]
+			<th><:tradlang:th_langue_mere:></th><BOUCLE_langues_totales(DATA){source tableau, #GET{langues}}>
+			<th class="lang #CLE">[(#SET{langue_longue,[(#CLE|traduire_nom_langue)]})]
 				<a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]" title="<:tradlang:lien_voir_bilan_lang{lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">[(#CLE)]</a>
-			</th>
-			</BOUCLE_langues_totales>
+			</th>[(#SET{total_#CLE,0})]</BOUCLE_langues_totales>
 		</tr>
 	</thead>
 	<B_modules_lang>
-	<tbody>
-	<BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
+	<tbody><BOUCLE_modules_lang(TRADLANG_MODULES){priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td class="#EDIT{nom_mod}">[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
-		#SET{full,''}
-		#SET{langue_mere,#LANG_MERE}
+		[(#SET{full,''})][(#SET{langue_mere,#LANG_MERE})]
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
-		<td><abbr title="[(#GET{langue_mere}|traduire_nom_langue)]">[(#GET{langue_mere})]</abbr> [((#GRAND_TOTAL))]</td>
-		#SET{full,#GRAND_TOTAL}
-		</B_compte_langue_mere>
+		<td><abbr title="[(#GET{langue_mere}|traduire_nom_langue)]">[(#GET{langue_mere})]</abbr> [((#GRAND_TOTAL))]</td>[(#SET{full,#GRAND_TOTAL})]</B_compte_langue_mere>
 		<BOUCLE_langue_module(POUR){tableau #GET{langues}}>
 			<BOUCLE_compte_tradlang(TRADLANGS){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
-			[(#SET{class,'non_traduit'})]
-			
-			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)
-				[(#SET{class,traduit_full})]
-				[(#SET{percent,100})]
-			]
-			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
-				[(#SET{percent,#TOTAL_BOUCLE|div{#GET{full}}|mult{100}})]
-				[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{50}}|oui)#SET{class,traduit}]
-			]
-			
-			[(#CLE|=={#LANG_MERE}|oui)
-				[(#SET{percent,100})]
-			]
-			[(#SET{total_#CLE,[(#GET{total_#CLE}|plus{#GET{percent,0}})]})]
-			[(#SET{traduites,#TOTAL_BOUCLE})]
-			[(#SET{langue,#CLE})]
-			[(#SET{langue_longue,#CLE|traduire_nom_langue})]
-			[(#SET{langue_dir,[(#CLE|lang_dir)]})]
-			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]" title="<:tradlang:info_percent_chaines{total=#GET{full},traduites=#GET{traduites},langue=#GET{langue},langue_longue=#GET{langue_longue},langue_dir=#GET{langue_dir}}|attribut_html:>">[(#GET{percent}|floor)%]</a></td>]
-			[(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#SET{total_boucle,#TOTAL_BOUCLE}<abbr title="<:tradlang:info_nb_items_module{module=#NOM_MOD,nb=#GET{total_boucle}}|attribut_html:>">[(#GET{percent}|floor)%]</abbr></td>]
-			</B_compte_tradlang>
+			[(#SET{class,'non_traduit'})][
+			(#TOTAL_BOUCLE|=={#GET{full}}|oui)[(#SET{class,traduit_full})][(#SET{percent,100})]][
+			(#TOTAL_BOUCLE|=={#GET{full}}|non)[(#SET{percent,#TOTAL_BOUCLE|div{#GET{full}}|mult{100}})][(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{50}}|oui)#SET{class,traduit}]][
+			(#CLE|=={#LANG_MERE}|oui)[(#SET{percent,100})]][
+			(#SET{total_#CLE,[(#GET{total_#CLE}|plus{#GET{percent,0}})]})][
+			(#SET{traduites,#TOTAL_BOUCLE})][
+			(#SET{langue,#CLE})][
+			(#SET{langue_longue,#CLE|traduire_nom_langue})][
+			(#SET{langue_dir,[(#CLE|lang_dir)]})][
+			(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]" title="<:tradlang:info_percent_chaines{total=#GET{full},traduites=#GET{traduites},langue=#GET{langue},langue_longue=#GET{langue_longue},langue_dir=#GET{langue_dir}}|attribut_html:>">[(#GET{percent}|floor)%]</a></td>][
+			(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#SET{total_boucle,#TOTAL_BOUCLE}<abbr title="<:tradlang:info_nb_items_module{module=#NOM_MOD,nb=#GET{total_boucle}}|attribut_html:>">[(#GET{percent}|floor)%]</abbr></td>]</B_compte_tradlang>
 			<td class="non_traduit"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#CLE})]"> - </a></td>
-			<//B_compte_tradlang>
-		</BOUCLE_langue_module>
-	</tr>
-	</BOUCLE_modules_lang>
-	[(#SET{total_modules,#TOTAL_BOUCLE})]
+			<//B_compte_tradlang></BOUCLE_langue_module>
+	</tr></BOUCLE_modules_lang>
+	</tbody>[(#SET{total_modules,#TOTAL_BOUCLE})]
 	<tfoot>
-		<td><:tradlang:tfoot_total:></td>
-		<td></td>
-		<BOUCLE_langues_tfoot(POUR){tableau #GET{langues}}>
-		<td>
-			[(#GET{total_#CLE}|div{#GET{total_modules}}|floor)%]
-		</td>
-		</BOUCLE_langues_tfoot>
+		<tr>
+			<td><:tradlang:tfoot_total:></td>
+			<td></td>
+			<BOUCLE_langues_tfoot(POUR){tableau #GET{langues}}>
+			<td>[(#GET{total_#CLE}|div{#GET{total_modules}}|floor)%]</td></BOUCLE_langues_tfoot>
+		</tr>
 	</tfoot>
-	</tbody>
 	</B_modules_lang>
 </table>
 </B_langues_totales>
 <//B_langues_totales>
 </div>
 </BOUCLE_priorites>
+#FILTRE{trim}
