@@ -2,47 +2,31 @@
 <form action="[(#ENV{action})]" method="get"><div>
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<ul>
-		[(#ENV{titre}|oui)
+	<ul>[
 		<li class="fieldset">
 			<fieldset>
-			<h3 class="legend">#ENV{titre}</h3>
-			<ul>
-		]
+			<h3 class="legend">(#ENV{titre})</h3>
+			<ul>]
 		<li class="editer editer_#ENV{name}">
-			<select name="#ENV{name}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]"[(#ENV{multiple}|oui) multiple="multiple" size="[(#ENV{size,10})]"] id="#ENV{name}">
-				[(#ENV{option_vide}|oui)
-				<option value="">--</option>]
-				<B_module_langue_dispo_pref>
+			<select name="#ENV{name}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]"[(#ENV{multiple}|oui) multiple="multiple" size="[(#ENV{size,10})]"] id="#ENV{name}">[(#ENV{option_vide}|oui)
+				<option value="">--</option>]<B_module_langue_dispo_pref>
 				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
-				<BOUCLE_module_langue_dispo_pref(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{langues_preferees}{fusion lang}{par lang}>
-				[(#LANG|=={#ENV{lang_exclue}}|non)
-					[(#ENV{multiple}|non)
-					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
-					[(#ENV{multiple}|oui)
-					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]
-				</BOUCLE_module_langue_dispo_pref>
-				[(#SET{optgroup,'oui'})]
-				</optgroup>
-				</B_module_langue_dispo_pref>
-				<B_module_langue_dispo>
-				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
-				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){module?}{id_tradlang_module?}{!langues_preferees}{fusion lang}{par lang}>
-				[(#LANG|=={#ENV{lang_exclue}}|non)
-					[(#ENV{multiple}|non)
-					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]
-					[(#ENV{multiple}|oui)
-					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]
-				</BOUCLE_module_langue_dispo>
-				[(#GET{optgroup}|=={oui})</optgroup>]
-				</B_module_langue_dispo>
+				<BOUCLE_module_langue_dispo_pref(TRADLANGS tradlang_modules){id_tradlang_module?}{langues_preferees}{fusion lang}{par lang}>[(#LANG|=={#ENV{lang_exclue}}|non)[(#ENV{multiple}|non)
+					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>][(#ENV{multiple}|oui)
+					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]</BOUCLE_module_langue_dispo_pref>[(#SET{optgroup,'oui'})]
+				</optgroup></B_module_langue_dispo_pref>
+				<B_module_langue_dispo>[(#GET{optgroup}|=={oui}|oui)
+				<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
+				<BOUCLE_module_langue_dispo(TRADLANGS tradlang_modules){id_tradlang_module?}{!langues_preferees}{fusion lang}{par lang}>[(#LANG|=={#ENV{lang_exclue}}|non)[(#ENV{multiple}|non)
+					<option value="#LANG"[(#LANG|=={#ENV{#ENV{name}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>][(#ENV{multiple}|oui)
+					<option value="#LANG"[(#LANG|in_array{#ENV{#ENV{name},#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)]</option>]]</BOUCLE_module_langue_dispo>[(#GET{optgroup}|=={oui}|oui)
+				</optgroup>]</B_module_langue_dispo>
 			</select>
-		[(#ENV{titre}|oui)
-				</fieldset>
-			</li>
-		</ul>]
+		</li>[(#ENV{titre}|oui)
+				</ul>
+			</fieldset>
 		</li>
-	</ul>
+	]</ul>
 	<p class="boutons">
 	<input type="submit" class="submit" value="<:bouton_valider:>" title="<:info_rechercher:>" />
 	</p>

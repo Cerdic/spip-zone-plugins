@@ -1,22 +1,12 @@
-#SET{priorite,''}
+[(#SET{priorite,''})]
 <B_modules>
-	<select name="id_tradlang_module" id="id_tradlang_module" class="text">
-	[(#ENV{option_vide}|oui)
-		<option value="">--</option>]
-	<BOUCLE_modules(TRADLANG_MODULES)>
-		[(#PRIORITE|!={#GET{priorite}}|oui)
-		#SET{priorite,#PRIORITE}
-		#SET{optgroup_ancien,#GET{optgroup}}
-		[(#GET{optgroup}|=={oui}|oui)
-		</optgroup>
-		]
-		#SET{optgroup,oui}
-		<optgroup label="#PRIORITE">
-		]
-		<option value="#ID_TRADLANG_MODULE"[(#ID_TRADLANG_MODULE|=={#ENV{id_tradlang_module}}|oui)selected="selected"]>#NOM_MOD</option>
-	</BOUCLE_modules>
-		[(#GET{optgroup}|=={oui}|oui)
-		</optgroup>
-		]
-	</select>
+<select name="id_tradlang_module" id="id_tradlang_module" class="text">
+	[(#ENV{option_vide}|oui)<option value="">--</option>]
+	<BOUCLE_modules(TRADLANG_MODULES)>[(#PRIORITE|!={#GET{priorite}}|oui)[(#SET{priorite,#PRIORITE})][(#SET{optgroup_ancien,#GET{optgroup}})]
+[(#GET{optgroup}|=={oui}|oui)	</optgroup>][(#SET{optgroup,oui})]
+	<optgroup label="#PRIORITE">
+	]	<option value="#ID_TRADLANG_MODULE"[(#ID_TRADLANG_MODULE|=={#ENV{id_tradlang_module}}|oui)selected="selected"]>#NOM_MOD</option>
+	</BOUCLE_modules>[(#GET{optgroup}|=={oui}|oui)</optgroup>]
+</select>
 </B_modules>
+#FILTRE{trim}

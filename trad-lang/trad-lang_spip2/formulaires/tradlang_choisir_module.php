@@ -6,10 +6,8 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 	$id_tradlang_module = _request('id_tradlang_module') ? _request('id_tradlang_module') : $id_tradlang_module;
 	
 	include_spip('inc/autoriser');
-	include_spip('inc/lang_liste');
-	include_spip('inc/config');
 	
-	if(!sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module))){
+	if(!$infos_module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module))){
 		$valeurs['id_tradlang_module'] = $id_tradlang_module = $module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module NOT LIKE "attic%" AND module != "contrib"',array('priorite','nom_mod'),'','0,1');
 		/**
 		 * Si aucun module dans la base
@@ -27,7 +25,8 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		$valeurs['id_tradlang_module'] = $id_tradlang_module;
 	
 	if(autoriser('modifier','tradlang')){
-		$infos_module = sql_fetsel('lang_mere,module','spip_tradlang_modules',"id_tradlang_module=".intval($id_tradlang_module));
+		include_spip('inc/lang_liste');
+		include_spip('inc/config');
 
 		$valeurs = array('id_tradlang_module' => $id_tradlang_module,'lang_orig' => $lang_orig,'lang_cible'=>$lang_cible,'lang_crea'=> $lang_crea);
 		foreach($valeurs as $key => $val){
@@ -36,13 +35,17 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		}
 		
 		/**
+		 * Si la langue d'origine passée au formulaire n'est pas la langue mère 
+		 *
 		 * On vérifie que la langue d'origine choisie dans l'url est correctement traduite 
 		 * sinon on passe à la langue mère
 		 */
-		$compte_total_mere = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($infos_module['lang_mere']));
-		$compte_total_orig = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($lang_orig));
-		if($compte_total_mere != $compte_total_orig)
-			$valeurs['lang_orig'] = $infos_module['lang_mere'];
+		if($lang_orig != $infos_module['lang_mere']){
+			$compte_total_mere = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($infos_module['lang_mere']));
+			$compte_total_orig = sql_getfetsel('COUNT(*)','spip_tradlangs','id_tradlang_module='.intval($valeurs['id_tradlang_module']).' AND statut="OK" AND lang='.sql_quote($lang_orig));
+			if($compte_total_mere != $compte_total_orig)
+				$valeurs['lang_orig'] = $infos_module['lang_mere'];
+		}
 
 		$valeurs['lang_mere'] = $infos_module['lang_mere'];
 		
