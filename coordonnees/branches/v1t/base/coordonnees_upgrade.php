@@ -28,14 +28,21 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 
 	// On utilise plus le champ "numero" qui sera inclu dans la "voie"
 	if (version_compare($current_version, "1.1", "<")) {
+		$ok = true;
+
 		// on ajoute le contenu du champ "numero" au champ "voie"
 		sql_update("spip_adresses",
-			array("voie" => "CONCAT(numero, ' ', voie)"),
+			array("voie" => "CONCAT(numero, ' ', voie)"), //!\ PostgreSQL, Sqlite, MySQL apres "SET sql_mode='PIPES_AS_CONCAT';" (sinon interprete comme le double-pipe comme OR), Oracle : "numero||' '||voie;" Nota1: L'equivalent SqlServer est "numero+' '+voie;" Nota2: Oracle connait CONCAT mais que ne prend que deux arguments donc "CONCAT(numero,CONCAT(' ',voie));" Bref: ce n'est pas portable !!!
 			array("numero IS NOT NULL", "numero <> ''"));
-		// on supprime le champ "numero"
-		sql_alter("TABLE spip_adresses DROP COLUMN numero");
-		spip_log('Tables coordonnées correctement passsées en version 1.1','coordonnees');
-		ecrire_meta($nom_meta_base_version, $current_version="1.1");
+
+		if ($ok){
+			// on supprime le champ "numero"
+			sql_alter("TABLE spip_adresses DROP COLUMN numero");
+
+			spip_log('Tables coordonnées correctement passsées en version 1.1','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.1");
+		}
+		else return false;
 	}
 
 	// On supprime les "type" en les transformant en vrai "titre" libres
@@ -43,47 +50,61 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok = true;
 
 		// On renomme les champs "type_truc" en "titre" tout simplement + on les allonge
-		$ok &= sql_alter('TABLE spip_adresses CHANGE type_adresse titre VARCHAR(255) not null default ""');
-		$ok &= sql_alter('TABLE spip_numeros CHANGE type_numero titre VARCHAR(255) not null default ""');
-		$ok &= sql_alter('TABLE spip_emails CHANGE type_email titre VARCHAR(255) not null default ""');
+		$ok &= sql_alter("TABLE spip_adresses ADD titre VARCHAR(255) NOT NULL DEFAULT ''");
+		$ok &= sql_update('spip_adresses', array('titre' => 'type_adresse') );
+		$ok &= sql_alter("TABLE spip_numeros ADD titre VARCHAR(255) NOT NULL DEFAULT ''");
+		$ok &= sql_update('spip_numeros', array('titre' => 'type_numero') );
+		$ok &= sql_alter("TABLE spip_emails ADD titre VARCHAR(255) NOT NULL DEFAULT ''");
+		$ok &= sql_update('spip_emails', array('titre' => 'type_email') );
 
 		if ($ok){
+			sql_alter("TABLE spip_adresses DROP COLUMN type_adresse");
+			sql_alter("TABLE spip_numeros DROP COLUMN type_numero");
+			sql_alter("TABLE spip_emails DROP COLUMN type_email");
 			spip_log('Tables coordonnées correctement passsées en version 1.2','coordonnees');
-			ecrire_meta($nom_meta_base_version, $current_version="1.2");
+			ecrire_meta($nom_meta_base_version, $current_version='1.2');
 		}
 		else return false;
 	}
 
 	// On passe les pays en code ISO, beaucoup plus génériques que les ids SQL
 	if (version_compare($current_version, "1.3", "<")) {
-		$ok = true;
+		if ( test_plugin_actif('pays') ) { // cas normal si on a mis a jour regulierement
+			$ok = true;
 
-		// On ajoute un champ pour le code car il faut les deux champs pour la transistion
-		$ok &= sql_alter('TABLE spip_adresses ADD pays_code VARCHAR(2) not null default ""');
+			// On ajoute un champ pour le code car il faut les deux champs pour la transistion
+			$ok &= sql_alter("TABLE spip_adresses ADD pays_code VARCHAR(2) NOT NULL DEFAULT ''");
 
-		// On parcourt les adresses pour remplir le code du pays
-		$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
-		if ($adresses and is_array($adresses)){
-			foreach ($adresses as $adresse){
-				$ok &= sql_update(
+			// On parcourt les adresses pour remplir le code du pays
+			$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
+			if ($adresses and is_array($adresses)){
+				foreach ($adresses as $adresse){
+					$ok &= sql_update(
 					'spip_adresses',
 					array('pays_code' => '(SELECT code FROM spip_pays WHERE id_pays='.intval($adresse['pays']).')'),
 					'id_adresse='.intval($adresse['id_adresse'])
-				);
+					);
+				}
 			}
+
+			// On supprime l'ancien
+			$ok &= sql_alter('TABLE spip_adresses DROP pays');
+
+			// On change le nom du nouveau
+			$ok &= sql_alter("TABLE spip_adresses ADD pays VARCHAR(3) NOT NULL DEFAULT '' ");
+			$ok &= sql_update('spip_adresses', array('pays'=> 'pays_code') );
+			$ok &= sql_alter('TABLE spip_adresses DROP pays_code');
+
+			if ($ok){
+				spip_log('Tables coordonnées correctement passsées en version 1.3','coordonnees');
+				ecrire_meta($nom_meta_base_version, $current_version="1.3");
+			}
+			else return false;
+		} else { // on a saute directement a la v1.5 du plugin et donc on n'est pas passe par la case dependance au plugin "Pays"...
+			spip_log('Tables coordonnées non passsées en version 1.3 car plugin Pays absent !','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.2b");
+			return true;
 		}
-
-		// On supprime l'ancien
-		$ok &= sql_alter('TABLE spip_adresses DROP pays');
-
-		// On change le nom du nouveau
-		$ok &= sql_alter('TABLE spip_adresses CHANGE pays_code pays VARCHAR(2) not null default ""');
-
-		if ($ok){
-			spip_log('Tables coordonnées correctement passsées en version 1.3','coordonnees');
-			ecrire_meta($nom_meta_base_version, $current_version="1.3");
-		}
-		else return false;
 	}
 
 	// On avait supprimer les types, mais ils reviennent en force mais dans les LIENS
