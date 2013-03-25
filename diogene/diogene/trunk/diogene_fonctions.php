@@ -139,7 +139,7 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 		}
 	}else{
 		if($objet == 'article')
-			$url = generer_url_ecrire_article($id);
+			$url = generer_url_ecrire_article_dist($id);
 		else
 			$url = generer_url_ecrire_objet($objet,$id);
 	}
