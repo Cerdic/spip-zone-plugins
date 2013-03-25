@@ -1,0 +1,53 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:emailtospip:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>           
+     [(#SAISIE{input, email,
+				label=<:emailtospip:cfg_email:>})]        
+     
+     [(#SAISIE{input, email_pwd,
+				label=<:emailtospip:cfg_email_pwd:>})]             
+            
+     [(#SAISIE{input, hote_imap,
+				label=<:emailtospip:cfg_hote_imap:>,
+        explication=<:emailtospip:cfg_hote_imap_explication:>})]           
+            
+     [(#SAISIE{input, hote_port,
+				label=<:emailtospip:cfg_hote_port:>,
+        explication=<:emailtospip:cfg_hote_port_explication:>,
+        defaut=143})] 
+        
+     [(#SAISIE{input, inbox,
+				label=<:emailtospip:cfg_inbox:>,
+        defaut=INBOX})]     
+        
+     [(#SAISIE{input, pwd,
+				label=<:emailtospip:cfg_pwd:>,
+        explication=<:emailtospip:cfg_pwd_explication:>})]    
+        
+            
+      [(#SAISIE{selection, import_statut,
+				label=<:emailtospip:cfg_import_statut:>,
+        cacher_option_intro=true,
+        datas=#ARRAY{            
+      			prop,<:sites:info_statut_site_3:>,
+      			publie,<:sites:info_statut_site_2:>}})]
+            
+      [(#SAISIE{input,id_rubrique,label=<:emailtospip:cfg_id_rubrique:>})]                       
+
+              
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="emailtospip" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

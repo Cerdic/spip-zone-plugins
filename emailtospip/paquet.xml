@@ -1,0 +1,16 @@
+<paquet
+	prefix="emailtospip"
+	categorie="edition"
+	version="1.0.0"
+	etat="experimental"
+	compatibilite="[3.0.7;3.0.*]"
+	logo="prive/themes/spip/images/emailtospip-64.png"
+	documentation="http://contrib.spip.net/4355"
+>
+	<nom>Publication par email</nom>
+	<auteur lien='http://www.erational.org'>erational</auteur>
+  <licence>GNU/GPL</licence>
+  
+  <pipeline nom="taches_generales_cron" inclure="emailtospip_pipelines.php" />
+	
+</paquet>
