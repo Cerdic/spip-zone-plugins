@@ -52,7 +52,7 @@
 		<p><:urls_pages:explication_code_htacess:></p>
 		#BOITE_OUVRIR{'',simple info}<small><tt>
 		<BOUCLE_code(DATA){source table, #CONFIG{urls_pages}|unserialize}{!cle = rewritebase}{valeur != ''}{"<br>"}>
-		RewriteRule ^#VALEUR(\.html)?$    spip.php?page=#VALEUR [QSA,E=url_propre:$0,L]
+		RewriteRule ^#VALEUR(\.html)?$    spip.php?page=#CLE [QSA,E=url_propre:$0,L]
 		</BOUCLE_code>
 		</small></tt>#BOITE_FERMER
 		</B_code>

@@ -74,8 +74,9 @@ function urls_pages_lister_pages () {
 
 	// 2: lister les squelettes à exclure
 	// squelettes de base à exclure
-	$exclure_base = array('sommaire', 'login', '401', '403', '404');
+	$exclure_base = array('sommaire', 'login');
 	// les squelettes 'techniques' de Z
+	$exclure_z = array();
 	if ( $z and is_array($dossiers_z) ) {
 		foreach ( $dossiers_z as $dossier ) {
 			foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
@@ -118,13 +119,15 @@ function urls_pages_lister_pages () {
 				$exclure = false;
 				// tests par tableaux
 				// liste prédéfinie, squelettes des objets, squelettes techniques
-				if ( is_array($exclure_z) and is_array($exclure_base)
-				  and ( in_array($squelette, $exclure_z)
-				    or in_array($squelette, $exclure_base) ) )
+				if ( in_array($squelette, $exclure_z)
+				  or in_array($squelette, $exclure_base) )
 					$exclure = true;
 				// tests par regex
 				// squelettes commenant par "inc-"
 				if ( preg_match("/^inc-/", $squelette) )
+					$exclure = true;
+				// 40x,30x
+				if ( preg_match("/^[4|3][\d]{2}$/", $squelette) )
 					$exclure = true;
 				// squelettes des objets éditoriaux : objet, objet-10/objet=10, objet.en
 				if ( is_array($exclure_objets) ) {
