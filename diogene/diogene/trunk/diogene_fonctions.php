@@ -77,7 +77,7 @@ function diogene_nombre_attente($id_diogene){
 // TODO : passer le define dans une valeur de config
 if (!test_espace_prive() AND (defined('_DIOGENE_MODIFIER_PUBLIC') ? _DIOGENE_MODIFIER_PUBLIC : true)) {
 	function generer_url_ecrire_article($id, $args, $ancre, $public, $connect){
-		return url_absolue(generer_url_publier($id,article,'article',false));
+		return url_absolue(generer_url_publier($id,article,'article',null,true));
 	}
 }
 
@@ -138,7 +138,10 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 			$url = parametre_url($url,$id_table_objet,intval($id));
 		}
 	}else{
-		$url = generer_url_ecrire_objet($objet,$id);
+		if($objet == 'article')
+			$url = generer_url_ecrire_article($id);
+		else
+			$url = generer_url_ecrire_objet($objet,$id);
 	}
 	return $url;
 }
