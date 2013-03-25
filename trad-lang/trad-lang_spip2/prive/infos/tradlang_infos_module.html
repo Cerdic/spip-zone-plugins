@@ -2,7 +2,7 @@
 #SET{str_mere,#ARRAY}
 <div>
 	<h4>[(#LANG_MERE|traduire_nom_langue)][ ((#LANG_MERE))] - <:tradlang:label_langue_mere:></h4>
-	<BOUCLE_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
+	<BOUCLE_langue_mere(TRADLANGS){id_tradlang_module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
 	#SET{total_mere,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p>
 	</B_langue_mere>
 	<BOUCLE_total_item_langue_mere_new(TRADLANGS){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_langue_mere_new>
@@ -12,23 +12,23 @@
 	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
 	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]
 </div>
-<BOUCLE_langues(TRADLANGS){module}{fusion lang}{lang !IN #LANG_MERE}>
+<BOUCLE_langues(TRADLANGS){id_tradlang_module}{fusion lang}{lang !IN #LANG_MERE}>
 #SET{str_cible,#ARRAY}
 #SET{total,0}
 <div>
 	#SET{update,non}
 	<h4>[(#LANG|traduire_nom_langue)][ ((#LANG))]</h4>
-	<BOUCLE_total_item(TRADLANGS){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
+	<BOUCLE_total_item(TRADLANGS){id_tradlang_module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 	#SET{total,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p></B_total_item>
-	<BOUCLE_total_item_new(TRADLANGS){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
+	<BOUCLE_total_item_new(TRADLANGS){id_tradlang_module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_new>
 	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_new>
-	<BOUCLE_total_item_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
+	<BOUCLE_total_item_modif(TRADLANGS){id_tradlang_module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_modif>
-	<BOUCLE_revise_inexistants(TRADLANGS){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
+	<BOUCLE_revise_inexistants(TRADLANGS){id_tradlang_module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}> </BOUCLE_revise_inexistants>
 	[(#SET{nb_manquant,#TOTAL_BOUCLE})]  #SET{update,oui}
 	<p class="attention"><:tradlang:items_manquants{nb=#GET{nb_manquant}}:></p>
 	</B_revise_inexistants>
-	<BOUCLE_total_item_trop(TRADLANGS){module}{lang=#LANG}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
+	<BOUCLE_total_item_trop(TRADLANGS){id_tradlang_module}{lang=#LANG}{id !IN #GET{str_mere}}> </BOUCLE_total_item_trop>
 	#SET{nb_trop,#TOTAL_BOUCLE} #SET{update,oui}
 	<p class="attention"><:tradlang:items_en_trop{nb=#GET{nb_trop}}:></p></B_total_item_trop>
 	[(#GET{update}|=={oui}|oui)
