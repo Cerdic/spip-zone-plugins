@@ -60,18 +60,15 @@ function exec_pdf_paniers_mois(){
 	$pdf->AddCol('date_distribution',40,_T('amap:date'),'L');
 	$pdf->AddCol('signature',40,_T('amap:signature'),'L');
 	/* recupere le type panier et l'id_auteur associe */
-    if ($type_paniers_auteurs = sql_select('id_auteur, type_panier', 'spip_auteurs')) {
-		while ($row = sql_fetch($type_paniers_auteurs)) {
-			$type_panier_extension[$row['id_auteur']] = array("type_panier" => _T('amap:'.$row['type_panier']));
+	if ($infos_paniers_auteurs = sql_select('id_auteur, type_panier', 'spip_auteurs')) {
+		while ($row = sql_fetch($infos_paniers_auteurs)) {
+			$extension[$row['id_auteur']] = array(
+				"type_panier" => _T('amap:'.$row['type_panier']),
+				"dispo" => _T('amap:'.$row['dispo'])
+			);
 		}
-    }
-	/* recupere la disponibilite et l'id_auteur associe 
-    if ($dispo_auteurs = sql_select('id_auteur, dispo', 'spip_amap_paniers')) {
-		while ($row = sql_fetch($dispo_auteurs)) {
-			$dispo_extension[$row['id_auteur']] = array("dispo" => _T('amap:'.$row['dispo']));
-		}
-    }*/
-	$pdf->Query_extended(sql_select("a.nom as nom,  DATE_FORMAT(b.date_distribution,'à %k:%i le %d/%m/%Y') as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution BETWEEN ".sql_quote(date('Y-m-j H:i:s',$mois_distri_debut)).' AND '.sql_quote(date('Y-m-j H:i:s',$mois_distri_fin)),"" , "nom"), $prop, $type_panier_extension, "id_auteur");
+	}
+	$pdf->Query_extended(sql_select("a.nom as nom,  DATE_FORMAT(b.date_distribution,'à %k:%i le %d/%m/%Y') as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution BETWEEN ".sql_quote(date('Y-m-j H:i:s',$mois_distri_debut)).' AND '.sql_quote(date('Y-m-j H:i:s',$mois_distri_fin)),"" , "nom"), $prop, $extension, "id_auteur");
 	$pdf->Output();
 	}
 }
