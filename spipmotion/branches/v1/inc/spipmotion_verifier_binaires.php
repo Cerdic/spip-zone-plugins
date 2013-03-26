@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2011 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -55,7 +55,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	}
 	
 	if(!$valeurs)
-		$valeurs = lire_config('spipmotion');
+		$valeurs = lire_config('spipmotion',array());
 
 	if(!function_exists('exec')){
 		ecrire_config('spipmotion_exec_casse', 'oui');
@@ -183,7 +183,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	}else{
 		effacer_config('spipmotion_casse');
 	}
-	spip_log($erreurs,'test');
+	
 	if($notif){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('spipmotion_verifier_binaires', 1,

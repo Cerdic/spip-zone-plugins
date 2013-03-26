@@ -78,7 +78,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				if(strpos($contenu, $reg) !== false){
 					$index = array_push($pregs, $reg);
 					$indexs[$key] = $index;
-					spip_log($indexs,'test');
 				}
 			}
 
@@ -207,6 +206,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_ffmpeg2theora']['version'] = $infos[1];
 				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
 				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']),'','spipmotion_metas');
+			}else{
+				effacer_meta('spipmotion_ffmpeg2theora','spipmotion_metas');
 			}
 			
 			/**
@@ -221,6 +222,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_flvtool2']['flvtool2'] = true;
 				$data['spipmotion_flvtool2']['version'] = $infos[1];
 				ecrire_meta('spipmotion_flvtool2',serialize($data['spipmotion_flvtool2']),'','spipmotion_metas');
+			}else{
+				effacer_meta('spipmotion_flvtool2','spipmotion_metas');
 			}
 			
 			/**
@@ -235,6 +238,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_flvtoolplus']['flvtoolplus'] = true;
 				$data['spipmotion_flvtoolplus']['version'] = $infos[1];
 				ecrire_meta('spipmotion_flvtoolplus',serialize($data['spipmotion_flvtoolplus']),'','spipmotion_metas');
+			}else{
+				effacer_meta('spipmotion_flvtoolplus','spipmotion_metas');
 			}
 			
 			/**
@@ -249,6 +254,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_mediainfo']['mediainfo'] = true;
 				$data['spipmotion_mediainfo']['version'] = $infos[1];
 				ecrire_meta('spipmotion_mediainfo',serialize($data['spipmotion_mediainfo']),'','spipmotion_metas');
+			}else{
+				effacer_meta('spipmotion_mediainfo','spipmotion_metas');
 			}
 			$inc_meta = charger_fonction('meta', 'inc');
 			$inc_meta('spipmotion_metas');
