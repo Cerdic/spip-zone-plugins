@@ -36,7 +36,7 @@
 			<label for="severites"><:tickets:champ_severite:></label>
 			<select name="severites[]" id="severites" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
 			<BOUCLE_severites(TICKETS){fusion severite}{severite != ''}>
-				<option value="#SEVERITE"[(#SEVERITE|in_array{#ENV{severites,#ARRAY}}|oui)selected="selected"]>[(#SEVERITE|tickets_texte_severite)]</option>]
+				<option value="#SEVERITE"[(#SEVERITE|in_array{#ENV{severites,#ARRAY}}|oui)selected="selected"]>[(#SEVERITE|tickets_texte_severite)]</option>
 			</BOUCLE_severites>
 			</select>
 		</li>
@@ -46,7 +46,7 @@
 			<label for="trackers"><:tickets:champ_type:></label>
 			<select name="trackers[]" id="trackers" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
 			<BOUCLE_trackers(TICKETS){fusion tracker}{tracker != ''}>
-				<option value="#TRACKER"[(#TRACKER|in_array{#ENV{trackers,#ARRAY}}|oui)selected="selected"]>[(#TRACKER|tickets_texte_tracker)]</option>]
+				<option value="#TRACKER"[(#TRACKER|in_array{#ENV{trackers,#ARRAY}}|oui)selected="selected"]>[(#TRACKER|tickets_texte_tracker)]</option>
 			</BOUCLE_trackers>
 			</select>
 		</li>
@@ -57,7 +57,7 @@
 			<select name="projet" id="projet">
 				<option value=""> - </option>
 			<BOUCLE_projets(TICKETS){fusion projet}{projet != ''}>
-				<option value="#PROJET"[(#PROJET|=={#ENV{projet}}|oui)selected="selected"]>#PROJET</option>]
+				<option value="#PROJET"[(#PROJET|=={#ENV{projet}}|oui)selected="selected"]>#PROJET</option>
 			</BOUCLE_projets>
 			</select>
 		</li>
@@ -68,7 +68,7 @@
 			<select name="composant" id="composant">
 				<option value=""> - </option>
 			<BOUCLE_composants(TICKETS){fusion composant}{composant != ''}>
-				<option value="#COMPOSANT"[(#COMPOSANT|=={#ENV{composant}}|oui)selected="selected"]>#COMPOSANT</option>]
+				<option value="#COMPOSANT"[(#COMPOSANT|=={#ENV{composant}}|oui)selected="selected"]>#COMPOSANT</option>
 			</BOUCLE_composants>
 			</select>
 		</li>
@@ -79,7 +79,7 @@
 			<select name="version" id="version">
 				<option value=""> - </option>
 			<BOUCLE_versions(TICKETS){fusion version}{version != ' '}>
-				<option value="#VERSION"[(#VERSION|=={#ENV{version}}|oui)selected="selected"]>#VERSION</option>]
+				<option value="#VERSION"[(#VERSION|=={#ENV{version}}|oui)selected="selected"]>#VERSION</option>
 			</BOUCLE_versions>
 			</select>
 		</li>
@@ -90,7 +90,7 @@
 			<select name="jalon" id="jalon">
 				<option value=""> - </option>
 			<BOUCLE_jalons(TICKETS){fusion jalon}{jalon != ''}>
-				<option value="#JALON"[(#JALON|=={#ENV{jalon}}|oui)selected="selected"]>#JALON</option>]
+				<option value="#JALON"[(#JALON|=={#ENV{jalon}}|oui)selected="selected"]>#JALON</option>
 			</BOUCLE_jalons>
 			</select>
 		</li>
@@ -101,7 +101,7 @@
 			<select name="navigateur" id="navigateur">
 				<option value=""> - </option>
 			<BOUCLE_navigateurs(TICKETS){fusion navigateur}{navigateur != ' '}>
-				<option value="#NAVIGATEUR"[(#NAVIGATEUR|=={#ENV{navigateur}}|oui)selected="selected"]>#NAVIGATEUR</option>]
+				<option value="#NAVIGATEUR"[(#NAVIGATEUR|=={#ENV{navigateur}}|oui)selected="selected"]>#NAVIGATEUR</option>
 			</BOUCLE_navigateurs>
 			</select>
 		</li>
@@ -121,7 +121,7 @@
 			<label for="assignes"><:tickets:champ_id_assigne:></label>
 			<select id="assignes" name="assignes[]" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
 				<BOUCLE_assignes(TICKETS){fusion id_assigne}{id_assigne != ''}>
-					<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{assignes,#ARRAY}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
+					<option value="#ID_ASSIGNE"[(#ID_ASSIGNE|in_array{#ENV{assignes,#ARRAY}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_ASSIGNE}</option>
 				</BOUCLE_assignes>
 			</select>
 		</li>

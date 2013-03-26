@@ -34,6 +34,7 @@
 	<ul class="liste-items">
 		<BOUCLE_documents_joints(DOCUMENTS) {id_ticket} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}{tout}>
 		<li class="item">
+			[(#LOGO_DOCUMENT|image_reduire{100})]
 			<strong class="#EDIT{titre}"><a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
 			<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
 			[<div class="date"><:tickets:info_document_ajoute:> <abbr title="[(#DATE|date_iso)]">(#DATE|affdate)</abbr></div>]

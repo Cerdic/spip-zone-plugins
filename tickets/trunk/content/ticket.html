@@ -10,7 +10,7 @@
 		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>]
 		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:suivre_tickets_rss_unique:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]" class="i_rss"><:tickets:suivre_tickets_rss_unique:></a>
 		</div>
 	</div>
 
@@ -21,8 +21,8 @@
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
 			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
 			</BOUCLE_assigne>
-			[<dt><:tickets:champ_severite:></dt><dd>[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt><:tickets:champ_type:></dt><dd>(#TRACKER|tickets_texte_tracker)</dd>]
+			[<dt><:tickets:champ_severite:></dt><dd class="#EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt><:tickets:champ_type:></dt><dd class="#EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
 			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
 			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
@@ -64,13 +64,14 @@
 	<ul class="forum comments-items">
 	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
 	<BOUCLE_si_comment(CONDITION){si #PLUGIN{comments}|oui}>
+		
 		<BOUCLE_comments-list(FORUMS) {si #GET{config_thread}|=={list}|oui}{statut IN publie} {id_ticket} {plat} {par date}>
 		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
 		</li>
 		</BOUCLE_comments-list>
 		</B_comments-list>
-		<BOUCLE_comments-thread(FORUMS) {si #GET{config_thread}|=={thread}|oui}{statut IN publie} {id_ticket} {par date}>
+		<BOUCLE_comments-thread(FORUMS) {si #GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread1}}|oui}{statut IN publie} {id_ticket} {par date}>
 		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 			[(#GET{autoriser_commenter}|=={oui}|oui)
@@ -126,7 +127,6 @@
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 		(#INCLURE{javascript/thread-move.js}|compacte{js})
 		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
-		</B_si_thread-1>
 		<//B_comments-thread>
 		<//B_comments-list>
 	</BOUCLE_si_comment>
