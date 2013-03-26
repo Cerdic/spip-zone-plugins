@@ -106,7 +106,7 @@ function urls_pages_lister_pages () {
 					$squelettes[$dossier.'/content'][] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
 			} else if ($z == 'z') {
 				foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
-					$squelettes[$dossier.'/contenu'][] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
+					$squelettes[$dossier.'/contenu'][] = preg_replace('/^page-/','',strtolower(pathinfo($chemin, PATHINFO_FILENAME)));
 			}
 		}
 	}
