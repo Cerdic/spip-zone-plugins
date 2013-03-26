@@ -20,7 +20,7 @@
 						<option value=""><:memoization:option_methode_defaut:>[
 							((#VAL|memoization_methode))]</option>
 						<option value="apc"[
-							selected="(#ENV{apc}|=={apc}|?{selected})"][
+							selected="(#ENV{methode}|=={apc}|?{selected})"][
 								disabled="(#VAL{apc}|memoization_methode|non|?{disabled})"]
 								><:memoization:option_methode_apc:></option>
 						<option value="xcache"[
