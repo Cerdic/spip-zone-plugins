@@ -232,7 +232,7 @@
 			</abbr></th>
 		</tr>
 	</thead>
-	<tbody
+	<tbody>
 	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version?}{jalon?}{composant?}{projet?}{sticked?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
