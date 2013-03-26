@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_ajouter_boussole' => 'Añadiendo las brújulas a su base de datos, tendrá la posibilidad de utilizar los modelos proporcionados para mostrarlos en sus páginas públicas.<br />Si la brújula ya existe este formulario permitirá actualizarla conservando la configuración de la visualización. ',
 	'info_boite_boussoles_gerer' => '<strong>A esta página sólo pueden acceder los responsables del sitio.</strong><p>Permite añadir, actualizar y eliminar las brújulas. También es posible visitar la página de configuración de la visualización de cada brújula.</p>',
-	'info_configurer_boussole' => 'Este formulario le permite configurar la visualización de la brújula eligiendo los sitios a mostrar o no y el orden de visualización en un grupo. Los sitios no mostrados se indican por un fondo tramado y una fuente color gris. ', # MODIF
+	'info_configurer_boussole' => 'Este formulario le permite configurar la visualización de la brújula eligiendo los sitios a mostrar o no y el orden de visualización en un grupo. Los sitios no mostrados se indican por un fondo tramado y una fuente color gris. ',
 	'info_fichier_boussole' => 'Introduzca la url del archivo de descripción de su brújula',
 	'info_liste_aucune_boussole' => 'Ninguna brújula se ha cargado aún en su base de datos. Utilice el siguiente formulario para añadir una.',
 	'info_site_boussole' => 'Este sitio forma parte de la brújula:',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Versión',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»', # MODIF
+	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»',
 	'message_nok_champ_obligatoire' => 'Este campo es obligatorio',
 	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)',
 	'message_nok_xml_introuvable' => 'El archivo «@fichier@» no se encuentra',
