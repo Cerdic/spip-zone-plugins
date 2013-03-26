@@ -14,7 +14,7 @@ function formulaires_editer_email_charger_dist($id_email='new', $objet='', $id_o
 }
 
 function formulaires_editer_email_verifier_dist($id_email='new', $objet='', $id_objet='', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('email', $id_email);
+	$erreurs = formulaires_editer_objet_verifier('email', $id_email, array('email') );
 	return $erreurs;
 }
 

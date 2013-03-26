@@ -14,7 +14,7 @@ function formulaires_editer_adresse_charger_dist($id_adresse='new', $objet='', $
 }
 
 function formulaires_editer_adresse_verifier_dist($id_adresse='new', $objet='', $id_objet='', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('adresse', $id_adresse);
+	$erreurs = formulaires_editer_objet_verifier('adresse', $id_adresse, array() );
 	return $erreurs;
 }
 

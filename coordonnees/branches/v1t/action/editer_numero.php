@@ -1,12 +1,13 @@
 <?php
-
 /**
  * Plugin Coordonnées
  * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_numero_dist($arg=null) {
+
+function action_editer_numero_dist($arg=NULL) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -21,14 +22,16 @@ function action_editer_numero_dist($arg=null) {
 		$id_numero = insert_numero();
 	}
 
-	if ($id_numero) $err = revisions_numeros($id_numero);
+	if ($id_numero)
+		$err = revisions_numeros($id_numero);
+
 	return array($id_numero, $err);
 }
 
 
 function insert_numero($c = '') {
 	$champs = array(
-		'numero' => _T('coordonnees:nouveau_numero')
+		'numero' => _T('coordonnees:item_nouveau_numero')
 	);
 
 	// Envoyer aux plugins
@@ -39,16 +42,28 @@ function insert_numero($c = '') {
 		'data' => $champs
 	));
 
+	// Ajouter les champs
 	$id_numero = sql_insertq("spip_numeros", $champs);
 
+	// Renvoyer aux plugins
+	pipeline('post_insertion', array(
+		'args' => array(
+			'table' => 'spip_numeros',
+		),
+		'data' => $champs
+	));
+
 	if (!$c)
-		$c = array('objet' => _request('objet'),
+		$c = array(
+			'objet' => _request('objet'),
 			'id_objet' => _request('id_objet'),
-			'type' => _request('type'));
+			'type' => _request('type'),
+		);
 
 	// ajouter la liaison si presente
-	if (!empty($c['objet']) AND !empty($c['id_objet'])) {
-		if (empty($c['type'])) $c['type'] = '';
+	if ($c['objet'] AND $c['id_objet']) {
+		if (empty($c['type']))
+			$c['type'] = '';
 		$c['id_numero'] = $id_numero;
 		sql_insertq("spip_numeros_liens", $c);
 	}
@@ -58,15 +73,15 @@ function insert_numero($c = '') {
 
 
 // Enregistrer certaines modifications d'un numero
-function revisions_numeros($id_numero, $c=false) {
+function revisions_numeros($id_numero, $c=FALSE) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
-	if ($c === false) {
+	if ($c === FALSE) {
 		$c = array();
 		foreach (array(
-				'numero', 'titre') as $champ
-		) {
-			if (($a = _request($champ)) !== null) {
+			'numero', 'titre'
+		) as $champ ) {
+			if (($a = _request($champ)) !== NULL) {
 				$c[$champ] = $a;
 			}
 		}

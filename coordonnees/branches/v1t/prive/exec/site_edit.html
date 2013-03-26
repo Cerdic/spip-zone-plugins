@@ -1,8 +1,8 @@
 [(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<!--#hierarchie-->
 	<ul id="chemin">
-		<li><span class="bloc"><:coordonnees:editer_site:></li>
-		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_email}|intval|?{<:coordonnees:editer_site:>,<:coordonnees:nouveau_site:>})]</span></li>
+		<li><span class="bloc"><:ecrire:info_site_web:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_syndic}|intval|?{<:ecrire:icone_modifier_site:>,<:ecrire:icone_referencer_nouveau_site:>})]</span></li>
 	</ul>
 	<!--/#hierarchie-->
 
@@ -23,10 +23,10 @@
 	<div class="entete-formulaire">
 		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{images/site-24.png}, #LANG_LEFT})]
 
-		<h1>[(#ENV{id_syndic}|intval|?{<:coordonnees:editer_site:>,<:coordonnees:nouveau_site:>})]</h1>
+		<h1>[(#ENV{id_syndic}|intval|?{<:ecrire:icone_modifier_site:>,<:ecrire:icone_referencer_nouveau_site:>})]</h1>
 	</div>
 		<div class='ajax'>
-		#FORMULAIRE_EDITER_SITE{#ENV{id_syndic,new},#ENV{id_rubrique},#ENV{retour},0,'sites_edit_config',#ARRAY{},'',#ENV{objet},#ENV{id_objet}}
+		#FORMULAIRE_EDITER_SYNDIC{#ENV{id_syndic,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
 		</div>
 	</div>
 ]

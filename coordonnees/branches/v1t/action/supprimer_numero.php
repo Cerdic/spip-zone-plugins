@@ -6,7 +6,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_numero_dist($arg=null) {
+function action_supprimer_numero_dist($arg=NULL) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -14,13 +14,13 @@ function action_supprimer_numero_dist($arg=null) {
 	$arg = explode('/', $arg);
 
 	// cas suppression d'un numero et de toutes ses liaisons
-	if ($arg[0] == 'numero' and intval($arg[1])) {
+	if ($arg[0] == 'numero' AND intval($arg[1])) {
 		action_supprimer_numero_post($arg[1]);
 	}
 
 	// cas de suppression d'un lien donne
 	// (et de le numero avec s'il n'existe plus de liaison ensuite)
-	elseif ($arg[0] == 'lien' and intval($arg[1]) and intval($arg[3])) {
+	elseif ($arg[0] == 'lien' AND intval($arg[1]) AND intval($arg[3])) {
 		action_supprimer_numero_post($arg[1], $arg[2], $arg[3], $arg[4]);
 	}
 
@@ -33,26 +33,27 @@ function action_supprimer_numero_post($id_numero, $objet='', $id_objet='', $type
 
 	// on passe objet et id_objet en plus de id_numero...
 	// c'est que l'on souhaite faire attention aux liaisons
-	$il_en_reste = false;
+	$il_en_reste = FALSE;
 
-	if ($objet and $id_objet = intval($id_objet)) {
+	if ($objet AND $id_objet = intval($id_objet)) {
 		// on supprime les liens entre l'objet et le numero...
-		// s'il reste des liens... on ne supprime pas le numero :
-		// c'est qu'elle est encore utilisée quelque part
-		sql_delete("spip_numeros_liens", array(
-			"id_numero=" . sql_quote($id_numero),
+		sql_delete('spip_numeros_liens', array(
+			"id_numero=" . intval($id_numero),
 			"objet=" . sql_quote($objet),
-			"id_objet=" . sql_quote($id_objet),
+			"id_objet=" . intval($id_objet),
 			"type=" . sql_quote($type),
 		));
-		$il_en_reste = sql_countsel('spip_numeros_liens', "id_numero=" . sql_quote($id_numero));
+		$il_en_reste = sql_countsel('spip_numeros_liens', "id_numero=" . intval($id_numero));
 	}
 
 	if (!$il_en_reste) {
-		sql_delete("spip_numeros", "id_numero=" . sql_quote($id_numero));
+		// s'il reste des liens... on ne supprime pas le numero :
+		// c'est qu'elle est encore utilisée quelque part
+		sql_delete('spip_numeros', "id_numero=" . intval($id_numero));
 	}
 
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_numero/$id_numero'");
 }
+
 ?>

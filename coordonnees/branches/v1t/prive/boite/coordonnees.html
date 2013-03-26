@@ -44,7 +44,7 @@
 			]
 			[(#ENV{new}|=={site}|ou{#ENV{id_syndic}}|oui)
 				<h3>[(#ENV{id_syndic}|intval|?{<:ecrire:icone_modifier_site:>,<:ecrire:icone_referencer_nouveau_site:>})]</h3>
-				<div class='ajax'>[(#FORMULAIRE_EDITER_SITE{#ENV{id_syndic,new},#ENV{id_rubrique},#ENV{retour},0,'sites_edit_config',#ARRAY{},'',#ENV{objet},#ENV{id_objet}})]</div>[(#REM)<!-- ok dans le principe, mais ce formulaire ne fait pas la liaison... -->]
+				<div class='ajax'>[(#FORMULAIRE_EDITER_SYNDIC{#ENV{id_syndic,new},#ENV{objet},#ENV{id_objet},#GET{retour}#sites_#ENV{objet}_#ENV{id_objet}})]</div>[(#REM)<!-- ok dans le principe, mais ce formulaire ne fait pas la liaison... -->]
 			]
 		]
 

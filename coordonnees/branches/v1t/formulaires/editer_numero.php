@@ -14,7 +14,7 @@ function formulaires_editer_numero_charger_dist($id_numero='new', $objet='', $id
 }
 
 function formulaires_editer_numero_verifier_dist($id_numero='new', $objet='', $id_objet='', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('numero', $id_numero);
+	$erreurs = formulaires_editer_objet_verifier('numero', $id_numero, array() );
 	return $erreurs;
 }
 

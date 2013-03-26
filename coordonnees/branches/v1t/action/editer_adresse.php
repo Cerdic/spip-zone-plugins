@@ -1,12 +1,13 @@
 <?php
-
 /**
  * Plugin Coordonnées
  * Licence GPL (c) 2010 Matthieu Marcillaud
 **/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_adresse_dist($arg=null) {
+
+function action_editer_adresse_dist($arg=NULL) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -21,12 +22,14 @@ function action_editer_adresse_dist($arg=null) {
 		$id_adresse = insert_adresse();
 	}
 
-	if ($id_adresse) $err = revisions_adresses($id_adresse);
+	if ($id_adresse)
+		$err = revisions_adresses($id_adresse);
+
 	return array($id_adresse,$err);
 }
 
 
-function insert_adresse($c = '') {
+function insert_adresse($c='') {
 	$champs = array(
 		'voie' => _T('coordonnees:item_nouvelle_adresse')
 	);
@@ -39,18 +42,30 @@ function insert_adresse($c = '') {
 		'data' => $champs
 	));
 
-	$id_adresse = sql_insertq("spip_adresses", $champs);
+	// Ajouter les champs
+	$id_adresse = sql_insertq('spip_adresses', $champs);
+
+	// Renvoyer aux plugins
+	pipeline('post_insertion', array(
+		'args' => array(
+			'table' => 'spip_adresses',
+		),
+		'data' => $champs
+	));
 
 	if (!$c)
-		$c = array('objet' => _request('objet'),
+		$c = array(
+			'objet' => _request('objet'),
 			'id_objet' => _request('id_objet'),
-			'type' => _request('type'));
+			'type' => _request('type'),
+		);
 
 	// ajouter la liaison si presente
-	if (!empty($c['objet']) AND !empty($c['id_objet'])) {
-		if (empty($c['type'])) $c['type'] = '';
+	if ($c['objet'] AND $c['id_objet']) {
+		if (empty($c['type']))
+			$c['type'] = '';
 		$c['id_adresse'] = $id_adresse;
-		sql_insertq("spip_adresses_liens", $c);
+		sql_insertq('spip_adresses_liens', $c);
 	}
 
 	return $id_adresse;
@@ -58,16 +73,15 @@ function insert_adresse($c = '') {
 
 
 // Enregistrer certaines modifications d'une adresse
-function revisions_adresses($id_adresse, $c=false) {
+function revisions_adresses($id_adresse, $c=FALSE) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
-	if ($c === false) {
+	if ($c === FALSE) {
 		$c = array();
 		foreach (array(
-				'voie', 'complement', 'boite_postale',
-				'code_postal', 'ville', 'region', 'pays', 'titre') as $champ
-		) {
-			if (($a = _request($champ)) !== null) {
+			'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'pays', 'titre'
+		) as $champ ) {
+			if (($a = _request($champ)) !== NULL) {
 				$c[$champ] = $a;
 			}
 		}

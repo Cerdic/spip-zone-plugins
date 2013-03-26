@@ -1,5 +1,5 @@
 
-<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_email,nouveau}'>
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_syndic,nouveau} spip formulaire_editer formulaire_editer_site formulaire_editer_site-#ENV{id_site,nouveau}'>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -7,15 +7,16 @@
 	[(#ENV{editable}|oui)
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<input type='hidden' name='id_email' value='#ENV{id_email}' />
+			<input type='hidden' name='id_syndic' value='#ENV{id_email}' />
 			<input type='hidden' name='objet' value='#ENV{objet}' />
 			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
-				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
+				[(#SAISIE{input, nom_site,	label=<:info_nom_site_2:>})]
 			[(#ENV{id_objet}|oui)
-				[(#SAISIE{type_mel, type, label=<:coordonnees:label_type_email:>})]
+				[(#SAISIE{type_mel, type, label=<:coordonnees:label_type_url:>})]
 			]
-				[(#SAISIE{input, email, obligatoire, label=<:coordonnees:label_email:>})]
+				[(#SAISIE{input, url_site, label=<:ecrire:entree_adresse_site:>})]
+				[(#SAISIE{textarea, descriptif, rows='4', cols='40', label=<:ecrire:entree_description_site:>})]
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
