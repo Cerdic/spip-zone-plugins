@@ -24,7 +24,16 @@ function embed_url($url) {
 	} else { // Si pas sauvegardé
 		// Gérer les images Flickr à part
 		// car autoembed ne gère que les vidéos de Flickr
-		if (preg_match("/^http\:\/\/(www\.)?flickr\.com/i", $url)) {
+		// sets
+		if (preg_match(",^https?\://(www\.)?flickr\.com/photos/[^/]*/sets/.+,i", $url)) {
+			if ($page = @join("",file($url))) {
+				if (preg_match(',<meta property="og:image" content="(.*)" />,', $page, $i1)) {
+					$img = $i1[1];
+					$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_w."px; max-height: ".$max_i."px;'/></a></div>";
+				}
+			}
+		}
+		if (preg_match("/^https?\:\/\/(www\.)?flickr\.com/i", $url)) {
 			$oembed = "http://www.flickr.com/services/oembed/?format=json&url=".$url;
 			$json = @join("",file($oembed));
 			
