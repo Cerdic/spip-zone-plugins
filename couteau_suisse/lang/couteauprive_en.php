@@ -396,9 +396,9 @@ Available arguments: {zone}, {format} and/or {id}.',
 	'horloge:nom' => 'Clock',
 
 	// I
-	'icone_visiter:description' => 'Replaces the standard "<:icone_visiter_site:>" button (top right on this page) with the site logo, if there is one.
+	'icone_visiter:description' => 'Inserts the site logo (if any) in the menu of the private space at the top right of the page, in order to better identify the accessed site.
 
-To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.', # MODIF
+To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.',
 	'icone_visiter:nom' => '"<:icone_visiter_site:>" button',
 	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between &lt;head&gt; et &lt;/head&gt;. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
 	'insert_head:nom' => '#INSERT_HEAD tag',
