@@ -2,7 +2,7 @@
 /**
  * Fonctions
  *
- * @plugin     URLs Personnalisées étendues
+ * @plugin     URLs pages personnalisées
  * @copyright  2013
  * @author     Charles Razack
  * @licence    GNU/GPL
@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Puis on filtres les squelettes qui ne sont pas des pages :
  *  - ceux correspondant à un objet éditorial (article*, rurbique*, etc.)
  *  - liste prédéfinie à exclure : sommaire, login, inc-*...
- *  - squelettes 'techniques' de Z (z_apl...)
+ *  - squelettes 'techniques' (z_apl, 404...)
  *
  * @return array
  *     liste des pages de la forme (page1=>dossier, page2=>dossier ...)
@@ -80,15 +80,15 @@ function urls_pages_lister_pages () {
 	if ( $z and is_array($dossiers_z) ) {
 		foreach ( $dossiers_z as $dossier ) {
 			foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
-				$exclure_z[] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
+				$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
 			foreach ( preg_files("$dossier/content/" . $pattern_html) as $chemin )
-				$exclure_z[] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
+				$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
 		}
 	}
 	// les squelettes des objets éditoriaux
 	if ( $objets_sql = lister_tables_objets_sql() and is_array($objets_sql) )
 		foreach ( $objets_sql as $objet)
-			$exclure_objets[] = strtolower($objet['type']);
+			$exclure_objets[] = $objet['type'];
 
 
 	// 3: lister tous les squelettes dans les répertoires trouvés
@@ -99,14 +99,18 @@ function urls_pages_lister_pages () {
 			// sans Z, rechercher à la racine des dossiers de squelettes
 			if ( !$z ) {
 				foreach ( preg_files("$dossier/" . $pattern_html) as $chemin )
-					$squelettes[$dossier][] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
+					$squelettes[$dossier][] = pathinfo($chemin, PATHINFO_FILENAME);
 			// avec Z, rechercher dans les sous-repertoires 'content' ou 'contenu'
+			// Z 2
 			} else if ($z == 'zcore') {
 				foreach ( preg_files("$dossier/content/" . $pattern_html) as $chemin )
-					$squelettes[$dossier.'/content'][] = strtolower(pathinfo($chemin, PATHINFO_FILENAME));
-			} else if ($z == 'z') {
+					$squelettes[$dossier.'/content'][] = pathinfo($chemin, PATHINFO_FILENAME);
+			}
+			// Z 1 : squelettes préfixés par "page-"
+			else if ($z == 'z') {
 				foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
-					$squelettes[$dossier.'/contenu'][] = preg_replace('/^page-/','',strtolower(pathinfo($chemin, PATHINFO_FILENAME)));
+					if ( preg_match('/^page-/',pathinfo($chemin, PATHINFO_FILENAME)) )
+						$squelettes[$dossier.'/contenu'][] = preg_replace('/^page-/','',pathinfo($chemin, PATHINFO_FILENAME));
 			}
 		}
 	}

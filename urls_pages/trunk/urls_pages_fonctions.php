@@ -2,7 +2,7 @@
 /**
  * Fonctions
  *
- * @plugin     URLs Personnalisées étendues
+ * @plugin     URLs pages personnalisées
  * @copyright  2013
  * @author     Charles Razack
  * @licence    GNU/GPL

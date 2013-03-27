@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_titre_parametrages' => 'URLs personnalisées étendues',
+	'cfg_titre_parametrages' => 'URLs pages personnalisées',
 
 	// L
 	'label_rewritebase' => 'RewriteBase',
@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_code_htaccess' => 'Code .htaccess',
 
 	// E
-	'explication_formulaire_1' => 'Ce formulaire permet de mettre en place des urls personnalisées pour les squelettes ne correspondant à aucun objet éditorial. Ces urls seront prises en charge par la balise <tt>#URL_PAGE</tt>.',
+	'explication_formulaire_1' => 'Ce formulaire permet de mettre en place des urls personnalisées pour les squelettes ne correspondant à aucun objet éditorial : les pages. Leurs urls seront prises en charge par la balise <tt>#URL_PAGE</tt>.',
 	'explication_code_htacess' => 'Copiez le code ci-dessous dans le fichier <tt>.htaccess</tt> afin d\'activer la redirection.',
 	'explication_rewritebase' => 'Si présente, copier la directive RewriteBase du fichier <tt>.htacess</tt>',
 	'explication_ecriture_url' => 'N\'indiquez que la partie figurant après la racine du site :<br>

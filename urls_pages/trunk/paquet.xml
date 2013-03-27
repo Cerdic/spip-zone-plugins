@@ -1,13 +1,13 @@
 <paquet
 	prefix="urls_pages"
 	categorie="statistique"
-	version="0.1.3"
+	version="0.1.4"
 	etat="experimental"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/urls_pages.png"
 >
 
-	<nom>URLs Pages étendues</nom>
+	<nom>URLs pages personnalisées</nom>
 	<!-- Gestion des variantes d'URL des pages (squelettes ne correspondant à aucun objet éditorial) -->
 
 	<auteur>Charles Razack</auteur>

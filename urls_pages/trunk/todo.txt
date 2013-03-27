@@ -1,0 +1,3 @@
+Plugin URLs pages personnalisées : A faire
+
+- Si le plugin "squelettes par mot clé" est actif, exclure de la liste les squelettes <objet>-xxx.html
