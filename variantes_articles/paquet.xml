@@ -1,0 +1,21 @@
+<paquet
+	prefix="variantesarticles"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[2.1.13;3.0.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet généré le 2013-03-27 13:55:54
+	-->
+
+	<nom>Variantes Articles</nom>
+
+	<auteur lien='http://contrib.spip.net/Beurt'>Beurt</auteur>
+
+	<licence>GNU/GPL v3</licence>
+
+
+</paquet>

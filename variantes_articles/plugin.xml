@@ -1,0 +1,19 @@
+<plugin>
+ <nom>Variantes Articles</nom>
+ <version>1.0.0</version>
+ <prefix>variantesarticles</prefix>
+ <etat>dev</etat>
+ <auteur>Beurt</auteur>
+ <description>
+	 Permet de d&eacute;finir une variante du squelette article pour un article donn&eacute;:
+	 
+	Ce plugin compl&egrave;te le principe des [variantes de SPIP->http://www.spip.net/fr_article3445.html] de squelettes, en permettant de faire des squelettes sp&eacute;cifiques pour un article d'un id_article donn&eacute;. Si pour un article d'id_article=XX, un fichier article_XX.html est trouv&eacute;, alors c'est lui qui est utilis&eacute;, sinon ce sera article=YY.html ou article-YY.html... ou article.html qui seront utilis&eacute;s (o&ugrave; YY est un id_rubrique, comme c'est [d&eacute;crit pour le fonctionnement normal des variantes de SPIP->http://www.spip.net/fr_article3445.html])
+
+Ce plug-in est sous licence GNU/GPL v3</description>
+  <lien></lien>
+	<options>
+		variantesarticles_options.php
+	</options>
+	<categorie>navigation</categorie>
+	<necessite id="SPIP" version="[2.1.13;3.0.0]" />
+</plugin>
