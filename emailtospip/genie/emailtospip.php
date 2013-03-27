@@ -89,10 +89,15 @@ function genie_emailtospip_dist($t){
 }
 
 
-// bug de casse  
+// bug de casse sur les vieilles versions PHP 
 // http://docs.php.net/manual/fr/function.imap-utf8.php
+// https://bugs.php.net/bug.php?id=44098
+// http://svn.php.net/viewvc/?view=revision&revision=294699
 function imap_utf8_fix($string) {
-    return iconv_mime_decode($string,0,"UTF-8");
+   if (version_compare(phpversion(), '5.3.3', '>=')) 
+              return $string;
+        else  
+              return iconv_mime_decode($string,0,"UTF-8");
 } 
 
 //
