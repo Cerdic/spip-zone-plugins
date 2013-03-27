@@ -14,7 +14,7 @@
 
 	<BOUCLE_ogg(DOCUMENTS){extension IN ogg}{fichier==/#ENV{nomVideo}\.ogv$}{par num titre}>
 		<source src="#FICHIER" type='video/ogg' /> [(#REM) ; codecs="theora, vorbis" OGV peut utiliser plusieurs codecs, on l'oublie donc ]
-	</BOUCLE>
+	</BOUCLE_ogg>
 
 
 	<BOUCLE_mkv(DOCUMENTS){extension IN mkv}{fichier==/#ENV{nomVideo}\.mkv$}{par num titre}>
