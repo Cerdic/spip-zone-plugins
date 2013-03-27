@@ -5,7 +5,7 @@
 }})
 ][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
-<B_detaillee>
+<B_comment_detaillee>
 [<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 <div class="ticket">
 [(#ENV{recherche}|oui)
@@ -28,29 +28,29 @@
 	<thead>
 		<tr>
 			<th></th>
-			<th>
+			<th[(#ENV{tri_detaillee}|=={id_objet}|oui)class="tri"]>
 				[(#ENV{tri_detaillee}|=={id_objet}|non)[(#TRI{id_objet,#,ajax})]]
 				[(#ENV{tri_detaillee}|=={id_objet}|oui)
-					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',#,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',#,ajax})]]]</th>
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,#,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,#,ajax})]]]</th>
 			<th><:tickets:champ_texte:></th>
-			<th>
+			<th[(#ENV{tri_detaillee}|=={date}|oui)class="tri"]>
 				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={date}|ou{#ENV{tri_detaillee}|non}|oui)
-					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{'>',<:tickets:champ_date:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'<',<:tickets:champ_date:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax})]]]
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(FORUMS){recherche?}{objet=ticket}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_comment_detaillee(FORUMS){recherche?}{objet=ticket}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#INFO_STATUT{ticket, #ID_OBJET}|tickets_icone_statut)]})"][ alt="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"][ title="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"] /></td>
 			<td><strong><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></strong></td>
 			<td><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">#TITRE</a><br />[(#TEXTE|couper{160})]</td>
 			<td>[(#DATE|affdate)]</td>
 		</tr>
-	</BOUCLE_detaillee>
+	</BOUCLE_comment_detaillee>
 	</tbody>
 </table>
 [(#COMPTEUR_BOUCLE|>{10}|oui)
@@ -66,4 +66,4 @@
 </p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
-</B_detaillee>
+</B_comment_detaillee>

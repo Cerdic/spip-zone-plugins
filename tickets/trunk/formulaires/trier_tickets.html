@@ -131,7 +131,7 @@
 		<input type="submit" class="submit" value="<:bouton_valider:>" title="<:info_rechercher:>" />
 	</p>
 	#SET{date_min,''}
-	<BOUCLE_date_debut(ARTICLES){par date}{0,1}>
+	<BOUCLE_date_debut(TICKETS){par date}{0,1}>
 	#SET{date_min,#DATE|affdate{d/m/Y}}
 	</BOUCLE_date_debut>
 	[(#INCLURE{fond=formulaires/dateur/inc-dateur,startDate=#GET{date_min},endDate=[(#ENV{date}|affdate{d/m/Y})]})]
