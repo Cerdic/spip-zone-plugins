@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_hote_port' => 'Port',
   'cfg_hote_port_explication' => '143, 993 (SSL) ou 993/imap/ssl (gmail), .... <a href="http://php.net/manual/fr/function.imap-open.php">infos</a>',
   'cfg_inbox' => 'Dossier distant',
-  'cfg_pwd' => 'Mot de passe',
+  'cfg_pwd' => 'Préfixe',
   'cfg_pwd_explication' => '<i>(Facultatif)</i> Phrase secrète à ajouter dans le sujet de l\'email pour qu\'il soit traité par le plugin.<br />Si ce champs est vide, tous les emails seront importés',
   'cfg_id_rubrique' => 'Id de la rubrique où importer les articles',
 
