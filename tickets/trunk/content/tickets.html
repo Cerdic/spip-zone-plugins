@@ -41,7 +41,7 @@
 	[(#GET{tickets_tries}|!={oui}|oui)
 		[<div class="ajax">
 			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert,1,redac,2,resolu,3,ferme},sticked=on,
-				recherche,jalon,composant,version,navigateur,projet,id_auteur,
+				recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="sticked",
 				titre=<:tickets:tickets_sticked:>}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]"><:tickets:suivre_tickets_rss:></a>
@@ -51,7 +51,7 @@
 		[(#SESSION{id_auteur}|oui)
 			[<div class="ajax">
 				(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_assigne=#SESSION{id_auteur},
-					recherche,jalon,composant,version,navigateur,projet,id_auteur,
+					recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="tickets_assigne",
 					titre=<:tickets:vos_tickets_assignes:>}|trim)
 				<div class="actions rss">
 					<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
@@ -61,7 +61,7 @@
 		[(#SESSION{id_auteur}|oui)
 			[<div class="ajax">
 			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statuts=#ARRAY{0,ouvert,1,redac},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
-				recherche,jalon,composant,version,navigateur,projet,
+				recherche,jalon,composant,version,navigateur,projet,tri_nom="tickets_en_cours",
 				titre=<:tickets:vos_tickets_en_cours:>}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
@@ -73,7 +73,7 @@
 			[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],
 			[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},tri_nom="tickets_autres",
 			titre=#GET{titre}}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur_non,#SESSION{id_auteur}}|parametre_url{id_assigne_non,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
@@ -81,7 +81,7 @@
 		</div>]
 		
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,resolu,1,ferme},
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,resolu,1,ferme},tri_nom="tickets_traites",
 			titre=<:tickets:tickets_traites:>}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
@@ -90,13 +90,12 @@
 
 		[(#SESSION{id_auteur}|oui)
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},tri_nom="tickets_auteur",
 			titre=<:tickets:tous_vos_tickets:>}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
 			</div>
-		</div>]
-		]
+		</div>]]
 		
 		[<div class="ajax">
 			(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
