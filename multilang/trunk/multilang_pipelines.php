@@ -10,7 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string $flux Le contenu du head CSS modifié
  */
 function multilang_insert_head_css($flux){
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$config = lire_config('multilang',array());
 	if($config['multilang_public'] == 'on'){
 
@@ -32,7 +33,8 @@ function multilang_insert_head_css($flux){
  * @return string $flux Le contenu du head modifié
  */
 function multilang_insert_head_prive($flux){
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$config = lire_config('multilang',array());
 
 	$flux .= multilang_inserer_head($config);
@@ -44,11 +46,14 @@ function multilang_insert_head_prive($flux){
  * Insertion dans le pipeline insert_head (SPIP)
  * si on a configuré multilang pour s'insérer dans l'espace public
  *
- * @param string $flux Le contenu du head
- * @return string $flux Le contenu du head modifié
+ * @param string $flux 
+ * 		Le contenu du head
+ * @return string $flux 
+ * 		Le contenu du head modifié
  */
 function multilang_insert_head($flux){
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$config = lire_config('multilang',array());
 
 	if($config['multilang_public'] == 'on'){
@@ -69,41 +74,23 @@ function multilang_inserer_head($config=array()){
 	if(count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 
 		$root = '' ;
-
+		if(isset($config['multilang_public']))
+			unset($config['multilang_public']);
+		if(isset($config['multilang_crayons']))
+			unset($config['multilang_crayons']);
 		if(isset($config['siteconfig']) && $config['siteconfig']){
 			$root .= 'div#configurer-accueil,div.formulaire_configurer_identite' ; // Config Site
+			unset($config['siteconfig']);
 		}
-		if(isset($config['article']) && $config['article']) { // Articles
-			$root .= ',div.formulaire_editer_article';
-		}
-		if(isset($config['breve']) && $config['breve']) { // Breves
-			$root .= ',div.formulaire_editer_breve';
-		}
-		if(isset($config['rubrique']) && $config['rubrique']) { // Rubriques
-			$root .= ',div.formulaire_editer_rubrique';
-		}
-		if(isset($config['auteur']) && $config['auteur']) { // Auteurs
-			$root .= ',div.formulaire_editer_auteur';
-		}
-		if(isset($config['document']) && $config['document']) {  // Docs dans page de presentation rubrique ou article,
-			$root .= ',div#portfolio_portfolio,div#portfolio_documents' ;
-		}
-		if(isset($config['site']) && $config['site']) { // Sites
-			$root .= ',div.formulaire_editer_site';
-		}
-		if(isset($config['evenement']) && $config['evenement']) { // Evenements
-			$root .= ',div.formulaire_editer_evenement';
-		}
-		if(isset($config['motcle']) && $config['motcle']) { // Mots
-			$root .= ',div.formulaire_editer_mot,div.formulaire_editer_groupe_mot';
-		}
-		if(isset($config['gis']) && $config['gis']) { // GIS
-			$root .= ',div.formulaire_editer_gis';
-		}
-
-		// Docs traites a part dans pages d'edition d'articles et de rubriques
-		if($config['document']){
-			$root .= ',div#liste_documents,div.formulaire_editer_document' ; // avec ou sans Mediatheque
+		
+		foreach($config as $conf => $val){
+			if($val == 'on') {
+				if($conf == 'document')
+					$root .= ',div#portfolio_portfolio,div#portfolio_documents,div#liste_documents,div.formulaire_editer_document' ;
+				else
+					$root .= ',div.formulaire_editer_'.$conf;
+				unset($config[$conf]);
+			}
 		}
 		// Appel de multilang_init_lang si
 		// - document.ready
@@ -184,39 +171,28 @@ function multilang_inserer_head($config=array()){
  */
 function multilang_affichage_final($flux){
 	if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js'){
-		$root = '' ;
-		include_spip('inc/config');
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
 		$config = lire_config('multilang',array());
+		
+		/**
+		 * On n'utilise multilang que si l'espace public est activé ainsi que les crayons
+		 */
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
+			unset($config['multilang_public']);
+			unset($config['multilang_crayons']);
+			$root = '' ;
+			
 			if(isset($config['siteconfig']) && $config['siteconfig']){
 				$root .= ',input[type=hidden][name*=name_][value|=meta-valeur]';
+				unset($config['siteconfig']);
 			}
-			if(isset($config['article']) && $config['article']) { // Articles
-				$root .= ',input[type=hidden][name*=name_][value|=article]:not(input[value|=article-logo])';
-			}
-			if(isset($config['breve']) && $config['breve']) { // Breves
-				$root .= ',input[type=hidden][name*=name_][value|=breve]:not(input[value|=breve-logo])';
-			}
-			if(isset($config['rubrique']) && $config['rubrique']) { // Rubriques
-				$root .= ',input[type=hidden][name*=name_][value|=rubrique]:not(input[value|=rubrique-logo])';
-			}
-			if(isset($config['auteur']) && $config['auteur']) { // Auteurs
-				$root .= ',input[type=hidden][name*=name_][value|=auteur]:not(input[value|=auteur-logo])';
-			}
-			if(isset($config['document']) && $config['document']) {  // Docs dans page de presentation rubrique ou article,
-				$root .= ',input[type=hidden][name*=name_][value|=document]:not(input[value|=document-vignette])' ;
-			}
-			if(isset($config['site']) && $config['site']) { // Sites
-				$root .= ',input[type=hidden][name*=name_][value|=site]';
-			}
-			if(isset($config['evenement']) && $config['evenement']) { // Evenements
-				$root .= ',input[type=hidden][name*=name_][value|=evenement]:not(input[value|=evenement-logo])';
-			}
-			if(isset($config['motcle']) && $config['motcle']) { // Mots
-				$root .= ',input[type=hidden][name*=name_][value|=mot]:not(input[value|=mot-logo])';
-			}
-			if(isset($config['gis']) && $config['gis']) { // GIS
-				$root .= ',input[type=hidden][name*=name_][value|=gis]:not(input[value|=gis-logo])';
+			
+			foreach($config as $conf => $val){
+				if($val == 'on') { // Articles
+					$root .= ',input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo])';
+					unset($config[$conf]);
+				}
 			}
 			$texte = '
 				var crayons_multilang_init = function(){

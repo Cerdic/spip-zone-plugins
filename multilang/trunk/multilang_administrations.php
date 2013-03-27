@@ -26,10 +26,9 @@ function multilang_upgrade($nom_meta_base_version,$version_cible){
 
 function multilang_creer_config(){
 	include_spip('inc/config');
-	$config = lire_config('multilang');
-	if (!is_array($config)) {
+		$config = lire_config('multilang');
+	if (!is_array($config))
 		$config = array();
-	}
 	$config_defaut = array_merge(array(
 			'siteconfig' => 'on',
 			'article' => '',

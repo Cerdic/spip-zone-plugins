@@ -1,8 +1,4 @@
-<!-- autoriser=webmestre -->
-<!-- refus=<:cfg:refus_configuration_webmestre:> -->
-<!-- nom=multilang -->
-
-<div class="formulaire_spip formulaire_configurer formulaire_configurer_multilang">
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -23,7 +19,6 @@
                   #SET{defaut_on,#LISTE{rubrique,auteur,document}}
                   <BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}>
                   [(#VALEUR{editable}|=={oui}|oui)
-                  	[(#CLE|objet_type)] => [(#VALEUR{texte_objets}|_T)]
                   	[(#SET{name,[(#CLE|objet_type)]})]
                   	[(#SET{label,[(#VALEUR{texte_objets}|_T)]})]
 					[(#SAISIE{oui_non,#GET{name},
