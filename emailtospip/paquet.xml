@@ -1,7 +1,7 @@
 <paquet
 	prefix="emailtospip"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo="prive/themes/spip/images/emailtospip-64.png"

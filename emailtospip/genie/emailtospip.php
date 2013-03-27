@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function genie_emailtospip_dist($t){
-   // chargement configuration
+  // chargement configuration
    include_spip('inc/config');
 
    $email = lire_config('emailtospip/email'); 
@@ -27,6 +27,7 @@ function genie_emailtospip_dist($t){
    
    
    $limit = 20; // max d'emails à traiter en une passe (pour éviter le timeout)
+   $pagination = 100; // nb emails à examiner (pour ne pas consulter toute la boite)
       
    if ($hote_imap!="") {  
           // connection or die          
@@ -34,24 +35,29 @@ function genie_emailtospip_dist($t){
           $mbox = @imap_open($connection, $email, $email_pwd);
           
           if (FALSE === $mbox) {
+                spip_log("connection $connection impossible","emailtospip");
                 return false;                
           } else {
-                // lecture message 
-                //      // listing boite
+                // lecture boite                  
                 $info = imap_check($mbox);
                 if (FALSE === $info) {
-                    return false; // Impossible de lire le contenu de la boite mail                     
+                    spip_log("Impossible de lire le contenu de la boite mail","emailtospip");
+                    return false;                   
                 } else {
-                    $nbMessages = min(50, $info->Nmsgs);
-                    $mails = imap_fetch_overview($mbox, '1:'.$nbMessages, 0);  
-                   
+                    // lire des derniers msgs
+                    $nbMessages = $info->Nmsgs;
+                    $nbMessagesMin =  max(1,$nbMessages- $pagination);
+                    $mails = imap_fetch_overview($mbox, "$nbMessagesMin:$nbMessages", 0);
+                                        
                     $i=0;
                     foreach ($mails as $mail) {           
                         $sujet = imap_utf8_fix($mail->subject);
-                        $uid = $mail->uid;                        
+                        $uid = $mail->uid; 
+                        $msgno = $mail->msgno;                       
                         if (preg_match_all("#<(.*?)>#ims",$mail->from, $matches,PREG_SET_ORDER))    // buzz <buzz@buzz.org> ->  buzz@buzz.org
                                   $email_from = $matches[0][1];
                             else  $email_from = $mail->to;
+                        //echo "<br >- $i ($msgno/$uid) : $sujet ";
                         
                         // en mode mot de passe, ne selectionner que les emails avec le mot titre                         
                         if ($pwd!="") {
@@ -65,8 +71,9 @@ function genie_emailtospip_dist($t){
                             $import = true;
                         }
                         
-                        if ($import && $i++<$limit) {                              
-                            emailtospip_mail($uid,$mbox,$sujet,$email_from,$import_statut,$id_rubrique,$id_secteur,$lang); 
+                        if ($import) { 
+                            if ($i++<$limit)                           
+                              emailtospip_mail($uid,$mbox,$sujet,$email_from,$import_statut,$id_rubrique,$id_secteur,$lang); 
                          }
                        
                         
@@ -118,6 +125,7 @@ function emailtospip_mail($uid,$mbox,$sujet,$email,$import_statut,$id_rubrique,$
                $corps = $matches[0][1];
           } else {
               // mmmm ... rien de recupere ... on quitte le navire
+              spip_log("email $sujet (type: ".$structure->subtype.") impossible à traiter","emailtospip");               
               return false;
           }
     
@@ -150,9 +158,5 @@ function emailtospip_mail($uid,$mbox,$sujet,$email,$import_statut,$id_rubrique,$
     
     return true;
 } 
-
-
-
-
 
 ?>
