@@ -20,34 +20,17 @@
                      label=<:multilang:cfg_lbl_siteconfig:>,
                      defaut=on}
                   )]
-                  [(#SAISIE{oui_non,article,
-                     label=<:multilang:cfg_lbl_article:>,
-                     defaut=''}
-                  )]
-                  [(#SAISIE{oui_non,breve,
-                     label=<:multilang:cfg_lbl_breve:>,
-                     defaut=''}
-                  )]
-                  [(#SAISIE{oui_non,rubrique,
-                     label=<:multilang:cfg_lbl_rubrique:>,
-                     defaut=on}
-                  )]
-                  [(#SAISIE{oui_non,auteur,
-                     label=<:multilang:cfg_lbl_auteur:>,
-                     defaut=on}
-                  )]
-                  [(#SAISIE{oui_non,document,
-                     label=<:multilang:cfg_lbl_document:>,
-                     defaut=on}
-                  )]
-                  [(#SAISIE{oui_non,motcle,
-                     label=<:multilang:cfg_lbl_motcle:>,
-                     defaut=''}
-                  )]
-                  [(#SAISIE{oui_non,site,
-                     label=<:multilang:cfg_lbl_site:>,
-                     defaut=''}
-                  )]
+                  #SET{defaut_on,#LISTE{rubrique,auteur,document}}
+                  <BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}>
+                  [(#VALEUR{editable}|=={oui}|oui)
+                  	[(#CLE|objet_type)] => [(#VALEUR{texte_objets}|_T)]
+                  	[(#SET{name,[(#CLE|objet_type)]})]
+                  	[(#SET{label,[(#VALEUR{texte_objets}|_T)]})]
+					[(#SAISIE{oui_non,#GET{name},
+	                     label=#GET{label},
+	                     defaut=''})]
+					]</BOUCLE_objets>
+                  
 				  [(#PLUGIN{agenda}|oui)
 					  [(#SAISIE{oui_non,evenement,
 	                     label=<:multilang:cfg_lbl_evenement:>,
