@@ -116,7 +116,6 @@ function type_urls_liste_urls_exec() {
 		.'<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" /></head><body style="text-align:center">'
 		.propre(recuperer_fond('fonds/type_urls_liste', array('type'=>_request('type'))))
 		.'</body></html>';
-;
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
