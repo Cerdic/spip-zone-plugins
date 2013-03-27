@@ -12,5 +12,5 @@
   <licence>GNU/GPL</licence>
   
   <pipeline nom="taches_generales_cron" inclure="emailtospip_pipelines.php" />
-	
+	 <necessite nom="saisies" compatibilite="[1.24.0;]" />  
 </paquet>
