@@ -1,0 +1,66 @@
+#CACHE{0*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.menu_multilang {
+	background-color:transparent;
+	padding:5px;
+}
+
+.menu_multilang .langues{
+	overflow:auto;
+}
+
+.menu_multilang .langues a{
+	cursor:pointer;
+	font-weight:normal;
+	margin-right:2px;
+	display:block;
+	float:left;
+}
+
+.menu_multilang .langues a.on{
+	font-weight:bold;
+}
+
+.menu_multilang .langues a.empty{
+	background-color:#GET{foncee};
+	padding:2px;
+	color:#fff;
+}
+
+.menu_multilang .multilang_message{
+	clear:both;
+}
+
+.menu_lang_flottant{
+	border-bottom:3px solid #GET{foncee};
+	background-color:[#(#GET{claire}|couleur_eclaircir)];
+	opacity:.8;
+}
+
+#SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
+<BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>
+.multi_lang_#VALEUR {
+	background-position:98% 1px;
+	background-repeat:no-repeat;
+	background-image:url([(#VAL{Multi #VALEUR}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+}
+</BOUCLE_langues>
+
+.multi_lang_no_multi {
+	background-position:98% 1px;
+	background-repeat:no-repeat;
+	background-image:url([(#VAL{No multi}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
+}
+
+.multi_lang_broken {
+	background-position:98% 1px;
+	background-repeat:no-repeat;
+	background-image:url(#CHEMIN{images/multi_forbidden.png});
+}
