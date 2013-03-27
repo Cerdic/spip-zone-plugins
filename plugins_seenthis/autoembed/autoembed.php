@@ -25,8 +25,8 @@ function embed_url($url) {
 		// Gérer les images Flickr à part
 		// car autoembed ne gère que les vidéos de Flickr
 		// sets
-		if (preg_match(",^https?\://(www\.)?flickr\.com/photos/[^/]*/sets/.+,i", $url)) {
-			if ($page = @join("",file($url))) {
+		if (preg_match(",^https?\://(www\.)?flickr\.com/+photos/+[^/]*/+sets/[^/]+,i", $url, $r)) {
+			if ($page = @join("",file($r[0]))) {
 				if (preg_match(',<meta property="og:image" content="(.*)" />,', $page, $i1)) {
 					$img = $i1[1];
 					$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_w."px; max-height: ".$max_i."px;'/></a></div>";
