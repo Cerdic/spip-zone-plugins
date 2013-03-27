@@ -15,18 +15,18 @@
 [(#SET{lesExtensions,
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
-			3,dist_vimeo
-	}
-})]
+			3,dist_vimeo} 
+})]                     [(#REM) fermer l'accolade en fin de ligne sinon le retour à la ligne 
+			                 est pris en compte dans la chaîne de caractère]
 [(#SET{lesExtensionsHtml5,
 	#ARRAY{ 1,m4v,
 			2,mp4,
 			3,webm,
 			4,ogv,
-			5,mkv
-	}
+			5,mkv}
 })]
-<BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{tout}>
+[(#SET{toutesExtensions, [(#GET{lesExtensions}|array_merge{#GET{lesExtensionsHtml5}})]})]
+<BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{extension IN #GET{toutesExtensions}}{tout}>
 [(#REM)
 	Si une dimension est fournie avec le modele on la prend,
 	sinon celle du document si elle n'est pas nulle,
@@ -41,7 +41,7 @@
 [(#SET{fichier,#FICHIER*})]
 [(#GET{liste_definition}|=={oui}|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-<dt class='spip_doc_titre'>
+<dt>
 ]
 
 [(#REM)
@@ -124,38 +124,36 @@
 			[(#FICHIER|basename|pathinfo|table_valeur{filename}|oui) [(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})] ]
 			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
 			[(#GET{titre_descriptif}|=={oui}|oui)
+			[(#GET{liste_definition}|=={oui}|non)
 			<figcaption>
 				<p><strong>#TITRE</strong></p> 
 				#DESCRIPTIF
 			</figcaption>
-			]
+			]]
 		</figure>
 		</section>
 	</div> <!-- Fermeture de ID : playerVideo -->
 	]
 	
-	
-[(#REM)
-/** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
-]
-	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
-	[(#EXTENSION|match{dist_}|non)
-		[(#INCLURE{fond=medias/modeles/video,id=#GET{document},env,emb=' '})]
-	]]
 
+[(#GET{liste_definition}|=={oui}|oui)
+</dt>
+]
 [(#REM)
 /** Titre et Descriptif **/
 ]
 [(#GET{liste_definition}|=={oui}|oui)
 	[(#GET{titre_descriptif}|=={oui}|oui)
-	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
-	[<br /><strong>(#TITRE)</strong>]
-	]]
-</dt>
-	[(#GET{titre_descriptif}|=={oui}|oui)
-	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
-	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
-	]]
+	[<dt class='spip_doc_titre'><strong>(#TITRE)</strong></dt>]
+	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)[<br/>(#CREDITS|PtoBR)]</dd>]
+	]
 </dl>
 ]
 </BOUCLE_LaVideo>
+</B_LaVideo>
+[(#REM)
+/** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
+    On passe par le modele emb qui est plus évolué que le modele video.
+]
+	[(#INCLURE{fond=modeles/emb,id_document=#GET{document},env})]
+<//B_LaVideo>
