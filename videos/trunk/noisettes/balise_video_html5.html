@@ -2,38 +2,22 @@
 <video width="#ENV{largeur}" height="#ENV{hauteur}" preload="metadata" tabindex="-1" controls autobuffer[(#ENV{autoplay}|oui)autoplay]>
 	[(#REM) 8 boucles pour donner la préférence au H264 qui a besoin d'être en premier pour iPad notamment et pour bien nommer les types ]
 
-	<BOUCLE_h264(DOCUMENTS){fichier==^(m4v|mp4)/#ENV{nomVideo}\.(m4v|mp4)$}{par num titre}{distant IN non}>
+	<BOUCLE_h264(DOCUMENTS){extension IN mp4,m4v}{fichier==/#ENV{nomVideo}\.(m4v|mp4)$}{par num titre}>
 		<source src="#FICHIER" type='video/mp4' /> [(#REM) ; codecs="avc1.42E01E, mp4a.40.2" H264 peut utiliser plusieurs codecs, on l'oublie donc ]
 	</BOUCLE_h264>
 
-	<BOUCLE_h264_distant(DOCUMENTS){extension IN mp4,m4v}{par num titre}{distant IN oui}>
-		<source src="#FICHIER" type='video/mp4' /> [(#REM) ; codecs="avc1.42E01E, mp4a.40.2" H264 peut utiliser plusieurs codecs, on l'oublie donc ]
-	</BOUCLE_h264_distant>
 
-
-	<BOUCLE_webm(DOCUMENTS){fichier==^webm/#ENV{nomVideo}\.webm$}{par num titre}{distant IN non}>
+	<BOUCLE_webm(DOCUMENTS){extension IN webm}{fichier==/#ENV{nomVideo}\.webm$}{par num titre}>
 		<source src="#FICHIER" type='video/webm; codecs="vp8, vorbis"' /> 
 	</BOUCLE_webm>
 
-	<BOUCLE_webm_distant(DOCUMENTS){extension IN webm}{par num titre}{distant IN oui}>
-		<source src="#FICHIER" type='video/webm; codecs="vp8, vorbis"' /> 
-	</BOUCLE_webm_distant>
 
-
-	<BOUCLE_ogg(DOCUMENTS){fichier==^ogv/#ENV{nomVideo}\.ogv$}{par num titre}{distant IN non}>
+	<BOUCLE_ogg(DOCUMENTS){extension IN ogg}{fichier==/#ENV{nomVideo}\.ogv$}{par num titre}>
 		<source src="#FICHIER" type='video/ogg' /> [(#REM) ; codecs="theora, vorbis" OGV peut utiliser plusieurs codecs, on l'oublie donc ]
-	</BOUCLE_ogg>
-
-	<BOUCLE_ogg_distant(DOCUMENTS){extension IN ogg}{par num titre}{distant IN oui}>
-		<source src="#FICHIER" type='video/ogg' /> [(#REM) ; codecs="theora, vorbis" OGV peut utiliser plusieurs codecs, on l'oublie donc ]
-	</BOUCLE_ogg_distant>
+	</BOUCLE>
 
 
-	<BOUCLE_mkv(DOCUMENTS){fichier==^mkv/#ENV{nomVideo}\.mkv$}{par num titre}{distant IN non}>
+	<BOUCLE_mkv(DOCUMENTS){extension IN mkv}{fichier==/#ENV{nomVideo}\.mkv$}{par num titre}>
 		<source src="#FICHIER" type='video/x-matroska; codecs="theora, vorbis"' />
 	</BOUCLE_mkv>
-
-	<BOUCLE_mkv_distant(DOCUMENTS){extension IN mkv}{par num titre}{distant IN oui}>
-		<source src="#FICHIER" type='video/x-matroska; codecs="theora, vorbis"' />
-	</BOUCLE_mkv_distant>
 </video>
