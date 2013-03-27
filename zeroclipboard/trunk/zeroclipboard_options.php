@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Plugin Zeroclipboard
+ * 
+ * @package SPIP\Zeroclipboard\Options
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**

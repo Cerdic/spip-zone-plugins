@@ -1,7 +1,7 @@
 <paquet
 	prefix="zeroclipboard"
 	categorie="divers"
-	version="0.2.3"
+	version="0.2.4"
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/zeroclipboard_logo.png"
