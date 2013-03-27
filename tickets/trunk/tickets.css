@@ -13,7 +13,6 @@
 
 .ticket_commentaires {clear:both;}
 
-
 .formulaire_editer_ticket input.text {width:98%;}
 .formulaire_editer_statut_ticket li.editer_statut .explication {color:#D06C07;}
 li.editer_forum_ticket .explication {display:none;}
@@ -23,6 +22,10 @@ li.editer_forum_ticket .explication {display:none;}
 .ticket table.spip {margin: 15px 0px; width:100%; text-align:left; border:1px solid #ccc; border-spacing:2px; border-collapse:separate !important;}
 .ticket table th,
 .ticket table.spip th{background: white; color: #666; padding:3px; text-align: left; border:none;}
+.ticket table th.tri,
+.ticket table.spip th.tri {background:#eee;padding:3px; border:none;}
+.ticket table th a,
+.ticket table.spip th a {display:block;}
 .ticket table tr,
 .ticket table.spip tr{color: #5b5b5b; background:#f3f3f3;}
 .ticket table td,

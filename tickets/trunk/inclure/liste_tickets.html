@@ -162,73 +162,73 @@
 	<thead>
 		<tr>
 			<th></th>
-			<th>
+			<th[(#ENV{tri_detaillee}|=={id_ticket}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri_detaillee}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax})]]
 				[(#ENV{tri_detaillee}|=={id_ticket}|oui)
-					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',#,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',#,ajax})]]]
+					[(#ENV{sens_detaillee,1}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,#,ajax})]]
+					[(#ENV{sens_detaillee,1}|=={-1}|oui)[(#TRI{>,#,ajax})]]]
 			</th>
-			<th>
+			<th[(#ENV{tri_detaillee}|=={titre}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri_detaillee}|=={titre}|non)[(#TRI{titre,<:tickets:champ_titre:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={titre}|oui)
-					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_titre:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_titre:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_titre:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_titre:>,ajax})]]]
 			</th>
-			[(#ENV{tracker}|non)<th>
+			[(#ENV{tracker}|non)<th[(#ENV{tri_detaillee}|=={tracker}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri_detaillee}|=={tracker}|non)[(#TRI{tracker,<:tickets:champ_type:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={tracker}|oui)
-					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_type:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_type:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_type:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_type:>,ajax})]]]
 			</th>]
-			<th>
+			<th[(#ENV{tri_detaillee}|=={severite}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri_detaillee}|=={severite}|non)[(#TRI{severite,<:tickets:champ_importance:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={severite}|oui)
-					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_importance:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_importance:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_importance:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_importance:>,ajax})]]]
 			</th>
 			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<th>
+				<th[(#ENV{tri_detaillee}|=={projet}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri_detaillee}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet:>,ajax})]]
 					[(#ENV{tri_detaillee}|=={projet}|oui)
-						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_projet:>,ajax})]]
-						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_projet:>,ajax})]]]
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_projet:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_projet:>,ajax})]]]
 				</th>
 			]
 			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<th>
+				<th[(#ENV{tri_detaillee}|=={composant}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri_detaillee}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant:>,ajax})]]
 					[(#ENV{tri_detaillee}|=={composant}|oui)
-						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_composant:>,ajax})]]
-						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_composant:>,ajax})]]]
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_composant:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_composant:>,ajax})]]]
 				</th>
 			]
 			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<th>
+				<th[(#ENV{tri_detaillee}|=={version}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri_detaillee}|=={version}|non)[(#TRI{version,<:tickets:champ_version:>,ajax})]]
 					[(#ENV{tri_detaillee}|=={version}|oui)
-						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_version:>,ajax})]]
-						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_version:>,ajax})]]]
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_version:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_version:>,ajax})]]]
 				</th>
 			]
 			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<th>
+				<th[(#ENV{tri_detaillee}|=={jalon}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri_detaillee}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon:>,ajax})]]
 					[(#ENV{tri_detaillee}|=={jalon}|oui)
-						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_jalon:>,ajax})]]
-						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_jalon:>,ajax})]]]
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,<:tickets:champ_jalon:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon:>,ajax})]]]
 				</th>
 			]
-			<th>
+			<th[(#ENV{tri_detaillee}|=={date}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={date}|ou{#ENV{tri_detaillee}|non}|oui)
-					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{'>',<:tickets:champ_date:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'<',<:tickets:champ_date:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax})]]]
 			</th>
-			<th><abbr title="<:tickets:champ_maj_long:>">
+			<th[(#ENV{tri_detaillee}|=={maj}|oui)class="tri[(#ENV{sens_detaillee,1}|=={1}|?{' asc',' desc'})]"]><abbr title="<:tickets:champ_maj_long:>">
 				[(#ENV{tri_detaillee}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax})]]
 				[(#ENV{tri_detaillee}|=={maj}|oui)
-					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{'>',<:tickets:champ_maj:>,ajax})]]
-					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'<',<:tickets:champ_maj:>,ajax})]]]
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_maj:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_maj:>,ajax})]]]
 			</abbr></th>
 		</tr>
 	</thead>
