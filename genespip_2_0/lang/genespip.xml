@@ -1,11 +1,11 @@
 <traduction module="genespip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/genespip_2_0/lang/" reference="fr">
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/genespip?lang_cible=ca">
-		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/genespip?lang_cible=en">
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/genespip?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
