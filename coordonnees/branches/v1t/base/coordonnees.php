@@ -39,10 +39,10 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // perso, pro, vacance...
 		"voie" => "TINYTEXT DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
 		"complement" => "TINYTEXT DEFAULT '' NOT NULL", // p. ex. 3e etage
-		"boite_postale" => "VARCHAR(40) DEFAULT '' NOT NULL",
-		"code_postal" => "VARCHAR(40) DEFAULT '' NOT NULL",
-		"ville" => "TINYTEXT DEFAULT '' NOT NULL",
-		"region" => "VARCHAR(40) DEFAULT '' NOT NULL",
+		"boite_postale" => "VARCHAR(40) DEFAULT '' NOT NULL", // attention : outre le numero de CP/BP, il est mentionne la localite si elle est differente du "bureau distributeur". ce champ peut contenir un autre nom (affichage au meme endroit) en plus du nom de la ville dans certains cas : Argentine (nom de "quartier"), Bielorussie (nom de "Raion" ici et nom de "village" en complement en zone rurale), Bresil (nom de "quartier"), Chilie (cp a Santiago et nom de "quartier" ailleurs, le nom plus loin etant celui de la "municipalite" de rattachement), Chine (nom de "district"), Grande Bretagne (nom de "localite" si different de la ville postale), , Hong-Kong (nom de "district"), Inde (nom de "village" en complement puis nom de "district" ici, ou nom de "localite" ici puis nom de ville de distribution/rattachement plus loin), Indonesie (Village/Kelurahan, Sous-district/Kecamatan), Iran ("Premise"), Irak (nom de "Mahla" et numero, l'autre nom plus loin etant le nom de "district"), Letonie (noms "village" puis "paroise" en milieu rural et nom "ville" en milieu urbain, l'autre nom etant pour la municipalite de reference), Mexica ("city ward"), Pakistan (nom de "district"), Perou (nom de "district" pour les municipalites de Lima et Callao), Roumanie (nom de "localite" suivi de "jud.", l'autre nom/numero plus loin etant celui du "comte" precede de "sector"), Russie (nom de "sous-region"), Taiwan (nom de "localite", l'autre nom plus loin etant celui du "district" ou l'inverse je sais pas), Turkie (nom de "localite", l'autre nom plus loin etant celui du "district" ou l'inverse je sais pas),
+		"code_postal" => "VARCHAR(40) DEFAULT '' NOT NULL", // pays qui utilisent et format : http://fr.wikipedia.org/wiki/Code_postal
+		"ville" => "TINYTEXT DEFAULT '' NOT NULL", // en fait la "commune du bureau de distribution" ou "ville postale" quand il y a un code postal...
+		"region" => "VARCHAR(40) DEFAULT '' NOT NULL", // usage en : Argentine (region), Biolorussie (departement?), Australie (code "etat"), Bresil (dode "etat"), Canada (code/nom "province"), Chine (nom de "province"), Espagne (nom "province"), Etats-Unis (code "etat"), Hong Kong (nom du "district"), Inde (nom "etat"), Indonesie (nom "province"), Iran (nom "province"), Irak (nom "province"), Italie (abreviation "province"), Malaisie (nom "etat"), Mexico (nom "etat"), Oman (nom "zone?"), Pakistan (nom "province"), Perou (nom de "province" en dehors des regions de Lima et Callao), Russie (nom "region"), Taiwan (nom de "comte"), Turquie, Ukraine (noms "raion, region"),
 		"pays" => "VARCHAR(3) DEFAULT '' NOT NULL", // peut etre sur 2 caracteres (codes : ISO alpha ou numerique, ONU, etc.) ou sur 3 caracterse (codes : ISO alpha, CIO, etc.)
 		"maj" => "TIMESTAMP"
 		);
@@ -140,9 +140,9 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	//-- Table syndic_liens ------------------------------------------
 	// nota: "syndic" (sans S final) est le nom hitorique de la table
 	// mais la boucle est SYNDICATIONS ou SITES (synonyme) pour les
-	// "sites" references (la table "urls" est reservee aux URLs propres)
-	// et c'est la table "syndic_articles" qui lie aux articles syndiques
-	// et c'est la table "syndic_liens" qui lie aux objets declares dans SPIP
+	// "sites" references (la table "urls" est reservee aux URLs propres.)
+	// ET C'est la table "syndic_articles" qui va lier aux articles syndiques
+	// Et c'est la table "syndic_liens" qui va lier aux objets declares dans SPIP
 	$syndic_liens = array(
 		"id_syndic" => "BIGINT NOT NULL DEFAULT 0",
 		"id_objet" => "BIGINT NOT NULL DEFAULT 0",

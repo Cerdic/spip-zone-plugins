@@ -68,39 +68,44 @@ function logo_type_adr($type_adresse) {
  * @return string
  *  Balise HTML micro-format (cf. logo_type_)
 **/
-function logo_type_tel($type_numero) {
+function filtre_logo_type_tel($type_numero) {
 	return logo_type_('tel', $type_numero);
 }
 
 /**
- * Filtre d'affichage du type d'un courriel
+ * Filtre d'affichage du type (format) d'un courriel
+ *
+ * @param string $format_email
+ *  Valeur du format d'adresse de courriel (cf. logo_type_).
+ *  Les valeurs nativement prises en compte sont les codes normalisees
+ * IANA/RFC2426 (section 3.3.2) : internet (SMTP) pref x400 (X.400)
+ *  Ces formats correspondent en fait a des "services" associes, et Internet est
+ * pour le SMTP par defaut. Aussi, certaines applications ajoutent leur variante
+ * proprietaire/personnelle : AOL (America On-Line), AppleLink (AppleLink), CIS
+ * (CompuServe Information Service), eWorld (eWorld), IBMMail (IBM Mail), MCIMail
+ * (MCI Mail), POWERSHARE (PowerShare), PRODIGY (Prodigy information service),
+ * TLX (Telex number), TTMail (AT&T Mail), etc. Bien que non pris en charge
+ * nativement, ils peuvent etre utilise en surchargeant le fichier listant les
+ * types puis en rajoutant le logo (Compuserve-GIF/JPEG/PNG) dans le repertoire
+ * "images/" et en donnant l'intitule dans sons fichier de langue perso "lang/perso_??.html"
+ * @return string
+ *  Balise HTML micro-format (cf. logo_type_)
+**/
+function filtre_logo_type_email($format_email) {
+	return logo_type_('email', $format_email);
+}
+
+/**
+ * Filtre d'affichage du type (usage) d'un courriel
  *
  * @param string $type_email
  *  Valeur du type de liaison (cf. logo_type_).
  *  Les valeurs nativement prises en compte sont les codes normalisees
- * IANA/RFC2426 (section 3.3.2) : internet pref x400
- * CCITT.X520+RFC5322/RFC6350 (section 6.4.2) : home intl work
+ * CCITT.X520+RFC5322/RFC6350 (section 6.4.2) : home (perso) intl work (pro)
  * @return string
  *  Balise HTML micro-format (cf. logo_type_)
 **/
-function logo_type_email($type_email) {
-	return logo_type_('email', $type_email);
-}
-
-/**
- * Filtre d'affichage du type d'un mel (2nd)
- *
- * @param string $type_adresse
- *  Valeur du type de liaison (cf. logo_type_).
- *  Cette adaptation reconnait les codes RFC6350 traduits "perso" et "pro"
- * (respectivement pour "home" et "work")
- * @return string
- *  Balise HTML micro-format (cf. logo_type_)
- * @note
- *  On fait un nouveau filtre pour ne pas melanger ce qui releve de la norme et
- * les bidouilles temporaires.
-**/
-function logo_type_mel($type_email) {
+function filtre_logo_type_mel($type_email) {
 	return logo_type_('mel', $type_email);
 }
 
@@ -114,7 +119,7 @@ function logo_type_mel($type_email) {
  * @return string
  *  Balise HTML micro-format (cf. logo_type_)
 **/
-function logo_type_impp($type_messagerie) {
+function filtre_logo_type_impp($type_messagerie) {
 	return logo_type_('impp', $type_messagerie);
 }
 

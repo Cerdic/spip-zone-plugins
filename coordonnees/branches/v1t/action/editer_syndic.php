@@ -83,8 +83,8 @@ function insert_site() {
 		'date' => date('Y-m-d H:i:s'), // maintenant
 		'syndication' => $syndication,
 		'url_syndic' => $url_syndic,
-		'moderation' => $GLOBALS['meta']['moderation'], // 'oui'||'non'
-		'resume' => $GLOBALS['meta']['resume'], // 'oui'||'non'
+		'moderation' => $GLOBALS['meta']['moderation_sites'], // 'oui'||'non' ; default:'non'
+		'resume' => $GLOBALS['meta']['syndication_integrale'], // 'oui'||'non' ; default:'oui'
 		'nom_site' => _request('nom_site'), // pas pris en compte si pas dans la liste ?!?
 		'url_site' => _request('url_site'), // pas pris en compte si pas dans la liste ?!?
 		'descriptif' => _request('descriptif'), // pas pris en compte si pas dans la liste ?!?

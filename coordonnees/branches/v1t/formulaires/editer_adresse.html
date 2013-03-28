@@ -15,8 +15,8 @@
 			[(#ENV{id_objet}|oui)
 				[(#SAISIE{type_adr, type, label=<:coordonnees:label_type_adresse:>})]
 			]
-				[(#SAISIE{input, voie, label=<:coordonnees:label_voie:>})]
-				[(#SAISIE{input, complement, label=<:coordonnees:label_complement:>})]
+				[(#SAISIE{input, voie, label=<:coordonnees:label_voie:>, explication=<:coordonnees:explication_voie:> })]
+				[(#SAISIE{input, complement, label=<:coordonnees:label_complement:>, explication=<:coordonnees:explication_complement:> })]
 				[(#SAISIE{input, boite_postale, label=<:coordonnees:label_boite_postale:>})]
 				[(#SAISIE{input, code_postal, label=<:coordonnees:label_code_postal:>})]
 				[(#SAISIE{input, ville, label=<:coordonnees:label_ville:>})]
@@ -24,7 +24,7 @@
 			[(#PLUGIN{pays}|?{
 				[(#SAISIE{pays, pays, code_pays=oui, label=<:coordonnees:label_pays:>, defaut=FR})]
 			,
-				[(#SAISIE{input, pays, label=<:coordonnees:label_pays:>, defaut=FR, maxlength=3, size=2, explication=<:coordonnees:code_ISO_3166:> })]
+				[(#SAISIE{input, pays, label=<:coordonnees:label_pays:>, defaut=FR, maxlength=3, size=2, explication=<:perso:code_ISO_3166:> })]
 			})]
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

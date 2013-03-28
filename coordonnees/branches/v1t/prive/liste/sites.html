@@ -7,8 +7,8 @@
 	<BOUCLE_sites(SITES syndic_liens){statut!=poubelle}{syndic_liens.objet}{syndic_liens.id_objet}{par nom_site, url_site}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
-				[(#LOGO_SITE|?{[(#LOGO_SITE||image_reduire{24})],[(#TYPE|logo_type_mel)]}):]
-				[(#STATUT|=={publie}|oui)<a href="[(#ID_SYNDIC|generer_url_entite{site})]">][(#NOM_SITE)][(#STATUT|=={publie}|oui)</a>]
+				[(#LOGO_SITE|?{[(#LOGO_SITE||image_reduire{24})],[(#TYPE|logo_type_mel)]}) ]
+				[(#STATUT|=={publie}|oui)<a href="[(#ID_SYNDIC|generer_url_entite{site})]">][(#NOM_SITE*)][(#STATUT|=={publie}|oui)</a>]
 			</td>
 			<td class='url'>
 				[<a [title="(#DESCRIPTIF)" ]href="(#URL_SITE)">
