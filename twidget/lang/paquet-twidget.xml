@@ -1,7 +1,7 @@
 <traduction module="paquet-twidget" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/twidget/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="fr" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=nl">
