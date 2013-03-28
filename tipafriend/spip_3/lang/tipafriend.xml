@@ -1,9 +1,9 @@
 <traduction module="tipafriend" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tipafriend/spip_3/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
-		<traducteur nom="PieroWbmstr" lien="http://trad.spip.net/auteur/pierowbmstr" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="PieroWbmstr" lien="http://trad.spip.net/auteur/pierowbmstr" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 	</langue>
 	<langue code="fr" />
