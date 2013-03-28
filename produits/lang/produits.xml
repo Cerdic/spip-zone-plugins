@@ -1,7 +1,7 @@
 <traduction module="produits" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/produits/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/produits?lang_cible=en">
-		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/produits?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
