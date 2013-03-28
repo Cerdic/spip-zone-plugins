@@ -11,7 +11,7 @@
 [(#AUTORISER{modifier,feuillederoute}|oui)
 
 	[(#GET{existe}|=={oui}|oui)
-		<a href="#" class="poignee_feuillederoute"><:feuillederoute:modifier_le_texte:></a>
+		<a href="#" class="poignee_feuillederoute" id="feuillederoute_ancre_editer"><:feuillederoute:modifier_le_texte:></a>
 	]
 
 	<div class="formulaire_spip formulaire_feuillederoute[(#GET{existe}|=={oui}|oui) tiroir_feuillederoute]">
@@ -38,7 +38,9 @@
 		// ouverture/fermeture du formulaire d'edition
 		$('.tiroir_feuillederoute').css({display:'none'});
 		$('a.poignee_feuillederoute').click(function(){
-			$(this).siblings('.tiroir_feuillederoute').toggle(200);
+			$(this).siblings('.tiroir_feuillederoute').toggle(200,function(){
+				$('.feuillederoute').animate({scrollTop: $('#feuillederoute_ancre_editer').offset().top});
+			});
 			return false;
 		});
 	});
