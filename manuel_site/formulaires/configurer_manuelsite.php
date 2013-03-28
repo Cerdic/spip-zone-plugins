@@ -8,7 +8,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_manuelsite_saisies_dist(){
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$config = lire_config('manuelsite',array('id_article'=>null,'cacher_public'=>'','intro'=>'','email'=>'','afficher_bord_gauche'=>'','largeur'=>'300','background_color'=>''));
 	
 	return array(
@@ -102,6 +103,8 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 }
 
 function formulaires_configurer_manuelsite_verifier(){
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	// On la garde en mémoire dans le hit pour une utilisation dans le pipeline de traitement
 	set_request('ancien_cacher_public', lire_config('manuelsite/cacher_public'));
 	return array();
