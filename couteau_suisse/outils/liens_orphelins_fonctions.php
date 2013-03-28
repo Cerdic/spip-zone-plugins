@@ -20,9 +20,9 @@ function liens_orphelins($texte){
 	// prudence 2 : on protege TOUS les raccourcis de liens Spip, au cas ou...
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',\[([^][]*)->(>?)([^]]*)\],msS', 'cs_liens_echappe_callback', $texte);
-	// prudence 3 : on protege TOUTES les balises contenant des points, histoire de voir plus clair
+	// prudence 3 : on protege TOUTES les balises contenant des points et <form/>, histoire de voir plus clair
 	if (strpos($texte, '<')!==false) 
-		$texte = preg_replace_callback(',<[^>]+\.[^>]*>,Ums', 'cs_liens_echappe_callback', $texte);
+		$texte = preg_replace_callback(',<(?:form|[^>]+\.)[^>]*>,Ums', 'cs_liens_echappe_callback', $texte);
 	// encore ici, on s'en va si pas de point...
 	if (strpos($texte, '.')===false) return echappe_retour($texte, 'LIENS');
 
