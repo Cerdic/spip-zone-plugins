@@ -93,7 +93,7 @@ function urls_pages_lister_pages () {
 
 	// 3: lister tous les squelettes dans les répertoires trouvés
 	// retourne un tableau de la forme array(dossier1 => array(squelette1,squelette2), dossier2 => (...))
-	$pattern_html = '[\w-]*\.html$';
+	$pattern_html = '[\w-=_\.]*\.html$';
 	if ( is_array($dossiers_pages) ) {
 		foreach ( $dossiers_pages as $dossier ) {
 			// sans Z, rechercher à la racine des dossiers de squelettes
@@ -131,12 +131,14 @@ function urls_pages_lister_pages () {
 				if ( preg_match("/^inc-/", $squelette) )
 					$exclure = true;
 				// 40x,30x
-				if ( preg_match("/^[4|3][\d]{2}$/", $squelette) )
+				if ( preg_match("/^(4|3)\d{2}$/", $squelette) )
 					$exclure = true;
-				// squelettes des objets éditoriaux : objet, objet-10/objet=10, objet.en
+				// squelettes des objets éditoriaux, ex: article, article-10, article=10, article_10, article.en, article-10.en
+				// cf. http://www.spip.net/fr_article3445.html
+				// cf. http://plugins.spip.net/variantesarticles.html
 				if ( is_array($exclure_objets) ) {
 					foreach ( $exclure_objets as $objet ) {
-						if ( preg_match("/^$objet((-|=)\d{2}|(\.)[a-zA-Z]{2})?$/", $squelette) ) {
+						if ( preg_match("/^$objet((-|=|_)\d*)?((\.)[a-zA-Z]{2})?$/", $squelette) ) {
 							$exclure = true;
 							break;
 						}
