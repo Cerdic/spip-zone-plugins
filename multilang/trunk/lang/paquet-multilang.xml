@@ -1,4 +1,4 @@
-<traduction module="paquet-multilang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilang/lang/" reference="fr">
+<traduction module="paquet-multilang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilang/trunk/lang/" reference="fr">
 	<langue code="en" />
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-multilang?lang_cible=es">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
