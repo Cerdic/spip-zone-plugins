@@ -27,6 +27,8 @@
 })]
 [(#SET{toutesExtensions, [(#GET{lesExtensions}|array_merge{#GET{lesExtensionsHtml5}})]})]
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{extension IN #GET{toutesExtensions}}{tout}>
+#SET{poster,#LOGO_DOCUMENT}
+
 [(#REM)
 	Si une dimension est fournie avec le modele on la prend,
 	sinon celle du document si elle n'est pas nulle,
@@ -122,7 +124,7 @@
 		<figure>
 			[(#SET{nomVideo,[(#FICHIER|basename|replace{\.#EXTENSION,''})]})]
 			[(#FICHIER|basename|pathinfo|table_valeur{filename}|oui) [(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})] ]
-			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
+			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},poster=#GET{poster},env} />
 			[(#GET{titre_descriptif}|=={oui}|oui)
 			[(#GET{liste_definition}|=={oui}|non)
 			<figcaption>

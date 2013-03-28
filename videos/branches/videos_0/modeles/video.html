@@ -26,6 +26,7 @@
 	}
 })]
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{tout}>
+#SET{poster,#LOGO_DOCUMENT}
 [(#REM)
 	Si une dimension est fournie avec le modele on la prend,
 	sinon celle du document si elle n'est pas nulle,

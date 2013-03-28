@@ -1,5 +1,5 @@
 [(#REM) http://www.w3.org/TR/html5/video.html#video ]
-<video width="#ENV{largeur}" height="#ENV{hauteur}" preload="metadata" tabindex="-1" controls autobuffer[(#ENV{autoplay}|oui)autoplay]>
+<video width="#ENV{largeur}" height="#ENV{hauteur}" preload="metadata" tabindex="-1" controls autobuffer[(#ENV{autoplay}|oui)autoplay][ poster="(#ENV{poster})"]>
 	[(#REM) 8 boucles pour donner la préférence au H264 qui a besoin d'être en premier pour iPad notamment et pour bien nommer les types ]
 
 	<BOUCLE_h264(DOCUMENTS){extension IN mp4,m4v}{fichier==/#ENV{nomVideo}\.(m4v|mp4)$}{par num titre}>
