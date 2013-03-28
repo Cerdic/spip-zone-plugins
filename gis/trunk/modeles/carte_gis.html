@@ -102,7 +102,7 @@ map_cfg["[(#GET{id})]"] = {
 "path_styles":[(#ENV*{path_styles}|json_encode)],
 "autocenterandzoom":[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
 "open_id":"[(#ENV{id_a_ouvrir,''})]",
-"clusterStyles":[(#ENV*{clusterStyles,#ARRAY}|json_encode)],
+"clusterStyles":\[[(#ENV*{clusterStyles,#ARRAY}|json_encode)]\],
 "affiche_points":[(#ENV{point,''}|=={non}|?{false,true})],
 "json_points":{
 	"url":"[(#URL_PAGE{gis_json}|url_absolue)]"[,

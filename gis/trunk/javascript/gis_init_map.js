@@ -164,7 +164,7 @@ var gis_init_map = function(mapcfg) {
 				options["maxZoom"] = mapcfg["clusterMaxZoom"];
 			if (mapcfg["clusterStyles"].length)
 				options["styles"] = mapcfg["clusterStyles"];
-			map.markerCluster = new L.Marker.Clusterer(map, markers, options);
+			map.markerCluster = new L.Marker.Clusterer(map, map.markers, options);
 		}
 	}
 
