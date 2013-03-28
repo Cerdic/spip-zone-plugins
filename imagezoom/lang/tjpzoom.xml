@@ -5,8 +5,8 @@
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/tjpzoom?lang_cible=fa">
