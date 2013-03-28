@@ -57,7 +57,7 @@ function genie_emailtospip_dist($t){
                         if (preg_match_all("#<(.*?)>#ims",$mail->from, $matches,PREG_SET_ORDER))    // buzz <buzz@buzz.org> ->  buzz@buzz.org
                                   $email_from = $matches[0][1];
                             else  $email_from = $mail->to;
-                        //echo "<br >- $i ($msgno/$uid) : $sujet ";
+                        //echo "<h1>NEW EMAIL</h1>- $i ($msgno/$uid) : $sujet ";    // debug
                         
                         // en mode mot de passe, ne selectionner que les emails avec le mot titre                         
                         if ($pwd!="") {
@@ -94,10 +94,13 @@ function genie_emailtospip_dist($t){
 // https://bugs.php.net/bug.php?id=44098
 // http://svn.php.net/viewvc/?view=revision&revision=294699
 function imap_utf8_fix($string) {
-   if (version_compare(phpversion(), '5.3.3', '>=')) 
-              return $string;
-        else  
-              return iconv_mime_decode($string,0,"UTF-8");
+   if (version_compare(phpversion(), '5.3.3', '>=')) {
+           spip_log("decodage sujet (5.3+):".$string,"emailtospip");
+           return $string;
+   }     else   {
+           spip_log("decodage sujet (5.3-):".$string." : ".iconv_mime_decode($string,2,"UTF-8") ,"emailtospip");
+           return iconv_mime_decode($string,0,"UTF-8");
+   }
 } 
 
 //
@@ -120,21 +123,26 @@ function emailtospip_mail($uid,$mbox,$sujet,$email,$import_statut,$id_rubrique,$
     $structure = imap_fetchstructure($mbox, $uid, FT_UID); 
         
     //$corps = imap_fetchbody($mbox, $uid, 2, FT_UID);  // 1: plain text 2: html
-    $corps = imap_body($mbox, $uid, FT_UID);
-    $corps = quoted_printable_decode($corps); 
-    
-    // si on est sur HTML, extrait le body
-    if ($structure->subtype != "PLAIN") {
+    //$corps = imap_body($mbox, $uid, FT_UID);     // pas assez precis ex. gmail alternative txt et html melange
+
+    // HTML disponible   ?
+    if ($corps = imap_fetchbody($mbox, $uid, 2, FT_UID)) {            
+          $corps = quoted_printable_decode($corps); 
+          // si le html contient  un <html><body> on essaie de virer pas regex
           $pattern = "#<body[^>]*>(.*?)<\/body>#ims";
           if (preg_match_all($pattern, $corps, $matches,PREG_SET_ORDER))  {
-               $corps = $matches[0][1];
+              $corps = $matches[0][1];
+              spip_log("email $sujet (type: ".$structure->subtype.") HTML avec body regex","emailtospip");  
           } else {
-              // mmmm ... rien de recupere ... on quitte le navire
-              spip_log("email $sujet (type: ".$structure->subtype.") impossible à traiter","emailtospip");               
-              return false;
+              // cas gmail, on fait rien ... on garde le corps sans regex
+              spip_log("email $sujet (type: ".$structure->subtype.") HTML sans body","emailtospip");               
           }
-    
-    }
+    } else { 
+          // pas HTML disponible, on prend le PLAIN TXT            
+          $corps = imap_fetchbody($mbox, $uid, 1, FT_UID);
+          $corps = quoted_printable_decode($corps); 
+          spip_log("email $sujet (type: ".$structure->subtype.") TXT","emailtospip"); 
+    };
 
     // ....dans la table articles 
     $date =  date('Y-m-d H:i:s',time());                               	

@@ -10,7 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
   'cfg_import_statut' => 'Statut des articles importés',
-  'cfg_email' => 'Email',   
+  'cfg_email' => 'Email', 
+  'cfg_email_explication' => 'Email ou identifiant de la boite email',   
   'cfg_email_pwd' => 'Mot de passe',
   'cfg_hote_imap' => 'Adresse du serveur IMAP',
   'cfg_hote_imap_explication' => 'ex. imap.gmail.com',   
