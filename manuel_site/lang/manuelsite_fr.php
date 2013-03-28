@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@ Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
+	'configurer_explication' => 'Ce plugin installe une icône d’aide permettant d’afficher depuis n’importe quelle page de l’espace privé le manuel de rédaction du site. Ce manuel est @texte@. Il a pour but d’expliquer aux rédacteurs l’architecture du site, dans quelle rubrique ranger quoi, comment encoder et installer une vidéo... Bref tout ce que vous voulez et qui est spécifique à votre site.',
 	'configurer_explication_l_article' => '<a href="@url@" title="Manuel de redaction">l’article #@idart@</a> de votre site.',
 	'configurer_explication_un_article' => 'un article du site.',
 	'configurer_titre' => 'Configurer le manuel de rédaction du site',
