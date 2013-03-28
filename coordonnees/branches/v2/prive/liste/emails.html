@@ -7,7 +7,7 @@
 	<BOUCLE_mails(EMAILS emails_liens){emails_liens.objet}{emails_liens.id_objet}{par email}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
-				[(#TYPE|logo_type_mel):]
+				[(#TYPE|logo_type_mel) ]
 				[(#TITRE)]
 			</td>
 			<td class='email'>

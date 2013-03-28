@@ -7,7 +7,7 @@
 	<BOUCLE_telephones(NUMEROS numeros_liens){numeros_liens.objet}{numeros_liens.id_objet}{par numero}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
-				[(#TYPE|logo_type_tel):]
+				[(#TYPE|logo_type_tel) ]
 				[(#TITRE)]
 			</td>
 			<td class='numero'>
