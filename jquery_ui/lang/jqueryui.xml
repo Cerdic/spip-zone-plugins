@@ -1,7 +1,7 @@
 <traduction module="jqueryui" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jquery_ui/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/jqueryui?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/jqueryui?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
