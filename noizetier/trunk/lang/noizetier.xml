@@ -1,10 +1,10 @@
 <traduction module="noizetier" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noizetier/trunk/lang/" reference="fr">
 	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
