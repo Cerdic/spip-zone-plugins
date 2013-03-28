@@ -102,25 +102,4 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 
 }
 
-function formulaires_configurer_manuelsite_verifier(){
-	if(!function_exists('lire_config'))
-		include_spip('inc/config');
-	// On la garde en mémoire dans le hit pour une utilisation dans le pipeline de traitement
-	set_request('ancien_cacher_public', lire_config('manuelsite/cacher_public'));
-	return array();
-}
-
-/**
- * Pipeline
- * Invalider le cache pour tout changement de configuration
- *
- * @param array $flux
- * @return array
- */
-function manuelsite_formulaire_traiter($flux){
-	include_spip('inc/invalideur');
-	suivre_invalideur('1');
-	return $flux;
-}
-
 ?>

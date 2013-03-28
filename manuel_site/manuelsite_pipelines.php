@@ -27,5 +27,21 @@ function manuelsite_pre_boucle($boucle) {
 	return $boucle;
 }
 
-
+/**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * 
+ * Invalider le cache pour tout changement de configuration
+ *
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array
+ * 		Le même contexte de pipeline après invalidation s'il y a lieu
+ */
+function manuelsite_formulaire_traiter($flux){
+	if($flux['args']['form'] == 'configurer_manuelsite'){
+		include_spip('inc/invalideur');
+		suivre_invalideur('1');
+	}
+	return $flux;
+}
 ?>

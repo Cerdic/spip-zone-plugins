@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.9.1</version>
+	<version>0.9.2</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -45,7 +45,7 @@
 	</pipeline>
 	<pipeline>
 		<nom>formulaire_traiter</nom>
-		<inclure>formulaires/configurer_manuelsite.php</inclure>
+		<inclure>manuelsite_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		 <nom>autoriser</nom>
