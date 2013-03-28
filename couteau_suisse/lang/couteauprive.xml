@@ -29,8 +29,8 @@
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=sk">
-		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
 	<langue code="tr" />
 </traduction>
