@@ -1,7 +1,7 @@
 <traduction module="zotspip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=en">
-		<traducteur nom="Joseph" lien="http://trad.spip.net/auteur/joseph-larmarange" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Joseph" lien="http://trad.spip.net/auteur/joseph-larmarange" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=es">
 		<traducteur nom="agnesg63" lien="http://trad.spip.net/auteur/agnesg63" />
