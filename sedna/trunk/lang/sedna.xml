@@ -8,8 +8,8 @@
 	<langue code="cs" />
 	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="eo" />
 	<langue code="es" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=es">
