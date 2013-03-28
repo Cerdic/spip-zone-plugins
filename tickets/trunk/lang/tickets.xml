@@ -6,8 +6,8 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=es">
