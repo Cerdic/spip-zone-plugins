@@ -11,8 +11,8 @@
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/cfg?lang_cible=es">
-		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/cfg?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
