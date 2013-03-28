@@ -66,11 +66,13 @@ function cache_valide(&$page, $date) {
 	if (isset($GLOBALS['meta']['cache_inhib']) AND $_SERVER['REQUEST_TIME'] AND $_SERVER['REQUEST_TIME']<$GLOBALS['meta']['cache_inhib']) return -1;
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
-	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
+
+	// pas de cache ? on le met a jour, sauf pour les bots (on leur calcule la page sans mise en cache)
+	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return _IS_BOT?-1:1;
 
 	// controle de la signature
 	if ($page['sig'] !== cache_signature($page))
-		return 1;
+		return _IS_BOT?-1:1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
@@ -101,10 +103,11 @@ function cache_valide(&$page, $date) {
 	$cache_mark = (isset($GLOBALS['meta']['cache_mark'])?$GLOBALS['meta']['cache_mark']:0);
 	if ($duree == 0)  #CACHE{0}
 		return -1;
-	else if ($date + $duree < $now
-		# le cache est anterieur a la derniere purge : l'ignorer
+	// sauf pour les bots, qui utilisent toujours le cache
+	else if ((!_IS_BOT AND $date + $duree < $now)
+		# le cache est anterieur a la derniere purge : l'ignorer, meme pour les bots
 	  OR $date<$cache_mark)
-		return 1;
+		return _IS_BOT?-1:1;
 	else
 		return 0;
 }
