@@ -4,15 +4,15 @@
 	</langue>
 	<langue code="ca" />
 	<langue code="de" url="http://trad.spip.net/tradlang_module/contact?lang_cible=de">
-		<traducteur nom="Martin" lien="http://trad.spip.net/auteur/martin" />
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Martin" lien="http://trad.spip.net/auteur/martin" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/contact?lang_cible=en">
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/contact?lang_cible=es">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
