@@ -101,7 +101,7 @@ function cache_valide(&$page, $date) {
 	$cache_mark = (isset($GLOBALS['meta']['cache_mark'])?$GLOBALS['meta']['cache_mark']:0);
 	if ($duree == 0)  #CACHE{0}
 		return -1;
-	else if ($date + $duree < $now 
+	else if ($date + $duree < $now
 		# le cache est anterieur a la derniere purge : l'ignorer
 	  OR $date<$cache_mark)
 		return 1;
@@ -131,12 +131,13 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 		// "cache sessionne" ; sa date indique la date de validite
 		// des caches sessionnes
 		if (!is_array($tmp = $memo->get($chemin_cache))) {
-			spip_log('Creation cache sessionne '.$memo->methode.' '.$chemin_cache);
 			$tmp = array(
 				'invalideurs' => array('session' => ''),
 				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
-			$memo->set($chemin_cache, $tmp);
+			$ok = $memo->set($chemin_cache, $tmp);
+			spip_log("Creation du cache sessionne $chemin_cache ". $memo->methode ." pour "
+				. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 		}
 		$chemin_cache .= '_'.$page['invalideurs']['session'];
 	}
