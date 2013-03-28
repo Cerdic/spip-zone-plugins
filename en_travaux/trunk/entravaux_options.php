@@ -102,19 +102,11 @@ if (is_entravaux()){
 function entravaux_styliser($flux){
 	if (is_entravaux()){
 		include_spip('inc/autoriser');
+		// les pages exceptions
+		$pages_ok = array('login_sos','robots.txt','spip_pass','favicon.ico','informer_auteur');
 		if (!autoriser('travaux')
-			AND !in_array(
-				    $flux['args']['fond'],
-						// les pages exceptions
-			      array('login_sos','robots.txt','spip_pass','favicon.ico',
-			      )
-			    )
-			AND !in_array(
-						$flux['args']['contexte'][_SPIP_PAGE],
-						// les pages exceptions
-						array('login_sos','robots.txt','spip_pass','favicon.ico',
-						)
-					)
+			AND !in_array($flux['args']['fond'],$pages_ok)
+			AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
 			// et on laisse passer modeles et formulaires,
 			// qui ne peuvent etre inclus ou appeles que legitimement
 		  AND strpos($flux['args']['fond'],'/')===false){
