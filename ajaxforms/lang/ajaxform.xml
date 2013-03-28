@@ -7,8 +7,8 @@
 	</langue>
 	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/ajaxform?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
