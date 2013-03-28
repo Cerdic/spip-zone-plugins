@@ -115,7 +115,7 @@
 		<figure>
 			[(#SET{nomVideo,[(#FICHIER|basename|replace{\.#EXTENSION,''})]})]
 			[(#FICHIER|basename|pathinfo|table_valeur{filename}|oui) [(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})] ]
-			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
+			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},poster=#GET{poster},env} />
 			[(#GET{titre_descriptif}|=={oui}|oui)
 			<figcaption>
 				<p><strong>#TITRE</strong></p> 
