@@ -90,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_pref' => 'Préféré',
 	'type_email_x400' => 'X.400', // http://en.wikipedia.org/wiki/X.400#Addressing
 	'type_mel_home' => 'Personnel',
+	'type_mel_intl' => 'International', // ?
 	'type_mel_work' => 'Professionnel',
 	'type_tel_bbs' => 'Service de messagerie', // http://fr.wikipedia.org/wiki/Bulletin_Board_System#Les_BBS_du_r.C3.A9seau_t.C3.A9l.C3.A9phonique
 	'type_tel_car' => 'Voiture', // il s'agit du "mode analogique" de la radiotelephonie  http://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9phonie_mobile#Le_r.C3.A9seau

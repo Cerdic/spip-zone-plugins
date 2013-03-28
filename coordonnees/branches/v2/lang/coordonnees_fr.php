@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_internet' => 'Internet',
 	'type_email_pref' => 'Préféré',
 	'type_email_x400' => 'X.400',
+	'type_mel_intl' => 'International', // ?
 	'type_mel_home' => 'Personnel',
 	'type_mel_work' => 'Professionnel',
 	'type_tel_bbs' => 'Service de messagerie',

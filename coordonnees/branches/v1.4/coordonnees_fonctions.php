@@ -22,25 +22,24 @@ function logo_type_($id='', $val='') {
 }
 
 // RFC2426/CCITT.X520 : dom home intl parcel postal pref work
-function logo_type_adr($type_adresse) {
+function filtre_logo_type_adr($type_adresse) {
 	return logo_type_('adr', $type_adresse);
 }
 
 // RFC2426/CCITT.X500 : bbs car cell fax home isdn modem msg pager pcs pref video voice work
 // RFC6350/CCITT.X520.1988 : cell fax pager text textphone video voice x-... (iana-token)
 // + : dsl
-function logo_type_tel($type_numero) {
+function filtre_logo_type_tel($type_numero) {
 	return logo_type_('tel', $type_numero);
 }
 
 // RFC2426/IANA : internet pref x400
-// RFC6350/CCITT.X520+RFC5322 : home intl work
-function logo_type_email($type_email) {
+function filtre_logo_type_email($type_email) {
 	return logo_type_('email', $type_email);
 }
 
-// RFC6350/CCITT.X520+RFC5322 readapte : perso pro
-function logo_type_mel($type_email) {
+// RFC6350/CCITT.X520+RFC5322 : home intl work
+function filtre_logo_type_mel($type_email) {
 	return logo_type_('mel', $type_email);
 }
 

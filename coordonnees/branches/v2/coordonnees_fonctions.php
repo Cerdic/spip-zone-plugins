@@ -79,7 +79,6 @@ function filtre_logo_type_tel($type_numero) {
  *  Valeur du type de liaison (cf. logo_type_).
  *  Les valeurs nativement prises en compte sont les codes normalisees
  * IANA/RFC2426 (section 3.3.2) : internet pref x400
- * CCITT.X520+RFC5322/RFC6350 (section 6.4.2) : home intl work
  * @return string
  *  Balise HTML micro-format (cf. logo_type_)
 **/
@@ -88,17 +87,12 @@ function filtre_logo_type_email($type_email) {
 }
 
 /**
- * Filtre d'affichage du type d'un mel (2nd)
+ * Filtre d'affichage du type (usage) d'un courriel
  *
- * @param string $type_adresse
+ * @param string $type_email
  *  Valeur du type de liaison (cf. logo_type_).
- *  Cette adaptation reconnait les codes RFC6350 traduits "perso" et "pro"
- * (respectivement pour "home" et "work")
- * @return string
- *  Balise HTML micro-format (cf. logo_type_)
- * @note
- *  On fait un nouveau filtre pour ne pas melanger ce qui releve de la norme et
- * les bidouilles temporaires.
+ *  Les valeurs nativement prises en compte sont les codes normalisees
+ * CCITT.X520+RFC5322/RFC6350 (section 6.4.2) : home (perso) intl work (pro)
 **/
 function filtre_logo_type_mel($type_email) {
 	return logo_type_('mel', $type_email);

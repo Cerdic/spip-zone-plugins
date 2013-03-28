@@ -6,6 +6,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
 /**
  * Fonction privee mutualisee utilisee par les filtres logo_type_xx
  *
@@ -121,6 +122,24 @@ function filtre_logo_type_mel($type_email) {
 **/
 function filtre_logo_type_impp($type_messagerie) {
 	return logo_type_('impp', $type_messagerie);
+}
+
+/**
+ * Interdire l'acces a une page si on n'a pas l'autorisation
+ *
+ * @param bool $autorisation
+ *   Resultat de l'appel a autoriser('UneAction', 'coordonnees')
+ * @return void
+ *   Affichage de la page d'acces refuse/interdit si l'autorisation est a FALSE
+ * @note
+ *   C'est une reprise (r67625) du filtre "sinon_interdire_acces" de Bonux
+**/
+function coordonnees_interdit_sinon($autorisation) {
+	if (!$autorisation) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
 }
 
 ?>
