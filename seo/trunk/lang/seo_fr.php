@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url_activate' => 'Activer la meta d\'URL Canoniques',
 
 	// F
-	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes',
+	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux metas générées par les squelettes',
 	'forcer_squelette_label' => 'Charger les metas pour tous squelettes',
 
 	// G
@@ -51,11 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Robots :',
 	'meta_sommaire_value' => 'Valeur de la Meta du Sommaire',
 	'meta_tags' => 'Meta Tags',
-	'meta_tags_activate' => 'Activer les meta tags éditoriales',
-	'meta_tags_default' => 'Valeur des Meta Tags par Défaut (pour les Articles et les Rubriques)',
+	'meta_tags_activate' => 'Activer les balises metas éditoriales',
+	'meta_tags_default' => 'Valeur des balises metas par défaut (pour les articles et les rubriques)',
 	'meta_tags_edit_activate' => 'Activer l\'édition des meta tags dans les rubriques et les articles',
-	'meta_tags_editing' => 'Edition des Meta Tags',
-	'meta_tags_sommaire' => 'Valeur des Meta Tags du Sommaire (page d\'accueil)',
+	'meta_tags_editing' => 'Édition des balises metas',
+	'meta_tags_sommaire' => 'Valeur des balises metas du sommaire (page d\'accueil)',
 	'meta_title' => 'Titre :',
 
 	// S
