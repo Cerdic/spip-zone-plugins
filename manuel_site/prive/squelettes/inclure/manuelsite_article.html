@@ -3,9 +3,10 @@
 	Largeur max image. Soit largeur définie dans la config, soit largeur #extra de prive/style_prive.html (180 moins 20 de marge)
 ]
 [(#SET{taille_max_image,180})]
-[(#CONFIG{manuelsite/afficher_bord_gauche}|et{#CONFIG{manuelsite/largeur,300}|match{%}|non}|oui)
+[(#CONFIG{manuelsite/afficher_bord_gauche}|et{#CONFIG{manuelsite/largeur,300}|intval|>{0}|oui}|et{#CONFIG{manuelsite/largeur,300}|match{%}|non}|oui)
 	[(#SET{taille_max_image,[(#CONFIG{manuelsite/largeur,300}|moins{20})]})]
 ]
+
 [(#ENV{bouton_fermer}|oui)
 	<a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
 ]

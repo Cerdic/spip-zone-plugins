@@ -1,7 +1,7 @@
 <paquet
 	prefix="manuelsite"
 	categorie="edition"
-	version="0.9.2"
+	version="0.9.3"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/manuelsite-32.png"
