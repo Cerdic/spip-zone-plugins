@@ -17,7 +17,7 @@ function corbeille_action_rapide() {
 		$infos =
 			($nb?_T('couteauprive:corbeille_objets', array('nb'=>$nb)):_T('couteauprive:corbeille_objets_vide'))
 			.($nb_lies>0?' '._T('couteauprive:corbeille_objets_lies', array('nb_lies'=>$nb_lies)):'');
-		$objets[] = "<label><input type='checkbox' value='$_table:$ids'".($nb?" checked='checked'":"")." name='$_table'/>$lib.
+		$objets[] = "<label><input type='checkbox' value='$_table:$ids'".(($statut!=='spam' && $nb)?" checked='checked'":"")." name='$_table'/>$lib.
 <span class='ar_edit_info'>$infos</span></label>";
 	}
 	return ajax_action_auteur('action_rapide', 'purge_corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
