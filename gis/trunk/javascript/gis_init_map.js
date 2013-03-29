@@ -223,7 +223,9 @@ var gis_init_map = function(mapcfg) {
 		map.kml = {};
 		for(var i in mapcfg['kml']){
 			map.kml[i] = new L.KML(mapcfg['kml'][i], {async: true});
-			map.kml[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
+			if (mapcfg['centrer_fichier']) {
+				map.kml[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
+			}
 			map.addLayer(map.kml[i]);
 		}
 	}
@@ -231,7 +233,9 @@ var gis_init_map = function(mapcfg) {
 		map.gpx = {};
 		for(var i in mapcfg['gpx']){
 			map.gpx[i] = new L.GPX(mapcfg['gpx'][i], {async: true});
-			map.gpx[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
+			if (mapcfg['centrer_fichier']) {
+				map.gpx[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
+			}
 			map.addLayer(map.gpx[i]);
 		}
 	}
