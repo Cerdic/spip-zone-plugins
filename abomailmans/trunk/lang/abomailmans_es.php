@@ -41,35 +41,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emails_a_renseigner' => 'Correos electrónicos a reportar',
 	'envoi_apercu' => 'Vista previa',
 	'envoi_confirmer' => 'Confirmar y enviar',
-	'envoi_liste_parametres' => 'Liste des paramètres [Facultatif]', # NEW
+	'envoi_liste_parametres' => 'Lista de parámetros de configuración [Opcional]',
 	'envoi_parametres' => 'Configuración',
 	'envoi_regulier' => 'Envíos automáticos',
 	'envoi_regulier_info' => 'Dejar en blanco para no recibir envíos automáticos',
-	'envoi_regulier_tous_les' => 'Envoi tous les', # NEW
-	'envoi_vers' => 'envoi vers', # NEW
+	'envoi_regulier_tous_les' => 'Enviar todos los',
+	'envoi_vers' => 'enviar a',
 	'envoyer_courier' => 'Envíar un correo electrónico',
 	'envoyer_courier_liste' => 'Enviar este correo electrónico a esta lista de difusión:',
 	'envoyer_mailmans' => 'Seleccionar el modelo y su contenido',
-	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire', # NEW
-	'erreur_nobot' => 'Votre inscription n\' a pu être effectué à cause d\'un problème technique', # NEW
-	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>', # NEW
-	'explication_email_sympa' => 'Si ce champ est renseigné, la liste est considérée comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".', # NEW
+	'erreur_email_liste_oublie' => 'La dirección de correo electrónico es obligatoria',
+	'erreur_nobot' => 'Su inscripción no ha podido efectuarse debido a un problema técnico',
+	'explication_email_subscribe' => 'Correo electrónico de suscripción, del estilo <code>suffixe+subscribe@exemple.org</code>',
+	'explication_email_sympa' => 'Si este campo es reportado, la lista se considera como una lista de servidor "Sympa", en caso contrario como una lista "Mailman" o "ezmlm".',
 	'explication_email_unsubscribe' => 'Correo electrónico de baja de suscripción',
 
 	// I
 	'icone_ajouter_liste' => 'Añadir una nueva lista',
-	'icone_envoyer_mail_liste' => 'Envoyer un e-mail aux lettres à partir du contenu de ce site', # NEW
+	'icone_envoyer_mail_liste' => 'Enviar un correo electrónico a los boletines a partir del contenido de este sitio',
 	'icone_modifier_abomailman' => 'Modificar la lista',
 	'icone_retour_abomailman' => 'Volver a la lista',
 	'info_abomailman_aucun' => 'Ninguna lista',
 	'info_abomailmans_1' => 'Una lista',
 	'info_abomailmans_nb' => '@nb@ listas',
-	'info_sisympa' => '[Obligatoire si liste Sympa]', # NEW
+	'info_sisympa' => '[Obligatorio en caso de liste Sympa]',
 	'insciption_listes_legende' => 'Suscripción a las listas de suscripción',
 	'inscription_lettres_legende' => 'Suscripción a las listas de difusión y de discusiones',
 
 	// J
-	'je_m_abonne' => 'Cochez pour valider l\'abonnement ou le désabonnement.', # NEW
+	'je_m_abonne' => 'Marque para validar la suscripción o la baja en la suscripción',
 
 	// L
 	'label_etat_liste' => 'Estado de la lista',
@@ -81,19 +81,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_inscription_news' => 'Inscripción en la lista de difusión',
 	'legende_inscriptions_ml' => 'Inscripción en la listas de discusión',
 	'legende_inscriptions_news' => 'Inscripción a las listas de difusión',
-	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseignées', # NEW
+	'les_listes_mailmans' => 'Listas mailmans, sympa o ezmlm reportadas',
 	'lire_article' => 'Leer artículo',
 	'liste_creee' => 'La lista número @id@ (@titre@) ha sido creada.',
 	'liste_non_existante' => 'La lista solicitada no existe o ha sido eliminada',
-	'liste_oublie' => 'Vous avez oublié de cocher une liste !', # NEW
+	'liste_oublie' => '¡Ha olvidado marcar una lista!',
 	'liste_supprimee' => 'La lista número @id@ (@titre@) ha sido eliminada.',
 	'liste_updatee' => 'La lista número @id@ (@titre@) ha sido actualizada.',
 
 	// M
-	'message' => 'Introduction à votre courrier, avant le contenu issu du site', # NEW
+	'message' => 'Introducción a su correo, antes del contenido del sitio',
 	'message_confirm_suite' => 'Para confirmar su solicitud, responda a la solicitud de confirmación que ha recibido por correo electrónico.',
 	'message_confirmation_a' => 'Una solicitud de suscripción a las siguientes listas acaba de ser enviada:',
-	'message_confirmation_d' => 'Une demande de désabonnement aux listes suivantes vient d\'être envoyée. ', # NEW
+	'message_confirmation_d' => 'Una solicitud de baja en la suscripción a las siguientes listas acaba de ser enviada.',
 	'message_confirmation_unique_a' => 'Una solicitud de suscripción a la siguiente lista acaba de ser enviada:',
 	'message_confirmation_unique_d' => 'Una solicitud de baja de la suscripción a la siguiente lista acaba de ser enviada. ',
 	'mot' => 'Y listar los artículos de la palabra clave',
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'template' => 'Elija el modelo y su contenido',
 	'template_defaut' => 'Modelo por defecto',
-	'template_defaut_info' => 'Si le fichier modele_choisi.txt.html existe, la newsletter sera envoyée en mode html + texte. Sinon seule la version html sera expédiée.', # NEW
+	'template_defaut_info' => 'Si el archivo modelo_elegido.txt.html existe, el boletín será enviado en modo html + texte. Si no, sólo la versión html será expedida. ',
 	'texte_descriptif' => 'Descripción',
 	'titre_abomailman' => 'Título de la lista',
 	'titre_liste_obligatoire' => 'El título de la lista es obligatorio',
