@@ -27,7 +27,7 @@ function genie_emailtospip_dist($t){
    
    
    $limit = 20; // max d'emails à traiter en une passe (pour éviter le timeout)
-   $pagination = 100; // nb emails à examiner (pour ne pas consulter toute la boite)
+   $pagination = 50; // nb emails à examiner (pour ne pas consulter toute la boite)
       
    if ($hote_imap!="") {  
           // connection or die          
