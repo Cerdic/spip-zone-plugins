@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_pref' => 'Preferovaný',
 	'type_email_x400' => 'X.400',
 	'type_mel_home' => 'Domov',
+	'type_mel_intl' => 'International', # NEW
 	'type_mel_work' => 'Práca',
 	'type_tel_bbs' => 'Odkazová služba',
 	'type_tel_car' => 'Auto',
