@@ -12,6 +12,8 @@ function gis_insert_head_css($flux){
 	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.css') .'" />';
 	$flux .= "\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.ie.css') .'" /> <![endif]-->';
 	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'plugins/leaflet-plugins.css') .'" />';
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('css/leaflet.markercluster.css') .'" />';
+	$flux .="\n".'<!--[if lte IE 8]><link rel="stylesheet" href="'. find_in_path('css/leaflet.markercluster.ie.css') .'" /><![endif]-->';
 	return $flux;
 }
 

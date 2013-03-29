@@ -39,9 +39,9 @@
 Lib clustering si besoin
 ]
 [(#ENV{cluster}|=={oui}|oui)
-#INCLURE{javascript/leafclusterer.js}
+#INCLURE{javascript/leaflet.markercluster-src.js}
 ]
 
-[(#CONFIG{auto_compress_js}|=={oui})
+[(#CONFIG{auto_compress_js}|=={oui}|oui)
 #FILTRE{compacte}
 ]

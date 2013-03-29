@@ -62,7 +62,7 @@ var gis_init_map = function(mapcfg) {
 		jQuery(layers_control._form).addClass('noajax');
 	}
 
-	map.setView(new L.LatLng(mapcfg['lat'],mapcfg['lon']),mapcfg['zoom']);
+
 	map.attributionControl.setPrefix('');
 
 	// Ajout des contrôles de la carte
@@ -143,28 +143,36 @@ var gis_init_map = function(mapcfg) {
 	else {
 		// Analyse des points et déclaration (en regroupant les points en cluster)
 		map.parseGeoJson = function(data) {
-			map.markers = [];
+			var options = {
+				showCoverageOnHover:false
+			};
+			if (mapcfg["clusterMaxZoom"])
+				options.disableClusteringAtZoom = parseInt(mapcfg["clusterMaxZoom"]);
+			if (mapcfg["clusterShowCoverageOnHover"])
+				options.showCoverageOnHover = Boolean(mapcfg["clusterShowCoverageOnHover"]);
+
+			map.markers = new L.MarkerClusterGroup(options);
+
 			/* Pour chaque points présents, on crée un marqueur */
 			$.each(data.features, function(i, feature) {
 				if (feature.geometry.coordinates[0]) {
 					var latlng = new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
 					var marker = new L.Marker(latlng);
+
 					// Déclarer l'icone du point
 					map.setGeoJsonFeatureIcon(feature, marker);
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, marker);
 
 					marker.id = feature.id;
-					map.markers.push(marker);
+					map.markers.addLayer(marker);
 				}
 			});
-			/* Ajout des marqueurs dans un clustering JS client */
-			var options = {};
-			if (mapcfg["clusterMaxZoom"])
-				options["maxZoom"] = mapcfg["clusterMaxZoom"];
-			if (mapcfg["clusterStyles"].length)
-				options["styles"] = mapcfg["clusterStyles"];
-			map.markerCluster = new L.Marker.Clusterer(map, map.markers, options);
+
+			map.addLayer(map.markers);
+
+			if (mapcfg['autocenterandzoom'])
+				map.fitBounds(map.markers.getBounds());
 		}
 	}
 

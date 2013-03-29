@@ -50,8 +50,7 @@ Uniquement si objets = point_libre :
 Clustering (regroupement de points proches) :
 - cluster = oui                    Active le clustering
 - clusterMaxZoom = 11              Regroupe les points jusque à ce zoom, mais pas au delà
-- clusterStyles = #ARRAY{}         Styles appliqués aux clusters
-
+- clusterShowCoverageOnHover = 0   1 pour afficher un dessin au survol de la zone couvertes par les points regroupés
 ]
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
@@ -99,10 +98,10 @@ map_cfg["[(#GET{id})]"] = {
 "fullscreen":[(#ENV{fullscreen}|=={oui}|?{true,false})],
 "cluster":[(#ENV{cluster}|=={oui}|?{true,false})],
 "clusterMaxZoom":[(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
+"clusterShowCoverageOnHover":[(#ENV{clusterShowCoverageOnHover}|?{true,false})],
 "path_styles":[(#ENV*{path_styles}|json_encode)],
 "autocenterandzoom":[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
 "open_id":"[(#ENV{id_a_ouvrir,''})]",
-"clusterStyles":\[[(#ENV*{clusterStyles,#ARRAY}|json_encode)]\],
 "affiche_points":[(#ENV{point,''}|=={non}|?{false,true})],
 "json_points":{
 	"url":"[(#URL_PAGE{gis_json}|url_absolue)]"[,
