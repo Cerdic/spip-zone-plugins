@@ -96,15 +96,15 @@ function cs_corbeille_table_infos($table=false) {
 				),
 				"forums_publics" => array( "statut" => "off",
 					"table"=>"forum",
-					"libelle" => 'titre_forum',
+					"libelle" => 'spip:titre_forum',
 				),
 				"forums_prives" => array( "statut" => "privoff",
 					"table"=>"forum",
-					"libelle" => 'icone_forum_administrateur',
+					"libelle" => 'spip:icone_forum_administrateur',
 				),
 				"forums_spam" => array( "statut" => "spam",
 					"table"=>"forum",
-					"libelle" => 'spam',
+					"libelle" => 'public:spam',
 				),
 			);
 		}
