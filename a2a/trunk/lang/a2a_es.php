@@ -16,10 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_a2a' => 'Configurar las relaciones entre artículos',
 
 	// E
-	'explication_navigateur' => 'Haga click en [Añadir] para navegar en la arborescencia del sitio a fin de seleccionar los artículos a relacionar. ',
-	'explication_type_obligatoire' => 'Vous pouvez imposer de typer les liaisons', # NEW
-	'explication_types_differents' => 'Marque esta casilla para permitir relacionar varias veces dos mismos artículos, cambiando el tipo cada vez',
-	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
+	'explication_navigateur' => 'Haga click en [Añadir] para navegar en la arborescencia del sitio para seleccionar los artículos a conectar. ',
+	'explication_type_obligatoire' => 'Puede imponer el caracterizar los vínculos',
+	'explication_types_differents' => 'Marque esta casilla para permitir conectar varias veces dos mismos artículos, cambiando el tipo cada vez',
+	'explication_types_liaisons' => 'Puede definir los tipos de relaciones: indíquelos uno por línea, seguido de una coma y de una descripción. Una línea vacía para el valor por defecto. 
+La descripción puede ser una cadena de idioma. ',
 
 	// I
 	'info_nombre_articles_lies' => '@nb@ artículos relacionados',
@@ -31,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_cet_article_deux_cotes' => 'Vincular los dos lados',
 
 	// O
-	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
+	'ob_pb' => 'No se puede forzar el tipo de conexión: en efecto, los siguientes artículos tienen vínculos no tipificados. Tipifíquelos primero, después fuerce la tipificación.',
 
 	// P
 	'pas_articles_lies' => 'Ningún artículo relacionado',
@@ -54,11 +55,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer_le_lien_deux_cotes' => 'Desvincular los dos lados',
 
 	// T
-	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
+	'td_pb' => 'Usted solicita prohibir la conexión varias veces de dos mismos artículos. Sin embargo, algunos artículos tienen varias conexiones con otros artículos. Corríjalo antes. ',
 	'type' => 'Tipo',
 	'type_inexistant' => 'Tipo de conexión inexistente',
 	'type_liaison' => 'Tipo de conexión',
-	'type_obligatoire' => 'Typage obligatoire', # NEW
+	'type_obligatoire' => 'Tipificación obligatoria',
 	'types_differents' => 'Conexiones múltiples',
 	'types_liaisons' => 'Tipos de conexión',
 	'types_liaisons_non_modifiables' => 'Los siguientes tipos de conexiones no pueden modificarse con la configuración',
