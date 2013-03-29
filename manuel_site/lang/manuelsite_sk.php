@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_explication' => 'Tento zásuvný modul nainštaluje ikonu pomocníka, ktorá umožní zobraziť zo súkromnej zóny akúkoľvek stranu z manuálu o publikovaní na stránke. Tento manuál je @texte@ Musí redaktorom priblížiť štruktúru stránky, čo je v ktorej rubrike, ako zakódovať a nainštalovať video, atď. Skrátka všetko, čo chcete a čo je špecifické pre vašu stránku.',
+	'configurer_explication' => 'Tento zásuvný modul nainštaluje ikonu pomocníka, ktorá umožní zobraziť zo súkromnej zóny akúkoľvek stranu z manuálu o publikovaní na stránke. Tento manuál je @texte@ Musí redaktorom priblížiť štruktúru stránky, čo je v ktorej rubrike, ako zakódovať a nainštalovať video, atď. Skrátka všetko, čo chcete a čo je špecifické pre vašu stránku.', # MODIF
 	'configurer_explication_l_article' => '<a href="@url@" title="Manuál na publikovanie">článok #@idart@</a> z vašej stránky.',
 	'configurer_explication_un_article' => 'článok stránky.',
 	'configurer_titre' => 'Nastaviť manuál na publikovanie stránky',

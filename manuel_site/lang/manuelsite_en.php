@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_explication' => 'This plugin displays an help icon on every page of the private space showing the Website Editor Handbook. This handbook is @texte@ Its purpose is to explain the architecture of the site to the editors, in which section to store what, how to encode and install a video… So, all that you want and which is specific to your website.',
+	'configurer_explication' => 'This plugin displays an help icon on every page of the private space showing the Website Editor Handbook. This handbook is @texte@ Its purpose is to explain the architecture of the site to the editors, in which section to store what, how to encode and install a video… So, all that you want and which is specific to your website.', # MODIF
 	'configurer_explication_l_article' => '<a href="@url@" title="Website Editor Handbook">the article #@idart@</a> of your website.',
 	'configurer_explication_un_article' => 'an article of the website.',
 	'configurer_titre' => 'Configure the Website Editor Handbook',
