@@ -14,7 +14,7 @@ function corbeille_action_rapide() {
 			?cs_lien(generer_url_ecrire('action_rapide',"arg=corbeille|liste_objets&script=foo&objet=$objet&statut=$statut"),$obj['libelle'])
 			:$obj['libelle'];
 		$ids = join(',', $ids);
-		$infos = 
+		$infos =
 			($nb?_T('couteauprive:corbeille_objets', array('nb'=>$nb)):_T('couteauprive:corbeille_objets_vide'))
 			.($nb_lies>0?' '._T('couteauprive:corbeille_objets_lies', array('nb_lies'=>$nb_lies)):'');
 		$objets[] = "<label><input type='checkbox' value='$_table:$ids'".($nb?" checked='checked'":"")." name='$_table'/>$lib.
@@ -51,7 +51,7 @@ function cs_corbeille_table_infos($table=false) {
 						|| $o['statut_titres'][$p='refuse'] || $o['statut_textes_instituer'][$p='refuse'] // breves, sites
 					)//	|| ($o['editable'] && $t!='rubriques' && $t!='documents' && $p='?poubelle')) // et les autres objets editables ?
 				) {
-					$params[$t] = array( 
+					$params[$t] = array(
 						"statut" => $p,
 						"libelle" => $o['texte_objets'],
 					);
@@ -70,10 +70,6 @@ function cs_corbeille_table_infos($table=false) {
 					"table"=>"forum",
 					"libelle" => 'forum:titre_cadre_forum_interne',
 				),
-				"forums_spam" => array( "statut" => "spam",
-					"table"=>"forum",
-					"libelle" => 'forum:messages_spam',
-				),
 			));
 		} else {
 			$params = array(
@@ -83,15 +79,15 @@ function cs_corbeille_table_infos($table=false) {
 				),
 				"auteurs" => array( "statut" => "5poubelle",
 					"libelle" => 'icone_auteurs',
-				),					
-				"breves" => array( "statut" => "refuse", 
+				),
+				"breves" => array( "statut" => "refuse",
 					"libelle" => defined('_SPIP30000')?'breves:icone_breves':'icone_breves',
 				),
 				"sites" => array( "statut" => "refuse",
 					"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
 					"libelle" => 'couteau:objet_syndics',
 				),
-				"signatures" => array( "statut" => "poubelle", 
+				"signatures" => array( "statut" => "poubelle",
 					"libelle" => 'couteau:objet_petitions',
 				),
 				"forums_publics" => array( "statut" => "off",
@@ -102,15 +98,11 @@ function cs_corbeille_table_infos($table=false) {
 					"table"=>"forum",
 					"libelle" => 'spip:icone_forum_administrateur',
 				),
-				"forums_spam" => array( "statut" => "spam",
-					"table"=>"forum",
-					"libelle" => 'public:spam',
-				),
 			);
 		}
 		if(is_array($corbeille_params)) $params = array_merge($params, $corbeille_params);
-		array_walk($params, create_function('&$val', '$val["libelle"] = _T($val["libelle"]);')); 
-		uasort($params, create_function ('$a, $b', 'return strcmp(strtolower($a["libelle"]), strtolower($b["libelle"]));')); 
+		array_walk($params, create_function('&$val', '$val["libelle"] = _T($val["libelle"]);'));
+		uasort($params, create_function ('$a, $b', 'return strcmp(strtolower($a["libelle"]), strtolower($b["libelle"]));'));
 	}
 	if(!$table) return $params;
 	if(isset($params[$table])) return $params[$table];
@@ -193,7 +185,6 @@ function corbeille_liste_objets_exec() {
 		.'<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" /></head><body style="text-align:center">'
 		.(recuperer_fond('fonds/corbeille', array('objet'=>_request('objet'),'statut'=>_request('statut'))))
 		.'</body></html>';
-;
 }
 
 ?>
