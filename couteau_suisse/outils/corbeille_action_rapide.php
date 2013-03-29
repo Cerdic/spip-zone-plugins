@@ -70,6 +70,10 @@ function cs_corbeille_table_infos($table=false) {
 					"table"=>"forum",
 					"libelle" => 'forum:titre_cadre_forum_interne',
 				),
+				"forums_spam" => array( "statut" => "spam",
+					"table"=>"forum",
+					"libelle" => 'forum:messages_spam',
+				),
 			));
 		} else {
 			$params = array(
@@ -97,6 +101,10 @@ function cs_corbeille_table_infos($table=false) {
 				"forums_prives" => array( "statut" => "privoff",
 					"table"=>"forum",
 					"libelle" => 'spip:icone_forum_administrateur',
+				),
+				"forums_spam" => array( "statut" => "spam",
+					"table"=>"forum",
+					"libelle" => 'public:spam',
 				),
 			);
 		}
