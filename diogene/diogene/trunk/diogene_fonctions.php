@@ -138,7 +138,10 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 			$url = parametre_url($url,$id_table_objet,intval($id));
 		}
 	}else{
-		$url = generer_url_ecrire_objet($objet,$id);
+		$a = id_table_objet($objet) . "=" . intval($id);
+		if (!function_exists('objet_info'))
+			include_spip('inc/filtres');
+		$url = generer_url_ecrire(objet_info($objet,'url_voir'), $a);
 	}
 	return $url;
 }
