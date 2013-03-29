@@ -1,0 +1,21 @@
+		<BOUCLE_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit}}{","}>
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"id":"#ID_GIS",
+		"properties": {
+			"title":[(#VAL{<a href='[(#ID_GIS|generer_url_entite{gis,'','',0})]'>[(#TITRE*|supprimer_numero|sinon{----})]</a>}|json_encode)],
+			"description":[(#DESCRIPTIF|json_encode)][(#SET{logo_doc,''})]
+			[(#LOGO_GIS|oui)
+			[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
+			[(#LOGO_GIS|non)
+			[(#CHEMIN{images/marker_defaut.png}|oui)[
+				(#SET{logo_doc,#CHEMIN{images/marker_defaut.png}|image_passe_partout{32,32}|image_recadre{32,32}})]
+			]]
+			[(#GET{logo_doc}|oui)
+			#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+			#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+			[,"icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+			"icon_size": \[[(#GET{icon_w})],[(#GET{icon_h})]\],
+			"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\],
+			"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]]
+		}}</BOUCLE_gis>

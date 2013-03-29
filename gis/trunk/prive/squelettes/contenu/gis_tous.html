@@ -1,4 +1,15 @@
-<!-- <h1 class="grostitre"><:gis:editer_gis_titre:></h1> -->
+<h1 class="grostitre"><:gis:editer_gis_titre:></h1>
+
 [(#REM)<p><:gis:editer_gis_explication:></p>]
 
-[(#INCLURE{fond=modeles/carte_gis,id_carte_gis=_all})]
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<BOUCLE_gis(GIS){recherche ?}{pagination 1}>
+<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_gis,gis:info_nb_gis})]</h3>
+</BOUCLE_gis>
+<h3><:gis:info_aucun_gis:></h3>
+<//B_gis>
+
+
+[(#INCLURE{fond=modeles/carte_gis,id_carte_gis=_all,recherche,objets=tous_avec_liens_espace_prive})]
