@@ -6,9 +6,9 @@
 //include_spip('inc/actions_compat');
 
 function corbeille_action_rapide() {
-	foreach(cs_corbeille_table_infos() as $table=>$obj) {
-		list($nb, $nb_lies, $ids, $statut) = cs_corbeille_gerer($table, -1);
-		$table = isset($obj['table'])?$obj['table']:$table;
+	foreach(cs_corbeille_table_infos() as $_table=>$obj) {
+		list($nb, $nb_lies, $ids, $statut) = cs_corbeille_gerer($_table, -1);
+		$table = isset($obj['table'])?$obj['table']:$_table;
 		$objet = objet_type($table);
 		$lib = ($nb && defined('_SPIP30000'))
 			?cs_lien(generer_url_ecrire('action_rapide',"arg=corbeille|liste_objets&script=foo&objet=$objet&statut=$statut"),$obj['libelle'])
@@ -17,7 +17,7 @@ function corbeille_action_rapide() {
 		$infos = 
 			($nb?_T('couteauprive:corbeille_objets', array('nb'=>$nb)):_T('couteauprive:corbeille_objets_vide'))
 			.($nb_lies>0?' '._T('couteauprive:corbeille_objets_lies', array('nb_lies'=>$nb_lies)):'');
-		$objets[] = "<label><input type='checkbox' value='$table:$ids'".($nb?" checked='checked'":"")." name='$table'/>$lib.
+		$objets[] = "<label><input type='checkbox' value='$_table:$ids'".($nb?" checked='checked'":"")." name='$_table'/>$lib.
 <span class='ar_edit_info'>$infos</span></label>";
 	}
 	return ajax_action_auteur('action_rapide', 'purge_corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
@@ -70,6 +70,10 @@ function cs_corbeille_table_infos($table=false) {
 					"table"=>"forum",
 					"libelle" => 'forum:titre_cadre_forum_interne',
 				),
+				"forums_spam" => array( "statut" => "spam",
+					"table"=>"forum",
+					"libelle" => 'forum:messages_spam',
+				),
 			));
 		} else {
 			$params = array(
@@ -98,6 +102,10 @@ function cs_corbeille_table_infos($table=false) {
 					"table"=>"forum",
 					"libelle" => 'icone_forum_administrateur',
 				),
+				"forums_spam" => array( "statut" => "spam",
+					"table"=>"forum",
+					"libelle" => 'spam',
+				),
 			);
 		}
 		if(is_array($corbeille_params)) $params = array_merge($params, $corbeille_params);
@@ -119,7 +127,7 @@ function cs_corbeille_table_infos($table=false) {
  */
 function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 	$params = cs_corbeille_table_infos($table);
-	if (isset($params['table'])) $table = $params['table'];
+	if(isset($params['table'])) $table = $params['table'];
 	include_spip('base/abstract_sql');
 	$type = objet_type($table);
 	$table_sql = table_objet_sql($type);
@@ -134,7 +142,6 @@ function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 	// compte/supprime les elements definis par la liste des index
 	if($vider) sql_delete($table_sql, sql_in($id_table, $ids));
 	$nb = count($ids);
-
 	// compte/supprime des elements lies
 	$nb_lies = 0;
 	$f = $vider?'sql_delete':'sql_countsel';
@@ -155,7 +162,7 @@ function cs_corbeille_gerer($table, $ids=array(), $vider=false) {
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php
 function corbeille_purge_corbeille_action() {
 	// purger la corbeille
-	foreach(cs_corbeille_table_infos() as $table=>$objet)	
+	foreach(cs_corbeille_table_infos() as $table=>$objet)
 		if(preg_match(',^(.*?):(.*)$,', _request($table), $regs)) {
 			$ids = explode(',', $regs[2]);
 			// purger !

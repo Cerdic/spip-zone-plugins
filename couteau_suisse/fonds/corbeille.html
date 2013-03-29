@@ -3,7 +3,7 @@
 </style>
 #CACHE{0}
 #SET{picto,#ENV{objet}|objet_icone{16}}
-[(#SET{req,[select [(#ENV{objet}|id_table_objet)] as id from (#ENV{objet}|table_objet_sql) where statut='[(#ENV{statut})]' order by [(#ENV{objet}|id_table_objet)] desc]})]
+[(#SET{req,[select statut,[(#ENV{objet}|id_table_objet)] as id from (#ENV{objet}|table_objet_sql) where statut=[(#ENV{statut}|sql_quote)] order by [(#ENV{objet}|id_table_objet)] desc]})]
 <B_objets>
 #ANCRE_PAGINATION
 <div class="liste-objets [(#ENV{objet}|objet_info{table_objet})]">
@@ -13,6 +13,7 @@
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
 			<th class='titre principale' scope='col'><:info_titre:></th>
+			<th class='statut' scope='col'><:couteauprive:statut:></th>
 			<th class='id' scope='col'><:info_numero_abbreviation:></th>
 	  </tr>
 	</thead>
@@ -25,6 +26,7 @@
 							title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>  <a class="suppr"
 							href="[(#SELF|replace{'\|',%7C}|parametre_url{suppr,#VALEUR{id}})]" title="<:lien_supprimer|html_attribut:>">X</a>
 			</td>
+ 			<td class='statut'>#VALEUR{statut}</td>
 			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
 				[<a href="[(#VALEUR{id}|generer_url_ecrire_entite_edit{#ENV{objet}})]">(#VALEUR{id})</a>],
 				[(#VALEUR{id})]
