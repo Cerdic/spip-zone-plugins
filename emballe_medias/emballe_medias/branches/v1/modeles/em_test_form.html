@@ -1,0 +1,139 @@
+#CACHE{0}
+<style type="text/css">
+#SET{claire,#VAL{_EM_COULEUR_CLAIRE}|defined|?{#EVAL{_EM_COULEUR_CLAIRE},#CONFIG{emballe_medias/styles/couleur_claire,#edf3fe}}}
+#SET{foncee,#VAL{_EM_COULEUR_FONCEE}|defined|?{#EVAL{_EM_COULEUR_FONCEE},#CONFIG{emballe_medias/styles/couleur_foncee,#3874b0}}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+#em_form_upload{
+	margin:0;
+}
+
+#em_message_attente{
+	display:none;
+}
+
+object.swfupload{
+	cursor:pointer;
+}
+
+#em_upload_boutons{
+	background-color:#GET{claire};
+	border:2px solid #GET{foncee};
+	color:#GET{foncee};
+	text-align:center;
+	cursor:pointer;
+}
+
+#em_message_avant_upload{
+	border:3px solid #DEDED0;
+	background:#fff;
+	padding:5px;
+}
+
+noscript.alternative_js{
+	display: block;
+	background-color: #FFFF66;
+	border-top: solid 4px #FF9966;
+	border-bottom: solid 4px #FF9966;
+	margin: 10px 25px;
+	padding: 10px 15px;
+}
+
+#page #em_upload_document #em_form_upload ul li{
+	padding:10px;
+}
+
+#em_upload_document{
+	margin:10px 0;
+}
+</style>
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.cookies.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.swfobject.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/handler.js})"></script>]
+<script type="text/javascript">
+<!--
+	var swfu;
+
+	var settings = {
+		flash_url : "[(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})Flash/swfupload.swf]}|url_absolue)]",
+
+		file_size_limit : "0MB",
+		file_upload_limit : "0",
+		file_queue_limit : "0",
+
+		button_width: "[(#CONFIG{emballe_medias/styles/width_bouton}|sinon{200})]",
+		button_height: "[(#CONFIG{emballe_medias/styles/height_bouton}|sinon{22})]",
+		button_placeholder_id: "spanButtonPlaceHolder",
+		button_text: '<span class="bouton_flash"><:emballe_medias:bouton_parcourir:><\/span>',
+		button_text_style: ".bouton_flash {color:[(#VAL{_EM_COULEUR_TEXTE_BOUTON}|defined|?{#EVAL{_EM_COULEUR_TEXTE_BOUTON},#CONFIG{emballe_medias/styles/couleur_texte_bouton,#FFFFFF}})];[(#CONFIG{emballe_medias/styles/flash_bouton_styles}|sinon{'font-size: 12px; font-weight:bold; font-family:Tahoma,Arial,Helvetica,sans-serif; text-align:center; display:block; width:100%'})]}",
+		button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+		button_cursor: SWFUpload.CURSOR.HAND,
+
+		/**
+		 * Les callbacks sont définis dans handler.js
+		 */
+		swfupload_loaded_handler : swfUploadLoaded
+	};
+	jQuery(document).ready(function(){
+		swfu = new SWFUpload(settings);
+		window.onbeforeunload = function(){
+			if(isUploading){
+				return emballe_medias_langue.erreur_beforeunload;
+			}
+		};
+		jQuery(window).unload(function(){
+			swfu.destroy();
+		});
+	});
+
+-->
+</script>
+<div id="em_upload_document">
+<form id="em_form_upload" action="#SELF" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend>[(#ENV{file_upload_limite}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>})]</legend>
+			<ul>
+				<li>
+				<div id="em_message_attente" class="explication">
+					<:emballe_medias:verification_fichier:>
+				</div>
+				<div id="em_message_avant_upload" class="explication">
+					[(#ENV{config_fichiers}|table_valeur{texte_upload}|propre)]
+					[(#SET{types,[(#GET{types}|emballe_medias_liste_extensions)]})]
+					[(#ENV{file_upload_limite}|>{1}|oui)<p class="explications em_message_file_upload_limit"><:emballe_medias:file_upload_limit_public:> #ENV{file_upload_limite}</p>]
+					[(#ENV{file_queue_limite}|>{1}|oui)<p class="explications em_message_file_queue_limit"><:emballe_medias:queue_limit_max:> #ENV{file_queue_limite}</p>]
+					<p class="explications">
+						<:emballe_medias:types_fichiers_autorises{types=#GET{types}}:>
+					</p>
+					[(#SET{taille,[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]})]
+					<p class="explications">
+						<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
+					</p>
+				</div>
+				</li>
+				<li id="divSWFUploadUI" >
+					<div id="progress_bar_container">
+					</div>
+				</li>
+			</ul>
+			<div class="boutons">
+				<div id="em_upload_boutons">
+					<span id="spanButtonPlaceHolder"></span>
+				</div>
+			</div>
+			<noscript><:emballe_medias:swfupload_alternative_js:></noscript>
+			<div id="divLoadingContent" class="content" style="background-color: #FFFF66; border-top: solid 4px #FF9966; border-bottom: solid 4px #FF9966; margin: 10px 25px; padding: 10px 15px; display: none;">
+				<:emballe_medias:chargement_uploader:>
+			</div>
+			<div id="divLongLoading" class="content" style="background-color: #FFFF66; border-top: solid 4px #FF9966; border-bottom: solid 4px #FF9966; margin: 10px 25px; padding: 10px 15px; display: none;">
+				SWFUpload is taking a long time to load or the load has failed.  Please make sure JavaScript is enabled and that a working version of the Adobe Flash Player is installed.
+			</div>
+			<div id="divAlternateContent" class="content" style="background-color: #FFFF66; border-top: solid 4px #FF9966; border-bottom: solid 4px #FF9966; margin: 10px 25px; padding: 10px 15px; display: none;">
+				We're sorry.  SWFUpload could not load.  You may need to install or upgrade Flash Player.
+				Visit the <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Adobe website</a> to get the Flash Player.
+			</div>
+		</fieldset>
+	</form>
+</div>

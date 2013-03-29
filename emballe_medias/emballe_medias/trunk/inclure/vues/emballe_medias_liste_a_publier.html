@@ -1,0 +1,4 @@
+<div id="liste_a_publier">
+#SET{titre,#VAL{emballe_medias:titre_medias_preparation}|_T}
+[(#INCLURE{fond=inclure/diogene_attente_publication_emballe_media,id_auteur=#SESSION{id_auteur},titre=#GET{titre},page=#ENV{page},env,ajax})]
+</div>

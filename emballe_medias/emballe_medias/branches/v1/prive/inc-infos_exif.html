@@ -1,0 +1,134 @@
+[(#REM)
+
+	Affichage des informations EXIF et IPTC des documents JPG
+
+]<BOUCLE_d(DOCUMENTS){id_document}{tout}{extension=jpg}{distant=non}>
+#SET{fichier,#FICHIER}
+[(#SET{compteur,[(#GET{fichier}|md5|substr{0,5})]})]
+[(#SET{afficher,[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|sinon{[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]})]}|sinon{[(#GET{fichier}|lire_iptc)]})]})]
+[(#GET{afficher}|?{" ",""})
+<div class="em_infos_documents" id="document_#ID_DOCUMENT">
+	<div>
+		<h5><:emballe_medias:document_infos_complementaires:></h5>
+		<div class="infos_techniques images">
+		<div class="type_infos">
+			[(#SET{logo_exif,<div><img src='[(#CHEMIN{imgs_photo/indicateur-exif.png})]' alt='exif' /></div>})]
+			[(#GET{fichier}|lire_exif{make}|sinon{#GET{fichier}|lire_exif{model}}|>{0}|?{[(#GET{logo_exif})],""})]
+
+			[(#SET{logo_iptc,<div><img src='[(#CHEMIN{imgs_photo/indicateur-iptc.png})]' alt='iptc' /></div>})]
+			[(#GET{fichier}|lire_iptc|?{[(#GET{logo_iptc})],""})]
+
+			[(#SET{logo_hist,<div><img src='[(#CHEMIN{imgs_photo/indicateur-hist.png})]' alt='hist' /></div>})]
+			[(#GET{fichier}|test_traiter_image{[(#GET{fichier}|largeur)], [(#GET{fichier}|hauteur)]}|>{0}|?{[(#GET{logo_hist})],""})]
+
+			[(#SET{logo_gps,<div><img src='[(#CHEMIN{imgs_photo/indicateur-gps.png})]' alt='gps' /></div>})]
+			[(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128}|?{[(#GET{logo_gps})],""})]
+		</div>
+		<p class="explication"><:emballe_medias:explication_infos_documents:></p>
+		<p class="info_appareil">
+			<:emballe_medias:document_appareil:> : [(#GET{fichier}|lire_exif{make})] [(#GET{fichier}|lire_exif{model})]
+		</p>
+
+		[(#REM) IPTC simples]
+
+		[<p class="info_titre"><:photo_infos_fonctions:titre:> :
+			<strong>(#GET{fichier}|lire_iptc{objectName}|typo)</strong>
+			</p>]
+		
+		[<p class="info_auteur"><:photo_infos_fonctions:auteur:> :
+			(#GET{fichier}|lire_iptc{byline})
+			</p>]
+			
+		[<p class="info_legende"><:photo_infos_fonctions:legende:> :
+			(#GET{fichier}|lire_iptc{caption}|typo)
+			</p>]
+
+		[<p class="info_copyright"><:photo_infos_fonctions:copyright:> :
+			(#GET{fichier}|lire_iptc{copyright})
+			</p>]
+
+		[<p class="info_credits"><:photo_infos_fonctions:credits:> :
+			(#GET{fichier}|lire_iptc{credit})
+			</p>]
+
+		[<p class="info_tags"><:photo_infos_fonctions:motscles:> :
+			<div>(#GET{fichier}|lire_iptc{keywords}|replace{"\n","</div><div>"})</div>
+			</p>]
+
+		[<p class="info_sensibilite"><:photo_infos_fonctions:sensibilite:> :
+			[<img src="(#CHEMIN{imgs_photo/iso-16.png})" alt="ISO" align="top" />]
+			(#GET{fichier}|lire_exif{isoEquiv})
+			</p>]
+
+		[<p class="info_vitesse"><:photo_infos_fonctions:vitesse:> :
+			(#GET{fichier}|lire_exif{exposureTime}) s
+			</p>]
+
+		[<p class="info_ouverture"><:photo_infos_fonctions:ouverture:> :
+			[<img src="(#CHEMIN{imgs_photo/ouverture-16.png})" alt="ISO" align="top" />]
+			<i>f</i>/(#GET{fichier}|lire_exif{fnumber})
+			</p>]
+
+		[<p class="info_focale"><:photo_infos_fonctions:focale:> :
+			(#GET{fichier}|lire_exif{focalLength})&nbsp;mm
+			</p>]
+
+		[<p class="info_focale35mm"><:photo_infos_fonctions:focale35mm:> :
+			(#GET{fichier}|lire_exif{focalLength35mm})&nbsp;mm
+			</p>]
+
+		[<p class="info_flash"><:photo_infos_fonctions:flash:> :
+			[<img src="(#CHEMIN{imgs_photo/flash-[(#GET{fichier}|lire_exif{flashUsed})]-16.png})" alt="ISO" align="top" />]
+			(#GET{fichier}|lire_exif{flashUsed})
+			</p>]
+
+		[<p class="info_distance"><:photo_infos_fonctions:distance:> :
+			(#GET{fichier}|lire_exif{focusDistance})[(#GET{fichier}|lire_exif{focusDistance}|=={infini}|?{'','&nbsp;m'})]
+			</p>]
+
+		[<p class="info_ouverture_max"><:photo_infos_fonctions:ouverturemax:> :
+			[<img src="(#CHEMIN{imgs_photo/ouverture-max-16.png})" alt="ISO" align="top" />]
+			<i>f</i>/(#GET{fichier}|lire_exif{maxAperture})
+			</p>]
+
+		[<p class="info_intitule"><:photo_infos_fonctions:objectif:> :
+			(#GET{fichier}|lire_exif{auxLens})
+			</p>]
+
+		[(#REM) IPTC complementaires]
+
+		[<p class="info_intitule"><:photo_infos_fonctions:intitule:> :
+			(#GET{fichier}|lire_iptc{headline})
+			</p>]
+
+		[<p class="info_categorie"><:photo_infos_fonctions:categorie:> :
+			(#GET{fichier}|lire_iptc{category})
+			</p>]
+
+		[<p class="info_date_creation"><:photo_infos_fonctions:datecreation:> :
+			(#GET{fichier}|lire_iptc{createdDate}|affdate)
+			</p>]
+
+		[<p class="info_ville"><:photo_infos_fonctions:ville:> :
+			(#GET{fichier}|lire_iptc{city})
+			</p>]
+
+		[<p class="info_province"><:photo_infos_fonctions:provinceetat:> :
+			(#GET{fichier}|lire_iptc{provinceState})
+			</p>]
+
+		[<p class="info_pays"><:photo_infos_fonctions:pays:> :
+			(#GET{fichier}|lire_iptc{country})
+			</p>]
+
+		[<p class="info_latitude"><:photo_infos_fonctions:latitude:> :
+			(#GET{fichier}|lire_exif{GPSLatitude})
+			</p>]
+
+		[<p class="info_longitude"><:photo_infos_fonctions:longitude:> :
+			(#GET{fichier}|lire_exif{GPSLongitude})
+			</p>]
+		[<div class='info_carte_document'>(#GET{fichier}|lire_exif{GPSLatitudeInt}|position_carte{[(#GET{fichier}|lire_exif{GPSLongitudeInt})],128})</div>]
+	</div>
+</div>]
+</BOUCLE_d>

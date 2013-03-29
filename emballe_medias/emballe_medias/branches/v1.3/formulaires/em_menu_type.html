@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_em_menu_type" id="formulaire_em_menu_type">
+<form method="post" action="#ENV{url}"><div>
+	[(#ENV{url}|form_hidden)]
+	<ul>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend">[(#ENV{em_type}|?{<:emballe_medias:label_changer_type:>,<:emballe_medias:label_choisir_type:>})]</h3>
+				<ul>
+					<li>
+						<select name="#ENV{nom}" id="#ENV{nom}">
+							<INCLURE{fond=prive/listes/em_changer_type_liste}{env}>
+						</select>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+	</ul>
+	<noscript>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</noscript>
+</div></form>
+</div>
+<script type="text/javascript">
+	jQuery('##ENV{nom}').change(function(){
+		jQuery('#formulaire_em_menu_type form fieldset ul').prepend('<p><:emballe_medias:message_navigateur_redirection:></p>');
+		jQuery(this).parents('form').submit();
+		jQuery(this).attr('disabled','disabled');
+	});
+</script>

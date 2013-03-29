@@ -1,0 +1,47 @@
+[(#REM)
+
+	Plugin emballe medias
+	
+	Chaines de langue dans un objet javascript pour les fonctions javascript de l'uploadeur
+	
+	Elles sont stockées dans window.locale.emballe_medias_langue
+	On peut donc les appeler avec locale.emballe_medias_langue.item
+
+]#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript;}
+
+if(typeof(window.locale) == 'undefined') window.locale = {};
+
+window.locale.emballe_medias_langue = {
+	analyze_document:'<:emballe_medias:analyze_document|html2unicode|unicode2charset|texte_script:>',
+	bouton_enlever:'<:emballe_medias:bouton_enlever|html2unicode|unicode2charset|texte_script:>',
+	cancel_upload:'<:emballe_medias:cancel_upload|html2unicode|unicode2charset|texte_script:>',
+	cancelled:'<:emballe_medias:cancelled|html2unicode|unicode2charset|texte_script:>',
+	complete:'<:emballe_medias:complete|html2unicode|unicode2charset|texte_script:>',
+	drag_upload_message:'<:emballe_medias:message_drag_files|html2unicode|unicode2charset|texte_script:>',
+	drag_upload_message_un:'<:emballe_medias:message_drag_file|html2unicode|unicode2charset|texte_script:>',
+	erreur_beforeunload:'<:emballe_medias:erreur_beforeunload|html2unicode|unicode2charset|texte_script:>',
+	failed_validation:'<:emballe_medias:failed_validation|html2unicode|unicode2charset|texte_script:>',
+	invalid_file_type:'<:emballe_medias:erreur_invalid_file_type|html2unicode|unicode2charset|texte_script:>',
+	max_file_size:'<:emballe_medias:max_file_size|html2unicode|unicode2charset|texte_script:>',
+	pending:'<:emballe_medias:pending|html2unicode|unicode2charset|texte_script:>',
+	queue_limit_exceeded:'<:emballe_medias:queue_limit_exceeded|html2unicode|unicode2charset|texte_script:>',
+	queue_limit_reached:'<:emballe_medias:queue_limit_reached|html2unicode|unicode2charset|texte_script:>',
+	queue_limit_un:'<:emballe_medias:queue_limit_un|html2unicode|unicode2charset|texte_script:>',
+	queue_limit_max:'<:emballe_medias:queue_limit_max|html2unicode|unicode2charset|texte_script:>',
+	temps_passe:'<:emballe_medias:temps_passe|html2unicode|unicode2charset|texte_script:>',
+	temps_restant:'<:emballe_medias:temps_restant|html2unicode|unicode2charset|texte_script:>',
+	too_big_file:'<:emballe_medias:erreur_fichier_trop_gros|html2unicode|unicode2charset|texte_script:>',
+	server_io_error:'<:emballe_medias:server_io_error|html2unicode|unicode2charset|texte_script:>',
+	security_error:'<:emballe_medias:security_error|html2unicode|unicode2charset|texte_script:>',
+	statut:'<:diogene:info_statut|html2unicode|unicode2charset|texte_script:>',
+	stopped:'<:emballe_medias:stopped|html2unicode|unicode2charset|texte_script:>',
+	unhandled_error:'<:emballe_medias:unhandled_error|html2unicode|unicode2charset|texte_script:>',
+	upload_error:'<:emballe_medias:upload_error|html2unicode|unicode2charset|texte_script:>',
+	upload_failed:'<:emballe_medias:upload_failed|html2unicode|unicode2charset|texte_script:>',
+	upload_limit_exceeded:'<:emballe_medias:upload_limit_exceeded|html2unicode|unicode2charset:>',
+	uploading:'<:emballe_medias:uploading|html2unicode|unicode2charset:>',
+	zero_byte_files:'<:emballe_medias:erreur_zero_byte_files|html2unicode|unicode2charset:>'
+}
+
+#FILTRE{trim}

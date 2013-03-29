@@ -1,0 +1,96 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_supprimer_document formulaire_emballe_medias" id='formulaire_supprimer_document[_(#ENV{compteur})]'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#SELF' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tous}>
+		<ul>
+			<li class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
+			[(#FICHIER|get_spip_doc|file_exists|oui)
+				[(#MIME_TYPE|match{video/}|ou{[(#EXTENSION|match{mp4})]}|oui)#SET{em_type,video}]
+				[(#MIME_TYPE|match{audio/}|oui)#SET{em_type,audio}]
+				[(#EXTENSION|match{gif|png|jpg}|oui)#SET{em_type,image}]
+				[(#GET{em_type}|non)#SET{em_type,normal}]
+				#SET{nb,#ENV{compteur}}
+				<fieldset>
+					<legend>[(#ENV{compteur}|oui)<:emballe_medias:previsu_document_nb{nb=#GET{nb}}:>][(#ENV{compteur}|non)<:emballe_medias:previsu_document:>]</legend>
+					<ul>
+						<li class="previsu_document #GET{type}">
+							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
+							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type}_#EXTENSION,em_type=#GET{em_type},id_document,id_objet,objet,compteur,total,ajax}>
+							]
+							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|non)
+							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type},em_type=#GET{em_type},id_document,id_objet,objet,compteur,total,ajax}>
+							]
+						</li>
+					</ul>
+				</fieldset>
+			]
+			[(#FICHIER|get_spip_doc|file_exists|non)#SET{fichier,#FICHIER|basename}
+				<p class="reponse_formulaire reponse_formulaire_erreur"><:emballe_medias:erreur_document_disparu{fichier=#GET{fichier}}:></p>
+				#SET{type,#ENV{em_type}}
+				#SET{types,#FORM_TYPE{#GET{type}}}
+				[(#SET{file_types,[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]})]})]
+				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
+				
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+					<script type="text/javascript"><!--
+						var em_tabs_charger = function(){
+						    cookie_name = 'ui-tab-em_charger_ftp'
+						    $('.em_charger_fichiers').tabs({
+									cookie: {
+										name:cookie_name,
+										expires: 1
+									}
+								});
+						};
+						jQuery(document).ready(function(){
+							em_tabs_charger();
+						});
+						onAjaxLoad(em_tabs_charger);
+					// --></script>
+					<div class="em_charger_fichiers">
+						<ul>
+							<li><a href="#em_charger_fichier"><:emballe_medias:lien_charger_local:></a></li>
+							[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
+							[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
+						</ul>
+						<div id="em_charger_fichier">
+				]
+				<INCLURE{fond=inclure/upload_formulaire,
+					id_objet=#ENV{id_objet},
+					objet=#ENV{objet},
+					id_document=#ENV{id_document},
+					action_document=remplacer_document,
+					config_fichiers=#GET{config_fichiers},
+					type_media=#GET{type},
+					file_upload_limite=1,
+					file_queue_limite=1,
+					nb_files_count=0,env},
+					form=non>
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+						</div>
+						[(#GET{afficher_ftp}|=={oui}|oui)
+						<div id="em_charger_ftp">
+							[(#FORMULAIRE_EM_CHARGER_MEDIA_FTP{article,#GET{id_article,0},#GET{file_types},#GET{type},#GET{file_upload_limite}})]
+						</div>]
+						[(#GET{afficher_doc_trad}|=={oui}|oui)
+						<div id="em_doc_trad">
+							[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]
+						</div>]
+					</div>
+				]
+			]
+			</li>
+		</ul>
+		</BOUCLE_documents_en_cours>
+		[(#ENV{editable}|oui)
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_bouton})</p>]
+		<p class="boutons">
+			<input type="submit" class="submit" value="[(#ENV*{contenu_bouton,<:emballe_medias:supprimer_document:>})]" />
+		</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur_boutons})</p>]
+	</div>
+	</form>
+</div>

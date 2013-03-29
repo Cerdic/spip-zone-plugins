@@ -1,0 +1,79 @@
+#CACHE{0}
+[(#REM)
+
+	Sélecteur de statut de média
+	
+	Plus ou moins le même que le sélecteur de statut d'articles sauf que pour pouvoir choisir le statut
+	"publié" ou "proposé", l'article doit avoir au moins un document
+	Cette condition est vérifiée par la boucle has_document
+
+]
+#SET{has_document,non}
+#SET{force,non}
+<BOUCLE_has_document(DOCUMENTS){id_article}{tout}>
+#SET{has_document,oui}
+</BOUCLE_has_document>
+[(#ENV{id_article}|non)
+	#SET{force,oui}
+]
+#SET{statuts_texte,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}}
+<li class="fieldset diogene_selecteur_statut">
+<fieldset>
+	<legend><:diogene:legende_selecteur_statut:></legend>
+	<ul>
+		<li class="editer editer_statut editer_statut_emballe_media">
+			<label for="statut"><:emballe_medias:label_change_statut_em_normal:></label>
+			<select id="statut" name="statut">
+				[(#ENV{id_article}|non)
+				<option value="" selected="selected">--</option>
+				]
+				[(#ENV{statut}|=={publie}|ou{#GET{force}|=={oui}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,publie}}|et{#GET{has_document}|=={oui}|oui}|oui}|oui)
+				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
+					[(#GET{statuts_texte}|table_valeur{publie}|_T)]
+				</option>]]
+				[(#ENV{statut}|=={prop}|ou{#GET{force}|=={oui}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|et{#GET{has_document}|=={oui}|oui}|oui}|oui)
+				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
+					[(#GET{statuts_texte}|table_valeur{prop}|_T)]
+				</option>]
+				[(#ENV{statut}|=={prepa}|ou{#GET{force}|=={oui}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prepa}}}|oui)
+				<option value="prepa"[(#ENV{statut}|=={prepa}|ou{#ENV{statut}|non}|oui) selected="selected"]>
+					[(#GET{statuts_texte}|table_valeur{prepa}|_T)]
+				</option>]
+				[(#ENV{statut}|et{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,poubelle}}|oui}|ou{#GET{force}|=={oui}|oui}|oui)
+				<option value="poubelle"[(#ENV{statut}|=={poubelle}|oui) selected="selected"]>
+					[(#GET{statuts_texte}|table_valeur{poubelle}|_T)]
+				</option>]
+			</select>
+		</li>
+	</ul>
+</fieldset>
+</li>
+<script type="text/javascript">
+;if (window.jQuery)
+	(function($){
+		var statut_defaut = "#ENV{statut}";
+		jQuery('#statut').change(function(){
+			if($(this).val() == statut_defaut){
+				jQuery(this).parents('form').unbind('form-pre-serialize');
+			}else if((statut_defaut != 'publie') && ($(this).val() != 'poubelle')){
+				jQuery(this).parents('form').unbind('form-pre-serialize');
+			}
+			else{
+				if(jQuery(this).val() == 'poubelle'){
+					var message = '<:diogene:message_confirm_poubelle:>';
+				}else if(statut_defaut == 'publie'){
+					var message = '<:diogene:message_confirm_depublier:>';
+				}
+				if (message) {
+					jQuery(this).parents('form').unbind('form-pre-serialize').bind('form-pre-serialize', function(event, $form, formOptions, veto){
+						if (!confirm(message)) {
+							jQuery(this).removeClass('loading');
+							veto.veto = true;
+						}
+					});
+				}
+			}
+		});
+})(jQuery);
+</script>
+#FILTRE{trim}

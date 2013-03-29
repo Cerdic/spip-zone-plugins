@@ -1,0 +1,5 @@
+#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript;}
+
+[(#VAL{'prive/json/em_lang'}|emballe_medias_json_encode{#ENV{lang}})]
+

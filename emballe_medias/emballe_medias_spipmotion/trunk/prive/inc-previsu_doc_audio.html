@@ -1,0 +1,12 @@
+#CACHE{0}
+<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{extension IN #FORM_TYPE{#ENV{em_type}}}{tout}>
+<h3 class="h3 #EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h3>
+[(#PLUGIN{mediaspip_player}|oui)
+<div class="em_previsu">
+	[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=oui,infos=non,largeur=100%})]
+</div>]
+<INCLURE{fond=prive/inc-previsu_doc_audio_infos,id_document,id_objet,objet,em_type,redirect,ajax}>
+</BOUCLE_documents_en_cours>
+</B_documents_en_cours>
+<p><:emballe_medias:aucun_document_type:> [(#FORM_TYPE{audio}|explode{', '})]</p>
+<//B_documents_en_cours>

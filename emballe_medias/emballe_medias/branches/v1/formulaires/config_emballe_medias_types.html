@@ -1,0 +1,47 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=emballe_medias -->
+<!-- casier=types -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend">
+						<:emballe_medias:legend_gerer_types:>
+					</h3>
+					<ul>
+					[(#CONFIG{emballe_medias/fichiers/gerer_types}|=={on}|oui)
+						[(#SAISIE{case,gerer_modifs_types,
+							label=<:emballe_medias:label_gerer_modifs_types:>,
+							label_case=<:emballe_medias:label_case_gerer_modifs_types:>,
+							explication=<:emballe_medias:explication_gerer_modifs_types:>})]
+						[(#SAISIE{case,autoriser_normal,
+							label=<:emballe_medias:label_types_autoriser_normal:>,
+							label_case=<:emballe_medias:label_case_types_autoriser_normal:>})]
+						[(#SAISIE{selection_multiple,types_dispos,
+							label=<:emballe_medias:label_types_disponibles:>,
+							cacher_option_intro=oui,
+							datas=#ARRAY{
+								audio,<:emballe_medias:type_audio:>,
+								image,<:emballe_medias:type_image:>,
+								video,<:emballe_medias:type_video:>,
+								texte,<:emballe_medias:type_texte:>}})]
+					]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>

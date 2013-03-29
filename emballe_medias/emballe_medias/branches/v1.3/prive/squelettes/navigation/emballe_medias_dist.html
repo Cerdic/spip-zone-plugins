@@ -1,0 +1,18 @@
+<ul class="liste_items sous_navigation">
+	<li class="item[(#ENV{exec}|=={configurer_emballe_medias}|oui)on]">
+		<a href="#URL_ECRIRE{configurer_emballe_medias}">
+			<:emballe_medias:emballe_medias_fichiers:>
+		</a>
+	</li>
+	[(#CONFIG{emballe_medias/fichiers/gerer_types}|=={on}|oui)
+	<li class="item[(#ENV{exec}|=={configurer_emballe_medias_types}|oui)on]">
+		<a href="#URL_ECRIRE{configurer_emballe_medias_types}">
+			<:emballe_medias:emballe_medias_types:>
+		</a>
+	</li>]
+	<li class="item[(#ENV{exec}|=={configurer_emballe_medias_styles}|oui)on]">
+		<a href="#URL_ECRIRE{configurer_emballe_medias_styles}">
+			<:emballe_medias:emballe_medias_styles:>
+		</a>
+	</li>
+</ul>

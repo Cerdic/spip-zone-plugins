@@ -1,0 +1,101 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Emballe Medias
+			[en]Wrap Medias
+		</multi>
+	</nom>
+	<auteur>b_b, [kent1->http://www.kent1.info]</auteur>
+	<slogan>
+		<multi>
+			[fr]Emballer ses documents proprement
+			[en]Pack the documents properly
+		</multi>
+	</slogan>
+	<licence>© 2009-2012 GNU/GPL v3</licence>
+	<description>
+		<multi>
+			[fr]Formulaire configurable qui emballe les medias depuis l'espace public...
+			[en]Configurable form to wrap medias from the public space...
+		</multi>
+	</description>
+	<icon>images/emballe_medias.png</icon>
+	<version>0.9.5</version>
+	<version_base>0.2.2</version_base>
+	<etat>stable</etat>
+	
+	<prefix>emballe_medias</prefix>
+	<fonctions>
+		emballe_medias_fonctions.php
+	</fonctions>
+	<options>
+		emballe_medias_options.php
+	</options>
+	<install>base/emballe_medias_installer.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/emballe_medias.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>em_types</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_traiter</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_champs_sup</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>emballe_medias_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>emballe_medias_autoriser.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='cfg' version='[1.14.4;]' />
+	<necessite id='saisies' version='[1.1;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<necessite id='diogene' version='[0.4.1;]' />
+	<necessite id='swfupload' version='[0.2;]' />
+	<necessite id="jqueryui" version="[1.8.5;]" />
+	<utilise id='ancres_douces' version='[1.2;]' />
+	<utilise id='palette' />
+	<utilise id='legendes' />
+	<utilise id='photo_infos' />
+	<utilise id='spipmotion' />
+	<utilise id='doc2img' />
+	<utilise id='diogene_licence' />
+	<utilise id='diogene_spipicious' />
+	<utilise id='diogene_gerer_auteurs' />
+	<categorie>edition</categorie>
+</plugin>

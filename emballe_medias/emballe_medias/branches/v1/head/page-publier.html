@@ -1,0 +1,91 @@
+<title>#NOM_SITE_SPIP</title>
+[<link rel="stylesheet" href="(#CHEMIN{diogene.css}|direction_css)" type="text/css" media="all" />]
+[<link rel="stylesheet" href="(#CHEMIN{javascript/jquery-ui/themes/smoothness/jquery-ui.css}|direction_css)" type="text/css" media="all" />]
+[<link rel="stylesheet" href="(#URL_PAGE{emballe_medias.css}|direction_css)" type="text/css" media="all" />]
+
+<INCLURE{fond=inclure/head}>
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/emballe_medias_fonctions.js})"></script>]
+
+[(#REM)
+	
+	Si on a le plugin jQuery File Upload, on l'utilise
+	On charge les js de jfu et sa css
+	On charge les js de SWFUpload qui sert d'alternative
+	
+][(#PLUGIN{jfu}|oui)
+	[(#REM)
+		La feuille de stype spécifique à fileupload-ui
+	][<link rel="stylesheet" href="(#CHEMIN{[(#EVAL{_DIR_LIB_JFU})jquery.fileupload-ui.css]})">]
+	[<script src="(#CHEMIN{javascript/tmpl.min.js})"></script>]
+	[<script src="(#CHEMIN{javascript/load-image.min.js})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_JFU})jquery.iframe-transport.jss]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_JFU})jquery.fileupload.js]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_JFU})jquery.fileupload-fp.js]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_JFU})jquery.fileupload-ui.js]})"></script>]
+	[<script type="text/javascript" src="(#URL_PAGE{jfu_locales.js}|parametre_url{lang,#ENV{lang}})"></script>]
+	
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]}|replace{' ','%20'})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.queue.js]}|replace{' ','%20'})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.cookies.js]}|replace{' ','%20'})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.swfobject.js]}|replace{' ','%20'})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{javascript/swfupload_handler.js})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{javascript/swfupload_fileprogress.js})"></script>]
+	#SET{js,done}
+]
+[(#REM)
+
+	Sinon on regarde si on a plupload
+	Il n'a pas besoin de swfupload lui
+	
+][(#PLUGIN{plupload}|et{#GET{js}|=={done}|non}|oui)
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_PLUPLOAD})plupload.js]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_PLUPLOAD})plupload.html5.js]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_PLUPLOAD})plupload.flash.js]})"></script>]
+	[<script type="text/javascript" src="(#CHEMIN{javascript/plupload_functions.js})"></script>]
+	#SET{js,done}
+]
+
+[(#REM)
+
+	Si on ne dispose pas des plugins jQuery File Upload ni Plupload,
+	on charge seulement SWFUpload qui reste obligatoire
+	
+][(#GET{js}|=={done}|non)
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.queue.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.cookies.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.swfobject.js]}|replace{' ','%20'})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/swfupload_handler.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/swfupload_fileprogress.js})"></script>]]
+
+[<script type="text/javascript" src="(#URL_PAGE{emballe_medias_lang.js}|parametre_url{lang,#ENV{lang}})"></script>]
+<script type="text/javascript">
+	var em_markitup = function(){
+		if(window.jQuery.markItUp){
+			jQuery('.formulaire_spip .inserer_barre:not(.markItUpEditor)')
+			.barre_outils('edition')
+			.previsu_spip({
+				previewParserPath:'[(#URL_PAGE{preview}|url_absolue)]',
+				textEditer:'<:barre_outils:editer:>',
+				textVoir:'<:barre_outils:voir:>'});
+		}
+	}
+	
+	var em_tabs_charger = function(){
+	    cookie_name = 'ui-tab-em_charger_ftp'
+	    $('.em_charger_fichiers').tabs({
+			cookie: {
+				name:cookie_name,
+				expires: 1
+			}
+		});
+	};
+	
+	jQuery(document).ready(function(){
+		em_markitup();
+		em_tabs_charger();
+		onAjaxLoad(em_markitup);
+		onAjaxLoad(em_tabs_charger);
+	});
+</script>

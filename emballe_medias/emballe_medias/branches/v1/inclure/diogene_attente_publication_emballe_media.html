@@ -1,0 +1,22 @@
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+<B_medias_attente>
+<div>
+	#ANCRE_PAGINATION
+	<h3 class="h3">[(#_diogene:TITRE)] (#GRAND_TOTAL)</h3>
+	<ul class="liste-items liste_objets_attente">
+		<BOUCLE_medias_attente(ARTICLES){id_secteur = #_diogene:ID_SECTEUR}{statut IN prop,prepa}{!par statut, date}{pagination 5}>
+		<li class="item">
+			<BOUCLE_documents(DOCUMENTS){id_article}{0,1}{tout}>
+			[(#LOGO_DOCUMENT|image_reduire{150,150})]
+			</BOUCLE_documents>
+			<h4 class="h4"><a href="[(#URL_PAGE{#ENV{page},type_objet=#_diogene:TYPE}|parametre_url{id_article,#ID_ARTICLE})]">[(#TITRE|sinon{<:emballe_medias:titre_nouveau_document:>})]</a></h4>
+			[<p><:par_auteur|ucfirst:> : (#LESAUTEURS)</p>]
+			[<p><:emballe_medias:statut:> [(#STATUT|puce_statut{class='puce_statut'})] (#STATUT|diogene_info_statut)</p>]
+			#INTRODUCTION
+		</li>
+		</BOUCLE_medias_attente>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_medias_attente>
+</BOUCLE_diogene>

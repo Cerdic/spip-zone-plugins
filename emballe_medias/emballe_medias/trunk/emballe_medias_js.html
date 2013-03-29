@@ -1,0 +1,97 @@
+#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript;}
+[(#INCLURE{javascript/jfu_spip_fonctions.js})]
+
+//*** jQuery File Upload ***//
+[(#INCLURE{javascript/tmpl.min.js})]
+[(#INCLURE{javascript/load-image.min.js})]
+[(#INCLURE{javascript/jquery_file_upload/js/jquery.iframe-transport.js})]
+[(#INCLURE{javascript/jquery_file_upload/js/jquery.fileupload.js})]
+[(#INCLURE{javascript/jquery.fileupload-emballe_medias.js})]
+[(#INCLURE{fond=jfu_locales.js,lang=#ENV{lang}})]
+
+//*** SWFUPLOAD ***//
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.queue.js]})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.cookies.js]}|replace{' ','%20'})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.swfobject.js]}|replace{' ','%20'})]})]
+[(#INCLURE{javascript/swfupload_handler.js})]
+[(#INCLURE{javascript/swfupload_fileprogress.js})]
+[(#INCLURE{fond=emballe_medias_lang.js,lang=#ENV{lang}})]
+
+var em_markitup = function(){
+	if(window.jQuery.markItUp){
+		jQuery('.formulaire_spip .inserer_barre:not(.markItUpEditor)')
+		.barre_outils('edition')
+		.previsu_spip({
+			previewParserPath:'[(#URL_PAGE{preview}|url_absolue)]',
+			textEditer:'<:barreoutils:editer:>',
+			textVoir:'<:barreoutils:voir:>'});
+	}
+}
+
+var em_tabs_charger = function(){
+    cookie_name = 'ui-tab-em_charger_ftp'
+    jQuery('.em_charger_fichiers').tabs({
+		cookie: {
+			name:cookie_name,
+			expires: 1
+		}
+	});
+	
+	cookie_name_lot = 'ui-tab-em_traitement'
+    jQuery('#emballe_media_edition').tabs({
+		cookie: {
+			name:cookie_name_lot,
+			expires: 1
+		}
+	});
+};
+
+var medias_init_select_all = function(){
+	jQuery('.selection_documents').each(function(){
+		var me = jQuery(this);
+		if((me.find('.selection').size() == 0) && (me.find('div.choix').size() > 1)){
+			if(me.children('label').size() > 0)
+				me.children('label').after('<p class="explication selection"><a href="#" class="select_all"><:emballe_medias:select_all|attribut_html:></a> | <a href="#" class="unselect_all"><:emballe_medias:unselect_all|attribut_html:></a></p>');
+			else if(me.children('div').children('.explication').size() > 0)
+				me.children('div').children('.explication').after('<p class="explication selection"><a href="#" class="select_all"><:emballe_medias:select_all|attribut_html:></a> | <a href="#" class="unselect_all"><:emballe_medias:unselect_all|attribut_html:></a></p>');
+		}
+		me.find('.select_all').unbind('click').click(function(e){
+			e.preventDefault();
+			me.find('.choix').not('.selected').find('label').click();
+			return false;
+		});
+		me.find('.unselect_all').unbind('click').click(function(e){
+			e.preventDefault();
+			me.find('.selected').find('label').click();
+			return false;
+		});
+	});
+}
+
+var medias_init_clicks = function(){
+	jQuery('.selection_documents .choix input:checked').parents('.choix').addClass('selected');
+	jQuery('.selection_documents .choix input[type=checkbox]').change(function(){
+		if(jQuery(this).is(':checked')){
+			jQuery(this).parents('.choix').addClass('selected');
+		}else{
+			jQuery(this).parents('.choix').removeClass('selected');
+		}
+	});
+	jQuery('.selection_documents .choix input').hide();
+}
+
+jQuery(document).ready(function(){
+	medias_init_clicks();
+	medias_init_select_all();
+	em_markitup();
+	onAjaxLoad(em_markitup);
+	onAjaxLoad(em_tabs_charger);
+	onAjaxLoad(medias_init_clicks);
+	onAjaxLoad(medias_init_select_all);
+});
+
+jQuery(window).load(function(){
+	em_tabs_charger();
+});

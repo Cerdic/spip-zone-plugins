@@ -1,0 +1,635 @@
+#SET{types,#FORM_TYPE{#ENV{type_media}}}
+<script type="text/javascript">
+<!--
+	var isUploading = false;
+	var nb_max = #ENV{file_upload_limite,1};
+	var nb_files = 0;
+	var iTime = new Date();
+	var isIE = jQuery.browser.msie;
+	
+	/**
+	 * Vérifier que l'auteur n'a pas déjà uploadé son quota de docs (dans un autre onglet par exemple)
+	 * Si c'est le cas on recharge la page
+	 */
+	function emballe_medias_verifier_upload(){
+		var upload_ok = false;
+		jQuery.ajax({
+			url: "#URL_PAGE{emballe_medias_file_upload_limit}",
+			async: false,
+			type: "GET",
+			data: ({
+				id_article:"#ENV{id_article}",
+				id_auteur : "#SESSION{id_auteur}",
+				em_type: "#ENV{em_type}"
+			}),
+			dataType: "html",
+			success: function(msg){
+				var nb = #ENV{file_upload_limite};
+				if (parseInt(msg) < nb) {
+					upload_ok = true;
+				}
+			}
+		});
+		return upload_ok;
+	}
+	
+	/**
+	 * Handler de swfupload au moment de la fermeture du navigateur de fichiers
+	 * @param {int} numFilesSelected : le nombre de fichiers sélectionnés
+	 * @param {int} numFilesQueued : le nombre de fichiers dans la queue
+	 */
+	function fileDialogComplete(numFilesSelected, numFilesQueued) {
+		try {
+			if(numFilesSelected > 0){
+				var upload_ok = emballe_medias_verifier_upload();
+				if (upload_ok == true) {
+					this.startUpload();
+				} else {
+					this.cancelUpload();
+					alert(emballe_medias_langue.queue_limit_exceeded);
+					window.location.reload(true);
+				}
+			}
+		} catch (ex)  {
+			this.debug(ex);
+		}
+	}
+	
+	/**
+	 * Handler de swfupload au moment du succès d'un upload
+	 * @param {Object} file
+	 * @param {Object} serverData
+	 * @param {Object} response
+	 */
+	function uploadSuccess(file, serverData, response) {
+		try {
+			isUploading = false;
+			var data = jQuery.parseJSON(serverData);
+			if(typeof(data.error) == 'object'){
+				var message_erreur = data.error.message;
+				jQuery('.em_charger_fichiers').tabs('enable',1);
+				var progress = new FileProgress(file, this.customSettings.progressTarget);
+				var id = progress.fileProgressID;
+				jQuery('#'+id).addClass('red');
+				jQuery('#'+id+' .bg .bar').toggleClass('progressBarError').css('width','');
+				progress.setStatus('error',message_erreur);
+				// On enlève le animeajax()
+				jQuery('#'+id+' .image_loading').detach();
+				jQuery('#'+id).children().css('opacity', 1);
+				// On affiche un message dans le debug au cas où
+				this.debug("Erreur - "+ message_erreur);
+			}
+			else{
+				jQuery('.em_charger_fichiers').tabs('enable',1);
+				nb_files++;
+				var uploader = this;
+				uploader.settings.file_upload_limit =  (uploader.settings.file_upload_limit-1);
+				if(uploader.settings.file_queue_limit > uploader.settings.file_upload_limit){
+					uploader.settings.file_queue_limit = uploader.settings.file_upload_limit;
+				}
+				if(uploader.settings.file_upload_limit == 0){
+					jQuery('.em_charger_fichiers,#em_form_upload,.jfupload').fadeOut().detach();
+				}
+				var progress = new FileProgress(file, this.customSettings.progressTarget);
+				progress.setComplete();
+				progress.setStatus("complete","Complete.");
+				if(nb_files == this.settings.file_upload_limit){
+					jQuery('#em_upload_document').fadeOut().remove();
+				}else{
+					progress.toggleCancel(false);
+					jQuery('.em_message_file_queue_limit').html(emballe_medias_langue.queue_limit_max+" : "+uploader.settings.file_queue_limit);
+					jQuery('.em_message_file_upload_limit').html("<:emballe_medias:file_upload_limit_public:> "+uploader.settings.file_upload_limit);
+				}
+				
+				/**
+				 * Si le retour n'est pas numérique, il y a une erreur quelque part
+				 * Il vaut mieux que l'on rafraichisse la page pour éviter tout déborderment par la suite
+				 */
+				if((isNaN(parseFloat(data.message.id_article)) || !isFinite(data.message.id_article))){
+					window.location.reload(true);
+				}
+				
+				var retour = (uploader.settings.file_upload_limit > 0) ? 'form':'haut';
+				/**
+				 * Au cas où nous n'avions pas d'id_article auparavant,
+				 * on utilise le nouvel article créé si upload multiple
+				 */
+				this.settings.post_params.arg = data.message.id_article;
+				
+				jQuery.ajax({
+					url: "#URL_PAGE{inc-media_uploaded}",
+					type: "GET",
+					data: ({
+						redirect : "#SELF",
+						id_article:data.message.id_article,
+						retour : retour
+					}),
+					dataType: "html",
+					beforeSend : function(){
+						jQuery("#em_upload_fichier").addClass('loading');
+					},
+					success: function(msg){
+						jQuery("#em_upload_fichier").removeClass('loading').html(msg);
+						if (uploader.customSettings.form_exists == 0) {
+							jQuery('#formulaire_diogene').load('[(#URL_PAGE{inc-emballe_media_form})]',{
+									//redirect: "#SELF",
+									id_article: data.message.id_article,
+									id_trad: "#ENV{id_trad}",
+									id_rubrique: "#ENV{id_rubrique}",
+									em_type: "#ENV{em_type}",
+									position_auto: data.message.position_auto
+								}).fadeIn();
+							uploader.customSettings.form_exists = 1;
+						}
+						/**
+						 * Si le plugin SPIP ancres douces est activé
+						 */
+						if(typeof jQuery.localScroll=="function")
+							jQuery.localScroll({hash:true});
+					}
+				});
+			}
+		} catch (ex) {
+			this.debug(ex);
+		}
+	}
+
+	/**
+	 * La configuration de swfupload
+	 */
+	var swfu_settings = {
+		flash_url : "[(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})Flash/swfupload.swf]}|url_absolue)]",
+		upload_url: "[(#VAL{emballe_medias_upload}|generer_url_action)]",
+		post_params:{
+			"arg" : "#ENV{id_article}",
+			"id_auteur" : "#SESSION{id_auteur}",
+			"em_type" : "#ENV{em_type}",
+			"id_rubrique" : "#ENV{id_rubrique}",
+			"id_document":"#ENV{id_document}",
+			"action_document": "#ENV{action_document}"
+		},
+		file_size_limit : "[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]MB",
+		file_types : "[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions)]",
+		file_upload_limit : "#ENV{file_upload_limite}",
+		file_queue_limit : "#ENV{file_queue_limite}",
+		custom_settings : {
+			progressTarget : "progress_bar_container",
+			nb_files:"#ENV{nb_files_count,0}", //Nombre de fichiers déjà mis en ligne pour l'article en cours
+			form_exists: "[(#ENV{doc_uploaded}|=={non}|?{0,1})]"
+		},
+		debug: [(#ENV{config_fichiers}|table_valeur{upload_debug}|sinon{false}|=={on}|?{true}|sinon{false})],
+
+		/**
+		 * La forme du bouton d'upload
+		 */
+		button_width: "[(#CONFIG{emballe_medias/styles/width_bouton}|sinon{200})]",
+		button_height: "[(#CONFIG{emballe_medias/styles/height_bouton}|sinon{22})]",
+		button_placeholder_id: "spanButtonPlaceHolder",
+		button_text: '<span class="bouton_flash"><:emballe_medias:bouton_parcourir:><\/span>',
+		button_text_style: ".bouton_flash {color:[(#VAL{_EM_COULEUR_TEXTE_BOUTON}|defined|?{#EVAL{_EM_COULEUR_TEXTE_BOUTON},#CONFIG{emballe_medias/styles/couleur_texte_bouton,#FFFFFF}})];[(#CONFIG{emballe_medias/styles/flash_bouton_styles}|sinon{'font-size: 12px; font-weight:bold; font-family:Tahoma,Arial,Helvetica,sans-serif; text-align:center; display:block; width:100%'})]}",
+		button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+		button_cursor: SWFUpload.CURSOR.HAND,
+
+		/**
+		 * Les callbacks sont définis dans handler.js
+		 */
+		swfupload_loaded_handler : swfUploadLoaded,
+		swfupload_pre_load_handler : swfUploadPreLoad,
+		file_queued_handler : fileQueued,
+		file_queue_error_handler : fileQueueError,
+		file_dialog_complete_handler : fileDialogComplete,
+		upload_start_handler : uploadStart,
+		upload_progress_handler : uploadProgress,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadSuccess,
+		upload_complete_handler : uploadComplete,
+		queue_complete_handler : queueComplete
+	};
+
+	$(function(){
+		<BOUCLE_sijfu1(CONDITION){si #PLUGIN{jfu}|oui}>
+			var html5_upload_support = gethtml5uploadfunctions();
+			if(html5_upload_support.html5 && html5_upload_support.canSendBinary){
+				$('#divLoadingContent,#divLongLoading,#divAlternateContent,.swfupload').detach();
+				$('#fileupload').fileupload();
+				$('#fileupload').fileupload('option',{
+		            paramName: 'Filedata',
+					add: function (e, data) {
+						if(data.files.length > 0){
+							var verif = emballe_medias_verifier_upload();
+						}
+						if(verif == true){
+							var that = $(this).data('fileupload'),
+								options = that.options,
+			                    files = data.files;
+			                $(this).fileupload('process', data).done(function () {
+				                that._adjustMaxNumberOfFiles(-data.files.length);
+				                data.isAdjusted = true;
+				                data.isValidated = that._validate(data.files);
+				                data.files.valid = data.isValidated = that._validate(files);
+			                    data.context = that._renderUpload(files).data('data', data);
+			                    options.filesContainer[
+			                        options.prependFiles ? 'prepend' : 'append'
+			                    ](data.context);
+				                that._renderPreviews(files, data.context);
+			                    that._forceReflow(data.context);
+			                    that._transition(data.context).done(
+			                        function () {
+			                            if ((that._trigger('added', e, data) !== false) &&
+			                                    (options.autoUpload || data.autoUpload) &&
+			                                    data.autoUpload !== false && data.isValidated) {
+			                                data.submit();
+			                            }else if($(this).find('.fileupload-buttonbar button.start').is(':hidden')){
+											$(this).find('.fileupload-buttonbar button.start').fadeIn('slow');
+										}
+			                        }
+			                    );
+							});
+						}
+		            },
+					send: function (e, data) {
+		                if (!data.isValidated) {
+		                    var that = $(this).data('fileupload');
+		                    if (!data.isAdjusted) {
+		                        that._adjustMaxNumberOfFiles(-data.files.length);
+		                    }
+		                    if (!that._validate(data.files)) {
+		                        return false;
+		                    }
+		                }
+						isUploading = true;
+						jQuery('.em_charger_fichiers').tabs('disable',1);
+		                if (data.context && data.dataType &&
+		                    data.dataType.substr(0, 6) === 'iframe') {
+		                    data.context.find('.ui-progressbar').progressbar(
+		                        'value',
+		                        parseInt(100, 10)
+		                    );
+		                }
+						if($(this).find('.fileupload-buttonbar button.start,.fileupload-buttonbar .fileinput-button').is(':visible')){
+							$(this).find('.fileupload-buttonbar button.start,.fileupload-buttonbar .fileinput-button').fadeOut('slow');
+						}
+						if($(this).find('.fileupload-buttonbar button.cancel').is(':hidden')){
+							$(this).find('.fileupload-buttonbar button.cancel').fadeIn('slow');
+						}
+		            },
+		            done: function (e, data) {
+						isUploading = false;
+						if (data.context) {
+							var total = format_file_size(data.total);
+							data.context.find('.transfer').html(total+' / '+total);
+		                    data.context.find('.ui-progressbar').progressbar(
+		                        'value',
+		                        parseInt(100, 10)
+		                    );
+						}
+						jQuery('.em_charger_fichiers').tabs('enable',1);
+						nb_files++;
+						if((data.files.length == 1) && $(this).find('.fileupload-buttonbar button.cancel').is(':visible')){
+							$(this).find('.fileupload-buttonbar button.cancel').fadeOut('slow');
+						}
+						//if(nb_files == data.file_upload_limit){
+						//	jQuery('#em_upload_document').fadeOut().remove();
+						//}else{
+							//progress.toggleCancel(false);
+						//	jQuery('.em_message_file_queue_limit').html(emballe_medias_langue.queue_limit_max+" : "+data.file_queue_limit);
+						//	jQuery('.em_message_file_upload_limit').html("<:emballe_medias:file_upload_limit_public:> "+data.file_upload_limit);
+						//}
+						
+						/**
+						 * Si le retour n'est pas numérique, il y a une erreur quelque part
+						 * Il vaut mieux que l'on rafraichisse la page pour éviter tout déborderment par la suite
+						 */
+						if((isNaN(parseFloat(data.result.message.id_article)) || !isFinite(data.result.message.id_article))){
+							window.location.reload(true);
+						}
+						
+						var retour = 'form'; 
+						//(data.file_upload_limit > 0) ? 'form':'haut';
+						/**
+						 * Au cas où nous n'avions pas d'id_article auparavant,
+						 * on utilise le nouvel article créé si upload multiple
+						 */
+						//this.settings.post_params.arg = data.result.message.id_article;
+						
+						$.ajax({
+							url: "#URL_PAGE{inc-media_uploaded}",
+							type: "GET",
+							data: ({
+								redirect : "#SELF",
+								id_article:data.result.message.id_article,
+								retour : retour
+							}),
+							dataType: "html",
+							beforeSend : function(){
+								$(this).animeajax().addClass('loading');
+							},
+							success: function(msg){
+								$(this).removeClass('loading').children().css('opacity', 1);
+								if(data.maxNumberOfFiles == 0){
+									jQuery('.em_charger_fichiers,#em_form_upload,.jfupload').fadeOut().detach();
+								}
+								if (data.form_exists == 0) {
+									$('#em_upload_fichier').html(msg);
+									jQuery('#formulaire_diogene').load('[(#URL_PAGE{inc-emballe_media_form})]',{
+											id_article: data.result.message.id_article,
+											id_trad: "#ENV{id_trad}",
+											id_rubrique: "#ENV{id_rubrique}",
+											em_type: "#ENV{em_type}",
+											position_auto: data.result.message.position_auto
+										}).fadeIn('slow');
+									data.form_exists = 1;
+								}
+								if(typeof jQuery.localScroll=="function")
+									jQuery.localScroll({hash:true});
+							}
+						});
+		            },
+					// Callback for failed (abort or error) uploads:
+		            fail: function (e, data) {
+						isUploading=false;
+		                var that = $(this).data('fileupload');
+		                that._adjustMaxNumberOfFiles(data.files.length);
+		                if (data.context) {
+		                    data.context.each(function (index) {
+		                        $(this).fadeOut(function () {
+		                            if (data.errorThrown !== 'abort') {
+		                                var file = data.files[index];
+		                                file.error = file.error || data.errorThrown
+		                                    || true;
+		                                that._renderDownload([file])
+		                                    .css('display', 'none')
+		                                    .replaceAll(this)
+		                                    .fadeIn(function () {
+		                                        // Fix for IE7 and lower:
+		                                        $(this).show();
+		                                    });
+		                            } else {
+		                                data.context.remove();
+		                            }
+		                        });
+		                    });
+							if(data.files.length == 1){
+								if($(this).find('.fileupload-buttonbar button.start,.fileupload-buttonbar button.cancel').is(':visible')){
+									$(this).find('.fileupload-buttonbar button.start,.fileupload-buttonbar button.cancel').fadeOut('slow');
+								}
+								if($(this).find('.fileupload-buttonbar .fileinput-button').is(':hidden')){
+									$(this).find('.fileupload-buttonbar .fileinput-button').fadeIn('slow');
+								}
+							}
+							jQuery('.em_charger_fichiers').tabs('enable',1);
+		                } else if (data.errorThrown !== 'abort') {
+		                    that._adjustMaxNumberOfFiles(-data.files.length);
+		                    data.context = that._renderUpload(data.files)
+		                        .css('display', 'none')
+		                        .appendTo($(this).find('.files'))
+		                        .fadeIn(function () {
+		                            // Fix for IE7 and lower:
+		                            $(this).show();
+		                        }).data('data', data);
+		                }
+		            },
+		            progress: function (e, data) {
+		                if (data.context) {
+							var currentTime = new Date();
+							var percent = data.loaded / data.total * 100;
+							var infos = infos_upload(currentTime,iTime,percent,data.loaded,data.total);
+							data.context.find('.transfer').html(infos.cur_kb+' / '+infos.total_kb+' ('+infos.kbs+' kb/s)');
+							data.context.find('.time_remaining').html(infos.time_left+' '+emballe_medias_langue.temps_restant+' ('+infos.time_passed+' '+emballe_medias_langue.temps_passe+')');
+
+							if(percent == 100)
+								data.context.find('.transfer').html(infos.total_kb+' / '+infos.total_kb);
+							
+		                    data.context.find('.ui-progressbar').progressbar(
+		                        'value',
+		                        parseInt(percent)
+		                    );
+		                }
+		            },
+		            progressall: function (e, data) {
+						var currentTime = new Date();
+						var percent = data.loaded / data.total * 100;
+						var infos = infos_upload(currentTime,iTime,percent,data.loaded,data.total);
+		                $(this).find('.fileupload-progressbar').progressbar(
+		                    'value',
+		                    parseInt(data.loaded / data.total * 100, 10)
+		                );
+		            },
+		            start: function (e, data) {
+		            	var that = $(this).data('fileupload');
+		                that._transition($(this).find('.fileupload-progress')).done(
+		                    function () {
+		                        that._trigger('started', e);
+		                    }
+		                );
+		            	$(this).find('.ui-progressbar').progressbar().fadeIn();
+		            },
+					maxFileSize : [(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100}|mult{1024}|mult{1024})],
+					autoUpload : [(#ENV{file_upload_limite}|=={1}|?{true,false})],
+					maxNumberOfFiles :#ENV{file_upload_limite},
+					acceptFileTypes : /(\.|\/)([(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions{'|',''})])$/i,
+					file_upload_limit : #ENV{file_upload_limite},
+					file_queue_limit : #ENV{file_queue_limite},
+					form_exists: "[(#ENV{doc_uploaded}|=={non}|?{0,1})]"
+				});
+				$(window).unload(function(){
+					$('#fileupload').fileupload('destroy').hide();
+				});
+			}else{
+				$('#fileupload').hide().detach();
+				
+				var swfu;
+				
+				swfu = new SWFUpload(swfu_settings);
+				
+				$(window).unload(function(){
+					swfu.destroy();
+				});
+			}
+		</BOUCLE_sijfu1>
+		</B_sijfu1>
+		$('#fileupload').hide().detach();
+		
+		var swfu;
+		
+		swfu = new SWFUpload(swfu_settings);
+		
+		$(window).unload(function(){
+			swfu.destroy();
+		});
+		<//B_sijfu1>
+		$('#formulaire_em_charger_media_ftp form').submit(function(){
+			jQuery('.em_charger_fichiers').tabs('disable',0);
+		});
+		window.onbeforeunload = function(){
+			if(isUploading)
+				return emballe_medias_langue.erreur_beforeunload;
+		};
+	});
+
+-->
+</script>
+<BOUCLE_sijfu(CONDITION){si #PLUGIN{jfu}|oui}>
+<div id="fileupload" class="formulaire_spip jfupload ui-widget ui-widget-content ui-corner-all">
+    <form action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="POST" enctype="multipart/form-data">
+    	<input type="hidden" name="arg" value="#ENV{id_article}" />
+		[<input type="hidden" name="em_type" value="(#ENV{em_type})" />]
+		[<input type="hidden" name="id_rubrique" value="(#ENV{id_rubrique})" />]
+		[<input type="hidden" name="id_document" value="(#ENV{id_document})" />]
+		[<input type="hidden" name="action_document" value="(#ENV{action_document})" />]
+        <div class="fileupload-buttonbar ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <div class="fileinput-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">[(#ENV{legende_upload,[(#ENV{file_upload_limite}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>})]})]</span>
+                <input type="file" name="files[]" multiple class="ui-button">
+            </div>
+            <button type="submit" class="btn btn-primary start ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:none"><span class="ui-button-text">Start upload</span></button>
+            <button type="reset" class="btn btn-warning cancel ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="display:none" title="<:bouton_annuler:>"><span class="ui-button-text"><:emballe_medias:cancel_upload:></span></button>
+        </div>
+    </form>
+    <div class="fileupload-content fileupload-progress">
+		<div id="em_message_attente" class="explication">
+			<:emballe_medias:verification_fichier:>
+		</div>
+		<div id="em_message_avant_upload" class="explication">
+			[(#ENV{config_fichiers}|table_valeur{texte_upload}|propre)]
+			[(#SET{types_liste,[(#GET{types}|emballe_medias_liste_extensions)]})]
+			[(#ENV{file_upload_limite}|>{1}|oui)<p class="explications em_message_file_upload_limit"><:emballe_medias:file_upload_limit_public:> #ENV{file_upload_limite}</p>]
+			[(#ENV{file_queue_limite}|>{1}|oui)<p class="explications em_message_file_queue_limit"><:emballe_medias:queue_limit_max:> #ENV{file_queue_limite}</p>]
+			<p class="explications">
+				<:emballe_medias:types_fichiers_autorises{types=#GET{types_liste}}:>
+			</p>
+			[(#SET{taille,[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]})]
+			<p class="explications">
+				<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
+			</p>
+		</div>
+        <div class="files"></div>
+		[(#ENV{file_upload_limite}|>{1}|oui)
+        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+        </div>
+        <!-- The extended global progress information -->
+        <div class="progress-extended">&nbsp;</div>]
+    </div>
+</div>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+		<div class="template-upload fade upload_info progressWrapper">
+			<div class="progress_container">
+				<div class="preview"><span class="fade"></span></div>
+				<span class="filename name">{%=file.name%}</span>
+				<span class="size"><span>{%=o.formatFileSize(file.size)%}</span></span>
+				<div class="transfer"></div>
+				<div class="time_remaining"></div>
+				<div class="statut"></div>
+	        	
+	        
+	        {% if (file.error) { %}
+	            <div class="error message_erreur red"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</div>
+	        {% } else if (o.files.valid && !i) { %}
+	            <div>
+	                <div class="progress progress_container ui-progressbar .progress-animated progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+	                </div>
+	            </div>
+	            <div class="start">{% if (!o.options.autoUpload) { %}
+	                <button class="btn btn-primary">
+	                    <i class="icon-upload icon-white"></i>
+	                    <span>{%=locale.fileupload.start%}</span>
+	                </button>
+	            {% } %}</div>
+	        {% }%}
+	        <div class="cancel">{% if (!i) { %}
+	        	<button title="<:bouton_annuler:>" class="btn btn-warning ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-button-text">{%=locale.fileupload.cancel%}</span></button>
+	        {% } %}</div>
+	     </div>
+    </div>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td class="delete">
+            <button class="btn btn-danger ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+            	<span class="ui-button-text">
+                <i class="icon-trash icon-white"></i>
+                <span>{%=locale.fileupload.destroy%}</span>
+               </span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+        </td>
+    </tr>
+{% } %}
+</script>
+</BOUCLE_sijfu>
+<div id="em_upload_document[_(#ENV{id_document})]" class="formulaire_spip swfupload">
+	<div id="divLoadingContent" class="reponse_formulaire_erreur">
+		<:swfupload:chargement_uploader:>
+	</div>
+	<div id="divLongLoading" class="reponse_formulaire_erreur" style="display:none">
+		<:swfupload:erreur_chargement_uploader_long_failed:>
+	</div>
+	<div id="divAlternateContent" class="reponse_formulaire_erreur" style="display:none">
+		<:swfupload:erreur_chargement_uploader_failed{url=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash}:>
+	</div>
+	[(#GET{form}|!={non}|oui)<form id="em_form_upload" action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="post" enctype="multipart/form-data">]
+	[(#GET{form}|=={non}|oui)<div id="em_form_upload">]
+		<div>
+			<ul>
+
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend">[(#ENV{legende_upload,[(#ENV{file_upload_limite}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>})]})]</h3>
+					<ul>
+						<li>
+							<div id="em_message_attente" class="explication">
+								<:emballe_medias:verification_fichier:>
+							</div>
+							<div id="em_message_avant_upload" class="explication">
+								[(#ENV{config_fichiers}|table_valeur{texte_upload}|propre)]
+								[(#SET{types_liste,[(#GET{types}|emballe_medias_liste_extensions)]})]
+								[(#ENV{file_upload_limite}|>{1}|oui)<p class="explications em_message_file_upload_limit"><:emballe_medias:file_upload_limit_public:> #ENV{file_upload_limite}</p>]
+								[(#ENV{file_queue_limite}|>{1}|oui)<p class="explications em_message_file_queue_limit"><:emballe_medias:queue_limit_max:> #ENV{file_queue_limite}</p>]
+								<p class="explications">
+									<:emballe_medias:types_fichiers_autorises{types=#GET{types_liste}}:>
+								</p>
+								[(#SET{taille,[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]})]
+								<p class="explications">
+									<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
+								</p>
+							</div>
+						</li>
+						<li id="divSWFUploadUI" >
+							<div id="progress_bar_container">
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<div class="boutons">
+			<div id="em_upload_boutons">
+				<span id="spanButtonPlaceHolder"></span>
+			</div>
+		</div>
+		<noscript><:emballe_medias:swfupload_alternative_js:></noscript>
+		</div>
+	[(#GET{form}|!={non}|oui)</form>]
+	[(#GET{form}|=={non}|oui)</div>]
+</div>

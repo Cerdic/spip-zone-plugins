@@ -1,0 +1,117 @@
+<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tous}>
+[(#PLUGIN{mediabox}|oui)#SET{mediabox,oui}]
+[(#ENV{compteur}|oui)
+	<div class="em_next_prev">
+		[(#ENV{compteur}|=={1}|oui)
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+		[(#ENV{compteur}|>{1}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|moins{1})]">
+				<img src="#CHEMIN{images/ico_fle_haut.png}" alt="<:emballe_medias:em_prev:>" />
+			</a>
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+	</div>
+]
+<h3 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h3>
+[(#DISTANT|=={non}|oui)
+	[(#EXTENSION|in_array{#ARRAY{0,jpg,1,gif,2,png}}|oui)
+	<div id="actions-#ID_DOCUMENT" class="actions-documents">
+		[(#PLUGIN{legendes}|et{#AUTORISER{creerdans,legende,#ID_DOCUMENT}}|oui)
+		#SET{legende_editable,oui}
+		[(#GET{mediabox}|=={oui}|oui)
+		[<a class="mediabox em_image_zoom" title="[(#TITRE|sinon{[(#FICHIER|basename)]})]" href="(#FICHIER|image_reduire{1600,1200}|extraire_attribut{src})"><:emballe_medias:lien_zoom_image:></a>]]
+		<a class="legende_add" title="<:legendes:ajouter_legende:>" href="#"><:legendes:ajouter_legende:></a>]
+		<a href="[(#URL_ACTION_AUTEUR{tourner,#ID_DOCUMENT--90,[(#ENV{redirect,#SELF}|ancre_url{rotation-#ID_DOCUMENT})]})]" title="<:medias:image_tourner_gauche:>" class="bouton_rotation bouton_tourner-gauche ajax">
+			<:medias:image_tourner_gauche:>
+		</a>
+		<a href="[(#URL_ACTION_AUTEUR{tourner,#ID_DOCUMENT-180,[(#ENV{redirect,#SELF}|ancre_url{rotation-#ID_DOCUMENT})]})]" title="<:medias:image_tourner_180:>" class="bouton_rotation bouton_tourner-demi-tour ajax">
+			<:medias:image_tourner_180:>
+		</a>
+		<a href="[(#URL_ACTION_AUTEUR{tourner,#ID_DOCUMENT-90,[(#ENV{redirect,#SELF}|ancre_url{rotation-#ID_DOCUMENT})]})]" title="<:medias:image_tourner_droite:>" class="bouton_rotation bouton_tourner-droite ajax">
+			<:medias:image_tourner_droite:>
+		</a>
+	</div>
+	]
+]
+
+#SET{largeur_previsu,#VAL{_EM_PREVISU_LARGEUR}|defined|?{#EVAL{_EM_PREVISU_LARGEUR},#CONFIG{emballe_medias/styles/largeur_img_previsu,425}}}
+#SET{hauteur_previsu,#VAL{_EM_PREVISU_HAUTEUR}|defined|?{#EVAL{_EM_PREVISU_HAUTEUR},#CONFIG{emballe_medias/styles/hauteur_img_previsu,425}}}
+<div class="em_vignette spip_documents_center">
+	[(#PLUGIN{legendes}|oui)
+		[(#INCLURE{fond=modeles/image_legendes,
+			id_document=#ID_DOCUMENT,largeur=#GET{largeur_previsu},hauteur=#GET{hauteur_previsu},editable=#GET{legende_editable},class=spip_documents spip_documents_center,bouton_ajouter=.legende_add})]
+	]
+	[(#PLUGIN{legendes}|non)
+		[(#GET{mediabox}|=={oui}|oui)<a class="mediabox" title="[(#TITRE|sinon{[(#FICHIER|basename)]})]" href="[(#FICHIER|image_reduire{1600,1200}|extraire_attribut{src})]">]
+		[(#FICHIER|image_reduire{#GET{largeur_previsu},#GET{hauteur_previsu}}
+			|inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]})]
+		[(#GET{mediabox}|=={oui}|oui)</a>]
+	]
+</div>
+	
+<div class="infos_document">
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_id:></strong>
+			#(#ID_DOCUMENT)
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_nom_fichier:></strong>
+			<abbr title="[(#FICHIER|basename)]">
+				<a href="#FICHIER" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
+					(#FICHIER|basename|couper{20})
+				</a>
+			</abbr>
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_poid_fichier:></strong> (#TAILLE|taille_en_octets)
+		</p>
+	</div>]
+	[<div><strong><:emballe_medias:document_type:></strong> (#MIME_TYPE)</p></div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_extension:></strong>
+			(#EXTENSION)
+		</p>
+	</div>]
+	<div>
+		<p>
+			<strong><:emballe_medias:document_dimensions:></strong>
+			#LARGEUR/#HAUTEUR px
+		</p>
+	</div>
+	[<div class="#EDIT{em_descriptif}">
+		(#DESCRIPTIF|sinon{<p><:emballe_medias:document_description_no_crayons:></p>})
+	</div>]
+	[(#PLUGIN{licence}|et{#ID_LICENCE|>={0}|oui}|oui)<div>
+		<p>
+			<strong><:emballe_medias:document_licence:></strong>
+			<span class="em_licence_documents #EDIT{id_licence}">
+				#MODELE{licence,id_document=#ID_DOCUMENT,id_licence=#ID_LICENCE,nom_licence=oui,lien=non,hauteur_logo=24}
+			</span>
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_credits:></strong>
+			<span class="em_credits_documents #EDIT{credits}">
+			 (#CREDITS|sinon{<:emballe_medias:no_credits_crayons:>})
+			</span>
+		</p>
+	</div>]
+	[(#PLUGIN{photo_infos}|oui)
+		<INCLURE{fond=prive/inc-infos_exif,id_document}>
+	]
+</div>
+</BOUCLE_documents_en_cours>

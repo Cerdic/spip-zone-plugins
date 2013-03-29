@@ -1,0 +1,151 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_emballe_medias" id='formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#SELF' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<p class="explication">
+				<:emballe_medias:explication_traitement_lot_intro:>
+			</p>
+		</div>
+		<ul>
+			<li class="editer boutons">
+				<label><:emballe_medias:label_selectionnez_types_medias:></label>
+				<input type="hidden" name="statuts_medias" value="#ENV{statuts_medias}" />
+				<input style="height:0;width:0;visibility: hidden;" type="submit" class="submit" name="valider" value="<:bouton_valider:>" />
+				[(#ENV{statuts_medias,prepa}|=={prepa}|oui)
+				<:emballe_medias:info_statut_prepa:>]
+				[(#ENV{statuts_medias,prepa}|=={prepa}|non)
+				<button class="submit" name="change_statut_prepa" value="prepa"><:emballe_medias:info_statut_prepa:></button>]
+				[(#ENV{statuts_medias,prepa}|=={prop}|oui)
+				<:emballe_medias:info_statut_prop:>]
+				[(#ENV{statuts_medias,prepa}|=={prop}|non)
+				<button class="submit" name="change_statut_prop" value="prop"><:emballe_medias:info_statut_prop:></button>]
+				[(#ENV{statuts_medias,prepa}|=={publie}|oui)
+				<:emballe_medias:info_statut_publies:>]
+				[(#ENV{statuts_medias,prepa}|=={publie}|non)
+				<button class="submit" name="change_statut_publie" value="publie"><:emballe_medias:info_statut_publies:></button>]
+			</li>
+		</ul>
+		<ul>
+		<li>
+			<div>
+				[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
+				<p class="explication">
+					<:emballe_medias:explication_medias_prepas_auth_publier:>
+				</p>]
+				[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
+				<p class="explication">
+					<:emballe_medias:explication_medias_prepas:>
+				</p>]
+				[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
+				<p class="explication">
+					<:emballe_medias:explication_medias_props_auth_publier:>
+				</p>]
+				[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
+				<p class="explication">
+					<:emballe_medias:explication_medias_props:>
+				</p>]
+			</div>
+		</li>
+		[(#SET{pagination_attente,[(#ENV{statuts_medias,prepa}|=={prepa}|?{100000,30})]})]
+		<INCLURE{fond=formulaires/media_edition_lot_liste,medias,id_diogene,id_secteur,erreurs,statuts_medias=#ENV{statuts_medias,prepa},pagination=#GET{pagination_attente},debut_medias,ajax} />
+		</ul>
+		<ul class="edition_par_lot">
+			[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
+			    <li class="editer editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
+				<label for="surtitre"><:texte_sur_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{surtitre})</span>
+				]<input type='text' class='text' name='surtitre' id='surtitre'[ lang='(#LANGUE)'] value="[(#ENV**{surtitre})]" />
+			    </li>]
+			    [<li class="editer editer_forcer_titre[ (#ENV**{erreurs}|table_valeur{titre_demander_validation}|oui)erreur]">
+			    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_demander_validation})</span>
+			    	<div class="choix">
+			    		<input type="checkbox" name="forcer_traiter_titre" id="forcer_traiter_titre"/>
+			    		<label for="forcer_traiter_titre"><:emballe_medias:label_forcer_validation_titre:></label>
+			    	</div>
+			    </li>]
+			    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+			    	<label for="titre"><:info_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]
+					<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]" />
+			    </li>
+			  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
+			    <li class="editer editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
+				<label for="soustitre"><:texte_sous_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{soustitre})</span>
+				]<input type='text' class='text' name='soustitre' id='soustitre'[ lang='(#LANGUE)'] value="[(#ENV**{soustitre})]" />
+			    </li>]
+				[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+						<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+						]
+						(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+			    </li>]
+				
+			  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
+			    <li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif"><:texte_descriptif_rapide:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+			    </li>]
+			  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
+			    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=,Uis}|oui)
+				<label for='virtuel'><:info_redirection:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>
+				]<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
+				<input type='hidden' name='changer_virtuel' value='oui' />
+				<p class='explication'><:texte_article_virtuel_reference:></p>
+				</li>]
+				[<li class="editer editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=,Uis}|non)
+					<label for="chapo"><:info_chapeau:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
+					]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
+				</li>]
+					]
+		
+				[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
+			  	<li class="editer editer_liens_sites fieldset">
+					<fieldset>
+						<h3 class="legend"><:entree_liens_sites:></h3>
+						<ul>
+						<li class="editer editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+							<label for="nom_site"><:info_titre:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
+							]<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" />
+						</li>
+						<li class="editer editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+							<label for="url_site"><:info_url:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+							]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+						</li>
+						</ul>
+					</fieldset>
+				</li>]
+			    
+			  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
+			    <li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+					<label for="text_area"><:info_texte:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+					][(#ENV**{_texte_trop_long,''})]
+						<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+			    </li>]
+			  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
+			    <li class="editer editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
+					<label for="ps"><:info_post_scriptum:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
+					]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
+			    </li>]
+			    [(#PIPELINE{diogene_ajouter_saisies,#ARRAY{args,#ENV**{diogene_args}},data,''})]
+			    <!--extra-->
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div>
+	</form>
+	</BOUCLE_si_editable>
+</div>

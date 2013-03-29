@@ -1,0 +1,9 @@
+<B_liste_types>
+	[(#CONFIG{emballe_medias/types/autoriser_normal}|=={on}|oui)
+	<option value='normal'[(#ENV{em_type}|=={normal}|oui) selected="selected"]><:emballe_medias:type_aucun:></option>]
+	[(#CONFIG{emballe_medias/types/autoriser_normal}|=={on}|non)
+	<option value=''>-</option>]
+	<BOUCLE_liste_types(POUR){tableau #CONFIG*{'emballe_medias/types/types_dispos'}}>
+		<option value='#VALEUR'[(#ENV{em_type}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{emballe_medias:type_}|concat{#VALEUR}|_T)]</option>
+	</BOUCLE_liste_types>
+</B_liste_types>

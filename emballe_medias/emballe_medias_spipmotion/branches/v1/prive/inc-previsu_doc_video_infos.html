@@ -1,0 +1,213 @@
+<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{extension IN #FORM_TYPE{video}}{tout}>
+<div class="em_infos_documents" id="document_#ID_DOCUMENT">
+	<div class="infos">
+		<ul>
+			<li><a href="#em_infos">?</a></li>
+			<li><a href="#em_infos_doc#ID_DOCUMENT"><:spipmotion:info_version_original:></a></li>
+			<BOUCLE_copies_link(DOCUMENTS){id_orig=#ID_DOCUMENT}{tout}>
+			<li><a href="#em_infos_doc#ID_DOCUMENT"><:spipmotion:info_version{version=#EXTENSION}:></a></li>
+			</BOUCLE_copies_link>
+		</ul>
+		<div id="em_infos">
+			<BOUCLE_spipmotion_attentes(SPIPMOTION_ATTENTES){id_document=#ID_DOCUMENT}{encode IN "en_cours","non","erreur"}{0,1}>
+			<p id="em_attentes_#ID_DOCUMENT">
+				[(#ENCODE|=={non}|oui)<:em_spipmotion:message_document_attente_encodage:>]
+				[(#ENCODE|=={non}|non)<:em_spipmotion:message_document_encours_encodage:>]
+			</p>
+			</BOUCLE_spipmotion_attentes>
+			<div class="actions">
+				<a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="spipmotion_recharge_#ID_DOCUMENT" class="bouton ajax"><:spipmotion:lien_recharger:></a>
+			</div>
+			</B_spipmotion_attentes>
+			[(#EXTENSION|in_array{[(#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY})]}
+				|ou{[(#EXTENSION|in_array{[(#CONFIG{spipmotion/fichiers_audios,#ARRAY})]})]}
+				|oui)
+				<div class="actions">
+					<a href="[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#ENV{id_objet}/#ENV{objet}/#ID_DOCUMENT,[(#SELF|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{em_infos_doc#ID_DOCUMENT})]})]" class="bouton ajax">
+						[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos,#ARRAY}}|oui)<:spipmotion:encoder_video:>]
+						[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios,#ARRAY}}|oui)<:spipmotion:encoder_son:>]
+					</a>
+				</div>]
+			<//B_spipmotion_attentes>
+			<B_autres_versions>
+			<p>
+				[(#TOTAL_BOUCLE|>{1}|oui)<:em_spipmotion:autres_versions_formats:>]
+				<BOUCLE_autres_versions(DOCUMENTS){id_orig=#ID_DOCUMENT}{tout}{', '}>#SET{extension,#EXTENSION}[(#TOTAL_BOUCLE|>{1}|?{#EXTENSION,''})]</BOUCLE_autres_versions>
+				[(#TOTAL_BOUCLE|=={1}|oui)<:em_spipmotion:autre_version_format{format=#GET{extension}}:>]
+			</p>
+			</B_autres_versions>
+		</div>
+		<div id="em_infos_doc#ID_DOCUMENT">
+			<div>
+				<p>
+					<strong><:emballe_medias:document_titre:> </strong>
+					<span class="#EDIT{titre}">[(#TITRE|sinon{#FICHIER|basename})]</span>
+				</p>
+			</div>
+			[<div>
+				<p>
+					<strong><:emballe_medias:document_id:></strong>
+					#(#ID_DOCUMENT)
+				</p>
+			</div>]
+			[<div>
+				<p><strong><:emballe_medias:document_logo:> </strong></p>
+				<div class="em_vignette #EDIT{vignette} resize-100">
+					(#LOGO_DOCUMENT|image_passe_partout{100,100}|inserer_attribut{alt,''})
+				</div>
+			</div>]
+			<div>
+				<p><strong><:emballe_medias:document_description:> </strong></p>
+				<div class="em_descriptif_documents #EDIT{em_descriptif}">
+					[(#DESCRIPTIF|sinon{<p><:emballe_medias:document_description_no_crayons:></p>})]
+				</div>
+			</div>
+			[(#ID_LICENCE|>={0}|oui)<div>
+				<p>
+					<strong><:emballe_medias:document_licence:></strong>
+					<span class="em_licence_documents #EDIT{id_licence}">
+						#MODELE{licence,id_document=#ID_DOCUMENT,id_licence=#ID_LICENCE,nom_licence=oui,lien=non,hauteur_logo=24}
+					</span>
+				</p>
+			</div>]
+			[<div>
+				<p>
+					<strong><:emballe_medias:document_credits:></strong>
+					<span class="em_credits_documents #EDIT{credits}">
+					 (#CREDITS)
+					</span>
+				</p>
+			</div>]
+			[(#CREDITS|non)[(#PLUGIN{medias}|oui)
+			<div>
+				<p>
+					<strong><:emballe_medias:document_credits:></strong>
+					<span class="em_credits_documents #EDIT{credits}"><:emballe_medias:no_credits_crayons:></span>
+				</p>
+			</div>]]
+			[(#PLUGIN{podcast}|oui)
+			<div>
+				<p>
+					<strong><:podcast:label_dans_podcast:> : </strong>
+					<span class="em_podcast_documents #EDIT{podcast}">
+						[(#VAL{item_[(#PODCAST)]}_T)]
+					</span>
+				</p>
+			</div>
+			<div>
+				<p>
+					<strong><:podcast:label_contenu_explicit:> : </strong>
+					<span class="em_explicit_documents #EDIT{explicit}">
+						[(#VAL{podcast:valeur_[(#EXPLICIT)]}_T)]
+					</span>
+				</p>
+			</div>]
+			<h5><:spipmotion:info_infos_techniques:></h5>
+			#INCLURE{fond=inclure/spipmotion_document_infos,env,id_document}
+			<div class="actions">
+				<a href="[(#URL_ACTION_AUTEUR{spipmotion_logo,0/article/#ID_DOCUMENT,[(#SELF|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{em_infos_doc#ID_DOCUMENT})]})]" class="bouton ajax"><:spipmotion:recuperer_logo:></a><span class="sep"> | </span><a href="[(#URL_ACTION_AUTEUR{spipmotion_infos,0/article/#ID_DOCUMENT,[(#SELF|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]})]" class="bouton ajax"><:spipmotion:recuperer_infos:></a>
+			</div>
+		</div>
+		<BOUCLE_copies(DOCUMENTS){id_orig=#ID_DOCUMENT}{tout}>
+		<div id="em_infos_doc#ID_DOCUMENT">
+		[(#FICHIER|get_spip_doc|file_exists|non)
+			<p class="reponse_formulaire reponse_formulaire_erreur">
+				<:spipmotion:erreur_document_plus_disponible:>
+			</p>
+		]
+		#SET{logo,#LOGO_DOCUMENT}
+		<BOUCLE_si_copie_dispo(CONDITION){si #FICHIER|get_spip_doc|file_exists|oui}>
+			<div>
+				<p>
+					<strong><:emballe_medias:document_titre:> </strong>
+					<span class="#_copies:EDIT{titre}">[(#TITRE|sinon{#FICHIER|basename})]</span>
+				</p>
+			</div>
+			[<div>
+				<p>
+					<strong><:emballe_medias:document_id:></strong>
+					#(#ID_DOCUMENT)
+				</p>
+			</div>]
+			<div>
+				<p><strong><:emballe_medias:document_logo:></strong></p>
+				<div class="em_vignette #_copies:EDIT{vignette} resize-100">
+					[(#GET{logo}|image_passe_partout{100,100}|inserer_attribut{alt,''})]
+				</div>
+			</div>
+			<div>
+				<p><strong><:emballe_medias:document_description:></strong></p>
+				<div class="em_descriptif_documents #_copies:EDIT{em_descriptif}">
+					[(#DESCRIPTIF|sinon{<p><:emballe_medias:document_description_no_crayons:></p>})]
+				</div>
+			</div>
+			[(#_copies:ID_LICENCE|>={0}|oui)<div>
+				<p>
+					<strong><:emballe_medias:document_licence:></strong>
+					<span class="em_licence_documents #_copies:EDIT{id_licence}">
+						#MODELE{licence,id_document=#_copies:D_DOCUMENT,id_licence=#_copies:ID_LICENCE,nom_licence=oui,lien=non,hauteur_logo=24}
+					</span>
+				</p>
+			</div>]
+			[<div>
+				<p>
+					<strong><:emballe_medias:document_credits:></strong>
+					<span class="em_credits_documents #_copies:EDIT{credits}">
+					 (#_copies:CREDITS)
+					</span>
+				</p>
+			</div>]
+			[(#CREDITS|non)[(#PLUGIN{medias}|oui)
+			<div>
+				<p>
+					<strong><:emballe_medias:document_credits:></strong>
+					<span class="em_credits_documents #_copies:EDIT{credits}">
+					 <:emballe_medias:no_credits_crayons:>
+					</span>
+				</p>
+			</div>]]
+			[(#PODCAST|oui)<div>
+				<p>
+					<strong><:podcast:label_dans_podcast:> : </strong>
+					<span class="em_podcast_documents #_copies:EDIT{podcast}">
+						[(#VAL{item_#PODCAST}_T)]
+					</span>
+				</p>
+			</div>]
+			[(#EXPLICIT|oui)<div>
+				<p>
+					<strong><:podcast:label_contenu_explicit:> : </strong>
+					<span class="em_explicit_documents #_copies:EDIT{explicit}">
+						[(#VAL{podcast:valeur_[(#EXPLICIT)]}_T)]
+					</span>
+				</p>
+			</div>]
+			<h5><:spipmotion:info_infos_techniques:></h5>
+			#INCLURE{fond=inclure/spipmotion_document_infos,env,id_document}
+			<div class="actions">
+				<a href="[(#URL_ACTION_AUTEUR{spipmotion_logo,0/article/#ID_DOCUMENT,[(#SELF|ancre_url{em_infos_doc#ID_DOCUMENT}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{em_infos_doc#ID_DOCUMENT})]})]" class="bouton ajax"><:spipmotion:recuperer_logo:></a><span class="sep"> | </span><a href="[(#URL_ACTION_AUTEUR{spipmotion_infos,0/article/#ID_DOCUMENT,[(#SELF|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{em_infos_doc#ID_DOCUMENT})]})]" class="bouton ajax"><:spipmotion:recuperer_infos:></a>
+				<BOUCLE_spipmotion_attente_format(SPIPMOTION_ATTENTES){id_document=#ID_ORIG}{extension=#EXTENSION}{encode != oui}>
+				<p><:spipmotion:message_document_encours_encodage_version{version=#EXTENSION}:></p>
+				</BOUCLE_spipmotion_attente_format>
+				</B_spipmotion_attente_format>
+				[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}|ou{#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}|oui)
+				<span class="sep"> | </span><a href="[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#ENV{id_objet}/#ENV{objet}/#ID_ORIG/#EXTENSION,[(#SELF|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{em_infos_doc#ID_DOCUMENT})]})]" class="bouton ajax">
+					[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}|oui)<:spipmotion:encoder_video_version{version=#EXTENSION}:>]
+					[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}|oui)<:spipmotion:encoder_son{version=#EXTENSION}:>]
+				</a>]
+				<//B_spipmotion_attente_format>
+			</div>
+			</BOUCLE_si_copie_dispo>
+		</div>
+		</BOUCLE_copies>
+	</div>
+</div>
+<script type="text/javascript">
+if(jQuery('#em_attentes_#ID_DOCUMENT').size() > 0){
+	var refresh_#ID_DOCUMENT = function(){
+		jQuery('#spipmotion_recharge_#ID_DOCUMENT').click();
+	}
+	setTimeout(refresh_#ID_DOCUMENT,90000);
+}
+</script>
+</BOUCLE_documents_en_cours>

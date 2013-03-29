@@ -1,0 +1,13 @@
+<!-- titre=<:emballe_medias:emballe_medias_styles:>-->
+<!-- logo=images/emballe_medias-128.png-->
+<!-- icone=images/menu_emballe_medias.png-->
+<!-- onglet=emballe_medias_fichiers -->
+<!-- liens*=emballe_medias:emballe_medias_fichiers -->
+[(#CONFIG{emballe_medias/fichiers/gerer_types}|=={on}|oui)
+<!-- liens*=emballe_medias:emballe_medias_types -->]
+[(#PLUGIN{plupload}|non)
+<!-- liens*=emballe_medias:emballe_medias_styles -->]
+
+<div class="ajax">
+#FORMULAIRE_CONFIG_EMBALLE_MEDIAS_STYLES
+</div>

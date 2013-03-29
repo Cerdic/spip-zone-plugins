@@ -1,0 +1,27 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_emballe_media formulaire_changer_type">
+	<!-- br class='spacer' / -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:emballe_medias:changer_type_article:></h3>
+					<ul>
+						<li class="editer_type">
+							<select class="text" name="type">
+								<INCLURE{fond=prive/listes/em_changer_type_liste}{env}>
+							</select>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="valider" value="<:bouton_enregistrer:>" />
+		</p>
+	</form>]
+</div>

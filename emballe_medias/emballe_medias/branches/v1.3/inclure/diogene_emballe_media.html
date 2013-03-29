@@ -1,0 +1,334 @@
+#CACHE{0}
+[(#SET{config_fichiers,#CONFIG{emballe_medias/fichiers/}})]
+[(#SET{config_types,#CONFIG{emballe_medias/types/}})]
+[(#SET{pas_autorise,false})]
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+	[(#SET{id_rubrique,[(#ENV{id_rubrique,#ID_SECTEUR})]})]
+	[(#REM)
+		Si on ne veut pas publier à la racine du secteur media, on choisi la premiere rubrique du secteur par défaut
+	]
+	<BOUCLE_autoriser_modifier_creer(CONDITION){si #ENV{id_article}|ou{#AUTORISER{creerdans,diogene,#ID_DIOGENE}}|oui}>
+		<BOUCLE_si_pas_secteur(CONDITION){si #GET{id_rubrique}|et{#GET{id_rubrique}|=={#ID_SECTEUR}}|et{#CONFIG{emballe_medias/fichiers/publier_dans_secteur,off}|!={on}}|oui}>
+			<BOUCLE_rubrique_defaut(RUBRIQUES){id_parent=#GET{id_rubrique}}{0,1}>
+			[(#SET{id_rubrique,#ID_RUBRIQUE})]
+			</BOUCLE_rubrique_defaut>
+		</BOUCLE_si_pas_secteur>
+		[(#REM)
+			On vérifie tout d'abord que l'on ait bien les droits de création dans ce secteur
+		]
+		<BOUCLE_autorise_creer_secteur(CONDITION){si #ID_SECTEUR|>{0}|et{#AUTORISER{creerarticledans,rubrique,#ID_SECTEUR}}|oui}>
+			[(#REM)
+				On ne publie que s'il existe au moins une sous-rubrique (catégorie)
+				dans le secteur (même si elle n'est pas encore publiée)
+				Ou on publie dans le secteur si la conf de em medias le permet
+			]
+			[(#CONFIG{emballe_medias/fichiers/publier_dans_secteur}|=={on}|oui)
+				#SET{publier_dans_secteur,0}
+			]
+			<BOUCLE_rubriques_disponibles(RUBRIQUES){id_secteur}{id_rubrique!=#GET{publier_dans_secteur,#ID_SECTEUR}}{tout}{0,1}> </BOUCLE_rubriques_disponibles>
+			[(#SET{new,oui})]
+			[(#SET{doc_uploaded,non})]
+			[(#SET{nb_files_count,0})]
+	
+			[(#REM) on cherche un article de l'auteur en cours de redac si la conf de diogene le demande ]
+			[(#SET{id_article_en_cours,#ENV{id_article}})]
+			<BOUCLE_chercher_article_auteur(ARTICLES){si #CONFIG{emballe_medias/fichiers/chercher_article}|=={on}|oui}{id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{statut IN prop,prepa}{origine_traduction}{em_type ?}>
+			[(#SET{id_article_en_cours,#ENV{id_article,#ID_ARTICLE}})]
+			</BOUCLE_chercher_article_auteur>
+	
+			<B_article_en_cours>
+			[(#REM)
+				- Un article est présent dans l'environnement
+				- Il correspondant au bon secteur
+				- Il correspond aux statuts modifiables
+				- On teste si l'auteur actuel a les droits de modification
+			]
+			<BOUCLE_article_en_cours(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_article=#GET{id_article_en_cours}}{statut IN prop,prepa,publie}{em_type ?}>
+				<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE}|oui}>
+				[(#SET{article_cree,oui})]
+				[(#SET{id_article,#ID_ARTICLE})]
+				[(#SET{id_rubrique,#ID_RUBRIQUE})]
+				[(#SET{type,#EM_TYPE})]
+				[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+				[(#SET{new,non})]
+				<BOUCLE_doc_en_cours(DOCUMENTS){id_article}{extension IN #GET{types}}{mode IN document,image}{tout}>
+					[(#FICHIER|get_spip_doc|file_exists|non)#SET{orig_disparu,oui}]
+					[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+					[(#SET{doc_uploaded,oui})]
+					<BOUCLE_doc_convertis(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{tout}>
+					[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+					[(#SET{doc_uploaded,oui})]
+					</BOUCLE_doc_convertis>
+				</BOUCLE_doc_en_cours>
+				</BOUCLE_autorise>
+				</B_autorise>
+				[(#REM)
+					L'auteur identifié n'a pas le droit de modifier l'article en question
+					On lui signale par un message
+				]
+				[(#SET{pas_autorise,true})]
+				[(#SET{pre_message,<:emballe_medias:erreur_autorisation_article:>})]
+				<//B_autorise>
+			</BOUCLE_article_en_cours>
+			</B_article_en_cours>
+			#SET{type,#ENV{em_type}}
+			<BOUCLE_autorise_publier_sstype(CONDITION){si (#GET{config_types}|table_valeur{autoriser_normal}|=={on}|oui)}>
+				<BOUCLE_article_en_cours_de_redac(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type ?}{origine_traduction}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
+					[(#SET{article_cree,oui})][(#SET{id_article,#ID_ARTICLE})][(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+					<BOUCLE_doc_en_cours_de_redac(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
+						[(#FICHIER|get_spip_doc|file_exists|non)#SET{orig_disparu,oui}]
+						[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+						[(#SET{doc_uploaded,oui})]
+						<BOUCLE_doc_convertis_redac(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{tout}>
+						[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+						[(#SET{doc_uploaded,oui})]
+						</BOUCLE_doc_convertis_redac>
+					</BOUCLE_doc_en_cours_de_redac>
+				</BOUCLE_article_en_cours_de_redac>
+			</BOUCLE_autorise_publier_sstype>
+			</B_autorise_publier_sstype>
+				<BOUCLE_article_en_cours_de_redac_sstype(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type}{!statut = 'poubelle'}{!statut = 'publie'}{origine_traduction}{0,1}>
+					[(#SET{article_cree,oui})][(#SET{id_article,#ID_ARTICLE})][(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{new,non})][(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+					<BOUCLE_doc_en_cours_de_redac_sstype(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
+						[(#FICHIER|get_spip_doc|file_exists|non)#SET{orig_disparu,oui}]
+						[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+						[(#SET{doc_uploaded,oui})]
+						<BOUCLE_doc_convertis_redac_sstype(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{tout}>
+						[(#SET{nb_files_count,[(#GET{nb_files_count}|plus{1})]})]
+						[(#SET{doc_uploaded,oui})]
+						</BOUCLE_doc_convertis_redac_sstype>
+					</BOUCLE_doc_en_cours_de_redac_sstype>
+				</BOUCLE_article_en_cours_de_redac_sstype>
+			<//B_autorise_publier_sstype>
+			<//B_article_en_cours>
+			<BOUCLE_articles_non_publies(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_article != #GET{id_article}}{id_secteur = #_diogene:ID_SECTEUR}{statut IN prepa}> </BOUCLE_articles_non_publies>
+			#BOITE_OUVRIR{'','notice'}
+			#SET{nb,#GRAND_TOTAL}
+			<p><:emballe_medias:message_notice_nb_articles_prepa{nb=#GET{nb}}:></p>
+			#SET{url,#URL_PAGE{publier}|ancre_url{diogene_proposes_vous}}
+			<p><:emballe_medias:message_notice_voir_articles_prepa{url=#GET{url}}:></p>
+			#BOITE_FERMER
+			</B_articles_non_publies>
+			<BOUCLE_article(ARTICLES){id_article=#GET{id_article}}{statut?}>
+				[(#SET{titre,[(#TITRE|sinon{<:emballe_medias:titre_nouveau_document:>})]})]
+				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
+				<div class="texte">
+				[(#GET{type}|in_array{#LISTE{audio,video,texte,image}}|oui)
+				<p>
+					<strong><:emballe_medias:type_media:></strong>
+					[(#VAL{emballe_medias:type_#GET{type}}|_T)]
+				</p>]
+				[<p><strong><:par_auteur|ucfirst:> : </strong> 
+					(#LESAUTEURS)
+				</p>]
+				<p>
+					<strong><:diogene:info_statut:> </strong>[(#STATUT|puce_statut{article,#ID_ARTICLE})] 
+					[(#STATUT|=={publie}|oui)
+						<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
+					[(#STATUT|=={publie}|non)
+						[(#STATUT|diogene_info_statut)]]
+					#SET{est_auteur,non}
+					<BOUCLE_auteurs_article(AUTEURS){id_article}{id_auteur=#SESSION{id_auteur}}>
+						#SET{est_auteur,oui}
+					</BOUCLE_auteurs_article>
+					[(#GET{est_auteur}|=={non}|oui)
+						#BOITE_OUVRIR{'',notice}
+						<p><:diogene:message_pas_auteur:></p>
+						#BOITE_FERMER
+					]
+					[(#GET{nb_files_count}|=={0}|et{#GET{id_article}|intval}|oui)
+						[(#BOUTON_ACTION{[(#GET{est_auteur}|=={oui}|?{<:diogene:texte_statut_poubelle_normal:>,<:diogene:texte_statut_poubelle_normal_pas_auteur:>})],[(#URL_ACTION_AUTEUR{instituer_objet,article-#GET{id_article}-poubelle,[(#SELF|parametre_url{id_article,''})]})],'',<:diogene:message_confirm_poubelle:>})]
+					]
+				</p>
+				<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
+					<B_si_traduction>
+					<p>
+						<BOUCLE_si_traduction(CONDITION){si #ID_TRAD|>{0}|oui}>
+							<BOUCLE_article_orig(ARTICLES){id_article=#ID_TRAD}{statut IN prop,prepa,publie}{tout}>
+							[(#SET{titre_orig,#TITRE})]
+							[(#SET{url,#URL_ARTICLE})]
+							[(#SET{afficher_doc_trad,oui})]
+							[(#SET{article_trad,#ID_TRAD})]
+							<BOUCLE_doc_orig(DOCUMENTS){mode IN document,image}{id_article=#ID_TRAD}{0,1}>
+							[(#SET{doc_trad_dispo,oui})]
+							</BOUCLE_doc_orig>
+							</B_doc_orig>
+							[(#SET{doc_trad_dispo,non})]
+							<//B_doc_orig>
+							<:diogene:info_traduction_article{titre=#GET{titre_orig},url=#GET{url}}:>
+							</BOUCLE_article_orig>
+						</BOUCLE_si_traduction>
+					</p>
+					</B_si_traduction>
+				</BOUCLE_si_trad>
+				</B_si_trad>
+					<B_traductions_toutes>
+						<p><strong><:emballe_medias:message_document_original:></strong></p>
+						<ul class="spip">
+							<BOUCLE_traductions_toutes(ARTICLES){traduction}{tout}{statut IN prop,prepa,publie}{exclus}>
+								<li><a href="#URL_ARTICLE">#TITRE</a></li>
+							</BOUCLE_traductions_toutes>
+						</ul>
+					</B_traductions_toutes>
+				<//B_si_trad>
+				<B_traductions>
+					<p><:diogene:message_article_traduit_en:>
+					<BOUCLE_traductions(ARTICLES){traduction}{lang != #LANG}{', '}>
+					#SET{langue,#LANG|traduire_nom_langue}
+					<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
+					</BOUCLE_traductions>
+					</p>
+				</B_traductions>
+				</div>
+			</BOUCLE_article>
+	
+			[<p class="message_erreur">(#GET{pre_message})</p>]
+			
+			[(#REM)
+				Nouveau media, si on force le choix des  types, on affiche un formulaire de choix de types
+			]
+			[(#GET{new}|=={oui}|et{#GET{config_fichiers}|table_valeur{forcer_gerer_types}|=={on}|oui}|oui)
+				#EM_MENU_TYPE]
+					
+			[(#GET{pas_autorise}|=={false}|oui)
+				[(#PIPELINE{diogene_avant_formulaire,[(#ARRAY{args,[(#ENV**|unserialize|array_merge{[(#ARRAY{champs_ajoutes,#CHAMPS_AJOUTES,type,article})]})],data,''})]})]
+				[(#VAL{_EM_FILE_QUEUE_LIMIT}|defined|?{#SET{limite_file_upload,#EVAL{_EM_FILE_QUEUE_LIMIT}},#SET{limite_file_upload,#GET{config_fichiers}|table_valeur{file_queue_limit}|sinon{1}}})]
+				[(#SET{file_upload_limite,[(#VAL{_EM_FILE_UPLOAD_LIMIT}|defined|?{[(#EVAL{_EM_FILE_UPLOAD_LIMIT})],[(#GET{config_fichiers}|table_valeur{file_upload_limit}|sinon{1})]}|moins{#GET{nb_files_count}})]})]
+				[(#SET{file_queue_limite,[(#GET{limite_file_upload}|>{#GET{file_upload_limite}}|?{#GET{file_upload_limite},[(#GET{limite_file_upload})]})]})]
+	
+				[(#GET{nb_files_count}|>={[(#GET{file_upload_limite})]}|non)
+					[(#GET{config_fichiers}|table_valeur{gerer_types}|=={on}|oui)
+						[(#GET{config_types}|table_valeur{forcer_gerer_types}|=={on}|non)
+							[(#ENV{em_type}|sinon{#GET{type,''}}|in_array{[(#GET{config_types}|table_valeur{types_dispos}|sinon{#ARRAY})]}|ou{[(#ENV{em_type}|=={''})]}|oui)
+								[(#SET{type_ok,ok})]]
+							[(#GET{type_ok}|=={ok}|non)
+								#SET{type_ok,pasok}
+								[(#SET{type_message,<:emballe_medias:type_invalide:>})]]
+						]
+						[(#GET{config_types}|table_valeur{autoriser_normal}|=={on}|non)
+							[(#ENV{em_type}|sinon{#GET{type,''}}|in_array{#GET{config_types}|table_valeur{types_dispos}}|oui)
+								[(#SET{type_ok,ok})]]
+	
+							[(#GET{type_ok}|=={ok}|non)
+								#SET{type_ok,pasok}
+								[(#ENV{em_type}|=={''}|oui)
+									[(#SET{type_message,<:emballe_medias:type_obligatoire:>})]]
+								[(#ENV{em_type}|=={''}|non)
+									[(#SET{type_message,<:emballe_medias:type_invalide:>})]]
+							]
+						]
+					]
+	
+					[(#GET{config_fichiers}|table_valeur{gerer_types}|=={on}|ou{#GET{config_fichiers}|table_valeur{forcer_gerer_types}|=={on}|oui}|non)
+						[(#SET{type_ok,ok})]
+					]
+					
+					[(#GET{type_ok}|=={pasok}|oui)
+						[(#ENV{id_article}|oui)
+							[(#FORMULAIRE_EM_CHANGER_TYPE{#GET{id_article},#GET{type_message}})]]
+					]
+					[(#GET{type_ok}|=={ok}|oui)
+						[(#ENV{id_article}|oui)
+							[(#FORMULAIRE_EM_CHANGER_TYPE{#GET{id_article},#GET{type_message}})]]
+						#SET{types,#FORM_TYPE{#GET{type}}}
+						[(#GET{types}|is_array|oui)
+						[(#SET{file_types,[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]})]})]]
+						[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
+						
+						[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+						<div class="em_charger_fichiers">
+							<ul>
+								<li><a href="#em_charger_fichier"><:emballe_medias:lien_charger_local:></a></li>
+								[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
+								[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
+							</ul>
+							<div id="em_charger_fichier">
+						]
+	
+						<INCLURE{fond=inclure/upload_formulaire,
+							id_rubrique=#GET{id_rubrique},
+							id_parent=#GET{id_rubrique},
+							id_article=#GET{id_article},
+							id_objet=#GET{id_article},
+							objet=article,
+							config_fichiers=#GET{config_fichiers},
+							type_media=#GET{type},
+							file_upload_limite=#GET{file_upload_limite},
+							file_queue_limite=#GET{file_queue_limite},
+							nb_files_count=#GET{nb_files_count},
+							doc_uploaded=#GET{doc_uploaded},env}>
+	
+						[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+								</div>
+								[(#GET{afficher_ftp}|=={oui}|oui)
+								<div id="em_charger_ftp" class="ajax">
+									[(#FORMULAIRE_EM_CHARGER_MEDIA_FTP{article,#GET{id_article,0},#GET{file_types},#GET{type},#GET{file_upload_limite}})]
+								</div>]
+								[(#GET{afficher_doc_trad}|=={oui}|oui)
+								<div id="em_doc_trad">
+									[(#GET{doc_trad_dispo}|=={oui}|oui)
+									[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]]
+									[(#GET{doc_trad_dispo}|=={non}|oui)
+									#BOITE_OUVRIR{'',error}
+										<p><:emballe_medias:message_doc_trad_indisponible:></p>
+										[<p><a href="(#URL_ARTICLE{[(#GET{article_trad})]}|parametre_url{retour,#SELF})"><:emballe_medias:lien_voir_origine:></a></p>]
+									#BOITE_FERMER]
+								</div>]
+							</div>
+						]
+					]
+				]
+				<div id="em_upload_fichier">
+					[(#GET{doc_uploaded}|=={oui}|oui)
+					[(#GET{nb_files_count}|>={[(#GET{config_fichiers}|table_valeur{file_upload_limit}|sinon{1})]}|?{#SET{retour,haut},#SET{retour,form}})]
+					<INCLURE{fond=inc-media_uploaded,id_objet=#GET{id_article},objet=article,retour=#GET{retour},em_type=#GET{type},env}>
+					]
+				</div>
+				<div id="formulaire_diogene"[ (#GET{doc_uploaded}|=={oui}|non) style="display:none"]>
+					[(#GET{doc_uploaded}|=={oui}|oui)
+						<div class="ajax">
+							[(#FORMULAIRE_EDITER_ARTICLE{#GET{id_article,new},#GET{id_rubrique,#ENV{id_rubrique,0}},'',#ENV{id_trad,0}})]
+						</div>
+					]
+				</div>
+			]
+			</B_rubriques_disponibles>
+			#BOITE_OUVRIR{'',error}
+				<p>
+					#SET{secteur_existant,oui}
+					[(#INFO_TITRE{rubrique,#ID_SECTEUR}|strlen|non)
+						#SET{secteur_existant,non}
+						<:diogene:erreur_secteur_diogene_inexistant:>
+					]
+					[(#GET{secteur_existant}|=={oui}|oui)
+						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|oui)<:emballe_medias:erreur_publier_categorie_avant:>]
+						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|non)<:emballe_medias:erreur_publier_categorie_avant_demander_admin:>]
+					]
+				</p>
+			#BOITE_FERMER
+			<//B_rubriques_disponibles>
+		</BOUCLE_autorise_creer_secteur>
+		#BOITE_OUVRIR{'',error}
+			<p>
+				[(#SESSION{statut}|oui)<:diogene:erreur_autorisation_statut_publier:>]
+				[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier:>]
+			</p>
+		#BOITE_FERMER
+		<//B_autorise_creer_secteur>
+	</BOUCLE_autoriser_modifier_creer>
+	</B_autoriser_modifier_creer>
+		<BOUCLE_articles_secteurs(ARTICLES){si #_diogene:OBJET|in_array{#ARRAY{0,article,1,emballe_media}}|oui}{id_secteur = #_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{statut IN prop,prepa}> </BOUCLE_articles_secteurs>
+		#BOITE_OUVRIR{'',error}
+			<p>
+				[(#_diogene:NOMBRE_ATTENTE|>{0}|et{#GRAND_TOTAL|>={#_diogene:NOMBRE_ATTENTE}|oui}|oui)
+					[(#SET{url,[(#SELF|parametre_url{type_objet,''}|ancre_url{diogene_proposes_vous})]})]
+					<:diogene:erreur_autorisation_statut_publier_limite{nb=#NOMBRE_ATTENTE,url=#GET{url}}:>
+				]
+				[(#_diogene:NOMBRE_ATTENTE|>{0}|et{#GRAND_TOTAL|>={#_diogene:NOMBRE_ATTENTE}|oui}|non)
+					<:diogene:erreur_autorisation_statut_publier:>
+				]
+			</p>
+		#BOITE_FERMER
+		</B_articles_secteurs>
+	<//B_autoriser_modifier_creer>
+</BOUCLE_diogene>

@@ -1,0 +1,25 @@
+<paquet
+	prefix="em_spipmotion"
+	categorie="edition"
+	version="1.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/emballe_medias.png"
+>	
+
+	<nom>Emballe Medias - SPIPmotion</nom>
+	<!-- Complément vidéo pour "Emballe Medias" (utilise SPIPmotion) -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="diogene_avant_formulaire" inclure="em_spipmotion_pipelines.php" />
+	<pipeline nom="em_post_upload_medias" inclure="em_spipmotion_pipelines.php" />
+
+	<necessite nom="emballe_medias" compatibilite="[1.1.1;[" />
+	<necessite nom="spipmotion" compatibilite="[1.2.4;[" />
+	<necessite nom="getid3" compatibilite="[1.1.1;[" />
+
+	<utilise nom="mediaspip_player" compatibilite="[1.4.1;[" />
+</paquet>

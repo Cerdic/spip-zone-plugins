@@ -1,0 +1,26 @@
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+#SET{afficher_langue,''}
+[(#CONFIG{langues_multilingue}|explode{','}|count|>{1}|oui)
+	#SET{afficher_langue,oui}
+]
+<B_medias>
+<div class="menu diogene">
+	#ANCRE_PAGINATION
+	<h3>#TITRE</h3>
+	<ul class="menu-liste">
+	<BOUCLE_medias(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{par statut}{!par date}{statut IN prop,prepa,publie}{pagination 5}>
+		<li class="menu-entree[ (#EXPOSE)]">
+			[(#EXPOSE|non)
+			<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#_diogene:TYPE}|parametre_url{em_type,#EM_TYPE}|parametre_url{id_article,#ID_ARTICLE})]">]
+				[(#STATUT|puce_statut{article,#ID_ARTICLE})] [(#TITRE|sinon{<:info_sans_titre:>})]
+				([(#VAL{emballe_medias:type_[(#EM_TYPE)]}|_T))][(#GET{afficher_langue}|=={oui}|oui)[&#91;(#LANG)&#93;]]
+			[(#EXPOSE|?{'',</a>})]
+		</li>
+	</BOUCLE_medias>
+	</ul>
+	[<p class="pagination">
+		(#PAGINATION)
+	</p>]
+</div>
+</B_medias>
+</BOUCLE_diogene>

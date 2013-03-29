@@ -1,0 +1,29 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Emballe Medias - Doc2Img
+			[en]Wrap medias - Doc2Img
+		</multi>
+	</nom>
+	<auteur>kent1</auteur>
+	<licence>GNU/GPL v3</licence>
+	<version>0.1.4</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr]Compl&#201;ment Doc2Img pour "Emballe Medias" (utilise doc2img)
+			[en]Doc2Img add-on for "Wrap media" (use doc2img)
+		</multi>
+	</description>
+	<icon>images/emballe_medias.png</icon>
+	<prefix>em_doc2img</prefix>
+	<pipeline>
+		<nom>em_post_upload_medias</nom>
+		<inclure>em_doc2img_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='emballe_medias' version='[0.6.8;]' />
+	<necessite id='doc2img' version='[0.92;]' />
+	<utilise id='Fulltext' />
+	<categorie>edition</categorie>
+</plugin>

@@ -1,0 +1,9 @@
+[(#ENV*{type}|=={emballe_media}|oui)
+	[(#CONFIG{articles_surtitre}|=={oui}|oui)<option value="surtitre"[(#VAL{surtitre}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:texte_sur_titre:></option>]
+	[(#CONFIG{articles_soustitre}|=={oui}|oui)<option value="soustitre"[(#VAL{soustitre}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:texte_sous_titre:></option>]
+	<option value="texte"[(#VAL{texte}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:info_texte:></option>
+	[(#CONFIG{articles_descriptif}|=={oui}|oui)<option value="descriptif"[(#VAL{descriptif}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:texte_descriptif_rapide:></option>]
+	[(#CONFIG{articles_chapeau}|=={oui}|oui)<option value="chapo"[(#VAL{chapo}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:info_chapeau:></option>]
+	[(#CONFIG{articles_ps}|=={oui}|oui)<option value="ps"[(#VAL{ps}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:info_post_scriptum:></option>]
+	[(#CONFIG{articles_urlref}|=={oui}|oui)<option value="urlref"[(#VAL{urlref}|in_array{#ENV{valeur_env}}|oui) selected="selected"]><:entree_liens_sites:></option>]
+]

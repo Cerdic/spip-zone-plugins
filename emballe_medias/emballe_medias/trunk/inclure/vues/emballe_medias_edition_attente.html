@@ -1,0 +1,15 @@
+#CACHE{0}
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+<div id="emballe_media_edition">
+	<ul class="tabs_lot">
+		<li><a href="#edition_par_lot"><:emballe_medias:lien_edition_lot:></a></li>
+		<li><a href="#edition_par_un"><:emballe_medias:lien_edition_un:></a></li>
+	</ul>
+	<div id="edition_par_lot">
+		<INCLURE{fond=inclure/vues/emballe_medias_edition_lot,env,ajax} />
+	</div>
+	<div id="edition_par_un">
+		<INCLURE{fond=inclure/vues/emballe_medias_edition_normale,env,ajax} />
+	</div>
+</div>
+</BOUCLE_diogene>

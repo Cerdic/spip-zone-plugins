@@ -1,0 +1,160 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=emballe_medias -->
+<!-- casier=fichiers -->
+#CACHE{0}
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">
+							<:emballe_medias:upload_fichiers:>
+						</h3>
+						<ul>
+							[(#SAISIE{case,gerer_types,
+								label=<:emballe_medias:label_gerer_types:>,
+								label_case=<:emballe_medias:label_case_gerer_types:>,
+								explication=<:emballe_medias:explication_gerer_types:>})]
+							[(#SAISIE{case,publier_dans_secteur,
+								label=<:emballe_medias:label_publier_dans_secteur:>,
+								label_case=<:emballe_medias:label_case_publier_dans_secteur:>})]
+							[(#SAISIE{oui_non,chercher_article,
+								label=<:emballe_medias:label_chercher_article:>,
+								explication=<:emballe_medias:explication_chercher_article:>})]
+
+							<li class="editer editer_fichiers">
+								#SET{extensions,#ARRAY}
+								#SET{extensions_images,#ARRAY|push{xcf}}
+								<BOUCLE_images(TYPES_DOCUMENTS){mime_type LIKE image/%}{extension !IN #GET{extensions}}>
+									#SET{extensions_images,#GET{extensions_images}|push{#EXTENSION}}
+								</BOUCLE_images>
+								<label><:emballe_medias:extensions_autorisees:></label>
+								<B_images_2>
+								<p class="explication"><:emballe_medias:extensions_images:></p>
+								<select name="fichiers_images[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+									<BOUCLE_images_2(TYPES_DOCUMENTS){extension IN #GET{extensions_images}}{extension !IN #GET{extensions}}{par extension}>
+										<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_images}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+										#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+									</BOUCLE_images_2>
+								</select>
+								<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
+								</B_images_2>
+								<B_sons>
+								<p class="explication"><:emballe_medias:extensions_audio:></p>
+								<select name="fichiers_audios[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+									<BOUCLE_sons(TYPES_DOCUMENTS){mime_type LIKE audio/%}{extension !IN #GET{extensions}}{par extension}>
+										<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+										#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+									</BOUCLE_sons>
+								</select>
+								<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
+								</B_sons>
+								#SET{videos,#ARRAY|push{mp4}|push{m4v}}
+								<BOUCLE_videos(TYPES_DOCUMENTS){mime_type LIKE video/%}>
+									#SET{videos,#GET{videos}|push{#EXTENSION}}
+								</BOUCLE_videos>
+								<B_videos1>
+								<p class="explication"><:emballe_medias:extensions_video:></p>
+								<select name="fichiers_videos[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+									<BOUCLE_videos1(TYPES_DOCUMENTS){extension IN #GET{videos}}{extension !IN #GET{extensions}}{par extension}>
+										#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+										<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+									</BOUCLE_videos1>
+								</select>
+								<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
+								</B_videos1>
+								#SET{extensions_texte,#ARRAY}
+								<BOUCLE_texte_zero(TYPES_DOCUMENTS){mime_type LIKE %oasis%}{extension !IN #GET{extensions}}>
+								#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+								</BOUCLE_texte_zero>
+								<BOUCLE_texte_un(TYPES_DOCUMENTS){mime_type LIKE %ms%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+								#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+								</BOUCLE_texte_un>
+								<BOUCLE_texte_bis(TYPES_DOCUMENTS){mime_type LIKE text/%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+								#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+								</BOUCLE_texte_bis>
+								<BOUCLE_texte_tre(TYPES_DOCUMENTS){extension IN pdf,ps,eps,ai,lyx,epub}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+								#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+								</BOUCLE_texte_tre>
+								<BOUCLE_texte_quat(TYPES_DOCUMENTS){mime_type LIKE %/vnd.google-earth%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+								#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+								</BOUCLE_texte_quat>
+								<B_texte>
+								<p class="explication"><:emballe_medias:extensions_texte:></p>
+								<select name="fichiers_textes[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+									<BOUCLE_texte(TYPES_DOCUMENTS){extension IN #GET{extensions_texte}}{extension !IN #GET{extensions}}{par extension}>
+										<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_textes}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+										#SET{extensions,#GET{extensions}|push{#EXTENSION}}
+									</BOUCLE_texte>
+								</select>
+								<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
+								</B_texte>
+							</li>
+
+							[(#SAISIE{input,file_size_limit,
+								size=4,
+								maxlength=4,
+								label=<:emballe_medias:label_cfg_file_size_limit:>,
+								explication=[(#VAL{emballe_medias:explication_file_size_limit}|_T{[(#ARRAY{taille_max,[(#EVAL{@ini_get('upload_max_filesize')})]})]})],
+								defaut=100})]
+							[(#SET{explication_readonly,<span class="champ_readonly"><:emballe_medias:explication_config_readonly:></span>})]
+							#SET{file_upload_limit_readonly,#VAL{_EM_FILE_UPLOAD_LIMIT}|defined|?{'oui',''}}
+							[(#SAISIE{input,file_upload_limit,
+								size=3,
+								maxlength=3,
+								label=<:emballe_medias:file_upload_limit:>,
+								readonly=#GET{file_upload_limit_readonly},explication=#GET{file_upload_limit_readonly}|?{#GET{explication_readonly},''},
+								class=[(#GET{file_upload_limit_readonly}|?{readonly,''})],
+								valeur_forcee=[(#GET{file_upload_limit_readonly}|?{#EVAL{_EM_FILE_UPLOAD_LIMIT},''})],
+								defaut=1})]
+							#SET{file_queue_limit_readonly,#VAL{_EM_FILE_QUEUE_LIMIT}|defined|?{'oui',''}}
+							[(#SAISIE{input,file_queue_limit,
+								label=<:emballe_medias:file_queue_limit:>,
+								size=3,
+								maxlength=3,
+								readonly=#GET{file_queue_limit_readonly},explication=#GET{file_queue_limit_readonly}|?{#GET{explication_readonly},''},
+								class=[(#GET{file_queue_limit_readonly}|?{readonly,''})],
+								valeur_forcee=[(#GET{file_queue_limit_readonly}|?{#EVAL{_EM_FILE_QUEUE_LIMIT},''})],
+								defaut=1})]
+							<li>
+								<label for="upload_debug"><:emballe_medias:label_upload_debug:></label>
+								<input type="checkbox"[ checked="(#ENV{upload_debug}|=={on}|?{checked})"] name="upload_debug" id="upload_debug" />
+							</li>
+							
+							[(#SAISIE{textarea,texte_upload,
+								rows=15,
+								cols=50,
+								label=<:emballe_medias:label_texte_upload:>,
+								class=multilang})]
+						</ul>
+						</fieldset>
+					</li>
+				</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+				<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+			</p>
+	</div>
+</form>
+[(#REM) Code jQuery plier/deplier les listes ]
+<script type="text/javascript"><!--
+jQuery(document).ready(function(){
+	jQuery('a.select_all').click(function(){
+		jQuery(this).parent().prev('select').find('option').attr('selected', true);
+		return false;
+	});
+	jQuery('a.unselect_all').click(function(){
+		jQuery(this).parent().prev('select').find('option').attr('selected', false);
+		return false;
+	});
+});
+// --></script>
+
+</div>

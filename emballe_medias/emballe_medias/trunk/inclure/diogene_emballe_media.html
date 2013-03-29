@@ -1,0 +1,260 @@
+#CACHE{0}
+[(#REM)
+	
+	Affichage de la modification ou l'ajout d'un ou plusieurs médias
+	
+	Test 1 : 
+		Le secteur du diogene existe bien (pourrait arriver) ?
+	
+	Test 2 : 
+		Un id_article est-il passé dans l'environnement ?
+			Si oui, on teste :
+				-* son existence et le fait qu'il soit dans le bon secteur (première boucle) si non, erreur
+				-* le fait qu'on ait le droit de le modifier (condition sur autoriser) si non, erreur
+				-* le fait qu'il ait un document attaché (boucle doc_en_cours_env), si non, on affichera le formulaire d'upload
+			Si non, on passe au test 3. 
+	
+	Test 3 : 
+		A-t-on le droit d'uploader plus d'un document qui restera en attente ?
+		Si oui, on teste : 
+			-* la possibilité de créer un article dans le secteur, si non erreur
+				Si oui on affichera le formulaire d'upload avec comme argument le nombre de fichiers possibles et
+				la liste des medias en attente de validation.
+		Si non on passe au test 4.
+	
+	Test 4 : 
+		A-t-on plusieurs documents en attente associés à l'id_auteur ?
+			Si oui, on affiche la liste des medias en attente sans le formulaire d'upload
+			Si non on passe au test 5.
+	
+	Test 5 : 
+		A-t-on 1 seul document possible en attente et 1 en attente ?
+			Si oui on affiche l'ancienne version, la modification de l'unique article en attente, seule dans sa page
+	
+]
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+	[(#SET{config_fichiers,#CONFIG{emballe_medias/fichiers/}})]
+	[(#SET{config_types,#CONFIG{emballe_medias/types/}})]
+	[(#SET{autoriser_modifier,non})]
+	[(#SET{erreur,non})]
+	[(#SET{id_diogene,#ID_DIOGENE})]
+	[(#SET{doc_uploaded,non})]
+	[(#SET{type,#ENV{em_type}})]
+	[(#SET{id_rubrique,[(#ENV{id_rubrique,#ID_SECTEUR})]})]
+	
+	[(#REM)
+	
+		Le secteur du diogene existe bien?
+		
+	]
+	<BOUCLE_secteur_existant(RUBRIQUES){id_rubrique=#ID_SECTEUR}>
+		[(#SET{autoriser_creer,#AUTORISER{creerdans,diogene,#_diogene:ID_DIOGENE}|?{oui,non}})]
+		[(#SET{limite_upload,[(#GET{id_diogene}|diogene_nombre_attente)]})]
+		<BOUCLE_article_env(ARTICLES){id_article=#ENV{id_article}}{id_secteur=#_diogene:ID_SECTEUR}{statut IN publie,prop,prepa}>
+			#SET{id_article,#ID_ARTICLE}
+			[(#ID_SECTEUR|!={#_diogene:ID_SECTEUR})
+				[(#SET{erreur,oui})]
+				[(#SET{erreur_message,erreur_article_secteur_inexistant})]
+			]
+			<BOUCLE_autorise_modif_env(CONDITION){si #GET{erreur}|=={non}|et{#AUTORISER{modifier,article,#ID_ARTICLE}}|oui}>
+				[(#SET{article_cree,oui})]
+				[(#SET{id_rubrique,#ID_RUBRIQUE})]
+				[(#SET{type,#EM_TYPE})]
+				[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+				<BOUCLE_doc_en_cours_env(DOCUMENTS){id_article}{extension IN #GET{types}}{mode IN document,image}{tout}>
+					[(#FICHIER|get_spip_doc|file_exists|non)[(#SET{orig_disparu,oui})]]
+					[(#SET{doc_uploaded,oui})]
+				</BOUCLE_doc_en_cours_env>
+			</BOUCLE_autorise_modif_env>
+			</B_autorise_modif_env>
+			[(#SET{erreur,oui})]
+			[(#SET{erreur_message,erreur_autorisation_article})]
+			<//B_autorise_modif_env>
+		</BOUCLE_article_env>
+		</B_article_env>
+		[(#ENV{id_article}|intval|>{0}|oui)
+			[(#SET{erreur,oui})]
+			[(#SET{erreur_message,erreur_article_inexistant})]
+		]
+		<BOUCLE_autoriser_creer(CONDITION){si #GET{erreur}|=={non}|et{#GET{autoriser_creer}|=={oui}|oui}|oui}>
+			[(#REM)
+				Si on n'est pas autoriser à créer à la racine du secteur,
+				on prend la première sous rubrique
+			]
+			<BOUCLE_si_pas_secteur(CONDITION){si #ENV{id_article}|non|et{#GET{id_rubrique}|et{#GET{id_rubrique}|=={#ID_SECTEUR}}|et{#CONFIG{emballe_medias/fichiers/publier_dans_secteur,off}|!={on}}}|oui}>
+				<BOUCLE_rubrique_defaut(RUBRIQUES){id_parent=#GET{id_rubrique}}{0,1}>
+				[(#SET{id_rubrique,#ID_RUBRIQUE})]
+				</BOUCLE_rubrique_defaut>
+			</BOUCLE_si_pas_secteur>
+			
+			<BOUCLE_autorise_publier_sstype(CONDITION){si (#GET{config_types}|table_valeur{autoriser_normal}|=={on}|oui)}>
+				<BOUCLE_article_en_cours_de_redac(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type ?}{origine_traduction}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
+					[(#SET{id_article,#ID_ARTICLE})]
+					[(#SET{id_rubrique,#ID_RUBRIQUE})]
+					[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+					[(#SET{type,#EM_TYPE})]
+					<BOUCLE_doc_en_cours_de_redac(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
+						[(#FICHIER|get_spip_doc|file_exists|non)
+							[(#SET{orig_disparu,oui})]
+						]
+						[(#SET{doc_uploaded,oui})]
+					</BOUCLE_doc_en_cours_de_redac>
+				</BOUCLE_article_en_cours_de_redac>
+			</BOUCLE_autorise_publier_sstype>
+				<BOUCLE_article_en_cours_de_redac_sstype(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type}{!statut = 'poubelle'}{!statut = 'publie'}{origine_traduction}{0,1}>
+					[(#SET{id_article,#ID_ARTICLE})]
+					[(#SET{id_rubrique,#ID_RUBRIQUE})]
+					[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
+					[(#SET{type,#EM_TYPE})]
+					<BOUCLE_doc_en_cours_de_redac_sstype(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
+						[(#FICHIER|get_spip_doc|file_exists|non)
+							[(#SET{orig_disparu,oui})]
+						]
+						[(#SET{doc_uploaded,oui})]
+					</BOUCLE_doc_en_cours_de_redac_sstype>
+				</BOUCLE_article_en_cours_de_redac_sstype>
+			<//B_autorise_publier_sstype>
+			[(#GET{id_article}|intval|>{0}|non|et{#AUTORISER{creerarticledans,rubrique,#GET{id_rubrique}}|non}|oui)
+				#SET{erreur,oui}
+				#SET{erreur_message,erreur_aucun_article_attente}
+			]
+		</BOUCLE_autoriser_creer>
+		</B_autoriser_creer>
+		<BOUCLE_articles_en_cours(ARTICLES){id_auteur=#SESSION{id_auteur}}{statut !IN publie,poubelle}> </BOUCLE_articles_en_cours>
+		</B_articles_en_cours>
+		
+		[(#GET{erreur}|=={non}|oui)
+		[(#SET{erreur,oui})]
+		[(#SET{erreur_message,erreur_article_creation_impossible})]]
+		<//B_articles_en_cours>
+		<//B_autoriser_creer>
+		<//B_article_env>
+	</BOUCLE_secteur_existant>
+	</B_secteur_existant>
+	[(#GET{erreur}|=={non}|oui)
+	[(#SET{erreur,oui})]
+	[(#SET{erreur_message,erreur_secteur_inexistant})]]
+	<//B_secteur_existant>
+	
+	[(#REM)
+		On peut finalement afficher les choses en fonction des SET et GET précedents
+	]
+	[(#GET{erreur}|=={non}|oui)
+		[(#ENV{id_article}|intval|>{0}|et{#GET{id_article}|>{0}}|oui)
+			
+			<INCLURE{fond=inclure/diogene_emballe_media_description,id_article=#GET{id_article},id_diogene=#_diogene:ID_DIOGENE,ajax} />
+			
+			[(#GET{doc_uploaded}|=={non}|oui)
+				[(#SET{file_upload_limite,1})]
+				[(#SET{file_queue_limite,1})]
+				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
+				
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+				<div class="em_charger_fichiers">
+					<ul>
+						<li><a href="#em_charger_fichier"><:emballe_medias:lien_charger_local:></a></li>
+						[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
+						[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
+					</ul>
+					<div id="em_charger_fichier">
+				]
+				
+				<INCLURE{fond=inclure/emballe_media_template_upload}>
+					
+				<INCLURE{fond=inclure/upload_formulaire,
+					id_diogene=#GET{id_diogene},
+					id_rubrique=#GET{id_rubrique},
+					id_parent=#GET{id_rubrique},
+					id_objet=#GET{id_article},
+					objet=article,
+					config_fichiers=#GET{config_fichiers},
+					file_upload_limite=#GET{file_upload_limite},
+					file_queue_limite=#GET{file_queue_limite},
+					nb_files_count=#GET{nb_files_count},
+					doc_uploaded=#GET{doc_uploaded}
+					selecteur_recharger=#LISTE{"#em_upload_fichier","#liste_medias_publication"},env}>
+
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+						</div>
+						[(#GET{afficher_ftp}|=={oui}|oui)
+						<div id="em_charger_ftp" class="ajax">
+							[(#FORMULAIRE_EM_CHARGER_MEDIA_FTP{article,#GET{id_article,0},#GET{file_types},#GET{type},#GET{file_upload_limite}})]
+						</div>]
+						[(#GET{afficher_doc_trad}|=={oui}|oui)
+						<div id="em_doc_trad">
+							[(#GET{doc_trad_dispo}|=={oui}|oui)
+							[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]]
+							[(#GET{doc_trad_dispo}|=={non}|oui)
+							#BOITE_OUVRIR{'',error}
+								<p><:emballe_medias:message_doc_trad_indisponible:></p>
+								[<p><a href="(#URL_ARTICLE{[(#GET{article_trad})]}|parametre_url{retour,#SELF})"><:emballe_medias:lien_voir_origine:></a></p>]
+							#BOITE_FERMER]
+						</div>]
+					</div>
+				]
+			]
+			
+			<INCLURE{fond=inc-media_uploaded,id_objet=#GET{id_article},objet=article,em_type=#GET{type},id_diogene=#GET{id_diogene},ajax,env}>
+			<INCLURE{fond=inclure/emballe_media_formulaire_article,id_article=#GET{id_article},id_trad,id_rubrique=#GET{id_rubrique,#ENV{id_rubrique,0}},id_diogene=#GET{id_diogene},ajax,env}>
+		]
+		[(#ENV{id_article}|intval|>{0}|et{#GET{id_article}|>{0}}|non)
+			[(#GET{autoriser_creer}|=={oui}|oui)
+				[(#SET{file_upload_limite,#GET{limite_upload}})]
+				[(#SET{file_queue_limite,#GET{limite_upload}})]
+				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
+				
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+				<div class="em_charger_fichiers">
+					<ul>
+						<li><a href="#em_charger_fichier"><:emballe_medias:lien_charger_local:></a></li>
+						[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
+						[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
+					</ul>
+					<div id="em_charger_fichier">
+				]
+				
+				<INCLURE{fond=inclure/emballe_media_template_upload}>
+				
+				<INCLURE{fond=inclure/upload_formulaire,
+					id_diogene=#GET{id_diogene},
+					id_rubrique=#GET{id_rubrique},
+					id_parent=#GET{id_rubrique},
+					id_objet=#GET{id_article},
+					objet=article,
+					config_fichiers=#GET{config_fichiers},
+					file_upload_limite=#GET{file_upload_limite},
+					file_queue_limite=#GET{file_queue_limite},
+					nb_files_count=#GET{nb_files_count},
+					doc_uploaded=#GET{doc_uploaded},
+					selecteur_recharger=#LISTE{"#em_upload_fichier","#liste_medias_publication",.diogene_#GET{id_diogene},.diogene_lot_#GET{id_diogene}},env}>
+	
+				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
+						</div>
+						[(#GET{afficher_ftp}|=={oui}|oui)
+						<div id="em_charger_ftp" class="ajax">
+							[(#FORMULAIRE_EM_CHARGER_MEDIA_FTP{article,#GET{id_article,0},#GET{file_types},#GET{type},#GET{file_upload_limite}})]
+						</div>]
+						[(#GET{afficher_doc_trad}|=={oui}|oui)
+						<div id="em_doc_trad">
+							[(#GET{doc_trad_dispo}|=={oui}|oui)
+							[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]]
+							[(#GET{doc_trad_dispo}|=={non}|oui)
+							#BOITE_OUVRIR{'',error}
+								<p><:emballe_medias:message_doc_trad_indisponible:></p>
+								[<p><a href="(#URL_ARTICLE{[(#GET{article_trad})]}|parametre_url{retour,#SELF})"><:emballe_medias:lien_voir_origine:></a></p>]
+							#BOITE_FERMER]
+						</div>]
+					</div>
+				]]
+
+			<INCLURE{fond=inclure/vues/emballe_medias_edition_attente,id_diogene=#_diogene:ID_DIOGENE,env,ajax}>
+		]
+	]
+	[(#GET{erreur}|=={oui}|oui)
+		#BOITE_OUVRIR{'',error}
+		[(#VAL{emballe_medias:[(#GET{erreur_message})]}|_T)]
+		#BOITE_FERMER
+	]
+	
+</BOUCLE_diogene>
+#FILTRE{trim}

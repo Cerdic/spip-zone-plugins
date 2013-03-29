@@ -1,0 +1,24 @@
+#HTTP_HEADER{Content-type:text/html}
+#CACHE{0}
+[(#SET{result,0})]
+[(#REM) Récupérer le nombre de docs attachés à l'objet passé dans l'env ]
+[(#SET{req_env,[select * from (#ENV{objet}|table_objet_sql) where [(#ENV{objet}|id_table_objet)]=[(#ENV{id_objet}|intval)] AND statut IN ('publie','prop','prepa')]})]
+<BOUCLE_objet_env(DATA){source sql,#GET{req_env}}>
+	<BOUCLE_doc(DOCUMENTS spip_documents_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}>	</BOUCLE_doc>
+	[(#SET{result,#TOTAL_BOUCLE})]
+	</B_doc>
+</BOUCLE_objet_env>
+</B_objet_env>
+[(#REM) Sinon, si l'option "chercher_article" est active, récupérer le nombre de docs attachés à l'objet en prop ou prepa ]
+<BOUCLE_chercher_objet(CONDITION){si #CONFIG{emballe_medias/fichiers/chercher_article}|=={on}|oui}>
+	[(#SET{req_en_cours,[select objet.[(#ENV{objet}|id_table_objet)] as id, from (#ENV{objet}|table_objet_sql) as #ENV{objet} left join spip_auteurs_liens as lien ON lien.objet=#ENV{objet} AND lien.id_objet=objet.id_objet where id_auteur=[(#ENV{id_auteur})][ AND em_type="(#ENV{em_type})"] AND statut IN ('prop','prepa')] LIMIT 0,1})]
+	<BOUCLE_documents_en_cours_bis(DATA){source sql,#GET{req_en_cours}}>
+		<BOUCLE_doc_bis(DOCUMENTS spip_documents_liens){id_objet=#VALEUR{id}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}> </BOUCLE_doc_bis>
+		[(#SET{result,#TOTAL_BOUCLE})]
+		</B_doc_bis>
+	</BOUCLE_documents_en_cours_bis>
+	</B_documents_en_cours_bis>
+</BOUCLE_chercher_objet>
+<//B_objet_env>
+[(#GET{result})]
+[(#FILTRE{trim})]

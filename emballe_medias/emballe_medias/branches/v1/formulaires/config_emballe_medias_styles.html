@@ -1,0 +1,72 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=emballe_medias -->
+<!-- casier=styles -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+#MODELE{em_test_form,env}
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend">
+						<:emballe_medias:legend_gerer_styles:>
+					</h3>
+					<ul>
+						[(#SET{explication_readonly,<span class="champ_readonly"><:emballe_medias:explication_config_readonly:></span>})]
+						#SET{couleur_foncee_readonly,#VAL{_EM_COULEUR_FONCEE}|defined|?{'oui',''}}
+						#SET{couleur_claire_readonly,#VAL{_EM_COULEUR_CLAIRE}|defined|?{'oui',''}}
+						#SET{couleur_texte_bouton_readonly,#VAL{_EM_COULEUR_TEXTE_BOUTON}|defined|?{'oui',''}}
+						[(#SAISIE{couleur,couleur_foncee,
+							size=8,readonly=#GET{couleur_foncee_readonly},explication=#GET{couleur_foncee_readonly}|?{#GET{explication_readonly}},maxlength=7,
+							class=[(#GET{couleur_foncee_readonly}|?{readonly,''})],
+							valeur_forcee=[(#GET{couleur_foncee_readonly}|?{#EVAL{_EM_COULEUR_FONCEE},''})],
+							label=<:emballe_medias:label_couleur_foncee:>})]
+						[(#SAISIE{couleur,couleur_claire,
+							size=8,readonly=#GET{couleur_claire_readonly},explication=#GET{couleur_claire_readonly}|?{#GET{explication_readonly}},maxlength=7,
+							class=[(#GET{couleur_claire_readonly}|?{readonly,''})],
+							valeur_forcee=[(#GET{couleur_claire_readonly}|?{#EVAL{_EM_COULEUR_CLAIRE},''})],
+							label=<:emballe_medias:label_couleur_claire:>})]
+						[(#SAISIE{couleur,couleur_texte_bouton,
+							size=8,readonly=#GET{couleur_texte_bouton_readonly},explication=#GET{couleur_texte_bouton_readonly}|?{#GET{explication_readonly}},maxlength=7,
+							class=[(#GET{couleur_texte_bouton_readonly}|?{readonly,''})],
+							valeur_forcee=[(#GET{couleur_texte_bouton_readonly}|?{#EVAL{_EM_COULEUR_TEXTE_BOUTON},''})],
+							label=<:emballe_medias:label_couleur_texte_bouton:>})]
+
+						[(#SAISIE{textarea,flash_bouton_styles,
+							rows=4,
+							defaut=#VAL{'font-size: 12px; font-weight:bold; font-family:Tahoma,Arial,Helvetica,sans-serif; text-align:center; display:block; width:100%;'},
+							label=<:emballe_medias:label_flash_bouton_styles:>})]
+						
+						#SET{previsu_largeur_readonly,#VAL{_EM_PREVISU_LARGEUR}|defined|?{'oui',''}}
+						#SET{previsu_hauteur_readonly,#VAL{_EM_PREVISU_HAUTEUR}|defined|?{'oui',''}}
+						[(#SAISIE{input,largeur_img_previsu,
+							label=<:emballe_medias:largeur_img_previsu:>,
+							size=4,readonly=#GET{previsu_largeur_readonly},explication=#GET{previsu_largeur_readonly}|?{#GET{explication_readonly}},maxlength=4,
+							class=[(#GET{previsu_largeur_readonly}|?{readonly,''})],
+							valeur_forcee=[(#GET{previsu_largeur_readonly}|?{#EVAL{_EM_PREVISU_LARGEUR},''})],
+							defaut=425})]
+							
+						[(#SAISIE{input,hauteur_img_previsu,
+							label=<:emballe_medias:hauteur_img_previsu:>,
+							size=4,readonly=#GET{previsu_hauteur_readonly},explication=#GET{previsu_hauteur_readonly}|?{#GET{explication_readonly}},maxlength=4,
+							class=[(#GET{previsu_hauteur_readonly}|?{readonly,''})],
+							valeur_forcee=[(#GET{previsu_hauteur_readonly}|?{#EVAL{_EM_PREVISU_HAUTEUR},''})],
+							defaut=425})]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+			<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>

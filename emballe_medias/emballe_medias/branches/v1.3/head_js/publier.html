@@ -1,0 +1,34 @@
+[<link rel="stylesheet" href="(#PRODUIRE{fond=emballe_medias.css}|direction_css)" type="text/css" media="all" />]
+[(#REM)
+	La feuille de stype spécifique à fileupload-ui
+][<link rel="stylesheet" href="(#CHEMIN{css/jquery.fileupload-ui.css})" media="all">]
+[<script type="text/javascript" src="(#PRODUIRE{fond=emballe_medias_js,lang=#ENV{lang}})"></script>]
+<script type="text/javascript">
+	var em_markitup = function(){
+		if(window.jQuery.markItUp){
+			jQuery('.formulaire_spip .inserer_barre:not(.markItUpEditor)')
+			.barre_outils('edition')
+			.previsu_spip({
+				previewParserPath:'[(#URL_PAGE{preview}|url_absolue)]',
+				textEditer:'<:barreoutils:editer:>',
+				textVoir:'<:barreoutils:voir:>'});
+		}
+	}
+	
+	var em_tabs_charger = function(){
+	    cookie_name = 'ui-tab-em_charger_ftp'
+	    $('.em_charger_fichiers').tabs({
+			cookie: {
+				name:cookie_name,
+				expires: 1
+			}
+		});
+	};
+	
+	jQuery(document).ready(function(){
+		em_markitup();
+		em_tabs_charger();
+		onAjaxLoad(em_markitup);
+		onAjaxLoad(em_tabs_charger);
+	});
+</script>

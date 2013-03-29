@@ -1,0 +1,155 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<BOUCLE_diogene(DIOGENES){id_secteur}{objet=emballe_media}>
+#SET{diogene,#ID_DIOGENE}
+#SET{champs_ajoutes,#CHAMPS_AJOUTES}
+</BOUCLE_diogene>
+<BOUCLE_autoriser_modifier(CONDITION){si #AUTORISER{modifier,article,#ENV{id_article}}|et{#GET{diogene}|intval|>{0}}|oui}>
+<div class="menu liste important">
+	<h2 class="h2"><:diogene:titre_modifier_article:></h2>
+	<ul class="menu-liste">
+		[(#ID_TRAD|=={0}|?{#SET{origine,#ID_ARTICLE},#SET{origine,#ID_TRAD}})]
+		#SET{langues,#CONFIG{langues_multilingue}|explode{','}}
+		#SET{langues_creees,#ARRAY}
+		<li class="menu-entree">
+			<a href="[(#ID_ARTICLE|generer_url_publier{article})]"><:diogene:lien_editer_publication:>[(#GET{langues}|count|>{1}|oui)([(#LANG|traduire_nom_langue)])]</a>
+		</li>
+		
+		<BOUCLE_si_langues(CONDITION){si #GET{langues}|count|>{1}|oui}>
+		<BOUCLE_article_origine(ARTICLES){id_article=#GET{origine}}{statut IN prepa,prop,publie}{origine_traduction}>
+			#SET{langues_creees,#GET{langues_creees}|push{#LANG}}
+			[(#_article:ID_ARTICLE|=={#GET{origine}}|non)
+				[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+				#SET{lang,#LANG|traduire_nom_langue}
+				<li class="menu-entree">
+					<a href="[(#ID_ARTICLE|generer_url_publier{article})]">
+						<:diogene:lien_modifier_version_originale{lang=#GET{lang}}:>
+					</a>
+				</li>]
+			]
+			<BOUCLE_article_traduit(ARTICLES){traduction}{statut IN prepa,prop,publie}{par lang}>
+			#SET{langues_creees,#GET{langues_creees}|push{#LANG}}
+			[(#ID_ARTICLE|!={#GET{origine}}|et{#ID_ARTICLE|!={#_article:ID_ARTICLE}}|oui)
+				[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+					#SET{lang,#LANG|traduire_nom_langue}
+					<li class="menu-entree">
+						<a href="[(#ID_ARTICLE|generer_url_publier{article})]">
+							<:diogene:lien_modifier_version{lang=#GET{lang}}:>
+						</a>
+					</li>
+				]
+			]
+			</BOUCLE_article_traduit>
+			
+			#SET{langues_creees,#GET{langues_creees}|array_unique}
+			#SET{langues,#GET{langues}|array_diff{#GET{langues_creees}}}
+			<BOUCLE_langues(POUR){tableau #GET{langues}}>
+			#SET{lang,#VALEUR|traduire_nom_langue}
+			[(#GET{diogene}|is_numeric|et{#AUTORISER{creerdans,diogene,#GET{diogene}}}|oui)
+			<li class="menu-entree">
+				<a href="[(#URL_ACTION_AUTEUR{diogene_creer_traduction,[(#_article:ID_ARTICLE)]&langue_forcee=[(#_langues:VALEUR)]})]">
+					<:diogene:lien_creer_version{lang=#GET{lang}}:>
+				</a>
+			</li>]
+			</BOUCLE_langues>
+		</BOUCLE_article_origine>
+		</BOUCLE_si_langues>
+		
+		<BOUCLE_document(DOCUMENTS){id_article}{id_orig=0}>
+		[(#_document:EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos,#ARRAY}}|oui)#SET{video,oui}]
+		[(#_document:EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios,#ARRAY}}|oui)#SET{audio,oui}]
+		#SET{attentes,#ARRAY}
+		<BOUCLE_attente(SPIPMOTION_ATTENTES?){id_document}{encode IN 'non','en_cours','erreur'}>#SET{attentes,#GET{attentes}|push{#EXTENSION}} </BOUCLE_attente>
+		<li class="menu-entree">
+			#SET{total,#TOTAL_BOUCLE}
+			[(#GET{total}|=={1}|oui)<p><:spipmotion:info_document_encodage_en_cours_unique{nb=#GET{total}}:></p>]
+			[(#GET{total}|>{1}|oui)<p><:spipmotion:info_document_encodage_en_cours_plusieurs{nb=#GET{total}}:></p>]
+		</li>
+		</B_attente>
+		<BOUCLE_video(CONDITION){si #_document:EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}}>
+			<B_videos_encodables>
+				<li class="menu-entree">
+					[(#GET{video}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_video:>})]]
+					[(#GET{audio}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_son:>})]]
+					[(#_document:TOTAL_BOUCLE|>{1}|oui)
+						[(#SET{titre,[(#GET{titre}|concat{&nbsp;[((#_document:TITRE|sinon{[(#_document:FICHIER|basename)]}))]})]})]
+					]
+					[(#BOUTON_ACTION{#GET{titre},[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#_article:ID_ARTICLE/article/#ID_DOCUMENT,#SELF})],'',<:spipmotion:message_confirmation_encodages:>})]
+					<ul class="menu-liste">
+						<BOUCLE_videos_encodables(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}>
+						<li>
+							[(#VALEUR|in_array{#GET{attentes}}|non)
+								[(#GET{video}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_video_version{version=#VALEUR}:>})]]
+								[(#GET{audio}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_son_version{version=#VALEUR}:>})]]
+								[(#BOUTON_ACTION{#GET{titre},[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#_article:ID_ARTICLE/article/#_document:ID_DOCUMENT/#VALEUR,#SELF})],'',<:spipmotion:message_confirmation_encodage{version=#VALEUR}:>})]
+							]
+							[(#VALEUR|in_array{#GET{attentes}}|oui)
+								<:spipmotion:message_document_encours_encodage_version{version=#VALEUR}:>
+							]
+						</li>
+						</BOUCLE_videos_encodables>
+					</ul>
+				</li>
+			</B_videos_encodables>
+		</BOUCLE_video>
+		<BOUCLE_son(CONDITION){si #_document:EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}}}>
+			<B_sons_encodables>
+				<li class="menu-entree">
+					[(#GET{video}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_video:>})]]
+					[(#GET{audio}|=={oui}|oui)[(#SET{titre,<:spipmotion:encoder_son:>})]]
+					[(#_document:TOTAL_BOUCLE|>{1}|oui)
+						[(#SET{titre,[(#GET{titre}|concat{&nbsp;[((#_document:TITRE|sinon{[(#_document:FICHIER|basename)]}))]})]})]
+					]
+					[(#BOUTON_ACTION{#GET{titre},[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#_article:ID_ARTICLE/article/#ID_DOCUMENT,#SELF})],'',<:spipmotion:message_confirmation_encodages:>})]
+					<ul>
+					<BOUCLE_sons_encodables(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}>
+						<li>
+							[(#VALEUR|in_array{#GET{attentes}}|non)
+								[(#GET{video}|=={oui}|oui) [(#SET{titre,<:spipmotion:encoder_video_version{version=#VALEUR}:>})] ]
+								[(#GET{audio}|=={oui}|oui) [(#SET{titre,<:spipmotion:encoder_son_version{version=#VALEUR}:>})] ]
+								[(#BOUTON_ACTION{#GET{titre},[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#_article:ID_ARTICLE/article/#_document:ID_DOCUMENT/#VALEUR,#SELF})],'',<:spipmotion:message_confirmation_encodage{version=#VALEUR}:>})]
+							]
+							[(#VALEUR|in_array{#GET{attentes}}|oui)
+								<:spipmotion:message_document_encours_encodage_version{version=#VALEUR}:>
+							]
+						</li>
+					</BOUCLE_sons_encodables>
+					</ul>
+				</li>
+			</B_sons_encodables>
+			<//B_sons_encodables>
+		</BOUCLE_son>
+		<B_remove_versions>
+		<li class="menu-entree">
+			[(#BOUTON_ACTION{<:spipmotion:lien_supprimer_versions:>,[(#URL_ACTION_AUTEUR{spipmotion_remove_version,#_document:ID_DOCUMENT,#SELF})],'',<:spipmotion:message_confirmation_suppression_versions:>})]
+			<ul class="menu-liste">
+			<BOUCLE_remove_versions(DOCUMENTS){id_orig=#ID_DOCUMENT}>
+				<li class="menu-entree">
+					[(#BOUTON_ACTION{<:spipmotion:lien_supprimer_version{version=#EXTENSION}:>,[(#URL_ACTION_AUTEUR{spipmotion_remove_version,#_document:ID_DOCUMENT-#EXTENSION,#SELF})],'',<:spipmotion:message_confirmation_suppression_version{version=#EXTENSION}:>})]
+				</li>
+			</BOUCLE_remove_versions>
+			</ul>
+		</li>
+		</B_remove_versions>
+		[(#SET{doc2img_types,[(#CONFIG{doc2img/format_document,''}|explode{','})]})]
+		[(#VAL{tiff}|in_array{[(#GET{doc2img_types})]}|?{[(#SET{doc2img_types,[(#GET{doc2img_types}|push{tif})]})]})]
+		[(#PLUGIN{doc2img}|et{[(#EXTENSION|in_array{#GET{doc2img_types}})]}|oui)
+		<li class="menu-entree">
+			<a href="[(#URL_ACTION_AUTEUR{doc2img_convert,#ID_DOCUMENT,#SELF})]">
+				<:doc2img:doc2img_reconvertir_doc:>
+			</a>
+		</li>]
+		<//B_attente>
+		</BOUCLE_document>
+		<BOUCLE_si_geo(CONDITION){si #PLUGIN{diogene_geo}|et{#VAL{geo}|in_array{#GET{champs_ajoutes}|unserialize|sinon{#ARRAY}}}|oui}>
+		<BOUCLE_point(GIS?){id_article}{0,1}> </BOUCLE_point>
+		<li class="menu-entree">
+			<a href="[(#ID_ARTICLE|generer_url_publier{article}|ancre_url{diogene_geo})]">
+				<:diogene_geo:message_article_geolocaliser:>
+			</a>
+		</li>
+		<//B_point>
+		</BOUCLE_si_geo>
+	</ul>
+</div>
+</BOUCLE_autoriser_modifier>
+</BOUCLE_article>

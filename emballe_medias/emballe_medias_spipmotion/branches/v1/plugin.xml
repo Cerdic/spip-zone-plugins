@@ -1,0 +1,38 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Emballe Medias - SPIPmotion
+			[en]Wrap medias - SPIPmotion
+		</multi>
+	</nom>
+	<auteur>kent1 (kent1@arscenic.info)</auteur>
+	<licence>GNU/GPL v3</licence>
+	<version>0.2.6</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+			[fr]Compl&#233;ment vid&#233;o pour "Emballe Medias" (utilise SPIPmotion)
+			[en]Video add-on for "Wrap media" (use SPIPmotion)
+		</multi>
+	</description>
+	<icon>images/emballe_medias.png</icon>
+	<prefix>em_spipmotion</prefix>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>em_spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>diogene_avant_formulaire</nom>
+		<inclure>em_spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>em_post_upload_medias</nom>
+		<inclure>em_spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
+	<necessite id='emballe_medias' version='[0.5.1;]' />
+	<necessite id='spipmotion' version='[0.4.1;]' />
+	<necessite id='cfg' version='[1.0.6;]' />
+	<utilise id='mediaspip_player' />
+	<categorie>edition</categorie>
+</plugin>

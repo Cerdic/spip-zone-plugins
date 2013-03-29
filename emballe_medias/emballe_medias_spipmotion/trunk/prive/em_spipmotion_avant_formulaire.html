@@ -1,0 +1,38 @@
+[(#REM)
+	Un petit javascript
+]
+<script type="text/javascript"><!--
+	var em_spipmotion_interface = function(){
+		jQuery(".em_infos_documents .infos").each(function(){
+			$(this).find('ul a').unbind('click');
+		    cookie_name = 'ui-tab-'+$(this).parent().attr('id');
+		    $(this).tabs({
+					cookie: {
+						name:cookie_name,
+						expires: 1
+					}
+				});
+		});
+		jQuery(".em_infos_documents .infos_techniques").each(function(){
+			if(jQuery(this).prev().is('h4') && (jQuery(this).prev().find('a').size() == 0)){
+				jQuery(this).hide();
+				jQuery(this).prev().wrapInner('<a class="em_infos_plus" title="<:em_spipmotion:title_infos_voir:>" href="#"><\/a>');
+				jQuery(this).prev().find('a.em_infos_plus').unbind('click').click(function(e){
+					e.preventDefault();
+					if (jQuery(this).parent().next('.infos_techniques').is(':visible')) {
+						jQuery(this).parent().next('.infos_techniques').slideUp('500');
+						jQuery(this).removeClass('ouverte').attr('title','<:em_spipmotion:title_infos_voir:>');
+						
+					}else{
+						jQuery(this).parent().next('.infos_techniques').slideDown();
+						jQuery(this).addClass('ouverte').attr('title','<:em_spipmotion:title_infos_cacher:>');
+					}
+				});
+			}
+		});
+	};
+	jQuery(document).ready(function(){
+		em_spipmotion_interface();
+	});
+	onAjaxLoad(em_spipmotion_interface);
+// --></script>

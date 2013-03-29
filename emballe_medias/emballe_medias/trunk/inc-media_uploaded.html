@@ -1,0 +1,11 @@
+#HTTP_HEADER{Content-type:text/html}
+#CACHE{0}
+<div id="em_upload_fichier"[ class="diogene_(#ENV{id_diogene})"]>
+<B_doc>
+<BOUCLE_doc(DOCUMENTS spip_documents_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}>
+<div class="ajax">
+	[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#ENV{em_type},#ENV{objet},[(#ENV{id_objet}|intval)],#ENV{redirect}})]
+</div>
+</BOUCLE_doc>
+</B_doc>
+</div>

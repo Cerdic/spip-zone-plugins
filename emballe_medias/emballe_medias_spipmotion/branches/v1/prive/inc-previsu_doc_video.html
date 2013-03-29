@@ -1,0 +1,31 @@
+#SET{largeur_previsu,#VAL{_EM_PREVISU_LARGEUR}|defined|?{#EVAL{_EM_PREVISU_LARGEUR},#CONFIG{emballe_medias/styles/largeur_img_previsu,425}}}
+<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{extension IN #FORM_TYPE{video}}{tout}>
+[(#ENV{compteur}|oui)
+	<div class="em_next_prev">
+		[(#ENV{compteur}|=={1}|oui)
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+		[(#ENV{compteur}|>{1}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|moins{1})]">
+				<img src="#CHEMIN{images/ico_fle_haut.png}" alt="<:emballe_medias:em_prev:>" />
+			</a>
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+	</div>
+]
+<h4 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h4>
+[(#PLUGIN{mediaspip_player}|oui)
+<div class="em_previsu">
+	[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=oui,infos=non,largeur=#GET{largeur_previsu}})]
+</div>]
+<INCLURE{fond=prive/inc-previsu_doc_video_infos,id_document,id_objet,objet,em_type,ajax}>
+</BOUCLE_documents_en_cours>
+</B_documents_en_cours>
+<p><:emballe_medias:aucun_document_type:></p>
+<//B_documents_en_cours>

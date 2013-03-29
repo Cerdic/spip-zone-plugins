@@ -1,0 +1,34 @@
+#HTTP_HEADER{Content-type:text/html}
+#CACHE{0}
+<BOUCLE_documents_en_cours(ARTICLES){id_article}{statut ?}>
+	<B_doc>
+	[(#TOTAL_BOUCLE|>{1}|oui)#SET{total,#TOTAL_BOUCLE}
+		<p><:emballe_medias:nb_doc_uploaded{nb=#GET{total}}:></p>
+		<p><a href="#formulaire_diogene"><img src="#CHEMIN{images/ico_fle_bas.png}" alt="" /> <:emballe_medias:ancre_formulaire_validation:></a></p>
+	]
+	<BOUCLE_doc(DOCUMENTS){id_article}{par id_document}{inverse}{id_orig=0}{tout}>
+		[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#ENV{em_type},'article',#_article_env:ID_ARTICLE,#ENV{redirect},[(#TOTAL_BOUCLE|>{1}|?{#COMPTEUR_BOUCLE,''})],[(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE,''})]})]
+	</BOUCLE_doc>
+	[(#TOTAL_BOUCLE|>{1}|oui)
+		[(#ENV{retour}|=={form}|oui)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_formulaire_upload:></a></p>]
+		[(#ENV{retour}|=={form}|non)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_haut_page:></a></p>]
+	]
+	</B_doc>
+</BOUCLE_documents_en_cours>
+</B_documents_en_cours>
+	<BOUCLE_documents_en_cours_bis(ARTICLES){id_auteur=#SESSION{id_auteur}}{em_type=#ENV{type}}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
+		<B_doc_bis>
+		[(#TOTAL_BOUCLE|>{1}|oui)#SET{total,#TOTAL_BOUCLE}
+			<p><:emballe_medias:nb_doc_uploaded{nb=#GET{total}}:></p>
+			<p><a href="#formulaire_diogene"><img src="#CHEMIN{images/ico_fle_bas.png}" alt="" /> <:emballe_medias:ancre_formulaire_validation:></a></p>
+		]
+		<BOUCLE_doc_bis(DOCUMENTS){id_article}{par id_document}{inverse}{id_orig=1}{tout}>
+			[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#ENV{em_type},'article',#_documents_en_cours_bis:ID_ARTICLE,#ENV{redirect},[(#TOTAL_BOUCLE|>{1}|?{#COMPTEUR_BOUCLE,''})]})]
+		</BOUCLE_doc_bis>
+		[(#TOTAL_BOUCLE|>{1}|oui)
+			[(#ENV{retour}|=={form}|oui)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_formulaire_upload:></a></p>]
+			[(#ENV{retour}|=={form}|non)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_haut_page:></a></p>]
+		]
+		</B_doc_bis>
+	</BOUCLE_documents_en_cours_bis>
+<//B_documents_en_cours>

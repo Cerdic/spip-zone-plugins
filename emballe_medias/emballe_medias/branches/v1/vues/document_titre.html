@@ -1,0 +1,4 @@
+[(#REM) Vue pour le titre d'un document]
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+[(#ENV{titre}|?{[(#ENV*{titre}|typo)],[(#FICHIER|basename)]})]
+</BOUCLE_document>

@@ -1,0 +1,382 @@
+[(#REM)
+
+	Formulaire d'upload multiple
+
+
+
+]#CACHE{0}
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+#SET{types,#FORM_TYPE{#ENV{type_media}}}
+<script type="text/javascript">
+<!--
+	var isUploading = false;
+	var nb_max = [(#ENV{file_upload_limite,1}|is_numeric|?{#ENV{file_upload_limite,1},false})];
+	var nb_files = 0;
+	var iTime = new Date();
+	var isIE = jQuery.browser.msie;
+	
+	/**
+	 * Vérifier que l'auteur n'a pas déjà uploadé son quota de docs (dans un autre onglet par exemple)
+	 * Si c'est le cas on recharge la page
+	 * 
+	 * retourne true si on a pas d'id_objet dans l'environnement
+	 */
+	function emballe_medias_verifier_upload(){
+		var upload_ok = false;
+		var verif = {};
+		
+		var id_objet = #ENV{id_objet,#ENV{id_article,false}};
+		if(!id_objet){
+			verif.upload_ok = true;
+		}else{
+			jQuery.ajax({
+				url: "#URL_PAGE{emballe_medias_file_upload_limit}",
+				async: false,
+				type: "GET",
+				data: ({
+					objet:"#ENV{objet,article}",[
+					id_objet:"(#ENV{id_objet,#ENV{id_article}})",]
+					id_auteur : "#SESSION{id_auteur}"
+				}),
+				dataType: "html",
+				success: function(msg){
+					var nb = [(#ENV{file_upload_limite,1}|is_numeric|?{#ENV{file_upload_limite,1},999999999})];
+					if (parseInt(msg) < nb) {
+						verif.upload_ok = true;
+					}else{
+						verif.upload_ok = false;
+						verif.message = msg;
+					}
+				}
+			});
+		}
+		return verif;
+	}
+	
+	/**
+	 * Handler de swfupload au moment du succès d'un upload
+	 * @param {Object} file
+	 * @param {Object} serverData
+	 * @param {Object} response
+	 */
+	function swfupload_uploadSuccess(file, serverData, response) {
+		try {
+			isUploading = false;
+			var data = jQuery.parseJSON(serverData);
+			var progress = new FileProgress(file, this.customSettings.progressTarget);
+			var id = progress.fileProgressID;
+			if(typeof(data.error) == 'object'){
+				var message_erreur = data.error.message;
+				jQuery('.em_charger_fichiers').tabs('enable',1);
+				jQuery('#'+id).addClass('red');
+				jQuery('#'+id+' .bg .bar').toggleClass('progressBarError').css('width','');
+				progress.setStatus('error',message_erreur);
+				// On affiche un message dans le debug au cas ou
+				this.debug("Erreur - "+ message_erreur); 
+ 			}else{
+				jQuery('.em_charger_fichiers').tabs('enable',1);
+				nb_files++;
+				var uploader = this;
+				if(typeof(uploader.settings.file_upload_limit) == 'number' && uploader.settings.file_upload_limit > 0){
+					uploader.settings.file_upload_limit = (uploader.settings.file_upload_limit-1);
+					if(uploader.settings.file_queue_limit > uploader.settings.file_upload_limit){
+						uploader.settings.file_queue_limit = uploader.settings.file_upload_limit;
+					}
+				}
+				progress.setComplete();
+				progress.setStatus("complete","Complete.");
+				if((typeof(uploader.settings.file_upload_limit) != 'undefined') && nb_files == uploader.settings.file_upload_limit){
+					jQuery('#em_upload_document').fadeOut().remove();
+				}else{
+					//progress.toggleCancel(false);
+					jQuery('#'+id+' .cancel .btn span:last-child').last().html(locale.emballe_medias_langue.bouton_enlever);
+					jQuery('#'+id+' .cancel .btn').unbind('click').click(function(e){
+						e.preventDefault();
+						jQuery(this).parents('.upload_info').fadeOut('slow');
+					});
+					if((typeof(uploader.settings.file_queue_limit) != 'undefined') && uploader.settings.file_queue_limit)
+						jQuery('.em_message_file_queue_limit').html(emballe_medias_langue.queue_limit_max+" : "+uploader.settings.file_queue_limit);
+					if((typeof(uploader.settings.file_upload_limit) != 'undefined') && uploader.settings.file_upload_limit)
+						jQuery('.em_message_file_upload_limit').html("<:emballe_medias:file_upload_limit_public:> "+uploader.settings.file_upload_limit);
+				}
+					
+				/**
+				 * Si le retour n'est pas numérique, il y a une erreur quelque part
+				 * Il vaut mieux que l'on rafraichisse la page pour éviter tout déborderment par la suite
+				 */
+				if((isNaN(parseFloat(data.message.id_objet)) || !isFinite(data.message.id_objet))){
+					window.location.reload(true);
+				}
+				
+				jQuery('#'+id+' .time_remaining,#'+id+' .ui-progressbar').fadeOut('slow',function(){
+					$(this).detach();
+				});
+				
+				var retour = (uploader.settings.file_upload_limit > 0) ? 'form':'haut';
+				$('[(#ENV{selecteur_recharger,#ARRAY}|implode{','})]').ajaxReload();
+			}
+			// On enleve le animeajax()
+			jQuery('#'+id+' .image_loading').detach();
+			jQuery('#'+id).children().css('opacity', 1);
+		} catch (ex) {
+			this.debug(ex);
+		}
+	}
+
+	/**
+	 * La configuration de swfupload
+	 */
+	var swfu_settings = {
+		flash_url : "[(#CHEMIN{[(#EVAL{_DIR_LIB_SWFUPLOAD})Flash/swfupload.swf]}|url_absolue)]",
+		upload_url: "[(#VAL{emballe_medias_upload}|generer_url_action)]",
+		post_params:{
+			"arg" : "#ENV{id_objet}",
+			"objet" : "#ENV{objet}",
+			"id_auteur" : "#SESSION{id_auteur}",
+			"id_rubrique" : "#ENV{id_rubrique}",
+			"id_parent" : "#ENV{id_parent,#ENV{id_rubrique}}",
+			"id_document":"#ENV{id_document}",
+			"action_document": "#ENV{action_document}"
+		},
+		file_size_limit : "[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]MB",
+		file_types : "[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions)]",[(#ENV{file_upload_limite,0}|is_numeric|et{#ENV{file_upload_limite,0}|>{0}|oui}|oui)
+		file_upload_limit : "#ENV{file_upload_limite}",][(#ENV{file_queue_limite,infnite}|is_numeric|et{#ENV{file_queue_limite,infnite}|>{0}|oui}|oui)
+		file_queue_limit : "#ENV{file_queue_limite}",]
+		custom_settings : {
+			progressTarget : "progress_bar_container",
+			nb_files:"#ENV{nb_files_count,0}", //Nombre de fichiers déjà mis en ligne pour l'objet en cours
+			form_exists: "[(#ENV{doc_uploaded}|=={non}|?{0,1})]"
+		},
+
+		/**
+		 * La forme du bouton d'upload
+		 */
+		button_width: "[(#CONFIG{emballe_medias/styles/width_bouton}|sinon{200})]",
+		button_height: "[(#CONFIG{emballe_medias/styles/height_bouton}|sinon{22})]",
+		button_placeholder_id: "fileupload_input",
+		button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+		button_cursor: SWFUpload.CURSOR.HAND,
+
+		/**
+		 * Les callbacks sont définis dans handler.js
+		 */
+		swfupload_loaded_handler : swfupload_swfUploadLoaded,
+		swfupload_pre_load_handler : swfupload_swfUploadPreLoad,
+		file_queued_handler : swfupload_fileQueued,
+		file_queue_error_handler : swfupload_fileQueueError,
+		file_dialog_complete_handler : swfupload_fileDialogComplete,
+		upload_start_handler : swfupload_uploadStart,
+		upload_progress_handler : swfupload_uploadProgress,
+		upload_error_handler : swfupload_uploadError,
+		upload_success_handler : swfupload_uploadSuccess,
+		upload_complete_handler : swfupload_uploadComplete,
+		queue_complete_handler : swfupload_queueComplete
+	};
+
+	$(function(){
+		var html5_upload_support = gethtml5uploadfunctions();
+		if(html5_upload_support.html5 && html5_upload_support.canSendBinary){
+			$('[#(#ENV{id_formulaire,fileupload}) ].divLoadingContent,[#(#ENV{id_formulaire,fileupload}) ].divLongLoading,[#(#ENV{id_formulaire,fileupload}) ].divAlternateContent,[#(#ENV{id_formulaire,fileupload}) ].swfupload').detach();
+			$('[#(#ENV{id_formulaire,fileupload})]').fileupload();
+			$('[#(#ENV{id_formulaire,fileupload})]').fileupload('option',{
+	            paramName: 'Filedata',
+	            done: function (e, data) {
+	            	var that = $(this).data('fileupload');
+					isUploading = false;
+					if (data.context) {
+						var total = format_file_size(data.total);
+						data.context.find('.transfer').html(total+' / '+total);
+	                    data.context.find('.statut').html(locale.emballe_medias_langue.complete);
+						data.context.find('.time_remaining,.ui-progressbar').fadeOut('slow',function(){
+							$(this).detach();
+						});
+					}
+					/**
+					 * On change le bouton Cancel en enlever, il enlève la boite
+					 */
+					data.context.find('.cancel .btn span:last-child').last().html(locale.emballe_medias_langue.bouton_enlever);
+					data.context.find('.cancel .btn').unbind('click').click(function(e){
+						e.preventDefault();
+						jQuery(this).parents('.upload_info').fadeOut('slow');
+					});
+					jQuery('.em_charger_fichiers').tabs('enable',1);
+					nb_files++;
+					if((data.files.length == 1) && $(this).find('.fileupload-buttonbar button.cancel').is(':visible')){
+						$(this).find('.fileupload-buttonbar button.cancel').fadeOut('slow');
+					}
+					if($(this).find('.fileupload-buttonbar .fileinput-button').is(':hidden')){
+						$(this).find('.fileupload-buttonbar .fileinput-button').fadeIn('slow');
+					}
+					
+					/**
+					 * Si le retour n'est pas numérique, il y a une erreur quelque part
+					 * Il vaut mieux que l'on rafraichisse la page pour éviter tout déborderment par la suite
+					 */
+					if((isNaN(parseFloat(data.result.message.id_objet)) || !isFinite(data.result.message.id_objet))){
+						window.location.reload(true);
+					}
+					
+					/**
+					 * Plus de fichiers possibles? on vire le form d'upload
+					 */
+					if(data.maxNumberOfFiles == 0){
+						jQuery('.em_charger_fichiers,#em_form_upload,.jfupload').fadeOut().detach();
+						jQuery('#formulaire_diogene').ajaxReload();
+					}else{
+						if(that.disabled){
+							that.enable();
+						}
+						$('.em_message_file_upload_limit .number').html(data.maxNumberOfFiles);
+					}
+					$('[(#ENV{selecteur_recharger,#ARRAY}|implode{','})]').ajaxReload();
+	           	},
+				maxFileSize : [(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100}|mult{1024}|mult{1024})],
+				autoUpload : #ENV{autoUpload,true},
+				[(#ENV{file_upload_limite,1}|is_numeric|oui)
+				maxNumberOfFiles : #ENV{file_upload_limite,1},]
+				limitConcurrentUploads : #ENV{limitconcurrentuploads,#ENV{config_fichiers}|table_valeur{limitconcurrentuploads}|sinon{3}},
+				acceptFileTypes : /(\.|\/)([(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions{'|',''})])$/i,[
+				file_upload_limit : (#ENV{file_upload_limite,1}|is_numeric|oui)#ENV{file_upload_limite,1},]
+				file_queue_limit : [(#ENV{file_queue_limite,#ENV{file_upload_limite,1}}|is_numeric|?{#ENV{file_queue_limite,#ENV{file_upload_limite,1}},"''"})],
+				progressInterval : 1
+			});
+			
+			var lastDrag = 0;
+			var DROP_TARGETS_ARE_SHOWING = false;
+
+			$('body')[0].addEventListener('dragenter', function(e){
+				lastDrag = +new Date;  //this is used later to determine if the dragged file leaves your app viewport
+				if(!DROP_TARGETS_ARE_SHOWING){ //make sure it's not a link that's being dragged
+					$('.ui-fileupload').each(function(){
+						var nb_files = $(this).fileupload(
+							'option',
+							'maxNumberOfFiles'
+						);
+						var message_drag = (nb_files == 1) ? locale.emballe_medias_langue.drag_upload_message_un : locale.emballe_medias_langue.drag_upload_message;
+						if($(this).find('.drag_upload_message_container').size() == 0)
+							$(this).append('<div class="drag_upload_message_container"><div class="drag_upload_message">'+message_drag+'</div></div>');
+						else if($(this).find('.drag_upload_message_container').is(':hidden')){
+							$(this).find('.drag_upload_message_container .drag_upload_message').html(message_drag);
+							$(this).find('.drag_upload_message_container').fadeIn();
+						}
+					});
+					DROP_TARGETS_ARE_SHOWING = true;
+				}
+
+				if(DROP_TARGETS_ARE_SHOWING){
+					e.stopPropagation();
+					e.preventDefault();
+				}
+			}, false);
+			
+			$('body')[0].addEventListener('dragover', function(e){
+				lastDrag = +new Date;
+				if(DROP_TARGETS_ARE_SHOWING){ //if no drop targets are showing, just fall back to the default browser behavior
+					e.stopPropagation();  
+					e.preventDefault();
+				}
+			}, false);
+			
+			$('body')[0].addEventListener('drop', function(e){
+				if(DROP_TARGETS_ARE_SHOWING){ //if no drop targets are showing, just fall back to the default browser behavior
+					$('.ui-fileupload').each(function(){
+						$(this).find('.drag_upload_message_container').fadeOut();
+					});
+					DROP_TARGETS_ARE_SHOWING = false;
+				}
+			}, false);
+			
+			$('body')[0].addEventListener('dragleave', function(e){
+				var lastBodyLeave = +new Date;
+				setTimeout(function(){
+					if(lastDrag < lastBodyLeave){
+						DROP_TARGETS_ARE_SHOWING = false;
+						$('[#(#ENV{id_formulaire,fileupload}) ].ui-fileupload').each(function(){
+							$(this).find('.drag_upload_message_container').fadeOut();
+						});
+					}
+				},50)
+			}, false);
+
+			$('[#(#ENV{id_formulaire,fileupload}) ]#swfupload_messages,[#(#ENV{id_formulaire,fileupload}) ]#divSWFUploadUI').detach();
+			$('[#(#ENV{id_formulaire,fileupload}) ].fileinput-button span,.btn').button();
+		}else{
+			var swfu;
+			swfu = new SWFUpload(swfu_settings);
+			$(window).unload(function(){
+				swfu.destroy();
+			});
+		}
+		$('#formulaire_em_charger_media_ftp form').submit(function(){
+			jQuery('.em_charger_fichiers').tabs('disable',0);
+		});
+		window.onbeforeunload = function(){
+			if(isUploading){
+				return locale.emballe_medias_langue.erreur_beforeunload;
+			}
+		};
+	});
+
+-->
+</script>
+<div id="#ENV{id_formulaire,fileupload}" class="formulaire_spip jfupload ui-fileupload ui-widget ui-widget-content ui-corner-all">
+    <form action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="POST" enctype="multipart/form-data">
+    	<input type="hidden" name="arg" value="#ENV{id_objet}" />
+    	<input type="hidden" name="objet" value="#ENV{objet}" />
+		[<input type="hidden" name="id_rubrique" value="(#ENV{id_rubrique})" />]
+		[<input type="hidden" name="id_parent" value="(#ENV{id_parent,#ENV{id_rubrique}})" />]
+		[<input type="hidden" name="id_document" value="(#ENV{id_document})" />]
+		[<input type="hidden" name="action_document" value="(#ENV{action_document})" />]
+        <div class="fileupload-buttonbar ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <div class="fileinput-button" id="fileinput-button">
+                [<span>(#ENV{legende_upload,[(#ENV{file_upload_limite,1}|is_numeric|?{#ENV{file_upload_limite,1}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>},<:emballe_medias:legend_mise_en_ligne_multiple:>})]})</span>]
+                <input type="file" name="files[]" id="fileupload_input" multiple>
+            </div>
+            <button type="submit" class="btn btn-primary start" style="display:none">Start upload</button>
+            <button type="reset" class="btn btn-warning cancel" style="display:none" title="<:bouton_annuler:>"><:emballe_medias:cancel_upload:></button>
+        </div>
+    </form>
+    <div class="fileupload-content fileupload-progress ui-fileupload-content">
+		<div id="em_message_attente" class="em_message_attente explication">
+			<:emballe_medias:verification_fichier:>
+		</div>
+		<div id="swfupload_messages">
+			<div id="divLoadingContent" class="divLoadingContent reponse_formulaire_erreur">
+				<:swfupload:chargement_uploader:>
+			</div>
+			<div id="divLongLoading" class="divLongLoading reponse_formulaire_erreur" style="display:none">
+				<:swfupload:erreur_chargement_uploader_long_failed:>
+			</div>
+			<div id="divAlternateContent" class="divAlternateContent reponse_formulaire_erreur" style="display:none">
+				<:swfupload:erreur_chargement_uploader_failed{url=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash}:>
+			</div>
+		</div>
+		<div id="em_message_avant_upload" class="em_message_avant_upload explication">
+			[(#ENV{config_fichiers}|table_valeur{texte_upload}|propre)]
+			[(#SET{types_liste,[(#GET{types}|emballe_medias_liste_extensions)]})]
+			[(#ENV{file_upload_limite,1}|is_numeric|et{#ENV{file_upload_limite}|>{1}|oui}|oui)
+				<p class="explications em_message_file_upload_limit"><:emballe_medias:file_upload_limit_public:> <span class="number">#ENV{file_upload_limite}</span></p>]
+			[(#ENV{file_queue_limite}|is_numeric|et{#ENV{file_queue_limite}|>{1}|oui}|et{#ENV{file_upload_limite}|!={#ENV{file_queue_limite}}|oui}|oui)
+				<p class="explications em_message_file_queue_limit"><:emballe_medias:queue_limit_max:> <span class="number">#ENV{file_queue_limite}</span></p>]
+			<p class="explications">
+				<:emballe_medias:types_fichiers_autorises{types=#GET{types_liste}}:>
+			</p>
+			[(#SET{taille,[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]})]
+			<p class="explications">
+				<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
+			</p>
+		</div>
+        <div class="files">
+        	<div id="divSWFUploadUI" class="divSWFUploadUI">
+				<div id="progress_bar_container" class="progress_bar_container">
+				</div>
+			</div>
+        </div>
+		[(#ENV{file_upload_limite}|>{1}|oui)
+        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+        </div>
+        <!-- The extended global progress information -->
+        <div class="progress-extended">&nbsp;</div>]
+    </div>
+</div>
+</BOUCLE_diogene>

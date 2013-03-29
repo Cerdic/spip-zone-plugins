@@ -1,0 +1,37 @@
+#HTTP_HEADER{Content-type:text/html}
+#CACHE{0}
+
+[(#SET{req_env,[select * from (#ENV{objet}|table_objet_sql) where [(#ENV{objet}|id_table_objet)]=[(#ENV{id_objet}|intval)][(#ENV{objet}|!={auteur}|oui)AND statut IN ('publie','prop','prepa')]]})]
+<BOUCLE_objet_env(DATA){source sql,#GET{req_env}}>
+	<B_doc>
+	[(#TOTAL_BOUCLE|>{1}|oui)#SET{total,#TOTAL_BOUCLE}
+		<p><:emballe_medias:nb_doc_uploaded{nb=#GET{total}}:></p>
+		<p><a href="#formulaire_diogene"><img src="#CHEMIN{images/ico_fle_bas.png}" alt="" /> <:emballe_medias:ancre_formulaire_validation:></a></p>
+	]
+	<BOUCLE_doc(DOCUMENTS spip_documents_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{par id_document}{inverse}{mode != conversion}{tout}>
+		[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#ENV{em_type},#ENV{objet},[(#ENV{id_objet}|intval)],#ENV{redirect},[(#TOTAL_BOUCLE|>{1}|?{#COMPTEUR_BOUCLE,''})],[(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE,''})]})]
+	</BOUCLE_doc>
+	[(#TOTAL_BOUCLE|>{1}|oui)
+		[(#ENV{retour}|=={form}|oui)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_formulaire_upload:></a></p>]
+		[(#ENV{retour}|=={form}|non)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_haut_page:></a></p>]
+	]
+	</B_doc>
+</BOUCLE_objet_env>
+</B_objet_env>
+	[(#SET{req_en_cours,[select * from (#ENV{objet}|table_objet_sql) where [(#ENV{objet}|id_table_objet)]=[(#ENV{id_objet}|intval)] AND statut IN ('publie','prop','prepa')]})]
+	<BOUCLE_documents_en_cours_bis(ARTICLES){id_auteur=#SESSION{id_auteur}}{em_type}{statut IN publie,prop,prepa}{0,1}>
+		<B_doc_bis>
+		[(#TOTAL_BOUCLE|>{1}|oui)#SET{total,#TOTAL_BOUCLE}
+			<p><:emballe_medias:nb_doc_uploaded{nb=#GET{total}}:></p>
+			<p><a href="#formulaire_diogene"><img src="#CHEMIN{images/ico_fle_bas.png}" alt="" /> <:emballe_medias:ancre_formulaire_validation:></a></p>
+		]
+		<BOUCLE_doc_bis(DOCUMENTS){id_objet=[(#ENV{id_objet}|intval)]}{objet=[(#ENV{objet})]}{par id_document}{inverse}{tout}>
+			[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#ENV{em_type},#ENV{objet},#_documents_en_cours_bis:ID_ARTICLE,#ENV{redirect},[(#TOTAL_BOUCLE|>{1}|?{#COMPTEUR_BOUCLE,''})]})]
+		</BOUCLE_doc_bis>
+		[(#TOTAL_BOUCLE|>{1}|oui)
+			[(#ENV{retour}|=={form}|oui)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_formulaire_upload:></a></p>]
+			[(#ENV{retour}|=={form}|non)<p><a href="#em_upload_fichier"><img src="#CHEMIN{images/ico_fle_haut.png}" alt="" /> <:emballe_medias:ancre_haut_page:></a></p>]
+		]
+		</B_doc_bis>
+	</BOUCLE_documents_en_cours_bis>
+<//B_objet_env>

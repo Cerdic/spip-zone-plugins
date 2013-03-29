@@ -1,0 +1,22 @@
+#HTTP_HEADER{Content-type:text/html}
+#CACHE{0}
+[(#SET{result,0})]
+[(#REM) Récupérer le nombre de docs attachés à l'article passé dans l'env ]
+<BOUCLE_article_env(ARTICLES){id_article}{statut IN publie,prop,prepa}>
+	<BOUCLE_doc(DOCUMENTS){id_article}{par id_document}{inverse}{tous}>	</BOUCLE_doc>
+	[(#SET{result,#TOTAL_BOUCLE})]
+	</B_doc>
+</BOUCLE_article_env>
+</B_article_env>
+[(#REM) Sinon, si l'option "chercher_article" est active, récupérer le nombre de docs attachés à l'article en prop ou prepa ]
+<BOUCLE_chercher_article(CONDITION){si #CONFIG{emballe_medias/fichiers/chercher_article}|=={on}|oui}>
+	<BOUCLE_documents_en_cours_bis(ARTICLES){id_auteur}{em_type?}{statut IN prop,prepa}{!statut = 'poubelle'}{0,1}>
+		<BOUCLE_doc_bis(DOCUMENTS){id_article}{par id_document}{inverse}{tous}> </BOUCLE_doc_bis>
+		[(#SET{result,#TOTAL_BOUCLE})]
+		</B_doc_bis>
+	</BOUCLE_documents_en_cours_bis>
+	</B_documents_en_cours_bis>
+</BOUCLE_chercher_article>
+<//B_article_env>
+[(#GET{result})]
+[(#FILTRE{trim})]

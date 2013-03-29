@@ -1,0 +1,19 @@
+<li class="editer editer_medias selection_documents diogene_lot_#ENV{id_diogene} [ (#ENV**{erreurs}|table_valeur{medias}|oui)erreur]">
+	<label><:emballe_medias:label_choisir_medias_lot:></label>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{medias})</span>]
+<B_medias>
+	#ANCRE_PAGINATION
+	[<p class="pagination">(#PAGINATION)</p>]
+	<BOUCLE_medias(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{!par date}{statut IN #ENV{statuts_medias}}{pagination #ENV{pagination,100}}>
+	<div class="choix">
+		<input type="checkbox" name="medias[]" id="medias_#ID_ARTICLE" value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{medias,#ARRAY}}|oui) checked="checked"] />
+		<label for="medias_#ID_ARTICLE">
+		<INCLURE{fond=inclure/resume/choix_media_lot,id_article} />
+		</label>
+	</div>
+	</BOUCLE_medias> 
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_medias>
+	<span class="erreur_message"><:emballe_medias:erreur_aucun_media_correspondant:></span>
+<//B_medias>
+</li>

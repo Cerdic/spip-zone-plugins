@@ -1,0 +1,264 @@
+#CACHE{24*3600}
+[(#REM)
+
+	Ce squelette definit les styles du formulaire d'upload
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{24*3600,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,#VAL{_EM_COULEUR_CLAIRE}|defined|?{#EVAL{_EM_COULEUR_CLAIRE},#CONFIG{emballe_medias/styles/couleur_claire,#edf3fe}}}
+#SET{foncee,#VAL{_EM_COULEUR_FONCEE}|defined|?{#EVAL{_EM_COULEUR_FONCEE},#CONFIG{emballe_medias/styles/couleur_foncee,#3874b0}}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* remember to define focus styles! */
+:focus { outline: 0; }
+
+fieldset.flash {
+	width: 375px;
+	margin: 10px 5px;
+	background-color: #ededed;
+	border:none;
+}
+
+.progressWrapper {
+	padding:15px;
+	background:#E6E6E6;
+	overflow: hidden;
+}
+
+.progressBarComplete,
+.progressBarError {
+	width: 100%;
+	font-size: 0;
+	height: 40px;
+	background-color: blue;
+	margin-top: 2px;
+	visibility: hidden;
+}
+
+.progressBarComplete {
+	background-color: green;
+}
+
+.progressBarError {
+	background-color: red;
+}
+
+a.progressCancel {
+	float: right;
+	display:none;
+}
+
+#em_form_upload{
+	margin:0 auto;
+}
+
+#em_message_attente{
+	display:none;
+}
+
+#progress_bar_container{
+	display:none;
+}
+
+#progress_bar_container div.red {
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+
+#progress_bar_container div.red .statut{
+	color:#B50000;
+}
+
+#progress_bar_container div.green {
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+
+#progress_bar_container div.blue {
+	border: solid 1px #CEE2F2;
+	background-color: #F0F5FF;
+}
+
+.progress_container {
+	border: 1px solid #ebebeb;
+}
+
+.files .progress_container{
+	border:none;
+}
+
+.progress_container .bg {
+	color: #fff;
+	background: #f5f5f5;
+	background: url(#CHEMIN{images/progressbar/bg_progressbar.gif}) repeat-x left center;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 20px;
+	margin: 2px;
+	padding:0px;
+}
+.progress_container .bar {
+	display: block;
+	background: url(#CHEMIN{images/progressbar/bg_progressbar_active.gif}) repeat-x left center;
+	font-style: normal;
+	text-align: center;
+	padding: 5px 0px 4px 0px;
+	border-right: 1px solid #408bb6;
+	width: 60px;
+}
+
+.fileupload-content .files .progress_container .ui-progressbar{
+	width:100%;
+}
+
+.upload_response { color: #909D01; font: bold 18px arial, sans-serif; margin-bottom: 5px; }
+
+/* Informations sur l'upload en cours */
+.upload_info { margin-top: 3px; color: #969696;}
+.upload_info .cancel { float: right; }
+.upload_info .filename,.files .upload_info .filename { font-weight: bold; color: #3e3e3e;padding:0; }
+.upload_info .transfer .time_remaining { color: #3e3e3e; font-weight: bold; margin-left: 10px; }
+
+.infos_videos,.infos_videos_right{
+	width:47%;
+	border-right:1px solid #ccc;
+	padding:1%;
+	float:left;
+}
+.infos_videos_right{
+	border:none;
+}
+.infos_videos ul{
+	list-style-type:none;
+	padding-left:15px;
+}
+
+object.swfupload{
+	cursor:pointer;
+}
+
+#em_upload_boutons{
+	background-color:#GET{claire};
+	border:2px solid #GET{foncee};
+	color:#GET{foncee};
+	text-align:center;
+	cursor:pointer;
+	width:200px;
+}
+
+#em_message_avant_upload{
+	border:3px solid #E6E6E6;
+	background:#fff;
+	padding:5px;
+}
+
+#videos_informations h2,.previsu_document h2{
+	margin:0 0 10px;
+}
+
+.previsu_document{
+	background-color:#fff;
+	padding:5px;
+	margin:10px 0;
+}
+
+.previsu_document .em_next_prev{
+	float:right;
+}
+
+noscript.alternative_js{
+	display: block;
+	background-color: #FFFF66;
+	border-top: solid 4px #FF9966;
+	border-bottom: solid 4px #FF9966;
+	margin: 10px 25px;
+	padding: 10px 15px;
+}
+
+#em_upload_document #em_form_upload.formulaire_spip ul li{
+	padding:10px;
+}
+
+#em_upload_document #em_form_upload.formulaire_spip ul li#divSWFUploadUI{
+	padding:0px;
+}
+
+.em_logo_documents{
+	overflow:hidden;
+}
+
+.em_infos_documents,.em_infos_documents .type_infos{
+	overflow:hidden;
+}
+
+.em_infos_documents .type_infos{
+	text-align:right;
+}
+
+.em_infos_documents .type_infos div{
+	display:inline;
+	text-align:right;
+}
+
+.actions-documents{
+	float:right;
+	text-align:right;
+	overflow:auto;
+}
+
+.actions-documents a{
+	display:block;
+	float:left;
+	margin:3px;
+}
+
+.actions-documents .bouton_rotation{
+	width:15px;
+	height:15px;
+	text-indent:3000em;
+	overflow:hidden;
+}
+
+.actions-documents .bouton_tourner-gauche{
+	background:transparent url(#CHEMIN{images/tourner-gauche-10.gif}) no-repeat center center;
+}
+
+.actions-documents .bouton_tourner-demi-tour{
+	background:transparent url(#CHEMIN{images/tourner-demitour-10.gif}) no-repeat center center;
+}
+
+.actions-documents .bouton_tourner-droite{
+	background:transparent url(#CHEMIN{images/tourner-droite-10.gif}) no-repeat center center;
+}
+
+.actions-documents .em_image_zoom{
+	background:transparent url(#CHEMIN{images/ico_image_zoom.png}) no-repeat;
+	background-position: 0 -20px;
+	width:16px;
+	height:17px;
+	text-indent:3000em;
+	overflow:hidden;
+}
+
+.actions-documents .em_image_zoom:hover{
+	background:transparent url(#CHEMIN{images/ico_image_zoom.png}) no-repeat top left;
+}
+
+.actions-documents .legende_add{
+	background:transparent url(#CHEMIN{images/new.png}) no-repeat top left;
+	width:15px;
+	height:15px;
+	text-indent:3000em;
+	overflow:hidden;
+}
+[(#INCLURE{fond=#VAL{prive/}|em_tous_les_fonds{/style_em_}}{env}{couleur_claire=#GET{couleur_claire}}{couleur_foncee=#GET{couleur_foncee}}{lang}{ltr})]

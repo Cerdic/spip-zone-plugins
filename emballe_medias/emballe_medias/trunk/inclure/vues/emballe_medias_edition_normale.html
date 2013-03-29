@@ -1,0 +1,106 @@
+#CACHE{0}
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+<div id="liste_medias_publication">
+	<h2 class="h2"><:emballe_medias:titre_medias_preparation:></h2>
+	[(#ENV{id_media}|non)
+	<p class="explication">
+		[(#AUTORISER{publierdans,rubrique,#ID_SECTEUR}|oui)
+		<:emballe_medias:explication_medias_prepas_auth_publier:>]
+		[(#AUTORISER{publierdans,rubrique,#ID_SECTEUR}|non)
+		<:emballe_medias:explication_medias_prepas:>]
+	</p>]
+	<div id="navigation_liste" class="diogene_#ID_DIOGENE">
+		<B_selected>
+		<ul class="liste-items liste medias">
+		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut !IN 'publie','poubelle'}{doublons selected}>
+		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
+			<span class="titre_media">#TITRE</span>
+			<BOUCLE_document_selected(DOCUMENTS){id_article}{0,1}{tout}>
+			[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200})]
+			</BOUCLE_document_selected>
+			</B_document_selected>
+			[(#CHEMIN{images/media_sans_logo.png}|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
+			<//B_document_selected>
+		</li>
+		</BOUCLE_selected>
+		</ul>
+		</B_selected>
+		<B_articles>
+		#ANCRE_PAGINATION
+		<ul class="liste-items liste medias">
+		<BOUCLE_articles(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{statut !IN 'publie','poubelle'}{doublons selected}{par date}{inverse}{pagination 10}>
+		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
+			<a href="[(#SELF|parametre_url{id_media,#ID_ARTICLE}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{liste_medias_publication})]" class="ajax">
+				<span class="titre_media">#TITRE</span>
+				<BOUCLE_document(DOCUMENTS){id_article}{0,1}{tout}>
+				[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200})]
+				</BOUCLE_document>
+				</B_document>
+				[(#CHEMIN{images/media_sans_logo.png}|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
+				<//B_document>
+			</a>
+		</li>
+		</BOUCLE_articles>
+		</ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+		</B_articles>
+	</div>
+	<div id="edition_emballe_media">
+	<BOUCLE_article(ARTICLES){id_article=#ENV{id_media}}{statut !IN publie,poubelle}>
+	<B_document_up>
+	#SET{statut,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{#STATUT}|_T}
+	#BOITE_OUVRIR{'',notice}
+		<p><:emballe_medias:message_info_media_statut{statut=#GET{statut}}:></p>
+		[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|oui)
+			#SET{statut_nouveau,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{'publie'}|_T}
+			<p><:emballe_medias:message_info_media_publier{statut=#GET{statut_nouveau}}:></p>]
+		[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|non)
+			#SET{statut_nouveau,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{'prop'}|_T}
+			<p><:emballe_medias:message_info_media_proposer{statut=#GET{statut_nouveau}}:></p>]
+	#BOITE_FERMER
+	<div id="em_upload_fichier">
+		<BOUCLE_document_up(DOCUMENTS){id_article}{0,1}{tout}>
+		<INCLURE{fond=inc-media_uploaded,id_objet=#ID_ARTICLE,objet=article,env}>
+		</BOUCLE_document_up>
+	</div>
+	<div id="formulaire_diogene">
+		<div class="ajax">
+			[(#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE})]
+		</div>
+	</div>
+	</B_document_up>
+		#BOITE_OUVRIR{'',error}
+		<p><:emballe_medias:erreur_media_sans_document:></p>
+		<p>Ok Ok je sais il manque un formulaire d'upload ici mais c'est pas si facile</p>
+		#BOITE_FERMER
+		<div class="ajax">
+		[(#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE})]
+		</div>
+	<//B_document_up>
+	</BOUCLE_article>
+	</B_article>
+		#BOITE_OUVRIR{'','notice'}
+		<B_medias_non_publies>
+		<BOUCLE_medias_non_publies(ARTICLES){si #ENV{vue}|!={liste_a_publier}|oui}{id_auteur=#SESSION{id_auteur}}{id_article != #ENV{id_article}}{id_secteur = #_diogene:ID_SECTEUR}{statut IN prop,prepa}> </BOUCLE_medias_non_publies>
+			#SET{nb,#GRAND_TOTAL}
+			[(#ENV{id_article}|oui)
+			<p><:emballe_medias:message_notice_nb_articles_prepa_autres{nb=#GET{nb}}:></p>]
+			[(#ENV{id_article}|non)
+			[<p>(#GET{nb}|singulier_ou_pluriel{emballe_medias:message_notice_articles_prepa_un,emballe_medias:message_notice_articles_prepa_nb})</p>]]
+			<p><:emballe_medias:message_selectionner_media_editer:></p>
+		</B_medias_non_publies>
+		<p><:emballe_medias:message_aucun_media_attente:></p>
+		<//B_medias_non_publies>
+		#BOITE_FERMER
+	<//B_article>
+
+	<script type="text/javascript">
+	if(typeof(cQuery) == 'function'){
+		if(typeof(cQuery.fn.crayonsstart == 'function')){
+			cQuery.fn.crayonsstart();
+		}
+	}
+	</script>
+</div>
+</div>
+</BOUCLE_diogene>

@@ -1,0 +1,11 @@
+[(#REM)
+
+	Controleur pour le crayon 'em_descriptif' , uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(DOCUMENTS){id_document}{tout}>
+<textarea class="crayon-active" name="#ENV{name_descriptif}"
+ style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}">
+[(#DESCRIPTIF**|entites_html)]</textarea>
+</BOUCLE_a>

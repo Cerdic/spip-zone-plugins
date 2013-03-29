@@ -1,0 +1,20 @@
+#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript;}
+[(#INCLURE{javascript/jfu_spip_fonctions.js})]
+
+//*** jQuery File Upload ***//
+[(#INCLURE{javascript/tmpl.min.js})]
+[(#INCLURE{javascript/load-image.min.js})]
+[(#INCLURE{javascript/jquery_file_upload/js/jquery.iframe-transport.js})]
+[(#INCLURE{javascript/jquery_file_upload/js/jquery.fileupload.js})]
+[(#INCLURE{javascript/jquery.fileupload-emballe_medias.js})]
+[(#INCLURE{fond=jfu_locales.js,lang=#ENV{lang}})]
+
+//*** SWFUPLOAD ***//
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.queue.js]})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.cookies.js]}|replace{' ','%20'})]})]
+[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})plugins/swfupload.swfobject.js]}|replace{' ','%20'})]})]
+[(#INCLURE{javascript/swfupload_handler.js})]
+[(#INCLURE{javascript/swfupload_fileprogress.js})]
+[(#INCLURE{fond=emballe_medias_lang.js,lang=#ENV{lang}})]

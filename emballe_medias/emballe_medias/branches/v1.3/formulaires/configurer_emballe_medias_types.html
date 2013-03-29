@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+<h3 class="titrem">[(#CHEMIN{images/emballe_medias-24.png}|balise_img{'',cadre-icone})]<:emballe_medias:legend_gerer_types:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		[(#CONFIG{emballe_medias/fichiers/gerer_types}|=={on}|oui)
+			[(#SAISIE{case,gerer_modifs_types,
+				label=<:emballe_medias:label_gerer_modifs_types:>,
+				label_case=<:emballe_medias:label_case_gerer_modifs_types:>,
+				explication=<:emballe_medias:explication_gerer_modifs_types:>})]
+			[(#SAISIE{case,autoriser_normal,
+				label=<:emballe_medias:label_types_autoriser_normal:>,
+				label_case=<:emballe_medias:label_case_types_autoriser_normal:>})]
+			[(#SAISIE{selection_multiple,types_dispos,
+				label=<:emballe_medias:label_types_disponibles:>,
+				cacher_option_intro=oui,
+				size=4,
+				datas=#ARRAY{
+					audio,<:emballe_medias:type_audio:>,
+					image,<:emballe_medias:type_image:>,
+					video,<:emballe_medias:type_video:>,
+					texte,<:emballe_medias:type_texte:>}})]
+		]
+		</ul>
+		<input type="hidden" name="_meta_casier" value="emballe_medias/types" />
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div>
+</form>
+</div>
