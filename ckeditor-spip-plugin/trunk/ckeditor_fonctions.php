@@ -594,7 +594,7 @@ $ajaxload
 	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
 	<script type=\"text/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
 	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
-	<script type=\"text/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("fonds/ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=fonds/ckeditor4spip.js"))."\"></script>\n";
+	<script type=\"text/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
 		if ($load_extra_js) { 
 			$script .= "	<script type=\"text/javascript\" src=\"$load_extra_js\"></script>\n" ;
 		}
@@ -610,34 +610,25 @@ $ajaxload
 	}
 	$script .= "	<script type=\"text/javascript\">
 function loadCKEditor() {
-	var prefix_id ;
-	try {
-		prefix_id = $(this).attr('id');
-	} catch (E) {
-		prefix_id = undefined ;
-	}
 	var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
-	if ((prefix_id != undefined) && prefix_id.match(/^\w+$/)){
-		$.each(ajaxload, function(i){
-			ajaxload[i][2]=prefix_id;
-			ajaxload[i][0]='#'+prefix_id+' '+ajaxload[i][0];
-		});
-	}
-	$.each(ajaxload, function(i){
-		$(ajaxload[i][0]).each(function(i){
-			var temp_id = this.id;
-			var hEd = CKEDITOR.instances[temp_id];
-			if (hEd)
-				hEd.destroy();
-		});
-	});        
+	try {
+		var prefix_id = $(this).attr('id');
+		if ((prefix_id != undefined) && prefix_id.match(/^\w+$/)){
+			$.each(ajaxload, function(i){
+				ajaxload[i][2]=prefix_id;
+				ajaxload[i][0]='#'+prefix_id+' '+ajaxload[i][0];
+			});
+			for(name in CKEDITOR.instances) {
+				CKEDITOR.instances[name].destroy()
+			}
+			CKEDITOR.instances = [] ;
+		}
+	} catch (E) {}
 	fullInitCKEDITOR(ajaxload) ;
 }
 $(window).load(function(){
-
 	if(typeof onAjaxLoad == 'function') onAjaxLoad(loadCKEditor);
 	loadCKEditor();
-
 }) ;
 
 	</script>" ;

@@ -1,8 +1,6 @@
 [(#CACHE{0})][(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
-<BOUCLE_si(CONDITION){si #SESSION{statut}|<{2}}>
 
 var ckeDataProcessor;
-var defined_ed = {} ; // liste les editeurs déjà définis - pour éviter les créations redondantes
 
 var sansConversion = [(#CONFIG{ckeditor/conversion}|=={'aucune'}|?{true,false})] ;
 if (sansConversion) {
@@ -128,16 +126,14 @@ function SpipEditor2CKEditor(editor_id){
 	var EdConfig={};$.extend(EdConfig,CKEDITOR.ckConfig) ;
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
 	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
-		if (stack[editor_id].editor) {
-			var instance = CKEDITOR.instances[stack[editor_id].editor] ;
+		var id = $(editor_id).attr('id') ;
+		if (id) {
+			var instance = CKEDITOR.instances[id] ;
 			if (instance) {
-				exit;
-				CKEDITOR.remove(instance) ;
+				instance.destroy() ;
 			}
 		}
-	} catch (E) { 
-		/* rien */
-	}
+	} catch (E) { /* rien */ }
 	try { 
 	$(editor_id).ckeditor(function(){
 		HideSpipUI(editor_id);
@@ -173,15 +169,10 @@ function SpipEditor2CKEditor(editor_id){
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
 		this.setReadOnly(false);
 		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
-		var ckeditor = this ;
-		$(editor_id).parents().find('input[class=submit]').click(function() {
-			CKEditor2SpipEditor(editor_id) ; // ça c'est sub-optimal, mais ça fonctionne
-			//ckeditor.updateElement() ; // ça c'est ce qu'il me semble qu'il faurait faire, mais ça ne fonctionne pas ...
-		}) ;
+		$(editor_id).parents().find('input[class=submit]') // fix: a priori ceci n'est nécessaire que pour les forums, mais il semble que cela fonctionne aussi pour les autres formulaires
+			.attr('onclick', 'javacript:CKEditor2SpipEditor(\''+editor_id+'\');') ;
 	},EdConfig);
-	} catch (E) {
-		alert("Erreur non prévue : \n"+E) ;
-	}
+	} catch (E) { /* rien */ }
 }
 
 function barrebouilles_editor(editor_id){ 
@@ -382,4 +373,3 @@ function fullInitCKEDITOR(editor_ids){
 		}}
 	}
 }
-</BOUCLE_si>
