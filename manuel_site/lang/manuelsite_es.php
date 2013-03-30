@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_explication' => 'Este plugin instala un icono de ayuda permitiendo mostrar desde no importa qué página del espacio privado el manual de redacción del sitio. Este manual es @texte@ Tiene por objetivo explicar a los redactores la arquitectura del sitio, en qué sección ubicar algo, cómo codificar e instalar un vídeo... En fin, todo lo que desee y que sea característico de su sitio.', # MODIF
+	'configurer_explication' => 'Este plugin instala un icono de ayuda permitiendo mostrar desde no importa qué página del espacio privado el manual de redacción del sitio. Este manual es @texte@ Tiene por objetivo explicar a los redactores la arquitectura del sitio, en qué sección ubicar algo, cómo codificar e instalar un vídeo... En fin, todo lo que desee y que sea característico de su sitio.',
 	'configurer_explication_l_article' => '<a href="@url@" title="Manual de redacción">el artículo #@idart@</a> de su sitio.',
 	'configurer_explication_un_article' => 'un artículo del sitio. ',
 	'configurer_titre' => 'Configurar el manual de redacción del sitio',
