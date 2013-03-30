@@ -1,0 +1,36 @@
+<BOUCLE_document(DOCUMENTS){id_document}>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+    <title>[(#TITRE|sinon{#FICHIER|basename})] - #NOM_SITE_SPIP</title>
+    <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+    [<link rel="stylesheet" href="(#CHEMIN{css/embed_code.css})">]
+	   	
+   	[(#VAL{''}|gis_insert_head_css)]
+   	[<script src="(#CHEMIN{prive/javascript/jquery.js})" type="text/javascript"></script>]
+    [<script src="(#CHEMIN{prive/javascript/jquery.placeholder-label.js})" type="text/javascript"></script>]
+    [<script src="(#CHEMIN{prive/javascript/ajaxCallback.js})" type="text/javascript"></script>]
+   	[(#VAL{''}|gis_insert_head)]
+</head>
+<body id="document_#ENV{id_document}" class="document embed_document embed_document_#MEDIA" dir="#LANG_DIR" style="width:#ENV{largeur}px;height:#ENV{hauteur}px">
+	<div class="infos_document gis">
+		[<div class="logo">(#LOGO_DOCUMENT|image_reduire{100,100})</div>]
+		<div class="titre"><h1>[(#TITRE|sinon{#FICHIER|basename})]</h1></div>
+		<BOUCLE_gis(GIS){id_document}>
+			<div class="spip_documents" style="clear:both">
+			#MODELE{carte_gis,largeur=100%,hauteur=#ENV{hauteur,400px},kml=#ID_DOCUMENT,lat=#LAT,lon=#LON,zoom=#ZOOM,point=non,id_carte_gis=kml#ID_DOCUMENT}
+			</div>
+		</BOUCLE_gis>
+		</B_gis>
+			<div class="spip_documents" style="clear:both">
+			#MODELE{carte_gis,largeur=100%,hauteur=#ENV{hauteur,400px},kml=#ID_DOCUMENT,point=non,id_carte_gis=kml#ID_DOCUMENT}
+			</div>
+		<//B_gis>
+	</div>
+</body>
+</html>
+</BOUCLE_document>
+</B_document>
+#INCLURE{fond=embed/document,env}
+<//B_document>
+#FILTRE{trim}
