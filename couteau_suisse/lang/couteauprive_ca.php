@@ -774,6 +774,7 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Els autors en stat',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Només els statuts SPIP següents:',
 	'statuts_tous' => 'Tots els statuts',
 	'suivi_forums:description' => 'Un autor d\'un article està sempre informat quan es publica un missatge al fòrum que aquest té associat. Però, a més, també es possible advertir a: tots els participants al fòrum o només als autors dels missatges en endavant.[[%radio_suivi_forums3%]]',

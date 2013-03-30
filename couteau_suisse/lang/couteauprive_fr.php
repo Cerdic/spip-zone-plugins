@@ -8,7 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
-	'statut' => 'Statut',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
@@ -774,6 +773,7 @@ _ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se config
 ',
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
+	'statut' => 'Statut',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
 	'suivi_forums:description' => 'Un auteur d\'article est toujours informé lorsqu\'un message est publié dans le forum public associé. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[%radio_suivi_forums3%]]',

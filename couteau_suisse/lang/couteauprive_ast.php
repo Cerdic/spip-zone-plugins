@@ -740,6 +740,7 @@ _ • {Control de caché}: opción identica a la precedente, con escritura nel d
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Autores por estatutu',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Únicamente los estatutos SPIP siguientes:',
 	'statuts_tous' => 'Tolos estatutos',
 	'suivi_forums:description' => 'Al autor d\'un artículu siempre se-y informa al espublizase un mensaxe nel foru públicu asociáu. Pero amás ye posible avisar dafechu: a tolos participantes del foru o sólo a los autores de mensaxes d\'enriba.[[%radio_suivi_forums3%]]',

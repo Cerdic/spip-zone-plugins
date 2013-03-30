@@ -737,6 +737,7 @@ _ • {Control de la caché}: opción idéntica a la anterior, con escritura en 
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Estado de los autores',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Únicamente los siguientes estados SPIP:',
 	'statuts_tous' => 'Todos los estados',
 	'suivi_forums:description' => 'El autor de un artículo siempre es informado cuando se publique un mensaje en el foro público asociado. Pero es posible avisar además: a todos los participantes en el foro, o solamente a los autores de los mensajes previos del hilo.[[%radio_suivi_forums3%]]',

@@ -761,6 +761,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».', # MODIF
 	'spip_log:nom' => 'SPIP a jeho protokoly',
 	'stat_auteurs' => 'Autori v štatistikách',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Iba tento status SPIPU:',
 	'statuts_tous' => 'Všetky stavy',
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',

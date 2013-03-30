@@ -712,6 +712,7 @@ _ • {Önbelleğin kontrolü} : bu seçenek bir öncekiyle aynıdır ama tüm s
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Stat durumundaki yazarlar',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Sadece şu SPIP statüsü :',
 	'statuts_tous' => 'Tüm statüler',
 	'suivi_forums:description' => 'Bir makale yazarı, ilintili kamusal forumda bir mesaj yayınlandığında her zaman bilgilendirilir. Ama ayrıca şunlar da bilgilendirilebilir : tüm forum katılımcıları veya mesajların yazarları.[[%radio_suivi_forums3%]]',

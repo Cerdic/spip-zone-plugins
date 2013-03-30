@@ -774,6 +774,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 @puce@ jet lag used by the functions date / time can be configured here: «[.->timezone]» {(PHP 5.1 minimum)}.',
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
+	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Only the following SPIP status:',
 	'statuts_tous' => 'Every status',
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
