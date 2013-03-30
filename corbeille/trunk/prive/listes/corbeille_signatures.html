@@ -2,7 +2,7 @@
 <div class="liste corbeille-signatures">
 [<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{corbeille:signatures_corbeille_un,corbeille:signatures_corbeille_tous})</h3>]
 [<p class='pagination'>(#PAGINATION)</p>]
-<ul class='liste-items signatures checkables'>
+<ul class='liste-items checkables'>
 <BOUCLE_signatures(SIGNATURES){statut}{pagination 5}{!par date}{recherche ?}>
 <li class='item'>
 <label for='signature-#ID_SIGNATURE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' id="signature-#ID_SIGNATURE" value='#ID_SIGNATURE'[ (#ID_SIGNATURE|in_any{#ENV{elements}}|oui)checked='checked']/>
