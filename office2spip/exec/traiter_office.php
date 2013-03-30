@@ -146,6 +146,8 @@ function exec_traiter_office () {
 
 		$distant = _request("distant");
 		$GLOBALS["distant"] = $distant; 
+		
+		
 		if (strlen($distant) > 0) {
 			include_spip("inc/distant");
 			$fichier = copie_locale($distant);
@@ -161,9 +163,12 @@ function exec_traiter_office () {
 				if (preg_match(",<base href=[\'\"]([^\'\"]*)[\'\"],", $texte_source, $preg)) {
 					$racine = $preg[1];
 				}
+				include_spip("inc/filtres_mini");
 				$texte_source = liens_absolus($texte_source, $racine);
 				
-				if (preg_match(",<meta [^>]*charset=([a-zA-Z0-9\-]*),", $texte_source, $preg )) {
+				
+	
+				if (preg_match(",<meta [^>]*charset=\"?([a-zA-Z0-9\-]*),", $texte_source, $preg )) {
 					$charset = strtolower($preg[1]);
 					
 					if ($charset != "utf-8") {
@@ -171,9 +176,9 @@ function exec_traiter_office () {
 						$texte_source = preg_replace(",<meta [^>]*charset=([a-zA-Z0-9\-]*)[^>]*>,", "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />", $texte_source);
 					}
 				}
+				
 				ecrire_fichier($fichier, $texte_source);
 			}
-
 
 
 			if (preg_match(",\/([^\/]+)$,", $fichier, $preg)) {
@@ -242,13 +247,14 @@ function exec_traiter_office () {
 			chdir($pwd);
 		}
 		else {
+		
 			exec("soffice");
 			exec("unoconv --format=html $nom_dest", $retour, $err);
 		}
 		
 		if (file_exists($nom_html)) {
 			$resultat = join(file($nom_html), "");
-
+			
 			if (preg_match(",<title[^\>]*>(.*)<\/title>,Uims", $resultat, $preg)) {
 				if (strlen(trim($preg[1])) > 0) {	
 					$titre = trim($preg[1]);
@@ -258,8 +264,18 @@ function exec_traiter_office () {
 			}
 			
 			if (preg_match(",<body[^\>]*>(.*)<\/body>,ims", $resultat, $preg)) {
+			
+				$texte = $preg[1];
+			
+				if ($GLOBALS["distant"]) {
+					include_spip("inc/Readability");
+					$r = new Readability($resultat);
+					$r->init();
+					$texte = $r->articleContent->innerHTML;
+				}
+			
 				include_spip("inc/fonctionsale");
-				$texte = sale($preg[1]);
+				$texte = sale($texte);
 				
 				include_spip("base/abstract_sql");
 				$id_article = sql_insertq("spip_articles", array(
