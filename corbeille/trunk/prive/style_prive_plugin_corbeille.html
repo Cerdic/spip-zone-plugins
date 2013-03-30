@@ -1,4 +1,3 @@
-#CACHE{0}
 [(#REM)
 
 	Ce squelette definit les styles de l'espace prive
@@ -10,6 +9,7 @@
 
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
+	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -26,6 +26,5 @@
 .liste.corbeille-breves >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{breve-16}) no-repeat center left;}
 .liste.corbeille-messages >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{message-16}) no-repeat center left;}
 .liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
-.liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
 .liste.corbeille-sites >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{site-16}) no-repeat center left;}
-.liste.corbeille-signatures >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{signature-16}) no-repeat center left;}
+.liste.corbeille-signatures >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{petition-16}) no-repeat center left;}

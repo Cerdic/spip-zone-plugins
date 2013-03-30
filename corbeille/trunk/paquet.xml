@@ -1,9 +1,9 @@
 <paquet
 	prefix="corbeille"
 	categorie="maintenance"
-	version="3.0.1"
+	version="3.0.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/trash-full-32.png"
 	documentation="http://www.spip-contrib.net/Corbeille,2855"
 >	
@@ -12,7 +12,7 @@
 	<!-- Gestion des documents mis à la corbeille -->
 
 	<auteur lien="http://www.japanim.net/">Matthieu Onfray (Japanim)</auteur>
-	<auteur>adapté en plugin avec tendresse par la communauté</auteur>
+	<credit>adapté en plugin avec tendresse par la communauté</credit>
 
 	<copyright>2005-2008</copyright>
 

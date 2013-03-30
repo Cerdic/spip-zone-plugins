@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'petitions_toutes' => "Toutes les p&eacute;titions dans la corbeille :",
   
   // readme
-  'readme' => 'Cette page permet de {{supprimer d&eacute;finitivement}} tout document que vous avez jet&eacute; &agrave; la corbeille. Vous pouvez laisser un document dans la corbeille tant que vous le souhaitez. C\'est {{&agrave; vous}} de faire le m&eacute;nage.',
+  'readme' => 'Cette page permet de {{supprimer d&eacute;finitivement}} tout objet SPIP que vous avez mis &agrave; la poubelle. Vous pouvez laisser un objet SPIP dans la corbeille tant que vous le souhaitez. C\'est {{&agrave; vous}} de faire le m&eacute;nage.',
 
   // S
   'signe' => " a sign&eacute; via :",
