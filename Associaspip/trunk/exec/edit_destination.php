@@ -16,14 +16,16 @@ function exec_edit_destination() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_destination = association_passeparam_id('destination');
-		onglets_association('plan_comptable', 'association');
+		echo association_navigation_onglets('plan_comptable', 'association');
 		// INTRO :
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
 		echo association_totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'destination_comptable' => array('grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
+		) );
 		debut_cadre_association('euro-39.gif', 'destination_nav_ajouter');
 		echo recuperer_fond('prive/editer/editer_asso_destinations', array (
 			'id_destination' => $id_destination,

@@ -20,15 +20,17 @@ function exec_suppr_exercice() {
 }
 
 function exec_suppr_exercice_args($id_exercice, $exercice) {
-	include_spip ('inc/navigation_modules');
+	include_spip ('association_modules');
 
-	onglets_association('exercices_budgetaires_titre', 'association');
+	echo association_navigation_onglets('exercices_budgetaires_titre', 'association');
 	// info
 	$infos['exercice_entete_debut'] = association_formater_date($exercice['date_debut'], 'dtstart');
 	$infos['exercice_entete_fin'] = association_formater_date($exercice['date_fin'], 'dtend');
 	echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 	// datation et raccourcis
-	echo association_navigation_raccourcis(generer_url_ecrire('exercices'));
+	echo association_navigation_raccourcis(array(
+		'tous_les_exercices' => array('grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
+	) );
 	debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 	echo association_bloc_suppression('exercice', $id_exercice);
 	fin_page_association();

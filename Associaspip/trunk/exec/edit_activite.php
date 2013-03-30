@@ -16,10 +16,10 @@ function exec_edit_activite() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_activite = association_passeparam_id('activite');
 		$id_evenement = ($id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : association_recuperer_entier('id_evenement'));
-		onglets_association('titre_onglet_activite', 'activites');
+		echo association_navigation_onglets('titre_onglet_activite', 'activites');
 		if (test_plugin_actif('agenda')) {
 		// INTRO : Rappel Infos Evenement
 
@@ -31,7 +31,9 @@ function exec_edit_activite() {
 			echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		}
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('inscrits_activite',"id=$id_evenement"));
+		echo association_navigation_raccourcis(array(
+			'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+		) );
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
 		// formulaire
 		echo recuperer_fond('prive/editer/editer_asso_activites', array (

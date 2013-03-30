@@ -16,8 +16,8 @@ function exec_exercices() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/navigation_modules');
-		onglets_association('exercices_budgetaires_titre', 'association');
+		include_spip('association_modules');
+		echo association_navigation_onglets('exercices_budgetaires_titre', 'association');
 		// notice
 		echo '';
 		// quelques stats sur les exrcices
@@ -31,8 +31,11 @@ function exec_exercices() {
 		// finaly I use ODBC "TIMESTAMPDIFF()" that should be known by latest major rdbms...
 		///
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
-			'ajouter_un_exercice' => array('calculatrice.gif', array('edit_exercice'))
+		echo association_navigation_raccourcis(array(
+			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
+			'ajouter_un_exercice' => array('calculatrice.gif', array('edit_exercice'),array('gerer_compta', 'association') ),
+			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
+			'destination_comptable' => array('euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
 		echo association_bloc_listehtml2('asso_exercices',

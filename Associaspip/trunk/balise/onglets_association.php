@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/navigation_modules');
+include_spip('association_modules');
 
 function balise_ONGLETS_ASSOCIATION_dist ($p) {
 	return calculer_balise_dynamique($p, 'ONGLETS_ASSOCIATION', array());

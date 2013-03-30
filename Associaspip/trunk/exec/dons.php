@@ -16,7 +16,7 @@ function exec_dons() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_don = association_passeparam_id('don');
 		list($id_periode, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
 		if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
@@ -24,7 +24,7 @@ function exec_dons() {
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres :
  			$type = _request('type'); // type de don
 		}
-		onglets_association('titre_onglet_dons', 'dons');
+		echo association_navigation_onglets('titre_onglet_dons', 'dons');
 		// TOTAUX : nombre de dons selon leur nature
 		$liste_effectifs = array(
 			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  $critere_periode"),
@@ -42,9 +42,9 @@ function exec_dons() {
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
 		echo association_totauxinfos_montants($id_periode, $dons_financiers, $remboursements);
 		// datation et raccourcis
-		echo association_navigation_raccourcis('', array(
+		echo association_navigation_raccourcis(array(
 			'ajouter_un_don' => array('ajout-24.png', array('edit_don'), array('gerer_dons', 'association') ),
-		));
+		), 40);
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// FILTRES
 		$filtre_typedon = '<select name="type" onchange="form.submit()">';

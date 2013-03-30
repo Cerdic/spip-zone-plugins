@@ -16,8 +16,8 @@ function exec_association() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
-		onglets_association('', 'association');
+		include_spip ('association_modules');
+		echo association_navigation_onglets('', 'association');
 		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
@@ -27,15 +27,10 @@ function exec_association() {
 			'categories_de_cotisations' => array('cotisation.png', array('categories'), array('editer_profil', 'association')),
 			'gerer_les_autorisations' => array('annonce.gif', array('association_autorisations'), array('gerer_autorisations', 'association')),
 			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', array('destination'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : ''),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercices'), array('gerer_compta', 'association') ),
+			'destination_comptable' => array('euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
+			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
 		); // racourcis natifs
-		$modules_externes = pipeline('associaspip', array()); // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
-		foreach ( $modules_externes as $plugin=>$boutons ) {
-			if ( test_plugin_actif($plugin) )
-				$raccourcis_actifs[] = $boutons[1];
-		}
-		echo association_navigation_raccourcis('', $raccourcis_actifs);
+		echo association_navigation_raccourcis( $raccourcis_actifs, 20);
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		// Profil de l'association
 		echo debut_cadre_enfonce('', TRUE);

@@ -16,7 +16,7 @@ function exec_ventes() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_vente = association_passeparam_id('vente');
 		list($id_periode, $critere_periode) = association_passeparam_annee('vente', 'asso_ventes', $id_vente);
 		if ($id_vente) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
@@ -24,7 +24,7 @@ function exec_ventes() {
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
 			$etat = _request('etat'); // etat d'avancement de la commande
 		}
-		onglets_association('titre_onglet_ventes', 'ventes');
+		echo association_navigation_onglets('titre_onglet_ventes', 'ventes');
 		// TOTAUX : nombre de ventes selon etat de livraison
 		echo association_totauxinfos_effectifs('ventes', array(
 			'pair' => array( 'ventes_enregistrees', sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  $critere_periode"), ),
@@ -36,9 +36,9 @@ function exec_ventes() {
 		$data = sql_fetsel('SUM(prix_unitaire*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', $critere_periode);
 		echo association_totauxinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
-		echo association_navigation_raccourcis('', array(
+		echo association_navigation_raccourcis(array(
 			'ajouter_une_vente' => array('ajout-24.png', array('edit_vente'), array('gerer_ventes', 'association') ),
-		) );
+		), 50);
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
 		// FILTRES
 		$filtre_statut = '<select name="etat" onchange="form.submit()">';

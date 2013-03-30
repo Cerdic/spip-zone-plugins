@@ -20,8 +20,8 @@ function exec_suppr_categorie() {
 }
 
 function exec_suppr_categorie_args($id_categorie, $categorie) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('categories_de_cotisations', 'association');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('categories_de_cotisations', 'association');
 	// INTRO : resume ressource
 	$infos['entete_code'] = association_formater_code($categorie['valeur'], 'x-spip_asso_categories');
 	$infos['entete_duree'] = association_formater_duree($categorie['duree'], 'M');
@@ -29,7 +29,9 @@ function exec_suppr_categorie_args($id_categorie, $categorie) {
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 	echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 	// datation et raccourcis
-	echo association_navigation_raccourcis(generer_url_ecrire('categories'));
+	echo association_navigation_raccourcis(array(
+		'categories_de_cotisations' => array('grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association')),
+	) );
 	debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 	echo association_bloc_suppression('categorie', $id_categorie);
 	fin_page_association();

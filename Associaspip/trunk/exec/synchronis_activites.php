@@ -16,9 +16,9 @@ function exec_synchronis_activites() {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		include_spip('inc/navigation_modules');
+		include_spip('association_modules');
 		$id_evenement = association_passeparam_id('evenement');
-		onglets_association('synchroniser_asso_membres', 'activites');
+		echo association_navigation_onglets('synchroniser_asso_membres', 'activites');
 		// INTRO : Rappel Infos Evenement
 		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement") ;
 		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
@@ -47,7 +47,9 @@ function exec_synchronis_activites() {
 		// TOTAUX : nombres d'inscrits par reponse
 		echo association_totauxinfos_effectifs('inscriptions',  $reponses);
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('inscrits_activite', "id=$id_evenement"));
+		echo association_navigation_raccourcis(array(
+			'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+		) );
 		debut_cadre_association('reload-32.png', 'options_synchronisation');
 		echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (
 			'id_evenement' => $id_evenement,

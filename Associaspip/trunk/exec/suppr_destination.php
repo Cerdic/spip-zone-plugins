@@ -20,13 +20,15 @@ function exec_suppr_destination() {
 }
 
 function exec_suppr_destination_args($id_destination, $destination) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('plan_comptable', 'association');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('plan_comptable', 'association');
 	// INTRO :
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
 	echo association_totauxinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'destination_comptable' => array('grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
+	) );
 	debut_cadre_association('euro-39.gif', 'suppression_de_destination');
 	echo association_bloc_suppression('destination', $id_destination,'destination');
 	fin_page_association();

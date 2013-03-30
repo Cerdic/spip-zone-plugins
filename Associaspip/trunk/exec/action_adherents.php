@@ -29,11 +29,14 @@ function exec_action_adherents() {
 }
 
 function exec_action_adherents_args($id_auteurs, $action_adherents) {
-	onglets_association('titre_onglet_membres', 'adherents');
+	include_spip('association_modules');
+	echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 	// info
 	echo association_totauxinfos_intro(_T('asso:confirmation'));
 	// datation et raccourcis
-	echo association_navigation_raccourcis(generer_url_ecrire('adherents'));
+	echo association_navigation_raccourcis(array(
+		'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents'), array('voir_membres', 'association') ),
+	));
 	if ($action_adherents=='desactive') {
 		$statut_courant = _request('statut_courant');
 		if($statut_courant==='sorti') {

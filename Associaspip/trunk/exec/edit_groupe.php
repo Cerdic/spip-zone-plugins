@@ -21,9 +21,9 @@ function exec_edit_groupe() {
 			$r = array(0, array());
 		else  $r = association_controle_id('groupe', 'asso_groupes');
 		if ($r) {
-			include_spip ('inc/navigation_modules');
+			include_spip ('association_modules');
 			list($id_groupe, $groupe) = $r;
-			onglets_association('gestion_groupes', 'adherents');
+			echo association_navigation_onglets('gestion_groupes', 'adherents');
 			if ($groupe) {
 				$infos = sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe");
 				$infos = array('entete_utilise' => _T('asso:nombre_fois', array('nombre'=> $infos)));
@@ -31,7 +31,9 @@ function exec_edit_groupe() {
 				$titre = 'titre_editer_groupe';
 			} else  $titre = 'titre_creer_groupe';
 			// datation et raccourcis
-			echo association_navigation_raccourcis(generer_url_ecrire('groupes'));
+			echo association_navigation_raccourcis(array(
+				'tous_les_groupes' => array('annonce.gif', array('groupes', "id=$id_groupe"), array('voir_groupes', 'association') ),
+			) );
 			debut_cadre_association('annonce.gif', $titre);
 			echo recuperer_fond('prive/editer/editer_asso_groupes',
 					array ('id' => $id_groupe));

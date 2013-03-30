@@ -20,13 +20,15 @@ function exec_edit_groupe_autorisations() {
 }
 
 function exec_edit_groupe_autorisations_args($id_groupe, $groupe) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('gerer_les_autorisations', 'association');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('gerer_les_autorisations', 'association');
 	// INFO
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 	echo association_totauxinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis(generer_url_ecrire('association_autorisations'));
+	echo association_navigation_raccourcis(array(
+		'les_groupes_dacces' => array('annonce.gif', array('association_autorisations', "id=$id_groupe"), array('voir_groupes', 'association') ),
+	) );
 	debut_cadre_association('annonce.gif', 'titre_editer_groupe');
 	echo recuperer_fond('prive/editer/editer_asso_groupes', array (
 		'id' => $id_groupe

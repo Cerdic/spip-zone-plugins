@@ -17,26 +17,27 @@ function exec_compte_bilan() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/navigation_modules');
+		include_spip('association_modules');
 		include_spip('inc/association_comptabilite');
 		$ids = association_passeparam_compta();
-		onglets_association('titre_onglet_comptes', 'comptes');
+		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
 		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
+		echo association_navigation_raccourcis(array(
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
 			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
-		));
+		), 12);
 		if(autoriser('voir_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_impression')
-				echo icone1_association('PDF', generer_action_auteur('pdf_comptesbilan', 0), 'print-24.png');
+				echo association_navigation_raccourci1('PDF', generer_action_auteur('pdf_comptesbilan', 0), 'print-24.png');
 			}
 			export_compte($ids, 'bilan');
 			echo fin_cadre_enfonce(TRUE);

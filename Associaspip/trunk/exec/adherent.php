@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_adherent() {
-	include_spip('inc/navigation_modules');
+	include_spip('association_modules');
 	include_spip('inc/adherent');
 	$id_auteur = association_passeparam_id('auteur');
 	$full = autoriser('editer_membres', 'association');
@@ -38,7 +38,7 @@ function exec_adherent() {
 			default :
 				$statut='visiteur'; break;
 		}
-		onglets_association('titre_onglet_membres', 'adherents');
+		echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 		// INFOS
 		if ($full) {
 			$infos['adherent_libelle_categorie'] = $categorie;
@@ -65,7 +65,7 @@ function exec_adherent() {
 			$raccourcis['adherent_label_ajouter_cotisation'] = array('cotis-12.gif', array('ajout_cotisation', "id_auteur=$id_auteur"), array('ajouter_cotisation', 'association', $id_auteur) );
 		if ($GLOBALS['association_metas']['pc_dons'])
 			$raccourcis['ajouter_un_don'] = array('ajout-24.png', array('edit_don', "id_auteur=$id_auteur"), array('editer_dons', 'association', $id_auteur) );
-		echo association_navigation_raccourcis('', $raccourcis);
+		echo association_navigation_raccourcis( $raccourcis, 33);
 		debut_cadre_association('annonce.gif', 'membre');
 		if ( autoriser('voir_groupes', 'association') )
 			echo propre($data['commentaire']);

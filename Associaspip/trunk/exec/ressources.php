@@ -16,7 +16,7 @@ function exec_ressources() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/navigation_modules');
+		include_spip('association_modules');
 		$id_ressource = association_passeparam_id('ressource');
 		if ($id_ressource) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$statut = $type = '';
@@ -24,7 +24,7 @@ function exec_ressources() {
  			$statut = _request('statut'); // statut de la ressource
  			$type = _request('type'); // identifiant du type (categorie) de ressource
 		}
-		onglets_association('titre_onglet_prets', 'ressources');
+		echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 		// INTRO : presentation du module
 		echo "\n<p>"._T('asso:ressources_info')."</p>\n";
 		// preparation des listes associees aux statuts
@@ -81,9 +81,9 @@ function exec_ressources() {
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
-		echo association_navigation_raccourcis('', array(
-			'ressources_nav_ajouter' => array('ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association'), ),
-		) );
+		echo association_navigation_raccourcis(array(
+			'ressources_nav_ajouter' => array('ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association') ),
+		), 60);
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');
 		// Filtres
 		$filtre = '';

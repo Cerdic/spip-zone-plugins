@@ -20,8 +20,8 @@ function exec_membres_groupe() {
 }
 function exec_membres_groupe_args($id_groupe, $groupe) {
 
-	include_spip ('inc/navigation_modules');
-	onglets_association(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>=100?'adherents':'association') );
+	include_spip ('association_modules');
+	echo association_navigation_onglets(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>=100?'adherents':'association') );
 	// INFO
 	if ($id_groupe>=100) {
 		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
@@ -30,9 +30,9 @@ function exec_membres_groupe_args($id_groupe, $groupe) {
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
 	echo '<div class="vcard">'. association_totauxinfos_intro( '<div class="org" id="vcard-group'.$groupe['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr><abbr class="organization-unit" title="'.$groupe['nom'] .'">'. (($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom']) .'</abbr></div>', 'groupe', $id_groupe, $infos ) .'</div>';
 	// datation et raccourcis
-	echo association_navigation_raccourcis('', array(
+	echo association_navigation_raccourcis(array(
 		'editer_groupe' => array('edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ) ),
-	) );
+	), 01);
 	debut_cadre_association('annonce.gif', 'groupe_membres');
 	echo recuperer_fond('modeles/membres_groupe', array(
 		'id_groupe' => $id_groupe

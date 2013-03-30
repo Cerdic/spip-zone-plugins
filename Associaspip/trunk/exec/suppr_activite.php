@@ -20,8 +20,8 @@ function exec_suppr_activite() {
 }
 
 function exec_suppr_activite_args($id_activite, $activite) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('titre_onglet_activite', 'activites');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('titre_onglet_activite', 'activites');
 	// INTRO : Rappel Infos Evenement & Participant
 	$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement='.$activite['id_evenement']);
 	$infos['evenement'] = $evenement['titre'];
@@ -37,7 +37,9 @@ function exec_suppr_activite_args($id_activite, $activite) {
 	$infos['entete_montant'] = association_formater_prix($activite['prix_unitaire'], 'fees');
 	association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+	) );
 	debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 	echo association_bloc_suppression('activite', $id_activite);
 	fin_page_association();

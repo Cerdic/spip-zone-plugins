@@ -14,6 +14,24 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/presentation'); // utilise par "onglet1_association" (pour "onglet") puis aussi dans les pages appelantes
 include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le test "autoriser") puis aussi dans les pages appelantes
 
+
+
+/*****************************************
+ * @defgroup association_navigation
+ * Affichage HTML : boutons de navigation intra/inter-modules
+ *
+ * @return string $res
+ *   code HTML du bouton et autres elements connexes
+ * @ note
+ *   Ces elements destines a l'affichage des modules sont dans un fichier separe
+ * qui sera autonome quand il ne fera plus appel a aucune fonction de association_options.php (association_langue association_date_du_jour)
+ * @note
+ *   Les anciens appels de procedure doivent etre remplace par des appel de fonction :
+ * icone1_association : association_navigation_raccourci1
+ * onglets_association : echo association_navigation_onglets
+ * raccourcis_association : echo association_navigation_raccourcis
+** @{ */
+
 /**
  * Afficher le titre de la/le page/module courante puis (en dessous) les onglets
  * des differents modules actives dans la configuration
@@ -25,7 +43,7 @@ include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le tes
  * @param bool $INSERT_HEAD
  *   Indique s'il s'agit d'une page exec classique en PHP (vrai, par defaut) ou
  *   en HTML (faux, alors) a compiler par SPIP (cas des balises) ou par le dev
- * @return $res
+ * @return string $res
  *   Debut de la page HTML de l'espace prive
  */
 function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
@@ -74,36 +92,36 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 }
 
 /**
- * @see association_navigation_onglets
- */
-function onglets_association($titre='', $top_exec='', $INSERT_HEAD=TRUE) {
-	echo association_navigation_onglets($titre, $top_exec, $INSERT_HEAD);
-}
-
-/**
  * Bloc de raccourci(s)
  *
- * @param string $retour
- *     URL de retour
  * @param array $raccourcis
  *   Tableau des raccourcis definis chacun sous la forme :
  *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
  *   toutefois si le 2e element est une chaine, on la prend comme URL
- * @return void
+ * @param string $identifiant
+ *   Identifiant interne de la liste de raccourcis
+ * (attention, les entiers sont reserves a usage interne !
+ * les modules doivent utiliser une chaine alphabetique !)
+ * @return string $res
+ *   Bloc HTML du tableau des raccourcis precede de la fermeture du bloc infos (qui precede toujours dans ce plugin)
  */
-function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
+function association_navigation_raccourcis($raccourcis=array(), $identifiant='') {
 	$res = ''; // initialisation
+	if ($identifiant) { // bloc identifie = extensible
+		$modules_externes = pipeline('associaspip', array()); // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
+		foreach ( $modules_externes as $plugin=>$boutons ) {
+			if ( test_plugin_actif($plugin) )
+				$raccourcis[] = $boutons[$identifiant];
+		}
+	}
 	foreach($raccourcis as $titre => $params) {
 		list($image, $url, $aut) = $params;
 		if ( association_acces($aut) ) { // generation du raccourci
 			if (is_array($url))
 				$url = generer_url_ecrire($url[0],$url[1]);
-			$res .= icone1_association($titre, $url, $image);
+			$res .= association_navigation_raccourci1($titre, $url, $image);
 		}
 	}
-
-	if ($retour)
-		$res .= icone1_association('asso:bouton_retour', $retour, 'retour-24.png');
 
 	return association_date_du_jour()
 	. fin_boite_info(TRUE)
@@ -122,12 +140,17 @@ function association_navigation_raccourcis($retour='',  $raccourcis=array()) {
  * @return string
  *   HTML du raccourci (icone+texte+lien)
  */
-function icone1_association($texte, $lien, $image) {
+function association_navigation_raccourci1($texte, $lien, $image) {
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative
 	return icone_horizontale(association_langue($texte), $lien, $chemin, 'rien.gif', FALSE); // http://doc.spip.org/@icone_horizontale
 }
+
+/** @} */
+
+
+// Procedures de mise en page des modules
 
 /**
  * Finition propre des pages privee du plugin

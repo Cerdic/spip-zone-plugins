@@ -20,8 +20,8 @@ function exec_suppr_plan() {
 }
 
 function exec_suppr_plan_args($id_plan, $plan) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('plan_comptable', 'association');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('plan_comptable', 'association');
 	// info
 	$infos['entete_code'] = $plan['code'];
 	$infos['solde_initial'] = association_formater_prix($plan['solde_anterieur']);
@@ -29,7 +29,9 @@ function exec_suppr_plan_args($id_plan, $plan) {
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
 	echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'plan_comptable' => array('grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
+	) );
 	debut_cadre_association('plan_compte.png', 'suppression_de_compte');
 	echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
 	fin_page_association();

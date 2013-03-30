@@ -13,7 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function exec_activites() {
 	if (!autoriser('voir_activites', 'association')
-	OR !test_plugin_actif('AGENDA')) {
+	OR !test_plugin_actif('AGENDA')
+	OR !test_plugin_actif('SIMPLECAL') ) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -22,7 +23,7 @@ function exec_activites() {
 }
 
 function exec_activites_args($id_evenement) {
-		include_spip ('inc/navigation_modules');
+	include_spip ('association_modules');
 	list($id_periode, $critere_periode) = association_passeparam_periode('debut', 'evenement', $id_evenement);
 	if ($id_evenement) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 		$id_mot = $incription = '';
@@ -30,7 +31,7 @@ function exec_activites_args($id_evenement) {
 		$id_mot = association_recuperer_entier('mot'); // id du mot cle
 		$inscription = _request('inscription');
 	}
-	onglets_association('titre_onglet_activite', 'activites');
+	echo association_navigation_onglets('titre_onglet_activite', 'activites');
 	// TOTAUX : nombre d'activites de la periode en cours selon iscriptions
 	$avec_inscrits = sql_countsel('spip_asso_activites', sql_in_select('id_evenement', 'id_evenement', 'spip_evenements', $critere_periode), 'id_evenement');
 	echo association_totauxinfos_effectifs('activites', array(
@@ -43,13 +44,13 @@ function exec_activites_args($id_evenement) {
 	echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 	// datation et raccourci vers la gestion des evenements
 	if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
-		echo association_navigation_raccourcis('', array(
-								 'evenements' => array('simplecal-logo-16.png', array('evenement_tous')),
-		) );
+		echo association_navigation_raccourcis(array(
+			'evenements' => array('simplecal-logo-16.png', array('evenement_tous'), array('menu', 'evenements') ),
+		), 70);
 	} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
-		echo association_navigation_raccourcis('', array(
-								 'evenements' => array('agenda-evenements-16.png', array('agenda_evenements')),
-		) );
+		echo association_navigation_raccourcis(array(
+			'evenements' => array('agenda-evenements-16.png', array('agenda_evenements'), array('menu', 'evenements'), ),
+		), 70);
 	} else { // pas de bloc de raccourcis
 		echo association_date_du_jour();
 		echo fin_boite_info(TRUE);

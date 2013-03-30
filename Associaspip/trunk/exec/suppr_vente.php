@@ -20,8 +20,8 @@ function exec_suppr_vente() {
 }
 
 function exec_suppr_vente_args($id_vente, $vente) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('titre_onglet_ventes', 'ventes');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('titre_onglet_ventes', 'ventes');
 	// info
 	$infos['ventes_entete_date_vente'] = association_formater_date($vente['date_vente'],'dtstart');
 	$infos['ventes_entete_date_envoi'] = association_formater_date($vente['date_envoi'],'dtend');
@@ -33,7 +33,9 @@ function exec_suppr_vente_args($id_vente, $vente) {
 	$infos['entete_commentaire'] = $vente['commentaire'];
 	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'titre_onglet_ventes' => array('grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
+	) );
 	debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
 	echo association_bloc_suppression('vente', $id_vente);
 	fin_page_association();

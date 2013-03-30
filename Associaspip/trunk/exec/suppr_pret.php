@@ -20,8 +20,8 @@ function exec_suppr_pret() {
 }
 
 function exec_suppr_pret_args($id_pret, $pret) {
-	include_spip ('inc/navigation_modules');
-	onglets_association('titre_onglet_prets', 'ressources');
+	include_spip ('association_modules');
+	echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 	$ressource = sql_fetsel('*', 'spip_asso_ressources', 'id_ressource='.$pret['id_ressource'] ) ;
 	$infos['entete_article'] = $ressource['intitule'];
 	$infos['entete_nom'] = association_formater_idnom($pret['id_auteur'], array(), 'membre');
@@ -30,7 +30,9 @@ function exec_suppr_pret_args($id_pret, $pret) {
 	$infos['entete_montant'] = association_formater_prix($pret['prix_unitaire']*$pret['duree'], 'fees');
 	echo association_totauxinfos_intro('', 'pret', $id_pret, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'prets_titre_liste_reservations' => array('grille-24.png', array('prets', "id=$pret[id_ressource]"), array('voir_prets', 'association') ),
+		) );
 	debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
 	echo association_bloc_suppression('pret', "$id_pret-$pret[id_ressource]");
 	fin_page_association();

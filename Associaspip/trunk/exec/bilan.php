@@ -17,24 +17,25 @@ function exec_bilan() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		include_spip ('inc/association_comptabilite');
 		$plan = sql_countsel('spip_asso_plan');
 		$ids = association_passeparam_compta();
 		if ( !($ids_destinations = _request('destinations')) ) // recuperer l'id_destination de la ou des destinations
 			$ids_destinations = array(0); // ...ou creer une entree a 0 dans le tableau
 		include_spip('inc/association_comptabilite');
-		onglets_association('titre_onglet_comptes', 'comptes');
+		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
 		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('comptes', "$ids[type_periode]=$ids[id_periode]"), array(
+		echo association_navigation_raccourcis(array(
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]") ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]") ),
 			'encaisse' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
-		));
+		), 12);
 		// on cree les intitule de toutes les destinations dans un tableau
 		$intitule_destinations = array();
 		$destinations = sql_allfetsel('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule'); // on recupere tout dans un tableau : il ne devrait pas y en avoir des masses...

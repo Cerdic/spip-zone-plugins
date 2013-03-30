@@ -30,7 +30,6 @@ function action_pdf_fiscal() {
 	if (!test_plugin_actif('fpdf')) return;
 	list(,$id_auteur, $annee) = $r;
 	$mbr_qui = sql_fetsel('*', 'spip_asso_membres', "id_auteur=$id_auteur");
-	include_spip('inc/navigation_modules');
         include_spip('pdf/fpdi_pdf_parser');
         include_spip('fpdf');
         include_spip('pdf/fpdf_tpl');

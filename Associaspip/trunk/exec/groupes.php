@@ -16,14 +16,15 @@ function exec_groupes() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
-		onglets_association('gestion_groupes', 'adherents');
+		include_spip ('association_modules');
+		echo association_navigation_onglets('gestion_groupes', 'adherents');
 		// notice
 		echo _T('asso:aide_groupes');
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('adherents'), array(
-		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'))
-		));
+		echo association_navigation_raccourcis(array(
+		      'adherent_titre_liste_actifs' => array('annonce.gif', array('adherents'), array('voir_membres', 'association') ),
+		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'), array('voir_groupes', 'association') )
+		), 02);
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau
 		echo association_bloc_listehtml2('asso_groupes',

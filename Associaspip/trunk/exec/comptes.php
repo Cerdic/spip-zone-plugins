@@ -16,7 +16,7 @@ function exec_comptes() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 // initialisations
 		$vu = _request('vu');
 		if (!is_numeric($vu))
@@ -30,7 +30,7 @@ function exec_comptes() {
 		$where = 'imputation LIKE '. sql_quote($imputation);
 		$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
 		$where .= " AND $critere_periode";
-		onglets_association('titre_onglet_comptes', 'comptes');
+		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', $critere_periode, "intitule DESC"); // on se permet sql_allfetsel car il s'agit d'une association (mois d'une demie dizaine de comptes) et non d'un etablissement financier (des milliers de comptes clients)
 		// TOTAUX : operations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
 		foreach (array('recette','depense') as $direction) {
@@ -56,13 +56,13 @@ function exec_comptes() {
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']), 'code'); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
-		echo association_navigation_raccourcis('', array(
+		echo association_navigation_raccourcis(array(
 			'encaisse_titre_general' => array('finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
 			'ajouter_une_operation' => array('ajout-24.png', array('edit_compte')),
-		) );
+		), 10);
 		debut_cadre_association('finances-24.png', 'informations_comptables');
 		// FILTRES
 		$filtre_imputation = '<select name="imputation" onchange="form.submit()">';

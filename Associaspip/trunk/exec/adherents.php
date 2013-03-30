@@ -12,14 +12,14 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_adherents() {
-	if (!autoriser('voir_membres', 'association', 0)) {  // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation sur voir_membres car on les consulte tous
+	if (!autoriser('voir_membres', 'association', 0)) {  // on s'assure qu'il n'y ai pas d'id associe a la demande d'autorisation ici car on les consulte tous
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip('inc/navigation_modules');
+		include_spip('association_modules');
 		list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 		$lettre = _request('lettre');
-		onglets_association('titre_onglet_membres', 'adherents');
+		echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 		// TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
@@ -54,11 +54,11 @@ function exec_adherents() {
 		}
 
 		// datation et raccourcis
-		echo association_navigation_raccourcis('', array(
+		echo association_navigation_raccourcis(array(
 			'gerer_les_groupes' => array('annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes utilisateurs et non les autorisations qu'on liste
 			'menu2_titre_mailing' => array('mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
 			'synchronise_asso_membre_lien' => array('reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
-		));
+		), 30);
 
 		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
 		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe);

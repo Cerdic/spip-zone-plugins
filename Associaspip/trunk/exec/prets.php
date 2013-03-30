@@ -16,7 +16,7 @@ function exec_prets() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		exec_prets_args(association_recuperer_entier('id_pret'));
 	}
 }
@@ -33,7 +33,7 @@ function exec_prets_args($id_pret) {
 		list($id_ressource, $ressource) = $r;
 		$statut = association_passeparam_statut(); // etat de restitution du pret
 	}
-	onglets_association('titre_onglet_prets', 'ressources');
+	echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 	$where = "id_ressource=$id_ressource AND $critere_periode";
 	prets_gauche($id_ressource, $ressource, $where);
 	echo "</div></div>\n";
@@ -92,7 +92,10 @@ function prets_gauche($id_ressource, $ressource, $where) {
 	// datation et raccourcis
 
 	if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
-			echo association_navigation_raccourcis(generer_url_ecrire('ressources'), array('prets_nav_ajouter' => array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret="), array('gerer_prets', 'association'))));
+			echo association_navigation_raccourcis(array(
+				'titre_onglet_prets' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association'))
+				'prets_nav_ajouter' => array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association'))
+			), 64);
 }
 
 function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unite)
@@ -112,9 +115,9 @@ function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unit
 		'periode' => array($id_periode, 'asso_prets', 'sortie')),
 				      'prets', array(
 // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
-			'' => "<input type='hidden' name='id' value='$id_ressource' />", 
+			'' => "<input type='hidden' name='id' value='$id_ressource' />",
 			'statut' => $filtre_statut,
-			)); 
+			));
 	// TABLEAU
 	switch ($statut) {
 			case 'retour' :
@@ -145,4 +148,5 @@ function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unit
 		);
 	echo association_selectionner_souspage(array('spip_asso_prets', $where), 'prets', "id=$id_ressource&".($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($statut?"&statut='$statut'":'') );
 }
+
 ?>

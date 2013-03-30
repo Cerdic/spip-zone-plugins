@@ -16,14 +16,16 @@ function exec_edit_categorie() {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_categorie = association_passeparam_id('categorie');
-		onglets_association('categories_de_cotisations', 'association');
+		echo association_navigation_onglets('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$infos['entete_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
 		echo association_totauxinfos_intro('', 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'categories_de_cotisations' => array('grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association') ),
+		) );
 		debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 		echo recuperer_fond('prive/editer/editer_asso_categories', array (
 			'id_categorie' => $id_categorie

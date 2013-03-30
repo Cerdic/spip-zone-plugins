@@ -20,8 +20,8 @@ function exec_ajout_cotisation() {
 }
 
 function exec_ajout_cotisation_args($id_auteur, $membre) {
-	include_spip('inc/navigation_modules');
-	onglets_association('titre_onglet_membres', 'adherents');
+	include_spip('association_modules');
+	echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 	// info : membre et categorie par defaut
 	$categorie = sql_fetsel('*', 'spip_asso_categories', 'id_categorie='. intval($membre['id_categorie']));
 	$infos['adherent_libelle_categorie'] = $categorie['libelle'];
@@ -29,9 +29,9 @@ function exec_ajout_cotisation_args($id_auteur, $membre) {
 	$infos['adherent_libelle_validite'] = association_formater_date($membre['date_validite'], 'dtend');
 	echo association_totauxinfos_intro(htmlspecialchars(association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'])), 'membre', $id_auteur, $infos );
 	// datation et raccourcis
-	echo association_navigation_raccourcis('', array(
+	echo association_navigation_raccourcis(array(
 		'voir_adherent' => array('edit-24.gif', array('adherent', "id=$id_auteur") ),
-	));
+	) );
 	debut_cadre_association('annonce.gif', 'cotisation');
 	echo recuperer_fond('prive/editer/ajouter_cotisation', array (
 		'id_auteur' => $id_auteur,

@@ -16,14 +16,17 @@ function exec_destination() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
-		onglets_association('plan_comptable', 'association');
+		include_spip ('association_modules');
+		echo association_navigation_onglets('plan_comptable', 'association');
 		// notice
 		echo propre(_T('asso:destination_info'));
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
+		echo association_navigation_raccourcis(array(
+			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
 			'destination_nav_ajouter' => array('euro-39.gif', array('edit_destination')),
-		));
+			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
+			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
+		) );
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table
 		echo association_bloc_listehtml2('asso_destination',

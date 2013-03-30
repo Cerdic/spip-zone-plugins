@@ -20,9 +20,9 @@ function exec_suppr_don() {
 }
 
 function exec_suppr_don_args($id_don, $don) {
-	include_spip ('inc/navigation_modules');
+	include_spip ('association_modules');
 
-	onglets_association('titre_onglet_dons', 'dons');
+	echo association_navigation_onglets('titre_onglet_dons', 'dons');
 	// info
 	$infos['entete_date'] = association_formater_date($don['date_don'], '');
 	$infos['entete_nom'] = association_formater_idnom($don['id_auteur'], $don['nom'], 'membre');
@@ -32,7 +32,9 @@ function exec_suppr_don_args($id_don, $don) {
 	$infos['entete_commentaire'] = $don['commentaire'];
 	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'don', $id_don, $infos ) .'</div>';
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'tous_les_dons' => array('grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
+	) );
 	debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
 	echo association_bloc_suppression('don', $id_don);
 	fin_page_association();

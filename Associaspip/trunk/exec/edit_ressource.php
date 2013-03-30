@@ -16,14 +16,16 @@ function exec_edit_ressource() {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
-		onglets_association('titre_onglet_prets', 'ressources');
+		include_spip ('association_modules');
+		echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 		$id_ressource = association_passeparam_id('ressource');
 		// INTRO : resume ressource
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'titre_onglet_prets' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
+		) );
 		debut_cadre_association('pret-24.gif', 'ressources_titre_edition_ressources');
 		echo recuperer_fond('prive/editer/editer_asso_ressources', array (
 			'id_ressource' => $id_ressource

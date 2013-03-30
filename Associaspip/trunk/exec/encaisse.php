@@ -11,18 +11,17 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip ('inc/navigation_modules');
-
 function exec_encaisse() {
 	if (!autoriser('voir_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
+		include_spip('association_modules');
 // initialisations
 		$plan = sql_countsel('spip_asso_plan');
 		$id_exercice = association_passeparam_exercice();
 // traitements
-		onglets_association('titre_onglet_comptes', 'comptes');
+		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
 		echo association_totauxinfos_intro('encaisse', '');
 		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
@@ -31,11 +30,12 @@ function exec_encaisse() {
 			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date_operation>='. sql_quote($financier['date_anterieure']) .' AND date_operation<=NOW()');
 		}
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('comptes', "exercice=$id_exercice"), array(
+		echo association_navigation_raccourcis(array(
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
 			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
 #			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
-		));
+		), 15);
 		debut_cadre_association('finances-24.png', 'encaisse');
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher
 		// Recuperer les comptes financiers avec toutes les informations dont on aura besoin

@@ -16,13 +16,15 @@ function exec_edit_compte() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_compte = association_passeparam_id('compte');
-		onglets_association('titre_onglet_comptes', 'comptes');
+		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : resume compte
 		echo association_totauxinfos_intro('', 'compte', $id_compte);
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'informations_comptables' => array('grille-24.png', array('comptes', "id=$id_compte"), array('gerer_compta', 'association') ),
+		) );
 		debut_cadre_association('compts.gif', 'modification_des_comptes');
 		echo recuperer_fond('prive/editer/editer_asso_comptes', array (
 			'id_compte' => $id_compte

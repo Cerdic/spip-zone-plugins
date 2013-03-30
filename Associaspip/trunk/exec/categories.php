@@ -16,16 +16,17 @@ function exec_categories() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
-		onglets_association('categories_de_cotisations', 'association');
+		include_spip ('association_modules');
+		echo association_navigation_onglets('categories_de_cotisations', 'association');
 		// notice
 		echo '';
 		// quelques stats sur les categories
 		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
 		// datation et raccourcis
-		echo association_navigation_raccourcis(generer_url_ecrire('association'), array(
-			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', array('edit_categorie'))
-		));
+		echo association_navigation_raccourcis(array(
+			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
+			'ajouter_une_categorie_de_cotisation' => array('cotisation.png', array('edit_categorie'), array('editer_profil', 'association') ),
+		) );
 		debut_cadre_association('cotisation.png', 'toutes_categories_de_cotisations');
 		echo association_bloc_listehtml2('asso_categories',
 			sql_select('*', 'spip_asso_categories', '', 'id_categorie'),

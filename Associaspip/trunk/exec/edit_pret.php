@@ -16,9 +16,9 @@ function exec_edit_pret() {
 			include_spip('inc/minipres');
 			echo minipres();
 	} else {
-		include_spip ('inc/navigation_modules');
+		include_spip ('association_modules');
 		$id_pret = association_passeparam_id('pret');
-		onglets_association('titre_onglet_prets', 'ressources');
+		echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 		if ($id_pret) { // modifier
 			$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret");
 		} else { // ajouter
@@ -28,7 +28,9 @@ function exec_edit_pret() {
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
-		echo association_navigation_raccourcis('');
+		echo association_navigation_raccourcis(array(
+			'prets_titre_liste_reservations' => array('grille-24.png', array('prets', "id=$id_ressource"), array('voir_prets', 'association') ),
+		) );
 		debut_cadre_association(($id_pret?'edit-12.gif':'creer-12.gif'), 'prets_titre_edition_prets');
 		echo recuperer_fond('prive/editer/editer_asso_prets', array (
 			'id_ressource' => $id_ressource,

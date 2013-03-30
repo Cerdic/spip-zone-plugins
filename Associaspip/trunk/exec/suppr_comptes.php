@@ -20,12 +20,14 @@ function exec_suppr_comptes() {
 }
 
 function exec_suppr_comptes_args($id_compte, $row) {
-	include_spip('inc/navigation_modules');
-	onglets_association('titre_onglet_comptes', 'comptes');
+	include_spip('association_modules');
+	echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 	// info
 	echo _T('asso:confirmation');
 	// datation et raccourcis
-	echo association_navigation_raccourcis('');
+	echo association_navigation_raccourcis(array(
+		'informations_comptables' => array('grille-24.png', array('comptes', "id=$id_compte"), array('gerer_compta', 'association') ),
+	) );
 	debut_cadre_association('finances-32.jpg', 'operations_comptables');
 	echo '<p><strong>', _T('asso:vous_vous_appretez_a_effacer_la_ligne_de_compte'),  ' ', $id_compte, '</strong></p>';
 
