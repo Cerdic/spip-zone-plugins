@@ -1,5 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_delier_document' => 'Unlink this document from this article',
-	'bouton_forcer' => 'Force this document',
+	'bouton_enlever' => 'Enlever', # NEW
 	'bouton_parcourir' => 'Browse',
 	'bouton_recuperer_document' => 'Retrieve the document',
 	'bouton_supprimer' => 'Remove',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation_article' => 'You don\'t have the necessary rights to edit this article.',
 	'erreur_beforeunload' => 'You are uploading a document',
 	'erreur_conflit_secteur' => 'You can\'t create a template for the articles and the medias for the same main section',
+	'erreur_demander_validation_titre' => 'Vous avez demandé à modifier le titre or certains des médias ont déjà un titre personnalisé. Veuillez cocher la case ci dessous pour forcer la modification des titres.', # NEW
 	'erreur_diogene_multiple' => 'You can only have on template "wrap media" on this website',
 	'erreur_document_disparu' => 'The original document is no longer available. Below you can bring it back online, the original file was: @fichier@',
 	'erreur_document_existant' => 'A similar document is already present: @nom@.',
@@ -104,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_prepa' => 'Being prepared',
 	'info_statut_prop' => 'Proposed to publication',
 	'info_statut_publies' => 'Published',
-	
+
 	// L
 	'label_case_gerer_modifs_types' => 'Show the type change form',
 	'label_case_gerer_types' => 'Enable types management',
@@ -147,6 +149,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_plugin' => 'Update of the "Wrap Medias" plugins at the version @version@.',
 	'max_file_size' => 'The maximal file size is: ',
+	'media_propose_detail' => 'Le média "@titre@" est proposé à la publication
+	depuis', # NEW
+	'media_propose_sujet' => '[@nom_site_spip@] Propose : @titre@', # NEW
+	'media_propose_titre' => 'Média proposé
+	---------------', # NEW
+	'media_propose_url' => 'Vous êtes invité à venir le consulter. Il est disponible à l\'adresse :', # NEW
+	'media_publie_detail' => 'Le média "@titre@" vient d\'être publié par @connect_nom@.', # NEW
+	'media_publie_sujet' => '[@nom_site_spip@] PUBLIÉ : @titre@', # NEW
+	'media_publie_titre' => 'Média publié
+	--------------', # NEW
+	'media_valide_date' => 'Sous réserve de changement, ce média sera publié', # NEW
+	'media_valide_detail' => 'Le média "@titre@" a été validé par @connect_nom@.', # NEW
+	'media_valide_sujet' => '[@nom_site_spip@] VALIDÉ : @titre@', # NEW
+	'media_valide_titre' => 'Média validé
+	--------------', # NEW
+	'media_valide_url' => 'En attendant, il est visible à cette adresse temporaire :', # NEW
+	'message_aucun_media_attente' => 'Vous n\'avez aucun média en attente de publication.', # NEW
 	'message_delier_document' => 'This document is allready linked to an other object. So you can\'t delete it definitively. You only can unlink it from the current article.',
 	'message_doc_trad_indisponible' => 'No document is available in the original article.',
 	'message_document_original' => 'This article is the original version of:',
@@ -156,9 +175,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_info_media_publier' => 'Change its status in "@statut@" for it to be visible on the website.',
 	'message_info_media_statut' => 'This media is currently "@statut@".',
 	'message_medias_maj_nb' => '@nb@ media have been updated.',
-	'message_medias_maj_un' => '@nb@ media has been updated.',
 	'message_medias_maj_statut_nb' => 'The status of the selected media has been updated in "@statut@"',
 	'message_medias_maj_statut_un' => 'Its status has been updated in "@statut@"',
+	'message_medias_maj_un' => '@nb@ media has been updated.',
 	'message_navigateur_redirection' => 'Your browser will be redirected',
 	'message_notice_articles_prepa_nb' => 'You have @nb@ media being prepared.',
 	'message_notice_articles_prepa_un' => 'You have one media being prepared.',

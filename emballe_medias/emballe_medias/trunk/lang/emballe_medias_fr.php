@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_medias_prepas_auth_publier' => 'Les médias listés ci-dessous sont en cours de préparation, vous devez changer leur statut pour qu\'ils soient publiés en ligne.',
 	'explication_medias_props' => 'Les médias listés ci dessous sont proposés à la publication, vous devez attendre qu\'un administrateur change leur statut pour qu\'ils soient visibles sur le site.',
 	'explication_medias_props_auth_publier' => 'Les médias listés ci dessous sont proposés à la publication, vous devez changer leur statut pour qu\'ils soient publiés en ligne ou attendre qu\'un administrateur ne le fasse.',
-	'explication_traitement_lot_intro' => 'Pour traiter vos médias par lot, sélectionnez tout d\'abord les médias à modifier, puis complétez les champs du formulaire qui seront appliqués.', 
+	'explication_traitement_lot_intro' => 'Pour traiter vos médias par lot, sélectionnez tout d\'abord les médias à modifier, puis complétez les champs du formulaire qui seront appliqués.',
 	'extensions_audio' => 'Extensions Audio :',
 	'extensions_autorisees' => 'Extensions de fichiers autorisées',
 	'extensions_images' => 'Extensions Image :',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_prepa' => 'En préparation',
 	'info_statut_prop' => 'Proposés à la publication',
 	'info_statut_publies' => 'Publiés',
-	
+
 	// L
 	'label_case_gerer_modifs_types' => 'Afficher le formulaire de changement de type',
 	'label_case_gerer_types' => 'Activer la gestion des types',
@@ -173,9 +173,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_info_media_publier' => 'Changez son statut en "@statut@" pour qu\'il soit visible sur le site.',
 	'message_info_media_statut' => 'Ce média est actuellement "@statut@".',
 	'message_medias_maj_nb' => '@nb@ médias ont été mis à jour.',
-	'message_medias_maj_un' => '@nb@ média a été mis à jour.',
 	'message_medias_maj_statut_nb' => 'Le statut des médias sélectionnés a été mis à jour en "@statut@"',
 	'message_medias_maj_statut_un' => 'Son statut a été mis à jour en "@statut@"',
+	'message_medias_maj_un' => '@nb@ média a été mis à jour.',
 	'message_navigateur_redirection' => 'Votre navigateur va être redirigé.',
 	'message_notice_articles_prepa_nb' => 'Vous avez @nb@ médias en préparation.',
 	'message_notice_articles_prepa_un' => 'Vous avez un média en préparation.',
