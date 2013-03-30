@@ -1,5 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/em_spipmotion?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -14,6 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_encodage_pas_prevu' => 'This document won\'t be encoded.',
 	'info_previsu' => 'Preview',
+
+	// L
+	'lien_recharger_voir_player' => 'Recharger le lecteur', # NEW
 
 	// M
 	'message_document_attente_encodage' => 'This document is in the encoding queue.',

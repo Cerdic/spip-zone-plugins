@@ -1,5 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias_spipmotion/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -15,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_recharger_voir_player' => 'Recharger le lecteur',
-	
+
 	// M
 	'message_document_attente_encodage' => 'Ce document est dans la file d\'attente d\'encodage.',
 	'message_document_encours_encodage' => 'Ce document est en cours d\'encodage.',
