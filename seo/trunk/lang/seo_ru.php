@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url_activate' => 'Включить канонические URL', # MODIF
 
 	// F
-	'forcer_squelette_descriptif' => 'Мета теги, заданные в плагине, имеют больший приоритет, чем теги, указанные в шаблонах.',
+	'forcer_squelette_descriptif' => 'Мета теги, заданные в плагине, имеют больший приоритет, чем теги, указанные в шаблонах.', # MODIF
 	'forcer_squelette_label' => 'Подключать мета теги во все шаблоны',
 
 	// G
@@ -54,10 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_sommaire_value' => 'Значение Meta главной страницы',
 	'meta_tags' => 'Mета Теги',
 	'meta_tags_activate' => 'Включить', # MODIF
-	'meta_tags_default' => 'Сгенерировать Mета Теги по умолчанию (для статей и разделов)',
+	'meta_tags_default' => 'Сгенерировать Mета Теги по умолчанию (для статей и разделов)', # MODIF
 	'meta_tags_edit_activate' => 'Включить возможность редактирования мета тегов для разделов и статей',
-	'meta_tags_editing' => 'Редактирование мета-тегов',
-	'meta_tags_sommaire' => 'Мета теги главной страницы',
+	'meta_tags_editing' => 'Редактирование мета-тегов', # MODIF
+	'meta_tags_sommaire' => 'Мета теги главной страницы', # MODIF
 	'meta_title' => 'Title :',
 
 	// S

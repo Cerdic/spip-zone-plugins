@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries', # MODIF
 
 	// F
-	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred hlavičkami meta, ktoré vygenerujú šablóny',
+	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred hlavičkami meta, ktoré vygenerujú šablóny', # MODIF
 	'forcer_squelette_label' => 'Nahrať hlavičky meta pre všetky šablóny',
 
 	// G
@@ -54,10 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_sommaire_value' => 'Hodnota tagu Zhrnutie',
 	'meta_tags' => 'Meta tagy',
 	'meta_tags_activate' => 'Aktivovať meta tagy', # MODIF
-	'meta_tags_default' => 'Predvolená hodnota meta tagov (pre články a rubriky)',
+	'meta_tags_default' => 'Predvolená hodnota meta tagov (pre články a rubriky)', # MODIF
 	'meta_tags_edit_activate' => 'Aktivovať úpravu meta tagov v rubrikách a článkoch',
-	'meta_tags_editing' => 'Úprava meta tagov',
-	'meta_tags_sommaire' => 'Hodnota meta tagov zhrnutia (úvodná stránka)',
+	'meta_tags_editing' => 'Úprava meta tagov', # MODIF
+	'meta_tags_sommaire' => 'Hodnota meta tagov zhrnutia (úvodná stránka)', # MODIF
 	'meta_title' => 'Nadpis:',
 
 	// S

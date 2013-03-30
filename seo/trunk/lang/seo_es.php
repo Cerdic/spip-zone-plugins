@@ -18,46 +18,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bing_webmaster' => 'Herramientas para administradores web de Bing (Bing Webmaster Tools)',
 	'bing_webmaster_activate' => 'Activar Herramientas para administradores web de Bing (Bing Webmaster Tools)',
-	'bing_webmaster_id' => 'Meta code de vérification', # NEW
+	'bing_webmaster_id' => 'Metacódigo de verificación',
 
 	// C
-	'canonical_url' => 'URL Canoniques', # NEW
-	'canonical_url_activate' => 'Activer la meta d\'URL Canoniques', # NEW
+	'canonical_url' => 'URL Canónicas',
+	'canonical_url_activate' => 'Activar la meta de URL Canónicas',
 
 	// F
-	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux meta générées par les squelettes', # NEW
-	'forcer_squelette_label' => 'Charger les metas pour tous squelettes', # NEW
+	'forcer_squelette_descriptif' => 'Las metas SEO son prioritarias para las metas generadas por los esqueletos', # MODIF
+	'forcer_squelette_label' => 'Cargar las metas para todos los esqueletos',
 
 	// G
 	'google_analytics' => 'Google Analytics',
 	'google_analytics_activate' => 'Activar Google Analytics',
-	'google_analytics_id' => 'Google Analytics web property ID', # NEW
+	'google_analytics_id' => 'Google Analytics web property ID',
 	'google_webmaster_tools' => 'Herramientas de administradores web de Google (Google Webmaster Tools)',
 	'google_webmaster_tools_activate' => 'Activar Herramientas de administradores de Google (Google Webmaster Tools)',
-	'google_webmaster_tools_id' => 'Meta code de vérification', # NEW
+	'google_webmaster_tools_id' => 'Metacódigo de verificación',
 
 	// I
-	'insert_head' => 'Insertion automatique dans #INSERT_HEAD', # NEW
+	'insert_head' => 'Inserción automática en #INSERT_HEAD',
 	'insert_head_activate' => 'Activar la inserción automática',
-	'insert_head_descriptif' => 'Insertion automatique de la configuration SEO dans le &lt;head&gt;', # NEW
+	'insert_head_descriptif' => 'Inserción automática de la configuración SEO en el &lt;head&gt;',
 
 	// M
 	'meta_author' => 'Autor:',
 	'meta_copyright' => 'Copyright:',
 	'meta_description' => 'Descripción:',
-	'meta_keywords' => 'Mots Clefs :', # NEW
-	'meta_page_description_sommaire_value' => 'Valeur de la Description de la Page + Valeur Meta du Sommaine', # NEW
-	'meta_page_description_value' => 'Valeur de la Description de la Page', # NEW
-	'meta_page_title_sommaire_value' => 'Valeur du Titre de la Page + Valeur Meta du Sommaire', # NEW
+	'meta_keywords' => 'Palabras clave:',
+	'meta_page_description_sommaire_value' => 'Valor de la Descripción de la Página + Valor Meta del Sumario',
+	'meta_page_description_value' => 'Valor de la Descripción de la Página',
+	'meta_page_title_sommaire_value' => 'Valor del Título de la Página + Valor Meta del Sumario',
 	'meta_page_title_value' => 'Valor del Título de la Página',
 	'meta_robots' => 'Robots:',
-	'meta_sommaire_value' => 'Valeur de la Meta du Sommaire', # NEW
-	'meta_tags' => 'Meta Tags', # NEW
-	'meta_tags_activate' => 'Activer les meta tags éditoriales', # NEW
-	'meta_tags_default' => 'Valeur des Meta Tags par Défaut (pour les Articles et les Rubriques)', # NEW
-	'meta_tags_edit_activate' => 'Activer l\'édition des meta tags dans les rubriques et les articles', # NEW
-	'meta_tags_editing' => 'Edición de los Meta Tags',
-	'meta_tags_sommaire' => 'Valor de los Meta Tags del Sumario (página de inicio)',
+	'meta_sommaire_value' => 'Valor de la Meta del Sumario',
+	'meta_tags' => 'Meta Tags',
+	'meta_tags_activate' => 'Activar las Meta Tagas editoriales', # MODIF
+	'meta_tags_default' => 'Valor de las Meta Tags por defecto (para Artículos y Secciones)', # MODIF
+	'meta_tags_edit_activate' => 'Activar la edición de las meta tags en las secciones y artículos',
+	'meta_tags_editing' => 'Edición de las Meta Tags', # MODIF
+	'meta_tags_sommaire' => 'Valor de las Meta Tags del Sumario (página de inicio)', # MODIF
 	'meta_title' => 'Título:',
 
 	// S
