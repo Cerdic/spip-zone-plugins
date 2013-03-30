@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.7.2"
+	version="4.8.0"
 	schema="2.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
@@ -15,12 +15,12 @@
 	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
-	<credit lien="http://leaflet.cloudmade.com/">Leaflet</credit>
+	<credit lien="http://leafletjs.com/">Leaflet</credit>
 	<credit lien="https://github.com/shramov/leaflet-plugins">Leaflet plugins</credit>
-	<credit lien="https://github.com/brunob/leaflet-providers">Leaflet providers</credit>
+	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
-	<copyright>2011-2012</copyright>
+	<copyright>2011-2013</copyright>
 	<licence>GPL v3</licence>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
 
@@ -29,7 +29,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.1.13" lien="http://github.com/downloads/brunob/Leaflet/leaflet-gis-4.1.13.zip" />
+	<lib nom="leaflet-gis-4.8.0" lien="http://contrib.spip.net/IMG/zip/leaflet-gis-4.8.0.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"

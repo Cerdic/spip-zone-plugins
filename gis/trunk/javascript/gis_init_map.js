@@ -73,7 +73,7 @@ var gis_init_map = function(mapcfg) {
 			map.addControl(new L.Control.FullScreen());
 		if (mapcfg['overview']){
 			var minimap_layer = get_layer(mapcfg['default_layer']);
-			var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100}).addTo(map);
+			var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(map);
 		}
 	}
 
