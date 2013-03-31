@@ -1,0 +1,11 @@
+<BOUCLE_recents(ARTICLES) {lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{0,#CONFIG{rssconfig/nb_art,10}}{unique}>
+<INCLURE{fond=inclure/rss-item}{id_article}>
+</BOUCLE_recents>
+
+<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{age<#CONFIG{rssconfig/age_art,3}}{unique}>
+<INCLURE{fond=inclure/rss-item}{id_article}>
+</BOUCLE_tres_recents>
+
+<BOUCLE_recemment_modifies(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig/age_modif,0}}{unique}>
+<INCLURE{fond=inclure/rss-item}{id_article}>
+</BOUCLE_recemment_modifies>
