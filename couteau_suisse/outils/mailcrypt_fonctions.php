@@ -13,7 +13,8 @@ function mailcrypt_init() {
 		// span ayant l'arobase en background
 		@define('_mailcrypt_AROBASE', '<span class=\'spancrypt\'>&nbsp;</span>');
 //		@define('_mailcrypt_REGEXPR1', ',\b['._cs_liens_AUTORISE.']*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?,');
-		@define('_mailcrypt_REGEXPR2', ',\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?),');
+		@define('_mailcrypt_REGEXPR1', '\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?)');
+		@define('_mailcrypt_REGEXPR2', ','._mailcrypt_REGEXPR1.',');
 	}
 }
 
@@ -22,6 +23,18 @@ function mailcrypt_email_dist($texte) {
 	if(!defined('_MAILCRYPT_TRAITE_EMAIL') || strpos($texte, '@')===false) return $texte;
 	if(function_exists('mailcrypt_email')) return mailcrypt_email($texte);
 	return test_espace_prive()?$texte:mailcrypt($texte);
+}
+
+function mailcrypt_crypt_callback($matches) {
+	$i = uniqid();
+	return cs_code_echappement('"#" title="' 
+		. attribut_html(str_replace('@' ,_mailcrypt_AROBASE_JS, urldecode($matches[1]))) 
+		. '" onclick="location.href=lancerlien(\''
+		. str_replace('@', ','.$i.',', $matches[1]).'\',\','.$i.',\'); return false;"', 'LIENS');
+}
+
+function mailcrypt_decrypt_callback($matches) {
+	return $matches[1].' href="mailto:'.str_replace($matches[3], '@', $matches[2]).'"';
 }
 
 function mailcrypt($texte) {
@@ -39,8 +52,7 @@ function mailcrypt($texte) {
 		$texte = preg_replace_callback(',href=(["\'])[^>]*@[^>]*\.html?\\1,', 'cs_liens_echappe_callback', $texte);
 
 	// protection des liens HTML
-	$texte = preg_replace(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 
-		'"#" title="$1' . _mailcrypt_AROBASE_JS . '$2" onclick="location.href=lancerlien(\'$1\',\'$2\'); return false;"', $texte);
+	$texte = preg_replace_callback(",[\"\']mailto:([^\"\']+)[\"\'],", 'mailcrypt_crypt_callback', $texte);
 	// retrait des titles en doublon... un peu sale, mais en attendant mieux ?
 	$texte = preg_replace(',title="[^"]+'._mailcrypt_AROBASE_JSQ.'[^"]+"([^>]+title=[\"\']),', '$1', $texte);
 
@@ -58,11 +70,11 @@ function maildecrypt($texte) {
 	// \s+ est pour le compresseur HTML qui ajoute des CR partout !
 	$texte = preg_replace(',<span\s+class=[\'"]spancrypt[\'"]>(.*)</span>,Umsi','@',$texte);
 	// traiter les liens
-	$texte = preg_replace(
+	$texte = preg_replace_callback(
 		',href="#" (title=["\'].*?["\']) onclick="location.href=lancerlien\(\'(\S*?)\'\,\'(\S*?)\'\); return false;",',
-		'$1 href="mailto:$2@$3"', $texte);
+		'mailcrypt_decrypt_callback', $texte);
 	// traiter les title
-	return str_replace(_mailcrypt_AROBASE_JS, '@', $texte);
+	return str_replace(attribut_html(_mailcrypt_AROBASE_JS), '@', $texte);
 }
 
 // pipeline recuperer_fond

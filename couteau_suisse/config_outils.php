@@ -1244,12 +1244,12 @@ add_outil( array(
 	'code:options' => '%%balise_email%%%%fonds_demailcrypt2%%',
 	'description' => '<:mailcrypt::>[[%balise_email%]][[->%fonds_demailcrypt%]][[->%fonds_demailcrypt2%]]',
 	'pipelinecode:post_propre' => "if(strpos(\$flux, '@')!==false) \$flux=cs_echappe_balises('', 'mailcrypt', \$flux);",
-	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
+	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a.replace(new RegExp(b,'g'),'@'); }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	// ... puis arranger un peu le title qui a ete protege
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
 	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
-		this.title = this.title.replace(/\.\..t\.\./,'[@]');
+		//this.title = this.title.replace(/\.\..t\.\./g,'[@]');
 	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',

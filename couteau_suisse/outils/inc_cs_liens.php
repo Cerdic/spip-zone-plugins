@@ -33,8 +33,9 @@ if (!defined('_SPIP19300')) {
 
 // les callbacks...
 
-function cs_liens_echappe_callback($matches)
-	{return cs_code_echappement($matches[0], 'LIENS');}
+function cs_liens_echappe_callback($matches) {
+	return cs_code_echappement($matches[0], 'LIENS');
+}
 
 function cs_liens_raccourcis_callback($matches) {
 	if($GLOBALS["liens_interrogation"]) {
