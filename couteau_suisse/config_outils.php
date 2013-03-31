@@ -1249,7 +1249,7 @@ add_outil( array(
 	// ... puis arranger un peu le title qui a ete protege
 	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
 	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
-		//this.title = this.title.replace(/\.\..t\.\./g,'[@]');
+		this.title = this.title.replace(/\.\..t\.\./g,'[@]');
 	});",
 	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
 		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
