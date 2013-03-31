@@ -13,7 +13,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
 [(#SET{flux_articles,#CONFIG{rssconfig/activer}|!={non}|oui})]
-[(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={articles}}|oui})]
+[(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={breves}}|oui})]
 
 [(#GET{flux_articles}|ou{#GET{flux_breves}}|oui)
 <channel[ xml:lang="(#LANG)"]>
