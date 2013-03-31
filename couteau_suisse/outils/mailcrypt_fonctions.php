@@ -13,8 +13,7 @@ function mailcrypt_init() {
 		// span ayant l'arobase en background
 		@define('_mailcrypt_AROBASE', '<span class=\'spancrypt\'>&nbsp;</span>');
 //		@define('_mailcrypt_REGEXPR1', ',\b['._cs_liens_AUTORISE.']*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?,');
-		@define('_mailcrypt_REGEXPR1', '\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?)');
-		@define('_mailcrypt_REGEXPR2', ','._mailcrypt_REGEXPR1.',');
+		@define('_mailcrypt_REGEXPR2', ',\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?),'); 
 	}
 }
 
