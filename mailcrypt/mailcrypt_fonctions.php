@@ -102,6 +102,9 @@ function maildecrypt($texte) {
 	// Supprimer l'appel du javascript
 	$texte = preg_replace(',<script type=\'text/javascript\'(.*)mailcrypt.js(.*)</script>,U','',$texte);
 	
+	// Nettoyer les eventuels _MAILCRYPT_AROBASE_JSQ restants (lien avec destinataires mutiples)
+	$texte = preg_replace(',_MAILCRYPT_AROBASE_JSQ,', '@', $texte);
+	
 	return $texte;
 }
 
