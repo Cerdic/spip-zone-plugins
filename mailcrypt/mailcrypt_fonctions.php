@@ -14,10 +14,10 @@ function mailcrypt_affichage_final($texte){
 	  AND strpos($texte,"mc_lancerlien")!==false){
 		$js = <<<js
 <script type="text/javascript">/*<![CDATA[*/
-function mc_lancerlien(a,b){	x='ma'+'ilto'+':'+a+'@'+b;	return x;}
+function mc_lancerlien(a,b){x='ma'+'ilto'+':'+a+'@'+b.replace(/\.\..t\.\./g,'@'); return x;}
 jQuery(function(){
 	jQuery('.spancrypt').empty().append('@');
-	jQuery('a.spip_mail').attr('title',function(i, val) {	return val.replace(/\.\..t\.\./,'@');	});
+	jQuery('a.spip_mail').attr('title',function(i, val) {	return val.replace(/\.\..t\.\./g,'@');	});
 });/*]]>*/</script>
 js;
 		if ($p = stripos($texte,"</body>"))
@@ -34,6 +34,13 @@ function mailcrypt_facteur_pre_envoi($facteur) {
 
 function mailcrypt_echappe($matches) {
 	return code_echappement($matches[0], 'MAILCRYPT');
+}
+
+function mailcrypt_protection_lien($matches) {
+	$m1 = $matches[1];
+	$m2 = $matches[2];
+	$m2 = preg_replace(',\@,', _MAILCRYPT_AROBASE_JS, $m2); // Il faut aussi tenir compte des ecritures du type mailto:toto@toto.org,titi@titi.org  ou mailto:toto@toto.org?cc=tata@tata.org
+	return '"#'.$m1.'#mc#'.$m2.'#" title="'.$m1. _MAILCRYPT_AROBASE_JS . $m2.'" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN . '(\''.$m1.'\',\''.$m2.'\'); return false;"';
 }
 
 function mailcrypt($texte) {
@@ -64,8 +71,7 @@ function mailcrypt($texte) {
 		$texte = preg_replace_callback(',href=(["\'])[^>]*@[^>]*\.html?\\1,', 'mailcrypt_echappe', $texte);
 
 	// protection des liens HTML
-	$texte = preg_replace(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 
-		'"#$1#mc#$2#" title="$1' . _MAILCRYPT_AROBASE_JS . '$2" onclick="location.href=' . _MAILCRYPT_FONCTION_JS_LANCER_LIEN . '(\'$1\',\'$2\'); return false;"', $texte);
+	$texte = preg_replace_callback(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 'mailcrypt_protection_lien', $texte);
 	// retrait des titles en doublon... un peu sale, mais en attendant mieux ?
 	$texte = preg_replace(',title="[^"]+'._MAILCRYPT_AROBASE_JSQ.'[^"]+"([^>]+title=[\"\']),', '$1', $texte);
 
