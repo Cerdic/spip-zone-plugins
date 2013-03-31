@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function formulaires_langonet_rechercher_charger($type) {
 	$legende = _T('langonet:titre_form_rechercher_'.$type);
 	$explication = _T('langonet:info_rechercher_'.$type);

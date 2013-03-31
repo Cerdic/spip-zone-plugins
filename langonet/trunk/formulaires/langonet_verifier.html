@@ -1,5 +1,5 @@
-<div class="formulaire_spip formulaire_langonet_verifier" id="formulaire_langonet_verifier">
-	<h3 class="titrem"><:langonet:titre_form_verifier:></h3>
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_verifier:></h3>
 
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
@@ -9,40 +9,34 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		<div><input type="hidden" name="encodage" id="encodage_defaut" value="html" /></div>
+		<p class="explication"><:langonet:info_verifier:></p>
 		<ul>
-			<li class="fieldset">
-				<fieldset>
-					<p class="explication"><:langonet:info_verifier:></p>
-					<ul>
-						<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
-							<label><:langonet:label_verification:></label>
-							<div class="choix">
-								<input type="radio" value="definition" id="verification_definition" class="radio" name="verification" [(#ENV{verification, definition}|=={definition}|oui) checked="checked"] />
-								<label for="verification_definition"><:langonet:label_verification_definition:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="utilisation" id="verification_utilisation" class="radio" name="verification" [(#ENV{verification, definition}|=={utilisation}|oui) checked="checked"] />
-								<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="fonction_l" id="verification_fonction_l" class="radio" name="verification" [(#ENV{verification, definition}|=={fonction_l}|oui) checked="checked"] />
-								<label for="verification_fonction_l"><:langonet:label_verification_fonction_l:></label>
-							</div>
-						</li>
-						<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]" id="option_fichier_langue">
-							<label for="fichier_langue"><:langonet:label_fichier_verifie:></label>
-							<p class="explication"><:langonet:info_fichier_verifie:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
-							[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
-						</li>
-						<li class="editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
-							<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
-							<p class="explication"><:langonet:info_arborescence_scannee:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
-							[(#ENV{dossier_scan, #ARRAY}|langonet_creer_select_dossiers)]
-						</li>
-					</ul>
-				</fieldset>
+			<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
+				<label><:langonet:label_verification:></label>
+				<div class="choix">
+					<input type="radio" value="definition" id="verification_definition" class="radio" name="verification" [(#ENV{verification, definition}|=={definition}|oui) checked="checked"] />
+					<label for="verification_definition"><:langonet:label_verification_definition:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="utilisation" id="verification_utilisation" class="radio" name="verification" [(#ENV{verification, definition}|=={utilisation}|oui) checked="checked"] />
+					<label for="verification_utilisation"><:langonet:label_verification_utilisation:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="fonction_l" id="verification_fonction_l" class="radio" name="verification" [(#ENV{verification, definition}|=={fonction_l}|oui) checked="checked"] />
+					<label for="verification_fonction_l"><:langonet:label_verification_fonction_l:></label>
+				</div>
+			</li>
+			<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]" id="option_fichier_langue">
+				<label for="fichier_langue"><:langonet:label_fichier_verifie:></label>
+				<p class="explication"><:langonet:info_fichier_verifie:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+			</li>
+			<li class="editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
+				<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
+				<p class="explication"><:langonet:info_arborescence_scannee:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
+				[(#ENV{dossier_scan, #ARRAY}|langonet_creer_select_dossiers)]
 			</li>
 		</ul>
 
@@ -54,14 +48,10 @@
 	]
 
 	[(#REM) <!-- Affichage des resultats --> ]
-	[<ul>
-		<li class="fieldset">
-			<fieldset>
-				<h3 class="legend"><:langonet:legende_resultats:></h3>
-				(#ENV*{message_ok}|table_valeur{resultats})
-			</fieldset>
-		</li>
-	</ul>]
+	[<fieldset>
+		<legend><:langonet:legende_resultats:></legend>
+		(#ENV*{message_ok}|table_valeur{resultats})
+	</fieldset>]
 </div>
 
 <script type="text/javascript">

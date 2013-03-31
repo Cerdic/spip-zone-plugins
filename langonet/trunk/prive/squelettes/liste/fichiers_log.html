@@ -1,0 +1,31 @@
+<B_liste_fichiers_log>
+#ANCRE_PAGINATION
+<div class="liste-objets fichiers_log">
+	<table class="spip liste">
+		[<caption><strong class="caption">(#VAL{langonet:titre_bloc_logs_}|concat{#ENV{verification}}|_T)</strong></caption>]
+		<tbody>
+<BOUCLE_liste_fichiers_log(DATA) {source table, #ENV{verification}|langonet_lister_fichiers_log}{where?}{recherche?}{par cle}{pagination #ENV{pas, 5}}>
+			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{log, telecharger}})]
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="titre principale">#CLE</td>
+				<td class="lien">
+					<a href="#URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}" title="#GET{bulle}">
+						[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:bouton_download:>})]
+					</a>
+				</td>
+			[(#PLUGIN{MEDIABOX}|oui)
+				[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{log, afficher}})]
+				<td class="lien">
+					<a href="#URL_ECRIRE{langonet_afficher,fichier=#VALEUR}" class="mediabox" title="#GET{bulle}">
+						[(#CHEMIN_IMAGE{preview-16.png}|balise_img{<:langonet:bouton_lister:>})]
+					</a>
+				</td>
+			]
+			</tr>
+</BOUCLE_liste_fichiers_log>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_fichiers_log>
+<//B_liste_fichiers_log>

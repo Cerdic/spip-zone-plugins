@@ -1,0 +1,31 @@
+<B_liste_fichiers_lang>
+#ANCRE_PAGINATION
+<div class="liste-objets fichiers_lang">
+	<table class="spip liste">
+		<caption><strong class="caption"><:langonet:titre_bloc_langues_generees:></strong></caption>
+		<tbody>
+<BOUCLE_liste_fichiers_lang(DATA) {source table, #VAL|langonet_lister_fichiers_lang}{where?}{recherche?}{par cle}{pagination #ENV{pas, 5}}>
+			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{lang, telecharger}})]
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="titre principale">#CLE</td>
+				<td class="lien">
+					<a href="#URL_ACTION_AUTEUR{langonet_telecharger,#VALEUR}" title="#GET{bulle}">
+						[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:bouton_download:>})]
+					</a>
+				</td>
+			[(#PLUGIN{MEDIABOX}|oui)
+				[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{lang, afficher}})]
+				<td class="lien">
+					<a href="#URL_ECRIRE{langonet_afficher,fichier=#VALEUR}" class="mediabox" title="#GET{bulle}">
+						[(#CHEMIN_IMAGE{preview-16.png}|balise_img{<:langonet:bouton_lister:>})]
+					</a>
+				</td>
+			]
+			</tr>
+</BOUCLE_liste_fichiers_lang>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_fichiers_lang>
+<//B_liste_fichiers_lang>

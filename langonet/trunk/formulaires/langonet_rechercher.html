@@ -1,5 +1,6 @@
 <div class="formulaire_spip formulaire_langonet_rechercher_#ENV{type}" id="formulaire_langonet_rechercher_#ENV{type}">
-	<h3 class="titrem">#ENV**{_legende}</h3>
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})][(#ENV**{_legende})]</h3>
+
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
@@ -7,34 +8,28 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication">#ENV**{_explication}</p>
 		<ul>
-			<li class="fieldset">
-				<fieldset>
-					<p class="explication">#ENV**{_explication}</p>
-					<ul>
-						<li class="editer_pattern obligatoire[(#ENV{erreurs}|table_valeur{pattern}|oui) erreur]">
-							<label for="pattern_#ENV{type}"><:langonet:label_pattern:></label>
-							<p class="explication">#ENV**{_info_pattern}</p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
-							<input type="text" name="pattern" id="pattern_#ENV{type}" value="#ENV{pattern}" class="text" />						
-						</li>
-						<li class="editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
-							<label><:langonet:label_correspondance:></label>
-							<div class="choix">
-								<input type="radio" value="egal" id="correspondance_egal_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={egal}|oui) checked="checked"] />
-								<label for="correspondance_egal_#ENV{type}"><:langonet:label_correspondance_egal:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="commence" id="correspondance_commence_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={commence}|oui) checked="checked"] />
-								<label for="correspondance_commence_#ENV{type}"><:langonet:label_correspondance_commence:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="contient" id="correspondance_contient_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={contient}|oui) checked="checked"] />
-								<label for="correspondance_contient_#ENV{type}"><:langonet:label_correspondance_contient:></label>
-							</div>
-						</li>
-					</ul>
-				</fieldset>
+			<li class="editer_pattern obligatoire[(#ENV{erreurs}|table_valeur{pattern}|oui) erreur]">
+				<label for="pattern_#ENV{type}"><:langonet:label_pattern:></label>
+				<p class="explication">#ENV**{_info_pattern}</p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
+				<input type="text" name="pattern" id="pattern_#ENV{type}" value="#ENV{pattern}" class="text" />
+			</li>
+			<li class="editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
+				<label><:langonet:label_correspondance:></label>
+				<div class="choix">
+					<input type="radio" value="egal" id="correspondance_egal_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={egal}|oui) checked="checked"] />
+					<label for="correspondance_egal_#ENV{type}"><:langonet:label_correspondance_egal:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="commence" id="correspondance_commence_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={commence}|oui) checked="checked"] />
+					<label for="correspondance_commence_#ENV{type}"><:langonet:label_correspondance_commence:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="contient" id="correspondance_contient_#ENV{type}" class="radio" name="correspondance" [(#ENV{correspondance, egal}|=={contient}|oui) checked="checked"] />
+					<label for="correspondance_contient_#ENV{type}"><:langonet:label_correspondance_contient:></label>
+				</div>
 			</li>
 		</ul>
 
@@ -46,12 +41,8 @@
 
 	[(#REM) <!-- Affichage des resultats --> ]
 	[(#SET{total_trouves, [(#ENV*{message_ok}|table_valeur{total})]})]
-	[<ul>
-		<li class="fieldset">
-			<fieldset>
-				<h3 class="legend"><:langonet:legende_trouves{total=#GET{total_trouves}}:></h3>
-				(#ENV*{message_ok}|table_valeur{trouves})
-			</fieldset>
-		</li>
-	</ul>]
+	[<fieldset>
+		<legend><:langonet:legende_trouves{total=#GET{total_trouves}}:></legend>
+		(#ENV*{message_ok}|table_valeur{trouves})
+	</fieldset>]
 </div>
