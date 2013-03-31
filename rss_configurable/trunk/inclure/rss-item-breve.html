@@ -1,0 +1,56 @@
+[(#REM)
+	Cette page génère le contenu d'une brève
+	pour un flux RSS, appelé depuis backend.html ou backend-breves.html
+
+]<BOUCLE_une_breve(BREVES){id_breve} {statut?}>
+	<item[ xml:lang="(#LANG)"]>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
+		<link>[(#URL_BREVE|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_BREVE|url_absolue)</guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		[(#CONFIG{rssconfig_breves/creator}|=={nom_site_spip}|oui)[<dc:creator>(#NOM_SITE_SPIP|supprimer_tags|texte_backend)</dc:creator>]]
+
+[(#REM)
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
+
+]<BOUCLE_mots_rss(MOTS){id_breve}{si #CONFIG{rssconfig_breves/diffuser_mots,oui}|=={oui}}>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#INTRODUCTION|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}{statut?}{si #CONFIG{rssconfig_breves/diffuser_rubrique,oui}|=={oui}}>-
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_tags|texte_backend)&lt;/a&gt;]
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_breve}{", "}{si #CONFIG{rssconfig_breves/diffuser_mots,oui}|=={oui}}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de la brève,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages de RSS Config.
+][
+(#CONFIG{rssconfig_breves/syndication_integrale,oui}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE{right}||image_reduire{150,150}|texte_backend)
+		][&lt;div class='rss_texte'&gt;(#TEXTE|
+			image_reduire{500,0}|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
+
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes aux breves ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_breve}{vu=non}{doublons}{si #CONFIG{rssconfig_breves/diffuser_documents,oui}|=={oui}}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+
+	</item>
+</BOUCLE_une_breve>

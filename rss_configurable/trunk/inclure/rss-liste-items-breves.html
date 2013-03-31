@@ -1,0 +1,11 @@
+<BOUCLE_recents(BREVES) {lang ?}{branche ?}{id_mot ?} {par date}{inverse}{0,#CONFIG{rssconfig_breves/nb_art,20}}{unique}>
+<INCLURE{fond=inclure/rss-item-breve}{id_breve}>
+</BOUCLE_recents>
+
+<BOUCLE_tres_recents(BREVES){lang ?}{branche ?}{id_mot ?} {par date}{inverse}{age<#CONFIG{rssconfig_breves/age_art,0}}{unique}>
+<INCLURE{fond=inclure/rss-item-breve}{id_breve}>
+</BOUCLE_tres_recents>
+
+<BOUCLE_recemment_modifies(BREVES){lang ?}{branche ?}{id_mot ?} {par date}{inverse}{age_modif < #CONFIG{rssconfig_breves/age_modif,0}}{unique}>
+<INCLURE{fond=inclure/rss-item-breve}{id_breve}>
+</BOUCLE_recemment_modifies>

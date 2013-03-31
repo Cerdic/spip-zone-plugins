@@ -2,7 +2,7 @@
 	prefix="rssconfig"
 	categorie="squelette"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"
 	documentation="http://www.spip-contrib.net/?article3793"

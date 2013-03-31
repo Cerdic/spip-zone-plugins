@@ -5,7 +5,7 @@
 	<icon>prive/themes/spip/images/rssconfig-32.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>1.4.1</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>Ce plugin vous permet de personnaliser le fonctionnement de votre flux RSS &#224; l&#8217;aide d&#8217;un formulaire dans l&#8217;espace priv&#233;.</description>
 	<lien>http://www.spip-contrib.net/?article3793</lien>
 	<prefix>rssconfig</prefix>

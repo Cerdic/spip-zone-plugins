@@ -12,10 +12,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
-[(#SET{flux_articles,#CONFIG{rssconfig/activer}|!={non}|oui})]
-[(#SET{flux_breves,#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={articles}}|oui})]
-
-[(#GET{flux_articles}|ou{#GET{flux_breves}}|oui)
+[(#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}}|et{#CONFIG{rssconfig_breves/activer}|!={non}}|et{#CONFIG{rssconfig_breves/flux,breves}|!={articles}}|oui)
 <channel[ xml:lang="(#LANG)"]>
 	<title>[(#NOM_SITE_SPIP|textebrut|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
@@ -33,23 +30,13 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 
-[(#GET{flux_articles}|oui)
 [(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
 			sinon, on explode la chaine saisie ]
-#SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|picker_selected{rubrique}}
-[(#GET{rubriques_a_inclure}|count|=={0}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig/rubriques_a_inclure}|explode{','}}]
+#SET{rubriques_a_inclure,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
+[(#GET{rubriques_a_inclure}|count|=={0}|oui) #SET{rubriques_a_inclure,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
 
 #SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure}}}
-<INCLURE{fond=inclure/rss-liste-items}{env}{id_rubrique=#GET{id_rubrique}}>]
-
-[(#GET{flux_breves}|oui)
-[(#REM) Si la saisie des rubriques a ete faites avec le selecteur, on utilise le filtre picker_selected
-			sinon, on explode la chaine saisie ]
-#SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|picker_selected{rubrique}}
-[(#GET{rubriques_a_inclure_breves}|count|=={0}|oui) #SET{rubriques_a_inclure_breves,#CONFIG{rssconfig_breves/rubriques_a_inclure}|explode{','}}]
-
-#SET{id_rubrique,#ENV{id_rubrique,#GET{rubriques_a_inclure_breves}}}
-<INCLURE{fond=inclure/rss-liste-items-breves}{env}{id_rubrique=#GET{id_rubrique}}>]
+<INCLURE{fond=inclure/rss-liste-items-breves}{env}{id_rubrique=#GET{id_rubrique}}>
 
 </channel>
 

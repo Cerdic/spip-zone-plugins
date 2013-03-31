@@ -1,5 +1,10 @@
 [(#AUTORISER{configurer,rssconfig}|sinon_interdire_acces)]
 <h1 class="grostitre"><:rssconfig:configurer_rssconfig:></h1>
+<h2><:articles:></h2>
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_RSSCONFIG
 </div>
+[(#PLUGIN{breves}|et{#CONFIG{activer_breves}|=={oui}})<h2><:breves:breves:></h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RSSCONFIG_BREVES
+</div>]
