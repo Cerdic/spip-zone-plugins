@@ -28,12 +28,12 @@ function exec_compte_resultat() {
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
-			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
-			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')) ),
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), array('voir_compta', 'association') ),
+#			'annexe_titre_general' => array('finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), array('voir_compta', 'association') ),
 		), 12);
-		if(autoriser('voir_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
+		if(autoriser('exporter_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')

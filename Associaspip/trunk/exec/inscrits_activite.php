@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_inscrits_activite() {
-	if (!autoriser('voir_inscriptions', 'association')) {
+	if (!autoriser('voir_inscriptions', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) ) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -40,7 +40,7 @@ function exec_inscrits_activite() {
 		// TOTAUX : montants des participations
 			echo association_totauxinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
-			$res['activite_titre_toutes_activites'] = array('grille-24.png', array('activites', $GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
+			$res['activite_titre_toutes_activites'] = array('grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
 			$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']) );
 			$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"), array('editer_inscriptions', 'association') );
 		}

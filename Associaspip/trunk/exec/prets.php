@@ -93,8 +93,8 @@ function prets_gauche($id_ressource, $ressource, $where) {
 
 	if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
 			echo association_navigation_raccourcis(array(
-				'titre_onglet_prets' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association'))
-				'prets_nav_ajouter' => array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association'))
+				'ressources_titre_liste_ressources' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association')),
+				'prets_nav_ajouter' => array('creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association')),
 			), 64);
 }
 

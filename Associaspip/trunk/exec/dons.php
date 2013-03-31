@@ -43,7 +43,7 @@ function exec_dons() {
 		echo association_totauxinfos_montants($id_periode, $dons_financiers, $remboursements);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'ajouter_un_don' => array('ajout-24.png', array('edit_don'), array('gerer_dons', 'association') ),
+			'ajouter_un_don' => array('ajout-24.png', array('edit_don'), array('editer_dons', 'association') ),
 		), 40);
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// FILTRES

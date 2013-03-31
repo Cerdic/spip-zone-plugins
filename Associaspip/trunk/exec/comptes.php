@@ -57,11 +57,11 @@ function exec_comptes() {
 		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'encaisse_titre_general' => array('finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
-			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode") ),
-			'ajouter_une_operation' => array('ajout-24.png', array('edit_compte')),
+			'encaisse_titre_general' => array('finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
+#			'annexe_titre_general' => array('finances-24.png', array('compte_annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
+			'ajouter_une_operation' => array('ajout-24.png', array('edit_compte'), array('editer_compta', 'association') ),
 		), 10);
 		debut_cadre_association('finances-24.png', 'informations_comptables');
 		// FILTRES

@@ -31,10 +31,10 @@ function exec_encaisse() {
 		}
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice") ),
-			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice") ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', "exercice=$id_exercice") ),
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "exercice=$id_exercice"), array('voir_compta', 'association') ),
+			'cpte_bilan_titre_general' => array('finances-24.png', array('compte_bilan', "exercice=$id_exercice"), array('voir_compta', 'association') ),
+#			'annexe_titre_general' => array('finances-24.png', array('compte_annexe', "exercice=$id_exercice"), array('voir_compta', 'association') ),
 		), 15);
 		debut_cadre_association('finances-24.png', 'encaisse');
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher

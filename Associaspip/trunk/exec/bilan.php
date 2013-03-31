@@ -31,10 +31,10 @@ function exec_bilan() {
 		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('gerer_compta', 'association') ),
-			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]") ),
-#			'annexe_titre_general' => array('finances-24.png', array('annexe', "$ids[type_periode]=$ids[id_periode]") ),
-			'encaisse' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]") ),
+			'informations_comptables' => array('grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+			'cpte_resultat_titre_general' => array('finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+#			'annexe_titre_general' => array('finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+			'encaisse' => array('finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 		), 12);
 		// on cree les intitule de toutes les destinations dans un tableau
 		$intitule_destinations = array();
@@ -71,7 +71,7 @@ function exec_bilan() {
 			// TABLEAU EXPLOITATION
 			echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
 			association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
-			if(autoriser('voir_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
+			if(autoriser('exporter_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
 			  echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');
 			  if (test_plugin_actif('FPDF')) { // impression en PDF
 			    echo "<a href='".generer_action_auteur('pdf_comptesresultat', 0) ."'>PDF</a> ";

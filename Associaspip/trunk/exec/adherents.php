@@ -199,14 +199,14 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		}
 		$icone = !$icone ? strlen($statut) :  http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur'));
 		$auteurs .= "<tr class='$class'>\n";
-		if ($GLOBALS['association_metas']['aff_id_auteur']=='on') {
+		if ($GLOBALS['association_metas']['aff_id_auteur']) {
 			$auteurs .= '<td class="integer">'
 			. $id_auteur.'</td>';
 		}
 		if ($GLOBALS['association_metas']['aff_photo']) {
 			$auteurs .= '<td class="photo logo centre">'.$logo.'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_civilite']=='on' && $GLOBALS['association_metas']['civilite'])
+		if ($GLOBALS['association_metas']['aff_civilite'] && $GLOBALS['association_metas']['civilite'])
 			$auteurs .= '<td class="honorific-prefix">'.$data['sexe'].'</td>';
 		$auteurs .= '<td class="family-name">'
 		.$mail.'</td>';

@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_activite() {
-	if (!autoriser('editer_inscriptions', 'association')) {
+	if (!autoriser('editer_inscriptions', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) ) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

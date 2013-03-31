@@ -125,7 +125,7 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
 
 	return association_date_du_jour()
 	. fin_boite_info(TRUE)
-	. bloc_des_raccourcis($res);
+	. (count($res)?bloc_des_raccourcis($res):''); // tester si le tableau est vide (ce qui peut arriver si on n'a l'autorisation pour aucun bouton) et ne pas afficher un bloc sans bouton (c'est disgracieux et troublant)
 }
 
 /**

@@ -12,9 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_activites() {
-	if (!autoriser('voir_activites', 'association')
-	OR !test_plugin_actif('AGENDA')
-	OR !test_plugin_actif('SIMPLECAL') ) {
+	if (!autoriser('voir_activites', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) ) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -49,7 +47,7 @@ function exec_activites_args($id_evenement) {
 		), 70);
 	} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
 		echo association_navigation_raccourcis(array(
-			'evenements' => array('agenda-evenements-16.png', array('agenda_evenements'), array('menu', 'evenements'), ),
+			'evenements' => array('img_pack/agenda-24.png', array('agenda_evenements'), array('menu', 'evenements'), ),
 		), 70);
 	} else { // pas de bloc de raccourcis
 		echo association_date_du_jour();

@@ -29,8 +29,11 @@ function exec_ajout_cotisation_args($id_auteur, $membre) {
 	$infos['adherent_libelle_validite'] = association_formater_date($membre['date_validite'], 'dtend');
 	echo association_totauxinfos_intro(htmlspecialchars(association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'])), 'membre', $id_auteur, $infos );
 	// datation et raccourcis
+#	$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 	echo association_navigation_raccourcis(array(
-		'voir_adherent' => array('edit-24.gif', array('adherent', "id=$id_auteur") ),
+		'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents', "id=$id_auteur"), array('voir_membres', 'association', 0) ),
+		'voir_adherent' => array('annonce.gif', array('adherent', "id_auteur=$id_auteur"), array('voir_membres', 'association', $id_auteur) ),
+#		"adherent_label_modifier_$statut" => array('membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), autoriser('voir', 'auteur', $id_auteur) ),
 	) );
 	debut_cadre_association('annonce.gif', 'cotisation');
 	echo recuperer_fond('prive/editer/ajouter_cotisation', array (

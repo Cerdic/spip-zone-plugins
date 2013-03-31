@@ -50,8 +50,11 @@ function exec_edit_adherent_args($id_auteur, $data) {
 		$infos['coordonnees:pages'] =  $sites[$id_auteur];
 	echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) ."</div>\n";
 	// datation et raccourcis
+#	$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 	echo association_navigation_raccourcis(array(
-		'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents', "id=$id_auteur"), array('voir_membres', 'association') ),
+		'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents', "id=$id_auteur"), array('voir_membres', 'association', 0) ),
+		'voir_adherent' => array('annonce.gif', array('adherent', "id_auteur=$id_auteur"), array('voir_membres', 'association', $id_auteur) ),
+#		"adherent_label_modifier_$statut" => array('membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), autoriser('voir', 'auteur', $id_auteur) ),
 	) );
 	debut_cadre_association('annonce.gif', 'adherent_titre_modifier_membre');
 	echo recuperer_fond('prive/editer/editer_asso_membres', array (

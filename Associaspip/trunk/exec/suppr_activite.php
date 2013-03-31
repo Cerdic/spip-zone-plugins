@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function exec_suppr_activite() {
 	$r = association_controle_id('activite', 'asso_activites', 'editer_inscriptions');
-	if ($r) {
+	if ($r AND (test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) ) {
 		list($id_activite, $activite) = $r;
 		exec_suppr_activite_args($id_activite, $activite);
 	}
@@ -38,7 +38,7 @@ function exec_suppr_activite_args($id_activite, $activite) {
 	association_totauxinfos_intro('', 'activite', $id_activite, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+		'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$activite[id_evenement]"), array('voir_inscriptions', 'association') ),
 	) );
 	debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 	echo association_bloc_suppression('activite', $id_activite);

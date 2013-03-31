@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_destination() {
+function exec_destination_comptable() {
 	if (!autoriser('gerer_compta', 'association')) {
 		include_spip('inc/minipres');
 		echo minipres();
