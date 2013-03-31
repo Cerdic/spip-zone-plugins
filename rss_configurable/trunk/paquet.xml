@@ -1,9 +1,9 @@
 <paquet
 	prefix="rssconfig"
 	categorie="squelette"
-	version="1.4.1"
-	etat="test"
-	compatibilite="[2.1.0;3.0.*]"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"
 	documentation="http://www.spip-contrib.net/?article3793"
 >	
