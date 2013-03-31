@@ -1,0 +1,24 @@
+<paquet
+	prefix="langonet"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="langonet_logo-64.png"
+	documentation="http://www.spip-contrib.net/langOnet-Presentation-generale"
+>	
+
+	<nom>LangOnet</nom>
+	<!-- Vérifier, générer, rechercher ou afficher les items de langue -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>denisb</auteur>
+	<auteur>esj</auteur>
+	<auteur>kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="langonet_autorisations.php" />
+
+	<menu nom="langonet" titre="langonet:bouton_langonet" parent="bando_administration" icone="images/langonet-24.png" action="langonet" parametres="operation=verifier" />
+</paquet>

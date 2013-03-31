@@ -1,0 +1,21 @@
+[(#REM) <!-- Fichiers produits par certaines operations de langonet --> ]
+[(#ENV{operation, verifier}|=={verifier}|oui)
+<INCLURE{fond=prive/squelettes/inclure/inc-fichiers_log,
+	verification=definition,
+	fichiers_log=#VAL{definition}|langonet_lister_fichiers_log,
+	env} />
+<INCLURE{fond=prive/squelettes/inclure/inc-fichiers_log,
+	verification=utilisation,
+	fichiers_log=#VAL{utilisation}|langonet_lister_fichiers_log,
+	env} />
+<INCLURE{fond=prive/squelettes/inclure/inc-fichiers_log,
+	verification=fonction_l,
+	fichiers_log=#VAL{fonction_l}|langonet_lister_fichiers_log,
+	env} />
+]
+
+[(#ENV{operation, verifier}|=={generer}|oui)
+<INCLURE{fond=prive/squelettes/inclure/inc-fichiers_lang,
+	fichiers_lang=#VAL|langonet_lister_fichiers_lang,
+	env} />
+]
