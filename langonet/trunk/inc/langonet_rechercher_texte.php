@@ -46,8 +46,10 @@ function inc_langonet_rechercher_texte($pattern, $correspondance, $modules) {
 		foreach ($spip_trad as $_module => $_traductions) {
 			$fichier = '../ecrire/lang/' . $_module . '_' . $langue . '.php';
 			foreach ($_traductions as $_item => $_texte) {
-				$_texte = strtolower($_texte);
-				$egal = ((strcasecmp($_texte, $pattern) == 0) OR (strcasecmp($_texte, $pattern_html) == 0));
+				$_texte_html = htmlentities($_texte, ENT_COMPAT, 'UTF-8');
+				$egal = ((strcasecmp($_texte, $pattern) == 0)
+					OR (strcasecmp($_texte, $pattern_html) == 0)
+					OR (strcasecmp($_texte_html, $pattern_html) == 0));
 				$commence_par = false;
 				$contient = false;
 				if (!$egal AND ($correspondance != 'egal')) {
