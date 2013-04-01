@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Recherche d'une chaine UTF-8 dans le texte francais des items de langues de SPIP et des plugins disponibles
  *
  * @param string $pattern
- * 		la traduction ou une partie de celle-ci à rechercher. Ce texte est en frainçais au format UTF-8
+ * 		la traduction ou une partie de celle-ci à rechercher. Ce texte est en français au format UTF-8
  * @param string $correspondance
  * 		type de correspondance : egal, commence, ou contient
  * @param array  $modules
