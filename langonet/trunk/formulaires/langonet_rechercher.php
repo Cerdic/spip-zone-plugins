@@ -40,12 +40,16 @@ function formulaires_langonet_rechercher_charger($type) {
 
 function formulaires_langonet_rechercher_verifier($type) {
 	$erreurs = array();
-	$obligatoires = ($type == 'texte') ? array('pattern', 'modules') : array('pattern');
+
+	$obligatoires = array('pattern');
+	if (!_request('defaut_modules'))
+		$obligatoires[] = 'modules';
 	foreach ($obligatoires as $_champ) {
 		if (!_request($_champ)) {
 			$erreurs[$_champ] = _T('langonet:message_nok_champ_obligatoire');
 		}
 	}
+
 	return $erreurs;
 }
 
