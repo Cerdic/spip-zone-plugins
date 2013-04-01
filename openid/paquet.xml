@@ -1,0 +1,47 @@
+<paquet
+	prefix="openid"
+	categorie="auteur"
+	version="1.1.14"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="images/openid-100.png"
+	schema="0.2"
+	documentation="http://www.spip-contrib.net/Plugin-d-authentification-OpenID"
+>	
+
+	<nom>OpenID</nom>
+	<!-- Authentification des auteurs et visiteurs à l'aide de leur OpenID -->
+
+	<auteur mail="mailto:edouard@lafargue.name">Edouard Lafargue</auteur>
+	<auteur>Mathieu Marcillaud</auteur>
+	<auteur lien="yterium.net">Cedric Morin</auteur>
+	<auteur>Fil</auteur>
+
+	<copyright>2007-2009</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/openid.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="openid_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="openid_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="openid_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="openid_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="openid_pipelines.php" />
+	<pipeline nom="recuperer_fond" />
+
+	<lib nom="openid-php-openid-782224d" lien="http://www.spip-contrib.net/IMG/zip/openid-php-openid-2.2.2-0-ga287b2d.zip" />
+
+<spip compatibilite="[2.1.0;3.0.99]">	
+
+	<chemin path="spip_2_1" />
+</spip>
+
+
+<spip compatibilite="[2.0.0;2.1.0[">	
+
+	<pipeline nom="formulaire_traiter" inclure="openid_pipelines.php" />
+
+	<chemin path="spip_2_0" />
+</spip>
+
+</paquet>

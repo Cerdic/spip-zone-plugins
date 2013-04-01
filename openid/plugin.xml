@@ -25,7 +25,7 @@
 	<chemin dir="./" />
 	<chemin dir="spip_2_0" />
 	<prefix>openid</prefix>
-	<install>base/openid_install.php</install>
+	<install>openid_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/openid.php</inclure>
@@ -65,7 +65,7 @@
 	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, [Cedric Morin->yterium.net], Fil</auteur>
 	<licence>&#169; 2007-2009 - GNU/GPL</licence>
-	<version>1.1.13</version>
+	<version>1.1.14</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -87,7 +87,7 @@
 	<chemin dir="./" />
 	<chemin dir="spip_2_1" />
 	<prefix>openid</prefix>
-	<install>base/openid_install.php</install>
+	<install>openid_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/openid.php</inclure>
