@@ -1,0 +1,24 @@
+<paquet
+	prefix="gravatar"
+	categorie="communication"
+	version="1.4.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="images/gravatar-64.png"
+	documentation="http://www.spip-contrib.net/gravatar"
+>	
+
+	<nom>Gravatar</nom>
+	<!-- Afficher le Gravatar d'un auteur ou d'un contributeur de forum -->
+
+	<auteur>Thomas Beaumanoir</auteur>
+	<auteur lien="http://www.clever-age.com">Clever Age</auteur>
+	<auteur>Fil</auteur>
+	<auteur>Cedric</auteur>
+
+	<pipeline nom="affiche_gauche" inclure="gravatar_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="gravatar_pipelines.php" />
+
+	<menu nom="gravatar" titre="gravatar:cfg_titre_gravatar" parent="configuration" icone="prive/themes/spip/images/gravatar-16.png" action="configurer_gravatar" />
+	<menu nom="gravatar21" titre="gravatar:cfg_titre_gravatar" parent="bando_squelette" icone="images/gravatar-16.png" action="configurer_gravatar" />
+</paquet>

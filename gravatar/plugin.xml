@@ -2,7 +2,7 @@
 	<nom>Gravatar</nom>
 	<auteur>Thomas Beaumanoir, [Clever Age->http://www.clever-age.com], Fil et Cedric</auteur>
 	<icon>images/gravatar-64.png</icon>
-	<version>1.3.3</version>
+	<version>1.4.0</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>
@@ -32,7 +32,7 @@ _ Configures a default image, and image size.
 	</description>
 	<lien>http://www.spip-contrib.net/gravatar</lien>
 	<prefix>gravatar</prefix>
-	<fonctions>inc/gravatar.php</fonctions>
+	<fonctions>gravatar_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>gravatar_pipelines.php</inclure>
