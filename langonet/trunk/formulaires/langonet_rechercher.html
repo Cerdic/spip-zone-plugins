@@ -33,9 +33,15 @@
 			</li>
 			<B_modules>
 			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
+				<p class="explication">#ENV**{_info_modules}</p>
 				<label><:langonet:label_modules:></label>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]
-				<div>
+				<div class="choix">
+					<input type="checkbox" name="defaut_modules" id="defaut_modules_#ENV{type}" value="oui"[(#ENV{defaut_modules}|oui) checked="checked"]
+								 onchange="jQuery(this).prop('checked')?jQuery('#liste_modules_#ENV{type}').hide('fast'):jQuery('#liste_modules_#ENV{type}').show('fast');" />
+					<label for="defaut_modules_#ENV{type}">#ENV**{_label_defaut}</label>
+				</div>
+				<div id="liste_modules_#ENV{type}"[(#ENV{defaut_modules}|oui)style="display:none;"]>
 					<ol class="spip">
 			<BOUCLE_modules(DATA){source table, #ENV{_modules}}>
 						<li class="choix">
