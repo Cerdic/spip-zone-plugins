@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_delier_document' => 'Unlink this document from this article',
-	'bouton_enlever' => 'Enlever', # NEW
+	'bouton_enlever' => 'Remove',
 	'bouton_parcourir' => 'Browse',
 	'bouton_recuperer_document' => 'Retrieve the document',
 	'bouton_supprimer' => 'Remove',
@@ -152,11 +152,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_propose_detail' => 'Le média "@titre@" est proposé à la publication
 	depuis', # NEW
 	'media_propose_sujet' => '[@nom_site_spip@] Propose : @titre@', # NEW
-	'media_propose_titre' => 'Média proposé
-	---------------', # NEW
+	'media_propose_titre' => 'Proposed Media
+---------------',
 	'media_propose_url' => 'Vous êtes invité à venir le consulter. Il est disponible à l\'adresse :', # NEW
 	'media_publie_detail' => 'Le média "@titre@" vient d\'être publié par @connect_nom@.', # NEW
-	'media_publie_sujet' => '[@nom_site_spip@] PUBLIÉ : @titre@', # NEW
+	'media_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
 	'media_publie_titre' => 'Média publié
 	--------------', # NEW
 	'media_valide_date' => 'Sous réserve de changement, ce média sera publié', # NEW
