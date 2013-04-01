@@ -7,8 +7,8 @@
 		</multi>
 	</slogan>
 	<auteur>Fil</auteur>
-	<licence>&#169; 2009-2011 - GNU/LGPL - MIT</licence>
-	<version>1.4.0</version>
+	<licence>&#169; 2009-2013 - GNU/LGPL - MIT</licence>
+	<version>1.4.1</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -19,7 +19,7 @@
 	<lien>http://zzz.rezo.net/Memoization.html</lien>
 	<prefix>Memoization</prefix>
 	<icon>memoization.png</icon> <!-- icone : http://www.flickr.com/photos/laszlo-photo/149047693/ -->
-	<options>inc/memoization.php</options>
+	<options>memoization_options.php</options>
 	<categorie>performance</categorie>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>

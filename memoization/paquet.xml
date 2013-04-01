@@ -1,0 +1,20 @@
+<paquet
+	prefix="Memoization"
+	categorie="performance"
+	version="1.4.1"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="memoization.png"
+	documentation="http://zzz.rezo.net/Memoization.html"
+>	
+
+	<nom>Memoization</nom>
+	<!-- Gestion du cache de SPIP par diverses méthodes. -->
+
+	<auteur>Fil</auteur>
+
+	<copyright>2009-2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
+</paquet>
