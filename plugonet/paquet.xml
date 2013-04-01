@@ -1,7 +1,7 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="0.6.10"
+	version="0.7.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="plugonet-64.png"

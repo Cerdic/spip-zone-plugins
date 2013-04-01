@@ -6,8 +6,10 @@
 		</small>
 	</p>
 <BOUCLE_xml(DATA){source pregfiles, #ENV{dossier}, #ENV{regexp}}{par valeur}>
+	#SET{disabled,''}
+	[(#VALEUR|dirname|concat{/paquet.xml}|file_exists|oui)[(#SET{disabled,oui})]]
 	<div class="choix">
-		<input type="checkbox" name="xml[]" class="checkbox xml" id="xml_#COMPTEUR_BOUCLE" value="#VALEUR" />
+		<input type="checkbox" name="xml[]" class="checkbox xml" id="xml_#COMPTEUR_BOUCLE" value="#VALEUR"[(#GET{disabled}|oui)disabled="disabled"] />
 		<label for="xml_#COMPTEUR_BOUCLE">
 			[(#REM) <!-- Raccourci qui lance l'operation en GET avec certains parametres choisis par defaut -->]
 			#SET{url, #ENV{onglet}|generer_url_ecrire{un_xml=#VALEUR}}
@@ -15,6 +17,7 @@
 				#SET{url, #GET{url}|parametre_url{forcer,on}|parametre_url{simuler,on}}
 			]
 			<a[ href="(#GET{url})"]>[(#VALEUR|joli_repertoire)]</a>
+			[(#GET{disabled}|oui)<small>(<:plugonet:info_paquet_existant:>)</small>]
 		</label>
 	</div>
 </BOUCLE_xml>
@@ -26,10 +29,12 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		jQuery("a#cocher_tout").click(function () {
-			jQuery('input[type=checkbox].xml').attr('checked', 'checked');
+			jQuery('input[type=checkbox].xml').not(':disabled').attr('checked', 'checked');
+			return false;
 	    });
 		jQuery("a#decocher_tout").click(function () {
 			jQuery('input[type=checkbox].xml').attr('checked', false);
+			return false;
 	    });
 	});
 //]]>
