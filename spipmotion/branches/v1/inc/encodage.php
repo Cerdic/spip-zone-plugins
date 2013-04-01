@@ -90,9 +90,12 @@ function encodage($source,$doc_attente){
 	$id_objet = $attente['id_objet'];
 
 	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
-	if($source['rotation'] == '90'){
+	
+	if(($encodeur == 'ffmpeg2theora') && $GLOBALS['meta']['spipmotion_ffmpeg2theora_casse'] == 'oui')
 		$encodeur = 'ffmpeg';
-	}
+	
+	if($source['rotation'] == '90')
+		$encodeur = 'ffmpeg';
 	
 	include_spip('inc/documents');
 	$chemin = get_spip_doc($source['fichier']);
@@ -377,7 +380,11 @@ function encodage($source,$doc_attente){
 			}else{
 				$vbitrate = null;
 			}
-			$infos_sup_normal .= ' -sameq ';
+			if(version_compare($ffmpeg_version,'1.0.0','<')){
+				$infos_sup_normal .= ' -sameq ';
+			}else{
+				$infos_sup_normal .= ' -q:v 0 ';
+			}
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
 			$vbitrate = lire_config("spipmotion/bitrate_$extension_attente","448");
@@ -406,7 +413,12 @@ function encodage($source,$doc_attente){
 				if(version_compare($ffmpeg_version,'0.7.10','<')){
 					$infos_sup_normal .= ' -vpre baseline -vpre ipod640';
 				}else{
-					$infos_sup_normal .= ' -profile baseline -vpre ipod640';	
+					if(version_compare($ffmpeg_version,'1.1.0','<')){
+						$infos_sup_normal .= ' -profile baseline -vpre ipod640';
+					}else{
+						$infos_sup_normal .= ' -profile:v baseline -vpre ipod640';
+					}
+						
 				}
 			}
 			/**
@@ -443,6 +455,8 @@ function encodage($source,$doc_attente){
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 		}else{
+			if(($vcodec == '--vcodec libtheora'))
+				$passes = 1;
 			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($vcodec == '--vcodec libtheora') OR ($extension_attente == 'webm'))){
 				spip_log('Premiere passe','spipmotion');
 				if ($ffmpeg_version < '0.7'){
@@ -468,7 +482,6 @@ function encodage($source,$doc_attente){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "-map_metadata 0:0";
 					$metadatas_supp = '';
 					$metas_orig = @unserialize($source['metas']);
 					
@@ -490,7 +503,6 @@ function encodage($source,$doc_attente){
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
 				}
-				$infos_sup_normal .= " -map_metadata 0:0";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
