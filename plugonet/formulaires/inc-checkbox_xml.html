@@ -7,7 +7,8 @@
 	</p>
 <BOUCLE_xml(DATA){source pregfiles, #ENV{dossier}, #ENV{regexp}}{par valeur}>
 	#SET{disabled,''}
-	[(#VALEUR|dirname|concat{/paquet.xml}|file_exists|oui)[(#SET{disabled,oui})]]
+	[(#ENV{form}|=={plugonet_generer}|oui)
+	[(#VALEUR|dirname|concat{/paquet.xml}|file_exists|oui)[(#SET{disabled,oui})]]]
 	<div class="choix">
 		<input type="checkbox" name="xml[]" class="checkbox xml" id="xml_#COMPTEUR_BOUCLE" value="#VALEUR"[(#GET{disabled}|oui)disabled="disabled"] />
 		<label for="xml_#COMPTEUR_BOUCLE">
