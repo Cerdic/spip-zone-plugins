@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_previsu' => 'Preview',
 
 	// L
-	'lien_recharger_voir_player' => 'Recharger le lecteur', # NEW
+	'lien_recharger_voir_player' => 'Reload the player',
 
 	// M
 	'message_document_attente_encodage' => 'This document is in the encoding queue.',
