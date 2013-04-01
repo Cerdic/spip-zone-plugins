@@ -775,41 +775,6 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 }
 
 /**
- * Affiche une icone nommee type_*_*.???
- *
- * @param string $classe
- *   Nom du type d'icone. (correspond au CLASS microformat)
- * @param string|array $valeur
- *   Nom du sous-type d'icove. (correspond au TITLE microformat)
- * @param string $sep
- *   Separateur place entre les icones
- * @return string
- *   Dessin et texte
- */
-function association_formater_typecoord($classe, $valeur, $sep=' ') {
-	include_spip('coordonnees_fonctions'); // pour utiliser les filtres du plugin "Coordonnees"
-	if ( function_exists('logo_type_') ) // bonne version du plugin "Coordonnees" activee
-		return logo_type_($classe, $valeur, $sep).$sep;
-	global $formats_logos;
-	$types = explode(',', $valeur);
-	$res = '';
-	foreach ($types as $type) {
-		$type = strtolower($type);
-		$lang =  _T('coordonnees:type'. ($classe?"_$classe":'') . ($valeur?"_$valeur":'') );
-		foreach ($formats_logos as $format) { // @file ecrire/inc/chercher_logo.php
-			$fichier = "images/type_$classe". ($type?"_ $type":'') .".$format";
-			if ( $chemin = find_in_path($fichier) )
-			$img = $chemin;
-		}
-		if ($img)
-			$res .= "<img class='type' src='$img' alt='$type' title='". $lang ."' />$sep"; // $res .= association_bouton_act($type, $img, '', '', '', '') ; // c'est comme un bouton... sans action/lien...
-		elseif ($type)
-			$res .= "<abbr class='type' title='$type'>". $lang ."</abbr>$sep";
-	}
-	return $res;
-}
-
-/**
  * Affichage micro-formate de liste de numeros de telephones
  *
  * @param array $id_objets
@@ -851,7 +816,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 			foreach ($id_objets as $id_objet) { // prepare la structure du tableau renvoye
 				$telephones_array[$id_objet] = array();
 			}
-			$query = sql_select('l.id_objet, l.type, n.*','spip_numeros AS n INNER JOIN spip_numeros_liens AS l ON l.id_numero=n.id_numero', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
+			$query = sql_select('l.id_objet, l.type, n.*','spip_numeros AS n INNER JOIN spip_numeros_liens AS l ON l.id_numero=n.id_numero', sql_in('l.id_objet', $id_objets).' AND l.objet='. sql_quote($objet) );
 			while ($data = sql_fetch($query)) { // on recupere tous les numeros dans un tableau de tableaux
 				$telephones_array[$data['id_objet']][] = $data;
 			}
@@ -862,13 +827,12 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 	}
 	$telephones_string = array();  // initialisation du tableau renvoye
 	foreach ($telephones_array as $id_objet => $telephones) { // on cree la liste de chaines de numeros
-		$telephones_string[$id_objet] = ''; // initialisation de la chaine renvoyee
 		foreach ($telephones as $telephone) { // formater chaque numero
 			if ( !is_array($telephone) ) {
 				$telephone['numero'] = $telephone;
 			}
 			if ($html_span) { // formatage HTML avec microformat
-				$telephones_string[$id_objet] =  "<$html_span class='tel'>". association_formater_typecoord('tel', $telephone['type']);
+				$telephones_string[$id_objet] .=  "<$html_span class='tel'>". appliquer_filtre($telephone['type'], 'logo_type_tel');
 				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
 				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
 				unset($telephone['type']); // ne devrait plus etre traite par le modele
@@ -944,10 +908,9 @@ function association_formater_adresses($id_objets, $objet='auteur', $html_span='
 	}
 	$adresses_string = array();  // initialisation du tableau renvoye
 	foreach ($adresses_array as $id_objet => $adresses) {  // on cree la liste de chaines d'adresses
-		$adresses_string[$id_objet] = ''; // initialisation de la chaine renvoyee
 		foreach ($adresses as $adresse) { // chaque adresse est forcement un tableau bien qu'on le verifie pas
 			if ($html_span) { // formatage HTML avec microformat
-				$adresses_string[$id_objet] =  "<$html_span class='adr'>". association_formater_typecoord('adr', $adresse['type']);
+				$adresses_string[$id_objet] .=  "<$html_span class='adr'>". appliquer_filtre($adresse['type'], 'logo_type_adr');
 				if ($adresse['voie'])
 					$adresse['voie'] = "<span class='street-address'>$adresse[voie]</span>";
 				if ($adresse['ville'])
@@ -1017,7 +980,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 			$emails_array[$id_objet] = array();
 		}
 		if ( $objet=='auteur' ) { // on commence par recuperer les emails de la table spip_auteurs
-			$query = sql_select("id_auteur, email, CONCAT('0-', id_auteur) AS id_email, '' AS titre, '' AS type", 'spip_auteurs', sql_in('id_auteur', $id_objets)." AND email <> ''"); // on peut prendre comme titre le champ "nom" qui peut etre different du nom de membre affiche (c'est un pseudo) mais ce n'est pas forcement pertinent ; on peut reprendre le champ "email" aussi mais cela empeche le reformatage automatique et on a une longue colonne disgracieuse...
+			$query = sql_select("id_auteur, email, CONCAT('0-', id_auteur) AS id_email, '' AS titre, 'pref' AS type", 'spip_auteurs', sql_in('id_auteur', $id_objets)." AND email <> ''"); // on peut prendre comme titre le champ "nom" qui peut etre different du nom de membre affiche (c'est un pseudo) mais ce n'est pas forcement pertinent ; on peut reprendre le champ "email" aussi mais cela empeche le reformatage automatique et on a une longue colonne disgracieuse...
 			while ($auteur_info = sql_fetch($query))
 				$emails_array[$auteur_info['id_auteur']][] = $auteur_info;
 			sql_free($query);
@@ -1035,15 +998,14 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 	}
 	$emails_string = array();  // initialisation du tableau renvoye
 	foreach ($emails_array as $id_objet => $courriels) {  // on cree la liste de chaines de courriels
-		$emails_string[$id_objet] = ' '; // initialisation de la chaine renvoyee
 		foreach ($courriels as $courriel) { // formater chaque mel
 			$href = FALSE;
 			if ( !is_array($courriel) ) {
 				$courriel['email'] = $courriel;
 			}
 			if ($html_span) { // balisage HTML avec microformat
-				$emails_string[$id_objet] = "<$html_span class='email'>". association_formater_typecoord('mel', $courriel['type']);
-				if ( !$courriel['type'] || stripos($courriel['type'], 'internet')!==FALSE )
+				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_mel');
+				if ( !in_array($courriel['format',array('x400','ldap')) )
 					$href = TRUE;
 				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
@@ -1059,7 +1021,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 }
 
 /**
- * Affichage micro-formate de liste d'adresses electroniques
+ * Affichage micro-formate de liste de sites
  *
  * @param array $id_objets
  *   Liste des (listes de) URLs a formater, ou
@@ -1100,11 +1062,11 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 			$urls_array[$id_objet] = array();
 		}
 		if ( in_array($objet, array('auteur', 'breve', 'forum', 'syndic', 'signature')) ) { // on commence par recuperer les #NOM_SITE et #URL_SITE des tables natives de SPIP (pour les breves c'est plutot #LIEN_TITRE et #LIEN_URL ! pfff...)
-			$query = sql_select("id_$objet, ". ($objet=='breve'?'lien_titre':'nom_site') .' AS titre, '.  ($objet=='breve'?'lien_url':'url_site') ." AS url, CONCAT('0-',id_$objet) AS id_url, 'site' AS type",
+			$query = sql_select("0 AS id_url, id_$objet AS id_objet, ". ($objet=='breve'?'lien_titre':'nom_site') .' AS titre, '.  ($objet=='breve'?'lien_url':'url_site') ." AS url, 'pref' AS type",
 			"spip_{$objet}s",
 			sql_in("id_$objet", $id_objets) .' AND '. ($objet=='breve'?'lien_url':'url_site'). "<>''");
 			while ($site = sql_fetch($query))
-				$urls_array[$site["id_$objet"]][] = $site;
+				$urls_array[$site['id_objet']][] = $site;
 			sql_free($query);
 		}
 		$trouver_table = charger_fonction('trouver_table', 'base');
@@ -1115,46 +1077,24 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 			}
 			sql_free($query);
 		}
-/*
-		if ( $trouver_table('sites') && $trouver_table('sites_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
-			$query = sql_select('l.id_site AS id_url, l.id_objet, l.type, s.*','spip_sites AS s INNER JOIN spip_sites_liens AS l ON l.id_site=s.id_site', sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
-			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
-				$urls_array[$data['id_objet']][] = $data;
-			}
-			sql_free($query);
-		}
-		if ( $trouver_table('ims') && $trouver_table('ims_liens') ) { // le plugin "Coordonnees" est installe (active ou pas)
-			$query = sql_select("l.id_objet, l.type, m.id_im AS id_url, m.identifiant AS titre,  CONCAT(CONCAT(t.url_debut,m.titre),t.url_fin) AS url ",
-			'spip_ims AS m INNER JOIN spip_ims_liens AS l ON l.id_im=m.id_im INNER JOIN spip_ims_types AS t ON l.type=t.type',
-			sql_in('l.id_objet', $id_objets)." AND l.objet='$objet' ");
-			while ($data = sql_fetch($query)) { // on recupere tous les sites lies dans un tableau de tableaux
-				$urls_array[$data['id_objet']][] = $data;
-			}
-			sql_free($query);
-		}
-*/
 	} else { // on a deja la liste des URLs !
 		$urls_array = $id_objets;
 	}
 	$urls_string = array();  // initialisation du tableau renvoye
 	foreach ($urls_array as $id_objet => $urls) { // on le transforme en liste de chaines formatees
-		$urls_string[$id_objet] = ''; // initialisation de la chaine renvoyee
 		foreach ($urls as $lien) { // il y a la(s) URL(s)
 			if ( !is_array($lien) ) {
 				$lien['url'] = $lien;
 			}
-			if ( $lien['type'] && $lien['titre'] && !$lien['url'] ) { // pas d'URL ??? on va tenter d'utiliser l'identifiant de messagerie
-				$lien['url'] = $lien['type'].':'. htmlspecialchars($lien['titre']) ; // on presume que le "type" est le protocole et que le "titre" est le reste...
-			}
 			if ($a) { // balisage HTML avec microformat
-				$urls_string[$id_objet] = "<a class='url' href='$lien[url]' id='$lien[id_url]'>". association_formater_typecoord('url', $lien['type']);
-				unset($lien['type']); // ne devrait plus etre traite par le modele
-				unset($lien['id_objet']); // ne devrait plus etre traite par le modele
-				unset($lien['id_url']); // ne devrait pas etre utilise par le modele
-				$urls_string[$id_objet] = $urls_string[$id_objet]. ($lien['titre']?$lien['titre']:$lien['url']); // on affiche le titre si present sinon la valeur
+				$urls_string[$id_objet] .= appliquer_filtre($lien['type'], 'logo_type_mel') ." <a class='url' href='$lien[url]'>";
+#				unset($lien['type']); // ne devrait plus etre traite par le modele
+#				unset($lien['id_objet']); // ne devrait plus etre traite par le modele
+#				unset($lien['id_url']); // ne devrait pas etre utilise par le modele
+				$urls_string[$id_objet] .= ($lien['titre']?$lien['titre']:$lien['url']); // on affiche le titre si present sinon la valeur
 			} else
 				$urls_string[$id_objet] .= $lien['url'];
-			$urls_string .= ($a?'</a>':'') .$sep;
+			$urls_string[$id_objet] .= ($a?'</a>':'') .$sep;
 		}
 	}
 	return $urls_string;
