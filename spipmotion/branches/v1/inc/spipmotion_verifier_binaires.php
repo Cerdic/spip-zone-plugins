@@ -62,16 +62,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		$erreurs[] = 'exec';
 	}
 	else{
-		/**
-		 * Tester ffmpeg2theora
-		 */
-		exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
-		if($retour_ffmpeg2theora_int != 0){
-			ecrire_config('spipmotion_ffmpeg2theora_casse', 'oui');
-			$erreurs[] = 'ffmpeg2theora';
-		}else{
-			effacer_config('spipmotion_ffmpeg2theora_casse');
-		}
 	
 		/**
 		 * Tester flvtool2
@@ -167,6 +157,7 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 			}
 		}else{
 			exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
+			spip_log($retour_ffmpeg,'test');
 			if($retour_int_ffmpeg != 0){
 				ecrire_config('spipmotion_casse', 'oui');
 				$erreurs[] = 'ffmpeg';
@@ -175,6 +166,17 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 					effacer_config('spipmotion_casse');
 				}
 			}
+		}
+		
+		/**
+		 * Tester ffmpeg2theora
+		 */
+		exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
+		if($retour_ffmpeg2theora_int != 0){
+			ecrire_config('spipmotion_ffmpeg2theora_casse', 'oui');
+			//$erreurs[] = 'ffmpeg2theora';
+		}else{
+			effacer_config('spipmotion_ffmpeg2theora_casse');
 		}
 	}
 
