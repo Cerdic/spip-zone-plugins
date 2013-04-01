@@ -7,18 +7,33 @@ function formulaires_langonet_rechercher_charger($type) {
 	$explication = _T('langonet:info_rechercher_'.$type);
 	$info_pattern = _T('langonet:info_pattern_'.$type.'_cherche');
 
+	$modules_fr = ($type == 'texte') ? langonet_lister_modules('fr') : '';
+	$modules_choisis = array();
+	if (_request('modules')) {
+		foreach (_request('modules') as $_valeurs) {
+			$modules_choisis[] = reset(explode(':', $_valeurs));
+		}
+	}
+	else {
+		$modules_choisis = array('ecrire', 'spip', 'public');
+	}
 	return array('type' => $type,
 				'_legende' => $legende,
 				'_explication' => $explication,
 				'_info_pattern' => $info_pattern,
+				'_modules' => $modules_fr,
+				'_modules_choisis' => $modules_choisis,
 				'pattern' => _request('pattern'),
 				'correspondance' => _request('correspondance'));
 }
 
 function formulaires_langonet_rechercher_verifier($type) {
 	$erreurs = array();
-	if (!_request('pattern')) {
-		$erreurs['pattern'] = _T('langonet:message_nok_champ_obligatoire');
+	$obligatoires = ($type == 'texte') ? array('pattern', 'modules') : array('pattern');
+	foreach ($obligatoires as $_champ) {
+		if (!_request($_champ)) {
+			$erreurs[$_champ] = _T('langonet:message_nok_champ_obligatoire');
+		}
 	}
 	return $erreurs;
 }
@@ -26,13 +41,14 @@ function formulaires_langonet_rechercher_verifier($type) {
 function formulaires_langonet_rechercher_traiter($type) {
 
 	// Recuperation des champs du formulaire
-	$pattern = htmlentities(_request('pattern'), ENT_COMPAT, 'UTF-8');
+	$pattern = _request('pattern');
 	$correspondance = _request('correspondance');
+	$modules = _request('modules');
 	$langonet_rechercher = charger_fonction('langonet_rechercher_'.$type,'inc');
 
 	// Verification et formatage des resultats de la recherche
 	$retour = array();
-	$resultats = $langonet_rechercher($pattern, $correspondance);
+	$resultats = $langonet_rechercher($pattern, $correspondance, $modules);
 	if ($resultats['erreur']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}

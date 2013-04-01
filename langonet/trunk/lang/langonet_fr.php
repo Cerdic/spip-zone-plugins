@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_corriger' => 'Obtenir les corrections',
 	'bouton_generer' => 'Générer',
+	'bouton_generer2' => 'G&eacute;n&eacute;rer',
 	'bouton_langonet' => 'LangOnet',
 	'bouton_lister' => 'Afficher',
 	'bouton_rechercher' => 'Rechercher',
@@ -64,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langue_source' => 'Langue source',
 	'label_mode' => 'Mode de création des nouveaux items',
 	'label_module' => 'Module',
+	'label_modules' => 'Modules disponibles pour le recherche',
 	'label_pattern' => 'Chaîne à rechercher',
 	'label_verification' => 'Type de vérification',
 	'label_verification_definition' => 'Détection des définitions manquantes',
