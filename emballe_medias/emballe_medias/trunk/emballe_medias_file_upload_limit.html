@@ -4,7 +4,7 @@
 [(#REM) Récupérer le nombre de docs attachés à l'objet passé dans l'env ]
 [(#SET{req_env,[select * from (#ENV{objet}|table_objet_sql) where [(#ENV{objet}|id_table_objet)]=[(#ENV{id_objet}|intval)] AND statut IN ('publie','prop','prepa')]})]
 <BOUCLE_objet_env(DATA){source sql,#GET{req_env}}>
-	<BOUCLE_doc(DOCUMENTS spip_documents_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}>	</BOUCLE_doc>
+	<BOUCLE_doc(DOCUMENTS spip_documents_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}> </BOUCLE_doc>
 	[(#SET{result,#TOTAL_BOUCLE})]
 	</B_doc>
 </BOUCLE_objet_env>
