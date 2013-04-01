@@ -6,6 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_cocher_tout' => 'Tout cocher',
+	'bouton_cocher_aucun' => 'Tout décocher',
+	'bouton_cocher_spip' => 'Cocher les modules SPIP',
 	'bouton_corriger' => 'Obtenir les corrections',
 	'bouton_generer' => 'Générer',
 	'bouton_langonet' => 'LangOnet',
