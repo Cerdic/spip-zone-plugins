@@ -8,8 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_corriger' => 'Obtenir les corrections',
 	'bouton_generer' => 'Générer',
-	'bouton_generer2' => 'G&Eacute;n&eacute;rer',
-	'bouton_generer3' => 'génÉrer',
 	'bouton_langonet' => 'LangOnet',
 	'bouton_lister' => 'Afficher',
 	'bouton_rechercher' => 'Rechercher',
@@ -139,11 +137,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_mode_vide' => 'Une chaîne vide',
 
 	// T
-	'test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et est égal à test.',
-	'test_item_1_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.',
-	'test_item_2_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.',
-	'test_item_non_utilise_1' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().',
-	'test_item_non_utilise_2' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().',
 	'texte_item_defini_ou' => '<em>défini dans :</em>',
 	'texte_item_mal_defini' => '<em>mais pas défini dans le bon module :</em>',
 	'texte_item_non_defini' => '<em>mais défini nulle part !</em>',
@@ -159,9 +152,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_verifier' => 'Vérification des fichiers de langue',
 	'titre_page' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
-
-	// Z
-	'z_test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et contient test.'
 );
 
 ?>
