@@ -1,0 +1,20 @@
+<paquet
+	prefix="tablematieres"
+	categorie="edition"
+	version="2.0.3"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.99]"
+	documentation="http://www.spip-contrib.net/Table-des-Matieres"
+>	
+
+	<nom>Table des Mati&#232;res</nom>
+	<!-- Créer le sommaire d'un article -->
+
+	<auteur>marcimat</auteur>
+	<auteur>Fil</auteur>
+	<auteur>James</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="tdm_pipelines.php" />
+</paquet>
