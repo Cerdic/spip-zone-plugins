@@ -51,13 +51,13 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan='') {
 	if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0] != $classe)){
 		$erreurs['code'] = _T('asso:erreur_plan_code');
 	}
-	
+
 	/* verifier la date */
 	if ($erreur_date = association_verifier_date(_request('date_anterieure'))) {
 		$erreurs['date_anterieure'] = _request('date_anterieure')."&nbsp;:&nbsp;".$erreur_date; /* on ajoute la date eronee entree au debut du message d'erreur car le filtre affdate corrige de lui meme et ne reaffiche plus les valeurs eronees */
 	}
 
-	
+
 	if (!array_key_exists("code",$erreurs)) { /* si le code est valide */
 		/* verifier que le code n'est pas deja attribue a une ligne du plan ou si il l'est que c'est a celle qu'on edite */
 		if ($r = sql_fetsel('code,id_plan', 'spip_asso_plan', "code=$code")) {
@@ -84,10 +84,10 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan='') {
 	if ($err OR !$id_plan) {
 		$res['message_erreur'] = ($err?$err:_T('erreur'));
 	} else {
-		$res['message_ok'] = ''; 
-		$res['redirect'] = generer_url_ecrire('plan'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
+		$res['message_ok'] = '';
+		$res['redirect'] = generer_url_ecrire('plan_comptable'); /* on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation... */
 	}
-	
+
 	return $res;
 }
 ?>
