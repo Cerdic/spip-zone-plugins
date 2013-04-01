@@ -7,7 +7,7 @@ function formulaires_langonet_rechercher_charger($type) {
 	$explication = _T('langonet:info_rechercher_'.$type);
 	$info_pattern = _T('langonet:info_pattern_'.$type.'_cherche');
 
-	$modules_fr = ($type == 'texte') ? langonet_lister_modules('fr') : '';
+	$modules_fr = langonet_lister_modules('fr');
 	$modules_choisis = array();
 	if (_request('modules')) {
 		foreach (_request('modules') as $_valeurs) {
@@ -15,7 +15,7 @@ function formulaires_langonet_rechercher_charger($type) {
 		}
 	}
 	else {
-		$modules_choisis = array('ecrire', 'spip', 'public');
+		$modules_choisis = ($type == 'texte') ? array('ecrire', 'spip', 'public') : array_keys($modules_fr);
 	}
 	return array('type' => $type,
 				'_legende' => $legende,

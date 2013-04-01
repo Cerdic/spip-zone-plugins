@@ -205,8 +205,8 @@ function langonet_lister_modules($langue, $exclure_paquet=true) {
 		// On extrait le module
 		if (preg_match(",/lang/([^/]+)_${langue}\.php$,i", $_fichier, $module)) {
 			// On ajoute le module à la liste : l'index correspond au module et la valeur au dossier
-			if ($exclure_paquet
-			AND (strtolower(substr($module[1], 0, 7)) != 'paquet-')) {
+			if (!$exclure_paquet OR ($exclure_paquet
+			AND (strtolower(substr($module[1], 0, 7)) != 'paquet-'))) {
 				$liste[$module[1]] = dirname($_fichier) . '/';
 			}
 		}

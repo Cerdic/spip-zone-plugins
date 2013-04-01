@@ -16,22 +16,6 @@
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
 				<input type="text" name="pattern" id="pattern_#ENV{type}" value="#ENV{pattern}" class="text" />
 			</li>
-			<B_modules>
-			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
-				<label for="modules"><:langonet:label_modules:></label>
-				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]
-				<div>
-					<ol class="spip">
-			<BOUCLE_modules(DATA){source table, #ENV{_modules}}>
-						<li class="choix">
-							<input type="checkbox" value="#CLE:#VALEUR" name="modules[]" id="module_#CLE"[ (#CLE|in_array{#ENV{_modules_choisis}}|oui)checked="checked"] />
-							<label for="module_#CLE">#CLE</label>
-						</li>
-			</BOUCLE_modules>
-					</ol>
-				</div>
-			</li>
-			</B_modules>
 			<li class="editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
 				<label><:langonet:label_correspondance:></label>
 				<div class="choix">
@@ -47,6 +31,22 @@
 					<label for="correspondance_contient_#ENV{type}"><:langonet:label_correspondance_contient:></label>
 				</div>
 			</li>
+			<B_modules>
+			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
+				<label><:langonet:label_modules:></label>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]
+				<div>
+					<ol class="spip">
+			<BOUCLE_modules(DATA){source table, #ENV{_modules}}>
+						<li class="choix">
+							<input type="checkbox" value="#CLE:#VALEUR" name="modules[]" id="module_#ENV{type}_#CLE"[ (#CLE|in_array{#ENV{_modules_choisis}}|oui)checked="checked"] />
+							<label for="module_#ENV{type}_#CLE">#CLE</label>
+						</li>
+			</BOUCLE_modules>
+					</ol>
+				</div>
+			</li>
+			</B_modules>
 		</ul>
 
 		<p class='boutons'>

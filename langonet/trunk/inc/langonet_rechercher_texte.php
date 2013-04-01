@@ -28,6 +28,7 @@ function inc_langonet_rechercher_texte($pattern, $correspondance, $modules) {
 	$tous_lang = array();
 	if ($modules) {
 		foreach ($modules as $_valeur) {
+			// L'index 0 correspond au module, l'index 1 au fichier
 			$valeurs = explode(':', $_valeur);
 			$var_source = 'i18n_' . $valeurs[0] . '_' . $langue;
 			if (empty($GLOBALS[$var_source])) {
