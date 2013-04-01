@@ -410,7 +410,10 @@ function action_crayons_html_dist() {
 	// du formulaire dans un controleur Draggable, par exemple, mais il y a
 	// d'autres usages possibles)
 	include_spip('inc/crayons');
-	lang_select($GLOBALS['auteur_session']['lang']);
+
+	if(!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang'] OR ($GLOBALS['forcer_lang'] === 'non'))
+		lang_select($GLOBALS['auteur_session']['lang']);
+	
 	$return = affiche_controleur(_request('class'));
 	if (!_request('type') OR _request('type') == 'crayon')
 	  $return['$html'] = crayons_formulaire($return['$html']);

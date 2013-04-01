@@ -1,7 +1,7 @@
 <paquet
 	prefix="crayons"
 	categorie="edition"
-	version="1.15.1"
+	version="1.15.2"
 	etat="stable"
 	compatibilite="[1.9.0;*]"
 	logo="images/crayon-32.png"
@@ -18,6 +18,4 @@
 	
 	<pipeline nom="affichage_final" inclure="crayons_fonctions.php" />
 	<pipeline nom="header_prive" inclure="crayons_fonctions.php" action="insert_head" />
-
-	<!-- utilise id="cfg" version="[1.14.1;]" / -->
 </paquet>

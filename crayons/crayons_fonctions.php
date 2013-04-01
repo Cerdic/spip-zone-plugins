@@ -20,16 +20,11 @@ function analyse_droits_rapide_dist() {
 
 // Le pipeline header_prive (pour y tester les crayons)
 function Crayons_insert_head($head) {
-	include_spip('cfg_options');
-
-	// par defaut, pas de traitement sur les entetes
-	$res = $head;
-
 	// verifie la presence d'une meta crayons, si c'est vide
 	// on ne cherche meme pas a traiter l'espace prive
 	$config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
 	if (empty($config_espace_prive)) {
-		return $res;
+		return $head;
 	}
 
 	// verifie que l'edition de l'espace prive est autorisee
@@ -39,12 +34,12 @@ function Crayons_insert_head($head) {
 	       in_array(_request('exec'),explode(',',$config_espace_prive['exec_autorise']))) {
 			// Calcul des droits
 			include_spip('inc/crayons');
-			$res = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
+			$head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
 		}
 	}
 
 	// retourne l'entete modifiee
-	return $res;
+	return $head;
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
@@ -88,8 +83,12 @@ function &Crayons_affichage_final(&$page) {
 }
 
 function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page') {
-	lang_select($GLOBALS['auteur_session']['lang']);
-
+	/**
+	 * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
+	 */
+	if(!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang'] OR ($GLOBALS['forcer_lang'] === 'non'))
+		lang_select($GLOBALS['auteur_session']['lang']);
+	
 	$jsFile = generer_url_public('crayons.js');
 	if (_DEBUG_CRAYONS)
 		$jsFile = parametre_url($jsFile,'debug_crayons',1,'&');
@@ -172,15 +171,15 @@ EOH;
 	if ($pos_head === false)
 		return $page;
 
-  // js inline avant la premiere css, ou sinon avant la fin du head
+	// js inline avant la premiere css, ou sinon avant la fin du head
 	$pos_link = strpos($page, '<link ');
-  if (!$pos_link)
-	  $pos_link = $pos_head;
-  $page = substr_replace($page, $incJS, $pos_link, 0);
+	if (!$pos_link)
+		$pos_link = $pos_head;
+	$page = substr_replace($page, $incJS, $pos_link, 0);
 
 	// css avant la fin du head
-  $pos_head = strpos($page, '</head>');
-	$page = substr_replace($page, $incCSS, $pos_head, 0);
+	$pos_head = strpos($page, '</head>');
+		$page = substr_replace($page, $incCSS, $pos_head, 0);
 	
 	return $page;
 }
