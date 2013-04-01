@@ -1,0 +1,7 @@
+<BOUCLE_a (SITES){id_syndic=#ENV{id,#ENV{id_site}}}>
+	[(#SET{rel,[(#VAL{rssjs}|uniqid)]})]
+	<dl id="#GET{rel}" class="rssjs[ (#ENV{class})]"></dl>
+	<script type="text/javascript">
+		google.setOnLoadCallback(initialize_rssjs('#URL_SYNDIC', #ENV{nbre_entrees,12}, '#GET{rel}', '#ENV{mode}'));
+	</script>
+</BOUCLE_a>
