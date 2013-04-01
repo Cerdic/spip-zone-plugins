@@ -1,0 +1,81 @@
+[(#REM)
+
+	Affichage d'une collection dont l'id_collection est passé en paramètre
+	
+	On affiche le media sélectionné dont l'id_article est passé en id_media
+	Si pas d'id_media valide passé en paramètre, on affiche le premier media de la collection
+	
+	En dessous du media affiché, on affiche la liste des medias de la collection
+
+	Paramètres accepté :
+	-* id_collection int : identifiant numérique de la collection
+	-* id_media int : id_article du media à afficher
+	-* hauteur_media int : hauteur qui sera passée en paramètre au modèle d'affichage du media
+	-* largeur_media int : largeur qui sera passée en paramètre au modèle d'affichage du media 
+]
+
+<BOUCLE_collection(COLLECTIONS){id_collection}>
+<BOUCLE_media_selected(ARTICLES){id_collection}{id_article=#ENV{id_media}}{par rang}>
+#SET{media,#ID_ARTICLE}
+</BOUCLE_media_selected>
+</B_media_selected>
+<BOUCLE_media_defaut(ARTICLES){id_collection}{par rang,num titre,titre}{0,1}>
+#SET{media,#ID_ARTICLE}
+</BOUCLE_media_defaut>
+<//B_media_selected>
+<BOUCLE_article_media(ARTICLES spip_collections_liens){id_collection}{id_article=#GET{media}}>
+<div class="media-selectionne" id="media_#ID_ARTICLE">
+	<h2 class="h2 #EDIT{titre}"><:collection:titre_media{titre=#TITRE,rang=#RANG}:></h2>
+	<B_documents_selectionne>
+	<BOUCLE_documents_selectionne(DOCUMENTS){id_article}>
+	</BOUCLE_documents_selectionne>
+	#SET{largeur_media,#ENV{largeur_media,600}}
+	#SET{hauteur_media,#ENV{hauteur_media}}
+	#SET{total,#TOTAL_BOUCLE}
+		<BOUCLE_doc_selectionne(DOCUMENTS){si #GET{total}|=={1}|oui}{id_article}>
+		[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
+		[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|oui)
+			[(#MODELE{doc_img,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},pagination=non,debut_d2c,env,ajax})]
+		]
+		[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|non)
+			[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,350})]]
+			[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},infos=non,noresize=oui,ajax})]
+		]
+		</BOUCLE_doc_selectionne>
+		<BOUCLE_document_selectionne_orig(DOCUMENTS){si #GET{total}|>{1}}{id_article}{mode !IN doc2img,conversion}>
+			[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
+			<BOUCLE_documents_lisibles(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{extension IN flv,mp3,ogg,mp4,ogv,webm,m4v}>
+				[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
+		 	</BOUCLE_documents_lisibles>
+				[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,''})]]
+				[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},autobuffer=non,noresize=oui,infos=non,env,ajax})]
+			</B_documents_lisibles>
+			[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},noresize=oui,autobuffer=non,infos=non,env,ajax})]
+			<//B_documents_lisibles>
+		</BOUCLE_document_selectionne_orig>
+		</B_documents_selectionne>
+</div>
+</BOUCLE_article_media>
+
+<B_medias>
+<ul class="liste-items medias-liste">
+<BOUCLE_medias(ARTICLES spip_collections_liens){id_collection}{par rang}>
+#SET{rang,#RANG}
+<li class="item media[(#ENV{id_media}|=={#ID_ARTICLE}|oui)on][(#ENV{id_media}|non|et{#COMPTEUR_BOUCLE|=={1}|oui}|oui)on]">
+	<BOUCLE_documents(DOCUMENTS){id_article}>
+	[(#SET{titre,[(#_medias:TITRE|sinon{#FICHIER})]})]
+	<a href="[(#SELF|parametre_url{id_media,#_medias:ID_ARTICLE}|ancre_url{media_#ID_ARTICLE})]" title="<:collection:title_voir_media{titre=#GET{titre}}|attribut_html|couper{70}:>" class="ajax">
+	[(#LOGO_DOCUMENT|image_passe_partout{80,80}|image_recadre{80,80}|inserer_attribut{class,""})]
+	<span class="compteur">#GET{rang}/#_medias:GRAND_TOTAL</span>
+	</a>
+	</BOUCLE_documents>
+	</B_documents>
+</li>
+</BOUCLE_medias>
+</ul>
+</B_medias>
+#BOITE_OUVRIR{'',notice}
+<p><:collection:message_collection_vide:></p>
+#BOITE_FERMER
+<//B_medias>
+</BOUCLE_collection>

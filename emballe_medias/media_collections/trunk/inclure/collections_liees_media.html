@@ -1,0 +1,21 @@
+[(#REM)
+
+	Une inclusion listant les collections auxquelles le média (l'article) passé en paramètre est lié
+	
+	Paramètres possibles :
+	-* id_article int (obligatoire) : l'id_article
+	-* afficher_si_vide string "non" : si "non" on n'affichera aucune div dans le cas où il n'y a pas de liaison
+	
+	NB : dans le cas où il n'y a pas liaison, une div est quand même affichée permettant d'être mise à jour en ajax
+	lors de l'utilisation du formulaire de liaison rapide FORMULAIRE_ASSOCIER_MEDIA_COLLECTION
+	
+]
+<B_collections>
+<div class="info_media info-collections_liees[ (#ENV{class})]">
+[(#GRAND_TOTAL|singulier_ou_pluriel{'collection:info_media_dans_collection','collection:info_media_dans_collections'})]
+<BOUCLE_collections(COLLECTIONS){id_article}{', '}><a href="#URL_COLLECTION">#TITRE</a></BOUCLE_collections>
+</div>
+</B_collections>
+[(#ENV{afficher_si_vide,oui}|!={non}|oui)
+<div class="info_media info-collections_liees"></div>]
+<//B_collections>

@@ -1,0 +1,55 @@
+<BOUCLE_contenu_collection(COLLECTIONS){id_collection}>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{collections}"><:collection:collections_titre:></a><span> &gt; </span>[<strong class="on">(#TITRE|supprimer_numero|couper{80})</strong>]</p>
+
+<div class="content-principal">
+	<div class="cartouche">
+		[(#LOGO_COLLECTION|image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		
+		<p class="info-publi">
+			[(#SET{date,[(#DATE|nom_jour|concat{[ (#DATE|affdate)]})]})]
+			[(#SET{date_iso,[(#DATE|date_iso)]})]
+			[(#ID_ADMIN|intval|>{0}|oui)
+			[(#SET{auteurs,[<a href="(#URL_AUTEUR{#ID_ADMIN})">[(#INFO_NOM{auteur,#ID_ADMIN})]</a>]})]
+			]
+			<:collection:info_collection_creation{date=#GET{date},date_abbr=#GET{date_iso},auteurs=#GET{auteurs}}:>
+		</p>
+	</div>
+	<div class="surlignable">
+		[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF|image_reduire{500,0})</div>]
+		<div class="infos_collection">
+			<div class="type_collection #TYPE_COLLECTION"><dl>
+				<dt><:collection:label_type:></dt>
+				<dd class="#EDIT{type_collection}">[(#TYPE_COLLECTION|titre_type_collection)]</dd>
+				<B_auteurs_collection>
+				<dd class="collaborateurs_collection">
+					<:collection:info_collaborateurs:>
+				<BOUCLE_auteurs_collection(AUTEURS){si #TYPE_COLLECTION|=={coop}|oui}{id_collection}{id_auteur != #ID_ADMIN}{0,1}> </BOUCLE_auteurs_collection>
+				#LESAUTEURS
+				</dd>
+				</B_auteurs_collection>
+			</dl></div>
+			[<div class="genre #GENRE"><dl>
+				<dt><:collection:label_genre:></dt>
+				<dd class="#EDIT{genre}">(#GENRE|titre_genre_collection)</dd>
+			</dl></div>]
+		</div>
+	</div>
+	<div class="content-collection[ (#GENRE)][ (#TYPE_COLLECTION)]">
+		[(#SET{inclure_collection,[(#CHEMIN{inclure/vues/collection_[(#TYPE_COLLECTION)]_[(#GENRE)].html}|sinon{[(#CHEMIN{inclure/vues/collection_[(#GENRE)].html}|sinon{[(#CHEMIN{inclure/vues/collection_[(#TYPE_COLLECTION)].html})]})]})]})]
+		[(#GET{inclure_collection}|?{#SET{inclure_collection,#GET{inclure_collection}|substr{0,-5}},#SET{inclure_collection,inclure/content-collection}})]
+		<INCLURE{fond=#GET{inclure_collection},ajax,env} />
+	</div>
+</div>
+[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+[(#REM)
+
+	Rien dans la collection, pas de forums
+	
+]
+<BOUCLE_forums(ARTICLES){id_collection}{0,1}>
+[(#REM) Forum de la collection ]
+<INCLURE{fond=inclure/forum,id_collection,objet=collection,id_objet=#ID_COLLECTION,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum),repondre_titre=<:mediaspip_core:poster_message:>} />
+</BOUCLE_forums>
+</BOUCLE_contenu_collection>

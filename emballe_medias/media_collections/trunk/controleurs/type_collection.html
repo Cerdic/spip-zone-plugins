@@ -1,0 +1,22 @@
+[(#REM)
+
+	Controleur pour le crayon 'type_collection' de la table collections (plugin collections), uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(COLLECTIONS?){id_collection}{tout}>
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		<li class="editer[(#GET{adresse_obl}|oui)obligatoire]">
+			<label for="#ENV{name_type_collection}"><:collection:label_type:></label>
+			<p class="explication"><:collection:explication_type:></p>
+			<select class="crayon-active" name="#ENV{name_type_collection}" id="#ENV{name_type_collection}"
+				style="width:#ENV{largeur}px;">
+				<BOUCLE_data(DATA){source table,#PIPELINE{collections_liste_types,#ARRAY}}>
+				<option value="#CLE"[(#TYPE_COLLECTION|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_data>
+			</select>
+		</li>
+	</ul>
+</fieldset>
+</BOUCLE_a>

@@ -1,0 +1,25 @@
+#SET{collections_deja,#ARRAY}
+<BOUCLE_collections_deja(COLLECTIONS){id_article}>
+#SET{collections_deja,#GET{collections_deja}|push{#ID_COLLECTION}} 
+</BOUCLE_collections_deja>
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<B_collections>
+	<optgroup label="<:collection:optgroup_collections_votre|attribut_html:>">
+	<BOUCLE_collections(COLLECTIONS){id_auteur=#SESSION{id_auteur}}{par num titre,titre}{doublons}>
+	[(#GENRE|in_array{#ENV{_genres,#PIPELINE{collections_liste_genres}|array_keys}}|?{
+		<option value="#ID_COLLECTION"[(#ID_COLLECTION|in_array{#GET{collections_deja}}|oui)disabled="disabled"][(#ID_COLLECTION|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>,
+		<option value="#ID_COLLECTION" disabled="disabled">#TITRE (<:collection:option_erreur_genre{genre=#GENRE}:>)</option>
+	})]
+	</BOUCLE_collections>
+	</optgroup>
+	</B_collections>
+	<B_collections_coop>
+	<optgroup label="<:collection:optgroup_collections_autres|attribut_html:>">
+	<BOUCLE_collections_coop(COLLECTIONS){type_collection = coop}{genre IN #ENV{_genres,#PIPELINE{collections_liste_genres}|array_keys}}{par num titre,titre}{doublons}>
+	<option value="#ID_COLLECTION"[(#ID_COLLECTION|in_array{#GET{collections_deja}}|oui)disabled="disabled"][(#ID_COLLECTION|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>
+	</BOUCLE_collections_coop>
+	</optgroup>
+	</B_collections_coop>
+</select>

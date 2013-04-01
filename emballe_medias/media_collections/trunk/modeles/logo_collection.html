@@ -1,0 +1,48 @@
+[(#REM)
+
+	Modèle logo_collection
+	Plugin collection (ou albums)
+	© kent1 (http://www.kent1.info - kent1@arscenic.info) 2012-2013 - Distribué sous licence GNU/GPL
+	
+	Modèle de génération automatique de logo pour l'objet collection
+	Il est utilisé lorsqu'on utilise la balise LOGO_COLLECTION dans une boucle collection
+	et qu'il n'y a pas de logo de collection habituel (via le formulaire d'insertion de logo de SPIP)
+	
+	Dans un premier temps on test la présence d'un logo sur le premier article trouvé dans la collection
+	Si ce logo n'existe pas, on utilise le logo du document de cette collection
+	
+	Les paramètres possibles :
+	-* lien string oui : entoure le logo d'un lien vers la collection
+	-* largeur int : la largeur pour le redimentionnement final (facultatif, ce réglage n'est utilisé que via l'utilisation du modèle seul)
+	-* hauteur int : la hauteur pour le redimentionnement final (facultatif, ce réglage n'est utilisé que via l'utilisation du modèle seul)  
+]
+
+#SET{logo,#CHEMIN{images/logo_collection_defaut.png}|sinon{#CHEMIN{images/rien.gif}}}
+<BOUCLE_collection(COLLECTIONS){id_collection}>
+[(#SET{masque,[(#CHEMIN{images/collection_#TYPE_COLLECTION.png}|sinon{#CHEMIN{images/collection.png}})]})]
+<BOUCLE_article_collection(ARTICLES){id_collection}{par rang,num titre, titre}{0,1}>
+#SET{logo,#LOGO_ARTICLE}
+<BOUCLE_doc_article(DOCUMENTS){si #LOGO_ARTICLE|non}{id_article}{0,1}>
+#SET{logo,#LOGO_DOCUMENT}
+</BOUCLE_doc_article>
+</BOUCLE_article_collection>
+[(#GET{masque}|oui)
+	#SET{largeur_masque,#GET{masque}|balise_img|extraire_attribut{width}}
+	#SET{hauteur_masque,#GET{masque}|balise_img|extraire_attribut{height}}
+]
+[(#GET{logo}|oui)
+[(#GET{masque}|oui)
+[(#GET{logo}|image_passe_partout{#GET{largeur_masque},#GET{hauteur_masque}}
+		|image_recadre{#GET{largeur_masque},#GET{hauteur_masque},center}
+		|image_masque{#GET{masque},mode=normal}
+		|image_reduire{#ENV{hauteur},#ENV{largeur}}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]]
+[(#GET{masque}|non)
+[(#GET{logo}
+		|image_reduire{#ENV{hauteur},#ENV{largeur}}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]]
+]
+</BOUCLE_collection>
+#FILTRE{trim}

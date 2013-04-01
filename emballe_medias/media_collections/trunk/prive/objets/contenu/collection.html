@@ -1,0 +1,33 @@
+<BOUCLE_collection(COLLECTIONS){id_collection}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:collection:label_titre_point:></label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_id_admin[ (#ID_ADMIN*|intval|>{0}|?{'',vide})]">
+	<label><:collection:label_id_admin_point:></label>
+	<span dir='#LANG_DIR' class='id_admin'><a href="#URL_AUTEUR{#ID_ADMIN}">(#INFO_NOM{auteur,#ID_ADMIN})</a></span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:collection:label_descriptif_point:></label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<label><:collection:label_date_point:></label>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE|affdate)</span>
+</div>]
+
+[<div class="champ contenu_genre[ (#GENRE*|strlen|?{'',vide})]">
+	<label><:collection:label_genre_point:></label>
+	<span dir='#LANG_DIR' class='#EDIT{genre} type_collection'>(#GENRE|titre_genre_collection)</span>
+</div>]
+
+[<div class="champ contenu_type_collection[ (#TYPE_COLLECTION*|strlen|?{'',vide})]">
+	<label><:collection:label_type_point:></label>
+	<span dir='#LANG_DIR' class='#EDIT{type_collection} type_collection'>(#TYPE_COLLECTION|titre_type_collection)</span>
+</div>]
+
+</BOUCLE_collection>

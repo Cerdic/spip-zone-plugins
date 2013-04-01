@@ -1,0 +1,24 @@
+<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+<div id="formulaire_[(#FORM)]_[(#ID_OBJET)]" class="ajax formulaire_[(#FORM)]">
+<INCLURE{fond=formulaires/associer_media_collection_ajax,ajax,env} />
+</div>
+<script type="text/javascript">
+if(window.jQuery){
+	var collection_associer_[(#ID_OBJET)] = function(){
+		var collection_associer_mediabox = [(#CONFIG{collections/mediabox,off}|=={on}|?{false,true})];
+		jQuery('.formulaire_[(#FORM)]_[(#ID_OBJET)]_hide').hide();
+		jQuery('#bouton_[(#FORM)]_[(#ID_OBJET)]').unbind('click').click(function(e){
+			if(collection_associer_mediabox && typeof(jQuery.colorbox) == 'function'){
+				jQuery.colorbox({inline:true,href:".formulaire_[(#FORM)]_[(#ID_OBJET)]_hide .formulaire_[(#FORM)]"});
+			}else{
+				jQuery('#formulaire_[(#FORM)]_[(#ID_OBJET)] .formulaire_[(#FORM)]_[(#ID_OBJET)_hide').toggle('slow');
+				jQuery('.formulaire_[(#FORM)]_[(#ID_OBJET)]_hide').toggle('slow');
+			}
+			e.preventDefault();
+		});
+	}
+	collection_associer_[(#ID_OBJET)]();
+	onAjaxLoad(collection_associer_[(#ID_OBJET)]);
+}
+</script>
+</BOUCLE_si_editable>

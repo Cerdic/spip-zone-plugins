@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/collections, par=titre, env, ajax, sinon=<:collection:info_aucun_collection:>}>
+
+[(#AUTORISER{creer,collection})
+	[(#URL_ECRIRE{collection_edit,new=oui}|icone_verticale{<:collection:icone_creer_collection:>,collection,new,right})]
+]

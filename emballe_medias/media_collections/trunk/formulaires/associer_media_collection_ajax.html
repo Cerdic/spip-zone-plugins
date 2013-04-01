@@ -1,0 +1,49 @@
+<button type='image' class="submit associer_media_collection" id="bouton_[(#ENV{form})]_[(#ID_OBJET)]" name="associer" value="<:collection:bouton_media_associer|attribut_html:>" title="<:collection:collection_ajouter|attribut_html:>">
+	<span><:collection:bouton_media_associer|attribut_html:></span>
+	[(#CHEMIN_IMAGE{collection-add-16.png}|balise_img)]
+</button>
+
+<div class="formulaire_[(#ENV{form})]_[(#ID_OBJET)]_hide">
+<div class="formulaire_[(#ENV{form}) ]formulaire_spip">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+	<form action="#ENV{action}" method="post" enctype="multipart/form-data">
+		#ACTION_FORMULAIRE{#SELF}
+		<div>
+			<ul>
+			<li class="editer editer_collections[(#ENV**{erreurs}|table_valeur{collections}|oui)erreur]">
+				<label for="collections">
+					<:collection:label_collections_ajouter:>
+				</label>[<span class="erreur_message">
+				(#ENV**{erreurs}|table_valeur{collections})</span>]
+				<select id="id_collection" name="id_collection">
+					<option value="">-</option>
+					<B_collections>
+					<optgroup label="<:collection:optgroup_collections_votre|attribut_html:>">
+					<BOUCLE_collections(COLLECTIONS){id_admin=#SESSION{id_auteur}}{par num titre,titre}{doublons}>
+					[(#GENRE|in_array{#ENV{_genres}}|?{
+						<option value="#ID_COLLECTION"[(#ID_COLLECTION|in_array{#ENV{_collections}}|oui)disabled="disabled"]>#TITRE</option>,
+						<option value="#ID_COLLECTION" disabled="disabled">#TITRE (<:collection:option_erreur_genre{genre=#GENRE}:>)</option>
+					})]
+					</BOUCLE_collections>
+					</optgroup>
+					</B_collections>
+					<B_collections_coop>
+					<optgroup label="<:collection:optgroup_collections_autres|attribut_html:>">
+					<BOUCLE_collections_coop(COLLECTIONS){type_collection = coop}{id_admin != #SESSION{id_auteur}}{id_auteur = #SESSION{id_auteur}}{genre IN #ENV{_genres}}{par num titre,titre}{doublons}>
+					<option value="#ID_COLLECTION"[(#ID_COLLECTION|in_array{#ENV{_collections}}|oui)disabled="disabled"]>#TITRE</option>
+					</BOUCLE_collections_coop>
+					</optgroup>
+					</B_collections_coop>
+				</select>
+			</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:bouton_valider:>">
+			</p>
+		</div>
+	</form>
+	</BOUCLE_si_editable>
+</div>
+</div>

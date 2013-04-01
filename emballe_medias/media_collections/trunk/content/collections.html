@@ -1,0 +1,17 @@
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:collection:collections_titre:></strong></p>
+
+<div class="content-principal">
+	<div class="cartouche">
+		<h1 class="h1"><:collection:collections_titre:></h1>
+	</div>
+
+[(#REM)
+	La liste des collections du site
+]
+[(#INCLURE{fond=liste/collections-vignette,
+	ajax,
+	env,
+	info_texte=non,
+	largeur=200,
+	hauteur=200})]
+</div>

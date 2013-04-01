@@ -1,0 +1,18 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<BOUCLE_mediaslies(ARTICLES){id_article}{id_collection}{statut?}>
+	<div class="item statut_[(#STATUT)]" id="media#ID_ARTICLE">
+		<BOUCLE_doc(DOCUMENTS){id_article}{statut?}{0,1}>[(#LOGO_DOCUMENT{#_mediaslies:URL_ARTICLE,60,60})]</BOUCLE_doc>
+		<h4 class="titrem">
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+		</h4>
+		<div class="infos"></div>
+		<div class="actions"></div>
+		<div class="nettoyeur"></div>
+	</div>
+</BOUCLE_mediaslies>

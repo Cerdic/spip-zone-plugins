@@ -1,0 +1,39 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+	    	[(#SET{genres,[(#PIPELINE{collections_liste_genres,#ARRAY})]})]
+	    	[(#SAISIE{radio,genre_defaut,
+				label=<:collection:label_genre_defaut:>,
+				explication=<:collection:explication_genre_defaut:>,
+				defaut=[(#GET{genres}|array_flip|array_shift)],
+				datas=#GET{genres}})]
+			
+			[(#SET{types,[(#PIPELINE{collections_liste_types,#ARRAY})]})]
+			[(#SAISIE{radio,type_collection_defaut,
+				label=<:collection:label_type_defaut:>,
+				explication=<:collection:explication_type_defaut:>,
+				defaut=[(#GET{types}|array_flip|array_shift)],
+				datas=#GET{types}})]
+				
+			[(#PLUGIN{mediabox}|oui)
+	    	<li class="editer editer_mediabox[(#ENV**{erreurs}|table_valeur{mediabox}|oui)erreur]">
+	    		<label for="mediabox"><:collection:label_mediabox:></label>[
+	    		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mediabox})</span>]
+	    		<div class="choix">
+	    			<input type="checkbox"[(#ENV{mediabox}|=={on}|oui)checked="checked"] name="mediabox" id="mediabox" />
+	    			<label for="mediabox"><:collection:label_mediabox_long:></label>
+	    		</div>
+	    	</li>]
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="collections" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,90 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_collection,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_collection' value='#ENV{id_collection}' />
+		<input type='hidden' id="rang_modifier_#ID_COLLECTION" name='rang_modifier' value='0' />
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:collection:legende_medias_collection_modifier:></legend>
+				<ul>
+					<li class="editer editer_medias_collection_modifier selection_documents" id="editer_liste_collection">
+						[(#REM)
+							On passe par des inclure pour éviter de recharger trop de choses lors de la pagination
+						]
+						<INCLURE{fond=formulaires/liste_collection_dissocier,id_collection,id_secteur,document_media,debut_medias_collection_supprimer,pagination,ajax} />
+						<script type="text/javascript">
+						<!--
+						;(function($){
+							$(function(){
+								var init_collection_sortable = function(){
+									if($('#editer_liste_collection .choix').size() > 1){
+										//var height = $('#editer_liste_collection .choix').eq(0).height();
+										//var width = $('#editer_liste_collection .choix').eq(0).width();
+										//$('#editer_liste_collection .choix').height(height).width(width);
+										$('#editer_liste_collection').sortable({
+											create: function( event, ui ) {
+												$('#editer_liste_collection .explication').eq(0).append('<br /><:collection:explication_medias_modifier_drag:>');
+											},
+											items: 'div.choix',
+											opacity: 0.8,
+											delay: 300,
+											forcePlaceholderSize: true,
+											cursor: 'move',
+											update: function(event,ui){
+												$('input#rang_modifier_#ID_COLLECTION').val('1');
+											}
+										});
+									}
+								}
+								if(typeof($.fn.sortable) != 'function'){
+									$.getScript(['(#CHEMIN{prive/javascript/ui/jquery.ui.sortable.js})'],function(){
+										init_collection_sortable();
+									});
+								}else{
+									setTimeout(init_collection_sortable,1000);
+								}
+								$('p.supprimer_elements_collection').hide();
+								$('#editer_liste_collection .choix input[type=checkbox]').change(function(){
+									if($('#editer_liste_collection .choix input[type=checkbox]:checked').size() > 0){
+										if($('p.supprimer_elements_collection').is(':hidden')){
+											$('p.supprimer_elements_collection').fadeIn();
+										}
+									}else{
+										if($('p.supprimer_elements_collection').is(':visible')){
+											$('p.supprimer_elements_collection').fadeOut();
+										}
+									}
+								});
+							});
+						})(jQuery);
+						-->
+						</script>
+					</li>
+				</ul>
+				<p class="boutons supprimer_elements_collection"><input type='submit' name="supprimer_elements_collection" id="supprimer_elements_collection" class='submit' value='<:collection:bouton_dissocier:>' /></p>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:collection:legende_medias_collection_ajouter:></legend>
+				<ul>
+					<li class="editer editer_medias_collection_ajouter selection_documents">
+						[(#REM)
+							On passe par des inclure pour éviter de recharger trop de choses lors de la pagination
+						]
+						<INCLURE{fond=formulaires/liste_collection_ajouter,id_collection,id_secteur,document_media,pagination,debut_medias_collection_ajouter,ajax} />
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	</BOUCLE_si_editable>
+</div>

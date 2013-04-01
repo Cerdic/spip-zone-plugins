@@ -1,0 +1,28 @@
+<BOUCLE_medias_collection_dissocier(ARTICLES){id_collection}{id_secteur?}{statut?}{doublons medias_ajoutes}> </BOUCLE_medias_collection_dissocier>
+<B_medias_collection_ajouter>
+[(#ANCRE_PAGINATION)]
+<p class="explication">
+	<:collection:explication_medias_ajouter:>
+</p>
+<BOUCLE_medias_collection_ajouter(ARTICLES spip_documents_liens spip_documents){id_auteur=#SESSION{id_auteur}}{id_secteur?}{documents.media == #ENV{document_media,.*}}{!par maj}{pagination #ENV{pagination,9}}{doublons medias_ajoutes}>
+	<div class="choix">
+		<input type="checkbox" id="champ_medias_collection_ajouter_#COMPTEUR_BOUCLE" name="medias_collection_ajouter[]" value="#ID_ARTICLE" />
+		<label for="champ_medias_collection_ajouter_#COMPTEUR_BOUCLE">
+			<span class="titre">#TITRE</span>
+			<BOUCLE_doc_medias_collection_ajouter(DOCUMENTS){id_article}{0,1}>
+			[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200})]
+			</BOUCLE_doc_medias_collection_ajouter>
+		</label>
+	</div>	
+</BOUCLE_medias_collection_ajouter>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_medias_collection_ajouter>
+#BOITE_OUVRIR{'',notice}
+<p class="explication"><:collection:message_collection_aucun_media_publie:></p>
+<BOUCLE_diogene_emballe_medias(DIOGENES){objet=emballe_media}>
+[(#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)
+<p class="explication"><:collection:message_collection_media_utiliser_interface:></p>]
+<p class="explication"><:collection:message_collection_media_utiliser_autres_auteurs:></p>
+</BOUCLE_diogene_emballe_medias>
+#BOITE_FERMER
+<//B_medias_collection_ajouter>

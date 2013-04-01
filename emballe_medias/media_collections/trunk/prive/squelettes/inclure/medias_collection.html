@@ -1,0 +1,19 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<div id="portfolios">
+<B_medias>
+<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{collection:info_media_un,collection:info_medias_nb})]</h3>
+<div class="liste_items medias" id="medias">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_medias(ARTICLES){id_collection}{par rang,num titre,date,id_article}{pagination 10}{statut?}>
+	[(#MODELE{media_desc,id_article,id_collection=#ID_COLLECTION})]
+</BOUCLE_medias>
+[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_medias>
+</div>

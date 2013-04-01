@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_collection,1,
+	points,-1
+}})]<B_liste_collections>
+#ANCRE_PAGINATION
+<div class="liste-objets collections">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{collection:info_1_collection,collection:info_nb_collections}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:collection:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_collection,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_collections(COLLECTIONS){id_mot?}{auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{collection-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_COLLECTION|image_reduire{20,26})]<a href="[(#ID_COLLECTION|generer_url_entite{collection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COLLECTION">[(#RANG). ]#TITRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,collection,#ID_COLLECTION}|?{
+				<a href="[(#URL_ECRIRE{collection_edit,id_collection=#ID_COLLECTION})]">#ID_COLLECTION</a>,
+				#ID_COLLECTION
+			})]</td>
+		</tr>
+	</BOUCLE_liste_collections>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_collections>[
+<div class="liste-objets collections caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_collections>

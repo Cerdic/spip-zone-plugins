@@ -1,0 +1,17 @@
+<B_collections>
+<div class="liste articles albums boites[ cols(#ENV{cols})]">
+	#ANCRE_PAGINATION
+	<h2 class="h2">[(#GRAND_TOTAL|singulier_ou_pluriel{collection:info_1_collection,collection:info_nb_collections})]</h2>
+		<ul class="liste-items">
+			<BOUCLE_collections(COLLECTIONS){id_auteur?}{par num titre,titre}{pagination #ENV{pas,9}}>
+			<li class="item[ (#TYPE_COLLECTION)][ first(#COMPTEUR_BOUCLE|=={1}|oui)]">
+			[(#INCLURE{fond=inclure/collection-vignette,id_collection,largeur,hauteur})]
+			</li>
+			</BOUCLE_collections>
+		</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_collections>
+[(#ENV{afficher_message_aucun,oui}|=={non}|non)
+[<p class="message_aucun">(#ENV{message_aucun,<:collection:info_aucun_collection:>})</p>]]
+<//B_collections>

@@ -1,0 +1,61 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	date,-1, 
+	id_collection,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutcoll,#EVAL{_request("debutcoll");}}}
+<B_liste_collections>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutcoll,#EVAL{_request("debutcoll");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies collections">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{collection:info_1_collection,collection:info_nb_collections}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(COLLECTIONS){tout}{id_collection IN #GET{selection}}{where?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_collection==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutcoll,@#ID_COLLECTION}|ancre_url{paginationcoll}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:collection:label_titre:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_collections(COLLECTIONS){id_collection IN #GET{selection}}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} coll}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_COLLECTION|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='titre'>[(#LOGO_COLLECTION|image_reduire{20,20})]<a href="[(#ID_COLLECTION|generer_url_entite{collection})]">#TITRE</a></td>
+
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\[collection-#ID_COLLECTION-#OBJET-#ID_OBJET\]" value="X"><:collection:retirer_lien_collection:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_collections>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[collection-*-#OBJET-#ID_OBJET\]" value="X"><:collection:retirer_tous_liens_collections:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_collections>
+<div class="liste-objets liste-objets-lies COLLECTIONS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:collection:info_aucun_collection:>})]</strong>
+</div>
+<//B_liste_collections>

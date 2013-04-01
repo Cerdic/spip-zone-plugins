@@ -1,0 +1,53 @@
+[(#REM)
+
+	Ce squelette definit des styles spécifiques aux collections
+
+	Regarder emballe_medias.css.html dans le plugin emballe medias
+	
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+
+.formulaire_ajouter_media_collection .selection_documents .pagination{
+	clear:both;
+}
+
+.formulaire_ajouter_media_collection .selection_documents .choix{
+	width:31%;
+	margin:1%;
+	color:#fff;
+	float:left;
+}
+
+.formulaire_ajouter_media_collection .selection_documents .choix label{
+	position:relative;
+	overflow:auto;
+	display:block;
+}
+
+.formulaire_ajouter_media_collection .selection_documents .choix label .titre{
+	background-color:#GET{claire};
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:96%;
+	padding:2%;
+	display:block;
+}
+.formulaire_ajouter_media_collection .selection_documents .choix label img{
+	width:100%;
+	height:auto;
+	vertical-align:bottom;
+}
+.formulaire_ajouter_media_collection .selection_documents .choix .rang{
+	color:#000;
+	background:#fff;
+	padding:.2em .5em;
+	border-radius:7px;
+	position:absolute;
+	top:1em;
+	right:5px;
+	z-index:100;
+}

@@ -1,0 +1,13 @@
+<BOUCLE_collection(COLLECTIONS){id_collection=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:collection:titre_collection:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_COLLECTION</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{collection,#ID_COLLECTION})]
+
+[(#VAL{redirect}
+	|generer_url_action{type=collection&id=#ID_COLLECTION}
+	|parametre_url{var_mode,calcul}
+	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</div>
+</BOUCLE_collection>

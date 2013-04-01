@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_collections_selectionnes>
+	<ul>
+	<BOUCLE_collections_selectionnes(COLLECTIONS){id_collection IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_COLLECTION)</li>
+	</BOUCLE_collections_selectionnes>
+	</ul>
+	</B_collections_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_collections_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_collection_selectionne(COLLECTIONS){id_collection=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_COLLECTION)</p>
+	</BOUCLE_collection_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_collection_selectionne>
+<//B_test_multiple>

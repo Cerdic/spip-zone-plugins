@@ -1,0 +1,38 @@
+[(#REM)
+	Parametres :
+	-* largeur : de l'image... (largeur originale par defaut)
+	-* hauteur : de l'image... (hauteur originale par defaut)
+	-* info_titre : si !=non afficher le titre
+	-* info_texte : si !=non afficher le descriptif
+	-* info_total : si !=non afficher le nombre d'objets de l'album
+	-* info_date : si !=non afficher la date
+	-* info_commentaires : !=non oui afficher le nombre de commentaires
+ ]
+ 
+<BOUCLE_collection_vignette(COLLECTIONS){id_collection}>
+
+[(#ENV{info_titre}|!={non}|oui)<h3 class="titre"><a href="#URL_COLLECTION">#TITRE</a></h3>]
+
+[<a href="#URL_COLLECTION">
+	(#LOGO_COLLECTION|image_reduire{#ENV{largeur,200},#ENV{hauteur,200}})
+</a>]
+
+<div class="info_media">
+	[(#ENV{info_date}|!={non}|oui)
+	<p>
+		[(#SET{date,[(#DATE|nom_jour|concat{[ (#DATE|affdate)]})]})]
+		[(#SET{date_iso,[(#DATE|date_iso)]})]
+		[(#SET{auteurs,#LESAUTEURS})]
+		<:collection:info_collection_creation{date=#GET{date},date_abbr=#GET{date_iso},auteurs=#GET{auteurs}}:>
+	</p>]
+	[(#ENV{info_texte}|!={non}|oui)
+		[<div class="texte">(#DESCRIPTIF|couper{100})</div>]]
+	<BOUCLE_total(ARTICLES){si #ENV{info_total}|!={non}}{id_collection} />[<p>(#GRAND_TOTAL|singulier_ou_pluriel{collection:info_medias_1,collection:info_medias_nb}|sinon{<:collection:info_medias_aucun:>})</p>]<//B_total>
+	
+	<BOUCLE_coms(FORUMS){si #ENV{info_commentaires}|!={non}}{id_collection}{plat}> </BOUCLE_coms>
+	<p><a href="[(#URL_COLLECTION|ancre_url{forum})]">
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaire})]</a></p>
+	</B_coms>
+	<//B_coms>
+</div>
+</BOUCLE_collection_vignette>

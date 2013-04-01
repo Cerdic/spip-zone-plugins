@@ -1,0 +1,51 @@
+[(#AUTORISER{voir,collection,#ID_COLLECTION}|sinon_interdire_acces)]
+<BOUCLE_collection(COLLECTIONS){id_collection}{si #ENV{exec}|=={collection}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,collection,#ID_COLLECTION})
+		[(#ID_COLLECTION|afficher_qui_edite{collection}|non)
+			[(#URL_ECRIRE{collection_edit,id_collection=#ID_COLLECTION}|icone_verticale{<:collection:icone_modifier_collection:>,collection,edit,right ajax preload})]
+		]
+		[(#ID_COLLECTION|afficher_qui_edite{collection}|oui)
+			[(#URL_ECRIRE{collection_edit,id_collection=#ID_COLLECTION}|icone_verticale{#ID_COLLECTION|afficher_qui_edite{collection},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{collection-24.png}|balise_img{collection,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{collection,#ID_COLLECTION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/collection,id=#ID_COLLECTION,id_collection=#ID_COLLECTION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/squelettes/inclure/medias_collection,id=#ID_COLLECTION,id_collection=#ID_COLLECTION,ajax} />
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,collection,#ID_COLLECTION})
+	[(#ID_COLLECTION|afficher_qui_edite{collection}|non)
+		[(#URL_ECRIRE{collection_edit,id_collection=#ID_COLLECTION}|icone_verticale{<:collection:icone_modifier_collection:>,collection,edit,right ajax preload})]
+	]
+	[(#ID_COLLECTION|afficher_qui_edite{collection}|oui)
+		[(#URL_ECRIRE{collection_edit,id_collection=#ID_COLLECTION}|icone_verticale{#ID_COLLECTION|afficher_qui_edite{collection},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,collection,id,#ID_COLLECTION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_collection>
+[(#ENV**{exec}|=={collection_edit}|?{#INCLURE{fond=prive/squelettes/contenu/collection_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_collection>

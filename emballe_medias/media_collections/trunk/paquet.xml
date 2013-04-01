@@ -1,0 +1,45 @@
+<paquet
+	prefix="collections"
+	categorie="edition"
+	version="1.4.6"
+	etat="stable"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/collection-32.png"
+	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/collections-ou-albums/article/le-plugin-collections-ou-albums"
+	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20collections"
+	schema="1.0.5" 
+>
+	<nom>Collections de medias</nom>
+ 
+	<auteur lien='http://www.kent1.info'>kent1</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<necessite nom="emballe_medias" compatibilite="[1.3.1;]" />
+	<necessite nom="diogene" compatibilite="[1.4.0;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<utilise nom="diogene" />
+	<utilise nom="diogene_spipicious" />
+	<utilise nom="diogene_mots" />
+	<utilise nom="diogene_auteurs" />
+	
+	<pipeline nom="autoriser" inclure="collections_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/collections.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/collections.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/collections.php" /> 
+	<pipeline nom="affiche_milieu" inclure="collections_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="collections_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="collections_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="collections_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="collections_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="collections_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="collections_pipelines.php" />
+	<pipeline nom="collections_liste_types" inclure="collections_pipelines.php" />
+	<pipeline nom="collections_liste_genres" inclure="collections_pipelines.php" /> 
+	<pipeline nom="diogene_objets" inclure="collections_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="collections_pipelines.php" />
+	
+	<menu nom="collections" titre="collection:titre_collections" parent="menu_edition" icone="images/collection-16.png" action="collections" /> 
+	<menu nom="collection_creer" titre="collection:icone_creer_collection" parent="outils_rapides" icone="images/collection-new-16.png" action="collection_edit" parametres="new=oui" /> 
+</paquet>

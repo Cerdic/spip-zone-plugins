@@ -1,0 +1,38 @@
+[(#REM)
+
+	Squelette inclure/diogenes_vos_objets_collection.html
+	Plugin collections
+	© kent1 (http://www.kent1.info - kent1@arscenic.info)
+	
+	Inclusion utilisée par le plugin diogene
+	
+	Affiche les collections créée par l'auteur en cours dans la navigation de la page "publier"
+	au niveau du bloc "Modifier vos publications"
+	
+	Ce squelette accepte les arguments :
+	-* id_diogene int : l'identifiant numérique du diogène de collection (doit correspondre au diogene de collections)
+	-* id_collection int : l'identifiant numérique de la collection sélectionnée afin de l'exposer dans la liste
+	-* debut_collections int : l'emplacement où l'on est dans la pagination de la liste de collections
+	 
+]
+<BOUCLE_diogene(DIOGENES){id_diogene}{objet=collection}>
+<B_collections>
+<div class="menu diogene collection" id="menu_diogene_#ID_DIOGENE">
+	#ANCRE_PAGINATION
+	<h3 class="h3">#TITRE</h3>
+	<ul class="menu-liste">
+	<BOUCLE_collections(COLLECTIONS){id_admin=#SESSION{id_auteur}}{par statut}{!par date}{statut IN prepa,publie}{pagination 5}>
+		<li class="menu-entree[ (#EXPOSE)]">
+			[(#EXPOSE|non)<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#_diogene:TYPE}|parametre_url{id_collection,#ID_COLLECTION})]">]
+				[(#STATUT|puce_statut{collection,#ID_COLLECTION})] [(#TITRE|sinon{<:info_sans_titre:>})]
+			[(#EXPOSE|?{'',</a>})]
+		</li>
+	</BOUCLE_collections>
+	</ul>
+	[<p class="pagination">
+		(#PAGINATION)
+	</p>]
+</div>
+</B_collections>
+</BOUCLE_diogene>
+#FILTRE{trim}

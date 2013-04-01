@@ -1,0 +1,40 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,collection,#ID_COLLECTION}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,collection}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_COLLECTION}|?{#ENV{lier_trad,#ID_COLLECTION}|generer_url_entite{collection},#URL_ECRIRE{collections}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_COLLECTION|oui)
+	[(#GET{redirect}|icone_verticale{Retour,collection,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_COLLECTION|?{<:collection:icone_modifier_collection:>,<:collection:icone_creer_collection:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{collection,#ID_COLLECTION}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_COLLECTION|generer_url_entite{collection}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_COLLECTION{#ENV{id_collection,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
+[(#ID_COLLECTION|oui)
+	<div class='cadre-formulaire-editer'>
+		<div class="ajax">
+		[(#FORMULAIRE_AJOUTER_MEDIA_COLLECTION{#ENV{id_collection,oui},'',#GET{redirect}})]
+	[(#ENV{retourajax,''}|oui)
+		</div>
+		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+	]
+	</div>
+]

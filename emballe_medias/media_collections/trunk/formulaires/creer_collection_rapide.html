@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#CONFIG{collections/type_collection_defaut}|strlen|>{1}|oui)
+			#SAISIE{hidden,type_collection,defaut=#CONFIG{collections/type_collection_defaut}}]
+			[(#CONFIG{collections/genre_defaut}|strlen|>{1}|oui)
+			#SAISIE{hidden,genre,defaut=#CONFIG{collections/genre_defaut}}]
+			[(#SAISIE{
+				input,
+				titre,
+				label=<:collection:label_titre_creer_rapide:>,obligatoire=oui})]
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='<:bouton_valider|attribut_html:>' /></p>
+	</div></form>]
+</div>

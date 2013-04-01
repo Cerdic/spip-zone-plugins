@@ -1,0 +1,18 @@
+[(#REM)
+
+	Petite inclusion affichant un formulaire de création rapide de collection
+	pour l'id_auteur connecté
+	
+	Liste des paramètres acceptés :
+	-* class_parent string defaut "menu" : une class pour la div parente
+	-* afficher_titre string "non" : si == non, pas de titre de bloc parent affiché
+	-* titre string : le titre du bloc parent, sinon un titre par défaut est utilisé
+]
+[(#AUTORISER{creer,collection}|oui)
+<div class="#ENV{class_parent,menu} creer_collection">
+	[(#ENV{afficher_titre}|!={non}|oui)
+	<h2 class="h2"><span>[(#ENV{titre,<:collection:titre_creer_collection_rapide:>})]</span></h2>]
+	<div class="ajax">
+		[(#FORMULAIRE_CREER_COLLECTION_RAPIDE)]
+	</div>
+</div>]

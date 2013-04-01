@@ -1,0 +1,25 @@
+<B_medias_collection_modifier>
+[(#ANCRE_PAGINATION)]
+<p class="explication">
+	<:collection:explication_medias_modifier:>
+</p>
+<BOUCLE_medias_collection_modifier(ARTICLES spip_collections_liens){id_collection}{id_secteur?}{par rang}{pagination #ENV{pagination,100000}}>
+	#SET{rang,#RANG}
+	<BOUCLE_doc_medias_collection(DOCUMENTS){id_article}{0,1}> #SET{erreur_media,non}
+	<div class="choix[(#ENV{document_media}|!={'.*'}|et{#MEDIA|!={#ENV{document_media}}|oui}|oui)[(#SET{erreur_media,oui})]erreur]">
+		[(#GET{erreur_media}|=={oui}|oui)
+			<span class="erreur_message"><:collection:erreur_media_document:></span>]
+		<input type="checkbox" id="champ_medias_collection_modifier_#_medias_collection_modifier:COMPTEUR_BOUCLE" name="medias_collection_modifier[]" value="#_medias_collection_modifier:ID_ARTICLE" />
+		<label for="champ_medias_collection_modifier_#_medias_collection_modifier:COMPTEUR_BOUCLE">
+			[<span class="rang" title="<:collection:info_rang_collection|attribut_html:>">(#GET{rang})</span>]
+			<span class="titre">#_medias_collection_modifier:TITRE</span>
+			[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200})]
+		</label>
+		<input type="hidden" name="rang[]" value="#_medias_collection_modifier:ID_ARTICLE" />
+	</div>
+	</BOUCLE_doc_medias_collection>
+</BOUCLE_medias_collection_modifier>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_medias_collection_modifier>
+	<p class="explication"><:collection:message_collection_vide:></p>
+<//B_medias_collection_modifier>

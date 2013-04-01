@@ -1,0 +1,27 @@
+#CACHE{24*3600}
+[(#REM)
+
+	Ce squelette definit des styles spécifiques aux collections
+
+	Regarder emballe_medias.css.html dans le plugin emballe medias
+	
+]
+#CACHE{24*3600,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.formulaire_ajouter_media_collection .selection_documents .choix{
+	width:31%;
+	margin:1%;
+	color:#fff;
+}
+
+.formulaire_ajouter_media_collection .selection_documents .choix .rang{
+	color:#000;
+	background:#fff;
+	padding:.2em .5em;
+	border-radius:7px;
+	position:absolute;
+	top:5px;
+	left:5px;
+}

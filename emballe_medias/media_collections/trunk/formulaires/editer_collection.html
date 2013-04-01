@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_collection,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_collection' value='#ENV{id_collection}' />
+		<ul>
+
+			[(#SAISIE{input,titre,obligatoire=oui,
+				label=<:collection:label_titre:>})]
+
+			[(#SAISIE{textarea,descriptif,
+				label=<:collection:label_descriptif:>,
+				class=inserer_barre_edition,rows=6})]
+			
+			[(#SAISIE{radio,genre,
+				label=<:collection:label_genre:>,
+				explication=<:collection:explication_genre:>,
+				defaut=#CONFIG{collections/genre_defaut},
+				datas=#PIPELINE{collections_liste_genres,#ARRAY}})]
+				
+			[(#SAISIE{radio,type_collection,
+				label=<:collection:label_type:>,
+				explication=<:collection:explication_type:>,
+				defaut=#CONFIG{collections/type_collection_defaut},
+				datas=#PIPELINE{collections_liste_types,#ARRAY}})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

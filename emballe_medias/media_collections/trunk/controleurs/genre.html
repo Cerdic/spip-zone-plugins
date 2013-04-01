@@ -1,0 +1,22 @@
+[(#REM)
+
+	Controleur pour le crayon 'genre' de la table collections (plugin collections), uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(COLLECTIONS?){id_collection}{tout}>
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		<li class="editer[(#GET{adresse_obl}|oui)obligatoire]">
+			<label for="#ENV{name_genre}"><:collection:label_genre:></label>
+			<p class="explication"><:collection:explication_genre:></p>
+			<select class="crayon-active" name="#ENV{name_genre}" id="#ENV{name_genre}"
+				style="width:#ENV{largeur}px;">
+				<BOUCLE_data(DATA){source table,#PIPELINE{collections_liste_genres,#ARRAY}}>
+				<option value="#CLE"[(#GENRE|=={#CLE}|oui)selected="selected"]>#VALEUR</option>
+				</BOUCLE_data>
+			</select>
+		</li>
+	</ul>
+</fieldset>
+</BOUCLE_a>

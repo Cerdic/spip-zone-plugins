@@ -1,0 +1,68 @@
+[(#REM)
+	
+	Boucle diogène englobante
+	
+]
+#CACHE{0}
+<BOUCLE_diogene(DIOGENES){id_diogene}>
+	[(#SET{id_objet,[(#ENV{[(#OBJET|id_table_objet)]})]})]
+	[(#SET{objet,#OBJET})]
+	#SET{redirect,#ENV{retour,#SELF}}
+	
+	[(#REM)
+		On regarde l'environnement si une collection est passée en paramètre.
+	]
+	<BOUCLE_collection_environnement(COLLECTIONS){id_collection}{tout}>
+		#SET{id_collection,#ID_COLLECTION}
+		#SET{statut,#STATUT}
+		<INCLURE{fond=inclure/diogene_collection_description,id_collection,id_diogene=#_diogene:ID_DIOGENE,ajax,env} />
+	</BOUCLE_collection_environnement>
+	</B_collection_environnement>
+	<BOUCLE_collection_non_publie(COLLECTIONS){id_auteur=#SESSION{id_auteur}}{statut !IN publie,poubelle}{0,1}>
+	#SET{id_collection,#ID_COLLECTION}
+	#SET{statut,#STATUT}
+	<INCLURE{fond=inclure/diogene_collection_description,id_collection,id_diogene=#_diogene:ID_DIOGENE,ajax,env} />
+	</BOUCLE_collection_non_publie>
+	<//B_collection_environnement>
+	[(#AUTORISER{modifier,collection,#GET{id_collection}}|oui)
+	<div id="formulaire_diogene" class="editer_collection">
+		[(#GET{id_collection}|>{0}|oui)
+		<script type="text/javascript">
+			var collection_tabs_charger = function(){
+			    cookie_name = 'ui-tab-collection'
+			    $('.editer_collection').tabs({
+					cookie: {
+						name:cookie_name,
+						expires: 1
+					}
+				});
+			};
+			jQuery(window).load(function(){
+				collection_tabs_charger();
+				onAjaxLoad(collection_tabs_charger);
+			});
+		</script>
+			<ul class="menu-tabs">
+				<li><a href="#collection_editer"><:collection:tab_editer_collection:></a></li>
+				<li><a href="#collection_associer"><:collection:tab_associer_collection:></a></li>
+			</ul>
+		]
+		<div id="collection_editer">
+			<div class="ajax">
+				[(#FORMULAIRE_EDITER_COLLECTION{#GET{id_collection,oui},'',#GET{redirect}})]
+			</div>
+		</div>
+		[(#GET{id_collection}|>{0}|oui)
+		<div id="collection_associer">
+			<div class="ajax">
+				[(#FORMULAIRE_AJOUTER_MEDIA_COLLECTION{#GET{id_collection,oui},'',#GET{redirect}})]
+			</div>
+		</div>]
+	</div>]
+	[(#AUTORISER{modifier,collection,#GET{id_collection}}|non)
+	[(#BOITE_OUVRIR{'',error})]
+		[(#SESSION{statut}|oui)<:collection:erreur_autorisation_statut_modifier:>]
+		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+		[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
+	[(#BOITE_FERMER)]]
+</BOUCLE_diogene>

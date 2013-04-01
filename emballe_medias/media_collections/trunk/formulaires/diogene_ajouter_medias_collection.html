@@ -1,0 +1,14 @@
+
+#SET{explication,''}	
+<B_collections>
+[(#SET{explication_debut,[(#GRAND_TOTAL|singulier_ou_pluriel{'collection:info_media_dans_collection','collection:info_media_dans_collections'})]})]
+<BOUCLE_collections(COLLECTIONS){id_article}>[(#SET{explication,[(#GET{explication}|concat{[(#COMPTEUR_BOUCLE|=={1}|?{<a href="#URL_COLLECTION">[(#TITRE)]</a>,&#44; <a href="#URL_COLLECTION">[(#TITRE)]</a>})]})]})] </BOUCLE_collections>
+</B_collections>
+#SET{explication,#GET{explication_debut}|concat{#GET{explication}}}
+
+[(#SAISIE{
+	collections,
+	id_collection,
+	explication=#GET{explication},
+	id_article=#ENV{id_article},
+	label=<:collection:label_choix_collection:>})]

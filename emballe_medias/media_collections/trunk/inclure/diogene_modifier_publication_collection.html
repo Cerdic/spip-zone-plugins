@@ -1,0 +1,90 @@
+<BOUCLE_collection(COLLECTIONS){id_collection}>
+<BOUCLE_diogene(DIOGENES){si #AUTORISER{modifier,collection,#ENV{id_collection}}|oui}{objet=collection}>
+<div class="menu liste important">
+	<h2 class="h2"><:collection:titre_modifier_collection_diogene:></h2>
+	<ul class="menu-liste">
+		[(#REM)
+		
+			Un lien pour éditer la collection
+			=> renvoit vers la page du diogène
+		
+		]
+		<li class="menu-entree">
+			<a href="[(#_collection:ID_COLLECTION|generer_url_publier{collection})]"><:collection:lien_editer_collection:></a>
+		</li>
+		[(#REM)
+		
+			Rendre la collection coopérative (coop) si elle est personnelle ou vice versa
+			On ne peut modifier du type coopératif vers personnel que s'il n'y a pas d'autres auteurs liés
+		]
+		[(#TYPE_COLLECTION|=={perso}|oui)
+		<li class="menu-entree">
+			[(#BOUTON_ACTION{<:collection:bouton_ouvrir_collection:>,[(#URL_ACTION_AUTEUR{editer_collection,#ID_COLLECTION,#SELF}|parametre_url{type_collection,coop})]})]
+		</li>]
+		<BOUCLE_auteurs(AUTEURS){id_collection}{id_auteur != #ID_ADMIN}> </BOUCLE_auteurs>
+		</B_auteurs>
+		[(#TYPE_COLLECTION|=={coop}|oui)
+		<li class="menu-entree">
+			[(#BOUTON_ACTION{<:collection:bouton_fermer_collection:>,[(#URL_ACTION_AUTEUR{editer_collection,#ID_COLLECTION,#SELF}|parametre_url{type_collection,perso})]})]
+		</li>]
+		<//B_auteurs>
+		[(#REM)
+		
+			Rejoindre la collection si l'on n'est pas collaborateur
+			
+		]
+		<BOUCLE_auteurs_collab(AUTEURS){id_collection}{id_auteur=#SESSION{id_auteur}}> </BOUCLE_auteurs_collab>
+		[(#TYPE_COLLECTION|=={coop}|oui)
+		[(#SESSION{id_auteur}|!={#_collection:ID_ADMIN}|oui)
+		<li class="menu-entree">
+			[(#AUTORISER{associerauteurs,collection,#ID_COLLECTION}|oui)
+			[(#BOUTON_ACTION{<:collection:bouton_quitter_collection:>,[(#URL_ACTION_AUTEUR{associer_auteur_collection,delier/#ID_COLLECTION,#SELF}|parametre_url{type_collection,perso})]})]	
+			]
+		</li>]]
+		</B_auteurs_collab>
+		[(#TYPE_COLLECTION|=={coop}|oui)
+		[(#SESSION{id_auteur}|!={#_collection:ID_ADMIN}|oui)
+		<li class="menu-entree">
+			[(#AUTORISER{associerauteurs,collection,#ID_COLLECTION}|oui)
+			[(#BOUTON_ACTION{<:collection:bouton_rejoindre_collection:>,[(#URL_ACTION_AUTEUR{associer_auteur_collection,lier/#ID_COLLECTION,#SELF}|parametre_url{type_collection,perso})]})]	
+			]
+		</li>]]
+		<//B_auteurs_collab>
+		[(#REM)
+		
+			Supprimer la collection
+		
+		]
+		<BOUCLE_auteur_collection(COLLECTIONS){si #AUTORISER{instituer,collection,#ID_COLLECTION,'',#ARRAY{statut,poubelle}}}{id_collection}{id_admin=#SESSION{id_auteur}}>
+		<li class="menu-entree">
+		[(#BOUTON_ACTION{<:collection:bouton_diogene_statut_poubelle_normal:>,[(#URL_ACTION_AUTEUR{instituer_objet,collection-#_collection:ID_COLLECTION-poubelle,[(#URL_PAGE{collections})]})],'',<:diogene:message_confirm_poubelle:>})]
+		</li>
+		</BOUCLE_auteur_collection>
+		</B_auteur_collection>
+		[(#AUTORISER{instituer,collection,#ID_COLLECTION,'',#ARRAY{statut,poubelle}}|oui)
+		<li class="menu-entree">[(#BOUTON_ACTION{<:collection:bouton_diogene_statut_poubelle_normal_pas_auteur:>,[(#URL_ACTION_AUTEUR{instituer_objet,collection-#_collection:ID_COLLECTION-poubelle,[(#URL_PAGE{collections})]})],'',<:diogene:message_confirm_poubelle:>})]</li>]
+		<//B_auteur_collection>
+	</ul>
+</div>
+</BOUCLE_diogene>
+</B_diogene>
+<BOUCLE_si_coop(CONDITION){si #SESSION{id_auteur}|>{0}|et{#TYPE_COLLECTION|=={coop}|et{#SESSION{id_auteur}|=={#ID_ADMIN}|non|et{#AUTORISER{associerauteurs,collection,#ID_COLLECTION}|oui}}}|oui}>
+<div class="menu liste important">
+	<h2 class="h2"><:collection:titre_participer:></h2>
+	<ul class="menu-liste">
+	<BOUCLE_auteurs_collab_coop(AUTEURS){id_collection}{id_auteur=#SESSION{id_auteur}}> </BOUCLE_auteurs_collab_coop>
+		<li class="menu-entree">
+			<p class="explication"><:collection:explication_participer_non:></p>
+			[(#BOUTON_ACTION{<:collection:bouton_quitter_collection:>,[(#URL_ACTION_AUTEUR{associer_auteur_collection,delier/#ID_COLLECTION,#SELF}|parametre_url{type_collection,perso})]})]	
+		</li>
+		</B_auteurs_collab_coop>
+		<li class="menu-entree">
+			<p class="explication"><:collection:explication_participer:></p>
+			[(#BOUTON_ACTION{<:collection:bouton_rejoindre_collection:>,[(#URL_ACTION_AUTEUR{associer_auteur_collection,lier/#ID_COLLECTION,#SELF}|parametre_url{type_collection,perso})]})]	
+		</li>
+		<//B_auteurs_collab_coop>
+	</ul>
+</div>
+</BOUCLE_si_coop>
+<//B_diogene>
+</BOUCLE_collection>
