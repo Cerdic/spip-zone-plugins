@@ -380,7 +380,7 @@ function encodage($source,$options){
 		/**
 		 * Définition des bitrates
 		 * On vérifie ceux de la source et on compare à ceux souhaités dans la conf
-		 * Si la source est inférieure, on utilise ceux de la source en utilisant l'option -sameq
+		 * Si la source est inférieure, on utilise ceux de la source en utilisant l'option -qscale 0
 		 * ffmpeg2theora lui a besoin d'une estimation de bitrate
 		 */
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < (lire_config("spipmotion/bitrate_$extension_attente","448"))*1000)){
@@ -388,7 +388,11 @@ function encodage($source,$options){
 				$vbitrate = $source['videobitrate'];
 			}else{
 				$vbitrate = null;
-				$infos_sup_normal .= ' -sameq ';
+				if(version_compare($ffmpeg_version,'1.0.0','<')){
+					$infos_sup_normal .= ' -sameq ';
+				}else{
+					$infos_sup_normal .= ' -q:v 0 ';
+				}
 			}
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
