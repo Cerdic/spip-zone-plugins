@@ -7,12 +7,10 @@
 	-* bouton_ajouter : expression css cible du bouton perso pour ajouter des notes
 	-* extensions : array des extensions autorisées
 	-* fichier : forcer le fichier à utiliser en arrière plan lors de l'édition des légendes
- ]
-
+]
 <BOUCLE_doc(DOCUMENTS){id_document}{tout}{mode==.*}>
 [(#SET{largeur,#ENV{largeur,#LARGEUR}})]
 [(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})]
-
 <div class="image_legendes[ (#ENV{class})]">
 [(#EXTENSION|in_array{#ENV{extensions,#ARRAY{0,jpg,1,gif,2,png}}}|?{
 	[(#ENV{fichier,#FICHIER}
@@ -52,7 +50,7 @@
 			useAjax: true
 		});
 	}
-	$(function(){
+	$(window).load(function(){
 		var mq = window.matchMedia("(max-width: [(#GET{largeur})]px)");
 		if (!mq.matches)
 			init_notes_#ID_DOCUMENT();
