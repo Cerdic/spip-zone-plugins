@@ -593,10 +593,16 @@ function cs_fermer_parentheses($expr) {
 	return $expr . str_repeat(')', substr_count($expr, '(') - substr_count($expr, ')'));
 }
 
+// renvoie un code html destine a la partie privee ou publique
+// ce code est entoure des balises <cs_html/> provoquant une future compilation
 function cs_html_partie_privee($texte, $prive=true) {
+	// protection des crochets apres echappement des portions html a compiler plus tard
+	$texte = str_replace(array(']','[','@CHR93@'), array('@CHR93@','[(#CHR{91})]', '[(#CHR{93})]'),
+			cs_echappe_balises('cs_html', false, cs_optimise_if(cs_parse_code_js($texte))));
+	// moment du test prive/public		
 	return '<cs_html>[(#EVAL{test_espace_prive()}|'.($prive?'oui':'non').')'
-		. str_replace(array(']','[','@CHR93@'), array('@CHR93@','[(#CHR{91})]', '[(#CHR{93})]'),
-			cs_optimise_if(cs_parse_code_js($texte)))
+		// balises <cs_html/> eventuelles devenue inutiles (leur interpretation est non recursive)
+		. str_replace(array('<cs_html>','</cs_html>'), '', echappe_retour($texte, 'CS'))
 		. ']</cs_html>';
 }
 

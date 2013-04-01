@@ -1251,8 +1251,7 @@ add_outil( array(
 	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
 		this.title = this.title.replace(/\.\..t\.\./g,'[@]');
 	});",
-	'code:css' => 'span.spancrypt {background:transparent url(' . url_absolue(find_in_path('img/mailcrypt/leure.gif'))
-		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
+	'code:css' => '<cs_html>span.spancrypt {background:transparent url([(#CHEMIN{img/mailcrypt/leure.gif}|url_absolue)]) no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}</cs_html>',
 	'traitement:EMAIL' => 'mailcrypt_email_dist',
 	 	'pipeline:recuperer_fond'   => 'mailcrypt_recuperer_fond',
 	// compatibilite avec le plugin facteur
@@ -1521,13 +1520,30 @@ add_variable( array(
 ));
 
 // largeur d'ecran de la partie privee
-add_variable( array(
+add_variables( array(
 	'nom' => 'spip_ecran',
 	'format' => _format_CHAINE,
 	'radio' => array('defaut' => 'couteauprive:par_defaut', 'large' => 'spip:info_grand_ecran', 'etroit' => 'spip:info_petit_ecran'),
 	'defaut' => 'defaut',
 	'label' => '@_CS_CHOIX@',
 	"code:%s!='defaut'" => "\$GLOBALS['spip_ecran']=\$_COOKIE['spip_ecran']=%s;",
+), array(
+	'nom' => 'tres_large',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+	"code:%s" => '<cs_html>
+/* etroit */
+#conteneur,.table_page,div.messages{width:[(#VAL{750}|plus{%s})]px;}
+#contenu{width:[(#VAL{505}|plus{%s})]px;}
+/* large */
+body.large{min-width:[(#VAL{974}|plus{%s})]px;}
+.large .largeur{width:[(#VAL{974}|plus{%s})]px;}
+.large #conteneur,.large .table_page, .large div.messages{width:[(#VAL{974}|plus{%s})]px;}
+.large div.messages-alertes{width:[(#VAL{964}|plus{%s})]px;}
+.large #contenu{float:left;margin-left:17px;width:[(#VAL{540}|plus{%s})]px;}
+#bando_outils ul.deroulant li ul {width:[(#VAL{770}|plus{%s})]px;}
+.large #bando_outils ul.deroulant li ul {width:[(#VAL{970}|plus{%s})]px;}
+</cs_html>',
 ));
 add_outil( array(
 	'id' => 'spip_ecran',
@@ -1540,6 +1556,7 @@ function disable_spip_ecran(){ jQuery("[name=\\"spip_ecran\\"]").attr("disabled"
 if(typeof onAjaxLoad=="function") onAjaxLoad(disable_spip_ecran);
 if(window.jQuery) jQuery(document).ready(disable_spip_ecran);
 //--></script>\'; }',
+	'code:css_prive' =>'[[%tres_large%]]',
 ));
 
 add_variables( array(
