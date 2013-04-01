@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_doc_uploaded' => '@nb@ documents mis en ligne',
-	'no_credits_crayons' => 'Aucun crédits spécifiés',
+	'no_credits_crayons' => 'Aucun crédit spécifié',
 
 	// P
 	'pending' => 'Dans la file d\'attente...',
