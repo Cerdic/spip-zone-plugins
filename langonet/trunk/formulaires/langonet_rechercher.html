@@ -83,11 +83,11 @@
 			$("input.module_#ENV{type}").attr("checked",false);
 			return false;
 		});
-		jQuery("#select_spip").click(function(){
-			jQuery("input.select_module").attr("checked",false);
-			jQuery('#module_ecrire_#ENV{type}').attr('checked',true);
-			jQuery('#module_public_#ENV{type}').attr("checked",true);
-			jQuery('#module_spip_#ENV{type}').attr("checked",true);
+		jQuery("#select_spip_#ENV{type}").click(function(){
+			jQuery("input.module_#ENV{type}").attr("checked",false);
+			jQuery("#module_ecrire_#ENV{type}").attr("checked",true);
+			jQuery("#module_public_#ENV{type}").attr("checked",true);
+			jQuery("#module_spip_#ENV{type}").attr("checked",true);
 			return false;
 		});
 	})(jQuery);
