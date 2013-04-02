@@ -763,7 +763,7 @@ _ • {Pas de cache} : désactiver temporairement le cache peut aider au dévelo
 _ • {Contrôle du cache} : option identique à la précédente, avec une écriture sur le disque de tous les résultats afin de pouvoir éventuellement les contrôler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.',
 	'spip_cache:nom' => 'SPIP et le cache…',
-	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un «petit écran» présentera deux colonnes et un «grand écran» en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]][[->Ajouter : %tres_large% pixels à la largeur de l\'écran.]]
+	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un «petit écran» présentera deux colonnes et un «grand écran» en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]][[->Et ajouter %tres_large% pixels à la largeur de l\'écran.]]
 {{ {Pensez à vider les caches de SPIP !} }}',
 	'spip_ecran:nom' => 'Largeur d\'écran',
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour la journalisation des évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
