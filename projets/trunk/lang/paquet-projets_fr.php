@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'projets_description' => 'Crée une base de données de projets, permettant de définir les objectifs, les enjeux, ... d\'un projet.
 
 Ce plugin est un élément autonome de SPIPMINE.',
-	'projets_nom' => 'projets',
+	'projets_nom' => 'Projets',
 	'projets_slogan' => 'Gerer des projets avec SPIP',
 );
 

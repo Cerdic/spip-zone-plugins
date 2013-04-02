@@ -17,6 +17,10 @@ function projets_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['projets_cadres'] = 'projets_cadres';
 	$interfaces['table_des_tables']['projets_categories'] = 'projets_categories';
 
+	$interfaces['table_des_traitements']['OBJECTIFS']['projets'] = _TRAITEMENT_RACCOURCIS;;
+	$interfaces['table_des_traitements']['ENJEUX']['projets'] = _TRAITEMENT_RACCOURCIS;;
+	$interfaces['table_des_traitements']['METHODE']['projets'] = _TRAITEMENT_RACCOURCIS;;
+
 	return $interfaces;
 }
 
