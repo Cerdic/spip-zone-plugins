@@ -1,18 +1,11 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-gravatar
-// Langue: fr
-// Date: 01-04-2013 13:21:03
-// Items: 2
-
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/gravatar/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// G
+	// G
 	'gravatar_description' => 'Permet d\'utiliser un cache pour stocker les gravatars.
 _ À utiliser dans une boucle de cette manière : <code>#GRAVATAR{email, taille, url image par
 défaut}</code>
@@ -23,6 +16,7 @@ _ Permet de configurer une image par defaut, et la taille des images.
 
 Fournit le filtre <code>|gravatar</code>, à utiliser par exemple comme 
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.',
-	'gravatar_slogan' => 'Afficher le Gravatar d\'un auteur ou d\'un contributeur de forum',
+	'gravatar_slogan' => 'Afficher le Gravatar d\'un auteur ou d\'un contributeur de forum'
 );
+
 ?>
