@@ -764,7 +764,7 @@ _ • {No cache}: temporarily deactivating the cache can be useful when the site
 _ • {Cache checking}: similar to the preceding option. However, all results are written to disk so that you can manually check them.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ The "Compresser" extension available in SPIP is used to compress the various CSS and JavaScript code sections of your pages and insert them in a static cache file. This speeds up the display of your site, and limits both the number of calls made to the server and the size of the files that need to be retrieved.',
 	'spip_cache:nom' => 'SPIP and the cache',
-	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]',
+	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]]', # MODIF
 	'spip_ecran:nom' => 'Screen width',
 	'spip_log:description' => '@puce@ Manage various parameters taken into account by SPIP to log events specific to website. PHP function to use <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Only keep %nombre_de_logs% file (s), each having %taille_des_logs% Ko maximum size <br/> <q3>{Reset one of these two boxes disables logs input.}</ q3>]]
