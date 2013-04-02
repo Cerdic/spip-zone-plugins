@@ -196,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_limit_exceeded' => 'Vous avez tenté d\'ajouter trop de fichiers.',
-	'queue_limit_max' => 'La limite maximale du nombre de fichier dans la file d\'attente est',
+	'queue_limit_max' => 'La limite maximale du nombre de fichiers dans la file d\'attente est',
 	'queue_limit_reached' => 'Vous avez atteint la limite.',
 	'queue_limit_un' => 'Vous ne pouvez sélectionner qu\'un seul fichier',
 
