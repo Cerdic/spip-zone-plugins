@@ -1540,9 +1540,9 @@ body.large{min-width:[(#VAL{974}|plus{%s})]px;}
 .large .largeur{width:[(#VAL{974}|plus{%s})]px;}
 .large #conteneur,.large .table_page, .large div.messages{width:[(#VAL{974}|plus{%s})]px;}
 .large div.messages-alertes{width:[(#VAL{964}|plus{%s})]px;}
-.large #contenu{float:left;margin-left:17px;width:[(#VAL{540}|plus{%s})]px;}
-#bando_outils ul.deroulant li ul {width:[(#VAL{770}|plus{%s})]px;}
-.large #bando_outils ul.deroulant li ul {width:[(#VAL{970}|plus{%s})]px;}
+.large #contenu{width:[(#VAL{540}|plus{%s})]px !important;}
+#bando_outils ul.deroulant li ul{width:[(#VAL{770}|plus{%s})]px;}
+.large #bando_outils ul.deroulant li ul{width:[(#VAL{970}|plus{%s})]px;}
 </cs_html>',
 ));
 add_outil( array(
