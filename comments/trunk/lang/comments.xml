@@ -1,23 +1,27 @@
-<traduction module="comments" gestionnaire="salvatore" reference="fr">
-	<langue code="ast">
-		<traducteur nom="xuacu" />
+<traduction module="comments" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/comments/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/comments?lang_cible=ast">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en">
-		<traducteur nom="paolo2" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/comments?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/comments?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fa" />
-	<langue code="fr_tu">
-		<traducteur nom="beatnick" />
+	<langue code="fr" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
 	<langue code="it" />
 	<langue code="pt" />
-	<langue code="pt_br">
-		<traducteur nom="rporto" />
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/comments?lang_cible=pt_br">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk">
-		<traducteur nom="jaro" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/comments?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
