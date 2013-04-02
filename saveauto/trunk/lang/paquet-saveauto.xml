@@ -1,0 +1,5 @@
+<traduction module="paquet-saveauto" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/trunk/lang/" reference="fr">
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="it" />
+</traduction>
