@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_projet' => 'Ajouter ce projet',
 
+    // C
+    'client_non_trouve' => 'Client non trouvé.',
+
 	// E
 	'explication_actif' => 'Super-statut du projet',
 	'explication_date_debut' => 'Date de démarrage du projet',
@@ -43,8 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_projets_cadre' => 'Cadre du projet',
 	'label_id_projets_categorie' => 'Catégorie du projet',
 	'label_methode' => 'Méthode',
-	'label_nb_heures_estimees' => 'Nb heures estimees',
-	'label_nb_heures_reelles' => 'Nombre d\'heures réel',
+	'label_nb_heures_estimees' => 'Nb heures estimées',
+	'label_nb_heures_reelles' => 'Nombre d\'heures réelles',
 	'label_nom' => 'Nom du projet',
 	'label_objectif' => 'Objectif',
 	'label_url_site' => 'Voir en ligne',
