@@ -17,9 +17,9 @@
 ]
 #SET{valeur,#ENV{valeur,#ENV{defaut}}}
 [(#SET{id,[(#ENV**|md5|substr{0,6})]})]
-<input type='text' name="#ENV{nom}" id="#GET{id}" [ value="(#GET{valeur})"] class='datetime' />
+<input type='text' name="#ENV{nom}" id="#GET{id}" value="[(#GET{valeur}|sinon{0000-00-00 00:00:00})]" class='datetime' />
 
-
+                         
 <script type='text/javascript'>
 function activer_dateur_#GET{id}() {
 	jour = '\
