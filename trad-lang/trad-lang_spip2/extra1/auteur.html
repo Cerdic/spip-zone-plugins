@@ -1,13 +1,13 @@
 [(#AUTORISER{modifier,auteur,#ENV{id_auteur}}|oui)
 [(#SESSION{id_auteur}|=={#ENV{id_auteur}}|oui)[(#SET{auteur_env,oui})]]
-<div class="modifier">
+<div class="modifier menu">
 	<ul class="liste-item">
-		[(#ENV{vue}|=={profil}|non)<li>
-			<a href="[(#URL_AUTEUR|parametre_url{vue,profil})]">[(#GET{auteur_env}|=={oui}|?{<:tradlang:lien_profil_auteur:>,<:tradlang:lien_profil_autre:>})]</a>
+		[(#ENV{vue}|=={profil}|non)<li class="item">
+			<a href="[(#URL_AUTEUR|parametre_url{vue,profil})]" class="btn">[(#GET{auteur_env}|=={oui}|?{<:tradlang:lien_profil_auteur:>,<:tradlang:lien_profil_autre:>})]</a>
 		</li>]
 		[(#ENV{vue}|oui)
-		<li>
-			<a href="[(#URL_AUTEUR|parametre_url{vue,''})]">[(#GET{auteur_env}|=={oui}|?{<:tradlang:lien_retour_page_auteur:>,<:tradlang:lien_retour_page_auteur_autre:>})]</a>
+		<li class="item">
+			<a href="[(#URL_AUTEUR|parametre_url{vue,''})]" class="btn">[(#GET{auteur_env}|=={oui}|?{<:tradlang:lien_retour_page_auteur:>,<:tradlang:lien_retour_page_auteur_autre:>})]</a>
 		</li>]
 	</ul>
 </div>
