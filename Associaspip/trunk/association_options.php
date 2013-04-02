@@ -1005,7 +1005,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 			}
 			if ($html_span) { // balisage HTML avec microformat
 				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_mel');
-				if ( !in_array($courriel['format',array('x400','ldap')) )
+				if ( !in_array($courriel['format'],array('x400','ldap')) )
 					$href = TRUE;
 				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
