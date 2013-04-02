@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_doc_uploaded' => '@nb@ documents uploaded',
-	'no_credits_crayons' => 'No specified credits',
+	'no_credits_crayons' => 'No specified credits', # MODIF
 
 	// P
 	'pending' => 'Pending...',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'queue_limit_exceeded' => 'You have attempted to queue too many files',
 	'queue_limit_max' => 'The max number of files is',
 	'queue_limit_reached' => 'You have reached the upload limit.',
-	'queue_limit_un' => 'You may select only one file.',
+	'queue_limit_un' => 'You may select only one file.', # MODIF
 
 	// S
 	'security_error' => 'Security Error',
