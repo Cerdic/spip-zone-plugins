@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_choisir_pluginxml_verifier' => 'Choose the plugin.xml files you want to check. You can also click on the name of a plugin.xml to launch directly its verification.',
 	'info_forcer_paquetxml' => 'By default, the paquet.xml file is only written if its content is valid according to the new DTD. You can force its writing whatever the result of the validation.',
 	'info_generer' => 'This option allows you to generate the new paquet.xml description file of a plugin from an existing plugin.xml.<br />In addition of the paquet.xml file, the language files of slogan and description items from the plugin and a file of Unix commands are created in the specific folders of each plugin.',
+	'info_paquet_existant' => 'The paquet.xml already exists',
 	'info_simuler_paquetxml' => 'By default, the result files are created in the installation folder of each plugin. You can however choose to create them in a temporary folder of the site.',
 	'info_valider' => 'This option allows you to formally validate the paquet.xml file  description of a plugin according to its DTD. This form provides a list of paquet.xml files present in all files directories of this site.',
 	'info_verifier' => 'This option allows you to check the plugin.xml description file of a plugin to anticipate problems during the file generation of the paquet.xml. This form provides a list of the plugin.xml files present in all directories of this site.',
