@@ -79,6 +79,7 @@ object.swfupload{
 	background-color:#fff;
 	padding:5px;
 	margin:10px 0;
+	position:relative;
 }
 
 .previsu_document .em_next_prev{
@@ -238,7 +239,19 @@ noscript.alternative_js{
 }
 
 #formulaire_media_edition_lot{width:100%}
-#formulaire_media_edition_lot .selection_documents,#navigation_liste{width:50%;float:left;padding:0;}
+#formulaire_media_edition_lot .selection_documents,
+#navigation_liste{
+	width:50%;float:left;padding:0;
+}
+
+#formulaire_media_edition_lot .selection_documents{
+	padding-right:1%;
+	width:49%;
+}
+
+#formulaire_media_edition_lot .selection_documents label{
+	margin-left:0;
+}
 #liste_medias_publication .item,
 .selection_documents .choix{
 	position:relative;
