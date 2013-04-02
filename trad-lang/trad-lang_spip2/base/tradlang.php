@@ -84,6 +84,12 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"date_modif" => "datetime default NULL",
 			"maj" => "timestamp(14) NOT NULL"
 		),
+		/**
+		 * Laisser le statut ici sinon on n'agit plus sur le pipeline pre_boucle
+		 */
+		'statut' => array( 
+			array('champ'=>'statut','publie'=>'OK,NEW,MODIF','previsu'=>'OK,NEW,MODIF','exception'=>'statut') 
+		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang",
 			"UNIQUE" => "id,module,lang",
