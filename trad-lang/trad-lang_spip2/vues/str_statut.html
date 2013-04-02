@@ -1,6 +1,14 @@
 <BOUCLE_a(TRADLANGS){id_tradlang}>
 [(#STR**|tradlang_utf8|entites_html|nl2br)]
 <script type="text/javascript">
+/**
+ * Clore les autres crayons ouverts
+ */
+cQuery('.crayon-has').cancelcrayon();
+
+/**
+ * Recharger le parent en ajax si possible
+ */
 $('#tradlang-#ID_TRADLANG').ajaxReload();
 </script>
 </BOUCLE_a>
