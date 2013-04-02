@@ -1,0 +1,21 @@
+<paquet
+        prefix="spipmine"
+        categorie="squelette"
+        version="2.0.0"
+        etat="dev"
+        compatibilite="[3.0.5;3.0.*]"
+        logo="spipmine_logo-64.png"
+        documentation=""
+        schema="0.1.0"
+        >
+
+    <nom>SPIPMine</nom>
+
+    <!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
+    <auteur>Cyril Marion</auteur>
+
+    <licence>GNU/GPL</licence>
+
+
+    <necessite nom="projets" compatibilite="[1.0.*;]" />
+</paquet>
