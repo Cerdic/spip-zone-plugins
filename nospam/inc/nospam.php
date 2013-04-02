@@ -199,11 +199,33 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 	if ($condstatut)
 		$condstatut = "$condstatut AND ";
 
+	// ne pas prendre en compte les liens sur le meme domaine que celui du site
+	$allowed = array();
+	$tests = array($GLOBALS['meta']['adresse_site'],url_de_base());
+	foreach ($tests as $t){
+		if ($parse = parse_url($t)
+			AND $parse['host']){
+			$host = explode(".",$parse['host']);
+			while (count($host)>2) array_shift($host);
+			$allowed[] = implode(".",$host);
+		}
+	}
+	if (count($allowed)){
+		$allowed = array_map('preg_quote',$allowed);
+		$allowed = implode("|",$allowed);
+		$allowed = "/($allowed)$/";
+		spip_log("domaines whitelist pour les liens spams : $allowed","nospam");
+	}
+	else
+		$allowed = "";
+
+
 	$hosts = array();
 	foreach ($liens as $lien){
 		$url = extraire_attribut($lien,"href");
 		if ($parse = parse_url($url)
-		  AND $parse['host'])
+		  AND $parse['host']
+		  AND (!$allowed OR !preg_match($allowed,$parse['host'])))
 			$hosts[] = $parse['host'];
 	}
 
