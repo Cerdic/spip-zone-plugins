@@ -9,7 +9,6 @@
  * @subpackage odt2spip
  * @category import
  *
- * @version $Id$
  *
  */
 

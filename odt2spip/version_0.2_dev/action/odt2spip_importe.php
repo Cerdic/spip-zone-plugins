@@ -13,6 +13,7 @@
  * @version $Id$
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Création de l'article et redirection vers celui-ci
@@ -42,7 +43,7 @@ function action_odt2spip_importe() {
 
 	// le 1er élément de _request('arg') est id_rubrique=XXX
 	$Targs = explode("=", $args[0]);
-	$id_rubrique = $Targs[1];
+	$id_rubrique = intval($Targs[1]);
 	$hash = _request('hash');
 
 	$redirect = _request('redirect');
@@ -66,7 +67,11 @@ function action_odt2spip_importe() {
 	if (!is_dir($rep_dezip) AND !sous_repertoire($base_dezip, $id_auteur)) {
 		die (_T('odtspip:err_repertoire_tmp'));
 	}
-
+    $rep_pictures = $rep_dezip."Pictures/";
+    
+	// paramètres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
+	$conversion_image = 96/2.54;
+    
 	// traitement d'un fichier odt envoye par $_POST
 	$fichier_zip = addslashes($_FILES['fichier_odt']['name']);
 	if ($_FILES['fichier_odt']['name'] == '' 
@@ -89,9 +94,11 @@ function action_odt2spip_importe() {
 		die($zip->errorName(true));	 //$zip->error_code
 	}
 
-	// Création du fichier nécessaire à snippets
+	// Création de l'array avec les parametres de l'article
 	$odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie', 'inc');
-	list($fichier_sortie, $xml_sortie) = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
+	$Tarticle = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
+//	list($fichier_sortie, $xml_sortie) = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
+/*
 
 	// générer l'article à partir du fichier xml de sortie
 	// (code pompé sur plugins/snippets/action/snippet_importe.php)
@@ -110,15 +117,19 @@ function action_odt2spip_importe() {
 
 	// si on est en 2.0 passer le statut de l'article en prepa
 	sql_updateq('spip_articles', array('statut' => 'prop'), 'id_article=' . $id_article);
+*/
+	// créer l'article
+	include_spip('action/editer_article');
+	$id_article = article_inserer($id_rubrique);
+	// le remplir
+	article_modifier($id_article, $Tarticle);
 
 	// si nécessaire attacher le fichier odt original à l'article
 	// et lui mettre un titre signifiant
 	if (_request('attacher_odt') == '1') {
-		// recuperer le titre
-		preg_match('/<titre>(.*?)<\/titre>/', $xml_sortie, $match);
-		$titre = $match[1];
+		$titre = $Tarticle['titre'];
 		if (!isset($ajouter_documents)) {
-			$ajouter_documents = charger_fonction('ajouter_documents','inc');
+			$ajouter_documents = charger_fonction('ajouter_documents','action');
 		}
 		
 		// la y'a un bogue super-bizarre avec la fonction spip_abstract_insert()
@@ -134,7 +145,7 @@ function action_odt2spip_importe() {
 			'descriptif' => _T('odtspip:cet_article_version_odt')
 		);
 		include_spip('inc/modifier');
-		revision_document($id_doc_odt,$c);
+		objet_modifier_champs('document',$id_doc_odt,$c);
 	}
 
 	// vider le contenu du rep de dezippage

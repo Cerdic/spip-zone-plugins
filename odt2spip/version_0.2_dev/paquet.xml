@@ -1,0 +1,15 @@
+<paquet
+	prefix="odt2spip"
+	categorie="edition"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.5;["
+	logo="images/odt2spip-64.png"
+>	
+	<nom>odt2spip</nom> 	<!-- générateur d'articles spip à partir de fichiers odt -->
+	<auteur>cy_altern</auteur>
+	<copyright>2009-2013</copyright>
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+
+	<pipeline nom="affiche_gauche" inclure="odt2spip_pipelines.php" />
+</paquet>

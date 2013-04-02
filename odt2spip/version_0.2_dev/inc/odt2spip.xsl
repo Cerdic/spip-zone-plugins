@@ -40,12 +40,16 @@
             indent="yes" />
 <xsl:preserve-space elements="*" />
 
-<!-- Récuperation des parametre venant de PHP: 
+<!-- Récuperation des parametres venant de PHP: 
   IntertitresRiches = oui|non 
   en fct de la presence d'un des plugins enluminure_typo ou intertitres_enrichis -->
 <xsl:param name="IntertitresRiches"/>
-<!-- nombre de caracteres pour la longueur du titre si pas de titre:h -->
-<xsl:param name="NombreCaracteresTitre"/>
+<!-- ModeImages = img|doc pour la balise a utiliser pour integrer les images -->
+<xsl:param name="ModeImages"/>
+<!-- LanguePublication = code de la langue de publication de l'article -->
+<xsl:param name="LanguePublication"/>
+<!-- DateJour = date du jour au format SQl -->
+<xsl:param name="DateJour"/>
 
 <!-- gestion des titres de façon la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
@@ -210,7 +214,7 @@
                                       | //*[node()][@text:style-name=concat('Heading_20_',$NivoTitre1)][1]"/>
             </xsl:when>
            <xsl:otherwise>
-                <xsl:value-of select="substring(//text:h[node()][1] | //text:p[node()][1], 1, $NombreCaracteresTitre)"/>
+                <xsl:value-of select="//text:h[node()][1] | //text:p[node()][1]"/>
             </xsl:otherwise>
         </xsl:choose>
 </xsl:variable>
@@ -226,6 +230,7 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 -->
 <!-- test recuperation du parametre passe par PHP 
 intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
+ModeImages= <xsl:value-of select="$ModeImages" />
 -->
 <articles>
 	<article>
@@ -240,11 +245,13 @@ intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
         <xsl:apply-templates select="office:body/office:text"/>
     </texte>
 		<ps></ps>
-		<date></date>
+		<date><xsl:value-of select="$DateJour" /></date>
 		<statut>prop</statut>
 		<id_secteur></id_secteur>
-		<accepter_forum></accepter_forum>
-		<lang></lang>
+		<date_redac><xsl:text >0000-00-00 00:00:00</xsl:text></date_redac>
+		<accepter_forum>non</accepter_forum>
+		<date_modif><xsl:value-of select="$DateJour" /></date_modif>
+		<lang><xsl:value-of select="$LanguePublication" /></lang>
 		<langue_choisie></langue_choisie>
 		<id_trad></id_trad>
 		<extra></extra>
@@ -262,10 +269,20 @@ intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
 
 
 <!-- les paragraphes y compris les vides utilises pour saut de ligne -->
-<xsl:template match="text:p">
-		<xsl:apply-templates/>
-    <xsl:if test="count(node())=0"><xsl:text >&#xA;&#xA;</xsl:text></xsl:if>
+<xsl:template match="table:table-cell//text:p">
+	<xsl:apply-templates/>
+    <xsl:if test="count(node())=0">
+		<xsl:text>&#xA;&#xA;</xsl:text>
+	</xsl:if>
 </xsl:template>
+<xsl:template match="text:p">
+	<xsl:apply-templates/>
+	<xsl:text >&#xA;&#xA;</xsl:text>
+    <xsl:if test="count(node())=0">
+		<xsl:text>&#xA;&#xA;</xsl:text>
+	</xsl:if>
+</xsl:template>
+
 
 
 <!-- bidouiller pour ne pas afficher le titre du document dans le texte (part 1) -->
@@ -509,7 +526,7 @@ _ <xsl:apply-templates />
    </xsl:if>
 </xsl:template>
 
-<xsl:template name="img2texte">&#60;img<xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
+<xsl:template name="img2texte">&#60;<xsl:value-of select="$ModeImages" /><xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
 <!-- sale bidouille pour approximer la position de l'image (|left |center |right) -->
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &lt;= 2">left</xsl:when>
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &gt;= 5">right</xsl:when>

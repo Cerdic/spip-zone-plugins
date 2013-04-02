@@ -9,25 +9,23 @@
  * @subpackage odt2spip
  * @category import
  *
- * @version $Id$
  *
  */
 
 /**
- * Ajout d'un lien d'import à la barre de navigation de l'interface privée
+ * Ajout une boite de creation d'un article à partir d'un fichier odt
+ * dans la colonne gauche des pages exec=rubrique
  *
- * @internal à l'aide du pipeline {@link affiche_droite}
- * @param Array $flux Le code de la barre
+ * @internal à l'aide du pipeline {@link affiche_gauche}
+ * @param Array $flux Le code de la colonne gauche
  * @return Array Le code modifié
  */
-function odt2spip_affiche_droite($flux){
-	$id_rubrique = $flux['args']['id_rubrique'];
-	if ($flux['args']['exec'] == 'naviguer' AND $id_rubrique > 0) {
-		$icone = icone_horizontale(_T("odtspip:importer_fichier"), "#", "",
-					_DIR_PLUGIN_ODT2SPIP . "images/odt-24.png", false, 
-					"onclick='$(\"#boite_odt2spip\").slideToggle(\"fast\");return false;'");
-		$out = recuperer_fond('formulaires/odt2spip', 
-					array('id_rubrique' => $id_rubrique, 'icone' => $icone));
+function odt2spip_affiche_gauche($flux){
+//echo '<br><br>depart pipe<br>';
+	if ($flux['args']['exec']=='rubrique'
+	  AND $id_rubrique = $flux['args']['id_rubrique']
+	  AND autoriser('publierdans','rubrique',$flux['args']['id_rubrique'])){
+		$out = recuperer_fond('formulaires/odt2spip', array('id_rubrique' => $id_rubrique));
 		$flux['data'] .= $out;
 	}
 	return $flux;

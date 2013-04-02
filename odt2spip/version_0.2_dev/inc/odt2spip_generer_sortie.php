@@ -9,9 +9,10 @@
  * @subpackage odt2spip
  * @category import
  *
- * @version $Id$
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Création du fichier nécessaire à snippets
@@ -30,7 +31,6 @@
 function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// variables en dur pour xml en entree et xslt utilisee
 	// $xml_entre = $rep_dezip . 'content.xml';  // chemin du fichier xml a lire	
-	// !!! ce chemin absolu ne fonctionne pas pour PHP4 !!!
 	$xml_entre = _DIR_TMP . 'odt2spip/' . $id_auteur . '/content.xml';  // chemin du fichier xml a lire
 	$xslt_texte = _DIR_PLUGIN_ODT2SPIP . 'inc/odt2spip.xsl'; // chemin de la xslt a utiliser pour le texte
 
@@ -44,9 +44,19 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 
 	// si il n'existe pas de titre:h dans le doc, on parametre ici la longueur max du paragraphe utilise pour remplacer
 	$nb_carateres_titre = 50;
-  
+
+	// faut il mettre les images en mode document?
+    $type = (_request('mode_image') AND _request('mode_image') == 'document') ? 'document' : ($spip_version_code > 2 ? 'image' : 'vignette');
+    $ModeImages = ($type == 'document' ? 'doc' : 'img');
+    
+	// récupérer la langue de publication + verifier la valeur envoyée
+    $Tlangues = explode(',', $GLOBALS['meta']['langues_proposees']);
+    $LanguePublication = (in_array(_request('lang_publi'), $Tlangues) ? _request('lang_publi') : $GLOBALS['meta']['langue_site']);
+    
+	// date pour les champs date et date_modif
+	$date_jour = date("Y-m-d H:i:s");
+
 	// appliquer la transformation XSLT sur le fichier content.xml
-	// daterminer si on est en php 4 ou php 5 pour choisir les fonctions xslt a utiliser
 	// on est php5: utiliser les fonctions de la classe XSLTProcessor
 	// verifier que l'extension xslt est active
 	if (!class_exists('XSLTProcessor')) {
@@ -58,6 +68,9 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// passage des parametres a la xslt
 	$proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);  
 	$proc->setParameter(null, 'NombreCaracteresTitre', $nb_carateres_titre);
+	$proc->setParameter(null, 'ModeImages', $ModeImages);
+	$proc->setParameter(null, 'LanguePublication', $LanguePublication);
+	$proc->setParameter(null, 'DateJour', $date_jour);
 
 	$xml = new DOMDocument();
 	$xml->load($xml_entre);
@@ -70,30 +83,61 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 		die(_T('odtspip:err_transformation_xslt'));
 	}
 
-	// traitements complementaires du flux de sortie
-	// remplacer les &gt; et &lt;
-	$a_remplacer = array('&#60;', '&#62;', '&lt;', '&gt;', '"', "<date/>");
-	$remplace = array('<', '>', '<', '>', "'", '<date>' . date("Y-m-d H:i:s") . '</date>');
-	$xml_sortie = str_replace($a_remplacer, $remplace, $xml_sortie);
+	// construire l'array des parametres de l'article
+	$t = preg_match('#<titre>(.*?)</titre>#',$xml_sortie);
+	$Tarticle['titre'] = $t[1];
+	$a = preg_match('#<texte>(.*?)</texte>#',$xml_sortie);
+	$Tarticle['texte'] = $a[1];
+	$Tarticle['date_redac'] = '0000-00-00 00:00:00';
+	$Tarticle['date'] = $Tarticle['date_modif'] = $date_jour;
+	$Tarticle['lang'] = $LanguePublication;
+	$Tarticle['statut'] = 'prop';
+	$Tarticle['accepter_forum'] = 'non';
+/*
+	<date><xsl:value-of select="$DateJour" /></date>
+	<statut>prop</statut>
+	<date_redac><xsl:text ></xsl:text></date_redac>
+	<accepter_forum>non</accepter_forum>
+	<date_modif><xsl:value-of select="$DateJour" /></date_modif>
+	<lang><xsl:value-of select="$LanguePublication" /></lang>
+*/	
 	
+	// traitements complementaires du texte de l'article
+	// remplacer les &gt; et &lt;
+	$a_remplacer = array('&#60;', '&#62;', '&lt;', '&gt;', '"');
+	$remplace = array('<', '>', '<', '>', "'");
+	
+    // si plugin TYPOENLUMINE est en version 3 (ou plus) utiliser la syntaxe {{{**titre 2}}} a la place de {2{titre 2}2}
+    // (cf http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum435614)
+    if (array_key_exists('TYPOENLUMINEE', $Tplugins) AND intval(substr($Tplugins['TYPOENLUMINEE']['version'], 0, 1)) >= 3) {
+		array_push($a_remplacer, '{2{', '}2}', '{3{', '}3}', '{4{', '}4}', '{5{', '}5}');
+		array_push($remplace, '{{{**', '}}}', '{{{***', '}}}', '{{{****', '}}}', '{{{*****', '}}}');
+	}
+	
+	$Tarticle['texte'] = str_replace($a_remplacer, $remplace, $Tarticle['texte']);
+
 	// gerer la conversion des <math>Object X</math> => on delegue a /inc/odt2spip_traiter_mathml.php
-	if (preg_match_all('/<math>(.*?)<\/math>/', $xml_sortie, $match, PREG_PATTERN_ORDER) > 0) {
+	if (preg_match_all('/<math>(.*?)<\/math>/', $Tarticle['texte'], $match, PREG_PATTERN_ORDER) > 0) {
 		include_spip('inc/odt2spip_traiter_mathml');
 		foreach ($match[1] as $balise) {
 			$fic_content = $rep_dezip . $balise . '/content.xml';
 			// si le fichier /Object X/content.xml ne contient pas du mathML, virer la balise <math>
 			if (substr_count(file_get_contents($fic_content), '<!DOCTYPE math:math') < 1) {
-				$xml_sortie = str_replace('<math>' . $balise . '</math>', '', $xml_sortie);
+				$Tarticle['texte'] = str_replace('<math>' . $balise . '</math>', '', $Tarticle['texte']);
 				continue;
 			}
 			// sinon faire la transfo xsl du contenu du fichier pour obtenir le LateX qu'on place dans la balise
-			$xml_sortie = str_replace($balise, odt2spip_traiter_mathml($fic_content), $xml_sortie);
+			$Tarticle['texte'] = str_replace($balise, odt2spip_traiter_mathml($fic_content), $Tarticle['texte']);
 		}
 	}
 
 	// virer les sauts de ligne multiples
-	$xml_sortie = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $xml_sortie);
-	
+	$Tarticle['texte'] = preg_replace('/([\r\n]{2})[ \r\n]*/m', "$1", $Tarticle['texte']);
+
+    // si malgré toutes les magouille xslt la balise  <titre> est vide, mettre le nom du fichier odt
+    if ($Tarticle['titre'] == '')
+		$Tarticle['titre'] = str_replace(array('_','-','.odt'), array(' ',' ',''), $fichier_zip);
+		
 	// traiter les images: dans tous les cas il faut les integrer dans la table documents 
 	// en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
 	$rep_pictures = $rep_dezip . "Pictures/";
@@ -101,14 +145,14 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// parametres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
 	$conversion_image = 96 / 2.54;
 
-	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
+	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $Tarticle['texte'], $match, PREG_PATTERN_ORDER);
 
 	if (@count($match) > 0) {
 		if (!isset($odt2spip_retailler_img)) {
 			$odt2spip_retailler_img = charger_fonction('odt2spip_retailler_img', 'inc');
 		}
 		if (!isset($ajouter_documents)) {
-			$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		}
 		$T_images = array();
 		foreach($match[1] as $ch) {
@@ -120,20 +164,22 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 				$hauteur = round($Tdims[2] * $conversion_image);
 				$odt2spip_retailler_img($rep_pictures . $img, $largeur, $hauteur);
 				$type = 'image';
+// TODO: $actifs = ???				
 				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0, $actifs)) {
-					$xml_sortie = str_replace($ch, $id_document, $xml_sortie);
+					$Tarticle['texte'] = str_replace($ch, $id_document, $Tarticle['texte']);
 					$T_images[] = $id_document;
 				}
 			}
 		}
 	}
 
+/*
 	//finalement enregistrer le contenu dans /tmp/odt2spip/id_auteur/snippet_odt2spip.xml
 	if (!ecrire_fichier($fichier_sortie,$xml_sortie)) {
 		die(_T('odtspip:err_enregistrement_fichier_sortie') . $fichier_sortie);
 	}
-	
-	return array($fichier_sortie, $xml_sortie);
+*/	
+	return array($Tarticle);
 }
 
 ?>
