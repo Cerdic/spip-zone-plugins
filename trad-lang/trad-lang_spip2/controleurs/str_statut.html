@@ -36,10 +36,6 @@
 	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
 	var id = me.crayon().find('form');
 	var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
-	$('.formulaire_crayon .readonly').unbind('focus').focus(function(e){
-		e.preventDefault();
-		$(this).blur();
-	});
 	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
 		var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 		if(vars){
