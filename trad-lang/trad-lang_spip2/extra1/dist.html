@@ -2,17 +2,12 @@
     (#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{id_tradlang_module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})
 </div>]
 
-[(#AUTORISER{modifier,tradlang}|et{#SESSION{statut}}|non)
-	#LOGIN_PUBLIC
-]
-
-[(#REM) Inscription au site ]
-#FORMULAIRE_INSCRIPTION
+<INCLURE{fond=inclure/extra_login,ajax} />
 
 <BOUCLE_menu_navigation_haut(MENUS?){identifiant LIKE navigation_haut%}{par num titre, titre}>
-<div class="menu">
-#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
-</div>
+[<div class="menu">
+(#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT})
+</div>]
 </BOUCLE_menu_navigation_haut>
 
 <BOUCLE_tradlang(TRADLANGS){id_tradlang}>
@@ -26,7 +21,7 @@
 <INCLURE{fond=inclure/rubriques,id_rubrique} />
 
 <BOUCLE_menu_navigation_bas(MENUS?){identifiant LIKE navigation_bas%}{par num titre, titre}>
-<div class="menu">
-#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
-</div>
+[<div class="menu">
+(#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT})
+</div>]
 </BOUCLE_menu_navigation_bas>
