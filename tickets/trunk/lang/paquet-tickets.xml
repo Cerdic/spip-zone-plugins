@@ -1,0 +1,5 @@
+<traduction module="paquet-tickets" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/" reference="fr">
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="fr" />
+</traduction>
