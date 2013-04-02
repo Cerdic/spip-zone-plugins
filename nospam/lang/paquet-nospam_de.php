@@ -1,18 +1,15 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-nospam
-// Langue: de
-// Date: 01-04-2013 14:54:22
-// Items: 1
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=de
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// N
+	// N
 	'nospam_description' => 'SPAM stoppen! Ein Filter ohne Nebenwirkungen für ehrliche Nutzer.',
+	'nospam_slogan' => 'Limiter le risque de spams dans les forums' # NEW
 );
+
 ?>
