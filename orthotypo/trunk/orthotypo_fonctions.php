@@ -376,7 +376,10 @@ function orthotypo_mois_rempl($texte){
 		$pre1 = _T('date_jnum1');
 		$pre2 = _T('date_jnum2');
 		$pre3 = _T('date_jnum3');
-		$typo[$lang] = ",([1-3]?[0-9]|$pre1|$pre2|$pre3)\s+(".join('|', $typo[$lang]).'),UimsS';
+		// si on est en _AUTOBR desactive, on accepte un retour ligne entre le chiffre et le mois (mais pas 2=paragraphe)
+		// sinon on accepte pas de retours lignes du tout
+		$space = ((defined('_AUTOBR')&&!_AUTOBR)?"(?:[ \t]*(?:\r\n|\r|\n))?[ \t]*":"[ \t]+");
+		$typo[$lang] = ",([1-3]?[0-9]|$pre1|$pre2|$pre3)$space+(".join('|', $typo[$lang]).')\b,UimsS';
 		include_spip('inc/charsets');
 		$typo[$lang] = unicode2charset(html2unicode($typo[$lang]));
 	}
