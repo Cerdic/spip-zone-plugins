@@ -1,19 +1,15 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-palette
-// Langue: en
-// Date: 26-12-2011 20:52:48
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-palette?lang_cible=en
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// P
+	// P
 	'palette_description' => 'Set class palette to an input to add a color picker: <code><input class="palette" name="couleur" value="#dfdfdf" /></code>',
-	'palette_slogan' => 'Color picker',
+	'palette_slogan' => 'Color picker'
 );
+
 ?>
