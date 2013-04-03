@@ -30,7 +30,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	<generator>SPIP - www.spip.net</generator>
 ]
 [(#ENV{objet}|et{#ENV{id_objet}}|non)
-	<title>[(#NOM_SITE_SPIP|texte_backend)] - <:comments:comments:></title>
+	<title>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)] - <:comments:comments:></title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
