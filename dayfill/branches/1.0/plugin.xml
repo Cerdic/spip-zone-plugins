@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[en]DayFill - Time tracer[fr]D&eacute;file - Gestionnaire de temps</multi></nom>
 	<icon>images/dayfill-32.png</icon>
-	<version>0.0.0</version>
+	<version>1.0.0</version>
 	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
 	<licence>GPL</licence>
 	<etat>dev</etat>
