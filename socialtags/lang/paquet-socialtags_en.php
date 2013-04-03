@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'socialtags_description' => 'Le plugin Social Tags permet d\'ajouter des icônes de partage de liens vers les sites tels que Digg, Facebook, Delicious...
-En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondant dans la liste des liens de Social tags. Il propose également des noisettes paramétrables permettant d\'afficher les badges et boites de type "J\'aime" de Facebook.', # NEW
+	'socialtags_description' => 'The Social Tags plugin allows you to add icons to share links to websites like Digg, Facebook, Delicious...
+In addition, if the Google+ 1 plugin is active, it\'s possible to add the button in the list of links in Social tags. 
+It also offers configurable nuts to display badges and "Like" box on Facebook.',
 	'socialtags_slogan' => 'Activate the social link sharing network buttons.'
 );
 
