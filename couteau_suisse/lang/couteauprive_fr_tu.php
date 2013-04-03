@@ -397,9 +397,9 @@ Arguments disponibles : {zone}, {format} et/ou {id}.',
 	'horloge:nom' => 'Horloge',
 
 	// I
-	'icone_visiter:description' => 'Remplace l\'image du bouton standard «<:icone_visiter_site:>» (en haut à droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Insère le logo du site (s\'il existe) dans le menu de l\'espace privé en haut à droite de la page, afin de mieux identifier le site consulté.
 
-Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».', # MODIF
+Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».',
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »',
 	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
@@ -554,7 +554,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
+	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tente une mise à jour manuelle.',
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
 
@@ -563,15 +563,15 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de tes squelettes',
 	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Sépare-les par les deux points «~:~» et vérifie bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>',
-	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
+	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.',
 	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de tes différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
 La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tente de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que tu sois obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.',
 	'maj_auto:nom' => 'Mises à jour automatiques',
-	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
-	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
+	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !',
+	'maj_librairies_ko' => 'Librairies introuvables !',
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
 Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère <code>{tout_voir}</code> aux boucles de ton squelette.
@@ -603,7 +603,7 @@ Objets publiés mais masqués du public :
 	'outil_actif_court' => 'actif',
 	'outil_activer' => 'Activer',
 	'outil_activer_le' => 'Activer l\'outil',
-	'outil_actualiser' => 'Actualiser l\'outil', # NEW
+	'outil_actualiser' => 'Actualiser l\'outil',
 	'outil_cacher' => 'Ne plus afficher',
 	'outil_desactiver' => 'Désactiver',
 	'outil_desactiver_le' => 'Désactiver l\'outil',
@@ -765,15 +765,17 @@ _ • {Pas de cache} : désactiver temporairement le cache peut aider au dévelo
 _ • {Contrôle du cache} : option identique à la précédente, avec une écriture sur le disque de tous les résultats afin de pouvoir éventuellement les contrôler.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de tes pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.',
 	'spip_cache:nom' => 'SPIP et le cache…',
-	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un écran étroit présentera deux colonnes et un écran large en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]]', # MODIF
+	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un «petit écran» présentera deux colonnes et un «grand écran» en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]][[->Et ajouter %tres_large% pixels à la largeur de l\'écran.]]
+{{ {Pense à vider les caches de SPIP !} }}',
 	'spip_ecran:nom' => 'Largeur d\'écran',
 	'spip_log:description' => '@puce@ Gère ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laisse vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]',
-	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # MODIF
+	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».
+_ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se configure ici : «[.->timezone]» {(PHP 5.1 minimum)}.',
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
-	'statut' => 'Statut', # NEW
+	'statut' => 'Statut',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',
 	'statuts_tous' => 'Tous les statuts',
 	'suivi_forums:description' => 'Un auteur d\'article est toujours informé lorsqu\'un message est publié dans le forum public associé. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[%radio_suivi_forums3%]]',
@@ -788,14 +790,14 @@ _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ',
 	'test_i18n:nom' => 'Traductions manquantes',
-	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
+	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si tu utilises des configurations système, ou la variable d\'environnement TZ.
 _ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
 
 Réglage actuellement détecté : @_CS_TZ@.
 
-@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
-[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
-	'timezone:nom' => 'Décalage horaire', # NEW
+@puce@ {{Définis ci-dessous le décalage horaire à utiliser sur ce site.}}
+[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].',
+	'timezone:nom' => 'Décalage horaire',
 	'titre' => 'Le Couteau Suisse',
 	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l\'écriture de tes squelettes. Le résultat renvoyé est : le titre du groupe d\'un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
 
