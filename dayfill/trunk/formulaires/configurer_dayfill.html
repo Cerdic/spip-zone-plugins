@@ -8,7 +8,12 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
+		<ul>
+		[(#SAISIE{auteurs, collaborateurs, multiple=oui,
+						label=<:dayfill:label_auteurs_potentiels:>,
+						class=chosen,
+						explication=<:dayfill:explication_id_auteur:> })]
+		</ul>
 		<input type="hidden" name="_meta_casier" value="dayfill" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
