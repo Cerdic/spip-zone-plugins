@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_page-biblio' => 'Recherche et affichage des références bibliographiques de la librairie Zotero synchronisée avec ZotSpip.', # NEW
-	'deselectionner_tout' => 'Deseleccionar todo',
+	'deselectionner_tout' => 'Desmarcar todo',
 	'droits_insuffisants' => 'No tienen los derechos exigidos para  realizar esta modificación.',
 
 	// E
