@@ -2,27 +2,29 @@
 <form action="[(#ENV{action})]" method="get" class="form-search">
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<label for="#ENV{_id_champ,recherche}" class="hide"><:info_rechercher_02:></label>
-	<input type="text"
-				 class="text[(#ENV{recherche}|oui) cancelable] input-medium search-query"
-				 name="recherche"
-				 id="#ENV{_id_champ,recherche}"
-				 placeholder="<:info_rechercher|attribut_html:>"[
-				 value="(#ENV{recherche})"]
-	/>[<a
-	(#ENV{recherche}|oui)
-		class="cancel hide[ (#ENV{class,''})]"
-		href="[(#ENV{action}|parametre_url{'recherche',''})]"
-		onclick="$(this).siblings('input.text').val('')"
-		title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN_IMAGE{fermer-16.png}
-	|balise_img
-	|inserer_attribut{alt,<:annuler_recherche:>})]</a>]<input type='submit'
-					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
-					 class="btn"
-					 alt='<:info_rechercher|attribut_html:>'
-					 onclick="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
-					 onkeypress="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
-	/><a class="none hide[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
+	<div class="input-append">
+		<label for="#ENV{_id_champ,recherche}" class="hide"><:info_rechercher_02:></label>
+		<input type="text"
+					 class="text[(#ENV{recherche}|oui) cancelable] input-medium search-query"
+					 name="recherche"
+					 id="#ENV{_id_champ,recherche}"
+					 placeholder="<:info_rechercher|attribut_html:>"[
+					 value="(#ENV{recherche})"]
+		/>[<a
+		(#ENV{recherche}|oui)
+			class="cancel hide[ (#ENV{class,''})]"
+			href="[(#ENV{action}|parametre_url{'recherche',''})]"
+			onclick="$(this).siblings('input.text').val('')"
+			title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN_IMAGE{fermer-16.png}
+		|balise_img
+		|inserer_attribut{alt,<:annuler_recherche:>})]</a>]<input type='submit'
+						 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
+						 class="btn"
+						 alt='<:info_rechercher|attribut_html:>'
+						 onclick="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
+						 onkeypress="return recherche_submit_#ENV{_id_champ,recherche}.apply(this);"
+		/><a class="none hide[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
+	</div>
 </form>
 <script type="text/javascript">/*<![CDATA[*/
 function recherche_submit_#ENV{_id_champ,recherche}(){
