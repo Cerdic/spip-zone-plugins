@@ -1,9 +1,33 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_dayfill.php ../plugins/fabrique_auto/.backup/dayfill/formulaires/editer_projets_activite.html ../plugins/fabrique_auto/dayfill/formulaires/editer_projets_activite.html
+22c22
+< 			[(#SAISIE{da, date_debut, obligatoire=oui,
+---
+> 			[(#SAISIE{date, date_debut, obligatoire=oui,
+24c24,38
+< 				explication=<:projets_activite:explication_date_debut:> })]
+---
+> 				explication=<:projets_activite:explication_date_debut:> ,
+> 				horaire=oui,heure_pas=5})]
+>
+> 			[(#SAISIE{date, date_fin, obligatoire=oui,
+> 				label=<:projets_activite:label_date_fin:>,
+> 				explication=<:projets_activite:explication_date_fin:> ,
+> 				horaire=oui,heure_pas=5})]
+>
+> 			[(#SAISIE{input, nb_heures_passees, obligatoire=oui,
+> 				label=<:projets_activite:label_nb_heures_passees:>,
+> 				explication=<:projets_activite:explication_nb_heures_passees:> })]
+>
+> 			[(#SAISIE{input, nb_heures_decomptees, obligatoire=oui,
+> 				label=<:projets_activite:label_nb_heures_decomptees:>,
+> 				explication=<:projets_activite:explication_nb_heures_decomptees:> })]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_dayfill.php ../plugins/fabrique_auto/.backup/dayfill/formulaires/editer_projets_activite.php ../plugins/fabrique_auto/dayfill/formulaires/editer_projets_activite.php
+89c89
+< 	return formulaires_editer_objet_verifier('projets_activite',$id_projets_activite, array('descriptif', 'id_auteur', 'date_debut'));
+---
+> 	return formulaires_editer_objet_verifier('projets_activite',$id_projets_activite, array('descriptif', 'id_auteur', 'date_debut', 'date_fin', 'nb_heures_passees', 'nb_heures_decomptees'));
 diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_dayfill.php ../plugins/fabrique_auto/.backup/dayfill/paquet.xml ../plugins/fabrique_auto/dayfill/paquet.xml
-9c9
-< 	schema="1.0.0"
----
-> 	schema="2.0.0"
 12c12
-< 		Paquet généré le 2013-04-03 12:12:17
+< 		Paquet généré le 2013-04-03 13:09:12
 ---
-> 		Paquet généré le 2013-04-03 12:35:39
+> 		Paquet généré le 2013-04-03 13:11:39

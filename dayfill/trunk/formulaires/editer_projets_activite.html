@@ -8,6 +8,35 @@
 		<input type='hidden' name='id_projets_activite' value='#ENV{id_projets_activite}' />
 		<ul>
 
+			[(#SAISIE{projets, id_projet,
+				label=<:projets_activite:label_id_projet:>})]
+
+			[(#SAISIE{textarea, descriptif, obligatoire=oui,
+				label=<:projets_activite:label_descriptif:>,
+				explication=<:projets_activite:explication_descriptif:> })]
+
+			[(#SAISIE{auteurs, id_auteur, obligatoire=oui,
+				label=<:projets_activite:label_id_auteur:>,
+				explication=<:projets_activite:explication_id_auteur:> })]
+
+			[(#SAISIE{date, date_debut, obligatoire=oui,
+				label=<:projets_activite:label_date_debut:>,
+				explication=<:projets_activite:explication_date_debut:> ,
+				horaire=oui,heure_pas=5})]
+
+			[(#SAISIE{date, date_fin, obligatoire=oui,
+				label=<:projets_activite:label_date_fin:>,
+				explication=<:projets_activite:explication_date_fin:> ,
+				horaire=oui,heure_pas=5})]
+
+			[(#SAISIE{input, nb_heures_passees, obligatoire=oui,
+				label=<:projets_activite:label_nb_heures_passees:>,
+				explication=<:projets_activite:explication_nb_heures_passees:> })]
+
+			[(#SAISIE{input, nb_heures_decomptees, obligatoire=oui,
+				label=<:projets_activite:label_nb_heures_decomptees:>,
+				explication=<:projets_activite:explication_nb_heures_decomptees:> })]
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

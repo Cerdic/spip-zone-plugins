@@ -47,7 +47,6 @@ function dayfill_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_projets_activite" => "bigint(21) NOT NULL",
 			"id_projet"          => "int(11) DEFAULT NULL",
-			"id_facture"         => "int(11) NOT NULL DEFAULT '0'",
 			"descriptif"         => "varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL",
 			"id_auteur"          => "int(11) NOT NULL DEFAULT '0'",
 			"date_debut"         => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
@@ -61,7 +60,7 @@ function dayfill_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "descriptif AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('id_projet', 'id_facture', 'descriptif', 'id_auteur', 'date_debut', 'date_fin', 'nb_heures_passees', 'nb_heures_decomptees'),
+		'champs_editables'  => array('id_projet', 'descriptif', 'id_auteur', 'date_debut', 'date_fin', 'nb_heures_passees', 'nb_heures_decomptees'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("descriptif" => 10),
 		'tables_jointures'  => array(),

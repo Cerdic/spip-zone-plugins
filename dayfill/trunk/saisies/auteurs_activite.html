@@ -1,0 +1,40 @@
+[(#REM)
+
+permettant de joindre un auteur à une action
+qui liste 2 groupes d'auteurs
+1e : les auteurs liés au projet (dans l'ordre le la dernière action)
+2e : les autres auteurs, définis (qq part) comme pouvant travailler sur un projet
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+
+  Exemple d'appel :
+	[(#SAISIE{auteurs_activite,id_auteur,
+		label=<:plugin:auteurs_du_site:>
+	})]
+]
+
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+
+	<optgroup label="<:dayfill:label_auteurs_projet:>">
+	[(#REM) Liste des auteurs liés au projet ]
+	<BOUCLE_auteurs_projet(AUTEURS){id_projet}{par num nom, nom}{doublons}>
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>
+	</BOUCLE_auteurs_projet>
+	</optgroup>
+
+	<optgroup label="<:dayfill:label_auteurs_potentiels:>">
+	[(#REM) Liste des auteurs potentiels ]
+	<BOUCLE_auteurs_potentiels(AUTEURS){id_auteur IN #CONFIG{dayfill/collaborateurs}}{par num nom, nom}{doublons}>
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>
+	</BOUCLE_auteurs_potentiels>
+	</optgroup>
+
+</select>

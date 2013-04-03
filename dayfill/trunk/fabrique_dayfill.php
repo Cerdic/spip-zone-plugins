@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-03 12:35:39
+ *   le 2013-04-03 13:11:39
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -95,22 +95,8 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'projets',
           'explication' => '',
-          'saisie_options' => '',
-        ),
-        3 => 
-        array (
-          'nom' => 'Id facture',
-          'champ' => 'id_facture',
-          'sql' => 'int(11) NOT NULL DEFAULT \'0\'',
-          'caracteristiques' => 
-          array (
-            0 => 'editable',
-          ),
-          'recherche' => '',
-          'saisie' => '',
-          'explication' => 'Facture dans le cadre de laquelle l\'activité a été effectuée.',
           'saisie_options' => '',
         ),
         5 => 
@@ -124,7 +110,7 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '10',
-          'saisie' => '',
+          'saisie' => 'textarea',
           'explication' => 'Décrivez l\'activité',
           'saisie_options' => '',
         ),
@@ -139,7 +125,7 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'auteurs',
           'explication' => 'Indiquez l\'auteur de l\'activité',
           'saisie_options' => '',
         ),
@@ -154,9 +140,9 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'date',
           'explication' => 'Indiquez le moment où l\'activité a démarré',
-          'saisie_options' => '',
+          'saisie_options' => 'horaire=oui,heure_pas=5',
         ),
         9 => 
         array (
@@ -169,9 +155,9 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'date',
           'explication' => 'Indiquez le moment où l\'activité a pris fin',
-          'saisie_options' => '',
+          'saisie_options' => 'horaire=oui,heure_pas=5',
         ),
         10 => 
         array (
@@ -184,7 +170,7 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'input',
           'explication' => 'Indiquez la durée brute de l\'activité, en heures.',
           'saisie_options' => '',
         ),
@@ -199,7 +185,7 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'input',
           'explication' => 'Indiquez la durée de l\'activité qui sera réellement prise en compte, en heures.',
           'saisie_options' => '',
         ),

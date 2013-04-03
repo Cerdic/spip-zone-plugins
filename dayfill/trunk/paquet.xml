@@ -1,15 +1,15 @@
-﻿<paquet
+<paquet
 	prefix="dayfill"
 	categorie="divers"
-	version="2.0.0"
+	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.7;3.0.*]"
 	logo="prive/themes/spip/images/dayfill-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="2.0.0" 
 >
 	<!--
-		Paquet généré le 2013-04-03 12:35:39
+		Paquet généré le 2013-04-03 13:11:39
 	-->
 
 	<nom>DayFill</nom>
