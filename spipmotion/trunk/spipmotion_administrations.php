@@ -77,6 +77,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.2.9'] = array(
 		array('spipmotion_install_recuperer_infos',array()),
 	);
+	$maj['1.2.10'] = array(
+		array('spipmotion_install_recuperer_infos',array()),
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut
@@ -108,29 +111,29 @@ function spipmotion_install_recuperer_infos(){
 	/**
 	 * On vire ces metas qui peuvent exister
 	 */
-	effacer_meta('spipmotion_formats');
-	effacer_meta('spipmotion_codecs');
-	effacer_meta('spipmotion_codecs_audio_decode');
-	effacer_meta('spipmotion_codecs_video_decode');
-	effacer_meta('spipmotion_codecs_audio_encode');
-	effacer_meta('spipmotion_codecs_video_encode');
-	effacer_meta('spipmotion_bitstream_filters');
-	effacer_meta('spipmotion_protocols');
-	effacer_meta('spipmotion_avfilters');
-	effacer_meta('spipmotion_compiler');
-	effacer_meta('spipmotion_ffmpeg2theora');
-	effacer_meta('spipmotion_flvtool2');
-	effacer_meta('spipmotion_flvtoolplus');
-	effacer_meta('spipmotion_mediainfo');
-	effacer_meta('spipmotion_ffmpeg_casse');
-	effacer_meta('spipmotion_ffmpeg2theora_casse');
-	effacer_meta('spipmotion_flvtool_casse');
-	effacer_meta('spipmotion_flvtoolplus_casse');
-	effacer_meta('spipmotion_qt-faststart_casse');
-	effacer_meta('spipmotion_spipmotionsh_casse');
-	effacer_meta('spipmotion_ffmpeg-php_casse');
-	effacer_meta('safe_mode');
-	effacer_meta('spipmotion_safe_mode_exec_dir');
+	effacer_meta('spipmotion_formats','spipmotion');
+	effacer_meta('spipmotion_codecs','spipmotion');
+	effacer_meta('spipmotion_codecs_audio_decode','spipmotion');
+	effacer_meta('spipmotion_codecs_video_decode','spipmotion');
+	effacer_meta('spipmotion_codecs_audio_encode','spipmotion');
+	effacer_meta('spipmotion_codecs_video_encode','spipmotion');
+	effacer_meta('spipmotion_bitstream_filters','spipmotion');
+	effacer_meta('spipmotion_protocols','spipmotion');
+	effacer_meta('spipmotion_avfilters','spipmotion');
+	effacer_meta('spipmotion_compiler','spipmotion');
+	effacer_meta('spipmotion_ffmpeg2theora','spipmotion');
+	effacer_meta('spipmotion_flvtool2','spipmotion');
+	effacer_meta('spipmotion_flvtoolplus','spipmotion');
+	effacer_meta('spipmotion_mediainfo','spipmotion');
+	effacer_meta('spipmotion_ffmpeg_casse','spipmotion');
+	effacer_meta('spipmotion_ffmpeg2theora_casse','spipmotion');
+	effacer_meta('spipmotion_flvtool_casse','spipmotion');
+	effacer_meta('spipmotion_flvtoolplus_casse','spipmotion');
+	effacer_meta('spipmotion_qt-faststart_casse','spipmotion');
+	effacer_meta('spipmotion_spipmotionsh_casse','spipmotion');
+	effacer_meta('spipmotion_ffmpeg-php_casse','spipmotion');
+	effacer_meta('safe_mode','spipmotion');
+	effacer_meta('spipmotion_safe_mode_exec_dir','spipmotion');
 	
 	/**
 	 * On récupère les informations de spipmotion si possible
