@@ -23,6 +23,11 @@ function formulaires_editer_projet_identifier_dist($id_projet='new', $retour='',
 function formulaires_editer_projet_charger_dist($id_projet='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('projet',$id_projet,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
     if (!$valeurs['actif']) $valeurs['actif'] = 'oui';
+
+	if (!intval($id_projet) and $id_parent = _request('id_parent')){
+		$valeurs['id_parent'] = $id_parent;
+	}
+
 	return $valeurs;
 }
 
