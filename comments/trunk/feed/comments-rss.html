@@ -7,7 +7,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 <channel[ xml:lang="(#LANG)"]>
 <BOUCLE_article(ARTICLES){id_article}>
-	<title>[(#TITRE|texte_backend)] - <:comments:comments:></title>
+	<title>[(#TITRE|textebrut|entites_html|charset2unicode )] - <:comments:comments:></title>
 	<link>[(#URL_ARTICLE|url_absolue)]</link>
 	[<description>(#INTRODUCTION|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
