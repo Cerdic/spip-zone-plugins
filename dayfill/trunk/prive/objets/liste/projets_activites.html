@@ -1,6 +1,8 @@
 [(#SET{defaut_tri,#ARRAY{
-	descriptif,1, 
+	date_debut,-1,
+	descriptif,1,
 	id_projets_activite,1,
+	nb_heures_decomptees,1,
 	points,-1
 }})]<B_liste_projets_activites>
 #ANCRE_PAGINATION
@@ -9,7 +11,10 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_activite:info_1_projets_activite,projets_activite:info_nb_projets_activites}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
+			<th class='picto' scope='col'>[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{up},ajax})][(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{desc},ajax})]</th>
+			<th class="date" scope='col'>[(#TRI{date_debut,<:projets_activite:label_date_activite:>,ajax})]</th>
+			<th class="duree">[(#TRI{nb_heures_decomptees,<:projets_activite:label_duree_activite:>,ajax})]</th>
+			<th class="auteur">[(#TRI{id_auteur,<:projets_activite:label_auteur_activite:>,ajax})]</th>
 			<th class='descriptif' scope='col'>[(#TRI{descriptif,<:projets_activite:label_descriptif:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_projets_activite,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -18,6 +23,9 @@
 	<BOUCLE_liste_projets_activites(PROJETS_ACTIVITES){id_projet?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num descriptif},#GET{defaut_tri}}{par descriptif}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_activite-16.png}|balise_img)]</td>
+			<td class="date">[(#DATE_DEBUT|affdate{'d-m-Y'})]</td>
+			<td class="duree">[(#NB_HEURES_DECOMPTEES)]</td>
+			<td class="auteur">[(#INFO_NOM{auteur,#ID_AUTEUR})]</td>
 			<td class='descriptif principale'>[(#LOGO_PROJETS_ACTIVITE|image_reduire{20,26})]<a href="[(#ID_PROJETS_ACTIVITE|generer_url_entite{projets_activite})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_ACTIVITE">[(#RANG). ]#DESCRIPTIF</a></td>
 			<td class='id'>[(#AUTORISER{modifier,projets_activite,#ID_PROJETS_ACTIVITE}|?{
 				<a href="[(#URL_ECRIRE{projets_activite_edit,id_projets_activite=#ID_PROJETS_ACTIVITE})]">#ID_PROJETS_ACTIVITE</a>,

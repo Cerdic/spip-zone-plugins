@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_date_fin' => 'Indiquez le moment où l\'activité a pris fin',
 	'explication_descriptif' => 'Décrivez l\'activité',
 	'explication_id_auteur' => 'Indiquez l\'auteur de l\'activité',
-	'explication_nb_heures_decomptees' => 'Indiquez la durée de l\'activité qui sera réellement prise en compte, en heures.',
+	'explication_nb_heures_decomptees' => 'Indiquez la durée de l\'activité qui doit réellement être prise en compte, en heures.',
 	'explication_nb_heures_passees' => 'Indiquez la durée brute de l\'activité, en heures.',
 
 	// I
@@ -26,9 +26,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_projets_activites_auteur' => 'Les activités de cet auteur',
 
 	// L
+	'label_auteur_activite' => "Auteur",
+	'label_date_activite' => "Date",
 	'label_date_debut' => 'Heure debut',
 	'label_date_fin' => 'Heure fin',
 	'label_descriptif' => 'Descriptif',
+	'label_duree_activite' => "Durée",
 	'label_id_auteur' => 'Auteur',
 	'label_id_projet' => 'Id projet',
 	'label_nb_heures_decomptees' => 'Nb heures decomptees',

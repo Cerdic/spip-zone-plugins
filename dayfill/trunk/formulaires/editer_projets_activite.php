@@ -60,6 +60,11 @@ function formulaires_editer_projets_activite_identifier_dist($id_projets_activit
  */
 function formulaires_editer_projets_activite_charger_dist($id_projets_activite='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('projets_activite',$id_projets_activite,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	if (!intval($id_projets_activite) and $id_projet = _request('id_projet')){
+		$valeurs['id_projet'] = $id_projet;
+	}
+
 	return $valeurs;
 }
 
@@ -100,8 +105,6 @@ function formulaires_editer_projets_activite_verifier_dist($id_projets_activite=
 			set_request($champ, $normaliser);
 		}
 	}
-
-	return $erreurs;
 
 	return $erreurs;
 }
