@@ -1,0 +1,131 @@
+#SET{contexte,#EVAL{definir_barre_contexte()}}
+#SET{boutons,#GET{contexte}|definir_barre_boutons{0}}
+<div id='bando_haut' role='navigation'>
+	<div id='bando_liens_rapides'>
+		<div class="container">
+			<div class="row">
+				<div class='span12'>
+					<a href='#conteneur' onclick='return focus_zone("#conteneur")'>Aller au contenu</a> |
+					<a href='#bando_navigation' onclick='return focus_zone("#bando_navigation")'>Aller &agrave; la navigation</a> |
+					<a href='#recherche' onclick='return focus_zone("#recherche")'>Aller &agrave; la recherche</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id='bando_identite'>
+		<div class="container">
+			<div class="row">
+				<div class="span6">
+				    <p class='session'><a
+					    title='<:icone_informations_personnelles:>'
+					    href='#URL_ECRIRE{infos_perso}'><strong class='nom'>[(#SESSION{nom}|trim|sinon{#SESSION{login}}|typo|couper{30})]</strong></a> |
+					<a class='menu_lang'
+					   href='#URL_ECRIRE{configurer_langage}'
+					   title='<:titre_config_langage:>'>[(#CHEMIN_IMAGE{langues.png}|balise_img{<:titre_config_langage:>})][(#LANG|traduire_nom_langue)]</a> |
+					<a class='aide popin' target='_blank'
+					   href='#URL_ECRIRE{aide,var_lang=#LANG}'><:icone_aide_ligne:></a> |
+					<a href='[(#VAL{logout}|generer_url_action{logout=prive})]'><:icone_deconnecter:></a>
+				    </p>
+				</div>
+				<div class="span6">
+				    <p class='nom_site_spip'><a
+					    class='info'
+					    title='Informations sur [(#NOM_SITE|attribut_html)]'
+					    href='#URL_ECRIRE{configurer_identite}'><strong
+					    class='nom'>[ (#NOM_SITE_SPIP|couper{35}) ]</strong></a>|
+					<a class='voir' href='#URL_SITE_SPIP'><:icone_visiter_site:></a>
+				    </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id='bando_navigation'>
+		<div class="navbar navbar-inverse navbar-static-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class='nav-collapse collapse'>
+						<B_boutons>
+						<ul class='nav'>
+							<BOUCLE_boutons(POUR)
+								{tableau #GET{boutons}}
+								{cle!=outils_rapides}
+								{cle!=outils_collaboratifs}>[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
+									class="[(#VAL{first}|unique)][(#CLE|=={menu_accueil}|non) dropdown]"><a
+									href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"[(#CLE|=={menu_accueil}|non)
+									class="dropdown-toggle"
+									data-toggle="dropdown"]><i id="bando1_#CLE" class="icon-large"></i> [(#VALEUR{libelle}|_T)]</a>]
+									<B_sous><ul class="dropdown-menu">
+									<BOUCLE_sous(POUR)
+									{tableau #VALEUR{sousmenu}}>[<li><a
+											href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+											class=""><i class="bando2_#CLE"></i>(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous>
+									</ul></B_sous>#GET{li}</BOUCLE_boutons>
+						</ul>
+						</B_boutons>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id='bando_outils'>
+        <div class="container">
+            <div class='row'>
+                <div class="span1">
+			<div class="dropdown">
+				<ul class='dropdown-menu' role="menu" aria-labelledby="dLabel" style="display: block;">
+				    <li class="dropdown-submenu"><a  tabindex="-1" 
+					    href='#URL_ECRIRE{plan}'
+					    id='boutonbandeautoutsite'>[(#CHEMIN_IMAGE{boussole-24.png}|balise_img)]</a>
+					[(#REM|menu_rubriques)]</li>
+				</ul>
+			</div>
+                </div>
+
+                <div class="span5">
+                    <B_creer>
+                        <ul class='rapides creer nav nav-pills'>
+                            <BOUCLE_creer(POUR)
+                            {tableau #GET{boutons}}
+                            {cle=outils_rapides}><BOUCLE_creersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
+                                href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+                                title="[(#VALEUR{libelle}|_T|attribut_html)]"
+                                class=""><i class="bando2_#CLE"></i> <span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_creersous></BOUCLE_creer>
+                        </ul>
+                    </B_creer>
+                </div>
+                <div class="span6">
+                    <div id='rapides'>
+                        <div class="row">
+                            <div class="span3">
+                                <B_collaborer>
+                                    <ul class='rapides collaborer nav nav-pills pull-left'>
+                                        <BOUCLE_collaborer(POUR)
+                                        {tableau #GET{boutons}}
+                                        {cle=outils_collaboratifs}><BOUCLE_collaborersous(POUR){tableau #VALEUR{sousmenu}}>[<li class="bouton"><a
+                                            href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+                                            title="[(#VALEUR{libelle}|_T|attribut_html)]"
+                                            class=""><i class="bando2_#CLE"></i> <span>(#VALEUR{libelle}|_T)</span></a></li>]</BOUCLE_collaborersous></BOUCLE_collaborer>
+                                    </ul>
+                                </B_collaborer>
+                            </div>
+                            <div class="span3">
+                                #FORMULAIRE_RECHERCHE_ECRIRE
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	</div>
+
+</div>

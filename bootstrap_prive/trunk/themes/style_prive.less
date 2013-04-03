@@ -1,0 +1,194 @@
+@import "css/variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "css/tables.less";
+@import "css/sprites.less";
+@greenFlashy : #C5E41C;
+
+table.liste {
+  .table;
+  .table-striped;
+}
+.nav li a {
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 36px;
+}
+
+.nav li a i[class^=bando2_] {
+  background-position: center center;
+  height: 16px;
+  width: 16px;
+  margin-left: -26px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.nav li a i[id^=bando1_] {
+  [class^="icon-"];
+  margin-right: 10px;
+}
+
+body.navigation_avec_icones #bando1_menu_accueil {
+  [class^="icon-"];
+  .icon-white;
+  .icon-home;
+}
+body.navigation_avec_icones #bando1_menu_edition {
+  [class^="icon-"];
+  .icon-white;
+  .icon-edit;
+}
+body.navigation_avec_icones #bando1_menu_publication {
+  [class^="icon-"];
+  .icon-white;
+  .icon-ok;
+}
+body.navigation_avec_icones #bando1_menu_activite {
+  [class^="icon-"];
+  .icon-white;
+  .icon-comment;
+}
+body.navigation_avec_icones #bando1_menu_squelette {
+  [class^="icon-"];
+  .icon-white;
+  .icon-leaf;
+}
+body.navigation_avec_icones #bando1_menu_administration {
+  [class^="icon-"];
+  .icon-white;
+  .icon-wrench;
+}
+body.navigation_avec_icones #bando1_menu_configuration {
+  [class^="icon-"];
+  .icon-white;
+  .icon-cog;
+}
+/*
+ul.nav li.dropdown:hover > ul.dropdown-menu{
+  display: block;
+}
+*/
+.cadre-icone {
+    left: 10px;
+    position: absolute;
+    top: -16px;
+    z-index: 1;
+}
+a.plus_info {
+    display: block;
+    position: absolute;
+    right: 10px;
+}
+.hd, .ft {
+    padding: 0.6925em 10px;
+}
+.bd {
+    padding: 0.6925em 10px;
+    > *:first-child, > *:first-child > *:first-child {
+      margin-top: 0;
+    }
+}
+.box {
+    margin: 2.0775em 0;
+}
+.icone {
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    &.horizontale {
+      clear: both;
+      display: block;
+      margin: 0;
+      padding: 2px 2px 2px 32px;
+      position: relative;
+      text-align: left;
+      
+      a, .submit {
+        padding: 0;
+        vertical-align: middle;
+        height: 28px;
+        width: auto;
+        display: table-cell;
+        img {
+          background: none repeat scroll 0 0 transparent;
+          border: 0 none;
+          left: 4px;
+          margin-top: -12px;
+          padding: 0;
+          position: absolute;
+          top: 50%;
+        }
+      }
+    }
+}
+#bando_identite .nom_site_spip {
+  text-align: right;
+}
+#bando_outils {
+  padding: 10px 0;
+}
+.creer.nav, #rapides .rapides.nav {
+  li {
+    a {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      span {
+        text-indent: -999em;
+        display: none;
+      }
+      i {
+        margin: 0;
+        height: 24px;
+        width: 24px;
+        padding: 3px;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+#rapides .rapides.nav {
+  li {
+    a {
+      line-height: 20px;
+      
+      i[class^=bando2_]  {
+        height: 20px;
+        width: 20px;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+#bando_outils {
+  background-color: @greenFlashy;
+  .nav, form {
+    margin-bottom: 0;
+  }
+    .dropdown {
+        .dropdown-menu:first-child {
+            background-clip: padding-box;
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            display: block;
+            float: left;
+            left: 0;
+            list-style: none outside none;
+            margin: 0;
+            min-width: inherit;
+            padding: 0 0;
+            position: absolute;
+            top: 100%;
+            z-index: 1000;
+        }
+    }
+}
+
+#copyright {
+  text-align: right;
+}
