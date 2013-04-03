@@ -1,0 +1,60 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi id_organisation,1,
+	id_facture,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutfacl,#EVAL{_request("debutfacl");}}}
+<B_liste_factures>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutfacl,#EVAL{_request("debutfacl");}}}
+#SET{afficher_lettres,#TRI|=={'multi id_organisation'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies factures">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{facture:info_1_facture,facture:info_nb_factures}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(FACTURES){tout}{id_facture IN #GET{selection}}{where?}
+			{tri #ENV{par,multi id_organisation},#GET{defaut_tri}}{id_facture==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#ID_ORGANISATION**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutfacl,@#ID_FACTURE}|ancre_url{paginationfacl}|afficher_initiale{#ID_ORGANISATION**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='id_organisation' scope='col'>[(#TRI{multi id_organisation,<:facture:label_id_organisation:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_factures(FACTURES){id_facture IN #GET{selection}}
+		{tri #ENV{par,multi id_organisation},#GET{defaut_tri}}{pagination #ENV{nb,10} facl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ID_ORGANISATION**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_FACTURE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='id_organisation'>[(#LOGO_FACTURE|image_reduire{20,20})]<a href="[(#ID_FACTURE|generer_url_entite{facture})]">#ID_ORGANISATION</a></td>
+
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\[facture-#ID_FACTURE-#OBJET-#ID_OBJET\]" value="X"><:facture:retirer_lien_facture:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_factures>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[facture-*-#OBJET-#ID_OBJET\]" value="X"><:facture:retirer_tous_liens_factures:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_factures>
+<div class="liste-objets liste-objets-lies FACTURES caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:facture:info_aucun_facture:>})]</strong>
+</div>
+<//B_liste_factures>
