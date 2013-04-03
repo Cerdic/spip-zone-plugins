@@ -74,6 +74,9 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.6'] = array(
 		array('spipmotion_remove_idorig',array())
 	);
+	$maj['1.2.9'] = array(
+		array('spipmotion_install_recuperer_infos',array()),
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut

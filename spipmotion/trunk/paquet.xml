@@ -1,11 +1,11 @@
 <paquet
 	prefix="spipmotion"
 	categorie="multimedia"
-	version="1.2.8"
+	version="1.2.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
-	schema="1.1.6"
+	schema="1.2.9"
 	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/"
 >	
 
