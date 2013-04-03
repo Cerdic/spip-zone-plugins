@@ -1,0 +1,43 @@
+<BOUCLE_projets_activite(PROJETS_ACTIVITES){id_projets_activite}>
+
+[<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_id_projet:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_projet} id_projet'>(#ID_PROJET)</span>
+</div>]
+
+[<div class="champ contenu_id_facture[ (#ID_FACTURE*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_id_facture:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_facture} id_facture'>(#ID_FACTURE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_id_auteur:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#ID_AUTEUR)</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_date_debut:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT)</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_date_fin:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN)</span>
+</div>]
+
+[<div class="champ contenu_nb_heures_passees[ (#NB_HEURES_PASSEES*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_nb_heures_passees:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{nb_heures_passees} nb_heures_passees'>(#NB_HEURES_PASSEES)</span>
+</div>]
+
+[<div class="champ contenu_nb_heures_decomptees[ (#NB_HEURES_DECOMPTEES*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_nb_heures_decomptees:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{nb_heures_decomptees} nb_heures_decomptees'>(#NB_HEURES_DECOMPTEES)</span>
+</div>]
+
+</BOUCLE_projets_activite>

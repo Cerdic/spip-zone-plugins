@@ -1,0 +1,9 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_dayfill.php ../plugins/fabrique_auto/.backup/dayfill/paquet.xml ../plugins/fabrique_auto/dayfill/paquet.xml
+9c9
+< 	schema="1.0.0"
+---
+> 	schema="2.0.0"
+12c12
+< 		Paquet généré le 2013-04-03 12:12:17
+---
+> 		Paquet généré le 2013-04-03 12:35:39

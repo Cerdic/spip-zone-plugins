@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,projets_activite,#ID_PROJETS_ACTIVITE}|sinon_interdire_acces)]
+<BOUCLE_projets_activite(PROJETS_ACTIVITES){id_projets_activite}{si #ENV{exec}|=={projets_activite}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,projets_activite,#ID_PROJETS_ACTIVITE})
+		[(#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite}|non)
+			[(#URL_ECRIRE{projets_activite_edit,id_projets_activite=#ID_PROJETS_ACTIVITE}|icone_verticale{<:projets_activite:icone_modifier_projets_activite:>,projets_activite,edit,right ajax preload})]
+		]
+		[(#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite}|oui)
+			[(#URL_ECRIRE{projets_activite_edit,id_projets_activite=#ID_PROJETS_ACTIVITE}|icone_verticale{#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#DESCRIPTIF|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{projets_activite-24.png}|balise_img{projets_activite,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{projets_activite,#ID_PROJETS_ACTIVITE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projets_activite,id=#ID_PROJETS_ACTIVITE,id_projets_activite=#ID_PROJETS_ACTIVITE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,projets_activite,#ID_PROJETS_ACTIVITE})
+	[(#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite}|non)
+		[(#URL_ECRIRE{projets_activite_edit,id_projets_activite=#ID_PROJETS_ACTIVITE}|icone_verticale{<:projets_activite:icone_modifier_projets_activite:>,projets_activite,edit,right ajax preload})]
+	]
+	[(#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite}|oui)
+		[(#URL_ECRIRE{projets_activite_edit,id_projets_activite=#ID_PROJETS_ACTIVITE}|icone_verticale{#ID_PROJETS_ACTIVITE|afficher_qui_edite{projets_activite},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_activite,id,#ID_PROJETS_ACTIVITE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_projets_activite>
+[(#ENV**{exec}|=={projets_activite_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projets_activite_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projets_activite>
