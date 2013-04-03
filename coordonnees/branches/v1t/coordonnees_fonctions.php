@@ -79,16 +79,32 @@ function filtre_logo_type_tel($type_numero) {
  * @param string $format_email
  *  Valeur du format d'adresse de courriel (cf. logo_type_).
  *  Les valeurs nativement prises en compte sont les codes normalisees
- * IANA/RFC2426 (section 3.3.2) : internet (SMTP) pref x400 (X.400)
- *  Ces formats correspondent en fait a des "services" associes, et Internet est
- * pour le SMTP par defaut. Aussi, certaines applications ajoutent leur variante
- * proprietaire/personnelle : AOL (America On-Line), AppleLink (AppleLink), CIS
- * (CompuServe Information Service), eWorld (eWorld), IBMMail (IBM Mail), MCIMail
- * (MCI Mail), POWERSHARE (PowerShare), PRODIGY (Prodigy information service),
- * TLX (Telex number), TTMail (AT&T Mail), etc. Bien que non pris en charge
- * nativement, ils peuvent etre utilise en surchargeant le fichier listant les
- * types puis en rajoutant le logo (Compuserve-GIF/JPEG/PNG) dans le repertoire
- * "images/" et en donnant l'intitule dans sons fichier de langue perso "lang/perso_??.html"
+ * IANA/RFC2426 (section 3.3.2) : internet (SMTP) pref x400 (CCITT_F.400/ITU-T_X.400)
+ * @note
+ *  Ces formats definis precisement par des RFC sont associes a des "services" ;
+ * et, pour Internet, certaines applications utilisent leur nom de service
+ * proprietaire :
+ * AOL (America On-Line) 1983--???? http://en.wikipedia.org/wiki/America_Online
+ * AppleLink (Apple Computer's online service) 1986--1994 http://en.wikipedia.org/wiki/AppleLink
+ * CIS (CompuServe Information Service) 1969--2009 http://en.wikipedia.org/wiki/CompuServe
+ * eWorld (eWorld) 1994--1996 http://en.wikipedia.org/wiki/EWorld
+ * IBMMail (IBM Mail) http://en.wikipedia.org/wiki/IBMMAIL
+ * MCIMail (MCI Mail) 1983--2003 http://en.wikipedia.org/wiki/MCI_Mail
+ * POWERSHARE (PowerShare : Apple Open Collaboration Environment) 1993-1996 http://en.wikipedia.org/w/Apple_Open_Collaboration_Environment
+ * PRODIGY (Prodigy information service) 1984--???? http://en.wikipedia.org/wiki/Prodigy_%28online_service%29
+ * TTMail (AT&T Mail) http://en.wikipedia.org/wiki/AT%26T_Internet_Services ?
+ * TLX (Telex number), etc. http://www.perlmonks.org/bare/?node_id=168011
+ * Bien que non geres de base, ils peuvent etre utilise en surchargeant
+ * "saisie/type_email" puis en rajoutant le logo (Compuserve-GIF/JPEG/PNG) dans
+ * "images/" et en donnant l'intitule dans "lang/perso_??.php" (ces 3 repertoires
+ * sont a creer dans votre dossier "squelettes" !)
+ *   Bien entendu, garder a l'esprit que ces valeurs hors standards ajoutent des
+ * problemes d'interoperabilite et des disfonctionnements meme dans ces solutions
+ * proprios http://www.abc.se/~m8827/prog/mailserv.html
+ *   Mais, in fine, seuls SMTP et X.400 sont largement supportes...
+ * http://www.powershellcommunity.org/Forums/tabid/54/aft/5249/Default.aspx
+ * http://www.msexchange.org/articles-tutorials/exchange-server-2010/management-administration/x400-addresses-exchange-2010-part1.html
+ * http://www.isode.com/whitepapers/ic-6036.html
  * @return string
  *  Balise HTML micro-format (cf. logo_type_)
 **/
@@ -122,6 +138,49 @@ function filtre_logo_type_mel($type_email) {
 **/
 function filtre_logo_type_impp($type_messagerie) {
 	return logo_type_('impp', $type_messagerie);
+}
+
+/**
+ * filtre d'elements du lien hypertexte d'une adresse de courriel
+ *
+ * @param string $adresse
+ *  Valeur de l'email
+ * @param string $format
+ *  Type de formatage : internet|x400
+ * @return string
+ *  Attributs CLASS et HREF de la balise A
+**/
+function filtre_lien_type_mel($adresse, $format='smtp') {
+	$adresse = trim($adresse);
+	$prefixe = ''; // defaut
+	switch (strtolower($format)) {
+		case 'smtp':
+		case 'inet':
+		case 'internet':
+			break;
+		case 'x400':
+		case 'x500': // encapsule "X.400" pour le courrier electronique
+		case 'ex': // Exchange : synonyme de X.500
+		case 'ad': // Active Dircetory : synonyme de X.500
+			$delimiteur = ctype_alpha($adresse[0])?';':$adresse[0]; // X.400 recommande le delimiteur ';' ...mais on peut en utiliser un autre comme '/' a condition de le specifier au debut... cf. note 4 de la RFC 1685
+			$prefixe = 'IMCEAEX-'.($delimiteur==';'?'_':''); // http://www.outlookforums.com/threads/8929-how-can-i-hide-my-x400-address-going-senders-exchange-2007-when-person-hidden-gal/
+			$adresse = str_replace($delimiteur, '_', $adresse); // http://www.experts-exchange.com/Software/Server_Software/Email_Servers/Exchange/A_9650-NDRs-and-the-legacyExchangeDN.html
+			break;
+		case 'ldap': // "LDAP" est l'equivalent "X.500" sur IP (creer initialement pour)
+			$prefixe = 'IMCEAEX-_'; // cf "X.500"
+			$adresse = str_replace(',', '_', $adresse); // cf "X.500"
+			break;
+		case 'ccmail':
+			$adresse = str_replace(' at ', '@', $adresse);
+			break;
+		case 'ms':
+			$last_slash = strrpos($adresse, '/');
+			$adresse = substr($adresse, $last_slash+1) .'@'. str_replace('/', '.', substr($adresse, 0, $last_slash)); // correspond probablement au UPN http://msdn.microsoft.com/en-us/library/windows/desktop/aa380525%28v=vs.85%29.aspx
+			break;
+		default:
+			$prefixe = '';
+	}
+	return  " class='email' href='mailto:$prefixe$adresse' ";
 }
 
 /**

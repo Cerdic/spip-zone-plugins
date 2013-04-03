@@ -72,7 +72,8 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	//-- Table emails ------------------------------------------
 	$emails = array(
 		"id_email" => "BIGINT NOT NULL auto_increment",
-		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
+		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // alias: perso, boulot, etc.
+		"format" => "VARCHAR(9) DEFAULT 'internet' NOT NULL", // pour les vCard : 'internet'|'x400' ; pour nombre de proxy : 'SMTP'|'X400'|'SIP' ...parfois (Lotus) 'Inet'|'X.400' pfff
 		"email" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj" => "TIMESTAMP"
 		);

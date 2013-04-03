@@ -66,7 +66,6 @@ function insert_email($c='') {
 			$c['type'] = '';
 		$c['id_email'] = $id_email;
 		sql_insertq('spip_emails_liens', $c);
-		));
 	}
 
 	return $id_email;
@@ -80,7 +79,7 @@ function revisions_emails($id_email, $c=FALSE) {
 	if ($c === FALSE) {
 		$c = array();
 		foreach (array(
-			'email', 'titre',
+			'email', 'titre', 'format',
 		) as $champ ) {
 			if (($a = _request($champ)) !== NULL) {
 				$c[$champ] = $a;

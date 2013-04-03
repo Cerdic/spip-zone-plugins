@@ -13,6 +13,5 @@ maj:2013-03-21 -->]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 	<option value="internet"[(#ENV{valeur,#ENV{defaut}}|=={internet}|oui) selected="selected"]><:coordonnees:type_email_internet:></option>
-	<option value="pref"[(#ENV{valeur,#ENV{defaut}}|=={pref}|oui) selected="selected"]><:coordonnees:type_email_pref:></option>
 	<option value="x400"[(#ENV{valeur,#ENV{defaut}}|=={x400}|oui) selected="selected"]><:coordonnees:type_email_x400:></option>
 </select>

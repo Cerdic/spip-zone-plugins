@@ -7,11 +7,12 @@
 	<BOUCLE_mails(EMAILS emails_liens){emails_liens.objet}{emails_liens.id_objet}{par email}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='titre'>
-				[(#TYPE|logo_type_email) ]
+				[(#TYPE|logo_type_mel) ]
 				[(#TITRE)]
 			</td>
 			<td class='email'>
-				[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]#EMAIL[(#TYPE|match{x400}|non)</a>]
+				<!--[(#FORMAT|logo_type_email) ]-->
+				<a[(#EMAIL|lien_type_mel{#FORMAT})]>#EMAIL</a>
 			</td>
 			<td class='action'>
 			[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
@@ -19,6 +20,8 @@
 					|balise_img{<:coordonnees:modifier_email:>})],
 					[(#URL_ECRIRE{email_edit}
 						|parametre_url{id_email,#ID_EMAIL}
+						|parametre_url{objet,#OBJET}
+						|parametre_url{id_objet,#ID_OBJET}
 						|parametre_url{retour,[(#ENV{retour,#SELF})]}
 					)],ajax})]
 				[(#BOUTON_ACTION{

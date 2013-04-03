@@ -142,9 +142,9 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok = true;
 
 		include_spip('base/upgrade');
-		maj_tables('spip_adresses'); //=		$ok &= sql_alter("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOUT NULL");
+		maj_tables('spip_adresses'); //=		$ok &= sql_alter("TABLE spip_adresses ADD region VARCHAR(40) DEFAULT '' NOT NULL");
 
-		if ($ok){
+		if ($ok){ // "maj_tables" ne renvoit rien... mais le retour de "sql_alter" n'est pas pertinent (sauf en cas d'indisponibilite du serveur ou il renvoit FALSE)
 			spip_log('Tables coordonnées correctement passsées en version 1.6','coordonnees');
 			ecrire_meta($nom_meta_base_version, $current_version="1.6");
 		}
@@ -178,10 +178,23 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		$ok = true;
 
 		include_spip('base/create');
-		creer_base(); //=		$ok &= sql_create("spip_syndic_liens", array('id_syndic'=>"BIGINT NOT NULL DEFAULT 0", 'id_objet'=>"BIGINT NOT NULL DEFAULT 0", 'objet'=>"VARCHAR(25) NOT NULL", 'type'=>"VARCHAR(25) NOT NULL DEFAULT ''", ), array('PRIMARY KEY'=>"id_syndic, id_objet, objet, type", 'KEY id_syndic'=>"id_syndic", false, false ) );
+		maj_tables('spip_syndic_liens'); //=		$ok &= sql_create("spip_syndic_liens", array('id_syndic'=>"BIGINT NOT NULL DEFAULT 0", 'id_objet'=>"BIGINT NOT NULL DEFAULT 0", 'objet'=>"VARCHAR(25) NOT NULL", 'type'=>"VARCHAR(25) NOT NULL DEFAULT ''", ), array('PRIMARY KEY'=>"id_syndic, id_objet, objet, type", 'KEY id_syndic'=>"id_syndic", false, false ) );
 
-		if ($ok){ // "create" ne renvoit rien :-/
+		if ($ok){ // ni "sql_create" ni "maj_tables" ne renvoient rien :-/
 			ecrire_meta($nom_meta_base_version, $current_version="1.8");
+		}
+		else return false;
+	}
+
+	// On distingue les formats des types d'usage
+	if (version_compare($current_version, "1.9", "<")) {
+		$ok = true;
+
+		include_spip('base/upgrade');
+		maj_tables('spip_emails'); //=		$ok &= sql_alter("TABLE spip_emails ADD format VARCHAR(9) DEFAULT '' NOT NULL");
+
+		if ($ok){ // "maj_tables" ne renvoit rien... mais le retour de "sql_alter" n'est pas pertinent (sauf en cas d'indisponibilite du serveur ou il renvoit FALSE)
+			ecrire_meta($nom_meta_base_version, $current_version="1.9");
 		}
 		else return false;
 	}
