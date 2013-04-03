@@ -3,7 +3,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/projets, par=nom, env, ajax, sinon=<:projet:info_aucun_projet:>}>
+<INCLURE{fond=prive/objets/liste/projets, par=date_publication, env, ajax, sinon=<:projet:info_aucun_projet:>}>
 
 [(#AUTORISER{creer,projet})
 	[(#URL_ECRIRE{projet_edit,new=oui}|icone_verticale{<:projet:icone_creer_projet:>,projet,new,right})]
