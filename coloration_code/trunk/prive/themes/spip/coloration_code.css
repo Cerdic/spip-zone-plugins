@@ -1,8 +1,21 @@
-.coloration_code .spip_cadre{
-	margin-left:2em;	
+.coloration_code.cadre {
+
 }
+
+.coloration_code pre {
+  background: #eee;
+  padding: 0;
+  -webkit-box-shadow: inset 40px 0 0 #f7f7f7, inset 41px 0 0 #ececf0;
+     -moz-box-shadow: inset 40px 0 0 #f7f7f7, inset 41px 0 0 #ececf0;
+          box-shadow: inset 40px 0 0 #f7f7f7, inset 41px 0 0 #ececf0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding:1em 0;
+}
+.coloration_code .download {text-align: right}
 
 .coloration_code ol{
 	list-style-type: decimal;
-	margin-left: 0em;
+    margin-left:43px;
 }	

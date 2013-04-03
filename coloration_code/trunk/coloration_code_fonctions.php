@@ -51,6 +51,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	// En outre, le bouton telecharger n'est pas affiche.
 	if ($cadre == 'cadre')
 		$englobant = 'div';
+	$balise_code = ($englobant == 'div' ? "div":"code");
 
 	// Supprime le premier et le dernier retour chariot
 	$code = preg_replace("/^(\r\n|\n|\r)*/", "", $code);
@@ -76,7 +77,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	// et que FF ne gere pas comme les autres navigateurs (va comprendre).
 	$geshi->set_overall_style('');
 	$geshi->set_code_style('');
-	
+
 	$stylecss = "";
 	if (!PLUGIN_COLORATION_CODE_STYLES_INLINE OR PLUGIN_COLORATION_CODE_SANS_STYLES) {
 		$geshi->enable_classes();
@@ -119,12 +120,10 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	if($datatext)
 		$datatext_content = ' data-clipboard-text="'.attribut_html($code).'"';
 		
-	if ($cadre == 'cadre') {
-	  $spip_cadre = ' spip_cadre';
-	  $geshi->set_header_type(GESHI_HEADER_DIV);
+	if ($cadre == 'cadre' OR $englobant=="div") {
+	  $geshi->set_header_type(GESHI_HEADER_PRE);
 	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 	} else {
-	  $spip_cadre = '';
 	  $geshi->set_header_type(GESHI_HEADER_NONE);
 	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
 	}
@@ -132,10 +131,10 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	//
 	// And echo the result!
 	//
-	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code"><' . $englobant . ' class="spip_'.$language.' '.$cadre.$spip_cadre.'"'.$datatext_content.'>'.$geshi->parse_code().'</' . $englobant . '>';
+	$rempl = $stylecss . '<' . $englobant . ' class="coloration_code '.$cadre.'"><' . $balise_code . ' class="spip_'.$language.' '.$cadre.'"'.$datatext_content.'>'.$geshi->parse_code().'</' . $balise_code . '>';
 
 	if ($telecharge) {
-		$rempl .= "<div class='" . $cadre . "_download'><a href='$fichier'>"._T('bouton_download')."</a></div>";
+		$rempl .= "<p class='download " . $cadre . "_download'><a href='$fichier'>"._T('bouton_download')."</a></p>";
 	}
 	return $rempl.'</' . $englobant . '>';
 }
