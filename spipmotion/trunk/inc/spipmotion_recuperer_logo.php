@@ -28,7 +28,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$infos=false,$only_return=false){
 	spip_log("SPIPMOTION : recuperation d un logo du document $id_document","spipmotion");
+	
 	$id_vignette = false;
+	
 	/**
 	 * Pas d'id_document, on retourne false
 	 */
@@ -43,10 +45,8 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		spip_log('SPIPMOTION Erreur : le script de génération de vignette n\'est pas disponible','spipmotion'._LOG_CRITIQUE);
 		return false;
 	}
+	
 	include_spip('inc/documents');
-	include_spip('inc/filtres_images_mini');
-	include_spip('action/editer_document');
-	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 	
 	$retour = 0;
 	
@@ -60,8 +60,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
 		if(!$vignette_existante)
 			$vignette_existante = 'new';
-		$chemin_court = $document['fichier'];
-		$chemin = get_spip_doc($chemin_court);
+		$chemin = get_spip_doc($document['fichier']);
 		$string_temp = "$id-$type-$id_document";
 	}
 	else if($fichier && is_array($infos) && $only_return){
@@ -78,12 +77,15 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 	}
 
 	if($document['hasvideo'] == 'oui'){
+		include_spip('inc/filtres_images_mini');
+		include_spip('action/editer_document');
+		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
+		
 		$vignette = false;
-		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 			$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignette.sh'; 
-		}else{
+		else
 			$spipmotion_sh = find_in_path('script_bash/spipmotion_vignette.sh');
-		}
 		
 		$query = md5($string_temp);
 		$dossier_temp = _DIR_VAR;
@@ -129,9 +131,8 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 						 * on tente de récupérer la vignette du document original
 						 */
 						if($retour>10){
-							if($document['mode'] != 'conversion'){
+							if($document['mode'] != 'conversion')
 								$original = sql_fetsel('id_document,id_vignette','spip_documents','id_document='.intval($document['id_document']));
-							}
 							else{
 								$id_original = sql_getfetsel('doc.id_document','spip_documents as doc LEFT JOIN spip_documents_liens as lien ON doc.id_document=lien.id_document','lien.objet="document" AND lien.id_document='.intval($id_document));
 								$original = sql_fetsel('id_document,id_vignette','spip_documents','id_document='.intval($id_original));
@@ -168,20 +169,20 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 							$retour++;
 						}
 						else if(file_exists($img_finale)){
+							if(($document['rotation'] == '90') && ($document['mode'] != 'conversion'))
+								$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
 							$x = $ajouter_documents($vignette_existante,
 													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 									    			'', 0, 'vignette');
-							$x = reset($x);
-							if(intval($x)){
+							$id_vignette = reset($x);
+							if(intval($id_vignette)){
 								$vignette = true;
-								$id_vignette = $x;
-								if(!$only_return && ($document['id_vignette'] != $x))
-									document_modifier($id_document, array('id_vignette'=>$x));
+								if(!$only_return && ($document['id_vignette'] != $id_vignette))
+									document_modifier($id_document, array('id_vignette'=>$id_vignette));
 							}
 							spip_unlink($img_finale);
-						}else{
+						}else
 							return false;
-						}
 					}
 					/**
 					 * On n'a pas le plugin de fonctions d'images supplémentaires
@@ -189,27 +190,27 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 					 */
 					else{
 						if(file_exists($img_finale)){
+							$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
 							$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 								    			'', 0, 'vignette');
-							$x = reset($x);
-							if(intval($x)){
+							$id_vignette = reset($x);
+							if(intval($id_vignette)){
 								$vignette = true;
-								$id_vignette = $x;
-								if(!$only_return && ($document['id_vignette'] != $x))
-									document_modifier($id_document, array('id_vignette'=>$x));
+								if(!$only_return && ($document['id_vignette'] != $id_vignette))
+									document_modifier($id_document, array('id_vignette'=>$id_vignette));
 							}
 							spip_unlink($img_finale);
 						}
 					}
 				}
-			}else{
+			}else
 				return false;	
-			}
+			
 		}
-	}else{
+	}else
 		spip_log('Erreur : ce document n a pas de piste video','spipmotion');
-	}
+	
 	return $id_vignette;
 }
 ?>
