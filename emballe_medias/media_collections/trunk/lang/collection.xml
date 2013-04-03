@@ -1,4 +1,6 @@
 <traduction module="collection" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/media_collections/trunk/lang/" reference="fr">
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/collection?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 	<langue code="fr" />
 </traduction>
