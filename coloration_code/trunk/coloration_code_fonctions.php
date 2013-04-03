@@ -147,14 +147,19 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
  * @return string $ret
  */
 function cadre_ou_code($regs) {
-	$ret = false;
 	// pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
-	if (!preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)
-	|| !($ret = coloration_code_color($regs[3], $matches[3], $regs[1]))) {
-		$ret = $regs[1] == 'code' ? traiter_echap_code_dist($regs)
-					: traiter_echap_cadre_dist($regs);
+	if (preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)){
+		$englobant = "div";
+		if ($regs[1]=="code" AND strpos($regs[3],"\n")===false)
+			$englobant = "span";
+		if ($ret = coloration_code_color($regs[3], $matches[3], $regs[1], $englobant))
+			return $ret;
 	}
-	return $ret;
+
+	if ($regs[1] == 'code')
+		return traiter_echap_code_dist($regs);
+
+	return traiter_echap_cadre_dist($regs);
 }
 
 /**
