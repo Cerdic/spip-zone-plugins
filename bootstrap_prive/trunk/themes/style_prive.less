@@ -7,8 +7,8 @@ table.liste {
   .table;
   .table-striped;
 }
-.nav {
-  li {
+.nav, #navigation {
+  li, li.item {
     a {
       background-repeat: no-repeat;
       background-position: 10px center;
@@ -131,6 +131,7 @@ a.plus_info {
           padding: 0;
           position: absolute;
           top: 50%;
+          right: auto;
         }
       }
     }
@@ -207,6 +208,11 @@ a.plus_info {
         }
     }
 }
+.formulaire_spip .toggle_box_link {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
 
 .form-search {
   .input-append {
@@ -218,7 +224,23 @@ a.plus_info {
     }
   }
 }
+.none,.js .none-js,.no-js .none-nojs{display:none}
+.hidden,.js .hidden-js,.no-js .hidden-nojs{visibility:hidden}
+.invisible,.over,.js .over-js,.no-js .over-nojs{position:absolute;left:-3000em;height:1%}
+.js .invisible_au_chargement{visibility:hidden}
+.js .visible_au_chargement{visibility:hidden}
+.js .display_au_chargement{display:none}
+.no-js .invisible_au_chargement{visibility:hidden}
+.no-js .visible_au_chargement{visibility:visible}
+.no-js .display_au_chargement{display:block}
 
+#chemin {
+  padding: 10px 0;
+  
+  .bouton_deplacer {
+    float: right;
+  }
+}
 #copyright {
   text-align: right;
 }

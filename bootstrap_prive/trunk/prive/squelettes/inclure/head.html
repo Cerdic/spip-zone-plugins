@@ -15,12 +15,23 @@ var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
 var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
 /*]]>*/</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!-- #ENV{paramcss} -->
 [<link rel="stylesheet" href="(#CSS{css/font.css})" type="text/css" />]
 [<link rel="stylesheet" href="(#CSS{css/bootstrap.css})" type="text/css" />]
 [<link rel="stylesheet" href="(#CSS{css/responsive.css})" type="text/css" />]
 [<link rel="stylesheet" href="(#CSS{css/box.css})" type="text/css" />]
 [<link rel="stylesheet" href="(#CSS{css/box_skins.css})" type="text/css" />]
+
+[<link rel="stylesheet" href="(#URL_PAGE{style_prive_defaut.css,#ENV{paramcss}})" type="text/css" />]
+
+[<link rel="stylesheet" href="(#CSS{css/spip.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/spip.comment.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/spip.list.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/spip.petition.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/spip.pagination.css})" type="text/css" />]
+[(#REM)
+[<link rel="stylesheet" href="(#CSS{css/spip.portfolio.css})" type="text/css" />]
+]
 
 #PIPELINE{header_prive_css,''}
 
@@ -28,11 +39,8 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 (#REM) spip-admin pour le debug
 -->][<link rel="stylesheet" type="text/css" href="(#CSS{spip_admin.css}|url_absolue)"/>]
 [<!--
-(#REM) CSS pour les icônes de bandeau
--->]<link rel="stylesheet" type="text/css" href="#CSS{themes/bando.css}"/>
-[<!--
 (#REM) CSS espace prive : la vraie
--->]<link rel="stylesheet" type="text/css" href="#CSS{themes/style_prive.css,#ENV{paramcss}}"/>
+-->]<link rel="stylesheet" type="text/css" href="#CSS{themes/style_prive.css}"/>
 [<!--
 (#REM) Favicon
 -->][<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|url_absolue)" type="image/x-icon" />]
@@ -47,4 +55,16 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/presentation.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/gadgets.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-affix.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-alert.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-button.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-carousel.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-collapse.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{js/bootstrap-dropdown.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-modal.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-popover.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-scrollspy.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-tab.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-tooltip.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-transitien.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{js/bootstrap-typeahead.js})"></script>]

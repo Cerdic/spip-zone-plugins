@@ -1,7 +1,7 @@
 <paquet
 	prefix="bootstrap_prive"
 	categorie="squelette"
-	version="0.2.0"
+	version="0.4.0"
 	etat="test"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="bootstrap_prive_logo.png"
