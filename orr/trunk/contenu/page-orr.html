@@ -2,28 +2,48 @@
 	<div id="motcle">
 		<INCLURE{fond=inc-selection_mots}>
 	</div>
-
+    <div id="choixaffichage">
+        &nbsp;
+        <h3 id="semaine">semaine</h3> &nbsp;&nbsp;&nbsp;&nbsp; <h3 id="mois">mois</h3>
+    </div>
 	<div id="datepick">
 		<div id = "datepickers"></div>
 	</div>
 </div>
 
-		<br/>
-		<br/>
-		<div id="affichageTableau">
-			<div id="icones">
-				<span id="gauche"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="droite"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
-			</div>
-			<div id="tableau">
-				<INCLURE{fond=inc-tableau,ajax=tableau}>
-			</div>
-		</div>
+        <div id="affichage_semaine" class="cacher">
+	            <div id="icones" >
+		            <span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
+	            </div>
+	            <div id="tableau_semaine">
+		            <INCLURE{fond=inc/inc-affichage-semaine,ajax=tableau}>
+	            </div>
+        </div>
 
+        <div id="affichage_mois" class="cacherii">
+	            <div id="icones">
+		            <span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
+	            </div>
+	            <div id="tableau_mois">
+		            <INCLURE{fond=inc/inc-affichage-mois,ajax=tableau}>
+	            </div>
+        </div>
+		
 
 
 <script>
 
 	jQuery(document).ready(function(){
+
+        jQuery("#mois").bind("click",function(event){
+        jQuery("#affichage_semaine").css("display","none");
+        jQuery("#affichage_mois").css("display","block");
+        });
+        jQuery("#semaine").bind("click",function(event){
+        jQuery("#affichage_semaine").css("display","block");
+        jQuery("#affichage_mois").css("display","none");
+        });
+
 		[(#ENV{jourj}|?{
 			jourj = "[(#ENV{jourj})]"
 			console.log(jourj),
@@ -41,21 +61,41 @@
 				tabAjax()
 			},
 		});
-		jQuery("#gauche").bind("click",function(event){
+		jQuery("#mois_precedent").bind("click",function(event){
+			dateselectionne=Date.parse(jourj);
+			dateselectionne = dateselectionne.addMonths(-1);
+
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
+		});
+		jQuery("#jour_precedent").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(-1);
 
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
 		});
-		jQuery("#droite").bind("click",function(event){
+		jQuery("#jour_suivant").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(1);
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
 
 		});
+		jQuery("#mois_suivant").bind("click",function(event){
+			dateselectionne=Date.parse(jourj);
+			dateselectionne = dateselectionne.addMonths(1);
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
+
+		});
 		jQuery("#aujourdhui").bind("click",function(event){
+			dateselectionne = new Date();
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax();
+
+		});
+		jQuery("#mois_actuel").bind("click",function(event){
 			dateselectionne = new Date();
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();

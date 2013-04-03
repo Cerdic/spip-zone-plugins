@@ -1,6 +1,35 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function orr_premierjoursemaine($date){
+	list($annee,$mois,$jour)=explode('-',$date);
+    $date_N=date("N",mktime(0,0,0,$mois,$jour,intval($annee)));
+    $jour_premier=$jour-$date_N+1;
+    return $date_premier_lundi=date("Y-m-d",mktime(0,0,0,$mois,$jour_premier,intval($annee)));
+}
+
+function orr_premierjourmois($date){
+	list($annee,$mois,$jour)=explode('-',$date);
+    //$jour_date=date("j",mktime(0,0,0,$mois,$jour,intval($annee)));
+    //$premier_jour_mois=$jour-$date_N+1;
+    return $date_premier_jour_mois=date("Y-m-d",mktime(0,0,0,$mois,1,intval($annee)));
+}
+function orr_premierlundimois($date){
+	list($annee,$mois,$jour)=explode('-',$date);
+    $numero_premier_jour=date("N",mktime(0,0,0,$mois,1,intval($annee)));
+    return $premier_jour_calendrier=date("Y-m-d",mktime(0,0,0,$mois,1-$numero_premier_jour+1,intval($annee)));
+
+    //$lundi=strtotime("Monday",$date);
+    //return date("Y",$lundi); 
+    //return $lundi;
+    //return $date;
+}
+
+function orr_plusunjour($date){
+	list($annee,$mois,$jour)=explode('-',$date);
+    return $date_plusun=date("Y-m-d",mktime(0,0,0,$mois,$jour+1,intval($annee)));
+}
+
 /**
  * Determination le jour des 7 jours d'une semaine connaissant la date du jeudi
  * @param date au format Y-m-d

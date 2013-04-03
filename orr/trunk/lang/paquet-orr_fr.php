@@ -6,7 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
-	'oresource_titre' => 'ORR',
+	'orr_description' => 'Adaptation du célèbre GRR pour spip',
+	'orr_nom' => 'ORR',
+	'orr_slogan' => 'Organisation de réservations de ressources',
 );
 
 ?>

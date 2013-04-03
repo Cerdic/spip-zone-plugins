@@ -51,7 +51,7 @@ $res = sql_select(
 }
 
 // declaration vide pour ce pipeline.
-function oresource_autoriser(){}
+function orr_autoriser(){}
 
 
 // -----------------

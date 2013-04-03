@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'installation du plugin et de mise à jour.
 **/
-function oresource_upgrade($nom_meta_base_version, $version_cible) {
+function orr_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(array('maj_tables', array('spip_orr_ressources', 'spip_orr_reservations','spip_orr_autorisations', 'spip_orr_reservations_liens','spip_orr_autorisations_liens')));
@@ -32,7 +32,7 @@ function oresource_upgrade($nom_meta_base_version, $version_cible) {
 /**
  * Fonction de désinstallation du plugin.
 **/
-function oresource_vider_tables($nom_meta_base_version) {
+function orr_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_orr_ressources");
 	sql_drop_table("spip_orr_autorisations");

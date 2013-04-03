@@ -11,16 +11,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  */
-function oresource_declarer_tables_interfaces($interfaces) {
+function orr_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['tables_jointures']['spip_orr_autorisations'][] = 'orr_autorisations_liens';
+	$interfaces['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
+
 	$interfaces['tables_jointures']['spip_orr_autorisations_liens'][] = 'orr_autorisations';
+	$interfaces['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
 
 	$interfaces['tables_jointures']['spip_orr_ressources'][] = 'orr_autorisations_liens';
-	$interfaces['tables_jointures']['spip_auteurs'][] = 'orr_autorisations_liens';
+	$interfaces['tables_jointures']['spip_orr_ressources'][] = 'orr_reservations_liens';
 
-	$interfaces['tables_jointures']['spip_orr_reservations'][] = 'orr_reservations_liens';
-	$interfaces['tables_jointures']['spip_orr_reservations_liens'][] = 'orr_reservations';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'orr_autorisations_liens';
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'orr_reservations_liens';
 
 	$interfaces['table_des_tables']['orr_ressources'] = 'orr_ressources';
@@ -37,7 +39,7 @@ function oresource_declarer_tables_interfaces($interfaces) {
 /**
  * Déclaration des objets éditoriaux
  */
-function oresource_declarer_tables_objets_sql($tables) {
+function orr_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_orr_ressources'] = array(
 		'type' => 'orr_ressource',
@@ -91,7 +93,6 @@ function oresource_declarer_tables_objets_sql($tables) {
 			"id_grappe"               => "bigint(21) ",
 			"orr_statut"              => "varchar(25)  DEFAULT ''",
 			"id_auteur"               => "bigint(21) ",
-			"orr_droit"               => "varchar(25) NOT NULL DEFAULT ''",
 			"orr_autorisation_nom"    => "varchar(25) NOT NULL DEFAULT ''",
 			"orr_autorisation_valeur" => "varchar(25) NOT NULL DEFAULT ''",
 			"maj"                     => "TIMESTAMP"
@@ -100,7 +101,7 @@ function oresource_declarer_tables_objets_sql($tables) {
 			"PRIMARY KEY"        => "id_orr_autorisation",
 		),
 		 #'date' => "",
-		'champs_editables'  => array('orr_type_objet','id_grappe','orr_statut','orr_droit'),
+		'champs_editables'  => array('orr_type_objet','id_grappe','orr_statut'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array("orr_statut" => 8),
 		'tables_jointures'  => array('spip_orr_autorisations_liens'),
@@ -112,7 +113,7 @@ function oresource_declarer_tables_objets_sql($tables) {
 /**
  * Déclaration des tables secondaires (liaisons)
  */
-function oresource_declarer_tables_auxiliaires($tables) {
+function orr_declarer_tables_auxiliaires($tables) {
 
 	$tables['spip_orr_reservations_liens'] = array(
 		'field' => array(

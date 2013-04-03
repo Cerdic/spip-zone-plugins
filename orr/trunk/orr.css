@@ -1,24 +1,63 @@
-table {
-	border-collapse: collapse;
-	text-align: center;
+div#couleur_ressource {
+    float:left;
+    padding-right:10px;
 }
+div#tab_affichage_mois{
+    float:clear;
+
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+}
+/* partie haute */
+h3#semaine, h3#mois{
+    display:inline-block;
+}
+#motscles, #motcle{
+    width : 150px;
+    float:left;
+}
+#choixaffichage{
+    /*display:inline-block;*/
+    float:left;
+    padding-top:40px;
+    padding-left:50px;
+    padding-right:50px;
+}
+#datepick{
+	width : 200px;
+	float:right;
+    /*display:inline-block;*/
+	}
+#affichage_semaine, #affichage_mois {
+    padding-top:20px;
+    clear:both;
+}
+
+td{
+    vertical-align:top;
+}
+
+
 td.largeurcol{
-	vertical-align:top;
+    vertical-align:top;
     width:80px;
 }
 #premierjour {
-	border-top : 1px solid red ;
-	border-bottom : 1px solid red ;
-	border-left : 1px solid red ;
-	}
+    border-top : 1px solid red ;
+    border-bottom : 1px solid red ;
+    border-left : 1px solid red ;
+}
 #jourmilieu {
-	border-top : 1px solid red ;
-	border-bottom : 1px solid red ;
+    border-top : 1px solid red ;
+    border-bottom : 1px solid red ;
 }
 #dernierjour {
-	border-top : 1px solid red ;
-	border-bottom : 1px solid red ;
-	border-right : 1px solid red ;
+    border-top : 1px solid red ;
+    border-bottom : 1px solid red ;
+    border-right : 1px solid red ;
 }
 .ui-tpicker-grid-label{
 	width: 154px ;
@@ -26,29 +65,17 @@ td.largeurcol{
 	}
 th, td{
 	padding : 5px;
-	}
+}
 
 td#jeudi, th#jeudith{
 	background-color : #D6D6D6 ;
 }
 
-#motscles, #motcle{
-	width : 150px;
-	float:left;
-	}
-
-#datepick{
-	width : 200px;
-	float:right;
-	}
 
 #contenu{
 width: 980px;
 }
 
-#affichageTableau{
-clear:both;
-}
 
 img.stylo{
 float:left;}
@@ -60,3 +87,7 @@ padding-right:30px;}
 .poubelle_visible{display:auto;}
 .poubelle_cache{display:none;}
 
+
+div.cacher{
+   display:none; 
+}

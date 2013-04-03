@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Ajout de contenu sur certaines pages,
  * notamment des formulaires de liaisons entre objets
  */
-function oresource_affiche_milieu($flux) {
+function orr_affiche_milieu($flux) {
 	$texte = "";
 	$e     = trouver_objet_exec($flux['args']['exec']);
 
@@ -59,7 +59,7 @@ function oresource_affiche_milieu($flux) {
 /**
  * Ajout de liste sur la vue d'un auteur
  */
-function oresource_affiche_auteurs_interventions($flux) {
+function orr_affiche_auteurs_interventions($flux) {
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
 
 		$flux['data'] .= recuperer_fond('prive/objets/liste/orr_reservations', array(
@@ -79,7 +79,7 @@ function oresource_affiche_auteurs_interventions($flux) {
  * @param int $n
  * @return int
  */
-function oresource_optimiser_base_disparus($flux){
+function orr_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('orr_reservation'=>'*'),'*');
 	return $flux;
@@ -87,14 +87,14 @@ function oresource_optimiser_base_disparus($flux){
 /**
  * insertion de date.js
  **/
-function oresource_jquery_plugins($scripts){
+function orr_jquery_plugins($scripts){
     $scripts[] = "javascript/date.js";
     return $scripts;
 }
 /**
  * insertion du css
  **/
-function oresource_insert_head_css($flux){
+function orr_insert_head_css($flux){
 	$css   = find_in_path('orr.css');
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
     return $flux;

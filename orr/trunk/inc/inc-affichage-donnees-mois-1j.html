@@ -1,0 +1,21 @@
+#SET{motcle1,#ENV{motcle}}
+#SET{mots_choisis, #ARRAY}
+<BOUCLE_themes(MOTS){type=orr}>
+  #SET{mots_choisis, #GET{mots_choisis}|push{#ID_MOT}}
+</BOUCLE_themes>
+#SET{motcle2,#GET{motcle1,#GET{mots_choisis}}}
+[(#GET{motcle1}|?{#SET{motcle2,#VAL{#ENV{motcle}|explode{:}}},#SET{motcle2,#GET{mots_choisis}}})]
+
+<BOUCLE_jour(ORR_RESERVATIONS){orr_date_debut<#ENV{jourplusun}}{orr_date_fin>#ENV{jourj}}>
+
+    <BOUCLE_couleur(ORR_RESSOURCES){id_orr_reservation}{id_mot IN #GET{motcle2}}>
+				[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
+        #SET{couleur_ressource,#ORR_RESSOURCE_COULEUR}
+        <div style="background-color:#GET{couleur_ressource}" >
+        #ORR_RESERVATION_NOM <br /> 
+        </div>]
+    </BOUCLE_couleur>
+    <br />
+</BOUCLE_jour>
+
+

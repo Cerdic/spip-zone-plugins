@@ -1,5 +1,5 @@
 <paquet
-	prefix="oresource"
+	prefix="orr"
 	categorie="divers"
 	version="2.0.0"
 	etat="dev"
@@ -21,15 +21,15 @@
     <necessite nom="timepicker" compatibilite="[1.0.0;]" />
     <necessite nom="palette" compatibilite="[3.0.0;]" />
 
-	<pipeline nom="autoriser" inclure="oresource_autorisations.php" />
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/oresource.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/oresource.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/oresource.php" />
-	<pipeline nom="affiche_milieu" inclure="oresource_pipelines.php" />
-	<pipeline nom="affiche_auteurs_interventions" inclure="oresource_pipelines.php" />
-	<pipeline nom="optimiser_base_disparus" inclure="oresource_pipelines.php" />
-    <pipeline nom="jquery_plugins" inclure="oresource_pipelines.php" />
-    <pipeline nom="insert_head_css" inclure="oresource_pipelines.php" />
+	<pipeline nom="autoriser" inclure="orr_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/orr.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/orr.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/orr.php" />
+	<pipeline nom="affiche_milieu" inclure="orr_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="orr_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="orr_pipelines.php" />
+    <pipeline nom="jquery_plugins" inclure="orr_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="orr_pipelines.php" />
 
 	<menu nom="orr_ressources" titre="orr_ressource:titre_orr_ressources" parent="menu_edition" icone="images/calendrier-16.png" action="orr_ressources" />
 </paquet>
