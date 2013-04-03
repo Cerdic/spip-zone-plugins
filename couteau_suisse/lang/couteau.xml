@@ -22,6 +22,7 @@
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />

@@ -38,17 +38,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forcer l\'actualisation distante',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
+	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?',
 	'maj_liste' => 'Liste des plugins détectés :',
-	'maj_maj' => 'Mettre à jour le plugin sélectionné', # MODIF
+	'maj_maj' => 'Mettre à jour le(s) plugin(s) sélectionné(s)',
 	'maj_ok' => 'Ce [plugin->@zip@] semble [à jour->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
+	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].',
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => 'La [révision distante->@url@] n\'a pas pu être trouvée.',
 	'maj_rev_ok' => 'La révision [@revision@->@url@] est [disponible->@zip@].',
 	'maj_spip' => 'Après avoir mis à jour tous tes plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.',
 	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
+	'maj_tiers' => 'Nécessite/Utilise/Procure',
 	'maj_verif' => 'Vérifie préalablement l\'archive qui te convient :',
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifie bien que l\'archive téléchargée correspond au plugin qu\'il te faut mettre à jour.',
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.',
