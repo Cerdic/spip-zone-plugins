@@ -1,7 +1,7 @@
 <paquet
 	prefix="dayfill"
 	categorie="divers"
-	version="2.0.1"
+	version="2.0.2"
 	etat="dev"
 	compatibilite="[3.0.7;3.0.*]"
 	logo="prive/themes/spip/images/dayfill-64.png"
@@ -23,6 +23,8 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/dayfill.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/dayfill.php" />
+
+	<pipeline nom="affiche_enfants" inclure="dayfill_pipelines.php" />
 
 	<menu nom="projets_activites" titre="projets_activite:titre_projets_activites" parent="menu_edition" icone="images/projets_activite-16.png" action="projets_activites" />
 	<menu nom="projets_activite_creer" titre="projets_activite:icone_creer_projets_activite" parent="outils_rapides" icone="images/projets_activite-new-16.png" action="projets_activite_edit" parametres="new=oui" />

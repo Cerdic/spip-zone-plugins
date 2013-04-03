@@ -129,7 +129,13 @@ function formulaires_editer_projets_activite_verifier_dist($id_projets_activite=
  *     Retours des traitements
  */
 function formulaires_editer_projets_activite_traiter_dist($id_projets_activite='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('projets_activite',$id_projets_activite,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$retour = formulaires_editer_objet_traiter('projets_activite',$id_projets_activite,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	if ($id_auteur = _request('id_auteur') and $id_projet = _request('id_projet')) {
+		include_spip('action/editer_liens');
+		objet_associer(array('auteur'=>$id_auteur), array('projet'=>$id_projet));
+	}
+	return $retour;
 }
 
 

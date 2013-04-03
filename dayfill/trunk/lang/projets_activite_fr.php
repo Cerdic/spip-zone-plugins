@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_projets_activite' => 'Activité',
 	'titre_projets_activites' => 'Activités',
 	'titre_projets_activites_rubrique' => 'Activités de la rubrique',
+	'titre_projets_activite_projet' => "Activités liées au projet",
 );
 
 ?>

@@ -25,14 +25,14 @@ qui liste 2 groupes d'auteurs
 
 	<optgroup label="<:dayfill:label_auteurs_projet:>">
 	[(#REM) Liste des auteurs liés au projet ]
-	<BOUCLE_auteurs_projet(AUTEURS){id_projet}{par num nom, nom}{doublons}>
+	<BOUCLE_auteurs_projet(AUTEURS){tout}{id_projet}{par num nom, nom}{doublons}>
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>
 	</BOUCLE_auteurs_projet>
 	</optgroup>
 
 	<optgroup label="<:dayfill:label_auteurs_potentiels:>">
 	[(#REM) Liste des auteurs potentiels ]
-	<BOUCLE_auteurs_potentiels(AUTEURS){id_auteur IN #CONFIG{dayfill/collaborateurs}}{par num nom, nom}{doublons}>
+	<BOUCLE_auteurs_potentiels(AUTEURS){tout}{id_auteur IN #CONFIG{dayfill/collaborateurs}}{par num nom, nom}{doublons}>
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>
 	</BOUCLE_auteurs_potentiels>
 	</optgroup>
