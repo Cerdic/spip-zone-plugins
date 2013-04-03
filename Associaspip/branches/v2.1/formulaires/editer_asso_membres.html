@@ -32,7 +32,7 @@
 		<li class="editer_categorie">
 			<label for="categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
 			<B_categorie>
-			<select name="categorie" id="categorie" class="formo" > 
+			<select name="categorie" id="categorie" class="formo" >
 			<BOUCLE_categorie(ASSO_CATEGORIES){par libelle}>
 			<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
 			</BOUCLE_categorie>
@@ -52,7 +52,7 @@
 		<!-- impossible de recuperer les valeurs des statuts dans le tableau global association_liste_des_statuts, re-entres a la main, il y apeut-etre moyen de faire mieux -->
 		<li class="editer_statut_interne">
 			<label for="statu_interne"><strong><:asso:adherent_libelle_statut:></strong></label>
-			<select name="statut_interne" id="statut_interne" class="formo" > 
+			<select name="statut_interne" id="statut_interne" class="formo" >
 				<option [(#ENV{statut_interne}|=={sorti}|?{selected="selected"})] value="sorti"><:asso:adherent_entete_statut_sorti:></option>
 				<option [(#ENV{statut_interne}|=={prospect}|?{selected="selected"})]  value="prospect"><:asso:adherent_entete_statut_prospect:></option>
 				<option  [(#ENV{statut_interne}|=={ok}|?{selected="selected"})] value="ok"><:asso:adherent_entete_statut_ok:></option>
@@ -67,6 +67,36 @@
 			<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class='formo'/>
 		</li>
 		]
+
+		<li class="editer_email">
+			<label for="email"><strong><:asso:adherent_libelle_email:></strong></label>
+			<input name="email" id="email"  class='formo' type="text" value="[(#ENV{email})]" />
+		</li>
+
+		<li class="editer_adresse">
+			<label for="adresse"><strong><:asso:adherent_libelle_adresse:></strong></label>
+			<textarea name="adresse" id="adresse"  class='formo' rows="3" cols="80">[(#ENV{adresse})]</textarea>
+		</li>
+
+		<li class="editer_code_postal">
+			<label for="code_postal"><strong><:asso:adherent_libelle_code_postal:></strong></label>
+			<input name="code_postal" id="code_postal"  class='formo' type="text" value="[(#ENV{code_postal})]" />
+		</li>
+
+		<li class="editer_ville">
+			<label for="ville"><strong><:asso:adherent_libelle_ville:></strong></label>
+			<input name="ville" id="ville"  class='formo' type="text" value="[(#ENV{ville})]" />
+		</li>
+
+		<li class="editer_telephone">
+			<label for="telephone"><strong><:asso:adherent_libelle_telephone:></strong></label>
+			<input name="telephone" id="telephone"  class='formo' type="text" value="[(#ENV{telephone})]" />
+		</li>
+
+		<li class="editer_mobile">
+			<label for="mobile"><strong><:asso:adherent_libelle_ville:></strong></label>
+			<input name="mobile" id="mobile"  class='formo' type="text" value="[(#ENV{mobile})]" />
+		</li>
 
 		<li class="editer_commentaire">
 			<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>

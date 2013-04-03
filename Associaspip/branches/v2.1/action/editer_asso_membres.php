@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_asso_membres() {
-		
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
 
@@ -30,17 +30,24 @@ function action_editer_asso_membres() {
 	$id_asso = _request('id_asso');
 
 	$modifs = array("commentaire"=> $commentaire,
-					 "validite"=> $validite,
-					 "categorie"=> $categorie,
-					 "statut_interne"=> $statut_interne,
-					 "nom_famille" => $nom_famille,
-					 "fonction" => $fonction);
+					"validite"=> $validite,
+					"categorie"=> $categorie,
+					"statut_interne"=> $statut_interne,
+					"nom_famille" => $nom_famille,
+					"fonction" => $fonction,
+					'email' => _request('email'),
+					'adresse' => _request('adresse'),
+					'code_postal' => _request('code_postal'),
+					'ville' => _request('ville'),
+					'telephone' => _request('telephone'),
+					'mobile' => _request('mobile'),
+				);
 
 	/* pour ne pas ecraser les champs quand ils sont desactives */
 	if ($GLOBALS['association_metas']['civilite']=="on") $modifs["sexe"] = $sexe;
 	if ($GLOBALS['association_metas']['prenom']=="on") $modifs["prenom"] = $prenom;
 	if ($GLOBALS['association_metas']['id_asso']=="on") $modifs["id_asso"] = $id_asso;
-	
+
 	sql_updateq('spip_asso_membres', $modifs, "id_auteur=$id_auteur");
 
 	return (array($id_auteur,''));
