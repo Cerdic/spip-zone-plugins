@@ -94,7 +94,7 @@ function encodage($source,$options){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
 		$ret['success'] = false;
 		$ret['erreur'] = 'spipmotion_casse';
-		return ;
+		return false;
 	}
 	
 	include_spip('inc/config');
@@ -105,10 +105,17 @@ function encodage($source,$options){
 	$extension_attente = $options['format'];
 
 	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
-	$chemin_ffmpeg = (strlen(lire_config('spipmotion/chemin')) > 0) ? "--p ".lire_config('spipmotion/chemin') : '';
-	if($source['rotation'] == '90'){
+	
+	$ffmpeg2theora = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
+	
+	if(
+		($source['rotation'] == '90')
+		 OR ($encodeur == 'ffmpeg2theora' && !$ffmpeg2theora['version'])){
 		$encodeur = 'ffmpeg';
 	}
+	
+	//$chemin_ffmpeg = (strlen(lire_config('spipmotion/chemin')) > 0) ? "--p ".lire_config('spipmotion/chemin') : '';
+	$chemin_ffmpeg = '';
 	
 	include_spip('inc/documents');
 	$chemin = get_spip_doc($source['fichier']);
@@ -170,13 +177,12 @@ function encodage($source,$options){
 	 */
 	if($source['hasaudio'] == 'oui'){
 		$acodec = lire_config("spipmotion/acodec_$extension_attente") ? "--acodec ".lire_config("spipmotion/acodec_$extension_attente") :'';
-		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis")){
+		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis"))
 			$acodec = '--acodec libvorbis';
-		}
+		
 		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
-			$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
-			$audiobitrate_ffmpeg = "--audioquality $qualite";
+			$audiobitrate_ffmpeg2theora = $audiobitrate_ffmpeg = "--audioquality $qualite";
 		}else{
 			if(intval($source['audiobitrate']) && (intval($source['audiobitrate']) < (lire_config("spipmotion/bitrate_audio_$extension_attente","64")*1000))){
 				$audiobitrates = array('32000','64000','96000','128000','192000','256000');
@@ -185,16 +191,16 @@ function encodage($source,$options){
 					foreach($audiobitrates as $bitrate){
 						if($source['audiobitrate'] >= $bitrate){
 							$bitrate_final = $bitrate;
+							break;
 						}
 					}
 					$abitrate = $bitrate_final;
-				}else{
+				}else
 					$abitrate = $source['audiobitrate'];
-				}
+
 				$abitrate = floor($abitrate/1000);
-			}else{
+			}else
 				$abitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
-			}
 			$texte .= "ab=".$abitrate."000\n";
 			$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate ".$abitrate;
 		}
@@ -236,6 +242,7 @@ function encodage($source,$options){
 				foreach($audiosamplerates as $samplerate){
 					if($source['audiosamplerate'] >= $samplerate){
 						$audiosamplerate_final = $samplerate;
+						break;
 					}
 				}
 				$samplerate = $audiosamplerate_final;
@@ -249,9 +256,8 @@ function encodage($source,$options){
 					$acodec = '--acodec libfaac';
 					$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate 128";
 				}
-			}else{
+			}else
 				$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
-			}
 		}
 		$audiofreq = "--audiofreq ".$samplerate;
 		$texte .= "ar=$samplerate\n";
@@ -261,12 +267,11 @@ function encodage($source,$options){
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
 		 */
 		if(in_array($extension_attente,array('ogg','ogv','oga'))
-				&& ($source['audiochannels'] < 2)
-				&& ($encodeur != 'ffmpeg2theora')){
+			&& ($source['audiochannels'] < 2)
+			&& ($encodeur != 'ffmpeg2theora')){
 			$audiochannels = 2;
-		}else{
+		}else
 			$audiochannels = $source['audiochannels'];
-		}
 
 		if(intval($audiochannels) >= 1){
 			/**
@@ -281,15 +286,14 @@ function encodage($source,$options){
 			}
 		}
 		$ss_audio = '';
-	}else{
+	}else
 		$ss_audio = '-an';
-	}
 
-	if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+
+	if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 		$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
-	}else{
+	else
 		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
-	}
 
 	/**
 	 * Encodage
@@ -320,9 +324,13 @@ function encodage($source,$options){
 	 */
 	if(in_array($source['extension'],lire_config('spipmotion/fichiers_videos_encodage',array()))){
 		$format = lire_config("spipmotion/format_$extension_attente");
-		
-		$width = $source['largeur'];
-		$height = $source['hauteur'];
+		if($source['rotation'] == '90'){
+			$width = $source['hauteur'];
+			$height = $source['largeur'];
+		}else{
+			$width = $source['largeur'];
+			$height = $source['hauteur'];
+		}
 		$width_finale = lire_config("spipmotion/width_$extension_attente",480);
 		
 		/**
@@ -352,12 +360,10 @@ function encodage($source,$options){
 		 * divisibles par 2
 		 * On le fait pour tous les cas pour éviter toute erreur
 		 */
-		if(!is_int($width_finale/2)){
+		if(!is_int($width_finale/2))
 			$width_finale = $width_finale +1;
-		}
-		if(!is_int($height_finale/2)){
+		if(!is_int($height_finale/2))
 			$height_finale = $height_finale +1;
-		}
 
 		$video_size = "--size ".$width_finale."x".$height_finale;
 
@@ -370,11 +376,11 @@ function encodage($source,$options){
 		$vcodec .= lire_config("spipmotion/vcodec_$extension_attente") ? "--vcodec ".lire_config("spipmotion/vcodec_$extension_attente") :'';
 
 		$fps_conf = (intval(lire_config("spipmotion/fps_$extension_attente","30")) > 0) ? lire_config("spipmotion/fps_$extension_attente","30") : ((intval($source['framerate']) > 0) ? intval($source['framerate']) : 24);
-		if(intval($source['framerate']) && (intval($source['framerate']) < $fps_conf)){
+		if(intval($source['framerate']) && (intval($source['framerate']) < $fps_conf))
 			$fps_num = $source['framerate'];
-		}else{
+		else
 			$fps_num = (intval($fps_conf) > 0) ? $fps_conf : $source['framerate'];
-		}
+
 		$fps = "--fps $fps_num";
 
 		/**
@@ -388,11 +394,10 @@ function encodage($source,$options){
 				$vbitrate = $source['videobitrate'];
 			}else{
 				$vbitrate = null;
-				if(version_compare($ffmpeg_version,'1.0.0','<')){
+				if(version_compare($ffmpeg_version,'1.0.0','<'))
 					$infos_sup_normal .= ' -sameq ';
-				}else{
+				else
 					$infos_sup_normal .= ' -q:v 0 ';
-				}
 			}
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
@@ -400,52 +405,48 @@ function encodage($source,$options){
 			$bitrate = "--bitrate $vbitrate";
 		}
 
-		$texte .= intval($vbitrate) ? "vb=".$vbitrate."000\n" : "";
-		$bitrate = intval($vbitrate) ? "--bitrate ".$vbitrate : "";
+		$texte .= intval($vbitrate) ? "vb=".$vbitrate."000\n" : '';
+		$bitrate = intval($vbitrate) ? "--bitrate ".$vbitrate : '';
 		
 		$configuration = array();
-		if(is_array($spipmotion_compiler['configuration'])){
+		if(is_array($spipmotion_compiler['configuration']))
 			$configuration = $spipmotion_compiler['configuration'];
-		}
+		
 		/**
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
-			if(in_array('--enable-pthreads',$configuration)){
+			if(in_array('--enable-pthreads',$configuration))
 				$infos_sup_normal .= " -threads 0 ";
-			}
+			
 			/**
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
 			if($format == 'ipod'){
-				if(version_compare($ffmpeg_version,'0.7.10','<')){
+				if(version_compare($ffmpeg_version,'0.7.10','<'))
 					$infos_sup_normal .= ' -vpre baseline -vpre ipod640';
-				}else{
+				else
 					$infos_sup_normal .= ' -profile baseline -vpre ipod640';	
-				}
 			}
 			/**
 			 * Encodage pour PSP
 			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
 			 */
 			else if($format == 'psp'){
-				$infos_sup_normal .= ' -vpre main';
-				$infos_sup_normal .= ' -level 21';
-				$infos_sup_normal .= ' -refs 2';
+				$infos_sup_normal .= ' -vpre main -level 21 -refs 2';
 			}
-			
-			//if($format)
-			//	$infos_sup_normal .= ' -f '.$format;
 		}
 		if(($vcodec == "--vcodec libtheora") && ($encodeur != 'ffmpeg2theora')){
-			if(in_array('--enable-pthreads',$configuration)){
+			if(in_array('--enable-pthreads',$configuration))
 				$infos_sup_normal .= " -threads 0 ";
-			}
 		}
 		
-		$aspect = $source['aspect_ratio'] ? $source['aspect_ratio']: "$width_finale:$height_finale";
-		$infos_sup_normal .= " -aspect $aspect";
+		
+		if($source['rotation'] != 90){
+			$aspect = $source['aspect_ratio'] ? $source['aspect_ratio']: "$width_finale:$height_finale";
+			$infos_sup_normal .= " -aspect $aspect";
+		}
 			
 		$fichier_texte = "$dossier$query.txt";
 
@@ -459,10 +460,8 @@ function encodage($source,$options){
 		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
 		$pass_log_file = $dossier.$query.'-pass';
 		
-		$ffmpeg2theora = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
 		if(($encodeur == 'ffmpeg2theora') && ($ffmpeg2theora['version'] > 0)){
-			if($passes == 2)
-				$deux_passes = '--two-pass';
+			if($passes == 2) $deux_passes = '--two-pass';
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -471,12 +470,17 @@ function encodage($source,$options){
 				spip_log('Premiere passe','spipmotion');
 				if ($ffmpeg_version < '0.7'){
 					$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
-				}else{
+				}else
 					$preset_1 = $preset_quality ? '-preset '.$preset_quality : '';
-				}
+
 				if($source['rotation'] == '90'){
-					$rotation = "-vf transpose=1";
+					if ($ffmpeg_version < '1.0'){
+						$rotation = "-vf transpose=1";
+					}else{
+						$rotation = "-filter:v transpose=1";
+					}
 				}
+
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal $rotation\"";
 				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
 				spip_log($encodage_1,'spipmotion');
@@ -493,10 +497,7 @@ function encodage($source,$options){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "";
-					//$metadatas = "-map_metadata 0:0";
-					$metadatas_supp = '';
-					$metas_orig = @unserialize($source['metas']);
+					$metadatas = $metadatas_supp = "";
 					
 					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$ss_audio.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
@@ -509,17 +510,22 @@ function encodage($source,$options){
 				}
 			}else{
 				$infos_sup_normal .= " $ss_audio ";
-				if ($ffmpeg_version < '0.7'){
+				if ($ffmpeg_version < '0.7')
 					$infos_sup_normal .= $preset_quality ? " -vpre $preset_quality":'';
-				}else{
+				else
 					$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
-				}
+				
 				if($source['rotation'] == '90'){
-					$rotation = "-vf transpose=1";
+					if ($ffmpeg_version < '1.0'){
+						$rotation = "-vf transpose=1";
+					}else{
+						$rotation = "-filter:v transpose=1";
+					}
+					$infos_sup_normal .= " $rotation";
 				}
-				if($infos_sup_normal){
+						
+				if($infos_sup_normal)
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
-				}
 				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte $chemin_ffmpeg --log $fichier_log";
 				spip_log($encodage,'spipmotion');
 				$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -557,12 +563,11 @@ function encodage($source,$options){
 			$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
 			$x2 = $ajouter_documents('new', $vignette, '', 0, 'vignette');
 			$id_vignette = reset($x2);
-			if (is_numeric($id_vignette)){
+			if (is_numeric($id_vignette))
 			  	$source['id_vignette'] = $id_vignette;
-			}
-		}else{
+		}else
 			$source['id_vignette'] = $id_vignette;
-		}
+		
 		/**
 		 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
 		 */
@@ -622,17 +627,9 @@ function encodage($source,$options){
 		if(file_exists($pass_log_file)){
 		//	supprimer_fichier($pass_log_file);
 		}
-		if(file_exists($pass_log_file.'.mbtree')){
-			supprimer_fichier($pass_log_file.'.mbtree');
-		}
-		if(file_exists(_DIR_RACINE.$query.'.mbtree')){
-			supprimer_fichier(_DIR_RACINE.$query.'.mbtree');
-		}
-		if(file_exists($fichier_temp)){
-			supprimer_fichier($fichier_temp);
-		}
-		if(file_exists(_DIR_RACINE.$query.'-pass')){
-			supprimer_fichier(_DIR_RACINE.$query.'-pass');
+		foreach(array($pass_log_file.'.mbtree',_DIR_RACINE.$query.'.mbtree',$fichier_temp,_DIR_RACINE.$query.'-pass') as $file){
+			if(file_exists($file))
+				supprimer_fichier($file);
 		}
 	}
 	pipeline('post_spipmotion_encodage',
