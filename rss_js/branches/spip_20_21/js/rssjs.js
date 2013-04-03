@@ -1,4 +1,6 @@
 function initialize_rssjs(flux, entrees, recept, mode) {
+	/* spip remplace & par &amp; et google feed api n'aime pas */
+	var flux = flux.replace(/&amp;/g, '&');
 	var feed = new google.feeds.Feed(flux);
 	feed.setNumEntries(entrees);
 	feed.load(function(result) {
