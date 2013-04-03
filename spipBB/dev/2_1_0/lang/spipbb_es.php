@@ -129,7 +129,7 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	// B
 	'bouton_select_all' => 'Seleccionar todo',
 	'bouton_speciaux_sur_skels' => 'Configurar los botones específicos de los esqueletos públicos',
-	'bouton_unselect_all' => 'Deseleccionar todo',
+	'bouton_unselect_all' => 'Desmarcar todo',
 
 	// C
 	'champs_obligatoires' => 'Los campos marcados con un * son obligatorios.',
