@@ -24,6 +24,11 @@
 <INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
 </div>
 
+
+[(#REM) Affiche les projets enfants ]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,projet,id_projet,#ID_PROJET,objet,projet,id_objet,#ID_PROJET},data,#INCLURE{fond=prive/objets/contenu/projet-enfants,id_projet,env}})]})]
+
+
 <div class="nettoyeur"></div>
 
 [(#AUTORISER{modifier,projet,#ID_PROJET})

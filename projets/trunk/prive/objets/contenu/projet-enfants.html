@@ -1,0 +1,10 @@
+	[(#INCLURE{fond=prive/objets/liste/projets,titre=<:projet:info_tous_les_sous_projets:>,id_parent=#ID_PROJET,par=id_projet,ajax,env})]
+
+	[(#AUTORISER{creerprojetdans,projet,#ID_PROJET}|oui)
+	[(#ID_PROJET|?{
+	[(#URL_ECRIRE{projet_edit,new=oui&id_parent=#ID_PROJET}|icone_verticale{<:projet:icone_creer_sous_projet:>,projet,new,right clearright})]
+	,
+	[(#URL_ECRIRE{projet_edit,new=oui}|icone_verticale{<:projet:icone_creer_projet:>,secteur,new,right clearright})]
+		})]
+]
+<div class="nettoyeur"></div>
