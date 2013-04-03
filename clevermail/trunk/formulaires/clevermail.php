@@ -5,7 +5,7 @@ function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force 
 	if ($cbox == 'box') {
 	  $default['cbox'] = $cbox;
 	}
-	if ($GLOBALS['visiteur_session']['email']) {
+	if (isset($GLOBALS['visiteur_session']['email']) AND $GLOBALS['visiteur_session']['email']) {
 		$default['sub_email'] = $GLOBALS['visiteur_session']['email'];
 	}
 	if ($lsr_mode_force) {
