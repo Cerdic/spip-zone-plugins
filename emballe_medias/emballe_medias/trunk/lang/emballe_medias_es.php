@@ -49,10 +49,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'em_next' => 'Documento siguiente',
 	'em_prev' => 'Documento anterior',
-	'emballe_medias' => 'Emballe médias', # NEW
-	'emballe_medias_fichiers' => 'Emballe médias (Fichiers)', # NEW
-	'emballe_medias_styles' => 'Emballe médias (Styles)', # NEW
-	'emballe_medias_types' => 'Emballe médias (Types)', # NEW
+	'emballe_medias' => 'Envuelve medias',
+	'emballe_medias_fichiers' => 'Envuelve medias (Archivos)',
+	'emballe_medias_styles' => 'Envuelve medias (Estilos)',
+	'emballe_medias_types' => 'Envuelve medias (Tipos)',
 	'erreur_article_inexistant' => 'El media que desea modificar no existe.',
 	'erreur_aucun_fichier' => 'Elija por favor un archivo',
 	'erreur_aucun_media_correspondant' => 'Ningún media corresponde a los criterios',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_beforeunload' => 'Está publicando en red un documento',
 	'erreur_conflit_secteur' => 'No puede crear una plantilla para los artículos y para los media dentro de la misma sección',
 	'erreur_demander_validation_titre' => 'Ha solicitado modificar el título o algunos medias tienen ya un título personalizado. Marque por favor la siguiente casilla para imponer la modificación de los títulos.',
-	'erreur_diogene_multiple' => 'Vous ne pouvez avoir qu\'un seul template "emballe média" sur ce site', # NEW
+	'erreur_diogene_multiple' => 'No puede tener más que una sola plantilla "envuelve média" en este sitio',
 	'erreur_document_disparu' => 'El documento original ya no está disponible. Puede volver a publicarlo a continuación, el archivo original era: @fichier@',
 	'erreur_document_existant' => 'Un documento similiar ya existe: @nom@',
 	'erreur_document_insere' => 'Este documento está insertado en el contenido del artículo, por lo que no puede eliminarse. ',
@@ -75,16 +75,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_upload_fournir_objet' => 'Debe proporcionar un tipo de objeto.',
 	'erreur_upload_session' => 'Ninguna sesión visitante.',
 	'erreur_zero_byte_files' => 'Es imposible publicar en red archivos de 0 byte.',
-	'explication_chercher_article' => 'Lors de la soumission d\'un nouveau article, si l\'id_article n\'est pas renseigné en tant que paramètre du formulaire, chercher l\'existence d\'un article en cours de rédaction du même auteur et insérer l\'article dedans (sinon on crée systématiquement un nouvel article)', # NEW
+	'explication_chercher_article' => 'Al presentar un nuevo artículo, si el id_article no se indica como parámetro del formulario, buscar la existencia de un artículo en curso de redacción del mismo autor e insertar dentro el artículo (si no se crea sistemáticamente un nuevo artículo)',
 	'explication_config_readonly' => 'Esta opción está desactivada. Debe ser impuesta por el tema que utiliza.',
 	'explication_file_size_limit' => 'Límite de tamaño para un archivo (MB). @taille_max@ es el máximo aceptado por su configuración PHP.',
 	'explication_gerer_modifs_types' => 'Muestra un formulario en la columna izquierda de la página de modificación del artículo, permitiendo a los autores elegir ellos mismos el tipo de artículo. ',
-	'explication_gerer_types' => 'Typer les articles (remplir le champs "em_type" de la table article) en fonction du type de document mis en ligne. Si cette option est activée, il sera possible de définir plusieurs formulaire différents en fonction du type de fichier à mettre en ligne.', # NEW
+	'explication_gerer_types' => 'Tipificar los artículos (rellenar los campos "em_type" de la tabla article) en función del tipo de documento publicado. Si esta opción está activada, será posible definir varios formularios diferentes en función del tipo de archivo a publicar.',
 	'explication_infos_documents' => 'Esta información es extraída directamente de metadatos de la imagen.',
 	'explication_medias_prepas' => 'Los medias listados a continuación están en curso de preparación, debe cambiar su estatus a "propuesto para publicación" para que un administrador los publique definitivamente. ',
 	'explication_medias_prepas_auth_publier' => 'Los medias listados a continuación están en curso de preparación, debe cambiar su estatus para que sean publicados. ',
-	'explication_medias_props' => 'Les médias listés ci dessous sont proposés à la publication, vous devez attendre qu\'un administrateur change leur statut pour qu\'ils soient visibles sur le site.', # NEW
-	'explication_medias_props_auth_publier' => 'Les médias listés ci dessous sont proposés à la publication, vous devez changer leur statut pour qu\'ils soient publiés en ligne ou attendre qu\'un administrateur ne le fasse.', # NEW
+	'explication_medias_props' => 'Los medias listados a continuación han sido propuestos para publicación, ha de esperar que un administrador cambie su estatus para que sean visibles en el sitio. ',
+	'explication_medias_props_auth_publier' => 'Los medias listados a continuación han sido propuestos para publicación, ha de cambiar su estatus para que sean publicados o esperar a que un administrador lo haga. ',
 	'explication_traitement_lot_intro' => 'Para procesar sus medias por lote, seleccione previamente los medias a modificar, después complete los campos del formulario que serán aplicados.',
 	'extensions_audio' => 'Extensiones Audio:',
 	'extensions_autorisees' => 'Extensiones de archivos autorizados',
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_case_gerer_modifs_types' => 'Mostrar el formulario de cambio de tipo',
 	'label_case_gerer_types' => 'Activar la gestión de los tipos',
 	'label_case_publier_dans_secteur' => 'Permitir publicar artículos sin categoría (en la raíz del sector medias).',
-	'label_case_types_autoriser_normal' => 'Dans le cas où aucun type n\'est sélectionné, on autorise la publication de type "normal"', # NEW
+	'label_case_types_autoriser_normal' => 'En el caso en que ningún tipo sea seleccionado, se autoriza la publicación de tipo "normal"',
 	'label_cfg_file_size_limit' => 'Límite del tamaño de los archivos en MB',
 	'label_change_statut_em_normal' => 'Modificar el estatus de su media',
 	'label_changer_type' => 'Modificar el tipo de documento(s) a publicar: ',
@@ -126,12 +126,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_forcer_validation_titre' => 'Forzar la inclusión del título',
 	'label_gerer_modifs_types' => 'Permitir modificar el tipo a posteriori',
 	'label_gerer_types' => 'Administrar los tipos de artículos',
-	'label_publier_dans_secteur' => 'Publication hors catégorie', # NEW
-	'label_selectionnez_types_medias' => 'Choisissez le statut des médias à sélectionner :', # NEW
+	'label_publier_dans_secteur' => 'Publicación fuera de categoría',
+	'label_selectionnez_types_medias' => 'Elija el estatus de los medias a seleccionar:',
 	'label_texte_upload' => 'Explicaciones para la subida en línea',
 	'label_types_autoriser_normal' => 'Autorizar publicación sin tipo definido',
 	'label_types_disponibles' => 'Tipos disponibles',
-	'label_upload_debug' => 'Afficher le debug du formulaire d\'upload des documents', # NEW
+	'label_upload_debug' => 'Mostrar la depuración (debug) del formulario de publicación (upload) de los documentos',
 	'largeur_img_previsu' => 'Anchura máxima (en px) de la previsualización de imágenes',
 	'legend_gerer_styles' => 'Gestión de estilos',
 	'legend_gerer_types' => 'Gestión de tipos de artículos',
@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_zoom_image' => 'Zoom',
 
 	// M
-	'maj_plugin' => 'Mise à jour du plugin "Emballe Médias" à la version @version@.', # NEW
+	'maj_plugin' => 'Actualización del plugin "Envuelve medias" en la versión @version@.',
 	'max_file_size' => 'El tamaño máximo del archivo es: ',
 	'media_propose_detail' => 'El media "@titre@" está propuesto para publicación
 	desde',
@@ -166,24 +166,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	--------------',
 	'media_valide_url' => 'A la espera, está visible desde esta dirección temporal:',
 	'message_aucun_media_attente' => 'No tiene ningún media a la espera de publicación.',
-	'message_delier_document' => 'Ce document est déjà lié à un autre objet. Vous ne pouvez le supprimer. Vous pouver seulement le délier de l\'objet en cours.', # NEW
+	'message_delier_document' => 'Este documento ya está vinculado a otro objeto. No puede eliminarlo. Solamente puede desvincularlo del objeto en curso. ',
 	'message_doc_trad_indisponible' => 'Ningún documento está disponible en el artículo de origen.',
 	'message_document_original' => 'Este artículo es la versión original de:',
-	'message_drag_file' => 'Déposez le fichier ici.', # NEW
-	'message_drag_files' => 'Déposez les fichiers ici.', # NEW
+	'message_drag_file' => 'Deposite el archivo aquí',
+	'message_drag_files' => 'Deposite los archivos aquí.',
 	'message_info_media_proposer' => 'Cambie su estatus a "@statut@" para que los administradores puedan validarlo.',
 	'message_info_media_publier' => 'Cambie su estatus a "@statut@" para que sea visible en el sitio. ',
 	'message_info_media_statut' => 'Este media está actualmente "@statut@".',
-	'message_medias_maj_nb' => '@nb@ médias ont été mis à jour.', # NEW
-	'message_medias_maj_statut_nb' => 'Le statut des médias sélectionnés a été mis à jour en "@statut@"', # NEW
-	'message_medias_maj_statut_un' => 'Son statut a été mis à jour en "@statut@"', # NEW
+	'message_medias_maj_nb' => '@nb@ medias han sido actualizados.',
+	'message_medias_maj_statut_nb' => 'El estatus de los medias seleccionados ha sido actualizado como "@statut@"',
+	'message_medias_maj_statut_un' => 'Su estatus se ha actualizado como "@statut@"',
 	'message_medias_maj_un' => '@nb@ ha sido actualizado. ',
-	'message_navigateur_redirection' => 'Votre navigateur va être redirigé.', # NEW
-	'message_notice_articles_prepa_nb' => 'Vous avez @nb@ médias en préparation.', # NEW
-	'message_notice_articles_prepa_un' => 'Vous avez un média en préparation.', # NEW
-	'message_notice_nb_articles_prepa_autres' => 'Vous avez @nb@ autres médias en préparation.', # NEW
-	'message_notice_voir_articles_prepa' => 'Voir <a href="@url@" class="@class_lien@">ces médias</a>.', # NEW
-	'message_selectionner_media_editer' => 'Sélectionnez un média dans la liste afin de l\'éditer.', # NEW
+	'message_navigateur_redirection' => 'Su navegador va a ser redirigido. ',
+	'message_notice_articles_prepa_nb' => 'Tiene @nb@ medias en curso.',
+	'message_notice_articles_prepa_un' => 'Tiene un media en curso.',
+	'message_notice_nb_articles_prepa_autres' => 'Tiene @nb@ otros medias en curso.',
+	'message_notice_voir_articles_prepa' => 'Ver <a href="@url@" class="@class_lien@">estos medias</a>.',
+	'message_selectionner_media_editer' => 'Seleccione un media de la lista para editarlo.',
 	'message_type_mis_a_jour' => 'El tipo de artículo ha sido actualizado',
 	'message_type_pas_mis_a_jour' => 'El tipo de artículo no ha sido modificado. ',
 
@@ -198,8 +198,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_limit_exceeded' => 'Ha intentado adjuntar demasiados archivos.',
-	'queue_limit_max' => 'La limite maximale du nombre de fichier dans la file d\'attente est', # NEW
-	'queue_limit_reached' => 'Vous avez atteint la limite.', # NEW
+	'queue_limit_max' => 'El límite máximo del número de archivos en la lista de espera es',
+	'queue_limit_reached' => 'Ha llegado al límite.',
 	'queue_limit_un' => 'No puede seleccionar más que un solo archivo',
 
 	// S
@@ -211,8 +211,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'swfupload_alternative_js' => 'Debe activar el javascript para publicar un documento',
 
 	// T
-	'temps_passe' => 'passé', # NEW
-	'temps_restant' => 'restant', # NEW
+	'temps_passe' => 'pasado',
+	'temps_restant' => 'restante',
 	'titre_lien_publier' => 'Publicar',
 	'titre_medias_preparation' => 'Sus medias en preparación',
 	'titre_modification_media' => 'Modificación del media: @titre@',
@@ -224,26 +224,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_aucun' => 'Ningún tipo específico',
 	'type_audio' => 'Audio',
 	'type_image' => 'Imagen',
-	'type_invalide' => 'Le type de document choisi est invalide, modifiez votre choix.', # NEW
+	'type_invalide' => 'El tipo de documento elegido no es válido, modifique su elección.',
 	'type_media' => 'Tipo de media: ',
 	'type_normal' => 'Ningún tipo específico',
-	'type_obligatoire' => 'La configuration du site vous oblige à choisir un type pour ce document. Sélectionnez celui désiré dans la liste ci-dessous.', # NEW
-	'type_texte' => 'Texte', # NEW
-	'type_video' => 'Video', # NEW
-	'types_fichiers_autorises' => 'L\'ensemble des extensions de fichier autorisées sont : @types@', # NEW
+	'type_obligatoire' => 'La configuración del sitio le obliga a elegir un tipo de documento. Seleccione el que desee en la siguiente lista. ',
+	'type_texte' => 'Texto',
+	'type_video' => 'Vídeo',
+	'types_fichiers_autorises' => 'El conjunto de las extensiones de archivo autorizadas son: @types@',
 
 	// U
-	'unhandled_error' => 'Erreur inconnue', # NEW
-	'unselect_all' => 'Tout déselectionner', # NEW
-	'upload_error' => 'Erreur de mise en ligne :', # NEW
-	'upload_failed' => 'La mise en ligne a échoué.', # NEW
-	'upload_fichiers' => 'Mise en ligne des fichiers', # NEW
-	'upload_limit_exceeded' => 'Upload limit exceeded.', # NEW
-	'uploading' => 'Mise en ligne...', # NEW
+	'unhandled_error' => 'Error desconocido',
+	'unselect_all' => 'Desmarcar todo',
+	'upload_error' => 'Error de publicación',
+	'upload_failed' => 'La publicación ha fallado. ',
+	'upload_fichiers' => 'Publicación de los archivos',
+	'upload_limit_exceeded' => 'Límite de publicación en ered excedido',
+	'uploading' => 'Publicado',
 
 	// V
-	'verification_fichier' => 'Vérification du fichier...', # NEW
-	'verifier_formulaire' => 'Il y a des erreurs.<br />Vérifiez le contenu du formulaire.' # NEW
+	'verification_fichier' => 'Verificación del archivo...',
+	'verifier_formulaire' => 'Hay errores.<br />Verifique el contenido del formulario.'
 );
 
 ?>

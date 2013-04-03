@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation_article' => 'You don\'t have the necessary rights to edit this article.',
 	'erreur_beforeunload' => 'You are uploading a document',
 	'erreur_conflit_secteur' => 'You can\'t create a template for the articles and the medias for the same main section',
-	'erreur_demander_validation_titre' => 'Vous avez demandé à modifier le titre or certains des médias ont déjà un titre personnalisé. Veuillez cocher la case ci dessous pour forcer la modification des titres.', # NEW
+	'erreur_demander_validation_titre' => 'You asked to change the title but some of the media have a custom title. Please check the box below to force the change of titles.',
 	'erreur_diogene_multiple' => 'You can only have on template "wrap media" on this website',
 	'erreur_document_disparu' => 'The original document is no longer available. Below you can bring it back online, the original file was: @fichier@',
 	'erreur_document_existant' => 'A similar document is already present: @nom@.',
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_config_readonly' => 'This option is disabled. It must be overridden by the theme you are using.',
 	'explication_file_size_limit' => 'Limite de taille pour un fichier (MB). @taille_max@ est le maximum accepté par votre configuration PHP.',
 	'explication_gerer_modifs_types' => 'Displays a form in the left column of the edit page of the articles, allowing authors to choose their own type.',
-	'explication_gerer_types' => 'Give a type to the articles (fill in the field "em_type" in the article database table) depending on the type of document available online. If this option is enabled, it will be possible to define several different forms depending on the type of files to upload.',
+	'explication_gerer_types' => 'Give a type to the articles (fill in the field "em_type" in the article table) depending on the type of document uploaded. If this option is enabled, it will be possible to define several different forms depending on the type of files to upload.',
 	'explication_infos_documents' => 'These informations are directly extracted from the image metadatas.',
 	'explication_medias_prepas' => 'Media listed below are being prepared, you must change their status to "proposed for publication" for an administrator publishes them permanently.',
 	'explication_medias_prepas_auth_publier' => 'Media listed below are being prepared, you must change their status for them to be published online.',
@@ -149,23 +149,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_plugin' => 'Update of the "Wrap Medias" plugins at the version @version@.',
 	'max_file_size' => 'The maximal file size is: ',
-	'media_propose_detail' => 'Le média "@titre@" est proposé à la publication
-	depuis', # NEW
-	'media_propose_sujet' => '[@nom_site_spip@] Propose : @titre@', # NEW
+	'media_propose_detail' => 'The media "@titre@" is proposed to publication since',
+	'media_propose_sujet' => '[@nom_site_spip@] Proposed : @titre@',
 	'media_propose_titre' => 'Proposed Media
 ---------------',
-	'media_propose_url' => 'Vous êtes invité à venir le consulter. Il est disponible à l\'adresse :', # NEW
-	'media_publie_detail' => 'Le média "@titre@" vient d\'être publié par @connect_nom@.', # NEW
+	'media_propose_url' => 'You are invited to consult it. It\'s available at:',
+	'media_publie_detail' => 'The media "@titre@" has been published by @connect_nom@.',
 	'media_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
-	'media_publie_titre' => 'Média publié
-	--------------', # NEW
+	'media_publie_titre' => 'Media published
+	--------------',
 	'media_valide_date' => 'Sous réserve de changement, ce média sera publié', # NEW
-	'media_valide_detail' => 'Le média "@titre@" a été validé par @connect_nom@.', # NEW
-	'media_valide_sujet' => '[@nom_site_spip@] VALIDÉ : @titre@', # NEW
-	'media_valide_titre' => 'Média validé
-	--------------', # NEW
-	'media_valide_url' => 'En attendant, il est visible à cette adresse temporaire :', # NEW
-	'message_aucun_media_attente' => 'Vous n\'avez aucun média en attente de publication.', # NEW
+	'media_valide_detail' => 'The media "@titre@" has been validated by @connect_nom@.',
+	'media_valide_sujet' => '[@nom_site_spip@] VALIDATED : @titre@',
+	'media_valide_titre' => 'Média validated
+	--------------',
+	'media_valide_url' => 'In the meantime, it is visible at this temporary address:',
+	'message_aucun_media_attente' => 'You have no media pending publication.',
 	'message_delier_document' => 'This document is allready linked to an other object. So you can\'t delete it definitively. You only can unlink it from the current article.',
 	'message_doc_trad_indisponible' => 'No document is available in the original article.',
 	'message_document_original' => 'This article is the original version of:',
@@ -189,7 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_doc_uploaded' => '@nb@ documents uploaded',
-	'no_credits_crayons' => 'No specified credits', # MODIF
+	'no_credits_crayons' => 'No specified credit',
 
 	// P
 	'pending' => 'Pending...',
@@ -198,9 +197,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_limit_exceeded' => 'You have attempted to queue too many files',
-	'queue_limit_max' => 'The max number of files is',
+	'queue_limit_max' => 'The max number of files in the queue is',
 	'queue_limit_reached' => 'You have reached the upload limit.',
-	'queue_limit_un' => 'You may select only one file.', # MODIF
+	'queue_limit_un' => 'You may only select one file.',
 
 	// S
 	'security_error' => 'Security Error',
