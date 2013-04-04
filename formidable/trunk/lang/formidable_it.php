@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
 	'aucun_traitement' => 'Aucun traitement', # NEW
+    'analyse_exporter' => 'Esporta l\'analisi',
 
 	// B
 	'bouton_formulaires' => 'Moduli',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
+    'champ' => 'Campo',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -106,6 +108,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Vedi la risposta',
 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
+
+    // S
+    'sans_reponses' => 'Senza risposta',
 
 	// T
 	'titre_cadre_raccourcis' => 'Raccourcis', # NEW

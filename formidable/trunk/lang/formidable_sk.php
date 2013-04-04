@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'Na tento formulár odpovedal jeden človek.',
 	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.',
 	'aucun_traitement' => 'Žiadne spracovanie',
+    'analyse_exporter' => 'Exportovať analýzu',
 
 	// B
 	'bouton_formulaires' => 'Formuláre',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
+    'champ' => 'Pol\'a',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
@@ -106,6 +108,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_nb' => '@nb@ odpovedí',
 	'reponses_voir_detail' => 'Zobraziť odpoveď',
 	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
+
+    // S
+    'sans_reponses' => 'Neriešiteľný',
 
 	// T
 	'titre_cadre_raccourcis' => 'Skratky',

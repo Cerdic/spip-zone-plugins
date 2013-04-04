@@ -94,15 +94,26 @@ function formidable_generer_nom_cookie($id_formulaire){
  * Vérifie si le visiteur a déjà répondu à un formulaire
  *
  * @param int $id_formulaire L'identifiant du formulaire
- * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
+ * @param string $options : options du formulaire definies dans l'espace prive
  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
  */
-function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie'){
+function formidable_verifier_reponse_formulaire($id_formulaire, $options){
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
 
+	$anonymiser = isset($options['anonymiser']) ? $options['anonymiser'] : false;
+	$anonymiser_variable = isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : '';
+
+	// traitement de l'anonymisation
+	if ($anonymiser != false) {
+	    // mod de l'id_auteur
+	    $variables_anonymisation =
+	            $GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
+	    $id = eval("return $variables_anonymisation;");
+	    $id_auteur = formidable_scramble($id);
+	}
 	// ni cookie ni id, on ne peut rien faire
 	if (!$cookie and !$id_auteur) {
 		return false;
@@ -111,17 +122,17 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
 	// priorite sur le cookie
 	if ($choix_identification == 'cookie' or !$choix_identification) {
 		if ($cookie)
-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
 		else
-			$where = 'id_auteur='.intval($id_auteur);
+			$where = 'id_auteur='.$id_auteur;
 	}
 	
 	// sinon sur l'id_auteur
 	else {
 		if ($id_auteur)
-			$where = 'id_auteur='.intval($id_auteur);		
+			$where = 'id_auteur='.$id_auteur;
 		else
-			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+			$where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
 	}
 	
 	$reponses = sql_allfetsel(
@@ -149,7 +160,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
  * @return string Retour le HTML des vues
  */
-function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0){
+function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0, $format_brut=false) {
 	// Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
 	if (!is_array($saisie) or (isset($saisie['saisies']) and $saisie['saisies']))
 		return '';
@@ -177,10 +188,104 @@ function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0
 	}
 	
 	// On génère la saisie
-	return recuperer_fond(
-		'saisies-analyses/_base',
-		$contexte
-	);
+    if ($format_brut) {
+        return analyser_saisie($contexte);
+    } else {
+        return recuperer_fond(
+            'saisies-analyses/_base',
+            $contexte
+        );
+    }
+}
+
+/*
+ * Renvoie une ligne de réponse sous la forme d'un tableau
+ *
+ * @param array $saisie Un tableau décrivant une saisie
+ * @return array Tableau contenant une ligne
+ */
+function analyser_saisie($saisie) {
+    if (!isset($saisie['type_saisie']) or $saisie['type_saisie'] == '')
+        return '';
+
+    $ligne = array();
+
+    switch($saisie['type_saisie']) {
+        case 'selecteur_rubrique' :
+        case 'selecteur_rubrique_article' :
+        case 'selecteur_article' :
+            $ligne['plein'] = count(array_filter($saisie['valeurs']));
+            $ligne['vide'] = count(array_diff_key($saisie['valeurs']
+                , array_filter($saisie['valeurs'])));
+        break;
+        case 'radio' :
+        case 'selection' :
+        case 'selection_multiple' :
+        case 'checkbox' :
+            $stats = array();
+            foreach($saisie['valeurs'] as $valeur) {
+                if (is_array($valeur)) {
+                    foreach($valeur as $choix) {
+                        if (isset($stats["choix-$choix"]))
+                            $stats["choix-$choix"]++;
+                        else $stats["choix-$choix"] = 1;
+                    }
+                } else {
+                    if (isset($stats["choix-$valeur"]))
+                            $stats["choix-$valeur"]++;
+                        else $stats["choix-$valeur"] = 1;
+                }
+            }
+            $datas = is_string($saisie['datas'])
+                ? saisies_chaine2tableau($saisie['datas'])
+                : $saisie['datas'];
+            foreach($datas as $key => $val) {
+                $nb = (isset($stats["choix-$key"]))
+                    ? $stats["choix-$key"]
+                    : 0;
+                $ligne[$val] = $nb;
+            }
+        break;
+        case 'destinataires' :
+            $stats = array();
+            foreach($saisie['valeurs'] as $valeur) {
+                foreach($valeur as $choix) {
+                    if (isset($stats["choix-$choix"]))
+                        $stats["choix-$choix"]++;
+                    else $stats["choix-$choix"] = 1;
+                }
+            }
+            foreach($stats as $key => $val) {
+                $key = str_replace('choix-', '', $key);
+                if ($key == '') $key = '<valeur vide>';
+                $auteur = sql_getfetsel('nom','spip_auteurs',"id_auteur=$key");
+                $ligne[$auteur] = $val;
+            }
+        break;
+    }
+
+    $vide = 0;
+    foreach($saisie['valeurs'] as $valeur) {
+        if ($valeur == '') $vide++;
+        switch($saisie['type_saisie']) {
+            case 'case' :
+            case 'oui_non' :
+                if(isset($ligne['oui']) == false) $ligne['oui'] = 0;
+                if(isset($ligne['non']) == false) $ligne['non'] = 0;
+                if ($valeur) $ligne['oui']++; else $ligne['non']++;
+            break;
+            case 'input' :
+            case 'hidden' :
+            case 'explication' :
+            break;
+        }
+    }
+    $ligne['sans_reponse'] = $vide;
+    $ligne['header'] = $saisie['label'] != ''
+        ? $saisie['label']
+        : $saisie['type_saisie'];
+
+    return $ligne;
 }
 
 
@@ -221,6 +326,52 @@ function titre_nb_reponses($nb) {
 	if (!$nb) return _T('formidable:reponse_aucune');
 	if ($nb == 1) return _T('formidable:reponse_une');
 	return _T('formidable:reponses_nb', array('nb' => $nb));
+}
+
+/**
+ * Transforme le hash MD5 en une valeur numérique unique
+ *
+ * trouvé ici : http://stackoverflow.com/questions/1422725/represent-md5-hash-as-an-integer
+ * @param string $hex_str La valeur alphanumérique à transformer
+ * @return string Valeur numérique
+*/
+function md5_hex_to_dec($hex_str) {
+	$arr = str_split($hex_str, 4);
+	foreach ($arr as $grp) {
+	    $dec[] = str_pad(hexdec($grp), 5, '0', STR_PAD_LEFT);
+	}
+
+	/* on s'assure que $result ne commence pas par un zero */
+	$result = implode('', $dec);
+	for ($cpt = 0 ; $cpt < strlen($result) ; $cpt++) {
+	    if ($result[$cpt] != '0') break;
+	}
+	$result = substr($result, $cpt);
+	return $result;
+}
+
+/**
+ * Transforme un login en une valeur numérique de 19 caractères
+ *
+ * NOTE: il devient impossible de retrouver la valeur d'origine car le HASH
+ * est coupé à 19cars et est donc incomplet. L'unicité n'est pas garantie mais
+ * les chances pour que deux logins tombent sur le même HASH sont de 1 sur
+ * 10 milliards de milliards
+ * A la fin, on recherche et supprime les éventuels zéros de début
+ * @param string $login Login à transformer
+ * @param string $passwd Chaîne 'secrète' ajoutée au login et id_formulaire pour éviter
+ *  les recoupements d'identité entre plusieurs formulaires
+ * @return string Un nombre de 19 chiffres
+*/
+function formidable_scramble($login, $passwd = '') {
+	$id_form = (isset($flux['args']['id_form']) ? $flux['args']['id_form'] : '');
+	if ($passwd == '')
+	    $passwd = $GLOBALS['formulaires']['passwd']['interne'];
+	$login_md5 = md5("$login$passwd$id_form");
+	$login_num = md5_hex_to_dec($login_md5);
+	$login_num = substr($login_num, 0, 19);
+
+	return $login_num;
 }
 
 ?>

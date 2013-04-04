@@ -27,6 +27,24 @@ options:
         id_auteur: '<:formidable:identification_par_id_auteur:>'
       defaut: 'cookie'
   -
+    saisie: 'oui_non'
+    options:
+      nom: 'anonymiser'
+      label: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_anonymiser_explication:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      option_intro: '<:formidable:traiter_enregistrement_option_choix_select_label:>'
+      nom: 'anonymiser_variable'
+      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
+      datas:
+        remote_user: "Variable serveur : REMOTE_USER"
+        php_auth_user: "Variable serveur : PHP_AUTH_USER"
+      defaut: ''
+  -
     saisie: 'radio'
     options:
       nom: 'moderation'

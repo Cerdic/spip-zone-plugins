@@ -28,8 +28,10 @@ function formidable_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
-	else return false;
+    if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and
+        (!$qui['restreint']) or $GLOBALS['formulaires']['autoriser_admin_restreint'])
+            return true;
+    else return false;
 }
 
 /**
@@ -93,7 +95,7 @@ function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt){
 			else{
 				include_spip('inc/formidable');
 				// Si la personne n'a jamais répondu, c'est bon
-				if (!formidable_verifier_reponse_formulaire($id, $options['identification']))
+				if (!formidable_verifier_reponse_formulaire($id))
 					return true;
 				else
 					return false;

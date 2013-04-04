@@ -2,6 +2,11 @@
 	[(#REM) Afficher du HTML si prévu par un plugin ou pour les stats ]
 	[(#ENV**{_remplacer_formulaire})]
 </BOUCLE_remplacer_le_formulaire>
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#ENV{id}}>
+	[(#SET{enregistrement,[(#TRAITEMENTS**|unserialize|table_valeur{'enregistrement'})]})]
+	[(#SET{anonymiser,[(#GET{enregistrement}|table_valeur{'anonymiser'})]})]
+	[(#GET{anonymiser}|=={on}|oui)<h3><:formidable:formulaire_anonyme_explication:>]</h3>
+</BOUCLE_formulaire>
 <div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]

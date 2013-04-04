@@ -16,6 +16,15 @@ function traiter_enregistrement_dist($args, $retours){
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 	
+	// traitement de l'anonymisation
+	if ($options['anonymiser'] == 'on') {
+		// mod de l'id_auteur
+		$variables_anonymisation =
+			$GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
+		$id = eval("return $variables_anonymisation;");
+		$id_auteur = formidable_scramble($id);
+	}
+
 	// On cherche le cookie et sinon on le crée
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
 	if (isset($_COOKIE[$nom_cookie]))
