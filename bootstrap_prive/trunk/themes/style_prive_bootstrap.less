@@ -1,12 +1,16 @@
-@import "css/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "css/tables.less";
+@import "bootstrap2spip/css/variables.less"; // Modify this for custom colors, font-sizes, etc
 @import "css/sprites.less";
+@import "bootstrap2spip/css/forms.less";
+@import "bootstrap2spip/css/box.less";
 @greenFlashy : #C5E41C;
+@import "bootstrap2spip/css/tables.less";
 
-table.liste {
-  .table;
-  .table-striped;
-}
+
+  table.liste {
+    .table;
+    .table-striped;
+  }
+
 .nav, #navigation {
   li, li.item {
     a {
@@ -223,6 +227,46 @@ a.plus_info {
     }
   }
 }
+.formulaire_spip {
+  .choix {
+    label {
+      .checkbox;
+      .checkbox.inline;
+      margin-left: -10px;
+    }
+  }
+  .boutons {
+    padding: 10px;
+    margin: 0;
+  }
+}
+.instituer_objet {
+  .formulaire_spip {
+    .boutons {
+     margin-top: 0;
+     margin-bottom: 0;
+     padding: 0;
+    }
+  }
+}
+
+.box.info {
+  padding: 0;
+  margin: 2em 0;
+  text-shadow: none;
+  border: none;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+  background-color: @formActionsBackground;
+  border-color: transparent;
+  color: @black;
+  
+  .inner {
+    border: none;
+  }
+}
+
 .none,.js .none-js,.no-js .none-nojs{display:none}
 .hidden,.js .hidden-js,.no-js .hidden-nojs{visibility:hidden}
 .invisible,.over,.js .over-js,.no-js .over-nojs{position:absolute;left:-3000em;height:1%}
@@ -243,3 +287,4 @@ a.plus_info {
 #copyright {
   text-align: right;
 }
+
