@@ -1,0 +1,1 @@
+- Corriger le soucis de .pagination ul > li > a qui a un padding rsiduel qui n'a pas lieu d'tre ici.
