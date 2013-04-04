@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :',
 
 	// L
-	'label_creer_htaccess' => 'Accès aux document joints par leur URL',
+	'label_creer_htaccess' => 'Accès aux documents joints par leur URL',
 	'label_creer_htaccess_non' => 'autoriser la lecture',
 	'label_creer_htaccess_oui' => 'interdire la lecture',
 
