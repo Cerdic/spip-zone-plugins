@@ -168,7 +168,9 @@ function SpipEditor2CKEditor(editor_id){
 				.attr('src','[(#CHEMIN{images/ckeditor_spip.png}|url_absolue)]') ;
 		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
 		this.setReadOnly(false);
-		this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
+		this.on('dataReady', function(e){ 
+			this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
+		});
 		$(editor_id).parents().find('input[class=submit]') // fix: a priori ceci n'est nécessaire que pour les forums, mais il semble que cela fonctionne aussi pour les autres formulaires
 			.attr('onclick', 'javacript:CKEditor2SpipEditor(\''+editor_id+'\');') ;
 	},EdConfig);
@@ -312,6 +314,7 @@ function fullInitCKEDITOR(editor_ids){
 			stack[editor_id].ndx = ndx ;
 			stack[editor_id].tb = editor_tb ;
 			stack[editor_id].nobarre = ($(editor_id).hasClass('no_barre') || CKEDITOR.ckeditmode == 'spip') ;
+			stack[editor_id].md5 = editor_md5 ;
 			if (! stack[editor_id].nobarre)
 				$(editor_id).addClass('no_barre');[(#REM) // on fait en sorte de désactiver l'affichage du porte plume avant qu'il n'entre en scène ...]
 

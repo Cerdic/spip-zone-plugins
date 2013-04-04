@@ -1,7 +1,7 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="0.16.8"
+	version="0.16.9"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/ckspip-logo.png"

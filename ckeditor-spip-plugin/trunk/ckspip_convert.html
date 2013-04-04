@@ -2,33 +2,31 @@
 #CACHE{0}
 <?php
 	include_spip('inc/autoriser');
-	if (autoriser('ecrire')) {
-		include_spip("inc/ckeditor_tools") ;
+	include_spip("inc/ckeditor_tools") ;
+	
+	if ($_POST['text_area'] && $_POST['cvt']) {
 
-		if ($_POST['text_area'] && $_POST['cvt']) {
+		if ($GLOBALS['meta']['charset'] && ($GLOBALS['meta']['charset'] != 'utf-8')) {
+			$_POST['text_area'] = iconv('utf-8', $GLOBALS['meta']['charset'].'//TRANSLIT//IGNORE', $_POST['text_area']) ;
+		}
 
-			if ($GLOBALS['meta']['charset'] && ($GLOBALS['meta']['charset'] != 'utf-8')) {
-				$_POST['text_area'] = iconv('utf-8', $GLOBALS['meta']['charset'].'//TRANSLIT//IGNORE', $_POST['text_area']) ;
-			}
-
-			switch ($_POST['cvt']) {
-				case 'spip2html':
-					$result = ckeditor_spip2html($_POST['text_area']) ;
-					if (!$_POST['fix'] && preg_match("~\s*<p>.*?</p>\s*~s", $result, $m) && ($m[0] == $result)) {
-						echo preg_replace("~^\s*<p>(.*?)</p>\s*$~s", "$1", $result) ;
-					} else {
-						echo $result ;
-					}
-					break ;
-				case 'html2spip':
-					echo ckeditor_html2spip($_POST['text_area']) ;
-					break ;
-				case 'none':
-					echo $_POST['text_area'] ;
-					break ;
-				default:
-					echo _T('ckeditor:err_conversion')."\n".$_POST['text_area'] ;
-			}
+		switch ($_POST['cvt']) {
+			case 'spip2html':
+				$result = ckeditor_spip2html($_POST['text_area']) ;
+				if (!$_POST['fix'] && preg_match("~\s*<p>.*?</p>\s*~s", $result, $m) && ($m[0] == $result)) {
+					echo preg_replace("~^\s*<p>(.*?)</p>\s*$~s", "$1", $result) ;
+				} else {
+					echo $result ;
+				}
+				break ;
+			case 'html2spip':
+				echo ckeditor_html2spip($_POST['text_area']) ;
+				break ;
+			case 'none':
+				echo $_POST['text_area'] ;
+				break ;
+			default:
+				echo _T('ckeditor:err_conversion')."\n".$_POST['text_area'] ;
 		}
 	}
 ?>
