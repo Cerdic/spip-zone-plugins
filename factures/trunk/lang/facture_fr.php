@@ -18,19 +18,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_factures' => '@nb@ factures',
 
 	// L
-	'label_conditions' => 'Conditions',
+	'label_conditions' => 'Conditions commerciales',
 	'label_date_facture' => 'Date facture',
 	'label_delais_validite' => 'Delais validite',
 	'label_fin_validite' => 'Fin validite',
 	'label_id_organisation' => 'Id organisation',
-	'label_id_type_document' => 'Id type document',
+	'label_id_organisation_emettrice' => 'Organisation émettrice',
 	'label_libelle_facture' => 'Libelle facture',
-	'label_montant' => 'Montant',
-	'label_nb_heures_vendues' => 'Nb heures vendues',
+	'label_montant' => 'Montant global de la facture (calculé)',
 	'label_nota_bene' => 'Nota bene',
-	'label_num_devis' => 'Num devis',
-	'label_num_facture' => 'Num facture',
-	'label_reglement' => 'Reglement',
+	'label_num_devis' => 'Numéro du devis lié',
+	'label_num_facture' => 'Numéro de la facture',
+	'label_quantite' => 'Quantité globale',
+	'label_reglement' => 'Mode de règlement',
 
 	// R
 	'retirer_lien_facture' => 'Retirer ce facture',

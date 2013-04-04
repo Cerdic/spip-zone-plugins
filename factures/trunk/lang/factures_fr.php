@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// T
-	'titre_page_configurer_factures' => 'Factures & devis',
+	'titre_page_configurer_factures' => 'Configurer Factures et Devis',
 );
 
 ?>

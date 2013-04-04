@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	multi id_organisation,1,
+	multi libelle_facture,1,
 	id_facture,1
 }})
 ]
@@ -9,7 +9,7 @@
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutfaca,#EVAL{_request("debutfaca");}}}
-#SET{afficher_lettres,#TRI|=={'multi id_organisation'}|oui}
+#SET{afficher_lettres,#TRI|=={'multi libelle_facture'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-associer factures">
 <table class='spip liste'>
@@ -24,10 +24,10 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(FACTURES){tout}{!id_facture IN #GET{exclus}}{where?}{recherche?}
-			{tri #ENV{par,multi id_organisation},#GET{defaut_tri}}{id_facture==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#ID_ORGANISATION**|extraire_multi|initiale|unique|oui)
+			{tri #ENV{par,multi libelle_facture},#GET{defaut_tri}}{id_facture==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#LIBELLE_FACTURE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutfaca,@#ID_FACTURE}|ancre_url{paginationfaca}|afficher_initiale{#ID_ORGANISATION**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutfaca,@#ID_FACTURE}|ancre_url{paginationfaca}|afficher_initiale{#LIBELLE_FACTURE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -38,15 +38,15 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
 	
 		<tr class='first_row'>
-			<th class='id_organisation' scope='col'>[(#TRI{multi id_organisation,<:facture:label_id_organisation:>,ajax})]</th>
+			<th class='libelle_facture' scope='col'>[(#TRI{multi libelle_facture,<:facture:label_libelle_facture:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_factures(FACTURES){!id_facture IN #GET{exclus}}{where?}{recherche?}
-		{tri #ENV{par,multi id_organisation},#GET{defaut_tri}}{pagination #ENV{nb,10} faca}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ID_ORGANISATION**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='id_organisation'>[(#LOGO_FACTURE|image_reduire{20,20})]<a href="[(#ID_FACTURE|generer_url_entite{facture})]">#ID_ORGANISATION</a></td>
+		{tri #ENV{par,multi libelle_facture},#GET{defaut_tri}}{pagination #ENV{nb,10} faca}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#LIBELLE_FACTURE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='libelle_facture'>[(#LOGO_FACTURE|image_reduire{20,20})]<a href="[(#ID_FACTURE|generer_url_entite{facture})]">#LIBELLE_FACTURE</a></td>
 			<td class='action'>
 				<button class="button link add" name="ajouter_lien\[facture-#ID_FACTURE-#OBJET-#ID_OBJET\]" value="+"><:facture:ajouter_lien_facture:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>

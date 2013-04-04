@@ -13,7 +13,7 @@
 	]
 	[
 		[(#ID_FACTURE|?{<:facture:icone_modifier_facture:>,<:facture:icone_creer_facture:>})]
-		<h1>(#ENV{titre,#INFO_ID_ORGANISATION{facture,#ID_FACTURE}|sinon{<:info_sans_titre:>}})</h1>
+		<h1>(#ENV{titre,#INFO_LIBELLE_FACTURE{facture,#ID_FACTURE}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
 

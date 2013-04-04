@@ -1,20 +1,20 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.1"
-	etat="dev"
+	version="1.0.2"
+	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
 	documentation=""
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2013-04-04 11:22:33
+		Paquet généré le 2013-04-04 15:39:52
 	-->
 
 	<nom>Factures &amp; devis</nom>
 
-	<auteur>Cyril Marion</auteur>
+	<auteur lien='http://www.cym.fr'>Cyril Marion - Ateliers CYM S.A.R.L.</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 

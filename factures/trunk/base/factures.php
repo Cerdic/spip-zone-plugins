@@ -4,7 +4,7 @@
  *
  * @plugin     Factures &amp; devis
  * @copyright  2013
- * @author     Cyril Marion
+ * @author     Cyril Marion - Ateliers CYM S.A.R.L.
  * @licence    GNU/GPL
  * @package    SPIP\Factures\Pipelines
  */
@@ -46,29 +46,29 @@ function factures_declarer_tables_objets_sql($tables) {
 		'principale' => "oui",
 		'field'=> array(
 			"id_facture"         => "bigint(21) NOT NULL",
-			"id_organisation"    => "int(11) DEFAULT NULL",
-			"id_type_document"   => "int(11) NOT NULL DEFAULT '1'",
 			"num_facture"        => "varchar(50) NOT NULL",
-			"num_devis"          => "varchar(50) DEFAULT NULL",
+			"id_organisation_emettrice" => "int(11) NOT NULL DEFAULT 0",
+			"id_organisation"    => "int(11) DEFAULT NULL",
 			"date_facture"       => "datetime DEFAULT NULL",
 			"libelle_facture"    => "mediumtext",
+			"montant"            => "decimal(18,2) DEFAULT NULL",
+			"quantite"           => "decimal(18,2) DEFAULT NULL",
 			"conditions"         => "text NOT NULL",
 			"reglement"          => "varchar(50) DEFAULT NULL",
+			"nota_bene"          => "mediumtext",
 			"delais_validite"    => "int(11) DEFAULT NULL",
 			"fin_validite"       => "datetime DEFAULT NULL",
-			"montant"            => "decimal(18,2) DEFAULT NULL",
-			"nb_heures_vendues"  => "decimal(18,2) DEFAULT NULL",
-			"nota_bene"          => "mediumtext",
+			"num_devis"          => "varchar(50) DEFAULT NULL",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_facture",
 		),
-		'titre' => "'' AS titre, '' AS lang",
+		'titre' => "libelle_facture AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array(),
+		'champs_editables'  => array('num_facture', 'id_organisation_emettrice', 'id_organisation', 'date_facture', 'libelle_facture', 'montant', 'quantite', 'conditions', 'reglement', 'nota_bene', 'delais_validite', 'fin_validite', 'num_devis'),
 		'champs_versionnes' => array(),
-		'rechercher_champs' => array(),
+		'rechercher_champs' => array("num_facture" => 10),
 		'tables_jointures'  => array(),
 		
 
@@ -92,7 +92,7 @@ function factures_declarer_tables_objets_sql($tables) {
 		'key' => array(
 			"PRIMARY KEY"        => "id_ligne",
 		),
-		'titre' => "'' AS titre, '' AS lang",
+		'titre' => "designation AS titre, '' AS lang",
 		 #'date' => "",
 		'champs_editables'  => array(),
 		'champs_versionnes' => array(),

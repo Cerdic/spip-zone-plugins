@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-04 11:22:33
+ *   le 2013-04-04 15:39:52
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -30,18 +30,18 @@ $data = array (
     'slogan' => 'Facturer et faire des devis avec SPIP',
     'description' => 'Factures & devis permet d\'éditer, imprimer, archiver facilement vos devis et factures.',
     'prefixe' => 'factures',
-    'version' => '1.0.0',
-    'auteur' => 'Cyril Marion',
-    'auteur_lien' => '',
+    'version' => '1.0.2',
+    'auteur' => 'Cyril Marion - Ateliers CYM S.A.R.L.',
+    'auteur_lien' => 'http://www.cym.fr',
     'licence' => 'GNU/GPL',
     'categorie' => 'divers',
-    'etat' => 'dev',
+    'etat' => 'experimental',
     'compatibilite' => '[3.0.7;3.0.*]',
     'documentation' => '',
     'administrations' => 'on',
     'schema' => '1.0.0',
     'formulaire_config' => 'on',
-    'formulaire_config_titre' => '',
+    'formulaire_config_titre' => 'Configurer Factures et Devis',
     'fichiers' => 
     array (
       0 => 'autorisations',
@@ -77,8 +77,8 @@ $data = array (
     array (
       'nom' => 'Factures',
       'nom_singulier' => 'Facture',
-      'genre' => 'masculin',
-      'logo_variantes' => '',
+      'genre' => 'feminin',
+      'logo_variantes' => 'on',
       'table' => 'spip_factures',
       'cle_primaire' => 'id_facture',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
@@ -87,19 +87,44 @@ $data = array (
       array (
         0 => 
         array (
-          'nom' => 'Id organisation',
-          'champ' => 'id_organisation',
-          'sql' => 'int(11) DEFAULT NULL',
-          'recherche' => '',
+          'nom' => 'Numéro de la facture',
+          'champ' => 'num_facture',
+          'sql' => 'varchar(50) NOT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
+          'recherche' => '10',
           'saisie' => '',
           'explication' => '',
           'saisie_options' => '',
         ),
         1 => 
         array (
-          'nom' => 'Id type document',
-          'champ' => 'id_type_document',
-          'sql' => 'int(11) NOT NULL DEFAULT \'1\'',
+          'nom' => 'Organisation émettrice',
+          'champ' => 'id_organisation_emettrice',
+          'sql' => 'int(11) NOT NULL DEFAULT 0',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => '',
+          'explication' => '',
+          'saisie_options' => '',
+        ),
+        2 => 
+        array (
+          'nom' => 'Id organisation',
+          'champ' => 'id_organisation',
+          'sql' => 'int(11) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -107,9 +132,14 @@ $data = array (
         ),
         3 => 
         array (
-          'nom' => 'Num facture',
-          'champ' => 'num_facture',
-          'sql' => 'varchar(50) NOT NULL',
+          'nom' => 'Date facture',
+          'champ' => 'date_facture',
+          'sql' => 'datetime DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -117,9 +147,14 @@ $data = array (
         ),
         4 => 
         array (
-          'nom' => 'Num devis',
-          'champ' => 'num_devis',
-          'sql' => 'varchar(50) DEFAULT NULL',
+          'nom' => 'Libelle facture',
+          'champ' => 'libelle_facture',
+          'sql' => 'mediumtext',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -127,9 +162,27 @@ $data = array (
         ),
         5 => 
         array (
-          'nom' => 'Date facture',
-          'champ' => 'date_facture',
-          'sql' => 'datetime DEFAULT NULL',
+          'nom' => 'Montant global de la facture (calculé)',
+          'champ' => 'montant',
+          'sql' => 'decimal(18,2) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
+          'recherche' => '',
+          'saisie' => '',
+          'explication' => '',
+          'saisie_options' => '',
+        ),
+        6 => 
+        array (
+          'nom' => 'Quantité globale',
+          'champ' => 'quantite',
+          'sql' => 'decimal(18,2) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -137,9 +190,13 @@ $data = array (
         ),
         7 => 
         array (
-          'nom' => 'Libelle facture',
-          'champ' => 'libelle_facture',
-          'sql' => 'mediumtext',
+          'nom' => 'Conditions commerciales',
+          'champ' => 'conditions',
+          'sql' => 'text NOT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -147,9 +204,13 @@ $data = array (
         ),
         8 => 
         array (
-          'nom' => 'Conditions',
-          'champ' => 'conditions',
-          'sql' => 'text NOT NULL',
+          'nom' => 'Mode de règlement',
+          'champ' => 'reglement',
+          'sql' => 'varchar(50) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -157,9 +218,13 @@ $data = array (
         ),
         9 => 
         array (
-          'nom' => 'Reglement',
-          'champ' => 'reglement',
-          'sql' => 'varchar(50) DEFAULT NULL',
+          'nom' => 'Nota bene',
+          'champ' => 'nota_bene',
+          'sql' => 'mediumtext',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -170,6 +235,10 @@ $data = array (
           'nom' => 'Delais validite',
           'champ' => 'delais_validite',
           'sql' => 'int(11) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
@@ -180,43 +249,31 @@ $data = array (
           'nom' => 'Fin validite',
           'champ' => 'fin_validite',
           'sql' => 'datetime DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
           'saisie_options' => '',
         ),
-        13 => 
+        12 => 
         array (
-          'nom' => 'Montant',
-          'champ' => 'montant',
-          'sql' => 'decimal(18,2) DEFAULT NULL',
-          'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
-          'saisie_options' => '',
-        ),
-        15 => 
-        array (
-          'nom' => 'Nb heures vendues',
-          'champ' => 'nb_heures_vendues',
-          'sql' => 'decimal(18,2) DEFAULT NULL',
-          'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
-          'saisie_options' => '',
-        ),
-        16 => 
-        array (
-          'nom' => 'Nota bene',
-          'champ' => 'nota_bene',
-          'sql' => 'mediumtext',
+          'nom' => 'Numéro du devis lié',
+          'champ' => 'num_devis',
+          'sql' => 'varchar(50) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
           'saisie' => '',
           'explication' => '',
           'saisie_options' => '',
         ),
       ),
-      'champ_titre' => '',
+      'champ_titre' => 'libelle_facture',
       'champ_date' => '',
       'statut' => '',
       'chaines' => 
@@ -242,9 +299,7 @@ $data = array (
       'table_liens' => '',
       'vue_liens' => 
       array (
-        0 => 'spip_auteurs',
-        1 => 'spip_contacts',
-        2 => 'spip_organisations',
+        0 => 'spip_organisations',
       ),
       'roles' => '',
       'auteurs_liens' => '',
@@ -262,12 +317,16 @@ $data = array (
         0 => 'menu_edition',
         1 => 'outils_rapides',
       ),
+      'saisies' => 
+      array (
+        0 => 'objets',
+      ),
     ),
     1 => 
     array (
       'nom' => 'Lignes facture',
       'nom_singulier' => 'Ligne facture',
-      'genre' => 'masculin',
+      'genre' => 'feminin',
       'logo_variantes' => 'on',
       'table' => 'spip_lignes_factures',
       'cle_primaire' => 'id_ligne',
@@ -346,7 +405,7 @@ $data = array (
           'saisie_options' => '',
         ),
       ),
-      'champ_titre' => '',
+      'champ_titre' => 'designation',
       'champ_date' => '',
       'statut' => '',
       'chaines' => 
@@ -370,6 +429,10 @@ $data = array (
         'texte_changer_statut_objet' => 'Ce lignes facture est :',
       ),
       'table_liens' => '',
+      'vue_liens' => 
+      array (
+        0 => 'spip_factures',
+      ),
       'roles' => '',
       'auteurs_liens' => '',
       'vue_auteurs_liens' => '',

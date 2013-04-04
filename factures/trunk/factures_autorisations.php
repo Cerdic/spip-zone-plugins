@@ -4,7 +4,7 @@
  *
  * @plugin     Factures &amp; devis
  * @copyright  2013
- * @author     Cyril Marion
+ * @author     Cyril Marion - Ateliers CYM S.A.R.L.
  * @licence    GNU/GPL
  * @package    SPIP\Factures\Autorisations
  */
