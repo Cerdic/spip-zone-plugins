@@ -8,39 +8,52 @@
 
 [(#REM) affichage d'une reservation de plusieurs jours - Premier Jour ]
 <BOUCLE_affichreserv2(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut >= #GET{jour}}{orr_date_debut < #GET{jourplusun}}{orr_date_fin >= #GET{jourplusun}}{par orr_date_debut}>
+<BOUCLE_auteur2(AUTEURS){id_orr_reservation}>
+#SET{auteur,#NOM}
+</BOUCLE_auteur2>
+
 <div style="background-color:#GET{couleur}" id="premierjour">
    	<p class="edition_formu">[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}})<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="stylo" src="#CHEMIN{img/crayon-16.png}" alt="stylo" /></a>]</p>
     <p class="dir_#ID_ORR_RESERVATION nomreservation visible" ><img class="changeclic" src="#CHEMIN{img/bas.png}" alt="bas" />#ORR_RESERVATION_NOM </p>
-    <p style="display : none ;" class="dir_#ID_ORR_RESERVATION cache" id="dir_lundi_#ENV{idressource}_2#COMPTEUR_BOUCLE_click"style="">[(#ORR_DATE_DEBUT|affdate{'H:i'})]-->...</p>
+    <p style="display : none ;" class="dir_#ID_ORR_RESERVATION cache" id="dir_lundi_#ENV{idressource}_2#COMPTEUR_BOUCLE_click"style="">Nom : #GET{auteur} <br/> [(#ORR_DATE_DEBUT|affdate{'H:i'})]-->...</p>
 
 </div>
 </BOUCLE_affichreserv2>
 
 [(#REM) affichage d'une reservation plusieurs jours - Jour milieu ]
 <BOUCLE_affichreserv3(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut < #GET{jour}}{orr_date_fin > #GET{jour}}{orr_date_fin >= #GET{jourplusun}}{par orr_date_debut}>
+<BOUCLE_auteur3(AUTEURS){id_orr_reservation}>
+#SET{auteur,#NOM}
+</BOUCLE_auteur3>
 <div style="background-color:#GET{couleur}" id="jourmilieu">
 	<p class="edition_formu">[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}})<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="stylo" src="#CHEMIN{img/crayon-16.png}" alt="stylo" /></a>]</p>
     <p class="dir_#ID_ORR_RESERVATION nomreservation visible"><img class="changeclic" src="#CHEMIN{img/bas.png}" alt="bas" />#ORR_RESERVATION_NOM </p>
-<p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">...<-->...</p>
+<p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">Nom : #GET{auteur} <br/> ...<-->...</p>
 
 </div>
 </BOUCLE_affichreserv3>
 
 [(#REM) affichage d'une reservation plusieurs jours - Dernier Jour ]
 <BOUCLE_affichreserv4(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut < #GET{jour}}{orr_date_fin >= #GET{jour}}{orr_date_fin < #GET{jourplusun}}{par orr_date_debut}>
+<BOUCLE_auteur4(AUTEURS){id_orr_reservation}>
+#SET{auteur,#NOM}
+</BOUCLE_auteur4>
 <div style="background-color:#GET{couleur}" id="dernierjour">
 <p class="edition_formu">[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}})<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="stylo" src="#CHEMIN{img/crayon-16.png}" alt="stylo" /></a>]</p>
 <p class="dir_#ID_ORR_RESERVATION nomreservation visible"><img class="changeclic" src="#CHEMIN{img/bas.png}" alt="bas" />#ORR_RESERVATION_NOM </p>
-<p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">...-->[(#ORR_DATE_FIN|affdate{"H:i"})]</p>
+<p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">Nom : #GET{auteur} <br/> ...-->[(#ORR_DATE_FIN|affdate{"H:i"})]</p>
 
 </div>
 </BOUCLE_affichreserv4>
 
 [(#REM) affichage pour reservation d'une journée ]
 <BOUCLE_AffichReserv1(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut >= #GET{jour}}{orr_date_fin < #GET{jourplusun}}{par orr_date_debut}>
+<BOUCLE_auteur1(AUTEURS){id_orr_reservation}>
+#SET{auteur,#NOM}
+</BOUCLE_auteur1>
 <div style="background-color:#GET{couleur}">
 	<p class="edition_formu">[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}})<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="stylo" src="#CHEMIN{img/crayon-16.png}" alt="stylo" /></a>]</p>
     <p class="dir_#ID_ORR_RESERVATION nomreservation visible"><img class="changeclic" src="#CHEMIN{img/bas.png}" alt="bas" />#ORR_RESERVATION_NOM</p>
-    <p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">[(#ORR_DATE_DEBUT|affdate{'H:i'})] --> [(#ORR_DATE_FIN|affdate{"H:i"})]</p>
+    <p style="display : none;" class="dir_#ID_ORR_RESERVATION cache" style="">Nom : #GET{auteur} <br/> [(#ORR_DATE_DEBUT|affdate{'H:i'})] --> [(#ORR_DATE_FIN|affdate{"H:i"})]</p>
 </div>
 </BOUCLE_AffichReserv1>
