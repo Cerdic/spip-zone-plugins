@@ -2,7 +2,7 @@
 	<nom>Social tags</nom>
 	<auteur>phil</auteur>
 	<icon>prive/themes/spip/images/socialtags-32.png</icon>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>[fr]Activer des boutons de partage de liens sur les r&#233;seaux sociaux.

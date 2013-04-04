@@ -1,7 +1,7 @@
 <paquet
 	prefix="socialtags"
 	categorie="communication"
-	version="1.0.3"
+	version="1.0.4"
 	etat="stable"
 	compatibilite="[2.0.10;3.0.99]"
 	logo="prive/themes/spip/images/socialtags-32.png"
