@@ -133,7 +133,6 @@ while test -n "${1}"; do
 		--info) info="${2}"
 		shift;;
 		--log) log="${2}"
-		echo $log
 		shift;;
 		--encodeur) encodeur="${2}"
 		shift;;
@@ -224,7 +223,7 @@ spipmotion_encodage_ffmpeg (){
 	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
 	  	echo "SPIPmotion v$VERSION
 	
-	On encode une video plouf
+	On encode une video
 	"
 	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
 	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
