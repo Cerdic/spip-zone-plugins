@@ -8,6 +8,64 @@
 		<input type='hidden' name='id_facture' value='#ENV{id_facture}' />
 		<ul>
 
+			[(#SAISIE{input, num_facture, obligatoire=oui,
+				label=<:facture:label_num_facture:>,
+				explication=<:facture:explication_num_facture:> })]
+
+			[(#SAISIE{input, id_organisation_emettrice, obligatoire=oui,
+				label=<:facture:label_id_organisation_emettrice:>,
+				explication=<:facture:explication_id_organisation_emettrice:> })]
+
+			[(#SAISIE{organisations, id_organisation, obligatoire=oui,
+				label=<:facture:label_id_organisation:>,
+				explication=<:facture:explication_id_organisation:> })]
+
+			[(#SAISIE{date, date_facture, obligatoire=oui,
+				label=<:facture:label_date_facture:>,
+				explication=<:facture:explication_date_facture:> })]
+
+			[(#SAISIE{input, libelle_facture, obligatoire=oui,
+				label=<:facture:label_libelle_facture:>,
+				explication=<:facture:explication_libelle_facture:> })]
+
+			[(#SAISIE{input, montant,
+				label=<:facture:label_montant:>,
+				explication=<:facture:explication_montant:> ,
+				type=number,attributs='step=0.01'})]
+
+			[(#SAISIE{input, quantite,
+				label=<:facture:label_quantite:>,
+				explication=<:facture:explication_quantite:> ,
+				type=number})]
+
+			[(#SAISIE{input, unite,
+				label=<:facture:label_unite:>,
+				explication=<:facture:explication_unite:> })]
+
+			[(#SAISIE{input, conditions,
+				label=<:facture:label_conditions:>,
+				explication=<:facture:explication_conditions:> })]
+
+			[(#SAISIE{input, reglement,
+				label=<:facture:label_reglement:>,
+				explication=<:facture:explication_reglement:> })]
+
+			[(#SAISIE{textarea, nota_bene,
+				label=<:facture:label_nota_bene:>,
+				explication=<:facture:explication_nota_bene:> })]
+
+			[(#SAISIE{input, delais_validite,
+				label=<:facture:label_delais_validite:>,
+				explication=<:facture:explication_delais_validite:> })]
+
+			[(#SAISIE{date, fin_validite,
+				label=<:facture:label_fin_validite:>,
+				explication=<:facture:explication_fin_validite:> })]
+
+			[(#SAISIE{input, num_devis,
+				label=<:facture:label_num_devis:>,
+				explication=<:facture:explication_num_devis:> })]
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

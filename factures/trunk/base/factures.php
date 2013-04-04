@@ -53,6 +53,7 @@ function factures_declarer_tables_objets_sql($tables) {
 			"libelle_facture"    => "mediumtext",
 			"montant"            => "decimal(18,2) DEFAULT NULL",
 			"quantite"           => "decimal(18,2) DEFAULT NULL",
+			"unite"              => "varchar(25) NOT NULL DEFAULT ''",
 			"conditions"         => "text NOT NULL",
 			"reglement"          => "varchar(50) DEFAULT NULL",
 			"nota_bene"          => "mediumtext",
@@ -66,9 +67,9 @@ function factures_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "libelle_facture AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('num_facture', 'id_organisation_emettrice', 'id_organisation', 'date_facture', 'libelle_facture', 'montant', 'quantite', 'conditions', 'reglement', 'nota_bene', 'delais_validite', 'fin_validite', 'num_devis'),
+		'champs_editables'  => array('num_facture', 'id_organisation_emettrice', 'id_organisation', 'date_facture', 'libelle_facture', 'montant', 'quantite', 'unite', 'conditions', 'reglement', 'nota_bene', 'delais_validite', 'fin_validite', 'num_devis'),
 		'champs_versionnes' => array(),
-		'rechercher_champs' => array("num_facture" => 10),
+		'rechercher_champs' => array("num_facture" => 10, "libelle_facture" => 10),
 		'tables_jointures'  => array(),
 		
 
@@ -94,7 +95,7 @@ function factures_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "designation AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array(),
+		'champs_editables'  => array('id_facture', 'position', 'quantite', 'unite', 'designation', 'commentaire'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),

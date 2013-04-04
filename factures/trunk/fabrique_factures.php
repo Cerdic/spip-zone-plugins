@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-04 15:39:52
+ *   le 2013-04-04 16:57:27
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -30,7 +30,7 @@ $data = array (
     'slogan' => 'Facturer et faire des devis avec SPIP',
     'description' => 'Factures & devis permet d\'éditer, imprimer, archiver facilement vos devis et factures.',
     'prefixe' => 'factures',
-    'version' => '1.0.2',
+    'version' => '1.0.5',
     'auteur' => 'Cyril Marion - Ateliers CYM S.A.R.L.',
     'auteur_lien' => 'http://www.cym.fr',
     'licence' => 'GNU/GPL',
@@ -96,8 +96,8 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '10',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Corrigez l\'identifiant de la facture ou corriges celui proposé par défaut',
           'saisie_options' => '',
         ),
         1 => 
@@ -111,8 +111,8 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Sélectionnez l\'organisation émettrice de la facture ou du devis',
           'saisie_options' => '',
         ),
         2 => 
@@ -126,8 +126,8 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'organisations',
+          'explication' => 'Saisissez l\'organisation destinataire du devis ou de la facture',
           'saisie_options' => '',
         ),
         3 => 
@@ -141,8 +141,8 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'date',
+          'explication' => 'Saisissez la date de facture ou corrigez celle proposée par défaut',
           'saisie_options' => '',
         ),
         4 => 
@@ -155,9 +155,9 @@ $data = array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
-          'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'recherche' => '10',
+          'saisie' => 'input',
+          'explication' => 'Saisissez un libellé explicite pour la facture ou le devis',
           'saisie_options' => '',
         ),
         5 => 
@@ -170,9 +170,9 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
-          'saisie_options' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez le montant total de la facture ou corrigez celui calculé par SPIP à partir des lignes de factures',
+          'saisie_options' => 'type=number,attributs=\'step=0.01\'',
         ),
         6 => 
         array (
@@ -184,11 +184,25 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
-          'saisie_options' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez une quantité globale relative à cette facture ou ce devis (en général un nombre d\'heures ou de jours)',
+          'saisie_options' => 'type=number',
         ),
         7 => 
+        array (
+          'nom' => 'Unité vendue',
+          'champ' => 'unite',
+          'sql' => 'varchar(25) NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez une unité relative à cette facture ou ce devis (en général des heures ou des jours)',
+          'saisie_options' => '',
+        ),
+        8 => 
         array (
           'nom' => 'Conditions commerciales',
           'champ' => 'conditions',
@@ -198,11 +212,11 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez les conditions de règlement proposées pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        8 => 
+        9 => 
         array (
           'nom' => 'Mode de règlement',
           'champ' => 'reglement',
@@ -212,11 +226,11 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez un mode de règlement pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        9 => 
+        10 => 
         array (
           'nom' => 'Nota bene',
           'champ' => 'nota_bene',
@@ -226,11 +240,11 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'textarea',
+          'explication' => 'Indiquez un nota-bene qui apparaitra à la fin de la facture ou du devis (équivalent des "mentions manuscrites")',
           'saisie_options' => '',
         ),
-        10 => 
+        11 => 
         array (
           'nom' => 'Delais validite',
           'champ' => 'delais_validite',
@@ -240,11 +254,11 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez un nombre de jours de validité pour le devis ou la facture',
           'saisie_options' => '',
         ),
-        11 => 
+        12 => 
         array (
           'nom' => 'Fin validite',
           'champ' => 'fin_validite',
@@ -254,11 +268,11 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'date',
+          'explication' => 'Indiquez une date de fin de validité pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        12 => 
+        13 => 
         array (
           'nom' => 'Numéro du devis lié',
           'champ' => 'num_devis',
@@ -268,8 +282,8 @@ $data = array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez une référence à un devis précédent (le cas échéant)',
           'saisie_options' => '',
         ),
       ),
@@ -339,8 +353,13 @@ $data = array (
           'nom' => 'Id facture',
           'champ' => 'id_facture',
           'sql' => 'int(11) NOT NULL DEFAULT \'0\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
-          'saisie' => '',
+          'saisie' => 'facture',
           'explication' => '',
           'saisie_options' => '',
         ),
@@ -349,9 +368,13 @@ $data = array (
           'nom' => 'Position',
           'champ' => 'position',
           'sql' => 'int(11) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Saisir la position de la ligne dans la facture ou le devis',
           'saisie_options' => '',
         ),
         2 => 
@@ -359,9 +382,14 @@ $data = array (
           'nom' => 'Quantité',
           'champ' => 'quantite',
           'sql' => 'float DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Veuillez indiquer la quandité vendue ou proposée',
           'saisie_options' => '',
         ),
         3 => 
@@ -369,9 +397,14 @@ $data = array (
           'nom' => 'Unité',
           'champ' => 'unite',
           'sql' => 'varchar(50) DEFAULT NULL',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'input',
+          'explication' => 'Veuillez indiquer l\'unité vendue ou proposée',
           'saisie_options' => '',
         ),
         4 => 
@@ -379,9 +412,14 @@ $data = array (
           'nom' => 'Désignation',
           'champ' => 'designation',
           'sql' => 'text',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'obligatoire',
+          ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'textarea',
+          'explication' => 'Écrivez une description de l\'élément vendu ou proposé',
           'saisie_options' => '',
         ),
         5 => 
@@ -390,18 +428,22 @@ $data = array (
           'champ' => 'prix_unitaire_ht',
           'sql' => 'decimal(18,2) DEFAULT NULL',
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
-          'saisie_options' => '',
+          'saisie' => 'input',
+          'explication' => 'Indiquez le prix unitaire hors taxes de l\'élément vendu ou proposé',
+          'saisie_options' => 'type=number,attributs=\'step=0.01\'',
         ),
         6 => 
         array (
           'nom' => 'Commentaire',
           'champ' => 'commentaire',
           'sql' => 'mediumtext',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+          ),
           'recherche' => '',
-          'saisie' => '',
-          'explication' => '',
+          'saisie' => 'textarea',
+          'explication' => 'Saisissez un commentaire le cas échéant',
           'saisie_options' => '',
         ),
       ),
@@ -446,8 +488,7 @@ $data = array (
       ),
       'boutons' => 
       array (
-        0 => 'menu_edition',
-        1 => 'outils_rapides',
+        0 => 'outils_rapides',
       ),
     ),
   ),
