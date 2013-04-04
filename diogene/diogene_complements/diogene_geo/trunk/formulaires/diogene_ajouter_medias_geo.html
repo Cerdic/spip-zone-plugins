@@ -6,15 +6,15 @@
 	Si un id_gis on affiche la carte tout le temps
 ]
 [(#ENV{id_gis}|intval|oui)
-	#SET{geo_affiche,oui}
+	[(#SET{geo_affiche,oui})]
 ]
 [(#REM)
 	Si pas d'id_gis on regarde la conf
 ]
 [(#ENV{id_gis}|intval|non)
-	#SET{geo_affiche,oui}
+	[(#SET{geo_affiche,oui})]
 	[(#GET{complements}|table_valeur{geo_cacher}|=={on}|oui)
-		#SET{geo_affiche,non}	
+		[(#SET{geo_affiche,non})]	
 	]
 ]
 <li class="fieldset diogene_geo" id="diogene_geo">
@@ -82,10 +82,12 @@
 		[(#GET{geo_affiche}|=={non}|oui)$('.ul_info_gis').hide();] 
 		$('#gis_afficher').change(function(){
 			if($(this).is(':checked')){
-				$('.ul_info_gis').slideDown('slow');
-			}else{
+				$('.ul_info_gis').slideDown('slow',function(){
+					if(typeof(form_map) == 'object')
+						form_map.invalidateSize();
+				});
+			}else
 				$('.ul_info_gis').slideUp();
-			}
 		});
 	})(jQuery); 
 </script>
