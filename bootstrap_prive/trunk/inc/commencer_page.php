@@ -29,7 +29,8 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	. "<div id='page'>"
 	. auteurs_recemment_connectes($connect_id_auteur)
 	. ($alertes?alertes_auteur($connect_id_auteur):'')
-	. '<div class="container">';
+	. '<div class="container">'
+	. '<div class="row">';
 }
 
 // envoi du doctype et du <head><title>...</head>

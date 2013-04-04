@@ -61,13 +61,13 @@ function fin_grand_cadre(){ return "\n</div>";}
  * Retourne le code HTML du début de la colonne gauche
  * @return string Code HTML
  */
-function debut_gauche() {	return "<div id='conteneur' class=''>\n<div id='navigation' class='lat' role='contentinfo'>\n";}
+function debut_gauche() {	return "<div id='conteneur' class=''>\n<div class='span3'>\n<div id='navigation' class='lat' role='contentinfo'>\n";}
 
 /**
  * Retourne le code HTML de la fin de la colonne
  * @return string Code HTML
  */
-function fin_gauche(){return "</div></div><br class='nettoyeur' />";}
+function fin_gauche(){return "</div><!-- / end #conteneur -->\n</div>\n<br class='nettoyeur' />";}
 
 /**
  * Retourne le code HTML du changement de colonne (passer de la gauche à la droite)
@@ -87,8 +87,8 @@ function creer_colonne_droite(){
 function debut_droite() {
 	return liste_objets_bloques(_request('exec'))
 	  . creer_colonne_droite()
-	  . "</div>"
-	  . "\n<div id='contenu'>";
+	  . "</div><!-- / end #navigation.lat -->\n</div><!-- / end .span3 -->\n"
+	  . "\n<div id='contenu' class='span9'>";
 }
 
 // http://doc.spip.org/@liste_articles_bloques
