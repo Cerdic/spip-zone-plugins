@@ -2,6 +2,7 @@
 @import "css/sprites.less";
 @import "bootstrap2spip/css/forms.less";
 @import "bootstrap2spip/css/box.less";
+@import "themes/mixins.less";
 @greenFlashy : #C5E41C;
 @import "bootstrap2spip/css/tables.less";
 
@@ -40,38 +41,31 @@ body.navigation_avec_icones {
   li {
     a {
         > #bando1_menu_accueil {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-home;
         }
         > #bando1_menu_edition {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-edit;
         }
         > #bando1_menu_publication {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-ok;
         }
         > #bando1_menu_activite {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-comment;
         }
         > #bando1_menu_squelette {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-leaf;
         }
         > #bando1_menu_administration {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-wrench;
         }
         > #bando1_menu_configuration {
-          [class^="icon-"];
-          .icon-white;
+          .bando1-icons;
           .icon-cog;
         }
 
@@ -145,6 +139,9 @@ a.plus_info {
 }
 #bando_outils {
   padding: 5px 0;
+  .span1 {
+    height: 30px;
+  }
 }
 .creer.nav, #rapides .rapides.nav {
   li {
