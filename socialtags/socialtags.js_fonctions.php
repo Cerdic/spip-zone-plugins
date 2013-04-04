@@ -16,7 +16,7 @@ function socialtags_json($cfg) {
 	if (in_array($a = $service['lesauteurs'], $cfg)) {
 		$t = _q($service['titre']);
 		$u = _q($service['url']);
-		$d = _q($service['descriptif']);
+		$d = isset($service['descriptif']) ? _q($service['descriptif']) : $t;
 		$u_site = _q($GLOBALS['meta']['adresse_site']);
 		$i = _q('data:image/png;base64,'.base64_encode(file_get_contents(find_in_path('images/'.$a.'.png'))));
 		$json[] = "{ a: '{$a}', n: {$t}, i: {$i}, u: {$u}, u_site: {$u_site}}";
