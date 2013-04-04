@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-04 17:30:35
+ *   le 2013-04-04 17:44:27
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -30,8 +30,8 @@ $data = array (
     'slogan' => 'Facturer et faire des devis avec SPIP',
     'description' => 'Factures & devis permet d\'éditer, imprimer, archiver facilement vos devis et factures.',
     'prefixe' => 'factures',
-    'version' => '1.0.6',
-    'auteur' => 'Cyril Marion - Ateliers CYM S.A.R.L.',
+    'version' => '1.0.7',
+    'auteur' => 'Cyril Marion - Ateliers CYM',
     'auteur_lien' => 'http://www.cym.fr',
     'licence' => 'GNU/GPL',
     'categorie' => 'divers',
@@ -318,6 +318,12 @@ $data = array (
       'roles' => '',
       'auteurs_liens' => '',
       'vue_auteurs_liens' => '',
+      'echafaudages' => 
+      array (
+        0 => 'prive/squelettes/contenu/objets.html',
+        1 => 'prive/objets/infos/objet.html',
+        2 => 'prive/squelettes/contenu/objet.html',
+      ),
       'autorisations' => 
       array (
         'objet_creer' => '',
@@ -478,6 +484,12 @@ $data = array (
       'roles' => '',
       'auteurs_liens' => '',
       'vue_auteurs_liens' => '',
+      'echafaudages' => 
+      array (
+        0 => 'prive/squelettes/contenu/objets.html',
+        1 => 'prive/objets/infos/objet.html',
+        2 => 'prive/squelettes/contenu/objet.html',
+      ),
       'autorisations' => 
       array (
         'objet_creer' => '',
