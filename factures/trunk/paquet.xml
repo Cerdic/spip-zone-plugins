@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2013-04-03 19:46:31
+		Paquet généré le 2013-04-04 11:22:33
 	-->
 
 	<nom>Factures &amp; devis</nom>
@@ -26,4 +26,6 @@
 
 	<menu nom="factures" titre="facture:titre_factures" parent="menu_edition" icone="images/facture-16.png" action="factures" /> 
 	<menu nom="facture_creer" titre="facture:icone_creer_facture" parent="outils_rapides" icone="images/facture-new-16.png" action="facture_edit" parametres="new=oui" /> 
+	<menu nom="lignes_factures" titre="ligne:titre_lignes_factures" parent="menu_edition" icone="images/ligne-16.png" action="lignes_factures" /> 
+	<menu nom="ligne_creer" titre="ligne:icone_creer_ligne" parent="outils_rapides" icone="images/ligne-new-16.png" action="ligne_edit" parametres="new=oui" /> 
 </paquet>
