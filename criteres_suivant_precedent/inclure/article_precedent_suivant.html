@@ -1,12 +1,12 @@
 
-<BOUCLE_article_precedent(ARTICLES) {precedent}{!par date}
+<BOUCLE_article_precedent(ARTICLES) {precedent}{par date}{inverse #ENV{senstri,0}}
 	{id_rubrique?}
 	{id_mot?}
 	{id_auteur?}
 	{id_groupe?}>
 	[<a href="#URL_ARTICLE" rel="prev" class="spip_in prev" title="[(#TITRE|couper{20}|attribut_html)]">(#CHEMIN{images/precedent.png}|image_reduire{20,20}|inserer_attribut{alt,<:suivant_precedent:alt_lien_prev:>})</a>]
 </BOUCLE_article_precedent>
-<BOUCLE_article_suivant(ARTICLES) {suivant}{!par date}
+<BOUCLE_article_suivant(ARTICLES) {suivant}{par date}{inverse #ENV{senstri,0}}
 	{id_rubrique?}
 	{id_mot?}
 	{id_auteur?}
