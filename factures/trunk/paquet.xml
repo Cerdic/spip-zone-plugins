@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.5"
+	version="1.0.6"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2013-04-04 16:57:27
+		Paquet généré le 2013-04-04 17:30:35
 	-->
 
 	<nom>Factures &amp; devis</nom>

@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_lien_facture' => 'Ajouter ce facture',
+	'ajouter_lien_facture' => 'Ajouter cette facture',
 
 	// E
 	'explication_conditions' => 'Indiquez les conditions de règlement proposées pour cette facture ou ce devis',
@@ -26,10 +26,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_unite' => 'Indiquez une unité relative à cette facture ou ce devis (en général des heures ou des jours)',
 
 	// I
-	'icone_creer_facture' => 'Créer un facture',
-	'icone_modifier_facture' => 'Modifier ce facture',
-	'info_1_facture' => 'Un facture',
-	'info_aucun_facture' => 'Aucun facture',
+	'icone_creer_facture' => 'Créer une facture',
+	'icone_modifier_facture' => 'Modifier cette facture',
+	'info_1_facture' => 'Une facture',
+	'info_aucun_facture' => 'Aucune facture',
 	'info_factures_auteur' => 'Les factures de cet auteur',
 	'info_nb_factures' => '@nb@ factures',
 
@@ -50,18 +50,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_unite' => 'Unité vendue',
 
 	// R
-	'retirer_lien_facture' => 'Retirer ce facture',
-	'retirer_tous_liens_factures' => 'Retirer tous les factures',
+	'retirer_lien_facture' => 'Retirer cette facture',
+	'retirer_tous_liens_factures' => 'Retirer toutes les factures',
 
 	// T
-	'texte_ajouter_facture' => 'Ajouter un facture',
-	'texte_changer_statut_facture' => 'Ce facture est :',
-	'texte_creer_associer_facture' => 'Créer et associer un facture',
+	'texte_ajouter_facture' => 'Ajouter une facture',
+	'texte_changer_statut_facture' => 'Cette facture est :',
+	'texte_creer_associer_facture' => 'Créer et associer une facture',
 	'titre_facture' => 'Facture',
 	'titre_factures' => 'Factures',
 	'titre_factures_rubrique' => 'Factures de la rubrique',
-	'titre_langue_facture' => 'Langue de ce facture',
-	'titre_logo_facture' => 'Logo de ce facture',
+	'titre_langue_facture' => 'Langue de cette facture',
+	'titre_logo_facture' => 'Logo de cette facture',
 );
 
 ?>

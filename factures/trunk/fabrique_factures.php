@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-04 16:57:27
+ *   le 2013-04-04 17:30:35
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -30,7 +30,7 @@ $data = array (
     'slogan' => 'Facturer et faire des devis avec SPIP',
     'description' => 'Factures & devis permet d\'éditer, imprimer, archiver facilement vos devis et factures.',
     'prefixe' => 'factures',
-    'version' => '1.0.5',
+    'version' => '1.0.6',
     'auteur' => 'Cyril Marion - Ateliers CYM S.A.R.L.',
     'auteur_lien' => 'http://www.cym.fr',
     'licence' => 'GNU/GPL',
@@ -294,21 +294,21 @@ $data = array (
       array (
         'titre_objets' => 'Factures',
         'titre_objet' => 'Facture',
-        'info_aucun_objet' => 'Aucun facture',
-        'info_1_objet' => 'Un facture',
+        'info_aucun_objet' => 'Aucune facture',
+        'info_1_objet' => 'Une facture',
         'info_nb_objets' => '@nb@ factures',
-        'icone_creer_objet' => 'Créer un facture',
-        'icone_modifier_objet' => 'Modifier ce facture',
-        'titre_logo_objet' => 'Logo de ce facture',
-        'titre_langue_objet' => 'Langue de ce facture',
+        'icone_creer_objet' => 'Créer une facture',
+        'icone_modifier_objet' => 'Modifier cette facture',
+        'titre_logo_objet' => 'Logo de cette facture',
+        'titre_langue_objet' => 'Langue de cette facture',
         'titre_objets_rubrique' => 'Factures de la rubrique',
         'info_objets_auteur' => 'Les factures de cet auteur',
-        'retirer_lien_objet' => 'Retirer ce facture',
-        'retirer_tous_liens_objets' => 'Retirer tous les factures',
-        'ajouter_lien_objet' => 'Ajouter ce facture',
-        'texte_ajouter_objet' => 'Ajouter un facture',
-        'texte_creer_associer_objet' => 'Créer et associer un facture',
-        'texte_changer_statut_objet' => 'Ce facture est :',
+        'retirer_lien_objet' => 'Retirer cette facture',
+        'retirer_tous_liens_objets' => 'Retirer toutes les factures',
+        'ajouter_lien_objet' => 'Ajouter cette facture',
+        'texte_ajouter_objet' => 'Ajouter une facture',
+        'texte_creer_associer_objet' => 'Créer et associer une facture',
+        'texte_changer_statut_objet' => 'Cette facture est :',
       ),
       'table_liens' => '',
       'vue_liens' => 
@@ -338,8 +338,8 @@ $data = array (
     ),
     1 => 
     array (
-      'nom' => 'Lignes facture',
-      'nom_singulier' => 'Ligne facture',
+      'nom' => 'Lignes de facture',
+      'nom_singulier' => 'Ligne de facture',
       'genre' => 'feminin',
       'logo_variantes' => 'on',
       'table' => 'spip_lignes_factures',
@@ -452,23 +452,23 @@ $data = array (
       'statut' => '',
       'chaines' => 
       array (
-        'titre_objets' => 'Lignes factures',
-        'titre_objet' => 'Lignes facture',
-        'info_aucun_objet' => 'Aucun lignes facture',
-        'info_1_objet' => 'Un lignes facture',
-        'info_nb_objets' => '@nb@ lignes factures',
-        'icone_creer_objet' => 'Créer un lignes facture',
-        'icone_modifier_objet' => 'Modifier ce lignes facture',
-        'titre_logo_objet' => 'Logo de ce lignes facture',
-        'titre_langue_objet' => 'Langue de ce lignes facture',
-        'titre_objets_rubrique' => 'Lignes factures de la rubrique',
-        'info_objets_auteur' => 'Les lignes factures de cet auteur',
-        'retirer_lien_objet' => 'Retirer ce lignes facture',
-        'retirer_tous_liens_objets' => 'Retirer tous les lignes factures',
-        'ajouter_lien_objet' => 'Ajouter ce lignes facture',
-        'texte_ajouter_objet' => 'Ajouter un lignes facture',
-        'texte_creer_associer_objet' => 'Créer et associer un lignes facture',
-        'texte_changer_statut_objet' => 'Ce lignes facture est :',
+        'titre_objets' => 'Lignes de facture',
+        'titre_objet' => 'Ligne de facture',
+        'info_aucun_objet' => 'Aucune ligne de facture',
+        'info_1_objet' => 'Une ligne de facture',
+        'info_nb_objets' => '@nb@ lignes de facture',
+        'icone_creer_objet' => 'Créer une ligne de facture',
+        'icone_modifier_objet' => 'Modifier cette ligne de facture',
+        'titre_logo_objet' => 'Logo de cette ligne de facture',
+        'titre_langue_objet' => 'Langue de cette ligne de facture',
+        'titre_objets_rubrique' => 'Lignes de facture de la rubrique',
+        'info_objets_auteur' => 'Les lignes de facture de cet auteur',
+        'retirer_lien_objet' => 'Retirer cette ligne de facture',
+        'retirer_tous_liens_objets' => 'Retirer toutes les lignes de facture',
+        'ajouter_lien_objet' => 'Ajouter cette ligne de facture',
+        'texte_ajouter_objet' => 'Ajouter une ligne de facture',
+        'texte_creer_associer_objet' => 'Créer et associer une ligne de facture',
+        'texte_changer_statut_objet' => 'Cette ligne de facture est :',
       ),
       'table_liens' => '',
       'vue_liens' => 
