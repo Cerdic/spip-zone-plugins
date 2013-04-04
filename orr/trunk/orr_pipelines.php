@@ -91,6 +91,7 @@ function orr_jquery_plugins($scripts){
     $scripts[] = "javascript/date.js";
     return $scripts;
 }
+
 /**
  * insertion du css
  **/
@@ -100,6 +101,5 @@ function orr_insert_head_css($flux){
     return $flux;
 
 }
-
 
 ?>
