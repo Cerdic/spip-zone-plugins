@@ -1,0 +1,50 @@
+[(#AUTORISER{voir,facture,#ID_FACTURE}|sinon_interdire_acces)]
+<BOUCLE_facture(FACTURES){id_facture}{si #ENV{exec}|=={facture}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,facture,#ID_FACTURE})
+		[(#ID_FACTURE|afficher_qui_edite{facture}|non)
+			[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{<:facture:icone_modifier_facture:>,facture,edit,right ajax preload})]
+		]
+		[(#ID_FACTURE|afficher_qui_edite{facture}|oui)
+			[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{#ID_FACTURE|afficher_qui_edite{facture},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#LIBELLE_FACTURE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{facture-24.png}|balise_img{facture,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{facture,#ID_FACTURE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/facture,id=#ID_FACTURE,id_facture=#ID_FACTURE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,facture,#ID_FACTURE})
+	[(#ID_FACTURE|afficher_qui_edite{facture}|non)
+		[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{<:facture:icone_modifier_facture:>,facture,edit,right ajax preload})]
+	]
+	[(#ID_FACTURE|afficher_qui_edite{facture}|oui)
+		[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE}|icone_verticale{#ID_FACTURE|afficher_qui_edite{facture},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+[(#REM) Affiche les lignes de factures ]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,facture,id_facture,#ID_FACTURE,objet,id_objet},data,#INCLURE{fond=prive/objets/contenu/lignes_facture,id_facture,env}})]})]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,facture,id,#ID_FACTURE},data,'<div class="nettoyeur"></div>'}}
+
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_facture>
+[(#ENV**{exec}|=={facture_edit}|?{#INCLURE{fond=prive/squelettes/contenu/facture_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_facture>
