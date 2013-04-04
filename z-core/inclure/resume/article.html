@@ -14,7 +14,7 @@
 	<BOUCLE_nb_commentaires(FORUMS) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
 		<span class="comments">
 		<span class="sep">|</span>
-		<a[ href="(#URL_ARTICLE|ancre_url{forum})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="icon-comment"></i> (#TOTAL_BOUCLE)]</a>
+		<a[ href="(#URL_ARTICLE|ancre_url{comments})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="icon-comment"></i> (#TOTAL_BOUCLE)]</a>
 		</span>
 		]
 	<//B_nb_commentaires>
