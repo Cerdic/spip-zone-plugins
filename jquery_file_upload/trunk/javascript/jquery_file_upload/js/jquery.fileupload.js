@@ -858,6 +858,7 @@
         _getDroppedFiles: function (dataTransfer) {
             dataTransfer = dataTransfer || {};
             var items = dataTransfer.items;
+            console.log(items);
             if (items && items.length && (items[0].webkitGetAsEntry ||
                     items[0].getAsEntry)) {
                 return this._handleFileTreeEntries(
@@ -959,6 +960,7 @@
                 data = {};
             that._getDroppedFiles(dataTransfer).always(function (files) {
                 data.files = files;
+                console.log(files);
                 if (that._trigger('drop', e, data) !== false) {
                     that._onAdd(e, data);
                 }
@@ -981,10 +983,13 @@
             var ns = this.options.namespace;
             if (this._isXHRUpload(this.options)) {
                 this.options.dropZone
+                    .unbind('dragover.' + ns)
                     .bind('dragover.' + ns, {fileupload: this}, this._onDragOver)
+                    .unbind('drop.' + ns)
                     .bind('drop.' + ns, {fileupload: this}, this._onDrop);
                 this.options.pasteZone
-                    .bind('paste.' + ns, {fileupload: this}, this._onPaste);
+                	.unbind('paste.' + ns)
+                	.bind('paste.' + ns, {fileupload: this}, this._onPaste);
             }
             this.options.fileInput
                 .bind('change.' + ns, {fileupload: this}, this._onChange);
