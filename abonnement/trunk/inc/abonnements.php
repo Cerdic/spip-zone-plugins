@@ -63,4 +63,26 @@ function abonnements_desactiver($id_abonnement){
 	autoriser_exception('modifier', 'abonnement', $id_abonnement, false);
 }
 
+/*
+ * Envoyer un courriel à l'abonné pour lui rappeler combien de temps il lui reste
+ */
+function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $periode){
+	$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
+	
+	$envoyer_mail(
+		$email,
+		_T('abonnement:notification_echeance_sujet_'.$periode, array('duree'=>$duree)),
+		recuperer_fond(
+			'notifications/abonnement_echeance',
+			array(
+				'id_abonnement' => $id_abonnement,
+				'nom' => $nom,
+				'email' => $email,
+				'duree' => $duree,
+				'periode' => $periode
+			)
+		)
+	);
+}
+
 ?>

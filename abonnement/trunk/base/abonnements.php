@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function abonnements_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['abonnements_offres'] = 'abonnements_offres';
 	$interfaces['table_des_tables']['abonnements'] = 'abonnements';
+	$interfaces['table_des_tables']['abonnements_offres_notifications'] = 'abonnements_offres_notifications';
 
 	return $interfaces;
 }
@@ -125,6 +126,25 @@ function abonnements_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
+/*
+ * Déclaration des tables principales non objet
+ */
+function abonnements_declarer_tables_principales($tables) {
+	$tables['spip_abonnements_offres_notifications'] = array(
+		'field' => array(
+			'id_abonnements_offres_notification' => 'bigint(21) not null',
+			'id_abonnements_offre'	=> 'bigint(21) DEFAULT 0 NOT NULL',
+			'duree'					=> 'int(11) NOT NULL DEFAULT 0',
+			'periode'				=> 'varchar(25) NOT NULL DEFAULT ""',
+		),
+		'key' => array(
+			'PRIMARY KEY'			=> 'id_abonnements_offres_notification',
+			'KEY id_abonnements_offre' => 'id_abonnements_offre',
+		),
+	);
+	
+	return $tables;
+}
 
 /**
  * Déclaration des tables secondaires (liaisons)
@@ -142,7 +162,7 @@ function abonnements_declarer_tables_auxiliaires($tables) {
 			"KEY id_abonnements_offre"  => "id_abonnements_offre"
 		)
 	);
-
+	
 	return $tables;
 }
 

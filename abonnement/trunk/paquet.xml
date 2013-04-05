@@ -1,8 +1,8 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="2.0.0"
-	schema="2.0.0"
+	version="2.1.0"
+	schema="2.1.0"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/abonnements-64.png"
@@ -20,16 +20,19 @@
 	<licence>GNU/GPL v3</licence>
 	<necessite nom="saisies" compatibilite="[1.28.1;]" /> 
 	<necessite nom="verifier" compatibilite="[1.0.0;]" /> 
-	<necessite nom="yaml" compatibilite="[1.5.0;]" /> 
+	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+	<necessite nom="facteur" compatibilite="[3.0.1;]" /> 
 
 	<pipeline nom="autoriser" inclure="abonnements_autorisations.php" /> 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/abonnements.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/abonnements.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/abonnements.php" /> 
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/abonnements.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="abonnements_pipelines.php" />
 	<pipeline nom="post_edition" inclure="abonnements_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="abonnements_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="abonnements_pipelines.php" />
 
 	<menu nom="abonnements_offres" titre="abonnementsoffre:titre_abonnementsoffres" parent="menu_publication" icone="images/abonnement-16.png" action="abonnements_offres" /> 
 </paquet>

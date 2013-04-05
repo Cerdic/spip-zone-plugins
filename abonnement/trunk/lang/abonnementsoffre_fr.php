@@ -22,6 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_0' => 'Gratuit',
 	'champ_prix_label' => 'Prix',
 	'champ_titre_label' => 'Titre',
+	'configurer_notifications' => 'Configurer les notifications',
+	'configurer_notifications_quand' => 'Quand ?',
 	
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',

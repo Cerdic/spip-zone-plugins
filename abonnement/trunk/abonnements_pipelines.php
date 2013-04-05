@@ -82,8 +82,23 @@ function abonnements_post_edition($flux){
  * Ajout d'une tache CRON pour vérifier toutes les heures si les abonnements actifs ont une tâche de désactivation
  */
 function abonnements_taches_generales_cron($taches){
-	$taches['abonnements_verifier_desactivation'] = 60 * 60;
+	$taches['abonnements_verifier_desactivation'] = 60 * 60; // toutes les heures
+	$taches['abonnements_verifier_notifications'] = 24 * 3600; // une fois par jour
 	return $taches;
 }
 
+/*
+ * Ajouter la config des notifications
+ */
+function abonnements_affiche_gauche($flux){
+	if ($flux['args']['exec'] == 'abonnements_offre'){
+		$flux['data'] .= recuperer_fond(
+			'prive/squelettes/navigation/inc-abonnements_notifications',
+			array('id_abonnements_offre' => $flux['args']['id_objet'])
+		);
+	}
+	
+	return $flux;
+}
+ 
 ?>

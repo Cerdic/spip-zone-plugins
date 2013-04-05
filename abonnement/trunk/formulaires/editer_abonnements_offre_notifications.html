@@ -1,0 +1,53 @@
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<div class="liste-objets liste-objets-lies abonnements_offres_notifications">
+			<table class="spip liste">
+				<caption><strong class="caption"><:abonnementsoffre:configurer_notifications:></strong></caption>
+				<thead>
+					<tr class="first_row">
+						<th class="duree principale" scope="col'"><:abonnementsoffre:configurer_notifications_quand:></th>
+						<th class="supprimer" scope="col'"><:lien_supprimer|ucfirst:></th>
+					</tr>
+				</thead>
+				<tbody>
+					<BOUCLE_notifications(ABONNEMENTS_OFFRES_NOTIFICATIONS){!par periode}{!par duree}>
+					<tr>
+						<td class="duree principale">
+							[(#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}})]
+						</td>
+						<td class="supprimer">
+							<button class="button link delete" name="supprimer[#ID_ABONNEMENTS_OFFRES_NOTIFICATION]" value="X">
+								<img src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12" alt="X" />
+								<:lien_supprimer|ucfirst:>
+							</button>
+						</td>
+					</tr>
+					</BOUCLE_notifications>
+					<tr>
+						<td colspan="2">Aucune notification</td>
+					</tr>
+					<//B_notifications>
+				</tbody>
+			</table>
+		</div>
+		
+		<ul>
+			#GENERER_SAISIES{#ENV{_saisies}}
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>

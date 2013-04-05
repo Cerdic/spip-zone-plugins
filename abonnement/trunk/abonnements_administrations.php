@@ -15,7 +15,12 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(array('maj_tables', array('spip_abonnements_offres', 'spip_abonnements_offres_liens', 'spip_abonnements')));
-
+	
+	// Ajout de la config des notifications
+	$maj['2.1.0'] = array(
+		array('maj_tables', array('spip_abonnements_offres_notifications'))
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
