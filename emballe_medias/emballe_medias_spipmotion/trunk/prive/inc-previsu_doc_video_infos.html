@@ -13,13 +13,17 @@
 			<div id="em_attentes_#ID_DOCUMENT" class="notice">
 			<BOUCLE_facd_attentes(FACD_CONVERSIONS){id_document=#ID_DOCUMENT}{statut IN "en_cours","non","erreur"}{0,1}>
 			<p>
+				[(#STATUT|=={erreur}|oui)[(#SET{encodage_en_erreur,oui})]
+				<:spipmotion:info_document_encodage_en_erreur:>]
+				[(#STATUT|=={erreur}|non)
 				[(#STATUT|=={non}|oui)<:em_spipmotion:message_document_attente_encodage:>]
-				[(#STATUT|=={non}|non)<:em_spipmotion:message_document_encours_encodage:>]
+				[(#STATUT|=={non}|non)<:em_spipmotion:message_document_encours_encodage:>]]
 			</p>
 			</BOUCLE_facd_attentes>
+			[(#GET{encodage_en_erreur}|=={oui}|non)
 			<div class="actions act">
 				<a href="[(#ENV{redirect,#SELF}|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="facd_recharge_#ID_DOCUMENT" class="bouton ajax"><:facd:lien_recharger:></a>
-			</div>
+			</div>]
 			</div>
 			</B_facd_attentes>
 			[(#EXTENSION|in_array{[(#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY})]}
