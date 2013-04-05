@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_url_site' => 'Vous pouvez indiquer une url permettant de voir le projet en ligne',
 
 	// I
+	'icone_creer_sous_projet' => 'Créer un sous-projet',
 	'icone_creer_projet' => 'Créer un projet',
 	'icone_modifier_projet' => 'Modifier ce projet',
 	'info_1_projet' => 'Un projet',
