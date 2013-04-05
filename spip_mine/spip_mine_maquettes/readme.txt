@@ -1,1 +1,0 @@
-aurait pu s'appeler : spip_designs

@@ -1,3 +1,0 @@
-05/08/2009 :
-    - install / désinstall automatique des tables
-    - désinstall du plugin depuis l'interface (voir plugin annonces)
