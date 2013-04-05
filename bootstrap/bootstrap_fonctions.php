@@ -78,6 +78,7 @@ function bootstrap_affichage_final($flux){
 		AND isset($GLOBALS['visiteur_session']['statut'])
 		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
 		AND $GLOBALS['visiteur_session']['webmestre']=='oui'
+		AND strpos($flux,"<!-- insert_head -->")!==false
 		AND $p=stripos($flux,"</body>")
 		AND $f = find_in_path("js/hashgrid.js")
 	){
