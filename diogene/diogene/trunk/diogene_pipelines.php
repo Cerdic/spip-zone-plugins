@@ -189,13 +189,13 @@ function diogene_editer_contenu_objet($flux){
 					$type='article';
 
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html')){
-					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']);
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']));
 				}
 				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html')){
-					$saisie .= recuperer_fond('formulaires/selecteur_statut_'.$type,$args['contexte']);
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$type,$args['contexte']));
 				}else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_objet.html') AND $type != 'rubrique'){
 					$args['contexte']['type'] = $type;
-					$saisie .= recuperer_fond('formulaires/selecteur_statut_objet',$args['contexte']);
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet',$args['contexte']));
 				}
 				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims',"\\1<ul>".$saisie."</ul>\\2",$flux['data'],1);
 			}

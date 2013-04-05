@@ -59,19 +59,22 @@ function balise_URL_ARTICLE($p) {
  */
 function diogene_nombre_attente($id_diogene){
 	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-	$diogene = sql_fetsel('id_secteur,nombre_attente','spip_diogenes','id_diogene='.intval($id_diogene).' AND objet IN ("article","emballe_media")');
-	if(!$diogene['nombre_attente'] || !intval($id_auteur) || ($id_auteur < 1))
+	if(!intval($id_auteur) || ($id_auteur < 1))
 		return false;
-	else {
-		if($GLOBALS['visiteur_session']['statut'] == "0minirezo")
-			return 'infinite';
+	if($GLOBALS['visiteur_session']['statut'] == "0minirezo")
+		return 'infinite';
+	
+	$diogene = sql_fetsel('id_secteur,nombre_attente','spip_diogenes','id_diogene='.intval($id_diogene).' AND objet IN ("article","emballe_media")');
+
+	if($diogene['nombre_attente'] == 0)
+		return 'infinite';
 		
-		$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($id_auteur).' AND art.id_secteur='.intval($diogene['id_secteur']).' AND statut NOT IN ("publie","poubelle")');
-		$nombre_attente = ($diogene['nombre_attente'] - $nb_articles);
-		if($nombre_attente < 0)
-			$nombre_attente = 0;
-		return intval($nombre_attente);
-	}
+	$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($id_auteur).' AND art.id_secteur='.intval($diogene['id_secteur']).' AND statut NOT IN ("publie","poubelle")');
+	$nombre_attente = ($diogene['nombre_attente'] - $nb_articles);
+	if($nombre_attente < 0)
+		$nombre_attente = 0;
+	return intval($nombre_attente);
+
 }
 
 // TODO : passer le define dans une valeur de config
