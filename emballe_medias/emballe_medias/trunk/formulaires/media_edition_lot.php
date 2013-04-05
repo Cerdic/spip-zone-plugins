@@ -65,9 +65,8 @@ function formulaires_media_edition_lot_verifier_dist(){
 		$medias = _request('medias');
 		
 		foreach(objet_info('article','champs_editables') as $champ){
-			if(_request($champ) && _request($champ) == ''){
+			if(_request($champ) && _request($champ) == '')
 				set_request($champ,false);
-			}
 		}
 		
 		$erreurs = formulaires_editer_objet_verifier('article',$medias[0]);
@@ -75,7 +74,7 @@ function formulaires_media_edition_lot_verifier_dist(){
 		if(_request('titre') != '' && !_request('forcer_traiter_titre')){
 			foreach($medias as $id_article){
 				$titre = sql_getfetsel('titre','spip_articles','id_article='.intval($id_article));
-				if(!preg_match(',^(IMG \d+|imgp\d+|DSC\d+|photo\d+|image\.).*,',$titre)){
+				if(!preg_match(',^(IMG \d+|img \d+|imgp\d+|DSC\d+|photo\d+|image\.).*,',$titre)){
 					$erreurs['titre_demander_validation'] = _T('emballe_medias:erreur_demander_validation_titre');
 					break;
 				}
@@ -96,9 +95,8 @@ function formulaires_media_edition_lot_traiter_dist(){
 	$medias_a_traiter = _request('medias');
 	
 	$statut = _request('statut');
-	if(($statut && !in_array($statut,array('prop','prepa','publie','poubelle'))) || ($statut == '')){
+	if(($statut && !in_array($statut,array('prop','prepa','publie','poubelle'))) || ($statut == ''))
 		set_request('statut',NULL);
-	}
 
 	$titre = _request('titre');
 	if($titre != ''){
