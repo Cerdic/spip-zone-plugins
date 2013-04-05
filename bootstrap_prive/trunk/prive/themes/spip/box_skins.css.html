@@ -27,16 +27,17 @@
 /* ====== Contour blocks ====== */
 /* remove *background-image:" to default to square corners for IE */
 /* ----- simple (extends box) ----- */
-.simple .inner {border:1px solid #ccc;background-color:#fcfcfc;color:#333;}
+.simple .inner {border:none;background-color:#f5f5f5;color:#333;}
+.simple.box.fiche_objet .inner { background-color: #ffffff; border: 1px solid #f5f5f5;}
 .simple .inner .hd {}
 .simple b{}
 /* ----- info (extends box) ----- */
-.info .inner {border:2px solid #ENV{claire};background:#fcfcfc;}
+.info .inner {border:2px solid #ENV{claire};background:#f5f5f5;}
 .info .inner .hd {}
 .info b{}
 /* ----- note (extends box) ----- */
-.note,.note .inner{border:1px solid #c2c2c2;}
-.note .inner{border-color:#fff; border-width:4px; background-color:[#(#ENV{claire}|couleur_eclaircir{0.85})];}
+.note,.note .inner{border:none;}
+.note .inner{border: none; background-color:[#(#ENV{claire}|couleur_eclaircir{0.96})];}
 .note .inner .hd {}
 
 /* ----- raccourcis (extends box) ----- */
@@ -49,9 +50,11 @@
 
 /* ----- basic (extends box) ----- */
 .basic {/*margin-bottom: -1px*/}
-.basic .inner {/*padding-bottom: 1px;*/border: 1px solid #aaa;}
+.basic .inner {padding:0;/*padding-bottom: 1px;*/border: none;}
 .basic .inner .hd {}
 .basic b{}
+.box.basic .inner {padding:0;}
+
 
 /* ----- error, success, notice (extends box) ----- */
 .box.error, .box.success, .box.notice {padding:0;backround-image:none;}
