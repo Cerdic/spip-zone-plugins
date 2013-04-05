@@ -149,7 +149,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
  * @param array $env L'environnement, contenant normalement la réponse à la saisie
  * @return string Retour le HTML des vues
  */
-function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0){
+function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0, $format_brut=false) {
     // Si le paramètre n'est pas bon ou que c'est un conteneur, on génère du vide
     if (!is_array($saisie) or (isset($saisie['saisies']) and $saisie['saisies']))
         return '';
@@ -177,10 +177,104 @@ function formidable_analyser_saisie($saisie, $valeurs=array(), $reponses_total=0
     }
 
     // On génère la saisie
-    return recuperer_fond(
-        'saisies-analyses/_base',
-        $contexte
-    );
+    if ($format_brut) {
+        return analyser_saisie($contexte);
+    } else {
+        return recuperer_fond(
+            'saisies-analyses/_base',
+            $contexte
+        );
+    }
+}
+
+/*
+ * Renvoie une ligne de réponse sous la forme d'un tableau
+ *
+ * @param array $saisie Un tableau décrivant une saisie
+ * @return array Tableau contenant une ligne
+ */
+function analyser_saisie($saisie) {
+    if (!isset($saisie['type_saisie']) or $saisie['type_saisie'] == '')
+        return '';
+
+    $ligne = array();
+
+    switch($saisie['type_saisie']) {
+        case 'selecteur_rubrique' :
+        case 'selecteur_rubrique_article' :
+        case 'selecteur_article' :
+            $ligne['plein'] = count(array_filter($saisie['valeurs']));
+            $ligne['vide'] = count(array_diff_key($saisie['valeurs']
+                , array_filter($saisie['valeurs'])));
+        break;
+        case 'radio' :
+        case 'selection' :
+        case 'selection_multiple' :
+        case 'checkbox' :
+            $stats = array();
+            foreach($saisie['valeurs'] as $valeur) {
+                if (is_array($valeur)) {
+                    foreach($valeur as $choix) {
+                        if (isset($stats["choix-$choix"]))
+                            $stats["choix-$choix"]++;
+                        else $stats["choix-$choix"] = 1;
+                    }
+                } else {
+                    if (isset($stats["choix-$valeur"]))
+                            $stats["choix-$valeur"]++;
+                        else $stats["choix-$valeur"] = 1;
+                }
+            }
+            $datas = is_string($saisie['datas'])
+                ? saisies_chaine2tableau($saisie['datas'])
+                : $saisie['datas'];
+            foreach($datas as $key => $val) {
+                $nb = (isset($stats["choix-$key"]))
+                    ? $stats["choix-$key"]
+                    : 0;
+                $ligne[$val] = $nb;
+            }
+        break;
+        case 'destinataires' :
+            $stats = array();
+            foreach($saisie['valeurs'] as $valeur) {
+                foreach($valeur as $choix) {
+                    if (isset($stats["choix-$choix"]))
+                        $stats["choix-$choix"]++;
+                    else $stats["choix-$choix"] = 1;
+                }
+            }
+            foreach($stats as $key => $val) {
+                $key = str_replace('choix-', '', $key);
+                if ($key == '') $key = '<valeur vide>';
+                $auteur = sql_getfetsel('nom','spip_auteurs',"id_auteur=$key");
+                $ligne[$auteur] = $val;
+            }
+        break;
+    }
+
+    $vide = 0;
+    foreach($saisie['valeurs'] as $valeur) {
+        if ($valeur == '') $vide++;
+        switch($saisie['type_saisie']) {
+            case 'case' :
+            case 'oui_non' :
+                if(isset($ligne['oui']) == false) $ligne['oui'] = 0;
+                if(isset($ligne['non']) == false) $ligne['non'] = 0;
+                if ($valeur) $ligne['oui']++; else $ligne['non']++;
+            break;
+            case 'input' :
+            case 'hidden' :
+            case 'explication' :
+            break;
+        }
+    }
+    $ligne['sans_reponse'] = $vide;
+    $ligne['header'] = $saisie['label'] != ''
+        ? $saisie['label']
+        : $saisie['type_saisie'];
+
+    return $ligne;
 }
 
 

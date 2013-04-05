@@ -31,9 +31,9 @@ function action_exporter_analyse_reponses_dist($arg=null) {
 		$res = sql_select(
             array('nom, valeur'),
 
-            'intranet_formulaires_reponses_champs AS FRC,
-            intranet_formulaires_reponses AS FR,
-            intranet_formulaires AS F',
+            'spip_formulaires_reponses_champs AS FRC,
+            spip_formulaires_reponses AS FR,
+            spip_formulaires AS F',
 
             "FRC.id_formulaires_reponse=FR.id_formulaires_reponse
             AND FR.statut='publie'
