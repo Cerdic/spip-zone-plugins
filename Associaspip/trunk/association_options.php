@@ -1365,8 +1365,8 @@ function filtre_selecteur_asso_statut($sel='') {
     $res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
     $res .= '>'. _T('asso:actifs') ."</option>\n";
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
-		$res .= '<option value="'.$statut.'"'
-		$res .= ($sel==$statut?' selected="selected"':'')
+		$res .= '<option value="'.$statut.'"';
+		$res .= ($sel==$statut?' selected="selected"':'');
 		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut)
 		. "</option>\n";
 	}
@@ -1420,7 +1420,7 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
 			$res .= ' selected="selected"';
 			$pager .= "\n<strong>$val[annee]</strong>";
 		} else {
-			$pager .= ' <a href="'.$url.'&annee='.$val['annee']) .'">'.$val['annee']."</a>\n";
+			$pager .= ' <a href="'.$url.'&annee='.$val['annee'] .'">'.$val['annee']."</a>\n";
 		}
 		$res .= '>'.$val['annee']."</option>\n";
     }
@@ -1862,35 +1862,35 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
  *   Total des depenses
  * @return string $res
  *   Table HTML presentant les recettes (sur une ligne) et les depenses (sur une autre ligne), puis le solde (sur une derniere ligne)
- *
- * @attention
- *   Tous ces parametres sont facultatifs, mais un tableau est quand meme genere dans tous les cas !
  */
 function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) ."</caption>\n";
 	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;
-#	if ($recettes) {
+	if ($recettes) {
 		$res .= "<tr class='impair'>"
 		. '<th scope="row" class="entree">'. _T('asso:bilan_recettes') ."</th>\n"
 		. '<td class="decimal">' .association_formater_prix($recettes). ' </td>'
 		. "</tr>\n";
-#	}
+	}
 	$depenses = is_array($somme_depenses) ? call_user_func_array('sql_getfetsel', $somme_depenses) : $somme_depenses ;
-#	if ($depenses) {
+	if ($depenses) {
 		$res .= '<tr class="pair">'
 		. '<th scope="row" class="sortie">'. _T('asso:bilan_depenses') ."</th>\n"
 		. '<td class="decimal">'.association_formater_prix($depenses) ."</td>\n"
 		. "</tr>\n";
-#	}
-	if ($recettes && $depenses) {
+	}
+	if (!$recettes && !$depenses) { // ne rien afficher si les deux sont a zero !
+		return '';
+	}
+	if ($recettes && $depenses) { // on va afficher le solde si l'un des deux ne vaut pas zero
 		$solde = $recettes-$depenses;
 		$res .= '<tr class="'.($solde>0?'impair':'pair').'">'
 		. '<th scope="row" class="solde">'. _T('asso:bilan_solde') ."</th>\n"
 		. '<td class="decimal">'.association_formater_prix($solde)."</td>\n"
 		. "</tr>\n";
 	}
-	return $res.'</table>';
+	return "$res</table>\n";
 }
 
 /** @} */
