@@ -6,37 +6,77 @@
 
 ]
 <!--#navigation-->
-<div class="box raccourcis">
-	<div class="inner"><div class="bd amap-nav">
-	<ul>
-		<li class="subMenu"><a href="#URL_ECRIRE{amapiens}" class="page_accueil [(#ENV{exec}|=={amapiens}|oui)on]" title="<:amap:liste_amapiens:>"><:amap:liste_amapiens:></a></li>
-		<!-- Gestion de panier -->
-		<li class="subMenu"><a href="#URL_ECRIRE{panier_liste}" class="page_accueil [(#ENV{exec}|=={panier_liste}|oui)on]" title="<:amap:liste_paniers:>"><:amap:liste_paniers:></a></li>
-		[(#ENV{exec}|=={panier_liste}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{panier_enregistre}" class="options" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		[(#ENV{exec}|=={panier_enregistre}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{panier_enregistre}" class="options [(#ENV{exec}|=={panier_enregistre}|oui)on]" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		<!-- Gestion des livraisons -->
-		<li class="subMenu"><a href="#URL_ECRIRE{livraison_liste}" class="page_accueil [(#ENV{exec}|=={livraison_liste}|oui)on]" title="<:amap:liste_livraisons:>"><:amap:liste_livraisons:></a></li>
-		[(#ENV{exec}|=={livraison_liste}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{livraison_enregistre}" class="options" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		[(#ENV{exec}|=={livraison_enregistre}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{livraison_enregistre}" class="options [(#ENV{exec}|=={livraison_enregistre}|oui)on]" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		<!-- Gestion des responsables -->
-		<li class="subMenu"><a href="#URL_ECRIRE{responsable_liste}" class="page_accueil [(#ENV{exec}|=={responsable_liste}|oui)on]" title="<:amap:liste_responsables:>"><:amap:liste_responsables:></a></li>
-		[(#ENV{exec}|=={responsable_liste}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{responsable_enregistre}" class="options" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		[(#ENV{exec}|=={responsable_enregistre}|oui)
-			<li class="subMenu"><a href="#URL_ECRIRE{responsable_enregistre}" class="options [(#ENV{exec}|=={responsable_enregistre}|oui)on]" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
-		]
-		<!-- Gestion de l'impression -->
-		<li class="subMenu"><a href="#URL_ECRIRE{impression}" class="page_accueil [(#ENV{exec}|=={impression}|oui)on]" title="<:amap:impression:>"><:amap:impression:></a></li>
+<ul class="liste_items sous_navigation">
+	<li class="item [(#ENV{exec}|=={amapiens}|oui)on execfound]">
+		<a href="#URL_ECRIRE{amapiens}" title="<:amap:liste_amapiens:>">
+			<i class="amap_page_accueil"></i><:amap:liste_amapiens:>
+		</a>
+	</li>
+	<!-- Gestion de panier -->
+	<li class="item [(#ENV{exec}|=={panier_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{panier_liste}" title="<:amap:liste_paniers:>">
+			<i class="amap_page_accueil"></i><:amap:liste_paniers:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={panier_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{panier_enregistre}" title="<:amap:enregistrement:>">
+				<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={panier_enregistre}|oui)
+		<li class="item [(#ENV{exec}|=={panier_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{panier_enregistre}" title="<:amap:enregistrement:>">
+				<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion des livraisons -->
+	<li class="item [(#ENV{exec}|=={livraison_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{livraison_liste}" title="<:amap:liste_livraisons:>">
+			<i class="amap_page_accueil"></i><:amap:liste_livraisons:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={livraison_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{livraison_enregistre}" title="<:amap:enregistrement:>">
+			<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={livraison_enregistre}|oui)
+		<li class="item [(#ENV{exec}|=={livraison_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{livraison_enregistre}" title="<:amap:enregistrement:>">
+			<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion des responsables -->
+	<li class="item [(#ENV{exec}|=={responsable_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{responsable_liste}" title="<:amap:liste_responsables:>">
+			<i class="amap_page_accueil"></i><:amap:liste_responsables:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={responsable_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{responsable_enregistre}" title="<:amap:enregistrement:>">
+			<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={responsable_enregistre}|oui)
+		<li class="item [(#ENV{exec}|=={responsable_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{responsable_enregistre}" title="<:amap:enregistrement:>">
+			<i class="amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion de l'impression -->
+	<li class="item [(#ENV{exec}|=={impression}|oui)on execfound]">
+		<a href="#URL_ECRIRE{impression}" title="<:amap:impression:>">
+			<i class="amap_page_accueil"></i><:amap:impression:>
+		</a>
+	</li>
 	</ul>
-	</div></div>
-</div>
 <!--/#navigation-->
