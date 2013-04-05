@@ -155,6 +155,11 @@ function zcore_insert_head_css($flux){
 	$contenu = z_blocs(false);
 	$contenu = reset($contenu);
 	$flux = "<script type='text/javascript'>var var_zajax_content='$contenu';</script>" . $flux;
+
+	if (find_in_path('inc-insert-head-css.html')){
+		$flux .= recuperer_fond('inc-insert-head-css',array());
+	}
+
 	return $flux;
 }
 

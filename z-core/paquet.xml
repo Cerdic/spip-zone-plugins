@@ -1,8 +1,8 @@
 <paquet
 	prefix="Zcore"
 	categorie="squelette"
-	version="2.2.0"
-	etat="test"
+	version="2.2.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/z-core-32.png"
 	documentation="http://www.yterium.net/108"
