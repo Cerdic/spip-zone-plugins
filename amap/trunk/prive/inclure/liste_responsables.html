@@ -22,9 +22,9 @@
 	<tbody>
 	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {tri date_distribution}{pagination 20}>
 	<tr>
-		<td class='date_distribution' scope='col'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
-		<td class='responsables' scope='col'><BOUCLE_prod(AUTEURS){tous}{id_auteur}><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_prod></td>
-		<td class='action' scope='col'>
+		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		<td class='responsables'><BOUCLE_prod(AUTEURS){tous}{id_auteur}><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_prod></td>
+		<td class='action'>
 			<a href='[(#URL_ECRIRE{responsable_enregistre}|parametre_url{id_amap_responsable,#ID_AMAP_RESPONSABLE})]'><:amap:action_modifier:></a>
 		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_amap_responsable,#ID_AMAP_RESPONSABLE,#SELF})]'><:amap:action_supprimer:></a>
 		</td>
