@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin DayFill - Gestionnaire de temps pour Spip 2.0
+ * Plugin DayFill - Gestionnaire d'activitÃ©s pour Spip
  * Licence GPL (c) 2010 - Ateliers CYM
  *
  */
 
-spip_log('options bien chargées', 'dayfile');
+spip_log('options bien chargï¿½es', 'dayfile');
 
 //action_purger_dist();
 

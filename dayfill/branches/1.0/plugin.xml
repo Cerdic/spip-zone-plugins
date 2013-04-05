@@ -1,7 +1,7 @@
 <plugin>
-	<nom><multi>[en]DayFill - Time tracer[fr]D&eacute;file - Gestionnaire de temps</multi></nom>
+	<nom><multi>[en]DayFill - Activities tracer[fr]D&eacute;file - Gestionnaire d'activit&eacute;s</multi></nom>
 	<icon>images/dayfill-32.png</icon>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
 	<licence>GPL</licence>
 	<etat>dev</etat>
@@ -9,9 +9,9 @@
 	</description>
 	<lien></lien>
 	<prefix>dayfill</prefix>
-	
+
 	<options>dayfill_options.php</options>
-	
+
 	<onglet id="dayfill" parent="configuration">
 		<icone>images/dayfill-24.png</icone>
 		<titre>dayfill:titre_page_dayfill</titre>
@@ -28,8 +28,8 @@
 		<nom>insert_head</nom>
 		<inclure>dayfill_pipelines.php</inclure>
 	</pipeline>
-	
-	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<necessite id="SPIP" version="[2.1.0;2.1.99]]" />
 	<necessite id="cfg" version="[1.16.0;]" />
 	<utilise id="spimine" version="[1.0;]" />
 
