@@ -6,7 +6,8 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * 2008-2013 - Distribué sous licence GNU/GPL
- *
+ * 
+ * Récupération des metadonnées d'un fichier via mediainfo : http://mediainfo.sourceforge.net/fr
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -14,8 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Récupération des métadonnées via MediaInfo
  * 
+ * On passe un chemin de fichier en argument et si ce fichier existe, mediainfo renvoit 
+ * les metadatas intéressantes dans un array
+ * 
  * @param string $chemin
- * 		le chemin du fichier à analyser
+ * 		Le chemin du fichier à analyser
  * @return array $infos
  * 		Un tableau des informations récupérées
  */
@@ -25,6 +29,10 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		include_spip('inc/filtres');
 		include_spip('inc/charset');
 		
+		/**
+		 * On enregistre les metadonnées dans un fichier xml 
+		 * qui sera traité par la suite
+		 */
 		ob_start();
 		passthru("mediainfo -f --Output=XML '$chemin' --LogFile=$chemin.xml");
 		ob_end_clean();
@@ -61,8 +69,21 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['encodeur'] = $info[0]['Writing_library'][0];
 					if(!$infos['encodeur'])
 						$infos['encodeur'] = $info[0]['Writing_application'][0];
+					
+					if(isset($info[0]['comapplequicktimelocationISO6709'][0])){
+						spip_log($info[0]['comapplequicktimelocationISO6709'][0],'test');
+						$coords = preg_match('/((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)\//',$info[0]['comapplequicktimelocationISO6709'][0],$matches);
+						if(isset($matches[1]) && isset($matches[3])){
+							$infos['lat'] = $matches[1];
+							$infos['lon'] = $matches[3];
+						}
+					}
 					/**
-					 * Récupération de la cover
+					 * Récupération de la cover (pour les fichiers audio)
+					 * 
+					 * On écrit l'image dans le répertoire local/cache-spipmotion_logo
+					 * On ajoute la vignette en base de donnée (c'est un document en mode vignette)
+					 * On ajoute id_vignette dans l'array d'info qui sera ensuite utilisé
 					 */
 					if($info[0]['Cover_Data'][0]){
 						$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
@@ -94,10 +115,8 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
 							$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
 				
-							if (is_numeric(reset($ajoute))
-							  AND $id_vignette = reset($ajoute)){
+							if (is_numeric($id_vignette = reset($ajoute)))
 							  	$infos['id_vignette'] = $id_vignette;
-							}
 							spip_unlink($dest);
 						}
 					}
@@ -150,6 +169,9 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						}
 					}
 				}
+				/**
+				 * Les infos techniques vidéo
+				 */
 				if($track == 'track type="Video"'){
 					if(!$infos['titre'])
 						$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : '';
@@ -189,6 +211,9 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['rotation'] = intval($info[0]['Rotation'][0]);
 					$infos['hasvideo'] = 'oui';
 				}
+				/**
+				 * Les infos techniques audio
+				 */
 				if($track == 'track type="Audio"'){
 					$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
 					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
@@ -196,26 +221,29 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 					$infos['audiocodec'] = $info[0]['Codec'][0];
 					$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
-					if($infos['audiocodec'] == 'AAC LC'){
+					if($infos['audiocodec'] == 'AAC LC')
 						$infos['audiocodecid'] = 'mp4a.40.2';
-					}else if($infos['audiocodec'] == 'MPA1L3'){
+					else if($infos['audiocodec'] == 'MPA1L3')
 						$infos['audiocodecid'] = 'mp3a';
-					}else{
+					else
 						$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
-					}
-					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode']){
+					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode'])
 						$infos['hasaudio'] = 'oui';
-					}
 				}
 			}
+			/**
+			 * Suppression du fichier temporaire ayant l'ensemble des metadonnées
+			 */
 			spip_unlink($chemin.'.xml');
 		}
+		/**
+		 * On met l'ensemble des metas dans le champs metadatas
+		 */
+		$infos['metadatas'] = serialize(array('Retrieved infos in database' => $infos));
 	}
-	else{
-		spip_log('fichier_non_existant','elix_deja_base');
-	}
-	$metas['Retrieved infos in database'] = $infos;
-	//$infos['metadatas'] = serialize($metas);
+	else
+		spip_log('fichier_non_existant');
+	
 	return $infos;
 }
 ?>

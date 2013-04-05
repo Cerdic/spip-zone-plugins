@@ -5,8 +5,9 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
- *
+ * 2008-2013 - Distribué sous licence GNU/GPL
+ * 
+ * Récupération de metadonnés d'un fichier audio ou vidéo
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -86,13 +87,15 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	
 	/**
 	 * Récupération des métadonnées par mediainfo
+	 * cf inc/spipmotion_mediainfo.php
 	 */
 	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
 		$infos = $mediainfo($fichier);
 	}
 	/**
-	 * Récupérayion des métadonnées de ffprobe
+	 * Récupération des métadonnées de ffprobe
+	 * cf inc/spipmotion_ffprobe.php
 	 */
 	$infos_ffprobe = array();
 	if(!$GLOBALS['meta']['spipmotion_ffprobe_casse']){
@@ -104,16 +107,15 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		}
 	}
 	
-	if(strlen($document['titre']) > 0){
+	if(strlen($document['titre']) > 0)
 		unset($infos['titre']);
-	}
-	if(strlen($document['descriptif']) > 0){
+
+	if(strlen($document['descriptif']) > 0)
 		unset($infos['descriptif']);
-	}
+
 	foreach($infos as $key => $val){
-		if(!$val){
+		if(!$val)
 			unset($infos[$key]);
-		}	
 	}
 	
 	/**
@@ -125,19 +127,18 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if(!isset($infos[$champ]))
 			$infos[$champ] = '';
 		if(is_null($infos[$champ]) OR ($infos[$champ]=='')){
-			if(_request($champ)){
+			if(_request($champ))
 				$infos[$champ] = _request($champ);
-			}else {
+			else
 				unset($infos[$champ]);	
-			}
 		}
 	}
-	$infos['taille'] = @intval(filesize($fichier));
 	
 	/**
 	 * La récupération de duree est importante
 	 * pour les vignettes
-	 * Si le logiciel de récupération de métadonnées ne sait pas la récupérer, on utilise celle du document original
+	 * Si le logiciel de récupération de métadonnées ne sait pas la récupérer, 
+	 * on utilise celle du document original
 	 */
 	if(!$infos['duree'] && ($document['mode'] == 'conversion')){
 		$doc_orig = sql_getfetsel('lien.id_objet',
@@ -151,9 +152,9 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	 * Filesize tout seul est limité à 2Go
 	 * cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
 	 */
-	if($infos['taille'] == '2147483647'){
+	$infos['taille'] = @intval(filesize($fichier));
+	if($infos['taille'] == '2147483647')
 		$infos['taille'] = sprintf("%u", filesize($fichier));
-	}
 	
 	if($logo){
 		$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
@@ -162,6 +163,61 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			$infos['id_vignette'] = $id_vignette;
 	}
 
+	/**
+	 * Si on a gis et que les fonctions de récupération de metadonnés nous ont renvoyé :
+	 * -* lat = la latitude;
+	 * -* lon = la longitude;
+	 * 
+	 * Deux cas :
+	 * -* Si on a un id_document numérique 
+	 * -** On recherche si on a déjà un point lié au document et on le modifie
+	 * -** Sinon on crée de nouvelles coordonnées
+	 * -* Si on n'a pas d'id_document (cas des metadonnées récupérées par les fonctions metadatas/....php)
+	 * -** On crée un point avec les coordonnées et on envoit dans le $_POST id_gis_meta 
+	 * pour que le point soit lié dans le pipeline post_edition
+	 */
+	if(defined('_DIR_PLUGIN_GIS') && is_numeric($infos['lat']) && is_numeric($infos['lon'])){
+		include_spip('inc/config');
+		$zoom = lire_config('gis/zoom',4);
+		$config = @unserialize($GLOBALS['meta']['gis']);
+		$c = array(
+			'titre' => $infos['titre'] ? $infos['titre'] : basename($fichier),
+			'lat'=> $infos['lat'],
+			'lon' => $infos['lon'],
+			'zoom' => $zoom
+		);
+
+		if (defined('_DIR_PLUGIN_GISGEOM')) {
+			$geojson = '{"type":"Point","coordinates":['.$infos['lon'].','.$infos['lat'].']}';
+			set_request('geojson',$geojson);
+		}
+		
+		include_spip('action/editer_gis');
+		
+		if(intval($id_document)){
+			if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
+				/**
+				 * Des coordonnées sont déjà définies pour ce document => on les update
+				 */ 
+				revisions_gis($id_gis,$c);
+			}else{
+				/**
+				 * Aucune coordonnée n'est définie pour ce document  => on les crée
+				 */ 
+				$id_gis = insert_gis();
+				revisions_gis($id_gis,$c);
+				lier_gis($id_gis, 'document', $id_document);
+			}
+		}else{
+			/**
+			 * Aucune coordonnée n'est définie pour ce document  => on les crée
+			 * On ajoute dans le $_POST id_gis_meta qui sera utilisable dans post_edition
+			 */ 
+			$id_gis = insert_gis();
+			revisions_gis($id_gis,$c);
+			set_request('id_gis_meta',$id_gis);
+		}
+	}
 	/**
 	 * Si on a $only_return à true, on souhaite juste retourner les metas, sinon on les enregistre en base
 	 * Utile pour metadatas/video par exemple
@@ -175,6 +231,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			include_spip('action/editer_document');
 			document_modifier($id_document, $infos);
 		}
+		
 		return true;
 	}
 	return $infos;

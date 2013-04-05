@@ -63,6 +63,18 @@ function spipmotion_post_edition($flux){
 		$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 		
 		/**
+		 * Si les metadatas/* on renvoyé un id_gis_meta, on l'associe au document
+		 */
+		if(defined('_DIR_PLUGIN_GIS') && intval(_request('id_gis_meta'))){
+			/**
+			 * Si on reçoit un id_gis_meta dans l'environnement,
+			 * c'est que cela vient d'une récupération de metas après upload de document
+			 * dans spipmotion par exemple
+			 */
+			lier_gis(intval(_request('id_gis_meta')), 'document', $id_document);
+		}
+		
+		/**
 		 * Si on ajoute le document et que :
 		 * -* son extension est ogg
 		 * -* il a une piste vidéo
