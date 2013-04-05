@@ -212,20 +212,21 @@
 					 * Si le retour n'est pas numérique, il y a une erreur quelque part
 					 * Il vaut mieux que l'on rafraichisse la page pour éviter tout déborderment par la suite
 					 */
-					if((isNaN(parseFloat(data.result.message.id_objet)) || !isFinite(data.result.message.id_objet))){
+					if((isNaN(parseFloat(data.result.message.id_objet)) || !isFinite(data.result.message.id_objet)))
 						window.location.reload(true);
-					}
 					
 					/**
-					 * Plus de fichiers possibles? on vire le form d'upload
+					 * Plus de fichiers possibles en upload
+					 * On détruit le formulaire au stop
+					 * On recharge le formulaire du diogene
 					 */
 					if(data.maxNumberOfFiles == 0){
 						jQuery('.em_charger_fichiers,#em_form_upload,.jfupload').fadeOut().detach();
 						jQuery('#formulaire_diogene').ajaxReload();
+						$('#[(#ENV{id_formulaire,fileupload})]').bind('fileuploadstop', function (e) {$(this).data('fileupload').destroy();})
 					}else{
-						if(that.disabled){
+						if(that.disabled)
 							that.enable();
-						}
 						$('.em_message_file_upload_limit .number').html(data.maxNumberOfFiles);
 					}
 					$('[(#ENV{selecteur_recharger,#ARRAY}|implode{','})]').ajaxReload();
@@ -244,7 +245,7 @@
 			var lastDrag = 0;
 			var DROP_TARGETS_ARE_SHOWING = false;
 
-			$('body')[0].addEventListener('dragenter', function(e){
+			$(document).unbind('dragenter').bind('dragenter', function(e){
 				lastDrag = +new Date;  //this is used later to determine if the dragged file leaves your app viewport
 				if(!DROP_TARGETS_ARE_SHOWING){ //make sure it's not a link that's being dragged
 					$('.ui-fileupload').each(function(){
@@ -267,26 +268,26 @@
 					e.stopPropagation();
 					e.preventDefault();
 				}
-			}, false);
+			});
 			
-			$('body')[0].addEventListener('dragover', function(e){
+			$(document).unbind('dragover').bind('dragover', function(e){
 				lastDrag = +new Date;
 				if(DROP_TARGETS_ARE_SHOWING){ //if no drop targets are showing, just fall back to the default browser behavior
 					e.stopPropagation();  
 					e.preventDefault();
 				}
-			}, false);
+			});
 			
-			$('body')[0].addEventListener('drop', function(e){
+			$(document).bind('drop', function(e){
 				if(DROP_TARGETS_ARE_SHOWING){ //if no drop targets are showing, just fall back to the default browser behavior
 					$('.ui-fileupload').each(function(){
 						$(this).find('.drag_upload_message_container').fadeOut();
 					});
 					DROP_TARGETS_ARE_SHOWING = false;
 				}
-			}, false);
+			});
 			
-			$('body')[0].addEventListener('dragleave', function(e){
+			$(document).unbind('dragleave').bind('dragleave', function(e){
 				var lastBodyLeave = +new Date;
 				setTimeout(function(){
 					if(lastDrag < lastBodyLeave){
@@ -295,11 +296,15 @@
 							$(this).find('.drag_upload_message_container').fadeOut();
 						});
 					}
-				},50)
-			}, false);
+				},50);
+			});
 
 			$('[#(#ENV{id_formulaire,fileupload}) ]#swfupload_messages,[#(#ENV{id_formulaire,fileupload}) ]#divSWFUploadUI').detach();
 			$('[#(#ENV{id_formulaire,fileupload}) ].fileinput-button span,.btn').button();
+			
+			$(window).unload(function(){
+				$('[#(#ENV{id_formulaire,fileupload})]').fileupload('destroy');
+			});
 		}else{
 			var swfu;
 			swfu = new SWFUpload(swfu_settings);
@@ -311,9 +316,8 @@
 			jQuery('.em_charger_fichiers').tabs('disable',0);
 		});
 		window.onbeforeunload = function(){
-			if(isUploading){
+			if(isUploading)
 				return locale.emballe_medias_langue.erreur_beforeunload;
-			}
 		};
 	});
 
