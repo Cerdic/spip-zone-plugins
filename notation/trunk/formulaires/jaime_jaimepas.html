@@ -10,7 +10,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV**{editable}|oui)
-	<form action="#SELF" method="post" id="#FORM[(#ENV*{_form_id})]" enctype="multipart/form-data">
+	<form action="#SELF" method="post" id="#FORM[(#ENV*{_form_id})]">
 		#ACTION_FORMULAIRE{#SELF}
 		<div>
 			[(#REM) ne pas envoyer une variable commencant par id_ 

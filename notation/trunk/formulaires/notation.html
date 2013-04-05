@@ -6,7 +6,7 @@
 </BOUCLE_note>
 <div class="formulaire_notation ajax">
 [(#ENV**{editable}|oui)
-	<form action="#SELF" method="post" id="notation[(#ENV*{_form_id})]" enctype="multipart/form-data" style="display:inline; padding:0; spacing:0; border:0">
+	<form action="#SELF" method="post" id="notation[(#ENV*{_form_id})]" style="display:inline; padding:0; spacing:0; border:0">
 		#ACTION_FORMULAIRE{#SELF}
 		<div style="display:inline">
 			[(#NOTATION_ETOILE_CLICK{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
