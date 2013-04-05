@@ -21,9 +21,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Un tableau des informations récupérées
  */
 function inc_spipmotion_ffprobe_dist($chemin){
-	include_spip('inc/filtres');
 	$infos = $metas = array();
 	if(file_exists($chemin)){
+		include_spip('inc/filtres');
 		ob_start();
 		passthru("ffprobe -i '$chemin' -show_format -show_streams 2> /dev/null");
 		$metadatas=ob_get_contents();
@@ -37,6 +37,10 @@ function inc_spipmotion_ffprobe_dist($chemin){
 					$metas['duree'] = $info[1];
 				if($info[0] == 'bit_rate')
 					$metas['bitrate'] = $info[1];
+				if(preg_match('/^TAG:.*/',$infos)){
+					$info = explode('=',str_replace('TAG:','',$infos));
+					$metas[$info[0]] = trim($info[1]);
+				}
 			}
 		}
 		preg_match_all('/\[STREAM\](.*)\[\/STREAM\]/sU', $metadatas, $streams);
@@ -70,9 +74,14 @@ function inc_spipmotion_ffprobe_dist($chemin){
 				}
 			}
 		}
+		if(isset($metas['location'])){
+			$coords = preg_match('/((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)\//',$metas['location'],$matches);
+			if(isset($matches[1]) && isset($matches[3])){
+				$metas['lat'] = $matches[1];
+				$metas['lon'] = $matches[3];
+			}
+		}
 	}
-	spip_log('Metas de ffprobe sur '.$chemin,'test');
-	spip_log($metas,'test');
 	return $metas;
 }
 ?>

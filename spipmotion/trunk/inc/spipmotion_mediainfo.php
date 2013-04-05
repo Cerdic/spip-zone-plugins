@@ -71,7 +71,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						$infos['encodeur'] = $info[0]['Writing_application'][0];
 					
 					if(isset($info[0]['comapplequicktimelocationISO6709'][0])){
-						spip_log($info[0]['comapplequicktimelocationISO6709'][0],'test');
 						$coords = preg_match('/((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)\//',$info[0]['comapplequicktimelocationISO6709'][0],$matches);
 						if(isset($matches[1]) && isset($matches[3])){
 							$infos['lat'] = $matches[1];
