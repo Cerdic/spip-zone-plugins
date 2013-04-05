@@ -84,6 +84,16 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
     )
 );
 
+/* déclaration des différentes variables utilisées pour effectuer l'anonymisation */
+$GLOBALS['formulaires']['variables_anonymisation'] = array(
+	'remote_user' => '$_SERVER["REMOTE_USER"]',
+	'php_auth_user' => '$_SERVER["PHP_AUTH_USER"]',
+);
+
+$GLOBALS['formulaires']['passwd'] = array(
+	'interne' => 'palabresecreta',
+);
+
 $GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
 
 if (!function_exists('array_fill_keys')) {

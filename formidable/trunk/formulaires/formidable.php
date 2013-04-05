@@ -90,12 +90,17 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
                 }
             } else {
 
+                // calcul des paramètres d'anonymisation
+                $anonymisation = (isset($options['anonymiser']) && $options['anonymiser'] == true)
+                    ? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
+                    : '';
+
                 // Si multiple = non mais que c'est modifiable, alors on va chercher
                 // la dernière réponse si elle existe
                 if ($options = $traitements['enregistrement']
                     and !$options['multiple']
                     and $options['modifiable']
-                    and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'])
+                    and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'], $anonymisation)
                 ){
                     $id_formulaires_reponse = array_pop($reponses);
                     $contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);

@@ -95,14 +95,26 @@ function formidable_generer_nom_cookie($id_formulaire){
  *
  * @param int $id_formulaire L'identifiant du formulaire
  * @param string $choix_identification Comment verifier une reponse. Priorite sur 'cookie' ou sur 'id_auteur'
+ * @param string $anonymisation : vaut '' si le formulaire n'est pas anonymisé, sinon c'est la variable d'anonymisation
  * @return unknown_type Retourne un tableau contenant les id des réponses si elles existent, sinon false
  */
-function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie'){
+function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identification='cookie', $anonymisation=''){
     global $auteur_session;
     $id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
     $nom_cookie = formidable_generer_nom_cookie($id_formulaire);
     $cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : false;
 
+    $anonymiser = ($anonymisation == '') ? false : true;
+    if ($anonymiser) $anonymiser_variable = $anonymisation;
+
+    // traitement de l'anonymisation
+    if ($anonymiser) {
+        // mod de l'id_auteur
+        $variables_anonymisation =
+                $GLOBALS['formulaires']['variables_anonymisation'][$anonymiser_variable];
+        $id = eval("return $variables_anonymisation;");
+        $id_auteur = formidable_scramble($id);
+    }
     // ni cookie ni id, on ne peut rien faire
     if (!$cookie and !$id_auteur) {
         return false;
@@ -111,17 +123,17 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
     // priorite sur le cookie
     if ($choix_identification == 'cookie' or !$choix_identification) {
         if ($cookie)
-            $where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+            $where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
         else
-            $where = 'id_auteur='.intval($id_auteur);
+            $where = 'id_auteur='.$id_auteur;
     }
 
     // sinon sur l'id_auteur
     else {
         if ($id_auteur)
-            $where = 'id_auteur='.intval($id_auteur);
+            $where = 'id_auteur='.$id_auteur;
         else
-            $where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.intval($id_auteur).')' : ')');
+            $where = '(cookie='.sql_quote($cookie).($id_auteur ? ' OR id_auteur='.$id_auteur.')' : ')');
     }
 
     $reponses = sql_allfetsel(
@@ -315,6 +327,52 @@ function titre_nb_reponses($nb) {
     if (!$nb) return _T('formidable:reponse_aucune');
     if ($nb == 1) return _T('formidable:reponse_une');
     return _T('formidable:reponses_nb', array('nb' => $nb));
+}
+
+/**
+ * Transforme le hash MD5 en une valeur numérique unique
+ *
+ * trouvé ici : http://stackoverflow.com/questions/1422725/represent-md5-hash-as-an-integer
+ * @param string $hex_str La valeur alphanumérique à transformer
+ * @return string Valeur numérique
+*/
+function md5_hex_to_dec($hex_str) {
+    $arr = str_split($hex_str, 4);
+    foreach ($arr as $grp) {
+        $dec[] = str_pad(hexdec($grp), 5, '0', STR_PAD_LEFT);
+    }
+
+    /* on s'assure que $result ne commence pas par un zero */
+    $result = implode('', $dec);
+    for ($cpt = 0 ; $cpt < strlen($result) ; $cpt++) {
+        if ($result[$cpt] != '0') break;
+    }
+    $result = substr($result, $cpt);
+    return $result;
+}
+
+/**
+ * Transforme un login en une valeur numérique de 19 caractères
+ *
+ * NOTE: il devient impossible de retrouver la valeur d'origine car le HASH
+ * est coupé à 19cars et est donc incomplet. L'unicité n'est pas garantie mais
+ * les chances pour que deux logins tombent sur le même HASH sont de 1 sur
+ * 10 milliards de milliards
+ * A la fin, on recherche et supprime les éventuels zéros de début
+ * @param string $login Login à transformer
+ * @param string $passwd Chaîne 'secrète' ajoutée au login et id_formulaire pour éviter
+ *  les recoupements d'identité entre plusieurs formulaires
+ * @return string Un nombre de 19 chiffres
+*/
+function formidable_scramble($login, $passwd = '') {
+    $id_form = (isset($flux['args']['id_form']) ? $flux['args']['id_form'] : '');
+    if ($passwd == '')
+        $passwd = $GLOBALS['formulaires']['passwd']['interne'];
+    $login_md5 = md5("$login$passwd$id_form");
+    $login_num = md5_hex_to_dec($login_md5);
+    $login_num = substr($login_num, 0, 19);
+
+    return $login_num;
 }
 
 ?>
