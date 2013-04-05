@@ -22,7 +22,7 @@ Afin de faciliter votre navigation, nous vous conseillons les actions suivantes 
 -* vérifiez l’URL que vous avez saisie dans la barre d’adresse de votre navigateur et assurez-vous qu’elle soit complète,
 -* accédez [au plan du site|Liste exhaustive des pages du site->@plan@] pour rechercher la page souhaitée,
 -* effectuez une recherche dans la zone de recherche de la page en saisissant des mots clés de la page souhaitée,
--* retournez à l’[accueil du site|Retour en page d’accueil->@sommaire@] pour pour repartir depuis la racine de la hiérarchie,
+-* retournez à l’[accueil du site|Retour en page d’accueil->@sommaire@] pour repartir depuis la racine de la hiérarchie,
 -* transmettez un rapport d’erreur aux administrateurs du site afin de corriger le lien rompu en utilisant le bouton ci-dessous.
 
 En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces réservés à leurs administrateurs ou abonnés nécessitant une connexion. Si vous y êtes autorisé, [cliquez ici pour accéder à la plateforme de connexion du site|Des identifiants vous seront demandés->@ecrire@].',
