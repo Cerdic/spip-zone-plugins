@@ -427,30 +427,22 @@
         },
 
         _hasError: function (file) {
-            if (file.error) {
+            if (file.error)
                 return file.error;
-            }
             // The number of added files is subtracted from
             // maxNumberOfFiles before validation, so we check if
             // maxNumberOfFiles is below 0 (instead of below 1):
-            if (this.options.maxNumberOfFiles < 0) {
+            if (this.options.maxNumberOfFiles < 0)
                 return 'maxNumberOfFiles';
-            }
             // Files are accepted if either the file type or the file name
             // matches against the acceptFileTypes regular expression, as
             // only browsers with support for the File API report the type:
-            if (!(this.options.acceptFileTypes.test(file.type) ||
-                    this.options.acceptFileTypes.test(file.name))) {
+            if (!(this.options.acceptFileTypes.test(file.type) || this.options.acceptFileTypes.test(file.name)))
                 return 'acceptFileTypes';
-            }
-            if (this.options.maxFileSize &&
-                    file.size > this.options.maxFileSize) {
+            if (this.options.maxFileSize && file.size > this.options.maxFileSize)
                 return 'maxFileSize';
-            }
-            if (typeof file.size === 'number' &&
-                    file.size < this.options.minFileSize) {
+            if (typeof file.size === 'number' && file.size < this.options.minFileSize)
                 return 'minFileSize';
-            }
             return null;
         },
 
@@ -459,9 +451,9 @@
                 valid = !!files.length;
             $.each(files, function (index, file) {
                 file.error = that._hasError(file);
-                if (file.error) {
+                if (file.error)
                     valid = false;
-                }else{
+                else{
                 	var verif = emballe_medias_verifier_upload();
                 	if(verif.upload_ok != true){
                         file.error = 'Upload pas ok';
@@ -473,17 +465,15 @@
         },
 
         _renderTemplate: function (func, files) {
-            if (!func) {
+            if (!func)
                 return $();
-            }
             var result = func({
                 files: files,
                 formatFileSize: this._formatFileSize,
                 options: this.options
             });
-            if (result instanceof $) {
+            if (result instanceof $)
                 return result;
-            }
             return $(this.options.templatesContainer).html(result).children();
         },
 
