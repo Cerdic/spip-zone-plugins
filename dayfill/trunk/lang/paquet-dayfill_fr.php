@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'dayfill_description' => 'DayFill (ou Défile en français...) permet de saisir des activités (anciennement des actions) dans le cadre d\'un projet.',
-	'dayfill_nom'         => 'DayFill',
-	'dayfill_slogan'      => 'Gestion d\'activités liées à des projets',
+	'dayfill_nom'         => "DayFill - Gestionnaire d'activités",
+	'dayfill_slogan'      => "Gérer des activités liées à des projets",
+	'dayfill_description' => "DayFill (ou Défile en français, comme «le temps qui défile...») permet de saisir des activités (des actions) dans le cadre d'un projet.",
 );
 
 ?>
