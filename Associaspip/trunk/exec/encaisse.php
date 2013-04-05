@@ -55,10 +55,11 @@ function exec_encaisse() {
 		}
 		// Afficher les releves de situation des encaisses /!\ Tous les comptes financiers ne sont normalement pas concernes : idealement il aurait fallu configurer un groupe "caisse" (51xx) et un groupe "banque" (53xx) mais d'une part nous ignorons si d'autres systemes comptables n'utilisent pas plus de groupes et d'autre part (meme une association francaise) peut bien ne pas avoir les deux types de comptes...
 		echo "\n<table width='100%' class='asso_tablo' id='asso_tablo_encaisse'>\n";
-		echo "<tr>";
-		echo "<th colspan='2'>&nbsp;</th>\n";
-		echo '<th>'. _T('asso:avoir_initial') ."</th>\n";
-		echo '<th>'. _T('asso:avoir_actuel') ."</th>\n";
+		echo "<tr class='row_first'>";
+		echo "<th scope='col'>&nbsp;</th>\n";
+		echo '<th scope="col">'. _T('asso:entete_date') ."</th>\n";
+		echo '<th scope="col">'. _T('asso:avoir_initial') ."</th>\n";
+		echo '<th scope="col">'. _T('asso:avoir_actuel') ."</th>\n";
 		echo "</tr>\n";
 		$total_actuel = $total_initial = 0;
 		foreach($lesEcritures as $compteFinancier) {
@@ -72,9 +73,9 @@ function exec_encaisse() {
 			$total_actuel += $compteFinancier['solde_anterieur']+$compteFinancier['solde_actuel'];
 		} // fin corps
 		echo "<tr>";
-		echo '<th  colspan="2" class="text">'. _T('asso:encaisse_total_general') ."</th>\n";
-		echo '<th class="decimal">'. association_formater_prix($total_initial) ."</th>\n";
-		echo '<th class="decimal">'. association_formater_prix($total_actuel) ."</th>\n";
+		echo '<th scope="row" colspan="2" class="solde text">'. _T('asso:encaisse_total_general') ."</th>\n";
+		echo '<th class="solde decimal">'. association_formater_prix($total_initial) ."</th>\n";
+		echo '<th class="solde decimal">'. association_formater_prix($total_actuel) ."</th>\n";
 		$solde_virementsinternes = sql_getfetsel('SUM(recette)-SUM(depense)', 'spip_asso_comptes', 'imputation='.sql_quote($GLOBALS['association_metas']['pc_intravirements']), 'imputation');
 		if( $solde_virementsinternes!=0 ) { // desequilible du compte de virements internes (ceci ne devrait arriver que si l'operation n'est pas enregistree via ce plugin !) /!\ Attention a bien forcer la comparaison avec zero car '0.00' sera faux !
 			echo '</tr><tr class="erreur"><td  colspan="3" class="message_erreur">'. _T('asso:erreur_equilibre_comptes58') .'</td><td class="decimal">'. association_formater_prix($solde_virementsinternes) .'</td></tr>';

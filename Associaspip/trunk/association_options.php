@@ -1450,7 +1450,7 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
 			$res .= ' selected="selected"';
 			$pager .= "\n<strong>$lettre</strong>";
 		} else {
-			$pager .= ' <a href="'.$url.'?lettre='.$val['init'].'">'.$val['init'].'</a>';
+			$pager .= ' <a href="'.$url.'&lettre='.$val['init'].'">'.$val['init'].'</a>';
 		}
 		$res .= '>'.$val['init']."</option>\n";
     }

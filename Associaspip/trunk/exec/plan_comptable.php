@@ -29,55 +29,54 @@ function exec_plan_comptable() {
 		) );
 		debut_cadre_association('plan_compte.png',  'plan_comptable');
 		$classe = _request('classe');
-		if (!$classe)
-			$classe = '%';
+		if (!$classe) // si on n'a pas de classe selectionnee...
+			$classe = '%'; // ...on les prend toutes
 		$active = _request('active');
-		if ($active=='')
-			$active = TRUE; // si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs
-		echo '<table class="asso_filtre" width="100%">';
-		echo '<tr>';
-		echo '<td>';
+		if ($active=='') // si on n'a pas de filtre active dans l'environnement...
+			$active = 1; // ...on affiche par defaut les comptes actifs
+		$lettre = _request('lettre'); // c'est si on fait passer la classe comptable par le filtre lettre
+		// FILTRES
+		$filtre_classes = '<div id="asso_classe">';
 		$query = sql_select('DISTINCT classe, active', 'spip_asso_plan', 'active='. sql_quote($active),'', 'classe');
 		while ($data = sql_fetch($query)) {
 			if ($data['classe']==$classe) {
-				echo ' <strong>'.$data['classe'].' </strong>';
+				$filtre_classes .= ' <strong>'.$data['classe'].' </strong>';
 			} else {
-				echo '<a href="'.generer_url_ecrire('plan_comptable', 'classe='.$data['classe']).'">'.$data['classe'].'</a> ';
+				$filtre_classes .= '<a href="'.generer_url_ecrire('plan_comptable', 'classe='.$data['classe']).'">'.$data['classe'].'</a> ';
 			}
 		}
 		if ($classe=='%') {
-			echo ' <strong>'._T('asso:plan_entete_tous').'</strong>';
+			$filtre_classes .= ' <strong>'._T('asso:plan_entete_tous').'</strong>';
 		} else {
-			echo ' <a href="'.generer_url_ecrire('plan_comptable').'">'._T('asso:plan_entete_tous').'</a>';
+			$filtre_classes .= ' <a href="'.generer_url_ecrire('plan_comptable').'">'._T('asso:plan_entete_tous').'</a>';
 		}
-		echo '</td>';
-		echo '<td style="text-align:right;">';
-		//Filtre active
-		echo '<form method="post" action="'.generer_url_ecrire('plan_comptable').'"><div>';
-		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
-		echo '<select name ="active" onchange="form.submit()">';
-		echo '<option value="1" ';
+		$filtre_classes .= "</div>\n";
+		$filtre_activation = "<select name='active' onchange='form.submit()'>\n";
+		$filtre_activation .= '<option value="1" ';
 		if ($active) {
-			echo ' selected="selected"';
+			$filtre_activation .= ' selected="selected"';
 		}
-		echo '> '._T('asso:plan_libelle_comptes_actifs').'</option>';
-		echo '<option value="0" ';
+		$filtre_activation .= '> '. _T('asso:plan_libelle_comptes_actifs') ."</option>\n";
+		$filtre_activation .= '<option value="0" ';
 		if (!$active) {
-			echo ' selected="selected"';
+			$filtre_activation .= ' selected="selected"';
 		}
-		echo '> '._T('asso:plan_libelle_comptes_desactives').'</option>';
-		echo '</select>';
-		echo '</div></form>';
-		echo '</td>';
-		echo '</tr></table>';
+		$filtre_activation .= '> '. _T('asso:plan_libelle_comptes_desactives') ."</option>\n";
+		$filtre_activation .= "</select>\n";
+		echo association_bloc_filtres(array(
+//			'lettre' => array($lettre, 'asso_plan', 'classe', generer_url_ecrire('plan_comptable', "active=$active") ),
+		), 'plan_comptable', array(
+			'classe' => $filtre_classes,
+			'active' => $filtre_activation,
+		));
 		//Affichage de la table
 		echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
 		echo '<tr class="row_first">';
-		echo "\n<th>". _T('asso:classe') .'</th>';
-		echo "\n<th>". _T('asso:entete_code') .'</th>';
-		echo "\n<th>". _T('asso:entete_intitule') .'</th>';
-		echo "\n<th>". _T('asso:solde_initial') .'</th>';
-		echo "\n<th>". _T('asso:entete_date') .'</th>';
+		echo "\n<th scope='col'>". _T('asso:classe') .'</th>';
+		echo "\n<th scope='col'>". _T('asso:entete_code') .'</th>';
+		echo "\n<th scope='col'>". _T('asso:entete_intitule') .'</th>';
+		echo "\n<th scope='col'>". _T('asso:solde_initial') .'</th>';
+		echo "\n<th scope='col'>". _T('asso:entete_date') .'</th>';
 		echo '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
 		echo "</tr>\n";
 		$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
@@ -87,7 +86,7 @@ function exec_plan_comptable() {
 			echo '<tr>';
 			if ($classe!=$data['classe']) {
 				if ($i!=0) {
-					echo '<td colspan="8" style="border:0;"><hr style="color: #EEE;" /></td>';
+					echo '<th colspan="8" style="border:0;"><hr class="spip" /></th>';
 					echo "</tr>\n<tr>";
 				} else {
 					$i++;

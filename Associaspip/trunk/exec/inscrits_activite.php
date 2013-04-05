@@ -53,7 +53,7 @@ function exec_inscrits_activite() {
 		echo association_navigation_raccourcis($res, 75);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
 		// FILTRES
-		$filtre_statut = '<select name="statut" onchange="form.submit()">';
+		$filtre_statut = '<select name="statut" onchange="form.submit()" id="asso_statutinscription">';
 		$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
 		$filtre_statut .= '<option value="1"'. (intval($statut)>0?' selected="selected"':'') .'>'. _T('asso:activite_entete_validees') .'</option>';
 		$filtre_statut .= '<option value="-1"'. (intval($statut)<0?' selected="selected"':'') .'>'. _T('asso:activite_entete_impayees') .'</option>';

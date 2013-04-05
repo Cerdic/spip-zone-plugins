@@ -567,15 +567,15 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
     $titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
     echo "<table width='100%' class='asso_tablo' id='asso_tablo_$titre'>\n";
     echo "\n<tr>";
-    echo '<th style="width:10px">&nbsp;</th>';
-    echo '<th style="width:30px">&nbsp;</th>';
-    echo '<th>'. _T("asso:$titre") .'</th>';
+    echo '<th scope="col" style="width:10px">&nbsp;</th>';
+    echo '<th scope="col" style="width:30px">&nbsp;</th>';
+    echo '<th scope="col">'. _T("asso:$titre") .'</th>';
     if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
-	echo '<th style="width:80px">&nbsp;</th>';
+	echo '<th scope="col" style="width:80px">&nbsp;</th>';
     } else { // mode liste standard : contributions volontaires et autres
-	echo '<th style="width:80px">'. _T("asso:$prefixe".'_recettes') .'</th>';
-	echo '<th style="width:80px">'. _T("asso:$prefixe".'_depenses') .'</th>';
-	// echo '<th width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
+	echo '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_recettes') .'</th>';
+	echo '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_depenses') .'</th>';
+	// echo '<th scope="col" width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
     }
     echo "</tr>\n";
     $total_valeurs = $total_recettes = $total_depenses = 0;
@@ -611,15 +611,15 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
 #	    }
 	}
     }
-    echo "\n<tr>";
+    echo "\n<tr class='row_first'>";
     echo '<th colspan="2">&nbsp;</th>';
-    echo '<th class="text">'. _T("asso:$prefixe".'_total') .'</th>';
+    echo '<th scope="row" class="text solde">'. _T("asso:$prefixe".'_total') .'</th>';
     if ($direction) { // mode liste comptable
-	echo '<th class="decimal">'. association_formater_nombre($total_valeurs) . '</th>';
+	echo '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
     } else { // mode liste standard
-	echo '<th class="decimal">'. association_formater_nombre($total_recettes) . '</th>';
-	echo '<th class="decimal">'. association_formater_nombre($total_depenses) . '</th>';
-	// echo '<th class="decimal">'. association_formater_nombre($total_valeurs) . '</th>';
+	echo '<th class="entree decimal">'. association_formater_nombre($total_recettes) . '</th>';
+	echo '<th class="sortie decimal">'. association_formater_nombre($total_depenses) . '</th>';
+	// echo '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
     }
     echo "</tr>\n</table>\n";
     return $total_valeurs;
@@ -639,14 +639,14 @@ function association_liste_resultat_net($recettes, $depenses) {
     echo "<tr>";
     echo '<th style="width: 10px">&nbsp;</th>';
     echo '<th style="width: 30px">&nbsp;</th>';
-    echo '<th>'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
+    echo '<th scope="row">'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
     echo '<th style="width: 80px">&nbsp;</th>';
     echo "</tr>";
     echo "\n<tr>";
     echo '<th colspan="2">&nbsp;</th>';
     $res = $recettes-$depenses;
-    echo '<th class="text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
-    echo '<th class="decimal">'. association_formater_nombre(abs($res)) .'</th>';
+    echo '<th class="solde text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
+    echo '<th class="solde decimal">'. association_formater_nombre(abs($res)) .'</th>';
     echo "</tr></table>";
 }
 
