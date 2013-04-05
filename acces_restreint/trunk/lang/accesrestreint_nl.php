@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Werktekening',
 
 	// E
-	'explication_creer_htaccess' => 'Deze optie voorkomt het lezen van de bijgevoegde documenten als de tekst waarop zij betrekking hebben is niet gepubliceerd',
+	'explication_creer_htaccess' => 'Deze optie voorkomt het lezen van de bijgevoegde documenten als de tekst waarop zij betrekking hebben is niet gepubliceerd', # MODIF
 
 	// I
 	'icone_menu_config' => 'Beperkte toegang',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'Deze post maakt deel uit van de zones :',
 
 	// L
-	'label_creer_htaccess' => 'De toegang tot het document bevestigd door de URL',
+	'label_creer_htaccess' => 'De toegang tot het document bevestigd door de URL', # MODIF
 	'label_creer_htaccess_non' => 'laten lezen',
 	'label_creer_htaccess_oui' => 'verbieden afspelen',
 

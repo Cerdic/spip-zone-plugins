@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Beschreiwung',
 
 	// E
-	'explication_creer_htaccess' => 'Dës Optioun verhënnert d\'Uweisen vu verlinkten Dokumenter wann den Text nët verëffentlecht ass',
+	'explication_creer_htaccess' => 'Dës Optioun verhënnert d\'Uweisen vu verlinkten Dokumenter wann den Text nët verëffentlecht ass', # MODIF
 
 	// I
 	'icone_menu_config' => 'Limitéierten Zougang',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'Dës Rubrik gehéiert zu den Zonen:',
 
 	// L
-	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d\'Url',
+	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d\'Url', # MODIF
 	'label_creer_htaccess_non' => 'Liesen erlaaben',
 	'label_creer_htaccess_oui' => 'Liesen verbidden',
 

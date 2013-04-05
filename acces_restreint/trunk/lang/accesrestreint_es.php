@@ -8,57 +8,57 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_droits_auteur' => 'Añadirme derechos de acceso para esta zona',
-	'aucune_zone' => 'Aucune zone', # NEW
+	'ajouter_droits_auteur' => 'Otorgarme derechos de acceso para esta área',
+	'aucune_zone' => 'Ningún área',
 	'auteurs' => 'autores',
 
 	// B
-	'bouton_configurer_acces' => 'Configuration des accès .htaccess', # NEW
-	'bouton_creer_la_zone' => 'Crear la nueva zona',
+	'bouton_configurer_acces' => 'Configuración de accesos .htaccess',
+	'bouton_creer_la_zone' => 'Crear la nueva área',
 
 	// C
 	'colonne_id' => 'Nº',
-	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?', # NEW
-	'confirmer_retirer_auteur_zone' => '¿Estás seguro de que quieres retirar este autor de la zona?',
-	'confirmer_retirer_auteurs' => '¿Estás seguro de que quieres retirar todos los autores de esta zona?',
-	'confirmer_retirer_rubrique_zone' => 'Êtes vous sûr de vouloir retirer cette rubrique de cette zone ?', # NEW
-	'confirmer_supprimer_zone' => '¿Quiere realmente suprimir esta zona?',
-	'creer_zone' => 'Crear una zona nueva',
+	'confirmer_ajouter_auteurs' => '¿Está seguro de querer añadir este autor al área?',
+	'confirmer_retirer_auteur_zone' => '¿Está seguro de querer retirar este autor del área?',
+	'confirmer_retirer_auteurs' => '¿Está seguro de querer retirar todos los autores de esta área?',
+	'confirmer_retirer_rubrique_zone' => '¿Está seguro de querer retirar esta sección de esta área?',
+	'confirmer_supprimer_zone' => '¿Esta seguro de querer eliminar esta área?',
+	'creer_zone' => 'Crear una nueva área',
 
 	// D
 	'descriptif' => 'Descripción',
 
 	// E
-	'explication_creer_htaccess' => 'Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n\'est pas publi&eacute', # NEW
+	'explication_creer_htaccess' => 'Esta opción impide la lectura de los documentos adjuntos si el texto al que se refieren no está publicado', # MODIF
 
 	// I
 	'icone_menu_config' => 'Acceso restringido',
-	'icone_supprimer_zone' => 'Suprimir esta zona',
-	'info_1_zone' => '1 zone', # NEW
-	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder', # NEW
+	'icone_supprimer_zone' => 'Eliminar esta área',
+	'info_1_zone' => '1 área',
+	'info_acces_restreint' => 'El acceso a esta página está restringido. Identifíquese para acceder a ella. ',
 	'info_ajouter_auteur' => 'Añadir este autor',
 	'info_ajouter_auteurs' => 'Añadir todos los autores',
-	'info_ajouter_zones' => 'Añadir todas las zonas',
+	'info_ajouter_zones' => 'Añadir todas las áreas',
 	'info_aucun_acces' => 'Ningún acceso autorizado',
-	'info_aucun_auteur' => 'Ningún autor en la zona',
-	'info_aucune_zone' => 'Ninguna zona',
-	'info_auteurs_lies_zone' => 'Los autores con acceso a esta zona',
-	'info_lien_action_proteger' => 'Protéger l\'accès à cette rubrique.', # NEW
-	'info_nb_zones' => '@nb@ zones', # NEW
-	'info_page' => 'Esta página permite administrar las zonas de acceso restringido en el sitio',
+	'info_aucun_auteur' => 'Ningún autor en el área',
+	'info_aucune_zone' => 'Ningún área',
+	'info_auteurs_lies_zone' => 'Los autores con acceso a esta área',
+	'info_lien_action_proteger' => 'Proteger el acceso a esta sección',
+	'info_nb_zones' => '@nb@ áreas',
+	'info_page' => 'Esta página permite administrar las áreas de acceso restringido en el sitio',
 	'info_retirer_auteurs' => 'Retirar todos los autores',
-	'info_retirer_zone' => 'Eliminar de la zona',
-	'info_retirer_zones' => 'Eliminar de todas las zonas',
-	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
-	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
+	'info_retirer_zone' => 'Quitar del área',
+	'info_retirer_zones' => 'Quitar de todas las áreas',
+	'info_rubrique_dans_zone' => 'Esta sección es parte del área:',
+	'info_rubrique_dans_zones' => 'Esta sección es parte de las áreas:',
 
 	// L
-	'label_creer_htaccess' => 'Accès aux document joints par leur URL', # NEW
-	'label_creer_htaccess_non' => 'autoriser la lecture', # NEW
-	'label_creer_htaccess_oui' => 'interdire la lecture', # NEW
+	'label_creer_htaccess' => 'Acceso a los documentos adjuntos por su URL', # MODIF
+	'label_creer_htaccess_non' => 'autorizar la lectura',
+	'label_creer_htaccess_oui' => 'prohibir la lectura',
 
 	// M
-	'modifier_zone' => 'Modificar la zona',
+	'modifier_zone' => 'Modificar el área',
 
 	// P
 	'page_zones_acces' => 'Acceso Restringido',
@@ -68,32 +68,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'rubriques' => 'secciones',
-	'rubriques_zones_acces' => 'Secciones de la zona',
+	'rubriques_zones_acces' => 'Secciones del área',
 
 	// S
-	'selectionner_une_zone' => 'Seleccionar una zona',
+	'selectionner_une_zone' => 'Seleccionar un área',
 
 	// T
-	'texte_ajouter_zone' => 'Ajouter une zone', # NEW
-	'texte_creer_associer_zone' => 'Créer et associer une zone', # NEW
+	'texte_ajouter_zone' => 'Añadir un área',
+	'texte_creer_associer_zone' => 'Crear y asociar un área',
 	'titre' => 'Título',
-	'titre_ajouter_zone' => 'Añadir la zona',
-	'titre_boite_protegee_non' => 'Accès non protégé', # NEW
-	'titre_boite_protegee_oui' => 'Accès protégé', # NEW
-	'titre_cadre_modifier_zone' => 'Modificar una zona',
-	'titre_page_config' => 'Configuration des accès', # NEW
-	'titre_table' => 'Todas las zonas de acceso restringido',
-	'titre_zone_acces' => 'Zone d\'accès restreint', # NEW
-	'titre_zones_acces' => 'Zonas de acceso restringido',
+	'titre_ajouter_zone' => 'Agregar el área',
+	'titre_boite_protegee_non' => 'Acceso no protegido',
+	'titre_boite_protegee_oui' => 'Acceso protegido',
+	'titre_cadre_modifier_zone' => 'Modificar un área',
+	'titre_page_config' => 'Configuración de accesos',
+	'titre_table' => 'Todas las áreas de acceso',
+	'titre_zone_acces' => 'Área de acceso restringido',
+	'titre_zones_acces' => 'Áreas de acceso restringido',
 	'toutes' => 'Todas',
 
 	// V
-	'voir_toutes' => 'Ver todas las zonas',
+	'voir_toutes' => 'Ver todas las áreas',
 
 	// Z
-	'zone_numero' => 'ZONA NÚMERO :',
-	'zone_restreinte_espace_prive' => 'Restringir el acceso a esta zona en el espacio privado',
-	'zone_restreinte_publique' => 'Restringir el acceso a esta zona en la parte pública'
+	'zone_numero' => 'ÁREA NÚMERO:',
+	'zone_restreinte_espace_prive' => 'Restringir el acceso a esta área en el espacio privado',
+	'zone_restreinte_publique' => 'Restringir el acceso a esta área en la parte pública'
 );
 
 ?>
