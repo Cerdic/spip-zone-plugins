@@ -1,0 +1,23 @@
+<paquet
+	prefix="dayfill_factures"
+	categorie="divers"
+	version="1.0.2"
+	etat="experimental"
+	compatibilite="[3.0.7;3.0.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0"
+>
+	<nom>Dayfill - Factures</nom>
+
+	<auteur>Cyril Marion</auteur>
+
+	<licence>GNU/GPL</licence>
+
+    <pipeline nom="declarer_champs_extras" inclure="base/dayfill_factures.php" />
+
+	<necessite nom="cextras" compatibilite="[3.0.0;[" />
+	<necessite nom="factures" compatibilite="[1.0.9;[" />
+	<necessite nom="dayfill" compatibilite="[2.0.0;[" />
+
+</paquet>
