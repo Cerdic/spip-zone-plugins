@@ -5,8 +5,10 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
- *
+ * 2008-2013 - Distribué sous licence GNU/GPL
+ * 
+ * Fonction de récupération automatique de métadonnées à l'upload de document
+ * appelée par le plugin medias
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,8 +17,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Fonction de récupération des métadonnées sur les fichiers vidéos
  * appelée à l'insertion en base dans le plugin medias (inc/renseigner_document)
  * 
- * @param string $file : le chemin du fichier à analyser
- * @return array $metas : le tableau comprenant les différentes metas à mettre en base
+ * @param string $file
+ * 		Le chemin du fichier à analyser
+ * @return array $metas
+ * 		Le tableau comprenant les différentes metas à mettre en base
  */
 function metadata_video_dist($file){
 	$metas = array();
@@ -32,7 +36,6 @@ function metadata_video_dist($file){
 		$fichier = basename($file);
 		$fichier = str_replace('-encoded','',substr($fichier,0, strrpos($fichier, ".")));
 		$duree_originale = sql_getfetsel('duree','spip_documents','mode != "conversion" AND fichier LIKE "%'.$fichier.'.%"');
-		spip_log($duree_originale,'spipmotion');
 		if($duree_originale > 0){
 			$metas['duree'] = $duree_originale;
 			$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
