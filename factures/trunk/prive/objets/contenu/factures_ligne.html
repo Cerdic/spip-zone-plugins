@@ -1,0 +1,38 @@
+<BOUCLE_factures_ligne(FACTURES_LIGNES){id_factures_ligne}>
+
+[<div class="champ contenu_id_facture[ (#ID_FACTURE*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_id_facture:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_facture} id_facture'>(#ID_FACTURE)</span>
+</div>]
+
+[<div class="champ contenu_position[ (#POSITION*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_position:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{position} position'>(#POSITION)</span>
+</div>]
+
+[<div class="champ contenu_quantite[ (#QUANTITE*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_quantite:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{quantite} quantite'>(#QUANTITE)</span>
+</div>]
+
+[<div class="champ contenu_unite[ (#UNITE*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_unite:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{unite} unite'>(#UNITE)</span>
+</div>]
+
+[<div class="champ contenu_designation[ (#DESIGNATION*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_designation:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{designation} designation'>(#DESIGNATION)</span>
+</div>]
+
+[<div class="champ contenu_prix_unitaire_ht[ (#PRIX_UNITAIRE_HT*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_prix_unitaire_ht:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{prix_unitaire_ht} prix_unitaire_ht'>(#PRIX_UNITAIRE_HT)</span>
+</div>]
+
+[<div class="champ contenu_commentaire[ (#COMMENTAIRE*|strlen|?{'',vide})]">
+	<label><:factures_ligne:label_commentaire:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{commentaire} commentaire'>(#COMMENTAIRE)</span>
+</div>]
+
+</BOUCLE_factures_ligne>

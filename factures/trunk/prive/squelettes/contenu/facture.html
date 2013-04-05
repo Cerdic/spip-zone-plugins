@@ -24,6 +24,18 @@
 <INCLURE{fond=prive/objets/contenu/facture,id=#ID_FACTURE,id_facture=#ID_FACTURE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
 </div>
 
+
+[(#REM) Affiche les lignes de factures ]
+[(#INCLURE{fond=prive/objets/liste/factures_lignes,titre=<:factures:info_detail_lignes_facture:>,id_parent=#ID_FACTURE,par=position,ajax,env})]
+
+[(#AUTORISER{creerlignefacturedans,facture,#ID_FACTURE}|oui)
+[(#ID_FACTURE|?{
+[(#URL_ECRIRE{factures_ligne_edit,new=oui&id_parent=#ID_FACTURE}|icone_verticale{<:factures_ligne:icone_creer_factures_ligne:>,factures_ligne,new,right clearright})]
+,
+[(#URL_ECRIRE{factures_ligne_edit,new=oui}|icone_verticale{<:factures_ligne:icone_creer_factures_ligne:>,factures_ligne,new,right clearright})]
+	})]
+]
+
 <div class="nettoyeur"></div>
 
 [(#AUTORISER{modifier,facture,#ID_FACTURE})
@@ -35,11 +47,7 @@
 	]
 ]
 
-[(#REM) Affiche les lignes de factures ]
-[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,facture,id_facture,#ID_FACTURE,objet,id_objet},data,#INCLURE{fond=prive/objets/contenu/lignes_facture,id_facture,env}})]})]
-
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,facture,id,#ID_FACTURE},data,'<div class="nettoyeur"></div>'}}
-
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)

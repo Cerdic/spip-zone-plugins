@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_factures_lignes_selectionnes>
+	<ul>
+	<BOUCLE_factures_lignes_selectionnes(FACTURES_LIGNES){id_factures_ligne IN #GET*{valeur}}
+		{par num designation, designation}{tout}>
+		<li class="choix">#DESIGNATION (#ID_FACTURES_LIGNE)</li>
+	</BOUCLE_factures_lignes_selectionnes>
+	</ul>
+	</B_factures_lignes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_factures_lignes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_factures_ligne_selectionne(FACTURES_LIGNES){id_factures_ligne=#ENV{valeur}}
+		{par num designation, designation}{tout}>
+	  	<p>#DESIGNATION (#ID_FACTURES_LIGNE)</p>
+	</BOUCLE_factures_ligne_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_factures_ligne_selectionne>
+<//B_test_multiple>

@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function factures_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_factures', 'spip_lignes_factures')));
+	$maj['create'] = array(array('maj_tables', array('spip_factures', 'spip_factures_lignes')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -41,12 +41,12 @@ function factures_upgrade($nom_meta_base_version, $version_cible) {
 function factures_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_factures");
-	sql_drop_table("spip_lignes_factures");
+	sql_drop_table("spip_factures_lignes");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('facture', 'ligne')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('facture', 'ligne')));
-	sql_delete("spip_forum",                 sql_in("objet", array('facture', 'ligne')));
+	sql_delete("spip_versions",              sql_in("objet", array('facture', 'factures_ligne')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('facture', 'factures_ligne')));
+	sql_delete("spip_forum",                 sql_in("objet", array('facture', 'factures_ligne')));
 
 	effacer_meta($nom_meta_base_version);
 }

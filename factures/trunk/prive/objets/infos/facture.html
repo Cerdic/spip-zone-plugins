@@ -1,0 +1,7 @@
+<BOUCLE_facture(FACTURES){id_facture=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:facture:titre_facture:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_FACTURE</p></div>
+
+</div>
+</BOUCLE_facture>

@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-04-04 17:44:27
+ *   le 2013-04-05 11:50:18
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -30,7 +30,7 @@ $data = array (
     'slogan' => 'Facturer et faire des devis avec SPIP',
     'description' => 'Factures & devis permet d\'éditer, imprimer, archiver facilement vos devis et factures.',
     'prefixe' => 'factures',
-    'version' => '1.0.7',
+    'version' => '1.0.9',
     'auteur' => 'Cyril Marion - Ateliers CYM',
     'auteur_lien' => 'http://www.cym.fr',
     'licence' => 'GNU/GPL',
@@ -41,7 +41,7 @@ $data = array (
     'administrations' => 'on',
     'schema' => '1.0.0',
     'formulaire_config' => 'on',
-    'formulaire_config_titre' => 'Configurer Factures et Devis',
+    'formulaire_config_titre' => 'Configurer Factures & Devis',
     'fichiers' => 
     array (
       0 => 'autorisations',
@@ -67,7 +67,8 @@ $data = array (
     'scripts' => 
     array (
       'pre_copie' => '',
-      'post_creation' => '',
+      'post_creation' => 'include_once($destination_ancien_plugin . \'factures_post_creation.php\');
+factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);',
     ),
     'exemples' => '',
   ),
@@ -348,10 +349,10 @@ $data = array (
       'nom_singulier' => 'Ligne de facture',
       'genre' => 'feminin',
       'logo_variantes' => 'on',
-      'table' => 'spip_lignes_factures',
-      'cle_primaire' => 'id_ligne',
+      'table' => 'spip_factures_lignes',
+      'cle_primaire' => 'id_factures_ligne',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
-      'table_type' => 'ligne',
+      'table_type' => 'factures_ligne',
       'champs' => 
       array (
         0 => 
@@ -365,7 +366,7 @@ $data = array (
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'facture',
+          'saisie' => 'factures',
           'explication' => '',
           'saisie_options' => '',
         ),
@@ -501,6 +502,10 @@ $data = array (
       'boutons' => 
       array (
         0 => 'outils_rapides',
+      ),
+      'saisies' => 
+      array (
+        0 => 'objets',
       ),
     ),
   ),

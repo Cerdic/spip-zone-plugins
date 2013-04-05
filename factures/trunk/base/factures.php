@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function factures_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['factures'] = 'factures';
-	$interfaces['table_des_tables']['lignes_factures'] = 'lignes_factures';
+	$interfaces['table_des_tables']['factures_lignes'] = 'factures_lignes';
 
 	return $interfaces;
 }
@@ -75,12 +75,12 @@ function factures_declarer_tables_objets_sql($tables) {
 
 	);
 
-	$tables['spip_lignes_factures'] = array(
-		'type' => 'ligne',
+	$tables['spip_factures_lignes'] = array(
+		'type' => 'factures_ligne',
 		'principale' => "oui", 
-		'table_objet_surnoms' => array('lignesfacture'), // table_objet('ligne') => 'lignes_factures' 
+		'table_objet_surnoms' => array('facturesligne'), // table_objet('factures_ligne') => 'factures_lignes' 
 		'field'=> array(
-			"id_ligne"           => "bigint(21) NOT NULL",
+			"id_factures_ligne"  => "bigint(21) NOT NULL",
 			"id_facture"         => "int(11) NOT NULL DEFAULT '0'",
 			"position"           => "int(11) DEFAULT NULL",
 			"quantite"           => "float DEFAULT NULL",
@@ -91,7 +91,7 @@ function factures_declarer_tables_objets_sql($tables) {
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_ligne",
+			"PRIMARY KEY"        => "id_factures_ligne",
 		),
 		'titre' => "designation AS titre, '' AS lang",
 		 #'date' => "",

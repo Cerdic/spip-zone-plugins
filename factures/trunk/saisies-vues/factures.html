@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_factures_selectionnes>
+	<ul>
+	<BOUCLE_factures_selectionnes(FACTURES){id_facture IN #GET*{valeur}}
+		{par num libelle_facture, libelle_facture}{tout}>
+		<li class="choix">#LIBELLE_FACTURE (#ID_FACTURE)</li>
+	</BOUCLE_factures_selectionnes>
+	</ul>
+	</B_factures_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_factures_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_facture_selectionne(FACTURES){id_facture=#ENV{valeur}}
+		{par num libelle_facture, libelle_facture}{tout}>
+	  	<p>#LIBELLE_FACTURE (#ID_FACTURE)</p>
+	</BOUCLE_facture_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_facture_selectionne>
+<//B_test_multiple>

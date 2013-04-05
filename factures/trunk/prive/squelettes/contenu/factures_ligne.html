@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,factures_ligne,#ID_FACTURES_LIGNE}|sinon_interdire_acces)]
+<BOUCLE_factures_ligne(FACTURES_LIGNES){id_factures_ligne}{si #ENV{exec}|=={factures_ligne}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,factures_ligne,#ID_FACTURES_LIGNE})
+		[(#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne}|non)
+			[(#URL_ECRIRE{factures_ligne_edit,id_factures_ligne=#ID_FACTURES_LIGNE}|icone_verticale{<:factures_ligne:icone_modifier_factures_ligne:>,factures_ligne,edit,right ajax preload})]
+		]
+		[(#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne}|oui)
+			[(#URL_ECRIRE{factures_ligne_edit,id_factures_ligne=#ID_FACTURES_LIGNE}|icone_verticale{#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#DESIGNATION|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{factures_ligne-24.png}|balise_img{factures_ligne,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{factures_ligne,#ID_FACTURES_LIGNE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/factures_ligne,id=#ID_FACTURES_LIGNE,id_factures_ligne=#ID_FACTURES_LIGNE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,factures_ligne,#ID_FACTURES_LIGNE})
+	[(#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne}|non)
+		[(#URL_ECRIRE{factures_ligne_edit,id_factures_ligne=#ID_FACTURES_LIGNE}|icone_verticale{<:factures_ligne:icone_modifier_factures_ligne:>,factures_ligne,edit,right ajax preload})]
+	]
+	[(#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne}|oui)
+		[(#URL_ECRIRE{factures_ligne_edit,id_factures_ligne=#ID_FACTURES_LIGNE}|icone_verticale{#ID_FACTURES_LIGNE|afficher_qui_edite{factures_ligne},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,factures_ligne,id,#ID_FACTURES_LIGNE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_factures_ligne>
+[(#ENV**{exec}|=={factures_ligne_edit}|?{#INCLURE{fond=prive/squelettes/contenu/factures_ligne_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_factures_ligne>

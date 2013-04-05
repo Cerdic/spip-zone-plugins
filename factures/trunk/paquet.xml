@@ -1,15 +1,15 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.7"
+	version="1.0.9"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
 	documentation=""
-	schema="1.0.0"
+	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2013-04-04 17:44:27
+		Paquet généré le 2013-04-05 11:50:18
 	-->
 
 	<nom>Factures &amp; devis</nom>
@@ -17,14 +17,14 @@
 	<auteur lien='http://www.cym.fr'>Cyril Marion - Ateliers CYM</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 
-	<pipeline nom="autoriser" inclure="factures_autorisations.php" />
+	<pipeline nom="autoriser" inclure="factures_autorisations.php" /> 
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/factures.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/factures.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/factures.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/factures.php" /> 
 
-	<menu nom="factures" titre="facture:titre_factures" parent="menu_edition" icone="images/facture-16.png" action="factures" />
-	<menu nom="facture_creer" titre="facture:icone_creer_facture" parent="outils_rapides" icone="images/facture-new-16.png" action="facture_edit" parametres="new=oui" />
-	<menu nom="ligne_creer" titre="ligne:icone_creer_ligne" parent="outils_rapides" icone="images/ligne-new-16.png" action="ligne_edit" parametres="new=oui" />
+	<menu nom="factures" titre="facture:titre_factures" parent="menu_edition" icone="images/facture-16.png" action="factures" /> 
+	<menu nom="facture_creer" titre="facture:icone_creer_facture" parent="outils_rapides" icone="images/facture-new-16.png" action="facture_edit" parametres="new=oui" /> 
+	<menu nom="factures_ligne_creer" titre="factures_ligne:icone_creer_factures_ligne" parent="outils_rapides" icone="images/factures_ligne-new-16.png" action="factures_ligne_edit" parametres="new=oui" /> 
 </paquet>
