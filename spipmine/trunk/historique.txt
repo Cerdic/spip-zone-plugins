@@ -1,0 +1,26 @@
+
+L'ancien plugin spip-mine était là :
+- http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip_mine?rev=39168
+
+Il contenait les idées suivantes :
+- spip_mine_comptes
+- spip_mine_contacts
+- spip_mine_evaluations
+- spip_mine_factures
+- spip_mine_maquettes
+- spip_mine_pages
+- spip_mine_projets
+
+Ces idées dans ce nouveau plugin ont été déplacées dans des plugins indépendants pour SPIP 3
+- contacts & organisations          | était dans spip_mine_comptes, spip_mine_contacts
+- coordonnées                       | était dans spip_mine_comptes, spip_mine_contacts
+- factures
+- projets
+- dayfill (activités de projets)    | était dans projets
+
+Ainsi que des plugins pour lier ces éléments entre eux :
+- projets_organisations
+
+À faire certainement :
+- factures_activites
+

@@ -17,5 +17,5 @@
     <licence>GNU/GPL</licence>
 
 
-    <necessite nom="projets" compatibilite="[1.0.*;]" />
+    <necessite nom="projets" compatibilite="[1.0.0;]" />
 </paquet>
