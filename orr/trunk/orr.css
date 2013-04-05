@@ -45,6 +45,7 @@ td.largeurcol{
     vertical-align:top;
     width:80px;
 }
+/* Affichage semaine : Bordure rouge autour des résa */
 #premierjour {
     border-top : 1px solid red ;
     border-bottom : 1px solid red ;
@@ -70,11 +71,14 @@ th, td{
 td#jeudi, th#jeudith{
 	background-color : #D6D6D6 ;
 }
-
-
-#contenu{
-width: 980px;
+td#id1couleur_jour_mois{
+	background-color : #D6D6D6 ;
 }
+
+
+/*#contenu{*/
+/*width: 980px;*/
+/*}*/
 
 
 img.stylo{
@@ -92,7 +96,7 @@ div.cacher{
    display:none; 
 }
 
-
+/* affichage mois : infobulle */
 
 .tooltip
 {
@@ -161,3 +165,4 @@ div.cacher{
   border-top-color: #ccc;
   bottom: -8px;
 }
+/* Fin infobulle */
