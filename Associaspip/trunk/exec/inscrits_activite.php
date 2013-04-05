@@ -36,7 +36,7 @@ function exec_inscrits_activite() {
 			'valide' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
 										       ));
 		// STATS sur les participations a cette activite (nombre de place et montant paye)
-			echo association_totauxinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
+			echo association_totauxinfos_stats('inscriptions', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
 		// TOTAUX : montants des participations
 			echo association_totauxinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
