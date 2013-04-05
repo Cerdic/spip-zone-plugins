@@ -5,8 +5,9 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
- *
+ * 2008-2013 - Distribué sous licence GNU/GPL
+ * 
+ * Fonction de récupération de métadonnées via ffprobe
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -14,13 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Récupération des métadonnées via FFprobe
  * 
- * @param string $chemin : le chemin du fichier à analyser
- * @return array $infos : un tableau des informations récupérées
+ * @param string $chemin
+ * 		Le chemin du fichier à analyser
+ * @return array $infos
+ * 		Un tableau des informations récupérées
  */
 function inc_spipmotion_ffprobe_dist($chemin){
 	include_spip('inc/filtres');
-	$infos = array();
-	$metas = array();
+	$infos = $metas = array();
 	if(file_exists($chemin)){
 		ob_start();
 		passthru("ffprobe -i '$chemin' -show_format -show_streams");
@@ -31,12 +33,10 @@ function inc_spipmotion_ffprobe_dist($chemin){
 			$formats =  explode("\n",trim($formats[1]));
 			foreach ($formats as $infos){
 				$info = explode('=',$infos);
-				if($info[0] == 'duration'){
+				if($info[0] == 'duration')
 					$metas['duree'] = $info[1];
-				}
-				if($info[0] == 'bit_rate'){
+				if($info[0] == 'bit_rate')
 					$metas['bitrate'] = $info[1];
-				}
 			}
 		}
 		preg_match_all('/\[STREAM\](.*)\[\/STREAM\]/sU', $metadatas, $streams);
@@ -49,15 +49,12 @@ function inc_spipmotion_ffprobe_dist($chemin){
 					$stream_final[$ligne[0]] = $ligne[1];
 				}
 				if(isset($stream_final['codec_type']) && $stream_final['codec_type'] == 'video'){
-					if(isset($stream_final['width'])){
+					if(isset($stream_final['width']))
 						$metas['largeur'] = $stream_final['width'];
-					}
-					if(isset($stream_final['height'])){
+					if(isset($stream_final['height']))
 						$metas['hauteur'] = $stream_final['height'];
-					}
-					if(isset($stream_final['nb_frames'])){
+					if(isset($stream_final['nb_frames']))
 						$metas['framecount'] = $stream_final['nb_frames'];
-					}
 					if(isset($stream_final['r_frame_rate'])){
 						 $framerate = explode('/',$stream_final['r_frame_rate']);
 						 $metas['framerate'] = $framerate[0];
@@ -65,12 +62,10 @@ function inc_spipmotion_ffprobe_dist($chemin){
 					$metas['hasvideo'] = 'oui';
 				}
 				if(isset($stream_final['codec_type']) && $stream_final['codec_type'] == 'audio'){
-					if(isset($stream_final['channels'])){
+					if(isset($stream_final['channels']))
 						$metas['audiochannels'] = $stream_final['channels'];
-					}
-					if(isset($stream_final['sample_rate'])){
+					if(isset($stream_final['sample_rate']))
 						$metas['audiosamplerate'] = intval($stream_final['sample_rate']);
-					}
 					$metas['hasaudio'] = 'oui';
 				}
 			}
