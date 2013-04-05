@@ -9,13 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Risposte non vuote',
+	'analyse_exporter' => 'Exporter l\'analyse', # NEW
 	'analyse_longueur_moyenne' => 'Lunghezza media in numero di parole',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Risposte vuote',
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
 	'aucun_traitement' => 'Aucun traitement', # NEW
-    'analyse_exporter' => 'Esporta l\'analisi',
 
 	// B
 	'bouton_formulaires' => 'Moduli',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
-    'champ' => 'Campo',
+	'champs' => 'Champs', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'Il modulo non esiste.',
 
 	// F
+	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.', # NEW
 	'formulaires_aucun' => 'Al momento non è presente alcun modulo.',
 	'formulaires_dupliquer' => 'Duplica il modulo',
 	'formulaires_dupliquer_copie' => '(copia)',
@@ -109,8 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_voir_detail' => 'Vedi la risposta',
 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
 
-    // S
-    'sans_reponses' => 'Senza risposta',
+	// S
+	'sans_reponses' => 'Sans réponse', # NEW
 
 	// T
 	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
@@ -147,6 +148,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Si è verificato un errore tecnico durante il salvataggio in database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Hai già risposto a questo modulo.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La risposta da modificare non esiste.',
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)', # NEW
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'Se le risposte sono modificabili, quale procedura si dovrà utilizzare in priorità per individuare la risposta da modificare?',
 	'traiter_enregistrement_option_identification_label' => 'Identificazione',
 	'traiter_enregistrement_option_moderation_label' => 'Moderazione',

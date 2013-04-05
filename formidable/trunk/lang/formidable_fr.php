@@ -7,13 +7,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Réponses non-vide',
+	'analyse_exporter' => 'Exporter l\'analyse',
 	'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',
 	'analyse_sans_reponse' => 'Laissés blanc',
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
 	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.',
 	'aucun_traitement' => 'Aucun traitement',
-    'analyse_exporter' => 'Exporter l\'analyse',
 
 	// B
 	'bouton_formulaires' => 'Formulaires',
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses',
-    'champs' => 'Champs',
+	'champs' => 'Champs',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'Le formulaire n\'existe pas.',
 
 	// F
-	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistr&eacute;e.',
+	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.',
 	'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
 	'formulaires_dupliquer' => 'Dupliquer le formulaire',
 	'formulaires_dupliquer_copie' => '(copie)',
@@ -108,8 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_voir_detail' => 'Voir la réponse',
 	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n\'a été défini pour ce formulaire. Il ne fait donc rien. :)',
 
-    // S
-    'sans_reponses' => 'Sans réponse',
+	// S
+	'sans_reponses' => 'Sans réponse',
 
 	// T
 	'titre_cadre_raccourcis' => 'Raccourcis',
@@ -142,15 +142,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet_accuse' => 'Merci de votre réponse.',
 	'traiter_email_titre' => 'Envoyer par courriel',
 	'traiter_email_url_enregistrement' => 'Vous pouvez gérer les réponses <a href="@url@">sur cette page</a>.',
-	'traiter_enregistrement_option_anonymiser_label' => "Anonymiser le formulaire",
-	'traiter_enregistrement_option_anonymiser_explication' => "Rendre les r&eacute;sultats du formulaire anonymes (ne pas garder de traces de l'identifiant des personnes ayant r&eacute;pondu.)",
-	'traiter_enregistrement_option_choix_select_label' => "Choisir une variable parmi celles propos&eacute;es",
-	'traiter_enregistrement_option_anonymiser_variable_label' => "Variable &agrave; partir de laquelle anonymiser le formulaire",
-	'traiter_enregistrement_option_anonymiser_variable_explication' => "Quelle variable syst&egrave;me utiliser pour calculer une valeur unique pour chaque auteur sans pour autant r&eacute;v&eacute;ler son identit&eacute;.",
 	'traiter_enregistrement_description' => 'Enregistre les résultats du formulaire dans la base de données',
 	'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement en base de données',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez déjà répondu à ce formulaire.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.',
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)',
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire',
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.',
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire',
+	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées',
 	'traiter_enregistrement_option_identification_explication' => 'Si les réponses sont modifiables, quel procédé utiliser en priorité pour connaitre la réponse à modifier ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
 	'traiter_enregistrement_option_moderation_label' => 'Modération',

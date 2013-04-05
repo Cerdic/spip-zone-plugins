@@ -9,13 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Neprázdne odpovede',
+	'analyse_exporter' => 'Exporter l\'analyse', # NEW
 	'analyse_longueur_moyenne' => 'Priemerná dĺžka vyjadrená počtom slov',
 	'analyse_nb_reponses_total' => '@nb@ ľudia odpovedali na tento formulár.',
 	'analyse_sans_reponse' => 'Nevyplnené',
 	'analyse_une_reponse_total' => 'Na tento formulár odpovedal jeden človek.',
 	'analyse_zero_reponse_total' => 'Na tento formulár neodpovedal žiaden človek.',
 	'aucun_traitement' => 'Žiadne spracovanie',
-    'analyse_exporter' => 'Exportovať analýzu',
 
 	// B
 	'bouton_formulaires' => 'Formuláre',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
-    'champ' => 'Pol\'a',
+	'champs' => 'Champs', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'Formulár neexistuje.',
 
 	// F
+	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.', # NEW
 	'formulaires_aucun' => 'Momentálne tu nie je žiaden formulár.',
 	'formulaires_dupliquer' => 'Skopírovať formulár',
 	'formulaires_dupliquer_copie' => '(kópia)',
@@ -109,8 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_voir_detail' => 'Zobraziť odpoveď',
 	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
 
-    // S
-    'sans_reponses' => 'Neriešiteľný',
+	// S
+	'sans_reponses' => 'Sans réponse', # NEW
 
 	// T
 	'titre_cadre_raccourcis' => 'Skratky',
@@ -147,6 +148,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Počas ukladania do databázy sa vyskytla technická chyba',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Tento formulár ste už vyplnili.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Odpoveď, ktorú chcete upraviť, sa nedá nájsť.',
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)', # NEW
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'Ak sa odpovede dajú upraviť, aký spôsob sa použije ako prvý, aby sa zistilo, či sa odpoveď menila?',
 	'traiter_enregistrement_option_identification_label' => 'Identifikácia',
 	'traiter_enregistrement_option_moderation_label' => 'Kontrola',
