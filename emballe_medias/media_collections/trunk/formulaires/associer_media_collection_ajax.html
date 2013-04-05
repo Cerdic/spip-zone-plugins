@@ -8,7 +8,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
-	<form action="#ENV{action}" method="post" enctype="multipart/form-data">
+	<form action="#ENV{action}" method="post">
 		#ACTION_FORMULAIRE{#SELF}
 		<div>
 			<ul>
