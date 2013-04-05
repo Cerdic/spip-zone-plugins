@@ -20,16 +20,17 @@
 </div>
 
 <B_paniers>
-<table class="amap spip">
+<div class="liste-objets">
+<table class="spip liste">
 	<thead>
-	<tr>
+	<tr class="first_row">
 		<th class='statut' scope='col'><:amap:adherent:></th>
 		<th class='statut' scope='col'><:amap:date_distribution:></th>
 	</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_producteur}>
-	<tr>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 		<td class='nom'><BOUCLE_prod(AUTEURS){tous}{id_auteur}>#NOM</BOUCLE_prod></td>
 		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 	</tr>
@@ -37,4 +38,5 @@
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION)</p>]
+</div>
 </B_paniers>

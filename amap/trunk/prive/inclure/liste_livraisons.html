@@ -9,10 +9,11 @@
 
 ]
 <B_livraisons>
+<div class="liste-objets">
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-<table class="amap spip">
+<table class="spip liste">
 	<thead>
-	<tr>
+	<tr class="first_row">
 		<th class='date_livraison' scope='col'><:amap:date_livraison:></th>
 		<th class='contenu_panier' scope='col'><:amap:contenu_panier:></th>
 		[(#SESSION{statut}|=={0minirezo}|oui)<th class='action' scope='col'><:amap:action:></th>]
@@ -20,7 +21,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_livraisons(AMAP_LIVRAISONS) {par date_livraison} {pagination 20}>
-	<tr>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 		<td class='date_livraison'>[(#DATE_LIVRAISON|affdate{'d/m/Y'})]</td>
 		<td class='contenu_panier'>[(#CONTENU_PANIER|PtoBR)]</td>
 		[(#SESSION{statut}|=={0minirezo}|oui)<td class='action'><a href='[(#URL_ECRIRE{livraison_enregistre}|parametre_url{id_amap_livraison,#ID_AMAP_LIVRAISON})]'><:amap:action_modifier:></a></td>]
@@ -29,6 +30,7 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
 </B_livraisons>
 	<p style="text-align: justify;">
 		<:amap:table_vide_aucun_enregistrement:>

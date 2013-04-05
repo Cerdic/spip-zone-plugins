@@ -8,11 +8,12 @@
 
 ]
 <B_paniers>
+<div class="liste-objets">
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-<table class="amap spip">
+<table class="spip liste">
 	<thead>
-	<tr>
-		<th class='adhrent' scope='col'>[(#TRI{nom,<:amap:adherent:>,ajax})]</th>
+	<tr class="first_row">
+		<th class='adherent' scope='col'>[(#TRI{nom,<:amap:adherent:>,ajax})]</th>
 		<th class='producteurs' scope='col'>[(#TRI{id_producteur,<:amap:producteurs:>,ajax})]</th>
 		<th class='date_distribution' scope='col'>[(#TRI{date_distribution,<:amap:date_distribution:>,ajax})]</th>
 		<th class='type_panier' scope='col'>[(#TRI{type_panier,<:amap:type_panier:>,ajax})]</th>
@@ -21,7 +22,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_paniers(AMAP_PANIERS auteurs) {tri date_distribution}{pagination 20}{age<0}>
-	<tr>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 		<td class='nom'>#NOM</td>
 		<td class='producteur'><BOUCLE_prod(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_prod></td>
 		<td class='date_distribution'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
@@ -34,6 +35,7 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
 </B_paniers>
 	<p style="text-align: justify;">
 		<:amap:table_vide_aucun_enregistrement:>

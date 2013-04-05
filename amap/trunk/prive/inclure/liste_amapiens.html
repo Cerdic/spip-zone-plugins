@@ -8,10 +8,11 @@
 
 ]
 <B_auteurs>
+<div class="liste-objets">
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-<table class="amap spip">
+<table class="spip liste">
 	<thead>
-	<tr>
+	<tr class="first_row">
 		<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
 		<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 		<th class='adhesion' scope='col'>[(#TRI{adhesion,<:amap:adhesion:>,ajax})]</th>
@@ -21,7 +22,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_auteurs(AUTEURS) {tri nom} {tous} {pagination 20}>
-	<tr>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 		<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 		<td class='nom[ (#NOM|non)vide]'><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
 		<td class='adhesion'>#ADHESION</td>
@@ -38,4 +39,5 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
 </B_auteurs>

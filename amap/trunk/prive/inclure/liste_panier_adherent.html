@@ -26,9 +26,10 @@
 
 <BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
 <B_paniers>
-<table class="amap spip">
+<div class="liste-objets">
+<table class="spip liste">
 	<thead>
-	<tr>
+	<tr class="first_row">
 		<th class='producteur' scope='col'><:amap:producteur:></th>
 		<th class='date_livraison' scope='col'><:amap:date_distribution:></th>
 		<th class='panier_dispo' scope='col'><:amap:panier_dispo_interface:></th>
@@ -36,7 +37,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo,non}}>
-	<tr>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 		<td class='nom'><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
 		<td class='date_production'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
 		[(#ENV{dispo,non}|=={non}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
@@ -68,5 +69,6 @@
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION)</p>]
+</div>
 </B_paniers>
 </BOUCLE_auteur>
