@@ -90,6 +90,7 @@ object.swfupload{
 	margin:0;
 	height:auto;
 }
+
 noscript.alternative_js{
 	display: block;
 	background-color: #FFFF66;
@@ -279,11 +280,36 @@ noscript.alternative_js{
 	margin:0;
 	border:none;
 }
-.selection_documents .choix .spip_logos,#liste_medias_publication .item .spip_logos{width:96%;margin:2%;padding:0;vertical-align:bottom;float:none;border:none;height:auto}
-.selection_documents .choix.selected,#liste_medias_publication li.on{background:#4EBAFF}
-#formulaire_media_edition_lot .edition_par_lot,#edition_emballe_media{width:50%;float:right}
-.content #liste_medias_publication .formulaire_spip{width:100%}
-#formulaire_media_edition_lot .boutons{clear:both}
+
+.selection_documents .choix .spip_logos,
+#liste_medias_publication .item .spip_logos{
+	width:96%;
+	margin:2%;
+	padding:0;
+	vertical-align:bottom;
+	float:none;
+	border:none;
+	height:auto
+}
+
+.selection_documents .choix.selected,
+#liste_medias_publication li.on{
+	background:#4EBAFF
+}
+
+#formulaire_media_edition_lot .edition_par_lot,
+#edition_emballe_media{
+	width:50%;
+	float:right
+}
+
+.content #liste_medias_publication .formulaire_spip{
+	width:100%
+}
+
+#formulaire_media_edition_lot .boutons{
+	clear:both
+}
 
 #liste_medias_publication{
 	margin-top:15px;
@@ -293,18 +319,57 @@ noscript.alternative_js{
 #liste_medias_publication li.item a{
 	display:block
 }
+
 .formulaire_spip .selection_documents .choix label{
 	display:block;
 	position:relative;
 	overflow:auto;
 	margin:0;
 }
-#liste_medias_publication span.titre_media,.selection_documents .choix .titre{display:block;position:absolute;bottom:0;left:0;background:rgb(0,0,0);background:rgba(0,0,0,.8);color:#fff;width:96%;padding:2%;overflow:hidden}
-#liste_medias_publication li.on .titre_media,.selection_documents .choix.selected .titre{background-color:#4EBAFF}
-.selection_documents .choix .erreur_message{position:absolute;background:rgb(0,0,0);background:rgba(0,0,0,.8);width:96%;top:25%;margin:2%}
-#liste_medias_publication li.on .spip_logos{border-color:#4EBAFF}
-#liste_medias_publication a:hover .titre_media,.selection_documents .choix:hover .titre{background-color:#FC575E}
-#liste_medias_publication li.item:hover,.selection_documents .choix:hover{background-color:#FC575E}
+
+#liste_medias_publication span.titre_media,
+.selection_documents .choix .titre{
+	display:block;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:rgb(0,0,0);
+	background:rgba(0,0,0,.8);
+	color:#fff;
+	width:96%;
+	padding:2%;
+	overflow:hidden;
+}
+
+#liste_medias_publication li.on .titre_media,
+.selection_documents .choix.selected .titre{
+	background-color:#4EBAFF
+}
+
+.selection_documents .choix .erreur_message{
+	position:absolute;
+	background:rgb(0,0,0);
+	background:rgba(0,0,0,.8);
+	width:96%;
+	top:25%;
+	margin:2%;
+}
+
+#liste_medias_publication li.on .spip_logos{
+	border-color:#4EBAFF;
+}
+
+#liste_medias_publication a:hover .titre_media,
+#liste_medias_publication li.on:hover .titre_media,
+.selection_documents .choix:hover .titre{
+	background-color:#FC575E;
+}
+
+#liste_medias_publication li.item:hover,
+.selection_documents .choix:hover
+{
+	background-color:#FC575E;
+}
 
 <BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_em_}}>
 	#SET{fond,prive/#VALEUR|basename{'.html'}}
