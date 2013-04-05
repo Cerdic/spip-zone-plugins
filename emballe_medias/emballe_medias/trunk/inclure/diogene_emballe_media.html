@@ -51,7 +51,7 @@
 		[(#SET{autoriser_creer,#AUTORISER{creerdans,diogene,#_diogene:ID_DIOGENE}|?{oui,non}})]
 		[(#SET{limite_upload,[(#GET{id_diogene}|diogene_nombre_attente)]})]
 		<BOUCLE_article_env(ARTICLES){id_article=#ENV{id_article}}{id_secteur=#_diogene:ID_SECTEUR}{statut IN publie,prop,prepa}>
-			#SET{id_article,#ID_ARTICLE}
+			[(#SET{id_article,#ID_ARTICLE})]
 			[(#ID_SECTEUR|!={#_diogene:ID_SECTEUR})
 				[(#SET{erreur,oui})]
 				[(#SET{erreur_message,erreur_article_secteur_inexistant})]
@@ -87,21 +87,16 @@
 				</BOUCLE_rubrique_defaut>
 			</BOUCLE_si_pas_secteur>
 			
-			<BOUCLE_autorise_publier_sstype(CONDITION){si (#GET{config_types}|table_valeur{autoriser_normal}|=={on}|oui)}>
+			<BOUCLE_autorise_publier_sstype(CONDITION){si (#GET{config_types}|table_valeur{autoriser_normal}|=={on}|oui)}{si #GET{limite_upload}|=={1}|oui}>
 				<BOUCLE_article_en_cours_de_redac(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type ?}{origine_traduction}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
-					[(#SET{id_article,#ID_ARTICLE})]
-					[(#SET{id_rubrique,#ID_RUBRIQUE})]
-					[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
-					[(#SET{type,#EM_TYPE})]
+					[(#SET{id_article,#ID_ARTICLE})][(#SET{id_rubrique,#ID_RUBRIQUE})][(#SET{types,#FORM_TYPE{#EM_TYPE}})][(#SET{type,#EM_TYPE})]
 					<BOUCLE_doc_en_cours_de_redac(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
-						[(#FICHIER|get_spip_doc|file_exists|non)
-							[(#SET{orig_disparu,oui})]
-						]
+						[(#FICHIER|get_spip_doc|file_exists|non)[(#SET{orig_disparu,oui})]]
 						[(#SET{doc_uploaded,oui})]
 					</BOUCLE_doc_en_cours_de_redac>
 				</BOUCLE_article_en_cours_de_redac>
 			</BOUCLE_autorise_publier_sstype>
-				<BOUCLE_article_en_cours_de_redac_sstype(ARTICLES){id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type}{!statut = 'poubelle'}{!statut = 'publie'}{origine_traduction}{0,1}>
+				<BOUCLE_article_en_cours_de_redac_sstype(ARTICLES){si #GET{limite_upload}|=={1}|oui}{id_secteur=#_diogene:ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{em_type}{!statut = 'poubelle'}{!statut = 'publie'}{origine_traduction}{0,1}>
 					[(#SET{id_article,#ID_ARTICLE})]
 					[(#SET{id_rubrique,#ID_RUBRIQUE})]
 					[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
@@ -141,58 +136,17 @@
 	]
 	[(#GET{erreur}|=={non}|oui)
 		[(#ENV{id_article}|intval|>{0}|et{#GET{id_article}|>{0}}|oui)
-			
 			<INCLURE{fond=inclure/diogene_emballe_media_description,id_article=#GET{id_article},id_diogene=#_diogene:ID_DIOGENE,ajax} />
 			
-			[(#GET{doc_uploaded}|=={non}|oui)
-				[(#SET{file_upload_limite,1})]
-				[(#SET{file_queue_limite,1})]
-				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
-				
-				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
-				<div class="em_charger_fichiers">
-					<ul>
-						<li><a href="#em_charger_fichier"><:emballe_medias:lien_charger_local:></a></li>
-						[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
-						[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
-					</ul>
-					<div id="em_charger_fichier">
-				]
-				
-				<INCLURE{fond=inclure/emballe_media_template_upload}>
-					
-				<INCLURE{fond=inclure/upload_formulaire,
-					id_diogene=#GET{id_diogene},
-					id_rubrique=#GET{id_rubrique},
-					id_parent=#GET{id_rubrique},
-					id_objet=#GET{id_article},
-					objet=article,
-					config_fichiers=#GET{config_fichiers},
-					file_upload_limite=#GET{file_upload_limite},
-					file_queue_limite=#GET{file_queue_limite},
-					nb_files_count=#GET{nb_files_count},
-					doc_uploaded=#GET{doc_uploaded}
-					selecteur_recharger=#LISTE{"#em_upload_fichier","#liste_medias_publication"},env}>
-
-				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
-						</div>
-						[(#GET{afficher_ftp}|=={oui}|oui)
-						<div id="em_charger_ftp" class="ajax">
-							[(#FORMULAIRE_EM_CHARGER_MEDIA_FTP{article,#GET{id_article,0},#GET{file_types},#GET{type},#GET{file_upload_limite}})]
-						</div>]
-						[(#GET{afficher_doc_trad}|=={oui}|oui)
-						<div id="em_doc_trad">
-							[(#GET{doc_trad_dispo}|=={oui}|oui)
-							[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]]
-							[(#GET{doc_trad_dispo}|=={non}|oui)
-							#BOITE_OUVRIR{'',error}
-								<p><:emballe_medias:message_doc_trad_indisponible:></p>
-								[<p><a href="(#URL_ARTICLE{[(#GET{article_trad})]}|parametre_url{retour,#SELF})"><:emballe_medias:lien_voir_origine:></a></p>]
-							#BOITE_FERMER]
-						</div>]
-					</div>
-				]
-			]
+			<INCLURE{fond=inclure/diogene_emballe_media_bloc_upload_unique,id_article=#GET{id_article},file_types=#GET{file_types},types=#GET{types},type=#GET{type},afficher_doc_trad=#GET{afficher_doc_trad},id_diogene=#GET{id_diogene},id_rubrique=#GET{id_rubrique},
+				id_parent=#GET{id_rubrique},
+				id_objet=#GET{id_article},
+				objet=article,
+				config_fichiers=#GET{config_fichiers},
+				file_upload_limite=#GET{file_upload_limite},
+				file_queue_limite=#GET{file_queue_limite},
+				nb_files_count=#GET{nb_files_count},
+				doc_uploaded=#GET{doc_uploaded}} />
 			
 			<INCLURE{fond=inc-media_uploaded,id_objet=#GET{id_article},objet=article,em_type=#GET{type},id_diogene=#GET{id_diogene},ajax,env}>
 			<INCLURE{fond=inclure/emballe_media_formulaire_article,id_article=#GET{id_article},id_trad,id_rubrique=#GET{id_rubrique,#ENV{id_rubrique,0}},id_diogene=#GET{id_diogene},ajax,env}>
@@ -202,7 +156,6 @@
 				[(#SET{file_upload_limite,#GET{limite_upload}})]
 				[(#SET{file_queue_limite,#GET{limite_upload}})]
 				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
-				
 				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
 				<div class="em_charger_fichiers">
 					<ul>
