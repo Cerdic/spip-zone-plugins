@@ -1274,16 +1274,15 @@ function association_verifier_destinations($valeur, $req=TRUE) {
  * @defgroup filtre_selecteur_asso
  * Selecteur HTML (liste deroulante) servant a filtrer le listing affiche en milieu de page
  *
- * @param string $plus
- *   Source HTML rajoute a la suite.
- *   (utile si on genere tout le formulaire avec des champs caches)
+ * @param int $sel
+ *   Selection initiale (pour conserver la valeur selectionnee)
  * @return string $res
  *   Code HTML du selecteur (ou du formulaire complet si $exec est indique)
  *
 ** @{ */
 
 /**
- * @name association_selecteur_<liste>
+ * @name filtre_selecteur_asso_<liste1>
  * cas general de :
  *
  * @param int $sel
@@ -1294,7 +1293,7 @@ function association_verifier_destinations($valeur, $req=TRUE) {
 /**
  * Selecteur d'exercice comptable
  */
-function filtre_selecteur_asso_exercice($sel='', $plus='') {
+function filtre_selecteur_asso_exercice($sel='') {
     $res = "<select name ='exercice' onchange='form.submit()' id='asso_exercice'>\n";
 #    $res .= '<option value="0" ';
 #	$res .= (!$el?' selected="selected"':'');
@@ -1306,14 +1305,13 @@ function filtre_selecteur_asso_exercice($sel='', $plus='') {
 		$res .= '>'.$val['intitule']."</option>\n";
     }
     sql_free($sql);
-    $res .= "</select>\n$plus";
-    return $res;
+    return "$res</select>\n";
 }
 
 /**
  * Selecteur de destination comptable
  */
-function filtre_selecteur_asso_destination($sel='', $plus='') {
+function filtre_selecteur_asso_destination($sel='') {
     if ( !$GLOBALS['association_metas']['destinations'])
  		return ''; // on n'affiche le selecteur que si l'utilisation des destinations est activee en configuration
    $res = "<select name ='destination' onchange='form.submit()' id='asso_destination'>n";
@@ -1328,14 +1326,13 @@ function filtre_selecteur_asso_destination($sel='', $plus='') {
 		$res .= '>'.$val['intitule']."</option>\n";
     }
     sql_free($sql);
-    $res .= "</select>\n$plus";
-	return $res;
+    return "$sel</select>\n";
 }
 
 /**
  * Selecteur de groupe de membres
  */
-function filtre_selecteur_asso_groupe($sel='', $plus='') {
+function filtre_selecteur_asso_groupe($sel='') {
     $sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
     if ( !$sql || !sql_count($sql) )
 		return '';  // ne proposer que s'il y a des groupes definis
@@ -1349,8 +1346,7 @@ function filtre_selecteur_asso_groupe($sel='', $plus='') {
 		$res .= '>'.$val['nom']."</option>\n";
 	}
 	sql_free($sql);
-	$res .= "</select>\n$plus";
-	return $res;
+	return "$res</select>\n";
 }
 
 /**
@@ -1360,7 +1356,7 @@ function filtre_selecteur_asso_groupe($sel='', $plus='') {
  *   Idem instituer_statut_interne_ici
  *   Idem instituer_adherent_ici
  */
-function filtre_selecteur_asso_statut($sel='', $exec='', $plus='') {
+function filtre_selecteur_asso_statut($sel='') {
     $res = "<select id='statut_interne' name='statut_interne' onchange='form.submit()' id='asso_statutinterne'>\n";
 #    $res .= '<option value="tous"';
 #    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
@@ -1370,33 +1366,33 @@ function filtre_selecteur_asso_statut($sel='', $exec='', $plus='') {
     $res .= '>'. _T('asso:actifs') ."</option>\n";
     foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"'
-		. ($sel==$statut?' selected="selected"':'')
-		. '> '
-		. _T('asso:adherent_entete_statut_'.$statut)
+		$res .= ($sel==$statut?' selected="selected"':'')
+		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut)
 		. "</option>\n";
 	}
-	$res .= "</select>\n$plus";
-    return $res;
+	return "$res</select>\n";
 }
 
 /**
  * Zone de saisie de numero de membre
  */
-function filtre_selecteur_asso_id($sel='', $exec='', $plus='') {
+function filtre_selecteur_asso_id($sel='') {
 	    $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'.$sel.'" placeholder="'. _T('asso:entete_id') .'" />';
-    return "$res\n$plus";
+    return "$res\n";
 }
 
 //@}
 
 /**
- * @name association_selectionner_<liste>
+ * @name filtre_selecteur_asso_<liste2>
  * cas general de :
  *
  * @param string $table
  *   Nom (sans prefixe "spip_") de la table concernee
+ * @param string $url
+ *   Adresse des liens (en son absence c'est une liste de selection)
  * @param bool $lst
- *   Type : liste de selection (vrai) ou liens/boutons (faux)
+ *   Indique s'il faut une liste de selection (vrai) ou des cases/boutons (faux)
  */
 //@{
 
@@ -1408,7 +1404,7 @@ function filtre_selecteur_asso_id($sel='', $exec='', $plus='') {
  * @param string $champ
  *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
  */
-function filtre_selecteur_asso_annee($annee='', $table, $champ, $plus='', $lst=TRUE) {
+function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
     $pager = '';
     if ( !$annee ) // annee non precisee (ou valant 0)
 		$annee = date('Y'); // on prend l'annee courante
@@ -1424,13 +1420,12 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $plus='', $lst=T
 			$res .= ' selected="selected"';
 			$pager .= "\n<strong>$val[annee]</strong>";
 		} else {
-			$pager .= ' <a href="'. generer_url_ecrire($exec, '&annee='.$val['annee']) .'">'.$val['annee']."</a>\n";
+			$pager .= ' <a href="'.$url.'&annee='.$val['annee']) .'">'.$val['annee']."</a>\n";
 		}
 		$res .= '>'.$val['annee']."</option>\n";
     }
-    $res .= '</select>'.$plus;
     sql_free($sql);
-    return ($lst?$res:$pager.$plus);
+    return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
 }
 
 /**
@@ -1441,7 +1436,7 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $plus='', $lst=T
  * @param string $champ
  *   Nom du champ contenant les initiales recherchees
  */
-function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $plus='', $lst='') {
+function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
     $lettre = strtoupper($lettre);
     $pager = '';
     $res = "<select name ='lettre' onchange='form.submit()' id='lettre_champ'>\n";
@@ -1455,18 +1450,17 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $plus='', $lst
 			$res .= ' selected="selected"';
 			$pager .= "\n<strong>$lettre</strong>";
 		} else {
-			$pager .= ' <a href="'.$lst.'?lettre='.$val['init'].'">'.$val['init'].'</a>'; //!\
+			$pager .= ' <a href="'.$url.'?lettre='.$val['init'].'">'.$val['init'].'</a>';
 		}
 		$res .= '>'.$val['init']."</option>\n";
     }
     sql_free($sql);
-    $res .= "</select>\n$plus";
     if ( !$lettre || $lettre=='%' ) {
-		$pager .= ' <strong>'. _T('asso:entete_tous') .'</strong>'; //!\
+		$pager .= ' <strong>'. _T('asso:entete_tous') .'</strong>';
 	} else {
-		$pager .= ' <a href="'.$lst.'">'. _T('asso:entete_tous') .'</a>';
+		$pager .= ' <a href="'.$url.'">'. _T('asso:entete_tous') .'</a>';
 	}
-    return ($lst?$res:($pager.$plus));
+    return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
 }
 
 /**
@@ -1481,8 +1475,8 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $plus='', $lst
  * @see association_selectionner_annee
  * @see association_selectionner_exercice
  */
-function filtre_selecteur_asso_periode($periode, $table, $champ) {
-	return $GLOBALS['association_metas']['exercices'] ? filtre_selecteur_asso_exercice($periode) : filtre_selecteur_asso_annee($periode, $table, $champ) ;
+function filtre_selecteur_asso_periode($periode, $table, $champ, $url='') {
+	return $GLOBALS['association_metas']['exercices'] ? filtre_selecteur_asso_exercice($periode) : filtre_selecteur_asso_annee($periode, $table, $champ, $url) ;
 }
 
 /**
@@ -1493,7 +1487,7 @@ function filtre_selecteur_asso_periode($periode, $table, $champ) {
  * @param string $objet
  *   Objet lie auquel restreindre la selection.
  */
-function filtre_selecteur_asso_type($type='', $table, $objet='', $plus='', $lst=FALSE) {
+function filtre_selecteur_asso_type($type='', $table, $objet='', $lst=FALSE) {
     switch ($table) {
 		case 'adresse':
 			$abreviation = 'adr';
@@ -1523,8 +1517,7 @@ function filtre_selecteur_asso_type($type='', $table, $objet='', $plus='', $lst=
 		$pager .= '<div class="choix"><input name="type_$table" id="type_$table_'. preg_replace('/\W/', '', $val['type']) .'" type="radio" value="'.$val['type']. ($type==$val['type']?' checked="checked"':'') .'" /><label for>"type_$table_'. preg_replace('/\W/', '', $val['type']) .'">'. appliquer_filtre($val['type'], "logo_type_$abreviation") ."</label></div>\n";
 	}
 	sql_free($sql);
-    $res .= "</select>\n$plus";
-    return ($lst?$res:$pager.$plus);
+    return ($lst?"$res</select>\n":$pager);
 }
 
 //@}
@@ -1569,10 +1562,7 @@ function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
 		$intitule_destinations[$val['id_destination']] = $val['intitule'];
     }
 	sql_free($sql);
-    $res1 .= "</select>\n$plus";
-    $res2 .= ''.$plus;
-    $res = ($lst?$res1:$res2);
-	return $res;
+    return ($lst?"$res1</select>\n":$res2);
 }
 
 /**

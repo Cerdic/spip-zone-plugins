@@ -120,7 +120,7 @@ function exec_adherents() {
 			$filtre_categorie .= '>'.$categorie['valeur'].'</option>'; // court (ou pas) : comme pour les groupes
 		}
 		echo association_bloc_filtres(array(
-			'lettre' => array($lettre, 'asso_membres', 'nom_famille', 'adherents', ),
+			'lettre' => array($lettre, 'asso_membres', 'nom_famille', generer_url_ecrire('adherents', (!$id?($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut=$statut_interne":'').($id_categorie?"&categorie=$id_categorie":''):"&id=$id") ), ),
 			'id' => $id,
 			'groupe' => $id_groupe, // ne pas proposer que si on affiche les groupes : on peut vouloir filtrer par groupe sans pour autant les afficher
 			'statut'=> $statut_interne,
