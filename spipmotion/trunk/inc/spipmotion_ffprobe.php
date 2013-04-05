@@ -25,7 +25,7 @@ function inc_spipmotion_ffprobe_dist($chemin){
 	$infos = $metas = array();
 	if(file_exists($chemin)){
 		ob_start();
-		passthru("ffprobe -i '$chemin' -show_format -show_streams");
+		passthru("ffprobe -i '$chemin' -show_format -show_streams 2> /dev/null");
 		$metadatas=ob_get_contents();
 		ob_end_clean();
 		preg_match('/\[FORMAT\](.*)\[\/FORMAT\]/s', $metadatas, $formats);
@@ -53,7 +53,7 @@ function inc_spipmotion_ffprobe_dist($chemin){
 						$metas['largeur'] = $stream_final['width'];
 					if(isset($stream_final['height']))
 						$metas['hauteur'] = $stream_final['height'];
-					if(isset($stream_final['nb_frames']))
+					if(isset($stream_final['nb_frames']) && $stream_final['nb_frames'] != 'N/A')
 						$metas['framecount'] = $stream_final['nb_frames'];
 					if(isset($stream_final['r_frame_rate'])){
 						 $framerate = explode('/',$stream_final['r_frame_rate']);
@@ -71,6 +71,8 @@ function inc_spipmotion_ffprobe_dist($chemin){
 			}
 		}
 	}
+	spip_log('Metas de ffprobe sur '.$chemin,'test');
+	spip_log($metas,'test');
 	return $metas;
 }
 ?>
