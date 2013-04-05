@@ -374,7 +374,7 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
         array (
           'nom' => 'Position',
           'champ' => 'position',
-          'sql' => 'int(11) DEFAULT NULL',
+          'sql' => 'int(2) DEFAULT NULL',
           'caracteristiques' => 
           array (
             0 => 'editable',

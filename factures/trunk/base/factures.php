@@ -82,7 +82,7 @@ function factures_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_factures_ligne"  => "bigint(21) NOT NULL",
 			"id_facture"         => "int(11) NOT NULL DEFAULT '0'",
-			"position"           => "int(11) DEFAULT NULL",
+			"position"           => "int(2) DEFAULT NULL",
 			"quantite"           => "float DEFAULT NULL",
 			"unite"              => "varchar(50) DEFAULT NULL",
 			"designation"        => "text",
