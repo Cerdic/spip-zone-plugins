@@ -84,6 +84,7 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
     )
 );
 
+$GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
 
 if (!function_exists('array_fill_keys')) {
     /**
