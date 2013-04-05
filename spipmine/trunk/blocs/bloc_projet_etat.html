@@ -1,0 +1,18 @@
+
+<!-- #SQUELETTE -->
+
+<BOUCLE_p(PROJETS){id_projet=#ENV{id_projet}}>
+<fieldset id="projet">
+	<legend><:projets:label_etat_projet:></legend>
+	<dl>
+
+		<dt><:projets:label_type_presta:></dt><dd class="#EDIT{id_type_presta}"><BOUCLE_t(TYPES_PRESTATIONS){id_type_presta}>[<span>(#NOM_TYPE_PRESTA|supprimer_numero|couper{16}|sinon{'&nbsp;'})</span>]</BOUCLE_t></B_t>&nbsp;<//B_t></dd>
+		<dt><:projets:label_statut_projet:></dt><dd class="#EDIT{id_type_status}"><BOUCLE_s(TYPES_STATUS){id_type_status}>[<span>(#NOM_TYPE_STATUS|supprimer_numero|couper{16}|sinon{'&nbsp;'})</span>]</BOUCLE_s></B_s>&nbsp;<//B_s></dd>
+		<dt><:projets:label_devis:></dt><dd class="#EDIT{id_facture}"><BOUCLE_d(FACTURES){id_projet}{id_type_document=2}>[<a href="#URL_PAGE{fiche_facture, id_facture=#ID_FACTURE}">(#NUM_FACTURE)</a>]</BOUCLE_d></B_d>&nbsp;<//B_d></dd>
+		<dt><:projets:label_cadre_projet:></dt><dd class="#EDIT{id_type_facturation}"><BOUCLE_c(TYPES_FACTURATION){id_type_facturation}{par num nom_type_facturation}>[(#NOM_TYPE_FACTURATION|supprimer_numero)]</BOUCLE_c></B_c>&nbsp;<//B_c></dd>
+		<dt><:projets:label_projet_actif:></dt><dd class="#EDIT{actif}">[(#ACTIF|=={'non'}|?{'clos','actif'})]</dd>
+
+	</dl>
+</fieldset>
+
+</BOUCLE_p>

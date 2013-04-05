@@ -1,0 +1,21 @@
+#CACHE{0}
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+	"Trouver le projet"...
+	Cela veut dire :
+	- cette rubrique sur laquelle on applique le formattage "document"
+	- et qui peut etre soit une doc, soit un cahier des charges...
+	- correspond-elle a un des champs "num_doc" ou "num_cdc" ou "num_dev" d'un des projets de la table spip_projets ?
+
+]
+<B_projet>
+
+<BOUCLE_projet(spip_projets_liens){objet='rubrique'}{id_objet=#ID_RUBRIQUE}>
+	<a href="#URL_PAGE{fiche_projet,id_projet=#ID_PROJET}" title="<:projet:voir_projet_num|attribut_html:>#ID_PROJET [(#MODELE{titre_projet,id_projet=#ID_PROJET})]">
+	<img src="#URL_SITE_SPIP/#LOGO_PROJET{30,30}" alt="<:projet:voir_projet_num|attribut_html:>#ID_PROJET [(#MODELE{titre_projet,id_projet=#ID_PROJET})]" width="30" height="30" /></a>
+	<span class="#EDIT{choix_cdc}">&nbsp;XXX&nbsp;</span>
+</BOUCLE_projet>
+</B_projet>
+<//B_projet>

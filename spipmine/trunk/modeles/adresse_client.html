@@ -1,0 +1,22 @@
+<!-- #SQUELETTE-->
+
+[(#REM)
+	@path   \squelettes\modeles\adresse_client.html
+    Afficher l'adresse postale d'un client.
+]
+
+<BOUCLE_client(ORGANISATIONS){id_projet}>
+<div class="adresse_client">
+	[<h2 class="#EDIT{nom}"><strong><a href="[(#URL_ORGANISATION|parametre_url{'id_organisation',#ID_ORGANISATION})]">(#NOM)</a></strong></h2>]
+	<BOUCLE_a(ADRESSES){id_auteur}{tous}>
+	[<span class="#EDIT{voie}">(#VOIE)</span>]
+	[<br /><span class="#EDIT{complement}">(#COMPLEMENT)</span>]
+	[<br /><span class="#EDIT{boite_postale}">(#BOITE_POSTALE)</span>]
+	[<br /><span class="#EDIT{code_postal}">(#CODE_POSTAL)</span>] [<span class="#EDIT{ville}">(#VILLE)</span>]
+	</BOUCLE_a>
+</div>
+</BOUCLE_client>
+
+</B_client>
+Client non trouv&eacute;.
+<//B_client>

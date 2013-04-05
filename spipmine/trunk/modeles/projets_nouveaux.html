@@ -1,0 +1,43 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Derniers projets rentr�s.
+	Ceux sur lesquels on a une date rendu mais sur lesquels on a pas encore boss�.
+
+	10/04/2009 : cr�ation
+	15/04/2009 : am�liorations
+]
+
+<B_nouveaux>
+<table class="spip">
+	<thead>
+		<tr>
+			<th>N�</th>
+			<th>Client</th>
+			<th>Nom</th>
+			<th>Etat</th>
+			<th>H. esti.</th>
+			<th>H. pass.</th>
+			<th>A rendre le</th>
+			<th>Livr� le</th>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_nouveaux(PROJETS){!par date_livraison_prevue}{id_type_status IN(0,1)}{0,30}>
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]>
+			<td><a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ID_PROJET})]" title="#NOM_PROJET">[#ID_PROJET]</a></td>
+			<td><BOUCLE_client(ORGANISATIONS){id_organisation}><a href="[(#URL_ORGANISATION|parametre_url{'id_organisation',#ID_ORGANISATION})]" title="#NOM">[(#NOM|couper{3})]</a></BOUCLE_client></td>
+			<td><a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ID_PROJET})]">[(#NOM_PROJET|couper{80})]</a></td>
+			<td class="#EDIT{id_type_status}"><BOUCLE_status(TYPES_STATUS){id_type_status}>#NOM_TYPE_STATUS</BOUCLE_status></td>
+			<td class="#EDIT{nb_heures_estimees} horaire">#NB_HEURES_ESTIMEES</td>
+			<td class="horaire">#TOTAL_HEURES_PASSEES</td>
+			<td class="#EDIT{date_livraison_prevue} date">[(#DATE_LIVRAISON_PREVUE|affdate{'d/m/Y'})]</td>
+			<td class="#EDIT{date_livraison} date">[(#DATE_LIVRAISON|affdate{'d/m/Y'})]</td>
+		</tr>
+</BOUCLE_nouveaux>
+	</tbody>
+</table>
+
+</B_nouveaux>

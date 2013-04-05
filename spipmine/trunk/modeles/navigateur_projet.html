@@ -1,0 +1,26 @@
+#CACHE{0}
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	25/04/2009 : optimisation dans le title avec NOM_PROJET|texte_backend
+]
+<div class="navigateur projet">
+
+<B_facture>
+<BOUCLE_facture(PROJETS){id_projet}>
+
+	<BOUCLE_p(PROJETS){precedent}>
+		<a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',[(#ID_PROJET)]})]" title="<:spipmine:aller_projet_num|attribut_html:>#ID_PROJET - Projet [(#NOM_PROJET|texte_backend)]" ><i class="icon-chevron-left"></i> <:spipmine:projet_precedent:></a>
+	</BOUCLE_p>
+	&nbsp;|&nbsp;
+	<BOUCLE_s(PROJETS){suivant}>
+		<a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',[(#ID_PROJET)]})]" title="Aller au projet N�#ID_PROJET - Projet [(#NOM_PROJET|texte_backend)]" ><:spipmine:projet_suivant:> <i class="icon-chevron-right"></i></a>
+	</BOUCLE_s>
+
+</BOUCLE_facture>
+</B_facture>
+<//B_facture>
+
+</div>

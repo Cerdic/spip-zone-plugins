@@ -1,0 +1,17 @@
+
+<!-- projets/squelettes/modeles/navigateur_client.html -->
+
+<div class="navigateur projet">
+
+
+<BOUCLE_facture(ORGANISATIONS){id_organisation}{par nom}>
+	<BOUCLE_p(ORGANISATIONS){precedent}>
+		<a href="[(#URL_ORGANISATION)]" title="Aller sur la fiche client N�#ID_ORGANISATION - Client #NOM" ><img src="#URL_SITE_SPIP/prive/images/triangle_rtl.gif" alt="Petite fl&egrave; gauche" />Client pr&eacute;c&eacute;dent</a>
+	</BOUCLE_p>
+	&nbsp;|&nbsp;
+	<BOUCLE_s(ORGANISATIONS){suivant}>
+		<a href="[(#URL_ORGANISATION)]" title="Aller sur la fiche client N�#ID_ORGANISATION - Client #NOM" >Client suivant <img src="#URL_SITE_SPIP/prive/images/triangle.gif" alt="Petite fl&egrave; droite" /></a>
+	</BOUCLE_s>
+</BOUCLE_facture>
+
+</div>

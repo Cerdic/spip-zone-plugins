@@ -1,0 +1,45 @@
+
+<!-- #SQUELETTE -->
+
+<h3>Liste des factures impayées</h3>
+
+[(#SET{defaut_tri,#ARRAY{
+    id_organisation,1,
+    nom,1,
+    num_facture,1,
+    date_facture,-1,
+    montant,1
+}})
+]
+
+<B_factures>
+<table summary="<:projets:tableau_impayes:>" class='spip'>
+	<thead>
+	<tr>
+		<th>[(#TRI{id_organisation,ID ORGA.,ajax})]</th>
+		<th>[(#TRI{nom,NOM ORGA.,ajax})]</th>
+        <th>[(#TRI{num_facture,NUM. FACTURE,ajax})]</th>
+        <th>[(#TRI{date_facture,Date facture,ajax})]</th>
+        <th>[(#TRI{montant,Montant,ajax})]</th>
+        <th>reglement</th>
+	</tr>
+	</thead>
+	<tbody>
+
+<BOUCLE_factures(FACTURES)
+	{tri #ENV{order,date_facture},#GET{defaut_tri}}
+	{pagination 50}>
+
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<td>#ID_ORGANISATION</td>
+		<td>#NOM</td>
+		<td>#NUM_FACTURE</td>
+        <td class="date">[(#DATE_FACTURE|affdate{'d/m/Y'})]</td>
+        <td class="montant">[(#MONTANT|monetaire)]</td>
+        <td class="montant">[(#ID_TYPE_DOCUMENT|=={1}|oui)[(#MODELE{reglement}{id_facture})]]</BOUCLE_reglements></td>
+	</tr>
+</BOUCLE_factures>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_factures>

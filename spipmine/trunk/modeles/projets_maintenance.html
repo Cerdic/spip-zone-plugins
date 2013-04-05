@@ -1,0 +1,78 @@
+#CACHE{0}
+<!-- #SQUELETTE -->
+[(#REM)
+
+	Projets
+	- concernant uniquement de la maintenance (informatique ou web)
+	- en cours de validit� (par d�faut) ou tous
+
+	04/05/2009 : cr�ation
+	07/05/2009 : optimisation
+	10/02/2009 : solution trouv�e pour le param�tre pass� dans l'url
+
+]
+
+#SET{id_orgnaisation, #EVAL{_request('id_organisation')}}
+#SET{id_type_status, #EVAL{_request('id_type_status')}}
+
+
+<fieldset>
+<legend>Contrats de maintenance </legend>
+<form name="type_projet" action="#SELF" method="get">
+
+	<label>Filtre </label>
+	<select name="id_type_status" >
+		<option value="">---</option>
+		<BOUCLE_s(TYPES_STATUS){id_type_status IN (4,5,6)}{par num nom_type_status}>
+		<option value="#ID_TYPE_STATUS" [(#EVAL{_request('id_type_status')}|=={#ID_TYPE_STATUS}|?{'selected="selected"'})]>[(#NOM_TYPE_STATUS|supprimer_numero)]</option>
+		</BOUCLE_s>
+	</select>
+
+	<label> Client </label>
+	<select name="id_organisation" >
+		<option value="">---</option>
+		<BOUCLE_c(ORGANISATIONS){par nom_}>
+		<option value="#ID_ORGANISATION" [(#EVAL{_request('id_organisation')}|=={#ID_ORGANISATION}|?{'selected="selected"'})]>[(#NOM|couper{20})]</option>
+		</BOUCLE_c>
+	</select>
+	<input type="submit" value="OK" />
+	<input[(#ENV{id_organisation}|?{'',' style="display:none"'})] type="button" onclick="[document.location='(#URL_ORGANISATION|parametre_url{'id_organisation',#ENV{id_organisation}})']" value="Fiche client" />
+</form>
+
+
+<B_a>
+#PAGINATION
+
+<table class="spip tablesorter">
+	<thead>
+		<tr>
+			<th>N�</th>
+			<th>Client</th>
+			<th>Nom</th>
+			<th>Etat</th>
+			<th>H. esti.</th>
+			<th>H. pass.</th>
+			<th>A rendre le</th>
+			<th>Livr� le</th>
+		</tr>
+	</thead>
+	<tbody>
+	[(#REM) maintenance web, maintenance informatique, Admin reseaux / serveur]
+<BOUCLE_a(PROJETS){id_type_presta IN(4,5,13)}{!par date_livraison_prevue}{id_type_status = #GET{id_type_status, .*}}{id_organisation = #GET{id_organisation, .*}}{actif?}{id_type_status?}{pagination 10}>
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]>
+			<td><a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ID_PROJET})]" title="#NOM_PROJET">[#ID_PROJET]</a></td>
+			<td><BOUCLE_client(ORGANISATION){id_organisation}><a href="[(#URL_PAGE{fiche_client}|parametre_url{'id_organisation',#ID_ORGANISATION})]" title="#NOM">[(#NOM|couper{15})]</a></BOUCLE_client></td>
+			<td><a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ID_PROJET})]">[(#NOM_PROJET|couper{80})]</a></td>
+			<td class="#EDIT{id_type_status}"><BOUCLE_status(TYPES_STATUS){id_type_status}>#NOM_TYPE_STATUS</BOUCLE_status></td>
+			<td class="#EDIT{nb_heures_estimees} horaire">#NB_HEURES_ESTIMEES</td>
+			<td class="horaire">#TOTAL_HEURES_PASSEES</td>
+			<td class="#EDIT{date_livraison_prevue} date">[(#DATE_LIVRAISON_PREVUE|affdate{'d/m/Y'})]</td>
+			<td class="#EDIT{date_livraison} date">[(#DATE_LIVRAISON|affdate{'d/m/Y'})]</td>
+		</tr>
+</BOUCLE_a>
+	</tbody>
+</table>
+
+</B_a>
+
+</fieldset>

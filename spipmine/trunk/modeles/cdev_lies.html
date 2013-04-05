@@ -1,0 +1,42 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Chercher parmi toutes les rubriques
+	liées à tous les projets liés à CETTE rubrique
+	celles qui sont de type "cahier de développement" càd :
+	- soit dont le parent le plus proche possédant un mot clé du groupe "type_objet" et donc ce mot soit "cahierDeDeveloppement"
+
+]
+#SET{objet,''}
+<B_projet>
+[(#REM) Les projets liés à la rubrique ]
+<BOUCLE_projet(spip_projets_liens){id_objet=#ID_RUBRIQUE}>
+	<!-- la rubrique #ID_RUBRIQUE est liée au projet #ID_PROJET -->
+
+	[(#REM) Toutes les rubriques liées aux projets ]
+	<BOUCLE_lesObjetsLies(spip_projets_liens){id_projet}>
+	<!-- Le projet #ID_PROJET est lié à l'objet #ID_OBJET -->
+	[(#REM) Les objets de type CDEV (parent 76) ]
+	<BOUCLE_objets(RUBRIQUES){id_rubrique=#ID_OBJET}>
+	<a href="#URL_RUBRIQUE{#ID_RUBRIQUE}" title="<:spipmine:voir_cdev_num|attribut_html:>#ID_RUBRIQUE[ (#TITRE)]">
+	<img src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|extraire_attribut{src})]" alt="<:spipmine:voir_cdev_num|attribut_html:>#ID_RUBRIQUE[ (#TITRE)]" width="30" height="30" /></a>
+	<span class="#EDIT{choix_dev}">&nbsp;</span>
+	</BOUCLE_objets>#SET{objet,oui}
+	</B_objets>
+	<!-- l'objet #ID_OBJET n'est pas un objet de type CDEV -->
+	<//B_objets>
+	</BOUCLE_lesObjetsLies>
+
+</BOUCLE_projet>
+</B_projet>
+<!-- la rubrique #ID_RUBRIQUE n'est liée à aucun projet -->
+<//B_projet>
+[(#GET{objet}|non)
+<img class="#EDIT{choix_doc}"
+	src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|extraire_attribut{src})]"
+	alt="<:spipmine:choisir_cdev_objet|attribut_html:> <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	title="<:spipmine:choisir_cdev_objet|attribut_html:> <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	width="30" height="30" /><span class="#EDIT{choix_dev}">&nbsp;</span>
+]

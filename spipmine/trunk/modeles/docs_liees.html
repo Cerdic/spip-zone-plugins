@@ -1,0 +1,43 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Chercher parmi toutes les rubriques
+	li�es � tous les projets li�s � CETTE rubrique
+	celles qui sont de type "documentation" c�d :
+	- soit dont le parent le plus proche poss�dant un mot cl� du groupe "type_objet" et donc ce mot soit "documentation"
+	- soit sont LE parent a l'id_rubrique 38
+
+]
+#SET{objet,''}
+<B_projet>
+[(#REM) Les projets li�s � la rubrique ]
+<BOUCLE_projet(spip_projets_liens){id_objet=#ID_RUBRIQUE}>
+	<!-- la rubrique #ID_RUBRIQUE est li�e au projet #ID_PROJET -->
+
+	[(#REM) Toutes les rubriques li�es aux projets ]
+	<BOUCLE_lesObjetsLies(spip_projets_liens){id_projet}>
+	<!-- Le projet #ID_PROJET est li� � l'objet #ID_OBJET -->
+	[(#REM) Les objets de type DOC li�s aux projets ]
+	<BOUCLE_objets(RUBRIQUES){id_rubrique=#ID_OBJET}{id_parent=38}>
+	<a href="#URL_RUBRIQUE{#ID_RUBRIQUE}" title="Voir la documentation N&deg;#ID_RUBRIQUE[ (#TITRE)]">
+	<img src="#URL_SITE_SPIP/IMG/rubon38.png" alt="Voir la documentation N&deg;#ID_RUBRIQUE[ (#TITRE)]" width="30" height="30" /></a>
+	<span class="#EDIT{choix_doc}">&nbsp;</span>
+	</BOUCLE_objets>#SET{objet,oui}
+	</B_objets>
+	<!-- l'objet #ID_OBJET n'est pas un objet de type CDEV -->
+	<//B_objets>
+	</BOUCLE_lesObjetsLies>
+
+</BOUCLE_projet>
+</B_projet>
+<!-- la rubrique #ID_RUBRIQUE n'est li�e � aucun projet -->
+<//B_projet>
+[(#GET{objet}|non)
+<img class="#EDIT{choix_doc}"
+	src="#URL_SITE_SPIP/IMG/ruboff38.png"
+	alt="Choisir une documentation pour l'objet <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	title="Choisir une documentation pour l'objet <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	width="30" height="30" /><span class="#EDIT{choix_doc}">&nbsp;</span>
+]

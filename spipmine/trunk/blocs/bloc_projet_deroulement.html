@@ -1,0 +1,16 @@
+
+<!-- #SQUELETTE -->
+
+<BOUCLE_p(PROJETS){id_projet=#ENV{id_projet}}>
+
+<fieldset id="deroulement">
+	<legend><:projets:label_deroulement:></legend>
+	<dl>
+		<dt><:projets:label_date_saisie:></dt><dd class="#EDIT{date_saisie}">[(#DATE_SAISIE|affdate{'d/m/Y'}|sinon{'&nbsp;'})]</dd>
+		<dt><:projets:label_date_demarrage:></dt><dd class="#EDIT{date_debut}">[(#DATE_DEBUT|affdate{'d/m/Y'}|sinon{'&nbsp;'})]</dd>
+		<dt><:projets:label_date_echeance:></dt><dd class="#EDIT{date_livraison_prevue}">[(#DATE_LIVRAISON_PREVUE|affdate{'d/m/Y'}|sinon{'&nbsp;'})]</dd>
+		<dt><:projets:label_date_livraison:></dt><dd class="#EDIT{date_livraison}">[(#DATE_LIVRAISON|affdate{'d/m/Y'}|sinon{'&nbsp;'})]</dd>
+ 	</dl>
+</fieldset>
+
+</BOUCLE_p>

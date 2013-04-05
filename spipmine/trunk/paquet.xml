@@ -16,5 +16,6 @@
     <licence>GNU/GPL</licence>
 
 
-    <necessite nom="projets" compatibilite="[1.0.0;]" />
+    <necessite nom="projets" compatibilite="[1.0.0;1.9.99]" />
+    <necessite nom="spipr_dist" compatibilite="[0.4.0;1.9.99]" />
 </paquet>

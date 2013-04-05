@@ -1,0 +1,42 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Chercher parmi toutes les rubriques
+	liees a tous les projets lies a CETTE rubrique
+	celles qui sont de type "cahier des charges" cad :
+	- soit dont le parent le plus proche possedant un mot cle du groupe "type_objet" et donc ce mot soit "cahierDesCharges"
+
+]
+#SET{objet,''}
+<B_projet>
+[(#REM) Les projets lies a la rubrique ]
+<BOUCLE_projet(spip_projets_liens){id_objet=#ID_RUBRIQUE}>
+	<!-- la rubrique #ID_RUBRIQUE est li�e au projet #ID_PROJET -->
+
+	[(#REM) Toutes les rubriques liees aux projets ]
+	<BOUCLE_lesObjetsLies(spip_projets_liens){id_projet}>
+	<!-- Le projet #ID_PROJET est lie a l'objet #ID_OBJET -->
+	[(#REM) Les objets de type CDC lies aux projets ]
+	<BOUCLE_objets(RUBRIQUES){id_rubrique=#ID_OBJET}>
+	<a href="#URL_RUBRIQUE" title="<:spipmine:voir_cdc_num|attribut_html:>#ID_RUBRIQUE[ (#TITRE|attribut_html)]">
+	<img src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|extraire_attribut{src})]" alt="<:spipmine:voir_cdc_num|attribut_html:>#ID_RUBRIQUE[ (#TITRE|attribut_html)]" width="30" height="30" /></a>
+	<span class="#EDIT{choix_cdc}">&nbsp;</span>
+	</BOUCLE_objets>#SET{objet,oui}
+	</B_objets>
+	<!-- l'objet #ID_OBJET n'est pas un objet de type CDEV -->
+	<//B_objets>
+	</BOUCLE_lesObjetsLies>
+
+</BOUCLE_projet>
+</B_projet>
+<!-- la rubrique #ID_RUBRIQUE n'est liee a aucun projet -->
+<//B_projet>
+[(#GET{objet}|non)
+<img class="#EDIT{choix_cdc}"
+	src="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|extraire_attribut{src})]"
+	alt="<:spipmine:choisir_cdc_objet|attribut_html:> <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	title="<:spipmine:choisir_cdc_objet|attribut_html:> <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	width="30" height="30" /><span class="#EDIT{choix_cdc}">&nbsp;</span>
+]

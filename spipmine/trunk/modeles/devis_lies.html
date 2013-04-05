@@ -1,0 +1,39 @@
+
+<!-- #SQUELETTE -->
+
+[(#REM)
+
+	Chercher parmi toutes les factures
+	li�es � tous les projets li�s � CETTE rubrique
+	celles qui sont de type "devis" c�d objet = devis
+]
+<B_projet>
+[(#REM) Les devis li�s � la rubrique ]
+<BOUCLE_projet(spip_projets_liens){id_objet=#ID_RUBRIQUE}{objet = 'devis'}>
+	<!-- la rubrique #ID_RUBRIQUE est li�e au projet #ID_PROJET -->
+
+	[(#REM) Toutes les rubriques li�es aux projets ]
+	<BOUCLE_lesObjetsLies(spip_projets_liens){id_projet}>
+	<!-- Le projet #ID_PROJET est li� � l'objet #ID_OBJET -->
+	[(#REM) Les objets de type DEVIS/FACTURE li�s aux projets ]
+	<BOUCLE_objets(FACTURES){id_facture=#ID_OBJET}{doublons}>
+	<a href="#URL_PAGE{fiche_facture,id_facture=#ID_FACTURE}" title="Voir la facture N&deg;#ID_OBJET">
+	<img src="#URL_SITE_SPIP/IMG/arton10.png" alt="Voir la facture N&deg;#ID_OBJET" width="30" height="30" /></a>
+	<span class="#EDIT{choix_doc}">&nbsp;</span>
+	</BOUCLE_objets>#SET{vide,non}
+	</B_objets>
+	<!-- l'objet #ID_OBJET n'est pas un objet de type DEVIS/FACTURE -->
+	<//B_objets>
+	</BOUCLE_lesObjetsLies>
+
+</BOUCLE_projet>
+</B_projet>
+<!-- la rubrique #ID_RUBRIQUE n'est li�e � aucun projet -->
+<//B_projet>
+[(#GET{objet}|non)
+<img class="#EDIT{choix_doc}"
+	src="#URL_SITE_SPIP/IMG/arton10.png"
+	alt="Choisir une facture pour l'objet <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	title="Choisir une facture pour l'objet <INCLURE{fond=inclure/titre_rubrique}{id_rubrique}/>"
+	width="30" height="30" /><span class="#EDIT{choix_doc}">&nbsp;</span>
+]

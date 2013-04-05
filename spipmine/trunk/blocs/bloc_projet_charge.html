@@ -1,0 +1,36 @@
+
+<!-- #SQUELETTE -->
+[(#REM)
+
+    Affiche les statistiques de charge relative au projet :
+	- le nombre d'heures estime (provient du devis)
+    - la charge reelle brute (total brut des actions)
+    - la charge ponderee (total des actions 'facturees')
+    - les heures facturees (provient directement de la table )
+    - les actions facturees (total des actions attribuees a une facture)
+    - les actions pas encore attribuees
+
+    19/03/2011 : passage des chaines de caractere dans le fichier lang; concatenation des champs heures et actions; ajout bloc repartition
+    24/09/2012 : optimisation pour mise en squelettes
+
+]
+
+<BOUCLE_p(PROJETS){id_projet=#ENV{id_projet}}>
+
+<fieldset id="charge">
+	<legend>Charge</legend>
+	<dl>
+		<dt><:projets:label_charge_estimee:></dt><dd class="#EDIT{nb_heures_estimees}">[(#NB_HEURES_ESTIMEES|horaire|sinon{'&nbsp;'})]</dd>
+		<!--dt><:projets:charge_reelle_brute:></dt><dd>[(#TOTAL_HEURES_PASSEES|horaire|sinon{'N/C'})]</dd-->
+		<!--dt><:projets:charge_reelle_decomptee:></dt><dd class="#EDIT{nb_heures_facturees}">[(#TOTAL_HEURES_DECOMPTEES|horaire|sinon{'&nbsp;'})]</dd-->
+        <dt><:projets:label_charge_brute_vs_comptee:></dt><dd class="#EDIT{nb_heures_facturees}">[(#TOTAL_HEURES_PASSEES|horaire|sinon{'N/C'})]/[(#TOTAL_HEURES_DECOMPTEES|horaire|sinon{'&nbsp;'})]</dd>
+		<!--dt><:projets:heures_facturees:> :</dt><dd class="#EDIT{nb_heures_facturees}">[(#NB_HEURES_FACTUREES|horaire|sinon{'&nbsp;'})]</dd-->
+		<!--dt><:projets:actions_facturees:> :</dt><dd>[(#TOTAL_ACTIONS_FACTUREES|horaire|sinon{'0'})]</dd-->
+		<!--dt><:projets:actions_en_attente:> :</dt><dd>[(#TOTAL_ACTIONS_ATTENTE|horaire|sinon{'0'})]</dd-->
+		<dt><:projets:label_actions_facturees_vs_attente:></dt><dd>[(#TOTAL_ACTIONS_FACTUREES|horaire|sinon{'0'})]/[(#TOTAL_ACTIONS_ATTENTE|horaire|sinon{'0'})]</dd>
+        <dt><:projets:label_repartition_intervenant:></dt><dd>999</dd>
+        <dt><:projets:label_repartition_metier:></dt><dd>999</dd>
+	</dl>
+</fieldset>
+
+</BOUCLE_p>
