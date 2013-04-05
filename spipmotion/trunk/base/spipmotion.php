@@ -5,12 +5,26 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
- *
+ * 2008-2013 - Distribué sous licence GNU/GPL
+ * 
+ * Déclaration des tables et champs supplémentaires
+ * 
+ * @package SPIP\SPIPmotion\Pipelines
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion dans le pipeline declarer_tables_principales (SPIP)
+ * 
+ * On ajoute 20 champs à la table spip_documents pour conserver les informations dont
+ * on a besoin issues des metadonnées pour les fichiers audio et vidéo
+ * 
+ * @param array $flux
+ * 		Le tableau de description des tables
+ * @return arrau $flux
+ * 		Le tableau de description des tables complétées
+ */
 function spipmotion_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['duree'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_documents']['field']['bitrate'] = "INTEGER";
@@ -36,14 +50,32 @@ function spipmotion_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-// Declarer dans la table des tables pour sauvegarde
+/**
+ * Insertion dans le pipeline declarer_tables_interfaces (SPIP)
+ * 
+ * On ajoute la table des metas de spipmotion dans table_des_tables 
+ * pour qu'elle soit sauvegardée
+ * 
+ * @param array $interfaces
+ * 		Le table de description des interfaces
+ * @return array $interfaces
+ * 		Le table de description des interfaces complété
+ */
 function spipmotion_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['spipmotion_metas'] = 'spipmotion_metas';
 	return $interfaces;
 }
 
 /**
+ * Insertion dans le pipeline declarer_tables_auxiliaires (SPIP)
  * 
+ * Déclaration de la table de metas spipmotion_metas qui accueille
+ * les metas spécifiques à SPIPmotion
+ * 
+ * @param array $tables_auxiliaires
+ * 		Le tableau des tables auxiliaires
+ * @return array $tables_auxiliaires
+ * 		Le tableau des tables auxiliaires complété
  */
 function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){	
 	$spip_spipmotion_metas = array(
@@ -64,7 +96,14 @@ function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){
 
 /**
  * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
- * On ajoute nos champs dans les champs editables de la table spip_documents
+ * 
+ * On ajoute nos champs ajoutés dans declarer_tables_principales 
+ * dans les champs editables de la table spip_documents
+ * 
+ * @param array $tables
+ * 		Le tableau des objets déclarés
+ * @return array $tables
+ * 		Le tableau des objets déclarés complété
  */
 function spipmotion_declarer_tables_objets_sql($tables){
 	$tables['spip_documents']['champs_editables'][] = 'duree';
