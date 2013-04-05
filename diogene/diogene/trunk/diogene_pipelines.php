@@ -15,6 +15,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Insertion dans le pipeline insert_head_css (SPIP)
+ * 
+ * Compromis entre faire deux hits pour de petits fichiers sur la page d'upload
+ * ou les trimballer sur tout le site dans une css compressée pour quelques octets (on choisi la 2)
+ * 
+ * @param $flux string
+ * 		Le contenu de la balise #INSERT_HEAD_CSS
+ * @return $flux string
+ * 		Le contenu de la balise modifié
+ */
+function diogene_insert_head_css($flux){
+	$diogene_css = direction_css(find_in_path('css/diogene.css'), lang_dir());
+	$datepicker_css = direction_css(find_in_path('css/jquery.ui.datepicker.css'), lang_dir());
+	$flux
+		.= "<link rel='stylesheet' type='text/css' media='all' href='$diogene_css' />\n"
+		.  "<link rel='stylesheet' type='text/css' media='all' href='$datepicker_css' />\n";
+	return $flux;
+}
+/**
  * Insertion dans le pipeline editer_contenu_objet (SPIP)
  * 
  * Insère ou enlève les champs dans le formulaire
