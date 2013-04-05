@@ -3,7 +3,7 @@
 	<slogan>Revisitons la barre de nav de SPIP</slogan>
 	<auteur>Collectif spip-dev</auteur>
 	<licence>(c) 2009 GPL</licence>
-	<version>1.1.10</version>
+	<version>1.1.11</version>
 	<icon>bandeau-32.png</icon>
 	<etat>stable</etat>
 	<description>Ce plugin permet de tester en situation r&#233;elle un nouveau bandeau de navigation pour l’interface de SPIP 2. Aussit&#244;t activ&#233;, il remplace la navigation principale de l’espace priv&#233; par une version am&#233;lior&#233;e, graphiquement assortie.</description>
