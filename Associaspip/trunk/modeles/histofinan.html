@@ -18,7 +18,7 @@ maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 	<hr class="nettoyeur" />
 	<:asso:liens_vers_les_justificatifs:>
 ]
-<BOUCLE_RecusFiscaux(ASSO_COMPTES){id_journal=#ENV{id}}{imputation=#META{/association/pc_cotisations}} {fusion YEAR(date)} {!par date}>
+<BOUCLE_RecusFiscaux(ASSO_COMPTES){id_journal=#ENV{id}}{imputation=#META{/association/pc_cotisations}} {fusion YEAR(date)} {!par date_operation}>
 [(#GET{droit_acces}|=={oui }|oui)
 	<a href="[(#URL_ECRIRE{pdf_fiscal}
 		|parametre_url{id,#ID_JOURNAL}

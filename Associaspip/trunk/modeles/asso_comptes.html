@@ -50,7 +50,7 @@ maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 	</tr>
 <BOUCLE_historique(ASSO_COMPTES)
  {id_journal?IN #ENV{id_journal}} {imputation?IN #ENV{imputation}}
- {!par date} {par id_journal,imputation}
+ {!par date_operation} {par id_journal,imputation}
  {pagination #ENV{rpp,#META{/association/pagination_historiques,10}}} >
 	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td><span title="#DATE">[(#DATE|affdate)]</span></td>
