@@ -82,56 +82,5 @@
 				$('#date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
 			}
         });
-        // action de controle du formulaire lorsque l'on clique sur le bouton envoyé
-        $('#envoyer').click(function(){
-            var valid     = true;
-            var datedebut = $("#date_debut").val();
-            var datefin   = $("#date_fin").val();
-            var data = { madate : datedebut };
-
-            // Les verifications :
-            // Pour le champ nom, vérifie sa présence
-            if ($("#champ_nom_reservation").val() == ""){
-                $("#champ_nom_reservation").css("border-color","#FF0000");
-                $("#champ_nom_reservation").next(".error-message").css("color","#FF0000").html("X  Il faut remplir ce champ !!");
-                valid = false;
-            }
-            else{
-                $("#champ_nom_reservation").css("border-color","#04F935");
-                $("#champ_nom_reservation").next(".error-message").html("");
-//~ //~
-            }
-            // Pour le champ date_debut, vérifie sa présence
-            if ($("#date_debut").val() == ""){
-                $("#date_debut").css("border-color","#FF0000");
-                $("#date_debut").next(".error-message").css("color","#FF0000").html("X  Il faut remplir ce champ !!");
-                valid = false;
-            }
-            else{
-                $("#date_debut").css("border-color","#04F935");
-                $("#date_debut").next(".error-message").html("");
-//~ //~
-            }
-            // Pour le champ date_fin, vérifie sa présence
-            if ($("#date_fin").val() == ""){
-                $("#date_fin").css("border-color","#FF0000");
-                $("#date_fin").next(".error-message").css("color","#FF0000").html("X  Il faut remplir ce champ !!");
-                valid = false;
-            }
-            else{
-                // vérifie que date_fin soit postérieur à date_debut
-                if (datedebut >= datefin){
-                    $("#date_fin").css("border-color","#FF0000");
-                    $("#date_fin").next(".error-message").css("color","#FF0000").html("X mauvaise date !!");
-                    valid = false;
-                }
-                else{
-                    $("#date_fin").css("border-color","#04F935");
-                    $("#date_fin").next(".error-message").html("");
-                }
-            }
-
-            return valid;
-        });
     });
 </script>
