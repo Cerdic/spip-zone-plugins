@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_file_size_limit' => 'La taille maximale d\'un fichier est de @taille@ MB',
-	'message_queue_limit_max' => 'La limite maximale du nombre de fichier dans la file d\'attente est @nb@.',
-	'message_types_fichiers_autorises' => 'L\'ensemble des extensions de fichier autorisées sont : @types@',
+	'message_queue_limit_max' => 'La limite maximale du nombre de fichiers dans la file d\'attente est @nb@.',
+	'message_types_fichiers_autorises' => 'L\'ensemble des extensions de fichier autorisées est : @types@',
 
 	// T
 	'temps_passe' => 'passé',
