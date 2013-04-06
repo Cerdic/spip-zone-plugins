@@ -27,7 +27,7 @@ Na vylepšenie navigácie vám radíme urobiť tieto veci:
 -* vráťte sa na [úvodnú stránku|Vrátiť sa na úvodnú stránku->@sommaire@] a dostanete sa na začiatok hierarchie webu,
 -* pomocou tlačidla, ktoré sa nachádza nižšie, pošlite správu o chybe administrátorom stránky, aby opravili nefungujúci odkaz.
 
-V poslednom rade veľa internetových stránok má viac vyhradených zón pre administrátorov alebo abonentov, do ktorých sa treba prihlásiť. Ak ste sa prihlásili, [ak sa chcete dostať na prihlasovaciu stránku, kliknite sem|Budú sa od vás vyžadovať prihlasovacie údaje->@ecrire@].',
+V poslednom rade veľa internetových stránok má viac vyhradených zón pre administrátorov alebo abonentov, do ktorých sa treba prihlásiť. Ak ste sa prihlásili, [ak sa chcete dostať na prihlasovaciu stránku, kliknite sem|Budú sa od vás vyžadovať prihlasovacie údaje->@ecrire@].', # MODIF
 
 	// B
 	'backtrace' => 'PHP na spätné vystopovanie',

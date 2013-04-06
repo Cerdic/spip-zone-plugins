@@ -27,7 +27,7 @@ To facilitate your browsing, we recommend the following actions:
 -* return to the [homepage|Back to site homepage->@sommaire@] to restart from the root of the hierarchy;
 -* send an error report to the site administrators to correct the broken link using the button below.
 
-Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].',
+Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].', # MODIF
 
 	// B
 	'backtrace' => 'PHP Backtrace',
