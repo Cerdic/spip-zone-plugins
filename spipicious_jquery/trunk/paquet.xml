@@ -1,21 +1,21 @@
 <paquet
 	prefix="spipicious"
 	categorie="communication"
-	version="1.1.4"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipicious-128.png"
 	schema="0.6.3"
-	documentation="http://kent1.sklunk.net/spip.php?article97"
+	documentation="http://contrib.spip.net/Plugin-Spipicious"
 >	
 
-	<nom>spip.icio.us</nom>
+	<nom>SPIP.icio.us</nom>
 	<!-- Tagger tous les objets -->
 
 	<auteur mail="kent1@arscenic.info" lien="http://www.kent1.info">kent1</auteur>
 	<auteur lien="http://www.erational.org">erational</auteur>
 
-	<copyright>2007-2012</copyright>
+	<copyright>2007-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
