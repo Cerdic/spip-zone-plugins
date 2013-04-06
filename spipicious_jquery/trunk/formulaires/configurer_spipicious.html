@@ -8,15 +8,14 @@
 			<ul>
 
 				[(#SAISIE{statuts_auteurs,people,
-						label=<:spipicious:types_utilisateurs:>,
-						multiple=oui})]
+					label=<:spipicious:types_utilisateurs:>,
+					multiple=oui})]
 				<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}> #SET{id_groupe,#ID_GROUPE} </BOUCLE_groupes>
 				[(#GRAND_TOTAL|>{1}|oui)
 				[(#SAISIE{groupe_mots,groupe_mot,
-						cacher_option_intro=oui,
-						label=<:spipicious:nom_groupe_tag:>})]]
-				[(#GRAND_TOTAL|=={1}|oui)
-				#SET{un_groupe_mot,oui} ]
+					cacher_option_intro=oui,
+					label=<:spipicious:nom_groupe_tag:>})]]
+				[(#GRAND_TOTAL|=={1}|oui)[(#SET{un_groupe_mot,oui})]]
 				</B_groupes>
 			</ul>
 			[(#GET{un_groupe_mot}|=={oui}|oui)
