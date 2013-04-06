@@ -59,9 +59,9 @@ function exec_suppr_ressource_args($id_ressource, $ressource) {
 	}
 	$infos['statut'] = '<span class="'.(is_numeric($ressource['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_statut_$type") .'</span>';
 	$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), )); // indice de popularite
-	echo '<div class="hproduct">'.  association_totauxinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos ) .'</div>';
+	echo '<div class="hproduct">'.  association_tablinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos ) .'</div>';
 	// STATS sur la duree et le montant des emprunts
-	echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
+	echo association_tablinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('titre_onglet_prets', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),

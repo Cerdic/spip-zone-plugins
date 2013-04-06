@@ -23,11 +23,11 @@ function exec_encaisse() {
 // traitements
 		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : rappel de l'exercicee affichee
-		echo association_totauxinfos_intro('encaisse', '');
+		echo association_tablinfos_intro('encaisse', '');
 		// STATS recettes et depenses par comptes financiers (indique rapidement les comptes financiers avec les mouvements les plus importants --en montant !)
 		$journaux = sql_allfetsel('journal, intitule', 'spip_asso_comptes RIGHT JOIN spip_asso_plan ON journal=code', "date_operation>=date_anterieure AND date_operation<=NOW()", "intitule DESC"); // on se permet sql_allfetsel car il n'y en a pas des masses a priori...
 		foreach ($journaux as $financier) {
-			echo association_totauxinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date_operation>='. sql_quote($financier['date_anterieure']) .' AND date_operation<=NOW()');
+			echo association_tablinfos_stats($financier['intitule'], 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), 'journal='.sql_quote($financier['journal']) .' AND date_operation>='. sql_quote($financier['date_anterieure']) .' AND date_operation<=NOW()');
 		}
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(

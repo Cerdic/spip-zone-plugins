@@ -27,7 +27,7 @@ function exec_edit_groupe() {
 			if ($groupe) {
 				$infos = sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe");
 				$infos = array('entete_utilise' => _T('asso:nombre_fois', array('nombre'=> $infos)));
-				echo association_totauxinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
+				echo association_tablinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 				$titre = 'titre_editer_groupe';
 			} else  $titre = 'titre_creer_groupe';
 			// datation et raccourcis

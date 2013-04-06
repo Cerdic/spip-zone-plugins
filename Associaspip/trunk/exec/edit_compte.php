@@ -20,7 +20,7 @@ function exec_edit_compte() {
 		$id_compte = association_passeparam_id('compte');
 		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 		// INTRO : resume compte
-		echo association_totauxinfos_intro('', 'compte', $id_compte);
+		echo association_tablinfos_intro('', 'compte', $id_compte);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('informations_comptables', 'grille-24.png', array('comptes', "id=$id_compte"), array('gerer_compta', 'association') ),

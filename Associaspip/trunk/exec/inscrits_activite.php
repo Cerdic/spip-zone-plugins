@@ -29,16 +29,16 @@ function exec_inscrits_activite() {
 			$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
 			$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 			$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-			echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+			echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		// TOTAUX : nombres d'inscriptions par etat de paiement
-			echo association_totauxinfos_effectifs('participations', array(
+			echo association_tablinfos_effectifs('participations', array(
 			'pair' => array( 'asso:activite_entete_validees', array('spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription "), ),
 			'valide' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
 										       ));
 		// STATS sur les participations a cette activite (nombre de place et montant paye)
-			echo association_totauxinfos_stats('inscriptions', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
+			echo association_tablinfos_stats('inscriptions', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
 		// TOTAUX : montants des participations
-			echo association_totauxinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
+			echo association_tablinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
 			$res[] = array('activite_titre_toutes_activites', 'grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
 			$res[] = array('activite_bouton_modifier_article', 'edit-12.gif', array('articles', 'id_article='.$evenement['id_article']) );

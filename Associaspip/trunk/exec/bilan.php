@@ -28,7 +28,7 @@ function exec_bilan() {
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
-		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
+		echo association_tablinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('informations_comptables', 'grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),

@@ -24,7 +24,7 @@ function exec_suppr_destination_args($id_destination, $destination) {
 	echo association_navigation_onglets('plan_comptable', 'association');
 	// INTRO :
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_destination_op',"id_destination=$id_destination")) );
-	echo association_totauxinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
+	echo association_tablinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('destination_comptable', 'grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),

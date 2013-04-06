@@ -41,7 +41,7 @@ function exec_comptes() {
 				}
 			}
 			if (count($direction_libelles))
-				echo association_totauxinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_decomptes); // ToDo: tri par ordre decroissant (sorte de "top")
+				echo association_tablinfos_effectifs(_T('asso:compte_entete_financier') .': '. _T('asso:'.$direction.'s'), $direction_decomptes); // ToDo: tri par ordre decroissant (sorte de "top")
 		}
 		// TOTAUX : operations de l'exercice par type d'operation
 		$classes = array('pair'=>'produits', 'impair'=>'charges', 'cv'=>'contributions_volontaires', 'vi'=>'banques');
@@ -49,12 +49,12 @@ function exec_comptes() {
 		foreach ($classes as $classe_css=>$classe_cpt) {
 			$liste_types[$classe_css] = array( 'compte_liste_nombre_'.$classe_css, sql_countsel('spip_asso_comptes', "LEFT(imputation,1)=".sql_quote($GLOBALS['association_metas']["classe_$classe_cpt"])." AND $critere_periode "), );
 		}
-		echo association_totauxinfos_effectifs(_T('asso:bouton_radio_type_operation_titre'), $liste_types);
+		echo association_tablinfos_effectifs(_T('asso:bouton_radio_type_operation_titre'), $liste_types);
 		// STATS : montants de l'exercice pour l'imputation choisie (toutes si aucune)
-		echo association_totauxinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
+		echo association_tablinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 		// TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 		$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']), 'code'); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-		echo association_totauxinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
+		echo association_tablinfos_montants(($imputation=='%' ? _T('asso:tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('encaisse_titre_general', 'finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),

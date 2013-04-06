@@ -70,7 +70,7 @@ function exec_ressources() {
 			'sorti' => "statut IN ('sorti','',NULL)",
 		);
 		// TOTAUX : nombre de ressources par statut
-		echo association_totauxinfos_effectifs('ressources', array(
+		echo association_tablinfos_effectifs('ressources', array(
 			'valide' => array('', sql_countsel('spip_asso_ressources', $s_sql['ok'] ), association_formater_puce('', 'verte', 'ressources_libelle_statut_ok'), ),
 			'prospect' => array('', sql_countsel('spip_asso_ressources', $s_sql['suspendu']), association_formater_puce('', 'orange', 'ressources_libelle_statut_suspendu'), ),
 			'cv' => array('', sql_countsel('spip_asso_ressources', $s_sql['reserve']), association_formater_puce('', 'rouge', 'ressources_libelle_statut_reserve'), ),
@@ -79,7 +79,7 @@ function exec_ressources() {
 		// TOTAUX : montants des locations sur l'annee en cours
 		$recettes = sql_getfetsel('SUM(duree*prix_unitaire) AS somme_recettes', 'spip_asso_prets', "DATE_FORMAT('date_sortie', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
 		$depences = sql_getfetsel('SUM(prix_acquisition) AS somme_depences', 'spip_asso_ressources', "DATE_FORMAT('date_acquisition', '%Y')=DATE_FORMAT(NOW(), '%Y') ");
-		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
+		echo association_tablinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ressources_nav_ajouter', 'ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association') ),

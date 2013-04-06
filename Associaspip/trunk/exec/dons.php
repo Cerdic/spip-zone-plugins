@@ -30,17 +30,17 @@ function exec_dons() {
 			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  $critere_periode"),
 			'colis' => sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  $critere_periode")
 		);
-		echo association_totauxinfos_effectifs('dons', array(
+		echo association_tablinfos_effectifs('dons', array(
 			'pair' => array( 'dons_en_argent', $liste_effectifs['argent'], ),
 			'prospect' => array('dons_en_nature', $liste_effectifs['colis'], ),
 			'impair' => array('dons_mixtes', sql_countsel('spip_asso_dons', $critere_periode)-$liste_effectifs['argent']-$liste_effectifs['colis'] ),
 		));
 		// STATS sur les donnations de l'annee
-		echo association_totauxinfos_stats('donnations', 'dons', array('dons_en_argent'=>'argent','dons_en_nature'=>'valeur',), $critere_periode);
+		echo association_tablinfos_stats('donnations', 'dons', array('dons_en_argent'=>'argent','dons_en_nature'=>'valeur',), $critere_periode);
 		// TOTAUX : montants des dons et remboursements financiers
 		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND $critere_periode" );
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
-		echo association_totauxinfos_montants($id_periode, $dons_financiers, $remboursements);
+		echo association_tablinfos_montants($id_periode, $dons_financiers, $remboursements);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ajouter_un_don', 'ajout-24.png', array('edit_don'), array('editer_dons', 'association') ),

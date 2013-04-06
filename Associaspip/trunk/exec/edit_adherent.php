@@ -48,7 +48,7 @@ function exec_edit_adherent_args($id_auteur, $data) {
 		$infos['coordonnees:numeros'] =  $telephones[$id_auteur];
 	if ($sites[$id_auteur])
 		$infos['coordonnees:pages'] =  $sites[$id_auteur];
-	echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) ."</div>\n";
+	echo '<div class="vcard">'. association_tablinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos ) ."</div>\n";
 	// datation et raccourcis
 #	$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 	echo association_navigation_raccourcis(array(

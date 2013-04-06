@@ -26,7 +26,7 @@ function exec_suppr_exercice_args($id_exercice, $exercice) {
 	// info
 	$infos['exercice_entete_debut'] = association_formater_date($exercice['date_debut'], 'dtstart');
 	$infos['exercice_entete_fin'] = association_formater_date($exercice['date_fin'], 'dtend');
-	echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
+	echo association_tablinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('tous_les_exercices', 'grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),

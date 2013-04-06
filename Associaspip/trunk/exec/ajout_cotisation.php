@@ -27,7 +27,7 @@ function exec_ajout_cotisation_args($id_auteur, $membre) {
 	$infos['adherent_libelle_categorie'] = $categorie['libelle'];
 	$infos['entete_montant'] = association_formater_prix($categorie['prix_cotisation']);
 	$infos['adherent_libelle_validite'] = association_formater_date($membre['date_validite'], 'dtend');
-	echo association_totauxinfos_intro(htmlspecialchars(association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'])), 'membre', $id_auteur, $infos );
+	echo association_tablinfos_intro(htmlspecialchars(association_formater_nom($membre['sexe'], $membre['prenom'], $membre['nom_famille'])), 'membre', $id_auteur, $infos );
 	// datation et raccourcis
 #	$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
 	echo association_navigation_raccourcis(array(

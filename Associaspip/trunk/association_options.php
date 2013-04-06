@@ -1661,7 +1661,7 @@ function generer_url_activite($id, $param='', $ancre='') {
 
 
 /*****************************************
- * @defgroup association_totauxinfos
+ * @defgroup association_tablinfos
  * Informations de synthese, sur un objet, destinees a etre presente dans le bloc
  * d'infos contextuel debutant la colonne de gauche
  *
@@ -1692,7 +1692,7 @@ function generer_url_activite($id, $param='', $ancre='') {
  *   Ce n'est pas redondant d'avoir a la fois $type et $ObjetEtendu qui peuvent
  *   avoir des valeurs differentes comme on peut le voir dans exec/adherent.php et exec/inscrits_activite.php !
  */
-function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $ObjetEtendu='') {
+function association_tablinfos_intro($titre, $type='', $id=0, $DesLignes=array(), $ObjetEtendu='') {
 	$res = '';
 	if ($type) {
 		$res .= '<div style="text-align: center" class="verdana1 spip_x-small">'. _T('asso:titre_num', array('titre'=>_T("local:$type"), 'num'=>$id) ) .'</div>'; // presentation propre a Associaspip qui complete par un autre titre (voir ci-apres). Dans un SPIP traditionnel on aurait plutot : $res .= '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'. association_langue($type) .'<br /><span class="spip_xx-large">'.$id.'</span></div>';
@@ -1751,7 +1751,7 @@ function association_totauxinfos_intro($titre, $type='', $id=0, $DesLignes=array
  *   - l'ecart-type <http://fr.wikipedia.org/wiki/Dispersion_statistique#.C3.89cart_type>
  *   - ainsi que les extrema si on le desire
  */
-function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs, $sql_criteres='1=1',$decimales_significatives=1, $avec_extrema=FALSE) {
+function association_tablinfos_stats($legende='', $sql_table_asso, $sql_champs, $sql_criteres='1=1',$decimales_significatives=1, $avec_extrema=FALSE) {
 	if (!is_array($sql_champs) || !$sql_table_asso)
 		return FALSE;
 	$res = '<table width="100%" class="asso_infos"><caption>'
@@ -1801,7 +1801,7 @@ function association_totauxinfos_stats($legende='', $sql_table_asso, $sql_champs
  * @note
  *   Les classes CSS sont utilisees comme cle des tables parce-qu'il ne doit y en avoir qu'une par ligne.
  */
-function association_totauxinfos_effectifs($legende='', $lignes, $decimales_significatives=0) {
+function association_tablinfos_effectifs($legende='', $lignes, $decimales_significatives=0) {
 	if (!is_array($lignes) OR !$lignes)
 		return '';
 	$nbr_actuel = $nbr_total = 0;
@@ -1834,7 +1834,7 @@ function association_totauxinfos_effectifs($legende='', $lignes, $decimales_sign
  * @return string $res
  *   Table HTML presentant les recettes (sur une ligne) et les depenses (sur une autre ligne), puis le solde (sur une derniere ligne)
  */
-function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
+function association_tablinfos_montants($legende='', $somme_recettes=0, $somme_depenses=0) {
 	$res = '<table width="100%" class="asso_infos">';
 	$res .= '<caption>'. _T('asso:totaux_montants', array('de_par'=>_T("local:$legende"))) ."</caption>\n";
 	$recettes = is_array($somme_recettes) ? call_user_func_array('sql_getfetsel', $somme_recettes) : $somme_recettes ;

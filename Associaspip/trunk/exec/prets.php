@@ -79,16 +79,16 @@ function prets_gauche($id_ressource, $ressource, $where) {
 	}
 
 	$infos['statut'] = '<span class="'.(is_numeric($ressource['statut'])?'quanttity':'availability').'">'. association_formater_puce($ressource['statut'], $puce, "ressources_libelle_statut_$type") .'</span>';
-	echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos, 'asso_ressource') .'</div>';
+	echo '<div class="hproduct">'. association_tablinfos_intro('<span class="n">'.$ressource['intitule'].'</span>', 'ressource', $id_ressource, $infos, 'asso_ressource') .'</div>';
 	// TOTAUX : nombres d'emprunts de la ressource pour la periode
-	echo association_totauxinfos_effectifs('prets', array(
+	echo association_tablinfos_effectifs('prets', array(
 			'pair' => array( 'prets_restitues', sql_countsel('spip_asso_prets', "$where AND date_retour<NOW() AND date_retour<>'0000-00-00T00:00:00' "), ), // restitues, termines, anciens, ...
 			'impair' => array( 'prets_encours', sql_countsel('spip_asso_prets', "$where AND (date_retour>NOW() OR date_retour='0000-00-00T00:00:00' ) "), ), // dus, en attente, en cours, nouveaux, ...
 		));
 		// STATS sur la duree et le montant des emprunts pendant la periode
-	echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), $where);
+	echo association_tablinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), $where);
 	// TOTAUX : montants generes par les umprunts de la ressources depuis le debut
-	echo association_totauxinfos_montants('emprunts', sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource"), $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
+	echo association_tablinfos_montants('emprunts', sql_getfetsel('SUM(duree*prix_unitaire) AS totale', 'spip_asso_prets', "id_ressource=$id_ressource"), $ressource['prix_acquisition']); // /!\ les recettes sont calculees simplement (s'il y a un systeme de penalite pour retard, il faut s'adapter a la saisie pour que le module soit utile) ; les depenses ne prennent pas en compte les eventuels frais d'entretien ou de reparation de la ressource...
 	// datation et raccourcis
 
 	if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )

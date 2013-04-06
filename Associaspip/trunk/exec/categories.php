@@ -21,7 +21,7 @@ function exec_categories() {
 		// notice
 		echo '';
 		// quelques stats sur les categories
-		echo association_totauxinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
+		echo association_tablinfos_stats('tous', 'categories', array('entete_duree'=>'duree', 'entete_montant'=>'prix_cotisation') );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),

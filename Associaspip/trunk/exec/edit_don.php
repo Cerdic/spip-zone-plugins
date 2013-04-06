@@ -23,7 +23,7 @@ function exec_edit_don_args($id_auteur, $membre, $id_don) {
 	include_spip ('association_modules');
 	echo association_navigation_onglets('titre_onglet_dons', 'dons');
 	// INTRO : resume don
-	echo association_totauxinfos_intro('', 'don', $id_don);
+	echo association_tablinfos_intro('', 'don', $id_don);
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('tous_les_dons', 'grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),

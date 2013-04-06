@@ -21,7 +21,7 @@ function exec_edit_categorie() {
 		echo association_navigation_onglets('categories_de_cotisations', 'association');
 		// INTRO : resume ressource
 		$infos['entete_utilisee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
-		echo association_totauxinfos_intro('', 'categorie', $id_categorie, $infos );
+		echo association_tablinfos_intro('', 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('categories_de_cotisations', 'grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association') ),

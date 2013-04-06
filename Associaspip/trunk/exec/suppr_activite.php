@@ -35,7 +35,7 @@ function exec_suppr_activite_args($id_activite, $activite) {
 	$infos['date'] = association_formater_date($activite['date_paiement']);
 	$infos['entete_quantite'] = association_formater_nombre($activite['quantite'], 1);
 	$infos['entete_montant'] = association_formater_prix($activite['prix_unitaire'], 'fees');
-	association_totauxinfos_intro('', 'activite', $id_activite, $infos );
+	association_tablinfos_intro('', 'activite', $id_activite, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$activite[id_evenement]"), array('voir_inscriptions', 'association') ),

@@ -29,7 +29,7 @@ function exec_ajout_inscription() {
 		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
 		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+		echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),

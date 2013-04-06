@@ -26,15 +26,15 @@ function exec_ventes() {
 		}
 		echo association_navigation_onglets('titre_onglet_ventes', 'ventes');
 		// TOTAUX : nombre de ventes selon etat de livraison
-		echo association_totauxinfos_effectifs('ventes', array(
+		echo association_tablinfos_effectifs('ventes', array(
 			'pair' => array( 'ventes_enregistrees', sql_countsel('spip_asso_ventes', "date_envoi<date_vente AND  $critere_periode"), ),
 			'impair' => array( 'ventes_expediees', sql_countsel('spip_asso_ventes', "date_envoi>=date_vente AND  $critere_periode"), ),
 		));
 		// STATS sur les paniers/achats/commandes
-		echo association_totauxinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire*quantite',), $critere_periode);
+		echo association_tablinfos_stats('paniers/commandes', 'ventes', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire*quantite',), $critere_periode);
 		// TOTAUX : montants des ventes et des frais de port
 		$data = sql_fetsel('SUM(prix_unitaire*quantite) AS somme_ventes, SUM(frais_envoi) AS somme_frais', 'spip_asso_ventes', $critere_periode);
-		echo association_totauxinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
+		echo association_tablinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ajouter_une_vente', 'ajout-24.png', array('edit_vente'), array('gerer_ventes', 'association') ),

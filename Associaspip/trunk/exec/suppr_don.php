@@ -30,7 +30,7 @@ function exec_suppr_don_args($id_don, $don) {
 	$infos['colis'] = ($don['valeur'] ? '('.association_formater_prix($don['valeur'], 'donation estimated').')<div class="n">' : '') .$don['colis'] .($don['valeur']?'</div>':'');
 	$infos['contrepartie'] = $don['contrepartie'];
 	$infos['entete_commentaire'] = $don['commentaire'];
-	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'don', $id_don, $infos ) .'</div>';
+	echo '<div class="hproduct">'. association_tablinfos_intro('', 'don', $id_don, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('tous_les_dons', 'grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),

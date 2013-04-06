@@ -20,7 +20,7 @@ function exec_edit_vente() {
 		echo association_navigation_onglets('titre_onglet_ventes', 'ventes');
 		$id_vente = association_passeparam_id('vente');
 		// info
-		echo association_totauxinfos_intro('', 'vente', $id_vente);
+		echo association_tablinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('titre_onglet_ventes', 'grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),

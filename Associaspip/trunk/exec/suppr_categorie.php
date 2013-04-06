@@ -27,7 +27,7 @@ function exec_suppr_categorie_args($id_categorie, $categorie) {
 	$infos['entete_duree'] = association_formater_duree($categorie['duree'], 'M');
 	$infos['entete_montant'] = association_formater_prix($categorie['prix_cotisation'], 'subscription');
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_membres', "categorie=$id_categorie"), ));
-	echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
+	echo '<div class="hproduct">'. association_tablinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('categories_de_cotisations', 'grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association')),

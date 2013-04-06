@@ -24,7 +24,7 @@ function exec_compte_resultat() {
 		// INTRO : rappel de l'exercicee affichee
 		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
 		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
-		echo association_totauxinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
+		echo association_tablinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
 		// pas de sommes de synthes puisque tous les totaux sont dans la zone centrale ;-
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(

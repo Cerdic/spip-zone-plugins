@@ -28,7 +28,7 @@ function exec_suppr_pret_args($id_pret, $pret) {
 	$infos['prets_entete_date_sortie'] = association_formater_date($pret['date_sortie'],'dtstart');
 	$infos['prets_entete_date_retour'] = association_formater_date($pret['date_retour'],'dtend');
 	$infos['entete_montant'] = association_formater_prix($pret['prix_unitaire']*$pret['duree'], 'fees');
-	echo association_totauxinfos_intro('', 'pret', $id_pret, $infos );
+	echo association_tablinfos_intro('', 'pret', $id_pret, $infos );
 	// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('prets_titre_liste_reservations', 'grille-24.png', array('prets', "id=$pret[id_ressource]"), array('voir_prets', 'association') ),

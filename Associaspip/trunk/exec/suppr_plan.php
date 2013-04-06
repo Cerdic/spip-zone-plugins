@@ -27,7 +27,7 @@ function exec_suppr_plan_args($id_plan, $plan) {
 	$infos['solde_initial'] = association_formater_prix($plan['solde_anterieur']);
 	$infos['entete_date'] = association_formater_date($plan['date_anterieure']);
 	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_comptes',"imputation='$plan[code]' OR journal='$plan[code]'")) );
-	echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
+	echo association_tablinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),

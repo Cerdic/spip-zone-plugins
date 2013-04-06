@@ -32,7 +32,7 @@ function exec_action_adherents_args($id_auteurs, $action_adherents) {
 	include_spip('association_modules');
 	echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 	// info
-	echo association_totauxinfos_intro(_T('asso:confirmation'));
+	echo association_tablinfos_intro(_T('asso:confirmation'));
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('adherent_titre_liste_actifs', 'grille-24.png', array('adherents'), array('voir_membres', 'association') ),

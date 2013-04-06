@@ -26,7 +26,7 @@ function exec_edit_pret() {
 		}
 		// INTRO : resume ressource
 		$infos['ressource_pretee'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_prets', "id_ressource=$id_ressource"), ));
-		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
+		echo association_tablinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('prets_titre_liste_reservations', 'grille-24.png', array('prets', "id=$id_ressource"), array('voir_prets', 'association') ),

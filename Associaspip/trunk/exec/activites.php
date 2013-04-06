@@ -32,14 +32,14 @@ function exec_activites_args($id_evenement) {
 	echo association_navigation_onglets('titre_onglet_activite', 'activites');
 	// TOTAUX : nombre d'activites de la periode en cours selon iscriptions
 	$avec_inscrits = sql_countsel('spip_asso_activites', sql_in_select('id_evenement', 'id_evenement', 'spip_evenements', $critere_periode), 'id_evenement');
-	echo association_totauxinfos_effectifs('activites', array(
+	echo association_tablinfos_effectifs('activites', array(
 		'pair'=>array( 'activites_sans_inscrits', (sql_countsel('spip_evenements', $critere_periode)-$avec_inscrits), ),
 		'impair'=>array( 'activites_avec_inscrits', $avec_inscrits, ),
 	));
 	// STATS : places et participations pour la periode en cours
-	echo association_totauxinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), $critere_periode);
+	echo association_tablinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), $critere_periode);
 	// TOTAUX : montants des participations pour la periode
-	echo association_totauxinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
+	echo association_tablinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 	// datation et raccourci vers la gestion des evenements
 	if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 		echo association_navigation_raccourcis(array(

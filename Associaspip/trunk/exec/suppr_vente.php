@@ -31,7 +31,7 @@ function exec_suppr_vente_args($id_vente, $vente) {
 	$infos['entete_quantite'] = association_formater_nombre($vente['quantite'], 2, 'quantity');
 	$infos['entete_montant'] = association_formater_prix($vente['prix_unitaire'], 'purchase cost offer');
 	$infos['entete_commentaire'] = $vente['commentaire'];
-	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
+	echo '<div class="hproduct">'. association_tablinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
 		array('titre_onglet_ventes', 'grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),

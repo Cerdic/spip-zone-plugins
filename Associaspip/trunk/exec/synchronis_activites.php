@@ -25,7 +25,7 @@ function exec_synchronis_activites() {
 		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
 		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
 		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-		echo '<div class="vevent">'. association_totauxinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+		echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 		$reponses = sql_allfetsel('reponse, COUNT(*) AS nombre', 'spip_evenements_participants', "id_evenement=$id_evenement", 'reponse', 'reponse DESC');
 		foreach ($reponses as $num=>$rep ) { // re-normaliser le tableau des reponses
 			switch ( $rep['reponse'] ) { // mettre la l'identifiant de la reponse en cle et rajouter au debut du tableau la chaine de langue
@@ -45,7 +45,7 @@ function exec_synchronis_activites() {
 			unset($reponses[$num]); // supprimer l'ancienne entree (le tableau final aura le meme nombre d'elements)
 		}
 		// TOTAUX : nombres d'inscrits par reponse
-		echo association_totauxinfos_effectifs('inscriptions',  $reponses);
+		echo association_tablinfos_effectifs('inscriptions',  $reponses);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
