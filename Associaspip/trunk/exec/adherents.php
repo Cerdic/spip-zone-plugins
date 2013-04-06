@@ -79,12 +79,12 @@ function exec_adherents() {
 			$frm .= filtre_selecteur_asso_type('%', 'adresse', 'auteur', 1);
 			$frm .= '</li>'; //l3.1
 			$frm .= '<li class="editer_filtre_email">'; //l3.2
-			$frm .= '<em class="explication">'. _L('email principal') .'</em>';
+			$frm .= '<em class="explication">'. _T('asso:eti_filtre_emails') .'</em>';
 			$frm .= '<div class="choix">'; //l3.2.1
 			$frm .= '<select name="filtre_email" id="filtre_email">';
-			$frm .= '<option value="0">'. _L('asso:membre_quel_email') .'</option>';
-			$frm .= '<option value="-1">'. _T('asso:membre_sans_email') .'</option>';
-			$frm .= '<option value="+1">'. _L('asso:membre_avec_email') .'</option>';
+			$frm .= '<option value="0">'. _T('asso:membres_bof_email') .'</option>';
+			$frm .= '<option value="-1">'. _T('asso:membres_non_email') .'</option>';
+			$frm .= '<option value="+1">'. _T('asso:membres_oui_email') .'</option>';
 			$frm .= '</select>';
 			$frm .= '</li>'; //l3.2
 			$frm .= '</ul>'; //l2.2
