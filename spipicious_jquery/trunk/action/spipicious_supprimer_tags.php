@@ -21,11 +21,10 @@ function action_spipicious_supprimer_tags_dist(){
 	$type = _request('spipicious_type');
 
 	include_spip('inc/autoriser');
-	if(!autoriser('tagger_spipicious',$type,$id_objet,$visiteur_session,$opt)){
-		return '';
-	}
+	if(!autoriser('tagger_spipicious',$type,$id_objet))
+		return false;
 
-	$id_auteur = $visiteur_session['id_auteur'];
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	$id_table_objet = id_table_objet($type);
 
 	$remove_tags = _request('remove_tags');
@@ -48,9 +47,8 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 		// Utilisation par un autre utilisateur => sinon : il n'est plus du tout utilise =>
 		// suppression du mot pure et simple dans spip_mots_$type et spip_mot
 		$newt = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag));
-		if (!$newt){
+		if (!$newt)
 			mot_supprimer($remove_tag);
-		}
 		else {
 			// Utilisation par un autre utilisateur ok mais utilisation sur le meme id_$type
 			$newt2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));

@@ -14,17 +14,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function action_spipicious_ajouter_tags_dist(){
-	global $visiteur_session;
-
 	$id_objet = _request('spipicious_id');
 	$type = _request('spipicious_type');
 
 	include_spip('inc/autoriser');
-	if(!autoriser('tagger_spipicious',$type,$id_objet,$visiteur_session,$opt)){
-		return '';
-	}
+	if(!autoriser('tagger_spipicious',$type,$id_objet))
+		return false;
 
-	$id_auteur = $visiteur_session['id_auteur'];
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$id_groupe = lire_config('spipicious/groupe_mot','1');
 	$id_table_objet = id_table_objet($type);
 
@@ -54,11 +53,9 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 	if (is_array($tableau_tags)) {
 		$table = table_objet_sql($type);
 		$infos_objets = sql_fetsel('*',$table,"$id_table_objet=$id_objet");
-		if(isset($infos_objets['statut']) && ($infos_objets['statut'] != 'publie')){
-			spip_log('Le statut de l objet est pas publié','spipicious');
-			spip_log($infos_objets['statut'],'spipicious');
+		if(isset($infos_objets['statut']) && ($infos_objets['statut'] != 'publie'))
 			$statut = 'prop';
-		}
+
 		include_spip('action/editer_mot');
 		foreach ($tableau_tags as $k=>$tag) {
 			$tag = trim($tag);
@@ -75,21 +72,19 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 				}
 				// on lie le mot au couple type (uniquement si pas deja fait)
 				$result = sql_getfetsel("id_mot",'spip_mots_liens',"id_mot=".intval($id_tag)." AND objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
-				if (!$result) {
+				if (!$result)
 					mot_associer($id_tag,array($type=>$id_objet));
-				}
+
 				$result_spipicious = sql_fetsel("*","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
 				if(!$result_spipicious['id_mot']){
 					sql_insertq("spip_spipicious",array('id_mot' => intval($id_tag),'id_auteur' => intval($id_auteur),'id_objet' => intval($id_objet), 'objet'=>$type, 'position' => intval($position),'statut' => $statut));
 					$message = _T('spipicious:tag_ajoute',array('name'=>$tag));
 					$invalider = true;
 				}
-				else if(isset($result_spipicious['statut']) && ($result_spipicious['statut'] != $statut)){
+				else if(isset($result_spipicious['statut']) && ($result_spipicious['statut'] != $statut))
 					sql_updateq('spip_spipicious',array('statut'=>$statut),"id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
-				}
-				else{
+				else
 					$message = _T('spipicious:tag_deja_present');
-				}
 				$position++;
 			}
 			$tag_analysed[] = $tag;
