@@ -29,7 +29,7 @@ function exec_association() {
 			array('plan_comptable', 'plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association'), ),
 			array('destination_comptable', 'euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
 			array('exercices_budgetaires_titre', 'calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
-		), 20);
+		), 1);
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		// Profil de l'association
 		echo debut_cadre_enfonce('', TRUE);

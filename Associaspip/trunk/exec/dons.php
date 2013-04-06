@@ -44,7 +44,7 @@ function exec_dons() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ajouter_un_don', 'ajout-24.png', array('edit_don'), array('editer_dons', 'association') ),
-		), 40);
+		), 2);
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// FILTRES
 		$filtre_typedon = '<select name="type" onchange="form.submit()">';

@@ -58,7 +58,7 @@ function exec_adherents() {
 			array('gerer_les_groupes', 'annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes utilisateurs et non les autorisations qu'on liste
 			array('menu2_titre_mailing', 'mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
 			array('synchronise_asso_membre_lien', 'reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
-		), 30);
+		), 2);
 
 		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
 		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe);

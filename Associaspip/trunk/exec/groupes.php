@@ -24,7 +24,7 @@ function exec_groupes() {
 		echo association_navigation_raccourcis(array(
 				array('adherent_titre_liste_actifs', 'annonce.gif', array('adherents'), array('voir_membres', 'association') ),
 		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'), array('voir_groupes', 'association') )
-		), 02);
+		), 11);
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau
 		echo association_bloc_listehtml2('asso_groupes',

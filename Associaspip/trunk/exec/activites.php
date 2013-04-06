@@ -44,7 +44,7 @@ function exec_activites_args($id_evenement) {
 	if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 		echo association_navigation_raccourcis(array(
 			array('evenements', 'simplecal-logo-16.png', array('evenement_tous'), array('menu', 'evenements') ),
-		), 70);
+		), 4);
 	} elseif ( test_plugin_actif('AGENDA') ) { // gestion des evenements avec Agenda 2
 		echo association_navigation_raccourcis(array(
 			array('evenements', 'img_pack/agenda-24.png', array('agenda_evenements'), array('menu', 'evenements'), ),

@@ -35,7 +35,7 @@ function exec_encaisse() {
 			array('cpte_resultat_titre_general', 'finances-24.png', array('compte_resultat', "exercice=$id_exercice"), array('voir_compta', 'association') ),
 			array('cpte_bilan_titre_general', 'finances-24.png', array('compte_bilan', "exercice=$id_exercice"), array('voir_compta', 'association') ),
 #			array('annexe_titre_general', 'finances-24.png', array('compte_annexe', "exercice=$id_exercice"), array('voir_compta', 'association') ),
-		), 15);
+		), 16);
 		debut_cadre_association('finances-24.png', 'encaisse');
 		$lesEcritures = array(); // initialiser le tableaux des ecritures a afficher
 		// Recuperer les comptes financiers avec toutes les informations dont on aura besoin

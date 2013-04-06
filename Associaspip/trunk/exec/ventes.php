@@ -38,7 +38,7 @@ function exec_ventes() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ajouter_une_vente', 'ajout-24.png', array('edit_vente'), array('gerer_ventes', 'association') ),
-		), 50);
+		), 3);
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
 		// FILTRES
 		$filtre_statut = '<select name="etat" onchange="form.submit()">';

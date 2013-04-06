@@ -62,7 +62,7 @@ function exec_comptes() {
 			array('cpte_bilan_titre_general','finances-24.png', array('compte_bilan', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
 #			array('annexe_titre_general', 'finances-24.png', array('compte_annexe', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
 			array('ajouter_une_operation', 'ajout-24.png', array('edit_compte'), array('editer_compta', 'association') ),
-		), 10);
+		), 6);
 		debut_cadre_association('finances-24.png', 'informations_comptables');
 		// FILTRES
 		$filtre_imputation = '<select name="imputation" onchange="form.submit()">';

@@ -23,7 +23,7 @@ function exec_association_autorisations() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),
-		), 02);
+		), 10);
 		debut_cadre_association('annonce.gif', 'les_groupes_dacces');
 		echo recuperer_fond('prive/contenu/voir_groupes_autorisations', array ());
 		fin_page_association();

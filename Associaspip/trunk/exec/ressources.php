@@ -83,7 +83,7 @@ function exec_ressources() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('ressources_nav_ajouter', 'ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association') ),
-		), 60);
+		), 5);
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');
 		// Filtres
 		$filtre = '';

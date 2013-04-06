@@ -95,7 +95,7 @@ function prets_gauche($id_ressource, $ressource, $where) {
 			echo association_navigation_raccourcis(array(
 				array('ressources_titre_liste_ressources', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association')),
 				array('prets_nav_ajouter', 'creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association')),
-			), 64);
+			), 15);
 }
 
 function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unite)

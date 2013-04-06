@@ -66,7 +66,7 @@ function exec_adherent() {
 			$raccourcis[] = array('adherent_label_ajouter_cotisation', 'cotis-12.gif', array('ajout_cotisation', "id_auteur=$id_auteur"), array('ajouter_cotisation', 'association', $id_auteur) );
 		if ($GLOBALS['association_metas']['pc_dons'])
 			$raccourcis[] = array('ajouter_un_don', 'ajout-24.png', array('edit_don', "id_auteur=$id_auteur"), array('editer_dons', 'association', $id_auteur) );
-		echo association_navigation_raccourcis( $raccourcis, 33);
+		echo association_navigation_raccourcis( $raccourcis, 12);
 		debut_cadre_association('annonce.gif', 'membre');
 		if ( autoriser('voir_groupes', 'association') )
 			echo propre($data['commentaire']);

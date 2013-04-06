@@ -35,7 +35,7 @@ function exec_bilan() {
 			array('cpte_resultat_titre_general', 'finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 #			array('annexe_titre_general', 'finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 			array('encaisse', 'finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-		), 12);
+		), 16);
 		// on cree les intitule de toutes les destinations dans un tableau
 		$intitule_destinations = array();
 		$destinations = sql_allfetsel('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule'); // on recupere tout dans un tableau : il ne devrait pas y en avoir des masses...

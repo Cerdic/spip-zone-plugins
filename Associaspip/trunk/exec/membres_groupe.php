@@ -33,7 +33,7 @@ function exec_membres_groupe_args($id_groupe, $groupe) {
 	echo association_navigation_raccourcis(array(
 		array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupe'), 'association') ),
 		array('editer_groupe', 'edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'editer_groupe'), 'association') ),
-	), $id_groupe<100?0:1);
+	), $id_groupe<100?10:11);
 	debut_cadre_association('annonce.gif', 'groupe_membres');
 	echo recuperer_fond('modeles/membres_groupe', array(
 		'id_groupe' => $id_groupe

@@ -32,7 +32,7 @@ function exec_compte_resultat() {
 			array('encaisse_titre_general', 'finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 			array('cpte_bilan_titre_general', 'finances-24.png', array('compte_bilan', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), array('voir_compta', 'association') ),
 #			array('annexe_titre_general', 'finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]".($ids['destination']?"&destination=$ids[destination]":'')), array('voir_compta', 'association') ),
-		), 12);
+		), 16);
 		if(autoriser('exporter_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';

@@ -33,7 +33,7 @@ function exec_compte_annexe() {
 			array('encaisse_titre_general', 'finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 			array('cpte_resultat_titre_general', 'finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
 			'cpte_bilan_titre_general' => array('finances-24.png', array('bilan', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-		), 12);
+		), 16);
 		debut_cadre_association('finances-24.png', 'annexe_titre_general');
 		// Filtres
 		echo association_bloc_filtres(array(
