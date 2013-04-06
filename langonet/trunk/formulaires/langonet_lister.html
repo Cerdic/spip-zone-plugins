@@ -28,11 +28,20 @@
 	[<fieldset>
 		<legend><:langonet:legende_table:></legend>
 		[<p>(#ENV*{message_ok}|table_valeur{explication})</p>]
-		<ul class="spip">
-			<li><:langonet:info_tradlang_statut_ok:></li>
-			<li><:langonet:info_tradlang_statut_modif:></li>
-			<li><:langonet:info_tradlang_statut_new:></li>
-		</ul>
+		<table class="legende">
+			<tr>
+				<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
+				<td><:langonet:info_tradlang_statut_ok:></td>
+			</tr>
+			<tr>
+				<td>[(#CHEMIN_IMAGE{tradlang_statut_modif.png}|balise_img{'', icone})]</td>
+				<td><:langonet:info_tradlang_statut_modif:></td>
+			</tr>
+			<tr>
+				<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
+				<td><:langonet:info_tradlang_statut_new:></td>
+			</tr>
+		</table>
 		(#INCLURE{fond=prive/squelettes/liste/items_lang,
 			titre=#ENV*{message_ok}|table_valeur{titre},
 			items=#ENV*{message_ok}|table_valeur{table},

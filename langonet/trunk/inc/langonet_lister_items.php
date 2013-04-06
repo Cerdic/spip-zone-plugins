@@ -8,9 +8,12 @@ if (!defined('_LANGONET_ETAT_ITEM'))
 /**
  * Creation du tableau des items de langue d'un fichier donne trie par ordre alphabetique
  *
- * @param string $module prefixe du fichier de langue
- * @param string $langue index du nom de langue
- * @param string $ou_langue chemin vers le fichier de langue a verifier
+ * @param string $module
+ * 		Nom du module de langue
+ * @param string $langue
+ * 		Code SPIP de la langue
+ * @param string $ou_langue
+ * 		Chemin vers le fichier de langue à vérifier
  * @return array
  */
 function inc_langonet_lister_items($module, $langue, $ou_langue) {
@@ -42,11 +45,6 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 	ksort($table_brute);
 	$initiale = '';
 	foreach ($table_brute as $_item => $_traduction) {
-//		if ($initiale != $_item[0]) {
-//			// Nouvelle initiale
-//			$initiale = $_item[0];
-//		}
-//		$table[$initiale][$_item]['traduction'] = $_traduction;
 		$table[$_item]['traduction'] = $_traduction;
 		$cle = array_search($_item, $matches[1]);
 		if ($cle !== false)
