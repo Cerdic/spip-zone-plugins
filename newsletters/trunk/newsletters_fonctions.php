@@ -187,6 +187,7 @@ function newsletter_fixer_image($src,$id_newsletter){
 		$dir[$id_newsletter] = sous_repertoire(_DIR_IMG,"nl");
 		$dir[$id_newsletter] = sous_repertoire($dir[$id_newsletter],$id_newsletter);
 	}
+	include_spip("inc/documents"); //deplacer_fichier_upload
 
 	// recuperer l'image par copie directe si possible
 	if (strncmp($src,$GLOBALS['meta']['adresse_site'].'/',$l=strlen($GLOBALS['meta']['adresse_site'].'/'))==0)
