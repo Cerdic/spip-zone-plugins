@@ -1484,37 +1484,52 @@ function filtre_selecteur_asso_periode($periode, $table, $champ, $url='') {
  *
  * @param string $type
  *   Type selectionnee. (aucune par defaut)
+ * @param string $coord
+ *   Coordonnee qui nous interessee :
+ *   adresse|email|numero|syndic
  * @param string $objet
  *   Objet lie auquel restreindre la selection.
  */
-function filtre_selecteur_asso_type($type='', $table, $objet='', $lst=FALSE) {
-    switch ($table) {
+function filtre_selecteur_asso_type($type='', $coord='adresse', $objet='auteur', $lst=FALSE) {
+    $tbl = table_objet_sql($coord); // on le determine ici car 'site' est un alias de 'syndic' (dont la table n'a pas de S final et dont la boucle s'appelle 'syndication' !)
+    switch ($coord) {
 		case 'adresse':
 			$abreviation = 'adr';
 			break;
 		case 'email':
 			$abreviation = 'mel';
 			break;
+#		case 'impp':
+#			$abreviation = 'mip';
+#			break;
 		case 'numero':
 			$abreviation = 'tel';
 			break;
+		case 'site':
+		case 'syndic':
+			$coord = 'site';
+			$abreviation = 'mel';
+			break;
 		default:
-			$abreviation = $table;
+			if (!$tbl) // la requete plantera surement
+				return;
+			else // la requete reussira probablement
+				$abreviation = $coord;
 			break;
 	}
-    $pager = '';
-    $res = "<select name='type_$table' onchange='form.submit()' id='type_$table'>\n";
-    $res .= '<option value="tous"';
-    $pager .= '<div class="choix"><input name="type_$table" id="type_$table_tous" type="radio" value="tous"';
-    $res .= (($type=='tous' || $type=='%')?' selected="selected"':'');
-    $pager .= (($type=='tous' || $type=='%')?' checked="checked"':'');
+	$res = $pager = '<em class="explication">'. _T("coordonnees:label_type_$coord") ."</em>\n";
+    $res .= "<select name='type_$coord' id='type_$coord'>\n";
+    $res .= '<option value="%"';
+    $pager .= "<div class='choix'><input name='type_$coord' id='type_{$coord}_tous' type='radio' value='%'";
+    $res .= (($type==' ' || $type=='%')?' selected="selected"':'');
+    $pager .= (($type==' ' || $type=='%')?' checked="checked"':'');
     $res .= '>'. _T('asso:entete_tous') ."</option>\n";
-    $pager .= '" /><label for>"type_$table_'.'tous">'. _T('asso:entete_tous') ."</label></div>\n";
-    $sql = sql_select("type", 'spip_'.$table.'_liens', ($objet?("objet=".sql_quote($objet)):''), 'objet, type', 'objet, type');
+    $pager .= " /><label for='type_{$coord}_tous'>". _T('asso:entete_tous') ."</label></div>\n";
+    $sql = sql_select("type", $tbl.'_liens', ($objet?("objet=".sql_quote($objet)):''), 'objet, type', 'objet, type');
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['type'].'"'
-		. ($type==$val['type']?' selected="selected"':'') .'> '. _T('coordonnes:type_'.$abreviation.'_'.$val['type']) . "</option>\n";
-		$pager .= '<div class="choix"><input name="type_$table" id="type_$table_'. preg_replace('/\W/', '', $val['type']) .'" type="radio" value="'.$val['type']. ($type==$val['type']?' checked="checked"':'') .'" /><label for>"type_$table_'. preg_replace('/\W/', '', $val['type']) .'">'. appliquer_filtre($val['type'], "logo_type_$abreviation") ."</label></div>\n";
+		. ($type==$val['type']?' selected="selected"':'') .'> '. _T('coordonnees:type_'.$abreviation.'_'.$val['type']) . "</option>\n";
+		$pager .= "<div class='choix'><input name='type_$coord' id='type_$coord_". preg_replace('/\W/', '', $val['type']) ."' type='radio' value='$val[type]'". ($type==$val['type']?' checked="checked"':'') ." /><label for='type_$coord_". preg_replace('/\W/', '', $val['type']) ."'>". appliquer_filtre($val['type'], "logo_type_$abreviation") ."</label></div>\n";
 	}
 	sql_free($sql);
     return ($lst?"$res</select>\n":$pager);

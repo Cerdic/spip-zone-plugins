@@ -74,12 +74,20 @@ function exec_adherents() {
 			$frm .= '<input type="hidden" name="statut_interne" value="'. htmlspecialchars($statut_interne, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
 			$frm .= '<input type="hidden" name="suffixe" value="'. $suffixe .'" />';
 			$frm .= '</div>'; //l2.1
-			$frm .= '<ul><li class="editer_filtre_email">'; //l2.2
-			$frm .= '<div class="choix">'; //l3.1
-			$frm .= '<input type="checkbox" name="filtre_email" id="filtre_email" value="oui" />';
-			$frm .= '<label for="filtre_email">'. _T('asso:membre_sans_email:') .'</label>';
-			$frm .= '</div>'; //l3.1
-			$frm .= '</li></ul>'; //l2.2
+			$frm .= '<ul>'; //l2.2
+			$frm .= '<li class="editer_filtre_email">'; //l3.1
+			$frm .= filtre_selecteur_asso_type('%', 'adresse', 'auteur', 1);
+			$frm .= '</li>'; //l3.1
+			$frm .= '<li class="editer_filtre_email">'; //l3.2
+			$frm .= '<em class="explication">'. _L('email principal') .'</em>';
+			$frm .= '<div class="choix">'; //l3.2.1
+			$frm .= '<select name="filtre_email" id="filtre_email">';
+			$frm .= '<option value="0">'. _L('asso:membre_quel_email') .'</option>';
+			$frm .= '<option value="-1">'. _T('asso:membre_sans_email') .'</option>';
+			$frm .= '<option value="+1">'. _L('asso:membre_avec_email') .'</option>';
+			$frm .= '</select>';
+			$frm .= '</li>'; //l3.2
+			$frm .= '</ul>'; //l2.2
 			$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>'; //l2.3
 			echo generer_action_auteur('pdf_etiquettes', 0, '', $frm, '', '');
 			echo '</div>'; //l1.2

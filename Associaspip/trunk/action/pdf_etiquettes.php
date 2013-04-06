@@ -47,8 +47,8 @@ function action_pdf_etiquettes() {
 	$where = htmlspecialchars_decode(_request('where_adherents'));
 	$jointure = _request('jointure_adherents');
 	$filtre_email = _request('filtre_email');
-	if($filtre_email) { // restreindre aux auteurs sans email principal
-		$where .= " AND a.email='' ";
+	if($filtre_email) { // restreindre aux auteurs avec/sans email principal
+		$where .= ' AND a.email'. ($filtre_email>0?'!':'') ."='' ";
 		$jointure .= " LEFT JOIN spip_auteurs a ON m.id_auteur=a.id_auteur ";
 	}
 	// on genere la requete des id_auteur
@@ -62,6 +62,7 @@ function action_pdf_etiquettes() {
 	include_spip('pdf/extends');
 	$pdf = new PDF(FALSE, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
 	$statut = _request('statut_interne');
+	$typadr = _request('type_adresse');
 	$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
 	$pdf->Open();
 	$pdf->AddPage();
@@ -69,9 +70,7 @@ function action_pdf_etiquettes() {
 	$pdf->AliasNbPages();
 	$pdf->SetFontSize(8);
 
-	$affiche_civilite = $GLOBALS['association_metas']['etiquette_avec_civilite'];
-
-	$where = "l.objet='auteur' AND ( (a.code_postal<>'' AND a.ville<>'') OR (a.boite_postale<>'') ) AND ". sql_in('l.id_objet', $liste_id_auteurs);
+	$where = "l.objet='auteur' AND ( (a.code_postal<>'' AND a.ville<>'') OR (a.boite_postale<>'') ) AND ". sql_in('l.id_objet', $liste_id_auteurs) .' AND l.type LIKE '.sql_quote($typadr);
 	$res = sql_select('l.id_objet, a.*','spip_adresses_liens l INNER JOIN spip_adresses a ON l.id_adresse=a.id_adresse', $where,'' );
 	$indice = 0;
 	include_spip('filtres','inc'); // http://doc.spip.org/@extraire_multi
@@ -128,7 +127,7 @@ function action_pdf_etiquettes() {
 //	if ($indice==0) {
 //		$message .= _T('asso:etiquette_aucune_impression');
 //	} else {
-		$nom_fic = 'etiquettes_'. _request('suffixe') .'_'. ($filtre_email?'avec':'sans'). 'email.pdf';
+		$nom_fic = 'etiquettes_'. _request('suffixe') .'_'. ($typadr=='%'?'all':$typadr) .'_'. ($filtre_email?($filtre_email>0?'avec':'sans'):'quel'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 //		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 //	}
