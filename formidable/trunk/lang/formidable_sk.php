@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Neprázdne odpovede',
-	'analyse_exporter' => 'Exportovať analýzu',
+	'analyse_exporter' => 'Exporter l\'analyse', # NEW
 	'analyse_longueur_moyenne' => 'Priemerná dĺžka vyjadrená počtom slov',
 	'analyse_nb_reponses_total' => '@nb@ ľudia odpovedali na tento formulár.',
 	'analyse_sans_reponse' => 'Nevyplnené',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
-	'champs' => 'Pol\'a',
+	'champs' => 'Champs', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_aucun_traitement' => 'Vaša odpoveď bola odoslaná, ale k tomuto formuláru nebola definovaná žiadna funkcia. Nič neurobí. :-)',
 
 	// S
-	'sans_reponses' => 'Neriešiteľný',
+	'sans_reponses' => 'Sans réponse', # NEW
 
 	// T
 	'titre_cadre_raccourcis' => 'Skratky',
@@ -148,11 +148,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Počas ukladania do databázy sa vyskytla technická chyba',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Tento formulár ste už vyplnili.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Odpoveď, ktorú chcete upraviť, sa nedá nájsť.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Urobte výsledky anonymnej forme (nevedú trasovanie identifikátor respondentov).', # NEW
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymizované podobe', # NEW
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Čo systémová premenná slúži na výpočet jednej hodnoty pre každého autora, bez toho, aby odhalil svoju identitu.', # NEW
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Premenná, z ktorých anonymizujú formulár', # NEW
-	'traiter_enregistrement_option_choix_select_label' => 'Vyberte premennú, ktorá z dostupnej', # NEW
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)', # NEW
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'Ak sa odpovede dajú upraviť, aký spôsob sa použije ako prvý, aby sa zistilo, či sa odpoveď menila?',
 	'traiter_enregistrement_option_identification_label' => 'Identifikácia',
 	'traiter_enregistrement_option_moderation_label' => 'Kontrola',

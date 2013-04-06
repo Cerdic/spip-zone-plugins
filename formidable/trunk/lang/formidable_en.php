@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'One person responded to this form.',
 	'analyse_zero_reponse_total' => 'No one responded to this form.',
 	'aucun_traitement' => 'No treatment',
-	'analyse_exporter' => 'Export analysis',
 
 	// B
 	'bouton_formulaires' => 'Forms',
@@ -28,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'CSS class of the progress bar',
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
 	'cfg_titre_parametrages_analyse' => 'Settings in the answers analysis',
-	'champs' => 'Fields',
+	'champs' => 'Champs', # NEW
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -65,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'This form doesn\'t exist.',
 
 	// F
-	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user\'s identity will not be recorded.',
+	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.', # NEW
 	'formulaires_aucun' => 'There is no form for now',
 	'formulaires_dupliquer' => 'Duplicate the form',
 	'formulaires_dupliquer_copie' => '(copy)',
@@ -112,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_aucun_traitement' => 'Your reply was accepted. But as the function of the form has not yet been configured, nothing was done with your data!',
 
 	// S
-	'sans_reponses' => 'Unanswered',
+	'sans_reponses' => 'Sans réponse', # NEW
 
 	// T
 	'titre_cadre_raccourcis' => 'Shortcuts',
@@ -149,11 +148,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_option_anonymiser_label' => "Anonymize form",
-	'traiter_enregistrement_option_anonymiser_explication' => "Make the form results anonymous (don\'t keep any tracks of user who have answered.)",
-	'traiter_enregistrement_option_choix_select_label' => "Select a variable from the available",
-	'traiter_enregistrement_option_anonymiser_variable_label' => "Variable from witch the form will be anonymized",
-	'traiter_enregistrement_option_anonymiser_variable_explication' => "What system variable used to calculate a single value for each author without revealing his identity.",
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)', # NEW
+	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.', # NEW
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
