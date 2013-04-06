@@ -1,34 +1,50 @@
 <?php
-
 /**
- * spip.icio.us
+ * SPIP.icio.us
  * Gestion de tags lies aux auteurs
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * Erational
+ * Erational (http://www.erational.org)
  *
- * © 2007-2012 - Distribue sous licence GNU/GPL
+ * © 2007-2013 - Distribue sous licence GNU/GPL
  *
+ * Déclarations relatives à la base de données
+ * 
+ * @package SPIP\SPIPicious\Pipelines
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Déclarer les interfaces de la table spip_spipicious pour le compilateur
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function spipicious_declarer_tables_interfaces($interface){
-	$interface['tables_jointures']['spip_mots'][] = 'spipicious';
-	$interface['tables_jointures']['spip_auteurs'][]= 'spipicious';
-	$interface['tables_jointures']['spip_articles'][] = 'spipicious';
-	$interface['tables_jointures']['spip_breves'][] = 'spipicious';
-	$interface['tables_jointures']['spip_documents'][] = 'spipicious';
-	$interface['tables_jointures']['spip_rubriques'][] = 'spipicious';
-	$interface['tables_jointures']['spip_syndic'][] = 'spipicious';
+	/**
+	 * Une jointure sur chaque table pour faciliter
+	 */
+	$interface['tables_jointures'][] = 'spipicious';
 
-	//-- Table des tables ----------------------------------------------------
 	$interface['table_des_tables']['spipicious']='spipicious';
 
 	return $interface;
 }
 
+/**
+ * Déclarer la tables principale de spipicious
+ *
+ * @pipeline declarer_tables_principales
+ * @param array $tables_principales
+ *     Description des tables
+ * @return array $tables_principales
+ *     Description complétée des tables
+ */
 function spipicious_declarer_tables_principales($tables_principales){
 	$spip_spipicious = array(
 	  	"id_mot"	=> "bigint(21) NOT NULL",
