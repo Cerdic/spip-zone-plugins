@@ -26,7 +26,7 @@ function exec_edit_exercice() {
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_exercices', "id_exercice=$id_exercice" ), 'exercice', $id_exercice, $infos);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'tous_les_exercices' => array('grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
+			array('tous_les_exercices', 'grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
 		) );
 		debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 		echo recuperer_fond('prive/editer/editer_asso_exercices', array (

@@ -82,7 +82,7 @@ function exec_ressources() {
 		echo association_totauxinfos_montants('ressources', $recettes, $depenses);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'ressources_nav_ajouter' => array('ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association') ),
+			array('ressources_nav_ajouter', 'ajout-24.png', array('edit_ressource'), array('gerer_ressources', 'association') ),
 		), 60);
 		debut_cadre_association('pret-24.gif', 'ressources_titre_liste_ressources');
 		// Filtres

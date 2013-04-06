@@ -23,7 +23,7 @@ function exec_edit_vente() {
 		echo association_totauxinfos_intro('', 'vente', $id_vente);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'titre_onglet_ventes' => array('grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
+			array('titre_onglet_ventes', 'grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
 		) );
 		debut_cadre_association('ventes.gif', 'ressources_titre_mise_a_jour');
 		echo recuperer_fond('prive/editer/editer_asso_ventes', array (

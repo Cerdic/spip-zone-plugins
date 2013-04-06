@@ -48,7 +48,7 @@ function exec_synchronis_activites() {
 		echo association_totauxinfos_effectifs('inscriptions',  $reponses);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+			array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
 		) );
 		debut_cadre_association('reload-32.png', 'options_synchronisation');
 		echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (

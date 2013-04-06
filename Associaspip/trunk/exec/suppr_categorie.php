@@ -30,7 +30,7 @@ function exec_suppr_categorie_args($id_categorie, $categorie) {
 	echo '<div class="hproduct">'. association_totauxinfos_intro('<span class="n">'.$categorie['libelle'].'</span>', 'categorie', $id_categorie, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'categories_de_cotisations' => array('grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association')),
+		array('categories_de_cotisations', 'grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association')),
 	) );
 	debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 	echo association_bloc_suppression('categorie', $id_categorie);

@@ -32,7 +32,7 @@ function exec_edit_groupe() {
 			} else  $titre = 'titre_creer_groupe';
 			// datation et raccourcis
 			echo association_navigation_raccourcis(array(
-				'tous_les_groupes' => array('annonce.gif', array('groupes', "id=$id_groupe"), array('voir_groupes', 'association') ),
+				array('tous_les_groupes', 'annonce.gif', array('groupes', "id=$id_groupe"), array('voir_groupes', 'association') ),
 			) );
 			debut_cadre_association('annonce.gif', $titre);
 			echo recuperer_fond('prive/editer/editer_asso_groupes',

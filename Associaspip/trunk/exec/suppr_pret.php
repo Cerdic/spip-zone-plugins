@@ -31,7 +31,7 @@ function exec_suppr_pret_args($id_pret, $pret) {
 	echo association_totauxinfos_intro('', 'pret', $id_pret, $infos );
 	// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'prets_titre_liste_reservations' => array('grille-24.png', array('prets', "id=$pret[id_ressource]"), array('voir_prets', 'association') ),
+			array('prets_titre_liste_reservations', 'grille-24.png', array('prets', "id=$pret[id_ressource]"), array('voir_prets', 'association') ),
 		) );
 	debut_cadre_association('pret-24.gif', 'prets_titre_suppression_prets');
 	echo association_bloc_suppression('pret', "$id_pret-$pret[id_ressource]");

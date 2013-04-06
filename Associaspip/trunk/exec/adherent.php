@@ -58,14 +58,14 @@ function exec_adherent() {
 		echo '<div class="vcard">'. association_totauxinfos_intro('<span class="fn">'.htmlspecialchars($nom_membre).'</span>', $statut, $id_auteur, $infos, 'asso_membre') .'</div>';
 		// datation et raccourcis
 		$raccourcis = array(
-			'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents', "id=$id_auteur"), array('voir_membres', 'association', 0) ),
-			'adherent_label_modifier_membre' => array('edit-24.gif', array('edit_adherent', "id=$id_auteur"), array('editer_membres', 'association') ),
-			"adherent_label_modifier_$statut" => array('membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), autoriser('voir', 'auteur', $id_auteur) ),
+			array('adherent_titre_liste_actifs', 'grille-24.png', array('adherents', "id=$id_auteur"), array('voir_membres', 'association', 0) ),
+			array('adherent_label_modifier_membre', 'edit-24.gif', array('edit_adherent', "id=$id_auteur"), array('editer_membres', 'association') ),
+			array("adherent_label_modifier_$statut", 'membre_infos.png', array('auteur_infos', "id_auteur=$id_auteur"), autoriser('voir', 'auteur', $id_auteur) ),
 		);
 		if ($GLOBALS['association_metas']['pc_cotisations'])
-			$raccourcis['adherent_label_ajouter_cotisation'] = array('cotis-12.gif', array('ajout_cotisation', "id_auteur=$id_auteur"), array('ajouter_cotisation', 'association', $id_auteur) );
+			$raccourcis[] = array('adherent_label_ajouter_cotisation', 'cotis-12.gif', array('ajout_cotisation', "id_auteur=$id_auteur"), array('ajouter_cotisation', 'association', $id_auteur) );
 		if ($GLOBALS['association_metas']['pc_dons'])
-			$raccourcis['ajouter_un_don'] = array('ajout-24.png', array('edit_don', "id_auteur=$id_auteur"), array('editer_dons', 'association', $id_auteur) );
+			$raccourcis[] = array('ajouter_un_don', 'ajout-24.png', array('edit_don', "id_auteur=$id_auteur"), array('editer_dons', 'association', $id_auteur) );
 		echo association_navigation_raccourcis( $raccourcis, 33);
 		debut_cadre_association('annonce.gif', 'membre');
 		if ( autoriser('voir_groupes', 'association') )

@@ -95,9 +95,9 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
  * Bloc de raccourci(s)
  *
  * @param array $raccourcis
- *   Tableau des raccourcis definis chacun sous la forme :
- *   'titre' => array('icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
- *   toutefois si le 2e element est une chaine, on la prend comme URL
+ *   Liste des raccourcis definis chacun sous la forme :
+ *   array('titre', 'icone', array('url_ecrire', 'parametres_url'), array('permission' ...), ),
+ *   toutefois si le 3e element est une chaine, on la prend comme URL
  * @param string $identifiant
  *   Identifiant interne de la liste de raccourcis
  * (attention, les entiers sont reserves a usage interne !
@@ -114,8 +114,8 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
 				$raccourcis[] = $boutons[$identifiant];
 		}
 	}
-	foreach($raccourcis as $titre => $params) {
-		list($image, $url, $aut) = $params;
+	foreach($raccourcis as $params) {
+		list($titre, $image, $url, $aut) = $params;
 		if ( association_acces($aut) ) { // generation du raccourci
 			if (is_array($url))
 				$url = generer_url_ecrire($url[0],$url[1]);

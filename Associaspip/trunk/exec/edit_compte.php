@@ -23,7 +23,7 @@ function exec_edit_compte() {
 		echo association_totauxinfos_intro('', 'compte', $id_compte);
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'informations_comptables' => array('grille-24.png', array('comptes', "id=$id_compte"), array('gerer_compta', 'association') ),
+			array('informations_comptables', 'grille-24.png', array('comptes', "id=$id_compte"), array('gerer_compta', 'association') ),
 		) );
 		debut_cadre_association('compts.gif', 'modification_des_comptes');
 		echo recuperer_fond('prive/editer/editer_asso_comptes', array (

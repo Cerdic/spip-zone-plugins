@@ -35,7 +35,7 @@ function exec_action_adherents_args($id_auteurs, $action_adherents) {
 	echo association_totauxinfos_intro(_T('asso:confirmation'));
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'adherent_titre_liste_actifs' => array('grille-24.png', array('adherents'), array('voir_membres', 'association') ),
+		array('adherent_titre_liste_actifs', 'grille-24.png', array('adherents'), array('voir_membres', 'association') ),
 	));
 	if ($action_adherents=='desactive') {
 		$statut_courant = _request('statut_courant');

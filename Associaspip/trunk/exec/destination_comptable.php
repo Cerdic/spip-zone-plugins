@@ -22,10 +22,10 @@ function exec_destination_comptable() {
 		echo propre(_T('asso:destination_info'));
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
-			'destination_nav_ajouter' => array('euro-39.gif', array('edit_destination')),
-			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
+			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),
+			array('destination_nav_ajouter', 'euro-39.gif', array('edit_destination')),
+			array('plan_comptable', 'plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
+			array('exercices_budgetaires_titre', 'calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
 		) );
 		debut_cadre_association('euro-39.gif', 'destination_comptable');
 		//Affichage de la table

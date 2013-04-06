@@ -32,10 +32,10 @@ function exec_exercice_comptable() {
 		///
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
+			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),
 			'ajouter_un_exercice' => array('calculatrice.gif', array('edit_exercice'),array('gerer_compta', 'association') ),
-			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
+			array('plan_comptable', 'plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
+			array('destination_comptable', 'euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
 		) );
 		debut_cadre_association('calculatrice.gif', 'tous_les_exercices');
 		echo association_bloc_listehtml2('asso_exercices',

@@ -24,7 +24,7 @@ function exec_edit_ressource() {
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'titre_onglet_prets' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
+			array('titre_onglet_prets', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
 		) );
 		debut_cadre_association('pret-24.gif', 'ressources_titre_edition_ressources');
 		echo recuperer_fond('prive/editer/editer_asso_ressources', array (

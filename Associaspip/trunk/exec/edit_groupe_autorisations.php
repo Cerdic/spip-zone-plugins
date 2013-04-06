@@ -27,7 +27,7 @@ function exec_edit_groupe_autorisations_args($id_groupe, $groupe) {
 	echo association_totauxinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'les_groupes_dacces' => array('annonce.gif', array('association_autorisations', "id=$id_groupe"), array('voir_groupes', 'association') ),
+		array('les_groupes_dacces', 'annonce.gif', array('association_autorisations', "id=$id_groupe"), array('voir_groupes', 'association') ),
 	) );
 	debut_cadre_association('annonce.gif', 'titre_editer_groupe');
 	echo recuperer_fond('prive/editer/editer_asso_groupes', array (

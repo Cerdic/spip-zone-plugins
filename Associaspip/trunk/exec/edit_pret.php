@@ -29,7 +29,7 @@ function exec_edit_pret() {
 		echo association_totauxinfos_intro(sql_getfetsel('intitule', 'spip_asso_ressources', "id_ressource=$id_ressource" ), 'ressource', $id_ressource, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'prets_titre_liste_reservations' => array('grille-24.png', array('prets', "id=$id_ressource"), array('voir_prets', 'association') ),
+			array('prets_titre_liste_reservations', 'grille-24.png', array('prets', "id=$id_ressource"), array('voir_prets', 'association') ),
 		) );
 		debut_cadre_association(($id_pret?'edit-12.gif':'creer-12.gif'), 'prets_titre_edition_prets');
 		echo recuperer_fond('prive/editer/editer_asso_prets', array (

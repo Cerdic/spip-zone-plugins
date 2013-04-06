@@ -22,7 +22,7 @@ function exec_action_comptes() {
 		echo _T('asso:confirmation');
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'informations_comptables' => array('grille-24.png', array('comptes'), array('gerer_compta', 'association') ),
+			array('informations_comptables', 'grille-24.png', array('comptes'), array('gerer_compta', 'association') ),
 		) );
 		debut_cadre_association('finances-32.jpg', 'operations_comptables');
 		echo '<p>'. _T('asso:vous_vous_appretez_a_valider_les_operations') .'</p>';

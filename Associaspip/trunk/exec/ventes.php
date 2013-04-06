@@ -37,7 +37,7 @@ function exec_ventes() {
 		echo association_totauxinfos_montants($id_periode, $data['somme_ventes']+$data['somme_frais'], $data['somme_frais']); // les frais de port etant facturees a l'acheteur, ce sont bien des recettes... mais ces frais n'etant (normalement) pas refacturees (et devant meme etre transparents) ils n'entrent pas dans la marge (enfin, facon de dire car les couts d'acquisition ne sont pas pris en compte... le "solde" ici est le montant effectif des ventes.)
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'ajouter_une_vente' => array('ajout-24.png', array('edit_vente'), array('gerer_ventes', 'association') ),
+			array('ajouter_une_vente', 'ajout-24.png', array('edit_vente'), array('gerer_ventes', 'association') ),
 		), 50);
 		debut_cadre_association('ventes.gif', 'toutes_les_ventes');
 		// FILTRES

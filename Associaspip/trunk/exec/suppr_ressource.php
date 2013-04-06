@@ -64,7 +64,7 @@ function exec_suppr_ressource_args($id_ressource, $ressource) {
 	echo association_totauxinfos_stats('prets', 'prets', array('entete_duree'=>'duree','entete_montant'=>'duree*prix_unitaire',), "id_ressource=$id_ressource");
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'titre_onglet_prets' => array('grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
+		array('titre_onglet_prets', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
 	) );
 	debut_cadre_association('pret-24.gif', 'ressources_titre_suppression_ressources');
 	echo association_bloc_suppression('ressource', $id_ressource );

@@ -40,15 +40,15 @@ function exec_inscrits_activite() {
 		// TOTAUX : montants des participations
 			echo association_totauxinfos_montants('participations', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 		// datation et raccourcis
-			$res['activite_titre_toutes_activites'] = array('grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
-			$res['activite_bouton_modifier_article'] = array('edit-12.gif', array('articles', 'id_article='.$evenement['id_article']) );
-			$res['activite_bouton_ajouter_inscription'] = array('panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"), array('editer_inscriptions', 'association') );
+			$res[] = array('activite_titre_toutes_activites', 'grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
+			$res[] = array('activite_bouton_modifier_article', 'edit-12.gif', array('articles', 'id_article='.$evenement['id_article']) );
+			$res[] = array('activite_bouton_ajouter_inscription', 'panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"), array('editer_inscriptions', 'association') );
 		}
 		if ( test_plugin_actif('FPDF') && sql_countsel('spip_asso_activites', "id_evenement=$id_evenement", 'id_auteur') ) { // PDF des inscrits
-			$res['activite_bouton_imprimer_inscriptions'] = array('print-24.png', generer_action_auteur('pdf_activite', $id_evenement), array('exporter_inscriptions', 'association') );
+			$res[] = array('activite_bouton_imprimer_inscriptions', 'print-24.png', generer_action_auteur('pdf_activite', $id_evenement), array('exporter_inscriptions', 'association') );
 		}
 		if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
-			$res['activite_bouton_synchroniser_inscriptions'] = array('reload-32.png', array('synchronis_activites', "id=$id_evenement"), array('gerer_activites', 'association') );
+			$res[] = array('activite_bouton_synchroniser_inscriptions', 'reload-32.png', array('synchronis_activites', "id=$id_evenement"), array('gerer_activites', 'association') );
 		}
 		echo association_navigation_raccourcis($res, 75);
 		debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');

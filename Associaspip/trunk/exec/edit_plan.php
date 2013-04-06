@@ -23,7 +23,7 @@ function exec_edit_plan() {
 		echo propre(_T('asso:edit_plan'));
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'plan_comptable' => array('grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
+			array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
 		) );
 		debut_cadre_association('plan_compte.png', 'edition_plan_comptable');
 		echo recuperer_fond('prive/editer/editer_asso_plan', array (

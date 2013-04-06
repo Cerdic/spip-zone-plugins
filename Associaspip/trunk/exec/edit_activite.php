@@ -32,7 +32,7 @@ function exec_edit_activite() {
 		}
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'activite_titre_inscriptions_activites' => array('grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+			array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
 		) );
 		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
 		// formulaire

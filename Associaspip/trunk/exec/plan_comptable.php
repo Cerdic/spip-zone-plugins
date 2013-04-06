@@ -22,10 +22,10 @@ function exec_plan_comptable() {
 		echo propre(_T('asso:plan_info'));
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'association_infos_contacts' => array('assoc_qui.png', array('association'), array('voir_profil', 'association') ),
-			'plan_nav_ajouter' => array('plan_compte.png', array('edit_plan'), array('gerer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
+			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),
+			array('plan_nav_ajouter', 'plan_compte.png', array('edit_plan'), array('gerer_compta', 'association') ),
+			array('destination_comptable', 'euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
+			array('exercices_budgetaires_titre', 'calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
 		) );
 		debut_cadre_association('plan_compte.png',  'plan_comptable');
 		$classe = _request('classe');

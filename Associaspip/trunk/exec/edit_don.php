@@ -26,7 +26,7 @@ function exec_edit_don_args($id_auteur, $membre, $id_don) {
 	echo association_totauxinfos_intro('', 'don', $id_don);
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'tous_les_dons' => array('grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
+		array('tous_les_dons', 'grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
 	) );
 	debut_cadre_association('dons-24.gif', $id_don ? 'dons_titre_mise_a_jour' : 'ajouter_un_don');
 	echo recuperer_fond('prive/editer/editer_asso_dons', array (

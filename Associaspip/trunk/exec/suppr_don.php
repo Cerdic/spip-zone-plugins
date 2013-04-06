@@ -33,7 +33,7 @@ function exec_suppr_don_args($id_don, $don) {
 	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'don', $id_don, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'tous_les_dons' => array('grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
+		array('tous_les_dons', 'grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
 	) );
 	debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
 	echo association_bloc_suppression('don', $id_don);

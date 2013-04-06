@@ -29,7 +29,7 @@ function exec_suppr_exercice_args($id_exercice, $exercice) {
 	echo association_totauxinfos_intro($exercice['intitule'], 'exercice', $id_exercice, $infos);
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'tous_les_exercices' => array('grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
+		array('tous_les_exercices', 'grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
 	echo association_bloc_suppression('exercice', $id_exercice);

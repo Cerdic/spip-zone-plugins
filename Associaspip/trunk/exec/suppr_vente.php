@@ -34,7 +34,7 @@ function exec_suppr_vente_args($id_vente, $vente) {
 	echo '<div class="hproduct">'. association_totauxinfos_intro('', 'vente', $id_vente, $infos ) .'</div>';
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'titre_onglet_ventes' => array('grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
+		array('titre_onglet_ventes', 'grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
 	) );
 	debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
 	echo association_bloc_suppression('vente', $id_vente);

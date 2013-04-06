@@ -30,7 +30,7 @@ function exec_suppr_plan_args($id_plan, $plan) {
 	echo association_totauxinfos_intro($plan['intitule'], 'plan', $id_plan, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'plan_comptable' => array('grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
+		array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('plan_compte.png', 'suppression_de_compte');
 	echo association_bloc_suppression('plan', $id_plan,'plan_comptable');

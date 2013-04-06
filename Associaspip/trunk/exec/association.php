@@ -21,16 +21,15 @@ function exec_association() {
 		// presentation du plugin
 		echo propre(_T('asso:association_info_doc'));
 		// datation et raccourcis
-		$raccourcis_actifs = array(
-			'profil_de_lassociation' => array('assoc_qui.png', array('configurer_association'), array('editer_profil', 'association'), ),
-			'editer_asso_metas_utilisateur_lien' => array('assoc_qui.png', array('editer_asso_metas_utilisateur'), array('editer_profil', 'association')),
-			'categories_de_cotisations' => array('cotisation.png', array('categories'), array('editer_profil', 'association')),
-			'gerer_les_autorisations' => array('annonce.gif', array('association_autorisations'), array('gerer_autorisations', 'association')),
-			'plan_comptable' => array('plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
-			'destination_comptable' => array('euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
-			'exercices_budgetaires_titre' => array('calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
-		); // racourcis natifs
-		echo association_navigation_raccourcis( $raccourcis_actifs, 20);
+		echo association_navigation_raccourcis(array(
+			array('profil_de_lassociation', 'assoc_qui.png', array('configurer_association'), array('editer_profil', 'association'), ),
+			array('editer_asso_metas_utilisateur_lien', 'assoc_qui.png', array('editer_asso_metas_utilisateur'), array('editer_profil', 'association'), ),
+			array('categories_de_cotisations', 'cotisation.png', array('categories'), array('editer_profil', 'association'), ),
+			array('gerer_les_autorisations', 'annonce.gif', array('association_autorisations'), array('gerer_autorisations', 'association'), ),
+			array('plan_comptable', 'plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association'), ),
+			array('destination_comptable', 'euro-39.gif', array('destination_comptable'), $GLOBALS['association_metas']['destinations'] ? array('gerer_compta', 'association') : FALSE ),
+			array('exercices_budgetaires_titre', 'calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
+		), 20);
 		debut_cadre_association('assoc_qui.png', 'association_infos_contacts');
 		// Profil de l'association
 		echo debut_cadre_enfonce('', TRUE);

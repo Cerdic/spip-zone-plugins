@@ -24,7 +24,7 @@ function exec_edit_destination() {
 		echo association_totauxinfos_intro(sql_getfetsel('intitule','spip_asso_destination',"id_destination=$id_destination"), 'destination', $id_destination, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'destination_comptable' => array('grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
+			array('destination_comptable', 'grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
 		) );
 		debut_cadre_association('euro-39.gif', 'destination_nav_ajouter');
 		echo recuperer_fond('prive/editer/editer_asso_destinations', array (

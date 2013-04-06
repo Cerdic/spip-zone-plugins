@@ -27,7 +27,7 @@ function exec_suppr_destination_args($id_destination, $destination) {
 	echo association_totauxinfos_intro($destination['intitule'], 'destination', $id_destination, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(
-		'destination_comptable' => array('grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
+		array('destination_comptable', 'grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('euro-39.gif', 'suppression_de_destination');
 	echo association_bloc_suppression('destination', $id_destination,'destination');

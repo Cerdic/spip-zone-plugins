@@ -24,7 +24,7 @@ function exec_edit_categorie() {
 		echo association_totauxinfos_intro('', 'categorie', $id_categorie, $infos );
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-			'categories_de_cotisations' => array('grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association') ),
+			array('categories_de_cotisations', 'grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association') ),
 		) );
 		debut_cadre_association('cotisation.png', 'categories_de_cotisations');
 		echo recuperer_fond('prive/editer/editer_asso_categories', array (
