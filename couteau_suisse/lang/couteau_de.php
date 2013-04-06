@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_actu' => 'Update erzwingen',
 	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Liste der gefundenen Plugins:',
-	'maj_maj' => 'Ausgewähltes Plugin aktualisieren', # MODIF
+	'maj_maj' => 'Ausgewählte(s) Plugin(s) aktualisieren',
 	'maj_ok' => 'Dieses[Plugin->@zip@] scheint [auf dem neuesten Stand->@url@] zu sein.',
 	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@',
@@ -93,7 +93,7 @@ Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Format de
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.x', # MODIF
+Kompatibil mit SPIP v1.92x, v2.x.x und v3.0',
 	'pp_autobr' => 'Block mit automatischen Zeilenumbrüchen einfügen',
 	'pp_blocs_bloc' => 'Eingeklappten Block einfügen',
 	'pp_blocs_visible' => 'Geöffneten Block einfügen',
