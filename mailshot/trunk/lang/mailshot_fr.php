@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_service_configure' => 'Aucun service d\'envoi configuré. <a href="@url@">Configurer un service</a>',
 	'erreur_envoi_mail_bloque_debug' => 'Envoi du mail bloqué par <tt>_TEST_EMAIL_DEST</tt>',
 	'erreur_envoi_mail_force_debug' => 'Envoi du mail forcé vers @email@ par <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_generation_newsletter' => 'Une erreur est survenue lors de la génération de la newsletter',
 
 	// I
 	'info_aucun_envoi' => 'Aucun envoi',

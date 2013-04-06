@@ -60,6 +60,9 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	if (!is_array($corps)) {
 		$content = charger_fonction("content","newsletter");
 		$corps = $content($corps);
+		if (!$corps OR !is_array($corps)){
+			return _T('mailshot:erreur_generation_newsletter');
+		}
 	}
 	$corps = array_merge(array('html'=>'','texte'=>'','sujet'=>''),$corps);
 
