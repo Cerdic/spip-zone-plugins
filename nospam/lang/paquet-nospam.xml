@@ -2,6 +2,8 @@
 	<langue code="ar" />
 	<langue code="de" />
 	<langue code="en" />
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 </traduction>
