@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_test_envoye' => 'Die Testmail wurde fehlerfrei versand. Falls sie nicht richtig ankommt,
                       bearbeiten sie ihre Serverkonfiguration oder kontaktieren sie den Administrator.',
 	'erreur' => 'Fehler',
-	'erreur_dans_log' => ' : consultez le fichier log pour plus de détails', # NEW
+	'erreur_dans_log' => ' : siehe Logdatei für mehr Details',
 	'erreur_generale' => 'Mehrere Konfigurationsfehler. Bitte Inhalt des Formulars korrigieren.',
 	'erreur_invalid_host' => 'Servername inkorrekt',
 	'erreur_invalid_port' => 'Portnummer inkorrekt',
@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facteur_adresse_envoi_email' => 'E-Mail :',
 	'facteur_adresse_envoi_nom' => 'Name:',
-	'facteur_bcc' => 'Copie Cachée (BCC) :', # NEW
-	'facteur_cc' => 'Copie (CC) :', # NEW
-	'facteur_copies' => 'Copies :', # NEW
-	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.', # NEW
+	'facteur_bcc' => 'Blindkopie (BCC) :',
+	'facteur_cc' => 'kopie (CC) :',
+	'facteur_copies' => 'Kopien:',
+	'facteur_copies_descriptif' => 'Eine Kopie der E-Mails wird an die angegebenen Adressen verschick. Eine einzelne Adresse für Kopiene und/oder eine einzelne Adresse für Blindkopie.',
 	'facteur_filtre_accents' => 'Sonderzeichen in HTML-Entitäten umwandeln (z.B. für Hotmail).',
 	'facteur_filtre_css' => 'Stile zwischen <head> und </head> zu "inline" Stilen umwandeln, sinnvoll für Webmail die interne Stile externen vorzieht.',
 	'facteur_filtre_images' => 'Verlinkte Bilder in E-Mail einbetten',
