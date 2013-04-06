@@ -119,13 +119,13 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
 		if ( association_acces($aut) ) { // generation du raccourci
 			if (is_array($url))
 				$url = generer_url_ecrire($url[0],$url[1]);
-			$res .= association_navigation_raccourci1($titre, $url, $image);
+			$res .= association_navigation_raccourci1($titre, $image, $url);
 		}
 	}
 
 	return association_date_du_jour()
 	. fin_boite_info(TRUE)
-	. (count($res)?bloc_des_raccourcis($res):''); // tester si le tableau est vide (ce qui peut arriver si on n'a l'autorisation pour aucun bouton) et ne pas afficher un bloc sans bouton (c'est disgracieux et troublant)
+	. ($res?bloc_des_raccourcis($res):''); // tester si le tableau est vide (ce qui peut arriver si on n'a l'autorisation pour aucun bouton) et ne pas afficher un bloc sans bouton (c'est disgracieux et troublant)
 }
 
 /**
@@ -133,14 +133,14 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
  *
  * @param string $texte
  *   Libelle du bouton
- * @param string $lien
- *   URL vers lequel revoie le bouton
  * @param string $image
  *   Icone du bouton (place devant le libelle)
+ * @param string $lien
+ *   URL vers lequel revoie le bouton
  * @return string
  *   HTML du raccourci (icone+texte+lien)
  */
-function association_navigation_raccourci1($texte, $lien, $image) {
+function association_navigation_raccourci1($texte, $image, $lien) {
 	$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$image; // icone Associaspip
 	if ( !file_exists($chemin) )
 		$chemin = find_in_path($image); // icone alternative

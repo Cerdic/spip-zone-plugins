@@ -664,8 +664,9 @@ function export_compte($ids, $mode, $icone = true)
 		$url = generer_action_auteur($script, $args);
 		$t = strtoupper($t);
 		if ($icone)
-		  echo association_navigation_raccourci1($t, $url, 'export-24.png');
-		else echo "<a href='$url'>$t</a> ";
+		    echo association_navigation_raccourci1($t, 'export-24.png', $url);
+		else
+		    echo "<a href='$url'>$t</a> ";
 	}
 }
 

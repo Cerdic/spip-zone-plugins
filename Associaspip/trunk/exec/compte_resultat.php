@@ -37,7 +37,7 @@ function exec_compte_resultat() {
 			echo debut_cadre_enfonce('', TRUE);
 			echo '<h3>'. _T('asso:cpte_resultat_mode_exportation') .'</h3>';
 			if (test_plugin_actif('FPDF')) { // impression en PDF : _T('asso:bouton_impression')
-				echo association_navigation_raccourci1('PDF', generer_action_auteur('pdf_comptesresultat', 0), 'print-24.png');
+				echo association_navigation_raccourci1('PDF', 'print-24.png', generer_action_auteur('pdf_comptesresultat', 0) );
 			}
 			export_compte($ids, 'resultats');
 			echo fin_cadre_enfonce(TRUE);
