@@ -10,9 +10,11 @@
  * © 2007-2013 - Distribue sous licence GNU/GPL
  * 
  * Action d'ajout de tags à un objet
+ * 
+ * @package SPIP\SPIPicious\Actions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+if (!defined("_ECRIRE_INC_VERSION")) return;#securite
 
 /**
  * Action d'ajout de tags appelée par le formulaire
