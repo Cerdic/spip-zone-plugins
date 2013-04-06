@@ -1,4 +1,7 @@
 <traduction module="paquet-videos" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/videos/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-videos?lang_cible=de">
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-videos?lang_cible=sk">
