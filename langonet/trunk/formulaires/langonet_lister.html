@@ -27,7 +27,15 @@
 	[(#REM) <!-- Affichage des resultats --> ]
 	[<fieldset>
 		<legend><:langonet:legende_table:></legend>
-		[<p class="explication">(#ENV*{message_ok}|table_valeur{explication})</p>]
-		(#ENV*{message_ok}|table_valeur{table})
+		[<p>(#ENV*{message_ok}|table_valeur{explication})</p>]
+		<ul class="spip">
+			<li><:langonet:info_tradlang_statut_ok:></li>
+			<li><:langonet:info_tradlang_statut_modif:></li>
+			<li><:langonet:info_tradlang_statut_new:></li>
+		</ul>
+		(#INCLURE{fond=prive/squelettes/liste/items_lang,
+			titre=#ENV*{message_ok}|table_valeur{titre},
+			items=#ENV*{message_ok}|table_valeur{table},
+			env})
 	</fieldset>]
 </div>

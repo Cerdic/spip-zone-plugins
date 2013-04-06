@@ -51,7 +51,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pattern_texte_cherche' => 'Saisissez en UTF-8 une chaîne correspondant à tout ou partie d\'une traduction française d\'item de langue. La recherche est toujours insensible à la casse.',
 	'info_rechercher_item' => 'Cette option vous permet de chercher des items de langue via leur raccourci dans les fichiers de langue présents sur le site. Par souci de performance, seuls les fichiers de langue française sont utilisés et les fichiers de langue <em>paquet-xxxx_fr.php</em> sont exclus.',
 	'info_rechercher_texte' => 'Cette option vous permet de chercher des items de langue via leur traduction française dans les fichiers de langue de SPIP et des plugins disponibles. Par souci de performance, seuls les fichiers de langue française sont utilisés et les fichiers de langue <em>paquet-xxxx_fr.php</em> sont exclus.',
-	'info_table' => 'Vous pouvez consulter ci-dessous la liste alphabétique des items de langue du fichier «<em>@langue@</em>» (@total@). Chaque bloc affiche les items ayant la même initiale, le raccourci en gras et le texte affiché en regard. Survolez une initiale pour faire apparaître la liste correspondante.',
+	'info_table' => 'Chaque ligne affiche l\'icone représentant l\'état de traduction, le raccourci en gras et la traduction elle-même. La légende des couleurs de l\'état est la suivante :',
+	'info_tradlang_statut_ok' => '<strong>vert</strong> : item correctement traduit',
+	'info_tradlang_statut_modif' => '<strong>bleu</strong> : item dont la traduction est obsolète (référence modifiée)',
+	'info_tradlang_statut_new' => '<strong>rouge</strong> : item non encore traduit',
 	'info_verifier' => 'Cette option vous permet, d\'une part,  de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. Il est possible, soit de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, soit que certains items de langue définis ne sont plus utilisés. <br />D\'autre part, il est possible de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
 	// L
@@ -80,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_generer_cible' => 'Fichier source',
 	'legende_generer_source' => 'Fichier cible',
 	'legende_resultats' => 'Résultats de la vérification',
-	'legende_table' => 'Liste des items du fichier de langue choisi',
+	'legende_table' => 'Liste alphabétique des items du fichier de langue choisi',
 	'legende_trouves' => 'Liste des items trouvés (@total@)',
 
 	// M
