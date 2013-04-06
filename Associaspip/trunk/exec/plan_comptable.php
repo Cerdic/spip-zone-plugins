@@ -63,7 +63,7 @@ function exec_plan_comptable() {
 		}
 		$filtre_activation .= '> '. _T('asso:plan_libelle_comptes_desactives') ."</option>\n";
 		$filtre_activation .= "</select>\n";
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 //			'lettre' => array($lettre, 'asso_plan', 'classe', generer_url_ecrire('plan_comptable', "active=$active") ),
 		), 'plan_comptable', array(
 			'classe' => $filtre_classes,

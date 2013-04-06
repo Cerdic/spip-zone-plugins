@@ -32,7 +32,7 @@ function exec_suppr_exercice_args($id_exercice, $exercice) {
 		array('tous_les_exercices', 'grille-24.png', array('exercice_comptable', "id=$id_exercice"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('calculatrice.gif', 'exercice_budgetaire_titre');
-	echo association_bloc_suppression('exercice', $id_exercice);
+	echo association_form_suppression('exercice', $id_exercice);
 	fin_page_association();
 }
 

@@ -36,7 +36,7 @@ function exec_suppr_don_args($id_don, $don) {
 		array('tous_les_dons', 'grille-24.png', array('dons', "id=$id_don"), array('voir_dons', 'association') ),
 	) );
 	debut_cadre_association('dons-24.gif', 'action_sur_les_dons');
-	echo association_bloc_suppression('don', $id_don);
+	echo association_form_suppression('don', $id_don);
 	fin_page_association();
 }
 

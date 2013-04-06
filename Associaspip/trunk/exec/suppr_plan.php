@@ -33,7 +33,7 @@ function exec_suppr_plan_args($id_plan, $plan) {
 		array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('plan_compte.png', 'suppression_de_compte');
-	echo association_bloc_suppression('plan', $id_plan,'plan_comptable');
+	echo association_form_suppression('plan', $id_plan,'plan_comptable');
 	fin_page_association();
 }
 

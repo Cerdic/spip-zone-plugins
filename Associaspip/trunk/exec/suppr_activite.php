@@ -41,7 +41,7 @@ function exec_suppr_activite_args($id_activite, $activite) {
 		array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$activite[id_evenement]"), array('voir_inscriptions', 'association') ),
 	) );
 	debut_cadre_association('activites.gif', 'activite_titre_inscriptions_activites');
-	echo association_bloc_suppression('activite', $id_activite);
+	echo association_form_suppression('activite', $id_activite);
 	fin_page_association();
 }
 

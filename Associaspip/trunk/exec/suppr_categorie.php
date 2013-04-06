@@ -33,7 +33,7 @@ function exec_suppr_categorie_args($id_categorie, $categorie) {
 		array('categories_de_cotisations', 'grille-24.png', array('categories', "id=$id_categorie"), array('editer_profil', 'association')),
 	) );
 	debut_cadre_association('cotisation.png', 'categories_de_cotisations');
-	echo association_bloc_suppression('categorie', $id_categorie);
+	echo association_form_suppression('categorie', $id_categorie);
 	fin_page_association();
 }
 

@@ -50,7 +50,7 @@ function exec_ventes() {
 		$filtre_statut .= ($etat=='traites'?' selected="selected"':'');
 		$filtre_statut .= '>'. _T('asso:ventes_expediees') .'</option>';
 		$filtre_statut .= '</select>';
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 			'periode' => array($id_periode, 'asso_ventes', 'vente'),
 #			'id' => $id_vente,
 		), 'ventes', array(
@@ -88,7 +88,7 @@ function exec_ventes() {
 			'id_vente', // champ portant la cle des lignes et des boutons
 			array('pair hproduct', 'impair hproduct'), 'statut_vente', $id_vente // rel="purchase"
 		);
-		echo association_selectionner_souspage(array('spip_asso_ventes', $q_where), 'ventes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($etat?"&etat='$etat'":'') );
+		echo association_form_souspage(array('spip_asso_ventes', $q_where), 'ventes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($etat?"&etat='$etat'":'') );
 		fin_page_association();
 	}
 }

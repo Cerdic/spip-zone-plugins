@@ -85,7 +85,7 @@ function exec_comptes() {
 		$filtre_vu .= '<option value="0" '. ($vu=='0'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_non') .'</option>';
 		$filtre_vu .= '<option value="1" '. ($vu=='1'?' selected="selected"':'') .'>'. _T('asso:cpte_op_vu_oui') .'</option>';
 		$filtre_vu .= '</select>';
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 			'periode' => array($id_periode, 'asso_comptes', 'operation'),
 #			'id' => $id_compte,
 		), 'comptes', array(
@@ -108,7 +108,7 @@ function exec_comptes() {
 		$table = comptes_while($where, $limit, $id_compte);
 		if ($table) { // affichage de la liste
 			// SOUS-PAGINATION
-			$nav = association_selectionner_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), FALSE);
+			$nav = association_form_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), '<td align="right"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td>');
 			// ENTETES
 			$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
 			. '<tr class="row_first">'
@@ -123,7 +123,7 @@ function exec_comptes() {
 			. '</tr>'
 			. $table
 			. "\n</table>\n"
-			. "<table width='100%' class='asso_tablo_filtres'><tr>\n" . $nav . '<td align="right"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td></tr></table>';
+			. $nav;
 			echo generer_form_ecrire('action_comptes', $table);
 		} else { // absence d'operation pour l'exercice
 			echo '<table width="100%"><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></table>';

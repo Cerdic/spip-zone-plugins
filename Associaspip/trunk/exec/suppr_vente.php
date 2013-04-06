@@ -37,7 +37,7 @@ function exec_suppr_vente_args($id_vente, $vente) {
 		array('titre_onglet_ventes', 'grille-24.png', array('ventes', "id=$id_vente"), array('voir_ventes', 'association') ),
 	) );
 	debut_cadre_association('ventes.gif', 'action_sur_les_ventes_associatives');
-	echo association_bloc_suppression('vente', $id_vente);
+	echo association_form_suppression('vente', $id_vente);
 	fin_page_association();
 }
 

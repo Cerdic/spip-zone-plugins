@@ -67,7 +67,7 @@ function exec_suppr_ressource_args($id_ressource, $ressource) {
 		array('titre_onglet_prets', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association') ),
 	) );
 	debut_cadre_association('pret-24.gif', 'ressources_titre_suppression_ressources');
-	echo association_bloc_suppression('ressource', $id_ressource );
+	echo association_form_suppression('ressource', $id_ressource );
 	fin_page_association();
 }
 

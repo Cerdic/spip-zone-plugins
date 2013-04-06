@@ -47,13 +47,13 @@ function exec_dons() {
 		), 2);
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
 		// FILTRES
-		$filtre_typedon = '<select name="type" onchange="form.submit()">';
-		$filtre_typedon .= '<option value="">' ._T('asso:entete_tous') .'</option>';
-		$filtre_typedon .= '<option value="argent"'. ($type=='argent'?' selected="selected"':'') .'>'. _T('asso:dons_en_argent') .'</option>';
-		$filtre_typedon .= '<option value="colis"'. ($type=='colis'?' selected="selected"':'') .'>'. _T('asso:dons_en_nature') .'</option>';
-//		$filtre_typedon .= '<option value="argent AND colis"'. (($type=='argent AND colis' OR $type=='colis AND argent')?' selected="selected"':'') .'>'. _T('asso:dons_mixtes') .'</option>';
-		$filtre_typedon .= '</select>';
-		echo association_bloc_filtres(array(
+		$filtre_typedon = "<select name='type' onchange='form.submit()'>\n";
+		$filtre_typedon .= '<option value="">' ._T('asso:entete_tous') ."</option>\n";
+		$filtre_typedon .= '<option value="argent"'. ($type=='argent'?' selected="selected"':'') .'>'. _T('asso:dons_en_argent') ."</option>\n";
+		$filtre_typedon .= '<option value="colis"'. ($type=='colis'?' selected="selected"':'') .'>'. _T('asso:dons_en_nature') ."</option>";
+//		$filtre_typedon .= '<option value="argent AND colis"'. (($type=='argent AND colis' OR $type=='colis AND argent')?' selected="selected"':'') .'>'. _T('asso:dons_mixtes') ."</option>\n";
+		$filtre_typedon .= "</select>\n";
+		echo association_form_filtres(array(
 			'periode' => array($id_periode, 'asso_dons', 'don'),
 #			'id' => $id_don,
 		), 'dons', array(
@@ -80,7 +80,7 @@ function exec_dons() {
 			'id_don', // champ portant la cle des lignes et des boutons
 			array('argent'=>'pair', 'colis'=>'prospect', 'mixte'=>'impair'), 'type_don', $id_don
 		);
-		echo association_selectionner_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($type?"&type='$type'":'') );
+		echo association_form_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($type?"&type='$type'":'') );
 		fin_page_association();
 	}
 }

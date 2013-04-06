@@ -92,9 +92,9 @@ function exec_ressources() {
 			$p = association_langue("ressources_libelle_statut_$type");
 			$filtre .= "<option value='$type'$s>$p</option>\n";
 		}
-		$filtre = '<select name="statut" onchange="form.submit()"><option value="">' ._T('asso:entete_tous') .'</option>' . $filtre . '</select>';
+		$filtre = '<select name="statut" onchange="form.submit()">\n<option value="">' ._T('asso:entete_tous') ."</option>\n$filtre\n</select>";
 
-		echo association_bloc_filtres(array(), 'ressources', array('statut' => $filtre));
+		echo association_form_filtres(array(), 'ressources', array('statut' => $filtre));
 		// affichage du tableau
 		echo association_bloc_listehtml2('asso_ressources',
 			sql_select('*', 'spip_asso_ressources', $s_sql[$statut],'',  'id_ressource'),

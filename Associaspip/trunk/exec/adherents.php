@@ -96,19 +96,16 @@ function exec_adherents() {
 			}
 			echo fin_cadre_enfonce(TRUE);
 		}
-
-		$champsExclus = array();
-		if ( !$GLOBALS['association_metas']['civilite'] )
-			$champsExclus[] = 'sexe';
-		if ( !$GLOBALS['association_metas']['prenom'] )
-			$champsExclus[] = 'prenom';
-		if ( !$GLOBALS['association_metas']['id_asso'] )
-			$champsExclus[] = 'id_asso';
 		if ( autoriser('exporter_membres', 'association')
-		AND test_plugin_actif('FPDF')) { // tableau des membres
-			echo debut_cadre_enfonce('', TRUE);
-			echo association_bloc_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe), 'adherent_libelle_', $champsExclus, TRUE);
-			echo fin_cadre_enfonce(TRUE);
+		) { // tableau des membres
+			$champsExclus = array();
+			if ( !$GLOBALS['association_metas']['civilite'] )
+				$champsExclus[] = 'sexe';
+			if ( !$GLOBALS['association_metas']['prenom'] )
+				$champsExclus[] = 'prenom';
+			if ( !$GLOBALS['association_metas']['id_asso'] )
+				$champsExclus[] = 'id_asso';
+			echo association_form_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe), 'adherent_libelle_', $champsExclus, TRUE);
 		}
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
 		// FILTRES
@@ -127,7 +124,7 @@ function exec_adherents() {
 //			$filtre_categorie .= '>'.$categorie['valeur'].' - '.$categorie['libelle'].'</option>'; // long ; comme pour les comptes (ref - intitule)
 			$filtre_categorie .= '>'.$categorie['valeur'].'</option>'; // court (ou pas) : comme pour les groupes
 		}
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 			'lettre' => array($lettre, 'asso_membres', 'nom_famille', generer_url_ecrire('adherents', (!$id?($id_groupe?"&groupe=$id_groupe":'').($statut_interne?"&statut=$statut_interne":'').($id_categorie?"&categorie=$id_categorie":''):"&id=$id") ), ),
 			'id' => $id,
 			'groupe' => $id_groupe, // ne pas proposer que si on affiche les groupes : on peut vouloir filtrer par groupe sans pour autant les afficher
@@ -293,24 +290,23 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	if ($statut_interne != 'defaut')
 		$arg[]= "statut_interne=$statut_interne";
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
-	$res .= association_selectionner_souspage(array('spip_asso_membres', $critere), 'adherents', $arg, FALSE);
 	if (autoriser('editer_membres', 'association', 100)) {
-		$res .= "<td align='right' class='formulaire'>\n";
+		$nav .= "<td align='right' class='formulaire'>\n";
 		if ($auteurs) {
 			if (autoriser('editer_membres', 'association')) {
-				$res .=  '<select name="action_adherents"><option value="">'._T('asso:choisir_action')."</option>\n<option value='desactive'>"
+				$nav .=  '<select name="action_adherents"><option value="">'._T('asso:choisir_action')."</option>\n<option value='desactive'>"
 				.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
 				."</option>\n<option value='delete'>"._T('asso:supprimer_adherent')."</option>\n";
 			}
 			if (autoriser('editer_groupes', 'association', 100)) {
-				$res .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
+				$nav .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
 			}
-			$res .='</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
+			$nav .='</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
 		}
-		$res .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
+		$nav .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 		.  '</td>';
 	}
-	$res .= '</tr></table>';
+	$res .= association_form_souspage(array('spip_asso_membres', $critere), 'adherents', $arg, $nav);
 	return 	array($critere, $jointure_groupe, generer_form_ecrire('action_adherents', $res));
 }
 

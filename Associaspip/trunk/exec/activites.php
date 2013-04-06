@@ -78,7 +78,7 @@ function exec_activites_args($id_evenement) {
 	$filtre_incrits .= ($inscription=='sans'?' selected="selected"':'');
 	$filtre_incrits .= '>'. _T('asso:activites_sans_inscrits') .'</option>';
 	$filtre_incrits .= '</select>';
-	echo association_bloc_filtres(array(
+	echo association_form_filtres(array(
 		'periode' => array($id_periode, 'evenements', 'debut'),
 #			'id' => $id_evenement,
 	), 'activites', array(
@@ -122,7 +122,7 @@ function exec_activites_args($id_evenement) {
 		array('pair vevent', 'impair vevent'), 'participations', $id_evenement
 	);
 	//SOUS-PAGINATION
-	echo association_selectionner_souspage(array($q_from, $q_where, 'e.id_evenement', $q_having), 'activites&'.($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($mot?"&mot=$mot":'').($inscription?"&inscription='$inscription'":'') );
+	echo association_form_souspage(array($q_from, $q_where, 'e.id_evenement', $q_having), 'activites&'.($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($mot?"&mot=$mot":'').($inscription?"&inscription='$inscription'":'') );
 	fin_page_association();
 }
 

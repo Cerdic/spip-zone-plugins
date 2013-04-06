@@ -50,7 +50,7 @@ function exec_bilan() {
 		}
 		debut_cadre_association('finances-24.png', 'resultat_courant');
 		// Filtres
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
 			'destinations' => array($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '', TRUE),
 		), 'bilan');

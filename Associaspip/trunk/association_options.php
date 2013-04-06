@@ -1580,50 +1580,6 @@ function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
     return ($lst?"$res1</select>\n":$res2);
 }
 
-/**
- * Selecteur de sous-pagination
- *
- * @param int|array $pages
- *   Nombre total de pages ou
- *   Liste des elements a passer a "sql_countsel"
- * @param string $exec
- *   Nom du fichier appelant
- * @param string $params
- *   Autres informations passees par l'URL
- * @param int $debut
- *   Numero du premier enregistrement (si $req est a faux)
- *   Nom du champ contenant ce numero (si $req est a vrai)
- * @param bool $req
- * @param bool $tbl
- * @return string $res
- *   HTML du bandeau de pagination
- */
-function association_selectionner_souspage($pages, $exec='', $arg=array(), $tbl=TRUE, $debut='debut', $req=TRUE) {
-	$res = ($tbl?"<table width='100%' class='asso_tablo_filtres'><tr>\n":'') .'<td align="left">';
-	if ( is_array($pages) ) {
-		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
-	} else {
-		$nbr_pages = intval($pages);
-	}
-	if ( $nbr_pages>1 ) {
-		$debut = ($req?_request($debut):$debut);
-		$exec = ($exec?$exec:_request($exec));
-		if (!is_array($arg)) $arg = array($arg);
-		for ($i=0; $i<$nbr_pages; $i++) {
-			$position = $i*_ASSOCIASPIP_LIMITE_SOUSPAGE;
-			if ($position==$debut) { // page courante
-				$res .= "\n<strong>".$position.' </strong> ';
-			} else { // autre page
-				$arg['debut']= 'debut='.$position;
-				$h = generer_url_ecrire($exec, join('&', $arg));
-				$res .= "<a href='$h'>$position</a>\n";
-			}
-		}
-	}
-	$res .= "</td>\n";
-	return $res. ($tbl?"\n</tr></table>":'');
-}
-
 /** @} */
 
 
@@ -1912,9 +1868,10 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
 
 
 /*****************************************
- * @defgroup association_bloc
+ * @defgroup association_form
  *
- *
+ * @return string $res
+ *   FORMulaire HTML dans un bloc (DIV ou TABLE ou autre)
 ** @{ */
 
 /**
@@ -1928,7 +1885,7 @@ function association_totauxinfos_montants($legende='', $somme_recettes=0, $somme
  *   Nom du fichier d'action vers lequel le formulaire sera redirige, sans le prefixe "supprimer_".
  *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
  */
-function association_bloc_suppression($type, $id, $retour='') {
+function association_form_suppression($type, $id, $retour='') {
 	$res = _T('asso:objet_num', array('objet'=>$type,'num'=>$id));
 	$res = _T('asso:vous_aller_effacer', array('quoi'=>'<i>'.$res.'</i>'));
 	$res = '<p><strong>'. $res  .'</strong></p><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
@@ -1949,15 +1906,13 @@ function association_bloc_suppression($type, $id, $retour='') {
  *   - Tableau des 'identifiant_filtre'=>"code HTML du filtre" a rajouter
  * @param bool $td
  *   Indique s'il faut generer un tableau (vrai, par defaut) ou une liste (faux)
- * @return string $res
- *   Form-HTML des filtres
  * @note
  *   Ici il s'agit d'un vrai formulaire qui influe sur les donnees affichees
  *   et non sur la fonctionnalite en cours (onglet), contrairement aux apparences
  *   (le passage de parametre se faisant par l'URL, celle-ci change)
  *   http://comments.gmane.org/gmane.comp.web.spip.devel/61824
  */
-function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE) {
+function association_form_filtres($liste_filtres, $exec='', $supplements='', $td=TRUE) {
 	$res = '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
 	if ($exec)
 		$res .= "\n<div><input type='hidden' name='exec' value='$exec' /></div>";
@@ -1974,6 +1929,51 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
 	}
 	$res .= ($td?'<td':'<li') . ' class="boutons"><noscript><div class="boutons"><input type="submit" value="'. _T('asso:bouton_lister') .'" /></div></noscript>' . ($td?"</td>\n":'</li>');
 	return $res. ($td?'</tr></table':'</ul>') .">\n</form>\n";
+}
+
+/**
+ * Selecteur/bandeau de sous-pagination
+ *
+ * @param int|array $pages
+ *   Nombre total de pages ou
+ *   Liste des elements a passer a "sql_countsel"
+ * @param string $exec
+ *   Nom du fichier appelant
+ * @param string $params
+ *   Autres informations passees par l'URL
+ * @param int $debut
+ *   Numero du premier enregistrement (si $req est a faux)
+ *   Nom du champ contenant ce numero (si $req est a vrai)
+ * @param string $plus
+ *   Autres cellules du tableau uniligne. (utilise dans comptess et adherents !)
+ * avec d'autres (FALSE)
+ * @param bool $req
+ * 	Cf. $debut
+ */
+function association_form_souspage($pages, $exec='', $arg=array(), $plus='', $debut='debut', $req=TRUE) {
+	$res = "<table width='100%' class='asso_tablo_filtres'><tr>\n" .'<td align="left">';
+	if ( is_array($pages) ) {
+		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
+	} else {
+		$nbr_pages = intval($pages);
+	}
+	if ( $nbr_pages>1 ) {
+		$debut = ($req?_request($debut):$debut);
+		$exec = ($exec?$exec:_request($exec));
+		if (!is_array($arg))
+			$arg = array($arg);
+		for ($i=0; $i<$nbr_pages; $i++) {
+			$position = $i*_ASSOCIASPIP_LIMITE_SOUSPAGE;
+			if ($position==$debut) { // page courante
+				$res .= "\n<strong>".$position.' </strong> ';
+			} else { // autre page
+				$arg['debut']= 'debut='.$position;
+				$h = generer_url_ecrire($exec, join('&', $arg));
+				$res .= "<a href='$h'>$position</a>\n";
+			}
+		}
+	}
+	return "$res</td>\n$plus\n</tr></table>";
 }
 
 /**
@@ -1996,11 +1996,12 @@ function association_bloc_filtres($liste_filtres, $exec='', $supplements='', $td
  *   seront affiches/proposes dans le formulaire, d'ou pas d'exclu par defaut)
  * @param bool $coords
  *   Indique s'il faut (vrai) prendre en compte ou pas (faux) le plugin "Coordonnees"
- * @return string $res
- *   Form HTML complet dans un cadre. Ce formulaire sera traite par l'action de
- *   l'objet prefixe de "pdf_"
+ * @note
+ *   Ce formulaire sera traite par l'action de l'objet prefixe de "pdf_"
  */
-function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true) {
+function association_form_listepdf($objet, $params=array(), $prefixeLibelle='', $champsExclus=array(), $coords=true) {
+	if (!test_plugin_actif('FPDF'))
+		return;
 	$frm = '<div>'; //l2.1
 	foreach ($params as $k => $v) { // on fait suivre les autres parametres dont la liste des auteurs a afficher
 		$frm .= '<input type="hidden" name="'.$k.'" value="'. htmlspecialchars($v, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />'; // http://stackoverflow.com/questions/46483/htmlentities-vs-htmlspecialchars
@@ -2035,8 +2036,10 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
 	$res .= '<div class="formulaire_spip formulaire_asso_liste_'.$objet.'s">'; //l1.2
 	$res .= generer_action_auteur('pdf_'.$objet.'s', 0, '', $frm, '', '');
 	$res .= '</div>'; //l1.2
-	return $res;
+	return debut_cadre_enfonce('', TRUE). $res. fin_cadre_enfonce(TRUE);
 }
+
+/** @} */
 
 /**
  * Listing sous forme de tableau HTML
@@ -2066,7 +2069,6 @@ function association_bloc_listepdf($objet, $params=array(), $prefixeLibelle='', 
  * @return string $res
  *   Table-HTML listant les donnees formatees
  */
-
 function association_bloc_listehtml2($table, $reponse_sql, $presentation, $boutons=array(), $cle1='', $extra=array(), $cle2='', $selection=0) {
 
 	if ( $cle1 ) {
@@ -2176,8 +2178,6 @@ function association_bloc_bouton($boutons, $champ) {
 	}
 	return $res;
 }
-/** @} */
-
 
 
 /*****************************************

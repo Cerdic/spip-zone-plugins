@@ -102,16 +102,16 @@ function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unit
 {
 	debut_cadre_association('pret-24.gif', 'prets_titre_liste_reservations');
 	// FILTRES
-	$filtre_statut = '<select name="statut" onchange="form.submit()">';
-	$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
+	$filtre_statut = "<select name='statut' onchange='form.submit()'>\n";
+	$filtre_statut .= '<option value="">' ._T('asso:entete_tous') ."</option>\n";
 	$filtre_statut .= '<option value="sortie"';
 	$filtre_statut .= (intval($statut)<0||$statut=='sortie'?' selected="selected"':'');
-	$filtre_statut .= '>'. _T('asso:prets_encours') .'</option>';
+	$filtre_statut .= '>'. _T('asso:prets_encours') ."</option>\n";
 	$filtre_statut .= '<option value="retour"';
 	$filtre_statut .= (intval($statut)>0||$statut=='retour'?' selected="selected"':'');
-	$filtre_statut .= '>'. _T('asso:prets_restitues') .'</option>';
-	$filtre_statut .= '</select>';
-	echo association_bloc_filtres(array(
+	$filtre_statut .= '>'. _T('asso:prets_restitues') ."</option>\n";
+	$filtre_statut .= "</select>\n";
+	echo association_form_filtres(array(
 		'periode' => array($id_periode, 'asso_prets', 'sortie')),
 				      'prets', array(
 // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
@@ -146,7 +146,7 @@ function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unit
 			'id_pret', // champ portant la cle des lignes et des boutons
 			array('pair', 'impair'), 'statut_sortie', $id_pret
 		);
-	echo association_selectionner_souspage(array('spip_asso_prets', $where), 'prets', "id=$id_ressource&".($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($statut?"&statut='$statut'":'') );
+	echo association_form_souspage(array('spip_asso_prets', $where), 'prets', "id=$id_ressource&".($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($statut?"&statut='$statut'":'') );
 }
 
 ?>

@@ -44,7 +44,7 @@ function exec_compte_bilan() {
 		}
 		debut_cadre_association('finances-24.png', 'cpte_bilan_titre_general');
 		// Filtres
-		echo association_bloc_filtres(array(
+		echo association_form_filtres(array(
 			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
 			'destination' => $ids['destination'],
 		), 'compte_bilan');

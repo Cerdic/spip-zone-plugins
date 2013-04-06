@@ -33,7 +33,7 @@ function exec_suppr_groupe_args($id_groupe, $groupe) {
 		array('tous_les_groupes', 'annonce.gif', array('groupes', "id=$id_groupe"), array('voir_groupes', 'association') ),
 	) );
 	debut_cadre_association('annonce.gif', 'suppression_de_groupe');
-	echo association_bloc_suppression('groupe', $id_groupe);
+	echo association_form_suppression('groupe', $id_groupe);
 	fin_page_association();
 }
 
