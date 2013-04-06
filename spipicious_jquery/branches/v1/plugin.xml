@@ -22,7 +22,7 @@ _ Icon from [Pawel Kadysz->http://oneseventyseven.com/]
 	</multi>
 	</description>
 	<icon>images/spipicious-128.png</icon>
-	<lien>http://kent1.sklunk.net/spip.php?article97</lien>
+	<lien>http://contrib.spip.net/Plugin-Spipicious</lien>
 	<prefix>spipicious</prefix>
 	<install>base/spipicious_upgrade.php</install>
 	<pipeline>
