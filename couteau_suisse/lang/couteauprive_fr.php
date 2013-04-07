@@ -18,17 +18,19 @@ Signification des paramètres :
 
 Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
 
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples. Pensez à bien les tester toutes.
 _ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
 @puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
 ',
 	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».',
-	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log',
+	'autorisations_debug' => 'Tracer les autorisations dans {@_CS_DIR_LOG@spip.log}',
 	'label:autorisations_alias' => 'Vos alias :',
 	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).',
 	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]',
 	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]',
 	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]',
+	'autorisations_creees' => "Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ",
+	'autorisations_surcharge' => 'Fonction surchargée',
 
 	// 2
 	'2pts_non' => ' : non',
@@ -789,7 +791,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de vos pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.',
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un «petit écran» présentera deux colonnes et un «grand écran» en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]][[->Et ajouter %tres_large% pixels à la largeur de l\'écran.]]
-{{ {Pensez à vider les caches de SPIP !} }}',
+{{ {Pensez à vider les caches de SPIP et de votre navigateur.} }}',
 	'spip_ecran:nom' => 'Largeur d\'écran',
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour la journalisation des évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en logs.}</q3>]][[Autres réglages :->@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',

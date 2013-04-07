@@ -27,17 +27,11 @@ function autoriser_redacteur($faire,$type,$id,$qui,$opt) {
 function autoriser_administrateur($faire,$type,$id,$qui,$opt) {
 	return $qui["statut"] == "0minirezo" && !$qui["restreint"];
 }
-function autorisations_return($faire,$type,$id,$qui,$opt) {
- if($faire && $type && $id && isset($qui["id_auteur"]) && $qui["id_auteur"]) return autoriser($faire,$type,$id,NULL,$opt);
- if($faire && $type && $id) return autoriser($faire,$type,0,NULL,$opt);
- if($faire && $type) return autoriser($type,"",0,NULL,$opt);
- return autoriser("defaut");
-}
 @include_once "'.str_replace('\\','/',realpath(_DIR_CS_TMP.'mes_autorisations.php')).'";
 ',
 	// TODO : Exploiter $GLOBALS['autoriser_exception']
 	'pipelinecode:pre_description_outil' => 'if($id=="autorisations")
-$texte=str_replace(array("@_CS_DIR_LOG@"), array(cs_root_canonicalize(defined("_DIR_LOG")?_DIR_LOG:_DIR_TMP)), $texte);',
+$texte=str_replace(array("@_CS_DIR_TMP@","@_CS_DIR_LOG@"), array(cs_root_canonicalize(_DIR_CS_TMP), cs_root_canonicalize(defined("_DIR_LOG")?_DIR_LOG:_DIR_TMP)), $texte);',
 	
 ));
 
@@ -55,6 +49,7 @@ add_variables( array(
 	'format' => _format_CHAINE,
 	'lignes' => 8,
 	'code' => "function _autorisations_LISTE(){return %s;}",
+	'commentaire' => 'couteauprive_T("autorisations_creees")." ".((include_spip(_DIR_CS_TMP."mes_autorisations") && function_exists("autorisations_liste") && $tmp=autorisations_liste())?join(", ",$tmp):couteauprive_T("variable_vide"))',
 ));
 
 }
@@ -65,13 +60,13 @@ cs_log("autorisations_installe_dist()");
 
 	// on decode les alias entres dans la config
 	$alias = preg_split("/[\r\n]+/", _autorisations_LISTE());
-	$code = $fct = array(); $erreurs = '';
-	foreach ($alias as $_a) {
+	$fct = array(); $erreurs = '';
+	foreach($alias as $_a) {
 		list($a,) = explode('//', $_a, 2);
 		if (preg_match('/^\s*(?:(\d+)\s*:)?(.*?)=\s*(?:(\d+)\s*:)?(.*?)$/', $a, $regs)) {
 			$qui = intval($regs[1]); list($faire, $type, $id) = autorisations_parse($regs[2]);
 			$qui2 = intval($regs[3]); list($faire2, $type2, $id2) = autorisations_parse($regs[4]);
-			if($faire===-1 || $faire2===-1 || ($faire==$faire2 && $type==$type2)) { 
+			if($faire===-1 || $faire2===-1 || ($faire==$faire2 && $type==$type2 && $id==$id2 && $qui=$qui2)) { 
 				$erreurs .= "// #ERREUR : .$_a\n"; continue;
 			}
 			$if = $qui?"\$qui['id_auteur']==$qui":'';
@@ -80,7 +75,7 @@ cs_log("autorisations_installe_dist()");
 			elseif($id2) $alias = "'$faire2','$type2',$id2,\$qui";
 			elseif($type2) $alias = "'$faire2','$type2',\$id,\$qui";
 			else $alias = "'$faire2',\$type,\$id,\$qui";
-			$f = ($faire && $type)?"autoriser_{$faire}_{$type}":($faire?"autoriser_{$faire}":"autoriser_{$type}");
+			$f = ($faire && $type)?"autoriser_{$type}_{$faire}":($faire?"autoriser_{$faire}":"autoriser_{$type}");
 			$code[$f][] = "// $_a\n\t".($if?"if($if) ":'')."return autoriser($alias,\$opt);";
 		}
 	}
@@ -88,8 +83,16 @@ cs_log("autorisations_installe_dist()");
 		$fct[] = $k;
 		$v = join("\n\t", $v);
 		$code[$k] = "if(!function_exists('$k')) {\n\tfunction $k(\$faire,\$type,\$id,\$qui,\$opt) {
-	".$v.(strpos($v,') return')!==false?"\n\treturn autorisations_return(\$faire,\$type,\$id,\$qui,\$opt);":'').' } }';
+	".$v.(strpos($v,') return')!==false?"\n\treturn autorisations_return(\$faire,\$type,\$id,\$qui['id_auteur'],\$opt);":'').' } }';
 	}
+	// fonction generique de retour
+	$code[] = 'function autorisations_return($faire,$type,$id,$qui,$opt) {
+	if($faire && $type && $id && intval($qui)) return autoriser($faire,$type,$id,NULL,$opt);
+	if($faire && $type && $id) return autoriser($faire,$type,0,NULL,$opt);
+	if($faire && $type) return autoriser($type,"",0,NULL,$opt);
+	return autoriser("defaut");
+}';
+	// liste de autorisations "maison"
 	$code[] = 'function autorisations_liste() { return '.var_export($fct,1).'; }';
 	// en retour : le code PHP
 	$alias = array($erreurs.join("\n", $code));
@@ -124,21 +127,19 @@ function autorisations_action_rapide() {
 		if(in_array($reg[1], $alias)) { $sp1='<span class="vert">'; $sp2="</span>"; } else $sp1 = $sp2 = '';
 		$tmp = explode('_', $reg[2], 2);
 		$table = table_objet_sql($tmp[0]);
-		if($tmp[1]=='menu') 
-			$res['_menu_prive'][] = $sp1.$tmp[0].$sup.$sp2; 
-		elseif($tmp[1]=='onglet') 
-			$res['_onglet_prive'][] = $sp1.$tmp[0].$sup.$sp2; 
+		if(in_array($tmp[1], array('menu','onglet','bouton'))) 
+			$res['['.$tmp[1].']'][] = $sp1.$tmp[0].$sup.$sp2; 
 		elseif(strncmp($table, 'spip_', 5)===0)
-			$faire[$tmp[1]?$tmp[1]:'[!]'][] = $obj[$table][] = $tmp[1]?$sp1.$tmp[1].$sup.' '.$tmp[0].$sp2:"$sp1.$tmp[0] !.$sp2"; 
+			$faire[$tmp[1]?$tmp[1]:couteauprive_T('variable_vide')][] = $obj[$table][] = $tmp[1]?$sp1.$tmp[1].$sup.' '.$tmp[0].$sp2:"<span class='bleu'>$sp1$tmp[0]$sp2</span>"; 
 		elseif($tmp[1])
 			$res[$tmp[0]][] = $sp1.$tmp[1].$sup.' '.$tmp[0].$sp2; 
 		else
-			$res['_unique'][] = $sp1.$tmp[0].$sup.$sp2; 
+			$res['[unique]'][] = $sp1.$tmp[0].$sup.$sp2; 
 	}
 	foreach($obj as $k=>$r) {
 		sort($r);
-		$t = _T($objets[$k]['texte_objets']);
-		$obj[$k] = '<li><b>'.(!$t?"[$k]":$t).' : </b>'.join(', ', $r).'</li>';
+		$t = $objets[$k]['texte_objets'];
+		$obj[$k] = '<li><b>'.(!$t?"[$k]":_T($t)).' : </b>'.join(', ', $r).'</li>';
 	}
 	foreach($res as $k=>$r) {
 		sort($r);
@@ -149,7 +150,7 @@ function autorisations_action_rapide() {
 		$faire[$k] = "<li><b>$k : </b>".join(', ', $r).'</li>';
 	}
 	sort($obj); sort($res); sort($faire);
-	return '<style>#cs_auth h3{cursor:pointer; margin:0.5em 0;} #cs_auth{margin:0 2em;} #cs_auth ul{margin:0 1em;} .vert{color:#2B2;}</style>
+	return '<style>#cs_auth h3{cursor:pointer; margin:0.5em 0;} #cs_auth{margin:0 2em;} #cs_auth ul{margin:0 1em;} .vert{color:#2B2;} .bleu{color:#22B;}</style>
 <div id="cs_auth"><p>'
 		. couteauprive_T('autorisations_bilan', array('nb1'=>$nb_fonctions,'nb2'=>$nb_surcharges))
 		. '</p><h3>1. '.couteauprive_T('autorisations_titre1', array('nb'=>count($obj))).'<span id="auth_1" class="cs_hidden"> (...)</span></h3><ul>'
@@ -158,7 +159,7 @@ function autorisations_action_rapide() {
 		. join(' ', $faire)
 		. '</ul><h3>3. '.couteauprive_T('autorisations_titre3', array('nb'=>count($res))).'<span id="auth_3" class="cs_hidden"> (...)</span></h3><ul>'
 		. join('', $res)
-		. '</ul>'.($nb_surcharges?'<p><sup>(*)</sup> '._L('Fonction surchargée').'</p>':'') 
+		. '</ul>'.($nb_surcharges?'<p><sup>(*)</sup> '.couteauprive_T('autorisations_surcharge').'</p>':'') 
 		. '</div>' . http_script("
 jQuery(document).ready(function() {
 	jQuery('#cs_auth h3').click( function() {
