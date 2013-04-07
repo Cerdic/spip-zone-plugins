@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Description',
 
 	// E
-	'explication_creer_htaccess' => 'This option prevents reading the attached documents if the text to which they relate is not published', # MODIF
+	'explication_creer_htaccess' => 'This option prevents reading the attached documents if the text to which they relate is not published',
 
 	// I
 	'icone_menu_config' => 'Restricted access',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'This section is in areas:',
 
 	// L
-	'label_creer_htaccess' => 'Access to the attached document by their URL', # MODIF
+	'label_creer_htaccess' => 'Access to the attached document by their URL',
 	'label_creer_htaccess_non' => 'allow read',
 	'label_creer_htaccess_oui' => 'forbid the reading',
 
