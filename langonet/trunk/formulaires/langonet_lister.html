@@ -26,27 +26,9 @@
 
 	[(#REM) <!-- Affichage des resultats --> ]
 	[(#ENV*{message_ok}|oui)
-	<fieldset>
-		<legend><:langonet:legende_table:></legend>
-		[<p>(#ENV*{message_ok}|table_valeur{explication})</p>]
-		[(#ENV*{message_ok}|table_valeur{tradlang}|non)<:langonet:info_tradlang_non:>]
-		[(#ENV*{message_ok}|table_valeur{tradlang}|oui)
-		<p><:langonet:info_tradlang_oui:></p>
-		<table class="legende">
-			<tr>
-				<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
-				<td><:langonet:info_tradlang_statut_ok:></td>
-			</tr>
-			<tr>
-				<td>[(#CHEMIN_IMAGE{tradlang_statut_modif.png}|balise_img{'', icone})]</td>
-				<td><:langonet:info_tradlang_statut_modif:></td>
-			</tr>
-			<tr>
-				<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
-				<td><:langonet:info_tradlang_statut_new:></td>
-			</tr>
-		</table>]
-		#INCLURE{fond=prive/squelettes/liste/items_lang,
+		<INCLURE{fond=formulaires/inc-resultats_lister,
+			explication=#ENV*{message_ok}|table_valeur{explication},
+			tradlang=#ENV*{message_ok}|table_valeur{tradlang},
 			titre=#ENV*{message_ok}|table_valeur{titre},
 			items=#ENV*{message_ok}|table_valeur{table},
 			env}

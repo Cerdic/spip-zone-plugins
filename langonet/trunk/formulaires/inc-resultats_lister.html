@@ -1,0 +1,23 @@
+[(#REM) <!-- Affichage des resultats si ok --> ]
+<fieldset>
+	<legend><:langonet:legende_table:></legend>
+	[<p>(#ENV{explication})</p>]
+	[(#ENV{tradlang}|non)<:langonet:info_tradlang_non:>]
+	[(#ENV{tradlang}|oui)
+	<p><:langonet:info_tradlang_oui:></p>
+	<table class="legende">
+		<tr>
+			<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
+			<td><:langonet:info_tradlang_statut_ok:></td>
+		</tr>
+		<tr>
+			<td>[(#CHEMIN_IMAGE{tradlang_statut_modif.png}|balise_img{'', icone})]</td>
+			<td><:langonet:info_tradlang_statut_modif:></td>
+		</tr>
+		<tr>
+			<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
+			<td><:langonet:info_tradlang_statut_new:></td>
+		</tr>
+	</table>]
+	#INCLURE{fond=prive/squelettes/liste/items_lang, env}
+</fieldset>
