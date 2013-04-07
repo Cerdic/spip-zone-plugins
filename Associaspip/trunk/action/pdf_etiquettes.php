@@ -61,9 +61,7 @@ function action_pdf_etiquettes() {
 
 	include_spip('pdf/extends');
 	$pdf = new PDF(FALSE, array($GLOBALS['association_metas']['etiquette_largeur_page'],$GLOBALS['association_metas']['etiquette_hauteur_page']), 'mm', 'P');
-	$statut = _request('statut_interne');
 	$typadr = _request('type_adresse');
-	$pdf->titre = _T('asso:adherent_titre_liste_'.$statut);
 	$pdf->Open();
 	$pdf->AddPage();
 	$pdf->SetAutoPageBreak(0,0);

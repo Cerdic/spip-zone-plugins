@@ -44,7 +44,7 @@ function exec_adherents() {
 			if ($id_categorie)
 				$critere = "m.id_categorie=$id_categorie";
 			$suffixe .= "_$statut_interne".'_';
-			$suffixe .= str_replace(array('/', '\\', '?', '%', '*', ':', '|', '"', '<', '>', '.', ' ', '(', ')', ';', '&', '#', '[', ']', ), '~', utf8_decode($lettre) ); // caracteres problematiques : http://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+			$suffixe .= $lettre?str_replace(array('/', '\\', '?', '%', '*', ':', '|', '"', '<', '>', '.', ' ', '(', ')', ';', '&', '#', '[', ']', ), '~', utf8_decode($lettre) ):'tous'; // caracteres problematiques : http://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
 			$suffixe .= "_$id_categorie"."_$id_groupe";
 		} else { // si le filtre ID est actif, on ignore les autres filtres
 			$critere = "m.id_auteur=$id";
@@ -71,7 +71,6 @@ function exec_adherents() {
 			$frm .= '<div>'; //l2.1
 			$frm .= '<input type="hidden" name="where_adherents" value="'. htmlspecialchars($where_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
 			$frm .= '<input type="hidden" name="jointure_adherents" value="'. htmlspecialchars($jointure_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
-			$frm .= '<input type="hidden" name="statut_interne" value="'. htmlspecialchars($statut_interne, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
 			$frm .= '<input type="hidden" name="suffixe" value="'. $suffixe .'" />';
 			$frm .= '</div>'; //l2.1
 			$frm .= '<ul>'; //l2.2
