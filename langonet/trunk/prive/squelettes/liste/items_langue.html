@@ -1,10 +1,10 @@
 <B_liste_items>
-<div class="liste-objets items_lang">
+<div class="liste-objets items_langue">
 	<table class="spip liste">
 		<caption><strong class="caption">#ENV{titre}</strong></caption>
 		<tbody>
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
-			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+			<tr>
 				<td class="statut">[(#CHEMIN_IMAGE{[tradlang_statut_(#VALEUR|table_valeur{etat}).png]}|balise_img{'', icone})]</td>
 				<td class="titre principale"><strong>#CLE</strong></td>
 				<td class="texte">[(#VALEUR|table_valeur{traduction})]</td>

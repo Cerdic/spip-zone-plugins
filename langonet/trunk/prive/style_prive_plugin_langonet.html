@@ -20,11 +20,16 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-table.legende {margin-left: 0; width: 100%;}
+table.legende {margin-#GET{left}: 0; width: 100%;}
 table.legende tr {background: none;}
 table.legende td, table.legende tr:nth-child(2n) td {padding: 0; background: none;}
 
-.items_lang table caption {padding: 0;}
-.items_lang .caption {background-color: [#(#GET{claire}|couleur_eclaircir)];}
+.items_langue table caption {padding: 0;}
+.items_langue .caption {[background-color: #(#GET{claire}|couleur_eclaircir);]}
+.items_langue tr:nth-child(2n) {background: none;}
+.items_langue tr.trouve {[background-color: #(#GET{claire}|couleur_eclaircir|couleur_eclaircir);]}
+.items_langue td.fichier {padding-#GET{left}: 10px;}
+.items_langue td.traduction {font-style: italic;}
+.items_langue span.guillemet {[color: (#GET{foncee});]}
 
 [(#REM)	</style>]

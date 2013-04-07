@@ -87,9 +87,12 @@ function inc_langonet_rechercher_texte($pattern, $correspondance, $modules) {
 	if (!$trouve)
 		$resultats['erreur'] = _T('langonet:message_nok_item_trouve');
 	else {
-		$resultats['item_trouve']['egal'] = $trouve['egal'];
-		$resultats['item_trouve']['commence'] = $trouve['commence'];
-		$resultats['item_trouve']['contient'] = $trouve['contient'];
+		$resultats['trouves']['egal'] = isset($trouve['egal']) ? $trouve['egal'] : array();
+		$resultats['trouves']['commence'] = isset($trouve['commence']) ? $trouve['commence'] : array();
+		$resultats['trouves']['contient'] = isset($trouve['contient']) ? $trouve['contient'] : array();
+		$resultats['total'] = count($resultats['trouves']['egal'])
+							+ count($resultats['trouves']['commence'])
+							+ count($resultats['trouves']['contient']);
 	}
 
 	return $resultats;

@@ -37,8 +37,8 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		include($fichier_lang);
 	}
 
-	$table_brute = $GLOBALS[$var_source];
-	if ($table_brute) {
+	$liste_brute = $GLOBALS[$var_source];
+	if ($liste_brute) {
 		// Créer le tableau des items NEW et MODIF si le module est sous TradLang
 		$matches = array();
 		$tradlang = false;
@@ -52,23 +52,24 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		}
 
 		// On range la table des items en y ajoutant l'état
-		ksort($table_brute);
-		foreach ($table_brute as $_item => $_traduction) {
-			$table[$_item]['traduction'] = $_traduction;
+		ksort($liste_brute);
+		$liste = array();
+		foreach ($liste_brute as $_item => $_traduction) {
+			$liste[$_item]['traduction'] = $_traduction;
 			if ($tradlang) {
 				$cle = array_search($_item, $matches[1]);
 				if ($cle !== false)
-					$table[$_item]['etat'] = $matches[2][$cle] ? strtolower($matches[2][$cle]) : 'ok';
+					$liste[$_item]['etat'] = $matches[2][$cle] ? strtolower($matches[2][$cle]) : 'ok';
 				else
-					$table[$_item]['etat'] = 'nok';
+					$liste[$_item]['etat'] = 'nok';
 			}
 			else
-				$table[$_item]['etat'] = 'nok';
+				$liste[$_item]['etat'] = 'nok';
 		}
 
 		// On prepare le tableau des resultats
-		$resultats['items'] = $table;
-		$resultats['total'] = count($table_brute);
+		$resultats['items'] = $liste;
+		$resultats['total'] = count($liste_brute);
 		$resultats['tradlang'] = $tradlang;
 		$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';
 	}

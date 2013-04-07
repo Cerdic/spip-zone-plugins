@@ -64,14 +64,17 @@
 	</div></form>
 </BOUCLE_editable>
 
-	[(#REM) <!-- Affichage des resultats --> ]
-	[(#SET{total_trouves, [(#ENV*{message_ok}|table_valeur{total})]})]
-	[<fieldset>
-		<legend><:langonet:legende_trouves{total=#GET{total_trouves}}:></legend>
-		(#ENV*{message_ok}|table_valeur{trouves})
-	</fieldset>]
+[(#REM) <!-- Affichage des resultats --> ]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-resultats_rechercher,
+		total=#ENV*{message_ok}|table_valeur{total},
+		trouves=#ENV*{message_ok}|table_valeur{trouves},
+		env}
+]
+
 </div>
 
+[(#REM) <!-- Gestion des liens tout cocher, tout décocher et cocher les modules SPIP --> ]
 <script type="text/javascript">
 //<![CDATA[
 	(function($){
