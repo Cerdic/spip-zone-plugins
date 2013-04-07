@@ -25,9 +25,13 @@
 	]
 
 	[(#REM) <!-- Affichage des resultats --> ]
-	[<fieldset>
+	[(#ENV*{message_ok}|oui)
+	<fieldset>
 		<legend><:langonet:legende_table:></legend>
 		[<p>(#ENV*{message_ok}|table_valeur{explication})</p>]
+		[(#ENV*{message_ok}|table_valeur{tradlang}|non)<:langonet:info_tradlang_non:>]
+		[(#ENV*{message_ok}|table_valeur{tradlang}|oui)
+		<p><:langonet:info_tradlang_oui:></p>
 		<table class="legende">
 			<tr>
 				<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
@@ -41,10 +45,10 @@
 				<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
 				<td><:langonet:info_tradlang_statut_new:></td>
 			</tr>
-		</table>
-		(#INCLURE{fond=prive/squelettes/liste/items_lang,
+		</table>]
+		#INCLURE{fond=prive/squelettes/liste/items_lang,
 			titre=#ENV*{message_ok}|table_valeur{titre},
 			items=#ENV*{message_ok}|table_valeur{table},
-			env})
+			env}
 	</fieldset>]
 </div>
