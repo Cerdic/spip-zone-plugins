@@ -11,6 +11,7 @@
  *
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * retailler une image : (ne gère que les images GIF, JPG et PNG)

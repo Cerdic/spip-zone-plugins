@@ -11,6 +11,7 @@
  *
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Ajout une boite de creation d'un article à partir d'un fichier odt
@@ -21,7 +22,6 @@
  * @return Array Le code modifié
  */
 function odt2spip_affiche_gauche($flux){
-//echo '<br><br>depart pipe<br>';
 	if ($flux['args']['exec']=='rubrique'
 	  AND $id_rubrique = $flux['args']['id_rubrique']
 	  AND autoriser('publierdans','rubrique',$flux['args']['id_rubrique'])){

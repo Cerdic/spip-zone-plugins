@@ -94,58 +94,48 @@ function action_odt2spip_importe() {
 		die($zip->errorName(true));	 //$zip->error_code
 	}
 
-	// Création de l'array avec les parametres de l'article
+	// Création de l'array avec les parametres de l'article:
+	// c'est ici que le gros de l'affaire se passe!
 	$odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie', 'inc');
 	$Tarticle = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
-//	list($fichier_sortie, $xml_sortie) = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
-/*
 
-	// générer l'article à partir du fichier xml de sortie
-	// (code pompé sur plugins/snippets/action/snippet_importe.php)
-	include_spip('inc/snippets');
-	$table = $id = 'articles';
-	$contexte = $args[0];
-	$source = $fichier_sortie;
-	if (!$f = snippets_fonction_importer($table)) {
-		die(_T('odtspip:err_import_snippet'));
-	}
-	include_spip('inc/xml');
-	$arbre = spip_xml_load($source, false);
-	$translations = $f($id, $arbre, $contexte);
-	snippets_translate_raccourcis_modeles($translations);
-	$id_article = $translations[0][2];
-
-	// si on est en 2.0 passer le statut de l'article en prepa
-	sql_updateq('spip_articles', array('statut' => 'prop'), 'id_article=' . $id_article);
-*/
 	// créer l'article
 	include_spip('action/editer_article');
 	$id_article = article_inserer($id_rubrique);
+	
 	// le remplir
 	article_modifier($id_article, $Tarticle);
 
+	// si necessaire recup les id_doc des images associées et les lier à l'article
+	if (isset($Tarticle['Timages']) AND count($Tarticle['Timages']) > 0){
+		foreach($Tarticle['Timages'] as $id_img) {
+			$champs = array(
+				'parents' => array("article|$id_article"),
+				'statut' => 'publie'
+			);
+			document_modifier($id_img, $champs);
+		}
+	}
+	
 	// si nécessaire attacher le fichier odt original à l'article
 	// et lui mettre un titre signifiant
 	if (_request('attacher_odt') == '1') {
 		$titre = $Tarticle['titre'];
 		if (!isset($ajouter_documents)) {
-			$ajouter_documents = charger_fonction('ajouter_documents','action');
+			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		}
-		
-		// la y'a un bogue super-bizarre avec la fonction spip_abstract_insert()
-		// qui est donnée comme absente lors de l'appel de ajouter_document()
-		if (!function_exists('spip_abstract_insert')) {
-			include_spip('base/abstract_sql');
+		if ($id_document = $ajouter_documents('new',
+			array(array('tmp_name' =>  $rep_dezip . $fichier_zip, 'name' => $fichier_zip, 'titrer' => 0, 'distant' => 0, 'type' => 'document')),
+			'article', $id_article, 'document')
+			AND $id_doc_odt = intval($id_document[0])
+			AND $id_doc_odt == $id_document[0]) {
+				$c = array(
+					'titre' => $titre,
+					'descriptif' => _T('odtspip:cet_article_version_odt'),
+					'statut' => 'publie'
+					);
+				document_modifier($id_doc_odt, $c);
 		}
-		$id_doc_odt = $ajouter_documents($rep_dezip . $fichier_zip, $fichier_zip,
-					"article", $id_article, 'document', 0, $toto='');
-
-		$c = array(
-			'titre' => $titre,
-			'descriptif' => _T('odtspip:cet_article_version_odt')
-		);
-		include_spip('inc/modifier');
-		objet_modifier_champs('document',$id_doc_odt,$c);
 	}
 
 	// vider le contenu du rep de dezippage

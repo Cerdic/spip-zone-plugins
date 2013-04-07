@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
@@ -36,22 +36,17 @@
 >
 
 <xsl:output method = "xml"
-            encoding="ISO-8859-1"
+            encoding="UTF-8"
             indent="yes" />
 <xsl:preserve-space elements="*" />
 
-<!-- Récuperation des parametres venant de PHP: 
+<!-- RÃ©cuperation des parametres venant de PHP: 
   IntertitresRiches = oui|non 
   en fct de la presence d'un des plugins enluminure_typo ou intertitres_enrichis -->
 <xsl:param name="IntertitresRiches"/>
-<!-- ModeImages = img|doc pour la balise a utiliser pour integrer les images -->
-<xsl:param name="ModeImages"/>
-<!-- LanguePublication = code de la langue de publication de l'article -->
-<xsl:param name="LanguePublication"/>
-<!-- DateJour = date du jour au format SQl -->
-<xsl:param name="DateJour"/>
 
-<!-- gestion des titres de façon la plus generique possible -->
+
+<!-- gestion des titres de faÃ§on la plus generique possible -->
 <!-- si @text:style-name='Heading' est utilise, recuperer 'Heading' dans $STyleTitreGeneral -->
 <xsl:variable name="StyleTitreGeneral">
   <xsl:if test="count(//*[node()][@text:style-name='Heading']) > 0">Heading</xsl:if>
@@ -230,37 +225,16 @@ tG= <xsl:value-of select="$StyleTitreGeneral" />
 -->
 <!-- test recuperation du parametre passe par PHP 
 intertitres_riches= <xsl:value-of select="$IntertitresRiches" />
-ModeImages= <xsl:value-of select="$ModeImages" />
 -->
+<!-- le XML de sortie -->
 <articles>
-	<article>
-		<id_article></id_article>
-		<surtitre></surtitre>
-    <titre><xsl:value-of select="$ContenuTitreDoc"/></titre>
-		<soustitre></soustitre>
-		<id_rubrique></id_rubrique>
-		<descriptif></descriptif>
-		<chapo></chapo>
-		<texte>
-        <xsl:apply-templates select="office:body/office:text"/>
-    </texte>
-		<ps></ps>
-		<date><xsl:value-of select="$DateJour" /></date>
-		<statut>prop</statut>
-		<id_secteur></id_secteur>
-		<date_redac><xsl:text >0000-00-00 00:00:00</xsl:text></date_redac>
-		<accepter_forum>non</accepter_forum>
-		<date_modif><xsl:value-of select="$DateJour" /></date_modif>
-		<lang><xsl:value-of select="$LanguePublication" /></lang>
-		<langue_choisie></langue_choisie>
-		<id_trad></id_trad>
-		<extra></extra>
-		<nom_site></nom_site>
-		<url_site></url_site>
-		<url_propre></url_propre>
-	</article>
-</articles>    
-
+<article>
+	<titre><xsl:value-of select="$ContenuTitreDoc"/></titre>
+	<texte>
+		<xsl:apply-templates select="office:body/office:text"/>
+	</texte>
+</article>
+</articles>
 </xsl:template>
 
 
@@ -288,7 +262,7 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 <!-- bidouiller pour ne pas afficher le titre du document dans le texte (part 1) -->
 <xsl:template match="//*[@text:style-name='Heading']"/>
 
-<!-- les titres de façon dynamique en fonction des niveaux presents dans le fichier  -->
+<!-- les titres de faÃ§on dynamique en fonction des niveaux presents dans le fichier  -->
 <xsl:template match="//*[node()][@text:outline-level] 
                      | //*[node()][starts-with(@text:style-name,'Heading_20_')]">
     <xsl:choose>
@@ -301,7 +275,7 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 </xsl:template>
 
 <xsl:template name="titres">
-<!-- si $DecalerTitres == oui, décaler les niveaux puisqu'il n'existe pas de $StyleTitreGeneral et qu'il n'y a qu'un $NivoTitre1 -->
+<!-- si $DecalerTitres == oui, dÃ©caler les niveaux puisqu'il n'existe pas de $StyleTitreGeneral et qu'il n'y a qu'un $NivoTitre1 -->
     <xsl:variable name="NivoTitre1_ec">
       <xsl:choose>
           <xsl:when test="not($DecalerTitres='oui')">
@@ -434,7 +408,7 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 <xsl:template name="process-list"> 
   <xsl:param name="s"/>
   <xsl:for-each select="descendant::text:list-item/text:p[node()]">
--<xsl:for-each select="ancestor::*"><!-- gestion des listes imbriquées -->
+-<xsl:for-each select="ancestor::*"><!-- gestion des listes imbriquÃ©es -->
         <xsl:if test="name()='text:list-item'"><xsl:value-of select="$s"/></xsl:if>
 </xsl:for-each> 
     <xsl:apply-templates />
@@ -518,7 +492,7 @@ _ <xsl:apply-templates />
 
 
 <!-- nettement plus bricolage : les images... 
-     on met le nom de fichier de l'image qu'il faudra echanger en php par son id document spip une fois qu'il sera reference dans la table document -->	
+     on met le nom de fichier de l'image qu'il faudra echanger en php par son id document spip une fois qu'il sera reference dans la table documents -->	
 <xsl:template match="draw:image">
 <!-- on filtre les elements draw:image qui ont un frere draw:object cad qui ne sont pas des images -->   
    <xsl:if test="count(parent::draw:frame/draw:object)=0">
@@ -526,14 +500,14 @@ _ <xsl:apply-templates />
    </xsl:if>
 </xsl:template>
 
-<xsl:template name="img2texte">&#60;<xsl:value-of select="$ModeImages" /><xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
+<xsl:template name="img2texte">&#60;img<xsl:value-of select="substring(@xlink:href,10)"/>;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:width,'cm')" />;;;<xsl:value-of select="substring-before(parent::draw:frame/@svg:height,'cm')" />;;;|<xsl:choose>
 <!-- sale bidouille pour approximer la position de l'image (|left |center |right) -->
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &lt;= 2">left</xsl:when>
 <xsl:when test="substring-before(parent::draw:frame/@svg:x, 'cm') &gt;= 5">right</xsl:when>
 <xsl:otherwise>center</xsl:otherwise>
 </xsl:choose>&#62;</xsl:template>
 
-<!-- pour continuer dans les bidouillages, les objets integres 
+<!-- pour continuer dans les bidouillages: les objets integres 
      i.e. les formules de math sous forme d'un fichier MathML externe stocke dans un ss-rep: /Object X/content.xml 
      ici on cree une balise <math>Object X</math> qui sera ensuite post-traitee pour recuperer la formule   -->
 <xsl:template match="draw:object[@xlink:href]">

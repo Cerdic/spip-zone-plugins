@@ -15,7 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Création du fichier nécessaire à snippets
+ * Création de l'Array contenant les paramètres du futur article
  *
  * Le fichier content.xml a été extrait de l'archive .odt, et placé dans le dossier
  * temporaire propre à l'utilisateur courant. Un premier traitement est effectué
@@ -25,8 +25,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * à être insérées dans le futur article SPIP.
  * 
  * @param int $id_auteur Utilisateur courant
- * @param string $rep_dezip Répertoire où placer le fichier snippet_odt2spip.xml
- * @return mixed
+ * @param string $rep_dezip Répertoire où est dezippé le fichier odt
+ * @return Array
  */
 function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	// variables en dur pour xml en entree et xslt utilisee
@@ -34,19 +34,16 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	$xml_entre = _DIR_TMP . 'odt2spip/' . $id_auteur . '/content.xml';  // chemin du fichier xml a lire
 	$xslt_texte = _DIR_PLUGIN_ODT2SPIP . 'inc/odt2spip.xsl'; // chemin de la xslt a utiliser pour le texte
 
-	// fichier de sortie
-	$fichier_sortie = $rep_dezip . 'snippet_odt2spip.xml';
-
 	// determiner si le plugin enluminure_typo ou intertitres_enrichis est present & actif
 	include_spip('inc/plugin');
 	$Tplugins = liste_plugin_actifs();
 	$intertitres_riches = ((array_key_exists('TYPOENLUMINEE', $Tplugins) OR array_key_exists('INTERTITRESTDM', $Tplugins)) ? 'oui' : 'non'); 
 
 	// si il n'existe pas de titre:h dans le doc, on parametre ici la longueur max du paragraphe utilise pour remplacer
-	$nb_carateres_titre = 50;
+	$nb_caracteres_titre = 50;
 
 	// faut il mettre les images en mode document?
-    $type = (_request('mode_image') AND _request('mode_image') == 'document') ? 'document' : ($spip_version_code > 2 ? 'image' : 'vignette');
+    $type = (_request('mode_image') AND _request('mode_image') == 'document') ? 'document' : 'image';
     $ModeImages = ($type == 'document' ? 'doc' : 'img');
     
 	// récupérer la langue de publication + verifier la valeur envoyée
@@ -62,15 +59,10 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	if (!class_exists('XSLTProcessor')) {
 		die(_T('odtspip:err_extension_xslt'));
 	}
-
 	$proc = new XSLTProcessor();
 
 	// passage des parametres a la xslt
 	$proc->setParameter(null, 'IntertitresRiches', $intertitres_riches);  
-	$proc->setParameter(null, 'NombreCaracteresTitre', $nb_carateres_titre);
-	$proc->setParameter(null, 'ModeImages', $ModeImages);
-	$proc->setParameter(null, 'LanguePublication', $LanguePublication);
-	$proc->setParameter(null, 'DateJour', $date_jour);
 
 	$xml = new DOMDocument();
 	$xml->load($xml_entre);
@@ -84,23 +76,15 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 	}
 
 	// construire l'array des parametres de l'article
-	$t = preg_match('#<titre>(.*?)</titre>#',$xml_sortie);
+	preg_match('/<titre>(.*?)<\/titre>/',$xml_sortie, $t);
 	$Tarticle['titre'] = $t[1];
-	$a = preg_match('#<texte>(.*?)</texte>#',$xml_sortie);
+	preg_match('/<texte>(.*?)<\/texte>/s',$xml_sortie, $a);
 	$Tarticle['texte'] = $a[1];
 	$Tarticle['date_redac'] = '0000-00-00 00:00:00';
 	$Tarticle['date'] = $Tarticle['date_modif'] = $date_jour;
 	$Tarticle['lang'] = $LanguePublication;
 	$Tarticle['statut'] = 'prop';
 	$Tarticle['accepter_forum'] = 'non';
-/*
-	<date><xsl:value-of select="$DateJour" /></date>
-	<statut>prop</statut>
-	<date_redac><xsl:text ></xsl:text></date_redac>
-	<accepter_forum>non</accepter_forum>
-	<date_modif><xsl:value-of select="$DateJour" /></date_modif>
-	<lang><xsl:value-of select="$LanguePublication" /></lang>
-*/	
 	
 	// traitements complementaires du texte de l'article
 	// remplacer les &gt; et &lt;
@@ -139,14 +123,12 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 		$Tarticle['titre'] = str_replace(array('_','-','.odt'), array(' ',' ',''), $fichier_zip);
 		
 	// traiter les images: dans tous les cas il faut les integrer dans la table documents 
-	// en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
 	$rep_pictures = $rep_dezip . "Pictures/";
 
 	// parametres de conversion de taille des images : cm -> px (en 96 dpi puisque c'est ce que semble utiliser Writer)
 	$conversion_image = 96 / 2.54;
 
 	preg_match_all('/<img([;a-zA-Z0-9\.]*)/', $Tarticle['texte'], $match, PREG_PATTERN_ORDER);
-
 	if (@count($match) > 0) {
 		if (!isset($odt2spip_retailler_img)) {
 			$odt2spip_retailler_img = charger_fonction('odt2spip_retailler_img', 'inc');
@@ -154,7 +136,7 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 		if (!isset($ajouter_documents)) {
 			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 		}
-		$T_images = array();
+		$Timages = array();
 		foreach($match[1] as $ch) {
 			$Tdims = explode(';;;', $ch);
 			$img = $Tdims[0];
@@ -163,23 +145,29 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 				$largeur = round($Tdims[1] * $conversion_image);
 				$hauteur = round($Tdims[2] * $conversion_image);
 				$odt2spip_retailler_img($rep_pictures . $img, $largeur, $hauteur);
-				$type = 'image';
-// TODO: $actifs = ???				
-				if ($id_document = $ajouter_documents($rep_pictures . $img, $img, "article", '', $type, 0, $actifs)) {
-					$Tarticle['texte'] = str_replace($ch, $id_document, $Tarticle['texte']);
-					$T_images[] = $id_document;
+				if ($id_document = $ajouter_documents('new',
+					array(array('tmp_name' =>  $rep_pictures . $img, 'name' => $img, 'titrer' => 0, 'distant' => 0, 'type' => $type)),
+					'', 0, $type)
+					AND $id_img = intval($id_document[0])
+					AND $id_img == $id_document[0]) {
+					$Timages[] = $id_img;
+
+					// remplacer les noms de fichier par leur id_document dans les <imgLeNomDuFichier.jpg> du texte
+					$Tarticle['texte'] = str_replace($ch, $id_img, $Tarticle['texte']);
 				}
 			}
 		}
+		
+		// si les images doivent êtres intégrées en mode document, remplacer la balise <imgXY> par <docXY>
+		if ($type == 'document')
+			preg_replace('/<img/', '<doc', $Tarticle['texte']);
+
+		// intégrer l'array des images dans les parametres de l'article
+		// ce qui permettra de faire la liaison lorsqu'on aura l'id_article
+		$Tarticle['Timages'] = $Timages;
 	}
 
-/*
-	//finalement enregistrer le contenu dans /tmp/odt2spip/id_auteur/snippet_odt2spip.xml
-	if (!ecrire_fichier($fichier_sortie,$xml_sortie)) {
-		die(_T('odtspip:err_enregistrement_fichier_sortie') . $fichier_sortie);
-	}
-*/	
-	return array($Tarticle);
+	return $Tarticle;
 }
 
 ?>
