@@ -175,14 +175,15 @@ function formulaires_configurer_ckeditor_verifier_dist() {
 
 
 function formulaires_configurer_ckeditor_traiter_dist() {
+	print('request:'._request('startspellcheck').'<br/>') ;
 	ecrire_config('ckeditor/editmode',_request('editmode'));
 	ecrire_config('ckeditor/skin',_request('skin'));
 	ecrire_config('ckeditor/taille',_request('taille'));
 	ecrire_config('ckeditor/apercu',_request('apercu'));
-	ecrire_config('ckeditor/startspellcheck',_request('startspellcheck'));
+	ecrire_config('ckeditor/startspellcheck',_request('startspellcheck')=='on'?'on':'off');
 	ecrire_config('ckeditor/spellchecklang',_request('spellchecklang'));
-	ecrire_config('ckeditor/ignoreversion',_request('ignoreversion'));
-	ecrire_config('ckeditor/devtools',_request('devtools'));
+	ecrire_config('ckeditor/ignoreversion',_request('ignoreversion')=='on'?'on':'off');
+	ecrire_config('ckeditor/devtools',_request('devtools')=='on'?'on':'off');
 	return array('message_ok' => _T('ckeditor:ck_ok')) ;
 }
 

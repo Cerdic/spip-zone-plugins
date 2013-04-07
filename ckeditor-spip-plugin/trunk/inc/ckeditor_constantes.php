@@ -46,6 +46,11 @@ define('_CKE_TAGS_DEF', serialize(array( // le serialize est obligatoire puisque
 	))
 ) ;
 //define('_CKE_HTML2SPIP_DEF', false ) ;
+define('_CKE_SIZE',0);
+define('_CKE_DEFAULT',1);
+define('_CKE_COMPAT',2);
+define('_CKE_ICON',3);
+define('_CKE_PLUGIN',4);
 define('_CKE_CONVERSION_DEF', 'partielle') ;
 define('_CKE_HTML2SPIP_LIMITE_DEF', false ) ;
 define('_CKE_HTML2SPIP_IDENTITE', 'script;embed;param;object') ;

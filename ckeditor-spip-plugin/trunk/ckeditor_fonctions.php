@@ -273,6 +273,10 @@ function ckeditor_preparescript($config) {
 	static $init_done = false ;
 	if (!$init_done) {
 			$cke_cfg= array() ;
+			$removePlugins = array() ;
+			$allPlugins = array('about', 'blockquote', 'div', 'docprops', 'find', 'flash', 'horizontalrule', 'iframe', 'image', 'indent', 'justify', 'link', 'list', 'maximize', 'newpage', 'pagebreak', 'pastefromword', 'pastetext', 'placeholder', 'preview', 'print', 'removeformat', 'save', 'selection', 'showblocks', 'smiley', 'sourcearea', 'specialchar', 'table', 'templates', 'uicolor', 'undo', 'wsc', 'colorbutton','scayt','basicstyles','forms') ;
+			$requiredPlugins = array('clipboard','basicstyles','list','link','about') ; // requis par la barre d'outils basique
+
 			foreach($_COOKIE as $cookie => $value) { // fix pb avec la langue du dictionnaire
 				if (preg_match('~^scayt_~', $cookie)) {
 					@setcookie($cookie, '') ; // on efface les cookis du système SCAYT (Spell Check As You Type)
@@ -332,6 +336,7 @@ function ckeditor_preparescript($config) {
 				}
 			}
 
+			$cke_cfg['forcePasteAsPlainText'] = ckeditor_lire_config('pastetext', _CKE_PASTETEXT_DEF) ;
 			$cfgCK_Smileys = ckeditor_cfgCK_Smileys() ;
 			if (is_array($GLOBALS['toolbars'])) {
 				$tbsize = 0 ;
@@ -341,12 +346,13 @@ function ckeditor_preparescript($config) {
 					if (is_array($toolbar)) {
 						$thissize = 0 ;
 						foreach($toolbar as $tool => $item) {
+							if (($tool == 'PasteFromWord') && ($cke_cfg['forcePasteAsPlainText'])) continue ;
 							if (count($pluginsboutons) && ($tool == $plugposref) && ($plug_pos == 'avant')) {
 								$thissize += 24 * count($pluginsboutons) ;
 								$tb = array_merge($tb,$pluginsboutons) ;
 							}
-							if (ckeditor_lire_config("tool_$tool", $item[1]) &&
-								(!$html2spip || $item[2]) && // outil interdit par html2spip
+							if (ckeditor_lire_config("tool_$tool", $item[_CKE_DEFAULT]) &&
+								(!$html2spip || $item[_CKE_COMPAT]) && // outil interdit par html2spip
 								( // cas particulier d'outils absents ou désactivés
 									(($tool != 'Format') || ckeditor_lire_config("formats", _CKE_FORMATS_DEF)) &&
 									(($tool != 'Smiley') || $cfgCK_Smileys) &&
@@ -375,8 +381,9 @@ function ckeditor_preparescript($config) {
 										$cke_cfg['smiley_path'] = $cfgCK_Smileys[2]  ;
 										break ;
 								} 
-								$thissize += $item[0] ;	
+								$thissize += $item[_CKE_SIZE] ;	
 								$tb[] = $tool ;
+								$requiredPlugins[] = $item[_CKE_PLUGIN] ;
 							}
 			
 							if (count($pluginsboutons) && ($tool == $plugposref) && ($plug_pos == 'apres')) {
@@ -528,7 +535,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['extraPlugins'] = join(',', array_keys($pluginsactifs)) ;
 			$cke_cfg['loadExtraPlugins'] = $pluginsactifs ;
 
-			if (ckeditor_lire_config('devtools', _CKE_DEVTOOLS_DEF)) {
+			if (ckeditor_lire_config('devtools', _CKE_DEVTOOLS_DEF)=='on') {
 				$cke_cfg['extraPlugins'] .= ($cke_cfg['extraPlugins']?',':'').'devtools' ;
 			}
 
@@ -550,7 +557,7 @@ function ckeditor_preparescript($config) {
 			$ENTERMODE = array('ENTER_P'=>CKEDITOR_ENTER_P, 'ENTER_BR'=>CKEDITOR_ENTER_BR, 'ENTER_DIV'=>CKEDITOR_ENTER_DIV) ;
 			// dernières options de configurations
 			$cke_cfg['height'] = intval(ckeditor_lire_config('taille', _CKE_HAUTEUR_DEF)) ;
-			$cke_cfg['scayt_autoStartup'] = (ckeditor_lire_config('startspellcheck', _CKE_SCAYT_START_DEF)?true:false) ;
+			$cke_cfg['scayt_autoStartup'] = (ckeditor_lire_config('startspellcheck', _CKE_SCAYT_START_DEF)=='on') ;
 			$cke_cfg['scayt_sLang'] = ($config['scayt_sLang']?$config['scayt_sLang']:ckeditor_lire_config('spellchecklang', _CKE_SCAYT_LANG_DEF)) ;
 			$cke_cfg['resize_enabled'] = true ;
 			$cke_cfg['entities'] = false ;
@@ -564,7 +571,11 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['readOnly'] = false ;
 			$cke_cfg['spip_contexte'] = array('id'=>$config['id'], 'type'=>$config['type']) ;
 			$cke_cfg['forceEnterMode'] = true ;
-			$cke_cfg['forcePasteAsPlainText'] = ckeditor_lire_config('pastetext', _CKE_PASTETEXT_DEF) ;
+			$removePlugins = array_diff($allPlugins,$requiredPlugins) ;
+			if ($cke_cfg['forcePasteAsPlainText'] && ! in_array('pastefromword', $removePlugins)) {
+				$removePlugins[] = 'pastefromword';
+			}
+			$cke_cfg['removePlugins'] = join(',',$removePlugins) ;
 			if(ckeditor_lire_config('conversion', _CKE_CONVERSION_DEF)=='aucune')
 				$cke_cfg['fullPage'] = true ;
 

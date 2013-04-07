@@ -320,7 +320,7 @@ function fullInitCKEDITOR(editor_ids){
 
 			if ($('.after_'+editor_md5).length==0) {
 				$(editor_id).after('<span id="cke_cpt_'+ndx+'" class="after_'+editor_md5+'"></span>');
-	[(#CONFIG{ckeditor/ignoreversion}|non)
+	[(#CONFIG{ckeditor/ignoreversion}|=={'on'}|non)
 				if(CKEDITOR.version<CKEDITOR.ckpreferedversion){
 					var pref='<:ckeditor:version_preferee:>';
 					$('#cke_cpt_'+ndx).prepend(
