@@ -3,13 +3,12 @@
 	categorie="edition"
 	version="2.0.0"
 	etat="test"
-	compatibilite="[3.0.5;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="odt2spip-64.png"
 	documentation="http://contrib.spip.net/3001"
 >	
 	<nom>odt2spip</nom> 	<!-- générateur d'articles spip à partir de fichiers odt -->
 	<auteur>cy_altern</auteur>
-	<copyright>2009-2013</copyright>
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 	<credit lien="http://www.raleigh.ru/MathML/mmltex/index.php?lang=en">XSLT pour la transformation MathML 2.0 to LaTeX :
 	Vasil Yaroshevich, yarosh@raleigh.ru</credit>
