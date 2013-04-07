@@ -1,0 +1,48 @@
+<plugin>
+	<nom>Lettre (Objets)</nom>
+	<slogan>Associer des objets (articles) à une lettre d'information (newsletter)</slogan>
+	<auteur>[Camille Lafitte->http://www.webelys.com]</auteur>
+	<licence>GNU/GPL - (c) 2012</licence>
+	<version>0.0.2</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>
+		Permet d'associer à une lettre une liste d'articles.
+	</description>
+	<lien></lien>
+	<prefix>lettres_objets</prefix>
+
+	<necessite id="lettres" version="[4.4;]" />
+
+	<install>base/lettres_objets_upgrade.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/lettres_objets.php</inclure>
+	</pipeline>
+
+    <pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>lettres_objets_pipelines.php</inclure>
+	</pipeline>
+
+    <pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>lettres_objets_pipelines.php</inclure>
+	</pipeline>
+	
+    <pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>lettres_objets_pipelines.php</inclure>
+	</pipeline>
+
+    <pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>lettres_objets_pipelines.php</inclure>
+	</pipeline>
+
+
+
+
+	<categorie>communication</categorie>
+</plugin>
