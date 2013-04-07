@@ -42,7 +42,7 @@ function formulaires_langonet_lister_traiter() {
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_table_creee', array('langue' => $resultats['langue']));
 		$retour['message_ok']['explication'] =  _T('langonet:info_table');
 		$retour['message_ok']['titre'] =  basename($resultats['langue'], '.php') . ' (' . $resultats['total'] . ')';
-		$retour['message_ok']['table'] = $resultats['table'];
+		$retour['message_ok']['items'] = $resultats['items'];
 		$retour['message_ok']['tradlang'] = $resultats['tradlang'];
 	}
 	$retour['editable'] = true;

@@ -67,9 +67,9 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		}
 
 		// On prepare le tableau des resultats
-		$resultats['table'] = $table;
-		$resultats['tradlang'] = $tradlang;
+		$resultats['items'] = $table;
 		$resultats['total'] = count($table_brute);
+		$resultats['tradlang'] = $tradlang;
 		$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';
 	}
 	else {
