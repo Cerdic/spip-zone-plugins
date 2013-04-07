@@ -4,6 +4,31 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'autorisations:nom' => 'Fonctions d\'autorisations',
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+',
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».',
+	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log',
+	'label:autorisations_alias' => 'Vos alias :',
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).',
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]',
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]',
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]',
 
 	// 2
 	'2pts_non' => ' : non',
