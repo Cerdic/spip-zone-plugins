@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP\'s loops are loaded with the necessary tools to filter the results according to the visitors\' access priviliges.',
 	'accesrestreint_nom' => 'Restricted Access',
-	'accesrestreint_slogan' => 'Gestion de zones d\'accès restreint' # NEW
+	'accesrestreint_slogan' => 'Management of areas with restricted access'
 );
 
 ?>

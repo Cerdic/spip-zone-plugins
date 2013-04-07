@@ -1,6 +1,8 @@
 <traduction module="paquet-accesrestreint" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/acces_restreint/trunk/lang/" reference="fr">
 	<langue code="de" />
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-accesrestreint?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 	<langue code="es" />
 	<langue code="fr" />
 </traduction>
