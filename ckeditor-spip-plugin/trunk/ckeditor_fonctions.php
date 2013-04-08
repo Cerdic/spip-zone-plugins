@@ -346,7 +346,6 @@ function ckeditor_preparescript($config) {
 					if (is_array($toolbar)) {
 						$thissize = 0 ;
 						foreach($toolbar as $tool => $item) {
-							if (($tool == 'PasteFromWord') && ($cke_cfg['forcePasteAsPlainText'])) continue ;
 							if (count($pluginsboutons) && ($tool == $plugposref) && ($plug_pos == 'avant')) {
 								$thissize += 24 * count($pluginsboutons) ;
 								$tb = array_merge($tb,$pluginsboutons) ;
@@ -356,7 +355,8 @@ function ckeditor_preparescript($config) {
 								( // cas particulier d'outils absents ou désactivés
 									(($tool != 'Format') || ckeditor_lire_config("formats", _CKE_FORMATS_DEF)) &&
 									(($tool != 'Smiley') || $cfgCK_Smileys) &&
-									(($tool != 'SpipDoc') || $arg_select)
+									(($tool != 'SpipDoc') || $arg_select) &&
+									(($tool != 'PasteFromWord') || !$cke_cfg['forcePasteAsPlainText'])
 								)
 							) {
 								switch ($tool) { // certains outils nécessitent un traiteement supplémentaire
