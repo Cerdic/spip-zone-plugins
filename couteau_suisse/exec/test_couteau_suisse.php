@@ -57,15 +57,17 @@ function test_outil($array, $titre) {
 	global $icone;
 	static $i; $i++;
 	echo "<a id=$i></a>",debut_cadre_trait_couleur($icone,true,'',"$i. $titre");
-	foreach($array as $s=>$v)
+	foreach($array as $s=>$v) {
 		// unserialize eventuel des tableaux
-//		if(is_string($v) && strncmp($v,'a:',2)===0 && ($t=@unserialize($v))!==false) $v = $t;
+		if(is_string($v) && strncmp($v,'a:',2)===0 && ($t=@unserialize($v))!==false) 
+			$v = couper('serialized_'.htmlentities(var_export($t,1)),1000);
 		if(is_array($v))
 			foreach($v as $s2=>$v2) {
 				if(is_array($v2)) $v2 = htmlentities(var_export($v2,1));
 				echo "\n<b>{$s}[$s2]</b> = ".trim($v2)."<br />";
 			}
 		else echo "\n<b>$s</b> = ".trim($v)."<br />";
+	}
 	echo fin_cadre_trait_couleur(true);
 }
 

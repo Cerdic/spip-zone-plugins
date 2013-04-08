@@ -75,11 +75,11 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
     return false; // aucun troll permis, non mais !
 }</cadre>
 Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
+-* <code>$faire</code> : action demandée (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : type d\'objet sur lequel appliquer l\'action (\'article\', \'auteur\', ...)
+-* <code>$id</code> : identifiant éventuel de cet objet
+-* <code>$qui</code> : {id_auteur} demandant l\'autorisation (vide si auteur en cours)
+-* <code>$opt</code> : tableau d\'options, généralement vide
 
 Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
 
