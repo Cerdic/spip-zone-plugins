@@ -13,7 +13,6 @@
 include_spip('inc/session');
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-	  
 
 /**
  * Informer du droit de modifier ou non son login
@@ -52,7 +51,6 @@ function auth_pmb_retrouver_login($login, $serveur='') {
 		'statut<>'. sql_quote('5poubelle')))) {
 			return $login;
 	}
-
 
 	// PMB n'a pas de moyen de savoir si un auteur existe ou non.
 	// on peut juste savoir si le login+pass est valide ou non.

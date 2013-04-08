@@ -334,6 +334,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	if (pmb_recherche_critere($criteres, 'rechercher')) {
 		// valeur cherchee (parametre)
 		$recherche = pmb_interprete_argument_critere($criteres, 'rechercher', 1);
+
 		// valeur cherchee (env)
 		if (!$recherche) {
 			$recherche = pmb_critere_valeur($criteres, 'rechercher');
@@ -756,10 +757,12 @@ function pmb_critere_valeur($criteres, $cle, $op = '=') {
 		if (is_array($c) AND $c[0] == $op AND $c[1] == $cle) {
 			// enlever les guillemets si presents
 			$v = $c[2];
-			if (($v[0] == "'") and ($v[ count($v)-1 ] == "'")) {
-				$v = substr($v, 1,-1);
+			if ($v !== 'NULL') {
+				if (($v[0] == "'") and ($v[ count($v)-1 ] == "'")) {
+					$v = substr($v, 1,-1);
+				}
+				$res[] = $v;
 			}
-			$res[] = $v;
 		// ((machin IN ('34','TRUC'))) // magnifique :/
 		// ((look  IN ('PMB','FIRSTACCESS','ALL')))
 		} elseif (is_string($c)) {

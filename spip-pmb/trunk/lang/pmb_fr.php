@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_compte_lecteur' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde votre compte lecteur sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'message_recherche_avancee' => 'Prochainement, vous disposerez d\'une int\351gration compl\350te\nde la recherche avanc\351e sur ce site. \n\nEn attendant, vous allez \352tre redirig\351s vers l\'interface standard.',
 'mon_compte' => 'Mon compte',
+'mon_compte_necessite_identification' => 'Vous devez vous identifier pour accéder à votre compte lecteur.',
 'mots_cles' => 'Mots clés',
 
 // N
@@ -153,7 +154,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // U
 'unite_materielle' => 'Unité matérielle', // fait partie de...
 'url' => 'Adresse',
+
+// V
 'vous_etes_identifies' => 'Vous &ecirc;tes identifi&eacute;',
+
+// W
 'wsdl' => 'Adresse du WSDL SOAP',
 
 );

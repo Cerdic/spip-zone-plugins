@@ -1,8 +1,9 @@
-<BOUCLE_content(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
+
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 <span class="sep"> &gt; </span><:pmb:mon_compte:></p>
 
+<BOUCLE_content(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
 <div class="content-principal">
 	<div class="vcard">
 		<div class="cartouche">
@@ -11,6 +12,9 @@
 		</div>
 	</div>
 
-	<INCLURE{fond=inclure/inc-pmb_compte}{env}>
+	<INCLURE{fond=inclure/inc-pmb_compte, env}>
 </div>
 </BOUCLE_content>
+	<h1><:pmb:mon_compte:></h1>
+	<p class='error'><:pmb:mon_compte_necessite_identification:></p>
+<//B_content>
