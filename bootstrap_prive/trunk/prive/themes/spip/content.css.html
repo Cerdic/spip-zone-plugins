@@ -36,6 +36,11 @@
 
 /* Liens hypertexte */
 a { text-decoration: none; color: [#(#ENV{foncee}|couleur_foncer{0.25})]; }
+a:focus, a:hover, a:active {
+	background-color: transparent;
+	color: [(#ENV{foncee})];
+	text-decoration: none;
+}
 a:hover { text-decoration: underline; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }

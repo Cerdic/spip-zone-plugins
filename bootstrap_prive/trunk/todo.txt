@@ -12,7 +12,6 @@ A corriger :
 - sur le «navigateur de rubrique» des outils rapides, au survol, il n'y a plus le délai de quelques millisecondes si la souris sort du cadre (par inadvertance) avant de fermer le hover. (marcimat)
 -> De ce point de vue, ce qu'on avait fait sur le menu déroulant (navigation au clavier, hover, tempo, accessibilité) est bien meilleur que ce qu'il y a dans BootStrap. Il faut conserver ce qu'on avait fait. (cédric)
 
-
 - sous IE9, le petit carré de statut d'un objet éditorial est à couper en deux dans le sens de la hauteur (a croire qu’il est cacher car trop à gauche) (Franck_)
 
 
@@ -20,6 +19,8 @@ A corriger :
 Corrigé :
 r71769 - Sous Chrome, « aucun fichier choisi » deborde toujours (pas de problème sous IE9 et Firefox) (Franck_)
 
-- Les liens de couleur rouge bordeaux jurent avec la couleur par défaut (vert) du reste de l'interface je trouve. Est-ce pour être raccord avec les squelettes de la dist ?  (Charles Razack)
+r71787 - Les liens de couleur rouge bordeaux jurent avec la couleur par défaut (vert) du reste de l'interface je trouve. Est-ce pour être raccord avec les squelettes de la dist ?  (Charles Razack)
 
-- Problème du formulaire_spip div ul du formulaire d'ajout de document sur ?exec=article_edit&id_article=XX (pierretux)
+r71787 - Problème du formulaire_spip div ul du formulaire d'ajout de document sur ?exec=article_edit&id_article=XX (pierretux)
+
+- background-color des a:hover du bandeau de navigation prend en compte la couleur de personnalisation. Aurevoir le rouge.

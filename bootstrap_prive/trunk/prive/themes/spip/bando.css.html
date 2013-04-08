@@ -26,19 +26,19 @@ c'est du text/html !
     text-align: center;
 }
 
-// Hover/Focus state
-// -----------
+/* Hover/Focus state
+* ----------- */
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
 background-color:[#(#ENV{foncee}|couleur_foncer{0.25})];
-background-image:-moz-linear-gradient(top,[#(#ENV{foncee}|couleur_foncer{0.25})],[(#ENV{claire})]);
-background-image:-webkit-gradient(linear,0 0,0 100%,from([#(#ENV{foncee}|couleur_foncer{0.25})]),to([(#ENV{claire})]));
-background-image:-webkit-linear-gradient(top,[#(#ENV{foncee}|couleur_foncer{0.25})],[(#ENV{claire})]);
-background-image:-o-linear-gradient(top,[#(#ENV{foncee}|couleur_foncer{0.25})],[(#ENV{claire})]);
-background-image:linear-gradient(to bottom,[#(#ENV{foncee}|couleur_foncer{0.25})],[(#ENV{claire})]);
-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='[#(#ENV{foncee}|couleur_foncer{0.25})]',endColorstr='[(#ENV{claire})]',GradientType=0);
+background-image:-moz-linear-gradient(top,[(#ENV{claire})],[#(#ENV{foncee}|couleur_foncer{0.25})]);
+background-image:-webkit-gradient(linear,0 0,0 100%,from([(#ENV{claire})]),to([#(#ENV{foncee}|couleur_foncer{0.25})]));
+background-image:-webkit-linear-gradient(top,[(#ENV{claire})],[#(#ENV{foncee}|couleur_foncer{0.25})]);
+background-image:-o-linear-gradient(top,[(#ENV{claire})],[#(#ENV{foncee}|couleur_foncer{0.25})]);
+background-image:linear-gradient(to bottom,[(#ENV{claire})],[#(#ENV{foncee}|couleur_foncer{0.25})]);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='[(#ENV{claire})]',endColorstr='[#(#ENV{foncee}|couleur_foncer{0.25})]',GradientType=0);
 }
 
 [(#REM|bando_images_background)]
