@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'Le formulaire n\'existe pas.',
 
 	// F
-	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.',
+	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme, c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.',
 	'formulaires_aucun' => 'Il n\'y a pour l\'instant aucun formulaire.',
 	'formulaires_dupliquer' => 'Dupliquer le formulaire',
 	'formulaires_dupliquer_copie' => '(copie)',
@@ -146,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l\'enregistrement en base de données',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez déjà répondu à ce formulaire.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)',
+	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire',
