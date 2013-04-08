@@ -113,7 +113,7 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 		}
 		if(cs_le_test($current_version, $tmp, '1.11')){
 			// anciens metas inusites
-			foreach(array('tweaks_smileys', 'tweaks_chatons') as $meta) 
+			foreach(array('tweaks_smileys', 'tweaks_chatons', 'cs_spam_mots') as $meta) 
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
@@ -124,7 +124,7 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 function cs_le_test($current_version, &$tmp, $new) {
 	if($test = version_compare($current_version, $tmp=$new, '<')) {
 		echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
-		$GLOBALS['cs_base_update'][] = $tmp;
+		$GLOBALS['cs_base_update'] .= $tmp.' > ';
 	}
 	return $test;
 }

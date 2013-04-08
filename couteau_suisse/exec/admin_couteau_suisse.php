@@ -162,7 +162,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		}
 		if($infos && $infos['install_test'])
 			 echo $infos['install_test'][1], '<p style="color:red;">', 
-			 	isset($GLOBALS['cs_base_update'])?'DB '.join($GLOBALS['cs_base_update'], ' > ').' > ':'',
+			 	isset($GLOBALS['cs_base_update'])?'DB '.$GLOBALS['cs_base_update']:'',
 			 	_T($infos['install_test'][0]?'plugin_info_install_ok':'avis_operation_echec'),'</p>';
 		unset($infos);
 		parse_str(parametres_css_prive(), $paramcss);
