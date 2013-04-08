@@ -72,6 +72,31 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+', # NEW
+	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
+	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
+	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
+	'autorisations_surcharge' => 'Fonction surchargée', # NEW
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil t\'offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -444,6 +469,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',
+	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Balise pour les titres :',
@@ -766,13 +792,14 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_cache:description3' => '@puce@ L\'extension « Compresseur » présente dans SPIP permet de compacter les différents éléments CSS et Javascript de tes pages et de les placer dans un cache statique. Cela accélère l\'affichage du site, et limite le nombre d\'appels sur le serveur et la taille des fichiers à obtenir.',
 	'spip_cache:nom' => 'SPIP et le cache…',
 	'spip_ecran:description' => 'Détermine la largeur d\'écran imposée à tous en partie privée. Un «petit écran» présentera deux colonnes et un «grand écran» en présentera trois. Le réglage par défaut laisse l\'utilisateur choisir, son choix étant stocké dans un cookie.[[%spip_ecran%]][[->Et ajouter %tres_large% pixels à la largeur de l\'écran.]]
-{{ {Pense à vider les caches de SPIP !} }}',
+{{ {Pense à vider les caches de SPIP !} }}', # MODIF
 	'spip_ecran:nom' => 'Largeur d\'écran',
 	'spip_log:description' => '@puce@ Gère ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laisse vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]',
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]',
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».
 _ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se configure ici : «[.->timezone]» {(PHP 5.1 minimum)}.',
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statut' => 'Statut',

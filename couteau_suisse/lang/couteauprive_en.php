@@ -72,6 +72,31 @@ _The <code><multi/></code> tag are recommended in case of multilingual website. 
 	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
 	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>',
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+', # NEW
+	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
+	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
+	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
+	'autorisations_surcharge' => 'Fonction surchargée', # NEW
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'In order to reduce the complexity of code segments like <code>#SET{x,#GET{x}|a_filter}</code>, this tool offers you the following short-cut: <code>#SET_UN_FILTRE{x}</code>. The filter applied to a variable is therefore passed in the name of the tag.
@@ -443,6 +468,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
+	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
 	'label:balise_sommaire' => 'Activate the tag #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Tag for the titles:',
@@ -773,6 +799,7 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'spip_log:description2' => '@puce@ the SPIP severity filter allows you to select the level of maximum importance to be considered before starting a data log. Level 8 allows for example to store all the messages sent by SPIP. The default level is level 5.',
 	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».
 @puce@ jet lag used by the functions date / time can be configured here: «[.->timezone]» {(PHP 5.1 minimum)}.',
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
 	'statut' => 'Statut', # NEW

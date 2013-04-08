@@ -71,6 +71,31 @@ _ Na viacjazyčnej stránke sa odporúča používať tagy <code><multi/></code>
 	'autobr_non' => 'Vnútorné tagy &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Články a verejné správy (tagy @BALISES@)',
 	'autobr_racc' => 'Zlomov riadkov: <b>&lt;alinea>&lt;/alinea></b>',
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+', # NEW
+	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
+	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
+	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
+	'autorisations_surcharge' => 'Fonction surchargée', # NEW
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Na zjednodušenie prvkov kódu, ako <code>#SET{x,#GET{x}|a_filter}</code>, tento nástroj ponúka tieto skratky: <code>#SET_UN_FILTRE{x}.</code> Filter, ktorý sa použil na premennú sa preto prenáša v názve tagu.
@@ -434,6 +459,7 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
+	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Aktivovať tag #CS_DECOUPE:',
 	'label:balise_sommaire' => 'Aktivovať tag #CS_SOMMAIRE:',
 	'label:bloc_h4' => 'Tag for the titles:',
@@ -759,6 +785,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
 	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».', # MODIF
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP a jeho protokoly',
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statut' => 'Statut', # NEW

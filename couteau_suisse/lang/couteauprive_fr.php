@@ -4,33 +4,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'autorisations:nom' => 'Fonctions d\'autorisations',
-	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
-<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
-    return false; // aucun troll permis, non mais !
-}</cadre>
-Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
-
-Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
-
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples. Pensez à bien les tester toutes.
-_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
-@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
-',
-	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».',
-	'autorisations_debug' => 'Tracer les autorisations dans {@_CS_DIR_LOG@spip.log}',
-	'label:autorisations_alias' => 'Vos alias :',
-	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).',
-	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]',
-	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]',
-	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]',
-	'autorisations_creees' => "Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ",
-	'autorisations_surcharge' => 'Fonction surchargée',
 
 	// 2
 	'2pts_non' => ' : non',
@@ -97,6 +70,31 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples. Pensez à bien les tester toutes.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+',
+	'autorisations:nom' => 'Fonctions d\'autorisations',
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).',
+	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ',
+	'autorisations_debug' => 'Tracer les autorisations dans {@_CS_DIR_LOG@spip.log}',
+	'autorisations_surcharge' => 'Fonction surchargée',
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]',
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]',
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]',
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil vous offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -469,6 +467,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : «{Round Cor
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',
+	'label:autorisations_alias' => 'Vos alias :',
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Balise pour les titres :',
@@ -799,6 +798,7 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».
 _ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se configure ici : «[.->timezone]» {(PHP 5.1 minimum)}.
 ',
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».',
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statut' => 'Statut',

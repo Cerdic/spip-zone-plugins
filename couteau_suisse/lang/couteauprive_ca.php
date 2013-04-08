@@ -72,6 +72,31 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 	'autobr_non' => 'A l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles i missatges públics (etiquetes @BALISES@)',
 	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>', # MODIF
+	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
+    return false; // aucun troll permis, non mais !
+}</cadre>
+Signification des paramètres :
+-* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
+-* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
+-* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
+-* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
+-* <code>$opt</code> : tableau d\'option, généralement vide
+
+Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+
+@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
+_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
+', # NEW
+	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
+	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
+	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
+	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
+	'autorisations_surcharge' => 'Fonction surchargée', # NEW
+	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
+	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
+	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Per simplificar les escriptures del tipus <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la següent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
@@ -447,6 +472,7 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera automàticament:',
 	'label:auteur_forum_nom' => 'El visitant ha d\'especificar:',
 	'label:auto_sommaire' => 'Creació sistemàtica del sumari:',
+	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar l\'etiqueta #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Etiqueta pels títols:',
@@ -772,6 +798,7 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
+	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Els autors en stat',
 	'statut' => 'Statut', # NEW
