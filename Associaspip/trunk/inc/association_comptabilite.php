@@ -66,18 +66,18 @@ function association_editeur_destinations($destinations, $defaut='') {
 		$texte = $v['intitule'];
 		$options[$id] = "<option value='$id'>$texte</option>";
 	}
-	if (!$options) return '';
+	if (!$options) // aucune destination definie !
+	    return '';
 	$idIndex = 1;
 
-	if (!$GLOBALS['association_metas']['unique_dest']) { // destinations multiples, on insere le js qui permet de les gerer
+	if (intval($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples, on insere le js qui permet de les gerer
 	      $script = '<script type="text/javascript" src="'
 		. find_in_path('javascript/jquery.destinations_form.js')
 		. '"></script>';
 		$addDestinationButton = "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>";
 	}
 
-	if ( is_array($destinations) ) {
-      // si on a une liste de destinations (on edite une operation)
+	if ( is_array($destinations) ) { // si on a une liste de destinations (on edite une operation)
 	  $options = join("\n", $options) ;
 	  $res = '';
 	  foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
@@ -87,7 +87,7 @@ function association_editeur_destinations($destinations, $defaut='') {
 		. preg_replace("/(value='".$destId."')/", '$1 selected="selected"', $options)
 		. '</select></li>';
 
-		if (!$GLOBALS['association_metas']['unique_dest']) {
+		if (($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples
 		    $res .= '<li><input name="montant_dest['.$idIndex.']" value="'
 			. association_formater_nombre($destMontant)
 			. '" type="text" id="montant_dest_'.$idIndex.'" class="number decimal price" />'
@@ -120,7 +120,7 @@ function association_editeur_destinations($destinations, $defaut='') {
       . _T('asso:destination')
       . '</label>'
       . $res
-      . ($GLOBALS['association_metas']['unique_dest'] ? '' :
+      . ((intval($GLOBALS['association_metas']['destinations'])>1)? '' :
 	('<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'" />'))
       . '</div>';
 

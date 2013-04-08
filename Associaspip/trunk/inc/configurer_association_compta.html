@@ -13,30 +13,22 @@
 		</li>
 	</ul>
 	<fieldset>
-		<legend><:asso:destinations:></legend>
+		<legend><:asso:config_compta:></legend>
 		<ul>
 			<li class="editer_destinations">
-				<div class="choix">
-					<input type="checkbox" name="destinations" [(#ENV{destinations}|oui) checked="checked"] id="destinations" />
-					<label for="destinations"><:asso:config_libelle_destinations:></label>
-				</div>
+				<label for="destinations"><:asso:config_libelle_destinations:></label>
+				<select name="destinations">
+					<option value="2"[ (#ENV{destinations}|non) selected="selected"]><:asso:config_libelle_destination0:></option>
+					<option value="2"[ (#ENV{destinations}|>{1}) selected="selected"]><:asso:config_libelle_destination2:></option>
+					<option value="1"[ (#ENV{destinations}|=={1}) selected="selected"]><:asso:config_libelle_destination1:></option>
+				</select>
 			</li>
-			<li class="editer_destination1">
-				<div class="choix">
-					<input type="checkbox" name="unique_dest" [(#ENV{unique_dest}|oui) checked="checked"] id="destination1" />
-					<label for="destination1"><:asso:config_libelle_destination1:></label>
-				</div>
-			</li>
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend><:asso:exercices:></legend>
-		<ul>
 			<li class="editer_exercices">
-				<div class="choix">
-					<input type="checkbox" name="exercices" [(#ENV{exercices}|oui) checked="checked"] id="exercices" />
-					<label for="exercices"><:asso:config_libelle_exercices:></label>
-				</div>
+				<label for="exercices"><:asso:config_libelle_exercices:></label>
+				<select name="exercices">
+					<option value=""[(#ENV{exercices}|non) selected="selected"]><:asso:config_libelle_exercice0:></option>
+					<option value="on"[(#ENV{exercices}|oui) selected="selected"]><:asso:config_libelle_exercice1:></option>
+				</select>
 			</li>
 		</ul>
 	</fieldset>

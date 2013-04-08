@@ -259,14 +259,16 @@ function autoriser_associer_adherents_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_association_gerer_membres_dist($faire, $type, $id, $qui, $opt);
 }
 
-/// Un membre peut declarer lui-meme sa cotisation 
+/// Un membre peut declarer lui-meme sa cotisation
 /// si la destination et l'imputation des cotisations sont uniques.
 /// Le tresorier n'aura plus qu'a valider.
-
 function autoriser_association_ajouter_cotisation_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut']=='0minirezo' && !$qui['restreint']) return true;
-	if ($id != $GLOBALS['visiteur_session']['id_auteur']) return false;
-	if (!$GLOBALS['association_metas']['unique_dest']) return false;
+	if ($qui['statut']=='0minirezo' && !$qui['restreint'])
+		return true;
+	if ($id != $GLOBALS['visiteur_session']['id_auteur'])
+		return false;
+	if (intval($GLOBALS['association_metas']['destinations'])>1)
+		return false;
 	return (sql_countsel('spip_asso_plan', "(active=1) AND (classe=" . sql_quote($GLOBALS['association_metas']['classe_banques']) . ") AND (code!=" . sql_quote($GLOBALS['association_metas']['pc_intravirements']) . ')') == 1);
 }
 
