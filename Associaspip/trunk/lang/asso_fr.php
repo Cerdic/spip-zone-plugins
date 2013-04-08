@@ -257,30 +257,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_aide_fpdf' => 'Les param&egrave;tres suivants s\'appliquent aux pages imprimables g&eacute;n&eacute;r&eacute;es en PDF. Certains cas font cependant exception : re&ccedil;u fiscal, &eacute;tiquettes, comptes analytiques (en partie).',
 	'config_aide_infofiscal' => 'Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.',
 	'config_aide_pays' => 'code alpha-2 ISO 3166-1',
-	'config_aide_pc_activites' => 'Classe des comptes de produits :
- <a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
-	'config_aide_pc_cautions' => 'Classe des immobilisations :
-<a href=\'@url@&amp;code=1651\' title=\'D&eacute;clarer la classe 1651\'>FR=1651</a>
-',
-	'config_aide_pc_colis' => 'Classe des comptes de contributions volontaires :
- <a href=\'@url@&amp;code=875\' title=\'D&eacute;clarer la classe 875\'>FR=875</a>',
-	'config_aide_pc_cotisations' => 'Classe des comptes de produits :
- <a href=\'@url@&amp;code=756\' title=\'D&eacute;clarer la classe 756\'>FR=756</a>',
-	'config_aide_pc_dons' => 'Classe des comptes de produits :
- <a href=\'@url@&amp;code=754\' title=\'D&eacute;clarer la classe 754\'>FR=754/771 (courants/exceptionnels)</a>',
-	'config_aide_pc_frais2port' => 'Classe des comptes de produits :
- <a href=\'@url@&amp;code=705\' title=\'D&eacute;clarer la classe 705\'>FR=705</a>
- (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ',
-	'config_aide_pc_prets' => 'Classe des comptes de produits :
-<a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
-	'config_aide_pc_ressources' => 'Classe des comptes d\'immobilisations/charges :
- <a href=\'@url@&amp;code=210\' title=\'D&eacute;clarer la classe 210\'>FR=210/600?</a>
-  (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)',
-	'config_aide_pc_ventes' => 'Classe des comptes de produits :
- <a href=\'@url@&amp;code=701\' title=\'D&eacute;clarer la classe 701\'>FR=701/707/706</a>
- (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res
- --601-- / produits achet&eacute;s
- --607-- / services --et parainages...)',
+	'config_aide_pc_activites' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
+	'config_aide_pc_cautions' => 'Classe des immobilisations : <a href=\'@url@&amp;code=1651\' title=\'D&eacute;clarer la classe 1651\'>FR=1651</a>',
+	'config_aide_pc_colis' => 'Classe des comptes de contributions volontaires : <a href=\'@url@&amp;code=875\' title=\'D&eacute;clarer la classe 875\'>FR=875</a>',
+	'config_aide_pc_cotisations' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=756\' title=\'D&eacute;clarer la classe 756\'>FR=756</a>',
+	'config_aide_pc_dons' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=754\' title=\'D&eacute;clarer la classe 754\'>FR=754/771 (courants/exceptionnels)</a>',
+	'config_aide_pc_frais2port' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=705\' title=\'D&eacute;clarer la classe 705\'>FR=705</a> (si enregistr&eacute;s s&eacute;par&eacute;ment --frais accessoires-- car peuvent &ecirc;tre int&eacute;gr&eacute;...) ',
+	'config_aide_pc_intravirements' =>  'Classe des comptes financiers : <a href=\'@url@&amp;code=581\' title=\'D&eacute;clarer la classe 581\'>FR=581</a>',
+	'config_aide_pc_prets' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
+	'config_aide_pc_ressources' => 'Classe des comptes d\'immobilisations/charges : <a href=\'@url@&amp;code=210\' title=\'D&eacute;clarer la classe 210\'>FR=210/600?</a> (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)',
+	'config_aide_pc_ventes' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=701\' title=\'D&eacute;clarer la classe 701\'>FR=701/707/706</a> (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res --601-- / produits achet&eacute;s --607-- / services --et parainages...)',
 	'config_aide_recufiscal' => 'sigles :
 		s-b-l = &agrave; but non lucratif ;
 		d-i-g = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
