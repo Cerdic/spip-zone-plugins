@@ -137,7 +137,7 @@ function cs_champ_sql($id, $champ='texte', $objet='article') {
 	return '';
 }
 
-// recaler un contenu de fond. Exemple : #FILTRE{cs_recaler}
+// recaler un contenu de fond. Exemple : #FILTRE{cs_impossible}
 function cs_impossible($chaine='') { return _T('avis_operation_impossible'); }
 
 ?>

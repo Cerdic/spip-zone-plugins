@@ -148,7 +148,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
 	$t = isset($dir_type)?$get_infos($dir, false, constant($dir_type)):$get_infos($dir);
-	$cs_version_base = $t['version_base']; $cs_version = $t['version'];
+	$cs_version_base = $t['version_base']?$t['version_base']:$t['schema']; $cs_version = $t['version'];
 	if(!function_exists('installe_un_plugin')) {
 		// ici SPIP >= 3.0
 		// TODO: redondances probables a revoir

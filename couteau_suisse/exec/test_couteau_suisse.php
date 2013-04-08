@@ -29,6 +29,7 @@ cs_log("DEDUT : exec_test_couteau_suisse()");
 
 	echo '<br /><br /><br />', gros_titre(_T('couteauprive:titre_tests'), '', false), 
 		'<div style="width:98%; text-align:left; margin:0 auto">';
+
 	// et hop, on lance les tests !
 	cs_les_tests();
 	echo '</div>';
@@ -56,8 +57,14 @@ function test_outil($array, $titre) {
 	global $icone;
 	static $i; $i++;
 	echo "<a id=$i></a>",debut_cadre_trait_couleur($icone,true,'',"$i. $titre");
-	foreach($array as $s=>$v) if(is_array($v))
-			foreach($v as $s2=>$v2) echo "\n<b>{$s}[$s2]</b> = ".trim($v2)."<br />";
+	foreach($array as $s=>$v)
+		// unserialize eventuel des tableaux
+//		if(is_string($v) && strncmp($v,'a:',2)===0 && ($t=@unserialize($v))!==false) $v = $t;
+		if(is_array($v))
+			foreach($v as $s2=>$v2) {
+				if(is_array($v2)) $v2 = htmlentities(var_export($v2,1));
+				echo "\n<b>{$s}[$s2]</b> = ".trim($v2)."<br />";
+			}
 		else echo "\n<b>$s</b> = ".trim($v)."<br />";
 	echo fin_cadre_trait_couleur(true);
 }
@@ -80,6 +87,23 @@ function cs_les_tests() {
 			'PHP_SELF'=>getenv('PHP_SELF'),
 		);
 	test_outil($a, 'Echo de : getenv()');
+
+	// lecture des infos sur le plugin
+	include_spip('inc/plugin');
+	if(isset($GLOBALS['meta']['plugin'])) {
+		$t = unserialize($GLOBALS['meta']['plugin']);
+		$dir = $t['COUTEAU_SUISSE']['dir'];
+		$dir_type = $t['COUTEAU_SUISSE']['dir_type'];
+	}
+	if(!strlen($dir)) $dir = 'couteau_suisse';
+	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
+	$t = isset($dir_type)?$get_infos($dir, false, constant($dir_type)):$get_infos($dir);
+	$t['revision'] = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$tmp)) && (preg_match(',<revision>(\d+)</revision>,',$tmp, $r)))?$r[1]:"-";
+	$t['meta/couteau_suisse_base_version'] = $GLOBALS['meta']['couteau_suisse_base_version'];
+	test_outil($t, 'Infos sur votre plugin pr&eacute;f&eacute;r&eacute; :-)');
+
+//	$GLOBALS['meta']
+	test_outil($GLOBALS['meta'], 'Toutes les metas de SPIP !');
 
 	// lecture des variables stockees en meta
 	test_outil($metas_outils, 'Outils actifs : $metas_outils[]');
@@ -164,8 +188,8 @@ function cs_les_tests() {
 
 	// test des smileys
 	$textes = array(
-		"Doubles : :-(( :-)) :)) :'-)) :’-))",
-		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
+		"Doubles : :-(( :-)) :)) :'-)) :'-))",
+		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :'-) :'-D :'-D :'-( :'-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
 		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
 	);
 	test_outil(cs_test_fun($textes, 'cs_smileys_pre_typo'), 'Test sur : cs_smileys_pre_typo()');
