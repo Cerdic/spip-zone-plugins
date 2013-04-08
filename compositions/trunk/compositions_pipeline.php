@@ -95,10 +95,10 @@ function compositions_affiche_milieu($flux){
 		if ($id = $flux['args'][$e['id_table_objet']]) {
 			$config = unserialize($GLOBALS['meta']['compositions']);
 			$aut = autoriser('styliser',$type,$id);
-			if (($config['masquer_formulaire'] != 'oui' OR $aut)
+			if ((!isset($config['masquer_formulaire']) OR $config['masquer_formulaire'] != 'oui' OR $aut)
 				AND (
 					($c=compositions_lister_disponibles($type) AND is_array(reset($c)))
-					OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui')
+					OR ($type == 'rubrique' AND (!isset($config['tout_verrouiller']) OR $config['tout_verrouiller'] != 'oui'))
 				  )
 				) {
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";

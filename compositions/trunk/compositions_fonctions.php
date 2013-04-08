@@ -407,7 +407,7 @@ function balise_COMPOSITION_dist($p) {
  */
 function compositions_verrouiller($type, $id, $serveur=''){
 	$config = unserialize($GLOBALS['meta']['compositions']);
-	if ($config['tout_verrouiller'] == 'oui')
+	if (isset($config['tout_verrouiller']) AND $config['tout_verrouiller'] == 'oui')
 		return true;
 	
 	include_spip('base/abstract_sql');
