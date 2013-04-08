@@ -1,5 +1,5 @@
 #CACHE{0}
-#SET{url_orig,#SELF|parametre_url{type_objet,''}|parametre_url{em_type,''}|parametre_url{id_syndic,''}|parametre_url{id_article,''}|parametre_url{id_rubrique,''}|parametre_url{id_site,''}}
+[(#SET{url_orig,#SELF|parametre_url{type_objet,''}|parametre_url{em_type,''}|parametre_url{id_syndic,''}|parametre_url{id_article,''}|parametre_url{id_rubrique,''}|parametre_url{id_site,''}})]
 <BOUCLE_diogene(DIOGENES){type=#ENV{type_objet}}>
 <BOUCLE_autorise_utiliser(CONDITION){si #AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui}>
 	[(#REM) Fil d'Ariane ]
@@ -12,8 +12,7 @@
 			<h1 class="h1 #_diogene:EDIT{titre}"><:diogene:publier_titre:>[(#_diogene:TITRE|lcfirst)]</h1>
 		</div>
 		[<div class="texte #_diogene:EDIT{description}">(#_diogene:DESCRIPTION)</div>]
-		[(#CHEMIN{inclure/diogene_#OBJET.html}|oui)
-		#SET{fond,ok}
+		[(#CHEMIN{inclure/diogene_#OBJET.html}|oui)[(#SET{fond,ok})]
 		<INCLURE{fond=inclure/diogene_#OBJET,id_diogene,env,ajax}>]
 		[(#GET{fond}|!={ok}|oui)
 		<INCLURE{fond=inclure/diogene_objet,id_diogene,env,ajax}>]
@@ -28,23 +27,20 @@
 		<h1 class="h1"><:diogene:erreur:></h1>
 	</div>
 	<div class="texte">
-		#BOITE_OUVRIR{'',error}
+		[(#BOITE_OUVRIR{'',error})]
 			<p>
 				<:diogene:erreur_droits_objet_publier:>
 			</p>
 			[(#SESSION{statut}|non)
-			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}})]
 			<p><:diogene:erreur_autorisation_login_publier{url=#GET{url}}:></p>]
-		#BOITE_FERMER
-		<//B_articles_secteurs>
+		[(#BOITE_FERMER)]
 	</div>
 </div>
 <//B_autorise_utiliser>
 </BOUCLE_diogene>
 </B_diogene>
-#SET{contenu,''}
-#SET{contenu_attente_vous,''}
-#SET{contenu_attente,''}
+[(#SET{contenu,''})][(#SET{contenu_attente_vous,''})][(#SET{contenu_attente,''})]
 <BOUCLE_diogene_principaux(DIOGENES){menu=on}{par num titre, id_diogene, objet, titre}>
 [(#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)
 [(#SET{contenu,[(#GET{contenu}|concat{
