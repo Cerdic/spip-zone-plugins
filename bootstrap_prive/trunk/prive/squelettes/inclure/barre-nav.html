@@ -59,7 +59,8 @@
 									class="[(#VAL{first}|unique)][(#CLE|=={menu_accueil}|non) dropdown]"><a
 									href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"[(#CLE|=={menu_accueil}|non)
 									class="dropdown-toggle"
-									data-toggle="dropdown"]><i id="bando1_#CLE" class="icon-large"></i> [(#VALEUR{libelle}|_T)]</a>]
+									data-toggle="dropdown"
+									data-delay="1000"]><i id="bando1_#CLE" class="icon-large"></i> [(#VALEUR{libelle}|_T)]</a>]
 									<B_sous><ul class="dropdown-menu">
 									<BOUCLE_sous(POUR)
 									{tableau #VALEUR{sousmenu}}>[<li><a

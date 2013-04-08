@@ -23,4 +23,4 @@ r71787 - Les liens de couleur rouge bordeaux jurent avec la couleur par défaut 
 
 r71787 - Problème du formulaire_spip div ul du formulaire d'ajout de document sur ?exec=article_edit&id_article=XX (pierretux)
 
-- background-color des a:hover du bandeau de navigation prend en compte la couleur de personnalisation. Aurevoir le rouge.
+r71788 - background-color des a:hover du bandeau de navigation prend en compte la couleur de personnalisation. Aurevoir le rouge.
