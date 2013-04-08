@@ -7,7 +7,7 @@
 	<h3 class="legend"><:asso:ajouter_membres_au_groupe:></h3>
 	<p class="pagination">#PAGINATION</p>
 	<ul>
-<BOUCLE_membresHorsGroupe(asso_membres asso_groupes_liaisons){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe = #ENV{id_groupe}}{par nom_famille, prenom}{pagination 40}>
+<BOUCLE_membresHorsGroupe(asso_membres asso_fonctions){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe = #ENV{id_groupe}}{par nom_famille, prenom}{pagination 40}>
 	    <li class="liste_auteurs">
 		<div class="choix">
 		    <input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" id="auteur#ID_AUTEUR" />

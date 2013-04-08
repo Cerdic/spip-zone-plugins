@@ -323,7 +323,7 @@ function association_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
 	$tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';
 	$tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';
-	$tables_interfaces['table_des_tables']['asso_fonctions'] = 'asso_groupes_liaisons';
+	$tables_interfaces['table_des_tables']['asso_fonctions'] = 'asso_fonctions';
 	$tables_interfaces['table_des_tables']['asso_exercices'] = 'asso_exercices';
 
 	// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente

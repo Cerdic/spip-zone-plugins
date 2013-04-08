@@ -712,9 +712,9 @@ $GLOBALS['association_maj'][67570] = array(
 );
 
 function association_maj_71776() {
-	if ( sql_contsel('spip_association_metas', "nom='unique_dest' AND valeur='on' ") )
+	if ( sql_countsel('spip_association_metas', "nom='unique_dest' AND valeur='on' ") )
 		sql_update('spip_association_metas', array('valeur'=>'1'), "nom='destinations'");
-	if ( sql_contsel('spip_association_metas', "nom='destinations' AND valeur='on' ") )
+	if ( sql_countsel('spip_association_metas', "nom='destinations' AND valeur='on' ") )
 		sql_update('spip_association_metas', array('valeur'=>'2'), "nom='destinations'");
 }
 $GLOBALS['association_maj'][71780] = array(
