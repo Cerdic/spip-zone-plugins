@@ -1,11 +1,3 @@
-<title><:tickets:tickets:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-<meta name="description" content="<:tickets:titre_liste|couper{150}|textebrut:>" />
-[(#CONFIG{tickets/general/cacher_moteurs,on}|=={on}|oui)<meta name="robots" content="noindex, nofollow">]
-[<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_tickets:>" href="(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}})" />]
-[(#PLUGIN{Zpip}|non)
-<INCLURE{fond=inclure/head}>]
-[<link rel="stylesheet" href="(#CHEMIN{tickets.css})" type="text/css" media="projection, screen, tv" />]
-[(#PLUGIN{Zpip}|non)
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery('.formulaire_trier_tickets').hide();
@@ -23,4 +15,4 @@
 			return false;
 		});
 	});
-</script>]
+</script>

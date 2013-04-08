@@ -2,10 +2,10 @@
 <title><:tickets:icone_modifier_ticket:> - [(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [(#CONFIG{tickets/general/cacher_moteurs,on}|=={on}|oui)<meta name="robots" content="noindex, nofollow">]
 [<meta name="description" content="(#TEXTE|couper{150}|attribut_html)" />]
-
 </BOUCLE_editer_ticket_head>
 [<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_tickets:>" href="(#URL_PAGE{backend-tickets})" />]
 <title><:tickets:nouveau_ticket:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <//B_editer_ticket_head>
-<INCLURE{fond=inclure/head}>
+[(#PLUGIN{Zpip}|non)
+<INCLURE{fond=inclure/head}>]
 [<link rel="stylesheet" href="(#CHEMIN{tickets.css})" type="text/css" media="projection, screen, tv" />]
