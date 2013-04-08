@@ -1,1 +1,22 @@
-- Corriger le soucis de .pagination ul > li > a qui a un padding r�siduel qui n'a pas lieu d'�tre ici.
+A corriger :
+
+- Corriger le soucis de .pagination ul > li > a qui a un padding résiduel qui n'a pas lieu d'être ici.
+-> passer toutes les div.pagination en ul>li pour suivre bootstrap
+
+- La balise #LARGEUR_ECRAN{pleine_largeur} semble être inopérante par contre, c'est voulu ? cf. médiathèque qui devrait occuper toute la largeur. (Charles Razack)
+
+- Bandeau de navigation : Le fait de devoir cliquer pour afficher les sous-menus est contre-intuitif par contre. (Charles Razack & marcimat)
+
+- navigation clavier de ce même menu différente d'avant (à voir si c'est gênant) (marcimat)
+
+- sur le «navigateur de rubrique» des outils rapides, au survol, il n'y a plus le délai de quelques millisecondes si la souris sort du cadre (par inadvertance) avant de fermer le hover. (marcimat)
+-> De ce point de vue, ce qu'on avait fait sur le menu déroulant (navigation au clavier, hover, tempo, accessibilité) est bien meilleur que ce qu'il y a dans BootStrap. Il faut conserver ce qu'on avait fait. (cédric)
+
+- Les liens de couleur rouge bordeaux jurent avec la couleur par défaut (vert) du reste de l'interface je trouve. Est-ce pour être raccord avec les squelettes de la dist ?  (Charles Razack)
+
+- sous IE9, le petit carré de statut d'un objet éditorial est à couper en deux dans le sens de la hauteur (a croire qu’il est cacher car trop à gauche) (Franck_)
+
+- Sous Chrome, « aucun fichier choisi » deborde toujours (pas de problème sous IE9 et Firefox) (Franck_)
+
+----------
+Corrigé :

@@ -218,12 +218,10 @@ a.plus_info {
         }
     }
 }
-.formulaire_spip .toggle_box_link {
-    position: absolute;
-    right: 5px;
-    top: 5px;
+/* evite sur Chrome que "Aucun fichier choisi" ne dépasse du bloc. */
+input[type="file"] {
+  width: 100%;
 }
-
 .form-search {
   .input-append {
     .search-query {
@@ -235,6 +233,12 @@ a.plus_info {
   }
 }
 .formulaire_spip {
+  .toggle_box_link {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
   .choix {
     label {
       .checkbox;
