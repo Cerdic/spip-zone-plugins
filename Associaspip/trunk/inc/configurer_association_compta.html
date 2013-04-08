@@ -49,7 +49,7 @@
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 				</div>
 			</li>
-			<INCLURE{fond=inc/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques} } />
+			<INCLURE{fond=inc/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques, obligatoire=1} } />
 			<li class="editer_pc_intravirements">
 				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
 
@@ -66,10 +66,10 @@
 				<span class="erreur_message"><:asso:enregistrer_classe_banque_virement:></span>
 	<//B_pc_virements>
 			</li>
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations} />
+			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
+			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
+			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
+			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
 		</ul>
 	</fieldset>
 </fieldset>

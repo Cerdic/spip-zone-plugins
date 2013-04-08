@@ -9,7 +9,7 @@ parametres =
 
 maj:2012-11-30; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
 #CACHE{0}
-        <li class="editer_classe_[(#ENV{cc_nom})]">
+        <li class="editer_classe_[(#ENV{cc_nom})][ (#ENV{obligatoire}|oui)obligatoire]">
             [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{#ENV{cc_nom}})</span>]
             <label for="classe_[(#ENV{cc_nom})]">[(#VAL{asso:config_libelle_classe_#ENV{cc_nom}}|_T)]</label>
 <B_classe_compta>
