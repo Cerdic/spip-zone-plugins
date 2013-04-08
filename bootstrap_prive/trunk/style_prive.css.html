@@ -49,7 +49,7 @@ Valeurs par defaut :
 
 
 
-<BOUCLE_css(POUR){tableau #LISTE{bando.css,icons.css,lists.css,content.css,exceptions.css}}>
+<BOUCLE_css(POUR){tableau #LISTE{box_skins.css,bando.css,icons.css,lists.css,content.css,exceptions.css}}>
 [(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#VAL{_DIR_RACINE}|constant|strlen)],[(#VAL{-5}|intval)]})]})]
 /*
  * #VALEUR::[(#GET{fond})]
