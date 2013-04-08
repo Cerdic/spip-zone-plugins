@@ -125,7 +125,7 @@ function action_pdf_etiquettes() {
 //	if ($indice==0) {
 //		$message .= _T('asso:etiquette_aucune_impression');
 //	} else {
-		$nom_fic = 'etiquettes_'. _request('suffixe') .'_'. ($typadr=='%'?'all':$typadr) .'_'. ($filtre_email?($filtre_email>0?'avec':'sans'):'quel'). 'email.pdf';
+		$nom_fic = 'etiquettes_'. date('Ymd') . _request('suffixe') .'_'. ($typadr=='%'?'all':$typadr) .'_'. ($filtre_email?($filtre_email>0?'avec':'sans'):'quel'). 'email.pdf';
 		$pdf->Output($nom_fic, 'D');
 //		$message .= _T('asso:etiquette_fichier_telecharger', array('fichier'=>$nom_fic) );
 //	}

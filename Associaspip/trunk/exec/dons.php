@@ -17,15 +17,21 @@ function exec_dons() {
 		echo minipres();
 	} else {
 		include_spip ('association_modules');
+/// INITIALISATIONS
 		$id_don = association_passeparam_id('don');
 		list($id_periode, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
 		if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 			$type = '';
+			$suffixe_pdf = "don$id_don";
+			$critere_type = '';
 		} else { // on peut prendre en compte les filtres ; on recupere les parametres :
  			$type = _request('type'); // type de don
+ 			$suffixe_pdf = "dons_$id_periode".'_'.($type?$type:'tous');
+			$critere_type = $type?"$type AND ":'';
 		}
+/// AFFICHAGES_LATERAUX (connexes)
 		echo association_navigation_onglets('titre_onglet_dons', 'dons');
-		// TOTAUX : nombre de dons selon leur nature
+/// AFFICHAGES_LATERAUX : TOTAUX : nombre de dons selon leur nature
 		$liste_effectifs = array(
 			'argent' => sql_countsel('spip_asso_dons', "argent<>0 AND colis='' AND  $critere_periode"),
 			'colis' => sql_countsel('spip_asso_dons', "argent=0 AND colis<>'' AND  $critere_periode")
@@ -35,18 +41,23 @@ function exec_dons() {
 			'prospect' => array('dons_en_nature', $liste_effectifs['colis'], ),
 			'impair' => array('dons_mixtes', sql_countsel('spip_asso_dons', $critere_periode)-$liste_effectifs['argent']-$liste_effectifs['colis'] ),
 		));
-		// STATS sur les donnations de l'annee
+/// AFFICHAGES_LATERAUX : STATS sur les donnations de l'annee
 		echo association_tablinfos_stats('donnations', 'dons', array('dons_en_argent'=>'argent','dons_en_nature'=>'valeur',), $critere_periode);
-		// TOTAUX : montants des dons et remboursements financiers
+/// AFFICHAGES_LATERAUX : TOTAUX : montants des dons et remboursements financiers
 		$dons_financiers = sql_getfetsel('SUM(argent) AS somme_recettes', 'spip_asso_dons', "argent AND $critere_periode" );
 		$remboursements = sql_getfetsel('SUM(argent) AS somme_reversees', 'spip_asso_dons', "argent AND contrepartie AND $critere_periode" );
 		echo association_tablinfos_montants($id_periode, $dons_financiers, $remboursements);
-		// datation et raccourcis
+/// AFFICHAGES_LATERAUX : RACCOURCIS
 		echo association_navigation_raccourcis(array(
 			array('ajouter_un_don', 'ajout-24.png', array('edit_don'), array('editer_dons', 'association') ),
 		), 2);
+/// AFFICHAGES_LATERAUX : Forms-PDF
+		if ( autoriser('exporter_membres', 'association') ) { // etiquettes
+			echo association_form_etiquettes(" $critere_type $critere_periode ", ' LEFT JOIN spip_asso_dons AS d ON m.id_auteur=d.id_auteur ', $suffixe_pdf);
+		}
+/// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('dons-24.gif', 'tous_les_dons');
-		// FILTRES
+/// AFFICHAGES_CENTRAUX : FILTRES
 		$filtre_typedon = "<select name='type' onchange='form.submit()'>\n";
 		$filtre_typedon .= '<option value="">' ._T('asso:entete_tous') ."</option>\n";
 		$filtre_typedon .= '<option value="argent"'. ($type=='argent'?' selected="selected"':'') .'>'. _T('asso:dons_en_argent') ."</option>\n";
@@ -59,8 +70,7 @@ function exec_dons() {
 		), 'dons', array(
 			'type' => $filtre_typedon,
 		));
-		$critere_type = $type?"$type AND ":'';
-		// TABLEAU
+/// AFFICHAGES_CENTRAUX : TABLEAU
 		echo association_bloc_listehtml2('asso_dons',
 			sql_select("*, CASE WHEN argent<>0 AND colis='' THEN 'argent' WHEN argent=0 AND colis<>''  THEN 'colis' ELSE 'mixte' END AS type_don ", 'spip_asso_dons', "$critere_type $critere_periode", '', 'date_don DESC'), // requete
 			array(
@@ -80,6 +90,7 @@ function exec_dons() {
 			'id_don', // champ portant la cle des lignes et des boutons
 			array('argent'=>'pair', 'colis'=>'prospect', 'mixte'=>'impair'), 'type_don', $id_don
 		);
+/// AFFICHAGES_CENTRAUX : PAGINATION
 		echo association_form_souspage(array('spip_asso_dons', "$critere_type $critere_periode"), 'dons', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($type?"&type='$type'":'') );
 		fin_page_association();
 	}

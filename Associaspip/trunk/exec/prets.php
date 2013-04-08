@@ -17,28 +17,29 @@ function exec_prets() {
 		echo minipres();
 	} else {
 		include_spip ('association_modules');
-		exec_prets_args(association_recuperer_entier('id_pret'));
-	}
-}
-
-function exec_prets_args($id_pret) {
-	list($id_periode, $critere_periode) = association_passeparam_periode('sortie', 'asso_prets', $id_pret);
-	if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
-		$id_ressource = intval(sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=" . intval($id_pret)));
-		$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
-		$statut = '';
-	} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
-		$r = association_controle_id('ressource', 'asso_ressources');
-		if (!$r) return;
-		list($id_ressource, $ressource) = $r;
-		$statut = association_passeparam_statut(); // etat de restitution du pret
-	}
-	echo association_navigation_onglets('titre_onglet_prets', 'ressources');
-	$where = "id_ressource=$id_ressource AND $critere_periode";
+/// INITIALISATIONS
+		$id_pret = association_recuperer_entier('id_pret');
+		list($id_periode, $critere_periode) = association_passeparam_periode('sortie', 'asso_prets', $id_pret);
+		if ($id_pret) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
+			$id_ressource = intval(sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$id_pret"));
+			$ressource = sql_fetsel('*', 'spip_asso_ressources', "id_ressource=$id_ressource");
+			$statut = '';
+			$suffixe_pdf = "pret$id_pret";
+		} else { // on peut prendre en compte les filtres ; on recupere les parametres de :
+			$r = association_controle_id('ressource', 'asso_ressources');
+			if (!$r) return;
+			list($id_ressource, $ressource) = $r;
+			$statut = association_passeparam_statut(); // etat de restitution du pret
+			$suffixe_pdf = "prets_$id_ressource"."_$id_periode".'_'.($statut?$statut:'tous');
+		}
+		$where = "id_ressource=$id_ressource AND $critere_periode";
+/// AFFICHAGES_LATERAUX (connexes)
+		echo association_navigation_onglets('titre_onglet_prets', 'ressources');
 	prets_gauche($id_ressource, $ressource, $where);
 	echo "</div></div>\n";
 	pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $ressource['ud']);
 	fin_page_association();
+	}
 }
 
 function prets_gauche($id_ressource, $ressource, $where) {
@@ -92,10 +93,13 @@ function prets_gauche($id_ressource, $ressource, $where) {
 	// datation et raccourcis
 
 	if ( (is_numeric($ressource['statut']) && $ressource['statut']>0) || $ressource['statut']=='ok' )
-			echo association_navigation_raccourcis(array(
-				array('ressources_titre_liste_ressources', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association')),
-				array('prets_nav_ajouter', 'creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association')),
-			), 15);
+		echo association_navigation_raccourcis(array(
+			array('ressources_titre_liste_ressources', 'grille-24.png', array('ressources', "id=$id_ressource"), array('voir_ressources', 'association')),
+			array('prets_nav_ajouter', 'creer-12.gif', array('edit_pret', "id_ressource=$id_ressource&id_pret=0"), array('editer_prets', 'association')),
+		), 15);
+	if ( autoriser('exporter_membres', 'association') ) { // etiquettes
+		echo association_form_etiquettes($where, ' LEFT JOIN spip_asso_prets AS p ON m.id_auteur=p.id_auteur ', $suffixe_pdf); //!\ reorganiser le code pour prendre en compte le statut/etat de restitution
+	}
 }
 
 function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unite)
@@ -113,11 +117,10 @@ function pret_corps($id_periode, $id_pret, $id_ressource, $where, $statut, $unit
 	$filtre_statut .= "</select>\n";
 	echo association_form_filtres(array(
 		'periode' => array($id_periode, 'asso_prets', 'sortie')),
-				      'prets', array(
-// "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
-			'' => "<input type='hidden' name='id' value='$id_ressource' />",
-			'statut' => $filtre_statut,
-			));
+		'prets', array( // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
+		'' => "<input type='hidden' name='id' value='$id_ressource' />",
+		'statut' => $filtre_statut,
+	));
 	// TABLEAU
 	switch ($statut) {
 			case 'retour' :

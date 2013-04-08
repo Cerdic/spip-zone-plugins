@@ -83,7 +83,7 @@ function action_pdf_membres() {
 		}
 
 		$pdf->Query(sql_select('*, c.libelle as categorie','spip_asso_membres m LEFT JOIN spip_asso_categories c ON m.id_categorie = c.id_categorie', sql_in('id_auteur', $liste_id_auteurs), '', $order), $adresses_tels, 'id_auteur');
-		$nom_fic = 'membres_'. _request('suffixe') .'.pdf';
+		$nom_fic = 'liste_'. date('Ymd') . _request('suffixe') .'.pdf';
 		$pdf->Output($nom_fic, 'D');
 }
 

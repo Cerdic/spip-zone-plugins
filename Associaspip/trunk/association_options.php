@@ -2039,6 +2039,49 @@ function association_form_listepdf($objet, $params=array(), $prefixeLibelle='', 
 	return debut_cadre_enfonce('', TRUE). $res. fin_cadre_enfonce(TRUE);
 }
 
+/**
+ * Boite affichant le formulaire pour genere le PDF des etiquettes
+ *
+ * @param string $where_adherents
+ *   Criteres de requete SQL sur "spip_asso_membres m"
+ * @param string $jointure_adherents
+ *   Possible jonction SQL sur une autre table
+ * @param string $suffixe
+ *   Partie du nom de fichier insere entre "etiquettes" et ".pdf"
+ */
+function association_form_etiquettes($where_adherents, $jointure_adherents='', $suffixe='') {
+	if (!test_plugin_actif('FPDF') OR !test_plugin_actif('COORDONNEES') )
+		return;
+	$frm = '<div>'; //l2.1
+	$frm .= '<input type="hidden" name="where_adherents" value="'. htmlspecialchars($where_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
+	$frm .= '<input type="hidden" name="jointure_adherents" value="'. htmlspecialchars($jointure_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
+	$frm .= '<input type="hidden" name="suffixe" value="'. $suffixe .'" />';
+	$frm .= '</div>'; //l2.1
+	$frm .= '<ul>'; //l2.2
+	$frm .= '<li class="editer_filtre_email">'; //l3.1
+	$frm .= filtre_selecteur_asso_type('%', 'adresse', 'auteur', 1);
+	$frm .= '</li>'; //l3.1
+	$frm .= '<li class="editer_filtre_email">'; //l3.2
+	$frm .= '<em class="explication">'. _T('asso:eti_filtre_emails') .'</em>';
+	$frm .= '<select name="filtre_email" id="filtre_email">';
+	$frm .= '<option value="0">'. _T('asso:membres_bof_email') .'</option>';
+	$frm .= '<option value="-1">'. _T('asso:membres_non_email') .'</option>';
+	$frm .= '<option value="+1">'. _T('asso:membres_oui_email') .'</option>';
+	$frm .= '</select>';
+	$frm .= '</li>'; //l3.2
+	$frm .= '</ul>'; //l2.2
+	$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>'; //l2.3
+
+	$res = '<h3>'. _T('asso:etiquettes') .'</h3>';  //l1.1
+	$res .= '<div class="formulaire_spip formulaire_asso_etiquettes">'; //l1.2
+	$res .= '<p class="legend">'. _T('asso:info_etiquette') .'</p>'; //l2.0
+	$res .= generer_action_auteur('pdf_etiquettes', 0, '', $frm, '', '');
+	$res .= '</div>'; //l1.2
+	if ( autoriser('editer_profil', 'association') )
+		$res .= '<div><a href="'. generer_url_ecrire('parametrer_etiquettes') .'">'. _T('asso:parametrage_des_etiquettes') .'</a></div>'; //l2
+	return debut_cadre_enfonce('', TRUE). $res. fin_cadre_enfonce(TRUE);
+}
+
 /** @} */
 
 /**

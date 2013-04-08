@@ -17,10 +17,28 @@ function exec_adherents() {
 		echo minipres();
 	} else {
 		include_spip('association_modules');
+/// INITIALISATIONS
 		list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 		$lettre = _request('lettre');
+		$id = association_passeparam_id('auteur');
+		if (!$id) { //Filtres ID et groupe :
+			$id = _T('asso:adherent_libelle_id_auteur');
+			$id_groupe = association_recuperer_entier('groupe');
+			$id_categorie = association_recuperer_entier('categorie');
+			if ($id_categorie)
+				$critere = "m.id_categorie=$id_categorie";
+			$suffixe_pdf = "membres_$statut_interne".'_';
+			$suffixe_pdf .= $lettre?str_replace(array('/', '\\', '?', '%', '*', ':', '|', '"', '<', '>', '.', ' ', '(', ')', ';', '&', '#', '[', ']', ), '~', utf8_decode($lettre) ):'tous'; // caracteres problematiques : http://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+			$suffixe_pdf .= "_$id_categorie"."_$id_groupe";
+		} else { // si le filtre ID est actif, on ignore les autres filtres
+			$critere = "m.id_auteur=$id";
+			$id_groupe = 0;
+			$id_categorie = 0;
+			$suffixe_pdf = "membre$id";
+		}
+/// AFFICHAGES_LATERAUX (connexes)
 		echo association_navigation_onglets('titre_onglet_membres', 'adherents');
-		// TOTAUX : effectifs par statuts
+/// AFFICHAGES_LATERAUX : TOTAUX : effectifs par statuts
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // on sort les anciens membres
 		$liste_decomptes = array();
@@ -29,71 +47,20 @@ function exec_adherents() {
 			$liste_decomptes[$classe_css] = array( 'adherent_liste_nombre_'.$statut, sql_countsel('spip_asso_membres', "statut_interne='$statut'"), );
 		}
 		echo association_tablinfos_effectifs('adherents', $liste_decomptes);
-		// TOTAUX : montants des cotisations durant l'annee en cours
+/// AFFICHAGES_LATERAUX : TOTAUX : montants des cotisations durant l'annee en cours
 		$annee = date('Y'); // dans la requete SQL est : DATE_FORMAT(NOW(), '%Y') ou YEAR(NOW())
 		$data = sql_fetsel('SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses', 'spip_asso_comptes', "DATE_FORMAT('date', '%Y')=$annee AND imputation=".sql_quote($GLOBALS['association_metas']['pc_cotisations']) );
 		echo association_tablinfos_montants('cotisations_'.$annee, $data['somme_recettes'], $data['somme_depenses']);
-
-		//Filtres ID et groupe :
-		$id = association_passeparam_id('auteur');
-		$suffixe =  date('Ymd');
-		if (!$id) {
-			$id = _T('asso:adherent_libelle_id_auteur');
-			$id_groupe = association_recuperer_entier('groupe');
-			$id_categorie = association_recuperer_entier('categorie');
-			if ($id_categorie)
-				$critere = "m.id_categorie=$id_categorie";
-			$suffixe .= "_$statut_interne".'_';
-			$suffixe .= $lettre?str_replace(array('/', '\\', '?', '%', '*', ':', '|', '"', '<', '>', '.', ' ', '(', ')', ';', '&', '#', '[', ']', ), '~', utf8_decode($lettre) ):'tous'; // caracteres problematiques : http://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
-			$suffixe .= "_$id_categorie"."_$id_groupe";
-		} else { // si le filtre ID est actif, on ignore les autres filtres
-			$critere = "m.id_auteur=$id";
-			$id_groupe = 0;
-			$id_categorie = 0;
-			$suffixe .= "_membre$id";
-		}
-
-		// datation et raccourcis
+/// AFFICHAGES_LATERAUX : RACCOURCIS
 		echo association_navigation_raccourcis(array(
 			array('gerer_les_groupes', 'annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes utilisateurs et non les autorisations qu'on liste
 			array('menu2_titre_mailing', 'mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
 			array('synchronise_asso_membre_lien', 'reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
 		), 2);
-
-		// on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre pour la generation du pdf
-		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe);
-
-		if ( test_plugin_actif('FPDF') && test_plugin_actif('COORDONNEES') && autoriser('exporter_membres', 'association') ) { // etiquettes
-			echo debut_cadre_enfonce('',TRUE);
-			echo '<h3>'. _T('asso:etiquettes') .'</h3>'; //l1.1
-			echo '<div class="formulaire_spip formulaire_asso_etiquettes">'; //l1.2
-			echo '<p class="legend">'. _T('asso:info_etiquette') .'</p>'; //l2.0
-			$frm .= '<div>'; //l2.1
-			$frm .= '<input type="hidden" name="where_adherents" value="'. htmlspecialchars($where_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
-			$frm .= '<input type="hidden" name="jointure_adherents" value="'. htmlspecialchars($jointure_adherents, ENT_QUOTES, $GLOBALS['meta']['charset']) .'" />';
-			$frm .= '<input type="hidden" name="suffixe" value="'. $suffixe .'" />';
-			$frm .= '</div>'; //l2.1
-			$frm .= '<ul>'; //l2.2
-			$frm .= '<li class="editer_filtre_email">'; //l3.1
-			$frm .= filtre_selecteur_asso_type('%', 'adresse', 'auteur', 1);
-			$frm .= '</li>'; //l3.1
-			$frm .= '<li class="editer_filtre_email">'; //l3.2
-			$frm .= '<em class="explication">'. _T('asso:eti_filtre_emails') .'</em>';
-			$frm .= '<div class="choix">'; //l3.2.1
-			$frm .= '<select name="filtre_email" id="filtre_email">';
-			$frm .= '<option value="0">'. _T('asso:membres_bof_email') .'</option>';
-			$frm .= '<option value="-1">'. _T('asso:membres_non_email') .'</option>';
-			$frm .= '<option value="+1">'. _T('asso:membres_oui_email') .'</option>';
-			$frm .= '</select>';
-			$frm .= '</li>'; //l3.2
-			$frm .= '</ul>'; //l2.2
-			$frm .= '<p class="boutons"><input type="submit" value="'. _T('asso:bouton_imprimer') .'" /></p>'; //l2.3
-			echo generer_action_auteur('pdf_etiquettes', 0, '', $frm, '', '');
-			echo '</div>'; //l1.2
-			if ( autoriser('editer_profil', 'association') ) {
-				echo '<div><a href="'. generer_url_ecrire('parametrer_etiquettes') .'">'. _T('asso:parametrage_des_etiquettes') .'</a></div>'; //l2
-			}
-			echo fin_cadre_enfonce(TRUE);
+/// AFFICHAGES_LATERAUX : Forms-PDF
+		list($where_adherents, $jointure_adherents, $code_liste_membres) = adherents_liste($lettre, $critere, $statut_interne, $id_groupe); // on appelle ici la fonction qui calcule le code du tableau de membres pour pouvoir recuperer la liste des parametres a transmettre pour les pdf
+		if ( autoriser('exporter_membres', 'association') ) { // etiquettes
+			echo association_form_etiquettes($where_adherents, $jointure_adherents, $suffixe_pdf);
 		}
 		if ( autoriser('exporter_membres', 'association')
 		) { // tableau des membres
@@ -104,10 +71,11 @@ function exec_adherents() {
 				$champsExclus[] = 'prenom';
 			if ( !$GLOBALS['association_metas']['id_asso'] )
 				$champsExclus[] = 'id_asso';
-			echo association_form_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe), 'adherent_libelle_', $champsExclus, TRUE);
+			echo association_form_listepdf('membre', array('where_adherents'=>$where_adherents, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe_pdf), 'adherent_libelle_', $champsExclus, TRUE);
 		}
+/// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
-		// FILTRES
+/// AFFICHAGES_CENTRAUX : FILTRES
 		$filtre_categorie = '<select name="categorie" onchange="form.submit()">';
 		$filtre_categorie .= '<option value="" ';
 		$filtre_categorie .= (($id_categorie=='%' || $id_categorie='')?' selected="selected"':'');
@@ -131,7 +99,7 @@ function exec_adherents() {
 		), 'adherents', array(
 			'categorie' => $filtre_categorie,
 		));
-		// Affichage de la liste
+/// AFFICHAGES_CENTRAUX : TABLEAU
 		echo $code_liste_membres;
 		fin_page_association();
 	}
@@ -156,6 +124,7 @@ function exec_adherents() {
  *     filtres actifs et de la configuration (champs affiches ou pas)
  */
 function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
+/// INITIALISATIONS
 	if ($lettre)
 		$critere .= " AND UPPER(m.nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
 	if ($id_groupe) {
@@ -169,6 +138,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
 	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
 	$auteurs = '';
+/// AFFICHAGES_CENTRAUX : TABLEAU
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];
 		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']];
@@ -282,7 +252,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 	. '</tr>'
 	. $auteurs
 	. "\n</table>\n";
-	// SOUS-PAGINATION
+/// AFFICHAGES_CENTRAUX : PAGINATION
 	$arg = array();
 	if ($lettre)
 		$arg[]= "lettre=$lettre";
@@ -306,6 +276,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		.  '</td>';
 	}
 	$res .= association_form_souspage(array('spip_asso_membres', $critere), 'adherents', $arg, $nav);
+// FIN
 	return 	array($critere, $jointure_groupe, generer_form_ecrire('action_adherents', $res));
 }
 
