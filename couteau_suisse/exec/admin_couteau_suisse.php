@@ -162,7 +162,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		}
 		if($infos && $infos['install_test'])
 			 echo $infos['install_test'][1], '<p style="color:red;">', 
-			 	_T($infos['install_test'][0]?'plugin_info_install_ok':'avis_operation_echec'), '</p>';
+			 	isset($GLOBALS['cs_base_update'])?'DB '.join($GLOBALS['cs_base_update'], ' > ').' > ':'',
+			 	_T($infos['install_test'][0]?'plugin_info_install_ok':'avis_operation_echec'),'</p>';
 		unset($infos);
 		parse_str(parametres_css_prive(), $paramcss);
 	} else {
@@ -206,10 +207,13 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
 		$t .= '<br/>&bull;&nbsp;' . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|".couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	$tr = defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'));
-	$t = '<div>' . couteauprive_T('help2', array(
+	$erreur_base = (isset($GLOBALS['meta']['couteau_suisse_base_version']) && version_compare($GLOBALS['meta']['couteau_suisse_base_version'],$cs_version_base,'<'))
+		?"<span style='color:red'>DB v$cs_version_base => v".$GLOBALS['meta']['couteau_suisse_base_version'].' ??</span><br/>':'';
+	$t = '<div>' . $erreur_base . couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
+		
 		. chargement_automatique($dir)
 		. '</div><div>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
 		. ']<br/>&bull;&nbsp;[' . $tr . '|' . $tr . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')

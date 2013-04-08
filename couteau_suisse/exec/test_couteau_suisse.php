@@ -100,7 +100,7 @@ function cs_les_tests() {
 	if(!strlen($dir)) $dir = 'couteau_suisse';
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
 	$t = isset($dir_type)?$get_infos($dir, false, constant($dir_type)):$get_infos($dir);
-	$t['revision'] = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$tmp)) && (preg_match(',<revision>(\d+)</revision>,',$tmp, $r)))?$r[1]:"-";
+	$t['svn.revision'] = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$tmp)) && (preg_match(',<revision>(\d+)</revision>,',$tmp, $r)))?$r[1]:"-";
 	$t['meta/couteau_suisse_base_version'] = $GLOBALS['meta']['couteau_suisse_base_version'];
 	test_outil($t, 'Infos sur votre plugin pr&eacute;f&eacute;r&eacute; :-)');
 

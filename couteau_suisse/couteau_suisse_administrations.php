@@ -1,6 +1,6 @@
 <?php
 // pour tester la MAJ !
-# $GLOBALS['meta']['couteau_suisse_base_version']='1.5';
+# $GLOBALS['meta']['couteau_suisse_base_version']='1.8';
 
 if(!defined('_SPIP20100')) {
 	// Versions SPIP anterieures a 2.1
@@ -66,11 +66,11 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 	$current_version = 0.0;
 	if(	(!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if ($current_version==0.0){
+		if($current_version==0.0){
 			include_spip('base/create');
 			creer_base();
 		}
-		if (cs_le_test($current_version, $tmp, '1.0')){
+		if(cs_le_test($current_version, $tmp, '1.0')){
 			cs_suppr_metas_var('set_options');
 			cs_suppr_metas_var('radio_set_options3');
 			cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
@@ -84,31 +84,37 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 			cs_suppr_metas_var('target_blank');
 			cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
 			cs_suppr_metas_var('');
-			effacer_meta('cs_decoupe');
 			if(defined('_SPIP19300')) {
 				if(@$metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
 				cs_suppr_metas_var('radio_desactive_cache3');
 			}
-			foreach(array('cs_decoration', 'cs_decoration_racc', 'cs_smileys', 'cs_smileys_racc', 'cs_chatons', 'cs_chatons_racc',
-					'cs_jcorner', 'cs_couleurs', 'cs_couleurs_racc', 'cs_filets_sep', 'cs_filets_sep_racc', 'cs_insertions') as $meta) 
+			foreach(array('cs_decoupe', 'cs_decoration', 'cs_decoration_racc', 'cs_smileys', 'cs_smileys_racc', 
+					'cs_chatons', 'cs_chatons_racc', 'cs_jcorner', 'cs_couleurs', 'cs_couleurs_racc', 
+					'cs_filets_sep', 'cs_filets_sep_racc', 'cs_insertions') as $meta) 
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.5')){
+		if(cs_le_test($current_version, $tmp, '1.5')){
 			// nouveau champ 'ordre'
 			include_spip('outils/boites_privees');
 			tri_auteurs_verifie_table(true);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.7')){
+		if(cs_le_test($current_version, $tmp, '1.7')){
 			effacer_meta('tweaks_contribs');
 			// MAJ forcee de tous les fichiers distants
 			cs_maj_forcee(array('ecran_securite', 'previsualisation'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.10')){
+		if(cs_le_test($current_version, $tmp, '1.10')){
 			// MAJ pour rajeunissement
 			cs_maj_forcee(array('maj_auto', 'masquer', 'jcorner'));
+			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+		}
+		if(cs_le_test($current_version, $tmp, '1.11')){
+			// anciens metas inusites
+			foreach(array('tweaks_smileys', 'tweaks_chatons') as $meta) 
+				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas(); # Pour SPIP 1.92
@@ -118,7 +124,7 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 function cs_le_test($current_version, &$tmp, $new) {
 	if($test = version_compare($current_version, $tmp=$new, '<')) {
 		echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
-		$GLOBALS['cs_base_update'] = 1;
+		$GLOBALS['cs_base_update'][] = $tmp;
 	}
 	return $test;
 }
