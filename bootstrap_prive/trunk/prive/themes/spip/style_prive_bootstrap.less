@@ -251,6 +251,17 @@ input[type="file"] {
     margin: 0;
   }
 }
+/*
+ * Pour palier à http://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/bootstrap2spip/css/forms.less#L38 qui est trop restrictif pour le moment et casse le formulaire d'ajout de document sur ?exec=article_edit&id_article=XX
+*/
+.formulaire_spip {
+  > div, fieldset, form, form>div {
+     ul {
+      margin-left: 0;list-style: none;.control-group;
+    }
+  }
+}
+
 .instituer_objet {
   .formulaire_spip {
     .boutons {
