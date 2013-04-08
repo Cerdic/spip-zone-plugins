@@ -24,7 +24,7 @@ function exec_membres_groupe() {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
 		$infos['entete_commentaire'] = $groupe['commentaire'];
-		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
 		echo '<div class="vcard">'. association_tablinfos_intro( '<div class="org" id="vcard-group'.$groupe['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr><abbr class="organization-unit" title="'.$groupe['nom'] .'">'. (($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom']) .'</abbr></div>', 'groupe', $id_groupe, $infos ) .'</div>';
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 		echo association_navigation_raccourcis(array(
@@ -33,7 +33,7 @@ function exec_membres_groupe() {
 		), $id_groupe<100?10:11);
 /// AFFICHAGES_LATERAUX : Forms-PDF
 		if ( autoriser('exporter_membres', 'association') ) { // etiquettes
-			echo association_form_etiquettes(" g.id_groupe=$id_groupe ", ' LEFT JOIN spip_asso_groupes_liaisons AS g ON m.id_auteur=g.id_auteur ', "groupe$id_groupe");
+			echo association_form_etiquettes(" g.id_groupe=$id_groupe ", ' LEFT JOIN spip_asso_fonctions AS g ON m.id_auteur=g.id_auteur ', "groupe$id_groupe");
 		}
 /// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('annonce.gif', 'groupe_membres');

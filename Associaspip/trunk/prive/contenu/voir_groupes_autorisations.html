@@ -9,7 +9,7 @@
 <BOUCLE_groupes(ASSO_GROUPES){par id_groupe}{id_groupe <100}>
 		<tr>
 			<td class="text">[(#VAL{asso:groupe_#ID_GROUPE}|_T)]</td>
-			<td class="integer"><BOUCLE_decompte(asso_groupes_liaisons){id_groupe} />#TOTAL_BOUCLE<//B_decompte></td>
+			<td class="integer"><BOUCLE_decompte(asso_fonctions){id_groupe} />#TOTAL_BOUCLE<//B_decompte></td>
 			<td class="text">[(#COMMENTAIRE)]</td>
 			<td class="action"><a title="<:asso:editer_groupe:>" href="#URL_ECRIRE{edit_groupe_autorisations, id=#ID_GROUPE}"><img src="#CHEMIN{img_pack/edit-12.gif}" alt="<:asso:editer_groupe:>"/></a></td>
 			<td class="action"><a title="<:asso:voir_groupe:>" href="#URL_ECRIRE{membres_groupe, id=#ID_GROUPE}"><img src="#CHEMIN{img_pack/voir-12.png}" alt="<:asso:voir_groupe:>" /></a></td>

@@ -29,8 +29,8 @@ function association_vider_tables($nom_meta, $table) {
 		'spip_asso_destination_op',
 		'spip_asso_dons',
 		'spip_asso_exercices',
+		'spip_asso_fonctions',
 		'spip_asso_groupes',
-		'spip_asso_groupes_liaisons',
 		'spip_asso_membres',
 		'spip_asso_plan',
 		'spip_asso_prets',
@@ -472,15 +472,15 @@ function association_maj_53901() {
 		$GLOBALS['tables_principales']['spip_asso_groupes']['field'],
 		$GLOBALS['tables_principales']['spip_asso_groupes']['key']);
 	sql_alter("TABLE spip_asso_groupes AUTO_INCREMENT = 100");
-	sql_create('spip_asso_groupes_liaisons',
-		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['field'],
-		$GLOBALS['tables_principales']['spip_asso_groupes_liaisons']['key']);
+	sql_create('spip_asso_fonctions',
+		$GLOBALS['tables_principales']['spip_asso_fonctions']['field'],
+		$GLOBALS['tables_principales']['spip_asso_fonctions']['key']);
 
 	$liste_membres_bureau = sql_select("id_auteur, fonction" ,"spip_asso_membres", "fonction <> ''"); // si on a des membres avec une fonction definie, on recupere tout...
 	if (sql_count($liste_membres_bureau )) { // ...et on les met dans un groupe appele "Bureau"
 		$id_groupe = sql_insertq("spip_asso_groupes", array('nom' => 'Bureau', 'affichage' => '1')); // on cree un groupe "Bureau"...
 		while ($membre_bureau = sql_fetch($liste_membres_bureau)) { // ...et on y insere tous les membres qui avaient une fonction
-			sql_insertq("spip_asso_groupes_liaisons", array(
+			sql_insertq("spip_asso_fonctions", array(
 				'id_groupe' => $id_groupe,
 				'id_auteur' => $membre_bureau['id_auteur'],
 				'fonction'  => $membre_bureau['fonction'],
@@ -488,7 +488,7 @@ function association_maj_53901() {
 		}
 	}
 
-	sql_alter("TABLE spip_asso_membres DROP fonction"); // on supprime le champ fonction de la table spip_asso_membres car cela est maintenat gere dans spip_asso_groupes_liaisons
+	sql_alter("TABLE spip_asso_membres DROP fonction"); // on supprime le champ fonction de la table spip_asso_membres car cela est maintenat gere dans spip_asso_fonctions
 }
 $GLOBALS['association_maj'][53901] = array(
 	array('association_maj_53901')
@@ -571,7 +571,7 @@ function association_maj_60038() {
 		$max_id = ($max_id<100)?100:$max_id;
 		while ($data=sql_fetch($query)) {
 			sql_updateq('spip_asso_groupes', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on ajoute $max_id_ a l'ID des groupes selectionnes
-			sql_updateq('spip_asso_groupes_liaisons', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on fait pareil dans la table des liaisons
+			sql_updateq('spip_asso_fonctions', array('id_groupe'=>($data['id_groupe']+$max_id)), 'id_groupe='.$data['id_groupe']); // on fait pareil dans la table des liaisons
 		}
 	}
 
@@ -675,21 +675,21 @@ $GLOBALS['association_maj'][66942] = array(
 
 // reorganisation des autorisations
 $GLOBALS['association_maj'][67499] = array(
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>13), 'id_groupe=12' ), // lister livres de comptes et etats comptables
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>43), 'id_groupe=41' ), // lister dons
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>41), 'id_groupe=40' ), // editer dons
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>53), 'id_groupe=51' ), // lister ventes
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>51), 'id_groupe=50' ), // editer ventes
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>66), 'id_groupe=63' ), // lister prets
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>64), 'id_groupe=62' ), // editer prets
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>63), 'id_groupe=61' ), // lister ressources
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>61), 'id_groupe=60' ), // editer ressources
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>23), 'id_groupe=21' ), // voir profil association
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>21), 'id_groupe=20' ), // editer profil association
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>35), 'id_groupe=33' ), // relancer membres
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>33), 'id_groupe=31' ), // voir profils membres
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>31), 'id_groupe=30' ), // editer membres
-	array('sql_update', 'spip_asso_groupes_liaisons', array('id_groupe'=>30), 'id_groupe=32' ), // synchroniser membres
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>13), 'id_groupe=12' ), // lister livres de comptes et etats comptables
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>43), 'id_groupe=41' ), // lister dons
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>41), 'id_groupe=40' ), // editer dons
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>53), 'id_groupe=51' ), // lister ventes
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>51), 'id_groupe=50' ), // editer ventes
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>66), 'id_groupe=63' ), // lister prets
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>64), 'id_groupe=62' ), // editer prets
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>63), 'id_groupe=61' ), // lister ressources
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>61), 'id_groupe=60' ), // editer ressources
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>23), 'id_groupe=21' ), // voir profil association
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>21), 'id_groupe=20' ), // editer profil association
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>35), 'id_groupe=33' ), // relancer membres
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>33), 'id_groupe=31' ), // voir profils membres
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>31), 'id_groupe=30' ), // editer membres
+	array('sql_update', 'spip_asso_fonctions', array('id_groupe'=>30), 'id_groupe=32' ), // synchroniser membres
 );
 
 // ajout de nouvelles autorisations: 61,63,64,66,73,74,76.
@@ -717,9 +717,10 @@ function association_maj_71776() {
 	if ( sql_contsel('spip_association_metas', "nom='destinations' AND valeur='on' ") )
 		sql_update('spip_association_metas', array('valeur'=>'2'), "nom='destinations'");
 }
-$GLOBALS['association_maj'][71776] = array(
+$GLOBALS['association_maj'][71780] = array(
 	array('association_maj_71776'), // conversion/migration
 	array('sql_delete', 'spip_association_metas',  "nom='unique_dest'"), // supprimer l'entree devenue inutile
+	array('spip_query',"RENAME TABLE spip_asso_groupes_liaisons TO spip_asso_fonctions"),
 );
 
 

@@ -33,7 +33,7 @@ function insertion_membres($id_groupe, $id_auteurs) {
 	// l'interface d'ajout de membres depuis la liste des adherents permet d'ajouter a un groupe des membres qui en font deja partie
 	// il faut donc filter les ajouts pour en exclure ceux qui y sont deja sinon c'est erreur SQL et les ajouts ne se font pas
 	$membres = array();
-	$query = sql_select('id_auteur', 'spip_asso_groupes_liaisons', 'id_groupe='.$id_groupe);
+	$query = sql_select('id_auteur', 'spip_asso_fonctions', 'id_groupe='.$id_groupe);
 	while ($row = sql_fetch($query)) {
 		$membres[] = $row['id_auteur'];
 	}
@@ -46,7 +46,7 @@ function insertion_membres($id_groupe, $id_auteurs) {
 		}
 	}
 	if (count($insert_data)) {
-		sql_insertq_multi('spip_asso_groupes_liaisons', $insert_data);
+		sql_insertq_multi('spip_asso_fonctions', $insert_data);
 	}
 }
 

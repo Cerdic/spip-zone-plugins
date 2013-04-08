@@ -26,7 +26,7 @@ function exec_suppr_groupe_args($id_groupe, $groupe) {
 	// INFO
 	$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 	$infos['entete_commentaire'] = $groupe['commentaire'];
-	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
 	echo association_tablinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(

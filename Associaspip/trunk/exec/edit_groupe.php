@@ -25,7 +25,7 @@ function exec_edit_groupe() {
 			list($id_groupe, $groupe) = $r;
 			echo association_navigation_onglets('gestion_groupes', 'adherents');
 			if ($groupe) {
-				$infos = sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe");
+				$infos = sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe");
 				$infos = array('entete_utilise' => _T('asso:nombre_fois', array('nombre'=> $infos)));
 				echo association_tablinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 				$titre = 'titre_editer_groupe';

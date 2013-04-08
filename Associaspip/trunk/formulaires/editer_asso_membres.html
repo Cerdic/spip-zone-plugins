@@ -69,7 +69,7 @@
 			<h3 class="legend"><:asso:rejoindre_un_groupe:></h3>
 			<p class="pagination">#PAGINATION</p>
 			<ul>
-	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_groupes_liaisons){!id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination 40}>
+	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_fonctions){!id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination 40}>
 				<li class="liste_auteurs">
 					<div class="choix">
 						<input type="checkbox" name="id_groupes[]" value="#ID_GROUPE" />

@@ -20,7 +20,7 @@ function action_editer_membre_groupes() {
 
 	$insert_data = array();
 	foreach ($fonctions as $id_groupe => $fonction) {
-		sql_updateq('spip_asso_groupes_liaisons', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
+		sql_updateq('spip_asso_fonctions', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
 	}
 
 	return;

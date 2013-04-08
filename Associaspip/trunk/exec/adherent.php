@@ -70,7 +70,7 @@ function exec_adherent() {
 		debut_cadre_association('annonce.gif', 'membre');
 		if ( autoriser('voir_groupes', 'association') )
 			echo propre($data['commentaire']);
-		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
+		$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 		if (sql_count($query_groupes)) {
 			echo debut_cadre_relief('', TRUE, '', _T('asso:groupes_membre') );
 			echo association_bloc_listehtml2('asso_groupes',

@@ -23,7 +23,7 @@ function exec_edit_groupe_autorisations_args($id_groupe, $groupe) {
 	include_spip ('association_modules');
 	echo association_navigation_onglets('gerer_les_autorisations', 'association');
 	// INFO
-	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_groupes_liaisons',"id_groupe=$id_groupe")) );
+	$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
 	echo association_tablinfos_intro(_T("asso:groupe_".$id_groupe), 'groupe', $id_groupe, $infos );
 	// datation et raccourcis
 	echo association_navigation_raccourcis(array(

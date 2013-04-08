@@ -73,7 +73,7 @@
 					<th><:asso:envoi:></th>
 				</tr>
 				<B_destinataires>
-				<BOUCLE_destinataires(asso_membres asso_groupes_liaison){id_groupe?=#ENV{'filtre_id_groupe'}}{statut_interne IN (#ENV{'statut_interne'}|explode{:})}{par nom_famille,prenom}>
+				<BOUCLE_destinataires(asso_membres asso_fonctions){id_groupe?=#ENV{'filtre_id_groupe'}}{statut_interne IN (#ENV{'statut_interne'}|explode{:})}{par nom_famille,prenom}>
 				<tr class="[(#STATUT_INTERNE|association_styles_des_statuts)]">
 					<td class='integer'><label for='statut#ID_AUTEUR'>#ID_AUTEUR</label></td>
 					<td class='text'><a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#SEXE|association_formater_nom{#PRENOM,#NOM_FAMILLE})]</a></td>

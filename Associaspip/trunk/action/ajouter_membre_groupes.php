@@ -22,7 +22,7 @@ function action_ajouter_membre_groupes() {
 		$insert_data[] = array('id_groupe' => $id_groupe, 'id_auteur' => $id_auteur);
 	}
 	if (count($insert_data)) {
-		sql_insertq_multi('spip_asso_groupes_liaisons', $insert_data);
+		sql_insertq_multi('spip_asso_fonctions', $insert_data);
 	}
 
 	return;

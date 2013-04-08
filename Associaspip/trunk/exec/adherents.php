@@ -129,7 +129,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 		$critere .= " AND UPPER(m.nom_famille) LIKE UPPER('$lettre%') "; // le 1er UPPER (plutot que LOWER puisque les lettres sont mises et passees en majuscule) sur le champ est requis car LIKE est sensible a la casse... le 2nd UPPER est pour contrer les requetes entrees manuellement... (remarque, avec MySQL 5 et SQL Server, on aurait pu avoir simplement "nom_famille LIKE '$lettre%' COLLATE UTF_GENERAL_CI" ou mieux ailleurs : "nom_famille ILIKE '$lettre%'" mais c'est pas forcement portable)
 	if ($id_groupe) {
 		$critere .= " AND g.id_groupe=$id_groupe ";
-		$jointure_groupe = ' LEFT JOIN spip_asso_groupes_liaisons AS g ON m.id_auteur=g.id_auteur ';
+		$jointure_groupe = ' LEFT JOIN spip_asso_fonctions AS g ON m.id_auteur=g.id_auteur ';
 	} else {
 		$jointure_groupe = '';
 	}
@@ -188,7 +188,7 @@ function adherents_liste($lettre, $critere, $statut_interne, $id_groupe) {
 				$auteurs .= '<td class="given-name">'.$data['prenom'].'</td>';
 		if ($GLOBALS['association_metas']['aff_groupes']) {
 			$auteurs .= '<td class="organisation-unit">';
-			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_groupes_liaisons l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
+			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
 				$auteurs .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
 				while ($row_groupes = sql_fetch($query_groupes)) {

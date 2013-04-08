@@ -19,7 +19,7 @@ function action_exclure_membres_groupe_dist() {
 	// cette action peut etre appelee selon trois modes
 	if (strpos($arg, '-')) { // mode d'appel 1 : directement depuis un squelette avec en argument <id_groupe>-<id_auteur>
 		list($id_groupe, $id_auteur) = explode('-', $arg);
-		sql_delete('spip_asso_groupes_liaisons', "id_groupe=".intval($id_groupe)." AND id_auteur=".intval($id_auteur));
+		sql_delete('spip_asso_fonctions', "id_groupe=".intval($id_groupe)." AND id_auteur=".intval($id_auteur));
 	} else { // exclusion en lot de plusieurs membres
 		$id_auteurs = association_recuperer_liste('id_auteurs', TRUE);
 		$id_groupes = _request('id_groupes');
@@ -36,7 +36,7 @@ function action_exclure_membres_groupe_dist() {
 
 function exclusion_membres ($id_groupe, $id_auteurs) {
 	if (count($id_auteurs)) { // securite : ne pas executer la requete s'il n'y a pas de id_auteur
-		sql_delete('spip_asso_groupes_liaisons', 'id_groupe='.intval($id_groupe).' AND '.sql_in('id_auteur', $id_auteurs) );
+		sql_delete('spip_asso_fonctions', 'id_groupe='.intval($id_groupe).' AND '.sql_in('id_auteur', $id_auteurs) );
 	}
 }
 

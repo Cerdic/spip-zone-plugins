@@ -233,18 +233,19 @@ function association_declarer_tables_principales($tables_principales) {
 		'key' => &$spip_asso_groupes_key
 	);
 
-	$spip_asso_groupes_liaisons = array(
+	//-- Table FONCTIONS de membres ----------------------------
+	$spip_asso_fonctions = array(
 		'id_groupe' => "BIGINT UNSIGNED NOT NULL",
 		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
 		'fonction' => "VARCHAR(128) NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
-	$spip_asso_groupes_liaisons_key = array(
+	$spip_asso_fonctions_key = array(
 		'PRIMARY KEY' => 'id_groupe,id_auteur'
 	);
-	$tables_principales['spip_asso_groupes_liaisons'] = array(
-		'field' => &$spip_asso_groupes_liaisons,
-		'key' => &$spip_asso_groupes_liaisons_key
+	$tables_principales['spip_asso_fonctions'] = array(
+		'field' => &$spip_asso_fonctions,
+		'key' => &$spip_asso_fonctions_key
 	);
 
 	//-- Table MEMBRES ----------------------------------------
@@ -322,7 +323,7 @@ function association_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
 	$tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';
 	$tables_interfaces['table_des_tables']['asso_groupes'] = 'asso_groupes';
-	$tables_interfaces['table_des_tables']['asso_groupes_liaisons'] = 'asso_groupes_liaisons';
+	$tables_interfaces['table_des_tables']['asso_fonctions'] = 'asso_groupes_liaisons';
 	$tables_interfaces['table_des_tables']['asso_exercices'] = 'asso_exercices';
 
 	// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
@@ -330,8 +331,8 @@ function association_declarer_tables_interfaces($tables_interfaces) {
 	$tables_interfaces['table_titre']['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
 
 	// jointures
-	$tables_interfaces['tables_jointures']['spip_asso_membres']['id_auteur'] = 'asso_groupes_liaisons';
-	$tables_interfaces['tables_jointures']['spip_asso_groupes']['id_groupe'] = 'asso_groupes_liaisons';
+	$tables_interfaces['tables_jointures']['spip_asso_membres']['id_auteur'] = 'asso_fonctions';
+	$tables_interfaces['tables_jointures']['spip_asso_groupes']['id_groupe'] = 'asso_fonctions';
 	$tables_interfaces['tables_jointures']['spip_asso_destination_op']['id_compte'] = 'asso_comptes';
 	$tables_interfaces['tables_jointures']['spip_asso_destination_op']['id_destination'] = 'asso_destination';
 

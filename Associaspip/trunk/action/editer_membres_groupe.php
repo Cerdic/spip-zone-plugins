@@ -18,11 +18,11 @@ function action_editer_membres_groupe() {
 	$fonctions = association_recuperer_liste('fonctions', TRUE);
 	if ( _request('modifier') ) // mettre a jour les fonctions des membres
 		foreach ($fonctions as $id_auteur => $fonction) {
-			sql_updateq('spip_asso_groupes_liaisons', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
+			sql_updateq('spip_asso_fonctions', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
 		}
 	elseif ( _request('exclure') ) // exclure les membres du groupe
 		foreach ($fonctions as $id_auteur => $fonction) {
-			sql_delete('spip_asso_groupes_liaisons', "id_groupe=$id_groupe AND id_auteur=$id_auteur");
+			sql_delete('spip_asso_fonctions', "id_groupe=$id_groupe AND id_auteur=$id_auteur");
 		}
 
 	return;

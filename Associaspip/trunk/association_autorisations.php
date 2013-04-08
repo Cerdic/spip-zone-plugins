@@ -31,7 +31,7 @@ function is_in_groups($id_auteur, $id_groupes) {
 	} else {
 		$where .= "id_groupe=$id_groupes";
 	}
-	if (sql_countsel("spip_asso_groupes_liaisons", $where) != 0) {
+	if (sql_countsel("spip_asso_fonctions", $where) != 0) {
 		return TRUE;
 	} else {
 		return false;
