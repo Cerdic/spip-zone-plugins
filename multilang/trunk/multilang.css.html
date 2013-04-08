@@ -36,13 +36,12 @@
 }
 
 #SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
-<BOUCLE_langues(POUR){tableau #GET{langues}|explode{','}}>
+<BOUCLE_langues(DATA){source table,#GET{langues}|explode{','}}>
 .multi_lang_#VALEUR {
 	background-position:98% 1px;
 	background-repeat:no-repeat;
 	background-image:url([(#VAL{Multi #VALEUR}|image_typo{taille=11,couleur=cccccc}|extraire_attribut{src}|url_absolue)]);
-}
-</BOUCLE_langues>
+}</BOUCLE_langues>
 
 .multi_lang_no_multi {
 	background-position:98% 1px;
