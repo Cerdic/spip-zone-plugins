@@ -20,9 +20,11 @@
 		<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
 		<label for="aff_id_auteur"><:asso:adherent_libelle_id_auteur:></label>
 		<br />
+	[(#CONFIG{activer_logos}|=={oui}|oui)
 		<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />
 		<label for="aff_photo"><:asso:adherent_libelle_photo:></label>
 		<br />
+	]
 	[(#ENV{civilite}|oui)
 		<input type="checkbox" name="aff_civilite" [(#ENV{aff_civilite}|oui) checked="checked"] id="aff_civilite" />
 		<label for="aff_civilite"><:asso:adherent_libelle_sexe:></label>
@@ -39,17 +41,18 @@
 		<br />
 	]
 	<B_okGrp>
-		<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|oui) checked="checked"] id="aff_groupes" />
-	<BOUCLE_okGrp(ASSO_GROUPES)>
+	<BOUCLE_okGrp(ASSO_GROUPES){id_groupe>100}>
 	</BOUCLE_okGrp>
+		<input type="checkbox" name="aff_groupes" [(#ENV{aff_groupes}|oui) checked="checked"] id="aff_groupes" />
 	</B_okGrp>
 		<input type="checkbox" name="aff_groupes" disabled="disabled" id="aff_groupes" />
 	<//B_okGrp>
 		<label for="aff_groupes"><:asso:adherent_libelle_groupes:></label>
 		<br />
 	<B_okCat>
+	<BOUCLE_okCat(ASSO_CATEGORIES)>
+	</BOUCLE_okCat>
 		<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|oui) checked="checked"] id="aff_categorie" />
-	<BOUCLE_okCat(ASSO_CATEGORIES)></BOUCLE_okCat>
 	</B_okCat>
 		<input type="checkbox" name="aff_categorie" disabled="disabled" id="aff_categorie" />
 	<//B_okCat>
