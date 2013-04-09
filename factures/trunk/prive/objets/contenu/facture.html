@@ -1,26 +1,47 @@
 <BOUCLE_facture(FACTURES){id_facture}>
 
-[<div class="champ contenu_num_facture[ (#NUM_FACTURE*|strlen|?{'',vide})]">
+[<div class="champ invisible contenu_num_facture[ (#NUM_FACTURE*|strlen|?{'',vide})]">
 	<label><:facture:label_num_facture:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{num_facture} num_facture'>(#NUM_FACTURE)</span>
 </div>]
 
-[<div class="champ contenu_id_organisation_emettrice[ (#ID_ORGANISATION_EMETTRICE*|strlen|?{'',vide})]">
-	<label><:facture:label_id_organisation_emettrice:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_organisation_emettrice} id_organisation_emettrice'>(#ID_ORGANISATION_EMETTRICE)</span>
-</div>]
+<div id="organisations_adresses">
+	<div class='emettrice cadre_organisation'>
+		<div class="champ contenu_id_organisation_emettrice">
+			<label><:facture:label_id_organisation_emettrice:> : </label>
+			<BOUCLE_emetteur(ORGANISATIONS){id_organisation=#ID_ORGANISATION_EMETTRICE}{si #ID_ORGANISATION_EMETTRICE}>
+				<strong class='nom'>#NOM</strong>
+				<BOUCLE_adresse_emetteur(ADRESSES){id_organisation}{0,1}>
+					<span class='adresse'>[(#VOIE), ][(#COMPLEMENT) ,][(#BOITE_POSTALE), ][(#CODE_POSTAL) ][(#VILLE)][, (#PAYS)]</span>
+				</BOUCLE_adresse_emetteur>
+			</BOUCLE_emetteur>
+				<span dir='#LANG_DIR' class='id_organisation_emettrice'><:factures:non_renseigne:><span>
+			<//B_emetteur>
+		</div>
+	</div>
+	<div class='receptrice cadre_organisation'>
+		<div class="champ contenu_id_organisation[ (#ID_ORGANISATION*|strlen|?{'',vide})]">
+			<label><:facture:label_id_organisation:> : </label>
+			<BOUCLE_recepteur(ORGANISATIONS){id_organisation}{si #ID_ORGANISATION}>
+				<strong class='nom'>#NOM</strong>
+				<BOUCLE_adresse_recepteur(ADRESSES){id_organisation}{0,1}>
+					<span class='adresse'>[(#VOIE), ][(#COMPLEMENT) ,][(#BOITE_POSTALE), ][(#CODE_POSTAL) ][(#VILLE)][, (#PAYS)]</span>
+				</BOUCLE_adresse_recepteur>
+			</BOUCLE_recepteur>
+				<span dir='#LANG_DIR' class='id_organisation'><:factures:non_renseigne:><span>
+			<//B_recepteur>
+		</div>
+	</div>
+</div>
 
-[<div class="champ contenu_id_organisation[ (#ID_ORGANISATION*|strlen|?{'',vide})]">
-	<label><:facture:label_id_organisation:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_organisation} id_organisation'>(#ID_ORGANISATION)</span>
-</div>]
+
 
 [<div class="champ contenu_date_facture[ (#DATE_FACTURE*|strlen|?{'',vide})]">
 	<label><:facture:label_date_facture:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{date_facture} date_facture'>(#DATE_FACTURE)</span>
 </div>]
 
-[<div class="champ contenu_libelle_facture[ (#LIBELLE_FACTURE*|strlen|?{'',vide})]">
+[<div class="champ invisible contenu_libelle_facture[ (#LIBELLE_FACTURE*|strlen|?{'',vide})]">
 	<label><:facture:label_libelle_facture:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{libelle_facture} libelle_facture'>(#LIBELLE_FACTURE)</span>
 </div>]

@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
+	// N
+	'non_renseigne' => 'Non renseigné',
+
 	// T
 	'titre_page_configurer_factures' => 'Configurer Factures & Devis',
 );

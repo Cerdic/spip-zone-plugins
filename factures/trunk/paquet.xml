@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.9"
+	version="1.0.10"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
