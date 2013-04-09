@@ -1,0 +1,21 @@
+
+<B_annees>
+<div class='liste annees'>
+	<h3>Années</h3>
+	<ul class='liste-items'>
+		<li class='item[(#ENV{annee}|non) on active]'>
+			[(#SELF
+				|parametre_url{annee,''}
+				|lien_ou_expose{Toutes,#ENV{annee}|non})]
+		</li>
+	<BOUCLE_annees(FACTURES){fusion YEAR(date_facture)}{!par date_facture}>
+		#SET{annee,#DATE_FACTURE|affdate{Y}}
+		<li class='item[(#ENV{annee}|=={#GET{annee}}|oui) on active]'>
+			[(#SELF
+				|parametre_url{annee,#GET{annee}}
+				|lien_ou_expose{#GET{annee},#ENV{annee}|=={#GET{annee}}})]
+		</li>
+	</BOUCLE_annees>
+	</ul>
+</div>
+</B_annees>

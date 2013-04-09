@@ -17,8 +17,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_factures(FACTURES){id_organisation_emettrice?}{id_organisation?}{id_mot?}{id_auteur?}{where?}{recherche?}
-			{tri #ENV{par,date_facture},#GET{defaut_tri}}{!par date_facture}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_factures(FACTURES)
+			{id_organisation_emettrice?}{id_organisation?}{id_mot?}{id_auteur?}{where?}{recherche?}
+			{tri #ENV{par,date_facture},#GET{defaut_tri}}{!par date_facture}{pagination #ENV{nb,10}}
+			{fannees date_facture,#ENV{annee}}
+			>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{facture-16.png}|balise_img)]</td>
 			<td class='libelle_facture principale'>[(#LOGO_FACTURE|image_reduire{20,26})]<a href="[(#ID_FACTURE|generer_url_entite{facture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_FACTURE">[(#RANG). ]#LIBELLE_FACTURE</a></td>
