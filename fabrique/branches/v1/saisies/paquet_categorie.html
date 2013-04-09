@@ -1,7 +1,21 @@
 <B_categories>
 <select name="#ENV{nom}" id="champ_#ENV{nom}">
 	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES}>
+<BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES|sinon{#ARRAY{
+'communication','communication',
+'edition','edition',
+'multimedia','multimedia',
+'navigation','navigation',
+'date','date',
+'divers','divers',
+'auteur','auteur',
+'statistique','statistique',
+'performance','performance',
+'maintenance','maintenance',
+'outil','outil',
+'theme','theme',
+'squelette','squelette',
+'aucune','aucune'}}}>
 	[(#CLE|!={aucune}|oui) 
 	<option value="#CLE"[ (#ENV{valeur,#ENV{defaut}}|=={#CLE}|oui)selected="selected"]>
 		#VALEUR
