@@ -94,37 +94,5 @@ function autoriser_projetscadre_supprimer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
-// -----------------
-// Objet projets_categories
-
-
-// bouton de menu
-function autoriser_projetscategories_menu_dist($faire, $type, $id, $qui, $opts){
-	return true;
-} 
-
-
-// creer
-function autoriser_projetscategorie_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
-}
-
-// voir les fiches completes
-function autoriser_projetscategorie_voir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
-}
-
-// modifier
-function autoriser_projetscategorie_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
-}
-
-// supprimer
-function autoriser_projetscategorie_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
-}
-
-
-
 
 ?>

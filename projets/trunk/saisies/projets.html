@@ -4,7 +4,7 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_projets(PROJETS){par num nom, nom}{statut?}{racine}{id_parent?}{id_projets_cadre?}{id_projets_categorie?}{recherche?}{tout}>
+	<BOUCLE_projets(PROJETS){par num nom, nom}{statut?}{racine}{id_parent?}{id_projets_cadre?}{recherche?}{tout}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_PROJET"[(#ID_PROJET|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#NOM</option>]
 		[(#ENV{multiple}|non)

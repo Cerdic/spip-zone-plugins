@@ -15,11 +15,10 @@ function projets_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['projets'] = 'projets';
 	$interfaces['table_des_tables']['projets_cadres'] = 'projets_cadres';
-	$interfaces['table_des_tables']['projets_categories'] = 'projets_categories';
 
 	$interfaces['table_des_traitements']['OBJECTIF']['projets'] = _TRAITEMENT_RACCOURCIS;
-	$interfaces['table_des_traitements']['ENJEUX']['projets'] = _TRAITEMENT_RACCOURCIS;
-	$interfaces['table_des_traitements']['METHODE']['projets'] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['ENJEUX']['projets']   = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['METHODE']['projets']  = _TRAITEMENT_RACCOURCIS;
 
 	return $interfaces;
 }
@@ -39,7 +38,6 @@ function projets_declarer_tables_objets_sql($tables) {
 			"nom"                   => "varchar(75) DEFAULT '' NOT NULL",
 			"url_site"              => "varchar(255) DEFAULT '' NOT NULL",
 			"id_projets_cadre"      => "int(11) DEFAULT 0 NOT NULL",
-			"id_projets_categorie"  => "int(11) DEFAULT 0 NOT NULL",
 			"date_debut"            => "datetime NULL DEFAULT NULL",
 			"date_livraison_prevue" => "datetime NULL DEFAULT NULL",
 			"date_livraison"        => "datetime NULL DEFAULT NULL",
@@ -60,9 +58,9 @@ function projets_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		'date' => "date_publication",
-		'champs_editables'  => array('id_parent', 'nom', 'url_site', 'id_projets_cadre', 'id_projets_categorie', 'date_debut', 'date_livraison_prevue', 'date_livraison', 'nb_heures_estimees', 'nb_heures_reelles', 'actif', 'objectif', 'enjeux', 'methode', 'descriptif'),
-		'champs_versionnes' => array('nom', 'id_projets_categorie', 'objectif', 'enjeux', 'methode', 'descriptif'),
-		'rechercher_champs' => array("nom" => 7, "url_site" => 2, "id_projets_categorie" => 2, "objectif" => 3, "enjeux" => 2, "methode" => 1, "descriptif" => 2),
+		'champs_editables'  => array('id_parent', 'nom', 'url_site', 'id_projets_cadre', 'date_debut', 'date_livraison_prevue', 'date_livraison', 'nb_heures_estimees', 'nb_heures_reelles', 'actif', 'objectif', 'enjeux', 'methode', 'descriptif'),
+		'champs_versionnes' => array('nom', 'objectif', 'enjeux', 'methode', 'descriptif'),
+		'rechercher_champs' => array("nom" => 7, "url_site" => 2, "objectif" => 3, "enjeux" => 2, "methode" => 1, "descriptif" => 2),
 		'tables_jointures'  => array('spip_projets_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'          => 'projet:texte_statut_preparation',
@@ -113,7 +111,6 @@ function projets_declarer_tables_objets_sql($tables) {
 		),
 		'texte_changer_statut' => 'projet:texte_changer_statut_projet',
 
-
 	);
 
 	$tables['spip_projets_cadres'] = array(
@@ -136,31 +133,8 @@ function projets_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array("titre" => 2),
 		'tables_jointures'  => array(),
 
-
 	);
 
-	$tables['spip_projets_categories'] = array(
-		'type' => 'projets_categorie',
-		'principale' => "oui",
-		'table_objet_surnoms' => array('projetscategorie'), // table_objet('projets_categorie') => 'projets_categories'
-		'field'=> array(
-			"id_projets_categorie" => "bigint(21) NOT NULL",
-			"titre"              => "tinytext NOT NULL DEFAULT ''",
-			"descriptif"         => "text NOT NULL DEFAULT ''",
-			"maj"                => "TIMESTAMP"
-		),
-		'key' => array(
-			"PRIMARY KEY"        => "id_projets_categorie",
-		),
-		'titre' => "titre AS titre, '' AS lang",
-		 #'date' => "",
-		'champs_editables'  => array('titre', 'descriptif'),
-		'champs_versionnes' => array('titre', 'descriptif'),
-		'rechercher_champs' => array("titre" => 2, "descriptif" => 3),
-		'tables_jointures'  => array(),
-
-
-	);
 
 	return $tables;
 }

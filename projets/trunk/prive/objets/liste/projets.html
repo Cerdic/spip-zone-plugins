@@ -20,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets(PROJETS){id_parent?}{id_projets_cadre?}{id_projets_categorie?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_publication},#GET{defaut_tri}}{!par date_publication}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets(PROJETS){id_parent?}{id_projets_cadre?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date_publication},#GET{defaut_tri}}{!par date_publication}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projet-16.png}|balise_img)]</td>
 			<td class='statut'>[(#STATUT|puce_statut{projet,#ID_PROJET})]</td> 

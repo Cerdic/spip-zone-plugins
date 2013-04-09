@@ -18,27 +18,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function projets_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	# 
-	# $maj['create'] = array(array('creer_base'));
-	#
-	# include_spip('inc/config')
-	# $maj['create'] = array(
-	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
-	#	array('ecrire_config', array('projets', array('exemple' => "Texte de l'exemple")))
-	#);
-	#
-	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
-	# $maj['1.2.0']  = array(array('sql_alter','TABLE spip_xx DROP COLUMN id_auteur'));
-	# $maj['1.3.0']  = array(
-	#	array('sql_alter','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
-	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
-	# );
-	# ...
 
-	$maj['create'] = array(array('maj_tables', array('spip_projets', 'spip_projets_liens', 'spip_projets_cadres', 'spip_projets_categories')));
+	$maj['create'] = array(array('maj_tables', array('spip_projets', 'spip_projets_liens', 'spip_projets_cadres')));
 
+	// on ne gère plus les categories de projets (voir avec les groupes de mots si les gens en veulent).
+	$maj['1.1.0']  = array(
+		array('sql_drop_table', 'spip_projets_categories'),
+		array('sql_alter', 'TABLE spip_projets DROP id_projets_categorie'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -51,20 +39,15 @@ function projets_upgrade($nom_meta_base_version, $version_cible) {
  * - supprimer les tables et les champs créés par le plugin. 
 **/
 function projets_vider_tables($nom_meta_base_version) {
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	# sql_drop_table("spip_xx");
-	# sql_drop_table("spip_xx_liens");
 
 	sql_drop_table("spip_projets");
 	sql_drop_table("spip_projets_liens");
 	sql_drop_table("spip_projets_cadres");
-	sql_drop_table("spip_projets_categories");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('projet', 'projets_cadre', 'projets_categorie')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('projet', 'projets_cadre', 'projets_categorie')));
-	sql_delete("spip_forum",                 sql_in("objet", array('projet', 'projets_cadre', 'projets_categorie')));
+	sql_delete("spip_versions",              sql_in("objet", array('projet', 'projets_cadre')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('projet', 'projets_cadre')));
+	sql_delete("spip_forum",                 sql_in("objet", array('projet', 'projets_cadre')));
 
 	effacer_meta($nom_meta_base_version);
 }

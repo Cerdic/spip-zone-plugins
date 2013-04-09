@@ -1,17 +1,13 @@
 <paquet
 	prefix="projets"
 	categorie="divers"
-	version="1.0.5"
+	version="1.0.6"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets-64.png"
 	documentation=""
-	schema="1.0.0"
+	schema="1.1.0"
 >
-	<!--
-		Paquet généré le 2012-09-19 18:21:30
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
 
 	<nom>projets</nom>
 
@@ -19,25 +15,6 @@
 	<auteur>Cyril Marion</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="projets_autorisations.php" />
-		<pipeline nom="insert_head" inclure="projets_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="projets" titre="projets:projets_titre" parent="menu_edition"  icone="images/projets-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="projets" titre="projets:projets_titre" parent="configuration" icone="images/projets-24.png" />
-	-->
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
 	<necessite nom="verifier" compatibilite="[0.1.10;]" />
@@ -52,6 +29,4 @@
 	<pipeline nom="optimiser_base_disparus" inclure="projets_pipelines.php" />
 
 	<menu nom="projets" titre="projet:titre_projets" parent="menu_edition" icone="images/projet-16.png" action="projets" />
-	<!--menu nom="projets_cadres" titre="projets_cadre:titre_projets_cadres" parent="menu_edition" icone="images/projets_cadre-16.png" action="projets_cadres" /-->
-	<!--menu nom="projets_categories" titre="projets_categorie:titre_projets_categories" parent="menu_edition" icone="images/projets_categorie-16.png" action="projets_categories" /-->
 </paquet>
