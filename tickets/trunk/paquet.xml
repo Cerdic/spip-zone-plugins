@@ -1,9 +1,9 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="2.5.4"
-	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	version="2.5.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"
 	schema="1.4.2"
 	documentation="http://www.spip-contrib.net/Tickets-suivi-de-bugs"
