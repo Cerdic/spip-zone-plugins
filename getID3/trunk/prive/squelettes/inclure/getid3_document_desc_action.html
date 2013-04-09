@@ -1,3 +1,0 @@
-<BOUCLE_doc(DOCUMENTS){si #AUTORISER{modifier,document,#ENV{id_document}}}{id_document}{tout}>
-[(#MEDIA|in_array{#LISTE{audio,video}}|oui) | [(#BOUTON_ACTION{<:getid3:lien_recuperer_infos:>,#URL_ACTION_AUTEUR{getid3_infos,#ID_DOCUMENT,#SELF|ancre_url{doc_#ID_DOCUMENT}},ajax})]]
-</BOUCLE_doc>

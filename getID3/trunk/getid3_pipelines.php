@@ -125,7 +125,7 @@ function getid3_post_edition($flux){
 /**
  * Insertion dans le pipeline post_edition (plugin medias)
  * 
- * Ajouter le lien vers la récupératio et la modif des id3
+ * Ajouter le lien vers la récupération et la modif des id3
  *
  * @param array $flux
  * 		Le contexte du pipeline
@@ -133,22 +133,7 @@ function getid3_post_edition($flux){
  * 		Le contexte du pipeline modifié
  */
 function getid3_document_desc_actions($flux){
-	if(!function_exists('lire_config'))
-		include_spip('inc/config');
-	$son_modif_id3 = lire_config('getid3_write',array('mp3'));
-	$infos = sql_fetsel('distant,extension,media','spip_documents','id_document='.intval($flux['args']['id_document']));
-	
-	if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_modif_id3)){
-		$redirect = self();
-		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.intval($flux['args']['id_document'])),'redirect',$redirect);
-		$texte = _T('getid3:lien_modifier_id3');
-		if($flux['args']['position'] == 'galerie')
-			$flux['data'] .= "[<a href='$url' class='ajax'>$texte</a>]";
-		else
-			$flux['data'] .= "<span class='sep'> | </span><a href='$url' target='_blank' class='editbox'>$texte</a>";
-	}
-	if(($infos['distant'] == 'non') && in_array($infos['media'],array('video','audio')))
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/getid3_document_desc_action',$flux['args']);
+	$flux['data'] .= recuperer_fond('prive/squelettes/inclure/metadatas_document_desc_action',$flux['args']);
 	return $flux;
 }
 
