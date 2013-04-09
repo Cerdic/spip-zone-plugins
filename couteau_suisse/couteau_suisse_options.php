@@ -149,7 +149,7 @@ else {
 	}
 
 	// a-t-on voulu inclure couteau_suisse_fonctions.php ?
-	if ($GLOBALS['cs_fonctions_essai']) {
+	if (isset($GLOBALS['cs_fonctions_essai']) && $GLOBALS['cs_fonctions_essai']) {
 		if(defined('_LOG_CS')) cs_log(" -- lancement de cs_charge_fonctions()");
 		cs_charge_fonctions();
 	}
