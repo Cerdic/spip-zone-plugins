@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.11"
+	version="1.0.12"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
@@ -22,7 +22,9 @@
 	<pipeline nom="autoriser" inclure="factures_autorisations.php" /> 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/factures.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/factures.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/factures.php" />
+
+    <pipeline nom="afficher_complement_objet" inclure="factures_pipelines.php" />
 
 	<menu nom="factures" titre="facture:titre_factures" parent="menu_edition" icone="images/facture-16.png" action="factures" /> 
 	<menu nom="facture_creer" titre="facture:icone_creer_facture" parent="outils_rapides" icone="images/facture-new-16.png" action="facture_edit" parametres="new=oui" /> 
