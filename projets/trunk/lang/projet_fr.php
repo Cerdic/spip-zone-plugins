@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_actif' => 'Actif',
+	'label_date_publication' => 'Date de publication',
 	'label_date_debut' => 'Date de démarrage',
 	'label_date_livraison' => 'Date livraison effective',
 	'label_date_livraison_prevue' => 'Date livraison prévue',

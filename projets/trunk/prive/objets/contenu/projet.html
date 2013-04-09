@@ -1,11 +1,17 @@
 <BOUCLE_projet(PROJETS){id_projet}{statut?}>
 
-[<div class="champ contenu_id_parent[ (#ID_PARENT*|strlen|?{'',vide})]">
+<BOUCLE_si_parent(CONDITION){si #ID_PARENT|intval}>
+<div class="champ contenu_id_parent[ (#ID_PARENT*|strlen|?{'',vide})]">
 	<label><:projet:label_id_parent:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_parent} id_parent'>(#ID_PARENT)</span>
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{id_parent} id_parent'>
+		<BOUCLE_parent(PROJETS){id_projet=#ID_PARENT}{statut==.*}>
+			<a href='[(#ID_PROJET|generer_url_entite{projet})]'>#NOM</a>
+		</BOUCLE_parent>
+	</span>
+</div>
+</BOUCLE_si_parent>
 
-[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+[<div class="champ invisible contenu_nom[ (#NOM*|strlen|?{'',vide})]">
 	<label><:projet:label_nom:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
 </div>]
@@ -15,24 +21,28 @@
 	<span dir='#LANG_DIR' class='#EDIT{url_site} url_site'>(#URL_SITE)</span>
 </div>]
 
-[<div class="champ contenu_id_projets_cadre[ (#ID_PROJETS_CADRE*|strlen|?{'',vide})]">
+<BOUCLE_si_cadre(CONDITION){si #ID_PROJETS_CADRE|intval}>
+<div class="champ contenu_id_projets_cadre[ (#ID_PROJETS_CADRE*|strlen|?{'',vide})]">
 	<label><:projet:label_id_projets_cadre:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_projets_cadre} id_projets_cadre'>(#ID_PROJETS_CADRE)</span>
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{id_projets_cadre} id_projets_cadre'>
+		<BOUCLE_cadre(PROJETS_CADRES){id_projets_cadre}>#TITRE</BOUCLE_cadre>
+	</span>
+</div>
+</BOUCLE_si_cadre>
 
 [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
 	<label><:projet:label_date_debut:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT)</span>
+	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|affdate)</span>
 </div>]
 
 [<div class="champ contenu_date_livraison_prevue[ (#DATE_LIVRAISON_PREVUE*|strlen|?{'',vide})]">
 	<label><:projet:label_date_livraison_prevue:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_livraison_prevue} date_livraison_prevue'>(#DATE_LIVRAISON_PREVUE)</span>
+	<span dir='#LANG_DIR' class='#EDIT{date_livraison_prevue} date_livraison_prevue'>(#DATE_LIVRAISON_PREVUE|affdate)</span>
 </div>]
 
 [<div class="champ contenu_date_livraison[ (#DATE_LIVRAISON*|strlen|?{'',vide})]">
 	<label><:projet:label_date_livraison:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_livraison} date_livraison'>(#DATE_LIVRAISON)</span>
+	<span dir='#LANG_DIR' class='#EDIT{date_livraison} date_livraison'>(#DATE_LIVRAISON|affdate)</span>
 </div>]
 
 [<div class="champ contenu_nb_heures_estimees[ (#NB_HEURES_ESTIMEES*|strlen|?{'',vide})]">

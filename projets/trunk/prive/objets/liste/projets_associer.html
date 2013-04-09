@@ -1,11 +1,13 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi nom,1,
+	date_debut,-1, 
 	date_publication,-1, 
 	id_projet,1
 }})
 ]
 #SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
 #SET{debut,#ENV{debutproa,#EVAL{_request("debutproa");}}}
+<input type="hidden" name="debutproa" value="#GET{debut}" />
 <B_liste_projets>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
@@ -41,6 +43,7 @@ a mis a jour la valeur avec la page reelle]
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class='nom' scope='col'>[(#TRI{multi nom,<:projet:label_nom:>,ajax})]</th>
+			<th class='date_publication' scope='col'>[(#TRI{date_publication,<:projet:label_date_publication:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -50,6 +53,7 @@ a mis a jour la valeur avec la page reelle]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{projet})]</td> 
 			<td class='nom'>[(#LOGO_PROJET|image_reduire{20,20})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></td>
+			<td class='date_publication'>[(#DATE_PUBLICATION|affdate)]</td>
 			<td class='action'>
 				<button class="button link add" name="ajouter_lien\[projet-#ID_PROJET-#OBJET-#ID_OBJET\]" value="+"><:projet:ajouter_lien_projet:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
