@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin GetID3
+ * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
  * 
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
@@ -90,7 +91,7 @@ function formulaires_editer_id3_traiter($id,$retour=''){
 
 	$ecrire_id3 = charger_fonction('getid3_ecrire_infos','inc');
 	$err = $ecrire_id3($id,$valeurs,$files);
-	spip_log($err,'getid3');
+
 	if(is_array($files)){
 		foreach($files as $file){
 			supprimer_fichier($file);

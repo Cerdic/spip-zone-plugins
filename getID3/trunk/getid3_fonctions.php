@@ -1,13 +1,15 @@
 <?php
 /**
  * GetID3
- * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
  * Les fonctions du plugin
+ * 
+ * @package SPIP\GetID3\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
