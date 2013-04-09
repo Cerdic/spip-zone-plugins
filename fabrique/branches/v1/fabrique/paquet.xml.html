@@ -9,13 +9,13 @@
 	schema="#ENV{paquet/schema}"(#ENV{paquet/administrations}|oui)]
 >
 	<!--
-		Paquet généré le #DATE[
+		Paquet genere le #DATE[
 		(Vous pouvez bien entendu supprimer ces commentaires)(#ENV{paquet/exemples}|oui)]
 	-->
 
 	<nom>#ENV{paquet/nom}</nom>
 [
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->(#ENV{paquet/exemples}|oui)]
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->(#ENV{paquet/exemples}|oui)]
 	<auteur[ lien='(#ENV{paquet/auteur_lien})']>#ENV{paquet/auteur}</auteur>
 
 	<licence>#ENV{paquet/licence}</licence>[(#REM)
@@ -33,7 +33,7 @@
 		* declarer un pipeline 
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_accueil (A eviter), menu_edition, menu_publication,
 				menu_activite, menu_squelette, menu_administration, menu_configuration 
 		<menu nom="#ENV{paquet/prefixe}" titre="#ENV{paquet/prefixe}:#ENV{paquet/prefixe}_titre" parent="menu_edition"  icone="images/#ENV{paquet/prefixe}-16.png" />
 		* parents d'onglets... configuration, plugins, statistiques, ... 
