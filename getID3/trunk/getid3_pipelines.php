@@ -30,8 +30,7 @@ function getid3_post_edition($flux){
 			$son_modif_id3 = array("mp3,ogg,oga,flac");
 			$extensions_vignettes = array("png","gif","jpg");
 			$conf_id3 = lire_config('getid3/reecriture_tags',array());
-			$document = sql_fetsel("*", "spip_documents","id_document=".sql_quote($id_document));
-			$mode = $document['mode'];
+			$document = sql_fetsel("mode,fichier", "spip_documents","id_document=".sql_quote($id_document));
 			if($flux['args']['operation'] == 'ajouter_document'){
 				$getid3_done = true;
 				/**
@@ -39,8 +38,8 @@ function getid3_post_edition($flux){
 				 * Insertion de la vignette automatiquement dans le mp3 si changement
 				 */
 				if( 
-					$mode == 'vignette'
-					&& ($document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document)))
+					$document['mode'] == 'vignette'
+					&& ($document_orig = sql_fetsel('distant,extension,fichier','spip_documents','id_vignette='.intval($id_document)))
 					&& ($document_orig['distant'] != 'oui')
 					&& in_array($document_orig['extension'],$son_modif_id3)
 				){
@@ -78,9 +77,8 @@ function getid3_post_edition($flux){
 						if(in_array($key,$conf_id3))
 							$update = true;
 					}
-					if(is_numeric($flux['data']['id_vignette'])){
+					if(is_numeric($flux['data']['id_vignette']))
 						$update = true;
-					}
 					if($update){
 						$files = null;
 						
@@ -92,15 +90,14 @@ function getid3_post_edition($flux){
 						$recuperer_id3 = charger_fonction('recuperer_id3','inc');
 						$valeurs = $recuperer_id3($fichier);
 						
-						if(is_numeric($flux['data']['id_vignette'])){
+						if(is_numeric($flux['data']['id_vignette']))
 							$files[] = get_spip_doc(sql_getfetsel('fichier','spip_documents','id_document='.intval($flux['data']['id_vignette'])));
-						}
+						
 						foreach($valeurs as $valeur => $info){
-							if(preg_match('/cover/',$valeur) && (count($files) == 0)){
+							if(preg_match('/cover/',$valeur) && (count($files) == 0))
 								$files[] = $info;
-							}else{
-								$valeurs[$valeur] = filtrer_entites($info);
-							}
+							else
+								$valeurs[$valeur] = $info;
 						}
 						
 						if(isset($flux['data']['titre']) && in_array('titre',$conf_id3))
