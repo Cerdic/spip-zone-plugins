@@ -8,12 +8,12 @@
 	schema="0.5.0"
 >	
 
-	<nom>GetId3</nom>
+	<nom>GetID3</nom>
 	<!-- Lire et écrire les tags audio -->
 
 	<auteur mail="booz@rezo.net">BoOz</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
-
+	
 	<copyright>2008-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
@@ -27,4 +27,5 @@
 	
 	<necessite nom="medias" compatibilite="[2.7.30;[" />
 	<utilise nom="licence" />
+	<utilise nom="gis" />
 </paquet>

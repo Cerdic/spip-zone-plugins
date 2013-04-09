@@ -53,11 +53,10 @@ function getid3_post_edition($flux){
 					$files[] = get_spip_doc($document['fichier']);
 					
 					foreach($valeurs as $valeur => $info){
-						if(preg_match('/cover/',$valeur) && (count($files) == 0)){
+						if(preg_match('/cover/',$valeur) && (count($files) == 0))
 							$files[] = $info;
-						}else{
+						else
 							$valeurs[$valeur] = filtrer_entites($info);
-						}
 					}
 					
 					/**
