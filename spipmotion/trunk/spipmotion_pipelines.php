@@ -36,13 +36,15 @@ function spipmotion_document_desc_actions($flux){
 }
 
 /**
- * Pipeline Cron de SPIPmotion (SPIP)
+ * Pipeline taches_generales_cron de SPIPmotion (SPIP)
  *
  * Vérifie la présence à intervalle régulier de fichiers à encoder
  * dans la file d'attente
- *
- * @return L'array des taches complété
- * @param array $taches_generales Un array des tâches du cron de SPIP
+ * 
+ * @param array $taches_generales 
+ * 		Un array des tâches du cron de SPIP
+ * @return array $taches_generales
+ * 		L'array des taches complété
  */
 function spipmotion_taches_generales_cron($taches_generales){
 	$taches_generales['spipmotion_taches_generales'] = 24*60*60;
@@ -60,13 +62,14 @@ function spipmotion_taches_generales_cron($taches_generales){
  * 
  * Lors de la suppression de document, supprime les versions encodées créées par spipmotion s'il y a lieu
  *
- * @return $flux Le contexte de pipeline complété
- * @param array $flux Le contexte du pipeline
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte de pipeline complété
  */
 function spipmotion_post_edition($flux){
 	if(isset($flux['args']['operation']) && in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
 		$id_document = isset($flux['args']['id_objet']) ? intval($flux['args']['id_objet']) : 0;
-		$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 		
 		/**
 		 * Si les metadatas/* on renvoyé un id_gis_meta, on l'associe au document
@@ -91,6 +94,7 @@ function spipmotion_post_edition($flux){
 		 * 
 		 * Correction du ticket http://www.mediaspip.net/ticket/les-conteneurs-sons-et-videos-n
 		 */
+		$infos_doc = sql_fetsel('extension,hasvideo,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
 		if(
 			($flux['args']['operation'] == 'ajouter_document')
 			&& ($infos_doc['extension'] == 'ogg')
@@ -105,7 +109,7 @@ function spipmotion_post_edition($flux){
 				$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 				$id_vignette = $recuperer_logo($id_document,1,$file,$metas,true);
 				sql_updateq('spip_documents',array('id_vignette'=>$id_vignette,'media'=>'video','extension'=>'ogv','fichier'=> set_spip_doc($rep_ogv.$new_file)),'id_document ='.intval($id_document));
-				$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+				$infos_doc = sql_fetsel('extension,hasvideo,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
 			}
 		}
 		/**
@@ -114,7 +118,8 @@ function spipmotion_post_edition($flux){
 		 */
 		
 		if(($infos_doc['mode'] != 'vignette') && ($infos_doc['distant'] == 'non')){
-			include_spip('inc/config');
+			if(!function_exists('lire_config'))
+				include_spip('inc/config');
 			/**
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements :
@@ -279,11 +284,11 @@ function spipmotion_formulaire_traiter($flux){
  * 		Le contexte du pipeline modifié
  */
 function spipmotion_recuperer_fond($flux){
-	if ($flux['args']['fond']=='modeles/document_desc'){
+	if (!defined('_DIR_PLUGIN_GETID3') && $flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
-			$extension = sql_getfetsel("extension", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
-			if(in_array($extension,lire_config('spipmotion/fichiers_videos',array()))){
-				$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/prive_infos_video', $flux['args']['contexte']);
+			$media = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
+			if(in_array($media,array('video','audio'))){
+				$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/prive_infos_media', $flux['args']['contexte']);
 			}
 		}
 	}
