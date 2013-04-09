@@ -89,6 +89,7 @@ function auth_pmb_dist ($login, $pass, $serveur='') {
 		$ws = pmb_webservice();
 		//$session_id = $ws->pmbesOPACEmpr_login($login,$pass);
 		$session_id = $ws->pmbesOPACEmpr_login_md5($login, md5($pass));
+
 		if ($session_id) {
 			// importer les infos depuis pmb, 
 			// avec le statut par defaut a l'install
