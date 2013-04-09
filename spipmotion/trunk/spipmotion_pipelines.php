@@ -21,11 +21,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * (Dans le cas d'un son, c'est le plugin getID3 qui s'en charge si présent)
  * - bouton de demande d'encodage / de réencodage du son ou de la vidéo
  * 
- * @param array $flux Le contexte du pipeline
- * @return $flux Le contexte du pipeline complété
+ * On utilise le même inclure que GetID3 que l'on surcharge, donc on ne l'inclue à 
+ * nouveau que si GetID3 n'est pas là
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return $flux 
+ * 		Le contexte du pipeline complété
  */
 function spipmotion_document_desc_actions($flux){
-	$flux['data'] .= recuperer_fond('prive/squelettes/inclure/spipmotion_document_desc_action',$flux['args']);
+	if(!defined('_DIR_PLUGIN_GETID3'))
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/metadatas_document_desc_action',$flux['args']);
 	return $flux;
 }
 

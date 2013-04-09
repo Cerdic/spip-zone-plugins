@@ -148,6 +148,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if($duree > 0)
 			$infos['duree'] = $duree;
 	}
+	
 	/**
 	 * Filesize tout seul est limité à 2Go
 	 * cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
