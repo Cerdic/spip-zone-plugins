@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_organisations"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets-32.png"
@@ -13,7 +13,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="affiche_milieu" inclure="projets_organisations_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="projets_organisations_pipelines.php" />
 
 	<necessite nom='contacts' compatibilite='[2.0;[' />
 	<necessite nom='projets' compatibilite='[1.0;[' />
