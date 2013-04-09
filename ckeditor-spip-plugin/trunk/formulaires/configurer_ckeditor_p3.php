@@ -52,7 +52,6 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				'nom'=>'explication_conversion',
 				'texte' => _T('ckeditor:html2spip_detecte'))
 			) ;
-		//$cvt_explication = _T('ckeditor:html2spip_detecte') ;
 	} else {
 		$cvt_explication = array(
 			'saisie' => 'explication_spip',
@@ -60,7 +59,6 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 				'nom'=>'explication_conversion',
 				'texte' => _T('ckeditor:aide_html2spip_non_trouvee'))
 			) ;
-		//$cvt_explication= _T('ckeditor:aide_html2spip_non_trouvee') ;
 	}
 
 	$valeurs['saisies_cke_page3'] = array(
@@ -240,7 +238,63 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 						'cacher_option_intro' => 'oui',
 						'datas' => array(
 							'auto'=>'Auto détection',
-'af'=>'Afrikaans','ar'=>'Arabic','bg'=>'Bulgarian','bn'=>'Bengali/Bangla','bs'=>'Bosnian','ca'=>'Catalan','cs'=>'Czech','da'=>'Danish','de'=>'German','el'=>'Greek','en'=>'English','en-au'=>'English (Australia)','en-ca'=>'English (Canadian)','en-uk'=>'English (United Kingdom)','eo'=>'Esperanto','es'=>'Spanish','et'=>'Estonian','eu'=>'Basque','fa'=>'Persian','fi'=>'Finnish','fo'=>'Faroese','fr'=>'French','fr-ca'=>'French (Canada)','gl'=>'Galician','gu'=>'Gujarati','he'=>'Hebrew','hi'=>'Hindi','hr'=>'Croatian','hu'=>'Hungarian','is'=>'Icelandic','it'=>'Italian','ja'=>'Japanese','km'=>'Khmer','ko'=>'Korean','lt'=>'Lithuanian','lv'=>'Latvian','mn'=>'Mongolian','ms'=>'Malay','nb'=>'Norwegian Bokmal','nl'=>'Dutch','no'=>'Norwegian','pl'=>'Polish','pt'=>'Portuguese (Portugal)','pt-br'=>'Portuguese (Brazil)','ro'=>'Romanian','ru'=>'Russian','sk'=>'Slovak','sl'=>'Slovenian','sr'=>'Serbian (Cyrillic)','sr-latn'=>'Serbian (Latin)','sv'=>'Swedish','th'=>'Thai','tr'=>'Turkish','uk'=>'Ukrainian','vi'=>'Vietnamese','zh'=>'Chinese Traditional','zh-cn'=>'Chinese Simplified'
+							'af'=>'Afrikaans',
+							'ar'=>'Arabic',
+							'bg'=>'Bulgarian',
+							'bn'=>'Bengali/Bangla',
+							'bs'=>'Bosnian',
+							'ca'=>'Catalan',
+							'cs'=>'Czech',
+							'da'=>'Danish',
+							'de'=>'German',
+							'el'=>'Greek',
+							'en'=>'English',
+							'en-au'=>'English (Australia)',
+							'en-ca'=>'English (Canadian)',
+							'en-uk'=>'English (United Kingdom)',
+							'eo'=>'Esperanto',
+							'es'=>'Spanish',
+							'et'=>'Estonian',
+							'eu'=>'Basque',
+							'fa'=>'Persian',
+							'fi'=>'Finnish',
+							'fo'=>'Faroese',
+							'fr'=>'French',
+							'fr-ca'=>'French (Canada)',
+							'gl'=>'Galician',
+							'gu'=>'Gujarati',
+							'he'=>'Hebrew',
+							'hi'=>'Hindi',
+							'hr'=>'Croatian',
+							'hu'=>'Hungarian',
+							'is'=>'Icelandic',
+							'it'=>'Italian',
+							'ja'=>'Japanese',
+							'km'=>'Khmer',
+							'ko'=>'Korean',
+							'lt'=>'Lithuanian',
+							'lv'=>'Latvian',
+							'mn'=>'Mongolian',
+							'ms'=>'Malay',
+							'nb'=>'Norwegian Bokmal',
+							'nl'=>'Dutch',
+							'no'=>'Norwegian',
+							'pl'=>'Polish',
+							'pt'=>'Portuguese (Portugal)',
+							'pt-br'=>'Portuguese (Brazil)',
+							'ro'=>'Romanian',
+							'ru'=>'Russian',
+							'sk'=>'Slovak',
+							'sl'=>'Slovenian',
+							'sr'=>'Serbian (Cyrillic)',
+							'sr-latn'=>'Serbian (Latin)',
+							'sv'=>'Swedish',
+							'th'=>'Thai',
+							'tr'=>'Turkish',
+							'uk'=>'Ukrainian',
+							'vi'=>'Vietnamese',
+							'zh'=>'Chinese Traditional',
+							'zh-cn'=>'Chinese Simplified'
 						)
 					)
 				)
@@ -284,6 +338,36 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 					)
 				)
 			)
+		),
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'nettoyage_ckeditor',
+				'label' => _T('ckeditor:nettoyage_de_ckeditor'),
+				'pliable' => 'oui',
+				'plie' => 'oui'
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'radio',
+					'options' => array(
+						'nom' => 'nettoyage',
+						'datas' => array(
+							'sources'=>_T('ckeditor:les_sources'),
+							'exemples'=>_T('ckeditor:les_exemples'),
+							'tout'=>_T('ckeditor:les_sources_et_les_exemples')
+						)
+					)
+				),
+				array(
+					'saisie' => 'bouton',
+					'options' => array(
+						'nom' => 'nettoyer',
+						'type' => 'submit',
+						'texte' => _T('ckeditor:nettoyer')
+					)
+				)
+			)
 		)
 
 	) ;
@@ -321,6 +405,47 @@ function formulaires_configurer_ckeditor_p3_traiter_dist() {
 			unset($_POST[$cle]) ;
 		}
 		return array('message_ok' => _T('ckeditor:ck_delete')) ;
+	} else if (_request('nettoyer')) {
+		$cke_path = dirname(_CKE_JS) ;
+		$sources = $cke_path.'/_source' ;
+		$exemples = $cke_path.'/_samples' ;
+		switch (_request('nettoyage')) {
+			case 'sources':
+				if (is_dir($sources)) {
+					ckeditor_efface_repertoire($sources) ;
+					return array('message_ok' => _T('ckeditor:ok_nettoyage_des_sources')) ;
+				} else {
+					return array('message_ok', _T('ckeditor:ok_repertoire_introuvable',array('repertoire'=>$sources))) ;
+				}
+				break ;
+			case 'exemples':
+				if (is_dir($exemples)) {
+					ckeditor_efface_repertoire($exemples) ;
+					return array('message_ok' => _T('ckeditor:ok_nettoyage_des_exemples')) ;
+				} else {
+					return array('message_ok', _T('ckeditor:ok_repertoire_introuvable',array('repertoire'=>$exemples))) ;
+				}
+				break ;
+			case 'tout':
+				$result = array() ;
+				if (is_dir($sources)) {
+					ckeditor_efface_repertoire($sources) ;
+					$result[] = _T('ckeditor:ok_nettoyage_des_sources') ;
+				} else {
+					$result[] = _T('ckeditor:ok_repertoire_introuvable',array('repertoire'=>$sources)) ;
+				}
+				if (is_dir($exemples)) {
+					ckeditor_efface_repertoire($exemples) ;
+					$result[] = _T('ckeditor:ok_nettoyage_des_sources') ;
+				} else {
+					$result[] = _T('ckeditor:ok_repertoire_introuvable',array('repertoire'=>$exemples)) ;
+				}
+				return array('message_ok' => join("<br/>\n",$result)) ;
+				break ;
+			default: 
+				return array('message_erreur' => _T('ckeditor:ko_nettoyage_indetermine')) ;
+				break ;
+		}
 	} else {
 		foreach(preg_split('~\s*;\s*~', _request("protectedtags")) as $tag) {
 			$tag = trim($tag) ;

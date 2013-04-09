@@ -20,6 +20,14 @@ foreach($cke_tags as $tagname => $tagdesc) {
 define( 'PROTECTED_SPIP_TAGS', "(?:".join('|', $protectedtags).")" );unset($protectedtags);
 define( 'CLOSED_PROTECTED_SPIP_TAGS', "(?:".join('|', $closedtags).")" );unset($closedtags);
 
+function ckeditor_efface_repertoire($dir) {
+   $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+      (is_dir("$dir/$file")) ? ckeditor_efface_repertoire("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+  } 
+
 function ckeditor_ecrire_protectedtags($tags=null) {
 		if (! is_array($tags)) { $tags = lire_config('ckeditor/tags') ; }
 		if (! is_array($tags)) { $tags = unserialize(_CKE_TAGS_DEF) ; }

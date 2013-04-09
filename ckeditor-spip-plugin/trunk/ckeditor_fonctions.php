@@ -588,20 +588,6 @@ function ckeditor_preparescript($config) {
 
 	if (!$init_done) {
 		$script = "
-	<script type=\"text/javascript\">
-function initCKEDITOR() { //
-	// la configuration de ckeditor :
-	CKEDITOR.ckeditorpath=".$ckeditor_json_encode(url_absolue(_CKE_JS)).";
-	CKEDITOR.spipurl=".$ckeditor_json_encode(url_absolue(_DIR_RACINE.'spip.php')).";
-	CKEDITOR.ckpreferedversion='"._CKE_PREFERED_VERSION."';
-	CKEDITOR.ckeditmode='$editmode';
-	CKEDITOR.cache_redim=".$ckeditor_json_encode(ckeditor_lire_config('cache_redim', _CKE_CACHE_REDIM_DEF)?true:false).";
-$ajaxload
-	CKEDITOR.ckConfig = ".$ckeditor_json_encode($ckeditor_config_post($cke_cfg)).";
-
-	
-}
-	</script>
 	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
 	<script type=\"text/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
 	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
@@ -621,6 +607,14 @@ $ajaxload
 	}
 	$script .= "	<script type=\"text/javascript\">
 function loadCKEditor() {
+	// la configuration de ckeditor :
+	CKEDITOR.ckeditorpath=".$ckeditor_json_encode(url_absolue(_CKE_JS)).";
+	CKEDITOR.spipurl=".$ckeditor_json_encode(url_absolue(_DIR_RACINE.'spip.php')).";
+	CKEDITOR.ckpreferedversion='"._CKE_PREFERED_VERSION."';
+	CKEDITOR.ckeditmode='$editmode';
+	CKEDITOR.cache_redim=".$ckeditor_json_encode(ckeditor_lire_config('cache_redim', _CKE_CACHE_REDIM_DEF)?true:false).";
+	CKEDITOR.ckConfig = ".$ckeditor_json_encode($ckeditor_config_post($cke_cfg)).";
+
 	var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
 	try {
 		var prefix_id = $(this).attr('id');

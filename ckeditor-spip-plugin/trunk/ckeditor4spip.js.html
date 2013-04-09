@@ -269,7 +269,6 @@ function cke_crayon_submit(editor_id){
 
 function fullInitCKEDITOR(editor_ids){
 	if(!editor_ids)editor_ids=[["textarea[name=texte]","Full"]];
-	initCKEDITOR();
 	CKEDITOR.ckConfig.on={
 		'pluginsLoaded':function(ev){ckeDataProcessor=ev.editor.dataProcessor;ev.editor.dataProcessor=spipDataProcessor;}
 	};
