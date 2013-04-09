@@ -61,7 +61,6 @@
 	[(#INCLURE{fond=inclure/inc-pmb-notices-autres-lecteurs,env,id_notice,ajax,ajaxload})]
 ]
 
-
 <div class="pmb-toolbox" id="compte-lecteur">
 <h2><:pmb:compte_lecteur:></h2>
 <BOUCLE_auteurpmb(AUTEURS_PMB){id_auteur=#SESSION{id_auteur}}>
@@ -71,8 +70,8 @@
 			<strong>[(#PMB_SESSION|pmb_reserver_ouvrage{#ID_NOTICE,'',''})]</strong>
 		]
 		<ul class="spip">
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:ajouter_tag:></a></li>
-			<li><a href="[(#CONFIG{spip_pmb/url}|concat{avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:donner_avis:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|rtrim{/}|concat{/addtags.php}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:ajouter_tag:></a></li>
+			<li><a href="[(#CONFIG{spip_pmb/url}|rtrim{/}|concat{/avis.php}|parametre_url{todo,liste}|parametre_url{noticeid,#ID})]" class="mediabox_iframe"><:pmb:donner_avis:></a></li>
 			<li><a href="[(#URL_PMB_NOTICE|parametre_url{reserver,1})]#compte-lecteur"><:pmb:reserver_ouvrage:></a></li>
 		</ul>
 		<script type='text/javascript'>
