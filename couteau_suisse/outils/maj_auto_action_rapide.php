@@ -34,8 +34,7 @@ if(!function_exists('info_maj_spip')) {
 		if (!$maj) return "";
 		list(,$maj) = explode('|',$maj,2);
 		if (strncmp($maj,"<a",2)==0) $maj = extraire_attribut ($maj, 'title');
-		$lien = "http://www.spip.net/".$GLOBALS['spip_lang']."_download";
-		$res = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>$lien, 'zip'=>''));
+		$res = _T('couteau:maj_rev_ok',array('revision'=>$maj, 'url'=>"http://www.spip.net/$GLOBALS[spip_lang]_download", 'zip'=>''));
 		include_spip('lib/maj_auto/distant_mise_a_jour');
 		return $res;
 	}
@@ -92,6 +91,9 @@ function maj_lire_cookie(i,e){
 
 function info_maj_spip2(){
 	if (!autoriser('webmestre')) return "";
+	$tmp = "<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$GLOBALS['spip_version_branche'])).'</legend>';
+	if(defined('_CS_PAS_DE_DISTANT'))
+		return $tmp . ' <b>'.cs_lien("http://www.spip.net/$GLOBALS[spip_lang]_download", couteauprive_T('version_distante_off')) . '</b></fieldset>';
 	include_spip('inc/presentation');
 	// Plus grosse version de SPIP dispo (API d'origine)
 	$res = info_maj_spip();
@@ -103,8 +105,7 @@ function info_maj_spip2(){
 	if(!strlen($res)) return $res;
 	// liens morts
 	$res = preg_replace(',\[([^[]+)->\],', '$1', $res);		
-	return "<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$GLOBALS['spip_version_branche'])).'</legend>'
-		. propre("\n|{{{$res}}}|")
+	return $tmp	. propre("\n|{{{$res}}}|")
 		. (preg_match(",$m1\.$m2\.\d+,",$res)?'<p>'._T('couteau:maj_spip').'</p>':'').'</fieldset>';
 }
 
@@ -148,11 +149,13 @@ function maj_auto_action_rapide() {
 		. info_maj_spip2();
 	// verification de l'ecran de securite
 	if(defined('_ECRAN_SECURITE')) {
-		$maj = maj_auto_rev_distante(_MAJ_ECRAN_SECU,false,",(\d+\.\d+(\.\d+)?),",0,true);
-		if($maj{0}!="-" && _ECRAN_SECURITE!=$maj) {
+		$tmp = "\n<fieldset><legend class='padd'>"._T('couteauprive:help2', array('version'=>_T('couteauprive:ecran_securite:nom')
+			. ' ' . _ECRAN_SECURITE)) . '</legend>';
+		if(defined('_CS_PAS_DE_DISTANT'))
+			$html1 .= $tmp . ' <b>'.cs_lien(_MAJ_ECRAN_SECU, couteauprive_T('version_distante_off')) . '</b></fieldset>';
+		elseif(($maj = maj_auto_rev_distante(_MAJ_ECRAN_SECU,false,",(\d+\.\d+(\.\d+)?),",0,true)) && $maj{0}!="-" && _ECRAN_SECURITE!=$maj) {
 			include_spip('inc/description_outil');
-			$html1 .= "\n<fieldset><legend class='padd'>"._T('couteauprive:help2', array('version'=>_T('couteauprive:ecran_securite:nom').' '._ECRAN_SECURITE)).'</legend>'
-				. description_outil_liens(_T("couteauprive:ecran_maj_ko2", array("n"=>"<span class='redb'>$maj</span>"))).'</fieldset>';
+			$html1 .= $tmp . description_outil_liens(_T("couteauprive:ecran_maj_ko2", array("n"=>"<span class='redb'>$maj</span>"))) . '</fieldset>';
 		}
 	}
 	// verification des plugins
@@ -173,7 +176,11 @@ function maj_auto_action_rapide() {
 		$nom = trim($infos['nom']);
 		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
 		$maj_lib = $checked = '';
-		if($stop)
+
+		if(defined('_CS_PAS_DE_DISTANT')) 
+			$maj_lib = '[' . couteauprive_T('version_distante_off') . "->$infos[url_origine]]"
+				. ($infos['zip_trac']?" [[zip]->$infos[zip_trac]]":'');
+		elseif($stop)
 			$maj_lib = '<span class="cs_relancer">'._T('couteau:maj_poursuivre').'</span>';
 		elseif($infos['maj_dispo']) { 
 			$maj_lib = _T('couteau:maj_rev_ok', 
@@ -276,7 +283,14 @@ function maj_auto_svp_presenter_messages() {
 			
 // renvoie le pattern present dans la page distante
 // si le pattern est NULL, renvoie un simple 'is_file_exists'
+// retours possibles :
+// -3 si les acces distants sont desactives dans l'outil "Comportement du Couteau Suisse
+// -2 si la page distante est negative au pattern demande
+// -1 si l'acces distant a echoue ou si le timeout est atteint
 function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodified=0, $force=false) {
+	// acces distants desactives ?
+	if(defined('_CS_PAS_DE_DISTANT')) return '-3';
+	// var_mode en parametre URL ?
 	$force |= in_array(_request('var_mode'), array('calcul', 'recalcul'));
 	// pour la version distante, on regarde toutes les 24h00 (meme en cas d'echec)
 	$maj_ = isset($GLOBALS['meta']['tweaks_maj_auto'])?unserialize($GLOBALS['meta']['tweaks_maj_auto']):array();
