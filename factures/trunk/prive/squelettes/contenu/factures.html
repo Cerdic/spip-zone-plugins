@@ -3,7 +3,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/factures, par=libelle_facture, env, ajax, sinon=<:facture:info_aucun_facture:>}>
+<INCLURE{fond=prive/objets/liste/factures, par=date_facture, env, ajax, sinon=<:facture:info_aucun_facture:>}>
 
 [(#AUTORISER{creer,facture})
 	[(#URL_ECRIRE{facture_edit,new=oui}|icone_verticale{<:facture:icone_creer_facture:>,facture,new,right})]

@@ -1,4 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
+	date_facture,-1,
 	libelle_facture,1, 
 	id_facture,1,
 	points,-1
@@ -11,14 +12,17 @@
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
 			<th class='libelle_facture' scope='col'>[(#TRI{libelle_facture,<:facture:label_libelle_facture:>,ajax})]</th>
+			<th class='date_facture' scope='col'>[(#TRI{date_facture,<:facture:label_date_facture:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_facture,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_factures(FACTURES){id_organisation_emettrice?}{id_organisation?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num libelle_facture},#GET{defaut_tri}}{par libelle_facture}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_factures(FACTURES){id_organisation_emettrice?}{id_organisation?}{id_mot?}{id_auteur?}{where?}{recherche?}
+			{tri #ENV{par,date_facture},#GET{defaut_tri}}{!par date_facture}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{facture-16.png}|balise_img)]</td>
 			<td class='libelle_facture principale'>[(#LOGO_FACTURE|image_reduire{20,26})]<a href="[(#ID_FACTURE|generer_url_entite{facture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_FACTURE">[(#RANG). ]#LIBELLE_FACTURE</a></td>
+			<td class='date_facture'>#DATE_FACTURE</td>
 			<td class='id'>[(#AUTORISER{modifier,facture,#ID_FACTURE}|?{
 				<a href="[(#URL_ECRIRE{facture_edit,id_facture=#ID_FACTURE})]">#ID_FACTURE</a>,
 				#ID_FACTURE

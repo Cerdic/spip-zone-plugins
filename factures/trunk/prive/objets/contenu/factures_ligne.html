@@ -1,9 +1,17 @@
 <BOUCLE_factures_ligne(FACTURES_LIGNES){id_factures_ligne}>
 
-[<div class="champ contenu_id_facture[ (#ID_FACTURE*|strlen|?{'',vide})]">
+<div class="champ contenu_id_facture[ (#ID_FACTURE*|strlen|?{'',vide})]">
 	<label><:factures_ligne:label_id_facture:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_facture} id_facture'>(#ID_FACTURE)</span>
-</div>]
+	<BOUCLE_facture(FACTURES){id_facture}>
+	<span dir='#LANG_DIR' class='#EDIT{id_facture} id_facture'>
+		<a href="[(#ID_FACTURE|generer_url_entite{facture})]">
+			<:info_numero_abbreviation:>#ID_FACTURE[,
+			<:facture:label_reference_abbr:> (#NUM_FACTURE)][ :
+			 (#LIBELLE_FACTURE|couper{100})]
+		</a>
+		</span>
+	</BOUCLE_facture>
+</div>
 
 [<div class="champ contenu_position[ (#POSITION*|strlen|?{'',vide})]">
 	<label><:factures_ligne:label_position:> : </label>

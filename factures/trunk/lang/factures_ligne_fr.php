@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_commentaire' => 'Commentaire',
 	'label_designation' => 'Désignation',
-	'label_id_facture' => 'Id facture',
+	'label_id_facture' => 'Facture',
 	'label_position' => 'Position',
 	'label_prix_unitaire_ht' => 'Prix unitaire hors taxes',
 	'label_quantite' => 'Quantité',
