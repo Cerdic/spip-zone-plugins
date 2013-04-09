@@ -1,18 +1,28 @@
 <?php
 /**
  * GetID3
- * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
- * Définition des tables
+ * Fichier gérant l'installation et désinstallation du plugin
  *
+ * @package SPIP\GetID3\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Installation/maj : création des champs manquants dans spip_documents et préconfiguration
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+ */
 function getid3_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 	
@@ -21,10 +31,10 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 		array('getid3_verifier_binaires',array())
 	);
 	$maj['0.1'] = array(
-		array('maj_tables',array('spip_documents')),
+		array('maj_tables',array('spip_documents'))
 	);
 	$maj['0.2'] = array(
-		array('maj_tables',array('spip_documents')),
+		array('maj_tables',array('spip_documents'))
 	);
 	$maj['0.3.1'] = array(
 		array('getid3_verifier_binaires',array())
@@ -32,20 +42,44 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.4.0'] = array(
 		array('getid3_upgrade_compat_spipmotion',array())
 	);
+	$maj['0.5.0'] = array(
+		array('maj_tables',array('spip_documents'))
+	);
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Fonction de suppression du plugin
+ * 
+ * Supprime les deux métas en base, configuration et installation
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * 
+ * @return void
+ */
 function getid3_vider_tables($nom_meta_base_version) {
+	effacer_meta('getid3');
 	effacer_meta($nom_meta_base_version);
 }
 
+/**
+ * Fonction de vérification de la présence des fichiers binaires présents
+ * 
+ * @return void
+ */
 function getid3_verifier_binaires(){
 	$getid3_binaires = charger_fonction('getid3_verifier_binaires','inc');
 	$getid3_binaires(true);
 }
 
+/**
+ * Fonction de mise en concordance de la base entre GetID3 et SPIPmotion
+ * 
+ * @return void
+ */
 function getid3_upgrade_compat_spipmotion(){
 	$desc = sql_showtable('spip_documents', true, $connect);
 	/**
