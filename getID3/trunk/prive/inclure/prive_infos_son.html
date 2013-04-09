@@ -14,7 +14,6 @@
 						<strong><abbr title="[(#FICHIER|basename)]">(#FICHIER|basename|couper{40})</abbr></strong>
 					</td>
 				</tr>]
-
 				<tr>
 					<td class="son_left">
 						<:getid3:info_format:>
@@ -32,7 +31,23 @@
 						<strong>#EXTENSION</strong>
 					</td>
 				</tr>
-
+				<tr>
+					<td class="son_left">
+						<:getid3:info_media:>
+					</td>
+					<td >
+						<strong>#MEDIA</strong>
+					</td>
+				</tr>
+				[(#LARGEUR|intval|>{0}|et{#HAUTEUR|intval|>{0}}|oui)
+				<tr>
+					<td class="son_left">
+						<:getid3:info_format:>
+					</td>
+					<td >
+					<strong>#LARGEUR/#HAUTEUR px</strong>
+					</td>
+				</tr>]
 				[<tr>
 					<td class="son_left">
 						<:getid3:info_duree:>

@@ -1,70 +1,185 @@
 <?php
 /**
  * GetID3
- * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Récupération des informations d'un document ou d'un fichier audio
+ * Récupération des informations d'un document ou d'un fichier audio ou vidéo
+ * 
  * Si on a un id_document (en premier argument) on enregistre en base dans cette fonction
  * Si on a seulement un chemin de fichier (en second argument), on retourne un tableau des metas
  *
- * @param int/null $id_document : id_document duquel on doit récupérer les infos
- * @param string/false $fichier : chemin du fichier duquel on doit récupérer les infos
+ * @param int/bool $id_document 
+ * 		Identifiant numérique duquel on doit récupérer les infos
+ * @param string/bool $fichier
+ * 		Chemin du fichier duquel on doit récupérer les infos
+ * @param bool $logo
+ * 		Doit on récupérer une vignette
+ * @param bool $only_return
+ * 		Ne fait t'on que retourner le résultat
+ * @return array $infos
+ * 		Les infos récupérées
  */
 
-function inc_getid3_recuperer_infos($fichier=false){
-	if(!$fichier OR !file_exists($fichier)){
-		return false;
-	}
+function inc_getid3_recuperer_infos($id_document=false,$fichier=null,$logo=false,$only_return=false){
 	
+	if((!intval($id_document) && !isset($fichier)))
+		return false;
+	
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	if(!isset($fichier)){
+		include_spip('inc/documents');
+		$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
+		$fichier = get_spip_doc($document['fichier']);
+		$extension = $document['extension'];
+	}else
+		$extension = strtolower(array_pop(explode('.',basename($fichier))));
+
 	/**
 	 * Récupération des metas du fichier
 	 */
 	$recuperer_id3 = charger_fonction('recuperer_id3','inc');
-	$id3 = $recuperer_id3($fichier);
+	$infos = $recuperer_id3($fichier);
 	
+	/**
+	 * On enlève les infos vides
+	 */
+	if(strlen($document['titre']) > 0)
+		unset($infos['titre']);
+
+	if(strlen($document['descriptif']) > 0)
+		unset($infos['descriptif']);
+
+	foreach($infos as $key => $val){
+		if(!$val)
+			unset($infos[$key]);
+	}
+	
+	/**
+	 * Si les champs sont vides, on ne les enregistre pas
+	 * Par contre s'ils sont présents dans le $_POST ou $_GET,
+	 * on les utilise (fin de conversion où on récupère le titre et autres infos du document original)
+	 */
+	if(!function_exists('filtrer_entites'))
+		include_spip('inc/filtres');
+	foreach(array('titre','descriptif','credit') as $champ){
+		if(isset($infos[$champ]))
+			$infos[$champ] = filtrer_entites($infos[$champ]);
+		if(!isset($infos[$champ]))
+			$infos[$champ] = '';
+		if(is_null($infos[$champ]) OR ($infos[$champ]=='')){
+			if(_request($champ))
+				$infos[$champ] = _request($champ);
+			else
+				unset($infos[$champ]);	
+		}
+	}
+	
+	/**
+	 * Filesize tout seul est limité à 2Go
+	 * cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
+	 */
+	if(($infos['taille'] = @intval(filesize($fichier))) == '2147483647')
+		$infos['taille'] = sprintf("%u", filesize($fichier));
+	
+	/**
+	 * Si on a gis et que les fonctions de récupération de metadonnés nous ont renvoyé :
+	 * -* lat = la latitude;
+	 * -* lon = la longitude;
+	 * 
+	 * Deux cas :
+	 * -* Si on a un id_document numérique 
+	 * -** On recherche si on a déjà un point lié au document et on le modifie
+	 * -** Sinon on crée de nouvelles coordonnées
+	 * -* Si on n'a pas d'id_document (cas des metadonnées récupérées par les fonctions metadatas/....php)
+	 * -** On crée un point avec les coordonnées et on envoit dans le $_POST id_gis_meta 
+	 * pour que le point soit lié dans le pipeline post_edition
+	 */
+	if(defined('_DIR_PLUGIN_GIS') && is_numeric($infos['latitude']) && is_numeric($infos['longitude'])){
+		$zoom = lire_config('gis/zoom',4);
+		$config = @unserialize($GLOBALS['meta']['gis']);
+		$c = array(
+			'titre' => $infos['titre'] ? $infos['titre'] : basename($fichier),
+			'lat'=> $infos['latitude'],
+			'lon' => $infos['longitude'],
+			'zoom' => $zoom
+		);
+
+		if (defined('_DIR_PLUGIN_GISGEOM')) {
+			$geojson = '{"type":"Point","coordinates":['.$infos['longitude'].','.$infos['latitude'].']}';
+			set_request('geojson',$geojson);
+		}
+		
+		include_spip('action/editer_gis');
+		
+		if(intval($id_document)){
+			if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
+				/**
+				 * Des coordonnées sont déjà définies pour ce document => on les update
+				 */ 
+				revisions_gis($id_gis,$c);
+			}else{
+				/**
+				 * Aucune coordonnée n'est définie pour ce document  => on les crée
+				 */ 
+				$id_gis = insert_gis();
+				revisions_gis($id_gis,$c);
+				lier_gis($id_gis, 'document', $id_document);
+			}
+		}else{
+			/**
+			 * Aucune coordonnée n'est définie pour ce document  => on les crée
+			 * On ajoute dans le $_POST id_gis_meta qui sera utilisable dans post_edition
+			 */ 
+			$id_gis = insert_gis();
+			revisions_gis($id_gis,$c);
+			set_request('id_gis_meta',$id_gis);
+		}
+	}
+
 	/**
 	 * On remplit les champs de base de SPIP avec ce dont on dispose
 	 *
 	 * -* titre
 	 * -* descriptif
 	 */
-	if(isset($id3['title'])){
-		$id3['titre'] = preg_replace('/_/',' ',utf8_encode($id3['title']));
-	}
-	if(!isset($id3['title'])){
-		$titre = strtolower(array_shift(explode('.',basename($son_chemin))));
-		$titre = utf8_encode($titre);
-		$id3['titre'] = preg_replace('/_/',' ',$titre);
+	if(isset($infos['title']))
+		$infos['titre'] = preg_replace('/_/',' ',utf8_encode($infos['title']));
+
+	else if(!isset($infos['title'])){
+		$titre = utf8_encode(strtolower(array_shift(explode('.',basename($fichier)))));
+		$infos['titre'] = preg_replace('/_/',' ',$titre);
 	}
 
-	if(!isset($id3['descriptif'])){
+	if(!isset($infos['descriptif'])){
 		/**
 		 * Ne pas prendre les comments foireux d'itunes
 		 */
-		if(isset($id3['comments']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comments']))
-			$id3['descriptif'] = utf8_encode($id3['comments']);
+		if(isset($infos['comments']) && !preg_match('/0000[a-b|0-9]{4}/',$infos['comments']))
+			$infos['descriptif'] = utf8_encode($infos['comments']);
 		else{
-			if(isset($id3['artist']))
-				$id3['descriptif'] .= utf8_encode($id3['artist'])."\n";
-			if(isset($id3['album']))
-				$id3['descriptif'] .= utf8_encode($id3['album'])."\n";
-			if(isset($id3['year']))
-				$id3['descriptif'] .= utf8_encode($id3['year'])."\n";
-			if(isset($id3['genre']))
-				$id3['descriptif'] .= utf8_encode($id3['genre'])."\n";
-			if(isset($id3['track_number']))
-				$id3['descriptif'] .= utf8_encode($id3['track_number'])."\n";
-			if(isset($id3['comment']) && !preg_match('/0000[a-b|0-9]{4}/',$id3['comment']))
-				$id3['descriptif'] .= "\n".utf8_encode($id3['comment'])."\n";
+			if(isset($infos['artist']))
+				$infos['descriptif'] .= utf8_encode($infos['artist'])."\n";
+			if(isset($infos['album']))
+				$infos['descriptif'] .= utf8_encode($infos['album'])."\n";
+			if(isset($infos['year']))
+				$infos['descriptif'] .= utf8_encode($infos['year'])."\n";
+			if(isset($infos['genre']))
+				$infos['descriptif'] .= utf8_encode($infos['genre'])."\n";
+			if(isset($infos['track_number']))
+				$infos['descriptif'] .= utf8_encode($infos['track_number'])."\n";
+			if(isset($infos['comment']) && !preg_match('/0000[a-b|0-9]{4}/',$infos['comment']))
+				$infos['descriptif'] .= "\n".utf8_encode($infos['comment'])."\n";
 		}
 	}
 
@@ -75,40 +190,29 @@ function inc_getid3_recuperer_infos($fichier=false){
 	 * On ne met en vignette de document que la première que l'on trouve
 	 */
 	$covers = array();
-	foreach($id3 as $key=>$val){
+	foreach($infos as $key=>$val){
 		if(preg_match('/cover/',$key))
 			$covers[] = $val;
 	}
 	
-	$id3['credits'] = $id3['copyright_message']?$id3['copyright_message']:$id3['copyright'];
+	$infos['credits'] = $infos['copyright_message']?$infos['copyright_message']:$infos['copyright'];
 	
-	/**
-	 * Les valeurs que l'on mettra en base à la fin
-	 */
-	$valeurs = array(
-			'titre'=>filtrer_entites($id3['titre']),
-			'descriptif'=>filtrer_entites($id3['descriptif']),
-			'duree'=> $id3['duree_secondes'],
-			'bitrate' => intval($id3['bitrate']),
-			'audiobitrate' => intval($id3['bitrate']),
-			'audiobitratemode'=>$id3['bitrate_mode'],
-			'audiochannels' => $id3['channels'],
-			'audiosamplerate'=>$id3['audiosamplerate'],
-			'encodeur'=>$id3['codec'],
-			'bits'=>$id3['bits'],
-			'credits'=>$id3['credits']
-		);
+	if(!$infos['audiobitrate'] && !$infos['hasvideo'])
+		$infos['audiobitrate'] = intval($infos['bitrate']);
 	
-	if((isset($id3['date']) OR isset($id3['original_release_time']) OR isset($id3['encoded_time']))){
-		if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['date']))
-			$valeurs['date'] = $id3['date'];
-		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['original_release_time']))
-			$valeurs['date'] = $id3['original_release_time'];
-		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$id3['encoded_time']))
-			$valeurs['date'] = $id3['encoded_time'];
+	if(isset($infos['encoded_by']))
+		$infos['encodeur'] = $infos['encoded_by'];
+	
+	if((isset($infos['date']) OR isset($infos['original_release_time']) OR isset($infos['encoded_time']))){
+		if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$infos['date']))
+			$infos['date'] = $infos['date'];
+		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$infos['original_release_time']))
+			$infos['date'] = $infos['original_release_time'];
+		else if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/',$infos['encoded_time']))
+			$infos['date'] = $infos['encoded_time'];
 		
 		if(isset($valeurs['date']) && (strlen($valeurs['date'])=='10'))
-			$valeurs['date'] = $valeurs['date'].' 00:00:00';
+			$infos['date'] = $infos['date'].' 00:00:00';
 	}
 
 	/**
@@ -117,12 +221,12 @@ function inc_getid3_recuperer_infos($fichier=false){
 	 * 
 	 * Pour l'instant uniquement valable sur les CC
 	 */
-	if(defined('_DIR_PLUGIN_LICENCE') && ((strlen($id3['copyright_message']) > 0) OR strlen($id3['copyright']) > 0)){
+	if(defined('_DIR_PLUGIN_LICENCE') && ((strlen($infos['copyright_message']) > 0) OR strlen($infos['copyright']) > 0)){
 		include_spip('licence_fonctions');
 		if(function_exists('licence_recuperer_texte')){
-			foreach(array($id3['copyright_message'],$id3['copyright']) as $contenu){
-				$valeurs['id_licence'] = licence_recuperer_texte($contenu);
-				if(intval($valeurs['id_licence']))
+			foreach(array($infos['copyright_message'],$infos['copyright']) as $contenu){
+				$infos['id_licence'] = licence_recuperer_texte($contenu);
+				if(intval($infos['id_licence']))
 					break;
 			}
 		}
@@ -143,9 +247,8 @@ function inc_getid3_recuperer_infos($fichier=false){
 			$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
 
 			if (is_numeric(reset($ajoute))
-			  AND $id_vignette = reset($ajoute)){
-			  	$valeurs['id_vignette'] = $id_vignette;
-			}
+			  AND $id_vignette = reset($ajoute))
+			  	$infos['id_vignette'] = $id_vignette;
 		}
 	}else if(strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
 		/**
@@ -170,11 +273,28 @@ function inc_getid3_recuperer_infos($fichier=false){
 
 			if (is_numeric(reset($ajoute))
 			  AND $id_vignette = reset($ajoute)){
-			  	$valeurs['id_vignette'] = $id_vignette;
+			  	$infos['id_vignette'] = $id_vignette;
 			}
 		}
 	}
 	
-	return $valeurs;
+	/**
+	 * Si on a $only_return à true, on souhaite juste retourner les metas, sinon on les enregistre en base
+	 * Utile pour metadatas/video par exemple
+	 */
+	if(!$only_return && (intval($id_document) && (count($infos) > 0))){
+		foreach($infos as $champ=>$val){
+			if($document[$champ] == $val)
+				unset($infos[$champ]);
+		}
+		if(count($infos) > 0){
+			include_spip('action/editer_document');
+			document_modifier($id_document, $infos);
+		}
+		return true;
+	}
+
+	return $infos;
 }
+
 ?>

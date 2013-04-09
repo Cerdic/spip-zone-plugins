@@ -1,7 +1,7 @@
 <?php
 /**
  * GetID3
- * Gestion des métadonnées de fichiers sonores directement dans SPIP
+ * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
@@ -19,6 +19,7 @@ function action_getid3_infos_dist(){
 
 	if (!intval($arg)){
 		spip_log("action_getid3_infos_dist incompris: " . $arg);
+		return;
 	}
 	else{
 		action_getid3_infos_post($arg);
@@ -30,28 +31,8 @@ function action_getid3_infos_dist(){
 }
 
 function action_getid3_infos_post($id_document){
-	include_spip('inc/documents');
-	$fichier = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
-	$file = get_spip_doc($fichier['fichier']);
-	if(!file_exists($file))
-		return false;
-	
-	$recuperer_infos = charger_fonction('audio','metadata');
-	$infos = $recuperer_infos($file,false);
-	
-	if($document['titre'] != ''){
-		unset($infos['titre']);
-	}
-	if($document['descriptif'] != ''){
-		unset($infos['descriptif']);
-	}
-	if($document['credits'] != ''){
-		unset($infos['credits']);
-	}
-	if(is_array($infos) && count($infos)>0){
-		include_spip('action/editer_document');
-		document_modifier($id_document,$infos);
-	}
+	$recuperer_infos = charger_fonction('getid3_recuperer_infos','inc');
+	$infos = $recuperer_infos($id_document);
 	return $infos;
 }
 

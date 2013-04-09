@@ -5,18 +5,22 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
+ * @package SPIP\GetID3\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Insertion dans le pipeline post_edition
+ * Insertion dans le pipeline post_edition (SPIP)
+ * 
  * Récupération d'informations sur le document lors de son insertion en base
  *
- * @param array $flux Le contexte du pipeline
- * @return $flux le $flux modifié
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte du pipeline ($flux) modifié
  */
 function getid3_post_edition($flux){
 	if(in_array($flux['args']['operation'],array('ajouter_document','modifier'))){
@@ -120,30 +124,32 @@ function getid3_post_edition($flux){
 }
 
 /**
- * Ajouter le lien vers la modifs des id3
+ * Insertion dans le pipeline post_edition (plugin medias)
+ * 
+ * Ajouter le lien vers la récupératio et la modif des id3
  *
  * @param array $flux
- * @return array
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
 function getid3_document_desc_actions($flux){
-	$infos = sql_fetsel('distant,extension','spip_documents','id_document='.intval($flux['args']['id_document']));
-	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$son_modif_id3 = lire_config('getid3_write',array('mp3'));
-	$id_document = $flux['args']['id_document'];
+	$infos = sql_fetsel('distant,extension,media','spip_documents','id_document='.intval($flux['args']['id_document']));
+	
 	if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_modif_id3)){
 		$redirect = self();
-		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.intval($id_document)),'redirect',$redirect);
+		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.intval($flux['args']['id_document'])),'redirect',$redirect);
 		$texte = _T('getid3:lien_modifier_id3');
-		if($flux['args']['position'] == 'galerie'){
+		if($flux['args']['position'] == 'galerie')
 			$flux['data'] .= "[<a href='$url' class='ajax'>$texte</a>]";
-		}else{
+		else
 			$flux['data'] .= "<span class='sep'> | </span><a href='$url' target='_blank' class='editbox'>$texte</a>";
-		}
-	}if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_recup_id3)){
-		$texte2 = _T('getid3:lien_recuperer_infos');
-		$action2 = generer_action_auteur('getid3_infos', "$id_document", $redirect);
-		$flux['data'] .= "<span class='sep'> | </span><a href='$action2' class='ajax'>$texte2</a>";
 	}
+	if(($infos['distant'] == 'non') && in_array($infos['media'],array('video','audio')))
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/getid3_document_desc_action',$flux['args']);
 	return $flux;
 }
 
@@ -173,9 +179,8 @@ function getid3_taches_generales_cron($taches_generales){
 function getid3_recuperer_fond($flux){
 	if ($flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
-			$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
-			$extension = sql_getfetsel("extension", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
-			if(in_array($extension,$son_recup_id3))
+			$mode = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
+			if(in_array($mode,array('audio','video')))
 				$flux['data']['texte'] .= recuperer_fond('prive/inclure/prive_infos_son',$flux['args']['contexte']);
 		}
 	}
