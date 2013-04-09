@@ -5,8 +5,9 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
+ * Ecriture des tags ID3 ou vorbis
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -25,9 +26,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$formats = array('id3v1', 'id3v2.3')){
-	if(!intval($id_document)){
-		return;
-	}
+	if(!intval($id_document))
+		return false;
 	
 	$document = sql_fetsel("fichier,distant,extension", "spip_documents","id_document=".intval($id_document));
 	
@@ -41,17 +41,15 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 			$infos['date'] = $infos['year'];
 		}
 		
-		$err = array();
-		$TagData = array();
+		$err = $TagData = array();
 		
 		include_spip('inc/documents');
 		$document_chemin = get_spip_doc($document['fichier']);
 
 		include_spip('getid3/getid3');
 		$getid3 = new getID3;
-		if(!$getid3){
+		if(!$getid3)
 			return false;
-		}
 		
 		include_spip('getid3/write');
 		$getid3->encoding         = 'UTF-8';
@@ -132,16 +130,14 @@ function inc_getid3_ecrire_infos($id_document,$infos=array(),$images=null,$forma
 		/**
 		 * Les warnings
 		 */
-		if (!empty($ecrire->warnings)) {
+		if (!empty($ecrire->warnings))
 	    	$err = array_merge($err,$ecrire->warnings);
-	  	}
 	
 	  	/**
 	  	 * Les erreurs
 	  	 */
-		if (!empty($ecrire->errors)) {
+		if (!empty($ecrire->errors))
 			$err = array_merge($err,$ecrire->errors);
-		}
 		
 		/**
 		 * Modification de la taille du document en base 

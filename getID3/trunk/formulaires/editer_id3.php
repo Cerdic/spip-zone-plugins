@@ -5,7 +5,7 @@
  * 
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  * 
  * Formulaire d'édition des tags ID3 d'un fichier sonore
  */
@@ -21,17 +21,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_editer_id3_charger($id,$retour=''){
 	$valeurs = array();
-	$config_id3 = lire_config('getid3',array());
-	$infos_doc = sql_fetsel('*','spip_documents','id_document='.intval($id));
+	if(!function_exists('lire_config'))
+		$config_id3 = lire_config('getid3',array());
 	
-	if(!in_array($infos_doc['extension'],lire_config('getid3_write',array('mp3')))){
+	$infos_doc = sql_fetsel('extension,distant,fichier','spip_documents','id_document='.intval($id));
+	if(!in_array($infos_doc['extension'],lire_config('getid3_write',array('mp3'))))
 		$valeurs['message_erreur'] = _T('getid3:message_extension_invalide_ecriture');
-	}else if($infos_doc['distant'] == 'oui'){
+	else if($infos_doc['distant'] == 'oui')
 		$valeurs['message_erreur'] = _T('getid3:message_erreur_document_distant_ecriture');
-	}
-	if(isset($valeurs['message_erreur'])){
+	
+	if(isset($valeurs['message_erreur']))
 		$valeurs['editable'] = false;
-	}else{
+	else{
 		/**
 		 * Récupération des tags habituels:
 		 * - title
@@ -42,15 +43,15 @@ function formulaires_editer_id3_charger($id,$retour=''){
 		 */
 		include_spip('inc/documents');
 		$fichier = get_spip_doc($infos_doc['fichier']);
-		$recuperer_id3 = charger_fonction('recuperer_id3','inc');
-		$valeurs = $recuperer_id3($fichier);
+		$recuperer_id3 = charger_fonction('getid3_recuperer_infos','inc');
+		$valeurs = $recuperer_id3(false,$fichier,false,true);
+
 		foreach($valeurs as $valeur => $info){
 			if(preg_match('/cover/',$valeur)){
 				$valeurs['covers'][] = $info;
 				$valeurs['_hidden'] .= "<input type='hidden' name='old_cover' id='old_cover' value='$info' />"; 
-			}else{
-				$valeurs[$valeur] = filtrer_entites($info);
-			}
+			}else
+				$valeurs[$valeur] = $info;
 		}
 		if(!count($valeurs['covers']) && (strlen($config_id3['cover_defaut']) > 0)){
 			$valeurs['covers'][] = $config_id3['cover_defaut'];

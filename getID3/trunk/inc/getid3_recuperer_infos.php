@@ -105,7 +105,7 @@ function inc_getid3_recuperer_infos($id_document=false,$fichier=null,$logo=false
 	 * -** On crée un point avec les coordonnées et on envoit dans le $_POST id_gis_meta 
 	 * pour que le point soit lié dans le pipeline post_edition
 	 */
-	if(defined('_DIR_PLUGIN_GIS') && is_numeric($infos['latitude']) && is_numeric($infos['longitude'])){
+	if(defined('_DIR_PLUGIN_GIS') && !$only_return && is_numeric($infos['latitude']) && is_numeric($infos['longitude'])){
 		$zoom = lire_config('gis/zoom',4);
 		$config = @unserialize($GLOBALS['meta']['gis']);
 		$c = array(
@@ -232,7 +232,7 @@ function inc_getid3_recuperer_infos($id_document=false,$fichier=null,$logo=false
 		}
 	}
 	
-	if((count($covers) > 0)){
+	if((count($covers) > 0) && !$only_return){
 		if(intval($id_document))
 			$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
 		else
@@ -250,7 +250,7 @@ function inc_getid3_recuperer_infos($id_document=false,$fichier=null,$logo=false
 			  AND $id_vignette = reset($ajoute))
 			  	$infos['id_vignette'] = $id_vignette;
 		}
-	}else if(strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
+	}else if(!$only_return && strlen($cover_defaut = lire_config('getid3/cover_defaut','')) > 1){
 		/**
 		 * Si on n'a pas de cover,
 		 * On ajoute la cover par défaut si elle existe comme vignette de document et

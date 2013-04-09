@@ -5,8 +5,9 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info), BoOz
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2013 - Distribué sous licence GNU/GPL
  *
+ * @package SPIP\GetID3\Crons
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
