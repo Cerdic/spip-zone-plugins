@@ -24,3 +24,9 @@ r71787 - Les liens de couleur rouge bordeaux jurent avec la couleur par défaut 
 r71787 - Problème du formulaire_spip div ul du formulaire d'ajout de document sur ?exec=article_edit&id_article=XX (pierretux)
 
 r71788 - background-color des a:hover du bandeau de navigation prend en compte la couleur de personnalisation. Aurevoir le rouge.
+
+r71864 - réduction de la hauteur du bandeau de navigation et des icônes. Approximativement la même taille qu'avant (marcimat)
+
+r71864 - #bando_identite et #bando_liens_rapides reprennent les même CSS que l'interface d'origine
+
+r71864 - retour à un input[type='image'] pour le formulaire_recherche_ecrire pour éviter l'ascenseur horizontale en responsive (marcimat)

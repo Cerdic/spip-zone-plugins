@@ -45,6 +45,28 @@ c'est du text/html !
 #bando_identite a, #bando_identite strong, #identite a { color: #666; }
 #bando_identite a:hover { text-decoration: underline; }
 
+body.navigation_avec_icones li a > #bando1_menu_accueil {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/accueil.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_edition {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/edition.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_publication {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/publication.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_activite {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/activites.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_squelette {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/squelettes.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_administration {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/administration.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+body.navigation_avec_icones li a > #bando1_menu_configuration {
+    background-image: url("[(#CHEMIN{prive/themes/spip/images/configuration.png}|image_sepia{[(#ENV{claire}|replace{'#',''})]}|extraire_attribut{src})]");
+}
+
 .en_lignes {
     text-align: center;
 }
