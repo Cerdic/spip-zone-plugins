@@ -1,12 +1,13 @@
-@import "bootstrap2spip/css/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "bootstrap2spip/css/spip.variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "css/sprites.less";
+@import "bootstrap2spip/css/variables.less";
+@import "bootstrap2spip/css/spip.variables.less";
 @import "bootstrap2spip/css/forms.less";
-@import "bootstrap2spip/css/box.less";
 @import "prive/themes/spip/mixins.less";
 @greenFlashy : #C5E41C;
 @import "bootstrap2spip/css/tables.less";
 
+body {
+  font-family: @sansFontFamily;
+}
 
   table.liste {
     .table;
@@ -35,7 +36,6 @@
           margin-right: 10px;
         }
         &[id^=bando1_] {
-          [class^="icon-"];
           margin-right: 10px;
         }
       }

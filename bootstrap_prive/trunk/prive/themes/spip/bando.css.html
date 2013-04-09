@@ -14,14 +14,37 @@ c'est du text/html !
     #CACHE{3600*100,cache-client}
     #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
     #HTTP_HEADER{Vary: Accept-Encoding}
-/*
-#bando_haut {
-    padding-top: 50px;
-}
-*/
 #bando_outils {
     background-color: #ENV{claire};
 }
+#bando_haut #bando_liens_rapides {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+#bando_haut #bando_liens_rapides.actif {
+    background: none repeat scroll 0 0 #000000;
+    border-bottom: 1px solid #222222;
+    color: #FFFFFF;
+    line-height: 2em;
+    min-height: 25px;
+    overflow: hidden;
+    z-index: 11;
+}
+#bando_haut #bando_liens_rapides a {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+#bando_identite { line-height:2em; background: #[(#ENV{claire}|couleur_eclaircir|couleur_eclaircir)]; color: #666; overflow:hidden; z-index:10;position:relative;}
+#bando_identite p { padding: 1px 0; margin:0;}
+#bando_identite p img { vertical-align: middle; }
+#bando_identite p.nom_site_spip { text-align:#ENV{right}; }
+#bando_identite p.session { text-align:#ENV{left}; }
+#bando_identite p.session .menu_lang {  }
+#bando_identite a, #bando_identite strong, #identite a { color: #666; }
+#bando_identite a:hover { text-decoration: underline; }
+
 .en_lignes {
     text-align: center;
 }
