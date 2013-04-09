@@ -70,7 +70,7 @@
 </fieldset>
 </li>
 [(#REM)<!-- S'il y a des comptes actifs, on peut configurer la compta et les les modules lies a la compta (mais il faut activer la compta pour activer ces modules) ... -->]
-<BOUCLE_plan_comptable(ASSO_PLAN){active=1}{par classe}{3,3}>
+<BOUCLE_plan_comptable(ASSO_PLAN){active=1}{fusion classe}{3,3}>
 [(#REM)<!-- En regroupant par classe on a un compte par classe, mais ce n'est pas grave car ca indique que le plan comptable est renseigne avec des comptes actifs. En demandant exactement le 4eme resultat on s'assure qu'il y a au moins 4 classes differentes ; ce qui est requis pour pouvoir activer la compta. -->]
 </BOUCLE_plan_comptable>
 <li class="fieldset">
