@@ -53,15 +53,25 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 /**
  * Fonction de suppression du plugin
  * 
- * Supprime les deux métas en base, configuration et installation
+ * Supprime les différentes métas en base : 
+ * -* configuration;
+ * -* installation;
+ * -* les formats de tags que l'on peut écrire;
+ * -* si on est en safe mode;
+ * -* vorbiscomment non disponible;
+ * -* metaflac non disponible;
  * 
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
- * 
  * @return void
  */
 function getid3_vider_tables($nom_meta_base_version) {
 	effacer_meta('getid3');
+	effacer_meta('getid3_casse');
+	effacer_meta('getid3_safe_mode');
+	effacer_meta('getid3_write');
+	effacer_meta('getid3_vorbiscomment_casse');
+	effacer_meta('getid3_metaflac_casse');
 	effacer_meta($nom_meta_base_version);
 }
 
