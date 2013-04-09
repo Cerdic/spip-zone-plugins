@@ -160,9 +160,9 @@ function getid3_taches_generales_cron($taches_generales){
 function getid3_recuperer_fond($flux){
 	if ($flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
-			$mode = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
-			if(in_array($mode,array('audio','video')))
-				$flux['data']['texte'] .= recuperer_fond('prive/inclure/prive_infos_son',$flux['args']['contexte']);
+			$media = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
+			if(in_array($media,array('audio','video')))
+				$flux['data']['texte'] .= recuperer_fond('prive/inclure/prive_infos_media',$flux['args']['contexte']);
 		}
 	}
 	return $flux;
