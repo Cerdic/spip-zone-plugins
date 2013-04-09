@@ -1,28 +1,35 @@
 <BOUCLE_projets_activite(PROJETS_ACTIVITES){id_projets_activite}>
 
-[<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
+<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
 	<label><:projets_activite:label_id_projet:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_projet} id_projet'>(#ID_PROJET)</span>
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{id_projet} id_projet'>
+	<BOUCLE_projet(PROJETS){id_projet}{si #ID_PROJET}{statut==.*}{tout}>
+			<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a>
+	</BOUCLE_projet>
+		<:projet:non_renseigne:>
+	<//B_projet>
+	</span>
+</div>
 
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 	<label><:projets_activite:label_descriptif:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
 </div>]
 
-[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_id_auteur:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#ID_AUTEUR)</span>
-</div>]
+<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_auteur_activite:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>
+	<BOUCLE_auteur(AUTEURS){id_auteur}{si #ID_AUTEUR}{statut==.*}{tout}>
+		<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#NOM|sinon{#PSEUDO})]</a>
+	</BOUCLE_auteur>
+		<:projet:non_renseigne:>
+	<//B_auteur>
+	</span>
+</div>
 
-[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_date_debut:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT)</span>
-</div>]
-
-[<div class="champ contenu_date_fin[ (#DATE_FIN*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_date_fin:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN)</span>
+[<div class="champ contenu_date_debut_fin[ (#DATE_DEBUT*|strlen|?{'',vide})]">
+	<label><:projets_activite:label_date_debut_fin:> : </label>
+	<span dir='#LANG_DIR' class='date_debut_fin'>(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})</span>
 </div>]
 
 [<div class="champ contenu_nb_heures_passees[ (#NB_HEURES_PASSEES*|strlen|?{'',vide})]">

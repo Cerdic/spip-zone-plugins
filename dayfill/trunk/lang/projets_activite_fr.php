@@ -30,12 +30,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_activite' => "Date",
 	'label_date_debut' => 'Heure debut',
 	'label_date_fin' => 'Heure fin',
+	'label_date_debut_fin' => 'Quand',
 	'label_descriptif' => 'Descriptif',
 	'label_duree_activite' => "Durée",
 	'label_id_auteur' => 'Auteur',
-	'label_id_projet' => 'Id projet',
-	'label_nb_heures_decomptees' => 'Nb heures decomptees',
-	'label_nb_heures_passees' => 'Nb heures passees',
+	'label_id_projet' => 'Projet',
+	'label_nb_heures_decomptees' => "Nombre d'heures decomptées",
+	'label_nb_heures_passees' => "Nombre d'heures passées",
 
 	// R
 	'retirer_lien_projets_activite' => 'Retirer cette activité',

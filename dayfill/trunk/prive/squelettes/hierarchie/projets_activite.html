@@ -1,5 +1,5 @@
 <BOUCLE_activite(PROJETS_ACTIVITES){id_projets_activite}{tous}>
-<:dayfill:bouton_dayfill:></a>
-&gt; <a href="[(#URL_ECRIRE{projet}|parametre_url{id_projet,#ID_PROJET})]">[Projet «&nbsp(#INFO_TITRE{projet,#ID_PROJET})&nbsp;»]</a>
-&gt; <strong>Activit&eacute; N&deg;#ID_PROJETS_ACTIVITE du [(#DATE_DEBUT|affdate{'d/m/Y'})] ([(#DESCRIPTIF|PtoBR|couper{20})])</strong>
+<a href="#URL_ECRIRE{projets}"><:projet:titre_projets:></a>
+&gt; <a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a>
+&gt; <strong>Activit&eacute; N&deg;#ID_PROJETS_ACTIVITE du [(#DATE_DEBUT|affdate{'d/m/Y'})][ : (#DESCRIPTIF|PtoBR|couper{40})]</strong>
 </BOUCLE_activite>
