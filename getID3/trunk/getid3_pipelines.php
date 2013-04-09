@@ -162,7 +162,7 @@ function getid3_recuperer_fond($flux){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
 			$media = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
 			if(in_array($media,array('audio','video')))
-				$flux['data']['texte'] .= recuperer_fond('prive/inclure/prive_infos_media',$flux['args']['contexte']);
+				$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/prive_infos_media',$flux['args']['contexte']);
 		}
 	}
 	return $flux;
