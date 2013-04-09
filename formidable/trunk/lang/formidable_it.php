@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Risposte non vuote',
-	'analyse_exporter' => 'Exporter l\'analyse', # NEW
+	'analyse_exporter' => 'Esporta l\'analisi',
 	'analyse_longueur_moyenne' => 'Lunghezza media in numero di parole',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Risposte vuote',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
-	'champs' => 'Champs', # NEW
+	'champs' => 'Campi',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
 
 	// S
-	'sans_reponses' => 'Sans réponse', # NEW
+	'sans_reponses' => 'Senza risposta',
 
 	// T
 	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
@@ -148,10 +148,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Si è verificato un errore tecnico durante il salvataggio in database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Hai già risposto a questo modulo.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La risposta da modificare non esiste.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu.)', # NEW
-	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire', # NEW
-	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.', # NEW
-	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire', # NEW
+	'traiter_enregistrement_option_anonymiser_explication' => 'Fare i risultati di forma anonima (non conservare traccia di identificazione degli intervistati).', # MODIF
+	'traiter_enregistrement_option_anonymiser_label' => 'Modo anonimo',
+	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quale variabile di sistema utilizzato per calcolare un singolo valore per ogni autore, senza rivelare la propria identità.',
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variabile da cui la forma anonima',
 	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'Se le risposte sono modificabili, quale procedura si dovrà utilizzare in priorità per individuare la risposta da modificare?',
 	'traiter_enregistrement_option_identification_label' => 'Identificazione',
