@@ -31,6 +31,7 @@ function dayfill_affiche_enfants($flux) {
 
 		$bouton = '';
 		if (autoriser('creerprojetsactivitedans', 'projet', $id_projet)) {
+			include_spip('inc/presentation');
 			$bouton .= icone_verticale(_T("projets_activite:icone_creer_projets_activite"), generer_url_ecrire("projets_activite_edit", "id_projet=$id_projet"), "projets_activite-24.png", "new", "right")
 					. "<br class='nettoyeur' />";
 		}

@@ -1,7 +1,7 @@
 <paquet
 	prefix="dayfill"
 	categorie="divers"
-	version="2.0.2"
+	version="2.0.3"
 	etat="dev"
 	compatibilite="[3.0.7;3.0.*]"
 	logo="prive/themes/spip/images/dayfill-64.png"
