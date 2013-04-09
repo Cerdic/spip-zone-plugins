@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets"
 	categorie="divers"
-	version="1.0.6"
+	version="1.0.7"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets-64.png"

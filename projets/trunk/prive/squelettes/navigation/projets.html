@@ -1,2 +1,28 @@
 
 [(#INCLURE{fond=prive/squelettes/menus/projets})]
+
+#SET{statuts,#LISTE}
+<B_statuts>
+<div class='liste statuts'>
+	<h3>Statuts</h3>
+	<ul class='liste-items'>
+		<li class='item[(#ENV{statut}|non) on active]'>
+			[(#SELF
+				|parametre_url{statut,''}
+				|lien_ou_expose{Tous,#ENV{statut}|non})]
+		</li>
+	<BOUCLE_statuts(PROJETS){fusion statut}{par statut}>
+		[(#SET{statuts,#GET{statuts}|push{#STATUT}})]
+	</BOUCLE_statuts>
+
+	<BOUCLE_statuts_possibles(DATA){source table,#VAL{projet}|objet_info{statut_textes_instituer}}{cle IN #GET{statuts}}>
+		<li class='item[(#CLE|=={#ENV{statut}}|oui) on active]'>
+			[(#SELF
+				|parametre_url{statut,#CLE}
+				|lien_ou_expose{[[(#CLE|puce_statut{projet})] (#VALEUR|_T)],[(#CLE|=={#ENV{statut}})]})]
+		</li>
+	</BOUCLE_statuts_possibles>
+
+	</ul>
+</div>
+</B_statuts>
