@@ -66,7 +66,7 @@
 
 <B_detaillee>
 <div class="tickets[ (#ENV{class})]">
-[<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
+[<h3 class="h3">(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
 	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
@@ -151,85 +151,85 @@
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">200</a>})]]
 </p>]
 <table class="spip tickets">
 	<thead>
 		<tr>
 			<th></th>
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,#,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={-1}|oui)[(#TRI{>,#,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,#,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]
 			</th>
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|non)[(#TRI{titre,<:tickets:champ_titre:>,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|non)[(#TRI{titre,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_titre:>,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_titre:>,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow}|inserer_attribut{rel,nofollow})]]]
 			</th>
 			[(#ENV{tracker}|non)<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|non)[(#TRI{tracker,<:tickets:champ_type:>,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|non)[(#TRI{tracker,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_type:>,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_type:>,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]]
 			</th>]
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|non)[(#TRI{severite,<:tickets:champ_importance:>,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|non)[(#TRI{severite,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_importance:>,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_importance:>,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]]
 			</th>
 			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet:>,ajax})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_projet:>,ajax})]]
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_projet:>,ajax})]]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]]
 				</th>
 			]
 			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant:>,ajax})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_composant:>,ajax})]]
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_composant:>,ajax})]]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]]
 				</th>
 			]
 			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|non)[(#TRI{version,<:tickets:champ_version:>,ajax})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|non)[(#TRI{version,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_version:>,ajax})]]
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_version:>,ajax})]]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]]
 				</th>
 			]
 			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon:>,ajax})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon:>,ajax})]]
-						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon:>,ajax})]]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]]
 				</th>
 			]
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]]
 			</th>
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]><abbr title="<:tickets:champ_maj_long:>">
-				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_maj:>,ajax})]]
-					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_maj:>,ajax})]]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]]
 			</abbr></th>
 		</tr>
 	</thead>
@@ -269,13 +269,13 @@
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">200</a>})]]
 </p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
