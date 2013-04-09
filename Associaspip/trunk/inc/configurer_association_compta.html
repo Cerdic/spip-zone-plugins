@@ -41,7 +41,7 @@
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 				</div>
 			</li>
-			<INCLURE{fond=inc/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques, obligatoire=1} } />
+			<INCLURE{fond=inc/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
 			<li class="editer_pc_intravirements">
 				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
 
