@@ -25,7 +25,7 @@
 						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
 					[(#TITRE|strlen|?{':'})]
 				</span>
-				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
+				[<span class="formInfo"><a title="aide pour saisir le champ #TITRE" rel="no-follow" href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[<span class='spip_form_label_details'>(#TYPE|forms_label_details)</span>]
 				#SET{type,text}
 				#SET{class,''}

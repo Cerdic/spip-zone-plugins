@@ -1,4 +1,9 @@
-﻿2013-01-30
+﻿2013-04-10
+- Modification des fichiers de création de la structure du formulaire pour être conforme à la norme RGAA
+	- forms_champ_select.html ajout de l'attr title dans les select
+	- forms_structure.html ajout de l'attr title l'aide + un rel="no-follow"
+
+2013-01-30
 - corrections des fonctions SQL /action/instituer_forms_donnee.php
 - corrections des fonctions SQL /action/forms_duplique.php
 - corrections des fonctions SQL /inc/forms_tables_affichage.php
