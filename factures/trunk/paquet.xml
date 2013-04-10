@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.12"
+	version="1.0.13"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
@@ -23,6 +23,7 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/factures.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/factures.php" />
+	<pipeline nom="afficher_complement_objet" inclure="factures_pipelines.php" /> 
 
     <pipeline nom="afficher_complement_objet" inclure="factures_pipelines.php" />
 

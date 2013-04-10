@@ -66,6 +66,9 @@ function formulaires_editer_facture_identifier_dist($id_facture='new', $retour='
  */
 function formulaires_editer_facture_charger_dist($id_facture='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('facture',$id_facture,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	if ($id_organisation = _request('id_organisation') and !intval($id_facture)) {
+		$valeurs['id_organisation'] = $id_organisation;
+	}
 	return $valeurs;
 }
 
