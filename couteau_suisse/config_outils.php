@@ -350,20 +350,23 @@ add_outil( array(
 	'code:js_public' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
 	'pipelinecode:pre_description_outil' => 'if($id=="auteur_forum") $texte=str_replace(array("@_CS_FORUM_NOM@","@_CS_FORUM_EMAIL@"),
 	array(preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_nom")),preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_email"))),$texte);',
-));
-/* Astuce de b_b en php (a tester !)
-	'pipeline:formulaire_verifier' => 'nom_obligatoire',
-function nom_obligatoire($flux){
-	$form = $flux['args']['form'];
-	if ($form=='forum'){
-		if (!sinon($GLOBALS['visiteur_session']['nom'],$GLOBALS['visiteur_session']['session_nom'])){
-			$flux['data']['message_erreur'] .= _T('nom_obligatoire');
-			$flux['data']['session_nom'] = _T('nom_obligatoire');
-			unset($flux['data']['previsu']);
-		}
+	'pipelinecode:formulaire_verifier' => 'if($flux["args"]["form"]=="forum"){
+	$verif_email = %%auteur_forum_email%%; $verif_nom = %%auteur_forum_nom%%;
+	if($verif_deux = %%auteur_forum_deux%%) $verif_email = $verif_nom = 0;
+	$nom = sinon($GLOBALS["visiteur_session"]["nom"],$GLOBALS["visiteur_session"]["session_nom"]);
+	$mail = sinon($GLOBALS["visiteur_session"]["email"],$GLOBALS["visiteur_session"]["session_email"]);
+	if(($verif_deux && !$nom && !$mail) || ($verif_nom && !$nom)) unset($nom);
+	elseif($verif_email && !$mail) unset($mail);
+	$nom = !isset($nom); $mail = !isset($mail);
+	if($nom || $mail) {
+		$flux["data"]["message_erreur"] .= ($nom && !$mail)?_T("couteau:nom_forum")
+			:((!$nom && $mail)?_T("couteau:email_forum"):_T("couteau:nom_email_forum"));
+		unset($flux["data"]["previsu"]);
+		if($nom) $flux["data"]["session_nom"] = _T("info_obligatoire");
+		if($mail) $flux["data"]["session_email"] = _T("info_obligatoire");
 	}
-	return $flux;
-}*/
+}',
+));
 
 // ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')
 add_variable( array(

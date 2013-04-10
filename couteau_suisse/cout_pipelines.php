@@ -143,6 +143,10 @@ function couteau_suisse_post_edition($flux){
  * DIVERS *
  *********/
 
+function couteau_suisse_formulaire_verifier($flux){
+	return eval_metas_pipelines($flux, 'formulaire_verifier');
+}
+
 function couteau_suisse_taches_generales_cron($flux){
 	return eval_metas_pipelines($flux, 'taches_generales_cron');
 }

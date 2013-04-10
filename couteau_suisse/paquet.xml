@@ -1,7 +1,7 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.123"
+	version="1.8.124"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
@@ -40,6 +40,7 @@
 	<pipeline nom="creer_chaine_url" inclure="cout_pipelines.php" />
 	<pipeline nom="arbo_creer_chaine_url" inclure="cout_pipelines.php" />
 	<pipeline nom="propres_creer_chaine_url" inclure="cout_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="cout_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="cout_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="cout_pipelines.php" />
 	<!-- pipelines exterieurs -->
