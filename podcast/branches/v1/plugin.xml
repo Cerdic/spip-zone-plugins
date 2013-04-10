@@ -1,0 +1,49 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Podcast
+			[en]Podcasts
+		</multi>
+	</nom>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<licence>(c) 2010-2012 GPL</licence>
+	<version>0.1.2</version>
+	<version_base>0.1.0</version_base>
+	<etat>dev</etat>
+	<slogan>
+		<multi>
+			[fr]Un ou plusieurs flux de podcast sur son site
+			[en]One or several podcasts feeds on the site
+		</multi>
+	</slogan>
+	<description>
+	<multi>
+		[fr]Un plugin pour mettre à disposition un ou plusieurs flux de podcast sur son site
+		[en]A plugin to provide one or several podcasts feeds on the site
+	</multi>
+	</description>
+	<icon>images/podcast_64.png</icon>
+	<prefix>podcast</prefix>
+	<install>base/podcast_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/podcast_base.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>podcast_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>podcast_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>podcast_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="saisies" version='[1.7.6;]' />
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
+	<necessite id='spip_bonux' version='[1.8.10;]' />
+	<necessite id='cfg' version='[1.13.0;]' />
+	<categorie>multimedia</categorie>
+</plugin>

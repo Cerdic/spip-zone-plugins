@@ -1,0 +1,34 @@
+[(#REM)
+
+	Squelette affichant les liens de podcasts
+	
+	Paramètres d'environnement utilisés si disponibles :
+	- podcast_types : un array des type de flux à mettre à disposition
+	
+]#SET{podcast_flux,#ENV{podcast_types,#CONFIG{podcast/podcast_types,#ARRAY}}}[(#GET{podcast_flux}|count|>{0}|oui)
+<ul class="menu-liste">
+	[(#VAL{channels}|in_array{#GET{podcast_flux}}|oui)
+	<li class="item">
+		<a href="http://www.channels.com/autosubscribe?feed_url=[(#URL_PAGE{podcast}|url_absolue)]">
+			[(#CHEMIN{images/icon_channels.png}|image_reduire{16,16}|inserer_attribut{alt,''})]&nbsp;Channels.com
+		</a>
+	</li>]
+	[(#VAL{itunes}|in_array{#GET{podcast_flux}}|oui)
+	<li class="item">
+		<a href="[(#URL_PAGE{podcast}|parametre_url{type,itunes}|url_absolue|replace{http://,itpc://})]">
+			[(#CHEMIN{images/podcast_24.png}|image_reduire{16,16}|inserer_attribut{alt,''})]&nbsp;iTunes
+		</a>
+	</li>]
+	[(#VAL{miro}|in_array{#GET{podcast_flux}}|oui)
+	<li class="item">
+		<a href="http://subscribe.getmiro.com/?url1=[(#URL_PAGE{podcast}|url_absolue)]">
+			[(#CHEMIN{images/icon_miro.png}|image_reduire{16,16}|inserer_attribut{alt,''})]&nbsp;Miro
+		</a>
+	</li>]
+	[(#VAL{mrss}|in_array{#GET{podcast_flux}}|oui)
+	<li class="item">
+		<a href="[(#URL_PAGE{podcast}|url_absolue)]">
+			[(#CHEMIN{feed.png}|image_reduire{16,16}|inserer_attribut{alt,''})]&nbsp;Media RSS
+		</a>
+	</li>]
+</ul>]

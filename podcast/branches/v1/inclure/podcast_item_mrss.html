@@ -1,0 +1,61 @@
+<BOUCLE_document(DOCUMENTS){id_document}>
+#SET{id_article,''}
+#SET{category_string,' '}
+#SET{url_document,#URL_DOCUMENT|url_absolue}
+#SET{itunes_formats,#ARRAY|push{pdf}|push{m4a}|push{mov}|push{mp3}|push{mp4}}
+<B_article>
+<item>
+	<BOUCLE_article(ARTICLES){id_document}{0,1}>
+	<title>[(#TITRE|texte_backend)]</title>
+	[<link>(#URL_ARTICLE|url_absolue)</link>]
+	[<guid>(#URL_ARTICLE|parametre_url{id_document,#_document:ID_DOCUMENT}|url_absolue)</guid>]
+	[<comments>(#URL_ARTICLE|url_absolue)#comments</comments>]
+	[<pubDate>(#DATE|affdate{r})</pubDate>]
+	[(#SET{description,[(#_document:DESCRIPTIF|?{[(#_document:DESCRIPTIF|supprimer_tags|filtrer_entites)],[(#TEXTE|?{[(#TEXTE|supprimer_tags|filtrer_entites)],''})]})]})]
+	<BOUCLE_desc(CONDITION){si #GET{description}|strlen}>
+	<description><![CDATA[#GET{description}]]></description></BOUCLE_desc>
+	<BOUCLE_mots(MOTS){id_article}>[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|non)#SET{category_string,#GET{category_string}|concat{#TITRE|texte_backend}|concat{', '}}][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui) #SET{category_string,#GET{category_string}|concat{#TITRE|texte_backend}}]
+	<category><![CDATA[#TITRE]]></category></BOUCLE_mots>
+	[<itunes:keywords>(#GET{category_string}|trim)</itunes:keywords>]
+	[<media:keywords>(#GET{category_string}|trim)</media:keywords>]
+	<BOUCLE_type(CONDITION){si #ENV{type}|=={itunes}|et{#_document:EXTENSION|in_array{#GET{itunes_formats}}|non}}>
+		<BOUCLE_doc_itunes(DOCUMENTS){id_orig=#_document:ID_DOCUMENT}{extension IN #GET{itunes_formats}}{0,1}>
+		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#_document:TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+		</BOUCLE_doc_itunes>
+		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#_document:TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+		<//B_doc_itunes>
+	</BOUCLE_type>
+	[<enclosure url="(#GET{url_document})"[ length="(#_document:TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+	<//B_type>
+	#SET{id_article,#ID_ARTICLE}
+	<media:hash algo="md5">[(#FICHIER|md5)]</media:hash>
+	<media:content
+			url="[(#GET{url_document})]"[
+			fileSize="(#_document:TAILLE)"][
+			type="(#_document:MIME_TYPE)"]
+			isDefault="true"
+			expression="full"[
+			width="(#_document:LARGEUR|>{0}|?{#_document:LARGEUR,''})"][
+			height="(#_document:HAUTEUR|>{0}|?{#_document:HAUTEUR,''})"][
+			lang="(#LANG)"]
+         />
+	<BOUCLE_auteurs(AUTEURS){id_article}>
+        <media:credit>#NOM</media:credit>
+	</BOUCLE_auteurs>[
+	<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][
+	[<itunes:explicit>(#EXPLICIT)</itunes:explicit>]
+	<media:thumbnail url="(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)" />]
+	[(#PLUGIN{licence}|oui)#MODELE{licence,id_licence=#ID_LICENCE,modele_type=mrss,cacher_defaut=oui}]
+	<BOUCLE_point(GIS?){id_article}{0,1}>
+	<media:location[ description="(#TITRE|texte_script)"]>
+		<georss:where>
+			<gml:Point>
+				<gml:pos>#LAT #LON</gml:pos>
+			</gml:Point>
+		</georss:where>
+	</media:location>
+	</BOUCLE_point>
+	</BOUCLE_article>
+</item>
+</B_article>
+</BOUCLE_document>

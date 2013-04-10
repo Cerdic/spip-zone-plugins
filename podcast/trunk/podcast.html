@@ -1,0 +1,46 @@
+#CACHE{3600}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0" encoding="#CHARSET" ?>
+<rss version="2.0"
+	xmlns:media="http://search.yahoo.com/mrss/"
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		[<title>(#CONFIG{podcast/titre_podcast,#NOM_SITE_SPIP}|supprimer_tags|texte_backend)</title>]
+		<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
+		[<link>(#URL_SITE_SPIP)</link>]
+		[<lastBuildDate>(#ENV{date}|affdate{r})</lastBuildDate>]
+		[<pubDate>(#ENV{date}|affdate{r})</pubDate>]
+		[<itunes:image href="(#LOGO_SITE_SPIP|extraire_attribut{src}|url_absolue)"/>][
+		[<itunes:explicit>(#CONFIG{podcast/explicit_defaut,clean})</itunes:explicit>]
+		<image>
+			<url>(#LOGO_SITE_SPIP|image_passe_partout{144,400}|image_aplatir{jpg,ffffff}|extraire_attribut{src}|url_absolue)</url>
+			[<height>(#LOGO_SITE_SPIP|image_passe_partout{144,400}|extraire_attribut{height})</height>]
+			[<width>(#LOGO_SITE_SPIP|image_passe_partout{144,400}|extraire_attribut{width})</width>]
+			[<title>(#NOM_SITE_SPIP)</title>]
+			[<link>(#URL_SITE_SPIP)</link>]
+		</image>][
+		<managingEditor>(#CONFIG{podcast/email_auteur_podcast,#EMAIL_WEBMASTER}|supprimer_tags|texte_backend)[ ((#CONFIG{podcast/nom_auteur_podcast}|supprimer_tags|texte_backend))]</managingEditor>][
+		<itunes:author>(#CONFIG{podcast/nom_auteur_podcast}|supprimer_tags|texte_backend)</itunes:author>][
+		<itunes:owner>[
+			<itunes:name>(#CONFIG{podcast/nom_auteur_podcast}|supprimer_tags|texte_backend)</itunes:name>]
+			<itunes:email>(#CONFIG{podcast/email_auteur_podcast,#EMAIL_WEBMASTER}|supprimer_tags|texte_backend)</itunes:email>
+		</itunes:owner>][
+		<copyright>(#CONFIG{podcast/copyright_podcast}|supprimer_tags|texte_backend)</copyright>][
+		<description>(#CONFIG{podcast/description_podcast,#DESCRIPTIF_SITE_SPIP}|sinon{<:podcast:descriptif_flux_defaut{site=#NOM_SITE_SPIP}:>}|supprimer_tags|texte_backend)</description>][
+		<itunes:summary>(#CONFIG{podcast/description_podcast,#DESCRIPTIF_SITE_SPIP}|sinon{<:podcast:descriptif_flux_defaut{site=#NOM_SITE_SPIP}:>}|supprimer_tags|texte_backend)</itunes:summary>][
+		<itunes:subtitle>(#CONFIG{podcast/resume_podcast,#SLOGAN_SITE_SPIP}|sinon{<:podcast:resume_flux_defaut{site=#NOM_SITE_SPIP}:>}|supprimer_tags|texte_backend)</itunes:subtitle>][
+		<language>(#ENV{lang})</language>]
+		<generator>#NOM_SITE_SPIP (SPIP - http://www.spip.net)</generator>
+		<ttl>3600</ttl>[
+		<itunes:keywords>(#CONFIG{podcast/keywords_podcast}|supprimer_tags|texte_backend)</itunes:keywords>]
+		<BOUCLE_categories_principales(POUR){tableau #CONFIG{podcast/itunes_categories_principales,#ARRAY}}>
+		[(#SET{type,[(#VALEUR|strtolower|replace{' ','_'})]})]
+		<B_categories_enfants>[
+			<itunes:category text="(#VALEUR|texte_backend)">]
+			<BOUCLE_categories_enfants(POUR){tableau #CONFIG{podcast/itunes_categories_#GET{type},#ARRAY}}>[
+				<itunes:category text="(#VALEUR|texte_backend)"/>]</BOUCLE_categories_enfants>
+			</itunes:category></B_categories_enfants>[
+			<itunes:category text="(#VALEUR|texte_backend)"/>]<//B_categories_enfants>
+		</BOUCLE_categories_principales>
+		<INCLURE{fond=inclure/podcast_items,env}>
+   	</channel>
+</rss>

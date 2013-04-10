@@ -1,0 +1,13 @@
+[(#REM)
+
+	Controleur pour le crayon 'podcast' sur un document
+
+]<BOUCLE_d(DOCUMENTS){id_document}{tout}>
+<select class="crayon-active" name="#ENV{name_podcast}"
+ style="width:#ENV{largeur}px;#ENV{style}">
+	<option value="oui"[
+	(#PODCAST|=={oui}|?{selected="selected"})]><:item_oui:></option>
+	<option value="non"[
+	(#PODCAST|=={non}|?{selected="selected"})]><:item_non:></option>
+</select>
+</BOUCLE_d>

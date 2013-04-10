@@ -1,0 +1,15 @@
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+	[(#SAISIE{radio, podcast,
+		label=<:podcast:label_dans_podcast:>,
+		defaut=#PODCAST,
+		datas=#ARRAY{
+			oui,<:item_oui:>,
+			non,<:item_non:>}})]
+	[(#SAISIE{radio, explicit,
+		label=<:podcast:label_contenu_explicit:>,
+		defaut=#EXPLICIT,
+		datas=#ARRAY{
+			yes,<:item_oui:>,
+			clean,<:podcast:valeur_clean:>,
+			no,<:item_non:>}})]
+</BOUCLE_doc>

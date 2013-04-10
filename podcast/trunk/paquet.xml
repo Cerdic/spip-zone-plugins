@@ -1,0 +1,29 @@
+<paquet
+	prefix="podcast"
+	categorie="multimedia"
+	version="0.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/podcast_64.png"
+	schema="0.1.0"
+	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/le-plugin-podcasts"
+	demonstration="http://www.mediaspip.net"
+	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20podcasts"
+>
+
+	<nom>Podcasts</nom>
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="base/podcast_base.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/podcast_base.php" />
+	<pipeline nom="pre_edition" inclure="podcast_pipelines.php" />
+	<pipeline nom="post_edition" inclure="podcast_pipelines.php" />
+	<pipeline nom="editer_contenu_objet" inclure="podcast_pipelines.php" />
+	
+	<necessite nom="saisies" compatibilite='[1.7.6;[' />
+</paquet>
