@@ -9,6 +9,10 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+		[(#SAISIE{organisations,id_organisation_emettrice,
+			label=<:facture:label_id_organisation_emettrice:>,
+			explication=<:facture:explication_id_organisation_emettrice:>})]
+
 		<input type="hidden" name="_meta_casier" value="factures" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>

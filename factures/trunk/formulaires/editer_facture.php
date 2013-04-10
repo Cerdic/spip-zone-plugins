@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/config');
 
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
@@ -66,9 +67,16 @@ function formulaires_editer_facture_identifier_dist($id_facture='new', $retour='
  */
 function formulaires_editer_facture_charger_dist($id_facture='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('facture',$id_facture,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	if ($id_organisation = _request('id_organisation') and !intval($id_facture)) {
-		$valeurs['id_organisation'] = $id_organisation;
+
+	// sur une nouvelle facture, préremplir ce que l'on connait.
+	if (!intval($id_facture)) {
+		if ($id_organisation = _request('id_organisation')) {
+			$valeurs['id_organisation'] = $id_organisation;
+		}
+		$valeurs['id_organisation_emettrice'] = lire_config('factures/id_organisation_emettrice', 0);
+		$valeurs['date_facture'] = date("Y-m-d H:i:00", time());
 	}
+
 	return $valeurs;
 }
 
@@ -110,6 +118,8 @@ function formulaires_editer_facture_verifier_dist($id_facture='new', $retour='',
 			// si une valeur de normalisation a ete transmis, la prendre.
 		} elseif (!is_null($normaliser)) {
 			set_request($champ, $normaliser);
+		} elseif (!_request($champ)) {
+			set_request($champ, null);
 		}
 	}
 
