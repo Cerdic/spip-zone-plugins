@@ -1,0 +1,17 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<BOUCLE_si_rsd_actif(CONDITION){si #CONFIG{xmlrpc/desactiver_rsd,off}|=={on}|non}>
+<B_apis>
+<rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
+	<service>
+		<engineName>SPIP</engineName>
+		<engineLink>http://www.spip.net/</engineLink>
+		<homePageLink>#URL_SITE_SPIP</homePageLink>
+		<apis>
+		<BOUCLE_apis(POUR){tableau #PIPELINE{xmlrpc_apis}|sinon{#ARRAY}}>[
+			<api name="(#VALEUR)" blogID="1" preferred="[(#CONFIG{xmlrpc/api_preferee,spip}|=={#VALEUR}|?{'true','false'})]" apiLink="[(#URL_ACTION_AUTEUR{xmlrpc_serveur}|parametre_url{hash,''}|parametre_url{arg,''})]" />
+		]</BOUCLE_apis>
+		</apis>
+	</service>
+</rsd>
+</B_apis>
+</BOUCLE_si_rsd_actif>

@@ -1,0 +1,22 @@
+<paquet
+	prefix="xmlrpc"
+	categorie="outil"
+	version="0.3.1"
+	etat="test"
+	compatibilite="[2.0.10;3.0.99]"
+	logo="images/xmlrpc.png"
+>	
+
+	<nom>
+		XML-RPC API
+	</nom>
+	<!-- Serveur et client xml-rpc -->
+
+	<auteur>kent1</auteur>
+
+	<copyright>2011-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<necessite nom="crud" compatibilite="[0.3.5;[" />
+</paquet>

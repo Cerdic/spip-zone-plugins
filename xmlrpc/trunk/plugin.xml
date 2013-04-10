@@ -1,0 +1,49 @@
+<plugin>
+	<nom>
+		XML-RPC API
+	</nom>
+	<slogan>
+		<multi>
+		 	[fr] Serveur et client xml-rpc
+		 	[en] Server and client xml-rpc
+		 </multi>
+	</slogan>
+	<icon>images/xmlrpc.png</icon>
+	<auteur>[kent1->http://www.kent1.info]</auteur>
+	<licence>
+		© 2011-2012 - GNU/GPL v3
+	</licence>
+	<version>
+		0.3.1
+	</version>
+	<etat>
+		test
+	</etat>
+	<description>
+		API xml-rpc cliente et serveur
+	</description>
+	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/</lien>
+	<prefix>xmlrpc</prefix>
+	<options>xmlrpc_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>xmlrpc_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_pre_methode</nom>
+		<inclure>xmlrpc_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_post_methode</nom>
+		<inclure>xmlrpc_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>xmlrpc_apis</nom>
+		<inclure>xmlrpc_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.11;3.0.99]" />
+	<necessite id="crud" version="[0.3.5;]" />
+	<necessite id='cfg' version='[1.10.1;]' />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
+	<categorie>outil</categorie>
+</plugin>
