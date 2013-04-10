@@ -9,8 +9,9 @@
 	[(#SAISIE{organisations, id_parent,
 		label=<:plugin:info_organisation:>})] 
 ]
-<a href="#" id="changer_selection_organisation"><:contacts:changer:></a>
-<div id="selection_organisation">
+#SET{id,#VAL|uniqid}
+<a href="#" id="changer_selection_organisation_#GET{id}" class='changer_selection_organisation'><:contacts:changer:></a>
+<div id="selection_organisation_#GET{id}">
 <BOUCLE_organisation(ORGANISATIONS){id_organisation=#ENV{valeur,#ENV{defaut}}}{tout}>
 <input type="text" name="#ENV{nom}" readonly="readonly" value="#NOM" />
 <input type="hidden" name="#ENV{nom}" value="#ID_ORGANISATION" />[(#REM) La vrai valeur a priorite]
@@ -24,7 +25,7 @@
 <script type='text/javascript'>
 (function($){
 $(document).ready(function(){
-$("#changer_selection_organisation").click(function(){
+$("#changer_selection_organisation_#GET{id}").click(function(){
 	$(this).animeajax();
 	$.get("[(#URL_PAGE{saisie_organisations})]",  {
 		id_organisation: "#ENV{valeur,#ENV{defaut}}",
@@ -36,8 +37,8 @@ $("#changer_selection_organisation").click(function(){
 		nom:	"#ENV{nom}"
 		}, function(data)
 	{
-		$('#selection_organisation').html(data);
-		$('#changer_selection_organisation').remove();
+		$('#selection_organisation_#GET{id}').html(data);
+		$('#changer_selection_organisation_#GET{id}').remove();
 	});
 });
 });
