@@ -15,7 +15,42 @@ var tradlang_switchers = function(){
 	});
 }
 
+var tradlang_thead_flottant = function(){
+	if($(".bilan table.spip").not('.flotting').length > 0){
+		$("table.spip").not('.flotting').each(function(){
+			var table = $(this);
+			var thead = $(this).find('thead');
+			var thead_width = $(this).width();
+			var offset = thead.offset();
+			var limite_multilang = offset.top;
+			var limite_bas = limite_multilang+$(this).height()-$(this).find("tfoot").height()-thead.height();
+			$(window).scroll(function() {
+				var pos_bas = thead.offset().top+thead.height();
+				if(($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
+					if(!thead.hasClass("thead_flottant")){
+						thead.find('th').each(function(){
+							$(this).css({'width':$(this).width()+'px'});
+						});
+						table.find('tfoot tr').eq(0).find('td').each(function(){
+							$(this).css({'width':$(this).width()+'px'});
+						});
+						thead.addClass("thead_flottant");
+					}
+					thead.css({"position": "absolute", "top": $(window).scrollTop()+'px', "width": thead_width+"px","z-index":"999"});
+				}
+				if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas)){
+					thead.removeClass("thead_flottant").css({"position": "static", "width": "auto"});
+					thead.find('th').css({'width':'auto'});
+					table.find('tbody tr').eq(0).find('td').css({'width':'inherit'});
+				}
+			});
+			table.addClass('flotting');
+		});
+	}
+}
 $(document).ready(function(){
 	tradlang_switchers();
-	onAjaxLoad(tradlang_switchers)
+	tradlang_thead_flottant();
+	onAjaxLoad(tradlang_switchers);
+	onAjaxLoad(tradlang_thead_flottant);
 });
