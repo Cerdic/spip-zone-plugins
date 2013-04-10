@@ -356,11 +356,11 @@ add_outil( array(
 	$nom = sinon($GLOBALS["visiteur_session"]["nom"],$GLOBALS["visiteur_session"]["session_nom"]);
 	$mail = sinon($GLOBALS["visiteur_session"]["email"],$GLOBALS["visiteur_session"]["session_email"]);
 	if(($verif_deux && !$nom && !$mail) || ($verif_nom && !$nom)) unset($nom);
-	elseif($verif_email && !$mail) unset($mail);
+	if($verif_email && !$mail) unset($mail);
 	$nom = !isset($nom); $mail = !isset($mail);
 	if($nom || $mail) {
 		$flux["data"]["message_erreur"] .= _T(($verif_deux || ($nom && $mail))?"couteau:nom_email_forum"
-			:$nom?"couteau:nom_forum":"couteau:email_forum");
+			:($nom?"couteau:nom_forum":"couteau:email_forum"));
 		unset($flux["data"]["previsu"]);
 		if($nom) $flux["data"]["session_nom"] = _T("info_obligatoire");
 		if($mail) $flux["data"]["session_email"] = _T("info_obligatoire");
