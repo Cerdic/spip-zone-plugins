@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_numero_document' => 'Documento número',
 	'info_genre' => 'Género:',
 	'info_lossless' => 'Ninguna pérdida de compresión',
+	'info_media' => 'Type de média :', # NEW
 	'info_mime' => 'Type mime:',
 	'info_nom_fichier' => 'Nombre del archivo:',
 	'info_original_filename' => 'Nombre original',
