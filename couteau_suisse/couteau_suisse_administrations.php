@@ -63,62 +63,62 @@ function couteau_suisse_vider_tables($nom_meta_base_version) {
 // installation des tables du plugin et mises a jour
 function couteau_suisse_upgrade($nom_meta_base_version, $version_cible){
 if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version_cible");
-	$current_version = 0.0;
-	if(	(!isset($GLOBALS['meta'][$nom_meta_base_version]))
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if($current_version==0.0){
-			include_spip('base/create');
-			creer_base();
-		}
-		if(cs_le_test($current_version, $tmp, '1.0')){
-			cs_suppr_metas_var('set_options');
-			cs_suppr_metas_var('radio_set_options3');
-			cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
-			cs_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
-			cs_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
-			cs_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
-			cs_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
-			cs_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
-			cs_suppr_metas_var('desactive_cache');
-			cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
-			cs_suppr_metas_var('target_blank');
-			cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
-			cs_suppr_metas_var('');
-			if(defined('_SPIP19300')) {
-				if(@$metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
-				cs_suppr_metas_var('radio_desactive_cache3');
-			}
-			foreach(array('cs_decoupe', 'cs_decoration', 'cs_decoration_racc', 'cs_smileys', 'cs_smileys_racc', 
-					'cs_chatons', 'cs_chatons_racc', 'cs_jcorner', 'cs_couleurs', 'cs_couleurs_racc', 
-					'cs_filets_sep', 'cs_filets_sep_racc', 'cs_insertions') as $meta) 
-				effacer_meta($meta);
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		if(cs_le_test($current_version, $tmp, '1.5')){
-			// nouveau champ 'ordre'
-			include_spip('outils/boites_privees');
-			tri_auteurs_verifie_table(true);
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		if(cs_le_test($current_version, $tmp, '1.7')){
-			effacer_meta('tweaks_contribs');
-			// MAJ forcee de tous les fichiers distants
-			cs_maj_forcee(array('ecran_securite', 'previsualisation'));
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		if(cs_le_test($current_version, $tmp, '1.10')){
-			// MAJ pour rajeunissement
-			cs_maj_forcee(array('maj_auto', 'masquer', 'jcorner'));
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		if(cs_le_test($current_version, $tmp, '1.11')){
-			// anciens metas inusites
-			foreach(array('tweaks_smileys', 'tweaks_chatons', 'cs_spam_mots') as $meta) 
-				effacer_meta($meta);
-			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
-		}
-		ecrire_metas(); # Pour SPIP 1.92
+	$current_version = '0.0';
+	if(	isset($GLOBALS['meta'][$nom_meta_base_version])
+		&& !version_compare($current_version = $GLOBALS['meta'][$nom_meta_base_version], $version_cible) )
+			return;
+	if($current_version=='0.0') {
+		include_spip('base/create'); 
+		creer_base();
 	}
+	if(cs_le_test($current_version, $tmp, '1.0')) {
+		cs_suppr_metas_var('set_options');
+		cs_suppr_metas_var('radio_set_options3');
+		cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
+		cs_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
+		cs_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
+		cs_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
+		cs_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
+		cs_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
+		cs_suppr_metas_var('desactive_cache');
+		cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
+		cs_suppr_metas_var('target_blank');
+		cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
+		cs_suppr_metas_var('');
+		if(defined('_SPIP19300')) {
+			if(@$metas_vars['radio_desactive_cache3']==1) $metas_vars['radio_desactive_cache4']=-1;
+			cs_suppr_metas_var('radio_desactive_cache3');
+		}
+		foreach(array('cs_decoupe', 'cs_decoration', 'cs_decoration_racc', 'cs_smileys', 'cs_smileys_racc', 
+				'cs_chatons', 'cs_chatons_racc', 'cs_jcorner', 'cs_couleurs', 'cs_couleurs_racc', 
+				'cs_filets_sep', 'cs_filets_sep_racc', 'cs_insertions') as $meta) 
+			effacer_meta($meta);
+		ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+	}
+	if(cs_le_test($current_version, $tmp, '1.5')) {
+		// nouveau champ 'ordre'
+		include_spip('outils/boites_privees');
+		tri_auteurs_verifie_table(true);
+		ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+	}
+	if(cs_le_test($current_version, $tmp, '1.7')) {
+		effacer_meta('tweaks_contribs');
+		// MAJ forcee de tous les fichiers distants
+		cs_maj_forcee(array('ecran_securite', 'previsualisation'));
+		ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+	}
+	if(cs_le_test($current_version, $tmp, '1.10')) {
+		// MAJ pour rajeunissement
+		cs_maj_forcee(array('maj_auto', 'masquer', 'jcorner'));
+		ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+	}
+	if(cs_le_test($current_version, $tmp, '1.11')) {
+		// anciens metas inusites
+		foreach(array('tweaks_smileys', 'tweaks_chatons', 'cs_spam_mots') as $meta) 
+			effacer_meta($meta);
+		ecrire_meta($nom_meta_base_version, $current_version=$tmp);
+	}
+	ecrire_metas(); # Pour SPIP 1.92
 }
 
 function cs_le_test($current_version, &$tmp, $new) {
