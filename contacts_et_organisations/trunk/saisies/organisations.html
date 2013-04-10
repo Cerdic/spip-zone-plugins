@@ -15,6 +15,10 @@
 <input type="text" name="#ENV{nom}" readonly="readonly" value="#NOM" />
 <input type="hidden" name="#ENV{nom}" value="#ID_ORGANISATION" />[(#REM) La vrai valeur a priorite]
 </BOUCLE_organisation>
+[(#REM) Indiquer les inputs même si l'orga n'existe pas, pour les formulaires de configuration automatique ]
+<input type="text" name="#ENV{nom}" readonly="readonly" value="<:contacts:non_renseigne|attribut_html:>" />
+<input type="hidden" name="#ENV{nom}" value="" />
+<//B_organisation>
 </div>
 
 <script type='text/javascript'>
