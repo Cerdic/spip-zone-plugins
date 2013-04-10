@@ -79,7 +79,7 @@ body.navigation_avec_icones {
   }
 }
 #bando_navigation .nav > li {
-  padding: 0 10px;
+  padding: 0;
   text-align: center;
 }
 #bando_navigation .nav > li ul li {
@@ -356,7 +356,7 @@ input[type="file"] {
 @media (max-width: 767px) {
   .nav-collapse .nav > li {
     float: left;
-    width: 30%;
+    width: 33%;
   }
   .nav-collapse .nav li:nth-child(3n+1) {
     clear: left;
@@ -369,7 +369,7 @@ input[type="file"] {
 @media (min-width: 380px) and (max-width: 450px) {
   .nav-collapse .nav > li {
     float: left;
-    width: 45%;
+    width: 50%;
     padding: 0 !important;
   }
   .nav-collapse .nav li:nth-child(3n+1) {
@@ -388,4 +388,20 @@ input[type="file"] {
 
 // cf. css/thumbnails.less
 @media (max-width: 380px) {
+  .nav-collapse .nav > li {
+    float: none;
+    padding: 0 !important;
+  }
+  .nav-collapse .nav li:nth-child(3n+1) {
+    clear: none;
+  }
+  .nav-collapse .nav li:nth-child(2n+1) {
+    clear: left;
+  }
+  .nav-collapse .nav li:nth-child(4n) {
+    clear: none;
+  }
+  .nav-collapse .dropdown-menu {
+    clear: both;
+  }
 }
