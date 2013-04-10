@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'getid3_description' => 'Read and write audio tags to audio documents
-_ [->http://getid3.sourceforge.net/]',
-	'getid3_slogan' => 'Read and write audio tags'
+_ [->http://getid3.sourceforge.net/]', # MODIF
+	'getid3_slogan' => 'Read and write audio tags' # MODIF
 );
 
 ?>
