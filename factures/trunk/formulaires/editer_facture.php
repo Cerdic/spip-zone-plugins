@@ -75,6 +75,9 @@ function formulaires_editer_facture_charger_dist($id_facture='new', $retour='', 
 		}
 		$valeurs['id_organisation_emettrice'] = lire_config('factures/id_organisation_emettrice', 0);
 		$valeurs['date_facture'] = date("Y-m-d H:i:00", time());
+
+		$facture_reference = charger_fonction('facture_reference', 'inc');
+		$valeurs['num_facture'] = $facture_reference($valeurs);
 	}
 
 	return $valeurs;
