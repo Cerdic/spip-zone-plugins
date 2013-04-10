@@ -359,8 +359,8 @@ add_outil( array(
 	elseif($verif_email && !$mail) unset($mail);
 	$nom = !isset($nom); $mail = !isset($mail);
 	if($nom || $mail) {
-		$flux["data"]["message_erreur"] .= ($nom && !$mail)?_T("couteau:nom_forum")
-			:((!$nom && $mail)?_T("couteau:email_forum"):_T("couteau:nom_email_forum"));
+		$flux["data"]["message_erreur"] .= _T(($verif_deux || ($nom && $mail))?"couteau:nom_email_forum"
+			:$nom?"couteau:nom_forum":"couteau:email_forum");
 		unset($flux["data"]["previsu"]);
 		if($nom) $flux["data"]["session_nom"] = _T("info_obligatoire");
 		if($mail) $flux["data"]["session_email"] = _T("info_obligatoire");
