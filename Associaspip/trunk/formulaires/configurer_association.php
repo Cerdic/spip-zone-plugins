@@ -13,139 +13,73 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 function formulaires_configurer_association_verifier_dist() {
 	$erreurs = array();
-
 	$erreurs['message_erreur'] = _T('asso:erreur_titre'); // on insere directement un titre de message d'erreurs, si on n'a que lui a la fin on renvoie un tableau vide
-	$dons = _request('dons');
-	$ventes = _request('ventes');
-	$prets = _request('prets');
-	$activites = _request('activites');
-	$comptes = _request('comptes');
-	$pc_cotisations = _request('pc_cotisations');
-	$pc_dons = _request('pc_dons');
-	$pc_ventes = _request('pc_ventes');
-	$pc_frais_envoi = _request('pc_frais_envoi');
-	$pc_prets = _request('pc_prets');
-	$pc_activites = _request('pc_activites');
-	$nom = _request('nom'); // nom de l'association ne doit pas etre vide
-	if (!$nom or strlen(trim($nom))==0) {
+
+	if ( !strlen(trim(_request('nom'))) ) { // nom de l'association ne doit pas etre vide
 		$erreurs['nom'] = _T('asso:erreur_configurer_association_nom_association_vide');
 	}
-	$ref_attribuee = array();
-	$classe_attribuee = array();
-	if ($comptes) { // si la gestion comptable est activee, on valide le plan comptable
+
+	$comptes = _request('comptes');
+	if ($comptes) { // si la gestion comptable est activee
 		include_spip('inc/association_comptabilite');
-		if (!association_valider_plan_comptable()) {
+		if (!association_valider_plan_comptable()) { // on (re)valide le plan comptable
 			$erreurs['comptes'] = _T('asso:erreur_configurer_association_plan_comptable_non_valide');
 			return $erreurs;
 		}
-		// on verifie qu'il n'a pas deux fois la meme reference comptable en incluant celle des cotisations ou qu'on n'a pas attribue aux cotisations ou modules de gestion une reference comptable de la classe des comptes financiers
-		$classe_financier = _request('classe_banques');
-		$classe_attribuee[$classe_financier] = 'classe_banques';
-		$ref_attribuee[$pc_cotisations] = 'pc_cotisations';
-		if ($pc_cotisations[0]==$classe_financier) // le premier caractere du code de la reference comptable est sa classe
-			$erreurs['pc_cotisations'] = _T('asso:erreur_configurer_association_reference_financier');
-		foreach( array('classe_charges','classe_produits','classe_contributions_volontaires') as $index=>$classe_testee) { // on verifie que les classes sont uniques
-			$$classe_testee = _request($classe_testee);
-			if (array_key_exists($$classe_testee, $classe_attribuee)) {
+		$classe_attribuee = array();
+		foreach( array('banques', 'charges','produits','contributions_volontaires') as $index=>$exigee) { // on verifie que les classes obligatoires sont distincts
+			$classe_testee = _request("classe_$exigee");
+			if (array_key_exists($classe_testee, $classe_attribuee)) { // classe dupliquee
 				$erreurs[$classe_testee] = _T('asso:erreur_configurer_association_classe_identique');
-				$erreurs[$ref_attribuee[$$classe_testee]] = _T('asso:erreur_configurer_association_classe_identique');
+				$erreurs[$ref_attribuee[$classe_testee]] = _T('asso:erreur_configurer_association_classe_identique');
 			}
-			$classe_attribuee[$$classe_testee] = $classe_testee;
+			$classe_attribuee[$classe_testee] = $classe_testee;
 		}
+		$classe_financier = $classe_attribuee['classe_banques'];
 	}
-	if ($dons=='on') {
-		if (!$comptes) {
-			$erreurs['dons'] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
-		} else {
-			if (!array_key_exists($pc_dons,$ref_attribuee)) { // le premier caractere du code de la reference comptable est sa classe
-				if ($pc_dons[0]==$classe_financier)
-					$erreurs['dons'] = _T('asso:erreur_configurer_association_reference_financier');
+	$ref_attribuee = array();
+	foreach (array(
+		'comptes' => array('cotisations'), // pour inclure les cotisations
+		'activites' => array('activites'),
+		'dons' => array('dons'),
+		'prets' => array('cautions','prets','ressources'),
+		'ventes' => array('frais_envoi','ventes'),
+	) as $module=>$refs) {
+		if (_request($module)) { // module actif
+			if (!$comptes) { // compta non activee :-S
+				$erreurs[$module] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
 			} else {
-				$erreurs['dons'] = _T('asso:erreur_configurer_association_reference_multiple');
-				$erreurs[$ref_attribuee[$pc_dons]] = _T('asso:erreur_configurer_association_reference_multiple');
-			}
-			$ref_attribuee[$pc_dons]='dons';
-		}
-	}
-	if ($ventes=='on') {
-		if (!$comptes) {
-			$erreurs['ventes'] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
-		} else {
-			if (!array_key_exists($pc_ventes,$ref_attribuee)) {
-				if ($pc_ventes[0]==$classe_financier) // le premier caractere du code de la reference comptable est sa classe
-					$erreurs['ventes'] = _T('asso:erreur_configurer_association_reference_financier');
-			} else {
-				$erreurs['ventes'] = _T('asso:erreur_configurer_association_reference_multiple');
-				$erreurs[$ref_attribuee[$pc_ventes]] = _T('asso:erreur_configurer_association_reference_multiple');
-			}
-			$ref_attribuee[$pc_ventes]='ventes';
-			if ($pc_ventes!=$pc_frais_envoi) { // vente et frais_envoi peuvent etre associes a la meme reference comptable meme si c'est deconseille d'un point de vue comptable
-				if (!array_key_exists($pc_frais_envoi,$ref_attribuee)) {
-					if ($pc_frais_envoi[0]==$classe_financier) // le premier caractere du code de la reference comptable est sa classe
-						$erreurs['frais_envoi'] = _T('asso:erreur_configurer_association_reference_financier');
-				} else {
-					$erreurs['frais_envoi'] = _T('asso:erreur_configurer_association_reference_multiple');
-					$erreurs[$ref_attribuee[$pc_frais_envoi]] = _T('asso:erreur_configurer_association_reference_multiple');
+				foreach ($refs as $champ) {
+					$val = _request("pc_$champ");
+					if (!array_key_exists($val,$ref_attribuee)) { // reference unique
+						if ($val[0]==$classe_financier) // le 1er caractere de la reference comptable est sa classe : elle ne doit pas etre financiere
+							$erreurs["pc_$champ"] = _T('asso:erreur_configurer_association_reference_financier');
+					} elseif($val==_request('pc_ventes') && $champ=='frais_envoi') { // exception : vente et frais_envoi peuvent etre associes a la meme reference comptable meme si c'est deconseille d'un point de vue comptable
+					} elseif($val=='' && $champ=='cautions') { // exception : la reference peut ne pas etre attribuee si on ne veut pas utiliser de systeme de cautionnement
+					} else { // references multiples...
+						$erreurs[$module] = _T('asso:erreur_configurer_association_reference_multiple');
+						$erreurs[$ref_attribuee[$val]] = _T('asso:erreur_configurer_association_reference_multiple');
+					}
+					$ref_attribuee[$val] = "pc_$champ";
 				}
-				$ref_attribuee[$pc_frais_envoi]='frais_envoi';
 			}
-		}
-	}
-	if ($prets=='on') {
-		if (!$comptes) {
-			$erreurs['prets'] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
-		} else {
-			if (!array_key_exists($pc_prets,$ref_attribuee)) {
-				if ($pc_prets[0]==$classe_financier) // le premier caractere du code de la reference comptable est sa classe
-					$erreurs['prets'] = _T('asso:erreur_configurer_association_reference_financier');
-			} else {
-				$erreurs['prets'] = _T('asso:erreur_configurer_association_reference_multiple');
-				$erreurs[$ref_attribuee[$pc_prets]] = _T('asso:erreur_configurer_association_reference_multiple');
-			}
-			$ref_attribuee[$pc_prets] = 'prets';
-		}
-	}
-	if ($activites=='on') {
-		if (!$comptes) {
-			$erreurs['activites'] = _T('asso:erreur_configurer_association_gestion_comptable_non_activee');
-		} else {
-			if (!array_key_exists($pc_activites,$ref_attribuee)) {
-				if ($pc_activites[0]==$classe_financier) // le premier caractere du code de la reference comptable est sa classe
-					$erreurs['activites'] = _T('asso:erreur_configurer_association_reference_financier');
-			} else {
-				$erreurs['activites'] = _T('asso:erreur_configurer_association_reference_multiple');
-				$erreurs[$ref_attribuee[$pc_activites]] = _T('asso:erreur_configurer_association_reference_multiple');
-			}
-			$ref_attribuee[$pc_activites]='activites';
 		}
 	}
 
 	if (count($erreurs)==1) { // si on n'a qu'un entree dans la table des erreurs, c'est le titre qu'on a mis au debut, on n'a pas d'erreur, on renvoie un tableau vide
 		return array();
 	}
-	// on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de 'on' sinon le retour de verif mange les eventuelles modifs
-	if (!$comptes)
-		set_request('comptes', 'off');
-	if (!$dons)
-		set_request('dons', 'off');
-	if (!$ventes)
-		set_request ('ventes', 'off');
-	if (!$prets)
-		set_request ('prets', 'off');
-	if (!$activites)
-		set_request ('activites', 'off');
-	if (!_request('$destinations'))
-		set_request ('destinations', 'off');
-	if (!_request('civilite'))
-		set_request ('civilite', 'off');
-	if (!_request('prenom'))
-		set_request ('prenom', 'off');
-	if (!_request('id_asso'))
-		set_request ('id_asso', 'off');
+	foreach (array(
+		'activites', 'comptes', 'dons', 'prets', 'ventes', // compta (destinations, exercices)
+		'civilite', 'id_asso', 'prenom', // fichemembres
+	) as $checkbox) { // on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de 'on' sinon le retour de verif mange les eventuelles modifs
+		if (!_request($checkbox))
+			set_request($checkbox, 'off');
+	}
+
 	return $erreurs;
 }
 
-// reprise en grande partie du code de la fonction traiter de configurer_metas
 function formulaires_configurer_association_traiter_dist($form) {
 	include_spip('formulaires/configurer_metas');
 // debut du code directement copie depuis formulaires_configurer_metas_traiter_dist
@@ -160,63 +94,35 @@ function formulaires_configurer_association_traiter_dist($form) {
 	while ($row = sql_fetch($query)) { // on ajoute toutes les metas utilisateurs : presentes avec le prefixe meta_utilisateur_ dans la table spip_association_metas
 		$metas_list[$row['nom']]=0;
 	}
-	// ignorer les changements fait dans un module non active
-	$dons = _request('dons');
-	$ventes = _request('ventes');
-	$prets = _request('prets');
-	$activites = _request('activites');
-	$comptes = _request('comptes');
-	if (!$comptes) {
-		unset($metas_list['pc_cotisations']);
-		unset($metas_list['dc_cotisations']);
-		unset($metas_list['destinations']);
+
+	foreach ( array(
+		'activites' => array('dc_activites', 'pc_activites'),
+		'comptes' => array('destinations','dc_cotisations', 'pc_cotisations',),
+		'dons' => array('dc_colis','pc_colis','pc_dons','dc_dons'), //no dc_colis
+		'prets' => array('dc_cautions','pc_cautions','dc_prets','pc_prets','dc_ressources','pc_ressources',), //no dc_cautions
+		'ventes' => array('dc_frais_envoi','pc_frais_envoi','dc_ventes','pc_ventes'), //no dc_frais_envoi
+	) as $module=>$metas) { // ignorer les changements fait dans un module non active
+		if (!_request($module)) { // module desactive...
+			foreach ($metas as $meta) { // ...ignorer les changements faits
+				unset($metas_list[$meta]);
+			}
+		}
 	}
-	if (!$dons) {
-		unset($metas_list['pc_dons']);
-		unset($metas_list['dc_dons']);
+	foreach ( array('cotisations', 'dons', 'colis', 'ressources', 'cautions', 'prets', 'activites',) as $pc ) { // A-t-on modifie les metas pc_XXX si oui il faut faire suivre dans la table des comptes la modif, sinon on perd toutes les operations deja enregistrees
+		$nrc = _request("pc_$pc"); // Nouvelle Reference
+		if ($comptes && $GLOBALS['association_metas']["pc_$pc"] && ($nrc!=$GLOBALS['association_metas']["pc_$pc"])) { // condition pour modifier dans la table des comptes : module actif (peut-etre aussi juste active par cet envoi) ET meta pre-existente ET meta modifiee
+			sql_updateq('spip_asso_comptes', array('imputation' => $nrc), 'imputation='.$GLOBALS['association_metas']["pc_$pc"]);
+		}
 	}
-	if (!$ventes) {
-		unset($metas_list['pc_ventes']);
-		unset($metas_list['pc_frais_envoi']);
-		unset($metas_list['dc_ventes']);
-	}
-	if (!$prets) {
-		unset($metas_list['pc_prets']);
-	}
-	if (!$activites) {
-		unset($metas_list['pc_activites']);
-	}
-	// A-t-on modifie les metas pc_XXX si oui il faut faire suivre dans la table des comptes la modif, sinon on perd toutes les operations deja enregistrees
-	$pc_cotisations = _request('pc_cotisations');
-	$pc_dons = _request('pc_dons');
-	$pc_ventes = _request('pc_ventes');
 	$pc_frais_envoi = _request('pc_frais_envoi');
-	$pc_prets = _request('pc_prets');
-	$pc_activites = _request('pc_activites');
-	// condition pour modifier dans la table des comptes : module actif (peut-etre aussi juste active par cet envoi) ET meta pre-existente ET meta modifiee
-	if ($comptes && $GLOBALS['association_metas']['pc_cotisations'] && ($pc_cotisations!=$GLOBALS['association_metas']['pc_cotisations'])) {
-		sql_updateq('spip_asso_comptes', array('imputation' => $pc_cotisations), 'imputation='.$GLOBALS['association_metas']['pc_cotisations']);
-	}
-	if ($dons && $GLOBALS['association_metas']['pc_dons'] && ($pc_dons!=$GLOBALS['association_metas']['pc_dons'])) {
-		sql_updateq('spip_asso_comptes', array('imputation' => $pc_dons), 'imputation='.$GLOBALS['association_metas']['pc_dons']);
-	}
-	if ($ventes && $GLOBALS['association_metas']['pc_ventes'] && ($pc_ventes!=$GLOBALS['association_metas']['pc_ventes'])) {
-		sql_updateq('spip_asso_comptes', array('imputation' => $pc_ventes), 'imputation='.$GLOBALS['association_metas']['pc_ventes']);
-	}
-	if ($ventes &&
+	if (_request('ventes') &&
 		$GLOBALS['association_metas']['pc_frais_envoi'] &&
 		($pc_frais_envoi!=$GLOBALS['association_metas']['pc_frais_envoi']) &&
 		($GLOBALS['association_metas']['pc_frais_envoi']!=$GLOBALS['association_metas']['pc_ventes']) &&
-		$pc_ventes!=$pc_frais_envoi) { // pour celui la on controle aussi que le pc_vente et pc_frais_envoi etaient differents avant et apres la modif
+		_request('pc_ventes')!=$pc_frais_envoi) { // pour celle-la on controle aussi que le pc_vente et pc_frais_envoi etaient differents avant et apres la modif
 			// - si ils etaient egaux, on ne peux pas faire migrer les frais d'envoi vu qu'ils etaient inseres dans la meme operation comptable
 			// - si ils sont maintenant egaux mais ne l'etaient pas avant, toutes les ventes vont apparaitre en double: la vente elle meme et les frais d'envoi.
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), 'imputation='.$GLOBALS['association_metas']['pc_frais_envoi']);
-	}
-	if ($prets && $GLOBALS['association_metas']['pc_prets'] && ($pc_prets!=$GLOBALS['association_metas']['pc_prets'])) {
-		sql_updateq('spip_asso_comptes', array('imputation' => $pc_prets), 'imputation='.$GLOBALS['association_metas']['pc_prets']);
-	}
-	if ($activites && $GLOBALS['association_metas']['pc_activites'] && ($pc!=$GLOBALS['association_metas']['pc_activites'])) {
-		sql_updateq('spip_asso_comptes', array('imputation' => $pc_activites), 'imputation='.$GLOBALS['association_metas']['pc_activites']);
 	}
 	// code repris sur formulaires_configurer_metas_traiter_dist
 	foreach (array_keys($metas_list) as $k) {
