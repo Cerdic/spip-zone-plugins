@@ -1,0 +1,99 @@
+#SET{largeur_previsu,#VAL{_EM_PREVISU_LARGEUR}|defined|?{#EVAL{_EM_PREVISU_LARGEUR},#CONFIG{emballe_medias/styles/largeur_img_previsu,425}}}
+#SET{hauteur_previsu,#VAL{_EM_PREVISU_HAUTEUR}|defined|?{#EVAL{_EM_PREVISU_HAUTEUR},#CONFIG{emballe_medias/styles/hauteur_img_previsu,425}}}
+<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tout}>
+[(#ENV{compteur}|oui)
+	<div class="em_next_prev">
+		[(#ENV{compteur}|=={1}|oui)
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+		[(#ENV{compteur}|>{1}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|moins{1})]">
+				<img src="#CHEMIN{images/ico_fle_haut.png}" alt="<:emballe_medias:em_prev:>" />
+			</a>
+			[(#ENV{total}|>{#ENV{compteur}}|oui)
+			<a href="#formulaire_supprimer_document_[(#ENV{compteur}|plus{1})]">
+				<img src="#CHEMIN{images/ico_fle_bas.png}" alt="<:emballe_medias:em_next:>" />
+			</a>]
+		]
+	</div>
+]
+<h4 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h4>
+<div class="em_vignette">
+	#MODELE{emb,id_document=#ID_DOCUMENT,align=center}
+</div>
+[(#ID_DOCUMENT|epubreader_creer_js{spip_documents_#ID_DOCUMENT})]
+<div class="infos_document">
+	<div>
+		<p>
+			<strong><:emballe_medias:document_titre:> </strong>
+			<span class="#EDIT{titre}">[(#TITRE|sinon{#FICHIER|basename})]</span>
+		</p>
+	</div>
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_id:></strong>
+			#(#ID_DOCUMENT)
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_nom_fichier:></strong>
+			<abbr title="[(#FICHIER|basename)]">
+				<a href="#FICHIER" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
+					(#FICHIER|basename|couper{20})
+				</a>
+			</abbr>
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_poid_fichier:></strong> (#TAILLE|taille_en_octets)
+		</p>
+	</div>]
+	[<div><strong><:emballe_medias:document_type:></strong> (#MIME_TYPE)</p></div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_extension:></strong>
+			(#EXTENSION)
+		</p>
+	</div>]
+	<div>
+		<strong><:emballe_medias:document_logo:></strong>
+		<div class="em_vignette #EDIT{vignette} resize-100">
+			[(#LOGO_DOCUMENT|image_passe_partout{100,100}|inserer_attribut{alt,''})]
+		</div>
+	</div>
+	<div>
+		<p><strong><:emballe_medias:document_description:></strong> </p>
+		<div class="#EDIT{em_descriptif}">[(#DESCRIPTIF|sinon{<p><:emballe_medias:document_description_no_crayons:></p>})]</div>
+	</div>
+	[(#ID_LICENCE|>={0}|oui)<div>
+		<p>
+			<strong><:emballe_medias:document_licence:></strong>
+			<span class="em_licence_documents #EDIT{id_licence}">
+				#MODELE{licence,id_document=#ID_DOCUMENT,id_licence=#ID_LICENCE,nom_licence=oui,lien=non,hauteur_logo=24}
+			</span>
+		</p>
+	</div>]
+	[<div>
+		<p>
+			<strong><:emballe_medias:document_credits:></strong>
+			<span class="em_credits_documents #EDIT{credits}">
+			 (#CREDITS)
+			</span>
+		</p>
+	</div>]
+	[(#CREDITS|non)[(#PLUGIN{medias}|oui)
+	<div>
+		<p>
+			<strong><:emballe_medias:document_credits:></strong>
+			<span class="em_credits_documents #EDIT{credits}">
+			 <p><:emballe_medias:no_credits_crayons:></p>
+			</span>
+		</p>
+	</div>]]
+</div>
+</BOUCLE_documents_en_cours>

@@ -1,0 +1,13 @@
+<BOUCLE_epub(DOCUMENTS types_documents) {id_document=#ID} {tout}>
+<div class="spip_document_#ID_DOCUMENT spip_documents_epub spip_documents[ spip_documents_(#ENV{align})]" id="spip_documents_#ID_DOCUMENT"
+	style='[height:(#ENV{height,#ENV{hauteur}});]width:#ENV{width,#ENV{largeur,100%}};[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};][ (#ENV{align,center}|=={center}|non)[width:(#ENV{largeur}|max{120})px;]]'>
+	<div style="width:100%">
+	<a href="#FICHIER" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
+		[(#LOGO_DOCUMENT|image_reduire{#GET{largeur_previsu},#GET{hauteur_previsu}}|inserer_attribut{class,''})]
+	</a>
+	</div>
+	[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
+	[<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+</div>
+[(#ID_DOCUMENT|epubreader_creer_js{spip_documents_#ID_DOCUMENT,#ENV{height,#ENV{hauteur,600}}})]
+</BOUCLE_epub>
