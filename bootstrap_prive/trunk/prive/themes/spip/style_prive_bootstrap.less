@@ -333,3 +333,53 @@ input[type="file"] {
     margin: 10px 10px 10px 0;
     width: 150px;
 }
+
+/*
+ * Voici les medias queries utilisés dans Bootstrap
+ */
+// cf. css/responsive-1200px-min.less
+@media (min-width: 1200px) {
+}
+// cf. css/responsieve-768px-979px.less
+@media (min-width: 768px) and (max-width: 979px) {
+  #bando_navigation .nav > li {
+    padding: 0;
+  }
+}
+// cf. css/responsive-767px-max.less
+@media (max-width: 767px) {
+  .nav-collapse .nav > li {
+    float: left;
+    width: 30%;
+  }
+  .nav-collapse .nav li:nth-child(3n+1) {
+    clear: left;
+  }
+}
+// cf. css/thumbnails.less
+@media (max-width: 450px) {
+}
+
+@media (min-width: 380px) and (max-width: 450px) {
+  .nav-collapse .nav > li {
+    float: left;
+    width: 45%;
+    padding: 0 !important;
+  }
+  .nav-collapse .nav li:nth-child(3n+1) {
+    clear: none;
+  }
+  .nav-collapse .nav li:nth-child(2n+1) {
+    clear: left;
+  }
+  .nav-collapse .nav li:nth-child(4n) {
+    clear: none;
+  }
+  .nav-collapse .dropdown-menu {
+    clear: both;
+  }
+}
+
+// cf. css/thumbnails.less
+@media (max-width: 380px) {
+}
