@@ -1,0 +1,35 @@
+<paquet
+	prefix="signalement"
+	categorie="edition"
+	version="1.1.1"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/signalement.png"
+	schema="0.1.0"
+	documentation="http://www.mediaspip.net/ticket/faire-un-plugin-de-signalement"
+>	
+
+	<nom>Signalement de contenus illicites</nom>
+	<!-- Signaler les contenus illicites sur un site -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="signalement_liste" action="" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/signalement.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/signalement.php" />
+	<pipeline nom="autoriser" inclure="signalement_autoriser.php" />
+	<pipeline nom="afficher_config_objet" inclure="signalement_pipelines.php" />
+	<pipeline nom="post_edition" inclure="signalement_pipelines.php" />
+	<pipeline nom="notifications_destinataires" inclure="signalement_pipelines.php" />
+	
+	<necessite nom="notifications" compatibilite="[2.2.1;[" />
+	<utilise nom="facteur" />
+	<utilise nom="mediabox" />
+	
+	<menu nom="signalements_reactions" titre="signalement:icone_suivi_signalements" parent="menu_activite" icone="images/signalement-16.png" action="controler_signalement" />
+	<menu nom="configurer_signalement" titre="signalement:titre_signalements" parent="menu_configuration" icone="images/signalement-16.png" />
+</paquet>

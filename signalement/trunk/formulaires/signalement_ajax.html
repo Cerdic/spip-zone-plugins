@@ -1,0 +1,79 @@
+[(#ENV{_deja_signale}|non)
+<button type='image' class="submit ajouter_signalement" id="bouton_signalement_[(#OBJET)]_[(#ID_OBJET)]" name="ajouter" value="<:signalement:signalement_ajouter|attribut_html:>" title="<:signalement:signalement_ajouter|attribut_html:>">
+	<span><:signalement:bouton_alerter|attribut_html:></span>
+	[(#CHEMIN{images/signalement-add-16.png}|balise_img{<:signalement:add_to|attribut_html:>})]
+</button>]
+[(#ENV{_deja_signale}|oui)
+<button type='submit' class="submit retirer_signalement"  id="bouton_signalement_[(#OBJET)]_[(#ID_OBJET)]" name="retirer" value="<:signalement:signalement_enlever|attribut_html:>" title="<:signalement:signalement_enlever|attribut_html:>">
+	<span><:signalement:bouton_enlever_alerte|attribut_html:></span>
+	[(#CHEMIN{images/signalement-del-16.png}|balise_img{<:signalement:remove_from|attribut_html:>})]
+</button>]
+
+<div class="formulaire_signalement_hide">
+<div class="formulaire_signalement formulaire_spip">
+	[(#ENV**{message_ok})]
+	[(#ENV*{message_erreur})]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+	<form action="#ENV{action}" method="post" enctype="multipart/form-data">
+		#ACTION_FORMULAIRE{#SELF}
+		#SET{alertes,#REM|lister_signalements}
+		<div>
+			<BOUCLE_si_pas_alerte(CONDITION){si #ENV{_deja_signale}|non}>
+			<ul>
+			<B_signalements>
+			<li class="editer editer_motif[(#ENV**{erreurs}|table_valeur{motif}|oui)erreur]">
+				<label for="motif">
+					<:signalement:label_motif:>
+				</label>[<span class="erreur_message">
+				(#ENV**{erreurs}|table_valeur{motif})</span>]
+				<select id="motif" name="motif">
+					<option value="">-</option>
+					<BOUCLE_signalements(DATA){source table,#CONFIG{signalement/motifs,#GET{alertes}|array_keys}}>
+					<option value="#VALEUR"[(#VALEUR|=={#ENV{motif}}|oui)selected="selected"]>[(#GET{alertes}|table_valeur{#VALEUR})]</option>
+					</BOUCLE_signalements>
+				</select>
+			</B_signalements>
+			</li>
+			<li class="editer editer_texte[(#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="texte">
+					<:signalement:label_texte:>
+				</label>[<span class="erreur_message">
+				(#ENV**{erreurs}|table_valeur{texte})</span>]
+				<textarea id="texte" name="texte" class="texte" rows="5">#ENV**{texte}</textarea>
+			</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:bouton_valider:>">
+			</p>
+			</BOUCLE_si_pas_alerte>
+			</B_si_pas_alerte>
+			<ul>
+				<li class="fieldset">
+					<legend><:signalement:bouton_enlever_alerte:></legend>
+					<ul>
+						[(#ENV{motif}|oui)
+						<li class="editer editer_motif">
+							<label for="motif">
+								<:signalement:label_motif:>
+							</label>
+							[(#GET{alertes}|table_valeur{#ENV{motif}})]
+						</li>]
+						[(#ENV{texte}|oui)
+						<li class="editer editer_texte">
+							<label for="texte">
+								<:signalement:label_texte:>
+							</label
+							[(#ENV**{texte}|propre)]
+						</li>]
+					</ul>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:signalement:bouton_enlever_alerte:>">
+			</p>
+			<//B_si_pas_alerte>
+		</div>
+	</form>
+	</BOUCLE_si_editable>
+</div>
+</div>

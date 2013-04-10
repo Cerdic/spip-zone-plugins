@@ -1,0 +1,5 @@
+[(#VAL{texte}|trouver_fond{emails/}|?{
+	#INCLURE**{fond=emails/texte,sujet=#INCLURE**{fond=notifications/signalement_poste_html_sujet,env},html=#INCLURE**{fond=notifications/signalement_poste_html_corps,env}}
+				,
+	#INCLURE**{fond=notifications/signalement_poste_texte,env}
+})]

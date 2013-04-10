@@ -1,0 +1,36 @@
+<BOUCLE_signalement(SIGNALEMENTS){id_signalement}{statut?}{tout}>
+#SET{self,#SELF|parametre_url{debut_signalement|email_auteur|ip|id_auteur|auteur,''}}
+[(#REM) Le cartouche ---------------------------------------------------------]
+<div class='cartouche'>
+<h3 class='titre'><span class='info_statut'>[(#CHEMIN_IMAGE{[signalement-statut-(#STATUT)-24.png]}|balise_img|inserer_attribut{alt,#VAL{signalement:statut_}|concat{#STATUT}|_T})]</span>
+<a href='[(#GET{self}|parametre_url{debut_signalement,@#ID_SIGNALEMENT}|ancre_url{signalement#ID_SIGNALEMENT})]' title='[<:info_numero_abbreviation|attribut_html:> (#ID_SIGNALEMENT)]'>[(#MOTIF|sinon{<:signalement:info_sans_motif:>})]<b class="numero">#ID_SIGNALEMENT</b></a></h3>
+<div class='date'>[(#DATE|date_interface)]</div>
+#SET{voir,''}
+<div class='reponse_a'><:signalement:lien_signalement_objet:> <a href='[(#ID_OBJET|generer_url_entite{#OBJET,'',signalement#ID_SIGNALEMENT})]'>#INFO_TITRE{#OBJET,#ID_OBJET}</a>#SET{voir,'</div>'}
+[ &#91;<a href='[(#GET{self}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]' class="ajax"><:signalement:lien_voir_signalements_objet:></a>&#93;(#GET{voir})]
+
+<div class='par'><:par_auteur:>[
+(#ID_AUTEUR|oui)
+<a class='ajax' href='[(#GET{self}|parametre_url{id_auteur,#ID_AUTEUR})]' title='<:signalement:messages_meme_auteur|attribut_html:>' >#MODELE{auteur_nom,id_auteur}</a>
+
+][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:signalement:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
+
+][ &mdash; <a class='ajax' href='[(#GET{self}|parametre_url{email_auteur,#EMAIL_AUTEUR})]' title='<:signalement:messages_meme_email|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
+
+][(#STATUT|!={publie}|oui)[ &mdash; IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:signalement:messages_meme_ip|attribut_html:>' >(#IP)</a>]]</div>
+
+</div>
+[(#REM) Le corps ---------------------------------------------------------]
+[<div class='texte controle'>(#TEXTE|lignes_longues)</div>]
+[<div class='notes controle'>(#NOTES|lignes_longues)</div>]
+#SET{liens,#TITRE|extraire_balises{a}|extraire_attribut{href}}
+[<div class="urls">
+	<h4 onclick="$(this).next().toggle('fast');">[(#GET{liens}|count) ]<:signalement:info_liens_titre:></h4>
+	<div class="none-js">
+	(#GET{liens}|implode{", "}|textebrut|couper{1000}|nl2br)
+	</div>
+</div>]
+
+[(#REM) Les boutons ---------------------------------------------------------]
+[(#INCLURE{fond=prive/modeles/signalement-actions-#ENV{boutons,moderer}, id_signalement, id_objet, objet, statut, self})]
+</BOUCLE_signalement>

@@ -1,0 +1,120 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.onglets_simple ul.statut_signalement li.publie strong,.onglets_simple ul.statut_signalement li.publie a {background-image:url(#CHEMIN_IMAGE{signalement-statut-publie-24.png});padding-#GET{left}:27px;}
+.onglets_simple ul.statut_signalement li.refuse strong,.onglets_simple ul.statut_signalement li.refuse a {background-image:url(#CHEMIN_IMAGE{signalement-statut-refuse-24.png});padding-#GET{left}:27px;}
+.onglets_simple ul.statut_signalement li.spam strong,.onglets_simple ul.statut_signalement li.spam a,
+.onglets_simple ul.statut_signalement li.poubelle strong,.onglets_simple ul.statut_signalement li.poubelle a, {background-image:url(#CHEMIN_IMAGE{signalement-statut-spam-24.png});padding-#GET{left}:27px;}
+
+.controler_signalement .annule_filtre {float:#GET{right};}
+.controler_signalement #actiongroup button {width:100%;margin:5px 0;}
+
+/* Habillage des signalements en liste pour moderation
+---------------------------------------------- */
+ul.signalements li.item { margin: 15px 0; padding: 0 0 .8em 0; background: #eee url(#CHEMIN_IMAGE{signalement-bg-item-64.png}); border: 1px solid #ccc; border-top: 8px solid #ccc; position:relative;}
+ul.signalements li.item:hover { background-color: #e9e9e9; }
+
+ul.signalements li.statut_publie { background-image: none; border-color: #B2BF6B; }
+ul.signalements li.statut_refuse,
+ul.signalements li.statut_refuse:hover { background-color: #edd3d3; border-color: #FF5F5F; }
+ul.signalements li.statut_spam,
+ul.signalements li.statut_spam:hover,
+ul.signalements li.statut_poubelle,
+ul.signalements li.statut_poubelle:hover,  { background-color: #ddd; border-color: #666; }
+
+ul.signalements li .cartouche { min-height: 30px; padding: 5px; padding-#GET{left}: 30px; border-bottom: 1px solid #eee; }
+ul.signalements li .cartouche .numero {position: absolute;right: 5px;font-size: 1.5em;color:#bbb;font-weight: bold;font-style: italic;}
+ul.signalements li.statut_refuse .cartouche { border-color: #edd3d3; }
+ul.signalements li.statut_spam .cartouche,
+ul.signalements li.statut_poubelle .cartouche, { border-color: #ddd; }
+ul.signalements li .cartouche h3 {font-size:1.1em;margin-bottom:0.25em;}
+ul.signalements li .cartouche .date,ul.signalements li .cartouche .par {display:inline;}
+ul.signalements li .cartouche .info_statut {display:block;float:#GET{left};margin-#GET{left}:-30px;position:relative;display:inline;}
+ul.signalements li .cartouche .reponse_a {font-weight:bold;}
+ul.signalements li .cartouche .reponse_a a {font-weight:normal;}
+ul.signalements li .cartouche .lien_admin {display:block;}
+ul.signalements li .cartouche .statut{ float:right; width:20%; font-style:italic; text-align:right; }
+
+ul.signalements li.item .texte,ul.signalements li.item .site,ul.signalements li.item .urls { margin: 0; padding: 0 30px;max-height:15em;overflow-y:auto;}
+ul.signalements li.item .urls {border-top:1px dotted #eee;color:#666;word-wrap:break-word;}
+ul.signalements li.item .urls h4 {margin:0;cursor:hand;cursor:pointer;}
+ul.signalements li.item .texte p { margin: 0; padding: .8em 0; }
+
+ul.signalements >li.item .actions.moderer {padding-top:5px;padding-bottom:5px;margin-#GET{right}:5px;background:url(#CHEMIN_IMAGE{actions-filigrane-24.png}) no-repeat bottom right;padding-#GET{right}:30px;}
+ul.signalements >li.item .actions.moderer > div {visibility:hidden;}
+ul.signalements >li.item:hover .actions.moderer > div,ul.signalements >li.item.hover .actions.moderer > div{visibility:visible;}
+
+ul.signalements li .actions .bruler input.submit {color:#af976d;}
+ul.signalements li .actions .supprimer input.submit {color:#cf4d4d;}
+ul.signalements li .checkbox {position:absolute;top:50%;left:1px;}
+
+/* controle des signalements : afficher les liens */
+.controle a {
+	position: relative !important;
+	left:0 !important;
+	right:0 !important;
+	top:0 !important;
+	bottom: 0 !important;
+}
+.controle a:after {	display: inline; content: " [\27a0" attr(href) "]";}
+
+/* Habillage des signalements en thread pour participation
+---------------------------------------------- */
+.repondre { clear: both; margin-top: 2.50em; margin-right: 1em; text-align: right; font-weight: bold; }
+
+/* Habillage des signalements */
+ul.signalement { display: block; clear: both; margin: 0; padding: 0; font-size:11px; }
+ul.signalement, ul.signalement ul { list-style: none; }
+.signalement-fil { margin-top: 1.50em; }
+.signalement-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
+.signalement-chapo .signalement-titre, .signalement-chapo .signalement-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
+.signalement-texte { margin: 0; padding: 0.50em 1em; color: #333; }
+.signalement-texte .hyperlien {}
+.signalement-texte .repondre { margin: 0; padding: 0.10em 0; text-align: right; }
+
+/* Boite d'un signalement : eclaircissement progressif des bords */
+#SET{border,#GET{foncee}}
+ul .signalement-message { background:#fff; border: 1px solid #GET{border}; margin: 0; padding: 0; margin-bottom: 1em; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul .signalement-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul .signalement-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul .signalement-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul .signalement-message { border: 1px solid #GET{border}; }
+#SET{border,##GET{border}|couleur_eclaircir}
+ul ul ul ul ul ul .signalement-message { border: 1px dotted #GET{border}; }
+
+/* Boite de titre d'un signalement : mise en couleur selon la profondeur du signalement */
+#SET{fond,##GET{claire}|couleur_eclaircir}
+ul .signalement-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul .signalement-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul .signalement-chapo { background: #GET{fond}; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul .signalement-chapo { background: #GET{fond}; border-bottom: 1px dotted #E0E0E0; }
+#SET{fond,##GET{fond}|couleur_eclaircir}
+ul ul ul ul ul .signalement-chapo { background: #GET{fond}; }
+
+[(#REM)	</style>]

@@ -1,0 +1,62 @@
+[(#AUTORISER{moderer,signalement}|sinon_interdire_acces)]
+[(#VAL{_INTERDIRE_TEXTE_HTML}|define{oui}|vide) Activer l'echappement du HTML dans cette page de moderation]
+<h1 class="grostitre"><:signalement:titre_signalement_suivi:></h1>
+
+#SET{self,#SELF|parametre_url{id_signalement|email_auteur|ip|id_auteur|auteur|debut_id_signalement,''}}
+
+[(#ENV{objet}|et{#ENV{id_objet}})
+#BOITE_OUVRIR{'','note'}
+	<p><:signalement:texte_signalements:></p>
+	<a class='annule_filtre' href='[(#GET{self}|parametre_url{id_objet|objet,''})]' title="<:signalement:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:signalement:tout_voir:>})]</a>
+	<h2 class='objet_titre'><a href='[(#INFO_URL{#OBJET,#ID_OBJET}|ancre_url{signalement#ID_SIGNALEMENT})]'>[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></h2>
+#BOITE_FERMER
+]
+
+#SET{self,#SELF|parametre_url{id_signalement|email_auteur|ip|id_auteur|auteur|debut_id_signalement|statut,''}}
+
+
+	[(#REM) Les boutons pour tout le lot de message d'un emetteur ---------------------------------------------------------]
+	[(#ENV{id_signalement}|oui)
+	<a class='annule_filtre ajax' href='#GET{self}' title="<:signalement:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:signalement:tout_voir:>})]</a>
+	]
+	[(#ENV{ip}|ou{#ENV{email_auteur}}|ou{#ENV{auteur}}|ou{#ENV{id_auteur}})
+	#BOITE_OUVRIR{'','note'}
+		<div class='par'><:par_auteur:>
+			<a class='annule_filtre ajax' href='#GET{self}' title="<:signalement:tout_voir|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:signalement:tout_voir:>})]</a>
+
+		[
+		(#ENV{id_auteur,''}|oui)<a href='#URL_ECRIRE{auteur,id_auteur=#ENV{id_auteur}}'>#MODELE{auteur_nom,id_auteur=#ENV{id_auteur}}</a>
+		][(#ENV{id_auteur,''}|?{'',#ENV{auteur,''}})
+		][<a href='mailto:#ENV{email_auteur}'>(#ENV{email_auteur,''})</a>][IP (#ENV{ip,''})]
+		</div>
+		#SET{selection,#ENV{ip}|concat{'/',#ENV{email_auteur},'/',#ENV{id_auteur},'/',#ENV{auteur}}}
+		[(#AUTORISER{instituer,signalement,0}|et{#ENV{recherche,''}|non}|et{#ENV{id_article,''}|non})
+		<p class='actions'>
+		 &#91;<a class='ajax valider' href='#URL_ACTION_AUTEUR{instituer_lot_signalement,publie-#GET{selection},#SELF}'><:signalement:icone_valider_messages:></a>&#93;
+		 &#91;<a class='ajax supprimer' href='#URL_ACTION_AUTEUR{instituer_lot_signalement,refuse-#GET{selection},#SELF}'><:signalement:icone_supprimer_messages:></a>&#93;
+		</p>
+		]
+	#BOITE_FERMER
+	]
+	#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
+	[<h2><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h2>]
+
+<B_signalement>
+	<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{signalement:info_1_signalement,signalement:info_nb_signalements}|sinon{<:signalement:aucun_signalement:>})]</h3>
+	<div class="clear"></div>
+
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+	<ul class='liste-items signalements'>
+		<BOUCLE_signalement(SIGNALEMENTS){id_signalement?}{id_objet?}{objet?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_signalement}{pagination #ENV{nb,10}}{statut?}{recherche?}>
+			<li class="item signalement[ (#EXPOSE)] statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='signalement#ID_SIGNALEMENT' data-id='#ID_SIGNALEMENT'
+							onclick="jQuery(this).toggleClass('hover');">
+			[(#INCLURE{fond=prive/modeles/signalement, id_signalement, self})]
+			</li>
+		</BOUCLE_signalement>
+	</ul>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_signalement>
+
+	<h3><:signalement:aucun_signalement:></h3>
+
+<//B_signalement>
