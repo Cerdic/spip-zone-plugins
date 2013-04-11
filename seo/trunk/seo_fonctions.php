@@ -1,4 +1,13 @@
 <?php
+/**
+ * BouncingOrange SPIP SEO plugin
+ *
+ * @category   SEO
+ * @package    SPIP\SEO\Fonctions
+ * @author     Pierre ROUSSET (p.rousset@gmail.com)
+ * @copyright  Copyright (c) 2009 BouncingOrange (http://www.bouncingorange.com)
+ * @license    http://opensource.org/licenses/gpl-2.0.php  General Public License (GPL 2.0)
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -98,35 +107,35 @@ function seo_insere_remplace_metas($head,$contexte){
 	}
 	/* META GOOGLE WEBMASTER TOOLS */
 	if (isset($config['webmaster_tools'])
-	  AND $config['webmaster_tools']['activate']=='yes'
-	  AND $is_sommaire){
+		AND $config['webmaster_tools']['activate']=='yes'
+		AND $is_sommaire){
 		$append .= "\n" . seo_generer_webmaster_tools();
 	}
 
 	if (isset($config['bing'])
-	  AND $config['bing']['activate']=='yes'
-	  AND $is_sommaire){
+		AND $config['bing']['activate']=='yes'
+		AND $is_sommaire){
 		$append .= "\n" . seo_generer_bing();
 	}
 
 	/* CANONICAL URL */
 	if (isset($config['canonical_url'])
-	  AND $config['canonical_url']['activate']=='yes'
-	  AND $is_sommaire){
+		AND $config['canonical_url']['activate']=='yes'
+		AND $is_sommaire){
 		$append .= "\n" . seo_generer_urls_canoniques($contexte);
 	}
 
 	/* GOOGLE ANALYTICS */
 	if (isset($config['analytics'])
 		AND $config['analytics']['activate']=='yes'
-	  AND $is_sommaire){
+		AND $is_sommaire){
 		$append .= "\n" . seo_generer_google_analytics();
 	}
 
 	/* ALEXA */
 	if (isset($config['alexa'])
-	  AND $config['alexa']['activate']=='yes'
-	  AND $is_sommaire){
+		AND $config['alexa']['activate']=='yes'
+		AND $is_sommaire){
 		$append .= "\n" . seo_generer_alexa();
 	}
 
@@ -144,6 +153,7 @@ function seo_insere_remplace_metas($head,$contexte){
 
 /**
  * Renvoyer la balise <link> pour URL CANONIQUES
+ * 
  * @param array $contexte
  * @return string
  */
@@ -162,6 +172,7 @@ function seo_generer_urls_canoniques($contexte){
 
 /**
  * Renvoyer la balise SCRIPT de Google Analytics
+ * 
  * @return string
  */
 function seo_generer_google_analytics(){
@@ -191,6 +202,7 @@ function seo_generer_google_analytics(){
 /**
  * Renvoyer les META Classiques
  * - Meta Titre / Description / etc.
+ * 
  * @param null|array $contexte
  * @return array
  */
@@ -232,6 +244,7 @@ function seo_calculer_meta_tags($contexte=null){
 			}
 			if (isset($row['lang']))
 				unset($row['lang']);
+
 			if (count($row))
 				$tag['description'] = couper(implode(" ", $row), 150, '');
 		}

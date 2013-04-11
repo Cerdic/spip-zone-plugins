@@ -3,7 +3,7 @@
  * BouncingOrange SPIP SEO plugin
  *
  * @category   SEO
- * @package    SPIP_SEO
+ * @package    SPIP\SEO\Pipelines
  * @author     Pierre ROUSSET (p.rousset@gmail.com)
  * @copyright  Copyright (c) 2009 BouncingOrange (http://www.bouncingorange.com)
  * @license    http://opensource.org/licenses/gpl-2.0.php  General Public License (GPL 2.0)
@@ -28,15 +28,15 @@ function autoriser_seo_bouton_dist($faire, $type, $id, $qui, $opt){
  * @param string $flux
  *     Le contenu de la page
  * @return string
- *     Le contenu de la page modifié
+ *     Le contenu de la page modifiÃ©e
  */
 function seo_recuperer_fond($flux){
 	if (strncmp($flux['args']['fond'],"head/",5)==0
-	AND false
-	  AND strpos($flux['data']['texte'],"<!--seo_insere-->")===false
+		AND false
+		AND strpos($flux['data']['texte'],"<!--seo_insere-->")===false
 		AND strpos($flux['data']['texte'],"<title")!==false
-	  AND include_spip('inc/config')
-	  AND lire_config('seo/insert_head/activate', 'no')=="yes"
+		AND include_spip('inc/config')
+		AND lire_config('seo/insert_head/activate', 'no')=="yes"
 	){
 		$flux['data']['texte'] = recuperer_fond("inclure/seo-head",array("head"=>$flux['data']['texte'],"contexte"=>$flux['args']['contexte']));
 	}
@@ -50,7 +50,7 @@ function seo_recuperer_fond($flux){
  * @param string $flux
  *     Le contenu de la page
  * @return string
- *     Le contenu de la page modifié
+ *     Le contenu de la page modifiÃ©e
  */
 function seo_affichage_final($flux){
 
@@ -62,7 +62,7 @@ function seo_affichage_final($flux){
 	if ($GLOBALS['html']
 		AND stripos($flux,'<head>')!==false
 		AND strpos($flux,"<!--seo_insere-->")===false
-	  AND include_spip('inc/config')
+		AND include_spip('inc/config')
 		AND lire_config('seo/insert_head/activate', 'no')=="yes"
 		AND preg_match('/<head>(.*)<\/head>/Uims', $flux, $head)){
 		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head[1],"contexte"=>$GLOBALS['contexte']));
