@@ -1,15 +1,9 @@
-[(#SET{titre, <:icone_deconnecter:>})]
-[(#ENV{titre}|oui)
-	#SET{titre, #ENV*{titre}|typo}
-]
-
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:icone_deconnecter:>})]})]
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos"> </div>
 ]
-[(#ENV{appel_menu}|oui)
-	[(#SESSION{id_auteur}|>{0}|oui)
-		<li class="menu-entree item[ (#ENV{css})]">
-			<a href="#URL_LOGOUT" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
-	]
+[(#ENV{appel_menu}|et{#SESSION{id_auteur}|>{0}|oui}|oui)
+	<li class="menu-entree item[ (#ENV{css})]">
+		<a href="#URL_LOGOUT" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 ]

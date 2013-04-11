@@ -1,6 +1,4 @@
-[(#ENV{titre}|oui)
-	#SET{titre, #ENV*{titre}|typo}
-]
+#SET{titre, #ENV*{titre}|typo}
 
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>

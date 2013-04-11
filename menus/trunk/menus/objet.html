@@ -30,7 +30,6 @@
 	<div class="infos">#ENV{type_objet}-#GET{id_objet}[-(#GET{info_session})][-(#GET{info_trad})]</div>
 ]
 
-
 [(#ENV{appel_menu}|et{#GET{visible}|=={oui}}|oui)
 	<li class="menu-entree item[ (#ENV{css})][ (#ENV{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
 		<a href="#INFO_URL{#ENV{type_objet}, #GET{id_objet}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>

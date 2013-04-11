@@ -1,11 +1,6 @@
-[(#SET{titre, <:espace_prive:>})]
-[(#SET{titre_connecter, <:lien_connecter:>})]
-[(#ENV{titre}|oui)
-	#SET{titre, #ENV*{titre}|typo}
-]
-[(#ENV{titre_connecter}|oui)
-	#SET{titre_connecter, #ENV*{titre_connecter}|typo}
-]
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:espace_prive:>})]})]
+[(#SET{titre_connecter,[(#ENV*{titre_connecter}|typo|sinon{<:lien_connecter:>})]})]
+
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos"> </div>
@@ -17,6 +12,6 @@
 	]
 	[(#SESSION{id_auteur}|>{0}|non)
 		<li class="menu-entree item[ (#ENV{css})]">
-			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" title="[(#GET{titre_connecter}|attribut_html)]">#GET{titre_connecter}</a>
+			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" title="[(#GET{titre_connecter}|attribut_html)]" rel="nofollow">#GET{titre_connecter}</a>
 	]
 ]

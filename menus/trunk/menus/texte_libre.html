@@ -1,6 +1,4 @@
-[(#ENV{contenu}|oui)
-	#SET{contenu, #ENV*{contenu}|_T_ou_typo}
-]
+#SET{contenu, #ENV*{contenu}|_T_ou_typo}
 
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">[(#GET{contenu}|expanser_liens)]</div>

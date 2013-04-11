@@ -1,8 +1,4 @@
-[(#SET{titre, <:accueil_site:>})]
-[(#ENV{titre}|oui)
-	#SET{titre, #ENV*{titre}|typo}
-]
-
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:accueil_site:>})]})]
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
 	<div class="infos"><:info_racine_site:></div>
