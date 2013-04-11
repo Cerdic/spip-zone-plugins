@@ -6,23 +6,23 @@
     <ul>
 [(#REM)<!-- Informations sur l'association -->]
       <li class="fieldset" id="conf_informations">
-#INCLURE{fond=inc/configurer_association_informations,env}
+#INCLURE{fond=prive/editer/configurer_infos,env}
       </li>
 [(#REM)<!-- Options de gestion des membres -->]
       <li class="fieldset" id="conf_membres">
-#INCLURE{fond=inc/configurer_association_membres,env}
+#INCLURE{fond=prive/editer/configurer_membres,env}
       </li>
 [(#REM)<!-- PDF des listes a telecharger pour impression et CERFA -->]
 [(#PLUGIN{fpdf}|oui)
       <li class="fieldset" id="conf_pdf">
-#INCLURE{fond=inc/configurer_association_pdf,env}
+#INCLURE{fond=prive/editer/configurer_pdf,env}
       </li>
 ]
 [(#REM)<!-- Compta -->]
-#INCLURE{fond=inc/configurer_association_compta,env}
+#INCLURE{fond=prive/editer/configurer_compta,env}
     </ul>
     <p class="boutons">
-	<input type="submit" value="<:pass_ok:>" class="submit" />
+      <input type="submit" value="<:pass_ok:>" class="submit" />
     </p>
   </form>
 </div>
