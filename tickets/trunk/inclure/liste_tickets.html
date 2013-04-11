@@ -151,13 +151,13 @@
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
 </p>]
 <table class="spip tickets">
 	<thead>
@@ -269,20 +269,24 @@
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
 </p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
 </div>
 </B_detaillee>
 <BOUCLE_si_afficher_filtres_sans(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
-	<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>
+	<h3><:tickets:tickets_tries:> (0)</h3>
+	[(#BOITE_OUVRIR{'',notice})]
+		<p><:tickets:message_aucun_ticket_recherche:></p>
+	[(#BOITE_FERMER)]
+	
 	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
 	[(#ENV{recherche}|oui)
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]

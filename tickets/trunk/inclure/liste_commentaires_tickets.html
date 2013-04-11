@@ -9,20 +9,19 @@
 [<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 <div class="ticket">
 [(#ENV{recherche}|oui)
-<p><:tickets:champ_recherche:> #ENV{recherche}</p>
-]
+<p><:tickets:champ_recherche:> #ENV{recherche}</p>]
 [(#ANCRE_PAGINATION)]
 [<p class="pagination">(#PAGINATION)</p>]
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">200</a>})]]
 </p>]
 <table class="spip">
 	<thead>
@@ -56,13 +55,13 @@
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
 	<span class='label'><:tickets:label_paginer_par:></span>
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton" rel="nofollow">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
 </p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
