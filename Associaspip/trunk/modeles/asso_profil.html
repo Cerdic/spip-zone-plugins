@@ -35,8 +35,10 @@ maj:2012-11-27; version:0.1.0; licence:GPL; -->]
     (#META{/association/email})</a>
     </p>]
     <dl class="note">
-        [(#META{/association/recufiscal}|oui)<dt><:asso:config_libelle_recufiscal:></dt>
-            <dd>[(#VAL{asso:config_libelle_recufisc#META{/association/recufiscal}}|_T)]</dd>]
+        [(#META{/association/recufiscal}|oui)<dt><:cerfa11580:intitule_tco:></dt>
+            <dd>[(#VAL{cerfa11580:intitule_type#META{/association/recufiscal}}|_T{#ARRAY{'plus',#META{/association/infofiscal}}})]</dd>
+            [<dd>(#META{/association/cgi200}|ou{#META{/association/cgi238}}|ou{#META{/association/cgi885}})<:cerfa11580:intitule_cgi:></dd>]
+        ]
         [<dt><:asso:config_libelle_declaration:></dt>
             <dd>(#META{/association/declaration}|typo)</dd>]
         [<dt><:asso:config_libelle_prefet:></dt>

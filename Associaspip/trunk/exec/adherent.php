@@ -89,7 +89,7 @@ function exec_adherent() {
 		}
 
 		if ($GLOBALS['association_metas']['recufiscal']) {
-			$t =  _T('asso:liens_vers_les_justificatifs');
+			$t =  _T('cerfa11580:liens_vers_justificatifs');
 			echo debut_cadre_relief('', TRUE, '', $t);
 			$t = voir_adherent_recu_fiscal($id_auteur);
 			echo $t ? $t : _T('asso:aucun');
@@ -104,7 +104,7 @@ function exec_adherent() {
 		if ($GLOBALS['association_metas']['activites']) {
 			$t = _T('asso:adherent_titre_historique_activites');
 			echo debut_cadre_relief('', TRUE, '', $t);
-			echo voir_adherent_activites($id_auteur);
+			echo voir_adherent_activites($id_auteur); // ou est cette fonction ? et les autres voir_adherent ?
 			echo fin_cadre_relief(TRUE);
 		}
 		if ($GLOBALS['association_metas']['ventes']) {

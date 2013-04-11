@@ -2,8 +2,8 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2012 Emmanuel Saint-James
+ * @copyright Copyright (c) 2007 (v1) Bernard Blazin & Francois de Montlivault
+ * @copyright Copyright (c) 2010--2011 (v2) Emmanuel Saint-James & Jeannot Lapin & Marcel Bolla & gilcot
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -255,7 +255,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compte_liste_nombres' => 'Nombre d\'op&eacute;rations',
 	'compte_origine' => 'Compte Origine',
 	'config_aide_fpdf' => 'Les param&egrave;tres suivants s\'appliquent aux pages imprimables g&eacute;n&eacute;r&eacute;es en PDF. Certains cas font cependant exception : re&ccedil;u fiscal, &eacute;tiquettes, comptes analytiques (en partie).',
-	'config_aide_infofiscal' => 'Dates au format jj/mm/aaaa s&eacute;par&eacute;es par un espace.',
 	'config_aide_pays' => 'code alpha-2 ISO 3166-1',
 	'config_aide_pc_activites' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
 	'config_aide_pc_cautions' => 'Classe des immobilisations : <a href=\'@url@&amp;code=1651\' title=\'D&eacute;clarer la classe 1651\'>FR=1651</a>',
@@ -267,21 +266,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_aide_pc_prets' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=708\' title=\'D&eacute;clarer la classe 708\'>FR=708</a>',
 	'config_aide_pc_ressources' => 'Classe des comptes d\'immobilisations/charges : <a href=\'@url@&amp;code=210\' title=\'D&eacute;clarer la classe 210\'>FR=210/600?</a> (montant &gt;/&lt; 500&nbsp;&euro;&nbsp;; avec/sans amortissement)',
 	'config_aide_pc_ventes' => 'Classe des comptes de produits : <a href=\'@url@&amp;code=701\' title=\'D&eacute;clarer la classe 701\'>FR=701/707/706</a> (produits fabriqu&eacute;s &agrave; partir de mati&egrave;res premi&egrave;res --601-- / produits achet&eacute;s --607-- / services --et parainages...)',
-	'config_aide_recufiscal' => 'sigles :
-		s-b-l = &agrave; but non lucratif ;
-		d-i-g = d\'int&eacute;r&egrave;t g&eacute;n&eacute;ral ;
-		d-u-p = d\'utilit&eacute; publique ;
-		<br />abbr&eacute;viations :
-		asso. = association(s) ;
-		fond. = fondation(s) ;
-		ent. = entreprise(s) ;
-		ets. = &eacute;tablissement(s) ;
-		org. = organisme(s) ;
-		pers. = personne(s) ;
-		pub. = public(s)/publique(s) ;
-		st&eacute;. = soci&eacute;t&eacute;(s) ;
-		sup. = sup&eacute;rieur(e)(s) ;
-	...',
 	'config_enregistree' => 'La configuration a &eacute;t&eacute; bien enregistr&eacute;e.',
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_fpdf_a3' => 'A3',
@@ -336,9 +320,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_affichage_champs_page_membres' => 'S&eacute;lectionner les champs &agrave; afficher sur la page des membres',
 	'config_libelle_article2vente' => 'Produit',
 	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
-	'config_libelle_cgi200' => 'Art. 200 du CGI',
-	'config_libelle_cgi238' => 'Art. 238 bis du CGI',
-	'config_libelle_cgi885' => 'Art. 885-0 V bis A du CGI',
 	'config_libelle_classe_banques' => 'Classe des comptes financiers',
 	'config_libelle_classe_charges' => 'Classe des comptes de charges',
 	'config_libelle_classe_contributions_volontaires' => 'Classe des comptes de contrib. volontaires',
@@ -375,30 +356,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_pays' => 'Pays',
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_libelle_prets' => 'Gestion des pr&egrave;ts et ressources',
-	'config_libelle_recufisc0' => 'D&eacute;sactiver (gestion manuelle ou non-usage)',
-	'config_libelle_recufisc1' => 'Asso./fond. reconnue d-u-p',
-	'config_libelle_recufisc10' => 'Org. ayant pour activit&eacute; principale l\'organisation de festivals',
-	'config_libelle_recufisc11' => 'Asso. fournissant gratuitement aide/soins &agrave; pers. en difficult&eacute;...',
-	'config_libelle_recufisc12' => 'Fond. du patrimoine ou fond./asso. lui affectant ses dons',
-	'config_libelle_recufisc13' => 'Ets. de recherche public/priv&eacute;, d-i-g, s-b-l',
-	'config_libelle_recufisc14' => 'Ent. d\'insertion ou ent. de travail temporaire d\'insertion',
-	'config_libelle_recufisc15' => 'Asso. interm&eacute;diaires',
-	'config_libelle_recufisc16' => 'Ateliers/chantiers d\'insertion',
-	'config_libelle_recufisc17' => 'Ent. adapt&eacute;es',
-	'config_libelle_recufisc18' => 'Agence Nationale de la Recherche',
-	'config_libelle_recufisc19' => 'St&eacute;./org. agr&eacute;&eacute; de recherche scientifique/technique',
-	'config_libelle_recufisc2' => 'Asso. du 57/67/68 dont la mission est reconnue d-u-p (pr&eacute;ciser date)',
-	'config_libelle_recufisc20' => 'Autre organisme (&agrave; pr&eacute;ciser)',
-	'config_libelle_recufisc3' => 'Fondation universitaire/partenariale',
-	'config_libelle_recufisc4' => 'Fondation d\'entreprise',
-	'config_libelle_recufisc5' => '&OElig;uvre/org. d-i-g',
-	'config_libelle_recufisc6' => 'Mus&eacute;e de France',
-	'config_libelle_recufisc7' => 'Ets. d\'enseignement sup./artistique pub./priv&eacute;, d-i-g, s-b-l',
-	'config_libelle_recufisc8' => 'Org. dont l\'objet exclusif est la participation financi&egrave;re &agrave; la cr&eacute;ation d\'ent.',
-	'config_libelle_recufisc9' => 'Asso. culturelle ou de bienfaisance et ets. pub. des cultes reconnus d\'Alsace-Moselle',
-	'config_libelle_recufiscal' => 'Type',
 	'config_libelle_rue' => 'Rue',
-	'config_libelle_tauxfiscal' => '% cotisation statutaire',
 	'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title=\'Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d&quot;avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin\'>(&agrave; caract&egrave;re informatif)</abbr>',
 	'config_libelle_ventes' => 'Gestion des ventes associatives',
@@ -684,7 +642,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'libelle_prix_unite' => 'Prix unitaire (Euros)',
 	'libelle_quantite' => 'Quantit&eacute;',
 	'libelle_statut' => 'Statut',
-	'liens_vers_les_justificatifs' => 'Liens vers les justificatifs',
 	'liste_nombre_total' => 'Total&nbsp;:',
 
 // M

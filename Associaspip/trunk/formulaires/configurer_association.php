@@ -124,7 +124,7 @@ function formulaires_configurer_association_traiter_dist($form) {
 			// - si ils sont maintenant egaux mais ne l'etaient pas avant, toutes les ventes vont apparaitre en double: la vente elle meme et les frais d'envoi.
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), 'imputation='.$GLOBALS['association_metas']['pc_frais_envoi']);
 	}
-	// code repris sur formulaires_configurer_metas_traiter_dist
+// code repris sur formulaires_configurer_metas_traiter_dist
 	foreach (array_keys($metas_list) as $k) {
 		$v = _request($k);
 		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta);
