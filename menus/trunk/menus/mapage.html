@@ -4,6 +4,6 @@
 	<div class="infos"> </div>
 ]
 [(#ENV{appel_menu}|et{#SESSION{id_auteur}|>{0}|oui}|oui)
-	<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={auteur}|et{#ENV{env}|table_valeur{id_auteur}|=={#SESSION{id_auteur}}}) on active]">
+	<li class="menu-entree item[ (#ENV{css})][(#ENV{env/type}|=={auteur}|ou{#ENV{env/type-page}|=={auteur}}|et{#ENV{env/id_auteur}|=={#SESSION{id_auteur}}}) on active]">
 		<a href="#URL_AUTEUR{#SESSION{id_auteur}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
 ]
