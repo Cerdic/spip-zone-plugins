@@ -13,6 +13,7 @@
   -* bouton_suppression string : si égal à non, on n'affiche pas le bouton de suppression
   -* bouton_ajout string : si égal à oui, on affiche le formulaire de favoris (un bouton d'ajout et donc de suppression en somme)
   -* type_pagination string : le type de pagination souhaitée sinon celle par défaut de SPIP
+  -* sinon string : le texte à afficher dans le cas ou la liste est vide (par défaut aucun)
 
 ]
 <B_selections>
@@ -32,4 +33,6 @@
 		</ul>
 		[<p class="pagination">(#PAGINATION{#ENV{type_pagination,''}})</p>]
 	</div>
-</B_selections>
+</B_selections>[
+<div id="selection" class="liste favoris[ (#ENV{class})]"><p>(#ENV*{sinon,''})</p></div>
+]<//B_selections>
