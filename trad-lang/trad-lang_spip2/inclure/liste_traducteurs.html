@@ -1,13 +1,28 @@
 <B_auteurs>
 [<h2 class="h2">(#ENV*{titre})</h2>]
+#ANCRE_PAGINATION
 [<p>(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_nb_participants,tradlang:info_nb_participants})</p>]
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#SET{debut,#ENV{debut_auteurs,#EVAL{_request("debut_auteurs");}}}
+#SET{p,''}
+<BOUCLE_lettre(AUTEURS spip_versions spip_tradlangs){compteur versions}{id_auteur != '-1'}{spip_versions.objet=tradlang}{par multi nom}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
+(#NOM**|extraire_multi|initiale|unique|oui)
+[(#SET{p,#GET{p}|concat{
+#SELF|parametre_url{debut_auteurs,@#ID_AUTEUR}|ancre_url{pagination_auteurs}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{pagination,12}}
+}})]
+]#SAUTER{#ENV{pagination,12}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+(#SET{p,
+	#GET{p}|concat{
+		#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{pagination,12}}
+	}
+})]</B_lettre>
+[<p class='pagination'>(#GET{p})</p>]
 [<p class="pagination">(#PAGINATION)</p>]
 <p class="pagination_tri"></p>
 
 <ul class="liste-items traducteurs">
 <BOUCLE_auteurs(AUTEURS spip_versions spip_tradlangs){compteur versions}{id_auteur != '-1'}{spip_versions.objet=tradlang}{tri #ENV{tri,multi nom}}{pagination #ENV{pagination,12}}>
 <li class="item">
-
 	<h4><a href="#URL_AUTEUR" class="spip_in">#NOM</a></h4>
 	<p class="infos_auteur_revisions"><a href="[(#URL_AUTEUR|ancre_url{revisions})]">[(#COMPTEUR{versions}|singulier_ou_pluriel{tradlang:auteur_revision,tradlang:auteur_revisions})]</a></p>
 	[(#SET{langues,#ARRAY})]
