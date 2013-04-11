@@ -226,7 +226,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'raccourcis' => 'Raccourcis',
 	'recherche_case' => 'Dans le champ :',
 	'recherche_utilisateurs' => 'Rechercher un utilisateur',
-	'recherche_valeur' => 'Rechercher :',
 
 	// S
 	'statut_rel' => 'Statut interne',
