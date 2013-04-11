@@ -37,9 +37,15 @@ function critere_compteur($idb, &$boucles, $crit, $left=false){
 	}
 	$type = objet_type($table);
 	$type_id = id_table_objet($type);
+	
+	/**
+	 * Si la clé primaire est une clé multiple, on prend la première partie
+	 * Utile pour compter les versions de spip_versions par exemple
+	 */
+	if(count($types = explode(',',$type_id)) > 1)
+		$type_id = $types[0];
 	$table_sql = table_objet_sql($type);
-	
-	
+
 	$trouver_table = charger_fonction('trouver_table','base');
 	$arrivee = array($table, $trouver_table($table, $boucle->sql_serveur));
 	$depart = array($boucle->id_table,$trouver_table($boucle->id_table, $boucle->sql_serveur));
