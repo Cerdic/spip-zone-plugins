@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recommander' => 'Recommander cette page',
 	'recommander_lecture' => 'Bonjour, @from@ vous recommande la lecture de cette page : ',
 	'recommander_message' => 'Recommander',
-	'recommander_titre' => 'A lire sur @nom_site@ --'
+	'recommander_titre' => 'A lire sur @nom_site@ - '
 );
 
 ?>
