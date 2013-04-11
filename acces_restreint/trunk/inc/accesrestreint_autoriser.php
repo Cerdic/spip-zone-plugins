@@ -66,6 +66,16 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_article_voir')) {
 function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
+	if (!$id){
+		if ($qui['statut'] == '0minirezo') return true;
+		if (isset($opt['statut'])){
+			$statut = $opt['statut'];
+			if (in_array($statut, array('prop', 'publie')))
+				return true;
+		}
+		return false;
+	}
+
 	include_spip('public/quete');
 	if (!$id_rubrique = $opt['id_rubrique']){
 		$article = quete_parent_lang('spip_articles',$id);
