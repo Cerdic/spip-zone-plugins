@@ -19,17 +19,21 @@ function inc_stats_trads_to_array_dist($unite, $duree, $id_tradlang_module, $opt
 	$order = "date";
 	$where = array(
 		'objet = "tradlang"',
-		'id_version > 0',
-		'id_auteur > 0'
+		'id_version > 0'
 	);
 	
+	
+	if(!isset($options['id_auteur']) OR !is_numeric($options['id_auteur']))
+		$where[] = 'id_auteur > 0';
+	else
+		$where[] = 'id_auteur = '.intval($options['id_auteur']);
+
 	if ($duree)
 		$where[] = sql_date_proche($order,-$duree,'day',$serveur);
 
 	$where = implode(" AND ",$where);
 	$format = ($unite=='jour'?'%Y-%m-%d':'%Y-%m-01');
 	$res = sql_select("COUNT(*) AS v, DATE_FORMAT($order,'$format') AS d", $table, $where, "d", "d", "",'',$serveur);
-	
 	$format = str_replace('%','',$format);
 	$periode = ($unite=='jour'?24*3600:365*24*3600/12);
 	$step = intval(round($periode*1.1,0));

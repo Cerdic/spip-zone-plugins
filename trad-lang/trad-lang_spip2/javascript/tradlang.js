@@ -77,10 +77,13 @@ var tradlang_hauteur_blocs = function(){
 $(document).ready(function(){
 	tradlang_switchers();
 	tradlang_thead_flottant();
-	tradlang_tabs_charger();
 	tradlang_hauteur_blocs();
 	onAjaxLoad(tradlang_switchers);
 	onAjaxLoad(tradlang_thead_flottant);
 	onAjaxLoad(tradlang_tabs_charger);
 	onAjaxLoad(tradlang_hauteur_blocs);
+});
+
+$(window).load(function(){
+	tradlang_tabs_charger();
 });

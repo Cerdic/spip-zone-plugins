@@ -28,8 +28,8 @@
 			<ul class="liste-items">
 				[(#PLUGIN{mesfavoris}|oui)<li class="item"><a href="&#35;favoris">[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]</a></li>]
 				<li class="item"><a href="&#35revisions">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</a></li>
+				<li class="item"><a href="&#35stats">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_stats_vos:>,<:tradlang:titre_stats_ses:>})]</a></li>
 			</ul>
-			
 			[(#PLUGIN{mesfavoris}|oui)
 				[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
 				[(#SET{bouton_ajout,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{non,oui})]})]
@@ -42,8 +42,106 @@
 			[<div id="revisions">
 				<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</h2>
 				(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_auteur,ajax,sinon=<:revisions:info_aucune_revision:>}|trim)
-			</div>]
-			]
+			</div>]]
+			<div id="stats">
+				<INCLURE{fond=inclure/stats-trads-jours,options=#ARRAY{id_auteur,#ID_AUTEUR},ajax,env} />
+				<INCLURE{fond=inclure/stats-trads-mois,options=#ARRAY{id_auteur,#ID_AUTEUR},ajax,env} />
+				
+				<INCLURE{fond=prive/stats/visites} />
+				
+				<script type="text/javascript">
+				function trace_trads_table(table, classes, options) {
+					$table = $(table);
+					if ($table.is(':hidden')) {
+						return true; // pas a faire ou deja fait.
+					}
+				
+					// copier le titre des tableaux
+					titre = $table.find("caption").text();
+					$table
+						.before("<h2>" + titre + "</h2>")
+						.wrap("<div class='" + classes + "'></div>");
+				
+					// mettre les visites avec un fond colore pour le graphique
+					$table.find("thead th:eq(1)").data({fill: true, serie: 'bar', color: '#FFD845'});
+					$table.find("thead th:eq(2)").data({serie: 'line', color: '#7FC4FF'});
+				
+					params = {
+						legendeExterne:true,
+						legendeActions:true,
+						width:'100%', // 795px, 600px (sans le tableau de resume) ...
+						height:'250px',
+						modeDate:true,
+						zoom:true,
+						parse:{
+							axeOnTitle:true,
+							defaultSerie:{
+								bars:{show:true},
+								lines:{show:true},
+								points:{show:false}
+							}
+						},
+						flot:{
+							xaxis:{
+								labelWidth:45,
+								monthNames: [
+									'[(#VAL{2000-01-01}|nom_mois)]',
+									'[(#VAL{2000-02-01}|nom_mois)]',
+									'[(#VAL{2000-03-01}|nom_mois)]',
+									'[(#VAL{2000-04-01}|nom_mois)]',
+									'[(#VAL{2000-05-01}|nom_mois)]',
+									'[(#VAL{2000-06-01}|nom_mois)]',
+									'[(#VAL{2000-07-01}|nom_mois)]',
+									'[(#VAL{2000-08-01}|nom_mois)]',
+									'[(#VAL{2000-09-01}|nom_mois)]',
+									'[(#VAL{2000-10-01}|nom_mois)]',
+									'[(#VAL{2000-11-01}|nom_mois)]',
+									'[(#VAL{2000-12-01}|nom_mois)]'
+								]
+							}
+						},
+						infobulle:{show:true}
+					}
+				
+					$table.tFlot($.extend(true, {}, params, options));	
+				}
+				
+				function trace_trads(){
+					trace_trads_table(
+						"#trads_quotidiennes",
+						"statistiques_trads_quotidiennes statistiques_trads",
+						{
+							grille:{weekend:true},
+							flot:{
+								xaxis:{
+									minTickSize: [1, "day"]
+								},
+								bars:{barWidth:24 * 60 * 60 * 1000}
+							}
+						});
+						
+					trace_trads_table(
+						"#trads_mensuelles",
+						"statistiques_trads_mensuelles statistiques_trads", {
+							grille:{years:true},
+							flot:{
+								xaxis:{
+									timeformat:"%b %y",
+									minTickSize: [1, "month"]
+								},
+								bars:{barWidth:30 * 24 * 60 * 60 * 1000 /* nb de jours... approximatif */}
+							}
+					});
+					
+				}
+				(function($){
+					$(document).ready(function(){
+						trace_trads();
+						onAjaxLoad(trace_trads);
+					});
+				})(jQuery);
+				</script>
+			</div>
 		</div>
 	</BOUCLE_si_pas_profil>
 </div>

@@ -5,10 +5,7 @@
 	<a href="[(#SELF|parametre_url{duree,#ENV{duree,90}|duree_zoom{plus}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
 </p>
-#SET{max,0}
-#SET{moy,0}
-#SET{last,0}
-#SET{lastlast,0}
+[(#SET{max,0})][(#SET{moy,0})][(#SET{last,0})][(#SET{lastlast,0})]
 <B_statsj>
 	<table class='spip info trads' style="width:145px;">
 		<caption><:statistiques:resume:></caption>
@@ -31,7 +28,7 @@
 			</tr>
 			<tr>
 				<th><:info_total|trim{':'}|trim|ucfirst:></th>
-				<td class='num'>[(#REM|stats_total)]</td>
+				<td class='num'>[(#REM|stats_tradlang_total{#ENV{options,#ARRAY}})]</td>
 			</tr>
 		</tbody>
 	</table>
@@ -46,7 +43,7 @@
 			</tr>
 		</thead>
 	  <tbody>
-		<BOUCLE_statsj(DATA){source stats_trads,jour,#ENV{duree,90},#ENV{id_tradlang_module}}>
+		<BOUCLE_statsj(DATA){source stats_trads,jour,#ENV{duree,90},#ENV{id_tradlang_module},#ENV{options,#ARRAY}}>
 			<tr class="c_[(#CLE|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
 				<th title="[(#CLE|affdate{'Y/m/d'})]">[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<:info_aujourdhui:>,#CLE|affdate_jourcourt})]</th>
 				<td class="val">#VALEUR{versions}</td>
