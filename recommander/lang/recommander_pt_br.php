@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recommander' => 'Recomenda a leitura', # MODIF
 	'recommander_lecture' => 'Bom dia, @from@ recomenda a leitura deste texto: ', # MODIF
 	'recommander_message' => 'Recomanda',
-	'recommander_titre' => 'Ler em @nom_site@ --'
+	'recommander_titre' => 'Ler em @nom_site@ --' # MODIF
 );
 
 ?>
