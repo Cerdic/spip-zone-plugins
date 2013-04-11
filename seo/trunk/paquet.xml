@@ -1,7 +1,7 @@
 <paquet
 	prefix="seo"
 	categorie="statistique"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="seo.png"
@@ -14,7 +14,7 @@
 
 	<auteur mail="p.rousset@gmail.com">Pierre ROUSSET</auteur>
 
-	<copyright>2009-2012</copyright>
+	<copyright>2009-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL 2</licence>
 

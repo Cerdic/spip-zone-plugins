@@ -238,15 +238,17 @@ function seo_calculer_meta_tags($contexte=null){
 		if (count($select)){
 			$select = implode(",",$select);
 			$row = sql_fetsel($select, $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
-			if (isset($row['titre'])){
-				$tag['title'] = couper($row['titre'], 64);
-				unset($row['titre']);
+			if($row){
+				if (isset($row['titre'])){
+					$tag['title'] = couper($row['titre'], 64);
+					unset($row['titre']);
+				}
+				if (isset($row['lang']))
+					unset($row['lang']);
+	
+				if (count($row))
+					$tag['description'] = couper(implode(" ", $row), 150, '');
 			}
-			if (isset($row['lang']))
-				unset($row['lang']);
-
-			if (count($row))
-				$tag['description'] = couper(implode(" ", $row), 150, '');
 		}
 		// Get the value set by default
 		if (isset($config['meta_tags']['default']) AND is_array($config['meta_tags']['default'])){
