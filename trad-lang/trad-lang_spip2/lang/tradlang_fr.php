@@ -331,6 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_tradlang_module' => 'Logo du module',
 	'titre_modifications_chaines' => 'Les dernières modifications de cette chaine',
 	'titre_modifier' => 'Modifier',
+	'titre_page_auteurs' => 'Liste des contributeurs',
 	'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
 	'titre_page_tradlang_module' => 'Module #@id@ : @module@',
 	'titre_profil_auteur' => 'Éditez votre profil',
