@@ -1,0 +1,22 @@
+<paquet
+	prefix="paravent"
+	categorie="maintenance"
+	version="1.0.2"
+	etat="test"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/paravent-64.png"
+	documentation="http://contrib.spip.net/Paravent"
+	schema="1.0.0" 
+>
+	<nom>Paravent</nom>
+	<!-- Surcharge du plugin en travaux ouvrant le site aux auteurs identifiés -->
+	<auteur>Scribe</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="entravaux" compatibilite="[3.1.14;]" />
+	
+	<pipeline nom="autoriser" inclure="paravent_autorisations.php" />
+
+</paquet>

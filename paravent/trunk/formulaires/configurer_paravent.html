@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:paravent:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#SAISIE{textarea, head,
+				label=<:paravent:cfg_head:>,
+				explication=<:paravent:cfg_head_explication:>
+				})]
+			
+			[(#SAISIE{textarea, body,
+				label=<:paravent:cfg_body:>,
+				explication=<:paravent:cfg_body_explication:>
+				})]
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="paravent" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

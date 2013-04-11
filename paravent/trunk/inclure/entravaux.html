@@ -1,0 +1,37 @@
+[(#HTTP_HEADER{HTTP/1.1 503 Service Temporarily Unavailable})][(#HTTP_HEADER{Status: 503 Service Temporarily Unavailable})][(#HTTP_HEADER{Retry-After: 7200})]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+#CONFIG{paravent/head}
+
+#SET{fond,#fff url(#CHEMIN{entravaux-bg.gif})}
+[(#CONFIG{paravent/body}|non)
+<style type="text/css">
+html { font-size: 100%; }
+body { background: #GET{fond}; text-align: left; font: 1em/normal Verdana,Geneva,sans-serif; color: #000; }
+#minipres { width: 30em; margin: 40px; margin-left: 120px; }
+#minipres h1 { font-size: 1.1em; color: #970038; font-weight: bold; }
+</style>
+]
+</head>
+<body>
+[(#CONFIG{paravent/body}|oui)
+	#CONFIG{paravent/body}
+]
+[(#CONFIG{paravent/body}|non)
+	<div id="minipres">
+		<h1><:info_travaux_titre:></h1>
+		[(#CONFIG{entravaux_message,<:entravaux:info_travaux_texte:>}|propre)]		
+	</div>
+]
+
+[(#SESSION{id_auteur}|non)
+		<p class="retour">&#91;<a href="#URL_PAGE{login_sos}"><:lien_connecter:></a>&#93;</p>
+]
+[(#SESSION{id_auteur}|oui)
+		<p class="retour">&#91;<a href="#URL_ECRIRE{accueil}"><:espace_prive:></a>&#93; &#91;<a href="#URL_LOGOUT"><:icone_deconnecter:></a>&#93;</p>
+]
+</body>
+</html>
