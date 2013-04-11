@@ -89,7 +89,7 @@ function modification_adherents($tab, $action, $statut='') {
 		if ($action=='grouper') {
 			$action_file = 'ajouter_membres_groupe';
 		} else {
-			$action_file = 'exclure_membres_groupe';
+			$action_file = 'supprimer_asso_fonctions';
 		}
 	} else {
 		$action_file = $action.'_adherents';

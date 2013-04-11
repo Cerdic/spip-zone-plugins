@@ -30,7 +30,7 @@ function exec_action_comptes() {
 		$res .= '<p>'. _T('asso:apres_confirmation_vous_ne_pourrez_plus_modifier_ces_operations') .'</p>';
 		$res .= '<p class="boutons"><input type="submit" value="'._T('asso:bouton_confirmer').'" /></p>';
 		// count est du bruit de fond de secu
-		echo redirige_action_post('valider_comptes', count($_REQUEST['valide']), 'comptes', '', $res);
+		echo redirige_action_post('valider_asso_comptes', count($_REQUEST['valide']), 'comptes', '', $res);
 		fin_page_association();
 	}
 }

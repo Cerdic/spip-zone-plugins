@@ -1883,13 +1883,13 @@ function association_tablinfos_montants($legende='', $somme_recettes=0, $somme_d
  *   ID de l'objet a supprimer
  * @param string $retour
  *   Nom du fichier d'action vers lequel le formulaire sera redirige, sans le prefixe "supprimer_".
- *   Par defaut, quand rien n'est indique, c'est l'objet suffixe de "s" qui est utilise
+ *   Par defaut, quand rien n'est indique, c'est l'objet prefixe de "asso" qui est utilise
  */
 function association_form_suppression($type, $id, $retour='') {
 	$res = _T('asso:objet_num', array('objet'=>$type,'num'=>$id));
 	$res = _T('asso:vous_aller_effacer', array('quoi'=>'<i>'.$res.'</i>'));
 	$res = '<p><strong>'. $res  .'</strong></p><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
-	return redirige_action_post("supprimer_{$type}s", $id, ($retour?$retour:$type.'s'), '', $res);
+	return redirige_action_post("supprimer_asso_$type", $id, ($retour?$retour:$type.'s'), '', $res);
 }
 
 /**

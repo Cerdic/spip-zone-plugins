@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
     return;
 
-function action_editer_asso_plan() {
+function action_editer_asso_plan_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_plan = $securiser_action();
 	$code = _request('code');

@@ -31,7 +31,7 @@ function formulaires_editer_membres_groupe_traiter($id_groupe='') {
 		$action_editer_membres = charger_fonction('editer_membres_groupe','action');
 		$action_editer_membres($id_groupe);
 	} elseif (_request('exclure')) {
-		$action_supprimer_membres = charger_fonction('exclure_membres_groupe','action');
+		$action_supprimer_membres = charger_fonction('supprimer_asso_fonctions','action');
 		$action_supprimer_membres($id_groupe);
 	}
 	$res['message_ok'] = '';
