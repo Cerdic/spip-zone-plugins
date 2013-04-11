@@ -42,7 +42,7 @@
 					<label for="duree"><:asso:prets_libelle_duree:></label>
 					<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 				</li>
-				<INCLURE{fond=inc/saisir_membre, nom, id_auteur }>
+#INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur}
 				<li class="editer_commentaire_sortie">
 					<label for="commentaire_sortie"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3" cols='64'>[(#ENV{commentaire_sortie})]</textarea>
@@ -62,7 +62,7 @@
 					<label for="montant"><:asso:libelle_montant:></label>
 					<input name="montant" type="[(#HTML5|?{number,text})]" [value="(#ENV{montant})"] id="montant" class="number float price" />
 				</li>
-				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
 			[(#ENV{id_pret}|oui)
 				<li class="editer_commentaire_retour">
 					<label for="commentaire_retour"><:asso:libelle_commentaire:></label>
@@ -94,6 +94,6 @@
 			]
 			</ul>
 		</fieldset>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_pret} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_pret} } />
 	</form>
 </div>

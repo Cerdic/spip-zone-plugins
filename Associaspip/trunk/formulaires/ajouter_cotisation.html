@@ -16,7 +16,7 @@
 				<label for="saisie_montant"><:asso:montant_paye_en_euros:></label>
 				<input type="[(#HTML5|?{number,text})]" name="montant" value="[(#ENV{montant})]" id="saisie_montant"  class="number float price" />
 			</li>
-			<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
 			<li class="editer_justification">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{justification})</span>]
 				<label for="saisie_justification"><:asso:libelle_jusfification:></label>

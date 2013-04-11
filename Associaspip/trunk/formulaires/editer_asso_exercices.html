@@ -19,8 +19,8 @@
 				<label for="date_fin"><:asso:exercice_libelle_fin:></label>
 				<input name="date_fin" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_fin})"] id="date_fin" class="date" />
 			</li>
-			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 		</ul>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_exercice} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_exercice} } />
 	</form>
 </div>

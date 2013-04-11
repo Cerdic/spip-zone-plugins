@@ -41,7 +41,7 @@
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 				</div>
 			</li>
-			<INCLURE{fond=inc/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
+			<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
 			<li class="editer_pc_intravirements">
 				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
 
@@ -61,10 +61,12 @@
 				<span class="erreur_message"><:asso:enregistrer_classe_banque_virement:></span>
 	<//B_pc_virements>
 			</li>
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
-			<INCLURE{fond=inc/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
+			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
+			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
+			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
+<!--
+			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
+-->
 		</ul>
 	</fieldset>
 </fieldset>
@@ -98,7 +100,7 @@
 <:asso:config_aide_pc_cotisations{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_cotisations}}:>
 				</em>
 			</li>
-		<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_cotisations}, dc_nom=cotisations} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cotisations}, dc_nom=cotisations} />
 	</B_classeSelect_cotisations>
 			<li class="erreur">
 				<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
@@ -143,7 +145,7 @@
 <:asso:config_aide_pc_dons{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_dons}}:>
 				</em>
 			</li>
-			<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
+			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
 	</B_classeSelect_dons>
 		</ul>
 	</fieldset>
@@ -205,7 +207,7 @@
 <:asso:config_aide_pc_ventes{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_ventes}}:>
 				</em>
 			</li>
-			<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
+			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
 	</B_classeSelect_ventes>
 		</ul>
 	</fieldset>
@@ -271,7 +273,7 @@
 <:asso:config_aide_pc_activites{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_activites}}:>
 			</em>
 		</li>
-		<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
 	</B_classeSelect_activites>
 		<li class="erreur">
 			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
@@ -315,7 +317,7 @@
 <:asso:config_aide_pc_ressources{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_ressources}}:>
 				</em>
 			</li>
-			<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_ressources}, dc_nom=ressources} />
+			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ressources}, dc_nom=ressources} />
 	</B_classeSelect_ressources>
 		</ul>
 	</fieldset>
@@ -340,7 +342,7 @@
 				</em>
 			</li>
 <!--
-			<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_cautions}, dc_nom=cautions} />
+			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cautions}, dc_nom=cautions} />
 -->
 	</B_classeSelect_cautions>
 		</ul>
@@ -365,7 +367,7 @@
 <:asso:config_aide_pc_prets{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_prets}}:>
 				</em>
 			</li>
-			<INCLURE{fond=inc/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
+			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
 	</B_classeSelect_prets>
 		</ul>
 	</fieldset>

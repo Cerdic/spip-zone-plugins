@@ -21,7 +21,7 @@
 					<label for="prix_acquisition"><:asso:ressources_libelle_prix_acquisition:></label>
 					<input type="[(#HTML5|?{number,text})]" name="prix_acquisition" [value="(#ENV{prix_acquisition})"] id="prix_acquisition"  class="number float price" />
 				</li>
-				<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_charges}, id_dest, montant_dest, defaut_dest, env}>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_charges}, id_dest, montant_dest, defaut_dest, env} />
 			</ul>
 		</fieldset>
 		<fieldset>
@@ -86,11 +86,11 @@
 					</div>
 			] [(#REM)<!-- Anciens statuts textuels -->]
 				</li>
-				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 			</ul>
 		</fieldset>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_ressource} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_ressource} } />
 	</form>
 </div>

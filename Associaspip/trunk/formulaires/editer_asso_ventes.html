@@ -4,7 +4,7 @@
     <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<fieldset><legend><:asso:acheteur:></legend><ul>
-#INCLURE{fond=inc/saisir_membre, nom, id_auteur}
+#INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur}
 		</ul></fieldset>
 		<fieldset>
 			<legend>Facturation</legend>
@@ -66,15 +66,15 @@
 					<label for="frais_envoi"><:asso:frais_d_envoi_en_e__:></label>
 					<input type="[(#HTML5|?{number,text})]" name="frais_envoi" [value="(#ENV{frais_envoi})"] id="frais_envoi"  class="number float price" />
 				</li>
-				<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 			</ul>
 		</fieldset>
 		<fieldset>
 		  <legend><:asso:adherent_entete_paiement:></legend>
 		  <ul>
-<INCLURE{fond=inc/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}
->		  </ul>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env}
+ />		  </ul>
 		</fieldset>
-<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_vente} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_vente} } />
 	</form>
 </div>

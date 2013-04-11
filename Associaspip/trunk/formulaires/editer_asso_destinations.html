@@ -9,8 +9,8 @@
 				<label for="intitule"><:asso:libelle_intitule:></label>
 				<input name="intitule" type="text" [value="(#ENV{intitule})"] id="intitule" class="text" />
 			</li>
-			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 		</ul>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_destination} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_destination} } />
 	</form>
 </div>

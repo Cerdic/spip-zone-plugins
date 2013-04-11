@@ -20,7 +20,7 @@
 				<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class="text" />
 			</li>
 		]
-		<INCLURE{fond=inc/saisir_categorie}{categorie=#ENV{id_categorie}}>
+<INCLURE{fond=prive/editer/saisir_categorie}{categorie=#ENV{id_categorie}} />
 			<li class="editer_validite">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_validite})</span>]
 				<label for="saisie_date_validite"><:asso:adherent_libelle_validite:></label>
@@ -40,10 +40,10 @@
 		[(#META{/association/id_asso}|oui)
 			<li class="editer_id_asso">
 				<label for="id_asso"><:asso:adherent_libelle_reference_interne:></label>
-				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class="text" />
+				<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso" class="text" />
 			</li>
 		]
-		<INCLURE{fond=inc/saisir_commentaires}{commentaire=#ENV{commentaire}}>
+<INCLURE{fond=prive/editer/saisir_commentaires}{commentaire=#ENV{commentaire}} />
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->

@@ -24,8 +24,8 @@
 				<label for="cotisation"><:asso:libelle_montant:></label>
 				<input name="prix_cotisation" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_cotisation})"] id="cotisation" class="number float price" />
 			</li>
-			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 		</ul>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_categorie} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_categorie} } />
 	</form>
 </div>

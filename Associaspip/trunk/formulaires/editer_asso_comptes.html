@@ -107,7 +107,7 @@
 				</label>
 				<input type="[(#HTML5|?{number,text})]" name="recette" value="[(#ENV{recette})]" id="recette" class="number float price" />
 			</li>
-			<INCLURE{fond=inc/saisir_paiement, journal, type_operation, id_dest, montant_dest, defaut_dest, env}>
+<INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation, id_dest, montant_dest, defaut_dest, env} />
 			<li id="saisie_justification" class="editer_justification [(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]">
 				<label for="justification"><:asso:libelle_justification:></label>
 				<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class="text" />
@@ -115,6 +115,6 @@
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_compte} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_compte} } />
 	</form>
 </div>

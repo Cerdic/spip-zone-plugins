@@ -9,6 +9,6 @@
 				<input type="text" name="nom_meta" [value="(#ENV{nom_meta})"] id="nom_meta"  class="text" />
 			</li>
 		</ul>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{nom_meta} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{nom_meta} } />
 	</form>
 </div>

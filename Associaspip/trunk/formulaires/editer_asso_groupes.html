@@ -9,7 +9,7 @@
 				<label for="nom"><:asso:nom_groupe:></label>
 				<input [(#ENV{_autorisation}|oui) disabled="disabled" [value="(#VAL{asso:groupe_#ENV{id_groupe}}|_T)"]] type="text" name="nom" [(#ENV{_autorisation}|non) [value="(#ENV{nom})"]] id="nom" class="text" />
 			</li>
-			<INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 		 [(#ENV{_autorisation}|non)
 			<li class="editer_affichage">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{affichage})</span>]
@@ -18,6 +18,6 @@
 			</li>
 		]
 		</ul>
-		<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_groupe} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_groupe} } />
 	</form>
 </div>

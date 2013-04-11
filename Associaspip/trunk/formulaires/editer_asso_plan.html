@@ -39,8 +39,8 @@
 		<label for="active"><:asso:compte_active:></label>
 		<input type="checkbox" name="active" [(#ENV{active}|?{checked="checked"})] id="active" />
 	    </li>
-	    <INCLURE{fond=inc/saisir_commentaires, commentaire }>
+<INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 	</ul>
-	<INCLURE{fond=inc/bouton_validation, pass_ok=#ENV{id_plan} }>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_plan} } />
     </form>
 </div>
