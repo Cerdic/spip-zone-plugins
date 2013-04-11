@@ -20,7 +20,7 @@ function action_supprimer_numero_dist(){
 	$arg = $securiser_action();
 	list($id_numero, $objet, $id_objet) = preg_split('/\W/', $arg);
 
-	if ($numero AND $id_numero AND autoriser('supprimer', 'numero', $id_numero)) {
+	if (intval($id_numero) AND autoriser('supprimer', 'numero', $id_numero)) {
 		// on supprime les liens entre l'objet et l'numero
 		include_spip('action/editer_liens');
 		objet_dissocier( array('numero' => $id_numero), array($objet => $id_objet) );

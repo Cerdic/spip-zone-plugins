@@ -20,7 +20,7 @@ function action_supprimer_adresse_dist(){
 	$arg = $securiser_action();
 	list($id_adresse, $objet, $id_objet) = preg_split('/\W/', $arg);
 
-	if ($adresse AND $id_adresse AND autoriser('supprimer', 'adresse', $id_adresse)) {
+	if (intval($id_adresse) AND autoriser('supprimer', 'adresse', $id_adresse)) {
 		// on supprime les liens entre l'objet et l'adresse
 		include_spip('action/editer_liens');
 		objet_dissocier( array('adresse' => $id_adresse), array($objet => $id_objet) );
