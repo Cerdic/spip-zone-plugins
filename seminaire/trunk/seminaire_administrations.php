@@ -16,7 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-
 	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['create']);
 	/**activer les mots clés et leur configuration avancée s'ils ne le sont pas déjà**/
 	if ($GLOBALS['meta']['articles_mots']!=oui){
@@ -56,6 +55,16 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
           if (sql_error() != '') $Terreurs[] = (_T('erreur_creation_mot_cle')).$st.': '.sql_error();
         }
     }
+
+	$maj['1.0.1'] = array(
+	/*Copie de abstract vers descriptif*/
+	array('sql_update',"spip_evenements", array('descriptif'=>'abstract')),
+	array('sql_alter',"TABLE spip_evenements DROP abstract"),
+	/*on change name en attendee*/
+	array('sql_alter',"TABLE spip_evenements ADD attendee text NOT NULL"),
+	array('sql_update',"spip_evenements", array('attendee'=>'name')),
+	array('sql_alter',"TABLE spip_evenements DROP name"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
