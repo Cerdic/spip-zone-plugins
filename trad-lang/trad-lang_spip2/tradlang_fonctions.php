@@ -163,7 +163,7 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 }
 
 /**
- * <BOUCLE(TRADLANG)>
+ * <BOUCLE(TRADLANGS)>
  * On enlève les modules attic*
  */
 function boucle_TRADLANGS_dist($id_boucle, &$boucles) {

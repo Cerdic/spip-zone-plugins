@@ -101,3 +101,29 @@ div.graph[dir="ltr"] div.translated {
 .none, .js .none-js, .no-js .none-nojs {
     display: none;
 }
+
+.formulaire_spip li.editer_version_originale_choisie{
+	width:33%;
+	float:left;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	box-sizing:border-box;
+}
+.formulaire_spip li.editer_valeur_originale{
+	width:33%;
+	float:left;
+	margin-left:1%;
+	clear:none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	box-sizing:border-box;
+}
+
+.formulaire_spip li.editer_valeur_fichier{
+	width:33%;
+	float:right;
+	clear:none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	box-sizing:border-box;
+}

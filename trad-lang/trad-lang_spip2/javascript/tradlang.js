@@ -48,9 +48,39 @@ var tradlang_thead_flottant = function(){
 		});
 	}
 }
+
+var tradlang_tabs_charger = function(){
+    jQuery('#infos_auteur_tabs').tabs();
+};
+
+(function($) {
+	$.fn.equalHeights = function(minHeight, maxHeight) {
+		var tallest = (minHeight) ? minHeight : 0;
+		this.each(function() {
+			if($(this).height() > tallest)
+				tallest = $(this).height();
+		});
+		if((maxHeight) && tallest > maxHeight) tallest = maxHeight;
+		return this.each(function() {
+			$(this).height(tallest).css("overflow","hidden");
+		});
+	}
+})(jQuery);
+
+
+var tradlang_hauteur_blocs = function(){
+	if(typeof(jQuery.fn.equalHeights) ==  'function'){
+		jQuery('.traducteurs li.item').equalHeights();
+	}
+}
+
 $(document).ready(function(){
 	tradlang_switchers();
 	tradlang_thead_flottant();
+	tradlang_tabs_charger();
+	tradlang_hauteur_blocs();
 	onAjaxLoad(tradlang_switchers);
 	onAjaxLoad(tradlang_thead_flottant);
+	onAjaxLoad(tradlang_tabs_charger);
+	onAjaxLoad(tradlang_hauteur_blocs);
 });

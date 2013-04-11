@@ -1,0 +1,33 @@
+<B_auteurs>
+[<h2 class="h2">(#ENV*{titre})</h2>]
+[<p>(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_nb_participants,tradlang:info_nb_participants})</p>]
+[<p class="pagination">(#PAGINATION)</p>]
+<p class="pagination_tri"></p>
+
+<ul class="liste-items traducteurs">
+<BOUCLE_auteurs(AUTEURS spip_versions spip_tradlangs){compteur versions}{id_auteur != '-1'}{spip_versions.objet=tradlang}{tri #ENV{tri,multi nom}}{pagination #ENV{pagination,12}}>
+<li class="item">
+
+	<h4><a href="#URL_AUTEUR" class="spip_in">#NOM</a></h4>
+	<p class="infos_auteur_revisions"><a href="[(#URL_AUTEUR|ancre_url{revisions})]">[(#COMPTEUR{versions}|singulier_ou_pluriel{tradlang:auteur_revision,tradlang:auteur_revisions})]</a></p>
+	[(#SET{langues,#ARRAY})]
+	<BOUCLE_versions_lang(TRADLANGS spip_versions){id_auteur}{fusion lang}>
+	[(#SET{langue,[(#LANG|unique{#ID_AUTEUR})]})]
+	[(#GET{langue}|oui)[(#SET{langues,#GET{langues}|push{#GET{langue}}})]]
+	</BOUCLE_versions_lang>
+	<B_data_langue>
+	<p class="info_revisions_langue">
+	[(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:auteur_revisions_langue,tradlang:auteur_revisions_langues})]
+	<BOUCLE_data_langue(DATA){source table,#GET{langues}}{par valeur}{', '}{0,5}><abbr title="#VALEUR">[(#VALEUR|traduire_nom_langue)]</abbr></BOUCLE_data_langue>[(#GRAND_TOTAL|>{5}|oui)...]
+	</p>
+	</B_data_langue>
+	</B_versions_lang>
+	<BOUCLE_modules_favoris(FAVORIS){id_auteur}{objet=tradlang_module}> </BOUCLE_modules_favoris>
+	[(#SET{total,#GRAND_TOTAL})]
+	<p class="info_favoris"><a href="[(#URL_AUTEUR|ancre_url{favoris})]"><:tradlang:info_nb_modules_favoris{nb=#GET{total}}:></a></p>
+	</B_modules_favoris>
+</li>
+</BOUCLE_auteurs>
+</ul>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_auteurs>

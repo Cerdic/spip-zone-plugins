@@ -7,6 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'Aucun module.',
+	'auteur_revision' => '@nb@ modification de traduction.',
+	'auteur_revisions' => '@nb@ modifications de traductions.',
+	'auteur_revisions_langue' => 'La langue de ses participations&nbsp;:',
+	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations&nbsp;:',
 
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
@@ -89,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_tradlang' => '@nb@ chaîne de langue',
 	'info_1_tradlang_module' => '1 module de langue',
 	'info_aucun_tradlang_module' => 'Aucun module de langue',
+	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.',
 	'info_chaine_jamais_modifiee' => 'Cette chaîne n\'a jamais été modifiée.',
 	'info_chaine_originale' => 'Cette chaîne est la chaine originale',
 	'info_contributeurs' => 'Contributeurs',
@@ -115,6 +120,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_modif' => '@pc@% des items de priorité "@priorite@" sont modifiés et à vérifier en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_new' => '@pc@% des items de priorité "@priorite@" sont nouveaux en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_ok' => 'Les modules de priorité "@priorite@" sont traduits à @pc@% en @lang@ (@langue_longue@)',
+	'info_nb_modules_favoris' => '@nb@ modules favoris.',
+	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.',
 	'info_nb_tradlang' => '@nb@ chaînes de langue',
 	'info_nb_tradlang_module' => '@nb@ modules de langue',
 	'info_percent_chaines' => '@traduites@ / @total@ chaines traduites en "[@langue@] @langue_longue@"',

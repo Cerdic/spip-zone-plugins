@@ -1,6 +1,6 @@
 <BOUCLE_content(AUTEURS){id_auteur}{tous}>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:tradlang:info_contributeurs:></span>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{auteurs}" class="spip_in"><:tradlang:info_contributeurs:></a>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
 
 <div class="content-principal">
 	<div class="vcard">[(#REM) microformat vcard]
@@ -23,18 +23,29 @@
 	[(#ENV{vue}|in_array{#ARRAY{0,profil}}|oui)
 		<INCLURE{fond=inclure/auteur_profil,env}>
 	]
-	[(#ENV{vue}|in_array{#ARRAY{0,profil}}|non)
-		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
-		[(#PLUGIN{mesfavoris}|oui)
-		[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
-		[(#SET{bouton_ajout,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{non,oui})]})]
-		<INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},bouton_ajout=#GET{bouton_ajout},ajax}>]
-		[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
-		[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
-		#SET{url_modif,#URL_PAGE{tradlang_revision}}
-		[<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</h2>
-		(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>}|trim)]]
-	]
+	<BOUCLE_si_pas_profil(CONDITION){si #ENV{vue}|in_array{#ARRAY{0,profil}}|non}>
+		<div id="infos_auteur_tabs">
+			<ul class="liste-items">
+				[(#PLUGIN{mesfavoris}|oui)<li class="item"><a href="&#35;favoris">[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]</a></li>]
+				<li class="item"><a href="&#35revisions">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</a></li>
+			</ul>
+			
+			[(#PLUGIN{mesfavoris}|oui)
+				[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
+				[(#SET{bouton_ajout,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{non,oui})]})]
+				<div id="favoris">
+				[(#INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},bouton_ajout=#GET{bouton_ajout},sinon=<:tradlang:info_auteur_sans_favori:>,ajax})]
+				</div>
+			]
+			[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
+			[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)[(#SET{url_modif,#URL_PAGE{tradlang_revision}})]
+			[<div id="revisions">
+				<h2>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</h2>
+				(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_auteur,ajax,sinon=<:revisions:info_aucune_revision:>}|trim)
+			</div>]
+			]
+		</div>
+	</BOUCLE_si_pas_profil>
 </div>
 [(#ENV{vue}|in_array{#ARRAY{0,profil}}|non|et{#SESSION{id_auteur}|!={#ENV{id_auteur}}|oui})
 #FORMULAIRE_ECRIRE_AUTEUR

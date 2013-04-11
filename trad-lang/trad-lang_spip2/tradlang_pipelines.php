@@ -24,7 +24,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function tradlang_taches_generales_cron($taches_generales) {
 	$taches_generales['tradlang_verifier_versions'] = 240;
-	
 	return $taches_generales;
 }
 /**
@@ -101,6 +100,21 @@ function tradlang_insert_head($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline jqueryui_forcer (plugin jQueryUI)
+ * 
+ * On ajoute le chargement des js pour les tabs
+ * 
+ * @param array $plugins 
+ * 		Un tableau des scripts déjà demandé au chargement
+ * @return array $plugins 
+ * 		Le tableau complété avec les scripts que l'on souhaite 
+ */
+function tradlang_jqueryui_plugins($plugins){
+	if(!test_espace_prive())
+		$plugins[] = "jquery.ui.tabs";
+	return $plugins;
+}
 /**
  * Insertion dans le pipeline insert_head_css (SPIP)
  * 
@@ -179,17 +193,21 @@ function tradlang_editer_contenu_objet($flux){
 }
 
 /**
+ * Insertion dans le pipeline formulaire_charger (SPIP)
+ * 
  * Ajouter la valeur langues_preferees dans la liste des champs de la fiche auteur
  *
  * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
 function tradlang_formulaire_charger($flux){
 	// si le charger a renvoye false ou une chaine, ne rien faire
 	if (is_array($flux['data']) && ($flux['args']['form']=='editer_auteur')){
 		$flux['data']['langues_preferees'] = '';
-		if ($id_auteur = intval($flux['data']['id_auteur'])){
+		if ($id_auteur = intval($flux['data']['id_auteur']))
 			$flux['data']['langues_preferees'] = sql_getfetsel('langues_preferees','spip_auteurs','id_auteur='.intval($id_auteur));
-		}
 	}
 	return $flux;
 }
@@ -197,7 +215,9 @@ function tradlang_formulaire_charger($flux){
 /**
  * Insertion dans le pipeline forum_objets_depuis_env (Plugin Forum)
  * On ajoute la possibilité d'avoir des forums sur les chaines de langue
+ * 
  * @param array $array
+ * @return array $array
  */
 function tradlang_forum_objets_depuis_env($array){
 	$array['tradlang'] = id_table_objet('tradlang');
