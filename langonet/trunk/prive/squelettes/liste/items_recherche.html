@@ -22,7 +22,7 @@
 				<td class="fichier">[(#VAL{.php}|str_replace{'', #VALEUR})]</td>
 				<td class="traduction">[
 					<span class="guillemet">&#10078;</span>
-					(#GET{traductions}|table_valeur{#CLE}|htmlentities)
+					(#GET{traductions}|table_valeur{#CLE}| htmlspecialchars)
 					<span class="guillemet">&#10077;</span>
 				]</td>
 			</tr>
