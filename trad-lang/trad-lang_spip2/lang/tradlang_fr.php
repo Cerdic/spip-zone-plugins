@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucunmodule' => 'Aucun module.',
 	'auteur_revision' => '@nb@ modification de traduction.',
 	'auteur_revisions' => '@nb@ modifications de traductions.',
-	'auteur_revisions_langue' => 'La langue de ses participations&nbsp;:',
-	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations&nbsp;:',
+	'auteur_revisions_langue' => 'La langue de ses participations :',
+	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :',
 
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
@@ -340,9 +340,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'Ses contributions',
 	'titre_revisions_sommaire' => 'Dernières modifications',
 	'titre_revisions_vos' => 'Vos contributions',
+	'titre_stats_ses' => 'Ses statistiques',
 	'titre_stats_trads_journalieres' => 'Nombre de révisions journalières',
 	'titre_stats_trads_mensuelles' => 'Nombre de révisions mensuelles',
-	'titre_stats_ses' => 'Ses statistiques',
 	'titre_stats_vos' => 'Vos statistiques',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Chaines de langue',

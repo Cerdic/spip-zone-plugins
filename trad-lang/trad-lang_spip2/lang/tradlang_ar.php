@@ -9,6 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'لا توجد اي وحدة.',
+	'auteur_revision' => '@nb@ modification de traduction.', # NEW
+	'auteur_revisions' => '@nb@ modifications de traductions.', # NEW
+	'auteur_revisions_langue' => 'La langue de ses participations :', # NEW
+	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :', # NEW
 
 	// B
 	'bouton_activer_lang' => 'تفعيل اللغة "@lang@" لهذه الوحدة',
@@ -91,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_tradlang' => '@nb@ سلسلة لغة',
 	'info_1_tradlang_module' => 'سلسلة لغة واحدة',
 	'info_aucun_tradlang_module' => 'لا توجد اي سلسلة لغة',
+	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.', # NEW
 	'info_chaine_jamais_modifiee' => 'لم يتم تعديل هذه السلسلة أبداً.',
 	'info_chaine_originale' => 'هذه السلسلة هي السلسلة الأصلية',
 	'info_contributeurs' => 'المساهمون',
@@ -117,6 +122,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_modif' => '@pc@٪ من البنود ذات الأولوية «@priorite@» معدلة وجاهزة للتدقيق بـ@lang@ (@langue_longue@)',
 	'info_nb_items_priorite_new' => '@pc@٪ من البنود ذات الأولوية «@priorite@» جديدة بـ@lang@ (@langue_longue@) ',
 	'info_nb_items_priorite_ok' => 'الوحدات ذات الأولوية «@priorite@» مترجمة بنسبة @pc@٪ الى @lang@ (@langue_longue@)',
+	'info_nb_modules_favoris' => '@nb@ modules favoris.', # NEW
+	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
 	'info_nb_tradlang' => '@nb@ سلسلة لغة',
 	'info_nb_tradlang_module' => '@nb@ وحدة لغة',
 	'info_percent_chaines' => '@traduites@ / @total@ سلسلة مترجمة الى «[@langue@] @langue_longue@»',
@@ -325,6 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_tradlang_module' => 'شعار الوحدة',
 	'titre_modifications_chaines' => 'أحدث تعديلات هذه السلسلة',
 	'titre_modifier' => 'تعديل',
+	'titre_page_auteurs' => 'Liste des contributeurs', # NEW
 	'titre_page_configurer_tradlang' => 'إعداد ملحق Trad-lang',
 	'titre_page_tradlang_module' => 'الوحدة #@id@ : @module@',
 	'titre_profil_auteur' => 'تحرير سيرتك',
@@ -333,8 +341,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'مساهماته (ها)',
 	'titre_revisions_sommaire' => 'أحدث التعديلات',
 	'titre_revisions_vos' => 'مساهماتك',
+	'titre_stats_ses' => 'Ses statistiques', # NEW
 	'titre_stats_trads_journalieres' => 'عدد التعديلات اليومية',
 	'titre_stats_trads_mensuelles' => 'عدد التعديلات الشهري',
+	'titre_stats_vos' => 'Vos statistiques', # NEW
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'سلاسل اللغة',
 	'titre_tradlang_module' => 'وحدة لغة',
