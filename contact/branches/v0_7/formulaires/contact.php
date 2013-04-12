@@ -301,7 +301,8 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	if ($pj_enregistrees_nom != null) {
 		//On rajoute des sauts de ligne pour différencier du message.
 		$texte_final = array(
-			'texte' => $texte_final
+			'texte' => $texte_final,
+			'repondre_a' => $posteur['mail'],
 		);
 		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
 			$texte_final['pieces_jointes'][$cle] = array(
@@ -378,12 +379,6 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		}
 	}
 	// envoyer le mail maintenant
-	if (!is_array($texte_final)) {
-		$texte_final = array(
-			'texte' => $texte_final
-		);
-	}
-	$texte_final['repondre_a'] = $posteur['mail'];
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$envoyer_mail($mail, $posteur['sujet'], $texte_final , '', "X-Originating-IP: ".$GLOBALS['ip']);
 
