@@ -12,9 +12,9 @@ function paravent_autoriser(){}
 
 /**
  * Autoriser a voir le site en construction : par defaut tous les auteurs authentifies
- * @return bool
+ * @return booleen
  */
-function autoriser_travaux($faire, $type, $id, $qui, $opt){
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+function autoriser_travaux(){
+	return in_array($GLOBALS['visiteur_session']['statut'], array('0minirezo', '1comite'));
 	}
 ?>
