@@ -226,7 +226,6 @@ You will receive and email telling you how to change your login.',
 	'raccourcis' => 'Shortcuts',
 	'recherche_case' => 'Search fields',
 	'recherche_utilisateurs' => 'Search an user',
-	'recherche_valeur' => 'Search:',
 
 	// S
 	'statut_rel' => 'Internal status',
