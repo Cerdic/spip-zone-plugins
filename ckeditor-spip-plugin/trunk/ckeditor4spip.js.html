@@ -125,7 +125,7 @@ function SpipEditor2CKEditor(editor_id){
 	$(editor_id).attr('disabled',true);
 	var EdConfig={};$.extend(EdConfig,CKEDITOR.ckConfig) ;
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
-	try {	// fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax
+	try { [(#REM) // fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax ]
 		var id = $(editor_id).attr('id') ;
 		if (id) {
 			var instance = CKEDITOR.instances[id] ;
@@ -171,7 +171,7 @@ function SpipEditor2CKEditor(editor_id){
 		this.on('dataReady', function(e){ 
 			this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
 		});
-		$(editor_id).parents().find('input[class=submit]') // fix: a priori ceci n'est nécessaire que pour les forums, mais il semble que cela fonctionne aussi pour les autres formulaires
+		$(editor_id).parents().find('input[class=submit]') [(#REM) // fix: a priori ceci n'est nécessaire que pour les forums, mais il semble que cela fonctionne aussi pour les autres formulaires]
 			.attr('onclick', 'javacript:CKEditor2SpipEditor(\''+editor_id+'\');') ;
 	},EdConfig);
 	} catch (E) { /* rien */ }

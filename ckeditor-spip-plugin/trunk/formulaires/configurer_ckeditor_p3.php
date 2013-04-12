@@ -13,11 +13,6 @@ function formulaires_configurer_ckeditor_p3_charger_dist() {
 	}
 	ckeditor_ecrire_protectedtags() ;
 	($cfg = lire_config("ckeditor")) || ($cfg = array()) ;
-	$default_ce = is_array($cfg['extras_tb'])?$cfg['extras_tb']:array() ;
-	foreach(liste_CHAMPS_EXTRAS() as $CE) {
-		if (is_null($default_ce[$CE])) 
-			$default_ce[$CE]= _CKE_CHAMPS_EXTRAS_TB_DEF;
-	}
 	$valeurs = array(
 		'protectedtags' => $cfg['protectedtags'],
 		'conversion' => array_key_exists('conversion', $cfg)?$cfg['conversion']:_CKE_CONVERSION_DEF,

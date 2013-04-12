@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]CKEditor pour SPIP[en]CKEditor for SPIP[ar]CKEDITOR &#1604; SPIP</multi></nom>
 	<auteur>Auteurs : [Fr&#233;d&#233;ric Bonnaud->mailto:fred@lea-linux.org], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com], [Emmanuel Dreyfus->mailto:manu@netbsd.org]</auteur>
-	<version>0.16.10</version>
+	<version>0.16.11</version>
 	<etat>test</etat>
 	<description>
 		<h3><multi>[fr]Int&#233;gration de l'&#233;diteur WYSIWYG CKEditor à SPIP 2.0.9+[en]Integration of WYSIWYG editor CKEditor with SPIP 2.0.9+[ar]&#1578;&#1603;&#1575;&#1605;&#1604; CKEditor &#1606;&#1575;&#1588;&#1585; &#1604;SPIP 2.0.9+ et SPIP 3.0.4+</multi></h3>

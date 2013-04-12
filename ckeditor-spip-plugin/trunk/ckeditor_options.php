@@ -43,24 +43,4 @@ function ck_enliste($texte, $double = false) {
 	return $result ;
 }
 
-function liste_CHAMPS_EXTRAS() {
-	if ($iextras = $GLOBALS['meta']['iextras']) { // y'a-t-il des champs extra ?
-		$iextras = unserialize($iextras) ;
-		foreach($iextras as $id => $iextra) {
-			if ($iextra->type == 'bloc') { // de type bloc ?
-				$result[] = $iextra->champ ;
-			}
-		}
-	} else {
-		$result = array() ;
-	}
-	return $result ;
-}
-
-function balise_CHAMPS_EXTRAS_dist($p) {
-	$p->code = "liste_CHAMPS_EXTRAS()" ;
-	$p->interdire_scripts = false ;
-	return $p ;
-}
-
 ?>
