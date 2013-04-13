@@ -7,45 +7,45 @@
 		<label for="date_don"><:asso:date_aaaa_mm_jj:></label>
 		<input type="[(#HTML5|?{date,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don" class="date" #ENV{readonly} />
 		</div>
-	<fieldset>
-		<legend><:asso:bienfaiteur:></legend>
-		<ul>
+		<fieldset>
+			<legend><:asso:bienfaiteur:></legend>
+			<ul>
 #INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur, lecture_seule=#ENV{auteur_fixe} }
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend><:asso:dons_en_argent:></legend>
-		<ul>
-			<li class="editer_colis">[(#REM) class a revoir]
-			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
-			<label for="argent"><:asso:don_financier_en_e__:></label>
-			<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
-			</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:asso:dons_en_argent:></legend>
+			<ul>
+				<li class="editer_colis">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{argent})</span>]
+					<label for="argent"><:asso:don_financier_en_e__:></label>
+					<input type="[(#HTML5|?{number,text})]" name="argent" [value="(#ENV{argent})"] id="argent"  class="number float price" />
+				</li>
 <INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
-		</ul>
-	</fieldset>
-[(#ENV{auteur_fixe}|oui})
+			</ul>
+		</fieldset>
+[(#ENV{auteur_fixe}|oui)
 		<fieldset>
 			<legend><:asso:dons_en_nature:></legend>
 			<ul>
-			<li class="editer_colis">
-				<label for="colis"><:asso:colis:></label>
-				<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />
-			</li>
-			<li class="editer_valeur">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
-				<label for="valeur"><:asso:contre_valeur_en_e__:></label>
-				<input type="[(#HTML5|?{number,text})]" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class="number fleat price" />
-			</li>
-			<li class="editer_contrepartie">
-				<label for="contrepartie"><:asso:geste_association:></label>
-				<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />
-				[(#META{/association/recufiscal}|et{#PLUGIN{fpdf}}|oui)<em class="explication"><:asso:dons_aide_contrepartie:></em>]
-			</li>
+				<li class="editer_colis">
+					<label for="colis"><:asso:colis:></label>
+					<input type="text" name="colis" [value="(#ENV{colis})"] id="colis"  class="text" />
+				</li>
+				<li class="editer_valeur">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{valeur})</span>]
+					<label for="valeur"><:asso:contre_valeur_en_e__:></label>
+					<input type="[(#HTML5|?{number,text})]" name="valeur" [value="(#ENV{valeur})"] id="valeur"  class="number fleat price" />
+				</li>
+				<li class="editer_contrepartie">
+					<label for="contrepartie"><:asso:geste_association:></label>
+					<input type="text" name="contrepartie" [value="(#ENV{contrepartie})"] id="contrepartie"  class="text" />
+					[(#META{/association/recufiscal}|et{#PLUGIN{fpdf}}|oui)<em class="explication"><:asso:dons_aide_contrepartie:></em>]
+				</li>
 <INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 			</ul>
 		</fieldset>
-	]
+]
 <INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_don} } />
 	</form>
 </div>
