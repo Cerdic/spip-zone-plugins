@@ -8,10 +8,7 @@
 <div class="cadre cadre-info">
     <div class="cadre_padding">
         <div><:asso:association_info_doc:></div>
-        <p class="date" title="[(#DATE)]">
-            [(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
-            <:asso:date_du_jour{date=#GET{aujourdhui}}:>
-        </p>
+        [(#VAL{1}|association_aujourdhui)]
     </div>
 </div>
 <!--/#navigation-->

@@ -50,7 +50,7 @@ function exec_activites_args($id_evenement) {
 			array('evenements', 'img_pack/agenda-24.png', array('agenda_evenements'), array('menu', 'evenements'), ),
 		), 70);
 	} else { // pas de bloc de raccourcis
-		echo association_date_du_jour();
+		echo association_aujourdhui();
 		echo fin_boite_info(TRUE);
 	}
 	debut_cadre_association('activites.gif', 'activite_titre_toutes_activites');

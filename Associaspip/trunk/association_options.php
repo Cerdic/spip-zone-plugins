@@ -72,6 +72,13 @@ if (!defined('_ASSOCIASPIP_LIMITE_SOUSPAGE'))
 if (!defined('_ASSOCIASPIP_AUJOURDHUI_HORAIRE'))
 	define('_ASSOCIASPIP_AUJOURDHUI_HORAIRE', FALSE);
 
+/**
+ * @var const _ASSOCIASPIP_AUJOURDHUI_PHRASE
+ *   Indique s'il faut afficher juste l'horodatage ou s'il faut l'inserer dans la chaine de langue prevue a cet effet
+ */
+if (!defined('_ASSOCIASPIP_AUJOURDHUI_PHRASE'))
+	define('_ASSOCIASPIP_AUJOURDHUI_PHRASE', TRUE);
+
 
 /*****************************************
  * @defgroup association_bouton
@@ -2454,17 +2461,15 @@ function association_chargeparam_destinations($type, &$contexte) {
 /**
  * Affichage du message indiquant la date
  * (et l'heure si option activee)
+ * (dans la phrase prevu si option activee)
  *
- * @param bool $phraser
- *   Indique si l'horodatage est insere dans la chaine de langue prevue a cet
- *   effet (vrai, par defaut) ou s'il est renvoye seul (faux)
  * @return string $res
  */
-function association_date_du_jour($phraser=TRUE) {
+function association_aujourdhui() {
 	$frmt_m = date('Y-m-d'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'\TH:i:s':'') ); // format machine-parsable : idealement "\TH:i:s.uP" mais il faut PHP "up"date (plus precisement 5.1.0 pour "e" et 5.1.3 pour "P" et 5.2.0 pour "u")
 	$format = 'affdate_'. (_ASSOCIASPIP_AUJOURDHUI_HORAIRE?'heure':'base');
 	$frmt_h = $format($frmt_m, 'entier');  // format human-readable
-	if ( $phraser )
+	if (_ASSOCIASPIP_AUJOURDHUI_PHRASE)
 		return '<p class="clear date">'. _T('asso:date_du_jour', array('date'=> (@$GLOBALS['meta']['html5']?'<time datetime="':'<abbr title="'). $frmt_m.'">'.$frmt_h. (@$GLOBALS['meta']['html5']?'</time>':'</abbr>') ) ) .'</p>';
 	else
 		return $frmt_h;

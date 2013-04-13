@@ -7,10 +7,7 @@
 <div class='cadre cadre-info'>
 	<div class="cadre_padding">
 		<div><:asso:info_doc_etiquette:></div>
-		<p class="date" title="[(#DATE)]">
-			[(#SET{aujourdhui,[(#DATE|affdate)] })]
-			[(#VAL{asso:date_du_jour}|_T{#ARRAY{date,#GET{aujourdhui}}})]
-	   </p>
+		[(#VAL{1}|association_aujourdhui)]
 	</div>
 </div>
 <!--/#navigation-->

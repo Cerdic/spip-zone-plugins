@@ -24,7 +24,7 @@ include_spip('inc/autoriser'); // utilise par "onglet1_association" (pour le tes
  *   code HTML du bouton et autres elements connexes
  * @ note
  *   Ces elements destines a l'affichage des modules sont dans un fichier separe
- * qui sera autonome quand il ne fera plus appel a aucune fonction de association_options.php (association_langue association_date_du_jour)
+ * qui sera autonome quand il ne fera plus appel a aucune fonction de association_options.php (association_langue association_aujourdhui)
  * @note
  *   Les anciens appels de procedure doivent etre remplace par des appel de fonction :
  * icone1_association : association_navigation_raccourci1
@@ -123,7 +123,7 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
 		}
 	}
 
-	return association_date_du_jour()
+	return association_aujourdhui()
 	. fin_boite_info(TRUE)
 	. ($res?bloc_des_raccourcis($res):''); // tester si le tableau est vide (ce qui peut arriver si on n'a l'autorisation pour aucun bouton) et ne pas afficher un bloc sans bouton (c'est disgracieux et troublant)
 }

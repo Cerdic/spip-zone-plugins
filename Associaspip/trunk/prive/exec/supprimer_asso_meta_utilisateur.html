@@ -10,10 +10,7 @@
 		<div style="text-align: center" class="verdana1 spip_medium">
 			<:asso:confirmation:>
 		</div>
-		<p class="date" title="[(#DATE)]">
-			[(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
-			<:asso:date_du_jour{date=#GET{aujourdhui}}:>
-		</p>
+		[(#VAL{1}|association_aujourdhui)]
 	</div>
 </div>
 <!--/#navigation-->
