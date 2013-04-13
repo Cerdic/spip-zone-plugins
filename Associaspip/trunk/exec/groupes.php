@@ -22,8 +22,8 @@ function exec_groupes() {
 		echo _T('asso:aide_groupes');
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
-				array('adherent_titre_liste_actifs', 'annonce.gif', array('adherents'), array('voir_membres', 'association') ),
-		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'), array('editer_groupes', 'association', 100) )
+				array('adherent_titre_liste_actifs', 'grille-24.png', array('adherents'), array('voir_membres', 'association') ),
+				array('ajouter_un_groupe', 'annonce.gif', array('edit_groupe'), array('editer_groupes', 'association', 100) )
 		), 11);
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau
@@ -32,8 +32,8 @@ function exec_groupes() {
 			array(
 #				'id_groupe' => array('asso:entete_id', 'entier'),
 				'nom' => array('asso:entete_nom', 'texte'),
-				'commentaire' => array('asso:entete_commentaire', 'texte'),
 				'affichage' => array('asso:ordre_affichage_groupe', 'entier'),
+				'commentaire' => array('asso:entete_commentaire', 'texte'),
 			), // entetes et formats des donnees
 			array(
 				array('suppr', 'groupe', 'id=$$'),

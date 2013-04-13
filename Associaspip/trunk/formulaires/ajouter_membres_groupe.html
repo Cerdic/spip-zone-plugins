@@ -1,26 +1,24 @@
 <B_membresHorsGroupe>
 <div class="formulaire_spip formulaire_#FORM">
-    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form id="formulaire_#FORM" method="post" action="#ENV{action}">
 	<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 	<h3 class="legend"><:asso:ajouter_membres_au_groupe:></h3>
 	<p class="pagination">#PAGINATION</p>
 	<ul>
 <BOUCLE_membresHorsGroupe(asso_membres asso_fonctions){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe = #ENV{id_groupe}}{par nom_famille, prenom}{pagination 40}>
-	    <li class="liste_auteurs">
-		<div class="choix">
-		    <input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" id="auteur#ID_AUTEUR" />
-		    <label for="auteur#ID_AUTEUR">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE}) ]</label>
-		</div>
-	    </li>
+		<li class="liste_auteurs">
+			<div class="choix">
+				<input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" id="auteur#ID_AUTEUR" />
+				<label for="auteur#ID_AUTEUR">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE})]</label>
+			</div>
+		</li>
 </BOUCLE_membresHorsGroupe>
 	</ul>
-<INCLURE{fond=prive/editer/bouton_validation, pass_ok=1 } />
-    </form>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=0 } />
+	</form>
 </div>
 </B_membresHorsGroupe>
-<div class="erreur">
-	<:asso:tous_les_membres_sont_dans_ce_groupe:>
-</div>
+<div class="erreur"><:asso:tous_les_membres_sont_dans_ce_groupe:></div>
 <//B_membresHorsGroupe>
