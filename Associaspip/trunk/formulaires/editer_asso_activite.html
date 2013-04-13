@@ -27,7 +27,7 @@
 			<ul>
 				<li class="editer_montant">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{montant})</span>]
-					<label for="prix_unitaire"><:asso:activite_libelle_montant_inscription:></label>
+					<label for="prix_unitaire"><:asso:libelle_montant:></label>
 					<input name="prix_unitaire" type="[(#HTML5|?{number,text})]" [value="(#ENV{prix_unitaire})" ]id="prix_unitaire" class="number float price" />
 				</li>
 				<li class="editer_date">

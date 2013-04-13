@@ -23,7 +23,7 @@ function exec_groupes() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 				array('adherent_titre_liste_actifs', 'annonce.gif', array('adherents'), array('voir_membres', 'association') ),
-		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'), array('voir_groupes', 'association') )
+		      'ajouter_un_groupe' => array('annonce.gif', array('edit_groupe'), array('editer_groupes', 'association', 100) )
 		), 11);
 		debut_cadre_association('annonce.gif', 'tous_les_groupes');
 		// affichage du tableau
