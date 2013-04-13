@@ -3,7 +3,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_langonet_lister_charger() {
-	return array('fichier_langue' => _request('fichier_langue'));
+	$valeurs = array();
+	$champs = array('fichier_langue', 'affichage');
+	foreach($champs as $_champ){
+		$valeurs[$_champ] = _request($_champ);
+	}
+	return $valeurs;
 }
 
 function formulaires_langonet_lister_verifier() {
@@ -44,6 +49,7 @@ function formulaires_langonet_lister_traiter() {
 		$retour['message_ok']['titre'] =  basename($resultats['langue'], '.php') . ' (' . $resultats['total'] . ')';
 		$retour['message_ok']['items'] = $resultats['items'];
 		$retour['message_ok']['tradlang'] = $resultats['tradlang'];
+		$retour['message_ok']['affichage'] = _request('affichage');
 	}
 	$retour['editable'] = true;
 	return $retour;

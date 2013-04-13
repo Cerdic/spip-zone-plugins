@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entete_log_erreur_utilisation' => 'ERREUR : items non utilisés',
 
 	// I
+	'info_affichage' => 'Choisissez d\'afficher le texte produit ou brut de la traduction.',
 	'info_arborescence_scannee' => 'Choisissez le répertoire de base dont l\'arborescence sera scannée',
 	'info_bloc_langues_generees' => 'Cliquez sur un lien ci-dessous pour télécharger l\'un des fichiers de langue générés.',
 	'info_bloc_logs_definition' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des définitions manquantes d\'un fichier de langue.',
@@ -61,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_verifier' => 'Cette option vous permet, d\'une part,  de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. Il est possible, soit de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, soit que certains items de langue définis ne sont plus utilisés. <br />D\'autre part, il est possible de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
 	// L
+	'label_affichage' => 'Mode d\'affichage de la traduction',
 	'label_arborescence_scannee' => 'Arborescence à scanner',
 	'label_avertissement' => 'Avertissements',
 	'label_chemin_langue' => 'Localisation du fichier de langue',
@@ -142,6 +144,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_rechercher_item' => 'Rechercher un raccourci',
 	'onglet_rechercher_texte' => 'Rechercher un texte',
 	'onglet_verifier' => 'Vérifier une langue',
+	'option_affichage_final' => 'Texte produit sans balise HTML',
+	'option_affichage_brut' => 'Texte brut avec les balises HTML',
 	'option_aucun_dossier' => 'aucune arborescence sélectionnée',
 	'option_aucun_fichier' => 'aucune langue sélectionnée',
 	'option_mode_index' => 'Item de la langue source',

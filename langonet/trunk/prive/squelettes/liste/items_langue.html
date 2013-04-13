@@ -7,7 +7,11 @@
 			<tr>
 				<td class="statut">[(#CHEMIN_IMAGE{[tradlang_statut_(#VALEUR|table_valeur{etat}).png]}|balise_img{'', icone})]</td>
 				<td class="titre principale"><strong>#CLE</strong></td>
-				<td class="texte">[(#VALEUR|table_valeur{traduction})]</td>
+				<td class="texte">
+				[(#ENV{affichage}|=={brut}|?{
+					[(#VALEUR|table_valeur{traduction}|htmlspecialchars)],
+					[(#VALEUR|table_valeur{traduction})]})]
+				</td>
 			</tr>
 </BOUCLE_liste_items>
 		</tbody>

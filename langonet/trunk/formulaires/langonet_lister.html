@@ -16,6 +16,19 @@
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
 				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
 			</li>
+			<li class="editer_affichage[(#ENV{erreurs}|table_valeur{affichage}|oui) erreur]">
+				<label><:langonet:label_affichage:></label>
+				<p class="explication"><:langonet:info_affichage:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{affichage})</span>]
+				<div class="choix">
+					<input type="radio" name="affichage" value="final" id="affichage_final" class="radio"[ (#ENV{affichage, final}|=={final}|oui)checked="checked"] />
+					<label for="affichage_final"><:langonet:option_affichage_final:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="affichage" value="brut" id="affichage_brut" class="radio"[ (#ENV{affichage, final}|=={brut}|oui)checked="checked"] />
+					<label for="affichage_brut"><:langonet:option_affichage_brut:></label>
+				</div>
+			</li>
 		</ul>
 
 		<p class="boutons">
@@ -29,6 +42,7 @@
 		<INCLURE{fond=formulaires/inc-resultats_lister,
 			explication=#ENV*{message_ok}|table_valeur{explication},
 			tradlang=#ENV*{message_ok}|table_valeur{tradlang},
+			affichage=#ENV*{message_ok}|table_valeur{affichage},
 			titre=#ENV*{message_ok}|table_valeur{titre},
 			items=#ENV*{message_ok}|table_valeur{items},
 			env}
