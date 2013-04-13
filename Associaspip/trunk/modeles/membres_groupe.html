@@ -9,31 +9,38 @@ parametres =
 maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 
 <B_membres2groupe>
-<table width="100%" class="asso_tablo">
-		<tr class="row_first">[(#META{association/aff_photo}|oui)
-			<th></th>]
-			<th><:asso:entete_nom:></th>
-			<th><:asso:fonction:></th>[
-(#AUTORISER{voir_profil,association}|oui)[
-(#PLUGIN{coordonnees}|oui)
-			<th><:coordonnees:label_numero:></th>]
-			<th><:asso:email:></th>]
-		</tr>
+#ANCRE_PAGINATION
+<table class="spip asso_tablo" width="100%">
+	<tr class="row_first">[(#META{association/aff_photo}|oui)
+		<th scope="col"></th>]
+		<th scope="col"><:asso:entete_nom:></th>
+		<th scope="col"><:asso:fonction:></th>
+	[(#AUTORISER{voir_profil,association}|oui)
+		[(#PLUGIN{coordonnees}|oui)
+		<th scope="col"><:coordonnees:label_numero:></th>
+		]
+		<th><:asso:email:></th>
+	]
+	</tr>
 <BOUCLE_membres2groupe(ASSO_FONCTIONS asso_membres)
-					     {id_groupe=#ENV{id_groupe}}
-					     {par nom_famille}
-					     {pagination}
-					     ><tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">[(#META{association/aff_photo}|oui)
-	<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>]
-	<td>[<a href='#URL_ECRIRE{adherent,id_auteur=#ID_AUTEUR}'>(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})</a>]</td>
-	<td><a class="include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>[(#AUTORISER{voir_profil,association}|oui)
-			[(#PLUGIN{coordonnees}|oui)
-			<td>[(#ID_AUTEUR|association_formater_telephones|array_shift)]</td>]
-			<td>[(#ID_AUTEUR|association_formater_emails|array_shift)]</td>]
-</tr>
+	{id_groupe=#ENV{id_groupe,#ENV{id}}}
+	{par nom_famille,prenom}
+	{pagination #ENV{pagination,10} assofonctions2groupe}
+	>
+	<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
+		[(#META{association/aff_photo}|oui)<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>]
+		<td>[<a href='#URL_ECRIRE{adherent,id_auteur=#ID_AUTEUR}'>(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})</a>]</td>
+		<td><a class="spip_in include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
+	[(#AUTORISER{voir_profil,association}|oui)
+		[(#PLUGIN{coordonnees}|oui)
+		<td>[(#ID_AUTEUR|association_formater_telephones|array_shift)]</td>
+		]
+		<td>[(#ID_AUTEUR|association_formater_emails|array_shift)]</td>
+	]
+	</tr>
 </BOUCLE_membres2groupe>
 </table>
-<p class="pagination">#PAGINATION</p>
+[<p class="pagination">(#PAGINATION)</p>]
 </B_membres2groupe>
-<div><:asso:aucun_membre_dans_ce_groupe:></div>
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun_membre_dans_ce_groupe:>})</div>]
 <//B_membres2groupe>

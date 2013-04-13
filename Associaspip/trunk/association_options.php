@@ -111,7 +111,7 @@ function association_bouton_act($texte, $image, $script='', $exec_args='', $img_
 	$res = "<img src=\"$chemin\"$texte $img_attrs />";
 	if ($script) {
 		$h = generer_url_ecrire($script, $exec_args);
-		$res = "<a href='$h'>$res</a>";
+		$res = "<a class='spip_in' href='$h'>$res</a>";
 	}
 	return $tag ? "<$tag class='action'>$res</$tag>" : $res;
 }
@@ -834,7 +834,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 			if ($html_span) { // formatage HTML avec microformat
 				$telephones_string[$id_objet] .=  "<$html_span class='tel'>". appliquer_filtre($telephone['type'], 'logo_type_tel');
 				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
-				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
+				$telephones_string[$id_objet] .=  ($href_pre?("<a class='spip_out' title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='value'>";
 				unset($telephone['type']); // ne devrait plus etre traite par le modele
 				unset($telephone['id_objet']); // ne devrait plus etre traite par le modele
 				unset($telephone['id_numero']); // ne devrait pas etre utilise par le modele
@@ -1007,7 +1007,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_mel');
 				if ( !in_array($courriel['format'],array('x400','ldap')) )
 					$href = TRUE;
-				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
+				$emails_string[$id_objet] .= ($href?("<a class='spip_out' title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='value'>";
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_objet']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
@@ -1087,7 +1087,7 @@ function association_formater_urls($id_objets, $objet='auteur', $a=TRUE, $sep=' 
 				$lien['url'] = $lien;
 			}
 			if ($a) { // balisage HTML avec microformat
-				$urls_string[$id_objet] .= appliquer_filtre($lien['type'], 'logo_type_mel') ." <a class='url' href='$lien[url]'>";
+				$urls_string[$id_objet] .= appliquer_filtre($lien['type'], 'logo_type_mel') ." <a class='url spip_out' href='$lien[url]'>";
 #				unset($lien['type']); // ne devrait plus etre traite par le modele
 #				unset($lien['id_objet']); // ne devrait plus etre traite par le modele
 #				unset($lien['id_url']); // ne devrait pas etre utilise par le modele
@@ -1405,7 +1405,7 @@ function filtre_selecteur_asso_id($sel='') {
  *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
  */
 function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
-    $pager = '';
+    $pager = ' ';
     if ( !$annee ) // annee non precisee (ou valant 0)
 		$annee = date('Y'); // on prend l'annee courante
     $res = "<select name ='annee' onchange='form.submit()' id='annee_$champ'>\n";
@@ -1418,11 +1418,12 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
 		$res .= '<option value="'.$val['annee'].'"';
 		if ($annee==$val['annee']) {
 			$res .= ' selected="selected"';
-			$pager .= "\n<strong>$val[annee]</strong>";
+			$pager .= "<span class='on'>$val[annee]</span>";
 		} else {
-			$pager .= ' <a href="'.$url.'&annee='.$val['annee'] .'">'.$val['annee']."</a>\n";
+			$pager .= ' <a href="'.$url.'&annee='.$val['annee'] .'">'.$val['annee'].'</a>';
 		}
 		$res .= '>'.$val['annee']."</option>\n";
+		$pager .= ' ';
     }
     sql_free($sql);
     return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
@@ -1448,7 +1449,7 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
 		$res .= '<option value="'.$val['init'].'"';
 		if ($lettre==$val['init']) {
 			$res .= ' selected="selected"';
-			$pager .= "\n<strong>$lettre</strong>";
+			$pager .= " <span class='on'>$lettre</span>";
 		} else {
 			$pager .= ' <a href="'.$url.'&lettre='.$val['init'].'">'.$val['init'].'</a>';
 		}
@@ -1456,11 +1457,11 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
     }
     sql_free($sql);
     if ( !$lettre || $lettre=='%' ) {
-		$pager .= ' <strong>'. _T('asso:entete_tous') .'</strong>';
+		$pager .= ' <span class="on">'. _T('asso:entete_tous') .'</span>';
 	} else {
 		$pager .= ' <a href="'.$url.'">'. _T('asso:entete_tous') .'</a>';
 	}
-    return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
+    return ($url?"<div class='choix'>$pager </div>\n":"$res</select>\n");
 }
 
 /**
@@ -1951,7 +1952,7 @@ function association_form_filtres($liste_filtres, $exec='', $supplements='', $td
  * 	Cf. $debut
  */
 function association_form_souspage($pages, $exec='', $arg=array(), $plus='', $debut='debut', $req=TRUE) {
-	$res = "<table width='100%' class='asso_tablo_filtres'><tr>\n" .'<td align="left">';
+	$res = "<table width='100%' class='asso_tablo_filtres'><tr>\n" .'<td align="left"> ';
 	if ( is_array($pages) ) {
 		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
 	} else {
@@ -1965,12 +1966,14 @@ function association_form_souspage($pages, $exec='', $arg=array(), $plus='', $de
 		for ($i=0; $i<$nbr_pages; $i++) {
 			$position = $i*_ASSOCIASPIP_LIMITE_SOUSPAGE;
 			if ($position==$debut) { // page courante
-				$res .= "\n<strong>".$position.' </strong> ';
+				$res .= '<span class="on">'.$position.'</span>';
 			} else { // autre page
 				$arg['debut']= 'debut='.$position;
 				$h = generer_url_ecrire($exec, join('&', $arg));
-				$res .= "<a href='$h'>$position</a>\n";
+				$res .= "<a class='spip_in' href='$h'>$position</a>";
 			}
+			if ( $i!=($nbr_pages-1) )
+				$res .= ' | ';
 		}
 	}
 	return "$res</td>\n$plus\n</tr></table>";
@@ -2078,7 +2081,7 @@ function association_form_etiquettes($where_adherents, $jointure_adherents='', $
 	$res .= generer_action_auteur('pdf_etiquettes', 0, '', $frm, '', '');
 	$res .= '</div>'; //l1.2
 	if ( autoriser('editer_profil', 'association') )
-		$res .= '<div><a href="'. generer_url_ecrire('parametrer_etiquettes') .'">'. _T('asso:parametrage_des_etiquettes') .'</a></div>'; //l2
+		$res .= '<div><a class="spip_in" href="'. generer_url_ecrire('parametrer_etiquettes') .'">'. _T('asso:parametrage_des_etiquettes') .'</a></div>'; //l2
 	return debut_cadre_enfonce('', TRUE). $res. fin_cadre_enfonce(TRUE);
 }
 
@@ -2126,9 +2129,10 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 		$res .= '<th scope="col">'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
 	}
 	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection);
-	sql_free($reponse_sql);
+//	sql_free($reponse_sql);
 
-	if (!$lignes) return _T('asso:aucun');
+	if (!$lignes)
+		return _T('asso:aucun');
 
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
 		$res .= '<th scope="col" colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";

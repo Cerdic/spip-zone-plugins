@@ -28,13 +28,13 @@ maj:2012-11-27; version:0.1.0; licence:GPL; -->]
             {_ht=&nbsp;}
         )]
     </p>
-    [<p class="tel">(#MODELE{coordonnees_telephone}
+    [<p class="tel"><a class="spip_out" href="tel:#META{/association/telephone}">(#MODELE{coordonnees_telephone}
         {numero=#META{/association/telephone}}
-    )</p>]
-    [<p class="email"><a href="mailto:#META{/association/email}">
+    )</a></p>]
+    [<p class="email"><a class="spip_out" href="mailto:#META{/association/email}">
     (#META{/association/email})</a>
     </p>]
-    <dl class="note">
+    <dl class="spip note">
         [(#META{/association/recufiscal}|oui)<dt><:cerfa11580:intitule_tco:></dt>
             <dd>[(#VAL{cerfa11580:intitule_type#META{/association/recufiscal}}|_T{#ARRAY{'plus',#META{/association/infofiscal}}})]</dd>
             [<dd>(#META{/association/cgi200}|ou{#META{/association/cgi238}}|ou{#META{/association/cgi885}})<:cerfa11580:intitule_cgi:></dd>]

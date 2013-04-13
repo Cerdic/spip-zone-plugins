@@ -1,64 +1,68 @@
 <B_ressources_disponibles>
 #ANCRE_PAGINATION
-<table class="spip">
-	<caption><:asso:ressources_titre_liste_ressources:></caption>
-		<tr class="row_first">
-		[(#ENV{code}|=={oui}|oui)
-			<th><:asso:ressources_entete_code:></th>
-		]
-			<th><:asso:ressources_entete_intitule:></th>
-		[(#ENV{acquisition}|=={oui}|oui)
-			<th><:asso:entete_date:></th>
-		]
-		[(#ENV{remarques}|=={oui}|oui)
-			<th><:asso:remarques:></th>
-		]
-			<th><:asso:ressources_entete_montant:></th>
-			<th><:asso:ressources_entete_caution:></th>
-			<th><:asso:ressources_libelle_statut:></th>
-		[(#ENV{retour}|=={oui}|oui)
-			<th><:asso:prets_entete_date_retour:></th>
-		]
-		</tr>
-<BOUCLE_ressources_disponibles(ASSO_RESSOURCES){pagination 20}{!par date_acquisition}{statut !IN sorti, suspendu }{!statut<0}>
-		<tr id="#ID_RESSOURCE" [class="(#EVAL{[(#_ressources_disponibles:COMPTEUR_BOUCLE)]}|alterner{'row_even','row_odd'})"]>
-		[(#ENV{code}|=={oui}|oui)
-			<td class="text">#CODE</td>
-		]
-			<td class="text">#INTITULE</td>
-		[(#ENV{acquisition}|=={oui}|oui)
-			<td class="date"> [(#DATE_ACQUISITION|appliquer_filtre{association_formater_date})]</td>
-		]
-		[(#ENV{remarques}|=={oui}|oui)
-			<td class="text">#COMMENTAIRE</td>
-		]
-			<td class="decimal">[(#PU|appliquer_filtre{association_formater_prix})] [/ (#VAL{1}|appliquer_filtre{association_formater_duree{#UD}})]</td>
-			<td class="decimal">[(#PRIX_CAUTION|appliquer_filtre{association_formater_prix})]</td>
-			<td>
-				[(#STATUT|=={ok}|ou{#STATUT|>{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
-				[(#STATUT|=={reserve}|ou{#STATUT|=={0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
-				[(#STATUT|=={suspendu}|ou{#STATUT|<{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
-				[(#STATUT|=={sorti}|ou{#STATUT|=={NULL}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
-			</td>
-		<B_dernier_retour>
-		<BOUCLE_dernier_retour(ASSO_PRETS){id_ressource}{!par date_retour}{0,1}>
-		[(#ENV{retour}|=={oui}|oui)
-			<td class="date">
-				[(#DATE_RETOUR|appliquer_filtre{association_formater_date})]
-			</td>
-		]
-		</BOUCLE_dernier_retour>
-		</B_dernier_retour>
-		[(#ENV{retour}|=={oui}|oui)
-			<td class="erreur">
-				<:asso:pas_encore_sortie:>
-			</td>
-		]
-		<//B_dernier_retour>
-		</tr>
+<table class="spip asso_tablo" width="100%">
+	[<caption>(#ENV{titre,<:asso:ressources_titre_liste_ressources:>}|replace{'@#@',#GRAND_TOTAL})</caption>]
+	<tr class="row_first">
+		<th scope="col"><:asso:ressources_entete_code:></th>
+		<th scope="col"><:asso:ressources_entete_intitule:></th>
+	[(#ENV{acquisition}|oui)
+		<th scope="col"><:asso:entete_date:></th>
+	]
+	[(#ENV{remarques}|oui)
+		<th scope="col"><:asso:remarques:></th>
+	]
+		<th scope="col"><:asso:ressources_entete_montant:></th>
+		<th scope="col"><:asso:ressources_entete_caution:></th>
+		<th><:asso:ressources_libelle_statut:></th>
+	[(#ENV{retour}|=={oui}|oui)
+		<th scope="col"><:asso:prets_entete_date_retour:></th>
+	]
+	</tr>
+<BOUCLE_ressources_disponibles(ASSO_RESSOURCES)
+	{code?LIKE #ENV{code}%}
+	{intitule?LIKE #ENV{intitule}%}
+	{date_acquisition?LIKE #ENV{date_acquisition}%}
+	{prix_acquisition?}
+	{pu?}
+	{ud?}
+	{commentaire?LIKE %#ENV{commentaire}%}{maj?LIKE #ENV{maj}%}
+	{statut !IN sorti, suspendu }{!statut<0}
+	{par #ENV{tri,date_acquisition DESC}}
+	{pagination #ENV{pagination,10} assoressources}
+	>
+	<tr id="#ID_RESSOURCE" [class="(#EVAL{[(#_ressources_disponibles:COMPTEUR_BOUCLE)]}|alterner{'row_odd odd impair','row_even even pair'})"]>
+		<td class="text">#CODE</td>
+		<td class="text">#INTITULE</td>
+	[(#ENV{acquisition}|oui)
+		<td class="date">[(#DATE_ACQUISITION|appliquer_filtre{association_formater_date})]</td>
+	]
+	[(#ENV{remarques}|=={oui}|oui)
+		<td class="text">#COMMENTAIRE</td>
+	]
+		<td class="decimal">[(#PU|appliquer_filtre{association_formater_prix})] [/ (#VAL{1}|appliquer_filtre{association_formater_duree{#UD}})]</td>
+		<td class="decimal">[(#PRIX_CAUTION|appliquer_filtre{association_formater_prix})]</td>
+		<td>
+			[(#STATUT|=={ok}|ou{#STATUT|>{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
+			[(#STATUT|=={reserve}|ou{#STATUT|=={0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
+			[(#STATUT|=={suspendu}|ou{#STATUT|<{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
+			[(#STATUT|=={sorti}|ou{#STATUT|=={NULL}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
+		</td>
+	<B_dernier_retour>
+	<BOUCLE_dernier_retour(ASSO_PRETS){id_ressource}{!par date_retour}{0,1}>
+	[(#ENV{retour}|oui)
+		<td class="date">[(#DATE_RETOUR|appliquer_filtre{association_formater_date})]</td>
+	]
+	</BOUCLE_dernier_retour>
+	</B_dernier_retour>
+	[(#ENV{retour}|oui)
+		<td class="erreur"><:asso:pas_encore_sortie:></td>
+	]
+	<//B_dernier_retour>
+	</tr>
 </BOUCLE_ressources_disponibles>
-		<tr class="row_last">
-			<th colspan="5">[: <span class="pagination">(#PAGINATION)</span>]</th>
-		</tr>
 </table>
+[<p class="pagination">(#PAGINATION)</p>]
 </B_ressources_disponibles>
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun:>})</div>]
+<//B_ressources_disponibles>
+

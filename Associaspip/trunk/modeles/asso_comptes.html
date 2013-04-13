@@ -1,96 +1,42 @@
-[(#REM)<!-- Association Compte : Extrait du grand journal
-plugin = associaspip ; tables = spip_asso_comptes, spip_asso_plans
-plugins necessaires = Bonux (pour la boucle CONDITION testant le droit d'acces pour des raisons de securite evidente)
-parametres =
-- id_journal (entier) : id_auteur du membre concerne
-- imputation (texte) : id_plan du journal comptable desire
-- titre (texte = '') : chaine de langue contenant le titre du tableau
-- rpp (entier = 10) : nombre de resultats par page (i.e. pas de pagination)
-- vide (texte = 'aucun') : chaine conntenant le message a afficher en absence de resultat
-
-maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
-
-#SET{est_membre,non}
-<BOUCLE_membre(ASSO_MEMBRES){id_auteur=#SESSION{id_auteur}}>
-	#SET{est_membre,oui}
-</BOUCLE_membre>
-<BOUCLE_acces(CONDITION ?){si #GET{est_membre}|=={oui} }>
-
-<B_historique>
+<B_historique_comptable>
 #ANCRE_PAGINATION
-<table class="spip" align="#LANG_LEFT" widht="90%">
-		<col align="#LANG_RIGHT" />
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
-		<col align="#LANG_LEFT" />
-		]
-		<col align="#LANG_RIGHT" char="." />
-		<col align="#LANG_LEFT"/>
-		[(#SESSION{statut}|=={0minirezo}|oui)
-		<col align="#LANG_LEFT" />
-		<col align="#LANG_LEFT" />
-		]
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
-		<col align="center" />
-		]
-	[<caption>(#ENV{titre}|replace{'@#@',#TOTAL_BOUCLE})</caption>]
+<table class="spip asso_tablo" width="100%">
+	[<caption>(#ENV{titre}|replace{'@#@',#GRAND_TOTAL})</caption>]
 	<tr class="row_first">
 		<th><:asso:entete_date:></th>
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<th><:asso:adherent_entete_justification:></th>
-		]
 		<th><:asso:entete_montant:></th>
 		<th><:asso:compte_entete_financier:></th>
-		[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#SESSION{statut}|=={0minirezo}|oui)
 		<th><:asso:adherent_entete_journal:></th>
 		<th><:asso:compte_entete_imputation:></th>
-		]
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
-		<th><:asso:entete_action:></th>
-		]
+	]
 	</tr>
-<BOUCLE_historique(ASSO_COMPTES)
- {id_journal?IN #ENV{id_journal}} {imputation?IN #ENV{imputation}}
- {!par date_operation} {par id_journal,imputation}
- {pagination #ENV{rpp,#META{/association/pagination_historiques,10}}} >
-	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+<BOUCLE_historique_comptable(ASSO_COMPTES)
+	{date_operation?LIKE #ENV{date_operation}%}
+	{recette?}
+	{depense?}
+	{jutification?LIKE %#ENV{justification}%}
+	{imputation?LIKE #ENV{imputation}%}
+	{journal?LIKE #ENV{journal}%}
+	{id_journal?IN #ENV{id_journal}}
+	{maj?LIKE #ENV{maj}%}
+	{par #ENV{tri, date_operation DESC}}
+	{pagination #ENV{pagination,10} assocomptes}
+	>
+	<tr id="compte#ID_COMPTE" class="[(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
 		<td><span title="#DATE">[(#DATE|affdate)]</span></td>
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
 		<td>[(#JUSTIFICATION|propre)]</td>
-		]
 		<td>[(#RECETTE|>{0}|?{[<span title="+#RECETTE">(#VAL{'%.2n'}|money_format{#RECETTE})</span>],[<span title="-#DEPENSE">-(#VAL{'%.2n'}|money_format{#DEPENSE})</span>]})]</td>
 		<td><BOUCLE_ModePaiement(spip_asso_plan){code=#JOURNAL}{0,1}><span title="#JOURNAL">#INTITULE</span></BOUCLE_ModePaiement></td>
-		[(#SESSION{statut}|=={0minirezo}|oui)
+	[(#SESSION{statut}|=={0minirezo}|oui)
 		<td>#ID_JOURNAL</td>
 		<td>#IMPUTATION</td>
-		]
-		[(#AUTORISER{voir_compta,association,#ID_COMPTE}|oui)
-		<td>
-			[(#BOUTON_ACTION{
-				[(#CHEMIN{img_pack/edit-12.gif}
-					|balise_img{<:asso:adherent_bouton_maj_operation:>})],
-				[(#URL_ECRIRE{edit_compte}
-					|parametre_url{id,#ID_COMPTE}
-					|parametre_url{retour,[(#ENV{retour,#SELF})]})],
-				ajax
-			})]
-			[(#BOUTON_ACTION{
-				[(#CHEMIN{img_pack/poubelle.gif}
-					|balise_img{<:asso:bouton_supprimer:>})],
-				[(#URL_ECRIRE{action_compte}
-					|parametre_url{id,#ID_COMPTE}
-					|parametre_url{retour,[(#ENV{retour,#SELF})]})],
-				ajax
-			})]
-		</td>
-		]
+	]
 	</tr>
-</BOUCLE_historique>
+</BOUCLE_historique_comptable>
 </table>
-<div>
-    [<p class="pagination">(#PAGINATION{prive})</p>]
-</div>
-</B_historique>
-	[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun:>})</div>]
-<//B_historique>
-
-</BOUCLE_acces>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_historique_comptable>
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun:>})</div>]
+<//B_historique_comptable>
