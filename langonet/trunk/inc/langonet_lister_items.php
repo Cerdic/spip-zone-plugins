@@ -4,8 +4,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_LANGONET_PATTERN_ETAT_ITEM'))
 	define('_LANGONET_PATTERN_ETAT_ITEM', '%\s[\'"]([^\'"]*)[\'"].+[\'"](?:[^\'"]*)[\'"]\s*,?(?:\s*#\s*(NEW|MODIF))?$%Uims');
-if (!defined('_LANGONET_PATTERN_TRADLANG'))
-	define('_LANGONET_PATTERN_TRADLANG', '// extrait automatiquement de');
+if (!defined('_LANGONET_PATTERN_REFERENCE'))
+	define('_LANGONET_PATTERN_REFERENCE', '#<traduction[^>]*reference="(.*)">#Uims');
 
 /**
  * Creation du tableau des items de langue d'un fichier donne trie par ordre alphabetique
@@ -39,14 +39,24 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 
 	$liste_brute = $GLOBALS[$var_source];
 	if ($liste_brute) {
+		// Recherche du gestionnaire de traduction TradLang par l'existence du rapport XML.
+		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
+		// de chaque item. On peut aussi identifier la langue de référence
+		$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
+		$tradlang = false;
+		$langue_reference = false;
+		if (file_exists($rapport_xml)) {
+			$tradlang = true;
+			if ($contenu = spip_file_get_contents($rapport_xml))
+				if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+					$langue_reference = ($matches[1] == $langue);
+		}
+
 		// Créer le tableau des items NEW et MODIF si le module est sous TradLang
 		$matches = array();
-		$tradlang = false;
-		if ($contenu = spip_file_get_contents($fichier_lang)) {
-			// Déterminer préalablement si le module est traduit sous tradlang ou pas.
-			// Si non, l'état ne peut être déduit
-			if (stripos($contenu, _LANGONET_PATTERN_TRADLANG) !== false) {
-				$tradlang = true;
+		if ($tradlang AND !$langue_reference) {
+			if ($contenu = spip_file_get_contents($fichier_lang)) {
+				// la langue de référence ne possède pas les tags NEW ou MODIF
 				preg_match_all(_LANGONET_PATTERN_ETAT_ITEM, $contenu, $matches);
 			}
 		}
@@ -57,11 +67,15 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		foreach ($liste_brute as $_item => $_traduction) {
 			$liste[$_item]['traduction'] = $_traduction;
 			if ($tradlang) {
-				$cle = array_search($_item, $matches[1]);
-				if ($cle !== false)
-					$liste[$_item]['etat'] = $matches[2][$cle] ? strtolower($matches[2][$cle]) : 'ok';
-				else
-					$liste[$_item]['etat'] = 'nok';
+				if ($langue_reference)
+					$liste[$_item]['etat'] = 'ok';
+				else {
+					$cle = array_search($_item, $matches[1]);
+					if ($cle !== false)
+						$liste[$_item]['etat'] = $matches[2][$cle] ? strtolower($matches[2][$cle]) : 'ok';
+					else
+						$liste[$_item]['etat'] = 'nok';
+				}
 			}
 			else
 				$liste[$_item]['etat'] = 'nok';
@@ -71,6 +85,7 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		$resultats['items'] = $liste;
 		$resultats['total'] = count($liste_brute);
 		$resultats['tradlang'] = $tradlang;
+		$resultats['reference'] = $langue_reference;
 		$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';
 	}
 	else {

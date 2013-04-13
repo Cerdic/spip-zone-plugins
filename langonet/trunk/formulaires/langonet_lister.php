@@ -49,6 +49,7 @@ function formulaires_langonet_lister_traiter() {
 		$retour['message_ok']['titre'] =  basename($resultats['langue'], '.php') . ' (' . $resultats['total'] . ')';
 		$retour['message_ok']['items'] = $resultats['items'];
 		$retour['message_ok']['tradlang'] = $resultats['tradlang'];
+		$retour['message_ok']['reference'] = $resultats['reference'];
 		$retour['message_ok']['affichage'] = _request('affichage');
 	}
 	$retour['editable'] = true;

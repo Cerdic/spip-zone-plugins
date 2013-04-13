@@ -4,7 +4,10 @@
 	[<p>(#ENV{explication})</p>]
 	[(#ENV{tradlang}|non)<:langonet:info_tradlang_non:>]
 	[(#ENV{tradlang}|oui)
-	<p><:langonet:info_tradlang_oui:></p>
+		#SET{langue_ref, ''}
+		[(#ENV{reference}|oui)
+			#SET{langue_ref, #VAL{langonet:info_langue_reference}|_T}]
+	<p><:langonet:info_tradlang_oui{reference=#GET{langue_ref}}:></p>
 	<table class="legende">
 		<tr>
 			<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
