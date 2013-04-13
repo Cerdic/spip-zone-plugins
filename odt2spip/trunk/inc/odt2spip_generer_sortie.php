@@ -140,7 +140,10 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 		foreach($match[1] as $ch) {
 			$Tdims = explode(';;;', $ch);
 			$img = $Tdims[0];
-			if (file_exists($rep_pictures . $img)) {
+			// si l'extension du fichier image n'est pas jpg/gif/png virer la balise
+            if (!in_array(strtolower(substr($img, -3)), array('jpg','gif','png')))
+				$Tarticle['texte'] = str_replace($ch, '', $Tarticle['texte']);
+            elseif (file_exists($rep_pictures . $img)) {
 				// retailler l'image en fct des parametres ;;;largeur;;;hauteur;;;
 				$largeur = round($Tdims[1] * $conversion_image);
 				$hauteur = round($Tdims[2] * $conversion_image);
