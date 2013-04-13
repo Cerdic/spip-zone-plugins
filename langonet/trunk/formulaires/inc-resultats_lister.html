@@ -1,26 +1,24 @@
 [(#REM) <!-- Affichage des resultats si ok --> ]
-<fieldset>
-	<legend><:langonet:legende_table:></legend>
-	[<p>(#ENV{explication})</p>]
-	[(#ENV{tradlang}|non)<:langonet:info_tradlang_non:>]
-	[(#ENV{tradlang}|oui)
-		#SET{langue_ref, ''}
-		[(#ENV{reference}|oui)
-			#SET{langue_ref, #VAL{langonet:info_langue_reference}|_T}]
-	<p><:langonet:info_tradlang_oui{reference=#GET{langue_ref}}:></p>
-	<table class="legende">
-		<tr>
-			<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
-			<td><:langonet:info_tradlang_statut_ok:></td>
-		</tr>
-		<tr>
-			<td>[(#CHEMIN_IMAGE{tradlang_statut_modif.png}|balise_img{'', icone})]</td>
-			<td><:langonet:info_tradlang_statut_modif:></td>
-		</tr>
-		<tr>
-			<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
-			<td><:langonet:info_tradlang_statut_new:></td>
-		</tr>
-	</table>]
-	#INCLURE{fond=prive/squelettes/liste/items_langue, env}
-</fieldset>
+<h3><:langonet:legende_table:></h3>
+[<p>(#ENV{explication})</p>]
+[(#ENV{tradlang}|non)<:langonet:info_tradlang_non:>]
+[(#ENV{tradlang}|oui)
+	#SET{langue_ref, ''}
+	[(#ENV{reference}|oui)
+		#SET{langue_ref, #VAL{langonet:info_langue_reference}|_T}]
+<p><:langonet:info_tradlang_oui{reference=#GET{langue_ref}}:></p>
+<table class="legende">
+	<tr>
+		<td>[(#CHEMIN_IMAGE{tradlang_statut_ok.png}|balise_img{'', icone})]</td>
+		<td><:langonet:info_tradlang_statut_ok:></td>
+	</tr>
+	<tr>
+		<td>[(#CHEMIN_IMAGE{tradlang_statut_modif.png}|balise_img{'', icone})]</td>
+		<td><:langonet:info_tradlang_statut_modif:></td>
+	</tr>
+	<tr>
+		<td>[(#CHEMIN_IMAGE{tradlang_statut_new.png}|balise_img{'', icone})]</td>
+		<td><:langonet:info_tradlang_statut_new:></td>
+	</tr>
+</table>]
+#INCLURE{fond=prive/squelettes/liste/items_langue, env}
