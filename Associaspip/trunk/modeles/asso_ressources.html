@@ -1,7 +1,7 @@
 <B_ressources_disponibles>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
-	[<caption>(#ENV{titre,<:asso:ressources_titre_liste_ressources:>}|replace{'@#@',#GRAND_TOTAL})</caption>]
+	[<caption>(#ENV{titre}|sinon{<:asso:ressources_titre_liste_ressources:>})</caption>]
 	<tr class="row_first">
 		<th scope="col"><:asso:ressources_entete_code:></th>
 		<th scope="col"><:asso:ressources_entete_intitule:></th>
@@ -63,6 +63,6 @@
 </table>
 [<p class="pagination">(#PAGINATION)</p>]
 </B_ressources_disponibles>
-[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun:>})</div>]
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:recherche_reponse0:>})</div>]
 <//B_ressources_disponibles>
 

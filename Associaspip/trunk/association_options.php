@@ -1888,7 +1888,7 @@ function association_tablinfos_montants($legende='', $somme_recettes=0, $somme_d
  */
 function association_form_suppression($type, $id, $retour='') {
 	$res = _T('asso:objet_num', array('objet'=>$type,'num'=>$id));
-	$res = _T('asso:vous_aller_effacer', array('quoi'=>'<i>'.$res.'</i>'));
+	$res = _T('asso:vous_allez_effacer', array('quoi'=>'<i>'.$res.'</i>'));
 	$res = '<p><strong>'. $res  .'</strong></p><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
 	return redirige_action_post("supprimer_asso_$type", $id, ($retour?$retour:$type.'s'), '', $res);
 }
@@ -2132,7 +2132,7 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 //	sql_free($reponse_sql);
 
 	if (!$lignes)
-		return _T('asso:aucun');
+		return _T('asso:recherche_reponse0');
 
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
 		$res .= '<th scope="col" colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";

@@ -92,7 +92,7 @@ function exec_adherent() {
 			$t =  _T('cerfa11580:liens_vers_justificatifs');
 			echo debut_cadre_relief('', TRUE, '', $t);
 			$t = voir_adherent_recu_fiscal($id_auteur);
-			echo $t ? $t : _T('asso:aucun');
+			echo $t ? $t : _T('asso:recherche_reponse0');
 			echo fin_cadre_relief(TRUE);
 		}
 		if ($GLOBALS['association_metas']['pc_cotisations']) {

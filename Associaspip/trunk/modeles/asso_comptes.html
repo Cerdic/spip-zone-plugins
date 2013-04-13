@@ -1,7 +1,7 @@
 <B_historique_comptable>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
-	[<caption>(#ENV{titre}|replace{'@#@',#GRAND_TOTAL})</caption>]
+	[<caption>(#ENV{titre}|sinon{<:asso:recherche_reponses{nombre=#GRAND_TOTAL}:>})</caption>]
 	<tr class="row_first">
 		<th><:asso:entete_date:></th>
 		<th><:asso:adherent_entete_justification:></th>
@@ -38,5 +38,5 @@
 </table>
 [<p class="pagination">(#PAGINATION)</p>]
 </B_historique_comptable>
-[<div class="erreur">(#ENV{vide}|sinon{<:asso:aucun:>})</div>]
+[<div class="erreur">(#ENV{vide}|sinon{<:asso:recherche_reponse0:>})</div>]
 <//B_historique_comptable>
