@@ -23,14 +23,11 @@ function formulaires_langonet_generer_verifier() {
 }
 
 function formulaires_langonet_generer_traiter() {
-	// Recuperation des champs du formulaire
-	//   $module     -> prefixe du fichier de langue
-	//                  'langonet' pour 'langonet_fr.php'
+	// Recuperation des champs du formulaire :
+	//   $module     	-> prefixe du fichier de langue 'langonet' pour 'langonet_fr.php'
 	//                  parfois different du 'nom' du plugin
-	//   $langue     -> index du nom de langue
-	//                  'fr' pour 'langonet_fr.php'
-	//   $ou_langue  -> chemin vers le fichier de langue à vérifier
-	//                  'plugins/auto/langonet/lang'
+	//   $langue_source	-> index du nom de langue 'fr' pour 'langonet_fr.php'
+	//   $ou_langue  	-> chemin vers le fichier de langue à vérifier 'plugins/auto/langonet/lang'
 	$retour_select_langue = explode(':', _request('fichier_langue'));
 	$module = $retour_select_langue[1];
 	$langue_source = $retour_select_langue[2];
@@ -40,7 +37,14 @@ function formulaires_langonet_generer_traiter() {
 
 	// Generation du fichier toujours en UTF-8 aujourd'hui
 	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
-	$retour = $langonet_generer($module, $langue_source, $ou_langue, $langue_cible, $mode, 'utf8');
+	$resultats = $langonet_generer($module, $langue_source, $ou_langue, $langue_cible, $mode, 'utf8');
+	if ($resultats['erreur']) {
+		$retour['message_erreur'] = $resultats['erreur'];
+	}
+	else {
+		$retour['message_ok']['fichier'] = $resultats['fichier'];
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_genere', array('langue' => $langue_cible, 'module' => $module, 'fichier' => $resultats['fichier']));
+	}
 	$retour['editable'] = true;
 
 	return $retour;

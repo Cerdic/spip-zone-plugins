@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_generer:></h3>
 
-	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
