@@ -42,7 +42,7 @@
 					<label for="duree"><:asso:prets_libelle_duree:></label>
 					<input name="duree" type="[(#HTML5|?{number,text})]" [value="(#ENV{duree})"] id="duree" class="number integer" />
 				</li>
-#INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur}
+<INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur} />
 				<li class="editer_commentaire_sortie">
 					<label for="commentaire_sortie"><:asso:libelle_commentaire:></label>
 					<textarea name="commentaire_sortie" id="commentaire_sortie" rows="3" cols='64'>[(#ENV{commentaire_sortie})]</textarea>

@@ -11,7 +11,7 @@
 					<label for="date_inscription"><:asso:libelle_date:></label>
 					<input name="date_inscription" type="[(#HTML5|?{date,text})]" [value="(#ENV{date_inscription})"] id="date_inscription" class="date" readonly="readonly" />
 				</li>
-#INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur, lecture_seule=#ENV{date_paiement} }
+<INCLURE{fond=prive/editer/saisir_membre, nom, id_auteur, lecture_seule=#ENV{date_paiement} } />
 				<li class="editer_quantite">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{quantite})</span>]
 					<label for="nombre_places"><:asso:libelle_quantite:></label>
