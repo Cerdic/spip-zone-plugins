@@ -57,7 +57,7 @@ function licence_editer_contenu_objet($flux){
 	$type_form = $flux['args']['type'];
 	$id_document = $flux['args']['id'];
 	if(in_array($type_form,array('document'))){
-		if(preg_match(",<li [^>]*class=[\"']editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
+		if(preg_match(",<li [^>]*class=[\"']editer editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
 			include_spip('inc/licence');
 			$ajouts = recuperer_fond('prive/licence_document_saisies',array('id_document'=>$id_document,'licences' => $GLOBALS['licence_licences']));
 			$flux['data'] = str_replace($regs[0],$ajouts.$regs[0],$flux['data']);
