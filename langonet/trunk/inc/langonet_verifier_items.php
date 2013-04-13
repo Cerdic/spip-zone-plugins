@@ -6,19 +6,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // (voir le fichier regexp.txt pour des exemples)
 
 // déclaration d'items dans base/module.php
-define("_LANGONET_ITEM_B",
-       '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
+if (!defined('_LANGONET_ITEM_B'))
+	define("_LANGONET_ITEM_B", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
 // Fontions PHP _T ou _U avec apostrophe
-define("_LANGONET_ITEM_A",
-       '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
+if (!defined('_LANGONET_ITEM_A'))
+	define("_LANGONET_ITEM_A", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
 // Fontions PHP _T ou _U avec guillemet
-define("_LANGONET_ITEM_G", 
-       '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
+if (!defined('_LANGONET_ITEM_G'))
+	define("_LANGONET_ITEM_G", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
 // squelette avec <:  :>
-define("_LANGONET_ITEM_H", 
-       "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
+if (!defined('_LANGONET_ITEM_H'))
+	define("_LANGONET_ITEM_H", "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
 // pour plugin.xml (obsolete a terme)
-define("_LANGONET_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+if (!defined('_LANGONET_ITEM_X'))
+	define("_LANGONET_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+
 
 /**
  * Verification de l'utilisation des items de langue

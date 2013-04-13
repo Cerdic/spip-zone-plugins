@@ -8,12 +8,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 // Ces 2 REGEXP de recherche de _L
 // doivent fournir les memes tableaux que les RegExp de recherche de <: :>
-define("_LANGONET_FONCTION_L", 
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
-	'#\b_L *[(] *(")([^"]+)"[^)]*#');
+if (!defined('_LANGONET_FONCTION_L'))
+	define("_LANGONET_FONCTION_L", '#\b_L *[(] *(")([^"]+)"[^)]*#');
 
-define("_LANGONET_FONCTION_L2", 
-	"#\b_L *[(] *(')([^']+)'[^)]*#");
+if (!defined('_LANGONET_FONCTION_L2'))
+	define("_LANGONET_FONCTION_L2", "#\b_L *[(] *(')([^']+)'[^)]*#");
 
 // Si une erreur se produit lors du deroulement de la fonction,
 // le tableau resultat contient le libelle
@@ -25,7 +25,8 @@ define("_LANGONET_FONCTION_L2",
 // On n'examine que les fichiers php
 // (voir le fichier regexp.txt).
 
-define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
+if (!defined('_LANGONET_FILES'))
+	define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
 // Construit le tableau des occurrences du premier argument de _L.
 // Ce tableau est indexe par un representant canonique de chaque chaine trouvee
