@@ -27,25 +27,17 @@ function formulaires_langonet_verifier_verifier() {
 }
 
 
-
-///Recuperation des champs du formulaire
-///  $verification -> type de verification
-///                  'definition' ou 'utilisation'
-///  $rep          -> nom du repertoire parent de lang/
-///                   'langonet' pour 'langonet/lang/'
-///                   correspond generalement au 'nom' du plugin
-///  $module       -> prefixe du fichier de langue
-///                   'langonet' pour 'langonet_fr.php'
-///                   parfois different du 'nom' du plugin
-///  $langue       -> index du nom de langue
-///                   'fr' pour 'langonet_fr.php'
-///  $ou_langue    -> chemin vers le fichier de langue a verifier
-///                   'plugins/auto/langonet/lang'
-///  $ou_fichier   -> racine de l'arborescence a verifier
-///                   'plugins/auto/langonet'
-
 function formulaires_langonet_verifier_traiter() {
 
+	// Recuperation des champs du formulaire
+	//  $verification -> type de verification 'definition' ou 'utilisation'
+	//  $rep          -> nom du repertoire parent de lang/ : 'langonet' pour 'langonet/lang/'
+	//                   correspond generalement au 'nom' du plugin
+	//  $module       -> prefixe du fichier de langue : 'langonet' pour 'langonet_fr.php'
+	//                   parfois different du 'nom' du plugin
+	//  $langue       -> index du nom de langue, 'fr' pour 'langonet_fr.php'
+	//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
+	//  $ou_fichier   -> racine de l'arborescence a verifier 'plugins/auto/langonet'
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
 	$retour_select_langue = explode(':', _request('fichier_langue'));
@@ -583,8 +575,8 @@ function creer_script($resultats, $verification) {
 	// "truc_x" doit etre traite avant "truc"
 	arsort($sed);
 	// Creer le texte du script
-	$in = _L('executer ce script dans ');
-	$out = _L("Si correct, rappeler ce script avec 'mv' comme argument pour modifier les fichiers.");
+	$in = 'executer ce script dans ';
+	$out = "Si correct, rappeler ce script avec 'mv' comme argument pour modifier les fichiers.";
 	return "echo \"$in $ou\"\n" .
 		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
 		"\nfor i in " .
