@@ -764,6 +764,17 @@
       <text:p text:style-name="Standard">
         Du texte <text:span text:style-name="T9">soulign ©</text:span> ou <text:span text:style-name="T10">barr ©</text:span> 
       </text:p>
+	  <text:h text:style-name="Heading_20_3" text:outline-level="3">
+		<text:span text:style-name="T11">Les images pas JPG / GIF / PNG : </text:span>
+	  </text:h>
+	  <text:p text:style-name="P21">
+		<text:span text:style-name="T11">par exemple une image copiée / collée directement depuis un éditeur d&apos;image</text:span>
+	  </text:p>
+	  <text:p text:style-name="P20">
+		<draw:frame draw:style-name="fr3" draw:name="images2" text:anchor-type="paragraph" svg:width="15.178cm" svg:height="11.384cm" draw:z-index="7">
+			<draw:image xlink:href="Pictures/2000000900003B4A00002C78E023E93C.svm" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+		</draw:frame>
+	  </text:p>      
       <text:h text:style-name="Heading_20_3" text:outline-level="3">Les niveaux de titres suppl ©mentaires:</text:h>
       <text:p text:style-name="Standard">
         Tous les titres de niveau inf ©rieur au titres de niveau 2 sont format ©s    l&apos;identique: en italique

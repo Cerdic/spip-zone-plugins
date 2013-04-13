@@ -160,10 +160,11 @@ function action_odt2spip_importe() {
                                    $xml_sortie);
     
 
-    // traiter les images: dans tous les cas il faut les intégrer dans la table documents
+// traiter les images: dans tous les cas il faut les intégrer dans la table documents
     // en 1.9.2 c'est mode vignette + il faut les intégrer dans la table de liaison 
     // en 2.0 c'est mode image + les fonctions de snippets font la liaison => on bloque la liaison en filant un id_article vide
-    $id_article_tmp = ($spip_version_code > 2 ? '' : 100000);    
+    $id_article_tmp = ($spip_version_code > 2 ? '' : 100000);   
+    
     preg_match_all('/<'.$ModeImages.'([;a-zA-Z0-9\.]*)/', $xml_sortie, $match, PREG_PATTERN_ORDER);
     if (@count($match) > 0) {
         include_spip('inc/ajouter_document');
@@ -171,18 +172,21 @@ function action_odt2spip_importe() {
         foreach($match[1] as $ch) {
             $Tdims = explode(';;;', $ch);
             $img = $Tdims[0];
-            if (file_exists($rep_pictures.$img)) {
-              // retailler l'image en fct des parametres ;;;largeur;;;hauteur;;;
+			// si l'extension du fichier image n'est pas jpg/gif/png virer la balise
+            if (!in_array(strtolower(substr($img, -3)), array('jpg','gif','png')))
+				$xml_sortie = str_replace($ch, '', $xml_sortie);
+            elseif (file_exists($rep_pictures.$img)) {			
+				// retailler l'image en fct des parametres ;;;largeur;;;hauteur;;;
                 $largeur = round($Tdims[1]*$conversion_image);
                 $hauteur = round($Tdims[2]*$conversion_image);
                 odt2spip_retailler_img($rep_pictures.$img, $largeur, $hauteur);
-              // intégrer l'image comme document spip
+				// intégrer l'image comme document spip
                 // la y'a un bogue super-bizarre avec la fonction spip_abstract_insert() qui est donnee comme absente lors de l'appel de ajouter_document()
                 if (!function_exists('spip_abstract_insert')) include_spip('base/abstract_sql');
                 $ajouter_documents = charger_fonction('ajouter_documents','inc');
 //                $type = ($spip_version_code > 2 ? 'image' : 'vignette');
                 if ($id_document = $ajouter_documents($rep_pictures.$img, $img, "article", $id_article_tmp, $type, 0, $toto='')) { 
-                  // uniformiser la sortie: si on est en 1.9.2 inc_ajouter_documents_dist() retourne le type de fichier (extension) alors qu'en 2.0 c'est l'id_document
+					// uniformiser la sortie: si on est en 1.9.2 inc_ajouter_documents_dist() retourne le type de fichier (extension) alors qu'en 2.0 c'est l'id_document
                     if (!is_numeric($id_document)) {
                         $Ttmp = explode('.', $img);
                         $nom_fic = $Ttmp[0];
@@ -191,7 +195,7 @@ function action_odt2spip_importe() {
                     }
                     $xml_sortie = str_replace($ch, $id_document, $xml_sortie);
                     $T_images[] = $id_document;
-                };
+                } 
             }
         }
     }
