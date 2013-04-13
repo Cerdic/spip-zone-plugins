@@ -2,43 +2,37 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/**
- * Verification de l'utilisation de la fonction _L() dans le code PHP 
- *
- */
 // Ces 2 REGEXP de recherche de _L
 // doivent fournir les memes tableaux que les RegExp de recherche de <: :>
 #       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
 if (!defined('_LANGONET_FONCTION_L'))
 	define("_LANGONET_FONCTION_L", '#\b_L *[(] *(")([^"]+)"[^)]*#');
-
 if (!defined('_LANGONET_FONCTION_L2'))
 	define("_LANGONET_FONCTION_L2", "#\b_L *[(] *(')([^']+)'[^)]*#");
-
-// Si une erreur se produit lors du deroulement de la fonction,
-// le tableau resultat contient le libelle
-// de l'erreur dans $resultats['erreur'];
-// sinon, cet index n'existe pas.
-
-// $ou_fichier   => racine de l'arborescence a verifier
-// On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
-// On n'examine que les fichiers php
-// (voir le fichier regexp.txt).
 
 if (!defined('_LANGONET_FILES'))
 	define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
-// Construit le tableau des occurrences du premier argument de _L.
-// Ce tableau est indexe par un representant canonique de chaque chaine trouvee
-// Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier
-// Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
-// pointant sur un sous-sous-sous-tableau des resultats des preg_match
-// (donc encore des tableaux, indexe numeriquement)
 
-// @param string $module
-// @param string $ou_fichier
-// @return array
-
+/**
+ * Verification de l'utilisation de la fonction _L() dans le code PHP.
+ *
+ * Cette fonction construit le tableau des occurrences du premier argument de _L.
+ * Ce tableau est indexe par un representant canonique de chaque chaine trouvee.
+ * Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier.
+ * Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne, pointant
+ * sur un sous-sous-sous-tableau des resultats des preg_match(donc encore des tableaux, indexe numeriquement)
+ *
+ * @param $module
+ * 		nom du module de langue
+ * @param $ou_fichier
+ * 		racine de l'arborescence a verifier.
+ * 		On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
+ * 		On n'examine que les fichiers php (voir le fichier regexp.txt).
+ * @return array
+ * 		Si une erreur se produit lors du deroulement de la fonction, le tableau resultat contient le libelle
+ * 		de l'erreur dans l'index 'erreur'; sinon, cet index n'existe pas.
+ */
 function inc_langonet_verifier_l($module, $ou_fichier) {
 
 	$item_md5 = $fichier_non = array();

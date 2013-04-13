@@ -10,39 +10,41 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:langonet:info_generer:></p>
-		<fieldset>
-			<legend><:langonet:legende_generer_source:></legend>
-			<ul>
-				<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
-					<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
-					<p class="explication"><:langonet:info_fichier_source:></p>
-					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
-					[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
-				</li>
-			</ul>
-		</fieldset>
-		<fieldset>
-			<legend><:langonet:legende_generer_cible:></legend>
-			<ul>
-				<li class="editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
-					<label for="langue_cible"><:langonet:label_langue_cible:></label>
-					<p class="explication"><:langonet:info_langue:></p>
-					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_cible})</span>]
-					<input type="text" class="text" name="langue_cible" id="langue_cible" value="#ENV{langue_cible}" />
-				</li>
-				<li class="editer_mode obligatoire[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
-					<label for="mode"><:langonet:label_mode:></label>
-					<p class="explication"><:langonet:info_mode:></p>
-					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
-					<select name="mode" id="mode">
-						<option value="valeur" [(#ENV{mode, valeur}|=={valeur}|oui) selected="selected"]><:langonet:option_mode_valeur:></option>
-						<option value="index" [(#ENV{mode, valeur}|=={index}|oui) selected="selected"]><:langonet:option_mode_index:></option>
-						<option value="vide" [(#ENV{mode, valeur}|=={vide}|oui) selected="selected"]><:langonet:option_mode_vide:></option>
-						<option value="pas_item" [(#ENV{mode, valeur}|=={pas_item}|oui) selected="selected"]><:langonet:option_mode_pas_item:></option>
-					</select>
-				</li>
-			</ul>
-		</fieldset>
+		<ul>
+			<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+				<label for="fichier_langue"><:langonet:label_fichier_source:></label>
+				<p class="explication"><:langonet:info_fichier_source:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
+			</li>
+			<li class="editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
+				<label for="langue_cible"><:langonet:label_langue_cible:></label>
+				<p class="explication"><:langonet:info_langue:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_cible})</span>]
+				<input type="text" class="text" name="langue_cible" id="langue_cible" value="#ENV{langue_cible}" />
+			</li>
+			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+				<label><:langonet:label_mode:></label>
+				<p class="explication"><:langonet:info_mode:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
+				<div class="choix">
+					<input type="radio" name="mode" value="valeur" id="mode_valeur" class="radio"[ (#ENV{mode, valeur}|=={valeur}|oui)checked="checked"] />
+					<label for="mode_valeur"><:langonet:option_mode_valeur:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="mode" value="index" id="mode_index" class="radio"[ (#ENV{mode, valeur}|=={index}|oui)checked="checked"] />
+					<label for="mode_index"><:langonet:option_mode_index:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="mode" value="vide" id="mode_vide" class="radio"[ (#ENV{mode, valeur}|=={vide}|oui)checked="checked"] />
+					<label for="mode_vide"><:langonet:option_mode_vide:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="mode" value="pas_item" id="mode_pas_item" class="radio"[ (#ENV{mode, valeur}|=={pas_item}|oui)checked="checked"] />
+					<label for="mode_pas_item"><:langonet:option_mode_pas_item:></label>
+				</div>
+			</li>
+		</ul>
 
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:langonet:bouton_generer:>' />

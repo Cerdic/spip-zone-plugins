@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_defaut_modules_item' => 'Tous les modules disponibles',
 	'label_defaut_modules_texte' => 'Les modules SPIP (ecrire, spip, public)',
 	'label_fichier_liste' => 'Fichier de langue',
+	'label_fichier_source' => 'Fichier de langue source',
 	'label_fichier_verifie' => 'Langue à vérifier',
 	'label_langue_cible' => 'Langue cible',
 	'label_langue_source' => 'Langue source',
