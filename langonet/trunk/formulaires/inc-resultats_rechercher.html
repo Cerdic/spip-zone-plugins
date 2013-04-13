@@ -1,10 +1,9 @@
 [(#REM) <!-- Affichage des resultats --> ]
-<fieldset>
-	<legend><:langonet:legende_trouves{total=#ENV{total}}:></legend>
+<h3><:langonet:legende_trouves{total=#ENV{total}}:></h3>
+<p><:langonet:info_recherche:></p>
 <BOUCLE_pertinences(DATA) {liste egal,commence,contient}{par cle}>
 	#INCLURE{fond=prive/squelettes/liste/items_recherche,
 		items=#ENV{trouves}|table_valeur{#VALEUR},
 		pertinence=#VALEUR,
 		env}
 </BOUCLE_pertinences>
-</fieldset>

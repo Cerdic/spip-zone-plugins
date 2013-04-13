@@ -63,6 +63,7 @@
 		</p>
 	</div></form>
 </BOUCLE_editable>
+</div>
 
 [(#REM) <!-- Affichage des resultats --> ]
 [(#ENV*{message_ok}|oui)
@@ -71,8 +72,6 @@
 		trouves=#ENV*{message_ok}|table_valeur{trouves},
 		env}
 ]
-
-</div>
 
 [(#REM) <!-- Gestion des liens tout cocher, tout décocher et cocher les modules SPIP --> ]
 <script type="text/javascript">

@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modules_recherche_texte' => 'Par défaut, seuls les modules de langue SPIP sont sélectionnés pour la recherche. Si vous préférez choisir les modules à utiliser ouvrez la liste en décochant la case ci-dessous.',
 	'info_pattern_item_cherche' => 'Saisissez un texte correspondant à tout ou partie d\'un raccourci d\'item de langue. La recherche est toujours insensible à la casse.',
 	'info_pattern_texte_cherche' => 'Saisissez en UTF-8 un texte correspondant à tout ou partie d\'une traduction française d\'item de langue. La recherche est toujours insensible à la casse.',
+	'info_recherche' => 'Les résultats de la recherche sont présentés par type de correspondance.',
 	'info_rechercher_item' => 'Cette option vous permet de chercher des items de langue via leur raccourci dans les fichiers de langue présents sur le site. Par souci de performance, seuls les fichiers de langue française sont utilisés et les fichiers de langue <em>paquet-xxxx_fr.php</em> sont exclus.',
 	'info_rechercher_texte' => 'Cette option vous permet de chercher des items de langue via leur traduction française dans les fichiers de langue de SPIP et des plugins disponibles. Par souci de performance, seuls les fichiers de langue française sont utilisés et les fichiers de langue <em>paquet-xxxx_fr.php</em> sont exclus.',
 	'info_table' => 'Chaque ligne affiche l\'icone représentant l\'état de traduction (si le module est sous TradLang), le raccourci en gras et la traduction elle-même.',
