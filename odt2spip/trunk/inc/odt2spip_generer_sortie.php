@@ -167,6 +167,14 @@ function inc_odt2spip_generer_sortie($id_auteur, $rep_dezip){
 		$Tarticle['Timages'] = $Timages;
 	}
 
+	// encodage des caracteres pour gerer aussi les SPIP 3 en ISO-8859-1
+	// cf http://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers#forum466929
+	if ($GLOBALS['meta']['charset'] != 'utf-8'){
+		include_spip('inc/charsets');
+		$Tarticle['texte'] = importer_charset($Tarticle['texte'], 'utf-8');
+		$Tarticle['titre'] = importer_charset($Tarticle['titre'], 'utf-8');
+	}
+	
 	return $Tarticle;
 }
 
