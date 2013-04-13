@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/reglements, par=date_reglement, env, ajax, sinon=<:reglement:info_aucun_reglement:>}>
+
+[(#AUTORISER{creer,reglement})
+	[(#URL_ECRIRE{reglement_edit,new=oui}|icone_verticale{<:reglement:icone_creer_reglement:>,reglement,new,right})]
+]

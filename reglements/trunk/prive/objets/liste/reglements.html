@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+id_reglement,1,
+points,-1
+}})]<B_liste_reglements>
+	#ANCRE_PAGINATION
+	<div class="liste-objets reglements">
+		<table class='spip liste'>
+			[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{reglement:info_1_reglement,reglement:info_nb_reglements}})</strong></caption>]
+			<thead>
+			<tr class='first_row'>
+				<th class='picto' scope='col'></th>
+				<th class='date_reglement' scope='col'>[(#TRI{date_reglement,<:reglement:label_date_reglement:>,ajax})]</th>
+				<th class='id_facture' scope='col'>[(#TRI{id_facture,<:reglement:label_id_facture:>,ajax})]</th>
+				<th class='montant' scope='col'>[(#TRI{montant,<:reglement:label_montant_reglement:>,ajax})]</th>
+				<th class='id' scope='col'>[(#TRI{id_reglement,<:info_numero_abbreviation:>,ajax})]</th>
+			</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_liste_reglements(REGLEMENTS){id_facture?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+			<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+				<td class='picto'>[(#CHEMIN_IMAGE{reglement-16.png}|balise_img)]</td>
+				<td class='date_reglement principale'>[(#LOGO_REGLEMENT|image_reduire{20,26})]<a href="[(#ID_REGLEMENT|generer_url_entite{reglement})]" title="<:info_numero_abbreviation|attribut_html:> #ID_REGLEMENT">[(#RANG). ]#DATE_REGLEMENT</a></td>
+				<td class='id_facture'><a href="#URL_FACTURE">#ID_FACTURE</a></td>
+				<td class='montant'>#MONTANT</td>
+				<td class='id'>[(#AUTORISER{modifier,reglement,#ID_REGLEMENT}|?{
+					<a href="[(#URL_ECRIRE{reglement_edit,id_reglement=#ID_REGLEMENT})]">#ID_REGLEMENT</a>,
+					#ID_REGLEMENT
+					})]</td>
+			</tr>
+			</BOUCLE_liste_reglements>
+			</tbody>
+		</table>
+		[<p class='pagination'>(#PAGINATION{prive})</p>]
+	</div>
+</B_liste_reglements>[
+<div class="liste-objets reglements caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_reglements>

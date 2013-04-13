@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,reglement,#ID_REGLEMENT}|sinon_interdire_acces)]
+<BOUCLE_reglement(REGLEMENTS){id_reglement}{si #ENV{exec}|=={reglement}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,reglement,#ID_REGLEMENT})
+		[(#ID_REGLEMENT|afficher_qui_edite{reglement}|non)
+			[(#URL_ECRIRE{reglement_edit,id_reglement=#ID_REGLEMENT}|icone_verticale{<:reglement:icone_modifier_reglement:>,reglement,edit,right ajax preload})]
+		]
+		[(#ID_REGLEMENT|afficher_qui_edite{reglement}|oui)
+			[(#URL_ECRIRE{reglement_edit,id_reglement=#ID_REGLEMENT}|icone_verticale{#ID_REGLEMENT|afficher_qui_edite{reglement},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#DATE_REGLEMENT|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{reglement-24.png}|balise_img{reglement,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{reglement,#ID_REGLEMENT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/reglement,id=#ID_REGLEMENT,id_reglement=#ID_REGLEMENT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,reglement,#ID_REGLEMENT})
+	[(#ID_REGLEMENT|afficher_qui_edite{reglement}|non)
+		[(#URL_ECRIRE{reglement_edit,id_reglement=#ID_REGLEMENT}|icone_verticale{<:reglement:icone_modifier_reglement:>,reglement,edit,right ajax preload})]
+	]
+	[(#ID_REGLEMENT|afficher_qui_edite{reglement}|oui)
+		[(#URL_ECRIRE{reglement_edit,id_reglement=#ID_REGLEMENT}|icone_verticale{#ID_REGLEMENT|afficher_qui_edite{reglement},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,reglement,id,#ID_REGLEMENT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_reglement>
+[(#ENV**{exec}|=={reglement_edit}|?{#INCLURE{fond=prive/squelettes/contenu/reglement_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_reglement>
