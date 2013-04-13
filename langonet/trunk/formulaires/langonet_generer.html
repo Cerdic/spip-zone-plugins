@@ -9,52 +9,34 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
 		<p class="explication"><:langonet:info_generer:></p>
-		<ul>
-			<li class="editer_module obligatoire[(#ENV{erreurs}|table_valeur{module}|oui) erreur]">
-				<label for="module_a_generer"><:langonet:label_module:></label>
-				<p class="explication"><:langonet:info_module:></p>
-				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{module})</span>]
-				<input type="text" class="text" name="module" id="module_a_generer" value="#ENV{module}" />
-			</li>
-		</ul>
 		<fieldset>
 			<legend><:langonet:legende_generer_source:></legend>
 			<ul>
-				<li class="editer_langue_source obligatoire[(#ENV{erreurs}|table_valeur{langue_source}|oui) erreur]">
-					<label for="langue_source"><:langonet:label_langue_source:></label>
-					<p class="explication"><:langonet:info_langue:></p>
-					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_source})</span>]
-					<input type="text" class="text" name="langue_source" id="langue_source" value="#ENV{langue_source}" />
-				</li>
-				<li class="editer_chemin_langue obligatoire[(#ENV{erreurs}|table_valeur{chemin_langue}|oui) erreur]">
-					<label for="chemin_langue_a_generer"><:langonet:label_chemin_langue:></label>
-					<p class="explication"><:langonet:info_chemin_langue:></p>
-					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{chemin_langue})</span>]
-					<input type="text" class="text" name="chemin_langue" id="chemin_langue_a_generer" value="#ENV{chemin_langue}" />
+				<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+					<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
+					<p class="explication"><:langonet:info_fichier_source:></p>
+					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
+					[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
 			<legend><:langonet:legende_generer_cible:></legend>
 			<ul>
-				<li class="editer_langue_cible[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
+				<li class="editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
 					<label for="langue_cible"><:langonet:label_langue_cible:></label>
 					<p class="explication"><:langonet:info_langue:></p>
 					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_cible})</span>]
 					<input type="text" class="text" name="langue_cible" id="langue_cible" value="#ENV{langue_cible}" />
 				</li>
-				<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+				<li class="editer_mode obligatoire[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 					<label for="mode"><:langonet:label_mode:></label>
 					<p class="explication"><:langonet:info_mode:></p>
 					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
 					<select name="mode" id="mode">
-						<option value="index" [(#ENV{mode, valeur}|=={index}|oui) selected="selected"]><:langonet:option_mode_index:></option>
 						<option value="valeur" [(#ENV{mode, valeur}|=={valeur}|oui) selected="selected"]><:langonet:option_mode_valeur:></option>
-						<option value="new" [(#ENV{mode, valeur}|=={new}|oui) selected="selected"]><:langonet:option_mode_new:></option>
-						<option value="new_index" [(#ENV{mode, valeur}|=={new_index}|oui) selected="selected"]><:langonet:option_mode_new_index:></option>
-						<option value="new_valeur" [(#ENV{mode, valeur}|=={new_valeur}|oui) selected="selected"]><:langonet:option_mode_new_valeur:></option>
+						<option value="index" [(#ENV{mode, valeur}|=={index}|oui) selected="selected"]><:langonet:option_mode_index:></option>
 						<option value="vide" [(#ENV{mode, valeur}|=={vide}|oui) selected="selected"]><:langonet:option_mode_vide:></option>
 						<option value="pas_item" [(#ENV{mode, valeur}|=={pas_item}|oui) selected="selected"]><:langonet:option_mode_pas_item:></option>
 					</select>

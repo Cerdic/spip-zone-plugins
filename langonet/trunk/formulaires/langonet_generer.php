@@ -2,39 +2,47 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_langonet_generer_charger(){
+function formulaires_langonet_generer_charger() {
 	$valeurs = array();
-	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode');
+	$champs = array('fichier_langue', 'langue_cible', 'mode');
 	foreach($champs as $_champ){
 		$valeurs[$_champ] = _request($_champ);
 	}
 	return $valeurs;
 }
 
-function formulaires_langonet_generer_verifier(){
+function formulaires_langonet_generer_verifier() {
 	$erreurs = array();
-	$obligatoires = array('module', 'langue_source', 'chemin_langue');
-	foreach($obligatoires as $_obligatoire){
-		if(!_request($_obligatoire)){
-			$erreurs[$_obligatoire] = _T('langonet:message_nok_champ_obligatoire');
-		}
+	if (_request('fichier_langue') == '0') {
+		$erreurs['fichier_langue'] = _T('langonet:message_nok_champ_obligatoire');
+	}
+	if (!_request('langue_cible')) {
+		$erreurs['langue_cible'] = _T('langonet:message_nok_champ_obligatoire');
 	}
 	return $erreurs;
 }
 
-function formulaires_langonet_generer_traiter(){
+function formulaires_langonet_generer_traiter() {
 	// Recuperation des champs du formulaire
-	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode', 'encodage');
-	foreach($champs as $_champ){
-		$champs[$_champ] = _request($_champ);
-	}
-	if (substr($champs['chemin_langue'],-1) != '/') {
-		$champs['chemin_langue'] .= '/';
-	}
-	// Generation du fichier
+	//   $module     -> prefixe du fichier de langue
+	//                  'langonet' pour 'langonet_fr.php'
+	//                  parfois different du 'nom' du plugin
+	//   $langue     -> index du nom de langue
+	//                  'fr' pour 'langonet_fr.php'
+	//   $ou_langue  -> chemin vers le fichier de langue à vérifier
+	//                  'plugins/auto/langonet/lang'
+	$retour_select_langue = explode(':', _request('fichier_langue'));
+	$module = $retour_select_langue[1];
+	$langue_source = $retour_select_langue[2];
+	$ou_langue = $retour_select_langue[3];
+	$langue_cible = _request('langue_cible');
+	$mode = _request('mode');
+
+	// Generation du fichier toujours en UTF-8 aujourd'hui
 	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
-	$retour = $langonet_generer($champs['module'], $champs['langue_source'], $champs['chemin_langue'], $champs['langue_cible'], $champs['mode'], $champs['encodage']);
+	$retour = $langonet_generer($module, $langue_source, $ou_langue, $langue_cible, $mode, 'utf8');
 	$retour['editable'] = true;
+
 	return $retour;
 }
 
