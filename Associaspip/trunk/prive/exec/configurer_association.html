@@ -1,7 +1,7 @@
-[(#AUTORISER{editer_profil, association}|ou{ #AUTORISER{configurer_compta, association} })
+[(#AUTORISER{editer_profil, association}|et{ #AUTORISER{configurer_compta, association} })
 
 <!--#hierarchie-->
-#ONGLETS_ASSOCIATION{'configuration','association'}
+#ONGLETS_ASSOCIATION{'titre_page_config','association'}
 <!--/#hierarchie-->
 
 <!--#navigation-->
@@ -21,23 +21,17 @@
     <div class="cadre_padding">
         <div class="verdana1" style="font-size: x-small;">
             <b><:spip:titre_cadre_raccourcis:></b>
-<!--
             <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-				<td><a class="cellule-h" href="#URL_ECRIRE{synchroniser_asso_membres}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/reload-32.png}') no-repeat scroll center center transparent;" alt="<:asso:synchronise_asso_membre_lien:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
-                <td><a class="cellule-h" href="#URL_ECRIRE{synchroniser_asso_membres}"><:asso:synchronise_asso_membre_lien:></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:association_infos_contacts:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><:asso:association_infos_contacts:></a></td>
             </tr></tbody></table>
--->
             <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:editer_asso_metas_utilisateur_lien:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:editer_asso_metas_utilisateur_lien:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
                 <td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><:asso:editer_asso_metas_utilisateur_lien:></a></td>
             </tr></tbody></table>
             <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/retour-24.png}') no-repeat scroll center center transparent;" alt="<:asso:bouton_retour:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
-				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><:asso:bouton_retour:></a>
-                </td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{synchroniser_asso_membres}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/reload-32.png}') no-repeat scroll center center transparent;" alt="<:asso:synchronise_asso_membre_lien:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+                <td><a class="cellule-h" href="#URL_ECRIRE{synchroniser_asso_membres}"><:asso:synchronise_asso_membre_lien:></a></td>
             </tr></tbody></table>
         </div>
     </div>

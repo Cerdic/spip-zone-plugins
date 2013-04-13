@@ -1,68 +1,64 @@
 <!--#hierarchie-->
-#ONGLETS_ASSOCIATION{editer_asso_metas_utilisateur}
+#ONGLETS_ASSOCIATION{editer_asso_metas_utilisateur,association}
 <!--/#hierarchie-->
 
 <!--#navigation-->
 <div class="cadre cadre-info">
-    <div class="cadre_padding">
-        <div><:asso:meta_utilisateur_note:></div>
-        <p class="date" title="[(#DATE)]">
-            [(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
-            <:asso:date_du_jour{date=#GET{aujourdhui}}:>
-        </p>
-    </div>
+	<div class="cadre_padding">
+		<div><:asso:meta_utilisateur_note:></div>
+		<p class="date" title="[(#DATE)]">
+			[(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
+			<:asso:date_du_jour{date=#GET{aujourdhui}}:>
+		</p>
+	</div>
 </div>
 <!--/#navigation-->
 
 <!--#extra-->
 <div class="cadre cadre-e">
-    <div class="cadre_padding">
-        <div class="verdana1" style="font-size: x-small;">
-            <b><:spip:titre_cadre_raccourcis:></b>
-            <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-		<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:ajouter_meta_utilisateur:>" src="#CHEMIN{images/rien.gif}" /></span></a></a></td>
-		<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><:asso:ajouter_meta_utilisateur:></a>
-                </td>
-            </tr></tbody></table>
-            <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-		<td><a class="cellule-h" href="#URL_ECRIRE{configurer_association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/retour-24.png}') no-repeat scroll center center transparent;" alt="<:asso:bouton_retour:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
-		<td><a class="cellule-h" href="#URL_ECRIRE{configurer_association}"><:asso:bouton_retour:></a></td>
-            </tr></tbody></table>
-        </div>
-    </div>
+	<div class="cadre_padding">
+		<div class="verdana1" style="font-size: x-small;">
+			<b><:spip:titre_cadre_raccourcis:></b>
+			<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:ajouter_meta_utilisateur:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><:asso:ajouter_meta_utilisateur:></a>
+				</td>
+			</tr></tbody></table>
+			<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:association_infos_contacts:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><:asso:association_infos_contacts:></a></td>
+			</tr></tbody></table>
+			<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{configurer_association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:titre_page_config:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{configurer_association}"><:asso:titre_page_config:></a></td>
+			</tr></tbody></table>
+		</div>
+	</div>
 </div>
 <!--/#extra-->
 
 <!--#contenu-->
 <div class="cadre cadre-r">
-    <img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/assoc_qui.png}" />
-    <div class="titrem impliable" id="dhtns">
-        <a class="titremancre" href="#"></a>
-	Toutes les metas utilisateur
-    </div>
-    <div class="cadre-padding">
+	<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/assoc_qui.png}" />
+	<div class="titrem impliable" id="dhtns">
+		<a class="titremancre" href="#"></a>
+		<:asso:liste_metas_utilisateurs:>
+	</div>
+	<div class="cadre-padding">
 <B_metas>
 	<table width="100%" class="asso_tablo" id="liste_asso_metasutilisateur">
-	    <tr class="row_first">
+		<tr class="row_first">
 		<th><:asso:nom_meta_utilisateur:></th>
 		<th colspan="2" class="actions"><:asso:action_meta_utilisateur:></th>
-	    </tr>
+		</tr>
 <BOUCLE_metas(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
-	    <tr>
+		<tr>
 		<td class="text">[(#NOM|replace{^meta_utilisateur_}|replace{_,&nbsp;})]</td>
 		<td class="action"><a title="<:asso:supprimer_meta_utilisateur:>" href="#URL_ECRIRE{supprimer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/suppr-12.gif}"/></a></td>
 		<td class="action"><a title="<:asso:editer_meta_utilisateur:>" href="#URL_ECRIRE{editer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/edit-12.gif}"/></a></td>
-	    </tr>
+		</tr>
 </BOUCLE_metas>
 	</table>
 </B_metas>
-<!--
-	<p class="boutons">
-	    <a class="spip_in" href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><:asso:ajouter_meta_utilisateur:></a>
-	    <br class="clear nettoyeur" />
-	</p>
--->
-    </div>
 </div>
 <!--/#contenu-->

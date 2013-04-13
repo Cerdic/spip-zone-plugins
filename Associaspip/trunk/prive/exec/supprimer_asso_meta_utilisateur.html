@@ -1,56 +1,51 @@
 [(#AUTORISER{editer_profil, association})
 
 <!--#hierarchie-->
-#ONGLETS_ASSOCIATION{editer_asso_metas_utilisateur}
+#ONGLETS_ASSOCIATION{editer_asso_metas_utilisateur,association}
 <!--/#hierarchie-->
 
 <!--#navigation-->
 <div class="cadre cadre-info">
-    <div class="cadre_padding">
-        <div style="text-align: center" class="verdana1 spip_medium">
-            <:asso:confirmation:>
-        </div>
-        <p class="date" title="[(#DATE)]">
-            [(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
-            <:asso:date_du_jour{date=#GET{aujourdhui}}:>
-        </p>
-    </div>
+	<div class="cadre_padding">
+		<div style="text-align: center" class="verdana1 spip_medium">
+			<:asso:confirmation:>
+		</div>
+		<p class="date" title="[(#DATE)]">
+			[(#SET{aujourdhui,[(#DATE|affdate_jourcourt)] })]
+			<:asso:date_du_jour{date=#GET{aujourdhui}}:>
+		</p>
+	</div>
 </div>
 <!--/#navigation-->
 
 <!--#extra-->
 <div class="cadre cadre-e">
-    <div class="cadre_padding">
-        <div class="verdana1" style="font-size: x-small;">
-            <b><:spip:titre_cadre_raccourcis:></b>
-            <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/retour-24.png}') no-repeat scroll center center transparent;" alt="<:asso:bouton_retour:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
-				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><:asso:bouton_retour:></a>
-                </td>
-            </tr></tbody></table>
-        </div>
-    </div>
+	<div class="cadre_padding">
+		<div class="verdana1" style="font-size: x-small;">
+			<b><:spip:titre_cadre_raccourcis:></b>
+			<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/grille-24.png}') no-repeat scroll center center transparent;" alt="<:asso:liste_metas_utilisateurs:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><:asso:liste_metas_utilisateurs:></a>
+				</td>
+			</tr></tbody></table>
+		</div>
+	</div>
 </div>
 <!--/#extra-->
 
 <!--#contenu-->
 <div class="cadre cadre-r">
-    <img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/assoc_qui.png}"/>
-    <div class="titrem impliable" id="dhtns">
-        <a class="titremancre" href="#"></a>
-        <:asso:supprimer_meta_utilisateur:>
-<!--
-        [: (#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]
--->
-    </div>
-    <div class="cadre-padding formulaire_spip">
-        <p><:asso:avertissement_suppression_meta_utilisateur:> <strong>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</strong></p>
-        <p class="boutons">
-            <a class="spip_in" href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:bouton_supprimer:></a>
-        </p>
-    </div>
+	<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/assoc_qui.png}"/>
+	<div class="titrem impliable" id="dhtns">
+		<a class="titremancre" href="#"></a>
+		<:asso:supprimer_meta_utilisateur:>
+	</div>
+	<div class="cadre-padding formulaire_spip">
+		<p><:asso:avertissement_suppression_meta_utilisateur:> <strong>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</strong></p>
+		<p class="boutons">
+			<a class="spip_in" href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:bouton_supprimer:></a>
+		</p>
+	</div>
 </div>
 <!--/#contenu-->
-
 ]

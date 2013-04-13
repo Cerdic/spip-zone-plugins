@@ -1,46 +1,49 @@
 [(#AUTORISER{configurer})
 <!--#hierarchie-->
-#ONGLETS_ASSOCIATION{titre_page_config_etiquette}
+#ONGLETS_ASSOCIATION{titre_page_config_etiquette,association}
 <!--/#hierarchie-->
 
 <!--#navigation-->
 <div class='cadre cadre-info'>
-    <div class="cadre_padding">
-        <div><:asso:info_doc_etiquette:></div>
-        <p class="date" title="[(#DATE)]">
-            [(#SET{aujourdhui,[(#DATE|affdate)] })]
-            [(#VAL{asso:date_du_jour}|_T{#ARRAY{date,#GET{aujourdhui}}})]
-       </p>
-    </div>
+	<div class="cadre_padding">
+		<div><:asso:info_doc_etiquette:></div>
+		<p class="date" title="[(#DATE)]">
+			[(#SET{aujourdhui,[(#DATE|affdate)] })]
+			[(#VAL{asso:date_du_jour}|_T{#ARRAY{date,#GET{aujourdhui}}})]
+	   </p>
+	</div>
 </div>
 <!--/#navigation-->
 
 <!--#extra-->
 <div class="cadre cadre-e">
-    <div class="cadre_padding">
-        <div class="verdana1" style="font-size: x-small;">
-            <b><:spip:titre_cadre_raccourcis:></b>
-            <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
-				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/retour-24.png}') no-repeat scroll center center transparent;" alt="<:asso:bouton_retour:>" src="#CHEMIN{images/rien.gif}" /></span></a></a>
-                </td>
-				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><:asso:bouton_retour:></a>
-                </td>
-            </tr></tbody></table>
-        </div>
-    </div>
+	<div class="cadre_padding">
+		<div class="verdana1" style="font-size: x-small;">
+			<b><:spip:titre_cadre_raccourcis:></b>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/assoc_qui.png}') no-repeat scroll center center transparent;" alt="<:asso:association_infos_contacts:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{association}"><:asso:association_infos_contacts:></a>
+				</td>
+			</tr></tbody></table>
+			<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr>
+				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><span class="cell-i"><img width="24" height="24" style="background: url('#CHEMIN{img_pack/annonce.gif}') no-repeat scroll center center transparent;" alt="<:asso:titre_onglet_membres:>" src="#CHEMIN{images/rien.gif}" /></span></a></td>
+				<td><a class="cellule-h" href="#URL_ECRIRE{adherents}"><:asso:titre_onglet_membres:></a>
+				</td>
+			</tr></tbody></table>
+		</div>
+	</div>
 </div>
 <!--/#extra-->
 
 <!--#contenu-->
 <div class="cadre cadre-r">
-    <img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/print-24.png}"/>
-    <div class="titrem impliable" id="dhtns">
-        <a class="titremancre" href="#"></a>
-        <:asso:parametrage_des_etiquettes:>
-    </div>
-    <div class="cadre-padding">
-        #FORMULAIRE_PARAMETRER_ETIQUETTES
-    </div>
+	<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/print-24.png}"/>
+	<div class="titrem impliable" id="dhtns">
+		<a class="titremancre" href="#"></a>
+		<:asso:parametrage_des_etiquettes:>
+	</div>
+	<div class="cadre-padding">
+		#FORMULAIRE_PARAMETRER_ETIQUETTES
+	</div>
 </div>
 <!--/#contenu-->
 
