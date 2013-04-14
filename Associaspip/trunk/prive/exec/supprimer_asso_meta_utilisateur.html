@@ -38,10 +38,20 @@
 		<:asso:supprimer_meta_utilisateur:>
 	</div>
 	<div class="cadre-padding formulaire_spip">
-		<p><:asso:avertissement_suppression_meta_utilisateur:> <strong>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</strong></p>
-		<p class="boutons">
-			<a class="spip_in" href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:bouton_supprimer:></a>
-		</p>
+		<div class="formulaire_spip formulaire_supprimer_asso_meta_utilisateur">
+		<form id="formulaire_asso_meta_utilisateur" method="post" action="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]">
+			<div>
+				<h3 class="legend"><strog class="danger"><:asso:avertissement_suppression_meta_utilisateur:> <i>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</i></strong></h3>
+				<input type="hidden" name="nom_meta_ut" value="#ENV{nom_meta_ut}" />
+				<input type="hidden" name="action" value="supprimer_meta_utilisateur" />
+				<input type="hidden" name="arg" value="#ENV{nom_meta_ut}" />
+				<input type="hidden" name="redirect" value="#URL_ECRIRE{editer_asso_metas_utilisateur}" />
+				<p class="boutons">
+					<input type="submit" value="<:asso:bouton_supprimer:>" />
+				</p>
+			</div>
+		</form>
+		</div>
 	</div>
 </div>
 <!--/#contenu-->

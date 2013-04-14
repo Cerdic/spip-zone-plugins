@@ -1896,8 +1896,8 @@ function association_tablinfos_montants($legende='', $somme_recettes=0, $somme_d
 function association_form_suppression($type, $id, $retour='') {
 	$res = _T('asso:objet_num', array('objet'=>$type,'num'=>$id));
 	$res = _T('asso:vous_allez_effacer', array('quoi'=>'<i>'.$res.'</i>'));
-	$res = '<p><strong>'. $res  .'</strong></p><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
-	return redirige_action_post("supprimer_asso_$type", $id, ($retour?$retour:$type.'s'), '', $res);
+	$res = '<h3 class="legend"><strog class="danger">'. $res  .'</strog></h3><p class="boutons"><input type="submit" value="'. _T('asso:bouton_confirmer') .'" /></p>';
+	return "\n<div class='formulaire_spip formulaire_supprimer_asso_$type'>\n\t". redirige_action_post("supprimer_asso_$type", $id, ($retour?$retour:$type.'s'), '', $res) ."\n</div>\n";
 }
 
 /**
