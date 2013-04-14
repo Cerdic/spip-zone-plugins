@@ -58,7 +58,8 @@ function formulaires_langonet_verifier_traiter() {
 		$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
 		$resultats = $langonet_verifier_items($module, $ou_fichier);
 	}
-	// Creation du fichier de langue corrige avec les items detectes comme 
+
+	// Creation du fichier de langue corrige avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours
 	$_l = ($verification=='fonction_l');
 	$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
@@ -84,7 +85,9 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour = formater_resultats($verification, $resultats, $corrections,$ou_fichier);
+		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
+		$retour['message_ok']['resultats'] = $resultats;
+//		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
 	}
 	$retour['editable'] = true;
 	return $retour;
