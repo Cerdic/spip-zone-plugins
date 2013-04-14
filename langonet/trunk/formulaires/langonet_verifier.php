@@ -45,7 +45,7 @@ function formulaires_langonet_verifier_traiter() {
 	$module = $retour_select_langue[1];
 	$langue = $retour_select_langue[2];
 	$ou_langue = $retour_select_langue[3];
-	$encodage = _request('encodage');
+	$encodage = 'utf8';
 
 	// Chargement de la fonction de verification
 	// et verification et formatage des resultats pour affichage
@@ -410,6 +410,7 @@ function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
 	// typiquement quand c'est un md5, donner l'index prevu pour aider a trouver l'homonyme
 	// (mais ce serait encore mieux que Langonet le donne)
 	if ($match[2] AND ($item !==  $match[2])) {
+		include_spip('inc/langonet_utils');
 		$index = langonet_index_brut($match[2]);
 		$occ = "(<b>" . $index . "</b>)<br />" . $occ;
 	}
@@ -585,52 +586,6 @@ function creer_script($resultats, $verification) {
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
 		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";
-}
-
-// Calcul du representant canonique d'une chmine de langue (_L ou <: :>)
-// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
-// les caracteres non alphabetiques etant remplaces par un souligne.
-// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
-// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
-// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
-// C'est donc le tableau des chaines de langues manquant.
-
-// @param string $occ
-// @return string
-
-function langonet_index_brut($occ)
-{
-	$index = textebrut($occ);
-	$index = preg_replace('/\\\\[nt]/', ' ', $index);
-	$index = strtolower(translitteration($index));
-	$index = trim(preg_replace('/\W+/', ' ', $index));
-	$index = preg_replace('/\b(\w+)\W+\1/', '\1', $index);
-	if (strlen($index) > 32) {
-	  // trop long: abandonner les petits mots
-		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
-		if (strlen($index) > 32) {
-			// tant pis mais couper proprement si possible
-			$index = substr($index, 0, 32);
-			if ($n = strrpos($index,' ') OR ($n = strrpos($index,'_')))
-				$index = substr($index, 0, $n);
-		}
-	}
-	$index = str_replace(' ', '_', trim($index));
-	return $index;
-}
-
-// comme la precedente, mais en cas d'homonymie,
-// on prend le md5, qui est illisible.
-
-// @param string $occ
-// @param array item_md5
-// @return string
-
-function langonet_index($occ, $item_md5)
-{
-	$index = langonet_index_brut($occ);
-	$x =  (isset($item_md5[$index]) AND strcasecmp($item_md5[$index],$occ));
-	return $x ? md5($occ) :	$index;
 }
 
 // fonction purement utilitaire

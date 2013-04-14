@@ -37,5 +37,7 @@ function langonet_tester_definition() {
 	$essai = _L('Test 4 _L()' . $arg5);
 	$essai = _L("Test 5 _L()$arg6");
 	$essai = _L("Test 6 _L()${arg7}");
+	$essai = _L  ("Test 7 _L()");
+	$essai = _L	("Test 7 _L()");
 }
 ?>

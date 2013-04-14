@@ -36,23 +36,32 @@ if (!defined('_LANGONET_FILES'))
 function inc_langonet_verifier_l($module, $ou_fichier) {
 
 	$item_md5 = $fichier_non = array();
-	foreach($ou_fichier as $rep){
-		$files = array_merge(preg_files(_DIR_RACINE.$rep, _LANGONET_FILES));
+
+	// Construire la liste des fichiers php dans lesquels rechercher la fonction _L()
+	// On passe les arborescences une par une
+	foreach($ou_fichier as $_arborescence) {
+		$fichiers = array_merge(preg_files(_DIR_RACINE . $_arborescence, _LANGONET_FILES));
 	}
-	foreach ($files as $_fichier) {
-		foreach ($contenu = file($_fichier) as $ligne => $texte) {
-			if (preg_match_all(_LANGONET_FONCTION_L, $texte, $m, PREG_SET_ORDER))
-				foreach ($m as $occ) {
-					$index = langonet_index($occ[2], $item_md5);
-					$item_md5[$index] = $occ[2];
-					$fichier_non[$index][$_fichier][$ligne][] = $occ;
-				}
-			elseif (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
-				foreach ($m as $occ) {
-					$index = langonet_index($occ[2], $item_md5);
-					$item_md5[$index] = $occ[2];
-					$fichier_non[$index][$_fichier][$ligne][] = $occ;
-				}
+
+	// Chercher, pour chaque fichier collecté, l'un ou l'autre des pattern de la fonction _L()
+	include_spip('inc/langonet_utils');
+	foreach ($fichiers as $_fichier) {
+		$contenu = file($_fichier);
+		if ($contenu) {
+			foreach ($contenu as $_ligne => $_texte) {
+				if (preg_match_all(_LANGONET_FONCTION_L, $_texte, $m, PREG_SET_ORDER))
+					foreach ($m as $_occ) {
+						$index = langonet_index($_occ[2], $item_md5);
+						$item_md5[$index] = $_occ[2];
+						$fichier_non[$index][$_fichier][$_ligne][] = $_occ;
+					}
+				elseif (preg_match_all(_LANGONET_FONCTION_L2, $_texte, $m, PREG_SET_ORDER))
+					foreach ($m as $_occ) {
+						$index = langonet_index($_occ[2], $item_md5);
+						$item_md5[$index] = $_occ[2];
+						$fichier_non[$index][$_fichier][$_ligne][] = $_occ;
+					}
+			}
 		}
 	}
 	return array(

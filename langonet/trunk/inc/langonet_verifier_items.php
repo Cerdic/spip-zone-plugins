@@ -105,8 +105,9 @@ function langonet_collecter_items($files) {
 /// Memorise le resultat d'un preg_match ci-dessus
 // et analyse au passage si l'item est dynamique (_T avec $ ou concatenation)
 
-function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false)
-{
+function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false) {
+	include_spip('inc/langonet_utils');
+
 	list($tout, $module, $nom, $suite) = $occ;
 	if (($tout[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
 		// $nom approximatif, mais pas grave: c'est pour le msg

@@ -59,14 +59,14 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		[(#ENV{verification, definition}|=={fonction_l}|oui)
-//			jQuery("#option_fichier_langue").hide();
+			jQuery("#option_fichier_langue").hide();
 		]
 		jQuery("input[name='verification']").change(function() {
 			if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
-//				jQuery("#option_fichier_langue").hide();
+				jQuery("#option_fichier_langue").hide('fast');
 			}
 			else {
-//				jQuery("#option_fichier_langue").show();
+				jQuery("#option_fichier_langue").show('fast');
 			}
 			jQuery(this).blur();
 		});	
