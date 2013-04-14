@@ -77,7 +77,7 @@ function formulaires_langonet_verifier_traiter() {
 			$mode = 'inutile';
 		}
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+//		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
 	// Traitement des resultats
@@ -85,9 +85,9 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
-		$retour['message_ok']['resultats'] = $resultats;
-//		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
+//		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
+//		$retour['message_ok']['resultats'] = $resultats;
+		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
 	}
 	$retour['editable'] = true;
 	return $retour;

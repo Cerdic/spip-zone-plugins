@@ -47,8 +47,11 @@
 </div>
 
 [(#REM) <!-- Affichage des resultats --> ]
-[<h3><:langonet:legende_resultats:></h3>
-	(#ENV*{message_ok}|table_valeur{resultats})]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-resultats_verifier,
+		resultats=#ENV{message_ok}|table_valeur{resultats}
+		env}
+]
 
 <script type="text/javascript">
 //<![CDATA[
