@@ -2,16 +2,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Ces 2 REGEXP de recherche de _L
-// doivent fournir les memes tableaux que les RegExp de recherche de <: :>
-#       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
-if (!defined('_LANGONET_FONCTION_L'))
-	define("_LANGONET_FONCTION_L", '#\b_L *[(] *(")([^"]+)"[^)]*#');
+
+if (!defined('_LANGONET_PATTERN_FONCTION_L'))
+	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*(['\"])([^\\1]+)\\1[^)]*#");
 if (!defined('_LANGONET_FONCTION_L2'))
 	define("_LANGONET_FONCTION_L2", "#\b_L *[(] *(')([^']+)'[^)]*#");
 
-if (!defined('_LANGONET_FILES'))
-	define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
+if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
+	define('_LANGONET_PATTERN_FICHIERS_L', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
 
 /**
@@ -35,41 +33,53 @@ if (!defined('_LANGONET_FILES'))
  */
 function inc_langonet_verifier_l($module, $ou_fichier) {
 
-	$item_md5 = $fichier_non = array();
+	// Initialisation du tableau des resultats
+	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
+	// de l'erreur dans $resultats['erreur'].
+	// Sinon, cet index n'existe pas
+	$resultats = array();
 
 	// Construire la liste des fichiers php dans lesquels rechercher la fonction _L()
 	// On passe les arborescences une par une
+	$fichiers = array();
 	foreach($ou_fichier as $_arborescence) {
-		$fichiers = array_merge(preg_files(_DIR_RACINE . $_arborescence, _LANGONET_FILES));
+		$fichiers = array_merge(preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L));
 	}
 
-	// Chercher, pour chaque fichier collecté, l'un ou l'autre des pattern de la fonction _L()
-	include_spip('inc/langonet_utils');
-	foreach ($fichiers as $_fichier) {
-		$contenu = file($_fichier);
-		if ($contenu) {
-			foreach ($contenu as $_ligne => $_texte) {
-				if (preg_match_all(_LANGONET_FONCTION_L, $_texte, $m, PREG_SET_ORDER))
-					foreach ($m as $_occ) {
-						$index = langonet_index($_occ[2], $item_md5);
-						$item_md5[$index] = $_occ[2];
-						$fichier_non[$index][$_fichier][$_ligne][] = $_occ;
+	// Chercher, pour chaque fichier collecté, le pattern de la fonction _L()
+	if ($fichiers) {
+		include_spip('inc/langonet_utils');
+
+		$item_md5 = array();
+		$fichier_non = array();
+		foreach ($fichiers as $_fichier) {
+			$contenu = file($_fichier);
+			if ($contenu) {
+				foreach ($contenu as $_ligne => $_texte) {
+					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_texte, $m, PREG_SET_ORDER)) {
+						foreach ($m as $_occurrence) {
+							// Calcul du nom du raccourci de l'item de langue
+							$index = langonet_index($_occurrence[2], $item_md5);
+							// Stockage de ce raccourci
+							$item_md5[$index] = $_occurrence[2];
+							// Ajout de l'occurrence trouvée dans le fichier des erreurs
+							$fichier_non[$index][$_fichier][$_ligne][] = $_occurrence;
+						}
 					}
-				elseif (preg_match_all(_LANGONET_FONCTION_L2, $_texte, $m, PREG_SET_ORDER))
-					foreach ($m as $_occ) {
-						$index = langonet_index($_occ[2], $item_md5);
-						$item_md5[$index] = $_occ[2];
-						$fichier_non[$index][$_fichier][$_ligne][] = $_occ;
-					}
+				}
 			}
 		}
+
+		$resultats['module'] = $module;
+		$resultats['ou_fichier'] = $ou_fichier;
+		$resultats['item_non'] = array_keys($item_md5);
+		$resultats['fichier_non'] = $fichier_non;
+		$resultats['item_md5'] = $item_md5;
 	}
-	return array(
-		     'module' => $module,
-		     'ou_fichier' => $ou_fichier,
-		     'item_non' => array_keys($item_md5),
-		     'fichier_non' => $fichier_non,
-		     'item_md5' => $item_md5
-		     );
+	else {
+		$resultats['erreur'] = _T('langonet:message_nok_arborescence_l');
+	}
+
+	return $resultats;
 }
 ?>

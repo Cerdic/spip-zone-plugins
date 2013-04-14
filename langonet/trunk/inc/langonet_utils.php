@@ -3,7 +3,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// Conversion d'un texte en utf-8
+/**
+ * Conversion d'un texte en utf-8
+ *
+ * @param string	$sujet
+ * @return string
+ */
 function entite2utf($sujet) {
 	if (!$sujet) return;
 	include_spip('inc/charsets');
@@ -12,19 +17,20 @@ function entite2utf($sujet) {
 }
 
 
-// Calcul du representant canonique d'une chaine de langue (_L ou <: :>)
-// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
-// les caracteres non alphabetiques etant remplaces par un souligne.
-// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
-// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
-// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
-// C'est donc le tableau des chaines de langues manquant.
-
-// @param string $occ
-// @return string
-
-function langonet_index_brut($occ) {
-	$index = textebrut($occ);
+//
+/**
+ * Calcul du représentant canonique d'une chaine de langue (_L ou <: :>).
+ * C'est un transcodage ASCII, reduit aux 32 premiers caractères,
+ * les caractères non alphabétiques étant remplacés par un souligné.
+ * On élimine les répétitions de mots pour évacuer le cas fréquent truc: @truc@.
+ * Si le résultat a plus que 32 caractères, on élimine les mots de moins de 3 lettres.
+ * Si cela demeure toujours trop, on coupe au dernier mot complet avant 32 caractères.
+ *
+ * @param string	$occurrence
+ * @return string
+ */
+function langonet_index_brut($occurrence) {
+	$index = textebrut($occurrence);
 	$index = preg_replace('/\\\\[nt]/', ' ', $index);
 	$index = strtolower(translitteration($index));
 	$index = trim(preg_replace('/\W+/', ' ', $index));
@@ -49,18 +55,21 @@ function langonet_index_brut($occ) {
  * Calcul du représentation canonique d'une chaine de langue à créer avec traitement d'homonynie.
  * En cas d'homonynmie, le représentant utilisé est le md5.
  *
- * @param string	$occ
+ * @param string	$occurrence
  * @param array		$item_md5
  * @return string
  */
-function langonet_index($occurence, $item_md5) {
+function langonet_index($occurrence, $item_md5) {
 	// Calcul du raccourci brut de l'item de langue
-	$index = langonet_index_brut($occurence);
+	$index = langonet_index_brut($occurrence);
 
-	// Si cet item existe déjà, on prend son md5 mais qui produira un raccourci illisible
-	$index_existe =  (isset($item_md5[$index]) AND strcasecmp($item_md5[$index], $occurence));
-	if ($index_existe)
-		md5($occurence);
+	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
+	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différenst :
+	// on prend alors son md5 mais qui produira un raccourci illisible
+	if (isset($item_md5[$index])) {
+		if (strcasecmp($item_md5[$index], $occurrence) != 0)
+			$index = md5($occurrence);
+	}
 
 	return $index;
 }

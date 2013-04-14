@@ -540,9 +540,10 @@ function creer_script($resultats, $verification) {
 		$val = array_shift($val); // index 0 du dit
 		$args = '';
 		if ($_l) {
+			include_spip('inc/langonet_verifier_l');
 			if (preg_match(_LANGONET_FONCTION_L2, $val, $m))
 				$occ = $m[2];
-			elseif (!preg_match(_LANGONET_FONCTION_L, $val, $m))
+			elseif (!preg_match(_LANGONET_PATTERN_FONCTION_L, $val, $m))
 				continue;
 			else {
 			// gestion des backslash imparfaite, mais c'est deja ca

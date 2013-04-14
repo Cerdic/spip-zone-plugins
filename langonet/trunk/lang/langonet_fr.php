@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_trouves' => 'Liste des items trouvés (@total@)',
 
 	// M
+	'message_nok_arborescence_l' => 'Aucun fichier à vérifier dans l\'arborescence choisie.',
 	'message_nok_aucun_fichier_log' => 'Aucun fichier de log disponible au téléchargement',
 	'message_nok_aucune_langue_generee' => 'Aucun fichier de langue généré disponible au téléchargement',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
