@@ -48,8 +48,8 @@
 
 [(#REM) <!-- Affichage des resultats --> ]
 [(#ENV*{message_ok}|oui)
-	<INCLURE{fond=formulaires/inc-resultats_verifier,
-		resultats=#ENV{message_ok}|table_valeur{resultats}
+	<INCLURE{fond=formulaires/inc-resultats_verifier_#ENV{verification},
+		resultats=#ENV{message_ok}|table_valeur{resultats},
 		env}
 ]
 
