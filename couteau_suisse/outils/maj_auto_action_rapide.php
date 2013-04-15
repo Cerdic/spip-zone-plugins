@@ -176,7 +176,7 @@ function maj_auto_action_rapide($actif) {
 		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $dir=$extension?_DIR_PLUGINS_DIST:_DIR_PLUGINS);
 		$nom = trim($infos['nom']);
 		if(!defined('_SPIP30000') && strtoupper($infos['necessite'][0]['id'])=='SPIP') array_shift($infos['necessite']);
-		$maj_lib = $checked = '';
+		$cfg = $maj_lib = $checked = '';
 
 		if(defined('_CS_PAS_DE_DISTANT')) 
 			$maj_lib = '[' . couteauprive_T('version_distante_off') . "->$infos[url_origine]]"
@@ -199,11 +199,11 @@ function maj_auto_action_rapide($actif) {
 			$maj_lib = _T('couteau:maj_rev_ko', array('url'=>$infos['url_origine']));
 		// eventuels liens morts
 		$maj_lib = preg_replace(',\[([^[]+)->\],', '$1', $maj_lib);
-		if($actif || $extension) $nom = (defined('_SPIP30000')
+		if($actif || $extension) $cfg = defined('_SPIP30000')
 			?recuperer_fond('prive/squelettes/inclure/cfg',
 				array('script'=>'configurer_'.strtolower($infos['prefix']),'nom'=>': '.$nom))
-			:( (include_spip('plugins/afficher_plugin') && function_exists('plugin_bouton_config'))?plugin_bouton_config($p, $infos, $dir):'') )
-			. $nom . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"<br /> {{".$maj_lib.'}}':'');
+			:( (include_spip('plugins/afficher_plugin') && function_exists('plugin_bouton_config'))?plugin_bouton_config($p, $infos, $dir):'');
+		$nom = $cfg . $nom . '&nbsp;(v' . $infos['version'] . ')' . ($maj_lib?"<br /> {{".$maj_lib.'}}':'');
 		$nom = preg_replace(",[\n\r]+,", ' ', $nom); // Pour éviter les auto_br de SPIP...
 		$rev = $infos['rev_local']?_T('couteau:maj_rev', array('revision' => $infos['rev_local'])):'';
 		if(strlen($infos['commit'])) $rev .= (strlen($rev)?'<br/>':'') . cs_date_court($infos['commit']);
