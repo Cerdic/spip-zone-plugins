@@ -199,7 +199,7 @@ function cs_formatspip($id_article){
 		:bouton_block_invisible("formatspip").cs_div_configuration().$txt[1];
 	$bloc = $compat?debut_block_depliable(false, "formatspip")
 		:debut_block_invisible("formatspip");
-	return debut_cadre_enfonce(find_in_path('/img/formatspip-24.png'), true, '', $bouton)
+	return debut_cadre_enfonce(cs_icone(24,'formatspip','png'), true, '', $bouton)
 		. $bloc	. $txt[0] . fin_block()
 		. fin_cadre_enfonce(true);
 }
