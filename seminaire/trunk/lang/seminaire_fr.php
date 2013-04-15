@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apreciser'					 =>		'A pr&eacute;ciser',
 	'aujour'					 =>		'Les &eacute;v&eacute;nements de la journ&eacute;e',
 	'a_venir'					 =>		'Les prochains s&eacute;minaires',
+	'attendee'					 => 	'Nom de l&rsquo;intervenant',
 	'attention_type'			 =>		'Le choix du type d&rsquo;&eacute;v&eacute;nement d&eacute;termine le tri qui lui sera appliqu&eacute;.',
 	'abonnement'				 =>		'S&rsquo;abonner au calendrier',
 
@@ -40,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_cles_techniques_kitcnrs'=>	'Les mots cl&eacute;s pour rep&eacute;rer plus finement les diff&eacute;rents types d&rsquo;&eacute;v&eacute;nements',
 
 	// N
-	'name'						 => 	'Nom de l&rsquo;intervenant',
 	'nom_de_l_intervenant'		 =>		'Intervenant &agrave; pr&eacute;ciser',
 	'notes'						 =>		'Notes de dernières minutes',
 

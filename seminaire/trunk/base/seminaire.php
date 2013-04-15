@@ -2,11 +2,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seminaire_declarer_champs_extras($champs = array()){
-	$champs['spip_evenements']['name'] = array(
+	$champs['spip_evenements']['attendee'] = array(
 		'saisie' => 'input',// type de saisie
 		'options' => array(
-			'nom' => 'name',
-			'label' => _T('seminaire:name'), 
+			'nom' => 'attendee',
+			'label' => _T('seminaire:attendee'), 
 			'sql' => "varchar(256) NOT NULL DEFAULT ''", // declaration sql
 			'rechercher'=>true,
 			'defaut' => '',	
@@ -20,18 +20,6 @@ function seminaire_declarer_champs_extras($champs = array()){
 			'rechercher'=>true,
 			'defaut' => '',	
 	));
-	$champs['spip_evenements']['abstract'] = array(
-		'saisie' => 'textarea',
-		'options' => array(
-			'nom' => 'abstract', // nom sql
-			'label' => _T('seminaire:abstract'), 
-			'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-			'rechercher'=>true,
-			'defaut' => '',	
-			'rows' => 4,
-			'traitements' => '_TRAITEMENT_RACCOURCIS',
-			'class'	=>'inserer_barre_edition',
-	));	
 	$champs['spip_evenements']['notes'] = array(
 		'saisie' => 'textarea',
 		'options' => array(
