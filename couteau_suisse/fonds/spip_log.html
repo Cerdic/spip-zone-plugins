@@ -18,7 +18,7 @@
 <B_lecture_log>
 	#ANCRE_PAGINATION
 	<div class="spip_code">
-		<div class="pagination tri">
+		<div class="pagination tri"><div class="center">
             <BOUCLE_logs(DATA){source glob, #GET{log0}}{par valeur}{valeur != ''}{' | '}> #SET{f,#VALEUR|basename}
             [(#SELF|parametre_url{tri_lecture_log,''}|parametre_url{debut_lecture_log,''}|parametre_url{log,#GET{f}}|lien_ou_expose{#GET{f},#ENV{log}|basename|=={#GET{f}}})]
             </BOUCLE_logs><br /></B_logs>
@@ -30,7 +30,7 @@
 				<:couteauprive:rss_actualiser:>
 			</a>
 		]
-		</div>
+		</div></div>
 		<table class="spip liste">
 			<thead>
 				<tr class="first_row">
