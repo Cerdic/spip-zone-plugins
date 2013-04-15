@@ -2702,6 +2702,26 @@ function association_langue_index($index, $head) {
 	return _T((strpos($head,':') ? '' : 'asso:'). $head . $index);
 }
 
+if (!include_spip('inc/filtres_ecrire') OR !function_exists('sinon_interdire_acces')) { // Le filtre existe dans : Bonux, SPIP3... On conditionne comme ici : http://zone.spip.org/trac/spip-zone/browser/_plugins_/couteau-kiss/exec/configurer_ck.php?rev=50006
+	/**
+	 * Interdire l'acces a une page si on n'a pas l'autorisation
+	 *
+	 * @param bool $autorisation
+	 *   Resultat de l'appel a autoriser('action_module', 'association')
+	 * @return void
+	 *   Affichage de la page d'acces refuse/interdit si l'autorisation est a FALSE
+	**/
+	function sinon_interdire_acces($autorisation) {
+		if (!$autorisation) {
+			while (ob_get_level()) // vider tous les tampons
+				ob_end_clean();
+			include_spip('inc/minipres');
+			echo minipres(); // generer le "403 Forbiden"
+			exit;
+		}
+	}
+}
+
 /** @} */
 
 
