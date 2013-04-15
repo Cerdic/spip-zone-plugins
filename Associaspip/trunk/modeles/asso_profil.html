@@ -1,10 +1,4 @@
-[(#REM)<!-- affichage du profli de l'association
-plugin = Associaspip ; tables = spip_association_metas
-plugins necessaires = aucun
-parametres = aucun
-
-maj:2012-11-27; version:0.1.0; licence:GPL; -->]
-
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
 <BOUCLE_pays_code(PAYS?) {code=#META{/association/pays}}>
 [(#SET{nom_pays,#NOM})]
 </BOUCLE_pays_code>
@@ -14,7 +8,6 @@ maj:2012-11-27; version:0.1.0; licence:GPL; -->]
 [(#SET{nom_pays,#META{/association/pays}})]
     <//B_pays_num>
 <//B_pays_code>
-
 <div class="vcard">
     <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
     <p class="adr" id="vcard-asso-adr">

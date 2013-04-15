@@ -1,3 +1,4 @@
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
 <B_historique_comptable>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
@@ -24,8 +25,8 @@
 	{par #ENV{tri, date_operation DESC}}
 	{pagination #ENV{pagination,10} assocomptes}
 	>
-	<tr id="compte#ID_COMPTE" class="[(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
-		<td><span title="#DATE">[(#DATE|affdate)]</span></td>
+	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td><span title="#DATE">[(#DATE_OPERATION|appliquer_filtre{association_formater_date})]</span></td>
 		<td>[(#JUSTIFICATION|propre)]</td>
 		<td>[(#RECETTE|>{0}|?{[<span title="+#RECETTE">(#VAL{'%.2n'}|money_format{#RECETTE})</span>],[<span title="-#DEPENSE">-(#VAL{'%.2n'}|money_format{#DEPENSE})</span>]})]</td>
 		<td><BOUCLE_ModePaiement(spip_asso_plan){code=#JOURNAL}{0,1}><span title="#JOURNAL">#INTITULE</span></BOUCLE_ModePaiement></td>

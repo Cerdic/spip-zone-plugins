@@ -1,3 +1,4 @@
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
 <B_ressources_disponibles>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
@@ -30,7 +31,7 @@
 	{par #ENV{tri,date_acquisition DESC}}
 	{pagination #ENV{pagination,10} assoressources}
 	>
-	<tr id="#ID_RESSOURCE" [class="(#EVAL{[(#_ressources_disponibles:COMPTEUR_BOUCLE)]}|alterner{'row_odd odd impair','row_even even pair'})"]>
+	<tr id="#ID_RESSOURCE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
 		<td class="text">#CODE</td>
 		<td class="text">#INTITULE</td>
 	[(#ENV{acquisition}|oui)

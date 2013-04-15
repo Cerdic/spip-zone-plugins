@@ -1,13 +1,4 @@
-[(#REM)<!-- affichage des Membres d'un Groupe
-plugin = associaspip ; tables = spip_asso_membres, spip_asso_groupes, spip_asso_fonctions
-plugins necessaires = aucun
-parametres =
-- id_groupe (entier) : id_groupe dont on veut afficher les membres
-
-//!\ "inclusion de fragments" <http://microformats.org/wiki/include-pattern>
-
-maj:2012-09-27; version:0.1.1; licence:GPL; -->]
-
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
 <B_membres2groupe>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
@@ -22,12 +13,13 @@ maj:2012-09-27; version:0.1.1; licence:GPL; -->]
 		<th><:asso:email:></th>
 	]
 	</tr>
+[(#REM)<!-- //!\ "inclusion de fragments" <http://microformats.org/wiki/include-pattern> -->]
 <BOUCLE_membres2groupe(ASSO_FONCTIONS asso_membres)
 	{id_groupe=#ENV{id_groupe,#ENV{id}}}
 	{par nom_famille,prenom}
 	{pagination #ENV{pagination,10} assofonctions2groupe}
 	>
-	<tr class="agent vcard [(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
+	<tr class="agent vcard [row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
 		[(#META{association/aff_photo}|oui)<td class="url photo">[(#LOGO_AUTEUR{#URL_AUTEUR,left}|image_reduire{60})]</td>]
 		<td>[<a href='#URL_ECRIRE{adherent,id_auteur=#ID_AUTEUR}'>(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE, 'span'})</a>]</td>
 		<td><a class="spip_in include" href="#vcard-group#ENV{id_groupe}"></a> [<span class="role">(#FONCTION)</span>]</td>
