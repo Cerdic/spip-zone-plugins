@@ -1,0 +1,10 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_import_ics.php ../plugins/fabrique_auto/.backup/import_ics/paquet.xml ../plugins/fabrique_auto/import_ics/paquet.xml
+12c12
+< 		Paquet genere le 2013-04-15 14:07:29
+---
+> 		Paquet genere le 2013-04-15 14:09:23
+Binary files ../plugins/fabrique_auto/.backup/import_ics/prive/themes/spip/images/almanach-24.png and ../plugins/fabrique_auto/import_ics/prive/themes/spip/images/almanach-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/import_ics/prive/themes/spip/images/almanach-add-24.png and ../plugins/fabrique_auto/import_ics/prive/themes/spip/images/almanach-add-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/import_ics/prive/themes/spip/images/almanach-del-24.png and ../plugins/fabrique_auto/import_ics/prive/themes/spip/images/almanach-del-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/import_ics/prive/themes/spip/images/almanach-edit-24.png and ../plugins/fabrique_auto/import_ics/prive/themes/spip/images/almanach-edit-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/import_ics/prive/themes/spip/images/almanach-new-24.png and ../plugins/fabrique_auto/import_ics/prive/themes/spip/images/almanach-new-24.png differ
