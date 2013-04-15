@@ -13,10 +13,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function coordonnees_afficher_fiche_objet($flux) {
 	$texte = "";
-	$e = trouver_objet_exec($flux['args']['exec']);
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+	$e = trouver_objet_exec($exec);
 	$type = $flux['args']['type'];
 
-	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets'))) {
+	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets')) ) {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
@@ -35,6 +36,26 @@ function coordonnees_afficher_fiche_objet($flux) {
 	return $flux;
 }
 
+
+/**
+ * Liste des coordonnées d'un auteur sur sa fiche
+**/
+function coordonnees_affiche_auteurs_interventions($flux) {
+	$texte = "";
+	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
+			'objet' => 'auteur',
+			'id_objet' => $id_auteur,
+			),
+			array('ajax'=>'coordonnees')
+		);
+	}
+	if ($texte) {
+		$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
 
 /**
  * Optimiser la base de donnees en supprimant les liens orphelins
