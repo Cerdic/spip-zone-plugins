@@ -50,7 +50,7 @@ function spip_log_liste_objets_exec() {
 	}*/
 	include_spip('inc/pipelines'); // f_jQuery()
 	include_spip('inc/commencer_page'); // init_head()
-	echo '<html><head>'.f_jQuery(init_head(_T('couteau:urls_propres_titre')))
+	echo '<html><head>'.f_jQuery(init_head(couteauprive_T('spip_log:nom')))
 		.'<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" /></head><body style="text-align:center">'
 		.(recuperer_fond('fonds/spip_log', array('log'=>_DIR_LOG.$log, 'sens_lecture_log'=>_request('sens_lecture_log'), 'tri_lecture_log'=>_request('tri_lecture_log'), 'debut_lecture_log'=>_request('debut_lecture_log') )))
 		.'</body></html>';
