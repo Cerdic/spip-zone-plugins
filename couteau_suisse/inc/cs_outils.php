@@ -275,6 +275,30 @@ function cs_balises_traitees($outil_id, $join=', #') {
 	return '';
 }
 
+// formulaire simple d'action rapide : fieldset avec bouton, legend en option
+// valider ce formulaire implique l'appel ajax de la function {$outil}_{$id}_action()
+function ajax_action_rapide_simple($id, $corps, $button='bouton_valider', $legend='', $outil='') {
+	$align = $legend?'text-align:right;':'text-align:center;';
+	$corps .= "<div style='$align'><input class='fondo' type='submit' value=\""
+		. attribut_html(_T($button)).'" /></div>';
+	$corps = $legend?"<fieldset><legend>"._T($legend)."</legend>$corps</fieldset>"
+		:"<div style='$align padding:0.4em;'>$corps</div>";
+	return ($outil || ($outil = _request('outil')) || ($outil = array_shift(explode('|', _request('arg'),2))))
+		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
+		?ajax_action_auteur('action_rapide', $id, 'admin_couteau_suisse', "arg=$outil|description_outil&cmd=descrip#cs_action_rapide",
+			"\n<div>$corps</div>")
+		:'ajax_action_rapide_simple() : outil??';
+}
+
+// bouton d'acualisation pour action_rapide
+function bouton_actualiser_action_rapide($outil='') {
+	return ($outil || ($outil = _request('outil')) || ($outil = array_shift(explode('|', _request('arg'),2))))
+		?ajax_action_auteur('action_rapide', 'actualise', 'admin_couteau_suisse', "arg=$outil|description_outil&cmd=descrip#cs_action_rapide",
+		"\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
+		. attribut_html(_T('couteauprive:rss_actualiser')).']" /></div>')
+		:'bouton_actualiser_action_rapide() : outil??';
+}
+
 // renvoie les boutons eventuels d'action rapide
 function cs_action_rapide($outil_id, $actif=true) {
 	include_spip('inc/texte');
@@ -282,7 +306,7 @@ function cs_action_rapide($outil_id, $actif=true) {
 	$f = "{$outil_id}_action_rapide";
 	include_spip("outils/$f");
 	if(!function_exists($f)) return '';
-	if(strlen($f = trim($f()))) {
+	if(strlen($f = trim($f($actif)))) {
 		// si inactif...
 		if(!$actif) {
 			if(preg_match_all(',<legend[^>]*>(.*?):?\s*</legend>,', $f, $regs)	
@@ -295,6 +319,7 @@ function cs_action_rapide($outil_id, $actif=true) {
 	}
 	return '';
 }
+
 // gere les fichiers distants d'un outil
 function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
@@ -352,8 +377,8 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	
 }
 
-// Liste les endroits de la base ou on trouve un raccourci
-// Ex. : $champs = array("article/texte", "rubrique/texte")
+// liste les endroits de la base ou on trouve un raccourci
+// ex. : $champs = array("article/texte", "rubrique/texte")
 function cs_raccourcis_presents($champs, $racc) {
 	if(!defined('_SPIP19300')) return "(SPIP 2 mini)";
 	$res = array();

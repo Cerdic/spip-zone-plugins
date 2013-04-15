@@ -31,16 +31,14 @@ function glossaire_verifie(&$c) {
 }
 
 
-function glossaire_action_rapide() {
+function glossaire_action_rapide($actif) {
 	if(_request('test_bd')) {
 		$info = glossaire_verifie($count);
 		$info = $info
 			?('<div style="color:red">'.$info.'</div>')
 			:('<div style="color:green">'._T('couteauprive:glossaire_ok', array('nb'=>$count)).'</div>');
 	} else $info = '';
-	return ajax_action_auteur('action_rapide', 'test', 'admin_couteau_suisse', "arg=glossaire|description_outil&cmd=descrip#cs_action_rapide",
-		"\n<fieldset><legend>"._T('couteau:test_base')."</legend><div style='text-align: center; padding:0.4em;'><input class='fondo' type='submit' value=\""
-		. attribut_html(_T('couteau:lancer_test')) . "\" /></div></fieldset>$info");
+	return ajax_action_rapide_simple('test', $info, 'couteau:lancer_test', 'couteau:test_base');
 }
 
 // fonction {$outil}_{$arg}_action() appelee par action/action_rapide.php

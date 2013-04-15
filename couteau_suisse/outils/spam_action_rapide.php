@@ -31,7 +31,7 @@ function spam_filtre_de_test_ip($texte, $liste=false) {
 	return $liste?join('<br />', $res):'ok';
 }
 
-function spam_action_rapide() {
+function spam_action_rapide($actif) {
 	include_spip('public/assembler'); // pour recuperer_fond()
 	$fd = recuperer_fond('fonds/test_spam', array(
 		'ar_message' => _request('ar_message'),

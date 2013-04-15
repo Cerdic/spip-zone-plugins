@@ -19,22 +19,16 @@ if(!defined('_SPIP19300')) {
 	}*/
 }
 
-function spip_cache_action_rapide() {
+function spip_cache_action_rapide($actif) {
+	if(!$actif) return _T('bouton_vider_cache');
 	include_spip('inc/texte'); // pour attribut_html()
 	if ($n = taille_du_cache())
 	  $info = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
 	else
 	  $info = _T('taille_cache_vide');
-	// <legend> : pour la description de l'outil inactif
-	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	// on envoie une action 'action_rapide' car 'purger' n'existe pas (encore?) en exec/
-	return ajax_action_auteur('action_rapide', 'cache', 'admin_couteau_suisse', "arg=spip_cache|description_outil&cmd=descrip#cs_action_rapide",
-			"\n<fieldset class='cs_hidden'><legend>"._T('bouton_vider_cache')."</legend></fieldset><div style='text-align: center; padding:0.4em;'>$info<br /><input class='fondo' type='submit' value=\""
-			. attribut_html(_T('bouton_vider_cache')) . '" /></div>')
-	// bouton d'acualisation
-		. ajax_action_auteur('action_rapide', 'actualise', 'admin_couteau_suisse', "arg=spip_cache|description_outil&cmd=descrip#cs_action_rapide",
-			"\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
-			. attribut_html(_T('couteauprive:rss_actualiser')).']" /></div>');
+	return ajax_action_rapide_simple('cache', $info, 'bouton_vider_cache')
+		. bouton_actualiser_action_rapide();
 
 /*	// appel direct vers SPIP, sans ajax :
 	return redirige_action_post('purger', 'cache', 'admin_couteau_suisse', "cmd=descrip&outil=spip_cache#cs_infos",

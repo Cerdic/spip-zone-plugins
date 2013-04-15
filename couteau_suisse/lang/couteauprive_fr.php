@@ -223,7 +223,10 @@ Notez bien : en modifiant ce deuxième style, vous perdez alors les styles stand
 	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detectée(s).',
 	'corbeille_objets_vide' => 'Aucun objet dans la corbeille.',
 	'corbeille_objets_vider' => 'Supprimer les objets sélectionnés',
-	'corbeille_vider' => 'Vider la corbeille :',
+	'fichiers_introuvables' => 'Fichiers introuvables',
+	'fichiers_detectes' => 'Fichiers détectés :',
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés',
+	'corbeille_vider' => 'Objets détectés :',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs à tous les textes du site (articles, brèves, titres, forum, …) en utilisant des balises à crochets en raccourcis : <code>[couleur]texte[/couleur]</code>.
 
@@ -581,6 +584,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.',
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
+	'log_gravite' => 'Gravité',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.',

@@ -11,7 +11,7 @@ if(defined('_SPIP20100')) {
 	$table_des_tables['urls']='urls';
 }
 
-function type_urls_action_rapide() {
+function type_urls_action_rapide($actif) {
 //	include_spip('inc/actions');
 //	include_spip('inc/actions_compat');
 

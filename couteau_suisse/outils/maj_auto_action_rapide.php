@@ -130,7 +130,8 @@ function info_maj_spip_ext($ver_min, $rev_min, $min3){
 }
 
 
-function maj_auto_action_rapide() {
+function maj_auto_action_rapide($actif) {
+	if(!$actif) return str_replace(':','',_T('couteau:maj_liste'));
 	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
 	$tiers = array_map(create_function('$v','return _T("couteau:2pts", array("objet"=>$v));'), explode('/', _T('couteau:maj_tiers')));
 	$tiers = array('necessite'=> $tiers[0], 'utilise'=> $tiers[1], 'procure'=> $tiers[2]);

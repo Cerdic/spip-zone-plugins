@@ -5,7 +5,8 @@
 //include_spip('inc/actions');
 //include_spip('inc/actions_compat');
 
-function corbeille_action_rapide() {
+function corbeille_action_rapide($actif) {
+	if(!$actif) return str_replace(':','',_T('couteauprive:corbeille_vider'));
 	foreach(cs_corbeille_table_infos() as $_table=>$obj) {
 		list($nb, $nb_lies, $ids, $statut) = cs_corbeille_gerer($_table, -1);
 		$table = isset($obj['table'])?$obj['table']:$_table;
@@ -20,13 +21,8 @@ function corbeille_action_rapide() {
 		$objets[] = "<label><input type='checkbox' value='$_table:$ids'".(($statut!=='spam' && $nb)?" checked='checked'":"")." name='$_table'/>$lib.
 <span class='ar_edit_info'>$infos</span></label>";
 	}
-	return ajax_action_auteur('action_rapide', 'purge_corbeille', 'admin_couteau_suisse', "arg=corbeille|description_outil&cmd=descrip#cs_action_rapide",
-			"\n<div style='padding:0.4em;'><fieldset><legend>"._T('couteauprive:corbeille_vider').'</legend>'
-			. join("<br/>\n",$objets) . "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
-			. attribut_html(_T('couteauprive:corbeille_objets_vider'))
-			. '" /></div></fieldset></div>')
-		/*."\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\"["
-		. attribut_html(_T('couteauprive:rss_actualiser'))	. ']" /></div>'*/;
+	return ajax_action_rapide_simple('purge_corbeille', join("<br/>\n",$objets), 'couteauprive:corbeille_objets_vider', 'couteauprive:corbeille_vider')
+		. bouton_actualiser_action_rapide();
 }
 
 // pour ajouter des tables dans la corbeille, utiliser le tableau : global $corbeille_params['nvelle_table_SPIP'];
