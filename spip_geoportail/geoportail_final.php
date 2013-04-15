@@ -11,7 +11,7 @@ function geoportail_affichage_final($page)
 	$action = calculer_action_auteur('geoportail');
 	
 	// Version de l'API
-	$version = '2.0.2';
+	$version = '2.0.3';
 	// if ($GLOBALS['meta']['geoportail_gpp3']) $version = '2.0.0beta';
 
 	// Version debug de l'API
