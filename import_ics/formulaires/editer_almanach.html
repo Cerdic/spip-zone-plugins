@@ -1,0 +1,29 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
+		<ul>
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:almanach:label_titre:>,
+				explication=<:almanach:explication_titre:> })]
+
+			[(#SAISIE{input, url, obligatoire=oui,
+				label=<:almanach:label_url:>,
+				explication=<:almanach:explication_url:> })]
+
+			[(#SAISIE{selecteur_article, id_article, obligatoire=oui,
+				label=<:almanach:label_id_article:>,
+				explication=<:almanach:explication_id_article:> })]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
