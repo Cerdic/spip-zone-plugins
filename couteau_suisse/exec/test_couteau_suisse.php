@@ -77,7 +77,7 @@ function cs_red($s){ return "<span style='color:red;'>$s</span>"; }
 // effectue tous les tests !
 function cs_les_tests() {
 	global $icone, $metas_vars, $metas_outils;
-	$icone = find_in_path('img/couteau-24.gif');
+	$icone = cs_icone(24);
 
 	test_outil($_SERVER, 'Echo de : $_SERVER[]');
 	test_outil($_ENV, 'Echo de : $_ENV[]');

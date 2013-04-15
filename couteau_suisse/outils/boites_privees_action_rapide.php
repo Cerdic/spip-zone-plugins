@@ -14,7 +14,7 @@ if(defined('_SPIP20100')) {
 		$f = trim(recuperer_fond('fonds/tri_auteurs2', array('id_objet'=>$id_article, 'objet'=>'article')));
 		// pas de cadre si un seul auteur...
 		if(strpos($f, '<table ')===false) return "";
-		return cadre_depliable(find_in_path('img/couteau-24.gif'),
+		return cadre_depliable(cs_icone(24),
 			cs_div_configuration().'<b>'._T('couteau:tri_auteurs').'</b>',
 			false,	// true = deplie
 			$f, 'bp_tri_auteurs2');
@@ -41,14 +41,14 @@ if(defined('_SPIP20100')) {
 		// ici, 1er affichage !
 		if(!strlen($texte)) return '';
 		// SPIP 1.92
-		if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
+		if(!defined('_SPIP19300')) return debut_cadre_relief(cs_icone(24), true)
 			. cs_div_configuration()
 			. "<div class='verdana1' style='text-align: left;'>"
 			. block_parfois_visible('bp_ta', '<b>'._T('couteau:tri_auteurs').'</b>', "<div id='bp_tri_auteurs_corps'>$texte</div>", 'text-align: center;')
 			. "</div>"
 			. fin_cadre_relief(true);
 		// SPIP 2.x
-		return cadre_depliable(find_in_path('img/couteau-24.gif'),
+		return cadre_depliable(cs_icone(24),
 			cs_div_configuration().'<b>'._T('couteau:tri_auteurs').'</b>',
 			false,	// true = deplie
 			"<div id='bp_tri_auteurs_corps'>$texte</div>",

@@ -14,13 +14,13 @@ function cs_deferr($f) {
  * PRIVE *
  *********/
 
-// ajout d'un onglet sur la page de configuration de SPIP
+// ajout d'un onglet sur la page de configuration de SPIP<3
 function couteau_suisse_ajouter_onglets($flux){
 	include_spip('inc/autoriser');
 	$arg = $flux['args']=='configuration' || $flux['args']=='plugins';
 	// si on est admin...
 	if($arg && autoriser('configurer', 'cs'))
-		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), 'couteau:titre', generer_url_ecrire('admin_couteau_suisse'));
+		$flux['data']['couteau_suisse']= new Bouton(cs_icone(24), 'couteau:titre', generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }
 
@@ -29,14 +29,7 @@ function eval_metas_pipelines(&$flux, $pipe){
 	if(isset($cs_metas_pipelines[$pipe])) eval($cs_metas_pipelines[$pipe]);
 	return $flux;
 }
-// ajout d'une icone sur la page de configuration des plugins
-// ce code ne sert a rien puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
 function couteau_suisse_affiche_gauche($flux){
-/*
-	if(_request('exec') == 'admin_plugin')
-		$flux['data'] .= 
-			icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false);
-*/
 	return eval_metas_pipelines($flux, 'affiche_gauche');
 }
 function couteau_suisse_affiche_droite($flux){
@@ -186,7 +179,7 @@ function couteau_suisse_bt_toolbox($params) {
 function couteau_suisse_bt_gadgets($params) {
 	global $cs_metas_pipelines;
 	if(!isset($cs_metas_pipelines['bt_toolbox'])) return $params;
-	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", _DIR_PLUGIN_COUTEAU_SUISSE."/img/couteau-24.gif", _T('couteauprive:raccourcis_barre'), $params['help']);
+	$params['flux'] .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['couteau_suisse']."','');", cs_icone(24), _T('couteauprive:raccourcis_barre'), $params['help']);
 	return $params;
 }
 

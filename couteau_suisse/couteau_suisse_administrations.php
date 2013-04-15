@@ -21,7 +21,7 @@ if(!defined('_SPIP20100')) {
 					if(!defined('_SPIP19300')) echo '<br />';
 					include_spip('inc/presentation');
 					echo debut_cadre_enfonce('', true),
-						icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', false),
+						icone_horizontale(_T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'), cs_icone(24), '', false),
 						fin_cadre_enfonce(true);
 					$ok++;
 				}

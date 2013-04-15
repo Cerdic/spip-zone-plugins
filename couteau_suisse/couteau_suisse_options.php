@@ -274,6 +274,13 @@ function cs_spip_file_options($code) {
 	}
 }
 
+// icones du CS
+function cs_icone($size) {
+	$f = 'couteau-'.$size.'.gif';
+	if(defined('_SPIP30000')) return $f;
+	return _DIR_PLUGIN_COUTEAU_SUISSE.'prive/themes/spip/images/'.$f;
+}
+
 // balises de tracage, directement compatibles regexpr
 // le separateur _CS_HTMLX est supprime en fin de calcul
 @define('_CS_HTMLA', '<span class="csfoo htmla"></span>');

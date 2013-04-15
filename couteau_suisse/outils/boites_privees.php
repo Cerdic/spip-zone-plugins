@@ -261,14 +261,14 @@ function cs_div_configuration() {
 
 function cs_cadre_depliable($titre, $id, $texte) {
 	// SPIP 1.92
-	if(!defined('_SPIP19300')) return debut_cadre_relief(find_in_path('img/couteau-24.gif'), true)
+	if(!defined('_SPIP19300')) return debut_cadre_relief(cs_icone(24), true)
 		. cs_div_configuration()
 		. "<div class='verdana1' style='text-align: left;'>"
 		. block_parfois_visible($id, "<b>$titre</b>", $texte, 'text-align: center;')
 		. "</div>"
 		. fin_cadre_relief(true);
 	// SPIP >= 2.0
-	return cadre_depliable(find_in_path('img/couteau-24.gif'), cs_div_configuration()."<b>$titre</b>", false /*true = deplie*/, $texte, $id);
+	return cadre_depliable(cs_icone(24), cs_div_configuration()."<b>$titre</b>", false /*true = deplie*/, $texte, $id);
 }
 
 ?>
