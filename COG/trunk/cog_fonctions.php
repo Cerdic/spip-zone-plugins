@@ -241,6 +241,7 @@ return $p;
 
 function cog_recherche_commune($nom_ville,$code_departement="")
 {
+	include_spip('base/abstract_sql');
 	$where='';
 	if (!empty($code_departement))
 		$where = 'and departement='.sql_quote($code_departement);
@@ -251,6 +252,7 @@ function cog_recherche_commune($nom_ville,$code_departement="")
 
 function cog_formulaire_recherche_commune($id_cog_commune,$nom_ville,$code_departement="")
 {
+	include_spip('base/abstract_sql');
 	if(intval($id_cog_commune)!=0)
 		{
 			$item=sql_fetsel('distinct id_cog_commune as id_cog_commune,trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as label,code,departement','spip_cog_communes','id_cog_commune='.intval($id_cog_commune));
@@ -279,6 +281,7 @@ function cog_recherche_id_commune_strict($nom_ville,$code_departement="")
 
 function cog_recherche_commune_strict($nom_ville,$code_departement="")
 {
+	include_spip('base/abstract_sql');;
 	$where='';
 	if (!empty($code_departement))
 		$where = 'and departement='.sql_quote($code_departement);
@@ -290,6 +293,7 @@ function cog_recherche_commune_strict($nom_ville,$code_departement="")
 
 function get_nom_commune($id_cog_commune)
 {
+    include_spip('base/abstract_sql');
     return sql_getfetsel('trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as nom_commune', 'spip_cog_communes','id_cog_commune = '.sql_quote($id_cog_commune));
 }
 
