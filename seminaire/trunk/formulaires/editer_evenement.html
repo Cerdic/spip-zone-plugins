@@ -43,7 +43,7 @@
 					</li>
 				</ul>
 	    </fieldset></li>
-			<li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
+	    	<li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
 				(#ENV{repetitions}|non)<a href='#' onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></a>
 				<div class='ajouter_repetitions none'>][
@@ -54,6 +54,11 @@
 			</li>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
+	   		<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif"><:seminaire:abstract:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
+	    	</li>
 	    [
 		(#ENV{affiche_inscription,oui}|=={oui}|oui)
 	    <li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
