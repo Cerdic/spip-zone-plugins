@@ -27,7 +27,7 @@ function action_supprimer_adresse_dist(){
 		// si l'adresse n'a pas d'autre lien, c'est qu'elle n'est plus utilisee
 		// on la supprime sans etat d'ame
 		if ( count(objet_trouver_liens( array('adresse' => $id_adresse), '*' )) == 0 )
-			sql_delete('adresse', "id_adresse=" . sql_quote($id_adresse));
+			sql_delete('spip_adresses', "id_adresse=" . sql_quote($id_adresse));
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_adresse/$id_adresse'");
 	}

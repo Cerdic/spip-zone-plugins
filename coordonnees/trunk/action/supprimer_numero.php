@@ -27,7 +27,7 @@ function action_supprimer_numero_dist(){
 		// si l'numero n'a pas d'autre lien, c'est qu'elle n'est plus utilisee
 		// on la supprime sans etat d'ame
 		if ( count(objet_trouver_liens( array('numero' => $id_numero), '*' )) == 0 )
-			sql_delete('numero', "id_numero=" . sql_quote($id_numero));
+			sql_delete('spip_numeros', "id_numero=" . sql_quote($id_numero));
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_numero/$id_numero'");
 	}

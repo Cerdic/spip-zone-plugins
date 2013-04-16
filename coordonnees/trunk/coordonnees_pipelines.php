@@ -38,11 +38,12 @@ function coordonnees_afficher_fiche_objet($flux) {
 
 
 /**
- * Liste des coordonnées d'un auteur sur sa fiche
+ * Liste des coordonnées d'un auteur sur la page "infos_perso"
 **/
 function coordonnees_affiche_auteurs_interventions($flux) {
 	$texte = "";
-	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+	if ($id_auteur = intval($flux['args']['id_auteur']) AND $exec != 'auteur') {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => 'auteur',
 			'id_objet' => $id_auteur,

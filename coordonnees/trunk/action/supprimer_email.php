@@ -27,7 +27,7 @@ function action_supprimer_email_dist(){
 		// si l'email n'a pas d'autre lien, c'est qu'elle n'est plus utilisee
 		// on la supprime sans etat d'ame
 		if ( count(objet_trouver_liens( array('email' => $id_email), '*' )) == 0 )
-			sql_delete('email', "id_email=" . sql_quote($id_email));
+			sql_delete('spip_emails', "id_email=" . sql_quote($id_email));
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_email/$id_email'");
 	}
