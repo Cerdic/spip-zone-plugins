@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_voie' => 'N<sup>o</sup> & voie',
 	'logo_adresse' => 'Logo de l\'adresse',
 	'logo_numero' => 'Logo du numero',
-	'logo_email' => 'Logo de l\'email',
+	'logo_email' => 'Logo du courriel',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
