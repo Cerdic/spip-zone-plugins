@@ -120,6 +120,7 @@
 			'creer_site' => true,        // Creer ou non le site s'il n'existe pas (defaut: false) 
 			'creer_base' => true,        // Creer ou non la base de donnee si elle n'existe pas (false) 
 			'creer_user_base' => false,  // Creer ou non un utilisateur pour la nouvelle base de donnee (false)
+			'mot_de_passe_aleatoire' => true, // Generer des mots de passe alatoires pour les nouveaux utilisateurs sql (si l'option creer_user_base est cochée)
 			'mail' => '',                // Adresse mail pour recevoir un mail lors d'une creation de site mutualise ('') 
 			'code' => 'ecureuil',        // Code d'activation ('ecureuil') 
 			'table_prefix' => false,     // Definir automatiquement le prefixe de table (false) ... mettre true si tous les sites dans la meme base 
