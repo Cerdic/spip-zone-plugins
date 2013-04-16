@@ -1,9 +1,11 @@
 <?php
-/*
+/**
  * Plugin Licence
- * (c) 2007-2011 fanouch
+ * (c) 2007-2013 fanouch
  * Distribue sous licence GPL
- *
+ * 
+ * La $GLOBALS des licences utilisables
+ * 
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

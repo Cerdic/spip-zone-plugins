@@ -1,9 +1,10 @@
 <?php
 /**
  * Plugin Licence
- * (c) 2007-2012 fanouch
+ * (c) 2007-2013 fanouch
  * Distribue sous licence GPL
- *
+ * 	
+ * @package SPIP\Licence\Fonctions
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -20,8 +21,12 @@ function licence_affiche($id_licence,$logo_non,$lien_non){
 
 /**
  * Fonction tentant de récupérer une licence cachée dans un texte
- * @param string $texte le texte à analyser
- * @return int $id_licence l'identifiant numérique de la licence trouvée ou false 
+ * Ne fonctionne que pour les Creative Commons
+ * 
+ * @param string $texte
+ * 		Le texte à analyser
+ * @return int $id_licence 
+ * 		L'identifiant numérique de la licence trouvée ou false 
  */
 function licence_recuperer_texte($texte){
 	if(preg_match('/http:\/\/creativecommons.org\/licenses\/(.[a-z|-]*)\//',$texte,$matches)){
