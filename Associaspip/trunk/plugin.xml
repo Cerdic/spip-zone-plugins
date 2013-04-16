@@ -17,8 +17,12 @@
 
 	<options>association_options.php</options>
 
-	<pipeline><nom>header_prive</nom></pipeline>
-	<pipeline><nom>delete_tables</nom></pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+	</pipeline>
+	<pipeline>
+		<nom>delete_tables</nom>
+	</pipeline>
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
@@ -33,26 +37,28 @@
         	<inclure>base/association.php</inclure>
 	</pipeline>
 
-	<!-- Ajout automatique de l'auteur edité comme membre -->
 	<pipeline>
+		<!-- Ajout automatique de l'auteur edité comme membre -->
 		<nom>post_edition</nom>
 		<inclure>association_pipelines.php</inclure>
 	</pipeline>
-
-	<!-- Interface avec la page auteur infos-->
 	<pipeline>
+		<!-- Interface avec la page auteur infos-->
 		<nom>affiche_gauche</nom>
 		<inclure>association_pipelines.php</inclure>
 	</pipeline>
-
-	<!-- Interface avec plugin champs extras 2 -->
 	<pipeline>
+		<!-- Interface avec plugin champs extras 2 -->
 		<nom>objets_extensibles</nom>
 		<inclure>association_pipelines.php</inclure>
 	</pipeline>
-
-	<!-- Autorisations -->
 	<pipeline>
+		<!-- Interface avec la liste des taches en cron -->
+		<nom>taches_generales_cron</nom>
+		<inclure>association_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline><!-- Autorisations -->
 		<nom>autoriser</nom>
 		<inclure>association_autorisations.php</inclure>
 	</pipeline>
@@ -62,7 +68,6 @@
 		<titre>Associaspip</titre>
 		<url>association</url>
 	</bouton>
-
 	<bouton id="association" parent="naviguer">
 		<icone>img_pack/asso-24.png</icone>
 		<titre>Associaspip</titre>

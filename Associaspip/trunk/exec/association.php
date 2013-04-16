@@ -56,12 +56,6 @@ function exec_association() {
 	}
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
-
-	// Petite routine pour mettre a jour les statuts de cotisation "echu".
-	// Possible http://programmer.spip.net/Declarer-une-tache http://contrib.spip.net/Ajouter-une-tache-CRON-dans-un-plugin-SPIP ?
-	sql_updateq('spip_asso_membres',
-		array('statut_interne' => 'echu'),
-			"statut_interne='ok' AND date_validite<CURRENT_DATE() ");
 }
 
 ?>
