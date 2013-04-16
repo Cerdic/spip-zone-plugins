@@ -36,7 +36,7 @@
 	<!-- Ajout automatique de l'auteur edité comme membre -->
 	<pipeline>
 		<nom>post_edition</nom>
-		<inclure>inc/post_edition.php</inclure>
+		<inclure>association_pipelines.php</inclure>
 	</pipeline>
 
 	<!-- Interface avec la page auteur infos-->
@@ -48,7 +48,7 @@
 	<!-- Interface avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>inc/association_cextras.php</inclure>
+		<inclure>association_pipelines.php</inclure>
 	</pipeline>
 
 	<!-- Autorisations -->
