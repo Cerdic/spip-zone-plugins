@@ -19,23 +19,23 @@ function formulaires_editer_email_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'titre',
-				'label' => _T('email:label_titre'),
-				'placeholder' => _T('email:placeholder_titre')
+				'label' => _T('coordonnees:label_titre'),
+				'placeholder' => _T('coordonnees:placeholder_titre_email')
 			)
 		),
 		array (
 			'saisie' => 'type_mel',
 			'options' => array (
 				'nom' => 'type',
-				'label' => _T('email:label_type'),
+				'label' => _T('coordonnees:label_type_email'),
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'email',
-				'label' => _T('email:label_email'),
-				'placeholder' => _T('email:placeholder_email'),
+				'label' => _T('coordonnees:label_email'),
+				'placeholder' => _T('coordonnees:placeholder_email'),
 				'obligatoire' => 'oui'
 			),
 			'verifier' => array (

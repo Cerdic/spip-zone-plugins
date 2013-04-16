@@ -15,6 +15,6 @@ maj:2013-03-22 -->]
 	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{datas, #LISTE{voice,work,home,msg,pref,fax,cell,dsl,video,pager,bbs,modem,car,isdn,pcs}}
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
-		<option value="#VALEUR"[(#ENV{valeur,#ENV{defaut}}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{numero:type_tel_#VALEUR}|_T)]</option>
+		<option value="#VALEUR"[(#ENV{valeur,#ENV{defaut}}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{coordonnees:type_tel_#VALEUR}|_T)]</option>
 </BOUCLE_selection>
 </select>

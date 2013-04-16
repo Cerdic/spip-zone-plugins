@@ -19,22 +19,22 @@ function formulaires_editer_numero_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'titre',
-				'label' => _T('numero:label_titre'),
-				'placeholder' => _T('numero:placeholder_titre')
+				'label' => _T('coordonnees:label_titre'),
+				'placeholder' => _T('coordonnees:placeholder_titre_numero')
 			)
 		),
 		array (
 			'saisie' => 'type_tel',
 			'options' => array (
 				'nom' => 'type',
-				'label' => _T('numero:label_type'),
+				'label' => _T('coordonnees:label_type_numero'),
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'numero',
-				'label' => _T('numero:label_numero'),
+				'label' => _T('coordonnees:label_numero'),
 				'obligatoire' => 'oui'
 			),
 			// decommenter ces lignes quand les numeros

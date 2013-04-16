@@ -15,6 +15,6 @@ maj:2013-03-22 -->]
 	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{datas, #LISTE{work,home}}
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
-		<option value="#VALEUR"[(#ENV{valeur,#ENV{defaut}}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{email:type_mel_#VALEUR}|_T)]</option>
+		<option value="#VALEUR"[(#ENV{valeur,#ENV{defaut}}|=={#VALEUR}|oui) selected="selected"]>[(#VAL{coordonnees:type_mel_#VALEUR}|_T)]</option>
 </BOUCLE_selection>
 </select>

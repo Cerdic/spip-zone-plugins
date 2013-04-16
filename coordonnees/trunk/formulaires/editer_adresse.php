@@ -18,44 +18,44 @@ function formulaires_editer_adresse_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'titre',
-				'label' => _T('adresse:label_titre'),
-				'placeholder' => _T('adresse:placeholder_titre')
+				'label' => _T('coordonnees:label_titre'),
+				'placeholder' => _T('coordonnees:placeholder_titre_adresse')
 			)
 		),
 		array (
 			'saisie' => 'type_adr',
 			'options' => array (
 				'nom' => 'type',
-				'label' => _T('adresse:label_type'),
+				'label' => _T('coordonnees:label_type_adresse'),
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'voie',
-				'label' => _T('adresse:label_voie')
+				'label' => _T('coordonnees:label_voie')
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'complement',
-				'label' => _T('adresse:label_complement'),
-				'placeholder' => _T('adresse:placeholder_complement')
+				'label' => _T('coordonnees:label_complement'),
+				'placeholder' => _T('coordonnees:placeholder_complement_adresse')
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'boite_postale',
-				'label' => _T('adresse:label_boite_postale'),
+				'label' => _T('coordonnees:label_boite_postale'),
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'code_postal',
-				'label' => _T('adresse:label_code_postal')
+				'label' => _T('coordonnees:label_code_postal')
 			),
 			// decommenter ces lignes quand les codes postaux
 			// internationaux seront pris en compte par 'verifier'
@@ -67,21 +67,21 @@ function formulaires_editer_adresse_saisies_dist(){
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'region',
-				'label' => _T('adresse:label_region')
+				'label' => _T('coordonnees:label_region')
 			)
 		),
 		array (
 			'saisie' => 'input',
 			'options' => array (
 				'nom' => 'ville',
-				'label' => _T('adresse:label_ville')
+				'label' => _T('coordonnees:label_ville')
 			)
 		),
 		array (
 			'saisie' => 'pays',
 			'options' => array (
 				'nom' => 'pays',
-				'label' => _T('adresse:label_pays'),
+				'label' => _T('coordonnees:label_pays'),
 				'obligatoire' => 'oui',
 				'class' => 'chosen',
 				'defaut' => 'FR',
