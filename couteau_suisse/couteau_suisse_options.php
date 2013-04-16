@@ -313,7 +313,7 @@ if(defined('_SPIP30000')) {
 			maj_auto_svp_maj_plugin(array($id_paquet));
 		}
 		// methode traditionnelle SPIP2, fonctionne egalement sous SPIP3 grace aux 2 lib distantes
-		// lancement de la maj (prise en compte de fichiers fantomes restes apres mise à jour de SPIP)
+		// lancement de la maj (prise en compte de fichiers fantomes restes apres mise a jour vers SPIP 3)
 		if((include_spip('action/charger_plugin') OR include_spip('lib/maj_auto/distant_action_charger_plugin'))
 			&& (include_spip('inc/charger_plugin') OR include_spip('lib/maj_auto/distant_inc_charger_plugin')))
 			action_charger_plugin_dist();

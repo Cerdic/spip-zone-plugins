@@ -425,7 +425,9 @@ function maj_auto_svp_maj_plugin($ids_paquet=array()) {
 		if(count($rejets = array_diff(array_keys($actions0), array_keys($actions)))) {
 			// probablement une action de reparation ou de MAJ de release sans changement de version
 			// dans ce cas, on remplace simplement les anciens fichiers du plugin (methode SPIP2)
-			if(include_spip('lib/maj_auto/distant_action_charger_plugin') && include_spip('lib/maj_auto/distant_inc_charger_plugin'))
+			// (prise en compte de fichiers fantomes restes apres mise à jour vers SPIP 3)
+			if((include_spip('action/charger_plugin') OR include_spip('lib/maj_auto/distant_action_charger_plugin'))
+					&& (include_spip('inc/charger_plugin') OR include_spip('lib/maj_auto/distant_inc_charger_plugin')))
 				foreach($rejets as $p) if($requests[$p][3]) {
 					set_request('url_zip_plugin2', $requests[$p][3]);
 					set_request('cs_retour', 'oui');
