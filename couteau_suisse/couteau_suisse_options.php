@@ -290,7 +290,7 @@ function cs_icone($size, $f='couteau') {
 @define('_CS_HTMLX2', '<p>(?:<br[^>]*>\s*)?<span class="csfoo \w+"></span></p>|<span class="csfoo \w+"></span>');
 
 // nettoyage des separateurs
-function cs_nettoie(&$flux) {
+function cs_nettoie($flux) {
 	if(strpos($flux, '"csfoo ')===false) return $flux;
 	return preg_replace(','.(strpos($flux, '<p><br')===false?_CS_HTMLX:_CS_HTMLX2).',', '', $flux);
 }

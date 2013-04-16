@@ -87,7 +87,7 @@ function couteau_suisse_affichage_final($flux){
 function couteau_suisse_recuperer_fond($flux){
 	$fond = &$flux['args']['fond']; $texte = &$flux['data']['texte'];
 	eval_metas_pipelines($flux, 'recuperer_fond');
-	cs_nettoie($texte);
+	$texte = cs_nettoie($texte);
 	return $flux;
 }
 
