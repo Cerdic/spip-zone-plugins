@@ -166,7 +166,7 @@ function cs_boite_rss() {
 	include_spip('inc/autoriser');
 	if (!defined('boites_privees_CS') || !autoriser('configurer','csinfosrss')) return '';
 	return debut_boite_info(true)
-		. '<p><b>'.couteauprive_T_T('rss_titre').'</b></p><div class="cs_boite_rss"><div><p>'.couteauprive_T('rss_attente').'</p><noscript>'.couteauprive_T('outil_inactif').' !</noscript></div></div>'
+		. '<p><b>'.couteauprive_T('rss_titre').'</b></p><div class="cs_boite_rss"><div><p>'.couteauprive_T('rss_attente').'</p><noscript>'.couteauprive_T('outil_inactif').' !</noscript></div></div>'
 		/*.'<div style="text-align: right; font-size: 87%;"><a title="'.couteauprive_T('rss_desactiver').'" href="'
 		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'.couteauprive_T('supprimer_cadre').'</a></div>'*/
 		. fin_boite_info(true);
