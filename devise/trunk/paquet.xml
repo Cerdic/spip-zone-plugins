@@ -1,0 +1,16 @@
+<paquet
+                prefix="devise"
+                categorie="divers"
+                version="3.0.2"
+                etat="dev"
+                compatibilite="[3.0.0-beta;["
+                logo="img/pig-64.png"
+                schema="0.2"
+>
+        <nom>Devise</nom>
+        <auteur>davux</auteur>
+        <licence>GNU/GPL</licence>
+        <necessite nom="cextras" compatibilite="[3.2.0;[" />
+        <pipeline nom="declarer_champs_extras" inclure="base/devise.php" />
+</paquet>
+
