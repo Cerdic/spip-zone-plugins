@@ -23,8 +23,8 @@
 			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,email,id_objet,#ID_EMAIL,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 		</td>
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:email:icone_modifier_email:>">
-			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'email:icone_modifier_email'})]
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:coordonnees:modifier_email:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'email:icone_supprimer_email'})]
 			</a>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'email:icone_supprimer_email'})],

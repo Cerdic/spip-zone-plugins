@@ -11,11 +11,11 @@
 [(#ENV{coordonnee}|non)
 <div class="icones-ajouter">
 	[(#SELF|parametre_url{coordonnee,adresse}|ancre_url{coordonnees}
-		|icone_horizontale{<:adresse:texte_ajouter_adresse_court:>,adresse,new,'coordonnee ajouter ajax right'})]
+		|icone_horizontale{<:coordonnees:ajouter_adresse_court:>,adresse,new,'coordonnee ajouter ajax right'})]
 	[(#SELF|parametre_url{coordonnee,email}|ancre_url{coordonnees}
-		|icone_horizontale{<:email:texte_ajouter_email_court:>,email,new,'coordonnee ajouter ajax right'})]
+		|icone_horizontale{<:coordonnees:ajouter_email_court:>,email,new,'coordonnee ajouter ajax right'})]
 	[(#SELF|parametre_url{coordonnee,numero}|ancre_url{coordonnees}
-		|icone_horizontale{<:numero:texte_ajouter_numero_court:>,numero,new,'coordonnee ajouter ajax right'})]
+		|icone_horizontale{<:coordonnees:ajouter_telephone_court:>,numero,new,'coordonnee ajouter ajax right'})]
 </div>
 ]
 

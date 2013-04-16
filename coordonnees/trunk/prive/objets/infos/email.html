@@ -1,13 +1,13 @@
 <BOUCLE_email_info(EMAILS){id_email=#ENV{id}}{tout}>
 <div class='infos'>
 	<div class='numero'>
-		<:email:info_numero:>
+		<:coordonnees:info_gauche_numero_email:>
 		<p>#ID_EMAIL</p>
 	</div>
 
 	<div class='utilisation'>
 		<B_email_utilisee>
-		<:email:info_utilisation:>
+		<:coordonnees:info_email_utilise_par:>
 		<dl>
 		<BOUCLE_email_utilisee(emails_liens){id_email}{fusion objet}{par objet}>
 			<dt>#OBJET</dt>

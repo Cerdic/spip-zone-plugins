@@ -1,13 +1,13 @@
 <BOUCLE_numero_info(NUMEROS){id_numero=#ENV{id}}{tout}>
 <div class='infos'>
 	<div class='numero'>
-		<:numero:info_numero:>
+		<:coordonnees:info_gauche_numero_numero:>
 		<p>#ID_NUMERO</p>
 	</div>
 
 	<div class='utilisation'>
 		<B_numero_utilisee>
-		<:numero:info_utilisation:>
+		<:coordonnees:info_numero_utilise_par:>
 		<dl>
 		<BOUCLE_numero_utilisee(numeros_liens){id_numero}{fusion objet}{par objet}>
 			<dt>#OBJET</dt>

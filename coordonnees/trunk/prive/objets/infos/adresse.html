@@ -1,13 +1,13 @@
 <BOUCLE_adresse_info(ADRESSES){id_adresse=#ENV{id}}{tout}>
 <div class='infos'>
 	<div class='numero'>
-		<:adresse:info_numero:>
+		<:coordonnees:info_gauche_numero_adresse:>
 		<p>#ID_ADRESSE</p>
 	</div>
 
 	<div class='utilisation'>
 		<B_adresse_utilisee>
-		<:adresse:info_utilisation:>
+		<:coordonnees:info_adresse_utilisee_par:>
 		<dl>
 		<BOUCLE_adresse_utilisee(adresses_liens){id_adresse}{fusion objet}{par objet}>
 			<dt>#OBJET</dt>

@@ -21,15 +21,15 @@
 			[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,numero,id_objet,#ID_NUMERO,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 		</td>
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:numero:icone_modifier_numero:>">
-			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'numero:icone_modifier_numero'})]
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'coordonnees:supprimer_numero'})]
 			</a>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'numero:icone_supprimer_numero'})],
 				#URL_ACTION_AUTEUR{supprimer_numero,#ID_NUMERO/#OBJET/#ID_OBJET,#SELF},
 				'button link ajax',
-				<:numero:texte_confirmer_supprimer_numero:>,
-				<:numero:icone_supprimer_numero:>}
+				<:coordonnees:confirmer_suppression_numero:>,
+				<:coordonnees:supprimer_numero:>}
 			)]
 		</td>
 	</tr>
