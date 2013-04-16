@@ -110,7 +110,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adherent_libelle_groupes' => 'Groupes',
 	'adherent_libelle_homme' => 'H',
 	'adherent_libelle_id_asso' => 'Réf. int.',
-	'adherent_libelle_id_auteur' => 'ID',
 	'adherent_libelle_masculin' => 'Monsieur',
 	'adherent_libelle_nom_famille' => 'Nom',
 	'adherent_libelle_non' => 'non',
