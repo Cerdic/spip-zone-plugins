@@ -223,7 +223,7 @@ N.B. by changing the second parameter you will lose any standard SPIP styles ass
 	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
 	'corbeille_objets_vide' => 'No object in the wastebin',
 	'corbeille_objets_vider' => 'Delete the selected objects',
-	'corbeille_vider' => 'Empty the wastebin:',
+	'corbeille_vider' => 'Empty the wastebin:', # MODIF
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Provides short-cuts to add colours to any text on the site (articles, news items, titles, forums, ...) by using bracket tags as short-cuts: <code>[colour]text[/colour]</code>.
 
@@ -365,6 +365,9 @@ When making an official update, update the associated remote file (click above o
 
 N.B. some Swiss Knife tools require {jQuery} to be installed. ',
 	'f_jQuery:nom' => 'Deactivate jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Dividing lines: <b>__i__</b> or <b>i</b> is a number between <b>0</b> and <b>@max@</b>.<br />Other available lines: @liste@',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
 _ The syntax is: «__code__», where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the <code>dossier_de_mon_squelette/img/filets/</code> directory or by default, in the directory <code>@_DIR_CS_ROOT@img/filets/</code>.',
@@ -582,6 +585,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'local_ko' => 'The automatic update of local file «@file@» failed. If the tool malfunctions, try a manual update.',
 	'log_brut' => 'Data written in raw format (no HTML)',
 	'log_fileline' => 'Extra debug information',
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',

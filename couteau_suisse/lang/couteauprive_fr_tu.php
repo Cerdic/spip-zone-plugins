@@ -225,7 +225,7 @@ Note bien : en modifiant ce deuxième style, tu perds alors les styles standards
 	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detectée(s).',
 	'corbeille_objets_vide' => 'Aucun objet dans la corbeille.',
 	'corbeille_objets_vider' => 'Supprimer les objets sélectionnés',
-	'corbeille_vider' => 'Vider la corbeille :',
+	'corbeille_vider' => 'Vider la corbeille :', # MODIF
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs à tous les textes du site (articles, brèves, titres, forum, …) en utilisant des balises à crochets en raccourcis : <code>[couleur]texte[/couleur]</code>.
 
@@ -366,6 +366,9 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 
 Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'Désactive jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : «__code__», où «code» représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier <code>dossier_de_mon_squelette/img/filets/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/filets/</code>.',
@@ -583,6 +586,7 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tente une mise à jour manuelle.',
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',

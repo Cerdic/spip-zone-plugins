@@ -213,7 +213,7 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'corbeille_objets_lies' => '@nb_lies@ ontdekte(n) verbinding.',
 	'corbeille_objets_vide' => 'Geen enkel onderwerp in het mandje', # MODIF
 	'corbeille_objets_vider' => 'De geselecteerde onderwerpen afschaffen',
-	'corbeille_vider' => 'Het mandje legen :',
+	'corbeille_vider' => 'Het mandje legen :', # MODIF
 	'couleurs:aide' => 'Inzet in kleuren: <b>[coul]tekst[/coul] </b>@fond@ met <b>coul</b> = @liste@',
 	'couleurs:description' => 'Maakt het mogelijk om kleuren gemakkelijk toe te passen op alle teksten van de site (artikelen, kort, titels, forum,…) door bakens in kortere wegen te gebruiken.
 
@@ -351,6 +351,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Opgelet: bepaalde werktuigen van het Zwitserse Mes (couteau suisse) vereisen de functies van {jQuery}.', # MODIF
 	'f_jQuery:nom' => 'Inactieve jQuery.',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Scheidingsnetten : <b>__i__</b> waar <b>i</b> is een aantal.<br />Andere beschikbare netten : @liste@', # MODIF
 	'filets_sep:description' => 'Neemt scheidingsnetten op, aan de persoonlijke behoeften aanpasbaar door bladen van stijl, in alle teksten van SPIP.
 _ De syntaxis is : "__code__", waar de code vertegenwoordigt ofwel het identificatienummer (van 0 tot 7) van het net dat in rechtstreeks verband met de overeenkomstige stijlen, ofwel de naam van een beeld moet opgenomen worden dat in het dossier wordt geplaatst plugins/couteau_suisse/img/filets.', # MODIF
@@ -555,6 +558,7 @@ _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net<
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien Javascript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.', # MODIF

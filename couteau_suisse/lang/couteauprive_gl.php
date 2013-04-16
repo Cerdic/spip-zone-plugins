@@ -218,7 +218,7 @@ Ollo : modificando este segundo parámetro, pérdense os estilos estándares de 
 	'corbeille_objets_lies' => '@nb_lies@ ligazón(s) detectada(s).',
 	'corbeille_objets_vide' => 'Non hai ningún obxecto na papeleira', # MODIF
 	'corbeille_objets_vider' => 'Suprimir os obxectos seleccionados',
-	'corbeille_vider' => 'Baleirar a papeleira :',
+	'corbeille_vider' => 'Baleirar a papeleira :', # MODIF
 	'couleurs:aide' => 'Colorear : <b>[coul]texte[/coul]</b>@fond@ con <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permite aplicar doadamente cores a todos os textos do web (artigos, breves, títulos, foro, …) usando balizas en atallos.
 
@@ -356,6 +356,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Aviso : algúnhas ferramentas de A Navalla Suíza necesitan as funcións de {jQuery}. ', # MODIF
 	'f_jQuery:nom' => 'Desactiva jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Filetes de separación : <b>__i__</b> ou <b>i</b> é un número.<br />Outros filetes dipoñíbeis : @liste@', # MODIF
 	'filets_sep:description' => 'Insire filetes de separación, personalizables mediante as follas de estilo, en todos os textos de SPIP.
 _ A sintaxe é : "__code__", ou "code" representa ben o número de identificación (de 0 à 7) do filete inserible en relación directa cos estilos correspondentes, ben o nome dunha imaxe situada no cartafol plugins/couteau_suisse/img/filets.', # MODIF
@@ -570,6 +573,7 @@ _ • {Predefinido} : substitución automática de orixe (a partir da version 2.
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Oculta todas as ligazóns de correo presentes nos seus textos e substitúeos por unha ligazón Javascript que permite activar o programa de correo do lector. Esta ferramenta antispam tenta impedir os robots de colleita de enderezos electrónicos deixados en claro nos foros ou nas balizas dos seus esqueletos.',

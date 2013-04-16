@@ -214,7 +214,7 @@ Nota: al modificar este segundo estilo, también pierdes los estilos estándar d
 	'corbeille_objets_lies' => '@nb_lies@ enlace(s) detectado(s).',
 	'corbeille_objets_vide' => 'No hay objetos en la papelera', # MODIF
 	'corbeille_objets_vider' => 'Suprimir los objetos seleccionados',
-	'corbeille_vider' => 'Vaciar la papelera:',
+	'corbeille_vider' => 'Vaciar la papelera:', # MODIF
 	'couleurs:aide' => 'Asignar colores: <b>[coul]texto[/coul]</b>@fond@ en <b>color</b>= @liste@',
 	'couleurs:description' => 'Permite aplicar facilmente des colores a todos los textos del sitio (artículos, breves, títulos, foro, …) utilizando balizas de atajo.
 
@@ -351,6 +351,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Atención: algunas herramientas de la Navaja Suiza necesitan las funciones de {jQuery}. ', # MODIF
 	'f_jQuery:nom' => 'Desactivar jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Filetes de Separación: <b>__i__</b> o <b>i</b> es un número.<br />Otros filetes disponibles: @liste@', # MODIF
 	'filets_sep:description' => 'Inserta filetes de separación, personalizables con hojas de estilo, en todos los textos de SPIP.
 _ La sintaxis es: "__código__", donde "código" representa o bien el número de identificación (de 0 a 7) del filete a insertar, relativo al estilo correspondiente, o el nombre de una imagen situada en la carpeta plugins/couteau_suisse/img/filets.', # MODIF
@@ -567,6 +570,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Enmascara todos los enlaces de correo presentes en los textos y los reemplaza por un enlace JavaScript que permite activar igual la aplicación de correo del lector. Esta herramienta antispam intenta impedir que los robots recojan las direcciones electrónicas escritas en claro en los foros o en las balizas de tus esqueletos.',

@@ -215,7 +215,7 @@ Pozn.: zmenou  druhého parametra stratíte štandardné štýly priradené k t
 	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
 	'corbeille_objets_vide' => 'Žiadne objekty v koši.',
 	'corbeille_objets_vider' => 'Delete the selected objects',
-	'corbeille_vider' => 'Empty the wastebin:',
+	'corbeille_vider' => 'Empty the wastebin:', # MODIF
 	'couleurs:aide' => 'Farba textu: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Umožňuje vám ľahko použiť farbu na celý text na stránke (články, novinky, nadpisy, diskusné fórum, a i.) pomocou tagov na typografické skratky v zátvorkách: <code>[couleur]text.[/couleur]</code>
 
@@ -356,6 +356,9 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 
 Pozor: Niektoré nástroje modulu Vreckový nožík si vyžadujú, aby bol {jQuery} nainštalovaný.',
 	'f_jQuery:nom' => 'Deactivate jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Oddeľovacie čiary: <b>__i__</b> alebo <b>i</b> je číslo.<br />Iné dostupné čiary: @liste@',
 	'filets_sep:description' => 'Vloží oddeľujúce čiary do hocijakého textu v SPIPe, čo sa dá prispôsobiť v súbore so štýlom.
 _ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.', # MODIF
@@ -573,6 +576,7 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Údaje zapísané ako neformátovaný text (nie ako HTML)',
 	'log_fileline' => 'Doplňujúce údaje o ladení',
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',

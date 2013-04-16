@@ -225,7 +225,7 @@ Fixeu-vos-hi bé: modificant aquest segon estil, també perdeu els estils estàn
 	'corbeille_objets_lies' => '@nb_lies@ enllaç(os) detectat(s).',
 	'corbeille_objets_vide' => 'Cap objecte a la paperera.',
 	'corbeille_objets_vider' => 'Suprimir els objectes seleccionats',
-	'corbeille_vider' => 'Buidar la paperera:',
+	'corbeille_vider' => 'Buidar la paperera:', # MODIF
 	'couleurs:aide' => 'Acolorir el text: <b>[coul]text[/coul]</b>@fond@ amb <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet aplicar fàcilment colors a tots els textos del lloc (articles, breus, títols, fòrum, …) utilitzant etiquetes entre claudàtors en dreceres: <code>[couleur]texte[/couleur]</code>.
 
@@ -367,6 +367,9 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 
 Atenció: certes eines del Ganivet Suís necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Línies de Separació: <b>__i__</b> o <b>i</b> és un nombre de <b>0</b> a <b>@max@</b>.<br />Altres línies disponibles: @liste@',
 	'filets_sep:description' => 'Insereix línies de separació, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.', # MODIF
@@ -586,6 +589,7 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enllaços de correus presents als vostres textos substituint-los per un enllaç JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electròniques deixades visibles als fòrums o a les etiquetes dels vostres esquelets.',

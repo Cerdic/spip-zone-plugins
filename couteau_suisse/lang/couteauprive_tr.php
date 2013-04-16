@@ -202,7 +202,7 @@ _ {{2.}} &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les liste
 	'corbeille_objets_lies' => '@nb_lies@ bağ görüldü.',
 	'corbeille_objets_vide' => 'Çöp kutusunda hiç nesne yok', # MODIF
 	'corbeille_objets_vider' => 'Seçilen nesneleri sil',
-	'corbeille_vider' => 'Çöp kutusunu boşalt :',
+	'corbeille_vider' => 'Çöp kutusunu boşalt :', # MODIF
 	'couleurs:aide' => 'Renklendirme : <b>[coul]metin[/coul]</b>@fond@ ile <b>coul</b> = @liste@',
 	'couleurs:description' => 'Kısayolların içinde komutlar kullanarak sitedeki tüm metinlere renk uygulanmasına olanak tanır (makaleler, kısa haberler, başlıklar, forum, ...).
 
@@ -334,6 +334,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Dikkat : bazı İsviçre Çakısı gereçleri {jQuery} fonksiyonlarına ihtiyaç duyar. ', # MODIF
 	'f_jQuery:nom' => 'jQuery\'yi deaktive eder',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Ayırma Fileleri (Filet) : <b>__i__</b>  <b>i</b> burada bir sayıyı temsil eder.<br />Diğer fileler : @liste@', # MODIF
 	'filets_sep:description' => 'Tüm SPIP etinlerine, stil sayfaları ile kişiselleştirilebilen ayırma filet\'leri ekler.
 _ Cümle yapısı şöyledir : "__code__", burada "code" ya eklenecek filet\'nin (0\'dan 7\'ye kadar) kimlik sayısını ya da plugins/couteau_suisse /img/filets dizinine yerleştirilen resmin ismini belirtir.', # MODIF
@@ -542,6 +545,7 @@ _ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</htm
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Metinlerinizde bulunan tüm bağları maskeler ve bir Javascript bağ yardımıyla okuyucunun mesajlaşmasını aktive etme olanağı tanır. Bu anti-spam gereci robotların, forumlarda veya iskeletlerde kullanılan komutlarda açıkta bırakılan elektronik adresleri toplamasını engellemeye çalışır.',

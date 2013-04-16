@@ -223,9 +223,6 @@ Notez bien : en modifiant ce deuxième style, vous perdez alors les styles stand
 	'corbeille_objets_lies' => '@nb_lies@ liaison(s) detectée(s).',
 	'corbeille_objets_vide' => 'Aucun objet dans la corbeille.',
 	'corbeille_objets_vider' => 'Supprimer les objets sélectionnés',
-	'fichiers_introuvables' => 'Fichiers introuvables',
-	'fichiers_detectes' => 'Fichiers détectés :',
-	'fichiers_vider' => 'Supprimer les fichiers sélectionnés',
 	'corbeille_vider' => 'Objets détectés :',
 	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permet d\'appliquer facilement des couleurs à tous les textes du site (articles, brèves, titres, forum, …) en utilisant des balises à crochets en raccourcis : <code>[couleur]texte[/couleur]</code>.
@@ -367,6 +364,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'Désactive jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :',
+	'fichiers_introuvables' => 'Fichiers introuvables',
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés',
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : «__code__», où «code» représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier <code>dossier_de_mon_squelette/img/filets/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/filets/</code>.',

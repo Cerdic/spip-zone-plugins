@@ -215,7 +215,7 @@ Decátate: al modificar esti segundu estilu, pierdes los estilos estándar de SP
 	'corbeille_objets_lies' => '@nb_lies@ enllaz(es) detectao(s).',
 	'corbeille_objets_vide' => 'Nun hai oxetos na papelera', # MODIF
 	'corbeille_objets_vider' => 'Desaniciar los oxetos seleicionaos',
-	'corbeille_vider' => 'Vaciar la papelera:',
+	'corbeille_vider' => 'Vaciar la papelera:', # MODIF
 	'couleurs:aide' => 'Poner de colores: <b>[coul]testu[/coul]</b>@fond@ siendo <b>coul</b> = @liste@',
 	'couleurs:description' => 'Permite aplica-yos facilmente colores a tolos testos del sitiu (artículos, breves, títulos, foru, …) utilizando balices en atayos.
 
@@ -353,6 +353,9 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 
 Atención: delles ferramientes de la Navaya Suiza necesiten les funciones de {jQuery}. ', # MODIF
 	'f_jQuery:nom' => 'Desactiva jQuery',
+	'fichiers_detectes' => 'Fichiers détectés :', # NEW
+	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
+	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Moldures de Dixebra: <b>__i__</b> onde <b>i</b> ye un númberu.<br />Otres moldures disponibles: @liste@', # MODIF
 	'filets_sep:description' => 'Amesta moldures de dixebra, personalizables con les fueyes d\'estilu, en tolos testos de SPIP.
 _ La sintaxis ye: "__code__", onde "code" representa o el númberu d’identificación (de 0 à 7) de la moldura a amestar en relación direuta colos estilos correspondientes, o el nome d\'una imaxe allugada nel direutoriu plugins/couteau_suisse/img/filets.', # MODIF
@@ -568,6 +571,7 @@ _ • {Predetermináu}: reemplazu automáticu d\'orixe (a partir de la versión 
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
 	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_gravite' => 'Gravité', # NEW
 
 	// M
 	'mailcrypt:description' => 'Mazcarita toos los enllaces de corréu presentes nos testos y los camuda por un enllaz JavaScript que permite lo mesmo activar la mensaxería del llector. Esta ferramienta escontra\'l corréu puxarra tenta torgar que los robots collechen les señes electróniques escrites en claro nos foros o nes balices de les tos cadarmes.',
