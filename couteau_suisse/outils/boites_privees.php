@@ -166,9 +166,9 @@ function cs_boite_rss() {
 	include_spip('inc/autoriser');
 	if (!defined('boites_privees_CS') || !autoriser('configurer','csinfosrss')) return '';
 	return debut_boite_info(true)
-		. '<p><b>'._T('couteauprive:rss_titre').'</b></p><div class="cs_boite_rss"><div><p>'._T('couteauprive:rss_attente').'</p><noscript>'._T('couteauprive:outil_inactif').' !</noscript></div></div>'
-		/*.'<div style="text-align: right; font-size: 87%;"><a title="'._T('couteauprive:rss_desactiver').'" href="'
-		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'._T('couteauprive:supprimer_cadre').'</a></div>'*/
+		. '<p><b>'.couteauprive_T_T('rss_titre').'</b></p><div class="cs_boite_rss"><div><p>'.couteauprive_T('rss_attente').'</p><noscript>'.couteauprive_T('outil_inactif').' !</noscript></div></div>'
+		/*.'<div style="text-align: right; font-size: 87%;"><a title="'.couteauprive_T('rss_desactiver').'" href="'
+		.generer_url_ecrire(_request('exec'),'cmd=switch&outil=rss_couteau_suisse').'">'.couteauprive_T('supprimer_cadre').'</a></div>'*/
 		. fin_boite_info(true);
 }
 
@@ -224,7 +224,7 @@ function cs_urls_propres($type, $id) {
 		$table = $type.($type=='syndic'?'':'s');
 		$r = spip_query("SELECT url_propre FROM spip_$table WHERE id_$type=$id");
 		if ($r && $r = spip_fetch_array($r) ) {
-			if(!strlen($r=$r['url_propre'])) $r=_T('couteauprive:variable_vide');
+			if(!strlen($r=$r['url_propre'])) $r = couteauprive_T('variable_vide');
 			$res .= "&bull;&nbsp;$r\n";
 		}
 		$lien_public = './?exec=action_rapide&arg=type_urls|URL_objet_191&format=iframe&type_objet='.$type.'&id_objet='.$id.'&script=foo';

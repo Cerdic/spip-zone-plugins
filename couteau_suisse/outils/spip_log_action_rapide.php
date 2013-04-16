@@ -16,7 +16,7 @@ function spip_log_ligne($f, $id=0) {
 
 function spip_log_action_rapide($actif) {
 	if(!defined('_SPIP30000')) return '';
-	if(!$actif) return str_replace(':','',_T('couteauprive:fichiers_vider'));
+	if(!$actif) return str_replace(':','',couteauprive_T('fichiers_vider'));
 	include_spip('public/assembler'); // pour recuperer_fond()
 	$fichiers = preg_files(_DIR_LOG.'.*[.]log([.]\d+)?$');
 	foreach ($fichiers as $f) if(preg_match(',[.]log$,', $f)) {
@@ -25,7 +25,7 @@ function spip_log_action_rapide($actif) {
 		$res[filemtime($f)] = $r;
 	}
 	krsort($res);
-	return (!count($res) ? _T('couteauprive:spip_log_introuvables')
+	return (!count($res) ? couteauprive_T('spip_log_introuvables')
 		:ajax_action_rapide_simple('supprime_logs', join("<br/>\n",$res), 'couteauprive:fichiers_vider', 'couteauprive:fichiers_detectes'))
 	  . bouton_actualiser_action_rapide();
 }
