@@ -1,7 +1,7 @@
 <paquet
 	prefix="licence"
 	categorie="divers"
-	version="0.4.6"
+	version="0.4.7"
 	etat="stable"
 	compatibilite="[2.0.10;3.0.99]"
 	logo="img_pack/licence_logo.png"
@@ -23,8 +23,8 @@
 	<pipeline nom="ieconfig_metas" inclure="licence_ieconfig_metas.php" />
 	<pipeline nom="affiche_milieu" inclure="licence_pipelines3.php" />
 	<pipeline nom="pre_insertion" inclure="licence_pipelines3.php" />
-	<pipeline nom="pre_edition" inclure="licence_pipelines3.php" />
 	<pipeline nom="editer_contenu_objet" inclure="licence_pipelines3.php" />
 	<pipeline nom="xmlrpc_methodes" inclure="licence_pipelines3.php" />
 	<pipeline nom="xmlrpc_server_class" inclure="licence_pipelines3.php" />
+	<utilise nom="medias" />
 </paquet>
