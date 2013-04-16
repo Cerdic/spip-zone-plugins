@@ -42,7 +42,7 @@
 	<!-- Interface avec la page auteur infos-->
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<inclure>inc/lien_page_auteur.php</inclure>
+		<inclure>association_pipelines.php</inclure>
 	</pipeline>
 
 	<!-- Interface avec plugin champs extras 2 -->
