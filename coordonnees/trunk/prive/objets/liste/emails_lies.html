@@ -6,7 +6,7 @@
 #SET{id_email_exclu, #ENV{coordonnee}|=={email}|?{#ENV{id_coordonnee}}}
 <B_liste_emails>
 #ANCRE_PAGINATION
-<div class="liste-objets emails coordonnees">
+<div class="liste-objets emails coordonnees lies">
 <table class='spip liste'>
 	<tbody>
 	<BOUCLE_liste_emails(EMAILS liens){id_email != #GET{id_email_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>

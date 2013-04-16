@@ -7,7 +7,7 @@
 #SET{id_adresse_exclue, #ENV{coordonnee}|=={adresse}|?{#ENV{id_coordonnee}}}
 <B_liste_adresses>
 #ANCRE_PAGINATION
-<div class="liste-objets adresses coordonnees">
+<div class="liste-objets adresses coordonnees lies">
 <table class='spip liste'>
 	<tbody>
 	<BOUCLE_liste_adresses(ADRESSES liens){id_adresse != #GET{id_adresse_exclus}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,pays},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>

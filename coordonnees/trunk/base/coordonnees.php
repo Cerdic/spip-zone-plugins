@@ -59,7 +59,17 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_editables'		=> array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'pays'),
 		'champs_versionnes'		=> array(),
 		'rechercher_champs'		=> array(),
-		'tables_jointures'		=> array('spip_adresses_liens')
+		'tables_jointures'		=> array('spip_adresses_liens'),
+		/* Les textes standard */
+		'texte_modifier'		=> 'coordonnees:modifier_adresse',
+		'texte_ajouter'			=> 'coordonnees:ajouter_adresse',
+		'texte_logo_objet'		=> 'coordonnees:logo_adresse',
+		'texte_creer'			=> 'coordonnees:nouvelle_adresse',
+		'texte_objet'			=> 'coordonnees:adresse',
+		'texte_objets'			=> 'coordonnees:adresses',
+		'info_aucun_objet'		=> 'coordonnees:info_aucune_adresse',
+		'info_1_objet'			=> 'coordonnees:info_1_adresse',
+		'info_nb_objets'		=> 'coordonnees:info_nb_adresses',
 	);
 
 	/* NUMEROS DE TELEPHONE */
@@ -80,7 +90,17 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_editables'		=> array( 'titre', 'numero' ),
 		'champs_versionnes'		=> array(),
 		'rechercher_champs'		=> array(),
-		'tables_jointures'		=> array('spip_numeros_liens')
+		'tables_jointures'		=> array('spip_numeros_liens'),
+		/* Les textes standard */
+		'texte_modifier'		=> 'coordonnees:modifier_numero',
+		'texte_ajouter'			=> 'coordonnees:ajouter_numero',
+		'texte_logo_objet'		=> 'coordonnees:logo_numero',
+		'texte_creer'			=> 'coordonnees:nouveau_numero',
+		'texte_objet'			=> 'coordonnees:numero',
+		'texte_objets'			=> 'coordonnees:numeros',
+		'info_aucun_objet'		=> 'coordonnees:info_aucun_numero',
+		'info_1_objet'			=> 'coordonnees:info_1_numero',
+		'info_nb_objets'		=> 'coordonnees:info_nb_numeros',
 	);
 
 	/* EMAILS */
@@ -101,7 +121,17 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'champs_editables'		=> array( 'titre', 'email' ),
 		'champs_versionnes'		=> array(),
 		'rechercher_champs'		=> array(),
-		'tables_jointures'		=> array('spip_emails_liens')
+		'tables_jointures'		=> array('spip_emails_liens'),
+		/* Les textes standard */
+		'texte_modifier'		=> 'coordonnees:modifier_email',
+		'texte_ajouter'			=> 'coordonnees:ajouter_email',
+		'texte_logo_objet'		=> 'coordonnees:logo_email',
+		'texte_creer'			=> 'coordonnees:nouvel_email',
+		'texte_objet'			=> 'coordonnees:email',
+		'texte_objets'			=> 'coordonnees:emails',
+		'info_aucun_objet'		=> 'coordonnees:info_aucun_email',
+		'info_1_objet'			=> 'coordonnees:info_1_email',
+		'info_nb_objets'		=> 'coordonnees:info_nb_emails',
 	);
 
 	return $tables;

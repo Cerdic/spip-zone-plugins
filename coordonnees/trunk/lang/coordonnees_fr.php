@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/v2/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_perso' => 'Domicile',
 	'adresse_pro' => 'Professionnel',
 	'adresses' => 'Adresses',
+	'adresse' => 'Adresse',
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
 	'ajouter_telephone' => 'Ajouter un numéro',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_email' => 'Éditer un courriel',
 	'editer_numero' => 'Éditer un numéro',
 	'emails' => 'Courriels',
+	'email' => 'Courriel',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
 
@@ -37,6 +39,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_numero_email' => 'N° Email',
 	'info_gauche_numero_numero' => 'N° Numéro',
 	'info_numero_utilise_par' => 'Numéro utilisé par :',
+	'info_aucune_adresse' => 'Aucune adresse',
+	'info_1_adresse' => '1 adresse',
+	'info_nb_adresses' => '@nb@ adresses',
+	'info_aucun_numero' => 'Aucun numero',
+	'info_1_numero' => '1 numero',
+	'info_nb_numeros' => '@nb@ numeros',
+	'info_aucun_email' => 'Aucun courriel',
+	'info_1_email' => '1 courriel',
+	'info_nb_emails' => '@nb@ courriels',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
@@ -57,6 +68,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
+	'logo_adresse' => 'Logo de l\'adresse',
+	'logo_numero' => 'Logo du numero',
+	'logo_email' => 'Logo de l\'email',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
@@ -68,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvel_email' => 'Nouveau courriel',
 	'nouvelle_adresse' => 'Nouvelle adresse',
 	'numeros' => 'Numéros',
+	'numero' => 'Numéro',
 
 	// P
 	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
