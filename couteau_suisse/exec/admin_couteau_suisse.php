@@ -209,11 +209,10 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	$tr = defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'));
 	$erreur_base = (isset($GLOBALS['meta']['couteau_suisse_base_version']) && version_compare($GLOBALS['meta']['couteau_suisse_base_version'],$cs_version_base,'<'))
 		?"<span style='color:red'>DB v$cs_version_base => v".$GLOBALS['meta']['couteau_suisse_base_version'].' ??</span><br/>':'';
-	$t = '<div>' . $erreur_base . couteauprive_T('help2', array(
+	$t = propre('<div>' . $erreur_base . couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
-		
 		. chargement_automatique($dir)
 		. '</div><div>&bull;&nbsp;[' . couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos')
 		. ']<br/>&bull;&nbsp;[' . $tr . '|' . $tr . '->' . generer_url_ecrire($exec,'cmd=trad#cs_infos')
@@ -223,8 +222,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
 			'contribs' => "\n_ &bull; " . cs_liste_contribs(25, "\n_ &bull; "),
 			'install' => $t))
-		. '</div>';
-	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', propre($t)); // SPIP >= 2.0
+		. '</div>');
+	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $t); // SPIP >= 2.0
 	$t = '<div class="cs_aide">'.propre('<div>'.couteauprive_T('help').'</div>').$t.'</div>';
 	echo debut_boite_info(true), $t, fin_boite_info(true);
 //	if(strlen($t = cs_aide_raccourcis()))
