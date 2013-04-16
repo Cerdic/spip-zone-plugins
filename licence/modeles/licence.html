@@ -1,4 +1,5 @@
 [(#REM)
+
 	Modele licence, parametres :
 	-* id_licence : id de la licence a afficher
 	-* id_article : id de l'article dont on souhaite afficher la licence
@@ -46,7 +47,7 @@
 		[(#ENV{desc_licence}|oui)
 			<p>#GET{desc_licence}</p>
 		]
-		[<a href="(#GET{link_licence})" class="spip_out" rel="license" [title="(#GET{desc_licence}|attribut_html)"]>]
+		[<a href="(#GET{link_licence})" class="spip_out" rel="external license" [title="(#GET{desc_licence}|attribut_html)"]>]
 			[(#GET{logo})]
 			[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
 		[</a>(#GET{link_licence}|oui)]
