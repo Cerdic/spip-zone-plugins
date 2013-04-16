@@ -1,13 +1,6 @@
 <?php
 // affiche un fond travaux si on n'est pas en zone ecrire ni admin
 
-// compatibilite pour SPIP 1.9.2
-if (!function_exists('test_espace_prive')) {
-	function test_espace_prive() {
-		return defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false;
-	}
-}
-
 if($tr_prive = test_espace_prive()) {
 	// prive : les admins passent, les redac passent si '!Tous'
 	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || !defined('_en_travaux_PRIVE');

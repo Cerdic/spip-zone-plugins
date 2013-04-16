@@ -36,9 +36,12 @@ elseif ($GLOBALS['spip_version_code']>=15133)
 	{ @define('_SPIP20100', 1); @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
 elseif (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) 
 	{ @define('_SPIP19300', 1); @define('_SPIP19200', 1); }
-elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) 
+elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>=')) {
 	@define('_SPIP19200', 1);
-else @define('_SPIP19100', 1);
+	if(!function_exists('test_espace_prive')) {
+		function test_espace_prive() { return defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false; }
+	}
+} else @define('_SPIP19100', 1);
 
 // globales de controles de passes
 $GLOBALS['cs_options'] /*= $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] */
