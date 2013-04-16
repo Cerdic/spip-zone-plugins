@@ -94,9 +94,8 @@ function multilang_init_lang(options) {
 		multilang_forms_toadd = $(multilang_forms_selector,multilang_jq_root).not($(multilang_forms));
 	}
 	multilang_forms = $(multilang_forms_selector,multilang_jq_root);
-	if(!init_done){
+	if(!init_done)
 		multilang_forms_toadd = multilang_forms;
-	}
 
 	//create menu lang for the global form
 	if(multilang_containers.size())
@@ -162,9 +161,8 @@ function multilang_init_multi(options) {
 	$(multilang_fields_selector,init_forms).each(function(){
 	    var me = $(this);
 	    if(me.closest(multilang_root_opt).length){
-	        if(me.is(multilang_fields_selector_opt)){
+	        if(me.is(multilang_fields_selector_opt))
 	        	multilang_init_field(this,this.form.form_lang);
-	        }
 	    }else{
 			multilang_init_field(this,this.form.form_lang);
 		}
@@ -354,9 +352,8 @@ function multilang_init_field(el,lang,force) {
 			el.field_pre_lang = n[1] || "";
 			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
 			el.field_lang[multilang_def_lang] = n[2];
-		} else {
+		} else
 			el.field_lang[multilang_def_lang] = el.value;
-		}
 	}
 
 	// Put the current lang string only in the field
@@ -373,17 +370,15 @@ function multilang_init_field(el,lang,force) {
 		 * Cas des crayons qui n'ont pas toujours de formalisme en ul > li
 		 */
 		if(el.name.match(/^content_[a-z0-9_]+_titre/)){
-			if($(el).parent().is('li')){
+			if($(el).parent().is('li'))
 				$(el).parent()
 					.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
-			}else{
+			else
 				$(el)
-				.before('<div class="editer_titre_numero"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br /></div>');
-			}
-		}else{
+					.before('<div class="editer_titre_numero"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br /></div>');
+		}else
 			$(el).parent()
 				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
-		}
 		$('#'+numid).totreat = false;
 	}
 }
@@ -408,12 +403,10 @@ function multilang_change_lang(el,container,target) {
 		multilang_forms_fields[target_id].each(function(){
 			var me = $(this);
 			if(me.parents(multilang_root_opt).size()>0){
-		        if(me.is(multilang_fields_selector_opt)){
+		        if(me.is(multilang_fields_selector_opt))
 		        	multilang_init_field(this,lang,true);
-		        }
-		    }else{
+		    }else
 		    	multilang_init_field(this,lang,true);
-		    }
 		});
 		target[0].isfull = false;
 	}else{
@@ -452,9 +445,8 @@ function multilang_mark_empty_langs(container,target) {
 		// Mise sous forme de tableau
 		if(typeof(this.field_lang) != 'undefined'){
 			$.each(this.field_lang,function(name,value){
-				if(value){
+				if(value)
 					field_langs.push(name);
-				}
 			});
 		}
 		// Trouver les elements non communs entre le tableau des langues availables et pour chaque champ,
