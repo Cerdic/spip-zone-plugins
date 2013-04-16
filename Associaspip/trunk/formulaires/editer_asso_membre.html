@@ -55,7 +55,7 @@
 				<th><:asso:fonction:></th>
 				<th><:asso:entete_action:></th>
 			</tr>
-	<BOUCLE_groupes_membre(ASSO_GROUPES_LIAISONS asso_groupes){id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination}>
+	<BOUCLE_groupes_membre(ASSO_FONCTIONS asso_groupes){id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
 				<td class="fn n"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
 				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]" /></td>
@@ -80,8 +80,6 @@
 			</ul>
 		</div>
 	</B_groupes_non_membre>
-		<p class="boutons">
-			<input type="submit" value="<:asso:bouton_modifier:>" class="submit" name="bsubmit" />
-		</p>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=0 } />
     </form>
 </div>
