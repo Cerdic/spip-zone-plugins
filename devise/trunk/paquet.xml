@@ -3,7 +3,7 @@
                 categorie="divers"
                 version="3.0.2"
                 etat="dev"
-                compatibilite="[3.0.0-beta;["
+                compatibilite="[3.0.0;3.*]"
                 logo="img/pig-64.png"
                 schema="0.2"
 >
