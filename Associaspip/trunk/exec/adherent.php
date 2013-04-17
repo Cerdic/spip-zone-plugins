@@ -87,7 +87,7 @@ function exec_adherent() {
 			);
 			echo fin_cadre_relief(TRUE);
 		}
-
+/** momentanement desactive pour cause de demenagement
 		if ($GLOBALS['association_metas']['recufiscal']) {
 			$t =  _T('cerfa11580:liens_vers_justificatifs');
 			echo debut_cadre_relief('', TRUE, '', $t);
@@ -95,6 +95,7 @@ function exec_adherent() {
 			echo $t ? $t : _T('asso:recherche_reponse0');
 			echo fin_cadre_relief(TRUE);
 		}
+*/
 		if ($GLOBALS['association_metas']['pc_cotisations']) {
 			$t = _T('asso:adherent_titre_historique_cotisations');
 			echo debut_cadre_relief('', TRUE, '', $t);
