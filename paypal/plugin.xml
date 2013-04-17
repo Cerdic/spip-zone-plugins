@@ -38,7 +38,7 @@
 		<url>configurer_paypal</url>
 	</bouton>
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
-   <necessite id="SPIP" version="[2.1.8;3.0.*]" />
+	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.8;]" />
 	<utilise id="verifier" version="[0.1.6;]" />
