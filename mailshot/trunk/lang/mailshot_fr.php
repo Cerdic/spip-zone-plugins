@@ -66,7 +66,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_control_play' => 'Relancer',
 	'label_control_stop' => 'Abandonner',
 	'label_rate_limit' => 'Limiter la cadence d\'envoi',
+	'label_boost_send_oui' => 'Envoi rapide',
 	'explication_rate_limit' => 'Indiquer le nombre maximum de mail envoyés par jour ou laisser vide pour ne pas fixer de limite',
+	'explication_boost_send' => 'Dans ce mode, les mails seront envoyés aussi vite que possible. Aucune limite de cadence n\'est prise en compte.
+										L\'envoi rapide est déconseillé car il augmente le risque de classement en SPAM.',
 
 	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi',
 	'legend_configuration_mailer' => 'Service d\'envoi des mails',

@@ -15,6 +15,9 @@ function genie_mailshot_bulksend_dist($t){
 		include_spip('inc/mailshot');
 		list($periode,$nb) = mailshot_cadence();
 		mailshot_envoyer_lot($nb);
+		// dire qu'on a pas fini si mode boost pour se relancer aussi vite que possible
+		if (lire_config("mailshot/boost_send")=='oui')
+			return -($t-$periode);
 	}
 	return 0;
 }

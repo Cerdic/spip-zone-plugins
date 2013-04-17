@@ -14,10 +14,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   (periode du cron, nb envois a chaque appel)
  */
 function mailshot_cadence(){
+	include_spip('inc/config');
+	if (lire_config("mailshot/boost_send")=='oui')
+		return array(30,100); // autant que possible, toutes les 30s
+
 	// cadence maxi
 	$cadence = array(60,5);
-
-	include_spip('inc/config');
 	$max_rate = lire_config("mailshot/rate_limit");
 	if ($max_rate = intval($max_rate)){
 		$rate_one_per_one = 24*60*60/$cadence[0];
