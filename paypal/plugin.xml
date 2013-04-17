@@ -4,7 +4,7 @@
 	[Matthieu Marcillaud->http://magraine.net/], [Les Développements Durables->http://www.ldd.fr]
 	</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<version_base>0.1</version_base>
 	<icon>images/paypal-32.png</icon>
 	<options>paypal_options.php</options>
@@ -38,7 +38,7 @@
 		<url>configurer_paypal</url>
 	</bouton>
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
-   <necessite id="SPIP" version="[2.1.8;2.1.99]" />
+   <necessite id="SPIP" version="[2.1.8;3.0.*]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.8;]" />
 	<utilise id="verifier" version="[0.1.6;]" />
