@@ -1384,7 +1384,7 @@ function filtre_selecteur_asso_statut($sel='') {
  * Zone de saisie de numero de membre
  */
 function filtre_selecteur_asso_id($sel='') {
-	    $res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5"  value="'.$sel.'" placeholder="'. _T('asso:entete_id') .'" />';
+	$res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5" '. (!$sel?'':'value="'.$sel.'" ') .'placeholder="'. _T('asso:entete_id') .'" />'; //!\ ''|0|FALSE|NULL sont traites pareil
     return "$res\n";
 }
 
@@ -1466,7 +1466,7 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
     if ( !$lettre || $lettre=='%' ) {
 		$pager .= ' <span class="on">'. _T('asso:entete_tous') .'</span>';
 	} else {
-		$pager .= ' <a href="'.$url.'">'. _T('asso:entete_tous') .'</a>';
+		$pager .= ' <a href="'.$url.'&lettre=">'. _T('asso:entete_tous') .'</a>'; //!\ on s'assure que le parametre est vide s'il etait dans l'URL
 	}
     return ($url?"<div class='choix'>$pager </div>\n":"$res</select>\n");
 }
@@ -1484,7 +1484,7 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
  * @see association_selectionner_exercice
  */
 function filtre_selecteur_asso_periode($periode, $table, $champ, $url='') {
-	return $GLOBALS['association_metas']['exercices'] ? filtre_selecteur_asso_exercice($periode) : filtre_selecteur_asso_annee($periode, $table, $champ, $url) ;
+	return $GLOBALS['association_metas']['exercices'] ? filtre_selecteur_asso_exercice($periode) : filtre_selecteur_asso_annee($periode, $table, $champ, $url);
 }
 
 /**
