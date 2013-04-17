@@ -2,7 +2,7 @@
 	<nom>Commandes pay&#233;es avec Paypal</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.5</version>
+	<version>0.2.6</version>
 	<etat>dev</etat>
    <slogan>G&#233;re les retours Paypal</slogan>
 	<description>Ce plugin permet de g&#233;rer les retours d'un payement Paypal pour savoir quelle commande a &#233;t&#233; pay&#233;e, et donc changer son statut.</description>
@@ -16,7 +16,7 @@
 		<inclure>commandes_paypal_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.8;3.0.*]" />
 	<necessite id="commandes" version="[0.4.0;]" />
 	<necessite id="paypal" version="[0.1.0;]" />
 </plugin>
