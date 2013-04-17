@@ -1,0 +1,56 @@
+<fieldset>
+	<h3 class="legend"><:cerfa11580:config_info_recufiscal:></h3>
+	<ul>
+		<li class="editer_recufiscal">
+			<label for="recufiscal"><:cerfa11580:config_libelle_typefiscal:></label>
+			<select name="recufiscal" id="recufiscal">
+				<option value="0"[(#ENV{recufiscal}|=={0}|oui) selected="selected"]><:cerfa11580:config_libelle_type0:></option>
+				<option value="1"[(#ENV{recufiscal}|=={1}|oui) selected="selected"]><:cerfa11580:config_libelle_type1:></option>
+				<option value="2"[(#ENV{recufiscal}|=={2}|oui) selected="selected"]><:cerfa11580:config_libelle_type2:></option>
+				<option value="3"[(#ENV{recufiscal}|=={3}|oui) selected="selected"]><:cerfa11580:config_libelle_type3:></option>
+				<option value="4"[(#ENV{recufiscal}|=={4}|oui) selected="selected"]><:cerfa11580:config_libelle_type4:></option>
+				<option value="5"[(#ENV{recufiscal}|=={5}|oui) selected="selected"]><:cerfa11580:config_libelle_type5:></option>
+				<option value="6"[(#ENV{recufiscal}|=={6}|oui) selected="selected"]><:cerfa11580:config_libelle_type6:></option>
+				<option value="7"[(#ENV{recufiscal}|=={7}|oui) selected="selected"]><:cerfa11580:config_libelle_type7:></option>
+				<option value="8"[(#ENV{recufiscal}|=={8}|oui) selected="selected"]><:cerfa11580:config_libelle_type8:></option>
+				<option value="9"[(#ENV{recufiscal}|=={9}|oui) selected="selected"]><:cerfa11580:config_libelle_type9:></option>
+				<option value="10"[(#ENV{recufiscal}|=={10}|oui) selected="selected"]><:cerfa11580:config_libelle_type10:></option>
+				<option value="11"[(#ENV{recufiscal}|=={11}|oui) selected="selected"]><:cerfa11580:config_libelle_type11:></option>
+				<option value="12"[(#ENV{recufiscal}|=={12}|oui) selected="selected"]><:cerfa11580:config_libelle_type12:></option>
+				<option value="13"[(#ENV{recufiscal}|=={13}|oui) selected="selected"]><:cerfa11580:config_libelle_type13:></option>
+				<option value="14"[(#ENV{recufiscal}|=={14}|oui) selected="selected"]><:cerfa11580:config_libelle_type14:></option>
+				<option value="15"[(#ENV{recufiscal}|=={15}|oui) selected="selected"]><:cerfa11580:config_libelle_type15:></option>
+				<option value="16"[(#ENV{recufiscal}|=={16}|oui) selected="selected"]><:cerfa11580:config_libelle_type16:></option>
+				<option value="17"[(#ENV{recufiscal}|=={17}|oui) selected="selected"]><:cerfa11580:config_libelle_type17:></option>
+				<option value="18"[(#ENV{recufiscal}|=={18}|oui) selected="selected"]><:cerfa11580:config_libelle_type18:></option>
+				<option value="19"[(#ENV{recufiscal}|=={19}|oui) selected="selected"]><:cerfa11580:config_libelle_type19:></option>
+				<option value="20"[(#ENV{recufiscal}|=={20}|oui) selected="selected"]><:cerfa11580:config_libelle_type20:></option>
+			</select>
+			<em class="explication"><:cerfa11580:config_aide_type:></em>
+		</li>
+		<li class="editer_infofiscal">
+			<label for="infofiscal"><:cerfa11580:config_libelle_infofiscal:></label>
+			<input type="text" name="infofiscal" [value="(#ENV{infofiscal})"] id="infofiscal" class="date" />
+			<em class="explication"><:cerfa11580:config_aide_infofiscal:></em>
+		</li>
+		<li class="editer_tauxfiscal">
+			<label for="tauxfiscal"><:cerfa11580:config_libelle_tauxfiscal:></label>
+			<input type="[(#HTML5|?{number,text})]" name="tauxfiscal" value="[(#ENV{tauxfiscal,100})]" id="tauxfiscal" class="number float rate" />
+		</li>
+		<li class="editer_codefiscal">
+			<label><:cerfa11580:config_libelle_codefiscal:></label>
+			<div class="choix">
+				<input type="checkbox" name="cgi200" [(#ENV{cgi200}|oui) checked="checked"] id="cgi200" />
+				<label for="cgi200"><:cerfa11580:config_libelle_cgi200:></label>
+			<div class="choix">
+			</div>
+				<input type="checkbox" name="cgi238" [(#ENV{cgi238}|oui) checked="checked"] id="cgi238" />
+				<label for="cgi238"><:cerfa11580:config_libelle_cgi238:></label>
+			<div class="choix">
+			</div>
+				<input type="checkbox" name="cgi885" [(#ENV{cgi885}|oui) checked="checked"] id="cgi885" />
+				<label for="cgi885"><:cerfa11580:config_libelle_cgi885:></label>
+			</div>
+		</li>
+	</ul>
+</fieldset>

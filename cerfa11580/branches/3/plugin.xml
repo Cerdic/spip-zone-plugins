@@ -1,0 +1,24 @@
+<plugin>
+	<nom>cerfa 11580</nom>
+	<auteur>
+	Bernard Blazin - Fran&#231;ois de Montlivault
+	Emmanuel Saint-James - Jeannolapin - gilcot
+	</auteur>
+	<version>3.0.0</version>
+	<meta>association_metas</meta>
+	<etat>dev</etat>
+	<slogan>Reçu dons aux œuvres</slogan>
+	<description>Génération de reçus selon le modèle <abbr title="numéro">n°</abbr>&nbsp;11580 du <abbr title="Centre d'Enregistrement et de R&eacute;vision des Formulaires Administratifs">cerfa</abbr> </description>
+	<prefix>cerfa11580</prefix>
+	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
+	<icon>cerfa11580.gif</icon>
+	<pipeline>
+		<nom>associaspip</nom>
+		<inclure>cerfa11580_pipelines.php</inclure>
+	</pipeline>
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
+	<necessite id="association" version="[2.2.0;2.2.99]" />
+	<necessite id="fpdf" version="[0.0.1;0.1.99]" />
+	<necessite id="coordonnees" version="[1.4.5;1.5.99]" />
+</plugin>
