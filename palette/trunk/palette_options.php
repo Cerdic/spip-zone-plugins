@@ -19,5 +19,5 @@ if (!function_exists('lire_config')) {
   	$GLOBALS['palette'] = serialize($options_palette);
 }
 
-define('_DIR_LIB_PALETTE','lib/farbtastic_1_3_1/')
+define('_DIR_LIB_PALETTE','lib/farbtastic_1_3_2/')
 ?>
