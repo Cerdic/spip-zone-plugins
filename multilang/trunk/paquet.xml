@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilang"
 	categorie="edition"
-	version="0.9.0"
+	version="0.9.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/multilang-32.png"
