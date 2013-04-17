@@ -1,7 +1,7 @@
 <paquet
 	prefix="palette"
 	categorie="outil"
-	version="3.0.2"
+	version="3.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.*]"
 	logo="prive/themes/spip/images/palette-128.png"
@@ -14,7 +14,7 @@
 
 	<auteur>Daniel FAIVRE (à partir de travaux de Marcimat)</auteur>
 
-	<copyright>2008-2012</copyright>
+	<copyright>2008-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
@@ -23,5 +23,5 @@
 	<pipeline nom="insert_head" inclure="palette_pipeline.php" />
 	<pipeline nom="header_prive" inclure="palette_pipeline.php" />
 
-	<lib nom="farbtastic_1_3_1" lien="http://files.spip.org/contribs/farbtastic_1_3_1.zip" />
+	<lib nom="farbtastic_1_3_2" lien="http://files.spip.org/contribs/farbtastic_1_3_2.zip" />
 </paquet>
