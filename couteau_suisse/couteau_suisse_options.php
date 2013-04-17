@@ -157,7 +157,7 @@ else {
 		cs_charge_fonctions();
 	}
 
-	if(defined('_LOG_CS')) cs_log(" FIN : couteau_suisse_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
+	if(defined('_LOG_CS')) cs_log(" FIN : couteau_suisse_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = ".((isset($GLOBALS['cs_fonctions_essai']) && $GLOBALS['cs_fonctions_essai'])?1:0));
 }
 
 // Droits pour configurer le Couteau Suisse (fonction surchargeable sans le _dist)

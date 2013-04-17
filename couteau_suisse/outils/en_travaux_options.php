@@ -1,21 +1,23 @@
 <?php
 // affiche un fond travaux si on n'est pas en zone ecrire ni admin
 
+$tr_acces = false;
+$s = is_array($GLOBALS['auteur_session'])?$GLOBALS['auteur_session']['statut']:'';
 if($tr_prive = test_espace_prive()) {
 	// prive : les admins passent, les redac passent si '!Tous'
-	$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || !defined('_en_travaux_PRIVE');
+	$tr_acces = $s=='0minirezo' || !defined('_en_travaux_PRIVE');
 } else {
 	// public : les admins passent si 'SaufAdmin'
 	if (defined('_en_travaux_PUBLIC')) {
 		switch (_en_travaux_PUBLIC) {
 			case 1:
-				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo');
+				$tr_acces = $s=='0minirezo';
 				break;
 			case 2:
-				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || ($GLOBALS['auteur_session']['statut']=='1comite');
+				$tr_acces = $s=='0minirezo' || $s=='1comite';
 				break;
 			case 3:
-				$tr_acces = ($GLOBALS['auteur_session']['statut']=='0minirezo') || ($GLOBALS['auteur_session']['statut']=='1comite') || ($GLOBALS['auteur_session']['statut']=='6forum');
+				$tr_acces = $s=='0minirezo' || $s=='1comite' || $s=='6forum';
 				break;
 		}
 	}
@@ -44,7 +46,7 @@ if (!$tr_acces) {
 }
 
 // nettoyage
-unset($tr_acces, $tr_prive, $tr_message);
+unset($s, $tr_acces, $tr_prive, $tr_message);
 
 function action_cs_travaux($prive=false){
 	include_spip('inc/texte'); # pour typo()

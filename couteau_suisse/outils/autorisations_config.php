@@ -60,7 +60,7 @@ cs_log("autorisations_installe_dist()");
 
 	// on decode les alias entres dans la config
 	$alias = preg_split("/[\r\n]+/", _autorisations_LISTE());
-	$fct = array(); $erreurs = '';
+	$code = $fct = array(); $erreurs = '';
 	foreach($alias as $_a) {
 		list($a,) = explode('//', $_a, 2);
 		if (preg_match('/^\s*(?:(\d+)\s*:)?(.*?)=\s*(?:(\d+)\s*:)?(.*?)$/', $a, $regs)) {
