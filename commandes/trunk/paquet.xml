@@ -3,7 +3,7 @@
 	   categorie="divers"
 	   version="0.9.4"
 	   etat="dev"
-	   compatibilite="[3.0.5;3.9.9]"
+	   compatibilite="[3.0.5;3.0.*]"
 	   logo="prive/themes/spip/images/commande.png"
 	   documentation=""
 	   schema="0.3" 
