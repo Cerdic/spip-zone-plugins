@@ -1,0 +1,15 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+
+[(#AUTORISER{configurer,_amap}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:amap:mini_doc:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{warning.gif}|balise_img{'',cadre-icone}|concat{#VAL{avis_attention}|_T}, 'simple'})]
+	<:amap:attention_modifications:>
+#BOITE_FERMER

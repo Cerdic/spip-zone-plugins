@@ -1,0 +1,83 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<!--<img src="#CHEMIN_IMAGE{amap-128.png}" class="right" />-->
+<!--#navigation-->
+<ul class="liste_items sous_navigation">
+	<li class="item[ (#ENV{exec}|=={amapiens}|oui)on execfound]">
+		<a href="#URL_ECRIRE{amapiens}" title="<:amap:liste_amapiens:>">
+			<i class="bando2_amap_page_accueil"></i><:amap:liste_amapiens:>
+		</a>
+	</li>
+	<!-- Gestion de panier -->
+	<li class="item[ (#ENV{exec}|=={panier_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{panier_liste}" title="<:amap:liste_paniers:>">
+			<i class="bando2_amap_page_accueil"></i><:amap:liste_paniers:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={panier_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{panier_enregistre}" title="<:amap:enregistrement:>">
+				<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={panier_enregistre}|oui)
+		<li class="item[ (#ENV{exec}|=={panier_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{panier_enregistre}" title="<:amap:enregistrement:>">
+				<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion des livraisons -->
+	<li class="item[ (#ENV{exec}|=={livraison_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{livraison_liste}" title="<:amap:liste_livraisons:>">
+			<i class="bando2_amap_page_accueil"></i><:amap:liste_livraisons:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={livraison_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{livraison_enregistre}" title="<:amap:enregistrement:>">
+				<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={livraison_enregistre}|oui)
+		<li class="item[ (#ENV{exec}|=={livraison_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{livraison_enregistre}" title="<:amap:enregistrement:>">
+				<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion des responsables -->
+	<li class="item[ (#ENV{exec}|=={responsable_liste}|oui)on execfound]">
+		<a href="#URL_ECRIRE{responsable_liste}" title="<:amap:liste_responsables:>">
+			<i class="bando2_amap_page_accueil"></i><:amap:liste_responsables:>
+		</a>
+	</li>
+	[(#ENV{exec}|=={responsable_liste}|oui)
+		<li class="item">
+			<a href="#URL_ECRIRE{responsable_enregistre}" title="<:amap:enregistrement:>">
+			<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	[(#ENV{exec}|=={responsable_enregistre}|oui)
+		<li class="item[ (#ENV{exec}|=={responsable_enregistre}|oui)on execfound]">
+			<a href="#URL_ECRIRE{responsable_enregistre}" title="<:amap:enregistrement:>">
+			<i class="bando2_amap_page_options"></i><:amap:enregistrement:>
+			</a>
+		</li>
+	]
+	<!-- Gestion de l'impression -->
+	<li class="item[ (#ENV{exec}|=={impression}|oui)on execfound]">
+		<a href="#URL_ECRIRE{impression}" title="<:amap:impression:>">
+			<i class="bando2_amap_page_accueil"></i><:amap:impression:>
+		</a>
+	</li>
+	</ul>
+<!--/#navigation-->

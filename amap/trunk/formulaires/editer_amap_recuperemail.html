@@ -15,7 +15,7 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type='hidden' name='id_amap_panier' value='#ENV{id_amap_panier}' />
 		<ul>
-			[(#SAISIE{auteurs,id_auteur, label=<:amap:nom:>, obligatoire=oui, option_statut=oui, defaut=#SESSION{id_auteur}})]
+			[(#SAISIE{auteurs,id_auteur, label=<:amap:nom:>, obligatoire=oui, option_statut=oui, defaut=#SESSION{id_auteur}, type_adherent=2})]
 			[(#SAISIE{producteurs,id_producteur, label=<:amap:producteurs:>, obligatoire=oui, disable_avec_post=oui})]
 			[(#SAISIE{date_distributions,date_distribution, label=<:amap:date_distribution:>, obligatoire=oui, disable_avec_post=oui})]
 		</ul>

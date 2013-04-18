@@ -20,10 +20,16 @@
 [(#ENV{option_statut}|oui)
 	#SET{bonhomme_statut, #ARRAY{0minirezo, admin-12.gif, 1comite, redac-12.gif, 6forum, visit-12.gif}}
 ]
+[(#ENV{type_adherent}|=={adherent}|oui)
+	#SET{type_adherent, #ARRAY{adherent, adherent}}
+]
+[(#ENV{type_adherent}|=={2}|oui)
+	#SET{type_adherent, #ARRAY{adherent, adherent, producteur, producteur}}
+]
 <B_adherent>
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="10"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_adherent(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{type_adherent IN adherent,producteur}>
+	<BOUCLE_adherent(AUTEURS){par num nom, nom}{statut ?}{statut != 5poubelle}{type_adherent IN #GET{type_adherent}}>
 		#SET{image_statut, #GET{bonhomme_statut}|table_valeur{#STATUT}}
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>
 	</BOUCLE_adherent>

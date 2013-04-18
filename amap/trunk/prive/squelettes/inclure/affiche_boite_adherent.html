@@ -1,0 +1,41 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+  
+  Appeler depuis /prive/inclure/affiche_boite
+
+]
+<!-- adherent -->
+<p>
+<BOUCLE_panier(AMAP_PANIERS){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
+	<BOUCLE_aut(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_totalpanier_dispo(AMAP_PANIERS auteurs){id_auteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:votre_panier, amap:vos_paniers}).]
+			</a>
+		<//B_totalpanier_dispo>
+	</BOUCLE_aut>
+</BOUCLE_panier>
+	<BOUCLE_aut1(AUTEURS){id_auteur}{tous}>
+		<:amap:aucun_panier_pour_vous:>
+	</BOUCLE_aut1>
+<//B_panier>
+</p>
+<p>
+<!-- responsable -->
+<BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
+	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES auteurs){id_auteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:votre_responsabilite, amap:vos_responsabilites}).]
+			</a>
+		<//B_totalpanier_respo>
+	</BOUCLE_aut2>
+</BOUCLE_responsable>
+	<BOUCLE_aut3(AUTEURS){id_auteur}{tous}>
+		<:amap:pas_responsable_pour_vous}:>
+	</BOUCLE_aut3>
+<//B_responsable>
+</p>

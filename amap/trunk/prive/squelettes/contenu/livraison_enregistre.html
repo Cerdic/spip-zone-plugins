@@ -1,0 +1,13 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<h1 class="grostitre"><:amap:enregistrement_livraison:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:enregistrement_livraison}|_T}, 'simple'})]
+	<p><:amap:enregistrement_livraison_explication:></p>
+        #FORMULAIRE_EDITER_AMAP_LIVRAISON{#ID_AMAP_LIVRAISON,#ENV{redirect,#URL_ECRIRE{livraison_liste}}}
+#BOITE_FERMER

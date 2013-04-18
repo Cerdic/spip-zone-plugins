@@ -1,0 +1,13 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<h1 class="grostitre"><:amap:enregistrement_responsable:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:enregistrement_responsable}|_T}, 'simple'})]
+	<p><:amap:enregistrement_responsable_explication:></p>
+        #FORMULAIRE_EDITER_AMAP_RESPONSABLE{#ID_AMAP_RESPONSABLE,#ENV{redirect,#URL_ECRIRE{responsable_liste}}}
+#BOITE_FERMER

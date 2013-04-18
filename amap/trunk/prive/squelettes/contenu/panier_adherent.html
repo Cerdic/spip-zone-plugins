@@ -1,0 +1,15 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+
+<h1 class="grostitre"><:amap:votre_compte_amap:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:votre_compte_amap}|_T}, 'simple'})]
+	<INCLURE{fond=prive/squelettes/inclure/liste_panier_adherent,dispo=non,env}>
+	<INCLURE{fond=prive/squelettes/inclure/liste_panier_adherent,dispo=oui,env}>
+	<INCLURE{fond=prive/squelettes/inclure/liste_responsable,env}>
+#BOITE_FERMER

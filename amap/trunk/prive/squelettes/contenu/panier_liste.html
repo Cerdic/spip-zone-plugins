@@ -1,0 +1,30 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<h1 class="grostitre"><:amap:liste_paniers:></h1>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{tabledata.gif}|balise_img{'',cadre-icone}|concat{#VAL{amap:liste_paniers}|_T}, 'simple'})]
+	<p><:amap:utiliser_entete_colone_tri:></p>
+
+	<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
+	#SET{total,0}
+	<BOUCLE_totalpanier(AMAP_PANIERS){age<0}>
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
+		#SET{total,#TOTAL_BOUCLE}
+	</BOUCLE_totalpanier>
+	
+	<BOUCLE_test(CONDITION){si #GET{total}|!={0}}>
+		<:amap:avant_le:>
+		<BOUCLE_evenementfin(EVENEMENTS){id_rubrique}{!par date_debut}{age<0}{0,1}>
+			[ (#DATE_DEBUT|affdate{'d/m/Y'}).]
+		</BOUCLE_evenementfin>
+	</BOUCLE_test>
+	</p>
+	</BOUCLE_rub>
+
+	<INCLURE{fond=prive/squelettes/inclure/liste_paniers,env,ajax}>
+#BOITE_FERMER

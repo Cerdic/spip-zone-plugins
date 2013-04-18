@@ -1,30 +1,30 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="3.0.2"
+	version="3.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/amapconfig-64.png"
-	schema="1.2.1"
-	documentation="http://contrib.spip.net/4331"
->	
+	logo="prive/themes/spip/images/amap-64.png"
+	documentation="http://contrib.spip.net/?article4331"
+	schema="1.2.2" 
+>
 
-	<nom>AMAP</nom>
-	<!-- Gestion des paniers et adhérents pour les AMAP -->
+	<nom>Amap</nom>
 
 	<auteur>Stéphane Moulinet</auteur>
 	<auteur>E-cosystems</auteur>
-	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
-
-	<copyright>2010-2013</copyright>
+	<auteur lien='http://www.pierre-kuhn.org'>Pierre KUHN</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="autoriser" inclure="amap_autoriser.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/amap_tables.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/amap_tables.php" />
-	<pipeline nom="declarer_champs_extras" inclure="base/amap_tables.php" />
+	<pipeline nom="autoriser" inclure="amap_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/amap.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/amap.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/amap.php" />
+	<pipeline nom="affiche_milieu" inclure="amap_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="amap_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="amap_pipelines.php" />
 
 	<necessite nom="agenda" compatibilite="[3.11.2;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
@@ -36,5 +36,6 @@
 
 	<utilise nom="fpdf" compatibilite="[0.0.1;[" />
 
-	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="images/amapconfig-16.png" action="mini_doc" />
+	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="images/amap-16.png" action="mini_doc" />
+
 </paquet>

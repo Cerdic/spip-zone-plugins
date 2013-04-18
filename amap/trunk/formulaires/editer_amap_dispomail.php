@@ -19,10 +19,12 @@ function formulaires_editer_amap_dispomail_traiter_dist() {
 	// La date ou le panier sera disponible.
 	$date_distribution = _request('date_distribution');
 	// Creation du lien vers le formulaire de recuperation
-	$lien .= generer_url_public("panier","id_amap_panier=$id_amap_panier");
+	$lien = url_absolue(generer_url_public('panier','id_amap_panier='.$id_amap_panier));
+	// Le texte supplémentaire
+	$panier_dispo_plus = $panier_dispo_plus;
 	// Creation de la liste des email d'amapiens
 	// On recupere dans la table des auteurs un tableau de tous les emails il sera de la forme emails[0..X]['email'] 
-	$emails = sql_allfetsel('email','spip_auteurs','email IS NOT NULL');  
+	$emails = sql_allfetsel('email','spip_auteurs','email IS NOT NULL');
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$headers .= "MIME-Version: 1.0 \n";

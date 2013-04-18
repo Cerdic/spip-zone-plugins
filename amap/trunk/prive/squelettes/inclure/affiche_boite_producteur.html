@@ -1,0 +1,37 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+  
+  Appeler depuis /prive/inclure/affiche_boite
+
+]
+<!-- producteur -->
+<p>
+<BOUCLE_panier(AMAP_PANIERS){id_producteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
+	<BOUCLE_prod(AUTEURS){id_auteur=#ID_PRODUCTEUR}{tous}>
+		<BOUCLE_totalpanier_prod(AMAP_PANIERS auteurs){id_producteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_producteur}|parametre_url{id_producteur,#ID_PRODUCTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:votre_panier_vendu, amap:vos_paniers_vendu}).]
+			</a>
+		<//B_totalpanier_prod>
+	</BOUCLE_prod>
+</BOUCLE_panier>
+	<:amap:aucun_panier_produit_par_vous:>
+<//B_panier>
+</p>
+<p>
+<!-- responsable -->
+<BOUCLE_responsable(AMAP_RESPONSABLES){id_auteur=#SESSION{id_auteur}}{tous}{age<0}{0,1}>
+	<BOUCLE_aut2(AUTEURS){id_auteur}{tous}>
+		<BOUCLE_totalpanier_respo(AMAP_RESPONSABLES auteurs){id_auteur}{age<0} />
+			<a href="[(#URL_ECRIRE{panier_adherent}|parametre_url{id_auteur,#ID_AUTEUR})]">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:votre_responsabilite, amap:vos_responsabilites}).]
+			</a>
+		<//B_totalpanier_respo>
+	</BOUCLE_aut2>
+</BOUCLE_responsable>
+	<:amap:pas_responsable_pour_vous:>
+<//B_responsable>
+</p>

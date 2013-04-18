@@ -1,6 +1,5 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/amap/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -22,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
 									4. Mettre à jour les <b>type d\'adhérent</b>, <b>adhésion</b> et <b>type de panier</b> sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
 									<p><b>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</b></p>',
-	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
-	'aucun_panier_produit_par_nom' => 'Nous n\'avons aucun panier produit par "@nom@".',
+	'aucun_panier_pour_vous' => 'Nous n\'avons aucun panier pour vous.',
+	'aucun_panier_produit_par_vous' => 'Vous avez produit aucun panier.',
 	'autorise_envoie_email_explication' => 'L\'envoie d\'email est utiliser pour la mise a disposition des paniers et la reprise. Non est conseiller pour de grosses amap, à la place on vous propose une interface de gestion.',
 	'autorise_envoie_email_label' => 'Voulez vous envoyez des mails ?',
 	'avant_le' => 'avant le',
@@ -47,8 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'enregistrement' => 'Enregistrement',
 	'enregistrement_livraison' => 'Enregistrement d\'une livraison',
+	'enregistrement_livraison_explication' => 'Vous pouvez via ce formulaire enregistré les contenus des livraisons, seulement les dates passer sont visibles.',
 	'enregistrement_paniers' => 'Enregistrement des paniers',
-	'enregistrement_responsable' => 'Enregistrement d\'un responsable pour les distributions',
+	'enregistrement_paniers_explication' => 'Ce formulaire vous permets d\'enregistré tous les paniers d\'un adhérent en une seule fois.',
+	'enregistrement_responsable' => 'Enregistrement d\'un responsable',
+	'enregistrement_responsable_explication' => 'Ce formulaire vous permets de géré les responsables de chaque distribution.',
 	'envoyer' => 'Envoyer',
 	'envoyez_email_non' => 'Non, ne pas envoyez de mail au adhérents.',
 	'envoyez_email_oui' => 'Oui, envoyez des mails aux adhérents.',
@@ -67,14 +69,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_amap' => 'Information AMAP',
 
 	// L
-	'la_responsabilite' => 'La responsabilité de',
-	'le_panier' => 'Le panier de',
-	'le_panier_vendu' => 'Le panier vendu par',
 	'les_livraisons' => 'Les livraisons',
 	'les_livraisons_effectuees' => 'Les livraisons déjà effectuées',
-	'les_paniers' => 'Les @nb@ paniers de',
 	'les_paniers_dispo' => 'Les paniers disponible de @nom@',
-	'les_paniers_vendu' => 'Les @nb@ paniers vendu par',
 	'les_responsabilites' => 'Les @nb@ responsabilités de',
 	'liste_amapiens' => 'Liste des amapiens',
 	'liste_amapiens_enregistres' => 'Liste des amapiens enregistrés',
@@ -88,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'livraison_explication' => 'Sur cette page vous trouverez la liste des livraison que vous avez déjà effectuer. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|livraison&gt;.',
 
 	// M
-	'manque_fpdf_imprimer' => 'Il vous manque le plugins "fpdf" pour pouvoir imprimer vos listes de paniers.',
+	'manque_fpdf_imprimer' => 'Il vous manque le plugin "fpdf" pour pouvoir imprimer vos listes de paniers.',
 	'mettre_disposition' => 'Mettre à disposition',
 	'mettre_disposition_explication' => 'Via cette page vous retrouvez vos paniers mais vous pouvez aussi les mettre a disposition, c\'est à dire que si vous ne pouvez pas venir vous pouvez l\'échanger ou le donner. Cliquer sur le lien "mettre à disposition" et suivez la procédure.',
 	'mettre_disposition_interface' => 'Un tableau est accessible pour les récupérés ensuite, le contenu de ce tableau est visible sur la page <a href="@url@"><b>ici</b></a>.',
@@ -104,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'panier' => 'Panier',
+	'panier_adherent' => 'Les paniers de @nom@',
 	'panier_deja_vendu' => 'Vous avez déjà vendu 1 panier',
 	'panier_dispo' => 'Panier disponible le @date_distribution@',
 	'panier_dispo_auteur' => 'Bonjour,
@@ -138,9 +136,10 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'pas_paniers_disponible' => 'Nous avons pas de panier disponible à vous proposer actuellement.',
 	'pas_producteur_amap' => 'Vous n\'avez pas de producteur dans votre amap.',
 	'pas_responsable_distribution' => 'Vous êtes pas responsable pour les distributions de la saison en cours.',
-	'pas_responsable_pour_nom' => '@nom@ est pas responsable de distribution.',
+	'pas_responsable_pour_vous' => 'Vous êtes pas responsable de distribution.',
 	'pas_statuts_nom' => '@nom@ n\'a pas de statuts actuellemment, éditer son profil pour corriger le manque.',
 	'petit' => 'Petit',
+	'pour_le' => 'pour le',
 	'producteur' => 'Producteur',
 	'producteurs' => 'Producteurs',
 
@@ -162,8 +161,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'signature' => 'Signature',
 
 	// T
-	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide :
-										<br />Elle ne contient aucun enregistrement.',
+	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide : Elle ne contient aucun enregistrement.',
 	'type_adherent' => 'Type d\'adhérent',
 	'type_adherent_auteur' => 'Type d\'adhérent :',
 	'type_panier' => 'Type de panier',
@@ -174,7 +172,13 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 
 	// V
 	'visiteur' => 'Visiteur',
-	'vos_paniers' => 'Vos paniers',
+	'vos_paniers' => 'Vos @nb@ paniers',
+	'vos_paniers_vendu' => 'Vos @nb@ paniers vendu',
+	'vos_responsabilites' => 'Vos @nb@ responsabilités',
+	'votre_compte_amap' => 'Votre compte AMAP',
+	'votre_panier' => 'Votre panier',
+	'votre_panier_vendu' => 'Votre panier vendu',
+	'votre_responsabilite' => 'Votre responsabilité',
 	'vous_etes_responsable_distribution' => 'Vous êtes responsables pour la distribution suivante :',
 	'vous_etes_responsable_distributions' => 'Vous êtes responsables pour les distributions suivante :'
 );

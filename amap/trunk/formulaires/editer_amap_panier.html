@@ -15,7 +15,7 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<input type='hidden' name='id_amap_panier' value='#ENV{id_amap_panier}' />
 		<ul>
-			[(#SAISIE{auteurs,id_auteur, label=<:amap:nom:>, obligatoire=oui, option_statut=oui, defaut=#SESSION{id_auteur}})]
+			[(#SAISIE{auteurs,id_auteur, label=<:amap:nom:>, obligatoire=oui, option_statut=oui, defaut=#SESSION{id_auteur}, type_adherent=adherent})]
 			[(#SAISIE{producteurs,id_producteur, label=<:amap:producteurs:>, obligatoire=oui, option_statut=oui})]
 			<li class="editer editer_date_distribution obligatoire saisie_checkbox">
 				<label for="champ_date_distribution"><:amap:date_distribution:> <span class='obligatoire'><:info_obligatoire_02:></span></label>

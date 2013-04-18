@@ -16,7 +16,7 @@
 	<input type='hidden' name='id_amap_panier' value='#ENV{id_amap_panier}' />
 		<ul>
 			[(#SAISIE{date_responsables,date_distribution, label=<:amap:date_distribution:>, obligatoire=oui})]
-			[(#SAISIE{auteurs,id_auteur, label=<:amap:responsables:>, obligatoire=oui, option_statut=oui})]
+			[(#SAISIE{auteurs,id_auteur, label=<:amap:responsables:>, obligatoire=oui, option_statut=oui, type_adherent=2})]
 		</ul>
 	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>

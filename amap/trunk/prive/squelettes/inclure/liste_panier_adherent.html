@@ -1,0 +1,73 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+  
+  Appeler depuis ?exec=panier_adherent
+
+]
+<BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
+<p>
+	#SET{total,0}
+	<BOUCLE_totalpanier(AMAP_PANIERS){id_auteur}{age<0}{dispo=#ENV{dispo,non}} />
+		[(#ENV{dispo,non}|=={non}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_recuperer, amap:reste_paniers_recuperer, nb})]]
+		[(#ENV{dispo}|=={oui}|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:panier_disposition, amap:paniers_disposition, nb})]]
+		#SET{total,#TOTAL_BOUCLE}
+	<//B_totalpanier>
+	<BOUCLE_test(CONDITION){si #GET{total}|!={0}}>
+		<:amap:avant_le:>
+		<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
+			<BOUCLE_evenementfin(EVENEMENTS){id_rubrique}{!par date_debut}{age<0}{0,1}>[(#DATE_DEBUT|affdate{'d/m/Y'}).]</BOUCLE_evenementfin>
+		</BOUCLE_rub>
+	</BOUCLE_test>
+</p>
+
+<B_paniers>
+<div class="liste-objets">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+<table class="spip liste">
+	<thead>
+	<tr class="first_row">
+		<th class='producteur' scope='col'><:amap:producteur:></th>
+		<th class='date_livraison' scope='col'><:amap:date_distribution:></th>
+		<th class='panier_dispo' scope='col'><:amap:panier_dispo_interface:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_paniers(AMAP_PANIERS) {pagination 20} {par date_distribution}{age<0}{id_auteur}{dispo=#ENV{dispo,non}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+		<td class='nom'><BOUCLE_producteur(AUTEURS){tous}{id_auteur=#ID_PRODUCTEUR}>#NOM</BOUCLE_producteur></td>
+		<td class='date_production'>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
+		[(#ENV{dispo,non}|=={non}|oui)[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+			[(#CONFIG{amap/email}|=={oui}|oui)<!-- envoie par mail d'un panier dispo -->
+			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
+				|parametre_url{nom_adherent,#NOM}
+				|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}
+				|parametre_url{id_amap_panier,#ID_AMAP_PANIER}
+				|parametre_url{id_auteur,#ID_AUTEUR}
+				|parametre_url{id_producteur,#ID_PRODUCTEUR}
+				|parametre_url{date_distribution2,#DATE_DISTRIBUTION}
+				|parametre_url{mail,oui}
+				)]'><:amap:mettre_disposition:></a></td>
+			]
+			[(#CONFIG{amap/email}|=={oui}|non)<!-- afficher sur une page les paniers dispo -->
+			<td class='panier_dispo'><a href='[(#URL_PAGE{panier_dispo}
+				|parametre_url{nom_adherent,#NOM}
+				|parametre_url{date_distribution,[(#DATE_DISTRIBUTION|affdate{"d/m/Y"})]}
+				|parametre_url{id_amap_panier,#ID_AMAP_PANIER}
+				|parametre_url{id_auteur,#ID_AUTEUR}
+				|parametre_url{id_producteur,#ID_PRODUCTEUR}
+				|parametre_url{date_distribution2,#DATE_DISTRIBUTION}
+				|parametre_url{mail,non}
+				)]'><:amap:mettre_disposition:></a></td>
+			]
+		]]
+	</tr>
+	</BOUCLE_paniers>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_paniers>
+</BOUCLE_auteur>

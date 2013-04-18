@@ -1,0 +1,41 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+  
+  Appeler depuis ?exec=panier_adherent
+
+]
+#CACHE{0}
+<BOUCLE_responsables1(AMAP_RESPONSABLES) {id_auteur} />
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:vous_etes_responsable_distribution, amap:vous_etes_responsable_distributions})]
+<//B_responsables1>
+
+<B_responsables>
+<div class="liste-objets">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+<table class="spip liste">
+	<!--
+	<thead>
+	<tr class="first_row">
+		<th class='date_distribution' scope='col'><:amap:date_distribution:></th>
+	</tr>
+	</thead>
+	-->
+	<tbody>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+	<BOUCLE_responsables(AMAP_RESPONSABLES auteurs) {par date_distribution}{pagination 20}{id_auteur}>
+		[<td class='date_distribution'>(#DATE_DISTRIBUTION|affdate{'d/m/Y'}|unique)</td>]
+		[<td class='date_distribution'>(#DATE_DISTRIBUTION|affdate{'d/m/Y'}|unique)</td>]
+		[<td class='date_distribution'>(#DATE_DISTRIBUTION|affdate{'d/m/Y'}|unique)</td>]
+		[<td class='date_distribution'>(#DATE_DISTRIBUTION|affdate{'d/m/Y'}|unique)</td>]
+	</BOUCLE_responsables>
+	</tr>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_responsables>
+	<:amap:pas_responsable_distribution:>
+<//B_responsables>

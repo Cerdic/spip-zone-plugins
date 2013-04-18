@@ -5,13 +5,14 @@
   Distribue sous licence GPL
 
 ]
+<BOUCLE_panniers(AMAP_PANIERS){id_auteur=#SESSION{id_auteur}}>#SET{paniers,#TOTAL_BOUCLE|singulier_ou_pluriel{amap:votre_panier, amap:vos_paniers}}</BOUCLE_panniers>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:amap:vos_paniers:></strong></p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on">#GET{paniers}</strong></p>
 
 <div class="contenu-principal">
 <div class="cartouche">
-	<h1 class="h1"><:amap:vos_paniers:></h1>
+	<h1 class="h1">#GET{paniers}</h1>
 </div>
-[(#SESSION{id_auteur}|oui)<INCLURE{fond=prive/inclure/liste_panier_adherent,env}{id_auteur=#SESSION{id_auteur}}>]
+[(#SESSION{id_auteur}|oui)<INCLURE{fond=prive/squelettes/inclure/liste_panier_adherent,env}{id_auteur=#SESSION{id_auteur}}>]
 [(#SESSION{id_auteur}|non)<:amap:pas_connecte_ou_reconnu:>]
 </div>

@@ -1,0 +1,65 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 - 2013 Amap
+  Distribue sous licence GPL
+
+]
+<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
+	<p>
+		<:amap:impression_paniers_fonction_date:>
+		<table border="0" width="100%">
+			<BOUCLE_paniers(EVENEMENTS){id_rubrique}{par date_debut}>
+				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+					<td class="center">
+						<BOUCLE_paniers_distribution(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
+							<a href="[(#URL_ECRIRE{pdf_paniers}|parametre_url{date_distribution,#DATE_DEBUT})]" target="_blank">
+						</BOUCLE_paniers_distribution>
+							[(#DATE_DEBUT|affdate_court)]
+						<BOUCLE_paniers_distribution2(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
+							</a>
+						</BOUCLE_paniers_distribution2>
+					</td>
+				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+			</BOUCLE_paniers>
+			[(#TOTAL_BOUCLE|alterner{'</tr>', '', '', '', ''})]
+			<//B_paniers>
+		</table>
+	</p>
+	<p></p>
+	<p>
+		<:amap:impression_paniers_fonction_mois:>
+		<table border="0" width="100%">
+			<BOUCLE_paniers_mois(EVENEMENTS){id_rubrique}{par date_debut}>
+				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+					[<td class="center">
+						<a href="[(#URL_ECRIRE{pdf_paniers_mois}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]" target="_blank">
+						(#DATE_DEBUT|affdate_mois_annee|unique{panier})
+						</a>
+					</td>]
+				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+			</BOUCLE_paniers_mois>
+			[(#TOTAL_BOUCLE|alterner{'</tr>', '', '', '', ''})]
+			<//B_paniers_mois>
+		</table>
+	</p>
+	<p></p>
+	<p>
+		<:amap:impression_responsables_fonction_mois:>
+		<table border="0" width="100%">
+			<BOUCLE_responsable(EVENEMENTS){id_rubrique}{par date_debut}>
+				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+					[<td class="center">
+						<a href="[(#URL_ECRIRE{pdf_responsables}|parametre_url{mois_distribution,#DATE_DEBUT|affdate{Y-m}})]" target="_blank">
+						(#DATE_DEBUT|affdate_mois_annee|unique{responsable})
+						</a>
+					</td>]
+				[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+			</BOUCLE_responsable>
+			[(#TOTAL_BOUCLE|alterner{'</tr>', '', '', '', ''})]
+			<//B_responsable>
+		</table>
+	</p>
+</BOUCLE_rub>
+<:amap:pas_article_agenda:>
+<//B_rub>
