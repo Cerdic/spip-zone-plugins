@@ -36,6 +36,6 @@
 
 	<utilise nom="fpdf" compatibilite="[0.0.1;[" />
 
-	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="images/amap-16.png" action="mini_doc" />
+	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="prive/themes/spip/images/amap-16.png" action="mini_doc" />
 
 </paquet>
