@@ -158,7 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
 	'media_publie_titre' => 'Media published
 	--------------',
-	'media_valide_date' => 'Sous réserve de changement, ce média sera publié', # NEW
+	'media_valide_date' => 'Subject to change, this media will be published',
 	'media_valide_detail' => 'The media "@titre@" has been validated by @connect_nom@.',
 	'media_valide_sujet' => '[@nom_site_spip@] VALIDATED : @titre@',
 	'media_valide_titre' => 'Média validated
