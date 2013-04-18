@@ -1,7 +1,7 @@
 <B_auteurs>
 [<h2 class="h2">(#ENV*{titre})</h2>]
 #ANCRE_PAGINATION
-[<p>(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_nb_participants,tradlang:info_nb_participants})</p>]
+[<p>(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_nb_participant,tradlang:info_nb_participants})</p>]
 #SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #SET{debut,#ENV{debut_auteurs,#EVAL{_request("debut_auteurs");}}}
 #SET{p,''}
