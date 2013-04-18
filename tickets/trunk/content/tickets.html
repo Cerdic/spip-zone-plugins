@@ -31,7 +31,7 @@
 <div class="ticket contenu-principal">
 	<div class="cartouche">
 		[(#AUTORISER{ecrire, ticket}|oui)
-			<a class="i_new" href="[(#URL_PAGE{editer_ticket})]"><:tickets:creer_ticket:></a>
+			<a class="i_new" href="[(#URL_PAGE{editer_ticket}|parametre_url{composant,#ENV{composant}}|parametre_url{version,#ENV{version}}|parametre_url{severite,#ENV{severite}})]"><:tickets:creer_ticket:></a>
 		]
 		<h1 class="titre"><:tickets:tickets:></h1>
 	</div>
