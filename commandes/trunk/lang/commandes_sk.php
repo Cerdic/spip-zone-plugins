@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_modifier' => 'Zmeniť objednávku:',
 	'commande_montant' => 'Množstvo',
 	'commande_nouvelle' => 'Nová objednávka',
-	'commande_numero' => 'Objednávka č. ',
+	'commande_numero' => 'Objednávka č. ', # MODIF
 	'commande_reference' => 'Číslo',
 	'commande_reference_numero' => 'Č. objednávky ',
 	'commande_statut' => 'Štádium',
@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_titre' => 'Faktúra',
 
 	// I
+	'info_commandes' => 'Commandes', # NEW
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 

@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_modifier' => 'Modify the order:',
 	'commande_montant' => 'Amount',
 	'commande_nouvelle' => 'New order',
-	'commande_numero' => 'Order No. ',
+	'commande_numero' => 'Order No. ', # MODIF
 	'commande_reference' => 'Reference',
 	'commande_reference_numero' => 'Reference No. ',
 	'commande_statut' => 'Status',
@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_titre' => 'Invoice',
 
 	// I
+	'info_commandes' => 'Commandes', # NEW
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_toutes_commandes' => 'All orders',
 

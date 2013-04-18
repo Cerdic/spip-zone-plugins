@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_modifier' => 'Modifier la commande :',
 	'commande_montant' => 'Montant',
 	'commande_nouvelle' => 'Nouvelle commande',
-	'commande_numero' => 'Commande ', # MODIF
+	'commande_numero' => 'Commande ',
 	'commande_reference' => 'Référence',
 	'commande_reference_numero' => 'Référence n° ', # MODIF
 	'commande_statut' => 'Statut',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_titre' => 'Facture',
 
 	// I
-	'info_commandes'=>'Commandes',
+	'info_commandes' => 'Commandes',
 	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_toutes_commandes' => 'Toutes les commandes',
 
