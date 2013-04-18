@@ -6,7 +6,7 @@
 	compatibilite="[2.0.10;3.0.99]"
 	logo="img_pack/licence_logo.png"
 	schema="0.2.0"
-	documentation="http://www.spip-contrib.net/spip.php?article2147"
+	documentation="http://contrib.spip.net/2147"
 >	
 
 	<nom>Licence</nom>

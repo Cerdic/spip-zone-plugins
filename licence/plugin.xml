@@ -22,7 +22,7 @@
 			[en]Link a license on articles and documents
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2147</lien>
+	<lien>http://contrib.spip.net/2147</lien>
 	<licence>GPL v3</licence>
 	<fonctions>licence_fonctions.php</fonctions>
 	<prefix>licence</prefix>
