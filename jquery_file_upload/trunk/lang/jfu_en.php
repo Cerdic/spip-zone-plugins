@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_file_size_limit' => 'The maximum size of a file is @taille@ MB',
 	'message_queue_limit_max' => 'The maximum number of files in the queue is @nb@.',
-	'message_types_fichiers_autorises' => 'All file extensions are: @types@', # MODIF
+	'message_types_fichiers_autorises' => 'All authorized file extensions are: @types@',
 
 	// T
 	'temps_passe' => 'passed',
