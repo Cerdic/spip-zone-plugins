@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'This form doesn\'t exist.',
 
 	// F
-	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user\'s identity won\'t be recorded.', # MODIF
+	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user\'s identity won\'t be recorded.',
 	'formulaires_aucun' => 'There is no form for now',
 	'formulaires_dupliquer' => 'Duplicate the form',
 	'formulaires_dupliquer_copie' => '(copy)',
@@ -148,7 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Make the form results anonymous (don\'t keep any tracks of user who have answered).', # MODIF
+	'traiter_enregistrement_option_anonymiser_explication' => 'Make the form results anonymous (don\'t keep any tracks of user who have answered).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable from witch the form will be anonymized',
