@@ -35,7 +35,6 @@ function exec_ajout_don() {
 		echo recuperer_fond('prive/editer/editer_asso_dons', array (
 			'id_don' => 0,
 			'id_auteur' => $id_auteur,
-			'editable' => autoriser('editer_compta', 'association')
 		));
 /// AFFICHAGES_CENTRAUX : FIN
 		fin_page_association();

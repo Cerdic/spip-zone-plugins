@@ -14,25 +14,23 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_asso_don_charger_dist($id_don=0, $id_auteur=0, $editable=true) {
+function formulaires_editer_asso_don_charger_dist($id_don=0, $id_auteur=0) {
 	$contexte = formulaires_editer_objet_charger('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
-	if (!$id_don) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui
-		$contexte['date_don'] = date('Y-m-d');
+	if (!$id_don) { // si c'est un nouveau don...
+		$contexte['date_don'] = date('Y-m-d'); // ...on charge la date d'aujourd'hui
+		if (is_numeric($id_auteur)) { // si de plus on a le parametre id_auteur, c'est qu'on vient de la page d'ajout d'un membre :
+			$contexte['id_auteur'] = $id_auteur; // on preselectionnera cet auteur
+			$contexte['auteur_fixe'] = true; // et on ne pourra pas le changer (ni la date de donation)
+		}
 	}
 	association_chargeparam_operation('dons', $id_don, $contexte);
 	association_chargeparam_destinations('dons', $contexte);
 
 	// paufiner la presentation des valeurs
-	if (!$contexte['id_auteur'] AND is_numeric($id_auteur)) {
-		$contexte['id_auteur']= $id_auteur;
-		$contexte['nom']= sql_getfetsel('nom', 'spip_auteurs', "id_auteur=$id_auteur");
-		$contexte['auteur_fixe']= true;
-	}
 	if ($contexte['argent'])
 		$contexte['argent'] = association_formater_nombre($contexte['argent']);
 	if ($contexte['valeur'])
 		$contexte['valeur'] = association_formater_nombre($contexte['valeur']);
-	$contexte['readonly'] = $editable ? '' : ' readonly="readonly"';
 	return $contexte;
 }
 

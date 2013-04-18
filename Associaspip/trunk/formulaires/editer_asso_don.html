@@ -5,7 +5,7 @@
 		<div>#ACTION_FORMULAIRE{#ENV{action}}
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_don})</span>]
 		<label for="date_don"><:asso:date_aaaa_mm_jj:></label>
-		<input type="[(#HTML5|?{date,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don" class="date" #ENV{readonly} />
+		<input type="[(#HTML5|?{date,text})]" name="date_don" [value="(#ENV{date_don}|affdate{Y-m-d})"] id="date_don" class="date" [(#ENV{auteur_fixe}|oui)readonly="readonly"] />
 		</div>
 		<fieldset>
 			<legend><:asso:bienfaiteur:></legend>
@@ -24,7 +24,6 @@
 <INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation=#META{/association/classe_produits}, id_dest, montant_dest, defaut_dest, env} />
 			</ul>
 		</fieldset>
-[(#ENV{auteur_fixe}|oui)
 		<fieldset>
 			<legend><:asso:dons_en_nature:></legend>
 			<ul>
@@ -45,7 +44,6 @@
 <INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 			</ul>
 		</fieldset>
-]
 <INCLURE{fond=prive/editer/bouton_validation, pass_ok=#ENV{id_don} } />
 	</form>
 </div>
