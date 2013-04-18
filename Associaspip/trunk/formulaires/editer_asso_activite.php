@@ -64,7 +64,7 @@ function formulaires_editer_asso_activite_verifier_dist($id_activite=0) {
 }
 
 function formulaires_editer_asso_activite_traiter_dist($id_activite=0) {
-	return formulaires_editer_objet_traiter('asso_activite', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.association_recuperer_entier('id_evenement')), '');
+	return formulaires_editer_objet_traiter('asso_activites', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.association_recuperer_entier('id_evenement')), '');
 }
 
 ?>

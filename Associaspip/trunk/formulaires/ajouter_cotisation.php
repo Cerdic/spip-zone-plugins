@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_ajouter_cotisation_charger_dist($id_auteur, $nom_prenom, $id_categorie, $validite, $editable) {
 	if ($id_categorie) { // si le membre a une categorie

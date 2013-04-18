@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_editer_asso_meta_utilisateur_charger_dist($nom_meta='') {
 	return array('nom_meta' => str_replace('_', ' ', str_replace('meta_utilisateur_', '', $nom_meta)));

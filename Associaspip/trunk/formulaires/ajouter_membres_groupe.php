@@ -12,11 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_ajouter_membres_groupe_charger_dist($id_groupe='') {
 	$contexte['id_groupe'] = $id_groupe;
-	$contexte['_action'] = array("ajouter_membres_groupe",$id_groupe); // pour passer securiser action
+	$contexte['_action'] = array("ajouter_membres_groupe", $id_groupe); // pour passer securiser action
 	return $contexte;
 }
 

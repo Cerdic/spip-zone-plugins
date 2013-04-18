@@ -35,7 +35,7 @@ function formulaires_editer_asso_destination_verifier_dist($id_destination=9) {
 }
 
 function formulaires_editer_asso_destination_traiter_dist($id_destination=0) {
-	return formulaires_editer_objet_traiter('asso_destination', $id_destination, '', '',  generer_url_ecrire('destination'), '');
+	return formulaires_editer_objet_traiter('asso_destinations', $id_destination, '', '',  generer_url_ecrire('destination'), '');
 }
 
 ?>

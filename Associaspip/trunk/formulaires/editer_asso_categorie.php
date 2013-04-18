@@ -13,10 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/association_comptabilite');
 
 function formulaires_editer_asso_categorie_charger_dist($id_categorie=0) {
-	$id_categorie = association_passeparam_id('categorie');
 	$contexte = formulaires_editer_objet_charger('asso_categories', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
 
 	// paufiner la presentation des montants

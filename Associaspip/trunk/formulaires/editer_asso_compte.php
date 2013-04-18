@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_editer_asso_compte_charger_dist($id_compte=0) {
     $contexte = formulaires_editer_objet_charger('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
@@ -45,7 +44,8 @@ function formulaires_editer_asso_compte_charger_dist($id_compte=0) {
 		}
 	}
     }
-    if ($code) echo http_script($code);
+    if ($code)
+	echo http_script($code);
 
     // paufiner la presentation des valeurs
     $contexte['depense'] = association_formater_nombre($contexte['depense']);

@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_editer_membres_groupe_charger_dist($id_groupe='') {
 	$contexte['id_groupe'] = $id_groupe;
