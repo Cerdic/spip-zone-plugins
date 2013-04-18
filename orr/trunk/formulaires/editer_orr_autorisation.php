@@ -52,7 +52,7 @@ function formulaires_editer_orr_autorisation_traiter_dist($id_autorisation="",$r
 
 
     // Détermination du type d'objet et du nom à afficher : orr_autorisation_nom
-$valeur_statuts=array("6forum" => "Visiteur","1comite"=>"Rédacteur","0minirezo"=>"Administrateur");
+$valeur_statuts=array("tous" => "Tous","6forum" => "Visiteur","1comite"=>"Rédacteur","0minirezo"=>"Administrateur");
 
     if ($orr_statut == "statut"){
         $type_objet="statut";

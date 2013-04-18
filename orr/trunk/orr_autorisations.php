@@ -102,7 +102,12 @@ function autoriser_orrreservation_creer_dist($faire, $type, $id, $qui, $opt) {
 
 // voir les fiches completes
 function autoriser_orrreservation_voir_dist($faire, $type, $id, $qui, $opt) {
-	$statut=$qui['statut'];
+    if ($qui['statut']) {
+        $statut=$qui['statut'];
+    }else {
+        $statut="tous";
+    }
+	//$statut=$qui['statut'];
     $id_auteur=$qui['id_auteur'];
 	$autorisation="V";
 	$resultat=recherche_autorisation($id,$statut,$autorisation,$id_auteur);
