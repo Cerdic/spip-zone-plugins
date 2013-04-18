@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La saisie d\'un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d\'un courriel.', # NEW
-	'cfg_forum_champs_obligatoires' => 'Champs obligatoires', # NEW
+	'cfg_explication_nom_obligatoire' => 'Entering a name or nickname is required to post a comment. You can also choose to make email mention compulsory.',
+	'cfg_forum_champs_obligatoires' => 'Mandatory fields',
 	'cfg_forum_format_fil' => 'List or thread?',
 	'cfg_forum_longueur' => 'Length of messages',
 	'cfg_forum_longueur_maxi' => 'Maximum length',
 	'cfg_forum_longueur_mini' => 'Minimum length',
 	'cfg_forum_permalien' => 'Permalink',
-	'cfg_label_apparence_permalien' => 'Apparence du lien permanent vers le commentaire', # NEW
+	'cfg_label_apparence_permalien' => 'Appearance of the permanent link to the comment',
 	'cfg_label_apparence_permalien_aucun' => 'None',
-	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)', # NEW
-	'cfg_label_apparence_permalien_diese' => 'Dièse (#)', # NEW
-	'cfg_label_apparence_permalien_picto' => 'Picto', # NEW
-	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d\'un couriel', # NEW
-	'cfg_label_presentation_fil' => 'Présentation du fil de discussion', # NEW
+	'cfg_label_apparence_permalien_compteur' => 'Counter (1.)',
+	'cfg_label_apparence_permalien_diese' => 'Sharp (#)',
+	'cfg_label_apparence_permalien_picto' => 'Pictogram',
+	'cfg_label_email_obligatoire' => 'Make mandatory the email mention',
+	'cfg_label_presentation_fil' => 'Thread presentation',
 	'cfg_label_presentation_fil_liste' => 'Comments list (flat)',
 	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)', # NEW
 	'cfg_label_presentation_fil_thread1' => 'Enfilade de commentaires à un niveau', # NEW
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email' => 'Email (not published)',
 	'label_nom' => 'Name',
-	'label_notification' => 'Prévenez-moi de tous les nouveaux commentaires de cette discussion par email', # NEW
+	'label_notification' => 'Notify me of new comments to this discussion by email',
 	'label_url' => 'Your web site',
 	'lien_suivre_commentaires' => 'Follow the comments:',
 
