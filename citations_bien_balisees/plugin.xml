@@ -2,7 +2,7 @@
 	<nom>Citations bien balis&#233;es</nom>
 	<auteur>Bertrand Marne, d'apr#&232;s [romy.tetue.net->http://romy.tetue.net/des-citations-bien-balisees]) - &#169; 2009</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>stable</etat>
 	<slogan>Traitement typographique des citations courtes</slogan>
 	<description>
@@ -29,5 +29,5 @@
 		<inclure>citations_bb_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
