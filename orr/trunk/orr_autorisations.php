@@ -26,7 +26,9 @@ $res = sql_select(
 
 	while ($r=sql_fetch($res)) {
 		
-		if (($r['type'] == "statut") AND ($r['statut'] == "$statut_connecte") AND (strpos($r['valeur'], $autorisation) !== false)) $result = true;
+        $valeur_statut=array("tous"=>"1","6forum"=>"2","1comite"=>"3","0minirezo"=>"4");
+		//if (($r['type'] == "statut") AND ($r['statut'] == "$statut_connecte") AND (strpos($r['valeur'], $autorisation) !== false)) $result = true;
+		if (($r['type'] == "statut") AND ($valeur_statut[$r['statut']] <= $valeur_statut[$statut_connecte]) AND (strpos($r['valeur'], $autorisation) !== false)) $result = true;
 
         if ($r['type'] == "grappe") {
             $res_grappe=sql_select(
