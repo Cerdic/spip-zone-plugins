@@ -1,5 +1,6 @@
 <traduction module="getid3" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/getID3/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/getid3?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Nathan" lien="http://trad.spip.net/auteur/nathan" />
 	</langue>
