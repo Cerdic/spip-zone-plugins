@@ -41,7 +41,7 @@ function formulaires_editer_asso_categorie_verifier_dist($id_categorie=0) {
 }
 
 function formulaires_editer_asso_categorie_traiter_dist($id_categorie=0) {
-	return formulaires_editer_objet_traiter('asso_categorie', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
+	return formulaires_editer_objet_traiter('asso_categories', $id_categorie, '', '',  generer_url_ecrire('categories'), '');
 }
 
 ?>

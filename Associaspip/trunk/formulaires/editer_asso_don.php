@@ -55,7 +55,7 @@ function formulaires_editer_asso_don_verifier_dist($id_don=0) {
 }
 
 function formulaires_editer_asso_don_traiter($id_don=0) {
-	return formulaires_editer_objet_traiter('asso_don', $id_don, '', '',  generer_url_ecrire('dons'), '');
+	return formulaires_editer_objet_traiter('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
 }
 
 ?>

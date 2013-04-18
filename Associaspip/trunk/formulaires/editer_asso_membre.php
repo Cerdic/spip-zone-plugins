@@ -44,7 +44,7 @@ function formulaires_editer_asso_membre_traiter($id_auteur) {
 	$action_ajouter_groupes = charger_fonction('ajouter_membre_groupes', 'action');
 	$action_ajouter_groupes($id_auteur);
 	// traitement des informations du membre
-	return formulaires_editer_objet_traiter('asso_membre', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
+	return formulaires_editer_objet_traiter('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
 }
 
 ?>

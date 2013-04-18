@@ -95,7 +95,7 @@ function formulaires_editer_asso_pret_verifier_dist($id_pret=0) {
 
 function formulaires_editer_asso_pret_traiter_dist($id_pret=0) {
 	$id_ressource = association_recuperer_entier('id_ressource');
-	return formulaires_editer_objet_traiter('asso_pret', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
+	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
 }
 
 ?>

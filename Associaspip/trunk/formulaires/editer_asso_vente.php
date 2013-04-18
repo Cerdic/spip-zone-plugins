@@ -61,7 +61,7 @@ function formulaires_editer_asso_vente_verifier_dist($id_vente=0) {
 }
 
 function formulaires_editer_asso_vente_traiter($id_vente=0) {
-	return formulaires_editer_objet_traiter('asso_vente', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
+	return formulaires_editer_objet_traiter('asso_ventes', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
 }
 
 ?>

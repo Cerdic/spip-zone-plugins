@@ -81,7 +81,7 @@ function formulaires_editer_asso_compte_verifier_dist($id_compte=0) {
 }
 
 function formulaires_editer_asso_compte_traiter($id_compte=0) {
-    return formulaires_editer_objet_traiter('asso_compte', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
+    return formulaires_editer_objet_traiter('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
 }
 
 ?>
