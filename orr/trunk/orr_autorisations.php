@@ -95,7 +95,12 @@ function autoriser_orrressource_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 // creer
 function autoriser_orrreservation_creer_dist($faire, $type, $id, $qui, $opt) {
-	$statut=$qui['statut'];
+    if ($qui['statut']) {
+        $statut=$qui['statut'];
+    }else {
+        $statut="tous";
+    }
+	//$statut=$qui['statut'];
     $id_auteur=$qui['id_auteur'];
 	$autorisation="C";
 	$resultat=recherche_autorisation($id,$statut,$autorisation,$id_auteur);
@@ -118,7 +123,12 @@ function autoriser_orrreservation_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // modifier
 function autoriser_orrreservation_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$statut=$qui['statut'];
+    if ($qui['statut']) {
+        $statut=$qui['statut'];
+    }else {
+        $statut="tous";
+    }
+	//$statut=$qui['statut'];
     $id_auteur=$qui['id_auteur'];
 	$autorisation="M";
 	$resultat=recherche_autorisation($id,$statut,$autorisation,$id_auteur);
@@ -127,7 +137,12 @@ function autoriser_orrreservation_modifier_dist($faire, $type, $id, $qui, $opt) 
 
 // supprimer
 function autoriser_orrreservation_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	$statut=$qui['statut'];
+    if ($qui['statut']) {
+        $statut=$qui['statut'];
+    }else {
+        $statut="tous";
+    }
+	//$statut=$qui['statut'];
     $id_auteur=$qui['id_auteur'];
 	$autorisation="S";
 	$resultat=recherche_autorisation($id,$statut,$autorisation,$id_auteur);
