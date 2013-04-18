@@ -129,7 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_contacts' => '@nb@ contacts',
 	'nom_contact' => 'Name',
 	'nom_organisation' => 'Name',
-	'non_renseigne' => 'Non renseigné', # NEW
+	'non_renseigne' => 'Unknown',
 
 	// O
 	'organisation' => 'Organization',
