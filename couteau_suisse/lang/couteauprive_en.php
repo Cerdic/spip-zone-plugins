@@ -93,7 +93,7 @@ _ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_
 	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
 	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
 	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
-	'autorisations_surcharge' => 'Fonction surchargée', # NEW
+	'autorisations_surcharge' => 'Overloaded function',
 	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
 	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
 	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
@@ -223,7 +223,7 @@ N.B. by changing the second parameter you will lose any standard SPIP styles ass
 	'corbeille_objets_lies' => '@nb_lies@ connection(s) detected.',
 	'corbeille_objets_vide' => 'No object in the wastebin',
 	'corbeille_objets_vider' => 'Delete the selected objects',
-	'corbeille_vider' => 'Empty the wastebin:', # MODIF
+	'corbeille_vider' => 'Detected objects:',
 	'couleurs:aide' => 'Text colouring: <b>[coul]text[/coul]</b>@fond@ with <b>coul</b> = @liste@',
 	'couleurs:description' => 'Provides short-cuts to add colours to any text on the site (articles, news items, titles, forums, ...) by using bracket tags as short-cuts: <code>[colour]text[/colour]</code>.
 
@@ -301,7 +301,7 @@ This tool may be combined with "[.->sommaire]".',
 	'detail_spip_options_ok' => '{{Note}}: This tool currently gives the SPIP options priority using the "@lien@" utility.',
 	'detail_surcharge' => 'Tool overloaded:',
 	'detail_traitements' => 'Treatment:',
-	'devdebug:description' => '{{This tool enables you to see any PHP errors on the screen.}}<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP space to which these settings will apply.',
+	'devdebug:description' => '{{This tool enables you to see any PHP errors on the screen.}}<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP space to which these settings will apply.', # MODIF
 	'devdebug:item_e_all' => 'All messages errors (all)',
 	'devdebug:item_e_error' => 'Serious or fatal errors (error)',
 	'devdebug:item_e_notice' => 'Execution notices (notice)',
@@ -365,9 +365,9 @@ When making an official update, update the associated remote file (click above o
 
 N.B. some Swiss Knife tools require {jQuery} to be installed. ',
 	'f_jQuery:nom' => 'Deactivate jQuery',
-	'fichiers_detectes' => 'Fichiers détectés :', # NEW
-	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
-	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
+	'fichiers_detectes' => 'Detected files:',
+	'fichiers_introuvables' => 'Files not found',
+	'fichiers_vider' => 'Delete selected files',
 	'filets_sep:aide' => 'Dividing lines: <b>__i__</b> or <b>i</b> is a number between <b>0</b> and <b>@max@</b>.<br />Other available lines: @liste@',
 	'filets_sep:description' => 'Inserts separating lines for any SPIP texts which can be customised with a stylesheet.
 _ The syntax is: «__code__», where "code" is either the identifying number (from 0 to 7) of the line to insert and which is linked to the corresponding style, or the name of an image in the <code>dossier_de_mon_squelette/img/filets/</code> directory or by default, in the directory <code>@_DIR_CS_ROOT@img/filets/</code>.',
@@ -471,7 +471,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
-	'label:autorisations_alias' => 'Vos alias :', # NEW
+	'label:autorisations_alias' => 'Your aliases:',
 	'label:balise_decoupe' => 'Activate the #CS_DECOUPE tag:',
 	'label:balise_sommaire' => 'Activate the tag #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Tag for the titles:',
@@ -794,8 +794,8 @@ _ • {No cache}: temporarily deactivating the cache can be useful when the site
 _ • {Cache checking}: similar to the preceding option. However, all results are written to disk so that you can manually check them.</q1>[[%radio_desactive_cache4%]]',
 	'spip_cache:description3' => '@puce@ The "Compresser" extension available in SPIP is used to compress the various CSS and JavaScript code sections of your pages and insert them in a static cache file. This speeds up the display of your site, and limits both the number of calls made to the server and the size of the files that need to be retrieved.',
 	'spip_cache:nom' => 'SPIP and the cache',
-	'spip_ecran:description' => 'Specify the screen width imposed on everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie.[[%spip_ecran%]][[->Et ajouter %tres_large% pixels à la largeur de l\'écran.]]
-{{ {Pensez à vider les caches de SPIP !} }}', # MODIF
+	'spip_ecran:description' => 'Specify the screen width imposed to everyone in the private zone. A narrow screen will display two columns and a wide screen will display three. The default settings leaves the user to make their own choice which will be stored in a browser cookie. [[%spip_ecran%]][[->And add %tres_large% pixels to the screen width.]]
+{{ {Think about emptying SPIP cache !} }}',
 	'spip_ecran:nom' => 'Screen width',
 	'spip_log:description' => '@puce@ Manage various parameters taken into account by SPIP to log events specific to website. PHP function to use <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Only keep %nombre_de_logs% file (s), each having %taille_des_logs% Ko maximum size <br/> <q3>{Reset one of these two boxes disables logs input.}</ q3>]]

@@ -303,7 +303,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont grâce à l\'outil «@lien@».',
 	'detail_surcharge' => 'Outil surchargé :',
 	'detail_traitements' => 'Traitements :',
-	'devdebug:description' => '{{Cet outil te permet de voir les erreurs PHP à l\'écran.}}<br />Tu peux choisir le niveau d\'erreurs d\'exécution PHP qui sera affiché si le débogueur est actif, ainsi que l\'espace SPIP sur lequel ces réglages s\'appliqueront.',
+	'devdebug:description' => '{{Cet outil te permet de voir les erreurs PHP à l\'écran.}}<br />Tu peux choisir le niveau d\'erreurs d\'exécution PHP qui sera affiché si le débogueur est actif, ainsi que l\'espace SPIP sur lequel ces réglages s\'appliqueront.', # MODIF
 	'devdebug:item_e_all' => 'Tous les messages d\'erreur (all)',
 	'devdebug:item_e_error' => 'Erreurs graves ou fatales (error)',
 	'devdebug:item_e_notice' => 'Notes d\'exécution (notice)',

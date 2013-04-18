@@ -293,7 +293,7 @@ Tento nástroj môžete spojiť s nástrojom "[zhrnutie.->sommaire]".',
 	'detail_spip_options_ok' => '{{Poznámka:}} Tento nástroj momentálne určuje prioritu nastavení SPIPU pomocou utility "@lien@".',
 	'detail_surcharge' => 'Preťažený nástroj:',
 	'detail_traitements' => 'Riešenie:',
-	'devdebug:description' => '{{Tento nástroj vám umožňuje vidieť všetky chyby PHP na obrazovke.}}<br />Môžete si zvoliť úroveň vykonávacích chýb PHP, ktorá sa zobrazí, keď budú ladič ako aj miesto, na ktoré sa tieto nastavenia použijú, aktívne.',
+	'devdebug:description' => '{{Tento nástroj vám umožňuje vidieť všetky chyby PHP na obrazovke.}}<br />Môžete si zvoliť úroveň vykonávacích chýb PHP, ktorá sa zobrazí, keď budú ladič ako aj miesto, na ktoré sa tieto nastavenia použijú, aktívne.', # MODIF
 	'devdebug:item_e_all' => 'Všetky správy o chybách (všetky)',
 	'devdebug:item_e_error' => 'Vážne alebo fatálne chyby',
 	'devdebug:item_e_notice' => 'Oznámenia o vykonaní',

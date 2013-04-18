@@ -302,7 +302,7 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'detail_spip_options_ok' => '{{Nota}}: Aquesta eina posa actualment les opcions SPIP més amunt gràcies a l\'eina «@lien@».',
 	'detail_surcharge' => 'Eina sobrecarregada:',
 	'detail_traitements' => 'Tractaments :',
-	'devdebug:description' => '{{Aquesta eina us permet veure els errors PHP a la pantalla.}}<br />Podeu escollir el nivell d\'errors d\'execució PHP que es mostrarà si el depurador està actiu, així com l\'espai SPIP sobre el que s\'aplicaran aquests paràmetres.',
+	'devdebug:description' => '{{Aquesta eina us permet veure els errors PHP a la pantalla.}}<br />Podeu escollir el nivell d\'errors d\'execució PHP que es mostrarà si el depurador està actiu, així com l\'espai SPIP sobre el que s\'aplicaran aquests paràmetres.', # MODIF
 	'devdebug:item_e_all' => 'Tots els missatges d\'error (all)',
 	'devdebug:item_e_error' => 'Errors greus o fatals (error)',
 	'devdebug:item_e_notice' => 'Notes d\'execució (notice)',
