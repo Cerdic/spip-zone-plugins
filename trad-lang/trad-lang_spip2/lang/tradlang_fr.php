@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_revision' => '@nb@ modification de traduction.',
 	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.',
 	'auteur_revisions' => '@nb@ modifications de traductions.',
+	'auteur_revisions_langue' => 'La langue de ses participations :',
+	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :',
 	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.',
-	'auteur_revisions_langue' => 'La langue de ses participations&nbsp;:',
-	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations&nbsp;:',
 
 	// B
 	'bouton_activer_lang' => 'Activer la langue "@lang@" pour ce module',
@@ -347,9 +347,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'Ses contributions',
 	'titre_revisions_sommaire' => 'Dernières modifications',
 	'titre_revisions_vos' => 'Vos contributions',
+	'titre_stats_ses' => 'Ses statistiques',
 	'titre_stats_trads_journalieres' => 'Nombre de révisions journalières',
 	'titre_stats_trads_mensuelles' => 'Nombre de révisions mensuelles',
-	'titre_stats_ses' => 'Ses statistiques',
 	'titre_stats_vos' => 'Vos statistiques',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Chaines de langue',

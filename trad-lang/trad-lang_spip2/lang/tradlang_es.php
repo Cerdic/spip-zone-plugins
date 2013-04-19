@@ -10,9 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucunmodule' => 'Ningún módulo.',
 	'auteur_revision' => '@nb@ modification de traduction.', # NEW
+	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'auteur_revisions' => '@nb@ modifications de traductions.', # NEW
 	'auteur_revisions_langue' => 'La langue de ses participations :', # NEW
 	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :', # NEW
+	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 
 	// B
 	'bouton_activer_lang' => 'Activar el idioma "@lang@" para este módulo',
@@ -94,10 +96,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importermodule' => 'Importar un módulo',
 	'info_1_tradlang' => '@nb@ cadena de idioma',
 	'info_1_tradlang_module' => '1 módulo de idioma',
+	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_aucun_tradlang_module' => 'Ningún módulo de idioma',
 	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.', # NEW
 	'info_chaine_jamais_modifiee' => 'Esta cadena nunca ha sido modificada.',
 	'info_chaine_originale' => 'Esta cadena es la cadena original. ',
+	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
 	'info_contributeurs' => 'Colaboradores',
 	'info_filtrer_status' => 'Filtrar por estatus:',
 	'info_langue_mere' => '(idioma de origen)',
@@ -123,7 +127,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_new' => '@pc@% de los items prioritarios "@priorite@" son nuevos en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_ok' => 'Los módulos prioritarios "@priorite@" están traducidos un @pc@% en @lang@ (@langue_longue@)',
 	'info_nb_modules_favoris' => '@nb@ modules favoris.', # NEW
+	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
+	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
+	'info_nb_participants_lang' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_nb_tradlang' => '@nb@ cadenas de idioma',
 	'info_nb_tradlang_module' => '@nb@ módulos de idioma',
 	'info_percent_chaines' => '@traduites@ / @total@ cadenas traducidas en "[@langue@] @langue_longue@"',
