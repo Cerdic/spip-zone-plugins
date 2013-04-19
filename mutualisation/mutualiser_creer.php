@@ -223,19 +223,13 @@ function mutu_etape_creer_base($e, $options){
 							// du nom de la connexion via DNS
 							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB);
 
-							// definit-on des pass aleatoires ?
-							if ($options['creer_mot_de_passe_aleatoire'])
-								$password = randomPassword();
-							else
-								$password = _INSTALL_PASS_DB;
-
 							// requete differente entre pg et mysql...
 							$req = $err = array();
 							switch (strtolower(_INSTALL_SERVER_DB)){
 
 								case 'pg':
 									// d'abord creer l'utilisateur
-									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . $password . "'";
+									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . _INSTALL_PASS_DB . "'";
 									$err[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD 'xxx'";
 									// l'affecter a sa base de donnee
 									$req[] = $r = "GRANT ALL PRIVILEGES ON DATABASE "
@@ -246,16 +240,16 @@ function mutu_etape_creer_base($e, $options){
 								case 'mysql':
 								default:
 								// creer user
-								$req[] = "CREATE user '" . _INSTALL_NAME_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . $password . "'";
-								$err[] = "CREATE user '" . _INSTALL_NAME_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
+								$req[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
+								$err[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
 								// affecter à sa base
 									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '"
-										. _INSTALL_NAME_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
+										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
 									$err[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '"
-										. _INSTALL_NAME_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
+										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY 'xxx'";
 									break;
 
@@ -460,19 +454,5 @@ function mutu_etape_fin($e, $options){
 		" id='mutu'"
 	);
 	exit;
-}
-
-/*
- * Pour créer des mots de passe aléatoires
- */
-function randomPassword() {
-    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-    $pass = array(); //remember to declare $pass as an array
-    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    for ($i = 0; $i < 8; $i++) {
-        $n = rand(0, $alphaLength);
-        $pass[] = $alphabet[$n];
-    }
-    return implode($pass); //turn the array into a string
 }
 ?>
