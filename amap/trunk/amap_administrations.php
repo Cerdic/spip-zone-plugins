@@ -40,14 +40,11 @@ function amap_upgrade($nom_meta_base_version, $version_cible) {
 **/
 
 function amap_rubriques(){
-        create_rubrique("000. Agenda de la saison", "0");
-        $id_rubrique = id_rubrique("000. Agenda de la saison");
-        if ($id_rubrique >0) {
-                create_rubrique("001. Distribution", $id_rubrique);
-                create_rubrique("002. Événements", $id_rubrique);
-        }
-        create_rubrique("001. Archives", "0");
-        ecrire_config('amap/email', 'oui');
+	creer_rubrique_nommee("000. Agenda de la saison");
+	creer_rubrique_nommee("000. Agenda de la saison/001. Distribution");
+	creer_rubrique_nommee("000. Agenda de la saison/002. Événements");
+	creer_rubrique_nommee("001. Archives");
+	ecrire_config('amap/email', 'oui');
 }
 
 /**
