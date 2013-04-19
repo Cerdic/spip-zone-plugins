@@ -9,7 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'amap_description' => 'The plugin is developped to manage baskets and subscibers. 
-The baskets are created and given to someone subscribing. He can make its basket available if he cannot be there to get it on the distribution day.',
+The baskets are created and given to someone subscribing. He can make its basket available if he cannot be there to get it on the distribution day.', # MODIF
+	'amap_nom' => 'Amap', # NEW
 	'amap_slogan' => 'Baskets and subscribers management for CSA'
 );
 
