@@ -140,6 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilisé dans un contexte complexe (par exemple :  _T(\'@module@:item_\'.$variable)).',
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-être utilisé dans un contexte complexe. Nous vous invitons à le vérifier :',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :',
+	'message_ok_fichier_verification' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.',
 
 	// O
 	'onglet_generer' => 'Générer une langue',

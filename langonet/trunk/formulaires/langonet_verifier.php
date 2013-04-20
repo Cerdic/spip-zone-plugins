@@ -40,12 +40,19 @@ function formulaires_langonet_verifier_traiter() {
 	//  $ou_fichier   -> racine de l'arborescence a verifier 'plugins/auto/langonet'
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
-	$retour_select_langue = explode(':', _request('fichier_langue'));
-	$rep = $retour_select_langue[0];
-	$module = $retour_select_langue[1];
-	$langue = $retour_select_langue[2];
-	$ou_langue = $retour_select_langue[3];
-	$encodage = 'utf8';
+	if ($verification != 'fonction_l') {
+		$retour_select_langue = explode(':', _request('fichier_langue'));
+		$rep = $retour_select_langue[0];
+		$module = $retour_select_langue[1];
+		$langue = $retour_select_langue[2];
+		$ou_langue = $retour_select_langue[3];
+	}
+	else {
+		// Pour la vérification de la fonction _L(), on ne choisi pas de fichier de langue.
+		// Néanmoins, pour créer le fichier de langue corrigé en rajoutant les nouveaux items devant remplacer
+		// les appels à _L() il est nécessaire d'en choisir un.
+		// Aussi, on choisit la langue de référence pour le module
+	}
 
 	// Chargement de la fonction de verification
 	// et verification et formatage des resultats pour affichage
@@ -77,6 +84,7 @@ function formulaires_langonet_verifier_traiter() {
 			$mode = 'inutile';
 		}
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+		$encodage = 'utf8';
 //		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
@@ -85,7 +93,7 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
 		$retour['message_ok']['explication'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
 		$retour['message_ok']['resultats'] = $resultats;
 //		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);

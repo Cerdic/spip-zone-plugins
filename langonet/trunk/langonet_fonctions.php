@@ -2,6 +2,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_LANGONET_PATTERN_FICHIERS_LANG'))
+	define('_LANGONET_PATTERN_FICHIERS_LANG', '_[a-z]{2,3}\.php$');
+if (!defined('_LANGONET_PATTERN_CODE_LANGUE'))
+	define('_LANGONET_PATTERN_CODE_LANGUE', '%_(\w{2,3})(_\w{2,3})?(_\w{2,4})?$%im');
+
+
 /**
  * Creation de la liste des fichiers de log de verification
  *
@@ -90,9 +96,9 @@ function langonet_creer_bulle_fichier($fichier, $type='log', $action='telecharge
  * @param string $sel_l
  * @return array
  */
-function langonet_creer_select_langues($sel_l='0') {
+function langonet_creer_select_langues($sel_l='0', $exclure_paquet=true) {
 
-	$retour = creer_selects($sel_l, array());
+	$retour = creer_selects($sel_l, array(), $exclure_paquet);
 	return $retour['fichiers'];
 }
 
@@ -104,7 +110,7 @@ function langonet_creer_select_langues($sel_l='0') {
  */
 function langonet_creer_select_dossiers($sel_d=array()) {
 	if (is_string($sel_d)) $sel_d = array($sel_d);
-	$retour = creer_selects('0', $sel_d);
+	$retour = creer_selects('0', $sel_d, true);
 	return $retour['dossiers'];
 }
 
@@ -117,22 +123,25 @@ function langonet_creer_select_dossiers($sel_d=array()) {
  * @param array $sel_d option(s) du select des repertoire
  * @return array
  */
-function creer_selects($sel_l='0',$sel_d=array()) {
-	// Recuperation des repertoires des plugins
+function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true) {
+	// Recuperation des repertoires des plugins par défaut
 	$rep_plugins = lister_dossiers_plugins();
-	// Recuperation des repertoires des extensions
-	$rep_extensions = lister_dossiers_plugins(defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS);
-	// Recuperation des repertoires SPIP et squelettes
-	if (strlen($GLOBALS['dossier_squelettes'])) {
-		$rep_perso = explode(':', $GLOBALS['dossier_squelettes']);
+	// Recuperation des repertoires des extensions : _DIR_PLUGINS_DIST à partir de SPIP 3
+	$rep_extensions = lister_dossiers_plugins(_DIR_PLUGINS_DIST);
+	// Recuperation des repertoires des plugins supplémentaires en mutualisation : _DIR_PLUGINS_SUPPL
+	$rep_suppl = defined('_DIR_PLUGINS_SUPPL') ? lister_dossiers_plugins(_DIR_PLUGINS_SUPPL) : array();
+	// Recuperation des repertoires squelettes perso
+	$rep_perso = array();
+	$perso = strlen($GLOBALS['dossier_squelettes']) ? explode(':', $GLOBALS['dossier_squelettes']) : array('squelettes');
+	foreach($perso as $_rep) {
+		if (is_dir(_DIR_RACINE . $_rep))
+			$rep_perso[] = $_rep;
 	}
-	else {
-		$rep_perso[] = 'squelettes';
-	}
+	// Recuperation des repertoires SPIP
 	$rep_spip[] = rtrim(_DIR_RESTREINT_ABS, '/');
 	$rep_spip[] = 'prive';
 	$rep_spip[] = 'squelettes-dist';
-	$rep_scan = array_merge($rep_perso, $rep_extensions, $rep_plugins, $rep_spip);
+	$rep_scan = array_merge($rep_perso, $rep_plugins, $rep_suppl, $rep_extensions, $rep_spip);
 	
 	// construction des <select>
 	// -- les fichiers de langue
@@ -152,33 +161,42 @@ function creer_selects($sel_l='0',$sel_d=array()) {
 	//     $module (prefixe fichier de langue)
 	//     $langue (index nom de langue)
 	//     $ou_lang (chemin relatif vers fichier de langue a verifier)
-	foreach ($rep_scan as $rep) {
-		if (in_array($rep, $rep_plugins)) {
-			$reel_dir = _DIR_PLUGINS . $rep;
+	foreach ($rep_scan as $_rep) {
+		if (in_array($_rep, $rep_plugins)) {
+			$reel_dir = _DIR_PLUGINS . $_rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
 		}
-		else if (in_array($rep, $rep_extensions)) {
-			$reel_dir = (defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS) . $rep;
+		else if (in_array($_rep, $rep_extensions)) {
+			$reel_dir = _DIR_PLUGINS_DIST . $_rep;
+			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
+		}
+		else if (in_array($_rep, $rep_suppl)) {
+			$reel_dir = _DIR_PLUGINS_SUPPL . $_rep;
 			$ou_fichier = str_replace('../', '', $reel_dir) . '/';
 		}
 		else {
-			$reel_dir = _DIR_RACINE . $rep;
-			$ou_fichier = $rep . '/';
+			$reel_dir = _DIR_RACINE . $_rep;
+			$ou_fichier = $_rep . '/';
 		}
 		if (is_dir($reel_dir . '/lang/')) {
 			// on recupere tous les fichiers de langue directement places
-			// dans lang/ sans parcourir d'eventuels sous-repertoires
+			// dans lang/ sans parcourir d'eventuels sous-repertoires. On exclue si demandé ou par défaut
+			// les fichiers de langue du paquet.xml
 			$opt_lang = '';
-			foreach ($fic_lang = preg_files($reel_dir . '/lang/', '_[a-z]{2,3}\.php$', 250, false) as $le_module) {
-				preg_match_all("%_(\w{2,3})(_\w{2,3})?(_\w{2,4})?$%im", str_replace('.php', '', $le_module), $matches);
+			foreach ($fic_lang = preg_files($reel_dir . '/lang/', _LANGONET_PATTERN_FICHIERS_LANG, 250, false) as $le_module) {
+				preg_match_all(_LANGONET_PATTERN_CODE_LANGUE, str_replace('.php', '', $le_module), $matches);
 				$module = str_replace($matches[0][0].'.php', '', $le_module);
 				$module = str_replace($reel_dir . '/lang/', '', $module);
-				$langue = ltrim($matches[0][0], '_');
-				$ou_langue = str_replace('../', '', $reel_dir) . '/lang/';
-				$value = $rep.':'.$module.':'.$langue.':'.$ou_langue;
-				$opt_lang .= '<option value="' . $value;
-				$opt_lang .= ($value == $sel_l) ? '" selected="selected">' : '">';
-				$opt_lang .= str_replace('.php', '', str_replace($reel_dir . '/lang/', '', $le_module)) . '</option>' . "\n";
+				if (!$exclure_paquet
+				OR ($exclure_paquet	AND (strtolower(substr($module, 0, 7)) != 'paquet-'))) {
+					$liste[$module[1]] = dirname($_fichier) . '/';
+					$langue = ltrim($matches[0][0], '_');
+					$ou_langue = str_replace('../', '', $reel_dir) . '/lang/';
+					$value = $_rep.':'.$module.':'.$langue.':'.$ou_langue;
+					$opt_lang .= '<option value="' . $value;
+					$opt_lang .= ($value == $sel_l) ? '" selected="selected">' : '">';
+					$opt_lang .= str_replace('.php', '', str_replace($reel_dir . '/lang/', '', $le_module)) . '</option>' . "\n";
+				}
 			}
 			if ($opt_lang) {
 				$sel_lang .= '<optgroup label="' . str_replace('../', '', $reel_dir) . '/">' . "\n";
@@ -242,6 +260,28 @@ function lister_dossiers_plugins($rep_base=null) {
 		}
 	}
 	return $dossiers;
+}
+
+function langonet_identifier_reference($module, $ou_langue, &$tradlang) {
+	$langue = 'fr';
+	$tradlang=false;
+
+	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
+	if (file_exists($rapport_xml)) {
+		$tradlang = true;
+		if ($contenu = spip_file_get_contents($rapport_xml))
+			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+				$langue = $matches[1];
+	}
+
+	if (!file_exists($fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php')) {
+		$fichiers = preg_files(_DIR_RACINE . $ou_langue, "/lang/${module}_[^/]+\.php$");
+		$langue = '';
+		if ($fichiers[0])
+			$langue = str_replace($module . '_', '', basename($fichiers[0], '.php'));
+	}
+
+	return $langue;
 }
 
 ?>
