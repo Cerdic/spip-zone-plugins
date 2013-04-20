@@ -85,7 +85,7 @@ function formulaires_langonet_rechercher_traiter($type) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T('langonet:message_ok_item_trouve', array('pattern' => $resultats['pattern']));
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_item_trouve', array('pattern' => $pattern));
 		$retour['message_ok']['total'] = $resultats['total'];
 		$retour['message_ok']['trouves'] = $resultats['trouves'];
 	}

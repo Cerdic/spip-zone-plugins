@@ -85,9 +85,10 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-//		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
-//		$retour['message_ok']['resultats'] = $resultats;
-		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
+		$retour['message_ok']['resume'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
+		$retour['message_ok']['explication'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
+		$retour['message_ok']['resultats'] = $resultats;
+//		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
 	}
 	$retour['editable'] = true;
 	return $retour;
