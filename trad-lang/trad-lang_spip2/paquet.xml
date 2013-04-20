@@ -26,6 +26,7 @@
 	<pipeline nom="autoriser" inclure="tradlang_autoriser.php" />
 	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="tradlang_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="tradlang_pipelines.php" />
 	
 	<necessite nom="revisions" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.9.1;[" />

@@ -223,4 +223,22 @@ function tradlang_forum_objets_depuis_env($array){
 	$array['tradlang'] = id_table_objet('tradlang');
 	return $array;
 }
+
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
+ * Utiliser de bons labels pour nos champs sous révision
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
+function tradlang_revisions_chercher_label($flux){
+	if($flux['args']['objet'] == 'tradlang'){
+		if(in_array($flux['args']['champ'],array('str','traducteur','statut'))){
+			$flux['data'] = 'tradlang:info_'.$flux['args']['champ'];
+		}
+	}
+	return $flux;
+}
 ?>
