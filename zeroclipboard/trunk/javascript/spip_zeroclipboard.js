@@ -4,8 +4,6 @@ var clip = null;
 
 $(function(){
 	function clipcomplete(client,text){
-		console.log('clipcomplete');
-		console.log(client.domElement);
 		$(client.domElement)
 			.html(locale.zeroclipboard.link_title_copied)
 			.removeClass('copypaste_link')
