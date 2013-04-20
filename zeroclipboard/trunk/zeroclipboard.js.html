@@ -2,7 +2,7 @@
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-ZeroClipboard.setMoviePath('#CHEMIN{#EVAL{_DIR_LIB_ZEROCLIPBOARD}ZeroClipboard.swf}');
+ZeroClipboard.setDefaults({moviePath:'#EVAL{_DIR_LIB_ZEROCLIPBOARD}ZeroClipboard.swf'});
 
 if(typeof(window.locale) == 'undefined') window.locale = {};
 	

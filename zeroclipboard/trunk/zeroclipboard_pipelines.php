@@ -35,7 +35,7 @@ function zeroclipboard_header_prive($flux){
  */
 function zeroclipboard_insert_head($flux){
 	$flux .= '
-<script type="text/javascript" src="'.produire_fond_statique('zeroclipboard.js').'"></script>
+<script type="text/javascript" src="'.produire_fond_statique('zeroclipboard.js',array('prive'=>'oui')).'"></script>
 ';
 	return $flux;
 }
@@ -52,9 +52,9 @@ function zeroclipboard_insert_head($flux){
  */
 function zeroclipboard_jquery_plugins($plugins){
 	if(!test_espace_prive())
-		$plugins[] = _DIR_LIB_ZEROCLIPBOARD.'src/javascript/ZeroClipboard.js';
+		$plugins[] = _DIR_LIB_ZEROCLIPBOARD.'ZeroClipboard.js';
 	else
-		$plugins[] = str_replace(_DIR_RACINE,'',_DIR_LIB_ZEROCLIPBOARD).'src/javascript/ZeroClipboard.js';
+		$plugins[] = str_replace(_DIR_RACINE,'',_DIR_LIB_ZEROCLIPBOARD).'ZeroClipboard.js';
 	$plugins[] = 'javascript/spip_zeroclipboard.js';
 
 	return $plugins;
