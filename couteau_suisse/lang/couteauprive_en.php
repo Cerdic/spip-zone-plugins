@@ -586,6 +586,7 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'log_brut' => 'Data written in raw format (no HTML)',
 	'log_fileline' => 'Extra debug information',
 	'log_gravite' => 'Gravité', # NEW
+	'log_non' => 'Désactiver totalement les logs', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
