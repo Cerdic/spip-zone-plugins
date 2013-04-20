@@ -52,8 +52,8 @@ function association_vider_tables($nom_meta, $table) {
 // fonction qui va remplir ou mettre a jour la table spip_asso_groupes
 // pour y a definir les groupes gerant les autorisations (id<100)
 function association_gestion_autorisations_upgrade() {
-	// definir tous les groupes qui doivent exister
-	$groupes_autorisations = array(
+/// initialisations
+	$autorisations_nouvelles = array(
 #		1, 2, 3, 20, 21, 30, 31, // r59886 avant r67499
 		1, 2, 3, 21, 23, 31, 33, // r59886 apres r67499
 #		10, 32, 33, // r66289 avant r67499
@@ -61,27 +61,28 @@ function association_gestion_autorisations_upgrade() {
 #		11, 12, 40, 41, 50, 51, // r66769 avant r67499
 		11, 13, 41, 43, 51, 53, // r66769 apres r67499
 #		61, 63, 62, 66, 73, 74, 76, // r67500 avant r67499
-		63, 66, 64, 66, 73, 74, 76, // r67500 apres r67499
-	);
-
-	// recuperer tous ceux existants
-	$groupes_existants = array();
-	$query = sql_select('id_groupe', 'spip_asso_groupes', 'id_groupe<100');
-	while ($data = sql_fetch($query)) {
-		$groupes_existants[$data['id_groupe']] = TRUE;
+		61, 63, 64, 66, 73, 74, 76, // r67500 apres r67499
+	); // definir tous les groupes qui doivent exister
+	$autorisations_anciennes = sql_allfetsel('id_groupe', 'spip_asso_groupes', 'id_groupe<100'); // recuperer tous les groupes existants
+	$autorisations_rajoutees = array(); // servira de temoin des rajouts
+/// traitements
+	foreach ($autorisations_anciennes as $groupe) { // comparer l'existant au requis :
+		$deja = array_search($groupe['id_groupe'], $autorisations_toutes); // verifier qu'une entree requise est bien presente...
+		if ($deja!==FALSE) // ...et si c'est le cas, alors...
+			unset($autorisations_nouvelles[$deja]); // ...la rayer des entrees a insere
 	}
+	foreach ($autorisations_nouvelles as $id) { // metre a jour
+#		$autorisations_rajoutees[] = sql_insertq('spip_asso_groupes', array(
+#			'nom'=>'', 'affichage'=>0, 'commentaire'=>'',
+#			'id_groupe'=>$id,
+#		)); // insertion des absents
+		$autorisations_rajoutees[] = sql_insert('spip_asso_groupes', '(nom, affichage, id_groupe)', "('', 0, $id)"); // insertion des absents
+	} //!\ Ce n'est pas le plus performant de faire (un peu moins d') une centaine de requetes individuelles quand on peut faire une requete groupee, mais on s'evite de planter le lot a cause d'un...
+	spip_log('Associaspip ajoute les groupes suivants : '.implode(',',$autorisations_rajoutees), 'associaspip'); // trace des ajouts (leur champ "maj" devrait etre a la date d'insertion ...sauf si c'est edite...)
+	$autorisations_ignorees = array_diff($autorisations_nouvelles, $autorisations_rajoutees); // liste des insertions echouees
+	if (count($autorisations_ignorees)) // malgre le controle des existants on a eu des doublons ?
+		spip_log('Associaspip conserve les groupes suivants : '.implode(', ', $autorisations_ignorees), 'associaspip'); // signaler les fautifs
 
-	// inserer toutes les entrees necessitant une mise à jour
-	$groupes_a_inserer = array();
-	foreach ($groupes_autorisations as $id_groupe) {
-		if (!$groupes_existants[$id_groupe]) { // il manque un entree
-			$groupes_a_inserer[]=array('id_groupe'=>$id_groupe);
-		}
-	}
-
-	if (count($groupes_a_inserer)) {
-		sql_insertq_multi('spip_asso_groupes', $groupes_a_inserer);
-	}
 }
 
 // MAJ des tables de la base SQL
