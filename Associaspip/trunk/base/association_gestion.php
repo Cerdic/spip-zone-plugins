@@ -14,39 +14,47 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
-// desinstallation
-function association_vider_tables($nom_meta, $table) {
-	// on efface la meta [association_meta][base_version] pour que la fonction qui gere la desinstallation ne voie plus le plugin et confirme sa desinstallation
-	effacer_meta($nom_meta, $table);
-	spip_log("Plugin Associaspip (vb:$nom_meta_base_version) dereference",'associaspip');
-
-	// On liste les tables du plugin
-	$tables_a_supprimer = array(
-		'spip_asso_activites',
-		'spip_asso_categories',
-		'spip_asso_comptes',
-		'spip_asso_destination',
-		'spip_asso_destination_op',
-		'spip_asso_dons',
-		'spip_asso_exercices',
-		'spip_asso_fonctions',
-		'spip_asso_groupes',
-		'spip_asso_membres',
-		'spip_asso_plan',
-		'spip_asso_prets',
-		'spip_asso_ressources',
-		'spip_asso_ventes',
-		'spip_association_metas',
-	);
-	// On efface les tables du plugin en consignant le resultat
-	foreach($tables_a_supprimer as $table ) {
-		if (sql_drop_table($table))
-			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
+/**
+ * Fonction de désinstallation du plugin Associaspip
+ *
+ * @param string $nom_meta_base_version
+ *   Nom de la meta informant de la version du schema de donnees du plugin installe dans SPIP
+ * @param string $table_metas
+ *   Nom de la table contenant les metas du plugin installe dans SPIP
+ * @return void
+**/
+function association_vider_tables($nom_meta_base_version, $table_metas='association_metas') {
+	$ok = TRUE; // va servir de temoin de la procedure
+	foreach(array( // les tables de prefixe "spip_asso_" du plugin
+		'activites',
+		'categories',
+		'comptes',
+		'destination',
+		'destination_op',
+		'dons',
+		'exercices',
+		'fonctions',
+		'groupes',
+		'membres',
+		'plan',
+		'prets',
+		'ressources',
+		'ventes',
+		) as $table) { // On efface les tables du plugin en consignant le resultat
+		if (sql_drop_table("spip_asso_$table"))
+			spip_log("Associaspip supprime la table '$table' ",'associaspip');
 		else {
-			spip_log("Associaspip : echec de la desinstallation de la table '$table' ",'associaspip');
+			spip_log("Associaspip n'a pu supprimer la table '$table' ",'associaspip');
+			$ok = FALSE;
 		}
 	}
-
+	if ($ok) { // tout s'est bien passe
+		effacer_meta($nom_meta_base_version, $table_metas); // on efface la meta $GLOBALS['association_metas']['base_version'] pour que SPIP (en fait sa fonction qui gere la desinstallation) ne voie plus le plugin et confirme sa desinstallation
+		sql_drop_table("spip_$table_metas"); // on efface enfin la table elle-meme devenue inutile
+		spip_log("Associaspip supprime la table '$table_metas' (schema:$nom_meta_base_version)",'associaspip'); // et on consigne cela
+	} else {
+		spip_log("Associaspip n'a pu supprimer la table '$table_metas' (schema:$nom_meta_base_version)",'associaspip'); // on l'inclu dans la liste des tables non supprimees
+	}
 }
 
 // fonction qui va remplir ou mettre a jour la table spip_asso_groupes
