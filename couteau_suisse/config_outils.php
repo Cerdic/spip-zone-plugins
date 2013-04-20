@@ -547,7 +547,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'spip_log',
-	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . "[[->%log_non%]]<:spip_log:4:>\n<:spip_log:3:>",
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . (defined('_SPIP20100')?'[[->%log_non%]]':'') . "<:spip_log:4:>\n<:spip_log:3:>",
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
 		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%%%log_non%%',
 	'categorie' =>'devel',
