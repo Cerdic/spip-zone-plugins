@@ -3,10 +3,10 @@
 	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
 	<version>1.9.1</version>
 	<etat>test</etat>
-	<lien>http://www.plugandspip.com/spip.php?page=explications</lien>
+	<lien>http://www.spip-contrib.net/1611</lien>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
-	<prefix>association</prefix>	
+	<prefix>association</prefix>
 
 	<fonctions>association_mes_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
 
@@ -16,10 +16,10 @@
 		<action>ajouterBoutons</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>header_prive</action>		
+		<action>header_prive</action>
 		<inclure>association_mes_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;1.9.1]" />

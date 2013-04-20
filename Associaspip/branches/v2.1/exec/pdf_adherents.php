@@ -20,7 +20,8 @@ function exec_pdf_adherents()
 		echo minipres();
 	} else {
 
-	$pdf=new PDF();	
+	include_spip('pdf/extends');
+	$pdf=new PDF();
 
 	$pdf->titre = _T('asso:adherent_titre_liste_actifs');
 	$pdf->Open();

@@ -7,9 +7,9 @@
 	<etat>test</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
-	<prefix>association</prefix>	
+	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://www.spip-contrib.net/Plugin-Gestion-d-associations</lien>
+	<lien>http://contrib.spip.net/1611</lien>
     <icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>
@@ -21,12 +21,12 @@
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>inc/post_edition.php</inclure>
 	</pipeline>
-	
+
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
 </plugin>

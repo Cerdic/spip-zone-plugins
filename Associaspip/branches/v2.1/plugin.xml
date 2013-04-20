@@ -11,7 +11,7 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://www.spip-contrib.net/Associaspip-2-1</lien>
+	<lien>http://contrib.spip.net/4275</lien>
 	<icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>
