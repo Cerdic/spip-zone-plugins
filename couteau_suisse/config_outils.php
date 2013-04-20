@@ -484,6 +484,11 @@ $texte=str_replace(
 ));
 
 add_variables( array(
+	'nom' => 'log_non',
+	'check' => 'couteauprive:log_non',
+	'defaut' => 0,
+	'code:%s' => "function inc_log(){}",
+), array(
 	'nom' => 'filtre_gravite',
 	'format' => _format_NOMBRE,
 	'radio' => array(0 => '_EMERGENCY (0)', 1 => '_ALERT (1)', 2 => '_CRITICAL (2)', 3 => '_ERROR (3)', 4 => '_WARNING (4)', 5 => '_NOTICE (5)', 6 => '_INFO (6)', 7 => '_DEBUG (7)', 8 => '_TRACE :'),
@@ -542,9 +547,9 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'spip_log',
-	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . "<:spip_log:4:>\n<:spip_log:3:>",
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . "[[->%log_non%]]<:spip_log:4:>\n<:spip_log:3:>",
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
-		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%',
+		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%%%log_non%%',
 	'categorie' =>'devel',
 	'pipelinecode:pre_description_outil' => 'if($id=="spip_log")
 	$texte=str_replace(array("@DIR_LOG@","@SPIP_OPTIONS@"),
