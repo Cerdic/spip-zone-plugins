@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 if (!defined('_LANGONET_PATTERN_FONCTION_L'))
-	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*(['\"])([^\\1]+)\\1[^)]*#");
+	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*(['\"])([^\\1]+)\\1[^)]*\)#Uims");
 if (!defined('_LANGONET_FONCTION_L2'))
 	define("_LANGONET_FONCTION_L2", "#\b_L *[(] *(')([^']+)'[^)]*#");
 
@@ -56,14 +56,18 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 			$contenu = file($_fichier);
 			if ($contenu) {
 				foreach ($contenu as $_no_ligne => $_ligne) {
-					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_ligne, $m, PREG_SET_ORDER)) {
-						foreach ($m as $_occurrence) {
+					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_ligne, $matches, PREG_OFFSET_CAPTURE)) {
+						foreach ($matches[2] as $_cle => $_occurrence) {
 							// Calcul du nom du raccourci de l'item de langue
-							$index = langonet_index($_occurrence[2], $item_md5);
-							// Stockage de ce raccourci
-							$item_md5[$index] = $_occurrence[2];
-							// Ajout de l'occurrence trouvée dans le fichier des erreurs
-							$fichier_non[$index][$_fichier][$_no_ligne][] = $_occurrence;
+							$texte = $_occurrence[0];
+							list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $item_md5);
+							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L()
+							$item_md5[$raccourci] = $texte;
+							// Ajout de l'occurrence trouvée dans la liste des erreurs
+							$expression = $matches[0][$_cle][0];
+							$colonne = $matches[0][$_cle][1];
+							$fichier_non[$raccourci][$_fichier][$_no_ligne][$colonne] =
+								array($expression, $raccourci_brut, $texte, $_ligne);
 						}
 					}
 				}

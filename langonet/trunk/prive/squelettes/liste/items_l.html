@@ -3,30 +3,33 @@
 	<table class="spip liste">
 		<caption>
 			<strong class="caption">
-				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_1},
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_n},
-									sous_total})]
 			</strong>
 		</caption>
 		<tbody>
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
-			<tr class="trouve row_odd">
-				<td colspan="2" class="raccourci">
-					[<strong>(#CLE) \([(#VALEUR|table_valeur{fichier}|count)]\)</strong>]
+			<tr class="row_odd">
+				<td colspan="3" class="raccourci">
+					[<strong>(#CLE)</strong>]
 				</td>
 			</tr>
-		#SET{traductions, #VALEUR|table_valeur{traduction}}
-		<BOUCLE_definitions(DATA) {source table, #VALEUR|table_valeur{fichier}}{par cle}>
+	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
+		<B_lignes>
 			<tr class="row_even">
-				<td class="fichier">[(#VAL{.php}|str_replace{'', #VALEUR})]</td>
-				<td class="traduction">[
-					<span class="guillemet">&#10078;</span>
-					(#GET{traductions}|table_valeur{#CLE}|htmlspecialchars)
-					<span class="guillemet">&#10077;</span>
-				]</td>
+				<td class="fichier" colspan="3">[(#VAL{.php}|str_replace{'', #CLE})]</td>
 			</tr>
-		</BOUCLE_definitions>
+		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
+			#SET{ligne, #CLE}
+			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
+			<tr class="row_even">
+				<td class="ligne">[L(#VAL{%04s}|sprintf{#GET{ligne}|plus{1}})]</td>
+				<td class="colonne">[C(#VAL{%03s}|sprintf{#CLE|plus{1}})]</td>
+				<td class="occurrence principale">
+					[(#VALEUR|table_valeur{0}|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8})]
+				</td>
+			</tr>
+			</BOUCLE_occurrences>
+		</BOUCLE_lignes>
+	</BOUCLE_fichiers>
 </BOUCLE_liste_items>
 		</tbody>
 	</table>

@@ -74,4 +74,29 @@ function langonet_index($occurrence, $item_md5) {
 	return $index;
 }
 
+
+/**
+ * Calcul du représentation canonique d'une chaine de langue à créer avec traitement d'homonynie.
+ * En cas d'homonynmie, le représentant utilisé est le md5.
+ *
+ * @param string	$occurrence
+ * @param array		$item_md5
+ * @return string
+ */
+function langonet_calculer_raccourci($occurrence, $item_md5) {
+	// Calcul du raccourci brut de l'item de langue
+	$index_brut = langonet_index_brut($occurrence);
+	$index = $index_brut;
+
+	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
+	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différents :
+	// on prend alors son md5 mais qui produira un raccourci illisible
+	if (isset($item_md5[$index_brut])) {
+		if (strcasecmp($item_md5[$index_brut], $occurrence) != 0)
+			$index = md5($occurrence);
+	}
+
+	return array($index, $index_brut);
+}
+
 ?>

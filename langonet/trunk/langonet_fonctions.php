@@ -284,4 +284,15 @@ function langonet_identifier_reference($module, $ou_langue, &$tradlang) {
 	return $langue;
 }
 
+function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
+	$affiche = '';
+
+	if ($ligne) {
+		$affiche = substr($ligne, max($colonne-$cadre, 0), strlen($expression)+$cadre*2);
+		$affiche = "<code>... $affiche ...</code>";
+	}
+
+	return $affiche;
+}
+
 ?>

@@ -23,5 +23,6 @@ function langonet_tester_definition() {
 	$essai = _L("T1234567890123456789012345678901xyz");
 	$essai = _L("Test multiple 1") . '_' . _L("Test multiple 2");
 	$essai = _L("Test multiple 3"); _L("Test multiple 4");
+	$essai = _L("Test multiple 5") . ' et la suite ' . _L("Test multiple 5");
 }
 ?>
