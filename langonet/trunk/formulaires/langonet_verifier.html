@@ -11,6 +11,17 @@
 		parametre : url d'action --> ]
 		<p class="explication"><:langonet:info_verifier:></p>
 		<ul>
+			<li class="editer_version[(#ENV{erreurs}|table_valeur{version}|oui) erreur]">
+				<label>Version d'affichage</label>
+				<div class="choix">
+					<input type="radio" value="new" id="version_new" class="radio" name="version" [(#ENV{version, new}|=={new}|oui) checked="checked"] />
+					<label for="version_new">Nouvel affichage des r&eacute;sultats</label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="old" id="version_old" class="radio" name="version" [(#ENV{version, new}|=={old}|oui) checked="checked"] />
+					<label for="version_old">Ancien affichage des r&eacute;sultats</label>
+				</div>
+			</li>
 			<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
 				<label><:langonet:label_verification:></label>
 				<div class="choix">
@@ -50,25 +61,28 @@
 [(#ENV*{message_ok}|oui)
 	<INCLURE{fond=formulaires/inc-resultats_verifier_#ENV{verification},
 		explication=#ENV*{message_ok}|table_valeur{explication},
-		resultats=#ENV{message_ok}|table_valeur{resultats},
+		resultats=#ENV*{message_ok}|table_valeur{resultats},
+		version=#ENV{version, new},
 		env}
 ]
 
 <script type="text/javascript">
 //<![CDATA[
 	jQuery(document).ready(function() {
-		[(#ENV{verification, definition}|=={fonction_l}|oui)
-			jQuery("#option_fichier_langue").hide();
+		[(#ENV{version, new}|=={new}|oui)
+			[(#ENV{verification, definition}|=={fonction_l}|oui)
+				jQuery("#option_fichier_langue").hide();
+			]
+			jQuery("input[name='verification']").change(function() {
+				if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
+					jQuery("#option_fichier_langue").hide('fast');
+				}
+				else {
+					jQuery("#option_fichier_langue").show('fast');
+				}
+				jQuery(this).blur();
+			});
 		]
-		jQuery("input[name='verification']").change(function() {
-			if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
-				jQuery("#option_fichier_langue").hide('fast');
-			}
-			else {
-				jQuery("#option_fichier_langue").show('fast');
-			}
-			jQuery(this).blur();
-		});	
 	});
 //]]>
 </script>

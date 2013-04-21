@@ -55,22 +55,21 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 		foreach ($fichiers as $_fichier) {
 			$contenu = file($_fichier);
 			if ($contenu) {
-				foreach ($contenu as $_ligne => $_texte) {
-					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_texte, $m, PREG_SET_ORDER)) {
+				foreach ($contenu as $_no_ligne => $_ligne) {
+					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_ligne, $m, PREG_SET_ORDER)) {
 						foreach ($m as $_occurrence) {
 							// Calcul du nom du raccourci de l'item de langue
 							$index = langonet_index($_occurrence[2], $item_md5);
 							// Stockage de ce raccourci
 							$item_md5[$index] = $_occurrence[2];
 							// Ajout de l'occurrence trouvée dans le fichier des erreurs
-							$fichier_non[$index][$_fichier][$_ligne][] = $_occurrence;
+							$fichier_non[$index][$_fichier][$_no_ligne][] = $_occurrence;
 						}
 					}
 				}
 			}
 		}
 
-		$resultats['module'] = $module;
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['item_non'] = array_keys($item_md5);
 		$resultats['fichier_non'] = $fichier_non;

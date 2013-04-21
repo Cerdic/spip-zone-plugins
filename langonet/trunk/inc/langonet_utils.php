@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return string
  */
 function entite2utf($sujet) {
-	if (!$sujet) return;
+	if (!$sujet OR !is_string($sujet)) return;
 	include_spip('inc/charsets');
 
 	return unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $sujet), ENT_NOQUOTES, 'utf-8'));
@@ -64,7 +64,7 @@ function langonet_index($occurrence, $item_md5) {
 	$index = langonet_index_brut($occurrence);
 
 	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
-	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différenst :
+	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différents :
 	// on prend alors son md5 mais qui produira un raccourci illisible
 	if (isset($item_md5[$index])) {
 		if (strcasecmp($item_md5[$index], $occurrence) != 0)

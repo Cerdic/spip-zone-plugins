@@ -10,6 +10,7 @@ function formulaires_langonet_verifier_charger() {
 
 	return array('verification' => _request('verification'),
 				'fichier_langue' => _request('fichier_langue'),
+				'version' => _request('version'),
 				'dossier_scan' => sinon(_request('dossier_scan'),array()));
 }
 
@@ -40,7 +41,9 @@ function formulaires_langonet_verifier_traiter() {
 	//  $ou_fichier   -> racine de l'arborescence a verifier 'plugins/auto/langonet'
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
-	if ($verification != 'fonction_l') {
+	$version = _request('version');
+	if (($version == 'old')
+	OR (($version == 'new') AND ($verification != 'fonction_l'))) {
 		$retour_select_langue = explode(':', _request('fichier_langue'));
 		$rep = $retour_select_langue[0];
 		$module = $retour_select_langue[1];
@@ -85,7 +88,8 @@ function formulaires_langonet_verifier_traiter() {
 		}
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		$encodage = 'utf8';
-//		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+		if ($version == 'old')
+			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
 	// Traitement des resultats
@@ -93,10 +97,13 @@ function formulaires_langonet_verifier_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
-		$retour['message_ok']['explication'] = _T($resume, array('log_fichier' => $log_fichier, 'script' => $script));
-		$retour['message_ok']['resultats'] = $resultats;
-//		$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
+		if ($version == 'new') {
+			$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
+			$retour['message_ok']['resultats'] = $resultats;
+		}
+		else
+			$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
+		$retour['message_ok']['explication'] = 'pas encore créée';
 	}
 	$retour['editable'] = true;
 	return $retour;
