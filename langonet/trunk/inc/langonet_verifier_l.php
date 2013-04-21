@@ -70,6 +70,7 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 			}
 		}
 
+		$resultats['module'] = $module;
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['item_non'] = array_keys($item_md5);
 		$resultats['fichier_non'] = $fichier_non;
