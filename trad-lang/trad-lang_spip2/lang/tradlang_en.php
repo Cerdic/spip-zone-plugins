@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_revision' => '@nb@ translation modified.',
 	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'auteur_revisions' => '@nb@ translations modified.',
-	'auteur_revisions_langue' => 'Contributions langage :',
-	'auteur_revisions_langues' => '@nb@ contributions langage:',
+	'auteur_revisions_langue' => 'Contributions langage :', # MODIF
+	'auteur_revisions_langues' => '@nb@ contributions langage:', # MODIF
 	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 
 	// B
@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langue_mere' => '(parent language)',
 	'info_langues_non_preferees' => 'Other languages :',
 	'info_langues_preferees' => 'Favorite language(s):',
+	'info_module_nb_items_langue_mere' => 'La langue mère du module est <abbr title="@lang_mere@">@lang_mere_longue@</abbr> et comporte @nb@ items de langue.', # NEW
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_langues' => 'This module is translated or partially translated into ​​@nb@ languages.',
 	'info_module_traduit_pc' => 'Module @pc@% translated',
@@ -136,9 +137,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_percent_chaines' => '@traduites@ / @total@ translated strings',
 	'info_revisions_stats' => 'Revisions',
 	'info_status_ok' => 'OK',
+	'info_statut' => 'Statut', # NEW
 	'info_str' => 'Text of the language string',
 	'info_textarea_readonly' => 'This text field is read only',
 	'info_tradlangs_sans_version' => '@nb@ language strings do not have a first revision( first revisions are created by CRON).',
+	'info_traducteur' => 'Traducteur(s)', # NEW
 	'info_traduire_module_lang' => 'Translate the module "@module@" in @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Information on translations',
 	'item_creer_langue_cible' => 'Create a new target language',
