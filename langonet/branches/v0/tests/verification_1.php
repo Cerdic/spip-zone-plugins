@@ -4,11 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Tests pour la verification de type definition
 function langonet_tester_definition() {
 	// Commenter ou decommenter les lignes suivantes pour tester les differents cas de verification
-
 	// VERIFICATION DEFINITION : Erreurs
-	// -- Les items suivants, utilises comme des items du module Langonet, ne sont pas definis dans langonet_fr.php
-	$essai = _T('langonet:test_item_non_defini_1');
-	$essai = _T('langonet:test_item_non_defini_2');
+	// -- Les items suivants, utilises comme des items du module Langonet, ne sont pas definis dans langonet-tests_fr.php
+	$essai = _T('langonet-tests:test_item_non_defini_1');
+	$essai = _T('langonet-tests:test_item_non_defini_2');
 
 	// VERIFICATION DEFINITION : Erreurs
 	// -- Les items suivants, utilises comme des items de modules differents de Langonet, ne sont pas definis dans leur fichier
@@ -25,16 +24,21 @@ function langonet_tester_definition() {
 
 	// VERIFICATION DEFINITION : Avertissements
 	// -- Les items suivants sont utilises dans un contexte complexe. Ce sont des items de Langonet ou pas
-	$essai = _T('langonet:test_item_1_'.$variable);
+	$essai = _T('langonet-tests:test_item_1_'.$variable);
 	$essai = _T('test_item_2_'.$variable);
-	$essai = _T("langonet:$fond1");
-	$essai = _T('langonet:' . $fond2);
-	$essai = _T("langonet:".$fond3);
+	$essai = _T("langonet-tests:$arg1");
+	$essai = _T('langonet-tests:' . $arg2);
+	$essai = _T("langonet-tests:".$arg3);
 
 	// VERIFICATION _L() : Erreurs
 	$essai = _L('Test 1 _L() de langonet');
 	$essai = _L("Test 2 _L() de langonet");
-	$essai = _L("Test 3 _L()", $fond4);
-	$essai = _L('Test 4 _L()' . $fond5);
+	$essai = _L("Test 3 _L()", $arg4);
+	$essai = _L('Test 4 _L()' . $arg5);
+	$essai = _L("Test 5 _L()$arg6");
+	$essai = _L("Test 6 _L()${arg7}");
+	$essai = _L  ("Test 7 _L()");
+	$essai = _L		("Test 7 _L()");
+	$essai = _L("T1234567890123456789012345678901abcdef");
 }
 ?>
