@@ -197,6 +197,7 @@ class SpipMandrill extends Mandrill {
 
 class FacteurMandrill extends Facteur {
 
+	public $send_options = array();
 	protected $message = array('to'=>array(),'headers'=>array());
 
 	protected function cleanAdress($address, $name = ''){
@@ -274,12 +275,11 @@ class FacteurMandrill extends Facteur {
 	}
 
 	/**
-	 * @param array $options
-	 *   options d'envoi
+	 * utilise $this->send_options options d'envoi
 	 *     string tracking_id
 	 * @return bool
 	 */
-	public function Send($options) {
+	public function Send() {
 		$api_key = lire_config("mailshot/mandrill_api_key");
 
 		/**
@@ -340,12 +340,12 @@ class FacteurMandrill extends Facteur {
 		$this->message['from_name'] = $this->FromName;
 
 		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
-		if (isset($options['tracking_id'])
-		  AND $id = $options['tracking_id']){
+		if (isset($this->send_options['tracking_id'])
+		  AND $id = $this->send_options['tracking_id']){
 			$this->message['track_opens'] = true;
 			$this->message['track_clicks'] = true;
 			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
-			$this->message['tags'][] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$options['tracking_id'];
+			$this->message['tags'][] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
 		}
 
 		$mandrill = new SpipMandrill($api_key);

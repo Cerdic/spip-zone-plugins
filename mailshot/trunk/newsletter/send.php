@@ -190,7 +190,11 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	// Et c'est parti on envoie enfin
 	spip_log("mail via mailshot\n$head"."Destinataire:".print_r($destinataire['email'],true),'mail');
 	spip_log("mail "."a :".print_r($destinataire['email'],true)."\n".trim($head),'mailshot_send'._LOG_DEBUG);
-	$retour = $mailer->Send($options);
+
+	// fixer les options d'envoi si possible (non dispo par Facteur mais par les surcharges)
+	if (isset($mailer->send_options))
+		$mailer->send_options = $options;
+	$retour = $mailer->Send();
 
 	if (!$retour) {
 		spip_log("Erreur Envoi mail via Facteur : ".print_r($mailer->ErrorInfo,true),'mailshot_send'._LOG_ERREUR);
