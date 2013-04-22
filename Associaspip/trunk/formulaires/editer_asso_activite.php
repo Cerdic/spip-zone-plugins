@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_activite_charger_dist($id_activite=0) {
-	$contexte = formulaires_editer_objet_charger('asso_activites', $id_activite, '', '',  generer_url_ecrire('activites'), '');
+	$contexte = formulaires_editer_objet_charger('asso_activite', $id_activite, '', '',  generer_url_ecrire('activites'), '');
 	if (!$id_activite) { // si c'est un ajout
 		$contexte['id_evenement'] = association_recuperer_entier('id_evenement');
 		$evenement = sql_fetsel('*', 'spip_evenements', 'id_evenement='.$contexte['id_evenement']);
@@ -64,7 +64,7 @@ function formulaires_editer_asso_activite_verifier_dist($id_activite=0) {
 }
 
 function formulaires_editer_asso_activite_traiter_dist($id_activite=0) {
-	return formulaires_editer_objet_traiter('asso_activites', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.association_recuperer_entier('id_evenement')), '');
+	return formulaires_editer_objet_traiter('asso_activite', $id_activite, '', '',  generer_url_ecrire('inscrits_activite','id='.association_recuperer_entier('id_evenement')), '');
 }
 
 ?>

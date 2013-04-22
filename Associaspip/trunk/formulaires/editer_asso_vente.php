@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_vente_charger_dist($id_vente=0) {
-	$contexte = formulaires_editer_objet_charger('asso_ventes', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
+	$contexte = formulaires_editer_objet_charger('asso_vente', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
 	if (!$id_vente) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui
 		$contexte['date_vente'] = $contexte['date_envoi'] = date('Y-m-d');
 		$contexte['quantite'] = 1;
@@ -61,7 +61,7 @@ function formulaires_editer_asso_vente_verifier_dist($id_vente=0) {
 }
 
 function formulaires_editer_asso_vente_traiter($id_vente=0) {
-	return formulaires_editer_objet_traiter('asso_ventes', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
+	return formulaires_editer_objet_traiter('asso_vente', $id_vente, '', '',  generer_url_ecrire('ventes'), '');
 }
 
 ?>

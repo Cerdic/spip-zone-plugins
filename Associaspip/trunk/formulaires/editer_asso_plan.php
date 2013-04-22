@@ -15,33 +15,25 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_plan_charger_dist($id_plan=0) {
-	if ($id_plan) {
-// edition, il faut recuperer les valeurs dans la table.
-// le nom de table ne se terminant pas par s,
-// on ne peut pas utiliser formulaires_editer_objet_charger
-// (voir si c'est maintenant possible avec la declaration des exceptions)
+	if ($id_plan) { // c'est une edition...
+		// le nom de table n'etant pas spip_asso_planS, on ne peut pas utiliser
+		// $contexte = formulaires_editer_objet_charger('asso_plan', $id_plan, '', '',  generer_url_ecrire('plan_comptable'), '');
 		$contexte = sql_fetsel('*', 'spip_asso_plan', "id_plan=$id_plan");
-#		$contexte['classe'] = $plans['classe'];
-#		$contexte['code'] = $plans['code'];
-// on passe aussi le code originellement present
-// pour detecter un changement de code a repercuter dans la table des comptes
-// sans avoir a refaire de requete
+		// on passe aussi le code originellement present pour detecter un
+		// changement de code a repercuter dans la table des comptes sans devoir refaire de requete
 		$contexte['_hidden'] = "<input type='hidden' name='code_initial' value='$contexte[code]' />";
 	} else { // c'est une creation
-		$contexte['code'] = intval(_request('code'));
-		if (!($contexte['classe'] = intval(_request('classe'))))
+		$contexte['code'] = _request('code');
+		if (!($contexte['classe'] = _request('classe')) )
 		  $contexte['classe'] = substr($contexte['code'], 0, 1);
 		$contexte['intitule'] = _request('intitule');
-		$contexte['solde_anterieur'] = _request('solde_anterieur');
 		$contexte['commentaire'] = _request('commentaire');
-		// par defaut les nouveaux comptes sont actives
-		$contexte['active'] = TRUE;
-		// par defout les nouveau comptes sont multidirectionnels
-		$contexte['type_op'] = 'multi';
-		$contexte['date_anterieure'] = date('Y-m-d');
+		$contexte['active'] = TRUE; // par defaut les nouveaux comptes sont actives
+		$contexte['type_op'] = 'multi'; // par defout les nouveau comptes sont multidirectionnels
+		$contexte['date_anterieure'] = date('Y-m-d'); // date du jour
+		$contexte['solde_anterieur'] = 0; // zero
 	}
-	// pour passer securiser action
-	$contexte['_action'] = array('editer_asso_plan', $id_plan);
+	$contexte['_action'] = array('editer_asso_plan', $id_plan); // pour passer securiser action
 	return $contexte;
 }
 
@@ -100,7 +92,6 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 
 /// Fonction grandement inspiree de formulaires_editer_objet_traiter
 /// dans ecrire/inc/editer.php
-
 function formulaires_editer_asso_plan_traiter_dist($id_plan=0) {
 	$res = array();
 	$action_plancomptable = charger_fonction('editer_asso_plan', 'action');
@@ -113,7 +104,7 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan=0) {
 			$retour = 'plan_comptable';
 		if ($champ = strval(_request('champ')))
 			$champ = "#$champ";
-		// on renvoit sur la page adherents
+		// on renvoit sur la page appelante...
 		// mais on perd a l'occasion d'eventuel filtres inseres
 		// avant d'arriver au formulaire de cotisation...
 		$res['redirect'] = generer_url_ecrire($retour) . $champ;

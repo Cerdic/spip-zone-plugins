@@ -13,10 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/autoriser');
 
 function formulaires_editer_asso_membre_charger_dist($id_auteur) {
-	$contexte = formulaires_editer_objet_charger('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
+	$contexte = formulaires_editer_objet_charger('asso_membre', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
 	list($annee, $mois, $jour) = explode('-',$contexte['date_validite']);
 	if ($jour==0 OR $mois==0 OR $annee==0) // on verifie que la date de validite n'est pas nulle et si oui on la met a hier
 		$contexte['date_validite'] = date('Y-m-d', mktime(0, 0, 0, date('m')  , date('d')-1, date('Y')));
@@ -44,7 +43,7 @@ function formulaires_editer_asso_membre_traiter($id_auteur) {
 	$action_ajouter_groupes = charger_fonction('ajouter_membre_groupes', 'action');
 	$action_ajouter_groupes($id_auteur);
 	// traitement des informations du membre
-	return formulaires_editer_objet_traiter('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
+	return formulaires_editer_objet_traiter('asso_membre', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
 }
 
 ?>

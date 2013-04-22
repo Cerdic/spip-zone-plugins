@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_pret_charger_dist($id_pret=0) {
-	$contexte = formulaires_editer_objet_charger('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets'), '');
+	$contexte = formulaires_editer_objet_charger('asso_pret', $id_pret, '', '',  generer_url_ecrire('prets'), '');
 	if (!$id_pret) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui, le statut et les prix de location de base et de caution a deposer
 		$contexte['date_sortie'] = $contexte['date_retour'] = date('Y-m-d');
 		$contexte['date_retour'] = '';
@@ -95,7 +95,7 @@ function formulaires_editer_asso_pret_verifier_dist($id_pret=0) {
 
 function formulaires_editer_asso_pret_traiter_dist($id_pret=0) {
 	$id_ressource = association_recuperer_entier('id_ressource');
-	return formulaires_editer_objet_traiter('asso_prets', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
+	return formulaires_editer_objet_traiter('asso_pret', $id_pret, '', '',  generer_url_ecrire('prets',"id=$id_ressource"), '');
 }
 
 ?>

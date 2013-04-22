@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_exercice_charger_dist($id_exercice=0) {
-	$contexte = formulaires_editer_objet_charger('asso_exercices', $id_exercice, '', '',  generer_url_ecrire('exercices'), '');
+	$contexte = formulaires_editer_objet_charger('asso_exercice', $id_exercice, '', '',  generer_url_ecrire('exercices'), '');
 
 	return $contexte;
 }
@@ -35,7 +35,7 @@ function formulaires_editer_asso_exercice_verifier_dist($id_exercice=0) {
 }
 
 function formulaires_editer_asso_exercice_traiter_dist($id_exercice=0) {
-	return formulaires_editer_objet_traiter('asso_exercices', $id_exercice, '', '',  generer_url_ecrire('exercices'), '');
+	return formulaires_editer_objet_traiter('asso_exercice', $id_exercice, '', '',  generer_url_ecrire('exercices'), '');
 }
 
 ?>

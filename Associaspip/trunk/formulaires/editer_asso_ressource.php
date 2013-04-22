@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_ressource_charger_dist($id_ressource=0) {
-	$contexte = formulaires_editer_objet_charger('asso_ressources', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
+	$contexte = formulaires_editer_objet_charger('asso_ressource', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
 	if (!$id_ressource) { // si c'est une nouvelle operation, on charge la date d'aujourd'hui ainsi qu'un id_compte et journal nuls
 		$contexte['date_acquisition'] = date('Y-m-d');
 		$contexte['ud'] = 'D';
@@ -70,7 +70,7 @@ function formulaires_editer_asso_ressource_verifier_dist($id_ressource=0) {
 }
 
 function formulaires_editer_asso_ressource_traiter($id_ressource=0) {
-	return formulaires_editer_objet_traiter('asso_ressources', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
+	return formulaires_editer_objet_traiter('asso_ressource', $id_ressource, '', '',  generer_url_ecrire('ressources'), '');
 }
 
 ?>

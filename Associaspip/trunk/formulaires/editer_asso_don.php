@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_don_charger_dist($id_don=0, $id_auteur=0) {
-	$contexte = formulaires_editer_objet_charger('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
+	$contexte = formulaires_editer_objet_charger('asso_don', $id_don, '', '',  generer_url_ecrire('dons'), '');
 	if (!$id_don) { // si c'est un nouveau don...
 		$contexte['date_don'] = date('Y-m-d'); // ...on charge la date d'aujourd'hui
 		if (is_numeric($id_auteur)) { // si de plus on a le parametre id_auteur, c'est qu'on vient de la page d'ajout d'un membre :
@@ -55,7 +55,7 @@ function formulaires_editer_asso_don_verifier_dist($id_don=0) {
 }
 
 function formulaires_editer_asso_don_traiter($id_don=0) {
-	return formulaires_editer_objet_traiter('asso_dons', $id_don, '', '',  generer_url_ecrire('dons'), '');
+	return formulaires_editer_objet_traiter('asso_don', $id_don, '', '',  generer_url_ecrire('dons'), '');
 }
 
 ?>

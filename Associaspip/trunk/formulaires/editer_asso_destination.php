@@ -15,9 +15,8 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_destination_charger_dist($id_destination=0) {
-//	$contexte = formulaires_editer_objet_charger('asso_destination', $id_destination, '', '',  generer_url_ecrire('destination'), ''); // ne fonctionne pas ...parce-que la table n'est pas au pluriel ! (va savoir pourquoi)
-	$contexte = sql_fetsel('*', 'spip_asso_destination', "id_destination='$id_destination' ");
-	$contexte['_action'] = array('editer_asso_destinations', $id_destination);
+	$contexte = sql_fetsel('*', 'spip_asso_destination', "id_destination='$id_destination' "); // $contexte = formulaires_editer_objet_charger('asso_destination', $id_destination, '', '',  generer_url_ecrire('destination'), ''); // ne fonctionne pas ...parce-que la table n'est pas spip_asso_destinationS
+	$contexte['_action'] = array('editer_asso_destination', $id_destination); // pour passer securiser action du coup
 	$contexte['retour'] = generer_url_ecrire('destination');
 
 	return $contexte;

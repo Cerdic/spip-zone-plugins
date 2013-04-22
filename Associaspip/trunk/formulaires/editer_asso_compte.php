@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_compte_charger_dist($id_compte=0) {
-    $contexte = formulaires_editer_objet_charger('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
+    $contexte = formulaires_editer_objet_charger('asso_compte', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
     if (!$id_compte) { // si c'est une nouvelle operation
 	$contexte['date'] = date('Y-m-d'); // on charge la date d'aujourd'hui
 	$contexte['type_operation'] = $GLOBALS['association_metas']['classe_charges']; // on fixe par defaut une depense
@@ -81,7 +81,7 @@ function formulaires_editer_asso_compte_verifier_dist($id_compte=0) {
 }
 
 function formulaires_editer_asso_compte_traiter($id_compte=0) {
-    return formulaires_editer_objet_traiter('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
+    return formulaires_editer_objet_traiter('asso_compte', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
 }
 
 ?>
