@@ -22,6 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url' => 'URL Canoniques',
 	'canonical_url_activate' => 'Activer la meta d\'URL Canoniques',
 
+	// E
+	'explication_description' => 'Il est conseillé que la longueur soit inférieure ou égale à 160 caractères.',
+	'explication_title' => 'Il est conseillé que la longueur soit comprise entre 5 et 70 caractères.',
+	
 	// F
 	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux metas générées par les squelettes',
 	'forcer_squelette_label' => 'Charger les metas pour tous squelettes',
@@ -35,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_webmaster_tools_id' => 'Meta code de vérification',
 
 	// I
+	'info_count_max' => 'Caractères pour atteindre la limite optimale : ',
 	'insert_head' => 'Insertion automatique dans #INSERT_HEAD',
 	'insert_head_activate' => 'Activer l\'insertion automatique',
 	'insert_head_descriptif' => 'Insertion automatique de la configuration SEO dans le &lt;head&gt;',

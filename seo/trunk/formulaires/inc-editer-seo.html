@@ -6,13 +6,15 @@
 		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:seo:meta_title:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			]<p class='explication'><:seo:explication_title:></p>
+			<input type="text" name="#GET{name}" class="text countchars" data-maxchar="70" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 		</li>
 		 #SET{name,meta_description}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:seo:meta_description:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<textarea name="#GET{name}" class="textarea">
+			]<p class='explication'><:seo:explication_description:></p>
+			<textarea name="#GET{name}" class="textarea countchars" data-maxchar="160">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 		</li>
 		 #SET{name,meta_keywords}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -34,4 +36,8 @@
 			]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 		</li>
 	</ul>
+	<script type='text/javascript'>/*<![CDATA[*/
+	if (window.jQuery){jQuery(function(){
+		jQuery.getScript('[(#PRODUIRE{fond=javascript/seo.js,lang=#ENV{lang}}|compacte)]',function(){seo_init();});
+	});}/*]]>*/</script>
 </fieldset>
