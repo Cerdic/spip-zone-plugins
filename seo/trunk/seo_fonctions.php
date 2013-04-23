@@ -19,6 +19,9 @@ function seo_interprete_contexte($contexte){
 	if (isset($infos[$s]))
 		return $infos[$s];
 	$infos[$s] = array('objet'=>'sommaire');
+	if(isset($contexte['page'])){
+		$infos[$s] = array('objet'=>$contexte['page']);
+	}
 	if (isset($contexte['type-page'])){
 		$infos[$s]['objet'] = $contexte['type-page'];
 		if ($infos[$s]['objet']!=='sommaire'
@@ -282,7 +285,6 @@ function seo_calculer_meta_tags($contexte=null){
 	elseif($i['objet']=="sommaire") {
 		$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 	}
-
 	return $meta_tags;
 }
 
