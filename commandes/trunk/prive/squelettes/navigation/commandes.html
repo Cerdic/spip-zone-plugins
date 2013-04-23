@@ -21,7 +21,7 @@
 	<BOUCLE_statuts(COMMANDES){tout}{fusion statut}>
 	#SET{actif, #ENV{statut}|=={#STATUT}|?{'oui',''}}
 	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,#STATUT}|lien_ou_expose{
-		[(#CHEMIN_IMAGE{puce-commande-#STATUT-16.png}|balise_img)&nbsp;][(#STATUT|commandes_lister_statuts)],
+		[(#CHEMIN_IMAGE{icone-commande-#STATUT-16.png}|balise_img)&nbsp;][(#STATUT|commandes_lister_statuts)],
 		#GET{actif},
 		'ajax', '', '',
 		[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:'#STATUT'\}\})"})]
