@@ -1,17 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[Sedna RSS] [(#NOM_SITE_SPIP|supprimer_tags)]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-<meta http-equiv="refresh" content="900;url=[(#SELF|url_absolue)]" />
 [(#REM)
 	Liens vers le backend (voir ausi plus bas affichage html)
 ]<BOUCLE_url_backend_ori(SITES){id_syndic}>
+<title>[Sedna RSS] [(#NOM_SITE_SPIP|supprimer_tags)] - [(#NOM_SITE|supprimer_tags)][ - (#ENV{age})]</title>
 <link rel="alternate" type="application/rss+xml" title="RSS [(#NOM_SITE|attribut_html)], via [(#NOM_SITE_SPIP|attribut_html)]" href="[(#URL_PAGE{sedna-rss}|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{recherche,#ENV{recherche}})]" />
 <link rel="alternate" type="application/rss+xml" title="RSS original" href="#URL_SYNDIC" />
 </BOUCLE_url_backend_ori>
+<title>[Sedna RSS] [(#NOM_SITE_SPIP|supprimer_tags)][ - (#ENV{age})]</title>
 <link rel="alternate" type="application/rss+xml" title="RSS [(#NOM_SITE_SPIP|attribut_html)]" href="[(#URL_PAGE{sedna-rss}|parametre_url{recherche,#ENV{recherche}})]" />
 <//B_url_backend_ori>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta http-equiv="refresh" content="900;url=[(#SELF|url_absolue)]" />
 <link rel="icon" type="image/png" href="#CHEMIN{images/sedna-icon.png}" />
 <link href="[(#CHEMIN{css/sedna.css}|direction_css)]" rel="stylesheet" type="text/css" />
 #SET{color_css,#EVAL{$_COOKIE['sedna_color']?$_COOKIE['sedna_color']:'blue'}}
