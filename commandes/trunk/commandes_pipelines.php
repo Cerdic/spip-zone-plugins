@@ -59,4 +59,22 @@ function commandes_affiche_gauche($flux) {
 	return $flux;
 }
 
+
+/**
+ * accueil : liste des commandes à envoyer
+ */
+function commandes_accueil_encours($flux) {
+
+	if ( $liste = recuperer_fond('prive/objets/liste/commandes', array(
+		'titre' => _T('commandes:titre_commandes_a_envoyer'),
+		'statut' => 'paye',
+		'cacher_tri' => true))
+	) {
+		$flux .= "<div class='commandes'>";
+		$flux .= $liste . "</div>";
+	}
+	return $flux;
+}
+
+
 ?>
