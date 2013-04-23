@@ -87,7 +87,7 @@ function formulaires_configurer_association_traiter_dist($form) {
 	if (!is_array($infos))
 		return $infos;
 	$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
-	$meta = $infos['meta'];
+	$meta_table = $infos['meta'];
 // fin du code directement copie depuis formulaires_configurer_metas_traiter_dist
 	$metas_list = array_flip(array_unique($vars[2])); // on recupere tous les noms des metas comme cles d'un tableau
 	$query = sql_select('nom', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
@@ -103,8 +103,8 @@ function formulaires_configurer_association_traiter_dist($form) {
 		'ventes' => array('dc_frais_envoi','pc_frais_envoi','dc_ventes','pc_ventes'), //no dc_frais_envoi
 	) as $module=>$metas) { // ignorer les changements fait dans un module non active
 		if (!_request($module)) { // module desactive...
-			foreach ($metas as $meta) { // ...ignorer les changements faits
-				unset($metas_list[$meta]);
+			foreach ($metas as $meta_nom) { // ...ignorer les changements faits
+				unset($metas_list[$meta_nom]);
 			}
 		}
 	}
@@ -127,9 +127,10 @@ function formulaires_configurer_association_traiter_dist($form) {
 // code repris sur formulaires_configurer_metas_traiter_dist
 	foreach (array_keys($metas_list) as $k) {
 		$v = _request($k);
-		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta);
+		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta_table);
 	}
-	return !isset($infos['prefix']) ? array()
+	return !isset($infos['prefix'])
+		? array()
 		: array('redirect' => generer_url_ecrire($infos['prefix']));
 }
 
