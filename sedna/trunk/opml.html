@@ -4,7 +4,8 @@
 	La Spec : http://www.opml.org/spec2
 	Le validateur : http://validator.opml.org
 
-][(#CACHE{3600})[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+][(#CACHE{3600})][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
 <opml version="2.0">
 
 <head>
@@ -12,24 +13,19 @@
 	<dateCreated>[(#DATE|affdate{'Y-m-d'})]</dateCreated>
 </head>
 <body>
-
-<BOUCLE_r(RUBRIQUES){par num titre, titre}>
-<B_syndic>
+<BOUCLE_r(RUBRIQUES){par num titre, titre}><B_syndic>
 <outline[ text="(#TITRE|texte_backend)"]>
-<BOUCLE_syndic(SITES){tout}{syndication=oui} {id_rubrique}>
+<BOUCLE_syndic(SITES){tout}{syndication=oui}{id_rubrique}>
 <outline
 	text="[(#NOM_SITE|texte_backend)]"
 	description="[(#DESCRIPTIF|supprimer_tags|texte_backend)]"
 	title="[(#NOM_SITE|texte_backend)]"
 	type="rss"
 	version="RSS"
-	htmlUrl="#URL_SITE"
+	htmlUrl="[(#URL_SITE|texte_backend)]"
 	<BOUCLE_lang(RUBRIQUES){id_rubrique}>[language="(#LANG)"]</BOUCLE_lang>
-	xmlUrl="#URL_SYNDIC"
-/>
-</BOUCLE_syndic>
+	xmlUrl="[(#URL_SYNDIC|texte_backend)]" /></BOUCLE_syndic>
 </outline>
-</B_syndic>
-</BOUCLE_r>
+</B_syndic></BOUCLE_r>
 </body>
 </opml>
