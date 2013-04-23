@@ -1,22 +1,18 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
-	<version>1.9.1</version>
+	<auteur>Fran&#231;ois de Montlivault</auteur>
+	<version>1.9.1</version><!-- 0.50 -->
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/1611</lien>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>
-
-	<fonctions>association_mes_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
-
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<fonctions>association_mes_fonctions.php</fonctions>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
