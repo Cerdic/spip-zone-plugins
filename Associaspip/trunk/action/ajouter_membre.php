@@ -17,7 +17,7 @@ function action_ajouter_membre() {
 	$id_auteur = intval($securiser_action());
 
 	if ($id_auteur) {
-		include_spip('inc/post_edition');
+		include_spip('association_pipelines');
 		update_spip_asso_membre($id_auteur);
 	}
 }
