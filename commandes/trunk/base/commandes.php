@@ -87,7 +87,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'encours'          => 'puce-commande-encours-8.png',
 			'paye'             => 'puce-commande-paye-8.png',
 			'envoye'           => 'puce-commande-envoye-8.png',
-			'partiel'          => 'puce-commande-envoye-8.png',
+			'partiel'          => 'puce-commande-paye-8.png',
 			'retour'           => 'puce-commande-retour-8.png',
 			'retour_partiel'   => 'puce-commande-retour-8.png',
 			'attente'          => 'puce-commande-attente-8.png',
