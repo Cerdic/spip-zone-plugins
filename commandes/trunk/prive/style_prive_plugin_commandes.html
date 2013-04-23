@@ -14,6 +14,49 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-.commandes #contenu .liste .descriptif ul {padding-left:20px;}
-
 #navigation .infos .reference p {font-size:1.5em;}
+
+
+/* ---------------
+   PAGE COMMANDES 
+   --------------- */
+/* liste commandes */
+.commandes .liste-objets img 		{ vertical-align: middle; }
+.commandes .liste-objets td		{ padding: .66em; vertical-align: top; }
+.commandes .liste-objets .action 	{ width: 1px; } /* forcer largeur min */
+.commandes .liste-objets .dates		{ min-width: 9em; }
+.commandes .liste-objets .dates .label	{ color: #888; color: rgba(0,0,0,.5); }
+.commandes .liste-objets .dates .item	{ padding: 0 }
+.commandes .liste-objets .descriptif	{ min-width: 10em; }
+.commandes .liste-objets .descriptif .montant { min-width: 4em; text-align: right; }
+/* commandes finalisées : fond vert */
+.commandes .envoye,
+.commandes .envoye td			{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+
+/* listes items & tables simples */
+.commandes .liste-items.simple		{ margin: 0; border-top-width: 0; }
+.commandes .liste-items.simple .item:last-child { border-bottom-width: 0; }
+.commandes table.simple			{ margin: 0; }
+.commandes table.simple,
+.commandes table.simple tr,
+.commandes table.simple td		{ background: 0 none; }
+.commandes table.simple td		{ vertical-align: top; padding: 0; border: 0 none; }
+
+
+/* --------------------
+   NAVIGATION COMMANDES 
+   -------------------- */
+.commandes.navigation h4		{
+					margin-bottom: 0;
+					font-size: 1em; color: #666;
+					}
+.commandes.navigation .liste-items .on	{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+.commandes.navigation .annee		{ width: 4em; }
+
+
+/* --------------
+   FICHE COMMANDE 
+   -------------- */
+.commandes .champ img 			{ vertical-align: middle; }
+.infos .formulaire_instituer_objet-commandes .statut_envoye .show { background-color: #9dba00; } /* utiliser #ENV{claire} ?*/
+.infos .formulaire_instituer_objet-commandes .statut_paye .show { background-color: [#(#VAL{9dba00}|couleur_eclaircir|couleur_eclaircir)]; }

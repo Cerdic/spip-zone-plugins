@@ -1,4 +1,9 @@
-[(#SET{defaut_tri,#ARRAY{
+[(#REM)
+	paramètres d'affichage :
+		titre_dehors (bool): true pour afficher le titre en dehors du tableau
+		cacher_tri (bool): true pour cacher le tri
+][
+(#SET{defaut_tri,#ARRAY{
 	date,-1,
 	date_paiement,-1,
 	reference,1
@@ -7,92 +12,125 @@
 }})
 ]<B_liste_commandes>
 #ANCRE_PAGINATION
-<div class="liste-elements commandes">
-<table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:commandes:info_toutes_commandes:>})</strong></caption>]
-	<thead>
-		<tr class='first_row'>
-			<th class='id'>[(#TRI{id_commande,<:info_numero_abbreviation:>,ajax})]</th>
-			<th class='reference'>[(#TRI{reference,<:commandes:reference:>,ajax})]</th>
-			<th class='etat'>[(#TRI{statut,<:commandes:etat:>,ajax})]</th>
-			<th class='qui'><:commandes:commande_client:></th>
-			<th class='date'>[(#TRI{date,<:commandes:commande_date:>,ajax})]</th>
-			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:commande_date_paiement:>,ajax})]</th>
-			<th class='descriptif'><:commandes:contenu:></th>
-			<th class='montant'><:commandes:montant:></th>
-			<th class='action'></th>
-			[(#ENV{simuler}|=={1}|oui)
-				<th class='descriptif'><:commandes:simuler:></th>]
-		</tr>
-	</thead>
-	<tbody>
-	<BOUCLE_liste_commandes(COMMANDES)
-		{id_auteur?}{id_commande?}{where?}
-		{statut ?IN commande,paye}{tri #ENV{order,date},#GET{defaut_tri}}
-		{pagination #ENV{nb,30}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='id'><a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">#ID_COMMANDE</a></td>
-			<td class='reference'>#REFERENCE</td>
-			<td class='etat'>[(#STATUT|commandes_lister_statuts)]</td>
-			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
-			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
-			<td class='date date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)][ (#DATE_PAIEMENT|affdate{H:i})] ]</td>
-			<td class='descriptif'>
-			<B_detail_commande>
-				<ul>
-				<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-					<li>[(#DESCRIPTIF*|typo|supprimer_numero) ][(#PRIX)]</li>
-				</BOUCLE_detail_commande>
-				</ul>
-			</B_detail_commande>
-			</td>
-			<td class='montant'>#PRIX</td>
-			<td class='action'>
-				[(#AUTORISER{voir,commande,#ID_COMMANDE})
-					[<a href="(#URL_PAGE{facture}
-						|parametre_url{redirect,#SELF}
-						|parametre_url{id_commande,#ID_COMMANDE})"><:commandes:facture_titre:></a>]
+[(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</h2>]]
+<div class="liste-objets commandes">
+	[(#ENV{cacher_tri}|non)
+	<div class='pagination tri'>
+		[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{id_commande,<:info_numero_abbreviation:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{reference,<:commandes:reference:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{statut,<:commandes:etat:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date,<:commandes:commande_date:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_paiement,<:commandes:commande_date_paiement:>,ajax})]
+	</div>
+	]
+	[<div class="pagination">(#PAGINATION{prive})</div>]
+	<table class='spip liste'>
+		[(#ENV{titre_dehors}|non)[<caption><strong class="caption">(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</strong></caption>]]
+		<thead>
+			<tr class='first_row'>
+				<th class='reference'><:commandes:reference:></th>
+				<th class='etat'><:commandes:etat:></th>
+				<th class='dates'><:commandes:label_commande_dates:></th>
+				<th class='descriptif'><:commandes:contenu:></th>
+				<th class='montant'><:commandes:montant:></th>
+				<th class='action'></th>
+				[(#ENV{simuler}|=={1}|oui)<th class='descriptif'><:commandes:simuler:></th>]
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_liste_commandes(COMMANDES)
+			{id_auteur?}{id_commande?}{where?}{statut?}{annee?}{mois?}
+			{tri #ENV{order,date},#GET{defaut_tri}}
+			{pagination #ENV{nb,20}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUT)]">
+				<td class='infos'>
+					<div class='id'>
+						<a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">
+							[<:commandes:commande:>&nbsp;(#ID_COMMANDE)]
+						</a>
+					</div>
+					<div class='reference'>
+						#REFERENCE
+					</div>
+					<div class='qui'>
+						<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
+							[(#INFO_PRENOM{auteur, #ID_AUTEUR}) ][(#INFO_NOM{auteur, #ID_AUTEUR})]
+						</a>
+					</div>
+				</td>
+				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;][(#STATUT|commandes_lister_statuts)]</td>
+				<td class='dates'>
+					<ul>
+						[<li class="date">
+							<span class="label"><:commandes:label_passee_le:>:</span><br>
+							(#DATE|affdate_jourcourt)[&nbsp;(#DATE|affdate{H:i})]
+						</li>]
+						[(#DATE_PAIEMENT|intval|oui)
+						<li class="date paiement">
+							<span class="label"><:commandes:label_payee_le:>:</span><br>
+							[(#DATE_PAIEMENT|affdate_jourcourt)][&nbsp;(#DATE_PAIEMENT|affdate{H:i})]
+						</li>
+						]
+				</td>
+				<td class='descriptif'>
+					<B_detail_commande>
+					<table class="simple">
+						<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
+						<tr>
+							<td class="titre">[(#DESCRIPTIF*|typo|supprimer_numero)]</td>
+							[<td class="montant">(#TOTAL_BOUCLE|>{1}|oui)[<small>(#PRIX)</small>]</td>]
+						</td>
+						</tr>
+						</BOUCLE_detail_commande>
+					</table>
+					</B_detail_commande>
+				</td>
+				<td class='montant'>#PRIX</td>
+				<td class='action'>
+					[(#AUTORISER{supprimer,commande,#ID_COMMANDE})
+						[(#BOUTON_ACTION{
+							[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+							[(#URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE}|parametre_url{redirect,#SELF})],
+							ajax link,
+							<:commandes:confirmer_supprimer_commande:>,
+							<:commandes:supprimer:>})]
+					]
+				</td>
+				[(#ENV{simuler}|=={1}|oui)
+				<td class='simuler'>
+				[(#BOUTON_ACTION{
+					<:commandes:statut_encours:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-encours,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_attente:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-attente,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_partiel:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-partiel,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_paye:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-paye,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_envoye:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-envoye,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_retour:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-retour,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_retour_partiel:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-retour_partiel,#SELF})]})]
+				[(#BOUTON_ACTION{
+					<:commandes:statut_erreur:>,
+					[(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-erreur,#SELF})]})]
+				</td>
 				]
-				[(#AUTORISER{supprimer,commande,#ID_COMMANDE})
-					[(#BOUTON_ACTION{				
-						<:commandes:supprimer:>,
-						[(#URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE}|parametre_url{redirect,#SELF})],
-						ajax,<:commandes:confirmer_supprimer_commande:>})]
-				]
-			</td>
-			[(#ENV{simuler}|=={1}|oui)
-            <td class='simuler'>
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_encours:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-encours,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_attente:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-attente,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_partiel:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-partiel,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_paye:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-paye,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_envoye:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-envoye,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_retour:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-retour,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_retour_partiel:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-retour_partiel,#SELF})]})]
-               [(#BOUTON_ACTION{				
-                  <:commandes:statut_erreur:>,
-                  [(#URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-erreur,#SELF})]})]
-            </td>
-			]
-		</tr>
-	</BOUCLE_liste_commandes>
-	</tbody>
-</table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+			</tr>
+		</BOUCLE_liste_commandes>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_commandes>[
 <div class="liste-elements commandes"><strong class="caption">(#ENV*{sinon,''})</strong></div>
