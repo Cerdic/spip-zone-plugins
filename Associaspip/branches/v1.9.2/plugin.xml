@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
-	<version>1.9.2</version>
+	<auteur>Fran&#231;ois de Montlivault</auteur>
+	<version>1.9.2</version> <!-- 0.64 -->
 	<etat>test</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion de petites associations.</description>
@@ -9,21 +9,17 @@
 	<install>base/association_gestion.php</install>
 	<lien>http://www.spip-contrib.net/1611</lien>
     <icon>annonce.gif</icon>
-
     <fonctions>association_fonctions.php</fonctions>
-
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
