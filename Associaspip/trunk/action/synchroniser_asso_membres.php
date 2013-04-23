@@ -44,7 +44,7 @@ function action_synchroniser_asso_membres() {
 	$nb_modifs = sql_count($auteurs);
 
 	if ($auteurs) {
-		include_spip('inc/post_edition');
+		include_spip('association_pipelines');
 		while ($auteur = sql_fetch($auteurs)) {
 			update_spip_asso_membre($auteur['id_auteur']);
 		}
