@@ -1,0 +1,114 @@
+[(#REM) message affiché si des commandes doivent être envoyées ou sont en attente de paiement ]
+<INCLURE{fond=prive/squelettes/inclure/info_commandes_actives}>
+
+#BOITE_OUVRIR{'','simple commandes navigation'}
+
+
+[(#REM) filtrer les statuts ]
+<h4><:commandes:label_filtre_etats:></h4>
+<ul class='liste-items statuts'>
+
+	[(#REM) tous les statuts ]
+	#SET{actif, #ENV{statut}|=={''}|?{'oui',''}}
+	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,''}|lien_ou_expose{
+		<:commandes:label_filtre_tous_statuts:>,
+		#GET{actif},
+		'ajax', '', '',
+		[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:''\}\})"})]
+	})</li>]
+
+	[(#REM) statuts ]
+	<BOUCLE_statuts(COMMANDES){tout}{fusion statut}>
+	#SET{actif, #ENV{statut}|=={#STATUT}|?{'oui',''}}
+	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,#STATUT}|lien_ou_expose{
+		[(#CHEMIN_IMAGE{puce-commande-#STATUT-16.png}|balise_img)&nbsp;][(#STATUT|commandes_lister_statuts)],
+		#GET{actif},
+		'ajax', '', '',
+		[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:'#STATUT'\}\})"})]
+	})</li>]
+	</BOUCLE_statuts>
+	
+</ul>
+
+
+[(#REM) filtrer les dates ]
+<h4><:commandes:label_filtre_dates:></h4>
+<ul class='liste-items annees'>
+
+	[(#REM) toutes les dates ]
+	#SET{actif, #ENV{annee}|=={''}|et{#ENV{mois}|=={''}}|?{'oui',''}}
+	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,''}|parametre_url{mois,''}|lien_ou_expose{
+		<:commandes:label_filtre_toutes_dates:>,
+		#GET{actif},
+		'ajax', '', '',
+		[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'',mois:''\}\})"})]
+	})</li>]
+
+	[(#REM) années/mois ]
+	<B_annees>
+	#ANCRE_PAGINATION
+	<li><table class="simple">
+	<BOUCLE_annees(COMMANDES){tout}{!par date}{fusion YEAR(date)}{pagination 5}>
+	<tr>
+		<td class="annee">
+			#SET{actif, #ENV{annee}|=={#DATE|annee}|?{'oui',''}}
+			[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,''}|lien_ou_expose{
+				[(#DATE|annee)],
+				#GET{actif},
+				ajax,'', '',
+				[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'[(#DATE|annee)]',mois:''\}\})"})]
+			})</li>]
+		</td>
+		<td class="mois">
+			<ul>
+				<BOUCLE_mois(COMMANDES){tout}{annee=#DATE|annee}{!par date}{fusion MONTH(date)}>
+				#SET{actif, #ENV{mois}|=={#DATE|mois}|et{#ENV{annee}|=={#DATE|annee}}|?{'oui',''}}
+				[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,#DATE|mois}|lien_ou_expose{
+					[(#DATE|affdate{nom_mois})],
+					#GET{actif},
+					'ajax', '', '',
+					[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'[(#DATE|annee)]',mois:'[(#DATE|mois)]'\}\})"})]
+				})</li>]
+				</BOUCLE_mois>
+			</ul>
+		</td>
+	</tr>
+	</BOUCLE_annees>
+	</table></li>
+	[<li class='pagination simple'>(#PAGINATION{page})</li>]
+	</B_annees>
+
+</ul>
+
+
+[(#REM) filtrer les clients ]
+<h4><:commandes:label_filtre_clients:></h4>
+<ul class='liste-items clients'>
+
+	[(#REM) tous les clients ]
+	#SET{actif, #ENV{id_auteur}|=={''}|?{'oui',''}}
+	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{id_auteur,''}|lien_ou_expose{
+		<:commandes:label_filtre_tous_clients:>,
+		#GET{actif},
+		'ajax', '', '',
+		[(#VAL{onclick="ajaxReload('commandes',\{args:\{id_auteur:''\}\})"})]
+	})</li>]
+
+	<B_clients>
+	#ANCRE_PAGINATION
+	<BOUCLE_clients(COMMANDES){tout}{fusion id_auteur}{pagination 15}>
+	#SET{actif, #ENV{id_auteur}|=={#ID_AUTEUR}|?{'oui',''}}
+	[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{id_auteur,#ID_AUTEUR}|lien_ou_expose{
+		[(#INFO_PRENOM{auteur, #ID_AUTEUR}) ][(#INFO_NOM{auteur, #ID_AUTEUR})],
+		#GET{actif},
+		'ajax', '', '',
+		[(#VAL{onclick="ajaxReload('commandes',\{args:\{id_auteur:'#ID_AUTEUR'\}\})"})]
+	})</li>]
+	</BOUCLE_clients>
+	[<li class='pagination simple'>(#PAGINATION{page})</li>]
+	</B_clients>
+
+</ul>
+
+
+#BOITE_FERMER

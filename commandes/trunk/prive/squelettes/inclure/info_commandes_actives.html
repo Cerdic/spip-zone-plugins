@@ -1,0 +1,22 @@
+[(#REM) message affichant le nombre de commandes à envoyer ou en attente de paiement ]
+#SET{nb_paye, #VAL{commande}|table_objet_sql|sql_countsel{statut='paye'}}
+#SET{nb_attente, #VAL{commande}|table_objet_sql|sql_countsel{statut='attente'}}
+
+[(#GET{nb_paye}|>{0}|ou{#GET{nb_attente}|>{0}}|oui)
+
+[(#BOITE_OUVRIR{#ENV{titre}|?{#CHEMIN_IMAGE{commande-24.png}|balise_img{'',cadre-icone}|concat{#ENV{titre}}},'info commandes'})]
+<ul class="liste-items simple">
+	<li class="item">
+		<a href="[(#URL_ECRIRE{commandes,statut=paye})]" class="ajax" onclick="ajaxReload('commandes',{args:{statut:'paye',}})">
+		[(#GET{nb_paye}|singulier_ou_pluriel{commandes:info_1_commande_attente_livraison,commandes:info_nb_commandes_attente_livraison})]
+		</a>
+	</li>
+	<li class="item">
+		<a href="[(#URL_ECRIRE{commandes,statut=attente})]" class="ajax" onclick="ajaxReload('commandes',{args:{statut:'attente',}})">
+		[(#GET{nb_attente}|singulier_ou_pluriel{commandes:info_1_commande_attente_paiement,commandes:info_nb_commandes_attente_paiement})]
+		</a>
+	</li>
+</ul>
+#BOITE_FERMER
+
+]
