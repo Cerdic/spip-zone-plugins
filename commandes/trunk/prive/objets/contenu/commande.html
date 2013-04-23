@@ -1,27 +1,35 @@
 <BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
-<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+[<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
 	<label><:commandes:modifier_commande_statut:></label>
-	<span dir='#LANG_DIR' class='statut'>[(#STATUT|commandes_lister_statuts)]</span>
-</div>
-<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='statut'>(#STATUT|commandes_lister_statuts)</span>
+</div>]
+[<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
 	<label><:commandes:date_envoi_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>[(#DATE_ENVOI|affdate)]</span>
-</div>
-<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>
+	(#DATE_ENVOI|=={0000-00-00 00:00:00}|?{
+		<em><:commandes:info_date_envoi_vide:></em>,
+		#DATE_ENVOI|affdate})
+	</span>
+</div>]
+[<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
 	<label><:commandes:date_paiement_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>[(#DATE_PAIEMENT|affdate)][ - (#DATE_PAIEMENT|affdate{'H:i'})]</span>
-</div>
-<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>
+		(#DATE_PAIEMENT|=={0000-00-00 00:00:00}|?{
+			<em><:commandes:info_date_paiement_vide:></em>,
+			#DATE_PAIEMENT|affdate|concat{' - ',#DATE_PAIEMENT|affdate{'H:i'}}})
+	</span>
+</div>]
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
 	<label><:commandes:date_commande_label:></label>
-	<span dir='#LANG_DIR' class='date'>[(#DATE|affdate)]</span>
-</div>
+	<span dir='#LANG_DIR' class='date'>(#DATE|affdate)</span>
+</div>]
 <div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
 	<label><:commandes:date_maj_label:></label>
 	<span dir='#LANG_DIR'>[(#MAJ|affdate)][ - (#MAJ|affdate{'H:i'})]</span>
 </div>
-<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+[<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
 	<label><:commandes:contact_label:></label>
 	<span dir='#LANG_DIR' class='#EDIT{id_auteur} auteur'>#ID_AUTEUR</span>
-	[(#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE})]
-</div>
+	(#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE})
+</div>]
 </BOUCLE_afficher_contenu>
