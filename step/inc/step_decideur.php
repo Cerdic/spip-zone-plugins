@@ -523,7 +523,7 @@ class Decideur {
 		$res = array();
 		foreach ($this->$quoi as $id=>$info) {
 			$supp = ($info['todo'] == 'up' or $info['todo'] == 'upon') ? 'en version ' . $info['maj'] : '';
-			$res[] = _T('step:message_action'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
+			$res[] = _T('step:message_action_'.$info['todo'],array('plugin'=>$info[p],'version'=>$info[v],'supp'=>$supp));
 		}
 		return $res;
 	}

@@ -9,7 +9,7 @@
 	</slogan>
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>&#169; 2008-2011 GPL</licence>
-	<version>0.15.6</version>
+	<version>0.15.7</version>
 	<version_base>0.6</version_base>
 	<install>base/step_upgrade.php</install>
 	<lien>http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins</lien>

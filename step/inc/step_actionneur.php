@@ -104,6 +104,7 @@ class Actionneur {
 			$i = $this->decideur->infos_courtes_id($id);
 			$i = $i['i'][$id];
 			switch ($action) {
+				case 'geton':
 				case 'on':
 					$this->on($i, $action);
 					break;
