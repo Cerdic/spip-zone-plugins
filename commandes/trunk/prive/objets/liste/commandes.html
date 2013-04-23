@@ -30,8 +30,8 @@
 		[(#ENV{titre_dehors}|non)[<caption><strong class="caption">(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</strong></caption>]]
 		<thead>
 			<tr class='first_row'>
-				<th class='reference'><:commandes:reference:></th>
 				<th class='etat'><:commandes:etat:></th>
+				<th class='reference'><:commandes:reference:></th>
 				<th class='dates'><:commandes:label_commande_dates:></th>
 				<th class='descriptif'><:commandes:contenu:></th>
 				<th class='montant'><:commandes:montant:></th>
@@ -45,6 +45,7 @@
 			{tri #ENV{order,date},#GET{defaut_tri}}
 			{pagination #ENV{nb,20}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUT)]">
+				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;][(#STATUT|commandes_lister_statuts)]</td>
 				<td class='infos'>
 					<div class='id'>
 						<a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">
@@ -52,7 +53,7 @@
 						</a>
 					</div>
 					<div class='reference'>
-						#REFERENCE
+						<strong>#REFERENCE</strong>
 					</div>
 					<div class='qui'>
 						<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
@@ -60,7 +61,6 @@
 						</a>
 					</div>
 				</td>
-				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;][(#STATUT|commandes_lister_statuts)]</td>
 				<td class='dates'>
 					<ul>
 						[<li class="date">
