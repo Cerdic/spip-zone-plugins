@@ -16,7 +16,7 @@ function switcher_affichage_final($texte = ""){
 	    $auteur_autorise = in_array($GLOBALS['visiteur_session']['id_auteur'],lire_config('switcher/auteurs_autorises',array())) ? true : false;
 
 	    //Contrôler le cas "tout public"
-	    if (lire_config('switcher/switcher_activer') == "on")
+	    if (lire_config('switcher/switcher_public') == "on")
     	    $auteur_autorise = true;
 	
 		if (SWITCHER_AFFICHER || $auteur_autorise) {
