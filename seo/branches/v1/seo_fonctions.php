@@ -67,6 +67,8 @@ function generer_google_analytics(){
  */
 function calculer_meta_tags(){
 
+    include_spip('inc/texte');
+
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 
