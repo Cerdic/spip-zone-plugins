@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_responsables' => 'Liste des responsables',
 	'livraison' => 'Livraison',
 	'livraison_enregistre_explication' => 'Vous devez avoir déjà distribué des paniers pour pouvoir enregistrer via ce formulaire des contenus de livraison.',
-	'livraison_explication' => 'Sur cette page, vous trouverez la liste des livraisons que vous avez déjà effectuées. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|livraison&gt;.',
+	'livraison_explication' => 'Sur cette page, vous trouverez la liste des livraisons que vous avez déjà effectuées. Ce tableau est affichable sur le site via un article en mettant le code &lt;liste|livraisons&gt;.',
 
 	// M
 	'manque_fpdf_imprimer' => 'Il vous manque le plugin "fpdf" pour pouvoir imprimer vos listes de paniers.',
