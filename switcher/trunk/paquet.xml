@@ -1,7 +1,7 @@
 <paquet
         prefix="switcher"
         categorie="maintenance"
-        version="0.2.0"
+        version="0.2.1"
         etat="dev"
         compatibilite="[3.0.0-alpha2;3.0.*]"
         documentation="http://zine.spip.org/spip.php?article8"
@@ -12,7 +12,7 @@
         <auteur>idée originale contribution switcher de Fil</auteur>
 
         <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-        <copyright>2006-2012</copyright>
+        <copyright>2006-2013</copyright>
  
         <pipeline nom="affichage_final" inclure="switcher_fonctions.php" />
         <pipeline nom="insert_head" inclure="head.php" />
