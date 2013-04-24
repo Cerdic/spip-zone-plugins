@@ -11,6 +11,7 @@
 <div class="infos_document">
 	[<div class="logo">(#LOGO_DOCUMENT{[(#URL_DOCUMENT|url_absolue)]}|image_reduire{100,100})</div>]
 	<div class="titre"><h1><a href="[(#URL_DOCUMENT|url_absolue)]">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></h1></div>
+	[(#FICHIER|image_reduire{#ENV{width,10000},0})]
 	[<div class="texte">(#DESCRIPTION)</div>]
 	[<div class="credits">(#CREDITS)</div>]
 </div>
@@ -23,6 +24,7 @@
 <head>
     <title>#NOM_SITE_SPIP</title>
     <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+    <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
     [<link rel="stylesheet" href="(#CHEMIN{css/embed_code.css})">]
 </head>
 <body id="document_#ID_DOCUMENT" class="document embed_document" dir="#LANG_DIR">
