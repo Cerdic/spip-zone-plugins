@@ -1,22 +1,23 @@
 <paquet
 	prefix="association"
 	categorie="divers"
-	version="2.1.0"
+	version="2.1.10"
 	etat="stable"
-	compatibilite="[2.1.8;]"
+	compatibilite="[2.1.8;3.0.99]"
 	logo="img_pack/annonce.gif"
 	schema="47731"
 	meta="association_metas"
-	documentation="http://www.spip-contrib.net/Plugin-Gestion-d-associations"
->	
+	documentation="http://contrib.spip.net/4275"
+>
 
 	<nom>Associaspip</nom>
 	<!-- Gestion d'associations -->
 
-	<auteur>Bernard Blazin</auteur>
-	<auteur>François de Montlivault (V1)</auteur>
-	<auteur>Emmanuel Saint-James</auteur>
-	<auteur>Jeannolapin (V2)</auteur>
+	<auteur>François de Montlivault (v:1.9)</auteur>
+	<auteur>Maïeul Roquette (v:2.0)</auteur>
+	<auteur>Bernard Blazin (v:2.0)</auteur>
+	<auteur>Emmanuel Saint-James (v:2.0-2.1)</auteur>
+	<auteur>Jeannolapin (v:2.1)</auteur>
 
 	<pipeline nom="header_prive" />
 	<pipeline nom="delete_tables" />
