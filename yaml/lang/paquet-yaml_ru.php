@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Y
-	'yaml_description' => 'Плагин предоставляет возможность чтения/написания в формата YAML:
-	<code>yaml_decode()</code> et <code>yaml_encode()</code>. А также делает доступным формат YAML для циклов.',
-	'yaml_slogan' => 'Формат файла для редактирования списков данных'
+	'yaml_description' => 'Плагин позволяет использовать функции чтения/записи в формате YAML:
+	<code>yaml_decode()</code> и <code>yaml_encode()</code>. И позволяет использовать YAML в запросе BOUCLE(DATA).',
+	'yaml_slogan' => 'Позволяет работать с YAML форматом'
 );
 
 ?>
