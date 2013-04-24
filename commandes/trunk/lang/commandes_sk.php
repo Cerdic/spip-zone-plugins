@@ -52,11 +52,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_titre' => 'Faktúra',
 
 	// I
+	'info_1_commande' => '1 commande', # NEW
+	'info_1_commande_attente_livraison' => '1 commande à envoyer', # NEW
+	'info_1_commande_attente_paiement' => '1 commande en attente de paiement', # NEW
+	'info_aucun_commande' => 'Aucune commande', # NEW
 	'info_commandes' => 'Commandes', # NEW
+	'info_date_envoi_vide' => 'commande non envoyée', # NEW
+	'info_date_paiement_vide' => 'commande non payée', # NEW
+	'info_nb_commandes' => '@nb@ commandes', # NEW
+	'info_nb_commandes_attente_livraison' => '@nb@ commandes à envoyer', # NEW
+	'info_nb_commandes_attente_paiement' => '@nb@ commandes en attente de paiement', # NEW
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
 	// L
+	'label_commande_dates' => 'Dates', # NEW
+	'label_filtre_clients' => 'Clients', # NEW
+	'label_filtre_dates' => 'Dates', # NEW
+	'label_filtre_etats' => 'Etats', # NEW
+	'label_filtre_tous_clients' => 'Tous les clients', # NEW
+	'label_filtre_tous_statuts' => 'Tous les états', # NEW
+	'label_filtre_toutes_dates' => 'Toutes les dates', # NEW
+	'label_passee_le' => 'passée le', # NEW
+	'label_payee_le' => 'payée le', # NEW
 	'label_recherche' => 'Vyhľadávať',
 
 	// M
@@ -121,6 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
+	'titre_commandes_a_envoyer' => 'Commandes à envoyer', # NEW
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
