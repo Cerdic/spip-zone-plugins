@@ -22,23 +22,16 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-
 /*  ------------------------------------------
 /*  Colonne de navigation
 /*  ------------------------------------------ */
 
 /*  Images de la colonne de navigation  */
-i.bando2_amap_page_accueil {
-	background:url(#CHEMIN_IMAGE{page_accueil.png}) no-repeat;
-	}	
-i.bando2_amap_page_options {
-	background:url(#CHEMIN_IMAGE{options.png}) no-repeat;
-	}
+.bando2_amap_page_accueil
+{ background-image:url(#CHEMIN_IMAGE{amap-accueil.png}); }
+
+.bando2_amap_page_options
+{ background-image:url(#CHEMIN_IMAGE{amap-options.png}); }
 
 /*  ------------------------------------------
 /*  Surcharge formulaire_spip

@@ -26,9 +26,12 @@ function amap_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['amap_paniers'] = 'amap_paniers';
 	$interfaces['table_des_tables']['amap_responsables'] = 'amap_responsables';
 	$interfaces['table_des_tables']['amap_livraisons'] = 'amap_livraisons';
-        //-- filtre date
-        $interfaces['table_date']['amap_paniers'] = 'date_distribution';
-        $interfaces['table_date']['amap_responsables'] = 'date_distribution';
+	//-- filtre date
+	$interfaces['table_date']['amap_paniers'] = 'date_distribution';
+	$interfaces['table_date']['amap_responsables'] = 'date_distribution';
+	//-- Savoir traiter "_ " en <br />
+	$interfaces['table_des_traitements']['CONTENU_PANIER']['amap_livraisons'] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['INFO_SUPPLEMENTAIRE']['amap_disponibles'] = _TRAITEMENT_RACCOURCIS;
 	return $interfaces;
 }
 
