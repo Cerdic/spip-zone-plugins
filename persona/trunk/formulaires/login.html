@@ -26,7 +26,7 @@ function persona_message(m) {
 }
 
 function persona_login() {
-	navigator.id.getVerifiedEmail(persona_verify_server);
+	navigator.id.get(persona_verify_server);
 	persona_message("Veuillez autoriser les popups");
 }
 
