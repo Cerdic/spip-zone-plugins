@@ -42,7 +42,7 @@ function action_persona_verify() {
 				'audience' => $audience
 			)
 			# forcer l'absence de boundary : persona.org/verify ne le tolere pas
-			# cf. https://github.com/mozilla/persona/issues/649
+			# cf. https://github.com/mozilla/browserid/issues/649
 			, $boundary = false
 			);
 
