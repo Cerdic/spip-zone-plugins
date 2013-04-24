@@ -9,22 +9,6 @@
 [(#INCLURE{javascript/persona.js})]
 
 /*
- * fonction demandant au client de verifier l'assertion renvoyee
- * par persona
- */
-function persona_verify_client(assertion) {
-  if (assertion) {
-    $.post("https://verifier.login.persona.org/verify",
-      {
-      assertion: assertion,
-      audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')
-      }, persona_welcome
-    );
-  }
-}
-
-
-/*
  * fonction demandant au serveur de verifier l'assertion persona
  * et de nous loger sur SPIP au passage, si le site est ainsi configure'
  */
