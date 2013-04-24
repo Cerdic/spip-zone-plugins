@@ -24,6 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'canonical_url' => 'Kanonická podoba adries',
 	'canonical_url_activate' => 'Aktivovať kanonickú podobu adries', # MODIF
 
+	// E
+	'explication_description' => 'Il est conseillé que la longueur soit inférieure ou égale à 160 caractères.', # NEW
+	'explication_title' => 'Il est conseillé que la longueur soit comprise entre 5 et 70 caractères.', # NEW
+
 	// F
 	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred hlavičkami meta, ktoré vygenerujú šablóny', # MODIF
 	'forcer_squelette_label' => 'Nahrať hlavičky meta pre všetky šablóny',
@@ -37,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_webmaster_tools_id' => 'Kontrolný kód',
 
 	// I
+	'info_count_max' => 'Caractères pour atteindre la limite optimale : ', # NEW
 	'insert_head' => 'Automatické vkladanie do #INSERT_HEAD',
 	'insert_head_activate' => 'Aktivovať automatické vkladanie',
 	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;hlavičky&gt;', # MODIF

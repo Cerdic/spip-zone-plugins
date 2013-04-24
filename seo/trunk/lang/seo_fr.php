@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_description' => 'Il est conseillé que la longueur soit inférieure ou égale à 160 caractères.',
 	'explication_title' => 'Il est conseillé que la longueur soit comprise entre 5 et 70 caractères.',
-	
+
 	// F
 	'forcer_squelette_descriptif' => 'Les metas SEO sont prioritaires aux metas générées par les squelettes',
 	'forcer_squelette_label' => 'Charger les metas pour tous squelettes',

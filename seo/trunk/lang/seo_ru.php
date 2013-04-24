@@ -22,24 +22,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'canonical_url' => 'Канонические URL',
-	'canonical_url_activate' => 'Включить канонические URL', # MODIF
+	'canonical_url_activate' => 'Включить канонические URL',
+
+	// E
+	'explication_description' => 'Длинна ссылки не должна превышать 160 символов.',
+	'explication_title' => 'Рекомендуемая  длинна от 5 до 70 символов.',
 
 	// F
-	'forcer_squelette_descriptif' => 'Мета теги, заданные в плагине, имеют больший приоритет, чем теги, указанные в шаблонах.', # MODIF
+	'forcer_squelette_descriptif' => 'Мета теги, заданные в плагине, имеют больший приоритет, чем теги, указанные в шаблонах.',
 	'forcer_squelette_label' => 'Подключать мета теги во все шаблоны',
 
 	// G
 	'google_analytics' => 'Google Analytics',
-	'google_analytics_activate' => 'Включить Analytics', # MODIF
+	'google_analytics_activate' => 'Добавить Google Analytics',
 	'google_analytics_id' => 'Google Analytics ID',
 	'google_webmaster_tools' => 'Google Webmaster Tools',
-	'google_webmaster_tools_activate' => 'Включить Webmaster Tools', # MODIF
+	'google_webmaster_tools_activate' => 'Включить Google Webmaster Tools',
 	'google_webmaster_tools_id' => 'Проверка Meta code ',
 
 	// I
+	'info_count_max' => 'Минимальное количество символов: ',
 	'insert_head' => 'Подключать автоматически в #INSERT_HEAD',
 	'insert_head_activate' => 'Включить',
-	'insert_head_descriptif' => 'Автоматическая вставка мета-тегов в &lt;header&gt;', # MODIF
+	'insert_head_descriptif' => 'Автоматическая вставка мета-тегов в &lt;header&gt;',
 
 	// M
 	'meta_author' => 'Автор :',
@@ -53,11 +58,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meta_robots' => 'Роботы :',
 	'meta_sommaire_value' => 'Значение Meta главной страницы',
 	'meta_tags' => 'Mета Теги',
-	'meta_tags_activate' => 'Включить', # MODIF
-	'meta_tags_default' => 'Сгенерировать Mета Теги по умолчанию (для статей и разделов)', # MODIF
+	'meta_tags_activate' => 'Включить',
+	'meta_tags_default' => 'Сгенерировать Mета Теги по умолчанию (для статей и разделов)',
 	'meta_tags_edit_activate' => 'Включить возможность редактирования мета тегов для разделов и статей',
-	'meta_tags_editing' => 'Редактирование мета-тегов', # MODIF
-	'meta_tags_sommaire' => 'Мета теги главной страницы', # MODIF
+	'meta_tags_editing' => 'Редактирование мета-тегов',
+	'meta_tags_sommaire' => 'Мета теги главной страницы',
 	'meta_title' => 'Title :',
 
 	// S
