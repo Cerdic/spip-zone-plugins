@@ -9,14 +9,15 @@ function switcher_affichage_final($texte = ""){
 
     $code = "";
     $texte = trim($texte);
-    
-	if(!$GLOBALS['visiteur_session'])
-	    return $texte;
 
 	if ($texte) {
 
+        //Contrôler le cas visiteur authentifié
 	    $auteur_autorise = in_array($GLOBALS['visiteur_session']['id_auteur'],lire_config('switcher/auteurs_autorises',array())) ? true : false;
-#	    var_dump(lire_config('switcher/auteurs_autorises'),$auteur_autorise,$GLOBALS['visiteur_session']['id_auteur']);
+
+	    //Contrôler le cas "tout public"
+	    if (lire_config('switcher/switcher_activer') == "on")
+    	    $auteur_autorise = true;
 	
 		if (SWITCHER_AFFICHER || $auteur_autorise) {
 			
