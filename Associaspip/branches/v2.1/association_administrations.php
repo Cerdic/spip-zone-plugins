@@ -40,7 +40,6 @@ function association_upgrade($meta, $courante, $table='meta')
 {
   // Compatibilite: le nom de la meta donnant le numero de version
   // n'etait pas std puis est parti dans une autre table puis encore une autre
-
 	if (!isset($GLOBALS['association_metas']['base_version'])) {
 		lire_metas('asso_metas');
 		if (isset($GLOBALS['asso_metas']['base_version'])) {
@@ -82,12 +81,12 @@ $GLOBALS['association_maj'][30] = array(
 
 $GLOBALS['association_maj'][40] = array(
 	array('sql_alter',"TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` "));
-		
+
 $GLOBALS['association_maj'][50] = array(
 	array('sql_alter',"TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres "));
-		
+
 $GLOBALS['association_maj'][60] = array(array('sql_drop_table', "spip_asso_profil"));
-		
+
 $GLOBALS['association_maj'][61] = array(
 	array('spip_query',"RENAME TABLE spip_asso_banques TO spip_asso_plan"),
 	array('sql_drop_table',"spip_asso_livres")
@@ -95,7 +94,7 @@ $GLOBALS['association_maj'][61] = array(
 $GLOBALS['association_maj'][62] = array(array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL AFTER commentaires"));
 
 $GLOBALS['association_maj'][63] = array(array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT(20) NOT NULL AFTER acheteur"));
-		
+
 function association_maj_64(){
 
 	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') {
@@ -123,7 +122,7 @@ function association_maj_38192()
 {
 	global $association_tables_auxiliaires;
 
-	if (sql_create('spip_asso_metas', 
+	if (sql_create('spip_asso_metas',
 		$association_tables_auxiliaires['spip_asso_metas']['field'],
 		$association_tables_auxiliaires['spip_asso_metas']['key'],
 		false, false)) {
@@ -164,10 +163,10 @@ function association_maj_43909()
 	global $association_tables_principales;
 
 	sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
-	sql_create('spip_asso_destination', 
+	sql_create('spip_asso_destination',
 		$association_tables_principales['spip_asso_destination']['field'],
 		$association_tables_principales['spip_asso_destination']['key']);
-	sql_create('spip_asso_destination_op', 
+	sql_create('spip_asso_destination_op',
 		$association_tables_principales['spip_asso_destination_op']['field'],
 		$association_tables_principales['spip_asso_destination_op']['key']);
 }
@@ -185,10 +184,10 @@ function association_maj_46392() /* repare l'erreur commise sur la maj 43909 */
 
 	/* et on refait la modif correctement: ca risque d'entrainer des erreurs SQL mais c'est pas grave */
 	sql_alter("TABLE spip_asso_plan ADD direction ENUM('credit','debit') NOT NULL default 'credit'");
-	sql_create('spip_asso_destination', 
+	sql_create('spip_asso_destination',
 		$association_tables_principales['spip_asso_destination']['field'],
 		$association_tables_principales['spip_asso_destination']['key']);
-	sql_create('spip_asso_destination_op', 
+	sql_create('spip_asso_destination_op',
 		$association_tables_principales['spip_asso_destination_op']['field'],
 		$association_tables_principales['spip_asso_destination_op']['key']);
 }
@@ -210,7 +209,7 @@ function association_maj_46779()
 
 	/* modification du type de direction, on ajoute une troisieme valeur a l'enumeration, on renomme direction en type_op essentiellement
 	pour des raisons de compatibilite avec les differentes bases de donnees supportees par SPIP (impossible d'utiliser ALTER COLUMN ou MODIFY)*/
-	sql_alter("TABLE spip_asso_plan ADD type_op ENUM('credit','debit','multi') NOT NULL default 'multi'");	
+	sql_alter("TABLE spip_asso_plan ADD type_op ENUM('credit','debit','multi') NOT NULL default 'multi'");
 	sql_update('spip_asso_plan', array('type_op' => 'direction'));
 	sql_alter("TABLE spip_asso_plan DROP direction");
 
@@ -228,7 +227,7 @@ function association_maj_46779()
 			"id_vente=".$row['id_vente']);
 	}
 	sql_alter("TABLE spip_asso_ventes DROP don");
-	
+
 }
 
 $GLOBALS['association_maj'][46779] = array(array('association_maj_46779'));
@@ -270,7 +269,7 @@ function association_maj_47501() /* revert de la 47144 pour ceux qui l'aurait ef
 					array('commentaire' => $commentaire, 'id_asso' => $id_asso),
 					"id_auteur=".$row['id_auteur']);
 			}
-		}		
+		}
 	}
 }
 $GLOBALS['association_maj'][47501] = array(array('association_maj_47501'));
@@ -282,4 +281,5 @@ function association_maj_47731() /* eliminer le champ id_achat de la table resso
 }
 
 $GLOBALS['association_maj'][47731] = array(array('association_maj_47731'));
+
 ?>
