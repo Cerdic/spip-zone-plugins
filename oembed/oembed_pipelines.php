@@ -163,7 +163,7 @@ function oembed_post_edition($flux) {
 				  AND is_int(reset($ajoute))){
 					$id_vignette = reset($ajoute);
 					include_spip('action/editer_document');
-					document_modifier($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+					document_modifier($id_document,array("id_vignette" => $id_vignette));
 				}
 			}
 			else
