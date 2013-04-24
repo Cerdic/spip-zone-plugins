@@ -14,7 +14,7 @@
  */
 function persona_verify_client(assertion) {
   if (assertion) {
-    $.post("https://persona.org/verify",
+    $.post("https://verifier.login.persona.org/verify",
       {
       assertion: assertion,
       audience: window.location.href.replace(/(\/\/.*?)\/.*/, '$1')

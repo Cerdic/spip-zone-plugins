@@ -7,7 +7,7 @@
  *
  */
 
-define('_PERSONA_VERIFY', "https://persona.org/verify");
+define('_PERSONA_VERIFY', "https://verifier.login.persona.org/verify");
 
 
 function persona_auth_loger($auteur, &$a) {
