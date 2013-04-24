@@ -1,0 +1,69 @@
+#! /usr/bin/php -q
+<?php
+
+## http://smush.it algorithm to reduce images footprint
+##
+## to install you need:
+## --------------------
+## apt-get install imagemagick
+##  => identify convert
+## apt-get install libjpeg-progs
+##  => jpegtran
+## apt-get install pngcrush
+## apt-get install gifsicle
+
+## reste a integrer :
+#15:28 <kent1> if strstr(0,6,'GIFGIF')
+#15:29 <kent1> gifsicle -o2 source.gif > dest.gif
+
+## doc fr: http://zzz.rezo.net/smushit-pour-reduire-le-poids-des.html
+
+$source = $argv[1];
+define('_DIR_TMP', '/tmp/');
+
+if ($dest = smush($source, _DIR_TMP.basename($source).'-smush-'.getmypid())
+AND is_readable($dest)
+AND filesize($dest) > 0
+AND filesize($dest) < filesize($source)
+)
+	echo $dest;
+else
+	echo $source;
+echo "\n";
+
+
+function smush($source, $tmp) {
+	if (!is_readable($source))
+		die ("$source not readable");
+
+	$format = trim(`identify -format %m $source`);
+	$fsize = filesize($source);
+
+	if ($format == 'GIF') {
+		$dest = $tmp.'.png';
+		`convert $source $dest`;
+		$source = $dest;
+		$format = 'PNG';
+	}
+
+	if ($format == 'PNG') {
+		$dest = $tmp.'.png';
+		`pngcrush -rem alla -reduce -brute $source $dest`;
+		return $dest;
+	}
+
+	if ($format == 'JPEG') {
+		$dest = $tmp.'.jpg';
+
+		if ($fsize < 10*1024) {
+			`jpegtran -copy none -optimize $source > $dest`;
+			return $dest;
+		}
+		else {
+			`jpegtran -copy none -progressive $source > $dest`;
+			return $dest;
+		}
+		
+	}
+}
+
