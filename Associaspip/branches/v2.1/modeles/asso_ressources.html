@@ -40,10 +40,10 @@
 	]
 		<td class="decimal">[(#PU|association_nbrefr)]</td>
 		<td>
-			[(#STATUT|=={ok}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
-			[(#STATUT|=={reserve}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
-			[(#STATUT|=={suspendu}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
-			[(#STATUT|=={sorti}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
+			[(#STATUT|=={ok}|oui)[<img src="(#CHEMIN{img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
+			[(#STATUT|=={reserve}|oui)[<img src="(#CHEMIN{img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
+			[(#STATUT|=={suspendu}|oui)[<img src="(#CHEMIN{img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
+			[(#STATUT|=={sorti}|oui)[<img src="(#CHEMIN{img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
 		</td>
 	<B_dernier_retour>
 	<BOUCLE_dernier_retour(ASSO_PRETS){id_ressource}{!par date_retour}{0,1}>
