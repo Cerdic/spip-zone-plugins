@@ -41,17 +41,7 @@ function exec_association() {
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);
 		echo debut_cadre_formulaire("",true);
-#		echo gros_titre(_T('asso:votre_asso'),'',false);
-#		echo "<br />\n";
-		echo '<strong>'.$GLOBALS['association_metas']['nom'].'</strong><br/>';
-		echo $GLOBALS['association_metas']['rue']."<br />\n";
-		echo $GLOBALS['association_metas']['cp'].'&nbsp;';
-		echo $GLOBALS['association_metas']['ville']."<br />\n";
-		echo $GLOBALS['association_metas']['telephone']."<br />\n";
-		echo $GLOBALS['association_metas']['email']."<br />\n";
-		echo $GLOBALS['association_metas']['siret']."<br />\n";
-		echo $GLOBALS['association_metas']['declaration']."<br />\n";
-		echo $GLOBALS['association_metas']['prefet']."<br />\n";
+		echo recuperer_fond('modeles/asso_profil');
 		echo fin_cadre_formulaire(true);
 
 		/* Provisoirement supprimé en attendant 1.9.3*/
@@ -74,8 +64,8 @@ function exec_association() {
 		while ($data = sql_fetch($query)) {
 			$id_auteur=$data['id_auteur'];
 			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-			$mob = print_tel($data['mobile']);
-			$tel = print_tel($data['telephone']);
+			$mob = association_telfr($data['mobile']);
+			$tel = association_telfr($data['telephone']);
 			if ($email = $data['email'])
 			  $tel = "<a href='mailto:$email' title='"
 			    . _L('Ecrire &agrave;') . ' ' . $email . "'>"
@@ -113,13 +103,6 @@ function exec_association() {
 			array("statut_interne"=> 'echu'),
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}
-}
-
-function print_tel($n)
-{
-	$n = preg_replace('/\D/', '', $n);
-	if (!intval($n)) return '';
-	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
 }
 
 ?>

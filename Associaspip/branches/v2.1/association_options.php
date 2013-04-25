@@ -26,17 +26,15 @@ $GLOBALS['association_styles_des_statuts'] = array(
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
-function association_icone($texte, $lien, $image, $sup='rien.gif')
-{
+function association_icone($texte, $lien, $image, $sup='rien.gif') {
 	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
-function association_bouton($texte, $image, $script, $args='', $img_attributes='')
-{
+function association_bouton($texte, $image, $script, $args='', $img_attributes='') {
 	return '<a href="'
 	. generer_url_ecrire($script, $args)
 	. '"><img src="'
-	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image 
+	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image
 	. '" alt=" " title="'
 	. $texte
 	. '" '
@@ -44,13 +42,11 @@ function association_bouton($texte, $image, $script, $args='', $img_attributes='
 	.' /></a>';
 }
 
-function association_retour()
-{
+function association_retour() {
 	return bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), "retour-24.png"));
 }
 
-function request_statut_interne()
-{
+function request_statut_interne() {
 	$statut_interne = _request('statut_interne');
 	if (in_array($statut_interne, $GLOBALS['association_liste_des_statuts'] ))
 		return "statut_interne=" . sql_quote($statut_interne);
@@ -72,14 +68,13 @@ function association_ajouterBoutons($boutons_admin) {
 			_DIR_PLUGIN_ASSOCIATION_ICONES."annonce.gif",  // icone
 			_T('asso:titre_menu_gestion_association') //titre
 			);
-			
+
 	}
 	return $boutons_admin;
 }
-	
 
-function association_mode_de_paiement($journal, $label)
-{
+
+function association_mode_de_paiement($journal, $label) {
 	$sel = '';
 	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['association_metas']['classe_banques']), '', "code") ;
 	while ($banque = sql_fetch($sql)) {
@@ -92,7 +87,7 @@ function association_mode_de_paiement($journal, $label)
 	return '<label for="journal"><strong>'
 	  . $label
 	  . "&nbsp;:</strong></label>\n"
-	  . (!$sel 
+	  . (!$sel
 	      ? "<input name='journal' id='journal' class='formo' />"
 	      : "<select name='journal' id='journal' class='formo'>$sel</select>\n");
 }
@@ -106,12 +101,12 @@ function association_calculer_nom_membre($civilite, $prenom, $nom) {
 }
 
 //Conversion de date
-function association_datefr($date) { 
-		$split = explode('-',$date); 
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2]; 
-		return $jour.'/'.$mois.'/'.$annee; 
+function association_datefr($date) {
+		$split = explode('-',$date);
+		$annee = $split[0];
+		$mois = $split[1];
+		$jour = $split[2];
+		return $jour.'/'.$mois.'/'.$annee;
 	}
 
 function association_verifier_date($date) {
@@ -120,7 +115,7 @@ function association_verifier_date($date) {
 	if (!checkdate($mois, $jour, $annee)) return _T('asso:erreur_date');
 	return;
 }
-	
+
 function association_nbrefr($montant) {
 		$montant = number_format(floatval($montant), 2, ',', ' ');
 		return $montant;
@@ -136,14 +131,19 @@ function association_recupere_montant ($valeur) {
 	return $valeur;
 }
 
-	//Affichage du message indiquant la date 
+//Affichage du message indiquant la date
 function association_date_du_jour($heure=false) {
 		return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
-	}
-	
-function association_flottant($s)
-{
+}
+
+function association_flottant($s) {
 	return number_format(floatval($s), 2, ',', ' ');
+}
+
+function association_telfr($n) {
+	$n = preg_replace('/\D/', '', $n);
+	if (!intval($n)) return '';
+	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
 }
 
 function association_header_prive($flux){
@@ -214,5 +214,6 @@ function generer_url_vente($id, $param='', $ancre='') {
 include_spip('balise/meta');
 // charger les metas donnees
 $inc_meta = charger_fonction('meta', 'inc'); // inc_version l'a deja chargee
-$inc_meta('association_metas'); 
+$inc_meta('association_metas');
+
 ?>

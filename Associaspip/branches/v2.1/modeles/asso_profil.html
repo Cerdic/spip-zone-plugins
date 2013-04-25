@@ -1,0 +1,21 @@
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
+<div class="vcard">
+    <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
+    <p class="adr" id="vcard-asso-adr">
+        [<span class="street-address">(#META{/association/rue}|nl2br{1}|typo)</span><br />]
+        [<span class="postal-code">#META{/association/cp}</span>&nbsp;]
+        [<span class="locality">#META{/association/ville}</span>]
+    </p>
+    [<p class="tel"><a class="spip_out" href="tel:#META{/association/telephone}">(#META{/association/telephone}|association_telfr)</a></p>]
+    [<p class="email"><a class="spip_out" href="mailto:#META{/association/email}">
+    (#META{/association/email})</a>
+    </p>]
+    <dl class="spip note">
+        [<dt><:asso:config_libelle_declaration:></dt>
+            <dd>(#META{/association/declaration}|typo)</dd>]
+        [<dt><:asso:config_libelle_prefet:></dt>
+            <dd>(#META{/association/prefet}|typo)</dd>]
+        [<dt><:asso:config_libelle_siret:></dt>
+            <dd>(#META{/association/siret}|propre)</dd>]
+    </dl>
+</div>
