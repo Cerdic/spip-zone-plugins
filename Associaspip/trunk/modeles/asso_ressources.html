@@ -26,7 +26,8 @@
 	{prix_acquisition?}
 	{pu?}
 	{ud?}
-	{commentaire?LIKE %#ENV{commentaire}%}{maj?LIKE #ENV{maj}%}
+	{commentaire?LIKE %#ENV{commentaire}%}
+	{maj?LIKE #ENV{maj}%}
 	{statut !IN sorti, suspendu }{!statut<0}
 	{par #ENV{tri,date_acquisition DESC}}
 	{pagination #ENV{pagination,10} assoressources}
@@ -43,10 +44,10 @@
 		<td class="decimal">[(#PU|appliquer_filtre{association_formater_prix})] [/ (#VAL{1}|appliquer_filtre{association_formater_duree{#UD}})]</td>
 		<td class="decimal">[(#PRIX_CAUTION|appliquer_filtre{association_formater_prix})]</td>
 		<td>
-			[(#STATUT|=={ok}|ou{#STATUT|>{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
-			[(#STATUT|=={reserve}|ou{#STATUT|=={0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
-			[(#STATUT|=={suspendu}|ou{#STATUT|<{0}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
-			[(#STATUT|=={sorti}|ou{#STATUT|=={NULL}}|oui)[<img src="(#CHEMIN{plugins/auto/Associaspip/img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
+			[(#STATUT|=={ok}|ou{#STATUT|>{0}}|oui)[<img src="(#CHEMIN{img_pack/puce-verte.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_ok:>]
+			[(#STATUT|=={reserve}|ou{#STATUT|=={0}}|oui)[<img src="(#CHEMIN{img_pack/puce-rouge.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_reserve:>.]
+			[(#STATUT|=={suspendu}|ou{#STATUT|<{0}}|oui)[<img src="(#CHEMIN{img_pack/puce-orange.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_suspendu:>]
+			[(#STATUT|=={sorti}|ou{#STATUT|=={NULL}}|oui)[<img src="(#CHEMIN{img_pack/puce-poubelle.gif})" alt="#STATUT" />] <:asso:ressources_libelle_statut_sorti:>]
 		</td>
 	<B_dernier_retour>
 	<BOUCLE_dernier_retour(ASSO_PRETS){id_ressource}{!par date_retour}{0,1}>
@@ -66,4 +67,3 @@
 </B_ressources_disponibles>
 [<div class="erreur">(#ENV{vide}|sinon{<:asso:recherche_reponse0:>})</div>]
 <//B_ressources_disponibles>
-
