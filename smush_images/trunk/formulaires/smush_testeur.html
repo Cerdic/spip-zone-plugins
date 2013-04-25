@@ -1,0 +1,42 @@
+<div class="formulaire_spip formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV*{message_ok}|oui)
+<div class="smush_test">
+	<div class="smush_test_original">
+		<h3><:smush:titre_version_originale:></h3>
+		<a href="[(#ENV{message_ok})]" title="<:bouton_telecharger:>">[(#ENV{message_ok}|balise_img)]</a>
+		[(#SET{taille_orig,[(#ENV*{message_ok}|filesize)]})]
+		[(#SET{taille_orig_octets,#GET{taille_orig}|taille_en_octets})]
+		<p><:smush:info_taille{taille=#GET{taille_orig},octets=#GET{taille_orig_octets}}:></p>
+	</div>
+	<div class="smush_test_smushed">
+		<h3><:smush:titre_version_smushed:></h3>
+		<a href="[(#ENV{message_ok}|image_smush|extraire_attribut{src})]" title="<:bouton_telecharger:>">[(#ENV{message_ok}|image_smush)]</a>
+		[(#SET{taille_smushed,[(#ENV*{message_ok}|image_smush|extraire_attribut{src}|filesize)]})]
+		[(#SET{taille_smushed_octets,#GET{taille_smushed}|taille_en_octets})]
+		<p><:smush:info_taille{taille=#GET{taille_smushed},octets=#GET{taille_smushed_octets}}:></p>
+	</div>
+	#SET{gain,#GET{taille_orig}|moins{#GET{taille_smushed}}}
+	#SET{gain_octets,#GET{gain}|taille_en_octets}
+	#SET{percent,#VAL{100}|moins{#GET{taille_smushed}|div{#GET{taille_orig}}|mult{100}}}
+	[(#GET{gain}|>{1024}|oui)
+	<p><:smush:info_gain{gain=#GET{gain},gain_octets=#GET{gain_octets},percent=#GET{percent}}:></p>]
+	[(#GET{gain}|>{1024}|non)
+	<p><:smush:info_gain_simple{gain=#GET{gain},percent=#GET{percent}}:></p>]
+</div>]
+<form method="post" action="#ENV{action}">
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_url_test">
+			<label for="url_test"><:smush:label_url_test:></label>
+			<input type="text" id="url_test" name="url_test" value="" class="text" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:bouton_valider:>" class="submit" />
+	</p>
+</div>
+</form>
+</div>

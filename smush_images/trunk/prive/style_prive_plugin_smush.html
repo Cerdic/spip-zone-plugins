@@ -1,0 +1,10 @@
+[(#REM) <style>]
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.smush_test {width:100%;}
+.smush_test .smush_test_original{width:50%;float:left;}
+.smush_test .smush_test_smushed{width:50%;float:left;}
+.smush_test .smush_test_original img,.smush_test .smush_test_smushed img{max-width:98%;margin:0 auto;height:auto;}

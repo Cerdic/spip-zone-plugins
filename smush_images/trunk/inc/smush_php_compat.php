@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if(!function_exists('json_decode')){
 	function json_decode($content, $assoc=false){
 		include_spip('lib/JSON/JSON.php');
