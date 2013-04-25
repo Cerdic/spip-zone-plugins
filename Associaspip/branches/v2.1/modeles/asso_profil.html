@@ -6,7 +6,7 @@
         [<span class="postal-code">#META{/association/cp}</span>&nbsp;]
         [<span class="locality">#META{/association/ville}</span>]
     </p>
-    [<p><a class="spip_out tel" href="tel:[(#VAL{/\D/}|preg_replace{'', #META{/association/telephone}})]">(#META{/association/telephone}|association_telfr)</a></p>]
+    [<p><a class="spip_out tel" href="tel:[(#META{/association/telephone}|replace{\D})]">(#META{/association/telephone}|association_telfr)</a></p>]
     [<p><a class="spip_out email" href="mailto:#META{/association/email}">
     (#META{/association/email})</a>
     </p>]
