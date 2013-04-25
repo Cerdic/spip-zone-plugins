@@ -1,6 +1,6 @@
 <?php
 /**
- * Smush
+ * Plugin Smush
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
