@@ -24,12 +24,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function smush_post_image_filtrer($flux) {
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
-	if((!isset($GLOBALS['meta']['smush_casse']) || $GLOBALS['meta']['smush_casse'] != 'oui') && !defined('_SMUSH_INTERDIRE_AUTO') && (lire_config('smush/eviter_traitement_auto','off') != 'on')){
+	if((!isset($GLOBALS['meta']['smush_casse']) || $GLOBALS['meta']['smush_casse'] != 'oui') && !defined('_SMUSH_INTERDIRE_AUTO') && (lire_config('smush/eviter_traitement_auto','off') != 'on'))
 		$flux = filtrer('image_smush',$flux);
-		spip_log('smush','test.'._LOG_ERREUR);
-	}else {
-		spip_log('On ne passe pas par smush','test.'._LOG_ERREUR);
-	}
 	return $flux;
 }
 
@@ -63,7 +59,7 @@ function image_smush($im) {
 		$format = trim(exec('identify -format %m '.$im));
 	
 		if ($format == 'GIF') {
-			$dest = $tmp.'.png';
+			$dest = $dest.'.png';
 			exec('convert '.$im.' '.$dest);
 			$source = $dest;
 			$format = 'PNG';
@@ -78,7 +74,6 @@ function image_smush($im) {
 	
 		else if ($format == 'JPEG') {
 			$fsize = filesize($im);
-			$dest = $tmp.'.jpg';
 			if ($fsize < 10*1024)
 				exec('jpegtran -copy none -optimize '.$im.' > '.$dest);
 			else
