@@ -20,7 +20,7 @@
 
 [(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
 		<p class="#GET{affichage}" id="poubelle">
-		<a class="mediabox" href="[(#URL_PAGE{poubelle}|parametre_url{'idresa',#GET{id}}|parametre_url{'date_debut',#GET{date_debut}})]"><img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="poubelle" /></a>
+		<a class="mediabox" href="[(#URL_PAGE{inc/formulaire_poubelle}|parametre_url{'idresa',#GET{id}}|parametre_url{'date_debut',#GET{date_debut}})]"><img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="poubelle" /></a>
 		</p>
 ]
 
