@@ -8,10 +8,10 @@
 		label=<:tickets:champ_assigner:>,
 		datas=#GET{assignables},
 		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]
-	[(#SAISIE{selection, statut,
+	[(#SAISIE{selection, ticket_statut,
 		label=<:tickets:champ_statut:>,
 		cacher_option_intro=oui,
-		valeur_forcee=#ENV{statut,#STATUT},
+		valeur_forcee=#ENV{ticket_statut,#STATUT},
 		datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
 	</ul>
 </fieldset>]

@@ -129,13 +129,13 @@ function tickets_forum_objets_depuis_env($objets){
  * @return array $flux Le contexte du formulaire modifié
  */
 function tickets_formulaire_charger($flux){
-	$args = $flux['args'];
-	$form = $flux['args']['form'];
-	if ($form == 'forum'){
-		if($args['args'][0] == 'ticket'){
+	if ($flux['args']['form'] == 'forum'){
+		if($flux['args']['args'][0] == 'ticket'){
 			$flux['data']['objet'] = 'ticket';
-			$flux['data']['id_objet'] = $args['args'][1];
-			$flux['data']['id_ticket'] = $args['args'][1];
+			$flux['data']['id_objet'] = $flux['args']['args'][1];
+			$flux['data']['id_ticket'] = $flux['args']['args'][1];
+			$flux['data']['ticket_statut'] = _request('ticket_statut');
+			$flux['data']['id_assigne'] = _request('id_assigne');
 		}
 	}
 	return $flux;
@@ -160,8 +160,8 @@ function tickets_recuperer_fond($flux){
 			if(_request('id_assigne')){
 				$infos_ticket['id_assigne'] = _request('id_assigne');
 			}
-			if(_request('statut')){
-				$infos_ticket['statut'] = _request('statut');
+			if(_request('ticket_statut')){
+				$infos_ticket['ticket_statut'] = _request('ticket_statut');
 			}
 			if(is_array($infos_ticket)){
 				$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($args['contexte'],$infos_ticket));
@@ -171,6 +171,25 @@ function tickets_recuperer_fond($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ * 
+ * On ajoute nos valeur de statut des tickets et de la personne assignée dans la prévisu de forum
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function tickets_formulaire_verifier($flux){
+	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket')) {
+		if(isset($flux['data']['previsu'])){
+			$flux['data']['previsu'] .= '<input type="hidden" name="ticket_statut" value="'._request('ticket_statut').'" />';
+			$flux['data']['previsu'] .= '<input type="hidden" name="id_assigne" value="'._request('id_assigne').'" />';
+		}
+	}
+	return $flux;
+}
+
 
 /**
  * Insertion dans le pipeline formulaire_traiter (SPIP)
@@ -186,8 +205,8 @@ function tickets_formulaire_traiter($flux){
 	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket')) {
 		include_spip('action/editer_ticket');
 		$id_ticket = $flux['args']['args'][1];
-		$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
-		if(($new_statut = _request('statut')) && ($new_statut != $infos_ticket['statut'])){
+		$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($id_ticket));
+		if(($new_statut = _request('ticket_statut')) && ($new_statut != $infos_ticket['statut'])){
 			ticket_instituer($id_ticket, array('statut'=>$new_statut));
 		}
 		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
