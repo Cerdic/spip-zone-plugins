@@ -1,0 +1,36 @@
+[(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
+[(#SET{nonphonepad,[^0-9*#]*})]
+<B_membres2groupe>
+#ANCRE_PAGINATION
+<table class="spip asso_tablo" width="100%">
+	<tr class="row_first">
+		<th scope="col"><:asso:entete_nom:></th>
+		<th scope="col"><:asso:fonction:></th>
+	[(#AUTORISER{associer}|oui)
+		<th scope="col"><:asso:adherent_libelle_telephone:></th>
+		<th scope="col"><:asso:adherent_libelle_mobile:></th>
+		<th scope="col"><:asso:adherent_libelle_email:></th>
+	]
+	</tr>
+[(#REM)<!-- //!\ "inclusion de fragments" <http://microformats.org/wiki/include-pattern> -->]
+<BOUCLE_equipe(ASSO_MEMBRES)
+	{fonction!=''}
+	{statut_inerne!='sorti'}
+	{par nom_famille,prenom}
+	{pagination #ENV{pagination,10} assofonctions2groupe}
+	>
+	<tr class="agent vcard [row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td>[<a class="spip_in fn" title="<:asso:lien_voir_auteur:>" href="#URL_PAGE{auteur}|parametre_url{'id_auteur',#ID_AUTEUR}">(#SEXE|association_formater_nom_membre{#PRENOM, #NOM_FAMILLE})</a>]</td>
+		<td><a class="spip_in include" href="#vcard-asso"></a> [<a class="spip_in role" title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent,id_auteur=#ID_AUTEUR}">(#FONCTION)</a>]</td>
+	[(#AUTORISER{associer}|oui)
+		<td>[<a class="spip_out tel" href="tel:[(#TELEPHONE|replace{\D})]">(#TELEPHONE|association_telfr)</a>]</td>
+		<td>[<a class="spip_out tel" href="tel:[(#MOBILE|replace{\D})]">(#MOBILE|association_telfr)</a>]</td>
+		<td>[<a class="spip_out email" href="mailto:(#EMAIL)">#EMAIL</a>]</td>
+	]
+	</tr>
+</BOUCLE_equipe>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_equipe>
+[<div class="erreur">(#ENV{vide}|sinon{<:ecrire:texte_vide:>})</div>]
+<//B_equipe>

@@ -51,50 +51,7 @@ function exec_association() {
 		echo '<br />';
 
 		echo debut_cadre_relief('', true);
-
-		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-		echo "<tr style='background-color: #DBE1C5;'>\n";
-		echo '<th>' . _T('asso:nom') . "</th>\n";
-		echo '<th>' . _T('asso:fonction') . "</th>\n";
-		echo '<th>' . _T('asso:portable') . "</th>\n";
-		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
-		echo '</tr>';
-		$query = voir_adherent_infos("*", '',  "fonction !='' AND statut_interne != 'sorti'", '',  "nom_famille");
-
-		while ($data = sql_fetch($query)) {
-			$id_auteur=$data['id_auteur'];
-			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-			$mob = association_telfr($data['mobile']);
-			$tel = association_telfr($data['telephone']);
-			if ($email = $data['email'])
-			  $tel = "<a href='mailto:$email' title='"
-			    . _L('Ecrire &agrave;') . ' ' . $email . "'>"
-			    . ($tel ? $tel : 'mail')
-			    . '</a>';
-			$auteur = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur");
-			$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
-			echo "\n<tr style='background-color: #EEEEEE;'>\n";
-
-			echo "<td class='arial11 border1'>",
-				"<a href='$auteur' title=\"",
-				_T('lien_voir_auteur'),
-				'">',
-				htmlspecialchars($nom_affiche),
-				 "</a></td>\n";
-
-			echo "<td class='arial11 border1'>",
-				"<a href='$adh' title=\"",
-				_T('asso:adherent_label_voir_membre'),
-				"\">",
-				htmlspecialchars($data['fonction']),
-				 "</a></td>\n";
-
-			echo '<td class="arial1 border1">'.$mob.'</td>';
-			echo '<td class="arial1 border1" style="text-align:center">'.$tel.'</td>';
-			echo "</tr>\n";
-		}
-		echo '</table>';
-
+		echo recuperer_fond('modeles/asso_membres_fonctions');
 		echo fin_cadre_relief(true);
 		echo fin_page_association();
 
