@@ -1,0 +1,32 @@
+[(#REM|tester_convert|oui) ]
+[(#REM|tester_jpegtran|oui) ]
+[(#REM|tester_optipng|oui) ]
+[(#REM|tester_pngnq|oui) ]
+
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[(#REM|tester_global|oui)
+		<li class="editer_eviter_traitement_auto">
+			<div class="choix">
+				<input type="checkbox" id="eviter_traitement_auto" name="eviter_traitement_auto" class="checkbox" value="on"[(#ENV{eviter_traitement_auto}|=={on}|oui)checked="checked"]>
+				<label for="eviter_traitement_auto"><:smush:label_eviter_traitement_auto:></label>
+			</div>
+		</li>]
+		[(#REM|tester_global|non)
+		<li class="erreur">
+			<p><:smush:info_impossible_utilisation_locale:></p>
+		</li>
+		]
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:bouton_valider:>" class="submit" />
+	</p>
+</div>
+</form>
