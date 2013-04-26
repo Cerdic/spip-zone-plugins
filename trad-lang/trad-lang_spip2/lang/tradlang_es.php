@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'Ningún módulo.',
-	'auteur_revision' => '@nb@ modification de traduction.', # NEW
-	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
-	'auteur_revisions' => '@nb@ modifications de traductions.', # NEW
-	'auteur_revisions_langue' => 'La langue de ses participations :', # NEW
-	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :', # NEW
-	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'auteur_revision' => '@nb@ modificación de traducción.',
+	'auteur_revision_specifique' => '@nb@ modificación de traducción en <abbr title="@lang@">@langue_longue@</abbr>.',
+	'auteur_revisions' => '@nb@ modificaciones de traducciones.',
+	'auteur_revisions_langue' => 'Idioma de sus participaciones:',
+	'auteur_revisions_langues' => 'Los @nb@ idiomas de sus participaciones:',
+	'auteur_revisions_specifique' => '@nb@ modificaciones de traducciones en <abbr title="@lang@">@langue_longue@</abbr>.',
 
 	// B
 	'bouton_activer_lang' => 'Activar el idioma "@lang@" para este módulo',
@@ -96,18 +96,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importermodule' => 'Importar un módulo',
 	'info_1_tradlang' => '@nb@ cadena de idioma',
 	'info_1_tradlang_module' => '1 módulo de idioma',
-	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_aucun_participant_lang' => 'Ningún autor del sitio ha traducido todavía en <abbr title="@lang@">@langue_longue@</abbr>.',
 	'info_aucun_tradlang_module' => 'Ningún módulo de idioma',
-	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.', # NEW
+	'info_auteur_sans_favori' => 'Este autor no tiene ningún modulo como favorito.',
 	'info_chaine_jamais_modifiee' => 'Esta cadena nunca ha sido modificada.',
 	'info_chaine_originale' => 'Esta cadena es la cadena original. ',
-	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
+	'info_choisir_langue' => 'En un idioma específico',
 	'info_contributeurs' => 'Colaboradores',
 	'info_filtrer_status' => 'Filtrar por estatus:',
 	'info_langue_mere' => '(idioma de origen)',
 	'info_langues_non_preferees' => 'Otros idiomas:',
 	'info_langues_preferees' => 'Idioma(s) preferente(s):',
-	'info_module_nb_items_langue_mere' => 'La langue mère du module est <abbr title="@lang_mere@">@lang_mere_longue@</abbr> et comporte @nb@ items de langue.', # NEW
+	'info_module_nb_items_langue_mere' => 'El idioma madre del módulo es <abbr title="@lang_mere@">@lang_mere_longue@</abbr> y comporta @nb@ items de idioma.',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_langues' => 'Este módulo está traducido o parcialmente traducido en @nb@ idiomas.',
 	'info_module_traduit_pc' => 'Módulo traducido un @pc@%',
@@ -127,21 +127,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_modif' => '@pc@% de los items prioritarios "@priorite@" están modificados y a la espera de verificación en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_new' => '@pc@% de los items prioritarios "@priorite@" son nuevos en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_ok' => 'Los módulos prioritarios "@priorite@" están traducidos un @pc@% en @lang@ (@langue_longue@)',
-	'info_nb_modules_favoris' => '@nb@ modules favoris.', # NEW
-	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
-	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
-	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
-	'info_nb_participants_lang' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_nb_modules_favoris' => '@nb@ módulos favoritos.',
+	'info_nb_participant' => '@nb@ autor inscrito en este sitio ha participado al menos una vez en la traducción.',
+	'info_nb_participant_lang' => '@nb@ autor inscrito en este sitio ha participado al menos una vez en la traducción en <abbr title="@lang@">@langue_longue@</abbr>.',
+	'info_nb_participants' => '@nb@ autores inscritos en este sitio han participado al menos una vez en la traducción.',
+	'info_nb_participants_lang' => '@nb@ autores inscritos en este sitio han participado al menos una vez en la traducción en <abbr title="@lang@">@langue_longue@</abbr>.',
 	'info_nb_tradlang' => '@nb@ cadenas de idioma',
 	'info_nb_tradlang_module' => '@nb@ módulos de idioma',
 	'info_percent_chaines' => '@traduites@ / @total@ cadenas traducidas en "[@langue@] @langue_longue@"',
 	'info_revisions_stats' => 'Revisiones',
 	'info_status_ok' => 'OK',
-	'info_statut' => 'Statut', # NEW
+	'info_statut' => 'Estatus',
 	'info_str' => 'Texto de la cadena de idioma',
 	'info_textarea_readonly' => 'Este campo de texto es sólo de lectura',
 	'info_tradlangs_sans_version' => '@nb@ cadenas de idioma no han creado una primera revisión (estas primeras revisiones son creadas por CRON).',
-	'info_traducteur' => 'Traducteur(s)', # NEW
+	'info_traducteur' => 'Traductor(es)',
 	'info_traduire_module_lang' => 'Traducir el módulo "@module@" en @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informaciones acerca de las traducciones',
 	'item_creer_langue_cible' => 'Crear un nuevo idioma de destino',
@@ -343,7 +343,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_tradlang_module' => 'Logo del módulo',
 	'titre_modifications_chaines' => 'Últimas modificaciones en esta cadena',
 	'titre_modifier' => 'Modificar',
-	'titre_page_auteurs' => 'Liste des contributeurs', # NEW
+	'titre_page_auteurs' => 'Lista de contribuidores',
 	'titre_page_configurer_tradlang' => 'Configuración del plugin Trad-lang',
 	'titre_page_tradlang_module' => 'Módulo #@id@ : @module@',
 	'titre_profil_auteur' => 'Edite su perfil',
@@ -352,10 +352,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'Sus colaboraciones',
 	'titre_revisions_sommaire' => 'Últimas modificaciones',
 	'titre_revisions_vos' => 'Sus colaboraciones',
-	'titre_stats_ses' => 'Ses statistiques', # NEW
+	'titre_stats_ses' => 'Sus estadísticas',
 	'titre_stats_trads_journalieres' => 'Número de revisiones diarias',
 	'titre_stats_trads_mensuelles' => 'Número de revisiones mensuales',
-	'titre_stats_vos' => 'Vos statistiques', # NEW
+	'titre_stats_vos' => 'Sus estadísticas',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Cadenas de idioma',
 	'titre_tradlang_module' => 'Módulo de idioma',
