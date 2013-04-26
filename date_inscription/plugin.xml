@@ -3,7 +3,7 @@
 	<auteur>b_b</auteur>
 	<version>0.1.1</version>
 	<version_base>0.1</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<prefix>date_inscription</prefix>
 	<slogan><multi>
 	[fr] Une date d'inscription pour les auteurs
