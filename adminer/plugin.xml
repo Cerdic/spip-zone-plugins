@@ -2,7 +2,7 @@
 	<nom>Adminer</nom>
 	<slogan>Utiliser Adminer pour explorer la base MySQL</slogan>
 	<auteur>Jakub Vr‡na, mis en plugin par Fil</auteur>
-	<version>3.6.3</version>
+	<version>3.6.4</version>
 	<etat>test</etat>
 	<prefix>adminer</prefix>
 	<description>
