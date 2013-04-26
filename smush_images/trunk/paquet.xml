@@ -2,10 +2,12 @@
 	prefix="smush"
 	categorie="performance"
 	version="0.3.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.1;3.0.99]"
 	schema="0.1.0"
->	
+	logo="prive/themes/spip/images/smush-64.png"
+	developpement="http://www.mediaspip.net/spip.php?page=tickets&amp;composant=plugins%20-%20smush"
+>
 
 	<nom>Smush</nom>
 	<!-- Activer des boutons de partage de liens sur les réseaux sociaux. -->
