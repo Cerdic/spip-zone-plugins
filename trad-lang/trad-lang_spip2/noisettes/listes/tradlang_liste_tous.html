@@ -11,7 +11,7 @@
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
 	<BOUCLE_total_orig(TRADLANGS){module}{statut=OK}{lang=#ENV{lang_orig}}> </BOUCLE_total_orig>
-		[(#GRAND_TOTAL|<{#GET{total_mere}})
+		[(#GRAND_TOTAL|<{#GET{total_mere}}|oui)
 			[(#SET{compte_langue_orig,#GRAND_TOTAL})]
 			[(#SET{lang_orig,#LANG_MERE})]
 			<div class="notice">

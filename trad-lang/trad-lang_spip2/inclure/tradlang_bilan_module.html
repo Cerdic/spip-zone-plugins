@@ -18,7 +18,9 @@
 
 #FORMULAIRE_FAVORI
 
+#SET{langue_mere_longue,#LANG_MERE|traduire_nom_langue}
 <p><:tradlang:info_module_traduit_langues{nb=#GET{langues_nb}}:></p>
+<p><:tradlang:info_module_nb_items_langue_mere{lang_mere=#LANG_MERE,lang_mere_longue=#GET{langue_mere_longue},nb=#GET{total_mere}}:></p>
 <p><a href="[(#SELF|parametre_url{id_tradlang_module,''})]" class="btn"><:tradlang:lien_trier_langue_non:></a></p>
 
 <div class="actions">
@@ -28,8 +30,6 @@
 	<thead>
 		<tr class="row_first">
 			<th><:tradlang:th_langue:></th>
-			<th class="lang"><:tradlang:th_langue_mere:></th>
-			<th class="total_items"><:tradlang:th_total_items_module:></th>
 			<th class="items_traduits"><:tradlang:th_items_traduits:></th>
 			<th class="items_modifs"><:tradlang:th_items_modifs:></th>
 			<th class="items_new"><:tradlang:th_items_new:></th>
@@ -43,8 +43,6 @@
 	<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>[(#SET{langue_longue,#CLE|traduire_nom_langue})][(#SET{full,''})][(#SET{langue_mere,#LANG_MERE})]
 	<tr class="lang">
 		<td><a href="[(#SELF|parametre_url{id_tradlang_module,''}|parametre_url{langue_modules,#CLE})]" title="<:tradlang:lien_voir_bilan_lang{lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">[#CLE][ (#GET{langue_longue})]</a></td>
-		<td>#LANG_MERE</td>
-		<td><abbr title="<:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}|attribut_html:>">#GET{total_mere}</abbr></td>
 		<BOUCLE_ok_langue(TRADLANGS){id_tradlang_module}{lang=#CLE}{statut=OK}> </BOUCLE_ok_langue>[(#SET{total_ok,#GRAND_TOTAL})]
 		<td><abbr title="[(#GET{total_ok}|singulier_ou_pluriel{tradlang:info_nb_items_module_ok_un,tradlang:info_nb_items_module_ok,nb,#ARRAY{module,#NOM_MOD,lang,#CLE,langue_longue,#GET{langue_longue}}}|attribut_html)]">#GRAND_TOTAL</abbr></td></B_ok_langue>[(#SET{total_ok,0})]
 		<td><abbr title="<:tradlang:info_nb_items_module_ok_aucun{module=#NOM_MOD,lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">#GET{total_ok}</abbr></td><//B_ok_langue>
@@ -83,7 +81,6 @@
 		<tr>
 			<td><:tradlang:tfoot_total:></td>
 			<td></td>
-			<td>#GET{total_mere}</td>
 			<td>[(#SET{percent_ok_full,[(#GET{total_ok_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_full})%]</td>
 			<td>[(#SET{percent_ok_modif,[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_modif})%]</td>
 			<td>[(#SET{percent_ok_new,[(#GET{total_new_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_new})%]</td>
