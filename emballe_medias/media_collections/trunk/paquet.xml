@@ -14,6 +14,7 @@
 	<auteur lien='http://www.kent1.info'>kent1</auteur>
 
 	<licence>GNU/GPL</licence>
+	<copyright>2012-2013</copyright>
 	
 	<necessite nom="emballe_medias" compatibilite="[1.3.1;]" />
 	<necessite nom="diogene" compatibilite="[1.4.0;]" />
