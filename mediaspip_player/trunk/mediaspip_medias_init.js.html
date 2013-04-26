@@ -1,5 +1,7 @@
-#CACHE{24*3600}
-#HTTP_HEADER{Content-Type: text/javascript; charset=iso-8859-15}
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/javascript}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 var erreur_flash = '<p><:mediaspip_player:message_erreur_flash{url=http://get.adobe.com/fr/flashplayer/}|texte_script:></p>';
+
+[(#INCLURE{fond=mediaspip_player_lang.js,lang})]

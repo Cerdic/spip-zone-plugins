@@ -22,8 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le contenu du insert_head modifié
  */function mediaspip_player_insert_head($flux){
 	$flux .= '
-<script src="'.produire_fond_statique('mediaspip_medias_init.js').'" type="text/javascript"></script>
-<script src="'.produire_fond_statique('mediaspip_player_lang.js').'" type="text/javascript"></script>
+<script src="'.produire_fond_statique('mediaspip_medias_init.js',array('lang'=>$GLOBALS['spip_lang'])).'" type="text/javascript"></script>
 ';
 	return $flux;
 }
@@ -39,8 +38,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function mediaspip_player_header_prive($flux){
 	$flux .= '
-<script src="'.generer_url_public('mediaspip_medias_init.js').'" type="text/javascript"></script>
-<script src="'.generer_url_public('mediaspip_player_lang.js').'" type="text/javascript"></script>
+<script src="'.produire_fond_statique('mediaspip_medias_init.js',array('lang'=>$GLOBALS['spip_lang'])).'" type="text/javascript"></script>
 <link rel="stylesheet" href="'.direction_css(find_in_path('css/html5_controls.css')).'" type="text/css" media="all" />
 ';
 	return $flux;
