@@ -288,8 +288,16 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 	$affiche = '';
 
 	if ($ligne) {
-		$affiche = substr($ligne, max($colonne-$cadre, 0), strlen($expression)+$cadre*2);
-		$affiche = "<code>... $affiche ...</code>";
+		$debut = max($colonne-$cadre, 0);
+		// il faut calculer la taille exacte du préfixe : $colonne-$debut
+		$affiche = substr($ligne, $debut, $colonne - $debut + strlen($expression) + $cadre);
+
+		// Si la taille précisée excède la distance entre le $debut et la fin de la ligne, substr() coupe
+		// avant sans retourner d'erreur. Il faut donc calculer l'index final
+		$index_fin = $debut + strlen($affiche);
+
+		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
+		$affiche = ($debut > 0 ? '... ' : '') . $affiche . ($index_fin < strlen($ligne)-1 ? ' ...' : '');
 	}
 
 	return $affiche;

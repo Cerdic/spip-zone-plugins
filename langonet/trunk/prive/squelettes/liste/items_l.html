@@ -23,8 +23,10 @@
 			<tr class="row_even">
 				<td class="ligne">[L(#VAL{%04s}|sprintf{#GET{ligne}|plus{1}})]</td>
 				<td class="colonne">[C(#VAL{%03s}|sprintf{#CLE|plus{1}})]</td>
-				<td class="occurrence principale">
-					[(#VALEUR|table_valeur{0}|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8})]
+				<td class="occurrence">
+					[<code>(#VALEUR|table_valeur{0}
+						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8}
+						|appliquer_filtre{coloration_code_color, php, code, span})</code>]
 				</td>
 			</tr>
 			</BOUCLE_occurrences>
