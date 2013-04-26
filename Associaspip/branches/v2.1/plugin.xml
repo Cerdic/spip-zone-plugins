@@ -1,10 +1,7 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>
-	Fran&#231;ois de Montlivault,<br />
-	Ma&#207;eul Roquette, Bernard Blazin, Emmanuel Saint-James,<br />
-	Emmanuel Saint-James, Jeannolapin
-	</auteur>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault,
+	Ma&#239;eul Roquette, Emmanuel Saint-James, Jeannolapin</auteur>
 	<version>2.1.10</version>
 	<version_base>47731</version_base>
 	<meta>association_metas</meta>
