@@ -41,6 +41,7 @@
 	<utilise nom="tablesorter" compatibilite="[1.2.1;[" />
 	<utilise nom="tooltip" compatibilite="[1.3.0;[" />
 	<utilise nom="chosen" compatibilite="[1.0.0;[" />
+	<utilise nom="mesfavoris" compatibilite="[2.3.4;[" />
 	
 	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="menu_configuration" icone="images/spip_lang-16.png" />
 	<menu nom="tradlang_modules" titre="tradlang:titre_tradlang" parent="menu_edition" icone="images/spip_lang-16.png" />
