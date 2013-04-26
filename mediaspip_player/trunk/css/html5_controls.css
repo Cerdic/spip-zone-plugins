@@ -129,7 +129,7 @@
 	-webkit-transition:.5s opacity;
 	-moz-transition:.5s opacity;
 	-o-transition:.5s opacity;
-	background:url(images/controls_background.png) repeat-x scroll 0 0 transparent;
+	background:url(images/bar_sprite.png) repeat-x scroll 0 -30px transparent;
 }
 
 .audio .media_wrapper .controls{
@@ -171,24 +171,24 @@
 	display:block;
 	height:25px;
 	width:24px;
-	background:url(images/button_volume_all.png) 0 -100px no-repeat;
+	background:url(images/button_play_pause_full.png) -44px -100px no-repeat;
 	float:right;
 }
 
 .media_wrapper span.volume_button.volume_button_66{
-	background-position:0 -75px;
+	background-position: -44px -75px;
 }
 
 .media_wrapper span.volume_button.volume_button_33{
-	background-position:0 -50px;
+	background-position: -44px -50px;
 }
 
 .media_wrapper span.volume_button.volume_button_0{
-	background-position:0 -25px;
+	background-position: -44px -25px;
 }
 
 .media_wrapper span.volume_button.muted{
-	background-position:0 0;
+	background-position: -44px 0;
 }
 
 .media_wrapper .controls .play_pause_button.pause{
@@ -229,7 +229,7 @@
 	-webkit-border-radius:20px;
 	-moz-border-radius:20px;
 	border-radius:20px;
-	background:url(images/bar_back.png) repeat-x;
+	background:url(images/bar_sprite.png) repeat-x scroll 0 0;
 	text-align:left;
 	margin:0;
 }
@@ -271,15 +271,19 @@
 	-webkit-transition:1s width;
 	-moz-transition:1s width;
 	-o-transition:1s width;
-	background:url(images/bar_buffered.png) repeat-x;
+	background:url(images/bar_sprite.png) repeat-x scroll 0 -20px;
 }
 
 .media_wrapper_full .controls .progress_back .progress_buffered{
 	position:inherit;
 }
-
+.media_wrapper .ui-widget-header{
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;
+}
 .media_wrapper .controls .progress_back .progress_elapsed_time,
-.ui-slider-horizontal .ui-slider-range{
+.media_wrapper .ui-slider .ui-slider-horizontal .ui-slider-range{
 	width:0%;
 	height:8px;
 	position:relative;
@@ -288,7 +292,7 @@
 	-webkit-border-radius:20px;
 	-moz-border-radius:20px;
 	border-radius:20px;
-	background:url(images/bar_elapsed.png) repeat-x;
+	background:url(images/bar_sprite.png) repeat-x scroll 0 -10px;
 }
 
 .media_wrapper_full .controls .progress_back .progress_elapsed_time{
@@ -319,7 +323,7 @@
 	float:right;
 	margin:7px 5px 0 0;
 	cursor:pointer;
-	background:url("images/button_play_pause_full.png") no-repeat scroll -13px -15px transparent;
+	background:url(images/button_play_pause_full.png) no-repeat scroll -13px -15px transparent;
 }
 
 .media_wrapper .controls.small span.fullwindow_button{
@@ -327,7 +331,7 @@
 }
 
 .media_wrapper .controls span.loop_button{
-	background:transparent url(images/bouton_loop.png) no-repeat;
+	background:transparent url(images/button_play_pause_full.png) no-repeat scroll 0 -30px;
 	width:18px;
 	height:14px;
 	float:right;
@@ -336,7 +340,7 @@
 }
 
 .loop .controls span.loop_button{
-	background-image:url(images/bouton_loop_on.png);
+	background-position:-20px -30px;
 }
 
 .media_wrapper .controls.small span.playback_display{display:none;}
