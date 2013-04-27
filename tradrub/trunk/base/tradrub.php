@@ -23,6 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function tradrub_declarer_tables_objets_sql($tables){
 	// Extension de la table rubriques
 	$tables['spip_rubriques']['field']['id_trad'] = "bigint(21) DEFAULT '0' NOT NULL";
+	$tables['spip_rubriques']['texte_definir_comme_traduction_objet'] = "tradrub:texte_definir_comme_traduction_rubrique";
 	return $tables;
 }
 
