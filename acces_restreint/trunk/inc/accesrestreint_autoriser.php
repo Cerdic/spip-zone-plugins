@@ -77,7 +77,7 @@ function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
 	}
 
 	include_spip('public/quete');
-	if (!$id_rubrique = $opt['id_rubrique']){
+	if (!isset($opt['id_rubrique']) OR !$id_rubrique = $opt['id_rubrique']){
 		$article = quete_parent_lang('spip_articles',$id);
 		$id_rubrique = $article['id_rubrique'];
 	}
