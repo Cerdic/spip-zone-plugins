@@ -26,7 +26,7 @@ function formulaires_panier_verifier($id_panier=0){
 	if (is_array($quantites))
 		foreach($quantites as $objet => $objets_de_ce_type)
 			foreach($objets_de_ce_type as $id_objet => $quantite){
-				if (!is_numeric($quantite) or $quantite != intval($quantite)){
+				if (!is_numeric($quantite) or $quantite != intval($quantite) or (is_numeric($quantite) and $quantite < 0)){
 					$erreurs['message_erreur'] = _T('paniers:panier_erreur_quantites');
 					$erreurs['quantites'][$objet][$id_objet] = 'erreur';
 				}
