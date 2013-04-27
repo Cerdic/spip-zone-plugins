@@ -5,8 +5,8 @@
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
-	<form action="#ENV{action}"><div>
-		#ACTION_FORMULAIRE
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		<p class="explication"><:langonet:info_verifier:></p>
@@ -63,26 +63,24 @@
 		explication=#ENV*{message_ok}|table_valeur{explication},
 		resultats=#ENV*{message_ok}|table_valeur{resultats},
 		version=#ENV{version, new},
-		env}
+		env} />
 ]
 
 <script type="text/javascript">
 //<![CDATA[
 	jQuery(document).ready(function() {
-		[(#ENV{version, new}|=={new}|oui)
-			[(#ENV{verification, definition}|=={fonction_l}|oui)
-				jQuery("#option_fichier_langue").hide();
-			]
-			jQuery("input[name='verification']").change(function() {
-				if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
-					jQuery("#option_fichier_langue").hide('fast');
-				}
-				else {
-					jQuery("#option_fichier_langue").show('fast');
-				}
-				jQuery(this).blur();
-			});
+		[(#ENV{verification, definition}|=={fonction_l}|oui)
+			jQuery("#option_fichier_langue").hide();
 		]
+		jQuery("input[name='verification']").change(function() {
+			if (jQuery("input[name='verification']:checked").val() == 'fonction_l') {
+				jQuery("#option_fichier_langue").hide('fast');
+			}
+			else {
+				jQuery("#option_fichier_langue").show('fast');
+			}
+			jQuery(this).blur();
+		});
 	});
 //]]>
 </script>
