@@ -1,8 +1,9 @@
 <?php
 /**
  * Plugin Tickets
- * Licence GPL (c) 2008-2012
+ * Licence GPL (c) 2008-2013
  *
+ * @package SPIP\Tickets\Pipelines
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -10,21 +11,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Insertion dans le pipeline affiche_aguche (SPIP)
  * 
+ * Affichage du bouton de création de tickets sur la page ?exec=ticket
+ * Affichage de la liste des tickets ouverts et des tickets en cours
+ * 
  * @param array $flux
  * 		Le contexte du pipeline
- * @return
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
-function tickets_affiche_gauche ($flux) {
-	$exec = $flux["args"]["exec"];
-
-	if (($exec == "ticket")) {
-		$data = $flux["data"];
-
-		include_spip('inc/autoriser');
-	
+function tickets_affiche_gauche($flux) {
+	if (isset($flux["args"]["exec"]) && ($flux["args"]["exec"] == "ticket")) {
 		$ret = '';
 		
-		if ($flux['args']['exec'] != 'ticket_edit' && autoriser('ecrire', 'ticket')) {
+		include_spip('inc/autoriser');
+		
+		if (autoriser('ecrire', 'ticket')) {
 			include_spip('inc/presentation'); # pour icone_horizontale
 			$ret .= boite_ouvrir('','simple');
 			$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
@@ -41,24 +42,28 @@ function tickets_affiche_gauche ($flux) {
 		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
 		$ret .= $page;
 		
-		$flux["data"] = $data.$ret;
+		$flux["data"] .= $ret;
 	}
 	return $flux;
 }
 
 
 /**
- * Insertion dans le pipeline accueil informations de l'etat des tickets
+ * Insertion dans le pipeline accueil_informations (SPIP)
+ * 
+ * Affichage de l'etat des tickets
+ * 
  * @param string $flux
+ * 		Le contexte du pipeline
  * @return string $flux
+ * 		Le contexte du pipeline modifié
  */
 function tickets_accueil_informations($flux){
 	global $spip_lang_left;
 	include_spip('inc/presentation');
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_tickets', '', 'statut', '','', "COUNT(*)<>0");
 
-	$cpt = array();
-	$cpt2 = array();
+	$cpt = $cpt2 = array();
 	$defaut = $where ? '0/' : '';
 	while($row = sql_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
@@ -92,18 +97,20 @@ function tickets_accueil_informations($flux){
 
 
 /**
- * Insertion dans le pipeline affiche milieu de la liste des tickets en cours de rédaction
- * @param string $gadget
- * @return string $gadget
+ * Insertion dans le pipeline affiche milieu (SPIP) 
+ * 
+ * Ajout de la liste des tickets en cours de rédaction
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
  */
 function tickets_affiche_milieu($flux){
-
-	$exec = $flux["args"]["exec"];
-	if ($exec == "accueil") {
+	if (isset($flux["args"]["exec"]) && $flux["args"]["exec"] == "accueil") {
 		$flux['data'] .= '<br class="nettoyeur" />';
 		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/inc_classement_accueil', array());
 	}
-
 	return $flux;
 }
 
@@ -143,6 +150,7 @@ function tickets_formulaire_charger($flux){
 
 /**
  * Insertion dans le pipeline recuperer_fond (SPIP)
+ * 
  * Sur le formulaire de forum (public seulement), on ajoute 2 champs quand on commente un ticket :
  * -* La possibilité de changer le statut;
  * -* La possibilité de changer l'assignation
@@ -152,19 +160,15 @@ function tickets_formulaire_charger($flux){
  * @param array $flux Le contexte du pipeline
  */
 function tickets_recuperer_fond($flux){
-	$args = $flux['args'];
-	$fond = $args['fond'];
-	if ($fond == 'formulaires/forum'){
-		if(is_numeric($args['contexte']['id_ticket'])){
-			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
-			if(_request('id_assigne')){
+	if ($flux['args']['fond'] == 'formulaires/forum'){
+		if(is_numeric($flux['args']['contexte']['id_ticket'])){
+			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
+			if(_request('id_assigne'))
 				$infos_ticket['id_assigne'] = _request('id_assigne');
-			}
-			if(_request('ticket_statut')){
+			if(_request('ticket_statut'))
 				$infos_ticket['ticket_statut'] = _request('ticket_statut');
-			}
 			if(is_array($infos_ticket)){
-				$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($args['contexte'],$infos_ticket));
+				$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($flux['args']['contexte'],$infos_ticket));
 				$flux['data']['texte'] = preg_replace(",(<fieldset>.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
 			}
 		}
@@ -181,11 +185,9 @@ function tickets_recuperer_fond($flux){
  * @return array $flux
  */
 function tickets_formulaire_verifier($flux){
-	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket')) {
-		if(isset($flux['data']['previsu'])){
-			$flux['data']['previsu'] .= '<input type="hidden" name="ticket_statut" value="'._request('ticket_statut').'" />';
-			$flux['data']['previsu'] .= '<input type="hidden" name="id_assigne" value="'._request('id_assigne').'" />';
-		}
+	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket') && isset($flux['data']['previsu'])) {
+		$flux['data']['previsu'] .= '<input type="hidden" name="ticket_statut" value="'._request('ticket_statut').'" />';
+		$flux['data']['previsu'] .= '<input type="hidden" name="id_assigne" value="'._request('id_assigne').'" />';
 	}
 	return $flux;
 }
@@ -206,12 +208,10 @@ function tickets_formulaire_traiter($flux){
 		include_spip('action/editer_ticket');
 		$id_ticket = $flux['args']['args'][1];
 		$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($id_ticket));
-		if(($new_statut = _request('ticket_statut')) && ($new_statut != $infos_ticket['statut'])){
+		if(($new_statut = _request('ticket_statut')) && ($new_statut != $infos_ticket['statut']))
 			ticket_instituer($id_ticket, array('statut'=>$new_statut));
-		}
-		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
+		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne']))
 			ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
-		}
 	}
 	if ($flux['args']['form']=='configurer_tickets_general') {
 		$config_docs = explode(',',$GLOBALS['meta']['documents_objets']);

@@ -1,8 +1,9 @@
 <?php
 /**
  * Plugin Tickets
- * Licence GPL (c) 2008-2012
+ * Licence GPL (c) 2008-2013
  *
+ * @package SPIP\Tickets\Options
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;

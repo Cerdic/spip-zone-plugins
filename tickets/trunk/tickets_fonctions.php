@@ -1,8 +1,9 @@
 <?php
 /**
  * Plugin Tickets
- * Licence GPL (c) 2008-2012
+ * Licence GPL (c) 2008-2013
  *
+ * @package SPIP\Tickets\Fonctions
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -15,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* composant
  * 
  * @param string $nom
+ * @return array
  */
 function tickets_champ_optionnel_actif($nom){
 	$constante = '_TICKETS_LISTE_' . strtoupper($nom);
@@ -30,9 +32,6 @@ function tickets_champ_optionnel_actif($nom){
 
 	return array_map('trim',explode(':', $liste));
 }
-
-
-// Creation de la liste des options du select d'assignation
 
 /**
  * 
