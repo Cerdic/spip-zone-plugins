@@ -41,7 +41,7 @@ function polyhier_affiche_hierarchie($flux){
  * @return array
  */
 function polyhier_affiche_enfants($flux) {
-	if ($id_rubrique = $flux['args']['id_rubrique']) {
+	if (isset($flux['args']['id_rubrique']) and $id_rubrique = $flux['args']['id_rubrique']) {
 		include_spip('inc/autoriser');
 		$flux['data'] .= recuperer_fond("prive/contenu/rubrique-enfants-indirects",$_GET, array('ajax'=>true));
 	}
