@@ -11,20 +11,12 @@ _ &#169; 2006</auteur>
 _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	agenda_mes_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	agenda_mes_fonctions.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
+	<options>agenda_mes_options.php</options> <!-- fichier charge a chaque hit -->
+	<fonctions>agenda_mes_fonctions.php</fonctions> <!-- fichier charge a chaque recalcul -->
+	<prefix>Agenda</prefix> <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix>
-	Agenda
-	</prefix>
 	<install>base/agenda_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
@@ -52,7 +44,6 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 	<necessite id="WCalendar" version="[0.11;]" />
-<!--	<necessite id="SPIP" version="[;1.925)" />-->
-	<necessite id="SPIP" version="[1.9.2;2.0.0)" />
+	<necessite id="SPIP" version="[1.9.2;2.0.0]" />
 	<categorie>date</categorie>
 </plugin>

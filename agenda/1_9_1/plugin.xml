@@ -7,12 +7,8 @@
  	[notre-ville.net->http://www.notre-ville.net]
 _ &#169; 2006 - Licence GPL
 	</auteur>
-	<version>
-	0.12
-	</version>
-	<etat>
-	stable
-	</etat>
+	<version>0.12</version>
+	<etat>stable</etat>
 	<description>
 <multi>
 	Agenda Ev&#233;nementiel
@@ -23,20 +19,12 @@ _ {{This plugin needs the Widget Calendar plugin}}
 </multi>
 	</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	agenda_mes_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	agenda_mes_fonctions.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
+	<options>agenda_mes_options.php</options> <!-- fichier charge a chaque hit -->
+	<fonctions>agenda_mes_fonctions.php</fonctions> <!-- fichier charge a chaque recalcul -->
+	<prefix>Agenda</prefix><!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix> 
-	Agenda
-	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_onglets</nom>
@@ -65,6 +53,6 @@ _ {{This plugin needs the Widget Calendar plugin}}
 
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.0;1.9.1)" />
+	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
 	<categorie>date</categorie>
 </plugin>

@@ -33,6 +33,6 @@
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;1.9.1)" />
+	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
 	<categorie>date</categorie>
 </plugin>
