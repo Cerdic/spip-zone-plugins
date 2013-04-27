@@ -123,7 +123,7 @@ function mutu_etape_code_activation($e, $options){
 		define(_FILE_CONNECT,$old_connect);
 	}
 	if ($options['code']) {
-		$secret = md5($code.$options['code']);
+		$secret = md5($options['code']);
 
 		if ($panel_nok AND ($options['code'] != $_REQUEST['code_activation']
 		AND $_COOKIE['mutu_code_activation'] != $secret)) {
@@ -177,6 +177,7 @@ function mutu_etape_creer_base($e, $options){
 			}
 
 			// si la base n'existe pas, on va travailler
+
 			if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 				if (_request('creerbase') == 'oui') {
 

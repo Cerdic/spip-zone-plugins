@@ -7,8 +7,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
-'install_code' => 'Veuillez entrer le code d\'activation du site :',
-'install_code_panel' => 'Veuillez entrer votre mot de passe habituel ou le code d\'activation fourni par l\'h&eacute;bergeur :',
+'install_code' => 'Veuillez entrer le code d\'activation du site :',
+'install_code_panel' => 'Veuillez entrer votre mot de passe habituel ou le code d\'activation fourni par l\'h&eacute;bergeur :',
 'install_err' => 'Erreur...',
 'install_site' => 'Installation de votre site SPIP',
 'install_bd_echec' => 'La cr&#233;ation de la base de donn&#233;es @nombase@ a &#233;chou&#233;.',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_repertoire_inaccessible' => 'Le r&#233;pertoire @repertoire@ n\'est pas accessible en &#233;criture',
 'install_creation_bd_site_2' => 'La base de donn&#233;es @base@ a &#233;t&#233; cr&#233;&#233;e pour le site @site@.',
 'install_creer_rep_1' => 'Voulez-vous ',
-'install_creer_rep_2' => 'cr&#233;er les r&#233;pertoires de ce site ?',
+'install_creer_rep_2' => 'cr&#233;er les r&#233;pertoires de ce site ?',
 'install_repertoire_noexist' => 'Le r&eacute;pertoire du site (@repertoire@) n\'existe pas',
 'install_repertoire_creer' =>  'Veuillez cr&#233;er le r&#233;pertoire @repertoire@ et ses sous r&#233;pertoires:',
 'install_rep_bd_ok' => 'Les r&#233;pertoires et la base de donn&#233;e du site sont maintenant cr&#233;&#233;s.',
