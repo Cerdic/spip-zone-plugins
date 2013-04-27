@@ -307,7 +307,8 @@ function ressource_image($attrs, $meta) {
 	$image['logodocument'] = $a;
 
 
-	// experimental : DEST (TODO: parametre à mieux nommer ?)
+	// experimental : DEST
+	// TODO: parametre à mieux nommer ?
 	// parametre |dest=800 pour reduire l'image LIEE a 800px max
 	if ($attrs['dest']) {
 		$tmp = image_reduire($meta['local'], $attrs['dest']);
