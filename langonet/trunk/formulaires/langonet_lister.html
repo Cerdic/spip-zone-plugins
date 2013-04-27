@@ -40,7 +40,6 @@
 [(#REM) <!-- Affichage des resultats --> ]
 [(#ENV*{message_ok}|oui)
 	<INCLURE{fond=formulaires/inc-resultats_lister,
-		explication=#ENV*{message_ok}|table_valeur{explication},
 		tradlang=#ENV*{message_ok}|table_valeur{tradlang},
 		reference=#ENV*{message_ok}|table_valeur{reference},
 		affichage=#ENV*{message_ok}|table_valeur{affichage},

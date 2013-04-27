@@ -52,6 +52,7 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 
 		$item_md5 = array();
 		$fichier_non = array();
+		$nb_occurrences = 0;
 		foreach ($fichiers as $_fichier) {
 			$contenu = file($_fichier);
 			if ($contenu) {
@@ -68,6 +69,7 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 							$colonne = $matches[0][$_cle][1];
 							$fichier_non[$raccourci][$_fichier][$_no_ligne][$colonne] =
 								array($expression, $raccourci_brut, $texte, $_ligne);
+							$nb_occurrences++;
 						}
 					}
 				}
@@ -77,6 +79,7 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 		$resultats['module'] = $module;
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['item_non'] = array_keys($item_md5);
+		$resultats['nb_occurrences'] = $nb_occurrences;
 		$resultats['fichier_non'] = $fichier_non;
 		$resultats['item_md5'] = $item_md5;
 	}

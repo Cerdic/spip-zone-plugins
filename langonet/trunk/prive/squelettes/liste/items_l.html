@@ -1,9 +1,10 @@
 <B_liste_items>
 <div class="liste-objets items_langue">
 	<table class="spip liste">
-		<caption>
+		<caption class="nok">
 			<strong class="caption">
-				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
+				[(#CHEMIN_IMAGE{erreur-24.png}|balise_img{'',cadre-icone})]
+				[(#ENV{total_occurrences}|singulier_ou_pluriel{
 									#VAL{langonet:message_ok_fonction_l}|concat{_1},
 									#VAL{langonet:message_ok_fonction_l}|concat{_n},
 									nberr})]
@@ -42,6 +43,6 @@
 </div>
 </B_liste_items>
 #BOITE_OUVRIR{'', success}
-<:langonet:message_ok_fonction_l_0{ou_fichier=#ENV{arborescence}}:>
+<:langonet:message_ok_fonction_l_0:>
 #BOITE_FERMER
 <//B_liste_items>

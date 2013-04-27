@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tradlang_statut_ok' => 'item correctement traduit',
 	'info_tradlang_statut_modif' => 'item dont la traduction est obsolète (référence modifiée)',
 	'info_tradlang_statut_new' => 'item non encore traduit',
+	'info_verification_l' => 'Vous avez choisi de rechercher les cas d\'utilisation de la fonction _L() dans les fichiers PHP inclus dans les arborescences suivantes :',
 	'info_verifier' => 'Cette option vous permet, d\'une part,  de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. Il est possible, soit de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, soit que certains items de langue définis ne sont plus utilisés. <br />D\'autre part, il est possible de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
 	// L
@@ -111,9 +112,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_fichier_genere' => 'Le fichier de langue «<em>@langue@</em>» du module «<em>@module@</em>» a été généré correctement.<br />Vous pouvez récupérer le fichier «<em>@fichier@</em>».',
 	'message_ok_fichier_log' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.<br />Le fichier «<em>@log_fichier@</em>» a été créé pour sauvegarder ces résultats.',
 	'message_ok_fichier_log_script' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.<br />Le fichier «<em>@log_fichier@</em>» a été créé pour sauvegarder ces résultats ainsi que le fichier des commandes de remplacement _L en _T, «<em>@script@</em>».',
-	'message_ok_fonction_l_0' => 'Aucun cas d\'utilisation de la fonction _L() n\'a été détecté dans les fichiers PHP du répertoire «<em>@ou_fichier@</em>».',
-	'message_ok_fonction_l_1' => 'Un seul cas d\'utilisation de la fonction _L() a été détecté dans les fichiers PHP du répertoire «<em>@ou_fichier@</em>» :',
-	'message_ok_fonction_l_n' => '@nberr@ cas d\'utilisation de la fonction _L() ont été détectés dans les fichiers PHP du répertoire «<em>@ou_fichier@</em>» :',
+	'message_ok_fonction_l_0' => 'Aucun cas d\'utilisation de la fonction _L() n\'a été détecté',
+	'message_ok_fonction_l_1' => 'Un seul cas d\'utilisation de la fonction _L()',
+	'message_ok_fonction_l_n' => '@nberr@ cas d\'utilisation de la fonction _L()',
 	'message_ok_item_trouve' => 'La recherche du texte @pattern@ s\'est déroulée correctement.',
 	'message_ok_item_trouve_commence_1' => 'L\'item de langue ci-dessous commence par le texte recherché :',
 	'message_ok_item_trouve_commence_n' => 'Les @sous_total@ items ci-dessous commencent tous par le texte recherché :',
