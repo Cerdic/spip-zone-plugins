@@ -1,9 +1,9 @@
 <paquet
 	prefix="tradrub"
 	categorie="edition"
-	version="3.1.0"
-	etat="test"
-	compatibilite="[3.0.0-alpha2;["
+	version="3.1.1"
+	etat="stable"
+	compatibilite="[3.0.0;["
 	logo="images/tradrub-32.png"
 	schema="1.0.0"
 	documentation=""
