@@ -23,4 +23,6 @@
 	<pipeline nom="delete_tables" />
 	<pipeline nom="ajouter_boutons" />
 	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
+
+	<necesite nom="agenda" compatibilite="[3.0.1;3.1.99]" />
 </paquet>

@@ -19,5 +19,6 @@
 		<inclure>association_mes_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
+	<necessite id="Agenda" version="[0.11;0.12]" />
 	<categorie>divers</categorie>
 </plugin>

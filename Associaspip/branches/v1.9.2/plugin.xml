@@ -26,6 +26,7 @@
 		<inclure>association_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
+	<necessite id="Agenda" version="[0.13;0.14]" />
 	<utilise id="cfg" version="[1.0;]" />
 	<utilise id="Inscription2" version="[0.1;]" />
 	<categorie>divers</categorie>
