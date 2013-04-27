@@ -3,6 +3,10 @@
 	<table class="spip liste">
 		<caption>
 			<strong class="caption">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
+									#VAL{langonet:message_ok_fonction_l}|concat{_1},
+									#VAL{langonet:message_ok_fonction_l}|concat{_n},
+									nberr})]
 			</strong>
 		</caption>
 		<tbody>
@@ -37,4 +41,7 @@
 	</table>
 </div>
 </B_liste_items>
+#BOITE_OUVRIR{'', success}
+<:langonet:message_ok_fonction_l_0{ou_fichier=#ENV{arborescence}}:>
+#BOITE_FERMER
 <//B_liste_items>

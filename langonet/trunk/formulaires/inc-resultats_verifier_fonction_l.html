@@ -1,10 +1,8 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
 [<p>(#ENV{explication})</p>]
-[(#ENV{version}|=={new}|oui)
-	#INCLURE{fond=prive/squelettes/liste/items_l,
-		items=#ENV{resultats}|table_valeur{fichier_non},
-		md5=#ENV{resultats}|table_valeur{item_md5},
-		env}]
-[(#ENV{version}|=={new}|non)
-	[(#ENV**{resultats})]]
+#INCLURE{fond=prive/squelettes/liste/items_l,
+	items=#ENV{resultats}|table_valeur{fichier_non},
+	arborescence=#ENV{resultats}|table_valeur{ou_fichier},
+	md5=#ENV{resultats}|table_valeur{item_md5},
+	env}
