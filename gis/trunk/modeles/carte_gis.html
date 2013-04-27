@@ -70,7 +70,7 @@ Clustering (regroupement de points proches) :
 	#SET{ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
 ]
 
-<div id="map[(#GET{id})]" class="carte_gis p"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
+<div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 var map[(#GET{id})];
