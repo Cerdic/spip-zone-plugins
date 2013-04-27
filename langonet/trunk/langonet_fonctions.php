@@ -297,7 +297,7 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 		$index_fin = $debut + strlen($affiche);
 
 		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
-		$affiche = ($debut > 0 ? '... ' : '') . $affiche . ($index_fin < strlen($ligne)-1 ? ' ...' : '');
+		$affiche = ($debut > 0 ? '&#8230;' : '') . $affiche . ($index_fin < strlen($ligne)-1 ? '&#8230;' : '');
 	}
 
 	return $affiche;
