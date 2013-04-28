@@ -118,17 +118,20 @@ function diogene_editer_contenu_objet($flux){
 				$diogene['champs_caches']['id_parent'];
 			}
 
+			/**
+			 * Si on a des champs à cacher :
+			 * - On les enlève si présents dans la conf
+			 * - Avant de les enlever, on vérifie bien qu'ils ne soient pas remplis, si ils le sont,
+			 * on laisse le champ jusqu'à ce qu'il soit vide
+			 */
 			if(is_array($champs_caches = unserialize($diogene['champs_caches']))){
 				foreach($champs_caches as $champ){
-					if($champ == 'urlref'){
+					if($champ == 'urlref')
 						$champ = 'liens_sites';
-					}
-					if (($champ == 'liens_sites') && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<fieldset>.*<\/fieldset>.*<\/li>,Uims",$flux['data'],$regs)){
+					if (($champ == 'liens_sites') && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<fieldset>.*<\/fieldset>.*<\/li>,Uims",$flux['data'],$regs))
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer (editer_$champ).*<fieldset>.*<\/fieldset>.*<\/li>),Uims","",$flux['data'],1);
-					}
-					else if (($champ != 'liens_site') && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<\/li>,Uims",$flux['data'],$regs)){
+					else if (($champ != 'liens_site') && (!isset($args['contexte'][$champ]) OR (strlen($args['contexte'][$champ]) == 0)) && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<\/li>,Uims",$flux['data'],$regs))
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer (editer_$champ).*<\/li>),Uims","",$flux['data'],1);
-					}
 				}
 			}
 			/**
