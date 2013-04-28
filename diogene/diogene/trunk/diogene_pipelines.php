@@ -28,9 +28,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function diogene_insert_head_css($flux){
 	$diogene_css = direction_css(find_in_path('css/diogene.css'), lang_dir());
 	$datepicker_css = direction_css(find_in_path('css/jquery.ui.datepicker.css'), lang_dir());
-	$flux
-		.= "<link rel='stylesheet' type='text/css' media='all' href='$diogene_css' />\n"
-		.  "<link rel='stylesheet' type='text/css' media='all' href='$datepicker_css' />\n";
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$diogene_css' />\n"
+			 . "<link rel='stylesheet' type='text/css' media='all' href='$datepicker_css' />\n";
 	return $flux;
 }
 /**
@@ -75,19 +74,17 @@ function diogene_editer_contenu_objet($flux){
 		 * Création de la clause Where de la requète pour trouver dans quel diogène on est
 		 */
 		if($type == 'article'){
-			if($id_diogene = intval(_request('id_diogene'))){
+			if($id_diogene = intval(_request('id_diogene')))
 				$where = "id_diogene = $id_diogene AND id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
-			}else{
+			else
 				$where = "id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
-			}
 		}
 		
 		if(!$where){
-			if((!$id_secteur) && $pipeline[$type]['diogene_max'] == 1){
+			if((!$id_secteur) && $pipeline[$type]['diogene_max'] == 1)
 				$where = "objet=".sql_quote($type);
-			}else{
+			else
 				$where = "id_secteur=".intval($id_secteur)." AND objet=".sql_quote($type);
-			}
 		}
 
 		/**
@@ -97,26 +94,24 @@ function diogene_editer_contenu_objet($flux){
 			/**
 			 * On ajoute dans l'environnement les champs ajoutés par diogènes et ses sous plugins
 			 */
-			if(unserialize($diogene['champs_ajoutes']) == 'false'){
+			if(unserialize($diogene['champs_ajoutes']) == 'false')
 				$args['diogene_ajouts'] = array();
-			}else{
+			else
 				$args['diogene_ajouts'] = unserialize($diogene['champs_ajoutes']);
-			}
+			
 			/**
 			 * On ajoute dans l'environnement les options des complements
 			 */
-			if(unserialize($diogene['options_complements']) == 'false'){
+			if(unserialize($diogene['options_complements']) == 'false')
 				$args['options_complements'] = array();
-			}else{
+			else
 				$args['options_complements'] = unserialize($diogene['options_complements']);
-			}
 
 			/**
 			 * On vire les champs que l'on ne souhaite pas
 			 */
-			if($diogene['objet'] == 'page'){
+			if($diogene['objet'] == 'page')
 				$diogene['champs_caches']['id_parent'];
-			}
 
 			/**
 			 * Si on a des champs à cacher :
@@ -177,19 +172,18 @@ function diogene_editer_contenu_objet($flux){
 					$contexte_selecteur['selecteur_type'] = "normal";
 				}
 				$contexte_selecteur['rubrique_principale'] = 'oui';
-				if($diogene['objet'] == 'emballe_media'){
+				if($diogene['objet'] == 'emballe_media')
 					$contexte_selecteur['rubrique_principale'] = 'non';
-				}
+
 				$saisie_rubrique = recuperer_fond('formulaires/selecteur_rubrique',$contexte_selecteur);
 				
-				if($args['contexte']['id_parent'] > 0){
+				if($args['contexte']['id_parent'] > 0)
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"']editer.*),Uims",$saisie_rubrique."\\2",$flux['data'],1);
-				}else{
+				else
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"']editer.*),Uims","\\2",$flux['data'],1);
-				}
-				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on')){
+				
+				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on'))
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
-				}
 			}else if(!test_espace_prive() && ($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
 				$contexte = $args['contexte'];
 				$contexte['id_rubrique'] = $diogene['id_secteur'];
@@ -210,12 +204,11 @@ function diogene_editer_contenu_objet($flux){
 				if($type=='page')
 					$type='article';
 
-				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html')){
+				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html'))
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']));
-				}
-				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html')){
+				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html'))
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$type,$args['contexte']));
-				}else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_objet.html') AND $type != 'rubrique'){
+				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_objet.html') AND $type != 'rubrique'){
 					$args['contexte']['type'] = $type;
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet',$args['contexte']));
 				}
@@ -240,17 +233,15 @@ function diogene_editer_contenu_objet($flux){
  * 		Le contexte d'environnement modifié
  */
 function diogene_formulaire_charger($flux){
-	$form = $flux['args']['form'];
-	if($form == 'editer_diogene'){
+	if(isset($flux['args']['form']) && $flux['args']['form'] == 'editer_diogene'){
 		$complements = unserialize($flux['data']['options_complements']);
 		$valeurs = array();
 		if(is_array($complements)){
 			foreach($complements as $complement => $valeur){
-				if(is_array(unserialize($valeur))){
+				if(is_array(unserialize($valeur)))
 					$valeurs[$complement] = unserialize($valeur);
-				}else{
+				else
 					$valeurs[$complement] = $valeur;
-				}
 			}
 		}
 		if($flux['data']['objet'] == 'page'){
@@ -258,14 +249,13 @@ function diogene_formulaire_charger($flux){
 			if($diogene = sql_getfetsel('id_diogene','spip_diogenes',"objet = 'page' AND id_diogene != ".intval($diogene_orig))){
 				$flux['data']['editable'] = false;
 				$flux['data']['message_erreur'] = _T('diogene:erreur_diogene_multiple_page');
-			}else{
+			}else
 				$flux['data']['_hidden'] .= "\n<input type='hidden' name='id_secteur' value='0' />\n";
-			}
 		}
 		$flux['data'] = array_merge($flux['data'],$valeurs);
 	}else{
 		$pipeline = pipeline('diogene_objets', array());
-		if (substr($form,0,7) == 'editer_' && ($objet = substr($form,7)) && in_array($objet,array_keys($pipeline))){
+		if (isset($flux['args']['form']) &&  substr($flux['args']['form'],0,7) == 'editer_' && ($objet = substr($flux['args']['form'],7)) && in_array($objet,array_keys($pipeline))){
 			$id_table_objet = id_table_objet($objet);
 			$id_objet = $flux['data'][$id_table_objet];
 			$flux['data']['id_objet'] = $id_objet;
@@ -275,7 +265,7 @@ function diogene_formulaire_charger($flux){
 			 * Cas spécifique pour les pages uniques
 			 * -* Uniquement dans l'espace public
 			 */
-			if(($form == 'editer_article') && !$flux['args']['id_parent']){
+			if(($flux['args']['form'] == 'editer_article') && !$flux['args']['id_parent']){
 				$type_objet= _request('type_objet');
 				$id_secteur = sql_getfetsel('id_secteur','spip_diogenes','type='.sql_quote($type_objet));
 				if(!$flux['args']['id_parent'] && is_numeric($flux['args']['args'][1])){
@@ -284,9 +274,8 @@ function diogene_formulaire_charger($flux){
 				}
 			}
 			
-			if(!test_espace_prive() && (($form == 'editer_article') && ($flux['data']['id_parent'] == '-1') OR ($id_secteur == 0))){
+			if(!test_espace_prive() && (($flux['args']['form'] == 'editer_article') && ($flux['data']['id_parent'] == '-1') OR ($id_secteur == 0)))
 				$flux['data']['type'] = 'page';
-			}
 			
 			if(intval($id_secteur)){
 				if($objet == 'article'){
@@ -297,11 +286,8 @@ function diogene_formulaire_charger($flux){
 					$id_diogene = sql_getfetsel('id_diogene','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet ='.sql_quote($objet));
 					$type_diogene = $objet;
 				}
-			}else{
-				if($pipeline[$objet]['diogene_max'] == 1){
-					$id_diogene = sql_getfetsel('id_diogene','spip_diogenes','objet ='.sql_quote($objet));
-				}
-			}
+			}else if($pipeline[$objet]['diogene_max'] == 1)
+				$id_diogene = sql_getfetsel('id_diogene','spip_diogenes','objet ='.sql_quote($objet));
 			
 			/**
 			 * On est effectivement dans un diogene
@@ -326,9 +312,8 @@ function diogene_formulaire_charger($flux){
 						'data' => array()
 					));
 	
-			if(is_array($post_valeurs)){
+			if(is_array($post_valeurs))
 				$flux['data'] = array_merge($flux['data'],$post_valeurs);
-			}
 		}
 	}
 	return $flux;
@@ -346,13 +331,11 @@ function diogene_formulaire_charger($flux){
  * 		Le contexte d'environnement modifié
  */
 function diogene_formulaire_verifier($flux){
-	$form = $flux['args']['form'];
 	$pipeline = pipeline('diogene_objets', array());
-	if ($objet = substr($form,7) AND in_array($objet,array_keys($pipeline))){
+	if ($objet = substr($flux['args']['form'],7) AND in_array($objet,array_keys($pipeline))){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
 		//if (_request('id_parent') < 0) return $flux;
 
-		$id_table_objet = id_table_objet($objet);
 		$flux['data'] = pipeline('diogene_verifier',
 			array(
 				'args' => array(
@@ -400,9 +383,10 @@ function diogene_formulaire_verifier($flux){
  */
 function diogene_formulaire_traiter($flux){
 	if(!test_espace_prive()
+		&& isset($flux['args']['form'])
 		&& (substr($flux['args']['form'],0,7) == 'editer_')
 		&& ($objet = substr($flux['args']['form'],7))
-		&& $objet != 'diogene'
+		&& ($objet != 'diogene')
 		&& ($id_diogene = intval(_request('id_diogene'))) 
 		&& ($id_diogene == sql_getfetsel('id_diogene','spip_diogenes','id_diogene='.intval($id_diogene)))){
 		
@@ -419,7 +403,7 @@ function diogene_formulaire_traiter($flux){
 		 */
 		$titre = _request('titre') ? _request('titre') : (_request('nom_site') ? _request('nom_site') : _request('nom'));
 		if(!$titre){
-			include_spip('inc/texte');
+			include_spip('inc/filtres'); // Pour generer_info_entite
 			$titre = generer_info_entite($id_objet,$objet,'titre');
 		}
 			
@@ -505,31 +489,26 @@ function diogene_pre_edition($flux){
 		if(isset($flux['data']['options_complements'])){
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
 		}
-		foreach(array('champs_ajoutes','champs_caches')
-			as $array){
+		foreach(array('champs_ajoutes','champs_caches') as $array){
 				if($val_array = _request($array)){
-					if(is_array($val_array)){
+					if(is_array($val_array))
 						$flux['data'][$array] = serialize($val_array);
-					}else{
+					else
 						$flux['data'][$array] = $val_array;
-					}
 				}
 		}
 		foreach($champs as $champ){
 			if(_request($champ)){
-				if(is_array($val = _request($champ))){
+				if(is_array($val = _request($champ)))
 					$options_complements[$champ] = serialize($val);
-				}else{
+				else
 					$options_complements[$champ] = $val;
-				}
 			}
 		}
-		if($flux['data']['objet'] == 'page'){
+		if($flux['data']['objet'] == 'page')
 			$options_complements['polyhier_desactiver'] = 'on';
-		}
-		if($options_complements){
+		if($options_complements)
 			$flux['data']['options_complements'] = serialize($options_complements);
-		}
 	}
 	return $flux;
 }
@@ -555,7 +534,7 @@ function diogene_post_edition($flux){
 		$id_rubrique = $flux['data']['id_rubrique'];
 		$modifs['statut'] = 'publie';
 		include_spip('inc/rubriques');
-		calculer_rubriques_if ($id_rubrique, $modifs,'');
+		calculer_rubriques_if($id_rubrique, $modifs,'');
 	}
 	return $flux;
 }
@@ -621,27 +600,23 @@ function diogene_diogene_avant_formulaire($flux){
  * 		Le contexte modifié
  */
 function diogene_diogene_ajouter_saisies($flux){
-	$id_article = $flux['args']['contexte']['id_article'];
 	if(is_array(unserialize($flux['args']['champs_ajoutes']))){
 		if(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && in_array('date',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
 			$dates_ajoutees = 'date_full';
-			if(!$flux['args']['contexte']['date']){
+			if(!$flux['args']['contexte']['date'])
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',mktime()));
-			}else{
+			else
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
-			}
-			if($flux['args']['contexte']['date_redac']){
+			if($flux['args']['contexte']['date_redac'])
 				list($flux['args']['contexte']['date_redac'],$flux['args']['contexte']['heure_redac']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
-			}
 		}elseif(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
 			list($flux['args']['contexte']['date_redac'],$flux['args']['contexte']['heure_redac']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
 			$dates_ajoutees = 'date_redac';
 		}elseif(in_array('date',unserialize($flux['args']['champs_ajoutes']))){
-			if(!$flux['args']['contexte']['date']){
+			if(!$flux['args']['contexte']['date'])
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',mktime()));
-			}else{
+			else
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
-			}
 			$dates_ajoutees = 'date_orig';
 		}
 		if($dates_ajoutees){
@@ -649,10 +624,9 @@ function diogene_diogene_ajouter_saisies($flux){
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_dates',$flux['args']['contexte']);
 		}
 		if(in_array('forum',unserialize($flux['args']['champs_ajoutes']))){
-			include_spip('inc/regler_moderation');
-			if(is_numeric($id_article)){
-				include_spip('formulaires/activer_forums_objet');
-				$flux['args']['contexte']['forums_actuels'] = get_forums_publics($id_article);
+			if(isset($flux['args']['contexte']['id_article']) && is_numeric($flux['args']['contexte']['id_article'])){
+				include_spip('formulaires/activer_forums_objet'); // Pour get_forums_publics
+				$flux['args']['contexte']['forums_actuels'] = get_forums_publics($flux['args']['contexte']['id_article']);
 			}
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_forums',$flux['args']['contexte']);
 		}
@@ -673,24 +647,20 @@ function diogene_diogene_ajouter_saisies($flux){
  * 		Le contexte modifié
  */
 function diogene_diogene_verifier($flux){
-	$id_article = _request('id_article');
 	$erreurs = &$flux['args']['erreurs'];
-
-	include_spip('inc/date_gestion');
-	
-	if(!$erreurs['date'] && ($date = _request('date_orig'))){
-		$date_orig = verifier_corriger_date_saisie('orig', 'oui', $erreurs);
+	if(_request('date_orig') || _request('date_redac')){
+		/**
+		 * Ce fichier se trouve dans plugins-dist/organiseur/inc/date_gestion.php
+		 * Mériterait une réincorporation dans SPIP?
+		 */
+		include_spip('inc/date_gestion');
+		if(!$erreurs['date'] && ($date = _request('date_orig')))
+			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $erreurs);
+		if(!$erreurs['date_redac'] && ($date = _request('date_redac')))
+			$date_redac = verifier_corriger_date_saisie('redac', 'oui', $erreurs);
 	}
-
-	if(!$erreurs['date_redac'] && ($date = _request('date_redac'))){
-		$date_redac = verifier_corriger_date_saisie('redac', 'oui', $erreurs);
-	}
-	
-	if(!$erreurs['forums'] && ($forums = _request('forums'))){
-		if(!in_array($forums,array('pos','pri','abo','non'))){
-			$erreurs['forums'] = _T('diogene:erreur_forums');
-		}
-	}
+	if(!$erreurs['forums'] && ($forums = _request('forums')) && !in_array($forums,array('pos','pri','abo','non')))
+		$erreurs['forums'] = _T('diogene:erreur_forums');
 	return $flux;
 }
 
@@ -698,8 +668,9 @@ function diogene_diogene_verifier($flux){
  * Insertion dans le formulaire diogene_traiter (plugin Diogene)
  * 
  * Traitement de saisies du formulaire
- * -* traite principalement les dates "date" et "date_redac"
- * -* traite la valeur pour le forum également
+ * -* traite les dates "date" et "date_redac"
+ * -* traite la valeur pour le forum également, si spécifié à "abo" et 
+ * l'inscription des visiteurs n'est pas ouverte, on l'ouvre automatiquement 
  * 
  * @param array $flux 
  * 		Le contexte du pipeline
@@ -708,20 +679,21 @@ function diogene_diogene_verifier($flux){
  */
 function diogene_diogene_traiter($flux){
 	$id_objet = $flux['args']['id_objet'];
-	include_spip('inc/date_gestion');
-	if(_request('date_orig')){
-		$flux['data']['date'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('orig', 'oui', $erreurs));
-	}
-	if(_request('date_redac')){
-		$flux['data']['date_redac'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('redac','oui', $erreurs));
+
+	if(_request('date_orig') || _request('date_redac')){
+		include_spip('inc/date_gestion');
+		if(_request('date_orig'))
+			$flux['data']['date'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('orig', 'oui', $erreurs));
+		if(_request('date_redac'))
+			$flux['data']['date_redac'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('redac','oui', $erreurs));
 	}
 	if($forums = _request('forums')){
 		$flux['data']['accepter_forum'] = $forums;
-		if ($forums == 'abo') {
+		if ($forums == 'abo' && ($GLOBALS['meta']['accepter_visiteurs'] != 'oui')){
 			ecrire_meta('accepter_visiteurs', 'oui');
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='id_forum/$id_objet'");
 		}
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_forum/$id_objet'");
 	}
 	return $flux;
 }

@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene"
 	categorie="edition"
-	version="1.5.5"
+	version="1.5.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/diogene-128.png"
@@ -45,6 +45,8 @@
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 	<necessite nom="images" />
 	<necessite nom="mediabox" />
+	<!-- Pour le fichier inc/date_gestion.php -->
+	<necessite nom="organiseur" />
 
 	<utilise nom="menus" />
 	<utilise nom="polyhier" />
