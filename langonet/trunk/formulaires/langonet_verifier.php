@@ -77,8 +77,10 @@ function formulaires_langonet_verifier_traiter() {
 		$resultats = $langonet_verifier_items($ou_fichier);
 	}
 
-	// Creation du fichier de langue corrige avec les items detectes comme
-	// non definis ou obsoletes suivant la verification en cours
+	// Creation du fichier de langue corrigé avec les items detectes comme
+	// non definis ou obsoletes suivant la verification en cours.
+	// Pour la vérification de la fonction _L(), il est possible de corriger plusieurs fichiers correspondant
+	// à plusieurs arborescences de plugins.
 	$items_a_corriger = $resultats[$_verification_fonction_l ? "item_non" : 'item_non_mais_nok'];
 	if ($items_a_corriger) {
 		$encodage = 'utf8';
@@ -97,7 +99,11 @@ function formulaires_langonet_verifier_traiter() {
 		}
 
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+
+		// Pour la vérification de la fonction _L(), on regarde si plusieurs plugins ont été corrigés et
+		// on crée des listes séparées d'items à corriger.
+
+//		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
 	// Traitement des resultats

@@ -5,9 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_LANGONET_PATTERN_FONCTION_L'))
 	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*(['\"])([^\\1]+)\\1[^)]*\)#Uims");
-if (!defined('_LANGONET_FONCTION_L2'))
-	define("_LANGONET_FONCTION_L2", "#\b_L *[(] *(')([^']+)'[^)]*#");
-
 if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
 	define('_LANGONET_PATTERN_FICHIERS_L', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
@@ -43,9 +40,8 @@ function inc_langonet_verifier_l($ou_fichier) {
 	// On passe les arborescences une par une
 	$fichiers = array();
 	foreach($ou_fichier as $_arborescence) {
-		$fichiers = array_merge(
-						$fichiers,
-						preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L));
+		if ($f = preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L))
+			$fichiers[$_arborescence] = preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L);
 	}
 
 	// Chercher, pour chaque fichier collecté, le pattern de la fonction _L()
@@ -54,24 +50,34 @@ function inc_langonet_verifier_l($ou_fichier) {
 
 		$item_md5 = array();
 		$fichier_non = array();
+		$correction = array();
 		$nb_occurrences = 0;
-		foreach ($fichiers as $_fichier) {
-			$contenu = file($_fichier);
-			if ($contenu) {
-				foreach ($contenu as $_no_ligne => $_ligne) {
-					if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_ligne, $matches, PREG_OFFSET_CAPTURE)) {
-						foreach ($matches[2] as $_cle => $_occurrence) {
-							// Calcul du nom du raccourci de l'item de langue
-							$texte = $_occurrence[0];
-							list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $item_md5);
-							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L()
-							$item_md5[$raccourci] = $texte;
-							// Ajout de l'occurrence trouvée dans la liste des erreurs
-							$expression = $matches[0][$_cle][0];
-							$colonne = $matches[0][$_cle][1];
-							$fichier_non[$raccourci][$_fichier][$_no_ligne][$colonne] =
-								array($expression, $raccourci_brut, $texte, $_ligne);
-							$nb_occurrences++;
+		foreach ($fichiers as $_arborescence => $_fichiers_arbo) {
+			if ($_fichiers_arbo) {
+				foreach ($_fichiers_arbo as $_fichier) {
+					$contenu = file($_fichier);
+					if ($contenu) {
+						foreach ($contenu as $_no_ligne => $_ligne) {
+							if (preg_match_all(_LANGONET_PATTERN_FONCTION_L, $_ligne, $matches, PREG_OFFSET_CAPTURE)) {
+								foreach ($matches[2] as $_cle => $_occurrence) {
+									// Calcul du nom du raccourci de l'item de langue
+									$texte = $_occurrence[0];
+									list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $item_md5);
+									// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L()
+									$item_md5[$raccourci] = $texte;
+									// Ajout de l'occurrence trouvée dans la liste des erreurs
+									$expression = $matches[0][$_cle][0];
+									$colonne = $matches[0][$_cle][1];
+									$fichier_non[$raccourci][$_fichier][$_no_ligne][$colonne] =
+										array($expression, $raccourci_brut, $texte, $_ligne);
+									// Insertion du raccourci dans la liste des corrections à introduire pour l'arborescence
+									// en cours d'analyse
+									if (!isset($correction[$raccourci]))
+										$correction[$raccourci] = $_arborescence;
+									// Compteur d'occurences
+									$nb_occurrences++;
+								}
+							}
 						}
 					}
 				}
@@ -83,6 +89,7 @@ function inc_langonet_verifier_l($ou_fichier) {
 		$resultats['nb_occurrences'] = $nb_occurrences;
 		$resultats['fichier_non'] = $fichier_non;
 		$resultats['item_md5'] = $item_md5;
+		$resultats['arborescence'] = $correction;
 	}
 	else {
 		$resultats['erreur'] = _T('langonet:message_nok_arborescence_l');

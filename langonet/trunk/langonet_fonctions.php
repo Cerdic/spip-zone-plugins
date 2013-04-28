@@ -183,10 +183,11 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 			$reel_dir = _DIR_RACINE . $_rep;
 			$ou_fichier = $_rep . '/';
 		}
+
+		// on recupere tous les fichiers de langue directement places
+		// dans lang/ sans parcourir d'eventuels sous-repertoires. On exclut si demandé ou par défaut
+		// les fichiers de langue du paquet.xml
 		if (is_dir($reel_dir . '/lang/')) {
-			// on recupere tous les fichiers de langue directement places
-			// dans lang/ sans parcourir d'eventuels sous-repertoires. On exclue si demandé ou par défaut
-			// les fichiers de langue du paquet.xml
 			$opt_lang = '';
 			foreach ($fic_lang = preg_files($reel_dir . '/lang/', _LANGONET_PATTERN_FICHIERS_LANG, 250, false) as $le_module) {
 				preg_match_all(_LANGONET_PATTERN_CODE_LANGUE, str_replace('.php', '', $le_module), $matches);

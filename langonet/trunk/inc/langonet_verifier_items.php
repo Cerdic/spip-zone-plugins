@@ -51,7 +51,7 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 						$fichiers,
 						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
 	}
-	
+
 	$resultats =  langonet_collecter_items($files);
 
 	// On charge le fichier de langue a verifier
