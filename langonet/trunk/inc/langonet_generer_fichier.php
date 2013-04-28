@@ -5,12 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 if (!defined('_LANGONET_SIGNATURE'))
 	define('_LANGONET_SIGNATURE', "// Ceci est un fichier langue de SPIP -- This is a SPIP language file");
 
-if (!defined('_LANGONET_DEFINITION_L'))
-	define('_LANGONET_DEFINITION_L', '<LANGONET_DEFINITION_L>');
-if (!defined('_LANGONET_DEFINITION_MANQUANTE'))
-	define('_LANGONET_DEFINITION_MANQUANTE', '<LANGONET_DEFINITION_MANQUANTE>');
-if (!defined('_LANGONET_DEFINITION_OBSOLETE'))
-	define('_LANGONET_DEFINITION_OBSOLETE', '<LANGONET_DEFINITION_OBSOLETE>');
+if (!defined('_LANGONET_TAG_DEFINITION_L'))
+	define('_LANGONET_TAG_DEFINITION_L', '<LANGONET_DEFINITION_L>');
+if (!defined('_LANGONET_TAG_DEFINITION_MANQUANTE'))
+	define('_LANGONET_TAG_DEFINITION_MANQUANTE', '<LANGONET_DEFINITION_MANQUANTE>');
+if (!defined('_LANGONET_TAG_DEFINITION_OBSOLETE'))
+	define('_LANGONET_TAG_DEFINITION_OBSOLETE', '<LANGONET_DEFINITION_OBSOLETE>');
 
 if (!defined('_LANGONET_TAG_NOUVEAU'))
 	define('_LANGONET_TAG_NOUVEAU', '# NEW');
@@ -45,10 +45,13 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	$source = _DIR_RACINE . $ou_langue . $module . '_' . $langue_source . '.php';
 	// Trouver dans quel cas ce fichier n'a pas deja ete inclus a ce stade
 	if (empty($GLOBALS[$var_source])) {
-		if (!file_exists($source))
-			return array('erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
-		$GLOBALS['idx_lang'] = $var_source;
-		include($source);
+		if (file_exists($source)) {
+			$GLOBALS['idx_lang'] = $var_source;
+			include($source);
+		}
+		else
+			if ($mode != 'fonction_l')
+				return array('erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
 	}
 
 	// Récupérer le bandeau d'origine si il existe.
@@ -132,17 +135,17 @@ function langonet_generer_items_cible($module, $var_source, $var_cible, $mode='i
 				else if ($mode == 'vide')
 					$texte = _LANGONET_TAG_NOUVEAU;
 				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
-					$texte = array(_LANGONET_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
+					$texte = array(_LANGONET_TAG_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
 				else if ($mode !== 'oublie')
 					$texte = _LANGONET_TAG_NOUVEAU . $_item;
 				else if (preg_match('/^[a-z]+$/i', $_item))
 					$texte = $_item;
-				else $texte = _LANGONET_DEFINITION_MANQUANTE;
+				else $texte = _LANGONET_TAG_DEFINITION_MANQUANTE;
 			}
 		}
 		if ($encodage == 'utf8')
 			$texte = entite2utf($texte);
-		$source[$_item] = $avec_commentaire ? array(_LANGONET_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
+		$source[$_item] = $avec_commentaire ? array(_LANGONET_TAG_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
 	}
 
 	return $source;

@@ -45,10 +45,13 @@ function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fic
 	// On ignore les ultimes sous-repertoires charsets/ , lang/ , req/ .
 	// On n'analyse que les fichiers php, html, xml ou yaml
 	// (voir le fichier regexp.txt).
-	$files = array();
-	foreach($ou_fichier as $rep){
-		$files = array_merge($files,preg_files(_DIR_RACINE.$rep, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
+	$fichiers = array();
+	foreach($ou_fichier as $_arborescence){
+		$fichiers = array_merge(
+						$fichiers,
+						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
 	}
+	
 	$resultats =  langonet_collecter_items($files);
 
 	// On charge le fichier de langue a verifier

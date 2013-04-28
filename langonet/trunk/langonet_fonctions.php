@@ -108,9 +108,9 @@ function langonet_creer_select_langues($sel_l='0', $exclure_paquet=true) {
  * @param string $sel_d
  * @return array
  */
-function langonet_creer_select_dossiers($sel_d=array()) {
+function langonet_creer_select_dossiers($sel_d=array(), $multiple=true) {
 	if (is_string($sel_d)) $sel_d = array($sel_d);
-	$retour = creer_selects('0', $sel_d, true);
+	$retour = creer_selects('0', $sel_d, true, $multiple);
 	return $retour['dossiers'];
 }
 
@@ -123,7 +123,7 @@ function langonet_creer_select_dossiers($sel_d=array()) {
  * @param array $sel_d option(s) du select des repertoire
  * @return array
  */
-function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true) {
+function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multiple=true) {
 	// Recuperation des repertoires des plugins par défaut
 	$rep_plugins = lister_dossiers_plugins();
 	// Recuperation des repertoires des extensions : _DIR_PLUGINS_DIST à partir de SPIP 3
@@ -150,10 +150,15 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true) {
 	$sel_lang .= ($sel_l == '0') ? ' selected="selected">' : '>';
 	$sel_lang .= _T('langonet:option_aucun_fichier') . '</option>' . "\n";
 	// -- les racines des arborescences a scanner
-	$sel_dossier = '<select name="dossier_scan[]" id="dossier_scan" multiple="multiple">' . "\n";
-	//$sel_dossier .= '<option value="0"';
-	//$sel_dossier .= (count($sel_d) == '0') ? ' selected="selected">' : '>';
-	//$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
+	if ($multiple) {
+		$sel_dossier = '<select name="dossier_scan[]" id="dossier_scan" multiple="multiple">' . "\n";
+	}
+	else {
+		$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
+		$sel_dossier .= '<option value="0"';
+		$sel_dossier .= (count($sel_d) == '0') ? ' selected="selected">' : '>';
+		$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
+	}
 
 	// la liste des options :
 	// value (fichier_langue) =>

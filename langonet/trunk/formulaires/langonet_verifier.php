@@ -30,66 +30,74 @@ function formulaires_langonet_verifier_verifier() {
 
 function formulaires_langonet_verifier_traiter() {
 
-	// Recuperation des champs du formulaire
+	$retour = array();
+
+	// Recuperation des champs du formulaire communs à toutes les vérifications
 	//  $verification -> type de verification 'definition' ou 'utilisation'
-	//  $rep          -> nom du repertoire parent de lang/ : 'langonet' pour 'langonet/lang/'
-	//                   correspond generalement au 'nom' du plugin
-	//  $module       -> prefixe du fichier de langue : 'langonet' pour 'langonet_fr.php'
-	//                   parfois different du 'nom' du plugin
-	//  $langue       -> index du nom de langue, 'fr' pour 'langonet_fr.php'
-	//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
 	//  $ou_fichier   -> racine de l'arborescence a verifier 'plugins/auto/langonet'
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
 	$version = _request('version');
-	if (($version == 'old')
-	OR (($version == 'new') AND ($verification != 'fonction_l'))) {
+
+	// Indicateur de verification d'utilisation de la fonction _L()
+	$_verification_fonction_l = ($verification == 'fonction_l');
+
+	if (!$_verification_fonction_l) {
+		// Recuperation des champs du formulaire propres aux vérifications utilisation et définition
+		//  $rep          -> nom du repertoire parent de lang/ : 'langonet' pour 'langonet/lang/'
+		//                   correspond generalement au 'nom' du plugin
+		//  $module       -> prefixe du fichier de langue : 'langonet' pour 'langonet_fr.php'
+		//                   parfois different du 'nom' du plugin
+		//  $langue       -> index du nom de langue, 'fr' pour 'langonet_fr.php'
+		//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
 		$retour_select_langue = explode(':', _request('fichier_langue'));
 		$rep = $retour_select_langue[0];
 		$module = $retour_select_langue[1];
 		$langue = $retour_select_langue[2];
 		$ou_langue = $retour_select_langue[3];
-	}
-	else {
-		// Pour la vérification de la fonction _L(), on ne choisi pas de fichier de langue.
-		// Néanmoins, pour créer le fichier de langue corrigé en rajoutant les nouveaux items devant remplacer
-		// les appels à _L() il est nécessaire d'en choisir un.
-		// Aussi, on choisit la langue de référence pour le module
-	}
 
-	// Chargement de la fonction de verification
-	// et verification et formatage des resultats pour affichage
-	$retour = array();
-	if ($verification != 'fonction_l') {
+		// Lancement de la vérification utilisation ou définition
 		$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
 		$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
 	}
 	else {
+		// Pour la vérification de la fonction _L(), on ne choisit pas de fichier de langue. En outre,
+		// à partir du moment où plusieurs arborescences sont scannées il n'est plus possible de construire
+		// un seul fichier de corrections. Aussi, plutôt que d'en construire n, on construit un seul fichier
+		// contenant l'ensemble des items créés.
+		// Néanmoins, pour créer le fichier de langue corrigé en rajoutant les nouveaux items devant remplacer
+		// les appels à _L() il est nécessaire d'en choisir un.
+		// Aussi, on choisit la langue de référence pour le module
+		$langue = 'fr';
+		$module = '';
+		$ou_langue = '';
+
+		// Lancement de la vérification fonction_l
 		$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
-		$resultats = $langonet_verifier_items($module, $ou_fichier);
+		$resultats = $langonet_verifier_items($ou_fichier);
 	}
 
 	// Creation du fichier de langue corrige avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours
-	$_l = ($verification=='fonction_l');
-	$all = $resultats[$_l ? "item_non" : 'item_non_mais_nok'];
-	if ($all) {
+	$items_a_corriger = $resultats[$_verification_fonction_l ? "item_non" : 'item_non_mais_nok'];
+	if ($items_a_corriger) {
+		$encodage = 'utf8';
 		if ($verification != 'utilisation') {
 			$extra = array();
-			foreach ($all as $item) {
+			foreach ($items_a_corriger as $_item) {
 				// indefini si dejo normalise
-				$index = preg_match('/^(.*)[{].*[}]$/', $item, $m) ? $m[1] : $item; 
-				$extra[$index] = @$resultats['item_md5'][$item];
+				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
+				$extra[$index] = @$resultats['item_md5'][$_item];
  			}
-			$mode = $_l ?'fonction_l' :  'oublie';
-		} else {
+			$mode = $_verification_fonction_l ? 'fonction_l' : 'oublie';
+		}
+		else {
 			$extra = $resultats['item_non'];
 			$mode = 'inutile';
 		}
+
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-		$encodage = 'utf8';
-		if ($version == 'old')
-			$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 	}
 
 	// Traitement des resultats
@@ -103,7 +111,6 @@ function formulaires_langonet_verifier_traiter() {
 		}
 		else
 			$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
-		$retour['message_ok']['explication'] = 'pas encore créée';
 	}
 	$retour['editable'] = true;
 	return $retour;

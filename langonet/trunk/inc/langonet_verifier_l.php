@@ -31,7 +31,7 @@ if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
  * 		Si une erreur se produit lors du deroulement de la fonction, le tableau resultat contient le libelle
  * 		de l'erreur dans l'index 'erreur'; sinon, cet index n'existe pas.
  */
-function inc_langonet_verifier_l($module, $ou_fichier) {
+function inc_langonet_verifier_l($ou_fichier) {
 
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
@@ -43,7 +43,9 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 	// On passe les arborescences une par une
 	$fichiers = array();
 	foreach($ou_fichier as $_arborescence) {
-		$fichiers = array_merge(preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L));
+		$fichiers = array_merge(
+						$fichiers,
+						preg_files(_DIR_RACINE . $_arborescence, _LANGONET_PATTERN_FICHIERS_L));
 	}
 
 	// Chercher, pour chaque fichier collecté, le pattern de la fonction _L()
@@ -76,7 +78,6 @@ function inc_langonet_verifier_l($module, $ou_fichier) {
 			}
 		}
 
-		$resultats['module'] = $module;
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['item_non'] = array_keys($item_md5);
 		$resultats['nb_occurrences'] = $nb_occurrences;
