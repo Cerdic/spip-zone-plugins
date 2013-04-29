@@ -6,7 +6,7 @@
 .ticket .infos {float:right; max-width:200px; margin:2em 0 1em 1em; padding: 0.5em;  background:#fafafa; border:1px solid #eee;
 	border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
 .ticket .infos .formulaire_spip {margin:0; padding:0;}
-.ticket table { margin:0 0 .5em 0;} 
+table.tickets { margin:0 0 .5em 0;} 
 .ticket dl { margin:0 0 .5em 0;} 
 .ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
 .ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
@@ -18,18 +18,17 @@
 li.editer_forum_ticket .explication {display:none;}
 
 /* start - table */
-.ticket table,
+table.tickets,
 .ticket table.spip {margin: 15px 0px; width:100%; text-align:left; border:1px solid #ccc; border-spacing:2px; border-collapse:separate !important;}
-.ticket table th,
-.ticket table.spip th{background: white; color: #666; padding:3px; text-align: left; border:none;}
-.ticket table th.tri,
-.ticket table.spip th.tri {background:#eee;padding:3px; border:none;}
-.ticket table th a,
-.ticket table.spip th a {display:block;}
-.ticket table tr,
-.ticket table.spip tr{color: #5b5b5b; background:#f3f3f3;}
-.ticket table td,
-.ticket table.spip td {padding:3px; border:none;}
-.ticket table tr.even,
-.ticket table.spip tr.row_even {background:#eee;}
-.ticket table tr:hover {background:#EAF1F5;}
+table.tickets th, table.tickets.spip th{background: white; color: #666; padding:3px; text-align: left; border:none;}
+table.ticket  th.tri,
+table.tickets.spip th.tri {background:#eee;padding:3px; border:none;}
+table.ticket  th a,
+table.tickets.spip th a {display:block;}
+table.ticket  tr,
+table.tickets.spip tr{color: #5b5b5b; background:#f3f3f3;}
+table.ticket  td,
+table.tickets.spip td {padding:3px; border:none;}
+table.ticket  tr.even,
+table.tickets.spip tr.row_even {background:#eee;}
+table.ticket  tr:hover {background:#EAF1F5;}
