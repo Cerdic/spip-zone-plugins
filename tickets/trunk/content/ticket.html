@@ -3,12 +3,13 @@
 <BOUCLE_si_ouvert(TICKETS){id_ticket}>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
+#SET{autoriser_modifier,non}
 </BOUCLE_si_ouvert>
 <div class="ticket content-principal">
 	<div class="cartouche">
-		[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)
+		[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)#SET{autoriser_modifier,oui}
 		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>]
-		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
+		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> - #TITRE</h1>
 		<div class="actions rss">
 			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]" class="i_rss"><:tickets:suivre_tickets_rss_unique:></a>
 		</div>
@@ -18,13 +19,13 @@
 	<div class="infos">
 		<dl>
 			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
-			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
+			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
 			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
 			</BOUCLE_assigne>
 			[<dt><:tickets:champ_severite:></dt><dd class="#EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
 			[<dt><:tickets:champ_type:></dt><dd class="#EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
 			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
-			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
+			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur}{tout}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
 			[<dt><:tickets:champ_composant:></dt><dd class="#EDIT{composant}">(#COMPOSANT)</dd>]
 			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]
@@ -32,7 +33,7 @@
 			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
 		</dl>
 		[(#REM) Bloc de choix du statut et de l'assignation]
-		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
+		[(#GET{autoriser_modifier}|=={oui}|oui)
 			#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF}
 		]
 		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
