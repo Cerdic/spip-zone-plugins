@@ -1,0 +1,21 @@
+<paquet
+	prefix="agendaflou"
+	categorie="date"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="agendaflou.png"
+	schema="1.0.0"
+>      
+	<nom>Agenda : dates floues</nom>
+	<!-- Spécifier que certaines dates ne sont pas précises -->
+
+	<auteur lien="http://ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<pipeline nom="declarer_tables_objets_sql" inclure="agendaflou_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="agendaflou_pipelines.php" />
+
+	<necessite nom="agenda" compatibilite="[3.11.7;[" />
+</paquet>
