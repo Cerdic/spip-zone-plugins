@@ -6,7 +6,7 @@
 			<li class="editer editer_diogene_gerer_auteurs">
 				<label><:diogene_gerer_auteurs:label_diogene_gerer_auteurs:></label>
 				<p class="explication"><:diogene_gerer_auteurs:explication_diogene_gerer_auteurs:></p>
-				<input type="text" class="text" name="diogene_gerer_auteurs" id="diogene_gerer_auteurs" size="50" data-selecteur="[(#VAL{diogene_auteurs}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" data-select-callback="diogene_select"  />
+				<input type="text" class="text nomulti" name="diogene_gerer_auteurs" id="diogene_gerer_auteurs" size="50" data-selecteur="[(#VAL{diogene_auteurs}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" data-select-callback="diogene_select"  />
 			</li>
 			<li style="display:none">
 				<input id="diogene_gerer_id_auteurs" class="hidden" type="hidden" name="diogene_gerer_id_auteurs"/>
