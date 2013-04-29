@@ -92,18 +92,16 @@ function piwik_head_js($options=array()){
 		}
 
 		if($afficher_js){
-			$ret .= '
-				<script type="text/javascript">
-				var pkBaseURL = (("https:" == document.location.protocol) ? "https://'.$url_piwik.'/" : "http://'.$url_piwik.'/");
-					document.write(unescape("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
-				</script>
-				<script type="text/javascript">
-				try {
-				var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", '.$id_piwik.');
-				piwikTracker.trackPageView();
-				piwikTracker.enableLinkTracking();
-				} catch( err ) {}
-				</script>';
+			$ret .= "
+				<script type='text/javascript'>var _paq = _paq || []; 
+					(function(){ var u=(('https:' == document.location.protocol) ? 'https://$url_piwik/' : 'http://$url_piwik/'); 
+					_paq.push(['setSiteId', $id_piwik]); 
+					_paq.push(['setTrackerUrl', u+'piwik.php']); 
+					_paq.push(['trackPageView']); 
+					_paq.push(['enableLinkTracking']); 
+					var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js'; 
+					s.parentNode.insertBefore(g,s); })();
+				</script>";
 		}
 	}
 
