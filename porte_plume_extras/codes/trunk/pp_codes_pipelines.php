@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function pp_codes_porte_plume_barre_pre_charger($barres){
 	// on ajoute les boutons dans les 2 barres de SPIP
@@ -26,14 +27,14 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 				"display"     => false,
 			),
 			// bouton <cadre html>				
-					array(
-						"id"			=> 'cadre_html',
-						"name"			=> _T('pp_codes:outil_inserer_cadre_html'),
-						"className"		=> "outil_cadre_html",
-						"openWith"		=> "<cadre class='html4strict'>\n",
-						"closeWith"		=> "\n</cadre>",
-						"display"		=> false,
-					),
+			array(
+				"id"			=> 'cadre_html',
+				"name"			=> _T('pp_codes:outil_inserer_cadre_html'),
+				"className"		=> "outil_cadre_html",
+				"openWith"		=> "<cadre class='html4strict'>\n",
+				"closeWith"		=> "\n</cadre>",
+				"display"		=> false,
+			),
 			// bouton <cadre xml>
 			 array(
 				"id"          => 'cadre_xml',

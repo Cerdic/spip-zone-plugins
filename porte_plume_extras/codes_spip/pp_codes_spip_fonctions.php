@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // pour definir des liens vers
 if (!defined('CODES_SPIP_BRANCHE')) {
 	#define(CODES_SPIP_BRANCHE, '3.0');

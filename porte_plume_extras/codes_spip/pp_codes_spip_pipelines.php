@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function pp_codes_spip_porte_plume_barre_pre_charger($barres){
 	// on ajoute les boutons dans la barre d'edition de SPIP
