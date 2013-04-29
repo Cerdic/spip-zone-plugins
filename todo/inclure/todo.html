@@ -1,7 +1,7 @@
 <B_todo>
 <table class="todolist">
 	<thead>
-		<tr>
+		<tr class="row_first">
 			<th class="statut">
 				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,statut})]" title="<:todo:tri_statut:>">
 					<img src="#CHEMIN{images/todo-statut-16.png}" alt="<:todo:label_statut:>" />
@@ -17,7 +17,7 @@
 	</thead>
 	<tbody>
 		<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
-		<tr class="[(#VALEUR|table_valeur{statut})]">
+		<tr class="[(#VALEUR|table_valeur{statut})][ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
 			<td class="statut">
 				[<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />]
 			</td>
