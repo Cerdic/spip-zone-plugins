@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_copie_locale' => 'Le fichier n\'a pu être copier localement (@src@).',
+	'erreur_copie_locale' => 'Le fichier n\'a pu être copié localement (@src@).',
 	'erreur_pas_image' => 'Le fichier ne semble pas être une image de type png, jpg ou gif (@src@).',
 
 	// I
