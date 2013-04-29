@@ -67,21 +67,21 @@ $(function(){
 				var code = $(this).parent('.cadre_download').prev('.cadre'),me = this;
 				var content_data = code.attr('data-clipboard-text'),
 					width = $(this).width(),height = $(this).height();
-				clip.domElement = $(me);
+				clip.domElement = me;
 				if(!content_data){
 					$.get($(this).parent().find('a').eq(0).attr('href'),function(data) {
 						content_data = data;
 						clip.setText(content_data);
-						clip.receiveEvent('mouseover', null);
 						clip.setCurrent(me);
 						clip.setSize(width,height);
+						clip.receiveEvent('mouseover', null);
 						$(me).parent('.cadre_download').prev('.cadre').attr('data-clipboard-text',content_data);
 					});
 				}else{
 					clip.setText(content_data);
-					clip.receiveEvent('mouseover', null);
 					clip.setCurrent(me);
 					clip.setSize(width,height);
+					clip.receiveEvent('mouseover', null);
 				}
 			});
 			var copies = $('.copypaste_container');
