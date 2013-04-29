@@ -1,21 +1,21 @@
-<li class="editer_dates_floues">
+<li class="editer_dates_floues [(#ENV{date_debut_floue}|et{#ENV{date_fin_floue}}|non)none]">
 	<label><:agendaflou:date_floue_label:></label>
 	<div class="choix">
 	<label for="date_debut_floue"><:agendaflou:date_floue_debut_label:></label>
 	<select id="date_debut_floue" name="date_debut_floue">
 		<option value=""><:agendaflou:date_floue_choix_normale:></option>
-		<option value="mois"[ (#DATE_DEBUT_FLOUE|=={mois}|oui)selected="selected"]><:agendaflou:date_floue_choix_mois:></option>
-		<option value="saison"[ (#DATE_DEBUT_FLOUE|=={saison}|oui)selected="selected"]><:agendaflou:date_floue_choix_saison:></option>
-		<option value="annee"[ (#DATE_DEBUT_FLOUE|=={annee}|oui)selected="selected"]><:agendaflou:date_floue_choix_annee:></option>
+		<option value="mois"[ (#ENV{date_debut_floue}|=={mois}|oui)selected="selected"]><:agendaflou:date_floue_choix_mois:></option>
+		<option value="saison"[ (#ENV{date_debut_floue}|=={saison}|oui)selected="selected"]><:agendaflou:date_floue_choix_saison:></option>
+		<option value="annee"[ (#ENV{date_debut_floue}|=={annee}|oui)selected="selected"]><:agendaflou:date_floue_choix_annee:></option>
 	</select>
 	</div>
 	<div class="choix">
 	<label for="date_fin_floue"><:agendaflou:date_floue_fin_label:></label>
 	<select id="date_fin_floue" name="date_fin_floue">
 		<option value=""><:agendaflou:date_floue_choix_normale:></option>
-		<option value="mois"[ (#DATE_FIN_FLOUE|=={mois}|oui)selected="selected"]><:agendaflou:date_floue_choix_mois:></option>
-		<option value="saison"[ (#DATE_FIN_FLOUE|=={saison}|oui)selected="selected"]><:agendaflou:date_floue_choix_saison:></option>
-		<option value="annee"[ (#DATE_FIN_FLOUE|=={annee}|oui)selected="selected"]><:agendaflou:date_floue_choix_annee:></option>
+		<option value="mois"[ (#ENV{date_fin_floue}|=={mois}|oui)selected="selected"]><:agendaflou:date_floue_choix_mois:></option>
+		<option value="saison"[ (#ENV{date_fin_floue}|=={saison}|oui)selected="selected"]><:agendaflou:date_floue_choix_saison:></option>
+		<option value="annee"[ (#ENV{date_fin_floue}|=={annee}|oui)selected="selected"]><:agendaflou:date_floue_choix_annee:></option>
 	</select>
 	</div>
 </li>
