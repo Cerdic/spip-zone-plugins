@@ -27,17 +27,20 @@ function todo_porte_plume_barre_pre_charger($barres){
 				"id"          => 'todo',
 				"name"        => _T('todo:outil_inserer_todo'),
 				"className"   => 'outil_todo', 
-				"openWith" => "<todo>\n+ ",
-				"closeWith" => "\n</todo>\n",
+				"openBlockWith" => "<todo>\n",
+				"closeBlockWith" => "\n</todo>",
+				"replaceWith" => "function(h){ return outil_todo(h, '+',true);}",
+				"selectionType" => "line",
 				"display"     => true,
 				"dropMenu" => array(
 					// bouton +
 					array(
 						"id"          => 'todo_plus',
 						"name"        => _T('todo:outil_inserer_todo_plus'),
-						"className"   => 'outil_todo_plus', 
-						"openWith" => "+ ",
-						"closeWith" => "\n",
+						"className"   => 'outil_todo_plus',
+						"replaceWith" => "function(h){ return outil_todo(h, '+');}",
+						"selectionType" => "line",
+						"forceMultiline" => true,
 						"display"     => true,
 					),
 					// bouton -
@@ -45,34 +48,62 @@ function todo_porte_plume_barre_pre_charger($barres){
 						"id"          => 'todo_moins',
 						"name"        => _T('todo:outil_inserer_todo_moins'),
 						"className"   => 'outil_todo_moins', 
-						"openWith" => "- ",
-						"closeWith" => "\n",
+						"replaceWith" => "function(h){ return outil_todo(h, '-');}", 
+						//"openWith" => "- ",
+						//"closeWith" => "\n",
+						"selectionType" => "line",
+						"forceMultiline" => true, 
 						"display"     => true,
 					),
 					// bouton o
 					array(
 						"id"          => 'todo_o',
 						"name"        => _T('todo:outil_inserer_todo_o'),
+						"replaceWith" => "function(h){ return outil_todo(h, 'o');}", 
 						"className"   => 'outil_todo_o', 
-						"openWith" => "o ",
-						"closeWith" => "\n",
+						//"openWith" => "o ",
+						//"closeWith" => "\n",
+						"selectionType" => "line",
+						"forceMultiline" => true, 
 						"display"     => true,
 					)
 				)
 			)
 		));
+		$barre->ajouterFonction("function outil_todo(h, c,recursif) {
+					if(recursif){
+						// Cas de la sélection de click sur le bouton de création de todo complète
+						s = h.selection;
+						lines = h.selection.split(/\\r?\\n/);
+						var lines_final = [];
+						for (j = 0, n = lines.length, i = 0; i < n; i++) {
+							// si une seule ligne, on se fiche de savoir qu'elle est vide,
+							// c'est volontaire si on clique le bouton
+							if (n == 1 || $.trim(lines[i]) !== '') {
+								if(r = lines[i].match(/^([+-o]) (.*)$/)){
+									r[1] = r[1].replace(/[+-o]/g, c);
+									lines_final[j] = r[1]+' '+r[2];
+									j++;
+								} else {
+									lines_final[j] = c + ' '+lines[i];
+									j++;
+								}
+							}
+						}
+						return lines_final.join('\\n');
+					}
+					// Click sur les autres boutons
+					if ((s = h.selection) && (r = s.match(/^([+-o]) (.*)$/))){
+						r[1] = r[1].replace(/[+-o]/g, c);
+						s = r[1]+' '+r[2];
+					} else {
+						s = c + ' '+s;
+					}
+					return s;
+				}");
 	}
 	return $barres;
 }
-
-
-function todo_porte_plume_barre_charger($barres){
-	if (isset($barres['edition'])) {
-		$barres['edition']->afficher(array('todo'));
-	}
-	return $barres;
-}
-
 
 function todo_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
