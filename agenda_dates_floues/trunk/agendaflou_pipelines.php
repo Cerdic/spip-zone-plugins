@@ -15,6 +15,9 @@ function agendaflou_declarer_tables_objets_sql($flux){
 
 // Ajouter les champs dans le HTML
 function agendaflou_formulaire_fond($flux){
+	$dates_floues = recuperer_fond('formulaires/inc-agendaflou', $flux['args']['contexte']);
+	
+	$flux['data'] = preg_replace('@<li[^>]*class=(\'|")editer_repetitions[^\'"]*\\1[^>]*>@is', "$dates_floues$0", $flux['data']);
 	
 	return $flux;
 }
