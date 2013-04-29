@@ -20,7 +20,7 @@ include_spip('inc/filtres');
  */
 function formulaires_recommander_charger_dist($titre, $url='', $texte='', $subject=''){
 	$valeurs = array(
-		'recommander_from'=> $GLOBALS['visiteur_session']['email'] ? $GLOBALS['visiteur_session']['email'] :'',
+		'recommander_from'=> isset($GLOBALS['visiteur_session']['email']) ? $GLOBALS['visiteur_session']['email'] :'',
 		'recommander_to'=> '',
 		'recommander_message'=> ''
 	);
