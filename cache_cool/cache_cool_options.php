@@ -57,7 +57,7 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 	// - on est pas deja en train de traiter un calcul en background
 	if ($use_cache==1 AND $chemin_cache
 		AND is_array($page) AND isset($page['texte'])
-		AND !$GLOBALS['visiteur_session']['id_auteur']
+		AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !$GLOBALS['visiteur_session']['id_auteur'])
 		AND !$processing
 		) {
 		// si c'est un bot, on ne lance pas un calcul differe
