@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_logiciel_ok' => 'Le logiciel "@logiciel@" semble utilisable',
 	'info_logiciel_ok_tous' => 'L\'ensemble des logiciels nécessaires sont utilisables. Vous pouvez utiliser smush en local.',
 	'info_taille' => 'Taille : @taille@ (@octets@).',
+	'info_titre_smush' => 'Smush',
 
 	// L
 	'label_eviter_traitement_auto' => 'Éviter le traitement automatique de toutes les images générées par SPIP',
