@@ -1,7 +1,7 @@
 <BOUCLE_document(DOCUMENTS){id_document}{tout}>
 <div id="infosdoc-#ID_DOCUMENT">
 	<div id="infos_video_haut_#ID_DOCUMENT" class="infos_video_haut">
-		<strong>[(#LOGO_DOCUMENT||image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}"><:spipmotion:info_infos_techniques:></a></strong>
+		<strong>[(#LOGO_DOCUMENT|image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_video_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_video_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_video_bas_#ID_DOCUMENT').slideDown(); return false;}"><:spipmotion:info_infos_techniques:></a></strong>
 		<br class="nettoyeur" />
 
 		<div id="infos_video_bas_#ID_DOCUMENT" class="infos_video_bas">
@@ -93,24 +93,25 @@
 				</tr>]]
 				
 				[(#HASVIDEO|=={oui}|oui)
-				[(#VIDEOBITRATE|>{0}|oui)[<tr>
-					<td class="video_left">
-						<:spipmotion:info_videobitrate:>
-					</td>
-					<td >
-					<strong>(#VIDEOBITRATE|div{1000}|floor) kb/s</strong>
-					</td>
-				</tr>]]
-				[<tr>
-					<td class="video_left">
-						<:spipmotion:info_videocodec:>
-					</td>
-					<td >
-					<strong>(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})</strong>
-					</td>
-				</tr>]]
+					[(#VIDEOBITRATE|>{0}|oui)[<tr>
+						<td class="video_left">
+							<:spipmotion:info_videobitrate:>
+						</td>
+						<td >
+						<strong>(#VIDEOBITRATE|div{1000}|floor) kb/s</strong>
+						</td>
+					</tr>]]
+					[<tr>
+						<td class="video_left">
+							<:spipmotion:info_videocodec:>
+						</td>
+						<td >
+						<strong>(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})</strong>
+						</td>
+					</tr>]
+				]
 				
-				[(#HASAUDIO|=={oui})
+				[(#HASAUDIO|=={oui}|oui)
 					[<tr>
 						<td class="video_left">
 							<:spipmotion:info_audiobitrate:>
