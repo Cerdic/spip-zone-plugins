@@ -243,6 +243,66 @@ function balise_descriptif_gis_dist($p) {
 }
 
 /**
+ * Balise #ADRESSE_GIS : retourne l'adresse du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_adresse_gis_dist($p) {
+	return rindex_pile($p, 'adresse_gis', 'gis');
+}
+
+/**
+ * Balise #PAYS_GIS : retourne le pays du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_pays_gis_dist($p) {
+	return rindex_pile($p, 'pays_gis', 'gis');
+}
+
+/**
+ * Balise #CODE_PAYS_GIS : retourne le code pays du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_code_pays_gis_dist($p) {
+	return rindex_pile($p, 'code_pays_gis', 'gis');
+}
+
+/**
+ * Balise #VILLE_GIS : retourne la ville du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_ville_gis_dist($p) {
+	return rindex_pile($p, 'ville_gis', 'gis');
+}
+
+/**
+ * Balise #REGION_GIS : retourne la région du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_region_gis_dist($p) {
+	return rindex_pile($p, 'region_gis', 'gis');
+}
+
+/**
+ * Balise #CODE_POSTAL_GIS : retourne le code postal du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_code_postal_gis_dist($p) {
+	return rindex_pile($p, 'code_postal_gis', 'gis');
+}
+
+/**
  * Définition du fond de carte à utiliser par défaut en prenant compte les defines
  */
 function gis_layer_defaut(){
