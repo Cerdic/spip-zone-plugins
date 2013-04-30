@@ -19,7 +19,7 @@
 		</multi>
 	</description>
 	<prefix>multilang</prefix>
-	<lien>http://www.spip-contrib.net/Multilang</lien>
+	<lien>http://contrib.spip.net/?article3498</lien>
 	<icon>images/multilang-32.png</icon>
 	<install>base/multilang_install.php</install>
 	<pipeline>

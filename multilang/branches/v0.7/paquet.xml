@@ -6,7 +6,7 @@
 	compatibilite="[2.1;3.0.99]"
 	logo="images/multilang-32.png"
 	schema="0.1"
-	documentation="http://www.spip-contrib.net/Multilang"
+	documentation="http://contrib.spip.net/?article3498"
 >	
 
 	<nom>Multilang</nom>
@@ -14,7 +14,7 @@
 
 	<auteur>Renato Formato</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-	<auteur>Yffic</auteur>
+	<auteur lien="http://contrib.spip.net/?auteur10787">Yffic</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
