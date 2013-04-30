@@ -1,7 +1,7 @@
 <paquet
 	prefix="collections"
 	categorie="edition"
-	version="1.4.6"
+	version="1.4.7"
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/collection-32.png"
