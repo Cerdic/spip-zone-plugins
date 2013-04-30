@@ -56,9 +56,12 @@
 						<strong>#REFERENCE</strong>
 					</div>
 					<div class='qui'>
-						<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
-							[(#INFO_PRENOM{auteur, #ID_AUTEUR}) ][(#INFO_NOM{auteur, #ID_AUTEUR})]
-						</a>
+						[(#ID_AUTEUR|>{0}|?{
+							<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[
+								(#INFO_PRENOM{auteur, #ID_AUTEUR}) ][(#INFO_NOM{auteur, #ID_AUTEUR})
+							]</a>,
+							<em><:info_aucun_auteur:></em>}
+						)]
 					</div>
 				</td>
 				<td class='dates'>

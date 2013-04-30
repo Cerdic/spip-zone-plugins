@@ -27,9 +27,14 @@
 	<label><:commandes:date_maj_label:></label>
 	<span dir='#LANG_DIR'>[(#MAJ|affdate)][ - (#MAJ|affdate{'H:i'})]</span>
 </div>
-[<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
 	<label><:commandes:contact_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} auteur'>#ID_AUTEUR</span>
-	(#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE})
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{id_auteur} auteur'>[
+		(#ID_AUTEUR|>{0}|?{
+			#ID_AUTEUR|concat{' ',#INFO_PRENOM{auteur,#ID_AUTEUR}|concat{' ',#INFO_NOM{auteur,#ID_AUTEUR}}|wrap{<a>}|inserer_attribut{href,#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}}},
+			<em><:info_aucun_auteur:></em>})
+	]</span>
+	#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE}
+</div>
+
 </BOUCLE_afficher_contenu>
