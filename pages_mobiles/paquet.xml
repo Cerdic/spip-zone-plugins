@@ -1,7 +1,7 @@
 <paquet
 	prefix="pages_mobiles"
 	categorie="navigation"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.4;3.0.*]"
 	logo="prive/themes/spip/images/pages_mobiles-64.png"

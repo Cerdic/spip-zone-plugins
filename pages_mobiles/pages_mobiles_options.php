@@ -156,7 +156,6 @@ function pages_mobiles_groupes_mobiles() {
 // le define est necessaire quand on appelle urls_decoder_url(), voir:
 // http://thread.gmane.org/gmane.comp.web.spip.zone/29186/focus=29214
 if (!defined('_SPIP_SCRIPT')) define('_SPIP_SCRIPT', 'spip.php');
-
 include_spip('inc/urls');
 $url_decodee = urls_decoder_url($GLOBALS['REQUEST_URI']);
 
@@ -170,7 +169,9 @@ $type_page = $type_page ? $type_page : $_GET[page];
 if ($type_page!="pages_mobiles" AND !test_espace_prive()) {
 
 	// Pas de type de page alors c'est le sommaire
-	if (!$type_page) $type_page = "sommaire";
+	// Attention depuis SPIP 3.0.7, urls_decoder_url retourne 404 comme type page
+	// quand "page" n'est pas défini !
+	if (!$type_page OR ($type_page == "404" AND $_GET[page] == false)) $type_page = "sommaire";
 
 	// on identifie le type de navigation
 	$type_mobile = pages_mobiles_detecter_mobile();
