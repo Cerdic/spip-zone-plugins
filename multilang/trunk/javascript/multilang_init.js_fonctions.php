@@ -65,7 +65,6 @@ function generer_multilang_init(){
 			if($(".menu_multilang").length > 0){
 				$(".menu_multilang").each(function(){
 					var menu_lang = $(this);
-					var menu_lang_width = menu_lang.width();
 					$(window).scroll(function() {
 						var offset = menu_lang.parents("form").offset();
 						var limite_multilang = offset.top;
@@ -74,6 +73,7 @@ function generer_multilang_init(){
 						if(($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
 							if(!menu_lang.hasClass("menu_lang_flottant"))
 								menu_lang.addClass("menu_lang_flottant");
+							var menu_lang_width = menu_lang.width();
 							menu_lang.css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
 						}
 						if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas) )
