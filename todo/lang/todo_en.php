@@ -15,6 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut' => 'Status',
 	'label_titre' => 'Title',
 
+	// O
+	'outil_inserer_todo' => 'Insérer une todo', # NEW
+	'outil_inserer_todo_moins' => 'Insérer une tâche terminée', # NEW
+	'outil_inserer_todo_o' => 'Insérer une tâche en cours', # NEW
+	'outil_inserer_todo_plus' => 'Insérer une tâche à faire', # NEW
+
 	// S
 	'statut_afaire' => 'To do',
 	'statut_encours' => 'Ongoing',
