@@ -4,7 +4,7 @@
 		<legend><:diogene_gerer_auteurs:form_legend:></legend>
 		<ul>
 			<li class="editer editer_diogene_gerer_auteurs">
-				<label><:diogene_gerer_auteurs:label_diogene_gerer_auteurs:></label>
+				<label for="diogene_gerer_auteurs"><:diogene_gerer_auteurs:label_diogene_gerer_auteurs:></label>
 				<p class="explication"><:diogene_gerer_auteurs:explication_diogene_gerer_auteurs:></p>
 				<input type="text" class="text nomulti" name="diogene_gerer_auteurs" id="diogene_gerer_auteurs" size="50" data-selecteur="[(#VAL{diogene_auteurs}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" data-select-callback="diogene_select"  />
 			</li>
@@ -15,7 +15,7 @@
 			<B_auteur_remove>
 			<li class="editer editer_gerer_auteurs_remove">
 				<label><:diogene_gerer_auteurs:label_gerer_auteurs_remove:></label>
-				<div class="explication"><p><:diogene_gerer_auteurs:explication_gerer_auteurs_remove:></p></div>
+				<p class="explication"><:diogene_gerer_auteurs:explication_gerer_auteurs_remove:></p>
 				<BOUCLE_auteur_remove(POUR){tableau #ENV**{diogene_gerer_auteurs_remove}}>
 					<BOUCLE_si_autoriser(CONDITION){si #SESSION{id_auteur}|=={#CLE}|et{#AUTORISER{configurer}|non}|non}>
 					<div class="choix">
