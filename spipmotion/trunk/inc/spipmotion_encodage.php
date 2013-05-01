@@ -85,6 +85,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
  * @param int $doc_attente id_facd_conversion L'id de la file d'attente
  */
 function encodage($source,$options){
+	include_spip('plugins/installer');
 	$ret = array();
 	spip_log('On encode le document : '.$source['id_document'],'spipmotion');
 	/**
@@ -397,7 +398,7 @@ function encodage($source,$options){
 				$vbitrate = $source['videobitrate'];
 			else{
 				$vbitrate = null;
-				if(version_compare($ffmpeg_version,'1.0.0','<'))
+				if(spip_version_compare($ffmpeg_version,'1.0.0','<'))
 					$infos_sup_normal .= ' -sameq ';
 				else
 					$infos_sup_normal .= ' -q:v 0 ';
@@ -427,7 +428,7 @@ function encodage($source,$options){
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
 			if($format == 'ipod'){
-				if(version_compare($ffmpeg_version,'0.7.10','<'))
+				if(spip_version_compare($ffmpeg_version,'0.7.10','<'))
 					$infos_sup_normal .= ' -vpre baseline -vpre ipod640';
 				else
 					$infos_sup_normal .= ' -profile baseline -vpre ipod640';	
