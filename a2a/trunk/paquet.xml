@@ -2,7 +2,7 @@
 	prefix="a2a"
 	categorie="navigation"
 	version="2.0.3"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/a2a-64.png"
 	schema="0.9.0"
