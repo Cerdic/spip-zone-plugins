@@ -8,10 +8,10 @@
 [(#ENV{appel_menu}|oui)
 	[(#AUTORISER{ecrire})
 		<li class="menu-entree item[ (#ENV{css})]">
-			<a href="#EVAL{_DIR_RESTREINT_ABS}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
+			<a href="#EVAL{_DIR_RESTREINT_ABS}">#GET{titre}</a>
 	]
 	[(#SESSION{id_auteur}|>{0}|non)
 		<li class="menu-entree item[ (#ENV{css})]">
-			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" title="[(#GET{titre_connecter}|attribut_html)]" rel="nofollow">#GET{titre_connecter}</a>
+			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" rel="nofollow">#GET{titre_connecter}</a>
 	]
 ]

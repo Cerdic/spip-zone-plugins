@@ -21,12 +21,12 @@
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 <BOUCLE_mots(MOTS){id_groupe=#GET{id_groupe}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 	<li class="menu-entree item">
-		<a href="#URL_MOT" title="[(#TITRE|attribut_html)]">#TITRE</a>
+		<a href="#URL_MOT">#TITRE</a>
 		<B_articles_mots>
 			<ul class="menu-liste menu-items">
 				<BOUCLE_articles_mots(ARTICLES){id_mot=#ID_MOT}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{nombre_articles_mot}}>
 				<li class="menu-entree item">
-					<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+					<a href="#URL_ARTICLE">#TITRE</a>
 				</li>
 				</BOUCLE_articles_mots>
 			</ul>
@@ -41,12 +41,12 @@
 			<ul class="menu-liste menu-items">
 				<BOUCLE_mots_tous(MOTS){id_groupe}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 				<li class="menu-entree item">
-					<a href="#URL_MOT" title="[(#TITRE|attribut_html)]">#TITRE</a>
+					<a href="#URL_MOT">#TITRE</a>
 						<B_mots_articles_mots>
 							<ul class="menu-liste menu-items">
 								<BOUCLE_mots_articles_mots(ARTICLES){id_mot=#ID_MOT}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{nombre_articles_mot}}>
 									<li class="menu-entree item">
-									<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+									<a href="#URL_ARTICLE">#TITRE</a>
 									</li>
 								</BOUCLE_mots_articles_mots>
 							</ul>

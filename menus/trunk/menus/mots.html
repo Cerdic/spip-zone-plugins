@@ -25,7 +25,7 @@
 				<ul class="menu-liste menu-items">
 					<BOUCLE_articles_infini(ARTICLES){id_mot}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 						<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
-							<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+							<a href="#URL_ARTICLE">#TITRE</a>
 						</li>
 					</BOUCLE_articles_infini>
 				</ul>
@@ -36,7 +36,7 @@
 				<ul class="menu-liste menu-items">
 					<BOUCLE_articles_limite(ARTICLES){id_mot}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{nombre}}>
 						<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
-							<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+							<a href="#URL_ARTICLE">#TITRE</a>
 						</li>
 					</BOUCLE_articles_limite>
 				</ul>

@@ -6,5 +6,5 @@
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree item[ (#ENV{css})][(#ENV{env/type-page}|=={#ENV{nom}}|ou{#ENV{env/type}|=={page}|et{#ENV{env/composition}|=={#ENV{nom}}}}) on active]">
-		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}" title="[(#GET{titre}|attribut_html)]" onclick="jQuery.modalbox('[(#URL_PAGE{#ENV{nom}, #ENV{parametres}}|parametre_url{var_zajax,#ENV{bloc},'&'})]');return false;">#GET{titre}</a>
+		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}" onclick="jQuery.modalbox('[(#URL_PAGE{#ENV{nom}, #ENV{parametres}}|parametre_url{var_zajax,#ENV{bloc},'&'})]');return false;">#GET{titre}</a>
 ]

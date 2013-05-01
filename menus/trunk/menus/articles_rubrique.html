@@ -17,12 +17,12 @@
 	<BOUCLE_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{origine_traduction}{0,#GET{articles_max_affiches}}>
 		<BOUCLE_trad(ARTICLES){traduction}{id_rubrique=#GET{id_rubrique}}{lang=#ENV{lang}}>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-			<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+			<a href="#URL_ARTICLE">#TITRE</a>
 		</li>
 		</BOUCLE_trad>
 		</B_trad>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-			<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+			<a href="#URL_ARTICLE">#TITRE</a>
 		</li>
 		<//B_trad>
 	</BOUCLE_articles_orig>
@@ -36,7 +36,7 @@
 	<BOUCLE_cpt_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}> </BOUCLE_cpt_articles>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles>
 	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-			<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+			<a href="#URL_ARTICLE">#TITRE</a>
 		</li>
 	</BOUCLE_articles>
 	[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)

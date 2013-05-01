@@ -66,7 +66,7 @@
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">
-			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+			<a href="#URL_RUBRIQUE">#TITRE</a>
 
 			[(#REM) Doit-on descendre plus loin ? ]
 			[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
@@ -104,7 +104,7 @@
                   </BOUCLE_test_classe_parent>
 						[(#REM) --------------------------- Fin Positionnement de la classe daddy ]
 
-						<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]"[ class="(#GET{class})"]>#TITRE</a>
+						<a href="#URL_RUBRIQUE"[ class="(#GET{class})"]>#TITRE</a>
 						<BOUCLE_test_niveau2(CONDITION){si #GET{cond}}>
 						<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 						</BOUCLE_test_niveau2>
@@ -138,7 +138,7 @@
 						<BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
 							<BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
 								<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-									<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+									<a href="#URL_ARTICLE">#TITRE</a>
 								</li>
 							</BOUCLE_articles_si_sousrub>
 							[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
@@ -170,7 +170,7 @@
 								<ul class="menu-liste menu-items">
 							<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
 								<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-										<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+										<a href="#URL_ARTICLE">#TITRE</a>
 								</li>
 							</BOUCLE_articles_pas_de_sousrub>
 								[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
@@ -204,7 +204,7 @@
          <B_articles_pas_de_rub>
          <BOUCLE_articles_pas_de_rub(ARTICLES){id_rubrique=#GET{id_rubrique}}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
             <li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-               <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+               <a href="#URL_ARTICLE">#TITRE</a>
             </li>
          </BOUCLE_articles_pas_de_rub>
             [(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)

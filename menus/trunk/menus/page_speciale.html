@@ -21,5 +21,5 @@
 ]
 [(#ENV{appel_menu}|et{#GET{afficher_entree}})
 	<li class="menu-entree item[ (#ENV{css})][(#ENV{env/type-page}|=={#ENV{nom}}|ou{#ENV{env/type}|=={page}|et{#ENV{env/composition}|=={#ENV{nom}}}}) on active]">
-		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}" title="[(#GET{titre}|attribut_html)]">#GET{titre}</a>
+		<a href="#URL_PAGE{#ENV{nom}, #ENV{parametres}}">#GET{titre}</a>
 ]
