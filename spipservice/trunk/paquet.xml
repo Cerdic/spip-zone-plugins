@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipservice"
 	categorie="outil"
-	version="2.0.1"
+	version="2.0.2"
 	etat="dev"
 	documentation="http://contrib.spip.net/SpipService"
 	compatibilite="[3.0.0 ;3.0.*]"
