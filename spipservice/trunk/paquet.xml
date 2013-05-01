@@ -1,9 +1,15 @@
-<paquet prefix="spipservice" categorie="outil" version="2.0.0"
-	etat="dev" compatibilite="[3.0.0 ;3.0.*]" logo="prive/themes/spip/images/spipservice.png"
+<paquet
+	prefix="spipservice"
+	categorie="outil"
+	version="2.0.1"
+	etat="dev"
+	documentation="http://contrib.spip.net/SpipService"
+	compatibilite="[3.0.0 ;3.0.*]"
+	logo="prive/themes/spip/images/spipservice.png"
 	schema="10">
 
 	<nom>SpipService</nom>
-	<!-- API REST permettant communication tierce -->
+	<!-- Actualisez votre site depuis des applications tierces -->
 	
 	<auteur lien="http://www.studio-lambda.com">Studio Lambda</auteur>
 

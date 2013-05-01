@@ -37,7 +37,7 @@ function spipservice_declarer_tables_objets_sql($tables){
 					"PRIMARY KEY"	=> "id_spipservice",
 			),
 			'date' => "date",
-			'texte_objets' => "spipservice:spipservice_nom"
+			'texte_objets' => "paquet-spipservice:spipservice_nom"
 	);
 	return $tables;
 }
