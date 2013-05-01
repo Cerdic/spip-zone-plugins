@@ -2,7 +2,7 @@
 	<nom>MailCrypt 2</nom>
 	<slogan>Prot&#233;ger les liens de courriels</slogan>
 	<auteur>Alexis Roussel, Paolo, Patrice Vanneufville, Joseph</auteur>
-	<version>2.4.0</version>
+	<version>2.4.1</version>
 	<icon>images/mailcrypt-256.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -10,7 +10,7 @@
 	</description>
 	<lien>http://www.spip-contrib.net/?article3828</lien>
 	<prefix>mailcrypt</prefix>
-	<categorie>edition</categorie>
+	<categorie>performance</categorie>
 	<fonctions>mailcrypt_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affichage_final</nom>
