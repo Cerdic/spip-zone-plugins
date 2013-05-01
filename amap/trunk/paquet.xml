@@ -22,7 +22,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/amap.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/amap.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/amap.php" />
-	<pipeline nom="affiche_milieu" inclure="amap_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="amap_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="amap_pipelines.php" />
 

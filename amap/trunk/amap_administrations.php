@@ -27,7 +27,7 @@ function amap_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-				array('maj_tables', array('spip_amap_paniers', 'spip_amap_responsables', 'spip_amap_responsables_liens', 'spip_amap_livraisons', 'spip_amap_livraisons_liens')),
+				array('maj_tables', array('spip_amap_paniers', 'spip_amap_responsables', 'spip_amap_livraisons')),
 				array('amap_rubriques'),
 	);
 
