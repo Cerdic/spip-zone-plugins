@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_suppression_tag' => 'Sélectionnez vos tags dans la liste ci-dessous et validez pour les supprimer.',
 
 	// L
-	'label_tags' => 'Tags :',
+	'label_tags' => 'Tags',
 	'liste_auteurs_tag' => 'Ce tag est utilisé par :',
 
 	// M
