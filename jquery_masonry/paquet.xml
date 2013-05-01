@@ -1,7 +1,7 @@
 <paquet
 	prefix="jquerymasonry"
 	categorie="multimedia"
-	version="0.4.1"
+	version="0.4.2"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/jquerymasonry-32.png"
@@ -21,6 +21,7 @@
 	<pipeline nom="ieconfig_metas" inclure="jquerymasonry_ieconfig_metas.php" />
 
 	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="yaml" compatibilite="[1.5.0;[" />
 
 	<menu nom="jquerymasonry" titre="jquerymasonry:titre_menu" parent="bando_squelette" icone="images/jquerymasonry-16.png" action="configurer_jquerymasonry" />
 </paquet>
