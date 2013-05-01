@@ -78,8 +78,8 @@ function association_upgrade($meta, $courante, $table='meta') {
 	}
 }
 
-// v0.50 (Associaspip 1.9.1) :
-//@r12523 on les table(champs) : asso_adherents@maj_64 asso_categories(id_categorie, valeur, libelle, duree, cotisation, commentaire, maj) asso_comptes(id_compte, recette, depense, justification, imputation, journal, id_journal, maj) asso_financiers@maj_21 asso_profil(id_profil, nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, maj, mail) asso_livres(id_livre, valeur, libelle, maj) asso_activites(id_activite, id_evenement, nom, id_adherent, accompagne, inscrits, date, telephone, adresse, email, commentaire, montant, date_paiement, statute, maj) asso_ventes(id_vente, article, code, acheteur, quantite, date_vente, date_envoi, don, prix_vente, frais_envoi, commentaire)
+// v0.30 (Associaspip 1.9.0) :
+//@r12523 on les table(champs) : asso_adherents@maj_64 asso_categories(id_categorie, valeur, libelle, duree, cotisation, commentaire, maj) asso_comptes(id_compte, recette, depense, justification, imputation, journal, id_journal, maj) asso_financiers@maj_21 asso_profil(id_profil, nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, maj, mail) asso_livres(id_livre, valeur, libelle, maj) asso_ventes(id_vente, article, code, acheteur, quantite, date_vente, date_envoi, don, prix_vente, frais_envoi, commentaire)
 function association_maj_0($version, $meta, $table){
 	global $association_tables_principales, $association_tables_auxiliaires;
 	$ok = TRUE;
@@ -96,24 +96,7 @@ function association_maj_0($version, $meta, $table){
 	}
 }
 
-// v0.20? (Associaspip 1.9.0)
-$GLOBALS['association_maj'][20] = array(
-//<r12523
-	// les livres de comptes ? ancienne table des financiers ? (table supprimee par v0.60)
-	array('sql_create','spip_asso_livres',
-		$association_tables_principales['spip_asso_livres']['field'],
-	    $association_tables_principales['spip_asso_livres']['key'],
-	    TRUE), // champs : id_livre, valeur, libelle
-	// initialisation du livre des comptes (donnees plus inserees des v0.40)
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('cotisation', 'Cotisations')"),
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('vente', 'Ventes')"),
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('don', 'Dons')"),
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('achat', 'Achats')"),
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('divers', 'Divers')"),
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('activite', 'Activités')"),
-);
-
-// v0.30 (Associaspip 1.9.1) : champ autorisation de publication, liste de l'equipe dirigeante, etc.
+// v0.30 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][21] = array(
 //<r12523
 	// champ autorisation de publication d'adherent
@@ -130,6 +113,7 @@ $GLOBALS['association_maj'][21] = array(
 	    TRUE), // champs : id_don, date_don, bienfaiteur, id_adherent, argent, colis, contrepartie, commentaire, maj
 );
 
+// v0.30 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][30] = array(
 //<r12524
 	// asso_financiers devient asso_banques
@@ -138,10 +122,22 @@ $GLOBALS['association_maj'][30] = array(
 	array('sql_alter', "TABLE spip_asso_banques ADD id_banque INT NOT NULL "),
 	array('sql_update', 'spip_asso_banques', array('id_banque' => 'id_financier'), 1),
 	array('sql_alter', "TABLE spip_asso_banques DROP id_financier"),
+	array('sql_alter', "TABLE spip_asso_banques ADD PRIMARY KEY(id_banque) "),
+	array('sql_alter', "TABLE spip_asso_banques MODIFY id_banque INT NOT NULL AUTO_INCREMENT "), //!\ non-portable...
 	// et on ajoute une entree caisses
-	array('sql_insert', 'spip_asso_financiers', "(code)", "('caisse')"),
+	array('sql_insert', 'spip_asso_banques', "(code)", "('caisse')"),
 	// et on ajoute un champ date
-	array('sql_alter', "TABLE spip_asso_banques ADD date DATE NOT NULL "),
+	array('sql_alter', "TABLE spip_asso_banques ADD \"date\" DATE NOT NULL "), //!\ 'date' fait partir des mots reserves du SQL... https://dev.mysql.com/doc/refman/4.1/en/reserved-words.html https://dev.mysql.com/doc/refman/4.1/en/server-sql-mode.html#sqlmode_ansi_quotes
+//<r12523
+/*
+	// les livres de comptes ? (table supprimee par r13839)
+	array('sql_create','spip_asso_livres',
+		$association_tables_principales['spip_asso_livres']['field'],
+	    $association_tables_principales['spip_asso_livres']['key'],
+	    TRUE), // champs : id_livre, valeur, libelle
+	// initialisation du livre des comptes (donnees plus inserees des v0.40)
+	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités') "),
+*/
 //@r13971
 	// asso_profil est enrichi
 	array('sql_alter', "TABLE spip_asso_profil ADD dons TEXT NOT NULL DEFAULT 'oui' "),
@@ -155,30 +151,41 @@ $GLOBALS['association_maj'][30] = array(
 // v0.40 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][40] = array(
 //<r12524
-	array('sql_alter',"TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL ")
+	// validation des ecritures comptables
+	array('sql_alter',"TABLE spip_asso_comptes ADD valide TEXT NOT NULL "),
+	// nouvelle table des participations aux activites
+	array('sql_create','spip_asso_activites',
+		$association_tables_principales['spip_asso_activites']['field'],
+	    $association_tables_principales['spip_asso_activites']['key'],
+	    TRUE), // champs : id_activite, id_evenement, nom, id_adherent, accompagne, inscrits, date, telephone, adresse, email, commentaire, montant, date_paiement, statut, maj
 );
 
 // v0.50 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][50] = array(
 //<r12524
-	array('sql_alter',"TABLE spip_asso_profil ADD indexation TEXT NOT NULL "),
-	array('sql_alter',"TABLE spip_asso_activites ADD membres TEXT NOT NULL "),
-	array('sql_alter',"TABLE spip_asso_activites ADD non_membres TEXT NOT NULL "),
+#	array('sql_alter',"TABLE spip_asso_profil ADD indexation TEXT NOT NULL "), // supprime par r13971 ou r12530
+//@r16186
+	// asso_activites.accompagne se decompose en asso_activites.membres + asso_activites.non_membres
+	array('sql_alter', "TABLE spip_asso_activites ADD membres TEXT NOT NULL"),
+	array('sql_alter', "TABLE spip_asso_activites ADD non_membres TEXT NOT NULL"),
+	array('sql_update', 'spip_asso_activites', array('membres' => 'accompagne'), "accompagne<>''"),
 );
 
 // v0.60 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][60] = array(
 //@r12530
 	// Passage au plugin "CFG"...
-	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_allfetsel('*','spip_profil')) )),  // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association ...requete avec "sql_allfetsel()" a verifier...
-	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil  ne sert plus...
+	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
+	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil ne sert donc plus...
 //@r13839
-	array('sql_drop_table', 'spip_asso_livres'),
+	// suppression de la table des livres
+	array('sql_drop_table', 'spip_asso_livres'), // n'a jamais servi...
+	// nouvelle table pour les ressources materielles
 	array('sql_create','spip_asso_ressources',
 		$association_tables_principales['spip_asso_ressources']['field'],
 	    $association_tables_principales['spip_asso_ressources']['key'],
 	    TRUE), // champs : id_ressource, code, intitule, date_acquisition, id_achat, pu, statut, commentaire, maj
-	// et une nouvelle table pour gerer la gestion de leurs prets apparait
+	// et une nouvelle table pour gerer leurs prets apparait
 	array('sql_create','spip_asso_prets',
 		$association_tables_principales['spip_asso_prets']['field'],
 	    $association_tables_principales['spip_asso_prets']['key'],
@@ -192,8 +199,10 @@ $GLOBALS['association_maj'][61] = array(
 	array('sql_alter', "TABLE spip_asso_banques RENAME TO spip_asso_plan"),
 	// la cle change en consequence
 	array('sql_alter', "TABLE spip_asso_plan ADD id_plan INT NOT NULL"),
-	array('sql_update', 'spip_asso_plan', array('id_plan' => 'id_financier'), 1),
-	array('sql_alter', "TABLE spip_asso_plan DROP id_financier"),
+	array('sql_update', 'spip_asso_plan', array('id_plan' => 'id_banque'), 1),
+	array('sql_alter', "TABLE spip_asso_plan DROP id_banque"),
+	array('sql_alter', "TABLE spip_asso_plan ADD PRIMARY KEY(id_plan) "),
+	array('sql_alter', "TABLE spip_asso_plan MODIFY id_plan INT NOT NULL AUTO_INCREMENT "), //!\ non-portable...
 	// le champ du solde anterieur est renomme de facon plus parlante
 	array('sql_alter', "TABLE spip_asso_plan ADD solde_anterieur FLOAT NOT NULL DEFAULT 0"),
 	array('sql_update', 'spip_asso_plan', array('solde_anterieur' => 'solde'), 1),
@@ -205,73 +214,80 @@ $GLOBALS['association_maj'][61] = array(
 	// et un nouveau champ de classe comptable
 	array('sql_alter', "TABLE spip_asso_plan ADD classe TEXT NOT NULL"),
 	// suppression de asso_profil.nom=indexation
-	array('sql_delete', 'spip_asso_profil', "nom=indexation"),
+#	array('sql_delete', 'spip_asso_profil', "nom=indexation"), //!\ fait par r12530
 );
 
-// v0.61 (Associaspip 1.9.2) : r16181 annonce 0.70 !
+function association_maj_16181(){
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+		// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16186) ou la table (r38192)
+		$champs = array('id_auteur', 'nom', 'prenom', 'sexe', 'fonction', 'email', 'numero', 'rue', 'cp', 'ville', 'telephone', 'portable', 'montant', 'relance', 'divers', 'remarques', 'vignette', 'naissance', 'profession', 'societe', 'identifiant', 'passe', 'creation', 'secteur', 'publication'); // champs pris en compte dans r16186... (on met id_auteur en tete par rapport a r16249 plus loin)
+		$liste_maj = sql_select(implode(', ', $champs), 'spip_adherents');
+		while ($maj = sql_fetsel($liste_maj) ) { //!\ I2 en s'installant reprend bien les auteurs ; il faut songer a completer par les informations sur les adherents
+			sql_updateq('spip_auteurs_elargis', $maj, 'id_auteur='.$maj['id_auteur']);
+		}
+		// asso_adherents perd les champs migres...
+		unset($champs[0]); //@r16249 : ...sauf 'id_auteur' pour completer r37532 (d'ou on le place en premier...)
+		foreach ($champs as $champ) { //@r16186
+			sql_alter("TABLE spip_asso_adherents DROP $champ");
+		}
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
+		if (!$GLOBALS['association_maj_erreur'])
+			$GLOBALS['association_maj_erreur'] = 62;
+		return;
+	}
+}
+// v0.62 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][62] = array(
-//@r16181
-	// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16186+r16315) ou la table (r38192) //!\ mais quand est-ce que Associaspip y exporte ses donnees ?!?
 //@r16186
-	// asso_adherents perd des champs : passage initie par r16181 a "Inscription 2"
-	array('sql_alter', "TABLE spip_asso_adherents DROP nom"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP prenom"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP sexe"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP fonction"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP email"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP numero"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP rue"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP cp"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP ville"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP telephone"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP portable"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP montant"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP relance"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP divers"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP remarques"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP vignette"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP id_auteur"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP naissance"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP profession"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP societe"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP identifiant"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP passe"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP creation"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP secteur"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP publication"),
-	// asso_adherents.statut devient asso_adherents.statut_relance
+	// asso_adherents.statut devient asso_adherents.statut_relance (nom utilise par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ?)
 	array('sql_alter', "TABLE spip_asso_adherents ADD statut_relance TEXT NOT NULL"),
-	array('sql_update', 'spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''"),
+	array('sql_update', 'spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''")
 	array('sql_alter', "TABLE spip_asso_adherents DROP statut"),
+	// migration vers "Inscription2"
+	array('association_maj_16181'),
 	// asso_activites.accompagne se decompose en asso_activites.membres + asso_activites.non_membres
-	array('sql_alter', "TABLE spip_asso_activites DROP accompagne"),
-	array('sql_alter', "TABLE spip_asso_activites ADD membres TEXT NOT NULL"),
-	array('sql_alter', "TABLE spip_asso_activites ADD non_membres TEXT NOT NULL"),
-//@r16249
-	array('sql_alter',"TABLE spip_asso_adherents ADD id_auteur INT NOT NULL "),
-//@r16315
-	array('sql_alter', "TABLE spip_asso_adherents DROP montant"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP date"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP categorie"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP statut_relance"),
+	array('sql_alter', "TABLE spip_asso_activites DROP accompagne"), //cf. v0.50
 //@r18150
+	// possibilite d'avoir des references comptables actives ou non
 	array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL "),
 );
 
+function association_maj_18423(){
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+		// asso_adherents perd les champs : id_adherent, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4
+		sql_drop_table('spip_asso_adherents'); // (suppression effective dans r20002 et) on utilise spip_auteurs_elargis jusqu'a la resurection en r37532
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
+		if (!$GLOBALS['association_maj_erreur'])
+			$GLOBALS['association_maj_erreur'] = 63;
+		return;
+	}
+}
 // v0.63 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][63] = array(
 //@r18423
-	// Passage au plugin "Inscription 2"
-	array('sql_drop_table', 'spip_asso_adherents'), // (suppression effective dans r20002 et) on utilise spip_auteurs_elargis jusqu'a la resurection en r37532 //!\ I2 en s'installant etend bien tous les auteurs spip... mais cf. note sur maj_r16181
+#	array('association_maj_18423'), //!\ report dans maj_64
 //@r20002
+	// liaison de asso_ventes avec asso_adherents ou auteurs_elargis
 	array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT NOT NULL"),
 );
 
 function association_maj_37532(){
-	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // v0.64 : le plugin "Inscription 2" est la...
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+		// champs manquants dans auteurs_elargis qui provoquaient des disfonctionnement signales sur le forum
 		sql_alter("TABLE spip_auteurs_elargis ADD validite DATE NOT NULL default '0000-00-00'");
-		sql_alter("TABLE spip_auteurs_elargis ADD montant FLOAT NOT NULL default '0'"); // quelque chose a avoir avec r16315 ?
+		sql_alter("TABLE spip_auteurs_elargis ADD montant FLOAT NOT NULL default '0'");
 		sql_alter("TABLE spip_auteurs_elargis ADD date DATE NOT NULL default '0000-00-00' ");
+		// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16315) ou la table (r38192)
+		// on utilise des @sql_... suite au deplacement en maj_64 : ca va hurler chez ceux qui avaient fait la maj_62 avant correction...
+		$champs = array('id_auteur', 'montant', 'date', 'categorie'); // champs pris en compte dans r16315... (sauf 'statut_relance' deja supprime dans r16186)
+		$liste_maj = @sql_select(implode(', ', $champs), 'spip_adherents');
+		while ($maj = sql_fetsel($liste_maj) ) { //!\ I2 en s'installant reprend bien les auteurs ; il faut songer a completer par les informations sur les adherents
+			@sql_updateq('spip_auteurs_elargis', $maj, 'id_auteur='.$maj['id_auteur']);
+		}
+		// asso_adherents perd les champs migres...
+		foreach ($champs as $champ) { //@r16315
+			@sql_alter("TABLE spip_asso_adherents DROP $champ");
+		}
 	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 64;
@@ -285,15 +301,17 @@ $GLOBALS['association_maj'][64] = array(
 //@r37532
 	// Optionnalisation du plugin "Inscription2" qui n'est plus maintenu...
 	array('association_maj_37532'),
+	array('association_maj_16181'), //!\ deplace de maj_62 suite a correction dans r37532
 	// asso_adherents reloaded
-	array('sql_create','spip_asso_adherents',
+	array('@sql_create','spip_asso_adherents',
 		$association_tables_principales['spip_asso_adherents']['field'],
 	    $association_tables_principales['spip_asso_adherents']['key'],
 	    FALSE), // re-creation (cf. maj_20002) avec les champs : id_adherent, nom, prenom, sexe, fonction, email, validite, numero, rue, cp, ville, telephone, portable, montant, date, statut, relance, divers, remarques, vignette, id_auteur, id_asso, categorie, naissance, profession, societe, identifiant, passe, creation, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4, secteur, publication, statut_interne, commentaire
 //@r37???
-	// Simulation provisoire
-	array('sql_alter', "TABLE spip_asso_adherents ADD commentaire TEXT NOT NULL DEFAULT '' "), // ex remarques ?
-	array('sql_alter', "TABLE spip_asso_adherents ADD statut_interne TEXT NOT NULL DEFAULT '' "), // ex relance ?
+	// asso_adherents.statut_relance devient asso_adherents.statut_interne
+	array('sql_alter', "TABLE spip_asso_adherents ADD statut_interne TEXT NOT NULL"),
+	array('sql_update', 'spip_asso_adherents', array('statut_interne' => 'statut_relance'), 1),
+	array('sql_alter', "TABLE spip_asso_adherents DROP statut_relance"),
 );
 
 // v0.65 (Associaspip 1.9.2/2.0)
