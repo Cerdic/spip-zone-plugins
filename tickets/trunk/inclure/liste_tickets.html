@@ -31,6 +31,7 @@
 	-* date_debut = date (sql)		La date des premiers à afficher
 	-* date_fin = date (sql)		La date des derniers à afficher
 	-* class = string				Une classe spécifique appliquée au bloc parent
+	-* niveau_titre = string (h2)   Le niveau des titres (h2|h3|h4...)
 ]
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
@@ -66,7 +67,7 @@
 
 <B_detaillee>
 <div class="tickets[ (#ENV{class})]">
-[<h3 class="h3">(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
+[<[(#ENV{niveau_titre,h2}) ]class="#ENV{niveau_titre,h2}">(#ENV{titre})[ ((#GRAND_TOTAL))]</[(#ENV{niveau_titre,h2})]>]
 
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
 	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
@@ -145,8 +146,7 @@
 		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>
 	</div>]
 </BOUCLE_si_afficher_filtres>
-<div class="ticket">
-[(#ANCRE_PAGINATION)]
+<div class="ticket"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 [<p class="pagination">(#PAGINATION)</p>]
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
@@ -243,10 +243,10 @@
 				[(#TEXTE|couper{160})]
 			</td>
 			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
-			[(#ENV{tracker}|non)<td><a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">[(#TRACKER|tickets_texte_tracker)]</a></td>]
+			[(#ENV{tracker}|non)<td>[<a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">(#TRACKER|tickets_texte_tracker)</a>]</td>]
 			<td>
-				<a href="[(#SELF|parametre_url{severite,#SEVERITE**})]">[(#SEVERITE|tickets_icone_severite{true})]
-				[&nbsp;(#SEVERITE|tickets_texte_severite)]</a>
+				[<a href="[(#SELF|parametre_url{severite,#SEVERITE**})]">(#SEVERITE|tickets_icone_severite{true})
+				[&nbsp;(#SEVERITE|tickets_texte_severite)]</a>]
 			</td>
 			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<td class="#EDIT{projet}"><a href="[(#SELF|parametre_url{projet,#PROJET**})]">[(#PROJET|sinon{-})]</a></td>
@@ -282,7 +282,7 @@
 </div>
 </B_detaillee>
 <BOUCLE_si_afficher_filtres_sans(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
-	<h3><:tickets:tickets_tries:> (0)</h3>
+	<[(#ENV{niveau_titre,h2}) ]class="[(#ENV{niveau_titre,h2})]"><:tickets:tickets_tries:> (0)</[(#ENV{niveau_titre,h2})]>
 	[(#BOITE_OUVRIR{'',notice})]
 		<p><:tickets:message_aucun_ticket_recherche:></p>
 	[(#BOITE_FERMER)]

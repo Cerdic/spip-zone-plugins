@@ -176,15 +176,20 @@ function tickets_icone_statut ($niveau,$full=false) {
 		return $img[$niveau];
 }
 
-function tickets_icone_severite ($niveau,$full=false) {
+function tickets_icone_severite ($niveau,$full=false,$alt=false) {
 	$img = array(
 		1 => "puce-rouge-breve.gif",
 		2 => "puce-orange-breve.gif",
 		3 => "puce-verte-breve.gif",
 		4 => "puce-poubelle-breve.gif"
 		);
-	if($full)
-		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_severite($niveau).'" />';
+	if($full){
+		$balise_img = charger_filtre('balise_img');
+		$img = $balise_img(find_in_path('prive/images/'.$img[$niveau]));
+		if($alt)
+			$img = inserer_attribut($img,'alt',tickets_texte_severite($niveau));
+		return $img;
+	}
 	else
 		return $img[$niveau];
 }

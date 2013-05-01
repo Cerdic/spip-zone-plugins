@@ -6,11 +6,10 @@
 ][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
 <B_comment_detaillee>
-[<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
-<div class="ticket">
+[<[(#ENV{niveau_titre,h2}) ]class="#ENV{niveau_titre,h2}">(#ENV{titre})[ ((#GRAND_TOTAL))]</[(#ENV{niveau_titre,h2})]>]
+<div class="ticket"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 [(#ENV{recherche}|oui)
 <p><:tickets:champ_recherche:> #ENV{recherche}</p>]
-[(#ANCRE_PAGINATION)]
 [<p class="pagination">(#PAGINATION)</p>]
 [(#COMPTEUR_BOUCLE|>{10}|oui)
 <p class="changer_pagination">
