@@ -198,7 +198,17 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		$boucle->from['gis'] = 'spip_gis';
 		$boucle->join['gis']= array("'gis_liens'","'id_gis'");
 		// bien renvoyer tous les points qui son attachés à l'objet
-		$boucle->group[] = 'gis_liens.id_gis';
+		// mais attention, si on trouve en amont un groupement portant sur un champ *de GIS*,
+		// alors cela signifie que la personne veut faire une opération de groupement sur les points donc là on n'ajoute pas id_gis
+		$tous_les_points = true;
+		foreach ($boucle->group as $champ){
+			if (in_array($champ, array('ville', 'code_postal', 'pays', 'code_pays', 'region'))) {
+				$tous_les_points = false;
+			}
+		}
+		if ($tous_les_points) {
+			$boucle->group[] = 'gis_liens.id_gis';
+		}
 		// ajouter gis aux jointures et spécifier les jointures explicites pour pouvoir utiliser les balises de la table de jointure
 		// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
 		// cf http://article.gmane.org/gmane.comp.web.spip.zone/6628
