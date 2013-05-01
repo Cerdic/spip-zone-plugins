@@ -7,7 +7,6 @@
 	logo="prive/themes/spip/images/supersized-32.jpg"
 	documentation="http://supersized.brubel.net/spip.php?rubrique3"
 	demonstration="http://supersized.brubel.net/spip.php?page=slide"
-	developpement="http://zone.spip.org/trac/spip-zone/browser/_plugins_/supersized/"
 >	
 	<nom>SuperSized slideshow</nom>
 	<auteur lien="http://lapsuske.brubel.net" mail="suske@brubel.net">Suske</auteur>
