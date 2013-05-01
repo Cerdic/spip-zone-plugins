@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_chapo' => 'Chapeau',
 	'label_date_redac' => 'Date de rédaction',
+	'label_inscrit_newsletter' => 'Vous êtes inscrit pour recevoir des nouvelles par mail de',	
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',
 	'label_patron' => 'Modèle',
