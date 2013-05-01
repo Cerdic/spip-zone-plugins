@@ -1,4 +1,4 @@
-<paquet prefix="spipservice" categorie="communication" version="2.0.0"
+<paquet prefix="spipservice" categorie="outil" version="2.0.0"
 	etat="dev" compatibilite="[3.0.0 ;3.0.*]" logo="prive/themes/spip/images/spipservice.png"
 	schema="10">
 

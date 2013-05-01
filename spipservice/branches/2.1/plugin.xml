@@ -14,7 +14,7 @@
 	<prefix>spipservice</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
     
-    <categorie>webservice</categorie>
+    <categorie>outil</categorie>
 	
 	<options>spipservice_options.php</options>
     <fonctions>spipservice_fonctions.php</fonctions>
