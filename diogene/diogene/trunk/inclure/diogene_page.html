@@ -10,12 +10,11 @@
 			<BOUCLE_article_env(ARTICLES){id_article}{statut IN prop,prepa,publie}>
 				[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
 				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
+				<div class="texte diogene_description">
 				<p>
 					<strong><:diogene:info_statut:> </strong>
-					[(#STATUT|=={publie}|oui)
-						<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-					[(#STATUT|=={publie}|non)
-						[(#STATUT|diogene_info_statut)]]
+					[(#STATUT|=={publie}|oui)<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
+					[(#STATUT|=={publie}|non)[(#STATUT|diogene_info_statut)]]
 				</p>
 				<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
 				<p>
@@ -33,6 +32,7 @@
 				</p>
 				</B_traductions>
 				<//B_si_trad>
+				</div>
 				<div class="ajax">
 					#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE}
 				</div>

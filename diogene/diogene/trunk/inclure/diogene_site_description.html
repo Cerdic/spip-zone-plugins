@@ -1,7 +1,7 @@
 <BOUCLE_site(SITES){id_syndic}{tout}>
 	[(#SET{titre,[(#NOM_SITE|sinon{<:info_sans_titre:>})]})]
 	<h2 class="h2"><:diogene:titre_modification_site{titre=#GET{titre}}:></h2>
-	<div class="chapo description description_site">
+	<div class="texte diogene_description description_site">
 		<p>
 			<strong><:diogene:info_statut:></strong>
 			[(#STATUT|=={publie}|oui)
