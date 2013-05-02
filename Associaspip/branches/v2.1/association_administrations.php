@@ -76,6 +76,49 @@ function association_upgrade($meta, $courante, $table='meta') {
 	}
 }
 
+// Changer le nom de la colonne PRIMARY KEY
+// ce champ ne *doit*pas*etre*reference*de*FOREIGN*KEY* ailleurs (cas non pris en compte)
+// et cette fonction doit etre appelee comme derniere modification sur la table (avec SQLite on cree les autres champs aussi...)
+function association_change_pk($table, $row_old, $row_new, $row_int='') {
+	include_spip('inc/install');
+	$sgbd = analyse_fichier_connection(_FILE_CONNECT);
+	switch ($sgbd[4]) { // le 4e argument de spip_connect_db() --appele dans le /config/connect.php de l'installation contient le "type/moteur" de SGBD : c'est le nom du fichier de portage .php defini /ecrire/req
+		case 'mysql' :
+			sql_alter("TABLE spip_$table CHANGE $row_old $row_new $row_int".'INT NOT NULL AUTO_INCREMENT');
+			break;
+		case 'pg' :
+			if ($row_old==$row_new) { // simple changement de type ?
+				sql_alter("TABLE spip_$table ALTER $row_old TYPE $row_int".'SERIAL');
+			} else {
+				sql_alter("TABLE spip_$table RENAME COLUMN $row_old TO $row_new"); // il est cependant recommande d'utiliser la methode ANSI http://wiki.postgresql.org/wiki/FAQ#How_do_you_change_a_column.27s_data_type.3F
+			}
+			break;
+		case 'sqlite2' :
+		case 'sqlite3' :
+			if ($row_old!=$row_new) { // on n'aura pas "Error: duplicate column name: $row_new"
+				sql_alter("TABLE spip_$table ADD $row_new INT NOT NULL"); // ALTER TABLE limite, or AUTOINCREMENT ne peut s'utiliser avec la cle primaire http://www.sqlite.org/lang_altertable.html
+				sql_update("spip_$table", array($row_new=>$row_old) ); // copier les donnees de l'ancienne colonne a la nouvelle
+				sql_alter("TABLE spip_$table RENAME TO spip_temp$table"); // ALTER TABLE limite au point de ne pouvoir DROPer de colonne ; mais sait renommer la table, ce qu'on fait... http://www.sqlite.org/lang_altertable.html
+				sql_create($association_tables_principales["spip_$table"]['field'], $association_tables_principales["spip_$table"]['key'], TRUE); // ...puis on recree la table proprement (avec "INTEGER PRIMARY KEY AUTOINCREMENT" --utiliser Int ou un autre provque "Error: AUTOINCREMENT is only allowed on an INTEGER PRIMARY KEY" et quand AutoIncrement n'est pas le dernier de la liste provoque 'Error: near "autoincremen": syntax error')
+#				sql_query("INSERT INTO spip_$table SELECT ". implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ) ." FROM spip_temp$table"); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode directe peu portable)
+				$ok = sql_insertq_multi("spip_$table", sql_allfetsel(implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ), "spip_temp$table") ); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode portable utilisant l'API SQL mais risque de debordement de memoire avec sql_fetchall...)
+				if ($ok)
+					sql_drop_table("spip_temp$table"); // ...et enfin on supprime la table de transition http://www.sqlite.org/faq.html#q11
+			}
+			break;
+		default :
+			$ok = sql_alter("TABLE spip_$table ADD $row_new $row_int".'INT NOT NULL'); // ajouter la nouvelle colonne : elle doit etre non nullable (pour etre une cle primaire) et de type entiere (pour etre candidate a l'auto-incrementation)
+			if ($ok) { // creation reussie
+				$ok = sql_update("spip_$table", array($row_new=>$row_old), 1); // migrer l'ancienne colonne vers la nouvelle
+				if ($ok) { // migration reussie
+					$ok = sql_alter("TABLE spip_$table DROP $row_old"); // supprimer l'ancienne colonne
+					if ($ok) // on a donc supprime la cle primaire par consequent
+						sql_alter("TABLE spip_$table ADD PRIMARY KEY($row_new)"); // declarer la nouvelle colonne comme cle primaire
+				}
+			}
+	}
+}
+
 // v0.30 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][21] = array(
 //<r12523
@@ -99,11 +142,7 @@ $GLOBALS['association_maj'][30] = array(
 	// asso_financiers devient asso_banques
 	array('sql_alter', "TABLE spip_asso_financiers RENAME TO spip_asso_banques"),
 	// et sa cle change en consequence
-	array('sql_alter', "TABLE spip_asso_banques ADD id_banque INT NOT NULL "),
-	array('sql_update', 'spip_asso_banques', array('id_banque' => 'id_financier'), 1),
-	array('sql_alter', "TABLE spip_asso_banques DROP id_financier"),
-	array('sql_alter', "TABLE spip_asso_banques ADD PRIMARY KEY(id_banque) "),
-	array('sql_alter', "TABLE spip_asso_banques MODIFY id_banque INT NOT NULL AUTO_INCREMENT "), //!\ non-portable...
+	array('association_change_pk', 'asso_banques', 'id_financier', 'id_banque'),
 	// et on ajoute une entree caisses
 	array('sql_insert', 'spip_asso_banques', "(code)", "('caisse')"),
 	// et on ajoute un champ date
@@ -177,12 +216,6 @@ $GLOBALS['association_maj'][61] = array(
 //@r13971
 	// asso_banques devient asso_plan
 	array('sql_alter', "TABLE spip_asso_banques RENAME TO spip_asso_plan"),
-	// la cle change en consequence
-	array('sql_alter', "TABLE spip_asso_plan ADD id_plan INT NOT NULL"),
-	array('sql_update', 'spip_asso_plan', array('id_plan' => 'id_banque'), 1),
-	array('sql_alter', "TABLE spip_asso_plan DROP id_banque"),
-	array('sql_alter', "TABLE spip_asso_plan ADD PRIMARY KEY(id_plan) "),
-	array('sql_alter', "TABLE spip_asso_plan MODIFY id_plan INT NOT NULL AUTO_INCREMENT "), //!\ non-portable...
 	// le champ du solde anterieur est renomme de facon plus parlante
 	array('sql_alter', "TABLE spip_asso_plan ADD solde_anterieur FLOAT NOT NULL DEFAULT 0"),
 	array('sql_update', 'spip_asso_plan', array('solde_anterieur' => 'solde'), 1),
@@ -193,6 +226,8 @@ $GLOBALS['association_maj'][61] = array(
 	array('sql_alter', "TABLE spip_asso_plan DROP date"),
 	// et un nouveau champ de classe comptable
 	array('sql_alter', "TABLE spip_asso_plan ADD classe TEXT NOT NULL"),
+	// la cle change en consequence
+	array('association_change_pk', 'asso_plan', 'id_banque', 'id_plan'),
 );
 
 function association_maj_16181(){
