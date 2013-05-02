@@ -25,12 +25,12 @@ function action_spipmotion_ajouter_file_encodage_tout_dist(){
 	include_spip('inc/autoriser');
 	if(autoriser('configurer')){
 		if (preg_match(",^(\w+)$,", $arg, $r)){
-			spip_log("Demande de réencodage complet au format: $arg","spipmotion");
 			$format = $arg;
+			spip_log("Demande de réencodage complet au format: $format","spipmotion");
 		}else{
 			spip_log("On réencode tous les fichiers","spipmotion");
 		}
-		action_spipmotion_ajouter_file_encodage_tout_post($arg);
+		action_spipmotion_ajouter_file_encodage_tout_post($format);
 	}
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
