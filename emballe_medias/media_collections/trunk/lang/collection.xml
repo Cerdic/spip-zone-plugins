@@ -5,5 +5,7 @@
 	<langue code="es" url="http://trad.spip.net/tradlang_module/collection?lang_cible=es">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/collection?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 </traduction>
