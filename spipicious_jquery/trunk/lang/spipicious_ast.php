@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_suppression_tag' => 'Esbilla les etiquetes na llista darréu y valida pa desaniciales.',
 
 	// L
-	'label_tags' => 'Etiquetes:',
+	'label_tags' => 'Etiquetes:', # MODIF
 	'liste_auteurs_tag' => 'Esta etiqueta la utilicen:',
 
 	// M

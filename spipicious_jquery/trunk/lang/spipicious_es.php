@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_suppression_tag' => 'Seleccione sus etiquetas en la siguiente lista y confirme para eliminarlas.',
 
 	// L
-	'label_tags' => 'Etiquetas:',
+	'label_tags' => 'Etiquetas',
 	'liste_auteurs_tag' => 'Esta etiqueta ha sido utilizada por:',
 
 	// M

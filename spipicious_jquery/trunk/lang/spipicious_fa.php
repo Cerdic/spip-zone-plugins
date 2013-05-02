@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_suppression_tag' => 'تگ‌هاي خود را از فهرست زير برگزينيد و براي حذف آن‌ها معتبر كنيد.',
 
 	// L
-	'label_tags' => 'تگ‌ها:',
+	'label_tags' => 'تگ‌ها:', # MODIF
 	'liste_auteurs_tag' => 'اين تگ مورد استفاده قرار گرفته به وسيله‌ي : ',
 
 	// M

@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_suppression_tag' => 'Vyberte štítky v zozname a pošlite formulár, aby boli odstránené.',
 
 	// L
-	'label_tags' => 'Štítky:',
+	'label_tags' => 'Štítky:', # MODIF
 	'liste_auteurs_tag' => 'Tento štítok používa:',
 
 	// M
