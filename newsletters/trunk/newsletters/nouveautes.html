@@ -41,7 +41,7 @@
 						[(#LOGO_SITE_SPIP|image_reduire{100,200}
 										|inserer_attribut{id,feedimage}
 										|inserer_attribut{style,float:right;padding:0 0 10px 3px;border:0;})]
-						<:newsletter:label_a_lire_sur:> #NOM_SITE_SPIP</a>
+						<:newsletter:label_a_lire_sur{site=#NOM_SITE_SPIP}:></a>
 				</h1>
 				<p
 					style="font-size:14px;color:#555;margin:9px 0 3px 0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;">
@@ -148,7 +148,7 @@
 		<tr>
 			<td
 				style="text-align:left;font-family:Helvetica,Arial,Sans-Serif;font-size:11px;margin:0 6px 1.2em 0;color:#333;">
-				<:newsletter:label_inscrit_newsletter:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>
+				<:newsletter:label_inscrit_newsletter{site=<a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>}:> 
 				<span class="unsubscribe_link">
 				<br/><a href="@url_unsubscribe@">
 				<:newsletter:label_link_unsubscribe:>
