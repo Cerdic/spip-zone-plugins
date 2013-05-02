@@ -100,11 +100,14 @@ var gis_init_map = function(mapcfg) {
 		// Déclarer le contenu de la popup s'il y en a
 		if (feature.properties && (feature.properties.title || feature.properties.description)){
 			var popupContent = '';
+			var popupOptions = '';
 			if (feature.properties.title)
 				popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
 			if (feature.properties.description)
 				popupContent = popupContent + feature.properties.description;
-			layer.bindPopup(popupContent);
+			if (feature.properties.popup_options)
+				popupOptions = feature.properties.popup_options;
+			layer.bindPopup(popupContent,popupOptions);
 		}
 	}
 
