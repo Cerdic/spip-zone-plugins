@@ -2,19 +2,16 @@
 #SET{jourj,#GET{jour}|orr_premierlundimois}
 <div>
     <div id="couleur_ressource">
-            <table id="tatata" border="1px">
-        <caption>Ressources</caption>
-                    <BOUCLE_tableauressource(ORR_RESSOURCES)>
-				[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
-                    <tr> 
-                        <td style="background-color:#ORR_RESSOURCE_COULEUR">#ORR_RESSOURCE_NOM</td></tr>]
-                    </BOUCLE_tableauressource>
-                    
-        
-            </table>
+        <table id="tatata" border="1px">
+            <caption>Ressources</caption>
+            <BOUCLE_tableauressource(ORR_RESSOURCES)>
+			    [(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})<tr><td style="background-color:#ORR_RESSOURCE_COULEUR">#ORR_RESSOURCE_NOM</td></tr>]
+            </BOUCLE_tableauressource>
+        </table>
     </div>
+
     <div id="tab_affichage_mois">
-    <table border="1px">
+        <table border="1px">
         <caption>Mois : [(#GET{jour}|affdate{nom_mois})] </caption>
         <thead>
             <tr>
@@ -85,24 +82,20 @@
                 <td class="semaine #GET{jourj}" id="[id(#GET{jourj}|=={#GET{jour}})couleur_jour_mois]"> [(#GET{jourj}|affdate{j})] #SET{jourplusun,#GET{jourj}|orr_plusunjour} <br/><INCLURE{fond=inc/affichage_mois-jour}{jourj=#GET{jourj}}{motcle=#ENV{motcle}}{jourplusun=#GET{jourplusun}}> #SET{jourj,#GET{jourj}|orr_plusunjour}</td>
                 <td class="semaine #GET{jourj}" id="[id(#GET{jourj}|=={#GET{jour}})couleur_jour_mois]"> [(#GET{jourj}|affdate{j})] #SET{jourplusun,#GET{jourj}|orr_plusunjour} <br/><INCLURE{fond=inc/affichage_mois-jour}{jourj=#GET{jourj}}{motcle=#ENV{motcle}}{jourplusun=#GET{jourplusun}}> #SET{jourj,#GET{jourj}|orr_plusunjour}</td>
             </tr>]    
-         
         </tbody>
-    </table>
-</div>
+        </table>
+    </div>
 </div>
 <script type="text/javascript" charset="utf-8">
     jQuery(document).ready(function(){
-
-            jQuery(".semaine").bind("click",function(event){
-                event.stopPropagation();
-                recupereDir(this);
-                var classe=idDir.split(" ");
-                
+        jQuery(".semaine").bind("click",function(event){
+            event.stopPropagation();
+            recupereDir(this);
+            var classe=idDir.split(" ");
         jQuery("#affichage_semaine").css("display","block");
         jQuery("#affichage_mois").css("display","none");
         jourj=classe[1];
         tabAjax();
-                });
-            });
-
+        });
+    });
 </script>

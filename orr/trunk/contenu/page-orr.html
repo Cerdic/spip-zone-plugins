@@ -11,30 +11,27 @@
 	</div>
 </div>
 
-        <div id="affichage_semaine" class="cacher">
-	            <div id="icones" >
-		            <span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
-	            </div>
-	            <div id="tableau_semaine">
-		            <INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
-	            </div>
-        </div>
+<div id="affichage_semaine" class="cacher">
+	<div id="icones" >
+		<span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
+	</div>
+	<div id="tableau_semaine">
+		<INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
+	</div>
+</div>
 
-        <div id="affichage_mois" class="cacherii">
-	            <div id="icones">
-		            <span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
-	            </div>
-	            <div id="tableau_mois">
-		            <INCLURE{fond=inc/affichage_mois,ajax=tableau}>
-	            </div>
-        </div>
-		
-
+<div id="affichage_mois" class="cacherii">
+	<div id="icones">
+		<span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
+	</div>
+	<div id="tableau_mois">
+		<INCLURE{fond=inc/affichage_mois,ajax=tableau}>
+	</div>
+</div>
 
 <script>
 
 	jQuery(document).ready(function(){
-
         jQuery("#mois").bind("click",function(event){
         jQuery("#affichage_semaine").css("display","none");
         jQuery("#affichage_mois").css("display","block");
@@ -52,7 +49,6 @@
 			console.log(jourj);
 		tabAjax();
 
-
 		jQuery("#datepickers").datepicker({
 			dateFormat : 'yy-mm-dd',
 			onSelect : function (dateText){
@@ -64,72 +60,66 @@
 		jQuery("#mois_precedent").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addMonths(-1);
-
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
 		});
 		jQuery("#jour_precedent").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(-1);
-
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
 		});
+
 		jQuery("#jour_suivant").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addDays(1);
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
-
 		});
 		jQuery("#mois_suivant").bind("click",function(event){
 			dateselectionne=Date.parse(jourj);
 			dateselectionne = dateselectionne.addMonths(1);
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
-
 		});
 		jQuery("#aujourdhui").bind("click",function(event){
 			dateselectionne = new Date();
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
-
 		});
 		jQuery("#mois_actuel").bind("click",function(event){
 			dateselectionne = new Date();
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax();
-
 		});
 		jQuery("#envoyer").click(function(){
-		var motscle = jQuery("#motscles").val().toString();
-		motscle=motscle.replace(",",":");
-			ajaxReload('tableau', {
-						args:{
-							motcle:motscle,
-							},
-			});
-		return false;
-        });
-        jQuery("#tous").click(function(){
-		//~ var motscle = "liste ";
-		var motscle = "";
-		console.log(motscle);
-			ajaxReload('tableau', {
-						args:{
-							motcle:motscle,
-							},
-			});
-		return false;
-        });
-	});
-
-function tabAjax(){
-		ajaxReload('tableau', {
+		    var motscle = jQuery("#motscles").val().toString();
+		    motscle=motscle.replace(",",":");
+			    ajaxReload('tableau', {
 					args:{
-						jourj:jourj,
-						},
-		});
-	}
+						motcle:motscle,
+					},
+			    });
+		    return false;
+        });
 
+        jQuery("#tous").click(function(){
+		    var motscle = "";
+		    console.log(motscle);
+			    ajaxReload('tableau', {
+				    args:{
+					    motcle:motscle,
+				    },
+			    });
+		    return false;
+            });
+	    });
+
+        function tabAjax(){
+		    ajaxReload('tableau', {
+				args:{
+					jourj:jourj,
+				},
+		    });
+        }
 </script>

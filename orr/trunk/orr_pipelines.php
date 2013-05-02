@@ -7,8 +7,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-
 /**
  * Ajout de contenu sur certaines pages,
  * notamment des formulaires de liaisons entre objets
@@ -25,16 +23,6 @@ function orr_affiche_milieu($flux) {
 			'id_objet'     => $flux['args'][$e['id_table_objet']]
 		));
 	}
-
-
-	// orr_reservations sur les auteurs, orr_ressources
-	//if (!$e['edition'] AND in_array($e['type'], array('auteur', 'orr_ressource'))) {
-	//$texte .= recuperer_fond('prive/objets/editer/liens', array(
-	//'table_source' => 'orr_reservations',
-	//'objet'        => $e['type'],
-	//'id_objet'     => $flux['args'][$e['id_table_objet']]
-	//));
-	//}
 	
 	// orr_autorisations sur orr_ressources
 	if (!$e['edition'] AND in_array($e['type'], array('orr_ressource'))) {
@@ -51,7 +39,6 @@ function orr_affiche_milieu($flux) {
 		else
 			$flux['data'] .= $texte;
 	}
-
 	return $flux;
 }
 
@@ -99,7 +86,6 @@ function orr_insert_head_css($flux){
 	$css   = find_in_path('orr.css');
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
     return $flux;
-
 }
 
 ?>

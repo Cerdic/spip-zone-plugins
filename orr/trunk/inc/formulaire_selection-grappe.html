@@ -1,8 +1,6 @@
-            #SET{tableau_grappe, #ARRAY}
-            <BOUCLE_selection_grappe(GRAPPES){liaisons==auteurs}> #SET{tableau_grappe, #GET{tableau_grappe}|array_merge{#ARRAY{#TITRE,#ID_GRAPPE}}} </BOUCLE_selection_grappe>
-            
-            [(#SAISIE*{selection, orr_grappe}
-                 {label=Sélectionnez une grappe}
-                 {datas=#GET{tableau_grappe}|array_flip })]
+#SET{tableau_grappe, #ARRAY}
+<BOUCLE_selection_grappe(GRAPPES){liaisons==auteurs}>#SET{tableau_grappe,#GET{tableau_grappe}|array_merge{#ARRAY{#TITRE,#ID_GRAPPE}}}</BOUCLE_selection_grappe>
+    [(#SAISIE*{selection, orr_grappe}
+        {label=Sélectionnez une grappe}
+        {datas=#GET{tableau_grappe}|array_flip })]
 <br />
-

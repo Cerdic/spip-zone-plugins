@@ -5,7 +5,7 @@
 	,
 	#SET{affichage,poubelle_cache}
 	}
-	)]
+)]
 
 [(#GET{id}|?{
 			#SET{date_fin,#INFO_ORR_DATE_FIN{orr_reservations,#GET{id}}}
@@ -14,7 +14,7 @@
 			#SET{date_fin,#ENV{ma_date}}
 			#SET{date_debut,#ENV{ma_date}}
 			}
-			)]
+)]
 
 #SET{nom_reservation,#INFO_ORR_RESERVATION_NOM{orr_reservations,#GET{id}}}
 
@@ -26,9 +26,6 @@
 
 <p><h1>Ressource : <em>#INFO_ORR_RESSOURCE_NOM{orr_ressources,#ENV{id_ressource}}</em></h1></p>
 
-
-
-
-	<div class="ajax">
-		#FORMULAIRE_RESERV{#ENV{id_ressource},#GET{date_debut},#GET{date_fin},#GET{nom_reservation},#GET{id}}
-	</div>
+<div class="ajax">
+	#FORMULAIRE_RESERV{#ENV{id_ressource},#GET{date_debut},#GET{date_fin},#GET{nom_reservation},#GET{id}}
+</div>
