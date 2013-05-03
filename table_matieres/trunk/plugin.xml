@@ -25,7 +25,7 @@
 		</multi>
 	</description>
 	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Table-des-Matieres</lien>
+	<lien>http://contrib.spip.net/?article2365</lien>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<pipeline>

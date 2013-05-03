@@ -4,7 +4,7 @@
 	version="2.1.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
-	documentation="http://www.spip-contrib.net/Table-des-Matieres"
+	documentation="http://contrib.spip.net/?article2365"
 >	
 
 	<nom>Table des Mati&#232;res</nom>
