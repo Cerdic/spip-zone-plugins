@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_trad' => 'Traduire SPIP',
 	'nom_site_spip_twit' => 'SPIP.org',
 	'nom_site_spip_user' => 'SPIP User',
-	'nom_site_spip_video' => 'Média SPIP',
+	'nom_site_spip_video' => 'Médias SPIP',
 	'nom_site_spip_zine' => 'SPIPZine',
 	'nom_site_spip_zone' => 'SPIP Zone',
 
