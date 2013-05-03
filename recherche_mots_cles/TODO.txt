@@ -1,0 +1,7 @@
+
+Travail à faire:
+
+
+- voir si plus intelligent de mettre une balise version_base dans plugin.xml pour gérer les mises à jours de la base dans le futur,
+
+

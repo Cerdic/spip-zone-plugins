@@ -1,0 +1,132 @@
+<?PHP
+	global $_POST;
+	echo '<table border = "1px"cellpadding="5" cellspacing="0" align="center" width="100%"><tr><td>';
+	echo '<h2 style="text-align:center">Recherche par mots clés</h2></td></tr><tr><td>';
+	/* Partie affichage du formulaire pour la requête*/
+	if (!(isset($_POST['Valider'])))
+	{
+			echo '<form action="#SELF" method="post">';
+			echo '<input type="radio"  name="type_criteres" value="et"  checked /> Articles correspondant &#224; tous les crit&#232;res coch&#233;s (ET)<br />'; // Mode ET
+			echo '<input type="radio" name="type_criteres" value="ou" > Articles correspondant &#224; au moins un des crit&#232;res (OU)';				//Mode OU
+			$table_groupe_mots_cles = sql_query("SELECT nbre_colonnes,id_groupes_mots_cles,titre,mode_presentation FROM spip_sti_groupes_mots_cles");		// Lecture de la table groupe de mots clés
+			while ($groupe_mots_cles = sql_fetch($table_groupe_mots_cles))	// Scrutation des entrées de cette table
+			{
+					$id_groupe =$groupe_mots_cles['id_groupes_mots_cles'];		//Récupération de l'identifiant groupe
+					$table_mots_cles = sql_query("SELECT titre,id_groupe,id_mot FROM spip_mots WHERE id_groupe='$id_groupe'");	// Lecture de la table mots clés correspondant au groupe
+					echo '</td></tr><tr><td><h2>'.$groupe_mots_cles['titre'].' :</h2>';		//Affichage du nom du groupe
+					$mode=$groupe_mots_cles['mode_presentation'];
+					if (($mode==1)||($mode==2))
+					{
+						$nbre_mots=sql_count($table_mots_cles);				//Récupération du nombres de mots clés dans le groupe
+						$nbre_colonnes=$groupe_mots_cles['nbre_colonnes'];									
+						if ($nbre_colonnes==0) $nbre_colonnes=1;	
+						$nbre_lignes=(int)($nbre_mots/$nbre_colonnes+$nbre_mots%$nbre_colonnes);			//Calcul du nombre de lignes d'affichage d'un critère
+						
+						$compteur=1;
+						echo '<table border = "0px" cellpadding="5px" cellspacing="0" align="left" width="100%"<tr><td valign="top" width="33%">'; //Tableau encadrant la zone de recherche
+						while ($mots_cles = sql_fetch($table_mots_cles))									// Scrutation des entrées de la table mots clés sous forme de Checkbox
+						{
+									if($groupe_mots_cles['titre']=='Format')
+									{
+										$logo='IMG/moton'.$mots_cles['id_mot'];					// Attribution du nom du logo sans l'extension
+										if 		(file_exists($logo.'.png')) $logo=$logo.'.png';	// Vérfication et affichage du logo en png
+										else if (file_exists($logo.'.jpg')) $logo=$logo.'.jpg';	// Vérfication et affichage du logo en jpg
+										else if (file_exists($logo.'.gif')) $logo=$logo.'.gif';	// Vérfication et affichage du logo en gif
+										else if (file_exists($logo.'.bmp')) $logo=$logo.'.bmp';	// Vérfication et affichage du logo en bmp
+										else $logo='IMG/logo.png';								// Sinon logo par défaut								
+										echo '<img src="'.$logo.'" width="20" height="20">';
+									}
+									echo '<input type="checkbox" name="mots_select[]" value="'.$mots_cles['id_mot'].'"/><font size="2"> '.$mots_cles['titre'].'</font><br />';		// Affichage checkbox
+									if(($compteur%$nbre_lignes==0) && ($compteur!=$nbre_mots)) echo '</td><td valign="top" width="33%">';
+									$compteur++;						// Incrémentation compteur pour colonne
+
+						}
+						echo '</td></tr></table>';
+					}
+					else
+					{
+						echo '<select name="mots_select[]" size="5" multiple>';
+						while ($mots_cles = sql_fetch($table_mots_cles))		// Scrutation des entrées de la table mots clés sous forme de liste déroulante
+						{
+								echo '<option  value="'.$mots_cles['id_mot'].'"/><font size="2">'.$mots_cles['titre'].'</font></option>'; // Affichage élement liste
+						}
+						echo '</select>';
+						echo '<p style="font-style:italic">Maintenir la touche "CTRL" pour une sélection multiple</p>';
+					}
+				
+			}
+			echo '</td></tr><tr><td>';
+			echo '<p style="text-align:center"><input type="submit" name="Valider" value="Valider"/></p>';
+			echo '</form>';
+	}
+	
+	/* Partie affichage du résultat de la requête */
+	else
+	{
+			echo '<form action="#SELF" method="post">';
+			$tab_id_mot=$_POST['mots_select'];					// Récupération de la variable Array associée aux Checkbox cochées ou champs sélectionnés
+			$type_criteres=$_POST['type_criteres'];				// Récupération du type de recherche effectué (tous les critères en même temps ou au moins des critères)
+			echo '<h2>Liste des articles r&eacute;pondant aux crit&egrave;res choisis. </h2><br />';
+			if ($tab_id_mot== false) echo "Pas de critère coché !";	//Vérification si au moins un critère est coché
+			else
+			{
+					foreach ($tab_id_mot as $id_mot)					//Scrutation des mots clés cochés
+					{
+							$table_mots_articles = sql_query("SELECT id_objet FROM spip_mots_liens WHERE id_mot='$id_mot' AND objet='article'"); //  Lecture de la table mots clés associés aux articles
+							while ($mots_articles = sql_fetch($table_mots_articles))		// Scrutation des entrées de la table mots clés associés aux articles
+							{
+								$id_article = $mots_articles['id_objet'];
+								$pointage_articles_mots[$id_mot][$id_article]=true;		// Pointage des identifiants articles par mots clés (tableau à 2 dimensions)
+							}
+					}	
+					
+					$id_mot=reset($tab_id_mot);									//Extraction des articles associés au premier mot clé
+					$pointage_articles = $pointage_articles_mots[$id_mot];	 //Pointage des articles correspondant au premier critère
+					foreach ($tab_id_mot as $id_mot)
+					{
+							$table_critere = sql_query("SELECT titre FROM spip_mots WHERE id_mot='$id_mot'");			//recherche des noms des critères
+							$critere=sql_fetch($table_critere);
+							if ($type_criteres=="et")
+							{
+								echo '<b>'.$critere['titre'].' </b>';															//Affichage des noms des critères
+								$pointage_articles=array_intersect_assoc($pointage_articles,$pointage_articles_mots[$id_mot]);	//Pointage des articles correspondant à tous les critères
+							}
+							else 
+							{
+								echo '<b>'.$critere['titre'].' :</b><br />';
+								$Nom_article=sql_query("SELECT titre,id_article,date FROM spip_articles");	//Récupération de l'article
+								echo '<ol>';
+								while($Nom_art=sql_fetch($Nom_article))
+								{
+									$id_article=$Nom_art['id_article'];
+									if ($pointage_articles_mots[$id_mot][$id_article]==true)
+									{
+										echo '<li><a href="spip.php?article'.$id_article.'">'.$Nom_art['titre'].'</a> Date : '.$Nom_art['date'].'</li>'; //Affichage du titre de l'article correspondant aux mots clé
+									}
+								}
+								echo '</ol><br />';
+							}
+					}
+					
+					if ($type_criteres=="et")
+					{
+							echo ' : <br>';
+							$Nom_article=sql_query("SELECT titre,id_article,date FROM spip_articles");	//Récupération de l'article
+							echo '<ol>';
+							while($Nom_art=sql_fetch($Nom_article))
+							{
+								$id_article=$Nom_art['id_article'];
+								if ($pointage_articles[$id_article]==true)
+								{
+									echo '<li><a href="spip.php?article'.$id_article.'">'.$Nom_art['titre'].'</a> Date de publication : '.date("d/m/Y", strtotime($Nom_art['date'])).'</li>'; //Affichage du titre de l'article correspondant aux mots clé
+								}
+							}
+							echo '</ol><br />';
+					}
+			}
+			echo '</td></tr><tr><td>';
+			echo '<p style="text-align:center"><input type="submit" name="Retour" value="Retour"/></p>';
+			echo '</form>';			
+	}
+	echo '</td></tr></table>';
+?>
