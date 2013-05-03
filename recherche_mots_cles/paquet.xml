@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.5.1"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/recherche_sti-24.png"
     schema="0.5"
 	documentation="http://sti.ac-orleans-tours.fr/spip/"
