@@ -11,6 +11,7 @@ function panier2commande_post_insertion($flux){
 		and $flux['data']['statut'] == 'encours'
 		and include_spip('inc/paniers')
 		and $id_panier = paniers_id_panier_encours()
+		and include_spip('inc/filtres')
 	){
 		// On récupère le contenu du panier
 		$panier = sql_allfetsel(
