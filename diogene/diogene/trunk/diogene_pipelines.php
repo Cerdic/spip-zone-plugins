@@ -415,13 +415,14 @@ function diogene_formulaire_traiter($flux){
 			 * TODO Utiliser les fonctions recherchant dans la déclaration des tables pour prendre le bon statut
 			 * ici : refuse est pour les sites et poubelle pour le reste
 			 */
+			include_spip('inc/filtres');
 			if(in_array($statut_objet,array('refuse','poubelle'))){
-				$flux['data']['message_ok'] = _T('diogene:message_objet_supprime',array('titre'=>$titre));
+				$flux['data']['message_ok'] = _T('diogene:message_objet_supprime',array('titre'=>extraire_multi($titre)));
 				$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,'');
 				$flux['data']['editable'] = false;
 			}
 			else{
-				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour',array('titre'=>$titre));
+				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour',array('titre'=>extraire_multi($titre)));
 				if($statut_objet == 'publie'){
 					$url = generer_url_entite($id_objet,$objet);
 					$flux['data']['message_ok'] .= '<br />'._T('diogene:message_objet_mis_a_jour_lien',array('url'=>$url));
@@ -436,7 +437,7 @@ function diogene_formulaire_traiter($flux){
 				}
 			}
 		}else{
-			$flux['data']['message_ok'] = _T('diogene:message_objet_cree',array('titre'=>$titre));
+			$flux['data']['message_ok'] = _T('diogene:message_objet_cree',array('titre'=>extraire_multi($titre)));
 			$flux['data']['editable'] = false;
 			$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,$id_objet);
 		}
