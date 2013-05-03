@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array $interface : le tableau avec les champs modifiés 
  */
 function tablematieres_declarer_tables_interfaces($interface){
-	include_spip('table_matieres');
+	include_spip('tablematieres_fonctions');
 
 	// ne retourner que la table des matieres du texte fourni (champ texte)
 	$interface['table_des_traitements']['TABLE_MATIERES'] = 'table_matieres(%s, \'tdm\')';

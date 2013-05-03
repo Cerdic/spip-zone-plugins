@@ -16,7 +16,7 @@ if (!defined('_SPIP_TEST_INC')) {
 
 	include_spip('public/assembler'); //recuperer_fond()
 	include_spip('inc/texte'); //propre() etc...
-	include_spip('table_matieres'); //ce qu'on on test
+	include_spip('tablematieres_fonctions'); //ce qu'on on test
 
 	$c = dutexte();
 	$d = dutexte2();
@@ -54,7 +54,7 @@ des intertitres sans texte
 
 {{{<multi>then...[fr]alors...</multi>}}}
 
-last chapter[[avec une note de bas de page pour voir si elle est doublée ou pas avec table_matieres]]
+last chapter[[avec une note de bas de page pour voir si elle est doublï¿½e ou pas avec table_matieres]]
 
 {{{*-*-*}}}
 
@@ -88,13 +88,13 @@ $$
 $$
 </math>
 
-{{{après les maths}}}
+{{{aprï¿½s les maths}}}
 
-du texte et tout ça...
+du texte et tout ï¿½a...
 
-{{{après les maths, on fait un intertitre de grande longueur pour vérifier une petite fonction sympa}}}
+{{{aprï¿½s les maths, on fait un intertitre de grande longueur pour vï¿½rifier une petite fonction sympa}}}
 
-du texte et tout ça...';
+du texte et tout ï¿½a...';
 	}
 
 	function dutexte2() {
@@ -116,7 +116,7 @@ dans un cadre aussi :
 {{{comme cela}}}
 muche</cadre>
 
-{{{troisième phase}}}
+{{{troisiï¿½me phase}}}
 
 fin du texte';
 	}
