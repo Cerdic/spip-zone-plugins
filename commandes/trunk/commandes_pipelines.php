@@ -63,8 +63,8 @@ function commandes_affiche_gauche($flux) {
 /**
  * accueil : liste des commandes en attente de validation
  *
- * @param array $flux
- * @return array $flux 
+ * @param string $flux
+ * @return string $flux 
  */
 function commandes_accueil_encours($flux) {
 
@@ -85,7 +85,9 @@ function commandes_accueil_encours($flux) {
  * lors de la modification du statut d'une commande
  *
  * @param array $flux
- * @return array $flux 
+ *	$flux['args'][x] = arguments (action, table, id_objet etc.)
+ *	$flux['data'][x] = champs modifiés (statut, date etc.)
+ * @return array $flux
  */
 function commandes_pre_edition($flux){
 
