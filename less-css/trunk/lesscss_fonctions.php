@@ -80,7 +80,11 @@ function less_css($source){
 
 		# si la feuille compilee est plus recente que la feuille source
 		# l'utiliser sans rien faire, sauf si recalcul explicite
-		if ((@filemtime($f) > @filemtime($source))
+		$changed = false;
+		if (@filemtime($f) < @filemtime($source))
+			$changed = true;
+
+		if (!$changed
 		  AND (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul'))
 			return $f;
 
@@ -103,8 +107,14 @@ function less_css($source){
 		$contenu = urls_absolues_css($contenu, $source);
 
 		// ecrire le fichier destination, en cas d'echec renvoyer la source
-		if (ecrire_fichier($f, $contenu, true))
+		// on ecrit sur un fichier
+		if (ecrire_fichier($f.".last", $contenu, true)){
+			if ($changed OR md5_file($f)!=md5_file($f.".last")){
+				@copy($f.".last",$f);
+				clearstatcache(true,$f); // eviter que PHP ne reserve le vieux timestamp
+			}
 			return $done[$source] = $f;
+		}
 		else
 			return $done[$source] = $source;
 	}
