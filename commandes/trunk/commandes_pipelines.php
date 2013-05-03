@@ -61,7 +61,10 @@ function commandes_affiche_gauche($flux) {
 
 
 /**
- * accueil : liste des commandes à envoyer
+ * accueil : liste des commandes en attente de validation
+ *
+ * @param array $flux
+ * @return array $flux 
  */
 function commandes_accueil_encours($flux) {
 
@@ -76,5 +79,35 @@ function commandes_accueil_encours($flux) {
 	return $flux;
 }
 
+
+/*
+ * Mettre à jour les dates de paiement ou d'envoi
+ * lors de la modification du statut d'une commande
+ *
+ * @param array $flux
+ * @return array $flux 
+ */
+function commandes_pre_edition($flux){
+
+	if (
+		$action = $flux['args']['action']
+		and $table = $flux['args']['table']
+		and $statut = $flux['data']['statut']
+		and $action == 'instituer'
+		and $table == table_objet_sql('commande')
+		and $date = date('Y-m-d H:i:s') // il faudrait copier la date de maj pour bien faire...
+	) {
+		switch ($statut) {
+			case 'paye';
+				$flux['data']['date_paiement'] = $date;
+				break;
+			case 'envoye';
+				$flux['data']['date_envoi'] = $date;
+				break;
+		}
+	}
+
+	return($flux);
+}
 
 ?>

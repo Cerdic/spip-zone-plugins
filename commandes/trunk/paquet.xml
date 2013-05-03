@@ -1,23 +1,23 @@
 <paquet
-	   prefix="commandes"
-	   categorie="divers"
-	   version="0.9.5"
-	   etat="dev"
-	   compatibilite="[3.0.5;3.0.*]"
-	   logo="prive/themes/spip/images/commande.png"
-	   documentation=""
-	   schema="0.3" 
-	   >
+	prefix="commandes"
+	categorie="divers"
+	version="0.9.6"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/commande.png"
+	documentation=""
+	schema="0.3" 
+	>
 
 	<nom>Commandes</nom>
 	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
 	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
 	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
-		
+
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />	
-	
+
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
 
@@ -27,14 +27,15 @@
 	<pipeline nom="affiche_gauche" inclure="commandes_pipelines.php" />
 	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
-	
+	<pipeline nom="pre_edition" inclure="commandes_pipelines.php" />
+
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
 	<pipeline nom="rechercher_liste_des_champs" inclure="base/commandes.php" />
 	<pipeline nom="rechercher_liste_des_jointures" inclure="base/commandes.php" /> 
-	
+
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
-	
+
 	<menu nom="commandes" titre="commandes:nom_bouton_plugin" parent="menu_edition" icone="images/commande-16.png" action="commandes" /> 
 </paquet>
