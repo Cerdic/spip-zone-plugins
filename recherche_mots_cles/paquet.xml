@@ -1,9 +1,9 @@
 <paquet
 	prefix="recherche_sti"
 	categorie="outil"
-	version="0.5"
+	version="0.5.1"
 	etat="dev"
-	compatibilite="[2.9.9;["
+	compatibilite="[3.0.9;3.0.*["
 	logo="prive/themes/spip/images/recherche_sti-24.png"
     schema="0.5"
 	documentation="http://sti.ac-orleans-tours.fr/spip/"
@@ -13,8 +13,7 @@
 
 	<auteur>Administrateurs site STI academie Orleans Tours</auteur>
 
-	<licence>2012 GNU/GPL </licence>
-
+	<copyright>2012</copyright>
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/recherche_sti.php" />	
