@@ -32,6 +32,8 @@
 	<utilise nom="Z" compatibilite="[1.7.10;[" />
 	<utilise nom="Zcore" compatibilite="[2.0.0-dev;[" />
 	<utilise nom="Zpip" compatibilite="[2.0.0-dev;[" />
+	
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 
 	<menu nom="compositions" titre="compositions:compositions" parent="menu_configuration" icone="images/composition-16.png" action="configurer_compositions" />
 </paquet>
