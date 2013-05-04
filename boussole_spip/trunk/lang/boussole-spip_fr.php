@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;

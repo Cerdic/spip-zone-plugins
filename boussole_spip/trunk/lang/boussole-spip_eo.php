@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_trad' => 'SPIP Traduki',
 	'nom_site_spip_twit' => 'SPIP.org',
 	'nom_site_spip_user' => 'SPIP Uzantoj',
-	'nom_site_spip_video' => 'SPIP Mediateko',
+	'nom_site_spip_video' => 'SPIP Mediateko', # MODIF
 	'nom_site_spip_zine' => 'SPIP Fanzino',
 	'nom_site_spip_zone' => 'SPIP Bazaro',
 
