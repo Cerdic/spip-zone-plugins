@@ -44,18 +44,18 @@ function spip_suggest_insert_head($flux) {
 $("#recherche").autocomplete({
       minLength: 0,
       source:"'.generer_url_public("suggest").'",
-      position: { my : "left top", at: "left bottom", of: "#formulaire_recherche" },
+      position: { my : "left top", at: "left bottom", of: "'.lire_config('suggest_selecteur_affichage').'" },
       focus: function( event, ui ) {
-        $("#recherche").val( ui.item.label );
+        $("'.lire_config('suggest_selecteur').'").val( ui.item.label );
         return false;
       },
       select: function( event, ui ) {
-        $( "#recherche" ).val( ui.item.label );
-		$("#formulaire_recherche form").submit();
+        $("'.lire_config('suggest_selecteur').'" ).val( ui.item.label );
+		$("'.lire_config('suggest_form').'").submit();
         return false;
       }
     });
-	var obj = $("#recherche").data("autocomplete");
+	var obj = $("'.lire_config('suggest_selecteur').'").data("autocomplete");
 	obj && (obj._renderItem = function( ul, item ) {
       return $( "<li>" )
         .data( "item.autocomplete", item )
