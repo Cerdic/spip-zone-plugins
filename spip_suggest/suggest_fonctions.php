@@ -41,7 +41,7 @@ function spip_suggest_insert_head($flux) {
 	$flux .= '
 <script type="text/javascript">
 	$(document).ready(function(){
-$("#recherche").autocomplete({
+$("'.lire_config('suggest_selecteur').'").autocomplete({
       minLength: 0,
       source:"'.generer_url_public("suggest").'",
       position: { my : "left top", at: "left bottom", of: "'.lire_config('suggest_selecteur_affichage').'" },
