@@ -1,0 +1,10 @@
+#FORMULAIRE_RECHERCHE_SEANCES
+
+<B_seances><ul id="recherche_seances">
+<BOUCLE_seances (SEANCES articles){id_article?}{id_rubrique?}{id_endroit?}{date_seance ?like #ENV{date_seance}%}{statut=publie}{par date_seance}>
+	[<li class="date">(#DATE_SEANCE|affdate_jourcourt|unique)</li>]
+	<li>[<span class="film"><a href="[(#URL_RUBRIQUE|ancre_url{a-#ID_ARTICLE})]" title="<:fiche_film:>">(#TITRE)</a></span>][ - (#DATE_SEANCE|heure_seance)][ - (#NOM_ENDROIT)][ - <a href="#" title="(#REMARQUE_SEANCE*|entites_html)">Rem</a>][ - <a href="(#URL_PAGE{ics_seance,id_seance=#ID_SEANCE})" title="<:ajouter_mon_agenda_titre:>"><:ajouter_mon_agenda:></a>]</li>
+</BOUCLE_seances>
+</ul></B_seances>
+<p id="alerte"><:seances_pas_de_resultats:></p>
+<//B_seances>

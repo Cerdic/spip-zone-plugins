@@ -1,0 +1,54 @@
+<a name="editer_seance"></a>
+<div class="formulaire_spip formulaire_seance" id="formulaire_seance">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{message_erreur})</p>]
+	[(#ENV{editable}|oui)
+	<form name="editer_seance" id="editer_seance" class="formulaire_spip formulaire_editer_seance" method="post" action="#ENV{action}" enctype="multipart/form-data">
+	[<!--(#REM) declarer les hidden -->]
+	[<input type="hidden" name="id_seance" value="(#ENV{id_seance})" />]
+	[<input type="hidden" name="id_article" value="(#ENV{id_article})" />]
+	[<input type="hidden" name="duplicate" value="(#ENV{duplicate})" />]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	<ul>
+		<li class="saisie obligatoire[ (#ENV*{erreurs}|table_valeur{id_endroit}|oui)erreur]">
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{id_endroit})</span>]
+		<label for="id_endroit" id="label_id_endroit"><:seances:seances_endroit:></label>
+		[<!-- (#REM) selection endroit -->]
+		<select name="id_endroit" id="id_endroit" class="select">
+			[(#INCLURE{fond=formulaires/inc/seances_select_endroits,id_endroit=#ENV{id_endroit}})]
+		</select>
+		</li>
+		
+		<li class="saisie obligatoire[ (#ENV*{erreurs}|table_valeur{date_seance}|oui)erreur]">
+		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{date_seance})</span>]
+		<label for="jour_seance" id="label_jour_seance"><:seances:date_seance:></label>
+		<select name="jour" id="jour_seance">
+			[(#INCLURE{fond=formulaires/inc/seances_select_jours,jour=#ENV{jour}})]
+		</select>
+		<select name="mois" id="mois_seance">
+			[(#INCLURE{fond=formulaires/inc/seances_select_mois,mois=#ENV{mois}})]
+		</select>
+		<select name="annee" id="annee_seance">
+			[(#INCLURE{fond=formulaires/inc/seances_select_annee,annee=#ENV{annee}})]
+		</select>
+		<:seances:seance_a:>
+		<select name="heure" id="heure_seance">
+			[(#INCLURE{fond=formulaires/inc/seances_select_heure,heure=#ENV{heure}})]
+		</select>
+		<:seances:symbole_heure:>
+		<select name="minutes" id="heure_seance">
+			[(#INCLURE{fond=formulaires/inc/seances_select_minutes,minutes=#ENV{minutes}})]
+		</select>
+		<:seances:symbole_minute:>
+		</li>
+		<li class="saisie">
+			<label for="remarque_seance" id="label_remarque_seance"><:seances:remarque_seance:></label>
+			<input type="text" class="text" name="remarque_seance" id="remarque_seance" value="#ENV{remarque_seance}" />
+		</li>
+	</ul>
+	[<!--(#REM) pour extra et autre -->]
+		<!--extra-->
+	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="<:seances:action_enregistrer:>" /></p>
+	</form>
+	]
+</div>

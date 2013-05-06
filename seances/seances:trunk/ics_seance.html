@@ -1,0 +1,19 @@
+#CACHE{24*3600}<BOUCLE_seance (SEANCES articles){id_seance}{statut=publie}>[(#HTTP_HEADER{Content-type: text[; charset=(#CHARSET)]})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment;[ filename="<:seances:prefixe_ics_seance:>(#ID_SEANCE|concat{.ics})"]})]BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SPIP//NONSGML v1.0//FR
+CALSCALE:GREGORIAN
+X-WR-TIMEZONE:Europe/Paris
+METHOD:PUBLISH
+X-WR-CALNAME;VALUE=TEXT:[(#TITRE|filtrer_ical)]
+BEGIN:VEVENT
+[SUMMARY:(#TITRE|filtrer_ical)]
+[URL:(#URL_ARTICLE|url_absolue)]
+UID:#URL_SITE_SPIP-R#ID_RUBRIQUE-A#ID_ARTICLE-S#ID_SEANCE
+DESCRIPTION:[(#REMARQUE_SEANCE|supprimer_tags|filtrer_ical)\n\n][(#CHAPO|supprimer_tags|textebrut|sinon{#INTRODUCTION}|filtrer_ical)]<BOUCLE_endroit (SEANCES_ENDROITS){id_endroit}>
+[LOCATION:(#NOM_ENDROIT|supprimer_numero|filtrer_ical)]</BOUCLE_endroit>
+[DTSTAMP:(#DATE_SEANCE|date_ical)]
+[DTSTART:(#DATE_SEANCE|date_ical)]
+[DTEND:(#DATE_SEANCE|heure_fin_seance{1}|date_ical)]
+END:VEVENT
+END:VCALENDAR
+</BOUCLE_seance>

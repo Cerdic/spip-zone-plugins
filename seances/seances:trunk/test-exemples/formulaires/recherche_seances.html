@@ -1,0 +1,51 @@
+<div class="formulaire_spip formulaire_recherche_seance" id="formulaire_recherche_seance">
+<a name="#FORM"></a>
+<form action="[(#ENV{action}|ancre_url{#FORM})]" method="get"><div>
+	[(#ENV{action}|form_hidden)]
+	<p class="explication"><:seances_recherche_explication:></p>
+	<ul>
+	[<!-- (#REM) section = rubrique ou seance a été activé -->]
+	<li><label for="section"><:seances_rechercher_section:></label>
+	<B_sections>
+	<select class="select" name="id_rubrique" id="section">
+		<option value=""[ (#ENV*{id_rubrique}|non)selected="selected"]>--</option>
+	<BOUCLE_sections (RUBRIQUES){par titre}{seance=1}>
+		[<option value="#ID_RUBRIQUE"[ (#ENV*{id_rubrique}|=={#ID_RUBRIQUE}|oui)selected="selected"]>(#TITRE)</option>]
+	</BOUCLE_sections>
+	</select></B_sections>
+	</li>
+	[<!-- (#REM) films = articles rattachés à une séance au moins -->]
+	<li><label for="film"><:seances_rechercher_film:></label>
+	<B_films>
+	<select class="select" name="id_article" id="film">
+		<option value=""[ (#ENV*{id_article}|non)selected="selected"]>--</option>
+	<BOUCLE_films (SEANCES articles){unique}{par titre}{statut=publie}>
+		[<option value="#ID_ARTICLE"[ (#ENV*{id_article}|=={#ID_ARTICLE}|oui)selected="selected"]>(#TITRE|unique)</option>]
+	</BOUCLE_films>
+	</select></B_films>
+	</li>
+	[<!-- (#REM) date -->]
+	<li><label for="date"><:seances_rechercher_date:></label>
+	<B_dates>
+	<select class="select" name="date_seance" id="date">
+		<option value=""[ (#ENV*{date_seance}|non)selected="selected"]>--</option>
+	<BOUCLE_dates (SEANCES){par date_seance}{statut=publie}>
+		#SET{date,(#DATE_SEANCE|affdate{'Y-m-d'})}
+		[<option value="(#GET{date}|unique)"[ (#ENV*{date_seance}|=={#GET{date}}|oui)selected="selected"]>[(#GET{date}|affdate_jourcourt)]</option>]
+	</BOUCLE_dates>
+	</select></B_dates>
+	</li>
+	[<!-- (#REM) endroit -->]
+	<li><label for="endroit"><:seances_rechercher_endroit:></label>
+	<B_endroits>
+	<select class="select" name="id_endroit" id="endroit">
+		<option value=""[ (#ENV*{id_endroit}|non)selected="selected"]>--</option>
+	<BOUCLE_endroits (SEANCES_ENDROITS){par nom_endroit}>
+		[<option value="#ID_ENDROIT"[ (#ENV*{id_endroit}|=={#ID_ENDROIT}|oui)selected="selected"]>(#NOM_ENDROIT)</option>]
+	</BOUCLE_endroits>
+	</select></B_endroits>
+	</li>
+	</ul>
+	<p class="boutons"><input type="submit" class="submit" value="<:seances_rechercher:>" /></p>
+</div></form>
+</div>

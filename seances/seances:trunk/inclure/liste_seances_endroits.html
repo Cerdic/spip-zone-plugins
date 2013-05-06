@@ -1,0 +1,21 @@
+<B_seances_endroits>
+[(#ANCRE_PAGINATION)]<ul>
+<BOUCLE_seances_endroits (SEANCES_ENDROITS){par nom_endroit}{pagination}>
+	<li>#NOM_ENDROIT[ - (#ID_ARTICLE|oui)[ <a href="(#URL_ECRIRE{articles}
+		|parametre_url{id_article,#ID_ARTICLE})" title="<:seances:article:> - #ID_ARTICLE">#ID_ARTICLE</a>]]
+	[<span>(#AUTORISER{modifier,seances_endroit})
+		[<a href="(#URL_ECRIRE{seances_endroit_edit}
+			|parametre_url{id_endroit,#ID_ENDROIT})"><:seances:action_modifier:></a>]
+	]
+	<BOUCLE_nbre_seances (SEANCES){id_endroit}></BOUCLE_nbre_seances>#SET{total,#TOTAL_BOUCLE}<//B_nbre_seances>
+	[(#AUTORISER{modifier,seances_endroit})
+		[(#GET{total}|=={0}|oui)
+		[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seances_endroit,#ID_ENDROIT,#SELF})" onclick="return confirm('<:seances:action_supprimer:> [(#NOM_ENDROIT)] ?')"><:seances:action_supprimer:></a></span>]]
+		[(#GET{total}|>{0}|oui)
+		 | <:seances:action_supprimer:>]
+	</span>]
+	</li>
+</BOUCLE_seances_endroits>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_seances_endroits>

@@ -1,0 +1,10 @@
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	<a href="#ENV**{retour}" class="seances_action"><:seances:retour:></a>
+	<BOUCLE_titre(ARTICLES){id_article}{statut IN 'prop','prepa','publie'}>
+	[<h1>(#TITRE|supprimer_numero)[ : (#ENV{id_seance}|=={new}|?{<:seances:nouvelle_seance:>,<:seances:modifier_seance:>})]</h1>]
+	</BOUCLE_titre>
+	
+</div>
+#FORMULAIRE_EDITER_SEANCE{#ENV{id_seance,new},#ENV{id_article},#ENV{retour},#ENV{duplicate,''}}
+</div>
