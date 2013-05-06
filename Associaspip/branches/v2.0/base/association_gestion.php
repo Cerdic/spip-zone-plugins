@@ -79,7 +79,7 @@ function association_upgrade($meta, $courante, $table='meta') {
 }
 
 // v0.30 (Associaspip 1.9.0) :
-//@r12523 on les table(champs) : asso_adherents@maj_64 asso_categories(id_categorie, valeur, libelle, duree, cotisation, commentaire, maj) asso_comptes(id_compte, recette, depense, justification, imputation, journal, id_journal, maj) asso_financiers@maj_21 asso_profil(id_profil, nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, maj, mail) asso_livres(id_livre, valeur, libelle, maj) asso_ventes(id_vente, article, code, acheteur, quantite, date_vente, date_envoi, don, prix_vente, frais_envoi, commentaire)
+//@r12523 on les table(champs) : asso_adherents@maj_64 asso_categories(id_categorie, valeur, libelle, duree, cotisation, commentaire, maj) asso_comptes(id_compte, recette, depense, justification, imputation, journal, id_journal, maj) asso_financiers@maj_21 asso_profil(id_profil, nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, maj, mail) asso_livres@maj_30 asso_ventes(id_vente, article, code, acheteur, quantite, date_vente, date_envoi, don, prix_vente, frais_envoi, commentaire)
 function association_maj_0($version, $meta, $table) {
 	global $association_tables_principales, $association_tables_auxiliaires;
 	$ok = TRUE;
@@ -170,15 +170,20 @@ $GLOBALS['association_maj'][30] = array(
 	// et on ajoute un champ date
 	array('sql_alter', "TABLE spip_asso_banques ADD \"date\" DATE NOT NULL"), //!\ 'date' fait partir des mots reserves du SQL... https://dev.mysql.com/doc/refman/4.1/en/reserved-words.html https://dev.mysql.com/doc/refman/4.1/en/server-sql-mode.html#sqlmode_ansi_quotes
 //<r12523
-/*
 	// les livres de comptes ? (table supprimee par r13839)
 	array('sql_create','spip_asso_livres',
-		$association_tables_principales['spip_asso_livres']['field'],
-	    $association_tables_principales['spip_asso_livres']['key'],
-	    TRUE), // champs : id_livre, valeur, libelle
+		array(
+			'id_livre' => "TINYINT NOT NULL",
+			'valeur' => "TEXT NOT NULL",
+			'libelle' => "TEXT NOT NULL",
+			'maj' => "TIMESTAMP NOT NULL",
+		),
+	    array(
+			'PRIMARY KEY' => "id_livre",
+	    ),
+	    TRUE),
 	// initialisation du livre des comptes (donnees plus inserees des v0.40)
 	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités')"),
-*/
 //@r13971
 	// asso_profil est enrichi
 	array('sql_alter', "TABLE spip_asso_profil ADD dons TEXT NOT NULL DEFAULT 'oui'"),
@@ -271,15 +276,16 @@ function association_maj_16181() {
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 62;
 		return;
+	} else { // On continue a utiliser la table asso_adherents....
+		// asso_adherents.statut devient asso_adherents.statut_relance (nom recherche par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ? mais I2 utilise statut_interne d'apres http://zone.spip.org/trac/spip-zone/changeset/16209/_plugins_/_test_/Association/Association_1.9.2/exec/action_cotisations.php#L31 ! bon, pas inclus dans maj_16181...)
+		sql_alter("TABLE spip_asso_adherents ADD statut_relance TEXT NOT NULL");
+		sql_update('spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''");
+		sql_alter("TABLE spip_asso_adherents DROP statut");
 	}
 }
 // v0.62 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][62] = array(
 //@r16186+r16199
-	// asso_adherents.statut devient asso_adherents.statut_relance (nom recherche par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ? mais I2 utilise statut_interne d'apres http://zone.spip.org/trac/spip-zone/changeset/16209/_plugins_/_test_/Association/Association_1.9.2/exec/action_cotisations.php#L31 ! bon, pas inclus dans maj_16181...)
-	array('sql_alter', "TABLE spip_asso_adherents ADD statut_relance TEXT NOT NULL"),
-	array('sql_update', 'spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''"),
-	array('sql_alter', "TABLE spip_asso_adherents DROP statut"),
 	// migration vers "Inscription2"
 	array('association_maj_16181'),
 	// asso_activites.accompagne se decompose en asso_activites.membres + asso_activites.non_membres
@@ -342,12 +348,51 @@ $GLOBALS['association_maj'][64] = array(
 function association_maj_37532() {
 	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // On utilise "Inscription 2" et sa table "auteurs_elargis" est la...
 		// asso_adherents reloaded
-		global $association_tables_principales;
-		@sql_create('spip_asso_adherents',
-			$association_tables_principales['spip_asso_adherents']['field'],
-			$association_tables_principales['spip_asso_adherents']['key'],
-		FALSE); // re-creation (cf. maj_20002) avec les champs communs (ci apres) et : id_adherent, id_asso, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4, statut?/statut_relance?/statut_interne? (cf. r16186+r16199 et r37532)
-		$champs_communs = 'nom, prenom, sexe, fonction, email, validite, numero, rue, cp, ville, telephone, portable, montant, date, relance, categorie, divers, remarques, vignette, id_auteur, naissance, profession, societe, identifiant, passe, creation, secteur, publication, commentaire'; // champs pris en compte dans r16186+r16315 (cf maj_16181+maj_16315) +r19708
+		sql_create('spip_asso_adherents',
+			array(
+				'id_adherent' => "BIGINT NOT NULL",
+				'nom' => "TEXT NOT NULL",
+				'prenom' => "TEXT NOT NULL",
+				'sexe' => "TINYTEXT NOT NULL",
+				'fonction' => "TEXT NOT NULL",
+				'email' => "TINYTEXT NOT NULL",
+				'validite' => "DATE NOT NULL DEFAULT '0000-00-00'",
+				'numero' => "TEXT NOT NULL",
+				'rue' => "TEXT NOT NULL",
+				'cp' => "TEXT NOT NULL",
+				'ville' => "TEXT NOT NULL",
+				'telephone' => "TINYTEXT NOT NULL",
+				'portable' => "TINYTEXT NOT NULL",
+				'montant' => "TEXT NOT NULL",
+				'"date"' => "DATE NOT NULL DEFAULT '0000-00-00'", //!\ usage de nom reserve du SQL...
+				'statut_interne' => "TINYTEXT NOT NULL", // statut/statut_relance y etait aussi en attendant que le code soit corrige
+				'relance' => "TINYINT NOT NULL DEFAULT 0",
+				'divers' => "TEXT NOT NULL",
+				'remarques' => "TEXT NOT NULL",
+				'vignette' => "TINYTEXT NOT NULL",
+				'id_auteur' => "BIGINT NOT NULL DEFAULT 0",
+				'id_asso' => "TEXT NOT NULL",
+				'categorie' => "TEXT NOT NULL",
+				'naissance' => "DATE NOT NULL DEFAULT '0000-00-00'",
+				'societe' => "TEXT NOT NULL",
+				'identifiant' => "TEXT NOT NULL",
+				'passe' => "TEXT NOT NULL",
+				'creation' => "DATE NOT NULL DEFAULT '0000-00-00'",
+				'maj' => "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+				'utilisateur1' => "TEXT NOT NULL",
+				'utilisateur2' => "TEXT NOT NULL",
+				'utilisateur3' => "TEXT NOT NULL",
+				'utilisateur4' => "TEXT NOT NULL",
+				'secteur' => "TEXT NOT NULL",
+				'publication' => "TEXT NOT NULL",
+				'profession' => "TEXT NOT NULL",
+				'commentaire' => "TEXT NOT NULL", //+
+			),
+			array(
+				'PRIMARY KEY' => "id_adherent",
+			),
+		FALSE); // re-creation (cf. maj_20002) avec les champs communs (ci apres) et : id_adherent, id_asso, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4
+		$champs_communs = 'nom, prenom, sexe, fonction, email, validite, numero, rue, cp, ville, telephone, portable, montant, date, relance, categorie, divers, remarques, vignette, id_auteur, naissance, profession, societe, identifiant, passe, creation, secteur, publication, statut_interne, commentaire'; // champs pris en compte dans r16186+r16315 (cf maj_16181+maj_16315) +r19708
 		$liste_maj = sql_select($champs_communs, 'spip_auteurs_elargis');
 		while ($maj = sql_fetsel($liste_maj) ) { // re-import necessaire pour passer en v0.7 qui se passe de I2
 			sql_insertq('spip_adherents', $maj);
@@ -356,6 +401,13 @@ function association_maj_37532() {
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 65;
 		return;
+	} else { // On continue d'utiliser asso_adherents qu'on met en accord
+		// asso_adherents.statut_relance devient asso_adherents.statut_interne (harmonisation avec auteurs_elargis ?)
+		sql_alter("TABLE spip_asso_adherents ADD statut_interne TEXT NOT NULL DEFAULT ''");
+		sql_update('spip_asso_adherents', array('statut_interne' => 'statut_relance'), 1);
+		sql_alter("TABLE spip_asso_adherents DROP statut_relance");
+		// ajout de asso_adherents.commentaire (harmonisation avec auteurs_elargis ?)
+		sql_alter("TABLE spip_asso_adherents ADD commentaire TEXT NOT NULL DEFAULT ''");
 	}
 }
 // v0.65 (Associaspip 1.9.2/2.0)
@@ -366,11 +418,6 @@ $GLOBALS['association_maj'][65] = array(
 //@r37532+r37978+r37979
 	// Optionnalisation du plugin "Inscription2" : on recree propremment asso_adherents
 	array('association_maj_37532'),
-//@r37532
-	// asso_adherents.statut_relance devient asso_adherents.statut_interne (harmonisation avec auteurs_elargis ?)
-	array('sql_alter', "TABLE spip_asso_adherents ADD statut_interne TEXT NOT NULL"),
-	array('sql_update', 'spip_asso_adherents', array('statut_interne' => 'statut_relance'), 1),
-	array('sql_alter', "TABLE spip_asso_adherents DROP statut_relance"),
 );
 
 // v0.70 (Associaspip 1.9.2/2.0)
