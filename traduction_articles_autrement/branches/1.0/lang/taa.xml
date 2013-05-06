@@ -6,13 +6,13 @@
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/taa?lang_cible=de">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/taa?lang_cible=en">
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/taa?lang_cible=es">
 		<traducteur nom="abelass" lien="http://trad.spip.net/auteur/abelass" />

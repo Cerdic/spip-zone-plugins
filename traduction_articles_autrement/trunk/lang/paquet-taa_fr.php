@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	 Les listes compactes fonctionnent maintenant également sur un site avec du multilinguisme par section. Il faut pour cela installer le plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip]
 	 
 	 Et pour pour pouvoir profiter d\'un système de traduction dans le sens du présent plugin, installez en plus le plugin [Traductions rubriques autrement->http://files.spip.org/spip-zone/traduction_rubriques_autrement.zip]. Les boutons de traduction seront affichés en haut de la rubrique avec la possibilité de créer les traductions manquantes en cliquant sur l\'onglet en gris. Le plugin essayera de chercher la rubrique correspondante dans le secteur de la langue, si la rubrique parente est bien traduite.',
+    'taa_nom' => 'Traduction d\'articles autrement',
 	'taa_slogan' => 'Rendre la traduction des articles plus aisée.'
 );
 
