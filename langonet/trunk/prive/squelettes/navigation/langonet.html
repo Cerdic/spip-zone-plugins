@@ -1,11 +1,11 @@
 [(#REM) <!-- Navigation dans les operations de langonet --> ]
 <ul class="liste-items sous_navigation">
-<BOUCLE_navigation_operations(DATA){liste verifier,generer,lister,rechercher_item,rechercher_texte}{par cle}>
+<BOUCLE_navigation_operations(DATA){liste verifier_item,verifier_l,generer,lister,rechercher_item,rechercher_texte}{par cle}>
 	[<li class="item">
 		(#URL_ECRIRE{#ENV{exec}}|parametre_url{operation, #VALEUR}
 			|lien_ou_expose{
 				[(#VAL{langonet:onglet_}|concat{#VALEUR}|_T)],
-				[(#ENV{operation, verifier}|=={#VALEUR})]})
+				[(#ENV{operation, verifier_item}|=={#VALEUR})]})
 	</li>]
 </BOUCLE_navigation_operations>
 </ul>

@@ -1,16 +1,19 @@
 [(#REM) <!-- Fichiers produits par certaines operations de langonet --> ]
-[(#ENV{operation, verifier}|=={verifier}|oui)
+[(#ENV{operation, verifier_item}|=={verifier_item}|oui)
 <INCLURE{fond=prive/squelettes/liste/fichiers_log,
 	verification=definition,
 	env} />
 <INCLURE{fond=prive/squelettes/liste/fichiers_log,
 	verification=utilisation,
 	env} />
+]
+
+[(#ENV{operation, verifier_item}|=={verifier_l}|oui)
 <INCLURE{fond=prive/squelettes/liste/fichiers_log,
 	verification=fonction_l,
 	env} />
 ]
 
-[(#ENV{operation, verifier}|=={generer}|oui)
+[(#ENV{operation, verifier_item}|=={generer}|oui)
 <INCLURE{fond=prive/squelettes/liste/fichiers_lang, env} />
 ]

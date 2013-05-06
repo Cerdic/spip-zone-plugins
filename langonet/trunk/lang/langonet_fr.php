@@ -62,7 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tradlang_statut_modif' => 'item dont la traduction est obsolète (référence modifiée)',
 	'info_tradlang_statut_new' => 'item non encore traduit',
 	'info_verification_l' => 'Vous avez choisi de rechercher les cas d\'utilisation de la fonction _L() dans les fichiers PHP inclus dans les arborescences suivantes :',
-	'info_verifier' => 'Cette option vous permet, d\'une part,  de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. Il est possible, soit de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, soit que certains items de langue définis ne sont plus utilisés. <br />D\'autre part, il est possible de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
+	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
+	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
 	// L
 	'label_affichage' => 'Mode d\'affichage de la traduction',
@@ -148,7 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_lister' => 'Afficher une langue',
 	'onglet_rechercher_item' => 'Rechercher un raccourci',
 	'onglet_rechercher_texte' => 'Rechercher un texte',
-	'onglet_verifier' => 'Vérifier une langue',
+	'onglet_verifier_item' => 'Vérifier une langue',
+	'onglet_verifier_l' => 'Vérifier la fonction _L',
 	'option_affichage_final' => 'Texte produit sans balise HTML',
 	'option_affichage_brut' => 'Texte brut avec les balises HTML',
 	'option_aucun_dossier' => 'aucune arborescence sélectionnée',
@@ -175,6 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue',
 	'titre_form_rechercher_texte' => 'Recherche de textes dans les fichiers de langue',
 	'titre_form_verifier' => 'Vérification des fichiers de langue',
+	'titre_form_verifier_l' => 'Vérification de l\'utilisation de la fonction _L',
 	'titre_page' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
 );

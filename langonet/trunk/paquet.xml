@@ -20,5 +20,5 @@
 
 	<pipeline nom="autoriser" inclure="langonet_autorisations.php" />
 
-	<menu nom="langonet" titre="langonet:bouton_langonet" parent="bando_administration" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier" />
+	<menu nom="langonet" titre="langonet:bouton_langonet" parent="bando_administration" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
 </paquet>

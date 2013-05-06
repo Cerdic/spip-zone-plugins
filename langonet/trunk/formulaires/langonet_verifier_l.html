@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_verifier_l:></h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		<p class="explication"><:langonet:info_verifier_l:></p>
+		<ul>
+			<li class="editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
+				<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
+				<p class="explication"><:langonet:info_arborescence_scannee:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]
+				[(#ENV{dossier_scan, 0}|langonet_creer_select_dossiers{0})]
+			</li>
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:langonet:bouton_verifier:>" />
+		</p>
+	</div></form>]
+</div>
+
+[(#REM) <!-- Affichage des resultats --> ]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-resultats_verifier_fonction_l,
+		explication=#ENV*{message_ok}|table_valeur{explication},
+		resultats=#ENV*{message_ok}|table_valeur{resultats},
+		env} />
+]

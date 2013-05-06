@@ -1,5 +1,5 @@
 [(#AUTORISER{webmestre}|sinon_interdire_acces)]
 <h1 class="grostitre"><:langonet:titre_page:></h1>
 
-[(#SET{inclusion, [inc-(#ENV{type-page})_[(#ENV{operation, verifier})]]})]
+[(#SET{inclusion, [inc-(#ENV{type-page})_[(#ENV{operation, verifier_item})]]})]
 <INCLURE{fond=prive/squelettes/inclure/#GET{inclusion}, env} />

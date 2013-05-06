@@ -97,7 +97,6 @@ function langonet_creer_bulle_fichier($fichier, $type='log', $action='telecharge
  * @return array
  */
 function langonet_creer_select_langues($sel_l='0', $exclure_paquet=true) {
-
 	$retour = creer_selects($sel_l, array(), $exclure_paquet);
 	return $retour['fichiers'];
 }
@@ -120,7 +119,7 @@ function langonet_creer_select_dossiers($sel_d=array(), $multiple=true) {
  * - des arborescences a scanner
  *
  * @param string $sel_l option du select des langues 
- * @param array $sel_d option(s) du select des repertoire
+ * @param array $sel_d option(s) du select des repertoires
  * @return array
  */
 function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multiple=true) {
@@ -156,7 +155,7 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 	else {
 		$sel_dossier = '<select name="dossier_scan" id="dossier_scan">' . "\n";
 		$sel_dossier .= '<option value="0"';
-		$sel_dossier .= (count($sel_d) == '0') ? ' selected="selected">' : '>';
+		$sel_dossier .= (count($sel_d) == 0) ? ' selected="selected">' : '>';
 		$sel_dossier .= _T('langonet:option_aucun_dossier') . '</option>' . "\n";
 	}
 
