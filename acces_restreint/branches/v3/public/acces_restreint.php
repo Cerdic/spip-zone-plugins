@@ -37,15 +37,15 @@ function accesrestreint_pre_boucle(&$boucle){
 			case 'forums':
 				$t = $boucle->id_table . '.id_rubrique';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$where = accesrestreint_rubriques_accessibles_where($t);
-		
+				$where = "'$t > 0 AND '.".accesrestreint_rubriques_accessibles_where($t);
+
 				$t = $boucle->id_table . '.id_article';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$where = "array('OR',$where,".accesrestreint_articles_accessibles_where($t).")";
+				$where = "array('OR',$where,array('AND', '$t > 0', ".accesrestreint_articles_accessibles_where($t)."))";
 		
 				$t = $boucle->id_table . '.id_breve';
 				$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-				$boucle->where[] = "array('OR',$where,".accesrestreint_breves_accessibles_where($t).")";
+				$boucle->where[] = "array('OR',$where,array('AND', '$t > 0', ".accesrestreint_breves_accessibles_where($t)."))";
 				$securise = true;
 				break;
 			case 'evenements':
