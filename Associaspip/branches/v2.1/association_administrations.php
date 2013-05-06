@@ -422,16 +422,15 @@ $GLOBALS['association_maj'][37869] = array(
 
 // Recopie des metas geree par CFG dans la table asso_meta
 function association_maj_38190() {
-	global $association_tables_auxiliaires;
 	if (sql_create('spip_asso_metas',
-		$association_tables_auxiliaires['spip_asso_metas']['field'],
-		$association_tables_auxiliaires['spip_asso_metas']['key'],
+		array('nom'=>"VARCHAR(255) NOT NULL", 'valeur'=>"TEXT DEFAULT ''", 'impt'=>"ENUM('non', 'oui') DEFAULT 'oui' NOT NULL", 'maj'=>"TIMESTAMP"),
+		array('PRIMARY KEY'=>'nom'),
 		FALSE, FALSE)) {
 		// Il faut charger a la main ses fichiers puisque plugin.xml ne le demande plus
 		include _DIR_PLUGINS . 'cfg/inc/cfg.php';
 		if (is_array($c = lire_config('association'))) {
 			foreach($c as $k => $v) {
-				ecrire_meta($k, $v, 'oui', 'association_metas');
+				ecrire_meta($k, $v, 'oui', 'asso_metas');
 			}
 			// effacer les vieilles meta
 			effacer_meta('association');
