@@ -1,7 +1,7 @@
 <BOUCLE_docs(DOCUMENTS){extension IN jpg,png}{mode=document}{0,9}{par hasard}>
 	<BOUCLE_liens(documents_liens){id_document}{objet=rubrique}{0,6}>
 		<BOUCLE_rubrique(RUBRIQUES){unique}{id_rubrique=#ID_OBJET}{" | "}>
-		| <a href="[(#URL_PAGE{slide}|parametre_url{id_rubrique,#ID_OBJET})]">#TITRE</a> |
+		| <a href="[(#SELF|parametre_url{id_rubrique,#ID_OBJET})]">#TITRE</a> |
 		</BOUCLE_rubrique>
 		</B_rubrique>
 	</BOUCLE_liens>
