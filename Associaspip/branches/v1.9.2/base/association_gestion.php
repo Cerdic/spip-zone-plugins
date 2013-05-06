@@ -100,6 +100,7 @@ function association_verifier_base() {
 		}
 
 		if (!spip_query("SELECT * FROM spip_auteurs_elargis") ) {
+			//@r16181+r16186+r28924//@r34264
 			echo "Installer les plugins cfg et Inscription2 avant d'installer le plugin Association $current_version!";
 			ecrire_metas();
 			exit;
@@ -108,6 +109,8 @@ function association_verifier_base() {
 		if ($current_version<0.62) {
 			//@r16186
 			spip_query("ALTER TABLE spip_asso_adherents CHANGE statut statut_relance TEXT NOT NULL"); //!\ portability: CHANGE isn't ANSI syntax...
+			//@r16211 (but see r16269 and r16270 and r16315 ?)
+			spip_query("ALTER TABLE spip_asso_adherents CHANGE id_adherent id_inscription BIGINT NOT NULL"); //!\ portability: CHANGE isn't ANSI syntax...
 			//@r16181
 			$champs = array('id_auteur', 'nom', 'prenom', 'sexe', 'fonction', 'email', 'numero', 'rue', 'cp', 'ville', 'telephone', 'portable', 'montant', 'relance', 'divers', 'remarques', 'vignette', 'naissance', 'profession', 'societe', 'identifiant', 'passe', 'creation', 'secteur', 'publication', 'statut_relance');
 			$liste_maj = spip_query("SELECT ". implode(', ', $champs) ." FROM spip_adherents");
@@ -139,7 +142,7 @@ function association_verifier_base() {
 		if ($current_version<0.64) {
 			//@r25365
 			spip_query("ALTER TABLE spip_asso_prets ADD id_ressource VARCHAR(20) NOT NULL");
-			//@r37532
+			//@r16315+r37532
 			spip_query("ALTER TABLE spip_auteurs_elargis ADD validite DATE NOT NULL DEFAULT '0000-00-00', ADD montant FLOAT NOT NULL DEFAULT '0', ADD `date` DATE NOT NULL DEFAULT '0000-00-00'"); //!\ portability: back-ticks escaping like `date` is MySQL specific... anyway one should avoid use of reserved words...
 			//@r16181
 			$champs = array('id_auteur', 'montant', 'date', 'categorie');

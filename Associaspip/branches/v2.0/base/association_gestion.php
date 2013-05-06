@@ -31,7 +31,7 @@ function association_vider_tables($nom_meta, $table) {
 		$ok &= sql_drop_table($nom);
 	foreach($association_tables_auxiliaires as $nom => $desc)
 		$ok &= sql_drop_table($nom);
-	if ($ok)
+	if ($ok) // on log depuis r34297
 		spip_log("plugin association correctement desinstalle");
 	else
 		spip_log("plugin association partiellement desinstalle");
@@ -80,7 +80,7 @@ function association_upgrade($meta, $courante, $table='meta') {
 
 // v0.30 (Associaspip 1.9.0) :
 //@r12523 on les table(champs) : asso_adherents@maj_64 asso_categories(id_categorie, valeur, libelle, duree, cotisation, commentaire, maj) asso_comptes(id_compte, recette, depense, justification, imputation, journal, id_journal, maj) asso_financiers@maj_21 asso_profil(id_profil, nom, numero, rue, cp, ville, telephone, siret, declaration, prefet, president, maj, mail) asso_livres(id_livre, valeur, libelle, maj) asso_ventes(id_vente, article, code, acheteur, quantite, date_vente, date_envoi, don, prix_vente, frais_envoi, commentaire)
-function association_maj_0($version, $meta, $table){
+function association_maj_0($version, $meta, $table) {
 	global $association_tables_principales, $association_tables_auxiliaires;
 	$ok = TRUE;
 	foreach($association_tables_principales as $nom => $desc)
@@ -104,26 +104,27 @@ function association_change_pk($table, $row_old, $row_new, $row_int='') {
 	$sgbd = analyse_fichier_connection(_FILE_CONNECT);
 	switch ($sgbd[4]) { // le 4e argument de spip_connect_db() --appele dans le /config/connect.php de l'installation contient le "type/moteur" de SGBD : c'est le nom du fichier de portage .php defini /ecrire/req
 		case 'mysql' :
-			sql_alter("TABLE spip_$table CHANGE $row_old $row_new $row_int".'INT NOT NULL AUTO_INCREMENT');
+			$ok = sql_alter("TABLE spip_$table CHANGE $row_old $row_new $row_int".'INT NOT NULL AUTO_INCREMENT');
 			break;
 		case 'pg' :
 			if ($row_old==$row_new) { // simple changement de type ?
-				sql_alter("TABLE spip_$table ALTER $row_old TYPE $row_int".'SERIAL');
+				$ok = sql_alter("TABLE spip_$table ALTER $row_old TYPE $row_int".'SERIAL');
 			} else {
-				sql_alter("TABLE spip_$table RENAME COLUMN $row_old TO $row_new"); // il est cependant recommande d'utiliser la methode ANSI http://wiki.postgresql.org/wiki/FAQ#How_do_you_change_a_column.27s_data_type.3F
+				$ok = sql_alter("TABLE spip_$table RENAME COLUMN $row_old TO $row_new"); // il est cependant recommande d'utiliser la methode ANSI http://wiki.postgresql.org/wiki/FAQ#How_do_you_change_a_column.27s_data_type.3F
 			}
 			break;
 		case 'sqlite2' :
 		case 'sqlite3' :
 			if ($row_old!=$row_new) { // on n'aura pas "Error: duplicate column name: $row_new"
-				sql_alter("TABLE spip_$table ADD $row_new INT NOT NULL"); // ALTER TABLE limite, or AUTOINCREMENT ne peut s'utiliser avec la cle primaire http://www.sqlite.org/lang_altertable.html
-				sql_update("spip_$table", array($row_new=>$row_old) ); // copier les donnees de l'ancienne colonne a la nouvelle
-				sql_alter("TABLE spip_$table RENAME TO spip_temp$table"); // ALTER TABLE limite au point de ne pouvoir DROPer de colonne ; mais sait renommer la table, ce qu'on fait... http://www.sqlite.org/lang_altertable.html
-				sql_create($association_tables_principales["spip_$table"]['field'], $association_tables_principales["spip_$table"]['key'], TRUE); // ...puis on recree la table proprement (avec "INTEGER PRIMARY KEY AUTOINCREMENT" --utiliser Int ou un autre provque "Error: AUTOINCREMENT is only allowed on an INTEGER PRIMARY KEY" et quand AutoIncrement n'est pas le dernier de la liste provoque 'Error: near "autoincremen": syntax error')
-#				sql_query("INSERT INTO spip_$table SELECT ". implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ) ." FROM spip_temp$table"); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode directe peu portable)
-				$ok = sql_insertq_multi("spip_$table", sql_allfetsel(implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ), "spip_temp$table") ); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode portable utilisant l'API SQL mais risque de debordement de memoire avec sql_fetchall...)
+				$ok = sql_alter("TABLE spip_$table ADD $row_new INT NOT NULL"); // ALTER TABLE limite, or AUTOINCREMENT ne peut s'utiliser avec la cle primaire http://www.sqlite.org/lang_altertable.html
+				$ok &= sql_update("spip_$table", array($row_new=>$row_old) ); // copier les donnees de l'ancienne colonne a la nouvelle
+				global $association_tables_principales;
+				$ok &= sql_alter("TABLE spip_$table RENAME TO spip_temp$table"); // ALTER TABLE limite au point de ne pouvoir DROPer de colonne ; mais sait renommer la table, ce qu'on fait... http://www.sqlite.org/lang_altertable.html
+				$ok &= sql_create($association_tables_principales["spip_$table"]['field'], $association_tables_principales["spip_$table"]['key'], TRUE); // ...puis on recree la table proprement (avec "INTEGER PRIMARY KEY AUTOINCREMENT" --utiliser Int ou un autre provque "Error: AUTOINCREMENT is only allowed on an INTEGER PRIMARY KEY" et quand AutoIncrement n'est pas le dernier de la liste provoque 'Error: near "autoincremen": syntax error')
+#				$ok &= sql_query("INSERT INTO spip_$table SELECT ". implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ) ." FROM spip_temp$table"); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode directe peu portable)
+				$ok &= sql_insertq_multi("spip_$table", sql_allfetsel(implode(', ', array_keys($association_tables_principales["spip_$table"]['field']) ), "spip_temp$table") ); // ...puis on reimporte les donnees http://www.sqlite.org/faq.html#q11 (methode portable utilisant l'API SQL mais risque de debordement de memoire avec sql_fetchall...)
 				if ($ok)
-					sql_drop_table("spip_temp$table"); // ...et enfin on supprime la table de transition http://www.sqlite.org/faq.html#q11
+					$ok = sql_drop_table("spip_temp$table"); // ...et enfin on supprime la table de transition http://www.sqlite.org/faq.html#q11
 			}
 			break;
 		default :
@@ -137,6 +138,7 @@ function association_change_pk($table, $row_old, $row_new, $row_int='') {
 				}
 			}
 	}
+	return $ok;
 }
 
 // v0.30 (Associaspip 1.9.1)
@@ -166,7 +168,7 @@ $GLOBALS['association_maj'][30] = array(
 	// et on ajoute une entree caisses
 	array('sql_insert', 'spip_asso_banques', "(code)", "('caisse')"),
 	// et on ajoute un champ date
-	array('sql_alter', "TABLE spip_asso_banques ADD \"date\" DATE NOT NULL "), //!\ 'date' fait partir des mots reserves du SQL... https://dev.mysql.com/doc/refman/4.1/en/reserved-words.html https://dev.mysql.com/doc/refman/4.1/en/server-sql-mode.html#sqlmode_ansi_quotes
+	array('sql_alter', "TABLE spip_asso_banques ADD \"date\" DATE NOT NULL"), //!\ 'date' fait partir des mots reserves du SQL... https://dev.mysql.com/doc/refman/4.1/en/reserved-words.html https://dev.mysql.com/doc/refman/4.1/en/server-sql-mode.html#sqlmode_ansi_quotes
 //<r12523
 /*
 	// les livres de comptes ? (table supprimee par r13839)
@@ -175,13 +177,13 @@ $GLOBALS['association_maj'][30] = array(
 	    $association_tables_principales['spip_asso_livres']['key'],
 	    TRUE), // champs : id_livre, valeur, libelle
 	// initialisation du livre des comptes (donnees plus inserees des v0.40)
-	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités') "),
+	array('sql_insert', 'spip_asso_livres', "(valeur, libelle)", "('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités')"),
 */
 //@r13971
 	// asso_profil est enrichi
-	array('sql_alter', "TABLE spip_asso_profil ADD dons TEXT NOT NULL DEFAULT 'oui' "),
-	array('sql_alter', "TABLE spip_asso_profil ADD ventes TEXT NOT NULL DEFAULT 'oui' "),
-	array('sql_alter', "TABLE spip_asso_profil ADD comptes TEXT NOT NULL DEFAULT 'oui' "),
+	array('sql_alter', "TABLE spip_asso_profil ADD dons TEXT NOT NULL DEFAULT 'oui'"),
+	array('sql_alter', "TABLE spip_asso_profil ADD ventes TEXT NOT NULL DEFAULT 'oui'"),
+	array('sql_alter', "TABLE spip_asso_profil ADD comptes TEXT NOT NULL DEFAULT 'oui'"),
 //@r15981
 	// asso_bienfaiteurs devient asso_dons
 	array('sql_alter', "TABLE spip_asso_bienfaiteurs RENAME TO spip_asso_dons"),
@@ -191,7 +193,7 @@ $GLOBALS['association_maj'][30] = array(
 $GLOBALS['association_maj'][40] = array(
 //<r12524
 	// validation des ecritures comptables
-	array('sql_alter',"TABLE spip_asso_comptes ADD valide TEXT NOT NULL "),
+	array('sql_alter',"TABLE spip_asso_comptes ADD valide TEXT NOT NULL"),
 	// nouvelle table des participations aux activites
 	array('sql_create','spip_asso_activites',
 		$association_tables_principales['spip_asso_activites']['field'],
@@ -202,7 +204,7 @@ $GLOBALS['association_maj'][40] = array(
 // v0.50 (Associaspip 1.9.1)
 $GLOBALS['association_maj'][50] = array(
 //<r12524
-#	array('sql_alter',"TABLE spip_asso_profil ADD indexation TEXT NOT NULL "), // supprime par r13971 ou r12530
+#	array('sql_alter',"TABLE spip_asso_profil ADD indexation TEXT NOT NULL"), // supprime par r13971 ou r12530
 //@r16186
 	// asso_activites.accompagne se decompose en asso_activites.membres + asso_activites.non_membres
 	array('sql_alter', "TABLE spip_asso_activites ADD membres TEXT NOT NULL"),
@@ -241,7 +243,7 @@ $GLOBALS['association_maj'][61] = array(
 	array('sql_update', 'spip_asso_plan', array('solde_anterieur' => 'solde'), 1),
 	array('sql_alter', "TABLE spip_asso_plan DROP solde"),
 	// le champ de la date anterieure est renomme de facon plus parlante
-	array('sql_alter', "TABLE spip_asso_plan ADD date_anterieure DATE NOT NULL DEFAULT '0000-00-00' "),
+	array('sql_alter', "TABLE spip_asso_plan ADD date_anterieure DATE NOT NULL DEFAULT '0000-00-00'"),
 	array('sql_update', 'spip_asso_plan', array('date_anterieure' => 'date'), 1),
 	array('sql_alter', "TABLE spip_asso_plan DROP date"),
 	// et un nouveau champ de classe comptable
@@ -252,10 +254,10 @@ $GLOBALS['association_maj'][61] = array(
 #	array('sql_delete', 'spip_asso_profil', "nom=indexation"), //!\ fait par r12530
 );
 
-function association_maj_16181(){
-	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+function association_maj_16181() {
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // On utilise "Inscription 2" et sa table "auteurs_elargis" est la...
 		// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16186) ou la table (r38192)
-		$champs = array('id_auteur', 'nom', 'prenom', 'sexe', 'fonction', 'email', 'numero', 'rue', 'cp', 'ville', 'telephone', 'portable', 'montant', 'relance', 'divers', 'remarques', 'vignette', 'naissance', 'profession', 'societe', 'identifiant', 'passe', 'creation', 'secteur', 'publication'); // champs pris en compte dans r16186... (on met id_auteur en tete par rapport a r16249 plus loin)
+		$champs = array('id_auteur', 'nom', 'prenom', 'sexe', 'fonction', 'email', 'numero', 'rue', 'cp', 'ville', 'telephone', 'portable', /*'montant',*/ 'relance', 'divers', 'remarques', 'vignette', 'naissance', 'profession', 'societe', 'identifiant', 'passe', 'creation', 'secteur', 'publication'); // champs pris en compte dans r16186... (on met id_auteur en tete par rapport a r16249 plus loin)
 		$liste_maj = sql_select(implode(', ', $champs), 'spip_adherents');
 		while ($maj = sql_fetsel($liste_maj) ) { //!\ I2 en s'installant reprend bien les auteurs ; il faut songer a completer par les informations sur les adherents
 			sql_updateq('spip_auteurs_elargis', $maj, 'id_auteur='.$maj['id_auteur']);
@@ -265,7 +267,7 @@ function association_maj_16181(){
 		foreach ($champs as $champ) { //@r16186
 			sql_alter("TABLE spip_asso_adherents DROP $champ");
 		}
-	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // On utilise "Inscription 2" ...mais la table auteurs_elargis est absente...
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 62;
 		return;
@@ -273,10 +275,10 @@ function association_maj_16181(){
 }
 // v0.62 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][62] = array(
-//@r16186
-	// asso_adherents.statut devient asso_adherents.statut_relance (nom utilise par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ?)
+//@r16186+r16199
+	// asso_adherents.statut devient asso_adherents.statut_relance (nom recherche par I2 si je comprends bien http://zone.spip.org/trac/spip-zone/browser/tags/inscription2_192/base/inscription2_installer.php#L70 ? mais I2 utilise statut_interne d'apres http://zone.spip.org/trac/spip-zone/changeset/16209/_plugins_/_test_/Association/Association_1.9.2/exec/action_cotisations.php#L31 ! bon, pas inclus dans maj_16181...)
 	array('sql_alter', "TABLE spip_asso_adherents ADD statut_relance TEXT NOT NULL"),
-	array('sql_update', 'spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''")
+	array('sql_update', 'spip_asso_adherents', array('statut_relance' => 'statut'), "statut<>''"),
 	array('sql_alter', "TABLE spip_asso_adherents DROP statut"),
 	// migration vers "Inscription2"
 	array('association_maj_16181'),
@@ -284,14 +286,14 @@ $GLOBALS['association_maj'][62] = array(
 	array('sql_alter', "TABLE spip_asso_activites DROP accompagne"), //cf. v0.50
 //@r18150
 	// possibilite d'avoir des references comptables actives ou non
-	array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL "),
+	array('sql_alter',"TABLE spip_asso_plan ADD actif TEXT NOT NULL"),
 );
 
-function association_maj_18423(){
-	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+function association_maj_18423() {
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // On utilise "Inscription 2" et sa table "auteurs_elargis" est la...
 		// asso_adherents perd les champs : id_adherent, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4
 		sql_drop_table('spip_asso_adherents'); // (suppression effective dans r20002 et) on utilise spip_auteurs_elargis jusqu'a la resurection en r37532
-	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // On utilise "Inscription 2" ...mais la table auteurs_elargis est absente...
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 63;
 		return;
@@ -306,12 +308,12 @@ $GLOBALS['association_maj'][63] = array(
 	array('sql_alter',"TABLE spip_asso_ventes ADD id_acheteur BIGINT NOT NULL"),
 );
 
-function association_maj_37532(){
-	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // le plugin "Inscription 2" est la...
+function association_maj_16315() {
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // On utilise "Inscription 2" et sa table "auteurs_elargis" est la...
 		// champs manquants dans auteurs_elargis qui provoquaient des disfonctionnement signales sur le forum
 		sql_alter("TABLE spip_auteurs_elargis ADD validite DATE NOT NULL default '0000-00-00'");
 		sql_alter("TABLE spip_auteurs_elargis ADD montant FLOAT NOT NULL default '0'");
-		sql_alter("TABLE spip_auteurs_elargis ADD date DATE NOT NULL default '0000-00-00' ");
+		sql_alter("TABLE spip_auteurs_elargis ADD \"date\" DATE NOT NULL default '0000-00-00'"); //!\ 'date' fait partir des mots reserves du SQL... https://dev.mysql.com/doc/refman/4.1/en/reserved-words.html https://dev.mysql.com/doc/refman/4.1/en/server-sql-mode.html#sqlmode_ansi_quotes
 		// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16315) ou la table (r38192)
 		// on utilise des @sql_... suite au deplacement en maj_64 : ca va hurler chez ceux qui avaient fait la maj_62 avant correction...
 		$champs = array('id_auteur', 'montant', 'date', 'categorie'); // champs pris en compte dans r16315... (sauf 'statut_relance' deja supprime dans r16186)
@@ -320,10 +322,10 @@ function association_maj_37532(){
 			@sql_updateq('spip_auteurs_elargis', $maj, 'id_auteur='.$maj['id_auteur']);
 		}
 		// asso_adherents perd les champs migres...
-		foreach ($champs as $champ) { //@r16315
+		foreach ($champs as $champ) { //@r16315+r18423
 			@sql_alter("TABLE spip_asso_adherents DROP $champ");
 		}
-	} elseif (_ASSOCIATION_INSCRIPTION2) { // le plugin "Inscription 2" n'est pas la... mais on n'utilise pas sa simulation..?
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // On utilise "Inscription 2" ...mais la table auteurs_elargis est absente...
 		if (!$GLOBALS['association_maj_erreur'])
 			$GLOBALS['association_maj_erreur'] = 64;
 		return;
@@ -332,28 +334,50 @@ function association_maj_37532(){
 // v0.64 (Associaspip 1.9.2/2.0)
 $GLOBALS['association_maj'][64] = array(
 //@r25365
-	array('sql_alter',"TABLE spip_asso_prets ADD id_ressource VARCHAR(20) NOT NULL "),
-//@r37532
-	// Optionnalisation du plugin "Inscription2" qui n'est plus maintenu...
+	array('sql_alter',"TABLE spip_asso_prets ADD id_ressource VARCHAR(20) NOT NULL"),
+//@r16315+r18423+r34264
+	array('association_maj_16315'),
+);
+
+function association_maj_37532() {
+	if (_ASSOCIATION_AUTEURS_ELARGIS == 'spip_auteurs_elargis') { // On utilise "Inscription 2" et sa table "auteurs_elargis" est la...
+		// asso_adherents reloaded
+		global $association_tables_principales;
+		@sql_create('spip_asso_adherents',
+			$association_tables_principales['spip_asso_adherents']['field'],
+			$association_tables_principales['spip_asso_adherents']['key'],
+		FALSE); // re-creation (cf. maj_20002) avec les champs communs (ci apres) et : id_adherent, id_asso, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4, statut?/statut_relance?/statut_interne? (cf. r16186+r16199 et r37532)
+		$champs_communs = 'nom, prenom, sexe, fonction, email, validite, numero, rue, cp, ville, telephone, portable, montant, date, relance, categorie, divers, remarques, vignette, id_auteur, naissance, profession, societe, identifiant, passe, creation, secteur, publication, commentaire'; // champs pris en compte dans r16186+r16315 (cf maj_16181+maj_16315) +r19708
+		$liste_maj = sql_select($champs_communs, 'spip_auteurs_elargis');
+		while ($maj = sql_fetsel($liste_maj) ) { // re-import necessaire pour passer en v0.7 qui se passe de I2
+			sql_insertq('spip_adherents', $maj);
+		}
+	} elseif (_ASSOCIATION_INSCRIPTION2) { // On utilise "Inscription 2" ...mais la table auteurs_elargis est absente...
+		if (!$GLOBALS['association_maj_erreur'])
+			$GLOBALS['association_maj_erreur'] = 65;
+		return;
+	}
+}
+// v0.65 (Associaspip 1.9.2/2.0)
+$GLOBALS['association_maj'][65] = array(
+//@r16315+r18423
+	// Optionnalisation du plugin "Inscription2" : on supprime ce qu'il reste de asso_adherents
+	array('association_maj_18423'), //!\ deplace de maj_62 suite a correction dans r16315
+//@r37532+r37978+r37979
+	// Optionnalisation du plugin "Inscription2" : on recree propremment asso_adherents
 	array('association_maj_37532'),
-	array('association_maj_16181'), //!\ deplace de maj_62 suite a correction dans r37532
-	// asso_adherents reloaded
-	array('@sql_create','spip_asso_adherents',
-		$association_tables_principales['spip_asso_adherents']['field'],
-	    $association_tables_principales['spip_asso_adherents']['key'],
-	    FALSE), // re-creation (cf. maj_20002) avec les champs : id_adherent, nom, prenom, sexe, fonction, email, validite, numero, rue, cp, ville, telephone, portable, montant, date, statut, relance, divers, remarques, vignette, id_auteur, id_asso, categorie, naissance, profession, societe, identifiant, passe, creation, maj, utilisateur1, utilisateur2, utilisateur3, utilisateur4, secteur, publication, statut_interne, commentaire
-//@r37???
-	// asso_adherents.statut_relance devient asso_adherents.statut_interne
+//@r37532
+	// asso_adherents.statut_relance devient asso_adherents.statut_interne (harmonisation avec auteurs_elargis ?)
 	array('sql_alter', "TABLE spip_asso_adherents ADD statut_interne TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_adherents', array('statut_interne' => 'statut_relance'), 1),
 	array('sql_alter', "TABLE spip_asso_adherents DROP statut_relance"),
 );
 
-// v0.65 (Associaspip 1.9.2/2.0)
+// v0.70 (Associaspip 1.9.2/2.0)
 $GLOBALS['association_maj'][37869] = array(
 //@r37869
 	// spip_asso_adherents.nom devient spip_asso_adherents.nom_famille
-	array('sql_alter', "TABLE spip_asso_adherents ADD nom_famille TEXT NOT NULL "),
+	array('sql_alter', "TABLE spip_asso_adherents ADD nom_famille TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_adherents', array('nom_famille' => 'nom'), "nom<>''"),
 	array('sql_alter', "TABLE spip_asso_adherents DROP nom"),
 );
@@ -379,31 +403,31 @@ function association_maj_38190() {
 	} else
 		spip_log("maj_38190: echec de  la creation de spip_asso_metas");
 }
-// v0.65 (Associaspip 1.9.2/2.0)
+// v0.80 (Associaspip 1.9.2/2.0)
 $GLOBALS['association_maj'][38192] = array(
 //@r38190
 	// Utilisation de asso_metas ! Exit le plugin "CFG"
 	array('association_maj_38190'),
 );
 
-// v0.65 (Associaspip 2.0)
+// v1.00 (Associaspip 2.0)
 $GLOBALS['association_maj'][38258] = array(
 	// spip_asso_adherents devient spip_asso_membres
-	array('sql_alter', "TABLE spip_asso_adherents RENAME TO spip_asso_membres"), // a noter que spip_asso_adherents n'etait plus utilise depuis r20002+r20034 ! puis est revenu en r37532 dans l'idee de pouvoir suppleer spip_auteurs_elargis !
+	array('sql_alter', "TABLE spip_asso_adherents RENAME TO spip_asso_membres"), // a noter que asso_adherents n'etait plus utilise depuis r20002+r20034 ! puis est revenu en r37532 dans l'idee de pouvoir suppleer auteurs_elargis !
 	// ...et la cle de asso_membres change...
 	array('sql_alter', "TABLE spip_asso_membres DROP id_adherent"), // plus utilise depuis r20076
-	array('sql_alter', "TABLE spip_asso_adherents  ADD PRIMARY KEY (id_auteur) "), // ce champ est NOT NULL et unique (c'est en fait une cle etrangere auteurs.id_auteur)
+	array('sql_alter', "TABLE spip_asso_adherents  ADD PRIMARY KEY (id_auteur)"), // ce champ est NOT NULL et unique (c'est en fait une cle etrangere auteurs.id_auteur)
 	// asso_adherents.numero et asso_adherents.rue fusionnent en asso_membres.adresse
-	array('sql_alter', "TABLE spip_asso_membres ADD adresse TEXT NOT NULL "),
+	array('sql_alter', "TABLE spip_asso_membres ADD adresse TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_membres', array('adresse' => "CONCAT(numero,CONCAT(', ',rue))") ), // l'ordre inverse est possible aussi, et dans les deux cas on peut ne pas avoir de virgule ou alors un autre symbole :-S
 #	array('sql_alter', "TABLE spip_asso_membres DROP numero"), // garder pour ceux qui veulent refaire la requete a leur sauce
 #	array('sql_alter', "TABLE spip_asso_membres DROP rue"), // garder pour ceux qui veulent refaire la requete a leur sauce
 	// spip_asso_adherents.cp devient spip_asso_membres.code_postal
-	array('sql_alter', "TABLE spip_asso_membres ADD code_postal TEXT NOT NULL "),
+	array('sql_alter', "TABLE spip_asso_membres ADD code_postal TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_membres', array('code_postal' => 'cp'), "cp<>''"),
 	array('sql_alter', "TABLE spip_asso_membres DROP cp"),
 	// spip_asso_adherents.portable devient spip_asso_membres.mobile
-	array('sql_alter', "TABLE spip_asso_membres ADD mobile TINYTEXT NOT NULL "),
+	array('sql_alter', "TABLE spip_asso_membres ADD mobile TINYTEXT NOT NULL"),
 	array('sql_update', 'spip_asso_membres', array('mobile' => 'portable'), "portable<>''"),
 	array('sql_alter', "TABLE spip_asso_membres DROP portable"),
 	// beaucoup sont supprimes : on garde pour ceux qui les utilisent
@@ -428,7 +452,7 @@ $GLOBALS['association_maj'][38258] = array(
 #	array('sql_alter', "TABLE spip_asso_membres DROP utilisateur4"), // cf. r19708
 );
 
-// v0.65 (Associaspip 2.0)
+// v1.00 (Associaspip 2.0)
 $GLOBALS['association_maj'][38578] = array(
 	array('sql_alter', 'TABLE spip_asso_metas RENAME TO spip_association_metas'),
 );
@@ -436,7 +460,7 @@ $GLOBALS['association_maj'][38578] = array(
 // v0.65 (Associaspip 2.0)
 $GLOBALS['association_maj'][39702] = array(
 	// on rajoute asso_comptes.valide
-	array('sql_alter', "TABLE spip_asso_comptes ADD valide TEXT DEFAULT 'oui' "),
+	array('sql_alter', "TABLE spip_asso_comptes ADD valide TEXT DEFAULT 'oui'"),
 	// on rajoute asso_comptes.maj
 	array('sql_alter', "TABLE spip_asso_comptes ADD maj TIMESTAMP"),
 );
