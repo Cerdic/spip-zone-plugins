@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -37,7 +38,7 @@ function formulaires_editer_seance_verifier_dist($id_seance='new', $id_article, 
 	$erreurs = formulaires_editer_objet_verifier('seance', $id_seance, array('id_endroit','date_seance'));
 	
 	if (!checkdate(_request('mois'), _request('jour'), _request('annee')))
-		$erreurs['date_seance'] = _T('seances:date_incorrecte');
+		$erreurs['date_seance'] = _T('seance:date_incorrecte');
 	return $erreurs;
 }
 

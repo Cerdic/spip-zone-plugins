@@ -1,21 +1,40 @@
 <B_seances_endroits>
-[(#ANCRE_PAGINATION)]<ul>
+[(#ANCRE_PAGINATION)]
+<div class="liste-objets seances_endroits">
+<table class="spip liste">
+<caption><strong class="caption"><:seance:liste_des_seances_endroits:></strong></caption>
+<thead>
+		<tr class="first_row">
+			<th class="endroit principale" scope="col"><:seance:endroit:></a></th>
+			<th class="article" scope="col"><:seance:article:></a></th>
+			<th class="modif" scope="col"><:seance:action:></th>
+			<th class="id" scope="col"><:seance:numero:></th>
+		</tr>
+	</thead>
+	<tbody>
+
 <BOUCLE_seances_endroits (SEANCES_ENDROITS){par nom_endroit}{pagination}>
-	<li>#NOM_ENDROIT[ - (#ID_ARTICLE|oui)[ <a href="(#URL_ECRIRE{articles}
-		|parametre_url{id_article,#ID_ARTICLE})" title="<:seances:article:> - #ID_ARTICLE">#ID_ARTICLE</a>]]
-	[<span>(#AUTORISER{modifier,seances_endroit})
+	<tr>
+	<td class="titre principale">#NOM_ENDROIT</td>
+	<td class="article">[(#ID_ARTICLE|oui)[ <a href="(#URL_ECRIRE{article}
+		|parametre_url{id_article,#ID_ARTICLE})" title="<:seance:article:> - #ID_ARTICLE">#ID_ARTICLE</a>]]</td>
+	<td  class="modif">
+	[(#AUTORISER{modifier,seances_endroit})
 		[<a href="(#URL_ECRIRE{seances_endroit_edit}
-			|parametre_url{id_endroit,#ID_ENDROIT})"><:seances:action_modifier:></a>]
+			|parametre_url{id_endroit,#ID_ENDROIT})"><:seance:action_modifier_court:></a>]
 	]
 	<BOUCLE_nbre_seances (SEANCES){id_endroit}></BOUCLE_nbre_seances>#SET{total,#TOTAL_BOUCLE}<//B_nbre_seances>
 	[(#AUTORISER{modifier,seances_endroit})
 		[(#GET{total}|=={0}|oui)
-		[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seances_endroit,#ID_ENDROIT,#SELF})" onclick="return confirm('<:seances:action_supprimer:> [(#NOM_ENDROIT)] ?')"><:seances:action_supprimer:></a></span>]]
-		[(#GET{total}|>{0}|oui)
-		 | <:seances:action_supprimer:>]
-	</span>]
-	</li>
+		[ | <a href="(#URL_ACTION_AUTEUR{supprimer_seances_endroit,#ID_ENDROIT,#SELF})" onclick="return confirm('<:seance:action_supprimer:> [(#NOM_ENDROIT)] ?')"><:seance:action_supprimer_court:></a></span>]]
+		[ | (#GET{total}|>{0}|oui)<:seance:action_supprimer_court:>]
+	]
+	</td>
+	<td class="id">#ID_ENDROIT</td>
+	</tr>
 </BOUCLE_seances_endroits>
-</ul>
-[<p class='pagination'>(#PAGINATION)</p>]
+</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div><!-- /liste-objets -->
 </B_seances_endroits>

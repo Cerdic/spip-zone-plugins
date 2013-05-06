@@ -22,7 +22,7 @@ function action_editer_seances_endroit_dist() {
 // inserer seances_endroit
 function insert_seances_endroit() {
 	$champs = array(
-		'nom_endroit' => _T('seances:item_nouvel_seances_endroit')
+		'nom_endroit' => _T('seance:item_nouvel_seances_endroit')
 	);
 	
 	// Envoyer aux plugins

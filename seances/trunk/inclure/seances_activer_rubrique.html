@@ -1,16 +1,15 @@
 #CACHE{0}
 <B_etat_rubrique>
-<div class="cadre cadre-r seances">
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{seance-24.png}|balise_img{'',cadre-icone}|concat{<:seance:seances:>},'simple','titrem'})]
 <BOUCLE_etat_rubrique (RUBRIQUES){id_rubrique}{tout}>
 [(#AUTORISER{modifier,seances})
-	<img src="#CHEMIN{images/seances-32.png}" height="32" width="32" style="height: 32px; width: 32px; margin-right: 10px; float: left;" alt="seances" />
 	[(#SEANCE|=={0}|oui)
-		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,#ENV{id_rubrique},#SELF})"><:seances:action_activer_seances_rubrique:></a>]
+		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,#ENV{id_rubrique},#SELF})"><:seance:action_activer_seances_rubrique:></a>]
 	]
 	[(#SEANCE|=={1}|oui)
-		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,-#ENV{id_rubrique},#SELF})"  onclick="return confirm('<:seances:confirmer_desactiver_seances_rubrique:>')"><:seances:action_desactiver_seances_rubrique:></a>]
+		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,-#ENV{id_rubrique},#SELF})"  onclick="return confirm('<:seance:confirmer_desactiver_seances_rubrique:>')"><:seance:action_desactiver_seances_rubrique:></a>]
 	]
 ]
 </BOUCLE_etat_rubrique>
-</div>
+#BOITE_FERMER
 </B_etat_rubrique>

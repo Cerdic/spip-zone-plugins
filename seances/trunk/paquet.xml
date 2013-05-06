@@ -1,0 +1,30 @@
+<paquet
+	prefix="seances"
+	categorie="date"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="prive/themes/spip/images/seance-128.png"
+	schema="1.0.0"
+	documentation="http://www.spip-contrib.net/spip.php?article3599"
+>	
+
+	<nom>S&#233;ances</nom>
+	<!-- Gestion de dates de séances et de leur répétition -->
+
+	<auteur>Dominique Wojylac</auteur>
+
+	<copyright>2010</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tables_seances.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/tables_seances.php" />
+	<pipeline nom="affiche_milieu" inclure="seances_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="seances_pipelines.php" />
+	<pipeline nom="autoriser" inclure="seances_autoriser.php" />
+	<pipeline nom="header_prive_css" inclure="seances_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="seances_pipelines.php" />
+	<menu nom="seances_endroits" titre="seance:seances_endroits" parent="menu_edition" icone="images/seance-16.png" action="seances_endroits" />
+	<menu nom="seances_config" titre="seance:seances_configuration" parent="menu_configuration" icone="images/seance-16.png" action="seances_configuration" />
+</paquet>

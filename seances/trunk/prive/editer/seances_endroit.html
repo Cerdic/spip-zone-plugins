@@ -1,7 +1,2 @@
-<div class="cadre-formulaire-editer">
-<div class="entete-formulaire">
-	<a href="#ENV**{retour}" class="seances_action"><:seances:retour:></a>
-	<p><:seances:info_modifier_seances_endroit:></p>
-</div>
-#FORMULAIRE_EDITER_SEANCES_ENDROIT{#ENV{id_endroit,new},#ENV{retour}}
-</div>
+[(#SET{retour,[(#URL_ECRIRE{seances_endroits}|parametre_url{id_endroit,#ENV{id_endroit}})]})]
+#FORMULAIRE_EDITER_SEANCES_ENDROIT{#ENV{id_endroit,new},#GET{retour}}

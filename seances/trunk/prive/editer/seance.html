@@ -1,10 +1,11 @@
+[(#SET{retour,[(#URL_ECRIRE{article}|parametre_url{id_article,#ENV{id_article}})]})]
 <div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
-	<a href="#ENV**{retour}" class="seances_action"><:seances:retour:></a>
+	[<a href="(#GET{retour})" class="seances_action"><:seance:retour:></a>]
 	<BOUCLE_titre(ARTICLES){id_article}{statut IN 'prop','prepa','publie'}>
-	[<h1>(#TITRE|supprimer_numero)[ : (#ENV{id_seance}|=={new}|?{<:seances:nouvelle_seance:>,<:seances:modifier_seance:>})]</h1>]
+	[<h1>(#TITRE|supprimer_numero)[ : (#ENV{id_seance}|=={new}|?{<:seance:nouvelle_seance:>,<:seance:modifier_seance:>})]</h1>]
 	</BOUCLE_titre>
 	
 </div>
-#FORMULAIRE_EDITER_SEANCE{#ENV{id_seance,new},#ENV{id_article},#ENV{retour},#ENV{duplicate,''}}
+#FORMULAIRE_EDITER_SEANCE{#ENV{id_seance,new},#ENV{id_article},#GET{retour},#ENV{duplicate,''}}
 </div>

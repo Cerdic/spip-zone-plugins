@@ -12,7 +12,7 @@
 	<ul>
 		<li class="saisie obligatoire[ (#ENV*{erreurs}|table_valeur{id_endroit}|oui)erreur]">
 		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{id_endroit})</span>]
-		<label for="id_endroit" id="label_id_endroit"><:seances:seances_endroit:></label>
+		<label for="id_endroit" id="label_id_endroit"><:seance:seances_endroit:></label>
 		[<!-- (#REM) selection endroit -->]
 		<select name="id_endroit" id="id_endroit" class="select">
 			[(#INCLURE{fond=formulaires/inc/seances_select_endroits,id_endroit=#ENV{id_endroit}})]
@@ -21,7 +21,7 @@
 		
 		<li class="saisie obligatoire[ (#ENV*{erreurs}|table_valeur{date_seance}|oui)erreur]">
 		[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{date_seance})</span>]
-		<label for="jour_seance" id="label_jour_seance"><:seances:date_seance:></label>
+		<label for="jour_seance" id="label_jour_seance"><:seance:date_seance:></label>
 		<select name="jour" id="jour_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_jours,jour=#ENV{jour}})]
 		</select>
@@ -31,24 +31,24 @@
 		<select name="annee" id="annee_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_annee,annee=#ENV{annee}})]
 		</select>
-		<:seances:seance_a:>
+		<:seance:seance_a:>
 		<select name="heure" id="heure_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_heure,heure=#ENV{heure}})]
 		</select>
-		<:seances:symbole_heure:>
+		<:seance:symbole_heure:>
 		<select name="minutes" id="heure_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_minutes,minutes=#ENV{minutes}})]
 		</select>
-		<:seances:symbole_minute:>
+		<:seance:symbole_minute:>
 		</li>
 		<li class="saisie">
-			<label for="remarque_seance" id="label_remarque_seance"><:seances:remarque_seance:></label>
+			<label for="remarque_seance" id="label_remarque_seance"><:seance:remarque_seance:></label>
 			<input type="text" class="text" name="remarque_seance" id="remarque_seance" value="#ENV{remarque_seance}" />
 		</li>
 	</ul>
 	[<!--(#REM) pour extra et autre -->]
 		<!--extra-->
-	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="<:seances:action_enregistrer:>" /></p>
+	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="<:seance:action_enregistrer:>" /></p>
 	</form>
 	]
 </div>

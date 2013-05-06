@@ -1,18 +1,15 @@
 [<!-- (#REM) Dans Editer on affiche la liste des seances_endroits et un bouton pour la création d'un nouvel endroit -->]
 [(#AUTORISER{voir,seances_endroits})
-	<h1><:seances:liste_des_seances_endroits:></h1>
-	<div class="ajax cadre cadre-e" id="liste_seances_endroits" >
+	<div class="ajax">
 	<INCLURE{fond=inclure/liste_seances_endroits,env,ajax} />
 	</div>
 	<!--#navigation-->
-	<div class="cadre cadre-info">
-	<div class="titrem"><:seances:endroits_seances:></div>
-		[<img src="(#CHEMIN{images/seances-48.png})" height="48" width="48" style="height: 48px; width: 48px; margin-right: 10px; float: left;" alt="seances" />]
-		<p><:seances:description_seances_endroits:></p>
+	[(#BOITE_OUVRIR{<:seance:endroits_seances:>,'simple','titrem'})]
+		<p><:seance:description_seances_endroits:></p>
 		[(#AUTORISER{modifier,seances_endroit})
 			[<a href="(#URL_ECRIRE{seances_endroit_edit}
-				|parametre_url{new,oui})" class="seances_action"><:seances:nouvel_seances_endroit:></a>]
+				|parametre_url{new,oui})" class="seances_action"><:seance:nouvel_seances_endroit:></a>]
 		]
-	</div>
+	#BOITE_FERMER
 	<!--/#navigation-->
 ]
