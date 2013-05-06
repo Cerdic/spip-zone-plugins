@@ -18,11 +18,9 @@ if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
  * Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne, pointant
  * sur un sous-sous-sous-tableau des resultats des preg_match(donc encore des tableaux, indexe numeriquement)
  *
- * @param $module
- * 		nom du module de langue
- * @param $ou_fichier
- * 		racine de l'arborescence a verifier.
- * 		On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
+ * @param array $ou_fichier
+ * 		tableau des racines d'arborescence à vérifier.
+ * 		On n'examine pas les ultimes sous-répertoires charsets/,lang/ , req/ et /.
  * 		On n'examine que les fichiers php (voir le fichier regexp.txt).
  * @return array
  * 		Si une erreur se produit lors du deroulement de la fonction, le tableau resultat contient le libelle
@@ -31,7 +29,7 @@ if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
 function inc_langonet_verifier_l($ou_fichier) {
 
 	// Initialisation du tableau des resultats
-	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
+	// Si une erreur se produit lors du déroulement de la fonction, le tableau contient le libellé
 	// de l'erreur dans $resultats['erreur'].
 	// Sinon, cet index n'existe pas
 	$resultats = array();

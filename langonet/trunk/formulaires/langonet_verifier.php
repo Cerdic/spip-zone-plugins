@@ -87,7 +87,6 @@ function formulaires_langonet_verifier_traiter() {
 		if ($verification != 'utilisation') {
 			$extra = array();
 			foreach ($items_a_corriger as $_item) {
-				// indefini si dejo normalise
 				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
 				$extra[$index] = @$resultats['item_md5'][$_item];
  			}
