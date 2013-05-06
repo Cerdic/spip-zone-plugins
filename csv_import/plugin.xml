@@ -1,39 +1,39 @@
 <plugin>
-	<nom>CSVImport</nom>
-	<slogan>
-		<multi>
-		[fr]Import / Export de fichiers CSV pour les tables SPIP
-		[it]Importazione / Esportazione di file CSV per le tabelle di SPIP.
-		</multi>
-	</slogan>
-	<auteur>C&#233;dric MORIN, [notre-ville.net->http://www.notre-ville.net]</auteur>
-	<licence>&#169; 2006-2009 GPL</licence>
-	<version>0.2.2</version>
-	<icon>img_pack/csvimport-24.png</icon>
-	<etat>stable</etat>
-	<description>
-		<multi>
-		[fr]Ce plugin permet &#224; l'administrateur de d&#233;finir les tables pour lesquelles import et/ou export sont autoris&#233;s ; 
-		ce peut &#234;tre les tables spip ou n'importe quelle autre table de la base. Les tables autoris&#233;es pour l'import/export qui ne sont pas des tables de spip sont declar&#233;es dynamiquement afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump. Si l'on souhaite g&#233;rer aussi les tables des jointures (spip_auteurs_articles par ex), ajouter la ligne suivante dans le fichier mes_options.php du site : <code>$GLOBALS['csvimport_tables_jointures'] = true;</code>
-		[it]Il plugin permette all'amministratore di definire le tabelle per le quali l'importazione e/o l'esportazione sono autorizzate : queste ultime possono essere tabelle di SPIP o qualsiasi altra tabella nel database. Le tabelle autorizzate per l'importazione/esportazione che non sono tabelle di SPIP vengono dichiarate dinamicamente al fine di essere salvate dal plugin Super_Dump
-   	</multi>
-	</description>
-	<lien>http://www.spip-contrib.net/Utilisation-du-plugin-CSV_IMPORT</lien>
-	<prefix>csvimport</prefix>
-	<options>csvimport_mes_options.php</options>
-	<bouton id='csvimport' parent='bando_edition'>
-		<icone>img_pack/csvimport-16.png</icone>
-		<titre>csvimport:csvimport</titre>
-		<url>csvimport_tous</url>
-	</bouton>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>csvimport_boutons.php</inclure>
-	</pipeline>
-	<chemin dir='' type='prive' />
-	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.8;2.1.99]" />
-	<necessite id="SPIP_BONUX" version="[1.8;]" />
-	<traduire gestionnaire="salvatore" module="csvimport" reference="fr" />
+    <nom>CSVImport</nom>
+    <slogan>
+        <multi>
+        [fr]Import / Export de fichiers CSV pour les tables SPIP
+        [it]Importazione / Esportazione di file CSV per le tabelle di SPIP.
+        </multi>
+    </slogan>
+    <auteur>C&#233;dric MORIN, [notre-ville.net->http://www.notre-ville.net]</auteur>
+    <licence>&#169; 2006-2009 GPL</licence>
+    <version>0.2.3</version>
+    <icon>img_pack/csvimport-24.png</icon>
+    <etat>stable</etat>
+    <description>
+        <multi>
+        [fr]Ce plugin permet &#224; l'administrateur de d&#233;finir les tables pour lesquelles import et/ou export sont autoris&#233;s ;
+        ce peut &#234;tre les tables spip ou n'importe quelle autre table de la base. Les tables autoris&#233;es pour l'import/export qui ne sont pas des tables de spip sont declar&#233;es dynamiquement afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump. Si l'on souhaite g&#233;rer aussi les tables des jointures (spip_auteurs_articles par ex), ajouter la ligne suivante dans le fichier mes_options.php du site : <code>$GLOBALS['csvimport_tables_jointures'] = true;</code>
+        [it]Il plugin permette all'amministratore di definire le tabelle per le quali l'importazione e/o l'esportazione sono autorizzate : queste ultime possono essere tabelle di SPIP o qualsiasi altra tabella nel database. Le tabelle autorizzate per l'importazione/esportazione che non sono tabelle di SPIP vengono dichiarate dinamicamente al fine di essere salvate dal plugin Super_Dump
+    </multi>
+    </description>
+    <lien>http://www.spip-contrib.net/Utilisation-du-plugin-CSV_IMPORT</lien>
+    <prefix>csvimport</prefix>
+    <options>csvimport_mes_options.php</options>
+    <bouton id='csvimport' parent='bando_edition'>
+        <icone>img_pack/csvimport-16.png</icone>
+        <titre>csvimport:csvimport</titre>
+        <url>csvimport_tous</url>
+    </bouton>
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>csvimport_boutons.php</inclure>
+    </pipeline>
+    <chemin dir='' type='prive' />
+    <categorie>edition</categorie>
+    <necessite id="SPIP" version="[2.0.8;3.0.99]" />
+    <necessite id="SPIP_BONUX" version="[1.8;]" />
+    <traduire gestionnaire="salvatore" module="csvimport" reference="fr" />
 </plugin>
