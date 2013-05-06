@@ -355,7 +355,7 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 // %s7: liberation de la ressource, en tenant compte du serveur SQL 
 // %s8: code de trace eventuel avant le retour
 define('CODE_CORPS_BOUCLE', '%s
-	if (defined("_BOUCLE_PROFILER") $timer = time()+microtime();
+	if (defined("_BOUCLE_PROFILER")) $timer = time()+microtime();
 	$t0 = "";
 	// REQUETE
 	$iter = IterFactory::create(
