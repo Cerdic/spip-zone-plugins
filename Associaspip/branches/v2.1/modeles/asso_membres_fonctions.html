@@ -1,6 +1,5 @@
 [(#REM)<!-- doc: contrib.spip.net/4174#modeles -->]
-[(#SET{nonphonepad,[^0-9*#]*})]
-<B_membres2groupe>
+<B_equipe>
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
 	<tr class="row_first">
@@ -17,10 +16,10 @@
 	{fonction!=''}
 	{statut_inerne!='sorti'}
 	{par nom_famille,prenom}
-	{pagination #ENV{pagination,10} assofonctions2groupe}
+	{pagination #ENV{pagination,10} assoequipe}
 	>
 	<tr class="agent vcard [row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
-		<td>[<a class="spip_in fn" title="<:asso:lien_voir_auteur:>" href="#URL_PAGE{auteur}|parametre_url{'id_auteur',#ID_AUTEUR}">(#SEXE|association_formater_nom_membre{#PRENOM, #NOM_FAMILLE})</a>]</td>
+		<td>[<a class="spip_in fn" title="<:asso:lien_voir_auteur:>" href="#URL_PAGE{auteur}|parametre_url{'id_auteur',#ID_AUTEUR}">(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE})</a>]</td>
 		<td><a class="spip_in include" href="#vcard-asso"></a> [<a class="spip_in role" title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent,id_auteur=#ID_AUTEUR}">(#FONCTION)</a>]</td>
 	[(#AUTORISER{associer}|oui)
 		<td>[<a class="spip_out tel" href="tel:[(#TELEPHONE|replace{\D})]">(#TELEPHONE|association_telfr)</a>]</td>

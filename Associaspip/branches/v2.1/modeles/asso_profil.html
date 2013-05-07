@@ -3,8 +3,8 @@
     <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
     <p class="adr" id="vcard-asso-adr">
         [<span class="street-address">(#META{/association/rue}|nl2br{1}|typo)</span><br />]
-        [<span class="postal-code">#META{/association/cp}</span>&nbsp;]
-        [<span class="locality">#META{/association/ville}</span>]
+        [<span class="postal-code">(#META{/association/cp})</span>&nbsp;]
+        [<span class="locality">(#META{/association/ville})</span>]
     </p>
     [<p><a class="spip_out tel" href="tel:[(#META{/association/telephone}|replace{\D})]">(#META{/association/telephone}|association_telfr)</a></p>]
     [<p><a class="spip_out email" href="mailto:#META{/association/email}">
