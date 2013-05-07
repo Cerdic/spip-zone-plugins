@@ -31,4 +31,39 @@ function tablematieres_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
+/**
+ * Insertion dans le pipeline jquery_plugins (SPIP)
+ * 
+ * Ajout du fichier javascript du plugin
+ * 
+ * @param array $plugins
+ * 		Le tableau des js déjà insérés
+ * @return array $plugins
+ * 		Le tableau des js complété 
+ */
+function tablematieres_jquery_plugins($plugins){
+	$plugins[] = 'javascript/table_matieres.js';
+	return $plugins;
+}
+
+/**
+ * Insertion dans le pipeline insert_head (SPIP)
+ * 
+ * @param string $flux
+ * 		Le contenu de la balise #INSERT_HEAD
+ * @return string $flux
+ * 		Le contenu de la balise #INSERT_HEAD complétée 		
+ */
+function tablematieres_insert_head($flux){
+	include_spip('inc/config');
+	$flux .= "<script type='text/javascript'>/* <![CDATA[ */
+var tdm_retour = '".preg_replace(
+		',<img,i',
+		'<img alt="' . _T('tdm:retour_table_matiere')
+		.'" title="' . _T('tdm:retour_table_matiere') . '"',
+		_RETOUR_TDM)."';
+var tdm_flottante = ".((lire_config('table_matieres/tdm_flottante','off') == 'on') ? 'true': 'false').";
+/* ]]> */</script>";
+	return $flux;
+}
 ?>

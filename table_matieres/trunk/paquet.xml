@@ -1,7 +1,7 @@
 <paquet
 	prefix="tablematieres"
 	categorie="edition"
-	version="2.1.0"
+	version="2.2.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
 	documentation="http://contrib.spip.net/?article2365"
@@ -17,4 +17,6 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="declarer_tables_interfaces" inclure="tdm_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="tdm_pipelines.php" />
+	<pipeline nom="insert_head" inclure="tdm_pipelines.php" />
 </paquet>

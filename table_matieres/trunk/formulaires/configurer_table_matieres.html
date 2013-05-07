@@ -39,6 +39,12 @@
 					<p class='explications'><:tdm:explication_min:></p>
 					<input type="text" name="min" class="text" size="4" value="#ENV{min,#EVAL{_MIN_ANCRE}}" />
 				</li>
+				<li class="editer_tdm_flottante[ (#ENV**{erreurs}|table_valeur{tdm_flottante}|oui)erreur]">
+					<label for="tdm_flottante"><:tdm:label_tdm_flottante:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{tdm_flottante})</span>]
+					<p class='explications'><:tdm:explication_tdm_flottante:></p>
+					<input type="checkbox" name="tdm_flottante" id="tdm_flottante" [checked="(#ENV{tdm_flottante}|=={on}|?{checked})"] value='on' />
+				</li>
 			</ul>
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />

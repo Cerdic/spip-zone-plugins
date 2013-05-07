@@ -2,7 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 // tester la presence de CFG
 $tm = @unserialize($GLOBALS['meta']['table_matieres']);
 
@@ -10,7 +9,7 @@ define('_AUTO_ANCRE', isset($tm['auto']) ? $tm['auto'] : 'oui');
 define('_LG_ANCRE', isset($tm['lg']) ? $tm['lg'] : 35);
 define('_SEP_ANCRE', isset($tm['sep']) ? $tm['sep'] : '-');
 define('_MIN_ANCRE', isset($tm['min']) ? $tm['min'] : 3);
-define('_RETOUR_TDM', '<a href="'.ancre_url($GLOBALS['REQUEST_URI'],'tdm').'" class="tdm"><img src="' .
+define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
 
@@ -40,7 +39,6 @@ function table_matieres($texte, $retourner = 'tout') {
 	if (!$table_matieres) {
 		$table_matieres = charger_fonction('table_matieres', 'inc');
 	}
-	
 	return $table_matieres($texte, $retourner);
 }
 
@@ -144,7 +142,6 @@ function tdm_remplacements_intertitres() {
 	);
 }
 
-
 /**
  * Intertitre en entrée.
  * L'analyse, stocke l'information et retourne l'intertitre complété 
@@ -190,9 +187,8 @@ function tdm_calculer_titre($intertitre) {
 		if (strlen($url) < 2) $url = "ancre$cId";
 	}
 
-	return array($titre, $url);
+	return array($titre, strtolower($url));
 }
-
 
 /**
  * Remet à zéro la liste des intertitres trouvés
@@ -208,7 +204,6 @@ function tdm_vider_intertitres() {
 function tdm_get_intertitres() {
 	return tdm_stocker_intertitre('');
 }
-
 
 /**
  * Stocke les intertitres trouves.
@@ -232,8 +227,6 @@ function tdm_stocker_intertitre($url='', $titre='', $vider = false) {
 	return $url;
 }
 
-
-
 /**
  * Remplace les @@RETOUR_TDM@@ laissés par les callback de recherche d'intertitres
  * par le lien de retour correspondant
@@ -250,17 +243,12 @@ function tdm_ajouter_liens_retour_table_matieres($texte) {
 		.'" title="' . _T('tdm:retour_table_matiere') . '"',
 		_RETOUR_TDM);
 
-	# Si demande en javascript... (pas tres propre, a refaire avec un js externe)
 	if (TDM_JAVASCRIPT AND !test_espace_prive() AND !_AJAX # crayons
 	) {
-		$_RETOUR_TDM = '<script type="text/javascript"><!--
-		document.write("'.str_replace('"', '\\"', $_RETOUR_TDM).'");
-		--></script>';
+		$_RETOUR_TDM = '';
 	}
-	
 	return str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte);
 }
-
 
 /**
  * Générer une table des matieres a partir du tableau
@@ -273,7 +261,8 @@ function tdm_generer_table_des_matieres($intertitres) {
 	// generer un code HTML 
 	$code = "";
 	foreach ($intertitres as $url=>$titre) {
-		$code .= "<li><a href='".ancre_url($GLOBALS['REQUEST_URI'],$url)."'>$titre</a></li>\n";
+		spip_log(self(),'test.'._LOG_ERREUR);
+		$code .= "<li><a href='#$url'>$titre</a></li>\n";
 	}
 
 	// code HTML de la table des matieres
@@ -282,15 +271,11 @@ function tdm_generer_table_des_matieres($intertitres) {
 		'tableau'=>$intertitres
 	));
 
-	# version en javascript (pas tres propre, a refaire avec un js externe)
 	if (TDM_JAVASCRIPT AND $_table AND !test_espace_prive()
 	AND !_AJAX # crayons
 	) {
 		$_table = inserer_attribut('<div class="encart"></div>',
-			'rel', $_table)
-			.'<script type="text/javascript"><!--
-			$("div.encart").html($("div.encart").attr("rel")).attr("rel","");
-			--></script>';
+			'rel', $_table);
 	}
 
 	return $_table;
@@ -315,7 +300,5 @@ function balise_TABLE_MATIERES_dist($p) {
 	}
 	return $p;
 }
-
-
 
 ?>
