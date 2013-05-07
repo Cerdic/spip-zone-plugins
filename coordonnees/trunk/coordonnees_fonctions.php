@@ -10,23 +10,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Fonction privee mutualisee utilisee par les filtres logo_type_xx
  * Renvoit soit une balise <img> si elle est trouvee, soit une balise <abbr>
  *
- * @param string $id    adr, tel, email, mel
- * @param string $val   le type de coordonnee (dom, home, work etc.)
- * @return string       balise <img> ou <abbr>
+ * @param string $id
+ *		adr, tel, email, mel
+ * @param string $val
+ *		le type de coordonnee (dom, home, work etc.)
+ * @return string
+ *		balise <img> ou <abbr>
 **/
 function logo_type_($id='', $val='') {
 	include_spip('inc/utils');
 	global $formats_logos;
-	switch ($id) {
-		case "adr"; $prefix_lang = "adresse"; break;
-		case "tel"; $prefix_lang = "numero"; break;
-		case "email"; $prefix_lang = "email"; break;
-		case "mel"; $prefix_lang = "email"; break;
-	}
 	$type = strtolower($val);
-	$lang = _T( ($id ? ($prefix_lang.':type_'. $id) : 'perso:type' )  . '_'.$type ); // les types libres sont traites par le fichier de langue perso
+	$lang = $type ? _T( ($id ? ("coordonnees:type_$id") : 'perso:type' )  . "_$type"  ) : '';
 	foreach ($formats_logos as $format) { // inspiration source: ecrire/inc/chercher_logo.php
-		$fichier = 'type'. ($id ? ('_' . $id) : '') . ($type ? ('_' . $type) : '') . '.' . $format;
+		$fichier = 'type'. ($id ? ("_$id") : '') . ($type ? ("_$type") : '') . '.' . $format;
 		if ( $chemin = chemin_image($fichier) )
 			$im = $chemin;
 	}
