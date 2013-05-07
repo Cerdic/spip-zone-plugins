@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	 Kompaktné zoznamy teraz fungujú aj na stránke s viacjazyčnými rubrikami. V tom prípade si treba nainštalovať zásuvný modul [Preklad medzi rubrikami.->http://files.spip.org/spip-zone/tradrub.zip]
 	 
 	 A aby ste mohli využívať systém na preklad, ktorý ponúka tento zásuvný modul, nainštalujte si zásuvný modul [Iný preklad rubrík.->http://files.spip.org/spip-zone/traduction_rubriques_autrement.zip] Tlačidlá prekladu sa zobrazia v hornej časti rubriky s možnosťou vytvoriť chýbajúce preklady kliknutím na sivú kartu. Zásuvný modul sa pokúsi nájsť príslušnú rubriku v sektore pre daný jazyk, ak je preložená nadradená rubrika.',
+	'taa_nom' => 'Traduction d\'articles autrement', # NEW
 	'taa_slogan' => 'Uľahčite si prekladanie článkov.'
 );
 
