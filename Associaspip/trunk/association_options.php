@@ -1451,7 +1451,7 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
 	$res .= '<option value=""';
 	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
 	$res .='>'. _T('asso:entete_tous') ."</option>\n";
-    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '',  'init ASC', "$champ"); // LEFT(field, n) ==  SUBSTRING(field, 1, n)
+    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '', 'init', 'init ASC'); // LEFT(field, n) ==  SUBSTRING(field, 1, n)
     while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['init'].'"';
 		if ($lettre==$val['init']) {
