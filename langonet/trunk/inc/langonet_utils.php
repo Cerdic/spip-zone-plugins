@@ -103,7 +103,7 @@ function langonet_calculer_raccourci($occurrence, $item_md5) {
 }
 
 
-function langonet_verifier_reference($langue, $module, $ou_langue) {
+function langonet_verifier_reference($module, $langue, $ou_langue) {
 	$utilise_tradlang=false;
 	$est_langue_reference=false;
 

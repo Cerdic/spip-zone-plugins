@@ -41,7 +41,7 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
 		// de chaque item. On peut aussi identifier la langue de référence
 		include_spip('inc/langonet_utils');
-		list($est_langue_reference, $utilise_tradlang) = langonet_verifier_reference($langue, $module, $ou_langue);
+		list($est_langue_reference, $utilise_tradlang) = langonet_verifier_reference($module, $langue, $ou_langue);
 
 		// Créer le tableau des items NEW et MODIF si le module est sous TradLang
 		$items_taggues = array();
