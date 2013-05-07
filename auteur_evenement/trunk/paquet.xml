@@ -1,0 +1,24 @@
+<paquet
+	prefix="auteur_evenement"
+	categorie="date"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.8;3.0.*]"
+	logo="prive/themes/spip/images/auteur_evenement-64.png"
+>
+
+	<nom>Auteurs Événement</nom>
+
+	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="agenda" compatibilite="[3.11.8;]" /> 
+	
+	<pipeline nom="affiche_milieu" inclure="auteur_evenement_pipelines.php" /> 
+	<pipeline nom="affiche_auteurs_interventions" inclure="auteur_evenement_pipelines.php" /> 
+
+
+</paquet>
