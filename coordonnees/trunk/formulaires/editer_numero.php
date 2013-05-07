@@ -90,17 +90,10 @@ function formulaires_editer_numero_traiter_dist($id_numero='new', $retour='', $a
 		list($objet, $id_objet) = explode('|', $associer_objet);
 		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-			objet_associer(array('numero' => $id_numero), array($objet => $id_objet));
+			objet_associer(array('numero' => $id_numero), array($objet => $id_objet), array('type'=>_request('type')));
 			if (isset($res['redirect'])) {
 				$res['redirect'] = parametre_url ($res['redirect'], 'id_numero', '', '&');
 			}
-		}
-		// remplir le champ "type" dans la table de liens
-		if ( $type = _request('type') ) {
-			sql_updateq('spip_numeros_liens',
-				array('type' => $type),
-				'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND id_numero='.intval($id_numero)
-			);
 		}
 	}
 	return $res;
