@@ -48,22 +48,14 @@
 	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src})]}|balise_img)]})]]
 ]
 [(#GET{largeur}|match{%}|oui)
-	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src})]}|balise_img|inserer_attribut{style,width:[(#GET{largeur});height:auto;]})]})]
+	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src})]}|balise_img|inserer_attribut{style,'width:100%;height:auto;'})]})]
 ]
-
 [(#GET{hauteur}|=={0}|oui)
 	#SET{hauteur,#GET{logo}|extraire_attribut{height}}
 	[(#GET{hauteur}|=={0}|oui)
 		#SET{hauteur,#CONFIG{mediaspip_player/hauteur_defaut_son,25}
 	]
 ]
-[(#GET{hauteur}|non)
-	#SET{hauteur,#CONFIG{mediaspip_player/hauteur_defaut_son,25}
-]
-[(#GET{largeur}|=={0}|oui)
-	#SET{largeur,#GET{logo}|extraire_attribut{largeur},100}
-]
-
 [(#SET{id_document_voir, [(#ID_DOCUMENT)_][(#VAL{0}|rand{100000})]})]
 
 #SET{variantes,#ARRAY}
@@ -78,11 +70,11 @@
 		(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,auto,1,metadata}}|?{[preload="(#ENV{autobuffer,#ENV{preload,metadata}})"],preload="metadata"})]][(#ENV{loop,non}|in_array{#ARRAY{0,false,1,non}}|non)
 		loop][
 		width="(#GET{largeur}|match{%}|?{'',#GET{largeur}})"]
-		style="[width:(#GET{largeur}|match{%}|?{#GET{largeur},[(#GET{largeur})px]});][height:(#GET{hauteur})px]">
+		style="[width:(#GET{largeur}|match{%}|?{#GET{largeur},[(#GET{largeur})px]});]">
 			<BOUCLE_ssdoc_mp3(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}{extension IN mp3}{tout}>
 			<source type="#MIME_TYPE" src="[(#FICHIER|timestamp|url_absolue)]" />
 			</BOUCLE_ssdoc_mp3>
-			<BOUCLE_ssdoc(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}{extension IN ogg}{tout}>[<source type="#MIME_TYPE" src="(#FICHIER|timestamp|url_absolue)]" />]</BOUCLE_ssdoc>
+			<BOUCLE_ssdoc(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}{extension IN ogg}{tout}>[<source type="#MIME_TYPE" src="(#FICHIER|timestamp|url_absolue)" />]</BOUCLE_ssdoc>
 			[(#EXTENSION|in_array{#ARRAY{0,ogg,1,oga,2,weba,3,mp3,4,webm}}|et{#EXTENSION|in_array{#GET{variantes}}|non}|oui)<source type="#MIME_TYPE" src="[(#FICHIER|timestamp|url_absolue)]" />]
 			[(#EXTENSION|in_array{[(#ARRAY|push{oga}|push{ogg}|push{mp3}|push{flac})]}|non)
 			<object width='#GET{largeur}' height='#GET{hauteur}' type="#MIME_TYPE">
@@ -118,10 +110,18 @@
 			});
 		}
 	}
-	$(function(){
-		ms_player_init_[(#GET{id_document_voir})]();
-		onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
-	});
+	if($('.spip_document_#ID_DOCUMENT > img').size() >= 0){
+		$(window).load(function(){
+			ms_player_init_[(#GET{id_document_voir})]();
+			onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
+		});
+	}
+	else{
+		$(function(){
+			ms_player_init_[(#GET{id_document_voir})]();
+			onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
+		});
+	}
 })(jQuery);
 </script>
 </BOUCLE_tous>

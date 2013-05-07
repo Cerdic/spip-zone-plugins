@@ -278,6 +278,7 @@
 					
 					id.addEventListener("loadedmetadata",function(e){
 						media.ms_start('loadedmetadata');
+						
 						/**
 						 * Cas d'un stream audio (Radio)
 						 */
@@ -473,7 +474,8 @@
 							event.preventDefault();
 						});
 					}
-					if((id.readyState == "4") || (id.readyState == "3")) media.ms_start('canplay');
+					//if((id.readyState == "4") || (id.readyState == "3")) 
+					media.ms_start('canplay');
 				}
 			}else{
 				media.ms_test_fallback(options);
@@ -489,7 +491,7 @@
 				elapsed_time = control.find('.elapsed_time'),
 				remaining_time = control.find('.remaining_time');
 			
-			if(!id.mediacanplay){
+			if(!id.mediacanplay || action == 'loadedmetadata'){
 				if(wrapper.hasClass('player_error')) 
 					wrapper.removeClass('player_error').addClass('loading');
 
@@ -526,7 +528,7 @@
 				if(wrapper.hasClass('loading'))
 					wrapper.removeClass('loading').addClass('paused').find('.play_pause_button').attr('title',ms_player_lang.bouton_lire);
 				
-				if(remaining_time.is('.remaining') && (id.duration != 'Infinity'))
+				if(remaining_time.is('.remaining') && (id.duration != 'Infinity') && !isNaN(id.duration))
 					remaining_time.text('-'+ms_second_to_time(id.duration));
 
 				elapsed_time.text(ms_second_to_time(id.currentTime));
