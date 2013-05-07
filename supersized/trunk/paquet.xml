@@ -1,10 +1,10 @@
 <paquet
 	prefix="supersized"
 	categorie="multimedia"
-	version="0.5.0"
+	version="0.5.1"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
-	logo="prive/themes/spip/images/supersized-32.jpg"
+	logo="prive/themes/spip/images/supersized-64.png"
 	documentation="http://supersized.brubel.net/spip.php?rubrique3"
 	demonstration="http://supersized.brubel.net/spip.php?page=slide"
 >	
