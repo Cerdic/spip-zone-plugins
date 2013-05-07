@@ -18,7 +18,7 @@ function exec_edit_don() {
 	$id_don = association_passeparam_id('don');
 /// AFFICHAGES_LATERAUX (connexes)
 	echo association_navigation_onglets('titre_onglet_dons', 'dons');
-/// AFFICHAGES_LATERAUX : INTRO : resume don
+/// AFFICHAGES_LATERAUX : INTRO : info don
 	echo association_tablinfos_intro('', 'don', $id_don);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	echo association_navigation_raccourcis(array(
@@ -27,7 +27,7 @@ function exec_edit_don() {
 /// AFFICHAGES_CENTRAUX (corps)
 	debut_cadre_association('dons-24.gif', 'ajouter_un_don');
 /// AFFICHAGES_CENTRAUX : FORMULAIRE
-	echo recuperer_fond('prive/editer/editer_asso_dons', array (
+	echo recuperer_fond('prive/editer/editer_asso_don', array (
 		'id_don' => $id_don,
 		'id_auteur' => 0,
 	));

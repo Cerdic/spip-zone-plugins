@@ -12,25 +12,26 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_plan() {
-	if (!autoriser('gerer_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-		include_spip ('association_modules');
-		echo association_navigation_onglets('plan_comptable', 'association');
-		$id_plan = association_passeparam_id('plan');
-		// Notice
-		echo propre(_T('asso:edit_plan'));
-		// datation et raccourcis
-		echo association_navigation_raccourcis(array(
-			array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
-		) );
-		debut_cadre_association('plan_compte.png', 'edition_plan_comptable');
-		echo recuperer_fond('prive/editer/editer_asso_plan', array (
-			'id_plan' => $id_plan
-		));
-		fin_page_association();
-	}
+	sinon_interdire_acces(autoriser('gerer_compta', 'association'));
+	include_spip ('association_modules');
+/// INITIALISATIONS
+	$id_plan = association_passeparam_id('plan');
+/// AFFICHAGES_LATERAUX (connexes)
+	echo association_navigation_onglets('plan_comptable', 'association');
+/// AFFICHAGES_LATERAUX : INTRO : notice plan comptable
+	echo propre(_T('asso:edit_plan'));
+/// AFFICHAGES_LATERAUX : RACCOURCIS
+	echo association_navigation_raccourcis(array(
+		array('plan_comptable', 'grille-24.png', array('plan_comptable', "id=$id_plan"), array('gerer_compta', 'association') ),
+	) );
+/// AFFICHAGES_CENTRAUX (corps)
+	debut_cadre_association('plan_compte.png', 'edition_plan_comptable');
+/// AFFICHAGES_CENTRAUX : FORMULAIRE
+	echo recuperer_fond('prive/editer/editer_asso_plan', array (
+		'id_plan' => $id_plan,
+	));
+/// AFFICHAGES_CENTRAUX : FIN
+	fin_page_association();
 }
 
 ?>

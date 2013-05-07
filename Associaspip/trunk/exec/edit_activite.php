@@ -12,35 +12,34 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_activite() {
-	if (!autoriser('editer_inscriptions', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) ) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-		include_spip ('association_modules');
-		$id_activite = association_passeparam_id('activite');
-		$id_evenement = ($id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : association_recuperer_entier('id_evenement'));
-		echo association_navigation_onglets('titre_onglet_activite', 'activites');
-		if (test_plugin_actif('agenda')) {
-		// INTRO : Rappel Infos Evenement
-
-			$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
-			$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
-			$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
-			$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
-			$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-			echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
-		}
-		// datation et raccourcis
-		echo association_navigation_raccourcis(array(
-			array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
-		) );
-		debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
-		// formulaire
-		echo recuperer_fond('prive/editer/editer_asso_activites', array (
-			'id_activite' => $id_activite,
-			'id_evenement' => $id_evenement));
-		fin_page_association();
+	sinon_interdire_acces(autoriser('editer_inscriptions', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) );
+/// INITIALISATIONS
+	$id_activite = association_passeparam_id('activite');
+	$id_evenement = ($id_activite ? sql_getfetsel('id_evenement', 'spip_asso_activites', "id_activite=$id_activite") : association_recuperer_entier('id_evenement'));
+/// AFFICHAGES_LATERAUX (connexes)
+	echo association_navigation_onglets('titre_onglet_activite', 'activites');
+/// AFFICHAGES_LATERAUX : INTRO : info evenement
+	if (test_plugin_actif('agenda')) {
+		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
+		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
+		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
+		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+		echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 	}
+/// AFFICHAGES_LATERAUX : RACCOURCIS
+	echo association_navigation_raccourcis(array(
+		array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+	) );
+/// AFFICHAGES_CENTRAUX (corps)
+	debut_cadre_association(($id_activite?'activites.gif':'panier_in.gif'), 'activite_titre_mise_a_jour_inscriptions');
+/// AFFICHAGES_CENTRAUX : FORMULAIRE
+	echo recuperer_fond('prive/editer/editer_asso_activite', array (
+		'id_activite' => $id_activite,
+		'id_evenement' => $id_evenement,
+	));
+/// AFFICHAGES_CENTRAUX : FIN
+	fin_page_association();
 }
 
 ?>
