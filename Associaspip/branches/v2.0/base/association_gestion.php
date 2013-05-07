@@ -221,7 +221,7 @@ $GLOBALS['association_maj'][50] = array(
 $GLOBALS['association_maj'][60] = array(
 //@r12530
 	// Passage au plugin "CFG"...
-	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
+	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_asso_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
 	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil ne sert donc plus...
 //@r13839
 	// suppression de la table des livres

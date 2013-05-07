@@ -202,7 +202,7 @@ $GLOBALS['association_maj'][50] = array(
 $GLOBALS['association_maj'][60] = array(
 //@r12530
 	// Passage au plugin "CFG"...
-	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
+	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_asso_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
 	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil ne sert donc plus...
 //@r13839
 	// suppression de la table des livres
@@ -238,14 +238,14 @@ $GLOBALS['association_maj'][61] = array(
 	array('association_change_pk', 'asso_plan', 'id_banque', 'id_plan'),
 );
 
-// Avec Associaspip 2.1 le support de "Inscription2" est abandonné... La constante
+// Avec Associaspip 2.1 le support de "Inscription2" est abandonne... La constante
 // '_ASSOCIATION_INSCRIPTION2' n'est donc plus définie dans association_options.php
 // (elle vaut donc FALSE --en fait elle est NULL car unset...) Du coup, il faut
 // le faire ici pour ne pas fausser les migrations qui en dependent, mais en
 // preferant une variable (locale au script et) du meme nom :
 $_ASSOCIATION_INSCRIPTION2 = ($GLOBALS['association_metas']['base_version']>0.6 AND $GLOBALS['association_metas']['base_version']<0.7); // pour etre strict c'aurait du etre 0.62 a 0.64 ?
 
-// Avec Associaspip 2.1 le support de "Inscription2" est abandonné... La constante
+// Avec Associaspip 2.1 le support de "Inscription2" est abandonne... La constante
 // '_ASSOCIATION_AUTEURS_ELARGIS' n'est donc plus définie dans association_options.php
 // Il faut donc le faire ici pour ne pas fausser les migrations qui en dependent,
 // mais en preferant une variable (locale au script et) de meme nom pour un
