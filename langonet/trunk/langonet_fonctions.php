@@ -194,7 +194,6 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 				$module = str_replace($reel_dir . '/lang/', '', $module);
 				if (!$exclure_paquet
 				OR ($exclure_paquet	AND (strtolower(substr($module, 0, 7)) != 'paquet-'))) {
-					$liste[$module[1]] = dirname($_fichier) . '/';
 					$langue = ltrim($matches[0][0], '_');
 					$ou_langue = str_replace('../', '', $reel_dir) . '/lang/';
 					$value = $_rep.':'.$module.':'.$langue.':'.$ou_langue;
@@ -265,28 +264,6 @@ function lister_dossiers_plugins($rep_base=null) {
 		}
 	}
 	return $dossiers;
-}
-
-function langonet_identifier_reference($module, $ou_langue, &$tradlang) {
-	$langue = 'fr';
-	$tradlang=false;
-
-	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
-	if (file_exists($rapport_xml)) {
-		$tradlang = true;
-		if ($contenu = spip_file_get_contents($rapport_xml))
-			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
-				$langue = $matches[1];
-	}
-
-	if (!file_exists($fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php')) {
-		$fichiers = preg_files(_DIR_RACINE . $ou_langue, "/lang/${module}_[^/]+\.php$");
-		$langue = '';
-		if ($fichiers[0])
-			$langue = str_replace($module . '_', '', basename($fichiers[0], '.php'));
-	}
-
-	return $langue;
 }
 
 function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {

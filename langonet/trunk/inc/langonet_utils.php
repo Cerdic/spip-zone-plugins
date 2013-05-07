@@ -2,6 +2,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_LANGONET_PATTERN_REFERENCE'))
+	define('_LANGONET_PATTERN_REFERENCE', '#<traduction[^>]*reference="(.*)">#Uims');
+
 
 /**
  * Conversion d'un texte en utf-8
@@ -97,6 +100,90 @@ function langonet_calculer_raccourci($occurrence, $item_md5) {
 	}
 
 	return array($index, $index_brut);
+}
+
+
+function langonet_verifier_reference($langue, $module, $ou_langue) {
+	$utilise_tradlang=false;
+	$est_langue_reference=false;
+
+	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
+	if (file_exists($rapport_xml)) {
+		$utilise_tradlang = true;
+		if ($contenu = spip_file_get_contents($rapport_xml))
+			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+				$est_langue_reference = ($matches[1] == $langue);
+	}
+
+	return array($est_langue_reference, $utilise_tradlang);
+}
+
+
+function langonet_trouver_reference($module, $ou_langue, $force=true) {
+	$langue_reference = 'fr';
+	$tradlang=false;
+
+	// On cherche d'abord si le module est sous tradlang et donc possède un rapport de traduction.
+	// Dans ce cas, on connait exactement la langue de référence.
+	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
+	if (file_exists($rapport_xml)) {
+		$tradlang = true;
+		if ($contenu = spip_file_get_contents($rapport_xml))
+			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+				$langue_reference = $matches[1];
+	}
+
+	// On vérifie que le fichier pour la langue de référence déterminée existe sinon on continue à chercher
+	if ($force
+	AND (!file_exists($fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue_reference . '.php'))) {
+		$fichiers = preg_files(_DIR_RACINE . $ou_langue, "/lang/${module}_[^/]+\.php$");
+		$langue_reference = '';
+		if ($fichiers[0])
+			$langue_reference = str_replace($module . '_', '', basename($fichiers[0], '.php'));
+	}
+
+	return array($langue_reference, $tradlang);
+}
+
+
+function langonet_trouver_module($ou_fichier) {
+
+	static $modules_spip = array('ecrire/' => 'ecrire', 'prive/' => 'spip', 'squelettes-dist/' => 'public');
+
+	if (in_array($ou_fichier, array_keys($modules_spip))) {
+		// On traite le cas de SPIP : on
+		$module = $modules_spip[$ou_fichier];
+		$langue = 'fr';
+		$ou_langue = 'ecrire/lang/';
+	}
+	else {
+		$module = 'indefini';
+		$langue = 'fr';
+		$ou_langue = $ou_fichier . 'lang/';
+
+		if (is_dir(_DIR_RACINE . $ou_langue)) {
+			if ($rapports_xml = glob(_DIR_RACINE . $ou_langue . '*.xml')) {
+				// On cherche en premier lieu les rapports XML de traduction car il contiennent aussi la langue de
+				// référence et on exclut toujours les fichiers de langue des paquet.xml.
+				foreach ($rapports_xml as $_rapport_xml) {
+					$module_xml = basename($_rapport_xml, '.xml');
+	    			if (strtolower(substr($module_xml, 0, 7)) != 'paquet-') {
+						$module = $module_xml;
+						// On recherche la langue de référence
+						if ($contenu = spip_file_get_contents($_rapport_xml))
+							if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+								$langue = $matches[1];
+						break;
+					}
+				}
+			}
+			else {
+
+			}
+		}
+	}
+
+	return array($ou_langue, $module, $langue);
 }
 
 ?>
