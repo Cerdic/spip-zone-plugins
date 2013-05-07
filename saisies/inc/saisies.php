@@ -276,9 +276,9 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 		}
 		return $tableau;
 	}
-	// Si c'est déjà un tableau on le renvoie tel quel
+	// Si c'est déjà un tableau on lui applique _T_ou_typo (qui fonctionne de manière récursive avant de le renvoyer
 	elseif (is_array($chaine)){
-		return $chaine;
+		return _T_ou_typo($chaine, 'multi');
 	}
 	else{
 		return array();
