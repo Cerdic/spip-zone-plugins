@@ -44,9 +44,9 @@ function inc_langonet_verifier_l($ou_fichier) {
 	if ($fichiers) {
 		include_spip('inc/langonet_utils');
 
-		$item_md5 = array();
-		$fichier_non = array();
+		$items_non = array();
 		$nb_occurrences = 0;
+		$corrections = array();
 		foreach ($fichiers as $_fichier) {
 			$contenu = file($_fichier);
 			if ($contenu) {
@@ -55,13 +55,13 @@ function inc_langonet_verifier_l($ou_fichier) {
 						foreach ($matches[2] as $_cle => $_occurrence) {
 							// Calcul du nom du raccourci de l'item de langue
 							$texte = $_occurrence[0];
-							list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $item_md5);
-							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L()
-							$item_md5[$raccourci] = $texte;
+							list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $corrections);
+							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L() pour les corrections
+							$corrections[$raccourci] = $texte;
 							// Ajout de l'occurrence trouvée dans la liste des erreurs
 							$expression = $matches[0][$_cle][0];
-							$colonne = $matches[0][$_cle][1];
-							$fichier_non[$raccourci][$_fichier][$_no_ligne][$colonne] =
+							$no_colonne = $matches[0][$_cle][1];
+							$items_non[$raccourci][$_fichier][$_no_ligne][$no_colonne] =
 								array($expression, $raccourci_brut, $texte, $_ligne);
 							// Compteur d'occurences
 							$nb_occurrences++;
@@ -72,9 +72,9 @@ function inc_langonet_verifier_l($ou_fichier) {
 		}
 
 		$resultats['ou_fichier'] = $ou_fichier;
-		$resultats['nb_occurrences'] = $nb_occurrences;
-		$resultats['item_non'] = $item_md5;
-		$resultats['fichier_non'] = $fichier_non;
+		$resultats['total_occurrences'] = $nb_occurrences;
+		$resultats['items_non'] = $items_non;
+		$resultats['corrections'] = $corrections;
 	}
 	else {
 		$resultats['erreur'] = _T('langonet:message_nok_arborescence_l');

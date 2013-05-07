@@ -25,38 +25,25 @@ function formulaires_langonet_verifier_l_traiter() {
 	$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
 	$resultats = $langonet_verifier_items($ou_fichier);
 
-	// Pour la vérification de la fonction _L(), on ne choisit pas de fichier de langue. En outre,
-	// à partir du moment où plusieurs arborescences sont scannées il n'est plus possible de construire
-	// un seul fichier de corrections. Aussi, plutôt que d'en construire n, on construit un seul fichier
-	// contenant l'ensemble des items créés.
-	// Néanmoins, pour créer le fichier de langue corrigé en rajoutant les nouveaux items devant remplacer
-	// les appels à _L() il est nécessaire d'en choisir un.
-	// Aussi, on choisit la langue de référence pour le module
-	$langue = 'fr';
-	$module = '';
-	$ou_langue = '';
-
-	// Creation du fichier de langue corrigé avec les items detectes comme
-	// non definis ou obsoletes suivant la verification en cours.
-	// Pour la vérification de la fonction _L(), il est possible de corriger plusieurs fichiers correspondant
-	// à plusieurs arborescences de plugins.
-	$items_a_corriger = $resultats["item_non"];
-	if ($items_a_corriger) {
+	// Creation du fichier de langue corrigé avec les items construits pour chaque cas d'utilisation de
+	// la fonction _L().
+	if ($resultats['total_occurrences'] > 0) {
 		$encodage = 'utf8';
 		$mode = 'fonction_l';
 
-		$extra = array();
-		foreach ($items_a_corriger as $_item) {
-			$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
-			$extra[$index] = @$resultats['item_non'][$_item];
-		}
-
+		// Pour la vérification de la fonction _L(), on ne choisit pas de fichier de langue dans le formulaire.
+		// Néanmoins, il est nécessaire d'en définir un pour créer le fichier de langue corrigé.
+		// On cherche donc un répertoire lang/ dans lequel il existe des fichiers de langue et on essaye de
+		// déterminer le module à corriger ainsi que la langue de référence.
+		// Si aucun module n'est trouvé on choisit le module "indefini" et la langue de référence "fr".
+		list($module, $langue, $ou_langue) = langonet_trouver_module($ou_fichier);
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-
-		// Pour la vérification de la fonction _L(), on regarde si plusieurs plugins ont été corrigés et
-		// on crée des listes séparées d'items à corriger.
-
-//		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+		$retour_corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $resultats["corrections"]);
+		if ($retour_corrections['fichier'])
+			$retour['message_ok']['explication'] = _T('langonet:message_ok_corrections_fonction_l',
+														array('fichier' => $retour_corrections['fichier']));
+		else
+			$retour['message_ok']['explication'] = _T('langonet:message_nok_corrections');
 	}
 
 	// Traitement des resultats

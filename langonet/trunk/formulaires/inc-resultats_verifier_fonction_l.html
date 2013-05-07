@@ -1,15 +1,10 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
-<p><:langonet:info_verification_l:></p>
-<B_arborescences>
-<ul class="spip">
-<BOUCLE_arborescences(DATA) {source table, #ENV{resultats}|table_valeur{ou_fichier}}{par cle}>
-	<li>#VALEUR</li>
-</BOUCLE_arborescences>
-</ul>
-</B_arborescences>
+#SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}}
+<p><:langonet:info_verification_l{arborescence=#GET{arborescence}}:></p>
+[<p>(#ENV*{explication})</p>]
 
 <INCLURE{fond=prive/squelettes/liste/items_l,
-	items=#ENV{resultats}|table_valeur{fichier_non},
-	total_occurrences=#ENV{resultats}|table_valeur{nb_occurrences},
+	items=#ENV{resultats}|table_valeur{items_non},
+	total_occurrences=#ENV{resultats}|table_valeur{total_occurrences},
 	env} />

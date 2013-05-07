@@ -183,7 +183,7 @@ function langonet_trouver_module($ou_fichier) {
 		}
 	}
 
-	return array($ou_langue, $module, $langue);
+	return array($module, $langue, $ou_langue);
 }
 
 ?>

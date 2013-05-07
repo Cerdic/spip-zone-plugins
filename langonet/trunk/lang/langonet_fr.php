@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tradlang_statut_ok' => 'item correctement traduit',
 	'info_tradlang_statut_modif' => 'item dont la traduction est obsolète (référence modifiée)',
 	'info_tradlang_statut_new' => 'item non encore traduit',
-	'info_verification_l' => 'Vous avez choisi de rechercher les cas d\'utilisation de la fonction _L() dans les fichiers PHP inclus dans les arborescences suivantes :',
+	'info_verification_l' => 'Vous avez choisi de rechercher les cas d\'utilisation de la fonction _L() dans les fichiers PHP de l\'arborescence <code>@arborescence@</code>.',
 	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
 	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
@@ -107,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_fichier_log' => 'Le fichier de log contenant les résultats de la vérification n\'a pas pu être créé !',
 	'message_nok_fichier_script' => 'Le fichier de script contenant les commandes de remplacement des fonctions _L par _T n\'a pas pu être créé !',
 	'message_nok_item_trouve' => 'Aucun item de langue ne correspond à la recherche !',
+	'message_nok_corrections' => 'Les corrections n\'ont pas pas pu être intégrées dans le fichier de langue concerné.',
 	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilisé dans un contexte complexe, comme par exemple, _T(\'@module@:item_\'.$variable).',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilisé dans un contexte complexe et pourrait être non défini dans le fichier de langue  «<em>@langue@</em>». Nous vous invitons à le vérifier :',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilisés dans un contexte complexe et pourraient être non définis dans le fichier de langue  «<em>@langue@</em>». Nous vous invitons à les vérifier un par un :',
@@ -143,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-être utilisé dans un contexte complexe. Nous vous invitons à le vérifier :',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :',
 	'message_ok_fichier_verification' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.',
+	'message_ok_corrections_fonction_l' => 'Les corrections des items trouvés ont été intégrés dans le fichier de langue <code>@fichier@</code>. Il convient cependant de réaliser les modifications du code correspondant manuellement',
 
 	// O
 	'onglet_generer' => 'Générer une langue',
