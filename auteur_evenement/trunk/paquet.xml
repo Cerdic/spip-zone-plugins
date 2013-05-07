@@ -1,7 +1,7 @@
 <paquet
 	prefix="auteur_evenement"
 	categorie="date"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.8;3.0.*]"
 	logo="prive/themes/spip/images/auteur_evenement-64.png"
