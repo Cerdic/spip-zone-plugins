@@ -51,20 +51,15 @@ function depublication_execution($flux) {
 	//retourne l'affichage complet
 	return $flux;
 }
-
-
-
 function depublication_taches_generales_cron($taches) {
 
-	$taches['depublication'] = 60; // par exemple toutes les 10 minutes, ne pas descendre en dessous de 30 secondes !
+	$taches['depublication'] = 600; // par exemple toutes les 10 minutes, ne pas descendre en dessous de 30 secondes !
 	spip_log('execution tache cron dépublication','depublication');
 	return $taches;
 }
 
 
-function depublication_header_prive($flux) { 
-	
-	
+function depublication_header_prive($flux) {
 	if (preg_match('"^depublication_.*$"',_request('exec'))) {
 
 		
@@ -89,11 +84,7 @@ function depublication_header_prive($flux) {
 		$flux .='<link rel="stylesheet" href="'.url_absolue(find_in_path('lib/DataTables-1.7.4/media/css/demo_table.css')).'" type="text/css" media="all" />';
 		
 	}
-	
-	
 	return $flux;
-
 }
-
 
 ?>
