@@ -88,7 +88,7 @@ function formulaires_editer_numero_traiter_dist($id_numero='new', $retour='', $a
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_numero = $res['id_numero']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
-		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+		if ($objet AND $id_objet AND include_spip('inc/autoriser') AND autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
 			objet_associer(array('numero' => $id_numero), array($objet => $id_objet), array('type'=>_request('type')));
 			if (isset($res['redirect'])) {
