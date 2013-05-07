@@ -55,7 +55,7 @@ function formulaires_inserer_modeles_charger_dist($formulaire_modele,$modalbox,$
 	return $contexte;
 }
 
-function formulaires_inserer_modeles_verifier_dist() {
+function formulaires_inserer_modeles_verifier_dist($formulaire_modele,$modalbox,$env) {
 	$erreurs = array();
 	
 	if (_request('choisir') && !_request('formulaire_modele'))
@@ -71,7 +71,7 @@ function formulaires_inserer_modeles_verifier_dist() {
 	return $erreurs;
 }
 
-function formulaires_inserer_modeles_traiter_dist() {
+function formulaires_inserer_modeles_traiter_dist($formulaire_modele,$modalbox,$env) {
 	if (_request('inserer')) {
 		include_spip('inc/saisies');
 		include_spip('inc/inserer_modeles');
