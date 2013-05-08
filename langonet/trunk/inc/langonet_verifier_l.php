@@ -55,7 +55,7 @@ function inc_langonet_verifier_l($ou_fichier) {
 						foreach ($matches[2] as $_cle => $_occurrence) {
 							// Calcul du nom du raccourci de l'item de langue
 							$texte = $_occurrence[0];
-							list($raccourci, $raccourci_brut) = langonet_calculer_raccourci($texte, $corrections);
+							list($raccourci, $raccourci_brut) = calculer_raccourci($texte, $corrections);
 							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L() pour les corrections
 							$corrections[$raccourci] = $texte;
 							// Ajout de l'occurrence trouvée dans la liste des erreurs

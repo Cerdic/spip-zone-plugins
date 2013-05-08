@@ -38,25 +38,25 @@ function entite2utf($sujet) {
  * @param string	$occurrence
  * @return string
  */
-function langonet_index_brut($occurrence) {
-	$index = textebrut($occurrence);
-	$index = preg_replace('/\\\\[nt]/', ' ', $index);
-	$index = strtolower(translitteration($index));
-	$index = trim(preg_replace('/\W+/', ' ', $index));
-	$index = preg_replace('/\b(\w+)\W+\1/', '\1', $index);
-	if (strlen($index) > 32) {
+function calculer_raccourci_brut($occurrence) {
+	$raccourci = textebrut($occurrence);
+	$raccourci = preg_replace('/\\\\[nt]/', ' ', $raccourci);
+	$raccourci = strtolower(translitteration($raccourci));
+	$raccourci = trim(preg_replace('/\W+/', ' ', $raccourci));
+	$raccourci = preg_replace('/\b(\w+)\W+\1/', '\1', $raccourci);
+	if (strlen($raccourci) > 32) {
 	  // trop long: abandonner les petits mots
-		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
-		if (strlen($index) > 32) {
+		$raccourci = preg_replace('/\b\w{1,3}\W/', '', $raccourci);
+		if (strlen($raccourci) > 32) {
 			// tant pis mais couper proprement si possible
-			$index = substr($index, 0, 32);
-			if ($n = strrpos($index,' ') OR ($n = strrpos($index,'_')))
-				$index = substr($index, 0, $n);
+			$raccourci = substr($raccourci, 0, 32);
+			if ($n = strrpos($raccourci,' ') OR ($n = strrpos($raccourci,'_')))
+				$raccourci = substr($raccourci, 0, $n);
 		}
 	}
-	$index = str_replace(' ', '_', trim($index));
+	$raccourci = str_replace(' ', '_', trim($raccourci));
 
-	return $index;
+	return $raccourci;
 }
 
 
@@ -68,48 +68,30 @@ function langonet_index_brut($occurrence) {
  * @param array		$item_md5
  * @return string
  */
-function langonet_index($occurrence, $item_md5) {
+function calculer_raccourci($occurrence, $item_md5) {
 	// Calcul du raccourci brut de l'item de langue
-	$index = langonet_index_brut($occurrence);
+	$raccourci_brut = calculer_raccourci_brut($occurrence);
+	$raccourci = $raccourci_brut;
 
 	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
 	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différents :
 	// on prend alors son md5 mais qui produira un raccourci illisible
-	if (isset($item_md5[$index])) {
-		if (strcasecmp($item_md5[$index], $occurrence) != 0)
-			$index = md5($occurrence);
+	if (isset($item_md5[$raccourci_brut])) {
+		if (strcasecmp($item_md5[$raccourci_brut], $occurrence) != 0)
+			$raccourci = md5($occurrence);
 	}
 
-	return $index;
+	return array($raccourci, $raccourci_brut);
 }
 
 
 /**
- * Calcul du représentation canonique d'une chaine de langue à créer avec traitement d'homonynie.
- * En cas d'homonynmie, le représentant utilisé est le md5.
- *
- * @param string	$occurrence
- * @param array		$item_md5
- * @return string
+ * @param string $module
+ * @param string $langue
+ * @param string $ou_langue
+ * @return array
  */
-function langonet_calculer_raccourci($occurrence, $item_md5) {
-	// Calcul du raccourci brut de l'item de langue
-	$index_brut = langonet_index_brut($occurrence);
-	$index = $index_brut;
-
-	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
-	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différents :
-	// on prend alors son md5 mais qui produira un raccourci illisible
-	if (isset($item_md5[$index_brut])) {
-		if (strcasecmp($item_md5[$index_brut], $occurrence) != 0)
-			$index = md5($occurrence);
-	}
-
-	return array($index, $index_brut);
-}
-
-
-function langonet_verifier_reference($module, $langue, $ou_langue) {
+function verifier_reference_tradlang($module, $langue, $ou_langue) {
 	$utilise_tradlang=false;
 	$est_langue_reference=false;
 
@@ -125,34 +107,11 @@ function langonet_verifier_reference($module, $langue, $ou_langue) {
 }
 
 
-function langonet_trouver_reference($module, $ou_langue, $force=true) {
-	$langue_reference = 'fr';
-	$tradlang=false;
-
-	// On cherche d'abord si le module est sous tradlang et donc possède un rapport de traduction.
-	// Dans ce cas, on connait exactement la langue de référence.
-	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
-	if (file_exists($rapport_xml)) {
-		$tradlang = true;
-		if ($contenu = spip_file_get_contents($rapport_xml))
-			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
-				$langue_reference = $matches[1];
-	}
-
-	// On vérifie que le fichier pour la langue de référence déterminée existe sinon on continue à chercher
-	if ($force
-	AND (!file_exists($fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue_reference . '.php'))) {
-		$fichiers = preg_files(_DIR_RACINE . $ou_langue, "/lang/${module}_[^/]+\.php$");
-		$langue_reference = '';
-		if ($fichiers[0])
-			$langue_reference = str_replace($module . '_', '', basename($fichiers[0], '.php'));
-	}
-
-	return array($langue_reference, $tradlang);
-}
-
-
-function langonet_trouver_module($ou_fichier) {
+/**
+ * @param string $ou_fichier
+ * @return array
+ */
+function trouver_module_langue($ou_fichier) {
 
 	static $modules_spip = array('ecrire/' => 'ecrire', 'prive/' => 'spip', 'squelettes-dist/' => 'public');
 
@@ -226,6 +185,7 @@ function langonet_trouver_module($ou_fichier) {
 
 	return array($module, $langue, $ou_langue);
 }
+
 
 /**
  * Creation d'un tableau des selects:
@@ -335,9 +295,9 @@ function creer_selects($sel_l='0',$sel_d=array(), $exclure_paquet=true, $multipl
 
 
 /**
- * Lister tous les plugins
+ * Lister tous les plugins contenus dans une arborescence donnée.
  *
- * @param string $rep_base
+ * @param string $racine_arborescence
  * @return array
  */
 // $rep_base  => le repertoire de depart de l'arboresence a scanner
@@ -359,6 +319,58 @@ function lister_dossiers_plugins($racine_arborescence=null) {
 		}
 	}
 	return $dossiers;
+}
+
+
+// ----------------- A VOIR PLUS TARD L'UTILITE ---------------------------
+
+function langonet_trouver_reference($module, $ou_langue, $force=true) {
+	$langue_reference = 'fr';
+	$tradlang=false;
+
+	// On cherche d'abord si le module est sous tradlang et donc possède un rapport de traduction.
+	// Dans ce cas, on connait exactement la langue de référence.
+	$rapport_xml = _DIR_RACINE . $ou_langue . $module . '.xml';
+	if (file_exists($rapport_xml)) {
+		$tradlang = true;
+		if ($contenu = spip_file_get_contents($rapport_xml))
+			if (preg_match(_LANGONET_PATTERN_REFERENCE, $contenu, $matches))
+				$langue_reference = $matches[1];
+	}
+
+	// On vérifie que le fichier pour la langue de référence déterminée existe sinon on continue à chercher
+	if ($force
+	AND (!file_exists($fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue_reference . '.php'))) {
+		$fichiers = preg_files(_DIR_RACINE . $ou_langue, "/lang/${module}_[^/]+\.php$");
+		$langue_reference = '';
+		if ($fichiers[0])
+			$langue_reference = str_replace($module . '_', '', basename($fichiers[0], '.php'));
+	}
+
+	return array($langue_reference, $tradlang);
+}
+
+/**
+ * Calcul du représentation canonique d'une chaine de langue à créer avec traitement d'homonynie.
+ * En cas d'homonynmie, le représentant utilisé est le md5.
+ *
+ * @param string	$occurrence
+ * @param array		$item_md5
+ * @return string
+ */
+function langonet_index($occurrence, $item_md5) {
+	// Calcul du raccourci brut de l'item de langue
+	$index = langonet_index_brut($occurrence);
+
+	// Si cet item existe déjà mais que la chaine diffère par des majuscules, on considère qu'on a à faire
+	// au même item. Sinon c'est que le calcul précédent a donné lieu à une collision inattendue de deux items différents :
+	// on prend alors son md5 mais qui produira un raccourci illisible
+	if (isset($item_md5[$index])) {
+		if (strcasecmp($item_md5[$index], $occurrence) != 0)
+			$index = md5($occurrence);
+	}
+
+	return $index;
 }
 
 ?>

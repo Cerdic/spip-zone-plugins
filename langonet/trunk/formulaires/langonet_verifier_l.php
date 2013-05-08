@@ -36,7 +36,9 @@ function formulaires_langonet_verifier_l_traiter() {
 		// On cherche donc un répertoire lang/ dans lequel il existe des fichiers de langue et on essaye de
 		// déterminer le module à corriger ainsi que la langue de référence.
 		// Si aucun module n'est trouvé on choisit le module "indefini" et la langue de référence "fr".
-		list($module, $langue, $ou_langue) = langonet_trouver_module($ou_fichier);
+		include_spip('inc/langonet_utils');
+		list($module, $langue, $ou_langue) = trouver_module_langue($ou_fichier);
+
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $resultats["items_a_corriger"]);
 		if ($corrections['fichier']) {
@@ -59,6 +61,7 @@ function formulaires_langonet_verifier_l_traiter() {
 		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];
 	}
 	$retour['editable'] = true;
+
 	return $retour;
 }
 
