@@ -32,21 +32,19 @@ function formulaires_langonet_verifier_item_traiter() {
 	$version = _request('version');
 
 	// Recuperation des champs du formulaire propres aux vérifications utilisation et définition
-	//  $rep          -> nom du repertoire parent de lang/ : 'langonet' pour 'langonet/lang/'
 	//                   correspond generalement au 'nom' du plugin
 	//  $module       -> prefixe du fichier de langue : 'langonet' pour 'langonet_fr.php'
 	//                   parfois different du 'nom' du plugin
 	//  $langue       -> index du nom de langue, 'fr' pour 'langonet_fr.php'
 	//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
 	$retour_select_langue = explode(':', _request('fichier_langue'));
-	$rep = $retour_select_langue[0];
 	$module = $retour_select_langue[1];
 	$langue = $retour_select_langue[2];
 	$ou_langue = $retour_select_langue[3];
 
 	// Lancement de la vérification utilisation ou définition
 	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
-	$resultats = $langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification);
+	$resultats = $langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, $verification);
 
 	// Creation du fichier de langue corrigé avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours.

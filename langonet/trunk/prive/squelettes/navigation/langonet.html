@@ -1,6 +1,6 @@
 [(#REM) <!-- Navigation dans les operations de langonet --> ]
 <ul class="liste-items sous_navigation">
-<BOUCLE_navigation_operations(DATA){liste verifier_item,verifier_l,rechercher_item,rechercher_texte,lister,generer}{par cle}>
+<BOUCLE_navigation_operations(DATA){liste verifier_item,verifier_l,rechercher_item,rechercher_texte,generer,lister}{par cle}>
 	[<li class="item">
 		(#URL_ECRIRE{#ENV{exec}}|parametre_url{operation, #VALEUR}
 			|lien_ou_expose{

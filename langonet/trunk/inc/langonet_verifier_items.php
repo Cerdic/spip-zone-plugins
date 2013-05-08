@@ -23,118 +23,146 @@ if (!defined('_LANGONET_ITEM_X'))
 
 
 /**
- * Verification de l'utilisation des items de langue
+ * Verification des items de langue non définis ou obsolètes
  *
- * @param string $rep
- * @param string $module
- * @param string $langue
- * @param string $ou_langue
- * @param string $ou_fichier
- * @param string $verification
+ * @param string $module		prefixe du fichier de langue
+ * @param string $langue		index du nom de langue
+ * @param string $ou_langue		chemin vers le fichier de langue à vérifier
+ * @param string $ou_fichier	tableau des racines d'arborescence à vérifier
+ * @param string $verification	type de verification à effectuer
  * @return array
  */
+function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, $verification) {
 
-// $rep          => nom du repertoire parent de lang/
-// $module       => prefixe du fichier de langue
-// $langue       => index du nom de langue
-// $ou_lang      => chemin vers le fichier de langue a verifier
-// $ou_fichier   => racine de l'arborescence a verifier
-// $verification => type de verification a effectuer
-function inc_langonet_verifier_items($rep, $module, $langue, $ou_langue, $ou_fichier, $verification) {
-
-	// On ignore les ultimes sous-repertoires charsets/ , lang/ , req/ .
-	// On n'analyse que les fichiers php, html, xml ou yaml
-	// (voir le fichier regexp.txt).
+	// On constitue la liste des fichiers pouvant être susceptibles de contenir des items de langue.
+	// Pour cela on boucle sur chacune des arborescences choisies.
+	// - les ultimes sous-repertoires charsets/ , lang/ , req/ sont ignorés.
+	// - seuls les fichiers php, html, xml ou yaml sont considérés.
 	$fichiers = array();
-	foreach($ou_fichier as $_arborescence){
+	foreach($ou_fichier as $_arborescence) {
 		$fichiers = array_merge(
 						$fichiers,
 						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
 	}
 
-	$resultats =  langonet_collecter_items($files);
+	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
+	// précédemment constituée.
+	$resultats =  collecter_occurrences($fichiers);
 
-	// On charge le fichier de langue a verifier
-	// si il existe dans l'arborescence $ou_langue
+	// On charge le fichier de langue à vérifier qui doit exister dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
 	include_spip('inc/traduire');
-	$fichier_langue = $ou_langue.$module.'_'.$langue.'.php';
-	$var_source = "i18n_".$module."_".$langue;
-	if (empty($GLOBALS[$var_source])) {
-		$GLOBALS['idx_lang'] = $var_source;
-		include(_DIR_RACINE.$fichier_langue);
+	$var_langue = "i18n_" . $module . "_" . $langue;
+	$fichier_langue = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
+	if (empty($GLOBALS[$var_langue])) {
+		if (file_exists($fichier_langue)) {
+			$GLOBALS['idx_lang'] = $var_langue;
+			include($fichier_langue);
+		}
 	}
+
+	// Traitement des occurrences d'erreurs et d'avertissements et constitution de la structure de résultats
 	if ($verification == 'definition') {
 		// Les chaines definies sont dans les fichiers definis par la RegExp ci-dessous
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
 		$files = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
-		$resultats = langonet_classer_items($module, $resultats, $GLOBALS[$var_source], $files);
-	} elseif ($GLOBALS[$var_source])
-		$resultats = langonet_reperer_items($resultats, $GLOBALS[$var_source]);
+		$resultats = langonet_classer_items($module, $resultats, $GLOBALS[$var_langue], $files);
+	}
+	elseif ($GLOBALS[$var_langue])
+		$resultats = langonet_reperer_items($resultats, $GLOBALS[$var_langue]);
+
+	// Completude de la structure de résultats
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichier;
+
 	return $resultats;
 }
 
-// On cherche l'ensemble des items utilises dans l'arborescence
-// ligne par ligne (tant pis pour les items sur plusieurs lignes),
-// a l'aide des RegExp definies ci-dessus
 
-function langonet_collecter_items($files) {
+/**
+ * Cherche l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers fournie.
+ * Cette recherche se fait ligne par ligne, ce qui ne permet pas de trouver les items sur plusieurs lignes.
+ *
+ * @param $fichiers
+ * @return array
+ */
+function collecter_occurrences($fichiers) {
 
 	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'tous' => array());
-	foreach ($files as $_fichier) {
-		$xml = strpos($_fichier, '.xml');
-		foreach ($contenu = file($_fichier) as $ligne => $t) {
-			if ($xml) {
-				if (preg_match_all(_LANGONET_ITEM_X, $t, $m, PREG_SET_ORDER))
-					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
-			} else {
-				if (preg_match_all(_LANGONET_ITEM_B, $t, $m, PREG_SET_ORDER))
-            		foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
-				if (preg_match_all(_LANGONET_ITEM_A, $t, $m, PREG_SET_ORDER))
-					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
-				if (preg_match_all(_LANGONET_ITEM_G, $t, $m, PREG_SET_ORDER))
-					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne, true);
-				if (preg_match_all(_LANGONET_ITEM_H, $t, $m, PREG_SET_ORDER))
-					foreach ($m as $occ) langonet_match($utilises, $occ, $_fichier, $ligne);
+
+	foreach ($fichiers as $_fichier) {
+		if ($contenu = file($_fichier)) {
+			foreach ($contenu as $_no_ligne => $ligne) {
+				if (stripos($_fichier, '.xml') !== false) {
+					if (preg_match_all(_LANGONET_ITEM_X, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+				}
+				else {
+					if (preg_match_all(_LANGONET_ITEM_B, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+					if (preg_match_all(_LANGONET_ITEM_A, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+					if (preg_match_all(_LANGONET_ITEM_G, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, true);
+					if (preg_match_all(_LANGONET_ITEM_H, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+				}
 			}
 		}
 	}
+
 	return $utilises;
 }
 
-/// Memorise le resultat d'un preg_match ci-dessus
-// et analyse au passage si l'item est dynamique (_T avec $ ou concatenation)
 
-function langonet_match(&$utilises, $occ, $_fichier, $ligne, $eval=false) {
+/**
+ * Memorise selon une structure prédéfinie chaque occurrence d'utilisation d'un item.
+ * Cette fonction analyse au passage si l'item est dynamique ou pas (_T avec $ ou concatenation).
+ *
+ * @param array $utilises
+ * @param $occurrence
+ * @param string $fichier
+ * @param string $no_ligne
+ * @param bool $eval
+ */
+function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 
-	list($tout, $module, $nom, $suite) = $occ;
-	if (($tout[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
-		// $nom approximatif, mais pas grave: c'est pour le msg
-		$nom .= ' . ' . substr($suite,3); 
+	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
+	if (($expression[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
+		// $raccourci_regexp approximatif, mais pas grave: c'est pour le msg
+		$raccourci_regexp .= ' . ' . substr($suite,3);
 		$eval = true;
-	} else $eval = (($suite AND ($suite[0]==='.')) OR ($eval AND strpos($nom, '$')));
-	if (!$nom) return;
-	list($item, $args) = langonet_argumenter($nom);
-	$index = langonet_index($nom, $utilises['items']) . $args;
-	$utilises['items'][$index] = $item;
-	$utilises['modules'][$index] = $module;
-	$utilises['item_tous'][$index][$_fichier][$ligne][] = $occ;
-	$utilises['suffixes'][$index] = $eval;
+	}
+	else
+		$eval = (($suite AND ($suite[0]==='.')) OR ($eval AND strpos($raccourci_regexp, '$')));
+	if (!$raccourci_regexp) return; // TODO : c'est quoi ça ?
+
+	list($item, $args) = extraire_arguments($raccourci_regexp);
+	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci($raccourci_regexp, $utilises['items']);
+	$raccourci_argumente .= $args;
+
+	$utilises['items'][$raccourci_argumente] = $item;
+	$utilises['modules'][$raccourci_argumente] = $module;
+	$utilises['item_tous'][$raccourci_argumente][$fichier][$no_ligne][] = $occurrence;
+	$utilises['suffixes'][$raccourci_argumente] = $eval;
+
 }
 
-include_spip('public/phraser_html');
 
 ///  gerer les args
 /// La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
 /// define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 /// define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
 
-function langonet_argumenter($occ)
-{
+function extraire_arguments($occ) {
+	include_spip('public/phraser_html');
 	$args = '';
 	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $occ, $m, PREG_SET_ORDER)) {
 		foreach($m as $match) {
@@ -144,6 +172,7 @@ function langonet_argumenter($occ)
 		}
 		$args = '{' . join(',',$args) . '}';
 	}
+
 	return array($occ, $args);
 }
 
