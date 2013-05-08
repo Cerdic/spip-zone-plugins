@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function formulaires_configurer_association_verifier_dist() {
+function formulaires_configurer_association_charger_dist() {
 	return $GLOBALS['association_metas'];
 }
 
