@@ -28,7 +28,7 @@
 [(#REM) <!-- Affichage des resultats --> ]
 [(#ENV*{message_ok}|oui)
 	<INCLURE{fond=formulaires/inc-resultats_verifier_fonction_l,
-		explication=#ENV*{message_ok}|table_valeur{explication},
+		corrections=#ENV*{message_ok}|table_valeur{corrections},
 		resultats=#ENV*{message_ok}|table_valeur{resultats},
 		env} />
 ]

@@ -73,8 +73,8 @@ function inc_langonet_verifier_l($ou_fichier) {
 
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['total_occurrences'] = $nb_occurrences;
-		$resultats['items_non'] = $items_non;
-		$resultats['corrections'] = $corrections;
+		$resultats['occurrences_non'] = $items_non;
+		$resultats['items_a_corriger'] = $corrections;
 	}
 	else {
 		$resultats['erreur'] = _T('langonet:message_nok_arborescence_l');

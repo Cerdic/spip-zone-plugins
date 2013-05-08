@@ -4,7 +4,7 @@
 		<caption class="notice">
 			<strong class="caption">
 				[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
-				[(#ENV{total_occurrences}|singulier_ou_pluriel{
+				[(#ENV{total}|singulier_ou_pluriel{
 									langonet:message_ok_fonction_l_1,
 									langonet:message_ok_fonction_l_n,
 									nberr})]
@@ -26,8 +26,8 @@
 			#SET{ligne, #CLE}
 			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
 			<tr class="row_even">
-				<td class="ligne">[L(#VAL{%04s}|sprintf{#GET{ligne}|plus{1}})]</td>
-				<td class="colonne">[C(#VAL{%03s}|sprintf{#CLE|plus{1}})]</td>
+				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+				<td class="colonne">[C(#CLE|plus{1})]</td>
 				<td class="occurrence">
 					[<code>(#VALEUR|table_valeur{0}
 						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8}

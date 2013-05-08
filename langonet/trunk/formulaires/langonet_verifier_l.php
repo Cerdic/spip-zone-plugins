@@ -38,12 +38,14 @@ function formulaires_langonet_verifier_l_traiter() {
 		// Si aucun module n'est trouvé on choisit le module "indefini" et la langue de référence "fr".
 		list($module, $langue, $ou_langue) = langonet_trouver_module($ou_fichier);
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-		$retour_corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $resultats["corrections"]);
-		if ($retour_corrections['fichier'])
-			$retour['message_ok']['explication'] = _T('langonet:message_ok_corrections_fonction_l',
-														array('fichier' => $retour_corrections['fichier']));
+		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $resultats["items_a_corriger"]);
+		if ($corrections['fichier']) {
+			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];
+			$retour['message_ok']['corrections']['explication'] = _T('langonet:message_ok_corrections_fonction_l',
+														array('fichier' => $corrections['fichier']));
+		}
 		else
-			$retour['message_ok']['explication'] = _T('langonet:message_nok_corrections');
+			$retour['message_ok']['corrections']['explication'] = _T('langonet:message_nok_corrections');
 	}
 
 	// Traitement des resultats
@@ -52,7 +54,9 @@ function formulaires_langonet_verifier_l_traiter() {
 	}
 	else {
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
-		$retour['message_ok']['resultats'] = $resultats;
+		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
+		$retour['message_ok']['resultats']['total_occurrences'] = $resultats['total_occurrences'];
+		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];
 	}
 	$retour['editable'] = true;
 	return $retour;

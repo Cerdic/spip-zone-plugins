@@ -144,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-être utilisé dans un contexte complexe. Nous vous invitons à le vérifier :',
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :',
 	'message_ok_fichier_verification' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.',
-	'message_ok_corrections_fonction_l' => 'Les corrections des items trouvés ont été intégrés dans le fichier de langue <code>@fichier@</code>. Il convient cependant de réaliser les modifications du code correspondant manuellement',
+	'message_ok_corrections_fonction_l' => 'Les items construits à partir des cas d\'utilisation de la fonction _L() ont été intégrés dans le fichier de langue <code>@fichier@</code>.',
 
 	// O
 	'onglet_generer' => 'Générer une langue',
@@ -152,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_rechercher_item' => 'Rechercher un raccourci',
 	'onglet_rechercher_texte' => 'Rechercher un texte',
 	'onglet_verifier_item' => 'Vérifier une langue',
-	'onglet_verifier_l' => 'Vérifier la fonction _L',
+	'onglet_verifier_l' => 'Vérifier la fonction _L()',
 	'option_affichage_final' => 'Texte produit sans balise HTML',
 	'option_affichage_brut' => 'Texte brut avec les balises HTML',
 	'option_aucun_dossier' => 'aucune arborescence sélectionnée',
@@ -179,7 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue',
 	'titre_form_rechercher_texte' => 'Recherche de textes dans les fichiers de langue',
 	'titre_form_verifier' => 'Vérification des fichiers de langue',
-	'titre_form_verifier_l' => 'Vérification de l\'utilisation de la fonction _L',
+	'titre_form_verifier_l' => 'Vérification de l\'utilisation de la fonction _L()',
 	'titre_page' => 'LangOnet',
 	'titre_page_navigateur' => 'LangOnet',
 );

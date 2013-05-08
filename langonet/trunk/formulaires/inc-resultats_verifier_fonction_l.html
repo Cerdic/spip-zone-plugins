@@ -2,9 +2,15 @@
 <h3><:langonet:legende_resultats:></h3>
 #SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}}
 <p><:langonet:info_verification_l{arborescence=#GET{arborescence}}:></p>
-[<p>(#ENV*{explication})</p>]
+[<p>
+	(#ENV{corrections}|table_valeur{explication})
+	[(#BOUTON_ACTION{
+		<:langonet:bouton_corriger:>,
+		#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections}|table_valeur{fichier}},
+		'', '', ''})]
+</p>]
 
 <INCLURE{fond=prive/squelettes/liste/items_l,
-	items=#ENV{resultats}|table_valeur{items_non},
-	total_occurrences=#ENV{resultats}|table_valeur{total_occurrences},
+	items=#ENV{resultats}|table_valeur{occurrences_non},
+	total=#ENV{resultats}|table_valeur{total_occurrences},
 	env} />

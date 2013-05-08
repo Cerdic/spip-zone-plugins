@@ -42,12 +42,12 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	// (evite le mecanisme standard de surcharge SPIP)
 	include_spip('inc/traduire');
 	$var_source = "i18n_" . $module . "_" . $langue_source;
-	$source = _DIR_RACINE . $ou_langue . $module . '_' . $langue_source . '.php';
+	$fichier_source = _DIR_RACINE . $ou_langue . $module . '_' . $langue_source . '.php';
 	// Trouver dans quel cas ce fichier n'a pas deja ete inclus a ce stade
 	if (empty($GLOBALS[$var_source])) {
-		if (file_exists($source)) {
+		if (file_exists($fichier_source)) {
 			$GLOBALS['idx_lang'] = $var_source;
-			include($source);
+			include($fichier_source);
 		}
 		else
 			if ($mode != 'fonction_l')
@@ -57,7 +57,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	// Récupérer le bandeau d'origine si il existe.
 	// Le bandeau est composé des lignes qui précèdent la signature habituelle
 	$bandeau = '';
-	if ($tableau = file($source)) {
+	if ($tableau = file($fichier_source)) {
 		array_shift($tableau); // saute < ? php
 		$signature_trouvee = false;
 		foreach($tableau as $_ligne) {
@@ -73,22 +73,22 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	// On charge le fichier de langue cible si il existe dans l'arborescence $ou_langue
 	$var_cible = "i18n_" . $module . "_" . $langue_cible;
-	$cible = _DIR_RACINE . $ou_langue . $module . '_' . $langue_cible . '.php';
+	$fichier_cible = _DIR_RACINE . $ou_langue . $module . '_' . $langue_cible . '.php';
 	if (empty($GLOBALS[$var_cible])) {
-		if (file_exists($cible)) {
+		if (file_exists($fichier_cible)) {
 			$GLOBALS['idx_lang'] = $var_cible;
-			include($cible);
+			include($fichier_cible);
 		}
 	}
 
 	// Créer la liste des items du fichier cible sous la forme d'un tableau (raccourci, traduction)
-	$source = langonet_generer_items_cible($module, $var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
+	$items_cible = langonet_generer_items_cible($module, $var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
 
 	// Ecriture du fichier de langue à partir de la liste des items cible
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
 	$dir = sous_repertoire($dir,"generation");
 	$bandeau .= "// Produit automatiquement par le plugin LangOnet à partir de la langue source $langue_source";
-	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $bandeau);
+	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $items_cible, $bandeau);
 
 	if (!$ok) {
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
@@ -115,14 +115,14 @@ function langonet_generer_items_cible($module, $var_source, $var_cible, $mode='i
 		include_spip('inc/langonet_utils');
 
 	// On recupere les items du fichier de langue si celui ci n'est pas vide
-	$source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
+	$items = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
 
 	// Si on demande de generer le fichier corrige alors on fournit la liste des items à ajouter ou supprimer
-	$source = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($source, $oublis_inutiles) : $source;
+	$items = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($items, $oublis_inutiles) : $items;
 	if ($mode != 'inutile')
 		$oublis_inutiles = array();
 
-	foreach ($source as $_item => $_valeur) {
+	foreach ($items as $_item => $_valeur) {
 		$texte = @$GLOBALS[$var_cible][$_item];
 		if ($texte) {
 			$avec_commentaire = in_array($_item, $oublis_inutiles);
@@ -144,11 +144,14 @@ function langonet_generer_items_cible($module, $var_source, $var_cible, $mode='i
 			}
 		}
 		if ($encodage == 'utf8')
-			$texte = entite2utf($texte);
-		$source[$_item] = $avec_commentaire ? array(_LANGONET_TAG_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
+			if (is_array($texte))
+				$texte[1] = entite2utf($texte[1]);
+			else
+				$texte = entite2utf($texte);
+		$items_cible[$_item] = $avec_commentaire ? array(_LANGONET_TAG_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
 	}
 
-	return $source;
+	return $items_cible;
 }
 
 
