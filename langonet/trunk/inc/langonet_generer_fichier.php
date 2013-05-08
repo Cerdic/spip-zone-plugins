@@ -85,18 +85,18 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	}
 
 	// Créer la liste des items du fichier cible sous la forme d'un tableau (raccourci, traduction)
-	$items_cible = langonet_generer_items_cible($var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
+	$items_cible = generer_items_cible($var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
 
 	// Ecriture du fichier de langue à partir de la liste des items cible
-	$dir = sous_repertoire(_DIR_TMP,"langonet");
+	$dossier_cible = sous_repertoire(_DIR_TMP,"langonet");
 	if (in_array($mode, $dossier_corrections)) {
-		$dir = sous_repertoire($dir, "verification");
-		$dir = sous_repertoire($dir, $dossier_corrections[$mode]);
+		$dossier_cible = sous_repertoire($dossier_cible, "verification");
+		$dossier_cible = sous_repertoire($dossier_cible, $dossier_corrections[$mode]);
 	}
 	else
-		$dir = sous_repertoire($dir, "generation");
+		$dossier_cible = sous_repertoire($dossier_cible, "generation");
 	$bandeau .= "// Produit automatiquement par le plugin LangOnet à partir de la langue source $langue_source";
-	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $items_cible, $bandeau);
+	$ok = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau);
 
 	if (!$ok) {
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
@@ -110,7 +110,6 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 
 /**
- * @param string $module
  * @param array $var_source
  * @param array $var_cible
  * @param string $mode
@@ -118,9 +117,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
  * @param array $oublis_inutiles
  * @return array
  */
-function langonet_generer_items_cible($var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
-	if ($encodage == 'utf8')
-		include_spip('inc/langonet_utils');
+function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
+	include_spip('inc/langonet_utils');
 
 	// On distingue 3 cas de génération d'un fichier de langue cible :
 	// 1- une génération d'une langue cible à partir d'une langue source (opération generer). Dans ce cas, aucun
