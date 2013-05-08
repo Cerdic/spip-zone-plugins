@@ -52,26 +52,25 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 			$GLOBALS['idx_lang'] = $var_source;
 			include($fichier_source);
 		}
-		else
-			if ($mode != 'fonction_l')
-				return array('erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
 	}
 
 	// Récupérer le bandeau d'origine si il existe.
 	// Le bandeau est composé des lignes qui précèdent la signature habituelle
 	$bandeau = '';
-	if ($tableau = file($fichier_source)) {
-		array_shift($tableau); // saute < ? php
-		$signature_trouvee = false;
-		foreach($tableau as $_ligne) {
-			$bandeau .= $_ligne;
-			if (strpos($_ligne, _LANGONET_SIGNATURE) !== false) {
-				$signature_trouvee = true;
-				break;
+	if (file_exists($fichier_source)) {
+		if ($tableau = file($fichier_source)) {
+			array_shift($tableau); // saute < ? php
+			$signature_trouvee = false;
+			foreach($tableau as $_ligne) {
+				$bandeau .= $_ligne;
+				if (strpos($_ligne, _LANGONET_SIGNATURE) !== false) {
+					$signature_trouvee = true;
+					break;
+				}
 			}
+			if (!$signature_trouvee)
+				$bandeau = '';
 		}
-		if (!$signature_trouvee)
-			$bandeau = '';
 	}
 
 	// On charge le fichier de langue cible si il existe dans l'arborescence $ou_langue
