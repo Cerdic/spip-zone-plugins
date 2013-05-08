@@ -13,35 +13,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_objet' => 'Add an object',
 
 	// C
-	'configurations' => 'Configurations',
+	'configurations' => 'Settings',
 
 	// E
 	'erreur_deja_selectionne' => 'This object has been already selected for this list',
 	'explication_choix_multi' => 'You can select multiple ones using ctrl or shift (apple or shift for Macs)',
 	'explication_selection_cible' => 'If no target is selected, all will be considered.',
 	'explication_selection_objets_cible' => 'The target objects which the "selected objects" can be linked',
-	'explication_selection_type_liens' => 'You can define types of relationships: please indicate one per line, followed by a comma and a description. A blank line for the default value. The description can be a chain of language.', # MODIF
+	'explication_selection_type_liens' => 'You can define relationships types: please indicate one per line, followed by a comma and a description. The description can be a language string.',
 
 	// I
 	'icone_creer_selection_objet' => 'Select an object',
-	'icone_modifier_selection_objet' => 'Modify this selected object', # MODIF
-	'info_1_selection_objet' => 'One selected object', # MODIF
-	'info_aucun_selection_objet' => 'No selected object', # MODIF
-	'info_nb_selection_objets' => '@nb@ selected objects', # MODIF
+	'icone_modifier_selection_objet' => 'Modify this selected object',
+	'info_1_selection_objet' => 'One selected object',
+	'info_aucun_selection_objet' => 'No selected object',
+	'info_nb_selection_objets' => '@nb@ of selected objects',
 
 	// L
 	'label_descriptif' => 'Description',
 	'label_id_objet' => 'Object ID',
 	'label_id_objet_dest' => 'Dest Object ID',
 	'label_objet' => 'Object',
-	'label_objet_dest' => 'Dest Object', # MODIF
+	'label_objet_dest' => 'Target object',
 	'label_ordre' => 'Rank',
 	'label_titre' => 'Title',
 	'label_url' => 'Url',
 
 	// O
 	'objet_destination_choisis' => 'Selected destination(s):',
-	'objet_lie_a' => 'Lié à', # NEW
+	'objet_lie_a' => 'Linked to',
 	'objets_cible' => 'The target objects',
 	'objets_selection' => 'Selected objects',
 
@@ -54,24 +54,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'selection_cible' => 'Target selection for',
 	'selection_objet' => 'Selection',
-	'selection_objet_cible_titre' => 'Selection of target objects', # MODIF
+	'selection_objet_cible_titre' => 'Selection of target objects',
 	'selection_objets_pour' => 'Object selection for',
 	'selection_rubrique_objet' => 'Objects that can be selected',
 	'selection_type_lien' => 'Link type',
-	'selection_type_liens' => 'Links type definition', # MODIF
+	'selection_type_liens' => 'Links type definition',
 	'selectione' => 'Selected :',
 
 	// T
 	'texte_ajouter_objet' => 'Select an object',
-	'texte_changer_statut_objet' => 'This Selected Object is:', # MODIF
+	'texte_changer_statut_objet' => 'This Selected Object is:',
 	'texte_creer_asselection_objetcier_objet' => 'Create and link an object',
-	'titre_langue_objet' => 'Language of this Selected Object', # MODIF
-	'titre_logo_selection_objet' => 'Logo of this Selected Object', # MODIF
-	'titre_selection_objet' => 'Objet Sélectionné', # NEW
-	'titre_selection_objets' => 'Selected Object', # MODIF
-	'titre_selection_objets_rubrique' => 'Selected Objects of the section', # MODIF
+	'titre_langue_objet' => 'Language of this Selected Object',
+	'titre_logo_selection_objet' => 'Logo of the Selected Object',
+	'titre_selection_objet' => 'Selected Objects',
+	'titre_selection_objets' => 'Selected Objects',
+	'titre_selection_objets_rubrique' => 'Selected Objects of the section',
 	'type_liens_defaut' => 'link types by default, can be overloaded below',
-	'type_liens_surcharge' => 'overload the default link types' # MODIF
+	'type_liens_surcharge' => 'overload the default link types'
 );
 
 ?>
