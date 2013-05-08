@@ -15,8 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_longueur' => 'Definido el número de caracteres máximo que constituirá cada anclaje.',
 	'explication_min' => 'Definido el número mínimo de epígrafes de un texto a partir del cual un sumario se mostrará.',
 	'explication_separateur' => 'Definido el carácter que se intercalará entre cada palabra para remplazar los espacios.',
+	'explication_tdm_flottante' => 'Lorsque la table des matières devient invisible lors du scroll de la page, celle-ci se positionne en haut de l\'écran afin d\'être constamment visible.', # NEW
 
 	// L
+	'label_tdm_flottante' => 'Table des matières flottante', # NEW
 	'longueur' => 'Longitud:',
 
 	// M

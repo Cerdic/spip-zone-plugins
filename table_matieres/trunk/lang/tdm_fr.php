@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		la balise <code>#TABLE_MATIERES</code> dans vos squelettes.',
 
 	// E
-	'explication_tdm_flottante' => 'Lorsque la table des matières devient invisible lors du scroll de la page, celle-ci se positionne en haut de l\'écran afin d\'être constamment visible.',
 	'explication_longueur' => 'Définit le nombre de caractères maximum que constituera chaque ancres.',
 	'explication_min' => 'Définit le nombre minimal d\'intertitres d\'un texte à partir duquel une table des matières sera affichée.',
 	'explication_separateur' => 'Définit le caractère qui s\'intercalera entre chaque mot pour remplacer les espaces.',
+	'explication_tdm_flottante' => 'Lorsque la table des matières devient invisible lors du scroll de la page, celle-ci se positionne en haut de l\'écran afin d\'être constamment visible.',
 
 	// L
 	'label_tdm_flottante' => 'Table des matières flottante',

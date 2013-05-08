@@ -16,8 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_longueur' => 'Sets the maximum number of characters that can consitute each anchor.',
 	'explication_min' => 'Defines the minimum number of subheadings of a text from which a table of contents will be displayed.',
 	'explication_separateur' => 'Defines the character that will be inserted between each word to replace spaces.',
+	'explication_tdm_flottante' => 'Lorsque la table des matières devient invisible lors du scroll de la page, celle-ci se positionne en haut de l\'écran afin d\'être constamment visible.', # NEW
 
 	// L
+	'label_tdm_flottante' => 'Table des matières flottante', # NEW
 	'longueur' => 'Length:',
 
 	// M
