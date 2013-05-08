@@ -32,6 +32,9 @@ if (!defined('_LANGONET_TAG_MODIFIE'))
  */
 function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='valeur', $encodage='utf8', $oublis_inutiles=array()) {
 
+	// Modes correspondant à des corrections
+	static $dossier_corrections = array('oublie' => 'definition', 'inutile' => 'utilisation', 'fonction_l' => 'fonction_l');
+
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
 	// de l'erreur dans $resultats['erreur'].
@@ -82,11 +85,16 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	}
 
 	// Créer la liste des items du fichier cible sous la forme d'un tableau (raccourci, traduction)
-	$items_cible = langonet_generer_items_cible($module, $var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
+	$items_cible = langonet_generer_items_cible($var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
 
 	// Ecriture du fichier de langue à partir de la liste des items cible
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
-	$dir = sous_repertoire($dir,"generation");
+	if (in_array($mode, $dossier_corrections)) {
+		$dir = sous_repertoire($dir, "verification");
+		$dir = sous_repertoire($dir, $dossier_corrections[$mode]);
+	}
+	else
+		$dir = sous_repertoire($dir, "generation");
 	$bandeau .= "// Produit automatiquement par le plugin LangOnet à partir de la langue source $langue_source";
 	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $items_cible, $bandeau);
 
@@ -110,45 +118,57 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
  * @param array $oublis_inutiles
  * @return array
  */
-function langonet_generer_items_cible($module, $var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
+function langonet_generer_items_cible($var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
 	if ($encodage == 'utf8')
 		include_spip('inc/langonet_utils');
 
-	// On recupere les items du fichier de langue si celui ci n'est pas vide
-	$items = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
+	// On distingue 3 cas de génération d'un fichier de langue cible :
+	// 1- une génération d'une langue cible à partir d'une langue source (opération generer). Dans ce cas, aucun
+	//    autre item que ceux de la langue source ne sont à considérer.
+	// 2- correction de la langue source en ajoutant des items de langue (opéation fonction_l ou verifier_definition).
+	//    Dans ce cas, le fichier cible correspondant à l'union des items source et des items à corriger.
+	// 3- correction de la langue source en tagguant les items à supprimer (opération verifier_utilisation).
+	//    Dans ce cas, les items cible coincident avec les items source et on conserve la liste des items inutiles à part.
+	$items_source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
+	$inutiles = array();
+	if ($mode == 'inutile')
+		$inutiles = $oublis_inutiles; // cas 3
+	else if ($mode == 'oublie' OR $mode == 'fonction_l')
+		$items_source =  array_merge($items_source, $oublis_inutiles); // cas 2
 
-	// Si on demande de generer le fichier corrige alors on fournit la liste des items à ajouter ou supprimer
-	$items = ($mode == 'oublie' OR $mode == 'fonction_l') ? array_merge($items, $oublis_inutiles) : $items;
-	if ($mode != 'inutile')
-		$oublis_inutiles = array();
-
-	foreach ($items as $_item => $_valeur) {
-		$texte = @$GLOBALS[$var_cible][$_item];
+	// On boucle sur la liste exacte des items cible pour affiner leur contenu suivant le type
+	// d'opération en cours.
+	foreach ($items_source as $_item => $_valeur) {
+		// Si l'item existe dans le fichier cible existant on vérifie si il n'est pas obsolète dans le cas où
+		// le mode est 'inutile' (opération verifier_utilisation)
+		$item_obsolete = false;
+		$texte = isset($GLOBALS[$var_cible][$_item]) ? $GLOBALS[$var_cible][$_item] : '';
 		if ($texte) {
-			$avec_commentaire = in_array($_item, $oublis_inutiles);
+			if ($mode == 'inutile')
+				$item_obsolete = in_array($_item, $inutiles);
 		}
 		else {
-			$avec_commentaire = false;
-			if ($mode != 'pas_item') {
-				if ($mode == 'valeur')
-					$texte = _LANGONET_TAG_NOUVEAU . $_valeur;
-				else if ($mode == 'vide')
-					$texte = _LANGONET_TAG_NOUVEAU;
-				else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
-					$texte = array(_LANGONET_TAG_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
-				else if ($mode !== 'oublie')
-					$texte = _LANGONET_TAG_NOUVEAU . $_item;
-				else if (preg_match('/^[a-z]+$/i', $_item))
-					$texte = $_item;
-				else $texte = _LANGONET_TAG_DEFINITION_MANQUANTE;
-			}
+			if ($mode == 'valeur')
+				$texte = _LANGONET_TAG_NOUVEAU . $_valeur;
+			else if ($mode == 'vide')
+				$texte = _LANGONET_TAG_NOUVEAU;
+			else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
+				$texte = array(_LANGONET_TAG_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
+			else if ($mode !== 'oublie')
+				$texte = _LANGONET_TAG_NOUVEAU . $_item;
+			else if (preg_match('/^[a-z]+$/i', $_item))
+				$texte = $_item;
+			else $texte = _LANGONET_TAG_DEFINITION_MANQUANTE;
 		}
-		if ($encodage == 'utf8')
+
+		// Passage en utf8 et stockage du texte de l'item cible pour traitement ultérieur lors de l'écriture du fichier
+		if ($encodage == 'utf8') {
 			if (is_array($texte))
 				$texte[1] = entite2utf($texte[1]);
 			else
 				$texte = entite2utf($texte);
-		$items_cible[$_item] = $avec_commentaire ? array(_LANGONET_TAG_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
+		}
+		$items_cible[$_item] = $item_obsolete ? array(_LANGONET_TAG_DEFINITION_OBSOLETE, $texte, $mode) : $texte;
 	}
 
 	return $items_cible;

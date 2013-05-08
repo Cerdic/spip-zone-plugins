@@ -178,6 +178,7 @@ function langonet_trouver_module($ou_fichier) {
 				}
 			}
 			else {
+				// TODO : compléter les autres cas ou le fichier n'existe pas
 
 			}
 		}
