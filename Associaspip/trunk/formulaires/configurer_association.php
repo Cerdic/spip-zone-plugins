@@ -12,6 +12,10 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function formulaires_configurer_association_verifier_dist() {
+	return $GLOBALS['association_metas'];
+}
+
+function formulaires_configurer_association_verifier_dist() {
 	$erreurs = array();
 	$erreurs['message_erreur'] = _T('asso:erreur_titre'); // on insere directement un titre de message d'erreurs, si on n'a que lui a la fin on renvoie un tableau vide
 
@@ -80,20 +84,11 @@ function formulaires_configurer_association_verifier_dist() {
 	return $erreurs;
 }
 
-function formulaires_configurer_association_traiter_dist($form) {
+function formulaires_configurer_association_traiter_dist() {
+	get_infos = charger_fonction('get_infos','plugins');
+	$infos = $get_infos('association');
 	include_spip('formulaires/configurer_metas');
-// debut du code directement copie depuis formulaires_configurer_metas_traiter_dist
-	$infos = formulaires_configurer_metas_infos($form);
-	if (!is_array($infos))
-		return $infos;
 	$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
-	$meta_table = $infos['meta'];
-// fin du code directement copie depuis formulaires_configurer_metas_traiter_dist
-	$metas_list = array_flip(array_unique($vars[2])); // on recupere tous les noms des metas comme cles d'un tableau
-	$query = sql_select('nom', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
-	while ($row = sql_fetch($query)) { // on ajoute toutes les metas utilisateurs : presentes avec le prefixe meta_utilisateur_ dans la table spip_association_metas
-		$metas_list[$row['nom']]=0;
-	}
 
 	foreach ( array(
 		'activites' => array('dc_activites', 'pc_activites'),
@@ -124,10 +119,10 @@ function formulaires_configurer_association_traiter_dist($form) {
 			// - si ils sont maintenant egaux mais ne l'etaient pas avant, toutes les ventes vont apparaitre en double: la vente elle meme et les frais d'envoi.
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), 'imputation='.$GLOBALS['association_metas']['pc_frais_envoi']);
 	}
-// code repris sur formulaires_configurer_metas_traiter_dist
-	foreach (array_keys($metas_list) as $k) {
+
+	foreach (array_keys($vars[2]) as $k) { // enregistrer chaque meta recense
 		$v = _request($k);
-		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta_table);
+		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $infos['meta']);
 	}
 	return !isset($infos['prefix'])
 		? array()
