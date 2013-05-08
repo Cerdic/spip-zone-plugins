@@ -57,7 +57,7 @@ function langonet_lister_fichiers_lang() {
 
 	// On cherche le dernier fichier de log de chaque fichier de langue
 	$liste_tous = array();
-	$langues = preg_files(_DIR_TMP . "langonet/generation", '[^/]*_[\w{2,3}]*.php$');
+	$langues = preg_files(_DIR_TMP . "langonet/generation/", '[^/]*_[\w{2,3}]*.php$');
 	foreach ($langues as $_fichier) {
 		$liste_tous[basename($_fichier, '.php')] = $_fichier;
 	}
