@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Paniers pour Spip 2.0
+ * Plugin Paniers pour Spip 3.0
  * Licence GPL 
  * Auteur Cyril Marion - Ateliers CYM
  * 
