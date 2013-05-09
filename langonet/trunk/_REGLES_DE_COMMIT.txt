@@ -80,7 +80,7 @@ occurrence d'utilisation d'un item de langue :
 
 En outre, d'autres règles génériques sont utilisées dans le code du plugin, à savoir :
 
-compteur d'élément :
+compteur d'éléments :
 	- préfixe  : nb_ (le suffixe représentant l'élément doit être au pluriel)
 	- exemples : $nb_occurrences, $_nb_elements...
 
@@ -91,8 +91,6 @@ numéro d'élément :
 
 3- Règles de nommage des fonctions
 ----------------------------------
-
-Le règles qui suivent sont applicables à toutes les fonctions du plugin.
 
 - le nom des fonctions doit contenir un verbe à l'intransitif pour expliquer le but
 - seules les fonctions dont la visibilité est externe (API) sont préfixées par "langonet_"
@@ -105,7 +103,7 @@ Le règles qui suivent sont applicables à toutes les fonctions du plugin.
 3- Règles de nommage des constantes
 -----------------------------------
 
-Les constantes doivent être nommées avec le préfixe "_LANGONET_".
-Leur définition doit être prioritairement locale à un fichier afin d'éviter la création d'un
-fichier langonet_options.php.
-La définition d'une constante doit être précédée d'un test : if (defined('nom de la constante') ...
+- les constantes doivent être nommées avec le préfixe "_LANGONET_".
+- leur définition doit être prioritairement locale à un fichier afin d'éviter la création d'un
+  fichier langonet_options.php.
+- la définition d'une constante doit être précédée d'un test : if (defined('nom de la constante') ...
