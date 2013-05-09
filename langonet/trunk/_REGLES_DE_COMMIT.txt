@@ -1,0 +1,111 @@
+********************************************
+****  les règles de codage de LangOnet  ****
+********************************************
+
+1- Concepts utilisés dans LongOnet
+----------------------------------
+
+Les règles de nommage définies dans ce fichier dérivent des concepts suivants :
+
+items de langue :
+	- couple associant un identifiant unique à un texte traduit dans une langue donnée.
+	- les items de langue sont des éléments d'un tableau associatif.
+
+raccourci :
+	- c'est l'identifiant unique d'un item de langue.
+	- est unique au sein d'un même module de langue.
+
+traduction :
+	- texte traduit de l'item de langue.
+
+module de langue :
+	- ensemble de raccourcis formant un tout cohérent.
+	- possède un identifiant unique comme ecrire, spip, public, langonet...
+
+code de langue :
+	- acronyme d'une langue.
+	- suit les normes ISO avec quelques distorsions.
+	- est de la forme : x, x_y, x_y_z où x,y et z possèdent de 2 à 4 caractères.
+
+fichier de langue :
+	- fichier PHP contenant les traductions d'un module de langue dans une langue donnée.
+	- définit les items de langue du module sous forme d'un tableau associatif.
+	- le tableau associatif est de la forme item[raccourci] = traduction.
+	- est situé dans le dossier lang/ de la racine d'un plugin.
+	- son nom est de la forme ${module}_${code_de_langue}.php
+
+occurrence d'utilisation d'un item de langue :
+	- expression autorisée d'un item de langue dans le code
+	- les formes autorisées sont répertoriées dans le fichier regexp.txt
+
+
+2- Règles de nommage des variables
+----------------------------------
+
+Les règles qui suivent doivent être respectées afin d'assurer une
+cohérence et une compréhension commune du code.
+Pour chaque concept, il est indiqué le préfixe de la variable sachant que celle-ci
+peut être qualifiée par un suffixe adéquat.
+Une variable de clé ou valeur dans un foreach est repérée par un underscore
+entre le $ et le préfixe.
+
+Une variable est donc de la forme : $[_]prefixe[_suffixe].
+Si une variable est un tableau, son préfixe est au pluriel et le suffixe s'accorde si besoin.
+
+raccourci :
+	- préfixe  : raccourci
+	- exemples : $raccourci, $_raccourci, $raccourci_brut...
+
+traduction :
+	- préfixe  : traduction
+	- exemples : $traduction, $_traduction, $traduction_fr...
+
+module de langue :
+	- préfixe  : module
+	- exemples : $module, $_module, $module_fr...
+
+code de langue :
+	- préfixe  : langue
+	- exemples : $langue, $_langue, $langue_source, $langue_cible...
+
+fichier de langue :
+	- préfixe  : fichier
+	- exemples : $fichier, $_fichier, $fichiers, $fichier_source...
+
+occurrence d'utilisation d'un item de langue :
+	- préfixe  : occurrence
+	- exemples : $occurrence, $_occurrence, $occurrences, $occurences_regexp...
+	- note     : une occurrence est en général un tableau contenant divers éléments
+	             représentatifs (numéros de ligne te colonne, item, expression fournie par la regexp...)
+
+En outre, d'autres règles génériques sont utilisées dans le code du plugin, à savoir :
+
+compteur d'élément :
+	- préfixe  : nb_ (le suffixe représentant l'élément doit être au pluriel)
+	- exemples : $nb_occurrences, $_nb_elements...
+
+numéro d'élément :
+	- préfixe  : no_
+	- exemples : $no_ligne, $_no_colonne...
+
+
+3- Règles de nommage des fonctions
+----------------------------------
+
+Le règles qui suivent sont applicables à toutes les fonctions du plugin.
+
+- le nom des fonctions doit contenir un verbe à l'intransitif pour expliquer le but
+- seules les fonctions dont la visibilité est externe (API) sont préfixées par "langonet_"
+  (par exemple celles de langonet_fonctions.php).
+  Cela ne concernent pas les fonctions de "personnalisation de SPIP" (pipeline, formulaire...)
+  qui suivent des règles propres.
+- les fonctions doivent renvoyer un résultat, a minima, true/false.
+
+
+3- Règles de nommage des constantes
+-----------------------------------
+
+Les constantes doivent être nommées avec le préfixe "_LANGONET_".
+Leur définition doit être prioritairement locale à un fichier afin d'éviter la création d'un
+fichier langonet_options.php.
+La définition d'une constante doit être précédée d'un test : if (defined('nom de la constante') ...

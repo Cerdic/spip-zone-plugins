@@ -96,28 +96,28 @@ function collecter_occurrences($fichiers) {
 
 	foreach ($fichiers as $_fichier) {
 		if ($contenu = file($_fichier)) {
-			foreach ($contenu as $_no_ligne => $ligne) {
+			foreach ($contenu as $_no_ligne => $_ligne) {
 				if (stripos($_fichier, '.xml') !== false) {
-					if (preg_match_all(_LANGONET_ITEM_X_CONTENU, $ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_X_CONTENU, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
-					if (preg_match_all(_LANGONET_ITEM_X_ATTRIBUT, $ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_X_ATTRIBUT, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 				else {
-					if (preg_match_all(_LANGONET_ITEM_B, $ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_B, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
-					if (preg_match_all(_LANGONET_ITEM_A, $ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_A, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
-					if (preg_match_all(_LANGONET_ITEM_G, $ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_G, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, true);
-					if (preg_match_all(_LANGONET_ITEM_H, $ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, true);
+					if (preg_match_all(_LANGONET_ITEM_H, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 			}
 		}
@@ -137,7 +137,7 @@ function collecter_occurrences($fichiers) {
  * @param string $no_ligne
  * @param bool $eval
  */
-function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $eval=false) {
+function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 
 	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
@@ -153,6 +153,8 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $eva
 	list($item, $args) = extraire_arguments($raccourci_regexp);
 	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
 	$raccourci_argumente .= $args;
+
+	$occurrence[] = $ligne;
 
 	$utilises['items'][$raccourci_argumente] = $item;
 	$utilises['modules'][$raccourci_argumente] = $module;
