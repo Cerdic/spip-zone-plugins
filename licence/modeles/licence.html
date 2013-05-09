@@ -38,7 +38,9 @@
 		[(#SET{logo,[(#CHEMIN{img_pack/[(#GET{icon_licence})]}
 						|image_passe_partout{[(#ENV{largeur_logo,''})],[(#ENV{hauteur_logo,32})]}
 						|inserer_attribut{title,[(#GET{desc_licence}|attribut_html)]}
-						|inserer_attribut{alt,[(#GET{name_licence}|attribut_html)]})]})]
+						|inserer_attribut{alt,''})]})]
+		[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}}|non)
+		[(#SET{logo,[(#GET{logo}|inserer_attribut{alt,[(#GET{name_licence}|attribut_html)]})]})]]
 	]
 	[(#ENV{modele_type}|=={mrss}|oui)
 	[<media:license type="text/html"[ href="(#GET{link_licence})"]>(#GET{name_licence})</media:license>]
@@ -49,7 +51,7 @@
 		]
 		[<a href="(#GET{link_licence})" class="spip_out" rel="external license" [title="(#GET{desc_licence}|attribut_html)"]>]
 			[(#GET{logo})]
-			[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}})#GET{name_licence}]
+			[(#GET{icon_licence}|=={''}|ou{#ENV{nom_licence}}|oui)#GET{name_licence}]
 		[</a>(#GET{link_licence}|oui)]
 	]
 </BOUCLE_selection>
