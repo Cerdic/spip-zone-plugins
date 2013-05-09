@@ -11,16 +11,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_NOTATION_AFFICHAGE_RAPIDE',1);
 
-function notation_en_etoile($nb, $id, $clicable=false){
+function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 	include_spip('inc/notation');
 	$ret = '';
 	if ($nb>0 && $nb<=0.5) $nb=1;
 	$needjs = "";
 	$max_note = notation_get_nb_notes();
-	$ret .= '<meta itemprop="ratingCount" class="best" content="'.$max_note.'" />';
-	$ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
 	$nb = round($nb);
-	$ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
+	if($microdatas){
+		$ret .= '<meta itemprop="ratingCount" class="best" content="'.$max_note.'" />';
+		$ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
+		$ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
+	}
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
 		$needjs = " notation_note_on_load";
 		$class = $clicable ? 'auto-submit-star' : 'star';
@@ -42,7 +44,7 @@ function notation_en_etoile($nb, $id, $clicable=false){
 			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$nb</a></div>";
 		}
 	}
-	return "<div class='notation_note$needjs' itemprop='aggregateRating' itemscope itemtype='http://schema.org/aggregateRating'>$ret</div>";
+	return "<div class='notation_note$needjs' ".($microdatas ? 'itemprop="aggregateRating" itemscope itemtype="http://schema.org/aggregateRating"':'').">$ret</div>";
 }
 
 
@@ -55,14 +57,22 @@ function notation_en_etoile($nb, $id, $clicable=false){
  * 
  * Un identifiant est calcule automatiquement, mais peut etre force 
  * #NOTATION_ETOILE{#NOTE,article#ID_ARTICLE}
+ * 
+ * Si vous souhaitez que la balise retourne les microdatas Aggregaterating
+ * (http://schema.org/aggregateRating), il faut mettre un troisième argument, par exemple :
+ * #NOTATION_ETOILE{#NOTATION_MOYENNE,'',oui}
  */
 function balise_NOTATION_ETOILE($p){
 	$nb = interprete_argument_balise(1,$p);
 	if (!$id = interprete_argument_balise(2,$p)){
 		$id = notation_calculer_id($p);
 	}
-
-	$p->code = "notation_en_etoile($nb,$id)";
+	$microdatas = false;
+	if($microdatas = interprete_argument_balise(3,$p)){
+		$p->code = "notation_en_etoile($nb,$id,false,true)";
+	}else{
+		$p->code = "notation_en_etoile($nb,$id)";
+	}
 	$p->interdire_scripts = false;
 	return $p;
 }
