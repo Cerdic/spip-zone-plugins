@@ -1,0 +1,48 @@
+nom: '<:paniers:nom_noisette:>'
+description: '<:paniers:description_noisette:>'
+icon: 'images/paniers-24.png'
+contexte:
+  - 'id_panier'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_noisette'
+      label: '<:paniers:noisette_label_afficher_titre_noisette:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'titre_noisette'
+      label: '<:paniers:noisette_label_titre_noisette:>'
+      defaut: 'paniers:titre_presse'
+      cacher_option_intro: 'oui'
+      datas:
+        'mediaspresse:titre_presse': '<:paniers:titre_mon_panier:>'
+        'mediaspresse:titre_revuedepresse': '<:paniers:titre_panier:>'
+        titre_perso: '<:paniers:noisette_titre_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_noisette_perso'
+      label: '<:paniers:noisette_label_titre_noisette_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:paniers:noisette_label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_lien_page_panier'
+      label: '<:paniers:noisette_label_afficher_lien_page_panier:>'
+      defaut: ''
