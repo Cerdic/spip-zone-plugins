@@ -7,6 +7,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 	include_spip('inc/config');
 	include_spip('inc/plugin');
 	include_spip('commandes_fonctions');
+	include_spip('inc/puce_statut');
 	$config = lire_config('commandes');
 
 	$choix_expediteurs = array(
@@ -18,6 +19,10 @@ function formulaires_configurer_commandes_saisies_dist(){
 	if (defined('_DIR_PLUGIN_FACTEUR')){
 		$choix_expediteurs['facteur'] = _T('commandes:notifications_expediteur_choix_facteur');
 	}
+
+	// liste des statuts précédés de leur puce
+	foreach (commandes_lister_statuts() as $k=>$v)
+		$statuts[$k] = http_img_pack(statut_image('commande',$k),'')."&nbsp;".$v;
 
 	return array(
 		array(
@@ -72,13 +77,12 @@ function formulaires_configurer_commandes_saisies_dist(){
 			),
 			'saisies' => array(
 				array(
-					'saisie' => 'selection_multiple',
+					'saisie' => 'checkbox',
 					'options' => array(
 						'nom' => 'quand',
 						'label' => _T('commandes:notifications_quand_label'),
 						'explication' => _T('commandes:notifications_quand_explication'),
-						'cacher_option_intro' => 'on',
-						'datas' => commandes_lister_statuts(),
+						'datas' => $statuts,
 						'defaut' => $config['quand']
 					)
 				),
