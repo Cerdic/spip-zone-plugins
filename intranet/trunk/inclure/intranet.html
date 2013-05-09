@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="none" />
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+<link rel="stylesheet" href="[(#VAL{reset.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{clear.css}|find_in_theme|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#VAL{minipres.css}|find_in_theme|direction_css)]" type="text/css" />
+
+<script type='text/javascript'><!--
+jQuery(function(){ jQuery('input#var_login').focus();
+// --></script>
+</head>
+<body>
+	<div id="minipres">
+		<h1><:intranet:info_intranet:></h1>
+		[(#CONFIG{intranet/message,<:intranet:info_intranet_texte:>}|propre)]
+		[(#FORMULAIRE_LOGIN{#ENV{url,#SELF}})]
+	</div>
+</body>
+</html>
