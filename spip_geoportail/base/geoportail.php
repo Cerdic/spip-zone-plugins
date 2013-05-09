@@ -68,7 +68,7 @@ $spip_geoservices = array(
 					"statut"		=> "ENUM ('prop','publie','refuse') default 'prop'", 
 					"niveau"		=> "INTEGER DEFAULT '0' NOT NULL", 
 					
-					"type"			=> "ENUM ('WMS', 'WMS-C', 'WFS', 'KML', 'GeoPortail') default 'WMS'", 
+					"type"			=> "ENUM ('WMS', 'WMS-C', 'WFS', 'KML', 'GeoPortail', 'OSM', 'TMS') default 'WMS'", 
 					"titre"			=> "TEXT NOT NULL default ''",
 					"descriptif"	=> "TEXT NOT NULL default ''",
 					"url_geoservice"=> "TEXT NOT NULL default ''",

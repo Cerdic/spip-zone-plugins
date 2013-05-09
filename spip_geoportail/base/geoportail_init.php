@@ -56,9 +56,17 @@ function geoportail_install($action){
 			if (isset($desc['field']['id_geoservice']) && !isset($desc['field']['zone']))
 			{	spip_query("ALTER TABLE spip_geoservices ADD zone varchar(3) NOT NULL default 'WLD'");
 			}
-			// Mettre a jour la zone des geoservices
+			// Mettre a jour la selection des geoservices
 			if (isset($desc['field']['id_geoservice']) && !isset($desc['field']['selection']))
 			{	spip_query("ALTER TABLE spip_geoservices ADD selection TINYINT(1) default '0'");
+			}
+			// Mettre a jour la liste des types de geoservices 
+			if ($desc)
+			{	$stat = spip_fetch_array(spip_query("DESCRIBE spip_geoservices type"));
+				if (strpos($stat['Type'],"'OSM'")===false)
+				{	spip_query ("ALTER TABLE spip_geoservices CHANGE type type ENUM( 'WMS', 'WMS-C', 'WFS', 'KML', 'GeoPortail', 'OSM', 'TMS' ) DEFAULT 'WMS'");
+					echo (" OSM+TMS");
+				}
 			}
 			
 			// Pas de RGC

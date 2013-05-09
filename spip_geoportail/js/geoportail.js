@@ -511,7 +511,6 @@ var spipGeoportail = jQuery.geoportail =
 				{	maxExtent: options.maxextent,
 					minZoomLevel: options.minzoom,
 					maxZoomLevel: options.maxzoom,
-					select: false,
 					description: desc,
 					metadataURL: options.link,
 					opacity: options.opacity,
@@ -519,6 +518,55 @@ var spipGeoportail = jQuery.geoportail =
 					select: options.select,
 					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
 				});
+		},
+		// Chargement d'un layer OSM
+		OSM: function (map, type, titre, desc, service, options)
+		{	if (!service.url.match(/\/$/)) service.url += "/";
+			var l = new OpenLayers.Layer.OSM( titre, service.url+"${z}/${x}/${y}.png", 
+				{	'sphericalMercator': true, 
+					isBaseLayer:false,
+					maxExtent: options.maxextent,
+					minZoomLevel: options.minzoom,
+					maxZoomLevel: options.maxzoom,
+					opacity: options.opacity,
+					isBaseLayer: false,
+					description: desc,
+					metadataURL: options.link,
+					visibility: options.visibility,
+					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+				});
+			map.getMap().addLayer(l);
+		},
+		// Chargement d'un layer TMS
+		TMS: function (map, type, titre, desc, service, options)
+		{	if (!service.url.match(/\/$/)) service.url += "/";
+			var l = new OpenLayers.Layer.TMS (titre, service.url, 
+				{	type: 'png', 
+					getURL: function(bounds) 
+					{	var res = this.map.getResolution();
+						var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+						var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+						var z = this.map.getZoom();
+						var limit = Math.pow(2, z);
+						if (y < 0 || y >= limit) return OpenLayers.Util.getImagesLocation() + "404.png";
+						else 
+						{	x = ((x % limit) + limit) % limit;
+							return this.url + z + "/" + x + "/" + y + "." + this.type;
+						}
+					},
+					transparent: true, 
+					isBaseLayer: false,
+					maxExtent: new OpenLayers.Bounds (-20037508.34, -20037508.34, 20037508.34, 20037508.34), //options.maxextent,
+					tileOrigin: new OpenLayers.LonLat (-20037508.34, -20037508.34),
+					minZoomLevel: options.minzoom,
+					maxZoomLevel: options.maxzoom,
+					opacity: options.opacity,
+					description: desc,
+					metadataURL: options.link,
+					visibility: options.visibility,
+					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+				});
+			map.getMap().addLayer(l);
 		}
 	},
 	
