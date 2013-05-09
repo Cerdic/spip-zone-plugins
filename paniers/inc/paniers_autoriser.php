@@ -20,12 +20,4 @@ function autoriser_paniers_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
-/**
- * Autorisation à configurer le plugin
- * Admins complets
- */ 
-function autoriser_paniers_configurer_dist($faire, $type, $id, $qui, $opts) {
-	return $qui['statut'] == '0minirezo';
-}
-
 ?>
