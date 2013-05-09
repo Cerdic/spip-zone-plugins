@@ -1,7 +1,7 @@
 <BOUCLE_article(ARTICLES){id_article}{statut?}>
 [(#SET{titre,[(#TITRE|sinon{<:emballe_medias:titre_nouveau_document:>})]})]
 <h2 class="h2"><:emballe_medias:titre_modification_media{titre=#GET{titre}}:></h2>
-<div class="texte description_article description_emballe_media diogene_#ENV{id_diogene}">
+<div class="texte diogene_description description_article description_emballe_media diogene_#ENV{id_diogene}">
 	[(#EM_TYPE|in_array{#LISTE{audio,video,texte,image}}|oui)
 	<p>
 		<strong><:emballe_medias:type_media:></strong>
