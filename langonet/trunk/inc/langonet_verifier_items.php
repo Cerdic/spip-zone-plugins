@@ -18,8 +18,11 @@ if (!defined('_LANGONET_ITEM_G'))
 if (!defined('_LANGONET_ITEM_H'))
 	define("_LANGONET_ITEM_H", "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
 // pour plugin.xml (obsolete a terme)
-if (!defined('_LANGONET_ITEM_X'))
-	define("_LANGONET_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+if (!defined('_LANGONET_ITEM_X_CONTENU'))
+	define("_LANGONET_ITEM_X_CONTENU", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
+// pour paquet.xml entre autres
+if (!defined('_LANGONET_ITEM_X_ATTRIBUT'))
+	define("_LANGONET_ITEM_X_ATTRIBUT", ",[a-z0-9_]+=['\"]([a-z0-9_]+):([a-z0-9_]+)['\"](),iS");
 
 
 /**
@@ -47,7 +50,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, 
 
 	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
 	// précédemment constituée.
-	$resultats =  collecter_occurrences($fichiers);
+	$utilises = collecter_occurrences($fichiers);
 
 	// On charge le fichier de langue à vérifier qui doit exister dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
@@ -65,11 +68,11 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, 
 	if ($verification == 'definition') {
 		// Les chaines definies sont dans les fichiers definis par la RegExp ci-dessous
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
-		$files = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
-		$resultats = langonet_classer_items($module, $resultats, $GLOBALS[$var_langue], $files);
+		$fichiers_langue = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
+		$resultats = reperer_items_manquants($module, $utilises, $GLOBALS[$var_langue], $fichiers_langue);
 	}
 	elseif ($GLOBALS[$var_langue])
-		$resultats = langonet_reperer_items($resultats, $GLOBALS[$var_langue]);
+		$resultats = reperer_items_inutiles($utilises, $GLOBALS[$var_langue]);
 
 	// Completude de la structure de résultats
 	$resultats['module'] = $module;
@@ -89,13 +92,16 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, 
  */
 function collecter_occurrences($fichiers) {
 
-	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'tous' => array());
+	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'item_tous' => array());
 
 	foreach ($fichiers as $_fichier) {
 		if ($contenu = file($_fichier)) {
 			foreach ($contenu as $_no_ligne => $ligne) {
 				if (stripos($_fichier, '.xml') !== false) {
-					if (preg_match_all(_LANGONET_ITEM_X, $ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_X_CONTENU, $ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
+					if (preg_match_all(_LANGONET_ITEM_X_ATTRIBUT, $ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne);
 				}
@@ -145,7 +151,7 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $eva
 	if (!$raccourci_regexp) return; // TODO : c'est quoi ça ?
 
 	list($item, $args) = extraire_arguments($raccourci_regexp);
-	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci($raccourci_regexp, $utilises['items']);
+	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
 	$raccourci_argumente .= $args;
 
 	$utilises['items'][$raccourci_argumente] = $item;
@@ -178,16 +184,15 @@ function extraire_arguments($occ) {
 
 //  Construire la liste des items definis mais apparament pas utilises
 
-function langonet_reperer_items($utilises, $init)
-{
+function reperer_items_inutiles($utilises, $items) {
 	$item_non = $item_peut_etre = $fichier_peut_etre = array();
-	foreach ($init as $_item => $_traduction) {
-		if (!in_array ($_item, $utilises['items'])) {
+	foreach ($items as $_raccourci => $_traduction) {
+		if (!in_array ($_raccourci, $utilises['items'])) {
 			// L'item est soit non utilise, soit utilise dans un contexte variable
 			$contexte_variable = false;
 			foreach($utilises['items'] as $_cle => $_valeur) {
 				if ($utilises['suffixes'][$_cle]) {
-					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
+					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
 						$contexte_variable = true;
 						break;
 					}
@@ -195,11 +200,11 @@ function langonet_reperer_items($utilises, $init)
 			}
 			if (!$contexte_variable) {
 				// L'item est vraiment non utilise
-				$item_non[] = $_item;
+				$item_non[] = $_raccourci;
 			} else {
 				// L'item est utilise dans un contexte variable
-				$item_peut_etre[] = $_item;
-				$fichier_peut_etre[$_item] = array();
+				$item_peut_etre[] = $_raccourci;
+				$fichier_peut_etre[$_raccourci] = array();
 			}
 		}
 	}
@@ -213,10 +218,10 @@ function langonet_reperer_items($utilises, $init)
 // On construit la liste de tous les items definis dans les fichiers de langues fournis
 // Ensuite on construit la liste des items utilises mais non definis
 
-function langonet_classer_items($module, $utilises, $init=array(), $files=array()) {
+function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_langue=array()) {
 
 	$tous_lang = array();
-	foreach ($files as $_fichier) {
+	foreach ($fichiers_langue as $_fichier) {
 		$module_def = preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $m) ? $m[1] : '';
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
 			if (preg_match_all("#^[\s\t]*['\"]([a-z0-9_]+)['\"][\s\t]*=>(.*)$#i", $texte, $matches, PREG_SET_ORDER)) {
@@ -232,7 +237,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 
 	$item_non_mais = $item_non_mais_nok = $item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = array();
 	foreach ($utilises['items'] as $_cle => $_valeur) {
-		if (!isset($init[$_valeur])) {
+		if (!isset($items[$_valeur])) {
 			if (!$utilises['suffixes'][$_cle]) {
 				$mod = $utilises['modules'][$_cle];
 				if ($mod == $module) {
@@ -279,7 +284,7 @@ function langonet_classer_items($module, $utilises, $init=array(), $files=array(
 				// il ne peut etre trouve dans un fichier de langue.
 				// On regarde s'il existe des items ressemblants.
 				$item_trouve = false;
-				foreach($init as $_item => $_traduction) {
+				foreach($items as $_item => $_traduction) {
 					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
 						$item_trouve = true;
 						$item_peut_etre[] = $_valeur;

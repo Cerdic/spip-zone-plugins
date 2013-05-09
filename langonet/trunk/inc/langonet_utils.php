@@ -68,7 +68,7 @@ function calculer_raccourci_brut($occurrence) {
  * @param array		$item_md5
  * @return string
  */
-function calculer_raccourci($occurrence, $item_md5) {
+function calculer_raccourci_unique($occurrence, $item_md5) {
 	// Calcul du raccourci brut de l'item de langue
 	$raccourci_brut = calculer_raccourci_brut($occurrence);
 	$raccourci = $raccourci_brut;
