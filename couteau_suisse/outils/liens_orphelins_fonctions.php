@@ -1,7 +1,7 @@
 <?php
 /*
  Liens orphelins - Code & integration 2007 : Patrice Vanneufville
- Toutes les infos sur : http://www.spip-contrib.net/?article2443
+ Toutes les infos sur : http://www.contrib.spip.net/?article2443
 */
 
 include_spip('outils/inc_cs_liens');

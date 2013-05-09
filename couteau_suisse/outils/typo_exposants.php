@@ -1,7 +1,7 @@
 <?php
 // Filtre typographique exposants pour langue francaise
 // serieuse refonte 2006 : Patrice Vanneufville
-// Toutes les infos sur : http://www.spip-contrib.net/?article1564
+// Toutes les infos sur : http://www.contrib.spip.net/?article1564
 
 // TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
 // exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting

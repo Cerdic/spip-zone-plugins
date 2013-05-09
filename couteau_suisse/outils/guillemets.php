@@ -1,6 +1,6 @@
 <?php
 // integration 2007 : Patrice Vanneufville
-// Toutes les infos sur : http://www.spip-contrib.net/?article1592
+// Toutes les infos sur : http://www.contrib.spip.net/?article1592
 
 /*
 Fichier de formatage typographique des guillemets, par Vincent Ramos

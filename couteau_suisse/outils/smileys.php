@@ -2,7 +2,7 @@
 
 // Outil SMILEYS - 25 decembre 2006
 // serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville, 2006
-// Toutes les infos sur : http://www.spip-contrib.net/?article1561
+// Toutes les infos sur : http://www.contrib.spip.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
 // fonction ajoutant un sailey au tableau $tab

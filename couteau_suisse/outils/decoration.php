@@ -3,7 +3,7 @@
 /*
 	Cet outil 'decoration' permet aux redacteurs d'un site spip de d'appliquer des styles aux textes SPIP
 	Attention : seules les balises en minuscules sont reconnues.
-	Doc : http://www.spip-contrib.net/?article2427
+	Doc : http://www.contrib.spip.net/?article2427
 */
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau

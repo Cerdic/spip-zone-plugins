@@ -2,7 +2,7 @@
 /**
  * @name 		DevelopmentDebugger
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
- * @link 		http://www.spip-contrib.net/?article3572
+ * @link 		http://www.contrib.spip.net/?article3572
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

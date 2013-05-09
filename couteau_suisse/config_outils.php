@@ -4,7 +4,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article2166   #
+#  Infos : http://www.contrib.spip.net/?article2166   #
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -547,7 +547,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'spip_log',
-	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]':'') . (defined('_SPIP20100')?'[[->%log_non%]]':'') . "<:spip_log:4:>\n<:spip_log:3:>",
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]][[->%log_non%]]':(defined('_SPIP20100')?'[[->%log_non%]]':'')) . "<:spip_log:4:>\n<:spip_log:3:>",
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
 		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%%%log_non%%',
 	'categorie' =>'devel',
@@ -1634,11 +1634,11 @@ if(isset($GLOBALS['mes_outils'])) {
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
-// http://www.spip-contrib.net/Citations
-// http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
-// http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// http://www.spip-contrib.net/Generation-automatique-de
-// http://www.spip-contrib.net/Balise-LOGO-ARTICLE-ORITRAD
+// http://www.contrib.spip.net/Citations
+// http://www.contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
+// http://www.contrib.spip.net/Ajouter-une-lettrine-aux-articles
+// http://www.contrib.spip.net/Generation-automatique-de
+// http://www.contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');

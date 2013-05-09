@@ -2,7 +2,7 @@
 
 // Outil SMILEYS - 25 decembre 2006
 // balise #SMILEYS : Patrice Vanneufville, 2007
-// Toutes les infos sur : http://www.spip-contrib.net/?article1561
+// Toutes les infos sur : http://www.contrib.spip.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
 function balise_SMILEYS_dist($p) {
