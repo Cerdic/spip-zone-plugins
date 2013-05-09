@@ -70,7 +70,7 @@
 		(#ENV{autobuffer,#ENV{preload,metadata}}|in_array{#ARRAY{0,auto,1,metadata}}|?{[preload="(#ENV{autobuffer,#ENV{preload,metadata}})"],preload="metadata"})]][(#ENV{loop,non}|in_array{#ARRAY{0,false,1,non}}|non)
 		loop][
 		width="(#GET{largeur}|match{%}|?{'',#GET{largeur}})"]
-		style="[width:(#GET{largeur}|match{%}|?{#GET{largeur},[(#GET{largeur})px]});]">
+		style="[width:(#GET{largeur}|match{%}|?{#GET{largeur},[(#GET{largeur})px]});][height:(#GET{hauteur})px]">
 			<BOUCLE_ssdoc_mp3(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}{extension IN mp3}{tout}>
 			<source type="#MIME_TYPE" src="[(#FICHIER|timestamp|url_absolue)]" />
 			</BOUCLE_ssdoc_mp3>
