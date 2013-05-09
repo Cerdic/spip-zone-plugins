@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.8.4"
+	version="4.8.5"
 	schema="2.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
@@ -29,7 +29,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.8.0" lien="http://contrib.spip.net/IMG/zip/leaflet-gis-4.8.0.zip" />
+	<lib nom="leaflet-gis-4.8.5" lien="http://contrib.spip.net/IMG/zip/leaflet-gis-4.8.5.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
