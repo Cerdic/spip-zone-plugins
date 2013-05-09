@@ -4,9 +4,9 @@
 	<BOUCLE_diogenes(DIOGENES)>
 	[(#AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui)
 	[(#CHEMIN{inclure/diogenes_vos_objets_#OBJET.html}|oui)
-	[(#INCLURE{fond=inclure/diogenes_vos_objets_#OBJET,id_diogene,id_auteur=#SESSION{id_auteur},env,ajax})#SET{count,true}]]
+	[(#INCLURE{fond=inclure/diogenes_vos_objets_#OBJET,id_diogene,id_auteur=#SESSION{id_auteur},type_pagination=page,env,ajax})#SET{count,true}]]
 	[(#CHEMIN{inclure/diogenes_vos_objets_#OBJET.html}|non)
-	[(#INCLURE{fond=inclure/diogenes_vos_objets_objet,id_diogene,id_auteur=#SESSION{id_auteur},env,ajax})#SET{count,true}]]]
+	[(#INCLURE{fond=inclure/diogenes_vos_objets_objet,id_diogene,id_auteur=#SESSION{id_auteur},type_pagination=page,env,ajax})#SET{count,true}]]]
 	</BOUCLE_diogenes>
 	[(#GET{count}|=={false}|oui)
 	<div>

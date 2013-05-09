@@ -1,8 +1,7 @@
 <BOUCLE_diogene(DIOGENES){id_diogene}>
 [(#SET{req,[select objet.[(#OBJET|id_table_objet)] as id,objet.statut as statut_objet,objet.titre as titre from (#OBJET|table_objet_sql) AS objet LEFT JOIN spip_auteurs_liens AS auteur_lien ON auteur_lien.objet = 'signe' AND auteur_lien.id_objet = objet.id_signe where auteur_lien.objet='#OBJET' AND auteur_lien.id_auteur=[(#SESSION{id_auteur})] order by objet.[(#OBJET|id_table_objet)] desc]})]
 <B_objets>
-<div class="menu diogene #OBJET diogene_#ID_DIOGENE">
-	#ANCRE_PAGINATION
+<div class="menu diogene #OBJET diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
 	<BOUCLE_objets(DATA){source sql,#GET{req}}{pagination #ENV{nb,10}}>
@@ -14,7 +13,7 @@
 		</li>
 	</BOUCLE_objets>
 	</ul>
-	[<p class='pagination'>(#PAGINATION{prive})</p>]
+	[<p class='pagination'>(#PAGINATION{#ENV{type_pagination,page}})</p>]
 </div>
 </B_objets>
 <//B_objets>
