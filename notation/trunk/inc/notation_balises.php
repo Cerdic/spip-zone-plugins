@@ -1,12 +1,12 @@
 <?php
 /**
-* Plugin Notation 
-* par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
-* 
-* Copyright (c) 2008
-* Logiciel libre distribue sous licence GNU/GPL.
-*  
-**/
+ * Plugin Notation
+ * par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
+ *
+ * Copyright (c) 2008
+ * Logiciel libre distribue sous licence GNU/GPL.
+ *
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_NOTATION_AFFICHAGE_RAPIDE',1);
@@ -15,10 +15,12 @@ function notation_en_etoile($nb, $id, $clicable=false){
 	include_spip('inc/notation');
 	$ret = '';
 	if ($nb>0 && $nb<=0.5) $nb=1;
-	$nb = round($nb);
-
 	$needjs = "";
-
+	$max_note = notation_get_nb_notes();
+	$ret .= '<meta itemprop="ratingCount" class="best" content="'.$max_note.'" />';
+	$ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
+	$nb = round($nb);
+	$ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
 		$needjs = " notation_note_on_load";
 		$class = $clicable ? 'auto-submit-star' : 'star';
@@ -27,7 +29,7 @@ function notation_en_etoile($nb, $id, $clicable=false){
 		AND lire_config('notation/change_note')){
 			$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$checked$disabled />\n";
 		}
-		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+		for ($i=1; $i<=$max_note; $i++){
 			$checked = ($i==$nb) ? " checked='checked'" : "";
 			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled />\n";
 		}
@@ -35,12 +37,12 @@ function notation_en_etoile($nb, $id, $clicable=false){
 	else 
 	// eviter de generer X boutons radio inactifs remplaces par le javascript au chargement
 	{
-		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+		for ($i=1; $i<=$max_note; $i++){
 			$checked = ($i<=$nb) ? " star-rating-on" : "";
-			$ret .= "<div class='star-rating star_group_notation-$id star-rating-readonly$checked'><a title='$nb'>$nb</a></div>";
+			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$nb</a></div>";
 		}
 	}
-	return "<div class='notation_note$needjs'>$ret</div>";
+	return "<div class='notation_note$needjs' itemprop='aggregateRating' itemscope itemtype='http://schema.org/aggregateRating'>$ret</div>";
 }
 
 
