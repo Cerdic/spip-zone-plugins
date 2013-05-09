@@ -1,17 +1,26 @@
 <?php
 /**
-* Plugin Notation v.0.5
-* par JEM (jean-marc.viglino@ign.fr)
-* 
-* Copyright (c) 2008
-* Logiciel libre distribue sous licence GNU/GPL.
-*  
-* Definition des tables
-*  
-**/
+ * Plugin Notation
+ * par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
+ *
+ * Copyright (c) 2008
+ * Logiciel libre distribue sous licence GNU/GPL.
+ * 
+ * @package SPIP\Notation\Pipelines
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion dans le pipeline declarer_tables_principales (SPIP)
+ * Déclarer la table principale spip_notations pour le compilateur
+ * 
+ * @pipeline declarer_tables_principales
+ * @param array $tables_principales
+ * 		Déclarations des tables pour le compilateur
+ * @return array
+ * 		Déclarations des tables pour le compilateur
+ */
 function notation_declarer_tables_principales($tables_principales){
 	/**
 	 * Un champ accepter_note sur les articles permettant de choisir si oui ou non on peut noter
@@ -48,7 +57,16 @@ function notation_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-
+/**
+ * Insertion dans le pipeline declarer_tables_auxiliaires (SPIP)
+ * Déclarer la table auxiliaire spip_notations_objets pour le compilateur
+ * 
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables_auxiliaires
+ * 		Déclarations des tables pour le compilateur
+ * @return array
+ * 		Déclarations des tables pour le compilateur
+ */
 function notation_declarer_tables_auxiliaires($tables_auxiliaires){	
 	// cette table est une sorte de vue sur la table notation
 	// pour determiner la note moyenne, ponderee et le nombre de votes
@@ -78,7 +96,16 @@ function notation_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
-
+/**
+ * Insertion dans le pipeline declarer_tables_auxiliaires (SPIP)
+ * Déclarer les interfaces des tables spip_notations et spip_notations_objets pour le compilateur
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function notation_declarer_tables_interfaces($interface){
 	// definir les jointures possibles
 	$interface['table_des_tables']['notations'] = 'notations';
