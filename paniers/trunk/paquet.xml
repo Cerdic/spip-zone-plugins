@@ -23,9 +23,9 @@
 	<necessite nom="spip_bonux" compatibilite="[2.2.17;]" />
 	<necessite nom="saisies" compatibilite="[1.9.8;]" />
 
-	<pipeline nom="declarer_tables_principales" inclure="base/paniers_tables.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/paniers_tables.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/paniers_tables.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/paniers.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/paniers.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/paniers.php" />
 
 	<pipeline nom="autoriser" inclure="paniers_autorisations.php" /> <!-- autorisations -->
 	<pipeline nom="optimiser_base_disparus" inclure="paniers_pipelines.php" /> <!-- suppression liens morts -->
