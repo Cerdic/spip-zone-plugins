@@ -1,10 +1,10 @@
 <paquet
 	prefix="intranet"
 	categorie="maintenance"
-	version="0.1.0"
-	etat="dev"
+	version="0.1.1"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/entravaux-32.png"
+	logo="prive/themes/spip/images/intranet-64.png"
 >	
 
 	<nom>Intranet</nom>
@@ -15,4 +15,5 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="styliser" />
+	<pipeline nom="intranet_pages_ok" action="" />
 </paquet>
