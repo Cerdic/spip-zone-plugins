@@ -1,8 +1,10 @@
 <?php
-/*
- * Plugin xxx
- * (c) 2009 xxx
- * Distribue sous licence GPL
+/**
+ * Plugin Notation
+ * par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
+ *
+ * Copyright (c) 2008
+ * Logiciel libre distribue sous licence GNU/GPL.
  *
  */
 
