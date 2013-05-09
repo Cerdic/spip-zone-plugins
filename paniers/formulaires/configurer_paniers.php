@@ -27,7 +27,8 @@ function formulaires_configurer_paniers_saisies_dist(){
 					'options' => array(
 						'nom' => 'limite_ephemere',
 						'label' => _T('paniers:limite_ephemere_label'),
-						'defaut' => $config['limite_ephemere']
+						'defaut' => $config['limite_ephemere'],
+						'li_class' => 'long_label'
 					)
 				),
 				array(
@@ -35,7 +36,8 @@ function formulaires_configurer_paniers_saisies_dist(){
 					'options' => array(
 						'nom' => 'limite_enregistres',
 						'label' => _T('paniers:limite_enregistres_label'),
-						'defaut' => $config['limite_enregistres']
+						'defaut' => $config['limite_enregistres'],
+						'li_class' => 'long_label'
 					)
 				)
 			)
