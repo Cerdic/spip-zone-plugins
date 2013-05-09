@@ -47,7 +47,7 @@
 		<url>configurer_paniers</url>
 	</bouton>
 
-   <necessite id="SPIP" version="[2.1.8;3.1.99]" />
+   <necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="prix" version="[0.1;]" />	
 	<necessite id="spip_bonux" version="[2.2.17;]" />	
 	<necessite id="saisies" version="[1.9.8;]" />
