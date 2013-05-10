@@ -6,7 +6,7 @@ parametres:
     saisie: 'selecteur_document'
     options:
       nom: 'id_modele'
-      label: '<:langotests:label_id_document:>'
+      label: '<:langotests:label_1:>'
       defaut: ''
       env: 'oui'
       obligatoire: 'oui'
@@ -16,7 +16,7 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'modele'
-      label: '<:langotests:label_modele:>'
+      label: '<:langotests:label_2:>'
       obligatoire: 'oui'
       cacher_option_intro: 'oui'
       defaut: 'doc'
@@ -28,9 +28,9 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'align'
-      label: '<:langotests:label_alignement:>'
+      label: '<:langotests:label_3:>'
       defaut: ''
       datas:
-        left: '<:langotests:item_left:>'
+        left: '<:langotests:label_4:>'
         center: '<:voir:>'
         right: '<:voir_en_ligne:>'

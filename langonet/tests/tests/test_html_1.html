@@ -5,8 +5,8 @@
 			<strong class="caption">
 				[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
 				[(#ENV{total}|singulier_ou_pluriel{
-									essai:message_ok_fonction_l_1,
-									essai:message_ok_fonction_l_n,
+									langotests:message_ok_fonction_l_1,
+									langotests:message_ok_fonction_l_n,
 									nberr})]
 			</strong>
 		</caption>
@@ -14,20 +14,20 @@
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
 			<tr class="row_odd">
 				<td colspan="3" class="raccourci">
-					<:essai:utilisation_html:>
+					<:langotests:utilisation_html:>
 				</td>
 			</tr>
 	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
 		<B_lignes>
 			<tr class="row_even">
-				<td class="fichier" colspan="3">[(#VAL{essai:utilisation_val_1}|_T)]</td>
+				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_1}|_T)]</td>
 			</tr>
 		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
 			#SET{ligne, #CLE}
 			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
 			<tr class="row_even">
-				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
-				<td class="colonne">[C(#CLE|plus{1})]</td>
+				<td class="ligne"><:langotests:ligne_html:></td>
+				<td class="colonne"><:voir_en_ligne:></td>
 				<td class="occurrence">
 					[<code>(#VALEUR|table_valeur{0}
 						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8}

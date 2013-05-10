@@ -62,5 +62,6 @@ Les utilisations avec ou sans module sont détectées.
 	- exemples	:
 		left: '<:langonet:item_left:>'
 		right: '<:item_right:>'
-	- regexp	: une regexp pour les deux cas utilisée pour le HTML aussi (donc plus verbeuse)
-		%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S
+	- regexp	: une regexp pour les deux cas
+		,<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,s
+
