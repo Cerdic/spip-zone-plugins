@@ -1,0 +1,36 @@
+nom: '<:bouton_ajouter:>'
+logo: 'images/media-24.png'
+icone_barre: 'media.png'
+parametres:
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'id_modele'
+      label: '<:langotests:label_id_document:>'
+      defaut: ''
+      env: 'oui'
+      obligatoire: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'modele'
+      label: '<:langotests:label_modele:>'
+      obligatoire: 'oui'
+      cacher_option_intro: 'oui'
+      defaut: 'doc'
+      datas:
+        doc: 'doc'
+        img: 'img'
+        emb: 'emb'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: '<:langotests:label_alignement:>'
+      defaut: ''
+      datas:
+        left: '<:langotests:item_left:>'
+        center: '<:voir:>'
+        right: '<:voir_en_ligne:>'

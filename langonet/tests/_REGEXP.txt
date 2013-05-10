@@ -1,0 +1,66 @@
+**********************************************
+****  Regexp et cas de tests de LangOnet  ****
+**********************************************
+
+1- Liste des fichiers concernés
+-------------------------------
+
+L'utilisation des items de langue est autorisé dans les fichiers :
+
+	- XML  : fichiers .xml comme paquet.xml, plugin.xml...
+	- YAML : fichiers .yaml comme ceux utilisés pour les saisies.
+	- PHP  : fichiers .php sauf ceux inclus dans les dossiers lang/ req/ et charsets/.
+	- HTML : fichiers .html correspondant aux squelettes SPIP.
+
+
+2- Cas d'utilisation des items de langue et regexp
+--------------------------------------------------
+
+2.1 - Pour les fichiers XML
+
+Le problème est la détection des items de langue de SPIP c'est-à-dire ceux qui ne sont pas préfixés du nom
+du module. Pour être capable de les repérer au maximum, on distingue le paquet.xml, le plugin.xml - pour lequel
+c'est possible - et les autres fichiers XML.
+
+Pour le paquet.xml:
+	- note		: les items sont uniquement contenus dans un attribut "titre"
+	- cas 1		: l'item est la valeur d'un attribut de nom "titre" sous la forme "module:raccourci_item"
+	- cas 2		: l'item est la valeur d'un attribut de nom "titre" sous la forme "raccourci_item"
+	- exemples	:
+		<onglet nom="id_onglet" titre="langonet:bouton_generer" parent="langonet" action="generer" />
+		<onglet nom="id_onglet" titre="voir_en_ligne" parent="langonet" action="voir" />
+	- regexp	: ,titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],is
+
+Pour le plugin.xml:
+	- note		: les items sont uniquement contenus dans une balise "<titre>"
+	- cas 1		: l'item est le contenu d'une balise de nom "titre" sous la forme "module:raccourci_item"
+	- cas 2		: l'item est le contenu d'une balise de nom "titre" sous la forme "raccourci_item"
+	- exemples	:
+		<onglet nom="id_onglet" titre="langonet:bouton_generer" parent="langonet" action="generer" />
+		<onglet nom="id_onglet" titre="voir_en_ligne" parent="langonet" action="voir" />
+	- regexp	: ,<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,is
+
+Pour les autres fichiers XML:
+	- note		: on ne peut pas chercher les items sans module car certains pourraient être des faux positifs
+	- cas 1		: l'item est le contenu d'une balise de nom "titre" sous la forme "module:raccourci_item"
+	- cas 2		: l'item est la valeur d'un attribut de nom "titre" sous la forme "module:raccourci_item"
+	- exemples	:
+		<nom>langonet:nom_plugin</nom>
+		<fonction nom="langonet" description="test-langonet:description_fonction_test" action="activer" />
+	- regexp	: une regexp pour chaque cas respectif
+		,<\w+>\s*(?:([a-z0-9_-]+):)([a-z0-9_]+)\s*</\w+>,is
+		,\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],is
+
+
+2.2 - Pour les fichiers YAML
+
+Un seul cas d'utilisation est envisagé dans ces fichiers et correspond à l'utilisation standard dans les squelettes.
+Les utilisations avec ou sans module sont détectées.
+
+	- cas  1 : l'item est la chaine entre quotes associé à un label yaml sous la forme <:module:raccourci_item>
+	- cas  2 : l'item est la chaine entre quotes associé à un label yaml sous la forme <:raccourci_item>
+	- exemples	:
+		left: '<:langonet:item_left:>'
+		right: '<:item_right:>'
+	- regexp	: une regexp pour les deux cas utilisée pour le HTML aussi (donc plus verbeuse)
+		%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S

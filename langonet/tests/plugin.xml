@@ -1,0 +1,42 @@
+<plugin>
+	<prefix>langotests</prefix>
+	<categorie>outil</categorie>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<icon>langotests-64.png</icon>
+
+	<nom>Base de tests de LangOnet</nom>
+	<slogan>Tester les op&#233;rations de LangOnet</slogan>
+	<description>
+Ce plugin permet d'ex&#233;cuter des tests de non-r&#233;gressions sur les op&#233;rations de v&#233;rification et de recherche.
+	</description>
+
+	<auteur>Eric Lupinacci, denisb</auteur>
+
+	<licence>GPL 3</licence>
+
+	<pipeline>
+		<nom>declarer_tables_objets_sql</nom>
+		<inclure>base/langotests_declarations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/langotests_declarations.php</inclure>
+	</pipeline>
+
+	<onglet id="langonglet_1" parent="langotests">
+		<titre>langotests:langonglet_1</titre>
+		<url>langonglet_1</url>
+	</onglet>
+	<onglet id="langonglet_2" parent="langotests">
+		<titre>langotests:langonglet_2</titre>
+		<url>langonglet_2</url>
+	</onglet>
+
+	<bouton id="langotests" parent="bando_administration">
+		<icone>langotests-16.png</icone>
+		<titre>voir_en_ligne</titre>
+		<url>langotests</url>
+	</bouton>
+</plugin>

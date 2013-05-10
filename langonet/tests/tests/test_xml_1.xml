@@ -1,0 +1,6 @@
+<test id="langotests">
+	<nom>langotests:nom_test_xml</nom>
+	<description>Tests d'items XML contenu et attribut</description>
+
+	<fonction nom="langotests" description="paquet-langotests:description_fonction_test" action="langotests" />
+</test>
