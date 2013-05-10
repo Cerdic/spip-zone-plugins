@@ -337,7 +337,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:bt' => '<span style=\\"color:red;\\">Atención :</span> la barra tipográfica (versión @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versión mayor o igual a @mini@.', # MODIF
 	'erreur:description' => '¡falta la id na definición de la ferramienta!',
 	'erreur:distant' => 'el sirvidor remotu',
-	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} paez inactiva nesta páxina. Has de consultar [equí->http://www.spip-contrib.net/?article2166] el párrafu so les dependencies del plugin o recargar esta páxina.',
+	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} paez inactiva nesta páxina. Has de consultar [equí->http://www.spip-contrib.net/?article2166] el párrafu so les dependencies del plugin o recargar esta páxina.', # MODIF
 	'erreur:js' => 'Paez que hubo un error de JavaScript nesta páxina que torga el so bon funcionamientu. Has de activar JavaScript nel to ñavegador o desactivar dellos plugins SPIP del to sitiu.',
 	'erreur:nojs' => 'El JavaScript ta desactiváu nesta páxina.',
 	'erreur:nom' => '¡Fallu!',
@@ -621,7 +621,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_desactiver_le' => 'Desactivar la ferramienta',
 	'outil_inactif' => 'Ferramienta inactiva',
 	'outil_intro' => 'Esta páxina llista les carauterístiques que ufre\'l plugin.<br /><br />Calcando nel nome de les ferramientes d\'embaxo, seleiciones los que vas poder camuda-yos l\'estau con l\'aida del botòn central: les ferramientes actives desactívense y <i>viceversa</i>. A cada clic, apaez la descripción embaxo de les llistes. Les categoríes son desplegables y les ferramientes puen tapecese. El doble-clic permite cambear rápidamente de ferramienta.<br /><br />Pal primer usu, encamiéntase activar les ferramientes una a una, por si acasu apaecen incompatibilidaes cola to cadarma, con SPIP o con otros plugins.<br /><br />Nota: la simple carga d\'esta páxina recompila dafechu toes les ferramientes de La Navaya Suiza.',
-	'outil_intro_old' => 'Esta interfaz ye antigua.<br /><br />Si alcuentres problemes cola utilización de la <a href=\'./?exec=admin_couteau_suisse\'>interfaz nueva</a>, afalámoste a comentánoslo nel foru de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Esta interfaz ye antigua.<br /><br />Si alcuentres problemes cola utilización de la <a href=\'./?exec=admin_couteau_suisse\'>interfaz nueva</a>, afalámoste a comentánoslo nel foru de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ ferramienta', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ ferramientes', # MODIF
 	'outil_permuter' => '¿Camudar la ferramienta: «@text@»?',

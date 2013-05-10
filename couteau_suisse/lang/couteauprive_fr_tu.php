@@ -350,7 +350,7 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',
 	'erreur:distant' => 'le serveur distant',
-	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Consulte [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les dépendances du plugin ou recharger cette page.',
+	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Consulte [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les dépendances du plugin ou recharger cette page.', # MODIF
 	'erreur:js' => 'Une erreur JavaScript semble être survenue sur cette page et empêche son bon fonctionnement. Active le JavaScript sur ton navigateur ou désactive certains plugins SPIP de ton site.',
 	'erreur:nojs' => 'Le JavaScript est désactivé sur cette page.',
 	'erreur:nom' => 'Erreur !',
@@ -640,7 +640,7 @@ Objets publiés mais masqués du public :
 	'outil_desactiver_le' => 'Désactiver l\'outil',
 	'outil_inactif' => 'Outil inactif',
 	'outil_intro' => 'Cette page liste les fonctionnalités du plugin mises à ta disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, tu sélectionnes ceux dont tu pourras permuter l\'état à l\'aide du bouton central : les outils activés seront désactivés et <i>vice versa</i>. À chaque clic, la description apparaît au-dessous des listes. Les catégories sont repliables et les outils peuvent être cachés. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une première utilisation, il est recommandé d\'activer les outils un par un, au cas où apparaîtraient certaines incompatibilités avec ton squelette, avec SPIP ou avec d\'autres plugins.<br /><br />Note : le simple chargement de cette page recompile l\'ensemble des outils du Couteau Suisse.',
-	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des problèmes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'hésite pas à nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si tu rencontres des problèmes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'hésite pas à nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ outil',
 	'outil_nbs' => '@pipe@ : @nb@ outils',
 	'outil_permuter' => 'Permuter l\'outil : « @text@ » ?',

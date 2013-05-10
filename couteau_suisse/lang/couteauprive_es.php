@@ -335,7 +335,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:bt' => '<span style=\\"color:red;\\">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.', # MODIF
 	'erreur:description' => '¡falta la id en la definición de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
-	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta página. Consulta [aquí->http://www.spip-contrib.net//La-navaja-suiza] el párrafo sobre las dependencias del plugin, o recarga esta página.',
+	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta página. Consulta [aquí->http://www.spip-contrib.net//La-navaja-suiza] el párrafo sobre las dependencias del plugin, o recarga esta página.', # MODIF
 	'erreur:js' => 'Parece que ha ocurrido un error de JavaScript en esta página que impide su buen funcionamiento. Intenta activar JavaScript en tu navegador o desactivar ciertos plugins de SPIP de tu sitio web.',
 	'erreur:nojs' => 'JavaScript está desactivado en esta página.',
 	'erreur:nom' => '¡Error!',
@@ -620,7 +620,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_desactiver_le' => 'Desactivar la herramienta',
 	'outil_inactif' => 'Herramienta inactiva',
 	'outil_intro' => 'Esta página lista las funciones que el plugin pone a tu disposición.<br /><br />Pulsando sobre el nombre de los útiles de más abajo, los seleccionas y podrás cambiar su estado con ayuda del botón central: los útiles activados se desactivarán y <i>viceversa</i>. Con cada pulsación, aparece la descripción bajo las listas. Las categorías son desplegables y los útiles se pueden ocultar. El doble-clic permite cambiar rápidamente de herramienta.<br /><br />En la primera utilización, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta página recompila el conjunto de herramientas de la Navaja Suiza.',
-	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ útil', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ útiles', # MODIF
 	'outil_permuter' => '¿Cambiar la herramienta: « @text@ »?',
