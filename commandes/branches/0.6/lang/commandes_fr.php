@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Bonjour',
 
 	// C
-	'commange'               => 'Commande',
+	'commande'               => 'Commande',
 	'commande_client'        => 'Client',
 	'commande_date'          => 'Date',
 	'commande_date_paiement' => 'Date de paiement',
