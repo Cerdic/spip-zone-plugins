@@ -2,9 +2,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Les REGEXP de recherche de l'item de langue 
-// (voir le fichier regexp.txt pour des exemples)
-
 // déclaration d'items dans base/module.php
 if (!defined('_LANGONET_ITEM_B'))
 	define("_LANGONET_ITEM_B", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
@@ -18,6 +15,10 @@ if (!defined('_LANGONET_ITEM_G'))
 if (!defined('_LANGONET_ITEM_H'))
 	define("_LANGONET_ITEM_H", "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
 
+// Items de langue dans les fichiers YAML
+if (!defined('_LANGONET_ITEM_YAML'))
+	define("_LANGONET_ITEM_YAML", ",<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,s");
+
 // Items de langue dans les fichiers XML
 // -- pour plugin.xml
 if (!defined('_LANGONET_ITEM_PLUGINXML'))
@@ -26,7 +27,8 @@ if (!defined('_LANGONET_ITEM_PLUGINXML'))
 if (!defined('_LANGONET_ITEM_PAQUETXML'))
 	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],is");
 // -- pour les autres fichiers XML
-// TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut)
+// TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut) ?
+// TODO : comment faire aussi pour ne pas capturer ces portions ?
 if (!defined('_LANGONET_ITEM_XML_CONTENU'))
 	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:([a-z0-9_-]+):)([a-z0-9_]+)\s*</\w+>,is");
 if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
@@ -125,7 +127,7 @@ function collecter_occurrences($fichiers) {
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 				elseif ($type_fichier == 'yaml') {
-					if (preg_match_all(_LANGONET_ITEM_H, $_ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_YAML, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
