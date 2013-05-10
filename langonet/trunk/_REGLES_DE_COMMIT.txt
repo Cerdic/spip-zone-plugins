@@ -78,6 +78,7 @@ occurrence d'utilisation d'un item de langue :
 	- note     : une occurrence est en général un tableau contenant divers éléments
 	             représentatifs (numéros de ligne te colonne, item, expression fournie par la regexp...)
 
+
 En outre, d'autres règles génériques sont utilisées dans le code du plugin, à savoir :
 
 compteur d'éléments :
@@ -87,6 +88,16 @@ compteur d'éléments :
 numéro d'élément :
 	- préfixe  : no_
 	- exemples : $no_ligne, $_no_colonne...
+
+chemin relatif à un fichier de langue :
+	- $ou_langue
+	- correspond par exemple à "plugins/auto/socialtags/v1.0.4/lang/"
+	- pour obtenir le chemin complet : _DIR_RACINE . $ou_langue
+
+arborescence de recherche des cas d'utilisation :
+	- $ou_fichier pour une arborescence unique et $ou_fichiers pour un tableau d'arborescences
+	- correspond par exemple à "plugins/minibando/"
+	- pour obtenir le chemin complet : _DIR_RACINE . $ou_fichier
 
 
 3- Règles de nommage des fonctions
