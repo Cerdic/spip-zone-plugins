@@ -3,13 +3,11 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.contrib.spip.net/?article2166   #
-#-----------------------------------------------------#
-
-/*
-	Cette page test certaines fonctions presentes dans le plugin
-	Pour rajouter des tests, rdv tout en bas de cette page !
-*/
+#  Infos : http://contrib.spip.net/?article2166       #
+#---------------------------------------------------------------#
+# Cette page teste certaines fonctions presentes dans le plugin #
+# Pour rajouter des tests, rdv tout en bas de cette page !      #
+#---------------------------------------------------------------#
 
 include_spip('inc/texte');
 include_spip('inc/layer');
@@ -156,7 +154,7 @@ function cs_les_tests() {
 	include_spip('public/parametrer');
 
 	// test de typo_exposants()
-	include_spip('inc/charsets');
+	include_spip('inc/charsets'); // ce fichier est en iso88591...
 	$textes = array(
 		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul. Surveiller : Pr&eacute;-St-Gervais ou Dr&eacute;",
 		"Ste Lucie, St-Lucien, St.Patrick, St Patrick, st-jules (laisser?), Sts Pierre &amp; Paul, STe Lucie (laisser?)",

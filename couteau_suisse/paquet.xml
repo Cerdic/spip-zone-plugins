@@ -1,12 +1,12 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.132"
+	version="1.8.133"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
 	schema="1.11"
-	documentation="http://www.spip-contrib.net/Le-Couteau-Suisse"
+	documentation="http://contrib.spip.net/Le-Couteau-Suisse"
 >	
 	<nom>&lt;multi>[fr]Le Couteau Suisse[en]Swiss Knife[ca]El Ganivet Su&#237;s[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[it]Coltellino Svizzero&lt;/multi></nom>
 <!-- plantage bizarre sur unserialize PHP 5.2.10...

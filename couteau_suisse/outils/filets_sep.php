@@ -5,7 +5,7 @@
 *	Idee originale : FredoMkb
 *	Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 *	+-------------------------------------+
-*	Toutes les infos sur : http://www.contrib.spip.net/?article1564
+*	Toutes les infos sur : http://contrib.spip.net/?article1564
 */
 
 // Constantes surchargeables

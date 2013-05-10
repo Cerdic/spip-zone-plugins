@@ -1,6 +1,6 @@
 <?php
 
-// Doc : http://www.contrib.spip.net/Les-Boites-Privees
+// Doc : http://contrib.spip.net/Les-Boites-Privees
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');

@@ -2,7 +2,7 @@
 
 // Outils CHATONS - 30 janvier 2007
 // Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
-// Toutes les infos sur : http://www.contrib.spip.net/?article2166
+// Toutes les infos sur : http://contrib.spip.net/?article2166
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function cs_rempl_chatons($texte) {

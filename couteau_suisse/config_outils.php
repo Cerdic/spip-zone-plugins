@@ -1,10 +1,9 @@
 <?php
-
 #-----------------------------------------------------#
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
-#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.contrib.spip.net/?article2166   #
+#  Contact : patriceÂ¡.!vanneufvilleÂ¡@!laposteÂ¡.!net   #
+#  Infos : http://contrib.spip.net/?article2166       #
 #-----------------------------------------------------#
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -928,7 +927,7 @@ if(%%tout_aut%%) {if($flux->type_requete == \'auteurs\' && !isset($flux->modific
 
 add_outil( array(
 	'id' => 'visiteurs_connectes',
-	'auteur' => "Phil d'apr&egrave;s spip-contrib",
+	'auteur' => "Phil d'apr&egrave;s contrib.spip",
 	'categorie' => 'public',
 	'contrib'	=> 3412,
 	'code:options' => "
@@ -1071,7 +1070,7 @@ include_spip('outils/couleurs');
 ",
 ));
 
-// outil essentiellement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
+// outil essentiellement franÃ§ais. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
 add_variable( array(
 	'nom' => 'expo_bofbof',
 	'format' => _format_NOMBRE,
@@ -1634,11 +1633,11 @@ if(isset($GLOBALS['mes_outils'])) {
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
-// http://www.contrib.spip.net/Citations
-// http://www.contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
-// http://www.contrib.spip.net/Ajouter-une-lettrine-aux-articles
-// http://www.contrib.spip.net/Generation-automatique-de
-// http://www.contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
+// http://contrib.spip.net/Citations
+// http://contrib.spip.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
+// http://contrib.spip.net/Ajouter-une-lettrine-aux-articles
+// http://contrib.spip.net/Generation-automatique-de
+// http://contrib.spip.net/Balise-LOGO-ARTICLE-ORITRAD
 // boutonstexte
 
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');

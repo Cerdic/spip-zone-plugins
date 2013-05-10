@@ -2,7 +2,7 @@
 	<nom><multi>[en]Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero</multi></nom>
 	<slogan>... ou plus de fonctionnalit&#233;s pour SPIP !</slogan>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.8.132</version>
+	<version>1.8.133</version>
 	<version_base>1.11</version_base>
 	<auteur>Patrice Vanneufville
 _ &#169; 2007-2013 - Distribu&#233; sous licence GPL
@@ -19,7 +19,7 @@ Available categories are: Administration, Typographical improvements, Typographi
 
 Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {A summary for your articles}, {Smileys}, {Delete the number}, {Fine URLs}, {SPIP and external links}, {No anonymous forums}, {Division in pages and tab}, etc., etc.
 
-See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+See the documentation articles at: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP v1.92x/v2.x.x/v3.0
 [fr]R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP.
@@ -30,7 +30,7 @@ Les cat&#233;gories disponibles sont : Administration, S&#233;curit&#233;, Inter
 
 D&#233;couvrez dans ce plugin vos outils favoris : {Supprime le num&#233;ro}, {Format des URLs}, {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Lutte contre le SPAM}, {Mailcrypt}, {Belles URLs}, {SPIP et les liens... externes}, {Smileys}, {Un sommaire pour vos articles}, {D&#233;coupe en pages et onglets}, etc., etc.
 
-N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilit&#233; : SPIP v1.92x v2.x.x et v3.0
 [nl]In slechts &#233;n plugin verenigt een lijst van kleine nieuwe en nuttige functies die het beleid verbeteren, van uw site SPIP.
@@ -41,7 +41,7 @@ De beschikbare categorie&#235;n zijn: Bestuur, typografische Verbeteringen, typo
 
 Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af externe}, {Niet van onbekende forums}, {D&#233;coupe in bladzijdes en tabben}, etc., etc.
 
-Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 De verenigbaarheid: SPIP 1.92x/2.x.x/3.0
 [ca]Reuneix en un sol plugin una llista de petites noves funcionalitats i utilitats que milloren la gesti&#243; del vostre lloc SPIP.
@@ -52,7 +52,7 @@ Les categories disponibles s&#243;n: Administraci&#243;, Millores tipogr&#224;fi
 
 Descobriu en aquest plugin les vostres utilitats favorites: {Expositors tipogr&#224;fics}, {Cometes tipogr&#224;fiques}, {Bonics s&#237;mbols}, {Un sumari pels vostres articles}, {Emoticones}, {Suprimir el n&#250;mero}, {Bonics URLs}, {SPIP i els enlla&#231;os... externs}, {No F&#242;rums an&#242;mins}, {Divisi&#243; en p&#224;gines i pestanyes}, etc., etc.
 
-No dubteu a consultar els articles de la documentaci&#243; del plugin publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+No dubteu a consultar els articles de la documentaci&#243; del plugin publicats a: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilitat: SPIP 1.92x/2.x.x/3.0
 [de]Zusammenfassung einiger Zusatzfunktionen f&#252;r eine bessere Verwaltung Ihrer SPIP Website.
@@ -63,7 +63,7 @@ Sie k&#246;nnen folgende Einstellungen vornehmen: Verwaltung, typografische Verb
 
 W&#228;hlen Sie die f&#252;r Sie wichtigsten Funktionen: {Typografische Hervorhebungen}, {typografische Anf&#252;hrungszeichen}, {sch&#246;ne Listen-Punkte}, {Inhaltsverzeichnis f&#252;r Artikel}, {Smileys}, {Nummern entferneno}, {&#228;sthetische URLs}, {SPIP und externe Links}, {keine anonymen Foren}, {Aufteilung in Seiten und Reiter}, etc., etc.
 
-Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Bitte lesen Sie auch die Artikel auf : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Kompatibel mit: SPIP 1.92x/2.x.x/3.0
 [es]Re&#250;ne en un solo plugin une liste de peque&#241;as caracter&#237;sticas nuevas y &#250;tiles para mejorar la gesti&#243;n de tu sitio SPIP.
@@ -74,7 +74,7 @@ Las categor&#237;as disponibles son: Administraci&#243;n, Mejoras tipogr&#225;fi
 
 Encuentra en este plugin tus herramientas favoritas: {Exponentes tipogr&#225;ficos}, {Comillas tipogr&#225;ficas}, {Marcas bonitas}, {Un sumario para tus art&#237;culos}, {Smileys}, {Suprimir el n&#250;mero}, {URLs elegantes}, {SPIP y los enlaces... externos}, {Foros no an&#243;nimos}, {Dividir en p&#225;ginas y pesta&#241;as}, etc., etc.
 
-No dudes en consultar los art&#237;culos de documentaci&#243;n del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+No dudes en consultar los art&#237;culos de documentaci&#243;n del plugin publicados en: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidad: SPIP 1.92x/2.x.x/3.0
 [ar]&#1610;&#1580;&#1605;&#1593; &#1601;&#1610; &#1605;&#1604;&#1581;&#1602; &#1608;&#1575;&#1581;&#1583; &#1608;&#1592;&#1575;&#1574;&#1601; &#1580;&#1583;&#1610;&#1583;&#1577; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1578;&#1607;&#1583;&#1601; &#1575;&#1604;&#1609; &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
@@ -88,7 +88,7 @@ Compatibilidad: SPIP 1.92x/2.x.x/3.0
 &#1601;&#1610; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1575;&#1583;&#1608;&#1575;&#1578;&#1603; &#1575;&#1604;&#1605;&#1601;&#1590;&#1604;&#1577;: {&#1575;&#1604;&#1575;&#1587;}&#1548; {&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1604;&#1575;&#1602;&#1578;&#1576;&#1575;&#1587;}&#1548; {&#1604;&#1575;&#1574;&#1581;&#1577; &#1605;&#1581;&#1578;&#1608;&#1610;&#1575;&#1578; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578;}&#1548; {&#1575;&#1586;&#1575;&#1604;&#1577; &#1575;&#1585;&#1602;&#1575;&#1605; &#1575;&#1604;&#1593;&#1606;&#1575;&#1589;&#1585;}&#1548; {&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577;}&#1548; {&#1605;&#1606;&#1593; &#1575;&#1604;&#1605;&#1588;&#1575;&#1585;&#1603;&#1575;&#1578; &#1575;&#1604;&#1605;&#1594;&#1601;&#1604;&#1577;}&#1548; &#1575;&#1604;&#1582;.
 
 
-&#1604;&#1575; &#1578;&#1585;&#1583; &#1601;&#1610; &#1602;&#1585;&#1575;&#1569;&#1577; &#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1578;&#1608;&#1579;&#1610;&#1602; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1593;&#1604;&#1609; &#1575;&#1604;&#1593;&#1606;&#1608;&#1575;&#1606;:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+&#1604;&#1575; &#1578;&#1585;&#1583; &#1601;&#1610; &#1602;&#1585;&#1575;&#1569;&#1577; &#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1578;&#1608;&#1579;&#1610;&#1602; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1593;&#1604;&#1609; &#1575;&#1604;&#1593;&#1606;&#1608;&#1575;&#1606;:[contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 &#1610;&#1578;&#1608;&#1575;&#1601;&#1602; &#1605;&#1593; &#1603;&#1604; &#1575;&#1589;&#1583;&#1575;&#1585;&#1575;&#1578; 1.92x/2.x.x/3.0 &#1605;&#1606; SPIP
 [gl]Re&#250;ne nun s&#243; m&#243;dulo unha lista de pequenas funcionalidades novas e &#250;tiles que melloran a xesti&#243;n do seu web SPIP.
@@ -99,7 +99,7 @@ As categor&#237;as dispo&#241;ibles son : administraci&#243;n, melloras tipogr&#
 
 Descubra neste m&#243;dulos as s&#250;as ferramentas favoritas : {Super&#237;ndices  tipogr&#225;ficos}, {V&#237;rgulas tipogr&#225;ficas}, {Vi&#241;etas fermosas}, {Un sumario para os seus artigos}, {Riso&#241;os}, {Suprimir o n&#250;mero}, {URL fermosos}, {SPIP e as ligaz&#243;ns... externas}, {Ning&#250;n foro an&#243;nimo}, {Partir en p&#225;xinas e pestanas}, etc., etc.
 
-Non dubide en consultar os artigos de documentaci&#243;n do m&#243;dulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Non dubide en consultar os artigos de documentaci&#243;n do m&#243;dulo publicados en  : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade : SPIP 1.92x/2.x.x/3.0
 [br]Bodet e vez ama&#241; ul listennad servijo&#249; nevez ha talbvoudus evit gwellaat mont en-dro ho lec'hienn SPIP.
@@ -110,7 +110,7 @@ Setu ar ranno&#249; kinniget : Mera&#241;, Gwellaat ar skritur, berradenno&#249;
 
 Kavit en astenn-ma&#241; un nebeud binviji :  {gallouterien}, {klochedigo&#249;}, {c'hwen vrav}, {ur roll evit ho pennado&#249;}, {skeudennigo&#249;-imor}, {dilemel an niverenn}, {chomlec'hio&#249; brav}, {SPIP hag al liammo&#249; diavaez}, {foromo&#249; dianv ebet}, {didroc'ha&#241; e pajenno&#249; hag e ivinello&#249;}, hag all. 
 
-Gallout a rit teurel ur sell war ar pennado&#249;-titouri&#241; diwar-benn an astenno&#249; war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Gallout a rit teurel ur sell war ar pennado&#249;-titouri&#241; diwar-benn an astenno&#249; war : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Heglot gant SPIP 1.92x/2.x.x/3.0
 [ast]Xunta n'un solu plugin una llista de peque&#241;es funciones nueves y ferramientes pa meyorar la xesti&#243;n del to sitiu SPIP.
@@ -121,7 +121,7 @@ Les categor&#237;es disponibles son: Alministraci&#243;n, Meyores tipogr&#225;fi
 
 Descubre nesti plugin les tos ferramientes favorites: {Esponentes tipogr&#225;ficos}, {Comilles tipogr&#225;fiques}, {Marques de llista guapes}, {Un sumariu pa los tos art&#237;culos}, {Caruques}, {Suprimir el n&#250;mberu}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Ensin foros an&#243;nimos}, {Divide en p&#225;xines y pesta&#241;es}, etc., etc.
 
-Si quies consultar los art&#237;culos de la documentaci&#243;n del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Si quies consultar los art&#237;culos de la documentaci&#243;n del plugin, tan espublizaos en: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilid&#225;: SPIP 1.92x/2.x.x/3.0
 [ro]Reune&#351;te &#238;ntr-un singur plugin o list&#259; de mici func&#355;ionalit&#259;&#355;i noi &#351;i utile care amelioreaz&#259; gestiunea site-ului dumneavoastr&#259; SPIP.
@@ -132,7 +132,7 @@ Categoriile disponibile sunt: Administrare, Amelior&#259;ri tipografice, Scurt&#
 
 Descoperi&#355;i &#238;n aces plug-in tool-urile dumneavoastr&#259; favorite: {Ghilimele tipografice}, {Fonturi dr&#259;gu&#355;e}, etc., etc.
 
-Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilitate : SPIP 1.92x/2.x.x/3.0
 [pt_br]Re&#250;ne, em um &#250;nico plugin, diversas pequenas e &#250;teis funcionalidades, que melhoram o gerenciamento do seu site SPIP.
@@ -143,7 +143,7 @@ As categorias dispon&#237;veis s&#227;o: Administra&#231;&#227;o, Melhoramentos 
 
 Descobra neste plugin as suas ferramentas favoritas: {Sobrescritos}, {Aspas tipogr&#225;ficas}, {Bullets melhorados}, {Um &#237;ndice para os seus artigos}, {Smileys}, {Excluir o n&#250;mero}, {URLs melhorados}, {SPIP e links externos}, {Sem f&#243;runs an&#244;nimos}, {Dividir em p&#225;ginas e guias}, etc., etc.
 
-N&#227;o deixe de consultar os artigos de documenta&#231;&#227;o do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+N&#227;o deixe de consultar os artigos de documenta&#231;&#227;o do plugin, publicados em: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade: SPIP 1.92x/2.x.x/3.0
 [it]Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
@@ -154,11 +154,11 @@ Le categorie disponibili sono:Amministrazione, Miglioramenti tipografici, Scorci
 
 Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Formato degli URL}, {Evidenziatori tipografici}, {Virgolette tipografiche}, {Simboli di spunta}, {Lotta contro lo SPAM}, {Mailcrypt}, {Belle URL}, {SPIP e i link... esterni}, {Smileys}, {Un sommario per i tuoi articoli}, {Dividi in pagine e schede}, ecc., ecc.
 
-Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilit&#224; : SPIP v1.92x, v2.x.x e v3.0
 	</multi></description>
-	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
+	<lien>[->http://contrib.spip.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	couteau_suisse_options.php
 	</options>

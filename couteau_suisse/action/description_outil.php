@@ -1,4 +1,10 @@
 <?php
+#-----------------------------------------------------#
+#  Plugin  : Couteau Suisse - Licence : GPL           #
+#  Auteur  : Patrice Vanneufville, 2006               #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
+#  Infos : http://contrib.spip.net/?article2166       #
+#-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
@@ -53,7 +59,7 @@ cs_log($metas_vars, 'metas_vars :');
 		if($ok_modif) $metas_vars[$var] = $final;
 			
 	} else 
-		spip_log("Outil du Couteau Suisse n�$index. Modification interdite de la variable %$var% par l'auteur id=$connect_id_auteur !!");
+		spip_log("Outil du Couteau Suisse #$index. Modification interdite de la variable %$var% par l'auteur id=$connect_id_auteur !!");
 //cs_log($metas_vars, " -- metas_vars = ");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	ecrire_metas();

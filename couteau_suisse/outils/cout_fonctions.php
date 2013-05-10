@@ -108,7 +108,7 @@ function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL', $exclusio
 }
 function cs_noop($t='',$a=NULL,$b=NULL,$c=NULL) { return $t; }
 
-// liste des docs sur spip-contrib (outils actifs)
+// liste des docs sur contrib.spip (outils actifs)
 function cs_liste_contribs($coupe = 999, $join = "</li><li>") {
 	global $metas_outils;
 	$contribs = array();

@@ -1,7 +1,7 @@
 <?php
 // Filtre typographique exposants pour langue francaise
 // serieuse refonte 2006 : Patrice Vanneufville
-// Toutes les infos sur : http://www.contrib.spip.net/?article1564
+// Toutes les infos sur : http://contrib.spip.net/?article1564
 
 // TODO : raccourci pour les exposants et indices (Pouce^2 ou Pouce^2^, H_2O ou H_2_O ou H,,2,,O
 // exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
@@ -36,7 +36,7 @@ function typo_exposants_installe_dist() {
 		'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
 		'/(?<=\b[DP])(r)(?=[\s\.-])/',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 
-		"/m(?:$carre)/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
+		"/m(?:$carre)/", '/(?<=\bm)([23])\b/',	 // m2, m3, mÂ²
 		'/(?<=\bM)(ios?|r?ds?)\b/',	// millions, milliards
 		'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 		"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
@@ -54,14 +54,14 @@ function typo_exposants_installe_dist() {
 		_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
 		_TYPO_sup,		// Dr, Pr, 
 
-		'm'._TYPO_class.'2</sup>',	_TYPO_sup,	// m2, m3, m²
+		'm'._TYPO_class.'2</sup>',	_TYPO_sup,	// m2, m3, mÂ²
 		_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve, Mn(s), Md(s), Bd(s), Cie(s)
-		_TYPO_sup, '&#201;'._TYPO_class.'ts</sup>',	// Sté(s), Ets
+		_TYPO_sup, '&#201;'._TYPO_class.'ts</sup>',	// StÃ©(s), Ets
 
 		_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
 		_TYPO_sup,	// 2nd(e)(s)
 
-		'$1'._TYPO_class.'e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
+		'$1'._TYPO_class.'e$2</sup>', // Erreurs me, eme, Ã¨me, iÃ¨me + pluriels
 		_TYPO_sup2, // 2e(s), IIIe(s)...
 		'$1'._TYPO_class.'o</sup>', // ro, vo, 1o, 2o, etc.
 		_TYPO_sup,	// Me

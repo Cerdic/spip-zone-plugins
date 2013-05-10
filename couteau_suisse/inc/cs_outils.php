@@ -3,12 +3,11 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2007               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.contrib.spip.net/?article2166   #
+#  Infos : http://contrib.spip.net/?article2166       #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions concernant la      #
 #  description des outils.                            #
 #-----------------------------------------------------#
-
 if(!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/autoriser');
