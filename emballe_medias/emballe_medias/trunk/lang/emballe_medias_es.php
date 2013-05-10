@@ -223,6 +223,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_nouveau_document_video' => 'Nuevo documento vídeo',
 	'type_aucun' => 'Ningún tipo específico',
 	'type_audio' => 'Audio',
+	'type_file' => 'Textuel', # NEW
 	'type_image' => 'Imagen',
 	'type_invalide' => 'El tipo de documento elegido no es válido, modifique su elección.',
 	'type_media' => 'Tipo de media: ',
