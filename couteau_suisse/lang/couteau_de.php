@@ -93,7 +93,7 @@ Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Format de
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibil mit SPIP v1.92x, v2.x.x und v3.0',
+Kompatibil mit SPIP v1.92x, v2.x.x und v3.0', # MODIF
 	'pp_autobr' => 'Block mit automatischen Zeilenumbrüchen einfügen',
 	'pp_blocs_bloc' => 'Eingeklappten Block einfügen',
 	'pp_blocs_visible' => 'Geöffneten Block einfügen',

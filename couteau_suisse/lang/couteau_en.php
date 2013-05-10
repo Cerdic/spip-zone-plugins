@@ -93,7 +93,7 @@ Some popular tools are included in this plugin: {Delete the number}, {URL format
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
+Compatibility: SPIP 1.92x, v2.0.x and v2.1.x', # MODIF
 	'pp_autobr' => 'Insert a block of text with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',

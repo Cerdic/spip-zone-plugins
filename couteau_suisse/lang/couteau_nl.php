@@ -93,7 +93,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Verenigbaarheid: SPIP 1.92x, v2.x.x en v.3.0',
+Verenigbaarheid: SPIP 1.92x, v2.x.x en v.3.0', # MODIF
 	'pp_autobr' => 'Plaats een blok waar de regeleinden zijn automatische',
 	'pp_blocs_bloc' => 'Plaats gevouwen een blok',
 	'pp_blocs_visible' => 'Plaats een blok ontvouwd',
