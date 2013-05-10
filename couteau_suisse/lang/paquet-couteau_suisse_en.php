@@ -18,7 +18,7 @@ Check out this plugin in your favorite tools: {Removes the number}, {URLs Format
 
 Feel free to consult the articles of plugin documentation that are published on: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP v1.92x, v2.x.x and v3.0',
+Compatibility: SPIP v1.92x, v2.x.x and v3.0', # MODIF
 	'couteau_suisse_slogan' => 'Lots of new and useful features for your site!'
 );
 

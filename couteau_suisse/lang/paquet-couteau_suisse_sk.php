@@ -18,7 +18,7 @@ Objavte svoje obľúbené nástroje v tomto zásuvnom module: {vymazanie čísl
 
 Pokojne si prečítajte dokumentáciu k zásuvnému modulu publikovanú na stránke: [spip-contrib.net.->http://www.spip-contrib.net/Le-Couteau-Suisse]
 
-Kompatibilita: SPIP v1.92x, v2.x.x a v3.0',
+Kompatibilita: SPIP v1.92x, v2.x.x a v3.0', # MODIF
 	'couteau_suisse_slogan' => 'Veľa malých nových a užitočných funkcií pre vašu stránku!'
 );
 
