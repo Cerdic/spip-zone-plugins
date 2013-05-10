@@ -39,7 +39,7 @@
 		</ul>
 	</fieldset>
 	<fieldset>
-		<legend><:asso:plan_comptable:></legend>
+		<legend><:asso:config_libelle_operations:></legend>
 		<ul>
 			<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
 			<li class="editer_pc_intravirements">
@@ -276,7 +276,7 @@
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
 	</B_classeSelect_activites>
 		<li class="erreur">
-			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module:></a>
+			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
 		</li>
 	<//B_classeSelect_activites>
 	</ul>
@@ -380,7 +380,7 @@
 	<h3 class="legend"><:asso:config_libelle_comptes:></h3>
 	<ul>
 		<li class="editer_comptes">
-			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_creer_un_plan_pour_activer_ce_module:></a>
+			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_creer_plan_et_activer_gestion_comptable:></a>
 			<input type="hidden" name="comptes" id="comptes" value="" /> [(#REM)<!-- pour etre bien sur de desactiver la gestion comptable -->]
 		</li>
 		<li>

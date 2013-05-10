@@ -18,7 +18,7 @@
 	  <label><:asso:config_libelle_affichage_champs_page_membres:></label>
 	  <div class="choix">
 		<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
-		<label for="aff_id_auteur"><:asso:adherent_libelle_id_auteur:></label>
+		<label for="aff_id_auteur"><:asso:config_libelle_id_auteur:></label>
 		<br />
 	[(#CONFIG{activer_logos}|=={oui}|oui)
 		<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />

@@ -19,14 +19,27 @@ function exec_edit_activite() {
 /// AFFICHAGES_LATERAUX (connexes)
 	echo association_navigation_onglets('titre_onglet_activite', 'activites');
 /// AFFICHAGES_LATERAUX : INTRO : info evenement
-	if (test_plugin_actif('agenda')) {
-		$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
-		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date');
+	$evenement = sql_fetsel('*', 'spip_evenements', "id_evenement=$id_evenement");
+	if (test_plugin_actif('AGENDA')) {
+		$format = 'association_formater_'. (($evenement['horaire']=='oui')?'heure':'date'); // les champs sont de type "DateTime" mais cet champ qui vaut "oui"/"non" indique s'il faut prendre en compte ou pas les horaires et les intitules vont dans ce sens
 		$infos['agenda:evenement_date_du'] = $format($evenement['date_debut'],'dtstart');
 		$infos['agenda:evenement_date_au'] = $format($evenement['date_fin'],'dtend');
-		$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
-		echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
+		if ($evenement['lieu'])
+			$infos['agenda:evenement_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+		if ($evenement['descriptif'])
+			$infos['agenda:evenement_descriptif'] = '<span class="description">'.$evenement['descriptif'].'</span>';
+	} elseif (test_plugin_actif('SIMPLECAL')) {
+		$format = 'association_formater_date'; // les champs sont de type "DateTime" (donc a priori formater_heure) mais le "DatePicker" de l'interface ne permet de saisir que la date (donc finalement formater_date) et les intitules vont dans ce sens
+		$infos['simplecal:info_date_debut'] = $format($evenement['date_debut'],'dtstart');
+		$infos['simplecal:info_date_fin'] = $format($evenement['date_fin'],'dtend');
+		if ($evenement['lieu'])
+			$infos['simplecal:info_lieu'] = '<span class="location">'.$evenement['lieu'].'</span>';
+		if ($evenement['statut'])
+			$infos['simplecal:statut'] = '<span class="status">'. _T('simplecal:info_statut_'.$evenement['statut']) .'</span>';
+		if ($evenement['descriptif'])
+			$infos['agenda:descriptif'] = '<span class="description">'.$evenement['descriptif'].'</span>';
 	}
+	echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	echo association_navigation_raccourcis(array(
 		array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),

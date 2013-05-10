@@ -88,6 +88,11 @@ function exec_plan_comptable() {
 		echo association_bouton_edit('plan', $data['id_plan']);
 		echo "</tr>\n";
 	}
+	if (sql_countsel()<4) {
+		echo '<tr class="row_first">';
+		echo '<th colspan="7" class="erreurs">' . _T('asso:erreur_creer_plan_et_activer_gestion_comptable') .'</th>';
+		echo "</tr>\n";
+	}
 	echo "</table>\n";
 	fin_page_association();
 }
