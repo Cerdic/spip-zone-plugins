@@ -26,17 +26,14 @@ function formulaires_langonet_verifier_item_traiter() {
 
 	// Recuperation des champs du formulaire communs à toutes les vérifications
 	//  $verification -> type de verification 'definition' ou 'utilisation'
-	//  $ou_fichier   -> racine de l'arborescence a verifier 'plugins/auto/langonet'
-	$verification = _request('verification');
-	$ou_fichier = _request('dossier_scan');
-	$version = _request('version');
-
-	// Recuperation des champs du formulaire propres aux vérifications utilisation et définition
-	//                   correspond generalement au 'nom' du plugin
+	//  $ou_fichiers   -> tableau des racines d'arborescences à verifier 'plugins/auto/langonet'
 	//  $module       -> prefixe du fichier de langue : 'langonet' pour 'langonet_fr.php'
 	//                   parfois different du 'nom' du plugin
 	//  $langue       -> index du nom de langue, 'fr' pour 'langonet_fr.php'
 	//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
+	$verification = _request('verification');
+	$ou_fichiers = _request('dossier_scan');
+	$version = _request('version');
 	$retour_select_langue = explode(':', _request('fichier_langue'));
 	$module = $retour_select_langue[1];
 	$langue = $retour_select_langue[2];
@@ -44,7 +41,7 @@ function formulaires_langonet_verifier_item_traiter() {
 
 	// Lancement de la vérification utilisation ou définition
 	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
-	$resultats = $langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, $verification);
+	$resultats = $langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification);
 
 	// Creation du fichier de langue corrigé avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours.
@@ -80,7 +77,7 @@ function formulaires_langonet_verifier_item_traiter() {
 			$retour['message_ok']['resultats'] = $resultats;
 		}
 		else
-			$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichier);
+			$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichiers);
 	}
 	$retour['editable'] = true;
 	return $retour;
@@ -405,9 +402,10 @@ function langonet_lister_occ($type, $item, $detail, $extra, $f_coloriser)
 	// Quand l'index ne correspond pas aux occurrences (on prend la derniere)
 	// typiquement quand c'est un md5, donner l'index prevu pour aider a trouver l'homonyme
 	// (mais ce serait encore mieux que Langonet le donne)
+	include_spip('inc/langonet_utils');
 	if ($match[2] AND ($item !==  $match[2])) {
 		include_spip('inc/langonet_utils');
-		$index = langonet_index_brut($match[2]);
+		$index = calculer_raccourci_brut($match[2]);
 		$occ = "(<b>" . $index . "</b>)<br />" . $occ;
 	}
 

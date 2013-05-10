@@ -17,12 +17,20 @@ if (!defined('_LANGONET_ITEM_G'))
 // squelette avec <:  :>
 if (!defined('_LANGONET_ITEM_H'))
 	define("_LANGONET_ITEM_H", "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
-// pour plugin.xml (obsolete a terme)
-if (!defined('_LANGONET_ITEM_X_CONTENU'))
-	define("_LANGONET_ITEM_X_CONTENU", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
-// pour paquet.xml entre autres
-if (!defined('_LANGONET_ITEM_X_ATTRIBUT'))
-	define("_LANGONET_ITEM_X_ATTRIBUT", ",[a-z0-9_]+=['\"]([a-z0-9_]+):([a-z0-9_]+)['\"](),iS");
+
+// Items de langue dans les fichiers XML
+// -- pour plugin.xml
+if (!defined('_LANGONET_ITEM_PLUGINXML'))
+	define("_LANGONET_ITEM_PLUGINXML", ",<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,is");
+// -- pour paquet.xml
+if (!defined('_LANGONET_ITEM_PAQUETXML'))
+	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],is");
+// -- pour les autres fichiers XML
+// TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut)
+if (!defined('_LANGONET_ITEM_XML_CONTENU'))
+	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:([a-z0-9_-]+):)([a-z0-9_]+)\s*</\w+>,is");
+if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
+	define("_LANGONET_ITEM_XML_ATTRIBUT", ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],is");
 
 
 /**
@@ -31,18 +39,18 @@ if (!defined('_LANGONET_ITEM_X_ATTRIBUT'))
  * @param string $module		prefixe du fichier de langue
  * @param string $langue		index du nom de langue
  * @param string $ou_langue		chemin vers le fichier de langue à vérifier
- * @param string $ou_fichier	tableau des racines d'arborescence à vérifier
+ * @param string $ou_fichiers	tableau des racines d'arborescence à vérifier
  * @param string $verification	type de verification à effectuer
  * @return array
  */
-function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, $verification) {
+function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification) {
 
 	// On constitue la liste des fichiers pouvant être susceptibles de contenir des items de langue.
 	// Pour cela on boucle sur chacune des arborescences choisies.
 	// - les ultimes sous-repertoires charsets/ , lang/ , req/ sont ignorés.
 	// - seuls les fichiers php, html, xml ou yaml sont considérés.
 	$fichiers = array();
-	foreach($ou_fichier as $_arborescence) {
+	foreach($ou_fichiers as $_arborescence) {
 		$fichiers = array_merge(
 						$fichiers,
 						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
@@ -77,7 +85,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichier, 
 	// Completude de la structure de résultats
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
-	$resultats['ou_fichier'] = $ou_fichier;
+	$resultats['ou_fichier'] = $ou_fichiers;
 
 	return $resultats;
 }
@@ -97,11 +105,27 @@ function collecter_occurrences($fichiers) {
 	foreach ($fichiers as $_fichier) {
 		if ($contenu = file($_fichier)) {
 			foreach ($contenu as $_no_ligne => $_ligne) {
-				if (stripos($_fichier, '.xml') !== false) {
-					if (preg_match_all(_LANGONET_ITEM_X_CONTENU, $_ligne, $occurrences, PREG_SET_ORDER))
+				$type_fichier = identifier_type_fichier($_fichier);
+				if ($type_fichier == 'paquet.xml') {
+					if (preg_match_all(_LANGONET_ITEM_PAQUETXML, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
-					if (preg_match_all(_LANGONET_ITEM_X_ATTRIBUT, $_ligne, $occurrences, PREG_SET_ORDER))
+				}
+				elseif ($type_fichier == 'plugin.xml') {
+					if (preg_match_all(_LANGONET_ITEM_PLUGINXML, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+				}
+				elseif ($type_fichier == 'xml') {
+					if (preg_match_all(_LANGONET_ITEM_XML_CONTENU, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_XML_ATTRIBUT, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+				}
+				elseif ($type_fichier == 'yaml') {
+					if (preg_match_all(_LANGONET_ITEM_H, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
@@ -126,6 +150,19 @@ function collecter_occurrences($fichiers) {
 	return $utilises;
 }
 
+function identifier_type_fichier($fichier) {
+	// On initialise le type avec l'extension du fichier
+	$informations = pathinfo($fichier);
+	$type = strtolower($informations['extension']);
+
+	// Pour les fichiers XML on précise si le fichier est un paquet.xml ou un plugin.xml
+	if ($type == 'xml')
+		if (($informations['basename'] == 'paquet.xml')
+		OR ($informations['basename'] == 'plugin.xml'))
+			$type = strtolower($informations['basename']);
+
+	return $type;
+}
 
 /**
  * Memorise selon une structure prédéfinie chaque occurrence d'utilisation d'un item.
@@ -140,6 +177,8 @@ function collecter_occurrences($fichiers) {
 function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 
+	if (!isset($occurrence[3]))
+		$occurrence[3] = '';
 	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
 	if (($expression[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
 		// $raccourci_regexp approximatif, mais pas grave: c'est pour le msg

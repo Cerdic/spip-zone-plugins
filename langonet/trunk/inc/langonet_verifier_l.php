@@ -15,7 +15,7 @@ if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
  * Ce tableau est indexe par un representant canonique de chaque chaine trouvee.
  * Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier.
  * Chacun a pour valeur une série de sous-tableaux [n° de ligne][n° de colonne] pointant
- * sur un tableau des resultats :
+ * sur un tableau des résultats :
  * - [0] : l'expression complète renvoyée par la regexp
  * - [1] : le raccourci brut sans gestion des collisions
  * - [2] : le texte du premier argument de la fonction _L
