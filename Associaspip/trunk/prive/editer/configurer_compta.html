@@ -18,7 +18,7 @@
 			<li class="editer_destinations">
 				<label for="destinations"><:asso:config_libelle_destinations:></label>
 				<select name="destinations">
-					<option value="2"[ (#ENV{destinations}|non) selected="selected"]><:asso:config_libelle_destination0:></option>
+					<option value="0"[ (#ENV{destinations}|non) selected="selected"]><:asso:config_libelle_destination0:></option>
 					<option value="2"[ (#ENV{destinations}|>{1}) selected="selected"]><:asso:config_libelle_destination2:></option>
 					<option value="1"[ (#ENV{destinations}|=={1}) selected="selected"]><:asso:config_libelle_destination1:></option>
 				</select>
@@ -30,17 +30,17 @@
 					<option value="on"[(#ENV{exercices}|oui) selected="selected"]><:asso:config_libelle_exercice1:></option>
 				</select>
 			</li>
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend><:asso:plan_comptable:></legend>
-		<ul>
 			<li>
 				<div class="choix">
 					<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 				</div>
 			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><:asso:plan_comptable:></legend>
+		<ul>
 			<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
 			<li class="editer_pc_intravirements">
 				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
