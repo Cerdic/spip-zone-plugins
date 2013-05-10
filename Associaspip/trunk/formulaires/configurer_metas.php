@@ -39,38 +39,46 @@ function formulaires_configurer_metas_traiter_dist($form) {
 		$infos = formulaires_configurer_metas_infos($form);
 		if (!is_array($infos))
 			return $infos; // fait ci-dessus en fait
-		$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
-		$meta = $infos['meta'];
-		foreach (array_unique($vars[2]) as $k) {
+		$vars = formulaires_configurer_metas_recense($infos['path'], TRUE); // $vars = formulaires_configurer_metas_recense($form, FALSE);
+		foreach ($vars as $k) {
 			$v = _request($k);
-			ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta);
+			ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $infos['meta']);
 		}
 		return !isset($infos['prefix']) ? array()
 		: array('redirect' => generer_url_ecrire($infos['prefix']));
 	}
 }
 
-// version amelioree de la RegExp de cfg_formulaire.
-define('_EXTRAIRE_SAISIES',
-	'#<(select|textarea|input)[^>]*\sname=["\'](\w+)(\[\w*\])?["\'](?: class=["\']([^\'"]*)["\'])?( multiple=)?[^>]*?>#ims');
-
-define('_EXTRAIRE_INCLURE','#INCLU[DR]E{fond=([^,} ]+)[^}]*}#s');
-
 // determiner la liste des noms des saisies d'un formulaire
 // (a refaire avec SAX)
-function formulaires_configurer_metas_recense($form, $opt='') {
-	if (!$opt) $opt = PREG_SET_ORDER;
-	$f = file_get_contents($form);
-	if (preg_match_all(_EXTRAIRE_INCLURE, $f, $r, PREG_SET_ORDER)) {
-		foreach($r as $m) {
-			if ($i = find_in_path($m[1] . '.html')) 
-			  $f = str_replace($m[0], file_get_contents($i), $f);
-		}
-	}
-	if ($f AND preg_match_all(_EXTRAIRE_SAISIES, $f, $r, $opt))
-		return $r;
-	else
+function formulaires_configurer_metas_recense($form, $IsFullPath=FALSE) {
+	$f = $isFullPath ? $form : find_in_path($form.'.html', 'formulaires/');
+	if ($f) { // c'est un formulaire CVT...
+		spip_log("Associaspip va recenser les metas dans : $f", 'associaspip');
+		$liste_metas = array();
+//		for ($i=0; $i<2; $i++) {
+//			if ($i==1)
+				$contenu = recuperer_fond("formulaires/$form", array_merge($liste_metas,array('editable'=>' ')) );
+			$balises = array_merge(
+				extraire_balises($contenu, 'input'),
+				extraire_balises($contenu, 'textarea'),
+				extraire_balises($contenu, 'select')
+			); // liste des saisies
+			foreach ($balises as $b) { // nom (attribut "name" exclusivement) de chaque balise
+				if ($n = extraire_attribut($b, 'name') AND preg_match(",^([\w\-]+)(\[\w*\])*$,", $n, $r) AND !in_array($n, array('formulaire_action','formulaire_action_args')) AND !in_array(extraire_attribut($b,'type'), array('submit','reset')) ) {
+					$liste_metas[] = $n;
+				}
+			}
+//		}
+//		spip_log("Associaspip liste dans '$form' les metas suivants : ". implode(', ', array_keys($liste_metas)), 'associaspip');
+//		return array_keys(array_unique($liste_metas));
+		spip_log("Associaspip trouve dans '$form' les metas suivants : ". implode(', ', array_unique($liste_metas)), 'associaspip');
+		return array_unique($liste_metas);
+	} else {
+		spip_log("Associaspip ne peut recenser les metas de : $f", 'associaspip');
 		return array();
+	}
+
 }
 
 // Repertoires potentiels des plugins, ce serait bien d'avoir ça ailleurs
@@ -88,17 +96,16 @@ function formulaires_configurer_metas_infos($form) {
 	if (!$path)
 		return ''; // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $m))
-		return array('path' => $path, 'meta' => 'meta');
-	$plugin = $m[2];
-	$get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos($plugin, FALSE, $m[1]);
+		return array('path' => $path, 'meta' => 'meta'); // structure de $m...
+	$get_infos = charger_fonction('get_infos', 'plugins');
+	$infos = $get_infos($m[2], FALSE, $m[1]);
 	if (!is_array($infos))
-	  return _T('erreur_plugin_nom_manquant') . ' ' . $plugin . ' ' . $path;
-	if (isset($infos['erreur'])) return $infos['erreur'][0];
-	$prefix = $infos['prefix'];
+		return _T('erreur_plugin_nom_manquant') . ' ' . $m[2] . ' ' . $path;
+	if (isset($infos['erreur']))
+		return $infos['erreur'][0];
 	$infos['path'] = $path;
 	if (!isset($infos['meta']))
-		$infos['meta'] = ($prefix . '_metas');
+		$infos['meta'] = ($infos['prefix'] . '_metas');
 	return $infos;
 }
 

@@ -85,10 +85,8 @@ function formulaires_configurer_association_verifier_dist() {
 }
 
 function formulaires_configurer_association_traiter_dist() {
-	get_infos = charger_fonction('get_infos','plugins');
-	$infos = $get_infos('association');
 	include_spip('formulaires/configurer_metas');
-	$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
+	$metas_list = formulaires_configurer_metas_recense('configurer_association');
 
 	foreach ( array(
 		'activites' => array('dc_activites', 'pc_activites'),
@@ -98,8 +96,8 @@ function formulaires_configurer_association_traiter_dist() {
 		'ventes' => array('dc_frais_envoi','pc_frais_envoi','dc_ventes','pc_ventes'), //no dc_frais_envoi
 	) as $module=>$metas) { // ignorer les changements fait dans un module non active
 		if (!_request($module)) { // module desactive...
-			foreach ($metas as $meta_nom) { // ...ignorer les changements faits
-				unset($metas_list[$meta_nom]);
+			foreach ($metas as $meta_nom) { // ...ignorer les changements faits...
+				unset($metas_list[$meta_nom]); // ...en retirant de la liste des metas a enregister
 			}
 		}
 	}
@@ -120,13 +118,11 @@ function formulaires_configurer_association_traiter_dist() {
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), 'imputation='.$GLOBALS['association_metas']['pc_frais_envoi']);
 	}
 
-	foreach (array_keys($vars[2]) as $k) { // enregistrer chaque meta recense
+	foreach ($metas_list as $k) { // enregistrer chaque meta recense
 		$v = _request($k);
-		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $infos['meta']);
+		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', 'association_metas');
 	}
-	return !isset($infos['prefix'])
-		? array()
-		: array('redirect' => generer_url_ecrire($infos['prefix']));
+	return array('redirect' => generer_url_ecrire('association')); // retour a la page d'accueuil
 }
 
 ?>
