@@ -1258,7 +1258,7 @@ add_outil( array(
 	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
 		this.title = this.title.replace(/\.\..t\.\./g,'[@]');
 	});",
-	'code:css' => '<cs_html>span.spancrypt {background:transparent url([(#CHEMIN{img/mailcrypt/leure.gif}|url_absolue)]) no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}</cs_html>',
+	'code:css' => '<cs_html>span.spancrypt {background:transparent url([(#CHEMIN{img/mailcrypt/leure.gif}|url_absolue)]) no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none; float:none; margin:0; display:inline;}</cs_html>',
 	'traitement:EMAIL' => 'mailcrypt_email_dist',
 	 	'pipeline:recuperer_fond'   => 'mailcrypt_recuperer_fond',
 	// compatibilite avec le plugin facteur
