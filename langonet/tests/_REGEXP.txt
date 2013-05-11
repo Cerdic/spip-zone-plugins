@@ -25,7 +25,7 @@ c'est possible - et les autres fichiers XML.
 Pour le paquet.xml:
 	- note		: les items sont uniquement contenus dans un attribut "titre"
 	- cas 1		: l'item est la valeur d'un attribut de nom "titre" sous la forme "module:raccourci_item"
-	- cas 2		: l'item est la valeur d'un attribut de nom "titre" sous la forme "raccourci_item"
+				  où module peut-être vide
 	- exemples	:
 		<onglet nom="id_onglet" titre="langonet:bouton_generer" parent="langonet" action="generer" />
 		<onglet nom="id_onglet" titre="voir_en_ligne" parent="langonet" action="voir" />
@@ -34,7 +34,7 @@ Pour le paquet.xml:
 Pour le plugin.xml:
 	- note		: les items sont uniquement contenus dans une balise "<titre>"
 	- cas 1		: l'item est le contenu d'une balise de nom "titre" sous la forme "module:raccourci_item"
-	- cas 2		: l'item est le contenu d'une balise de nom "titre" sous la forme "raccourci_item"
+				  où module peut-être vide
 	- exemples	:
 		<onglet nom="id_onglet" titre="langonet:bouton_generer" parent="langonet" action="generer" />
 		<onglet nom="id_onglet" titre="voir_en_ligne" parent="langonet" action="voir" />
@@ -43,7 +43,9 @@ Pour le plugin.xml:
 Pour les autres fichiers XML:
 	- note		: on ne peut pas chercher les items sans module car certains pourraient être des faux positifs
 	- cas 1		: l'item est le contenu d'une balise de nom "titre" sous la forme "module:raccourci_item"
+				  où module est forcément non vie
 	- cas 2		: l'item est la valeur d'un attribut de nom "titre" sous la forme "module:raccourci_item"
+				  où module est forcément non vie
 	- exemples	:
 		<nom>langonet:nom_plugin</nom>
 		<fonction nom="langonet" description="test-langonet:description_fonction_test" action="activer" />
@@ -58,12 +60,11 @@ Un seul cas d'utilisation est envisagé dans ces fichiers et correspond à l'uti
 Les utilisations avec ou sans module sont détectées.
 
 	- cas  1 : l'item est la chaine entre quotes associé à un label yaml sous la forme <:module:raccourci_item>
-	- cas  2 : l'item est la chaine entre quotes associé à un label yaml sous la forme <:raccourci_item>
+			   où module peut-être vide
 	- exemples	:
 		left: '<:langonet:item_left:>'
 		right: '<:item_right:>'
-	- regexp	: une regexp pour les deux cas
-		,<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,s
+	- regexp	: ,<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,s
 
 
 2.3 - Pour les fichiers HTML
@@ -90,8 +91,7 @@ Les utilisations avec ou sans module sont détectées.
 		<:sans_module_16{param=#GET{char}}|trim{/}:>
 		<:module:avec_module_17{param=#GET{char, valeur}}|trim{/, #ENV{position}}:>
 		<:sans_module_18{param=#GET{char, valeur}}|trim{/, #ENV{position}}:>
-	- regexp	: une seule pour toutes les occurences des cas 1
-		%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s
+	- regexp	: %<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s
 
 	- cas 2		: l'item est utilisé au travers de l'appel au filtre |singulier_ou_pluriel, à savoir,
 				  |singulier_ou_pluriel{module:raccourci_item_1, module:raccourci_item_n, parametre_compteur}
@@ -112,3 +112,5 @@ Les utilisations avec ou sans module sont détectées.
 
 
 2.4 - Pour les fichiers PHP
+
+
