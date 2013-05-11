@@ -16,7 +16,7 @@ function mailcrypt_affichage_final($texte){
 <script type="text/javascript">/*<![CDATA[*/
 function mc_lancerlien(a,b){x='ma'+'ilto'+':'+a+'@'+b.replace(/\.\..t\.\./g,'@'); return x;}
 jQuery(function(){
-	jQuery('.spancrypt').empty().append('@');
+	jQuery('.mcrypt').empty().append('@');
 	jQuery('a.spip_mail').attr('title',function(i, val) {	return val.replace(/\.\..t\.\./g,'@');	});
 });/*]]>*/</script>
 js;
@@ -54,7 +54,7 @@ function mailcrypt($texte) {
 		@define('_MAILCRYPT_AROBASE_JS', '..&aring;t..');
 		@define('_MAILCRYPT_AROBASE_JSQ', preg_quote(_MAILCRYPT_AROBASE_JS,','));
 		// span ayant l'arobase en background
-		@define('_MAILCRYPT_AROBASE', '<span class=\'spancrypt\'> '._T('mailcrypt:chez').' </span>');
+		@define('_MAILCRYPT_AROBASE', '<span class=\'mcrypt\'> '._T('mailcrypt:chez').' </span>');
 		@define('_MAILCRYPT_CARACTERES_LIENS', '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9');
 		@define('_MAILCRYPT_REGEXPR', ',\b(['._MAILCRYPT_CARACTERES_LIENS.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._MAILCRYPT_CARACTERES_LIENS.']*)?),');
 		@define('_MAILCRYPT_FONCTION_JS_LANCER_LIEN','mc_lancerlien');
@@ -82,11 +82,11 @@ function mailcrypt($texte) {
 }
 
 function maildecrypt($texte) {
-	if (strpos($texte, 'spancrypt')===false AND strpos($texte, 'mc_lancerlien')===false AND strpos($texte, '#mc')===false) return $texte;
+	if (strpos($texte, 'mcrypt')===false AND strpos($texte, 'mc_lancerlien')===false AND strpos($texte, '#mc')===false) return $texte;
 	
-	// Traiter les <span class="spancrypt">chez</span>
-	$texte = preg_replace(',<span class=\'spancrypt\'>(.*)</span>,U','@',$texte);
-	$texte = preg_replace(',<span class="spancrypt">(.*)</span>,U','@',$texte);
+	// Traiter les <span class="mcrypt">chez</span>
+	$texte = preg_replace(',<span class=\'mcrypt\'>(.*)</span>,U','@',$texte);
+	$texte = preg_replace(',<span class="mcrypt">(.*)</span>,U','@',$texte);
 	
 	// Traiter les liens HTML
 	$texte = preg_replace(
