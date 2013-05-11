@@ -2,6 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Items de langue dans les fichiers PHP
 // déclaration d'items dans base/module.php
 if (!defined('_LANGONET_ITEM_B'))
 	define("_LANGONET_ITEM_B", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
@@ -11,9 +12,17 @@ if (!defined('_LANGONET_ITEM_A'))
 // Fontions PHP _T ou _U avec guillemet
 if (!defined('_LANGONET_ITEM_G'))
 	define("_LANGONET_ITEM_G", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
+
+
+// Items de langue dans les fichiers HTML
 // squelette avec <:  :>
-if (!defined('_LANGONET_ITEM_H'))
-	define("_LANGONET_ITEM_H", "%<[:](?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^>]*)%S");
+// %<:(?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s
+if (!defined('_LANGONET_ITEM_HTML_BALISE'))
+	define("_LANGONET_ITEM_HTML_BALISE", "%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s");
+if (!defined('_LANGONET_ITEM_HTML_FONCTION_SP'))
+	define("_LANGONET_ITEM_HTML_FONCTION_SP", "%\|singulier_ou_pluriel{(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^,]*[^}]*}%s");
+if (!defined('_LANGONET_ITEM_HTML_FONCTION_SP2'))
+	define("_LANGONET_ITEM_HTML_FONCTION_SP2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+)[\s,]*)[^}]*}%s");
 
 // Items de langue dans les fichiers YAML
 if (!defined('_LANGONET_ITEM_YAML'))
@@ -55,7 +64,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	foreach($ou_fichiers as $_arborescence) {
 		$fichiers = array_merge(
 						$fichiers,
-						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|php|xml|yaml))$'));
+						preg_files(_DIR_RACINE.$_arborescence, '(?<!/charsets|/lang|/req)(/[^/]*\.(html|yaml))$'));
 	}
 
 	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
@@ -131,6 +140,14 @@ function collecter_occurrences($fichiers) {
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
+				elseif ($type_fichier == 'html') {
+					if (preg_match_all(_LANGONET_ITEM_HTML_BALISE, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_HTML_FONCTION_SP, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+				}
 				else {
 					if (preg_match_all(_LANGONET_ITEM_B, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
@@ -141,9 +158,6 @@ function collecter_occurrences($fichiers) {
 					if (preg_match_all(_LANGONET_ITEM_G, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, true);
-					if (preg_match_all(_LANGONET_ITEM_H, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 			}
 		}

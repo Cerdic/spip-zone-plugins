@@ -555,7 +555,7 @@ function creer_script($resultats, $verification) {
 		} else {
 			// si c'est un <: :> normaliser au besoin
 			if ($val[0]!=='<') continue;
-			if (!preg_match(_LANGONET_ITEM_H, $val, $m)) continue;
+			if (!preg_match(_LANGONET_ITEM_HTML_BALISE, $val, $m)) continue;
 			if (preg_match(',^\w+$,', $occ = $m[2])) continue;
 		}
 		// Un item avec $ non transforme n'est pas gere
