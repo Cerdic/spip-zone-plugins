@@ -1254,11 +1254,11 @@ add_outil( array(
 	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a.replace(new RegExp(b,'g'),'@'); }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
 	// ... puis arranger un peu le title qui a ete protege
-	'code:jq_init' => "jQuery('span.spancrypt', this).attr('class','cryptOK').html('&#6'+'4;');
+	'code:jq_init' => "jQuery('span.mcrypt', this).attr('class','cryptOK').html('&#6'+'4;');
 	jQuery(\"a[\"+cs_sel_jQuery+\"title*='..']\", this).each(function () {
 		this.title = this.title.replace(/\.\..t\.\./g,'[@]');
 	});",
-	'code:css' => '<cs_html>span.spancrypt {background:transparent url([(#CHEMIN{img/mailcrypt/leure.gif}|url_absolue)]) no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none; float:none; margin:0; display:inline;}</cs_html>',
+	'code:css' => '<cs_html>span.mcrypt {background:transparent url([(#CHEMIN{img/mailcrypt/leure.gif}|url_absolue)]) no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none; float:none; margin:0; display:inline;}</cs_html>',
 	'traitement:EMAIL' => 'mailcrypt_email_dist',
 	 	'pipeline:recuperer_fond'   => 'mailcrypt_recuperer_fond',
 	// compatibilite avec le plugin facteur

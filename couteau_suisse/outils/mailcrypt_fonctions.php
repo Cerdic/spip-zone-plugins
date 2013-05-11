@@ -11,7 +11,7 @@ function mailcrypt_init() {
 		@define('_mailcrypt_AROBASE_JS', '..&aring;t..');
 		@define('_mailcrypt_AROBASE_JSQ', preg_quote(_mailcrypt_AROBASE_JS,','));
 		// span ayant l'arobase en background
-		@define('_mailcrypt_AROBASE', '<span class=\'spancrypt\'>&nbsp;</span>');
+		@define('_mailcrypt_AROBASE', '<span class=\'mcrypt\'>&nbsp;</span>');
 //		@define('_mailcrypt_REGEXPR1', ',\b['._cs_liens_AUTORISE.']*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?,');
 		@define('_mailcrypt_REGEXPR2', ',\b(['._cs_liens_AUTORISE.']+)@([a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._cs_liens_AUTORISE.']*)?),'); 
 	}
@@ -62,12 +62,12 @@ function mailcrypt($texte) {
 }
 
 function maildecrypt($texte) {
-	if(strpos($texte, 'spancrypt')===false) return $texte;
+	if(strpos($texte, 'mcrypt')===false) return $texte;
 	mailcrypt_init();
 
-	// traiter les <span class='spancrypt'>chez</span>
+	// traiter les <span class='mcrypt'>chez</span>
 	// \s+ est pour le compresseur HTML qui ajoute des CR partout !
-	$texte = preg_replace(',<span\s+class=[\'"]spancrypt[\'"]>(.*)</span>,Umsi','@',$texte);
+	$texte = preg_replace(',<span\s+class=[\'"]mcrypt[\'"]>(.*)</span>,Umsi','@',$texte);
 	// traiter les liens
 	$texte = preg_replace_callback(
 		',href="#" (title=["\'].*?["\']) onclick="location.href=lancerlien\(\'(\S*?)\'\,\'(\S*?)\'\); return false;",',
