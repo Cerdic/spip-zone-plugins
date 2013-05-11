@@ -97,19 +97,13 @@ Les utilisations avec ou sans module sont détectées.
 				  |singulier_ou_pluriel{module:raccourci_item_1, module:raccourci_item_n, parametre_compteur}
 				  où module peut-être vide
 	- exemples	:
-		|singulier_ou_pluriel{module:raccourci_item_1, module:raccourci_item_n, parametre_compteur}
-	- regexp	:
-		%%
-
-%\|singulier_ou_pluriel{
-	(?:[\s]*
-		(?:([a-z0-9_-]+)
-	:)?
-	([a-z0-9_]+))
-	[^,]*
-	[^}]*
-}%s
-
+		[(#ENV{total}|singulier_ou_pluriel{langotests:message_ok_fonction_l_1, langotests:message_ok_fonction_l_n,nberr})]
+		[(#ENV{total}|singulier_ou_pluriel{message_ok_fonction_l_1, langotests:message_ok_fonction_l_n,nberr})]
+		[(#ENV{total}|singulier_ou_pluriel{langotests:message_ok_fonction_l_1, message_ok_fonction_l_n,nberr})]
+		[(#ENV{total}|singulier_ou_pluriel{message_ok_fonction_l_1, message_ok_fonction_l_n,nberr})]
+	- regexp	: il faut une regexp pour chaque argument pouvant être un item (arg1, arg2)
+		%\|singulier_ou_pluriel{(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s
+		%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s
 
 2.4 - Pour les fichiers PHP
 
