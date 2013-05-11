@@ -1,3 +1,15 @@
 [(#REM)Si on est dans un article slide de ses images sinon de celles de la rubrique (sinon du site)]
 [(#ENV{id_article}|?{#SET{art,#ENV{id_article}},#SET{rub,#ENV{id_rubrique}}})]
-<a href="[(#URL_PAGE{slide}|parametre_url{id_rubrique,#GET{rub}}|parametre_url{id_article,#GET{art}})]"><:supersized:voir_slideshow:></a>
+<a href="[(#URL_PAGE{slide}
+			|parametre_url{id_rubrique,#GET{rub}}
+			|parametre_url{id_article,#GET{art}}
+			|parametre_url{nbre_max,#ENV{nbre_max}}
+			|parametre_url{tritri,#ENV{tritri}}
+			|parametre_url{triinverse,#ENV{triinverse}}
+			|parametre_url{transition,#ENV{transition}}
+			|parametre_url{pause,#ENV{pause}}
+			|parametre_url{vitesse,#ENV{vitesse}}
+			|parametre_url{nolinks,#ENV{nolinks}}
+			|parametre_url{noclic,#ENV{noclic}}
+			|parametre_url{taille,#ENV{taille}}
+)]"><:supersized:voir_slideshow:></a>
