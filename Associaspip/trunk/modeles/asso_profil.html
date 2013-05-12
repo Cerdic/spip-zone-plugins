@@ -12,7 +12,7 @@
     <h3 class="fn org"><strong class="organization-name">#META{/association/nom}</strong></h3>
     <p class="adr" id="vcard-asso-adr">
         [(#MODELE{coordonnees_adresse}
-            {voie=<span class="street-address">[(#META{/association/rue}|nl2br{1}|typo)]</span>}
+            {voie=<span class="street-address">[(#META{/association/rue}|nl2br|typo)]</span>}
             {code_postal=<span class="postal-code">#META{/association/cp}</span>}
             {ville=<span class="locality">#META{/association/ville}</span>}
             {nom_pays=<abbr class="country" title="[(#GET{nom_pays})]"></abbr>}
