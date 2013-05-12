@@ -13,18 +13,18 @@ if (!defined('_LANGONET_ITEM_A'))
 if (!defined('_LANGONET_ITEM_G'))
 	define("_LANGONET_ITEM_G", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
 
-
 // Items de langue dans les fichiers HTML
-// squelette avec <:  :>
-// %<:(?:([a-z0-9_]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s
+// balise <:module:raccourci:> et toutes les formes admises avec paramètres et filtres
 if (!defined('_LANGONET_ITEM_HTML_BALISE'))
 	define("_LANGONET_ITEM_HTML_BALISE", "%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s");
-if (!defined('_LANGONET_ITEM_HTML_FONCTION_SP_ARG1'))
-	define("_LANGONET_ITEM_HTML_FONCTION_SP_ARG1", "%\|singulier_ou_pluriel{(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
-if (!defined('_LANGONET_ITEM_HTML_FONCTION_SP_ARG2'))
-	define("_LANGONET_ITEM_HTML_FONCTION_SP_ARG2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
-if (!defined('_LANGONET_ITEM_HTML_FONCTION_T'))
-	define("_LANGONET_ITEM_HTML_FONCTION_T", "%#VAL{}%s");
+// fonction |singulier_ou_pluriel{arg1, arg2, nb} pour chaque argument
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1'))
+	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1", "%\|singulier_ou_pluriel{(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2'))
+	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
+// fonction _T
+if (!defined('_LANGONET_ITEM_HTML_FILTRE_T'))
+	define("_LANGONET_ITEM_HTML_FILTRE_T", "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+{[^.]*})*)\|_T%s");
 
 // Items de langue dans les fichiers YAML
 if (!defined('_LANGONET_ITEM_YAML'))
@@ -146,10 +146,13 @@ function collecter_occurrences($fichiers) {
 					if (preg_match_all(_LANGONET_ITEM_HTML_BALISE, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
-					if (preg_match_all(_LANGONET_ITEM_HTML_FONCTION_SP_ARG1, $_ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
-					if (preg_match_all(_LANGONET_ITEM_HTML_FONCTION_SP_ARG2, $_ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2, $_ligne, $occurrences, PREG_SET_ORDER))
+						foreach ($occurrences as $_occurrence)
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_T, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
