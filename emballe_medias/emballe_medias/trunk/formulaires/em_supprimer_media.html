@@ -30,8 +30,7 @@
 				[(#MIME_TYPE|match{audio/}|oui)#SET{em_type,audio}]
 				[(#EXTENSION|match{gif|png|jpg}|oui)#SET{em_type,image}]
 				[(#GET{em_type}|non)#SET{em_type,normal}]
-				<fieldset>
-					<legend><:emballe_medias:previsu_document:></legend>
+					<h3 class="legend"><:emballe_medias:previsu_document:></h3>
 					<ul>
 						<li class="previsu_document #GET{type}">
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
@@ -42,7 +41,6 @@
 							]
 						</li>
 					</ul>
-				</fieldset>
 			]
 			[(#FICHIER|get_spip_doc|file_exists|non)
 				#SET{fichier,#FICHIER|basename}

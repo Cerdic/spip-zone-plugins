@@ -23,14 +23,12 @@
 	<ul>
 		<li class="editer editer_statut editer_statut_emballe_media">
 			<label for="statut"><:emballe_medias:label_change_statut_em_normal:></label>
-			<select id="statut" name="statut">
-				[(#ENV{id_article}|non)
-				<option value="" selected="selected">--</option>
-				]
+			<select id="statut" name="statut">[(#ENV{id_article}|non)
+				<option value="" selected="selected">--</option>]
 				[(#ENV{statut}|=={publie}|ou{#GET{force}|=={oui}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,publie}}|et{#GET{has_document}|=={oui}|oui}|oui}|oui)
 				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
 					[(#GET{statuts_texte}|table_valeur{publie}|_T)]
-				</option>]]
+				</option>]
 				[(#ENV{statut}|=={prop}|ou{#GET{force}|=={oui}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|et{#GET{has_document}|=={oui}|oui}|oui}|oui)
 				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
 					[(#GET{statuts_texte}|table_valeur{prop}|_T)]
@@ -53,17 +51,15 @@
 	(function($){
 		var statut_defaut = "#ENV{statut}";
 		jQuery('#statut').change(function(){
-			if($(this).val() == statut_defaut){
+			if($(this).val() == statut_defaut)
 				jQuery(this).parents('form').unbind('form-pre-serialize');
-			}else if((statut_defaut != 'publie') && ($(this).val() != 'poubelle')){
+			else if((statut_defaut != 'publie') && ($(this).val() != 'poubelle'))
 				jQuery(this).parents('form').unbind('form-pre-serialize');
-			}
 			else{
-				if(jQuery(this).val() == 'poubelle'){
+				if(jQuery(this).val() == 'poubelle')
 					var message = '<:diogene:message_confirm_poubelle:>';
-				}else if(statut_defaut == 'publie'){
+				else if(statut_defaut == 'publie')
 					var message = '<:diogene:message_confirm_depublier:>';
-				}
 				if (message) {
 					jQuery(this).parents('form').unbind('form-pre-serialize').bind('form-pre-serialize', function(event, $form, formOptions, veto){
 						if (!confirm(message)) {
