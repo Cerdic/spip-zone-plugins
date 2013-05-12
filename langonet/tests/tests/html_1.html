@@ -23,6 +23,12 @@
 			<tr class="row_even">
 				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_1}|_T)]</td>
 			</tr>
+			<tr class="row_even">
+				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_}|concat{#ENV{numero, defaut}}|_T)]</td>
+			</tr>
+			<tr class="row_even">
+				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
+			</tr>
 		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
 			#SET{ligne, #CLE}
 			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>

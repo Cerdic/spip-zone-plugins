@@ -1,0 +1,15 @@
+<!-- Dans ce fichier :
+	- 2 cas d'utilisation repérés X3 et X4
+	- 1 item défini
+	- 1 item non défini
+	- les autres identifiants ne sont pas repérés car pas sous la forme module:raccourci
+-->
+<test id="langotests">
+	<!-- X3 / module : langotests / item : item_defini_1 / repéré / défini  -->
+	<nom>langotests:defini_1</nom>
+	<!-- X4 / module : langotests / item : item_defini_1 / repéré / indéfini  -->
+	<fonction nom="langotests" description="langotests:indefini_1" retour="string" />
+
+	<description>Tests d'items XML contenu et attribut</description>
+	<categorie id="test" />
+</test>
