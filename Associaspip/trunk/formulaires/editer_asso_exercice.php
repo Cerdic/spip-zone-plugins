@@ -35,7 +35,7 @@ function formulaires_editer_asso_exercice_verifier_dist($id_exercice=0) {
 }
 
 function formulaires_editer_asso_exercice_traiter_dist($id_exercice=0) {
-	return formulaires_editer_objet_traiter('asso_exercice', $id_exercice, '', '',  generer_url_ecrire('exercices'), '');
+	return formulaires_editer_objet_traiter('asso_exercice', $id_exercice, '', '',  generer_url_ecrire('exercice_comptable'), '');
 }
 
 ?>
