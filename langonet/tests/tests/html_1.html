@@ -1,3 +1,11 @@
+<!-- Dans ce fichier :
+	- 4 cas d'utilisation repérés, 2 X3 et 2 X4
+		- 1 item défini dans verification
+		- 1 item défini dans langonet
+		- 1 item non défini dans verification
+		- 1 item non défini dans langonet
+	- les autres identifiants ne sont pas repérés car pas sous la forme module:raccourci
+-->
 <B_verification>
 <div>
 	<table class="spip">
@@ -8,32 +16,40 @@
 									langotests:message_ok_fonction_l_1,
 									langotests:message_ok_fonction_l_n,
 									nberr})]
-				[(#ENV{total}|singulier_ou_pluriel{langotests:message_ok_fonction_l_1, langotests:message_ok_fonction_l_n,nberr})]
+				<!-- H2 / module : verification / item : defini_html_singulier / repéré / défini  -->
+				<!-- H2 / module : verification / item : defini_html_pluriel / repéré / défini  -->
+				[(#ENV{total}|singulier_ou_pluriel{verification:defini_html_singulier, verification:defini_html_pluriel,nb})]
 			</strong>
 		</caption>
 		<tbody>
 <BOUCLE_verification(DATA) {source table, #GET{table}}{par cle}>
 			<tr class="row_odd">
-				<td colspan="3" class="raccourci">
-					<:langotests:utilisation_html:>
-				</td>
+				<!-- H1 / module : verification / item : defini_html_1 / repéré / défini  -->
+				<td><:verification:defini_html_1:></td>
+				<!-- H1 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->
+				<td><:voir_en_ligne:></td>
+				<!-- H1 / module : verification / item : indefini_html_1 / repéré / indéfini  -->
+				<td><:verification:indefini_html_1{param=#GET{char, valeur}}|replace{/, #ENV{chaine}}|ucfirst:></td>
+				<!-- H1 / module : langonet / item : titre_page / repéré / défini  -->
+				<td><:langonet:titre_page{param1=valeur1, param2=valeur2}|ucfirst:></td>
 			</tr>
 			<tr class="row_even">
-				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_1}|_T)]</td>
-			</tr>
-			<tr class="row_even">
-				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_}|concat{#ENV{numero, defaut}}|_T)]</td>
-			</tr>
-			<tr class="row_even">
-				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
-			</tr>
-				<td class="ligne"><:langotests:ligne_html:></td>
-				<td class="colonne"><:voir_en_ligne:></td>
+				<!-- H3 / module : verification / item : defini_html_2 / repéré / défini  -->
+				<td>[(#VAL{verification:defini_html_2}|_T)]</td>
+				<!-- H3 / module : vide (public) / item : voir_en_ligne partiellement identifié / repéré / défini  -->
+				<td>[(#VAL{voir_en_}|concat{#ENV{numero, defaut}}|_T)]</td>
+				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / indéfini  -->
+				<td>[(#VAL{verification:indefini_html_partiel_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
+
+				<!-- TODO : améliorer la regexp pour reconnaitre le cas ci-dessous -->
+				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / défini  -->
+				<td>[(#VAL{verification:defini_html_partiel_}|ajouter_numero|_T)]</td>
 			</tr>
 </BOUCLE_verification>
 		</tbody>
 	</table>
 </div>
 </B_verification>
-<:langonet:message_ok_fonction_l_0:>
+<!-- H1 / module : langonet / item : indefini_html_2 / repéré / indéfini  -->
+<:langonet:indefini_html_2:>
 <//B_verification>
