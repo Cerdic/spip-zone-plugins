@@ -1,0 +1,5 @@
+#SET{rel,(#VAL{rssjs}|uniqid)}
+<div id="#GET{rel}" class="rssjs_div[ (#ENV{class})]"></div><dl class="rssjs" id="dl_#GET{rel}"></dl>
+<script type="text/javascript">
+	google.setOnLoadCallback(initialize_rssjs_complet('#ENV*{url}', #ENV{nbre_entrees,12}, '#GET{rel}', '#ENV{mode}'));
+</script>
