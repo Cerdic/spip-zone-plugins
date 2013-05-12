@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Tests pour la verification de type definition
-function langonet_tester_definition() {
+function langonet_tester_2() {
 	// Commenter ou decommenter les lignes suivantes pour tester les differents cas de verification
 	// VERIFICATION DEFINITION : Erreurs
 	// -- Les items suivants, utilises comme des items du module Langonet, ne sont pas definis dans langonet-tests_fr.php
