@@ -1,28 +1,20 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>
-	Bernard Blazin - Fran&#231;ois de Montlivault
-	Emmanuel Saint-James - Jeannolapin - gilcot
-	</auteur>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault,
+	Ma&#239;eul Roquette, Emmanuel Saint-James,
+	Jeannot lapin, Art-Logic, Marcel Bolla, gilcot, G&#233;rard Savoye</auteur>
 	<version>2.2.0</version>
 	<version_base>71780</version_base>
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
-	<description>Gestion d'associations</description>
+	<description>Plugin de gestion de petites associations avec : gestion des adhérents et des cotisations et dons ; gestion des ventes associatives et des activités.</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
 	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
 	<icon>img_pack/asso-96.png</icon>
 
 	<options>association_options.php</options>
-
-	<pipeline>
-		<nom>header_prive</nom>
-	</pipeline>
-	<pipeline>
-		<nom>delete_tables</nom>
-	</pipeline>
 
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
@@ -33,10 +25,17 @@
 		<inclure>base/association.php</inclure>
 	</pipeline>
 	<pipeline>
-        	<nom>declarer_tables_interfaces</nom>
-        	<inclure>base/association.php</inclure>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/association.php</inclure>
 	</pipeline>
-
+	<pipeline><!-- Autorisations -->
+		<nom>autoriser</nom>
+		<inclure>association_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<!-- Injections dans le "header" de l'espace prive -->
+		<nom>header_prive</nom>
+	</pipeline>
 	<pipeline>
 		<!-- Ajout automatique de l'auteur edité comme membre -->
 		<nom>post_edition</nom>
@@ -58,11 +57,6 @@
 		<inclure>association_pipelines.php</inclure>
 	</pipeline>
 
-	<pipeline><!-- Autorisations -->
-		<nom>autoriser</nom>
-		<inclure>association_autorisations.php</inclure>
-	</pipeline>
-
 	<bouton id="association_bando" parent="bando_reactions">
 		<icone>img_pack/asso-24.png</icone>
 		<titre>Associaspip</titre>
@@ -75,6 +69,7 @@
 
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
+	<utilise id="agenda" version="[2.0.1;3.0.99]" />
 	<utilise id="fpdf" version="[0.0.1;0.1.99]" />
 	<utilise id="coordonnees" version="[1.4.5;1.5.99]" />
 	<utilise id="cextras" version="[0.8;1.99]" />
