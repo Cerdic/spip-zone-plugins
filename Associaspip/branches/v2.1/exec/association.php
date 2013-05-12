@@ -58,7 +58,7 @@ function exec_association() {
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
 		sql_updateq('spip_asso_membres',
 			array("statut_interne"=> 'echu'),
-			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
+			"statut_interne = 'ok' AND validite < CURRENT_DATE ");
 	}
 }
 
