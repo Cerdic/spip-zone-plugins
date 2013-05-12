@@ -1,0 +1,24 @@
+<paquet
+	prefix="imageflow"
+	categorie="multimedia"
+	version="2.0.0"
+	schema="0.1.0"
+	etat="test"
+	compatibilite="[3.0.7;["
+	logo="images/imageflow.png"
+	documentation="http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP"
+>
+
+	<nom>Portfolio ImageFlow</nom>
+
+	<auteur lien="http://www.quesaco.org/">Christian Paulus</auteur>
+	<auteur lien="http://imageflow.finnrudolph.de/">Finn Rudolph (script JS)</auteur>
+	<auteur lien="http://reflection.corephp.co.uk/v3.php">Richard Davey (script Reflect)</auteur>
+	<auteur lien="http://www.spip-contrib.net/ImageFlow-pour-SPIP]">St&#233;phane Kus (squelette)</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="ajouter_onglets" inclure="inc/imageflow_pipeline_ajouter_onglets.php" />
+	<pipeline nom="header_prive" inclure="inc/imageflow_pipeline_header_prive.php" />
+
+</paquet>
