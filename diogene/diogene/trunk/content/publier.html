@@ -45,7 +45,7 @@
 [(#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)
 [(#SET{contenu,[(#GET{contenu}|concat{
 <li class="item">
-	<h4 class="h4"><a href="[(#URL_PAGE{#ENV{page},type_objet=#TYPE})]">#TITRE</a></h4>
+	<h3 class="h3"><a href="[(#URL_PAGE{#ENV{page},type_objet=#TYPE})]">#TITRE</a></h3>
 	#DESCRIPTION
 </li>})]})]]
 [(#OBJET|in_array{#LISTE{article,emballe_media,site}}|oui)
