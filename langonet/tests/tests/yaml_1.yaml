@@ -1,7 +1,7 @@
 # Dans ce fichier :
 #   - 4 cas d'utilisation Y1 repérés
-#     - 1 défini dans langotests
-#     - 1 non défini dans langotests
+#     - 1 défini dans verification
+#     - 1 non défini dans verification
 #     - 1 défini dans public
 #     - 1 non défini dans ecrire, public ou spip
 nom: 'fichier-yaml'
@@ -12,9 +12,9 @@ parametres:
     saisie: 'selection'
     options:
       nom: 'align'
-      label: '<:langotests:defini_yaml_1:>'     # Y1 / module : langotests / item : defini_yaml_1 / repéré / défini
+      label: '<:verification:defini_yaml_1:>'     # Y1 / module : verification / item : defini_yaml_1 / repéré / défini
       defaut: ''
       datas:
-        left: '<:langotests:indefini_yaml_1:>'  # Y1 / module : langotests / item : indefini_yaml_1 / repéré / indéfini
+        left: '<:verification:indefini_yaml_1:>'  # Y1 / module : verification / item : indefini_yaml_1 / repéré / indéfini
         center: '<:voir_en_ligne:>'             # Y1 / module : vide (public) / item : voir_en_ligne / repéré / défini
         right: '<:langonet:indefini_yaml_2:>'   # Y1 / module : langonet / item : indefini_yaml_2 / repéré / indéfini

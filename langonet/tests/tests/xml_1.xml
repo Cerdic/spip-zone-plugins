@@ -1,18 +1,18 @@
 <!-- Dans ce fichier :
 	- 4 cas d'utilisation repérés, 2 X3 et 2 X4
-		- 1 item défini dans langotests
+		- 1 item défini dans verification
 		- 1 item défini dans langonet
-		- 1 item non défini dans langotests
+		- 1 item non défini dans verification
 		- 1 item non défini dans langonet
 	- les autres identifiants ne sont pas repérés car pas sous la forme module:raccourci
 -->
 <test id="langotests">
-	<!-- X3 / module : langotests / item : defini_xml_1 / repéré / défini  -->
-	<nom>langotests:defini_xml_1</nom>
+	<!-- X3 / module : verification / item : defini_xml_1 / repéré / défini  -->
+	<nom>verification:defini_xml_1</nom>
 	<!-- X3 / module : langonet / item : titre_page / repéré / défini  -->
 	<slogan>langonet:titre_page</slogan>
-	<!-- X4 / module : langotests / item : indefini_xml_1 / repéré / indéfini  -->
-	<fonction nom="fonction_1" description="langotests:indefini_xml_1" retour="string" />
+	<!-- X4 / module : verification / item : indefini_xml_1 / repéré / indéfini  -->
+	<fonction nom="fonction_1" description="verification:indefini_xml_1" retour="string" />
 	<!-- X4 / module : langonet / item : indefini_xml_2 / repéré / indéfini  -->
 	<fonction nom="fonction_2" description="langonet:indefini_xml_2" retour="string" />
 

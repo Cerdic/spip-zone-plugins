@@ -1,7 +1,7 @@
-<B_liste_items>
-<div class="liste-objets items_langue">
-	<table class="spip liste">
-		<caption class="notice">
+<B_verification>
+<div>
+	<table class="spip">
+		<caption>
 			<strong class="caption">
 				[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
 				[(#ENV{total}|singulier_ou_pluriel{
@@ -12,14 +12,12 @@
 			</strong>
 		</caption>
 		<tbody>
-<BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
+<BOUCLE_verification(DATA) {source table, #GET{table}}{par cle}>
 			<tr class="row_odd">
 				<td colspan="3" class="raccourci">
 					<:langotests:utilisation_html:>
 				</td>
 			</tr>
-	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
-		<B_lignes>
 			<tr class="row_even">
 				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_1}|_T)]</td>
 			</tr>
@@ -29,27 +27,13 @@
 			<tr class="row_even">
 				<td class="fichier" colspan="3">[(#VAL{langotests:utilisation_val_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
 			</tr>
-		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
-			#SET{ligne, #CLE}
-			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
-			<tr class="row_even">
 				<td class="ligne"><:langotests:ligne_html:></td>
 				<td class="colonne"><:voir_en_ligne:></td>
-				<td class="occurrence">
-					[<code>(#VALEUR|table_valeur{0}
-						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8}
-						|appliquer_filtre{coloration_code_color, php, code, span})</code>]
-				</td>
 			</tr>
-			</BOUCLE_occurrences>
-		</BOUCLE_lignes>
-	</BOUCLE_fichiers>
-</BOUCLE_liste_items>
+</BOUCLE_verification>
 		</tbody>
 	</table>
 </div>
-</B_liste_items>
-#BOITE_OUVRIR{'', success}
+</B_verification>
 <:langonet:message_ok_fonction_l_0:>
-#BOITE_FERMER
-<//B_liste_items>
+<//B_verification>

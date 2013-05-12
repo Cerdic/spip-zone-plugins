@@ -1,7 +1,7 @@
 <!-- Dans ce fichier :
 	- 4 cas d'utilisation X2 repérés
-		- 1 item défini dans langotests
-		- 1 item non défini dans langotests
+		- 1 item défini dans verification
+		- 1 item non défini dans verification
 		- 1 item défini mais dans public
 		- 1 item non défini dans langonet
 -->
@@ -32,14 +32,14 @@ Ce plugin permet d'ex&#233;cuter des tests de non-r&#233;gressions sur les op&#2
 		<inclure>base/langotests_declarations.php</inclure>
 	</pipeline>
 
-	<!-- X2 / module : langotests / item : defini_plugin_1 / repéré / défini  -->
+	<!-- X2 / module : verification / item : defini_plugin_1 / repéré / défini  -->
 	<onglet id="onglet_1" parent="langonet">
-		<titre>langotests:defini_plugin_1</titre>
+		<titre>verification:defini_plugin_1</titre>
 		<url>action_1</url>
 	</onglet>
-	<!-- X2 / module : langotests / item : indefini_plugin_1 / repéré / indéfini  -->
+	<!-- X2 / module : verification / item : indefini_plugin_1 / repéré / indéfini  -->
 	<onglet id="onglet_2" parent="langonet">
-		<titre>langotests:indefini_plugin_1</titre>
+		<titre>verification:indefini_plugin_1</titre>
 		<url>laction_2</url>
 	</onglet>
 	<!-- X2 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->

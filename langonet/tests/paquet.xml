@@ -1,7 +1,7 @@
 <!-- Dans ce fichier :
 	- 4 cas d'utilisation X1 repérés
-		- 1 item défini dans langotests
-		- 1 item non défini dans langotests
+		- 1 item défini dans verification
+		- 1 item non défini dans verification
 		- 1 item défini mais dans public
 		- 1 item non défini dans langonet
 -->
@@ -24,10 +24,10 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/langotests_declarations.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/langotests_declarations.php" />
 
-	<!-- X1 / module : langotests / item : defini_paquet_1 / repéré / défini  -->
-	<onglet nom="onglet_1" titre="langotests:defini_paquet_1" parent="langonet" action="action_1" />
-	<!-- X1 / module : langotests / item : indefini_paquet_1 / repéré / indéfini  -->
-	<onglet nom="onglet_2" titre="langotests:indefini_paquet_1" parent="langonet" action="action_2" />
+	<!-- X1 / module : verification / item : defini_paquet_1 / repéré / défini  -->
+	<onglet nom="onglet_1" titre="verification:defini_paquet_1" parent="langonet" action="action_1" />
+	<!-- X1 / module : verification / item : indefini_paquet_1 / repéré / indéfini  -->
+	<onglet nom="onglet_2" titre="verification:indefini_paquet_1" parent="langonet" action="action_2" />
 	<!-- X1 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->
 	<menu nom="menu_1" titre="voir_en_ligne" parent="bando_administration" icone="menu1-16.png" action="action_3" />
 	<!-- X1 / module : langonet / item : indefini_paquet_2 / repéré / indéfini  -->
