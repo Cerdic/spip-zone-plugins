@@ -4,8 +4,7 @@
 #SET{type,#TYPE}
 </BOUCLE_diogene>
 <B_sites_attente>
-<div>
-	#ANCRE_PAGINATION
+<div class="liste_attente"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">[(#GET{titre_diogene})] (#GRAND_TOTAL)</h3>
 	<ul class="liste-items liste_objets_attente">
 		<BOUCLE_sites_attente(SITES){id_secteur=#GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination 5}>
@@ -23,7 +22,7 @@
 		</li>
 		</BOUCLE_sites_attente>
 	</ul>
-	[<p class="pagination">(#PAGINATION)</p>]
+	[<p class="pagination">(#PAGINATION{page})</p>]
 </div>
 </B_sites_attente>
 </B_diogene>
