@@ -1,0 +1,33 @@
+<plugin>
+<nom>RSS-JS</nom>
+<etat>test</etat>
+<version>0.2.0</version>
+<auteur>Dominique Wojylac</auteur>
+<icon>images/rssjs-32.png</icon>
+<licence>GPL 3 - &#169; 2013</licence>
+<lien>http://www.spip-contrib.net/spip.php?article4359</lien>
+<description>Affichage de flux Rss gr&acirc;ce &agrave; l'API Google Feed</description>
+<prefix>rssjs</prefix>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclure_js</action>
+	<inclure>rssjs_pipeline.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclure_css</action>
+	<inclure>rssjs_pipeline.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head</nom>
+	<action>inclure_js</action>
+	<inclure>rssjs_pipeline.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head_css</nom>
+	<action>inclure_css</action>
+	<inclure>rssjs_pipeline.php</inclure>
+</pipeline>
+<categorie>communication</categorie>
+<necessite id="SPIP" version='[2.0.0;2.1.99]' />
+</plugin>
