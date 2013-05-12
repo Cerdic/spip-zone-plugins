@@ -1,7 +1,7 @@
 <plugin>
 <nom>RSS-JS</nom>
-<etat>test</etat>
-<version>0.2.0</version>
+<etat>stable</etat>
+<version>1.0.0</version>
 <auteur>Dominique Wojylac</auteur>
 <icon>images/rssjs-32.png</icon>
 <licence>GPL 3 - &#169; 2013</licence>
