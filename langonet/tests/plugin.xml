@@ -1,9 +1,9 @@
 <!-- Dans ce fichier :
-	- 3 cas d'utilisation X2 repérés
+	- 4 cas d'utilisation X2 repérés
 		- 1 item défini dans langotests
 		- 1 item non défini dans langotests
 		- 1 item défini mais dans public
-	- les autres identifiants ne sont pas repérés car pas sous la forme module:raccourci
+		- 1 item non défini dans langonet
 -->
 <plugin>
 	<prefix>langotests</prefix>
@@ -32,20 +32,26 @@ Ce plugin permet d'ex&#233;cuter des tests de non-r&#233;gressions sur les op&#2
 		<inclure>base/langotests_declarations.php</inclure>
 	</pipeline>
 
-	<!-- X2 / module : langotests / item : defini_3 / repéré / défini  -->
+	<!-- X2 / module : langotests / item : defini_plugin_1 / repéré / défini  -->
 	<onglet id="onglet_1" parent="langonet">
-		<titre>langotests:defini_3</titre>
+		<titre>langotests:defini_plugin_1</titre>
 		<url>action_1</url>
 	</onglet>
-	<!-- X2 / module : langotests / item : indefini_3 / repéré / indéfini  -->
+	<!-- X2 / module : langotests / item : indefini_plugin_1 / repéré / indéfini  -->
 	<onglet id="onglet_2" parent="langonet">
-		<titre>langotests:indefini_3</titre>
+		<titre>langotests:indefini_plugin_1</titre>
 		<url>laction_2</url>
 	</onglet>
 	<!-- X2 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->
-	<bouton id="menu" parent="bando_administration">
-		<icone>langotests-16.png</icone>
+	<bouton id="menu_1" parent="bando_administration">
+		<icone>menu1-16.png</icone>
 		<titre>voir_en_ligne</titre>
 		<url>action_3</url>
+	</bouton>
+	<!-- X2 / module : langonet / item : indefini_plugin_2 / repéré / indéfini  -->
+	<bouton id="menu_2" parent="bando_administration">
+		<icone>menu2-16.png</icone>
+		<titre>langonet:indefini_plugin_2</titre>
+		<url>action_4</url>
 	</bouton>
 </plugin>

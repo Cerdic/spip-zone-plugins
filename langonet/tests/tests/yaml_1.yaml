@@ -1,36 +1,20 @@
-nom: '<:bouton_ajouter:>'
+# Dans ce fichier :
+#   - 4 cas d'utilisation Y1 repérés
+#     - 1 défini dans langotests
+#     - 1 non défini dans langotests
+#     - 1 défini dans public
+#     - 1 non défini dans ecrire, public ou spip
+nom: 'fichier-yaml'
 logo: 'images/media-24.png'
 icone_barre: 'media.png'
 parametres:
   -
-    saisie: 'selecteur_document'
-    options:
-      nom: 'id_modele'
-      label: '<:langotests:label_1:>'
-      defaut: ''
-      env: 'oui'
-      obligatoire: 'oui'
-    verifier:
-      type: 'id_document'
-  -
-    saisie: 'selection'
-    options:
-      nom: 'modele'
-      label: '<:langotests:label_2:>'
-      obligatoire: 'oui'
-      cacher_option_intro: 'oui'
-      defaut: 'doc'
-      datas:
-        doc: 'doc'
-        img: 'img'
-        emb: 'emb'
-  -
     saisie: 'selection'
     options:
       nom: 'align'
-      label: '<:langotests:label_3:>'
+      label: '<:langotests:defini_yaml_1:>'     # Y1 / module : langotests / item : defini_yaml_1 / repéré / défini
       defaut: ''
       datas:
-        left: '<:langotests:label_4:>'
-        center: '<:voir:>'
-        right: '<:voir_en_ligne:>'
+        left: '<:langotests:indefini_yaml_1:>'  # Y1 / module : langotests / item : indefini_yaml_1 / repéré / indéfini
+        center: '<:voir_en_ligne:>'             # Y1 / module : vide (public) / item : voir_en_ligne / repéré / défini
+        right: '<:langonet:indefini_yaml_2:>'   # Y1 / module : langonet / item : indefini_yaml_2 / repéré / indéfini

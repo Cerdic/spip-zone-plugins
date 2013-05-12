@@ -1,9 +1,9 @@
 <!-- Dans ce fichier :
-	- 3 cas d'utilisation X1 repérés
+	- 4 cas d'utilisation X1 repérés
 		- 1 item défini dans langotests
 		- 1 item non défini dans langotests
 		- 1 item défini mais dans public
-	- les autres identifiants ne sont pas repérés car pas sous la forme module:raccourci
+		- 1 item non défini dans langonet
 -->
 <paquet
 	prefix="langotests"
@@ -24,10 +24,12 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/langotests_declarations.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/langotests_declarations.php" />
 
-	<!-- X1 / module : langotests / item : defini_2 / repéré / défini  -->
-	<onglet nom="onglet_1" titre="langotests:defini_2" parent="langonet" action="action_1" />
-	<!-- X1 / module : langotests / item : indefini_2 / repéré / indéfini  -->
-	<onglet nom="onglet_2" titre="langotests:item_indefini_2" parent="langonet" action="action_2" />
+	<!-- X1 / module : langotests / item : defini_paquet_1 / repéré / défini  -->
+	<onglet nom="onglet_1" titre="langotests:defini_paquet_1" parent="langonet" action="action_1" />
+	<!-- X1 / module : langotests / item : indefini_paquet_1 / repéré / indéfini  -->
+	<onglet nom="onglet_2" titre="langotests:indefini_paquet_1" parent="langonet" action="action_2" />
 	<!-- X1 / module : vide (public) / item : voir_en_ligne / repéré / défini  -->
-	<menu nom="menu" titre="voir_en_ligne" parent="bando_administration" icone="langotests-16.png" action="action_3" />
+	<menu nom="menu_1" titre="voir_en_ligne" parent="bando_administration" icone="menu1-16.png" action="action_3" />
+	<!-- X1 / module : langonet / item : indefini_paquet_2 / repéré / indéfini  -->
+	<menu nom="menu_2" titre="langonet:indefini_paquet_2" parent="bando_administration" icone="menu2-16.png" action="action_4" />
 </paquet>

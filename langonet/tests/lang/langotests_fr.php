@@ -19,9 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_generer_contient3' => 'ben va falloir génÉrer ça rapide !',
 
 	// Pour la vérification "definition"
-	'defini_1' => 'item défini #1',
-	'defini_2' => 'item défini #2',
-	'defini_3' => 'item défini #3',
+	'defini_xml_1' => 'item défini dans xml #1',
+	'defini_paquet_1' => 'item défini dans paquet.xml #1',
+	'defini_plugin_1' => 'item défini dans plugin.xml #1',
+	'defini_yaml_1' => 'item défini dans yaml #1',
 
 	'test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et est égal à test.',
 	'test_item_1_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.',
