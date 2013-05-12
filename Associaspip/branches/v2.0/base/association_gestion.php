@@ -217,12 +217,18 @@ $GLOBALS['association_maj'][50] = array(
 	array('sql_update', 'spip_asso_activites', array('membres' => 'accompagne'), "accompagne<>''"),
 );
 
+function association_maj_12530() {
+	sql_insertq('spip_meta', array(
+		'nom' => 'association',
+		'valeur' => serialize(sql_fetsel('*','spip_asso_profil')),
+	)); // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
+	sql_drop_table('spip_asso_profil'); // ...et asso_profil ne sert donc plus...
+}
 // v0.60 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][60] = array(
 //@r12530
 	// Passage au plugin "CFG"...
-	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_asso_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
-	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil ne sert donc plus...
+	array('association_maj_12530'), // migration de la table asso_profil dans un tableau dans meta
 //@r13839
 	// suppression de la table des livres
 	array('sql_drop_table', 'spip_asso_livres'), // n'a jamais servi...

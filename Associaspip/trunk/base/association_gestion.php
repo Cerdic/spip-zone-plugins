@@ -62,20 +62,19 @@ function association_vider_tables($nom_meta_base_version, $table_metas='associat
  *
  * @param string $meta
  *   Nom de la meta informant de la version du schema de donnees du plugin
+ * 'base_version'
  * @param string $courante
  *   Version cible du schema de donnees dans ce plugin (base_version dan plugin.xml)
  * @param string $table
  *   Nom de la table contenant les metas de ce plugin (meta dans plugin.xml)
+ * 'association_metas'
  * @return int
  *   Retourne 0 si ok, le dernier numero de MAJ ok sinon
 **/
 function association_upgrade($meta, $courante, $table='association_metas') {
 
-	$association_maj = array();
-
-
 	// Compatibilite pour la meta donnant le numero de version
-	if (!isset($GLOBALS['association_metas']['base_version'])) { // Le nom de la meta donnant le numero de version n'etait pas standard puis est parti dans une autre table puis encore une autre
+	if (!isset($GLOBALS[$table][$meta])) { // Le nom de la meta donnant le numero de version n'etait pas standard puis est parti dans une autre table puis encore une autre
 		lire_metas('asso_metas'); //!\ Pour une nouvelle installation, ceci genere des alertes dans prive_spip.log
 		if (isset($GLOBALS['asso_metas']['base_version'])) { // [r38190;r38579[:spip_asso_metas
 			$n = $GLOBALS['asso_metas']['base_version'];
@@ -83,9 +82,9 @@ function association_upgrade($meta, $courante, $table='association_metas') {
 			$n = $GLOBALS['meta']['association_base_version'];
 		} else
 			$n = 0;
-		$GLOBALS['association_metas']['base_version'] = $n; // et recuperer a la bonne place
+		$GLOBALS[$table][$meta] = $n; // et recuperer a la bonne place
 	} else // [r38579;[:spip_association_metas (avec le prefixe du plugin pour #CONFIGURER_METAS qui remplace CFG pour le chargement+enregistrement auto de la config)
-		$n = $GLOBALS['association_metas']['base_version'];
+		$n = $GLOBALS[$table][$meta];
 
 	// Upgrade proprement dit
 	effacer_meta('association_base_version', $table);
@@ -336,14 +335,21 @@ $GLOBALS['association_maj'][50] = array(
 	array('sql_alter', "TABLE spip_asso_activites ADD non_membres TEXT NOT NULL"),
 	array('sql_update', 'spip_asso_activites', array('membres' => 'accompagne'), "accompagne<>''"),
 	array('sql_alter', "TABLE spip_asso_activites DROP accompagne"),
+	array('spip_log', "maj_50", 'associaspip'),
 );
 
+function association_maj_12530() {
+	sql_insertq('spip_meta', array(
+		'nom' => 'association',
+		'valeur' => serialize(sql_fetsel('*','spip_asso_profil')),
+	)); // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
+	sql_drop_table('spip_asso_profil'); // ...et asso_profil ne sert donc plus...
+}
 // v0.60 (Associaspip 1.9.2)
 $GLOBALS['association_maj'][60] = array(
 //@r12530
 	// Passage au plugin "CFG"...
-	array('sql_insertq', 'spip_meta', array('nom'=>'association', 'valeur'=>serialize(sql_fetsel('*','spip_asso_profil')), ) ), // les entrees de asso_profil sont serialisees par "CFG" dans meta.nom=association
-	array('sql_drop_table', 'spip_asso_profil'), // ...et asso_profil ne sert donc plus...
+	array('association_maj_12530'), // migration de la table asso_profil dans un tableau dans meta
 //@r13839
 	// suppression de la table des livres
 	array('sql_drop_table', 'spip_asso_livres'), // n'a jamais servi...
@@ -384,7 +390,7 @@ $_ASSOCIATION_INSCRIPTION2 = ($GLOBALS['association_metas']['base_version']>0.6 
 // test plus allege :
 $_ASSOCIATION_AUTEURS_ELARGIS = ($_ASSOCIATION_INSCRIPTION2 AND @sql_select('id_auteur', 'spip_auteurs_elargis', '', '', '', 1) ); // $GLOBALS['meta']['inscription2'] au lieu du sql_select ?
 
-function association_maj_16181(){
+function association_maj_16181() {
 	if ($_ASSOCIATION_AUTEURS_ELARGIS) { // "Inscription 2" et sa table "auteurs_elargis" sont la...
 		// comme dit r38258 : il faut migrer les donnees avant de detruire les champs (r16186) ou la table (r38192)
 		$champs = array('id_auteur', 'nom', 'prenom', 'sexe', 'fonction', 'email', 'numero', 'rue', 'cp', 'ville', 'telephone', 'portable', /*'montant',*/ 'relance', 'divers', 'remarques', 'vignette', 'naissance', 'profession', 'societe', 'identifiant', 'passe', 'creation', 'secteur', 'publication'); // champs pris en compte dans r16186... (on met id_auteur en tete par rapport a r16249 plus loin)
