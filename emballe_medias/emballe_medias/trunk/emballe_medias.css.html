@@ -71,15 +71,15 @@ object.swfupload{
 	padding:5px;
 }
 
-#videos_informations h2,.previsu_document h2{
+.previsu_document h2{
 	margin:0 0 10px;
 }
 
 .previsu_document{
+	position:relative;
 	background-color:#fff;
 	padding:5px;
 	margin:10px 0;
-	position:relative;
 }
 
 .previsu_document .em_next_prev{
@@ -87,7 +87,6 @@ object.swfupload{
 }
 
 .previsu_document .spip_logos{
-	margin:0;
 	height:auto;
 }
 
@@ -219,9 +218,8 @@ noscript.alternative_js{
 	width:16px;
 	height:16px;
 	display:block;
-	float:right;
 	color:transparent;
-	text-indent:300px;
+	float:right;
 }
 .formulaire_spip .info_document_icone .infos_document{
 	text-align:left;
@@ -304,7 +302,9 @@ noscript.alternative_js{
 }
 
 .content #liste_medias_publication .formulaire_spip{
-	width:100%
+	max-width:100%;
+	overflow:hidden;
+	word-wrap: break-word;
 }
 
 #formulaire_media_edition_lot .boutons{
@@ -370,6 +370,9 @@ noscript.alternative_js{
 {
 	background-color:#FC575E;
 }
+
+.previsu_document .em_vignette a.mediabox{display:block}
+.previsu_document .em_vignette img{max-width:100%;height:auto;width:inherit;}
 
 <BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_em_}}>
 	#SET{fond,prive/#VALEUR|basename{'.html'}}
