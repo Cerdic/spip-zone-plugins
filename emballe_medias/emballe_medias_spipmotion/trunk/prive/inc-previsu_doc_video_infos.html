@@ -16,8 +16,7 @@
 				[(#STATUT|=={erreur}|oui)[(#SET{encodage_en_erreur,oui})]
 				<:spipmotion:info_document_encodage_en_erreur:>]
 				[(#STATUT|=={erreur}|non)
-				[(#STATUT|=={non}|oui)<:em_spipmotion:message_document_attente_encodage:>]
-				[(#STATUT|=={non}|non)<:em_spipmotion:message_document_encours_encodage:>]]
+				[(#STATUT|=={non}|?{<:em_spipmotion:message_document_attente_encodage:>,<:em_spipmotion:message_document_encours_encodage:>})]]
 			</p>
 			</BOUCLE_facd_attentes>
 			[(#GET{encodage_en_erreur}|=={oui}|non)
@@ -35,8 +34,7 @@
 						[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios,#ARRAY}}|oui)<:spipmotion:encoder_son:>]
 					</a>
 					[(#ENV{hasard}|oui)
-					<a href="[(#ENV{redirect,#SELF}|parametre_url{hasard,''})]" onclick="$('#formulaire_supprimer_document_#ID_DOCUMENT .previsu_document .em_previsu').ajaxReload();" class="bouton ajax"><:em_spipmotion:lien_recharger_voir_player:></a>
-					]
+					<a href="[(#ENV{redirect,#SELF}|parametre_url{hasard,''})]" onclick="$('#formulaire_supprimer_document_#ID_DOCUMENT .previsu_document .em_previsu').ajaxReload();" class="bouton ajax"><:em_spipmotion:lien_recharger_voir_player:></a>]
 				</div>]
 			<//B_facd_attentes>
 			<B_autres_versions>
@@ -116,8 +114,7 @@
 		[(#FICHIER|get_spip_doc|file_exists|non)
 			<p class="reponse_formulaire reponse_formulaire_erreur">
 				<:spipmotion:erreur_document_plus_disponible:>
-			</p>
-		]
+			</p>]
 		#SET{logo,#LOGO_DOCUMENT}
 		<BOUCLE_si_copie_dispo(CONDITION){si #FICHIER|get_spip_doc|file_exists|oui}>
 			<div>

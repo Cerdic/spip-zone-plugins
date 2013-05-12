@@ -16,8 +16,7 @@
 				<p>
 					[(#STATUT|=={erreur}|oui)[(#SET{encodage_en_erreur,oui})]
 					<:spipmotion:info_document_encodage_en_erreur:>]
-					[(#STATUT|=={non}|oui)<:em_spipmotion:message_document_attente_encodage:>]
-					[(#STATUT|=={non}|non)<:em_spipmotion:message_document_encours_encodage:>]
+					[(#STATUT|=={non}|?{<:em_spipmotion:message_document_attente_encodage:>,<:em_spipmotion:message_document_encours_encodage:>})]
 				</p>
 				#SET{encodages,oui}
 			</BOUCLE_facd_attentes>
@@ -34,10 +33,8 @@
 				<a href="[(#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage,#ID_DOCUMENT,#ENV{redirect,#SELF}})]" class="bouton ajax">
 					[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_videos,#ARRAY}}|oui)<:spipmotion:encoder_video:>]
 					[(#EXTENSION|in_array{#CONFIG{spipmotion/fichiers_audios,#ARRAY}}|oui)<:spipmotion:encoder_son:>]
-				</a>
-				[(#ENV{hasard}|oui)
-				<a href="[(#ENV{redirect,#SELF}|parametre_url{hasard,''})]" onclick="$('#formulaire_supprimer_document_#ID_DOCUMENT .previsu_document .em_previsu').ajaxReload();" class="bouton ajax"><:em_spipmotion:lien_recharger_voir_player:></a>
-				]
+				</a>[(#ENV{hasard}|oui)
+				<a href="[(#ENV{redirect,#SELF}|parametre_url{hasard,''})]" onclick="$('#formulaire_supprimer_document_#ID_DOCUMENT .previsu_document .em_previsu').ajaxReload();" class="bouton ajax"><:em_spipmotion:lien_recharger_voir_player:></a>]
 				</div>#SET{encodages,oui}]
 			<//B_facd_attentes>
 			<B_autres_versions>
@@ -46,11 +43,10 @@
 					<BOUCLE_autres_versions(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ID_DOCUMENT}{', '}{tout}>[(#TOTAL_BOUCLE|>{1}|oui)#EXTENSION]#SET{extension,#EXTENSION}</BOUCLE_autres_versions>
 					[(#TOTAL_BOUCLE|=={1}|oui)<:em_spipmotion:autre_version_format{format=#GET{extension}}:>]
 				</p>
-				#SET{encodages,oui}
+				[(#SET{encodages,oui})]
 			</B_autres_versions>
 			[(#GET{encodages}|=={oui}|non)
-			<p><:em_spipmotion:info_encodage_pas_prevu:></p>
-			]
+			<p><:em_spipmotion:info_encodage_pas_prevu:></p>]
 		</div>
 		<div id="em_infos_doc-#ID_DOCUMENT">
 			<div>
