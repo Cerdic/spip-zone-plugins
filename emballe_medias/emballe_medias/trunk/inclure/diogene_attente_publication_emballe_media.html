@@ -4,22 +4,21 @@
 [(#SET{type,#TYPE})]
 </BOUCLE_diogene>
 <B_medias_attente>
-<div>
-	#ANCRE_PAGINATION
+<div class="liste_attente"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	[(#ENV{afficher_titre,oui}|!={non}|oui)
 	<h3 class="h3">[(#GET{titre_diogene})][ ((#GRAND_TOTAL))]</h3>]
 	<ul class="liste-items liste_objets_attente liste_objets_attente_emballe_medias">
 		<BOUCLE_medias_attente(ARTICLES){id_secteur = #GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{!par statut, date}{pagination 5}{tout}>
 		<li class="item">[(#SET{url_publier,[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_article,#ID_ARTICLE})]})]
 			<BOUCLE_documents(DOCUMENTS){id_article}{0,1}{tout}>
-			<a href="#GET{url_publier}" class="lien_publier">[(#LOGO_DOCUMENT|sinon{#CHEMIN{images/media_sans_logo.png}}|image_reduire{150,150}|image_recadre{150,150}|inserer_attribut{class,spip_logos})]</a>
+			<a href="#GET{url_publier}" class="lien_publier">[(#LOGO_DOCUMENT|sinon{#CHEMIN{images/media_sans_logo.png}}|image_reduire{150,150}|image_recadre{150,150}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#_medias_attente:TITRE|couper{20})]})]</a>
 			</BOUCLE_documents>
 			</B_documents>
-			<a href="#GET{url_publier}" class="lien_publier">[(#CHEMIN{images/media_sans_logo.png}|image_reduire{150,150}|image_recadre{150,150}|inserer_attribut{class,spip_logos})]</a>
+			<a href="#GET{url_publier}" class="lien_publier">[(#CHEMIN{images/media_sans_logo.png}|image_reduire{150,150}|image_recadre{150,150}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#_medias_attente:TITRE|couper{20})]})]</a>
 			<//B_documents>
 			<h4 class="h4"><a href="#GET{url_publier}">[(#TITRE|sinon{<:emballe_medias:titre_nouveau_document:>})]</a></h4>
 			[<p><:par_auteur|ucfirst:>(#LESAUTEURS)</p>]
-			[<p><:diogene:info_statut:>[(#STATUT|puce_statut{article,#ID_ARTICLE})] (#STATUT|diogene_info_statut)</p>]
+			[<p><:diogene:info_statut:>[(#STATUT|puce_statut{article,#ID_ARTICLE}|inserer_attribut{alt,''})] (#STATUT|diogene_info_statut)</p>]
 			[(#EM_TYPE|in_array{#LISTE{audio,video,texte,image}}|oui)
 			<p>
 				<:emballe_medias:type_media:>[(#VAL{emballe_medias:type_#EM_TYPE}|_T)]
@@ -28,7 +27,7 @@
 		</li>
 		</BOUCLE_medias_attente>
 	</ul>
-	[<p class="pagination">(#PAGINATION)</p>]
+	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</p>]
 </div>
 </B_medias_attente>
 </B_diogene>
