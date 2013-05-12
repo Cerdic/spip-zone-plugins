@@ -66,7 +66,7 @@ function formulaires_ajouter_cotisation_traiter_dist($id_auteur, $nom_prenom, $c
 		$res['message_erreur'] = ($err?$err:_T('erreur_traite'));
 	} else {
 		$res['message_ok'] = '';
-		$res['redirect'] = generer_url_ecrire('adherents'); // on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation...
+		$res['redirect'] = generer_url_ecrire('adherents', "id=$id_auteur"); // on renvoit sur la page adherents mais on perd a l'occasion d'eventuel filtres inseres avant d'arriver au formulaire de cotisation...
 	}
 	return $res;
 }
