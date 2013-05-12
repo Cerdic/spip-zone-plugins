@@ -3,7 +3,7 @@
 #ANCRE_PAGINATION
 <table class="spip asso_tablo" width="100%">
 	<tr class="row_first">
-		<th scope="col"><:asso:entete_nom:></th>
+		<th scope="col"><:asso:adherent_libelle_nom_famille:></th>
 		<th scope="col"><:asso:fonction:></th>
 	[(#AUTORISER{associer}|oui)
 		<th scope="col"><:asso:adherent_libelle_telephone:></th>
@@ -14,13 +14,13 @@
 [(#REM)<!-- //!\ "inclusion de fragments" <http://microformats.org/wiki/include-pattern> -->]
 <BOUCLE_equipe(ASSO_MEMBRES)
 	{fonction!=''}
-	{statut_inerne!='sorti'}
+	{statut_interne!='sorti'}
 	{par nom_famille,prenom}
 	{pagination #ENV{pagination,10} assoequipe}
 	>
 	<tr class="agent vcard [row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
-		<td>[<a class="spip_in fn" title="<:asso:lien_voir_auteur:>" href="#URL_PAGE{auteur}|parametre_url{'id_auteur',#ID_AUTEUR}">(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE})</a>]</td>
-		<td><a class="spip_in include" href="#vcard-asso"></a> [<a class="spip_in role" title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent,id_auteur=#ID_AUTEUR}">(#FONCTION)</a>]</td>
+		<td><a class="spip_in fn" title="<:asso:adherent_label_modifier_visiteur:>" href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#SEXE|association_calculer_nom_membre{#PRENOM, #NOM_FAMILLE})]</a></td>
+		<td><a class="spip_in include" href="#vcard-asso"></a> [(#AUTORISER{associer}|oui)<a class="spip_in role" title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{voir_adherent,id=#ID_AUTEUR}">]#FONCTION[(#AUTORISER{associer}|oui)</a>]</td>
 	[(#AUTORISER{associer}|oui)
 		<td>[<a class="spip_out tel" href="tel:[(#TELEPHONE|replace{\D})]">(#TELEPHONE|association_telfr)</a>]</td>
 		<td>[<a class="spip_out tel" href="tel:[(#MOBILE|replace{\D})]">(#MOBILE|association_telfr)</a>]</td>
