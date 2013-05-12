@@ -14,6 +14,8 @@
 			]
 			<:collection:info_collection_creation{date=#GET{date},date_abbr=#GET{date_iso},auteurs=#GET{auteurs}}:>
 		</p>
+		[(#PLUGIN{notation}|oui)
+		[(#INCLURE{fond=inclure/infos_notations_collection,env}|trim)]]
 	</div>
 	<div class="surlignable">
 		[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF|image_reduire{500,0})</div>]
