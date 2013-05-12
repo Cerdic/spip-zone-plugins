@@ -4,7 +4,7 @@
 	[(#SET{afficher_langue,oui})]]
 <B_medias>
 <div class="menu diogene emballe_media diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
-	<h3>#TITRE</h3>
+	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
 	<BOUCLE_medias(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{par statut}{!par date}{statut IN prop,prepa,publie}{pagination 5}>
 		<li class="menu-entree[ (#EXPOSE)]">

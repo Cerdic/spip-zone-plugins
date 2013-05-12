@@ -102,9 +102,7 @@
 					[(#SET{types,#FORM_TYPE{#EM_TYPE}})]
 					[(#SET{type,#EM_TYPE})]
 					<BOUCLE_doc_en_cours_de_redac_sstype(DOCUMENTS){id_article=#GET{id_article}}{extension IN #GET{types}}{mode IN document,image}{tout}>
-						[(#FICHIER|get_spip_doc|file_exists|non)
-							[(#SET{orig_disparu,oui})]
-						]
+						[(#FICHIER|get_spip_doc|file_exists|non)[(#SET{orig_disparu,oui})]]
 						[(#SET{doc_uploaded,oui})]
 					</BOUCLE_doc_en_cours_de_redac_sstype>
 				</BOUCLE_article_en_cours_de_redac_sstype>
@@ -163,8 +161,7 @@
 						[(#GET{afficher_ftp}|=={oui}|oui)<li><a href="#em_charger_ftp"><:emballe_medias:lien_charger_ftp:></a></li>]
 						[(#GET{afficher_doc_trad}|=={oui}|oui)<li><a href="#em_doc_trad"><:emballe_medias:lien_charger_doc_trad:></a></li>]
 					</ul>
-					<div id="em_charger_fichier">
-				]
+					<div id="em_charger_fichier">]
 				
 				<INCLURE{fond=inclure/emballe_media_template_upload}>
 				
@@ -204,10 +201,8 @@
 		]
 	]
 	[(#GET{erreur}|=={oui}|oui)
-		#BOITE_OUVRIR{'',error}
+		[(#BOITE_OUVRIR{'',error})]
 		[(#VAL{emballe_medias:[(#GET{erreur_message})]}|_T)]
-		#BOITE_FERMER
-	]
-	
+		[(#BOITE_FERMER)]]
 </BOUCLE_diogene>
 #FILTRE{trim}
