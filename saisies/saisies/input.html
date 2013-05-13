@@ -9,6 +9,7 @@
   - maxlength : nombre de caracteres maximum
   - disable : champ insaisissable ? 'oui' (defaut : '')
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - autofocus : indique si le champ prend le focus a l'affichage (HTML5 requis)
   
   Exemple d'appel :
 	[(#SAISIE{input,couleur_foncee,
@@ -44,4 +45,4 @@
 ]</BOUCLE_selection>
 </datalist>
 </B_selection>
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#ENV{placeholder})"][(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|et{#HTML5}|oui) required="required"][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ (#ENV*{attributs})] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ list="(#GET{list_id})"][ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#ENV{placeholder})"][(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|et{#HTML5}|oui) required="required"][(#ENV{autofocus}|et{#ENV{autofocus}!={non}}|et{#HTML5}|oui) autofocus="autofocus"][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"][ (#ENV*{attributs})] />
