@@ -1,12 +1,8 @@
-/***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations             *
- *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+#CACHE{0}
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
 
 /* CSS Document */
 /* Espace prive*/
@@ -15,14 +11,13 @@
  *
  **  Les classes englobantes (tags DIV/TABLE/UL/etc de plus haut niveau des pages)
  -* pour les tables SQL spip_asso_XX :
- -** .asso_tablo pour presenter plusieurs enregistrements en tableau ou autre dans la colonne principale
- -*** .asso_tablo_filtres pour la zone d'elements de filtrage au dessus
- -*** .asso_tablo_actions pour la zone d'elements d'action (boutons essentiellement) juste en dessous
+ -** .asso_tablo pour presenter plusieurs enregistrements en tableau dans la colonne principale
+ -** .asso_filtres pour la zone d'elements de filtrage au dessus
  -** .asso_stats pour presenter les statistiques (sommes/totaux, moyennes) dans le cadre informatif de la colonne gauche (toujours en bas, avant la date)
  -** .asso_infos pour presenter un seul enregistrement (avec d'eventuelles informationsormations connexes) dans le cadre d'infos de la colonne gauche (toujours en premier avec le nom/titre et le id_XX de l'objet)
  -* pour le reste :
  -** .assso_autres seulement pour l'instant
- ** Les identifiants englobants (idem) prennet le nom de l'objet (au singulier) ou de la collection/table (au pluriel) -- nom qui est souvent le nom de la page-- et sont prefixees par le nom de la classe
+ ** Les identifiants englobants (idem) prennent le nom de l'objet (au singulier) ou de la collection/table (au pluriel) -- nom qui est souvent le nom de la page-- et sont prefixees par le nom de la classe
 
  */
 
@@ -52,15 +47,21 @@ table.asso_tablo
 	font-size: 8pt;
 	margin-bottom: .4em; /* ajout pour ne pas trop coller ce qui suit */
 } /* @: http://stackoverflow.com/a/7129454 http://w3schools.com/cssref/pr_tab_border-collapse.asp */
-table.asso_tablo thead tr
+table.asso_tablo thead tr,
+table.asso_tablo tr.head,
+table.asso_tablo tr.row_first
 {
 	background-color: #dbe1c5; /* HTML: TR bgcolor=#dbe1c5 */
 }
-table.asso_tablo tbody tr
+table.asso_tablo tbody tr,
+table.asso_tablo tr.row_odd,
+table.asso_tablo tr.row_even
 {
 	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
 }
 table.asso_tablo tfoot tr
+table.asso_tablo tr.foot,
+table.asso_tablo tr.row_last
 {
 	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
 }
@@ -72,11 +73,14 @@ table.asso_tablo th, table.asso_tablo td
 }
 table.asso_tablo tbody td,
 tablo.asso_stats tfoot td,
-tablo.asso_stats tfoot th
+tablo.asso_stats tfoot th,
+tablo.asso_stats tr.foot td,
+tablo.asso_stats tr.foot th
 {
 	border-top: 1px solid #ccc; /* class=border1 */
 }
-table.asso_tablo tfoot th
+table.asso_tablo tfoot th,
+table.asso_tablo tr.foot th
 {
 	color: #9F1C30;
 /*	text-align: right; */
@@ -156,13 +160,13 @@ th.time, th.datetime
 	text-align: "h"; /* HTML: TD align=char char="h" */
 	/* On pourrait utiliser ":" mais je ne suis pas certain du resultat si on a des HH:MM:SS... */
 } /* @: http://stackoverflow.com/q/1363239 */
-table.asso_tablo_filtres td.formulaire,
-table.asso_tablo_filtres td form
+table.asso_filtres td.formulaire,
+table.asso_filtres td form
 {
 	text-align: right; !important /* HTML: TD align=right */
 }
-table.asso_tablo_filtres td.pagination,
-table.asso_tablo_filtres td .pagination
+table.asso_filtres td.pagination,
+table.asso_filtres td .pagination
 {
 	text-align: left; !important /* HTML: TD align=right */
 }
@@ -258,8 +262,8 @@ span.erreur {
     margin-top: -1px;
     position: absolute;
 }
-.asso_tablo_filtres input,
-.asso_tablo_filtres select
+.asso_filtres input,
+.asso_filtres select
 { /* adapte de .fondl dans prive/styles_vielles_def.html */
 	margin-top: 0px;
 	padding: 0px; /* 3px dans styles_vieilles_def.html mais redefini a 0px dans style_prive.html pour les select ; et ca convient mieux ici */

@@ -32,11 +32,6 @@
 		<inclure>association_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
-		<!-- Injections dans le "header" de l'espace prive -->
-		<nom>header_prive</nom>
-		<inclure>association_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<!-- Ajout automatique de l'auteur edité comme membre -->
 		<nom>post_edition</nom>
 		<inclure>association_pipelines.php</inclure>

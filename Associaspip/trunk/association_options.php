@@ -1924,7 +1924,7 @@ function association_form_filtres($liste_filtres, $exec='', $supplements='', $td
 	$res = '<form method="get" action="'. ($exec?generer_url_ecrire($exec):'') .'">';
 	if ($exec)
 		$res .= "\n<div><input type='hidden' name='exec' value='$exec' /></div>";
-	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_tablo_filtres">'. ($td?'<tr>':'');
+	$res .= "\n<". ($td?'table width="100%"':'ul') .' class="asso_filtres">'. ($td?'<tr>':'');
 	foreach($liste_filtres as $selecteur =>$params) {
 		$res .= ($td?'<td':'<li') ." class='filtre_$filtre_selection'>". call_user_func_array("filtre_selecteur_asso_$selecteur", association_recuperer_liste($params, FALSE) ) . ($td?"</td>\n":'</li>');
 	}
@@ -1959,7 +1959,7 @@ function association_form_filtres($liste_filtres, $exec='', $supplements='', $td
  * 	Cf. $debut
  */
 function association_form_souspage($pages, $exec='', $arg=array(), $plus='', $debut='debut', $req=TRUE) {
-	$res = "<table width='100%' class='asso_tablo_filtres'><tr>\n" .'<td align="left"> ';
+	$res = "<table width='100%' class='asso_filtres'><tr>\n" .'<td align="left"> ';
 	if ( is_array($pages) ) {
 		$nbr_pages = ceil(call_user_func_array('sql_countsel',$pages)/_ASSOCIASPIP_LIMITE_SOUSPAGE); // ceil() ou intval()+1 ?
 	} else {
