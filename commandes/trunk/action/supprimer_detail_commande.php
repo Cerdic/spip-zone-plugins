@@ -32,7 +32,6 @@ function action_supprimer_detail_commande($arg=null) {
 	if (
 		$id_commande = intval($id_commande)
 		and $id_detail = intval($id_detail)
-		and include_spip('inc/autoriser')
 		and autoriser('supprimerdetail','commande',$id_commande)
 	) {
 		sql_delete("spip_commandes_details", "id_commande=".$id_commande . " AND id_commandes_detail=".$id_detail);
