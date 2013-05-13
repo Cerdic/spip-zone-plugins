@@ -1,0 +1,16 @@
+<paquet
+	prefix="oai"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="oai_logo.png"
+>      
+	<nom>Entrepôt OAI</nom>
+	<!-- Fournir un entrepôt OAI pouvant répondre à un moissonneur -->
+
+	<auteur lien="http://ldd.fr">Les Développements Durables</auteur>
+	<credit lien="http://www.openarchives.org">Open Archives Initiative</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>
