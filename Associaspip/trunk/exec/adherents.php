@@ -158,22 +158,41 @@ function adherents_liste($critere, $statut_interne, $args_url) {
 		$statut = $data['statut'];
 		if (!$statut OR $statut=='nouveau')
 			$statut = $data['bio'];
-		switch($statut)	{
-			case '0minirezo':
-				$icone = 'admin-12.gif';
+		switch ( substr($GLOBALS['spip_version_branche'],0,1) ) { // $GLOBALS['spip_version_base'] non... $GLOBALS['meta']['version_installee'] non... $GLOBALS['spip_version_branche'] oui... trouve dans info_maj_spip() dans "inc/presentation.php"
+			case 2: // SPIP 2.x : icones dans "prive/images/"
+				switch($statut)	{
+					case '0minirezo':
+						$icone = 'admin-12.gif';
+						break;
+					case '1comite':
+						$icone = 'redac-12.gif';
+						break;
+					case '5poubelle': // ?!?
+						$icone = 'poubelle.gif';
+						break;
+					case '6forum':
+					default : // autres cas
+						$icone = 'visit-12.gif';
+						break;
+				}
 				break;
-			case '1comite':
-				$icone = 'redac-12.gif';
+			case 3: // SPIP 3.x : les icones sont dans "prive/themes/spip/images/"
+				switch($statut)	{
+					case '0minirezo':
+					case '1comite':
+					case '5poubelle': // ?!?
+					case '6forum':
+						$icone = 'auteur-'.$statut.'-16.png';
+						break;
+					default : // autres cas
+						$icone = 'auteur-16.png';
+						break;
+				}
 				break;
-			case '5poubelle':
-				$icone = 'poubelle.gif';
-				break;
-			case '6forum':
-			default :
-				$icone = 'visit-12.gif';
+			default: // !?!
+				$icone = 'rien.gif';
 				break;
 		}
-		$icone = !$icone ? strlen($statut) :  http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur'));
 		$auteurs .= "<tr class='$class'>\n";
 		if ($GLOBALS['association_metas']['aff_id_auteur']) {
 			$auteurs .= '<td class="integer">'
@@ -213,10 +232,10 @@ function adherents_liste($critere, $statut_interne, $args_url) {
 			$auteurs .= '<td class="date">'. association_formater_date($data['date_validite'], 'dtend') .'</td>';
 		}
 		$auteurs .= '<td class="action">'
-		. '<a href="'. generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur) .'">'.$icone.'</a></td>';
+		. '<a href="'. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur") .'">'. http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur') ) .'</a></td>';
 		if (autoriser('editer_membres', 'association')) {
 			$auteurs .= association_bouton_paye('ajout_cotisation','id='.$id_auteur)
-			. association_bouton_edit('adherent','id='.$id_auteur);
+			. association_bouton_edit('adherent', "id=$id_auteur");
 		}
 		$auteurs .= association_bouton_list('adherent','id='.$id_auteur)
 		. association_bouton_coch('id_auteurs', $id_auteur)
