@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// X
-	'xmlrpc_description' => 'API xml-rpc cliente et serveur', # NEW
+	'xmlrpc_description' => 'API xml-rpc client and server',
 	'xmlrpc_slogan' => 'Server and client xml-rpc'
 );
 
