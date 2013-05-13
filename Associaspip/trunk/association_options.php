@@ -2476,16 +2476,6 @@ function association_aujourdhui() {
 }
 
 /**
- * Injection de "association.css" dans le "header" de l'espace prive
- * @param string $flux
- * @return string $c
- */
-function association_header_prive($flux) {
-	$c = direction_css(find_in_path('association.css'));
-	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
-}
-
-/**
  * Filtre pour "afficher" ou "cacher" un bloc div
  *
  * Utilise dans le formulaire cvt "editer_asso_comptes.html"

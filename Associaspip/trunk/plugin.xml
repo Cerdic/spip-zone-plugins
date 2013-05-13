@@ -13,7 +13,6 @@
 	<install>association_administrations.php</install>
 	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
 	<icon>img_pack/asso-96.png</icon>
-
 	<options>association_options.php</options>
 
 	<pipeline>
@@ -35,6 +34,7 @@
 	<pipeline>
 		<!-- Injections dans le "header" de l'espace prive -->
 		<nom>header_prive</nom>
+		<inclure>association_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<!-- Ajout automatique de l'auteur edité comme membre -->
