@@ -1,13 +1,22 @@
 <?php
+/**
+ * Fonctions (bis) du plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2013
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Fonctions (bis)
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
+/**
  * Créer une commande en cours pour le visiteur actuel.
  *
  * @return int $id_commande Retourne l'identifiant SQL de la commande
- */
+**/
 function creer_commande_encours(){
 	include_spip('inc/session');
 	

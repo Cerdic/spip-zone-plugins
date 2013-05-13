@@ -1,8 +1,27 @@
 <?php
+/**
+ * Déclarations relatives à la base de données
+ *
+ * @plugin     Commandes
+ * @copyright  2013
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Pipelines
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+/**
+ * Déclaration des alias de tables et filtres automatiques de champs
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function commandes_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['commandes'] = 'commandes';
@@ -15,6 +34,16 @@ function commandes_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
+
+/**
+ * Déclaration des tables principales
+ *
+ * @pipeline declarer_tables_principales
+ * @param array $tables_principales
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
 function commandes_declarer_tables_principales($tables_principales){
 
 	// Table commandes_details
@@ -48,6 +77,16 @@ function commandes_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
+
+/**
+ * Déclaration des objets éditoriaux
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
 function commandes_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_commandes'] = array(
@@ -110,6 +149,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
+
 function commandes_rechercher_liste_des_champs($tables){
 	$tables['commande']['reference'] = 8;
 	return $tables;
@@ -122,7 +162,8 @@ function commandes_rechercher_liste_des_jointures($tables){
 	return $tables;
 }
 
-// definir la jointur commande_auteur qui n'est pas sur spip_commandes_auteurs
+
+// definir la jointure commande_auteur qui n'est pas sur spip_commandes_auteurs
 // cf. inc/rechercher.php
 function inc_rechercher_joints_commande_auteur_dist($table, $table_liee, $ids, $serveur) {
 	if (!autoriser('voir', 'commande')) {
