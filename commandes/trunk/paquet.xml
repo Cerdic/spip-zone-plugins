@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="0.9.6"
+	version="0.10.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
