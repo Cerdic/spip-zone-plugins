@@ -8,8 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://site.tld/oai.api => dépôt par défaut
 // http://site.tld/oai.api/patates => dépôt personnalisé
 function action_api_oai_dist(){
-	if (!$depot = _request('arg')){
-		$depot = 'articles';
+	$arg = _request('arg');
+	
+	// Dépôt par défaut
+	if (!$depot = $arg){
+		$depot = 'dist';
 	}
 	
 	$verbes = array(
@@ -47,7 +50,7 @@ function action_api_oai_dist(){
 	unset($requete['action']);
 	unset($requete['arg']);
 	unset($requete['var_zajax']);
-#	var_dump($requete);exit;
+	unset($requete['var_mode']); // autorisé en plus pour permettre de recalculer
 	
 	// Pas d'erreur pour l'instant
 	$erreur = array();
@@ -97,21 +100,21 @@ function action_api_oai_dist(){
 		// S'il faut bien tester tous les autres arguments autres que resumptionToken
 		if ($tester_arguments){
 			// Pour chaque argument obligatoire du verbe, on regarde s'il fait partie de la requête
-			foreach ($arguments_ok['required'] as $arg_obli=>$val) {
-				if (!in_array($arg_obli, $requete)) {
+			foreach ($arguments_ok['required'] as $parametre=>$valeur) {
+				if (!in_array($parametre, $requete)) {
 					$erreur[] = array(
 						'error' => 'badArgument',
-						'message' => _T('oai:erreur_badArgument_obligatoire', array('arg' => $arg_obli, 'verbe' => $verbe)),
+						'message' => _T('oai:erreur_badArgument_obligatoire', array('arg' => $parametre, 'verbe' => $verbe)),
 					);
 				}
 			}
 			
 			// Pour chaque argument de la requête, on regarde s'il est autorisé ou en trop
-			foreach ($requete as $arg=>$val) {
-				if ($arg != 'verb' and !in_array($arg, array_merge($arguments_ok['required'], $arguments_ok['optional']))) {
+			foreach ($requete as $parametre=>$valeur) {
+				if ($parametre != 'verb' and !in_array($parametre, array_merge($arguments_ok['required'], $arguments_ok['optional']))) {
 					$erreur[] = array(
 						'error' => 'badArgument',
-						'message' => _T('oai:erreur_badArgument_interdit', array('arg' => $arg, 'verbe' => $verbe)),
+						'message' => _T('oai:erreur_badArgument_interdit', array('arg' => $parametre, 'verbe' => $verbe)),
 					);
 				}
 			}
@@ -166,7 +169,7 @@ function action_api_oai_dist(){
 		
 		// Si on a bien trouvé un squelette, on génère le contenu
 		if ($squelette){
-			$contexte = array_merge($requete, array('depot'=>$depot, 'formats'=>$formats));
+			$contexte = array_merge($requete, array('arg' => $arg, 'depot'=>$depot, 'formats'=>$formats));
 			$contenu = recuperer_fond($squelette, $contexte);
 			
 			// On teste si le squelette a levé une erreur
@@ -200,7 +203,7 @@ function action_api_oai_dist(){
 		}
 	}
 	include_spip('inc/filtres');
-	$retour .= '>'.url_absolue('oai.api/'._request('arg')).'</request>';
+	$retour .= '>'.url_absolue('oai.api'.($arg?"/$arg":'')).'</request>';
 	
 	// Le contenu du squelette
 	if (isset($contenu) and is_string($contenu)) {

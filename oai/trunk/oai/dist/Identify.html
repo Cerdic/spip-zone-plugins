@@ -1,0 +1,17 @@
+<repositoryName>#NOM_SITE_SPIP, <:oai:depot_oai:></repositoryName>
+<baseURL>[(#VAL{oai.api}|url_absolue)][/(#ENV{arg})]</baseURL>
+<protocolVersion>2.0</protocolVersion>
+[(#REM) La liste des administrateurs du dépôt, par défaut le webmaster ]
+<BOUCLE_admins(DATA){source table,#CONFIG{oai/admins, #CONFIG{email_webmaster}}|explode{','}}>
+<adminEmail>[(#VALEUR|trim)]</adminEmail>
+</BOUCLE_admins>
+
+[(#REM) Le contenu le plus jeune dans le dépôt ]
+<BOUCLE_article_jeune(ARTICLES){par date}{0,1}>
+<earliestDatestamp>[(#DATE|affdate{c})]</earliestDatestamp>
+</BOUCLE_article_jeune>
+
+[(#REM) Les contenus supprimés (poubelle) sont gardés un moment, mais peuvent être supprimés définitivement un jour ou l'autre ]
+<deletedRecord>transient</deletedRecord>
+
+<granularity>YYYY-MM-DDThh:mm:ssZ</granularity>

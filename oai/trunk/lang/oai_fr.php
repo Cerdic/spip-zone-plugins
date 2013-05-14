@@ -4,6 +4,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	//D
+	'depot_oai' => 'Dépôt OAI',
+	
 	// E
 	'erreur_badArgument_format' => 'Le format de méta-données demandé n’existe pas.',
 	'erreur_badArgument_interdit' => 'Argument interdit : «@arg@» n’existe pas pour le verbe «@verbe@».',
