@@ -32,9 +32,7 @@ function association_liste_destinations_associees($id_operation) {
 	$sql = sql_select('recette,depense,id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
 	$destinations = array();
 	while ( $r = sql_fetch($sql) ) {
-	  // soit recette soit depense est egal a 0,
-	  // on se contente les additionner
-	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense'];
+	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; // soit recette soit depense est egal a 0, on se contente les additionner
 	}
 	return $destinations;
 }
@@ -170,7 +168,8 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 
 }
 
-/** Modifier une operation comptable ainsi que ses ventilations si necessaire
+/**
+ * Modifier une operation comptable ainsi que ses ventilations si necessaire
  *
  * @param string $date
  *   Date de l'operation au format ISO
@@ -436,7 +435,9 @@ function association_creer_compte_virement_interne() {
     return $code;
 }
 
-/* on recupere les parametres de requete a passer aux fonctions */
+/**
+ * on recupere les parametres de requete a passer aux fonctions
+**/
 function association_passeparam_compta($classes=array()) {
     $params = array(); // initialisation de la liste
     list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
@@ -463,6 +464,8 @@ function association_passeparam_compta($classes=array()) {
 
 /**
  * On recupere les soldes des differents comptes de la classe specifiee pour la periode specifiee
+ * Ceci permet d'etablir la balance des comptes de la classe :
+ * http://fr.wikipedia.org/wiki/Balance_comptable
  *
  * @param int $classe
  *   Classe dont on veut recuperer les soldes des differents comptes
