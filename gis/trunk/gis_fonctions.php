@@ -98,8 +98,8 @@ function distance($from, $to, $miles=false) {
  * - l'opérateur de comparaison
  * - la distance à comparer, en kilomètres
  * Cela donne par exemple :
- *   {distancefrom #ARRAY{lat,#LAT,lon,#LON} < 30}
- *   {distancefrom #ARRAY{lat,#ENV{lat},lon,#ENV{lon}} <= #ENV{distance}}
+ *   {distancefrom #ARRAY{lat,#LAT,lon,#LON},<,30}
+ *   {distancefrom #ARRAY{lat,#ENV{lat},lon,#ENV{lon}},<=,#ENV{distance}}
  *
  * @param unknown $idb
  * @param unknown &$boucles
