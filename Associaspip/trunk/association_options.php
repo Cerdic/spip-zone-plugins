@@ -2306,8 +2306,7 @@ function association_controle_id($type, $table, $controle='') {
 /**
  * &annee=
  *
- * @return int $an
- * @return array($an, $sql_where)
+ * @return array($an, $sql_where, $debut, $fin, $titre)
  */
 function association_passeparam_annee($type='', $objet='', $id=0) {
 	if ($type) // recuperer en priorite :
@@ -2316,44 +2315,39 @@ function association_passeparam_annee($type='', $objet='', $id=0) {
 		$an = 0;
 	if (!$an) // pas d'annee_... alors c'est le nom generique qui est utilise
 		$an = intval(_request('annee'));
-	if (!$an) // annee non precisee
-		$an = date('Y'); // on prend l'annee courante
 	if ($type && $objet) {
-//		$desc_table = charger_fonction('trouver_table', 'base');
 		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de la l'annee passee en requete...
 			$an = sql_getfetsel("DATE_FORMAT(date_$type, '%Y')", table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) ); // ...on recupere l'annee correspondante a l'enregistrement recherche
 		} else { // on peut faire mieux que prendre l'annee courante ou une annee farfelue passee en parametre
 			$an = min(sql_getfetsel("MAX(DATE_FORMAT(date_$type, '%Y')) AS an_max", table_objet_sql($objet), ''), $an);
 			$an = max(sql_getfetsel("MIN(DATE_FORMAT(date_$type, '%Y')) AS an_min", table_objet_sql($objet), ''), $an);
 		}
-		if (!$an) // ID inexistant (donc annee non trouvee) ou table vide (du coup annee vide)
-			$an = date('Y'); // on prend l'annee courante retomber sur nos pattes et surtout ne pas fausser la requete
-		return array($an, "DATE_FORMAT(date_$type, '%Y')=$an");
-	} else
-		return $an;
+	}
+	if (!$an) // annee non precisee ou non trouvee (ID inexistant)
+		$an = date('Y'); // on prend l'annee courante
+	return array($an, "DATE_FORMAT(date_$type, '%Y')=$an", "$an-01-01", "$an-12-31", "an $an");
 }
 
 /**
  * &exercice=
  *
- * @return int $exo
- * @return array($exo, $sql_where)
+ * @return array($exo, $sql_where, $debut, $fin, $titre)
  */
 function association_passeparam_exercice($type='', $objet='', $id=0) {
 	$exo = intval(_request('exercice'));
-	if (!$exo) // exercice non precise
-		$exo = intval(sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC')); // on recupere le dernier exercice en date
 	if ($type && $objet) {
 		if ($id) { // on veut un enregistrement precis : on ne va pas tenir compte de l'exercice passe en requete...
 			$dt = sql_getfetsel("date_$type", table_objet_sql($objet), id_table_objet($objet).'='.sql_quote($id) ); // ...on recupere la date correspondante a l'enregistrement recherche
 			$exercice = sql_fetsel('*','spip_asso_exercices', "date_debut<='$dt' AND date_fin>='$dt'", '','date_debut DESC'); // on recupere le dernier exercice correspondant
 		}
-		if (!$exercice) { // pas d'ID ou table vide ou mauvais ID
-			$exercice = sql_fetsel('*','spip_asso_exercices', "id_exercice=$exo"); // on recupere l'exercice indique
-		}
-		return array($exercice['id_exercice'], "date_$type>='$exercicee[date_debut]' AND date_$type<='$exercice[date_fin]'");
 	} else
-		return $exo;
+		$exercice = 0;
+	if (!$exercice) { // ID absent/inconnu (quand type et objet precises) ou exercice directement indique...
+		if (!$exo) // exercice non precise
+			$exo = intval(sql_getfetsel('id_exercice','spip_asso_exercices','','','date_debut DESC')); // on recupere le dernier exercice en date
+		$exercice = sql_fetsel('*','spip_asso_exercices', "id_exercice=$exo"); // on recupere l'exercice indique
+	}
+	return array($exercice['id_exercice'], "date_$type>='$exercicee[date_debut]' AND date_$type<='$exercice[date_fin]'", $exercice['date_debut'], $exercice['date_fin'], $exercice['intitule']);
 }
 
 /**

@@ -439,22 +439,8 @@ function association_creer_compte_virement_interne() {
 /* on recupere les parametres de requete a passer aux fonctions */
 function association_passeparam_compta($classes=array()) {
     $params = array(); // initialisation de la liste
-//    list($params['id_periode'], $params['sql_periode']) = association_passeparam_periode('operation', 'comptes', $id_compte);
-    $params['id_periode'] = association_passeparam_periode();
-    if ($GLOBALS['association_metas']['exercices']) {
-#    	$params['id_periode'] = association_passeparam_exercice();
-	$params['type_periode'] = 'exercice';
-	$exercice = sql_fetsel('date_debut, date_fin, intitule', 'spip_asso_exercices', "id_exercice=$params[id_periode]");
-	$params['debut_periode'] = $exercice['date_debut'];
-	$params['fin_periode'] = $exercice['date_fin'];
-	$params['titre_periode'] = $exercice['intitule'];
-    } else {
-#    	$params['id_periode'] = association_passeparam_annee();
-	$params['type_periode'] = 'annee';
-	$params['debut_periode'] = "$params[id_periode]-01-01";
-	$params['fin_periode'] = "$params[id_periode]-12-31";
-	$params['titre_periode'] = $params['id_periode'];
-    }
+    list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
+    $params['type_periode'] = ($GLOBALS['association_metas']['exercices']?'exercice':'annee');
     $params['destination'] = association_recuperer_entier('destination');
     $params['type'] = _request('type');
     if ( !$classes ) { // pas en parametre, on prend dans la requete
