@@ -15,4 +15,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_badVerb_absent' => 'La requête doit comporter l’argument «verb».',
 	'erreur_badVerb_inconnu' => 'Le verbe «@verbe@» ne fait pas parti des valeurs autorisées.',
 	'erreur_noMetadataFormats' => 'Aucun format de méta-données n’a été trouvé pour ce dépot.',
+	'erreur_noSetHierarchy' => 'Ce dépôt n’a aucune catégorie.',
 );
