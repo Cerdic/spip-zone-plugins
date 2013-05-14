@@ -54,7 +54,7 @@ function formulaires_configurer_metas_traiter_dist($form) {
 function formulaires_configurer_metas_recense($form, $IsFullPath=FALSE) {
 	$f = $isFullPath ? $form : find_in_path($form.'.html', 'formulaires/');
 	if ($f) { // c'est un formulaire CVT...
-		spip_log("Associaspip va recenser les metas dans : $f", 'associaspip');
+#		spip_log("Associaspip va recenser les metas dans : $f", 'associaspip');
 		$liste_metas = array();
 //		for ($i=0; $i<2; $i++) {
 //			if ($i==1)
@@ -63,9 +63,14 @@ function formulaires_configurer_metas_recense($form, $IsFullPath=FALSE) {
 				extraire_balises($contenu, 'input'),
 				extraire_balises($contenu, 'textarea'),
 				extraire_balises($contenu, 'select')
-			); // liste des saisies
-			foreach ($balises as $b) { // nom (attribut "name" exclusivement) de chaque balise
-				if ($n = extraire_attribut($b, 'name') AND preg_match(",^([\w\-]+)(\[\w*\])*$,", $n, $r) AND !in_array($n, array('formulaire_action','formulaire_action_args')) AND !in_array(extraire_attribut($b,'type'), array('submit','reset')) ) {
+			); // liste des saisies prises en compte
+			foreach ($balises as $b) { // nom de chaque balise retenue
+				if ($n = extraire_attribut($b, 'name') // le nom est l'attribut "nome" exclusivement (pas id ou extrait de classe...)
+					AND preg_match(",^([\w\-]+)(\[\w*\])*$,", $n, $r) // on ne prend que si le nom est valide (plus restrictif que W3C http://razzed.com/2009/01/30/valid-characters-in-attribute-names-in-htmlxml/ http://stackoverflow.com/questions/70579/what-are-valid-values-for-the-id-attribute-in-html ...)
+					AND !in_array($n, array('formulaire_action','formulaire_action_args')) // on ne prend pas ces champs rajoutes par SpIP pour la securisation et d'autres automatismes
+					AND !in_array(extraire_attribut($b,'type'), array('submit','reset')) // on ne prend pas les saisies d'action (pas plus qu'on n'a pris en en compte les "button"s
+					AND !extraire_attribut($b, 'disabled') // on ne prend pas les champs desactives : ils ne sont normalement pas soumis
+				) {
 					$liste_metas[] = $n;
 				}
 			}
