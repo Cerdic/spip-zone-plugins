@@ -1,8 +1,8 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="3.1.1"
-	etat="dev"
+	version="3.1.2"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amap-64.png"
 	documentation="http://contrib.spip.net/?article4331"
@@ -26,14 +26,14 @@
 	<pipeline nom="optimiser_base_disparus" inclure="amap_pipelines.php" />
 
 	<necessite nom="agenda" compatibilite="[3.11.2;[" />
-	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
 	<necessite nom="facteur" compatibilite="[2.3.0;[" />
 	<necessite nom="saisies" compatibilite="[1.28.1;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="verifier" compatibilite="[1.0.1;[" />
-	<necessite nom="z" compatibilite="[1.7.21;[" />
 
 	<utilise nom="fpdf" compatibilite="[0.0.1;[" />
+	<utilise nom="z" compatibilite="[1.7.21;[" />
 
 	<menu nom="amap_bandeau" titre="amap:gestion_amap" parent="bando_configuration" icone="images/amap-16.png" action="mini_doc" />
 
