@@ -4,39 +4,39 @@
 	<li>
 	  <label><:asso:config_libelle_gerer_champs_membres:></label>
 	  <div class="choix">
-		<input type="checkbox" name="civilite" [(#ENV{civilite}|oui) checked="checked"] id="civilite" />
+		<input type="checkbox" name="civilite" value="on"[(#ENV{civilite}|oui) checked="checked"] id="civilite" />
 		<label for="civilite"><:asso:adherent_libelle_sexe:></label>
 		<br />
-		<input type="checkbox" name="prenom" [(#ENV{prenom}|oui) checked="checked"] id="prenom" />
+		<input type="checkbox" name="prenom" value="on"[(#ENV{prenom}|oui) checked="checked"] id="prenom" />
 		<label for="prenom"><:asso:adherent_libelle_prenom:></label>
 		<br />
-		<input type="checkbox" name="id_asso" [(#ENV{id_asso}|oui) checked="checked"] id="id_asso" />
+		<input type="checkbox" name="id_asso" value="on"[(#ENV{id_asso}|oui) checked="checked"] id="id_asso" />
 		<label for="id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 	  </div>
 	</li>
 	<li>
 	  <label><:asso:config_libelle_affichage_champs_page_membres:></label>
 	  <div class="choix">
-		<input type="checkbox" name="aff_id_auteur" [(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
+		<input type="checkbox" name="aff_id_auteur" value="on"[(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
 		<label for="aff_id_auteur"><:asso:config_libelle_id_auteur:></label>
 		<br />
 	[(#CONFIG{activer_logos}|=={oui}|oui)
-		<input type="checkbox" name="aff_photo" [(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />
+		<input type="checkbox" name="aff_photo" value="on"[(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />
 		<label for="aff_photo"><:asso:adherent_libelle_photo:></label>
 		<br />
 	]
 	[(#ENV{civilite}|oui)
-		<input type="checkbox" name="aff_civilite" [(#ENV{aff_civilite}|oui) checked="checked"] id="aff_civilite" />
+		<input type="checkbox" name="aff_civilite" value="on"[(#ENV{aff_civilite}|oui) checked="checked"] id="aff_civilite" />
 		<label for="aff_civilite"><:asso:adherent_libelle_sexe:></label>
 		<br />
 	]
 	[(#ENV{prenom}|oui)
-		<input type="checkbox" name="aff_prenom" [(#ENV{aff_prenom}|oui) checked="checked"] id="aff_prenom" />
+		<input type="checkbox" name="aff_prenom" value="on"[(#ENV{aff_prenom}|oui) checked="checked"] id="aff_prenom" />
 		<label for="aff_prenom"><:asso:adherent_libelle_prenom:></label>
 		<br />
 	]
 	[(#ENV{id_asso}|oui)
-		<input type="checkbox" name="aff_id_asso" [(#ENV{aff_id_asso}|oui) checked="checked"] id="aff_id_asso" />
+		<input type="checkbox" name="aff_id_asso" value="on"[(#ENV{aff_id_asso}|oui) checked="checked"] id="aff_id_asso" />
 		<label for="aff_id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 		<br />
 	]
@@ -52,20 +52,20 @@
 	<B_okCat>
 	<BOUCLE_okCat(ASSO_CATEGORIES)>
 	</BOUCLE_okCat>
-		<input type="checkbox" name="aff_categorie" [(#ENV{aff_categorie}|oui) checked="checked"] id="aff_categorie" />
+		<input type="checkbox" name="aff_categorie" value="on"[(#ENV{aff_categorie}|oui) checked="checked"] id="aff_categorie" />
 	</B_okCat>
 		<input type="checkbox" name="aff_categorie" disabled="disabled" id="aff_categorie" />
 	<//B_okCat>
 		<label for="aff_categorie"><:asso:adherent_libelle_categorie:></label>
 		<br />
-		<input type="checkbox" name="aff_validite" [(#ENV{aff_validite}|oui) checked="checked"] id="aff_validite" />
+		<input type="checkbox" name="aff_validite" value="on"[(#ENV{aff_validite}|oui) checked="checked"] id="aff_validite" />
 		<label for="aff_validite"><:asso:adherent_libelle_validite:></label>
 	  </div>
 	</li>
 	<li>
 	  <label for="import_auteur_auto"><:asso:config_import_auteur_auto_part1:></label>
 	  <div class="choix">
-		<input type="checkbox" name="import_auteur_auto" [(#ENV{import_auteur_auto}|oui) checked="checked"] id="import_auteur_auto" />
+		<input type="checkbox" name="import_auteur_auto" value="on"[(#ENV{import_auteur_auto}|oui) checked="checked"] id="import_auteur_auto" />
 		<label for="import_auteur_auto"><:asso:config_import_auteur_auto_part2:></label>
 	  </div>
 	</li>

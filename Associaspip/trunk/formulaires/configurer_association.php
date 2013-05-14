@@ -74,9 +74,10 @@ function formulaires_configurer_association_verifier_dist() {
 		return array();
 	}
 	foreach (array(
-		'activites', 'comptes', 'dons', 'prets', 'ventes', // compta (destinations, exercices)
-		'civilite', 'id_asso', 'prenom', // fichemembres
-	) as $checkbox) { // on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de 'on' sinon le retour de verif mange les eventuelles modifs
+		'activites', 'comptes', 'dons', 'prets', 'ventes', // compta -(destinations, exercices)
+		'civilite', 'id_asso', 'prenom', // fiche2membre
+		'aff_categorie', 'aff_groupe', 'aff_id_auteur', 'aff_validite', // liste2membres
+	) as $checkbox) { // on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de 'on' sinon le retour de verif mange les eventuelles modifs. (remarquer que le probleme ne se pose pas quand on a un "value" defini...)
 		if (!_request($checkbox))
 			set_request($checkbox, 'off');
 	}

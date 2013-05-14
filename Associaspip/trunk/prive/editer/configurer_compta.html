@@ -7,7 +7,7 @@
 	<ul>
 		<li class="editer_comptes">
 			<div class="choix">
-				<input name= "comptes" [(#ENV{comptes}|oui) checked="checked"] id="comptes" type="checkbox"/>
+				<input type="checkbox" name= "comptes" value="on"[(#ENV{comptes}|oui) checked="checked"] id="comptes" />
 				<label for="comptes"><:asso:config_libelle_activer_comptes:></label>
 			</div>
 		</li>
@@ -32,7 +32,7 @@
 			</li>
 			<li>
 				<div class="choix">
-					<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
+					<input type="checkbox" name="plan_comptable_prerenseigne" value="on"[(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 				</div>
 			</li>
@@ -119,7 +119,7 @@
 		<li class="editer_dons">
 			<div class="choix">
 				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="dons" [(#ENV{dons}|oui) checked="checked"] id="dons" />
+				<input type="checkbox" name="dons" value="on"[(#ENV{dons}|oui) checked="checked"] id="dons" />
 				<label for="dons"><:asso:config_libelle_activer_dons:></label>
 				]
 			</div>
@@ -181,7 +181,7 @@
 			<li class="editer_ventes">
 				<div class="choix">
 					[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-					<input type="checkbox" name="ventes" [(#ENV{ventes}|oui) checked="checked"] id="ventes" />
+					<input type="checkbox" name="ventes" value="on"[(#ENV{ventes}|oui) checked="checked"] id="ventes" />
 					<label for="ventes"><:asso:config_libelle_activer_ventes:></label>
 					]
 				</div>
@@ -248,7 +248,7 @@
 	[(#PLUGIN{agenda}|?{
 			<div class="choix">
 				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="activites" [(#ENV{activites}|oui) checked="checked"] id="activites" />
+				<input type="checkbox" name="activites" value="on"[(#ENV{activites}|oui) checked="checked"] id="activites" />
 				<label for="activites"><:asso:config_libelle_activer_activites:></label>
 				]
 			</div>
@@ -291,7 +291,7 @@
 		<li class="editer_prets">
 			<div class="choix">
 				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="prets" [(#ENV{prets}|oui) checked="checked"] id="prets" />
+				<input type="checkbox" name="prets" value="on"[(#ENV{prets}|oui) checked="checked"] id="prets" />
 				<label for="prets"><:asso:config_libelle_activer_prets:></label>
 				]
 			</div>
@@ -385,7 +385,7 @@
 		</li>
 		<li>
 			<div class="choix">
-				<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
+				<input type="checkbox" name="plan_comptable_prerenseigne" value="on"[(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
 				<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
 			</div>
 		</li>
