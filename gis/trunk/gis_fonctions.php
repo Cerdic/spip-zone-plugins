@@ -94,7 +94,7 @@ function distance($from, $to, $miles=false) {
  * 
  * Critère {distancefrom} qui permet de ne sélectionner que les objets se trouvant à une distance comparée avec un point de repère.
  * On doit lui passer 3 paramètres obligatoires :
- * - le point de repère qui est un tableau avec les clés "lat" et "lon"
+ * - le point de repère qui est un tableau avec les clés "lat" et "lon" ou un id_gis
  * - l'opérateur de comparaison
  * - la distance à comparer, en kilomètres
  * Cela donne par exemple :
