@@ -133,7 +133,7 @@ function formulaires_editer_adresse_traiter_dist($id_adresse='new', $retour='', 
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_adresse = $res['id_adresse']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
-		if ($objet AND $id_objet AND include_spip('inc/autoriser') AND autoriser('modifier', $objet, $id_objet)) {
+		if ($objet AND $id_objet == intval($id_objet)) {
 			include_spip('action/editer_liens');
 			objet_associer(array('adresse' => $id_adresse), array($objet => $id_objet), array('type'=>_request('type')));
 			if (isset($res['redirect'])) {
