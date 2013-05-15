@@ -56,8 +56,8 @@ function formulaires_configurer_metas_recense($form, $IsFullPath=FALSE) {
 	if ($f) { // c'est un formulaire CVT...
 #		spip_log("Associaspip va recenser les metas dans : $f", 'associaspip');
 		$liste_metas = array();
-//		for ($i=0; $i<2; $i++) {
-//			if ($i==1)
+		for ($i=0; $i<2; $i++) {
+			if ($i==1) // le 2nd passage sur le fond deja evalue permet de trouver aussi les name="#GET{...}"
 				$contenu = recuperer_fond("formulaires/$form", array_merge($liste_metas,array('editable'=>' ')) );
 			$balises = array_merge(
 				extraire_balises($contenu, 'input'),
@@ -74,7 +74,7 @@ function formulaires_configurer_metas_recense($form, $IsFullPath=FALSE) {
 					$liste_metas[] = $n;
 				}
 			}
-//		}
+		}
 //		spip_log("Associaspip liste dans '$form' les metas suivants : ". implode(', ', array_keys($liste_metas)), 'associaspip');
 //		return array_keys(array_unique($liste_metas));
 		spip_log("Associaspip trouve dans '$form' les metas suivants : ". implode(', ', array_unique($liste_metas)), 'associaspip');
