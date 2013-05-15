@@ -91,7 +91,7 @@ function formulaires_editer_email_traiter_dist($id_email='new', $retour='', $ass
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_email = $res['id_email']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
-		if ($objet AND $id_objet AND include_spip('inc/autoriser') AND autoriser('modifier', $objet, $id_objet)) {
+		if ($objet AND $id_objet == intval($id_objet)) {
 			include_spip('action/editer_liens');
 			objet_associer(array('email' => $id_email), array($objet => $id_objet), array('type'=>_request('type')));
 			if (isset($res['redirect'])) {
