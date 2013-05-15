@@ -43,7 +43,7 @@ var tdm_init = function(){
 }
 
 var tdm_flottante_init = function(){
-	if(tdm_flottante && $("#tdm").size() == 1){
+	if(typeof(tdm_flottante) != 'undefined' && tdm_flottante && $("#tdm").size() == 1){
 		var titres_offset = [],
 			tdm = $("#tdm");
 		
