@@ -8,7 +8,7 @@
 
 [(#REM) Le contenu le plus jeune dans le dépôt ]
 <BOUCLE_article_jeune(ARTICLES){par date}{0,1}>
-<earliestDatestamp>[(#DATE|affdate{c})]</earliestDatestamp>
+<earliestDatestamp>[(#VAL{Y-m-d\TH:m:s\Z}|gmdate{#DATE|strtotime})]</earliestDatestamp>
 </BOUCLE_article_jeune>
 
 [(#REM) Les contenus supprimés (poubelle) sont gardés un moment, mais peuvent être supprimés définitivement un jour ou l'autre ]

@@ -100,8 +100,8 @@ function action_api_oai_dist(){
 		// S'il faut bien tester tous les autres arguments autres que resumptionToken
 		if ($tester_arguments){
 			// Pour chaque argument obligatoire du verbe, on regarde s'il fait partie de la requête
-			foreach ($arguments_ok['required'] as $parametre=>$valeur) {
-				if (!in_array($parametre, $requete)) {
+			foreach ($arguments_ok['required'] as $parametre) {
+				if (!in_array($parametre, array_keys($requete))) {
 					$erreur[] = array(
 						'error' => 'badArgument',
 						'message' => _T('oai:erreur_badArgument_obligatoire', array('arg' => $parametre, 'verbe' => $verbe)),
@@ -147,10 +147,10 @@ function action_api_oai_dist(){
 		// On va chercher un squelette avec ce format
 		if ($format = $requete['metadataPrefix']) {
 			// Si le format demandé n'existe pas dans la liste
-			if (!in_array($requete['metadataPrefix'], $formats)) {
+			if (!in_array($format, $formats)) {
 				$erreur[] = array(
-					'error' => 'badArgument',
-					'message' => _T('oai:erreur_badArgument_format', array('arg' => $arg_obli, 'verbe' => $verbe)),
+					'error' => 'cannotDisseminateFormat',
+					'message' => _T('oai:erreur_cannotDisseminateFormat', array('format' => $format)),
 				);
 			}
 			// Pas d'erreur de format, on utilise le squelette contenant le format
@@ -189,7 +189,7 @@ function action_api_oai_dist(){
 	$retour .= '>';
 	
 	// La date de la réponse, en UTC
-	$retour .= '<responseDate>'.date('c').'</responseDate>';
+	$retour .= '<responseDate>'.gmdate('Y-m-d\TH:m:s\Z').'</responseDate>';
 	
 	// La description de la requête
 	$retour .= '<request';
