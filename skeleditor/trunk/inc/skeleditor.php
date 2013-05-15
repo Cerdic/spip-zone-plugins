@@ -8,7 +8,7 @@
  */
 
 define('_SE_EXTENSIONS_IMG',"jpg|png|gif|ico|bmp");
-define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|yaml|svg|php|php3|php4|py|sh|sql|css|rdf|txt|nfo|log|js|as|csv");
+define('_SE_EXTENSIONS',_SE_EXTENSIONS_IMG."|htm|html|xml|yaml|svg|php|php3|php4|py|sh|sql|css|less|rdf|txt|nfo|log|js|as|csv");
 
 /**
  * Determiner le dossier de travail
