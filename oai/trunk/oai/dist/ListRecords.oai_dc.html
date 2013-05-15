@@ -9,5 +9,5 @@
 [(#SET{identifier, oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE})]
 <INCLURE{fond=oai/#ENV{depot}/GetRecord.oai_dc, identifier=#GET{identifier}} />
 </BOUCLE_articles>
-<error code="noRecordsMatch"><:oai:erreur_noRecordsMatch:></error>
+<error code="noRecordsMatch"><:oai:erreur_norecordsMatch:></error>
 <//B_articles>

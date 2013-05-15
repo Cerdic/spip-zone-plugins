@@ -22,8 +22,8 @@ function calculer_critere_oaifromuntil($champ_de_creation, $champ_de_modificatio
 	if ($from or $until) {
 		$where = array(
 			'or',
-			'('.($from ? sql_quote($from).' < '.$champ_de_creation : '').(($from and $until) ? ' and ' : '').($until ? $champ_de_creation.' < '.sql_quote($until) : '').')',
-			'('.($from ? sql_quote($from).' < '.$champ_de_modification : '').(($from and $until) ? ' and ' : '').($until ? $champ_de_modification.' < '.sql_quote($until) : '').')',
+			'('.($from ? sql_quote($from).' <= '.$champ_de_creation : '').(($from and $until) ? ' and ' : '').($until ? $champ_de_creation.' <= '.sql_quote($until) : '').')',
+			'('.($from ? sql_quote($from).' <= '.$champ_de_modification : '').(($from and $until) ? ' and ' : '').($until ? $champ_de_modification.' <= '.sql_quote($until) : '').')',
 		);
 	}
 	// Sinon aucun critère
