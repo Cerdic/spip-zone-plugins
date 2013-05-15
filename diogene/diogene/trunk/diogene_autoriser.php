@@ -24,9 +24,24 @@ function diogene_autoriser(){};
  * @param unknown_type $qui
  * @param unknown_type $opt
  */
-function autoriser_diogene_modifier($faire,$type,$id,$qui,$opt){
+function autoriser_diogene_modifier_dist($faire,$type,$id,$qui,$opt){
 	return autoriser('configurer','','',$qui,$opt);
 }
+
+/**
+ * Autorisation a modifier le logo d'un template de formulaire (Diogene)
+ * 
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_diogene_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+}
+
 /**
  * Autorisation de creer dans le template
  *
@@ -37,7 +52,7 @@ function autoriser_diogene_modifier($faire,$type,$id,$qui,$opt){
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_diogene_creerdans($faire, $type, $id, $qui, $opt) {
+function autoriser_diogene_creerdans_dist($faire, $type, $id, $qui, $opt) {
 	$diogene = sql_fetsel('*','spip_diogenes','id_diogene='.intval($id));
 	if(
 		$qui['statut'] != '0minirezo' AND
@@ -64,7 +79,7 @@ function autoriser_diogene_creerdans($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_diogene_utiliser($faire, $type, $id, $qui, $opt) {
+function autoriser_diogene_utiliser_dist($faire, $type, $id, $qui, $opt) {
 	$diogene = sql_fetsel('*','spip_diogenes','id_diogene='.intval($id));
 	return
 		$qui['statut'] AND $id
@@ -89,23 +104,25 @@ function autoriser_diogene_utiliser($faire, $type, $id, $qui, $opt) {
  * 
  * http://doc.spip.org/@autoriser_rubrique_creerarticledans_dist
  */
-function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-	if(_DIR_PLUGIN_PAGES && ($id < 1)){
-		return $qui['statut'] && autoriser('voir','rubrique',$id);
-	}else{
-		if($qui['statut'] != '0minirezo'){
-			$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
-			$nb_attente = sql_getfetsel('nombre_attente','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
-			if($nb_attente > 0){
-				$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse") AND art.id_secteur='.intval($id_secteur));
-				if(intval($nb_articles) >= intval($nb_attente))
-					return false;
+if(!function_exists('autoriser_rubrique_creerarticledans')){
+	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+		if(_DIR_PLUGIN_PAGES && ($id < 1)){
+			return $qui['statut'] && autoriser('voir','rubrique',$id);
+		}else{
+			if($qui['statut'] != '0minirezo'){
+				$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
+				$nb_attente = sql_getfetsel('nombre_attente','spip_diogenes','id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
+				if($nb_attente > 0){
+					$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet','lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse") AND art.id_secteur='.intval($id_secteur));
+					if(intval($nb_articles) >= intval($nb_attente))
+						return false;
+				}
 			}
-		}
-		return $qui['statut'] && autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
+			return $qui['statut'] && autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
+		}	
 	}
-	
 }
+
 /**
  * Permet de créer un article dans une rubrique
  * Surcharge de SPIP
@@ -120,25 +137,27 @@ function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
-	$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
-
-	/**
-	 * Cas des pages
-	 */
-	if($id == '-1'){
-		$id_secteur=0;
-	}
-	$statut = sql_getfetsel('statut_auteur','spip_diogenes','id_secteur='.intval($id_secteur));
+if(!function_exists('autoriser_rubrique_voir')){
+	function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
+		$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
 	
-	if(!$statut)
-		$statut = '0minirezo';
-
-	return
-		($qui['statut'] AND $id
-		AND ($qui['statut'] <= $statut));
-		// OR
-		//autoriser_voir_dist('voir','rubrique', $id, $qui, $opt);
+		/**
+		 * Cas des pages
+		 */
+		if($id == '-1'){
+			$id_secteur=0;
+		}
+		$statut = sql_getfetsel('statut_auteur','spip_diogenes','id_secteur='.intval($id_secteur));
+		
+		if(!$statut)
+			$statut = '0minirezo';
+	
+		return
+			($qui['statut'] AND $id
+			AND ($qui['statut'] <= $statut));
+			// OR
+			//autoriser_voir_dist('voir','rubrique', $id, $qui, $opt);
+	}
 }
 
 /**
@@ -157,15 +176,17 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
-	$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
-	if($id == 0)
-		$id_secteur=0;
-
-	$statut_diogene = sql_getfetsel('statut_auteur_publier','spip_diogenes','id_secteur='.intval($id_secteur));
-	$statut = $statut_diogene ? $statut_diogene : '0minirezo';
-	return ($qui['statut'] AND $id
-		AND ($qui['statut'] <= $statut)) OR autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
+if(!function_exists('autoriser_rubrique_publierdans')){
+	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
+		$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
+		if($id == 0)
+			$id_secteur=0;
+	
+		$statut_diogene = sql_getfetsel('statut_auteur_publier','spip_diogenes','id_secteur='.intval($id_secteur));
+		$statut = $statut_diogene ? $statut_diogene : '0minirezo';
+		return ($qui['statut'] AND $id
+			AND ($qui['statut'] <= $statut)) OR autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
+	}
 }
 
 /**
@@ -185,29 +206,30 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
-	$r = sql_fetsel("id_secteur,id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
-	
-	if(!$r)
-		return false;
-	
-	if (!function_exists('auteurs_article'))
-		include_spip('inc/auth'); // pour auteurs_article si espace public
+if(!function_exists('autoriser_article_modifier')){
+	function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
+		$r = sql_fetsel("id_secteur,id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
 		
-	return
-		(
-			(autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-			AND auteurs_article($id, "id_auteur=".$qui['id_auteur']))
-			OR (
-				(!isset($opt['statut']) OR $opt['statut']!=='publie')
-				AND in_array($qui['statut'], array('0minirezo', '1comite'))
-				AND in_array($r['statut'], array('prop','prepa', 'publie'))
-				AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
+		if(!$r)
+			return false;
+		
+		if (!function_exists('auteurs_article'))
+			include_spip('inc/auth'); // pour auteurs_article si espace public
+			
+		return
+			(
+				(autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
+				AND auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+				OR (
+					(!isset($opt['statut']) OR $opt['statut']!=='publie')
+					AND in_array($qui['statut'], array('0minirezo', '1comite'))
+					AND in_array($r['statut'], array('prop','prepa', 'publie'))
+					AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
+				)
 			)
-		)
-		OR in_array($qui['statut'], array('0minirezo'));
+			OR in_array($qui['statut'], array('0minirezo'));
+	}
 }
-
 /**
  * Autoriser a creer un site dans la rubrique $id
  * Surcharge de SPIP : http://doc.spip.org/@autoriser_rubrique_creersitedans_dist
@@ -219,33 +241,21 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_rubrique_creersitedans($faire, $type, $id, $qui, $opt) {
-	$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
-	$statut = sql_getfetsel('statut_auteur','spip_diogenes','id_secteur='.intval($id_secteur));
-
-	return
-		$id
-		AND autoriser('voir','rubrique',$id)
-		AND $GLOBALS['meta']['activer_sites'] != 'non'
-		AND (($qui['statut'] <= $statut) OR
-			($qui['statut']=='0minirezo'
-			OR ($GLOBALS['meta']["proposer_sites"] >=
-			    ($qui['statut']=='1comite' ? 1 : 2)))
-			    );
-}
-
-/**
- * Autorisation a modifier le logo d'un template de formulaire (Diogene)
- * 
- * @param string $faire L'action
- * @param string $type Le type d'objet
- * @param int $id L'identifiant numérique de l'objet
- * @param array $qui Les informations de session de l'auteur
- * @param array $opt Des options
- * @return boolean true/false
- */
-function autoriser_diogene_iconifier_dist($faire,$quoi,$id,$qui,$opts){
-	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+if(!function_exists('autoriser_rubrique_creersitedans')){
+	function autoriser_rubrique_creersitedans($faire, $type, $id, $qui, $opt) {
+		$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
+		$statut = sql_getfetsel('statut_auteur','spip_diogenes','id_secteur='.intval($id_secteur));
+	
+		return
+			$id
+			AND autoriser('voir','rubrique',$id)
+			AND $GLOBALS['meta']['activer_sites'] != 'non'
+			AND (($qui['statut'] <= $statut) OR
+				($qui['statut']=='0minirezo'
+				OR ($GLOBALS['meta']["proposer_sites"] >=
+				    ($qui['statut']=='1comite' ? 1 : 2)))
+				    );
+	}
 }
 
 /**
