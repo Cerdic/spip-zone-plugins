@@ -1,0 +1,36 @@
+[(#REM) On cherche d'abord l'identifiant ]
+#SET{id_article, #ENV{identifier}|rawurldecode|explode{":"}|end|explode{"/"}|end}
+
+<BOUCLE_article(ARTICLES){id_article=#GET{id_article}}{statut IN publie,poubelle}>
+<record>
+	<header>
+		<identifier>oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE</identifier>
+		<datestamp>[(#VAL{Y-m-d\TH:m:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
+		<BOUCLE_rubriques(RUBRIQUES){parent}>
+		<setSpec><BOUCLE_chemin(HIERARCHIE){id_rubrique}{tout}{":"}>rubrique#ID_RUBRIQUE</BOUCLE_chemin></setSpec>
+		</BOUCLE_rubriques>
+		[(#STATUT|=={poubelle}|oui)<status>deleted</status>]
+	</header>
+	[(#REM) Seulement si pas poubelle ]
+	<BOUCLE_publie(CONDITION){si #STATUT|=={publie}|oui}>
+		<metadata>
+			<oai_dc:dc 
+				xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" 
+				xmlns:dc="http://purl.org/dc/elements/1.1/" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
+			>
+				<dc:title>[(#TITRE|texte_backend)]</dc:title>
+				<BOUCLE_auteurs(AUTEURS){id_article}> 
+				<dc:creator>[(#NOM|texte_backend)]</dc:creator>
+				</BOUCLE_auteurs>
+				<dc:subject>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</dc:subject> 
+				<dc:description>[(#INTRODUCTION|texte_backend)]</dc:description> 
+				<dc:date>[(#DATE|affdate{Y-m-d})]</dc:date>
+			</oai_dc:dc>
+		</metadata>
+	</BOUCLE_publie>
+</record>
+</BOUCLE_article>
+<error code="idDoesNotExist"><:oai:erreur_idDoesNotExist:></erreur>
+<//B_article>
