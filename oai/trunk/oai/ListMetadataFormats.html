@@ -1,9 +1,5 @@
-<ListMetadataFormats>
-	<B_formats>
-	<metadataFormat>
-		<BOUCLE_formats(DATA){source table, #ENV{formats}}>
-		#INCLURE{fond=oai/#ENV{depot}/ListMetadataFormats.#VALEUR}
-		</BOUCLE_formats>
-	</metadataFormat>
-	</B_formats>
-</ListMetadataFormats>
+<BOUCLE_formats(DATA){source table, #ENV{formats}}>
+<metadataFormat>
+	#INCLURE{fond=oai/#ENV{depot}/ListMetadataFormats.#VALEUR}
+</metadataFormat>
+</BOUCLE_formats>

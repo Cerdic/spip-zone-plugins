@@ -207,7 +207,14 @@ function action_api_oai_dist(){
 	
 	// Le contenu du squelette
 	if (isset($contenu) and is_string($contenu)) {
-		$retour.= $contenu;
+		// S'il n'y a pas d'erreur on entoure le contenu du nom du verbe
+		if (!$erreur) {
+			$retour.= "<$verbe>".$contenu."</$verbe>";
+		}
+		// Sinon que le contenu
+		else {
+			$retour.= $contenu;
+		}
 	}
 	
 	// Génération des erreurs s'il y en a en tableau
