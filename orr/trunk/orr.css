@@ -1,18 +1,5 @@
-div#couleur_ressource {
-    float:left;
-    padding-right:10px;
-}
-div#tab_affichage_mois{
-    float:clear;
-
-}
-
-table {
-    border-collapse: collapse;
-    text-align: center;
-}
-/* partie haute */
-h3#semaine, h3#mois{
+/* BLOLC : partie haute */
+div#choixaffichage h3#semaine, div#choixaffichage h3#mois{
     display:inline-block;
 }
 #motscles, #motcle{
@@ -20,7 +7,6 @@ h3#semaine, h3#mois{
     float:left;
 }
 #choixaffichage{
-    /*display:inline-block;*/
     float:left;
     padding-top:40px;
     padding-left:50px;
@@ -29,23 +15,34 @@ h3#semaine, h3#mois{
 #datepick{
 	width : 200px;
 	float:right;
-    /*display:inline-block;*/
 	}
+
+/*BLOC : CHOIX entre affichage-semaine et affichage-mois */    
 #affichage_semaine, #affichage_mois {
     padding-top:20px;
     clear:both;
 }
+div.cacher{
+   display:none; 
+}
 
-td{
+/* Affichage semaine */
+table#semaine {
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#tableau_orr td{
     vertical-align:top;
 }
 
-
-td.largeurcol{
+#tableau_orr td.largeurcol{
     vertical-align:top;
     width:80px;
 }
-/* Affichage semaine : Bordure rouge autour des résa */
+
+/* Affichage-semaine -> contenu cellule */
+
 #premierjour {
     border-top : 1px solid red ;
     border-bottom : 1px solid red ;
@@ -64,7 +61,7 @@ td.largeurcol{
 	width: 154px ;
 	margin-left: -20% ;
 	}
-th, td{
+#tableau_orr th, #tableau_orr td{
 	padding : 5px;
 }
 
@@ -76,24 +73,27 @@ td#id1couleur_jour_mois{
 }
 
 
-/*#contenu{*/
-/*width: 980px;*/
-/*}*/
 
-
-img.stylo{
-float:left;}
-
+/* Formulaire réservation */
 #poubelle{
-float:right;
-padding-right:30px;}
-
+    float:right;
+    padding-right:30px;
+}
 .poubelle_visible{display:auto;}
 .poubelle_cache{display:none;}
 
+img.orr_stylo{
+    float:left;
+}
 
-div.cacher{
-   display:none; 
+
+/* Affichage-mois */
+div#tab_affichage_mois{
+    float:clear;
+}
+div#couleur_ressource {
+    float:left;
+    padding-right:10px;
 }
 
 /* affichage mois : infobulle */

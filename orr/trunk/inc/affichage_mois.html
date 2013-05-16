@@ -2,7 +2,7 @@
 #SET{jourj,#GET{jour}|orr_premierjourcalendrier}
 <div>
     <div id="couleur_ressource">
-        <table id="tatata" border="1px">
+        <table id="affichage_ressource" border="1px">
             <caption>Ressources</caption>
             <BOUCLE_tableauressource(ORR_RESSOURCES)>
 			    [(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})<tr><td style="background-color:#ORR_RESSOURCE_COULEUR">#ORR_RESSOURCE_NOM</td></tr>]
@@ -11,7 +11,7 @@
     </div>
 
     <div id="tab_affichage_mois">
-        <table border="1px">
+        <table id ="tableau_mois" border="1px">
         <caption>Mois : [(#GET{jour}|affdate{nom_mois})] </caption>
         <thead>
             <tr>
