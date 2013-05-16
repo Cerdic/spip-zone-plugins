@@ -23,7 +23,7 @@
 			<BOUCLE_selection(POUR){tableau #ENV{licences}}>
 				[(#SET{licence,[(#VALEUR|table_valeur{id})]})]
 				[(#SET{name_licence,[(#VALEUR|table_valeur{name})]})]
-				<option value="#GET{licence}"[(#GET{licence}|=={#ENV{id_licence,#GET{licence_defaut,#CONFIG{licence/licence_defaut}}}}|oui) selected="selected"]>#GET{name_licence}</option>
+				<option value="#GET{licence}"[(#GET{licence}|=={#ENV{id_licence,#GET{licence_defaut,#CONFIG{licence/licence_defaut}}}}|oui) selected="selected"]>#GET{name_licence}[ - (#VALEUR|table_valeur{description})]</option>
 			</BOUCLE_selection>
 			</select>
 		</li>
