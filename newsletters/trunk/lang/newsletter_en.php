@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_selection_articles" => "Selection of articles",
 	"label_selection_rubriques" => "Selection of sections",
 	"label_selection_edito" => "Editorial selection (articles & sections)",
+  "lien_lire_en_ligne" => "Read online",
 
 	// R
 	"retirer_lien_newsletter" => "Remove this newsletter",

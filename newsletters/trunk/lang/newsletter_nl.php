@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_selection_articles" => "Selectie van artikelen",
 	"label_selection_rubriques" => "Selectie van de afdelingen",
 	"label_selection_edito" => "Redactionele selectie (artikelen & secties)",
+  "lien_lire_en_ligne" => "Lees online",
 
 	// R
 	"retirer_lien_newsletter" => "Verwijder deze nieuwsbrief",
