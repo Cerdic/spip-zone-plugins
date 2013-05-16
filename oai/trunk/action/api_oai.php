@@ -82,8 +82,8 @@ function action_api_oai_dist(){
 			if ($token = $requete['resumptionToken']) {
 				$tester_arguments = false;
 				
-				// S'il n'est pas tout seul, c'est une erreur
-				if (count($requete) > 1) {
+				// S'il n'est pas tout seul (à part le verbe bien sûr), c'est une erreur
+				if (count($requete) > 2) {
 					$erreur[] = array(
 						'error' => 'badArgument',
 						'message' => _T('oai:erreur_badargument_resumptiontoken_exclusif'),
@@ -93,6 +93,10 @@ function action_api_oai_dist(){
 				else{
 					// Le moissonneur a normalement échappé les caractères spéciaux : il faut les décoder
 					$token = rawurldecode($token);
+					// Et on récupère une liste de variables
+					parse_str($token, $requete);
+					// On ajoute le verbe
+					$requete['verb'] = $verbe;
 				}
 			}
 		}
@@ -196,8 +200,8 @@ function action_api_oai_dist(){
 	// Si ya aucune erreur, on ajoute tous les paramètres
 	if (!$erreur){
 		foreach ($requete as $param=>$valeur) {
-			// Sauf "depot" car c'est un truc interne
-			if ($param != 'depot') {
+			// Seulement les paramètres autorisés
+			if (in_array($param, array_merge($arguments_ok['required'], $arguments_ok['optional'], array('verb')))) {
 				$retour .= " $param=\"$valeur\"";
 			}
 		}
