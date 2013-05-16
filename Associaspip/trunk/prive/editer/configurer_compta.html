@@ -118,10 +118,9 @@
 	<ul>
 		<li class="editer_dons">
 			<div class="choix">
-				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="dons" value="on"[(#ENV{dons}|oui) checked="checked"] id="dons" />
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="dons" value="on"[(#ENV{dons}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="dons" />
 				<label for="dons"><:asso:config_libelle_activer_dons:></label>
-				]
 			</div>
 		</li>
 	</ul>
@@ -180,10 +179,9 @@
 		<ul>
 			<li class="editer_ventes">
 				<div class="choix">
-					[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-					<input type="checkbox" name="ventes" value="on"[(#ENV{ventes}|oui) checked="checked"] id="ventes" />
+					[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+					<input type="checkbox" name="ventes" value="on"[(#ENV{ventes}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="ventes" />
 					<label for="ventes"><:asso:config_libelle_activer_ventes:></label>
-					]
 				</div>
 			</li>
 		</ul>
@@ -247,10 +245,9 @@
 		<li class="editer_activites">
 	[(#PLUGIN{agenda}|?{
 			<div class="choix">
-				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="activites" value="on"[(#ENV{activites}|oui) checked="checked"] id="activites" />
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="activites" value="on"[(#ENV{activites}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="activites" />
 				<label for="activites"><:asso:config_libelle_activer_activites:></label>
-				]
 			</div>
 	,
 			<span class="erreur_message"><:asso:activer_agenda_pour_activer_module:></span>
@@ -290,10 +287,9 @@
 	<ul>
 		<li class="editer_prets">
 			<div class="choix">
-				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>][(#ENV{comptes}|oui)
-				<input type="checkbox" name="prets" value="on"[(#ENV{prets}|oui) checked="checked"] id="prets" />
+				[<span class="erreur_message">(#ENV{comptes}|non)<:asso:activer_gestion_comptable_pour_activer_ce_module:></span>]
+				<input type="checkbox" name="prets" value="on"[(#ENV{prets}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="prets" />
 				<label for="prets"><:asso:config_libelle_activer_prets:></label>
-				]
 			</div>
 		</li>
 	</ul>

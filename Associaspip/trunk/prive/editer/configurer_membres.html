@@ -6,10 +6,12 @@
 	  <div class="choix">
 		<input type="checkbox" name="civilite" value="on"[(#ENV{civilite}|oui) checked="checked"] id="civilite" />
 		<label for="civilite"><:asso:adherent_libelle_sexe:></label>
-		<br />
+	  </div>
+	  <div class="choix">
 		<input type="checkbox" name="prenom" value="on"[(#ENV{prenom}|oui) checked="checked"] id="prenom" />
 		<label for="prenom"><:asso:adherent_libelle_prenom:></label>
-		<br />
+	  </div>
+	  <div class="choix">
 		<input type="checkbox" name="id_asso" value="on"[(#ENV{id_asso}|oui) checked="checked"] id="id_asso" />
 		<label for="id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 	  </div>
@@ -19,27 +21,24 @@
 	  <div class="choix">
 		<input type="checkbox" name="aff_id_auteur" value="on"[(#ENV{aff_id_auteur}|oui) checked="checked"] id="aff_id_auteur" />
 		<label for="aff_id_auteur"><:asso:config_libelle_id_auteur:></label>
-		<br />
-	[(#CONFIG{activer_logos}|=={oui}|oui)
-		<input type="checkbox" name="aff_photo" value="on"[(#ENV{aff_photo}|oui)checked="checked"] id="aff_photo" />
+	  </div>
+	  <div class="choix">
+		<input type="checkbox" name="aff_photo" value="on"[(#ENV{aff_photo}|oui)checked="checked"][(#CONFIG{activer_logos}|=={oui}|non) disabled="disabled"] id="aff_photo" />
 		<label for="aff_photo"><:asso:adherent_libelle_photo:></label>
-		<br />
-	]
-	[(#ENV{civilite}|oui)
-		<input type="checkbox" name="aff_civilite" value="on"[(#ENV{aff_civilite}|oui) checked="checked"] id="aff_civilite" />
+	  </div>
+	  <div class="choix">
+		<input type="checkbox" name="aff_civilite" value="on"[(#ENV{aff_civilite}|oui) checked="checked"][(#ENV{civilite}|non) disabled="disabled"] id="aff_civilite" />
 		<label for="aff_civilite"><:asso:adherent_libelle_sexe:></label>
-		<br />
-	]
-	[(#ENV{prenom}|oui)
-		<input type="checkbox" name="aff_prenom" value="on"[(#ENV{aff_prenom}|oui) checked="checked"] id="aff_prenom" />
+	  </div>
+	  <div class="choix">
+		<input type="checkbox" name="aff_prenom" value="on"[(#ENV{aff_prenom}|oui) checked="checked"][(#ENV{prenom}|non) disabled="disabled"] id="aff_prenom" />
 		<label for="aff_prenom"><:asso:adherent_libelle_prenom:></label>
-		<br />
-	]
-	[(#ENV{id_asso}|oui)
-		<input type="checkbox" name="aff_id_asso" value="on"[(#ENV{aff_id_asso}|oui) checked="checked"] id="aff_id_asso" />
+	  </div>
+	  <div class="choix">
+		<input type="checkbox" name="aff_id_asso" value="on"[(#ENV{aff_id_asso}|oui) checked="checked"][(#ENV{id_asso}|non) disabled="disabled"] id="aff_id_asso" />
 		<label for="aff_id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
-		<br />
-	]
+	  </div>
+	  <div class="choix">
 	<B_okGrp>
 	<BOUCLE_okGrp(ASSO_GROUPES){id_groupe>100}>
 	</BOUCLE_okGrp>
@@ -48,7 +47,8 @@
 		<input type="checkbox" name="aff_groupes" disabled="disabled" id="aff_groupes" />
 	<//B_okGrp>
 		<label for="aff_groupes"><:asso:adherent_libelle_groupes:></label>
-		<br />
+	  </div>
+	  <div class="choix">
 	<B_okCat>
 	<BOUCLE_okCat(ASSO_CATEGORIES)>
 	</BOUCLE_okCat>
@@ -57,7 +57,8 @@
 		<input type="checkbox" name="aff_categorie" disabled="disabled" id="aff_categorie" />
 	<//B_okCat>
 		<label for="aff_categorie"><:asso:adherent_libelle_categorie:></label>
-		<br />
+	  </div>
+	  <div class="choix">
 		<input type="checkbox" name="aff_validite" value="on"[(#ENV{aff_validite}|oui) checked="checked"] id="aff_validite" />
 		<label for="aff_validite"><:asso:adherent_libelle_validite:></label>
 	  </div>
