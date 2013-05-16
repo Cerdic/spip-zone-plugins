@@ -12,7 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@notifications_instituerarticle_dist
 function notifications_instituerarticle($quoi, $id_article, $options) {
 	$type = 'article';
-	spip_log('ici?','test');
 	// ne devrait jamais se produire
 	if ($options['statut'] == $options['statut_ancien']) {
 		spip_log("statut inchange",'notifications');
