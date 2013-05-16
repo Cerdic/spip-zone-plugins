@@ -605,7 +605,7 @@ function diogene_diogene_ajouter_saisies($flux){
 		if(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && in_array('date',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
 			$dates_ajoutees = 'date_full';
 			if(!$flux['args']['contexte']['date'])
-				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',mktime()));
+				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',time()));
 			else
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
 			if($flux['args']['contexte']['date_redac'])
@@ -615,7 +615,7 @@ function diogene_diogene_ajouter_saisies($flux){
 			$dates_ajoutees = 'date_redac';
 		}elseif(in_array('date',unserialize($flux['args']['champs_ajoutes']))){
 			if(!$flux['args']['contexte']['date'])
-				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',mktime()));
+				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',time()));
 			else
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
 			$dates_ajoutees = 'date_orig';
