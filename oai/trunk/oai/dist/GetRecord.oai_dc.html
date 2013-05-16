@@ -5,7 +5,7 @@
 <record>
 	<header>
 		<identifier>oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE</identifier>
-		<datestamp>[(#VAL{Y-m-d\TH:m:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
+		<datestamp>[(#VAL{Y-m-d\TH:i:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
 		<BOUCLE_rubriques(RUBRIQUES){parent}>
 		<setSpec><BOUCLE_chemin(HIERARCHIE){id_rubrique}{tout}{":"}>rubrique#ID_RUBRIQUE</BOUCLE_chemin></setSpec>
 		</BOUCLE_rubriques>
@@ -20,7 +20,10 @@
 				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 				xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
 			>
+				<dc:identifier>#URL_ARTICLE</dc:identifier>
 				<dc:title>[(#TITRE|texte_backend)]</dc:title>
+				<dc:type>Text</dc:type>
+				<dc:language>#LANG</dc:language>
 				<BOUCLE_auteurs(AUTEURS){id_article}> 
 				<dc:creator>[(#NOM|texte_backend)]</dc:creator>
 				</BOUCLE_auteurs>
@@ -32,5 +35,5 @@
 	</BOUCLE_publie>
 </record>
 </BOUCLE_article>
-<error code="idDoesNotExist"><:oai:erreur_idDoesNotExist:></erreur>
+<error code="idDoesNotExist"><:oai:erreur_iddoesnotexist:></erreur>
 <//B_article>

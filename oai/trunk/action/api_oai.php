@@ -61,14 +61,14 @@ function action_api_oai_dist(){
 	if (!$verbe = $requete['verb']) {
 		$erreur[] = array(
 			'error' => 'badVerb',
-			'message' => _T('oai:erreur_badVerb_absent'),
+			'message' => _T('oai:erreur_badverb_absent'),
 		);
 	}
 	// Si le "verb" ne fait pas parti de la liste autorisée
 	elseif (!in_array($verbe, array_keys($verbes))) {
 		$erreur[] = array(
 			'error' => 'badVerb',
-			'message' => _T('oai:erreur_badVerb_inconnu', array('verbe' => $verbe)),
+			'message' => _T('oai:erreur_badverb_inconnu', array('verbe' => $verbe)),
 		);
 	}
 	// C'est un bon verbe, on peut tester les arguments
@@ -86,7 +86,7 @@ function action_api_oai_dist(){
 				if (count($requete) > 1) {
 					$erreur[] = array(
 						'error' => 'badArgument',
-						'message' => _T('oai:erreur_badArgument_resumptionToken_exclusif'),
+						'message' => _T('oai:erreur_badargument_resumptiontoken_exclusif'),
 					);
 				}
 				// Sinon c'est bon et on le récupère
@@ -104,7 +104,7 @@ function action_api_oai_dist(){
 				if (!in_array($parametre, array_keys($requete))) {
 					$erreur[] = array(
 						'error' => 'badArgument',
-						'message' => _T('oai:erreur_badArgument_obligatoire', array('arg' => $parametre, 'verbe' => $verbe)),
+						'message' => _T('oai:erreur_badargument_obligatoire', array('arg' => $parametre, 'verbe' => $verbe)),
 					);
 				}
 			}
@@ -114,7 +114,7 @@ function action_api_oai_dist(){
 				if ($parametre != 'verb' and !in_array($parametre, array_merge($arguments_ok['required'], $arguments_ok['optional']))) {
 					$erreur[] = array(
 						'error' => 'badArgument',
-						'message' => _T('oai:erreur_badArgument_interdit', array('arg' => $parametre, 'verbe' => $verbe)),
+						'message' => _T('oai:erreur_badargument_interdit', array('arg' => $parametre, 'verbe' => $verbe)),
 					);
 				}
 			}
@@ -150,7 +150,7 @@ function action_api_oai_dist(){
 			if (!in_array($format, $formats)) {
 				$erreur[] = array(
 					'error' => 'cannotDisseminateFormat',
-					'message' => _T('oai:erreur_cannotDisseminateFormat', array('format' => $format)),
+					'message' => _T('oai:erreur_cannotdisseminateformat', array('format' => $format)),
 				);
 			}
 			// Pas d'erreur de format, on utilise le squelette contenant le format
@@ -189,7 +189,7 @@ function action_api_oai_dist(){
 	$retour .= '>';
 	
 	// La date de la réponse, en UTC
-	$retour .= '<responseDate>'.gmdate('Y-m-d\TH:m:s\Z').'</responseDate>';
+	$retour .= '<responseDate>'.gmdate('Y-m-d\TH:i:s\Z').'</responseDate>';
 	
 	// La description de la requête
 	$retour .= '<request';

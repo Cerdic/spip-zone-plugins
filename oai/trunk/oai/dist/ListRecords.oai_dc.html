@@ -1,13 +1,9 @@
 [(#REM) Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123" ]
 #SET{set,#ENV{set}|?{#ENV{set}|replace{rubrique,''}}}
 
-[(#REM) Les filtres de dates sont envoyés en 8601 UTC, il faut les transformer pour SQL ]
-#SET{from, #ENV{from}|?{#VAL{Y-m-d H:m:s}|date{#ENV{from}|strtotime}}}
-#SET{until, #ENV{until}|?{#VAL{Y-m-d H:m:s}|date{#ENV{until}|strtotime}}}
-
 <BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 200}>
 [(#SET{identifier, oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE})]
 <INCLURE{fond=oai/#ENV{depot}/GetRecord.oai_dc, identifier=#GET{identifier}} />
 </BOUCLE_articles>
-<error code="noRecordsMatch"><:oai:erreur_norecordsMatch:></error>
+<error code="noRecordsMatch"><:oai:erreur_norecordsmatch:></error>
 <//B_articles>

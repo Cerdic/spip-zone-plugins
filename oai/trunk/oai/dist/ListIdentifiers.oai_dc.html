@@ -1,19 +1,15 @@
 [(#REM) Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123" ]
 #SET{set,#ENV{set}|?{#ENV{set}|replace{rubrique,''}}}
 
-[(#REM) Les filtres de dates sont envoyés en 8601 UTC, il faut les transformer pour SQL ]
-#SET{from, #ENV{from}|?{#VAL{Y-m-d H:m:s}|date{#ENV{from}|strtotime}}}
-#SET{until, #ENV{until}|?{#VAL{Y-m-d H:m:s}|date{#ENV{until}|strtotime}}}
-
 <BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 200}>
 <header>
 	<identifier>oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE</identifier>
-	<datestamp>[(#VAL{Y-m-d\TH:m:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
+	<datestamp>[(#VAL{Y-m-d\TH:i:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
 	<BOUCLE_rubriques(RUBRIQUES){parent}>
 	<setSpec><BOUCLE_chemin(HIERARCHIE){id_rubrique}{tout}{":"}>rubrique#ID_RUBRIQUE</BOUCLE_chemin></setSpec>
 	</BOUCLE_rubriques>
 	[(#STATUT|=={poubelle}|oui)<status>deleted</status>]
 </header>
 </BOUCLE_articles>
-<error code="noRecordsMatch"><:oai:erreur_noRecordsMatch:></error>
+<error code="noRecordsMatch"><:oai:erreur_norecordsmatch:></error>
 <//B_articles>
