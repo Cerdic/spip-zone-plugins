@@ -1,7 +1,7 @@
 [(#REM) Ce dépôt gère les identifiants de rubriques sous la forme "rubrique123" ]
 #SET{set,#ENV{set}|?{#ENV{set}|replace{rubrique,''}}}
 
-<BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 5}>
+<BOUCLE_articles(ARTICLES){statut IN publie,poubelle}{oaifromuntil date,maj,#ENV{from,0},#ENV{until,0}}{pagination 200}>
 <header>
 	<identifier>oai:[(#CONFIG{adresse_site}|parse_url{#EVAL{PHP_URL_HOST}})]:article/#ID_ARTICLE</identifier>
 	<datestamp>[(#VAL{Y-m-d\TH:i:s\Z}|gmdate{#MAJ|strtotime})]</datestamp>
