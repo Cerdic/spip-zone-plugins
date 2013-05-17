@@ -60,20 +60,6 @@ function request_statut_interne() {
 	}
 }
 
-function association_ajouterBoutons($boutons_admin) {
-		// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-
-		$boutons_admin['naviguer']->sousmenu['association']= new Bouton(
-			_DIR_PLUGIN_ASSOCIATION_ICONES."annonce.gif",  // icone
-			_T('asso:titre_menu_gestion_association') //titre
-			);
-
-	}
-	return $boutons_admin;
-}
-
-
 function association_mode_de_paiement($journal, $label) {
 	$sel = '';
 	$sql = sql_select("code,intitule", "spip_asso_plan", "classe=".sql_quote($GLOBALS['association_metas']['classe_banques']), '', "code") ;

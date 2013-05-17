@@ -1,7 +1,7 @@
 <paquet
 	prefix="association"
 	categorie="divers"
-	version="2.1.11"
+	version="2.1.12"
 	etat="stable"
 	compatibilite="[2.1.8;3.0.99]"
 	logo="img_pack/annonce.gif"
@@ -18,10 +18,12 @@
 	<auteur>Maïeul Roquette (v:2.0)</auteur>
 	<auteur>Emmanuel Saint-James (v:2.0-2.1)</auteur>
 	<auteur>Jeannolapin (v:2.1)</auteur>
+	<auteur>Art-Logic (v:2.1)</auteur>
+
+	<menu nom="association_bando" titre="asso:titre_menu_gestion_association" parent="bando_activite" icone="img_pack/annonce.gif" action="association" />
 
 	<pipeline nom="header_prive" />
 	<pipeline nom="delete_tables" />
-	<pipeline nom="ajouter_boutons" />
 	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
 
 	<necessite nom="agenda" compatibilite="[3.0.1;3.11.99]" />
