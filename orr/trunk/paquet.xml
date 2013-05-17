@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.1;3.0.*]"
 	logo="img/orr_calendrier-50.png"
-	documentation="http://contrib.spip.net/article4233"
+	documentation="http://contrib.spip.net/article4378"
 	schema="2.0.0"
 >
 	<!--
