@@ -20,6 +20,6 @@
 		<inclure>listes_articles_completes.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 	<categorie>navigation</categorie>
 </plugin>

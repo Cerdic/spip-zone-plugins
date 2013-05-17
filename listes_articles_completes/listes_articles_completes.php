@@ -131,16 +131,25 @@ function inc_formater_article($row, $own='')
 
 
 function listes_articles_completes_header_prive($flux) {
-	
 	$flux .= "
 		<style type='text/css'><!--
-			.tr_liste .liens {
+			.tr_liste .liens, .liste-objets.articles tr .liens {
 				visibility: hidden;
 				font-size: 85%;
+				line-height: 120%;
 				padding-top: 3px;
 			}
-			.tr_liste_over .liens, .tr_liste:hover .liens {
+			.tr_liste .liens, .liste-objets.articles tr .liens+.liens {
+				padding-top: 0px;
+			}
+			.tr_liste_over .liens, .tr_liste:hover .liens, .liste-objets.articles tr:hover .liens {
 				visibility: visible;
+			}
+			.liste-objets.articles td {
+				line-height: 130%;
+			}
+			.liste-objets.articles td.logo {
+				vertical-align: middle;
 			}
 		--></style>
 	";
