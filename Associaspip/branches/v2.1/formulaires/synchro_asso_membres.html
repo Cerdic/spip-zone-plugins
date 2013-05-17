@@ -4,28 +4,28 @@
 [(#ENV{editable})
 <form method="post" action="#ENV{action}">
 <div>
-	#ACTION_FORMULAIRE{#ENV{action}}	
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<h3 class="legend"><:asso:synchroniser_choix:></h3>
 		<li class="editer_tous">
-			<label><strong><:asso:synchroniser_tous:></strong></label>
-			<input type="checkbox" name="tous" id="tous">
+			<input type="checkbox" name="tous" id="tous" />
+			<label for="tous"><strong><:asso:synchroniser_tous:></strong></label>
 		</li>
 		<li class="editer_visiteurs">
-			<label><strong><:asso:synchroniser_visiteurs:></strong></label>
-			<input type="checkbox" name="visiteurs" id="visiteurs">
+			<input type="checkbox" name="visiteurs" id="visiteurs" />
+			<label for="visiteurs"><strong><:asso:synchroniser_visiteurs:></strong></label>
 		</li>
 		<li class="editer_redacteurs">
-			<label><strong><:asso:synchroniser_redacteurs:></strong></label>
-			<input type="checkbox" name="redacteurs" id="redacteurs">
+			<input type="checkbox" name="redacteurs" id="redacteurs" />
+			<label for="redacteurs"><strong><:asso:synchroniser_redacteurs:></strong></label>
 		</li>
 		<li class="editer_administrateurs">
-			<label><strong><:asso:synchroniser_administrateurs:></strong></label>
-			<input type="checkbox" name="administrateurs" id="administrateurs">
+			<input type="checkbox" name="administrateurs" id="administrateurs" />
+			<label for="administrateurs"><strong><:asso:synchroniser_administrateurs:></strong></label>
 		</li>
 		<li class="editer_forcer">
-			<label><strong><:asso:synchroniser_forcer:></strong></label>
-			<input type="checkbox" name="forcer" id="forcer">
+			<input type="checkbox" name="forcer" id="forcer" />
+			<label for="forcer"><strong><:asso:synchroniser_forcer:></strong></label>
 		</li>
 	</ul>
 
