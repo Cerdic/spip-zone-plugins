@@ -27,7 +27,7 @@
 				<BOUCLE_auteurs(AUTEURS){id_article}> 
 				<dc:creator>[(#NOM|texte_backend)]</dc:creator>
 				</BOUCLE_auteurs>
-				<dc:subject>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</dc:subject> 
+				<dc:subject>[(#INFO_TITRE{rubrique,#ID_RUBRIQUE}|texte_backend)]</dc:subject> 
 				<dc:description>[(#INTRODUCTION|texte_backend)]</dc:description> 
 				<dc:date>[(#DATE|affdate{Y-m-d})]</dc:date>
 			</oai_dc:dc>
