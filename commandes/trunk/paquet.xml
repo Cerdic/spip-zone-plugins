@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="0.10.0"
+	version="0.10.1"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
@@ -24,10 +24,10 @@
 
 	<pipeline nom="affiche_gauche" inclure="commandes_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="commandes_pipelines.php" />
-	<pipeline nom="affiche_gauche" inclure="commandes_pipelines.php" />
-	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" /><!-- page d'accueil : liste des commandes en attente validation -->
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
-	<pipeline nom="pre_edition" inclure="commandes_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="commandes_pipelines.php" /><!-- changement de statut : maj dates paiement et envoi -->
+	<pipeline nom="post_edition" inclure="commandes_pipelines.php" /><!-- changement de statut : envoi de notifications -->
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/commandes.php" />
