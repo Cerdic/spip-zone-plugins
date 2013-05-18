@@ -90,12 +90,10 @@ function commandes_accueil_encours($flux) {
 function commandes_pre_edition($flux){
 
 	if (
-		$action = $flux['args']['action']
-		and $table = $flux['args']['table']
+		($action=$flux['args']['action']) == 'instituer' // action instituer
+		and ($table=$flux['args']['table']) == table_objet_sql('commande') // on institue une commande
 		and $statut = $flux['data']['statut']
-		and $action == 'instituer'
-		and $table == table_objet_sql('commande')
-		and $date = date('Y-m-d H:i:s') // il faudrait copier la date de maj pour bien faire...
+		and $date = date('Y-m-d H:i:s') // todo : copier la date de maj ?
 	) {
 		switch ($statut) {
 			case 'paye';
@@ -131,7 +129,7 @@ function commandes_post_edition($flux){
 		and $config = lire_config('commandes')
 		and ($config['activer']) // les notifications sont activées
 		and (in_array($statut, $config['quand'])) // le nouveau statut est valide pour envoyer une notification
-		and ($notifications = charger_fonction('notifications', 'inc', true)) // le plugin notifications est actif
+		and ($notifications = charger_fonction('notifications', 'inc', true)) // la fonction est bien chargée
 	) {
 		// Déterminer l'expediteur
 		$options = array();
