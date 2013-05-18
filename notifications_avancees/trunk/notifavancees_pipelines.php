@@ -101,7 +101,8 @@ function notifications_destinataires($quoi, $id=0, $options=array()){
 	);
 	
 	// On supprime les doublons
-	$destinataires = array_unique($destinataires);
+	if (is_array($destinataires))
+		$destinataires = array_unique($destinataires);
 	
 	// Enfin on retire ceux qui se sont blacklistés explicitement
 	if ($blacklist = notifications_abonnes($quoi, $id, true))
