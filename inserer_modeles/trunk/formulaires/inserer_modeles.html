@@ -11,12 +11,12 @@
 <form action="#ENV{action}" method="post"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<BOUCLE_deja_choisi(CONDITION){si #ENV{formulaire_modele}}>
-		[<textarea readonly="readonly" class="code_modele" id="code_modele"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</textarea>]
+		[<textarea readonly="readonly" class="code_modele" id="code_modele[(#ENV{modalbox}|?{'_modalbox',''})]"[ (#ENV{_code_modele}|et{#ENV{_js_inserer_code}}|oui)ondblclick="#ENV**{_js_inserer_code}"]>(#ENV{_code_modele})</textarea>]
 		[(#REM) Insertion du code dans le texte après validation ]
-		[(#ENV{_code_modele}|oui)
+		[(#ENV{_code_modele}|et{#ENV{modalbox}|=={oui}}|oui)
 			<script>$(document).ready(function(){
 				[(#ENV{modalbox}|oui)
-					var code_modele = $("#code_modele").text();
+					var code_modele = $("#code_modele_modalbox").text(); [(#REM) On distingue #code_modele (colonne de gauche) de #code_modele_modalbox pour car les deux peuvent exister.]
 					if (code_modele != '') {
 						parent.$.markItUp( { replaceWith: code_modele } );
 						jQuery.modalboxclose();

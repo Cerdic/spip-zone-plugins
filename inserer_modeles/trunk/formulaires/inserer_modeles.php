@@ -106,12 +106,17 @@ function formulaires_inserer_modeles_traiter_dist($formulaire_modele,$modalbox,$
 			$code .= '>';
 		}
 		set_request('_code_modele',$code);
-
-		// js pour inserer la balise dans le texte
-		$codejs = "barre_inserer('".texte_script($code)."', $('textarea[name=texte]')[0]);";
-		set_request('_js_inserer_code',$codejs);
-
-		return array('message_ok' => _T('inserer_modeles:message_code_insere'));
+		
+		// Dans la colonne de gauche, on peut peut présupposer du champs dans lequel on veut insérer le modèle (chapeau, texte, ps).
+		// On ne fait donc pas d'insertion automatique.
+		if ($modalbox!='') {
+			return array('message_ok' => _T('inserer_modeles:message_code_insere'));
+		} else {
+			// js pour inserer la balise dans le texte
+			$codejs = "barre_inserer('".texte_script($code)."', $('textarea[name=texte]')[0]);";
+			set_request('_js_inserer_code',$codejs);
+			return array('message_ok' => _T('inserer_modeles:message_inserer_code'));
+		}
 	}
 }
 
