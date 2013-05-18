@@ -6,27 +6,28 @@ plugins necessaires = aucun
 parametres =
 - rc_nom (texte) : nom du type de reference comptable
 - rc_val (entier) : reference/code du plan comptable
-- rc_aide (texte) : explication sur le champ de saisie
 
-/!\ ne fonctionne pas : plante sur rc_aide qui contient un parameter.
-
-maj:2012-12-03; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
+maj:2013-05-18; version:0.1.1; licence:GPL; copyleft:gilcot; -->]
 #CACHE{0}
 <B_classeSelect_compta>
         <li class="editer_pc_[(#ENV{rc_nom})]">
             [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{#ENV{rc_nom}})</span>]
-            <label for="dc_[(#ENV{rc_nom})]"><:asso:config_libelle_num_pc:></label>
+            <label for="pc_[(#ENV{rc_nom})]"><:asso:config_libelle_num_pc:></label>
             <select name="pc_[(#ENV{rc_nom})]" id="pc_[(#ENV{rc_nom})]">
                 <option value=""><:asso:choisir_ref_compte:></option>
 <BOUCLE_classeSelect_compta(ASSO_PLAN) {active=1} {fusion classe} {par classe} >
                 <optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
     <BOUCLE_ref_compta(ASSO_PLAN) {classe}{active} {par code} >
-                <option value="#ID_DESTINATION"[ (#ENV{rc_val}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+                <option value="#CODE"[ (#ENV{rc_val}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
     </BOUCLE_ref_compta>
                 </optgroup>
 </BOUCLE_classeSelect_compta>
             </select>
-            [<em class="explication">(#ENV{rc_aide})</em>]
+            <em class="explication">[(#VAL{asso:config_aide_pc_#ENV{rc_nom}}|_T{ #ARRAY{'url',#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_#ENV{rc_nom}}} })]</em>
         </li>
         <!-- dc -->
 </B_classeSelect_compta>
+        <li class="erreur">
+            <a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
+        </li>
+<//B_classeSelect_compta>

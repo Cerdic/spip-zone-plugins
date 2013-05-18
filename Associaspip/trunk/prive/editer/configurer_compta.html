@@ -41,31 +41,16 @@
 	<fieldset>
 		<legend><:asso:config_libelle_operations:></legend>
 		<ul>
-			<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
 			<li class="editer_pc_intravirements">
 				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
 
-	<B_pc_virements>
-				<select name="pc_intravirements" id="pc_intravirements">
-					<option value="[(#ENV{classe_banques}|sinon{5})81]"><:asso:choisir_ref_compte:></option>
-				<optgroup label="#ENV{classe_banques} [: (#VAL{classe_#ENV{classe_banques}}|_T)]">
-	<BOUCLE_pc_virements(ASSO_PLAN){classe=#ENV{classe_banques}}{par code}>
-					<option value="#CODE" [(#ENV{pc_intravirements}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_virements>
-				</optgroup>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_intravirements{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_intravirements}}:>
-				</em>
-	</B_pc_virements>
-				<span class="erreur_message"><:asso:enregistrer_classe_banque_virement:></span>
-	<//B_pc_virements>
-			</li>
-			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
-			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
-			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
 <!--
-			<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
+		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_immobilisations}, cc_nom=immobilisations, obligatoire=0} />
 -->
 		</ul>
 	</fieldset>
@@ -82,30 +67,8 @@
 	<fieldset>
 		[(#REM)<!--<legend></legend>-->]
 		<ul>
-	<B_classeSelect_cotisations>
-			<li class="editer_pc_cotisations">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{pc_cotisations})</span>]
-				<label for="pc_cotisations"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_cotisations" id="pc_cotisations">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_cotisations(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_cotisations(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_cotisations}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_cotisations>
-				</optgroup>
-	</BOUCLE_classeSelect_cotisations>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_cotisations{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_cotisations}}:>
-				</em>
-			</li>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cotisations}, rc_nom=cotisations} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cotisations}, dc_nom=cotisations} />
-	</B_classeSelect_cotisations>
-			<li class="erreur">
-				<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
-			</li>
-	<//B_classeSelect_cotisations>
 		</ul>
 	</fieldset>
 </fieldset>
@@ -127,47 +90,14 @@
 	<fieldset>
 		<legend><:asso:config_libelle_don2argent:></legend>
 		<ul>
-	<B_classeSelect_dons>
-			<li class="editer_pc_dons">
-				<label for="pc_dons"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_dons" id="pc_dons">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_dons(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_dons(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_dons}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_dons>
-				</optgroup>
-	</BOUCLE_classeSelect_dons>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_dons{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_dons}}:>
-				</em>
-			</li>
-			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
-	</B_classeSelect_dons>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_dons}, rc_nom=dons} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:config_libelle_don2colis:></legend>
 		<ul>
-	<B_classeSelect_colis>
-			<li class="editer_pc_colis">
-				<label for="pc_colis"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_colis" id="pc_colis">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_colis(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_colis(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_colis}|=={#CODE}|oui)selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_colis>
-				</optgroup>
-	</BOUCLE_classeSelect_colis>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_colis{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_colis}}:>
-				</em>
-			</li>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_colis}, rc_nom=colis} />
 		</ul>
 	</fieldset>
 </li>
@@ -188,49 +118,14 @@
 	<fieldset>
 		<legend><:asso:config_libelle_article2vente:></legend>
 		<ul>
-	<B_classeSelect_ventes>
-			<li class="editer_pc_ventes">
-				<label for="pc_ventes"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_ventes" id="pc_ventes">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_ventes(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_ventes(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_ventes>
-				</optgroup>
-	</BOUCLE_classeSelect_ventes>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_ventes{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_ventes}}:>
-				</em>
-			</li>
-			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
-	</B_classeSelect_ventes>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_ventes}, rc_nom=ventes} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:config_libelle_frais2port:></legend>
 		<ul>
-	<B_classeSelect_frais>
-			<li class="editer_pc_frais_envoi">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{frais_envoi})</span>]
-				<label for="pc_frais_envoi"><:asso:config_libelle_num_pc:>&nbsp;</label>
-				<select name="pc_frais_envoi" id="pc_frais_envoi">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_frais(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-		<BOUCLE_pc_frais_envoi(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_frais_envoi}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-		</BOUCLE_pc_frais_envoi>
-				</optgroup>
-	</BOUCLE_classeSelect_frais>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_frais2port{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_frais_envoi}}:>
-				</em>
-			</li>
-	</B_classeSelect_ventes>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_frais_envoi}, rc_nom=frais_envoi} />
 		</ul>
 	</fieldset>
 </fieldset>
@@ -241,7 +136,6 @@
 	<h3 class="legend"><:asso:config_libelle_activites:></h3>
 	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{activites})</span>]
 	<ul>
-	<B_classeSelect_activites>
 		<li class="editer_activites">
 	[(#PLUGIN{agenda}|?{
 			<div class="choix">
@@ -254,28 +148,11 @@
 			<input type="hidden" name="activites" value="" />
 	})]
 		</li>
-		<li class="editer_pc_activites">
-			<label for="pc_activites"><:asso:config_libelle_num_pc:></label>
-			<select name="pc_activites" id="pc_activites">
-				<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_activites(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-			<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_activites(ASSO_PLAN){classe}{active}{par code}>
-				<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_activites>
-			</optgroup>
-	</BOUCLE_classeSelect_activites>
-			</select>
-			<em class="explication">
-<:asso:config_aide_pc_activites{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_activites}}:>
-			</em>
-		</li>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_activites}, rc_nom=activites} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
-	</B_classeSelect_activites>
 		<li class="erreur">
 			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
 		</li>
-	<//B_classeSelect_activites>
 	</ul>
 </fieldset>
 </li>
@@ -296,75 +173,24 @@
 	<fieldset>
 		<legend><:asso:ressources_libelle_acquisition:></legend>
 		<ul>
-	<B_classeSelect_ressources>
-			<li class="editer_pc_ressources">
-				<label for="pc_ressources"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_ressources" id="pc_ressources">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_ressources(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_ressources(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_ressources}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_ressources>
-				</optgroup>
-	</BOUCLE_classeSelect_ressources>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_ressources{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_ressources}}:>
-				</em>
-			</li>
-			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ressources}, dc_nom=ressources} />
-	</B_classeSelect_ressources>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_ressources}, rc_nom=ressources} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ressources}, dc_nom=ressources} />
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:ressources_libelle_caution:></legend>
 		<ul>
-	<B_classeSelect_cautions>
-			<li class="editer_pc_cautions">
-				<label for="pc_cautions"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_cautions" id="pc_cautions">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_cautions(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_cautions(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_cautions}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_cautions>
-				</optgroup>
-	</BOUCLE_classeSelect_cautions>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_cautions{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_cautions}}:>
-				</em>
-			</li>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cautions}, rc_nom=cautions} />
 <!--
-			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cautions}, dc_nom=cautions} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cautions}, dc_nom=cautions} />
 -->
-	</B_classeSelect_cautions>
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:ressources_libelle_location:></legend>
 		<ul>
-	<B_classeSelect_prets>
-			<li class="editer_pc_prets">
-				<label for="pc_prets"><:asso:config_libelle_num_pc:></label>
-				<select name="pc_prets" id="pc_prets">
-					<option value=""><:asso:choisir_ref_compte:></option>
-	<BOUCLE_classeSelect_prets(ASSO_PLAN){active=1}{fusion classe}{par classe}>
-				<optgroup label="#CLASSE [: (#VAL{classe_#CLASSE}|_T)]">
-	<BOUCLE_pc_prets(ASSO_PLAN){classe}{active}{par code}>
-					<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
-	</BOUCLE_pc_prets>
-				</optgroup>
-	</BOUCLE_classeSelect_prets>
-				</select>
-				<em class="explication">
-<:asso:config_aide_pc_prets{url=#URL_ECRIRE{'edit_plan',retour=configurer_association&champ=pc_prets}}:>
-				</em>
-			</li>
-			<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
-	</B_classeSelect_prets>
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cotisations}, rc_nom=prets} />
+		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
 		</ul>
 	</fieldset>
 </fieldset>

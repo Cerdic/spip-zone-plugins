@@ -40,6 +40,8 @@ function formulaires_configurer_association_verifier_dist() {
 			$classe_attribuee[$classe_testee] = $classe_testee;
 		}
 		$classe_financier = $classe_attribuee['classe_banques'];
+		if (substr(_request('pc_intravirements'), 0,1)!==$classe_financier) // cette ref. comptable n'est pas dans la classe banque...
+			$erreurs['pc_intravirements'] = _T('asso:enregistrer_classe_banque_virement'); // ...pas possible car c'est un compte financier....
 	}
 	$ref_attribuee = array();
 	foreach (array(
