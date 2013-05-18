@@ -41,21 +41,19 @@ function commandes_optimiser_base_disparus($flux){
  * @return string
  */
 function commandes_affiche_gauche($flux) {
-		
-	if ($flux['args']['exec'] == 'commande_edit'
+
+	if (
+		$flux['args']['exec'] == 'commande_edit'
 		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
 		AND $type = objet_type($table)
 		AND $id_table_objet = id_table_objet($type)
 		AND ($id = intval($flux['args'][$id_table_objet]))
-	  AND (autoriser('modifier', 'commande', 0))) {
+		AND (autoriser('modifier', 'commande', 0))
+	) {
 		//un test pour todo ajouter un objet (produit,document,article,abonnement,rubrique ...)
-        if (version_compare($GLOBALS['spip_version_branche'],'3.0.0','>'))
-        $flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-        else $flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-        
-			
-		}
-	
+		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+	}
+
 	return $flux;
 }
 
