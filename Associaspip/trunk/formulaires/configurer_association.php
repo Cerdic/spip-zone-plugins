@@ -87,7 +87,7 @@ function formulaires_configurer_association_verifier_dist() {
 
 function formulaires_configurer_association_traiter_dist() {
 	include_spip('formulaires/configurer_metas');
-	$metas_list = formulaires_configurer_metas_recense('configurer_association');
+	$metas_list = array_unique(array_keys( formulaires_configurer_metas_recense('configurer_association') ));
 
 	foreach ( array(
 		'activites' => array('dc_activites', 'pc_activites'),
