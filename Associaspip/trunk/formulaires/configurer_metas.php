@@ -110,6 +110,7 @@ function formulaires_configurer_metas_traiter_dist($form, $args=array()) {
 			ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $infos['meta']);
 		}
 		$retour = _request('redirect');
+		spip_log("Configurer_Metas enregistre la modififation des metas suivants dans '$form' : ". implode(', ', array_keys($vars) ), 'associaspip');
 		return $retour
 			? array('redirect' => generer_url_ecrire($infos['prefix']), 'message_ok' => _T('ecrire:config_info_enregistree'), 'message_erreur' => '', )
 			: ( !isset($infos['prefix'])

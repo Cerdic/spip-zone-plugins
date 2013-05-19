@@ -125,6 +125,7 @@ function formulaires_configurer_association_traiter_dist() {
 		$v = _request($k);
 		ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', 'association_metas');
 	}
+	spip_log("Associaspip enregistre la modififation du(s) meta(s) : ". implode(', ', $metas_list), 'associaspip');
 	return array('redirect' => generer_url_ecrire('association')); // retour a la page d'accueuil
 }
 
