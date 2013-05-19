@@ -42,10 +42,7 @@
 		<legend><:asso:config_libelle_operations:></legend>
 		<ul>
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
-			<li class="editer_pc_intravirements">
-				<label for="pc_intravirements"><:asso:config_libelle_virements_internes:></label>
-
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements, rc_titre=<:asso:config_libelle_virements_internes:>} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
@@ -150,9 +147,6 @@
 		</li>
 		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_activites}, rc_nom=activites} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
-		<li class="erreur">
-			<a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
-		</li>
 	</ul>
 </fieldset>
 </li>
