@@ -57,6 +57,15 @@ function formulaires_configurer_manuelsite_saisies_dist(){
 						'explication' => _T('manuelsite:explication_email'),
 						'defaut' => $config['email']
 					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'formu',
+						'label' => _T('manuelsite:label_formu'),
+						'explication' => _T('manuelsite:explication_formu'),
+						'defaut' => $config['formu']
+					)
 				)
 			)
 		),

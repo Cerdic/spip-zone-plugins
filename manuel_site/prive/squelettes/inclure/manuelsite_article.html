@@ -21,7 +21,11 @@
 
 		<div class="surlignable">
 		[<div class="intro">(#CONFIG{manuelsite/intro}|typo|propre)</div>]
+		[(#CONFIG{manuelsite/email}|match{\@}|?{
 		[<div class="email"><:manuelsite:help:><a href="mailto:#CONFIG{manuelsite/email}">(#CONFIG{manuelsite/email})</a></div>]
+		,
+		[<div class="formulaire"><:manuelsite:help:><a href="(#CONFIG{manuelsite/formu}|construire_lien)" class="popin"><:manuelsite:help2:></a>.</div>]
+		})]
 		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{#GET{taille_max_image},0})</div>]
 		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#GET{taille_max_image},0})</div>]
 		</div>

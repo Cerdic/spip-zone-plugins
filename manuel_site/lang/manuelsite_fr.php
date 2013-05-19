@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_cacher_public' => 'Cacher cet article dans l’espace public, flux rss compris',
 	'explication_email' => 'Email de contact pour les rédacteurs',
 	'explication_faq' => 'Vous trouverez ci-dessous les codes des blocs génériques utilisables pour rédiger votre manuel. Le texte correspondant à chaque code s’affiche (sans mise en forme) au survol de celui-ci. Il suffit de copier/coller le code désiré dans la zone de texte de votre article.<br />Pour ne pas afficher la question, rajouter <i>|q=non</i>.<br />Pour ajouter des paramètres, rajouter <i>|params=p1:v1;p2:v2</i>.',
+	'explication_formu' => 'Indiquez le nom de l\'objet éditorial qui permet de collecter les demandes d\'aide (pour être pris en compte, il faut laisser vide le champs e-mail ci-dessus)',
 	'explication_id_article' => 'Entrez le numéro de l’article qui contient le manuel',
 	'explication_intro' => 'Texte d’introduction au manuel (sera placé avant le chapo)',
 	'explication_largeur' => 'Entrez la largeur de la zone d’affichage du manuel',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// H
 	'help' => 'Au secours : ',
+	'help2' => ' déposez votre demande d\'aide'
 
 	// I
 	'intro' => 'Ce document a pour but d’aider les rédacteurs à l’utilisation du site. Il vient en complément du document intitulé « [Cours SPIP pour rédacteurs->@url@] » qui est une aide globale à l’utilisation de SPIP. Vous y trouverez une description de l’architecture du site, de l’aide technique sur des points particuliers...',
@@ -38,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_background_color' => 'Couleur de fond',
 	'label_cacher_public' => 'Cacher',
 	'label_email' => 'Email',
+	'label_formu' => 'Formulaire',
 	'label_id_article' => 'N° de l’article',
 	'label_intro' => 'Introduction',
 	'label_largeur' => 'Largeur',
