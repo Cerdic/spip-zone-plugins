@@ -126,7 +126,7 @@ function exec_comptes() {
 			. $nav;
 			echo generer_form_ecrire('action_comptes', $table);
 		} else { // absence d'operation pour l'exercice
-			echo '<table width="100%"><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercices').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></table>';
+			echo '<table width="100%"><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercice_comptable').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></table>';
 		}
 		fin_page_association();
 	}
