@@ -18,7 +18,7 @@ maj:2013-05-18; version:0.1.1; licence:GPL; copyleft:gilcot; -->]
             <select name="pc_[(#ENV{rc_nom})]" id="pc_[(#ENV{rc_nom})]">
                 <option value=""><:asso:choisir_ref_compte:></option>
 <BOUCLE_classeSelect_compta(ASSO_PLAN) {active=1} {fusion classe} {par classe} >
-                <optgroup label="[(#VAL{perso:classe_#CLASSE}|_T)]"[(#ENV{rc_classe}|oui) [(#ENV{rc_classe}|!={#CLASSE}|oui)style="display: none;"]]>
+                <optgroup label="[(#VAL{local:classe_#CLASSE}|_T)]"[(#ENV{rc_classe}|oui) [(#ENV{rc_classe}|!={#CLASSE}|oui)style="display: none;"]]>
     <BOUCLE_ref_compta(ASSO_PLAN) {classe}{active} {par code} >
                 <option value="#CODE"[ (#ENV{rc_val}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
     </BOUCLE_ref_compta>

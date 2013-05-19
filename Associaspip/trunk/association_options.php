@@ -770,7 +770,7 @@ function association_formater_idnom($id, $nom='', $lien='', $html_span='span') {
 			elseif ( $lien=='membre')
 				$res = association_formater_idnom($id, array(), '', $html_span); // on doit pouvoir faire mieux je pense
 			else
-				$res = _T('asso:objet_num', array('objet'=>_T("perso:$lien"), 'num'=>$id) );
+				$res = _T('asso:objet_num', array('objet'=>_T("local:$lien"), 'num'=>$id) );
 		}
 	} elseif ( $nom ) { // utiliser nom...
 		$res = ($html_span?"<$html_span class='n'>":'') .$nom. ($html_span?"</$html_span>":'');
@@ -1018,7 +1018,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_objet']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
-				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : ucwords(str_replace('@', ' ['._T('perso:at').'] ', $courriel['email'])) ); // on affiche le titre si present sinon la valeur
+				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : ucwords(str_replace('@', ' ['._T('local:at').'] ', $courriel['email'])) ); // on affiche le titre si present sinon la valeur
 			}
 			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$html_span>\n"):'');
 		}

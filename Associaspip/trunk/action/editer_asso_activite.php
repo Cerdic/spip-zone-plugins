@@ -37,7 +37,7 @@ function action_editer_asso_activite_dist() {
     include_spip('base/association');
     $id_compte = association_recuperer_entier('id_compte');
     $journal = _request('journal');
-    $ref_activite = '['. _T('asso:titre_num', array('titre'=>_T('perso:evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant) ." :$quantite*$prix_unite" ;
+    $ref_activite = '['. _T('asso:titre_num', array('titre'=>_T('local:evenement'),'num'=>$evenement) ) ."->activite$evenement] &mdash; ". ($id_auteur?"[$participant"."->membre$id_auteur]":$participant) ." :$quantite*$prix_unite" ;
     include_spip('inc/association_comptabilite');
     include_spip('inc/modifier'); // on passe par modifier_contenu pour que la modification soit envoyee aux plugins et que Champs Extras 2 la recupere
     if ($id_activite) { // c'est une modification
