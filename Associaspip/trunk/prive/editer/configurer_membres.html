@@ -1,18 +1,26 @@
+<script type="text/javascript">//<![CDATA[
+	// http://www.annedorko.com/blog/toggle-enable-and-disable-a-form-field-with-a-checkbox-javascript-101
+	function toggle(checkboxID, toggleID) {
+		var checkbox = document.getElementById(checkboxID);
+		var toggle = document.getElementById(toggleID);
+		updateToggle = checkbox.checked ? toggle.disabled=false : toggle.disabled=true;
+	}
+//]]></script>
 <fieldset>
   <h3 class="legend"><:asso:config_info_membres:></h3>
   <ul>
 	<li>
 	  <label><:asso:config_libelle_gerer_champs_membres:></label>
 	  <div class="choix">
-		<input type="checkbox" name="civilite" value="on"[(#ENV{civilite}|oui) checked="checked"] id="civilite" />
+		<input type="checkbox" name="civilite" value="on"[(#ENV{civilite}|oui) checked="checked"] id="civilite" onclick="toggle('civilite', 'aff_civilite')" />
 		<label for="civilite"><:asso:adherent_libelle_sexe:></label>
 	  </div>
 	  <div class="choix">
-		<input type="checkbox" name="prenom" value="on"[(#ENV{prenom}|oui) checked="checked"] id="prenom" />
+		<input type="checkbox" name="prenom" value="on"[(#ENV{prenom}|oui) checked="checked"] id="prenom" onclick="toggle('prenom', 'aff_prenom')" />
 		<label for="prenom"><:asso:adherent_libelle_prenom:></label>
 	  </div>
 	  <div class="choix">
-		<input type="checkbox" name="id_asso" value="on"[(#ENV{id_asso}|oui) checked="checked"] id="id_asso" />
+		<input type="checkbox" name="id_asso" value="on"[(#ENV{id_asso}|oui) checked="checked"] id="id_asso" onclick="toggle('id_asso', 'aff_id_asso')" />
 		<label for="id_asso"><:asso:config_libelle_utiliser_champ_id_asso:></label>
 	  </div>
 	</li>
