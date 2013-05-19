@@ -15,19 +15,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip ('inc/navigation_modules');
 
 function exec_activites(){
-		
+
 	include_spip('inc/autoriser');
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('associer', 'activites') OR !test_plugin_actif('agenda')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_activite'));
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite("",true);
@@ -37,17 +37,17 @@ function exec_activites(){
 		if (isset($liste['AGENDA']))
 			exec_activites_evenements(_request('mot'));
 		else echo _T('asso:config_libelle_activites');
-		echo fin_page_association(); 
+		echo fin_page_association();
 	}
 }
 
 
 function exec_activites_evenements($mot){
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_toutes_activites'));
-		
+
 		// FILTRES
 		if (!preg_match('/^[\w%]+$/', $mot))  $mot= "%";
-		
+
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td>';
@@ -74,7 +74,7 @@ function exec_activites_evenements($mot){
 		echo '</select>';
 		echo '</div></form>';
 		echo "</td></tr></table>\n";
-		
+
 		//TABLEAU
 		echo "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr style='background-color: #DBE1C5;'>\n";
@@ -86,11 +86,11 @@ function exec_activites_evenements($mot){
 		echo '<th>'._T('asso:activite_entete_inscrits')."</th>";
 		echo '<th colspan="3" style="text-align:center;">'._T('asso:activite_entete_action')."</th>";
 		echo '</tr>';
-		
+
 		$max_par_page=30;
 		$debut=intval($_GET['debut']);
 		if (!$debut) { $debut=0; }
-		
+
 		$query = sql_select('*, E.id_evenement, E.titre AS intitule, M.titre AS motact', 'spip_evenements AS E LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot', "date_format( date_debut, '%Y' ) = $annee AND (M.titre like '$mot' OR M.titre IS NULL)", '', "date_debut DESC",  "$debut,$max_par_page");
 		while ($data = sql_fetch($query)) {
 			$date = substr($data['date_debut'],0,10);
@@ -110,28 +110,28 @@ function exec_activites_evenements($mot){
 			echo '</tr>';
 		}
 		echo '</table>';
-		
+
 		echo "\n<table width='100%'>\n";
 		echo '<tr>';
-		
+
 		//SOUS-PAGINATION
 		echo '<td>';
 		$nombre_selection=sql_countsel("spip_evenements", "date_format( date_debut, '%Y' ) = $annee");
 
 		$pages=ceil($nombre_selection/$max_par_page);
-		
+
 		if ($pages == 1) { echo ''; }
 		else {
-			for ($i=0;$i<$pages;$i++) { 
+			for ($i=0;$i<$pages;$i++) {
 				$position= $i * $max_par_page;
-				if ($position == $debut) 
+				if ($position == $debut)
 				  { echo ' <strong>'.$position.' </strong> '; }
 				else { echo '<a href="'.generer_url_ecrire('activites','annee='.$annee.'&debut='.$position.'&imputation='.$imputation).'">'.$position.'</a>  '; }
 			}
 		}
 		echo "</td>\n";
 		echo '</table>';
-		
-		fin_cadre_relief();  
+
+		fin_cadre_relief();
 }
 ?>

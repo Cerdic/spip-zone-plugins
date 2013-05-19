@@ -25,5 +25,5 @@
 	<pipeline nom="delete_tables" />
 	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
 
-	<necessite nom="agenda" compatibilite="[3.0.1;3.11.99]" />
+	<utilise nom="agenda" compatibilite="[3.0.1;3.11.99]" />
 </paquet>

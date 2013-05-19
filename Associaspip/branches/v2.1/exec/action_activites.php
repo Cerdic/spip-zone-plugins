@@ -13,11 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-	
+
 function exec_action_activites(){
-		
+
 	include_spip('inc/autoriser');
-	if (!autoriser('associer', 'activites')) {
+	if (!autoriser('associer', 'activites') OR !test_plugin_actif('agenda')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -37,16 +37,16 @@ function exec_action_activites(){
 		$journal=$_REQUEST['journal'];
 		$statut=$_REQUEST['statut'];
 		$commentaire=$_REQUEST['commentaire'];
-		
+
 		$url_retour = $_REQUEST['url_retour'] ? $_REQUEST['url_retour'] : $_SERVER['HTTP_REFERER'];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:gestion_pour_association')) ;
 		association_onglets();
-			
+
 		echo debut_gauche('', true);
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
+		echo association_date_du_jour();
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite('', true);
