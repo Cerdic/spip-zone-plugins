@@ -448,7 +448,8 @@ var spipGeoportail = jQuery.geoportail =
 				orig.pictureUrl = options.picture;
 				orig.url = options.link;
 			}
-			return orig;
+			else return null;
+			return [ orig ];
 		},
 		// Chargment d'un layer geoportail
 		GeoPortail: function (map, type, titre, desc, service, options)
@@ -500,13 +501,15 @@ var spipGeoportail = jQuery.geoportail =
 					description: desc,
 					metadataURL: options.link,
 					visibility: options.visibility,
-					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+					originators: spipGeoportail.geoserviceLoad.originator(service, options)
 				}
 			);
 		},
 		// Chargment d'un layer KML
 		KML: function (map, type, titre, desc, service, options)
 		{	var n = Number(map.nameInstance.replace('map',''));
+			// Verifier qu'on n'a pas un GPX
+			if (service.url.substr(-3).toUpperCase() == "GPX") type="GPX";
 			spipGeoportail.addLayer ( spipGeoportail.getCarte(n), type, 0, titre, service.url, true,  
 				{	maxExtent: options.maxextent,
 					minZoomLevel: options.minzoom,
@@ -516,7 +519,7 @@ var spipGeoportail = jQuery.geoportail =
 					opacity: options.opacity,
 					visibility: options.visibility,
 					select: options.select,
-					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+					originators: spipGeoportail.geoserviceLoad.originator(service, options)
 				});
 		},
 		// Chargement d'un layer OSM
@@ -533,7 +536,7 @@ var spipGeoportail = jQuery.geoportail =
 					description: desc,
 					metadataURL: options.link,
 					visibility: options.visibility,
-					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+					originators: spipGeoportail.geoserviceLoad.originator(service, options)
 				});
 			map.getMap().addLayer(l);
 		},
@@ -564,7 +567,7 @@ var spipGeoportail = jQuery.geoportail =
 					description: desc,
 					metadataURL: options.link,
 					visibility: options.visibility,
-					originators: [ spipGeoportail.geoserviceLoad.originator(service, options) ]
+					originators: spipGeoportail.geoserviceLoad.originator(service, options)
 				});
 			map.getMap().addLayer(l);
 		}
