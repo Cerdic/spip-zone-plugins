@@ -40,9 +40,9 @@ function exec_association() {
 
 		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);
-		echo debut_cadre_formulaire("",true);
+		echo debut_cadre("",true);
 		echo recuperer_fond('modeles/asso_profil');
-		echo fin_cadre_formulaire(true);
+		echo fin_cadre(true);
 
 		/* Provisoirement supprimé en attendant 1.9.3*/
 
