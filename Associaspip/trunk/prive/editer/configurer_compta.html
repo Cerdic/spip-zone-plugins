@@ -42,7 +42,7 @@
 		<legend><:asso:config_libelle_operations:></legend>
 		<ul>
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_nom=banques, cc_val=#ENV{classe_banques}, obligatoire=1 } />
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements, rc_titre=<:asso:config_libelle_virements_internes:>} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_banques}, rc_val=#ENV{pc_intravirements}, rc_nom=intravirements, rc_titre=<:asso:config_libelle_virements_internes:>} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_charges}, cc_nom=charges, obligatoire=1} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_produits}, cc_nom=produits, obligatoire=1} />
 		<INCLURE{fond=prive/editer/saisir_config_cc, cc_val=#ENV{classe_contributions_volontaires}, cc_nom=contributions_volontaires, obligatoire=1} />
@@ -64,7 +64,7 @@
 	<fieldset>
 		[(#REM)<!--<legend></legend>-->]
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cotisations}, rc_nom=cotisations} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_cotisations}, rc_nom=cotisations} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_cotisations}, dc_nom=cotisations} />
 		</ul>
 	</fieldset>
@@ -87,14 +87,14 @@
 	<fieldset>
 		<legend><:asso:config_libelle_don2argent:></legend>
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_dons}, rc_nom=dons} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_dons}, rc_nom=dons} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_dons}, dc_nom=dons} />
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:config_libelle_don2colis:></legend>
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_colis}, rc_nom=colis} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_contributions_volontaires}, rc_val=#ENV{pc_colis}, rc_nom=colis} />
 		</ul>
 	</fieldset>
 </li>
@@ -115,14 +115,14 @@
 	<fieldset>
 		<legend><:asso:config_libelle_article2vente:></legend>
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_ventes}, rc_nom=ventes} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_ventes}, rc_nom=ventes} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_ventes}, dc_nom=ventes} />
 		</ul>
 	</fieldset>
 	<fieldset>
 		<legend><:asso:config_libelle_frais2port:></legend>
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_frais_envoi}, rc_nom=frais_envoi} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_charges}, rc_val=#ENV{pc_frais_envoi}, rc_nom=frais_envoi} />
 		</ul>
 	</fieldset>
 </fieldset>
@@ -145,7 +145,7 @@
 			<input type="hidden" name="activites" value="" />
 	})]
 		</li>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_activites}, rc_nom=activites} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_activites}, rc_nom=activites} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_activites}, dc_nom=activites} />
 	</ul>
 </fieldset>
@@ -183,7 +183,7 @@
 	<fieldset>
 		<legend><:asso:ressources_libelle_location:></legend>
 		<ul>
-		<INCLURE{fond=prive/editer/saisir_config_rc, rc_val=#ENV{pc_cotisations}, rc_nom=prets} />
+		<INCLURE{fond=prive/editer/saisir_config_rc, rc_classe=#ENV{classe_produits}, rc_val=#ENV{pc_cotisations}, rc_nom=prets} />
 		<INCLURE{fond=prive/editer/saisir_config_dc, dc_val=#ENV{dc_prets}, dc_nom=prets} />
 		</ul>
 	</fieldset>
