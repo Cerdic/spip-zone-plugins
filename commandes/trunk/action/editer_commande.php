@@ -144,10 +144,10 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 	$statut_ancien = $statut = $row['statut'];
 	$date_ancienne = $date = $row['date'];
 	$champs = array();
-	
+
 	$d = isset($c['date']) ? $c['date'] : null;
 	$s = isset($c['statut']) ? $c['statut'] : $statut;
-	
+
 	// On ne modifie le statut que si c'est autorisé
 	if ($s != $statut or ($d AND $d != $date)) {
 		//todo = donner l'autorisation a commandes_paypal_traitement_paypal
@@ -165,18 +165,8 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 
 	$champs['id_auteur'] = $id_auteur;
 
-	
-	// Si le statut est "paye" alors on ajoute la date de paiement
-	if ($s == 'paye'){
-		$champs['date_paiement'] = date('Y-m-d H:i:s');
-	}
-	
-	// Si le statut est "envoye" alors on ajoute la date de paiement
-	if ($s == 'envoye'){
-		$champs['date_envoi'] = date('Y-m-d H:i:s');
-	}
-	
-	// Envoyer aux plugins
+	// Pipeline pre_edition
+	// Les dates de paiement et d'envoi sont mises à jour via cette pipeline
 	$champs = pipeline(
 		'pre_edition',
 		array(
@@ -191,15 +181,14 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 	);
 
 	if (!count($champs)) return;
-	
+
 	// Envoyer les modifications et calculer les héritages
 	editer_commande_details($id_commande, $champs, $calcul_details);
-	
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_commande/$id_commande'");
-	
+
 	if ($date) {
 		$t = strtotime($date);
 		$p = @$GLOBALS['meta']['date_prochain_postdate'];
@@ -207,10 +196,11 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 			ecrire_meta('date_prochain_postdate', $t);
 		}
 	}
-	
+
 	spip_log("instituer_commande : il y a un flux post_edition sur commande",'commandes');
 
-	// Pipeline
+	// Pipeline post-edition
+	// Les notifications sont envoyées via cette pipeline
 	pipeline(
 		'post_edition',
 		array(
@@ -223,26 +213,6 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 			'data' => $champs
 		)
 	);
-	
-	// Notifications
-	include_spip('inc/config');
-	$config = lire_config('commandes');
-	if (($statut != $statut_ancien) &&
-		 ($config['activer']) &&
-		 (in_array($statut,$config['quand'])) &&
-		 ($notifications = charger_fonction('notifications', 'inc', true))
-		) {
-
-		// Determiner l'expediteur
-		$options = array();
-		if( $config['expediteur'] != "facteur" )
-			$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
-
-		// Envoyer au vendeur et au client
-		$notifications('commande_vendeur', $id_commande, $options);
-		if($config['client'])
-			$notifications('commande_client', $id_commande, $options);
-	}
 
 	return '';
 }
