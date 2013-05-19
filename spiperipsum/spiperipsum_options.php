@@ -12,6 +12,7 @@ define ('_SPIPERIPSUM_LECTURE_SECONDE','seconde');
 define ('_SPIPERIPSUM_LECTURE_PSAUME','psaume');
 define ('_SPIPERIPSUM_LECTURE_COMMENTAIRE','commentaire');
 define ('_SPIPERIPSUM_LECTURE_SAINT','saint');
+define ('_SPIPERIPSUM_LECTURE_FETE','fete');
 // -- Lecture par defaut
 define ('_SPIPERIPSUM_LECTURE_DEFAUT','evangile');
 

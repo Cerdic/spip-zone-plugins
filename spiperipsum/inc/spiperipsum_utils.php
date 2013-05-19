@@ -240,8 +240,64 @@ function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
 	// -- Texte de la lecture
 	//    On decoupe le texte en 3 parties : le texte proprement dit, sa reference de traduction et un credit
 	$url = $url_base . '&type=reading&content=' . lecture2code($lecture);
-	$texte = flux2texte($url, $charset, $lettrine);
-	$tableau = array_merge($tableau, $texte);
+	$textes = flux2texte($url, $charset, $lettrine);
+	$tableau = array_merge($tableau, $textes);
+
+	return $tableau;
+}
+
+
+function flux2commentaire($url_base, $charset) {
+	$tableau = array();
+
+	$no_tag = true;
+	// -- titre du commentaire
+	$tableau['titre'] = flux2element($url_base.'&type=comment_t', $charset, $no_tag);
+
+	// -- auteur du commentaire
+	$tableau['auteur'] = flux2element($url_base.'&type=comment_a', $charset, $no_tag);
+
+	// -- source du commentaire
+	$tableau['source'] = flux2element($url_base.'&type=comment_s', $charset, $no_tag);
+
+	// -- texte du commentaire : on n'insere jamais de lettrine
+	$textes = flux2texte($url_base.'&type=comment', $charset, false);
+	$tableau = array_merge($tableau, $textes);
+
+	return $tableau;
+}
+
+
+function flux2saint($url_base, $charset) {
+	$tableau = array('titre' => '', 'url' => '', 'texte' => '');
+
+	$page = recuperer_page($url_base.'&type=saint');
+	if (strpos($page, 'Error : ') === false) {
+		// Traitement du nom seul et de l'url permettant de recuperer les textes
+		// -- nom
+		$balise = extraire_balises($page, 'a');
+		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
+		$tableau['titre'] = preg_replace(',Ü,UimsS', '&dagger;', $titre);
+
+		// -- url
+		$attribut = extraire_attribut($balise, 'onclick');
+		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
+		$tableau['url'] = $url_texte[1];
+
+		// -- Traitement des textes
+		$page = recuperer_page($url_texte[1]);
+		if (strpos($page, 'Error : ') === false) {
+			$contenu = extraire_balise($page, 'div');
+			$textes = extraire_balises($contenu, 'p');
+			foreach($textes as $p) {
+				if ((!extraire_attribut($p, 'align')) AND (!extraire_attribut($p, 'style')))
+					$tableau['texte'] .= $p;
+			}
+			if (!$tableau['texte'])
+				$tableau['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
+			$tableau['texte'] = trim(str_replace('&nbsp;', '', $tableau['texte']));
+		}
+	}
 
 	return $tableau;
 }
@@ -288,38 +344,15 @@ function charger_lectures($langue, $jour) {
 		$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
 
 		// Traitement du commentaire
-		$no_tag = true;
-		// -- titre du commentaire
-		$tableau['commentaire']['titre'] = flux2element($url_base.'&type=comment_t', $charset, $no_tag);
-		// -- auteur du commentaire
-		$tableau['commentaire']['auteur'] = flux2element($url_base.'&type=comment_a', $charset, $no_tag);
-		// -- source du commentaire
-		$tableau['commentaire']['source'] = flux2element($url_base.'&type=comment_s', $charset, $no_tag);
-		// -- texte du commentaire : on n'insere jamais de lettrine
-		$texte = flux2texte($url_base.'&type=comment', $charset, false);
-		$tableau['commentaire'] = array_merge($tableau['commentaire'], $texte);
+		$tableau['commentaire'] = flux2commentaire($url_base, $charset);
 
 		// Traitement du saint du jour
-		// -- Traitement du nom seul et de l'url permettant de recuperer les textes
-		$url = "http://feed.evangelizo.org/reader.php?lang=".$code_langue."&type=saint&date=".date("Ymd", strtotime($date));
+		$tableau['saint'] = flux2saint($url_base, $charset);
+
+		// Traitement de la fête du jour
+		// --
+		$url = $url_base.'&type=feast';
 		$page = recuperer_page($url);
-		$balise = extraire_balises($page, 'a');
-		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
-		$tableau['saint']['titre'] = preg_replace(',Ü,UimsS', '&dagger;', $titre);
-		// -- Traitement des textes
-		$attribut = extraire_attribut($balise, 'onclick');
-		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
- 		$page = recuperer_page($url_texte[1]);
-		$textes = extraire_balises(extraire_balise($page, 'div'), 'p');
-		$tableau['saint']['texte'] = '';		
- 		foreach($textes as $p) {
- 			if ((!extraire_attribut($p, 'align')) AND (!extraire_attribut($p, 'style')))
-				$tableau['saint']['texte'] .= $p;		
-		}
-		if (!$tableau['saint']['texte'])
-			$tableau['saint']['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
-		$tableau['saint']['texte'] = trim(str_replace('&nbsp;', '', $tableau['saint']['texte']));
-		$tableau['saint']['url'] = $url_texte[1];
 
 //		var_dump($tableau);
  		ecrire_fichier($f, serialize($tableau));
