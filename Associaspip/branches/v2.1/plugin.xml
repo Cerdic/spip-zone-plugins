@@ -14,9 +14,6 @@
 	<icon>img_pack/annonce.gif</icon>
 	<options>association_options.php</options>
 	<pipeline>
-		<nom>header_prive</nom>
-	</pipeline>
-	<pipeline>
 		<nom>delete_tables</nom>
 	</pipeline>
 	<pipeline>

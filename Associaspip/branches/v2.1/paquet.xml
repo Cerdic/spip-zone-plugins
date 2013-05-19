@@ -22,7 +22,6 @@
 
 	<menu nom="association_bando" titre="asso:titre_menu_gestion_association" parent="bando_activite" icone="img_pack/annonce.gif" action="association" />
 
-	<pipeline nom="header_prive" />
 	<pipeline nom="delete_tables" />
 	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
 
