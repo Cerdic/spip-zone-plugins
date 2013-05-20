@@ -16,7 +16,7 @@ function exec_ventes() {
 	include_spip('association_modules');
 /// INITIALISATIONS
 	$id_vente = association_passeparam_id('vente');
-	list($id_periode, $critere_periode) = association_passeparam_annee('vente', 'asso_ventes', $id_vente);
+	list($id_periode, $critere_periode) = association_passeparam_periode('vente', 'asso_ventes', $id_vente);
 	if ($id_vente) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 		$etat = '';
 		$suffixe_pdf = "vente$id_vente";

@@ -16,7 +16,7 @@ function exec_dons() {
 	include_spip ('association_modules');
 /// INITIALISATIONS
 	$id_don = association_passeparam_id('don');
-	list($id_periode, $critere_periode) = association_passeparam_annee('don', 'asso_dons', $id_don);
+	list($id_periode, $critere_periode) = association_passeparam_periode('don', 'asso_dons', $id_don);
 	if ($id_don) { // la presence de ce parametre interdit la prise en compte d'autres (a annuler donc si presents dans la requete)
 		$type = '';
 		$suffixe_pdf = "don$id_don";
