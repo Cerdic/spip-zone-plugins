@@ -1,0 +1,36 @@
+[(#REM)<!-- doc: contrib.spip.net/4360#logasso -->]
+<B_logasso_dons>
+#ANCRE_PAGINATION
+<table class="spip asso_tablo" width="100%">
+	<caption><:asso:adherent_titre_historique_dons:></caption>
+	<tr class="row_first">
+		<th><:asso:entete_date:></th>
+		<th><:asso:colis:></th>
+		<th><:asso:argent:></th>
+		<!--th><:asso:contrepartie:></th-->
+	[(#AUTORISER{voir_dons,association,0})
+		<th><:asso:entete_action:></th>
+	]
+	</tr>
+<BOUCLE_logasso_dons(ASSO_DONS)
+	{id_auteur}
+	{date_don>#ENV{periode_du}}
+	{date_don<#ENV{periode_au}}
+	{par date_don}
+	{pagination}
+	>
+	<tr id="don#ID_DON" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td class="date">[(#DATE_DON|appliquer_filtre{association_formater_date})]</td>
+		<td class="text">[(#COLIS|nettoyer_raccourcis_typo)]</td>
+		<td class="decimal">[(#ARGENT|appliquer_filtre{association_formater_prix})]</td>
+		<!--td class="text">[(#CONTREPARTIE|nettoyer_raccourcis_typo)]</td-->
+	[(#AUTORISER{voir_dons,association,#ID_DON})
+		[(#VAL{dons}|association_bouton_list{#ID_DON})]
+	]
+	</tr>
+</BOUCLE_logasso_dons>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_logasso_dons>
+<!--div class="erreur"><:asso:aucun_don:></div-->
+<//B_logasso_dons>

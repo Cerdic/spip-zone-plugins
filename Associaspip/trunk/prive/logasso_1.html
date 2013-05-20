@@ -1,0 +1,37 @@
+[(#REM)<!-- doc: contrib.spip.net/4360#logasso -->]
+<B_logasso_cotisations>
+#ANCRE_PAGINATION
+<table class="spip asso_tablo" width="100%">
+	<caption><:asso:adherent_titre_historique_cotisations:></caption>
+	<tr class="row_first">
+		<th><:asso:entete_date:></th>
+		<th><:asso:adherent_entete_justification:></th>
+		<!--th><:asso:adherent_entete_journal:></th-->
+		<th><:asso:entete_montant:></th>
+	[(#AUTORISER{voir_compta,association,0})
+		<th><:asso:entete_action:></th>
+	]
+	</tr>
+<BOUCLE_logasso_cotisations(ASSO_COMPTES)
+	{imputation=#META{/association/pc_cotisations}}
+	{id_journal=#ENV{id_auteur}}
+	{date_operation>#ENV{periode_du}}
+	{date_operation<#ENV{periode_au}}
+	{par date_operation}
+	{pagination}
+	>
+	<tr id="compte#ID_COMPTE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td class="date">[(#DATE_OPERATION|appliquer_filtre{association_formater_date})]</td>
+		<td class="text">[(#JUSTIFICATION|nettoyer_raccourcis_typo)]</td>
+		<!--td class="text">[(#JOURNAL|nettoyer_raccourcis_typo)]</td-->
+		<td class="decimal">[(#RECETTE|appliquer_filtre{association_formater_prix})]</td>
+	[(#AUTORISER{voir_compta,association,#ID_COMPTE})
+		[(#VAL{comptes}|association_bouton_list{#ID_COMPTE})]
+	]
+	</tr>
+</BOUCLE_logasso_cotisations>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_logasso_cotisations>
+<!--div class="erreur"><:asso:aucune_cotisation:></div-->
+<//B_logasso_cotisations>

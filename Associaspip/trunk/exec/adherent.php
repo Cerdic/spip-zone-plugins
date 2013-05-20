@@ -35,7 +35,7 @@ function exec_adherent() {
 			$statut='visiteur'; break;
 	}
 	include_spip('inc/association_comptabilite');
-	include_spip('inc/adherent');
+	$ids = association_passeparam_compta();
 /// AFFICHAGES_LATERAUX (connexes)
 	echo association_navigation_onglets('titre_onglet_membres', 'adherents');
 /// AFFICHAGES_LATERAUX : INFOS
@@ -68,16 +68,22 @@ function exec_adherent() {
 	echo association_navigation_raccourcis( $raccourcis, 12);
 /// AFFICHAGES_CENTRAUX (corps)
 	debut_cadre_association('annonce.gif', 'membre');
+/// AFFICHAGES_CENTRAUX : FILTRES
+	echo association_form_filtres(array(
+		'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
+	), "adherent",
+		'<td><input type="hidden" name="id" value="'.$id_auteur.'" /> : '. association_formater_date($ids['debut_periode'], 'dtstart') .'&mdash;'. association_formater_date($ids['fin_periode'], 'dtend') .'</td>'
+	);
+/// AFFICHAGES_CENTRAUX : TABLEAU GROUPES + COMMENTAIRE
 	if ($full)
 		echo propre($data['commentaire']);
-/// AFFICHAGES_CENTRAUX : TABLEAUX
 	$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 	if ( autoriser('voir_groupes', 'association') AND sql_count($query_groupes) ) {
 		echo debut_cadre_relief('', TRUE, '', _T('asso:groupes_membre') );
 		echo association_bloc_listehtml2('asso_groupes',
 			$query_groupes, // requete
 			array(
-				'id_groupe' => array('asso:entete_id', 'entier'),
+#				'id_groupe' => array('asso:entete_id', 'entier'),
 				'nom' => array('asso:groupe', 'texte'),
 				'fonction' => array('asso:fonction', 'texte'),
 			), // entetes et formats des donnees
@@ -88,44 +94,29 @@ function exec_adherent() {
 		);
 		echo fin_cadre_relief(TRUE);
 	}
-/** momentanement desactive pour cause de demenagement
-	if ($GLOBALS['association_metas']['recufiscal']) {
-		$t =  _T('cerfa11580:liens_vers_justificatifs');
-			echo debut_cadre_relief('', TRUE, '', $t);
-		$t = voir_adherent_recu_fiscal($id_auteur);
-		echo $t ? $t : _T('asso:recherche_reponse0');
-		echo fin_cadre_relief(TRUE);
+/// AFFICHAGES_CENTRAUX : TABLEAUX
+	$logasso = array();
+	if ($GLOBALS['association_metas']['pc_cotisations'])
+		$logasso[] = 1;
+	if ($GLOBALS['association_metas']['dons'])
+		$logasso[] = 2;
+	if ($GLOBALS['association_metas']['ventes'])
+		$logasso[] = 3;
+	if ($GLOBALS['association_metas']['activites'])
+		$logasso[] = 4;
+	if ($GLOBALS['association_metas']['prets'])
+		$logasso[] = 5;
+	foreach ( pipeline('associaspip', array()) as $plugin=>$boutons ) { // Modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array(array, de, boutons)
+		if ( test_plugin_actif($plugin) && find_in_path("logasso_$plugin.html", 'prive') )
+			$logasso[] = $plugin;
 	}
-*/
-	if ($GLOBALS['association_metas']['pc_cotisations']) {
-		$t = _T('asso:adherent_titre_historique_cotisations');
-		echo debut_cadre_relief('', TRUE, '', $t);
-		echo voir_adherent_cotisations($id_auteur, $full);
-		echo fin_cadre_relief(TRUE);
-	}
-	if ($GLOBALS['association_metas']['activites']) {
-		$t = _T('asso:adherent_titre_historique_activites');
-		echo debut_cadre_relief('', TRUE, '', $t);
-		echo voir_adherent_activites($id_auteur);
-		echo fin_cadre_relief(TRUE);
-	}
-	if ($GLOBALS['association_metas']['ventes']) {
-		$t = _T('asso:adherent_titre_historique_ventes');
-		echo debut_cadre_relief('', TRUE, '', $t);
-		echo voir_adherent_ventes($id_auteur);
-		echo fin_cadre_relief(TRUE);
-	}
-	if ($GLOBALS['association_metas']['dons']) {
-		$t = _T('asso:adherent_titre_historique_dons');
-		echo debut_cadre_relief('', TRUE, '', $t);
-		echo voir_adherent_dons($id_auteur, $full);
-		echo fin_cadre_relief(TRUE);
-	}
-	if ($GLOBALS['association_metas']['prets'])  {
-		$t = _T('asso:adherent_titre_historique_prets');
-		echo debut_cadre_relief('', TRUE, '', $t);
-		echo voir_adherent_prets($id_auteur);
-		echo fin_cadre_relief(TRUE);
+	echo debut_cadre_relief('', TRUE, '', _T('asso:historiques'));
+	foreach ( $logasso as $log ) {
+		echo recuperer_fond("prive/logasso_$log", array(
+			'id_auteur' => $id_auteur,
+			'periode_du' => $ids['debut_periode'],
+			'periode_au' => $ids['fin_periode'],
+		), array('ajax'=>TRUE) );
 	}
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
