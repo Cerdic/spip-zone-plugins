@@ -1,24 +1,25 @@
 <paquet
 	prefix="multilingue"
 	categorie="edition"
-	version="0.3.2"
+	version="0.3.3"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
 	documentation="http://www.spip-contrib.net/Site-multilingue-facile"
 >
 	<nom>Site multilingue facile</nom>
+	<!-- Créer facilement un site multilingue -->
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
-	<auteur lien=http://websimple.be'>Rainer Müller</auteur>
+	<auteur lien="http://websimple.be">Rainer Müller</auteur>
 
-	<licence>GNU/GPL</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
-		<necessite nom="tradrub" compatibilite="[3.0.0;[" />
-		<necessite nom="languepreferee" compatibilite="[0.4.0;[" />				
-		<necessite nom="trad_rub" compatibilite="[1.1.0;]" />				
-		<necessite nom="taa" compatibilite="[1.1.0;[" />		
-		<utilise nom="z" compatibilite="[1.7.17;[" />	
+	<necessite nom="tradrub" compatibilite="[3.0.0;[" />
+	<necessite nom="languepreferee" compatibilite="[0.4.0;[" />
+	<necessite nom="trad_rub" compatibilite="[1.1.0;]" />
+	<necessite nom="taa" compatibilite="[1.1.0;[" />
+	<utilise nom="z" compatibilite="[1.7.17;[" />
 		
-		<menu nom="configurer_multilingue" titre="multilingue:multilingue_titre" parent="menu_configuration" icone="images/multilingue-16.png"/>	
+	<menu nom="configurer_multilingue" titre="multilingue:multilingue_titre" parent="menu_configuration" icone="images/multilingue-16.png"/>
 </paquet>
