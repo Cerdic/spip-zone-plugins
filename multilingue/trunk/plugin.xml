@@ -3,7 +3,7 @@
 	<slogan>Créer facilement un site multilingue</slogan>
 	<auteur>[Rainer M&uuml;ller->http://www.mychacra.net]</auteur>
 	<version>0.3.2</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 		[fr]
