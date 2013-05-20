@@ -10,7 +10,7 @@
 	<nom>Site multilingue facile</nom>
 
 	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
-	<auteur lien='http://www.mychacra.net/'>Rainer Müller</auteur>
+	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 
