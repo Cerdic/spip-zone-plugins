@@ -152,8 +152,8 @@ function page2page_propre($page, $charset, $no_tag=false) {
 	);
 	static $nettoyage_charset = array(
 				'iso-8859-1' => array(
-						'regexp' => array('#Å#UimsS'),
-						'replace' => array('&oelig;')),
+						'regexp' => array('#Å#UimsS', ',Ü,UimsS'),
+						'replace' => array('&oelig;', '&dagger;')),
 	);
 
 	$regexp = $nettoyage_commun['regexp'];
@@ -260,7 +260,7 @@ function flux2commentaire($url_base, $charset) {
 	// -- source du commentaire
 	$tableau['source'] = flux2element($url_base.'&type=comment_s', $charset, $no_tag);
 
-	// -- texte du commentaire : on n'insere jamais de lettrine
+	// -- texte du commentaire : on n'insère jamais de lettrine
 	$textes = flux2texte($url_base.'&type=comment', $charset, false);
 	$tableau = array_merge($tableau, $textes);
 
@@ -277,7 +277,7 @@ function flux2saint($url_base, $charset) {
 		// -- nom
 		$balise = extraire_balises($page, 'a');
 		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
-		$tableau['titre'] = preg_replace(',Ü,UimsS', '&dagger;', $titre);
+		$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
 
 		// -- url
 		$attribut = extraire_attribut($balise, 'onclick');
@@ -287,14 +287,29 @@ function flux2saint($url_base, $charset) {
 		// -- Traitement des textes
 		$page = recuperer_page($url_texte[1]);
 		if (strpos($page, 'Error : ') === false) {
-			$contenu = extraire_balise($page, 'div');
-			$textes = extraire_balises($contenu, 'p');
-			foreach($textes as $p) {
-				if ((!extraire_attribut($p, 'align')) AND (!extraire_attribut($p, 'style')))
-					$tableau['texte'] .= $p;
+			$contenu = extraire_balise($page, 'body');
+			$contenu = strip_tags($contenu, '<p><em>');
+			$contenu = preg_replace(',<em\b.*>,UimsS', '<em>', $contenu);
+			$balises_p = extraire_balises($contenu, 'p');
+			foreach($balises_p as $_cle => $_balise_p) {
+				// TODO : cela fonctionne car le premier <p> est mal fermé donc englobe le deuxième qui contient
+				// TODO : le titre qui devrait être supprimé
+				if (!extraire_attribut($_balise_p, 'align')) {
+					$contenu_p = trim(strip_tags($_balise_p, '<em>'));
+					if ($contenu_p) {
+						if (mb_strlen($contenu_p, $GLOBALS['meta']['charset']) == 1)
+							$tableau['texte'] .= '<span class="lettrine">' . $contenu_p . '</span>';
+						else
+							$tableau['texte'] .= $contenu_p . '<br />';
+					}
+				}
 			}
+
 			if (!$tableau['texte'])
 				$tableau['texte'] = preg_replace(',</?div\b.*>,UimsS', '', extraire_balise($page, 'div'));
+
+			$tableau['texte'] = page2page_propre(importer_charset($tableau['texte'], $charset), $charset, false);
+			$tableau['texte'] = preg_replace('#(<br />)+$#UimS', '', $tableau['texte']);
 			$tableau['texte'] = trim(str_replace('&nbsp;', '', $tableau['texte']));
 		}
 	}
@@ -302,6 +317,11 @@ function flux2saint($url_base, $charset) {
 	return $tableau;
 }
 
+
+function flux2fete($url_base, $charset) {
+	$tableau = array();
+	return $tableau;
+}
 
 // Charger le fichier des lectures et du saint du jour j
 // - si le fichier existe on retourne directement son nom complet
@@ -350,9 +370,8 @@ function charger_lectures($langue, $jour) {
 		$tableau['saint'] = flux2saint($url_base, $charset);
 
 		// Traitement de la fête du jour
-		// --
-		$url = $url_base.'&type=feast';
-		$page = recuperer_page($url);
+		// TODO : à faire
+		$tableau['fete'] = flux2fete($url_base, $charset);
 
 //		var_dump($tableau);
  		ecrire_fichier($f, serialize($tableau));
