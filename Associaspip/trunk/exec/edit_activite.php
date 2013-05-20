@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function exec_edit_activite() {
-	sinon_interdire_acces(autoriser('editer_inscriptions', 'association') OR !(test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) );
+	sinon_interdire_acces(autoriser('editer_inscriptions', 'association') AND (test_plugin_actif('AGENDA') OR test_plugin_actif('SIMPLECAL')) );
 	include_spip ('association_modules');
 /// INITIALISATIONS
 	$id_activite = association_passeparam_id('activite');

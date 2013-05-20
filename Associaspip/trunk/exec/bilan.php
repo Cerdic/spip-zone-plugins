@@ -13,77 +13,77 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 // Version HTML de la synthese des Comptes de Bilan
 function exec_bilan() {
-	if (!autoriser('voir_compta', 'association')) {
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-		include_spip ('association_modules');
-		include_spip ('inc/association_comptabilite');
-		$plan = sql_countsel('spip_asso_plan');
-		$ids = association_passeparam_compta();
-		if ( !($ids_destinations = _request('destinations')) ) // recuperer l'id_destination de la ou des destinations
-			$ids_destinations = array(0); // ...ou creer une entree a 0 dans le tableau
-		include_spip('inc/association_comptabilite');
-		echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
-		// INTRO : rappel de l'exercicee affichee
-		$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
-		$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
-		echo association_tablinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
-		// datation et raccourcis
-		echo association_navigation_raccourcis(array(
-			array('informations_comptables', 'grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-			array('cpte_resultat_titre_general', 'finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-#			array('annexe_titre_general', 'finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-			array('encaisse', 'finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
-		), 16);
-		// on cree les intitule de toutes les destinations dans un tableau
-		$intitule_destinations = array();
-		$destinations = sql_allfetsel('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule'); // on recupere tout dans un tableau : il ne devrait pas y en avoir des masses...
-		foreach ($destinations as $d) { // on veut plutot un tableau des intitules de toutes les destinations, donc une association id_destination=>intitule
-			$intitule_destinations[$d['id_destination']] = $d['intitule'];
-		}
-		if ($GLOBALS['association_metas']['destinations']) { // on affiche une liste de choix de destinations
-			echo debut_cadre_enfonce('',TRUE);
-			echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-			echo association_selectionner_destinations($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>', FALSE); // selecteur de destinations
-			echo fin_cadre_enfonce(TRUE);
-		}
-		debut_cadre_association('finances-24.png', 'resultat_courant');
-		// Filtres
-		echo association_form_filtres(array(
-			'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
-			'destinations' => array($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '', TRUE),
-		), 'bilan');
-		if ($plan) {
-			$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
-			$sel = ', code, intitule, classe';
-			$where = " date_operation>='$ids[debut_periode]' AND date_operation<='$ids[fin_operation]' ";
-			$having =  "classe NOT IN (". sql_quote($GLOBALS['association_metas']['classe_banques']). ',' .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) . ',' .sql_quote($GLOBALS['association_metas']['classe_charges']) . ',' .sql_quote($GLOBALS['association_metas']['classe_produits']) . ')';
-			$order = 'code';
-		} else {
-			$join = $sel = $where = $having = $order = '';
-		}
-		$classes = array(
-			sql_quote($GLOBALS['association_metas']['classe_charges']),
-			sql_quote($GLOBALS['association_metas']['classe_produits']),
-		);
-		foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
-			// TABLEAU EXPLOITATION
-			echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
-			association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
-			if(autoriser('exporter_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
-			  echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');
-			  if (test_plugin_actif('FPDF')) { // impression en PDF
-			    echo "<a href='".generer_action_auteur('pdf_comptesresultat', 0) ."'>PDF</a> ";
-			  }
-			  export_compte(array('id_periode' => 0, 'type_periode' => 'annee'), 'x', false) ;
-			  echo "\n</div>";
-			}
-			echo fin_cadre_relief(TRUE);
-		}
-//		bilan_encaisse();
-		fin_page_association();
+	sinon_interdire_acces(autoriser('voir_compta', 'association'));
+	include_spip('association_modules');
+/// INITIALISATIONS
+	include_spip ('inc/association_comptabilite');
+	$plan = sql_countsel('spip_asso_plan');
+	$ids = association_passeparam_compta();
+	if ( !($ids_destinations = _request('destinations')) ) // recuperer l'id_destination de la ou des destinations
+		$ids_destinations = array(0); // ...ou creer une entree a 0 dans le tableau
+/// AFFICHAGES_LATERAUX (connexes)
+	echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
+/// AFFICHAGES_LATERAUX : INTRO : rappel de l'exercicee affichee
+	$infos['exercice_entete_debut'] = association_formater_date($ids['debut_periode'], 'dtstart');
+	$infos['exercice_entete_fin'] = association_formater_date($ids['fin_periode'], 'dtend');
+	echo association_tablinfos_intro($ids['titre_periode'], 'exercice', $ids['id_periode'], $infos);
+/// AFFICHAGES_LATERAUX : RACCOURCIS
+	echo association_navigation_raccourcis(array(
+		array('informations_comptables', 'grille-24.png', array('comptes', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+		array('cpte_resultat_titre_general', 'finances-24.png', array('compte_resultat', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+#		array('annexe_titre_general', 'finances-24.png', array('compte_annexe', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+		array('encaisse', 'finances-24.png', array('encaisse', "$ids[type_periode]=$ids[id_periode]"), array('voir_compta', 'association') ),
+	), 16);
+/// AFFICHAGES_LATERAUX : Form-
+	// on cree les intitule de toutes les destinations dans un tableau
+	$intitule_destinations = array();
+	$destinations = sql_allfetsel('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule'); // on recupere tout dans un tableau : il ne devrait pas y en avoir des masses...
+	foreach ($destinations as $d) { // on veut plutot un tableau des intitules de toutes les destinations, donc une association id_destination=>intitule
+		$intitule_destinations[$d['id_destination']] = $d['intitule'];
 	}
+	if ($GLOBALS['association_metas']['destinations']) { // on affiche une liste de choix de destinations
+		echo debut_cadre_enfonce('',TRUE);
+		echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
+		echo association_selectionner_destinations($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>', FALSE); // selecteur de destinations
+		echo fin_cadre_enfonce(TRUE);
+	}
+/// AFFICHAGES_CENTRAUX (corps)
+	debut_cadre_association('finances-24.png', 'resultat_courant');
+/// AFFICHAGES_CENTRAUX : FILTRES
+	echo association_form_filtres(array(
+		'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
+		'destinations' => array($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '', TRUE),
+	), 'bilan');
+	if ($plan) {
+		$join = ' RIGHT JOIN spip_asso_plan ON imputation=code';
+		$sel = ', code, intitule, classe';
+		$where = " date_operation>='$ids[debut_periode]' AND date_operation<='$ids[fin_operation]' ";
+		$having =  "classe NOT IN (". sql_quote($GLOBALS['association_metas']['classe_banques']). ',' .sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']) . ',' .sql_quote($GLOBALS['association_metas']['classe_charges']) . ',' .sql_quote($GLOBALS['association_metas']['classe_produits']) . ')';
+		$order = 'code';
+	} else {
+		$join = $sel = $where = $having = $order = '';
+	}
+	$classes = array(
+		sql_quote($GLOBALS['association_metas']['classe_charges']),
+		sql_quote($GLOBALS['association_metas']['classe_produits']),
+	);
+/// AFFICHAGES_CENTRAUX : TABLEAUX : bilans
+	foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
+		echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
+		association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
+		if(autoriser('exporter_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
+			echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');
+			if (test_plugin_actif('FPDF')) { // impression en PDF
+				echo "<a href='".generer_action_auteur('pdf_comptesresultat', 0) ."'>PDF</a> ";
+			 }
+			export_compte(array('id_periode' => 0, 'type_periode' => 'annee'), 'x', false) ;
+			echo "\n</div>";
+		}
+		echo fin_cadre_relief(TRUE);
+	}
+/// AFFICHAGES_CENTRAUX : TABLEAU : encaisse
+/// AFFICHAGES_CENTRAUX : FIN
+	fin_page_association();
 }
 
 /* Dans la fonction suivante on dissocie la "lecture" et "l'affichage"
