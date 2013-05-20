@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducci&#243;n de secciones repensada[de]Rubriken&#252;bersetzung mal Anders</multi></nom>
 	<slogan>Naviguer entre les rubriques traduites</slogan>
-	<auteur>[Rainer M&#252;ller->http://www.mychacra.net]</auteur>
+	<auteur>[Rainer M&#252;ller->http://websimple.be]</auteur>
 	<version>0.1.2</version>
 	<etat>stable</etat>
 	<description>
