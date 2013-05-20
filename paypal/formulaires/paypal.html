@@ -1,18 +1,64 @@
+[(#REM)
+	Formulaire de paiement Paypal : on peut soit acheter, soit s'abonner
+	Plus d'info sur les paramètres sur le site de paypal:
+	https://www.paypalobjects.com/IntegrationCenter/ic_std-variable-ref-cart-upload.html
+
+	paramètres:
+		- shopping_url:          URL de la boutique, défaut = adresse du site
+		- redirect_ok:           URL de redirection une fois le paiement effectué
+		- libelle:               Libellé décrivant la commande
+		- custom:                Variable de transit jamais présenté au client (?)
+		- invoice|identifiant:   chaine unique identifiant la commande
+		- bouton_paypal_acheter: URL de l'image personnalisée du bouton Paypal
+		- shipping:              frais de port, défaut = 0
+		- handling_cart:         idem shipping (?)
+
+		# Achat ou Abonnement ?
+		- type:                  Détermine si on achète ou si on s'abonne
+		                         "abonnement" = s'abonner
+		                         ""           = acheter
+		# Pour un achat, soit on indique "details", soit on indique "prix"
+		# Pour un abonnement, on indique "prix", "duree" et "periode"
+		- details:               Tableau associatif détaillant le contenu de l'achat, avec prix et quantité pour chaque article
+		                         array(0=>array(descriptif=>xx, prix=>yy, quantite=>zz), 1=>array(...))
+		- prix:                  Prix de l'achat ou de l'abonnement
+		- duree:                 Durée de l'abonnement
+		- periode:               ?
+
+		# livraison
+		- no_shipping:           Paypal demandera-t-il à l'acheteur son adresse de livraison ? défaut = 1
+		                         0: on demande, mais pas obligatoire
+		                         1: pas obligatoire
+		                         2: obligatoire
+
+		# Pour pré-remplir les champs du formulaire d'inscription de l'acheteur sur le site de paypal
+		- email:                 Email
+		- first_name:            Prénom
+		- last_name:             Nom
+		- address1:              Voie
+		- address2:              Complément
+		- city:                  Ville
+		- zip:                   Code postal
+		- country:               Code du pays (2 lettres, idem plugin "pays")
+		- night_phone_b:         Numéro de téléphone
+]
 <div class="formulaire_spip formulaire_paypal">
-	
+
+[(#REM) URL de soumission : défini dans la fonction charger d'après une constante + configuration du plugin ]
 <form action="[(#ENV{soumission})]" method="post"><div class="boutons">
 
-[(#REM) Qui vend ?]
+[(#REM) Qui vend ? = adresse email du compte paypal du vendeur, définie dans la fonction charger d'après la configuration du plugin ]
 <input name="business" type="hidden" value="[(#ENV{identifiant_vendeur})]" />
 
-[(#REM) Quelle devise ?]
+[(#REM) Quelle devise ? Défini dans la fonction charger d'après la configuration du plugin ]
 <input name="currency_code" type="hidden" value="[(#ENV{currency_code})]" />
 
 [(#REM) Frais d'envoi ? ]
 <input name="shipping" type="hidden" value="#ENV{shipping,0.00}" />
 [<input name="handling_cart" type="hidden" value="(#ENV{handling_cart})" />]
 
-[(#REM) Informations de facturaction ]
+[(#REM) Informations de facturation
+        Sert à pré-remplir les champs du formulaire d'inscription sur le site paypal si l'acheteur n'est pas connecté ]
 [<input type="hidden" name="email" value="(#ENV{email})" />]
 [<input type="hidden" name="first_name" value="(#ENV{first_name})" />]
 [<input type="hidden" name="last_name" value="(#ENV{last_name})" />]
@@ -46,7 +92,7 @@
 [(#REM) Le bouton et son type ]
 
 
-[(#REM) C'est quoi qu'on achette ? ]
+[(#REM) C'est quoi qu'on achete ? ]
 [<input name="item_name" type="hidden" value="(#ENV{libelle})" />]
 [<input name="custom" type="hidden" value="(#ENV{custom})" />]
 [<input name="invoice" type="hidden" value="(#ENV{invoice, #ENV{identifiant}})" />]
