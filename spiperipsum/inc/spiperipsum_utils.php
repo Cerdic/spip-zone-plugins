@@ -275,12 +275,12 @@ function flux2saint($url_base, $charset) {
 	if (strpos($page, 'Error : ') === false) {
 		// Traitement du nom seul et de l'url permettant de recuperer les textes
 		// -- nom
-		$balise = extraire_balises($page, 'a');
-		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balise[0]);
+		$balises_a = extraire_balises($page, 'a');
+		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
 		$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
 
 		// -- url
-		$attribut = extraire_attribut($balise, 'onclick');
+		$attribut = extraire_attribut($balises_a, 'onclick');
 		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
 		$tableau['url'] = $url_texte[1];
 
@@ -319,7 +319,21 @@ function flux2saint($url_base, $charset) {
 
 
 function flux2fete($url_base, $charset) {
-	$tableau = array();
+	$tableau = array('titre' => '', 'url' => '', 'texte' => '');
+
+	$page = recuperer_page($url_base.'&type=feast');
+	if ($page AND (strpos($page, 'Error : ') === false)) {
+		// -- nom
+		$balises_a = extraire_balises($page, 'a');
+		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
+		$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
+
+		// -- url
+		$attribut = extraire_attribut($balises_a, 'onclick');
+		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
+		$tableau['url'] = $url_texte[1];
+	}
+
 	return $tableau;
 }
 
@@ -331,9 +345,7 @@ function charger_lectures($langue, $jour) {
 	include_spip('inc/charsets');
 
 	$date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? date('Y-m-d') : $jour;
-//	$date = '2012-10-20';
 	$code_langue = langue2code($langue);
-//	$code_langue = 'MG';
 	$charset = code2charset($code_langue);
 	$lettrine = ($code_langue == 'AR' OR $code_langue == 'ARM') ? false : true;
 
