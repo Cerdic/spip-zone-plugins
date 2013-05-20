@@ -152,9 +152,6 @@ function association_bouton_list($objet, $args='', $tag='td') {
 		case 'inscrits_activite' :
 			$titre = 'activite_bouton_voir_liste_inscriptions';
 			break;
-		case 'membres_groupe' :
-			$titre = 'voir_membres_groupe';
-			break;
 		case 'prets' :
 			$titre = 'prets_nav_gerer';
 			break;

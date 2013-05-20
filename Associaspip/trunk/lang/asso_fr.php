@@ -585,8 +585,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'groupe_74' => 'Éditer les participations aux activités',
 	'groupe_75' => 'Voir le détail des participations aux activités',
 	'groupe_76' => 'Voir la liste des participations aux activités',
-	'groupe_membres' => 'Membres du groupe',
-	'groupes_membre' => 'Groupes du membre :',
+	'groupe_membres' => 'Membre(s) du groupe',
+	'groupes_membre' => 'Groupe(s) du membre :',
+
+// H
+	'historique_membre' => 'Historique du membre',
 
 // I
 	'import_nom_auteur_nom' => 'Nom',
@@ -631,7 +634,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_desactive_gestion_comptable' => 'Gestion d\'association&nbsp;: à partir de cette mise à jour, il n\'est plus possible d\'activer la gestion comptable si le plan comptable n\'est pas valide. Votre plan comptable n\'est pas valide, la gestion comptable a donc été desactivée. Pour la reactiver, rendez vous sur la page d\'édition du plan comptable puis celle de configuration du plugin',
 	'maj_desactive_modules' => 'Gestion d\'association&nbsp;: à partir de cette mise à jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activités si la gestion comptable n\'est pas activée. Votre configuration actuelle du plugin n\'étant plus autorisée, les modules de gestions activés ont été désactivés (aucune donné n\'a été éffacée). Rendez vous sur la page de configuration du plugin pour les réactiver.',
 	'marges_des_etiquettes' => 'Marge des étiquettes',
-	'membre' => 'Membre',
 	'membre_ajoute' => ' membre inséré dans la liste des membres',
 	'membres' => 'Membres',
 	'membres_ajoutes' => ' membres insérés dans la liste des membres',

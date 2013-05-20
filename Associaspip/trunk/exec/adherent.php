@@ -46,6 +46,15 @@ function exec_adherent() {
 	if ($GLOBALS['association_metas']['id_asso']) {
 		$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 	}
+	$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
+	if ( autoriser('voir_groupes', 'association') AND sql_count($query_groupes) ) {
+		$liste_groupes = '<dl>';
+		while ( $row = sql_fetch($query_groupes) ) {
+			$liste_groupes .= '<dt><a class="spip_in" title="'. _T('asso:bouton_voir') .'" href="'. generer_url_ecrire('membres_groupe', 'id='.$row['id_groupe']) .'">'.$row['nom'].'</a></dt>';
+			$liste_groupes .= '<dd>'.$row['fonction'].'</dd>';
+		}
+		$infos['groupes_membre'] = "$liste_groupes</dl>";
+	}
 	if (isset($adresses[$id_auteur]))
 		$infos['coordonnees:adresses'] = $adresses[$id_auteur];
 	if (isset($emails[$id_auteur]))
@@ -67,34 +76,16 @@ function exec_adherent() {
 		$raccourcis[] = array('ajouter_un_don', 'ajout-24.png', array('ajout_don', "id_auteur=$id_auteur"), array('editer_dons', 'association', $id_auteur) );
 	echo association_navigation_raccourcis( $raccourcis, 12);
 /// AFFICHAGES_CENTRAUX (corps)
-	debut_cadre_association('annonce.gif', 'membre');
+	debut_cadre_association('annonce.gif', 'historique_membre');
 /// AFFICHAGES_CENTRAUX : FILTRES
 	echo association_form_filtres(array(
 		'periode' => array($ids['id_periode'], 'asso_comptes', 'operation'),
 	), "adherent",
-		'<td><input type="hidden" name="id" value="'.$id_auteur.'" /> : '. association_formater_date($ids['debut_periode'], 'dtstart') .'&mdash;'. association_formater_date($ids['fin_periode'], 'dtend') .'</td>'
+		'<td><input type="hidden" name="id" value="'.$id_auteur.'" /> '. association_formater_date($ids['debut_periode'], 'dtstart') .' &mdash; '. association_formater_date($ids['fin_periode'], 'dtend') .'</td>'
 	);
-/// AFFICHAGES_CENTRAUX : TABLEAU GROUPES + COMMENTAIRE
-	if ($full)
-		echo propre($data['commentaire']);
-	$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
-	if ( autoriser('voir_groupes', 'association') AND sql_count($query_groupes) ) {
-		echo debut_cadre_relief('', TRUE, '', _T('asso:groupes_membre') );
-		echo association_bloc_listehtml2('asso_groupes',
-			$query_groupes, // requete
-			array(
-#				'id_groupe' => array('asso:entete_id', 'entier'),
-				'nom' => array('asso:groupe', 'texte'),
-				'fonction' => array('asso:fonction', 'texte'),
-			), // entetes et formats des donnees
-			array(
-				array('list', 'membres_groupe', 'id=$$')
-			), // boutons d'action
-			'id_groupe' // champ portant la cle des lignes et des boutons
-		);
-		echo fin_cadre_relief(TRUE);
-	}
-/// AFFICHAGES_CENTRAUX : TABLEAUX
+/// AFFICHAGES_CENTRAUX : TABLEAUX HISTORIQUES + COMMENTAIRE
+	if ($full AND $data['commentaire'])
+		echo propre($data['commentaire']) .'<hr />';
 	$logasso = array();
 	if ($GLOBALS['association_metas']['pc_cotisations'])
 		$logasso[] = 1;
@@ -110,13 +101,12 @@ function exec_adherent() {
 		if ( test_plugin_actif($plugin) && find_in_path("logasso_$plugin.html", 'prive') )
 			$logasso[] = $plugin;
 	}
-	echo debut_cadre_relief('', TRUE, '', _T('asso:historiques'));
 	foreach ( $logasso as $log ) {
-		echo recuperer_fond("prive/logasso_$log", array(
+		echo '<div style="margin:1em 0;">'. recuperer_fond("prive/logasso_$log", array(
 			'id_auteur' => $id_auteur,
 			'periode_du' => $ids['debut_periode'],
 			'periode_au' => $ids['fin_periode'],
-		), array('ajax'=>TRUE) );
+		), array('ajax'=>TRUE) ) .'</div>';
 	}
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
