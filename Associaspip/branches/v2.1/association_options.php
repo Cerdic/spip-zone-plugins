@@ -132,11 +132,6 @@ function association_telfr($n) {
 	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
 }
 
-function association_header_prive($flux){
-	$c = direction_css(find_in_path('association.css'));
-	return "$flux\n<link rel='stylesheet' type='text/css' href='$c' />";
-}
-
 function association_delete_tables($flux){
   spip_unlink(cache_meta('association_metas'));
 }
