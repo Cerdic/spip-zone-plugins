@@ -2,7 +2,7 @@
 	   prefix="taa"
 	   categorie="edition"
 	   version="1.3.8"
-	   etat="test"
+	   etat="stable"
 	   compatibilite="[3.0.0;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
 	   documentation="http://www.spip-contrib.net/Traductions-d-articles-autrement-3"
