@@ -11,6 +11,7 @@
 
 	<auteur lien="http://ldd.fr">Les Développements Durables</auteur>
 	<credit lien="http://www.openarchives.org">Open Archives Initiative</credit>
-
+	<credit lien="http://wiki.eprints.org/w/OAI_XSLT">Christopher Gutteridge, University of Southampton</credit>
+	
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 </paquet>
