@@ -21,8 +21,10 @@ function exec_adherents() {
 		$args_sql = array();
 		list($statut_interne, $critere) = association_passeparam_statut('interne', 'defaut');
 		if ($statut_interne != 'defaut') {
-			$args_url[] = "statut=$statut_interne";
-			$args_sql[] = "m.statut_interne=' $statute_interne'"; // = $critere; // :-S
+			$args_url[] = "statut_interne=$statut_interne";
+			$args_sql[] = "m.$critere";
+		} else {
+			$args_sql[] = "$critere";
 		}
 		$id_categorie = association_recuperer_entier('categorie');
 		if ($id_categorie) {
@@ -94,7 +96,7 @@ function exec_adherents() {
 /// AFFICHAGES_CENTRAUX : FILTRES
 	$filtre_categorie = '<select name="categorie" onchange="form.submit()">';
 	$filtre_categorie .= '<option value="" ';
-	$filtre_categorie .= (($id_categorie=='%' || $id_categorie='')?' selected="selected"':'');
+	$filtre_categorie .= (($id_categorie=='%' || !$id_categorie)?' selected="selected"':'');
 	$filtre_categorie .= '>'. _T('asso:entete_tous') .'</option>';
 	$sql = sql_select(
 		'id_categorie, valeur, libelle',
@@ -116,30 +118,31 @@ function exec_adherents() {
 		'categorie' => $filtre_categorie,
 	));
 /// AFFICHAGES_CENTRAUX : TABLEAU
-	echo adherents_liste($critere, $statut_interne, $args_url);
+	echo adherents_liste($critere, $statut_interne, $args_url, $jointure_groupe);
 	fin_page_association();
 }
 
 
 /**
  * liste des adherents
- *
+ *   Filtre statut interne (pour la selection d'action...)
  * @param string $critere
  *   SQL de restriction selon les filtres
- * @param string $statut_interne
- *   Filtre statut interne
  * @param array $args_url
- *   Complement (parametres) d'URL pour la pagination
+ *   Liste de parametres d'URL pour la pagination
+ * @param string $jointure
+ *   SQL de jointure pour la liaison aux groupes
  * @return string
  *   Code HTML du tableau affichant la liste des membres en fonction des
  * filtres actifs et de la configuration (champs affiches ou pas)
  */
-function adherents_liste($critere, $statut_interne, $args_url) {
+function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
 	$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
-	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure_groupe", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
-	$auteurs = '';
+	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
+//	echo "<div style='background:yellow; color:red;'>SQL WHERE : $critere</div>"; // query check
+	$tbd = '';
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	while ($data = sql_fetch($query)) {
 		$id_auteur = $data['id_auteur'];
@@ -193,107 +196,100 @@ function adherents_liste($critere, $statut_interne, $args_url) {
 				$icone = 'rien.gif';
 				break;
 		}
-		$auteurs .= "<tr class='$class'>\n";
-		if ($GLOBALS['association_metas']['aff_id_auteur']) {
-			$auteurs .= '<td class="integer">'
+		$tbd .= "<tr class='$class'>\n";
+		if ($GLOBALS['association_metas']['aff_id_auteur'])
+			$tbd .= '<td class="integer">'
 			. $id_auteur.'</td>';
-		}
-		if ($GLOBALS['association_metas']['aff_photo']) {
-			$auteurs .= '<td class="photo logo centre">'.$logo.'</td>';
-		}
+		if ($GLOBALS['association_metas']['aff_photo'])
+			$tbd .= '<td class="photo logo centre">'.$logo.'</td>';
 		if ($GLOBALS['association_metas']['aff_civilite'] && $GLOBALS['association_metas']['civilite'])
-			$auteurs .= '<td class="honorific-prefix">'.$data['sexe'].'</td>';
-		$auteurs .= '<td class="family-name">'
+			$tbd .= '<td class="honorific-prefix">'.$data['sexe'].'</td>';
+		$tbd .= '<td class="family-name">'
 		.$mail.'</td>';
 		if ($GLOBALS['association_metas']['aff_prenom'] && $GLOBALS['association_metas']['prenom'])
-				$auteurs .= '<td class="given-name">'.$data['prenom'].'</td>';
+			$tbd .= '<td class="given-name">'.$data['prenom'].'</td>';
 		if ($GLOBALS['association_metas']['aff_groupes']) {
-			$auteurs .= '<td class="organisation-unit">';
+			$tbd .= '<td class="organisation-unit">';
 			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
-				$auteurs .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
+				$tbd .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
 				while ($row_groupes = sql_fetch($query_groupes)) {
-					$auteurs .= ', <a href="'.generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
+					$tbd .= ', <a href="'.generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
 				}
 			}
-			$auteurs .= '</td>';
+			$tbd .= '</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso']) {
-			$auteurs .= '<td class="text">'.$data['id_asso'].'</td>';
-		}
+		if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso'])
+			$tbd .= '<td class="text">'.$data['id_asso'].'</td>';
 		if ($GLOBALS['association_metas']['aff_categorie']) {
-			$auteurs .= '<td class="text">'.
+			$tbd .= '<td class="text">'.
 			( $data['id_categorie']
 				? sql_getfetsel('valeur', 'spip_asso_categories', "id_categorie=$data[id_categorie]" )
 				: $data['categorie']
 			) .'</td>';
 		}
-		if ($GLOBALS['association_metas']['aff_validite']) {
-			$auteurs .= '<td class="date">'. association_formater_date($data['date_validite'], 'dtend') .'</td>';
-		}
-		$auteurs .= '<td class="action">'
-		. '<a href="'. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur") .'">'. http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur') ) .'</a></td>';
+		if ($GLOBALS['association_metas']['aff_validite'])
+			$tbd .= '<td class="date">'. association_formater_date($data['date_validite'], 'dtend') .'</td>';
+		$tbd .= '<td class="action">'
+		.'<a href="'. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur") .'">'. http_img_pack($icone,'','', _T('asso:adherent_label_modifier_visiteur') ) .'</a></td>';
 		if (autoriser('editer_membres', 'association')) {
-			$auteurs .= association_bouton_paye('ajout_cotisation','id='.$id_auteur)
+			$tbd .= association_bouton_paye('ajout_cotisation','id='.$id_auteur)
 			. association_bouton_edit('adherent', "id=$id_auteur");
 		}
-		$auteurs .= association_bouton_list('adherent','id='.$id_auteur)
+		$tbd .= association_bouton_list('adherent','id='.$id_auteur)
 		. association_bouton_coch('id_auteurs', $id_auteur)
 		. "</tr>\n";
 	}
-	$res = "<table width='100%' class='asso_tablo' id='liste_adherents'>\n"
-	. '<tr class="row_first">';
+	if (!$tbd)
+		return _T('asso:recherche_reponse0');
+	$thd = '<tr class="row_first">';
 	if ($GLOBALS['association_metas']['aff_id_auteur'])
-		$res .= '<th>'. _T('asso:entete_id') .'</th>';
+		$thd .= '<th>'. _T('asso:entete_id') .'</th>';
 	if ($GLOBALS['association_metas']['aff_photo'])
-		$res .= '<th>'._T('asso:adherent_libelle_photo') .'</th>';
+		$thd .= '<th>'._T('asso:adherent_libelle_photo') .'</th>';
 	if ($GLOBALS['association_metas']['aff_civilite'] && $GLOBALS['association_metas']['civilite'])
-		$res .= '<th>'. _T('asso:adherent_libelle_sexe') .'</th>';
-	$res .= '<th>'. _T('asso:adherent_libelle_nom_famille') .'</th>';
+		$thd .= '<th>'. _T('asso:adherent_libelle_sexe') .'</th>';
+	$thd .= '<th>'. _T('asso:adherent_libelle_nom_famille') .'</th>';
 	if ($GLOBALS['association_metas']['aff_prenom'] && $GLOBALS['association_metas']['prenom'])
-		$res .= '<th>'. _T('asso:adherent_libelle_prenom') .'</th>';
-	if ($GLOBALS['association_metas']['aff_groupes']) {
-		$res .= '<th>'. _T('asso:adherent_libelle_groupes') .'</th>';
-	}
-	if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso']) {
-		$res .= '<th>'. _T('asso:adherent_libelle_id_asso') .'</th>';
-	}
-	if ($GLOBALS['association_metas']['aff_categorie']) {
-		$res .= '<th>'. _T('asso:adherent_libelle_categorie') .'</th>';
-	}
-	if ($GLOBALS['association_metas']['aff_validite']) {
-		$res .= '<th>'. _T('asso:adherent_libelle_validite') .'</th>';
-	}
-	$res .= '<th colspan="'
+		$thd .= '<th>'. _T('asso:adherent_libelle_prenom') .'</th>';
+	if ($GLOBALS['association_metas']['aff_groupes'])
+		$thd .= '<th>'. _T('asso:adherent_libelle_groupes') .'</th>';
+	if ($GLOBALS['association_metas']['aff_id_asso'] && $GLOBALS['association_metas']['id_asso'])
+		$thd .= '<th>'. _T('asso:adherent_libelle_id_asso') .'</th>';
+	if ($GLOBALS['association_metas']['aff_categorie'])
+		$thd .= '<th>'. _T('asso:adherent_libelle_categorie') .'</th>';
+	if ($GLOBALS['association_metas']['aff_validite'])
+		$thd .= '<th>'. _T('asso:adherent_libelle_validite') .'</th>';
+	$thd .= '<th colspan="'
 	  . (autoriser('editer_membres', 'association')?4:2)
 	  .'" class="actions">'._T('asso:entete_actions')
 	  ."</th>\n"
 	  . '<th><input title="'._T('asso:selectionner_tout')
 	  .'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
-	. '</tr>'
-	. $auteurs
-	. "\n</table>\n";
+	. "</tr>\n";
+	$res = "<table width='100%' class='asso_tablo' id='liste_adherents'>\n";
+	$res .= $thd.$tbd.$thd. "</table>\n";
 /// AFFICHAGES_CENTRAUX : PAGINATION
 	$res .= "<table width='100%' class='asso_tablo_filtres'><tr>\n";
 	if (autoriser('editer_membres', 'association', 100)) {
 		$nav .= "<td align='right' class='formulaire'>\n";
-		if ($auteurs) {
+		if ($tbd) {
 			if (autoriser('editer_membres', 'association')) {
-				$nav .=  '<select name="action_adherents"><option value="">'._T('asso:choisir_action')."</option>\n<option value='desactive'>"
+				$nav .= '<select name="action_adherents"><option value="">'._T('asso:choisir_action')."</option>\n<option value='desactive'>"
 				.($statut_interne=='sorti' ? _T('asso:reactiver_adherent') : _T('asso:desactiver_adherent'))
 				."</option>\n<option value='delete'>"._T('asso:supprimer_adherent')."</option>\n";
 			}
 			if (autoriser('editer_groupes', 'association', 100)) {
-				$nav .=sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
+				$nav .= sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
 			}
-			$nav .='</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
+			$nav .= '</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
 		}
 		$nav .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 		.  '</td>';
 	}
 	$res .= association_form_souspage(array('spip_asso_membres', $critere), 'adherents', $args_url, $nav);
 // FIN
-	return 	generer_form_ecrire('action_adherents', $res);
+	return generer_form_ecrire('action_adherents', $res);
 }
 
 ?>

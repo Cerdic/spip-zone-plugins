@@ -2105,6 +2105,7 @@ function association_form_etiquettes($where_adherents, $jointure_adherents='', $
  *   'nom_ou_alias_du_champ' => array('chaine_de:langue_du_libelle_d_entete', 'nom_du_format', 'parametre1', ...)
  *   Le nom du format est celui de la fonction de formatage du meme nom prefixee de association_formater_
  * @param array $boutons
+ *   Liste des boutons d'action ; chaque element de la liste est sous la forme :
  *   array('bouton', 'parametre1', ...)
  *   Le nom du type de bouton est celui de la fonction d'action du meme nom prefixee de association_bouton_
  * @param string $cle1
@@ -2126,39 +2127,74 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 			$objet = substr($cle1, 3);
 		else
 			$objet = $cle1;
+	} elseif( $table ) {
+		$objet = $table;
+	} else {
+		$objet = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
 	}
-	$res = '';
-	foreach ($presentation as &$param) { // affecter le tableau au passage
-		$entete = array_shift($param);
-		$res .= '<th scope="col">'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
-	}
-	$lignes = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection);
-//	sql_free($reponse_sql);
 
-	if (!$lignes)
+	$thd = '<tr class="row_first">'; // Ligne de entetes (Table HeaD)
+	foreach ($presentation as &$param) { // colonnes de titres
+		$entete = array_shift($param); // sortir l'entete //!\ affecte directement le tableau (passage en reference)
+		$thd .= '<th scope="col">'. ($entete ? association_langue($entete) : '&nbsp;' ) ."</th>\n";
+	}
+
+	$tbd = association_bloc_tr($reponse_sql, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection); // Ligne de corps (Table BoDy)
+	if (!$tbd)
+		//!\ l'appel devrait etre logiquement au debut (apres normalisation de cle1)
+		//!\ mais se fait seulement apres le foreach ci-dessus qui modifie
+		//!\ $presentation afin qu'il soit sous la bonne forme attendue...
 		return _T('asso:recherche_reponse0');
 
 	if ( count($boutons) ) { // colonne(s) de bouton(s) d'action
-		$res .= '<th scope="col" colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
+		$thd .= '<th scope="col" colspan="'. count($boutons) .'" class="actions">'. _T('asso:entete_action' .(count($boutons)-1?'s':'')) ."</th>\n";
 	}
+	$thd .= "</tr>\n";
 
-	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n<tr class='row_first'>$res</tr>\n$lignes</table>\n";
-
-
+	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n$thd$thb\n$thd</table>\n";
 	if ( $cle1 && $selection ) {
-// comme on ne peut placer un evenement "onLoad" que sur une ressource externe
-// (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT inclus
-// (tout juste apres ou dans HEAD si possible)
+		// comme on ne peut placer un evenement "OnLoad" que sur une ressource
+		// externe (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT
+		// inclus (tout juste apres ou dans HEAD si possible)
 		$res .= '<script type="text/javascript"> document.getElementById("'.$objet.$selection.'").scrollIntoView(true); </script>' ;
 	}
 	return $res;
 }
 
+/**
+ * Lignes de tableau HTML du resultat d'une requete
+ *
+ * @param ressource $query
+ *   Ressource de requete sql_select sur cette table (avec jointure eventuelle)
+ * @param array $extra
+ *   Liste de classes supplemetaires appliquees alternativement aux lignes ;
+ *   Ou tableau des valeur=>classe supplementaires appliquees aux lignes presentant la valeur
+ * @param string $cle1
+ *   Nom (ou alias) de la colonne cle primaire,
+ * @param string $cle2
+ *   Nom (ou alias) de la colonne dont les valeurs servent de cle de classe
+ * @param string $objet
+ *   Prefixe a utiliser avec l'ID pour identifier chaque ligne d'enregistrement
+ * @param array $presentation
+ *   Tableau decrivant les donnees affichees :
+ *   'nom_ou_alias_du_champ' => array( 'nom_du_format', 'parametre1', ...)
+ *   Le nom du format est celui de la fonction de formatage du meme nom prefixee de association_formater_
+ * @param array $boutons
+ *   Liste des boutons d'action ; chaque element de la liste est sous la forme :
+ *   array('bouton', 'parametre1', ...)
+ *   Le nom du type de bouton est celui de la fonction d'action du meme nom prefixee de association_bouton_
+ * @param int $selection
+ *   ID de la cle primaire selectionnee
+ * @return string $res
+ *   suite de TR-HTML listant les donnees formatees
+ */
 function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection) {
+// initialisations
 	$nbr_lignes = 0;
 	$nbr_couleurs = count($extra);
 	$class_sup = (is_array($extra) AND $nbr_couleurs);
 	$res ='';
+// formatage des lignes
 	while ($data = sql_fetch($query)) {
 		if ($class_sup) { // on a  un tableau de classes supplementaires
 			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
@@ -2173,62 +2209,56 @@ function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation
 		if ( $cle1 && $data[$cle1]==$selection ) {
 			$tr_css = 'surligne';
 		}
-		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>' .
-		association_bloc_format($presentation, $data, $cle1, $selection).
-		association_bloc_bouton($boutons, $data[$cle1]) .
-		"</tr>\n";
+	// debuter la ligne
+		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
+	// formater les donnees de la ligne
+		foreach ($presentation as $champ=>$params) {
+			$format = array_shift($params);
+			switch ($format) {
+					case 'date' :
+					case 'heure' :
+						$td_css = 'date';
+						break;
+					case 'duree' :
+					case 'nombre' :
+					case 'prix' :
+						$td_css = 'decimal';
+						break;
+					case 'entier' :
+						$td_css = 'integer';
+						$format = 'nombre'; $params = array(0);
+						break;
+					case 'puce' :
+					case 'logo' :
+						$td_css = 'image';
+						break;
+					case 'code' :
+					case 'texte' :
+					default :
+						$td_css = 'text';
+						break;
+			}
+			if ( $data[$cle1]==$selection )
+				$td_css .= ' surligne';
+			array_unshift($params, $data[$champ]);
+			$format = call_user_func_array("association_formater_$format", $params);
+			$res .= '<td class="'.$td_css.'">'. $format ."</td>\n";
+		}
+	// formater les boutons de la ligne
+		foreach ($boutons as $params) {
+			$type = array_shift($params);
+			foreach ($params as &$param) {
+				$param = str_replace('$$', $champ, $param);
+			}
+			$res .= call_user_func_array("association_bouton_$type", $params);
+		}
+	// finir la ligne
+		$res .= "</tr>\n";
 	}
+// fin : retour des lignes
 	return $res;
 }
 
-function association_bloc_format($presentation, $data, $cle1, $selection) {
-	$res = '';
-	foreach ($presentation as $champ=>$params) {
-		$format = array_shift($params);
-		switch ($format) {
-				case 'date' :
-				case 'heure' :
-					$td_css = 'date';
-					break;
-				case 'duree' :
-				case 'nombre' :
-				case 'prix' :
-					$td_css = 'decimal';
-					break;
-				case 'entier' :
-					$td_css = 'integer';
-					$format = 'nombre'; $params = array(0);
-					break;
-				case 'puce' :
-				case 'logo' :
-					$td_css = 'image';
-					break;
-				case 'code' :
-				case 'texte' :
-				default :
-					$td_css = 'text';
-					break;
-		}
-		if ( $data[$cle1]==$selection )
-			$td_css .= ' surligne';
-		array_unshift($params, $data[$champ]);
-		$format = call_user_func_array("association_formater_$format", $params);
-		$res .= '<td class="'.$td_css.'">'. $format ."</td>\n";
-	}
-	return $res;
-}
-
-function association_bloc_bouton($boutons, $champ) {
-	$res = '';
-	foreach ($boutons as $params) {
-		$type = array_shift($params);
-		foreach ($params as &$param) {
-			$param = str_replace('$$', $champ, $param);
-		}
-		$res .= call_user_func_array("association_bouton_$type", $params);
-	}
-	return $res;
-}
 
 
 /*****************************************

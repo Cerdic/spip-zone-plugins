@@ -15,17 +15,17 @@ function exec_comptes() {
 	sinon_interdire_acces(autoriser('voir_compta', 'association'));
 	include_spip('association_modules');
 /// INITIALISATIONS
+	$id_compte = association_passeparam_id('compte');
+	list($id_periode, $critere_periode) = association_passeparam_periode('operation', 'asso_comptes', $id_compte);
+	$where = $critere_periode;
+	$imputation = _request('imputation');
+	if ($imputation)
+		$where .= ' AND imputation LIKE '. sql_quote($imputation);
 	$vu = _request('vu');
 	if (!is_numeric($vu))
 		$vu = '';
-	$imputation = _request('imputation');
-	if (!$imputation)
-		$imputation= '%';
-	$id_compte = association_passeparam_id('compte');
-	list($id_periode, $critere_periode) = association_passeparam_periode('operation', 'asso_comptes', $id_compte);
-	$where = 'imputation LIKE '. sql_quote($imputation);
-	$where .= (!is_numeric($vu) ? '' : " AND vu=$vu");
-	$where .= " AND $critere_periode";
+	else
+		$where .= " AND vu=$vu ";
 /// AFFICHAGES_LATERAUX (connexes)
 	echo association_navigation_onglets('titre_onglet_comptes', 'comptes');
 /// AFFICHAGES_LATERAUX : TOTAUX : noperations de l'exercice par compte financier (indique rapidement les comptes financiers les plus utilises ou les modes de paiement preferes...)
@@ -51,7 +51,7 @@ function exec_comptes() {
 	echo association_tablinfos_stats('mouvements', 'comptes', array('bilan_recettes'=>'recette','bilan_depenses'=>'depense',), $where, 2);
 /// AFFICHAGES_LATERAUX : TOTAUX : montants de l'exercice pour l'imputation choisie (toutes si aucune)
 	$data = sql_fetsel( 'SUM(recette) AS somme_recettes, SUM(depense) AS somme_depenses, code, classe',  'spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code', "$where AND classe<>".sql_quote($GLOBALS['association_metas']['classe_banques']). " AND classe<>".sql_quote($GLOBALS['association_metas']['classe_contributions_volontaires']), 'code'); // une contribution benevole ne doit pas etre comptabilisee en charge/produit
-	echo association_tablinfos_montants(($imputation=='%' ? _T('asso:entete_tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
+	echo association_tablinfos_montants(( ($imputation=='%'||!$imputation) ? _T('asso:entete_tous') : $imputation), $data['somme_recettes'], $data['somme_depenses']);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	echo association_navigation_raccourcis(array(
 		array('encaisse_titre_general', 'finances-24.png', array('encaisse', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_compta', 'association') ),
@@ -64,8 +64,8 @@ function exec_comptes() {
 	debut_cadre_association('finances-24.png', 'informations_comptables');
 /// AFFICHAGES_CENTRAUX : FILTRES
 	$filtre_imputation = '<select name="imputation" onchange="form.submit()">';
-	$filtre_imputation .= '<option value="%" ';
-	$filtre_imputation .= (($imputation=='%' || $imputation='')?' selected="selected"':'');
+	$filtre_imputation .= '<option value="" ';
+	$filtre_imputation .= (($imputation=='%' || !$imputation)?' selected="selected"':'');
 	$filtre_imputation .= '>'. _T('asso:entete_tous') .'</option>';
 	$sql = sql_select(
 		'imputation , code, intitule, classe',
@@ -103,29 +103,32 @@ function exec_comptes() {
 		}
 	}
 	$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
-	$table = comptes_while($where, $limit, $id_compte);
-	if ($table) { // affichage de la liste
+	$tbd = comptes_while($where, $limit, $id_compte);
+	if ($tbd) { // affichage de la liste
+		// ENTETES
+		$thd = '<tr class="row_first">';
+		$thd .= '<th>'. _T('asso:entete_id') .'</th>';
+		$thd .= '<th>'. _T('asso:entete_date') .'</th>';
+		$thd .= '<th>'. _T('asso:compte_entete_imputation') .'</th>';
+		$thd .= '<th>'. _T('asso:compte_entete_justification') .'</th>';
+		$thd .= '<th>'. _T('asso:entete_montant') .'</th>';
+		$thd .= '<th>'. _T('asso:compte_entete_financier') .'</th>';
+		$thd .= '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>';
+		$thd .= '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
+		. "</tr>\n";
 		// SOUS-PAGINATION
 		$nav = association_form_souspage(array('spip_asso_comptes', $where), 'comptes', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode".($imputation?"&imputation=$imputation":''). (is_numeric($vu)?"&vu=$vu":''), '<td align="right"><input type="submit" value="'. _T('asso:bouton_valider') . '"  /></td>');
-		// TABLEAU/ENTETES
-		$table = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
-		. '<tr class="row_first">'
-		. '<th>'. _T('asso:entete_id') .'</th>'
-		. '<th>'. _T('asso:entete_date') .'</th>'
-		. '<th>'. _T('asso:compte_entete_imputation') .'</th>'
-		. '<th>'. _T('asso:compte_entete_justification') .'</th>'
-		. '<th>'. _T('asso:entete_montant') .'</th>'
-		. '<th>'. _T('asso:compte_entete_financier') .'</th>'
-		. '<th colspan="2" class="actions">'. _T('asso:entete_actions') .'</th>'
-		. '<th><input title="'._T('asso:selectionner_tout').'" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'valide[]\'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" /></th>'
-		. '</tr>'
-		// TABLEAU/CORPS
-		. $table
-		. "\n</table>\n"
-		. $nav;
-		echo generer_form_ecrire('action_comptes', $table);
-	} else { // absence d'operation pour l'exercice
-		echo '<table width="100%"><tr><td class="actions erreur">' .( $id_periode ? _T('asso:exercice_sans_operation') : '<a href="'.generer_url_ecrire('exercice_comptable').'">'._T('asso:ajouter_un_exercice').'</a>' ). '</td></tr></table>';
+		// TOTALE
+		$res = "<table width='100%' class='asso_tablo' $onload_option id='asso_liste_comptes'>\n"
+		. $thd.$tbd.$thd."\n</table>\n".$nav;
+		echo generer_form_ecrire('action_comptes', $res);
+	} else {
+		if( !sql_countsel('spip_asso_comptes', $where) ) // absence d'operation pour l'exercice
+			echo _T('asso:exercice_sans_operation');
+		elseif ($id_periode) // aucune operation correspondant aux filtres
+			echo _T('asso:recherche_reponse0');
+		else // exercice inconnu ou indefini
+			echo '<a href="'.generer_url_ecrire('exercice_comptable').'">'. _T('asso:ajouter_un_exercice') .'</a>';
 	}
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
