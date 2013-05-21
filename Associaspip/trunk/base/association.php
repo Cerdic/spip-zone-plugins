@@ -153,6 +153,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_ressource' => "BIGINT UNSIGNED NOT NULL",
 		'code' => "TINYTEXT NOT NULL",
 		'intitule' => "TINYTEXT NOT NULL",
+		'id_mot' => "BIGINT NOT NULL DEFAULT 0", //=  spip_mots.id_mot
 		'date_acquisition' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'prix_acquisition' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // Il s'agit du cout total d'acquisition (pour toutes les quantites acquises, avec --pour simplifier-- les frais accessoires --transports et renumeration d'intermediaires-- et taxes --de valeur ajourtee ou assimilables--)
 		'prix_caution' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // pour le depot de garanti... http://lexinter.net/JF/cautionnement.htm

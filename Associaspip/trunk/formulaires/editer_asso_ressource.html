@@ -27,6 +27,16 @@
 		<fieldset>
 			<legend><:asso:ressources_libelle_location:></legend>
 			<ul>
+				<li class="editer_mot_cle">
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{id_mot})</span>]
+					<label for="mot_cle"><:public:mots_clef:></label>
+					<select name="id_mot" id="mot_cle">
+						<option value="#ENV{id_mot}"> </option>
+					<BOUCLE_groupemots_ressources(MOTS){id_groupe=#META{/association/groupemots_ressources}}{par titre}>
+						<option value="#ID_MOT"[(#ENV{id_mot}|=={#ID_MOT}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_groupemots_ressources>
+					</select>
+				</li>
 				<li class="editer_caution">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{caution})</span>]
 					<label for="code"><:asso:ressources_libelle_prix_caution:></label>

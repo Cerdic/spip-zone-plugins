@@ -22,6 +22,7 @@
 <BOUCLE_ressources_disponibles(ASSO_RESSOURCES)
 	{code?LIKE #ENV{code}%}
 	{intitule?LIKE #ENV{intitule}%}
+	{id_mot?IN #ENV{id_mot}}
 	{date_acquisition?LIKE #ENV{date_acquisition}%}
 	{prix_acquisition?}
 	{pu?}

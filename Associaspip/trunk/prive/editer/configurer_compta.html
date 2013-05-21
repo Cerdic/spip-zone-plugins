@@ -30,7 +30,7 @@
 					<option value="on"[(#ENV{exercices}|oui) selected="selected"]><:asso:config_libelle_exercice1:></option>
 				</select>
 			</li>
-			<li>
+			<li class="editer_plan_comptable">
 				<div class="choix">
 					<input type="checkbox" name="plan_comptable_prerenseigne" value="on"[(#ENV{plan_comptable_prerenseigne}|oui) checked="checked"] id="plan_comptable_prerenseigne" />
 					<label for="plan_comptable_prerenseigne"><:asso:config_plan_comptable_prerenseigne:></label>
@@ -162,6 +162,16 @@
 				<input type="checkbox" name="prets" value="on"[(#ENV{prets}|oui) checked="checked"][(#ENV{comptes}|non) disabled="disabled"] id="prets" />
 				<label for="prets"><:asso:config_libelle_activer_prets:></label>
 			</div>
+		</li>
+		<li class="editer_groupemots_ressources">
+			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{groupemots_ressources})</span>]
+			<label for="groupemots_ressources"><:public:mots_clefs:></label>
+			<select name="groupemots_ressources" id="groupemots_ressources">
+				<option value="0"></option>
+		<BOUCLE_groupemots_ressources(GROUPES_MOTS){par titre}>
+				<option value="#ID_GROUPE"[(#ENV{groupemots_ressources}|=={#ID_GROUPE}|oui) selected="selected"]>#TITRE</option>
+		</BOUCLE_groupemots_ressources>
+			</select>
 		</li>
 	</ul>
 	<fieldset>

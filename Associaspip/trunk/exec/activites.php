@@ -62,8 +62,10 @@ function exec_activites() {
 			$filtre_motscles .= ($id_mot==$data_mots['id_mot']?' selected="selected"':'');
 			$filtre_motscles .= '>'.$data_mots['titre'].'</option>';
 		}
+		sql_free($query_mots);
 		$filtre_motscles .= '</optgroup>';
 	}
+	sql_free($query_groupes);
 	$filtre_motscles .= '</select>';
 	$filtre_incrits = '<select name="inscription" onchange="form.submit()">';
 	$filtre_incrits .= '<option value="">' ._T('asso:entete_tous') .'</option>';

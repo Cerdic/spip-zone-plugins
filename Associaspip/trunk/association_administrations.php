@@ -1161,5 +1161,10 @@ $GLOBALS['association_maj'][71780] = array(
 	array('sql_alter', "TABLE  spip_asso_groupes_liaisons RENAME TO spip_asso_fonctions"),
 );
 
+$GLOBALS['association_maj'][72929] = array(
+	// liaison des ressources aux mots-cles
+	array('maj_tables', 'spip_asso_ressources'), // + champ : id_mot
+);
+
 
 ?>

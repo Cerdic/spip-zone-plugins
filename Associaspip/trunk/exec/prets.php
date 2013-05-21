@@ -98,8 +98,8 @@ function exec_prets() {
 	$filtre_statut .= '>'. _T('asso:prets_restitues') ."</option>\n";
 	$filtre_statut .= "</select>\n";
 	echo association_form_filtres(array(
-		'periode' => array($id_periode, 'asso_prets', 'sortie')),
-		'prets', array( // "prets&id=$id_ressource" a la place de 'prets' ne fonctionne pas...
+		'periode' => array($id_periode, 'asso_prets', 'sortie')
+	), 'prets', array(
 		'' => "<input type='hidden' name='id' value='$id_ressource' />",
 		'statut' => $filtre_statut,
 	));

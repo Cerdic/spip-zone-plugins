@@ -2151,7 +2151,7 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
 	}
 	$thd .= "</tr>\n";
 
-	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n$thd$thb\n$thd</table>\n";
+	$res =  '<table width="100%" class="asso_tablo"'. ($table ? " id='liste_$table'" : '') . ">\n$thd$tbd\n$thd</table>\n";
 	if ( $cle1 && $selection ) {
 		// comme on ne peut placer un evenement "OnLoad" que sur une ressource
 		// externe (IMG, FRAME, SCRIPT, BODY) ; il vaut mieux appliquer un SCRIPT
@@ -2192,11 +2192,11 @@ function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation
 // initialisations
 	$nbr_lignes = 0;
 	$nbr_couleurs = count($extra);
-	$class_sup = (is_array($extra) AND $nbr_couleurs);
-	$res ='';
+	$res = '';
 // formatage des lignes
 	while ($data = sql_fetch($query)) {
-		if ($class_sup) { // on a  un tableau de classes supplementaires
+		// CSS du TR
+		if (is_array($extra) AND $nbr_couleurs) { // on a  un tableau de classes supplementaires
 			if ( $cle2 ) { // lignes colorees selon les valeurs d'un champ
 				$tr_css = $extra[$data[$cle2]];
 			} else { // simple alternance de couleurs
@@ -2205,16 +2205,16 @@ function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation
 			}
 		} elseif ( $extra ) { // classe supplementaire appliquee inconditionnellement
 				$tr_css = $extra;
-		} else $tr_css = '';
+		} else
+			$tr_css = '';
 		if ( $cle1 && $data[$cle1]==$selection ) {
 			$tr_css = 'surligne';
 		}
-	// debuter la ligne
-		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .'>';
-	// formater les donnees de la ligne
-		foreach ($presentation as $champ=>$params) {
+		// TDs du TR
+		$res .= '<tr'. ($cle1?' id="'.$objet.$data[$cle1].'"':'') . ($tr_css?' class="'.$tr_css.'"':'') .">\n\t"; // debuter la ligne
+		foreach ($presentation as $champ=>$params) { // formater les cellules de donnees de la ligne
 			$format = array_shift($params);
-			switch ($format) {
+			switch ($format) { // CSS du TD
 					case 'date' :
 					case 'heure' :
 						$td_css = 'date';
@@ -2238,22 +2238,19 @@ function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation
 						$td_css = 'text';
 						break;
 			}
-			if ( $data[$cle1]==$selection )
-				$td_css .= ' surligne';
+#			if ( $data[$cle1]==$selection )
+#				$td_css .= ' surligne';
 			array_unshift($params, $data[$champ]);
-			$format = call_user_func_array("association_formater_$format", $params);
-			$res .= '<td class="'.$td_css.'">'. $format ."</td>\n";
+			$res .= '<td class="'.$td_css.'">'. call_user_func_array("association_formater_$format", $params) ."</td>\n\t";
 		}
-	// formater les boutons de la ligne
-		foreach ($boutons as $params) {
+		foreach ($boutons as $params) { // formater les cellules de bouton de la ligne
 			$type = array_shift($params);
-			foreach ($params as &$param) {
-				$param = str_replace('$$', $champ, $param);
+			foreach ($params as &$param) { // on remplace les $$ par la valeur de la cle
+				$param = str_replace('$$', $data[$cle1], $param);
 			}
 			$res .= call_user_func_array("association_bouton_$type", $params);
 		}
-	// finir la ligne
-		$res .= "</tr>\n";
+		$res .= "\n</tr>\n"; // finir la ligne
 	}
 // fin : retour des lignes
 	return $res;

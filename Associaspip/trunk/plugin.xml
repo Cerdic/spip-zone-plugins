@@ -4,14 +4,14 @@
 	Ma&#239;eul Roquette, Emmanuel Saint-James,
 	Jeannot lapin, Art-Logic, Marcel Bolla, gilcot, Nicolas Villa, G&#233;rard Savoye</auteur>
 	<version>2.2.0</version>
-	<version_base>71780</version_base>
+	<version_base>72929</version_base>
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
 	<description>Plugin de gestion de petites associations avec : gestion des adhérents et des cotisations et dons ; gestion des ventes associatives et des activités.</description>
 	<prefix>association</prefix>
 	<install>association_administrations.php</install>
-	<lien>http://contrib.spip.net/Associaspip-2-2</lien>
+	<lien>http://contrib.spip.net/3487</lien>
 	<icon>img_pack/asso-96.png</icon>
 	<options>association_options.php</options>
 

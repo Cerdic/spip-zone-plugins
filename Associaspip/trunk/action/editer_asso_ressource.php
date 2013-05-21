@@ -15,7 +15,7 @@ function action_editer_asso_ressource_dist() {
     $securiser_action = charger_fonction('securiser_action', 'inc');
     $id_ressource=$securiser_action();
     $erreur = '';
-    $code= _request('code');
+    $code = _request('code');
     $date_achat = association_recuperer_date('date_acquisition');
     $prix_achat = association_recuperer_montant('prix_acquisition');
     $quantite = floatval(_request('quantite'));
@@ -24,6 +24,7 @@ function action_editer_asso_ressource_dist() {
 	'date_acquisition' => $date_achat,
 	'code' => $code,
 	'intitule' => _request('intitule'),
+	'id_mot' => _request('id_mot'),
 	'prix_caution' => association_recuperer_montant('prix_caution'),
 	'pu' => association_recuperer_montant('pu'),
 	'ud' => _request('ud'),
