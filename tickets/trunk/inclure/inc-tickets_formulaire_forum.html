@@ -3,11 +3,12 @@
 <fieldset class="tickets_formulaire_forum">
 	<legend><:tickets:icone_modifier_ticket:></legend>
 	<ul>
+	[(#AUTORISER{assigner,ticket,#ID_TICKET}|oui)
 	[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
 	[(#SAISIE{selection, id_assigne,
 		label=<:tickets:champ_assigner:>,
 		datas=#GET{assignables},
-		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]
+		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]]
 	[(#SAISIE{selection, ticket_statut,
 		label=<:tickets:champ_statut:>,
 		cacher_option_intro=oui,

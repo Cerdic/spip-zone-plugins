@@ -11,21 +11,22 @@
 			[(#SAISIE{input, titre,
 				label=<:tickets:champ_titre_ticket:>,
 				obligatoire=oui})]
-			
+			[(#SESSION{statut}|=={0monirezo}|oui)
 			[(#SAISIE{oui_non,sticked,
 				label=<:tickets:champ_sticked:>,
-				explication=<:tickets:explication_champ_sticked:>})]
+				explication=<:tickets:explication_champ_sticked:>})]]
 
 			[(#SAISIE{selection, statut,
 				label=<:tickets:champ_statut:>,
 				cacher_option_intro=oui,
 				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
 
+			[(#AUTORISER{assigner,ticket,#ENV{id_ticket}}|oui)
 			[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
 			[(#SAISIE{selection, id_assigne,
 				label=<:tickets:champ_assigner:>,
 				defaut=[(#ENV{id_ticket}|is_numeric|?{'',#SESSION{id_auteur}})],
-				datas=#GET{assignables}})]
+				datas=#GET{assignables}})]]
 				
 			[(#SAISIE{selection, tracker,
 				label=<:tickets:champ_type:>,
