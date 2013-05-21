@@ -1,0 +1,21 @@
+<BOUCLE_almanach(ALMANACHS){id_almanach}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:almanach:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><:almanach:label_url:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
+</div>]
+
+[<div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
+	<label><:almanach:label_id_article:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>(#ID_ARTICLE)</span>
+</div>]
+
+<div>
+	<label>Événéments liés à cet almanach</label>
+</div>
+</BOUCLE_almanach>

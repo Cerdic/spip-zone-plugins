@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_almanach,1,
+	points,-1
+}})]<B_liste_almanachs>
+#ANCRE_PAGINATION
+<div class="liste-objets almanachs">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{almanach:info_1_almanach,almanach:info_nb_almanachs}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:almanach:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_almanach,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_almanachs(ALMANACHS){id_article?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{almanach-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{almanach,#ID_ALMANACH})]</td> 
+			<td class='titre principale'>[(#LOGO_ALMANACH|image_reduire{20,26})]<a href="[(#ID_ALMANACH|generer_url_entite{almanach})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ALMANACH">[(#RANG). ]#TITRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,almanach,#ID_ALMANACH}|?{
+				<a href="[(#URL_ECRIRE{almanach_edit,id_almanach=#ID_ALMANACH})]">#ID_ALMANACH</a>,
+				#ID_ALMANACH
+			})]</td>
+		</tr>
+	</BOUCLE_liste_almanachs>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_almanachs>[
+<div class="liste-objets almanachs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_almanachs>
