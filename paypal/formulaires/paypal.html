@@ -10,6 +10,7 @@
 		- custom:                Variable de transit jamais présenté au client (?)
 		- invoice|identifiant:   chaine unique identifiant la commande
 		- bouton_paypal_acheter: URL de l'image personnalisée du bouton Paypal
+		- image_url              URL du logo affiché en haut à gauche à la place du nom du vendeur
 		- shipping:              frais de port, défaut = 0
 		- handling_cart:         idem shipping (?)
 
@@ -75,6 +76,9 @@
 	2 : obligatoire.
 ]
 <input name="no_shipping" type="hidden" value="#ENV{no_shipping,1}" />
+
+[(#REM) Logo du vendeur affiché en haut à gauche à la place du nom, 150x150px max ]
+[<input name="image_url" type="hidden" value="(#ENV{image_url})" />]
 
 [(#REM) URLS de traitement ]
 
