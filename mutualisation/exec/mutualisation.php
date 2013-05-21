@@ -135,7 +135,7 @@ function exec_mutualisation_dist() {
 			<td><div id='cache$nsite' class='taille loading'></div></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td>$adminplugin<a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
-			<td><a href='${url}ecrire/index.php?exec=config_fonctions'>$compression</a></td>
+			<td><a href='${url}ecrire/index.php?exec=config_fonctions#configurer-compresseur'>$compression</a></td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
