@@ -9,15 +9,8 @@
 		- libelle:               Libellé décrivant la commande
 		- custom:                Variable de transit jamais présenté au client (?)
 		- invoice|identifiant:   chaine unique identifiant la commande
-		- bouton_paypal_acheter: URL de l'image personnalisée du bouton Paypal
 		- shipping:              frais de port, défaut = 0
 		- handling_cart:         idem shipping (?)
-
-		# Personnaliser la page Paypal
-		- logo_url               URL du logo affiché en haut à gauche, 150x150px max (de préférence https)
-		- bandeau_url            URL de l'image affichée en haut à gauche, 750x90px max (de préférence https)
-		- couleur_bandeau        Couleur de fond du bandeau : code hexa 6 caractères
-		- couleur_bloc           Couleur de fond du bloc de paiement : code hexa 6 caractères
 
 		# Achat ou Abonnement ?
 		- type:                  Détermine si on achète ou si on s'abonne
@@ -47,6 +40,22 @@
 		- zip:                   Code postal
 		- country:               Code du pays (2 lettres, idem plugin "pays")
 		- night_phone_b:         Numéro de téléphone
+
+		# Personnaliser le bouton Paypal
+		# par défaut, il s'agit d'un input image, téléchargée sur le site de Paypal
+		- bouton_paypal_acheter:         URL de l'image personnalisée pour acheter
+		- bouton_paypal_souscrire:       URL de l'image personnalisée pour s'abonner
+		# pour avoir un input classique, il faut renseigner le paramètre 'xxx_texte'
+		- bouton_paypal_acheter_texte:   Texte du bouton acheter
+		- bouton_paypal_souscrire_texte: Texte du bouton d'abonnement
+		- bouton_paypal_acheter_class:   Classe du bouton acheter
+		- bouton_paypal_souscrire_class: Classe du bouton d'abonnement
+
+		# Personnaliser la page Paypal
+		- logo_url               URL du logo affiché en haut à gauche, 150x150px max (de préférence https)
+		- bandeau_url            URL de l'image affichée en haut à gauche, 750x90px max (de préférence https)
+		- couleur_bandeau        Couleur de fond du bandeau : code hexa 6 caractères
+		- couleur_bloc           Couleur de fond du bloc de paiement : code hexa 6 caractères
 ]
 <div class="formulaire_spip formulaire_paypal">
 
@@ -105,10 +114,15 @@
 
 [(#REM) Avoir les details ]
 [(#ENV{details}|et{#ENV{type}|=={abonnement}|non}|oui) 
-    #INCLURE{fond=formulaires/inc-paypal-details,details=#ENV{details}}
-<input type="hidden" name="cmd" value="_cart" /> 
-<input type="hidden" name="upload" value="1" />
-<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+	#INCLURE{fond=formulaires/inc-paypal-details,details=#ENV{details}}
+	<input type="hidden" name="cmd" value="_cart" /> 
+	<input type="hidden" name="upload" value="1" />
+	[(#REM) Bouton...]
+	[(#REM) Soit le bouton est une image - par défaut ]
+	[(#ENV{bouton_paypal_acheter_texte}|non)<input type="image" name="submit" alt="<:paypal:info_bouton_paypal:>" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" />]
+	[(#REM) Soit il s'agit d'un bouton traditionnel ]
+	[(#ENV{bouton_paypal_acheter_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_acheter_texte})]" value="[(#ENV{bouton_paypal_acheter_texte})]"[ class="(#ENV{bouton_paypal_acheter_class})"] />]
+	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 [(#REM) Acheter ]
@@ -120,7 +134,11 @@
 	[(#REM) Bouton...]
 	<input name="cmd" type="hidden" value="_xclick" />
 	<input name="bn" type="hidden" value="PP-BuyNow" />
-	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+	[(#REM) Soit le bouton est une image - par défaut ]
+	[(#ENV{bouton_paypal_acheter_texte}|non)<input type="image" name="submit" alt="<:paypal:info_bouton_paypal:>" src="[(#ENV{bouton_paypal_acheter}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif})]" />]
+	[(#REM) Soit il s'agit d'un bouton traditionnel ]
+	[(#ENV{bouton_paypal_acheter_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_acheter_texte})]"  value="[(#ENV{bouton_paypal_acheter_texte})]"[ class="(#ENV{bouton_paypal_acheter_class})"] />]
+	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 [(#REM) Ou s'abonner ]
@@ -134,7 +152,11 @@
 	[(#REM) Bouton...]
 	<input name="cmd" type="hidden" value="_xclick-subscriptions" />
 	<input name="bn" type="hidden" value="PP-Subscribe" />
-	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_souscrire}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+	[(#REM) Soit le bouton est une image - par défaut ]
+	[(#ENV{bouton_paypal_souscrire_texte}|non)<input type="image" name="submit" alt="<:paypal:info_bouton_paypal:>" src="[(#ENV{bouton_paypal_souscrire}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif})]" />]
+	[(#REM) Soit il s'agit d'un bouton traditionnel ]
+	[(#ENV{bouton_paypal_souscrire_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_souscrire_texte})]"  value="[(#ENV{bouton_paypal_souscrire_texte})]"[ class="(#ENV{bouton_paypal_souscrire_class})"] />]
+	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
 [(#REM) Personnaliser la page de paiement ]
