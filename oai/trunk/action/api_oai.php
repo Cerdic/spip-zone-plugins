@@ -186,6 +186,7 @@ function action_api_oai_dist(){
 	// Maintenant on construit le retour complet
 	// D'abord la racine
 	$retour = '<?xml version="1.0" encoding="UTF-8"?>';
+	$retour = '<?xml-stylesheet type="text/xsl" href="'._DIR_PLUGIN_OAI.'/oai2.xsl" ?>';
 	$retour .= '<OAI-PMH';
 	$retour .= '	xmlns="http://www.openarchives.org/OAI/2.0/"';
 	$retour .= '	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"';
