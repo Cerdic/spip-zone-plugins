@@ -162,9 +162,11 @@ function tickets_formulaire_charger($flux){
 function tickets_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/forum'){
 		if(is_numeric($flux['args']['contexte']['id_ticket'])){
-			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
-			if(_request('id_assigne'))
-				$infos_ticket['id_assigne'] = _request('id_assigne');
+			$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
+			foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+				if(_request($champ))
+					$infos_ticket[$champ] = _request($champ);
+			}
 			if(_request('ticket_statut'))
 				$infos_ticket['ticket_statut'] = _request('ticket_statut');
 			if(is_array($infos_ticket)){
@@ -179,7 +181,7 @@ function tickets_recuperer_fond($flux){
 /**
  * Insertion dans le pipeline formulaire_verifier (SPIP)
  * 
- * On ajoute nos valeur de statut des tickets et de la personne assignée dans la prévisu de forum
+ * On ajoute nos valeurs des champs de tickets dans la prévisu de forum
  *
  * @param array $flux
  * @return array $flux
@@ -187,7 +189,10 @@ function tickets_recuperer_fond($flux){
 function tickets_formulaire_verifier($flux){
 	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket') && isset($flux['data']['previsu'])) {
 		$flux['data']['previsu'] .= '<input type="hidden" name="ticket_statut" value="'._request('ticket_statut').'" />';
-		$flux['data']['previsu'] .= '<input type="hidden" name="id_assigne" value="'._request('id_assigne').'" />';
+		foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+			if(_request($champ))
+				$flux['data']['previsu'] .= '<input type="hidden" name="'.$champ.'" value="'._request($champ).'" />';
+		}
 	}
 	return $flux;
 }
@@ -206,12 +211,23 @@ function tickets_formulaire_verifier($flux){
 function tickets_formulaire_traiter($flux){
 	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket')) {
 		include_spip('action/editer_ticket');
+		include_spip('inc/autoriser');
 		$id_ticket = $flux['args']['args'][1];
-		$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($id_ticket));
-		if(($new_statut = _request('ticket_statut')) && ($new_statut != $infos_ticket['statut']))
-			ticket_instituer($id_ticket, array('statut'=>$new_statut));
-		if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne']))
-			ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
+		$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
+		if(autoriser('modifier','ticket',$id_ticket)){
+			$set = array();
+			if(($new_statut = _request('ticket_statut')) && ($new_statut != $infos_ticket['statut']))
+				$set['statut']= $new_statut;
+			/**
+			 * On met le $_POST['texte'] à null pour ne pas mettre le texte du forum dans le texte du ticket
+			 */
+			set_request('texte',NULL);
+			ticket_modifier($id_ticket,$set);
+		}
+		else if(autoriser('assigner','ticket',$id_ticket)){
+			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne']))
+				ticket_modifier($id_ticket, array('id_assigne'=>$new_assigne));
+		}
 	}
 	if ($flux['args']['form']=='configurer_tickets_general') {
 		$config_docs = explode(',',$GLOBALS['meta']['documents_objets']);

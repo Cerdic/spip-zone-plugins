@@ -1,5 +1,4 @@
-<BOUCLE_ticket(TICKETS){id_ticket}>
-[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
+<BOUCLE_ticket(TICKETS){si #AUTORISER{modifier,ticket,#ID_TICKET}|oui}{id_ticket}>
 <fieldset class="tickets_formulaire_forum">
 	<legend><:tickets:icone_modifier_ticket:></legend>
 	<ul>
@@ -9,11 +8,19 @@
 		label=<:tickets:champ_assigner:>,
 		datas=#GET{assignables},
 		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]]
+	#SET{saisies, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
+	<BOUCLE_saisies(DATA){source table, #GET{saisies}}>
+		[(#VALEUR|tickets_champ_optionnel_actif|oui)
+			[(#SAISIE{selection, #CLE,
+				label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
+				cacher_option_intro=oui,
+				datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]]
+	</BOUCLE_saisies>
 	[(#SAISIE{selection, ticket_statut,
 		label=<:tickets:champ_statut:>,
 		cacher_option_intro=oui,
 		valeur_forcee=#ENV{ticket_statut,#STATUT},
 		datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
 	</ul>
-</fieldset>]
+</fieldset>
 </BOUCLE_ticket>
