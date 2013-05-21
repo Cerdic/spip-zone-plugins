@@ -10,9 +10,14 @@
 		- custom:                Variable de transit jamais présenté au client (?)
 		- invoice|identifiant:   chaine unique identifiant la commande
 		- bouton_paypal_acheter: URL de l'image personnalisée du bouton Paypal
-		- image_url              URL du logo affiché en haut à gauche à la place du nom du vendeur
 		- shipping:              frais de port, défaut = 0
 		- handling_cart:         idem shipping (?)
+
+		# Personnaliser la page Paypal
+		- logo_url               URL du logo affiché en haut à gauche, 150x150px max (de préférence https)
+		- bandeau_url            URL de l'image affichée en haut à gauche, 750x90px max (de préférence https)
+		- couleur_bandeau        Couleur de fond du bandeau : code hexa 6 caractères
+		- couleur_bloc           Couleur de fond du bloc de paiement : code hexa 6 caractères
 
 		# Achat ou Abonnement ?
 		- type:                  Détermine si on achète ou si on s'abonne
@@ -77,9 +82,6 @@
 ]
 <input name="no_shipping" type="hidden" value="#ENV{no_shipping,1}" />
 
-[(#REM) Logo du vendeur affiché en haut à gauche à la place du nom, 150x150px max ]
-[<input name="image_url" type="hidden" value="(#ENV{image_url})" />]
-
 [(#REM) URLS de traitement ]
 
 <input name="return" type="hidden" value="[(#ENV{redirect_ok})]" />
@@ -135,6 +137,16 @@
 	<input alt="<:paypal:info_bouton_paypal:>" name="submit" src="[(#ENV{bouton_paypal_souscrire}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif})]" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
+[(#REM) Personnaliser la page de paiement ]
+
+[(#REM) Logo du vendeur affiché en haut à gauche à la place du nom, 150x150px max. De préférence URL https  ]
+[<input name="image_url" type="hidden" value="(#ENV{logo_url})" />]
+[(#REM) Image affichée en haut à gauche de la page de paiement, 750x90px max. De préférence URL https ]
+[<input name="cpp_header_image" type="hidden" value="(#ENV{bandeau_url})" />]
+[(#REM) Couleur de fond du bandeau : code hexa 6 caractères ]
+[<input name="cpp_headerback_color" type="hidden" value="(#ENV{couleur_bandeau})" />]
+[(#REM) Couleur de fond du bloc de paiement : code hexa 6 caractères ]
+[<input name="cpp_payflow_color" type="hidden" value="(#ENV{couleur_bloc})" />]
 
 </div></form>
 
