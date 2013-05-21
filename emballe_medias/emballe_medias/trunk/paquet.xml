@@ -1,7 +1,7 @@
 <paquet
 	prefix="emballe_medias"
 	categorie="edition"
-	version="2.0.2"
+	version="2.0.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/emballe_medias.png"
@@ -41,6 +41,7 @@
 	<necessite nom="diogene" compatibilite="[1.5.0;[" />
 	<necessite nom="swfupload" compatibilite="[1.0.0;[" />
 	<necessite nom="jfu" compatibilite="[5.16.3;[" />
+	<necessite nom="notifications" compatibilite="[3.0.10;[" />
 
 	<utilise nom="ancres_douces" compatibilite="[1.2;[" />
 	<utilise nom="palette" />
@@ -49,8 +50,6 @@
 	<utilise nom="spipmotion" />
 	<utilise nom="getid3" />
 	<utilise nom="doc2img" />
-	<utilise nom="notifications" />
-
 	<utilise nom="diogene_licence" />
 	<utilise nom="diogene_spipicious" />
 	<utilise nom="diogene_gerer_auteurs" />

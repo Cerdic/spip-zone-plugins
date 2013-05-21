@@ -104,6 +104,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_prepa' => 'En préparation',
 	'info_statut_prop' => 'Proposés à la publication',
 	'info_statut_publies' => 'Publiés',
+	'info_lien_publier_media' => 'Publier ce média',
+	'info_lien_refuser_media' => 'Refuser ce média',
+	'info_lien_supprimer_media' => 'Supprimer ce média',
+	'info_moderation_media_confirmee_publie' => 'Le média #@id_article@ a bien été publié',
+	'info_moderation_media_confirmee_refuse' => 'Le média #@id_article@ a bien été refusé',
+	'info_moderation_media_confirmee_supprime' => 'Le média #@id_article@ a bien été supprimé',
+	'info_moderation_media_deja_faite' => 'Le média #@id_article@ a déjà été modéré en "@statut@".',
+	'info_moderation_media_interdite' => 'Vous n\'avez pas le droit de modérer ce média',
+	'info_moderation_media_lien_titre' => 'Modérer ce média depuis l\'espace privé',
+	'info_moderation_media_url_perimee' => 'Ce lien de modération n\'est plus valide.',
 
 	// L
 	'label_case_gerer_modifs_types' => 'Afficher le formulaire de changement de type',
@@ -150,8 +160,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_propose_detail' => 'Le média "@titre@" est proposé à la publication
 	depuis',
 	'media_propose_sujet' => '[@nom_site_spip@] Propose : @titre@',
-	'media_propose_titre' => 'Média proposé
-	---------------',
+	'media_propose_titre' => 'Média proposé',
 	'media_propose_url' => 'Vous êtes invité à venir le consulter. Il est disponible à l\'adresse :',
 	'media_publie_detail' => 'Le média "@titre@" vient d\'être publié par @connect_nom@.',
 	'media_publie_sujet' => '[@nom_site_spip@] PUBLIÉ : @titre@',
