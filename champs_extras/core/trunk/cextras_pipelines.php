@@ -149,6 +149,7 @@ function cextras_editer_contenu_objet($flux){
 function cextras_pre_edition($flux){
 	
 	include_spip('inc/cextras');
+	include_spip('inc/saisies_lister');
 	$table = $flux['args']['table'];
 	if ($saisies = champs_extras_objet( $table )) {
 		$saisies = saisies_lister_avec_sql($saisies);
