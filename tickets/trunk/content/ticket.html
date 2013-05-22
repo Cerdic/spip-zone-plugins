@@ -3,7 +3,7 @@
 <BOUCLE_si_ouvert(TICKETS){id_ticket}>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
-#SET{autoriser_modifier,non}
+[(#SET{autoriser_modifier,non})]
 </BOUCLE_si_ouvert>
 <div class="ticket content-principal">
 	<div class="cartouche">
@@ -57,23 +57,21 @@
 	[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
 	</B_decompte>
-	<h2><:tickets:commentaire_aucun:></h2>
+	<h2 class="h2"><:tickets:commentaire_aucun:></h2>
 	<//B_decompte>
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
 	<ul class="forum comments-items">
 	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
-	<BOUCLE_si_comment(CONDITION){si #PLUGIN{comments}|oui}>
-		
-		<BOUCLE_comments-list(FORUMS) {si #GET{config_thread}|=={list}|oui}{statut IN publie} {id_ticket} {plat} {par date}>
-		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		<BOUCLE_comments-list(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={list}}|oui}{statut IN publie} {id_ticket} {plat} {par date}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
 		</li>
 		</BOUCLE_comments-list>
 		</B_comments-list>
-		<BOUCLE_comments-thread(FORUMS) {si #GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread1}}|oui}{statut IN publie} {id_ticket} {par date}>
-		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		<BOUCLE_comments-thread(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread1}}}|oui}{statut IN publie} {id_ticket} {par date}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 			[(#GET{autoriser_commenter}|=={oui}|oui)
 			[<p class="repondre"><a
@@ -83,7 +81,7 @@
 			<B_comments-fils>
 			<ul class="comments-ul comments-fils">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
-				<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 					<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
@@ -101,13 +99,13 @@
 		(#INCLURE{javascript/thread-move.js}|compacte{js})
 		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
 		</B_comments-thread>
-		<BOUCLE_comments-list-1(FORUMS){si #GET{config_thread}|=={thread-1}|oui}{id_ticket} {!par date_thread}{pagination 10}>
-		<li class="comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+		<BOUCLE_comments-list-1(FORUMS){si #PLUGIN{comments}|et{#GET{config_thread}|=={thread-1}}|oui}{id_ticket} {!par date_thread}{pagination 10}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}>
 			<B_comments-fils-1>
 			<ul class="comments-ul">
 				<BOUCLE_comments-fils-1(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
-				<li class="comment-item[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
 					<INCLURE{fond=inclure/comment,id_forum,thread=oui}>
 					[(#GET{autoriser_commenter}|=={oui}|oui)
 					[<p class="repondre"><a
@@ -128,11 +126,8 @@
 		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 		(#INCLURE{javascript/thread-move.js}|compacte{js})
 		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
-		<//B_comments-thread>
-		<//B_comments-list>
-	</BOUCLE_si_comment>
-	</B_si_comment>
-	<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
+		</B_comments-list-1>
+		<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
 		<li class="forum-fil comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
 			<div class="comment comment-message forum-message">
 				<div class="forum-chapo">
@@ -150,19 +145,16 @@
 					[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
 					[<p class="#EDIT{hyperlien} comment-external-link"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 					<BOUCLE_doc(DOCUMENTS){id_forum}>
-					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-						[(#EMBED_DOCUMENT|image_reduire{300})]
-					,
-						[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-					})]
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{[(#EMBED_DOCUMENT|image_reduire{300})],[(#LOGO_DOCUMENT|#URL_DOCUMENT)]})]
 					</BOUCLE_doc>
-
 					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
 				</div>
 			</div>
 		</li>
 	</BOUCLE_messages_ticket>
-	<//B_si_comment>
+	<//B_comments-list-1>
+	<//B_comments-thread>
+	<//B_comments-list>
 	</BOUCLE_messages>	
 	</ul>
 	</B_messages>
@@ -174,22 +166,17 @@
 	]
 	[(#GET{autoriser_commenter}|=={oui}|non)
 		[(#SESSION{id_auteur}|non)
-			<p><:tickets:tickets_sur_inscription:>
-				[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
+			[(#BOITE_OUVRIR{'',notice})]
+			<p><:tickets:tickets_sur_inscription:></p>
+			<p>#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+				<:tickets:lien_identification{url=#GET{url}}:>
 			</p>
-	
-			<h2 class='titre'><:tickets:titre_identification:></h2>
-			[(#FORMULAIRE_LOGIN{#SELF})]
-		]
+			[(#BOITE_FERMER)]]
 		[(#SESSION{id_auteur}|oui)
-			<p>
-				<:tickets:tickets_sur_inscription:>
-			</p>
-			<p>
-				<:tickets:tickets_sur_inscription_droits:>
-			</p>
-		]
-	]
+			[(#BOITE_OUVRIR{'',notice})]
+			<p><:tickets:tickets_sur_inscription:></p>
+			<p><:tickets:tickets_sur_inscription_droits:></p>
+			[(#BOITE_FERMER)]]]
 	</BOUCLE_si_ouvert_commentaires>
 </div>
 </BOUCLE_ticket_contenu>
