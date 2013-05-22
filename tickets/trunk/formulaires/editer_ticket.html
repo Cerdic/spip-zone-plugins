@@ -44,7 +44,7 @@
 				[(#SAISIE{selection, #CLE,
 					label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
 					cacher_option_intro=oui,
-					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]]
+					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VAL{extraire_multi}|array_map{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]})]]
 			</BOUCLE_saisies>
 
 			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|oui)

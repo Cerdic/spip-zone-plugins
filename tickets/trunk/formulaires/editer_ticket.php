@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/autoriser');
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/filtres'); # Pour extraire_muti dans editer_ticket.html
 
 /**
  * Identification unique d'un formulaire poste 
