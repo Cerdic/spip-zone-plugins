@@ -56,6 +56,7 @@
 		- bandeau_url            URL de l'image affichée en haut à gauche, 750x90px max (de préférence https)
 		- couleur_bandeau        Couleur de fond du bandeau : code hexa 6 caractères
 		- couleur_bloc           Couleur de fond du bloc de paiement : code hexa 6 caractères
+		- cbt                    texte du bouton permettant le retour sur le site du vendeur une fois le paiement effectué
 ]
 <div class="formulaire_spip formulaire_paypal">
 
@@ -169,6 +170,9 @@
 [<input name="cpp_headerback_color" type="hidden" value="(#ENV{couleur_bandeau})" />]
 [(#REM) Couleur de fond du bloc de paiement : code hexa 6 caractères ]
 [<input name="cpp_payflow_color" type="hidden" value="(#ENV{couleur_bloc})" />]
+[(#REM) Texte du bouton permettant le retour sur le site du vendeur une fois le paiement effectué ]
+[<input name="cbt" type="hidden" value="(#ENV{texte_bouton_continuer})" />]
+
 
 </div></form>
 
