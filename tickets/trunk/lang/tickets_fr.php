@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
 	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Écrire les tickets',
+	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels',
 	'cfg_lgd_champs_options_autres' => 'Autres options',
@@ -139,6 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Paginer par :',
 	'lien_filtrer' => 'Filtrer les tickets',
+	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>',
 	'lien_reponse_ticket' => 'Réponse au ticket',
 	'lien_supprimer_filtres' => 'Enlever tous les filtres',
 

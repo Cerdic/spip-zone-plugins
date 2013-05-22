@@ -1,5 +1,5 @@
-[(#SET{legendes,[(#ARRAY{0,<:tickets:cfg_lgd_autorisation_ecrire:>,1,<:tickets:cfg_lgd_autorisation_assigner:>,2,<:tickets:cfg_lgd_autorisation_modifier:>,3,<:tickets:cfg_lgd_autorisation_commenter:>})]})]
-#SET{prefixes,#ARRAY{0,ecrire_,1,assigner_,2,modifier_,3,commenter_}}
+[(#SET{legendes,[(#ARRAY{0,<:tickets:cfg_lgd_autorisation_ecrire:>,1,<:tickets:cfg_lgd_autorisation_assigner:>,2,<:tickets:cfg_lgd_autorisation_modifier:>,3,<:tickets:cfg_lgd_autorisation_commenter:>,4,<:tickets:cfg_lgd_autorisation_epingler:>})]})]
+#SET{prefixes,#ARRAY{0,ecrire_,1,assigner_,2,modifier_,3,commenter_,4,epingler_}}
 <B_bloc_autorisation>
 <ul>
 	<BOUCLE_bloc_autorisation(DATA){source table, #GET{legendes}}>
@@ -21,7 +21,7 @@
 			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
 			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{[(#GET{prefixe})type]}|non) visible]">
 				[(#CONFIG{[(#GET{prefixe})type]}|non)
-					[(#GET{prefixe}|in_array{#ARRAY{0,ecrire_,1,assigner_,2,modifier_}}|oui)
+					[(#GET{prefixe}|in_array{#ARRAY{0,ecrire_,1,assigner_,2,modifier_,3,epingler_}}|oui)
 						#SET{defaut,#ARRAY{0,0minirezo}}]
 					[(#GET{prefixe}|in_array{#ARRAY{0,commenter_}}|oui)
 						#SET{defaut,#ARRAY{0,0minirezo,1,1comite}}]

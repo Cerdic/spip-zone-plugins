@@ -11,7 +11,7 @@
 			[(#SAISIE{input, titre,
 				label=<:tickets:champ_titre_ticket:>,
 				obligatoire=oui})]
-			[(#SESSION{statut}|=={0minirezo}|oui)
+			[(#AUTORISER{epingler,ticket,#ENV{id_ticket}}|oui)
 			[(#SAISIE{oui_non,sticked,
 				label=<:tickets:champ_sticked:>,
 				explication=<:tickets:explication_champ_sticked:>})]]
@@ -44,17 +44,15 @@
 				[(#SAISIE{selection, #CLE,
 					label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
 					cacher_option_intro=oui,
-					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]
-			]
+					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]]
 			</BOUCLE_saisies>
 
 			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|oui)
 				[(#SAISIE{selection, navigateur,
 					label=<:tickets:champ_navigateur:>,
 					option_intro='-',
-					datas=[(#REM|tickets_liste_navigateur)]})]				
-			]
-			
+					datas=[(#REM|tickets_liste_navigateur)]})]]
+
 			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|?{#SET{explication,<:tickets:explication_description_ticket_ss_nav:>},#SET{explication,<:tickets:explication_description_ticket:>}})]
 			[(#SAISIE{textarea, texte,
 				label=<:tickets:champ_description:>,
@@ -62,19 +60,20 @@
 				obligatoire=oui,
 				class=inserer_barre_edition,
 				rows=20})]
-			
 			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#ENV{public}}|et{#PLUGIN{medias}}|oui)
 				[(#SAISIE{input, ajouter_document,
 					type=file,
 					label=<:tickets:champ_fichier:>,
-					explication=<:tickets:explication_fichier:>})]
-			]
+					explication=<:tickets:explication_fichier:>})]]
+
 			[(#SAISIE{input, exemple,
 				label=<:tickets:champ_url_exemple:>,
 				explication=<:tickets:explication_url_exemple:>})]
 		</ul>
 		<!--extra-->
-		<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
 	</div></form>
 	</BOUCLE_editable>
 </div>

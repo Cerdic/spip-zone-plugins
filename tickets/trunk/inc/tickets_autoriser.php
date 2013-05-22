@@ -40,6 +40,9 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 		case 'modifier':
 			$define = (defined('_TICKETS_AUTORISATION_MODIFIER')) ? _TICKETS_AUTORISATION_MODIFIER : ($utiliser_defaut ? '0minirezo':'');
 			break;
+		case 'epingler':
+			$define = (defined('_TICKETS_AUTORISATION_EPINGLER')) ? _TICKETS_AUTORISATION_EPINGLER : ($utiliser_defaut ? '0minirezo':'');
+			break;
 		default:
 			$define = $utiliser_defaut ? '0minirezo' : '';
 			break;
@@ -312,6 +315,59 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 				$autorise = true;
 		}
 	}
+	return $autorise;
+}
+
+/**
+ * Autorisation d'épingler des tickets
+ * Défini qui peut épingler les tickets
+ * Par défaut seulement les admins
+ * 
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
+ */ 
+function autoriser_ticket_epingler_dist($faire, $type, $id, $qui, $opt){
+	$autorise = false;
+	$utiliser_defaut = true;
+
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+
+	$type = lire_config('tickets/autorisations/epingler_type', 'par_statut');
+	if($type){
+		switch($type) {
+			case 'webmestre':
+				// Webmestres uniquement
+				$autorise = ($qui['webmestre'] == 'oui');
+				break;
+			case 'par_statut':
+				// Traitement spécifique pour la valeur 'tous'
+				if(in_array('tous',lire_config('tickets/autorisations/epingler_statuts',array('0minirezo'))))
+					return true;
+				// Autorisation par statut
+				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_statuts',array('0minirezo')));
+				break;
+			case 'par_auteur':
+				// Autorisation par id d'auteurs
+				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/modifier_auteurs',array()));
+				break;
+		}
+		if($autorise == true)
+			return $autorise;
+		$utiliser_defaut = false;
+	}
+
+	// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
+	// Sinon on ajoute la possibilité de régler par define
+	$liste = definir_autorisations_tickets('epingler',$utiliser_defaut);
+	if ($liste['statut'])
+		$autorise = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
 	return $autorise;
 }
 ?>

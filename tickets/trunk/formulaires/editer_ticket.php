@@ -1,8 +1,7 @@
 <?php
-
 /**
  * Plugin Tickets
- * Licence GPL (c) 2008-2012
+ * Licence GPL (c) 2008-2013
  *
  * Formulaire d'édition de tickets
  *
@@ -33,16 +32,20 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 	if (!autoriser('ecrire', 'ticket', $id_ticket)) {
 		$valeurs['editable'] = false;
 	}else{
-		$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
-		$valeurs['editable'] = true;
-	
-		// si nouveau ticket
-		if (!$id_ticket or $id_ticket=='oui'){
-			$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
-			// Si un des champs de ce tableau est passé dans l'URL, on l'utilise dans le formulaire
-			foreach(array('composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
-				if(!$valeurs[$champ] && _request($champ))
-					$valeurs[$champ] = _request($champ);
+		if(is_numeric($id_ticket) && !autoriser('modifier','ticket',$id_ticket))
+			$valeurs['editable'] = false;
+		else{
+			$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
+			$valeurs['editable'] = true;
+		
+			// si nouveau ticket
+			if (!$id_ticket or $id_ticket=='oui'){
+				$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
+				// Si un des champs de ce tableau est passé dans l'URL, on l'utilise dans le formulaire
+				foreach(array('composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+					if(!$valeurs[$champ] && _request($champ))
+						$valeurs[$champ] = _request($champ);
+				}
 			}
 		}
 	}
