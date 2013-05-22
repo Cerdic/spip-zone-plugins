@@ -16,16 +16,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* composant
  * 
  * @param string $nom
- * @return array
+ * 		Le nom du champ
+ * @return array|false
+ * 		Le tableau des valeurs possibles ou false si aucune
  */
 function tickets_champ_optionnel_actif($nom){
 	$constante = '_TICKETS_LISTE_' . strtoupper($nom);
-	if (!defined($constante) && !lire_config('tickets/general/'.$nom)) {
+	if (!defined($constante) && !lire_config('tickets/general/'.$nom))
 		return false;
-	}
 	if(defined($constante))
 		$liste = constant($constante);
-	else 
+	else
 		$liste = lire_config('tickets/general/'.$nom,'');
 
 	if ($liste == '') return false;
@@ -65,9 +66,9 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 		$selected = ($row_auteur["id_auteur"] == $en_cours) ? ' selected="selected"' : '';
 		$options .= '<option value="' . $row_auteur["id_auteur"] . '"' . $selected . '>' . $row_auteur["nom"] . '</option>';
 	}
-	if($format=='array'){
+	if($format=='array')
 		return $liste_assignables;
-	}
+
 	return $options;
 }
 
@@ -79,10 +80,12 @@ function tickets_classer_par_version($bidon) {
 			$liste = explode(":", _TICKETS_LISTE_VERSIONS);
 		else
 			$liste = explode(":", lire_config('tickets/general/versions'));
+		
+		$liste = array_map('trim',$liste);
+		
 		$i = 0;
 		foreach($liste as $_version) {
 			$i += 1;
-			$_version = trim($_version);
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_version').' '.$_version, 'statut' => 'ouvert', 'version' => $_version, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
@@ -99,10 +102,12 @@ function tickets_classer_par_jalon($bidon) {
 			$liste = explode(":", _TICKETS_LISTE_JALONS);
 		else
 			$liste = explode(":", lire_config('tickets/general/jalons'));
+			
+		$liste = array_map('trim',$liste);
+		
 		$i = 0;
 		foreach($liste as $_jalon) {
 			$i += 1;
-			$_jalon = trim($_jalon);
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
@@ -119,9 +124,11 @@ function tickets_classer_par_composant($bidon) {
 			$liste = explode(":", _TICKETS_LISTE_COMPOSANTS);
 		else
 			$liste = explode(":", lire_config('tickets/general/composants'));
+			
+		$liste = array_map('trim',$liste);
+		
 		$i = 0;
 		foreach($liste as $_composant) {
-			$_composant = trim($_composant);
 			$i += 1;
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_composant').' '.$_composant, 'statut' => 'ouvert', 'composant' => $_composant, 'bloc' => "_bloc$i")),
@@ -139,10 +146,12 @@ function tickets_classer_par_projet($bidon) {
 			$liste = explode(":", _TICKETS_LISTE_PROJETS);
 		else
 			$liste = explode(":", lire_config('tickets/general/projets'));
+		
+		$liste = array_map('trim',$liste);
+		
 		$i = 0;
 		foreach($liste as $_projet) {
 			$i += 1;
-			$_projet = trim($_projet);
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
 				array_merge($_GET, array('titre' => _T('tickets:champ_projet').' '.$_projet, 'statut' => 'ouvert', 'projet' => $_projet, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
@@ -246,24 +255,25 @@ function tickets_liste_severite($id_ticket = null){
 function tickets_liste_navigateur($nav=false){
 	$navs = array(
 		'tous' => _T('tickets:option_navigateur_tous'),
+		'android2' => 'Android 2.x',
 		'android4' => 'Android 4.x',
-		'firefox3' => 'Firefox 3.x',
-		'firefox4' => 'Firefox 4.x',
-		'firefox5' => 'Firefox 5.x',
-		'firefox6' => 'Firefox 6.x',
-		'chrome9' => 'Google Chrome 9.x',
-		'chrome11' => 'Google Chrome 11.x',
-		'chrome12' => 'Google Chrome 12.x',
-		'chrome13' => 'Google Chrome 13.x',
-		'chrome14' => 'Google Chrome 14.x',
-		'ie6' => 'Internet Explorer 6',
-		'ie7' => 'Internet Explorer 7',
+		'firefox4' => 'Firefox <= 4',
+		'firefox10' => 'Firefox <= 10',
+		'firefox15' => 'Firefox <= 15',
+		'firefox20' => 'Firefox <= 20',
+		'chrome10' => 'Google <= 10',
+		'chrome15' => 'Google Chrome <= 15',
+		'chrome20' => 'Google Chrome <= 20',
+		'chrome25' => 'Google Chrome <= 25',
+		'chrome30' => 'Google Chrome > 25',
 		'ie8' => 'Internet Explorer 8',
 		'ie9' => 'Internet Explorer 9',
+		'ie10' => 'Internet Explorer 10',
 		'opera11' => 'Opera 11.x',
 		'opera12' => 'Opera 12.x',
 		'safari4' => 'Safari 4.x',
 		'safari5' => 'Safari 5.x',
+		'safariipad' => 'Safari Ipad',
 		'autre' => _T('tickets:option_navigateur_autre')
 	);
 	return $navs;
