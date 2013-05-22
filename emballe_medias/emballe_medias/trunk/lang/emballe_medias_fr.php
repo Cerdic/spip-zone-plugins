@@ -101,9 +101,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'hauteur_img_previsu' => 'Hauteur maximale (en px) de la prévisualisation des images',
 
 	// I
-	'info_statut_prepa' => 'En préparation',
-	'info_statut_prop' => 'Proposés à la publication',
-	'info_statut_publies' => 'Publiés',
 	'info_lien_publier_media' => 'Publier ce média',
 	'info_lien_refuser_media' => 'Refuser ce média',
 	'info_lien_supprimer_media' => 'Supprimer ce média',
@@ -114,6 +111,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_media_interdite' => 'Vous n\'avez pas le droit de modérer ce média',
 	'info_moderation_media_lien_titre' => 'Modérer ce média depuis l\'espace privé',
 	'info_moderation_media_url_perimee' => 'Ce lien de modération n\'est plus valide.',
+	'info_statut_prepa' => 'En préparation',
+	'info_statut_prop' => 'Proposés à la publication',
+	'info_statut_publies' => 'Publiés',
 
 	// L
 	'label_case_gerer_modifs_types' => 'Afficher le formulaire de changement de type',

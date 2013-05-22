@@ -103,6 +103,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'hauteur_img_previsu' => 'Maximal height (in px) of the pictures preview',
 
 	// I
+	'info_lien_publier_media' => 'Publier ce média', # NEW
+	'info_lien_refuser_media' => 'Refuser ce média', # NEW
+	'info_lien_supprimer_media' => 'Supprimer ce média', # NEW
+	'info_moderation_media_confirmee_publie' => 'Le média #@id_article@ a bien été publié', # NEW
+	'info_moderation_media_confirmee_refuse' => 'Le média #@id_article@ a bien été refusé', # NEW
+	'info_moderation_media_confirmee_supprime' => 'Le média #@id_article@ a bien été supprimé', # NEW
+	'info_moderation_media_deja_faite' => 'Le média #@id_article@ a déjà été modéré en "@statut@".', # NEW
+	'info_moderation_media_interdite' => 'Vous n\'avez pas le droit de modérer ce média', # NEW
+	'info_moderation_media_lien_titre' => 'Modérer ce média depuis l\'espace privé', # NEW
+	'info_moderation_media_url_perimee' => 'Ce lien de modération n\'est plus valide.', # NEW
 	'info_statut_prepa' => 'Being prepared',
 	'info_statut_prop' => 'Proposed to publication',
 	'info_statut_publies' => 'Published',
@@ -152,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_propose_detail' => 'The media "@titre@" is proposed to publication since',
 	'media_propose_sujet' => '[@nom_site_spip@] Proposed : @titre@',
 	'media_propose_titre' => 'Proposed Media
----------------',
+---------------', # MODIF
 	'media_propose_url' => 'You are invited to consult it. It\'s available at:',
 	'media_publie_detail' => 'The media "@titre@" has been published by @connect_nom@.',
 	'media_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
