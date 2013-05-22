@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
+	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="[(#URL_ECRIRE{membres_groupe,id_groupe=#ENV{id_groupe}})]"><:asso:groupe_membres:></a></div>]
+	<form method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<h3 class="legend"><:asso:synchroniser_choix_membres:></h3>
+		<ul>
+			<li class="editer_dir">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</span>]
+				<!--label><:perso:direction:></label-->
+				<div class="choix">
+					[(#REM)<!-- export = ajouter tous les membres du groupe a la zone -->]
+					<input type="radio" name="dir" id="export" value="exp" />
+					<label for="export"><:accesrestreint:titre_ajouter_zone:></label>
+				</div>
+				<div class="choix">
+					[(#REM)<!-- import = ajouter tous les auteurs de la zone au groupe -->]
+					<input type="radio" name="dir" id="import" value="imp" />
+					<label for="import"><:asso:ajouter_membres_au_groupe:></label>
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:pass_ok:>" class="submit" />
+		</p>
+	</form>
+</div>

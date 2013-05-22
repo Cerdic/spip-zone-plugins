@@ -28,8 +28,10 @@ function exec_membres_groupe() {
 		echo '<div class="vcard">'. association_tablinfos_intro( '<div class="org" id="vcard-group'.$groupe['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr><abbr class="organization-unit" title="'.$groupe['nom'] .'">'. (($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom']) .'</abbr></div>', 'groupe', $id_groupe, $infos ) .'</div>';
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 		echo association_navigation_raccourcis(array(
-			array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupe'), 'association') ),
+			array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupes'), 'association') ),
 			array('editer_groupe', 'edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'editer_groupe'), 'association') ),
+			array('accesrestreint:modifier_zone', 'zones-acces-24.png', array('zones_edit', "id_zone=$groupe[id_zone]" ), test_plugin_actif('ACCESRESTREINT')?array('modifier', 'zone', $groupe['id_zone']):FALSE ),
+			array('synchroniser_asso_membres', 'reload-32.png', array('synchronis_groupe', "id=$id_groupe" ), test_plugin_actif('ACCESRESTREINT')?array('gerer_groupes', 'association', $id_groupe):FALSE ),
 		), $id_groupe<100?10:11);
 /// AFFICHAGES_LATERAUX : Forms-PDF
 		if ( autoriser('exporter_membres', 'association') ) { // etiquettes
@@ -41,6 +43,7 @@ function exec_membres_groupe() {
 		echo recuperer_fond('modeles/membres_groupe', array(
 			'id_groupe' => $id_groupe
 		));
+/// AFFICHAGES_CENTRAUX : FIN
 		fin_page_association();
 	}
 }

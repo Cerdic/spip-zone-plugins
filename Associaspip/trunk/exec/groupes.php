@@ -38,7 +38,7 @@ function exec_groupes() {
 		array(
 			array('suppr', 'groupe', 'id=$$'),
 			array('edit', 'groupe', 'id=$$'),
-			array('act', 'voir_groupe', 'voir-12.png', 'membres_groupe', 'id=$$'),
+			array('list', 'membres_groupe', 'id=$$'),
 		), // boutons d'action
 		'id_groupe' // champ portant la cle des lignes et des boutons
 	);

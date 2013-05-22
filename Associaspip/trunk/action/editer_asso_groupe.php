@@ -19,6 +19,7 @@ function action_editer_asso_groupe_dist() {
 	'nom' => _request('nom'),
 	'commentaire' => _request('commentaire'),
 	'affichage' => association_recuperer_entier('affichage'),
+	'id_zone' => association_recuperer_entier('affichage'),
     );
     include_spip('base/association');
     if ($id_groupe) { // modification

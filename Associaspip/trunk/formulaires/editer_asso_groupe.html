@@ -9,6 +9,19 @@
 				<label for="nom"><:asso:nom_groupe:></label>
 				<input [(#ENV{_autorisation}|oui) disabled="disabled" [value="(#VAL{asso:groupe_#ENV{id_groupe}}|_T)"]] type="text" name="nom" [(#ENV{_autorisation}|non) [value="(#ENV{nom})"]] id="nom" class="text" />
 			</li>
+		<B_acces_restreint>
+			<li class="editer_zone">
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom_groupe})</span>]
+				<label for="zone"><:accesrestreint:page_zones_acces:></label>
+				<select name="id_zone" id="zone">
+					<option value="#ENV{id_zone}"><:accesrestreint:info_aucune_zone:></option>
+		<BOUCLE_acces_restreint(ZONES?){par titre}>
+					<option value="#ID_ZONE"[(#ENV{id_zone}|=={#ID_ZONE}|oui) selected="selected"]>#TITRE</option>
+		</BOUCLE_acces_restreint>
+				</select>
+				<em class="explication"><:accesrestreint:selectionner_une_zone:></em>
+			</li>
+		</B_acces_restreint>
 <INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
 		 [(#ENV{_autorisation}|non)
 			<li class="editer_affichage">

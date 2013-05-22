@@ -37,7 +37,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_don' => "BIGINT UNSIGNED NOT NULL",
 		'date_don' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'nom' => "TINYTEXT NOT NULL",
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL DEFAULT 0", //fk:asso_membres
 		'argent' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'colis' => "TINYTEXT NOT NULL",
 		'valeur' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // estimation du colis
@@ -59,7 +59,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'article' => "TINYTEXT NOT NULL",
 		'code' => "TINYTEXT NOT NULL",
 		'nom' => "TINYTEXT NOT NULL",
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL DEFAULT 0", //fk:asso_membres
 		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0",
 		'date_vente' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'date_envoi' => "DATE DEFAULT '0000-00-00'",
@@ -83,8 +83,8 @@ function association_declarer_tables_principales($tables_principales) {
 		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'justification' => "TEXT NOT NULL",
-		'imputation' => "TINYTEXT NOT NULL",
-		'journal' => "TINYTEXT NOT NULL",
+		'imputation' => "TINYTEXT NOT NULL", //fk:asso_plan.code
+		'journal' => "TINYTEXT NOT NULL", //fk:asso_plan.code
 		'id_journal' => "BIGINT UNSIGNED NOT NULL DEFAULT '0'",
 		'vu' => "BOOLEAN DEFAULT 0",
 		'maj' => "TIMESTAMP NOT NULL"
@@ -135,8 +135,8 @@ function association_declarer_tables_principales($tables_principales) {
 
 	$spip_asso_destination_op = array(
 		'id_dest_op' => "INT UNSIGNED NOT NULL",
-		'id_compte' => "BIGINT UNSIGNED NOT NULL",
-		'id_destination' => "INT UNSIGNED NOT NULL",
+		'id_compte' => "BIGINT UNSIGNED NOT NULL", //fk:asso_comptes
+		'id_destination' => "INT UNSIGNED NOT NULL", //fk:asso_destination
 		'recette' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 		'depense' => "DECIMAL(19,2) NOT NULL DEFAULT '0'",
 	);
@@ -153,7 +153,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'id_ressource' => "BIGINT UNSIGNED NOT NULL",
 		'code' => "TINYTEXT NOT NULL",
 		'intitule' => "TINYTEXT NOT NULL",
-		'id_mot' => "BIGINT NOT NULL DEFAULT 0", //=  spip_mots.id_mot
+		'id_mot' => "BIGINT NOT NULL DEFAULT 0", //fk:mots
 		'date_acquisition' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'prix_acquisition' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // Il s'agit du cout total d'acquisition (pour toutes les quantites acquises, avec --pour simplifier-- les frais accessoires --transports et renumeration d'intermediaires-- et taxes --de valeur ajourtee ou assimilables--)
 		'prix_caution' => "DECIMAL(19,2) NOT NULL DEFAULT '0'", // pour le depot de garanti... http://lexinter.net/JF/cautionnement.htm
@@ -174,7 +174,7 @@ function association_declarer_tables_principales($tables_principales) {
 	//-- Table PRETS ------------------------------------------
 	$spip_asso_prets = array(
 		'id_pret' => "BIGINT UNSIGNED NOT NULL",
-		'id_ressource' => "BIGINT UNSIGNED NOT NULL",
+		'id_ressource' => "BIGINT UNSIGNED NOT NULL", //fk:asso_ressources
 		'date_reservation' => "DATETIME DEFAULT NULL ", // reservation prealable, sinon la plus ancienne des dates de sortie ou de depot de caution ; on ne peut helas pas mettre comme valeur par defaut NOW() ou CURRENT_TIME dans la definition
 		'date_sortie' => "DATETIME NOT NULL DEFAULT '0000-00-00T00:00:00'", // prise de la ressource
 		'date_retour' => "DATETIME NOT NULL DEFAULT '0000-00-00T00:00:00'", // retour de la ressource
@@ -183,7 +183,7 @@ function association_declarer_tables_principales($tables_principales) {
 		'duree' => "FLOAT UNSIGNED NOT NULL DEFAULT '0'", // quantite finale facturee
 		'prix_unitaire' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // prix de base unitaire facture
 		'prix_caution' => "DECIMAL(19,2) NOT NULL DEFAULT 0", // montant de la garantie deposee
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL DEFAULT 0", //fk:asso_membres
 		'nom' => "TINYTEXT NOT NULL",
 		'commentaire_sortie' => "TEXT NOT NULL",
 		'commentaire_retour' => "TEXT NOT NULL",
@@ -200,9 +200,9 @@ function association_declarer_tables_principales($tables_principales) {
 	//-- Table ACTIVITES ------------------------------------------
 	$spip_asso_activites = array(
 		'id_activite' => "BIGINT UNSIGNED NOT NULL",
-		'id_evenement' => "BIGINT UNSIGNED NOT NULL",
+		'id_evenement' => "BIGINT UNSIGNED NOT NULL", //fk:evenemens
 		'nom' => "TINYTEXT NOT NULL",
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL", //fk:asso_membres
 		'quantite' => "FLOAT UNSIGNED NOT NULL DEFAULT 0", // C'est la quantite appliquee a un montant unique (equivaut alors au "nombre de tarifs"...) ou le nombre d'invites du participant
 		'date_inscription' => "DATE NOT NULL DEFAULT '0000-00-00'",
 		'commentaire' => "TEXT NOT NULL",
@@ -220,10 +220,11 @@ function association_declarer_tables_principales($tables_principales) {
 
 	//-- Table GROUPES de membres ----------------------------
 	$spip_asso_groupes = array(
-		'id_groupe' => "INT UNSIGNED NOT NULL",
+		'id_groupe' => "BIGINT UNSIGNED NOT NULL",
 		'nom' => "VARCHAR(128) NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
 		'affichage' => "TINYINT NOT NULL DEFAULT 0",
+		'id_zone' => "BIGINT NOT NULL DEFAULT 0", //fk:zones
 		'maj' => "TIMESTAMP NOT NULL"
 	);
 	$spip_asso_groupes_key = array(
@@ -236,8 +237,8 @@ function association_declarer_tables_principales($tables_principales) {
 
 	//-- Table FONCTIONS de membres ----------------------------
 	$spip_asso_fonctions = array(
-		'id_groupe' => "BIGINT UNSIGNED NOT NULL",
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_groupe' => "BIGINT UNSIGNED NOT NULL", //fk:asso_groupes
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL", //fk:asso_membres
 		'fonction' => "VARCHAR(128) NOT NULL",
 		'maj' => "TIMESTAMP NOT NULL"
 	);
@@ -251,12 +252,12 @@ function association_declarer_tables_principales($tables_principales) {
 
 	//-- Table MEMBRES ----------------------------------------
 	$spip_asso_membres = array(
-		'id_auteur' => "BIGINT UNSIGNED NOT NULL",
+		'id_auteur' => "BIGINT UNSIGNED NOT NULL", //fk:auteurs
 		'id_asso' => "TINYTEXT NOT NULL",
 		'nom_famille' => "TEXT NOT NULL",
 		'prenom' => "TEXT NOT NULL",
 		'sexe' => "TINYTEXT NOT NULL",
-		'id_categorie' => "INT UNSIGNED NOT NULL",
+		'id_categorie' => "INT UNSIGNED NOT NULL", //fk:asso_categories
 		'statut_interne' => "TINYTEXT NOT NULL",
 		'commentaire' => "TEXT NOT NULL",
 		'date_validite' => "DATE NOT NULL DEFAULT '0000-00-00'",
