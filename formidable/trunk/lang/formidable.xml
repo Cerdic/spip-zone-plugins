@@ -7,6 +7,9 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es">
+		<traducteur nom="tin" lien="http://trad.spip.net/auteur/tin" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=fr">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
