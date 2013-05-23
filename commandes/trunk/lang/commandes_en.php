@@ -52,29 +52,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_titre' => 'Invoice',
 
 	// I
-	'info_1_commande' => '1 commande', # NEW
-	'info_1_commande_attente_livraison' => '1 commande à envoyer', # NEW
-	'info_1_commande_attente_paiement' => '1 commande en attente de paiement', # NEW
-	'info_aucun_commande' => 'Aucune commande', # NEW
-	'info_commandes' => 'Commandes', # NEW
-	'info_date_envoi_vide' => 'commande non envoyée', # NEW
-	'info_date_paiement_vide' => 'commande non payée', # NEW
-	'info_nb_commandes' => '@nb@ commandes', # NEW
-	'info_nb_commandes_attente_livraison' => '@nb@ commandes à envoyer', # NEW
-	'info_nb_commandes_attente_paiement' => '@nb@ commandes en attente de paiement', # NEW
+	'info_1_commande' => '1 order',
+	'info_1_commande_attente_livraison' => '1 order to send',
+	'info_1_commande_attente_paiement' => '1 order awaiting confirmation',
+	'info_aucun_commande' => 'No orders',
+	'info_commandes' => 'Orders',
+	'info_date_envoi_vide' => 'order not sent',
+	'info_date_paiement_vide' => 'order not paid for',
+	'info_nb_commandes' => '@nb@ orders',
+	'info_nb_commandes_attente_livraison' => '@nb@ orders to send',
+	'info_nb_commandes_attente_paiement' => '@nb@ orders awaiting payment',
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_toutes_commandes' => 'All orders',
 
 	// L
-	'label_commande_dates' => 'Dates', # NEW
-	'label_filtre_clients' => 'Clients', # NEW
-	'label_filtre_dates' => 'Dates', # NEW
-	'label_filtre_etats' => 'Etats', # NEW
-	'label_filtre_tous_clients' => 'Tous les clients', # NEW
-	'label_filtre_tous_statuts' => 'Tous les états', # NEW
-	'label_filtre_toutes_dates' => 'Toutes les dates', # NEW
+	'label_commande_dates' => 'Dates',
+	'label_filtre_clients' => 'Clients',
+	'label_filtre_dates' => 'Dates',
+	'label_filtre_etats' => 'States',
+	'label_filtre_tous_clients' => 'All clients',
+	'label_filtre_tous_statuts' => 'All states', # MODIF
+	'label_filtre_toutes_dates' => 'All dates',
 	'label_passee_le' => 'passée le', # NEW
-	'label_payee_le' => 'payée le', # NEW
+	'label_payee_le' => 'paid on the',
 	'label_recherche' => 'Search',
 
 	// M
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_choix_email' => 'an e-mail',
 	'notifications_expediteur_choix_facteur' => 'idem plugin Facteur',
 	'notifications_expediteur_choix_webmaster' => 'a webmaster',
-	'notifications_expediteur_email_label' => 'Enter an e-mail:', # MODIF
+	'notifications_expediteur_email_label' => 'E-mail of sender:',
 	'notifications_expediteur_explication' => 'Choose the sender notifications for the seller and buyer',
 	'notifications_expediteur_label' => 'Sender',
 	'notifications_expediteur_webmaster_label' => 'Select a webmaster:',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_choix_email' => 'one or more emails',
 	'notifications_vendeur_choix_webmaster' => 'one or more webmasters',
 	'notifications_vendeur_email_explication' => 'Enter one or more email separated by commas:',
-	'notifications_vendeur_email_label' => 'Email(s) :', # MODIF
+	'notifications_vendeur_email_label' => 'Email(s) of seller :',
 	'notifications_vendeur_explication' => 'Choose (the) recipient(s) of the notifications for shipments to the seller',
 	'notifications_vendeur_label' => 'Seller',
 	'notifications_vendeur_webmaster_label' => 'Select one or more webmasters:',
@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
-	'titre_commandes_a_envoyer' => 'Commandes à envoyer', # NEW
+	'titre_commandes_a_envoyer' => 'Orders to send',
 
 	// U
 	'une_commande_de' => 'An order of: ',
