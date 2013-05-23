@@ -10,12 +10,28 @@
 	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
 </div>]
 
-[<div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
+<div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
+<BOUCLE_details_article_lie(ARTICLES){id_article=#ID_ARTICLE}>
 	<label><:almanach:label_id_article:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>(#ID_ARTICLE)</span>
-</div>]
+	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>  #TITRE (article n°#ID_ARTICLE)</span> 
+	
+</BOUCLE_details_article_lie>
+</div>
+
 
 <div>
-	<label>Événéments liés à cet almanach</label>
+	[(#REM) On boucle sur la table de liens pour récupérer l'id de l'objet evenement voulu puis on boucle sur la table evenement pour recuperer les détails de l'événement ]
+	<label><h2>Événéments liés à cet almanach</h2></label>
+	<B_evenements_lies>
+	<ul>
+	<BOUCLE_evenements_lies(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>
+		<li>
+			<BOUCLE_details_evenement_lie(EVENEMENTS){id_evenement=#ID_OBJET}>
+				#MODELE{evenement_vevent}
+			</BOUCLE_details_evenement_lie>
+		</li>
+	</BOUCLE_evenements_lies>
+	</ul>
+	</B_evenements_lies>
 </div>
 </BOUCLE_almanach>
