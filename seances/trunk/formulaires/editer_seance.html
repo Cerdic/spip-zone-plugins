@@ -31,15 +31,15 @@
 		<select name="annee" id="annee_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_annee,annee=#ENV{annee}})]
 		</select>
-		<:seance:seance_a:>
+		<span class="seance_cl"><:seance:seance_a:></span>
 		<select name="heure" id="heure_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_heure,heure=#ENV{heure}})]
 		</select>
-		<:seance:symbole_heure:>
+		<span class="seance_cl"><:seance:symbole_heure:></span>
 		<select name="minutes" id="heure_seance">
 			[(#INCLURE{fond=formulaires/inc/seances_select_minutes,minutes=#ENV{minutes}})]
 		</select>
-		<:seance:symbole_minute:>
+		<span class="seance_cl"><:seance:symbole_minute:></span>
 		</li>
 		<li class="saisie">
 			<label for="remarque_seance" id="label_remarque_seance"><:seance:remarque_seance:></label>

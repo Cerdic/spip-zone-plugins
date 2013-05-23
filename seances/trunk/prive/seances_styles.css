@@ -1,10 +1,12 @@
 /* formulaire editer seance */
 #formulaire_seance select {
-	font-size: 1em;
+	font-size: .9em;
 	width: auto;}
 
 #formulaire_seance li {
 	padding-left: 90px;}
+
+#formulaire_seance li span.seance_cl {font-size: .9em;}
 
 #formulaire_seance label {
 	margin-left: -80px;
