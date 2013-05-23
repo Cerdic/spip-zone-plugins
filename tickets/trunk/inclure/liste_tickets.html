@@ -5,6 +5,7 @@
 	Les paramètres possibles sont :
 	
 	-* titre = string 				Le titre du bloc (sinon le bloc n'aura pas de titre)
+	-* niveau_titre = string (h2)   Le niveau des titres (h2|h3|h4...)
 	-* date_sens = -1|1				Le sens de tri de la date
 	-* id_auteur = int				Un id_auteur numérique
 	-* auteurs = array				Un array d'id_auteur
@@ -31,7 +32,9 @@
 	-* date_debut = date (sql)		La date des premiers à afficher
 	-* date_fin = date (sql)		La date des derniers à afficher
 	-* class = string				Une classe spécifique appliquée au bloc parent
-	-* niveau_titre = string (h2)   Le niveau des titres (h2|h3|h4...)
+	-* champs_caches = array		Les champs à ne pas afficher dans le tableau
+	-* couper = int (160)			La longueur de coupe du texte si affiché
+	-* cacher_texte = string (oui|'') Si oui n'affichera pas le texte des tickets
 ]
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
@@ -54,6 +57,7 @@
 	#SET{champs_optionnels,#GET{champs_optionnels}|push{#CLE}}
 ]
 </BOUCLE_champs_optionnels>
+[(#SET{champs_optionnels,[(#GET{champs_optionnels}|array_diff{#ENV{champs_caches,#ARRAY}})]})]
 #SET{tout_assignes,#ARRAY}
 <BOUCLE_tout_assignes(TICKETS){fusion id_assigne}>#SET{tout_assignes,#GET{tout_assignes}|push{#ID_ASSIGNE}}</BOUCLE_tout_assignes>
 #SET{tout_auteurs,#ARRAY}
@@ -64,11 +68,9 @@
 <BOUCLE_trackers(TICKETS){fusion tracker}>#SET{tout_trackers,#GET{tout_trackers}|push{#TRACKER}}</BOUCLE_trackers>
 #SET{tout_severites,#ARRAY}
 <BOUCLE_severites(TICKETS){fusion severite}>#SET{tout_severites,#GET{tout_severites}|push{#SEVERITE}}</BOUCLE_severites>
-
 <B_detaillee>
 <div class="tickets[ (#ENV{class})]">
 [<[(#ENV{niveau_titre,h2}) ]class="#ENV{niveau_titre,h2}">(#ENV{titre})[ ((#GRAND_TOTAL))]</[(#ENV{niveau_titre,h2})]>]
-
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
 	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
 	[(#ENV{recherche}|oui)
@@ -162,7 +164,12 @@
 <table class="spip tickets">
 	<thead>
 		<tr>
-			<th></th>
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|non)[(#TRI{statut,#,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,#,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)
@@ -219,28 +226,30 @@
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]]
 				</th>
 			]
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]]
-			</th>
+			</th>]
+			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]><abbr title="<:tickets:champ_maj_long:>">
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]]
-			</abbr></th>
+			</abbr></th>]
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version?}{jalon?}{composant?}{projet?}{sticked?}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] #STATUT">
 			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
 			<td>
 				<a href="[(#URL_TICKET)]">#TITRE</a><br />
-				[(#TEXTE|couper{160})]
+				[(#ENV{cacher_texte}|!={oui}|oui)[(#TEXTE|couper{#ENV{couper}})]]
 			</td>
 			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
 			[(#ENV{tracker}|non)<td>[<a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">(#TRACKER|tickets_texte_tracker)</a>]</td>]
@@ -260,8 +269,10 @@
 			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>
 			]
-			<td>[(#DATE|affdate)]</td>
-			<td>[(#MAJ|affdate)]</td>
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<td>[(#DATE|affdate)]</td>]
+			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<td>[(#MAJ|affdate)]</td>]
 		</tr>
 	</BOUCLE_detaillee>
 	</tbody>

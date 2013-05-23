@@ -127,9 +127,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_ticket' => 'Modifier ce ticket',
 	'icone_retour_ticket' => 'Retour au ticket',
 	'info_commentaire' => 'Commentaire #@id@ :',
+	'info_demande' => '@nb@ demande',
+	'info_demande_fermee' => '@nb@ fermée',
+	'info_demande_ouverte' => '@nb@ ouverte',
+	'info_demande_resolue' => '@nb@ résolue',
+	'info_demandes' => '@nb@ demandes',
+	'info_demandes_fermees' => '@nb@ fermées',
+	'info_demandes_ouvertes' => '@nb@ ouvertes',
+	'info_demandes_resolues' => '@nb@ résolues',
 	'info_document_ajoute' => 'Ajouté :',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NUMÉRO :',
+	'info_sans_version' => 'Sans version',
 	'info_ticket_1' => '1 ticket',
 	'info_ticket_aucun' => 'Aucun ticket',
 	'info_ticket_nb' => '@nb@ tickets',
@@ -139,10 +148,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_paginer_par' => 'Paginer par :',
+	'label_vue_liste_tickets' => 'Changer la vue de la liste :',
 	'lien_filtrer' => 'Filtrer les tickets',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>',
 	'lien_reponse_ticket' => 'Réponse au ticket',
 	'lien_supprimer_filtres' => 'Enlever tous les filtres',
+	'lien_vue_roadmap' => 'Feuille de route',
+	'lien_vue_tous' => 'Liste complète',
 
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',

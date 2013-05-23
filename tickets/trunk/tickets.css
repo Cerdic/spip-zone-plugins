@@ -32,3 +32,25 @@ table.tickets.spip td {padding:3px; border:none;}
 table.ticket  tr.even,
 table.tickets.spip tr.row_even {background:#eee;}
 table.ticket  tr:hover {background:#EAF1F5;}
+
+table.progress{
+	border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    float: left;
+    margin: 1px 6px 1px 0;
+    text-align: center;
+}
+
+table.progress td{
+	padding:0;
+	height:1.2em;
+}
+
+table.progress td.todo{
+	background-color:#eee;
+}
+
+table.progress td.closed{
+	background-color:#AECCD7;
+}

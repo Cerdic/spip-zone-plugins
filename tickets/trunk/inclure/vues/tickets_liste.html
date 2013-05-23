@@ -1,0 +1,100 @@
+[(#ENV{id_auteur}
+	|ou{#ENV{auteurs}}
+	|ou{#ENV{id_assigne}}
+	|ou{#ENV{assignes}}
+	|ou{#ENV{statut}}
+	|ou{#ENV{statuts}}
+	|ou{#ENV{date_debut}}
+	|ou{#ENV{date_fin}}
+	|ou{#ENV{tracker}}
+	|ou{#ENV{trackers}}
+	|ou{#ENV{recherche}}
+	|ou{#ENV{jalon}}
+	|ou{#ENV{composant}}
+	|ou{#ENV{version}}
+	|ou{#ENV{navigateur}}
+	|oui)
+	[(#SET{tickets_tries,oui})]	
+]
+
+#FORMULAIRE_TRIER_TICKETS
+
+[(#GET{tickets_tries}|!={oui}|oui)
+	[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert,1,redac,2,resolu,3,ferme},sticked=on,
+			recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="sticked",
+			titre=<:tickets:tickets_sticked:>}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>[(#SET{affiche,oui})]]
+
+	[(#SESSION{id_auteur}|oui)
+		[<div class="ajax">
+			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_assigne=#SESSION{id_auteur},
+				recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="tickets_assigne",
+				titre=<:tickets:vos_tickets_assignes:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>[(#SET{affiche,oui})]]
+	]
+	[(#SESSION{id_auteur}|oui)
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statuts=#ARRAY{0,ouvert,1,redac},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
+			recherche,jalon,composant,version,navigateur,projet,tri_nom="tickets_en_cours",
+			titre=<:tickets:vos_tickets_en_cours:>}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+		</div>[(#SET{affiche,oui})]]
+	]
+
+	[(#GET{affiche}|=={oui}|?{
+		[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],
+		[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},tri_nom="tickets_autres",
+		titre=#GET{titre}}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur_non,#SESSION{id_auteur}}|parametre_url{id_assigne_non,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>]
+	
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,resolu,1,ferme},tri_nom="tickets_traites",
+		titre=<:tickets:tickets_traites:>}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>]
+
+	[(#SESSION{id_auteur}|oui)
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},tri_nom="tickets_auteur",
+		titre=<:tickets:tous_vos_tickets:>}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>]]
+	
+	[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
+			recherche,jalon,composant,version,navigateur,projet,
+			titre=<:tickets:tickets_derniers_commentaires:>}|trim)
+		</div>
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets_comments}|parametre_url{lang,#ENV{lang}})]"><:tickets:suivre_tickets_comments_rss:></a>
+	</div>]
+]
+
+[(#GET{tickets_tries}|=={oui}|oui)
+	[(#SET{statut,[(#ENV{statuts}|is_array|?{#ENV{statuts},#ENV{statuts}|?{#ARRAY{0,#ENV{statuts}},#ARRAY{0,ouvert,1,redac,2,resolu,3,ferme}}})]})]
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statuts=#GET{statut},titre=<:tickets:tickets_tries:>,env,ajax}|trim)
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>]]
+	
+#FILTRE{trim}
