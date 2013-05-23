@@ -1,0 +1,377 @@
+[(#REM)
+
+	Inclure créant une liste de tickets
+	
+	Les paramètres possibles sont :
+	
+	-* titre = string 				Le titre du bloc (sinon le bloc n'aura pas de titre)
+	-* niveau_titre = string (h2)   Le niveau des titres (h2|h3|h4...)
+	-* date_sens = -1|1				Le sens de tri de la date
+	-* id_auteur = int				Un id_auteur numérique
+	-* auteurs = array				Un array d'id_auteur
+	-* id_auteur_non = int/array	Un id numérique ou un array des id_auteur dont on ne souhaite pas afficher les tickets
+	-* id_assigne = int				Un id_auteur numérique à qui aurait été assigné les tickets
+	-* assignes = array				Un array d'id_assigne
+	-* id_assigne_non = int/array	Un id numérique ou un array des id_assigne que l'on ne souhaite pas voir
+	-* tracker = int				L'id du tracker (1|2|3|4), anciennement type
+	-* trackers = array				Un array de trackers
+	-* severite = int				L'id de severite
+	-* severites = array			Un array de severites
+	-* statut = string				Le statut
+	-* statuts = array				Un array de statuts
+	-* version = string				La version
+	-* jalon = string				Le jalon
+	-* composant = string			Le composant
+	-* projet = string				Le projet
+	-* sticked = oui|''				N'afficher que les tickets épinglés ou pas
+	-* order = string				Le paramètre de tri (défaut date mais peut être maj|titre|tracker|jalon|version|composant|projet|severite|id_ticket)
+	-* tri_nom= string (detaillee)	Le nom du critère de tri (ce qui sera utilisé dans l'url pour le tri)
+	-* pagination = int				Le nombre d'élément à afficher dans la pagination
+	-* recherche = string			Une chaine recherchée dans les tickets
+	-* afficher_filtres				Affiche les filtres passés en argument
+	-* date_debut = date (sql)		La date des premiers à afficher
+	-* date_fin = date (sql)		La date des derniers à afficher
+	-* class = string				Une classe spécifique appliquée au bloc parent
+	-* champs_caches = array		Les champs à ne pas afficher dans le tableau
+	-* couper = int (160)			La longueur de coupe du texte si affiché
+	-* cacher_texte = string (oui|'') Si oui n'affichera pas le texte des tickets
+]
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	maj,#ENV{date_sens,-1},
+	titre,1,
+	tracker,1,
+	jalon,1,
+	version,1,
+	composant,1,
+	projet,1,
+	severite,1,
+	id_ticket,1
+}})
+][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
+[(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
+#SET{champs_optionnels,#ARRAY}
+#SET{champs, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
+<BOUCLE_champs_optionnels(DATA){source table, #GET{champs}}>
+[(#VALEUR|tickets_champ_optionnel_actif|oui)
+	#SET{champs_optionnels,#GET{champs_optionnels}|push{#CLE}}
+]
+</BOUCLE_champs_optionnels>
+[(#SET{champs_optionnels,[(#GET{champs_optionnels}|array_diff{#ENV{champs_caches,#ARRAY}})]})]
+#SET{tout_assignes,#ARRAY}
+<BOUCLE_tout_assignes(TICKETS){fusion id_assigne}>#SET{tout_assignes,#GET{tout_assignes}|push{#ID_ASSIGNE}}</BOUCLE_tout_assignes>
+#SET{tout_auteurs,#ARRAY}
+<BOUCLE_tout_auteurs(TICKETS){fusion id_auteur}>#SET{tout_auteurs,#GET{tout_auteurs}|push{#ID_AUTEUR}}</BOUCLE_tout_auteurs>
+#SET{tout_statuts,#ARRAY}
+<BOUCLE_statuts(TICKETS){fusion statut}>#SET{tout_statuts,#GET{tout_statuts}|push{#STATUT}}</BOUCLE_statuts>
+#SET{tout_trackers,#ARRAY}
+<BOUCLE_trackers(TICKETS){fusion tracker}>#SET{tout_trackers,#GET{tout_trackers}|push{#TRACKER}}</BOUCLE_trackers>
+#SET{tout_severites,#ARRAY}
+<BOUCLE_severites(TICKETS){fusion severite}>#SET{tout_severites,#GET{tout_severites}|push{#SEVERITE}}</BOUCLE_severites>
+<B_detaillee>
+<div class="tickets[ (#ENV{class})]">
+[<[(#ENV{niveau_titre,h2}) ]class="#ENV{niveau_titre,h2}">(#ENV{titre})[ ((#GRAND_TOTAL))]</[(#ENV{niveau_titre,h2})]>]
+<BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
+	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
+	[(#ENV{recherche}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]
+		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
+	][(#ENV{date_debut}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_debut,''})]})]
+		<p><:tickets:champ_date_debut:> [(#ENV{date_debut}|affdate)]</p>
+	][(#ENV{date_fin}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_fin,''})]})]
+		<p><:tickets:champ_date_fin:> [(#ENV{date_fin}|affdate)]</p>
+	]
+	<B_pour_statuts>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{statuts,''}|parametre_url{statut,''})]})]
+	<p><:tickets:champ_statut:> 
+	<BOUCLE_pour_statuts(DATA){source table, #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts>
+	</p>
+	</B_pour_statuts>
+	<B_pour_severites>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severites,''})]})]
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_severites(DATA){source table, #ENV{severites}}{', '}>[(#VALEUR|tickets_texte_severite)]</BOUCLE_pour_severites>
+	</p>
+	</B_pour_severites>
+	[(#ENV{severite}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severite,''})]})]
+		<p><:tickets:champ_severite:> [(#ENV{severite}|tickets_texte_severite)]</p>
+	]
+	<B_pour_trackers>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{trackers,''})]})]
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_trackers(DATA){source table, #ENV{trackers}}{', '}>[(#VALEUR|tickets_texte_tracker)]</BOUCLE_pour_trackers>
+	</p>
+	</B_pour_trackers>
+	[(#ENV{tracker}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{tracker,''})]})]
+		<p><:tickets:champ_type:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
+	]
+	[(#ENV{projet}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{projet,''})]})]
+		<p><:tickets:champ_projet:> #ENV{projet}</p>
+	][(#ENV{composant}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{composant,''})]})]
+		<p><:tickets:champ_composant:> #ENV{composant}</p>
+	][(#ENV{jalon}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{jalon,''})]})]
+		<p><:tickets:champ_jalon:> #ENV{jalon}</p>
+	][(#ENV{version}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{version,''})]})]
+		<p><:tickets:champ_version:> #ENV{version}</p>
+	][(#ENV{navigateur}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{navigateur,''})]})]
+		<p><:tickets:champ_navigateur:> #ENV{navigateur}</p>
+	]
+	<B_auteurs>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{auteurs,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_auteur,''})]})]
+		<p><:tickets:champ_id_auteur:> 
+		<BOUCLE_auteurs(AUTEURS){id_auteur IN #ENV{auteurs,#ENV{id_auteur}}}{', '}>
+		#NOM
+		</BOUCLE_auteurs>
+		</p>
+	</B_auteurs>
+	<B_assignes>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{assignes,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_assigne,''})]})]
+		<p><:tickets:champ_id_assigne:>
+		<BOUCLE_assignes(AUTEURS){id_auteur IN #ENV{assignes,#ENV{id_assigne}}}{', '}>
+		#NOM
+		</BOUCLE_assignes>
+		</p>
+	</B_assignes>
+	[(#ENV{url_defiltrer}|=={oui}|oui)
+	<div class="actions">
+		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>
+	</div>]
+</BOUCLE_si_afficher_filtres>
+<div class="ticket"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
+[<p class="pagination">(#PAGINATION)</p>]
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="changer_pagination">
+	<span class='label'><:tickets:label_paginer_par:></span>
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
+</p>]
+<table class="spip tickets">
+	<thead>
+		<tr>
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|non)[(#TRI{statut,#,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={statut}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,#,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={id_ticket}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,#,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|non)[(#TRI{titre,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={titre}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_titre:>,ajax}|inserer_attribut{rel,nofollow}|inserer_attribut{rel,nofollow})]]]
+			</th>
+			[(#ENV{tracker}|non)<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|non)[(#TRI{tracker,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={tracker}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_type:>,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>]
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|non)[(#TRI{severite,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_importance:>,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>
+			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_projet:>,ajax}|inserer_attribut{rel,nofollow})]]]
+				</th>
+			]
+			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_composant:>,ajax}|inserer_attribut{rel,nofollow})]]]
+				</th>
+			]
+			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|non)[(#TRI{version,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_version:>,ajax}|inserer_attribut{rel,nofollow})]]]
+				</th>
+			]
+			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]
+						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon:>,ajax}|inserer_attribut{rel,nofollow})]]]
+				</th>
+			]
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>]
+			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]><abbr title="<:tickets:champ_maj_long:>">
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_maj:>,ajax}|inserer_attribut{rel,nofollow})]]]
+			</abbr></th>]
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version=""}{jalon?}{composant?}{projet?}{version=""}{sticked?}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] #STATUT">
+			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
+			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
+			<td>
+				<a href="[(#URL_TICKET)]">#TITRE</a><br />
+				[(#ENV{cacher_texte}|!={oui}|oui)[(#TEXTE|couper{#ENV{couper}})]]
+			</td>
+			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
+			[(#ENV{tracker}|non)<td>[<a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">(#TRACKER|tickets_texte_tracker)</a>]</td>]
+			<td>
+				[<a href="[(#SELF|parametre_url{severite,#SEVERITE**})]">(#SEVERITE|tickets_icone_severite{true})
+				[&nbsp;(#SEVERITE|tickets_texte_severite)]</a>]
+			</td>
+			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td class="#EDIT{projet}"><a href="[(#SELF|parametre_url{projet,#PROJET**})]">[(#PROJET|sinon{-})]</a></td>
+			]
+			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td class="#EDIT{composant}"><a href="[(#SELF|parametre_url{composant,#COMPOSANT**})]">[(#COMPOSANT|sinon{-})]</a></td>
+			]
+			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
+			]
+			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>
+			]
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<td>[(#DATE|affdate)]</td>]
+			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			<td>[(#MAJ|affdate)]</td>]
+		</tr>
+	</BOUCLE_detaillee>
+	</tbody>
+</table>
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="changer_pagination">
+	<span class='label'><:tickets:label_paginer_par:></span>
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
+</p>]
+[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</div>
+</B_detaillee>
+<BOUCLE_si_afficher_filtres_sans(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
+	<[(#ENV{niveau_titre,h2}) ]class="[(#ENV{niveau_titre,h2})]"><:tickets:tickets_tries:> (0)</[(#ENV{niveau_titre,h2})]>
+	[(#BOITE_OUVRIR{'',notice})]
+		<p><:tickets:message_aucun_ticket_recherche:></p>
+	[(#BOITE_FERMER)]
+	
+	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
+	[(#ENV{recherche}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]
+		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
+	][(#ENV{date_debut}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_debut,''})]})]
+		<p><:tickets:champ_date_debut:> [(#ENV{date_debut}|affdate)]</p>
+	][(#ENV{date_fin}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_fin,''})]})]
+		<p><:tickets:champ_date_fin:> [(#ENV{date_fin}|affdate)]</p>
+	]
+	<B_pour_statuts_sans>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{statuts,''}|parametre_url{statut,''})]})]
+	<p><:tickets:champ_statut:> 
+	<BOUCLE_pour_statuts_sans(DATA){source table, #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts_sans>
+	</p>
+	</B_pour_statuts_sans>
+	<B_pour_severites_sans>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severites,''})]})]
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_severites_sans(DATA){source table, #ENV{severites}}{', '}>[(#VALEUR|tickets_texte_severite)]</BOUCLE_pour_severites_sans>
+	</p>
+	</B_pour_severites_sans>
+	[(#ENV{severite}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severite,''})]})]
+		<p><:tickets:champ_severite:> [(#ENV{severite}|tickets_texte_severite)]</p>
+	]
+	<B_pour_trackers_sans>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{trackers,''})]})]
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_trackers_sans(DATA){source table, #ENV{trackers}}{', '}>[(#VALEUR|tickets_texte_tracker)]</BOUCLE_pour_trackers_sans>
+	</p>
+	</B_pour_trackers_sans>
+	[(#ENV{tracker}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{tracker,''})]})]
+		<p><:tickets:champ_type:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
+	]
+	[(#ENV{projet}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{projet,''})]})]
+		<p><:tickets:champ_projet:> #ENV{projet}</p>
+	][(#ENV{composant}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{composant,''})]})]
+		<p><:tickets:champ_composant:> #ENV{composant}</p>
+	][(#ENV{jalon}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{jalon,''})]})]
+		<p><:tickets:champ_jalon:> #ENV{jalon}</p>
+	][(#ENV{version}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{version,''})]})]
+		<p><:tickets:champ_version:> #ENV{version}</p>
+	][(#ENV{navigateur}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{navigateur,''})]})]
+		<p><:tickets:champ_navigateur:> #ENV{navigateur}</p>
+	]
+	<B_auteurs_sans>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{auteurs,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_auteur,''})]})]
+		<p><:tickets:champ_id_auteur:> 
+		<BOUCLE_auteurs_sans(AUTEURS){id_auteur IN #ENV{auteurs,#ENV{id_auteur}}}{', '}>
+		#NOM
+		</BOUCLE_auteurs_sans>
+		</p>
+	</B_auteurs_sans>
+	<B_assignes_sans>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{assignes,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_assigne,''})]})]
+		<p><:tickets:champ_id_assigne:>
+		<BOUCLE_assignes_sans(AUTEURS){id_auteur IN #ENV{assignes,#ENV{id_assigne}}}{', '}>
+		#NOM
+		</BOUCLE_assignes_sans>
+		</p>
+	</B_assignes_sans>
+	[(#ENV{url_defiltrer}|=={oui}|oui)
+	<div class="actions">
+		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>
+	</div>]
+</BOUCLE_si_afficher_filtres_sans>
+<//B_detaillee>
