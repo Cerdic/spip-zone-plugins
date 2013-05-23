@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_assigner' => 'التكليف بالتذاكر',
 	'cfg_lgd_autorisation_commenter' => 'التعليق على التذاكر',
 	'cfg_lgd_autorisation_ecrire' => 'كتابة التذاكر',
+	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
 	'cfg_lgd_autorisation_modifier' => 'تعديل التذاكر',
 	'cfg_lgd_champs_optionnels' => 'حقول اختيارية',
 	'cfg_lgd_champs_options_autres' => 'الخيارات الأخرى',
@@ -141,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'تصفح حسب:',
 	'lien_filtrer' => 'ترشيح التذاكر',
+	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
 	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
 	'lien_supprimer_filtres' => 'حذف كل المرشحات',
 

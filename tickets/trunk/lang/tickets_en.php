@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_assigner' => 'Assign bug reports',
 	'cfg_lgd_autorisation_commenter' => 'Comment bug reports',
 	'cfg_lgd_autorisation_ecrire' => 'Write bug reports',
+	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
 	'cfg_lgd_autorisation_modifier' => 'Edit the bug reports',
 	'cfg_lgd_champs_optionnels' => 'Optional fields',
 	'cfg_lgd_champs_options_autres' => 'Other options',
@@ -141,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Paginate by:',
 	'lien_filtrer' => 'Filter the bug reports',
+	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
 	'lien_reponse_ticket' => 'Answer to the bug report',
 	'lien_supprimer_filtres' => 'Remove all filters',
 

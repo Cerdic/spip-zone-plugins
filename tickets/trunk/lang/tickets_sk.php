@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_assigner' => 'Priradiť lístky',
 	'cfg_lgd_autorisation_commenter' => 'Okomentovať lístky',
 	'cfg_lgd_autorisation_ecrire' => 'Napísať lístok',
+	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
 	'cfg_lgd_autorisation_modifier' => 'Upraviť lístky',
 	'cfg_lgd_champs_optionnels' => 'Nepovinné polia',
 	'cfg_lgd_champs_options_autres' => 'Ďalšie možnosti',
@@ -141,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_paginer_par' => 'Stránkovať od:',
 	'lien_filtrer' => 'Rozriediť lístky',
+	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
 	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
 	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
 
