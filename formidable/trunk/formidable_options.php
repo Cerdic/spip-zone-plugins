@@ -90,11 +90,19 @@ $GLOBALS['formulaires']['variables_anonymisation'] = array(
 	'php_auth_user' => '$_SERVER["PHP_AUTH_USER"]',
 );
 
-$GLOBALS['formulaires']['passwd'] = array(
-	'interne' => 'palabresecreta',
-);
+/*
+* on se contente d'initialiser si ces variable si elles ne
+* le sont pas dans mes_options.php de l'instance
+*/
+if (isset($GLOBALS['formulaires']['passwd']) == false) {
+	$GLOBALS['formulaires']['passwd'] = array(
+		'interne' => 'palabresecreta',
+	);
+}
 
-$GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
+if (isset($GLOBALS['formulaires']['autoriser_admin_restreint']) == false) {
+	$GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
+}
 
 if (!function_exists('array_fill_keys')) {
     /**
