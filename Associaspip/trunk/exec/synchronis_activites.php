@@ -52,7 +52,7 @@ function exec_synchronis_activites() {
 /// AFFICHAGES_CENTRAUX (corps)
 	debut_cadre_association('reload-32.png', 'options_synchronisation');
 /// AFFICHAGES_CENTRAUX : FORMULAIRE
-	echo recuperer_fond('prive/editer/synchroniser_asso_activites', array (
+	echo recuperer_fond('prive/editer/synchroniser_asso_activite', array (
 		'id_evenement' => $id_evenement,
 	));
 /// AFFICHAGES_CENTRAUX : FIN

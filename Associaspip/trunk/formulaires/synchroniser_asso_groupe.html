@@ -3,25 +3,97 @@
 	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="[(#URL_ECRIRE{membres_groupe,id_groupe=#ENV{id_groupe}})]"><:asso:groupe_membres:></a></div>]
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:synchroniser_choix_membres:></h3>
-		<ul>
-			<li class="editer_dir">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</span>]
-				<!--label><:perso:direction:></label-->
-				<div class="choix">
-					[(#REM)<!-- export = ajouter tous les membres du groupe a la zone -->]
-					<input type="radio" name="dir" id="export" value="exp" />
-					<label for="export"><:accesrestreint:titre_ajouter_zone:></label>
-				</div>
-				<div class="choix">
-					[(#REM)<!-- import = ajouter tous les auteurs de la zone au groupe -->]
-					<input type="radio" name="dir" id="import" value="imp" />
-					<label for="import"><:asso:ajouter_membres_au_groupe:></label>
-				</div>
-			</li>
-		</ul>
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</p>]
+		<fieldset class="editer_dir editer_import">[(#REM)<!-- import = ajouter des auteurs de la zone au groupe -->]
+			<legend class="legend">
+				<input type="radio" name="dir" id="dir_imp"[(#ENV{dir}|=={imp}|oui) selected="selected"] value="imp" />
+				<label for="dir_imp"><:asso:synchroniser_en_import:></label>
+			</legend>
+			<em class="explication"><:asso:ajouter_membres_au_groupe:></em>
+			<ul>
+
+				<li class="editer_imp">
+			<B_auteurs2zone_statut>
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{imp})</span>]
+					<label><:ecrire:info_auteurs:></label>
+			<BOUCLE_auteurs2zone_statut(spip_auteurs spip_zones?){fusion statut}{!par statut}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" id="imp_#STATUT" value="#STATUT" />
+						<label for="imp_#STATUT">
+						[(#STATUT|=={0minirezo}|?{
+							<:ecrire:item_choix_administrateurs:>
+						,
+							[(#STATUT|=={1comite}|?{
+								<:ecrire:item_choix_redacteurs:>
+							,
+								[(#STATUT|=={6forum}|?{
+									<:ecrire:item_choix_visiteurs:>
+								,
+									<:ecrire:info_statut_auteur_autre:> [(#VAL{perso:#STATUT}|_T)]
+								})]
+							})]
+						})]
+						</label>
+					</div>
+			</BOUCLE_auteurs2zone_statut>
+					<div class="choix">
+						<input type="checkbox" id="imp_SelectAll" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('imp[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
+						<label for="imp_SelectAll"><:spip:icone_tous_auteur:></label>
+					</div>
+			</B_auteurs2zone_statut>
+					<span class="erreur"><:spip:aucun_auteur:></span>
+			<//B_auteurs2zone_statut>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset class="editer_dir editer_export">[(#REM)<!-- export = ajout des membres du groupe a la zone -->]
+			<legend class="legend">
+				<input type="radio" name="dir" id="dir_exp"[(#ENV{dir}|=={exp}|oui) selected="selected"] value="exp" />
+				<label for="dir_exp"><:asso:synchroniser_en_export:></label>
+			</legend>
+			<em class="explication"><:accesrestreint:titre_ajouter_zone:></em>
+			<ul>
+				<li class="editer_cat">
+			<B_membres2groupe_categorie>
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{cat})</span>]
+					<label for="exp_cat"><:asso:adherent_libelle_categorie:></label>
+			<BOUCLE_membres2groupe_categorie(ASSO_FONCTIONS asso_membres){id_groupe}{fusion id_categorie}>
+					<div class="choix">
+						<input type="checkbox" name="cat[]" id="cat_#ID_CATEGORIE" value="#ID_CATEGORIE" />
+						<label for="cat_#ID_CATEGORIE"><BOUCLE_categorie2membre(ASSO_CATEGORIES){id_categorie}>#LIBELLE</BOUCLE_categorie2membre></label>
+					</div>
+			</BOUCLE_membres2groupe_categorie>
+					<div class="choix">
+						<input type="checkbox" id="cat_SelectAll" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('cat[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
+						<label for="cat_SelectAll"><:asso:selectionner_tout:></label>
+					</div>
+			</B_membres2groupe_categorie>
+					<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
+			<//B_membres2groupe_categorie>
+				</li>
+
+				<li class="editer_etat">
+			<B_membres2groupe_statut>
+					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{etat})</span>]
+					<label for="exp_etat"><:asso:adherent_libelle_statut:></label>
+			<BOUCLE_membres2groupe_statut(ASSO_FONCTIONS asso_membres){id_groupe}{fusion statut_interne}>
+					<div class="choix">
+						<input type="checkbox" name="etat[]" id="etat_#STATUT_INTERNE" value="#STATUT_INTERNE" />
+						<label for="etat_#STATUT_INTERNE">[(#VAL{asso:adherent_entete_statut_#STATUT_INTERNE}|_T)]</label>
+					</div>
+			</BOUCLE_membres2groupe_statut>
+					<div class="choix">
+						<input type="checkbox" id="etat_SelectAll" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('etat[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
+						<label for="etat_SelectAll"><:asso:selectionner_tout:></label>
+					</div>
+			</B_membres2groupe_statut>
+					<span class="erreur_message"><:asso:aucun_membre_dans_ce_groupe:></span>
+			<//B_membres2groupe_statut>
+				</li>
+			</ul>
+		</fieldset>
 		<p class="boutons">
-			<input type="submit" value="<:pass_ok:>" class="submit" />
+			<input type="submit" value="<:spip:pass_ok:>" class="submit" />
 		</p>
 	</form>
 </div>

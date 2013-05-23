@@ -108,8 +108,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 function association_navigation_raccourcis($raccourcis=array(), $identifiant='') {
 	$res = ''; // initialisation
 	if ($identifiant) { // bloc identifie = extensible
-		$modules_externes = pipeline('associaspip', array()); // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
-		foreach ( $modules_externes as $plugin=>$boutons ) {
+		foreach ( pipeline('associaspip', array()) as $plugin=>$boutons ) { // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
 			if ( test_plugin_actif($plugin) )
 				$raccourcis[] = $boutons[$identifiant];
 		}

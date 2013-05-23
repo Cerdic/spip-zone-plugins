@@ -18,8 +18,7 @@ function action_synchroniser_asso_groupe() {
 
 	$grp = association_recuperer_entier('id_groupe');
 	$zar = sql_getfetsel('id_zone', 'spip_asso_groupes', "id_groupe=$grp");
-	$laa = array(); // Liste des id_Auteurs rAjoutes
-	$dir = _request('dir'); // direction de la synchro
+	$laa = array(); // Liste des Auteurs Ajoutes
 	$desc_table = charger_fonction('trouver_table', 'base');
 	if ( $desc_table('spip_zones_auteurs') ) { // SPIP2
 		$ztl = 'spip_zones_auteurs';
@@ -28,34 +27,49 @@ function action_synchroniser_asso_groupe() {
 	} else { // ??
 		$ztl = 'spip_zones_liens';
 	}
-	switch ($dir) {
-		case 'imp' : // zone -> groupe
-			switch ($ztl) {
-				case 'spip_zones_auteurs': // SPIP 2
-					$q = sql_select('id_auteur', $zlt, "id_zone=$zar");
+	switch ( _request('dir') ) { // direction de la synchro
+		case 'imp' : // import: zones_% -> asso_fonctions
+			$imp = association_recuperer_liste('imp', TRUE); // tableau de la liste des statuts
+			if ( count($imp) ) // restreindre selon auteurs.statut specifie(s)
+				$qaw = sql_in('a.statut', $imp);
+			else // tous ...sauf supprimes...
+				$qaw = "a.statut<>'5poubelle' ";
+			$join = ' AS z INNER JOIN spip_auteurs AS a ON z.id_auteur=a.id_auteur';
+			switch ( substr($ztl, 11) ) {
+				case 'auteurs': // SPIP 2
+					$q = sql_select('id_auteur', $ztl.$join, "z.id_zone=$zar AND $qaw");
 					break;
-				case 'spip_zones_liens': // SPIP 3
-					$q = sql_select('id_objet', $zlt, "objet='auteur' AND id_zone=$zar");
+				case 'liens': // SPIP 3
+					$q = sql_select('id_objet', $ztl.$join, "z.objet='auteur' AND z.id_zone=$zar AND $qaw");
 					break;
 			}
-			while ( $aut = sql_fetch($q) )
-				if ( sql_countsel('spip_asso_membres', 'id_auteur='.$aut['id_auteur']) ) // filtre pour n'inserer que les membres
+			while ( $aut = sql_fetch($q) ) // inserer un par un (c'est moins performant que d'inserer en lot, mais d'une part on ne plante pas tout si on tente d'inserer en doublon et d'autre part le compte est celui des insertions reussies)
+				if ( sql_countsel('spip_asso_membres', 'id_auteur='.$aut['id_auteur']) ) // filtre pour n'inserer que les membres...
 				$laa[] = sql_insertq('spip_asso_fonctions', array(
 					'id_auteur' => $aut['id_auteur'],
 					'id_groupe' => $grp,
 				) );
+			sql_free($q);
 			break;
-		case 'exp' : // groupe -> zone
-			$q = sql_select('id_auteur', 'spip_asso_fonctions', "id_groupe=$grp");
-			while ( $aut = sql_fetch($q) )
-				switch ($ztl) {
-					case 'spip_zones_auteurs': // SPIP 2
+		case 'exp' : // export: asso_fonctions -> zones_%
+			$where = "f.id_groupe=$grp";
+			$etat = association_recuperer_liste('etat', TRUE);
+			if ( count($etat) ) // restreindre selon asso_membres.statut_interne specifie(s)
+				$where .= ' AND '. sql_in('m.statut_interne', $statut);
+			$cat = association_recuperer_liste('cat', TRUE);
+			if ( count($cat) ) // restreindre selon asso_membres.id_categorie specifie(s)
+				$where .= ' AND '. sql_in('m.id_categorie', $cat);
+			$join =  ($etat || $cat) ? ' LEFT JOIN spip_asso_membres AS m ON f.id_auteur=m.id_auteur' : ''; // si pas de restriction alors tous
+			$q = sql_select('id_auteur', 'spip_asso_fonctions AS f'.$join, $where);
+			while ( $aut = sql_fetch($q) ) // inserer un par un (c'est moins performant que d'inserer en lot, mais d'une part on ne plante pas tout si on tente d'inserer en doublon et d'autre part le compte est celui des insertions reussies)
+				switch ( substr($ztl, 11) ) {
+					case 'auteurs': // SPIP 2
 						$laa[] = sql_insertq($ztl, array(
 							'id_auteur' => $aut['id_auteur'],
 							'id_zone' => $zar,
 						) );
 						break;
-					case 'spip_zones_liens': // SPIP 3
+					case 'liens': // SPIP 3
 						$laa[] = sql_insertq($ztl, array(
 							'id_objet' => $aut['id_auteur'],
 							'id_zone' => $zar,
@@ -63,9 +77,12 @@ function action_synchroniser_asso_groupe() {
 						) );
 						break;
 				}
+			sql_free($q);
+			break;
+		default: // nop
 			break;
 	}
-	return count($laa); // on retourne le nombre de membres inseres dans la table
+	return count($laa); // on retourne le nombre d'insertions faites
 }
 
 ?>

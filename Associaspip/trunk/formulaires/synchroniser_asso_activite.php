@@ -15,32 +15,27 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
 
-function formulaires_synchroniser_asso_groupe_charger_dist($id_groupe=0) {
-	$contexte['id_groupe'] = $id_groupe; // passer l'argument dans l'environnement
-	$contexte['id_zone'] = sql_getfetsel('id_zone', 'spip_asso_groupes', 'id_groupe='.sql_quote($id_groupe)); // passer le parametre dans l'environnement
-	$contexte['_hidden'] .= "<input type='hidden' name='id_groupe' value='$id_groupe' />"; // transmettre le parametre
-	$contexte['_action'] = array('synchroniser_asso_groupe', ''); // pour passer securiser action
+function formulaires_synchroniser_asso_activite_charger_dist($id_evenement=0) {
+	$contexte['id_evenement'] = $id_evenement; // passer l'argument dans l'environnement
+	$contexte['_hidden'] .= "<input type='hidden' name='id_evenement' value='$id_evenement' />"; // transmettre le parametre
+	$contexte['_action'] = array('synchroniser_asso_activite', ''); // pour passer securiser action
 	if ( !_request('dir') ) // pas de direction selectionnee :
 		$contexte['dir'] = 'imp'; // preselectionner l'import.
 
 	return $contexte;
 }
 
-function formulaires_synchroniser_asso_groupe_verifier_dist($id_groupe=0) {
+function formulaires_synchroniser_asso_activite_verifier_dist($id_evenement=0) {
 	$erreurs = array();
 
-	if ( !in_array(_request('dir'), array('imp','exp')) )
-		$erreurs['dir'] = _T('perso:choix_invalide');
+	// pas de verification non plus
 
-	if (count($erreurs)) {
-		$erreurs['message_erreur'] = _T('asso:erreur_titre');
-	}
 	return $erreurs;
 }
 
-function formulaires_synchroniser_asso_groupe_traiter_dist($id_groupe=0) {
+function formulaires_synchroniser_asso_activite_traiter_dist($id_evenement=0) {
 	$res = array();
-	$synchro = charger_fonction('synchroniser_asso_groupe','action');
+	$synchro = charger_fonction('synchroniser_asso_activite','action');
 	$nb_insertion = $synchro(); // la fonction action retourne le nombre d'insertion realisees
 	if ($nb_insertion>1) {
 		$res['message_ok'] = _T('asso:membres_ajoutes');

@@ -1166,5 +1166,10 @@ $GLOBALS['association_maj'][72929] = array(
 	array('maj_tables', 'spip_asso_ressources'), // + champ : id_mot
 );
 
+$GLOBALS['association_maj'][72938] = array(
+	// liaison des ressources aux mots-cles
+	array('maj_tables', 'spip_asso_groupes'), // + champ : id_zone
+);
+
 
 ?>

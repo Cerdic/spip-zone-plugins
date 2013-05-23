@@ -159,7 +159,7 @@ function association_bouton_list($objet, $args='', $tag='td') {
 			$titre = 'bouton_voir';
 			break;
 	}
-	$res = association_bouton_act($titre, 'voir-12.png', "$objet", is_numeric($args)?"id=$args":$args, 'width="12" height="12"', $tag);
+	$res = association_bouton_act($titre, 'voir-12.png', $objet, is_numeric($args)?"id=$args":$args, 'width="12" height="12"', $tag);
 	return $res;
 }
 

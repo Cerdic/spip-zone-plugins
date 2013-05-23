@@ -19,13 +19,7 @@ function action_synchroniser_asso_membres() {
 	if (_request('tous')) {
 		$where = "statut <> '5poubelle'";
 	} else {
-		$liste_statuts = array();
-		if (_request('visiteurs'))
-			$liste_statuts[] = '6forum';
-		if (_request('redacteurs'))
-			$liste_statuts[] = '1comite';
-		if (_request('administrateurs'))
-			$liste_statuts[] = '0minirezo';
+		$liste_statuts = association_recuperer_liste('imp', TRUE);
 		$where = sql_in('statut', $liste_statuts) ." OR (statut='nouveau' AND ". sql_in('bio', $liste_statuts) .')'; // cas des redacteurs jamais connectes : leur statut est dans le champ bio
 	}
 	if (!_request('forcer')) { // on recupere les id de tous les membres deja presents pour ne pas les traiter

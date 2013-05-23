@@ -1,45 +1,57 @@
 <div class="formulaire_spip formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
 	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
-[(#ENV{editable})
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		<h3 class="legend"><:asso:synchroniser_choix_membres:></h3>
-		<ul>
-			<li class="editer_tous">
-				<div class="choix">
-					<input type="checkbox" name="tous" id="sync_t" />
-					<label for="sync_t"><:asso:synchroniser_tous:></label>
-				</div>
-			</li>
-			<li class="editer_visiteurs">
-				<div class="choix">
-					<input type="checkbox" name="visiteurs" id="sync_v" />
-					<label for="sync_v"><:asso:synchroniser_visiteurs:></label>
-				</div>
-			</li>
-			<li class="editer_redacteurs">
-				<div class="choix">
-					<input type="checkbox" name="redacteurs" id="sync_r" />
-					<label for="sync_r"><:asso:synchroniser_redacteurs:></label>
-				</div>
-			</li>
-			<li class="editer_administrateurs">
-				<div class="choix">
-					<input type="checkbox" name="administrateurs" id="sync_a" />
-					<label for="sync_a"><:asso:synchroniser_administrateurs:></label>
-				</div>
-			</li>
-			<li class="editer_forcer">
-				<div class="choix">
-					<input type="checkbox" name="forcer" id="forcer" />
-					<label for="forcer"><:asso:synchroniser_forcer:></label>
-				</div>
-			</li>
-		</ul>
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</p>]
+		<fieldset class="editer_dir editer_import">[(#REM)<!-- import = recuperer des auteurs SPIP dans Associaspip -->]
+			<legend class="legend">
+				<input type="hidden" name="dir" value="imp" />
+				<label><:asso:synchroniser_en_import:></label>
+			</legend>
+			<em class="explication"><:asso:synchroniser_choix_membres:></em>
+			<ul>
+				<li class="editer_imp">
+					<label><:ecrire:info_auteurs:></label>
+<BOUCLE_existe_statut7(auteurs){statut=nouveau}{0,1}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" value="nouveau" id="imp_nouveau" />
+						<label for="imp_nouveau"><!--<:ecrire:info_statut_auteur_autre:>--> <:perso:nouveau:></label>
+					</div>
+</BOUCLE_existe_statut7>
+<BOUCLE_existe_statut6(auteurs){statut=6forum}{0,1}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" value="6forum" id="imp_6forum" />
+						<label for="imp_6forum"><:ecrire:item_choix_visiteurs:></label>
+					</div>
+</BOUCLE_existe_statut6>
+<BOUCLE_existe_statut1(auteurs){statu=1comite}{0,1}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" value="1comite" id="imp_1comite" />
+						<label for="imp_1comite"><:ecrire:item_choix_redacteurs:></label>
+					</div>
+</BOUCLE_existe_statut1>
+<BOUCLE_existe_statut0(auteurs){statut=0minirezo}{0,1}>
+					<div class="choix">
+						<input type="checkbox" name="imp[]" value="0minirezo" id="imp_0minirezo" />
+						<label for="imp_0minirezo"><:ecrire:item_choix_administrateurs:></label>
+					</div>
+</BOUCLE_existe_statut0>
+					<div class="choix">
+						<input type="checkbox" name="tous" value="tous" id="sync_t" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('imp[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
+						<label for="sync_t"><:spip:icone_tous_auteur:></label>
+					</div>
+				</li>
+				<li class="editer_forcer">
+					<div class="choix">
+						<input type="checkbox" name="forcer" id="forcer" />
+						<label for="forcer"><:asso:synchroniser_forcer:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 		<p class="boutons">
 			<input type="submit" value="<:pass_ok:>" class="submit" />
 		</p>
 	</form>
-]
 </div>
