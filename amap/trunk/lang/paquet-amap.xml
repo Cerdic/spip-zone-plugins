@@ -1,6 +1,7 @@
 <traduction module="paquet-amap" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/amap/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-amap?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-amap?lang_cible=fr">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />

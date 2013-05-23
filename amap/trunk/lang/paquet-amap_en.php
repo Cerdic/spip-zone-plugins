@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'amap_description' => 'The plugin is developped to manage baskets and subscibers. 
-The baskets are created and given to someone subscribing. He can make its basket available if he cannot be there to get it on the distribution day.', # MODIF
-	'amap_nom' => 'Amap', # NEW
+	'amap_description' => 'The plugin is developed to manage baskets and subscibers. 
+The baskets are created and allocated to a subscriber who can make their basket available if they cannot be there to pick it up on the arranged day.',
+	'amap_nom' => 'AMAP', # MODIF
 	'amap_slogan' => 'Baskets and subscribers management for CSA'
 );
 
