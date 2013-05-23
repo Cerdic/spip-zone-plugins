@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucunmodule' => 'No module.',
 	'auteur_revision' => '@nb@ translation modified.',
-	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'auteur_revision_specifique' => '@nb@ translation modified in <abbr title="@lang@">@langue_longue@</abbr>.',
 	'auteur_revisions' => '@nb@ translations modified.',
-	'auteur_revisions_langue' => 'Contributions langage :', # MODIF
+	'auteur_revisions_langue' => 'Language of contributions :',
 	'auteur_revisions_langues' => '@nb@ contributions langage:', # MODIF
-	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'auteur_revisions_specifique' => '@nb@ translations modified in <abbr title="@lang@">@langue_longue@</abbr>.',
 
 	// B
 	'bouton_activer_lang' => 'Enable the language "@lang@" for this module',
@@ -96,18 +96,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importermodule' => 'Import a module',
 	'info_1_tradlang' => '@nb@ language strings',
 	'info_1_tradlang_module' => '@nb@ language module',
-	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_aucun_participant_lang' => 'No author on the site has translated in <abbr title="@lang@">@langue_longue@</abbr>.',
 	'info_aucun_tradlang_module' => 'No language module',
 	'info_auteur_sans_favori' => 'This author has no favorite module.',
 	'info_chaine_jamais_modifiee' => 'This string has never been edited.',
 	'info_chaine_originale' => 'This string is the source',
-	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
+	'info_choisir_langue' => 'In a specific language',
 	'info_contributeurs' => 'Contributors',
 	'info_filtrer_status' => 'Filter by status:',
 	'info_langue_mere' => '(parent language)',
 	'info_langues_non_preferees' => 'Other languages :',
 	'info_langues_preferees' => 'Favorite language(s):',
-	'info_module_nb_items_langue_mere' => 'La langue mère du module est <abbr title="@lang_mere@">@lang_mere_longue@</abbr> et comporte @nb@ items de langue.', # NEW
+	'info_module_nb_items_langue_mere' => 'The parent language of the module is <abbr title="@lang_mere@">@lang_mere_longue@</abbr> and comprises of @nb@ language items.',
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_langues' => 'This module is translated or partially translated into ​​@nb@ languages.',
 	'info_module_traduit_pc' => 'Module @pc@% translated',
@@ -128,20 +128,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_new' => '@pc@% of the items of priority "@priorite@" are new in @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_ok' => 'The modules of priority "@priorite@" are @pc@% translated in @lang@ (@langue_longue@)',
 	'info_nb_modules_favoris' => '@nb@ favorite modules.',
-	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
-	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_nb_participant' => '@nb@ author subscribed to this site has participated at least once in the translation..',
+	'info_nb_participant_lang' => '@nb@ author subscribed to this site has participated at least once in translating in <abbr title="@lang@">@langue_longue@</abbr>.',
 	'info_nb_participants' => '@nb@ authors listed on this site participated at least once to a translation.',
-	'info_nb_participants_lang' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_nb_participants_lang' => '@nb@ authors subscribed to this site have participated at least once in translating in <abbr title="@lang@">@langue_longue@</abbr>.',
 	'info_nb_tradlang' => '@nb@ language strings',
 	'info_nb_tradlang_module' => '@nb@ language modules',
 	'info_percent_chaines' => '@traduites@ / @total@ translated strings',
 	'info_revisions_stats' => 'Revisions',
 	'info_status_ok' => 'OK',
-	'info_statut' => 'Statut', # NEW
+	'info_statut' => 'Status',
 	'info_str' => 'Text of the language string',
 	'info_textarea_readonly' => 'This text field is read only',
 	'info_tradlangs_sans_version' => '@nb@ language strings do not have a first revision( first revisions are created by CRON).',
-	'info_traducteur' => 'Traducteur(s)', # NEW
+	'info_traducteur' => 'Translator(s)',
 	'info_traduire_module_lang' => 'Translate the module "@module@" in @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Information on translations',
 	'item_creer_langue_cible' => 'Create a new target language',
