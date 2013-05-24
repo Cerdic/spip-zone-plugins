@@ -129,9 +129,18 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'icone_modifier_ticket' => 'Modificar este ticket',
 	'icone_retour_ticket' => 'Volver al ticket',
 	'info_commentaire' => 'Comentario #@id@:',
+	'info_demande' => '@nb@ demande', # NEW
+	'info_demande_fermee' => '@nb@ fermée', # NEW
+	'info_demande_ouverte' => '@nb@ ouverte', # NEW
+	'info_demande_resolue' => '@nb@ résolue', # NEW
+	'info_demandes' => '@nb@ demandes', # NEW
+	'info_demandes_fermees' => '@nb@ fermées', # NEW
+	'info_demandes_ouvertes' => '@nb@ ouvertes', # NEW
+	'info_demandes_resolues' => '@nb@ résolues', # NEW
 	'info_document_ajoute' => 'Adjuntado:',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NÚMERO:',
+	'info_sans_version' => 'Sans version', # NEW
 	'info_ticket_1' => '1 ticket',
 	'info_ticket_aucun' => 'Ningún ticket',
 	'info_ticket_nb' => '@nb@ tickets',
@@ -141,10 +150,13 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 
 	// L
 	'label_paginer_par' => 'Paginar por:',
+	'label_vue_liste_tickets' => 'Changer la vue de la liste :', # NEW
 	'lien_filtrer' => 'Filtrar los tickets',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
 	'lien_reponse_ticket' => 'Respuesta al ticket',
 	'lien_supprimer_filtres' => 'Quitar todos los filtros',
+	'lien_vue_roadmap' => 'Feuille de route', # NEW
+	'lien_vue_tous' => 'Liste complète', # NEW
 
 	// M
 	'mail_texte_message_auto' => 'Éste es un mensaje automático: no lo responda. ',

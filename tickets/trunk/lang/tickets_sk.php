@@ -129,9 +129,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_ticket' => 'Upraviť tento lístok',
 	'icone_retour_ticket' => 'Vrátiť sa k lístku',
 	'info_commentaire' => 'Komentár #@id@:',
+	'info_demande' => '@nb@ demande', # NEW
+	'info_demande_fermee' => '@nb@ fermée', # NEW
+	'info_demande_ouverte' => '@nb@ ouverte', # NEW
+	'info_demande_resolue' => '@nb@ résolue', # NEW
+	'info_demandes' => '@nb@ demandes', # NEW
+	'info_demandes_fermees' => '@nb@ fermées', # NEW
+	'info_demandes_ouvertes' => '@nb@ ouvertes', # NEW
+	'info_demandes_resolues' => '@nb@ résolues', # NEW
 	'info_document_ajoute' => 'Pridaný:',
 	'info_liste_tickets' => 'Lístok',
 	'info_numero_ticket' => 'LÍSTOK ČÍSLO:',
+	'info_sans_version' => 'Sans version', # NEW
 	'info_ticket_1' => '1 lístok',
 	'info_ticket_aucun' => 'Žiaden lístok',
 	'info_ticket_nb' => 'lístkov: @nb@',
@@ -141,10 +150,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_paginer_par' => 'Stránkovať od:',
+	'label_vue_liste_tickets' => 'Changer la vue de la liste :', # NEW
 	'lien_filtrer' => 'Rozriediť lístky',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
 	'lien_reponse_ticket' => 'Réponse au ticket', # NEW
 	'lien_supprimer_filtres' => 'Odstrániť všetky filtre',
+	'lien_vue_roadmap' => 'Feuille de route', # NEW
+	'lien_vue_tous' => 'Liste complète', # NEW
 
 	// M
 	'mail_texte_message_auto' => 'Toto je automatická správa. Neodpovedajte na ňu.',
