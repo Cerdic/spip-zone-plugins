@@ -25,7 +25,7 @@ The plugin modifies some skeletons (topics and articles) and some nuts bases.
 Once installed the necessary plugins, simply determine the language of the site in "Settings" -> "Mulilinguisme / Language management
 
 and that your site is multilingual',
-	'multilingue_nom' => 'Easy multilingual site',
+	'multilingue_nom' => 'Easy Multilingual web-site',
 	'multilingue_slogan' => 'Create easily a multilingual site'
 );
 
