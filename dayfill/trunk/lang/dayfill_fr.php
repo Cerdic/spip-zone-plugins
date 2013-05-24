@@ -5,6 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'affichage_liste'               => 'Liste',
+	'affichage_calendrier'          => 'Calendrier',
+
 	// D
 	'dayfill_titre'                 => 'DayFill',
 
