@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Compact lists now also work on a site with multilingualism by areas. This requires installing the plugin [Translation between articles->http://files.spip.org/spip-zone/tradrub.zip]
 
 And to take advantage of a translation system in the sense of this plugin, install the plugin [Sections translations otherwise->http://files.spip.org/spip-zone/traduction_rubriques_autrement.zip]. Translation buttons will be displayed at the top of the article with the ability to create missing translations by clicking on the gray tab. The plugin will try to find the section in the area of ​​language, if the parent article is translated.',
+	'taa_nom' => 'Article translations differently',
 	'taa_slogan' => 'Make the articles translation easier.'
 );
 
