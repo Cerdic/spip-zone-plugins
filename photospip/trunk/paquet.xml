@@ -1,7 +1,7 @@
 <paquet
 	prefix="photospip"
 	categorie="multimedia"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/photospip_logo.png"

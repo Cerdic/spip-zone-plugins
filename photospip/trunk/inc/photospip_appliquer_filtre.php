@@ -50,16 +50,22 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 		else{
 			$dst_img = $filtre($src);
 		}
-		$dst_img = extraire_attribut($dst_img,'src');		
+		$dst_img = extraire_attribut($dst_img,'src');
 	}else{
 		spip_log('le filtre n existe pas','photospip');
 		return false;
 	}
+
 	spip_log("dst_img = $dst_img",'photospip');
+
+	// l'image peut arriver avec un paramètre de date, soit ?date=xxx, soit ?xxx
 	if (preg_match(',^(.*)\?date=(\d+).([^.]+)$,', $dst_img, $match)) {
+		$dst_img = $match[1];
+	} elseif (preg_match(',^(.*)\?(\d+)$,', $dst_img, $match)) {
 		$dst_img = $match[1];
 	}
 	//$dst_img = preg_replace(',\?date=\d+$,','', $dst_img);
+
 	if(preg_match("/\.(png|gif|jpe?g)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
