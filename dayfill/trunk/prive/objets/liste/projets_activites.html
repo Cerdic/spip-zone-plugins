@@ -20,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_activites(PROJETS_ACTIVITES){id_projet?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num descriptif},#GET{defaut_tri}}{par descriptif}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_activites(PROJETS_ACTIVITES){id_projet?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,date_debut},#GET{defaut_tri}}{!par date_debut}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_activite-16.png}|balise_img)]</td>
 			<td class="date">[(#DATE_DEBUT|affdate{'d-m-Y'})]</td>
