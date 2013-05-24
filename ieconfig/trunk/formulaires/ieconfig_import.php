@@ -91,7 +91,7 @@ function ieconfig_saisies_import() {
 					array(
 						'saisie' => 'checkbox',
 						'options' => array(
-							'nom' => 'export_metas',
+							'nom' => 'import_metas',
 							'label' => _T('ieconfig:label_importer'),
 							'tout_selectionner' => 'oui',
 							'datas' => $ieconfig_metas
@@ -109,6 +109,7 @@ function ieconfig_saisies_import() {
 			'data' => $saisies
 		));
 	}
+        
 	return $saisies;
 }
 
@@ -140,6 +141,9 @@ function formulaires_ieconfig_import_verifier_dist() {
 }
 
 function formulaires_ieconfig_import_traiter_dist() {
+    
+        include_spip('inc/config');
+        
 	// Si on est à l'étape de sélection d'un fichier de configuration
 	// On place le code YAML dans le contexte
 	if (!_request('_code_yaml')) {
@@ -154,8 +158,8 @@ function formulaires_ieconfig_import_traiter_dist() {
 	elseif (_request('importer') && _request('_code_yaml')) {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
-		
-		// On passe via le pipeline ieconfig
+                
+                // On passe via le pipeline ieconfig
 		$message_erreur = pipeline('ieconfig',array(
 			'args' => array(
 				'action' => 'import',
@@ -167,21 +171,21 @@ function formulaires_ieconfig_import_traiter_dist() {
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
 		$import_metas = _request('import_metas');
 		if (!is_array($import_metas)) $import_metas = array();
+                
 		
 		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
 			if(in_array($prefixe,$import_metas) && isset($config[$prefixe])) {
 				if(isset($data['metas_brutes']))
 					foreach(explode(',',$data['metas_brutes']) as $meta)
 						if (isset($config[$prefixe][$meta]))
-							ecrire_meta($meta,$config[$prefixe][$meta]);
+							ecrire_config($meta.'/',$config[$prefixe][$meta]);
 				if(isset($data['metas_serialize']))
 					foreach(explode(',',$data['metas_serialize']) as $meta)
 						if (isset($config[$prefixe][$meta]))
-							ecrire_meta($meta,serialize($config[$prefixe][$meta]));
-			}
+							ecrire_config($meta.'/',serialize($config[$prefixe][$meta]));
+                        }
 		}
-		
-		ecrire_metas();
+
 		
 		if ($message_erreur!='')
 			return array('message_erreur' => $message_erreur);
