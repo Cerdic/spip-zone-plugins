@@ -45,14 +45,18 @@ function exec_inscrits_activite() {
 /// AFFICHAGES_LATERAUX : TOTAUX : montants des participations
 	echo association_tablinfos_montants('inscriptions', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
+	$retour = '&retour=.%2F%3Fexec%3Dinscrits_activite%26amp%3Bid%3D'.$evenement['id_evenement']; // URL relative de cette page : parametre d'appel pour d'autres plus loin
 	$res[] = array('activite_titre_toutes_activites', 'grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
-	$res[] = array('activite_bouton_modifier_article', 'edit-12.gif', array('articles', 'id_article='.$evenement['id_article']) );
+#	$res[] = array('ecrire:icone_modifier_article', 'edit-24.gif', array('articles_edit', 'id_article='.$evenement['id_article'].$retour), array('modifier', 'article', $evenement['id_article']) );
+	$res[] = array('ecrire:icone_retour_article', 'images/article-24.gif', array('articles', 'id_article='.$evenement['id_article']), array('voir', 'article', $evenement['id_article']) );
 	$res[] = array('activite_bouton_ajouter_inscription', 'panier_in.gif', array('edit_activite', "id_evenement=$id_evenement"), array('editer_inscriptions', 'association') );
 	if ( test_plugin_actif('FPDF') && sql_countsel('spip_asso_activites', "id_evenement=$id_evenement", 'id_auteur') ) { // PDF des inscrits
 		$res[] = array('activite_bouton_imprimer_inscriptions', 'print-24.png', generer_action_auteur('pdf_activite', $id_evenement), array('exporter_inscriptions', 'association') );
 	}
-	if ( test_plugin_actif('AGENDA') && sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement", 'id_auteur') ) { // inscrits via le formulaire d'Agenda2
-		$res[] = array('activite_bouton_synchroniser_inscriptions', 'reload-32.png', array('synchronis_activites', "id=$id_evenement"), array('gerer_activites', 'association') );
+	if ( test_plugin_actif('AGENDA') && (sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement") OR sql_countsel('spip_asso_activites', "id_evenement=$id_evenement") ) ) {
+		$res[] = array('agenda:titre_cadre_modifier_evenement', 'edit-24.gif', array('evenements_edit', 'id_evenement='.$evenement['id_evenement'].$retour), array('modifier', 'evenement', $evenement['id_evenement']) );
+		$res[] = array('synchroniser_asso_activites', 'reload-32.png', array('synchronis_activite', "id=$id_evenement"), array('gerer_activites', 'association') );
+#		$res[] = array('agenda:liste_inscrits', 'img_pack/agenda-24.png', array('agenda_inscriptions', 'id_evenement='.$evenement['id_evenement'].$retour), $GLOBALS['auteur_session']['statut']=='0minirezo' && $evenement['inscription'] ); // pour exporter, ajouter au lien le parametre : &format=csv
 	}
 	echo association_navigation_raccourcis($res, 14);
 /// AFFICHAGES_LATERAUX : Forms-PDF

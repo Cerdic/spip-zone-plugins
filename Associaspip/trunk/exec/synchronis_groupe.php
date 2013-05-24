@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_synchronis_groupes() {
+function exec_synchronis_groupe() {
 	$r = association_controle_id('groupe', 'asso_groupes', 'gerer_groupes');
 	include_spip('association_modules');
 /// INITIALISATIONS
@@ -31,9 +31,12 @@ function exec_synchronis_groupes() {
 /// AFFICHAGES_LATERAUX : INTRO : Infos Zone
 		$infos = array(); // reset...
 		$zone = sql_fetsel('*', 'spip_zones', 'id_zone='.$groupe['id_zone']);
-		$infos['accesrestreint:descriptif'] = $zone['descriptif'];
-		$infos['accesrestreint:publique'] = _T('ecrire:item_'.$zone['publique']); // oui/non
-		$infos['accesrestreint:privee'] = _T('ecrire:item_'.$zone['privee']); // oui/non
+		if ($zone['publique'])
+			$infos['accesrestreint:publique'] = _T('ecrire:item_'.$zone['publique']); // oui/non
+		if ($zone['privee'])
+			$infos['accesrestreint:privee'] = _T('ecrire:item_'.$zone['privee']); // oui/non
+		if ($zone['descriptif'])
+			$infos['accesrestreint:descriptif'] = $zone['descriptif'];
 		$desc_table = charger_fonction('trouver_table', 'base');
 		if ( $desc_table('spip_zones_rubriques') ) // SPIP2
 			$rubs_w = sql_in_select('id_rubrique', 'id_rubrique', 'spip_zones_rubriques', 'id_zone='.$groupe['id_zone']);
@@ -48,13 +51,13 @@ function exec_synchronis_groupes() {
 		}
 		sql_free($rubs_q);
 		$infos['accesrestreint:rubriques_zones_acces'] = $rubs_l ? "<ul class='spip'>$rubs_l</ul>" : _T('accesrestreint:aucune_rubrique');
-		echo association_tablinfos_intro($zone['titre'], 'zone', $groupe['id_zone'], $infos);
+		echo '<hr class="spip" />'. association_tablinfos_intro($zone['titre'], 'zone', $groupe['id_zone'], $infos);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 		echo association_navigation_raccourcis(array(
-			array('groupe_membres', 'grilles-24.png', array('membres_groupe', "id=$id_groupe" ), array('voir_groupes', 'association', $id_groupe) ),
-			array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupes'), 'association') ),
+			array('groupe_membres', 'grille-24.png', array('membres_groupe', "id=$id_groupe" ), array('voir_groupes', 'association', $id_groupe) ),
+			array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'annonce.gif', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupes'), 'association') ),
 			array('editer_groupe', 'edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'editer_groupe'), 'association') ),
-			array('accesrestreint:modifier_zone', 'zones-acces-24.png', array('zones_edit', "id_zone=$groupe[id_zone]"), array('modifier', 'zone', $groupe['id_zone']) ),
+			array('accesrestreint:modifier_zone', 'img_pack/zones-acces-24.png', array('zones_edit', "id_zone=$groupe[id_zone]&retour=.%2F%3Fexec%3Dsynchronis_groupe%26amp%3Bid%3D".$groupe['id_groupe']), array('modifier', 'zone', $groupe['id_zone']) ),
 		) );
 /// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('reload-32.png', 'options_synchronisation');

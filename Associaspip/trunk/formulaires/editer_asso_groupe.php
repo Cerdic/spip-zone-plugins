@@ -22,7 +22,7 @@ function formulaires_editer_asso_groupe_charger_dist($id_groupe=0) {
 }
 
 function formulaires_editer_asso_groupe_traiter($id_groupe=0) {
-	return formulaires_editer_objet_traiter('asso_groupe', $id_groupe, '', '',  ($id_groupe>0 && $id_groupe<100)?generer_url_ecrire('association_autorisations'):generer_url_ecrire('groupes'), '');
+	return formulaires_editer_objet_traiter('asso_groupe', $id_groupe, '', '', generer_url_ecrire('membres_groupe', "id=$id_groupe"), '');
 }
 
 ?>

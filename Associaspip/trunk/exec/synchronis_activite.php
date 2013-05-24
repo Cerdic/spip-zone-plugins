@@ -11,7 +11,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function exec_synchronis_activites() {
+function exec_synchronis_activite() {
 	sinon_interdire_acces(autoriser('gerer_activites', 'association'));
 	include_spip('association_modules');
 /// INITIALISATIONS
@@ -48,6 +48,8 @@ function exec_synchronis_activites() {
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	echo association_navigation_raccourcis(array(
 		array('activite_titre_inscriptions_activites', 'grille-24.png', array('inscrits_activite', "id=$id_evenement"), array('voir_inscriptions', 'association') ),
+		array('agenda:liste_inscrits', 'grille-24.png', array('agenda_inscriptions', 'id_evenement='.$evenement['id_evenement']), sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement") AND $GLOBALS['auteur_session']['statut']=='0minirezo' AND $evenement['inscription'] ),
+		array('agenda:telecharger', 'images/synchro-24.gif', array('agenda_inscriptions', 'format=csv&id_evenement='.$evenement['id_evenement']), (sql_countsel('spip_evenements_participants', "id_evenement=$id_evenement") && $GLOBALS['auteur_session']['statut']=='0minirezo' && $evenement['inscription'])?TRUE:FALSE ),
 	) );
 /// AFFICHAGES_CENTRAUX (corps)
 	debut_cadre_association('reload-32.png', 'options_synchronisation');

@@ -1,12 +1,11 @@
 <div class="formulaire_spip formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
-	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="[(#URL_ECRIRE{inscrits_activite,id=#ENV{id_evenement}})]"><:asso:activite_titre_inscriptions_activites:></a></div>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</p>]
-		<fieldset class="editer_dir editer_import">[(#REM)<!-- import = mettre des inscriptions de Agenda2 dans Associaspip -->]
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir2cp})</p>]
+		<fieldset class="editer_dir2cp editer_import">[(#REM)<!-- import = mettre des inscriptions de Agenda2 dans Associaspip -->]
 			<legend class="legend">
-				<input type="radio" name="dir" id="dir_imp"[(#ENV{dir}|=={imp}|oui) selected="selected"] value="imp" />
+				<input type="radio" name="dir2cp" id="dir_imp"[(#ENV{dir2cp}|=={imp}|oui) checked="checked"] value="imp" />
 				<label for="dir_imp"><:asso:synchroniser_en_import:></label>
 			</legend>
 			<em class="explication"><:asso:synchroniser_choix_activites:></em>
@@ -45,16 +44,16 @@
 				</li>
 			</ul>
 		</fieldset>
-		<fieldset class="editer_dir editer_export">[(#REM)<!-- export = mettre des inscriptions de Associaspip dans Agenda2 -->]
+		<fieldset class="editer_dir2cp editer_export">[(#REM)<!-- export = mettre des inscriptions de Associaspip dans Agenda2 -->]
 			<legend class="legend">
-				<input type="radio" name="dir" id="dir_exp"[(#ENV{dir}|=={exp}|oui) selected="selected"] value="exp" />
+				<input type="radio" name="dir2cp" id="dir_exp"[(#ENV{dir2cp}|=={exp}|oui) checked="checked"] value="exp" />
 				<label for="dir_exp"><:asso:synchroniser_en_export:></label>
 			</legend>
 			<em class="explication"><:asso:synchroniser_choix_evenements:></em>
 			<ul>
 				<li class="editer_exp">
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{exp})</span>]
-					<label for="exp"><:agenda:reponse:></label>
+					<label for="exp"><:agenda:inscrits:></label>
 					<select name="exp" id="exp">
 						<option value="oui"><:agenda:label_reponse_jyparticipe:></option>
 						<option value="non"><:agenda:label_reponse_jyparticipe_pas:></option>

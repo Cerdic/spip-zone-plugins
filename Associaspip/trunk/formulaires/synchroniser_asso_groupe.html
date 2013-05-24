@@ -1,12 +1,11 @@
 <div class="formulaire_spip formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
-	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="[(#URL_ECRIRE{membres_groupe,id_groupe=#ENV{id_groupe}})]"><:asso:groupe_membres:></a></div>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</p>]
-		<fieldset class="editer_dir editer_import">[(#REM)<!-- import = ajouter des auteurs de la zone au groupe -->]
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir2cp})</p>]
+		<fieldset class="editer_dir2cp editer_import">[(#REM)<!-- import = ajouter des auteurs de la zone au groupe -->]
 			<legend class="legend">
-				<input type="radio" name="dir" id="dir_imp"[(#ENV{dir}|=={imp}|oui) selected="selected"] value="imp" />
+				<input type="radio" name="dir2cp" id="dir_imp"[(#ENV{dir2cp}|=={imp}|oui) checked="checked"] value="imp" />
 				<label for="dir_imp"><:asso:synchroniser_en_import:></label>
 			</legend>
 			<em class="explication"><:asso:ajouter_membres_au_groupe:></em>
@@ -16,7 +15,7 @@
 			<B_auteurs2zone_statut>
 					[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{imp})</span>]
 					<label><:ecrire:info_auteurs:></label>
-			<BOUCLE_auteurs2zone_statut(spip_auteurs spip_zones?){fusion statut}{!par statut}>
+			<BOUCLE_auteurs2zone_statut(spip_auteurs spip_zones){fusion spip_auteurs.statut}{!par spip_auteurs.statut}>[(#REM)<!-- sniff ca foire quand on rajoute la {fusion spip_zones.id_zone} -->]
 					<div class="choix">
 						<input type="checkbox" name="imp[]" id="imp_#STATUT" value="#STATUT" />
 						<label for="imp_#STATUT">
@@ -48,7 +47,7 @@
 		</fieldset>
 		<fieldset class="editer_dir editer_export">[(#REM)<!-- export = ajout des membres du groupe a la zone -->]
 			<legend class="legend">
-				<input type="radio" name="dir" id="dir_exp"[(#ENV{dir}|=={exp}|oui) selected="selected"] value="exp" />
+				<input type="radio" name="dir2cp" id="dir_exp"[(#ENV{dir2cp}|=={exp}|oui) checked="checked"] value="exp" />
 				<label for="dir_exp"><:asso:synchroniser_en_export:></label>
 			</legend>
 			<em class="explication"><:accesrestreint:titre_ajouter_zone:></em>

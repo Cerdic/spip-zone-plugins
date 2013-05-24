@@ -3,40 +3,32 @@
 	<div class="onglet" style="text-align:center; margin:0.5em auto; width:50%;"><a href="#URL_ECRIRE{adherents}"><:asso:menu2_titre_gestion_membres:></a></div>]
 	<form method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir})</p>]
-		<fieldset class="editer_dir editer_import">[(#REM)<!-- import = recuperer des auteurs SPIP dans Associaspip -->]
+		[<p class="erreur_message">(#ENV**{erreurs}|table_valeur{dir2cp})</p>]
+		<fieldset class="editer_dir2cp editer_import">[(#REM)<!-- import = recuperer des auteurs SPIP dans Associaspip -->]
 			<legend class="legend">
-				<input type="hidden" name="dir" value="imp" />
+				<input type="hidden" name="dir2cp" value="imp" />
 				<label><:asso:synchroniser_en_import:></label>
 			</legend>
 			<em class="explication"><:asso:synchroniser_choix_membres:></em>
 			<ul>
 				<li class="editer_imp">
 					<label><:ecrire:info_auteurs:></label>
-<BOUCLE_existe_statut7(auteurs){statut=nouveau}{0,1}>
 					<div class="choix">
-						<input type="checkbox" name="imp[]" value="nouveau" id="imp_nouveau" />
-						<label for="imp_nouveau"><!--<:ecrire:info_statut_auteur_autre:>--> <:perso:nouveau:></label>
+						<input type="checkbox" name="imp[]" value="nouveau" id="imp_nouveau" [(#ENV{nombre_statuts_nouveau}|non)disabled="disabled" ]/>
+						<label for="imp_nouveau"><!--<:ecrire:info_statut_auteur_autre:>--> <:perso:nouveau:> (#ENV{nombre_statuts_nouveau})</label>
 					</div>
-</BOUCLE_existe_statut7>
-<BOUCLE_existe_statut6(auteurs){statut=6forum}{0,1}>
 					<div class="choix">
-						<input type="checkbox" name="imp[]" value="6forum" id="imp_6forum" />
-						<label for="imp_6forum"><:ecrire:item_choix_visiteurs:></label>
+						<input type="checkbox" name="imp[]" value="6forum" id="imp_6forum" [(#ENV{nombre_statuts_6forum}|non)disabled="disabled" ]/>
+						<label for="imp_6forum"><:ecrire:item_choix_visiteurs:> (#ENV{nombre_statuts_6forum})</label>
 					</div>
-</BOUCLE_existe_statut6>
-<BOUCLE_existe_statut1(auteurs){statu=1comite}{0,1}>
 					<div class="choix">
-						<input type="checkbox" name="imp[]" value="1comite" id="imp_1comite" />
-						<label for="imp_1comite"><:ecrire:item_choix_redacteurs:></label>
+						<input type="checkbox" name="imp[]" value="1comite" id="imp_1comite" [(#ENV{nombre_statuts_1comite}|non)disabled="disabled" ]/>
+						<label for="imp_1comite"><:ecrire:item_choix_redacteurs:> (#ENV{nombre_statuts_1comite})</label>
 					</div>
-</BOUCLE_existe_statut1>
-<BOUCLE_existe_statut0(auteurs){statut=0minirezo}{0,1}>
 					<div class="choix">
-						<input type="checkbox" name="imp[]" value="0minirezo" id="imp_0minirezo" />
-						<label for="imp_0minirezo"><:ecrire:item_choix_administrateurs:></label>
+						<input type="checkbox" name="imp[]" value="0minirezo" id="imp_0minirezo" [(#ENV{nombre_statuts_0minirezo}|non)disabled="disabled" ]/>
+						<label for="imp_0minirezo"><:ecrire:item_choix_administrateurs:> (#ENV{nombre_statuts_0minirezo})</label>
 					</div>
-</BOUCLE_existe_statut0>
 					<div class="choix">
 						<input type="checkbox" name="tous" value="tous" id="sync_t" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('imp[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
 						<label for="sync_t"><:spip:icone_tous_auteur:></label>

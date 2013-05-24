@@ -23,16 +23,21 @@ function exec_membres_groupe() {
 		if ($id_groupe>=100) {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
-		$infos['entete_commentaire'] = $groupe['commentaire'];
+		if ($groupe['id_zone'])
+			$infos['accesrestreint:page_zones_acces'] = @sql_getfetsel('titre', 'spip_zones',"id_zone=$groupe[id_zone]");
+		if ($groupe['commentaire'])
+			$infos['entete_commentaire'] = $groupe['commentaire'];
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
 		echo '<div class="vcard">'. association_tablinfos_intro( '<div class="org" id="vcard-group'.$groupe['id_groupe'].'"><abbr class="organization-name" title="'.$GLOBALS['association_metas']['nom'].'"></abbr><abbr class="organization-unit" title="'.$groupe['nom'] .'">'. (($id_groupe<100)?_T("asso:groupe_".$id_groupe):$groupe['nom']) .'</abbr></div>', 'groupe', $id_groupe, $infos ) .'</div>';
 /// AFFICHAGES_LATERAUX : RACCOURCIS
-		echo association_navigation_raccourcis(array(
-			array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupes'), 'association') ),
-			array('editer_groupe', 'edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'editer_groupe'), 'association') ),
-			array('accesrestreint:modifier_zone', 'zones-acces-24.png', array('zones_edit', "id_zone=$groupe[id_zone]" ), test_plugin_actif('ACCESRESTREINT')?array('modifier', 'zone', $groupe['id_zone']):FALSE ),
-			array('synchroniser_asso_membres', 'reload-32.png', array('synchronis_groupe', "id=$id_groupe" ), test_plugin_actif('ACCESRESTREINT')?array('gerer_groupes', 'association', $id_groupe):FALSE ),
-		), $id_groupe<100?10:11);
+		$res = array();
+		$res[] = array(($id_groupe<100?'les_groupes_dacces':'tous_les_groupes'), 'grille-24.png', array(($id_groupe<100?'association_autorisations':'groupes'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'voir_groupes'), 'association') );
+		$res[] = array('editer_groupe', 'edit-24.gif', array(($id_groupe<100?'edit_groupe_autorisations':'edit_groupe'), "id=$id_groupe" ), array(($id_groupe<100?'gerer_autorisations':'editer_groupe'), 'association') );
+		if (test_plugin_actif('ACCESRESTREINT') AND $groupe['id_zone']) {
+			$res[] = array('accesrestreint:modifier_zone', 'img_pack/zones-acces-24.png', array('zones_edit', "id_zone=$groupe[id_zone]&retour=.%2F%3Fexec%3Dmembres_groupe%26amp%3Bid%3D".$groupe['id_groupe']), array('modifier', 'zone', $groupe['id_zone']), );
+			$res[] = array('synchroniser_asso_groupes', 'reload-32.png', array('synchronis_groupe', "id=$id_groupe" ), array('gerer_groupes', 'association', $id_groupe) );
+		}
+		echo association_navigation_raccourcis($res, $id_groupe<100?10:11);
 /// AFFICHAGES_LATERAUX : Forms-PDF
 		if ( autoriser('exporter_membres', 'association') ) { // etiquettes
 			echo association_form_etiquettes(" g.id_groupe=$id_groupe ", ' LEFT JOIN spip_asso_fonctions AS g ON m.id_auteur=g.id_auteur ', "groupe$id_groupe");

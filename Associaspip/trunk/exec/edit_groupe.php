@@ -37,7 +37,7 @@ function exec_edit_groupe() {
 		echo association_navigation_raccourcis(array(
 			array('groupe_membres', 'grille-24.png', array('membres_groupe', "id=$id_groupe"), array('voir_groupes', 'association') ),
 			array('tous_les_groupes', 'annonce.gif', array('groupes', "id=$id_groupe"), array('voir_groupes', 'association', $id_groupe) ),
-			array('synchroniser_asso_membres', 'reload-32.png', array('synchronis_groupe', "id=$id_groupe" ), test_plugin_actif('ACCESRESTREINT')?array('gerer_groupes', 'association', $id_groupe):FALSE ),
+			array('synchroniser_asso_groupes', 'reload-32.png', array('synchronis_groupe', "id=$id_groupe" ), test_plugin_actif('ACCESRESTREINT')?array('gerer_groupes', 'association', $id_groupe):FALSE ),
 		) );
 /// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('annonce.gif', $titre);

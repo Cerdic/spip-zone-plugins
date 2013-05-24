@@ -75,7 +75,7 @@ function exec_adherents() {
 	echo association_navigation_raccourcis(array(
 		array('gerer_les_groupes', 'annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes utilisateurs et non les autorisations qu'on liste
 		array('menu2_titre_mailing', 'mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
-		array('synchronise_asso_membre_lien', 'reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
+		array('synchronise_asso_membres', 'reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
 	), 2);
 /// AFFICHAGES_LATERAUX : Forms-PDF
 	if ( autoriser('exporter_membres', 'association') ) { // etiquettes

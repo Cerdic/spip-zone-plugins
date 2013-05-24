@@ -4,22 +4,21 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
     <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<h3 class="legend"><:asso:groupe_membres:></h3>
 		<p class="pagination">#PAGINATION</p>
 		<table class="spip formulaire_table_editable" border="1" cellpadding="2" cellspacing="0" width="100%">
 			<tr class="row_first">
-				<th scope="col"><:asso:entete_id:></th>
 				<th scope="col"><:asso:entete_nom:></th>
 				<th scope="col"><:asso:fonction:></th>
 				<th scope="col" colspan="2"><:asso:entete_actions:>
-				<input title="<:asso:selectionner_tout:>" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName(\'id_auteurs[]\'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /><th>
+				<input title="<:asso:selectionner_tout:>" type="checkbox" id="selectionnerTous" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('id_auteurs[]'); for (var i in checkboxList){checkboxList[i].checked=currentVal;}" /></th>
 			</tr>
-<BOUCLE_membresDansGroupe(ASSO_FONCTIONS asso_membres){id_groupe=#ENV{id_groupe}}{par nom_famille}{pagination}>
-			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
-				<td>#ID_AUTEUR</td>
+<BOUCLE_membresDansGroupe(ASSO_FONCTIONS asso_membres){id_groupe?}{id_auteur?}{par nom_famille,prenom}{pagination}>
+			<tr id="membre#ID_AUTEUR" class="[(#COMPTEUR_BOUCLE|alterner{'row_odd odd impair','row_even even pair'})]">
 				<td><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{adherent, id=#ID_AUTEUR}">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE})]</a></td>
 				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_AUTEUR]" class="text" /></td>
-				<td class="boutons"><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{supprimer_asso_fonctions, #ENV{id_groupe}-#ID_AUTEUR, #SELF}"><img src="#CHEMIN{img_pack/suppr-12.gif}"></a></td>
-				<td class="boutons"><input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" /><td>
+				<td class="bouton"><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{supprimer_asso_fonctions, #ENV{id_groupe}-#ID_AUTEUR, #SELF}"><img src="#CHEMIN{img_pack/suppr-12.gif}"></a></td>
+				<td class="bouton"><input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" /></td>
 			</tr>
 </BOUCLE_membresDansGroupe>
 		</table>

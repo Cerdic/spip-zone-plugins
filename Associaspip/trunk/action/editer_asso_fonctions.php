@@ -11,14 +11,16 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-function action_editer_membres_groupe() {
+function action_editer_asso_fonctions_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_groupe = $securiser_action();
 	$fonctions = association_recuperer_liste('fonctions', TRUE);
 	if ( _request('modifier') ) // mettre a jour les fonctions des membres
 		foreach ($fonctions as $id_auteur => $fonction) {
-			sql_updateq('spip_asso_fonctions', array('fonction' => $fonction), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
+			sql_updateq('spip_asso_fonctions', array(
+				'fonction' => $fonction
+			), "id_groupe=$id_groupe AND id_auteur=$id_auteur");
 		}
 	elseif ( _request('exclure') ) // exclure les membres du groupe
 		foreach ($fonctions as $id_auteur => $fonction) {
