@@ -1,7 +1,7 @@
 <paquet
 	prefix="ieconfig"
 	categorie="maintenance"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/ieconfig-32.png"
