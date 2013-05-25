@@ -5,7 +5,7 @@
     <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<h3 class="legend"><:asso:groupe_membres:></h3>
-		<p class="pagination">#PAGINATION</p>
+		[<p class="pagination">(#PAGINATION{prive})</p>]
 		<table class="spip formulaire_table_editable" border="1" cellpadding="2" cellspacing="0" width="100%">
 			<tr class="row_first">
 				<th scope="col"><:asso:entete_nom:></th>
