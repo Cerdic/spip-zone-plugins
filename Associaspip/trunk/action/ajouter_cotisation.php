@@ -23,7 +23,7 @@ function action_ajouter_cotisation() {
 
 	include_spip('inc/association_comptabilite');
 	if ($GLOBALS['association_metas']['comptes'] && $GLOBALS['association_metas']['pc_cotisations']) // on verifie que la gestion comptable est activee et que le pc_cotisation n'est pas vide pour inserer l'operation
-		association_ajouter_operation_comptable($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);
+		comptabilite_operation_ajouter($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);
 	sql_updateq(
 		'spip_asso_membres',
 		array(

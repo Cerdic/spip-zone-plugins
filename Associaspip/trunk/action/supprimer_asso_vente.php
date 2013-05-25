@@ -15,8 +15,8 @@ function action_supprimer_asso_vente_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_vente = $securiser_action();
 	include_spip ('inc/association_comptabilite');
-	association_supprimer_operation_comptable2($id_vente, 'pc_ventes');
-	association_supprimer_operation_comptable2($id_vente, 'pc_frais_envoi');
+	comptabilite_operation_supprimer($id_vente, 'pc_ventes');
+	comptabilite_operation_supprimer($id_vente, 'pc_frais_envoi');
 	sql_delete('spip_asso_ventes', "id_vente=$id_vente");
 }
 

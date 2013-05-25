@@ -40,13 +40,13 @@ function action_editer_asso_don_dist() {
 	if ($id_don) { // c'est une modification
 		// on modifie les operations comptables associees au don
 		if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { // si dons et colis sont associes a la meme reference, on modifie une seule operation
-			$erreur = association_modifier_operation_comptable($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+			$erreur = comptabilite_operation_modifier($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
 		} else { // sinon on en modifie deux
 			// modification du don en argent
-			$err1 = association_modifier_operation_comptable($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
+			$err1 = comptabilite_operation_modifier($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
 			// modification du don en nature
 			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$err2 = association_modifier_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_colis', $id_don)) );
+			$err2 = comptabilite_operation_modifier($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_colis', $id_don)) );
 			$erreur = ($err1?$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives au don
@@ -58,10 +58,10 @@ function action_editer_asso_don_dist() {
 			$erreur = _T('asso:erreur_sgbdr');
 		} else { // on ajoute les operations comptables associees au don
 			if ($GLOBALS['association_metas']['pc_dons']==$GLOBALS['association_metas']['pc_colis']) { // si argent et colis sont associes a la meme reference, on ajoute une seule operation : la somme des montants ?
-				association_ajouter_operation_comptable($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
+				comptabilite_operation_ajouter($date_don, $argent+$valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don);
 			} else { // sinon on en insere deux  (meme si les colis de valeur inconnue sont inseres afin de pouvoir les modifier ulterieurement)
-				association_ajouter_operation_comptable($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don); // argent
-				association_ajouter_operation_comptable($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don); // colis
+				comptabilite_operation_ajouter($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don); // argent
+				comptabilite_operation_ajouter($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don); // colis
 			}
 		}
 	}

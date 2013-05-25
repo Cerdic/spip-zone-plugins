@@ -1974,7 +1974,7 @@ function association_form_souspage($pages, $exec='', $arg=array(), $plus='', $de
 			} else { // autre page
 				$arg['debut']= 'debut='.$position;
 				$h = generer_url_ecrire($exec, join('&', $arg));
-				$res .= "<a class='spip_in' href='$h'>$position</a>";
+				$res .= "<a class='spip_in lien_pagination' rel='nofollow' href='$h'>$position</a>";
 			}
 			if ( $i!=($nbr_pages-1) )
 				$res .= ' | ';
@@ -2421,6 +2421,43 @@ function association_passeparam_periode($type='', $objet='', $id=0) {
 	return $PeriodeCompatable($type, $objet, $id);
 }
 
+/**
+ * &exercice= | &annee=
+ *
+ * @return array $params
+ *   Tableau avec les cles :
+ * - id_periode
+ * - sql_periode
+ * - debut_periode
+ * - fin_periode
+ * - url
+ * - classes
+ * @see association_passeparam_annee
+ * @see association_passeparam_exercice
+ */
+function association_passeparam_compta($classes=array()) {
+    $params = array(); // initialisation de la liste
+    list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
+    $params['type_periode'] = ($GLOBALS['association_metas']['exercices']?'exercice':'annee');
+    $params['destination'] = association_recuperer_entier('destination');
+    $params['type'] = _request('type');
+    if ( !$classes ) { // pas en parametre, on prend dans la requete
+	$keys = association_recuperer_liste('classes');
+	if ( count($keys) ) {
+	    $vals = array_fill(0, count($keys) ,0);
+	    $params['classes'] = array_combine($keys, $vals);
+	} else {
+	    $params['classes'] = array();
+	}
+    } elseif ( is_array($classes) ) { // c'est a priori bon
+	$params['classes'] = $classes;
+    } else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
+	$params['classes'] = $classes ? array( $classes=>0 ) : array() ;
+    }
+    $params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
+    return $params;
+}
+
 /** @} */
 
 
@@ -2454,7 +2491,7 @@ function association_chargeparam_destinations($type, &$contexte) {
 		// pour ajouter au contexte : id_dest, montant_dest, defaut_dest
 		// ces variables sont recuperees par la balise dynamique
 		include_spip('inc/association_comptabilite');
-		$dest = association_liste_destinations_associees($contexte['id_compte']);
+		$dest = comptabilite_liste_destinationsassociees($contexte['id_compte']);
 		if ($dest) {
 			$contexte['id_dest'] = array_keys($dest);
 			$contexte['montant_dest'] = array_values($dest);

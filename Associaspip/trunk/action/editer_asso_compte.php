@@ -33,12 +33,12 @@ function action_editer_asso_compte_dist() {
 			// Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
 			// 1ere ecriture : depense = 400   imputation = 581  journal = 5171
 			$old_imputation = $imputation;
-			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $compte_virement, $journal, 0);
+			$id_compte = comptabilite_operation_ajouter($date, $recette, $depense, $justification, $compte_virement, $journal, 0);
 			if (!$id_compte)
 				$erreur = _T('asso:erreur_sgbdr');
 			// Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
 			// 2eme ecriture : recette = 400   imputation = 581  journal = 531
-			$id_compte = association_ajouter_operation_comptable($date, $depense, $recette, $justification, $compte_virement, $old_imputation, 0);
+			$id_compte = comptabilite_operation_ajouter($date, $depense, $recette, $justification, $compte_virement, $old_imputation, 0);
 			if (!$id_compte)
 				$erreur = _T('asso:erreur_sgbdr');
 #		} else { // c'est une modif
@@ -47,11 +47,11 @@ function action_editer_asso_compte_dist() {
 #		}
 	} else {
 		if (!$id_compte) { // pas d'id_compte, c'est un ajout
-			$id_compte = association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, 0);
+			$id_compte = comptabilite_operation_ajouter($date, $recette, $depense, $justification, $imputation, $journal, 0);
 			if (!$id_compte)
 				$erreur = _T('asso:erreur_sgbdr');
 		} else { // c'est une modif, la parametre id_journal de la fonction modifier operation comptable est mis a '' afin de ne pas le modifier dans la base
-			$erreur = association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
+			$erreur = comptabilite_operation_modifier($date, $recette, $depense, $justification, $imputation, $journal, '', $id_compte);
 		}
 	}
 	return array($id_compte, $erreur);

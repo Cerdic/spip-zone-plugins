@@ -37,7 +37,7 @@ function formulaires_editer_asso_compte_charger_dist($id_compte=0) {
 		$code .= "var classe$val = new Array();\n";
 		// code virement interne
 		$interne = $GLOBALS['association_metas']['pc_intravirements'];
-		foreach (association_liste_plan_comptable($val,1) as $k => $v) {
+		foreach (comptabilite_liste_comptesclasse($val,1) as $k => $v) {
 			if ($k != $înterne) {
 				$code .= "classe$val" . "['$k'] = '". addslashes($v) ."';\n";
 			}

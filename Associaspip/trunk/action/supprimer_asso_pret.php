@@ -25,7 +25,7 @@ function action_supprimer_asso_pret_dist() {
 		$id_ressource = sql_getfetsel('id_ressource', 'spip_asso_prets', "id_pret=$ip_pret"); // on est oblige de faire une requete supplementaire car on a besoin du id_ressource pour mettre a jour le statut
 	}
 	include_spip ('inc/association_comptabilite');
-	association_supprimer_operation_comptable2($id_pret, 'pc_prets');
+	comptabilite_operation_supprimer($id_pret, 'pc_prets');
 	sql_delete('spip_asso_prets', "id_pret=$id_pret");
 	sql_updateq('spip_asso_ressources',
 		array('statut'=>'ok',

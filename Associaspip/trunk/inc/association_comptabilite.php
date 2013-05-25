@@ -1,9 +1,9 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d'associations
+ *  Comptaspip, extension de SPIP pour gestion comptable
  *
  * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
+ * @copyright Copyright (c) 2010 Emmanuel Saint-James & JeannotLapin
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
@@ -14,115 +14,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('base/association');
 include_spip('inc/association_plan_comptable');
 
+
 /*****************************************
- * @defgroup comptabilite_
- * dedie au module (futur plugin) Comptabilite (ComptaSPIP)
+ * @defgroup comptabilite_operation
+ * Action sur la(s) operation(s) du grand journal
  *
 ** @{ */
-
-/**
- * Recupere dans les tables la liste des destinations associees a une operation
- *
- * @param int $id_operation
- *   id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
- * @return array $destinations
- *   Un tableau eventuellement vide de id_destination=>montant
- */
-function association_liste_destinations_associees($id_operation) {
-	$sql = sql_select('recette,depense,id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
-	$destinations = array();
-	while ( $r = sql_fetch($sql) ) {
-	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; // soit recette soit depense est egal a 0, on se contente les additionner
-	}
-	return $destinations;
-}
-
-/**
- * Selecteur de destinations dHTML
- *
- * @param string $destinations
- *   Tableau de destinations deja selectionnees
- *   Ou '' si on ajoute une operation
- * @param bool $unique
- *   Permet de specifier si on veut associer une destination unique (vrai),
- *   par default on peut ventiler sur plusieurs destinations
- * @param int $defaut
- *   Permet de selectionner une destination par defaut (par id_destination)
- *   quand $destinations est vide
- * @return string $res
- *   un <div> le code HTML/javascript correspondant au selecteur de destinations
- */
-function association_editeur_destinations($destinations, $defaut='') {
-	$options = array();
-        // Constuire les balises Options d'un Select
-	// mais il faudrait arranger ca si une seule
-	$q = sql_select('id_destination,intitule', 'spip_asso_destination', '', '', 'intitule');
-
-	while ($v = sql_fetch($q)) {
-	  // Ces deux variables sont utilisees plus bas si une seule iteration
-		$id = $v['id_destination'];
-		$texte = $v['intitule'];
-		$options[$id] = "<option value='$id'>$texte</option>";
-	}
-	if (!$options) // aucune destination definie !
-	    return '';
-	$idIndex = 1;
-
-	if (intval($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples, on insere le js qui permet de les gerer
-	      $script = '<script type="text/javascript" src="'
-		. find_in_path('javascript/jquery.destinations_form.js')
-		. '"></script>';
-		$addDestinationButton = "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>";
-	}
-
-	if ( is_array($destinations) ) { // si on a une liste de destinations (on edite une operation)
-	  $options = join("\n", $options) ;
-	  $res = '';
-	  foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
-		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
-		. '<li>'
-		. '<select name="id_dest['.$idIndex.']" id="id_dest_'.$idIndex.'" >'
-		. preg_replace("/(value='".$destId."')/", '$1 selected="selected"', $options)
-		. '</select></li>';
-
-		if (($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples
-		    $res .= '<li><input name="montant_dest['.$idIndex.']" value="'
-			. association_formater_nombre($destMontant)
-			. '" type="text" id="montant_dest_'.$idIndex.'" class="number decimal price" />'
-			. '<button class="destButton" type="button" onclick="addFormField(); return false;">+</button>';
-		    if ($idIndex>1) {
-			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
-			}
-		}
-		$res .= '</li></ul></div>';
-		$idIndex++;
-	  }
-	} else { // pas de destination deja definies pour cette operation
-	    if ($defaut!='') {
-	      $options[$defaut] = str_replace('<option ', '<option selected="selected" ', $options[$defaut]);
-	    }
-	    $n = " name='id_dest[1]' id='id_dest_1'";
-	    if ((count($options) == 1)) { // on a une seule destination possible, pas de selecteur
-	      $res = "<input$n readonly='readonly' value='$id' /> $texte";
-	    } else  {
-	      $res = "<ul>\n<li>"
-		. "<select$n>" . join("\n", $options) . '</select>'
-		. "\n</li><li><input name='montant_dest[1]' id='montant_dest_1'/>"
-		. $addDestinationButton.'</li></ul>';
-	    }
-
-	}
-    return $script
-      . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
-      . '<label>'
-      . _T('asso:destination')
-      . '</label>'
-      . $res
-      . ((intval($GLOBALS['association_metas']['destinations'])>1)? '' :
-	('<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'" />'))
-      . '</div>';
-
-}
 
 /**
  * Ajouter une operation comptable ainsi que ses ventilations si necessaire
@@ -144,7 +41,7 @@ function association_editeur_destinations($destinations, $defaut='') {
  * @return int $id_operation
  *   ID de l'operation dans spip_asso_comptes et spip_asso_destination_op
  */
-function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
+function comptabilite_operation_ajouter($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
     $modifs = array(
 	'date_operation' => $date,
 	'imputation' => $imputation,
@@ -162,7 +59,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 	spip_log("imputation manquante : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
     }
     if ($GLOBALS['association_metas']['destinations']) { // Si on doit gerer les destinations
-	association_ajouter_destinations_comptables($id_operation, $recette, $depense);
+	comptabilite_operation_ventiler($id_operation, $recette, $depense);
     }
     return $id_operation;
 
@@ -190,7 +87,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
  * @return string $err
  *   Message d'erreur (vide en cas de succes)
  */
-function association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation) {
+function comptabilite_operation_modifier($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation) {
     $err = '';
     $id_operation = intval($id_operation);
     if ( sql_countsel('spip_asso_comptes', "id_compte=$id_operation AND vu ") ) { // il ne faut pas modifier une operation verouillee !!!
@@ -198,7 +95,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 	return $err = _T('asso:operation_non_modifiable');
     }
     if ($GLOBALS['association_metas']['destinations']) { // Si on doit gerer les destinations
-	$err = association_ajouter_destinations_comptables($id_operation, $recette, $depense);
+	$err = comptabilite_operation_ventiler($id_operation, $recette, $depense);
     }
     $modifs = array(
 	'date_operation' => $date,
@@ -219,7 +116,7 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 
 /**
  * Supprimer une operation dans spip_asso_comptes ainsi que si necessaire sa ventilation dans spip_asso_destination_op ;
- * cas 1 : usage direct de id_compte
+ * C'est la forme interne
  *
  * @param int $id_operation
  *   ID de l'operation a supprimer
@@ -229,12 +126,12 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
  *   ID de l'enregistrement d'ecriture inverse : indique donc une annulation
  *   comptable quand different de 0, et une suppression pure et simple sinon
  */
-function association_supprimer_operation_comptable1($id_operation, $securite=FALSE) {
+function comptabilite_operation1_supprimer($id_operation, $securite=FALSE) {
     list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date_operation, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_operation"); // recuperer les informations sur l'operation pour le fichier de log
     if ( ($securite AND !$verrou) || !$securite ) { // operation non verouillee ou controle explicitement desactive...
 	$annulation = 0;
 	sql_delete('spip_asso_destination_op', "id_compte=$id_operation"); // on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve
-	spip_log("suppression d'operation comptable : id_compte=$id_operation, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=...",'associaspip'); // on logue quand meme
+	spip_log("suppression de l'operation comptable $id_operation : date=$date, montant=$recette-$depense, imputation=$imputation, financier=$journal, id_journal=$id_journal, justification=...", 'associaspip'); // on logue quand meme
 	sql_delete('spip_asso_comptes', "id_compte=$id_operation"); // on efface enfin de la table comptes l'entree correspondant a cette operation
     } else { // on ne supprime pas les ecritures validees/verouillees ; il faut annuler l'operation par une operation comptable inverse...
 	$annulation = sql_insertq('spip_asso_comptes', array(
@@ -247,14 +144,13 @@ function association_supprimer_operation_comptable1($id_operation, $securite=FAL
 	    'id_journal' => -$id_journal, // on garde la trace par rapport au module ayant cree l'operation
 	    'vu' => 1, // cette operation n'est pas moifiable non plus...
 	) ); // on cree l'operation opposee a celle a annuler ; mais ce n'est pas une annulation correcte au regard des numeros de comptes (imputation/journal)...
-#	spip_log("annulation d'operation comptable : id_compte=$id_operation, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=annule_par_op$annulation",'associaspip'); // on logue quand meme ?
     }
     return $annulation;
 }
 
 /**
  * Supprimer une operation dans spip_asso_comptes ainsi que si necessaire sa ventilation dans spip_asso_destination_op ;
- * cas 2 : usage par les modules du couple imputation&id_journal
+ * C'est la forme utilisee par les modules...
  *
  * @param int $id_journal
  *   ID de l'enregistrement associe dans le module  (chaque imputation etant gere par un seul module)
@@ -264,10 +160,10 @@ function association_supprimer_operation_comptable1($id_operation, $securite=FAL
  *   ID de l'enregistrement supprime ou annule
  *   (vaut donc 0 si aucun enregistrement touche)
  */
-function association_supprimer_operation_comptable2($id_journal, $pc_journal) {
+function comptabilite_operation_supprimer($id_journal, $pc_journal) {
     $association_imputation = charger_fonction('association_imputation', 'inc');
     if ( $id_operation = sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation($pc_journal, $id_journal)) )
-	association_supprimer_operation_comptable1($id_operation);
+	comptabilite_operation1_supprimer($id_operation);
     return $id_operation; // indique quelle operation a ete supprimee (0 si aucune --donc erreur dans les parametres ?)
 }
 
@@ -276,23 +172,22 @@ function association_supprimer_operation_comptable2($id_journal, $pc_journal) {
  *
  * @param string $critere
  *   Critere de selection SQL des operations a supprimer
- * @retur void
+ * @retur int $ok
+ *   Nombre de comptes effectivement supprimes
  * @warning
- *   Cette fonction etant sans garde-four est a manipulur avec precaution !
- *   Les suppression sont irreversibles...
+ *   Cette fonction est a manipuler avec precaution...
  */
-function association_supprimer_operations_comptables($critere) {
-    $where = sql_in_select('id_compte', 'id_compte', 'spip_asso_comptes', $critere); // on recupere la liste des a supprimer
-    sql_delete('spip_asso_destination_op', $where); // on efface les ventilations de ces operations  si on en trouve
-    $query_log = sql_select('id_compte, date, recette, depense, imputation, journal, id_journal', 'spip_asso_comptes', $where);
-    while ( list($id_compte, $date, $recette, $depense, $imputation, $journal, $id_journal) = fetch($query_log) ) { // on logue les enregistrements a supprimer du livre comptable
-	spip_log("suppression d'operation comptable : id_compte=$id_compte, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal ",'associaspip');
-    }
-    sql_delete('spip_asso_comptes', $where); // on efface enfin de la table comptes les entrees correspondant a ces operations ($where ou $critere)
+function comptabilite_operations_supprimer($critere) {
+    $ok = 0; // compteur de suppression
+    $sql = sql_select('id_compte', 'spip_asso_comptes', $where); // liste des operations a supprimer
+    while ( $r = fetch($sql) )
+	if ( comptabilite_operation1_supprimer($r['id_compte']) )
+	    $ok++;
+    return $ok;
 }
 
 /**
- * Fonction permettant d'ajouter/modifier les destinations comptables (presente dans $_POST) a une operation comptable
+ * Editer des destinations comptables liees a une operation comptable
  *
  * @param int $id_compte
  *   ID de l'operation comptable a ventiller
@@ -300,17 +195,24 @@ function association_supprimer_operations_comptables($critere) {
  *   Montant total des recettes a ventiller
  * @param float $depense
  *   Montant total des depenses a ventiller
+ * @param array $repartion
+ *   Tableau des id_destination=>montant a ventiler.
+ * Quand vide, les ventilations sont recherchees dans $_POST['id_dest'] et $_POST['montant_dest']
  * @return void
  */
-function association_ajouter_destinations_comptables($id_compte, $recette, $depense) {
+function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $repartion=array() ) {
     sql_delete('spip_asso_destination_op', "id_compte=$id_compte"); // on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve
-    if ($recette>0) {
+    if ($recette>0) // soit une recette
 	$attribution_montant = 'recette';
-    } else {
+    else // soit une depense
 	$attribution_montant = 'depense';
-    }
-    $toutesDestinationsIds = association_recuperer_liste('id_dest', TRUE);
+    if ( count($repartion) ) { // usage normal
+	$toutesDestinationsIds = array_keys($repartion);
+	$toutesDestinationsMontants = array_values($repartion);
+    } else { // donnees de formulaire Associaspip
+	$toutesDestinationsIds = association_recuperer_liste('id_dest', TRUE);
 	$toutesDestinationsMontants = association_recuperer_liste('montant_dest', TRUE);
+    }
     if ( count($toutesDestinationsIds)>1 ) { // plusieurs destinations
 	foreach ($toutesDestinationsIds as $id => $id_destination) { // ventilation des montants. le tableau des montants a des cles indentique a celui des id
 	    $id_dest_op = sql_insertq('spip_asso_destination_op', array(
@@ -327,6 +229,147 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 	));
     }
 }
+
+
+/** @} */
+
+
+/*****************************************
+ * @defgroup comptabilite_liste_
+ * Recuperation de tableaux PHP eventuellement vide
+ *
+** @{ */
+
+/**
+ * Recupere dans les tables la liste des destinations associees a une operation
+ *
+ * @param int $id_operation
+ *   id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
+ * @return array $destinations
+ *   Un tableau eventuellement vide de id_destination=>montant
+ */
+function comptabilite_liste_destinationsassociees($id_operation) {
+	$sql = sql_select('recette, depense, id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
+	$destinations = array();
+	while ( $r = sql_fetch($sql) ) {
+	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; // soit recette soit depense est egal a 0, on se contente les additionner
+	}
+	return $destinations;
+}
+
+/**
+ * Tableau des comptes d'une classe du plan comptable
+ *
+ * @param int $classe
+ *   Classe dont on veut recuprer les comptes
+ * @param int active
+ *   Ce parametre facultatif permet de se restreindre aux comptes actifs (1) ou inactifs (0)
+ * @return array $res
+ *   retourne un tableau $code=>$intitule trie par code
+ */
+function comptabilite_liste_comptesclasse($classe, $actives='') {
+    $res = array();
+    $sql = sql_select('code, intitule', 'spip_asso_plan', "classe='$classe'".($actives!=''?" AND active=$actives":''), '', 'code'); // recupere le code et l'intitule de tous les comptes de classe $val
+    while ( $r = sql_fetch($sql) )
+	$res[$r['code']] = $r['intitule'];
+    return $res;
+}
+
+/** @} */
+
+
+/*****************************************
+ * @defgroup filtre_selecteur_compta_
+ * Selecteurs dHTML propres a la compta
+ *
+** @{ */
+
+/**
+ * Selecteur de destinations dHTML
+ *
+ * @param array $destinations
+ *   Tableau de id_destination=>montant deja selectionnees
+ * (vide si on ajoute une operation)
+ * @param int $defaut
+ *   Permet de selectionner une destination par defaut (par id_destination)
+ *   quand $destinations est vide
+ * @return string $res
+ *   un <div> le code HTML/javascript correspondant au selecteur de destinations
+ * @note
+ *   Associaspip : selon la configuration, on ne peut associer qu'une destination unique ou ventiler sur plusieurs destinations
+ */
+function filtre_selecteur_compta_destinations($destinations=array(), $defaut='') {
+	$options = array();
+	$sql = sql_select('id_destination, intitule', 'spip_asso_destination', '', '', 'intitule');
+	while ( $r = sql_fetch($sql) ) // Constuire les balises OPTIONs d'un SELECT ; mais il faudrait arranger ca si une seule
+		$options[$r['id_destination']] = '<option value="'.$r['id_destination'].'">'.$r['intitule'].'</option>';
+	if ( !count($options) OR !$GLOBALS['association_metas']['destinations'] ) // aucune destination definie ! ou usage desactive !
+	    return '';
+	$idIndex = 1;
+	if (intval($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples : on insere ...
+	    $script = '<script type="text/javascript" src="'
+	    . find_in_path('javascript/jquery.destinations_form.js')
+		. '"></script>'; // ...le JS qui permet de les gere
+	    $addDestinationButton = "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>"; // ...le bouton pour ajouter une destination
+	} else // destination unique
+	    $script = $addDestinationButton '';
+	if ( count($destinations) ) { // si on a une liste de destinations (on edite une operation)
+	  $options = join("\n", $options) ;
+	  $res = '';
+	  foreach ($destinations as $destId => $destMontant) { // restitution des listes de selection HTML
+		$res .= '<div id="row'.$idIndex.'" class="choix"><ul>'
+		. '<li>'
+		. '<select name="id_dest['.$idIndex.']" id="id_dest_'.$idIndex.'" >'
+		. preg_replace("/(value='".$destId."')/", '$1 selected="selected"', $options)
+		. '</select></li>';
+		if (($GLOBALS['association_metas']['destinations'])>1) { // destinations multiples
+		    $res .= '<li><input name="montant_dest['.$idIndex.']" value="'
+			. association_formater_nombre($destMontant)
+			. '" type="text" id="montant_dest_'.$idIndex.'" class="number decimal price" />'
+			. '<button class="destButton" type="button" onclick="addFormField(); return false;">+</button>';
+		    if ($idIndex>1) // bouton de suppression de l'affectation courante
+			$res .= '<button class="destButton" type="button" onclick="removeFormField(\'#row'.$idIndex.'\'); return false;">-</button>';
+		}
+		$res .= '</li></ul></div>';
+		$idIndex++;
+	  }
+	} else { // pas de destination deja definies pour cette operation
+	    if ( $defaut ) // un choix par defaut
+	      $options[$defaut] = str_replace('<option ', '<option selected="selected" ', $options[$defaut]);
+	    $n = " name='id_dest[1]' id='id_dest_1'";
+	    if ( count($options)==1 ) // on a une seule destination possible, pas de selecteur
+	      $res = "<input$n readonly='readonly' value='$id' /> $texte";
+	    else // plusieurs destinations possibles
+	      $res = "<ul>\n<li>"
+		. "<select$n>" . join("\n", $options) . '</select>'
+		. "\n</li><li><input name='montant_dest[1]' id='montant_dest_1'/>"
+		. $addDestinationButton.'</li></ul>';
+	}
+    return $script
+      . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
+      . '<label>'
+      . _T('asso:destination')
+      . '</label>'
+      . $res
+      . ((intval($GLOBALS['association_metas']['destinations'])>1)? '' :
+	('<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'" />'))
+      . '</div>';
+}
+
+
+
+/** @} */
+
+
+/*****************************************
+ * @defgroup comptabilite_ _
+ * Divers
+ *
+** @{ */
+
+
+
+
 
 /**
  * Prepare le critere sur une imputation comptable
@@ -380,25 +423,6 @@ function association_valider_plan_comptable() {
 }
 
 /**
- * Tableau des comptes d'une classe du plan comptable
- *
- * @param int $val
- *   Classe dont on veut recuprer les comptes
- * @param int active
- *   Ce parametre facultatif permet de se restreindre aux comptes actifs (1) ou inactifs (0)
- * @return array $res
- *   retourne un tableau $code=>$intitule trie par code
- */
-function association_liste_plan_comptable($val, $actives='') {
-    $res = array();
-    $query = sql_select('code, intitule', 'spip_asso_plan', "classe='$val'".($actives!=''?" AND active=$actives":''), '', 'code'); // recupere le code et l'intitule de tous les comptes de classe $val
-    while ($data = sql_fetch($query)) {
-	$res[$data['code']] = $data['intitule'];
-    }
-    return $res;
-}
-
-/**
  * Recupere le code du compte des virements internes
  *
  * @return string $res
@@ -409,7 +433,7 @@ function association_liste_plan_comptable($val, $actives='') {
 function association_creer_compte_virement_interne() {
     if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
 	return $GLOBALS['association_metas']['pc_intravirements'];
-    $res = association_liste_plan_comptable($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
+    $res = comptabilite_liste_comptesclasse($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
     foreach($res as $code => $libelle) { // existe-t-il le compte 58x ? (nota : c'est la compta francaise...)
 	if (substr($code,1,1)=='8') // il existe un code qui commence par 58...
 	    return $code;
@@ -433,33 +457,6 @@ function association_creer_compte_virement_interne() {
 	    'valeur' => $code,
 	));
     return $code;
-}
-
-/**
- * on recupere les parametres de requete a passer aux fonctions
-**/
-function association_passeparam_compta($classes=array()) {
-    $params = array(); // initialisation de la liste
-    list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
-    $params['type_periode'] = ($GLOBALS['association_metas']['exercices']?'exercice':'annee');
-    $params['destination'] = association_recuperer_entier('destination');
-    $params['type'] = _request('type');
-    if ( !$classes ) { // pas en parametre, on prend dans la requete
-//	$params['classes'] = array_flip( explode(',', association_recuperer_liste('classes')) );
-	$keys = association_recuperer_liste('classes');
-	if ( count($keys) ) {
-	    $vals = array_fill(0, count($keys) ,0);
-	    $params['classes'] = array_combine($keys, $vals);
-	} else {
-	    $params['classes'] = array();
-	}
-    } elseif ( is_array($classes) ) { // c'est a priori bon
-	$params['classes'] = $classes;
-    } else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
-	$params['classes'] = $classes ? array( $classes=>0 ) : array() ;
-    }
-    $params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
-    return $params;
 }
 
 /**
