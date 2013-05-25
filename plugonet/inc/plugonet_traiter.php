@@ -475,9 +475,10 @@ function plugin2balise_utilise($D) {
 	$res = '';
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+		$src = isset($i['src']) ? $i['src'] : '';
 		$att = " nom=\"$nom\"" .
 				(!empty($i['version']) ? (" compatibilite=\"" . bornes2intervalle(intervalle2bornes($i['version'])) . "\"") : '') .
-				plugin2balise_lien($i['src']);
+				plugin2balise_lien($src);
 		$res .="\n\t<utilise$att />";
 	}
 
