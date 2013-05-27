@@ -1,12 +1,12 @@
 <B_filleuls>
-<table>
-	<theader>
+<table class="spip parrainage">
+	<thead class="row_first">
 		<th class="selection"></th>
 		<th class="nom"><:parrainage:filleul_nom:></th>
 		<th class="email"><:parrainage:filleul_email:></th>
 		<th class="statut"><:parrainage:filleul_statut:></th>
 		<th class="actions"><:parrainage:filleul_actions:></th>
-	</theader>
+	</thead>
 	<tbody>
 	<BOUCLE_filleuls(FILLEULS){id_parrain?}{statut?}{par nom}>
 		[(#REM) On regarde si la personne est inscrite ]
@@ -17,7 +17,7 @@
 			#SET{url_auteur,''}
 			#SET{date_inscription,''}
 		<//B_auteur>
-		<tr class="filleul#ID_FOND #STATUT">
+		<tr class="filleul#ID_FOND #STATUT[ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
 			<td class="selection">
 				<input
 					type="checkbox"
@@ -33,35 +33,27 @@
 			<td class="email">#EMAIL</td>
 			<td class="statut">
 				[(#STATUT|=={contact}|oui)
-					<span title="<:parrainage:statut_contact_explication:>"><:parrainage:statut_contact:></span>
-				]
+					<span title="<:parrainage:statut_contact_explication:>"><:parrainage:statut_contact:></span>]
 				[(#STATUT|=={en_cours}|oui)
-					<span title="<:parrainage:statut_en_cours_explication:>"><:parrainage:statut_en_cours:></span>
-				]
+					<span title="<:parrainage:statut_en_cours_explication:>"><:parrainage:statut_en_cours:></span>]
 				[(#STATUT|=={invite}|oui)
 					[(#SET{duree,[(#DATE_INVITATION|date_relative)]})]
-					<span title="<:parrainage:statut_invite_explication:>"><:parrainage:statut_invite{duree=#GET{duree}}:></span>
-				]
+					<span title="<:parrainage:statut_invite_explication:>"><:parrainage:statut_invite{duree=#GET{duree}}:></span>]
 				[(#STATUT|=={visite}|oui)
-					<span title="<:parrainage:statut_visite_explication:>"><:parrainage:statut_visite:></span>
-				]
+					<span title="<:parrainage:statut_visite_explication:>"><:parrainage:statut_visite:></span>]
 				[(#STATUT|=={sans_nouvelles}|oui)
 					[(#SET{date,[(#DATE_INVITATION|affdate_jourcourt)]})]
-					<span title="<:parrainage:statut_sans_nouvelles_explication:>"><:parrainage:statut_sans_nouvelles{date=#GET{date}}:></span>
-				]
+					<span title="<:parrainage:statut_sans_nouvelles_explication:>"><:parrainage:statut_sans_nouvelles{date=#GET{date}}:></span>]
 				[(#STATUT|=={deja_inscrit}|oui)
 					<a href="#GET{url_auteur}" title="<:parrainage:statut_deja_inscrit_explication:>">
 						<:parrainage:statut_deja_inscrit:>
-					</a>
-				]
+					</a>]
 				[(#STATUT|=={filleul}|oui)
 					<a href="#GET{url_auteur}" title="<:parrainage:statut_filleul_explication:>">
 					[(#GET{date_inscription}|non)
-						<:parrainage:statut_filleul:>
-					]
+						<:parrainage:statut_filleul:>]
 					[(#GET{date_inscription}|oui)
-						<:parrainage:statut_filleul_depuis{date=#GET{date_inscription}}:>
-					]
+						<:parrainage:statut_filleul_depuis{date=#GET{date_inscription}}:>]
 					</a>
 				]
 			</td>
