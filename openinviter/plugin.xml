@@ -2,7 +2,7 @@
 	<nom>OpenInviter</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<etat>stable</etat>
 	<slogan>Intégration de la librairie OpenInviter.</slogan>
 	<description>Intégration de la librairie OpenInviter avec l'API du plugin Importateur de contacts.</description>
@@ -19,6 +19,6 @@
 		<inclure>openinviter_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.10;3.0.99]" />
 	<utilise id="importateur_contacts" />
 </plugin>

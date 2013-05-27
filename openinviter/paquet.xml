@@ -1,0 +1,23 @@
+<paquet
+	prefix="openinviter"
+	categorie="outil"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[2.1.10;3.0.99]"
+	logo="images/openinviter.gif"
+	documentation="http://contrib.spip.net/?article3979"
+>	
+
+	<nom>OpenInviter</nom>
+	<!-- Intégration de la librairie OpenInviter. -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="openinviter" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="importateur_contacts_moteurs" inclure="openinviter_pipelines.php" />
+
+	<utilise nom="importateur_contacts" />
+</paquet>
