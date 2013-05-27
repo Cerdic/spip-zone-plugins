@@ -1,0 +1,37 @@
+<paquet
+	prefix="parrainage"
+	categorie="communication"
+	version="0.6.0"
+	etat="test"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="images/parrainage-48.png"
+	schema="0.1.0"
+	documentation="http://contrib.spip.net/?article3978"
+>	
+
+	<nom>Parrainage</nom>
+	<!-- Proposer aux utilisateurs un outil de parrainage. -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="parrainage" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="autoriser" inclure="inc/parrainage_autoriser.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/parrainage_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/parrainage_tables.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="base/parrainage_tables.php" />
+	<pipeline nom="formulaire_charger" inclure="parrainage_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="parrainage_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="parrainage_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="parrainage_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="parrainage_pipelines.php" />
+
+	<necessite nom="facteur" compatibilite="[1.6.1;[" />
+	<necessite nom="saisies" compatibilite="[1.8.5;[" />
+
+	<utilise nom="importateur_contacts" />
+
+	<menu nom="configurer_parrainage" titre="parrainage:plugin_nom" parent="bando_configuration" icone="images/parrainage-16.png" action="configurer_parrainage" />
+</paquet>

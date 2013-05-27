@@ -2,7 +2,7 @@
 	<nom>Parrainage</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.1</version>
+	<version>0.6.0</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<slogan>Proposer aux utilisateurs un outil de parrainage.</slogan>
@@ -10,7 +10,7 @@
 	<icon>images/parrainage-48.png</icon>
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="parrainage" reference="fr" />
-	<lien>http://www.spip-contrib.net/Plugin-Parrainage</lien>
+	<lien>http://contrib.spip.net/?article3978</lien>
 	
 	<prefix>parrainage</prefix>
 	
@@ -60,7 +60,7 @@
 		<inclure>parrainage_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.2.10;]" />
 	<necessite id="facteur" version="[1.6.1;]" />
 	<necessite id="queue" version="[0.6.2;]" />
