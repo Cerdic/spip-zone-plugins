@@ -1,0 +1,20 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
+	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+                [(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
+                #ACTION_FORMULAIRE{#ENV{action},#FORM}
+ 
+               	<p>Les événements contenus à l'adresse <strong>#ENV{url}</strong> sont :</p>
+               	<ul>
+               		<li>premier</li>
+               		<li>second</li>
+               	</ul>	
+
+               	<p>Si ces événements sont ceux que vous vous attendiez à trouver, vous pouvez valider la saisie, sinon retournez à l'étape précédente.</p>
+	 	<p class='boutons'><input type='submit' class='submit' name="_retour_etape_1" value='Précédent' /> <input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

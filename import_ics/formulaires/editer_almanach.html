@@ -1,9 +1,10 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
+	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
 		<ul>
@@ -16,14 +17,14 @@
 				label=<:almanach:label_url:>,
 				explication=<:almanach:explication_url:> })]
 
-			[(#SAISIE{input, id_article, obligatoire=oui,
+			[(#SAISIE{selecteur_article, id_article, obligatoire=oui,
 				label=<:almanach:label_id_article:>,
 				explication=<:almanach:explication_id_article:> })]
 
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class="boutons"><input type='submit' class='submit' value='suivant' /></p>
 	</div></form>
 	]
 </div>

@@ -59,8 +59,10 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  *     Environnement du formulaire
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs = array(/*'formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden)',*/
+						'_etapes'=>2);
 	return $valeurs;
+
 }
 
 /**
@@ -112,6 +114,7 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  *     Retours des traitements
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+
 	include_spip('lib/iCalcreator.class');
 
 
@@ -124,6 +127,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$cal->parse();
 
 sql_insertq('spip_almanachs_liens',array('id_almanach'=>$id_almanach,'id_objet'=>'1','objet'=>'evenement'));
+
 	return formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
