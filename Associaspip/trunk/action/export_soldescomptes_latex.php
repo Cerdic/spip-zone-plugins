@@ -90,7 +90,7 @@ class LaTeX extends ExportComptes_TXT {
 			$new_chapitre = substr($data['code'], 0, 2);
 			if ($chapitre!=$new_chapitre) {
 				$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $new_chapitre) .' & ';
-				$this->out .= '\multicolumn{2}{l|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .'}\\\\'."\n";
+				$this->out .= '\multicolumn{2}{l|}{'. str_replace(array('\\','&'), array('\\backslash{}','\\&'), comptabilite_reference_intitule($new_chapitre) ) .'}\\\\'."\n";
 				$chapitre = $new_chapitre;
 			}
 			$this->out .= str_replace(array('\\','&'), array('\\backslash{}','\\&'), $data['code']) .' & ';

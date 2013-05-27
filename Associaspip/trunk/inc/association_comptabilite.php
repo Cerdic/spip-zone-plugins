@@ -12,7 +12,78 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 include_spip('base/association');
-include_spip('inc/association_plan_comptable');
+
+
+/*****************************************
+ * @defgroup comptabilite_liste_
+ * Recuperation de tableaux PHP eventuellement vide
+ *
+** @{ */
+
+/**
+ * Recupere dans les tables la liste des destinations associees a une operation
+ *
+ * @param int $id_operation
+ *   id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
+ * @return array $destinations
+ *   Un tableau eventuellement vide de id_destination=>montant
+ * @note:ex
+ *   association_liste_destinations_associees($id_operation)
+ */
+function comptabilite_liste_destinationsassociees($id_operation) {
+	$sql = sql_select('recette, depense, id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
+	$destinations = array();
+	while ( $r = sql_fetch($sql) ) {
+	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; // soit recette soit depense est egal a 0, on se contente les additionner
+	}
+	return $destinations;
+}
+
+/**
+ * Tableau des comptes d'une classe du plan comptable
+ *
+ * @param int $classe
+ *   Classe dont on veut recuprer les comptes
+ * @param int active
+ *   Ce parametre facultatif permet de se restreindre aux comptes actifs (1) ou inactifs (0)
+ * @return array $res
+ *   retourne un tableau $code=>$intitule trie par code
+ * @note:ex
+ *   association_liste_plan_comptable($classe, $actives)
+ */
+function comptabilite_liste_comptesclasse($classe, $actives='') {
+    $res = array();
+    $sql = sql_select('code, intitule', 'spip_asso_plan', "classe='$classe'".($actives!=''?" AND active=$actives":''), '', 'code'); // recupere le code et l'intitule de tous les comptes de classe $val
+    while ( $r = sql_fetch($sql) )
+	$res[$r['code']] = $r['intitule'];
+    return $res;
+}
+
+/**
+ * Retourne le tableau complet
+ *
+ * @param string $id
+ *   Identifiant du plan comptable qui nous interesse
+ * @param string $lang
+ *   Langue des intitules
+ * @return array $pcg
+ *   Tableau de reference=>intitule
+ * @note:ex
+ *   association_plan_comptable_complet()
+ */
+function comptabilite_liste_plancomplet($id='', $lang='') {
+    if (!$lang)
+	$lang = $GLOBALS['spip_lang'];
+    if (!$id)
+	$id = $GLOBALS['association']['plan_comptable'];
+//    if ($id) {
+	include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP
+	return $pcg; // retourner le tableau contenu dans le fichier
+//    } else {
+//    }
+}
+
+/** @} */
 
 
 /*****************************************
@@ -40,6 +111,8 @@ include_spip('inc/association_plan_comptable');
  *   ID de l'enregistrement associe dans le module  (chaque imputation etant gere par un seul module)
  * @return int $id_operation
  *   ID de l'operation dans spip_asso_comptes et spip_asso_destination_op
+ * @note:ex
+ *   association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal);
  */
 function comptabilite_operation_ajouter($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
     $modifs = array(
@@ -86,6 +159,8 @@ function comptabilite_operation_ajouter($date, $recette, $depense, $justificatio
  *   ID de l'operation dans spip_asso_comptes et spip_asso_destination_op
  * @return string $err
  *   Message d'erreur (vide en cas de succes)
+ * @note:ex
+ *   association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation)
  */
 function comptabilite_operation_modifier($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation) {
     $err = '';
@@ -125,6 +200,8 @@ function comptabilite_operation_modifier($date, $recette, $depense, $justificati
  * @return int $annulation
  *   ID de l'enregistrement d'ecriture inverse : indique donc une annulation
  *   comptable quand different de 0, et une suppression pure et simple sinon
+ * @note:ex
+ *    association_supprimer_operation_comptable1($id_operation, $securite)
  */
 function comptabilite_operation1_supprimer($id_operation, $securite=FALSE) {
     list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date_operation, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_operation"); // recuperer les informations sur l'operation pour le fichier de log
@@ -159,6 +236,8 @@ function comptabilite_operation1_supprimer($id_operation, $securite=FALSE) {
  * @return int $id_operation
  *   ID de l'enregistrement supprime ou annule
  *   (vaut donc 0 si aucun enregistrement touche)
+ * @note:ex
+ *   association_supprimer_operation_comptable2($id_journal, $pc_journal)
  */
 function comptabilite_operation_supprimer($id_journal, $pc_journal) {
     $association_imputation = charger_fonction('association_imputation', 'inc');
@@ -176,6 +255,8 @@ function comptabilite_operation_supprimer($id_journal, $pc_journal) {
  *   Nombre de comptes effectivement supprimes
  * @warning
  *   Cette fonction est a manipuler avec precaution...
+ * @note:ex
+ *   association_supprimer_operations_comptables($critere)
  */
 function comptabilite_operations_supprimer($critere) {
     $ok = 0; // compteur de suppression
@@ -199,6 +280,8 @@ function comptabilite_operations_supprimer($critere) {
  *   Tableau des id_destination=>montant a ventiler.
  * Quand vide, les ventilations sont recherchees dans $_POST['id_dest'] et $_POST['montant_dest']
  * @return void
+ * @note:ex
+ *   association_ajouter_destinations_comptables($id_compte, $recette, $depense)
  */
 function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $repartion=array() ) {
     sql_delete('spip_asso_destination_op', "id_compte=$id_compte"); // on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve
@@ -230,49 +313,82 @@ function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $re
     }
 }
 
-
 /** @} */
 
 
 /*****************************************
- * @defgroup comptabilite_liste_
- * Recuperation de tableaux PHP eventuellement vide
+ * @defgroup comptabilite_reference_
+ * Retour de texte relatif a une reference comptable
  *
 ** @{ */
 
 /**
- * Recupere dans les tables la liste des destinations associees a une operation
+ * Donner l'intitule d'une reference comptable.
  *
- * @param int $id_operation
- *   id_compte de l'operation dans spip_asso_compte (et spip_asso_destination)
- * @return array $destinations
- *   Un tableau eventuellement vide de id_destination=>montant
+ * @param string $code
+ *   La reference comptable dont on veut l'intitule
+ * @param bool $parent
+ *   Permet de retourner (si TRUE) le code parent existant dans le plan quand on
+ * ne trouve pas le code exact demande. Sinon (si FALSE) on renvoit une chaine vide
+ * @return string $nom
+ *   L'intitule correspondant
+ * @note
+ *   Ex association_plan_comptable_complet($code,$parent);
  */
-function comptabilite_liste_destinationsassociees($id_operation) {
-	$sql = sql_select('recette, depense, id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
-	$destinations = array();
-	while ( $r = sql_fetch($sql) ) {
-	    $destinations[$r['id_destination']] = $r['recette'] + $r['depense']; // soit recette soit depense est egal a 0, on se contente les additionner
-	}
-	return $destinations;
+function comptabilite_reference_intitule($code, $parent=FALSE) {
+    $nom = sql_getfetsel('intitule','spip_asso_plan','code='.sql_quote($code) ); // on tente de recuperer l'intitule defini...
+    if ($nom) // on a trouve ! alors...
+	return extraire_multi($nom, $GLOBALS['spip_lang']); // ...renvoyer la traduction
+    if ($GLOBALS['association_metas']['plan_comptable']) // sinon si on a un plan comptable selectionne
+	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
+    if ($nom) // on a trouve alors...
+	return $nom; // ...renvoyer la traduction
+    if (!$parent) // sinon si on doit s'en tenir a ce code, alors...
+	return ''; // c'est fini
+    $code = substr($code, 0, -1); // sinon on enleve le dernier caractere...
+    if (strlen($code)) // ...et tant qu'il y a un caractere...
+	return comptabilite_reference_intitule($code, TRUE); // ...on y retourne
+    else // mais quand on n'a pas de caractere a consommer...
+	return ''; // ...c'est la fin des haricots
 }
 
 /**
- * Tableau des comptes d'une classe du plan comptable
+ * Recupere le code du compte des virements internes
  *
- * @param int $classe
- *   Classe dont on veut recuprer les comptes
- * @param int active
- *   Ce parametre facultatif permet de se restreindre aux comptes actifs (1) ou inactifs (0)
- * @return array $res
- *   retourne un tableau $code=>$intitule trie par code
+ * @return string $res
+ *   C'est le code normalement defini dans la configuration du plugin.
+ *   S'il n'existe pas, on prend le premier compte 58x existant,
+ *   sinon on cree le compte 581 !
+ * @note:ex
+ *   association_creer_compte_virement_interne()
  */
-function comptabilite_liste_comptesclasse($classe, $actives='') {
-    $res = array();
-    $sql = sql_select('code, intitule', 'spip_asso_plan', "classe='$classe'".($actives!=''?" AND active=$actives":''), '', 'code'); // recupere le code et l'intitule de tous les comptes de classe $val
-    while ( $r = sql_fetch($sql) )
-	$res[$r['code']] = $r['intitule'];
-    return $res;
+function comptabilite_reference_virements() {
+    if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
+	return $GLOBALS['association_metas']['pc_intravirements'];
+    $res = comptabilite_liste_comptesclasse($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
+    foreach($res as $code => $libelle) { // existe-t-il le compte 58x ? (nota : c'est la compta francaise...)
+	if (substr($code,1,1)=='8') // il existe un code qui commence par 58...
+	    return $code;
+    }
+    // j'ai rien trouve, je cree le compte 581
+    $code = $GLOBALS['association_metas']['classe_banques'].'81';
+    $id_plan = sql_insertq('spip_asso_plan', array(
+	'code' => $code,
+	'intitule' => _T('asso:virement_interne'),
+	'classe' => $GLOBALS['association_metas']['classe_banques'],
+	'type_op' => 'multi',
+	'solde_anterieur' => '0',
+	'date_anterieure' => date('Y-m-d'),
+	'commentaire' => _T('asso:compte_cree_automatiquement'),
+	'active' => '0',
+	'maj' => date('Y-m-d')
+    ));
+    if ($id_plan)
+	sql_insertq('spip_association_metas', array(
+	    'nom' => 'pc_intravirements',
+	    'valeur' => $code,
+	));
+    return $code;
 }
 
 /** @} */
@@ -285,18 +401,19 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
 ** @{ */
 
 /**
- * Selecteur de destinations dHTML
+ * Selecteur de destinations
  *
  * @param array $destinations
- *   Tableau de id_destination=>montant deja selectionnees
- * (vide si on ajoute une operation)
+ *   Tableau de id_destination=>montant deja selectionnees (vide pour un ajout)
  * @param int $defaut
  *   Permet de selectionner une destination par defaut (par id_destination)
  *   quand $destinations est vide
  * @return string $res
- *   un <div> le code HTML/javascript correspondant au selecteur de destinations
+ *   Code HTML+JS correspondant au selecteur de destinations
  * @note
  *   Associaspip : selon la configuration, on ne peut associer qu'une destination unique ou ventiler sur plusieurs destinations
+ * @note:ex
+ *   association_editeur_destinations($destinations, $defaut)
  */
 function filtre_selecteur_compta_destinations($destinations=array(), $defaut='') {
 	$options = array();
@@ -312,7 +429,7 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
 		. '"></script>'; // ...le JS qui permet de les gere
 	    $addDestinationButton = "\n<button class='destButton' type='button' onclick='addFormField(); return FALSE;'>+</button>"; // ...le bouton pour ajouter une destination
 	} else // destination unique
-	    $script = $addDestinationButton '';
+	    $script = $addDestinationButton = '';
 	if ( count($destinations) ) { // si on a une liste de destinations (on edite une operation)
 	  $options = join("\n", $options) ;
 	  $res = '';
@@ -356,7 +473,42 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
       . '</div>';
 }
 
+/**
+ * Selecteur de plan comptable
+ *
+ * @param string $plan
+ *   ID du plan comptable selectionne
+ * @return string $res
+ *   Liste deroulante des plans comptables disponibles :
+ * ce sont de fichiers de langue "lang/pcg2*_*.php"
+ */
+function filtre_selecteur_compta_plan($plan) {
+    $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
+    foreach ($liste_plans as $pos=>$plan) {
+	$lang = strpos($plan, '_', 3); // l'indicateur de langue commence au premier underscore
+	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
+    }
+    $desc_table = charger_fonction('trouver_table', 'base');
+    if ( $desc_table('pays') )
+	$options = sql_allfetsel('code, nom', 'spip_pays', sql_in('code', $liste_plans) );
+    else
+	foreach ($liste_plans as $nom)
+	    $options[] = array('code'=>$nom, 'nom'=>_T("perso:$nom"), );
+    $res = "<select name='plan_comptable' id='selecteur_plan_comptable'>\n";
+    $res .= '<option value="">'. _T('ecrire:item_non') ."</option>\n";
+    foreach ($options as $option)
+	$res .= '<option value="'.$option['code'].'"'.
+	($option['code']==$plan?' selected="selected"':'')
+	.'>'. extraire_multi($option['nom'], $GLOBALS['spip_lang']) ."</option>\n";
+    return "$res</select>\n";
+}
 
+/**
+ * Selecteur de classe comptable
+ */
+function filtre_selecteur_compta_classe() {
+    // ToDo
+}
 
 /** @} */
 
@@ -366,9 +518,6 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
  * Divers
  *
 ** @{ */
-
-
-
 
 
 /**
@@ -420,43 +569,6 @@ function association_valider_plan_comptable() {
     if (count($classes)<2)
 	return FALSE; // on doit avoir au moins deux classes differentes
     return TRUE;
-}
-
-/**
- * Recupere le code du compte des virements internes
- *
- * @return string $res
- *   C'est le code normalement defini dans la configuration du plugin.
- *   S'il n'existe pas, on prend le premier compte 58x existant,
- *   sinon on cree le compte 581 !
- */
-function association_creer_compte_virement_interne() {
-    if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
-	return $GLOBALS['association_metas']['pc_intravirements'];
-    $res = comptabilite_liste_comptesclasse($GLOBALS['association_metas']['classe_banques']); // on recupere tous les comptes de la classe "financier" (classe 5)
-    foreach($res as $code => $libelle) { // existe-t-il le compte 58x ? (nota : c'est la compta francaise...)
-	if (substr($code,1,1)=='8') // il existe un code qui commence par 58...
-	    return $code;
-    }
-    // j'ai rien trouve, je cree le compte 581
-    $code = $GLOBALS['association_metas']['classe_banques'].'81';
-    $id_plan = sql_insertq('spip_asso_plan', array(
-	'code' => $code,
-	'intitule' => _T('asso:virement_interne'),
-	'classe' => $GLOBALS['association_metas']['classe_banques'],
-	'type_op' => 'multi',
-	'solde_anterieur' => '0',
-	'date_anterieure' => date('Y-m-d'),
-	'commentaire' => _T('asso:compte_cree_automatiquement'),
-	'active' => '0',
-	'maj' => date('Y-m-d')
-    ));
-    if ($id_plan)
-	sql_insertq('spip_association_metas', array(
-	    'nom' => 'pc_intravirements',
-	    'valeur' => $code,
-	));
-    return $code;
 }
 
 /**
@@ -574,7 +686,7 @@ function association_liste_totaux_comptes_classes($classes, $prefixe='', $direct
 	    $new_chapitre = substr($data['code'], 0, 2);
 	    if ($chapitre!=$new_chapitre) {
 		echo '<td class="text">'. $new_chapitre . '</td>';
-		echo '<td colspan="3" class="text">'. ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'")) .'</td>';
+		echo '<td colspan="3" class="text">'. comptabilite_reference_intitule($new_chapitre) .'</td>';
 		$chapitre = $new_chapitre;
 		echo "</tr>\n<tr>";
 	    }
@@ -759,7 +871,7 @@ class ExportComptes_TXT {
 		$new_chapitre = substr($data['code'], 0, 2);
 		if ($chapitre!=$new_chapitre) {
 		    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) .$champFin.$champsSeparateur;
-		    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) .$champFin.$champsSeparateur;
+		    $this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), comptabilite_reference_intitule($new_chapitre) ) .$champFin.$champsSeparateur;
 		    $this->out .= $champsSeparateur.' '.$champsSeparateur;
 		    $this->out .= $lignesSeparateur;
 		    $chapitre = $new_chapitre;
@@ -840,7 +952,7 @@ class ExportComptes_TXT {
 		    }
 		    $this->out .= "$indent$indent$balises[chapitre1]\n";
 		    $this->out .= "$indent$indent$indent$balises[code1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), $new_chapitre) ."$champFin $balises[code0]\n";;
-		    $this->out .= "$indent$indent$indent$balises[libelle1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), ($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))) ."$champFin $balises[libelle0]\n";
+		    $this->out .= "$indent$indent$indent$balises[libelle1] $champDebut". str_replace(array_keys($echappements), array_values($echappements), comptabilite_reference_intitule($new_chapitre) ) ."$champFin $balises[libelle0]\n";
 		    $chapitre = $new_chapitre;
 		}
 		$this->out .= "$indent$indent$indent$balises[categorie1]\n";
@@ -888,7 +1000,6 @@ if (test_plugin_actif('FPDF')) {
     define('FPDF_FONTPATH', 'font/');
     include_spip('fpdf');
     include_spip('inc/charsets');
-    include_spip('inc/association_plan_comptable');
 
 class ExportComptes_PDF extends FPDF {
 
@@ -1080,7 +1191,7 @@ class ExportComptes_PDF extends FPDF {
 		if ($chapitre!=$new_chapitre) { // debut de categorie
 		    $this->SetFillColor(225); // Couleur de fond de la ligne : gris-92.2%
 		    $this->Cell(20, 6, utf8_decode($new_chapitre), 0, 0, 'L', TRUE);
-		    $this->Cell(($this->largeur_utile)-(2*$this->cell_padding+20), 6, utf8_decode(($GLOBALS['association_metas']['plan_comptable_prerenseigne']?association_plan_comptable_complet($new_chapitre):sql_getfetsel('intitule','spip_asso_plan',"code='$new_chapitre'"))), 0, 0, 'L', TRUE);
+		    $this->Cell(($this->largeur_utile)-(2*$this->cell_padding+20), 6, utf8_decode(comptabilite_reference_intitule($new_chapitre)), 0, 0, 'L', TRUE);
 		    $chapitre = $new_chapitre;
 		    $this->Ln(); // Saut de ligne
 		    $yc += 6;

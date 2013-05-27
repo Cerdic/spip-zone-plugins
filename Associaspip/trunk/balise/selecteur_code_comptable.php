@@ -12,8 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 /**
- * Cette balise affiche un selecteur de code de reference comptable utilisant le plan comptable francais
- * Le selecteur n'est affiche que si la meta plan_comptable_prerenseigne est
+ * Cette balise affiche un selecteur de code de reference comptable utilisant le plan comptable choisi
+ * Le selecteur n'est affiche que si la meta plan_comptable est
  * activee dans la configuration du pluging. Lorsque la valeur du selecteur
  * change, on va remplir(jQuery) les champs code et intitule qui sont presents
  * sur la page ou est inseree la balise
@@ -24,11 +24,11 @@ function balise_SELECTEUR_CODE_COMPTABLE_dist ($p) {
 }
 
 function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
-	if ($GLOBALS['association_metas']['plan_comptable_prerenseigne']) { // si la meta est activee on renvoit le selecteur
-		include_spip('inc/association_plan_comptable');
-		$pcc = association_plan_comptable_complet(); // on recupere tout le plan comptable dans un tableau pour afficher le code commencant comme celui existant si ce dernier n'est pas dans le plan comptable
+	if ($GLOBALS['association_metas']['plan_comptable']) { // si la meta est activee on renvoit le selecteur
+		include_spip('inc/association_comptabilite');
+		$pcc = comptabilite_liste_plancomplet(); // on recupere tout le plan comptable dans un tableau pour afficher le code commencant comme celui existant si ce dernier n'est pas dans le plan comptable
 		if ($code != '')
-			$code = association_plan_comptable_complet($code, TRUE); // avec un second parametre a TRUE, la fonction renvoie le code lui meme si il est present dans le tableau ou le premier code hierarchiquement superieur present
+			$code = comptabilite_reference_intitule($code, TRUE); // avec un second parametre a TRUE, la fonction renvoie le code lui meme si il est present dans le tableau ou le premier code hierarchiquement superieur present
 		$res = '<select id="selecteur_code_comptable" class="select" onchange="var currentVal=String(document.getElementById(\'selecteur_code_comptable\').value).split(\'-\'); document.getElementById(\'code\').value=currentVal[0]; document.getElementById(\'intitule\').value=currentVal[1];">'; // code javascript en dur qui recopie l'intitule et le code dans les champs d'editions sur la page d'edition de la reference
 		$firstOptgroup = TRUE;
 		foreach ($pcc as $index_code => $intitule) { // on boucle sur tout le tableau

@@ -40,7 +40,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	//--><!]]>
 	</script><noscript><div>
 	<select name="imputation" id="imputation" class="select">
-<option value="0">-- ' . _T('choisir_ref_compte') . '</option>';
+<option value="0">-- ' . _T('asso:choisir_ref_compte') . '</option>';
 
 	include_spip('inc/association_comptabilite');
 	$interne = $GLOBALS['association_metas']['pc_intravirements'];
@@ -51,7 +51,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	$GLOBALS['association_metas']['classe_contributions_volontaires']
 	) as $key => $val) {
 		$res .= "\n<optgroup label='$val - "._T("perso:classe_$val")."'>";
-		foreach (comptabilite_liste_comptesclasse($val,1) as $k => $v) {
+		foreach (comptabilite_liste_comptesclasse($val, 1) as $k => $v) {
 			if ($k != $interne) { // code virement interne
 				$s = ($k==$imputation)?' selected="selected"':'';
 				$res .= "\n<option value='$k'$s>$k-$v</option>";

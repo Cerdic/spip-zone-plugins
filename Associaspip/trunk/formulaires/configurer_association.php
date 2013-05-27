@@ -11,6 +11,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
+include_spip('inc/association_comptabilite');
+
 function formulaires_configurer_association_charger_dist() {
 	return $GLOBALS['association_metas'];
 }
@@ -25,7 +27,6 @@ function formulaires_configurer_association_verifier_dist() {
 
 	$comptes = _request('comptes');
 	if ($comptes) { // si la gestion comptable est activee
-		include_spip('inc/association_comptabilite');
 		if (!association_valider_plan_comptable()) { // on (re)valide le plan comptable
 			$erreurs['comptes'] = _T('asso:erreur_configurer_association_plan_comptable_non_valide');
 			return $erreurs;

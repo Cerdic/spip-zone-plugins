@@ -1171,5 +1171,12 @@ $GLOBALS['association_maj'][72938] = array(
 	array('maj_tables', 'spip_asso_groupes'), // + champ : id_zone
 );
 
+$GLOBALS['association_maj'][72938] = array(
+	// plan comptable generalise
+	array('sql_update', 'spip_association_metas', array('valeur'=>'fr'), "nom='plan_comptable_prerenseigne' AND valeur<>'' "), // on met l'ID (on peut avoir autre chose que francais)
+	array('sql_insertq', 'spip_association_metas', array('nom'=>'plan_comptable', 'valeur'=>sql_select('valeur', 'spip_association_metas', "nom='plan_comptable_prerenseigne'"),) ), // nouveau nom de champ... : le creer et migrer la valeur
+	array('sql_delete', 'spip_association_metas', "nom='plan_comptable_prerenseigne'"), // nouveau nom de champ... : effacer l'ancien
+);
+
 
 ?>

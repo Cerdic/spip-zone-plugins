@@ -28,7 +28,7 @@ function action_editer_asso_compte_dist() {
 		if(!$justification)
 			$justification = _T('asso:virement_interne');
 		// si le compte 58xx n'existe pas on le cree dans le plan comptable
-		$compte_virement = association_creer_compte_virement_interne();
+		$compte_virement = comptabilite_reference_virements();
 #		if (!$id_compte) { // pas d'id_compte, c'est un ajout
 			// Supposons un virement de 400 du compte 5171 (Caisse d'epargne) vers le compte 531 (caisse)
 			// 1ere ecriture : depense = 400   imputation = 581  journal = 5171

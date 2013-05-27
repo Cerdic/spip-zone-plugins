@@ -1298,7 +1298,7 @@ function association_verifier_destinations($valeur, $req=TRUE) {
  * Selecteur d'exercice comptable
  */
 function filtre_selecteur_asso_exercice($sel='') {
-    $res = "<select name ='exercice' onchange='form.submit()' id='asso_exercice'>\n";
+    $res = "<select name='exercice' onchange='form.submit()' id='asso_exercice'>\n";
 #    $res .= '<option value="0" ';
 #	$res .= (!$el?' selected="selected"':'');
 #    $res .= '>'. _L("choisir l'exercice ?") ."</option>\n";
@@ -1318,7 +1318,7 @@ function filtre_selecteur_asso_exercice($sel='') {
 function filtre_selecteur_asso_destination($sel='') {
     if ( !$GLOBALS['association_metas']['destinations'])
  		return ''; // on n'affiche le selecteur que si l'utilisation des destinations est activee en configuration
-   $res = "<select name ='destination' onchange='form.submit()' id='asso_destination'>n";
+   $res = "<select name='destination' onchange='form.submit()' id='asso_destination'>n";
     $res .= '<option value="0" ';
 	$res .= (!$sel?' selected="selected"':'');
     $res .= '>'. _T('asso:toutes_destinations') ."</option>\n";
@@ -1412,7 +1412,7 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
     $pager = ' ';
     if ( !$annee ) // annee non precisee (ou valant 0)
 		$annee = date('Y'); // on prend l'annee courante
-    $res = "<select name ='annee' onchange='form.submit()' id='annee_$champ'>\n";
+    $res = "<select name='annee' onchange='form.submit()' id='annee_$champ'>\n";
     $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$champ, '%Y')) AS an_max", "spip_$table", '');
     $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$champ, '%Y')) AS an_min", "spip_$table", '');
     if ( $annee>$an_max || $annee<$an_min ) // si l'annee (courante) n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
@@ -1444,7 +1444,7 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
 function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
     $lettre = strtoupper($lettre);
     $pager = '';
-    $res = "<select name ='lettre' onchange='form.submit()' id='lettre_champ'>\n";
+    $res = "<select name='lettre' onchange='form.submit()' id='lettre_champ'>\n";
 	$res .= '<option value=""';
 	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
 	$res .='>'. _T('asso:entete_tous') ."</option>\n";
@@ -1557,10 +1557,10 @@ function filtre_selecteur_asso_type($type='', $coord='adresse', $objet='auteur',
 function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
 	if (!$GLOBALS['association_metas']['destinations'])
 		return FALSE;
-    $res1 = "<select name ='destinations[]' multiple='multiple' onchange='form.submit()' id='asso_destinations'>";
+    $res1 = "<select name='destinations[]' multiple='multiple' onchange='form.submit()' id='asso_destinations'>";
     $res2 = '';
     $res1 .= '<option value="0" ';
-    $res2 .= '<div class="choix"><input type="checkbox" name ="destinations[]" value="0" id="destination_0"';
+    $res2 .= '<div class="choix"><input type="checkbox" name="destinations[]" value="0" id="destination_0"';
     if ( !(array_search(0, $sel)===FALSE) ) {
 		$res1 .= ' selected="selected"';
 		$res2 .= ' checked="checked"';
@@ -1572,7 +1572,7 @@ function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
     $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
     while ($val = sql_fetch($sql)) {
 		$res1 .= '<option value="'.$val['id_destination'].'"';
-		$res2 .= '<div class="choix"><input type="checkbox" name ="destinations[]" value="'.$val['id_destination'].'" id="destination_'.$val['id_destination'].'"';
+		$res2 .= '<div class="choix"><input type="checkbox" name="destinations[]" value="'.$val['id_destination'].'" id="destination_'.$val['id_destination'].'"';
 		if ( !(array_search($val['id_destination'], $sel)===FALSE) ) {
 			$res1 .= ' selected="selected"';
 			$res2 .= ' checked="checked"';
