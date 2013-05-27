@@ -1,0 +1,20 @@
+<paquet
+	prefix="importateur_contacts"
+	categorie="outil"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[2.1.10;3.0.99]"
+	logo="images/importateur_contacts-32.png"
+	schema="1.0.0"
+	documentation="http://www.spip-contrib.net/Importateur-de-contacts"
+>	
+
+	<nom>Importateur de contacts</nom>
+	<!-- Formulaire d'importation de contacts. -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<necessite nom="saisies" compatibilite="[1.11.0;[" />
+</paquet>
