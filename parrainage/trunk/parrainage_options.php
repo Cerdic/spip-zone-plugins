@@ -19,10 +19,18 @@ if ($code_invitation = _request('invitation')){
 
 function parrainage_importer_contacts($contacts){
 	$ajouter_filleul = charger_fonction('ajouter_filleul', 'action/');
-	foreach ($contacts as $contact){
-		set_request('email', $contact['email']);
-		set_request('nom', $contact['nom']);
-		$ajouter_filleul(0);
+	if(is_array($contacts)){
+		$nb = 0;
+		foreach ($contacts as $contact){
+			set_request('email', $contact['email']);
+			set_request('nom', $contact['nom']);
+			$ajouter_filleul(0);
+			$nb++;
+		}
+		if($nb > 0){
+			include_spip('inc/invalideur');
+			suivre_invalideur('1');
+		}
 	}
 }
 
