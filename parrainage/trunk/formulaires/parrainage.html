@@ -12,7 +12,7 @@
 		#INCLURE{fond=formulaires/inc-liste-filleuls,env,id_parrain=#ENV{_id_parrain}}
 		
 		<ul>
-			[(#SAISIE{textarea, message, label=<:parrainage:parrainage_message_label:>})]
+			[(#SAISIE{textarea, message, label=<:parrainage:parrainage_message_label:>,rows=10})]
 		</ul>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -20,7 +20,8 @@
 		
 		<p class="boutons">
 			<span class="image_loading"></span>
-			<input type="submit" class="submit" value="<:parrainage:parrainage_inviter:>" />
+			<input type="submit" class="submit" name="submit_valider" value="<:parrainage:parrainage_inviter:>" />
+			<input type="submit" class="submit" name="submit_supprimer" value="<:parrainage:parrainage_supprimer_filleuls:>" onclick="return confirm('<:parrainage:parrainage_supprimer_filleuls_confirmation:>')" />
 		</p>
 	</div></form>
 	]

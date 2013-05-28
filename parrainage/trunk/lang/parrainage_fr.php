@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_titre' => 'Configuration du parrainage',
 
 	// E
+	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.',
 	'erreur_aucun_filleul' => 'Vous n\'avez sélectionné aucun filleul.',
 	'erreur_invitation_invalide' => 'Votre invitation ne correspond pas à l\'adresse de courriel indiquée.',
 	'erreur_invitation_obligatoire' => 'Vous devez avoir une invitation pour vous inscrire sur le site.',
@@ -39,11 +40,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_message_label' => 'Votre message',
 	'parrainage_message_ok_pluriel' => '@nombre@ invitations ont bien été programmées, elles sont maintenant en cours d\'envoi.',
 	'parrainage_message_ok_singulier' => 'Une invitation a bien été programmée, elle est maintenant en cours d\'envoi.',
-	'parrainage_supprimer_filleul' => 'Supprimer ce filleul',
+	'parrainage_supprime_un' => '@nb@ contact supprimé',
+	'parrainage_supprime_nb' => '@nb@ contacts supprimés',
+	'parrainage_supprimer_filleul' => 'Supprimer ce contact',
 	'parrainage_supprimer_filleul_confirmation' => 'Êtes-vous sûr de vouloir supprimer @nom@ de vos contacts ?',
+	'parrainage_supprimer_filleuls' => 'Supprimer les contacts sélectionnés',
+	'parrainage_supprimer_filleuls_confirmation' => 'Êtes-vous sûr de vouloir supprimer les contacts sélectionnés de vos contacts ?',
 	'plugin_nom' => 'Parrainage',
 
 	// S
+	'selectionner_rien' => 'Tout désélectionner',
+	'selectionner_tout' => 'Tout sélectionner',
 	'statut_contact' => 'Contact',
 	'statut_contact_explication' => 'Cette personne est dans votre carnet d\'adresse. Vous pouvez l\'inviter à rejoindre le site.',
 	'statut_deja_inscrit' => 'Déjà inscrit',

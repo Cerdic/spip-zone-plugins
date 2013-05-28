@@ -1,4 +1,9 @@
 <B_filleuls>
+[(#TOTAL_BOUCLE|>={10}|oui)
+<div class="actions">
+	<a href="#" onclick="jQuery('.selection input').attr('checked','checked');return false;"><:parrainage:selectionner_tout:></a>
+	<a href="#" onclick="jQuery('.selection input').attr('checked',false);return false;"><:parrainage:selectionner_rien:></a>
+</div>]
 <table class="spip parrainage">
 	<thead class="row_first">
 		<th class="selection"></th>
@@ -69,6 +74,11 @@
 			</td>
 		</tr>
 	</BOUCLE_filleuls>
-	<tbody>
+	</tbody>
 </table>
+[(#TOTAL_BOUCLE|>={10}|oui)
+<div class="actions">
+	<a href="#" onclick="jQuery('.selection input').attr('checked','checked');return false;"><:parrainage:selectionner_tout:></a>
+	<a href="#" onclick="jQuery('.selection input').attr('checked',false);return false;"><:parrainage:selectionner_rien:></a>
+</div>]
 </B_filleuls>
