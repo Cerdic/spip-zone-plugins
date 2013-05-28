@@ -1,7 +1,7 @@
 <?php
 $_pluginInfo=array(
 	'name'=>'Mail.ru',
-	'version'=>'1.1.6',
+	'version'=>'1.1.7',
 	'description'=>"Get the contacts from a Mail.ru account",
 	'base_version'=>'1.8.4',
 	'type'=>'email',
@@ -100,44 +100,45 @@ class mail_ru extends openinviter_base
 			}
 		$temp=$this->parseCSV($res);$teM=explode(PHP_EOL,$res);$arrayDescriptionFlag=explode(',',$teM[0]);
 		$contacts=array();
-		foreach ($temp as $values)				
-			$contacts[$values[8]]=array('first_name'=>(!empty($values[0])?$values[0]:false),
-										'middle_name'=>(!empty($values[2])?$values[2]:false),
-										'last_name'=>(!empty($values[1])?$values[1]:false),
-										'nickname'=>false,
-										'email_1'=>(!empty($values[8])?$values[8]:false),
-										'email_2'=>(!empty($values[9])?$values[9]:false),
-										'email_3'=>false,
-										'organization'=>false,
-										'phone_mobile'=>(!empty($values[11])?$values[11]:false),
-										'phone_home'=>(!empty($values[9])?$values[9]:false),			
-										'pager'=>false,
-										'address_home'=>false,
-										'address_city'=>(!empty($values[5])?$values[5]:false),
-										'address_state'=>(!empty($values[7])?$values[7]:false),
-										'address_country'=>(!empty($values[8])?$values[8]:false),
-										'postcode_home'=>(!empty($values[6])?$values[6]:false),
-										'company_work'=>(!empty($values[14])?$values[14]:false),
-										'address_work'=>false,
-										'address_work_city'=>(!empty($values[16])?$values[16]:false),
-										'address_work_country'=>(!empty($values[19])?$values[19]:false),
-										'address_work_state'=>(!empty($values[17])?$values[17]:false),
-										'address_work_postcode'=>(!empty($values[18])?$values[18]:false),
-										'fax_work'=>(!empty($values[21])?$values[21]:false),
-										'phone_work'=>(!empty($values[20])?$values[20]:false),
-										'website'=>(!empty($values[12])?$values[12]:false),
-										'isq_messenger'=>false,
-										'skype_essenger'=>false,
-										'yahoo_essenger'=>false,
-										'msn_messenger'=>false,
-										'aol_messenger'=>false,
-										'other_messenger'=>false,
-									   );				
+		if(!empty($temp))
+			foreach ($temp as $values)
+				if(!empty($values[8]))
+					$contacts[$values[8]]=array('first_name'=>(!empty($values[0])?$values[0]:false),
+												'middle_name'=>(!empty($values[2])?$values[2]:false),
+												'last_name'=>(!empty($values[1])?$values[1]:false),
+												'nickname'=>false,
+												'email_1'=>(!empty($values[8])?$values[8]:false),
+												'email_2'=>(!empty($values[9])?$values[9]:false),
+												'email_3'=>false,
+												'organization'=>false,
+												'phone_mobile'=>(!empty($values[11])?$values[11]:false),
+												'phone_home'=>(!empty($values[9])?$values[9]:false),			
+												'pager'=>false,
+												'address_home'=>false,
+												'address_city'=>(!empty($values[5])?$values[5]:false),
+												'address_state'=>(!empty($values[7])?$values[7]:false),
+												'address_country'=>(!empty($values[8])?$values[8]:false),
+												'postcode_home'=>(!empty($values[6])?$values[6]:false),
+												'company_work'=>(!empty($values[14])?$values[14]:false),
+												'address_work'=>false,
+												'address_work_city'=>(!empty($values[16])?$values[16]:false),
+												'address_work_country'=>(!empty($values[19])?$values[19]:false),
+												'address_work_state'=>(!empty($values[17])?$values[17]:false),
+												'address_work_postcode'=>(!empty($values[18])?$values[18]:false),
+												'fax_work'=>(!empty($values[21])?$values[21]:false),
+												'phone_work'=>(!empty($values[20])?$values[20]:false),
+												'website'=>(!empty($values[12])?$values[12]:false),
+												'isq_messenger'=>false,
+												'skype_essenger'=>false,
+												'yahoo_essenger'=>false,
+												'msn_messenger'=>false,
+												'aol_messenger'=>false,
+												'other_messenger'=>false,
+											   );
 		foreach ($contacts as $email=>$name) if (!$this->isEmail($email)) unset($contacts[$email]);
 		return $this->returnContacts($contacts);
-
 		}
-		
+
 	/**
 	 * Terminate session
 	 * 
@@ -156,7 +157,6 @@ class mail_ru extends openinviter_base
 		$this->stopPlugin();
 		return true;	
 		}
-	
-	}	
 
+	}
 ?>

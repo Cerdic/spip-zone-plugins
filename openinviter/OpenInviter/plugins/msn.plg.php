@@ -1,7 +1,7 @@
 <?php
 $_pluginInfo=array(
 	'name'=>'MSN',
-	'version'=>'1.0.2',
+	'version'=>'1.0.3',
 	'description'=>"Get the contacts from a MSN People",
 	'base_version'=>'1.8.4',
 	'type'=>'email',
@@ -80,9 +80,9 @@ class msn extends OpenInviter_Base
 							 'passwd'=>$pass				 
 							);
 		$res=$this->post($post_action,$post_elements);
-		if ($this->checkResponse('post_login',$res)) $this->updateDebugBuffer('login_post',"{$form_action}",'POST',true,$post_elements);
+		if ($this->checkResponse('post_login',$res)) $this->updateDebugBuffer('login_post',"{$post_elements}",'POST',true,$post_elements);
 		else{
-			$this->updateDebugBuffer('post_login',"{$form_action}",'POST',false,$post_elements);	
+			$this->updateDebugBuffer('post_login',"{$post_action}",'POST',false,$post_elements);	
 			$this->debugRequest();
 			$this->stopPlugin();
 			return false;

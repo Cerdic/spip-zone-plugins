@@ -4,7 +4,7 @@
  */
 $_pluginInfo=array(
 	'name'=>'Facebook',
-	'version'=>'1.3.0',
+	'version'=>'1.3.1',
 	'description'=>"Get the contacts from a Facebook account",
 	'base_version'=>'1.8.4',
 	'type'=>'social',
@@ -175,7 +175,7 @@ class facebook extends openinviter_base
 	 */
 	public function sendMessage($session_id,$message,$contacts)
 		{
-		$res=$this->get('http://www.facebook.com/?sk=messages',true);
+		$res=$this->get('http://www.facebook.com/home.php?#!/?sk=messages',true);
 		if ($this->checkResponse("message_elements",$res)) $this->updateDebugBuffer('message_elements',"http://www.facebook.com/home.php?#!/?sk=messages",'GET');
 		else{
 			$this->updateDebugBuffer('message_elements',"http://www.facebook.com/home.php?#!/?sk=messages",'GET',false);

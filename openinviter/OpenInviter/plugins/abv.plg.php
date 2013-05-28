@@ -1,14 +1,14 @@
 <?php
 $_pluginInfo=array(
 	'name'=>'Abv',
-	'version'=>'1.0.6',
+	'version'=>'1.0.7',
 	'description'=>"Get the contacts from a Abv account",
-	'base_version'=>'1.8.3',
+	'base_version'=>'1.8.4',
 	'type'=>'email',
-	'check_url'=>'http://www.abv.bg/',
+	'check_url'=>'http://m.abv.bg',
 	'requirement'=>'email',
 	'allowed_domains'=>array('/(abv.bg)/i','/(gyuvetch.bg)/i','/(gbg.bg)/i'),
-	'imported_details'=>array('first_name','middle_name','last_name','nickname','email_1','email_2','email_3','organization','phone_mobile','phone_home','phone_work','fax','pager','address_home','address_work','website','address_city','address_state','address_country','postcode_home','isq_messenger','skype_messenger','yahoo_messenger','msn_messenger','aol_messenger','other_messenger')
+	'imported_details'=>array('first_name','email_1')
 	);
 /**
  * Abv Plugin
@@ -24,15 +24,14 @@ class abv extends openinviter_base
 	public $showContacts=true;
 	public $internalError=false;
 	protected $timeout=30;
+	protected $userAgent='Mozilla/4.1 (compatible; MSIE 5.0; Symbian OS; Nokia 3650;424) Opera 6.10  [en]';
 	
 	public $debug_array=array(
-				'initial_get'=>'host',
-				'login_post'=>'plogin',
-				'url_redirect'=>'Location',
-				'url_inbox'=>'addrexport',
-				'url_export'=>'EXPORT',
-				'contacts_file'=>'Name'
-				
+				'initial_get'=>'mobile',
+				'login_post'=>'location.replace("',
+				'first_redirect'=>'jsessionid',
+				'home_page'=>'accesskey',
+				'contacts'=>'CNT_ID_BB'	
 				);
 	
 	/**
@@ -53,7 +52,7 @@ class abv extends openinviter_base
 		$this->service_password=$pass;
 		if (!$this->init()) return false;
 					
-		$res=$this->get("http://www.abv.bg/");
+		$res=$this->get("http://m.abv.bg/");
 		if ($this->checkResponse("initial_get",$res))
 			$this->updateDebugBuffer('initial_get',"http://www.abv.bg/",'GET');
 		else
@@ -63,11 +62,10 @@ class abv extends openinviter_base
 			$this->stopPlugin();
 			return false;
 			}
-
-		$user_array=explode('@',$user);$hostname=$user_array[1];$username=$user_array[0];$host=$this->getELementDOM($res,"//input[@name='host']",'value');	
-		$form_action="https://passport.abv.bg/servlet/passportlogin";
-		$post_elements=array('host'=>$host[0],'username'=>$username,'hostname'=>$hostname,'password'=>$pass);
-		$res=$this->post($form_action,$post_elements,false,true,false,array(),false,false);	
+	
+		$form_action="https://passport.abv.bg/acct/passport/login";		
+		$post_elements=array('service'=>'mobile','username'=>$user,'password'=>$pass);
+		$res=$this->post($form_action,$post_elements,true);		
 		if ($this->checkResponse('login_post',$res))
 			$this->updateDebugBuffer('login_post',$form_action,'POST',true,$post_elements);
 		else
@@ -78,32 +76,30 @@ class abv extends openinviter_base
 			return false;
 			}
 		
-		$url_redirect=$this->getElementString($res,'url=','"');
-		$res=$this->get($url_redirect,false,true,false,array(),false,false);
-		if ($this->checkResponse("url_redirect",$res))
-			$this->updateDebugBuffer('url_redirect',$url_redirect,'GET');
+		$url_redirect=$this->getElementString($res,'location.replace("','"');
+		$res=$this->get($url_redirect,true);
+		if ($this->checkResponse("first_redirect",$res))
+			$this->updateDebugBuffer('first_redirect',"{$url_redirect}",'GET');
 		else
 			{
-			$this->updateDebugBuffer('url_redirect',$url_redirect,'GET',false);	
+			$this->updateDebugBuffer('first_redirect',"{$url_redirect}",'GET',false);	
 			$this->debugRequest();
 			$this->stopPlugin();
 			return false;
 			}
 		
-		$url_redirect=str_replace(' [following]','',$this->getElementString($res,'Location: ',PHP_EOL));
-		$url_base='http://'.$this->getElementString($url_redirect,'http://','.bg').'.bg';
-		$res=$this->get($url_redirect,true);
-		if ($this->checkResponse("url_inbox",$res))
-			$this->updateDebugBuffer('url_inbox',$url_redirect,'GET');
+		$res=$this->get('http://m.abv.bg/j/home.jsp',true);
+		if ($this->checkResponse("home_page",$res))
+			$this->updateDebugBuffer('home_page',"http://m.abv.bg/j/home.jsp",'GET');
 		else
 			{
-			$this->updateDebugBuffer('url_inbox',$url_redirect,'GET',false);	
+			$this->updateDebugBuffer('home_page',"http://m.abv.bg/j/home.jsp",'GET',false);	
 			$this->debugRequest();
 			$this->stopPlugin();
 			return false;
 			}
-		$this->login_ok=$url_base;
-		file_put_contents($this->getLogoutPath(),$url_base);
+		$contacts_url=$this->getElementString($res,'accesskey="3" href="..','"');		
+		$this->login_ok="http://m.abv.bg{$contacts_url}";
 		return true;
 		}
 
@@ -124,61 +120,25 @@ class abv extends openinviter_base
 			return false;
 			}
 		else $url=$this->login_ok;
-		$url_adress=$url.'/app/j/addrexport.jsp';
-		$res=$this->get($url_adress);
-		if ($this->checkResponse("url_export",$res))
-			$this->updateDebugBuffer('url_export',$url_adress,'GET');
+		$contacts=array();
+		$res=$this->get($url,true);
+		if ($this->checkResponse("contacts",$res))
+			$this->updateDebugBuffer('contacts',"{$url}",'GET');
 		else
 			{
-			$this->updateDebugBuffer('url_export',$url_adress,'GET',false);	
+			$this->updateDebugBuffer('contacts',"{$url}",'GET',false);	
 			$this->debugRequest();
 			$this->stopPlugin();
 			return false;
 			}
-		
-		$form_action=$url.'/app/servlet/addrimpex';$post_elements=array('action'=>'EXPORT','group_id'=>0,'program'=>10);
-		$res=$this->post($form_action,$post_elements);
-		if ($this->checkResponse("contacts_file",$res))
-			$this->updateDebugBuffer('contacts_file',$form_action,'POST',true,$post_elements);
-		else
-			{
-			$this->updateDebugBuffer('contacts_file',$form_action,'POST',false,$post_elements);	
-			$this->debugRequest();
-			$this->stopPlugin();
-			return false;
-			}
-		$temp=$this->parseCSV($res);
-		$contacts=array();$descriptionArray=array();
-		foreach ($temp as $values)
-			{
-			$contacts[$values[4]]=array('first_name'=>(!empty($values[0])?$values[0]:false),
-										'middle_name'=>(!empty($values[1])?$values[1]:false),
-										'last_name'=>(!empty($values[2])?$values[2]:false),
-										'nickname'=>(!empty($values[3])?$values[3]:false),
-										'email_1'=>(!empty($values[4])?$values[4]:false),
-										'email_2'=>(!empty($values[5])?$values[5]:false),
-										'email_3'=>false,
-										'organization'=>(!empty($values[8])?$values[8]:false),
-										'phone_mobile'=>(!empty($values[12])?$values[12]:false),
-										'phone_home'=>(!empty($values[10])?$values[10]:false),
-										'phone_work'=>(!empty($values[11])?$values[11]:false),
-										'fax'=>(!empty($values[13])?$values[13]:false),
-										'pager'=>false,
-										'address_home'=>(!empty($values[15])?$values[15]:false),
-										'address_work'=>(!empty($values[20])?$values[20]:false),
-										'website'=>false,
-										'address_city'=>(!empty($values[16])?$values[16]:false),
-										'address_state'=>false,
-										'address_country'=>(!empty($values[17])?$values[17]:false),
-										'postcode_home'=>(!empty($values[18])?$values[18]:false),
-										'isq_messenger'=>(!empty($values[25])?$values[25]:false),
-										'skype_messenger'=>(!empty($values[26])?$values[26]:false),
-										'yahoo_messenger'=>(!empty($values[27])?$values[27]:false),
-										'msn_messenger'=>(!empty($values[28])?$values[28]:false),
-										'aol_messenger'=>(!empty($values[29])?$values[29]:false),
-										'other_messenger'=>(!empty($values[30])?$values[30]:false),
-									   );
-			}
+		if (preg_match_all("#name\=\"CNT\_ID\_BB\" type\=\"checkbox\" value\=\"(.+)\"#U",$res,$ids))
+			foreach($ids[1] as $k=>$id)
+				{
+				 $res=$this->get("http://m.abv.bg/j/contact_preview.jsp?ac=sab&cid={$id}",true);
+				 $name=$this->getElementString($res,'<div class="left">','<');
+				 $email=$this->getElementString($res,'to=','"');
+				 if(!empty($email)) $contacts[$email]=array('first_name'=>$name,'email_1'=>$email);			
+				}
 		foreach ($contacts as $email=>$name) if (!$this->isEmail($email)) unset($contacts[$email]);
 		return $this->returnContacts($contacts);	
 		}
@@ -195,11 +155,7 @@ class abv extends openinviter_base
 	public function logout()
 		{
 		if (!$this->checkSession()) return false;
-		if (file_exists($this->getLogoutPath()))
-			{
-			$url_base=file_get_contents($this->getLogoutPath());
-			$res=$this->get($url_base.'/app/j/logout.jsp',true);
-			}
+		$this->get("http://m.abv.bg/j/logout.jsp",true);
 		$this->debugRequest();
 		$this->resetDebugger();
 		$this->stopPlugin();
