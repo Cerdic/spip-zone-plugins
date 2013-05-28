@@ -8,7 +8,6 @@ function formulaires_importer_contacts_charger_dist($retour='', $traitement=''){
 	include_spip('inc/session');
 	session_set('contacts');
 	
-	
 	include_spip('inc/importateur_contacts');
 	$fournisseurs_choisis = importateur_contacts_lister_fournisseurs_choisis();
 	$liste_fournisseurs = array();
@@ -23,12 +22,12 @@ function formulaires_importer_contacts_charger_dist($retour='', $traitement=''){
 		'fournisseur' => '',
 		'contacts' => array()
 	);
-	
 	// On appelle une fonction de vérification correspondant au moteur du fournisseur choisi
 	if ($fournisseur = _request('fournisseur')){
 		$fournisseur = $fournisseurs_choisis[$fournisseur];
 		$moteur_choisi = $fournisseur['moteur_choisi'];
 		$fonction_charger_moteur = charger_fonction($moteur_choisi, 'formulaires/importer_contacts/charger');
+		if($fonction_charger_moteur)
 		$contexte = array_merge($contexte, $fonction_charger_moteur($fournisseur));
 	}
 	
@@ -44,8 +43,8 @@ function formulaires_importer_contacts_verifier_2_dist($retour='', $traitement='
 	// On appelle une fonction de vérification correspondant au moteur du fournisseur choisi
 	// Cette fonction doit aussi remplir la variable "contacts"
 	$fonction_verif_moteur = charger_fonction($moteur_choisi, 'formulaires/importer_contacts/verifier');
+	if($fonction_verif_moteur)
 	$erreurs = $fonction_verif_moteur($fournisseur);
-	
 	return $erreurs;
 }
 

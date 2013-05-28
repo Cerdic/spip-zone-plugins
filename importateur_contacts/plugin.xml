@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Importateur de contacts [en]Contacts importer</multi></nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<slogan>Formulaire d'importation de contacts.</slogan>
@@ -16,9 +16,12 @@
 	<lien>http://www.spip-contrib.net/Importateur-de-contacts</lien>
 	
 	<prefix>importateur_contacts</prefix>
-	
+	<options>importateur_contacts_options.php</options>
 	<install>importateur_contacts_administrations.php</install>
-	
+	<pipeline>
+		<nom>importateur_contacts_moteurs</nom>
+		<inclure>importateur_contacts_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.1.10;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<necessite id="cvtm" version="[0.2.0;]" />

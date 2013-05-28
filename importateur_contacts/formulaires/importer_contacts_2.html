@@ -7,7 +7,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
+
 		<ul>
 			#SET{moteur_choisi, #ENV{_fournisseurs_choisis}|table_valeur{#ENV{fournisseur}}|table_valeur{moteur_choisi}}
 			#INCLURE{fond=formulaires/importer_contacts_#GET{moteur_choisi}, env}

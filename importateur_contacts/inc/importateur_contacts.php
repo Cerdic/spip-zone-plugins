@@ -70,7 +70,6 @@ function importateur_contacts_lister_fournisseurs(){
 	include_spip('inc/config');
 	$moteurs = importateur_contacts_lister_moteurs();
 	$fournisseurs = array();
-	
 	foreach ($moteurs as $nom_moteur => $moteur){
 		foreach ($moteur['fournisseurs'] as $nom_fournisseur => $fournisseur){
 			// S'il n'y est pas déjà on l'ajoute tel quel

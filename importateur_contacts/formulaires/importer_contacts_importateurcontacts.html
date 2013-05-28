@@ -1,0 +1,7 @@
+#SET{titre_fournisseur, #ENV{_fournisseurs_choisis}|table_valeur{#ENV{fournisseur}}|table_valeur{titre}}
+
+[(#ENV{fournisseur}|=={email_liste}|oui)
+[(#SAISIE{textarea, email_liste, obligatoire=oui, label=#GET{titre_fournisseur}})]]
+
+[(#ENV{fournisseur}|=={email_simple}|oui)
+[(#SAISIE{input, email_simple, obligatoire=oui, label=#GET{titre_fournisseur}})]]
