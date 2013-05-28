@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'a_un_ami' => 'Ecrire un message',
 
+	// D
+	'de' => 'De',
+
 	// E
 	'envoye_a' => 'A ',
 	'envoyer_un_message' => 'envoyer un message',
