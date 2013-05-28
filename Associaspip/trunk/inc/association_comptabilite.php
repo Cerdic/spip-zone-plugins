@@ -60,13 +60,13 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
 }
 
 /**
- * Retourne le tableau complet
+ * Retourne le tableau complet de la liste des comptes
  *
  * @param string $id
  *   Identifiant du plan comptable qui nous interesse
  * @param string $lang
  *   Langue des intitules
- * @return array $pcg
+ * @return array $pc_liste
  *   Tableau de reference=>intitule
  * @note:ex
  *   association_plan_comptable_complet()
@@ -74,13 +74,36 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
 function comptabilite_liste_plancomplet($id='', $lang='') {
     if (!$lang)
 	$lang = $GLOBALS['spip_lang'];
+    if ($id=='' OR $id==0)
+	$id = $GLOBALS['association']['plan_comptable'];
+    if ($id) {
+	include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP : il contient le tableau
+    } else { // $id===FALSE pour local...
+	$pc_liste = array(); // initialiser le tableau
+	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
+	while( $r = sql_fetch($sql) ) // remplir le tableau
+	    $pc_liste[$r['code']] = extraire_multi($r['intitule'], $lang);
+    }
+    return $pc_liste; // retourner le tableau
+}
+
+/**
+ * Retourne le tableau de nomenclature des comptes
+ *
+ * @param string $id
+ *   Identifiant du plan comptable qui nous interesse
+ * @param string $lang
+ *   Langue des intitules
+ * @return array $pc_norme
+ *   Liste de : classe de depart, classe d'arrivee, longueur minimale d'une reference comptable
+ */
+function comptabilite_liste_planregles($id='', $lang='') {
+    if (!$lang)
+	$lang = $GLOBALS['spip_lang'];
     if (!$id)
 	$id = $GLOBALS['association']['plan_comptable'];
-//    if ($id) {
-	include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP
-	return $pcg; // retourner le tableau contenu dans le fichier
-//    } else {
-//    }
+    include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP
+    return $pc_norme?$pc_norme:array(0,9,2); // retourner le tableau contenu dans le fichier
 }
 
 /** @} */
@@ -395,6 +418,92 @@ function comptabilite_reference_virements() {
 
 
 /*****************************************
+ * @defgroup comptabilite_verifier_
+ * Validation du plan comptable...
+ *
+ * @param string $plan
+ *   Plan comptable par rapport auquel on valide
+ * @param string $lang
+ *   Langue des intitules ?
+ * @return string $err
+ *   Message d'erreur (vide si validation passee)
+ *
+** @{ */
+
+/**
+ * Verifie qu'une classe donnee est conforme au plan comptable choisi
+ *
+ * @param string $classe
+ *   Classe a verifier
+ */
+function comptabilite_verifier_classe($classe, $plan='', $lang='') {
+    if ( strlen($classe)!=1 ) // champ vide ou ayant plus d'un caractere
+	return _T('compta:erreur_classe_longueur');
+    $regles = comptabilite_liste_planregles($plan, $lang);
+    $min = $regles[0]?$regles[0]:0; // si pas defini on prend '0'
+    $max = $regles[1]?$regles[1]:0; // si pas defini on prend '9'
+    if ( $classe>$max OR $classe<$min ) // champ hors plage
+	return _T('compta:erreur_classe_plage', array('min'=>$min, 'max'=>$max,) );
+    return '';
+}
+
+/**
+ * Verifie qu'une reference donnee est conforme au plan comptable choisi
+ *
+ * @param string $code
+ *   Reference a verifier
+ * @param string $classe
+ *   Caractere de la classe si on souhaite s'assurer que c'est l'initial du code
+ */
+function comptabilite_verifier_code($code, $classe='', $plan='', $lang='') {
+    $regles = comptabilite_liste_planregles($plan, $lang);
+    $len = intval($regles[2])?intval($regles[2]):2; // si pas defini on prend '2'
+    if ( intval($regles[0]) AND intval($regles[1]) AND !preg_match('/^[0-9]{'.($len-1).'}\w*$/', $code) ) // champ de longueur insuffisante ou n'ayant pas le nombre de chiffres initial requis
+	return _T('asso:erreur_plan_code', array('nombre'=>$len,) );
+    elseif ( strlen($code)<$len ) // champ de longueur insuffisante
+	return _T('compta:erreur_code_longueur', array('nombre'=>$len,) );
+    if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
+	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
+    return '';
+}
+
+/**
+ * Validation de la table du plan comptable utilise
+ * - on doit avoir un certain nombre de classes differentes
+ * - chaque reference doit etre unique
+ * - les references et classes doivent respecter le referentiel choisi
+ *
+ * @param int $nbr
+ *   Nonbre de classes requises par le plugin
+ * @note:ex
+ *   association_valider_plan_comptable()
+ */
+function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
+    $classes = array(); // initialiser la liste des classes
+    $codes = array(); // initialiser la liste des references
+    $sql = sql_select('code, classe', 'spip_asso_plan'); // recupere la reference et la classe de tous les comptes du plan comptable
+    while ($r = sql_fetch($sql)) { // verification de chaque reference
+	$classes[$r['classe']] = $r['classe']; // on comptes les classes differentes
+	if( array_key_exists($r['code'], $codes) ) // on a deux fois le meme code...
+	    return _T('compta:erreur_plan_code_doublon', array('code'=>$r['code'],) ); // ...on arrete sur cette erreur...
+	else { // c'est la 1ere occurence
+	    $codes[$r['code']] = comptabilite_verifier_code($r['code'], $r['classe'], 0, $lang); // verifier qu'il est bien forme
+	    if ($codes[$r['code']]) // mauvais format...
+		return $codes[$r['code']]; // ...on arrete sur cette erreur...
+	}
+    }
+    if ( count($classes)<$nbr ) // on doit avoir au moins $nbr classes differentes
+	return _T('compta:erreur_plan_nombre_classes', array('nombre'=>$nbr,) ); // ...on arrete sur cette erreur...
+    foreach($classes as $classe) // verifier chaque classe
+	if ( $erreur = comptabilite_verifier_classe($classe, $plan, $lang) )
+	    return $erreur; // ...renvoyer la premiere erreur rencontree...
+    return '';
+}
+
+/** @} */
+
+
+/*****************************************
  * @defgroup filtre_selecteur_compta_
  * Selecteurs dHTML propres a la compta
  *
@@ -538,37 +647,6 @@ function inc_association_imputation_dist($nom, $id='', $table='') {
 	else $w = '';
 	$w2 = $id ? ("id_journal=".intval($id)) : '';
 	return ($w AND $w2) ? "$w AND $w2" : "$w$w2";
-}
-
-/**
- * Valide le plan comptable :
- *- on doit avoir au moins deux classes de comptes differentes
- *- le code de chaque compte doit etre unique
- *- le code du compte doit commencer par un chiffre egal a sa classe
- *
- * @return bool
- *   TRUE si le plan comptable est valide
- *   FALSE si le plan comptable est invalide
- */
-function association_valider_plan_comptable() {
-    $classes = array();
-    $codes = array();
-    $query = sql_select('code, classe', 'spip_asso_plan'); // recupere le code et la classe de tous les comptes du plan comptabl
-    while ($data = sql_fetch($query)) {
-	$classe = $data['classe'];
-	$code = $data['code'];
-	$classes[$classe] = 0; // on comptes les classes differentes
-	if(array_key_exists($code, $codes)) {
-	    return FALSE; // on a deux fois le meme code
-	} else {
-	    $codes[$code] = 0;
-	}
-	if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0]!=$classe)) // on verifie que le code est bien de la forme chiffre-chiffre-caracteres alphanumeriques et que le premier digit correspond a la classe
-	    return FALSE;
-    }
-    if (count($classes)<2)
-	return FALSE; // on doit avoir au moins deux classes differentes
-    return TRUE;
 }
 
 /**

@@ -39,12 +39,14 @@ function formulaires_editer_asso_plan_charger_dist($id_plan=0) {
 
 function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 	$erreurs = array();
+	include_spip('association_comptabilite', 'inc');
 
 	$classe = _request('classe');
+	if ($erreur = comptabilite_verifier_classe($classe) )
+		$erreurs['classe'] = $erreur;
 	$code = _request('code');
-	if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0]!=$classe)) { // on verifie que le code est bien de la forme chiffre-chiffre-caracteres_alphanumeriques et que le premier chiffre correspond a la classe
-		$erreurs['code'] = _T('asso:erreur_plan_code');
-	}
+	if ($erreur = comptabilite_verifier_classe($code, $classe) )
+		$erreurs['code'] = $erreur;
 	if ($erreur = association_verifier_montant('solde_anterieur') )
 		$erreurs['solde_anterieur'] = $erreur;
 	if ($erreur = association_verifier_date('date_anterieure') )
@@ -106,7 +108,7 @@ function formulaires_editer_asso_plan_traiter_dist($id_plan=0) {
 			$champ = "#$champ";
 		// on renvoit sur la page appelante...
 		// mais on perd a l'occasion d'eventuel filtres inseres
-		// avant d'arriver au formulaire de cotisation...
+		// avant d'arriver au formulaire d'edition de reference comptable...
 		$res['redirect'] = generer_url_ecrire($retour) . $champ;
 	}
 	return $res;

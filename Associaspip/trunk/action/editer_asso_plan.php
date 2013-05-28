@@ -65,7 +65,7 @@ function action_editer_asso_plan_dist() {
 	}
 	if ($GLOBALS['association_metas']['comptes']) { // si la gestion comptable est activee, on verifie que le plan comptable modifie est valide. Si il ne l'est pas, on desactive la gestion comptable
 		include_spip('inc/association_comptabilite');
-		if (!association_valider_plan_comptable()) {
+		if (!comptabilite_verifier_plan()) {
 			ecrire_meta('comptes', 0, 'oui', 'association_metas');
 			// on desactive les autres modules si ils sont actives
 			if ($GLOBALS['association_metas']['dons'])

@@ -27,8 +27,8 @@ function formulaires_configurer_association_verifier_dist() {
 
 	$comptes = _request('comptes');
 	if ($comptes) { // si la gestion comptable est activee
-		if (!association_valider_plan_comptable()) { // on (re)valide le plan comptable
-			$erreurs['comptes'] = _T('asso:erreur_configurer_association_plan_comptable_non_valide');
+		if ($erreur = comptabilite_verifier_plan()) { // on (re)valide le plan comptable
+			$erreurs['comptes'] = _T('asso:erreur_configurer_association_plan_comptable_non_valide') ."<br />$erreur";
 			return $erreurs;
 		}
 		$classe_attribuee = array();

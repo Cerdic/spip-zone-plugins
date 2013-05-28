@@ -11,6 +11,12 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
+$pc_norme = array(
+	1, //0: min classe
+	8, //1: max classe
+	3, //2: min longueur code
+);
+
 // Plan comptable prenant en compte les nouvelles dispositions du règlement
 // N° 99-01 du 16 février 1999 relatif aux modalités d’établissement des comptes
 // annuels des associations et fondations.
@@ -26,7 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 // Les associations releveront le plus souvent, non pas de l’inventaire
 // permanent, mais de l’inventaire intermittent.
 //
-$pcg = array(
+$GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 
 	1 => "Comptes de capitaux",
 	10 => "Fonds associatifs et réserves",
@@ -590,11 +596,7 @@ $pcg = array(
 	870 => "Bénévolat",
 	871 => "Prestations en nature",
 	875 => "Dons en nature"
+
 );
-
-// la variable suivante en fait un fichier de langue SPIP (pour fonction _T et balise de langue)
-// mais on est oblige (pour l'instant ?) de passer par $pcg qui est utilise par comptabilite_liste_plancomplet()
-$GLOBALS[$GLOBALS['idx_lang']] = $pcg;
-
 
 ?>

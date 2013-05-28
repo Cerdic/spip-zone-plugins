@@ -859,22 +859,31 @@ $GLOBALS['association_maj'][48225] = array(
 // comptable n'est pas activee
 function association_maj_48466() {
 	include_spip('inc/association_comptabilite');
-	/* on verifie la validite du plan comptable existant */
-	if ($GLOBALS['association_metas']['comptes'] && !association_valider_plan_comptable()) {
+	if ($GLOBALS['association_metas']['comptes'] && !comptabilite_verifier_plan()) { // on verifie la validite du plan comptable existant
 		ecrire_meta('comptes', '', 'oui', 'association_metas');
 		echo '<p>'._T('asso:maj_desactive_gestion_comptable').'</p>';
 	}
-
 	$desactivation = FALSE;
 	if (!$GLOBALS['association_metas']['comptes']) {
-		if ($GLOBALS['association_metas']['dons']) { ecrire_meta('dons', '', 'oui', 'association_metas'); $desactivation = TRUE; }
-		if ($GLOBALS['association_metas']['ventes']) { ecrire_meta('ventes', '', 'oui', 'association_metas'); $desactivation = TRUE; }
-		if ($GLOBALS['association_metas']['prets']) { ecrire_meta('prets', '', 'oui', 'association_metas'); $desactivation = TRUE; }
-		if ($GLOBALS['association_metas']['activites']) { ecrire_meta('activites', '', 'oui', 'association_metas'); $desactivation = TRUE; }
+		if ($GLOBALS['association_metas']['dons']) {
+			ecrire_meta('dons', '', 'oui', 'association_metas');
+			$desactivation = TRUE;
+		}
+		if ($GLOBALS['association_metas']['ventes']) {
+			ecrire_meta('ventes', '', 'oui', 'association_metas');
+			$desactivation = TRUE;
+		}
+		if ($GLOBALS['association_metas']['prets']) {
+			ecrire_meta('prets', '', 'oui', 'association_metas');
+			$desactivation = TRUE;
+		}
+		if ($GLOBALS['association_metas']['activites']) {
+			ecrire_meta('activites', '', 'oui', 'association_metas');
+			$desactivation = TRUE;
+		}
 	}
-
-	// si on a desactive des modules, on le signale par un message
-	if ($desactivation) echo '<p>'._T('asso:maj_desactive_modules').'</p>';
+	if ($desactivation) // si on a desactive des modules...
+		echo '<p>'._T('asso:maj_desactive_modules').'</p>'; // on le signale
 
 	// on en profite pour effacer des metas qui ne servent plus
 	effacer_meta('comptes_stricts', 'association_metas');
@@ -1171,7 +1180,7 @@ $GLOBALS['association_maj'][72938] = array(
 	array('maj_tables', 'spip_asso_groupes'), // + champ : id_zone
 );
 
-$GLOBALS['association_maj'][72938] = array(
+$GLOBALS['association_maj'][73025] = array(
 	// plan comptable generalise
 	array('sql_update', 'spip_association_metas', array('valeur'=>'fr'), "nom='plan_comptable_prerenseigne' AND valeur<>'' "), // on met l'ID (on peut avoir autre chose que francais)
 	array('sql_insertq', 'spip_association_metas', array('nom'=>'plan_comptable', 'valeur'=>sql_select('valeur', 'spip_association_metas', "nom='plan_comptable_prerenseigne'"),) ), // nouveau nom de champ... : le creer et migrer la valeur
