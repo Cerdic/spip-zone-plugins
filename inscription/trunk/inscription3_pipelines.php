@@ -245,9 +245,11 @@ function inscription3_formulaire_charger($flux){
 		$chercher_champs = charger_fonction('inscription3_champs_formulaire','inc');
 		$champs = $chercher_champs(null,'inscription');
 		foreach($champs as $clef =>$valeur) {
-            if (_request($valeur)) {
-                $valeurs[$valeur] = trim(_request($valeur));
-            }
+			$valeurs[$valeur] = _request($valeur);
+			if (is_array($valeurs[$valeur])) {
+				$valeurs[$valeur] = implode(',',$valeurs[$valeur]);
+			}
+			$valeurs[$valeur] = trim($valeurs[$valeur]);
             if($valeur == 'naissance'){
             	if(_request('naissance') && preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request('naissance'),$date_naissance)){
 					$valeurs['naissance_annee'] = $date_naissance[1];
@@ -550,7 +552,11 @@ function inscription3_formulaire_traiter($flux){
 		$champs = $chercher_champs(null,'inscription');
 	
 		foreach($champs as $clef => $valeur) {
-			$valeurs[$valeur] = trim(_request($valeur));
+			$valeurs[$valeur] = _request($valeur);
+			if (is_array($valeurs[$valeur])) {
+				$valeurs[$valeur] = implode(',',$valeurs[$valeur]);
+			}
+			$valeurs[$valeur] = trim($valeurs[$valeur]);
 			if($valeur == 'naissance'){
 				$annee = trim(_request('naissance_annee'));
 				$mois = _request('naissance_mois');
