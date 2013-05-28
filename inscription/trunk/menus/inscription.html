@@ -6,7 +6,7 @@
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	[(#SESSION{id_auteur}|non)
-		[(#REM|tester_config|oui)
+		[(#AUTORISER{inscrireauteur,1comite}|ou{#AUTORISER{inscrireauteur,6forum}}|ou{#REM|tester_config}|oui)
 		<li class="menu-entree[ (#ENV{css})]">
 			<a href="[(#URL_PAGE{#ENV{page,inscription}})]">
 				#GET{titre}
