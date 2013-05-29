@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Nastaviť služby na nahrávanie kontaktov',
 
 	// E
+	'email_liste' => 'Une liste d\'email', # NEW
+	'email_simple' => 'Un simple email', # NEW
 	'erreur_aucun_fournisseur' => 'Žiadna služba vám teraz nemôže zabezpečiť, aby ste našli svoje kontakty. Nainštalujte si, prosím, aspoň jednu knižnicu na nahrávanie kontaktov.',
 
 	// I

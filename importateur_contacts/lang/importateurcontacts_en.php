@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configure contacts importation service',
 
 	// E
+	'email_liste' => 'Une liste d\'email', # NEW
+	'email_simple' => 'Un simple email', # NEW
 	'erreur_aucun_fournisseur' => 'No service providing contacts has been found. Please, install at least one contact importation library.',
 
 	// I
