@@ -1,0 +1,27 @@
+span.lien_court {
+	font-weight: normal;
+	white-space: nowrap;
+}
+span.lien_court span.lien_protocol,
+span.lien_court span.lien_www,
+span.lien_court span.lien_off,
+span.lien_court span.lien_fin_cachee
+{
+	display: inline-block;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	padding-left: 1px;
+	margin-right: -2px;
+	font-size: 1px;
+	line-height: 1px;
+}
+span.lien_court span.lien_host {
+	font-weight: bold;
+}
+span.lien_court span.lien_raccourci:after {
+	content: "\2026/";
+}
+span.lien_court span.lien_fin_coupee:after {
+	content: "\2026";
+}
