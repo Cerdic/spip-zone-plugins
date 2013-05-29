@@ -39,13 +39,12 @@ function formulaires_editer_asso_plan_charger_dist($id_plan=0) {
 
 function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 	$erreurs = array();
-	include_spip('association_comptabilite', 'inc');
-
+	include_spip('inc/association_comptabilite');
 	$classe = _request('classe');
 	if ($erreur = comptabilite_verifier_classe($classe) )
 		$erreurs['classe'] = $erreur;
 	$code = _request('code');
-	if ($erreur = comptabilite_verifier_classe($code, $classe) )
+	if ($erreur = comptabilite_verifier_code($code, $classe) )
 		$erreurs['code'] = $erreur;
 	if ($erreur = association_verifier_montant('solde_anterieur') )
 		$erreurs['solde_anterieur'] = $erreur;
