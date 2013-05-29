@@ -24,6 +24,9 @@
 			// NBSP classique
 			$letexte = str_replace('&nbsp;',
 				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
+			// NBSP utf8
+			$letexte = str_replace("\xc2\xa0",
+				'<span style="border-bottom:2px solid #ccc;">&nbsp;</span>', $letexte);
 
 			// redondant avec le nouveau systeme
 			$letexte = str_replace("\n_ ",
