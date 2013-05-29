@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_titre' => 'Sponsorship configuration',
 
 	// E
+	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.', # NEW
 	'erreur_aucun_filleul' => 'You have not selected any sponsored person.',
 	'erreur_invitation_invalide' => 'Your invitation does not match the email address provided.',
 	'erreur_invitation_obligatoire' => 'You need an invitation to register on the site.',
@@ -41,11 +42,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_message_label' => 'Your message',
 	'parrainage_message_ok_pluriel' => '@nombre@ invitations have been programmed, they are now being send.',
 	'parrainage_message_ok_singulier' => 'An invitation has been programmed, it is now being send.',
-	'parrainage_supprimer_filleul' => 'Delete this sponsored person',
+	'parrainage_supprime_nb' => '@nb@ contacts supprimés', # NEW
+	'parrainage_supprime_un' => '@nb@ contact supprimé', # NEW
+	'parrainage_supprimer_filleul' => 'Delete this sponsored person', # MODIF
 	'parrainage_supprimer_filleul_confirmation' => 'Are you sure you want to delete @nom@ from your contacts ?',
+	'parrainage_supprimer_filleuls' => 'Supprimer les contacts sélectionnés', # NEW
+	'parrainage_supprimer_filleuls_confirmation' => 'Êtes-vous sûr de vouloir supprimer les contacts sélectionnés de vos contacts ?', # NEW
 	'plugin_nom' => 'Sponsorship',
 
 	// S
+	'selectionner_rien' => 'Tout désélectionner', # NEW
+	'selectionner_tout' => 'Tout sélectionner', # NEW
 	'statut_contact' => 'Contact',
 	'statut_contact_explication' => 'This person is in your address book. You can send an invitation to join the site.',
 	'statut_deja_inscrit' => 'Already registered',

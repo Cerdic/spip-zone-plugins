@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_titre' => 'Nastavenia patronátu',
 
 	// E
+	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.', # NEW
 	'erreur_aucun_filleul' => 'Nevybrali ste žiadneho priateľa.',
 	'erreur_invitation_invalide' => 'Vaša pozvánka sa nezhoduje so zadanou e-mailovou adresou',
 	'erreur_invitation_obligatoire' => 'Na to, aby ste sa mohli zaregistrovať na tejto stránke, musíte mať pozvánku.',
@@ -41,11 +42,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_message_label' => 'Vaša správa',
 	'parrainage_message_ok_pluriel' => '@nombre@ pozvánok bolo naprogramovaných, teraz sa posielajú.',
 	'parrainage_message_ok_singulier' => 'Pozvánka bola naprogramovaná, teraz sa posiela.',
-	'parrainage_supprimer_filleul' => 'Odstrániť tohto priateľa',
+	'parrainage_supprime_nb' => '@nb@ contacts supprimés', # NEW
+	'parrainage_supprime_un' => '@nb@ contact supprimé', # NEW
+	'parrainage_supprimer_filleul' => 'Odstrániť tohto priateľa', # MODIF
 	'parrainage_supprimer_filleul_confirmation' => 'Určite chcete odstrániť @nom@ zo svojich kontaktov?',
+	'parrainage_supprimer_filleuls' => 'Supprimer les contacts sélectionnés', # NEW
+	'parrainage_supprimer_filleuls_confirmation' => 'Êtes-vous sûr de vouloir supprimer les contacts sélectionnés de vos contacts ?', # NEW
 	'plugin_nom' => 'Patronát',
 
 	// S
+	'selectionner_rien' => 'Tout désélectionner', # NEW
+	'selectionner_tout' => 'Tout sélectionner', # NEW
 	'statut_contact' => 'Kontakt',
 	'statut_contact_explication' => 'Tento človek je vo vašom adresári. Môžete ho pozvať, aby sa pridal na stránku.',
 	'statut_deja_inscrit' => 'Už zaregistrovaný',
