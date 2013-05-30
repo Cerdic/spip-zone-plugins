@@ -23,4 +23,4 @@ function embed_code_intranet_pages_ok($pages_ok){
 	$pages_ok[] = 'embed_code';
 	return $pages_ok; 
 }
-?>	
+?>
