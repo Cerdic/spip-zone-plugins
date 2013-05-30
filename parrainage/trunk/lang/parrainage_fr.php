@@ -32,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invitation_sujet' => '@nom@ vous invite à rejoindre le site @site@',
 	'invitation_url' => 'Rendez-vous à l\'adresse suivante pour vous inscrire :',
 
+	// M
+	'message_ouvrir_visiteur' => 'Si vous souhaitez ouvrir l\'inscription au site à de nouveaux visiteurs, vous pouvez activer cette option ci-dessous (la configuration du plugin "Parrainage" oblige le nouvel inscrit à bénéficier d\'un code d\'invitation) : ',
+	
 	// P
 	'parrainage_inviter' => 'Envoyer l\'invitation',
 	'parrainage_message_aucun' => 'Aucune de ces personnes n\'a besoin d\'être invitée.',

@@ -56,7 +56,12 @@ function parrainage_recuperer_fond($flux){
 		);
 		$flux['data']['texte'] = preg_replace("%<li class='.*?saisie_mail_inscription.*?</li>%is", '$0'.$saisie, $flux['data']['texte']);
 	}
-	
+	if ($flux['args']['fond'] == 'formulaires/configurer_visiteurs'){
+		include_spip('inc/config');
+		$obligatoire = lire_config('parrainage/invitation_obligatoire','') ? 'oui' : 'non';
+		$texte = _T('parrainage:message_ouvrir_visiteur');
+		$flux['data']['texte'] = preg_replace("%<p class=\"explication.*?</p>%is", '<p class="explication">'.$texte.'</p>', $flux['data']['texte']);
+	}
 	return $flux;
 }
 
