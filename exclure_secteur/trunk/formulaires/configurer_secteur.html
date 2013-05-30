@@ -1,48 +1,98 @@
-<div class="formulaire_spip">
-<input type="hidden" name="_meta_titre"value="<:exclure_sect:cfg_exclure_secteur:>" />
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
+	<h3 class='titrem'><:exclure_sect:cfg_exclure_secteur:></h3>
 
-			<form action="#ENV{action}" method="post">
-#ACTION_FORMULAIRE{#ENV{action}}
-    <fieldset>
-	<ul>
-	<legend id="explication"><:exclure_sect:cfg_explication:></legend>
-	<BOUCLE_racine(RUBRIQUES){racine}{tout}>
-	<li>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-    #SET{checked, #CONFIG{secteur/exclure_sect, #ARRAY}}
-	<label for="rub_#ID_RUBRIQUE">#TITRE</label>	
-	<input type="checkbox" name="exclure_sect[]" value="#ID_RUBRIQUE" [(#ID_RUBRIQUE|in_array{#GET{checked}}|?{'checked="checked"'})] />
-	
-	</li>
-	
-	</BOUCLE_racine>
-	
-	</ul>
-	</fieldset>
-	<fieldset>
-	<ul>
-	<legend id="explication"><:exclure_sect:cfg_avances:></legend>
+	[(#REM)<input type="hidden" name="_meta_titre" value="<:exclure_sect:cfg_exclure_secteur:>" />]
 
-	<li>
-	<label for="tout"><:exclure_sect:cfg_tout:></label>
-	<input type="checkbox" name="tout" value="oui"[(#ENV{tout}|=={oui}|oui) checked="checked"] />
-	</li>
-	
-    <li>
-	<label for="idexplicite"><:exclure_sect:cfg_id_explicite:></label>
-	<input type="checkbox" name="idexplicite" value="oui"[(#ENV{idexplicite}|=={oui}|oui) checked="checked"] />
-	</li>
-	
-	
-    </ul>
-    </fieldset>
-	<p class="boutons">
-	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
-	</p>
-	
-    
-</form>
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form action="#ENV{action}" method="post"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#REM) Choix des secteurs à exclure ]
+		<fieldset>
+			<legend id="explication">
+				<:exclure_sect:cfg_explication:>
+			</legend>
+			<p class="explication">
+				<:exclure_sect:cfg_explication_exclure_sect:>
+			</p>
+			<ul>
+				#SET{name,exclure_sect} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{obli,''}
+				<li class="editer editer_[(#GET{name}) ]pleine_largeur[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<ul class="liste-items">
+						<BOUCLE_racine(RUBRIQUES){racine}{tout}>
+						#SET{checked, #ID_RUBRIQUE|in_array{#CONFIG{secteur/exclure_sect, #ARRAY}}|?{checked,''}}
+						#SET{alt,#VAL{titre_numero_rubrique}|_T|concat{' ',#ID_RUBRIQUE}}
+						<li class="item[ (#GET{checked}|oui)on]">
+							<div class="choix">
+								<input
+									type="checkbox"
+									name="exclure_sect[]"
+									value="#ID_RUBRIQUE"
+									[ (#GET{checked}|oui)checked="checked"] />
+								<label for="rub_#ID_RUBRIQUE">
+									[(#CHEMIN_IMAGE{secteur-16.png}|balise_img{#GET{alt},spip_logos})&nbsp;][(#TITRE)]
+								</label>
+							</div>
+						</li>
+						</BOUCLE_racine>
+					</ul>
+				</li>
+			</ul>
+		</fieldset>
+
+		[(#REM) Options avancées ]
+		<fieldset>
+			<legend id="explication">
+				<:exclure_sect:cfg_avances:>
+			</legend>
+			<ul>
+
+				#SET{name,tout} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_radio editer_[(#GET{name}) ][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:exclure_sect:cfg_label_tout:></label>[
+					<span class="erreur_message">(#GET{erreurs})</span>
+					]<p class="explication"><:exclure_sect:cfg_tout:></p>
+					<div class="choix">
+						<input type="radio" value="oui" id="[(#GET{name})_oui]" class="radio" name="#GET{name}"[ (#ENV{#GET{name}}|=={oui}|oui) checked="checked"]>
+						<label for="[(#GET{name})_oui]">Oui</label>
+					</div>
+					<div class="choix">
+						<input type="radio" value="" id="[(#GET{name})_non]" class="radio" name="#GET{name}"[ (#ENV{#GET{name}}|non) checked="checked"]>
+						<label for="[(#GET{name})_non]">Non</label>
+					</div>
+				</li>
+
+				#SET{name,idexplicite} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_radio editer_[(#GET{name}) ][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:exclure_sect:cfg_label_id_explicite:></label>[
+					<span class="erreur_message">(#GET{erreurs})</span>
+					]<p class="explication"><:exclure_sect:cfg_id_explicite:></p>
+					<div class="choix">
+						<input type="radio" value="oui" id="[(#GET{name})_oui]" class="radio" name="#GET{name}"[ (#ENV{#GET{name}}|=={oui}|oui) checked="checked"]>
+						<label for="[(#GET{name})_oui]">Oui</label>
+					</div>
+					<div class="choix">
+						<input type="radio" value="" id="[(#GET{name})_non]" class="radio" name="#GET{name}"[ (#ENV{#GET{name}}|non) checked="checked"]>
+						<label for="[(#GET{name})_non]">Non</label>
+					</div>
+				</li>
+
+			</ul>
+		</fieldset>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+		</p>
+
+	</div></form>
+	</BOUCLE_editable>
+
 </div>
-			
-			

@@ -11,12 +11,18 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'cfg_avances'			=>'R&eacute;glages avanc&eacute;s du plugin',
-	'cfg_exclure_secteur'	=>'Configuration du plugin exclure-secteur',
-	'cfg_explication'	=>'Choisissez les secteurs &agrave; exclure',
-	'cfg_id_explicite'	=>"Ne pas appliquer aux les boucles sur lequel l'identifiant de l'objet est explicité ou pris dans le contexte. (Permet de ne pas modifier le squelette article.html)",
-	'cfg_tout'			=>'Est-ce que le crit&eacute;re <code>{tout}</code> est &eacute;quivalent au crit&eacute;re <code>{tout_voir}</code> ?',
-// E
-	'exclure_secteur'=>'Exclure secteur',
+
+	// C
+	'cfg_avances'			=> 'Réglages avancés du plugin',
+	'cfg_exclure_secteur'		=> 'Configuration du plugin exclure-secteur',
+	'cfg_explication'		=> 'Secteurs à exclure',
+	'cfg_explication_exclure_sect'	=> 'Choisissez les secteurs à exclure. Ceux-ci n\'apparaîtront pas sur le site public, à moins d\'utiliser le critère <code>{tout_voir}</code>',
+	'cfg_id_explicite'		=> 'Ignorer les boucles sur lesquelles l\'identifiant de l\'objet est explicité ou pris dans le contexte ? <small>(Permet de ne pas modifier le squelette article.html)</small>',
+	'cfg_tout'			=> 'Le critère <code>{tout}</code> est-il équivalent au critère <code>{tout_voir}</code> ?',
+	'cfg_label_tout'		=> 'Critère <code>{tout}</code>',
+	'cfg_label_id_explicite'	=> 'Identifiant explicite',
+
+	// E
+	'exclure_secteur'		=>'Exclure secteur',
 );
 ?>
