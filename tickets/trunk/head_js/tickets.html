@@ -1,8 +1,9 @@
 <script type="text/javascript">
-	jQuery(document).ready(function(){
+	var tickets_trier = function(){
 		jQuery('.formulaire_trier_tickets').hide();
-		jQuery('.formulaire_trier_tickets').before('<div class="actions filtrer_tickets"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
-		jQuery('.afficher_filtres').click(function(){
+		if(jQuery('.formulaire_trier_tickets').prev('.filtrer_tickets').size() == 0)
+			jQuery('.formulaire_trier_tickets').before('<div class="actions filtrer_tickets"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
+		jQuery('.afficher_filtres').unbind('click').click(function(){
 			var form = jQuery(this).parent().next('.formulaire_trier_tickets');
 			if(form.is(':hidden')){
 				jQuery(this).removeClass('off').addClass('on');
@@ -14,5 +15,9 @@
 			}
 			return false;
 		});
+	}
+	jQuery(document).ready(function(){
+		tickets_trier();
+		onAjaxLoad(tickets_trier);
 	});
 </script>
