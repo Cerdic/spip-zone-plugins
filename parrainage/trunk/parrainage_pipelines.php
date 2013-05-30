@@ -77,9 +77,8 @@ function parrainage_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'inscription'){
 		include_spip('inc/config');
 		$code_invitation = _request('code_invitation');
-
 		// Si l'invitation est obligatoire
-		if ((lire_config('parrainage/invitation_obligatoire','') == 'oui') and !$code_invitation){
+		if ((lire_config('parrainage/invitation_obligatoire','') == 'on') and !$code_invitation){
 			$flux['data']['code_invitation'] = _T('parrainage:erreur_invitation_obligatoire');
 		}
 		// Si le code d'invitation est dans l'URL mais ne correspond pas à l'email donné
