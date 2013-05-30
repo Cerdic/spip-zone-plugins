@@ -9,18 +9,8 @@
 		[(#AUTORISER{ecrire, ticket}|oui)
 		<a class="i_new" href="[(#URL_PAGE{editer_ticket}|parametre_url{composant,#ENV{composant}}|parametre_url{version,#ENV{version}}|parametre_url{severite,#ENV{severite}})]"><:tickets:creer_ticket:></a>]
 		<h1 class="titre"><:tickets:tickets:></h1>
-	</div>
-	<BOUCLE_versions(TICKETS){fusion version}> </BOUCLE_versions>
-	[(#TOTAL_BOUCLE|>{1}|oui)
-	<div class="tickets_vues">
-		<p><:tickets:label_vue_liste_tickets:></p>
-		<div class="actions">
-			[(#ENV{vue}|=={roadmap}|?{<a href="[(#URL_PAGE{tickets})]" class="ajax"><:tickets:lien_vue_tous:></a>,<strong><:tickets:lien_vue_tous:></strong>})]
-			[(#ENV{vue}|=={roadmap}|?{<strong><:tickets:lien_vue_roadmap:></strong>,<a href="[(#SELF|parametre_url{vue,roadmap})]" class="ajax"><:tickets:lien_vue_roadmap:></a>})]
-		</div>
-	</div>]
-	</B_versions>
-	[(#ENV{vue}|=={roadmap}|?{[(#INCLURE{fond=inclure/vues/roadmap,env})],[(#INCLURE{fond=inclure/vues/tickets_liste,env})]})]
+	</div>[(#SET{nb_versions,0})]
+	[(#INCLURE{fond=inclure/vues/vues_tickets,env,ajax})]
 </div>
 </BOUCLE_si_afficher_public>
 	<p class="notice"><:tickets:message_page_publique_indisponible:></p>

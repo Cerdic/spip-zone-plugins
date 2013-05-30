@@ -1,4 +1,3 @@
-#CACHE{0}
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
 	id_objet,1
@@ -33,18 +32,18 @@
 					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]</th>
 			<th><:tickets:champ_texte:></th>
 			<th[(#ENV{tri_detaillee}|=={date}|oui)class="tri"]>
-				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri_detaillee}|=={date}|ou{#ENV{tri_detaillee}|non}|oui)
-					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]
-					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_date:>,ajax}|inserer_attribut{rel,nofollow})]]]
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_comment_detaillee(FORUMS){recherche?}{objet=ticket}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
-			<td><img[ src="(#CHEMIN{[prive/images/(#INFO_STATUT{ticket, #ID_OBJET}|tickets_icone_statut)]})"][ alt="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"][ title="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"] /></td>
-			<td><strong><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></strong></td>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
+			<td>[(#CHEMIN{[prive/images/(#INFO_STATUT{ticket, #ID_OBJET}|tickets_icone_statut)]}|balise_img|inserer_attribut{alt,[(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)]})]</td>
+			<td><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></td>
 			<td><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">#TITRE</a><br />[(#TEXTE|couper{160})]</td>
 			<td>[(#DATE|affdate)]</td>
 		</tr>
