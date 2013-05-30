@@ -6,27 +6,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_parrainage_charger(){
 	include_spip('inc/session');
 	
-	// S'il n'y a pas d'auteur connecté, pas de formulaire
-	if (!($id_auteur = session_get('id_auteur')) > 0)
-		return false;
-	else{
-		$nb_contacts = sql_countsel('spip_filleuls','id_parrain='.intval($id_auteur));
-		if($nb_contacts > 0){
-			$contexte = array(
-				'filleuls' => array(),
-				'message' => '',
-				'inviter_tous' => '',
-				'supprimer_filleul' => '',
-				'_id_parrain' => $id_auteur
-			);
-		}else{
-			$contexte = array(
-				'editable' => false,
-				'message_erreur' => _T('parrainage:erreur_aucun_contact')
-			);
+	include_spip('inc/autoriser');
+	if(autoriser('inscrireauteur','1comite') OR autoriser('inscrireauteur','6forum') OR tester_config('')){
+		// S'il n'y a pas d'auteur connecté, pas de formulaire
+		if (!($id_auteur = session_get('id_auteur')) > 0)
+			return false;
+		else{
+			$nb_contacts = sql_countsel('spip_filleuls','id_parrain='.intval($id_auteur));
+			if($nb_contacts > 0){
+				$contexte = array(
+					'filleuls' => array(),
+					'message' => '',
+					'inviter_tous' => '',
+					'supprimer_filleul' => '',
+					'_id_parrain' => $id_auteur
+				);
+			}else{
+				$contexte = array(
+					'editable' => false,
+					'message_erreur' => _T('parrainage:erreur_aucun_contact')
+				);
+			}
 		}
-		return $contexte;
+	}else{
+		$contexte = array(
+						'message_erreur'=> _T('parrainage:erreur_inscription_desactivee'),
+						'editable'=>false
+					);
 	}
+	return $contexte;
 }
 
 function formulaires_parrainage_verifier(){

@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.',
 	'erreur_aucun_filleul' => 'Vous n\'avez sélectionné aucun filleul.',
+	'erreur_inscription_desactivee' => 'L\'inscription au site est désactivée. Vous ne pouvez donc parrainer personne.',
 	'erreur_invitation_invalide' => 'Votre invitation ne correspond pas à l\'adresse de courriel indiquée.',
 	'erreur_invitation_obligatoire' => 'Vous devez avoir une invitation pour vous inscrire sur le site.',
 
