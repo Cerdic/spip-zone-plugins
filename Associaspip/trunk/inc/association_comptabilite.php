@@ -350,27 +350,25 @@ function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $re
  *
  * @param string $code
  *   La reference comptable dont on veut l'intitule
- * @param bool $parent
- *   Permet de retourner (si TRUE) le code parent existant dans le plan quand on
- * ne trouve pas le code exact demande. Sinon (si FALSE) on renvoit une chaine vide
+ * @param int $parent
+ *   Le nombre maximum de niveau dont il faut remonter dans la recherche d'un
+ * code parent lorsqu'on ne trouve pas le code exact demande.
  * @return string $nom
- *   L'intitule correspondant
+ *   L'intitule correspondant trouve
  * @note
  *   Ex association_plan_comptable_complet($code,$parent);
  */
-function comptabilite_reference_intitule($code, $parent=FALSE) {
+function comptabilite_reference_intitule($code, $parent=0) {
     $nom = sql_getfetsel('intitule','spip_asso_plan','code='.sql_quote($code) ); // on tente de recuperer l'intitule defini...
     if ($nom) // on a trouve ! alors...
 	return extraire_multi($nom, $GLOBALS['spip_lang']); // ...renvoyer la traduction
     if ($GLOBALS['association_metas']['plan_comptable']) // sinon si on a un plan comptable selectionne
 	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
-    if ($nom) // on a trouve alors...
+    if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
 	return $nom; // ...renvoyer la traduction
-    if (!$parent) // sinon si on doit s'en tenir a ce code, alors...
-	return ''; // c'est fini
     $code = substr($code, 0, -1); // sinon on enleve le dernier caractere...
-    if (strlen($code)) // ...et tant qu'il y a un caractere...
-	return comptabilite_reference_intitule($code, TRUE); // ...on y retourne
+    if (strlen($code) AND $parent) // ...et tant qu'il y a un caractere... et qu'on peut remonter...
+	return comptabilite_reference_intitule($code, $parent--); // ...on y retourne
     else // mais quand on n'a pas de caractere a consommer...
 	return ''; // ...c'est la fin des haricots
 }
