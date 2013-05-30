@@ -1,12 +1,13 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+	[(#AUTORISER{inscrireauteur,1comite}|ou{#AUTORISER{inscrireauteur,6forum}}|ou{#REM|tester_config}|non)
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:parrainage:message_insciption_fermee:></p>]
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
+		#ACTION_FORMULAIRE{#ENV{action}}	
 		
 		<ul>
 			[(#SAISIE{oui_non,invitation_obligatoire,

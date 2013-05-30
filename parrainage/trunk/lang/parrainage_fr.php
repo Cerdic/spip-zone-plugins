@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invitation_url' => 'Rendez-vous à l\'adresse suivante pour vous inscrire :',
 
 	// M
+	'message_insciption_fermee' => 'Attention, l\'inscription au site est fermée. Vous devez l\'activer pour utiliser ce plugin',
 	'message_ouvrir_visiteur' => 'Si vous souhaitez ouvrir l\'inscription au site à de nouveaux visiteurs, vous pouvez activer cette option ci-dessous (la configuration du plugin "Parrainage" oblige le nouvel inscrit à bénéficier d\'un code d\'invitation) : ',
 	
 	// P
