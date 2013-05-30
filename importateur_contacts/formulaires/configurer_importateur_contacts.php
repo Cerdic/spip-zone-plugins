@@ -1,11 +1,16 @@
 <?php
-
-// Sécurité
+/**
+ * Plugin Importateur de contacts
+ * 
+ * Formulaire de configuration du plugin
+ * 
+ * @package SPIP\Importateur_Contacts\Formulaires
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/importateur_contacts');
-
 function formulaires_configurer_importateur_contacts_saisies_dist(){
+	include_spip('inc/importateur_contacts');
+	
 	$saisies = array();
 	
 	$fournisseurs = importateur_contacts_lister_fournisseurs();
