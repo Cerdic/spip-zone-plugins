@@ -58,9 +58,10 @@ function parrainage_recuperer_fond($flux){
 	}
 	if ($flux['args']['fond'] == 'formulaires/configurer_visiteurs'){
 		include_spip('inc/config');
-		$obligatoire = lire_config('parrainage/invitation_obligatoire','') ? 'oui' : 'non';
-		$texte = _T('parrainage:message_ouvrir_visiteur');
-		$flux['data']['texte'] = preg_replace("%<p class=\"explication.*?</p>%is", '<p class="explication">'.$texte.'</p>', $flux['data']['texte']);
+		if(lire_config('parrainage/invitation_obligatoire','') == 'on'){
+			$texte = _T('parrainage:message_ouvrir_visiteur');
+			$flux['data']['texte'] = preg_replace("%<p class=\"explication.*?</p>%is", '<p class="explication">'.$texte.'</p>', $flux['data']['texte']);
+		}
 	}
 	return $flux;
 }
@@ -130,4 +131,21 @@ function parrainage_formulaire_traiter($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline intranet_pages_ok (Plugin intranet)
+ * 
+ * Permettre l'accès à la page d'inscription si le code d'invitation est obligatoire, et que l'on a
+ * ce code dans l'Url
+ * 
+ * @param array $pages_ok
+ * 		Tableau des types de pages acceptées
+ * @return array $pages_ok
+ * 		Le tableau des types de pages acceptées complété
+ */
+function parrainage_intranet_pages_ok($pages_ok){
+	if(include_spip('inc/config') && (lire_config('parrainage/invitation_obligatoire','') == 'on') && _request('invitation'))
+		$pages_ok[] = 'inscription';
+	
+	return $pages_ok;
+}
 ?>

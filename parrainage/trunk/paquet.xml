@@ -1,7 +1,7 @@
 <paquet
 	prefix="parrainage"
 	categorie="communication"
-	version="0.6.0"
+	version="0.6.1"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="images/parrainage-48.png"
@@ -27,11 +27,12 @@
 	<pipeline nom="formulaire_traiter" inclure="parrainage_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="parrainage_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="parrainage_pipelines.php" />
-
+	<pipeline nom="intranet_pages_ok" inclure="parrainage_pipelines.php" />
+	
 	<necessite nom="facteur" compatibilite="[1.6.1;[" />
 	<necessite nom="saisies" compatibilite="[1.8.5;[" />
 
 	<utilise nom="importateur_contacts" />
 
-	<menu nom="configurer_parrainage" titre="parrainage:plugin_nom" parent="bando_configuration" icone="images/parrainage-16.png" action="configurer_parrainage" />
+	<menu nom="configurer_parrainage" titre="parrainage:plugin_nom" parent="menu_configuration" icone="images/parrainage-16.png" action="configurer_parrainage" />
 </paquet>

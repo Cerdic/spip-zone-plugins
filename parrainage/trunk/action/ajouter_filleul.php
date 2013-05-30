@@ -64,8 +64,10 @@ function ajouter_filleul($id_parrain,$email,$nom){
 /**
  * Crée un nouveau filleul et retourne son ID
  *
- * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
+ * @param array $champs 
+ * 		Un tableau avec les champs par défaut lors de l'insertion
  * @return int id_filleul
+ * 		Identifiant numérique du filleul
  */
 function insert_filleul($champs=array()) {
 	// Envoyer aux plugins avant insertion
