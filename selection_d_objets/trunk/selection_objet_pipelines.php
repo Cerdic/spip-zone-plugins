@@ -122,7 +122,7 @@ function selection_objet_formulaire_charger($flux){
 }
 
 function selection_objet_formulaire_traiter($flux){
-    // Si on est sur le formulaire client qui est sur la page identification
+    // intervenir sur la configuration du plugin
     $form=$flux['args']['form'];
     if($form == 'configurer_selection_objet'){
          include_spip('inc/config');
