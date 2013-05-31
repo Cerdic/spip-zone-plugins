@@ -20,8 +20,8 @@
     <div class="vue-champ">
         <small><span><:simplecal:texte_issu_autre_objet:></span></small>
         <br />&rarr;<:simplecal:reference_objet:> 
-        [(#TYPE|=={article}|oui)<a href="?exec=#TYPEs&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
-        [(#TYPE|=={breve}|oui)<a href="?exec=#TYPEs_voir&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
+        [(#TYPE|=={article}|oui)<a href="?exec=[(#TYPE)s]&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
+        [(#TYPE|=={breve}|oui)<a href="?exec=[(#TYPE)s_voir]&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
     </div>]
     [<div class="vue-champ">
         <small><span><:simplecal:texte:></span></small>

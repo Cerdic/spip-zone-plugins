@@ -1,5 +1,9 @@
-Plugin Simple Calendrier pour SPIP 2.1
+﻿Plugin Simple Calendrier pour SPIP 2.1
 ------------------------------------------
+
+1.2.9 le 01/06/2013
+--------------------
+Petit ajustement de code sans conséquence (lié à http://core.spip.org/issues/1964)
 
 1.2.8 le 25/09/2012
 --------------------
