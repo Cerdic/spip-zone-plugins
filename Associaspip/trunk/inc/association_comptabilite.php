@@ -438,10 +438,8 @@ function comptabilite_verifier_classe($classe, $plan='', $lang='') {
     if ( strlen($classe)!=1 ) // champ vide ou ayant plus d'un caractere
 	return _T('compta:erreur_classe_longueur');
     $regles = comptabilite_liste_planregles($plan, $lang);
-    $min = $regles[0]?$regles[0]:0; // si pas defini on prend '0'
-    $max = $regles[1]?$regles[1]:0; // si pas defini on prend '9'
-    if ( $classe>$max OR $classe<$min ) // champ hors plage
-	return _T('compta:erreur_classe_plage', array('min'=>$min, 'max'=>$max,) );
+    if ( !preg_match($regles[0]?$regles[0]:'[0-9]', $classe) ) // champ hors plage
+	return _T('compta:erreur_classe_plage', array('intervalle'=>$regles[0],) );
     return '';
 }
 
@@ -456,7 +454,9 @@ function comptabilite_verifier_classe($classe, $plan='', $lang='') {
 function comptabilite_verifier_code($code, $classe='', $plan='', $lang='') {
     $regles = comptabilite_liste_planregles($plan, $lang);
     $len = intval($regles[2])?intval($regles[2]):2; // si pas defini on prend '2'
-    if ( intval($regles[0]) AND intval($regles[1]) AND !preg_match('/^[0-9]{'.($len-1).'}\w*$/', $code) ) // champ de longueur insuffisante ou n'ayant pas le nombre de chiffres initial requis
+    $c0 = $regles[0]?$regles[0]:'[0-9]'; // si pas defini on prend un chiffre
+    $c1 = $regles[1]?$regles[1]:'[0-9]'; // si pas defini on prend un chiffre
+    if ( !preg_match('/^'.$c0.$c1.'{'.($len-1).'}\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('asso:erreur_plan_code', array('nombre'=>$len,) );
     elseif ( strlen($code)<$len ) // champ de longueur insuffisante
 	return _T('compta:erreur_code_longueur', array('nombre'=>$len,) );
@@ -596,17 +596,15 @@ function filtre_selecteur_compta_plan($plan) {
 	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
     }
     $desc_table = charger_fonction('trouver_table', 'base');
-    if ( $desc_table('pays') )
-	$options = sql_allfetsel('code, nom', 'spip_pays', sql_in('code', $liste_plans) );
-    else
-	foreach ($liste_plans as $nom)
-	    $options[] = array('code'=>$nom, 'nom'=>_T("perso:$nom"), );
     $res = "<select name='plan_comptable' id='selecteur_plan_comptable'>\n";
     $res .= '<option value="">'. _T('ecrire:item_non') ."</option>\n";
-    foreach ($options as $option)
-	$res .= '<option value="'.$option['code'].'"'.
-	($option['code']==$plan?' selected="selected"':'')
-	.'>'. extraire_multi($option['nom'], $GLOBALS['spip_lang']) ."</option>\n";
+    foreach (array_unique($liste_plans) as $nom) {
+	$res .= '<option value="'.$nom.'"'.
+	($nom==$plan?' selected="selected"':'') .'>';
+	$pays = $desc_table('pays') ? sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($nom) ) : '';
+	$res .= $pays ? extraire_multi($pays, $GLOBALS['spip_lang']) : strtoupper($nom) ;
+	$res .= "</option>\n";
+    }
     return "$res</select>\n";
 }
 

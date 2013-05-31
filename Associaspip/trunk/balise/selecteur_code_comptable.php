@@ -28,7 +28,7 @@ function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
 		include_spip('inc/association_comptabilite');
 		$pcc = comptabilite_liste_plancomplet(); // on recupere tout le plan comptable dans un tableau pour afficher le code commencant comme celui existant si ce dernier n'est pas dans le plan comptable
 		if ($code != '')
-			$code = comptabilite_reference_intitule($code, TRUE); // avec un second parametre a TRUE, la fonction renvoie le code lui meme si il est present dans le tableau ou le premier code hierarchiquement superieur present
+			$code = comptabilite_reference_intitule($code, -1); // avec un second parametre a TRUE, la fonction renvoie le code lui meme s'il est present dans le tableau ou le premier code hierarchiquement superieur present
 		$res = '<select id="selecteur_code_comptable" class="select" onchange="var currentVal=String(document.getElementById(\'selecteur_code_comptable\').value).split(\'-\'); document.getElementById(\'code\').value=currentVal[0]; document.getElementById(\'intitule\').value=currentVal[1];">'; // code javascript en dur qui recopie l'intitule et le code dans les champs d'editions sur la page d'edition de la reference
 		$firstOptgroup = TRUE;
 		foreach ($pcc as $index_code => $intitule) { // on boucle sur tout le tableau

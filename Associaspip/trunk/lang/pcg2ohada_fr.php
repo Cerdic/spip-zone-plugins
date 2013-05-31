@@ -12,8 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 $pc_norme = array(
-	1, //0: min classe
-	9, //1: max classe
+	[1-9], //0: classes
+	[0-9], //1: sous-classes
 	3, //2: min longueur code
 );
 
