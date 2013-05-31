@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Importateur de contacts [en]Contacts importer</multi></nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<slogan>Formulaire d'importation de contacts.</slogan>
@@ -13,7 +13,7 @@
 	<categorie>outil</categorie>
 	<icon>images/importateur_contacts-32.png</icon>
 	<traduire gestionnaire="salvatore" module="importateurcontacts" reference="fr" />
-	<lien>http://www.spip-contrib.net/Importateur-de-contacts</lien>
+	<lien>http://contrib.spip.net/?article3902</lien>
 	
 	<prefix>importateur_contacts</prefix>
 	<options>importateur_contacts_options.php</options>

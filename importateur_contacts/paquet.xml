@@ -1,12 +1,12 @@
 <paquet
 	prefix="importateur_contacts"
 	categorie="outil"
-	version="1.2.0"
+	version="1.2.1"
 	etat="stable"
 	compatibilite="[2.1.10;3.0.99]"
 	logo="images/importateur_contacts-32.png"
 	schema="1.0.0"
-	documentation="http://www.spip-contrib.net/Importateur-de-contacts"
+	documentation="http://contrib.spip.net/?article3902"
 >	
 
 	<nom>Importateur de contacts</nom>
