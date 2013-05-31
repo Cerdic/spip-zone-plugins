@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 $pc_norme = array(
 	'[1-8S]', //0: classes
-	'[.][1-9]', //1: sous-classes (en fait [13][.][1-4], 2[.][1-9], [45][.][12], [678S][.][1-3], 9[.][4-5], en gros)
+	'[\.][1-9]', //1: sous-classes (en fait [13][\.][1-4], 2[\.][1-9], [45][\.][12], [678S][\.][1-3], 9[\.][4-5], en gros)
 	5, //2: min longueur code
 );
 
