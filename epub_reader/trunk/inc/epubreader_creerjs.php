@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Epub reader
- * © 2011-2012 - kent1
+ * © 2011-2013 - kent1
  * Licence GPL v3
  */
 
@@ -10,7 +10,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Créer le js qui sera utilisé par monocle
  * 
- * @param $id_document int l'identifiant numérique du document
+ * @param int $id_document 
+ * 		l'identifiant numérique du document
+ * @return string|false 
+ * 		Le code javascript si possible
  */
 function inc_epubreader_creerjs_dist($id_document,$id=false,$hauteur=600) {
 	if($repertoire = epubreader_unzip($id_document)){
@@ -153,20 +156,23 @@ Monocle.Reader('".$id."', bookData, { panels: Monocle.Panels.IMode });
  * Dézip un document epub dans son répertoire de cache
  * Le répertoire de cache défini est local/cache-epub/id_document
  * 
- * @param $id_document int : l'identifiant numérique du document
- * @return $rep_dest : retourne le chemin du répertoire de cache ou false
+ * @param int $id_document
+ * 		l'identifiant numérique du document
+ * @return string|false $rep_dest
+		retourne le chemin du répertoire de cache ou false
  */
 function epubreader_unzip($id_document){
 	include_spip('inc/documents');
-	include_spip('inc/flock');
 	$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 	
 	$fichier = get_spip_doc($document['fichier']);
 	if(!file_exists($fichier))
 		return false;
 	
+	include_spip('inc/flock');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-epub/');
 	$rep_dest = sous_repertoire(_DIR_VAR.'cache-epub/',$id_document);
+	
 	include_spip('inc/pclzip');
 	$zip = new PclZip(get_spip_doc($fichier));
 	
@@ -180,9 +186,8 @@ function epubreader_unzip($id_document){
 		spip_log('Erreur de décompression ' . $zip->error_code .' pour le fichier: ' . $fichier,'epub_reader');
 		return false;
 	}
-	else{
+	else
 		return $rep_dest;
-	}
 }
 
 /**
@@ -197,8 +202,10 @@ function epubreader_unzip($id_document){
  * 
  * TODO Déplacer cette fonction dans metadatas/epub.php
  * 
- * @param $id_document int : l'identifiant numérique du document
- * @return $infos array : un array des métas du document
+ * @param int $id_document
+ * 		l'identifiant numérique du document
+ * @return array $infos
+ * 		un array des métas du document
  */
 function epubreader_recuperer_metas($id_document){
 	if($repertoire = epubreader_unzip($id_document)){
@@ -228,9 +235,6 @@ function epubreader_recuperer_metas($id_document){
 										$infos['descriptif'] = trim(textebrut(translitteration($info_dublin[0])));
 									}
 									$infos[$matches[1]] = trim(textebrut(translitteration($info_dublin[0])));
-								}else{
-									spip_log($dublin,'epub_reader');
-									spip_log($info_dublin[0],'epub_reader');
 								}
 							}
 						}
@@ -251,8 +255,6 @@ function epubreader_recuperer_metas($id_document){
 											}
 										}
 									}
-								}else{
-									spip_log($meta,'epub_reader');
 								}
 							}
 						}
@@ -260,17 +262,12 @@ function epubreader_recuperer_metas($id_document){
 						if(is_array($references)){
 							foreach($references as $reference => $info_reference){
 								if(preg_match('/.*type=["\']cover["\'].*/s',$reference,$reference_match)){
-									spip_log('On a une cover '.$reference,'epub_reader');
 									if(preg_match('/ href=["\'](.*\.[a-z]{3})["\'] /',$reference,$cover_match)){
-										spip_log($cover_match,'epub_reader');
-										spip_log('la cover est : '.$repertoire.$file_dir.'/'.$cover_match[1],'epub_reader');
 										if(file_exists($repertoire.$file_dir.'/'.$cover_match[1])){
 											$infos['cover'] = $repertoire.$file_dir.'/'.$cover_match[1];
 											break;
 										}
 									}
-								}else{
-									spip_log($reference,'epub_reader');
 								}
 							}
 						}
@@ -294,8 +291,6 @@ function epubreader_recuperer_metas($id_document){
 					}
 				}
 			}
-		}else{
-			spip_log($repertoire.'META-INF/container.xml n existe pas','epub_reader');
 		}
 		
 		/**
@@ -316,11 +311,9 @@ function epubreader_recuperer_metas($id_document){
 			if (!$infos['date'])
 				unset($infos['date']);
 		}
-		spip_log($infos);
 		return $infos;
-	}else{
+	}else
 		return array();
-	}
 }
 
 ?>
