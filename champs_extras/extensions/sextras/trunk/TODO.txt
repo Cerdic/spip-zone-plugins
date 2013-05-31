@@ -1,4 +1,0 @@
-- trouver un moyen de récupérer la liste des objets sur lesquels on peut définir des champs extra, plutôt que le tableau défini en dur dans /formulaires/sextras_synchroniser.php:ligne 10
-- Proposer une option permettant de supprimer les champs en trop dans la base courante. C'est le cas où il y a des champs extra pour un objet dans la base courante mais pas dans la base référence.
-- Indiquer quelles sont les différences, champs par champs, par rapport à la référence
-- Pouvoir activer une alerte à la rentrée dans l'espace privé, dans le cas où il y a différence avec la référence. Un bouton "Voulez-vous synchroniser la définition des ce maintenant ?", avec un checkbox "activer les alertes".
