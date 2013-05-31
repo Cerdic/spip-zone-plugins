@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2011-2012 - Distribué sous licence GNU/GPL
+ * 2011-2013 - Distribué sous licence GNU/GPL
  *
  * Fichier de pipelines du plugin
  *
@@ -17,8 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Insertion dans le pipeline jquery_plugins (SPIP)
  * Ajoute les scripts js de monocle dans le head des pages
  * 
- * @return $flux Le contexte de pipeline complété
- * @param array $flux Le contexte du pipeline
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte de pipeline complété
  */
 function epubreader_jquery_plugins($plugins){
 	$plugins[] = 'scripts/monocore.js';
@@ -29,8 +31,10 @@ function epubreader_jquery_plugins($plugins){
  * Insertion dans le pipeline insert_head_css (SPIP)
  * Ajoute la css de monocle dans le head de chaque page 
  * 
- * @return $flux Le contexte de pipeline complété
- * @param array $flux Le contexte du pipeline
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte de pipeline complété
  */
 function epubreader_insert_head_css($flux){
 	$flux .= '
@@ -43,9 +47,11 @@ function epubreader_insert_head_css($flux){
  *
  * Intervient à chaque modification d'un objet de SPIP
  * notamment lors de l'ajout d'un document
- *
- * @return $flux Le contexte de pipeline complété
- * @param array $flux Le contexte du pipeline
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte de pipeline complété
  */
 function epubreader_post_edition($flux){
 	$id_document = $flux['args']['id_objet'];
@@ -68,8 +74,8 @@ function epubreader_post_edition($flux){
 			include_spip('inc/epubreader_creerjs');
 			$metadonnees = epubreader_recuperer_metas($id_document);
 			if(count($metadonnees) > 0){
-				$invalider = true;
-				document_modifier($id_document, $metadonnees);
+				//$invalider = true;
+				//document_modifier($id_document, $metadonnees);
 				if(isset($metadonnees['cover']) && file_exists($metadonnees['cover'])){
 					$id_vignette = (intval($infos_doc['id_vignette']) > 0) ? $infos_doc['id_vignette'] : 'new';
 					$ajouter_documents = charger_fonction('ajouter_documents','action');

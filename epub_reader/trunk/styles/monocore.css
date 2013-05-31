@@ -56,9 +56,9 @@ div.monelem_billboard_container {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
   transform: scale(0);
-  -webkit-transform-origin: 0 0;
-  -moz-transform-origin: 0 0;
-  transform-origin: 0 0;
+  -webkit-transform-origin: -0 -0;
+  -moz-transform-origin: -0 -0;
+  transform-origin: -0 -0;
 }
 
 .monelem_billboard_inner {
@@ -102,7 +102,15 @@ div.monelem_billboard_close:after {
   text-align: center;
 }
 
+div.monelem_book_fatality {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 75%;
+}
 
+div.monelem_book_fatality p {
+  line-height: 1.4;
+}
 
 
 /*===========================================================================

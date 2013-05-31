@@ -12,6 +12,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * @param int $id_document 
  * 		l'identifiant numérique du document
+ * @param string $id 
+ * 		l'identifiant dans le dom
+ * @param int $hauteur
+ * 		La hauteur d'affichage
  * @return string|false 
  * 		Le code javascript si possible
  */
@@ -161,17 +165,19 @@ Monocle.Reader('".$id."', bookData, { panels: Monocle.Panels.IMode });
  * @return string|false $rep_dest
 		retourne le chemin du répertoire de cache ou false
  */
-function epubreader_unzip($id_document){
+function epubreader_unzip($id_document=false,$fichier=false){
 	include_spip('inc/documents');
-	$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
-	
-	$fichier = get_spip_doc($document['fichier']);
-	if(!file_exists($fichier))
-		return false;
+	if(intval($id_document)){
+		$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
+		
+		$fichier = get_spip_doc($document['fichier']);
+		if(!file_exists($fichier))
+			return false;
+	}
 	
 	include_spip('inc/flock');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-epub/');
-	$rep_dest = sous_repertoire(_DIR_VAR.'cache-epub/',$id_document);
+	$rep_dest = sous_repertoire(_DIR_VAR.'cache-epub/',(intval($id_document) ? $id_document : md5($fichier)));
 	
 	include_spip('inc/pclzip');
 	$zip = new PclZip(get_spip_doc($fichier));
@@ -207,8 +213,8 @@ function epubreader_unzip($id_document){
  * @return array $infos
  * 		un array des métas du document
  */
-function epubreader_recuperer_metas($id_document){
-	if($repertoire = epubreader_unzip($id_document)){
+function epubreader_recuperer_metas($id_document=false,$fichier=false){
+	if($repertoire = epubreader_unzip($id_document,$fichier)){
 		if(file_exists($repertoire.'META-INF/container.xml')){
 			include_spip('inc/xml');
 			$arbre_container = spip_xml_load($repertoire.'META-INF/container.xml');
