@@ -151,6 +151,9 @@ function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
 				$where[$publique] = accesrestreint_documents_accessibles_where('id_document', $publique?"true":"false");
 				// inclure avant le eval, pour que les fonctions soient bien definies
 				include_spip('inc/accesrestreint');
+				// eviter une notice sur $connect inexistant dans eval() qui suit
+				$connect = '';
+
 				$where[$publique] = eval("return ".$where[$publique].";");
 			}
 			$documents_statut[$id_auteur][$publique][$id] = sql_getfetsel('id_document','spip_documents',array('id_document='.intval($id),$where[$publique]));
