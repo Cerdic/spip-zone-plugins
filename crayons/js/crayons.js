@@ -488,19 +488,18 @@ $.fn.iconecrayon = function(){
 
 // initialise les crayons
 $.fn.initcrayon = function(){
-	var me=this;
 	var editme = function(e){
 		timeme=null;
-		$(me).opencrayon(e,
+		$(this).opencrayon(e,
 			// calcul du "percent" du click par rapport a la hauteur totale du div
-			((e.pageY ? e.pageY : e.clientY) - document.body.scrollTop - me.offsetTop)
-			/ me.clientHeight);
+			((e.pageY ? e.pageY : e.clientY) - document.body.scrollTop - this.offsetTop)
+			/ this.clientHeight);
 	};
 	var timeme;
 	this
 	.addClass('crayon-autorise')
 	.dblclick(editme)
-	.bind("touchstart",function(e){timeme=setTimeout(function(){editme(e);},800);})
+	.bind("touchstart",function(e){var me=this;timeme=setTimeout(function(){editme.apply(me,[e]);},800);})
 	.bind("touchend",function(e){if (timeme) {clearTimeout(timeme);timeme=null;}})
 	.iconecrayon()
 	.hover(	// :hover pour MSIE
