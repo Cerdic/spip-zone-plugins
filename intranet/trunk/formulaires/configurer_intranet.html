@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_config formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="editer editer_pages_intranet">
+				<label for="champ_pages_intranet"><:intranet:label_pages_intranet:></label>
+				<p class="explication"><:intranet:explications_pages_intranet:></p>
+				<textarea name="pages_intranet" id="champ_pages_intranet" rows="5" cols="40">#ENV{pages_intranet}</textarea>
+			</li>
+			<li class="editer editer_message">
+				<label for="champ_message"><:intranet:label_message:></label>
+				<p class="explication"><:intranet:explications_message:></p>
+				<textarea name="message" class="inserer_barre_edition inserer_previsualisation" id="champ_message" rows="10}" cols="40">#ENV{message}</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+</form>
+</div>

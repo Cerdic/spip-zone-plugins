@@ -1,6 +1,7 @@
 <?php
 /*
  * Plugin Intranet
+ * 
  * (c) 2013 kent1
  * Distribue sous licence GPL
  *
@@ -27,20 +28,18 @@ if (!test_espace_prive()){
  * @return array
  */
 function intranet_styliser($flux){
-	include_spip('inc/autoriser');
-	// les pages exceptions
-	$pages_ok = array('robots.txt','spip_pass','favicon.ico','informer_auteur');
-	$pages_ok = pipeline('intranet_pages_ok',$pages_ok);
-	//spip_log($flux['args'],'test.'._LOG_ERREUR);
-	if (!autoriser('intranet')
+	if ( 
+		!test_espace_prive()
+		AND include_spip('inc/autoriser')
+		AND include_spip('inc/config')
+		AND !autoriser('intranet')
+		AND ($pages_ok = pipeline('intranet_pages_ok',array_merge(array('robots.txt','spip_pass','favicon.ico','informer_auteur'),explode(',',lire_config('intranet/pages_intranet',' ')))))
 		AND !in_array($flux['args']['fond'],$pages_ok)
 		AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
-		// et on laisse passer modeles et formulaires,
-		// qui ne peuvent etre inclus ou appeles que legitimement
 		AND strpos($flux['args']['fond'],'/')===false
 		AND !in_array(substr($flux['args']['fond'],-3),array('.js','.css'))){
-		$fond = trouver_fond('inclure/intranet','',true);
-		$flux['data'] = $fond['fond'];
+			$fond = trouver_fond('inclure/intranet','',true);
+			$flux['data'] = $fond['fond'];
 	}
 	return $flux;
 }
