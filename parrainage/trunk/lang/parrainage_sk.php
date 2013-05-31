@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.', # NEW
 	'erreur_aucun_filleul' => 'Nevybrali ste žiadneho priateľa.',
+	'erreur_inscription_desactivee' => 'L\'inscription au site est désactivée. Vous ne pouvez donc parrainer personne.', # NEW
 	'erreur_invitation_invalide' => 'Vaša pozvánka sa nezhoduje so zadanou e-mailovou adresou',
 	'erreur_invitation_obligatoire' => 'Na to, aby ste sa mohli zaregistrovať na tejto stránke, musíte mať pozvánku.',
 
@@ -33,6 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invitation_message' => '@nom_parrain@ vás pozýva, aby ste sa pripojili k stránke @site@.',
 	'invitation_sujet' => '@nom@ vás pozýva, aby ste sa pripojili k stránke @site@',
 	'invitation_url' => 'Na prihlásenie navštívte túto adresu:',
+
+	// M
+	'message_insciption_fermee' => 'Attention, l\'inscription au site est fermée. Vous devez l\'activer pour utiliser ce plugin', # NEW
+	'message_ouvrir_visiteur' => 'Si vous souhaitez ouvrir l\'inscription au site à de nouveaux visiteurs, vous pouvez activer cette option ci-dessous (la configuration du plugin "Parrainage" oblige le nouvel inscrit à bénéficier d\'un code d\'invitation) : ', # NEW
 
 	// P
 	'parrainage_inviter' => 'Poslať pozvánku',

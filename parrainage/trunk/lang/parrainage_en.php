@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.', # NEW
 	'erreur_aucun_filleul' => 'You have not selected any sponsored person.',
+	'erreur_inscription_desactivee' => 'L\'inscription au site est désactivée. Vous ne pouvez donc parrainer personne.', # NEW
 	'erreur_invitation_invalide' => 'Your invitation does not match the email address provided.',
 	'erreur_invitation_obligatoire' => 'You need an invitation to register on the site.',
 
@@ -33,6 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invitation_message' => '@nom_parrain@ invites you to join the site @site@.',
 	'invitation_sujet' => '@nom@ invits you to join the website @site@',
 	'invitation_url' => 'Go to the following address to register :',
+
+	// M
+	'message_insciption_fermee' => 'Attention, l\'inscription au site est fermée. Vous devez l\'activer pour utiliser ce plugin', # NEW
+	'message_ouvrir_visiteur' => 'Si vous souhaitez ouvrir l\'inscription au site à de nouveaux visiteurs, vous pouvez activer cette option ci-dessous (la configuration du plugin "Parrainage" oblige le nouvel inscrit à bénéficier d\'un code d\'invitation) : ', # NEW
 
 	// P
 	'parrainage_inviter' => 'Send invitation',
