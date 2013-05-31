@@ -16,10 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_liste' => 'Une liste d\'email', # NEW
 	'email_simple' => 'Un simple email', # NEW
 	'erreur_aucun_fournisseur' => 'Žiadna služba vám teraz nemôže zabezpečiť, aby ste našli svoje kontakty. Nainštalujte si, prosím, aspoň jednu knižnicu na nahrávanie kontaktov.',
+	'erreur_aucun_fournisseur_configure' => 'Aucun service d\'import de contact n\'est activé.', # NEW
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Získať kontakty',
-	'importer_fournisseur_label' => 'Vyberte si službu, z ktorej chcete získať svoje kontakty',
+	'importer_fournisseur_label' => 'Vyberte si službu, z ktorej chcete získať svoje kontakty', # MODIF
 	'info_aucun_contact' => 'Pre tento účet sa nenašiel žiaden kontakt.',
 	'info_nb_contacts' => 'Získali ste @nb@ kontaktov.',
 	'info_nb_contacts_erreur' => 'Získali ste @nb@ kontaktov, ale nedali sa použiť',
