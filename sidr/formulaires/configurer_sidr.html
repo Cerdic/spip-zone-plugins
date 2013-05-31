@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_selecteur[ (#ENV**{erreurs}|table_valeur{selecteur}|oui)erreur]">
+			<label for="selecteur"><:sidr:label_selecteur:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{selecteur})</span>]
+			<p class="explication"><:sidr:explication_selecteur:></p>
+			<input type="text" name="selecteur" class="text" id="selecteur" size="60" value="[(#ENV*{selecteur}|sinon{#menu})]" />
+		</li>		
+
+
+		<li class="fieldset"><fieldset><legend><:sidr:label_apparence:></legend>
+		<ul>
+			<li class="editer_skin[ (#ENV**{erreurs}|table_valeur{skin}|oui)erreur]">
+				<label for='skin'><:sidr:label_skin:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{skin})</span>]
+				<select name="skin" id="skin">
+					<option value="dark"[(#ENV{skin}|=={dark}|oui)selected="selected"]><:sidr:label_choix_skin_dark:></option>
+					<option value="light"[(#ENV{skin}|=={light}|oui)selected="selected"]><:sidr:label_choix_skin_light:></option>
+				</select>
+			</li>
+		</ul></fieldset>
+		</li>
+	</ul>
+
+	<p class="boutons">
+		<input style="display:none;" type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+		<input type="submit" name="reinit" class="submit" value="<:sidr:bouton_reinitialiser:>" />
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
+	</p>
+</div></form>
+</div>

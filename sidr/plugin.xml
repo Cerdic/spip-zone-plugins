@@ -1,0 +1,35 @@
+<plugin>
+	<nom>Sidr</nom>
+	<slogan>Menu de côté responsive</slogan>
+	<auteur>[Sidr->http://www.berriart.com/sidr/], [Mis en plugin pour SPIP par RealET->http://www.pyrat.net], icone : [Responsive Web Design Logo->https://commons.wikimedia.org/wiki/File:Responsive_Web_Design_Logo.svg]</auteur>
+	<version>1.0.0</version>
+	<icon>prive/themes/spip/images/sidr-32.png</icon>
+	<etat>stable</etat>
+	<description>
+Menu de côté responsive basé sur le plugin jQuery [Sidr->http://www.berriart.com/sidr/].
+	</description>
+	<lien>http://www.spip-contrib.net/sidr</lien>
+	<prefix>sidr</prefix>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<utilise id="cfg" version="[1.9.4;]" />
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>sidr_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sidr_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id='sidr' parent='configuration'>
+		<icone>prive/themes/spip/images/sidr-24.png</icone>
+		<titre>sidr:titre_menu_sidr</titre>
+		<url>configurer_sidr</url>
+	</bouton>
+	<bouton id='sidr2' parent='bando_squelette'>
+		<icone>images/sidr-16.png</icone>
+		<titre>sidr:titre_menu_sidr</titre>
+		<url>configurer_sidr</url>
+	</bouton>
+	<categorie>multimedia</categorie>
+</plugin>
