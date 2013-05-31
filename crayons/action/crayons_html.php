@@ -352,7 +352,6 @@ class Crayon {
 	Fabriquer les boutons du formulaire
 */
 function crayons_boutons($boutons = array()) {
-	$crayonsImgPath = dirname(url_absolue(find_in_path('images/cancel.png')));
 	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
 	$boutons['cancel'] = array('cancel', texte_backend(_T('crayons:annuler')));
 
@@ -370,10 +369,16 @@ function crayons_formulaire($html, $action='crayons_store') {
 	if (!$html)
 		return '';
 
+	// on est oblige de recreer un Crayon pour connaitre la largeur du form.
+	// Pb conceptuel a revoir
+	$crayon = new Crayon("");
+	$class = ($crayon->largeur<250?" small":"");
+
+
 	include_spip('inc/filtres');
 	return liens_absolus(
 		'<div class="formulaire_spip">'
-		. '<form class="formulaire_crayon" method="post" action="'
+		. '<form class="formulaire_crayon'.$class.'" method="post" action="'
 		. url_absolue(parametre_url(self(),'action', $action))
 		. '" enctype="multipart/form-data">'
 		. $html
