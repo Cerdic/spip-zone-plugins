@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recommander' => 'Odporučiť túto stránku',
 	'recommander_lecture' => 'Dobrý deň, @from@ Vám odporúča prečítať si túto stránku: ',
 	'recommander_message' => 'Odporučiť',
-	'recommander_titre' => 'Prečítajte si na @nom_site@ --' # MODIF
+	'recommander_titre' => 'Prečítajte si na @nom_site@ -'
 );
 
 ?>
