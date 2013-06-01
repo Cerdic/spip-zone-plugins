@@ -1,8 +1,8 @@
 <paquet
 	prefix="emballe_medias"
 	categorie="edition"
-	version="2.0.3"
-	etat="dev"
+	version="2.0.4"
+	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/emballe_medias.png"
 	schema="0.2.3"
@@ -11,7 +11,7 @@
 	<nom>Emballe Medias</nom>
 	<!-- Emballer ses documents proprement -->
 
-	<auteur>b_b </auteur>
+	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
 	<copyright>2009-2013</copyright>

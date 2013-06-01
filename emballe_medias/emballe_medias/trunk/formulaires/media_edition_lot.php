@@ -16,12 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/editer');
 
 function formulaires_media_edition_lot_charger_dist(){
-	//$valeurs = array();
 	$valeurs = formulaires_editer_objet_charger('article',$id_article,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	$diogene = sql_fetsel('*','spip_diogenes','objet="emballe_media"');
-	$valeurs['id_secteur'] = $diogene['id_secteur'];
+	$valeurs['id_secteur'] = $valeurs['id_parent'] = $diogene['id_secteur'];
 	$valeurs['id_diogene'] = $diogene['id_diogene'];
-	$valeurs['diogene_args'] = array('champs_ajoutes'=>$diogene['champs_ajoutes']);
+	if($diogene['champs_ajoutes'])
+		$valeurs['diogene_args'] = array('champs_ajoutes'=>$diogene['champs_ajoutes']);
 	$valeurs['statuts_medias'] = _request('statuts_medias') ? _request('statuts_medias') : 'prepa';	
 	if(_request('change_statut_prop')){
 		$valeurs['debut_medias'] = 0;
