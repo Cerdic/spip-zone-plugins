@@ -1,11 +1,8 @@
-[(#ENV*{valeur}|is_array|non)
-	[(#SET{valeur_env,[(#ENV*{valeur,a:0:{}}|unserialize)]})]
-][(#ENV*{valeur}|is_array|oui)
-	[(#SET{valeur_env,[(#ENV*{valeur})]})]
+[(#ENV*{valeur}|is_array|?{[(#SET{valeur_env,[(#ENV*{valeur})]})],[(#SET{valeur_env,[(#ENV*{valeur,a:0:{}}|unserialize)]})]})	
 ]<select name="#ENV{nom}[]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] multiple="multiple">
-	[(#CHEMIN{prive/champs_#ENV{type}.html}|oui)
+	[(#VAL{prive/champs_#ENV{type}}|trouver_fond|oui)
 	[(#INCLURE{fond=prive/champs_#ENV{type},valeur_env=#GET{valeur_env},env})]]
-	<BOUCLE_champs(DATA){si #CHEMIN{prive/champs_#ENV{type}.html}|non}{source tableau,#VAL{#ENV{type}|table_objet|objet_info{champs_editables}}}>
+	<BOUCLE_champs(DATA){si #VAL{prive/champs_#ENV{type}}|trouver_fond}{source tableau,#VAL{#ENV{type}|table_objet|objet_info{champs_editables}}}>
 	[(#VALEUR|!={titre})
 	<option value="#VALEUR"[(#VALEUR|in_array{#GET{valeur_env}}|oui) selected="selected"]>#VALEUR</option>]
 	</BOUCLE_champs>
