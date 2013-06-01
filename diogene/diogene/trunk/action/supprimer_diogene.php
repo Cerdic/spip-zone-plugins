@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * © 2010-2013 - Distribue sous licence GNU/GPL
  *
  * Action de suppression d'un Diogène
  *
@@ -23,7 +23,6 @@ function action_supprimer_diogene_dist(){
 		include_spip('action/editer_diogene');
 		diogene_supprimer($id_diogene);
 	}
-	
 }
 
 ?>

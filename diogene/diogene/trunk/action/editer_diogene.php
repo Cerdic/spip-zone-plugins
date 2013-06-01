@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * © 2010-2013 - Distribue sous licence GNU/GPL
  *
  * Action d'édition d'un diogene
  *
@@ -81,6 +81,9 @@ function diogene_instituer($id_diogene, $c) {
 
 /**
  * Fonction d'insertion d'un template
+ * 
+ * @return int $id_diogene
+ * 		L'identifiant numérique du template créé
  */
 function diogene_inserer() {
 
@@ -104,21 +107,24 @@ function diogene_inserer() {
  * Fonction de suppression d'un diogene
  * 
  * @param int $id_diogene
+ * 		L'identifiant numérique du diogène à supprimer
+ * @return bool true/false
  */
 function diogene_supprimer($id_diogene){
-	include_spip('inc/autoriser');
 	$diogene = sql_fetsel('*','spip_diogenes','id_diogene='.intval($id_diogene));
-	if($diogene && autoriser('modifier','diogene',$id_diogene)){
-		sql_delete(
-				'spip_diogenes',
-				'id_diogene = '.intval($id_diogene)
-			);
-		/**
-		 * Invalider le cache
-		 */
-		$invalideur = "id='diogene/$id_diogene'";
-		include_spip('inc/invalideur');
-		suivre_invalideur("$invalideur");
+	if(include_spip('inc/autoriser') && $diogene && autoriser('modifier','diogene',$id_diogene)){
+		if($del = sql_delete('spip_diogenes','id_diogene = '.intval($id_diogene))){
+			/**
+			 * Invalider le cache
+			 */
+			include_spip('inc/invalideur');
+			$invalideur = "id='diogene/$id_diogene'";
+			suivre_invalideur("$invalideur");
+			return true;
+		}else
+			return false;
+	}else{
+		return false;
 	}
 }
 
@@ -151,14 +157,12 @@ function diogene_modifier($id_diogene,$set=false){
 	foreach(array(
 		'champs_caches','champs_ajoutes','options_complements'
 	) as $champ){
-		if(isset($c[$champ]) && is_array($c[$champ])){
+		if(isset($c[$champ]) && is_array($c[$champ]))
 			$c[$champ] = serialize($c[$champ]);
-		}else if(isset($c[$champ]) && is_array(@unserialize($c[$champ]))){
+		else if(isset($c[$champ]) && is_array(@unserialize($c[$champ])))
 			$c[$champ] = $c[$champ];
-		}
-		else{
+		else
 			$c[$champ] = '';
-		}
 	}
 	
 	foreach(array(
@@ -166,9 +170,8 @@ function diogene_modifier($id_diogene,$set=false){
 	) as $texte){
 		if(isset($c[$champ]))
 			$c[$texte] = filtrer_entites($c[$texte]);
-		else {
+		else
 			$c[$texte] = '';
-		}
 	}
 
 	$invalideur = "id='diogene/$id_diogene'";
@@ -198,11 +201,10 @@ function diogene_modifier($id_diogene,$set=false){
 		unset($c['identifiant']);
 	}
 	$err = diogene_instituer($id_diogene, $c);
-
 	return $err;
 }
 
-function revision_diogene ($id_diogene, $c=false) {
+function revision_diogene($id_diogene, $c=false) {
 	return diogene_modifier($id_diogene,$c);
 }
 function diogene_set($id_diogene, $set=null) {
