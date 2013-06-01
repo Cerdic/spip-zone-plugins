@@ -47,7 +47,7 @@
 		Le secteur du diogene existe bien?
 		
 	]
-	<BOUCLE_secteur_existant(RUBRIQUES){id_rubrique=#ID_SECTEUR}>
+	<BOUCLE_secteur_existant(RUBRIQUES){id_rubrique=#ID_SECTEUR}{tout}>
 		[(#SET{autoriser_creer,#AUTORISER{creerdans,diogene,#_diogene:ID_DIOGENE}|?{oui,non}})]
 		[(#SET{limite_upload,[(#GET{id_diogene}|diogene_nombre_attente)]})]
 		<BOUCLE_article_env(ARTICLES){id_article=#ENV{id_article}}{id_secteur=#_diogene:ID_SECTEUR}{statut IN publie,prop,prepa}>
