@@ -118,7 +118,7 @@ Les utilisations avec ou sans module sont détectées.
 		[(#VAL{langonet:label_article_}|concat{#ELEMENT}|concat{#ENV{numero, defaut}}|_T)]
 		[(#VAL{langonet:label_article_}|concat{#ELEMENT}|concat{#ENV{numero, defaut}}|_T)]
 		[(#VAL{label_article_}|concat{#ELEMENT}|filtre_perso{#ENV{numero, defaut}}|trim|_T)]
-	- regexp	: %#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+{[^.]*})*)\|_T%s
+	- regexp	: %#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Us
 
 
 2.4 - Pour les fichiers PHP
