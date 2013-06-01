@@ -9,14 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_explication_nom_obligatoire' => 'La saisie d\'un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d\'un courriel.', # NEW
-	'cfg_forum_champs_obligatoires' => 'Champs obligatoires', # NEW
+	'cfg_forum_champs_obligatoires' => 'Povinné polia',
 	'cfg_forum_format_fil' => 'Liste ou thread ?', # NEW
 	'cfg_forum_longueur' => 'Dĺžka správ',
 	'cfg_forum_longueur_maxi' => 'Maximálna dĺžka',
 	'cfg_forum_longueur_mini' => 'Minimálna dĺžka',
-	'cfg_forum_permalien' => 'Permalien', # NEW
-	'cfg_label_apparence_permalien' => 'Apparence du lien permanent vers le commentaire', # NEW
-	'cfg_label_apparence_permalien_aucun' => 'Aucun', # NEW
+	'cfg_forum_permalien' => 'Trvalý odkaz',
+	'cfg_label_apparence_permalien' => 'Štýl trvalého odkazu ku komentáru',
+	'cfg_label_apparence_permalien_aucun' => 'Žiaden',
 	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)', # NEW
 	'cfg_label_apparence_permalien_diese' => 'Dièse (#)', # NEW
 	'cfg_label_apparence_permalien_picto' => 'Picto', # NEW
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom' => 'Meno',
 	'label_notification' => 'Prévenez-moi de tous les nouveaux commentaires de cette discussion par email', # NEW
 	'label_url' => 'Vaša webová stránka',
-	'lien_suivre_commentaires' => 'Suivre les commentaires :', # NEW
+	'lien_suivre_commentaires' => 'Sledovanie komentárov:',
 
 	// M
 	'moderation_info' => 'Upozornenie: Vaša správa sa zobrazí, až keď bude skontrolovaná a schválená.',
