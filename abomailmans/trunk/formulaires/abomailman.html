@@ -26,28 +26,28 @@
 		<fieldset>
 			<legend>#GET{legende}</legend>
 				<ul>
-					<li class="abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+					<li class="editer abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 						<label for="nom"><:abomailmans:nom:></label>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
 						<input name="nom" id="nom" type="text" class="text" value="#ENV{nom}" />
 					</li>
-					<li class="obligatoire abomailman_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+					<li class="editer obligatoire abomailman_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 						<label for="email_listes"><:abomailmans:email_abonnement:></label>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
 						<input name="email" id="email_listes" type="text" class="text" value="#ENV{email}" />
 					</li>
 					
-					<li class="abomailman_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
+					<li class="editer abomailman_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{listes})</span>]
 						<ul>
-							<li class="editer_listes">
+							<li class="editer editer_listes">
 							<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}{par num titre,titre}>
 							<div class="choix">
-								<label for="liste_#ID_ABOMAILMAN" class="#EDIT{titre}} #LANG" lang="#LANG"[ title="(#LANG|traduire_nom_langue)"]>#TITRE</label>
-								<input name="listes[]" type="checkbox" id="liste_#ID_ABOMAILMAN" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
-								[<p class="explications #EDIT{descriptif}">
+								[<p class="explication #EDIT{descriptif}">
 								(#DESCRIPTIF|PtoBR)
 								</p>]
+								<input name="listes[]" type="checkbox" id="liste_#ID_ABOMAILMAN" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
+								<label for="liste_#ID_ABOMAILMAN" class="#EDIT{titre}} #LANG" lang="#LANG"[ title="(#LANG|traduire_nom_langue)"]>#TITRE</label>
 							</div>
 							</BOUCLE_listes>
 							</li>
