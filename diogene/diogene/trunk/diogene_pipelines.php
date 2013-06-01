@@ -125,10 +125,12 @@ function diogene_editer_contenu_objet($flux){
 						$champ = 'liens_sites';
 					if (($champ == 'liens_sites') && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<fieldset>.*<\/fieldset>.*<\/li>,Uims",$flux['data'],$regs))
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer (editer_$champ).*<fieldset>.*<\/fieldset>.*<\/li>),Uims","",$flux['data'],1);
-					else if (($champ != 'liens_site') && (!isset($args['contexte'][$champ]) OR (strlen($args['contexte'][$champ]) == 0)) && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<\/li>,Uims",$flux['data'],$regs))
-						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer (editer_$champ).*<\/li>),Uims","",$flux['data'],1);
+					else if (($champ != 'liens_site') && (!isset($args['contexte'][$champ]) OR (strlen($args['contexte'][$champ]) == 0)) && preg_match(",<li [^>]*class=[\"']editer editer_($champ).*<\/li>,Uims",$flux['data'],$regs)){
+						$flux['data'] = preg_replace(",<li [^>]*class=[\"']editer editer_$champ.*<\/li>,Uims","",$flux['data'],1);
+					}
 				}
 			}
+
 			/**
 			 * On ajoute ce que l'on souhaite ajouter avant le formulaire
 			 */
@@ -176,12 +178,10 @@ function diogene_editer_contenu_objet($flux){
 					$contexte_selecteur['rubrique_principale'] = 'non';
 
 				$saisie_rubrique = recuperer_fond('formulaires/selecteur_rubrique',$contexte_selecteur);
-				
 				if($args['contexte']['id_parent'] > 0)
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"']editer.*),Uims",$saisie_rubrique."\\2",$flux['data'],1);
+					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims",$saisie_rubrique."\\2",$flux['data'],1);
 				else
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"']editer.*),Uims","\\2",$flux['data'],1);
-				
+					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims","\\2",$flux['data'],1);
 				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on'))
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
 			}else if(!test_espace_prive() && ($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
@@ -191,10 +191,10 @@ function diogene_editer_contenu_objet($flux){
 				$saisie_rubrique = recuperer_fond("formulaires/inc-selecteur-parents_diogene",$contexte);
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims",$saisie_rubrique."\\2",$flux['data'],1);
 			}
-			
 			/**
 			 * On ajoute en fin de formulaire les blocs supplémentaires
 			 */
+			
 			if (strpos($flux['data'],'<!--extra-->')!==FALSE){
 				$saisie = pipeline('diogene_ajouter_saisies',array('args'=>$args,'data' => ''));
 				/**
@@ -477,9 +477,9 @@ function diogene_pre_insertion($flux){
  */
 function diogene_pre_edition($flux){
 	$pipeline = pipeline('diogene_objets', array());
-	if(in_array($flux['args']['type'],array_keys($pipeline)) && ($flux['args']['action']=='modifier')){
+	if(in_array($flux['args']['type'],array_keys($pipeline)) && ($flux['args']['action']=='modifier'))
 		$flux = pipeline('diogene_traiter',$flux);
-	}
+
 	if(($flux['args']['table'] == 'spip_articles') && _request('changer_lang')){
 		$flux['data']['lang'] = _request('changer_lang');
 		$flux['data']['langue_choisie'] = 'oui';
@@ -487,9 +487,9 @@ function diogene_pre_edition($flux){
 	
 	if($flux['args']['table'] == 'spip_diogenes'){
 		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves'));
-		if(isset($flux['data']['options_complements'])){
+		if(isset($flux['data']['options_complements']))
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
-		}
+
 		foreach(array('champs_ajoutes','champs_caches') as $array){
 				if($val_array = _request($array)){
 					if(is_array($val_array))
