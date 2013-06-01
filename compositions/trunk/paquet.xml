@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/composition-32.png"
 	schema="0.5.0"
-	documentation="http://www.spip-contrib.net/?article3777"
+	documentation="http://contrib.spip.net/?article3777"
 >
 
 	<nom>Compositions</nom>
