@@ -29,9 +29,8 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 		if(is_numeric($id_objet)){
 			include_spip('inc/autoriser');
-			if(!autoriser('associerauteurs',$objet,$id_objet)){
+			if(!autoriser('associerauteurs',$objet,$id_objet))
 	    		return $flux;
-			}
 			
 			$nb_auteurs = sql_countsel('spip_auteurs','statut < 7');
 			if($nb_auteurs > 1){
@@ -39,9 +38,8 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 				while($auteur = sql_fetch($auteurs)){
 					$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
 				}
-				if(is_array($auteur_uniques) AND (count($auteur_uniques) > 0)){
+				if(is_array($auteur_uniques) AND (count($auteur_uniques) > 0))
 					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
-				}
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
 		}
