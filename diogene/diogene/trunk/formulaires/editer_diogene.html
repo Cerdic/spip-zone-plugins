@@ -1,3 +1,4 @@
+#CACHE{0}
 <div class="formulaire_spip formulaire_editer formulaire_editer_diogene formulaire_editer_diogene-#ENV{id_diogene,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -26,7 +27,7 @@
 				rows=10,
 				label=<:diogene:label_description:>})]
 				
-			#SET{pipeline,#PIPELINE{diogene_objets}}
+			[(#SET{pipeline,#PIPELINE{diogene_objets,#ARRAY{args,#ARRAY,data,#ARRAY}}})]
 			[(#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non)
 			[(#SAISIE{secteur,id_secteur,
 				cacher_option_intro=oui,
@@ -61,7 +62,6 @@
 						-* licence
 						...
 					]
-
 					#SET{champs_ajouts,#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{champs_sup}}
 					#SET{size,#GET{champs_ajouts}|count}
 					[(#GET{champs_ajouts}|count|>{0}|oui)
