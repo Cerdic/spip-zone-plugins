@@ -30,16 +30,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Stránka s podrobnými údajmi o kompase',
 
 	// I
-	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete mať možnosť využívať šablóny na zobrazenie verejne prístupných stránok.<br />Kompas opisuje súbor XML, ktorý obsahuje údaje o kompase a jeho stránkach.<br /><br />Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.', # MODIF
+	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
 	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať kompasy. Môžete navštíviť aj stránku s nastaveniami zobrazenia každého kompasu.</p>',
-	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nezobrazia, budú označené tieňom a sivým písmom.', # MODIF
+	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s popisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
 
 	// L
-	'label_1_boussole' => '@nb@ boussole', # NEW
+	'label_1_boussole' => '@nb@ kompas',
 	'label_1_site' => '@nb@ stránka',
 	'label_a_class' => 'Trieda so záložkou (kotvou) loga',
 	'label_actualise_le' => 'Aktualizovaný',
@@ -60,9 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_articles' => 'Maximálny počet zobrazených článkov na stránku',
 	'label_max_sites' => 'Maximálny počet stránok',
 	'label_mode' => 'Vyberte si kompas',
-	'label_mode_standard' => '"@boussole@" – oficiálny kompas stránok SPIPu', # MODIF
+	'label_mode_standard' => '"@boussole@", oficiálny kompas stránok SPIPu',
 	'label_modele' => 'Spôsob zobrazenia',
-	'label_n_boussoles' => '@nb@ boussoles', # NEW
+	'label_n_boussoles' => '@nb@ kompasov',
 	'label_n_sites' => '@nb@ stránok',
 	'label_nom' => 'Názov',
 	'label_p_class' => 'Trieda odseku s popisom',
@@ -82,9 +82,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"', # MODIF
+	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
 	'message_nok_champ_obligatoire' => 'Toto pole je povinné',
-	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy', # MODIF
+	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy
+(tabuľka @table@)',
 	'message_nok_xml_introuvable' => 'Súbor "@fichier@" sa nenašiel',
 	'message_nok_xml_invalide' => 'Súbor XML "@fichier@" s popisom kompasu nevyhovuje štandardu DTD',
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
