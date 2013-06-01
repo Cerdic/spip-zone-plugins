@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_desactiver_traduction_logo_objet' => 'Si l\'objet est traduit (présence d\'un id_trad comme pour les articles et rubriques) ce plugin fait en sorte que la balise #LOGO_ARTICLE p.ex cherche le logo de la traduction de l\'article (article de référence) si celui-ci ne dipose pas de logo.', # NEW
 
 	// L
-	'logo_objet' => 'Logo Objet', # NEW
+	'logo_objet' => 'Logo Objekt',
 
 	// M
 	'menu_langue' => 'Jazykové menu',
