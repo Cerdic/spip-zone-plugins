@@ -30,28 +30,30 @@
 			</li>
 		</ul>
 		<ul>
-		<li>
-			<div>
-				[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
-				<p class="explication">
-					<:emballe_medias:explication_medias_prepas_auth_publier:>
-				</p>]
-				[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
-				<p class="explication">
-					<:emballe_medias:explication_medias_prepas:>
-				</p>]
-				[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
-				<p class="explication">
-					<:emballe_medias:explication_medias_props_auth_publier:>
-				</p>]
-				[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
-				<p class="explication">
-					<:emballe_medias:explication_medias_props:>
-				</p>]
-			</div>
-		</li>
-		[(#SET{pagination_attente,[(#ENV{statuts_medias,prepa}|=={prepa}|?{100000,30})]})]
-		<INCLURE{fond=formulaires/media_edition_lot_liste,medias,id_diogene,id_secteur,erreurs,statuts_medias=#ENV{statuts_medias,prepa},pagination=#GET{pagination_attente},debut_medias,ajax} />
+			<li>
+				<div>
+					[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
+					<p class="explication">
+						<:emballe_medias:explication_medias_prepas_auth_publier:>
+					</p>]
+					[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
+					<p class="explication">
+						<:emballe_medias:explication_medias_prepas:>
+					</p>]
+					[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
+					<p class="explication">
+						<:emballe_medias:explication_medias_props_auth_publier:>
+					</p>]
+					[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
+					<p class="explication">
+						<:emballe_medias:explication_medias_props:>
+					</p>]
+				</div>
+			</li>
+			<li>
+			[(#SET{pagination_attente,[(#ENV{statuts_medias,prepa}|=={prepa}|?{100000,30})]})]
+			<INCLURE{fond=formulaires/media_edition_lot_liste,medias,id_diogene,id_secteur,erreurs,statuts_medias=#ENV{statuts_medias,prepa},pagination=#GET{pagination_attente},debut_medias,ajax} />
+			</li>
 		</ul>
 		<ul class="edition_par_lot">
 			[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
@@ -70,8 +72,7 @@
 			    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 			    	<label for="titre"><:info_titre:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
-				]
-					<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]" />
+				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]" />
 			    </li>
 			  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
 			    <li class="editer editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
@@ -83,7 +84,7 @@
 						<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 						]
-						(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+						(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent,#ENV{id_secteur}},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 			    </li>]
 				
 			  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
@@ -104,9 +105,7 @@
 					<label for="chapo"><:info_chapeau:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
 					]<textarea name='chapo' id='chapo'[ lang='(#LANGUE)'][ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
-				</li>]
-					]
-		
+				</li>]]
 				[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
 			  	<li class="editer editer_liens_sites fieldset">
 					<fieldset>
@@ -139,7 +138,7 @@
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
 					]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 			    </li>]
-			    [(#PIPELINE{diogene_ajouter_saisies,#ARRAY{args,#ENV**{diogene_args}},data,''})]
+			    [(#PIPELINE{diogene_ajouter_saisies,#ARRAY{args,#ENV**{diogene_args},data,''}})]
 			    <!--extra-->
 		</ul>
 		<p class="boutons">
