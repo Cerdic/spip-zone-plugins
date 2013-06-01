@@ -23,9 +23,8 @@ function diogene_spipicious_diogene_ajouter_saisies($flux){
 				while($tag = sql_fetch($tags)){
 					$tag_uniques[$tag['id_mot']] = $tag['titre'];
 				}
-				if(is_array($tag_uniques)){
+				if(is_array($tag_uniques))
 					$flux['args']['contexte']['diogene_spipicious_removal_tags'] = $tag_uniques;
-				}
 			}
     		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_spipicious',$flux['args']['contexte']);
 		}
