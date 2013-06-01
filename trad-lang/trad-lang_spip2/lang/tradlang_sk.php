@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'Žiaden modul.',
-	'auteur_revision' => '@nb@ modification de traduction.', # NEW
-	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
-	'auteur_revisions' => '@nb@ modifications de traductions.', # NEW
+	'auteur_revision' => '@nb@ úprava prekladu.',
+	'auteur_revision_specifique' => '@nb@ úprava prekladu v jazyku <abbr title="@lang@">@langue_longue@</abbr>.',
+	'auteur_revisions' => '@nb@  úprav prekladu.',
 	'auteur_revisions_langue' => 'La langue de ses participations :', # NEW
 	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :', # NEW
-	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'auteur_revisions_specifique' => '@nb@ úprav prekladu v jazyku<abbr title="@lang@">@langue_longue@</abbr>.',
 
 	// B
 	'bouton_activer_lang' => 'Aktivovať jazyk "@lang@" pre tento modul',
@@ -96,9 +96,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importermodule' => 'Nahrať modul',
 	'info_1_tradlang' => '@nb@ jazykových reťazcov',
 	'info_1_tradlang_module' => '1 jazykový modul',
-	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
+	'info_aucun_participant_lang' => 'Do jazyka <abbr title="@lang@">@langue_longue@</abbr> neprekladá žiaden z autorov stránky.',
 	'info_aucun_tradlang_module' => 'Žiaden jazykový modul',
-	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.', # NEW
+	'info_auteur_sans_favori' => 'Tento autor nemá žiaden obľúbený modul.',
 	'info_chaine_jamais_modifiee' => 'Tento reťazec sa ešte nikto nikdy neupravoval.',
 	'info_chaine_originale' => 'Tento reťazec je reťazec originálu',
 	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_modif' => 'V jazyku  @lang@ (@langue_longue@) je zmenených a na schválenie @pc@ % prioritných položiek',
 	'info_nb_items_priorite_new' => '@pc@ % prioritných položiek "@priorite@" v jazyku @lang@ (@langue_longue@) sú nové položky',
 	'info_nb_items_priorite_ok' => 'Prioritné moduly "@priorite@" sú do jazyka @lang@ (@langue_longue@) preložené na @pc@ %',
-	'info_nb_modules_favoris' => '@nb@ modules favoris.', # NEW
+	'info_nb_modules_favoris' => '@nb@obľúbených modulov.',
 	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
 	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
@@ -137,11 +137,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_percent_chaines' => '@traduites@/@total@ preložených reťazcov do jazyka "[@langue@] @langue_longue@"',
 	'info_revisions_stats' => 'Zmeny',
 	'info_status_ok' => 'OK',
-	'info_statut' => 'Statut', # NEW
+	'info_statut' => 'Stav',
 	'info_str' => 'Text jazykového reťazca',
-	'info_textarea_readonly' => 'Ce champ de texte est en lecture seule', # NEW
+	'info_textarea_readonly' => 'Toto textové pole je len na čítanie',
 	'info_tradlangs_sans_version' => '@nb@ chaînes de langue n\'ont pas de première révision créée (ces premières révisions sont créées par CRON).', # NEW
-	'info_traducteur' => 'Traducteur(s)', # NEW
+	'info_traducteur' => 'Preložil(i)',
 	'info_traduire_module_lang' => 'Preložiť modul "@module@" do @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'Informácie o prekladoch',
 	'item_creer_langue_cible' => 'Vytvoriť nový cieľový jazyk',
@@ -150,12 +150,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_manquant' => 'v tomto jazyku chýba jedna položka (z jazyka autora)',
 	'items_en_trop' => 'v tomto jazyku je naviac @nb@ položiek (oproti jazyku autora)',
 	'items_manquants' => 'v tomto jazyku chýba @nb@ položiek (z jazyka autora)',
-	'items_modif' => 'Zmenených položiek', # MODIF
-	'items_new' => 'Nových položiek', # MODIF
-	'items_total_nb' => 'Celkový počet položiek', # MODIF
+	'items_modif' => 'Zmenené položky:',
+	'items_new' => 'Nových položiek:',
+	'items_total_nb' => 'Celkový počet položiek:',
 
 	// J
-	'job_creation_revisions_modules' => 'Création des révisions d\'origine du module "@module@"', # NEW
+	'job_creation_revisions_modules' => 'Vytváranie pôvodných úprav modulu "@module@"',
 
 	// L
 	'label_fichier_langue' => 'Jazykový súbor, ktorý chcete nahrať',
@@ -180,7 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Popis modulu',
 	'label_tradlang_comm' => 'Kommentár',
 	'label_tradlang_status' => 'Stav prekladu',
-	'label_tradlang_str' => 'Preložený reťazec', # MODIF
+	'label_tradlang_str' => 'Preložený reťazec (@lang@)',
 	'label_update_langues_cible_mere' => 'Aktualizovať tento jazyk v databáze',
 	'label_valeur_fichier' => 'Vo vašom súbore',
 	'label_valeur_fichier_valider' => 'Potvrďte zmenu vo svojom súbore',
@@ -235,7 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucune_nouvelle_langue_dispo' => 'Tento modul je dostupný vo všetkých jazykoch',
 	'message_changement_lang_orig' => 'Vybraný jazyk originálu ("@lang_orig@") nie je preložený dostatočne, bude nahradený jazykom "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'Vybraný jazyk originálu ("@lang_orig@") neexistuje, bude nahradený jazykom "@lang_nouvelle@".',
-	'message_changement_statut' => 'Modification du statut de "@statut_old@" en ""@statut_new@"', # NEW
+	'message_changement_statut' => 'Zmena stavu z(o) "@statut_old@" na ""@statut_new@"',
 	'message_confirm_redirection' => 'Budete presmerovaný na zmenu modulu',
 	'message_demande_update_langues_cible_mere' => 'Môžete požiadať administrátora o opätovnú synchronizáciu tohto jazyka s hlavným jazykom.',
 	'message_info_choisir_langues_profiles' => '<a href="@url_profil@">Vo svojom profile</a> si môžete vybrať obľúbené jazyky a používať ich ako predvolené.',
@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_tradlang_module' => 'Logo modulu',
 	'titre_modifications_chaines' => 'Posledné zmeny tohto reťazca',
 	'titre_modifier' => 'Upraviť',
-	'titre_page_auteurs' => 'Liste des contributeurs', # NEW
+	'titre_page_auteurs' => 'Zoznam prispievateľov',
 	'titre_page_configurer_tradlang' => 'Nastavenia zásuvného modulu Trad-lang',
 	'titre_page_tradlang_module' => 'Modul #@id@ : @module@',
 	'titre_profil_auteur' => 'Upraví váš profil',
@@ -351,10 +351,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'Jeho/jej príspevky',
 	'titre_revisions_sommaire' => 'Posledné zmeny',
 	'titre_revisions_vos' => 'Vaše príspevky',
-	'titre_stats_ses' => 'Ses statistiques', # NEW
+	'titre_stats_ses' => 'Jeho alebo jej štatistiky',
 	'titre_stats_trads_journalieres' => 'Počet zmien za deň',
 	'titre_stats_trads_mensuelles' => 'Počet zmien za mesiac',
-	'titre_stats_vos' => 'Vos statistiques', # NEW
+	'titre_stats_vos' => 'Vaše štatistiky',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Jazykové reťazce',
 	'titre_tradlang_module' => 'Jazykový modul',
