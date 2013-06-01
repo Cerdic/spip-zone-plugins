@@ -1,7 +1,7 @@
 <paquet
 	prefix="todo"
 	categorie="edition"
-	version="1.1.4"
+	version="1.2.0"
 	etat="test"
 	compatibilite="[2.1.8;3.0.*]"
 	logo="images/todo-48.png"

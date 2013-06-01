@@ -23,6 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_afaire' => 'À faire',
 	'statut_encours' => 'En cours',
 	'statut_termine' => 'Terminé',
+	'statut_abandonne' => 'Abandonné',
+	'statut_arrete' => 'Arrêté',
+	'statut_alerte' => 'Alerte, nécessite une action',
+	'statut_inconnu' => 'Alerte, statut non connu',
 
 	// T
 	'tri_cle' => 'Remettre dans l\'ordre',
