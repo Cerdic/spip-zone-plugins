@@ -7,27 +7,23 @@
 		<strong><:emballe_medias:type_media:></strong>
 		[(#VAL{emballe_medias:type_#EM_TYPE}|_T)]
 	</p>]
-	[<p><strong><:par_auteur|ucfirst:> : </strong> 
+	[<p><strong><:par_auteur|ucfirst:>: </strong> 
 		(#LESAUTEURS)
 	</p>]
 	<p>
-		<strong><:diogene:info_statut:> </strong>[(#STATUT|puce_statut{article,#ID_ARTICLE})] 
-		[(#STATUT|=={publie}|oui)
-			<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-		[(#STATUT|=={publie}|non)
-			[(#STATUT|diogene_info_statut)]]
-		#SET{est_auteur,non})]
-		<BOUCLE_auteurs_article(AUTEURS){id_article}{id_auteur=#SESSION{id_auteur}}>
-			#SET{est_auteur,oui}
-		</BOUCLE_auteurs_article>
-		</B_auteurs_article>
-			[(#BOITE_OUVRIR{'',notice})]
-			<p><:diogene:message_pas_auteur:></p>
-			[(#BOITE_FERMER)]
-		<//B_auteurs_article>
-		[(#GET{nb_files_count}|=={0}|et{#GET{id_article}|intval}|oui)
-			[(#BOUTON_ACTION{[(#GET{est_auteur}|=={oui}|?{<:diogene:texte_statut_poubelle_normal:>,<:diogene:texte_statut_poubelle_normal_pas_auteur:>})],[(#URL_ACTION_AUTEUR{instituer_objet,article-#GET{id_article}-poubelle,[(#SELF|parametre_url{id_article,''}|parametre_url{em_type,''})]})],'',<:diogene:message_confirm_poubelle:>})]
-		]
+		<strong><:diogene:info_statut:> </strong>[(#STATUT|puce_statut{article,#ID_ARTICLE}|inserer_attribut{alt,''})] 
+		[(#STATUT|=={publie}|?{[<a href="#URL_ARTICLE" class="spip_in">(#STATUT|diogene_info_statut)</a>],[(#STATUT|diogene_info_statut)]})]
+		[(#SET{est_auteur,non})]
+		<BOUCLE_auteurs_article(AUTEURS){id_article}{id_auteur=#SESSION{id_auteur}}>[(#SET{est_auteur,oui})] </BOUCLE_auteurs_article>
+		</B_auteurs_article>[
+			(#BOITE_OUVRIR{'',notice})
+			<p><:diogene:message_pas_auteur:></p>][
+			(#BOITE_FERMER)
+		]<//B_auteurs_article>
+		<BOUCLE_document(DOCUMENTS){id_article}{tout}> </BOUCLE_document>
+		</B_document>
+		[(#BOUTON_ACTION{[(#GET{est_auteur}|=={oui}|?{<:diogene:texte_statut_poubelle_normal:>,<:diogene:texte_statut_poubelle_normal_pas_auteur:>})],[(#URL_ACTION_AUTEUR{instituer_objet,article-#GET{id_article}-poubelle,[(#SELF|parametre_url{id_article,''}|parametre_url{em_type,''})]})],'',<:diogene:message_confirm_poubelle:>})]]
+		<//B_document>
 	</p>
 	<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
 		<B_si_traduction>
