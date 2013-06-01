@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Udeliť mi prístup do tejto oblasti',
-	'aucune_zone' => 'Žiadne oblasti',
+	'aucune_zone' => 'Žiadna oblasť',
 	'auteurs' => 'autori',
 
 	// B
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Popis',
 
 	// E
-	'explication_creer_htaccess' => 'Táto možnosť bráni čítaniu pripojeného súboru, ak text ku ktorému je pripojený, nie je publikovaný', # MODIF
+	'explication_creer_htaccess' => 'Táto možnosť bráni čítaniu pripojených súborov, ak text, ku ktorému sa pripoja, ešte nie je publikovaný',
 
 	// I
 	'icone_menu_config' => 'Obmedzený prístup',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zones' => 'Táto rubrika sa nachádza v oblastiach:',
 
 	// L
-	'label_creer_htaccess' => 'Prístup k pripojeným súborom podľa ich adresy', # MODIF
+	'label_creer_htaccess' => 'Prístup k pripojeným súborom podľa ich URL',
 	'label_creer_htaccess_non' => 'Povoliť čítanie',
 	'label_creer_htaccess_oui' => 'Zakázať čítanie',
 
