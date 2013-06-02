@@ -46,7 +46,9 @@ function contact_formulaire_verifier($flux){
 				include_spip('action/inscrire_auteur');
 				creer_pass_pour_auteur($auteur['id_auteur']);
 				sql_updateq('spip_auteurs',array('prefs' => $statut_inscription,'statut' => 'nouveau','login'=> $email),'id_auteur = '.intval($auteur['id_auteur']));
-				$flux['data']['message_erreur'] = _T('contact:message_redemander_pass',array('email'=>$email,'url_pass'=>generer_url_public('spip_pass')));
+				$flux['data'] = array(
+									'message_erreur' => _T('contact:message_redemander_pass',array('email'=>$email,'url_pass'=>generer_url_public('spip_pass')))
+								);
 			}		
 		}
 	}
