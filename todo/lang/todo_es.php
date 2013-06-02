@@ -22,8 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_inserer_todo_plus' => 'Insertar una tarea para hacer',
 
 	// S
+	'statut_abandonne' => 'Abandonné', # NEW
 	'statut_afaire' => 'Para hacer',
+	'statut_alerte' => 'Alerte, nécessite une action', # NEW
+	'statut_arrete' => 'Arrêté', # NEW
 	'statut_encours' => 'En curso',
+	'statut_inconnu' => 'Alerte, statut non connu', # NEW
 	'statut_termine' => 'Terminado',
 
 	// T
