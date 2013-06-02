@@ -348,7 +348,8 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 				'id_auteur' => $id_aut,
 				'date_heure' => date('Y-m-d H:i:s'),
 				'texte' => $texte,
-				'rv' => 'non'
+				'destinataires' => join(', ', $destinataire),
+				'rv' => ''
 			)
 		);
 

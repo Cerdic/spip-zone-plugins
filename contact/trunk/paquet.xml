@@ -1,7 +1,7 @@
 <paquet
 	prefix="contact"
 	categorie="communication"
-	version="0.10.3"
+	version="0.11.0"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.1.0["
 	logo="prive/themes/spip/images/contact-32.png"
@@ -21,10 +21,9 @@
 	<traduire module="contact" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="jqueryui_plugins" inclure="contact_pipelines.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/contact_tables.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/contact_tables.php" />
 	<pipeline nom="contact_infos_supplementaires" action="" />
 	<pipeline nom="ieconfig_metas" inclure="contact_ieconfig_metas.php" />
+	<pipeline nom="formulaire_verifier" inclure="contact_pipelines.php" />
 
 	<utilise nom="facteur" />
 	<utilise nom="inserer_modeles" compatibilite="[0.4.3;[" />
