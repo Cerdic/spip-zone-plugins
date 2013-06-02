@@ -1,3 +1,4 @@
+<div class="ajax">
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
 	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -17,14 +18,15 @@
 				label=<:almanach:label_url:>,
 				explication=<:almanach:explication_url:> })]
 
-			[(#SAISIE{selecteur_article, id_article, obligatoire=oui,
+			[(#SAISIE{input, id_article, obligatoire=oui,
 				label=<:almanach:label_id_article:>,
 				explication=<:almanach:explication_id_article:> })]
 
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type='submit' class='submit' value='suivant' /></p>
+		<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p>
 	</div></form>
 	]
+</div>
 </div>

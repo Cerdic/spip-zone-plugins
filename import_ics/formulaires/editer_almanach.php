@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-
+include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
@@ -59,8 +59,8 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  *     Environnement du formulaire
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = array(/*'formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden)',*/
-						'_etapes'=>2);
+	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs[_etapes]=2;//on rajoute  un couple clé/valeur pour le nombre d'étapes du formulaire
 	return $valeurs;
 
 }
@@ -87,7 +87,7 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
 }
 
@@ -114,9 +114,6 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  *     Retours des traitements
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-
-	include_spip('lib/iCalcreator.class');
-
 
 	# on passe par un fichier temp car notre librairie fonctionne comme ca
 	$tmp = _DIR_TMP . 'ics-'.md5('url');
