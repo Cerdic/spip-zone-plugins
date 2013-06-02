@@ -37,7 +37,7 @@ function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array){
  */
 
 function inscription3_i3_exceptions_des_champs_auteurs_elargis($array){
-	// liste des champs pour lesquels on ne doit pas créer de champ dans la table spip_auteurs
+	// liste des champs pour lesquels on ne doit pas créer de champs dans la table spip_auteurs
 
 	// Principalement les champs déjà présents dans spip_auteurs
 	$array[] = 'id_auteur';
@@ -78,11 +78,11 @@ function inscription3_i3_exceptions_des_champs_auteurs_elargis($array){
  * Insertion dans le pipeline i3_verifications_specifiques du plugin inscription3
  * Utilisation de l'API verifier du plugin éponyme
  *
- * Pour chaque champ on fourni un array associatif contenant :
+ * Pour chaque champs on fourni un array associatif contenant :
  * - type => la fonction de l'api de vérification à utiliser
  * - options => un array des options à passer à cette fonction
  *
- * @return array Tableau contenant plusieurs tableaux en fonction du type de champ
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champs
  * @param object $array Doit recevoir un tableau du même type
  */
 
@@ -245,7 +245,7 @@ function inscription3_formulaire_charger($flux){
 		$chercher_champs = charger_fonction('inscription3_champs_formulaire','inc');
 		$champs = $chercher_champs(null,'inscription');
 		foreach($champs as $clef =>$valeur) {
-			$valeurs[$valeur] = _request($valeur);
+            $valeurs[$valeur] = _request($valeur);
 			if (is_array($valeurs[$valeur])) {
 				$valeurs[$valeur] = implode(',',$valeurs[$valeur]);
 			}
@@ -330,9 +330,7 @@ function inscription3_formulaire_verifier($flux){
 
 		include_spip('inscription3_fonctions');
 		include_spip('inc/editer');
-		
 		$config_i3 = lire_config('inscription3',array());
-		$erreurs['message_erreur'] = $flux['args']['erreurs']['message_erreur'];
 		if($erreurs['message_erreur'] == NULL)
 			unset($erreurs['message_erreur']);
 		/**
@@ -344,7 +342,7 @@ function inscription3_formulaire_verifier($flux){
 		unset($obligatoires['email']);
 		unset($obligatoires['nom']);
 		$erreurs = array_merge($erreurs,formulaires_editer_objet_verifier('auteur',null,$obligatoires));
-		
+
 		if($flux['args']['form'] == 'inscription'){
 			if(lire_config('inscription3/pass_obligatoire') == 'on' && lire_config('inscription3/pass') == 'on'){
 				if(!_request('pass') OR !_request('password1'))
@@ -475,7 +473,7 @@ function inscription3_formulaire_verifier($flux){
 		/**
 		 * Message d'erreur generalise
 		 */
-		if (count($erreurs)) {
+		if (count($erreurs) && !isset($erreurs['message_erreur'])) {
 			if(isset($erreurs_obligatoires))
 				$erreurs['message_erreur'] .= _T('inscription3:formulaire_remplir_obligatoires');
 			else
@@ -827,8 +825,8 @@ function inscription3_editer_contenu_objet($flux){
 			}
 			/**
 			 * On vire le champs création du formulaire (ne doit pas être modifié manuellement)
-			 * Si on n'a pas ce champ rempli, on utilise la date actuelle pour le remplir
-			 * Logiquement ce champ est rempli automatiquement via pre_insertion pour tous les auteurs
+			 * Si on n'a pas ce champs rempli, on utilise la date actuelle pour le remplir
+			 * Logiquement ce champs est rempli automatiquement via pre_insertion pour tous les auteurs
 			 */
 			if($config['creation'] == 'on'){
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_creation.*<\/li>),Uims","",$flux['data'],1);
