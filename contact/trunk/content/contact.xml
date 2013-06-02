@@ -1,0 +1,5 @@
+<page>
+	<nom><:contact:titre_court:></nom>
+	<description><:contact:description_page-contact:></description>
+	<icon>prive/themes/spip/images/contact-24.png</icon>
+</page>
