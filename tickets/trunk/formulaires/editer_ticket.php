@@ -86,14 +86,16 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
                 $erreurs['titre'] = _T('nospam:erreur_spam');
         // on analyse le texte
         $infos_texte = analyser_spams($texte);
-		
+
         if ($infos_texte['nombre_liens'] > 0) {
+        		$max_liens = defined('_DIR_PLUGIN_TODO') ? 6 : 3;
+				$max_caracteres_liens = defined('_DIR_PLUGIN_TODO') ? 1 : 3;
                 // si un lien a un titre de moins de 3 caracteres = spam !
-                if ($infos_texte['caracteres_texte_lien_min'] < 3) {
+                if ($infos_texte['caracteres_texte_lien_min'] < $max_caracteres_liens) {
                         $erreurs['texte'] = _T('nospam:erreur_spam');
                 }
                 // si le texte contient plus de trois lien = spam !
-                if ($infos_texte['nombre_liens'] > 3 && !isset($GLOBALS['visiteur_session']['id_auteur']))
+                if ($infos_texte['nombre_liens'] > $max_liens && !isset($GLOBALS['visiteur_session']['id_auteur']))
                         $erreurs['texte'] = _T('nospam:erreur_spam');
         }
 	}
