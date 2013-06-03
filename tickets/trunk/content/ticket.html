@@ -44,9 +44,14 @@
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
 	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+	
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
-	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
+	
+	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET,env,ajax=documents}>
+	[(#AUTORISER{joindredocument,ticket,#ID_TICKET}|oui)
+	<br class="nettoyeur" />
+	<INCLURE{fond=prive/squelettes/inclure/ajouter-documents,objet=ticket,id_objet=#ENV{id_ticket},env,ajax} />]
 </div>
 
 <a href="#forum" name="forum" id="forum"></a>

@@ -1,11 +1,12 @@
 [(#REM) Portfolio : album d'images ]
+<div id="portfolios">
 <B_documents_portfolio>
-<div class="documents documents_portfolio">
+<div id="illustrations" class="documents documents_portfolio">
 	<h2 class="h2"><:medias:info_portfolio:></h2>
 	<B_documents_portfolio>
 	<ul class="liste-items">
-	<BOUCLE_documents_portfolio(DOCUMENTS) {id_ticket} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{vu=non}{tout}>
-	<li class="item">
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_ticket}{extension IN png,jpg,gif} {par num titre, date}{vu=non}{tout}>
+	<li class="item" id="doc#ID_DOCUMENT">
 	<a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"[ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
 		|image_reduire{0,100}
 		|inserer_attribut{class,spip_logos}
@@ -29,7 +30,7 @@
 	Liste des autres documents joints
 ]
 <B_documents_joints>
-	<div class="liste documents documents_joints">
+	<div id="documents" class="liste documents documents_joints">
 	<h2 class="h2"><:medias:titre_documents_joints:></h2>
 	<ul class="liste-items">
 		<BOUCLE_documents_joints(DOCUMENTS) {id_ticket} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}{tout}>
@@ -49,3 +50,25 @@
 	</ul>
 	</div>
 </B_documents_joints>
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+function check_reload_page(){
+	var reload = false;
+	if($('#illustrations').length && !$('#illustrations .item').length){
+		$('#illustrations').remove();reload = true;
+	}
+	if($('#portfolio').length && !$('#portfolio .item').length){
+		$('#portfolio').remove();reload = true;
+	}
+	if($('#documents').length && !$('#documents .item').length){
+		$('#documents').remove();reload = true;
+	}
+	if (reload) {
+		jQuery('#portfolios').ajaxReload();
+		jQuery('#navigation .box.info').ajaxReload();
+	}
+}
+if (window.jQuery) jQuery(function(){onAjaxLoad(check_reload_page);});
+/*]]>*/</script>
