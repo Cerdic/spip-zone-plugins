@@ -21,7 +21,10 @@ function exec_suppr_groupe() {
 		echo association_navigation_onglets('gestion_groupes', 'adherents');
 /// AFFICHAGES_LATERAUX : INFO
 		$infos['ordre_affichage_groupe'] = $groupe['affichage'];
-		$infos['entete_commentaire'] = $groupe['commentaire'];
+		if (test_plugin_actif('ACCESRESTREINT') AND $groupe['id_zone'])
+			$infos['accesrestreint:page_zones_acces'] = sql_getfetsel('titre', 'spip_zones',"id_zone=$groupe[id_zone]");
+		if ($groupe['commentaire'])
+			$infos['entete_commentaire'] = $groupe['commentaire'];
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
 		echo association_tablinfos_intro($groupe['nom'], 'groupe', $id_groupe, $infos );
 /// AFFICHAGES_LATERAUX : RACCOURCIS
