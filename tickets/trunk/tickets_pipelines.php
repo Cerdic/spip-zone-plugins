@@ -95,7 +95,6 @@ function tickets_accueil_informations($flux){
 	return $flux;
 }
 
-
 /**
  * Insertion dans le pipeline affiche milieu (SPIP) 
  * 
@@ -136,14 +135,12 @@ function tickets_forum_objets_depuis_env($objets){
  * @return array $flux Le contexte du formulaire modifié
  */
 function tickets_formulaire_charger($flux){
-	if ($flux['args']['form'] == 'forum'){
-		if($flux['args']['args'][0] == 'ticket'){
-			$flux['data']['objet'] = 'ticket';
-			$flux['data']['id_objet'] = $flux['args']['args'][1];
-			$flux['data']['id_ticket'] = $flux['args']['args'][1];
-			$flux['data']['ticket_statut'] = _request('ticket_statut');
-			$flux['data']['id_assigne'] = _request('id_assigne');
-		}
+	if (($flux['args']['form'] == 'forum') && ($flux['args']['args'][0] == 'ticket')){
+		$flux['data']['objet'] = 'ticket';
+		$flux['data']['id_objet'] = $flux['args']['args'][1];
+		$flux['data']['id_ticket'] = $flux['args']['args'][1];
+		$flux['data']['ticket_statut'] = _request('ticket_statut');
+		$flux['data']['id_assigne'] = _request('id_assigne');
 	}
 	return $flux;
 }
