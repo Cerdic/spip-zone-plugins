@@ -13,8 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 $pc_norme = array(
 	'[1-9]', //0: classes
-	'[0-9]', //1: sous-classes (en fait pas de : 09, 17, 27, 30, 31, 34, 35, 36, 38, 40, 41, 43 a 49, 50, 51, 53 a 59, 70 a 78, 81 a 84, 86, 88, 93 a 98)
-	3, //2: min longueur code
+	'[0-9]', //1: sections (en fait pas de : 09, 17, 27, 30, 31, 34, 35, 36, 38, 40, 41, 43 a 49, 50, 51, 53 a 59, 70 a 78, 81 a 84, 86, 88, 93 a 98)
+	'[0-9]', //2: groupes
 );
 
 // http://www.lpg-fiduciaire-de-suisse.ch/plan-comptable-pour-les-entreprises-suisses.html
@@ -334,7 +334,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	653 => "Honoraires pour fiduciaire et conseil",
 	6530 => "Honoraires pour fiduciaire",
 	6531 => "Honoraires pour conseil",
-	6532 => "Honoraires pour conseil juridique"
+	6532 => "Honoraires pour conseil juridique",
 	654 => "Conseil d'administration, AG, OR",
 	6540 => "Charges pour conseil d'administration",
 	6541 => "Charges pour assemblée générale",

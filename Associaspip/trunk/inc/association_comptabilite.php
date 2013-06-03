@@ -453,13 +453,11 @@ function comptabilite_verifier_classe($classe, $plan='', $lang='') {
  */
 function comptabilite_verifier_code($code, $classe='', $plan='', $lang='') {
     $regles = comptabilite_liste_planregles($plan, $lang);
-    $len = intval($regles[2])?intval($regles[2]):2; // si pas defini on prend '2'
-    $c0 = $regles[0]?$regles[0]:'[0-9]'; // si pas defini on prend un chiffre
-    $c1 = $regles[1]?$regles[1]:'[0-9]'; // si pas defini on prend un chiffre
-    if ( !preg_match('/^'.$c0.$c1.'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
-	return _T('asso:erreur_plan_code', array('nombre'=>$len,) );
-    elseif ( strlen($code)<$len ) // champ de longueur insuffisante
-	return _T('compta:erreur_code_longueur', array('nombre'=>$len,) );
+    $regles = is_array($regles)?$regles:array('[0-9]', '[0-9]'); // si pas defini on prend deux chiffres
+    if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
+	return _T('asso:erreur_plan_code', array('nombre'=>count($regles),) );
+#    elseif ( strlen($code)<count($regles) ) // champ de longueur insuffisante
+#	return _T('compta:erreur_code_longueur', array('nombre'=>count($regles),) );
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
     return '';
