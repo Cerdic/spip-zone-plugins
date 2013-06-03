@@ -1,10 +1,11 @@
 <paquet
 prefix="feuillederoute"
 categorie="communication"
-version="1.2.1"
+version="1.3.0"
 etat="test"
-compatibilite="[3.0.0;3.*]"
+compatibilite="[3.0.0;3.0.*]"
 logo="images/feuillederoute-32.png"
+schema="0.0.1"
 documentation="http://contrib.spip.net/Feuille-de-Route"
 	>	
 

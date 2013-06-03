@@ -11,7 +11,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<!-- titre -->
 		<label><:feuillederoute:titre:></label>
-		<input id="titre" name="titre" value="[(#CONFIG{feuillederoute/titre}|?{#CONFIG{feuillederoute/titre},<:feuillederoute:feuillederoute:>})]"></input>
+		<input id="titre" name="titre" value="#CONFIG{feuillederoute/titre}"></input>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
 		</p>

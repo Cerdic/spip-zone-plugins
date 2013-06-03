@@ -1,2 +1,2 @@
-
-- peut-on/doit-on supprimer le fichier IMG/feuillederoute.php en désactivant le plugin ? --- supprimer le fichier à la désinstallation du plugin....
+pour l'instant rien du tout
+;o)
