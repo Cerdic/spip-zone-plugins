@@ -23,8 +23,8 @@ function exec_membres_groupe() {
 		if ($id_groupe>=100) {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
-		if ($groupe['id_zone'])
-			$infos['accesrestreint:page_zones_acces'] = @sql_getfetsel('titre', 'spip_zones',"id_zone=$groupe[id_zone]");
+		if (test_plugin_actif('ACCESRESTREINT') AND $groupe['id_zone'])
+			$infos['accesrestreint:page_zones_acces'] = sql_getfetsel('titre', 'spip_zones',"id_zone=$groupe[id_zone]");
 		if ($groupe['commentaire'])
 			$infos['entete_commentaire'] = $groupe['commentaire'];
 		$infos['entete_utilise'] = _T('asso:nombre_fois', array('nombre'=>sql_countsel('spip_asso_fonctions',"id_groupe=$id_groupe")) );
