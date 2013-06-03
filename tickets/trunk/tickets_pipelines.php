@@ -32,7 +32,7 @@ function tickets_affiche_gauche($flux) {
 			$ret .= boite_fermer();
 		}
 		
-		$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$connect_id_auteur, "statut"=>"redac", 'bloc'=>'_bloc1');
+		$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'], "statut"=>"redac", 'bloc'=>'_bloc1');
 		$options = array("ajax"=>true);
 		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
 		$ret .= $page;
@@ -66,8 +66,8 @@ function tickets_accueil_informations($flux){
 	$cpt = $cpt2 = array();
 	$defaut = $where ? '0/' : '';
 	while($row = sql_fetch($q)) {
-	  $cpt[$row['statut']] = $row['cnt'];
-	  $cpt2[$row['statut']] = $defaut;
+		$cpt[$row['statut']] = $row['cnt'];
+		$cpt2[$row['statut']] = $defaut;
 	}
 
 	if ($cpt) {
