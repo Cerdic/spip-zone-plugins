@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_non_modifiee' => 'Assignation non mise à jour',
 	'assignation_supprimee' => 'L\'assignation de ce ticket a été supprimée.',
 	'assigne_a' => 'Assigné à :',
+	'assigne_a_th' => 'Assigné à',
 	'assignes_a' => 'Assignés à',
 	'autres_tickets_ouverts' => 'Les autres tickets ouverts',
 
@@ -149,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Ajouté :',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NUMÉRO :',
+	'info_sans' => 'Non défini',
 	'info_sans_version' => 'Sans version',
 	'info_ticket_1' => '1 ticket',
 	'info_ticket_aucun' => 'Aucun ticket',

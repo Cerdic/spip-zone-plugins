@@ -75,7 +75,7 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 // Affichage de la page des tickets classes par version
 function tickets_classer_par_version($bidon) {
 	$page = NULL;
-	if (defined('_TICKETS_LISTE_VERSIONS') OR lire_config('tickets/general/versions')) {
+	if (defined('_TICKETS_LISTE_VERSIONS') OR lire_config('tickets/general/versions')){
 		if (defined('_TICKETS_LISTE_VERSIONS'))
 			$liste = explode(":", _TICKETS_LISTE_VERSIONS);
 		else
@@ -83,11 +83,12 @@ function tickets_classer_par_version($bidon) {
 		
 		$liste = array_map('trim',$liste);
 		
+		include_spip('inc/texte');
 		$i = 0;
 		foreach($liste as $_version) {
 			$i += 1;
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_version').' '.$_version, 'statut' => 'ouvert', 'version' => $_version, 'bloc' => "_bloc$i")),
+				array_merge($_GET, array('titre' => _T('tickets:champ_version').' '.((strlen($_version) > 0) ? extraire_multi($_version) : _T('tickets:info_sans_version')), 'statut' => 'ouvert', 'version' => $_version, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
 		}
 	}
@@ -131,7 +132,7 @@ function tickets_classer_par_composant($bidon) {
 		foreach($liste as $_composant) {
 			$i += 1;
 			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_composant').' '.$_composant, 'statut' => 'ouvert', 'composant' => $_composant, 'bloc' => "_bloc$i")),
+				array_merge($_GET, array('titre' => _T('tickets:champ_composant').' '.((strlen($_composant) > 0) ? $_composant : _T('tickets:info_sans')), 'statut' => 'ouvert', 'composant' => $_composant, 'bloc' => "_bloc$i")),
 				array('ajax'=>true));
 		}
 	}
@@ -211,9 +212,8 @@ function tickets_liste_statut($connecte = true){
 		"ferme" => _T("tickets:statut_ferme"),
 		"poubelle" => _T("tickets:statut_poubelle")
 	);
-	if (!$connecte) {
+	if (!$connecte)
 		unset($statuts['redac']);
-	}
 	return $statuts;
 }
 
