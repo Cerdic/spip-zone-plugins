@@ -1,0 +1,21 @@
+#CACHE{0}
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=scextras -->
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#GENERER_SAISIES{#ENV{mes_saisies}}
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" name="_cfg_ok" value="<:scextras:bouton_synchro:>" />
+		</p>
+		</div>
+	</form>
+</div>
