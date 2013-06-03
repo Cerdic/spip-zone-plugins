@@ -4,7 +4,8 @@
  * Licence GPL (c) 2008-2013
  *
  * Formulaire d'édition de tickets
- *
+ * 
+ * @package SPIP\Tickets\Formulaires
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -15,24 +16,42 @@ include_spip('inc/editer');
 include_spip('inc/filtres'); # Pour extraire_muti dans editer_ticket.html
 
 /**
- * Identification unique d'un formulaire poste 
- *
-**/
+ * Identification unique d'un formulaire poste
+ *  
+ * @param int $id_ticket[optional]
+ * 		Identifiant numérique du ticket ou new si nouveau
+ * @param string $retour[optional]
+ * 		URL de retour
+ * @param string $config_fonc[optional]
+ * 		Fonction de configuration du formulaire
+ * @param array $row[optional]
+ * @return string
+ */
 function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	return serialize(array(intval($id_ticket)));
 }
 
 /**
- * Fonction de chargement des valeurs
+ * Fonction de chargement des valeurs du formulaire
+ * 
+ * @param int $id_ticket[optional]
+ * 		Identifiant numérique du ticket ou new si nouveau
+ * @param string $retour[optional]
+ * 		URL de retour
+ * @param string $config_fonc[optional]
+ * 		Fonction de configuration du formulaire
+ * @param array $row[optional]
+ * @return array $valeurs
+ * 		Un tableau des valeurs chargées au formulaire
  */
 function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	// mettre une valeur new pour formulaires_editer_objet_charger()
 	
 	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
-	if (!autoriser('ecrire', 'ticket', $id_ticket)) {
+	if (!autoriser('ecrire', 'ticket', $id_ticket))
 		$valeurs['editable'] = false;
-	}else{
+	else{
 		if(is_numeric($id_ticket) && !autoriser('modifier','ticket',$id_ticket))
 			$valeurs['editable'] = false;
 		else{
@@ -58,11 +77,15 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
  *
  * Fonction de vérification des valeurs
  *
- * @return
  * @param int $id_ticket[optional]
- * @param string $retour[optional] URL de retour
- * @param object $config_fonc[optional]
- * @param object $row[optional]
+ * 		Identifiant numérique du ticket ou new si nouveau
+ * @param string $retour[optional]
+ * 		URL de retour
+ * @param string $config_fonc[optional]
+ * 		Fonction de configuration du formulaire
+ * @param array $row[optional]
+ * @return array $erreurs
+ * 		Un tableau des erreurs de validation
  */
 function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 
@@ -76,34 +99,32 @@ function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $confi
 		$texte = _request('texte');
         $caracteres = compter_caracteres_utiles($texte);
         // moins de 10 caracteres sans les liens = spam !
-        if ($caracteres < 10){
-                $erreurs['texte'] = _T('forum:forum_attention_dix_caracteres');
-        }
+        if ($caracteres < 10)
+			$erreurs['texte'] = _T('forum:forum_attention_dix_caracteres');
+
         // on analyse le titre
         $infos_titre = analyser_spams(_request('titre'));
         // si un lien dans le titre = spam !
         if ($infos_titre['nombre_liens'] > 0)
-                $erreurs['titre'] = _T('nospam:erreur_spam');
+			$erreurs['titre'] = _T('nospam:erreur_spam');
         // on analyse le texte
         $infos_texte = analyser_spams($texte);
 
         if ($infos_texte['nombre_liens'] > 0) {
-        		$max_liens = defined('_DIR_PLUGIN_TODO') ? 6 : 3;
-				$max_caracteres_liens = defined('_DIR_PLUGIN_TODO') ? 1 : 3;
-                // si un lien a un titre de moins de 3 caracteres = spam !
-                if ($infos_texte['caracteres_texte_lien_min'] < $max_caracteres_liens) {
-                        $erreurs['texte'] = _T('nospam:erreur_spam');
-                }
-                // si le texte contient plus de trois lien = spam !
-                if ($infos_texte['nombre_liens'] > $max_liens && !isset($GLOBALS['visiteur_session']['id_auteur']))
-                        $erreurs['texte'] = _T('nospam:erreur_spam');
+        	// plus de 3 liens = spam, sauf si todo est là et donc 6 liens
+			$max_liens = defined('_DIR_PLUGIN_TODO') ? 6 : 3;
+			// si un lien a un titre de moins de 3 caracteres = spam, sauf si todo est là
+			$max_caracteres_liens = defined('_DIR_PLUGIN_TODO') ? 1 : 3;
+			if ($infos_texte['caracteres_texte_lien_min'] < $max_caracteres_liens)
+				$erreurs['texte'] = _T('nospam:erreur_spam');
+			if ($infos_texte['nombre_liens'] > $max_liens && !isset($GLOBALS['visiteur_session']['id_auteur']))
+				$erreurs['texte'] = _T('nospam:erreur_spam');
         }
 	}
 	if(count($erreurs) == 0){
 		if (!isset($GLOBALS['visiteur_session']['tmp_ticket_document'])) {
 			include_spip('inc/session');
-			session_set('tmp_ticket_document',
-				sous_repertoire(_DIR_TMP, 'documents_ticket') . md5(uniqid(rand())));
+			session_set('tmp_ticket_document',sous_repertoire(_DIR_TMP, 'documents_ticket') . md5(uniqid(rand())));
 		}
 		$tmp = $GLOBALS['visiteur_session']['tmp_ticket_document'];
 		$doc = &$_FILES['ajouter_document'];
@@ -148,14 +169,17 @@ function tickets_edit_config(){
 }
 
 /**
- *
  * Fonction de traitement du formulaire
  *
- * @return
  * @param int $id_ticket[optional]
- * @param string $retour[optional] Une url de retour (on lui passera id_ticket=XX en paramètre)
- * @param object $config_fonc[optional]
- * @param object $row[optional]
+ * 		Identifiant numérique du ticket ou new si nouveau
+ * @param string $retour[optional]
+ * 		URL de retour
+ * @param string $config_fonc[optional]
+ * 		Fonction de configuration du formulaire
+ * @param array $row[optional]
+ * @return array $message
+ * 		Un tableau des éléments de retour du formulaire CVT
  */
 function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
@@ -168,9 +192,9 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 		 * Si pas d'adresse de retour on revient sur la page en cours avec l'id_ticket en paramètre
 		 * Utile pour l'utilisation dans le public
 		 */
-		if (!$retour) {
+		if (!$retour)
 			$message['redirect'] = parametre_url(parametre_url(self(),'id_ticket', $res['id_ticket']),'ticket','');
-		} else {
+		else {
 			if (strncmp($retour,'javascript:',11)==0)
 				$message['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour,11).'/*]]>*/</script>';
 			else // sinon on utilise la redirection donnee.
@@ -180,6 +204,13 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 	return $message;
 }
 
+/**
+ * Fonction listant les extensions de fichiers que l'on peut mettre en ligne depuis le 
+ * formulaire de tickets
+ * 
+ * @return array $formats
+ * 		Le tableau des extensions autorisées
+ */
 function ticket_documents_acceptes(){
 	include_spip('inc/config');
 	$formats = trim(lire_config('tickets/general/formats_documents_ticket'));
