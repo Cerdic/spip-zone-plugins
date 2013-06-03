@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madam',
 	'mademoiselle' => 'Miss',
+	'message_redemander_pass' => 'Votre adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider votre compte, demandez un <a href="@url_pass@">changement de mot de passe</a> et identifiez vous une première fois.', # NEW
 	'modele_label_auteur' => 'Pre-select an author (optional)?',
 	'modele_nom_formulaire' => 'the contact form',
 	'monsieur' => 'Mister',
