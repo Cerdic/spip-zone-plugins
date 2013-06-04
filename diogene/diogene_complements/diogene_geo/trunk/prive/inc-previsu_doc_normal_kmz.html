@@ -23,10 +23,10 @@
 <h4 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h4>
 <div class="em_vignette #EDIT{vignette}[ resize-(#GET{largeur_previsu})]">
 	<BOUCLE_gis(GIS){id_document}>
-	[(#MODELE{carte_gis,largeur=#GET{largeur_previsu}px,hauteur=#GET{hauteur_previsu}px,kml=[(#_documents_en_cours:EXTENSION|in_array{#ARRAY{0,kml,1,kmz}}|?{#ID_DOCUMENT,''})],gpx=[(#_documents_en_cours:EXTENSION|in_array{#ARRAY{0,gpx}}|?{#ID_DOCUMENT,''})],lat=#LAT,lon=#LON,zoom=#ZOOM,point=non})]
+	[(#MODELE{carte_gis,largeur=#GET{largeur_previsu}px,hauteur=#GET{hauteur_previsu}px,kml=[(#_documents_en_cours:EXTENSION|in_array{#LISTE{kml,kmz}}|?{#ID_DOCUMENT,''})],gpx=[(#_documents_en_cours:EXTENSION|=={gpx}|?{#ID_DOCUMENT,''})],lat=#LAT,lon=#LON,zoom=#ZOOM,point=non})]
 	</BOUCLE_gis>
 	</B_gis>
-	[(#MODELE{carte_gis,largeur=#GET{largeur_previsu}px,hauteur=#GET{hauteur_previsu}px,kml=[(#_documents_en_cours:EXTENSION|in_array{#ARRAY{0,kml,1,kmz}}|?{#ID_DOCUMENT,''})],gpx=[(#_documents_en_cours:EXTENSION|in_array{#ARRAY{0,gpx}}|?{#ID_DOCUMENT,''})],point=non})]
+	[(#MODELE{carte_gis,largeur=#GET{largeur_previsu}px,hauteur=#GET{hauteur_previsu}px,kml=[(#_documents_en_cours:EXTENSION|in_array{#LISTE{kml,kmz}}|?{#ID_DOCUMENT,''})],gpx=[(#_documents_en_cours:EXTENSION|=={gpx}|?{#ID_DOCUMENT,''})],point=non})]
 	<//B_gis>
 </div>
 <div class="infos_document">
