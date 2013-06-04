@@ -47,7 +47,7 @@
 	
 ]<BOUCLE_doc (DOCUMENTS) {id_document}>
 [(#SET{type,maxi})]
-[(#GET{type}|in_array{#ARRAY{0,maxi,1,mini,2,js}}|non)#SET{type,maxi}]
+[(#GET{type}|in_array{#LISTE{maxi,mini,js}}|non)#SET{type,maxi}]
 
 [(#REM)
 	Taille de la video

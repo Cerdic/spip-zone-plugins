@@ -3,9 +3,9 @@
 
 	Si l'extension est mp4 ou ogg, c'est une video
 
-][(#EXTENSION|in_array{#ARRAY|push{mp4}|push{ogg}}|oui)
+][(#EXTENSION|in_array{#LISTE{mp4,ogg}}|oui)
 	[(#INCLURE{fond=modeles/video}{id=#ID_DOCUMENT}{env}{emb=' '})]
-][(#EXTENSION|in_array{#ARRAY|push{mp4}|push{ogg}}|non)
+][(#EXTENSION|in_array{#LISTE{mp4,ogg}}|non)
 [(#REM) on trouvera plusieurs variable de hauteur/largeur
 - les balises #HAUTEUR et #LARGEUR
 - #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>

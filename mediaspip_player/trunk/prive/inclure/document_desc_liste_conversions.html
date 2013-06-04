@@ -3,18 +3,17 @@
 
 ]
 <BOUCLE_document(DOCUMENTS){id_document=#ENV{id_document,#ENV{id}}}{statut==.*}>
-[(#MODE|!={conversion}|et{#MEDIA|in_array{#ARRAY{0,video,1,audio}}}|oui)<div style="overflow:auto">
+[(#MODE|!={conversion}|et{#MEDIA|in_array{#LISTE{video,audio}}}|oui)<div style="overflow:auto">
 <INCLURE{fond=prive/inclure/ajouter_conversion,id_objet=#ID_DOCUMENT,objet=document,env} />
 </div>]
 <B_conversions>
 <div class="conversion_liste">
 	#ANCRE_PAGINATION
 	<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{mediaspip_player:info_une_conversion,mediaspip_player:info_nb_conversion})]</strong>
-	<BOUCLE_conversions(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 5 doc#ID_DOCUMENT}>
+	<BOUCLE_conversions(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination #ENV{pagination,5} doc#ID_DOCUMENT}>
 		#MODELE{document_desc,id_document,objet=document,id_objet=#ENV{id_document}}
 	</BOUCLE_conversions>
-	[<p class="pagination">(#PAGINATION{prive})</p>]
+	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,prive}})</p>]
 </div>
 </B_conversions>
-
 </BOUCLE_document>

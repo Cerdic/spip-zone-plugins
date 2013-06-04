@@ -120,16 +120,17 @@
 			var defaults = {
 				autoplay:false, // Lire automatiquement au chargement
 				autoload:true, // Précharger automatiquement au chargement
-				minwidth : null, // Largeur minimale
-				movieSize : null, 
-				messages: true, // Afficher ou non les messages sur le lecteur
-				volume: 100, // Niveau de volume au chargement
-				volume_bloque: false, // bloque le niveau de volume
-				volume_slider_orientation: 'horizontal', // Si on a les sliders, orientation du slider de volume
-				muted : false, // Le lecteur n'est pas mute par défaut
-				muted_bloque : false, // On autorise le switch mute/unmute sur le lecteur
-				cookie_volume: false, // Garder le niveau de volume de l'utilisateur dans un cookie
-				messages: true, // Affiche ou non les messages sur le lecteur
+				minwidth:null, // Largeur minimale
+				movieSize:null,
+				ratio:null,
+				messages:true, // Afficher ou non les messages sur le lecteur
+				volume:100, // Niveau de volume au chargement
+				volume_bloque:false, // bloque le niveau de volume
+				volume_slider_orientation:'horizontal', // Si on a les sliders, orientation du slider de volume
+				muted:false, // Le lecteur n'est pas mute par défaut
+				muted_bloque:false, // On autorise le switch mute/unmute sur le lecteur
+				cookie_volume:false, // Garder le niveau de volume de l'utilisateur dans un cookie
+				messages:true, // Affiche ou non les messages sur le lecteur
 				boutons_caches:[]
 			};
 			
@@ -180,6 +181,7 @@
 					id.percent_loaded = 0;
 					id.slider_control = id.slider_volume = false;
 					id.messages = options.messages;
+					id.type = (media.is('video')) ? 'video' : 'audio';
 					
 					if(slider) id.slider = true;
 					
@@ -201,13 +203,24 @@
 						if(media.attr('height')) height = media.attr('height');
 						else if(media.height() > 0) height = media.height();
 					}
-	
-					media.parent().wrapInner('<div class="media_wrapper loading '+class_wrapper+'"></div>');
-					media.parents('.media_wrapper').height(height).width(width);
+					
+					media.parent().wrapInner('<div class="media_wrapper loading no_metadata '+id.type+' '+class_wrapper+'"></div>');
+					if(id.type == 'video'){
+						if(options.height)
+							media.parents('.media_wrapper').height(height);
+						if(options.width)
+							media.parents('.media_wrapper').width(width);
+					}else
+						media.parents('.media_wrapper').width(width);
 					wrapper = media.parent();
 					
 					if(id.addcontrols){
-						controls = '<div class="controls small">'
+						if(id.type == 'video')
+							controls = '<div class="ms_splash"></div>'
+						else
+							controls = '';
+								
+						controls += '<div class="controls small">'
 							+'<div class="buttons_left">'
 								+'<span class="play_pause_button" title="'+ms_player_lang.bouton_loading+'"></span>'
 							+'</div>'
@@ -233,16 +246,17 @@
 						controls += (media.is('video') && $.inArray('fullscreen',options.boutons_caches) == '-1') ? '<span class="fullwindow_button" title="'+ms_player_lang.bouton_fullscreen+'"></span>' : '';
 						controls += ($.inArray('loop',options.boutons_caches) == '-1') ? '<span class="loop_button" title="'+ms_player_lang.bouton_loop+'"></span>' : '';
 						controls +='</div>';
-						+'</div>';
 		
 						wrapper.append(controls);
 						control = wrapper.find('.controls');
 					}
-					if(options.minwidth && $(this).width() > options.minwidth){
-						$(this).width(options.minwidth);
-						wrapper.width($(this).width());
+
+					if(id.type== 'video' && !height){
+						height = media.parents('.media_wrapper').find('.controls').height();
+						media.parents('.media_wrapper').add(media).height(height)
 					}
-					else if(options.minwidth){
+						
+					if(options.minwidth && $(this).width() > options.minwidth){
 						wrapper.width(options.minwidth);
 					}
 					
@@ -254,15 +268,7 @@
 					}
 					
 					if(media.prev().is('img')){
-						if(media.prev().width() > options.minwidth){
-							wrapper.width(media.prev().width());
-							wrapper.height(media.prev().height());
-						}else{
-							var img_height = media.prev().height(),
-								ratio = options.minwidth / media.prev().width();
-							wrapper.width(options.minwidth).height(img_height*ratio);
-							media.prev().width(options.minwidth).height(img_height*ratio);
-						}
+						
 						media.prev().wrap('<div class="html5_logo"></div>');
 						media.prev().click(function(){
 							media.ms_play_pause();
@@ -276,9 +282,9 @@
 						media.ms_resize_controls();
 					}
 					
-					id.addEventListener("loadedmetadata",function(e){
+					media.bind("loadedmetadata",function(e){
 						media.ms_start('loadedmetadata');
-						
+						$(this).parents('.media_wrapper').removeClass('no_metadata').addClass('has_metadata');
 						/**
 						 * Cas d'un stream audio (Radio)
 						 */
@@ -287,9 +293,8 @@
 							control.find('.progress_back').detach();
 							remaining_time.addClass('total_time').attr('title','').html(ms_player_lang.info_streaming);
 						}
-					},true);
-					
-					id.addEventListener("error", function(e){
+						media.ms_resize_controls();
+					}).bind("error", function(e){
 						if (id.error) {							
 							switch (id.error.code) {
 								case 1:
@@ -312,9 +317,7 @@
 								media.ms_messages('error',error_message);
 							wrapper.removeClass('loading').addClass('player_error').find('.play_pause_button').attr('title',ms_player_lang.info_erreur);
 						}
-					}, true);
-	
-					id.addEventListener("timeupdate", function(e){
+					}).bind("timeupdate", function(e){
 						if(control && id.percent_loaded != 100) media.ms_update_loaded(e);
 
 						var percent_time = ms_anything_to_percent(id.currentTime,id.duration);
@@ -329,33 +332,22 @@
 							progress_indicator.css('left',percent_time+'%');
 
 						media.ms_resize_controls();
-					}, true);
-	
-					id.addEventListener("seeking",function(e){
+					}).bind("seeking",function(e){
 						wrapper.addClass('seeking').find('.play_pause_button').attr('title',ms_player_lang.bouton_seeking);
-					},true);
-					
-					id.addEventListener("seeked",function(e){
+					}).bind("seeked",function(e){
 						wrapper.removeClass('seeking');
 						if(id.paused)
 							wrapper.find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_pause);
 						else
 							wrapper.find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_lire);
-					},true);
-	
-					id.addEventListener("progress", function(e){
+					}).bind("progress", function(e){
 						if(control && id.percent_loaded != 100) media.ms_update_loaded(e);
-					},false);
-					
-					id.addEventListener("play", function(e){
+					}).bind("pause", function(e){
+						media.ms_buttons();
+					}).bind("play", function(e){
 						if(control && id.percent_loaded != 100) media.ms_update_loaded(e);
-					},true);
-					
-					id.addEventListener("loadeddata", function(e){
-						if(control) media.ms_update_loaded(e);
-					},true);
-					
-					id.addEventListener("ended", function(e){
+						media.ms_buttons();
+					}).bind("ended", function(e){
 						if(!id.islooping){
 							wrapper.addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
 							id.paused = true;
@@ -363,11 +355,17 @@
 							id.currentTime = 0;
 						    id.play();
 						}
-					}, true);
-
-					id.addEventListener("volumechange", function(e){
+					}).bind("loadeddata", function(e){
+						if(control) media.ms_update_loaded(e);
+					}).bind("volumechange", function(e){
 						media.ms_volume(false);
-					}, true);
+					}).click(function(){
+						media.ms_play_pause();
+					}).dblclick(function(e){
+						media.ms_fullscreen();
+						e.preventDefault();
+						e.stopPropagation();
+					});
 	
 					document.addEventListener(fullScreenApi.fullScreenEventName, function(e){
 						if(id.isFullScreen && !fullScreenApi.isFullScreen())
@@ -375,14 +373,9 @@
 						media.ms_resize_controls();
 					}, true);
 					
-					media.click(function(){
-						media.ms_play_pause();
-					});
-					
-					media.dblclick(function(e){
-						media.ms_fullscreen();
-						e.preventDefault();
-						e.stopPropagation();
+					media.parent().find('.ms_splash').click(function(){
+						if(id.paused && $(this).is(':visible'))
+							media.ms_play_pause();
 					});
 					
 					var stop_timeout = false,
@@ -474,12 +467,11 @@
 							event.preventDefault();
 						});
 					}
-					//if((id.readyState == "4") || (id.readyState == "3")) 
+
 					media.ms_start('canplay');
 				}
-			}else{
+			}else
 				media.ms_test_fallback(options);
-			}
 			this.trigger('init');
 		},
 		ms_start : function(action){
@@ -490,7 +482,7 @@
 				control = wrapper.find('.controls'),
 				elapsed_time = control.find('.elapsed_time'),
 				remaining_time = control.find('.remaining_time');
-			
+
 			if(!id.mediacanplay || action == 'loadedmetadata'){
 				if(wrapper.hasClass('player_error')) 
 					wrapper.removeClass('player_error').addClass('loading');
@@ -499,32 +491,55 @@
 
 				var width_container = media.width(), parent_width = wrapper.parent().width();
 				
-				if(id.videoHeight && id.videoWidth){
-					var ratio_video = id.videoWidth/id.videoHeight;
-					id.ratio = ratio_video;
-					if(options.movieSize == 'adapt' && !id.isFullScreen && (!media.hasClass('noresize') || (options.movieSize != 'noresize'))){
-						/**
-						 * En mode adapt :
-						 * - on dimensionne la largeur à 100%
-						 * - on dimensionne la hauteur à un ratio correspondant au ratio réel de la vidéo 
-						 * par rapport à la largeur du bloc parent
-						 */
-						width_container = parent_width;
+				if(id.videoHeight && id.videoWidth)
+					id.ratio = id.videoWidth/id.videoHeight;
+				else if(options.ratio)
+					id.ratio = options.ratio;
+				else
+					id.ratio = media.width()/media.height();
+				
+				if(options.movieSize == 'adapt' && !id.isFullScreen && (!media.hasClass('noresize') || (options.movieSize != 'noresize'))){
+					/**
+					 * En mode adapt :
+					 * - on dimensionne la largeur à 100%
+					 * - on dimensionne la hauteur à un ratio correspondant au ratio réel de la vidéo 
+					 * par rapport à la largeur du bloc parent
+					 */
+					width_container = parent_width;
+					if(id.videoHeight && id.videoWidth)
 						var ratio = (width_container/id.videoWidth),
 							height_final = (id.videoHeight*ratio).toFixed();
-						wrapper.add(media).animate({height:height_final+'px',width:'100%'},500,function(){
-							media.ms_resize_controls();
+					else
+						var height_final = width_container/id.ratio;
+					
+					if(id.type == 'video'){
+						wrapper.animate({height:height_final+'px',width:'100%'},'fast',function(){
+							media.animate({height:'100%',width:'100%'},'fast').attr('height',false).ms_resize_controls();
 						});
-					}else if(!media.hasClass('noresize') && (options.movieSize != 'noresize')){
-						/**
-						 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
-						 * du ratio réel récupéré des métadonnées
-						 */
+					}else{
+						wrapper.animate({width:'100%'},'fast',function(){
+							media.animate({width:'100%'},'fast').ms_resize_controls();
+						});
+					}
+				}else if(!media.hasClass('noresize') && (options.movieSize != 'noresize')){
+					/**
+					 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
+					 * du ratio réel récupéré des métadonnées
+					 */
+					if(!options.height){
 						var media_height = media.width()/id.ratio;
 						media.attr('height','');
-						wrapper.css({'height':media_height+'px'});
+						if(id.type == 'video')
+							wrapper.height(media_height);
+					}else{
+						var media_width = media.height()*id.ratio;
+						if(id.type == 'video'){
+							wrapper.width(media_width);
+							media.width('100%').attr('width','');
+						}
 					}
 				}
+
 				if(wrapper.hasClass('loading'))
 					wrapper.removeClass('loading').addClass('paused').find('.play_pause_button').attr('title',ms_player_lang.bouton_lire);
 				
@@ -532,8 +547,12 @@
 					remaining_time.text('-'+ms_second_to_time(id.duration));
 
 				elapsed_time.text(ms_second_to_time(id.currentTime));
-				media.ms_resize_controls();
-				if((id.networkState == 2) && !isNaN(id.duration) && (typeof(id.buffered) != 'undefined') && (typeof(id.buffered.end(0)) == 'number') && id.buffered.end(0) > 0){
+                
+				try {
+                    arg.buffer = id.buffered.end(null);
+                } catch (ignored) {}
+                
+				if((id.networkState == 2) && id.duration && !isNaN(id.duration) && id.buffer){
 					var percent_load = ms_anything_to_percent(id.buffered.end(0),id.duration);
 					control.find('.progress_buffered').css('width',percent_load+'%');
 				}
@@ -589,7 +608,6 @@
 							}
 						});
 					}
-					media.ms_resize_controls();
 				}
 				
 				id.volume = Math.floor(parseInt(options.volume)/100);
@@ -615,41 +633,50 @@
 			$(this).parents('.media_wrapper').attr("tabindex",-1).hover(function(){
 				$(this).focus();
 			});
-			$(this).parents('.media_wrapper').keydown(function(e) {
+			$(this).parents('.media_wrapper').unbind('keydown').keydown(function(e) {
 				$(this).unbind('keyup').keyup(function(e){e.stopPropagation();e.preventDefault();}).ms_activate_keys(e);
 			});
+			media.ms_resize_controls();
 			this.trigger('start');
+		},
+		ms_buttons : function(){
+			if($(this)[0].paused){
+				$(this).parent('.media_wrapper').addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
+				$(this).ms_messages('pause',ms_player_lang.statut_pause);
+			}
+			else if ($(this)[0].ended){
+				$(this).parent('.media_wrapper').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
+				$(this)[0].currentTime = $(this)[0].startTime ? $(this)[0].startTime : '0';
+				if(!$(this)[0].options.volume_bloque && cookies && $(this)[0].options.cookie_volume){
+					var volume_cookie = parseFloat($.cookie('ms_volume'));
+					if((volume_cookie >= 0) && (volume_cookie <= 1))
+						$(this)[0].volume = volume_cookie;
+					if($.cookie('ms_volume_muted') == 'muted')
+						$(this)[0].muted = true;
+				}
+			}
+			else{
+				$(this).parent('.media_wrapper').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
+				$(this).ms_messages('play',ms_player_lang.statut_play);
+				if(!$(this)[0].options.volume_bloque && cookies && $(this)[0].options.cookie_volume){
+					var volume_cookie = parseFloat($.cookie('ms_volume'));
+					if((volume_cookie >= 0) && (volume_cookie <= 1))
+						$(this)[0].volume = volume_cookie;
+					if($.cookie('ms_volume_muted') == 'muted')
+						$(this)[0].muted = true;
+				}
+			}
 		},
 		ms_play_pause : function(){
 			if($(this)[0].mediacanplay && !$(this)[0].seeking){
 				var options = $(this)[0].options;
 				if($(this)[0].paused){
-					$(this).parent('.media_wrapper').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
-					$(this).ms_messages('play',ms_player_lang.statut_play);
-					if(!options.volume_bloque && cookies && options.cookie_volume){
-						var volume_cookie = parseFloat($.cookie('ms_volume'));
-						if((volume_cookie >= 0) && (volume_cookie <= 1))
-							$(this)[0].volume = volume_cookie;
-						if($.cookie('ms_volume_muted') == 'muted')
-							$(this)[0].muted = true;
-					}
 					$(this)[0].play();
 					this.trigger('play');
 				}else if ($(this)[0].ended){
-					$(this).parent('.media_wrapper').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
-					$(this)[0].currentTime = $(this)[0].startTime ? $(this)[0].startTime : '0';
-					if(!options.volume_bloque && cookies && options.cookie_volume){
-						var volume_cookie = parseFloat($.cookie('ms_volume'));
-						if((volume_cookie >= 0) && (volume_cookie <= 1))
-							$(this)[0].volume = volume_cookie;
-						if($.cookie('ms_volume_muted') == 'muted')
-							$(this)[0].muted = true;
-					}
 					$(this)[0].play();
 					this.trigger('play');
 				}else{
-					$(this).parent('.media_wrapper').addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);;
-					$(this).ms_messages('pause',ms_player_lang.statut_pause);
 					$(this)[0].pause();
 					this.trigger('pause');
 				}
@@ -807,7 +834,6 @@
 				id_container = container[0];
 			if($(this)[0].mediacanplay){
 				if(!$(this)[0].isFullScreen){
-					$(this)[0].isFullScreen = true;
 					$(this)[0].videoOrigWidth = $(this).width();
 					$(this)[0].videoOrigHeight = $(this).height();
 					id_container.origWidth = container.width();
@@ -821,8 +847,8 @@
 							$(this).ms_fullscreen_resize();
 						});
 					}
+					$(this)[0].isFullScreen = true;
 				}else{
-					$(this)[0].isFullScreen = false;
 					if (fullScreenApi.supportsFullScreen) {
 						(fullScreenApi.prefix === '') ? document.cancelFullScreen() : document[fullScreenApi.prefix + 'CancelFullScreen']();
 						container.bind('fullscreen_resize',function(){
@@ -845,6 +871,7 @@
 					}
 					container.add($(this)).trigger('fullscreen_resize').unbind('fullscreen_resize');
 					container.find('.controls').addClass('small').find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen);
+					$(this)[0].isFullScreen = false;
 				}
 			}
 		},
@@ -859,9 +886,8 @@
 			container.find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen_full);
 			
 			if (fullScreenApi.supportsFullScreen) {
-				container.css({width:'100%',height:'100%'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
-				$(this).css({width:'100%',height:'100%'});
 				(fullScreenApi.prefix === '') ? id_container.requestFullScreen() : id_container[fullScreenApi.prefix + 'RequestFullScreen']();
+				container.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
 				$(this).ms_resize_controls();
 			}else{
 				container.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
@@ -902,17 +928,16 @@
 			var control = $(this).parent().find('.controls'),
 				play_width = control.find('.buttons_left').outerWidth()+parseFloat(control.find('.buttons_left').css('margin-left'))+parseFloat(control.find('.buttons_left').css('margin-right')),
 				sound_width = control.find('.buttons_right').outerWidth()+parseFloat(control.find('.buttons_right').css('margin-left'))+parseFloat(control.find('.buttons_right').css('margin-right')),
-				progresswidth = parseFloat(control.width())-parseFloat(play_width)-parseFloat(sound_width) - parseFloat(control.find('.progress_bar').css('border-left-width')) - parseFloat(control.find('.progress_bar').css('border-right-width'))-parseFloat(control.find('.progress_bar').css('margin-right')) - parseFloat(control.find('.progress_bar').css('margin-left')) - parseFloat(control.find('.progress_bar').css('padding-right')) - parseFloat(control.find('.progress_bar').css('padding-left'));
+				progresswidth = parseFloat(control.width())-parseFloat(play_width)-parseFloat(sound_width) - parseFloat(control.find('.progress_bar').css('border-left-width')) - parseFloat(control.find('.progress_bar').css('border-right-width'))-parseFloat(control.find('.progress_bar').css('margin-right')) - parseFloat(control.find('.progress_bar').css('margin-left')) - parseFloat(control.find('.progress_bar').css('padding-right')) - parseFloat(control.find('.progress_bar').css('padding-left')) -1;
 			
 			control.find('.progress_bar').width(progresswidth);
 			
 			var remaining_width = control.find(".remaining_time").outerWidth()+parseFloat(control.find('.remaining_time').css('margin-left'))+parseFloat(control.find('.remaining_time').css('margin-right')),
 				elapsed_width = control.find(".elapsed_time").outerWidth()+parseFloat(control.find('.elapsed_time').css('margin-left'))+parseFloat(control.find('.elapsed_time').css('margin-right'));
 			
-			if(control.find(".remaining_time").is(':hidden'))
-				remaining_width = 0;
+			if(control.find(".remaining_time").is(':hidden')) remaining_width = 0;
 
-			var progressback_width = progresswidth - elapsed_width - remaining_width - parseFloat(control.find('.progress_back').css('border-left-width')) - parseFloat(control.find('.progress_back').css('border-right-width'))-parseFloat(control.find('.progress_back').css('margin-right')) - parseFloat(control.find('.progress_back').css('margin-left')) - parseFloat(control.find('.progress_back').css('padding-right')) - parseFloat(control.find('.progress_back').css('padding-left'))-1;
+			var progressback_width = progresswidth - elapsed_width - remaining_width - parseFloat(control.find('.progress_back').css('border-left-width')) - parseFloat(control.find('.progress_back').css('border-right-width'))-parseFloat(control.find('.progress_back').css('margin-right')) - parseFloat(control.find('.progress_back').css('margin-left')) - parseFloat(control.find('.progress_back').css('padding-right')) - parseFloat(control.find('.progress_back').css('padding-left'))-2;
 			
 			if(slider && progressback_width < 0 && !force){
 				if($(this)[0].slider && (typeof($(this)[0].slider_volume) == 'object')){
@@ -1037,9 +1062,8 @@
 					     */
 						e.preventDefault();
 			        	if (!fullScreenApi.supportsFullScreen) {
-			        		if($(this).find('video')[0].isFullScreen){
+			        		if($(this).find('video')[0].isFullScreen)
 			        			$(this).find('video').ms_fullscreen();
-			        		}
 			        	}
 						break;
 					case 70 :
@@ -1057,7 +1081,7 @@
 					     * Touche l
 					     * Active ou désactive le mode boucle (loop) sur le média en cours de lecture
 					     */
-						if($('input:focus,textarea:focus').size() == 0){
+						if($(this).find('video,audio')[0].isFullScreen || $('input:focus,textarea:focus').size() == 0){
 							$(this).find('video,audio').ms_loop();
 				        	e.preventDefault();
 						}
@@ -1067,8 +1091,8 @@
 					     * Touche M
 					     * Mute ou unmute
 					     */
-						if($('input:focus,textarea:focus').size() == 0){
-			        		$(this).find('.volume_button').click();
+						if($(this).find('video,audio')[0].isFullScreen || $('input:focus,textarea:focus').size() == 0){
+							$(this).find('video,audio').ms_volume(true);
 			        		e.preventDefault();
 						}
 						break;
@@ -1077,6 +1101,7 @@
 					      * Touche Space
 					      * Lance la lecture ou met le media en pause
 					      */
+						
 			    		if($(this).find('video,audio')[0].isFullScreen || ($('input:focus,textarea:focus').size() == 0)){
 			    			$(this).find('video,audio').ms_play_pause();
 			        		e.preventDefault();
@@ -1108,11 +1133,10 @@
 					     */
 			    		if($(this).find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus,select:focus').size() == 0)){
 			    			var pourcent_actuel = (($(this).find('video,audio')[0].currentTime / $(this).find('video,audio')[0].duration) * 100);
-			    			if(e.keyCode == 37) {
+			    			if(e.keyCode == 37)
 				    			var new_percent = (pourcent_actuel >= 5) ? (pourcent_actuel - 5) : 0;
-			    			}else{
+			    			else
 				    			var new_percent = (pourcent_actuel > 95) ? 100 : (pourcent_actuel + 5);
-					    	}
 			    			$(this).find('video,audio').ms_seek_to_percent(new_percent,true);
 			    			e.preventDefault();
 			    			e.stopPropagation();
