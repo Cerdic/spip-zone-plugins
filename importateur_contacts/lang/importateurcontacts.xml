@@ -1,6 +1,7 @@
 <traduction module="importateurcontacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/importateur_contacts/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=fr">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
