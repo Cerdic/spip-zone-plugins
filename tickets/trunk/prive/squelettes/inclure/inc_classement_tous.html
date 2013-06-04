@@ -46,7 +46,7 @@
             <td><b>##ID_TICKET</b></td>
             <td>[(#DATE|affdate{'d-m-Y'})]</td>
             <td class="#EDIT{id_auteur}">#INFO_NOM{auteur,#ID_AUTEUR}</td>
-            <td class="#EDIT{titre}[(#STATUT|in_array{#ARRAY{0,ferme,1,resolu}}|oui) del]"[ title="(#GET{discussion}|texte_backend)"]><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a><br />[(#TEXTE|PtoBR|couper{100})]</td>
+            <td class="#EDIT{titre}[(#STATUT|in_array{#LISTE{ferme,resolu}}|oui) del]"[ title="(#GET{discussion}|texte_backend)"]><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a><br />[(#TEXTE|PtoBR|couper{100})]</td>
             <td>
                 [(#TRACKER|tickets_texte_tracker)]
             </td>			
