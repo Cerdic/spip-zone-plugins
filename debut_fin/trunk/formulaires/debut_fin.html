@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_editer formulaire_debut_fin" >
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="haut">
+			<input type="radio" onclick="$('#fieldset_debut_fin').slideDown();" name="agenda" value="1" [(#ENV{agenda}|=={1}|oui)checked="checked"] />
+			<span[(#ENV{agenda}|=={1}|oui)style="font-weight: bold;"]>Ceci est un rendez-vous</span>
+			
+			
+			&nbsp; &nbsp;
+			<input type="radio" onclick="$('#fieldset_debut_fin').slideUp();" name="agenda" value="0" [(#ENV{agenda}|=={1}|non)checked="checked"] />
+			<span[(#ENV{agenda}|=={1}|non)style="font-weight: bold;"]>Ceci n'est pas un rendez-vous</span>
+		</li>
+		
+		<li id="fieldset_debut_fin"[ (#ENV{agenda}|=={1}|non)style="display: none"]>
+
+			<ul>
+				<li>
+					<label>Date de début</label>
+					<input type="text" style="width: 150px;" class="text date date-pick" name="date_debut" id="date_debut" value="[(#ENV{date_debut})]">
+				</li>
+				<li>
+					<label>Date de fin</label>
+					<input type="text" style="width: 150px;" class="text date date-pick" name="date_fin" id="date_fin" value="[(#ENV{date_fin})]">
+				</li>
+			</ul>
+		</li>
+	
+	</ul>
+	<p class='boutons spip_bouton'><input type='submit' class='submit' name='' value='Enregistrer' /></p>
+</form>
+</div>
+
+

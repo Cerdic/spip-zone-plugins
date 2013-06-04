@@ -1,0 +1,34 @@
+<plugin>
+	<nom>Date de début, date de fin</nom>
+	<auteur>ARNO*</auteur>
+	<version>1.0</version>
+	<etat>dev</etat>
+	<description>
+		Ajoute deux champs aux articles: #AGENDA (0 ou 1), #DATE_DEBUT et #DATE_FIN. 
+	</description>
+	<categorie>date</categorie>
+	<licence>GPL</licence>
+	<prefix>debut_fin</prefix>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/debut_fin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/debut_fin.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>debut_fin.php</inclure>
+	</pipeline>
+
+
+
+	<version_base>0.1.0</version_base>
+	<install>base/debut_fin.php</install>
+
+	<necessite id="SPIP" version="[3.0.10;3.0.*]" />
+</plugin>
+
