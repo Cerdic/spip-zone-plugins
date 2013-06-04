@@ -1,7 +1,7 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.4.4"
+	version="1.4.5"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"
@@ -32,5 +32,8 @@
 	
 	<utilise nom="Z" />
 	<utilise nom="Zpip" />
+	<utilise nom="spipr" />
+	<utilise nom="spipr_blog" />
 	<utilise nom="spipr_dist" />
+	<utilise nom="spipr_doc" />
 </paquet>
