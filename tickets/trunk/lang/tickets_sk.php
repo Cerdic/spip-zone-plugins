@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_non_modifiee' => 'Priradenie nebolo aktualizované',
 	'assignation_supprimee' => 'Priradenie tohto lístka bolo odstránené.',
 	'assigne_a' => 'Priradené komu:',
+	'assigne_a_th' => 'Assigné à', # NEW
 	'assignes_a' => 'Priradené komu',
 	'autres_tickets_ouverts' => 'Ďalšie otvorené lístky',
 
@@ -151,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Pridaný:',
 	'info_liste_tickets' => 'Lístok',
 	'info_numero_ticket' => 'LÍSTOK ČÍSLO:',
+	'info_sans' => 'Non défini', # NEW
 	'info_sans_version' => 'Bez verzie',
 	'info_ticket_1' => '1 lístok',
 	'info_ticket_aucun' => 'Žiaden lístok',

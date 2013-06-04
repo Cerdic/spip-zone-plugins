@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_non_modifiee' => 'Assignment not updated',
 	'assignation_supprimee' => 'The assignment of this bug report has ben deleted.',
 	'assigne_a' => 'Assigned to:',
+	'assigne_a_th' => 'Assigné à', # NEW
 	'assignes_a' => 'Assigned to',
 	'autres_tickets_ouverts' => 'Other opened bug reports',
 
@@ -151,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Added:',
 	'info_liste_tickets' => 'Bug reports',
 	'info_numero_ticket' => 'BUG REPORT NUMBER:',
+	'info_sans' => 'Non défini', # NEW
 	'info_sans_version' => 'Sans version', # NEW
 	'info_ticket_1' => '1bug report',
 	'info_ticket_aucun' => 'No bug report',

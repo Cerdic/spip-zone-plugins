@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_non_modifiee' => 'Assignation non mise à jour', # NEW
 	'assignation_supprimee' => 'L\'assignation de ce ticket a été supprimée.', # NEW
 	'assigne_a' => 'المكلَف:',
+	'assigne_a_th' => 'Assigné à', # NEW
 	'assignes_a' => 'المكلَف',
 	'autres_tickets_ouverts' => 'التذاكر المفتوحة الأخرى',
 
@@ -151,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'أضيف:',
 	'info_liste_tickets' => 'التذاكر',
 	'info_numero_ticket' => 'تذكرة رقم:',
+	'info_sans' => 'Non défini', # NEW
 	'info_sans_version' => 'Sans version', # NEW
 	'info_ticket_1' => 'تذكرة واحدة',
 	'info_ticket_aucun' => 'لا توجد تذاكر',
