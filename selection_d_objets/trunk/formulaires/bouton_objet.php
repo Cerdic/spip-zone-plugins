@@ -31,8 +31,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
     if($choisies)$where[]='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
     if($tables[$table_dest]['field']['lang'] and $lang){
-        if($objet_dest!='rubrique')$where[l]='lang IN ('.sql_quote($lang).')';
-        elseif(test_plugin_actif('tradrub'))$where[l]='lang IN ('.sql_quote($lang).')';
+        if($objet_dest!='rubrique')$where[]='lang IN ('.sql_quote($lang).')';
+        elseif(test_plugin_actif('tradrub'))$where[]='lang IN ('.sql_quote($lang).')';
         }
 
     $objets_choisies=tableau_objet($objet_dest_original,'','*',$where);

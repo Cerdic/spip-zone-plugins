@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_deja_selectionne' => 'Cet objet a déjà été sélectionné pour cette liste',
 	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',
 	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',
+	'explication_selection_choix_illimite' => 'Par defaut un objet ne peut être attaché qu\'ne fois à un Objet Cible, voulez-vous désactiver cette limitation.',	
 	'explication_selection_objets_cible' => 'Les objets cibles auxquelles des "Objets Sélection" pourront être attachés',
 	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. La description peut être une chaîne de langue.',
 
@@ -51,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'selection_cible' => 'Seléction des cibles pour',
+	'selection_choix_illimite' => 'Desactiver la limite de sélection par Objet Cible',	
 	'selection_objet' => 'Sélection',
 	'selection_objet_cible_titre' => 'Selection d\'Objets Cibles',
 	'selection_objets_pour' => 'Sélection objets pour',

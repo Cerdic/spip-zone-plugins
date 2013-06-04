@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /*Fournit un tableau avec id_objet=>donnees_objet*/
 
 function tableau_recherche_objet($objet,$exclus,$lang=''){
-    include_spip('inc/pipelines_ecrire');
+    include_spip('inc/pipelines_ecrire');  
     //Les tables non conforme, faudrait inclure une pipeline
     $exceptions=charger_fonction('exceptions','inc');
     $exception_objet=$exceptions();

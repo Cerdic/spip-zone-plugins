@@ -52,6 +52,9 @@ function formulaires_recherche_objets_charger_dist($objet_dest='rubrique',$id_ob
 }
 
 function formulaires_recherche_objets_verifier_dist($objet_dest='rubrique',$id_objet_dest,$lang=''){
+    include_spip('inc/config');
+    $config=lire_config('selection_objet');
+    
     $erreurs=array();
     
     if(!_request('objet_sel'))$erreurs['objet_sel']=_T("info_obligatoire");
@@ -64,7 +67,7 @@ function formulaires_recherche_objets_verifier_dist($objet_dest='rubrique',$id_o
                 'id_objet='.$id_objet,                                       
                 'lang='.sql_quote($lang),  
                 );
-        if($id=sql_getfetsel('id_selection_objet','spip_selection_objets',$where))$erreurs['objet_sel']=_T("selection_objet:erreur_deja_selectionne");
+        if(!isset($config['choix_illimite']) AND $id=sql_getfetsel('id_selection_objet','spip_selection_objets',$where))$erreurs['objet_sel']=_T("selection_objet:erreur_deja_selectionne");
 
     }
     

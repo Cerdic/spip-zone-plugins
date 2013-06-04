@@ -1,4 +1,6 @@
 #SET{exclude,#ARRAY}
+#SET{config,#CONFIG{selection_objet,#ARRAY}}
+#SET{choix_illimite,#GET{config}|table_valeur{choix_illimite}}
     #SET{id,selection_objet_dest_#OBJET_DEST}
 
 <B_test>
@@ -31,7 +33,7 @@
     #SET{nom_id_dest,id_#OBJET_DEST}    
     <BOUCLE_affichage(SELECTION_OBJETS){id_objet}{statut ?}{objet}{objet_dest}{par ordre_objet}>
         #SET{info_objet,#ENV{objets_choisies}|table_valeur{#ID_OBJET_DEST}}
-        #SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}
+        [(#GET{choix_illimite}|non)#SET{exclude,#GET{exclude}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_OBJET_DEST}}}]
         #SET{objet_dest,#OBJET_DEST}
         [(#OBJET_DEST|=={document}|oui)#SET{objet_dest,document_edit}]
         [(#SET{id,id_#OBJET_DEST})]        
