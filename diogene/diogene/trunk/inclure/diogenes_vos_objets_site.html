@@ -4,7 +4,7 @@
 <div class="menu diogene site diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
-		<BOUCLE_sites_auteur(SITES){id_secteur=#ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{par statut}{statut IN prop,publie}{pagination 5}>
+		<BOUCLE_sites_auteur(SITES){id_secteur=#ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{par statut}{statut IN prop,publie}{pagination #ENV{pagination,5}}>
 		<li>
 			<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#TYPE}|parametre_url{id_syndic,#ID_SYNDIC})]">
 				[(#STATUT|puce_statut{site,#ID_SYNDIC})] #NOM_SITE
@@ -23,7 +23,7 @@
 <div class="menu diogene site diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
-		<BOUCLE_sites(SITES){id_secteur=#ID_SECTEUR}{par statut}{statut IN prop,publie}{pagination 5}>
+		<BOUCLE_sites(SITES){id_secteur=#ID_SECTEUR}{par statut}{statut IN prop,publie}{pagination #ENV{pagination,5}}>
 		<li>
 			<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#TYPE}|parametre_url{id_syndic,#ID_SYNDIC})]">
 				[(#STATUT|puce_statut{site,#ID_SYNDIC})] #NOM_SITE

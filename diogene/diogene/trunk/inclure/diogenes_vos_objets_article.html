@@ -7,7 +7,7 @@
 <div class="menu diogene article diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
-		<BOUCLE_articles(ARTICLES){id_secteur=#ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{par statut}{!par date}{statut IN prop,prepa,publie}{pagination 5}>
+		<BOUCLE_articles(ARTICLES){id_secteur=#ID_SECTEUR}{id_auteur=#SESSION{id_auteur}}{par statut}{!par date}{statut IN prop,prepa,publie}{pagination #ENV{pagination,5}}>
 		<li class="menu-entree[ (#EXPOSE)]">
 			[(#EXPOSE|non)
 			<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#TYPE}|parametre_url{id_article,#ID_ARTICLE})]">]

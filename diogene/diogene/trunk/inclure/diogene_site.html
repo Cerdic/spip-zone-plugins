@@ -1,5 +1,4 @@
-<BOUCLE_diogene(DIOGENES){id_diogene}>
-<BOUCLE_secteur(CONDITION){si (#ID_SECTEUR|>{0})}>
+<BOUCLE_diogene(DIOGENES){id_diogene}{id_secteur > 0}>
 	<BOUCLE_autorise_publier_secteur(CONDITION){si (#AUTORISER{creersitedans,rubrique,#ID_SECTEUR}|oui)}>
 		[(#REM)
 			Si on a un id_syndic dans l'environnement
@@ -53,5 +52,4 @@
 			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
 	#BOITE_FERMER
 	<//B_autorise_publier_secteur>
-</BOUCLE_secteur>
 </BOUCLE_diogene>

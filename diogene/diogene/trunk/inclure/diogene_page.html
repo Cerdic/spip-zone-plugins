@@ -3,82 +3,79 @@
 	Squelette incluant le formulaire de création d'article
 	dans la page publier de diogène
 ]
-<BOUCLE_diogene(DIOGENES){id_diogene}>
-	<BOUCLE_secteur(CONDITION){si #ID_SECTEUR|=={0}|oui}>
-		<BOUCLE_autorise_publier_secteur(CONDITION){si #AUTORISER{creerdans,diogene,#_diogene:ID_DIOGENE}|oui}>
-			[(#VAL{modele}|set_request{page})]
-			<BOUCLE_article_env(ARTICLES){id_article}{statut IN prop,prepa,publie}>
-				[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
-				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
-				<div class="texte diogene_description">
-				<p>
-					<strong><:diogene:info_statut:> </strong>
-					[(#STATUT|=={publie}|oui)<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-					[(#STATUT|=={publie}|non)[(#STATUT|diogene_info_statut)]]
-				</p>
-				<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
-				<p>
-					#SET{titre_orig,#INFO_TITRE{article,#ID_TRAD}}
-					#SET{url,#URL_ARTICLE{#ID_TRAD}}
-					<:diogene:info_traduction_article{titre=#GET{titre_orig},url=#GET{url}}:>
-				</p>
-				</BOUCLE_si_trad>
-				<B_traductions>
-				<p><:diogene:message_article_traduit_en:>
-				<BOUCLE_traductions(ARTICLES){traduction}{lang != #LANG}{', '}>
-				#SET{langue,#LANG|traduire_nom_langue}
-				<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
-				</BOUCLE_traductions>
-				</p>
-				</B_traductions>
-				<//B_si_trad>
-				</div>
-				<div class="ajax">
-					#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE}
-				</div>
-			</BOUCLE_article_env>
-			<BOUCLE_article_en_cours_de_redac(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
-				#SET{id_rubrique,#ID_RUBRIQUE}
-				[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
-				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
-				<p>
-					<strong><:diogene:info_statut:> </strong>
-					[(#STATUT|=={publie}|oui)
-						<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-					[(#STATUT|=={publie}|non)
-						[(#STATUT|diogene_info_statut)]]
-				</p>
-				<BOUCLE_si_trad_redac(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
-				<p>
-					#SET{titre_orig,#INFO_TITRE{article,#ID_TRAD}}
-					#SET{url,#URL_ARTICLE{#ID_TRAD}}
-					<:diogene:info_traduction_article{titre=#GET{titre_orig},url=#GET{url}}:>
-				</p>
-				</BOUCLE_si_trad_redac>
-				<B_traductions_redac>
-				<p><:diogene:message_article_traduit_en:>
-				<BOUCLE_traductions_redac(ARTICLES){traduction}{lang != #LANG}{', '}>
-				#SET{langue,#LANG|traduire_nom_langue}
-				<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
-				</BOUCLE_traductions_redac>
-				</p>
-				</B_traductions_redac>
-				<//B_si_trad_redac>
-				<div class="ajax">
-					[(#FORMULAIRE_EDITER_ARTICLE{[(#ID_ARTICLE|sinon{new})],[(#ID_RUBRIQUE|sinon{#ENV{id_rubrique,0}})],'',#ENV{id_trad,0}})]
-				</div>
-			</BOUCLE_article_en_cours_de_redac>
-				<div id="ajax">
-					[(#FORMULAIRE_EDITER_ARTICLE{oui,#_diogene:ID_SECTEUR,'',#ENV{id_trad,0}})]
-				</div>
-			<//B_article_en_cours_de_redac>
-			<//B_article_env>
-		</BOUCLE_autorise_publier_secteur>
-		#BOITE_OUVRIR{'',error}
-			[(#SESSION{statut}|oui)<:diogene:erreur_autorisation_statut_publier:>]
-			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
-			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
-		#BOITE_FERMER
-		<//B_autorise_publier_secteur>
-	</BOUCLE_secteur>
+<BOUCLE_diogene(DIOGENES){id_diogene}{id_secteur == 0}>
+	<BOUCLE_autorise_publier_secteur(CONDITION){si #AUTORISER{creerdans,diogene,#_diogene:ID_DIOGENE}|oui}>
+		[(#VAL{modele}|set_request{page})]
+		<BOUCLE_article_env(ARTICLES){id_article}{statut IN prop,prepa,publie}>
+			[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
+			<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
+			<div class="texte diogene_description">
+			<p>
+				<strong><:diogene:info_statut:> </strong>
+				[(#STATUT|=={publie}|oui)<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
+				[(#STATUT|=={publie}|non)[(#STATUT|diogene_info_statut)]]
+			</p>
+			<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
+			<p>
+				#SET{titre_orig,#INFO_TITRE{article,#ID_TRAD}}
+				#SET{url,#URL_ARTICLE{#ID_TRAD}}
+				<:diogene:info_traduction_article{titre=#GET{titre_orig},url=#GET{url}}:>
+			</p>
+			</BOUCLE_si_trad>
+			<B_traductions>
+			<p><:diogene:message_article_traduit_en:>
+			<BOUCLE_traductions(ARTICLES){traduction}{lang != #LANG}{', '}>
+			#SET{langue,#LANG|traduire_nom_langue}
+			<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
+			</BOUCLE_traductions>
+			</p>
+			</B_traductions>
+			<//B_si_trad>
+			</div>
+			<div class="ajax">
+				#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE}
+			</div>
+		</BOUCLE_article_env>
+		<BOUCLE_article_en_cours_de_redac(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
+			#SET{id_rubrique,#ID_RUBRIQUE}
+			[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
+			<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
+			<p>
+				<strong><:diogene:info_statut:> </strong>
+				[(#STATUT|=={publie}|oui)
+					<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
+				[(#STATUT|=={publie}|non)
+					[(#STATUT|diogene_info_statut)]]
+			</p>
+			<BOUCLE_si_trad_redac(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
+			<p>
+				#SET{titre_orig,#INFO_TITRE{article,#ID_TRAD}}
+				#SET{url,#URL_ARTICLE{#ID_TRAD}}
+				<:diogene:info_traduction_article{titre=#GET{titre_orig},url=#GET{url}}:>
+			</p>
+			</BOUCLE_si_trad_redac>
+			<B_traductions_redac>
+			<p><:diogene:message_article_traduit_en:>
+			<BOUCLE_traductions_redac(ARTICLES){traduction}{lang != #LANG}{', '}>
+			#SET{langue,#LANG|traduire_nom_langue}
+			<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
+			</BOUCLE_traductions_redac>
+			</p>
+			</B_traductions_redac>
+			<//B_si_trad_redac>
+			<div class="ajax">
+				[(#FORMULAIRE_EDITER_ARTICLE{[(#ID_ARTICLE|sinon{new})],[(#ID_RUBRIQUE|sinon{#ENV{id_rubrique,0}})],'',#ENV{id_trad,0}})]
+			</div>
+		</BOUCLE_article_en_cours_de_redac>
+			<div id="ajax">
+				[(#FORMULAIRE_EDITER_ARTICLE{oui,#_diogene:ID_SECTEUR,'',#ENV{id_trad,0}})]
+			</div>
+		<//B_article_en_cours_de_redac>
+		<//B_article_env>
+	</BOUCLE_autorise_publier_secteur>
+	#BOITE_OUVRIR{'',error}
+		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+		[(#SESSION{statut}|?{<:diogene:erreur_autorisation_statut_publier:>,<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>})]
+	#BOITE_FERMER
+	<//B_autorise_publier_secteur>
 </BOUCLE_diogene>

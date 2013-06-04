@@ -4,7 +4,7 @@
 <div class="menu diogene #OBJET diogene_#ID_DIOGENE"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">#TITRE</h3>
 	<ul class="menu-liste">
-	<BOUCLE_objets(DATA){source sql,#GET{req}}{pagination #ENV{nb,10}}>
+	<BOUCLE_objets(DATA){source sql,#GET{req}}{pagination #ENV{pagination,10}}>
 		<li class="menu-entree[(#ENV{[(#_diogene:OBJET|id_table_objet)]}|=={#VALEUR{id}}|oui)on]">
 			[(#ENV{[(#_diogene:OBJET|id_table_objet)]}|=={#VALEUR{id}}|non)
 			<a href="[(#URL_PAGE{publier}|parametre_url{type_objet,#_diogene:TYPE}|parametre_url{[(#_diogene:OBJET|id_table_objet)],#VALEUR{id}})]">]

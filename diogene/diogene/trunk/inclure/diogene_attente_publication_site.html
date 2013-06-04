@@ -7,7 +7,7 @@
 <div class="liste_attente"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
 	<h3 class="h3">[(#GET{titre_diogene})] (#GRAND_TOTAL)</h3>
 	<ul class="liste-items liste_objets_attente">
-		<BOUCLE_sites_attente(SITES){id_secteur=#GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination 5}>
+		<BOUCLE_sites_attente(SITES){id_secteur=#GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination #ENV{pagination,5}}>
 		<li class="item">
 			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_syndic,#ID_SYNDIC})]">#TITRE</a></h4>
 			#INTRODUCTION
@@ -22,7 +22,7 @@
 		</li>
 		</BOUCLE_sites_attente>
 	</ul>
-	[<p class="pagination">(#PAGINATION{page})</p>]
+	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</p>]
 </div>
 </B_sites_attente>
 </B_diogene>

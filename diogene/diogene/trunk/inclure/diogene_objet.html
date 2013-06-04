@@ -6,7 +6,6 @@
 	[(#SET{id_parent,#ENV{id_parent,#ENV{id_rubrique}}})]
 	#SET{redirect,#ENV{retour,#SELF}}
 	<BOUCLE_secteur_existant(RUBRIQUES){si #ID_SECTEUR|>{0}}{si #AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui}{id_rubrique=#ID_SECTEUR}{tout}>
-		#SET{id_rubrique,#ID_RUBRIQUE}
 		[(#PIPELINE{diogene_avant_formulaire,[(#ARRAY{args,[(#ENV**|unserialize|array_merge{[(#ARRAY{champs_ajoutes,#CHAMPS_AJOUTES})]})],data,''})]})]
 		<div class="ajax">
 		[(#FORMULAIRE_{[editer_(#OBJET)],#GET{id_objet,oui},#GET{id_parent},#GET{redirect},#ENV{lier_trad}})]

@@ -8,10 +8,7 @@
 <div class="menu liste important">
 	<h2 class="h2"><:diogene:titre_modifier_article:></h2>
 	<ul class="menu-liste">
-		[(#_article:ID_TRAD|=={0}|oui)
-		#SET{origine,#_article:ID_ARTICLE}]
-		[(#_article:ID_TRAD|=={0}|non)
-		#SET{origine,#_article:ID_TRAD}]
+		[(#_article:ID_TRAD|=={0}|?{#SET{origine,#_article:ID_ARTICLE},#SET{origine,#_article:ID_TRAD}})]
 		#SET{langues,#CONFIG{langues_multilingue}|explode{','}}
 		#SET{langues_creees,#ARRAY|push{#_article:LANG}}
 		<li class="menu-entree">
@@ -56,3 +53,4 @@
 </div>
 </BOUCLE_autoriser_modifier>
 </BOUCLE_article>
+#FILTRE{trim}
