@@ -2,7 +2,7 @@
 [(#PLUGIN{mediabox}|oui)#SET{mediabox,oui}]
 <h3 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename|replace{'_',' '})]})]</h3>
 [(#DISTANT|=={non}|oui)
-	[(#EXTENSION|in_array{#ARRAY{0,jpg,1,gif,2,png}}|oui)
+	[(#EXTENSION|in_array{#LISTE{jpg,gif,png}}|oui)
 	<div id="actions-#ID_DOCUMENT" class="actions-documents">
 		[(#PLUGIN{legendes}|et{#AUTORISER{creerdans,legende,#ID_DOCUMENT}}|oui)
 		#SET{legende_editable,oui}
@@ -18,8 +18,7 @@
 		<a href="[(#URL_ACTION_AUTEUR{tourner,#ID_DOCUMENT-90,[(#ENV{redirect,#SELF}|ancre_url{rotation-#ID_DOCUMENT})]})]" title="<:medias:image_tourner_droite:>" class="bouton_rotation bouton_tourner-droite ajax">
 			<:medias:image_tourner_droite:>
 		</a>
-	</div>
-	]]
+	</div>]]
 
 #SET{largeur_previsu,#VAL{_EM_PREVISU_LARGEUR}|defined|?{#EVAL{_EM_PREVISU_LARGEUR},#CONFIG{emballe_medias/styles/largeur_img_previsu,425}}}
 #SET{hauteur_previsu,#VAL{_EM_PREVISU_HAUTEUR}|defined|?{#EVAL{_EM_PREVISU_HAUTEUR},#CONFIG{emballe_medias/styles/hauteur_img_previsu,425}}}

@@ -8,7 +8,7 @@
 	[(#ENV{afficher_titre,oui}|!={non}|oui)
 	<h3 class="h3">[(#GET{titre_diogene})][ ((#GRAND_TOTAL))]</h3>]
 	<ul class="liste-items liste_objets_attente liste_objets_attente_emballe_medias">
-		<BOUCLE_medias_attente(ARTICLES){id_secteur = #GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{!par statut, date}{pagination 5}{tout}>
+		<BOUCLE_medias_attente(ARTICLES){id_secteur = #GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{!par statut, date}{pagination #ENV{pagination,5}}{tout}>
 		<li class="item">[(#SET{url_publier,[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_article,#ID_ARTICLE})]})]
 			<BOUCLE_documents(DOCUMENTS){id_article}{0,1}{tout}>
 			<a href="#GET{url_publier}" class="lien_publier">[(#LOGO_DOCUMENT|sinon{#CHEMIN{images/media_sans_logo.png}}|image_reduire{150,150}|image_recadre{150,150}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#_medias_attente:TITRE|couper{20})]})]</a>
