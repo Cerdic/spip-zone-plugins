@@ -93,7 +93,7 @@
 						label=<:diogene:label_statut_auteur:>,
 						obligatoire=oui})]
 			
-					[(#ENV{objet}|in_array{#ARRAY{0,rubrique}}|non)
+					[(#ENV{objet}|=={rubrique}|non)
 						[(#SAISIE{statuts_auteurs,statut_auteur_publier,
 							cacher_option_intro=oui,
 							explication=<:diogene:explication_statut_auteur_publier:>,
