@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/association_comptabilite');
 
 function formulaires_editer_asso_plan_charger_dist($id_plan=0) {
 	if ($id_plan) { // c'est une edition...
@@ -39,7 +40,7 @@ function formulaires_editer_asso_plan_charger_dist($id_plan=0) {
 
 function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 	$erreurs = array();
-	include_spip('inc/association_comptabilite');
+
 	$classe = _request('classe');
 	if ($erreur = comptabilite_verifier_classe($classe) )
 		$erreurs['classe'] = $erreur;
@@ -53,9 +54,7 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 	// verifie la validite d'un changement
 	if (!array_key_exists('code', $erreurs)) { // si le code est valide
 		$code_initial = _request('code_initial'); // on recupere le code initial pour verifier si on l'a modifie ou pas
-		if ($r = sql_fetsel('code,id_plan', 'spip_asso_plan', "code='$code' AND id_plan<>$id_plan")) { // verifier que le code n'est pas deja attribue a une autre ligne du plan
-			$erreurs['code'] = _T('asso:erreur_plan_code_duplique');
-		} elseif ($code_initial && $code_initial[0]!=$classe && $GLOBALS['association_metas']['comptes']) { // on verifie que si on a change le code on n'a pas modifie la classe pour passer de la classe financiere a une autre classe quand des operations existent dans la base
+		if ($code_initial && $code_initial[0]!=$classe && $GLOBALS['association_metas']['comptes']) { // on verifie que si on a change le code on n'a pas modifie la classe pour passer de la classe financiere a une autre classe quand des operations existent dans la base
 			$colonne = '';
 			if ($code_initial[0]==$GLOBALS['association_metas']['classe_banques']) { // le code original faisait partie de la classe financiere et par consequent le nouveau qui est different non
 				$colonne = 'journal'; // si des operations avec ce compte existent, on trouve sa reference dans la colonne journal

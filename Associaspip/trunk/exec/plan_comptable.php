@@ -54,14 +54,47 @@ function exec_plan_comptable() {
 	));
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
-	echo '<tr class="row_first">';
-	echo "\n<th scope='col'>". _T('asso:classe') .'</th>';
-	echo "\n<th scope='col'>". _T('asso:entete_code') .'</th>';
-	echo "\n<th scope='col'>". _T('asso:entete_intitule') .'</th>';
-	echo "\n<th scope='col'>". _T('asso:solde_initial') .'</th>';
-	echo "\n<th scope='col'>". _T('asso:entete_date') .'</th>';
-	echo '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
-	echo "</tr>\n";
+	$thd = '<tr class="row_first">';
+	$thd .= "\n<th scope='col'>". _T('asso:classe') .'</th>';
+	$thd .= "\n<th scope='col'>". _T('asso:entete_code') .'</th>';
+	$thd .= "\n<th scope='col'>". _T('asso:entete_intitule') .'</th>';
+	$thd .= "\n<th scope='col'>". _T('asso:solde_initial') .'</th>';
+	$thd .= "\n<th scope='col'>". _T('asso:entete_date') .'</th>';
+	$thd .= '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
+	$thd .= "</tr>\n";
+	echo $thd;
+	$lc = sql_allfetsel('classe', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), 'classe', 'classe' );
+	include_spip('inc/association_comptabilite');
+	foreach ($lc as $r) {
+		echo '<tr style="border:0;">';
+		echo '<th class="text">'.$r['classe'].'</th>';
+		echo '<th></th>';
+		echo '<th class="text">'. comptabilite_reference_intitule($r['classe']).'</th>';
+		echo '<th colspan="5"><hr class="spip" /></th>';
+		echo "</tr>\n";
+		$query = sql_select("id_plan, ' ' AS classe, code, intitule, solde_anterieur, date_anterieure", 'spip_asso_plan', 'classe='. sql_quote($r['classe']) .' AND active=' . sql_quote($active), '', 'code' );
+		echo association_bloc_tr(
+			$query, // ressource SQL
+			array(),
+			'id_plan',
+			'',
+			'plan',
+			array(
+				'classe' => array('texte'),
+				'code' => array('texte'),
+				'intitule' => array('texte'),
+				'solde_anterieur' => array('prix'),
+				'date_anterieure' => array('date', 'dtstart'),
+			), // presentation
+			array(
+				array('suppr', 'plan', 'id=$$'),
+				array('edit', 'plan', 'id=$$'),
+			), // boutons
+			$id_plan // selection
+		);
+	}
+
+/*
 	$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
 	$classe = '';
 	$i = 0;
@@ -88,12 +121,13 @@ function exec_plan_comptable() {
 		echo association_bouton_edit('plan', $data['id_plan']);
 		echo "</tr>\n";
 	}
-	if (sql_countsel()<4) {
+*/
+	if (sql_countsel('spip_asso_plan', '', 'classe')<4) {
 		echo '<tr class="row_first">';
-		echo '<th colspan="7" class="erreurs">' . _T('asso:erreur_creer_plan_et_activer_gestion_comptable') .'</th>';
+		echo '<th colspan="7" class="erreurs">' . _T('compta:erreur_plan_nombre_classes', array('nombre'=>4,) ) .'</th>';
 		echo "</tr>\n";
 	}
-	echo "</table>\n";
+	echo "$thd</table>\n";
 	fin_page_association();
 }
 

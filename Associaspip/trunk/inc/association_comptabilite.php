@@ -60,6 +60,30 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
 }
 
 /**
+ * Retourne toutes les references disponibles
+ *
+ * @param string $id
+ *   Identifiant du plan comptable qui nous interesse
+ * @return array $pc_liste
+ *   Liste de references comptables
+ */
+function comptabilite_liste_plancodes($id='') {
+    if (!$id)
+	$id = $GLOBALS['association']['plan_comptable'];
+    if ($id) {
+	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
+	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
+	return array_keys($pc_liste); // on ne veut que les cles
+    } else { // $id===FALSE pour local...
+	$pc_liste = array(); // initialiser le tableau
+	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
+	while( $r = sql_fetch($sql) ) // remplir le tableau
+	    $pc_liste[] = $r['code'];
+	return $pc_liste; // retourner le tableau
+    }
+}
+
+/**
  * Retourne le tableau complet de la liste des comptes
  *
  * @param string $id
@@ -77,7 +101,8 @@ function comptabilite_liste_plancomplet($id='', $lang='') {
     if ($id=='' OR $id==0)
 	$id = $GLOBALS['association']['plan_comptable'];
     if ($id) {
-	include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP : il contient le tableau
+	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
+	include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
     } else { // $id===FALSE pour local...
 	$pc_liste = array(); // initialiser le tableau
 	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
@@ -92,18 +117,18 @@ function comptabilite_liste_plancomplet($id='', $lang='') {
  *
  * @param string $id
  *   Identifiant du plan comptable qui nous interesse
- * @param string $lang
- *   Langue des intitules
  * @return array $pc_norme
  *   Liste de : classe de depart, classe d'arrivee, longueur minimale d'une reference comptable
  */
-function comptabilite_liste_planregles($id='', $lang='') {
-    if (!$lang)
-	$lang = $GLOBALS['spip_lang'];
+function comptabilite_liste_planregles($id='') {
     if (!$id)
 	$id = $GLOBALS['association']['plan_comptable'];
-    include_spip('lang/pcg2'.$id."_$lang"); // charger le fichier de langue SPIP
-    return $pc_norme?$pc_norme:array(0,9,2); // retourner le tableau contenu dans le fichier
+    if (!$id)
+	return array('[0-9]', '[0-9]');
+    $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
+#    include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
+    include(find_in_path('lang/'.$trads[0])); // charger le premier fichier de langue SPIP
+    return (array)$pc_norme; // retourner le tableau contenu dans le fichier
 }
 
 /** @} */
@@ -421,8 +446,6 @@ function comptabilite_reference_virements() {
  *
  * @param string $plan
  *   Plan comptable par rapport auquel on valide
- * @param string $lang
- *   Langue des intitules ?
  * @return string $err
  *   Message d'erreur (vide si validation passee)
  *
@@ -434,10 +457,10 @@ function comptabilite_reference_virements() {
  * @param string $classe
  *   Classe a verifier
  */
-function comptabilite_verifier_classe($classe, $plan='', $lang='') {
+function comptabilite_verifier_classe($classe, $plan='') {
     if ( strlen($classe)!=1 ) // champ vide ou ayant plus d'un caractere
 	return _T('compta:erreur_classe_longueur');
-    $regles = comptabilite_liste_planregles($plan, $lang);
+    $regles = comptabilite_liste_planregles($plan);
     if ( !preg_match($regles[0]?$regles[0]:'[0-9]', $classe) ) // champ hors plage
 	return _T('compta:erreur_classe_plage', array('intervalle'=>$regles[0],) );
     return '';
@@ -451,13 +474,14 @@ function comptabilite_verifier_classe($classe, $plan='', $lang='') {
  * @param string $classe
  *   Caractere de la classe si on souhaite s'assurer que c'est l'initial du code
  */
-function comptabilite_verifier_code($code, $classe='', $plan='', $lang='') {
-    $regles = comptabilite_liste_planregles($plan, $lang);
-    $regles = is_array($regles)?$regles:array('[0-9]', '[0-9]'); // si pas defini on prend deux chiffres
+function comptabilite_verifier_code($code, $classe='', $plan='') {
+    $regles = comptabilite_liste_planregles($plan);
     if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
-	return _T('asso:erreur_plan_code', array('nombre'=>count($regles),) );
+	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
 #    elseif ( strlen($code)<count($regles) ) // champ de longueur insuffisante
 #	return _T('compta:erreur_code_longueur', array('nombre'=>count($regles),) );
+    if (sql_countsel('spip_asso_plan', "code='$code'")>1) // occurences multiples d'une meme reference
+	return _T('compta:erreur_plan_code_doublon');
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
     return '';
@@ -583,18 +607,20 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
  *
  * @param string $plan
  *   ID du plan comptable selectionne
+ * @param string $name
+ *   Nom du selecteur dans le formulaire
  * @return string $res
  *   Liste deroulante des plans comptables disponibles :
  * ce sont de fichiers de langue "lang/pcg2*_*.php"
  */
-function filtre_selecteur_compta_plan($plan) {
+function filtre_selecteur_compta_plan($plan, $name='plan_comptable') {
     $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
     foreach ($liste_plans as $pos=>$plan) {
 	$lang = strpos($plan, '_', 3); // l'indicateur de langue commence au premier underscore
 	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
     }
     $desc_table = charger_fonction('trouver_table', 'base');
-    $res = "<select name='plan_comptable' id='selecteur_plan_comptable'>\n";
+    $res = "<select name='$name' id='selecteur_$name'>\n";
     $res .= '<option value="">'. _T('ecrire:item_non') ."</option>\n";
     foreach (array_unique($liste_plans) as $nom) {
 	$res .= '<option value="'.$nom.'"'.
@@ -608,9 +634,31 @@ function filtre_selecteur_compta_plan($plan) {
 
 /**
  * Selecteur de classe comptable
+ *
+ * @param string $classe
+ *   Classe comptable selectionnee
+ * @param string $name
+ *   Nom du selecteur de classe dans le formulaire
+ * @param string $ref
+ *   Nom du champ de code comptable dans le formulaire
+ * @return string $res
+ *   Liste deroulante des classes comptables disponibles
+ * @note ex :
+ *   balise_SELECTEUR_CLASSE_COMPTABLE_dyn($classe)
  */
-function filtre_selecteur_compta_classe() {
-    // ToDo
+function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code_comptable') {
+    $js = 'var currentVal = String(document.getElementById(\'selecteur_'.$name.'\').value).split(\'-\'); var optGroupElt = document.getElementById(\'codeOptGrp\'+currentVal[0]); if (optGroupElt) {optGroupElt.childNodes[0].selected=\'selected\'; document.getElementById(\'selecteur_'.$ref.'\').onchange()}'; // javascript sur le onchange pour mettre le selecteur de code directement au debut de la classe selectionnée et appeler la fonction onchange du selecteur (repercuter la modif dans les champs libres code et intitule)
+    $res = "<select name='$name' id='selecteur_$name' onclick='$js'>\n";
+    $lc = comptabilite_liste_plancodes(); // on commence par recuperer tous les codes (on ne sait pas recuper la classe directement)
+    foreach ($lc as $code) { // puis parcours de la liste
+	if (strlen($code)==1) { // il s'agit d'une classe
+	    $res .= '<option value="'.$code.'"';
+	    $res .= ($code==$classe) ? ' selected="selected"' : '';
+	    $res .= '>'.$code.' - '. comptabilite_reference_intitule($code) ;
+	    $res .= "</option>\n";
+	}
+    }
+    return "$res</select>\n";
 }
 
 /** @} */

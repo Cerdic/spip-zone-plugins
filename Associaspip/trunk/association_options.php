@@ -2188,7 +2188,7 @@ function association_bloc_listehtml2($table, $reponse_sql, $presentation, $bouto
  * @return string $res
  *   suite de TR-HTML listant les donnees formatees
  */
-function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection) {
+function association_bloc_tr($query, $extra, $cle1, $cle2, $objet, $presentation, $boutons, $selection=0) {
 // initialisations
 	$nbr_lignes = 0;
 	$nbr_couleurs = count($extra);

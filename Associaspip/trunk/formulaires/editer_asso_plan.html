@@ -4,7 +4,11 @@
     <form id="formulaire_#FORM" method="post" action="#ENV{action}">
 	<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 	<ul>
-	    #SELECTEUR_CLASSE_COMPTABLE
+	    <li class="editer_classe">
+		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe})</span>]
+		<label for="classe"><:asso:classe:></label>
+		[(#ENV{classe}|selecteur_compta_classe)]
+	    </li>
 	    <li class="editer_code">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
 		<label for="code"><:asso:code:></label>

@@ -50,7 +50,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	$GLOBALS['association_metas']['classe_banques'],
 	$GLOBALS['association_metas']['classe_contributions_volontaires']
 	) as $key => $val) {
-		$res .= "\n<optgroup label='$val - "._T("perso:classe_$val")."'>";
+		$res .= "\n<optgroup label='$val - ". comptabilite_reference_intitule($code) ."'>";
 		foreach (comptabilite_liste_comptesclasse($val, 1) as $k => $v) {
 			if ($k != $interne) { // code virement interne
 				$s = ($k==$imputation)?' selected="selected"':'';
