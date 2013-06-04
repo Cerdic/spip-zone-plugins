@@ -10,8 +10,7 @@
 			[(#SET{date,[(#DATE|nom_jour|concat{[ (#DATE|affdate)]})]})]
 			[(#SET{date_iso,[(#DATE|date_iso)]})]
 			[(#ID_ADMIN|intval|>{0}|oui)
-			[(#SET{auteurs,[<a href="(#URL_AUTEUR{#ID_ADMIN})">[(#INFO_NOM{auteur,#ID_ADMIN})]</a>]})]
-			]
+			[(#SET{auteurs,[<a href="(#URL_AUTEUR{#ID_ADMIN})">[(#INFO_NOM{auteur,#ID_ADMIN})]</a>]})]]
 			<:collection:info_collection_creation{date=#GET{date},date_abbr=#GET{date_iso},auteurs=#GET{auteurs}}:>
 		</p>
 		[(#PLUGIN{notation}|oui)

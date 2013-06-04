@@ -32,28 +32,25 @@
 	#SET{largeur_media,#ENV{largeur_media,600}}
 	#SET{hauteur_media,#ENV{hauteur_media}}
 	#SET{total,#TOTAL_BOUCLE}
-		<BOUCLE_doc_selectionne(DOCUMENTS){si #GET{total}|=={1}|oui}{id_article}>
-		[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
-		[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|oui)
-			[(#MODELE{doc_img,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},pagination=non,debut_d2c,env,ajax})]
-		]
-		[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|non)
-			[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,350})]]
-			[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},infos=non,noresize=oui,ajax})]
-		]
-		</BOUCLE_doc_selectionne>
-		<BOUCLE_document_selectionne_orig(DOCUMENTS){si #GET{total}|>{1}}{id_article}{mode !IN doc2img,conversion}>
-			[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
-			<BOUCLE_documents_lisibles(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{extension IN flv,mp3,ogg,mp4,ogv,webm,m4v}>
-				[(#EXTENSION|in_array{#ARRAY{0,flv,1,mp3}}|oui)[(#SET{embed,#ID_DOCUMENT})]]
-		 	</BOUCLE_documents_lisibles>
-				[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,''})]]
-				[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},autobuffer=non,noresize=oui,infos=non,env,ajax})]
-			</B_documents_lisibles>
-			[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},noresize=oui,autobuffer=non,infos=non,env,ajax})]
-			<//B_documents_lisibles>
-		</BOUCLE_document_selectionne_orig>
-		</B_documents_selectionne>
+	<BOUCLE_doc_selectionne(DOCUMENTS){si #GET{total}|=={1}|oui}{id_article}>
+	[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|oui)
+		[(#MODELE{doc_img,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},pagination=non,debut_d2c,env,ajax})]
+	]
+	[(#PLUGIN{doc2img}|et{#EXTENSION|in_array{#CONFIG{doc2img/format_document,''}|explode{','}}}|non)
+		[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,350})]]
+		[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},infos=non,noresize=oui,ajax})]
+	]
+	</BOUCLE_doc_selectionne>
+	<BOUCLE_document_selectionne_orig(DOCUMENTS){si #GET{total}|>{1}}{id_article}{mode !IN doc2img,conversion}>
+		<BOUCLE_documents_lisibles(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{extension IN flv,mp3,ogg,mp4,ogv,webm,m4v}>
+	 	</BOUCLE_documents_lisibles>
+			[(#MIME_TYPE|match{audio/}|oui)[(#SET{largeur_media,''})]]
+			[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},autobuffer=non,noresize=oui,infos=non,env,ajax})]
+		</B_documents_lisibles>
+		[(#MODELE{emb,controls=oui,id_document=#_document_orig:ID_DOCUMENT,largeur=#GET{largeur_media},hauteur=#GET{hauteur_media},noresize=oui,autobuffer=non,infos=non,env,ajax})]
+		<//B_documents_lisibles>
+	</BOUCLE_document_selectionne_orig>
+	</B_documents_selectionne>
 </div>
 </BOUCLE_article_media>
 
