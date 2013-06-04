@@ -5,7 +5,7 @@
  * Player html5 pour les balises <audio> et <video>
  * avec fallback vers version flash pour flv/mp4/mp3/aac
  * 
- * $version : 1.2.5
+ * $version : 1.3.0
  * © GNU/GPL v3 - kent1 (http://kent1.info - kent1@arscenic.info)
  * cf : http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/
  * 
@@ -149,9 +149,9 @@
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
 				media.children('source').each(function(){
 					if(($(this).attr('type') != 'video/x-flv') && (id.canPlayType($(this).attr('type')) != '')){
-						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent)){
+						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent))
 							playable = false;
-						}else{
+						else{
 							playable = true;
 							return false;
 						}
@@ -176,10 +176,9 @@
 						height = options.height,
 						width = options.width;
 					
-					id.mediacanplay = id.isFullScreen = false;
 					id.options = options;
+					id.mediacanplay = id.isFullScreen = id.slider_control = id.slider_volume = false;
 					id.percent_loaded = 0;
-					id.slider_control = id.slider_volume = false;
 					id.messages = options.messages;
 					id.type = (media.is('video')) ? 'video' : 'audio';
 					
@@ -216,7 +215,7 @@
 					
 					if(id.addcontrols){
 						if(id.type == 'video')
-							controls = '<div class="ms_splash"></div>'
+							controls = '<div class="ms_splash"></div>';
 						else
 							controls = '';
 								
@@ -460,7 +459,7 @@
 					 */
 					if(!options.volume_bloque && typeof($.fn.mousewheel != "undefined")){
 						wrapper.mousewheel(function(event, delta) {
-							if(!id.muted){
+							if(!id.muted && id.duration){
 								var volume_new = Math.round((id.volume + parseFloat((delta > 0) ? '0.1' : '-0.1'))*10)/10;
 								if((volume_new <= 1) && (volume_new >= 0)) id.volume = volume_new;
 							}
@@ -491,12 +490,9 @@
 
 				var width_container = media.width(), parent_width = wrapper.parent().width();
 				
-				if(id.videoHeight && id.videoWidth)
-					id.ratio = id.videoWidth/id.videoHeight;
-				else if(options.ratio)
-					id.ratio = options.ratio;
-				else
-					id.ratio = media.width()/media.height();
+				if(id.videoHeight && id.videoWidth) id.ratio = id.videoWidth/id.videoHeight;
+				else if(options.ratio) id.ratio = options.ratio;
+				else id.ratio = media.width()/media.height();
 				
 				if(options.movieSize == 'adapt' && !id.isFullScreen && (!media.hasClass('noresize') || (options.movieSize != 'noresize'))){
 					/**
@@ -669,11 +665,7 @@
 		},
 		ms_play_pause : function(){
 			if($(this)[0].mediacanplay && !$(this)[0].seeking){
-				var options = $(this)[0].options;
-				if($(this)[0].paused){
-					$(this)[0].play();
-					this.trigger('play');
-				}else if ($(this)[0].ended){
+				if($(this)[0].paused || $(this)[0].ended){
 					$(this)[0].play();
 					this.trigger('play');
 				}else{
@@ -716,20 +708,16 @@
 						class_remove = sound_button.attr('class').match('volume_button_[0-9]{1,3}');
 					if(options.volume_bloque && options.volume) volume = $(this)[0].volume = (options.volume) ? $(this)[0].volume : options.volume;
 					if((volume <= 0.66) && (volume > 0.33)){
-						if(class_remove != null)
-							sound_button.removeClass(class_remove[0]);
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
 						sound_button.addClass('volume_button_66');
 					}else if((volume <= 1) && (volume > 0.66)){
-						if(class_remove != null)
-							sound_button.removeClass(class_remove[0]);
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
 						sound_button.addClass('volume_button_100');
 					}else if((volume <= 0.33) && (volume > 0)){
-						if(class_remove != null)
-							sound_button.removeClass(class_remove[0]);
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
 						sound_button.addClass('volume_button_33');
 					}else if(volume == 0){
-						if(class_remove != null)
-							sound_button.removeClass(class_remove[0]);
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
 						sound_button.addClass('volume_button_0');
 					}
 					var volume_title = ms_player_lang.bouton_volume+' ('+Math.floor($(this)[0].volume*100)+'%)';
@@ -804,9 +792,8 @@
 				var control = $(this).parent().find('.controls');
 				control.find('.progress_elapsed_time').css('width',percent+'%');
 				control.find('.progress_indicator').css('left',percent+'%');
-			}else if(update_slider){
+			}else if(update_slider)
 				$(this)[0].slider_control.slider("value", percent);
-			}
 		},
 		/**
 		 * Activer ou désactiver la boucle (mode loop)
@@ -877,11 +864,7 @@
 		},
 		ms_fullscreen_resize : function(){
 			var container = $(this).parent(),
-				id_container = container[0],
-				window_width = window.innerWidth,
-		    	window_height = window.innerHeight,
-				ratio = (window_height/$(this)[0].videoHeight),
-				width_final = ($(this)[0].videoWidth*ratio).toFixed();
+				id_container = container[0];
 	
 			container.find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen_full);
 			
@@ -890,11 +873,15 @@
 				container.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
 				$(this).ms_resize_controls();
 			}else{
+				var window_width = window.innerWidth,
+		    		window_height = window.innerHeight,
+					ratio = (window_height/$(this)[0].videoHeight),
+					width_final = ($(this)[0].videoWidth*ratio).toFixed();
 				container.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
 				if(width_final > window_width){
-					var ratio = (window_width/$(this)[0].videoWidth);
-					var height_final = ($(this)[0].videoHeight*ratio).toFixed();
-					var top = ((window_height-height_final)/2).toFixed();
+					var ratio = (window_width/$(this)[0].videoWidth),
+						height_final = ($(this)[0].videoHeight*ratio).toFixed(),
+						top = ((window_height-height_final)/2).toFixed();
 					$(this).css({position:'absolute',width:window_width+'px',height:height_final+'px',top:top+'px',left:'0'});
 				}else{
 					var left = ((window_width-width_final)/2).toFixed();
@@ -967,10 +954,10 @@
 		 * @param message string : le contenu du message 
 		 */
 		ms_messages : function(type,message){
-			var messages, options = $(this)[0].options,
+			if(!$(this)[0].options.messages) return;
+			
+			var messages,
 				message = '<span class="'+type+'">'+message+'</span>';
-
-			if(!options.messages) return;
 			
 			if($(this).is('.media_wrapper')) messages = $(this).find('.messages');
 			else messages = $(this).parents('.media_wrapper').find('.messages');
@@ -1034,13 +1021,11 @@
 		ms_update_loaded : function(e){
 			var percent_loaded = null;
 			if($(this)[0].buffered && $(this)[0].buffered.length)
-				percent_loaded = ms_anything_to_percent($(this)[0].buffered.end(0),$(this)[0].duration);
+				$(this)[0].percent_loaded = percent_loaded = ms_anything_to_percent($(this)[0].buffered.end(0),$(this)[0].duration);
 			else if((typeof(e.loaded) != 'undefined') && (typeof(e.total) != 'undefined'))
-				percent_loaded = ms_anything_to_percent(e.loaded,e.total);
-			if(percent_loaded != null){
-				$(this)[0].percent_loaded = percent_loaded;
+				$(this)[0].percent_loaded = percent_loaded = ms_anything_to_percent(e.loaded,e.total);
+			if(percent_loaded != null)
 				$(this).parent().find('.progress_buffered').css('width',percent_loaded+'%');
-			}
 		},
 		/**
 		 * Quelques évènements à la pression de touches sur le clavier
@@ -1057,14 +1042,11 @@
 				switch (e.keyCode) {
 					case 27 :
 						/**
-					     * Touche esc
-					     * Sort du mode fullscreen (uniquement sur videos)
+					     * Touche esc : sort du mode fullscreen (uniquement sur videos)
 					     */
 						e.preventDefault();
-			        	if (!fullScreenApi.supportsFullScreen) {
-			        		if($(this).find('video')[0].isFullScreen)
-			        			$(this).find('video').ms_fullscreen();
-			        	}
+			        	if (!fullScreenApi.supportsFullScreen && $(this).find('video')[0].isFullScreen)
+			        		$(this).find('video').ms_fullscreen();
 						break;
 					case 70 :
 						/**
@@ -1088,8 +1070,7 @@
 						break;
 					case 77 :
 						/**
-					     * Touche M
-					     * Mute ou unmute
+					     * Touche M : mute ou unmute
 					     */
 						if($(this).find('video,audio')[0].isFullScreen || $('input:focus,textarea:focus').size() == 0){
 							$(this).find('video,audio').ms_volume(true);
@@ -1098,10 +1079,8 @@
 						break;
 					case 32 :
 						 /**
-					      * Touche Space
-					      * Lance la lecture ou met le media en pause
+					      * Touche Space : lance la lecture ou met le media en pause
 					      */
-						
 			    		if($(this).find('video,audio')[0].isFullScreen || ($('input:focus,textarea:focus').size() == 0)){
 			    			$(this).find('video,audio').ms_play_pause();
 			        		e.preventDefault();
@@ -1112,7 +1091,7 @@
 					     * Touches Up (38) et Down (40)
 					     * Baisse ou augmente de 10% le volume de la video en cours de lecture
 					     */
-			    		if($(this).find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus').size() == 0)){
+			    		if($(this).find('video,audio')[0].duration && ($(this).find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus').size() == 0))){
 			        		if(!$(this).find('video,audio')[0].muted){
 								var delta  = (e.keyCode == 38) ? 1 : -1,
 									volume = $(this).find('video,audio')[0].volume,
@@ -1131,7 +1110,7 @@
 					     * Avance ou recule de 5% la video en cours de lecture
 					     * Il faut également modifier la valeur de la barre
 					     */
-			    		if($(this).find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus,select:focus').size() == 0)){
+			    		if($(this).find('video,audio')[0].duration && ($(this).find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus,select:focus').size() == 0))){
 			    			var pourcent_actuel = (($(this).find('video,audio')[0].currentTime / $(this).find('video,audio')[0].duration) * 100);
 			    			if(e.keyCode == 37)
 				    			var new_percent = (pourcent_actuel >= 5) ? (pourcent_actuel - 5) : 0;
