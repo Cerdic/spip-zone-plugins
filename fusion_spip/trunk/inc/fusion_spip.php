@@ -109,10 +109,10 @@ function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
 		if ($shema_source = sql_showtable($nom_table, false, $connect)) {
 			if ($diff_colonnes = array_diff(array_keys($shema_table['field']), array_keys($shema_source['field']))) {
-				$erreurs[] = 'Table "'.$nom_table.'" : manque champs '.join(' - ', $diff_colonnes);
+				$erreurs[] = _T('fusion_spip:manque_champs_source', array('table' => $nom_table, 'diff' => join(' - ', $diff_colonnes)));
 			}
 		} else {
-			$erreurs[] = 'Manque la table à importer "'.$nom_table.'"';
+			$erreurs[] = _T('fusion_spip:manque_table_source', array('table' => $nom_table));
 		}
 	}
 
