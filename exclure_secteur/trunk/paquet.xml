@@ -1,12 +1,13 @@
 <paquet
 	prefix="exclure_sect"
 	categorie="outil"
-	version="2.0.4"
+	version="2.0.5"
 	etat="test"
 	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="prive/themes/spip/images/exclure_secteur.jpg"
 	documentation="http://www.spip-contrib.net/Plugin-Exclure-secteur"
->	
+	schema="0.1.0"
+>
 
 	<nom>Exclure secteur</nom>
 	<!-- Exclure automatiquement des boucles certains secteurs -->
