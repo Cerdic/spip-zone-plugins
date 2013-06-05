@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function exclure_sect_upgrade($nom_meta_version_base, $version_cible){
    include_spip('base/upgrade');
@@ -7,7 +8,7 @@ function exclure_sect_upgrade($nom_meta_version_base, $version_cible){
    $maj['create'] = array(array('exclure_sect_conf'));
 
 
-    maj_plugin($nom_meta_base_version, $version_cible,$maj);
+    maj_plugin($nom_meta_version_base, $version_cible, $maj);
   }
 
 function exclure_sect_conf(){
