@@ -12,10 +12,9 @@
 				<div class="texte diogene_description">
 				<p>
 					<strong><:diogene:info_statut:> </strong>
-					[(#STATUT|=={publie}|oui)
-						<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-					[(#STATUT|=={publie}|non)
-						[(#STATUT|diogene_info_statut)]]
+					[(#STATUT|=={publie}|?{
+						[<a href="#URL_ARTICLE" class="spip_in">(#STATUT|diogene_info_statut)</a>],
+						[(#STATUT|diogene_info_statut)]})]
 				</p>
 				<BOUCLE_si_trad(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
 				<p>
@@ -43,10 +42,9 @@
 				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
 				<p>
 					<strong><:diogene:info_statut:> </strong>
-					[(#STATUT|=={publie}|oui)
-						<a href="#URL_ARTICLE" class="spip_in">[(#STATUT|diogene_info_statut)]</a>]
-					[(#STATUT|=={publie}|non)
-						[(#STATUT|diogene_info_statut)]]
+					[(#STATUT|=={publie}|?{
+						[<a href="#URL_ARTICLE" class="spip_in">(#STATUT|diogene_info_statut)</a>],
+						[(#STATUT|diogene_info_statut)]})]
 				</p>
 				<BOUCLE_si_trad_redac(CONDITION){si #ID_TRAD|=={#ID_ARTICLE}|ou{#ID_TRAD|=={0}}|non}>
 				<p>
@@ -58,7 +56,7 @@
 				<B_traductions_redac>
 				<p><:diogene:message_article_traduit_en:>
 				<BOUCLE_traductions_redac(ARTICLES){traduction}{lang != #LANG}{', '}>
-				#SET{langue,#LANG|traduire_nom_langue}
+				[(#SET{langue,[(#LANG|traduire_nom_langue)]})]
 				<a href="[(#ID_ARTICLE|generer_url_publier{article})]" title="<:diogene:lien_version{lang=#GET{langue}}:>">#GET{langue}</a>
 				</BOUCLE_traductions_redac>
 				</p>
@@ -74,10 +72,10 @@
 			<//B_article_en_cours_de_redac>
 			<//B_article_env>
 		</BOUCLE_autorise_publier_secteur>
-		#BOITE_OUVRIR{'',error}
-			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
-			[(#SESSION{statut}|?{<:diogene:erreur_autorisation_statut_publier:>,<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>})]
-		#BOITE_FERMER
+		[(#BOITE_OUVRIR{'',error})]
+			[(#SET{url,[(#URL_PAGE{login}|parametre_url{url,#SELF})]})]
+			[(#SESSION{statut}|?{<:diogene:erreur_autorisation_statut_publier:>,<:diogene:erreur_autorisation_login_publier{url=[(#GET{url})]}:>})]
+		[(#BOITE_FERMER)]
 		<//B_autorise_publier_secteur>
 	</BOUCLE_autoriser_modifier_creer>
 	</B_autoriser_modifier_creer>
