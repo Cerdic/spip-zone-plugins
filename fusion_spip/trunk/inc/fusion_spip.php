@@ -19,7 +19,7 @@ function fusion_spip_lister_tables_principales($connect, $skip_non_existing = fa
 	unset($tables['spip_paquets']);
 	unset($tables['spip_types_documents']);
 
-	// zapper les tables de l'hote qui ne sont pas dans la basqe importée
+	// zapper les tables de l'hote qui ne sont pas dans la base importée
 	if( $skip_non_existing ) {
 		foreach($tables as $table => $shema){
 			if( !sql_showtable($table, false, $connect)){
@@ -65,7 +65,7 @@ function fusion_spip_lister_tables_auxiliaires($connect, $skip_non_existing = fa
 		unset($tables['spip_versions_fragments']);
 	}
 
-	// zapper les tables de l'hote qui ne sont pas dans la basqe importée
+	// zapper les tables de l'hote qui ne sont pas dans la base importée
 	if( $skip_non_existing ) {
 		foreach($tables as $table => $shema){
 			if( !sql_showtable($table, false, $connect)){
