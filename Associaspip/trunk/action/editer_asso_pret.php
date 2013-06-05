@@ -56,9 +56,8 @@ function action_editer_asso_pret_dist() {
 	$erreur = comptabilite_operation_modifier(($fiso_retour>$fiso_sortie)?$date_retour:$date_sortie, $montant*($duree?$duree:1), 0, '['. _T('asso:titre_num', array('titre'=>_T('local:pret'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_prets'], $journal, $id_pret, $id_compte);
 	// on modifie l'opertation comptable associee a la caution
 	if ( !$erreur && $caution && $GLOBALS['association_metas']['pc_cautions'] ) { // les cautions sont encaissees
-	    $association_imputation = charger_fonction('association_imputation', 'inc');
-	    $critere = $association_imputation('pc_cautions', $id_pret);
-	    $err2 = comptabilite_operation_modifier($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND recette>0") ); // depot
+	    $critere = comptabilite_reference_operation('pc_cautions', $id_pret);
+	    $err2 = comptabilite_operation_modifier($date_caution1, $caution, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution1'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "id_compte=$critere AND recette>0") ); // depot
 	    $err3 = comptabilite_operation_modifier($date_caution0, 0, $caution, '['. _T('asso:titre_num', array('titre'=>_T('local:caution'),'num'=>$id_pret) ) .$ref_pret, $GLOBALS['association_metas']['pc_cautions'], _request('mode_caution0'), $id_pret, sql_getfetsel('id_compte', 'spip_asso_comptes', "$critere AND depense>0") ); // restitution
 	    $erreur = ($err2?$err2:$err3);
 	}

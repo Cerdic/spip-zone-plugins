@@ -2475,7 +2475,7 @@ function association_passeparam_compta($classes=array()) {
 
 function association_chargeparam_operation($type, $id, &$contexte) {
 	if ( $id ) { // si c'est une modification, on charge ses id_compte et journal depuis la table asso_comptes
-		list($id_compte, $journal) = sql_fetsel('id_compte, journal', 'spip_asso_comptes', 'imputation='. sql_quote($GLOBALS['association_metas']["pc_$type"]) .' AND id_journal='. sql_quote($id) ); // on recupere id_compte et journal dans la table des asso_compteS
+		list($id_compte, $journal) = sql_fetsel('id_compte, journal', 'spip_asso_comptes', 'imputation='. sql_quote($GLOBALS['association_metas']["pc_$type"]) .' AND id_journal='. intval($id) ); // on recupere id_compte et journal dans la table des asso_compteS
 	} else {  // si c'est une nouvelle operation, on charge id_compte et journal vides
 		$id_compte = $journal = '';
 	}

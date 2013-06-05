@@ -45,8 +45,7 @@ function action_editer_asso_don_dist() {
 			// modification du don en argent
 			$err1 = comptabilite_operation_modifier($date_don, $argent, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:don'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_dons'], $journal, $id_don, $id_compte);
 			// modification du don en nature
-			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$err2 = comptabilite_operation_modifier($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_colis', $id_don)) );
+			$err2 = comptabilite_operation_modifier($date_don, $valeur, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:colis'),'num'=>$id_don) ) .$ref_don, $GLOBALS['association_metas']['pc_colis'], '', $id_don, sql_getfetsel('id_compte', 'spip_asso_comptes', comptabilite_reference_operation('pc_colis', $id_don)) );
 			$erreur = ($err1?$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives au don

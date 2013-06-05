@@ -28,7 +28,7 @@ include_spip('base/association');
  * @return array $destinations
  *   Un tableau eventuellement vide de id_destination=>montant
  * @note:ex
- *   association_liste_destinations_associees($id_operation)
+ * association_liste_destinations_associees($id_operation);
  */
 function comptabilite_liste_destinationsassociees($id_operation) {
 	$sql = sql_select('recette, depense, id_destination', 'spip_asso_destination_op', "id_compte=" . intval($id_operation));
@@ -49,7 +49,7 @@ function comptabilite_liste_destinationsassociees($id_operation) {
  * @return array $res
  *   retourne un tableau $code=>$intitule trie par code
  * @note:ex
- *   association_liste_plan_comptable($classe, $actives)
+ * association_liste_plan_comptable($classe, $actives);
  */
 function comptabilite_liste_comptesclasse($classe, $actives='') {
     $res = array();
@@ -93,7 +93,7 @@ function comptabilite_liste_plancodes($id='') {
  * @return array $pc_liste
  *   Tableau de reference=>intitule
  * @note:ex
- *   association_plan_comptable_complet()
+ * association_plan_comptable_complet();
  */
 function comptabilite_liste_plancomplet($id='', $lang='') {
     if (!$lang)
@@ -135,7 +135,7 @@ function comptabilite_liste_planregles($id='') {
 
 
 /*****************************************
- * @defgroup comptabilite_operation
+ * @defgroup comptabilite_operation_
  * Action sur la(s) operation(s) du grand journal
  *
 ** @{ */
@@ -160,7 +160,7 @@ function comptabilite_liste_planregles($id='') {
  * @return int $id_operation
  *   ID de l'operation dans spip_asso_comptes et spip_asso_destination_op
  * @note:ex
- *   association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal);
+ * association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal);
  */
 function comptabilite_operation_ajouter($date, $recette, $depense, $justification, $imputation, $journal, $id_journal) {
     $modifs = array(
@@ -208,7 +208,7 @@ function comptabilite_operation_ajouter($date, $recette, $depense, $justificatio
  * @return string $err
  *   Message d'erreur (vide en cas de succes)
  * @note:ex
- *   association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation)
+ * association_modifier_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation)
  */
 function comptabilite_operation_modifier($date, $recette, $depense, $justification, $imputation, $journal, $id_journal, $id_operation) {
     $err = '';
@@ -249,9 +249,9 @@ function comptabilite_operation_modifier($date, $recette, $depense, $justificati
  *   ID de l'enregistrement d'ecriture inverse : indique donc une annulation
  *   comptable quand different de 0, et une suppression pure et simple sinon
  * @note:ex
- *    association_supprimer_operation_comptable1($id_operation, $securite)
+ *    association_supprimer_operation_comptable1($id_operation, $securite);
  */
-function comptabilite_operation1_supprimer($id_operation, $securite=FALSE) {
+function comptabilite_operation_supprimer($id_operation, $securite=FALSE) {
     list($date, $recette, $depense, $imputation, $journal, $id_journal, $verrou) = sql_fetsel('date_operation, recette, depense, imputation, journal, id_journal, vu', 'spip_asso_comptes', "id_compte=$id_operation"); // recuperer les informations sur l'operation pour le fichier de log
     if ( ($securite AND !$verrou) || !$securite ) { // operation non verouillee ou controle explicitement desactive...
 	$annulation = 0;
@@ -274,48 +274,6 @@ function comptabilite_operation1_supprimer($id_operation, $securite=FALSE) {
 }
 
 /**
- * Supprimer une operation dans spip_asso_comptes ainsi que si necessaire sa ventilation dans spip_asso_destination_op ;
- * C'est la forme utilisee par les modules...
- *
- * @param int $id_journal
- *   ID de l'enregistrement associe dans le module  (chaque imputation etant gere par un seul module)
- * @param string $pc_journal
- *   Nom de la meta associe au module (renverra le code comptable gere uniquement par ce module)
- * @return int $id_operation
- *   ID de l'enregistrement supprime ou annule
- *   (vaut donc 0 si aucun enregistrement touche)
- * @note:ex
- *   association_supprimer_operation_comptable2($id_journal, $pc_journal)
- */
-function comptabilite_operation_supprimer($id_journal, $pc_journal) {
-    $association_imputation = charger_fonction('association_imputation', 'inc');
-    if ( $id_operation = sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation($pc_journal, $id_journal)) )
-	comptabilite_operation1_supprimer($id_operation);
-    return $id_operation; // indique quelle operation a ete supprimee (0 si aucune --donc erreur dans les parametres ?)
-}
-
-/**
- * Suppression en masse d'operations compatebles avec leur ventilations
- *
- * @param string $critere
- *   Critere de selection SQL des operations a supprimer
- * @retur int $ok
- *   Nombre de comptes effectivement supprimes
- * @warning
- *   Cette fonction est a manipuler avec precaution...
- * @note:ex
- *   association_supprimer_operations_comptables($critere)
- */
-function comptabilite_operations_supprimer($critere) {
-    $ok = 0; // compteur de suppression
-    $sql = sql_select('id_compte', 'spip_asso_comptes', $where); // liste des operations a supprimer
-    while ( $r = fetch($sql) )
-	if ( comptabilite_operation1_supprimer($r['id_compte']) )
-	    $ok++;
-    return $ok;
-}
-
-/**
  * Editer des destinations comptables liees a une operation comptable
  *
  * @param int $id_compte
@@ -329,7 +287,7 @@ function comptabilite_operations_supprimer($critere) {
  * Quand vide, les ventilations sont recherchees dans $_POST['id_dest'] et $_POST['montant_dest']
  * @return void
  * @note:ex
- *   association_ajouter_destinations_comptables($id_compte, $recette, $depense)
+ * association_ajouter_destinations_comptables($id_compte, $recette, $depense);
  */
 function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $repartion=array() ) {
     sql_delete('spip_asso_destination_op', "id_compte=$id_compte"); // on efface de la table destination_op toutes les entrees correspondant a cette operation  si on en trouve
@@ -380,8 +338,8 @@ function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $re
  * code parent lorsqu'on ne trouve pas le code exact demande.
  * @return string $nom
  *   L'intitule correspondant trouve
- * @note
- *   Ex association_plan_comptable_complet($code,$parent);
+ * @note:ex
+ * association_plan_comptable_complet($code,$parent);
  */
 function comptabilite_reference_intitule($code, $parent=0) {
     $nom = sql_getfetsel('intitule','spip_asso_plan','code='.sql_quote($code) ); // on tente de recuperer l'intitule defini...
@@ -399,6 +357,26 @@ function comptabilite_reference_intitule($code, $parent=0) {
 }
 
 /**
+ * Donne l'operation comptable associee a un enregistrement pour un module gerant une imputation comptable
+ *
+ * @param string $nom
+ *   Nom de la meta contenant le code d'imputation (cf. $var)
+ *   ou directement le code d'imputation gere par le module
+ * @param int $id
+ *   ID de l'enregistrement associe par-et-dans le module
+ * @param string $var
+ *   Nom de la table des metas :
+ * c'est l'entree du tableau $GLOBALS qui contient le nom associe a l'imputation
+ * @return int $id_op
+ *   ID de la premiere operation correspondante enregistree dans le grand livre
+ * @note:ex
+ * $association_imputation = charger_fonction('association_imputation', 'inc'); $id_operation = sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation($nom, $id));
+ */
+function comptabilite_reference_operation($nom, $id=0, $var='association_metas') {
+    return sql_getfetsel('id_compte', 'spip_asso_comptes', 'imputation='. sql_quote($var?$GLOBALS[$var][$nom]:$nom) .'AND id_journal='. intval($id) );
+}
+
+/**
  * Recupere le code du compte des virements internes
  *
  * @return string $res
@@ -406,7 +384,7 @@ function comptabilite_reference_intitule($code, $parent=0) {
  *   S'il n'existe pas, on prend le premier compte 58x existant,
  *   sinon on cree le compte 581 !
  * @note:ex
- *   association_creer_compte_virement_interne()
+ * association_creer_compte_virement_interne();
  */
 function comptabilite_reference_virements() {
     if ($GLOBALS['association_metas']['pc_intravirements']) // un code de virement interne est deja defini !
@@ -670,26 +648,6 @@ function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code_comp
  *
 ** @{ */
 
-
-/**
- * Prepare le critere sur une imputation comptable
- *
- * @param string $nom
- *   Nom de la meta contenant le code d'imputation
- * @param int $id
- *   ID de l'enregistrement associe
- * @param string $table
- *   Nom ou alias de la table a interroger
- * @return string $champ
- *   sous-requete SQL de selection/restriction a une imputation comptable
- */
-function inc_association_imputation_dist($nom, $id='', $table='') {
-	if ($GLOBALS['association_metas'][$nom])
-		$w = ($table ? ($table . '.') : '') . 'imputation='. sql_quote($GLOBALS['association_metas'][$nom]);
-	else $w = '';
-	$w2 = $id ? ("id_journal=".intval($id)) : '';
-	return ($w AND $w2) ? "$w AND $w2" : "$w$w2";
-}
 
 /**
  * On recupere les soldes des differents comptes de la classe specifiee pour la periode specifiee

@@ -15,8 +15,8 @@ function action_supprimer_asso_don_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_don = $securiser_action();
 	include_spip ('inc/association_comptabilite');
-	comptabilite_operation_supprimer($id_don, 'pc_dons');
-	comptabilite_operation_supprimer($id_don, 'pc_colis');
+	comptabilite_operation_supprimer(comptabilite_reference_operation('pc_dons', $id_don));
+	comptabilite_operation_supprimer(comptabilite_reference_operation('pc_colis', $id_don));
 	sql_delete('spip_asso_dons', "id_don=$id_don");
 }
 

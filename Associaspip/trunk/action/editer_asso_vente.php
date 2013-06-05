@@ -66,8 +66,7 @@ function action_editer_asso_vente_dist() {
 			$erreur = comptabilite_operation_modifier($date_vente, $quantite*$prix_unite+$frais_envoi, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:vente'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 		} else { // sinon on en modifie deux
 			$err1 = comptabilite_operation_modifier($date_vente, $quantite*$prix_unite, 0, '['. _T('asso:titre_num', array('titre'=>_T('local:vente'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
-			$association_imputation = charger_fonction('association_imputation', 'inc');
-			$err2 = comptabilite_operation_modifier($date_envoi, $frais_envoi, 0, '['. _T('asso:titre_num', array('titre'=>_T('asso:config_libelle_frais_envoi'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', $association_imputation('pc_frais_envoi', $id_vente)) );
+			$err2 = comptabilite_operation_modifier($date_envoi, $frais_envoi, 0, '['. _T('asso:titre_num', array('titre'=>_T('asso:config_libelle_frais_envoi'),'num'=>$num_vente) ) .$ref_vente, $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel('id_compte', 'spip_asso_comptes', comptabilite_reference_operation('pc_frais_envoi', $id_vente)) );
 			$erreur = ($err1?$err1:$err2);
 		}
 		if (!$erreur) // on modifie les informations relatives a la vente
