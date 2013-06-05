@@ -5,7 +5,7 @@
  *
  * @return array liste des tables
  */
-function fusion_spip_lister_tables_principales() {
+function fusion_spip_lister_tables_principales($connect, $skip_non_existing = false) {
 
 	// @todo : lire les descriptions des tables sources plutot que locales ?
 	// comment dissocier principales/auxiliares/jointures de la base source ?
@@ -19,6 +19,15 @@ function fusion_spip_lister_tables_principales() {
 	unset($tables['spip_paquets']);
 	unset($tables['spip_types_documents']);
 
+	// zapper les tables de l'hote qui ne sont pas dans la basqe importée
+	if( $skip_non_existing ) {
+		foreach($tables as $table => $shema){
+			if( !sql_showtable($table, false, $connect)){
+				unset($tables[$table]);
+			}
+		}
+	}
+
 	return $tables;
 }
 
@@ -31,7 +40,7 @@ function fusion_spip_lister_tables_principales() {
  *
  * @return array liste des tables
  */
-function fusion_spip_lister_tables_auxiliaires($stats = false, $referers = false, $versions = false) {
+function fusion_spip_lister_tables_auxiliaires($connect, $skip_non_existing = false, $stats = false, $referers = false, $versions = false) {
 
 	// @todo : lire les descriptions des tables sources plutot que locales ?
 	// comment dissocier principales/auxiliares/jointures de la base source ?
@@ -54,6 +63,15 @@ function fusion_spip_lister_tables_auxiliaires($stats = false, $referers = false
 	if (!$versions) {
 		unset($tables['spip_versions']);
 		unset($tables['spip_versions_fragments']);
+	}
+
+	// zapper les tables de l'hote qui ne sont pas dans la basqe importée
+	if( $skip_non_existing ) {
+		foreach($tables as $table => $shema){
+			if( !sql_showtable($table, false, $connect)){
+				unset($tables[$table]);
+			}
+		}
 	}
 
 	return $tables;
@@ -84,12 +102,9 @@ function fusion_spip_lister_cles_primaires($tables) {
  * @param integer $base identifiant de la connection
  * @return array liste des erreurs
  */
-function fusion_spip_comparer_shemas($base, $traite_stats, $traite_referers) {
-	$erreurs = array();
-	$bases = bases_referencees(_FILE_CONNECT_TMP);
-	$connect = $bases[$base];
+function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
 
-	$tables = array_merge(fusion_spip_lister_tables_principales(), fusion_spip_lister_tables_auxiliaires($traite_stats, $traite_referers));
+	$tables = array_merge($principales, $auxiliaires);
 	foreach ($tables as $nom_table => $shema_table) {
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
 		if ($shema_source = sql_showtable($nom_table, false, $connect)) {

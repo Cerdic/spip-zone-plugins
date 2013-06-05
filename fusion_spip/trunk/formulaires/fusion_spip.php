@@ -39,9 +39,16 @@ function formulaires_fusion_spip_charger_dist() {
 function formulaires_fusion_spip_verifier_dist() {
 	$erreurs = array();
 
+	$base = _request('base');
 	$traite_stats = (_request('stats') == 'on' ? true : false);
 	$traite_referers = (_request('referers') == 'on' ? true : false);
 	$traite_versions = (_request('versions') == 'on' ? true : false);
+
+	$bases = bases_referencees(_FILE_CONNECT_TMP);
+	$connect = $bases[$base];
+
+	$principales = fusion_spip_lister_tables_principales($connect, false);
+	$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers, $traite_versions);
 
 	// vérifier champs obligatoires
 	if (!_request('base')) {
@@ -49,12 +56,11 @@ function formulaires_fusion_spip_verifier_dist() {
 	} // vérifier la conformité du shéma de la base source
 	else {
 		if( _request('confirme_warning') != 'on' ){
-			$erreurs_shema = fusion_spip_comparer_shemas(_request('base'), $traite_stats, $traite_referers, $traite_versions);
+			$erreurs_shema = fusion_spip_comparer_shemas($connect, $principales, $auxiliaires);
 			if (count($erreurs_shema)) {
-				$erreurs['warning_base_source'] = '- '.join('<br>- ', $erreurs_shema);
+				$erreurs['warning_shema'] = '- '.join('<br>- ', $erreurs_shema);
 			}
 		}
-
 	}
 
 	return $erreurs;
@@ -102,9 +108,8 @@ function formulaires_fusion_spip_traiter_dist() {
 		$time_start = microtime(true);
 		spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
-
-		$principales = fusion_spip_lister_tables_principales();
-		$auxiliaires = fusion_spip_lister_tables_auxiliaires($traite_stats, $traite_referers, $traite_versions);
+		$principales = fusion_spip_lister_tables_principales($connect, true);
+		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers, $traite_versions);
 		$cles_primaires = fusion_spip_lister_cles_primaires($principales);
 
 		// insérer les objets principaux

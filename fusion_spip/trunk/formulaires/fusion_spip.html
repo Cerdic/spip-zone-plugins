@@ -19,9 +19,9 @@
 				</select>
 				<p><:fusion_spip:base_desc:></p>
 			</li>
-			#SET{warning,#ENV**{erreurs}|table_valeur{warning_base_source}}
-			[<li class="editer_confirme_warning [ (#GET{warning}|oui)erreur]">
-				<span class='erreur_message'>(#GET{warning})</span>
+			#SET{warning_shema,#ENV**{erreurs}|table_valeur{warning_shema}}
+			[<li class="editer_confirme_warning [ (#GET{warning_shema}|oui)erreur]">
+				<span class='erreur_message'>(#GET{warning_shema})</span>
 				<input type="checkbox" name="confirme_warning" id="confirme_warning" />
 				<label for="confirme_warning"><:fusion_spip:confirme_warning:></label>
 			</li>]

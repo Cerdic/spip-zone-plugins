@@ -54,7 +54,7 @@ function formulaires_fusion_spip_supprimer_traiter_dist() {
 	$bases = bases_referencees(_FILE_CONNECT_TMP);
 	$connect = $bases[$base];
 
-	$principales = fusion_spip_lister_tables_principales();
+	$principales = fusion_spip_lister_tables_principales($connect);
 	foreach ($principales as $nom_table => $val) {
 		// Retrouve la clé primaire à partir du nom d'objet ou de table
 		$nom_id_objet = id_table_objet($nom_table);
