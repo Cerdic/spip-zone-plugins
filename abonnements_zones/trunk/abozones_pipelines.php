@@ -19,13 +19,13 @@ function abozones_afficher_complement_objet($flux){
 }
 
 /*
- * Ajouter ou retirer un utilisateur des zones liées à une offre suivant divers événements
+ * Ajouter ou retirer à un utilisateur des zones liées à une offre suivant divers événements
  */
 function abozones_post_edition($flux){
-	// Lorsqu'un abonnement change de statut... et que l'offre est liée à des zones !
+	// Lorsqu'un abonnement est créé ou change de statut... et que l'offre est liée à des zones !
 	if (
 		$flux['args']['table'] == 'spip_abonnements'
-		and $flux['args']['action'] == 'instituer'
+		and (($flux['args']['action'] == 'modifier') or ($flux['args']['action'] == 'instituer'))
 		and $id_abonnement = intval($flux['args']['id_objet'])
 		and $abonnement = sql_fetsel('id_abonnements_offre,id_auteur', 'spip_abonnements', 'id_abonnement = '.$id_abonnement)
 		and $id_auteur = $abonnement['id_auteur']
@@ -43,7 +43,11 @@ function abozones_post_edition($flux){
 		}
 		
 		// Si c'est une activation on ajoute les zones trouvées à l'utilisateur de l'abonnement SANS autorisation
-		if ($flux['data']['statut'] == 'actif') {
+		if (
+			$flux['data']['statut'] == 'actif'
+			and !isset($flux['data']['statut_ancien'])
+			or !isset($flux['data']['statut'])			
+		) {
 			autoriser_exception('affecterzones', 'auteur', $id_auteur);
 			zone_lier($zones, 'auteur', $id_auteur);
 			autoriser_exception('affecterzones', 'auteur', $id_auteur, false);
@@ -65,7 +69,7 @@ function abozones_post_edition($flux){
 }
 
 /*
- * Ajouter ou retirer un utilisateur d'une zone qui vient d'être liée ou déliée à une offre
+ * Ajouter ou retirer à un utilisateur une zone qui vient d'être liée ou déliée à une offre
  */
 function abozones_post_edition_lien($flux){
 	// Lorsqu'on vient de modifier un lien de zone pour une offre, et que celle-ci a des abonnements actifs
@@ -100,7 +104,7 @@ function abozones_post_edition_lien($flux){
 				autoriser_exception('retirerzones', 'auteur', $id_auteur, false);
 			}
 		}
-	}
+	}	
 }
 
 ?>
