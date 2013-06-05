@@ -141,6 +141,11 @@ function formulaires_fusion_spip_traiter_dist() {
 		// déclarer les url uniques importées avec "perma=1"
 		fusion_spip_maj_perma_urls($connect);
 
+		// appel d'une fonction de traitements perso (déclarée dans mes_options.php par exemple)
+		if (function_exists('fusion_spip_extra_action')) {
+			fusion_spip_extra_action($connect);
+		}
+
 		$time_end = microtime(true);
 		$time = $time_end - $time_start;
 		spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
