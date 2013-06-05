@@ -48,9 +48,11 @@ function formulaires_fusion_spip_verifier_dist() {
 		$erreurs['base'] = _T('info_obligatoire');
 	} // vérifier la conformité du shéma de la base source
 	else {
-		$erreurs_shema = fusion_spip_comparer_shemas(_request('base'), $traite_stats, $traite_referers, $traite_versions);
-		if (count($erreurs_shema)) {
-			$erreurs['base'] = '- '.join('<br>- ', $erreurs_shema);
+		if( _request('confirme_warning') != 'on' ){
+			$erreurs_shema = fusion_spip_comparer_shemas(_request('base'), $traite_stats, $traite_referers, $traite_versions);
+			if (count($erreurs_shema)) {
+				$erreurs['warning_base_source'] = '- '.join('<br>- ', $erreurs_shema);
+			}
 		}
 
 	}

@@ -19,6 +19,12 @@
 				</select>
 				<p><:fusion_spip:base_desc:></p>
 			</li>
+			#SET{warning,#ENV**{erreurs}|table_valeur{warning_base_source}}
+			[<li class="editer_confirme_warning [ (#GET{warning}|oui)erreur]">
+				<span class='erreur_message'>(#GET{warning})</span>
+				<input type="checkbox" name="confirme_warning" id="confirme_warning" />
+				<label for="confirme_warning"><:fusion_spip:confirme_warning:></label>
+			</li>]
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{img_dir}}
 			<li class="editer_img_dir [ (#GET{erreurs}|oui)erreur]">
 				<label for="img_dir"><:fusion_spip:img_dir:></label>

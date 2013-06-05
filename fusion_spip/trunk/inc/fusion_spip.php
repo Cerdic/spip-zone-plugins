@@ -97,7 +97,7 @@ function fusion_spip_comparer_shemas($base, $traite_stats, $traite_referers) {
 				$erreurs[] = 'Table "'.$nom_table.'" : manque champs '.join(' - ', $diff_colonnes);
 			}
 		} else {
-			$erreurs[] = 'Manque la table "'.$nom_table.'"';
+			$erreurs[] = 'Manque la table à importer "'.$nom_table.'"';
 		}
 	}
 

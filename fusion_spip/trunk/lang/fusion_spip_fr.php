@@ -15,6 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_importer' => 'Importer cette base',
 	'bouton_supprimer' => 'Supprimer cette base',
 
+	// C
+	'confirme_warning' => 'Confirmer la fusion des bases ?',
+
 	// D
 	'dossier_existe_pas' => 'Le répertoire @dossier@ n\'existe pas',
 	'dossier_pas_lisible' => 'Le répertoire @dossier@ n\'est pas accessible en lecture',
