@@ -1,0 +1,27 @@
+
+<B_resultats>
+#ANCRE_PAGINATION
+<div class="liste-elements resultats organisations">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_resultats(ORGANISATIONS){recherche #ENV{recherche_organisation}}{par points}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='nom'>
+			[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+			</td>
+			<td class='action'>
+			[(#AUTORISER{modifier, contact, #ENV{id_contact}}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/ajouter-16.png}|balise_img{<:contacts:lier_cette_organisation:>})],
+					[(#URL_ACTION_AUTEUR{lier_contact,[(#ENV{id_contact})/#ID_ORGANISATION],[(#ENV{redirect,#SELF})]})]})]
+			]
+			</td>
+		</tr>
+	</BOUCLE_resultats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_resultats>[
+<div class="liste-elements resultats organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_resultats>

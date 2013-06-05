@@ -1,0 +1,30 @@
+<B_resultats>
+#ANCRE_PAGINATION
+<div class="liste-elements resultats contacts">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_resultats(CONTACTS){recherche #ENV{recherche_contact}}{par points}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<BOUCLE_lien_contact(contacts_liens){id_contact}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_contact>
+				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
+			<//BOUCLE_lien_contact>
+			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/contact, id_contact}</a></td>
+			<td class="nom"><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#PRENOM) ]#NOM</a></td>
+			<td class="action">
+			[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/ajouter-16.png}|balise_img{<:contacts:lier_ce_contact:>})],
+					[(#URL_ACTION_AUTEUR{lier_contact,[(#ID_CONTACT)/#ENV{id_organisation}],[(#ENV{redirect,#SELF})]})]})]
+			]
+			</td>
+		</tr>
+	</BOUCLE_resultats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_resultats>[
+<div class="liste-elements resultats contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_resultats>
