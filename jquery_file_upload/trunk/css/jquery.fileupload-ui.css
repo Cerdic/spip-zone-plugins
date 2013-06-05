@@ -26,6 +26,7 @@
   overflow: hidden;
   float: left;
   margin-right: 4px;
+  cursor:pointer;
 }
 .fileinput-button input {
   position: absolute;
@@ -36,7 +37,7 @@
   border-width: 0 0 100px 200px;
   opacity: 0;
   filter: alpha(opacity=0);
-  -moz-transform: translate(-300px, 0) scale(4);
+  -moz-transform: translate(-280px, 0) scale(4);
   direction: ltr;
   cursor: pointer;
 }
