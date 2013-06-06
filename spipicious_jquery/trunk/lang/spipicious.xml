@@ -5,6 +5,7 @@
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
