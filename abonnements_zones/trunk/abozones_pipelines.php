@@ -44,9 +44,8 @@ function abozones_post_edition($flux){
 		
 		// Si c'est une activation on ajoute les zones trouvées à l'utilisateur de l'abonnement SANS autorisation
 		if (
-			$flux['data']['statut'] == 'actif'
-			and !isset($flux['data']['statut_ancien'])
-			or !isset($flux['data']['statut'])			
+			(($flux['data']['statut'] == 'actif') or !isset($flux['data']['statut']))
+			and !isset($flux['data']['statut_ancien'])						
 		) {
 			autoriser_exception('affecterzones', 'auteur', $id_auteur);
 			zone_lier($zones, 'auteur', $id_auteur);
