@@ -16,18 +16,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre' => 'Title',
 
 	// O
-	'outil_inserer_todo' => 'Insérer une todo', # NEW
-	'outil_inserer_todo_moins' => 'Insérer une tâche terminée', # NEW
-	'outil_inserer_todo_o' => 'Insérer une tâche en cours', # NEW
-	'outil_inserer_todo_plus' => 'Insérer une tâche à faire', # NEW
+	'outil_inserer_todo' => 'Insert a todo list',
+	'outil_inserer_todo_moins' => 'Insert a task done',
+	'outil_inserer_todo_o' => 'Insert a current task',
+	'outil_inserer_todo_plus' => 'Insert a task to do',
 
 	// S
-	'statut_abandonne' => 'Abandonné', # NEW
+	'statut_abandonne' => 'Abandoned',
 	'statut_afaire' => 'To do',
-	'statut_alerte' => 'Alerte, nécessite une action', # NEW
-	'statut_arrete' => 'Arrêté', # NEW
+	'statut_alerte' => 'Alert, requires action',
+	'statut_arrete' => 'Stopped',
 	'statut_encours' => 'Ongoing',
-	'statut_inconnu' => 'Alerte, statut non connu', # NEW
+	'statut_inconnu' => 'Alert, status unknown',
 	'statut_termine' => 'Done',
 
 	// T
