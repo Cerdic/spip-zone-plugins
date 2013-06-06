@@ -29,6 +29,7 @@
 	- point = non									si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 	- ajaxload = non								si elle vaut "non" cette option désactive l'init de la carte sur l'event ajaxload
 	- media = non									permet de passer le critère 'media' (pour les documents)
+	- mots = #ARRAY{0,1,1,4,2,7}             		plugin critere {mots} http://contrib.spip.net/Critere-mots
 
 ]
 
@@ -133,7 +134,7 @@ var map[(#GET{id})];
 				id_evenement : (#ENV{id_evenement}|trim),][
 				id_gis : (#ENV{id_gis}|trim),][
 				recherche : "(#ENV{recherche})",][
-				mots : (#ENV{mots}|?{[(#ENV{mots}|trim|json_encode)],''}),][
+				mots : (#ENV{mots}|?{[(#ENV{mots}|json_encode)],''}),][
 				limit : (#ENV{limit,#ENV{limite,500}}|trim)]
 			},
 			function(data) {
