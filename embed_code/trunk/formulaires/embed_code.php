@@ -25,8 +25,8 @@ include_spip('base/abstract_sql');
 function formulaires_embed_code_charger_dist($id_objet=null, $objet='document'){
 	$valeurs['id_objet'] = $id_objet;
 	$valeurs['objet'] = $objet;
-	$valeurs['largeur'] = lire_config('embed_code/embed_video_largeur',480);
-	$valeurs['hauteur'] = lire_config('embed_code/embed_video_hauteur',360);
+	$valeurs['largeur'] = lire_config('embed_code/embed_largeur',480);
+	$valeurs['hauteur'] = lire_config('embed_code/embed_hauteur',360);
 	if(!intval($id_objet))
 		return false;
 	

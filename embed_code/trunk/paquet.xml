@@ -22,5 +22,6 @@
 	
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
 	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
+	<necessite nom="saisies" compatibilite="[1.30.0;[" />
 	<utilise nom="mediaspip_player" />
 </paquet>

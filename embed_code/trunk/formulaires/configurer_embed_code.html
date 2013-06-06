@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+				[(#SAISIE{input,embed_largeur,
+					label=<:embed_code:cfg_label_largeur:>,
+					defaut=480})]
+				[(#SAISIE{input,embed_hauteur,
+					label=<:embed_code:cfg_label_hauteur:>,
+					defaut=360})]
+			</ul>
+			<p class="boutons">
+				<input type="submit" value="<:bouton_enregistrer:>" class="submit" />
+			</p>
+	</div>
+</form>
+</div>
