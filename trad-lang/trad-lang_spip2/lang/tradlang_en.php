@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_revision_specifique' => '@nb@ translation modified in <abbr title="@lang@">@langue_longue@</abbr>.',
 	'auteur_revisions' => '@nb@ translations modified.',
 	'auteur_revisions_langue' => 'Language of contributions :',
-	'auteur_revisions_langues' => '@nb@ contributions langage:', # MODIF
+	'auteur_revisions_langues' => '@nb@ contributions langage:',
 	'auteur_revisions_specifique' => '@nb@ translations modified in <abbr title="@lang@">@langue_longue@</abbr>.',
 
 	// B
