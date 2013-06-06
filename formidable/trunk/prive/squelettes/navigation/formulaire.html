@@ -10,6 +10,13 @@
 	|parametre_url{avertissement,''}
 	|icone_horizontale{<:formidable:editer_menu_formulaire:>,formulaire,formulaire-editer-24,center})]
 
+[(#CONFIG{formidable/analyse/auteur}|=={on}|oui)[(#URL_ECRIRE{formulaire_edit}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|parametre_url{configurer,auteurs}
+	|parametre_url{avertissement,''}
+	|icone_horizontale{<:formidable:editer_menu_auteurs:>,formulaire,formulaire-config-auteurs-24,center})]
+]
+
 [(#URL_ECRIRE{formulaire_edit}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
 	|parametre_url{configurer,champs}
@@ -27,6 +34,7 @@
 <BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}{tous}>
 </BOUCLE_resultats>
 
+[(#AUTORISER{voir,formulairesreponse,#ID_FORMULAIRE}|oui)
 <div class='navigation_resultats'>
 [(#URL_ECRIRE{formulaires_reponses}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
@@ -34,7 +42,7 @@
 [(#URL_ECRIRE{formulaires_analyse}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}
 	|icone_horizontale{<:formidable:reponses_analyse:>,formulaire,formulaire-analyse-24,center})]
-</div>
+</div>]
 
 </B_resultats>
 

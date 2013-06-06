@@ -1,4 +1,4 @@
-<BOUCLE_autoriser(CONDITION){si #AUTORISER{editer, formulaire}}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{editer, formulaire, #VAL{id_formulaire}|_request|sinon{0}}}>
 [(#BOITE_OUVRIR{'','info'})]
 <script type="text/javascript">/*<![CDATA[*/
 if (window.jQuery){
@@ -13,7 +13,7 @@ onAjaxLoad(debloquer_prive);
 			<h4><:formidable:editer_modifier_formulaire:></h4>
 			<h1>#TITRE</h1>
 			
-			#SET{configurer,#ENV{configurer}|in_array{#ARRAY{0,formulaire,1,champs,2,traitements}}|?{#ENV{configurer},champs}}
+			#SET{configurer,#ENV{configurer}|in_array{#ARRAY{0,formulaire,1,champs,2,traitements,3,auteurs}}|?{#ENV{configurer},champs}}
 		</BOUCLE_formulaire>
 		[(#URL_ECRIRE{formulaires}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
 			
@@ -27,6 +27,9 @@ onAjaxLoad(debloquer_prive);
 	
 	[(#GET{configurer}|=={formulaire}|oui)
 		#FORMULAIRE_EDITER_FORMULAIRE{#VAL{id_formulaire}|_request|sinon{0}, #VAL{nouveau}|_request|sinon{''}}
+	]
+	[(#GET{configurer}|=={auteurs}|oui)
+		#FORMULAIRE_EDITER_LIENS{formulaires,#VAL{id_formulaire}|_request|sinon{0},auteurs}
 	]
 	[(#GET{configurer}|=={champs}|oui)
 		#FORMULAIRE_EDITER_FORMULAIRE_CHAMPS{#ENV{id_formulaire}}

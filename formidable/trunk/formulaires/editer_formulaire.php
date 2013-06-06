@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/saisies');
+include_spip('action/editer_liens');
 
 function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 	$contexte = array();
@@ -14,7 +15,7 @@ function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 	$contexte['_contenu'] = $editer_formulaire;
 	
 	// Est-ce qu'on a le droit ?
-	if (autoriser('editer', 'formulaire')){
+	if (autoriser('editer', 'formulaire', $id_formulaire)){
 		// Est-ce que le formulaire existe ?
 		if ($id_formulaire > 0 and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)){
 			// Alors on pré-remplit avec les valeurs
@@ -61,6 +62,14 @@ function formulaires_editer_formulaire_traiter($id_formulaire, $nouveau){
 	if (!$retours['message_erreur'] and $retours['id_formulaire'] > 0){
 		// Si c'était un nouveau on reste sur l'édition
 		if (!intval($id_formulaire) and $nouveau == 'oui'){
+			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
+			$auteurs = lire_config('formidable/analyse/auteur');
+			if ($auteurs == 'on') {
+				if ($id_auteur = session_get('id_auteur')) {
+					// association (par défaut) du formulaire et de l'auteur courant
+					objet_associer(array('formulaire'=>$retours['id_formulaire']), array('auteur'=>$id_auteur));
+				}
+			}
 			$retours['redirect'] = parametre_url(generer_url_ecrire('formulaire_edit'), 'id_formulaire', $retours['id_formulaire'], '&');
 		}
 		// Sinon on redirige vers la page de visualisation
