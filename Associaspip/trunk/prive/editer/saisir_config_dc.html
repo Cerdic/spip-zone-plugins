@@ -11,15 +11,15 @@ maj:2012-11-30; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
 #CACHE{0}
         <li class="editer_dc_[(#ENV{dc_nom})]">
             [<span class="erreur_message">(#ENV**{erreurs}|table_valeur{#ENV{dc_nom}})</span>]
-            <label for="dc_[(#ENV{dc_nom})]"><:asso:config_libelle_num_dc:></label>
+            <label for="dc_[(#ENV{dc_nom})]"><:compta:label_destination:></label>
 <B_dest_compta>
             <select name="dc_[(#ENV{dc_nom})]" id="dc_[(#ENV{dc_nom})]">
-                <option value=""><:asso:choisir_dest_compte:></option>
+                <option value=""><:compta:item_no_destination:></option>
 <BOUCLE_dest_compta(ASSO_DESTINATION) {par intitule} >
                 <option value="#ID_DESTINATION"[ (#ENV{dc_val}|=={#ID_DESTINATION}|oui) selected="selected"]>#INTITULE</option>
 </BOUCLE_dest_compta>
             </select>
 </B_dest_compta>
-            <a class="spip_form_erreur" href="#URL_ECRIRE{'destination_comptable'}"><:asso:erreur_pas_de_destination:></a>
+            <a class="spip_form_erreur" href="#URL_ECRIRE{'destination_comptable'}"><:compta:erreur_destination_aucune:></a>
 <//B_dest_compta>
         </li>

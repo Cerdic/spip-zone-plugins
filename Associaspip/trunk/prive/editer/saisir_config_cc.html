@@ -14,12 +14,12 @@ maj:2012-11-30; version:0.1.0; licence:GPL; copyleft:gilcot; -->]
             <label for="classe_[(#ENV{cc_nom})]">[(#VAL{asso:config_libelle_classe_#ENV{cc_nom}}|_T)]</label>
 <B_classe_compta>
             <select name="classe_[(#ENV{cc_nom})]" id="classe_[(#ENV{cc_nom})]">
-                <option value=""><:asso:choisir_classe_compte:></option>
+                <option value=""><:compta:item_no_classe:></option>
 <BOUCLE_classe_compta(ASSO_PLAN) {fusion classe} {par classe} >
                 <option value="#CLASSE"[ (#ENV{cc_val}|=={#CLASSE}|oui) selected="selected"]>#CLASSE [: (#CLASSE|comptabilite_reference_intitule)]</option>
 </BOUCLE_classe_compta>
             </select>
 </B_classe_compta>
-            <a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:asso:erreur_pas_de_compte:></a>
+            <a class="spip_form_erreur" href="#URL_ECRIRE{'plan_comptable'}"><:compta:erreur_plan_comptes_actifs:></a>
 <//B_classe_compta>
         </li>

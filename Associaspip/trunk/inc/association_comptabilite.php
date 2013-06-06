@@ -84,35 +84,6 @@ function comptabilite_liste_plancodes($id='') {
 }
 
 /**
- * Retourne le tableau complet de la liste des comptes
- *
- * @param string $id
- *   Identifiant du plan comptable qui nous interesse
- * @param string $lang
- *   Langue des intitules
- * @return array $pc_liste
- *   Tableau de reference=>intitule
- * @note:ex
- * association_plan_comptable_complet();
- */
-function comptabilite_liste_plancomplet($id='', $lang='') {
-    if (!$lang)
-	$lang = $GLOBALS['spip_lang'];
-    if ($id=='' OR $id==0)
-	$id = $GLOBALS['association']['plan_comptable'];
-    if ($id) {
-	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
-	include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
-    } else { // $id===FALSE pour local...
-	$pc_liste = array(); // initialiser le tableau
-	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
-	while( $r = sql_fetch($sql) ) // remplir le tableau
-	    $pc_liste[$r['code']] = extraire_multi($r['intitule'], $lang);
-    }
-    return $pc_liste; // retourner le tableau
-}
-
-/**
  * Retourne le tableau de nomenclature des comptes
  *
  * @param string $id
@@ -508,6 +479,117 @@ function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
 ** @{ */
 
 /**
+ * Selecteur de classe du plan comptable
+ *
+ * @param string $classe
+ *   Classe comptable selectionnee
+ * @param string $name
+ *   Nom du selecteur de classe dans le formulaire
+ * @param string $ref
+ *   Nom du selecteur de code dans le formulaire
+ * @return string $res
+ *   Liste deroulante des classes comptables disponibles
+ * @note:ex
+ * balise_SELECTEUR_CLASSE_COMPTABLE_dyn($classe)
+ */
+function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code') {
+    if (@!$GLOBALS['meta']['html5'] AND $ref) { // JavaScript sur le onChange
+	$js = ' var OptCurrVal = document.getElementById(\'selecteur_'.$name.'\').value; ';
+	$js .= ' var OptGroupElt = document.getElementById(\'PlanComptableClasse\'+OptCurrVal); '; // mettre le selecteur de code directement au debut de la classe selectionnée
+	$js .= ' if (OptGroupElt) { OptGroupElt.childNodes[0].selected=\'selected\'; document.getElementById(\'selecteur_'.$ref.'\').onchange(); } '; // appeler la fonction onChange du selecteur de code (pour repercuter la modification dans les champs lies)
+    }
+    $res = "<select name='$name' id='selecteur_$name'". ($js?" onclick='$js'":'') .">\n";
+    $res .= '<option value="">'. _T('compta:item_no_classe') ."</option>\n";
+    $lc = ($GLOBALS['association_metas']['plan_comptable']?comptabilite_liste_plancodes():array(1,2,3,4,5,6,7,8,9,0));
+    foreach ($lc as $code) {
+	if (strlen($code)==1) { // il s'agit d'une classe
+	    $res .= '<option value="'.$code.'"';
+	    $res .= ($code==$classe) ? ' selected="selected"' : '';
+	    $res .= '>'.$code.' - '. comptabilite_reference_intitule($code) ;
+	    $res .= "</option>\n";
+	}
+    }
+    return "$res</select>\n";
+}
+
+/**
+ * Selecteur de reference du plan comptable
+ *
+ * @param string $code
+ *   Reference comptable selectionnee
+ * @param string $name
+ *   Nom du champ de reference comptable dans le formulaire
+ * @param string $ref
+ *   Nom du champ d'intitule comptable dans le formulaire
+ * @return string $res
+ *   Liste deroulante des references comptables disponibles
+ * @note:ex
+ * balise_SELECTEUR_CODE_COMPTABLE_dyn($code)
+ */
+function filtre_selecteur_compta_code($code, $name='code', $ref='intitule') {
+    if (@$GLOBALS['meta']['html5']) { // the sexy way
+	$res = "<datalist id='selecteur_$name'>\n"; // ce sera une liste d'auto-completion
+	$res .= '<em class="explication">'. _T('compta:item_no_code') ."</em>\n"; // voir au sujet de l'option vide ci-apres : ceci n'est pas affiche quand la DataList est reconnue
+	$res .= "<select name='$name'>\n"; // fall-back
+	$res .= "<option value=''></option>\n"; // pas de valeur pour ne pas saisir une option indesiree, mais pas de texte pour ne pas parasiter la DataList
+    } else { // the causual way
+#	$js = 'var CurrentOption=document.getElementById(\'selecteur_'.$name.'\'); document.getElementById(\''.$name.'\').value=CurrentOption.value; '; // recopier le code dans le champ prevu
+	$js = 'var currentVal=String(this.options[this.selectedIndex].text).split(\'-\'); document.getElementById(\''.$name.'\').value=currentVal[0]; '; // recopier le code dans le champ prevu
+	if ($ref)
+#	    $js .= ' document.getElementById(\''.$ref.'\').value=CurrentOption.options[CurrentOption.selectedIndex].text; '; // recopier l'intitule dans le champ prevu
+	    $js .= ' document.getElementById(\''.$ref.'\').value=currentVal[1]; '; // recopier l'intitule dans le champ prevu
+	$res = "<select name='$name' id='selecteur_$name' onchange='$js'>\n"; // malgre le JS, le selecteur est homonyme pour permettre de prendre la selection sans remplir quand JS est desactive. faut par contre le placer avant le champ libre pour que la valeur qui y est saisie remplace celle-ci (en l'ecrasant)
+	$res .= '<option value="">'. _T('compta:item_no_code') ."</option>\n"; // pas de valeur : pour ne rien choisir.
+    }
+    $optgroup = FALSE;
+    foreach (comptabilite_liste_plancodes() as $rc) {
+	if (@!$GLOBALS['meta']['html5'] AND strlen($rc)==1) { // il s'agit d'une classe
+	    if ($optgroup) //
+		$lst .= "</optgroup>\n";
+	    $res .= '<optgroup id="PlanComptableClasse'.$rc.'" label="'.$rc.' - '.  comptabilite_reference_intitule($rc) ."\">\n";
+	    $optgroup = TRUE;
+	} else { // il s'agit d'une reference
+	    $res .= '<option value="'.$rc.'"';
+	    $res .= ($code==$rc) ? ' selected="selected"' : '';
+	    $res .= '>'.$rc.' - '. comptabilite_reference_intitule($rc) ;
+	    $res .= "</option>\n";
+	}
+    }
+    if ($optgroup)
+	$res .= "</optgroup>\n";
+    return "$res</select>\n". (@$GLOBALS['meta']['html5']?'</datalist>\n':'');
+/*
+ <div style="font:0.8em/1em Arial, Helvetica, Sans-Serif;">
+<h4>Example 1 (for HTML 5 browsers)</h4>
+ <label>
+  Enter your favorite cartoon character:<br />
+  <input type="text" name="favCharacter" list="characters" maxlength="50" style="width:95%;">
+  <datalist id="characters">
+   <option value="Homer Simpson">
+   <option value="Bart">
+   <option value="Fred Flinstone">
+  </datalist>
+ </label>
+<h4>Example 2 (for both legacy and HTML 5 browsers)</h4>
+ <label>
+  Enter your favorite cartoon character:<br />
+  <input type="text" name="favCharacter" list="characters" maxlength="50" style="width:95%;"><br />
+ </label>
+ <datalist id="characters">
+  <label>
+   or select one from the list:<br />
+   <select name="favCharacter">
+    <option>Homer Simpson
+    <option>Bart
+    <option>Fred Flinstone
+   </select>
+  </label>
+ </datalist>
+</div>
+ */
+}
+
+/**
  * Selecteur de destinations
  *
  * @param array $destinations
@@ -589,7 +671,7 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
  *   Nom du selecteur dans le formulaire
  * @return string $res
  *   Liste deroulante des plans comptables disponibles :
- * ce sont de fichiers de langue "lang/pcg2*_*.php"
+ * ce sont de fichiers de langue "lang/pcg2*.php"
  */
 function filtre_selecteur_compta_plan($plan, $name='plan_comptable') {
     $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
@@ -606,35 +688,6 @@ function filtre_selecteur_compta_plan($plan, $name='plan_comptable') {
 	$pays = $desc_table('pays') ? sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($nom) ) : '';
 	$res .= $pays ? extraire_multi($pays, $GLOBALS['spip_lang']) : strtoupper($nom) ;
 	$res .= "</option>\n";
-    }
-    return "$res</select>\n";
-}
-
-/**
- * Selecteur de classe comptable
- *
- * @param string $classe
- *   Classe comptable selectionnee
- * @param string $name
- *   Nom du selecteur de classe dans le formulaire
- * @param string $ref
- *   Nom du champ de code comptable dans le formulaire
- * @return string $res
- *   Liste deroulante des classes comptables disponibles
- * @note ex :
- *   balise_SELECTEUR_CLASSE_COMPTABLE_dyn($classe)
- */
-function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code_comptable') {
-    $js = 'var currentVal = String(document.getElementById(\'selecteur_'.$name.'\').value).split(\'-\'); var optGroupElt = document.getElementById(\'codeOptGrp\'+currentVal[0]); if (optGroupElt) {optGroupElt.childNodes[0].selected=\'selected\'; document.getElementById(\'selecteur_'.$ref.'\').onchange()}'; // javascript sur le onchange pour mettre le selecteur de code directement au debut de la classe selectionnée et appeler la fonction onchange du selecteur (repercuter la modif dans les champs libres code et intitule)
-    $res = "<select name='$name' id='selecteur_$name' onclick='$js'>\n";
-    $lc = comptabilite_liste_plancodes(); // on commence par recuperer tous les codes (on ne sait pas recuper la classe directement)
-    foreach ($lc as $code) { // puis parcours de la liste
-	if (strlen($code)==1) { // il s'agit d'une classe
-	    $res .= '<option value="'.$code.'"';
-	    $res .= ($code==$classe) ? ' selected="selected"' : '';
-	    $res .= '>'.$code.' - '. comptabilite_reference_intitule($code) ;
-	    $res .= "</option>\n";
-	}
     }
     return "$res</select>\n";
 }

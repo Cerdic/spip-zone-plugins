@@ -6,41 +6,41 @@
 	<ul>
 	    <li class="editer_classe">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{classe})</span>]
-		<label for="classe"><:asso:classe:></label>
+		<label for="selecteur_classe"><:compta:label_classe:></label>
 		[(#ENV{classe}|selecteur_compta_classe)]
 	    </li>
 	    <li class="editer_code">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{code})</span>]
-		<label for="code"><:asso:code:></label>
-		#SELECTEUR_CODE_COMPTABLE
-		<input type="text" name="code" [value="(#ENV{code})"] id="code" class="text" />
+		<label for="code"><:compta:label_code:></label>
+		[(#ENV{code}|selecteur_compta_code)]
+		<input type="text" name="code" [value="(#ENV{code})"] id="code" class="text"[(#HTML5|oui) list="selecteur_code_comptable" ] />
 	    </li>
 	    <li class="editer_intitule">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{intitule})</span>]
-		<label for="intitule"><:asso:intitule:></label>
+		<label for="intitule"><:compta:label_intitule:></label>
 		<input type="text" name="intitule" [value="(#ENV{intitule})"] id="intitule" class="text" />
 	    </li>
 	    <li class="editer_solde_anterieur">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{solde_anterieur})</span>]
-		<label for="solde_anterieur"><:asso:solde_reporte_en_euros:></label>
+		<label for="solde_anterieur"><:compta:solde_reporte:></label>
 		<input type="[(#HTML5|?{number,text})]" name="solde_anterieur" [value="(#ENV{solde_anterieur})"] id="solde_anterieur" class="number float price" />
 	    </li>
 	    <li class="editer_date_anterieure">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_anterieure})</span>]
-		<label for="date_anterieure"><:asso:date_report_aaaa_mm_jj:></label>
+		<label for="date_anterieure"><:compta:date_report:></label>
 		<input type="[(#HTML5|?{date,text})]" name="date_anterieure" [value="(#ENV{date_anterieure}|affdate{Y-m-d})"] id="date_anterieure"  class="date" />
 	    </li>
 	    <li class="editer_type_op">
 		[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{type_op})</span>]
-		<label for="type_op"><:asso:direction_plan:></label>
+		<label for="type_op"><:compta:label_direction_plan:></label>
 		<select name="type_op" id="type_op">
-		    <option value="multi" [(#ENV{type_op}|=={multi}|?{selected="selected"})]>multi</option>
-		    <option value="credit" [(#ENV{type_op}|=={credit}|?{selected="selected"})]>credit</option>
-		    <option value="debit" [(#ENV{type_op}|=={debit}|?{selected="selected"})]>debit</option>
+		    <option value="multi" [(#ENV{type_op}|=={multi}|?{selected="selected"})]><:compta:item_direction_multi:></option>
+		    <option value="credit" [(#ENV{type_op}|=={credit}|?{selected="selected"})]><:compta:item_direction_credit:></option>
+		    <option value="debit" [(#ENV{type_op}|=={debit}|?{selected="selected"})]><:compta:item_direction_debit:></option>
 		</select>
 	    </li>
 	    <li class="editer_active">
-		<label for="active"><:asso:compte_active:></label>
+		<label for="active"><:compta:label_compte_active:></label>
 		<input type="checkbox" name="active" [(#ENV{active}|?{checked="checked"})] id="active" />
 	    </li>
 <INCLURE{fond=prive/editer/saisir_commentaires, commentaire } />
