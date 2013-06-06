@@ -1,4 +1,6 @@
 <traduction module="paquet-importateur_contacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/importateur_contacts/lang/" reference="fr">
-	<langue code="en" />
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-importateur_contacts?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
 	<langue code="fr" />
 </traduction>

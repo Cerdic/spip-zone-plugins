@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'importateur_contacts_description' => 'Lets you import contacts from one or more web services.',
 	'importateur_contacts_nom' => 'Contacts importer',
-	'importateur_contacts_slogan' => 'Formulaire d\'importation de contacts.' # NEW
+	'importateur_contacts_slogan' => 'Contacts import form.'
 );
 
 ?>
