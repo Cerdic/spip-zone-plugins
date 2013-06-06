@@ -12,13 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Each of these tools can be enabled or disabled by the user on [the plugin administration page->./?exec=admin_couteau_suisse] and manage a number of variables: click {{Configuration}}, then select the tab Couteau Suisse.
 
-The categories are: Administration, Security, Private interface, text enhancements, Typographical shortcuts, Display public, Tags, filters, criteria.
+The categories are: Administration, Security, Private interface, text enhancements, Typographical shortcuts, Public display, Tags, filters, criteria.
 
 Check out this plugin in your favorite tools: {Removes the number}, {URLs Format}, {Typographical superscript}, {Smart Quotes}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Beautiful URLs} , {SPIP and external links...}, {Smileys}, {A summary for your articles}, {cut in pages and tabs}, etc.., etc..
 
 Feel free to consult the articles of plugin documentation that are published on: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP v1.92x, v2.x.x and v3.0', # MODIF
+Compatibility: SPIP v1.92x, v2.x.x and v3.0',
 	'couteau_suisse_slogan' => 'Lots of new and useful features for your site!'
 );
 
