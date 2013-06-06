@@ -1,4 +1,7 @@
 <traduction module="paquet-smush" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/smush_images/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-smush?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-smush?lang_cible=es">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
