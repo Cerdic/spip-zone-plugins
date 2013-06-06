@@ -13,14 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configure contacts importation service',
 
 	// E
-	'email_liste' => 'A list of e-mails', # MODIF
+	'email_liste' => 'A list of e-mails',
 	'email_simple' => 'A simple e-mail',
 	'erreur_aucun_fournisseur' => 'No service providing contacts has been found. Please, install at least one contact importation library.',
 	'erreur_aucun_fournisseur_configure' => 'No service for importing contacts has been activated.',
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Recover my contacts',
-	'importer_fournisseur_label' => 'Choose which service to use in order to recover your contacts', # MODIF
+	'importer_fournisseur_label' => 'Choose which service to use in order to recover your contacts',
 	'info_aucun_contact' => 'No contact have been found on this account.',
 	'info_nb_contacts' => '@nb@ contacts have been recovered.',
 	'info_nb_contacts_erreur' => '@nb@ contacts have been recovered but can not be used.',
