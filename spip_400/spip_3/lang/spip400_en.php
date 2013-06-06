@@ -18,7 +18,7 @@ Access to this page or this document requires to be authorized and identified. I
 	'404_error' => 'The page or document you requested is not found on the site...',
 	'404_error_comment' => '{{We apologize for this time-cons...}}
 
-Some web pages are not permanent or regularly changing URL ({address access entry in the browser bar}).
+Some web pages are not permanent or regularly change URL ({address access entry in the browser bar}).
 
 To facilitate your browsing, we recommend the following actions:
 -* check the URL you typed in the address bar of your browser and make sure it is complete;
@@ -27,7 +27,7 @@ To facilitate your browsing, we recommend the following actions:
 -* return to the [homepage|Back to site homepage->@sommaire@] to restart from the root of the hierarchy;
 -* send an error report to the site administrators to correct the broken link using the button below.
 
-Finally, many websites have one or several spaces reserved for their directors or subscribers require login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].', # MODIF
+Finally, many websites have one or several spaces reserved for their administrators or subscribers requiring to login. If you have permission, [click here to access the platform connecting the site|IDs will be required->@ecrire@].',
 
 	// B
 	'backtrace' => 'PHP Backtrace',
