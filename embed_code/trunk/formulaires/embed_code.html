@@ -3,19 +3,19 @@
 	Permet de changer le nombre d'éléments dans une pagination d'une boucle
 	en passant un paramètre dans l'url
 ]
-<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM_#ENV{id_document}">
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM_#ENV{id_objet}">
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer embed_code">
 			[(#ENV*{erreurs}|table_valeur{largeur}|ou{#ENV*{erreurs}|table_valeur{hauteur}}|non)
-			<label for="code_embed_#ENV{id_document}"><:embed_code:label_code_embed:></label>
-			<textarea id="code_embed_#ENV{id_document}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly">[(#MODELE{embed_doc_player,download=non,buffer=10,id_document=#ENV{id_document},largeur=#ENV{largeur},hauteur=#ENV{hauteur},env}|liens_absolus|trim)]</textarea>
+			<label for="code_embed_#ENV{id_objet}"><:embed_code:label_code_embed:></label>
+			<textarea id="code_embed_#ENV{id_objet}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly">[(#MODELE{embed_doc_player,download=non,buffer=10,id_objet=#ENV{id_objet},objet=#ENV{objet},largeur=#ENV{largeur},hauteur=#ENV{hauteur},env}|liens_absolus|trim)]</textarea>
 			[(#PLUGIN{mediabox}|oui)
-			<p><a href="#" onclick="jQuery.colorbox({html:jQuery('#code_embed_#ENV{id_document}').val()});return false;" class="spip_out"><:embed_code:lien_preview_embed:></a></p>]]
+			<p><a href="#" onclick="jQuery.colorbox({html:jQuery('#code_embed_#ENV{id_objet}').val()});return false;" class="spip_out"><:embed_code:lien_preview_embed:></a></p>]]
 			[(#ENV*{erreurs}|table_valeur{largeur}|ou{#ENV*{erreurs}|table_valeur{hauteur}}|oui)
-			<label for="code_embed_#ENV{id_document}"><:embed_code:label_code_embed:></label>
-			<textarea id="code_embed_#ENV{id_document}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly"></textarea>]
+			<label for="code_embed_#ENV{id_objet}"><:embed_code:label_code_embed:></label>
+			<textarea id="code_embed_#ENV{id_objet}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly"></textarea>]
 			</li>
 			<li class="editer editer_largeur[(#ENV*{erreurs}|table_valeur{largeur}|oui)erreur]">
 				<label for="largeur"><:embed_code:label_largeur:></label>
@@ -33,9 +33,9 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		$('#formulaire_embed_code_#ENV{id_document}'+' .boutons input').hide();
-		$('#formulaire_embed_code_#ENV{id_document}'+' input')
-			.change(function(){$('#formulaire_embed_code_#ENV{id_document}'+' .boutons input').slideDown();})
-			.keydown(function(){$('#formulaire_embed_code_#ENV{id_document}'+' .boutons input').slideDown();});
+		$('#formulaire_embed_code_#ENV{id_objet}'+' .boutons input').hide();
+		$('#formulaire_embed_code_#ENV{id_objet}'+' input')
+			.change(function(){$('#formulaire_embed_code_#ENV{id_objet}'+' .boutons input').slideDown();})
+			.keydown(function(){$('#formulaire_embed_code_#ENV{id_objet}'+' .boutons input').slideDown();});
 	});
 </script>

@@ -18,18 +18,22 @@ include_spip('base/abstract_sql');
 /**
  * Chargement des valeurs par defaut des champs du formulaire
  *
- * @param int $id_document : L'identifiant numérique du document
+ * @param int $id_objet : L'identifiant numérique de l'objet
+ * @param string $objet : Le type d'objet
+ *
  */
-function formulaires_embed_code_charger_dist($id_document=null){
-	$valeurs['id_document'] = $id_document;
+function formulaires_embed_code_charger_dist($id_objet=null, $objet='document'){
+	$valeurs['id_objet'] = $id_objet;
+	$valeurs['objet'] = $objet;
 	$valeurs['largeur'] = lire_config('embed_code/embed_video_largeur',480);
 	$valeurs['hauteur'] = lire_config('embed_code/embed_video_hauteur',360);
-	if(!intval($id_document))
+	if(!intval($id_objet))
 		return false;
-
-	$infos_doc = sql_fetsel('hauteur,largeur,extension','spip_documents','id_document='.intval($id_document));
 	
-	if(($infos_doc['hauteur'] > 0) && ($infos_doc['largeur'] > 0)){
+	if ($objet == 'document')
+		$infos_doc = sql_fetsel('hauteur,largeur,extension','spip_documents','id_document='.intval($id_objet));
+	
+	if($infos_doc && ($infos_doc['hauteur'] > 0) && ($infos_doc['largeur'] > 0)){
 		$valeurs['ratio'] = $infos_doc['largeur']/$infos_doc['hauteur'];
 		$valeurs['hauteur_ratio'] = $valeurs['hauteur'] = floor($valeurs['largeur']/$valeurs['ratio']);
 	}else{
@@ -42,9 +46,11 @@ function formulaires_embed_code_charger_dist($id_document=null){
 /**
  * Vérifications du formulaires
  * 
- * @param int $id_document : L'identifiant numérique du document
+ * @param int $id_objet : L'identifiant numérique de l'objet
+ * @param string $objet : Le type d'objet
+ *
  */
-function formulaires_embed_code_verifier_dist($id_document=null){
+function formulaires_embed_code_verifier_dist($id_objet=null, $objet='document'){
 	$numeriques = array('largeur','hauteur');
 	foreach($numeriques as $numerique){
 		if(_request($numerique) && !ctype_digit(_request($numerique))){
@@ -67,14 +73,17 @@ function formulaires_embed_code_verifier_dist($id_document=null){
 /**
  * Traitement du formulaire
  *
- * @param int $id_document : L'identifiant numérique du document
+ * @param int $id_objet : L'identifiant numérique de l'objet
+ * @param string $objet : Le type d'objet
+ *
  */
-function formulaires_embed_code_traiter_dist($id_document=null){
-	$infos_doc = sql_fetsel('hauteur,largeur,extension','spip_documents','id_document='.intval($id_document));
-	if(($infos_doc['hauteur'] > 0) && ($infos_doc['largeur'] > 0)){
+function formulaires_embed_code_traiter_dist($id_objet=null, $objet='document'){
+	if ($objet == 'document')
+		$infos_doc = sql_fetsel('hauteur,largeur,extension','spip_documents','id_document='.intval($id_objet));
+	if($infos_doc && ($infos_doc['hauteur'] > 0) && ($infos_doc['largeur'] > 0)){
 		$valeurs['ratio'] = $infos_doc['hauteur']/$infos_doc['largeur'];
 	}
-	if(($infos_doc['largeur'] > 0) && ($infos_doc['hauteur'] > 0) && ($largeur = _request('largeur') OR $hauteur = _request('hauteur'))){
+	if($infos_doc && ($infos_doc['largeur'] > 0) && ($infos_doc['hauteur'] > 0) && ($largeur = _request('largeur') OR $hauteur = _request('hauteur'))){
 		if(intval($largeur) > 0){
 			$ratio = $largeur/$infos_doc['largeur'];
 			$valeurs['hauteur_ratio'] = floor($infos_doc['hauteur']*$ratio);

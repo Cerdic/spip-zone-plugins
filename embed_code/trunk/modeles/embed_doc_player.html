@@ -5,6 +5,8 @@
 	- MP3 pour les sons
 ]
 #CACHE{0}
-<BOUCLE_doc(DOCUMENTS) {id_document}{tout}>
+<BOUCLE_doc(DOCUMENTS){si #ENV{objet}|=={document}|oui}{id_document}{tout}>
 <iframe width="#ENV{largeur}" height="#ENV{hauteur}" style="width:[(#ENV{largeur}|match{'%'}|?{#ENV{largeur},[(#ENV{largeur})]px})];height:[(#ENV{hauteur})]px" src="[(#URL_PAGE{embed_code}|parametre_url{id_document,#ID_DOCUMENT}|url_absolue)]" frameborder="0" allowfullscreen></iframe>
 </BOUCLE_doc>
+<iframe width="#ENV{largeur}" height="#ENV{hauteur}" style="width:[(#ENV{largeur}|match{'%'}|?{#ENV{largeur},[(#ENV{largeur})]px})];height:[(#ENV{hauteur})]px" src="[(#URL_PAGE{embed_code}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{objet}}|parametre_url{largeur,#ENV{largeur}|moins{20}}|parametre_url{hauteur,#ENV{hauteur}}|url_absolue)]" frameborder="0" allowfullscreen></iframe>
+<//B_doc>
