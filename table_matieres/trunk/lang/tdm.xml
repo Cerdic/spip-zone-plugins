@@ -1,6 +1,7 @@
 <traduction module="tdm" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/table_matieres/trunk/lang/" reference="fr">
 	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tdm?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/tdm?lang_cible=es">
