@@ -72,31 +72,30 @@ _The <code><multi/></code> tag are recommended in case of multilingual website. 
 	'autobr_non' => 'All site text between &lt;alinea>&lt;/alinea> tags',
 	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
 	'autobr_racc' => 'Line breaks: <b>&lt;alinea>&lt;/alinea></b>',
-	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
+	'autorisations:description' => 'This tool is restricted to webmasters site. To create a SPIP authorization, simply create the appropriate functions. The example below allows the use of the function <code>autoriser(\'troller\',\'doc\')</code> or the tag <code>#AUTORISER{troller, doc}</code>:
 <cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
-    return false; // aucun troll permis, non mais !
+return false; // aucun troll permis, non mais !
 }</cadre>
-Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
+Explanation:
+-* <code>$faire</code>:  action asked (\'edit\', \'publish\', ...)
+-* <code>$type</code>: object type on which you apply an action (\'article\', \'author\', ...)
+-* <code>$id</code>: the identifier of the object you wish to operate
+-* <code>$qui</code> : {id_auteur}  asking the permission (or empty for a autor being processed)
+-* <code>$opt</code>: Table option, usually empty
 
-Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
+After recovery / contextual valorisation of default values, SPIP tries to run the best permission declared and will seek, in order <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, and then <code>autoriser_defaut()</code>.
 
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
-_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
-@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
-', # NEW
-	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
-	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
-	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
-	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
+@puce@ Use this tool to define aliases simple permissions.
+_ The syntax is: «<code> who: make type id = alias </code>" [[%autorisations_alias%]]
+@puce@ Configure logging options using the tool «[.->spip_log]».[[%autorisations_debug%]]',
+	'autorisations:nom' => 'Authorization functions',
+	'autorisations_bilan' => '@nb1@ functions authorizations found, including @nb2@ overloaded functions.',
+	'autorisations_creees' => 'Functions generated in {@_CS_DIR_TMP@mes_autorisations.php} : ',
+	'autorisations_debug' => 'Follow permissions in @_CS_DIR_LOG@spip.log',
 	'autorisations_surcharge' => 'Overloaded function',
-	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
-	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
-	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
+	'autorisations_titre1' => 'Authorization on objects [@nb@ objects]',
+	'autorisations_titre2' => 'Permissions on objects [@nb@ actions]',
+	'autorisations_titre3' => 'Various authorizations [@nb@ items]',
 
 	// B
 	'balise_set:description' => 'In order to reduce the complexity of code segments like <code>#SET{x,#GET{x}|a_filter}</code>, this tool offers you the following short-cut: <code>#SET_UN_FILTRE{x}</code>. The filter applied to a variable is therefore passed in the name of the tag.
@@ -301,7 +300,7 @@ This tool may be combined with "[.->sommaire]".',
 	'detail_spip_options_ok' => '{{Note}}: This tool currently gives the SPIP options priority using the "@lien@" utility.',
 	'detail_surcharge' => 'Tool overloaded:',
 	'detail_traitements' => 'Treatment:',
-	'devdebug:description' => '{{This tool enables you to see any PHP errors on the screen.}}<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP space to which these settings will apply.', # MODIF
+	'devdebug:description' => 'This tool enables you to see any PHP errors on the screen.<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP area to which these settings will apply.',
 	'devdebug:item_e_all' => 'All messages errors (all)',
 	'devdebug:item_e_error' => 'Serious or fatal errors (error)',
 	'devdebug:item_e_notice' => 'Execution notices (notice)',
@@ -349,7 +348,7 @@ When making an official update, update the associated remote file (click above o
 	'erreur:bt' => '<span style="color:red;">Warning:</span> the typographical toolbar (version @version@) appears to be an old version.<br />The Swiss Army Knife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
-	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.', # MODIF
+	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
 	'erreur:js' => 'A Javascript error appears to have occurred on this page, hindering its action. Please activate Javascript in your browser, or try deactivating some SPIP plugins which may be causing interference.',
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Error!',
@@ -585,8 +584,8 @@ _ • {By default}: automatic replacement (from SPIP version 2.0).
 	'local_ko' => 'The automatic update of local file «@file@» failed. If the tool malfunctions, try a manual update.',
 	'log_brut' => 'Data written in raw format (no HTML)',
 	'log_fileline' => 'Extra debug information',
-	'log_gravite' => 'Gravité', # NEW
-	'log_non' => 'Désactiver totalement les logs', # NEW
+	'log_gravite' => 'Severity',
+	'log_non' => 'Completely disable the logs',
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
@@ -639,7 +638,7 @@ Published objects but hidden from the editorial content :
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Inactive tool',
 	'outil_intro' => 'This page lists the functionalities provided by the plugin.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Army Knife tools.',
-	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>contrib.spip</a>.',
 	'outil_nb' => '@pipe@: @nb@ tool',
 	'outil_nbs' => '@pipe@: @nb@ tools',
 	'outil_permuter' => 'Switch the tool: « @text@ » ?',
@@ -804,10 +803,10 @@ _ • {Cache checking}: similar to the preceding option. However, all results ar
 	'spip_log:description2' => '@puce@ the SPIP severity filter allows you to select the level of maximum importance to be considered before starting a data log. Level 8 allows for example to store all the messages sent by SPIP. The default level is level 5.',
 	'spip_log:description3' => '@puce@ specific logs of the Swiss Army Knife are activated here  «[.->cs_comportement]».
 @puce@ jet lag used by the functions date / time can be configured here: «[.->timezone]» {(PHP 5.1 minimum)}.',
-	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
+	'spip_log:description4' => '@puce@ Specific logs authorizations are activated by: «[.->autorisations]».',
 	'spip_log:nom' => 'SPIP and the logs',
 	'stat_auteurs' => 'Authors in statistics',
-	'statut' => 'Statut', # NEW
+	'statut' => 'Status',
 	'statuts_spip' => 'Only the following SPIP status:',
 	'statuts_tous' => 'Every status',
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
