@@ -3,7 +3,7 @@
 	Permet de changer le nombre d'éléments dans une pagination d'une boucle
 	en passant un paramètre dans l'url
 ]
-<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM_#ENV{id_objet}">
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_[(#FORM)]_[(#ENV{id_objet})]">
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
