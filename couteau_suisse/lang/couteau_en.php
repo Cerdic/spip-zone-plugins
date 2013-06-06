@@ -83,17 +83,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page',
 	'plug_actifs' => 'Active plugins',
 	'plug_inactifs' => 'Inactive plugins',
-	'plugin_xml' => 'A collection of small, useful tools in a single plugin to make managing your SPIP site even easier.
+	'plugin_xml' => 'Combines in one plugin a list of small and useful new features improving the management of your SPIP site.
 
-Each tool can be individually activated/deactivated from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set several site options, click on {{Configuration}}, then choose the {{Swiss Army Knife}} tab.
+Each of these tools can be enabled or disabled by the user on [the plugin administration page->./?exec=admin_couteau_suisse] and manage a number of variables: click {{Configuration}}, then select the tab {{Couteau Suisse}},.
 
-Categories available: Administration, Typographical improvements, Typographical shortcuts, Public site display options, Tags, Filters, Criteria.
+The categories are: Administration, Security, Private interface, text enhancements, Typographical shortcuts, Public display, Tags, filters, criteria.
 
-Some popular tools are included in this plugin: {Delete the number}, {URL formats}, {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
+Check out this plugin in your favorite tools: {Removes the number}, {URLs Format}, {Typographical superscript}, {Smart Quotes}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Beautiful URLs} , {SPIP and external links...}, {Smileys}, {A summary for your articles}, {cut in pages and tabs}, etc.., etc..
 
-See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Feel free to consult the articles of plugin documentation that are published on: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x, v2.0.x and v2.1.x', # MODIF
+Compatibility: SPIP v1.92x, v2.x.x and v3.0',
 	'pp_autobr' => 'Insert a block of text with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
