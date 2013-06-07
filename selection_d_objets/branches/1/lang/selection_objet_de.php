@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deja_selectionne' => 'Dieses Objekt wurde bereits für diese Liste ausgewählt',
 	'explication_choix_multi' => 'Mithilfe der Taste Ctrl oder Maj können Sie mehrere auswählen (Apfel oder Maj für Macs)',
-	'explication_selection_choix_illimite' => 'Par defaut un objet ne peut être attaché qu\'ne fois à un Objet Cible, voulez-vous désactiver cette limitation.  ?', # NEW
+	'explication_selection_choix_illimite' => 'Standardmäßig kann ein Objekt nur einmal an ein Zielobjekt angeknüpft werden, möchten sie diese Einschränkung aufheben?',
 	'explication_selection_cible' => 'Wenn kein Ziel ausgewählt ist, werden alle berücksichtigt',
 	'explication_selection_objets_cible' => 'Zielobjekte an welche Auswahlobjekte geknüpft werden können.',
 	'explication_selection_type_liens' => 'Sie können Verknüpfungsarten festlegen: Fügen Sie eine Art pro Zeile ein, gefolgt von einer Komma und einer Beschreibung ein. Die Beschreibung kann eine Sprachkette sein.',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Ausgewählte Rubriken:',
 
 	// S
-	'selection_choix_illimite' => 'Desactiver la limite de sélection par Objet Cible', # NEW
+	'selection_choix_illimite' => 'Die Wahleinschränkung per Objekt aufheben',
 	'selection_cible' => 'Ziel Auswahl für',
 	'selection_objet' => 'Auswahl',
 	'selection_objet_cible_titre' => 'Auswahl Zielobjekte',

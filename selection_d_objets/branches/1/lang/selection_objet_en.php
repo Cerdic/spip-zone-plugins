@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deja_selectionne' => 'This object has been already selected for this list',
 	'explication_choix_multi' => 'You can select multiple ones using ctrl or shift (apple or shift for Macs)',
-	'explication_selection_choix_illimite' => 'By default an object can be attached only once to a Target Object, do you want to disable this limitation ?',
+	'explication_selection_choix_illimite' => 'By default an object can be attached only once to a Target Object, do you want to disable this limitation?',
 	'explication_selection_cible' => 'If no target is selected, all will be considered.',
 	'explication_selection_objets_cible' => 'The target objects which the "selected objects" can be linked',
 	'explication_selection_type_liens' => 'You can define relationships types: please indicate one per line, followed by a comma and a description. The description can be a language string.',
