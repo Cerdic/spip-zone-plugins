@@ -1,7 +1,7 @@
 <paquet
 	prefix="Albums"
 	categorie="multimedia"
-	version="2.2.5"
+	version="2.2.6"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
@@ -13,7 +13,7 @@
 
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://razack.wordpress.com">Charles Razack</auteur>
-	<licence>GPL - 2011</licence>
+	<licence>GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/albums.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/albums.php" />
