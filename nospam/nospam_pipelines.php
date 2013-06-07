@@ -112,11 +112,17 @@ function nospam_pre_edition($flux) {
 		// sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
 		include_spip('inc/autoriser');
 		if ($flux['data']['statut'] == 'publie'
-			AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !autoriser('modererforum'))
+			AND (!isset($GLOBALS['visiteur_session']['statut']) OR !autoriser('modererforum'))
 		) {
 
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=" . sql_quote($flux['data']['email_auteur']) : "";
-			$spammeur_connu = (!isset($GLOBALS['visiteur_session']['statut']) AND (sql_countsel('spip_forum', '(ip=' . sql_quote($GLOBALS['ip']) . "$email) AND statut='spam'") > 0));
+			$spammeur_connu = (!isset($GLOBALS['visiteur_session']['statut'])
+				AND (
+					isset($GLOBALS['ip_greylist'][$GLOBALS['ip']])
+					OR isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])
+					OR sql_countsel('spip_forum', '(ip=' . sql_quote($GLOBALS['ip']) . "$email) AND statut='spam'") > 0
+				)
+			);
 
 		  // activer aussi le flag spammeur connu en cas de flood, meme si aucune detection spam jusqu'ici
 		  // on sera plus severe sur les liens dans ce cas
@@ -166,10 +172,16 @@ function nospam_pre_edition($flux) {
 					0 => array(1 => 'spam'),
 					'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
 					'texte' => array(1 => 'prop', 5 => 'spam')
+				),
+				// seuils pour les blacklist : si pas de lien on passe en prop par precaution, sinon en spam
+				'blacklist' => array(
+					0 => array(1 => 'spam'),
+					'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
+					'texte' => array(0 => 'prop', 1 => 'spam')
 				)
 			);
 
-			$seuils = $spammeur_connu ? $seuils['spammeur'] : $seuils[0];
+			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])? $seuils['blacklist'] : ($spammeur_connu ? $seuils['spammeur'] : $seuils[0]);
 			include_spip("inc/nospam"); // pour analyser_spams()
 			foreach ($flux['data'] as $champ => $valeur) {
 				$infos = analyser_spams($valeur);
