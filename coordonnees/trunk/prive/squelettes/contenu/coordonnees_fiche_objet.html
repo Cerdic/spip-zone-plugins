@@ -29,7 +29,7 @@
 
 [(#REM) LISTES DES COORDONNEES LIEES ]
 <BOUCLE_listes(DATA){liste adresse,numero,email}>
-[(#INCLURE{fond=prive/objets/liste/#VALEURs_lies, env, ajax})]
+[(#INCLURE{fond=[prive/objets/liste/(#VALEUR)s_lies], env, ajax})]
 </BOUCLE_listes>
 
 #BOITE_FERMER
