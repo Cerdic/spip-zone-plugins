@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('action/editer_liens');
+include_spip('inc/config');
 
 /**
  * Autorisation par auteur et par formulaire

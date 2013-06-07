@@ -34,7 +34,7 @@
 <BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}{tous}>
 </BOUCLE_resultats>
 
-[(#AUTORISER{voir,formulairesreponse,#ID_FORMULAIRE}|oui)
+[(#AUTORISER{voir,formulaires_reponse,#ID_FORMULAIRE}|oui)
 <div class='navigation_resultats'>
 [(#URL_ECRIRE{formulaires_reponses}
 	|parametre_url{id_formulaire, #ID_FORMULAIRE}

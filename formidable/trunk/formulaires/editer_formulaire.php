@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/saisies');
 include_spip('action/editer_liens');
+include_spip('inc/config');
 
 function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
 	$contexte = array();
