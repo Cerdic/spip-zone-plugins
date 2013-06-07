@@ -3,7 +3,7 @@
 	<slogan>Am&#233;lioration de la mod&#233;ration</slogan>
 	<icon>img_pack/icone.png</icon>
 	<auteur>Yohann</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description>
 Ce plugin permet aux utilisateurs des forums publics configur&#233;s {{&#224; priori}}, qui sont enregsitr&#233;s et logu&#233;s en tant que visiteur r&#233;dacteur ou admin, de ne pas subir ce type de mod&#233;ration. Leur commentaire est automatiquement valid&#233; sans qu'il y ait une action de la part d'un mod&#233;rateur des forums depuis l'espace priv&#233;e.

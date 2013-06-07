@@ -3,7 +3,7 @@ include_spip('inc/meta');
 include_spip('inc/session');
 function moderation_vip($flux){
 	if ($flux['args']['table']=='spip_forum'
-		AND $flux['args']['action']=='instituer'){
+		AND $flux['args']['action']=='instituer'  AND $flux["data"]["statut"]!="prive"){
 			// Pour publier direct les auteurs configurés par modération modérée
 				global $visiteur_session;
 				if ($visiteur_session) {
