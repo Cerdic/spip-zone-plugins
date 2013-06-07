@@ -22,18 +22,26 @@
 
 		<ul>
 
-		[(#REM) choix des objets ]
-		[(#SAISIE{choisir_objets, objets,
-			label=<:album:label_activer_album_objets:>,
-			exclus=#LISTE{spip_albums,spip_documents}
-		})]
+			[(#REM) choix des objets sur lesquels l'ajout d'albums est possible ]
+			#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:album:label_activer_album_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}
+			</li>
 
-		[(#REM) choix des champs d'édition ]
-		[(#SAISIE{case, utiliser_titre_defaut,
-			label=<:album:label_utiliser_titre_defaut:>,
-			label_case=<:album:label_case_utiliser_titre_defaut:>,
-			defaut=#CONFIG{albums/utiliser_titre_defaut}
-		})]
+			[(#REM) titre par défaut d'un nouvel album ]
+			#SET{name,utiliser_titre_defaut} #SET{obli,''} #SET{defaut,#CONFIG{albums/utiliser_titre_defaut}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:album:label_utiliser_titre_defaut:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:album:label_case_utiliser_titre_defaut:></label>
+				</div>
+			</li>
 
 		</ul>
 
