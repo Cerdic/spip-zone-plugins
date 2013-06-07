@@ -2,7 +2,7 @@
 	prefix="continents"
 	categorie="outil"
 	version="1.0.1"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/continents-64.png"
 	documentation=""
