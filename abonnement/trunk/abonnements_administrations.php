@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_abonnements_offres', 'spip_abonnements_offres_liens', 'spip_abonnements')));
+	$maj['create'] = array(array('maj_tables', array('spip_abonnements_offres', 'spip_abonnements_offres_liens', 'spip_abonnements', 'spip_abonnements_offres_notifications')));
 	
 	// Ajout de la config des notifications
 	$maj['2.1.0'] = array(
