@@ -410,7 +410,7 @@ function comptabilite_verifier_classe($classe, $plan='') {
     if ( strlen($classe)!=1 ) // champ vide ou ayant plus d'un caractere
 	return _T('compta:erreur_classe_longueur');
     $regles = comptabilite_liste_planregles($plan);
-    if ( !preg_match($regles[0]?$regles[0]:'[0-9]', $classe) ) // champ hors plage
+    if ( !preg_match('/^'.$regles[0].'$/', $classe) ) // champ hors plage
 	return _T('compta:erreur_classe_plage', array('intervalle'=>$regles[0],) );
     return '';
 }
@@ -422,8 +422,15 @@ function comptabilite_verifier_classe($classe, $plan='') {
  *   Reference a verifier
  * @param string $classe
  *   Caractere de la classe si on souhaite s'assurer que c'est l'initial du code
+ * @param string $sens
+ *   credit|debit|multi : on s'assurera sommairement que le type de compte est bon
+ * Pour l'instant on ne prend en compte que 2 classes Associaspip mais y d'autres
+ * http://www.mesexercices.com/recherche_information/comptabilite-les-comptes-de-classe-6-charges-sont-normalement_6_38694.htm
+ * Par ailleurs, on ne peut pas fonctionner par classe caril y a des exceptions !
+ *  http://dz.viadeo.com/fr/questions/repondre/?questionId=0021aox4cgt6v70a
+ * Peut-etre faudrat-il rajouter des regles pour une meilleure validation ?
  */
-function comptabilite_verifier_code($code, $classe='', $plan='') {
+function comptabilite_verifier_code($code, $classe='', $sens='multi', $plan='') {
     $regles = comptabilite_liste_planregles($plan);
     if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
@@ -433,7 +440,11 @@ function comptabilite_verifier_code($code, $classe='', $plan='') {
 	return _T('compta:erreur_plan_code_doublon');
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
-    return '';
+#    if ( $code[0]==$GLOBALS['association_metas']['classe_produits'] AND $sens=='debit' ) // ce sont tous des comptes essentiellement créditeurs...
+#	return _T('compta:erreur_classe_type', array('numero'=$code[0], 'interdit'=>_T('compta:item_direction_debit'),) );
+#    elseif ( $code[0]==$GLOBALS['association_metas']['classe_charges'] AND $sens=='credit' ) // ce sont tous des comptes essentiellement débiteurs...
+#	return _T('compta:erreur_classe_type', array('numero'=$code[0], 'interdit'=>_T('compta:item_direction_credit'),) );
+     return '';
 }
 
 /**
@@ -558,35 +569,6 @@ function filtre_selecteur_compta_code($code, $name='code', $ref='intitule') {
     if ($optgroup)
 	$res .= "</optgroup>\n";
     return "$res</select>\n". (@$GLOBALS['meta']['html5']?'</datalist>\n':'');
-/*
- <div style="font:0.8em/1em Arial, Helvetica, Sans-Serif;">
-<h4>Example 1 (for HTML 5 browsers)</h4>
- <label>
-  Enter your favorite cartoon character:<br />
-  <input type="text" name="favCharacter" list="characters" maxlength="50" style="width:95%;">
-  <datalist id="characters">
-   <option value="Homer Simpson">
-   <option value="Bart">
-   <option value="Fred Flinstone">
-  </datalist>
- </label>
-<h4>Example 2 (for both legacy and HTML 5 browsers)</h4>
- <label>
-  Enter your favorite cartoon character:<br />
-  <input type="text" name="favCharacter" list="characters" maxlength="50" style="width:95%;"><br />
- </label>
- <datalist id="characters">
-  <label>
-   or select one from the list:<br />
-   <select name="favCharacter">
-    <option>Homer Simpson
-    <option>Bart
-    <option>Fred Flinstone
-   </select>
-  </label>
- </datalist>
-</div>
- */
 }
 
 /**
@@ -665,28 +647,28 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
 /**
  * Selecteur de plan comptable
  *
- * @param string $plan
+ * @param string $pcg
  *   ID du plan comptable selectionne
- * @param string $name
+ * @param string $nom
  *   Nom du selecteur dans le formulaire
  * @return string $res
  *   Liste deroulante des plans comptables disponibles :
  * ce sont de fichiers de langue "lang/pcg2*.php"
  */
-function filtre_selecteur_compta_plan($plan, $name='plan_comptable') {
+function filtre_selecteur_compta_plan($pcg, $nom='plan_comptable') {
     $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
     foreach ($liste_plans as $pos=>$plan) {
 	$lang = strpos($plan, '_', 3); // l'indicateur de langue commence au premier underscore
 	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
     }
     $desc_table = charger_fonction('trouver_table', 'base');
-    $res = "<select name='$name' id='selecteur_$name'>\n";
+    $res = "<select name='$nom' id='selecteur_$nom'>\n";
     $res .= '<option value="">'. _T('ecrire:item_non') ."</option>\n";
-    foreach (array_unique($liste_plans) as $nom) {
-	$res .= '<option value="'.$nom.'"'.
-	($nom==$plan?' selected="selected"':'') .'>';
-	$pays = $desc_table('pays') ? sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($nom) ) : '';
-	$res .= $pays ? extraire_multi($pays, $GLOBALS['spip_lang']) : strtoupper($nom) ;
+    foreach (array_unique($liste_plans) as $id) {
+	$res .= '<option value="'.$id.'"'.
+	($id==$pcg?' selected="selected"':'') .'>';
+	$pays = $desc_table('pays') ? sql_getfetsel('nom', 'spip_pays', 'code='.sql_quote($id) ) : '';
+	$res .= $pays ? extraire_multi($pays, $GLOBALS['spip_lang']) : strtoupper($id) ;
 	$res .= "</option>\n";
     }
     return "$res</select>\n";

@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 	'erreur_classe_longueur' => 'Une classe comptable est un seul caractère !',
 	'erreur_classe_plage' => 'Les classes comptables doivent être comprise dans la plage @intervalle@ !',
+	'erreur_classe_type' => 'Un compte de la classe <em>@numero@</em> ne peut etre de type <em>@interdit@</em> !',
 	'erreur_code_classe' => 'Une référence comptable de cette classe doit commencer par @nombre@ !',
 	'erreur_code_longueur' => 'Une référence comptable doit avoir au moins @nombre@ caractères !',
 	'erreur_destination_aucune' => 'Pas de destination comptable définie !',
