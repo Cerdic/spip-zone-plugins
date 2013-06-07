@@ -22,11 +22,12 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:album:info_nouvel_album|attribut_html:>" />
 			</li>
 
-			[(#REM) Descriptif ]
-			[(#SAISIE{textarea, descriptif, 
-			label=<:texte_descriptif_rapide:>,
-			rows=4,
-			inserer_barre=''})]
+			#SET{name,descriptif} #SET{obli,''} #SET{defaut,#ENV{titre_defaut,''}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="text_area"><:texte_descriptif_rapide:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" id="#GET{name}"[ lang="(#LANGUE)"] rows='4' cols='40'>[(#ENV*{#GET{name}})]</textarea>
+			</li>
 
 		</ul>
 
