@@ -30,7 +30,6 @@
 	<pipeline nom="jqueryui_plugins" inclure="albums_pipelines.php" /> <!-- drag n drop -->
 	<pipeline nom="optimiser_base_disparus" inclure="albums_pipelines.php" /> <!-- suppression liens morts -->
 
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
 	<necessite nom="medias" compatibilite="[2.7.0;]" />
 
 	<menu nom="albums" titre="album:titre_albums" parent="menu_edition" icone="images/album-16.png" />
