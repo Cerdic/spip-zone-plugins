@@ -13,6 +13,7 @@
 		<p class="explication"><:migreralbums:explication_migration_albums_article_2:></p>
 		<ul>
 
+			[(#REM) Select: choix de la rubrique ]
 			[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 				<label for="id_parent"><:migreralbums:label_rubrique_source:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
@@ -20,18 +21,32 @@
 				(#VAL|chercher_rubrique{0,#ENV{id_parent},'article',0,0,0,form_simple})
 			 </li>]
 
-			[(#SAISIE{case, toute_la_branche,
-				label_case=<:migreralbums:label_toute_la_branche_oui:>,
-				li_class=long_label}
-			)]
+			[(#REM) Checkbox : inclure les sous-rubriques ? ]
+			#SET{name,toute_la_branche} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
 
-			[(#SAISIE{case, refuser_articles,
-				label_case=<:migreralbums:label_refuser_articles_oui:>,
-				li_class=long_label}
-			)]
+			[(#REM) Checkbox: passer les articles en "refusé" ? ]
+			#SET{name,refuser_articles} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
 
-			[(#REM) CHOIX DES GROUPES DE MOTS ]
-			#SET{name,groupes_mots}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[(#REM) Select: choix des groupes de mots ]
+			#SET{name,groupes_mots} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<B_gr>
 			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
