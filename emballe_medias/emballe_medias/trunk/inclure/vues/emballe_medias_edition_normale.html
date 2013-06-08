@@ -9,31 +9,19 @@
 	<div id="navigation_liste" class="diogene_#ID_DIOGENE">
 		<B_selected>
 		<ul class="liste-items liste medias">
-		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut !IN 'publie','poubelle'}{doublons selected}>
+		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut !IN 'publie','poubelle','refuse'}{doublons selected}>
 		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
-			[<span class="titre_media">(#TITRE|couper{20})</span>]
-			<BOUCLE_document_selected(DOCUMENTS){id_article}{0,1}{tout}>
-			[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
-			</BOUCLE_document_selected>
-			</B_document_selected>
-			[(#CHEMIN{images/media_sans_logo.png}|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
-			<//B_document_selected>
+			<INCLURE{fond=inclure/resume/choix_media_lot,id_article} />
 		</li>
 		</BOUCLE_selected>
 		</ul>
 		</B_selected>
 		<B_articles>
 		<ul class="liste-items liste medias"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
-		<BOUCLE_articles(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{statut !IN 'publie','poubelle'}{doublons selected}{par date}{inverse}{pagination 10}>
+		<BOUCLE_articles(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{statut !IN 'publie','poubelle','refuse'}{doublons selected}{par date}{inverse}{pagination 10}>
 		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
 			<a href="[(#SELF|parametre_url{id_media,#ID_ARTICLE}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]}|ancre_url{liste_medias_publication})]" class="ajax" title="[(#TITRE|couper{60}|attribut_html)]">
-				[<span class="titre_media">(#TITRE|couper{20})</span>]
-				<BOUCLE_document(DOCUMENTS){id_article}{0,1}{tout}>
-				[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
-				</BOUCLE_document>
-				</B_document>
-				[(#CHEMIN{images/media_sans_logo.png}|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
-				<//B_document>
+				<INCLURE{fond=inclure/resume/choix_media_lot,id_article} />
 			</a>
 		</li>
 		</BOUCLE_articles>
@@ -42,7 +30,7 @@
 		</B_articles>
 	</div>
 	<div id="edition_emballe_media">
-	<BOUCLE_article(ARTICLES){id_article=#ENV{id_media}}{statut !IN publie,poubelle}>
+	<BOUCLE_article(ARTICLES){id_article=#ENV{id_media}}{statut !IN publie,poubelle,refuse}>
 	<B_document_up>
 	#SET{statut,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{#STATUT}|_T}
 	[(#BOITE_OUVRIR{'',notice})]
