@@ -1,9 +1,12 @@
 <BOUCLE_article(ARTICLES){id_article}{statut?}>
 <BOUCLE_document(DOCUMENTS){id_article}{0,1}{tout}>
-[(#LOGO_DOCUMENT|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
+[(#EXTENSION|in_array{#LISTE{jpg,png,gif}}|?{
+[(#FICHIER|image_passe_partout{200,200}|image_reduire{200,200}|image_recadre{200,200,"top center"}|inserer_attribut{class,spip_logos})],
+[(#LOGO_DOCUMENT|image_passe_partout{200,200}|image_reduire{200,200}|image_recadre{200,200,"top center"}|inserer_attribut{class,spip_logos})]
+})]
 </BOUCLE_document>
 </B_document>
 [(#CHEMIN{images/media_sans_logo.png}|image_reduire{200,200}|image_recadre{200,200}|inserer_attribut{class,spip_logos})]
 <//B_document>
-<span class="#EDIT{titre} titre">[(#TITRE|couper{45})]</span>
+<span class="#EDIT{titre} titre titre_media">[(#TITRE|couper{45})]</span>
 </BOUCLE_article>
