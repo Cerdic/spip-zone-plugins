@@ -8,25 +8,34 @@
 			<th class="titre">
 				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,titre})]" title="<:todo:tri_titre:>"><:todo:label_titre:></a>
 			</th>
+			[(#ENV{utilise_priorite}|oui)
+			<th class="priorite">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,priorite})]" title="<:todo:tri_priorite:>">!</a>
+			</th>]
 			<th class="rang">
 				<a class="ajax" href="[(#SELF|parametre_url{tri_todo,cle})]" title="<:todo:tri_cle:>">#</a>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
+<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
+		#SET{del, #VALEUR|table_valeur{statut}|in_array{#LISTE{termine, abandonne}}}
 		<tr class="[(#VALEUR|table_valeur{statut})][ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
 			<td class="statut">
 				[<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />]
 			</td>
 			<td class="titre[ (#VALEUR|table_valeur{statut})]">
-				[(#VALEUR|table_valeur{del}|?{<del>, <span>})][(#VALEUR|table_valeur{titre})][(#VALEUR|table_valeur{del}|?{</del>, </span>})]
+				[(#GET{del}|?{<del>, <span>})][(#VALEUR|table_valeur{titre})][(#GET{del}|?{</del>, </span>})]
 			</td>
+			[(#ENV{utilise_priorite}|oui)
+			<td class="priorite">
+				[(#VALEUR|table_valeur{priorite})]
+			</td>]
 			<td class="rang">
 				[#(#CLE|plus{1})]
 			</td>
 		</tr>
-		</BOUCLE_todo>
+</BOUCLE_todo>
 	</tbody>
 </table>
 </B_todo>

@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tri_cle' => 'Remettre dans l\'ordre',
+	'tri_priorite' => 'Trier par priorité',
 	'tri_statut' => 'Trier par statut',
 	'tri_titre' => 'Trier par titre'
 );
