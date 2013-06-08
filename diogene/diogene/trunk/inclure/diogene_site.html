@@ -49,7 +49,7 @@
 	#BOITE_OUVRIR{'',error}
 		[(#SESSION{statut}|oui)<p class="message_erreur"><:diogene:erreur_autorisation_statut_publier:></p>]
 		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
-			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=#GET{url}}:>]
+			[(#SESSION{statut}|non)<:diogene:erreur_autorisation_login_publier{url=[(#GET{url})]}:>]
 	#BOITE_FERMER
 	<//B_autorise_publier_secteur>
 </BOUCLE_diogene>
