@@ -35,9 +35,8 @@ function balise_URL_ARTICLE($p) {
 	} else{
 		$code = generer_generer_url('article', $p);
 		$_id = interprete_argument_balise(1,$p);
-		if (!$_id){
+		if (!$_id)
 			$_id = champ_sql('id_article', $p);
-		}
 		$p->code = "generer_url_publier($_id,'article','',false)";
 
 		$p->interdire_scripts = false;
@@ -108,16 +107,15 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	
 	if ($desc = $trouver_table($table_objet, $serveur)
-		AND isset($desc['field']['id_secteur'])){
+		AND isset($desc['field']['id_secteur']))
 			$infos_cherchees[] = 'id_secteur';
-	}
 		
 	if(is_numeric($id)){
 		$infos_objet = sql_fetsel($infos_cherchees,$table,$id_table_objet."=".intval($id));
 		$id_secteur = $infos_objet['id_secteur'] ? $infos_objet['id_secteur'] : 0;
-	}else{
+	}else
 		$infos_objet = array();
-	}
+	
 	/**
 	 * Si on ne force pas, on envoit vers la page de l'objet
 	 */
@@ -131,15 +129,12 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 		$objets[] = 'page';
 	}
 	
-	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.$id_secteur.' AND '.sql_in("objet",$objets));
+	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.intval($id_secteur).' AND '.sql_in("objet",$objets));
 	if($type_objet){
-		$page_publier = 'publier';
-		if(defined('_PAGE_PUBLIER'))
-			$page_publier = _PAGE_PUBLIER;
+		$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
 		$url = generer_url_public($page_publier,'type_objet='.$type_objet,'',true);
-		if(is_numeric($id)){
+		if(is_numeric($id))
 			$url = parametre_url($url,$id_table_objet,intval($id));
-		}
 	}else{
 		$a = id_table_objet($objet) . "=" . intval($id);
 		if (!function_exists('objet_info'))
@@ -164,9 +159,8 @@ function diogene_info_statut($statut, $type='article') {
 	if(!is_array($statuts)){
 		$statuts = objet_info($type,'statut_textes_instituer');
 	}
-	if(is_array($statuts) && array_key_exists($statut,$statuts)){
+	if(is_array($statuts) && array_key_exists($statut,$statuts))
 		return _T($statuts[$statut]);
-	}
 	else{
 		switch ($type) {
 			case 'article':
@@ -214,9 +208,9 @@ if(!function_exists('puce_statut_rubrique')){
 	 * @return un tag image <img src... /> ou le string du statut
 	 */
 	function puce_statut_rubrique($id_objet, $statut, $id_parent, $type, $ajax='') {
-		if(test_espace_prive()){
+		if(test_espace_prive())
 			return puce_statut_rubrique_dist($id_objet, $statut, $id_parent, $type, $ajax='');
-		}else{
+		else{
 			switch ($statut) {
 				case 'publie':
 					$img = 'puce-verte.gif';
@@ -278,13 +272,12 @@ function inc_aider($aide='', $skel='', $env=array(), $aide_spip_directe = false)
 		$url = parametre_url($url, 'var_lang', $spip_lang);
 	} else {
 		$args = "aide=$aide&var_lang=$spip_lang";
-		if(test_espace_prive()){
+		if(test_espace_prive())
 			$url = generer_url_ecrire("aide", $args);
-		}else{
+		else
 			$url = generer_url_public("aide_spip", $args);
-		}
+		
 	}
-	
 	return aider_icone($url);
 }
 

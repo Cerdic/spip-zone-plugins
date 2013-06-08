@@ -18,8 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * On désactive les puce rapide dans le public
  * Demande trop de css et autres trucs pour être sûr que ce soit correct partout
  */
-if(!test_espace_prive() && !defined(_ACTIVER_PUCE_RAPIDE)){
+if(!test_espace_prive() && !defined(_ACTIVER_PUCE_RAPIDE))
 	define(_ACTIVER_PUCE_RAPIDE,false);
-}
+
 
 ?>
