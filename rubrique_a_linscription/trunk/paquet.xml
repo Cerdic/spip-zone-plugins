@@ -1,7 +1,7 @@
 <paquet
 	prefix="rubrique_a_linscription"
 	categorie="auteur"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.99]"
 	logo="rubrique_a_linscription.png"
@@ -19,5 +19,5 @@
 	<pipeline nom="formulaire_verifier" inclure="rubrique_a_linscription.php" />
 	<pipeline nom="autoriser" inclure="autoriser_rubrique_a_linscription.php" />
 
-	<menu nom="rubriquelinscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="prive/images/admin-12.gif" action="rubrique_a_linscription" />
+	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="prive/images/admin-12.gif" action="configurer_rubrique_a_linscription" />
 </paquet>
