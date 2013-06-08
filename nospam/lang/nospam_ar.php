@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_attributs_html_interdits' => 'Il n\'est pas permis d\'utiliser les attributs html <tt>class</tt> ou <tt>style</tt>', # NEW
+	'erreur_blacklist' => 'Vous avez été mis sur liste noire, vous ne pouvez plus poster de message.', # NEW
 	'erreur_jeton' => 'غير قادر على مراعاة رسالتك. أشكركم للإعادة !',
 	'erreur_spam' => 'غير قادر على الأخذ في الاعتبار لرسالتك !',
 	'erreur_spam_doublon' => 'وجود رسالة مماثلة !',
