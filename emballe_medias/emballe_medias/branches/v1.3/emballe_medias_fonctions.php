@@ -20,25 +20,22 @@
  * @param array $array L'array des extensions de la configuration
  */
 function emballe_medias_liste_extensions($array,$sep='; *.',$debut='*.'){
-	if(!is_array($array)){
+	if(!is_array($array))
 		return _T('emballe_medias:configurer_les_extensions');
-	}
+
 	else{
 		$liste = implode($sep,$array);
-		if(!$liste){
+		if(!$liste)
 			return _T('emballe_medias:configurer_les_extensions');
-		}
-		else{
+		else
 			$liste = $debut.$liste;
-		}
 	}
 	return $liste;
 }
 
 function emballe_medias_liste_mimes($array){
-	if(!is_array($array)){
+	if(!is_array($array))
 		return false;
-	}
 	$mimes_finaux = array();
 	$mimes = sql_select('*','spip_types_documents',sql_in('extension',$array));
 	while($mime=sql_fetch($mimes)){
@@ -59,15 +56,12 @@ function emballe_medias_liste_mimes($array){
 function emballe_medias_generer_extensions($type=NULL){
 	include_spip('inc/config');
 	if($type !== NULL && (lire_config('emballe_medias/fichiers/gerer_types') == 'on')){
-		if(($ext = lire_config('emballe_medias/fichiers/fichiers_'.$type.'s')) && ($ext !== NULL)){
+		if(($ext = lire_config('emballe_medias/fichiers/fichiers_'.$type.'s')) && ($ext !== NULL))
 			$extensions = $ext;
-		}
-		else if(defined('_FORM_TYPE_'.strtoupper($type)) && ($ext = constant('_FORM_TYPE_'.strtoupper($type)))){
+		else if(defined('_FORM_TYPE_'.strtoupper($type)) && ($ext = constant('_FORM_TYPE_'.strtoupper($type))))
 			$extensions = explode(',',$ext);
-		}
-		else if(!$extensions){
+		else if(!$extensions)
 			$extensions = emballe_medias_generer_extensions();
-		}
 	}else if(
 			(lire_config('emballe_medias/fichiers/gerer_types') != 'on')
 			OR (lire_config('emballe_medias/types/autoriser_normal') == 'on')
@@ -81,18 +75,14 @@ function emballe_medias_generer_extensions($type=NULL){
 				sort($extensions);
 			}
 		}
-		if(is_array(lire_config('emballe_medias/fichiers/fichiers_videos'))){
+		if(is_array(lire_config('emballe_medias/fichiers/fichiers_videos')))
 			$extensions = array_merge($extensions,lire_config('emballe_medias/fichiers/fichiers_videos',array()));
-		}
-		if(is_array(lire_config('emballe_medias/fichiers/fichiers_audios'))){
+		if(is_array(lire_config('emballe_medias/fichiers/fichiers_audios')))
 			$extensions = array_merge($extensions,lire_config('emballe_medias/fichiers/fichiers_audios',array()));
-		}
-		if(is_array(lire_config('emballe_medias/fichiers/fichiers_textes'))){
+		if(is_array(lire_config('emballe_medias/fichiers/fichiers_textes')))
 			$extensions = array_merge($extensions,lire_config('emballe_medias/fichiers/fichiers_textes',array()));
-		}
-		if(!$extensions){
+		if(!$extensions)
 			$extensions = explode(',',_FORM_TYPE_DEFAULT);
-		}
 	}
 	return $extensions;
 }
