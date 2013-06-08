@@ -125,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_changer_type' => 'Modifier le type de document(s) à mettre en ligne : ',
 	'label_chercher_article' => 'Rechercher un article ?',
 	'label_choisir_medias_lot' => 'Choisissez les médias à traiter',
+	'label_choisir_modifications' => 'Modifications à appliquer',
 	'label_choisir_type' => 'Choisir le type de document(s) à mettre en ligne : ',
 	'label_couleur_claire' => 'Couleur claire',
 	'label_couleur_foncee' => 'Couleur foncée',
