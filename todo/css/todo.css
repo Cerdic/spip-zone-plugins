@@ -7,7 +7,10 @@ table.todolist td.rang{
 	-webkit-opacity:0.3;
 }
 
-.titre.termine del, .titre.abandonne del { color: #aaa; background-color: inherit; }
-.titre.alerte span { color: #8a1f11; background-color:#fbe3e4; }
-.titre.inconnu span { color: #8a1f11; background-color:#fbe3e4; }
-.titre.arrete span { color: #514721; background-color:#fff6bf; }
+.titre del { color: #aaa; background-color: inherit; }
+.titre span.probleme { color: #8a1f11; background-color:#fbe3e4; }
+.titre span.avertissement { color: #514721; background-color:#fff6bf; }
+
+ul.liste-tags { list-style: none outside none; margin-left: 0;}
+li.tag { background: url(img/tag.gif) no-repeat scroll left center transparent;
+	padding-left: 18px; margin-right: 10px; display: inline-block; font-size: 0.9em; }

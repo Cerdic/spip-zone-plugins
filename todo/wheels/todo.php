@@ -4,8 +4,14 @@
 
 // Un callback pour analyser la liste puis appeler un squelette avec les paramètres
 function tw_todo($t) {
+	// Liste des statuts supportés
 	global $todo_statuts;
+	// En attendant de la config
+	static $todo_statuts_finaux = array('termine', 'abandonne');
+	static $todo_statuts_rappel = array('arrete');
+	static $todo_statuts_alerte = array('alerte', 'inconnu');
 
+	// Extraction de lignes du texte
 	$liste = explode("\n", trim($t[0]));
 	array_shift($liste);
 	array_pop($liste);
@@ -15,7 +21,8 @@ function tw_todo($t) {
 	$utilise_priorite = false;
 	$index = 0;
 	foreach ($liste as $_tache){
-		$priorite = $tags = '';
+		$priorite = '';
+		$tags = array();
 		$texte = trim($_tache);
 		if ($texte) {
 			if (strpos($texte, '&nbsp;') === 0) {
@@ -37,7 +44,6 @@ function tw_todo($t) {
 
 					if ($suite) {
 						// -- la priorité
-//						if (preg_match_all('#((?:[a-z0-9_]+:|@)[-a-z0-9]+(?:\s|$))+#Uims', $suite, $infos)) {
 						if (preg_match('#(?:\s+|^)(@([0-9]))(?:\s|$)#Uims', $suite, $infos)) {
 							$priorite = $infos[2];
 							$suite = trim(str_replace($infos[1], '', $suite));
@@ -54,7 +60,7 @@ function tw_todo($t) {
 						if (preg_match_all('#(?:\s+|^)(?:([a-z0-9_]+):([\.-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
 							$types = $infos[1];
 							$valeurs = $infos[2];
-							$complements[] = array_unique(array_merge($complements));
+							$complements[] = array_unique(array_merge($complements, $types));
 						}
 					}
 				}
@@ -67,6 +73,8 @@ function tw_todo($t) {
 					'titre' => $titre,
 					'priorite' => $priorite,
 					'tags' => $tags,
+					'statut_final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
+					'statut_a_signaler' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))
 				);
 				$index += 1;
 			}
@@ -80,7 +88,7 @@ function tw_todo($t) {
 		}
 	}
 
-	if ($todo){
+	if ($todo) {
 		return recuperer_fond(
 			'inclure/todo',
 			array(

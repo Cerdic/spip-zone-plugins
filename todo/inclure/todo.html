@@ -18,17 +18,18 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_todo(POUR){tableau #ENV{liste}}{par #ENV{tri_todo,cle}}>
-		#SET{del, #VALEUR|table_valeur{statut}|in_array{#LISTE{termine, abandonne}}}
+<BOUCLE_todo(DATA){source table, #ENV{liste}}{par #ENV{tri_todo,cle}}>
 		<tr class="[(#VALEUR|table_valeur{statut})][ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
 			<td class="statut">
 				[<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />]
 			</td>
-			<td class="titre[ (#VALEUR|table_valeur{statut})]">
-				[(#GET{del}|?{<del>, <span>})][(#VALEUR|table_valeur{titre})][(#GET{del}|?{</del>, </span>})]
+			<td class="titre">
+				[(#VALEUR|table_valeur{statut_final}|?{<del>, <span[ class="(#VALEUR|table_valeur{statut_a_signaler})"]>})]
+					[(#VALEUR|table_valeur{titre})]
+				[(#VALEUR|table_valeur{statut_final}|?{</del>, </span>})]
 			<B_tags>
-				<ul>
-			<BOUCLE_tags(POUR){tableau #VALEUR|table_valeur{tags}}{par valeur}{', '}>
+				<ul class="liste-tags">
+			<BOUCLE_tags(DATA){source table, #VALEUR|table_valeur{tags}}{par valeur}>
 					<li class="tag">#VALEUR</li>
 			</BOUCLE_tags>
 				</ul>
