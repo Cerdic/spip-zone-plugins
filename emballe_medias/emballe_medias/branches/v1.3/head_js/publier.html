@@ -2,7 +2,7 @@
 [(#REM)
 	La feuille de stype spécifique à fileupload-ui
 ][<link rel="stylesheet" href="(#CHEMIN{css/jquery.fileupload-ui.css})" media="all">]
-[<script type="text/javascript" src="(#PRODUIRE{fond=emballe_medias_js,lang=#ENV{lang},format=js}|appliquer_filtre{minifier,js})"></script>]
+[<script type="text/javascript" src="(#PRODUIRE{fond=emballe_medias.js,lang=#ENV{lang}}|appliquer_filtre{minifier,js})"></script>]
 <script type="text/javascript">
 	var em_markitup = function(){
 		if(window.jQuery.markItUp){
