@@ -79,7 +79,7 @@ function exec_adherents() {
 	), 2);
 /// AFFICHAGES_LATERAUX : Forms-PDF
 	if ( autoriser('exporter_membres', 'association') ) { // etiquettes
-		echo association_form_etiquettes($critere, $jointure_adherents, $suffixe_pdf);
+		echo association_form_etiquettes($critere, $jointure_groupe, $suffixe_pdf);
 	}
 	if ( autoriser('exporter_membres', 'association') ) { // tableau des membres
 		$champsExclus = array();
@@ -89,7 +89,7 @@ function exec_adherents() {
 			$champsExclus[] = 'prenom';
 		if ( !$GLOBALS['association_metas']['id_asso'] )
 			$champsExclus[] = 'id_asso';
-		echo association_form_listepdf('membre', array('where_adherents'=>$critere, 'jointure_adherents'=>$jointure_adherents, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe_pdf), 'adherent_libelle_', $champsExclus, TRUE);
+		echo association_form_listepdf('membre', array('where_adherents'=>$critere, 'jointure_adherents'=>$jointure_groupe, 'statut_interne'=>$statut_interne, 'suffixe'=>$suffixe_pdf), 'adherent_libelle_', $champsExclus, TRUE);
 	}
 /// AFFICHAGES_CENTRAUX (corps)
 	debut_cadre_association('annonce.gif', 'adherent_titre_liste_actifs');
