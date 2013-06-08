@@ -26,6 +26,13 @@
 			</td>
 			<td class="titre[ (#VALEUR|table_valeur{statut})]">
 				[(#GET{del}|?{<del>, <span>})][(#VALEUR|table_valeur{titre})][(#GET{del}|?{</del>, </span>})]
+			<B_tags>
+				<ul>
+			<BOUCLE_tags(POUR){tableau #VALEUR|table_valeur{tags}}{par valeur}{', '}>
+					<li class="tag">#VALEUR</li>
+			</BOUCLE_tags>
+				</ul>
+			</B_tag>
 			</td>
 			[(#ENV{utilise_priorite}|oui)
 			<td class="priorite">
