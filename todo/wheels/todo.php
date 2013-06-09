@@ -5,7 +5,7 @@
 // - @tag ou tag est un mot. Exemple : @courses
 // - type:valeur ou type et valeur sont des mots. Exemple : fin:2013-06-02 ou commit:z72324
 if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([a-z0-9_]+:|@)([a-z0-9-_\.]+)(?:\s|$)#Uims');
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([\w-]+:|@)([\w.-]+)(?:\s|$)#Uims');
 
 
 /**
