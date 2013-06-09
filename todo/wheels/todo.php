@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([a-z0-9]+:|@)([a-z0-9-]+)(?:\s|$)#Uims');
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([a-z0-9_]+:|@)([a-z0-9-_\.]+)(?:\s|$)#Uims');
 
 // Un callback pour analyser la liste puis appeler un squelette avec les paramètres
 function tw_todo($t) {
