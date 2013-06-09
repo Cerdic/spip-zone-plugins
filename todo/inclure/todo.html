@@ -24,7 +24,7 @@
 				[<img src="(#CHEMIN{[(#VAL{images/todo-}|concat{#VALEUR|table_valeur{statut}}|concat{-16.png})]})" alt="" title="[(#VAL{todo:statut_}|concat{#VALEUR|table_valeur{statut}}|_T)]" />]
 			</td>
 			<td class="titre">
-				[(#VALEUR|table_valeur{statut_final}|?{<del>, <span[ class="(#VALEUR|table_valeur{statut_a_signaler})"]>})]
+				[(#VALEUR|table_valeur{statut_final}|?{<del>, <span[ class="(#VALEUR|table_valeur{alerte})"]>})]
 					[(#VALEUR|table_valeur{titre})]
 				[(#VALEUR|table_valeur{statut_final}|?{</del>, </span>})]
 			<B_tags>

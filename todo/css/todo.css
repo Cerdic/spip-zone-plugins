@@ -13,4 +13,4 @@ table.todolist td.rang{
 
 ul.liste-tags { list-style: none outside none; margin-left: 0;}
 li.tag { background: url(img/tag.gif) no-repeat scroll left center transparent;
-	padding-left: 18px; margin-right: 10px; display: inline-block; font-size: 0.9em; }
+	padding-left: 14px; margin-right: 1em; display: inline-block; font-size: 0.9em; }

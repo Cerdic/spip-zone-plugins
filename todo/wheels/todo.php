@@ -38,26 +38,27 @@ function tw_todo($t) {
 				$statut = $todo_statuts[$premier];
 
 				// -- le titre, que l'on sépare du reste des informations complémentaires éventuelles
+				// #(?:[a-z0-9]+:|@)(?:[a-z0-9-]+)(?:\s|$)#Uims
 				if (preg_match('#^(.+)(?:\s|$)(?:(?:[a-z0-9_]+:|@)[-a-z0-9]+(?:\s|$))#Uims', $texte, $infos)) {
 					$titre = trim($infos[1]);
 					$suite = trim(str_replace($titre, '', $texte));
 
 					if ($suite) {
 						// -- la priorité
-						if (preg_match('#(?:\s+|^)(@([0-9]))(?:\s|$)#Uims', $suite, $infos)) {
+						if (preg_match('#(?:\s|^)(@([0-9]))(?:\s|$)#Uims', $suite, $infos)) {
 							$priorite = $infos[2];
 							$suite = trim(str_replace($infos[1], '', $suite));
 							$utilise_priorite = true;
 						}
 
 						// -- les étiquettes
-						if (preg_match_all('#(?:\s+|^)(@([-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
+						if (preg_match_all('#(?:\s|^)(@([-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
 							$tags = $infos[2];
 							$suite = trim(str_replace($infos[1], '', $suite));
 						}
 
 						// -- les informations typées
-						if (preg_match_all('#(?:\s+|^)(?:([a-z0-9_]+):([\.-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
+						if (preg_match_all('#(?:\s|^)(?:([a-z0-9_]+):([\.-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
 							$types = $infos[1];
 							$valeurs = $infos[2];
 							$complements[] = array_unique(array_merge($complements, $types));
@@ -74,7 +75,7 @@ function tw_todo($t) {
 					'priorite' => $priorite,
 					'tags' => $tags,
 					'statut_final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
-					'statut_a_signaler' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))
+					'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))
 				);
 				$index += 1;
 			}
