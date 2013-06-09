@@ -1,11 +1,12 @@
 <paquet
 	prefix="bible"
 	categorie="divers"
-	version="4.0.1"
+	version="4.0.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
 	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
+	schema="0.1.0"
 >	
 
 	<nom>Spip-Bible</nom>
