@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.0.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.99]"
+	compatibilite="[3.0.0-beta;3.0.8]"
 	logo="rubrique_a_linscription.png"
 	schema="0.3"
 	documentation="http://www.spip-contrib.net/Rubrique-a-l-inscription"

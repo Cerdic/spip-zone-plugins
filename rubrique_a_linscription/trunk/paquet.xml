@@ -1,9 +1,9 @@
 <paquet
 	prefix="rubrique_a_linscription"
 	categorie="auteur"
-	version="1.0.2"
+	version="2.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.99]"
+	compatibilite="[3.0.9;3.0.99]"
 	logo="rubrique_a_linscription.png"
 	schema="0.3"
 	documentation="http://www.spip-contrib.net/Rubrique-a-l-inscription"
