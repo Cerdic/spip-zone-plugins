@@ -6,3 +6,5 @@ table.todolist td.rang{
 	-moz-opacity:0.3;
 	-webkit-opacity:0.3;
 }
+
+.titre del { color: #aaa; background-color: inherit; }
