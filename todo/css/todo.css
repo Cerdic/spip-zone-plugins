@@ -8,8 +8,8 @@ table.todolist td.rang{
 }
 
 .titre del { color: #aaa; background-color: inherit; }
-.titre span.probleme { color: #8a1f11; background-color:#fbe3e4; }
-.titre span.avertissement { color: #514721; background-color:#fff6bf; }
+.titre span.majeure { color: #8a1f11; background-color:#fbe3e4; }
+.titre span.mineure { color: #514721; background-color:#fff6bf; }
 
 ul.liste-tags { list-style: none outside none; margin-left: 0;}
 li.tag { background: url(img/tag.gif) no-repeat scroll left center transparent;

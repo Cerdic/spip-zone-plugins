@@ -37,7 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_cle' => 'Remettre dans l\'ordre',
 	'tri_priorite' => 'Trier par priorité',
 	'tri_statut' => 'Trier par statut',
-	'tri_titre' => 'Trier par titre'
+	'tri_titre' => 'Trier par titre',
+	'tri_fin' => 'Trier par date de fin',
+	'tri_debut' => 'Trier par date de début',
+	'tri_commit' => 'Trier par révision',
+	'tri_version' => 'Trier par version',
 );
 
 ?>

@@ -105,7 +105,7 @@ function tw_todo($t) {
 					'statut' => array(
 									'id' =>$statut,
 									'final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
-									'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))),
+									'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'mineure' : (in_array($statut, $todo_statuts_alerte) ? 'majeure' : ''))),
 					'titre' => $titre,
 					'tags' => $tags,
 					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),
