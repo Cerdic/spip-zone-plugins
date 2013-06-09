@@ -1,15 +1,15 @@
 <?php
 
-// Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le tire de la tâche :
+// Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le titre de la tâche :
 // - @p ou p=1..9 et désigne la priorité. Exemple : @1
-// - @tag ou tag est un mot. Exemple : @courses
+// - @tag ou tag est un mot. Exemple : @courses ou @перевод-шаблон
 // - type:valeur ou type et valeur sont des mots. Exemple : fin:2013-06-02 ou commit:z72324
 if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([\w-]+:|@)([\w.-]+)(?:\s|$)#Uims');
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([\w-]+:|@)([\w.-]+)(?:\s|$)#Uu');
 
 
 /**
- * Analyse le contenu du bloc inclus entre les marqueurs de début et de fin de la todolist
+ * Analyse le contenu du bloc inclu entre les marqueurs de début et de fin de la todolist
  * puis appelle un squelette avec les paramètres calculés
  *
  * @param array	$t	l'index 0 représente le contenu du bloc
@@ -45,7 +45,7 @@ function tw_todo($t) {
 			$priorite_utilisee[$index_todo] = false;
 		}
 
-		// Initialisation des variables de la tache en cours
+		// Initialisation des variables de la tâche en cours
 		$priorite = '';
 		$tags = $infos = array();
 		$texte = trim($_ligne);
@@ -55,8 +55,8 @@ function tw_todo($t) {
 			// - le statut d'une tâche,
 			// - l'indicateur d'un projet,
 			// - et sinon le descriptif libre de la tâche précédente.
-			// Les caractères de statut ! et ? sont traités par SPIP et précédés d'un &nbsp; qu'il faut
-			// au préalable supprimer.
+			// Les caractères de statut ! et ? sont traités par SPIP et précédés
+			// d'un &nbsp; qu'il faut au préalable supprimer.
 			if (strpos($texte, '&nbsp;') === 0) {
 				$texte = substr($texte, 6, strlen($texte)-6);
 			}
@@ -103,7 +103,7 @@ function tw_todo($t) {
 				else
 					$titre = $texte;
 
-				// Ajout de la tache dans la liste fournie au modèle
+				// Ajout de la tâche dans la liste fournie au modèle
 				$todos[$index_todo][$index_tache] = array(
 					'statut' => array(
 									'id' =>$statut,
@@ -122,7 +122,7 @@ function tw_todo($t) {
 				$index_tache = 0;
 			}
 			else {
-				// Descriptif libre de la tache précedente
+				// Descriptif libre de la tâche précédente
 				$todos[$index_todo][$index_tache-1]['titre'] .= '<br />' . $texte;
 			}
 		}
