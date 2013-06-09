@@ -24,8 +24,8 @@ function tw_todo($t) {
 
 	// En attendant de la config
 	static $todo_statuts_finaux = array('termine', 'abandonne');
-	static $todo_statuts_rappel = array('arrete');
-	static $todo_statuts_alerte = array('alerte', 'inconnu');
+	static $todo_alertes_mineures = array('arrete');
+	static $todo_alertes_majeures = array('alerte', 'inconnu');
 
 	// Extraction de lignes du texte
 	$lignes = explode("\n", trim($t[0]));
@@ -108,7 +108,7 @@ function tw_todo($t) {
 					'statut' => array(
 									'id' =>$statut,
 									'final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
-									'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'mineure' : (in_array($statut, $todo_statuts_alerte) ? 'majeure' : ''))),
+									'alerte' => (in_array($statut, $todo_alertes_mineures) ? 'mineure' : (in_array($statut, $todo_alertes_majeures) ? 'majeure' : ''))),
 					'titre' => $titre,
 					'tags' => $tags,
 					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),
