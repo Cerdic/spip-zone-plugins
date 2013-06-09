@@ -23,6 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_inserer_todo_moins' => 'Insérer une tâche terminée',
 	'outil_inserer_todo_o' => 'Insérer une tâche en cours',
 	'outil_inserer_todo_plus' => 'Insérer une tâche à faire',
+	'outil_inserer_todo_x' => 'Insérer une tâche abandonnée',
+	'outil_inserer_todo_egal' => 'Insérer une tâche arrêtée',
+	'outil_inserer_todo_exclamation' => 'Insérer une tâche nécessitant une action',
+	'outil_inserer_todo_interrogation' => 'Insérer une tâche dont le statut est inconnu',
 
 	// S
 	'statut_abandonne' => 'Abandonné',

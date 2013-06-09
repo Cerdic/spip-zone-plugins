@@ -62,6 +62,46 @@ function todo_porte_plume_barre_pre_charger($barres){
 						"selectionType" => "line",
 						"forceMultiline" => true, 
 						"display"     => true,
+					),
+					// bouton x
+					array(
+						"id"          => 'todo_x',
+						"name"        => _T('todo:outil_inserer_todo_x'),
+						"replaceWith" => "function(h){ return outil_todo(h, 'x');}",
+						"className"   => 'outil_todo_x',
+						"selectionType" => "line",
+						"forceMultiline" => true,
+						"display"     => true,
+					),
+					// bouton -
+					array(
+						"id"          => 'todo_egal',
+						"name"        => _T('todo:outil_inserer_todo_egal'),
+						"replaceWith" => "function(h){ return outil_todo(h, '=');}",
+						"className"   => 'outil_todo_egal',
+						"selectionType" => "line",
+						"forceMultiline" => true,
+						"display"     => true,
+					),
+					// bouton !
+					array(
+						"id"          => 'todo_exclamation',
+						"name"        => _T('todo:outil_inserer_todo_exclamation'),
+						"replaceWith" => "function(h){ return outil_todo(h, '!');}",
+						"className"   => 'outil_todo_exclamation',
+						"selectionType" => "line",
+						"forceMultiline" => true,
+						"display"     => true,
+					),
+					// bouton ?
+					array(
+						"id"          => 'todo_interrogation',
+						"name"        => _T('todo:outil_inserer_todo_interrogation'),
+						"replaceWith" => "function(h){ return outil_todo(h, '?');}",
+						"className"   => 'outil_todo_interrogation',
+						"selectionType" => "line",
+						"forceMultiline" => true,
+						"display"     => true,
 					)
 				)
 			)
@@ -106,7 +146,11 @@ function todo_porte_plume_lien_classe_vers_icone($flux){
 		'outil_todo'=>'todo.png',
 		'outil_todo_plus'=>'todo-afaire-16.png',
 		'outil_todo_moins'=>'todo-termine-16.png',
-		'outil_todo_o'=>'todo-encours-16.png'
+		'outil_todo_o'=>'todo-encours-16.png',
+		'outil_todo_x'=>'todo-abandonne-16.png',
+		'outil_todo_egal'=>'todo-arrete-16.png',
+		'outil_todo_exclamation'=>'todo-alerte-16.png',
+		'outil_todo_interrogation'=>'todo-inconnu-16.png'
 	));
 }
 ?>

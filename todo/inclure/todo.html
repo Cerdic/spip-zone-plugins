@@ -31,13 +31,11 @@
 				[(#VALEUR|table_valeur{statut/final}|?{<del>, <span[ class="(#VALEUR|table_valeur{statut/alerte})"]>})]
 					[(#VALEUR|table_valeur{titre})]
 				[(#VALEUR|table_valeur{statut/final}|?{</del>, </span>})]
-			<B_tags>
-				<ul class="liste-tags">
 			<BOUCLE_tags(DATA){source table, #VALEUR|table_valeur{tags}}{par valeur}>
-					<li class="tag">#VALEUR</li>
+				[(#COMPTEUR_BOUCLE|=={1}|oui)<ul class="liste-tags">]
+				<li class="tag">#VALEUR</li>
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)</ul>]
 			</BOUCLE_tags>
-				</ul>
-			</B_tag>
 			</td>
 			<BOUCLE_td_complements(DATA){source table, #ENV{types_info}}{par cle}>
 				<td[ class="(#VALEUR)"]>
