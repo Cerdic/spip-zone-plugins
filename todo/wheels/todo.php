@@ -91,7 +91,10 @@ function tw_todo($t) {
 						}
 						else {
 							// -- les informations typées
-							$infos[$type] = $valeur;
+							if ($formater = charger_fonction("formater_${type}", 'inc', true))
+								$infos[$type] = $formater($valeur);
+							else
+								$infos[$type] = $valeur;
 							if (!in_array($type, $types_info[$index_todo]))
 								$types_info[$index_todo][] = $type;
 						}
