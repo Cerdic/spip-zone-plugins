@@ -1,3 +1,28 @@
+@-moz-keyframes pulse{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
+@-webkit-keyframes pulse{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
+@-o-keyframes pulse{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
+@-ms-keyframes pulse{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
+@keyframes pulse{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
 .spip_documents.video,
 .spip_documents.audio{display:block;}
 
@@ -111,13 +136,11 @@ audio{height:25px;display:block}
 	z-index:1;
 }
 
-.media_wrapper.player_error .messages{
-	width:70%;
-	left:15%;
+.media_wrapper.player_error .messages,.media_wrapper .messages.error{
+	max-width:70%;
 	background:rgba(212,0,0,.8);
 	color:#fff;
-	max-width:70%;
-	top:inherit !important;
+	border:none;
 }
 
 .media_wrapper .controls{
@@ -172,7 +195,8 @@ audio{height:25px;display:block}
 .media_wrapper .ms_splash{
 	display:none;
 }
-.media_wrapper.video .ms_splash{
+
+.media_wrapper .ms_splash{
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -184,7 +208,40 @@ audio{height:25px;display:block}
 	background-size:12%;
 }
 
-.video .media_wrapper.no_metadata .ms_splash,
+.media_wrapper.loading .ms_splash,.media_wrapper.seeking .ms_splash{display:none;}
+.media_wrapper.loading .ms-waiting,.media_wrapper.seeking .ms-waiting{display:block;}
+.media_wrapper .ms-waiting{
+	display:none;
+	text-align:center;
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	padding-top:19%;
+	z-index:1;
+}
+.media_wrapper .ms-waiting *{-webkit-box-shadow:0 0 5px #333;-moz-box-shadow:0 0 5px #333;box-shadow:0 0 5px #333}
+.media_wrapper .ms-waiting em{
+	width:1em;
+	height:1em;
+	-webkit-border-radius:1em;
+	-moz-border-radius:1em;
+	border-radius:1em;
+	background-color:rgba(255,255,255,0.8);
+	display:inline-block;
+	-webkit-animation:pulse .6s infinite;
+	-moz-animation:pulse .6s infinite;
+	animation:pulse .6s infinite;
+	margin:.3em;
+	opacity:0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+.media_wrapper .ms-waiting em:nth-child(1){-webkit-animation-delay:.3s;-moz-animation-delay:.3s;animation-delay:.3s}
+.media_wrapper .ms-waiting em:nth-child(2){-webkit-animation-delay:.45s;-moz-animation-delay:.45s;animation-delay:.45s}
+.media_wrapper .ms-waiting em:nth-child(3){-webkit-animation-delay:.6s;-moz-animation-delay:.6s;animation-delay:.6s}
+.media_wrapper .ms-waiting p{color:#ccc;font-weight:bold}
+
 .video .media_wrapper.paused .ms_splash{
 	display:block;
 }
@@ -231,7 +288,7 @@ audio{height:25px;display:block}
 
 .loading .controls .progress_bar .progress_buffered,
 .loading .controls .progress_bar .progress_elapsed_time,
-.loading .progress_bar .ui-slider-horizontal .ui-slider-range,{
+.loading .progress_bar .ui-slider-horizontal .ui-slider-range{
 	opacity:0;
 }
 

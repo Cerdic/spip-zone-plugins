@@ -28,7 +28,7 @@
 - GET{hauteur} et GET{largeur} correspondent prioritairement a ENV,
   puis les balises LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
-[(#HAUTEUR|>{0}|et{#LARGEUR|>{0}}|oui)[(#SET{ratio,[(#LARGEUR|div{#HAUTEUR})]})]]
+[(#HAUTEUR|>{0}|et{#LARGEUR|>{0}}|oui)[(#SET{ratio,[(#ROTATION|=={90}|?{[(#HAUTEUR|div{#LARGEUR})],[(#LARGEUR|div{#HAUTEUR})]})]})]]
 [
 (#SET{hauteur,#ENV{hauteur,#HAUTEUR}})][
 (#SET{largeur,#ENV{largeur,#LARGEUR}})][(#REM)
@@ -115,9 +115,9 @@
 		loop][(#ENV{noresize}?{' class="noresize" ',''})][
 		width="(#GET{largeur}|match{%}|?{'',#GET{largeur}})"][
 		height="(#GET{hauteur})"][
-		poster="(#GET{logo})"][
-		style="width:(#GET{largeur}|match{%}|?{#GET{largeur}})"]
-		>
+		poster="(#GET{logo})"][(#ENV{muted,non}|=={oui}|oui)
+		muted][
+		style="width:(#GET{largeur}|match{%}|?{#GET{largeur}})"]>
 		<BOUCLE_variantes(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>[
 		(#EXTENSION|=={mp4}|et{#EXTENSION|in_array{#GET{variantes}}|non}|oui)
 			<source[ type='(#EXTENSION|in_array{#LISTE{mp4,m4v}}|?{'video/mp4',#MIME_TYPE}|trim)[; codecs="(#VIDEOCODECID)[,(#AUDIOCODECID)]"]'] src="[(#FICHIER|timestamp|url_absolue)]" />
@@ -148,7 +148,6 @@
 				(#ENV{autoplay,#ENV{autostart,non}}|in_array{#LISTE{false,non,none}}|non)autoplay:true,][
 				(#ENV{volume}|is_numeric|oui)volume : #ENV{volume},][
 				(#ENV{volume_bloque}|=={oui}|oui)volume_bloque : true,][
-				(#ENV{muted}|=={oui}|oui)muted : true,][
 				(#GET{ratio}|oui)ratio : #GET{ratio},][
 				(#ENV{muted_bloque}|=={oui}|oui)muted_bloque : true,][
 				(#ENV{boutons_caches}|oui)boutons_caches : [(#ENV{boutons_caches}|explode{','}|json_encode)],][(#GET{largeur}|oui)[
@@ -160,8 +159,8 @@
 		}
 	}
 	$(function(){
-		ms_player_init_#GET{id_document_voir}();
-		onAjaxLoad(function(){setTimeout(function(){ms_player_init_#GET{id_document_voir}();},500)});
+		ms_player_init_[(#GET{id_document_voir})]();
+		onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
 	});
 })(jQuery);
 </script>
