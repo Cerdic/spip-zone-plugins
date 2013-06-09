@@ -1,0 +1,12 @@
+<traduction module="paquet-todo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/todo/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-todo?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-todo?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
+	<langue code="fr" />
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-todo?lang_cible=ru">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+</traduction>

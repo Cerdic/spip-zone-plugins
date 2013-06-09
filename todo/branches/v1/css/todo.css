@@ -1,0 +1,8 @@
+table.todolist td, table.todolist th{
+	padding:0.2em 0.5em;
+}
+table.todolist td.rang{
+	opacity:0.3;
+	-moz-opacity:0.3;
+	-webkit-opacity:0.3;
+}
