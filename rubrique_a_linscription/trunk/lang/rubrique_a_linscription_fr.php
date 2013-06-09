@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accepter_inscription'		=>"Pour utiliser ce plugin vous devez <a href='?exec=configurer_interactions'>autoriser l'inscription de rédacteurs</a>.",
 	'auteur_bascule'			=>'Les auteurs @id_auteurs@ ont bien été basculés',
 	'cfg_pas_creer_mot'			=>'Ne pas créer de mot clef',
-	'cfg_argument_explicite'	=>'Le formulaire d\'inscription ne crée la rubrique ad hoc que si on lui passe l\'argument {rubrique_a_linscription}',
+	'cfg_formulaire_explicite'	=>'Le formulaire d\'inscription ne crée la rubrique ad hoc que si on utilise <code>#FORMULAIRE_INSCRIPTION_AVEC_RUBRIQUE</code>',
 	'cfg_avertissement_changement'	=> 'Attention : si vous modifiez les paramètres ci-dessous, les modifications ne seront pas appliqués retro-activement.',
 	'cfg_espace_prive_voir'		=> "Ne pas autoriser les auteurs ainsi créés à voir d'autres rubriques dans l'espace privé, à l'exception des rubriques parentes de la rubrique de l'auteur",
 	'cfg_espace_prive_creer'		=> "Ne pas autoriser les auteurs ainsi créés à proposer des articles en dehors de leur rubrique",
