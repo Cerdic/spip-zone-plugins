@@ -22,6 +22,7 @@ $pc_norme = array(
 // http://www.ohada.com/actes-uniformes/693/860/tableau-cadre-comptable-du-systeme-comptable-ohada.html
 // http://fr.wikipedia.org/wiki/Plan_comptable_%28OHADA%29
 // http://www.droit-afrique.com/images/textes/Ohada/Ohada%20-%20Acte%20uniforme%202000%20(Plan%20des%20comptes).pdf
+// http://www.ohada.org/documentation.html
 //
 $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 

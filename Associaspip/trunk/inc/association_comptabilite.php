@@ -95,7 +95,7 @@ function comptabilite_liste_planregles($id='') {
     if (!$id)
 	$id = $GLOBALS['association']['plan_comptable'];
     if (!$id)
-	return array('[0-9]', '[0-9]');
+	return array('[0-9]', '[0-9]', 'C'=>$GLOBALS['association_metas']['classe_produits'], 'D'=>$GLOBALS['association_metas']['classe_charges']);
     $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
 #    include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
     include(find_in_path('lang/'.$trads[0])); // charger le premier fichier de langue SPIP
@@ -423,27 +423,24 @@ function comptabilite_verifier_classe($classe, $plan='') {
  * @param string $classe
  *   Caractere de la classe si on souhaite s'assurer que c'est l'initial du code
  * @param string $sens
- *   credit|debit|multi : on s'assurera sommairement que le type de compte est bon
- * Pour l'instant on ne prend en compte que 2 classes Associaspip mais y d'autres
- * http://www.mesexercices.com/recherche_information/comptabilite-les-comptes-de-classe-6-charges-sont-normalement_6_38694.htm
- * Par ailleurs, on ne peut pas fonctionner par classe caril y a des exceptions !
- *  http://dz.viadeo.com/fr/questions/repondre/?questionId=0021aox4cgt6v70a
- * Peut-etre faudrat-il rajouter des regles pour une meilleure validation ?
+ *   credit|debit|multi : on s'assurera que la direction d'operation est bonnne
+ * Cela est precise par les regles C (pour credit) et D (pour debit) du plan comptable
+ * et dans tous les cas multi passe toujours...
  */
-function comptabilite_verifier_code($code, $classe='', $sens='multi', $plan='') {
+function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') {
     $regles = comptabilite_liste_planregles($plan);
+    $ruleC = $regles['C']; unset($regles['C']);
+    $ruleD = $regles['D']; unset($regles['D']);
     if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
-#    elseif ( strlen($code)<count($regles) ) // champ de longueur insuffisante
-#	return _T('compta:erreur_code_longueur', array('nombre'=>count($regles),) );
     if (sql_countsel('spip_asso_plan', "code='$code'")>1) // occurences multiples d'une meme reference
 	return _T('compta:erreur_plan_code_doublon');
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
-#    if ( $code[0]==$GLOBALS['association_metas']['classe_produits'] AND $sens=='debit' ) // ce sont tous des comptes essentiellement créditeurs...
-#	return _T('compta:erreur_classe_type', array('numero'=$code[0], 'interdit'=>_T('compta:item_direction_debit'),) );
-#    elseif ( $code[0]==$GLOBALS['association_metas']['classe_charges'] AND $sens=='credit' ) // ce sont tous des comptes essentiellement débiteurs...
-#	return _T('compta:erreur_classe_type', array('numero'=$code[0], 'interdit'=>_T('compta:item_direction_credit'),) );
+    if ( $ruleC AND preg_match('/^('.$ruleC.')\w*$/', $code) AND $sens=='debit' ) // comptes uniquement créditeurs...
+	return _T('compta:erreur_code_type', array('code'=>$code, 'interdit'=>_T('compta:item_direction_debit'),) );
+    if ( $ruleD AND preg_match('/^('.$ruleD.')\w*$/', $code) AND $sens=='credit' ) // comptes uniquement débiteurs...
+	return _T('compta:erreur_code_type', array('code'=>$code, 'interdit'=>_T('compta:item_direction_credit'),) );
      return '';
 }
 
@@ -467,7 +464,7 @@ function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
 	if( array_key_exists($r['code'], $codes) ) // on a deux fois le meme code...
 	    return _T('compta:erreur_plan_code_doublon', array('code'=>$r['code'],) ); // ...on arrete sur cette erreur...
 	else { // c'est la 1ere occurence
-	    $codes[$r['code']] = comptabilite_verifier_code($r['code'], $r['classe'], 0, $lang); // verifier qu'il est bien forme
+	    $codes[$r['code']] = comptabilite_verifier_code($r['code'], $r['type_op'], $r['classe'], $lang); // verifier qu'il est bien forme
 	    if ($codes[$r['code']]) // mauvais format...
 		return $codes[$r['code']]; // ...on arrete sur cette erreur...
 	}
