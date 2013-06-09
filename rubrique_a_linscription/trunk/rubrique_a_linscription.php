@@ -2,7 +2,12 @@
 /*charger*/
 function rubrique_a_linscription_formulaire_charger($flux){
 	$meta = unserialize(lire_meta('rubrique_a_linscription'));
-	if ($flux['args']['form']=='inscription' and lire_meta('accepter_inscriptions')=='oui' and (!$meta['argument_explicite']) or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')){
+	if (
+	    ($flux['args']['form']=='inscription' or $flux['args']['form']=='inscription_avec_rubrique') 
+	    and lire_meta('accepter_inscriptions')=='oui' 
+	    and (!$meta['argument_explicite']) 
+	    or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')
+	   ){
 		
 		
 		$flux['args']['args'][0] = $meta['statut'];
@@ -28,7 +33,12 @@ function rubrique_a_linscription_formulaire_verifier($flux){
 /* Traiter */
 function rubrique_a_linscription_formulaire_traiter($flux){
 	$meta = unserialize(lire_meta('rubrique_a_linscription'));
-	if ($flux['args']['form']=='inscription' and (!$meta['argument_explicite']) or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')){
+	if (
+	    ($flux['args']['form']=='inscription' or $flux['args']['form']=='inscription_avec_rubrique') 
+	    and (!$meta['argument_explicite']) 
+	    or ($meta['argument_explicite']=='on' 
+	    and $flux['args']['args'][0] == 'rubrique_a_linscription')
+	   ){
 
 		// Récuperation des paramètres
 		$mail = _request('mail_inscription');
