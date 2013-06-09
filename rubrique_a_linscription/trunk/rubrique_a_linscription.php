@@ -5,8 +5,8 @@ function rubrique_a_linscription_formulaire_charger($flux){
 	if (
 	    ($flux['args']['form']=='inscription' or $flux['args']['form']=='inscription_avec_rubrique') 
 	    and lire_meta('accepter_inscriptions')=='oui' 
-	    and (!$meta['argument_explicite']) 
-	    or ($meta['argument_explicite']=='on' and $flux['args']['args'][0] == 'rubrique_a_linscription')
+	    and (!$meta['formulaire_explicite']) 
+	    or ($meta['formulaire_explicite']=='on' and $flux['args']['form']=='inscription_avec_rubrique')
 	   ){
 		
 		
@@ -35,9 +35,9 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 	$meta = unserialize(lire_meta('rubrique_a_linscription'));
 	if (
 	    ($flux['args']['form']=='inscription' or $flux['args']['form']=='inscription_avec_rubrique') 
-	    and (!$meta['argument_explicite']) 
-	    or ($meta['argument_explicite']=='on' 
-	    and $flux['args']['args'][0] == 'rubrique_a_linscription')
+	    and (!$meta['formulaire_explicite']) 
+	    or ($meta['formulaire_explicite']=='on' 
+	    and $flux['args']['form']=='inscription_avec_rubrique')
 	   ){
 
 		// Récuperation des paramètres
