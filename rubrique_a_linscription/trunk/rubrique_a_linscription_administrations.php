@@ -22,6 +22,15 @@ function rubrique_a_linscription_upgrade($nom_meta_base_version,$version_cible){
 		 	ecrire_meta($nom_meta_base_version,$current_version='0.3','non');
 		 	ecrire_metas();
 		 }
+		 if (version_compare($current_version,'0.4','<=')){
+		 	spip_log('Mise à jour 0.4','rubrique_a_linscription');
+		 	$meta = unserialize(lire_meta('rubrique_a_linscription'));
+		 	$meta["rubrique_explicite"]=$meta["argument_explicite"];
+			unset($meta["argument_explicite"]);
+		 	ecrire_meta('rubrique_a_linscription',serialize($meta));
+		 	ecrire_meta($nom_meta_base_version,$current_version='0.4','non');
+		 	ecrire_metas();
+		 }
 				
 	}	
 	ecrire_metas();
