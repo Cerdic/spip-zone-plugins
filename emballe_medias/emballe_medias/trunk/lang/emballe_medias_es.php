@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_changer_type' => 'Modificar el tipo de documento(s) a publicar: ',
 	'label_chercher_article' => '¿Buscar un artículo?',
 	'label_choisir_medias_lot' => 'Elija los medias a procesar',
+	'label_choisir_modifications' => 'Modifications à appliquer', # NEW
 	'label_choisir_type' => 'Elegir el tipo de documento(s) a publicar: ',
 	'label_couleur_claire' => 'Color claro',
 	'label_couleur_foncee' => 'Color oscuro',
