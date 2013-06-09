@@ -12,6 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_statut' => 'Statut',
 	'label_titre' => 'Titre',
+	'label_fin' => 'Fin',
+	'label_debut' => 'Début',
+	'label_commit' => 'Révision',
+	'label_version' => 'Version',
+	'label_priorite' => '!',
 
 	// O
 	'outil_inserer_todo' => 'Insérer une todo',

@@ -1,6 +1,7 @@
 <?php
-# not usefull as this file is include by the engine itself
-# require_once 'engine/textwheel.php';
+
+if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([a-z0-9]+:|@)([a-z0-9-]+)(?:\s|$)#Uims');
 
 // Un callback pour analyser la liste puis appeler un squelette avec les paramètres
 function tw_todo($t) {
@@ -12,19 +13,25 @@ function tw_todo($t) {
 	static $todo_statuts_alerte = array('alerte', 'inconnu');
 
 	// Extraction de lignes du texte
-	$liste = explode("\n", trim($t[0]));
-	array_shift($liste);
-	array_pop($liste);
+	$lignes = explode("\n", trim($t[0]));
+	array_shift($lignes);
+	array_pop($lignes);
 	
-	$todo = array();
-	$complements = array();
-	$utilise_priorite = false;
-	$index = 0;
-	foreach ($liste as $_tache){
+	$taches = array();
+	$types_info = array();
+	$priorite_utilisee = false;
+	$index_tache = 0;
+	foreach ($lignes as $_ligne){
 		$priorite = '';
-		$tags = array();
-		$texte = trim($_tache);
+		$tags = $types = $infos = array();
+		$texte = trim($_ligne);
 		if ($texte) {
+			// Extraction du premier caractère de la ligne qui détermine soit :
+			// - le statut d'une tâche,
+			// - l'indicateur d'un projet,
+			// - et sinon le descriptif libre de la tâche précédente.
+			// Les caractères de statut ! et ? sont traités par SPIP et précédés d'un &nbsp; qu'il faut
+			// au préalable supprimer.
 			if (strpos($texte, '&nbsp;') === 0) {
 				$texte = substr($texte, 6, strlen($texte)-6);
 			}
@@ -38,30 +45,30 @@ function tw_todo($t) {
 				$statut = $todo_statuts[$premier];
 
 				// -- le titre, que l'on sépare du reste des informations complémentaires éventuelles
-				// #(?:[a-z0-9]+:|@)(?:[a-z0-9-]+)(?:\s|$)#Uims
-				if (preg_match('#^(.+)(?:\s|$)(?:(?:[a-z0-9_]+:|@)[-a-z0-9]+(?:\s|$))#Uims', $texte, $infos)) {
-					$titre = trim($infos[1]);
-					$suite = trim(str_replace($titre, '', $texte));
+				if (preg_match_all(_TODO_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
+					// Extraction du titre
+					$titre = trim(str_replace($infos_complementaires[0], '', $texte));
 
-					if ($suite) {
-						// -- la priorité
-						if (preg_match('#(?:\s|^)(@([0-9]))(?:\s|$)#Uims', $suite, $infos)) {
-							$priorite = $infos[2];
-							$suite = trim(str_replace($infos[1], '', $suite));
-							$utilise_priorite = true;
+					// Extraction des informations complémentaires
+					foreach($infos_complementaires[1] as $_cle => $_prefixe) {
+						$type = rtrim($_prefixe, ':');
+						$valeur = $infos_complementaires[2][$_cle];
+						if ($type == '@') {
+							if ((intval($valeur) >=1) AND (intval($valeur) <=9)) {
+								// -- la priorité
+								$priorite = $valeur;
+								$priorite_utilisee = true;
+							}
+							else {
+								// -- les étiquettes
+								$tags[] = $valeur;
+							}
 						}
-
-						// -- les étiquettes
-						if (preg_match_all('#(?:\s|^)(@([-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
-							$tags = $infos[2];
-							$suite = trim(str_replace($infos[1], '', $suite));
-						}
-
-						// -- les informations typées
-						if (preg_match_all('#(?:\s|^)(?:([a-z0-9_]+):([\.-a-z0-9]+))(?:\s|$)#Uims', $suite, $infos)) {
-							$types = $infos[1];
-							$valeurs = $infos[2];
-							$complements[] = array_unique(array_merge($complements, $types));
+						else {
+							// -- les informations typées
+							$infos[$type] = $valeur;
+							if (!in_array($type, $types_info))
+								$types_info[] = $type;
 						}
 					}
 				}
@@ -69,33 +76,33 @@ function tw_todo($t) {
 					$titre = $texte;
 
 				// Ajout de la tache dans la liste fournie au modèle
-				$todo[$index] = array(
-					'statut' => $statut,
+				$taches[$index_tache] = array(
+					'statut' => array(
+									'id' =>$statut,
+									'final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
+									'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))),
 					'titre' => $titre,
-					'priorite' => $priorite,
 					'tags' => $tags,
-					'statut_final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
-					'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))
+					'infos' => ($priorite_utilisee ? array_merge($infos, array('priorite' => $priorite)) : $infos),
 				);
-				$index += 1;
+				$index_tache += 1;
 			}
 			elseif ($premier == ':') {
 				// Projet
 			}
 			else {
 				// Descriptif libre de la tache précedente
-				$todo[$index-1]['titre'] .= '<br />' . $texte;
+				$taches[$index_tache-1]['titre'] .= '<br />' . $texte;
 			}
 		}
 	}
 
-	if ($todo) {
+	if ($taches) {
 		return recuperer_fond(
 			'inclure/todo',
 			array(
-				'liste' => $todo,
-				'utilise_priorite' => $utilise_priorite,
-				'complements' => $complements
+				'taches' => $taches,
+				'types_info' => ($priorite_utilisee ? array_merge($types_info, array('priorite')) : $types_info)
 			),
 			array(
 				'ajax' => true
