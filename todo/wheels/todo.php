@@ -1,9 +1,20 @@
 <?php
 
+// Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le tire de la tâche :
+// - @p ou p=1..9 et désigne la priorité. Exemple : @1
+// - @tag ou tag est un mot. Exemple : @courses
+// - type:valeur ou type et valeur sont des mots. Exemple : fin:2013-06-02 ou commit:z72324
 if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
 	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([a-z0-9_]+:|@)([a-z0-9-_\.]+)(?:\s|$)#Uims');
 
-// Un callback pour analyser la liste puis appeler un squelette avec les paramètres
+
+/**
+ * Analyse le contenu du bloc inclus entre les marqueurs de début et de fin de la todolist
+ * puis appelle un squelette avec les paramètres calculés
+ *
+ * @param array	$t	l'index 0 représente le contenu du bloc
+ * @return string	le html généré à partir d'un squelette
+ */
 function tw_todo($t) {
 	// Liste des statuts supportés
 	global $todo_statuts;
@@ -26,7 +37,7 @@ function tw_todo($t) {
 	$index_todo = 0;
 	$index_tache = 0;
 
-	// Analyse de chaque ligne
+	// Analyse de chaque ligne du bloc
 	foreach ($lignes as $_ligne){
 		// Initialisation des variables de la todolist en cours
 		if ($index_tache == 0) {
@@ -36,7 +47,7 @@ function tw_todo($t) {
 
 		// Initialisation des variables de la tache en cours
 		$priorite = '';
-		$tags = $types = $infos = array();
+		$tags = $infos = array();
 		$texte = trim($_ligne);
 
 		if ($texte) {
