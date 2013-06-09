@@ -2,11 +2,12 @@
 	<nom>Todo</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>1.1.4</version>
+	<version>1.1.5</version>
 	<etat>test</etat>
 	<slogan>Lister rapidement des choses à faire</slogan>
 	<description>Ajoute de nouveaux raccourcis typographiques permettant de décrire de manière simple des listes de choses à faire dans un contenu SPIP.</description>
 	<categorie>edition</categorie>
+	<icon>images/todo-48.png</icon>
 	
 	<prefix>todo</prefix>
 	
@@ -21,7 +22,7 @@
 		<inclure>todo_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="tw" version="[0.3.1;]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
 </plugin>
