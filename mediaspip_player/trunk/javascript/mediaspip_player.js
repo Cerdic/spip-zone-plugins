@@ -136,7 +136,7 @@
 			
 			options = $.extend(defaults, options);
 			
-			var media = $(this), id = $(this)[0], playable = false;
+			var media = $(this), id = media[0], playable = id.isFullScreen = false;
 
 			if(media.is(':hidden')) media.show();
 			if(media.is('audio')) options.movieSize = null;
@@ -543,11 +543,13 @@
 						wrapper.css({width:'auto'}).removeAttr('width');
 						media.animate({width:'100%'},'fast').ms_resize_controls();
 					}
-					var handler_media_resize = function(){ 
-						wrapper.css({width:'auto'}).css({height:(wrapper.width()/id.ratio)+'px'});
-						media.ms_resize_controls();
+					var handler_media_resize = function(){
+						if(!id.isFullScreen){
+							wrapper.css({width:'auto'}).css({height:(wrapper.width()/id.ratio)+'px'});
+							media.ms_resize_controls();
+						}
 					}
-					$(window).unbind('resize',handler_media_resize).resize(handler_media_resize);
+					$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
 				}else if(!media.hasClass('noresize') && (options.movieSize != 'noresize')){
 					/**
 					 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
@@ -861,25 +863,22 @@
 		},
 		ms_fullscreen : function(){
 			if($(this)[0].controls) return;
-			var media = $(this),
-				id = media[0],
-				wrapper = media.parent(),
-				id_wrapper = wrapper[0];
+			var media = $(this), id = media[0], wrapper = media.parent(), id_wrapper = wrapper[0];
 			if(id.mediacanplay){
 				if(!id.isFullScreen){
 					id.videoOrigWidth = media.width();
 					id.videoOrigHeight = media.height();
 					id_wrapper.origWidth = wrapper.width();
 					id_wrapper.origHeight = wrapper.height();
+					id.isFullScreen = true;
 					if (fullScreenApi.supportsFullScreen)
 						media.ms_fullscreen_resize();
 					else{
 						$('body').css({'overflow' : 'hidden', '-moz-user-select' : 'none'});
 						media.ms_fullscreen_resize();
 						var handler_fullscreen_resize = function(){ media.ms_fullscreen_resize(); }
-						$(window).unbind('resize',handler_fullscreen_resize).resize(handler_fullscreen_resize);
+						$(window).unbind('resize',handler_fullscreen_resize).bind('resize',handler_fullscreen_resize);
 					}
-					id.isFullScreen = true;
 				}else{
 					if (fullScreenApi.supportsFullScreen) {
 						(fullScreenApi.prefix === '') ? document.cancelFullScreen() : document[fullScreenApi.prefix + 'CancelFullScreen']();
@@ -896,7 +895,7 @@
 						}
 						wrapper.bind('ms_fullscreen_resize',handler_resize);
 						var media_handler_resize = function(){
-							media.animate({width:$(this)[0].videoOrigWidth+'px',height:$(this)[0].videoOrigHeight+'px',left:'0',top:'0'},500,function(){
+							media.animate({width:id.videoOrigWidth+'px',height:id.videoOrigHeight+'px',left:'0',top:'0'},500,function(){
 								media.ms_resize_controls();
 							});
 						}
@@ -916,29 +915,27 @@
 			if($(this)[0].controls) return;
 			var media = $(this), id = media[0], wrapper = media.parent(), id_wrapper = wrapper[0];
 	
-			wrapper.find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen_full);
+			wrapper.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small')
+				.find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen_full);
 			
 			if (fullScreenApi.supportsFullScreen) {
 				(fullScreenApi.prefix === '') ? id_wrapper.requestFullScreen() : id_wrapper[fullScreenApi.prefix + 'RequestFullScreen']();
-				wrapper.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
-				media.ms_resize_controls();
 			}else{
 				var window_width = window.innerWidth,
 		    		window_height = window.innerHeight,
 					ratio = (window_height/id.videoHeight),
 					width_final = (id.videoWidth*ratio).toFixed();
-				wrapper.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small');
 				if(width_final > window_width){
-					var ratio = (window_width/$(this)[0].videoWidth),
-						height_final = ($(this)[0].videoHeight*ratio).toFixed(),
+					var ratio = (window_width/id.videoWidth),
+						height_final = (id.videoHeight*ratio).toFixed(),
 						top = ((window_height-height_final)/2).toFixed();
 					$(this).css({position:'absolute',width:window_width+'px',height:height_final+'px',top:top+'px',left:'0'});
 				}else{
 					var left = ((window_width-width_final)/2).toFixed();
 					media.css({position:'auto',width:width_final+'px',height:window_height+'px',left:left+'px',top:'0'});
 				}
-				media.ms_resize_controls();
 			}
+			media.ms_resize_controls();
 		},
 	
 		/**
