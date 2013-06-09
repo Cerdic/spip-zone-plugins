@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tri_cle' => 'Restablecer en orden',
+	'tri_priorite' => 'Trier par priorité', # NEW
 	'tri_statut' => 'Clasificar por estatus',
 	'tri_titre' => 'Clasificar por título'
 );
