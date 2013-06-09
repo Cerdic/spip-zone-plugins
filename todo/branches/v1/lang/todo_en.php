@@ -7,19 +7,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// C
-	'configurer_bando' => 'Things to do',
-	'configurer_titre' => 'Configure the list of things to do',
-
 	// L
 	'label_statut' => 'Status',
 	'label_titre' => 'Title',
 
 	// O
-	'outil_inserer_todo' => 'Insérer une todo', # NEW
-	'outil_inserer_todo_moins' => 'Insérer une tâche terminée', # NEW
-	'outil_inserer_todo_o' => 'Insérer une tâche en cours', # NEW
-	'outil_inserer_todo_plus' => 'Insérer une tâche à faire', # NEW
+	'outil_inserer_todo' => 'Insert a todo', # NEW
+	'outil_inserer_todo_moins' => 'Insert a task completed', # NEW
+	'outil_inserer_todo_o' => 'Insert a task in process', # NEW
+	'outil_inserer_todo_plus' => 'Insert a task not started', # NEW
 
 	// S
 	'statut_afaire' => 'To do',
