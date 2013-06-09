@@ -1,0 +1,80 @@
+<!-- titre=Rubrique à l'inscription-->
+<div class="formulaire_spip formulaire_editer formulaire_editer_rubrique_a_linscription" id="formulaire_editer_rubrique_a_linscription">
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class="explication"><:rubrique_a_linscription:cfg_explication:></p>
+	<fieldset>
+		<legend><:rubrique_a_linscription:cfg_generale:></legend>
+		<p class="explication"><:rubrique_a_linscription:cfg_avertissement_changement:></p>
+		<ul>
+			[<li class="editer_rubrique_mere obligatoire">
+				<label for="rubrique_mere"><:rubrique_a_linscription:cfg_id_parent:></label>
+				(#VAL|chercher_rubrique{0,#ENV{id_parent},'rubrique','',''})
+			
+			</li>]
+			
+			<li class="editer_argument_explicite">
+				<input name="argument_explicite" type="checkbox" id="argument_explicite"[ checked="checked"(#ENV{argument_explicite}|oui)]>
+				<label for="argument_explicite"><:rubrique_a_linscription:cfg_argument_explicite:></label>
+			</li>
+			<B_groupes>
+				<li class="editer_groupe_mots">
+				<label for="groupe_mots"><:rubrique_a_linscription:cfg_groupes_mots:></label>
+				<select id="groupe_mots" name="groupe_mots">
+				<option value="0"><:rubrique_a_linscription:cfg_pas_creer_mot:></option>
+				<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}>
+					<option value="#ID_GROUPE"[ selected="(#ENV{groupe_mots}|=={#ID_GROUPE}|oui)"]>#TITRE</option>
+				</BOUCLE_groupes>
+				</select>
+				</li>
+			</B_groupes>
+			
+			<li class="editer_statut">
+				<label for="statut"><:rubrique_a_linscription:cfg_statut:></label>
+				<select id="statut" name="statut">
+					<option value="1comite"[ selected="(#ENV{statut}|=={1comite}|oui)"]><:auteur:></option>
+					<option value="0minirezo"[ selected="(#ENV{statut}|=={0minirezo}|oui)"]><:statut_admin_restreint:></option>
+				</select>
+			</li>
+			
+			
+		</ul>
+		
+	</fieldset>
+	<fieldset>
+		<legend><:rubrique_a_linscription:cfg_espace_prive:></legend>
+		<ul>
+			<li class="editer_espace_prive_voir">
+				<input type="checkbox" class="checkbox" name="espace_prive_voir" id="espace_prive_voir"[ checked="checked"(#ENV{espace_prive_voir}|oui)]>
+				<label for="espace_prive_voir"><:rubrique_a_linscription:cfg_espace_prive_voir:></label>
+			</li>
+			
+			<li class="editer_espace_prive_creer">
+				<input type="checkbox" class="checkbox" name="espace_prive_creer" id="espace_prive_creer"[ checked="checked"(#ENV{espace_prive_creer}|oui)]>
+				<label for="espace_prive_voir"><:rubrique_a_linscription:cfg_espace_prive_creer:></label>
+			</li>
+			
+		</ul>
+	</fieldset>	
+	<fieldset>
+		<legend><:rubrique_a_linscription:cfg_mail:></legend>
+		<ul>
+			<li class="editer_mail_public">
+				
+				<input type="checkbox" class="checkbox" name="mail_public" id="mail_public"[ checked="checked"(#ENV{mail_public}|oui)]>
+				<label for="mail_public"><:rubrique_a_linscription:cfg_mail_public:></label>
+				
+			</li>
+			
+			<li class="editer_mail_prive">
+				
+				<input type="checkbox" class="checkbox" name="mail_prive" id="mail_prive"[ checked="checked"(#ENV{mail_prive}|oui)]>
+				<label for="mail_prive"><:rubrique_a_linscription:cfg_mail_privee:></label>
+				
+			</li>
+		</ul>
+		</fieldset>
+	<p class="boutons"><input type="submit" name="ok" value="OK" /></p>
+   
+</form>
+</div>

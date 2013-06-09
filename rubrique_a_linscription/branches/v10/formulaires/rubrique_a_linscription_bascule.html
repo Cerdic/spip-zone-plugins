@@ -1,0 +1,25 @@
+<B_auteurs>
+
+<div class="formulaire_spip formulaire_rubrique_a_linscription_bascule">
+<form action="#ENV{action}" method="post">
+<div>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class="explication"><:rubrique_a_linscription:explication_bascule:></p>
+	[<div class="pagination">(#PAGINATION)</div>]
+	<ul>
+		
+		<BOUCLE_auteurs(AUTEURS){id_auteur?}{tout}{rubrique_a_linscription!=NULL}{par nom}{pagination 60}>
+		<li>
+			<label for="id_auteur_#ID_AUTEUR">#NOM</label>
+			<input type="checkbox" name="xd_auteur[]" id="id_auteur_#ID_AUTEUR" value="#ID_AUTEUR" />
+		</li>
+		</BOUCLE_auteurs>
+		
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+</div>
+</form>
+</div>
+</B_auteurs>

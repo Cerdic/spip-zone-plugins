@@ -1,0 +1,23 @@
+<paquet
+	prefix="rubrique_a_linscription"
+	categorie="auteur"
+	version="1.0.2"
+	etat="stable"
+	compatibilite="[3.0.0-beta;3.0.99]"
+	logo="rubrique_a_linscription.png"
+	schema="0.3"
+	documentation="http://www.spip-contrib.net/Rubrique-a-l-inscription"
+>	
+
+	<nom>Rubrique &#224; l'inscription</nom>
+	<!-- Créer une rubrique à l'inscription d'un admin -->
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<pipeline nom="formulaire_traiter" inclure="rubrique_a_linscription.php" />
+	<pipeline nom="formulaire_charger" inclure="rubrique_a_linscription.php" />
+	<pipeline nom="formulaire_verifier" inclure="rubrique_a_linscription.php" />
+	<pipeline nom="autoriser" inclure="autoriser_rubrique_a_linscription.php" />
+
+	<menu nom="configurer_rubrique_a_linscription" titre="rubrique_a_linscription:rubrique_a_linscription" parent="bando_configuration" icone="prive/images/admin-12.gif" action="configurer_rubrique_a_linscription" />
+</paquet>
