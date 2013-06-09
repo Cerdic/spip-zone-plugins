@@ -7,6 +7,10 @@ if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
 function tw_todo($t) {
 	// Liste des statuts supportés
 	global $todo_statuts;
+
+	// Initialisation du html calculé
+	$html = $t;
+
 	// En attendant de la config
 	static $todo_statuts_finaux = array('termine', 'abandonne');
 	static $todo_statuts_rappel = array('arrete');
@@ -16,15 +20,25 @@ function tw_todo($t) {
 	$lignes = explode("\n", trim($t[0]));
 	array_shift($lignes);
 	array_pop($lignes);
-	
-	$taches = array();
-	$types_info = array();
-	$priorite_utilisee = false;
+
+	// Initialisation des variables propres à l'ensemble des todos du bloc
+	$todos = array();
+	$index_todo = 0;
 	$index_tache = 0;
+
+	// Analyse de chaque ligne
 	foreach ($lignes as $_ligne){
+		// Initialisation des variables de la todolist en cours
+		if ($index_tache == 0) {
+			$types_info[$index_todo] = array();
+			$priorite_utilisee[$index_todo] = false;
+		}
+
+		// Initialisation des variables de la tache en cours
 		$priorite = '';
 		$tags = $types = $infos = array();
 		$texte = trim($_ligne);
+
 		if ($texte) {
 			// Extraction du premier caractère de la ligne qui détermine soit :
 			// - le statut d'une tâche,
@@ -54,10 +68,10 @@ function tw_todo($t) {
 						$type = rtrim($_prefixe, ':');
 						$valeur = $infos_complementaires[2][$_cle];
 						if ($type == '@') {
-							if ((intval($valeur) >=1) AND (intval($valeur) <=9)) {
+							if (preg_match('#^[1-9]$#', $valeur, $m)) {
 								// -- la priorité
 								$priorite = $valeur;
-								$priorite_utilisee = true;
+								$priorite_utilisee[$index_todo] = true;
 							}
 							else {
 								// -- les étiquettes
@@ -67,8 +81,8 @@ function tw_todo($t) {
 						else {
 							// -- les informations typées
 							$infos[$type] = $valeur;
-							if (!in_array($type, $types_info))
-								$types_info[] = $type;
+							if (!in_array($type, $types_info[$index_todo]))
+								$types_info[$index_todo][] = $type;
 						}
 					}
 				}
@@ -76,42 +90,51 @@ function tw_todo($t) {
 					$titre = $texte;
 
 				// Ajout de la tache dans la liste fournie au modèle
-				$taches[$index_tache] = array(
+				$todos[$index_todo][$index_tache] = array(
 					'statut' => array(
 									'id' =>$statut,
 									'final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
 									'alerte' => (in_array($statut, $todo_statuts_rappel) ? 'avertissement' : (in_array($statut, $todo_statuts_alerte) ? 'probleme' : ''))),
 					'titre' => $titre,
 					'tags' => $tags,
-					'infos' => ($priorite_utilisee ? array_merge($infos, array('priorite' => $priorite)) : $infos),
+					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),
 				);
 				$index_tache += 1;
 			}
 			elseif ($premier == ':') {
 				// Projet
+				$index_todo += 1;
+				$projets[$index_todo] = trim(substr($texte, 1, strlen($texte)-1));
+				$index_tache = 0;
 			}
 			else {
 				// Descriptif libre de la tache précedente
-				$taches[$index_tache-1]['titre'] .= '<br />' . $texte;
+				$todos[$index_todo][$index_tache-1]['titre'] .= '<br />' . $texte;
 			}
 		}
 	}
 
-	if ($taches) {
-		return recuperer_fond(
-			'inclure/todo',
-			array(
-				'taches' => $taches,
-				'types_info' => ($priorite_utilisee ? array_merge($types_info, array('priorite')) : $types_info)
-			),
-			array(
-				'ajax' => true
-			)
-		);
+	// Appel pour chaque todolist du modèle par défaut
+	if ($todos) {
+		$html = '';
+		foreach($todos as $_cle => $_taches) {
+			if ($_taches) {
+				$html .= recuperer_fond(
+					'inclure/todo',
+					array(
+						'projet' => (isset($projets[$_cle]) ? $projets[$_cle] : ''),
+						'taches' => $_taches,
+						'types_info' => ($priorite_utilisee[$_cle] ? array_merge($types_info[$_cle], array('priorite')) : $types_info[$_cle])
+					),
+					array(
+						'ajax' => true
+					)
+				);
+			}
+		}
 	}
-	else{
-		return $t;
-	}
+
+	return $html;
 }
 
 ?>
