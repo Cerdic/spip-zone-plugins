@@ -69,7 +69,7 @@ function mediaspip_player_jqueryui_plugins($plugins){
  */
 function mediaspip_player_jquery_plugins($plugins){
 	$plugins[] = _DIR_LIB_MOUSEWHEEL.'jquery.mousewheel.js';
-	$plugins[] = 'javascript/flowplayer-3.2.11.min.js';
+	$plugins[] = 'javascript/flowplayer-3.2.12.min.js';
 	$plugins[] = 'javascript/mediaspip_player.js';
 	$plugins[] = 'javascript/mediaspip_fallback_flash.js';
 	return $plugins;
