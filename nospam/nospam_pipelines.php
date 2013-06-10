@@ -210,7 +210,8 @@ function nospam_pre_edition($flux) {
 
 					if ($flux['data']['statut'] != 'spam') {
 						$champs = array_unique(array('texte', $champ));
-						if ($h = rechercher_presence_liens_spammes($infos['liens'], 1, 'spip_forum', $champs)) {
+						$nb_tolerance = 3;
+						if ($h = rechercher_presence_liens_spammes($infos['liens'], $nb_tolerance, 'spip_forum', $champs)) {
 							$flux['data']['statut'] = 'spam';
 							spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en spam car lien $h deja dans un spam", 'nospam');
 						}

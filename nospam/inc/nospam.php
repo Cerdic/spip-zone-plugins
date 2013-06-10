@@ -199,6 +199,14 @@ function rechercher_presence_liens_spammes($liens,$seuil,$table,$champs,$condsta
 	if ($condstatut)
 		$condstatut = "$condstatut AND ";
 
+	// limiter la recherche au mois precedent
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($desc = $trouver_table($table)
+	  AND isset($desc['date'])){
+		$depuis = date('Y-m-d H:i:s',strtotime("-1 month"));
+		$condstatut .= $desc['date'].">".sql_quote($depuis)." AND ";
+	}
+
 	// ne pas prendre en compte les liens sur le meme domaine que celui du site
 	$allowed = array();
 	$tests = array($GLOBALS['meta']['adresse_site'],url_de_base());
