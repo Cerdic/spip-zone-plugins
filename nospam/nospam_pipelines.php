@@ -149,6 +149,7 @@ function nospam_pre_edition($flux) {
 			  }
 		  }
 
+			$lang_suspecte = false;
 			// si c'est un spammeur connu,
 			// verifier que cette ip n'en est pas a son N-ieme spam en peu de temps
 			// a partir d'un moment on refuse carrement le spam massif, le posteur devra attendre pour reposter
@@ -163,6 +164,21 @@ function nospam_pre_edition($flux) {
 					$flux['data']['statut'] = ''; // on n'en veut pas !
 					spip_log("[Refuse] $nb spam pour (ip=" . $GLOBALS['ip'] . "$email) dans les 2 dernieres heures", 'nospam');
 					return $flux;
+				}
+			}
+			// sinon regarder si l'objet a une langue, et si le post est dans la meme langue ou non
+			// en cas de langue differente, on se mefie
+			elseif ($flux['data']['objet']){
+				$table = table_objet_sql($flux['data']['objet']);
+				$trouver_table = charger_fonction("trouver_table","base");
+				if ($desc = $trouver_table($table)
+				  AND isset($desc['field']['lang'])){
+					$primary = id_table_objet($flux['data']['objet']);
+					$lang_objet = sql_getfetsel("lang",$table,"$primary=".intval($flux['data']['id_objet']));
+					include_spip("inc/detecter_langue");
+					$lang_post = _detecter_langue($flux['data']['texte']);
+					if ($lang_post!==$lang_objet)
+						$lang_suspecte = true;
 				}
 			}
 
@@ -189,7 +205,7 @@ function nospam_pre_edition($flux) {
 				)
 			);
 
-			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])? $seuils['blacklist'] : ($spammeur_connu ? $seuils['suspect'] : $seuils[0]);
+			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])? $seuils['blacklist'] : (($spammeur_connu OR $lang_suspecte) ? $seuils['suspect'] : $seuils[0]);
 			include_spip("inc/nospam"); // pour analyser_spams()
 			foreach ($flux['data'] as $champ => $valeur) {
 				$infos = analyser_spams($valeur);
