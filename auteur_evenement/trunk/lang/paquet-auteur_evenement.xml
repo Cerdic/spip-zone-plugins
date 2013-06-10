@@ -1,3 +1,12 @@
 <traduction module="paquet-auteur_evenement" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/auteur_evenement/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-auteur_evenement?lang_cible=de">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-auteur_evenement?lang_cible=en">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-auteur_evenement?lang_cible=es">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="fr" />
 </traduction>
