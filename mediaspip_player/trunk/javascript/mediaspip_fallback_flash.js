@@ -25,6 +25,7 @@
 				volume: 100,
 				width:null,
 				height:null,
+				ratio:null,
 				poster:null,
 				loop:false,
 				cookie_volume: false,
@@ -36,33 +37,41 @@
 				boutons_caches:[]
 			},
 			media = $(this),
-			liens = [];
-			
+			liens = [],
 			options = $.extend(defaults, options);
-			options.isVideo = true;
-			options.isSound = false;
-			
+
 			if(media.is('audio')){
 				options.isSound = true;
 				options.isVideo = false;
+			}else{
+				options.isVideo = true;
+				options.isSound = false;
 			}
 			
 			liens = sm2_chercher_liens(options.sources,liens);
 			
 			if(liens.length>0){
 				var width = options.width,
-					height = options.height;
+					height = options.height,
+					ratio = options.ratio;
 				
 				if(!width){
-					if(media.attr('width')) width = media.attr('width');
-					else if(media.width() > 0) width = media.width();
+					if(!height && media.attr('width')) width = media.attr('width');
+					else if(!height && media.width() > 0) width = media.width();
+					else if(ratio && height)
+						width = height*ratio;
 				}
 				if(!height){
-					if(media.attr('height'))
-						height=media.attr('height');
-					else if(media.height() > 0)
-						height = media.height();
+					if(!width && media.attr('height'))
+						height = media.attr('height').toFixed();
+					else if(!width && media.height() > 0)
+						height = media.height().toFixed();
+					else if(ratio && width)
+						height = (width/ratio).toFixed();
 				}
+				
+				if(options.width && options.width == '100%')
+					options.movieSize = 'adapt';
 				
 				if(options.poster && $(this).prev().is('img'))
 					$(this).prev().detach();
@@ -70,14 +79,14 @@
 				media.wrap('<div class="media_wrapper loading" />');
 				var wrapper = media.parents('.media_wrapper');
 
-				var lecteur = '';
+				var controls = '';
 					/**
 					 * Le bloc html pour afficher les messages
 					 */
-					lecteur += (options.messages) ? '<div class="messages" style="display:none"></div>' : '';
-					lecteur += (options.poster) ? '<div class="html5_cover"></div>' : '';
-					lecteur +='<div class="flowplayer"></div>';
-					lecteur +='<div class="controls small">'
+					controls += (options.messages) ? '<div class="messages" style="display:none"></div>' : '';
+					controls += (options.poster) ? '<div class="html5_cover"></div>' : '';
+					controls +='<div class="flowplayer"></div>';
+					controls +='<div class="controls small">'
 					+'<div class="buttons_left">'
 						+'<span class="play_pause_button" title="'+ms_player_lang.bouton_loading+'"></span>'
 					+'</div>'
@@ -94,15 +103,15 @@
 						+'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>'
 					+'</div>'
 					+'<div class="buttons_right">';
-					lecteur += ($.inArray('volume',options.boutons_caches) == 0) ? '' : '<span class="volume_button" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(options.volume*100)+'%)"></span>';
+					controls += ($.inArray('volume',options.boutons_caches) == 0) ? '' : '<span class="volume_button" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(options.volume*100)+'%)"></span>';
 					/**
 					 * Si on a les sliders, on ajoute une div ici pour avoir un slider de volume
 					 */
-					lecteur += (slider && $.inArray('volume',options.boutons_caches) == '-1') ? '<span class="volume_slider_container '+options.volume_slider_orientation+'"><span class="volume_slider"></span></span>' : '';
-					lecteur += ($.inArray('loop',options.boutons_caches) == '-1') ? '<span class="loop_button" title="'+ms_player_lang.bouton_loop+'"></span>' : '';
-					lecteur +='</div>';
+					controls += (slider && $.inArray('volume',options.boutons_caches) == '-1') ? '<span class="volume_slider_container '+options.volume_slider_orientation+'"><span class="volume_slider"></span></span>' : '';
+					controls += ($.inArray('loop',options.boutons_caches) == '-1') ? '<span class="loop_button" title="'+ms_player_lang.bouton_loop+'"></span>' : '';
+					controls +='</div>';
 				
-					wrapper.html(lecteur);
+					wrapper.html(controls);
 
 				if(options.poster && options.isSound){
 					wrapper.find('.html5_cover').html('<img src="'+options.poster+'" />');
@@ -393,9 +402,13 @@
 	        						width_container = wrapper.parent().width();
 	        						var ratio = (width_container/clip.metaData.width),
 	        							height_final = (clip.metaData.height*ratio).toFixed();
-	        						wrapper.add(wrapper).animate({height:height_final+'px',width:'100%'},500,function(){
+	        						wrapper.animate({height:height_final+'px',width:'100%'},500,function(){
 	        							wrapper.flow_resize_controls();
 	        						});
+	        						var handler_media_resize = function(){
+        								wrapper.css({width:'auto'}).css({height:(wrapper.parent().width()/wrapper[0].ratio)+'px'}).flow_resize_controls();
+	        						}
+	        						$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
 	        					}else if(!wrapper.hasClass('noresize') || options.movieSize != 'noresize'){
 	        						/**
 	        						 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
@@ -581,13 +594,20 @@
 		    $(this).find('.buttons_right').width(buttons_right_width);
 		    
 			var width_container = $(this).width(),
-				play_width = parseFloat($(this).find('.buttons_left').outerWidth());
-			play_width += isNaN(parseFloat($(this).find('.buttons_left').css('margin-left'))) ? 0 : parseFloat($(this).find('.buttons_left').css('margin-left'));
-			play_width += isNaN(parseFloat($(this).find('.buttons_left').css('margin-right'))) ? 0 : parseFloat($(this).find('.buttons_left').css('margin-right'));
+				buttons_left = $(this).find('.buttons_left'),
+				buttons_right = $(this).find('.buttons_right'),
+				remaining_time = $(this).find(".remaining_time"),
+				elapsed_time = $(this).find(".elapsed_time"),
+				play_width = parseFloat(buttons_left.outerWidth()),
+				sound_width = parseFloat(buttons_right.outerWidth()),
+				elapsed_width = parseFloat(elapsed_time.outerWidth()),
+				remaining_width = 0;
 			
-			var sound_width = parseFloat($(this).find('.buttons_right').outerWidth());
-			sound_width += isNaN(parseFloat($(this).find('.buttons_right').css('margin-left'))) ? 0 : parseFloat($(this).find('.buttons_right').css('margin-left'));
-			sound_width += isNaN(parseFloat($(this).find('.buttons_left').css('margin-right'))) ? 0 : parseFloat($(this).find('.buttons_right').css('margin-right'));
+			play_width += isNaN(parseFloat(buttons_left.css('margin-left'))) ? 0 : parseFloat(buttons_left.css('margin-left'));
+			play_width += isNaN(parseFloat(buttons_left.css('margin-right'))) ? 0 : parseFloat(buttons_left.css('margin-right'));
+			
+			sound_width += isNaN(parseFloat(buttons_right.css('margin-left'))) ? 0 : parseFloat(buttons_right.css('margin-left'));
+			sound_width += isNaN(parseFloat(buttons_right.css('margin-right'))) ? 0 : parseFloat(buttons_right.css('margin-right'));
 			
 			var progresswidth = parseFloat(width_container)-parseFloat(play_width)-parseFloat(sound_width);
 			progresswidth -= isNaN(parseFloat(progress_bar.css('border-left-width'))) ? 0 : parseFloat(progress_bar.css('border-left-width'));
@@ -596,20 +616,18 @@
 			progresswidth -= isNaN(parseFloat(progress_bar.css('margin-left'))) ? 0 : parseFloat(progress_bar.css('margin-left'));
 			progresswidth -= isNaN(parseFloat(progress_bar.css('margin-left'))) ? 0 : parseFloat(progress_bar.css('padding-right'));
 			progresswidth -= isNaN(parseFloat(progress_bar.css('padding-left'))) ? 0 : parseFloat(progress_bar.css('padding-left'));
-			
+			progresswidth = progresswidth - 2;
 			progress_bar.width(progresswidth);
 
-			var remaining_width = 0;
-			if($(this).find(".remaining_time").is(':visible')){
-				remaining_width += parseFloat($(this).find(".remaining_time").outerWidth());
-				remaining_width += isNaN(parseFloat($(this).find(".remaining_time").css('margin-left'))) ? 0 : parseFloat($(this).find(".remaining_time").css('margin-left'));
-				remaining_width += isNaN(parseFloat($(this).find(".remaining_time").css('margin-right'))) ? 0 : parseFloat($(this).find(".remaining_time").css('margin-right'));
+			if(remaining_time.is(':visible')){
+				remaining_width += parseFloat(remaining_time.outerWidth());
+				remaining_width += isNaN(parseFloat(remaining_time.css('margin-left'))) ? 0 : parseFloat(remaining_time.css('margin-left'));
+				remaining_width += isNaN(parseFloat(remaining_time.css('margin-right'))) ? 0 : parseFloat(remaining_time.css('margin-right'));
 				remaining_width += $.browser.msie ? 4 : 0;
 			}
 			
-			var elapsed_width = parseFloat($(this).find(".elapsed_time").outerWidth());
-			elapsed_width += isNaN(parseFloat($(this).find(".elapsed_time").css('margin-left'))) ? 0 : parseFloat($(this).find(".elapsed_time").css('margin-left'));
-			elapsed_width += isNaN(parseFloat($(this).find(".elapsed_time").css('margin-right'))) ? 0 : parseFloat($(this).find(".elapsed_time").css('margin-right'));
+			elapsed_width += isNaN(parseFloat(elapsed_time.css('margin-left'))) ? 0 : parseFloat(elapsed_time.css('margin-left'));
+			elapsed_width += isNaN(parseFloat(elapsed_time.css('margin-right'))) ? 0 : parseFloat(elapsed_time.css('margin-right'));
 			
 			var progressback_width = progresswidth - elapsed_width - remaining_width;
 			progressback_width -= isNaN(parseFloat(progress_back.css('border-left-width'))) ? 0 : parseFloat(progress_back.css('border-left-width'));
@@ -631,15 +649,15 @@
 				});
 				wrapper.flow_resize_controls(true);
 			}else{
-				if($(this).find('.remaining_time').is(':hidden') && $(this).find('.loop_button').is(':visible') && progressback_width < 30){
+				if(remaining_time.is(':hidden') && $(this).find('.loop_button').is(':visible') && progressback_width < 30){
 					$(this).find('.loop_button').hide();
 					$(this).flow_resize_controls(true);
 				}
-				else if($(this).find('.remaining_time').is(':visible') && progressback_width < 30){
-					$(this).find('.remaining_time').hide();
+				else if(remaining_time.is(':visible') && progressback_width < 30){
+					remaining_time.hide();
 					$(this).flow_resize_controls(true);
 				}
-				else if($(this).find('.remaining_time').is(':hidden') && progressback_width < 30){
+				else if(remaining_time.is(':hidden') && progressback_width < 30){
 					$(this).find('.progress_back').hide();
 					return $(this);
 				}
