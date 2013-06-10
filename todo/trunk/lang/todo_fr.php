@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/todo/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/todo/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -10,23 +10,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configurer les listes de choses à faire',
 
 	// L
+	'label_commit' => 'Révision',
+	'label_debut' => 'Début',
+	'label_fin' => 'Fin',
+	'label_priorite' => '!',
 	'label_statut' => 'Statut',
 	'label_titre' => 'Titre',
-	'label_fin' => 'Fin',
-	'label_debut' => 'Début',
-	'label_commit' => 'Révision',
 	'label_version' => 'Version',
-	'label_priorite' => '!',
 
 	// O
 	'outil_inserer_todo' => 'Insérer une todo',
+	'outil_inserer_todo_egal' => 'Insérer une tâche arrêtée',
+	'outil_inserer_todo_exclamation' => 'Insérer une tâche nécessitant une action',
+	'outil_inserer_todo_interrogation' => 'Insérer une tâche dont le statut est inconnu',
 	'outil_inserer_todo_moins' => 'Insérer une tâche terminée',
 	'outil_inserer_todo_o' => 'Insérer une tâche en cours',
 	'outil_inserer_todo_plus' => 'Insérer une tâche à faire',
 	'outil_inserer_todo_x' => 'Insérer une tâche abandonnée',
-	'outil_inserer_todo_egal' => 'Insérer une tâche arrêtée',
-	'outil_inserer_todo_exclamation' => 'Insérer une tâche nécessitant une action',
-	'outil_inserer_todo_interrogation' => 'Insérer une tâche dont le statut est inconnu',
 
 	// S
 	'statut_abandonne' => 'Abandonné',
@@ -39,13 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tri_cle' => 'Remettre dans l\'ordre',
+	'tri_commit' => 'Trier par révision',
+	'tri_debut' => 'Trier par date de début',
+	'tri_fin' => 'Trier par date de fin',
 	'tri_priorite' => 'Trier par priorité',
 	'tri_statut' => 'Trier par statut',
 	'tri_titre' => 'Trier par titre',
-	'tri_fin' => 'Trier par date de fin',
-	'tri_debut' => 'Trier par date de début',
-	'tri_commit' => 'Trier par révision',
-	'tri_version' => 'Trier par version',
+	'tri_version' => 'Trier par version'
 );
 
 ?>
