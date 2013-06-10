@@ -26,13 +26,14 @@
 .spip_documents.video,
 .spip_documents.audio{display:block;}
 
-audio{height:25px;display:block}
+audio{min-height:24px;display:block;}
 
 .media{
 	margin:0 auto;
 }
 
 .media_wrapper{
+	min-height:24px;
 	outline:none;
 	font-family: arial,sans-serif;
 	color:#d5d5d5;

@@ -1042,25 +1042,23 @@
 				else
 					var sources = media.children("source");
 				$.each(sources, function(index, value){
-					if(($(this).attr('type').match('video/x-flv'))||($(this).attr('type').match('video/mp4'))||($(this).attr('type').match('audio/mpeg'))){
+					var source = $(this);
+					if((source.attr('type').match('video/x-flv'))||(source.attr('type').match('video/mp4'))||(source.attr('type').match('audio/mpeg'))){
 						var defaults_flash = {
 							flowurl:options.flowurl,
 							flasherror:options.flasherror ? options.flasherror : '',
 							autoplay:options.autoplay,
 							autoload:options.autoload,
 							wmode : 'transparent',
-							width : $(this).attr('width'),
-							height : $(this).attr('height')?$(this).attr('height'):$(this).parent().height(),
-							poster : $(this).attr('poster'),
+							width : media.attr('width'),
+							height : media.attr('height')?media.attr('height'):media.parent().height(),
+							poster : media.attr('poster'),
 							sources : $(this),
-							loop : (typeof(me.attr('loop')) == 'undefined') ? false : true
+							loop : (typeof(media.attr('loop')) == 'undefined') ? false : true
 						}
 						var options_flash = $.extend(options,defaults_flash);
 						media.ms_fallback_flash(options_flash);
-						/**
-						 * On s'arrête au premier élément qui nous convient
-						 */
-						return false;
+						return false;// On s'arrête au premier élément qui nous convient
 					}
 				});
 			}

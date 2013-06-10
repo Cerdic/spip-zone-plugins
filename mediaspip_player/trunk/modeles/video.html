@@ -3,9 +3,12 @@
 	Modele html video
 	
 	Les paramètres possibles :
-	-* logo string : le chemin vers un logo spécifique
-	-* controls string "non" : N'affichera pas les controles si la valeur est non ou false
-	-* autoplay string "tout sauf non ou false" : La video se lira dès qu'elle le pourra si la valeur est autre que non ou false
+	-* logo string : 
+		le chemin vers un logo spécifique
+	-* controls string "non" : 
+		n'affichera pas les controles si la valeur est "non", "none" ou "false"
+	-* autoplay string "tout sauf non ou false" : 
+		la video se lira dès qu'elle le pourra si la valeur est autre que non ou false
 	-* autobuffer|preload string non|auto|metadata : La méthode de preload : auto chargera l'ensemble de la video, metadata s'arrêtera aux metadatas, non ne chargera rien
 	-* loop string "tout sauf non ou false" : La video se lira en boucle
 	-* largeur int|% : La largeur par défaut (défaut 320), si valeur en %, % doit être indiqué (ex: 100%), sinon seul l'entier pour les px
@@ -15,10 +18,14 @@
 	-** null, respectera les tailles passées en paramètres ou la taille de la video dans la bdd ou la taille par défaut (320x240)
 	-* align string left|right|center : L'alignement par défaut
 	-* volume int : Un nombre de 0 à 100 correspondant le pourcentage
-	-* volume_bloque oui : si oui le niveau de volume restera bloqué
-	-* volume_slider_orientation string vertical|horizontal : l'orientation du slider de volume
-	-* muted oui : si oui le lecteur sera sur mute à l'initialisation
-	-* muted_bloque oui : si oui l'utilisateur ne peut switcher entre mute et unmute
+	-* volume_bloque string oui : 
+		si oui le niveau de volume restera bloqué
+	-* volume_slider_orientation string vertical|horizontal : 
+		l'orientation du slider de volume
+	-* muted string oui : 
+		si "oui" le lecteur sera sur mute à l'initialisation
+	-* muted_bloque string  oui : 
+		si "oui" l'utilisateur ne peut switcher entre mute et unmute
 	-* boutons_caches string : liste de boutons séparés par des virgule (ex: fullscreen,loop,volume)
 ]
 <BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>[
