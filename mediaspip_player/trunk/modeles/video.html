@@ -113,7 +113,7 @@
 
 <BOUCLE_si_id(CONDITION){si #GET{id_document_voir}|oui}>[(#SET{variantes,#ARRAY})]
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media video'[
-	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']
+	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',[(#ENV{largeur}|match{%}|oui)width:#ENV{largeur}]})']
 	id='media_#GET{id_document_voir}'>
 	<video id="video_#GET{id_document_voir}"[
 		(#ENV{controls,true}|in_array{#LISTE{false,non,none}}|non)controls ][
@@ -158,7 +158,7 @@
 				(#GET{ratio}|oui)ratio : #GET{ratio},][
 				(#ENV{muted_bloque}|=={oui}|oui)muted_bloque : true,][
 				(#ENV{boutons_caches}|oui)boutons_caches : [(#ENV{boutons_caches}|explode{','}|json_encode)],][(#GET{largeur}|oui)[
-				width:'(#ENV{largeur}|match{%}|?{[(#ENV{largeur})],[(#ENV{largeur}|match{px}|?{[(#ENV{largeur}|replace{px,''})],[(#ENV{largeur})]})]})',]
+				width:'(#ENV{align}|match{^(left|right)$}|et{#ENV{largeur}|match{%}}|?{100%,[(#ENV{largeur}|replace{px,''})]})',]
 				][height:'(#ENV{hauteur})',
 				]volume_slider_orientation:'#ENV{volume_slider_orientation,#CONFIG{mediaspip_player/slider_volume_orientation,horizontal}}'
 				

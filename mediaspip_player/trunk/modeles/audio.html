@@ -62,7 +62,7 @@
 #SET{variantes,#ARRAY}
 <BOUCLE_variantes(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media audio'[
-	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']
+	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',[(#ENV{largeur}|match{%}|oui)width:#ENV{largeur}]})']
 	id='media_#GET{id_document_voir}'>
 	#GET{logo}
 	<audio id="audio_[(#GET{id_document_voir})]"[(#ENV{controls,true}|in_array{#LISTE{false,non,none}}|non)
@@ -106,7 +106,7 @@
 				muted_bloque:true,][
 				poster:"(#GET{logo}|extraire_attribut{src}|url_absolue)",][(#ENV{boutons_caches}|oui)
 				boutons_caches:[(#ENV{boutons_caches}|explode{','}|json_encode)],][(#GET{largeur}|oui)[
-				width:'(#GET{largeur}|match{%}|?{[(#GET{largeur})],[(#GET{largeur}|match{px}|?{[(#GET{largeur}|replace{px,''})],[(#GET{largeur})]})]})',]
+				width:'(#ENV{align}|match{^(left|right)$}|et{#ENV{largeur}|match{%}}|?{100%,[(#ENV{largeur}|replace{px,''})]})',]
 				]volume_slider_orientation:'#ENV{volume_slider_orientation,#CONFIG{mediaspip_player/slider_volume_orientation,horizontal}}'
 			});
 		}
