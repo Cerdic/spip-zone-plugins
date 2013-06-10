@@ -147,9 +147,9 @@
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
 				media.children('source').each(function(){
 					if(($(this).attr('type') != 'video/x-flv') && (id.canPlayType($(this).attr('type')) != '')){
-						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent))
+						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)){
 							playable = false;
-						else{
+						}else{
 							playable = true;
 							return false;
 						}
@@ -1066,6 +1066,7 @@
 						return false;// On s'arrête au premier élément qui nous convient
 					}
 				});
+				
 			}
 		},
 		ms_update_loaded : function(e){
