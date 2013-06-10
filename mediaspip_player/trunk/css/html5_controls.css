@@ -243,7 +243,7 @@ audio{min-height:24px;display:block;}
 .media_wrapper .ms-waiting em:nth-child(3){-webkit-animation-delay:.6s;-moz-animation-delay:.6s;animation-delay:.6s}
 .media_wrapper .ms-waiting p{color:#ccc;font-weight:bold}
 
-.video .media_wrapper.paused .ms_splash{
+.media_wrapper.paused .ms_splash{
 	display:block;
 }
 
