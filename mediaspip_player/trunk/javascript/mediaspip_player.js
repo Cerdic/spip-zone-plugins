@@ -136,7 +136,7 @@
 			
 			options = $.extend(defaults, options);
 			
-			var media = $(this), id = media[0], playable = id.isFullScreen = false;
+			var media = $(this), id = media[0], playable = id.isFullScreen = id.has_html5_cover = false;
 
 			if(media.is(':hidden')) media.show();
 			if(media.is('audio')) options.movieSize = null;
@@ -206,10 +206,22 @@
 						class_wrapper += ' loading no_metadata';
 					}
 					
+					if(media.prev().is('img'))
+						media.prev().wrap('<div class="html5_cover"></div>');
+					
 					if(id.addcontrols){
-						media.parent().wrapInner('<div class="media_wrapper '+id.type+' '+class_wrapper+'"></div>');
-						
-						if(id.type == 'video')
+						media.wrap('<div class="media_wrapper '+id.type+' '+class_wrapper+'"></div>');
+						if(media.parents('.media_wrapper').prev().is('.html5_cover')){
+							var cover_html = media.parents('.media_wrapper').prev().html();
+							media.parents('.media_wrapper').prepend(cover_html);
+							media.parents('.media_wrapper').find('img').click(function(){
+								media.ms_play_pause();
+							});
+							media.parents('.media_wrapper').prev().detach();
+							if(media.parents('.media_wrapper').height() > 200)
+								id.has_html5_cover = true;
+						}
+						if(id.type == 'video' || id.has_html5_cover)
 							controls = '<div class="ms_splash"></div><div class="ms-waiting"><em> </em><em> </em><em> </em></div>';
 						else
 							controls = '';
@@ -273,11 +285,6 @@
 							bloc_messages = '<div class="messages" style="display:none"></div>';
 							wrapper.append(bloc_messages);
 						}
-					
-						if(media.prev().is('img'))
-							media.prev().wrap('<div class="html5_logo"></div>').click(function(){
-								media.ms_play_pause();
-							});
 					}
 					
 					if(control){
@@ -1050,8 +1057,6 @@
 							autoplay:options.autoplay,
 							autoload:options.autoload,
 							wmode : 'transparent',
-							width : media.attr('width'),
-							height : media.attr('height')?media.attr('height'):media.parent().height(),
 							poster : media.attr('poster'),
 							sources : $(this),
 							loop : (typeof(media.attr('loop')) == 'undefined') ? false : true
