@@ -56,12 +56,17 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 			spip_log('SPIPMOTION Erreur : tentative de récupération de logo sans autorisation de modification du document','spipmotion'._LOG_CRITIQUE);
 			return false;
 		}
-		$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 		$vignette_existante = sql_getfetsel('id_document','spip_documents','id_document='.intval($document['id_vignette']));
 		if(!$vignette_existante)
 			$vignette_existante = 'new';
 		$chemin = get_spip_doc($document['fichier']);
 		$string_temp = "$id-$type-$id_document";
+		if(!$document['duree'] OR $document['duree'] == ''){
+			$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
+			$recuperer_infos($id_document);
+			$document = sql_fetsel("*", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
+		}
 	}
 	else if($fichier && is_array($infos) && $only_return){
 		$chemin = $fichier;
@@ -71,11 +76,12 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		spip_log('Mauvais arguments pour récupérer la vignette','spipmotion');
 		return false;
 	}
+
 	if(!$document['duree'] OR $document['duree'] == ''){
 		spip_log('Erreur : le document n a pas de durée','spipmotion');
 		return false;
 	}
-
+	
 	if($document['hasvideo'] == 'oui'){
 		include_spip('inc/filtres_images_mini');
 		include_spip('action/editer_document');
@@ -190,7 +196,8 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 					 */
 					else{
 						if(file_exists($img_finale)){
-							$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
+							if($document['rotation'] == '90')
+								$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
 							$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
 								    			'', 0, 'vignette');

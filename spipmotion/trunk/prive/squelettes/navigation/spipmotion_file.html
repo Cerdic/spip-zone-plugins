@@ -1,16 +1,16 @@
 <BOUCLE_autoriser_relancer(CONDITION){si #AUTORISER{configurer}|oui}>
 #BOITE_OUVRIR{#CHEMIN_IMAGE{spipmotion-24.png}|balise_img{'',cadre-icone}|concat{#VAL{spipmotion:info_reencoder}|_T|attribut_html},'simple','titrem'}
-		<B_profils_reencoder>
-		<ul class="liste-items">
-			<li class="item">
-				[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,'',#SELF},'',<:spipmotion:bouton_reencoder_tout_message:>})]
-			</li class="item">
-			<BOUCLE_profils_reencoder(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
-				<li class="item">
-					[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout_format{format=#VALEUR}:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,#VALEUR,#SELF},'',<:spipmotion:bouton_reencoder_tout_message_format{format=#VALEUR}:>})]
-				</li>
-			</BOUCLE_profils_reencoder>
-		</ul>
-		</B_profils_reencoder>
+<B_profils_reencoder>
+<ul class="liste-items">
+	<li class="item">
+		[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,'',#SELF},'',<:spipmotion:bouton_reencoder_tout_message:>})]
+	</li class="item">
+	<BOUCLE_profils_reencoder(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
+		<li class="item">
+			[(#BOUTON_ACTION{<:spipmotion:bouton_reencoder_tout_format{format=#VALEUR}:>,#URL_ACTION_AUTEUR{spipmotion_ajouter_file_encodage_tout,#VALEUR,#SELF},'',<:spipmotion:bouton_reencoder_tout_message_format{format=#VALEUR}:>})]
+		</li>
+	</BOUCLE_profils_reencoder>
+</ul>
+</B_profils_reencoder>
 #BOITE_FERMER
 </BOUCLE_autoriser_relancer>

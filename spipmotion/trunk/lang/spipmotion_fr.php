@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page_ffmpeg_infos' => 'Cette page n\'est qu\'informative. Elle indique la configuration complète de l\'installation de FFmpeg sur votre système.',
 	'info_pixelformat' => 'Format de pixel :',
 	'info_poid_fichier' => 'Taille du fichier :',
+	'info_reencoder' => '(Ré)encoder',
 	'info_rotation' => 'Angle de rotation :',
 	'info_spipmotion_sh_chemin' => 'Chemin du script :',
 	'info_spipmotion_sh_version' => 'Version du script :',
