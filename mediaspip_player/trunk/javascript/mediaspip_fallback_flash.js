@@ -55,30 +55,35 @@
 					height = options.height,
 					ratio = options.ratio;
 				
+				if(options.movieSize == 'adapt')
+					width = options.width = '100%'
+				else if(options.width && options.width == '100%')
+					options.movieSize = 'adapt';
+				
 				if(!width){
-					if(!height && media.attr('width')) width = media.attr('width');
-					else if(!height && media.width() > 0) width = media.width();
+					if(!height && media.attr('width')) width = options.width = media.attr('width');
+					else if(!height && media.width() > 0) width = options.width = media.width();
 					else if(ratio && height)
-						width = height*ratio;
+						width = options.width = height*ratio;
 				}
 				if(!height){
 					if(!width && media.attr('height'))
-						height = media.attr('height').toFixed();
+						height = options.height =  media.attr('height').toFixed();
 					else if(!width && media.height() > 0)
-						height = media.height().toFixed();
-					else if(ratio && width)
-						height = (width/ratio).toFixed();
+						height = options.height = media.height();
+					else if(ratio && width && width != '100%')
+						height = options.height = (width/ratio);
+					else if(ratio && width && width == '100%')
+						height = options.height =  media.width()/ratio;
 				}
-				
-				if(options.width && options.width == '100%')
-					options.movieSize = 'adapt';
 				
 				if(options.poster && $(this).prev().is('img'))
 					$(this).prev().detach();
 				
 				media.wrap('<div class="media_wrapper loading" />');
 				var wrapper = media.parents('.media_wrapper');
-
+				if(ratio)
+					wrapper[0].ratio = ratio;
 				var controls = '';
 					/**
 					 * Le bloc html pour afficher les messages
@@ -111,7 +116,7 @@
 					controls += ($.inArray('loop',options.boutons_caches) == '-1') ? '<span class="loop_button" title="'+ms_player_lang.bouton_loop+'"></span>' : '';
 					controls +='</div>';
 				
-					wrapper.html(controls);
+				wrapper.html(controls);
 
 				if(options.poster && options.isSound){
 					wrapper.find('.html5_cover').html('<img src="'+options.poster+'" />');
@@ -138,9 +143,9 @@
 							
 				    		var player = this,
 				    			wrapper = $(this.getParent()).parents('.media_wrapper');
-				    		
+
 				    		wrapper.removeClass('loading').addClass('paused');
-							
+				    		
 							if(wrapper[0].options.isSound){
 								wrapper.find('.flowplayer').click(function(){
 									if (player.isLoaded() && !options.poster) player.toggle();
@@ -203,6 +208,12 @@
 								}
 				    		}
 				    		
+							var handler_media_resize = function(){
+								if(wrapper[0].ratio)
+									wrapper.css({width:'auto'}).css({height:(wrapper.parent().width()/wrapper[0].ratio)+'px'}).flow_resize_controls();
+    						}
+    						$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
+    						
 							wrapper.dblclick(function(e){ return false; });
 							wrapper.flow_resize_controls();
 				    	},
@@ -257,6 +268,7 @@
 			            		clip.looped = true;
 			            		wrapper.addClass('loop');
 			            	}
+
 			            	if(typeof(clip.looped) == 'undefined')
 			            		clip.looped = false;
 			            	
@@ -275,12 +287,16 @@
 								});
 			            	}
 		            		if(typeof(clip.duration) != 'undefined'){
-			            		var duration = ms_second_to_time(clip.duration);
-			            		if(wrapper.find(".remaining_time").is('.remaining'))
-			            			wrapper.find(".remaining_time").html('-'+duration);
-								else
-									wrapper.find(".remaining_time").html(duration);
-								wrapper.find(".elapsed_time").html(ms_second_to_time(0));
+		            			if(clip.duration){
+				            		var duration = ms_second_to_time(clip.duration);
+				            		if(wrapper.find(".remaining_time").is('.remaining'))
+				            			wrapper.find(".remaining_time").html('-'+duration);
+									else
+										wrapper.find(".remaining_time").html(duration);
+									wrapper.find(".elapsed_time").html(ms_second_to_time(0));
+		            			}
+		            			else
+									wrapper.find('.progress_back,.remaining_time').hide();
 		            		}else
 		            			wrapper.flow_resize_controls();
 		            		wrapper.flow_play_pause('play',wrapper[0].options);
@@ -292,7 +308,6 @@
 							var player = this,
 								statustime = 0,
 								wrapper = $(this.getParent()).parents('.media_wrapper');
-
 				    		// begin timer
 				    		this.timer = setInterval(function(){
 				    			if(typeof(clip.duration) == 'undefined') return;
@@ -378,6 +393,8 @@
 	            		onMetaData:function(clip) {
 	            			var wrapper = $(this.getParent()).parents('.media_wrapper'),
 	            				options = wrapper[0].options;
+	            			if(clip.duration)
+	            				wrapper.find('.progress_back,.remaining_time').show();
 	            			if((clip.duration != 'undefined') && (clip.duration != this.former_duration)){
 		            			this.former_duration = clip.duration;
 		            			var duration = ms_second_to_time(this.former_duration);
@@ -391,7 +408,7 @@
 		            		}
 	            			if(options.isVideo){
 	            				var ratio_video = clip.metaData.width/clip.metaData.height;
-	        					wrapper[0].ratio = ratio_video;
+	        					wrapper[0].ratio = options.ratio = ratio_video;
 	            				if(options.movieSize == 'adapt' && !wrapper.hasClass('noresize') && (options.movieSize != 'noresize')){
 	        						/**
 	        						 * En mode adapt :
@@ -405,10 +422,6 @@
 	        						wrapper.animate({height:height_final+'px',width:'100%'},500,function(){
 	        							wrapper.flow_resize_controls();
 	        						});
-	        						var handler_media_resize = function(){
-        								wrapper.css({width:'auto'}).css({height:(wrapper.parent().width()/wrapper[0].ratio)+'px'}).flow_resize_controls();
-	        						}
-	        						$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
 	        					}else if(!wrapper.hasClass('noresize') || options.movieSize != 'noresize'){
 	        						/**
 	        						 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
@@ -475,7 +488,7 @@
 		            		$(this.getParent()).parents('.media_wrapper').flow_play_pause('stop',wrapper[0].options);
 		            	},
 		            	onUpdate:function(clip){},
-		            	onBufferEmpty:function(){},
+		            	onBufferEmpty:function(clip){},
 		            	onBufferFull:function(clip){},
 		            	onBufferStop:function(){},
 		            	onNetStreamEvent:function(){}
@@ -484,12 +497,8 @@
 		            	background:'transparent',
 		            	backgroundGradient:'none'
 		     		},
-		     		play: {
-		     			opacity: 0
-		     		},
-			        plugins: {
-		     			controls: null
-		     		}
+		     		play: { opacity: 0 },
+			        plugins: { controls: null }
 			    };
 				
 			    wrapper.find('.flowplayer').flowplayer({
