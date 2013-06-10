@@ -2,15 +2,16 @@
 <BOUCLE_document(DOCUMENTS){id_document}{mode IN document,image}>
 [(#CHEMIN{embed/#EXTENSION.html}|oui)
 [(#SET{done,oui})]
-[(#INCLURE{fond=embed/#EXTENSION,env}|liens_ouvrants)]]
+#INCLURE{fond=embed/#EXTENSION,env}]
 [(#GET{done,non}|!={oui}|et{#CHEMIN{embed/#MEDIA.html}|oui}|oui)
 [(#SET{done,oui})]
-[(#INCLURE{fond=embed/#MEDIA,env})|liens_ouvrants]]
+#INCLURE{fond=embed/#MEDIA,env}]
 [(#GET{done,non}|!={oui}|oui)
 [(#SET{done,oui})]
-[(#INCLURE{fond=embed/document,env}|liens_ouvrants)]]
+#INCLURE{fond=embed/document,env}]
 </BOUCLE_document>
 </B_document>
-[(#INCLURE{fond=embed/#ENV{objet,document},env}|liens_ouvrants)]
+#INCLURE{fond=embed/#ENV{objet,document},env}
 <//B_document>
+#FILTRE{liens_ouvrants}
 #FILTRE{trim}
