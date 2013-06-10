@@ -90,6 +90,12 @@ function nospam_formulaire_verifier($flux) {
 		if (!isset($GLOBALS['visiteur_session']['statut']) OR $GLOBALS['visiteur_session']['statut'] != '0minirezo') {
 			if ($verifier_formulaire = charger_fonction("verifier_formulaire_$form", "nospam", true)) {
 				$flux = $verifier_formulaire($flux);
+				// recuperation de la liste des IPs blacklist/greylist
+				// async si on renvoie la previsu ou si erreur
+				$async = false;
+				if (count($flux['data']))
+					$async = true;
+				nospam_update_ip_list($async);
 			}
 		}
 	}
@@ -114,6 +120,8 @@ function nospam_pre_edition($flux) {
 		if ($flux['data']['statut'] == 'publie'
 			AND (!isset($GLOBALS['visiteur_session']['statut']) OR !autoriser('modererforum'))
 		) {
+			// verifier le status de cette IP
+			nospam_check_ip_status($GLOBALS['ip']);
 
 			$email = strlen($flux['data']['email_auteur']) ? " OR email_auteur=" . sql_quote($flux['data']['email_auteur']) : "";
 			$spammeur_connu = (!isset($GLOBALS['visiteur_session']['statut'])
@@ -167,8 +175,8 @@ function nospam_pre_edition($flux) {
 					'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
 					'texte' => array(4 => 'prop', 20 => 'spam') // pour le champ texte
 				),
-				// seuils severises pour les spammeurs connus
-				'spammeur' => array(
+				// seuils severises pour les suspects : modere en prop des qu'il y a un lien, spam si plus de 5
+				'suspect' => array(
 					0 => array(1 => 'spam'),
 					'url_site' => array(2 => 'spam'), // 2 liens dans le champ url, c'est vraiment louche
 					'texte' => array(1 => 'prop', 5 => 'spam')
@@ -181,7 +189,7 @@ function nospam_pre_edition($flux) {
 				)
 			);
 
-			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])? $seuils['blacklist'] : ($spammeur_connu ? $seuils['spammeur'] : $seuils[0]);
+			$seuils = isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])? $seuils['blacklist'] : ($spammeur_connu ? $seuils['suspect'] : $seuils[0]);
 			include_spip("inc/nospam"); // pour analyser_spams()
 			foreach ($flux['data'] as $champ => $valeur) {
 				$infos = analyser_spams($valeur);
@@ -241,4 +249,100 @@ function nospam_pre_edition($flux) {
 }
 
 
+
+/**
+ * Fermer la connexion pour que le visiteur n'attende pas apres le curl sur nospam.spip.net
+ * @param $content
+ * @return mixed
+ */
+function nospam_flush_close($content){
+	header("Content-Length: ".($l=ob_get_length()));
+	header("Connection: close");
+	return $content;
+}
+
+/**
+ * Flusher et lancer l'update de la liste des ip
+ */
+function nospam_flush_and_update(){
+	chdir(_ROOT_CWD); // securite en cas de register_shutdown_function
+	// forcer le flush des tampons pas envoyes (declenche le content-length/conection:close envoye dans cache_cool_flush)
+	$flush_level = ob_get_level();
+	while ($flush_level--) ob_end_flush();
+	flush();
+	if (function_exists('fastcgi_finish_request'))
+		fastcgi_finish_request();
+	nospam_update_ip_list();
+}
+
+if (!defined('_NOSPAM_IP_LIST_CACHE')) define('_NOSPAM_IP_LIST_CACHE',10800);
+/**
+ * Recuperer la liste des IP black ou grey sur nospam.spip.net
+ * si on a pas une liste a jour
+ * et la stocker dans un fichier
+ * @param bool $async
+ */
+function nospam_update_ip_list($async=false){
+	$file = _DIR_TMP."nospam_ip_list.txt";
+	if (file_exists($file) AND filemtime($file)>time()-_NOSPAM_IP_LIST_CACHE)
+		return;
+	spip_log("nospam_update_ip_list:$async","nospam");
+
+	if ($async){
+		// indiquer de fermer la connexion dans la foulee
+		// pour faire le hit de recuperation async hors temps d'attente
+		ob_start("nospam_flush_close");
+		register_shutdown_function("nospam_flush_and_update");
+		return;
+	}
+
+	// on fait d'abord un touch car si le recuperer_page echoue (hebergeurs qui interdisent)
+	// on ne veut pas recommencer plein de fois de suite
+	@touch($file);
+	$url_api = "http://nospam.spip.net/spamsignal.api/list";
+	include_spip("inc/distant");
+	include_spip("inc/json");
+	$res = recuperer_page($url_api);
+	if ($res
+	  AND function_exists("json_decode")
+	  AND $liste = json_decode($res,true)){
+		ecrire_fichier($file,serialize($liste));
+	}
+}
+
+/**
+ * Verifier le status d'une IP et la noter dans la globale ip_blacklist ou ip_greylist si c'est une IP louche
+ * @param $ip
+ * @return string
+ *   ok|grey|black
+ */
+function nospam_check_ip_status($ip){
+	$file = _DIR_TMP."nospam_ip_list.txt";
+	if (!file_exists($file) OR filemtime($file)<time()-_NOSPAM_IP_LIST_CACHE)
+		return;
+
+	lire_fichier($file,$liste);
+	spip_log("nospam_check_ip_status:$ip","nospam");
+	if ($liste = unserialize($liste)){
+		#spip_log($liste,"nospam");
+		$now = date('Y-m-d H:i:s');
+		$ip_family = preg_replace(",([.:])[^.:]$,","$1*",$ip);
+		spip_log("ip $ip famille $ip_family","nospam");
+		foreach(array("blacklist","greylist") AS $l){
+			if (isset($liste[$l][$ip])
+				AND $liste[$l][$ip]>$now){
+				$GLOBALS['ip_'.$l][$ip] = true;
+				spip_log("$ip ajoute a ip_$l","nospam");
+				return ($l=="blacklist"?"black":"grey");
+			}
+			if (isset($liste[$l][$ip_family])
+				AND $liste[$l][$ip_family]>$now){
+				$GLOBALS['ip_'.$l][$ip] = true;
+				spip_log("$ip ajoute a ip_$l (famille $ip_family)","nospam");
+				return ($l=="blacklist"?"black":"grey");
+			}
+		}
+	}
+	return "ok";
+}
 ?>
