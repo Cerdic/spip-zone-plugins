@@ -78,17 +78,15 @@ function tickets_declarer_tables_objets_sql($tables){
 			'auteur' => array('nom' => 10),
 		),
 		'statut' => array(
-			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'redac,ouvert,resolu,ferme','exception'=>array('statut','tout'))
+			 array('champ'=>'statut','publie'=>'ouvert,resolu,ferme','previsu'=>'ouvert,resolu,ferme','exception'=>array('statut','tout'))
 		),
 		'statut_images' => array(
-			'redac' => 'puce-blanche.gif',
 			'ouvert' => 'puce-orange.gif',
 			'resolu' => 'puce-verte.gif',
 			'ferme' => 'puce-poubelle.gif',
 			'poubelle' => 'puce-poubelle.gif'
 		),
 		'statut_textes_instituer' =>  array(
-			'redac' => _T('tickets:statut_redac'),
 			'ouvert' => _T('tickets:statut_ouvert'),
 			'resolu' => _T('tickets:statut_resolu'),
 			'ferme' => _T('tickets:statut_ferme'),

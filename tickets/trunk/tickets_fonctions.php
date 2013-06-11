@@ -174,7 +174,6 @@ foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
 
 function tickets_icone_statut ($niveau,$full=false) {
 	$img = array(
-		"redac" => "puce-blanche.gif",
 		"ouvert" => "puce-orange.gif",
 		"resolu" => "puce-verte.gif",
 		"ferme" => "puce-poubelle.gif",
@@ -211,8 +210,6 @@ function tickets_liste_statut($connecte = true){
 		"ferme" => _T("tickets:statut_ferme"),
 		"poubelle" => _T("tickets:statut_poubelle")
 	);
-	if (!$connecte)
-		unset($statuts['redac']);
 	return $statuts;
 }
 

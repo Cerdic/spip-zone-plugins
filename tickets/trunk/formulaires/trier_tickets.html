@@ -27,7 +27,6 @@
 			<select name="statuts[]" id="statuts" multiple="multiple" size="4">
 				<option value="ouvert"[(#VAL{ouvert}|in_array{#GET{statuts}}|oui)selected="selected"]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
 				<option value="resolu"[(#VAL{resolu}|in_array{#GET{statuts}}|oui)selected="selected"]>[(#VAL{resolu}|tickets_texte_statut)]</option>
-				<option value="redac"[(#VAL{redac}|in_array{#GET{statuts}}|oui)selected="selected"]>[(#VAL{redac}|tickets_texte_statut)]</option>
 				<option value="ferme"[(#VAL{ferme}|in_array{#GET{statuts}}|oui)selected="selected"]>[(#VAL{ferme}|tickets_texte_statut)]</option>
 			</select>
 		</li>

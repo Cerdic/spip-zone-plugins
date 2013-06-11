@@ -112,16 +112,7 @@ function ticket_modifier($id_ticket, $set=null) {
 /**
  * Création d'un nouveau ticket
  *
- * Si anonyme, on ne propose pas le ticket en redaction : on ouvre aussitot en lecture
- * vu que l'autorisation de modifier de ticket dans instituer_ticket()
- * risque d'interdire l'edition ensuite si l'autorisation de creation et de modification
- * ne concernent pas les memes personnes.
- * Ceci n'est pas encore ideal :
- * si autoriser creer renvoie toujours true, et modifier false, pour un anonyme,
- * un statut different de 'ouvert' ne sera pas pris en compte tout simplement.
- * Mais a la creation, on met rarement "resolu" !
- *
- * Cependant, lorsqu'on cree un ticket anonyme,
+ * Lorsqu'on cree un ticket anonyme,
  * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
  * 
  * @param int $id_auteur
@@ -192,25 +183,6 @@ function ticket_instituer($id_ticket, $c) {
 		else
 			spip_log("editer_ticket $id_ticket refus " . join(' ', $c),'tickets');
 
-		// En cas de publication, fixer la date a "maintenant"
-		// sauf si $c commande autre chose
-		if ($champs['statut'] == 'ouvert' AND in_array($statut_ancien, array('redac'))) {
-			if (!is_null($date))
-				$champs['date'] = $date;
-			else
-				$champs['date'] = date('Y-m-d H:i:s');
-			
-			// On publie les documents du ticket
-			$documents = sql_select('id_document','spip_documents_liens','objet="ticket" AND id_objet='.intval($id_ticket));
-			while($document = sql_fetch($documents)){
-				spip_log("On update le doc ".$document['id_document'],'tickets');
-				$champs = array(
-					'statut'=>'publie',
-					'date_publication'=>date('Y-m-d H:i:s'));
-				$id_document=$document['id_document'];
-				sql_updateq('spip_documents',$champs,"id_document=".intval($id_document)." AND statut='prepa'");
-			}
-		}
 		// On met à jour la date_modif à chaque mise à jour de statut
 		$champs['date_modif'] = date('Y-m-d H:i:s');
 	}

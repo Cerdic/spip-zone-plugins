@@ -20,7 +20,7 @@
 
 [(#GET{tickets_tries}|!={oui}|oui)
 	[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert,redac,resolu,ferme},sticked=on,
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert,resolu,ferme},sticked=on,
 			recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="sticked",
 			titre=<:tickets:tickets_sticked:>}|trim)
 		<div class="actions rss">
@@ -88,7 +88,7 @@
 ]
 
 [(#GET{tickets_tries}|=={oui}|oui)
-	[(#SET{statut,[(#ENV{statuts}|is_array|?{#ENV{statuts},#ENV{statuts}|?{#LISTE{#ENV{statuts}},#LISTE{ouvert,redac,resolu,ferme}}})]})]
+	[(#SET{statut,[(#ENV{statuts}|is_array|?{#ENV{statuts},#ENV{statuts}|?{#LISTE{#ENV{statuts}},#LISTE{ouvert,resolu,ferme}}})]})]
 	[<div class="ajax">
 	(#INCLURE{fond=inclure/liste_tickets,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statuts=#GET{statut},titre=<:tickets:tickets_tries:>,env,ajax}|trim)
 		<div class="actions rss">

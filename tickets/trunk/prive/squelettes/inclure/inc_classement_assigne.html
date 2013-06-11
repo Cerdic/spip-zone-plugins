@@ -1,5 +1,5 @@
 [(#REM) Affiche les listes:
-	- Tickets en cours de redaction ou ouvert classes par assignation
+	- Tickets ouverts classes par assignation
 ]
 <BOUCLE_assigne(TICKETS){statut = ouvert}{!par id_assigne}{fusion id_assigne}>
 	[(#SET{no_bloc, [_bloc(#ID_ASSIGNE)]})]

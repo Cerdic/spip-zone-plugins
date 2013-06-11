@@ -31,11 +31,6 @@ function tickets_affiche_gauche($flux) {
 			$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
 			$ret .= boite_fermer();
 		}
-		
-		$contexte = array('titre'=>_T('tickets:vos_tickets_en_cours'), 'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'], "statut"=>"redac", 'bloc'=>'_bloc1');
-		$options = array("ajax"=>true);
-		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
-		$ret .= $page;
 	
 		$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
 		$options = array('ajax'=>true);
@@ -86,7 +81,6 @@ function tickets_accueil_informations($flux){
 		$plus = $afficher_plus(generer_url_ecrire("tickets",""));
 		$res .= "<h4>$plus"._T('tickets:info_tickets')."</h4>";
 		$res .= "<ul class=\"liste-items\">";
-		if (isset($cpt['redac'])) $res .= "<li class=\"item\">"._T('tickets:info_tickets_redac').": ".$cpt2['redac'].$cpt['redac'] . "</li>";
 		if (isset($cpt['ouvert'])) $res .= "<li class=\"item\">"._T('tickets:info_tickets_ouvert').": ".$cpt2['ouvert'] .$cpt['ouvert'] . "</li>";
 		$res .= "</ul>";
 	}

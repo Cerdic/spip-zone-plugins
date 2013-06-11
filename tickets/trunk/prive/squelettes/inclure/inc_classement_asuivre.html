@@ -1,13 +1,6 @@
 [(#REM) Affiche les listes:
-	- Tickets en cours de redaction, pour l'auteur connecte
 	- Tickets asignes a l'auteur connecte
 	- Tickets ouverts quelqu'ils soient
-	- Tickets en rédaction (pour les admins)
 ]
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:vos_tickets_en_cours:>}{id_auteur=#SESSION{id_auteur}}{statut=redac}{bloc=_bloc1}>
 <INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:vos_tickets_assignes:>}{id_assigne=#SESSION{id_auteur}}{statut=ouvert}{bloc=_bloc2}>
 <INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:tous_tickets_ouverts:>}{statut=ouvert}{bloc=_bloc3}>
-
-[(#AUTORISER{configurer,tickets}|oui)
-<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:tous_tickets_en_redaction:>}{statut=redac}{bloc=_bloc4}>
-]

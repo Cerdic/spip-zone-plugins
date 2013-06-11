@@ -7,10 +7,6 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer_statut editer">
-				[(#ENV{statut}|=={redac}|oui)
-				<div class="explication">
-					<:tickets:explication_redaction:>
-				</div>]
 				<label for="statut"><:tickets:champ_statut:></label>
 				<select name="statut" id="statut" class="text" onchange="jQuery('#validation_bouton_statut').slideDown();">
 					<option value="ouvert"[(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
