@@ -157,5 +157,25 @@
 /** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
     On passe par le modele emb qui est plus évolué que le modele video.
 ]
-	[(#INCLURE{fond=modeles/emb,id_document=#GET{document},env})]
+    [(#REM) Pour le cas du type mime video, on appelle explicitement le modele de la
+            distribution sinon SPIP appelle le fichier du plugin en boucle 
+            sauf si un modele spécifique emb_extension.html existe
+            ]
+    <BOUCLE_distVideo(DOCUMENTS){id_document=#GET{document}}{tout}>
+        [(#SET{modele_mime, [(#MIME_TYPE|videos_trouver_modele_mime)] })]
+        [(#SET{modele_fond, [(#VAL**{emb_[(#EXTENSION)]}|trouver_fond{modeles/})] })]
+        
+        #SET{modele_video, 0}
+        [(#GET{modele_mime}|trim|=={'video'}|oui) 
+        [(#GET{modele_fond}|trim|=={''}|oui)
+            #SET{modele_video,1}
+        ]]
+
+        [(#GET{modele_video}|=={1}|oui)
+    	     [(#INCLURE{fond=plugins-dist/medias/modeles/video,id_document=#GET{document},env})]    
+        ]
+        [(#GET{modele_video}|=={1}|non)
+           [(#MODELE{emb}{id=#ID_DOCUMENT}{env}{emb=' '})]
+        ]
+    </BOUCLE_distVideo>
 <//B_LaVideo>

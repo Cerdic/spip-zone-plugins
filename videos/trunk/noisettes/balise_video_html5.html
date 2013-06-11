@@ -12,7 +12,7 @@
 	</BOUCLE_webm>
 
 
-	<BOUCLE_ogg(DOCUMENTS){extension IN ogg}{fichier==/#ENV{nomVideo}\.ogv$}{par num titre}>
+	<BOUCLE_ogg(DOCUMENTS){extension IN ogg,ogv}{fichier==/#ENV{nomVideo}\.ogv$}{par num titre}>
 		<source src="#FICHIER" type='video/ogg' /> [(#REM) ; codecs="theora, vorbis" OGV peut utiliser plusieurs codecs, on l'oublie donc ]
 	</BOUCLE_ogg>
 
