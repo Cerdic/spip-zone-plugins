@@ -160,7 +160,7 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
 	
-	if((lire_config('tickets/autorisations/assigner_modifieur','on') == 'on') && autoriser('modifier', $type, $id, $qui, $opt))
+	if((lire_config('tickets/autorisations/assigner_modifieur') == 'on') && autoriser('modifier', $type, $id, $qui, $opt))
 		return true;
 
 	$type = lire_config('tickets/autorisations/assigner_type');
@@ -364,7 +364,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
 	
-	if((lire_config('tickets/autorisations/assigner_modifieur','on') == 'on') && autoriser('modifier', $type, $id, $qui, $opt))
+	if((lire_config('tickets/autorisations/assigner_modifieur') == 'on') && autoriser('modifier', $type, $id, $qui, $opt))
 		return true;
 	
 	$type = lire_config('tickets/autorisations/commenter_type', 'par_statut');
