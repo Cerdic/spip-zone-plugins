@@ -480,7 +480,7 @@ function diogene_pre_edition($flux){
 	if(in_array($flux['args']['type'],array_keys($pipeline)) && ($flux['args']['action']=='modifier'))
 		$flux = pipeline('diogene_traiter',$flux);
 
-	if(($flux['args']['table'] == 'spip_articles') && _request('changer_lang')){
+	if(($flux['args']['table'] == 'spip_articles') && _request('changer_lang') && _request('changer_lang') != 'herit'){
 		$flux['data']['lang'] = _request('changer_lang');
 		$flux['data']['langue_choisie'] = 'oui';
 	}
