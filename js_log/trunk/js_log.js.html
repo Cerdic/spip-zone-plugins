@@ -1,5 +1,20 @@
 (function ($) { $(function () {
 
-alert('#URL_SITE_SPIP');
+    // pompé ici : http://openmymind.net/2012/4/4/You-Really-Should-Log-Client-Side-Error/
+    function logError(details) {
+        $.ajax({
+            type: 'POST',
+            url: '#URL_PAGE{erreurs_js}',
+            data: JSON.stringify({
+                context: navigator.userAgent,
+                details: details
+            }),
+            contentType: 'application/json; charset=utf-8'
+        });
+    }
+
+    window.onerror = function(message, file, line) {
+        logError(file + ':' + line + '\n\n' + message);
+    };
 
 }); })(jQuery);
