@@ -20,15 +20,14 @@ include_spip('inc/editer');
 function formulaires_assigner_ticket_charger($id_ticket='', $retour='', $config_fonc='ticket_assigner_config', $row=array(), $hidden=''){
 	
 	if(is_numeric($id_ticket)){
-		if (!autoriser('assigner', 'ticket', $id_ticket)) {
+		if (!autoriser('assigner', 'ticket', $id_ticket))
 			$editable = false;
-		}else{
+		else{
 			$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 			$editable = true;
 		}
-	}else{
+	}else
 		$editable = false;
-	}
 	
 	$valeurs['editable'] = $editable;
 	return $valeurs;
@@ -49,9 +48,9 @@ function formulaires_assigner_ticket_verifier($id_ticket='', $retour='', $config
 
 	$id_assigne_ancien = sql_getfetsel("id_assigne","spip_tickets","id_ticket=".intval($id_ticket));
 	$id_assigne = _request('id_assigne');
-	if($id_assigne == $id_assigne_ancien){
+	if($id_assigne == $id_assigne_ancien)
 		$erreurs['message_erreur'] = _T('tickets:assignation_non_modifiee');	
-	}
+
 	return $erreurs;
 }
 
@@ -74,9 +73,8 @@ function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_f
 	$id_assigne = _request('id_assigne');
 	sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
 	$message['message_ok'] = _T('tickets:assignation_modifiee');
-	if($retour){
+	if($retour)
 		$message['redirect'] = $retour;
-	}
 	
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('assignerticket', $id_ticket,

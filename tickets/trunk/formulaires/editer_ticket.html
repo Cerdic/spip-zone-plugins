@@ -15,8 +15,6 @@
 			[(#SAISIE{oui_non,sticked,
 				label=<:tickets:champ_sticked:>,
 				explication=<:tickets:explication_champ_sticked:>})]]
-			
-			
 
 			[(#AUTORISER{assigner,ticket,#ENV{id_ticket}}|oui)
 			[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
