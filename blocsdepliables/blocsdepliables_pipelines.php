@@ -22,6 +22,8 @@ function blocsdepliables_insert_head($flux){
 var blocs_slide = "._q($slide).";
 var blocs_title_sep = /".preg_quote(_BLOC_TITLE_SEP)."/g;
 var blocs_title_def = "._q(_T('couteau:bloc_deplier')._BLOC_TITLE_SEP._T('couteau:bloc_replier')).";
+jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
+var cs_sel_jQuery='';
 jQuery(function(){
 blocs_init.apply(document);
 if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);

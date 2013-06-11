@@ -2,9 +2,6 @@
 if(typeof(bloc_actif)=='undefined') var bloc_actif = '';
 if(typeof(bloc_actif_num)=='undefined') var bloc_actif_num = '';
 
-jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
-var cs_sel_jQuery="";
-
 // fonction surchargeable : gestion du slide jQuery
 jQuery.fn.blocs_toggle_slide_dist = function( selector ) {
 	this.toggleClass('blocs_slide');
