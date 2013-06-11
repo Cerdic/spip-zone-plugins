@@ -32,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_form_tickets_autorisations' => 'Autorisations',
 	'cfg_form_tickets_general' => 'Paramètres généraux',
 	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demandé ci-dessous votre sélection de statuts ou d\'auteurs.',
+	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket',
+	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)',
 	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
 	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
@@ -125,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale',
 	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caractères.',
 	'erreur_verifier_formulaire' => 'Vérifiez votre formulaire',
+	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.',
 	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.',
 	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
 	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.
@@ -249,7 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_tickets_assignes' => 'Les tickets qui vous sont assignés',
 	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés',
-	'vos_tickets_en_cours' => 'Vos tickets en cours de rédaction'
+	'vos_tickets_en_cours' => 'Vos tickets ouverts'
 );
 
 ?>

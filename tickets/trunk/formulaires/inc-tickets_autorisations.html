@@ -1,5 +1,5 @@
-[(#SET{legendes,[(#LISTE{<:tickets:cfg_lgd_autorisation_ecrire:>,<:tickets:cfg_lgd_autorisation_assigner:>,<:tickets:cfg_lgd_autorisation_modifier:>,<:tickets:cfg_lgd_autorisation_commenter:>,<:tickets:cfg_lgd_autorisation_epingler:>})]})]
-[(#SET{prefixes,#LISTE{ecrire_,assigner_,modifier_,commenter_,epingler_}})]
+[(#SET{legendes,[(#LISTE{<:tickets:cfg_lgd_autorisation_ecrire:>,<:tickets:cfg_lgd_autorisation_modifier:>,<:tickets:cfg_lgd_autorisation_assigner:>,<:tickets:cfg_lgd_autorisation_commenter:>,<:tickets:cfg_lgd_autorisation_epingler:>})]})]
+[(#SET{prefixes,#LISTE{ecrire_,modifier_,assigner_,commenter_,epingler_}})]
 <B_bloc_autorisation>
 <ul>
 	<BOUCLE_bloc_autorisation(DATA){source table, #GET{legendes}}>
@@ -7,7 +7,17 @@
 	<li class="fieldset">
 		<fieldset>
 			<h3 class="legend">#VALEUR</h3>
+			[(#GET{prefixe}|=={modifier_}|oui)
+			<p class="explication">
+				<:tickets:explication_autoriser_modifier_base:>
+			</p>]
 			<ul>
+			[(#GET{prefixe}|in_array{#LISTE{assigner_,commenter_}}|oui)
+				[(#SAISIE{case, [(#GET{prefixe})]modifieur,
+					label=<:tickets:cfg_lbl_autoriser_modifier:>,
+					label_case=<:tickets:cfg_lbl_autoriser_modifier_case:>,
+					defaut=on})]
+			]
 			[(#REM) <!-- Choix de la methode d'autorisation --> ]
 				[(#SAISIE{radio, [(#GET{prefixe})]type,
 					label=<:tickets:cfg_lbl_type_autorisation:>,
