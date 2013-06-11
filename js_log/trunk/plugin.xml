@@ -5,8 +5,10 @@
   <version>0.1</version>
   <description>
     Ce plugin permet de récupérer les erreurs javascripts qui se produisent
-    côté client. Un fichier js_client.log sera créé dans le répertoire
-    contenant les autres logs, et contiendra ces erreurs.
+    côté client. Un fichier erreurs_js.log sera créé dans le répertoire
+    contenant les autres logs, et contiendra ces erreurs. Suivant le
+    mécanisme de la fonction spip_log, les erreurs qui se produisent
+    dans l'espace privé seront dans le fichier prive_erreurs_js.log
   </description>
   <etat>dev</etat>
   <prefix>js_log</prefix>
