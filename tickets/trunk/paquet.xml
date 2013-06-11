@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"
 	schema="1.5.0"
-	documentation="http://www.spip-contrib.net/Tickets-suivi-de-bugs"
+	documentation="http://contrib.spip.net/?article3959"
 >
 
 	<nom>Tickets</nom>
