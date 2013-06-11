@@ -16,11 +16,7 @@
 				label=<:tickets:champ_sticked:>,
 				explication=<:tickets:explication_champ_sticked:>})]]
 			
-			[(#ENV{id_ticket}|intval|oui)
-			[(#SAISIE{selection, statut,
-				label=<:tickets:champ_statut:>,
-				cacher_option_intro=oui,
-				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]]
+			
 
 			[(#AUTORISER{assigner,ticket,#ENV{id_ticket}}|oui)
 			[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
@@ -70,6 +66,12 @@
 			[(#SAISIE{input, exemple,
 				label=<:tickets:champ_url_exemple:>,
 				explication=<:tickets:explication_url_exemple:>})]
+
+			[(#ENV{id_ticket}|intval|oui)
+			[(#SAISIE{selection, statut,
+				label=<:tickets:champ_statut:>,
+				cacher_option_intro=oui,
+				datas=[(#ENV{id_ticket}|tickets_liste_statut)]})]]
 		</ul>
 		<!--extra-->
 		<p class='boutons'>

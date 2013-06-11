@@ -1,7 +1,8 @@
+<B_statuts>
 <div class="formulaire_spip formulaire_editer formulaire_editer_statut_ticket ajax">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -9,10 +10,9 @@
 			<li class="editer_statut editer">
 				<label for="statut"><:tickets:champ_statut:></label>
 				<select name="statut" id="statut" class="text" onchange="jQuery('#validation_bouton_statut').slideDown();">
-					<option value="ouvert"[(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
-					<option value="resolu"[(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
-					<option value="ferme"[(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
-					<option value="poubelle"[(#ENV{statut}|=={poubelle}|?{" selected='selected'",""})]>[(#VAL{poubelle}|tickets_texte_statut)]</option>
+					<BOUCLE_statuts(DATA){source tableau,#ENV{id_ticket}|tickets_liste_statut}>
+					<option value="#CLE"[(#ENV{statut}|=={#CLE}|oui)selected='selected']>[(#VALEUR)]</option>
+					</BOUCLE_statuts>
 				</select>
 			</li>
 		</ul>
@@ -21,3 +21,4 @@
 		</p>
 	</div></form>
 </div>
+</B_statuts>

@@ -203,13 +203,28 @@ function tickets_icone_severite ($niveau,$full=false,$alt=false) {
 		return $img[$niveau];
 }
 
-function tickets_liste_statut($connecte = true){
+/**
+ * Lister les statuts affichés dans les sélecteurs
+ * 
+ * On teste les autorisations à instituer à ce niveau de statut
+ * 
+ * @param int $id_ticket
+ * 		L'identifiant numérique du ticket
+ * @return array $statuts
+ * 		La liste des statuts autorisés
+ */
+function tickets_liste_statut($id_ticket = null){
 	$statuts = array(
 		"ouvert" => _T("tickets:statut_ouvert"),
 		"resolu" => _T("tickets:statut_resolu"),
 		"ferme" => _T("tickets:statut_ferme"),
 		"poubelle" => _T("tickets:statut_poubelle")
 	);
+	include_spip('inc/autoriser');
+	foreach($statuts as $statut => $titre){
+		if(!autoriser('instituer','ticket',$id_ticket,$GLOBALS['visiteur_session'],array('statut'=>$statut)))
+			unset($statuts[$statut]);
+	}
 	return $statuts;
 }
 

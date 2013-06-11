@@ -20,7 +20,7 @@
 		label=<:tickets:champ_statut:>,
 		cacher_option_intro=oui,
 		valeur_forcee=#ENV{ticket_statut,#STATUT},
-		datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
+		datas=[(#ID_TICKET|tickets_liste_statut)]})]
 	</ul>
 </fieldset>
 </BOUCLE_ticket>
