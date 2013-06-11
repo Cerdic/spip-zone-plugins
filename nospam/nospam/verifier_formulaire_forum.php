@@ -9,8 +9,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_SPAM_URL_MAX_OCCURENCES')) define('_SPAM_URL_MAX_OCCURENCES',3);
-
 /**
  * Verification supplementaire antispam sur le formulaire_forum
  *

@@ -7,6 +7,7 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_SPAM_URL_MAX_OCCURENCES')) define('_SPAM_URL_MAX_OCCURENCES',3);
 
 /**
  * Lister les formulaires a prendre en charge contre le SPAM
@@ -234,8 +235,7 @@ function nospam_pre_edition($flux) {
 
 					if ($flux['data']['statut'] != 'spam') {
 						$champs = array_unique(array('texte', $champ));
-						$nb_tolerance = 3;
-						if ($h = rechercher_presence_liens_spammes($infos['liens'], $nb_tolerance, 'spip_forum', $champs)) {
+						if ($h = rechercher_presence_liens_spammes($infos['liens'], _SPAM_URL_MAX_OCCURENCES, 'spip_forum', $champs)) {
 							$flux['data']['statut'] = 'spam';
 							spip_log("\t" . $flux['data']['auteur'] . "\t" . $GLOBALS['ip'] . "\t" . "requalifié en spam car lien $h deja dans un spam", 'nospam');
 						}
