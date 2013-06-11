@@ -59,7 +59,7 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 		$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
 	else
 		$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
-	
+
 	$query_auteurs = sql_select($select, $from, $where);
 	while ($row_auteur = sql_fetch($query_auteurs)) {
 		$liste_assignables[$row_auteur["id_auteur"]] = $row_auteur["nom"];
@@ -206,7 +206,6 @@ function tickets_icone_severite ($niveau,$full=false,$alt=false) {
 
 function tickets_liste_statut($connecte = true){
 	$statuts = array(
-		"redac" => _T("tickets:statut_redac"),
 		"ouvert" => _T("tickets:statut_ouvert"),
 		"resolu" => _T("tickets:statut_resolu"),
 		"ferme" => _T("tickets:statut_ferme"),

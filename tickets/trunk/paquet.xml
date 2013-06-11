@@ -1,11 +1,11 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="2.6.0"
+	version="2.6.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"
-	schema="1.4.2"
+	schema="1.5.0"
 	documentation="http://www.spip-contrib.net/Tickets-suivi-de-bugs"
 >
 

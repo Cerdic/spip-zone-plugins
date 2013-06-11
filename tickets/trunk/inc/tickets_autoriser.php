@@ -17,7 +17,8 @@ function tickets_autoriser(){}
 /**
  * Renvoie la liste des auteurs ou des statuts autorises pour une action donnee
  * 
- * @param string $action L'action que l'on souhaite faire
+ * @param string $action 
+ * 		L'action que l'on souhaite faire
  * @param boolean $utiliser_defaut [optional]
  * @return 
  */ 
@@ -78,9 +79,8 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(autoriser('modifier', $type, $id, $qui, $opt)){
+	if(autoriser('modifier', $type, $id, $qui, $opt))
 		return autoriser('modifier', $type, $id, $qui, $opt);
-	}
 	
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
@@ -105,9 +105,8 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/ecrire_auteurs',array()));
 				break;
 		}
-		if($autorise == true){
+		if($autorise == true)
 			return $autorise;
-		}
 		$utiliser_defaut = false;
 	}
 
@@ -166,9 +165,8 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tickets/autorisations/assigner_statuts',array()))){
+				if(in_array('tous',lire_config('tickets/autorisations/assigner_statuts',array())))
 					return true;
-				}
 				// Autorisation par statut
 				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/assigner_statuts',array('0minirezo')));
 				break;
@@ -207,9 +205,8 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt)){
+	if(autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt))
 		return autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt);
-	}
 	
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
@@ -252,6 +249,7 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 /**
  * Autorisation de modification des tickets
  * Défini qui peut modifier les tickets :
+ * - L'auteur du ticket
  * - Les personnes assignées
  * - Les personnes correspondant à la configuration
  * 
@@ -267,10 +265,10 @@ function autoriser_ticket_modifier_dist($faire, $type, $id, $qui, $opt){
 	$utiliser_defaut = true;
 
 	if(is_numeric($id)){
-		// Si l'auteur en question est l'auteur assigné au ticket,
+		// Si l'auteur en question est l'auteur du ticket ou l'auteur assigné au ticket,
 		// il peut modifier le ticket
-		$id_assigne = sql_getfetsel('id_assigne','spip_tickets','id_ticket='.intval($id));
-		if($id_assigne && ($id_assigne == $qui['id_auteur']))
+		$id_assigne_auteur = sql_fetsel('id_assigne,id_auteur','spip_tickets','id_ticket='.intval($id));
+		if(($id_assigne_auteur['id_auteur'] && ($id_assigne_auteur['id_auteur'] == $qui['id_auteur'])) || ($id_assigne_auteur['id_assigne'] && ($id_assigne_auteur['id_assigne'] == $qui['id_auteur'])))
 			return true;
 		
 		if(!function_exists('lire_config'))

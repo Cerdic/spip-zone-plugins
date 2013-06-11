@@ -45,6 +45,12 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.4.1'] = array(
 		array('sql_alter',"TABLE spip_tickets CHANGE version version varchar(255) DEFAULT '' NOT NULL")
 	);
+	/**
+	 * On ne prend plus en compte le statut "redac"
+	 */
+	$maj['1.5.0'] = array(
+		array('tickets_supprimer_redac','')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -61,6 +67,10 @@ function tickets_existe() {
 		return false;
 	else
 		return true;
+}
+
+function tickets_supprimer_redac(){
+	sql_updateq('spip_tickets',array('statut' => 'ouvert'),array('statut'=>'redac'));
 }
 
 function migrer_commentaires_tickets_vers_forums() {

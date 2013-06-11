@@ -15,11 +15,12 @@
 			[(#SAISIE{oui_non,sticked,
 				label=<:tickets:champ_sticked:>,
 				explication=<:tickets:explication_champ_sticked:>})]]
-
+			
+			[(#ENV{id_ticket}|intval|oui)
 			[(#SAISIE{selection, statut,
 				label=<:tickets:champ_statut:>,
 				cacher_option_intro=oui,
-				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
+				datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]]
 
 			[(#AUTORISER{assigner,ticket,#ENV{id_ticket}}|oui)
 			[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]

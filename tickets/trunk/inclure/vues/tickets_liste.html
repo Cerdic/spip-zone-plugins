@@ -40,7 +40,7 @@
 	]
 	[(#SESSION{id_auteur}|oui)
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statuts=#LISTE{ouvert,redac},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statuts=#LISTE{ouvert},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
 			recherche,jalon,composant,version,navigateur,projet,tri_nom="tickets_en_cours",
 			titre=<:tickets:vos_tickets_en_cours:>}|trim)
 		<div class="actions rss">

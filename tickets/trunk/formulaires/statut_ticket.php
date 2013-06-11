@@ -20,7 +20,7 @@ include_spip('inc/editer');
 function formulaires_statut_ticket_charger($id_ticket='', $retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
 	
 	if(is_numeric($id_ticket)){
-		if (!autoriser('ecrire', 'ticket', $id_ticket)) {
+		if (!autoriser('instituer', 'ticket', $id_ticket)) {
 			$editable = false;
 		}else{
 			$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);

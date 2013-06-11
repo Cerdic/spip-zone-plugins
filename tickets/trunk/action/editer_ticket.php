@@ -103,8 +103,7 @@ function ticket_modifier($id_ticket, $set=null) {
 	suivre_invalideur("id='id_ticket/$id_ticket'");
 	
 	// Modification de statut. On ne peut passer par inc/modifier
-	// Modification de statut, changement de rubrique ?
-	$c = collecter_requests(array('date', 'statut', 'statut'),array(),$set);
+	$c = collecter_requests(array('date', 'statut'),array(),$set);
 	$err = ticket_instituer($id_ticket, $c);
 	
 	return $err;
@@ -132,10 +131,9 @@ function ticket_modifier($id_ticket, $set=null) {
  */
 function ticket_inserer($id_auteur=null) {
 	$ip = $id_auteur ? '' : $GLOBALS['ip'];
-	$statut = intval($id_auteur) ? 'redac' : 'ouvert';
 	
 	$champs = array(
-		'statut' =>  $statut,
+		'statut' =>  'ouvert',
 		'date' => date('Y-m-d H:i:s'),
 		'date_modif' => date('Y-m-d H:i:s'),
 		'ip' => $ip,
