@@ -1,0 +1,16 @@
+<plugin>
+  <nom>Logs Javascript</nom>
+  <auteur>Michel Bystranowski</auteur>
+  <licence>GNU/GPL</licence>
+  <version>0.1</version>
+  <description>
+    Ce plugin permet de récupérer les erreurs javascripts qui se produisent
+    côté client. Un fichier js_client.log sera créé dans le répertoire
+    contenant les autres logs, et contiendra ces erreurs.
+  </description>
+  <etat>dev</etat>
+  <prefix>js_log</prefix>
+
+  <necessite id="SPIP" version="[2.1.19;)" />
+
+</plugin>
