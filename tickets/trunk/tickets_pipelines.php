@@ -151,19 +151,18 @@ function tickets_formulaire_charger($flux){
  * @param array $flux Le contexte du pipeline
  */
 function tickets_recuperer_fond($flux){
-	if ($flux['args']['fond'] == 'formulaires/forum'){
-		if(is_numeric($flux['args']['contexte']['id_ticket'])){
-			$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
-			foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
-				if(_request($champ))
-					$infos_ticket[$champ] = _request($champ);
-			}
-			if(_request('ticket_statut'))
-				$infos_ticket['ticket_statut'] = _request('ticket_statut');
-			if(is_array($infos_ticket)){
-				$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($flux['args']['contexte'],$infos_ticket));
-				$flux['data']['texte'] = preg_replace(",(<fieldset>.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
-			}
+	if (($flux['args']['fond'] == 'formulaires/forum')
+		&& is_numeric($flux['args']['contexte']['id_ticket'])){
+		$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
+		foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+			if(_request($champ))
+				$infos_ticket[$champ] = _request($champ);
+		}
+		if(_request('ticket_statut'))
+			$infos_ticket['ticket_statut'] = _request('ticket_statut');
+		if(is_array($infos_ticket)){
+			$saisie_ticket = recuperer_fond('inclure/inc-tickets_formulaire_forum',array_merge($flux['args']['contexte'],$infos_ticket));
+			$flux['data']['texte'] = preg_replace(",(<fieldset>.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
 		}
 	}
 	return $flux;
@@ -241,27 +240,27 @@ function tickets_notifications_destinataires($flux){
 	/**
 	 * Notification des auteurs de tickets et des assignés et des autres forumeurs lorsque le post est validé
 	 */
-	if(($flux['args']['quoi'] == 'forumvalide')){
-		if(($flux['args']['options']['forum']['objet'] == 'ticket') && ($id_ticket = intval($flux['args']['options']['forum']['id_objet']))){
-			/**
-			 * On notifie l'id_auteur et l'id_assigné du ticket s'ils ne sont pas l'auteur du post en question
-			 */
-			$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket).' AND id_auteur !='.intval($flux['args']['options']['forum']['id_auteur']));
-			if(is_array($auteurs)){
-				foreach($auteurs as $auteur){
-					$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
-					$flux['data'][] = $email;
-				}
-			}
-			/**
-			 * On notifie les autres forumeurs du ticket
-			 * GROUP BY id_auteur
-			 */
-			$id_forums = sql_select('*','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
-			while($forum = sql_fetch($id_forums)){
-				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
+	if(($flux['args']['quoi'] == 'forumvalide')
+		&& ($flux['args']['options']['forum']['objet'] == 'ticket') 
+		&& ($id_ticket = intval($flux['args']['options']['forum']['id_objet']))){
+		/**
+		 * On notifie l'id_auteur et l'id_assigné du ticket s'ils ne sont pas l'auteur du post en question
+		 */
+		$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket).' AND id_auteur !='.intval($flux['args']['options']['forum']['id_auteur']));
+		if(is_array($auteurs)){
+			foreach($auteurs as $auteur){
+				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
 				$flux['data'][] = $email;
 			}
+		}
+		/**
+		 * On notifie les autres forumeurs du ticket
+		 * GROUP BY id_auteur
+		 */
+		$id_forums = sql_select('*','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
+		while($forum = sql_fetch($id_forums)){
+			$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
+			$flux['data'][] = $email;
 		}
 	}
 	return $flux;

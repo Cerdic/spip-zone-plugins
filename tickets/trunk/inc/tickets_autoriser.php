@@ -35,6 +35,9 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 		case 'assigner':
 			$define = (defined('_TICKETS_AUTORISATION_ASSIGNER')) ? _TICKETS_AUTORISATION_ASSIGNER : ($utiliser_defaut ? '0minirezo':'');
 			break;
+		case 'assigneretre':
+			$define = (defined('_TICKETS_AUTORISATION_ASSIGNERETRE')) ? _TICKETS_AUTORISATION_ASSIGNERETRE : ($utiliser_defaut ? '0minirezo':'');
+			break;
 		case 'commenter':
 			$define = (defined('_TICKETS_AUTORISATION_COMMENTER')) ? _TICKETS_AUTORISATION_COMMENTER : ($utiliser_defaut ? '1comite':'');
 			break;
@@ -138,6 +141,7 @@ function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
 function autoriser_ticket_creer_dist($faire, $type, $id, $qui, $opt){
 	return	autoriser('ecrire','ticket', $id, $qui, $opt);
 }
+
 /**
  * Autorisation d'assignation des tickets
  * (défini qui peu assigner les tickets)
@@ -189,6 +193,57 @@ function autoriser_ticket_assigner_dist($faire, $type, $id, $qui, $opt){
 	}
 
 	$liste = definir_autorisations_tickets('assigner',$utiliser_defaut);
+	if ($liste['statut'])
+		$autorise = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
+
+	return $autorise;
+}
+
+/**
+ * Autorisation d'être assigné à un ticket
+ *
+ * @param string $faire : l'action à faire
+ * @param string $type : le type d'objet sur lequel porte l'action
+ * @param int $id : l'identifiant numérique de l'objet
+ * @param array $qui : les éléments de session de l'utilisateur en cours
+ * @param array $opt : les options
+ * @return boolean true/false : true si autorisé, false sinon
+ */
+function autoriser_ticket_assigneretre_dist($faire, $type, $id, $qui, $opt){
+	
+	$autorise = false;
+	$utiliser_defaut = true;
+
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+
+	$type = lire_config('tickets/autorisations/assigneretre_type');
+	if($type){
+		switch($type) {
+			case 'webmestre':
+				// Webmestres uniquement
+				$autorise = ($qui['webmestre'] == 'oui');
+				break;
+			case 'par_statut':
+				// Traitement spécifique pour la valeur 'tous'
+				if(in_array('tous',lire_config('tickets/autorisations/assigneretre_statuts',array())))
+					return true;
+				// Autorisation par statut
+				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/assigneretre_statuts',array('0minirezo')));
+				break;
+			case 'par_auteur':
+				// Autorisation par id d'auteurs
+				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/assigneretre_auteurs',array()));
+				break;
+		}
+		if($autorise == true)
+			return $autorise;
+		$utiliser_defaut = false;
+	}
+
+	$liste = definir_autorisations_tickets('assigneretre',$utiliser_defaut);
 	if ($liste['statut'])
 		$autorise = in_array($qui['statut'], $liste['statut']);
 	else if ($liste['auteur'])

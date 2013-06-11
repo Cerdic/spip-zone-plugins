@@ -54,9 +54,35 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 	include_spip('inc/tickets_autoriser');
 	$select = array('nom','id_auteur');
 	$from = array('spip_auteurs AS t1');
-	$autorises = definir_autorisations_tickets('assigner');
-	if ($autorises['statut'])
+	
+	
+	
+	$autorises = false;
+	$type = lire_config('tickets/autorisations/assigneretre_type');
+	if($type){
+		switch($type) {
+			case 'webmestre':
+				// Webmestres uniquement
+				$autorises['statut'] = array('0minirezo');
+				$autorises['webmestre'] = 'oui';
+				break;
+			case 'par_statut':
+				$autorises['statut'] = lire_config('tickets/autorisations/assigneretre_statuts',array('0minirezo'));
+				break;
+			case 'par_auteur':
+				// Autorisation par id d'auteurs
+				$autorises['auteur'] = lire_config('tickets/autorisations/assigneretre_auteurs',array());
+				break;
+		}
+	}
+	if(!$autorises)
+		$autorises = definir_autorisations_tickets('assigneretre');
+	
+	if ($autorises['statut']){
 		$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
+		if($autorises['webmestre'] == 'oui')
+			$where[] = 't1.webmestre = '.sql_quote('oui');
+	}
 	else
 		$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
 
@@ -248,7 +274,6 @@ function tickets_liste_tracker_nom_long($id_ticket = null){
 	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_long','data'=>$trackers));
 	return $trackers;
 }
-
 
 function tickets_liste_severite($id_ticket = null){
 	$severites = array(

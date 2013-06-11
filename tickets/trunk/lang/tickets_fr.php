@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Méthode d\'autorisation',
 	'cfg_lbl_versions' => 'Versions',
 	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
+	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket',
 	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Écrire les tickets',
 	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets',
