@@ -13,4 +13,14 @@
 
   <necessite id="SPIP" version="[2.1.19;)" />
 
+  <pipeline>
+    <nom>insert_head</nom>
+    <inclure>js_log_pipeline.php</inclure>
+  </pipeline>
+
+  <pipeline>
+    <nom>header_prive</nom>
+    <inclure>js_log_pipeline.php</inclure>
+  </pipeline>
+
 </plugin>
