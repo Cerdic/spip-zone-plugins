@@ -1,0 +1,18 @@
+.blocs_titre {
+	background:transparent url(img/triangle-bas.gif) no-repeat scroll left center;
+	font-weight:normal;
+	line-height:1.2em;
+	margin-top:4px;
+	padding:0pt 0pt 0pt 20px;
+	margin-bottom:0.1em;
+	clear:left;
+	cursor:pointer;
+}
+
+.blocs_replie {
+	background:transparent url(img/triangle.gif) no-repeat scroll left center;
+}
+
+.blocs_title{
+	display:none;
+}

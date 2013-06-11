@@ -1,0 +1,23 @@
+<paquet
+	prefix="blocsdepliables"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/blocsdepliables-64.png"
+	documentation="http://contrib.spip.net/Des-blocs-depliables"
+>
+
+	<nom>Blocs Dépliables</nom>
+
+	<auteur>Collectif</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="pre_typo" inclure="blocsdepliables_pipelines.php" />
+	<pipeline nom="porte_plume_cs_pre_charger" inclure="blocsdepliables_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="blocsdepliables_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="blocsdepliables_pipelines.php" />
+	<pipeline nom="insert_head" inclure="blocsdepliables_pipelines.php" />
+
+</paquet>
