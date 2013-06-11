@@ -1,0 +1,21 @@
+<paquet
+	prefix="avatar_voki"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0 ;3.0.*]"
+	logo="prive/themes/spip/images/avatar_voki-128.png"
+	documentation="http://contrib.spip.net/Un-avatar-Voki-dans-vos-articles"
+>
+	<nom>Avatar VOKI</nom>
+	<!-- Un Avatar VOKI dans vos articles et/ou vos squelettes. -->
+
+  <credit lien="http://www.voki.com/">VOKI</credit>
+  
+	<auteur mail="francecool@hotmail.com" lien="http://contrib.spip.net/foxmulder06">Pascal MASSAI</auteur>
+  	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL 3</licence>
+		
+	<traduire module="avatar_voki" reference="fr" gestionnaire="salvatore" />
+		
+</paquet>

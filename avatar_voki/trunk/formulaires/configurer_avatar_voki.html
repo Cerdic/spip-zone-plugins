@@ -1,0 +1,56 @@
+<!-- nom=avatar_voki -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset" id="avatar_voki_codes">
+				<fieldset><legend><:avatar_voki:cfg_txt_codes:></legend>
+					<ul>
+						<li class="editer_jsselector">
+							<label for="jsselector"><:avatar_voki:cfg_codes:></label>
+							<p class="explication"><:avatar_voki:cfg_txt_code1:></p>
+							<input type="text" name="avatar_voki_code1" class="text" id="avatar_voki_code1" value="[(#ENV{avatar_voki_code1}|sinon{'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'})]" size="32" maxlength="32"/>
+              <p></p>
+							<p class="explication"><:avatar_voki:cfg_txt_code2:></p>
+							<input type="text" name="avatar_voki_code2" class="text" id="avatar_voki_code2" value="[(#ENV{avatar_voki_code2}|sinon{'yyyyyyy'})]" size="7" maxlength="7"/>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			
+			<li class="fieldset" id="avatar_voki_dimensions">
+				<fieldset><legend><:avatar_voki:cfg_txt_dimensions:></legend>
+					<ul>
+						<li class="editer_jsselector">
+							<label for="jsselector"><:avatar_voki:cfg_dimensions:></label>
+							<p class="explication"><:avatar_voki:cfg_txt_hauteur:></p>
+							<input type="text" name="avatar_voki_hauteur" class="text" id="avatar_voki_hauteur" value="[(#ENV{avatar_voki_hauteur}|sinon{'178'})]" size="3" maxlength="3"/>
+              <p></p>
+							<p class="explication"><:avatar_voki:cfg_txt_largeur:></p>
+							<input type="text" name="avatar_voki_largeur" class="text" id="avatar_voki_largeur" value="[(#ENV{avatar_voki_largeur}|sinon{'150'})]" size="3" maxlength="3"/>
+						</li>
+						<li class="editer_jsselector">
+							<label for="jsselector"><:avatar_voki:cfg_mise_en_page:></label>
+							<p class="explication"><:avatar_voki:cfg_txt_alignement:></p>
+							<select name="avatar_voki_alignement" id="avatar_voki_alignement" class="forml verdana1">
+								<option value="left" [ selected="(#ENV{avatar_voki_alignement}|=={left}|?{selected})"]><:avatar_voki:cfg_txt_alignement_gauche:></option>
+								<option value="center" [ selected="(#ENV{avatar_voki_alignement}|=={center}|?{selected})"]><:avatar_voki:cfg_txt_alignement_centre:></option>
+								<option value="right" [ selected="(#ENV{avatar_voki_alignement}|=={right}|?{selected})"]><:avatar_voki:cfg_txt_alignement_droite:></option>
+							</select>						
+              <p></p>
+							<p class="explication"><:avatar_voki:cfg_txt_marge_gauche:></p>
+							<input type="text" name="avatar_voki_marge" class="text" id="avatar_voki_marge" value="[(#ENV{avatar_voki_marge}|sinon{'0'})]" size="3" maxlength="3"/>
+						</li>
+					</ul>
+				</fieldset>				
+			</li>		
+			
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

@@ -1,0 +1,35 @@
+[(#REM)
+  Plugin SPIP "AVATAR_VOKI":
+  Définition: "Un Avatar VOKI dans vos articles et/ou vos squelettes."
+  
+	Utilisation du modele <avatar_voki>:
+		
+	Valeurs "par défaut" des parametres optionnels:
+		   * Alignement a GAUCHE.
+	     * Marge a GAUCHE = 0.
+	     * Dimensions de l'avatar VOKI: Largeur=150 points, hauteur=178 points.
+	     
+	1) Exemple de code pour vos articles SPIP:
+	   - Avec valeur par défaut: 
+	     <avatar_voki|>
+	     	
+	   - Avec tous les parametres, donnés ici avec leurs valeurs par défaut:
+	     <avatar_voki|voki_alignement=left|voki_marge_gauche=0|voki_largeur=150|voki_hauteur=178>>
+
+  2) Exemple de code pour vos squelettes¨HTML:
+     - Avec valeur par défaut: 
+       [(#MODELE{avatar_voki})]
+       
+     - Avec tous les parametres, donnés ici avec leurs valeurs par défaut:
+       [(#MODELE{avatar_voki}{voki_alignement=left}{voki_marge_gauche=0}{voki_largeur=150}{voki_hauteur=178}{voki_largeur=150}{voki_hauteur=178})]
+     
+  3) Configurer les 2 codes de votre Avatar VOKI, ainsi que sa mise en page dans le panneau de configuration du Plugin.
+    
+  Important: Ne rien modifier au dela de cette ligne !
+     
+]
+<!-- DEBUT MODELE: Un Avatar VOKI dans vos articles et/ou vos squelettes. -->	
+<div align="[(#ENV{voki_alignement}|match{left|center|right}|sinon{#CONFIG{avatar_voki/avatar_voki_alignement}})]"; style="margin-left:[(#ENV{voki_marge_gauche}|sinon{#CONFIG{avatar_voki/avatar_voki_marge}})px]">
+<object height="[(#ENV{voki_hauteur}|sinon{#CONFIG{avatar_voki/avatar_voki_hauteur}})]" width="[(#ENV{voki_largeur}|sinon{#CONFIG{avatar_voki/avatar_voki_largeur}})]" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" id="widget_name"><param name="movie" value="http://vhss-d.oddcast.com/vhss_editors/voki_player.swf?doc=http://vhss-d.oddcast.com/php/vhss_editors/getvoki/chsm=#CONFIG{avatar_voki/avatar_voki_code1}%26sc=#CONFIG{avatar_voki/avatar_voki_code2}" /><param name="quality" value="high" /><param name="allowScriptAccess" value="always" /><param name="width" value="[(#ENV{voki_largeur}|sinon{#CONFIG{avatar_voki/avatar_voki_largeur}})]" /><param name="height" value="[(#ENV{voki_hauteur}|sinon{#CONFIG{avatar_voki/avatar_voki_hauteur}})]" /><param name="allowNetworking" value="all"/><param name="wmode" value="transparent" /><param name="allowFullScreen" value="true" /><embed height="[(#ENV{voki_hauteur}|sinon{#CONFIG{avatar_voki/avatar_voki_hauteur}})]" width="[(#ENV{voki_largeur}|sinon{#CONFIG{avatar_voki/avatar_voki_largeur}})]" src="http://vhss-d.oddcast.com/vhss_editors/voki_player.swf?doc=http%3A%2F%2Fvhss-d.oddcast.com%2Fphp%2Fvhss_editors%2Fgetvoki%2Fchsm=#CONFIG{avatar_voki/avatar_voki_code1}%26sc=#CONFIG{avatar_voki/avatar_voki_code2}" quality="high" allowScriptAccess="always" allowNetworking="all" wmode="transparent" allowFullScreen="true" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" name="widget_name"></object>
+</div>
+<!-- FIN MODELE: Un Avatar VOKI dans vos articles et/ou vos squelettes. -->
