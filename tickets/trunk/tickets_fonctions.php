@@ -55,8 +55,6 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 	$select = array('nom','id_auteur');
 	$from = array('spip_auteurs AS t1');
 	
-	
-	
 	$autorises = false;
 	$type = lire_config('tickets/autorisations/assigneretre_type');
 	if($type){

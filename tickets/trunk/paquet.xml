@@ -1,7 +1,7 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="2.6.6"
+	version="2.6.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"

@@ -59,7 +59,7 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 			$valeurs['editable'] = true;
 		
 			// si nouveau ticket
-			if (!$id_ticket or $id_ticket=='oui'){
+			if (!$id_ticket OR $id_ticket=='oui'){
 				$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
 				// Si un des champs de ce tableau est passé dans l'URL, on l'utilise dans le formulaire
 				foreach(array('composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){

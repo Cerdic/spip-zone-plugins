@@ -349,8 +349,11 @@ function autoriser_ticket_instituer_dist($faire, $type, $id, $qui, $opt){
 	if(is_numeric($id)){
 		// Si l'auteur en question est l'auteur du ticket ou l'auteur assigné au ticket,
 		// il peut modifier le ticket
-		$id_assigne_auteur = sql_fetsel('id_assigne,id_auteur','spip_tickets','id_ticket='.intval($id));
-		if(($id_assigne_auteur['id_auteur'] && ($id_assigne_auteur['id_auteur'] == $qui['id_auteur'])) || ($id_assigne_auteur['id_assigne'] && ($id_assigne_auteur['id_assigne'] == $qui['id_auteur'])))
+		$id_assigne_auteur = sql_fetsel('statut,id_assigne,id_auteur','spip_tickets','id_ticket='.intval($id));
+		
+		if(($id_assigne_auteur['statut'] == 'redac' && $opt['statut'] == 'ouvert') 
+			OR ($id_assigne_auteur['id_auteur'] && ($id_assigne_auteur['id_auteur'] == $qui['id_auteur']))
+			OR ($id_assigne_auteur['id_assigne'] && ($id_assigne_auteur['id_assigne'] == $qui['id_auteur'])))
 			return true;
 		
 		if(!function_exists('lire_config'))

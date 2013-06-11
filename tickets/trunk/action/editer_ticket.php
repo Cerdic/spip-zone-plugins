@@ -26,9 +26,57 @@ function action_editer_ticket() {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_ticket > 0) $err = ticket_modifier($id_ticket);
+	if ($id_ticket > 0) $err = ticket_modifier($id_ticket,null,$insertion);
 
 	return array($id_ticket,$err);
+}
+
+/**
+ * Création d'un nouveau ticket
+ *
+ * Lorsqu'on cree un ticket anonyme,
+ * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
+ * 
+ * @param int $id_auteur
+ * 	Identifiant numérique de l'auteur qui crée le ticket
+ * @return int $id_ticket
+ * 	Identifiant numérique du nouveau ticlet
+ */
+function ticket_inserer($id_auteur=null) {
+	$ip = $id_auteur ? '' : $GLOBALS['ip'];
+	
+	$champs = array(
+		'statut' =>  'redac',
+		'date' => date('Y-m-d H:i:s'),
+		'date_modif' => date('Y-m-d H:i:s'),
+		'ip' => $ip,
+		'id_auteur' => $id_auteur,
+		'id_assigne' => 0
+		);
+		
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_tickets',
+			),
+			'data' => $champs
+		)
+	);
+	
+	$id_ticket = sql_insertq("spip_tickets", $champs);
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_tickets',
+				'id_objet' => $id_ticket
+			),
+			'data' => $champs
+		)
+	);
+	
+	return $id_ticket;
 }
 
 /**
@@ -77,7 +125,6 @@ function ticket_modifier($id_ticket, $set=null) {
 		&& $_FILES['ajouter_document']['tmp_name']
 		&& defined('_DIR_PLUGIN_MEDIAS')) {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		spip_log("$id_document,'ticket',$id_ticket,'document'",'tickets');
 		
 		/**
 		 * On enlève le titre du post du ticket pour éviter d'avoir des conflits d'édition
@@ -110,54 +157,6 @@ function ticket_modifier($id_ticket, $set=null) {
 }
 
 /**
- * Création d'un nouveau ticket
- *
- * Lorsqu'on cree un ticket anonyme,
- * on stocke l'adresse ip ; cela peut servir pour filtrer des spam
- * 
- * @param int $id_auteur
- * 	Identifiant numérique de l'auteur qui crée le ticket
- * @return int $id_ticket
- * 	Identifiant numérique du nouveau ticlet
- */
-function ticket_inserer($id_auteur=null) {
-	$ip = $id_auteur ? '' : $GLOBALS['ip'];
-	
-	$champs = array(
-		'statut' =>  'ouvert',
-		'date' => date('Y-m-d H:i:s'),
-		'date_modif' => date('Y-m-d H:i:s'),
-		'ip' => $ip,
-		'id_auteur' => $id_auteur,
-		'id_assigne' => 0
-		);
-		
-	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_tickets',
-			),
-			'data' => $champs
-		)
-	);
-	
-	$id_ticket = sql_insertq("spip_tickets", $champs);
-
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_tickets',
-				'id_objet' => $id_ticket
-			),
-			'data' => $champs
-		)
-	);
-	
-	return $id_ticket;
-}
-
-/**
  *
  * Gestion du statut d'un ticket
  * Tout changement de statut devrait passer par là
@@ -170,23 +169,26 @@ function ticket_instituer($id_ticket, $c) {
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("statut", "spip_tickets", "id_ticket=".intval($id_ticket));
+	$row = sql_fetsel("statut", "spip_tickets", "id_ticket=".intval($id_ticket));	
 	$statut_ancien = $statut = $row['statut'];
+
 	$champs = array();
 	$date = $c['date'];
 
 	$s = $c['statut'];
-
+	
+	if(!$s && $statut_ancien == 'redac')
+		$s = $c['statut'] = 'ouvert';
+	
 	if ($s AND $s != $statut) {
-		if (autoriser('ecrire', 'ticket', $id_ticket))
+		if (autoriser('instituer', 'ticket', $id_ticket,$GLOBALS['visiteur_session'],array('statut'=>$s)))
 			$statut = $champs['statut'] = $s;
 		else
-			spip_log("editer_ticket $id_ticket refus " . join(' ', $c),'tickets');
+			spip_log("editer_ticket $id_ticket refus " . join(' ', $c),'test.'._LOG_ERREUR);
 
 		// On met à jour la date_modif à chaque mise à jour de statut
 		$champs['date_modif'] = date('Y-m-d H:i:s');
 	}
-
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
