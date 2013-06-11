@@ -6,6 +6,14 @@ function ajouter_script($flux) {
   return $flux;
 }
 
+function inclure_formulaire_erreurs_js ($flux) {
+
+  // insère le formulaire erreur_js au début du body
+  return preg_replace('/(<body[^>]*>)/',
+                      '$1' . recuperer_fond('client_logger'),
+                      $flux);
+}
+
 function js_log_insert_head($flux) {
 
   return ajouter_script($flux);
@@ -14,6 +22,16 @@ function js_log_insert_head($flux) {
 function js_log_header_prive($flux) {
 
   return ajouter_script($flux);
+}
+
+function js_log_affichage_final($page) {
+
+  return inclure_formulaire_erreurs_js($page);
+}
+
+function js_log_body_prive ($body) {
+
+  return inclure_formulaire_erreurs_js($body);
 }
 
 ?>

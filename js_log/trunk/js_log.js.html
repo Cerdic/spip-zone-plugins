@@ -1,20 +1,19 @@
-(function ($) { $(function () {
+(function ($) {
 
-    // pompé ici : http://openmymind.net/2012/4/4/You-Really-Should-Log-Client-Side-Error/
     function logError(details) {
-        $.ajax({
-            type: 'POST',
-            url: '#URL_PAGE{erreurs_js}',
-            data: JSON.stringify({
-                context: navigator.userAgent,
-                details: details
-            }),
-            contentType: 'application/json; charset=utf-8'
-        });
+
+        $('#formulaire_client_logger')
+            .find('input[name="nav"]')
+            .attr('value', navigator.userAgent)
+        .parents('form')
+            .find('input[name="err_msg"]')
+            .attr('value', details)
+        .parents('form')
+            .ajaxSubmit();
     }
 
     window.onerror = function(message, file, line) {
         logError(file + ':' + line + '\n\n' + message);
     };
 
-}); })(jQuery);
+})(jQuery);

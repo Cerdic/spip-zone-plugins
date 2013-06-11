@@ -24,4 +24,14 @@
     <inclure>js_log_pipeline.php</inclure>
   </pipeline>
 
+  <pipeline>
+    <nom>affichage_final</nom>
+    <inclure>js_log_pipeline.php</inclure>
+  </pipeline>
+
+  <pipeline>
+    <nom>body_prive</nom>
+    <inclure>js_log_pipeline.php</inclure>
+  </pipeline>
+
 </plugin>
