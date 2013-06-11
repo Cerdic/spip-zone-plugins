@@ -2,7 +2,7 @@
 
 function ajouter_script($flux) {
 
-  $flux .= '<script type="text/javascript" src="' . find_in_path('js_log.js') . '"></script>';
+  $flux .= '<script type="text/javascript" src="' . produire_fond_statique('js_log.js') . '"></script>';
   return $flux;
 }
 
