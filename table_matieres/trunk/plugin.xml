@@ -11,7 +11,7 @@
 			[en]Create the summary of an article
 		</multi>
 	</slogan>
-	<version>2.2.1</version>
+	<version>2.2.2</version>
 	<prefix>tablematieres</prefix>
 	<fonctions>tablematieres_fonctions.php</fonctions>
 	<auteur>marcimat, Fil, James</auteur>
