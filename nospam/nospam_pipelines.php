@@ -342,7 +342,7 @@ function nospam_check_ip_status($ip){
 	if ($liste = unserialize($liste)){
 		#spip_log($liste,"nospam");
 		$now = date('Y-m-d H:i:s');
-		$ip_family = preg_replace(",([.:])[^.:]$,","$1*",$ip);
+		$ip_family = preg_replace(",([.:])[^.:]+$,","$1*",$ip);
 		spip_log("ip $ip famille $ip_family","nospam");
 		foreach(array("blacklist","greylist") AS $l){
 			if (isset($liste[$l][$ip])
