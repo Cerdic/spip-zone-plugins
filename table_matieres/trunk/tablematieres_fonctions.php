@@ -36,9 +36,9 @@ function table_matieres($texte, $retourner = 'tout') {
 	if (!$texte) {
 		return $texte;
 	}
-	if (!$table_matieres) {
+	if (!$table_matieres)
 		$table_matieres = charger_fonction('table_matieres', 'inc');
-	}
+	
 	return $table_matieres($texte, $retourner);
 }
 
@@ -243,10 +243,9 @@ function tdm_ajouter_liens_retour_table_matieres($texte) {
 		.'" title="' . _T('tdm:retour_table_matiere') . '"',
 		_RETOUR_TDM);
 
-	if (TDM_JAVASCRIPT AND !test_espace_prive() AND !_AJAX # crayons
-	) {
+	if (!test_espace_prive() AND TDM_JAVASCRIPT AND !_AJAX)# crayons
 		$_RETOUR_TDM = '';
-	}
+
 	return str_replace('@@RETOUR_TDM@@', $_RETOUR_TDM, $texte);
 }
 
@@ -261,7 +260,6 @@ function tdm_generer_table_des_matieres($intertitres) {
 	// generer un code HTML 
 	$code = "";
 	foreach ($intertitres as $url=>$titre) {
-		spip_log(self(),'test.'._LOG_ERREUR);
 		$code .= "<li><a href='#$url'>$titre</a></li>\n";
 	}
 
@@ -271,13 +269,11 @@ function tdm_generer_table_des_matieres($intertitres) {
 		'tableau'=>$intertitres
 	));
 
-	if (TDM_JAVASCRIPT AND $_table AND !test_espace_prive()
-	AND !_AJAX # crayons
-	) {
+	if (!test_espace_prive() AND TDM_JAVASCRIPT AND $_table 
+		AND !_AJAX){ # crayons
 		$_table = inserer_attribut('<div class="encart"></div>',
 			'rel', $_table);
 	}
-
 	return $_table;
 }
 
