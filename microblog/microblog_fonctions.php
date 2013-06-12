@@ -60,7 +60,7 @@ function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$
 		case 'url':
 			return $connection->url;
 		default:
-			if (!is_string($content)) {
+			if (!is_string($content) AND is_array($content)) {
 				// recopie ?
 				$contents = array();
 				foreach($content as $key => $val){
