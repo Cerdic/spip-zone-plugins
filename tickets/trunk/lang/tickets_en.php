@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
+	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket', # NEW
+	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)', # NEW
 	'cfg_lbl_cacher_moteurs' => 'Hide from search engines',
 	'cfg_lbl_case_joindre_fichiers' => 'Allow to attach one or more files to bug reports',
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space',
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Authorization method',
 	'cfg_lbl_versions' => 'Versions',
 	'cfg_lgd_autorisation_assigner' => 'Assign bug reports',
+	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket', # NEW
 	'cfg_lgd_autorisation_commenter' => 'Comment bug reports',
 	'cfg_lgd_autorisation_ecrire' => 'Write bug reports',
 	'cfg_lgd_autorisation_epingler' => 'Track the bug reports',
@@ -127,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'The maximum date must be greater than the minimum date',
 	'erreur_texte_longueur_mini' => 'The minimum length of text is @nb@ characters.',
 	'erreur_verifier_formulaire' => 'Verify your form',
+	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.', # NEW
 	'explication_champ_sticked' => 'The sticked bug reports are listed first regardless of their status.',
 	'explication_description_ticket' => 'Describe as precisely as possible the need or problem.
 	Indicate in particular if it occurs consistently or occasionally.
@@ -252,7 +256,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_tickets_assignes' => 'Bug reports assigned to you',
 	'vos_tickets_assignes_auteur' => '@nom@ bug reports assigned to you',
-	'vos_tickets_en_cours' => 'Your bug reports being editing'
+	'vos_tickets_en_cours' => 'Your bug reports being editing' # MODIF
 );
 
 ?>

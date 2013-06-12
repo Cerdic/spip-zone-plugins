@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Autorizar por lista de autores',
 	'cfg_lbl_autorisation_statuts' => 'Autorizar por estatus de autor',
 	'cfg_lbl_autorisation_webmestre' => 'Autorizar solamente a los webmasters',
+	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket', # NEW
+	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)', # NEW
 	'cfg_lbl_cacher_moteurs' => 'Esconder los motores de búsqueda',
 	'cfg_lbl_case_joindre_fichiers' => 'Autorizar a adjuntar uno o más archivos en los tickets',
 	'cfg_lbl_case_notification_publique' => 'Ser notificado en el espacio público antes que en el espacio privado',
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Método de autorización',
 	'cfg_lbl_versions' => 'Versiones',
 	'cfg_lgd_autorisation_assigner' => 'Asignar los tickets',
+	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket', # NEW
 	'cfg_lgd_autorisation_commenter' => 'Comentar los tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Escribir los tickets',
 	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
@@ -127,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'La fecha máxima ha de ser superior a la fecha mínima',
 	'erreur_texte_longueur_mini' => 'La longitud mínima del texto es de @nb@ caracteres.',
 	'erreur_verifier_formulaire' => 'Confirme su formulario',
+	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.', # NEW
 	'explication_champ_sticked' => 'Los tickets anclados se muestran siempre primero, cualquiera que sea su estatus.',
 	'explication_description_ticket' => 'Describa lo más concretamente posible la necesidad o el problema.
 Indique en particular si se ha producido sistemáticamente u ocasionalmente.
@@ -251,7 +255,7 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	// V
 	'vos_tickets_assignes' => 'Tickets que le han sido asignados',
 	'vos_tickets_assignes_auteur' => 'Tickets de @nom@ que le son asignados',
-	'vos_tickets_en_cours' => 'Sus tickets en curso de redacción'
+	'vos_tickets_en_cours' => 'Sus tickets en curso de redacción' # MODIF
 );
 
 ?>

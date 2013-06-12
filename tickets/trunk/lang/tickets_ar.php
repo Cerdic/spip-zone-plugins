@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'السماح حسب لائحة المؤلفين',
 	'cfg_lbl_autorisation_statuts' => 'الماح حسب وضعية المؤلفين',
 	'cfg_lbl_autorisation_webmestre' => 'السماح للمشرفين على الموقع فقط',
+	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket', # NEW
+	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)', # NEW
 	'cfg_lbl_cacher_moteurs' => 'إخفاء محركات بحث',
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets', # NEW
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plutôt que dans l\'espace privé', # NEW
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'أسلوب الأذون',
 	'cfg_lbl_versions' => 'الإصدارات',
 	'cfg_lgd_autorisation_assigner' => 'التكليف بالتذاكر',
+	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket', # NEW
 	'cfg_lgd_autorisation_commenter' => 'التعليق على التذاكر',
 	'cfg_lgd_autorisation_ecrire' => 'كتابة التذاكر',
 	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
@@ -127,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'La date maximale doit être supérieure à la date minimale', # NEW
 	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caractères.', # NEW
 	'erreur_verifier_formulaire' => 'الرجاء التدقيق في الاستمارة',
+	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.', # NEW
 	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.', # NEW
 	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
 	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.
@@ -251,7 +255,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_tickets_assignes' => 'Les tickets qui vous sont assignés', # NEW
 	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés', # NEW
-	'vos_tickets_en_cours' => 'تذاكرك قيد التحرير'
+	'vos_tickets_en_cours' => 'تذاكرك قيد التحرير' # MODIF
 );
 
 ?>

@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Povoliť podľa zoznamu autorov',
 	'cfg_lbl_autorisation_statuts' => 'Povoliť podľa funkcie autora',
 	'cfg_lbl_autorisation_webmestre' => 'Povoliť iba webmasterom',
+	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket', # NEW
+	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)', # NEW
 	'cfg_lbl_cacher_moteurs' => 'Schovať vyhľadávače',
 	'cfg_lbl_case_joindre_fichiers' => 'Povoliť pripájanie súborov k lístkom',
 	'cfg_lbl_case_notification_publique' => 'Oznamovať cez verejne prístupnú stránku namiesto súkromnej zóny',
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Spôsob overenia totožnosti',
 	'cfg_lbl_versions' => 'Verzie',
 	'cfg_lgd_autorisation_assigner' => 'Priradiť lístky',
+	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket', # NEW
 	'cfg_lgd_autorisation_commenter' => 'Okomentovať lístky',
 	'cfg_lgd_autorisation_ecrire' => 'Napísať lístok',
 	'cfg_lgd_autorisation_epingler' => 'Pripnúť lístky',
@@ -127,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'Maximálny dátum musí byť väčší ako minimálny dátum',
 	'erreur_texte_longueur_mini' => 'Minimálna dĺžka textu je @nb@ znakov.',
 	'erreur_verifier_formulaire' => 'Skontrolujte si svoj formulár',
+	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.', # NEW
 	'explication_champ_sticked' => 'Lístky budú vždy zobrazené najprv ako prilepené, a to bez ohľadu na ich stav.',
 	'explication_description_ticket' => 'Problém alebo potrebu opíšte tak presne, ako sa len dá.
 	Uveďte najmä to, či sa problém vyskytuje pravidelne alebo iba príležitostne.
@@ -251,7 +255,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_tickets_assignes' => 'Lístky, ktoré boli priradené vám',
 	'vos_tickets_assignes_auteur' => 'Lístky @nom@, ktoré boli priradené vám',
-	'vos_tickets_en_cours' => 'Vaše lístky, ktoré sa upravujú'
+	'vos_tickets_en_cours' => 'Vaše lístky, ktoré sa upravujú' # MODIF
 );
 
 ?>
