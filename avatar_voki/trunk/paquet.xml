@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0 ;3.0.*]"
 	logo="prive/themes/spip/images/avatar_voki-128.png"
-	documentation="http://contrib.spip.net/Un-avatar-Voki-dans-vos-articles"
+	documentation="http://contrib.spip.net/L-Avatar-VOKI-dans-vos-articles-et-squelettes-3-0"
 >
 	<nom>Avatar VOKI</nom>
 	<!-- Un Avatar VOKI dans vos articles et/ou vos squelettes. -->
