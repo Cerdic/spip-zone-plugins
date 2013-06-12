@@ -1,17 +1,13 @@
-/* --------------------------------------------------------------
+/* ------------------------------------------
+   albums.css : style minimal pour les albums
+   ------------------------------------------ */
 
-   albums.css
-   Style minimal pour les albums
-   Cf.: http://www.spip-contrib.net/1550
-
--------------------------------------------------------------- */
-
-/*=================
-  === VIGNETTES ===
-  =================*/
+/* ---------
+   Vignettes
+   --------- */
 .album.vignettes li			{ display: inline-block; margin: 0 10px 10px 0; }
 .album.vignettes li .spip_logos		{ float: none; margin: 0; }
-/* styles pour que le label ne dépasse pas */
+/* pour que le label ne dépasse pas */
 .album.vignettes figure,
   .album.vignettes .figure		{ display: table; width: 1px; text-align: center; }
 .album.vignettes figcaption,
