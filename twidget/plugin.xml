@@ -3,7 +3,7 @@
 	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<icon>prive/themes/spip/images/twidget-32.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.5.2</version>
+	<version>0.6.0</version>
 	<etat>stable</etat>
 	<description>Un widget Twitter facile a installer
 _ Ajoutez une inclusion dans vos squelettes pour afficher un widget twitter :
@@ -17,4 +17,5 @@ _ <code>#INCLURE{fond=inclure/twidget_profile}</code>
 	<lien></lien>
 	<categorie>communication</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="microblog" version="[1.2.1;]" />
 </plugin>
