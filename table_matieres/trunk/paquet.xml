@@ -1,7 +1,7 @@
 <paquet
 	prefix="tablematieres"
 	categorie="edition"
-	version="2.2.2"
+	version="2.2.3"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
 	documentation="http://contrib.spip.net/?article2365"

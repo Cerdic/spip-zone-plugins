@@ -45,9 +45,12 @@ var tdm_init = function(){
 
 var tdm_flottante_init = function(){
 	if(typeof(tdm_flottante) != 'undefined' && tdm_flottante && $("#tdm").size() == 1){
-		var titres_offset = limite_bas = limite_tdm = false, tdm = $("#tdm"),
-			newtdm_clone = $('#tdm').clone().addClass('tdm').addClass('tdm_clone').hide();
-		$('#tdm').parents("div:not(.encart)").eq(0).prepend(newtdm_clone);
+		var titres_offset = limite_bas = limite_tdm = false, tdm = $("#tdm");
+		if($('.tdm_clone').size() == 0){
+			var newtdm_clone = $('#tdm').clone().addClass('tdm').addClass('tdm_clone').hide();
+			$('#tdm').parents("div:not(.encart)").eq(0).prepend(newtdm_clone);
+		}
+		
 		var newtdm = $('.tdm_clone');
 		
 		var tdm_scroll = function(e){
