@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_DIR_LIB_GIS','lib/leaflet-gis-4.8.6/');
+define('_DIR_LIB_GIS','lib/leaflet-gis-4.8.7/');
 
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
@@ -48,6 +48,18 @@ $GLOBALS['gis_layers'] = array (
 	'thunderforest_landscape' => array(
 		'nom' => 'Thunderforest Landscape',
 		'layer' => 'L.tileLayer.provider("Thunderforest.Landscape")'
+	),
+	'thunderforest_outdoors' => array(
+		'nom' => 'Thunderforest Outdoors',
+		'layer' => 'L.tileLayer.provider("Thunderforest.Outdoors")'
+	),
+	'openmapsurfer' => array(
+		'nom' => 'OpenMapSurfer',
+		'layer' => 'L.tileLayer.provider("OpenMapSurfer")'
+	),
+	'openmapsurfer_grayscale' => array(
+		'nom' => 'OpenMapSurfer Grayscale',
+		'layer' => 'L.tileLayer.provider("OpenMapSurfer.Grayscale")'
 	),
 	'mapquestopen_osm' => array(
 		'nom' => 'Mapquest Open',
