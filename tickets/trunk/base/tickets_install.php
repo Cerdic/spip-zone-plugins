@@ -93,7 +93,7 @@ function tickets_declarer_tables_objets_sql($tables){
 			'poubelle' => _T('tickets:statut_poubelle')
 		),
 		'texte_changer_statut' => 'tickets:texte_ticket_statut',
-		'champs_versionnes' => array('titre','texte','severite','projet','tracker','composant','projet','jalon','version','navigateur','sticked')
+		'champs_versionnes' => array('titre','texte','composant','jalon','navigateur','projet','severite','sticked','tracker','version')
 	);
 	return $tables;
 }

@@ -266,4 +266,44 @@ function tickets_notifications_destinataires($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Révisions)
+ * Ajoute les labels des champs qui peuvent être révisés
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
+ */
+function tickets_revisions_chercher_label($flux){
+	if($flux['args']['objet'] == 'ticket'){
+		switch ($flux['args']['champ']){
+			case 'composant':
+				$flux['data'] = "tickets:champ_composant";
+				break;
+			case 'jalon':
+				$flux['data'] = "tickets:champ_jalon";
+				break;
+			case 'navigateur':
+				$flux['data'] = "tickets:champ_navigateur";
+				break;
+			case 'projet':
+				$flux['data'] = "tickets:champ_projet";
+				break;
+			case 'severite':
+				$flux['data'] = "tickets:champ_severite";
+				break;
+			case 'sticked':
+				$flux['data'] = "tickets:champ_sticked";
+				break;
+			case 'tracker':
+				$flux['data'] = "tickets:champ_type";
+				break;
+			case 'version':
+				$flux['data'] = "tickets:champ_version";
+				break;
+		}
+	}
+	return $flux;
+}
 ?>

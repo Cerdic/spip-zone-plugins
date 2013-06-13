@@ -3,6 +3,7 @@
  * Plugin Tickets
  * Licence GPL (c) 2008-2013
  *
+ * @package SPIP\Tickets\Autorisations
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -348,7 +349,7 @@ function autoriser_ticket_instituer_dist($faire, $type, $id, $qui, $opt){
 
 	if(is_numeric($id)){
 		// Si l'auteur en question est l'auteur du ticket ou l'auteur assigné au ticket,
-		// il peut modifier le ticket
+		// il peut instituer le ticket
 		$id_assigne_auteur = sql_fetsel('statut,id_assigne,id_auteur','spip_tickets','id_ticket='.intval($id));
 		
 		if(($id_assigne_auteur['statut'] == 'redac' && $opt['statut'] == 'ouvert') 
