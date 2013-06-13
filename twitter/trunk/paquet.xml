@@ -1,0 +1,17 @@
+<paquet
+	prefix="twidget"
+	categorie="communication"
+	version="0.6.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.*]"
+	logo="prive/themes/spip/images/twidget-32.png"
+>	
+
+	<nom>Twitter Widget</nom>
+	<!-- Un widget Twitter facile a installer -->
+
+	<auteur lien="http://www.yterium.net">C&#233;dric Morin</auteur>
+	<necessite nom="microblog" compatibilite="[1.2.1;]" />
+
+</paquet>
+        

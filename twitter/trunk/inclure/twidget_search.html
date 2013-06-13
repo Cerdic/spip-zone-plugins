@@ -1,0 +1,48 @@
+[(#REM)
+
+  Squelette Twitget Search
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<script type="text/javascript">/* <![CDATA[ */
+var twidget_css='#CHEMIN{css/twidget.css}';
+var twidget_logo='#CHEMIN{widget-bird.png}';
+var twidget_logo_large='#CHEMIN{widget-bird-large.png}';
+var twidget_proxy='[(#VAL{twidget}|generer_url_action|url_absolue)&w=]';
+var twidget_rien='#CHEMIN{rien.gif}';
+/* ]]> */</script>
+<script charset="utf-8" type="text/javascript" src="#CHEMIN{js/twidget.js}"></script>
+<script charset="utf-8" type="text/javascript">/* <![CDATA[ */
+new TWTR.Widget({
+	version: 2,
+	type: 'search',
+	search: '[(#ENV{search,#CONFIG{twidget/search,#spip}}|texte_script)]',
+	interval: [(#ENV{interval,#CONFIG{twidget/interval,6000}}|intval)],
+	title: '[(#ENV{title,#CONFIG{twidget/title,Du nouveau sur twitter}}|texte_script)]',
+	subject: '[(#ENV{subject,#CONFIG{twidget/subject,SPIP}}|texte_script)]',
+	width: [(#ENV{width,#CONFIG{twidget/width,250}}|intval)],
+	height: [(#ENV{height,#CONFIG{twidget/height,300}}|intval)],
+	theme: {
+		shell: {
+			background: '[(#ENV{shell_background,#CONFIG{twidget/shell_background,#8ec1da}}|texte_script)]',
+			color: '[(#ENV{shell_color,#CONFIG{twidget/shell_color,#ffffff}}|texte_script)]'
+		},
+		tweets: {
+			background: '[(#ENV{tweets_background,#CONFIG{twidget/tweets_background,#ffffff}}|texte_script)]',
+			color: '[(#ENV{tweets_color,#CONFIG{twidget/tweets_color,#444444}}|texte_script)]',
+			links: '[(#ENV{tweets_links,#CONFIG{twidget/tweets_links,#1986b5}}|texte_script)]'
+		}
+	},
+	features: {
+		scrollbar: #ENV{scrollbar,false},
+		loop: #ENV{loop,true},
+		live: #ENV{live,true},
+		hashtags: #ENV{hashtags,true},
+		timestamp: #ENV{timestamp,true},
+		avatars: #ENV{avatar,true},
+		toptweets: #ENV{toptweets,true},
+		behavior: 'default'
+	}
+}).render().start();
+/* ]]> */</script>

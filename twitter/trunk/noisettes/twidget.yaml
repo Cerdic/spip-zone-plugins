@@ -1,0 +1,84 @@
+nom: '<:twidget:nom_noisette_twidget:>'
+description: '<:twidget:description_noisette_twidget:>'
+icon: 'noisettes/widget-bird.png'
+ajax: 'non'
+parametres:
+  -
+    saisie: 'input'
+    options:
+      nom: 'width'
+      label: '<:twidget:noisette_label_width_twidget:>'
+      defaut: 250
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'shell_background'
+      label: '<:twidget:noisette_label_shell_background_twidget:>'
+      defaut: "#413C3C"
+  -
+    saisie: 'input'
+    options:
+      nom: 'shell_color'
+      label: '<:twidget:noisette_label_shell_color_twidget:>'
+      defaut: "#ffffff"
+  -
+    saisie: 'input'
+    options:
+      nom: 'tweets_background'
+      label: '<:twidget:noisette_label_tweets_background_twidget:>'
+      defaut: "#ffffff"
+  -
+    saisie: 'input'
+    options:
+      nom: 'tweets_color'
+      label: '<:twidget:noisette_label_tweets_color_twidget:>'
+      defaut: "#444444"
+  -
+    saisie: 'input'
+    options:
+      nom: 'tweets_links'
+      label: '<:twidget:noisette_label_tweets_links_twidget:>'
+      defaut: "#1986b5"     
+  -
+    saisie: 'selection'
+    options:
+      nom: 'demande'
+      label: '<:twidget:noisette_label_demande:>'
+      defaut: 'twprofile'
+      cacher_option_intro: 'oui'
+      datas:
+        twprofile: '<:twidget:noisette_demande_twidget_profile:>'
+        twsearch: '<:twidget:noisette_demande_twidget_search:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'user'
+      label: '<:twidget:noisette_label_user_twidget_profile:>'
+      afficher_si: '@demande@ == "twprofile"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'avatar'
+      label: '<:twidget:label_avatar_true_false:>'
+      defaut: 'false'
+      afficher_si: '@demande@ == "twprofile"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'search'
+      label: '<:twidget:noisette_label_search_twidget_search:>'
+      afficher_si: '@demande@ == "twsearch"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'title'
+      label: '<:twidget:noisette_label_title_twidget_search:>'
+      afficher_si: '@demande@ == "twsearch"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'subject'
+      label: '<:twidget:noisette_label_subject_twidget_search:>'
+      afficher_si: '@demande@ == "twsearch"'

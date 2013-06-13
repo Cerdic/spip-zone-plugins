@@ -1,0 +1,23 @@
+#SET{width,#ENV{width,250}}
+#SET{shell_background,#ENV{shell_background,#413C3C}}
+#SET{shell_color,#ENV{shell_color,#ffffff}}
+#SET{tweets_background,#ENV{tweets_background,#ffffff}}
+#SET{tweets_color,#ENV{tweets_color,#444444}}
+#SET{tweets_links,#ENV{tweets_links,#1986b5}}
+#SET{demande,#ENV{demande,twprofile}}
+#SET{user,#ENV{user,Spip}
+#SET{avatar,#ENV{avatar,false}}
+#SET{search,#ENV{search,SPIP}}
+#SET{title,#ENV{title,'Suivez twitter'}}
+#SET{subject,#ENV{subject,SPIP}}
+
+
+[(#GET{demande}|=={twprofile}|oui)
+#INCLURE{fond=inclure/twidget_profile,user=#GET{user},avatar=#GET{avatar},width=#GET{width},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_color=#GET{tweets_color},tweets_links=#GET{tweets_links}
+}
+]
+
+[(#GET{demande}|=={twsearch}|oui)
+#INCLURE{fond=inclure/twidget_search,search=#GET{search},title=#GET{title},subject=#GET{subject},shell_background=#GET{shell_background},shell_color=#GET{shell_color},tweets_background=#GET{tweets_background},tweets_color=#GET{tweets_color},tweets_links=#GET{tweets_links}
+}
+]
