@@ -21,6 +21,9 @@
 	<traduire module="seance" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-seances" reference="fr" gestionnaire="salvatore" />
 	<traduire module="endroit" reference="fr" gestionnaire="salvatore" />
+	
+	<menu nom="seances_endroits" titre="seance:seances_endroits" parent="menu_edition" icone="images/seance-16.png" action="seances_endroits" />
+	<menu nom="seances_config" titre="seance:seances_configuration" parent="menu_configuration" icone="images/seance-16.png" action="seances_configuration" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tables_seances.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tables_seances.php" />
@@ -29,6 +32,4 @@
 	<pipeline nom="autoriser" inclure="seances_autoriser.php" />
 	<pipeline nom="header_prive_css" inclure="seances_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="seances_pipelines.php" />
-	<menu nom="seances_endroits" titre="seance:seances_endroits" parent="menu_edition" icone="images/seance-16.png" action="seances_endroits" />
-	<menu nom="seances_config" titre="seance:seances_configuration" parent="menu_configuration" icone="images/seance-16.png" action="seances_configuration" />
 </paquet>
