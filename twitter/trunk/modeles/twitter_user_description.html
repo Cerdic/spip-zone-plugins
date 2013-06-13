@@ -3,7 +3,8 @@
 <div class="twitter user_desc[(#GET{is_defaut})defaut]">
 	<div class="name">
 		[(#GET{infos_compte/screen_name}|non)
-		<:erreur_connexion_compte{account=[@(#ENV{account})]}:>
+		[(#SET{screen_name,[@(#ENV{account}|sinon{'???'})]})]
+		<:twitter:erreur_connexion_compte{account=#GET{screen_name}}:>
 		]
 		[(#GET{infos_compte/screen_name}|oui)
 		[(#GET{infos_compte/protected}|oui)

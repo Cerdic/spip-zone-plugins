@@ -33,6 +33,10 @@
 		</style>
 	</fieldset>
 	</BOUCLE_cond>
+	[<div class='reponse_formulaire reponse_formulaire_erreur'>
+	(#VAL{erreur}|_request|twitter_affiche_erreur_config{#VAL{erreur_code}|_request})
+	</div>
+	]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{SELF}
 		<fieldset>

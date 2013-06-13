@@ -24,8 +24,15 @@ function action_twitter_oauth_callback_dist(){
 		$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 		$redirect = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
-		if (_request('oauth_token') && ($GLOBALS['visiteur_session']['oauth_token'] !== _request('oauth_token'))) {
-			session_set('status','oldtoken');
+
+		if(_request('denied')){
+			$redirect = parametre_url($redirect,'erreur','auth_denied','&');
+			session_set('oauth_status','denied');
+			$GLOBALS['redirect'] = $redirect;
+		}
+		elseif (_request('oauth_token') && ($GLOBALS['visiteur_session']['oauth_token'] !== _request('oauth_token'))) {
+			$redirect = parametre_url($redirect,'erreur','old_token','&');
+			session_set('oauth_status','oldtoken');
 			$GLOBALS['redirect'] = $redirect;
 		}
 		else {
