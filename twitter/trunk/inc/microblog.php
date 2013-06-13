@@ -1,14 +1,15 @@
 <?php
-/**
- * Plugin spip|microblog
- * (c) Fil 2009-2010
+/*
+ * Plugin spip|twitter
+ * (c) 2009-2013
  *
- * envoyer des micromessages depuis SPIP vers twitter ou laconica
+ * envoyer et lire des messages de Twitter
  * distribue sous licence GNU/LGPL
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 
 /**
@@ -181,7 +182,7 @@ function microblog_affiche_milieu($flux){
 		$deplie = false;
 		$ids = 'formulaire_editer_microblog-article-' . $id_article;
 		include_spip("inc/presentation"); // bouton_block_depliable et al non dispo en SPIP 3 sinon
-		$bouton = bouton_block_depliable(_T('microblog:titre_microblog'), $deplie, $ids);
+		$bouton = bouton_block_depliable(_T('twitter:titre_microblog'), $deplie, $ids);
 		$out = debut_cadre('e', find_in_path('microblog-24.gif','themes/spip/images/'),'',$bouton, '', '', true);
 		$out .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
 		$out .= fin_cadre();

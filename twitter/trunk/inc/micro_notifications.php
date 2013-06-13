@@ -1,9 +1,9 @@
 <?php
 /*
- * Plugin spip|microblog
- * (c) Fil 2009-2010
+ * Plugin spip|twitter
+ * (c) 2009-2013
  *
- * envoyer des micromessages depuis SPIP vers twitter ou laconica
+ * envoyer et lire des messages de Twitter
  * distribue sous licence GNU/LGPL
  *
  */
@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Buzzer les notifications
  */
 
-function Microblog_notifications($x) {
+function twitter_notifications($x) {
   include_spip('inc/filtres_mini');
   include_spip('inc/texte');
 
@@ -27,7 +27,7 @@ function Microblog_notifications($x) {
 				// ne pas poster si le forum est valide et config forum valide activee
 				if (sql_getfetsel("statut","spip_forum","id_forum=".intval($id))!="publie"
 					OR !$cfg['evt_forumvalide']){
-					$status = Microblog_annonce('forumposte',array('id_forum'=>$id));
+					$status = twitter_annonce('forumposte',array('id_forum'=>$id));
 					envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 				}
 			}
@@ -35,7 +35,7 @@ function Microblog_notifications($x) {
 		case 'forumvalide':      // forum valide
 			if ($cfg['evt_forumvalide']
 			AND $id = intval($x['args']['id'])) {
-				$status = Microblog_annonce('forumvalide',array('id_forum'=>$id));
+				$status = twitter_annonce('forumvalide',array('id_forum'=>$id));
 				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
@@ -80,7 +80,7 @@ function Microblog_notifications($x) {
 				ecrire_meta('microblog_vieux', $heure);
 			}
 
-			$status = Microblog_annonce('instituerarticle',array('id_article'=>$id));
+			$status = twitter_annonce('instituerarticle',array('id_article'=>$id));
 			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id), $heure);
 		}
 		break;
@@ -89,7 +89,7 @@ function Microblog_notifications($x) {
 	return $x;
 }
 
-function Microblog_annonce($quoi,$contexte){
+function twitter_annonce($quoi,$contexte){
 	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 

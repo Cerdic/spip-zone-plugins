@@ -6,7 +6,7 @@
 
 ]
 [<div class="ajax">
-	[<p class="status"><strong><:microblog:message_envoye:></strong> (#ENV*{_status})</p>]
+	[<p class="status"><strong><:twitter:message_envoye:></strong> (#ENV*{_status})</p>]
 	<div class="formulaire_spip formulaire_microblog formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET"[(#ENV{_hide})style="display:none;"]>
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		(#ENV{editable})
@@ -14,7 +14,7 @@
 		<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
-				#SET{fl,microblog}
+				#SET{fl,twitter}
 				#SET{name,microblog}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
 				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
@@ -26,8 +26,8 @@
 			<!--extra-->
 			<p class='boutons'>
 				<span class='image_loading'></span>
-				<input type='submit' class='submit' name="envoyer" value='<:microblog:bouton_envoyer_maintenant:>' />
-				<input type="submit" name="annuler_microblog" value="<:microblog:bouton_ne_pas_bloguer:>" />
+				<input type='submit' class='submit' name="envoyer" value='<:twitter:bouton_envoyer_maintenant:>' />
+				<input type="submit" name="annuler_microblog" value="<:twitter:bouton_ne_pas_bloguer:>" />
 				<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' />
 			</p>
 		</div></form>

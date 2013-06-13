@@ -1,14 +1,15 @@
 <?php
-/**
- * Plugin spip|microblog
- * (c) Fil 2009-2010
+/*
+ * Plugin spip|twitter
+ * (c) 2009-2013
  *
- * Envoyer des micromessages depuis SPIP vers twitter ou laconica
- * Distribue sous licence GNU/LGPL
+ * envoyer et lire des messages de Twitter
+ * distribue sous licence GNU/LGPL
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 /**
  * Fonction de chargement des valeurs par defaut des champs du formulaire
@@ -35,7 +36,7 @@ function formulaires_editer_microblog_verifier_dist($objet,$id_objet){
 	include_spip('inc/charsets');
 	$erreurs = array();
 	if (spip_strlen($microblog)>140){
-		$erreurs['microblog'] = _T('microblog:longueur_maxi_status');
+		$erreurs['microblog'] = _T('twitter:longueur_maxi_status');
 	}
 
 	return
@@ -75,7 +76,7 @@ function formulaires_editer_microblog_traiter_dist($objet,$id_objet){
 			$res['message_ok']=$status;
 		}
 		else{
-			$res['message_erreur']=_T('microblog:erreur_verifier_configuration');
+			$res['message_erreur']=_T('twitter:erreur_verifier_configuration');
 		}
 	}
 

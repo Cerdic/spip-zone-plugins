@@ -1,10 +1,14 @@
 <?php
 /*
- * Plugin xxx
- * (c) 2009 xxx
- * Distribue sous licence GPL
+ * Plugin spip|twitter
+ * (c) 2009-2013
+ *
+ * envoyer et lire des messages de Twitter
+ * distribue sous licence GNU/LGPL
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_twidget_dist(){
 

@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_associer_compte_twitter' => 'Associer votre compte twitter &agrave; ce site',
 	'label_dissocier_compte_twitter' => '<a href="@url_assoc@">Dissocier le compte twitter actuellement utilis&eacute;</a> (<a href="@url_compte@">@nom@</a>)',
-	'label_status' => 'Quoi de neuf ?',
+	'label_status' => 'Quoi de neuf ?',
 	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&#232;te (consumer secret) de l\'API Twitter',
 	'label_microblog'=> 'Modifier le message',
@@ -66,7 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'service' => 'Service',
 
 	// T
-	'titre_microblog' => 'Microbloguer',
+	'titre_microblog' => 'Twitter',
+	'titre_configurer_microblog' => 'Configurer Twitter',
 
 );
 

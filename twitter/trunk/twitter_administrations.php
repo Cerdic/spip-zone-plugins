@@ -1,0 +1,59 @@
+<?php
+/*
+ * Plugin spip|twitter
+ * (c) 2009-2013
+ *
+ * envoyer et lire des messages de Twitter
+ * distribue sous licence GNU/LGPL
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+/**
+ * Table principale
+ * un champ microblog sur les articles
+ *
+ * @param array $tables
+ * @return array
+ */
+function twitter_declarer_tables_objets_sql($tables) {
+	$tables['spip_articles']['field']['mircroblog'] = "VARCHAR(140) DEFAULT '' NOT NULL";
+	
+	return $tables;
+}
+
+/**
+ * maj dede la table article
+ *
+ * @param string $nom_meta_base_version
+ * @param string $version_cible
+ */
+function twitter_upgrade($nom_meta_base_version,$version_cible){
+
+	$maj = array();
+	$maj['create'] = array(
+		array('sql_alter',"TABLE spip_articles ADD microblog VARCHAR(140) DEFAULT '' NOT NULL"),
+	);
+
+	$maj['0.1.0'] = array(
+		array('sql_alter',"TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`"),
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+/**
+ * Desinstallation/suppression
+ *
+ * @param string $nom_meta_base_version
+ */
+function twitter_vider_tables($nom_meta_base_version) {
+	sql_alter("table spip_articles DROP microblog");
+	effacer_meta($nom_meta_base_version);
+}
+
+
+?>

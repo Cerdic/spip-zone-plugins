@@ -1,14 +1,15 @@
 <?php
 /*
- * Plugin Microblog
- * (c) 2010
- * Distribue sous licence GPL
+ * Plugin spip|twitter
+ * (c) 2009-2013
  *
- * Surcharge de inc/json du core base sur PEAR/JSON
- * 
+ * envoyer et lire des messages de Twitter
+ * distribue sous licence GNU/LGPL
+ *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 if ( !function_exists('json_decode') ){
 	function json_decode($content, $assoc=false){
