@@ -20,7 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
 	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
-	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>. Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
+	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>.<br />
+Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
 
 	// I
 	'invite' => 'Invite',
@@ -29,13 +30,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invite_afficher' => 'Afficher l\'invite de statut',
 
 	// L
-	'label_associer_compte_twitter' => 'Associer votre compte twitter &agrave; ce site',
-	'label_dissocier_compte_twitter' => '<a href="@url_assoc@">Dissocier le compte twitter actuellement utilis&eacute;</a> (<a href="@url_compte@">@nom@</a>)',
+	'label_associer_compte_twitter' => 'Ajouter un compte Twitter',
+	'label_dissocier_compte_twitter' => 'Supprimer ce compte',
 	'label_status' => 'Quoi de neuf ?',
-	'label_twitter_consumer_key' => 'Cl&eacute; cliente (consumer key) de l\'API Twitter',
-	'label_twitter_consumer_secret' => 'Cl&eacute; secr&#232;te (consumer secret) de l\'API Twitter',
+	'label_twitter_consumer_key' => 'Cl&eacute; cliente (<em>consumer key</em>)',
+	'label_twitter_consumer_secret' => 'Cl&eacute; secr&#232;te (<em>consumer secret</em>)',
 	'label_microblog'=> 'Modifier le message',
 	'label_username' => 'Nom d\'utilisateur',
+	'legend_api_twitter' => 'API Twitter',
+	'legend_comptes_twitter' => 'Comptes Twitter',
 	'lien_documentation' => 'Cf. documentation',
 	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
 

@@ -5,193 +5,134 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{SELF}
-		<ul>
-			<li class="fieldset fieldset_microblog_account">
-				<fieldset>
-					#SET{fonction,<code><tt>microblog()</tt></code>}
-					<legend><:twitter:compte_defaut{fonction=#GET{fonction}}:></legend>
-					<p class="explication"><:twitter:creer_compte_services:>&nbsp;:</p>
+		<fieldset>
+			<legend><:twitter:legend_api_twitter:></legend>
+			<p class="explication"><:twitter:explication_twitter_api_oauth:></p>
 
-					<ul>
-						<li>
-							<label>laconi.ca</label>
-							<a href="http://identi.ca/main/register">http://identi.ca/main/register</a>, <:twitter:presentation_laconica:>
-						</li>
-						<li>
-							<label>Twitter</label>
-							<a href="https://twitter.com/signup">https://twitter.com/signup</a>, twitter.com
-						</li>
-					</ul>
-
-					<ul class="compte">
-						<li class="editer_service">
-							<label for="service"><:twitter:service:></label>
-<!--
-	ce systeme de test ne fonctionne plus !
-							<p class="explication"><:twitter:compte_tests:> :
-							<br />supertweet | spipotest spipotest2
-							</p>
--->
-							<select name="service" id="service">
-								<option value="">(<:twitter:choisir:>)</option>
-								<option value="" disabled="disabled">- StatusNet -</option>
-								<!--<option value="spipo"[
-									(#ENV{service}|=={spipo}|?{selected="selected"})]>SPIP.org (spipo)</option>-->
-								<option value="identica"[
-									(#ENV{service}|=={identica}|?{selected="selected"})]>Status.net (identica)</option>
-								<option value="" disabled="disabled">&nbsp;</option>
-								<option value="" disabled="disabled">- Twitter -</option>
-								<option value="twitter"[
-									(#ENV{service}|=={twitter}|?{selected="selected"})]>Twitter.com</option>
-<!--
-								<option value="supertweet"[
-									(#ENV{service}|=={supertweet}|?{selected="selected"})]>(via) Supertweet.net</option>
--->
-							</select>
-						</li>
-						<li class="editer_user">
-							<label for="user"><:twitter:label_username:></label>
-							<input type="text" name="user" value="[(#ENV{user})]" id="user" class="text" />
-						</li>
-						<li class="editer_pass">
-							<label for="pass"><:entree_mot_passe:></label>
-							<input type="password" name="pass" value="[(#ENV{pass})]" id="pass" class="text" />
-						</li>
-						<li class="editer_twitter_consumer_key twitter_conf">
-							<label for="twitter_consumer_key"><:twitter:label_twitter_consumer_key:></label>
-							<p class="explication"><:twitter:explication_twitter_api_oauth:></p>
-							<input type="text" name="twitter_consumer_key" value="[(#ENV{twitter_consumer_key})]" id="twitter_consumer_key" class="text" />
-						</li>
-						<li class="editer_twitter_consumer_secret twitter_conf">
-							<label for="twitter_consumer_secret"><:twitter:label_twitter_consumer_secret:></label>
-							<input type="password" name="twitter_consumer_secret" value="[(#ENV{twitter_consumer_secret})]" id="twitter_consumer_secret" class="text" />
-						</li>
-						[(#ENV{service}|=={twitter}|oui)
-						[(#ENV{twitter_consumer_key}|strlen|et{#ENV{twitter_consumer_secret}|strlen}|oui)
-						<li class="associer_twitter_compte twitter_conf">
-							[(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api)]})]
-							[(#SET{name,#GET{infos_compte}|table_valeur{screen_name}})]
-							[(#SET{url_compte,#VAL{http://twitter.com/}|concat{#GET{name}}})]
-							[(#GET{name}|oui)
-								[(#SET{url_assoc,[(#URL_ACTION_AUTEUR{twitter_oauth_request,'-1',#SELF})]})]
-								<:twitter:label_dissocier_compte_twitter{nom=#GET{name},url_assoc=#GET{url_assoc},url_compte=#GET{url_compte}}:>	
-							]
-							[(#GET{name}|non)
-								<a href='[(#URL_ACTION_AUTEUR{twitter_oauth_request,'',#SELF})]'><:twitter:label_associer_compte_twitter:></a>	
-							]
-						</li>]]
-					</ul>
-					<script type="text/javascript">
-						jQuery(document).ready(function(){
-							[(#ENV{service}|=={twitter}|oui)
-								jQuery('ul.compte li').not('.twitter_conf').not('.editer_service').hide();
-							]
-							[(#ENV{service}|=={twitter}|non)
-								jQuery('ul.compte li.twitter_conf').hide();
-							]
-							jQuery('.editer_service select').change(function(){
-								if(jQuery(this).val() == 'twitter'){
-									jQuery('ul.compte li.twitter_conf').slideDown('slow',function(){
-										jQuery('ul.compte li').not('.twitter_conf').not('.editer_service').slideUp();
-									});
-								}else{
-									jQuery('ul.compte li').not('.twitter_conf').not('.editer_service').slideDown('slow',function(){
-										jQuery('ul.compte li.twitter_conf').slideUp();
-									});
-								}
+			<ul class="compte">
+				<li class="editer_twitter_consumer_key twitter_conf">
+					<label for="twitter_consumer_key"><:twitter:label_twitter_consumer_key:></label>
+					<input type="text" name="twitter_consumer_key" value="[(#ENV{twitter_consumer_key})]" id="twitter_consumer_key" class="text" />
+				</li>
+				<li class="editer_twitter_consumer_secret twitter_conf">
+					<label for="twitter_consumer_secret"><:twitter:label_twitter_consumer_secret:></label>
+					<input type="text" name="twitter_consumer_secret" value="[(#ENV{twitter_consumer_secret}|=={#CONFIG{microblog/twitter_consumer_secret}}|?{'',#ENV{twitter_consumer_secret}})]" id="twitter_consumer_secret" class="text" />
+					[<em><tt>(#CONFIG{microblog/twitter_consumer_secret}|twitter_masquer_secret)</tt></em>]
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:twitter:notifications:></legend>
+			<ul>
+				<li class="editer_notifications">
+					<label><:twitter:notifications_publiques:></label>
+					<p class="explication"><:twitter:elements_signaler:> :</p>
+					<div class="choix">
+						<input type="checkbox" name="evt_forumposte" id="evt_forumposte" [
+							(#ENV{evt_forumposte}|?{checked="checked"})] />
+						<label for="evt_forumposte"><:twitter:poster_forums:></label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="evt_proposerarticles" id="evt_proposerarticles"[
+							(#ENV{evt_proposerarticles}|?{checked="checked"})]  />
+						<label for="evt_proposerarticles"><:twitter:proposer_articles:></label>
+					</div>
+					<hr />
+					<div class="choix">
+						<input type="checkbox" name="evt_forumvalide" id="evt_forumvalide" [
+							(#ENV{evt_forumvalide}|?{checked="checked"})] />
+						<label for="evt_forumvalide"><:twitter:publier_forums:></label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="evt_publierarticles" id="evt_publierarticles"[
+							(#ENV{evt_publierarticles}|?{checked="checked"})] />
+						<label for="evt_publierarticles"><:twitter:publier_articles:></label>
+						<div id="evt_publierarticles_options"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
+						[(#CONFIG{post_dates}|=={non}|oui)
+							<div class="choix">
+								<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_validation" value="validation"[
+									(#ENV{evt_publierarticlesfutur}|=={publication}|?{'',checked="checked"})] />
+								<label for="evt_publierarticlesfutur_validation"><:twitter:publier_articles_futurs_immediatement:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_publication" value="publication"[
+									(#ENV{evt_publierarticlesfutur}|=={publication}|?{checked="checked"})] />
+								<label for="evt_publierarticlesfutur_publication"><:twitter:publier_articles_futurs_visibles:></label>
+							</div>
+						]
+							<div class="choix">
+								<input type="checkbox" name="short_url" id="short_url" value="1"[
+									(#ENV{short_url,''}|oui)checked="checked"] />
+								<label for="short_url"><:twitter:publier_articles_shorturl:></label>
+							</div>
+							<div class="choix">
+								<input type="text" name="attente" id="attente" value="[(#ENV{attente}|sinon{1})]" size="2" />
+								<label for="attente"><:twitter:publier_articles_attente:>
+								<small>(<:twitter:necessite_job_queue:>)</small>
+								</label>
+							</div>
+						</div>
+						<script type="text/javascript">
+							function affiche_bloc_synchro(){
+								if (jQuery("#evt_publierarticles").attr("checked"))
+									jQuery("#evt_publierarticles_options").show('fast');
+								else
+									jQuery("#evt_publierarticles_options").hide('fast');
+							}
+							jQuery(document).ready(function(){
+								jQuery("#evt_publierarticles").click(affiche_bloc_synchro);
 							});
-						});
-					</script>
-				</fieldset>
-			</li>
-			<li class="fieldset fieldset_microblog_notifications">
-				<fieldset>
-					<legend><:twitter:notifications:></legend>
-					<ul>
-						<li class="editer_notifications">
-							<label><:twitter:notifications_publiques:></label>
-							<p class="explication"><:twitter:elements_signaler:> :</p>
-							<div class="choix">
-								<input type="checkbox" name="evt_forumposte" id="evt_forumposte" [
-									(#ENV{evt_forumposte}|?{checked="checked"})] />
-								<label for="evt_forumposte"><:twitter:poster_forums:></label>
-							</div>
-							<div class="choix">
-								<input type="checkbox" name="evt_proposerarticles" id="evt_proposerarticles"[
-									(#ENV{evt_proposerarticles}|?{checked="checked"})]  />
-								<label for="evt_proposerarticles"><:twitter:proposer_articles:></label>
-							</div>
-							<hr />
-							<div class="choix">
-								<input type="checkbox" name="evt_forumvalide" id="evt_forumvalide" [
-									(#ENV{evt_forumvalide}|?{checked="checked"})] />
-								<label for="evt_forumvalide"><:twitter:publier_forums:></label>
-							</div>
-							<div class="choix">
-								<input type="checkbox" name="evt_publierarticles" id="evt_publierarticles"[
-									(#ENV{evt_publierarticles}|?{checked="checked"})] />
-								<label for="evt_publierarticles"><:twitter:publier_articles:></label>
-								<div id="evt_publierarticles_options"[(#ENV{evt_publierarticles}|non)style="display:none;"]>
-								[(#CONFIG{post_dates}|=={non}|oui)
-									<div class="choix">
-										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_validation" value="validation"[
-											(#ENV{evt_publierarticlesfutur}|=={publication}|?{'',checked="checked"})] />
-										<label for="evt_publierarticlesfutur_validation"><:twitter:publier_articles_futurs_immediatement:></label>
-									</div>
-									<div class="choix">
-										<input type="radio" name="evt_publierarticlesfutur" id="evt_publierarticlesfutur_publication" value="publication"[
-											(#ENV{evt_publierarticlesfutur}|=={publication}|?{checked="checked"})] />
-										<label for="evt_publierarticlesfutur_publication"><:twitter:publier_articles_futurs_visibles:></label>
-									</div>
-								]
-									<div class="choix">
-										<input type="checkbox" name="short_url" id="short_url" value="1"[
-											(#ENV{short_url,''}|oui)checked="checked"] />
-										<label for="short_url"><:twitter:publier_articles_shorturl:></label>
-									</div>
-									<div class="choix">
-										<input type="text" name="attente" id="attente" value="[(#ENV{attente}|sinon{1})]" size="2" />
-										<label for="attente"><:twitter:publier_articles_attente:>
-										<small>(<:twitter:necessite_job_queue:>)</small>
-										</label>
-									</div>
-								</div>
-								<script type="text/javascript">
-									function affiche_bloc_synchro(){
-										if (jQuery("#evt_publierarticles").attr("checked"))
-											jQuery("#evt_publierarticles_options").show('fast');
-										else
-											jQuery("#evt_publierarticles_options").hide('fast');
-									}
-									jQuery(document).ready(function(){
-										jQuery("#evt_publierarticles").click(affiche_bloc_synchro);
-									});
-								</script>
-							</div>
-						</li>
-					</ul>
-				</fieldset>
+						</script>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 
-				<fieldset>
-					<legend><:twitter:invite:></legend>
-					<ul>
-						<li>
-							<label><:twitter:invite_statut:></label>
-							<p class="explication"><:twitter:invite_statut_explications:></p>
-							<div class="choix">
-								<input type="checkbox" name="invite"[
-									(#ENV{invite}|?{checked="checked"})] id="invite" />
-								<label for="invite"><:twitter:invite_afficher:></label>
-							</div>
-						</li>
-					</ul>
-				</fieldset>
+		<fieldset>
+			<legend><:twitter:invite:></legend>
+			<ul>
+				<li>
+					<label><:twitter:invite_statut:></label>
+					<p class="explication"><:twitter:invite_statut_explications:></p>
+					<div class="choix">
+						<input type="checkbox" name="invite"[
+							(#ENV{invite}|?{checked="checked"})] id="invite" />
+						<label for="invite"><:twitter:invite_afficher:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 
-
-			</li>
-		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
 		</p>
 	</div></form>
+
+	<BOUCLE_cond(CONDITION){si #ENV{twitter_consumer_key}|strlen|et{#ENV{twitter_consumer_secret}|strlen}}>
+	<fieldset>
+		<legend><:twitter:legend_comptes_twitter:></legend>
+
+		<ul class="comptes">
+			<li class="compte pleine_largeur">
+				<BOUCLE_comptes(POUR){tableau #CONFIG{microblog/twitter_accounts}}>
+				<INCLURE{fond=modeles/twitter_user_description,account=#CLE} />
+				</BOUCLE_comptes>
+				Aucun compte associé.
+				<//B_comptes>
+			</li>
+			<li class="associer_twitter_compte twitter_conf">
+				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{ajouter-16.png}|balise_img)]<:twitter:label_associer_compte_twitter:>,#URL_ACTION_AUTEUR{ajouter_twitteraccount,new,#SELF}})]
+			</li>
+		</ul>
+		<style type="text/css">
+		.twitter.user_desc {background:white;padding:10px;padding-left: 52px;}
+		.twitter.user_desc .name .spip_logos {float: left;margin: 0 10px 10px -42px;}
+		.twitter.user_desc .name img {vertical-align: middle}
+		.twitter.user_desc .name small {float: right;}
+		.twitter.user_desc .actions {float: right}
+		.twitter.user_desc .description p:last-child {margin-bottom: 0}
+		.associer_twitter_compte {text-align: right}
+		</style>
+	</fieldset>
+	</BOUCLE_cond>
 </div>

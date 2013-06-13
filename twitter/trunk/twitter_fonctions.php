@@ -23,9 +23,10 @@ function generer_url_microblog($id, $entite='article', $args='', $ancre='', $pub
 		return $GLOBALS['meta']['adresse_site'].'/'.$id;
 }
 
+
 /**
  * Fonction d'utilisation simple de l'API twitter oAuth
- * 
+ *
  * @param $command string : la commande à passer
  * @param $type string : le type de commande (get/post/delete)
  * @param $params array : les paramètres dans un array de la commande
@@ -34,9 +35,37 @@ function generer_url_microblog($id, $entite='article', $args='', $ancre='', $pub
  * @param array $tokens
  * @return bool|string|array
  */
+if (!function_exists("microblog_twitter_api")){
 function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$tokens=null){
+	$options = $tokens;
+	if ($retour)
+		$options['return_type'] = $retour;
+	return twitter_api_call($command, $type, $params, $options);
+}
+}
+
+/**
+ * Fonction d'utilisation simple de l'API twitter oAuth
+ * 
+ * @param $command string : la commande à passer
+ * @param $type string : le type de commande (get/post/delete)
+ * @param $params array : les paramètres dans un array de la commande
+ * @param array $options
+ *   string return_type : le retour souhaité par défaut cela renverra la chaine ou l'array retourné par la commande.
+ *                        Sinon on peut utiliser les valeurs http_code,http_info,url
+ *
+ *   twitter_consumer_key : key de l'application a utiliser
+ *   twitter_consumer_secret : secret de l'application a utiliser
+ *
+ *   twitter_account : pour utiliser un compte twitter pre-configure plutot que celui par defaut
+ * ou
+ *   twitter_token : token du compte a utiliser
+ *   twitter_token_secret : token secret du compte a utiliser
+ * @return bool|string|array
+ */
+function twitter_api_call($command,$type='get',$params=array(),$options=null){
 	include_spip('inc/microblog');
-	if (!$connection = twitter_connect($tokens))
+	if (!$connection = twitter_connect($options))
 		return false;
 
 	switch($type){
@@ -53,6 +82,7 @@ function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$
 			$content = $connection->get($command,$params);
 	}
 
+	$retour = isset($options['return_type'])?$options['return_type']:'';
 	switch($retour){
 		case 'http_code':
 			return $connection->http_code;
@@ -74,6 +104,10 @@ function microblog_twitter_api($command,$type='get',$params=array(),$retour='',$
 			}
 			
 	}
+}
+
+function filtre_twitter_api_call_dist($command,$type='get',$params=array(),$options=null){
+	return twitter_api_call($command, $type, $params, $options);
 }
 
 ?>

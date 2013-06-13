@@ -1,0 +1,19 @@
+[(#SET{infos_compte,[(#VAL{account/verify_credentials}|twitter_api_call{get,#ARRAY,#ARRAY{account,#ENV{account}}})]})]
+<div class="twitter user_desc">
+	<div class="name">
+		[(#GET{infos_compte/protected}|non)
+		[(#CHEMIN_IMAGE{cadenas-16.png}|balise_img{prive})]
+		]
+		<strong><img src="#GET{infos_compte/profile_image_url}" class="spip_logos" width="32" height="32"/><a
+			href="[http://twitter.com/(#GET{infos_compte/screen_name})]">@#GET{infos_compte/screen_name}</a></strong>
+		\(#GET{infos_compte/name}\)
+		#SET{fonction,<code><tt>microblog()</tt></code>}
+		<small><:twitter:compte_defaut{fonction=#GET{fonction}}:></small>
+	</div>
+	<div class="actions">
+		[(#BOUTON_ACTION{<:twitter:label_dissocier_compte_twitter:>,#URL_ACTION_AUTEUR{supprimer_twitteraccount,#ENV{account},#SELF}})]
+	</div>
+	<div class="description">
+		[(#GET{infos_compte/description}|propre)]
+	</div>
+</div>
