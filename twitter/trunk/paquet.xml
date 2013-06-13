@@ -24,8 +24,8 @@
 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="twitter_administrations.php" />
-	<pipeline nom="notifications" inclure="inc/micro_notifications.php" />
-	<pipeline nom="taches_generales_cron" inclure="genie/microblog.php" />
+	<pipeline nom="notifications" inclure="inc/twitter_notifications.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/twitter.php" />
 	<pipeline nom="affiche_milieu" inclure="inc/microblog.php" />
 
 

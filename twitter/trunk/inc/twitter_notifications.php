@@ -67,7 +67,7 @@ function twitter_notifications($x) {
 				AND $cfg['evt_publierarticlesfutur']=='publication'
 			){
 				include_spip('inc/meta');
-				ecrire_meta('microblog_annonces',$GLOBALS['meta']['microblog_annonces'].','.$id);
+				ecrire_meta('twitter_annonces',$GLOBALS['meta']['twitter_annonces'].','.$id);
 			}
 
 			// en cas d'attente, on note la date du plus vieux, et on ajoute l'attente
@@ -81,7 +81,7 @@ function twitter_notifications($x) {
 			}
 
 			$status = twitter_annonce('instituerarticle',array('id_article'=>$id));
-			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id), $heure);
+			envoyer_tweet($status,array('objet'=>'article','id_objet'=>$id), $heure);
 		}
 		break;
 	}
@@ -93,17 +93,17 @@ function twitter_annonce($quoi,$contexte){
 	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 
-function envoyer_microblog($status,$liens=array(), $heure = null){
+function envoyer_tweet($status,$liens=array(), $heure = null){
 	// un status vide ne provoque pas d'envoi
 	if (!is_null($status) AND strlen($status)) {
 		if (!function_exists('job_queue_add')){
-			include_spip('inc/microblog');
-			microblog($status);
+			include_spip('inc/twitter');
+			tweet($status);
 		}
 		else {
 			if ($heure === null)
 				$heure = time() + 60;
-			$id_job = job_queue_add('microblog',"microblog : $status",array($status),'inc/microblog',true, $heure);
+			$id_job = job_queue_add('tweet',"Twitter : $status",array($status),'inc/twitter',true, $heure);
 			if ($liens)
 				job_queue_link($id_job,$liens);
 		}

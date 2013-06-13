@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_envoyer' => 'Envoyer',
 	'bouton_envoyer_maintenant' => 'Envoyer maintenant',
 	'bouton_ne_pas_bloguer' => 'Ne rien envoyer',
+	'bouton_preferer_compte' => 'Utiliser ce compte par défaut',
 
 	// C
 	'choisir' => 'choisir',
@@ -18,10 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_compte_services' => 'Vous pouvez cr&#233;er un compte pour votre site SPIP sur l\'un des services suivants',
 
 	// E
-	'elements_signaler' => 'Elements &#224; signaler sur le flux public ci-dessus',
+	'elements_signaler' => 'Envoyer un message avec le compte par défaut lors des événements ci-dessous.',
 	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
 	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>.<br />
 Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
+	'erreur_connexion_compte' => 'Impossible de se connecter avec le compte @account@.',
 
 	// I
 	'invite' => 'Invite',
@@ -31,6 +33,7 @@ Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez 
 
 	// L
 	'label_associer_compte_twitter' => 'Ajouter un compte Twitter',
+	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistré.',
 	'label_dissocier_compte_twitter' => 'Supprimer ce compte',
 	'label_status' => 'Quoi de neuf ?',
 	'label_twitter_consumer_key' => 'Cl&eacute; cliente (<em>consumer key</em>)',
@@ -71,6 +74,7 @@ Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez 
 	// T
 	'titre_microblog' => 'Twitter',
 	'titre_configurer_microblog' => 'Configurer Twitter',
+	'titre_configurer_twitter_app' => 'Application &amp; Comptes',
 
 );
 

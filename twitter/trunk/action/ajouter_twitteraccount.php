@@ -77,4 +77,39 @@ function action_ajouter_twitteraccount_dist() {
 		}
 	}
 }
+
+/**
+ * Ajouter un compte dans la liste des comptes dispos
+ * a partir de ses tokens (meme format que dans twitter_connect()
+ *
+ * @param array $tokens
+ *   twitter_token : token du compte a utiliser
+ *   twitter_token_secret : token secret du compte a utiliser
+ * @return array
+ */
+function twitter_ajouter_twitteraccount($tokens){
+	$cfg = @unserialize($GLOBALS['meta']['microblog']);
+
+	include_spip("inc/twitter");
+	if ($res = twitter_api_call("account/verify_credentials","get",array(),$tokens)){
+		$cfg['twitter_accounts'][$res['screen_name']] = array(
+			'token' => $tokens['twitter_token'],
+			'token_secret' => $tokens['twitter_token_secret'],
+		);
+	}
+	else {
+		$cfg['twitter_accounts'][] = array(
+			'token' => $tokens['twitter_token'],
+			'token_secret' => $tokens['twitter_token_secret'],
+		);
+		spip_log("Echec account/verify_credentials lors de l'ajout d'un compte","twitter"._LOG_ERREUR);
+	}
+	if (!isset($cfg['default_account'])
+	  OR !isset($cfg['twitter_accounts'][$cfg['default_account']]))
+		$cfg['default_account'] = reset(array_keys($cfg['twitter_accounts']));
+
+	ecrire_meta("microblog", serialize($cfg));
+
+	return $cfg;
+}
 ?>

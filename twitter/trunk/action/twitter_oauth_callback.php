@@ -22,11 +22,11 @@ function action_twitter_oauth_callback_dist(){
 		include_spip('inc/twitteroauth');
 		include_spip('inc/session');
 		$cfg = @unserialize($GLOBALS['meta']['microblog']);
-		
+
+		$redirect = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
 		if (_request('oauth_token') && ($GLOBALS['visiteur_session']['oauth_token'] !== _request('oauth_token'))) {
 			session_set('status','oldtoken');
-			$url = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
-			$GLOBALS['redirect'] = $url;
+			$GLOBALS['redirect'] = $redirect;
 		}
 		else {
 			$consumer_key = $cfg['twitter_consumer_key'];
@@ -35,7 +35,6 @@ function action_twitter_oauth_callback_dist(){
 			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $GLOBALS['visiteur_session']['oauth_token'], $GLOBALS['visiteur_session']['oauth_token_secret']);
 			$access_token = $connection->getAccessToken(_request('oauth_verifier'));
 			session_set('access_token',$access_token);
-
 			/**
 			 * Si le code de retour est 200 :
 			 * L'utilisateur a été vérifié et les tokens d'accès peuvent être
@@ -45,29 +44,20 @@ function action_twitter_oauth_callback_dist(){
 
 				// recuperer le screenname
 				$tokens = array(
-					'token' => $GLOBALS['visiteur_session']['access_token']['oauth_token'],
-					'token_secret' => $GLOBALS['visiteur_session']['access_token']['oauth_token_secret'],
+					'twitter_token' => $GLOBALS['visiteur_session']['access_token']['oauth_token'],
+					'twitter_token_secret' => $GLOBALS['visiteur_session']['access_token']['oauth_token_secret'],
 				);
-
-				if ($res = twitter_api_call("account/verify_credentials","get",$tokens)){
-					$cfg['twitter_accounts'][$res['screen_name']] = $tokens;
-				}
-				else {
-					$cfg['twitter_accounts'][] = $tokens;
-					spip_log("Echec account/verify_credentials lors de l'ajout d'un compte","twitter"._LOG_ERREUR);
-				}
-				var_dump($res);
-				var_dump($cfg);
-
-				ecrire_meta("microblog", serialize($cfg));
-				die();
-
-				$url = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['adresse_site'];
+				include_spip("action/ajouter_twitteraccount");
+				twitter_ajouter_twitteraccount($tokens);
 
 				session_set('access_token');
 				session_set('twitter_redirect');
 
-				$GLOBALS['redirect'] = $url;
+				$GLOBALS['redirect'] = $redirect;
+			}
+			else {
+				spip_log("Erreur '".$connection->http_code."' au retour pour recuperation des tokens dans action_twitter_oauth_callback_dist",'twitter'._LOG_ERRUR);
+				$GLOBALS['redirect'] = $redirect;
 			}
 		}
 	}

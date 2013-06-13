@@ -1,19 +1,30 @@
-[(#SET{infos_compte,[(#VAL{account/verify_credentials}|twitter_api_call{get,#ARRAY,#ARRAY{account,#ENV{account}}})]})]
-<div class="twitter user_desc">
+[(#SET{infos_compte,[(#VAL{account/verify_credentials}|twitter_api_call{get,#ARRAY,#ARRAY{twitter_account,#ENV{account}}})]})]
+#SET{is_defaut,#ENV{account}|=={#ENV{defaut}}|oui}
+<div class="twitter user_desc[(#GET{is_defaut})defaut]">
 	<div class="name">
-		[(#GET{infos_compte/protected}|non)
+		[(#GET{infos_compte/screen_name}|non)
+		<:erreur_connexion_compte{account=[@(#ENV{account})]}:>
+		]
+		[(#GET{infos_compte/screen_name}|oui)
+		[(#GET{infos_compte/protected}|oui)
 		[(#CHEMIN_IMAGE{cadenas-16.png}|balise_img{prive})]
 		]
 		<strong><img src="#GET{infos_compte/profile_image_url}" class="spip_logos" width="32" height="32"/><a
 			href="[http://twitter.com/(#GET{infos_compte/screen_name})]">@#GET{infos_compte/screen_name}</a></strong>
 		\(#GET{infos_compte/name}\)
-		#SET{fonction,<code><tt>microblog()</tt></code>}
+		[(#GET{is_defaut}|oui)
+		#SET{fonction,<code><tt>tweet()</tt></code>}
 		<small><:twitter:compte_defaut{fonction=#GET{fonction}}:></small>
-	</div>
-	<div class="actions">
-		[(#BOUTON_ACTION{<:twitter:label_dissocier_compte_twitter:>,#URL_ACTION_AUTEUR{supprimer_twitteraccount,#ENV{account},#SELF}})]
+		]
+		]
 	</div>
 	<div class="description">
 		[(#GET{infos_compte/description}|propre)]
+	</div>
+	<div class="actions">
+		[(#GET{is_defaut}|non)
+		[(#BOUTON_ACTION{<:twitter:bouton_preferer_compte:>,[(#URL_ACTION_AUTEUR{preferer_twitteraccount,#ENV{account},[(#SELF|ancre_url{comptes})]})]})]
+		]
+		[(#BOUTON_ACTION{<:twitter:label_dissocier_compte_twitter:>,[(#URL_ACTION_AUTEUR{supprimer_twitteraccount,#ENV{account},[(#SELF|ancre_url{comptes})]})]})]
 	</div>
 </div>
