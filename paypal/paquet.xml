@@ -1,7 +1,7 @@
 <paquet
 	prefix="paypal"
 	categorie="outil"
-	version="0.2.1"
+	version="0.2.2"
 	etat="dev"
 	compatibilite="[2.1.8;3.1.*]"
 	logo="prive/themes/spip/images/paypal-32.png"

@@ -14,6 +14,7 @@ function formulaires_paypal_charger($options = array()) {
 	*/
 	spip_log("options du formulaire paypal : ".print_r($options,true),"paypal");
 	
+    include_spip('inc/config');
 	$conf = lire_config('paypal');	
 	
 	$valeurs = array(

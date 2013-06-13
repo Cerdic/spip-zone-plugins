@@ -5,7 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_paypal_ipn_dist() {
 
 	spip_log("Entrer action_paypal_ipn_dist",'paypal');
-
+    
+    include_spip('inc/config');
 	$conf = lire_config('paypal');
 
 	$datas = $_POST;
