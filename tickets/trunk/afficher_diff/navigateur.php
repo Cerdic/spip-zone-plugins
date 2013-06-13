@@ -1,0 +1,40 @@
+<?php
+/**
+ * Plugin Tickets
+ * Licence GPL (c) 2008-2013
+ *
+ * @package SPIP\Tickets\Diff
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/diff');
+
+/**
+ * Afficher le diff du champ navigateur
+ * 
+ * @param string $champ
+ * @param string $old
+ * @param string $new
+ * @param string $format
+ *   apercu, diff ou complet
+ * @return string
+ */
+function afficher_diff_navigateur_dist($champ,$old,$new,$format='diff'){
+	// ne pas se compliquer la vie !
+	if ($old==$new)
+		$out = ($format!='complet'?'':tickets_texte_navigateur($new));
+	else {
+		$diff = new Diff(new DiffTexte);
+		$n = preparer_diff(tickets_texte_navigateur($new));
+		$o = preparer_diff(tickets_texte_navigateur($old));
+
+		$out = afficher_diff($diff->comparer($n,$o));
+		if ($format == 'diff' OR $format == 'apercu')
+			$out = afficher_para_modifies($out, ($format == 'apercu'));
+	}
+	return $out;
+}
+?>
+
+
