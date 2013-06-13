@@ -9,7 +9,7 @@
 var twidget_css='#CHEMIN{css/twidget.css}';
 var twidget_logo='#CHEMIN{widget-bird.png}';
 var twidget_logo_large='#CHEMIN{widget-bird-large.png}';
-var twidget_proxy='[(#VAL{twidget}|generer_url_action|url_absolue)&w=]';
+var twidget_proxy='[(#VAL{twidget}|generer_url_action{'',#EVAL{true}}|url_absolue)&w=]';
 var twidget_rien='#CHEMIN{rien.gif}';
 /* ]]> */</script>
 <script charset="utf-8" type="text/javascript" src="#CHEMIN{js/twidget.js}"></script>

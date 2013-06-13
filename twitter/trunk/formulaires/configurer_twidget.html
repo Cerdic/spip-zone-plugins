@@ -1,18 +1,17 @@
 <div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-	<h3 class="titrem"><:twidget:titre_configuration:></h3>
+	<h3 class="titrem"><:twitter:titre_configurer_widget:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	[(#ENV{editable})
-	<p class="description">[(#VAL{paquet-twidget:twidget_description}|_T|propre)]  </p>
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
 		paramêtre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		#SET{fl,twidget}
+		#SET{fl,twitter}
 
 		<fieldset>
-			<legend><:twidget:legend_commun_fieldset:></legend>
-				<p class="explication"><:twidget:explication_commun_fieldset:></p>
+			<legend><:twitter:legend_commun_widgets:></legend>
+				<p class="explication"><:twitter:explication_commun_widgets:></p>
 
 			<ul>
 				<!-- interval-->
@@ -89,8 +88,10 @@
 
 		</fieldset>
 		<fieldset>
-			<legend><:twidget:legend_recherche_fieldset:></legend>
-				<p class="explication"><:twidget:explication_recherche_fieldset:></p>
+			<legend><:twitter:legend_recherche_widget:></legend>
+				<p class="explication"><:twitter:explication_recherche_widget:>
+				<br /><tt>\#INCLURE{fond=inclure/twidget_search}</tt>
+				</p>
 			<ul>
 				<!-- SEARCH-->
 				#SET{name,search}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -100,10 +101,13 @@
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 			</ul>
+			#INCLURE{fond=inclure/twidget_search}
 		</fieldset>
 		<fieldset>
-			<legend><:twidget:legend_profil_fieldset:></legend>
-				<p class="explication"><:twidget:explication_profil_fieldset:></p>
+			<legend><:twitter:legend_profil_widget:></legend>
+				<p class="explication"><:twitter:explication_profil_widget:>
+				<br /><tt>\#INCLURE{fond=inclure/twidget_profile}</tt>
+				</p>
 			<ul>
 				<!-- rpp -->
 				#SET{name,rpp}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -120,6 +124,7 @@
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 			</ul>
+			#INCLURE{fond=inclure/twidget_profile}
 		</fieldset>
 
 

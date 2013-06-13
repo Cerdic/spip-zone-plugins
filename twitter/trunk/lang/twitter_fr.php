@@ -76,6 +76,34 @@ Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez 
 	'titre_configurer_microblog' => 'Configurer Twitter',
 	'titre_configurer_twitter_app' => 'Application &amp; Comptes',
 
+
+	'explication_commun_widgets' => "Configuration Nécessaire à l'utilisation du plugin Twitdget. Partie commune entre le widget profil et le widget recherche",
+	'explication_recherche_widget' => "Configuration pour le widget de recherche",
+	'explication_profil_widget' => "Configuration Nécessaire à l'utilisation du widget profil ",
+
+	'label_search' => "Recherche. Terme recherché, l'usage de tweeter implique souvent de précéder le terme par un # ",
+	'label_interval' => "Intervalle de temps après lequel la page tweeter est rechargée",
+	'label_subject' => "Sujet de la fenêtre tweete",
+	'label_title' => "Titre de la fenêtre",
+	'label_width' => "Largeur de la fenêtre",
+	'label_height' => "Hauteur de la fenêtre",
+	'label_shell_background' => "Couleur de fond de la fenêtre tweeter",
+	'label_shell_color' => "Couleur du texte",
+	'label_tweets_background' => "Couleur fond tweet",
+	'label_tweets_color' => "Couleur de fond des tweet",
+	'label_tweets_link' => "Couleur des liens",
+	'label_rpp' => "Nombre de résultats par page",
+	'label_user' => "Utilisateur twitter (ne pas précéder du @)",
+
+	'legend_commun_widgets' => "Configuration Commune",
+	'legend_recherche_widget' => "Widget Recherche",
+	'legend_profil_widget' => "Widget Profil",
+
+
+	// T
+	'titre_configurer_widget' => "Twitter Widgets",
+	'titre_twidget' => "Twidget",
+
 );
 
 ?>
