@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'elements_signaler' => 'Envoyer un message avec le compte par défaut lors des événements ci-dessous.',
 	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
 	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>.<br />
-Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration puis un lien plus bas permettra d\'associer un compte twitter &agrave; ce site.',
+Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration pour ajouter ensuite des comptes twitter &agrave; ce site.',
 	'erreur_connexion_compte' => 'Impossible de se connecter avec le compte @account@.',
 
 	// I
@@ -40,7 +40,7 @@ Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez 
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&#232;te (<em>consumer secret</em>)',
 	'label_microblog'=> 'Modifier le message',
 	'label_username' => 'Nom d\'utilisateur',
-	'legend_api_twitter' => 'API Twitter',
+	'legend_api_twitter' => 'Application Twitter',
 	'legend_comptes_twitter' => 'Comptes Twitter',
 	'lien_documentation' => 'Cf. documentation',
 	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
