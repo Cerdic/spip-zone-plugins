@@ -16,7 +16,7 @@ function formulaires_configurer_microblog_verifier_dist(){
 	$erreurs = array();
 
 	// si secret vide, reprendre celui de la config actuelle
-	if (!trim(_request('twitter_consumer_secret'))){
+	if (!trim(_request('twitter_consumer_secret')) AND _request('twitter_consumer_key')){
 		include_spip("inc/config");
 		set_request('twitter_consumer_secret',lire_config("microblog/twitter_consumer_secret"));
 	}

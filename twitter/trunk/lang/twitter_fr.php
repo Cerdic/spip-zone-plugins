@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'elements_signaler' => 'Envoyer un message avec le compte par défaut lors des événements ci-dessous.',
 	'erreur_verifier_configuration' => 'Il y a une erreur, veuillez v&eacute;rifiez la configuration.',
-	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>.<br />
-Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration pour ajouter ensuite des comptes twitter &agrave; ce site.',
+	'explication_twitter_api_oauth' => 'Créez une application Twitter <a href="http://dev.twitter.com/apps/new">dans l\'espace développeurs (http://dev.twitter.com/apps/new)</a>.
+Entrez ci-dessous les clés d\'identification et enregistrez (<a href="http://contrib.spip.net/4394">Plus d\'aide</a>).',
 	'erreur_connexion_compte' => 'Impossible de se connecter avec le compte @account@.',
 	'erreur_envoi_desactive' => 'L\'envoi de Tweet est desactivé par la constante <tt>_TEST_MICROBLOG_SERVICE</tt>',
 
