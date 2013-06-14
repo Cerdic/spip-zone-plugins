@@ -1,7 +1,7 @@
 <paquet
 	prefix="facteur"
 	categorie="communication"
-	version="3.0.1"
+	version="3.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/facteur-32.png"
@@ -16,6 +16,7 @@
 	
 	<pipeline nom="facteur_pre_envoi" action="" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
+	<pipeline nom="recuperer_fond" inclure="facteur_pipelines.php" />
 	
 	<menu nom="configurer_facteur" titre="facteur:configuration_facteur" parent="menu_configuration" icone="images/facteur-16.png" />
 </paquet>

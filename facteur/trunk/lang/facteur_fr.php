@@ -5,9 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée',
 	'configuration_adresse_envoi' => 'Configuration de l\'adresse d\'envoi',
@@ -52,6 +49,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender_descriptif' => 'Définit dans l\'entête du mail l\'adresse email de retour des erreurs (ou Return-Path), et lors d\'un envoi via la méthode SMTP cela définit aussi l\'adresse de l\'envoyeur.',
 	'facteur_smtp_username' => 'Nom d\'utilisateur :',
 
+	// M
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cet adresse email pour l\'envoi de courriels.',
+	
 	// N
 	'note_test_configuration' => 'Un email sera envoyé à l\'adresse d\'envoi définie (ou celle du webmaster).',
 
