@@ -63,7 +63,7 @@ function action_twitter_oauth_callback_dist(){
 				$GLOBALS['redirect'] = $redirect;
 			}
 			else {
-				spip_log("Erreur '".$connection->http_code."' au retour pour recuperation des tokens dans action_twitter_oauth_callback_dist",'twitter'._LOG_ERRUR);
+				spip_log("Erreur '".$connection->http_code."' au retour pour recuperation des tokens dans action_twitter_oauth_callback_dist",'twitter'._LOG_ERREUR);
 				$GLOBALS['redirect'] = $redirect;
 			}
 		}

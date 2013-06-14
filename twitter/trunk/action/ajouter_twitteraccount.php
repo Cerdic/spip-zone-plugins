@@ -91,7 +91,9 @@ function twitter_ajouter_twitteraccount($tokens){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 	include_spip("inc/twitter");
-	if ($res = twitter_api_call("account/verify_credentials","get",array(),$tokens)){
+	$options = $tokens;
+	$options['force'] = true;
+	if ($res = twitter_api_call("account/verify_credentials","get",array(),$options)){
 		$cfg['twitter_accounts'][$res['screen_name']] = array(
 			'token' => $tokens['twitter_token'],
 			'token_secret' => $tokens['twitter_token_secret'],

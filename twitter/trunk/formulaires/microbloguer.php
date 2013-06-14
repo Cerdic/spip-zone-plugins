@@ -52,13 +52,16 @@ function formulaires_microbloguer_traiter_dist(){
 	if ($status = _request('status')){
 		include_spip('inc/microblog');
 		$retour = microblog($status);
-		spip_log($retour,'microblog');
+		spip_log($retour,'twitter');
 		
 		if($retour){
 			set_request('status','');
-			$res = array('message_ok'=>$status,'editable'=>true);
+			$res = array('message_ok'=>_T('twitter:message_envoye')." ".$status,'editable'=>true);
 		}else{
-			$res = array('message_erreur'=>_T('twitter:erreur_verifier_configuration'),'editable'=>true);
+			$erreur = _T('twitter:erreur_verifier_configuration');
+			if (defined('_TEST_MICROBLOG_SERVICE') AND !_TEST_MICROBLOG_SERVICE)
+				$erreur = _T('twitter:erreur_envoi_desactive');
+			$res = array('message_erreur'=>$erreur,'editable'=>true);
 		}
 	}
 	else

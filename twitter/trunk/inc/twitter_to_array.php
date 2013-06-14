@@ -19,12 +19,10 @@ function inc_twitter_to_array_dist($url, $options = array()) {
 	$params = array();
 	parse_str($url['query'],$params);
 
-	if (!function_exists('microblog_twitter_api'))
-		include_spip("microblog_fonctions");
+	if (!function_exists('twitter_api_call'))
+		include_spip("inc/twitter");
 
-	$tokens = isset($options['tokens'])?$options['tokens']:null;
-
-	$res = microblog_twitter_api($command,'get',$params,'',$tokens);
+	$res = twitter_api_call($command,'get',$params,$options);
 
 	return $res;
 }

@@ -1,8 +1,8 @@
 <paquet
 	prefix="twitter"
 	categorie="communication"
-	version="0.10.3"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	schema="0.1.0"
 	logo="prive/themes/spip/images/twitter-32.png"

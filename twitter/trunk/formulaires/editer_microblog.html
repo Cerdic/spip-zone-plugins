@@ -6,8 +6,12 @@
 
 ]
 [<div class="ajax">
-	[<p class="status"><strong><:twitter:message_envoye:></strong> (#ENV*{_status})</p>]
-	<div class="formulaire_spip formulaire_microblog formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET"[(#ENV{_hide})style="display:none;"]>
+	<div class="formulaire_spip formulaire_microblog formulaire_#FORM" id="formulaire_#FORM-#OBJET-#ID_OBJET">
+		[<h3 class="titrem status">[(#CHEMIN_IMAGE{twitter-24.png}|balise_img{'',cadre-icone})]<strong><:twitter:message_envoye:></strong> <q class="small">(#ENV*{_status})</q></h3>]
+		[(#ENV{_hide}|oui)
+		<span class="toggle_box_link">\[<a href="#" onclick="jQuery(this).parent().hide().next('.edition').show('fast');return false;">Modifier</a>\]</span>
+		]
+		<div class="edition [(#ENV{_hide})none]">
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		(#ENV{editable})
 		<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer:>' style="display:none;"/>
@@ -16,7 +20,7 @@
 			<ul>
 				#SET{fl,twitter}
 				#SET{name,microblog}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
-				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<li class="editer_[(#GET{name})] pleine_largeur[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<label for="#GET{name}"><em>[(#VAL{140}|moins{#ENV*{#GET{name}}|strlen})]</em>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 					<textarea name="#GET{name}" id="#GET{name}" rows="3" cols="25">#ENV*{#GET{name}}</textarea>
@@ -32,6 +36,7 @@
 			</p>
 		</div></form>
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		</div>
 	</div>
 </div>
 ]

@@ -28,7 +28,7 @@ function twitter_notifications($x) {
 				if (sql_getfetsel("statut","spip_forum","id_forum=".intval($id))!="publie"
 					OR !$cfg['evt_forumvalide']){
 					$status = twitter_annonce('forumposte',array('id_forum'=>$id));
-					envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
+					twitter_envoyer_tweet($status,array('objet'=>'forum','id_objet'=>$id));
 				}
 			}
 			break;
@@ -36,7 +36,7 @@ function twitter_notifications($x) {
 			if ($cfg['evt_forumvalide']
 			AND $id = intval($x['args']['id'])) {
 				$status = twitter_annonce('forumvalide',array('id_forum'=>$id));
-				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
+				twitter_envoyer_tweet($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
 
@@ -73,15 +73,15 @@ function twitter_notifications($x) {
 			// en cas d'attente, on note la date du plus vieux, et on ajoute l'attente
 			$heure = time()+60;
 			if (($attente = 60*intval($cfg['attente'])) > 0) {
-				$vieux = $GLOBALS['meta']['microblog_vieux'];
+				$vieux = $GLOBALS['meta']['twitter_vieux'];
 				if ($vieux AND $vieux>$heure-$attente) {
 					$heure = $vieux + $attente;
 				}
-				ecrire_meta('microblog_vieux', $heure);
+				ecrire_meta('twitter_vieux', $heure);
 			}
 
 			$status = twitter_annonce('instituerarticle',array('id_article'=>$id));
-			envoyer_tweet($status,array('objet'=>'article','id_objet'=>$id), $heure);
+			twitter_envoyer_tweet($status,array('objet'=>'article','id_objet'=>$id), $heure);
 		}
 		break;
 	}
@@ -93,7 +93,7 @@ function twitter_annonce($quoi,$contexte){
 	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 
-function envoyer_tweet($status,$liens=array(), $heure = null){
+function twitter_envoyer_tweet($status,$liens=array(), $heure = null){
 	// un status vide ne provoque pas d'envoi
 	if (!is_null($status) AND strlen($status)) {
 		if (!function_exists('job_queue_add')){

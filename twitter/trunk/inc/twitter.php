@@ -24,7 +24,7 @@ function tweet($status, $tokens = null){
 	// Certains define prennent le pas sur le reste (mode TEST)
 	if (defined('_TEST_MICROBLOG_SERVICE')) {
 		if (_TEST_MICROBLOG_SERVICE == '') {
-			spip_log('microblog desactive par _TEST_MICROBLOG_SERVICE');
+			spip_log('microblog desactive par _TEST_MICROBLOG_SERVICE',"twitter"._LOG_INFO_IMPORTANTE);
 			return false;
 		}
 	}

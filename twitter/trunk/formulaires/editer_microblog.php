@@ -35,6 +35,7 @@ function formulaires_editer_microblog_charger_dist($objet,$id_objet,$hide_form=f
 function formulaires_editer_microblog_verifier_dist($objet,$id_objet){
 	include_spip('inc/charsets');
 	$erreurs = array();
+	$microblog = _request('microblog');
 	if (spip_strlen($microblog)>140){
 		$erreurs['microblog'] = _T('twitter:longueur_maxi_status');
 	}
@@ -73,7 +74,7 @@ function formulaires_editer_microblog_traiter_dist($objet,$id_objet){
 		$status = recuperer_fond("modeles/microblog_instituer".$objet,array($primary=>$id_objet));
 		$retour = microblog($status);
 		if($retour){
-			$res['message_ok']=$status;
+			$res['message_ok']=_T('twitter:message_envoye')." ".$status;
 		}
 		else{
 			$res['message_erreur']=_T('twitter:erreur_verifier_configuration');

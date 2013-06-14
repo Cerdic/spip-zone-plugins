@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_twitter_api_oauth' => 'L\'API oAuth de Twitter n&eacute;cessite la cr&eacute;ation d\'une application <a href="http://dev.twitter.com/apps/new">sur leur site (http://dev.twitter.com/apps/new)</a>.<br />
 Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez la configuration pour ajouter ensuite des comptes twitter &agrave; ce site.',
 	'erreur_connexion_compte' => 'Impossible de se connecter avec le compte @account@.',
+	'erreur_envoi_desactive' => 'L\'envoi de Tweet est desactivé par la constante <tt>_TEST_MICROBLOG_SERVICE</tt>',
 
 	// I
 	'invite' => 'Invite',
@@ -46,7 +47,7 @@ Cr&eacute;ez cette application, entrez les donn&eacute;es fournies, enregistrez 
 	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
 
 	// M
-	'message_envoye'=> 'Message&nbsp;:',
+	'message_envoye'=> 'Tweet&nbsp;:',
 
 	// P
 	'presentation_laconica' => 'le site public du logiciel laconi.ca',
