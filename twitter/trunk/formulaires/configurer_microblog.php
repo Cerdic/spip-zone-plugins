@@ -67,5 +67,8 @@ function twitter_affiche_erreur_config($erreur, $erreur_code){
 
 	if ($erreur_code)
 		$err .= "<br />Le serveur a repondu <b>".(isset($status_string[$erreur_code])?$status_string[$erreur_code]:$erreur_code)."</b>";
+	if ($erreur_code==401)
+		$err .= "<br />Avez-vous bien rempli le champ \"Callback URL\" de votre application Twitter ?";
+
 	return "<p>$err</p>";
 }
