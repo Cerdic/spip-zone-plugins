@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Buzzer les notifications
  */
 
-function twitter_notifications($x) {
+function Microblog_notifications($x) {
   include_spip('inc/filtres_mini');
   include_spip('inc/texte');
 
@@ -27,16 +27,16 @@ function twitter_notifications($x) {
 				// ne pas poster si le forum est valide et config forum valide activee
 				if (sql_getfetsel("statut","spip_forum","id_forum=".intval($id))!="publie"
 					OR !$cfg['evt_forumvalide']){
-					$status = twitter_annonce('forumposte',array('id_forum'=>$id));
-					twitter_envoyer_tweet($status,array('objet'=>'forum','id_objet'=>$id));
+					$status = Microblog_annonce('forumposte',array('id_forum'=>$id));
+					envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 				}
 			}
 			break;
 		case 'forumvalide':      // forum valide
 			if ($cfg['evt_forumvalide']
 			AND $id = intval($x['args']['id'])) {
-				$status = twitter_annonce('forumvalide',array('id_forum'=>$id));
-				twitter_envoyer_tweet($status,array('objet'=>'forum','id_objet'=>$id));
+				$status = Microblog_annonce('forumvalide',array('id_forum'=>$id));
+				envoyer_microblog($status,array('objet'=>'forum','id_objet'=>$id));
 			}
 			break;
 
@@ -80,8 +80,8 @@ function twitter_notifications($x) {
 				ecrire_meta('microblog_vieux', $heure);
 			}
 
-			$status = twitter_annonce('instituerarticle',array('id_article'=>$id));
-			twitter_envoyer_tweet($status,array('objet'=>'article','id_objet'=>$id), $heure);
+			$status = Microblog_annonce('instituerarticle',array('id_article'=>$id));
+			envoyer_microblog($status,array('objet'=>'article','id_objet'=>$id), $heure);
 		}
 		break;
 	}
@@ -89,21 +89,21 @@ function twitter_notifications($x) {
 	return $x;
 }
 
-function twitter_annonce($quoi,$contexte){
+function Microblog_annonce($quoi,$contexte){
 	return trim(recuperer_fond("modeles/microblog_$quoi",$contexte));
 }
 
-function twitter_envoyer_tweet($status,$liens=array(), $heure = null){
+function envoyer_microblog($status,$liens=array(), $heure = null){
 	// un status vide ne provoque pas d'envoi
 	if (!is_null($status) AND strlen($status)) {
 		if (!function_exists('job_queue_add')){
-			include_spip('inc/twitter');
-			tweet($status);
+			include_spip('inc/microblog');
+			microblog($status);
 		}
 		else {
 			if ($heure === null)
 				$heure = time() + 60;
-			$id_job = job_queue_add('tweet',"Tweet : $status",array($status),'inc/twitter',true, $heure);
+			$id_job = job_queue_add('microblog',"microblog : $status",array($status),'inc/microblog',true, $heure);
 			if ($liens)
 				job_queue_link($id_job,$liens);
 		}
