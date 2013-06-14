@@ -1,0 +1,21 @@
+<paquet
+    prefix="comarquage"
+    categorie="divers"
+    version="0.40.0"
+    etat="dev"
+    compatibilite="[3.0.0;3.0.*]"
+    logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
+    documentation="http://spip-contrib.net/?article3659"
+>
+    <nom>Comarquage</nom>
+    <auteur>IPEOS I-Solutions</auteur>
+    <auteur>Laurent Vergerolle - IPEOS I-Solutions</auteur>
+    <credit lien="http://www.ipeos.com">IPEOS I-Solutions</credit>
+    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+    <pipeline nom="insert_head_css" inclure="comarquage_pipeline.php" />
+    <pipeline nom="taches_generales_cron" inclure="comarquage_pipeline.php" />
+
+    <menu nom="configurer_comarquage" titre="comarquage:titre_config" parent="menu_squelette" icone="prive/themes/spip/images/picto-comarquage-service-public-16.png" />
+
+</paquet>

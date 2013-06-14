@@ -1,0 +1,124 @@
+h5 {font-size: 0.92em;}/* Bloc du sommaire + dossiers  */
+
+.spBarre10ThemesFils { border:1px solid #C8C8C8;
+float:left;
+margin:5px;
+min-height:7em;
+padding:8px 0 0;
+text-align:center;
+width:17%;}
+.spBarre10ThemesFils:hover {border: 1px solid #75736E}
+.spBarre10ThemesFils img { display: block; margin: 0 auto;}
+
+
+.spFilDAriane {clear: both; margin:0 0 0 0px;}
+.spFilDAriane a { color:#006578;}
+ul.spPublicationCFS {}
+
+
+
+/* Pour mettre le sommaire et les actus RSS sur deux colonnes 
+.spPublicationMenuGaucheForTheme {width: 50%; float: left; }
+.spPublicationMenuDroiteForTheme {width:50%; float: right;}
+*/
+
+/* Bloc du sommaire */
+.spPublicationSommaire { font-weight: bold;}
+.spPublicationSommaire li { background: #F5F5F5; margin: 2px 0 2px 0; padding: 2px 15px; border: 1px solid #FFF; list-style-type:none;} 
+.spPublicationSommaire li:hover { border: 1px solid #75736E}
+.spPublicationSommaire li a {}
+
+/* Bloc "comment faire si?" dans le sommaire */
+.spPublicationCFS { }
+li.spPublicationCFS { background: #F5F5F5; margin: 2px 0 2px 0; padding: 2px 15px;  border: 1px solid #FFF}
+li.spPublicationCFS:hover { border: 1px solid #75736E}
+/* Bloc actualités */
+#sp-actualite {border: 2px solid #F5F5F5; margin:1.5em 0 0;
+padding:0 1em;}
+ul.spPublicationActualite {margin: 0 0 15px 0; list-style-type:none;}
+.spPublicationActualite h4.spip { 	margin:0.5em 0 1em 2.5em; 	padding: 5px 0 0 25px; }
+
+/* Liste des thèmes principaux */
+ul.noeudThemes { list-style-type:none; }
+ul.noeudThemes li.noeudThemesFils { float: left; margin-bottom: 2em;  min-height:150px; padding-right:1%; width:48%; }
+ul.noeudThemes li.noeudThemesFils .noeudThemesFilsImage {float: left; margin-right: 1em;}
+ul.noeudThemes li.noeudThemesFils h4.spip {clear: none; margin-top: 10px; font-weight:bold;}
+ul.noeudThemes li.noeudThemesFils ul.noeudsousThemesFils {margin-top: 25px; /* hauteur du picto */}
+ul.noeudThemes li.noeudThemesFils ul.noeudsousThemesFils li {display: inline; background: none; padding: 0;}
+
+/* Liste des sous thèmes principaux */
+
+ul.noeudsousThemesFils { margin-left: 0px;}
+/*ul.spPublicationSommaire li, */
+/* ul.noeudsousThemesFils li, */
+ul.spThemeSousThemeDossier li,
+ul.spPublicationCDC li,
+ul.spPublicationSEL li,
+ul.spNoeudDossierDossierFiche li,
+ul.spPublicationQR li,
+ul.spPublicationPESP li,
+ul.spPublicationSIP li,
+ul.spNoeudDossierFiche li,
+ul.spTexteListe li
+{ 
+	background: url("images/puce.gif") no-repeat left center; padding-left: 15px; list-style-type:none;
+}
+/* Mise en page spécifiques pour certaines listes */
+ul.spTexteListe li {margin-left: 1.5em;}
+
+.spSousThemeDossier {clear: both;}
+.spPublicationMenuGauche {margin-bottom: 15px;}
+ul.spSousThemeDossierFiche {
+	margin:0 0 20px;
+}
+
+/* Liste des sous thèmes */
+ul.spNoeudDossierDossierFiche {clear: left;}
+
+
+/* Titres dans les listes */
+.spThemeSousTheme h4.spip,
+.spPublicationSEL h4.spip,
+.spPublicationCDC h4.spip,
+.spNoeudDossierDossier h4.spip,
+.spTexteChapitre h4.spip,
+.spPublicationQR h4.spip,
+.sp-pour-en-savoir-plus h4.spip,
+.spPublicationPESP h4.spip,
+.spPublicationSIP h4.spip,
+.spPublicationVA h4.spip,
+.spPublicationOSA h4.spip,
+.spPublicationReference h4.spip,
+.spSousThemeDossier h4.spip,
+.spPublicationSommaire h4.spip,
+.spPublicationCFS h4.spip,
+.spPublicationPartenaire h4.spip,
+.spAccueilComentFaireSiFiche h4.spip
+{
+	margin:1.5em 0 1em 2.5em;
+	padding: 10px 0 0 25px;
+	clear: none;
+}
+
+.spServiceComplementaireSN { /* Bloc "accéder au téléservice..." */
+	margin: 1.5em;
+}
+
+.spPublicationAvertissement { /* Bloc d'avertissement */
+	margin: 1em 0;	
+	border: 2px solid  #F5F5F5; padding: 5px;
+}
+.spPublicationAvertissement h4.spip {padding: 5px 0 0 5px; margin: 0.5em 0 0 0}
+
+/* PICTOS */
+.entiteObjectFloatRight {float: right; margin : 5px 0 0 5px;}
+.entiteImageFloatLeft  {float: left; margin: 5px 5px 0 0;}
+.spNoeudDossierDossier .entiteImageFloatLeft {margin-bottom: 1em;}
+
+.spTexteSousChapitreNote {margin: 1em 2em;}
+
+
+/* Divers */
+.clearall {clear: both}
+.bold {font-weight: bold;}
+

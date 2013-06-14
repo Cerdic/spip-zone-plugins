@@ -1,0 +1,19 @@
+#CACHE{0}
+[(#REM) Modèle pour le comarquage ]
+
+[(#SET{categorie,#ENV{categorie,'particuliers'}})]
+[(#SET{xml,#ENV{xml,#CONFIG{comarquage/default_xml_file}}})]
+[(#SET{xsl,#ENV{xsl,#CONFIG{comarquage/default_xsl_file}}})]
+
+[(#REM) Récupération de l'id xml pour le tag de stats Xiti ]
+#SET{tag_id,#EVAL{_request(xml)}}
+
+
+[(#SET{parametres,#ARRAY})]
+
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{categorie,#GET{categorie}}}}
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{xml,#GET{xml}}}}
+#SET{parametres, #GET{parametres}|array_merge{#ARRAY{xsl,#GET{xsl}}}}
+
+[(#REM) On déclenche le process ]
+[(#GET{parametres}|comarquage_run)]
