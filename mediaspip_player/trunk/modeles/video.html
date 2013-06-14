@@ -147,8 +147,7 @@
 	var ms_player_init_[(#GET{id_document_voir})] = function(){
 		if($('#video_[(#GET{id_document_voir})]').parent('.media_wrapper').size() == 0){
 			$('#video_[(#GET{id_document_voir})]').ms_player_init({
-				flowurl:'[(#CHEMIN{flash/flowplayer.swf}|url_absolue)]',
-				flasherror:erreur_flash,[
+				flowurl:'[(#CHEMIN{flash/flowplayer.swf}|url_absolue)]',[
 				(#ENV{min_width}|oui)[minwidth : '(#ENV{min_width}|match{%}|?{null,#ENV{min_width}})',]][
 				movieSize:'(#ENV{moviesize})',][(#ENV{cookie_volume,#CONFIG{mediaspip_player/cookie_volume,non}}|=={oui}|oui)
 				cookie_volume:true,][

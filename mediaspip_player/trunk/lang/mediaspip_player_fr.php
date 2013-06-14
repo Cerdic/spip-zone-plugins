@@ -55,7 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_video_largeur_embed' => 'Largeur des vidéos pour l\'exportation',
 
 	// M
-	'message_erreur_flash' => 'Pour regarder ce média vous devez installer ou mettre à niveau flash player (version minimale : 10)<br />Télécharger la <a href="@url@">dernière version ici</a>.',
+	'message_erreur_flash' => 'Pour regarder ce média vous devez installer ou mettre à niveau flash player (version minimale : 10)<br />Télécharger la <a href="http://get.adobe.com/fr/flashplayer/" class="spip_out">dernière version ici</a>.',
+	'message_erreur_flash_mobile' => 'Ce média n\'est consultable que via un lecteur flash. Votre plateforme ne permet pas l\'installation de ce logiciel.',
 
 	// S
 	'statut_error' => 'Votre navigateur ne semble pas pouvoir lire ce document.',

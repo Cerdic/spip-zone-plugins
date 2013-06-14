@@ -99,6 +99,7 @@
 		IS_IPAD = /iPad|MeeGo/.test(UA),
 		IS_IPHONE = /iP(hone|od)/i.test(UA),
 		IS_ANDROID = /Android/.test(UA),
+		IS_MOBILE = IS_IPAD || IS_ANDROID || IS_IPHONE,
 		IPAD_VER = IS_IPAD ? parseFloat(/Version\/(\d\.\d)/.exec(UA)[1], 10) : 0,
 		dataload = !IS_IPAD && !IS_IPHONE,
 		zeropreload = !IS_IE && !IS_ANDROID,
@@ -146,7 +147,7 @@
 			 */
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
 				media.children('source').each(function(){
-					if(($(this).attr('type') != 'video/x-flv') && (id.canPlayType($(this).attr('type')) != '')){
+					if(!$(this).attr('type').match('flv') && id.canPlayType($(this).attr('type')) != ''){
 						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)){
 							playable = false;
 						}else{
@@ -1012,7 +1013,7 @@
 		ms_messages : function(type,message){
 			var media = $(this),
 				id = media[0],
-				wrapper = $(this).parents('.media_wrapper');
+				wrapper = $(this).is('.media_wrapper') ? $(this) : $(this).parents('.media_wrapper');
 			
 			if(!id.options.messages || id.controls) return;
 			

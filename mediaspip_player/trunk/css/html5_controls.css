@@ -144,6 +144,15 @@ audio{min-height:24px;display:block;}
 	border:none;
 }
 
+.media_wrapper.player_error .messages{
+	position:relative;
+	float:right;
+	margin:0 0 20px 0;
+}
+.media_wrapper.player_error .messages a{
+	color:#FFF;
+	text-decoration:underline;
+}
 .media_wrapper .controls{
 	width:100%;
 	height:25px;

@@ -10,7 +10,9 @@
  */
 (function($){
 	var slider = (typeof($.ui) == 'object') && (typeof($.ui.slider) == 'function'),
-		cookies = (typeof($.cookie) == 'function');
+		cookies = (typeof($.cookie) == 'function'),
+		UA = navigator.userAgent,
+		IS_MOBILE = /iPad|MeeGo/.test(UA) || /iP(hone|od)/i.test(UA) || /Android/.test(UA);
 
 	$.extend($.fn, {
 		ms_fallback_flash : function(options) {
@@ -247,9 +249,8 @@
 				    			}
 				    		}
 				    		if(e == 186 || e == 77){
-				    			if($.inArray('volume',this.options.boutons_caches) == '-1' && !wrapper[0].options.muted_bloque){
+				    			if($.inArray('volume',this.options.boutons_caches) == '-1' && !wrapper[0].options.muted_bloque)
 				    				wrapper.find('.volume_button').click();
-				    			}
 				    		}
 				    	},
 			        clip:{
@@ -508,11 +509,10 @@
 			    	wmode:'transparent',
 			    	allowfullscreen: allowfullscreen,
 			    	onFail: function() {
-			    		var wrapper = $(this.getParent()).parents('.media_wrapper');
-			    		wrapper.removeClass('loading').addClass('player_error').css('background-color','inherit').find('.controls').detach();
+			    		wrapper.removeClass('loading').addClass('player_error').css({height:''}).find('.controls').detach();
 			    		wrapper.find('.html5_cover').css('background-color','#ffffff').find('.img').fadeTo('slow', 0.4);
 			    		wrapper.find('.flowplayer').css('position','relative').html(' ');
-			    		wrapper.ms_messages('error',wrapper[0].options.flasherror);
+			    		wrapper.ms_messages('error',IS_MOBILE ? ms_player_lang.flash_error_mobile : ms_player_lang.flash_error);
 			    	}
 			    }, media_options);
 			}
