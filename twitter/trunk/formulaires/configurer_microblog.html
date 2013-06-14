@@ -16,7 +16,7 @@
 			<B_comptes>
 			<li class="compte pleine_largeur">
 				<BOUCLE_comptes(POUR){tableau #CONFIG{microblog/twitter_accounts}}>
-				[(#SET{infos_compte,[(#VAL{account/verify_credentials}|twitter_api_call{get,#ARRAY,#ARRAY{twitter_account,#ENV{account}}})]})]
+				[(#SET{infos_compte,[(#VAL{account/verify_credentials}|twitter_api_call{get,#ARRAY,#ARRAY{twitter_account,#CLE}})]})]
 				[(#GET{infos_compte/errors}|oui)#SET{api_erreur,' '}]
 				#INCLURE{fond=modeles/twitter_user_description,account=#CLE,infos_compte=#GET{infos_compte},defaut=#CONFIG{microblog/default_account}}
 				#SET{comptes_ok,' '}
