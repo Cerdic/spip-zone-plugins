@@ -1,7 +1,7 @@
 <paquet
 	prefix="twitter"
 	categorie="communication"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	schema="0.1.0"
@@ -23,6 +23,7 @@
 	<traduire module="paquet-twitter" reference="fr" gestionnaire="salvatore" />
 
 
+	<pipeline nom="autoriser" inclure="twitter_fonctions.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="twitter_administrations.php" />
 	<pipeline nom="notifications" inclure="inc/twitter_notifications.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/twitter.php" />

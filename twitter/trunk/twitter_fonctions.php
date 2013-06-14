@@ -10,6 +10,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function autoriser_microbloguer_menu_dist(){
+	include_spip("inc/twitter");
+	if (!twitter_verifier_config())
+		return false;
+	return true;
+}
 
 function generer_url_microblog($id, $entite='article', $args='', $ancre='', $public=true, $type=null){
 	include_spip('inc/filtres_mini');

@@ -25,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Entrez ci-dessous les clés d\'identification et enregistrez (<a href="http://contrib.spip.net/4394">Plus d\'aide</a>).',
 	'erreur_connexion_compte' => 'Impossible de se connecter avec le compte @account@.',
 	'erreur_envoi_desactive' => 'L\'envoi de Tweet est desactivé par la constante <tt>_TEST_MICROBLOG_SERVICE</tt>',
+	'erreur_config_pour_widget' => 'Configurer l\'Application Twitter et ajouter un compte Twitter pour utiliser les Widgets',
+	'erreur_config_pour_tweeter' => 'Configurer le plugin pour envoyer un message.',
 
 	// I
 	'invite' => 'Invite',

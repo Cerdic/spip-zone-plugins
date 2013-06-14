@@ -23,6 +23,13 @@ function formulaires_editer_microblog_charger_dist($objet,$id_objet,$hide_form=f
 	$valeurs['id_objet']=$id_objet;
 	$valeurs['microblog'] = recuperer_fond("modeles/microblog_instituer".$objet,array($primary=>$id_objet));
 	$valeurs['_status'] = trim($valeurs['microblog']);
+
+	include_spip("inc/twitter");
+	if (!twitter_verifier_config()){
+		$valeurs['editable'] = false;
+		$valeurs['message_erreur'] = _T('twitter:erreur_config_pour_tweeter');
+	}
+
 	return $valeurs;
 }
 

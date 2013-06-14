@@ -14,10 +14,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Fonction de chargement des valeurs par defaut des champs du formulaire
  */
 function formulaires_microbloguer_charger_dist(){
-	return 
+	$valeurs =
 		array(
 			'status' => '',
 		);
+	include_spip("inc/twitter");
+	if (!twitter_verifier_config()){
+		$valeurs['editable'] = false;
+		$valeurs['message_erreur'] = _T('twitter:erreur_config_pour_tweeter');
+	}
+	return $valeurs;
 }
 
 /**

@@ -92,13 +92,8 @@ function twitter_connect($tokens=null){
 
 	$t = md5(serialize($tokens));
 	if (!isset($connection[$t])){
-		$tokens = twitter_tokens($tokens);
 
-		if(
-			isset($tokens['twitter_consumer_key'])
-				&& isset($tokens['twitter_consumer_secret'])
-				&& isset($tokens['twitter_token'])
-				&& isset($tokens['twitter_token_secret'])){
+		if($tokens = twitter_tokens($tokens)){
 			// Cas de twitter et oAuth
 			$t2 = md5(serialize($tokens));
 			include_spip('inc/twitteroauth');
@@ -128,7 +123,7 @@ function twitter_connect($tokens=null){
  * @param array $tokens
  * @return array
  */
-function twitter_tokens($tokens){
+function twitter_tokens($tokens=null){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
 
 	if(!is_array($tokens))
@@ -161,7 +156,15 @@ function twitter_tokens($tokens){
 			$t['twitter_token_secret'] = $cfg['twitter_accounts'][$account]['token_secret'];
 		}
 	}
-	return $t;
+	if(
+		isset($t['twitter_consumer_key'])
+		  AND isset($t['twitter_consumer_secret'])
+		  AND isset($t['twitter_token'])
+		  AND isset($t['twitter_token_secret'])){
+		return $t;
+	}
+
+	return false;
 }
 
 /**
@@ -247,4 +250,23 @@ function twitter_api_call($command,$type='get',$params=array(),$options=null){
 			return $res['content'];
 			break;
 	}
+}
+
+/**
+ * Verifier que la config twitter est OK
+ * @param bool $complete
+ *   verification complete de la connexion, avec requete chez Twitter (plus lent)
+ * @return bool
+ */
+function twitter_verifier_config($complete = false){
+	if (!$tokens = twitter_tokens())
+		return false;
+	if ($complete){
+		if (!twitter_connect())
+			return false;
+		if (!$infos = twitter_api_call("account/verify_credentials"))
+			return false;
+	}
+
+	return true;
 }

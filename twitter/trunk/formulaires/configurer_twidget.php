@@ -88,8 +88,8 @@ function formulaires_configurer_twidget_charger_dist() {
 
 	// formulaire configurable ou non ?
 	include_spip("inc/twitter");
-	if (!$infos = twitter_api_call("account/verify_credentials")){
-		$valeurs['_info_config_erreur'] = "Configurer l'Application Twitter et ajouter un compte Twitter pour utiliser les Widgets";
+	if (!twitter_verifier_config(true)){
+		$valeurs['_info_config_erreur'] = _T('twitter:erreur_config_pour_widget');
 	}
 
 	return $valeurs;
