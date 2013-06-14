@@ -77,7 +77,7 @@
 								<:microblog:label_dissocier_compte_twitter{nom=#GET{name},url_assoc=#GET{url_assoc},url_compte=#GET{url_compte}}:>	
 							]
 							[(#GET{name}|non)
-								<a href='[(#URL_ACTION_AUTEUR{twitter_oauth_request,'',#SELF})]'><:microblog:label_associer_compte_twitter:></a>	
+								<a href='[(#URL_ACTION_AUTEUR{twitter_oauth_request,new,#SELF})]'><:microblog:label_associer_compte_twitter:></a>
 							]
 						</li>]]
 					</ul>
