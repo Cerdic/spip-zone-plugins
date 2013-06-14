@@ -1,10 +1,18 @@
 [(#REM) 
-	Surcharge du portfolio des squelettes de la dist
+	Surcharge du squelette de la dist :
+	liste des documents joints & portfolio affichés en bas d'un article.
+	On inclut le squelette "normal" puis on ajoute les albums.
 ][
-(#REM) Portfolio traditionnel
+(#REM) Documents joints & portfolio classique
 ]<INCLURE{fond=squelettes-dist/inclure/documents, env}>
 [
 (#REM) Albums liés à l'article et non insérés dans le texte
-]<BOUCLE_albums(ALBUMS){id_article}{vu=non}>
-[<div style="clear:left">(#MODELE{album, id_album, titraille=2})</div>]
+]
+<B_albums>
+<div style="clear:left">
+<h2><:album:titre_albums:></h2>
+<BOUCLE_albums(ALBUMS){id_article}{vu=non}>
+[(#MODELE{album, id_album, hauteur=52, balise_titraille=strong})]
 </BOUCLE_albums>
+</div>
+</B_albums>
