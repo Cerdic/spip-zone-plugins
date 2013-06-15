@@ -14,8 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* globals VBArray, PDFJS */
 
 'use strict';
+
+// Initializing PDFJS global object here, it case if we need to change/disable
+// some PDF.js features, e.g. range requests
+if (typeof PDFJS === 'undefined') {
+  (typeof window !== 'undefined' ? window : this).PDFJS = {};
+}
 
 // Checking if the typed arrays are supported
 (function checkTypedArrayCompatibility() {
@@ -54,8 +61,14 @@
       result = [];
       for (var i = 0; i < arg1; ++i)
         result[i] = 0;
-    } else
+    } else if ('slice' in arg1) {
       result = arg1.slice(0);
+    } else {
+      result = [];
+      for (var i = 0, n = arg1.length; i < n; ++i) {
+        result[i] = arg1[i];
+      }
+    }
 
     result.subarray = subarray;
     result.buffer = result;
@@ -85,9 +98,9 @@
     return;
 
   Object.create = function objectCreate(proto) {
-    var constructor = function objectCreateConstructor() {};
-    constructor.prototype = proto;
-    return new constructor();
+    function Constructor() {}
+    Constructor.prototype = proto;
+    return new Constructor();
   };
 })();
 
@@ -334,7 +347,7 @@
   function changeList(element, itemName, add, remove) {
     var s = element.className || '';
     var list = s.split(/\s+/g);
-    if (list[0] == '') list.shift();
+    if (list[0] === '') list.shift();
     var index = list.indexOf(itemName);
     if (index < 0 && add)
       list.push(itemName);
@@ -380,19 +393,23 @@
 
 // Check console compatability
 (function checkConsoleCompatibility() {
-  if (typeof console == 'undefined') {
-    console = {
+  if (!('console' in window)) {
+    window.console = {
       log: function() {},
-      error: function() {}
+      error: function() {},
+      warn: function() {}
     };
   } else if (!('bind' in console.log)) {
     // native functions in IE9 might not have bind
     console.log = (function(fn) {
-      return function(msg) { return fn(msg); }
+      return function(msg) { return fn(msg); };
     })(console.log);
     console.error = (function(fn) {
-      return function(msg) { return fn(msg); }
+      return function(msg) { return fn(msg); };
     })(console.error);
+    console.warn = (function(fn) {
+      return function(msg) { return fn(msg); };
+    })(console.warn);
   }
 })();
 
@@ -426,4 +443,15 @@
     },
     enumerable: true
   });
+})();
+
+(function checkRangeRequests() {
+  // Safari has issues with cached range requests see:
+  // https://github.com/mozilla/pdf.js/issues/3260
+  // Last tested with version 6.0.4.
+  var isSafari = Object.prototype.toString.call(
+                  window.HTMLElement).indexOf('Constructor') > 0;
+  if (isSafari) {
+    PDFJS.disableRange = true;
+  }
 })();
