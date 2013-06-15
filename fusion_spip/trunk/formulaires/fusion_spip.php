@@ -105,8 +105,10 @@ function formulaires_fusion_spip_traiter_dist() {
 		);
 	} else {
 
+		@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+
 		$time_start = microtime(true);
-		spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
+		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
 		$principales = fusion_spip_lister_tables_principales($connect, true);
 		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers, $traite_versions);
@@ -155,7 +157,7 @@ function formulaires_fusion_spip_traiter_dist() {
 
 		$time_end = microtime(true);
 		$time = $time_end - $time_start;
-		spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+		fusion_spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 		$retour = array(
 			'message_ok' => _T('fusion_spip:message_import_ok')

@@ -182,7 +182,7 @@ function fusion_spip_inserer_table_principale($nom_table, $shema, $secteur, $con
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Table '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Table '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -266,7 +266,7 @@ function fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaire
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -321,7 +321,7 @@ function fusion_spip_liaisons_table_principale($nom_table, $shema, $cles_primair
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Liaisons '.$nom_table.' traitées : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Liaisons '.$nom_table.' traitées : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -445,7 +445,7 @@ function fusion_spip_vignettes_documents($connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Vignettes documents mises à jour : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Vignettes documents mises à jour : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 /**
@@ -483,9 +483,9 @@ function fusion_spip_import_documents($img_dir, $connect) {
 			// @todo: traiter les fichiers déja existant (les renommer)
 			if (file_exists($source_doc) && copy($source_doc, $dest_doc)) {
 				$documents_importes++;
-				//spip_log('Document copié : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
+				//fusion_spip_log('Document copié : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
 			} else {
-				//spip_log('Document échec : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
+				//fusion_spip_log('Document échec : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
 			}
 		}
 	}
@@ -518,19 +518,19 @@ function fusion_spip_import_documents($img_dir, $connect) {
 			// @todo: il existe surement mieux que copy() ?
 			if (copy($logo, $dest_logo)) {
 				$logos_importes++;
-				//spip_log('Logo copié : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
+				//fusion_spip_log('Logo copié : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
 			} else {
-				//spip_log('Logo échec : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
+				//fusion_spip_log('Logo échec : '.$logo.' > '.$dest_logo, 'fusion_spip_documents_'.$connect);
 			}
 		} else {
 			// objet lié pas trouvé ? logo obsolète, on ne fait rien
-			//spip_log($logo.' : liaison pas trouvée', 'fusion_spip_documents_'.$connect);
+			//fusion_spip_log($logo.' : liaison pas trouvée', 'fusion_spip_documents_'.$connect);
 		}
 	}
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Documents importés ('.$documents_importes.' docs / '.$logos_importes.' logos) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Documents importés ('.$documents_importes.' docs / '.$logos_importes.' logos) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 
@@ -618,7 +618,7 @@ function fusion_spip_maj_liens_internes($principales, $connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Liens internes mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Liens internes mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 }
 
@@ -693,7 +693,7 @@ function fusion_spip_maj_modeles($principales, $connect) {
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
-	spip_log('Modèles mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
+	fusion_spip_log('Modèles mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 /**
@@ -718,4 +718,9 @@ function fusion_spip_determiner_champs_texte($tables) {
 		}
 	}
 	return $objets;
+}
+
+function fusion_spip_log($message, $fichier){
+	//@todo: trouver un moyen de faire une sortie au fur et à mesure (avec ob_flush(); flush(); x2)
+	spip_log($message, 'fusion_spip_'.$fichier);
 }
