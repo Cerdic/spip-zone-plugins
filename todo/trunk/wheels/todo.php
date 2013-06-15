@@ -102,8 +102,8 @@ function tw_todo($t) {
 				$todos[$index_todo][$index_tache] = array(
 					'statut' => array(
 									'id' =>$statut,
-									'final' => $todo_statuts[$statut]['final'],
-									'alerte' => $todo_statuts[$statut]['alerte']),
+									'final' => $todo_statuts[$premier]['final'],
+									'alerte' => $todo_statuts[$premier]['alerte']),
 					'titre' => $titre,
 					'tags' => $tags,
 					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),
