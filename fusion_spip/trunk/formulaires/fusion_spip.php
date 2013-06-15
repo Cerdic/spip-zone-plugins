@@ -155,7 +155,7 @@ function formulaires_fusion_spip_traiter_dist() {
 			fusion_spip_extra_action($connect);
 		}
 
-		// recalculmer les secteurs et les statuts des rubriques et des articles
+		// recalculer les secteurs et les statuts des rubriques et des articles
 		include_spip('inc/rubriques');
 		calculer_rubriques();
 		propager_les_secteurs();
