@@ -53,9 +53,16 @@ function formulaires_fusion_spip_verifier_dist() {
 	// vérifier champs obligatoires
 	if (!_request('base')) {
 		$erreurs['base'] = _T('info_obligatoire');
-	} // vérifier la conformité du shéma de la base source
+	}
 	else {
-		if( _request('confirme_warning') != 'on' ){
+		// vérifier la version de la base source
+		$vhote = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"');
+		$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
+		if($vhote['valeur'] > $vsource['valeur']){
+			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions', array('vhote'=>$vhote['valeur'], 'vsource'=>$vsource['valeur']));
+		}
+		// vérifier la conformité du shéma de la base source
+		if( empty($erreurs) && _request('confirme_warning') != 'on' ){
 			$erreurs_shema = fusion_spip_comparer_shemas($connect, $principales, $auxiliaires);
 			if (count($erreurs_shema)) {
 				$erreurs['warning_shema'] = '- '.join('<br>- ', $erreurs_shema);
@@ -72,7 +79,7 @@ function formulaires_fusion_spip_verifier_dist() {
  */
 function formulaires_fusion_spip_traiter_dist() {
 	$erreurs = array();
-
+die();
 	// @todo: afficher une alerte sur formulaire_charger si max_execution_time ne peut pas être modifié
 	ini_set('max_execution_time', 0);
 

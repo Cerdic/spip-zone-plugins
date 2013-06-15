@@ -30,6 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<p>Importer une base de données d\'un autre site SPIP</p>
 		<p>Cette manipulation peut consommer beaucoup de ressources CPU et être longue si la base source est volumineuse, à déconseiller sur un hébergement mutualisé. </p>',
 	'explications_suppression' => 'Fonctionnalité à terminer',
+	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version :
+		<br/>- hôte est en v @vhote@
+		<br/>- source est en v @vsource@
+		<br/>Faites d\'abord une mise à jour du site source.',
 
 	// I
 	'img_dir' => 'Chemin physique des documents',

@@ -10,6 +10,8 @@
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
 			<li class="editer_base obligatoire[ (#GET{erreurs}|oui)erreur]">
 				<label for="base"><:fusion_spip:base:></label>
+				#SET{versions_bases,#ENV**{erreurs}|table_valeur{versions_bases}}
+				[<span class='erreur_message'>(#GET{versions_bases})</span>]
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select name="base" id="base">
 					<option value=""></option>
@@ -19,6 +21,7 @@
 				</select>
 				<p><:fusion_spip:base_desc:></p>
 			</li>
+
 			#SET{warning_shema,#ENV**{erreurs}|table_valeur{warning_shema}}
 			[<li class="editer_confirme_warning [ (#GET{warning_shema}|oui)erreur]">
 				<span class='erreur_message'>(#GET{warning_shema})</span>
