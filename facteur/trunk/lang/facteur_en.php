@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'Postman\'s configuration is now saved',
 	'configuration_adresse_envoi' => 'Sender\'s address configuration',
@@ -53,6 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender' => 'Return-Path (optional)',
 	'facteur_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender\'s email.',
 	'facteur_smtp_username' => 'Username:',
+
+	// M
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
 
 	// N
 	'note_test_configuration' => 'A test email will be sent to the "sender".',

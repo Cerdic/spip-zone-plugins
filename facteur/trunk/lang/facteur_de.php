@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'Die Konfiguration des Briedträgers wurde gespeichert',
 	'configuration_adresse_envoi' => 'Absendeadresse einstellen',
@@ -54,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender' => 'Fehlercodes (optional)',
 	'facteur_smtp_sender_descriptif' => 'Legt im Kopf der Mail die Empfängeradresse für Fehlermeldungen fest (bzw. den Return-Path), bestimmt ebenfalls die Absenderadresse bei Versand per SMTP.',
 	'facteur_smtp_username' => 'Benutzername:',
+
+	// M
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
 
 	// N
 	'note_test_configuration' => 'Eine Mail wird an die Absendeadresse geschickt (oder an den Webmaster).',

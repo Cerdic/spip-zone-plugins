@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.',
-	
+
 	// N
 	'note_test_configuration' => 'Un email sera envoyé à l\'adresse d\'envoi définie (ou celle du webmaster).',
 

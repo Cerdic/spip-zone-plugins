@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'La configuración del cartero fue guardada correctamente',
 	'configuration_adresse_envoi' => 'Configuración de la dirección de envío',
@@ -53,6 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender' => 'Rebote de errores (opcional)',
 	'facteur_smtp_sender_descriptif' => 'Indica en el encabezado del correo electrónico la dirección de correo electrónico de rebote de errores (o "Return-Path"), y en caso de un envío a través del método SMTP indica, también, la dirección del remitente.',
 	'facteur_smtp_username' => 'Nombre de usuario:',
+
+	// M
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
 
 	// N
 	'note_test_configuration' => 'Un correo electrónico se enviará a la dirección de envío definida (o aquélla del webmaster).',

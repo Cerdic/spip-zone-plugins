@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'Nastavenia Poštára sa uložili správne',
 	'configuration_adresse_envoi' => 'Nastavenie adresy odosielateľa',
@@ -53,6 +50,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
 	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.',
 	'facteur_smtp_username' => 'Používateľské meno:',
+
+	// M
+	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
 
 	// N
 	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).',
