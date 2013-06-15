@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'base' => 'Site source',
 	'base_desc' => '<p>La base de données du site source doit être <a href="'.generer_url_ecrire('admin_tech').'">déclarée comme base externe</a>.</p>
-		<p>Le site source doit être dans la même version que le site hôte.</p>',
+		<p>La base du site source doit être dans la même version que celle du site hôte ($spip_version_base)</p>',
 	'bouton_importer' => 'Démarrer la fusion',
 	'bouton_supprimer' => 'Supprimer la fusion',
 
