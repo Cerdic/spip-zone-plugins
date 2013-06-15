@@ -79,7 +79,7 @@ function formulaires_fusion_spip_verifier_dist() {
  */
 function formulaires_fusion_spip_traiter_dist() {
 	$erreurs = array();
-die();
+
 	// @todo: afficher une alerte sur formulaire_charger si max_execution_time ne peut pas être modifié
 	ini_set('max_execution_time', 0);
 
