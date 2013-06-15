@@ -5,14 +5,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Transforme la chaine représentant le numéro du commit en chaine formatée pour la Zone ou le Core
- * le cas échéans ou renvoie la chaine tel que.
+ * le cas échéans ou renvoie la chaine fournie en entrée.
  * Pour la Zone ou le Core on renvoie un lien vers le log de commit associé.
  *
  * @param string $valeur
  * 		Le numéro du commit sous la forme z11111 ou c22222 ou une chaine quelconque
  *
  * @return string
- * 		La valeur formatée.
+ * 		La valeur formatée pour la Zone ou le Core ou la valeur d'entrée.
  */
 function inc_formater_commit_dist($valeur) {
 	$commit = $valeur;
