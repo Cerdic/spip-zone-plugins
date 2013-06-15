@@ -2,13 +2,14 @@
 	<nom>Todo</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>1.1.6</version>
+	<version>1.1.7</version>
 	<etat>test</etat>
 	<slogan>Lister rapidement des choses à faire</slogan>
 	<description>Ajoute de nouveaux raccourcis typographiques permettant de décrire de manière simple des listes de choses à faire dans un contenu SPIP.</description>
 	<categorie>edition</categorie>
 	<icon>images/todo-48.png</icon>
-	
+	<lien>http://contrib.spip.net/Todo</lien>
+
 	<prefix>todo</prefix>
 	
 	<options>todo_options.php</options>
