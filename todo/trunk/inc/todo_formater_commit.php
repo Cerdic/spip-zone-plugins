@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  * 		La valeur formatée pour la Zone ou le Core ou la valeur d'entrée.
  */
-function inc_formater_commit_dist($valeur) {
+function inc_todo_formater_commit_dist($valeur) {
 	$commit = $valeur;
 
 	if (preg_match('#^(z|c)([0-9]+)$#Uis', $valeur, $m)) {
