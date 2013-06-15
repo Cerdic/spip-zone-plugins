@@ -26,10 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<p><strong>Plugin expérimental, en cours de développement !</strong></p>
 		<p>La fusion de bases de données peut consommer beaucoup de ressources CPU et être longue si la base source est volumineuse, à déconseiller sur un hébergement mutualisé. </p>',
 	'explications_suppression' => 'Fonctionnalité à terminer',
-	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version :
+	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
 		<br/>- hôte est en v @vhote@
-		<br/>- source est en v @vsource@
-		<br/>Faites d\'abord une mise à jour du site source.',
+		<br/>- source est en v @vsource@',
 
 	// I
 	'img_dir' => 'Chemin physique des documents',

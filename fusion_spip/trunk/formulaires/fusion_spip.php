@@ -37,6 +37,7 @@ function formulaires_fusion_spip_charger_dist() {
  * @return array
  */
 function formulaires_fusion_spip_verifier_dist() {
+	global $spip_version_base;
 	$erreurs = array();
 
 	$base = _request('base');
@@ -56,10 +57,9 @@ function formulaires_fusion_spip_verifier_dist() {
 	}
 	else {
 		// vérifier la version de la base source
-		$vhote = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"');
 		$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
-		if($vhote['valeur'] > $vsource['valeur']){
-			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions', array('vhote'=>$vhote['valeur'], 'vsource'=>$vsource['valeur']));
+		if($spip_version_base != $vsource['valeur']){
+			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions', array('vhote'=>$spip_version_base, 'vsource'=>$vsource['valeur']));
 		}
 		// vérifier la conformité du shéma de la base source
 		if( empty($erreurs) && _request('confirme_warning') != 'on' ){
