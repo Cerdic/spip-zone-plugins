@@ -22,11 +22,6 @@ function tw_todo($t) {
 	// Initialisation du html calculé
 	$html = $t;
 
-	// En attendant de la config
-	static $todo_statuts_finaux = array('termine', 'abandonne');
-	static $todo_alertes_mineures = array('arrete');
-	static $todo_alertes_majeures = array('alerte', 'inconnu');
-
 	// Extraction de lignes du texte
 	$lignes = explode("\n", trim($t[0]));
 	array_shift($lignes);
@@ -67,7 +62,7 @@ function tw_todo($t) {
 				$texte = trim(substr($texte, 1, strlen($texte)-1));
 
 				// -- le statut
-				$statut = $todo_statuts[$premier];
+				$statut = $todo_statuts[$premier]['id'];
 
 				// -- le titre, que l'on sépare du reste des informations complémentaires éventuelles
 				if (preg_match_all(_TODO_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
@@ -107,8 +102,8 @@ function tw_todo($t) {
 				$todos[$index_todo][$index_tache] = array(
 					'statut' => array(
 									'id' =>$statut,
-									'final' => (in_array($statut, $todo_statuts_finaux) ? true : false),
-									'alerte' => (in_array($statut, $todo_alertes_mineures) ? 'mineure' : (in_array($statut, $todo_alertes_majeures) ? 'majeure' : ''))),
+									'final' => $todo_statuts[$statut]['final'],
+									'alerte' => $todo_statuts[$statut]['alerte']),
 					'titre' => $titre,
 					'tags' => $tags,
 					'infos' => ($priorite_utilisee[$index_todo] ? array_merge($infos, array('priorite' => $priorite)) : $infos),

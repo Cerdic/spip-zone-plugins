@@ -8,13 +8,34 @@ $GLOBALS['spip_wheels']['raccourcis'][] = 'todo.yaml';
 
 // Définition des statuts de tâche
 $GLOBALS['todo_statuts'] = array(
-	'+' => 'afaire',
-	'o' => 'encours',
-	'-' => 'termine',
-	'x' => 'abandonne',
-	'=' => 'arrete',
-	'!' => 'alerte',
-	'?' => 'inconnu'
+	'+' => array(
+			'id' => 'afaire',
+			'final' => false,
+			'alerte' => ''),
+	'o' => array(
+			'id' => 'encours',
+			'final' => false,
+			'alerte' => ''),
+	'-' => array(
+			'id' => 'termine',
+			'final' => true,
+			'alerte' => ''),
+	'x' => array(
+			'id' => 'abandonne',
+			'final' => true,
+			'alerte' => ''),
+	'=' => array(
+			'id' => 'arrete',
+			'final' => false,
+			'alerte' => 'mineure'),
+	'!' => array(
+			'id' => 'alerte',
+			'final' => false,
+			'alerte' => 'majeure'),
+	'?' => array(
+			'id' => 'inconnu',
+			'final' => false,
+			'alerte' => 'majeure')
 );
 
 ?>
