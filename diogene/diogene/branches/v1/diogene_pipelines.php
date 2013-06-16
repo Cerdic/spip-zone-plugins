@@ -110,7 +110,7 @@ function diogene_editer_contenu_objet($flux){
 			 */
 			if (!test_espace_prive() && preg_match(",<li [^>]*class=[\"']editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
 				$contexte_selecteur = array(
-					'id_rubrique'=>$id_secteur,
+					'id_rubrique_limite'=>$id_secteur,
 					'type' => $type,
 					'id_parent'=>$args['contexte']['id_parent'],
 					'rubrique_principale' => $rubrique_principale);
@@ -125,6 +125,9 @@ function diogene_editer_contenu_objet($flux){
 				$contexte_selecteur['rubrique_principale'] = 'oui';
 				if($diogene['objet'] == 'emballe_media'){
 					$contexte_selecteur['rubrique_principale'] = 'non';
+				}
+				if($type == 'rubrique'){
+					$contexte_selecteur['id_rubrique'] = $args['contexte']['id_rubrique'];
 				}
 				$saisie_rubrique = recuperer_fond('formulaires/selecteur_rubrique',$contexte_selecteur);
 				if($args['contexte']['id_parent'] != 0){

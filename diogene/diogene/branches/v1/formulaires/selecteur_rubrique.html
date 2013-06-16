@@ -1,19 +1,19 @@
 #SET{prefix,#ENV{selecteur_type}|=={polyhier}|?{'rubrique|',''}}
 <B_rubriques>
-<BOUCLE_rubriques(RUBRIQUES){id_rubrique}{par num titre,titre}{tout}>
+<BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique_limite,0}}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
 <li class="editer_id_parent">
 	<B_ss_rubriques>
 	<label for="id_parent"><:diogene:texte_choix_rubrique:></label>
 	<select name="[(#ENV{selecteur_type}|=={polyhier}|?{parents[(#VAL{91}|chr)][(#VAL{93}|chr)],id_parent})]" id="id_parent">
 		[(#ENV{rubrique_principale}|=={oui}|oui)<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>]
-		<BOUCLE_ss_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}>
-			#SET{sep,''}
+		<BOUCLE_ss_rubriques(RUBRIQUES){id_rubrique != #ENV{id_rubrique}}{id_parent}{par num titre,titre}{tout}>
+			[(#SET{sep,''})]
 			<BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>#SET{sep,#GET{sep}|concat{&nbsp;&rsaquo;}}</BOUCLE_hierarchie>
 			<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>
 				[(#GET{sep})&nbsp;][(#TITRE|supprimer_numero)]
 			</option>
 			<B_ssss_rubriques>
-			<BOUCLE_ssss_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}>
+			<BOUCLE_ssss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
 			#SET{sep,''}
 			<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>
 				<BOUCLE_sshierarchie(HIERARCHIE){id_rubrique}>#SET{sep,#GET{sep}|concat{&nbsp;&rsaquo;}}</BOUCLE_sshierarchie>
