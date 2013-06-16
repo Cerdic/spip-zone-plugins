@@ -120,7 +120,7 @@ function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour
  *     Retours des traitements
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-
+	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	# on passe par un fichier temp car notre librairie fonctionne comme ca
 	//$tmp = _DIR_TMP . 'ics-'.md5('url');
 	//ecrire_fichier($tmp, str_replace("\r\n", "\n", $u));
@@ -156,27 +156,14 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
     			}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
-	#on insere les infos des événements dans la base spip_evenements
-	sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0'));
-	// 									'date_debut'=>'',
-	// 									'date_fin'=>'',
-	// 									'titre'=>'',
-	// 									'descriptif'=>str_replace('SUMMARY:', '', $summary_array["value"]),
-	// 									'lieu'=>'',
-	// 									'adresse'=>'',
-	// 									'inscription'=>'0',
-	// 									'places'=>'0',
-	// 									'horaire'=>'oui',
-	// 									'statut'=>'publie',
-	// 									'maj'=>'',
-	// 									'name'=>'',
-	// 									'origin'=>'',
-	// 									'notes'=>'',
-	// 									'attendee'=>$attendee );)
-
-  sql_insertq('spip_almanachs_liens',array('id_almanach'=>'1','id_objet'=>'2','objet'=>'evenement'));
+	#on insere les infos des événements dans la base 
+    $id_article = _request('id_article');
+	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0'));
+	#on associe l'évéenement à l'almanach
+	sql_insertq('spip_almanachs_liens',array('id_almanach'=>$chargement[1],'id_objet'=>$id_evenement,'objet'=>'evenement'));
  }
-	return formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+	return $chargement;
 }
 
 
