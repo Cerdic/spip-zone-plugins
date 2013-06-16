@@ -161,10 +161,13 @@ function diogene_editer_contenu_objet($flux){
 			 */
 			if (!test_espace_prive() && preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
 				$contexte_selecteur = array(
-					'id_rubrique'=>$id_secteur,
+					'id_rubrique_limite'=>$id_secteur,
 					'type' => $type,
 					'id_parent'=>$args['contexte']['id_parent'],
 					'rubrique_principale' => $rubrique_principale);
+				if($type == 'rubrique'){
+					$contexte_selecteur['id_rubrique'] = $args['contexte']['id_rubrique'];
+				}
 				if(count($regs2) > 0){
 					$class = "editer editer_parents";
 					$contexte_selecteur['selecteur_type'] = "polyhier";
