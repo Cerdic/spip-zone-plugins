@@ -292,8 +292,12 @@ function diogene_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
 	$pipeline = pipeline('diogene_objets', array());
 	if ($objet = substr($form,7) AND in_array($objet,array_keys($pipeline))){
-		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
-		//if (_request('id_parent') < 0) return $flux;
+		
+		
+		if($form == 'rubrique' &&
+			(_request('id_rubrique') == _request('id_parent'))){
+				$flux['data']['id_parent'] = 'Vous ne pouvez pas mettre cette rubrique dans elle-même.';
+		}
 
 		$id_table_objet = id_table_objet($objet);
 		$flux = pipeline('diogene_verifier',
@@ -304,6 +308,7 @@ function diogene_formulaire_verifier($flux){
 				'data' => $flux['data']
 			)
 		);
+		
 		$messages = $flux;
 		unset($messages['message_ok']);
 		if(count($messages) > 0){
@@ -595,8 +600,7 @@ function diogene_diogene_ajouter_saisies($flux){
  * @return array $flux le contexte modifié
  */
 function diogene_diogene_verifier($flux){
-	$id_article = _request('id_article');
-	$erreurs = &$flux['args']['erreurs'];
+	$erreurs = $flux['args']['erreurs'];
 
 	include_spip('inc/date_gestion');
 	
