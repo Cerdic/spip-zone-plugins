@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_diogene_multiple_page' => 'Vous ne pouvez avoir qu\'un seul template "page" sur ce site',
 	'erreur_droits_objet_publier' => 'Vos droits actuels ne vous autorisent pas à publier ce type d\'objet.',
 	'erreur_forums' => 'Erreur dans le choix de la configuration des forums',
+	'erreur_id_parent_id_rubrique' => 'Vous ne pouvez pas mettre cette rubrique dans elle-même.',
 	'erreur_identifiant_existant' => 'Cet identifiant est déjà existant',
 	'erreur_objet_diogene_max' => 'Le nombre de masques maximum (@max@) pour ce type d\'objet (@objet@) est déjà atteint.',
 	'erreur_objet_non_diogene' => 'Ce type d\'objet n\'est pas pris en compte (@objet@).',

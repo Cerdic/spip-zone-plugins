@@ -336,6 +336,11 @@ function diogene_formulaire_verifier($flux){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
 		//if (_request('id_parent') < 0) return $flux;
 
+		if($objet == 'rubrique' &&
+			(_request('id_rubrique') == _request('id_parent'))){
+				$flux['data']['id_parent'] = _T('diogene:erreur_id_parent_id_rubrique');
+		}
+			
 		$flux['data'] = pipeline('diogene_verifier',
 			array(
 				'args' => array(
@@ -480,6 +485,9 @@ function diogene_pre_edition($flux){
 	if(in_array($flux['args']['type'],array_keys($pipeline)) && ($flux['args']['action']=='modifier'))
 		$flux = pipeline('diogene_traiter',$flux);
 
+	/**
+	 * Attention au herit envoyé dans le privé
+	 */
 	if(($flux['args']['table'] == 'spip_articles') && _request('changer_lang') && _request('changer_lang') != 'herit'){
 		$flux['data']['lang'] = _request('changer_lang');
 		$flux['data']['langue_choisie'] = 'oui';
