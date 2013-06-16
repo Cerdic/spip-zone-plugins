@@ -294,7 +294,7 @@ function diogene_formulaire_verifier($flux){
 	if ($objet = substr($form,7) AND in_array($objet,array_keys($pipeline))){
 		
 		
-		if($form == 'rubrique' &&
+		if($objet == 'rubrique' &&
 			(_request('id_rubrique') == _request('id_parent'))){
 				$flux['data']['id_parent'] = 'Vous ne pouvez pas mettre cette rubrique dans elle-même.';
 		}
