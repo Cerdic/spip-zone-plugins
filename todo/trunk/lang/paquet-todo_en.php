@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'todo_description' => 'Adds new typographical shortcuts to describe a simple list of things to do in a SPIP content.',
+	'todo_description' => 'Adds new typographical shortcuts to describe a simple list of things to do in a SPIP content.', # MODIF
 	'todo_slogan' => 'Quickly list things to do'
 );
 

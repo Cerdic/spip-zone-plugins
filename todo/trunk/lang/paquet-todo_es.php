@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'todo_description' => 'Añade nuevos accesos directos tipográficos que permiten describir de forma simple listas de cosas para hacer en un contenido SPIP.',
+	'todo_description' => 'Añade nuevos accesos directos tipográficos que permiten describir de forma simple listas de cosas para hacer en un contenido SPIP.', # MODIF
 	'todo_slogan' => 'Listar rapidemente cosas para hacer'
 );
 
