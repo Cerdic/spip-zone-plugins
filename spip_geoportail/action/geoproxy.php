@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
     // ----------------------------------------------------------
     // global variables :
-    global $debug, $debug_html, $sUrl, $sReponse, $proxy_host, $proxy_port, $content_types, $url_autorisees;
+    global $debug, $debug_html, $sUrl, $sReponse, $proxy_host, $proxy_port, $content_types;
     $debug= 0;
     $debug_html= 0;
     $sUrl= '';
@@ -45,14 +45,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
         'text/plain',
         'text/html');
     // ----------------------------------------------------------
-    // Table des sites autorises (dans fichier Options)
-    $geoportail_url_autorisees = $GLOBALS['geoportail_url_autorisees'];
-    if ($geoportail_url_autorisees AND is_array($geoportail_url_autorisees))
-		$url_autorisees = $geoportail_url_autorisees;
-	else $url_autorisees = array();
-	// Pour les recherches par adresses
-	$url_autorisees[] = "http://wxs.ign.fr/";
-
     //
     // écriture d'un message de log
     function carp($msg) {
@@ -201,18 +193,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
     }
     
 
-    // On n'autorise pas a se connecter a n'importe quoi
-    function autoriser_connection_site ($url)
-    {	global $url_autorisees;
-		$url = urldecode($url);
-		for ($i=0; $i<sizeof($url_autorisees); $i++)
-		{	if (substr($url, 0, strlen($url_autorisees[$i])) == $url_autorisees[$i]) return true;
-		}
-		return false;
-    }
-
 // ----------------------------------------------------------
 // programme principal:
+//
 function action_geoproxy_dist() 
 {
     // on accept que GET/POST (pour l'instant)
@@ -225,7 +208,8 @@ function action_geoproxy_dist()
 		include_spip ('inc/geoportail_protect');
 		if (!geoportail_good_referer('geoportail')) { echo "<error class='Bad Referer'/>"; exit; }
 		//-- Interdir l'acces a des sites non autorises
-		if (autoriser_connection_site($sUrl))
+		include_spip('inc/geoportail_autorisations');
+		if (autoriser('geoproxy', 'connecter', 0, NULL, Array('url'=>$sUrl)))
 		{	carp("Proxying:$sUrl");
 			proxy($sUrl);
 			exit;
