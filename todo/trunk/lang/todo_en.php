@@ -7,10 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// C
-	'configurer_bando' => 'Things to do',
-	'configurer_titre' => 'Configure the list of things to do',
-
 	// L
 	'label_commit' => 'Révision', # NEW
 	'label_debut' => 'Début', # NEW
