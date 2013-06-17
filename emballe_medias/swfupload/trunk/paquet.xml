@@ -1,7 +1,7 @@
 <paquet
 	prefix="swfupload"
 	categorie="outil"
-	version="1.0.0"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/swfupload_64.png"
@@ -12,5 +12,5 @@
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<lib nom="SWFUpload" lien="http://swfupload.googlecode.com/files/SWFUpload%20v2.2.0.1%20Core.zip" />
+	<lib nom="SWFUpload_v2.2.0.1_Core" lien="http://swfupload.googlecode.com/files/SWFUpload%20v2.2.0.1%20Core.zip" />
 </paquet>
