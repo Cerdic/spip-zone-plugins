@@ -9,11 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_attributs_html_interdits' => 'No está permitido el uso de atributos html <tt>class</tt> ou <tt>style</tt>',
-	'erreur_blacklist' => 'Vous avez été mis sur liste noire, vous ne pouvez plus poster de message.', # NEW
-	'erreur_jeton' => 'No se puede tener en cuenta su mensaje. ¡Gracias a presentar de nuevo!',
-	'erreur_spam' => 'No se puede tener en cuenta su mensaje!',
-	'erreur_spam_doublon' => 'Un mensaje idéntico ya existe!',
-	'erreur_spam_ip' => 'También muchos comentarios en detrimento de la calidad!',
+	'erreur_blacklist' => 'Usted ha sido metido en lista negra, no puede enviar más mensaje.',
+	'erreur_jeton' => 'Su mensaje no ha sido tomado en cuenta. ¡Gracias por enviarlo de nuevo!',
+	'erreur_spam' => '¡Imposible tomar en cuenta su mensaje!',
+	'erreur_spam_doublon' => '¡Un mensaje idéntico ya existe!',
+	'erreur_spam_ip' => '¡Demasiados comentarios perjudiciales para la calidad!',
 	'erreur_url_deja_spammee' => 'Este mensaje contiene enlaces sospechos de ser SPAM. Gracias por eliminarlos.',
 
 	// F
