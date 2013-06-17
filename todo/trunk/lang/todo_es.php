@@ -7,34 +7,44 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// C
-	'configurer_bando' => 'Cosas para hacer',
-	'configurer_titre' => 'Configurar la lista de cosas para hacer',
-
 	// L
+	'label_commit' => 'Revisión',
+	'label_debut' => 'Comienzo
+',
+	'label_fin' => 'Fin',
+	'label_priorite' => '!',
 	'label_statut' => 'Estatus',
 	'label_titre' => 'Título',
+	'label_version' => 'Versión',
 
 	// O
 	'outil_inserer_todo' => 'Insertar un "to-do"',
+	'outil_inserer_todo_egal' => 'Insertar una tarea detenida',
+	'outil_inserer_todo_exclamation' => 'Insertar una tarea que necesita una acción',
+	'outil_inserer_todo_interrogation' => 'Insertar una tarea cuyo estatus es desconocido',
 	'outil_inserer_todo_moins' => 'Insertar una tarea terminada',
 	'outil_inserer_todo_o' => 'Insertar una tarea en curso',
 	'outil_inserer_todo_plus' => 'Insertar una tarea para hacer',
+	'outil_inserer_todo_x' => 'Insertar una tarea abandonada',
 
 	// S
-	'statut_abandonne' => 'Abandonné', # NEW
+	'statut_abandonne' => 'Abandonado',
 	'statut_afaire' => 'Para hacer',
-	'statut_alerte' => 'Alerte, nécessite une action', # NEW
-	'statut_arrete' => 'Arrêté', # NEW
+	'statut_alerte' => 'Alerta, necesita una acción',
+	'statut_arrete' => 'Detenido',
 	'statut_encours' => 'En curso',
-	'statut_inconnu' => 'Alerte, statut non connu', # NEW
+	'statut_inconnu' => 'Alerta, estatus no conocido',
 	'statut_termine' => 'Terminado',
 
 	// T
 	'tri_cle' => 'Restablecer en orden',
-	'tri_priorite' => 'Trier par priorité', # NEW
+	'tri_commit' => 'Clasificar por revisión',
+	'tri_debut' => 'Clasificar por fecha de inicio',
+	'tri_fin' => 'Clasificar por fecha de finalización',
+	'tri_priorite' => 'Clasificar por prioridad',
 	'tri_statut' => 'Clasificar por estatus',
-	'tri_titre' => 'Clasificar por título'
+	'tri_titre' => 'Clasificar por título',
+	'tri_version' => 'Clasificar por versión'
 );
 
 ?>

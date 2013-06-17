@@ -8,42 +8,42 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_commit' => 'Révision', # NEW
-	'label_debut' => 'Début', # NEW
-	'label_fin' => 'Fin', # NEW
-	'label_priorite' => '!', # NEW
+	'label_commit' => 'Commit',
+	'label_debut' => 'Start',
+	'label_fin' => 'End',
+	'label_priorite' => '!',
 	'label_statut' => 'Status',
 	'label_titre' => 'Title',
-	'label_version' => 'Version', # NEW
+	'label_version' => 'Version',
 
 	// O
 	'outil_inserer_todo' => 'Insert a todo list',
-	'outil_inserer_todo_egal' => 'Insérer une tâche arrêtée', # NEW
-	'outil_inserer_todo_exclamation' => 'Insérer une tâche nécessitant une action', # NEW
-	'outil_inserer_todo_interrogation' => 'Insérer une tâche dont le statut est inconnu', # NEW
-	'outil_inserer_todo_moins' => 'Insert a task done',
-	'outil_inserer_todo_o' => 'Insert a current task',
-	'outil_inserer_todo_plus' => 'Insert a task to do',
-	'outil_inserer_todo_x' => 'Insérer une tâche abandonnée', # NEW
+	'outil_inserer_todo_egal' => 'Insert an halted task',
+	'outil_inserer_todo_exclamation' => 'Insert a task needing an action',
+	'outil_inserer_todo_interrogation' => 'Insert an unknown status task',
+	'outil_inserer_todo_moins' => 'Insert a task completed',
+	'outil_inserer_todo_o' => 'Insert a processing task',
+	'outil_inserer_todo_plus' => 'Insert a not started task',
+	'outil_inserer_todo_x' => 'Insert an aborted task',
 
 	// S
-	'statut_abandonne' => 'Abandoned',
-	'statut_afaire' => 'To do',
-	'statut_alerte' => 'Alert, requires action',
-	'statut_arrete' => 'Stopped',
-	'statut_encours' => 'Ongoing',
+	'statut_abandonne' => 'Aborted',
+	'statut_afaire' => 'Not started',
+	'statut_alerte' => 'Alert, needs action',
+	'statut_arrete' => 'Halted',
+	'statut_encours' => 'In process',
 	'statut_inconnu' => 'Alert, status unknown',
-	'statut_termine' => 'Done',
+	'statut_termine' => 'Completed',
 
 	// T
-	'tri_cle' => 'Put back in order',
-	'tri_commit' => 'Trier par révision', # NEW
-	'tri_debut' => 'Trier par date de début', # NEW
-	'tri_fin' => 'Trier par date de fin', # NEW
-	'tri_priorite' => 'Trier par priorité', # NEW
+	'tri_cle' => 'Sort back by order',
+	'tri_commit' => 'Sort by commit',
+	'tri_debut' => 'Sort by start date',
+	'tri_fin' => 'Sort by end date',
+	'tri_priorite' => 'Sort by priority',
 	'tri_statut' => 'Sort by status',
 	'tri_titre' => 'Sort by title',
-	'tri_version' => 'Trier par version' # NEW
+	'tri_version' => 'Sort by version'
 );
 
 ?>
