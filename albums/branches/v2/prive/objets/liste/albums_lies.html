@@ -11,39 +11,60 @@
 <B_liste_album>
 #ANCRE_PAGINATION
 <BOUCLE_liste_album(ALBUMS liens){objet}{id_objet}{statut ?== #ENV{statut}}{!par date, vu, titre}{pagination #ENV{nb,10}}>
+<a name='album#ID_ALBUM'></a>
 #SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
-#SET{ajouter, #ENV{ajout_doc_album}|=={#ID_ALBUM}|?{oui,''}}
+#SET{ajouter, #ENV{albums}|=={remplir}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
+#SET{modifier, #ENV{albums}|=={modifier}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
+#SET{remplir_modifier, #ENV{albums}|match{remplir|modifier}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
+#SET{retour_propre, #SELF|parametre_url{albums,''}|parametre_url{id_album,''}|parametre_url{ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
 
 [(#REM) classe .item : pour beneficier du ajaxreload quand edition du portfolio dans une modalbox ]
-[(#BOITE_OUVRIR{'','simple album item'})]
+[(#BOITE_OUVRIR{'',#VAL{simple album}|concat{#GET{remplir_modifier}|?{' actif'}}})]
 
 	[(#REM) TITRE + infos ]
 	<div class='header'>
 		<div class='id'>
 			[(#STATUT|puce_statut{album,#ID_ALBUM})]
-			[<a class='numero' href="[(#ID_ALBUM|generer_url_entite{album})]">N°(#ID_ALBUM)</a>]
-			[(#VU|=={oui}|oui) [(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>,vu}|inserer_attribut{title,<:medias:document_vu:>})] ]
+			[<a class='numero' href="[(#ID_ALBUM|generer_url_entite{album})]"><:info_numero_abbreviation:>(#ID_ALBUM)</a>]
+			[(#VU|=={oui}|oui)
+			[(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>,vu}|inserer_attribut{title,<:medias:document_vu:>})]
+			]
 		</div>
 		[<div class='titre'><h4 class='#EDIT{titre}'>(#TITRE|couper{80}|sinon{<:info_sans_titre:>})</h4></div>]
 	</div>
 
 	[(#REM) CONTENU : vignettes ]
+	[(#GET{modifier}|non)
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_contenu, id_album, hauteur=60, ajax=documents})]
+	]
 
 	[(#REM) Formulaire ajout document ]
 	[(#GET{ajouter}|oui)
-	<a href="[(#SELF|parametre_url{ajout_doc_album,''}|parametre_url{id_album_ajoute,''})]" class='ajax bouton_fermer'>
-		[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]
+	<a href="[(#GET{retour_propre})]" class='ajax bouton_fermer'>
+		\[ <:bouton_fermer:> \]
 	</a>
 	<div class='ajax'>
 		#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album}
 	</div>
 	]
 
+	[(#REM) Formulaires modifications ]
+	[(#GET{modifier}|oui)
+	<a href="[(#GET{retour_propre})]" class='ajax bouton_fermer'>
+		\[ <:bouton_fermer:> \]
+	</a>
+	[(#REM) Formulaire édition album ]
+	<div class='ajax'>
+	[(#FORMULAIRE_EDITER_ALBUM{#ID_ALBUM, #GET{retour_propre}})]
+	</div>
+	[(#REM) Formulaire édition portfolio ]
+	[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, objet=album, id_objet=#ID_ALBUM, id_unique=#VAL{album}|concat{#ID_ALBUM}, ajax=documents})]
+	]
+
 #BOITE_PIED
 
-	[(#GET{ajouter}|non)
+	[(#GET{remplir_modifier}|non)
 	<div class='footer actions'>
 
 		[(#REM) BOUTON : dissocier ]
@@ -59,20 +80,22 @@
 		)<span class='reveal'> | </span>]
 
 		[(#REM) BOUTON : modifier ]
-		[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
-			bouton=portfolio,
-			id_album=#ID_ALBUM,
-			retour=#SELF|ancre_url{albums},
-			afficher=#LISTE{label},
-			class=reveal}
-		)<span class='reveal'> | </span>]
+		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="[(#SELF|parametre_url{albums,modifier}|parametre_url{id_album,#ID_ALBUM})]" class="ajax modifier reveal" title="<:album:icone_modifier_album:>"><:album:texte_modifier:></a><span class='reveal'> | </span>
+		]
 
 		[(#REM) BOUTON : Ajouter document ]
-		<a href="[(#SELF|parametre_url{ajout_doc_album,#ID_ALBUM}|parametre_url{ajouter,''})]" class='ajax ajouter'>
+		<a href="[(#SELF|parametre_url{albums,remplir}|parametre_url{id_album,#ID_ALBUM}|parametre_url{ajouter,''})]" class='ajax ajouter'>
 			<strong><:medias:bouton_ajouter_document:></strong>
 		</a>
 
 	</div>
+	]
+
+	[(#GET{modifier}|oui)
+	<a href="[(#GET{retour_propre})]" class='ajax bouton_fermer'>
+		\[ <:bouton_fermer:> \]
+	</a>
 	]
 
 #BOITE_FERMER

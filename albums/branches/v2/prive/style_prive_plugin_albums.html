@@ -113,8 +113,9 @@
 .albums .album .bd,
   .albums .album .hd		{ padding: 0;}
 .albums .album .inner		{ border: 1px solid #e5e5e5; background-color: transparent; }
-.album.actif .inner		{ border-color: #GET{claire};}
-.albums .album .inner:hover	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+.album.actif .inner		{ border-color: #GET{claire}; }
+.album.actif .bd		{ padding-left: 10px; padding-right: 10px; }
+.album .inner:hover		{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 /* header */
 .album .header,
   .album .footer 		{padding: .2em;}
@@ -149,6 +150,7 @@
 				}
 .placeholder-album		{ background-color:#GET{claire}; box-shadow:-1px 1px 1px #GET{foncee};}
 /* boutons */
+.album .bouton_fermer		{ margin: 10px 0; }
 .album .actions,
   .album .actions button	{ font-size: x-small; text-align: #ENV{right};}
 .album .actions a		{ /*font-weight: bold;*/ }
@@ -168,8 +170,9 @@
 .album .doc .retirer button.submit,
   .album .doc .retirer button.submit:hover{border: 0;}
 #portfolios .doc .retirer	{ display:none; } /* quand doc d'un album deplace dans portfolios */
-/* formulaire ajout */
-.album .formulaire_joindre_document { margin: 0 .5em .5em; }
+/* formulaires */
+.album .formulaire_joindre_document { margin: 0 0 10px; }
+.album .formulaire_editer_album { margin-top: 0; }
 
 /* DRAG DROP */
 .formulaire_albums_deplacer_documents .fermer { float: #ENV{right}; cursor: pointer; }
@@ -235,6 +238,17 @@
 /*============================ 
   === BOITE COLONNE GAUCHE === 
   ============================*/
+.lat .albums .menu .item	{ padding: .3em 0; }
+.lat .albums .menu .item img	{ vertical-align: middle; }
+.lat .albums .menu .item a	{ display: block; }
+.lat .albums .album		{ margin: 0; }
+.lat .album .inner		{ border: 0; }
+.lat .album .liste_docs		{ padding: 0; border-top: 0; text-align: center;}
+.lat .album .formulaire_joindre_document {margin: 0;}
+.lat .album .actions,
+  .lat .album .actions button	{ font-size: 1em; }
+
+/* */
 .album .raccourcis		{ padding: 0; }
 .album .raccourcis .toggle	{
 				display: block; margin: .6em 0;

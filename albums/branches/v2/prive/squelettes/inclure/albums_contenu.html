@@ -21,13 +21,13 @@
 	<B_contenu>
 	#ANCRE_PAGINATION
 	<BOUCLE_contenu(DOCUMENTS){id_album}{!par media, date}{tout}{pagination #ENV{nb,30}}>
-	#SET{titre, #VAL{N° }|concat{#ID_DOCUMENT,' - '}|concat{#EXTENSION|strtoupper}|concat{' - ',#TAILLE|taille_en_octets}|concat{' - ',#TITRE|couper{20}|sinon{#FICHIER|basename}}|attribut_html}
+	#SET{titre, #VAL{N° }|concat{#ID_DOCUMENT,' - '}|concat{#EXTENSION}|concat{' - ',#TAILLE|taille_en_octets}|concat{' - ',#TITRE|couper{20}|sinon{#FICHIER|basename}}|attribut_html}
 	[<li class='doc'[(#REM) style="#GET{style}" ]data-id_document="#ID_DOCUMENT" data-objet="album" data-id_objet="#ID_ALBUM">
 		<figure>
 		<a href="#URL_DOCUMENT" rel="album#ID_ALBUM" type="#MIME_TYPE" title="#GET{titre}"[ alt="(#DESCRIPTIF|couper{100}|attribut_html)"]>
 		(#LOGO_DOCUMENT|image_reduire{#GET{largeur},#GET{hauteur}})
 		</a>
-		<figcaption>#ID_DOCUMENT[ - (#EXTENSION|strtoupper)]</figcaption>
+		<figcaption>[<:info_numero_abbreviation:>(#ID_DOCUMENT)][ - (#EXTENSION)]</figcaption>
 		</figure>
 		[(#REM) Bouton pour retirer le document ]
 		[(#AUTORISER{modifier,album, #ID_ALBUM}|oui)
