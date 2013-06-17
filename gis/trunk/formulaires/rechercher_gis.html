@@ -4,7 +4,8 @@
 <B_recherche>
 	<ul class="liste_items">
 	<BOUCLE_recherche(GIS){titre LIKE %(#ENV{recherche_gis})%}{doublons objet}>#SET{id_gis,#ID_GIS}
-	[<li class="item">(#TITRE) 
+	#SET{ou, #LISTE{#VILLE, #PAYS}|array_filter|join{", "}}
+	[<li class="item">(#TITRE)[ ((#GET{ou}))]
 		<div class="actions">
 			[(#BOUTON_ACTION{<:gis:bouton_lier:>,[(#URL_ACTION_AUTEUR{editer_lien_gis,lier/#GET{id_gis}/#ENV{objet}/#ENV{id_objet},#SELF})],ajax})]
 		</div>
