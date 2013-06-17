@@ -6,7 +6,7 @@
 		titre             titre personnalisé
                                   'non' pour cacher le titre
 		titraille         niveau du titre <hx>
-		                  défaut: 3
+		                  défaut: 4
 		balise_titraille  si on veut autre chose que <hx> pour baliser le titre
 		                  ex: 'strong', 'em'...
 		statut            statut de l'album
@@ -30,7 +30,7 @@
 ]<BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
 <B_documents_joints>
 <div class="album liste p #ENV{align}" id="album#ID_ALBUM">
-	#SET{balise_titraille, #ENV*{balise_titraille}|replace{'<|>',''}|sinon{#VAL{'h'}|concat{#ENV{titraille,3}}}}
+	#SET{balise_titraille, #ENV*{balise_titraille}|replace{'<|>',''}|sinon{#VAL{'h'}|concat{#ENV{titraille,4}}}}
 	[(#ENV{titre}|!={non}|oui)
 		[<(#GET{balise_titraille})>][(#ENV{titre,#_album:TITRE})][</(#GET{balise_titraille})>]
 	]
