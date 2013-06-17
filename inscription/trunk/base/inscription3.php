@@ -71,7 +71,7 @@ function inscription3_declarer_champs_extras($champs = array()){
 							),
 							'verifier' => array()
 						);
-						$array_defaut['options'] = array_merge($array_defaut['options'],(!test_espace_prive() && ($GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'));
+						$array_defaut['options'] = array_merge($array_defaut['options'],(!test_espace_prive() && (isset($GLOBALS['visiteur_session']['statut']) && $GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'));
 						$array['saisie'] = isset($definitions_champs[$cle]['saisie']) ? $definitions_champs[$cle]['saisie'] : $array_defaut['saisie'];
 						$array['options'] = array_merge($array_defaut['options'],is_array($definitions_champs[$cle]['options']) ? $definitions_champs[$cle]['options'] : array());
 						$array['verifier'] = array_merge($array_defaut['verifier'],is_array($definitions_champs[$cle]['verifier']) ? $definitions_champs[$cle]['verifier'] : array());
@@ -90,7 +90,7 @@ function inscription3_declarer_champs_extras($champs = array()){
 							'verifier' => array()
 						);
 						$champs['spip_auteurs'][$cle]['source'] = 'inscription3';
-						$champs['spip_auteurs'][$cle]['options'] = array_merge($champs['spip_auteurs'][$cle]['options'],(!test_espace_prive() && ($GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'));
+						$champs['spip_auteurs'][$cle]['options'] = array_merge($champs['spip_auteurs'][$cle]['options'],(!test_espace_prive() && (isset($GLOBALS['visiteur_session']['statut']) && $GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'));
 				}
 			}
 		}
