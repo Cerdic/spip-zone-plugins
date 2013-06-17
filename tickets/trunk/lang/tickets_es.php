@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_non_modifiee' => 'Asignación no actualizada',
 	'assignation_supprimee' => 'La asignación de este ticket ha sido eliminada.',
 	'assigne_a' => 'Asignado a:',
-	'assigne_a_th' => 'Assigné à', # NEW
+	'assigne_a_th' => 'Asignado a',
 	'assignes_a' => 'Asignados a',
 	'autres_tickets_ouverts' => 'Otros tickets abiertos',
 
@@ -37,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Autorizar por lista de autores',
 	'cfg_lbl_autorisation_statuts' => 'Autorizar por estatus de autor',
 	'cfg_lbl_autorisation_webmestre' => 'Autorizar solamente a los webmasters',
-	'cfg_lbl_autoriser_modifier' => 'Ceux qui peuvent modifier le ticket', # NEW
-	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)', # NEW
+	'cfg_lbl_autoriser_modifier' => 'Aquéllos que pueden modificar el ticket',
+	'cfg_lbl_autoriser_modifier_case' => 'Autorizar a aquéllos que tienen la posibilidad de modificar el ticket (autor y asignado especialmente)',
 	'cfg_lbl_cacher_moteurs' => 'Esconder los motores de búsqueda',
 	'cfg_lbl_case_joindre_fichiers' => 'Autorizar a adjuntar uno o más archivos en los tickets',
 	'cfg_lbl_case_notification_publique' => 'Ser notificado en el espacio público antes que en el espacio privado',
@@ -57,10 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Método de autorización',
 	'cfg_lbl_versions' => 'Versiones',
 	'cfg_lgd_autorisation_assigner' => 'Asignar los tickets',
-	'cfg_lgd_autorisation_assigneretre' => 'Être assigné à un ticket', # NEW
+	'cfg_lgd_autorisation_assigneretre' => 'Estar asignado a un ticket',
 	'cfg_lgd_autorisation_commenter' => 'Comentar los tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Escribir los tickets',
-	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets', # NEW
+	'cfg_lgd_autorisation_epingler' => 'Anclar los tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modificar los tickets',
 	'cfg_lgd_champs_optionnels' => 'Campos opcionales',
 	'cfg_lgd_champs_options_autres' => 'Otras opciones',
@@ -68,13 +68,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_tickets' => 'Tickets - Configuración del plugin',
 	'champ_assigner' => 'Asignar a:',
 	'champ_composant' => 'Componente:',
-	'champ_composant_th' => 'Composant', # NEW
+	'champ_composant_th' => 'Componente',
 	'champ_createur' => 'Creado por:',
 	'champ_date' => 'Fecha:',
 	'champ_date_debut' => 'A partir de:',
 	'champ_date_fin' => 'Hasta:',
 	'champ_date_modif' => 'Modificado el',
-	'champ_date_th' => 'Date', # NEW
+	'champ_date_th' => 'Fecha',
 	'champ_description' => 'Descripción del ticket',
 	'champ_exemple' => 'Ejemplo:',
 	'champ_fichier' => 'Adjuntar un archivo',
@@ -82,31 +82,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_id_assigne' => 'Asignado a:',
 	'champ_id_auteur' => 'Autor:',
 	'champ_importance' => 'Importancia:',
-	'champ_importance_th' => 'Importance', # NEW
+	'champ_importance_th' => 'Importancia',
 	'champ_jalon' => 'Hito:',
-	'champ_jalon_th' => 'Jalon', # NEW
+	'champ_jalon_th' => 'Milestone',
 	'champ_maj' => 'Actualizado:',
 	'champ_maj_long' => 'Fecha de actualización',
-	'champ_maj_th' => 'MAJ', # NEW
+	'champ_maj_th' => 'actualizado',
 	'champ_navigateur' => 'Navegador:',
 	'champ_nouveau_commentaire' => 'Nuevo comentario',
 	'champ_projet' => 'Proyecto:',
-	'champ_projet_th' => 'Projet', # NEW
+	'champ_projet_th' => 'Proyecto',
 	'champ_recherche' => 'Búsqueda:',
 	'champ_severite' => 'Severidad:',
-	'champ_severite_th' => 'Sévérité', # NEW
+	'champ_severite_th' => 'Gravedad',
 	'champ_statut' => 'Estatus:',
-	'champ_statut_th' => 'Statut', # NEW
+	'champ_statut_th' => 'Estatus',
 	'champ_sticked' => 'Anclar:',
 	'champ_texte' => 'Texto',
 	'champ_titre' => 'Resumen',
-	'champ_titre_th' => 'Résumé', # NEW
+	'champ_titre_th' => 'Resumen',
 	'champ_titre_ticket' => 'Título del ticket',
 	'champ_type' => 'Tipo:',
-	'champ_type_th' => 'Type', # NEW
+	'champ_type_th' => 'Tipo',
 	'champ_url_exemple' => 'URL del ejemplo',
 	'champ_version' => 'Versión:',
-	'champ_version_th' => 'Version', # NEW
+	'champ_version_th' => 'Versión',
 	'changement_statut_mail' => 'El estado de este ticket ha sido modificado de "@ancien@" a "@nouveau@".',
 	'classement_assigne' => 'Tickets por asignación',
 	'classement_asuivre' => 'Tickets a seguir',
@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_saisie_superieure' => 'La fecha máxima ha de ser superior a la fecha mínima',
 	'erreur_texte_longueur_mini' => 'La longitud mínima del texto es de @nb@ caracteres.',
 	'erreur_verifier_formulaire' => 'Confirme su formulario',
-	'explication_autoriser_modifier_base' => 'Automatiquement, le créateur du ticket et l\'utilisateur qui y est assigné peut le modifier. La configuration suivante permet de définir les utilisateurs supplémentaires pouvant modifier les tickets.', # NEW
+	'explication_autoriser_modifier_base' => 'Automáticamente, el creador del ticket y el usuario asignado pueden modificarlo. La configuración siguiente permite definir los usuarios complementarios que pueden modificar los tickets. ',
 	'explication_champ_sticked' => 'Los tickets anclados se muestran siempre primero, cualquiera que sea su estatus.',
 	'explication_description_ticket' => 'Describa lo más concretamente posible la necesidad o el problema.
 Indique en particular si se ha producido sistemáticamente u ocasionalmente.
@@ -145,19 +145,19 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'icone_modifier_ticket' => 'Modificar este ticket',
 	'icone_retour_ticket' => 'Volver al ticket',
 	'info_commentaire' => 'Comentario #@id@:',
-	'info_demande' => '@nb@ demande', # NEW
-	'info_demande_fermee' => '@nb@ fermée', # NEW
-	'info_demande_ouverte' => '@nb@ ouverte', # NEW
-	'info_demande_resolue' => '@nb@ résolue', # NEW
-	'info_demandes' => '@nb@ demandes', # NEW
-	'info_demandes_fermees' => '@nb@ fermées', # NEW
-	'info_demandes_ouvertes' => '@nb@ ouvertes', # NEW
-	'info_demandes_resolues' => '@nb@ résolues', # NEW
+	'info_demande' => '@nb@ solicitud',
+	'info_demande_fermee' => '@nb@ cerrada',
+	'info_demande_ouverte' => '@nb@ abierta',
+	'info_demande_resolue' => '@nb@ resuelta',
+	'info_demandes' => '@nb@ solicitudes',
+	'info_demandes_fermees' => '@nb@ cerradas',
+	'info_demandes_ouvertes' => '@nb@ abiertas',
+	'info_demandes_resolues' => '@nb@ resueltas',
 	'info_document_ajoute' => 'Adjuntado:',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NÚMERO:',
-	'info_sans' => 'Non défini', # NEW
-	'info_sans_version' => 'Sans version', # NEW
+	'info_sans' => 'Indefinido',
+	'info_sans_version' => 'Sin versión',
 	'info_ticket_1' => '1 ticket',
 	'info_ticket_aucun' => 'Ningún ticket',
 	'info_ticket_nb' => '@nb@ tickets',
@@ -167,13 +167,13 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 
 	// L
 	'label_paginer_par' => 'Paginar por:',
-	'label_vue_liste_tickets' => 'Changer la vue de la liste :', # NEW
+	'label_vue_liste_tickets' => 'Cambiar la vista de la lista:',
 	'lien_filtrer' => 'Filtrar los tickets',
-	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>', # NEW
+	'lien_identification' => '<a href="@url@" class="spip_in">Identifíquese</a>',
 	'lien_reponse_ticket' => 'Respuesta al ticket',
 	'lien_supprimer_filtres' => 'Quitar todos los filtros',
-	'lien_vue_roadmap' => 'Feuille de route', # NEW
-	'lien_vue_tous' => 'Liste complète', # NEW
+	'lien_vue_roadmap' => 'Hoja de ruta',
+	'lien_vue_tous' => 'Lista completa',
 
 	// M
 	'mail_texte_message_auto' => 'Éste es un mensaje automático: no lo responda. ',
@@ -255,7 +255,7 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	// V
 	'vos_tickets_assignes' => 'Tickets que le han sido asignados',
 	'vos_tickets_assignes_auteur' => 'Tickets de @nom@ que le son asignados',
-	'vos_tickets_en_cours' => 'Sus tickets en curso de redacción' # MODIF
+	'vos_tickets_en_cours' => 'Sus tickets abiertos'
 );
 
 ?>
