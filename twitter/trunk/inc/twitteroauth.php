@@ -206,6 +206,12 @@ class TwitterOAuth {
    */
   function http($url, $method, $postfields = NULL) {
     $this->http_info = array();
+	  if (!function_exists("curl_init")
+	    OR !function_exists("curl_setopt")
+	    OR !function_exists("curl_exec")
+	  )
+		  throw new OAuthException('cURL is missing');
+
     $ci = curl_init();
     /* Curl settings */
     curl_setopt($ci, CURLOPT_USERAGENT, $this->useragent);

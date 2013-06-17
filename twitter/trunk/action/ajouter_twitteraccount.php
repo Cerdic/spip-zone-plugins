@@ -43,37 +43,44 @@ function action_ajouter_twitteraccount_dist() {
 		 * On les place dans la session de l'individu en cours
 		 * Ainsi que l'adresse de redirection pour la seconde action
 		 */
-		$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret']);
-		$request_token = $connection->getRequestToken($oauth_callback);
-		$token = $request_token['oauth_token'];
-		session_set('oauth_token',$token);
-		session_set('oauth_token_secret',$request_token['oauth_token_secret']);
-		session_set('twitter_redirect',str_replace('&amp;','&',$redirect));
-		
-		/**
-		 * Vérification du code de retour
-		 */
-		switch ($code = $connection->http_code) {
+		try {
+			$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret']);
+			$request_token = $connection->getRequestToken($oauth_callback);
+			$token = $request_token['oauth_token'];
+			session_set('oauth_token',$token);
+			session_set('oauth_token_secret',$request_token['oauth_token_secret']);
+			session_set('twitter_redirect',str_replace('&amp;','&',$redirect));
+
 			/**
-			 * Si le code de retour est 200 (ok)
-			 * On envoie l'utilisateur vers l\'url d'autorisation
+			 * Vérification du code de retour
 			 */
-			case 200:
-				$url = $connection->getAuthorizeURL($token);
-				include_spip('inc/headers');
-				$GLOBALS['redirect'] = $url;
-				#echo redirige_formulaire($url);
-				break;
-			/**
-			 * Sinon on le renvoie vers une erreur
-			 */
-			default:
-				spip_log('Erreur connexion twitter','microblog');
-				spip_log($connection, 'twitter'._LOG_ERREUR);
-				$redirect = parametre_url($redirect,'erreur_code',$code);
-				$redirect = parametre_url($redirect,'erreur','erreur_conf_app','&');
-				$GLOBALS['redirect'] = $redirect;
-				break;
+			switch ($code = $connection->http_code) {
+				/**
+				 * Si le code de retour est 200 (ok)
+				 * On envoie l'utilisateur vers l\'url d'autorisation
+				 */
+				case 200:
+					$url = $connection->getAuthorizeURL($token);
+					include_spip('inc/headers');
+					$GLOBALS['redirect'] = $url;
+					#echo redirige_formulaire($url);
+					break;
+				/**
+				 * Sinon on le renvoie vers une erreur
+				 */
+				default:
+					spip_log('Erreur connexion twitter','microblog');
+					spip_log($connection, 'twitter'._LOG_ERREUR);
+					$redirect = parametre_url($redirect,'erreur_code',$code);
+					$redirect = parametre_url($redirect,'erreur','erreur_conf_app','&');
+					$GLOBALS['redirect'] = $redirect;
+					break;
+			}
+		}
+		catch(Exception $e){
+			session_set('oauth_erreur_message',$e->getMessage());
+			$redirect = parametre_url($redirect,'erreur',"erreur_oauth",'&');
+			$GLOBALS['redirect'] = $redirect;
 		}
 	}
 }

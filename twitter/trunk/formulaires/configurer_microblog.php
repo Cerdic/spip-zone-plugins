@@ -37,8 +37,13 @@ function twitter_masquer_secret($secret){
 }
 
 function twitter_affiche_erreur_config($erreur, $erreur_code){
+	static $message_erreur = array();
 	if (!$erreur)
 		return "";
+
+	$key = "$erreur-$erreur_code";
+	if (isset($message_erreur[$key]))
+		return $message_erreur[$key];
 
 	static $status_string = array(
 		200 => '200 OK',
@@ -59,6 +64,12 @@ function twitter_affiche_erreur_config($erreur, $erreur_code){
 		case "old_token":
 			$err = "Le jeton de sécurité a expiré, recommencez l'opération.";
 			break;
+		case "erreur_oauth":
+			$err = session_get("oauth_erreur_message");
+			session_set("oauth_erreur_message");
+			if (!$err)
+				$err = "???";
+			break;
 		case "erreur_conf_app":
 		default:
 			$err = "Erreur de configuration de l'Application.";
@@ -70,5 +81,5 @@ function twitter_affiche_erreur_config($erreur, $erreur_code){
 	if ($erreur_code==401)
 		$err .= "<br />Avez-vous bien rempli le champ \"Callback URL\" de votre application Twitter ?";
 
-	return "<p>$err</p>";
+	return $message_erreur[$key] = "<p>$err</p>";
 }
