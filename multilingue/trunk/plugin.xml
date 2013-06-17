@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Site multilingue facile</multi></nom>
 	<slogan>Créer facilement un site multilingue</slogan>
 	<auteur>[Rainer M&uuml;ller->http://websimple.be]</auteur>
-	<version>0.3.2</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -33,10 +33,10 @@
 	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />	
 	<necessite id="tradrub" version="[2.1.1;]" />	
-	<necessite id="languepreferee" version="[0.4.0;]" />	
+	<necessite id="languepreferee" version="[0.4.2;]" />	
 	<necessite id="trad_rub" version='[0.1.2;]'/>	
 	<necessite id="taa" version='[0.3.4;]'/>	
 	<necessite id="cfg" version='[1.16.0;]'/>	
-	<utilise id="z" version='[1.7.17;]'/>	
+	<utilise id="z" version='[1.7.21;]'/>	
 	<traduire gestionnaire="salvatore" module="multilingue" reference="fr" />
 </plugin>
