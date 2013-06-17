@@ -76,6 +76,7 @@ function action_geoportail_config_dist()
 			ecrire_meta('geoportail_geomot',isset($_POST['mot']));
 			ecrire_meta('geoportail_geobreve',isset($_POST['breve']));
 			ecrire_meta('geoportail_geosyndic',isset($_POST['syndic']));
+			ecrire_meta('geoportail_geoalbum',isset($_POST['album']));
  			ecrire_metas();
  		}
 		// Modif des objets a georef

@@ -170,6 +170,11 @@ function geoportail_affiche_milieu($flux)
 	{	$contexte['id_objet'] = $flux['args']['id_syndic'];
 		$contexte['objet'] = 'syndic';
 	}
+	// Album
+	else if ($exec == 'album' && $GLOBALS['meta']['geoportail_geoalbum']) 
+	{	$contexte['id_objet'] = $flux['args']['id_album'];
+		$contexte['objet'] = 'album';
+	}
 	// Si plugin Agenda
 	else if ($exec == 'evenements_edit') 
 	{	$contexte['id_objet'] = $flux['args']['id_evenement'];

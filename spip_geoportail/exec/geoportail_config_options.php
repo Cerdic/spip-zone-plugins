@@ -69,6 +69,8 @@ function exec_geoportail_config_options()
  		$gbreve = ($GLOBALS['meta']['geoportail_geobreve'])?"CHECKED":"";
  		$gsyndic = ($GLOBALS['meta']['geoportail_geosyndic'])?"CHECKED":"";
 		$gservice = ($GLOBALS['meta']['geoportail_service'])?"CHECKED":"";
+		$galbum = ($GLOBALS['meta']['geoportail_geoalbum'])?"CHECKED":"";
+		
  		$geoportail_sysref = $GLOBALS['meta']['geoportail_sysref'];
  		$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
  		$geoportail_popup = $GLOBALS['meta']['geoportail_popup'];
@@ -138,6 +140,8 @@ function exec_geoportail_config_options()
 
 		if ($GLOBALS['spip_version_branche']>2) $form .= "<br/><input type='checkbox' name='docauto' id='docauto' $gdocauto style='margin-left:2em;'><label for=docauto>"._T('geoportail:info_documents_auto')."</label>";
 		
+		if (defined('_DIR_PLUGIN_ALBUMS')) $form .= "<br/><input type='checkbox' name='album' id='album' $galbum><label for=album>"._T('album:titre_album')."</label>";
+
 		$form .= "<br/><input type='checkbox' name='rubrique' id='rubrique' $grubrique><label for=rubrique>"._T('spip:icone_rubriques')."</label>"
 			."</td><td valign=top><input type='checkbox' name='mot' id='mot' $gmot><label for=mot>"._T('spip:icone_mots_cles')."</label>"
 			."<br/><input type='checkbox' name='breve' id='breve' $gbreve><label for=breve>"._T('spip:icone_breves')."</label>"
