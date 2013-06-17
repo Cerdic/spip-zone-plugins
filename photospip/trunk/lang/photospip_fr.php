@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_versions_une' => 'Une version',
 
 	// L
-	'label_angle_rotation' => 'Angle de rotation&nbsp:',
+	'label_angle_rotation' => 'Angle de rotation :',
 	'label_choisir_filtres' => 'Choisissez les filtres à activer',
 	'label_compression_rendu' => 'Qualité de compression du rendu (en %, 85 par défaut) :',
 	'label_couleur_sepia' => 'Couleur :',
