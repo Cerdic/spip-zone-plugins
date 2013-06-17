@@ -1,0 +1,30 @@
+<plugin>
+	<nom>
+		SWFupload
+	</nom>
+	<auteur>kent1</auteur>
+	<icon>
+	images/swfupload_64.png
+	</icon>
+	<version>
+	0.2.2
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	<multi>
+	[fr] SWFupload.
+_ Ce plugin  fournit la librairie SWFupload et une fonction de v&#233;rification de type mime qui doit &#234;tre appliqu&#233;e &#224; la suite de l'upload.
+	[en] SWFupload.
+_ This plugin provides the SWFUpload library and a function which check the mime type to be applied after the upload.
+	</multi>
+	</description>
+	<lien></lien>
+	<options>swfupload_options.php</options>
+	<prefix>
+		swfupload
+	</prefix>
+	<necessite id="lib:SWFUpload v2.2.0.1 Core" src="http://swfupload.googlecode.com/files/SWFUpload%20v2.2.0.1%20Core.zip" />
+	<categorie>outil</categorie>
+</plugin>
