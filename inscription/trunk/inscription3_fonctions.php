@@ -76,7 +76,7 @@ function critere_i3_recherche_dist($idb, &$boucles){
 }
 
 include_spip('inc/cextras_autoriser');
-if(($GLOBALS['visiteur_session']['statut'] != '0minirezo') && function_exists('restreindre_extras')){
+if(isset($GLOBALS['visiteur_session']['statut']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo') && function_exists('restreindre_extras')){
 	if(isset($GLOBALS['inscription3'])){
 		$inscription3 = is_array(@unserialize($GLOBALS['inscription3'])) ? unserialize($GLOBALS['inscription3']) : array();
 		$champ_testes = array();
