@@ -1,8 +1,13 @@
 <?php
 /**
- * Plugin Albums
- * Licence GNU/GPL
- */
+ * Fonctions d'installation et de désinstallation du plugin Albums
+ *
+ * @plugin     Albums
+ * @copyright  2013
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GNU/GPL
+ * @package    SPIP\Albums\Administrations
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
