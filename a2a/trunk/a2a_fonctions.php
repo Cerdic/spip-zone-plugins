@@ -23,23 +23,24 @@ function balise_ARTICLES_LIES($p) {
 	return $p;
 }
 
-function lister_articles_liants($id_article,$ordre,$type_liaison=null){
+function lister_articles_liant($id_article,$ordre,$type_liaison=null){
 	if ($type_liaison==null)
 	    return sql_allfetsel('id_article','spip_articles_lies','id_article_lie=' . sql_quote($id_article),'',"rang $ordre");
 	else
 	    return sql_allfetsel('id_article','spip_articles_lies','id_article_lie=' . sql_quote($id_article) . ' AND type_liaison=' . sql_quote($type_liaison),'',"rang $ordre");
 	}
 
-function balise_ARTICLES_LIANTS($p) { 
+function balise_ARTICLES_LIANT($p) { 
 	$id_article = champ_sql('id_article', $p);
 	$ordre = 'ASC';
 	$type_liaison=interprete_argument_balise(2,$p);
 	if($inverse = interprete_argument_balise(1,$p))
 		$ordre = 'DESC';
-	$type_liaison ? $p->code = "lister_articles_liants($id_article,$ordre,$type_liaison)" : $p->code = "lister_articles_liants($id_article,$ordre)";
+	$type_liaison ? $p->code = "lister_articles_liant($id_article,$ordre,$type_liaison)" : $p->code = "lister_articles_liant($id_article,$ordre)";
 	$p->type = 'php';  
 	return $p;
 }
+
 function types_liaisons_existent($array){
     // return ' ' si des liaisons existent, sinon retourne ''
     if (empty($array) or $array==array(''=>'')){
