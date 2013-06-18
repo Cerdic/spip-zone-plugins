@@ -10,7 +10,7 @@
 <lien>http://www.spip-contrib.net/?article3706</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.3.5</version>
+<version>2.3.6</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
@@ -48,7 +48,7 @@
 <lien>http://www.spip-contrib.net/?article3706</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.3.5</version>
+<version>2.3.6</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
