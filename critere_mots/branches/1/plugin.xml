@@ -4,7 +4,7 @@
   <auteur>Fil, [Ma&#239;eul Rouquette->http://www.maieul.net], RealET (Formulaires)</auteur>
   <icon>img_pack/stock_filter-data-by-criteria-24.png</icon>
   <licence>(c) 2009 GPL</licence>
-  <version>1.2.3</version>
+  <version>1.2.4</version>
   <etat>test</etat>
   <description>Permet d'afficher les &#233;l&#233;ments qui ont plusieurs mots cl&#233;s en communs, via la variable $mots[] pass&#233;e dans l'environnement</description>
   <lien>http://www.spip-contrib.net/Critere-mots</lien>

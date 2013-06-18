@@ -38,9 +38,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
-
 	$boucle->where[] = "\n\t\t".'$mots_where';
-
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
@@ -118,8 +116,7 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
         if ($in)
 	 $wh = sql_in("$_table.$_id_table", $in);
         else
-         $wh = '1=0';
-
+         $wh = 'id_article=1 AND id_article=2';
 	return $wh;
 }
 
