@@ -33,17 +33,6 @@
 ]
 
 
-[(#REM)
-	BOUTON EDITER PORTFOLIO (en fait un simple lien editbox)
-	parametre necessaire : id_album
-]
-[(#ENV{bouton}=={portfolio}|oui)
-	[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
-		<a href="[(#URL_ECRIRE{album_edit_portfolio,id_album=#ID_ALBUM})]" class="modifier editbox #ENV{class}" title="<:album:icone_modifier_album:>">[(#VAL{label}|in_array{#GET{afficher}}|oui)<:album:texte_modifier:>][(#VAL{icone}|in_array{#GET{afficher}}|oui)[(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:album:texte_modifier:>})]]</a>
-	]
-]
-
-
 [(#AUTORISER{associeralbum, #OBJET, #ID_OBJET}|oui)
 
 	[(#REM)

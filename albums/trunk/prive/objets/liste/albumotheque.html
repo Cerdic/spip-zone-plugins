@@ -39,12 +39,13 @@
 [<div class='pagination'>(#PAGINATION{prive})</div>]
 
 <BOUCLE_liste_albums(ALBUMS){contenu?}{orphelins?}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut == #ENV{statut,publie|prepa}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+<a name='album#ID_ALBUM'></a>
 #SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
-#SET{ajouter, #ENV{ajout_doc_album}|=={#ID_ALBUM}|?{oui,''}}
+#SET{remplir, #ENV{albums}|=={remplir}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
+#SET{retour_propre, #SELF|parametre_url{albums,''}|parametre_url{id_album,''}|parametre_url{ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
 
-[(#REM) classe .item : pour beneficier du ajaxreload quand edition du portfolio dans une modalbox ]
-[(#BOITE_OUVRIR{'',#VAL{simple album item}|concat{#COMPTEUR_BOUCLE|=={1}|?{' premier'}}})]
+[(#BOITE_OUVRIR{'',#VAL{simple album}|concat{#GET{remplir}|?{' actif'}}|concat{#COMPTEUR_BOUCLE|=={1}|?{' premier'}}})]
 
 	[(#REM) TITRE + infos ]
 	<div class='header'>
@@ -62,30 +63,26 @@
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_contenu, id_album, hauteur=60, ajax=documents})]
 
 	[(#REM) Formulaire ajout document ]
-	[(#GET{ajouter}|oui)
-	<a href="[(#SELF|parametre_url{ajout_doc_album,''})]" class='ajax bouton_fermer'>
-		[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]
+	[(#GET{remplir}|oui)
+	<a href="[(#GET{retour_propre})]" class='ajax bouton_fermer'>
+		\[ <:bouton_fermer:> \]
 	</a>
 	<div class='ajax'>
-		#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album}
+		[(#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album})]
 	</div>
 	]
 
 #BOITE_PIED
 
-	[(#GET{ajouter}|non)
+	[(#GET{remplir}|non)
 	<div class='footer actions'>
 		[(#REM) BOUTON : modifier ]
-		[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
-			bouton=portfolio,
-			id_album=#ID_ALBUM,
-			retour=#SELF|ancre_url{albums},
-			afficher=#LISTE{label},
-			class=reveal}
-		)<span class='reveal'> | </span>]
+		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM})]" class="modifier reveal" title="<:album:icone_modifier_album:>"><:album:texte_modifier:></a><span class='reveal'> | </span>
+		]
 		[(#REM) BOUTON : Ajouter document ]
-		[(#GET{ajouter}|non)
-		<a href="[(#SELF|parametre_url{ajout_doc_album,#ID_ALBUM}|parametre_url{ajouter,''})]" class='ajax ajouter'>
+		[(#GET{remplir}|non)
+		<a href="[(#SELF|parametre_url{albums,remplir}|parametre_url{id_album,#ID_ALBUM}|parametre_url{ajouter,''})]" class='ajax ajouter'>
 			<strong><:medias:bouton_ajouter_document:></strong>
 		</a>
 		]
@@ -117,9 +114,5 @@
 	]
 </div>
 <//B_liste_albums>
-
-<script type="text/javascript">/*<![CDATA[*/
-[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
-/*]]>*/</script>
 
 </div><!-- .albumotheque -->
