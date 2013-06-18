@@ -1,7 +1,7 @@
 <paquet
 	prefix="couleurs_spip"
 	categorie="edition"
-	version="3.0.0"
+	version="3.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="couleurs_spip.png"
@@ -11,10 +11,13 @@
 	<nom>Couleurs Spip</nom>
 	<!-- Des textes en couleur -->
 
-       <auteur>Dominique Wojylac</auteur>
-	
-	<pipeline nom="post_propre" inclure="couleurs_spip_pipelines.php" />
-	<pipeline nom="header_prive" inclure="couleurs_spip_pipelines.php" />
+	<auteur>Dominique Wojylac</auteur>
+	<auteur>Patrice Vanneufville</auteur>
+
+	<pipeline nom="pre_typo" inclure="couleurs_spip_pipelines.php" />
+	<pipeline nom="header_prive" action="insert_head_css" inclure="couleurs_spip_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="couleurs_spip_pipelines.php" />
-	
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="couleurs_spip_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="couleurs_spip_pipelines.php" />
+
 </paquet>
