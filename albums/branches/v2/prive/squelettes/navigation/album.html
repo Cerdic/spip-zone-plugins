@@ -8,15 +8,17 @@
 #BOITE_FERMER
 
 <B_liens>
-<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</h3>
+<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{album:info_1_association,album:info_nb_associations})]</h3>
 <ul class='liste_items'>
 	<BOUCLE_liens(ALBUMS liens){id_album}>
+	#SET{objet, #OBJET|objet_info{texte_objet}|_T}
+	#SET{title, #GET{objet}|concat{' ',#VAL{#VAL{info_numero_abbreviation}|_T},#ID_OBJET}|attribut_html}
 	<li class='item #OBJET'>
-	[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ]
+	[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img|inserer_attribut{title,#GET{title}})]
 	[(#VU|=={oui}|oui)
 	[<span class='vu'>(#CHEMIN_IMAGE{vu-16.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
 	]
-	[(#ID_OBJET|lien_objet{#OBJET})]
+	[(#ID_OBJET|lien_objet{#OBJET}|inserer_attribut{title,#GET{title}})]
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_boutons_actions,
 		bouton=dissocier,
 		id_album, 
@@ -29,5 +31,5 @@
 	</BOUCLE_liens>
 </ul>
 </B_liens>
-<h3><:medias:aucune_utilisation:></h3>
+<strong><:album:info_aucune_association:></strong>
 <//B_liens>
