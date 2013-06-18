@@ -40,7 +40,9 @@ function balise_ARTICLES_LIANT($p) {
 	$p->type = 'php';  
 	return $p;
 }
-
+function balise_ARTICLES_LIANTS($p){
+	return balise_ARTICLES_LIANT($p);
+	}
 function types_liaisons_existent($array){
     // return ' ' si des liaisons existent, sinon retourne ''
     if (empty($array) or $array==array(''=>'')){
