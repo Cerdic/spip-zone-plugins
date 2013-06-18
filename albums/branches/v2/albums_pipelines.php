@@ -1,8 +1,13 @@
 <?php
 /**
- * Plugin Albums
- * Licence GNU/GPL
- */
+ * Utilisations de pipelines par le plugin Albums
+ *
+ * @plugin     Albums
+ * @copyright  2013
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GNU/GPL
+ * @package    SPIP\Albums\Pipelines
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -40,12 +45,13 @@ function albums_afficher_complement_objet($flux) {
 
 
 /**
- * Objets associes et auteurs sur la page de visualisation d'un album
+ * auteurs sur la fiche d'un album
 **/
 function albums_affiche_milieu($flux){
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
+	// auteurs et objets associés sur fiche d'un album
 	if (!$e['edition'] AND $e['type']=='album') {
 		$id_album = $flux['args'][$e['id_table_objet']];
 		// boite auteurs
@@ -54,14 +60,6 @@ function albums_affiche_milieu($flux){
 			'objet' => 'album',
 			'id_objet' => $id_album
 		));
-		// boite objets associes (inseree uniquement si liens presents)
-		if (lister_objets_lies('*','album',$id_album,'album')){
-			$texte .= recuperer_fond('prive/squelettes/contenu/albums_affiche_milieu_objets_lies', array(
-				'id_album' => $id_album
-				),
-				array('ajax'=>true)
-			);
-		}
 	}
 
 	if ($texte) {
@@ -71,33 +69,6 @@ function albums_affiche_milieu($flux){
 			$flux['data'] .= $texte;
 	}
 
-	return $flux;
-}
-
-
-/**
- * Compagnons
- */
-function albums_compagnon_messages($flux) {
-
-	$exec = $flux['args']['exec'];
-	$pipeline = $flux['args']['pipeline'];
-	$aides = &$flux['data'];
-
-	switch ($pipeline) {
-		case 'affiche_milieu':
-			switch ($exec) {
-				case 'albums':
-					$aides[] = array(
-						'id' => 'albums_info',
-						'titre' => _T('album:c_albums_info'),
-						'texte' => _T('album:c_albums_info_texte'),
-						'statuts'=> array('1comite', '0minirezo', 'webmestre')
-					);
-					break;
-			}
-			break;
-	}
 	return $flux;
 }
 

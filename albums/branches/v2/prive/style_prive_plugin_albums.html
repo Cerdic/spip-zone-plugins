@@ -71,15 +71,13 @@
 				}
 
 
-
-
 /*==============
   === LISTES ===
   ==============*/
 
-/*==========
-  = TOUTES =
-  ==========*/
+/*==================
+  = LISTE : TOUTES =
+  ==================*/
 .albums .entete h2		{ display: inline; }
 .albums .liste-objets,
   .albums .liste		{ margin: 0; border-width: 0; }
@@ -96,18 +94,18 @@
 .album .pagination 		{ background-color: transparent; border: 0 none; }
 
 
-/*================
-  = ALBUMOTHEQUE =
-  ================*/
+/*======================
+  = LISTE ALBUMOTHEQUE =
+  ======================*/
 .albumotheque .album.premier	{ margin-top: 10px; }
 .albums.albumotheque .album .inner { background-color: #fff; }
 .albumotheque .album .header	{ padding: .5em; }
 .albumotheque .album .header > div { max-width: 40%; }
 
 
-/*========
-  = LIES =
-  ========*/
+/*==============
+  = LISTE LIES =
+  ==============*/
 /* conteneurs */
 .albums .album			{ margin: 0 0 10px;}
 .albums .album .bd,
@@ -115,7 +113,7 @@
 .albums .album .inner		{ border: 1px solid #e5e5e5; background-color: transparent; }
 .album.actif .inner		{ border-color: #GET{claire}; }
 .album.actif .bd		{ padding-left: 10px; padding-right: 10px; }
-.album .inner:hover		{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+.albums .album .inner:hover	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 /* header */
 .album .header,
   .album .footer 		{padding: .2em;}
@@ -183,26 +181,24 @@
 #portfolios.cible-album .liste_items { padding-top: 1em; padding-bottom: 1em; }
 
 
-/*============
-  = ASSOCIER =
-  ============*/
+/*==================
+  = LISTE ASSOCIER =
+  ==================*/
 .albums .associer .actions	{ width: 6em; }
 .albums .associer .actions img	{ vertical-align: middle; }
 .albums .associer .contenu	{ width: 8em; }
 .albums .associer .logo		{ width: 1px; } /* pour avoir taille minimale */
 
 
-/*=============
-  = SELECTEUR =
-  =============*/
+/*===================
+  = LISTE SELECTEUR =
+  ===================*/
 
 .albums .entete.selecteur h2	{ font-size: 1em; }
 .albums .liste-objets.selecteur	{ font-size: .9em; }
 .albums .selecteur td.id	{ width: auto; }
 .albums .selecteur td.actions	{ display: table-cell; width: auto; }
 .albums .selecteur td.actions input[type=radio]	{ margin: 0; }
-
-
 
 
 /*===============
@@ -215,24 +211,6 @@
 .albums .onglets_simple.filtres strong {padding-left: .5em; padding-right: .5em;}
 .albums .onglets_simple.filtres a,
   .albums .onglets_simple.filtres a:hover { border-color: transparent; background-color: transparent; }
-
-
-
-
-/*========================= 
-  === BOITE OBJETS LIES === 
-  =========================*/
-.albums.liaison > ul		{ padding-top: 0; padding-bottom: 0; margin: 0; list-style-type: none;}
-.albums.liaison .liste-objets	{ padding-bottom: 0; padding-right: 0; padding-top: 0; }
-.albums.liaison label		{
-				margin-top: .34em;
-				font-weight: bold;
-				}
-.albums.liaison .liste td.icone_objet { width: 20px; }
-.albums.liaison .liste tr:first-child td { border-top: none; }
-.albums.liaison .liste tr:last-child td { border-bottom: none; }
-
-
 
 
 /*============================ 
@@ -266,8 +244,6 @@
 .album .raccourcis .formulaire_spip li { text-align: left; }
 
 
-
-
 /*==============
   === DIVERS ===
   ==============*/
@@ -277,16 +253,6 @@
 .albums button:hover,
   .albums button:hover		{ cursor:pointer; }
 .actions .supprimer.off		{ margin-right: .25em; }
-/* formulaire configurer */
-.albums .inline .choix		{ display: inline-block; }
-.albums .inline .choix input	{ margin-right: 0; vertical-align: bottom; }
-.albums .inline .choix label	{ margin-left: 0; margin-right: .8em; }
-.albums .inline .choix strong small { font-weight: normal; }
-/* message compagnon */
-.box.compagnon .albums > ul	{ margin: .5em 0;}
-.box.compagnon .albums > ul li > ul { display: inline-block; vertical-align: top; list-style: none inside;}
-
-
 
 
 /*==============

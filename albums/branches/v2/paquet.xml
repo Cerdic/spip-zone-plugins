@@ -20,7 +20,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/albums.php" />
 
 	<pipeline nom="afficher_complement_objet" inclure="albums_pipelines.php" /><!-- ajout d'albums sur la page d un objet -->
-	<pipeline nom="affiche_milieu" inclure="albums_pipelines.php" /><!-- objets lies sur la page d'un album -->
+	<pipeline nom="affiche_milieu" inclure="albums_pipelines.php" /><!-- auteurs sur la page d'un album -->
 	<pipeline nom="autoriser" inclure="albums_autorisations.php" />
 	<pipeline nom="insert_head_css" inclure="albums_pipelines.php" /> <!-- css pages publiques -->
 	<pipeline nom="post_edition" inclure="albums_pipelines.php" /> <!-- mise a jour des liens albums apres edition d'un objet -->

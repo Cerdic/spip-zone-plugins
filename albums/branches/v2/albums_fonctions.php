@@ -1,13 +1,19 @@
 <?php
 /**
- * Plugin Albums
- * Licence GNU/GPL
- */
+ * Fonctions du plugin Albums
+ *
+ * @plugin     Albums
+ * @copyright  2013
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GNU/GPL
+ * @package    SPIP\Albums\Fonctions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * critere {orphelins}
- * selectionne les albums sans liens avec un objet editorial
+ * critère {orphelins}
+ * selectionne les albums sans lien avec un objet editorial
  *
  * @param string $idb
  * @param object $boucles
@@ -31,8 +37,8 @@ function critere_ALBUMS_orphelins_dist($idb, &$boucles, $crit) {
 
 
 /**
- * critere {contenu}
- * selectionne les albums en fonction de leur contenu (image, audio, file, video)
+ * critère {contenu}
+ * sélectionne les albums en fonction de leur contenu (image, audio, file, video)
  * 	{contenu} -> albums remplis
  * 	{!contenu} -> albums vides
  * 	{contenu xxx} -> albums contenant des xxx : medias sous forme de regexp
@@ -66,8 +72,8 @@ function critere_ALBUMS_contenu_dist($idb, &$boucles, $crit) {
 
 
 /**
- * fonction privee pour le calcul du critere {contenu}
- * renvoie un sql select en fonction des documents lies au albums
+ * fonction privée pour le calcul du critère {contenu}
+ * renvoie un sql select en fonction des documents liés au albums
  * 
  * note : la selection des albums vides (avec contenu=non) fait une requete a rallonge... a revoir
  *
@@ -118,7 +124,7 @@ function albums_calculer_critere_contenu_select ($media='') {
 
 
 /**
- * Fonction privee generant un tableau qui contient les types de medias presents dans un album, et leur nombre
+ * Fonction privée generant un tableau qui contient les types de medias présents dans un album, et leur nombre
  * exemple: array(file=>5, image=>2, ...)
  *
  * @param string $id_album	identifiant de l'album

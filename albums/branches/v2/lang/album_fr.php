@@ -7,25 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_associer' => 'Associer',
-	'bouton_dissocier' => 'Dissocier',
+	'bouton_dissocier' => 'Détacher',
 	'bouton_valider_deplacer_documents' => 'Enregistrer les changements',
 
 	// C
-	'c_albums_info' => 'Gestion des albums',
-	'c_albums_info_texte' => '<div class=\'albums\'>
-		On peut sélectionner les albums selon plusieurs critères :
-		<ul>
-		<li><strong>1er rang:</strong> objets auxquels les albums sont liés.</li>
-		<li><strong>2ème rang:</strong>
-			<ul>
-			<li>statuts des albums. Les albums ont 3 statuts : non publié (prepa/poubelle) ou publié.</li>
-			<li>albums insérés ou non dans le texte.</li>
-			<li>albums liés ou non à un objet éditorial.</li>
-			</ul>
-		</li>
-		<li><strong>3ème rang:</strong> types de médias contenus dans les albums.</li>
-		</ul>
-		</div>',
 	'cfg_titre_albums' => 'Albums',
 
 	// E
@@ -49,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heading_titre' => 'Titre',
 
 	// I
-	'icone_afficher_documents' => 'Vue complète',
 	'icone_ajouter' => 'Ajouter',
 	'icone_ajouter_album' => 'Ajouter un album',
 	'icone_associer_album' => 'Associer un album existant',

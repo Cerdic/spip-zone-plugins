@@ -14,13 +14,12 @@
 <a name='album#ID_ALBUM'></a>
 #SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}
-#SET{ajouter, #ENV{albums}|=={remplir}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
+#SET{remplir, #ENV{albums}|=={remplir}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
 #SET{modifier, #ENV{albums}|=={modifier}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
 #SET{remplir_modifier, #ENV{albums}|match{remplir|modifier}|et{#ENV{id_album}|=={#ID_ALBUM}}|?{oui,''}}
 #SET{retour_propre, #SELF|parametre_url{albums,''}|parametre_url{id_album,''}|parametre_url{ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
 
-[(#REM) classe .item : pour beneficier du ajaxreload quand edition du portfolio dans une modalbox ]
-[(#BOITE_OUVRIR{'',#VAL{simple album}|concat{#GET{remplir_modifier}|?{' actif'}}})]
+[(#BOITE_OUVRIR{'',#VAL{simple album lie}|concat{#GET{remplir_modifier}|?{' actif'}}})]
 
 	[(#REM) TITRE + infos ]
 	<div class='header'>
@@ -40,7 +39,7 @@
 	]
 
 	[(#REM) Formulaire ajout document ]
-	[(#GET{ajouter}|oui)
+	[(#GET{remplir}|oui)
 	<a href="[(#GET{retour_propre})]" class='ajax bouton_fermer'>
 		\[ <:bouton_fermer:> \]
 	</a>
