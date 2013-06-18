@@ -7,6 +7,7 @@ ul.nuage li,dl.nuage dt {
 	display: inline;
 	white-space: inherit;
 	font-size:1em;
+    padding:0;
 }
 
 .nuage .frequence {
@@ -15,6 +16,7 @@ ul.nuage li,dl.nuage dt {
 	height: 0;
 	overflow: auto;
 	width: 0;
+    padding:0;
 }
 a.nuage1{font-size:0.7em;}
 a.nuage2{font-size:0.8em;}

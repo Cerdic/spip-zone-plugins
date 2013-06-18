@@ -1,8 +1,8 @@
 <paquet
 	prefix="nuage"
 	categorie="navigation"
-	version="4.0.0"
-	etat="test"
+	version="4.0.1"
+	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="images/nuage-64.png"
 	documentation="http://www.spip-contrib.net/Nuage-de-mots-cles"
