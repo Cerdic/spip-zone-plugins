@@ -2,5 +2,8 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-xmlrpc?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-xmlrpc?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 </traduction>
