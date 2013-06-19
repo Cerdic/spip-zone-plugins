@@ -5,9 +5,8 @@ function _fichier_microcache($id, $fond) {
 
 	if (!is_numeric($id)) $id = md5($id);
 	$cle = "$id-microcache";
-	$dossier_microcache = sous_repertoire(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES, "microcache");
+	$dossier_microcache = sous_repertoire(_DIR_LOCAL, "microcache");
 	$dossier_microcache = sous_repertoire($dossier_microcache, $fond);
-
 	$microcache = sous_repertoire($dossier_microcache, (substr($id,-3))).$cle;
 
 	return $microcache;
