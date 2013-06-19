@@ -9,25 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_associer' => 'Bind', # ou alors : link associate ?
-	'bouton_dissocier' => 'Unbind',
+	'bouton_dissocier' => 'Unbind', # MODIF
 	'bouton_valider_deplacer_documents' => 'Save changes',
 
 	// C
-	'c_albums_info' => 'Album library', # ou alors : Albums management ?
-	'c_albums_info_texte' => '<div class=\'albums\'>
-		Albums can be selected via various criteria :
-		<ul>
-		<li><strong>1st row:</strong> objects bound with albums.</li>
-		<li><strong>2nd row:</strong>
-			<ul>
-			<li>albums status. Albums have 3 status : unpublished (prepa/poubelle) or published.</li>
-			<li>albums inserted in text or not.</li>
-			<li>albums bound with another object or not.</li>
-			</ul>
-		</li>
-		<li><strong>3rd row:</strong> types of medias which albums contain.</li>
-		</ul>
-		</div>',
 	'cfg_titre_albums' => 'Albums',
 
 	// E
@@ -51,7 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heading_titre' => 'Title',
 
 	// I
-	'icone_afficher_documents' => 'Full view',
 	'icone_ajouter' => 'Add',
 	'icone_ajouter_album' => 'Add an album',
 	'icone_associer_album' => 'Bind an existing album',
@@ -60,17 +44,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_fermer' => 'Close',
 	'icone_modifier_album' => 'Edit this album',
 	'info_1_album' => '1 album',
-	'info_1_objet_lie' => 'Bound to 1 object',
+	'info_1_association' => 'Associé à 1 objet', # NEW
 	'info_album_vide' => 'Album is empty',
 	'info_aucun_album' => 'No album',
 	'info_aucun_album_criteres' => 'No album match these criteria',
 	'info_aucun_album_supplementaire' => 'No additional album',
 	'info_aucun_album_vide' => 'No empty album',
+	'info_aucune_association' => 'Cet album n\'est associé à aucun objet', # NEW
 	'info_dans_objet' => 'in',
 	'info_documents_joints_albums' => 'Enable the interface to add documents to albums',
 	'info_js_prive' => 'animation desactivated in the private zone',
 	'info_nb_albums' => '@nb@ albums',
-	'info_nb_objets_lies' => 'Bound to @nb@ objects',
+	'info_nb_associations' => 'Associé à @nb@ objets', # NEW
 	'info_nouvel_album' => 'New album',
 	'info_publier' => 'publish',
 	'info_recherche_album_zero' => 'No result for « @cherche_album@ »',
