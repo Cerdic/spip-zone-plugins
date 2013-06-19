@@ -54,7 +54,7 @@
 			[<a class='numero' href="[(#ID_ALBUM|generer_url_entite{album})]">N°(#ID_ALBUM)</a>]
 			[(#VU|=={oui}|oui) [(#CHEMIN_IMAGE{vu-16.png}|balise_img{<:medias:document_vu:>,vu}|inserer_attribut{title,<:medias:document_vu:>})] ]
 		</div>
-		[<div class='titre'><a href="[(#ID_ALBUM|generer_url_entite{album})]"><h4 class='#EDIT{titre}'>(#TITRE|sinon{<:info_sans_titre:>})</h4></a></div>]
+		[<div class='titre'><a href="[(#ID_ALBUM|generer_url_entite{album})]"><h4 class='#EDIT{titre}'>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h4></a></div>]
 		[<div class='descriptif'><span class='#EDIT{descriptif}'>(#DESCRIPTIF)</span></div>]
 		[<div class='infos'>(#INCLURE{fond=prive/squelettes/inclure/albums_infos_extra, id_album, ajax=documents})</div>]
 	</div>
