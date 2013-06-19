@@ -1,7 +1,7 @@
 <paquet
 	prefix="orthotypo"
 	categorie="edition"
-	version="1.3.4"
+	version="1.3.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/orthotypo-32.png"

@@ -288,6 +288,7 @@ function orthotypo_exposants_fr($texte){
 	static $typo = null;
 	static $egrave; static $eaigu1; static $eaigu2; static $accents;
 	if (is_null($typo)) {
+		$u = ($GLOBALS['meta']['charset']=="utf-8"?"u":"");
 		// en principe, pas besoin de : caractere_utf_8(232)
 		$carre  = unicode2charset('&#178;').'|&#178;|&sup2;';
 		$egrave = unicode2charset('&#232;').'|&#232;|&egrave;';
@@ -317,21 +318,21 @@ function orthotypo_exposants_fr($texte){
 
 
 			// Societes(s), Etablissements
-			"/\bS(t(?:$eaigu1)s?)(?=\W)/u" => 'S'._TYPO_sup,
-			"/(?<=\W)(?:E|$eaigu2)ts\b/u" => '&#201;'._TYPO_class.'ts</sup>',
+			"/\bS(t(?:$eaigu1)s?)(?=\W)/$u" => 'S'._TYPO_sup,
+			"/(?<=\W)(?:E|$eaigu2)ts\b/$u" => '&#201;'._TYPO_class.'ts</sup>',
 
 			// 1er(s), Erreurs 1ier(s), 1ier(s)
 			'/(?<=\b[1I])i?(ers?)\b/u' => _TYPO_sup,
-			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/u" => _TYPO_sup,	// Erreurs 1(i)ere(s) + accents
+			"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/$u" => _TYPO_sup,	// Erreurs 1(i)ere(s) + accents
 			'/(?<=\b1)(r?es?)\b/u' => _TYPO_sup, // 1e(s), 1re(s)
 			'/(?<=\b2)(nde?s?)\b/u' => _TYPO_sup,	// 2nd(e)(s)
 
 			// Erreurs (i)(e)me(s) + accents
-			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/u" => '$1'._TYPO_class.'e$2</sup>',
+			"/(\b[0-9IVX]+)i?(?:e|$egrave)?me(s?)\b/$u" => '$1'._TYPO_class.'e$2</sup>',
 			// 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
 			'/\b([0-9IVX]+)(es?)\b/u' => _TYPO_sup2,
 			// recto, verso, primo, secondo, etc.
-			"/(?<![;$accents])\b(\d+|r|v)o\b/u" => '$1'._TYPO_class.'o</sup>',
+			"/(?<![;$accents])\b(\d+|r|v)o\b/$u" => '$1'._TYPO_class.'o</sup>',
 			// Maitre (suivi d'un espace et d'une majuscule)
 			'/\bM(e)(?= [A-Z])/u' => 'M'._TYPO_sup,
 		);
