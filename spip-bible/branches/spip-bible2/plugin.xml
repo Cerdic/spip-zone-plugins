@@ -3,7 +3,7 @@
 	<slogan>Pour faire rapidement des citations de la Bible</slogan>
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] (Auteur originel), Teddy Payet (Auteur associ&#233;), Cerdic (Id&#233;e du presse-papier)</auteur>
 	<licence>GPL3</licence>
-	<version>2.2.0</version>
+	<version>2.3.0</version>
 	<etat>stable</etat>
 	<install>base/bible_install.php</install>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
