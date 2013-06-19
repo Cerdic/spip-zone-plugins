@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_label_hauteur' => 'Hauteur par défaut', # NEW
-	'cfg_label_largeur' => 'Largeur par défaut', # NEW
-	'cfg_titre' => 'Configuration du plugin Embed code', # NEW
+	'cfg_label_hauteur' => 'Default height',
+	'cfg_label_largeur' => 'Default width',
+	'cfg_titre' => 'Embed code plugin configuration',
 
 	// I
 	'info_embed_code' => 'Embed this media',
