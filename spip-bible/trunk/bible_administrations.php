@@ -4,6 +4,7 @@
 function bible_upgrade($nom_meta_base_version,$version_cible) {
   $maj = array();
   $maj['create'] = array(array('bible_conf'));	
+  $maj["0.1.1"]  = array(array("bible_maj_0_1_1"));
   include_spip('base/upgrade');
   maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -12,6 +13,12 @@ function bible_vider_tables($nom_meta_base_version) {
 	effacer_config('bible_pp');
 	effacer_meta($nom_meta_base_version);
 }
+function bible_maj_0_1_1(){
+	ecrire_config('bible/alias_na',"na28");
+	$trad_prop = array_flip(lire_config("bible_pp/trad_prop"));
+	unset($trad_prop["na27"]);
+	ecrire_config("bible_pp/trad_prop",array_flip($trad_prop));
+	}
 function bible_conf(){
 	include_spip('inc/config');
 				ecrire_config('bible/numeros','oui');
