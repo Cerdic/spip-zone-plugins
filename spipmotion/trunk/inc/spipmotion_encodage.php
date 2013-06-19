@@ -415,7 +415,7 @@ function encodage($source,$options){
 		$configuration = array();
 		if(is_array($spipmotion_compiler['configuration']))
 			$configuration = $spipmotion_compiler['configuration'];
-		
+
 		/**
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
@@ -429,9 +429,9 @@ function encodage($source,$options){
 			 */
 			if($format == 'ipod'){
 				if(spip_version_compare($ffmpeg_version,'0.7.10','<'))
-					$infos_sup_normal .= ' -vpre baseline -vpre ipod640';
+					$infos_sup_normal .= ' -vpre baseline -vpre ipod640 -bf 0';
 				else
-					$infos_sup_normal .= ' -profile baseline -vpre ipod640';	
+					$infos_sup_normal .= ' -profile:v baseline -vpre ipod640 -bf 0';	
 			}
 			/**
 			 * Encodage pour PSP
