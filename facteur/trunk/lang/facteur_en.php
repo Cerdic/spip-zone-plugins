@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Username:',
 
 	// M
-	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
+	'message_identite_email' => 'The plugin configuration "factor" overload this email address to send emails.',
 
 	// N
 	'note_test_configuration' => 'A test email will be sent to the "sender".',
