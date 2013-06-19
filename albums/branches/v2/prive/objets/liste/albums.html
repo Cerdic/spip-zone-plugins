@@ -106,7 +106,7 @@
 			[(#REM) TITRE ]
 			[(#VAL{titre}|in_array{#GET{colonnes}}|oui)
 			<td class='titre principale #EDIT{titre}'>
-				[<a href="[(#ID_ALBUM|generer_url_entite{album})]">(#TITRE)</a>]
+				[<a href="[(#ID_ALBUM|generer_url_entite{album})]">[(#RANG). ](#TITRE)</a>]
 			</td>
 			]
 
