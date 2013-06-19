@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_versions_une' => 'One version',
 
 	// L
-	'label_angle_rotation' => 'Rotation angle:', # MODIF
+	'label_angle_rotation' => 'Rotation angle:',
 	'label_choisir_filtres' => 'Choose filters to enable',
 	'label_compression_rendu' => 'Compression quality for rendering (in %, default 85):',
 	'label_couleur_sepia' => 'Color :',
