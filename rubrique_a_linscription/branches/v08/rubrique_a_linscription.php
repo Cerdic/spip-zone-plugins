@@ -96,3 +96,5 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 	
 	return $flux;	
 }
+
+?>
