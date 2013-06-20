@@ -70,7 +70,7 @@ function exec_bilan() {
 /// AFFICHAGES_CENTRAUX : TABLEAUX : bilans
 	foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
 		echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
-		association_liste_totaux_comptes_classes($classes, 'cpte_resultat', 0, $ids['id_periode'], $id_destination);
+		echo comptabilite_tableau_balances($classes, 'cpte_resultat', 0, $ids['debut_periode'], $ids['fin_periode'], $id_destination);
 		if(autoriser('exporter_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
 			echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');
 			if (test_plugin_actif('FPDF')) { // impression en PDF

@@ -1,11 +1,9 @@
 <?php
 /***************************************************************************\
- *  Associaspip, extension de SPIP pour gestion d’associations
+ *  ComptaSPIP, extension comptable
  *
- * @copyright Copyright (c) 2007 Bernard Blazin & Francois de Montlivault
- * @copyright Copyright (c) 2010 Emmanuel Saint-James
- *
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @read (licence, copyrigth, authors, credits)
+ *  ../plugin.xml
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -13,11 +11,13 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 $pc_norme = array(
 	'[1-8]', //0: classes
-	'[0-9]', //1: sections (mais pas de : 24 30 55 56 57 73 81 82 83 84 85 !)
-	'[0-9]', //2: groupes (mais pas de : 100 111 112 113 114 116 117 118 121 122 123 124 125 126 127 128 130 131 132 133 134 135 136 137 140 149 150 152 154 159 160 170 172 173 175 176 177 179 180 182 183 184 189 190 191 192 196 200 202 204 209 210 216 217 219 220 222 224 225 226 227 230 233 234 235 236 239 240 250 251 252 253 254 255 256 257 258 259 260 263 264 265 270 278 280 282 283 284 285 286 287 288 289 294 295 298 299 300 301 302 303 304 305 306 307 308 309 310 313 314 315 316 318 319 320 324 325 327 328 329 330 332 333 334 336 337 338 339 340 342 343 344 346 347 348 349 350 352 353 354 356 357 359 360 361 362 363 364 365 366 367 368 369 370 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 396 398 399 400 402 406 407 412 414 415 417 420 430 431 432 433 434 435 436 439 440 450 452 453 454 459 460 461 462 463 464 465 466 469 470 473 474 479 480 482 483 484 485 490 492 493 494 497 498 499 500 510 520 521 522 523 524 525 526 527 528 529 530 535 536 537 538 539 540 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 591 592 593 594 595 596 597 598 599 600 610 620 630 636 638 639 640 642 643 649 650 652  656 659 660 662 663 664 668 669 670 673 674 676 677 679 680 682 683 684 685 688 690 692 693 694 700 710 711 712 714 715 716 717 718 719 723 724 725 726 727 728 729 730 731 732 733 734 735 736 737 738 739 743 744 745 746 747 748 749 750 759 760 769 770 773 774 776 779 780 782 783 784 785 788 790 791 792 793 794 795 798 799 800 803 804 805 806 807 808 863 865 866 867 867 868 869 872 873 874 876 877 878 879 892 893 894 895 896 897 898 899 81x 82x 83x 84x 85x)
-	'C' => '(7[0-9][0-8])|(6[0-9]9)|1018|(1[12]0)|(16[1236])|187|802',
-	'D' => '(6[0-9][0-8])|(7[0-9]9)|(1[12]9)|186|801',
-); // NB : Les associations peuvent limiter l’utilisation des comptes comptables aux trois premières racines de chaque classe. Ex : le compte 613 correspondant aux locations peut s’avérer suffisant pour y inclure toutes les locations. Il n’est pas forcément obligatoire pour les toutes petites associations de créer des sous-comptes.
+	'[0-9]', //1: sections (mais pas de : 24 30 55 56 57 81 82 83 84 85 !)
+	'[0-9]', //2: groupes (mais pas de : 100 111 112 113 114 116 117 118 121 122 123 124 125 126 127 128 130 131 132 133 134 135 136 137 140 149 150 152 159 160 170 172 173 175 176 177 179 180 182 183 184 189 190 191 192 196 200 202 204 209 210 216 217 219 220 222 224 225 226 227 230 233 234 235 236 239 240 250 251 252 253 254 255 256 257 258 259 260 263 264 265 270 278 283 284 285 286 287 288 289 294 295 298 299 300 301 302 303 304 305 306 307 308 309 310 313 314 315 316 318 319 320 324 325 327 328 329 330 332 333 334 336 337 338 339 340 342 343 344 346 347 348 349 350 352 353 354 356 357 359 360 361 362 363 364 365 366 367 368 369 370 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 396 398 399 402 406 407 412 414 415 420 430 431 432 433 434 435 436 439 440 450 452 453 454 459 460 461 463 466 469 470 473 474 479 480 482 483 484 485 490 492 493 494 497 498 499 500 510 520 521 522 523 524 525 526 527 528 529 530 535 536 537 538 539 540 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 591 592 593 594 595 596 597 598 599 600 610 620 630 636 638 639 640 642 643 649 650 652  656 659 660 662 663 669 670 673 674 676 677 679 680 682 683 684 685 688 690 692 693 694 700 710 711 712 714 715 716 717 718 719 723 724 725 726 727 728 729 730 732 733 734 735 736 737 738 743 744 745 746 747 748 749 750 759 760 769 770 773 774 776 779 780 782 783 784 785 788 790 792 793 794 795 798 799 800 803 804 805 806 807 808 863 865 866 867 867 868 869 872 873 874 876 877 878 879 892 893 894 895 896 897 898 899 81x 82x 83x 84x 85x)
+	'A' => array(6,7), // classes de gestion
+	'B' => array(1,2,3,4,5), // classes de bilan
+	'C' => '1018|(1[12]0)|(16[1236])|187|(2[67]9)|(28[012])|(29[012367])|(39[123457])|(40[3458])|419|(42[14])|(428[246])|(44[13]9)|442|4457|(4458[47])|(44[67])|(448[267])|455|(456[34])|464|4686|477|487|(49[156])|(5[01]9)|5186|590|(6[0-9]9)|(7[0-9][0-2])|(7[0-9][4-8])|802', // comptes au credit
+	'D' => '(1[01236]9)|186|409|4117|(41[368])|(42[57])|4287|(44[13][0-8])|4456|(4458[1236])|(456[26])|(46[25])|4687|476|(48[16])|(5[013]1)|(51[456])|5187|(53[23])|(6[0-9][0-8])|(7[0-9]9)|801', // comptes au debit
+);
 
 // Plan comptable prenant en compte les nouvelles dispositions du règlement :
 // N° 99-08 et n° 99-09 du 24 novembre 1999 (publiés dans le JO du 31/12/1999);
@@ -33,12 +33,13 @@ $pc_norme = array(
 // http://lump.pagesperso-orange.fr/compta.htm
 // http://www.mesexercices.com/recherche_information/comptabilite-les-comptes-de-classe-6-charges-sont-normalement_6_38694.htm
 //  http://dz.viadeo.com/fr/questions/repondre/?questionId=0021aox4cgt6v70a
+// Plan comptable général 2008, Éditions Economica, 2006 : ref.KPMG=1356 ; EAN=978-2-7178-5565-4
 //
 $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 
 	1 => "Comptes de capitaux",
 	10 => "Fonds associatifs et réserves",
-	101 => "Capital",
+	101 => "Capital", // À qualifier selon la forme juridique de l’organisme (capital social, individuel, …)
 	1011 => "Capital souscrit – non appelé",
 	1012 => "Capital souscrit – appelé, non versé",
 	1013 => "Capital souscrit – appelé, versé",
@@ -72,11 +73,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	1043 => "Primes d’apport",
 	1044 => "Primes de conversion d’obligations en actions",
 	1045 => "Bons de souscription d’actions",
-	105 => "Ecarts de réévaluation",
-	1051 => "Ecarts de réévaluation sur des biens sans droit de reprise",
-	1052 => "Ecarts de réévaluation sur des biens avec droit de reprise",
-	1053 => "Réserve de réévaluation",
+	105 => "Écarts de réévaluation",
+	1051 => "Écarts de réévaluation sur des biens sans droit de reprise", // Réserve consécutive à l’application de la loi n° 59-1472 du 28 décembre 1959.
+	1052 => "Écarts de réévaluation sur des biens avec droit de reprise",
+	1053 => "Réserve de réévaluation", // Réserve consécutive à l’application de la loi n° 76-1232 du 29 décembre 1976.
 	1055 => "Écarts de réévaluation (autres opérations légales)",
+#	1056 => "", // compte supprimé
 	1057 => "Autres écarts de réévaluation en France",
 	1058 => "Autres écarts de réévaluation à l’Étranger",
 	106 => "Réserves",
@@ -84,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	10611 => "Réserve légale proprement dite",
 	10612 => "Plus-values nettes à long terme",
 	1062 => "Réserves indisponibles",
-	1063 => "Réserves statutaires ou contractuelles", // Notamment les réserves prévues dans les statuts des organismes reconnues d’utilité publique
+	1063 => "Réserves statutaires ou contractuelles", // Notamment les réserves prévues dans les statuts des organismes reconnues d’utilité publique.
 	1064 => "Réserves réglementées",
 	10641 => "Plus-values nettes à long terme",
 	10643 => "Réserves consécutives à l’octroi de subventions d’investissement",
@@ -105,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	120 => "Résultat de l’exercice (excédent)",
 	129 => "Résultat de l’exercice (déficit)",
 	13 => "Subventions d’investissement affectés à des biens non renouvelables par l’organisme",
-	131 => "Subventions d’investissement non renouvelables",
+	131 => "Subventions d’équipement",
 	1311 => "– État",
 	1312 => "– Régions",
 	1313 => "– Départements",
@@ -152,8 +154,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	1432 => "Fluctuation des cours",
 	144 => "Provisions réglementées relatives aux autres éléments de l’actif",
 	145 => "Amortissements dérogatoires",
-	146 => "Provision spéciale de réévaluation",
-	147 => "Plus-values réinvesties",
+	146 => "Provision spéciale de réévaluation", // Provision consécutive à l’application de la loi n° 77-1467 du 30 décembre 1977.
+	147 => "Plus-values réinvesties", // Assimilées à des amortissements dérogatoires.
 	148 => "Réserves des plus-values", // = Autres provisions réglementées
 	14861 => "Réserves des plus-values nettes d’actif immobilisé",
 	14862 => "Réserves des plus-values nettes d’actif circulant",
@@ -167,31 +169,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	1516 => "Provisions pour risques d’emploi",
 	1518 => "Autres provisions pour risques",
 	153 => "Provisions pour pensions et obligations similaires",
+	154 => "Provisions pour restructurations",
 	155 => "Provisions pour impôts",
 	156 => "Provisions pour renouvellement des immobilisations (entreprises concessionnaires)",
 	157 => "Provisions pour charges à répartir sur plusieurs exercices",
 	1572 => "Provisions pour gros entretiens ou grandes révisions",
 	158 => "Autres provisions pour charges",
-	1582 => "Provisions pour cotisations sociales et fiscales sur congés à payer",
-	16 => "Emprunts et dettes assimilées",
+	1581 => "Provisions pour remises en état",
+#	1582 => "Provisions pour cotisations sociales et fiscales sur congés à payer", // compte supprimé
+	16 => "Emprunts et dettes assimilées", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	161 => "Emprunts obligataires convertibles",
 	162 => "Obligations représentatives de passifs nets remis en fiducie",
 	163 => "Autres emprunts obligataires",
 	164 => "Emprunts auprès des établissements de crédit",
-	1641 => "Emprunts à moyen et long terme foncier", // (interet 6611)
-	1642 => "Emprunts à moyen et long terme exploitation", // (interet 6612)
-	1643 => "Emprunts à court terme (court terme attente)", // (interet 6613)
+	1641 => "Emprunts à moyen et long terme foncier", // (intérêt 6611)
+	1642 => "Emprunts à moyen et long terme exploitation", // (intérêt 6612)
+	1643 => "Emprunts à court terme (court terme attente)", // (intérêt 6613)
 	165 => "Dépôts et cautionnements reçus",
 	1651 => "Dépôts",
 	1655 => "Cautionnements",
 	166 => "Participation des salariés aux résultats",
-	1661 => "Comptes bloqués", // Débit du compte 424 du montant des fonds qui n'ont pas pu être utilisés par suite d’absence d’accord entre employeurs et salariés
+	1661 => "Comptes bloqués", // Débit du compte 424 du montant des fonds qui n’ont pas pu être utilisés par suite d’absence d’accord entre employeurs et salariés
 	1662 => "Fonds de participation",
 	167 => "Emprunts et dettes assorties de conditions particulières",
 	1671 => "Émissions de titres participatifs",
 	1672 => "Titre associatif",
 	1674 => "Avances conditionnées de l’État",
 	1675 => "Emprunts participatifs",
+#	1676 => "", // compte supprimé
 	168 => "Autres emprunts et dettes assimilées",
 	1681 => "Autres emprunts (dont Prêts familiaux)",
 	1685 => "Rentes viagères capitalisées",
@@ -205,13 +210,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	16887 => "Sur emprunts et dettes assortis de conditions particulières",
 	16888 => "Sur autres emprunts et dettes assimilées",
 	169 => "Primes de remboursement des obligations",
-	17 => "Dettes rattachées à des participations",
+	17 => "Dettes rattachées à des participations", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	171 => "Dettes rattachées à des participations (groupe)",
 	174 => "Dettes rattachées à des participations (hors groupe)",
 	178 => "Dettes rattachées à des sociétés en participation",
 	1781 => "Principal",
 	1788 => "Intérêts courus",
-	18 => "Comptes de liaison des établissements",
+	18 => "Comptes de liaison des établissements et sociétés en participation",
 	181 => "Compte de liaison entre siège social et établissements",
 	186 => "Biens et prestations échangés entre établissement (charges)",
 	187 => "Biens et prestations échangés entre établissement (produits)",
@@ -245,23 +250,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2114 => "Terrains de gisement",
 	21141 => "Carrières",
 	2115 => "Terrains bâtis",
-	21151 => "Ensembles immobiliers industriels (A, B...)",
-	21155 => "Ensembles immobiliers administratifs et commerciaux (A, B...)",
+	21151 => "Ensembles immobiliers industriels (A, B, …)",
+	21155 => "Ensembles immobiliers administratifs et commerciaux (A, B, …)",
 	21158 => "Autres ensembles immobiliers",
-	211581 => "Affectés aux opérations professionnelles (A, B...)",
-	211588 => "Affectés aux opérations non professionnelles (A, B...)",
+	211581 => "Affectés aux opérations professionnelles (A, B, …)",
+	211588 => "Affectés aux opérations non professionnelles (A, B, …)",
 	2116 => "Compte d’ordre sur immobilisation", // (art. 6 du décret n°78-737 du 11 juillet 1978)
 	212 => "Agencements et aménagements de terrains", // (même ventilation que celle du compte 211)
 	2121 => "Aménagement foncier de drainages",
 	2128 => "Aménagement foncier non amortissables",
 	213 => "Constructions",
 	2131 => "Bâtiments",
-	21311 => "Ensembles immobiliers industriels (A, B...)",
-	21315 => "Ensembles immobiliers administratifs et commerciaux (A, B...)",
+	21311 => "Ensembles immobiliers industriels (A, B, …)",
+	21315 => "Ensembles immobiliers administratifs et commerciaux (A, B, …)",
 	21318 => "Autres ensembles immobiliers",
-	213181 => " Affectés aux opérations professionnelles (A, B...)",
-	213188 => " Affectés aux opérations non professionnelles (A, B...)",
-	2135 => "Installations générales, agencements, aménagements des constructions", // (même ventilation que celle du compte 2131)
+	213181 => " Affectés aux opérations professionnelles (A, B, …)",
+	213188 => " Affectés aux opérations non professionnelles (A, B, …)",
+	2135 => "Installations générales, agencements, aménagements des constructions",
+	21351 => "Ensembles immobiliers industriels (A, B, …)",
+	21355 => "Ensembles immobiliers administratifs et commerciaux (A, B, …)",
+	21358 => "Autres ensembles immobiliers",
+	213581 => " Affectés aux opérations professionnelles (A, B, …)",
+	213588 => " Affectés aux opérations non professionnelles (A, B, …)",
 	2138 => "Ouvrages d’infrastructure",
 	21381 => "Voies de terre",
 	21382 => "Voies de fer",
@@ -269,16 +279,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	21384 => "Barrages",
 	21385 => "Pistes d’aérodromes",
 	214 => "Constructions sur sol d’autrui",
+	2141 => "Bâtiments",
+	21411 => "Ensembles immobiliers industriels (A, B, …)",
+	21415 => "Ensembles immobiliers administratifs et commerciaux (A, B, …)",
+	21418 => "Autres ensembles immobiliers",
+	214181 => " Affectés aux opérations professionnelles (A, B, …)",
+	214188 => " Affectés aux opérations non professionnelles (A, B, …)",
+	2145 => "Installations générales, agencements, aménagements des constructions",
+	21451 => "Ensembles immobiliers industriels (A, B, …)",
+	21455 => "Ensembles immobiliers administratifs et commerciaux (A, B, …)",
+	21458 => "Autres ensembles immobiliers",
+	214581 => " Affectés aux opérations professionnelles (A, B, …)",
+	214588 => " Affectés aux opérations non professionnelles (A, B, …)",
+	2148 => "Ouvrages d’infrastructure",
+	21481 => "Voies de terre",
+	21482 => "Voies de fer",
+	21483 => "Voies d’eau",
+	21484 => "Barrages",
+	21485 => "Pistes d’aérodromes",
 	215 => "Installations techniques, matériel et outillage industriels",
-	2151 => "Installations complexes spécialisées (salle de traite, silo)",
+	2151 => "Installations complexes spécialisées", // Ex. : salle de traite, silo
 	21511 => "– sur sol propre",
 	21514 => "– sur sol d’autrui",
 	2153 => "Installations à caractère spécifique",
 	21531 => "– sur sol propre",
 	21534 => "– sur sol d’autrui",
-	2154 => "Matériel industriel",
-	2155 => "Outillage industriel",
-	2157 => "Agencements et aménagements du matériel et outillage industriels",
+	2154 => "Matériel industriel", // Les organismes pour lesquels la distinction entre les comptes 2154, 2155 et 2157 n’est pas indispensable peuvent regrouper ces comptes sous le compte 2154 dont l’intitulé est complété en conséquence.
+	2155 => "Outillage industriel", // Les organismes pour lesquels la distinction entre les comptes 2154, 2155 et 2157 n’est pas indispensable peuvent regrouper ces comptes sous le compte 2154 dont l’intitulé est complété en conséquence.
+	2157 => "Agencements et aménagements du matériel et outillage industriels", // Les organismes pour lesquels la distinction entre les comptes 2154, 2155 et 2157 n’est pas indispensable peuvent regrouper ces comptes sous le compte 2154 dont l’intitulé est complété en conséquence.
 	218 => "Autres immobilisations corporelles",
 	2181 => "Installations générales, agencements, aménagements divers", // Dans des constructions dont l’organisme n’est pas propriétaire.
 	2182 => "Matériel de transport",
@@ -305,7 +333,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2385 => "Installations techniques, matériel et outillage industriels",
 	2388 => "Autres immobilisations corporelles",
 	25 => "Parts dans des entreprises liées et créances sur des entreprises liées",
-	26 => "Participations et créances rattachées à des participations",
+	26 => "Participations et créances rattachées à des participations", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	261 => "Titres de participation",
 	2611 => "Actions",
 	2618 => "Autres titres",
@@ -315,14 +343,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2671 => "Créances rattachées à des participations (groupe)",
 	2674 => "Créances rattachées à des participations (hors groupe)",
 	2675 => "Versements représentatifs d’apports non capitalisés (appel de fonds)",
-	2676 => "Avances consolidables",
+	2676 => "Avances consolidables", // Au sens financier du terme.
 	2677 => "Autres créances rattachées à des participations",
 	2678 => "Intérêts courus",
 	268 => "Créances rattachées à des sociétés en participation",
 	2681 => "Principal",
 	2688 => "Intérêts courus",
 	269 => "Versements restant à effectuer sur titres de participation non libérés",
-	27 => "Autres immobilisations financières",
+	27 => "Autres immobilisations financières", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	271 => "Titres immobilisés (droit de propriété)",
 	2711 => "Actions",
 	2715 => "Parts sociales crédit agricole",
@@ -342,7 +370,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2755 => "Cautionnements",
 	276 => "Autres créances immobilisées",
 	2761 => "Créances diverses",
-	2768 => "Intérêts courus (à détailler)",
+	2768 => "Intérêts courus",
 	27682 => "Sur titres immobilisés (droits de créance)",
 	27684 => "Sur prêts",
 	27685 => "Sur dépôts et cautionnements",
@@ -352,7 +380,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2772 => "Actions propres ou parts propres en voie d’annulation",
 	279 => "Versements restant à effectuer sur titres immobilisés non libérés",
 	28 => "Amortissements des immobilisations",
-	280 => "Amortissements des immobilisations incorporelles",
+	280 => "Amortissements des immobilisations incorporelles", // Le compte 280 ne doit pas être utilisé pour regrouper les comptes 281 et suivants.
 	2801 => "Frais d’établissement", // (même ventilation que celle du compte 201)
 	2803 => "Frais de recherche et développement",
 	2805 => "Concessions et droits similaires, brevets, licences, logiciels, droits et valeurs similaires",
@@ -365,16 +393,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2814 => "Construction sur sol d’autrui", // (même ventilation que celle du compte 214)
 	2815 => "Installations techniques, matériel et outillage industriels", // (même ventilation que celle du compte 215)
 	2818 => "Autres immobilisations corporelles", // (même ventilation que celle du compte 218)
+	282 => "Amortissements des immobilisations mises en concession",
 	29 => "Provisions pour dépréciation des immobilisations",
-	290 => "Provisions pour dépréciation des immobilisations incorporelles",
+	290 => "Provisions pour dépréciation des immobilisations incorporelles", // Le compte 290 ne doit pas être utilisé pour regrouper les comptes 291 et suivants.
 	2905 => "Marques, procédés, droits, et valeurs similaires",
 	2906 => "Droit au bail",
 	2907 => "Fonds commercial",
 	2908 => "Autres immobilisations incorporelles",
 	291 => "Provisions pour dépréciation des immobilisations corporelles",
-	2911 => "Terrains",
-	292 => "Dépréciations des immobilisations mises en concession",
-	293 => "Dépréciations des immobilisations en cours",
+	2911 => "Terrains", // (autres que terrains de gisements)
+	292 => "Provisions pour dépréciations des immobilisations mises en concession",
+	293 => "Provisions pour dépréciations des immobilisations en cours",
 	2931 => "Immobilisations corporelles en cours",
 	2932 => "Immobilisations incorporelles en cours",
 	296 => "Provisions pour dépréciation des participations et créances rattachées à des participations",
@@ -383,22 +412,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	2967 => "Créances rattachées à des participations", // (même ventilation que celle du compte 267)
 	2968 => "Créances rattachées à des sociétés en participation", // (même ventilation que celle du compte 268)
 	297 => "Provisions pour dépréciation des autres immobilisations financières",
-	2971 => "Titres immobilisés (droit de propriété) (même ventilation que celle du compte 271)",
-	2972 => "Titres immobilisés (droit de créance) (même ventilation que celle du compte 272)",
-	2974 => "Prêts (même ventilation que celle du compte 274)",
-	2975 => "Dépôts et cautionnements versés (même ventilation que celle du compte 275)",
-	2976 => "Autres créances immobilisées (même ventilation que celle du compte 276)",
+	2971 => "Titres immobilisés – droit de propriété", // (même ventilation que celle du compte 271)
+	2972 => "Titres immobilisés – droit de créance", // (même ventilation que celle du compte 272)
+	2973 => "Titres immobilisés de l’activité portefeuille", // (même ventilation que celle du compte 273)
+	2974 => "Prêts", // (même ventilation que celle du compte 274)
+	2975 => "Dépôts et cautionnements versés", // (même ventilation que celle du compte 275)
+	2976 => "Autres créances immobilisées", // (même ventilation que celle du compte 276)
 
 	3 => "Comptes de stocks et en-cours", // La structure des comptes cette classe 3 sera harmonisee avec celle adoptee pour les comptes 60 et 70. Les associations releveront le plus souvent, non pas de l’inventaire permanent, mais de l’inventaire intermittent.
-	31 => "Matières premières et fournitures",
+	31 => "Matières premières et fournitures", // Les organismes qui relèvent du système abrégé regroupent les comptes 31 et 32 sous le même compte 31 dont l’intulé devient "Stocks – Approvisionnements".
 	311 => "Matières (ou groupe) A",
 	312 => "Matières (ou groupe) B",
-	317 => "Fournitures A, B, C...",
-	32 => "Autres approvisionnements",
-	321 => "Matières consommables",
+	317 => "Fournitures A, B, C, …",
+	32 => "Autres approvisionnements", // Les organismes qui relèvent du système abrégé regroupent les comptes 31 et 32 sous le même compte 31 dont l’intulé devient "Stocks – Approvisionnements".
+	321 => "Matières consommables", // Lorsque la distinction entre "Matières consommables" et "Fournitures consommables" n’est pas indispensable, les organismes peuvent regrouper les comptes 321 et 322 sous le numéro 321 dont l’intulé est complété en conséquence : "Matières et fournitures consommables".
 	3211 => "Matières (ou groupe) C",
 	3212 => "Matières (ou groupe) D",
-	322 => "Fournitures consommables",
+	322 => "Fournitures consommables", // Lorsque la distinction entre "Matières consommables" et "Fournitures consommables" n’est pas indispensable, les organismes peuvent regrouper les comptes 321 et 322 sous le numéro 321 dont l’intulé est complété en conséquence : "Matières et fournitures consommables".
 	3221 => "Combustibles",
 	3222 => "Produits d’entretien",
 	3223 => "Fournitures d’atelier et d’usine",
@@ -408,21 +438,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	3261 => "Emballages perdus",
 	3265 => "Emballages récupérables non identifiables",
 	3267 => "Emballages à usage mixte",
-	33 => "En-cours de production de biens",
+	33 => "En-cours de production de biens", // Les organismes relevant du système abrégé peuvent regrouper, le cas échéant, les comptes 33 et 34 et 35 sous le numéro 35 dont l’intulé devient "Stocks de produits et en-cours de production".
 	331 => "Produits en cours",
 	3311 => "Produits en cours P 1",
 	3312 => "Produits en cours P 2",
 	335 => "Travaux en cours ",
 	3351 => "Travaux en cours  T1",
 	3352 => "Travaux en cours  T2",
-	34 => "En-cours de production de services",
+	34 => "En-cours de production de services", // Les organismes relevant du système abrégé peuvent regrouper, le cas échéant, les comptes 33 et 34 et 35 sous le numéro 35 dont l’intulé devient "Stocks de produits et en-cours de production".
 	341 => "Études en cours",
 	3411 => "Études en cours E 1",
 	3412 => "Études en cours E 2",
 	345 => "Prestations de service en cours",
 	3451 => "Prestations de services S 1",
 	3452 => "Prestations de services S 2",
-	35 => "Stocks de produits",
+	35 => "Stocks de produits", // Les organismes relevant du système abrégé peuvent regrouper, le cas échéant, les comptes 33 et 34 et 35 sous le numéro 35 dont l’intulé devient "Stocks de produits et en-cours de production".
 	351 => "Produits intermédiaires",
 	3511 => "Produits intermédiaires (ou groupe) A",
 	3512 => "Produits intermédiaires (ou groupe) B",
@@ -431,29 +461,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	3552 => "Produits finis (ou groupe) B",
 	358 => "Produits résiduels (ou matières de récupération)",
 	3581 => "Déchets",
-	3585 => "Rebut",
+	3585 => "Rebuts",
 	3586 => "Matières de récupération",
-	36 => "Stocks provenant d’immobilisations",
+	36 => "Stocks provenant d’immobilisations", // Compte à ouvrir le cas échéant.
 	37 => "Stocks de marchandises",
 	371 => "Marchandises (ou groupe) A",
 	372 => "Marchandises (ou groupe) B",
-	38 => "Stocks en voie d’acheminement, mis en dépôt ou donnés en consignation", // (en cas d’inventaire en comptabilité générale)
+	38 => "Stocks en voie d’acheminement, mis en dépôt ou donnés en consignation", // Lorsque l’organisme tient un inventaire permanent en comptabilité générale, le compte 38 peut être utilisé pour comptabiliser leurs stocks en voie d'acheminement, mis en dépôt ou donnés en consignation.
 	39 => "Provisions pour dépréciation des stocks et en-cours",
-	391 => "Provisions pour dépréciation des matières premières et fournitures",
+	391 => "Provisions pour dépréciation des matières premières et fournitures", // Les organismes relevant du système abrégé qui regroupent les comptes 31 et 32 sous le numéro 31 utilisent le compte 391 dont l’intitule devient "Provisions pour dépréciation des stocks – Approvisionnements".
 	3911 => "Matières (ou groupe) A",
 	3912 => "Matières (ou groupe) B",
-	3917 => "Fournitures A, B, C...",
-	392 => "Provisions pour dépréciation des autres approvisionnements", // (même ventilation que celle du compte 32)
+	3917 => "Fournitures A, B, C, …",
+	392 => "Provisions pour dépréciation des autres approvisionnements", // (même ventilation que celle du compte 32) Les organismes relevant du système abrégé qui regroupent les comptes 31 et 32 sous le numéro 31 utilisent le compte 391 dont l’intitule devient "Provisions pour dépréciation des stocks – Approvisionnements".
 	3921 => "Matières consommables", // (même ventilation que celle du compte 321)
 	3922 => "Fournitures consommables", // (même ventilation que celle du compte 322)
 	3926 => "Emballages", // (même ventilation que celle du compte 326)
-	393 => "Provisions pour dépréciation des en-cours de production de biens", // (même ventilation que celle du compte 33)
+	393 => "Provisions pour dépréciation des en-cours de production de biens", // (même ventilation que celle du compte 33) Les organismes relevant du système abrégé qui regroupent les comptes 33 et 34 et 35 sous le numéro 35 utilisent le compte 395 dont l’intitule devient "Provisions pour dépréciation des stocks de produits et en-cours de production".
 	3931 => "Produits en cours", // (même ventilation que celle du compte 331)
 	3935 => "Travaux en cours", // (même ventilation que celle du compte 335)
-	394 => "Provisions pour dépréciation des en-cours de production de services", // (même ventilation que celle du compte 34)
+	394 => "Provisions pour dépréciation des en-cours de production de services", // (même ventilation que celle du compte 34) Les organismes relevant du système abrégé qui regroupent les comptes 33 et 34 et 35 sous le numéro 35 utilisent le compte 395 dont l’intitule devient "Provisions pour dépréciation des stocks de produits et en-cours de production".
 	3941 => "Études en cours", // (même ventilation que celle du compte 341)
 	3945 => "Prestations de services en cours", // (même ventilation que celle du compte 345)
-	395 => "Provisions pour dépréciation des stocks de produits", // (même ventilation que celle du compte 35)
+	395 => "Provisions pour dépréciation des stocks de produits", // (même ventilation que celle du compte 35) Les organismes relevant du système abrégé qui regroupent les comptes 33 et 34 et 35 sous le numéro 35 utilisent le compte 395 dont l’intitule devient "Provisions pour dépréciation des stocks de produits et en-cours de production".
 	3951 => "Produits intermédiaires", // (même ventilation que celle du compte 351)
 	3955 => "Produits finis", // (même ventilation que celle du compte 355)
 	397 => "Provisions pour dépréciation des stocks de marchandises",
@@ -461,7 +491,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	3972 => "Marchandises (ou groupe) B",
 
 	4 => "Comptes de tiers",
-	40 => "Fournisseurs et comptes rattachés",
+	40 => "Fournisseurs et comptes rattachés", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
+	400 => "Fournisseurs et comptes rattachés",
 	401 => "Fournisseurs", // (Factures de dettes)
 	4011 => "Fournisseurs – Achats de biens ou de prestations de services",
 	4017 => "Fournisseurs – Retenues de garantie",
@@ -470,7 +501,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	404 => "Fournisseurs d’immobilisations",
 	4041 => "Fournisseurs – Achats d’immobilisations",
 	4047 => "Fournisseurs d’immobilisations – Retenues de garantie",
-	405 => "Fournisseurs d’immobilisation – Effets à payer",
+	405 => "Fournisseurs d’immobilisation – Effets à payer", // Y compris billets de fonds.
 	408 => "Fournisseurs – Factures non parvenues",
 	4081 => "Fournisseurs – Achats de biens ou de prestations de services",
 	4084 => "Fournisseurs – Achats d’immobilisations",
@@ -479,13 +510,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	4091 => "Fournisseurs – Avances et acomptes versés sur commandes",
 	4096 => "Fournisseurs – Créances pour emballage et matériel à rendre",
 	4098 => "Rabais, remises, ristournes à obtenir et autres avoirs non encore reçus",
-	41 => "Usagers/Clients et comptes rattachés",
+	41 => "Usagers/Clients et comptes rattachés", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	410 => "Usagers/Clients et comptes rattachés",
 	411 => "Usagers/Clients (et organismes de prise en charge)", // (factures de créances)
 	4111 => "– Ventes de biens ou de prestations de services",
 	4117 => "– Retenues de garantie",
 	413 => "Usagers/Clients – Effets à recevoir",
 #	416 => "Usagers/Clients – Créances douteuses ou litigieuses", // (Supprimé par le règlement n°99-08 du CRC)
+#	417 => "", // compte supprimé
 	418 => "Usagers/Clients – Produits non encore facturés",
 	4181 => "Usagers/Clients – Factures à établir",
 	4188 => "Usagers/Clients – Intérêts courus",
@@ -496,7 +528,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	4198 => "Rabais, remises, ristournes à accorder et autres avoirs à établir",
 	42 => "Personnel et comptes rattachés",
 	421 => "Personnel – Rémunérations dues",
-	422 => "Comités d’entreprise, d’établissement",
+	422 => "Comités d’entreprise, d’établissement, …",
 	423 => "Notes de frais", // (compte non indiqué dans le PCG, c'est un compte issu de la pratique)
 	424 => "Participations des salariés aux résultats",
 	4246 => "Réserve spéciale", // (art. L. 442-2 du Code du travail)
@@ -556,7 +588,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	44583 => "Remboursement de taxes sur le chiffre d’affaires demandé",
 	44584 => "TVA récupérée d’avance",
 	44586 => "Taxes sur le chiffre d’affaires sur factures non parvenues",
-	44587 => "Taxes sur le chiffre d’affaires sur factures à établir",
+	44587 => "Taxes sur le chiffre d’affaires sur factures à établir", // Ce compte est utilisé lorsque l’exigibilité des taxes n’est pas encore intervenue.
 	446 => "Obligations cautionnées",
 	447 => "Autres impôts, taxes et versements assimilés",
 	4471 => "Impôts, taxes et versements assimilés sur rémunérations (administration des impôts)",
@@ -599,6 +631,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	4581 => "Opérations courantes",
 	4588 => "Intérêts courus",
 	46 => "Débiteurs divers et créditeurs divers",
+	462 => "Créances sur cessions d’immobilisations", // Y compris billets de fonds.
+	464 => "Dettes sur acquisitions de valeurs mobilières de placement",
+	465 => "Créances sur cessions de valeurs mobilières de placement",
 	467 => "Autres comptes débiteurs ou créditeurs",
 	468 => "Divers – Charges à payer et produits à recevoir",
 	4686 => "Charges à payer",
@@ -618,10 +653,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	478 => "Autres comptes transitoires",
 	48 => "Comptes de régularisation",
 	481 => "Charges à répartir sur plusieurs exercices", // (Règlement n°2004-06 du CRC)
-	4812 => "Frais d’acquisition des immobilisations",
+#	4811 => "Charges différéess", // compte supprimé
+#	4812 => "Frais d’acquisition des immobilisations", // compte supprimé
 	4816 => "Frais d’émission des emprunts",
 	4817 => "Pénalités de négociation de la dette",
-	4818 => "Charges différées liées à l’obligation d’équilibre budgétaire",
+#	4818 => "Charges différées liées à l’obligation d’équilibre budgétaire", //= Charges à étaler. compte supprimé
 	486 => "Charges constatée d’avance",
 	487 => "Produits constatés d’avance",
 	488 => "Comptes de répartition périodique des charges et des produits",
@@ -629,7 +665,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	4887 => "Produits",
 	489 => "Quotas d’émission alloués par l’État",
 	49 => "Provision pour dépréciation des comptes de tiers",
-	491 => "Provisions pour dépréciation des comptes d’usagers (et organismes de prise en charge)",
+	491 => "Provisions pour dépréciation des comptes d’usagers/clients (et organismes de prise en charge)",
 	495 => "Dépréciations des comptes du groupe et des associés",
 	4951 => "Comptes du groupe",
 	4955 => "Comptes courants des associés",
@@ -640,7 +676,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	4967 => "Autres comptes débiteurs",
 
 	5 => "Comptes financiers",
-	50 => "Valeurs mobilières de placement",
+	50 => "Valeurs mobilières de placement", // Les comptes de base (sur trois chiffres) peuvent être subdivisé à l’initiative des organismes pour distinguer les opérations faites et France ou à l’Étranger, en Euros ou en devises, et selon qu’elles sont traitées à long/moyen/court terme.
 	501 => "Parts dans des entreprises liées",
 	502 => "Actions propres",
 	503 => "Actions",
@@ -651,7 +687,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	506 => "Obligations",
 	5061 => "Obligations cotées",
 	5065 => "Obligations non cotées",
-	507 => "Bons du trésor et bons de caisse à court terme",
+	507 => "Bons du Trésor et bons de caisse à court terme",
 	508 => "Autres valeurs mobilières et créances assimilées",
 	5081 => "Autres valeurs mobilières",
 	5082 => "Bons de souscription",
@@ -669,13 +705,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	513 => "Caisse des dépôts et consignations",
 	514 => "Chèques postaux",
 	515 => "«Caisses» du Trésor et des établissements publics",
-	516 => "Sociétés de bourse",
+	516 => "Sociétés de bourse, Agents de change", // (loi du 22 janvier 1988)
 	517 => "Autres organismes financiers",
-	5171 => "Caisse d’Epargne",
+	5171 => "Caisse d’Épargne",
 	518 => "Intérêts courus",
 	5186 => "Intérêts courus à payer",
 	5187 => "Intérêts courus à recevoir",
-	519 => "Concours bancaires courants",
+	519 => "Concours bancaires/financiers courants", // Autre que ceux directement enregistrés dans les comptes 512 à 518.
 	5191 => "Crédit de mobilisation de créances commerciales (CMCC)",
 	5193 => "Mobilisation de créances nées à l’étranger",
 	5198 => "Intérêts courus sur concours bancaires courants",
@@ -684,8 +720,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	531 => "Caisse du siège social",
 	5311 => "Caisse en monnaie nationale",
 	5314 => "Caisse en devise",
-	532 => "Caisse des lieux d’activités", // Caisse succursale (ou usine) A
-	533 => "Caisse des lieux d’activités", // Caisse succursale (ou usine) B
+	532 => "Caisse des lieux d’activités A", //= "Caisse succursale (ou usine) A"
+	533 => "Caisse des lieux d’activités B", // "Caisse succursale (ou usine) B"
 	54 => "Régies d’avances et accréditifs",
 	541 => "Régies d’avances",
 	542 => "Accréditifs",
@@ -699,7 +735,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	5908 => "Autres valeurs mobilières de placement et créances assimilées",
 
 	6 =>"Comptes de charges",
-	60 => "Achats", // sauf 603
+	60 => "Achats (sauf 603)",
 	601 => "Achats stockés – Matières premières et fournitures", // Structure laissée libre en vue de répondre à la diversité des actions entreprises par le secteur associatif.
 	6011 => "Matières (ou groupe) A", // Ex. : Achat engrais et amendements
 	6012 => "Matières (ou groupe) B", // Ex. : Achat de semences
@@ -709,12 +745,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6016 => "Matières (ou groupe) F", // Ex. : Produits de reproduction animale
 	6017 => "Fournitures A", // Ex. : Achat d’emballages
 	6018 => "Fournitures B", // Ex. : Achat combustibles
-	6019 => "Fournitures C...",
+	6019 => "Fournitures C…",
 	602 => "Achats stockés – Autres approvisionnements", // Structure laissée libre en vue de répondre à la diversité des actions entreprises par le secteur associatif.
-	6021 => "Matières consommables", // Ex. : Achat carburants et lubrifiants
+	6021 => "Matières consommables", // Ex. : Achat carburants et lubrifiants. Les organismes pour lesquels la distinction entre "Matières consommables" et "Fournitures consommables" n'est pas indispensable peuvent regrouper les comptes 6021 et 6022 sous le numéro 6021 dont l’intitulé est complété en conséquence : "Achat de matières et fournitures consommables".
 	60211 => "Matières (ou groupe) C", // Ex. : Achat de fuel
 	60212 => "Matières (ou groupe) D", // Ex. : Achat d’huile et de graisse
-	6022 => "Fournitures consommables",
+	6022 => "Fournitures consommables", // Les organismes pour lesquels la distinction entre "Matières consommables" et "Fournitures consommables" n'est pas indispensable peuvent regrouper les comptes 6021 et 6022 sous le numéro 6021 dont l’intitulé est complété en conséquence : "Achat de matières et fournitures consommables".
 	60221 => "Combustibles",
 	69222 => "Produits d’entretien", // (produits de lavage)
 	60223 => "Fournitures d’atelier et d’usine",
@@ -736,12 +772,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6051 => "Travaux par tiers", // Ex. : Productions végétales (moissons, ensilages)
 	6054 => "Frais par tiers", // Ex. : Frais d’élevage ou d’insémination
 	606 => "Achats non stockés de matières et fournitures", // Structure laissée libre en vue de répondre à la diversité des actions entreprises par le secteur associatif.
-	6061 => "Fournitures non stockables (eau, énergie,…)",
-	6063 => "Fournitures d’entretiens et de petit équipement",
-	6064 => "Fournitures administratives", // Ex. Carburant à la pompe (véhicules exploitation)
+	6061 => "Fournitures non stockables (eau, énergie, …)",
+	6063 => "Fournitures d’entretiens et de petit équipement", // Matières et fournitures qui ne passent pas par un compte en magasin.
+	6064 => "Fournitures administratives", // Ex. Carburant à la pompe (véhicules exploitation).  Matières et fournitures qui ne passent pas par un compte en magasin.
 #	6066 => "Fournitures d’entretiens et de petit équipement",
 	6067 => "Fournitures LSM",
-	6068 => "Autres matières et fournitures de bureau",
+	6068 => "Autres matières et fournitures de bureau", // Matières et fournitures qui ne passent pas par un compte en magasin.
 	607 => "Achats de marchandises",
 	6071 => "Marchandises (ou groupe) A",
 	6072 => "Marchandises (ou groupe) B",
@@ -755,7 +791,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6097 => "– de marchandises",
 	6098 => "Rabais, remises et ristournes non affectés",
 	61 => "Services extérieurs",
-	611 => "Sous-traitance générale", // Autre que sous-traitance incorporée directement aux produits fabriqués et inscrite au compte 604.
+	611 => "Sous-traitance générale", // Autre que sous-traitance incorporée directement aux ouvrages, travaux et produits fabriqués, et inscrite au compte 604 ou 605.
 	612 => "Redevances de crédit-bail",
 	6122 => "Crédit-bail immobilier",
 	6125 => "Crédit-bail mobilier",
@@ -763,9 +799,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6132 => "Locations immobilières", // Loyer, fermages
 	6135 => "Locations mobilières", // Location de matériel
 	6136 => "Malis sur les emballages",
-	614 => "Charges locatives et de copropriété",
+	614 => "Charges locatives et de copropriété", // Lorsque le montant des charges de copropriété n’a pas un caractère significatif justifiant leur ventilation dans les autres comptes par nature.
 	615 => "Entretiens et réparations",
-	6151 => "Entretiens des terrains", // (barbelés, grillage)
+	6151 => "Entretiens des terrains", // Ex. : barbelés et grillage.
 	6152 => "Entretiens et réparations sur biens immobiliers",
 #	6153 => "Entretiens et réparations des constructions",
 	6155 => "Entretiens et réparations sur biens mobiliers",
@@ -781,7 +817,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6164 => "Risques d’exploitation",
 	6165 => "Insolvabilité clients",
 	6168 => "Autres assurances",
-	617 => "Etudes et recherches", // (analyse de terre)
+	617 => "Études et recherches", // Ex. : analyse de terre.
 	618 => "Divers",
 	6181 => "Documentation générale", // (abonnement)
 	6183 => "Documentation technique", // (abonnement)
@@ -796,19 +832,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6222 => "Commissions et courtages sur ventes",
 	6224 => "Rémunérations des transitaires",
 	6225 => "Rémunérations d’affacturage", // Ex. : Honoraires véto
-	6226 => "Autres honoraires", // (notaires, avocats, comptabilité)
+	6226 => "Autres honoraires", // Ex. : notaires, avocats, comptabilité.
 	62266 => "Maintenace de logiciel",
 	6227 => "Frais d’actes et de contentieux",
 	6228 => "Divers",
 	623 => "Publicité, publications, relations publiques",
 	6231 => "Annonces et insertions",
+	6232 => "Échantillons",
 	6233 => "Foires et expositions",
+	6234 => "Cadeaux à la clientèle",
+	6235 => "Primes",
 	6236 => "Catalogues et imprimés",
 	6237 => "Publications",
-	6238 => "Divers (pourboires, dons courants, ...)",
+	6238 => "Divers (pourboires, dons courants, …)",
 	624 => "Transports de biens et transports collectifs du personnel",
 	6241 => "Transports sur achats",
-	6243 => "Transports entre établissements",
+	6242 => "Transports sur ventes",
+	6243 => "Transports entre établissements ou chantiers",
 	6244 => "Transports administratifs",
 	6247 => "Transports collectifs du personnel",
 	6248 => "Divers",
@@ -819,13 +859,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	626 => "Frais postaux et frais de télécommunications",
 	6261 => "Frais postaux",
 	627 => "Services bancaires et assimilés",
-	6271 => "Frais de tenu du compte bancaire", // Frais sur titres (achat, vente, garde)
+	6271 => "Frais de tenu du compte bancaire", //ex Frais sur titres (achat, vente, garde)
 	6272 => "Commissions et frais sur émission d’emprunts",
-	6275 => "Frais sur effets",
+	6275 => "Frais sur effets", // (commission d'endossement, …)
 	6276 => "Location de coffres",
 	6278 => "Autres frais et commissions sur prestations de services",
 	628 => "Divers",
-	6281 => "Cotisations (liées à l’activité économique)", // Concours divers (cotisations professionnelles...)
+	6281 => "Cotisations (liées à l’activité économique)", //= "Concours divers (cotisations professionnelles…)"
 	6284 => "Frais de recrutement du personnel",
 	629 => "Rabais, remises et ristournes obtenus sur autres services extérieurs",
 	63 => "Impôts, taxes et versements assimilés",
@@ -853,7 +893,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	63511 => "Taxe professionnelle",
 	63512 => "Taxes foncières",
 	63513 => "Autres impôts locaux",
+	63514 => "Taxe sur les véhicules de sociétés",
 	63518 => "Autres impôts directs",
+	6352 => "Taxes sur le chiffre d'affaire non recuperables ", // Les organismes tiennent ce compte lorsqu’ils n’ont pu exceptionnellement enregistrer leurs charges, TVA non récupérable comprise (en cas de régularisation difficilement rattachables à une charge déterminée).
 	6353 => "Impôts indirects",
 	6354 => "Droits d’enregistrement et de timbre",
 	63541 => "Droits de mutation",
@@ -865,14 +907,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6374 => "Impôts et taxes exigibles à l’Étranger",
 	6378 => "Taxes diverses",
 	64 => "Charges de personnel",
-	641 => "Rémunérations du personnel",
-	6411 => "Salaires, appointements",
+	641 => "Rémunérations du personnel", // Y compris gérance majoritaire et administrateurs de sociétés.
+	6411 => "Salaires, appointements, commissions de base",
 	6412 => "Congés payés",
 	6413 => "Primes et gratifications", // et Rémunération des associés
 	6414 => "Indemnités et avantages divers",
 	6415 => "Supplément familial",
 	6418 => "Avantages en nature",
-	644 => "Rémunération du travail de l’exploitant",
+	644 => "Rémunération du travail de l’exploitant", // Compte à utiliser dans les entreprises individuelles conformément aux dispositions en vigueur.
 	645 => "Charges de sécurité sociale et de prévoyance",
 	6451 => "Cotisations à l’URSSAF",
 	6452 => "Cotisations aux mutuelles",
@@ -886,7 +928,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6473 => "Versements aux comités d’hygiène et de sécurité",
 	6474 => "Versements aux autres œuvres sociales",
 	6475 => "Médecine du travail, pharmacie",
-	648 => "Autres charges de personnel", // (stagiaires)
+	648 => "Autres charges de personnel", // Ex. : stagiaires.
 	65 => "Autres charges de gestion courante",
 	651 => "Redevances pour concessions, brevets, licences, marques, procédés, droits et valeurs similaires",
 	6511 => "Redevances pour concessions, brevets, licences, marques, procédés",
@@ -909,14 +951,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	661 => "Charges d’intérêts", // (capital : 164)
 	6611 => "Intérêts des emprunts et dettes", // (capital : 1641)
 	66116 => "– des emprunts et dettes assimilées",
+	66117 => "– des dettes rattachées à des participations",
 	6612 => "Intérêt des emprunts à moyen et court terme", // (capital : 1642)
 	6613 => "Intérêt des emprunts à long terme", // (capital : 1643 ou 5191)
 	6614 => "Crédit de campagne",
-	6616 => "Intérêts bancaires",
+	6615 => "Intérêts des comptes courants et des dépôts créditeurs",
+	6616 => "Intérêts bancaires", // et sur opérations de financement (escompte)
+	6617 => "Intérêts des obligations cautionnées",
 	6618 => "Intérêts des autres dettes", // (fournisseurs et autres ouvertures de crédit)
+	66181 => "– des dettes commerciales",
+	66188 => "– des dettes diverses",
+	664 => "Pertes sur créances liées à des participations",
 	665 => "Escomptes accordés",
 	666 => "Pertes de change",
 	667 => "Charges nettes sur cessions de valeurs mobilières de placement",
+	668 => "Autres charges financières",
 	67 => "Charges exceptionnelles",
 	671 => "Charges exceptionnelles sur opérations de gestion",
 	6711 => "Pénalités sur marchés (et dédits payés sur achats et ventes)",
@@ -926,12 +975,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6715 => "Subventions accordées",
 	6717 => "Rappel d’impôts (autres qu’impôts sur les bénéfices)",
 	6718 => "Autres charges exceptionnelles sur opérations de gestion",
-	672 => "Charges sur exercices antérieurs (à reclasser)",
+	672 => "Charges sur exercices antérieurs (à reclasser)", // Compte à la disposition des organismes pour enregistrer, en cours d’exercice, les charges sur les exercices antérieurs,
 	675 => "Valeurs comptables des éléments d’actif cédés",
 	6751 => "Immobilisations incorporelles",
 	6752 => "Immobilisations corporelles",
 	6756 => "Immobilisations financières",
-	6758 => "Autres éléments d’actif",
+	6758 => "Autres éléments d’actif", // Sauf stocks et valeurs mobilières de placement.
 	678 => "Autres charges exceptionnelles",
 	6781 => "Malis provenant de clauses d’indexation",
 	6782 => "Lots",
@@ -951,14 +1000,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	68173 => "Stocks et en-cours",
 	68174 => "Créances",
 	686 => "Dotations aux amortissements et aux provisions – Charges financières",
+	6861 => "Dotation aux amortissements des primes de remboursement des obligations",
+	6865 => "Dotation aux provisions pour risques et charges financiers",
 	6866 => "Dotations aux provisions pour dépréciation des éléments financiers",
 	68662 => "Dotations aux provisions financières",
 	68665 => "Valeurs mobilières de placement",
+	6868 => "Autres dotations",
 	687 => "Dotations aux amortissements et aux provisions – Charges exceptionnelles",
 	6871 => "Dotations aux amortissements exceptionnels des immobilisations",
 	6872 => "Dotations aux provisions réglementées (immobilisations)",
 	68725 => "Dotations aux amortissements dérogatoires",
 	6873 => "Dotations aux provisions réglementées (stocks)",
+	68735 => "Amortissements dérogatoires",
 	6874 => "Dotations aux autres provisions réglementées",
 	6875 => "Dotations aux provisions exceptionnelles",
 	6876 => "Dotations aux provisions pour dépréciations exceptionnelles",
@@ -969,41 +1022,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	6897 => "Engagements à réaliser sur legs et donations afffectés",
 	69 => "Impôts sur les bénéfices et assimilés & Participation des salariés",
 	691 => "Participation des salariés aux résultats",
-	695 => "Impôts sur les organismes", // des personnes morales lucratives ou pas...
+	695 => "Impôts sur les organismes", // des personnes morales lucratives ou pas…
 	6951 => "Impôts dus en France",
 	6952 => "Contribution additionnelle à l’impôt sur les bénéfices",
-	6954 => "Impôts dus à l’étranger",
+	6954 => "Impôts dus à l’Étranger",
 	696 => "Suppléments d’impôt sur les organismes, liés aux distributions",
-#	697 => "Imposition forfaitaire annuelle des organismes (avant 1996, depuis cpte 635)",
+#	697 => "Imposition forfaitaire annuelle des organismes", // Avant 1996, depuis compte 635.
 	698 => "Intégration fiscale",
 	6981 => "Intégration fiscale. Charges",
 	6989 => "Intégration fiscale. Produits",
 	699 => "Produits – Reports en arrière des déficits", // ?
 
 	7 => "Comptes de produits",
-	70 => "Ventes de produits finis, prestations de services, marchandises",
-	701 => "Ventes de produits finis",
+	70 => "Ventes de produits finis, prestations de services, marchandises", // Les comptes de base (sur trois chiffres) peuvent être subdivisé pour distinguer les ventes faites et France ou à l’Étranger.
+	701 => "Ventes de produits finis", // Les organismes pour lesquels la distinction des "Ventes de produits finis" et des "Ventes de produits intermédiaires" n'est pas significative peuvent regrouper les comptes 701 et 702 dans le numéro 701 dont l’intitulé devient : "Ventes de produits finis et intermédiaires".
 	7011 => "Produits finis (ou groupe) A",
 	7012 => "Produits finis (ou groupe) B",
-	702 => "Ventes de produits intermédiaires",
+	702 => "Ventes de produits intermédiaires", // Les organismes pour lesquels la distinction des "Ventes de produits finis" et des "Ventes de produits intermédiaires" n'est pas significative peuvent regrouper les comptes 701 et 702 dans le numéro 701 dont l’intitulé devient : "Ventes de produits finis et intermédiaires".
 	703 => "Ventes de produits résiduels",
-	704 => "Travaux",
+	704 => "Travaux", // Les organismes relevant du systeme abrege regroupent les comptes 704 et 705 et 706 sous le numéro 706 dont l’intitulé devient : "Travaux et prestations de services".
 	7041 => "Travaux de catégorie (ou activité) A",
 	7042 => "Travaux de catégorie (ou activité) B",
-	705 => "Études",
-	706 => "Prestations de services",
+	705 => "Études", // Les organismes relevant du systeme abrege regroupent les comptes 704 et 705 et 706 sous le numéro 706 dont l’intitulé devient : "Travaux et prestations de services".
+	706 => "Prestations de services", // Les organismes relevant du systeme abrege regroupent les comptes 704 et 705 et 706 sous le numéro 706 dont l’intitulé devient : "Travaux et prestations de services".
 	707 => "Ventes de marchandises",
 	7071 => "Marchandises (ou groupe) A",
 	7072 => "Marchandises (ou groupe) B",
 	708 => "Produits des activités annexes",
-	7081 => "Produits des prestations fournies au personnel",
+	7081 => "Produits des prestations fournies au personnel", //= "Produits des services exploités dans l'intérêt du personnel".
 	7082 => "Commissions et courtages",
 	7083 => "Locations diverses",
 	7084 => "Mise à disposition de personnel facturée",
 	7085 => "Ports et frais accessoires facturés",
 	7086 => "Bonis sur reprises d’emballages consignés",
 	7087 => "Bonifications obtenues des clients et primes sur ventes",
-	7088 => "Autres produits d’activités annexes", // (cessions d’approvisionnements...)
+	7088 => "Autres produits d’activités annexes", // (cessions d’approvisionnements…)
 	709 => "Rabais, remises et ristournes accordées par l’organisme",
 	7091 => "– sur ventes de produits finis",
 	7092 => "– sur ventes de produits intermédiaires",
@@ -1028,6 +1081,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	720 => "Report exercice précédent",
 	721 => "Immobilisations incorporelles",
 	722 => "Immobilisations corporelles",
+#	73 => "Produits nets partiels sur opérations à long terme", // compte supprimé
+#	731 => "Produits nets partiels sur opérations en cours", // à subdiviser par operation : compte supprimé
+#	739 => "Produits nets partiels sur opérations terminées", // compte supprimé
 	74 => "Subvention d’exploitation",
 	740 => "Subvention municipale",
 	741 => "Subvention départementale",
@@ -1061,7 +1117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	7617 => "Revenus des créances rattachées à des participations",
 	762 => "Produits des autres immobilisations financières",
 	7621 => "Revenus des titres immobilisés",
-	7624 => "Revenus des prêts",
+#	7624 => "Revenus des prêts", // compte supprimé (remplacé par 7626)
+	7626 => "Revenus des prêts",
 	7627 => "Revenus des créances diverses",
 	763 => "Revenus des autres créances",
 	7631 => "Revenus des créances commerciales",
@@ -1074,17 +1131,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	7681 => "Intérêts des comptes financiers débiteurs",
 	77 => "Produits exceptionnels",
 	771 => "Produits exceptionnels sur opérations de gestion",
+	7711 => "Dédits et pénalités perçus sur achats et sur ventes",
 	7713 => "Libéralités perçues",
 	7714 => "Rentrées sur créances amorties",
 	7715 => "Subventions d’équilibre",
 	7717 => "Dégrèvements d’impôts (autres qu’impôts sur les bénéfices)",
 	7718 => "Autres produits exceptionnels sur opérations de gestion",
-	772 => "Produits sur exercices antérieurs (à reclasser)",
+	772 => "Produits sur exercices antérieurs (à reclasser)", // Comptes à la disposition des organismes pour enregistrer en cours d’exercice, les produits sur exercices antérieurs.
 	775 => "Produits des cessions d’éléments d’actif",
 	7751 => "Immobilisations incorporelles",
 	7752 => "Immobilisations corporelles",
 	7756 => "Immobilisations financières",
-	7758 => "Autres éléments d’actif",
+	7758 => "Autres éléments d’actif", // Sauf stocks et valeurs mobilières de placement.
 	777 => "Quote-part des subventions d’investissement virée au résultat de l’exercice",
 	778 => "Autres produits exceptionnels",
     7781 => "Bonis provenant de clauses d’indexation",
@@ -1104,6 +1162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	78173 => "Stocks et en-cours",
 	78174 => "Créances",
 	786 => "Reprises sur provisions des produits financiers",
+	7865 => "Reprises sur provisions pour risques et charges financiers",
 	7866 => "Reprises sur provisions pour dépréciation des éléments financiers",
 	78662 => "Immobilisations financières",
 	78665 => "Valeurs mobilières de placement",
@@ -1121,13 +1180,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	7894 => "Report des ressources non utilisées sur subventions attribuées",
 	7895 => "Report des ressources non utilisées sur dons manuels affectés",
 	7897 => "Report des ressources non utilisées sur legs et donations affectés",
-	79 => "Transferts de charges",
+	79 => "Transferts de charges", // Autres que les transferts de charges aux comptes d'immobilisations couverts par le compte 72.
 	791 => "Transferts de charges d’exploitation",
 	796 => "Transferts de charges financières",
 	797 => "Transferts de charges exceptionnelles",
 
 	8 => "Contributions volontaires / Comptes spéciaux", // La classe 8 est utilisée pour satisfaire à des exigences d’information relatives aux documents de synthèse (Bilan : compte 89, Compte de Résultat : compte 88 et Annexe : compte 80).
-	80 => "Engagements",
+	80 => "Engagements", // Les organismes peuvent également regrouper les engagements dans un livre comptable dont la tenue est adaptée à leurs besoins et à leurs moyens.
 	801 => "Engagements donnés par l’entité",
 	8011 => "Avals, cautions, garanties",
 	8014 => "Effets circulant sous l’endos de l’entité",
@@ -1144,10 +1203,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 #	80265 => "Crédit-bail immobilier",
 	8028 => "Autres engagements reçus",
 	809 => "Contrepartie des engagements",
-	8091 => "Contrepartie des engagements donnés par l’entité", // Contrepartie 801.
-	8092 => "Contrepartie des engagements reçus par l’entité", // Contrepartie 802.
+	8091 => "Contrepartie des engagements donnés par l’entité", //= "Contrepartie 801".
+	8092 => "Contrepartie des engagements reçus par l’entité", //= "Contrepartie 802".
 	86 => "Emploi des contributions volontaires en nature",
-	860 => "Secours en nature, alimentaires, vestimentaires ...",
+	860 => "Secours en nature, alimentaires, vestimentaires …",
 	861 => "Mise à disposition gratuite de biens",
 	8611 => "Mise à disposition gratuite de locaux",
 	8612 => "Mise à disposition gratuite de matériels",
@@ -1161,6 +1220,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
 	89 => "Bilan",
 	890 => "Bilan d’ouverture", // Pour la réouverture des comptes de l’exercice.
 	891 => "Bilan de clôture", // Pour la clôture des comptes de l’exercice.
+
+#	9 => "Comptes analytiques", // Classe abrogée ! Récupérée pour information dans le fascicule 1998 chez Dunod : code=043648 ISBN=2-10-003648-3 EAN=9-782100-036486
+#	90 => "Competes réfléchis",
+#	903 => "Stock et provisions pour dépréciation des stocks réfléchis",
+#	904 => "Achats réfléchis",
+#	905 => "Charges réfléchies",
+#	906 => "Dotations réfléchies",
+#	907 => "Produits réfléchis",
+#	91 => "Reclassement préalable des charges et des produits de la comptabilité générale", // 910 a 918 : Reclassement préalable des charges de la comptabilité générale ; attribution selon les besoins de l’organisme
+#	919 => "Produits de la comptabilité générale reclassée",
+#	92 => "Centres d’analyse (centres de travail et sections)",
+#	920 => "Centres d’administration",
+#	921 => "Centres de financement",
+#	922 => "Centres de gestion du personnel",
+#	923 => "Centres de gestion des moyens matériels",
+#	924 => "Centres de prestations connexes",
+#	925 => "Centres d’approvisionnement",
+#	926 => "Centres d’étude technique et recherche",
+#	927 => "Centres de production",
+#	928 => "Centres de distribution",
+#	929 => "Autres frais à couvrir",
+#	93 => "Coûts des produits stockes ", // Attribution selon les besoins de l’organisme
+#	94 => "Stocks",
+#	940 => "Marchandises",
+#	941 => "Matières premières et fournitures",
+#	942 => "Autres approvisionnements (matières et fournitures consommables, emballages commerciaux, …)",
+#	943 => "Production de biens en cours",
+#	944 => "Production de services en cours",
+#	945 => "Produits (intermédiaires, finis, …)",
+#	949 => "Provisions pour dépréciation des stocks et en-cours",
+#	95 => "Coûts des produits vendus", // Attribution selon les besoins de l’organisme
+#	96 => "Écarts sur coûts préétablis", // Utilisation selon les besoins de l’organisme
+#	97 => "Différences de traitement comptable",
+#	970 => "Différences d’incorporation sur matières", // Ces différences, saisies comme ici, dans le groupe de comptes 97, pourraient être aussi bien intégrées dans une méthode plus développée de comptabilisation à coûts préétablis qui conduirait à analyser ces écarts dans le groupe de comptes 96.
+#	971 => "Différences d’incorporation pour amortissements et provisions",
+#	972 => "Différences d’incorporation pour éléments supplétifs",
+#	973 => "Différences d’incorporation sur autres charges de la comptabilité générale",
+#	974 => "Différences d’inventaire constatées",
+#	975 => "Différences sur coûts et taux de cession", //
+#	976 => "Differences sur niveau d’activité", //
+#	977 => "Différence d’incorporation sur produits de la comptabilité générale",
+#	978 => "", // Usage selon besoin de l’organisme
+#	979 => "", // Usage selon besoin de l’organisme
+#	98 => "Résultats de comptabilité analytique", // Attribution selon les besoins de l’organisme
+#	99 => "Liaisons internes",
+#	991 => "Liaisons internes propres à un même établissement",
+#	996 => "Cessions reçues d’autres établissements",
+#	997 => "Cessions fournies à d’autres établissements",
 
 );
 

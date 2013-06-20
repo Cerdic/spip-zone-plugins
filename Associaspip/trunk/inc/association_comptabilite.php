@@ -21,6 +21,70 @@ include_spip('base/association');
 ** @{ */
 
 /**
+ * On recupere les soldes des differents comptes de la classe specifiee pour la periode specifiee
+ * Ceci permet d'etablir la balance des comptes de la classe :
+ * http://fr.wikipedia.org/wiki/Balance_comptable
+ *
+ * @param int $classe
+ *   Classe dont on veut recuperer les soldes des differents comptes
+ * @param string $periode_du
+ *   Date de debut d'exercice au format iSO
+ * @param string $periode_au
+ *   Date de fin d'exercice au format iSO
+ * @param int $destination
+ *   ID destination
+ * @return array $balances
+ *   array(solde, intitule, 'c'=>credit, 'd'=>debit) pour chaque compte de la classe indiquee
+ */
+function comptabilite_liste_balanceclasse($classe, $periode_du=0, $periode_au=0, $destination=0) {
+//0 setup
+    $valeurs = (
+	'SUM('.(($destination)?'a_d':'a_c').'.recette) AS recettes, SUM('.(($destination)?'a_d':'a_c').'.depense) as depenses, SUM('.(($destination)?'a_d':'a_c').'.recette-'.(($destination)?'a_d':'a_c').'.depense) AS soldes' );
+    $q_w = ($destination ? "a_d.id_destination=$destination AND " : ''); // SQL:where
+    $q_w .= ($periode_du ? ('a_c.date_operation>='. sql_quote($periode_du) .' AND ') : '' );
+    $q_w .= 'a_c.date_operation<='.  ( $periode_au ? sql_quote($periode_au) : 'CURRENT_DATE' ); //!\ fonction NOW() non standard... a remplacer par DATETIME('NOW','UTC') ou CURRENT_TIMESTAMP !
+    $q_o = 'a_p.code'; // SQL:order_by
+    $q_h = 'a_p.classe='.sql_quote($classe); // SQL:having : on agrege par code (indirectement) associe a la classe unique selectionnee ...
+#    $q_s = "$q_g, $valeurs ". ($destination ? ', a_d.id_destination' : '') .', a_p.code, a_p.intitule, a_p.classe'; // SQL:select
+#    $q_f = 'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') ." RIGHT JOIN spip_asso_plan AS a_p ON a_c.$q_g=a_p.code"; // SQL:from
+    $balances = array();
+//1
+    $q_g = 'imputation';
+    $sql = sql_select(
+	"$q_g, $valeurs ". ($destination ? ', a_d.id_destination' : '') .', a_p.code, a_p.intitule, a_p.classe',
+	'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') ." RIGHT JOIN spip_asso_plan AS a_p ON a_c.$q_g=a_p.code",
+	$q_w, $q_g,  $q_o, '', $q_h
+    );
+    while ($r = sql_fetch($sql)) {
+	$balances[$r[$q_g]] = array(
+	    $r['soldes'], // solde=credits-debits
+	    $r['intitule'],
+	    'c' => $r['recettes'], // produits...
+	    'd' => $r['depenses'], // charges...
+	);
+    }
+    sql_free($sql);
+//2
+    $q_g = 'journal';
+    $sql = sql_select(
+	"$q_g, $valeurs ". ($destination ? ', a_d.id_destination' : '') .', a_p.code, a_p.intitule, a_p.classe',
+	'spip_asso_comptes AS a_c '. ($destination ? 'LEFT JOIN spip_asso_destination_op AS a_d ON a_d.id_compte=a_c.id_compte ' : '') ." RIGHT JOIN spip_asso_plan AS a_p ON a_c.$q_g=a_p.code",
+	$q_w, $q_g,  $q_o, '', $q_h
+    );
+    while ($r = sql_fetch($sql)) {
+	$balances[$r[$q_g]] = array(
+	    floatval($balances[$r[$q_g]][0]) + $r['soldes'], // solde=debits-credits
+	    $r['intitule'],
+	    'c' => $r['depenses']-floatval($balances[$r[$q_g]]['c']), // decaissements...
+	    'd' => $r['recettes']-floatval($balances[$r[$q_g]]['d']), // encaissements...
+	); //!\ inversion du sens de lecture... http://glasnost.entrouvert.org/articles/129.html
+    }
+    sql_free($sql);
+//3 end
+    return $balances;
+}
+
+/**
  * Recupere dans les tables la liste des destinations associees a une operation
  *
  * @param int $id_operation
@@ -95,7 +159,12 @@ function comptabilite_liste_planregles($id='') {
     if (!$id)
 	$id = $GLOBALS['association']['plan_comptable'];
     if (!$id)
-	return array('[0-9]', '[0-9]', 'C'=>$GLOBALS['association_metas']['classe_produits'], 'D'=>$GLOBALS['association_metas']['classe_charges']);
+	return array('[0-9]', '[0-9]',
+	    'A' => array($GLOBALS['association_metas']['classe_produits'], $GLOBALS['association_metas']['classe_charges'],),
+	    'B' => array($GLOBALS['association_metas']['classe_banques'],),
+	    'C' => $GLOBALS['association_metas']['classe_produits'],
+	    'D' => $GLOBALS['association_metas']['classe_charges'],
+	);
     $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
 #    include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
     include(find_in_path('lang/'.$trads[0])); // charger le premier fichier de langue SPIP
@@ -390,6 +459,144 @@ function comptabilite_reference_virements() {
 
 
 /*****************************************
+ * @defgroup comptabilite_tableau_
+ * Generation de tableaux HTML
+ *
+** @{ */
+
+/**
+ * On affiche les totaux (recettes et depenses) des differents comptes de la classe specifiee pour une periode donnee
+ *
+ * @param array $classes
+ *   Liste des classes dont on veut afficher les soldes des differents comptes
+ * @param string $prefixe
+ *   Prefixe a applique aux termes qualifiant la direction pour former le titre du tableau
+ * @param float $direction
+ *   Le signe de ce parametre indique le type de compte (et donc le sens de calcul du solde)
+ *   positif : comptes de credit (solde=recettes-depenses)
+ *   negatif : comptes de debit (solde=depenses-recettes)
+ *   d'apres http://www.lacompta.ch/MITIC/theorie.php?ID=26 c'est le solde qui est recherche, et il corresponde bien a :
+ *  recettes-depenses=recettes pour les classes 6
+ *  depenses-recettes=depenses pour les classes 7
+ * @param string $periode_du
+ *   Date de debut d'exercice au format iSO
+ * @param string $periode_au
+ *   Date de fin d'exercice au format iSO
+ * @param int $destination
+ *   ID destination
+ * @return string $html
+ *   HTML-Table listant les differents soldes ordonnes par classes puis par numeros de compte
+ * @note:ex
+ *   association_liste_totaux_comptes_classes // mais on affichait directement le tableau et renvoyait le total :S
+ */
+function comptabilite_tableau_balances($classes, $prefixe='', $direction='-1', $periode_du=0, $periode_au=0, $destination=0) {
+    $liste_classes = (array)$classes;
+    $titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
+    $html = "<table width='100%' class='asso_tablo' id='asso_tablo_$titre'>\n<tr>";
+    $html .= '<th scope="col" style="width:10px">&nbsp;</th>';
+    $html .= '<th scope="col" style="width:30px">&nbsp;</th>';
+    $html .= '<th scope="col">'. _T("asso:$titre") .'</th>';
+    if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
+	$html .= '<th scope="col" style="width:80px">&nbsp;</th>';
+    } else { // mode liste standard : contributions volontaires et autres
+	$html .= '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_recettes') .'</th>';
+	$html .= '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_depenses') .'</th>';
+#	$html .= '<th scope="col" width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
+    }
+    $html .= "</tr>\n";
+    $total_valeurs = $total_recettes = $total_depenses = 0;
+    $chapitre = '';
+    $i = 0;
+    foreach ( $liste_classes as $rang => $classe ) {
+	$balances = comptabilite_liste_balanceclasse($classe, $periode_du, $periode_au, $destination);
+	foreach ($balances as $code => $bal) {
+	    $html .= '<tr>';
+	    $new_chapitre = substr($code, 0, 2);
+	    if ($chapitre!=$new_chapitre) {
+		$html .= '<td class="text">'. $new_chapitre . '</td>';
+		$html .= '<td colspan="3" class="text">'. comptabilite_reference_intitule($new_chapitre) .'</td>';
+		$chapitre = $new_chapitre;
+		$html .= "</tr>\n<tr>";
+	    }
+	    $txt = '<td>&nbsp;</td><td class="text">'.$code.'</td><td class="text">'. $bal[1] .'</td>';
+	    if ( ($direction>0) AND floatval($bal['c']) ) { // mode liste comptable et solde crediteur
+		$html .= $txt.'<td class="decimal">'. association_formater_nombre($bal['c']) .'</td>';
+		$total_valeurs += $bal['c'];
+		$html .= "</tr>\n";
+	    } elseif ( ($direction<0) AND floatval($bal['d']) ) { // mode liste comptable et solde debiteur
+		$html .= $txt.'<td class="decimal">'. association_formater_nombre($bal['d']) .'</td>';
+		$total_valeurs += $bal['d'];
+		$html .= "</tr>\n";
+	    } elseif ( floatval($bal['c']) || floatval($bal['d']) AND !$direction ) { // mode liste standard et compte mouvemente
+		$html .= $txt;
+		$html .= '<td class="decimal">'. association_formater_nombre($bal['c']) .'</td>';
+		$total_recettes += $bal['c'];
+		$html .= '<td class="decimal">'. association_formater_nombre($bal['d']) .'</td>';
+		$total_depenses += $bal['d'];
+#		$html .= '<td class="decimal">'. association_formater_nombre($bal[0]) .'</td>';
+		$total_valeurs += $bal[0];
+		$html .= "</tr>\n";
+	    } // sinon ne pas afficher
+	}
+    }
+    $html .= "\n<tr class='row_first'>";
+    $html .= '<th colspan="2">&nbsp;</th>';
+    $html .= '<th scope="row" class="text solde">'. _T("asso:$prefixe".'_total') .'</th>';
+    if ($direction) { // mode liste comptable
+	$html .= '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
+    } else { // mode liste standard
+	$html .= '<th class="entree decimal">'. association_formater_nombre($total_recettes) . '</th>';
+	$html .= '<th class="sortie decimal">'. association_formater_nombre($total_depenses) . '</th>';
+#	$html .= '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
+    }
+    $html .= "</tr>\n</table>\n";
+    return $html;
+}
+
+/**
+ * On affiche la difference entre les recettes et les depenses (passees en parametre) pour les classes d'un exercice
+ * @param array $classes
+ *   Liste des classes dont on veut afficher les soldes des differents comptes
+ * @param string $periode_du
+ *   Date de debut d'exercice au format iSO
+ * @param string $periode_au
+ *   Date de fin d'exercice au format iSO
+ * @param int $destination
+ *   ID destination
+ * @return string $html
+ *   Table-HTML presentant le solde comptable (deficit ou benefice)
+ * @note:ex
+ *   association_liste_resultat_net($recettes, $depenses);
+ * // comme on recuperait les totaux, on les passait en parametre... :)
+ * // mais tableau_balances ne le renvoyant plus, on les recalcule... :S
+ */
+function comptabilite_tableau_resultat($classes, $periode_du=0, $periode_au=0, $destination=0) {
+    $liste_classes = (array)$classes;
+    $html = "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n<tr>";
+    $html .= '<th style="width: 10px">&nbsp;</th>';
+    $html .= '<th style="width: 30px">&nbsp;</th>';
+    $html .= '<th scope="row">'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
+    $html .= '<th style="width: 80px">&nbsp;</th>';
+    $html .= "</tr>";
+    $html .= "\n<tr>";
+    $html .= '<th colspan="2">&nbsp;</th>';
+    $total_soldes = 0;
+    foreach ( $liste_classes as $rang => $classe ) {
+	$balances = comptabilite_liste_balanceclasse($classe, $periode_du, $periode_au, $destination);
+	foreach ($balances as $code => $bal)
+	    $total_soldes += $bal[0];
+    }
+    $html .= '<th class="solde text">'. (($total_soldes<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
+    $html .= '<th class="solde decimal">'. association_formater_nombre(abs($total_soldes)) .'</th>';
+    $html .= "</tr>\n</table>\n";
+    return $html;
+}
+
+
+/** @} */
+
+
+/*****************************************
  * @defgroup comptabilite_verifier_
  * Validation du plan comptable...
  *
@@ -429,6 +636,7 @@ function comptabilite_verifier_classe($classe, $plan='') {
  */
 function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') {
     $regles = comptabilite_liste_planregles($plan);
+    unset($regles['A']); unset($regles['B']);
     $ruleC = $regles['C']; unset($regles['C']);
     $ruleD = $regles['D']; unset($regles['D']);
     if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
@@ -681,28 +889,6 @@ function filtre_selecteur_compta_plan($pcg, $nom='plan_comptable') {
 ** @{ */
 
 
-/**
- * On recupere les soldes des differents comptes de la classe specifiee pour la periode specifiee
- * Ceci permet d'etablir la balance des comptes de la classe :
- * http://fr.wikipedia.org/wiki/Balance_comptable
- *
- * @param int $classe
- *   Classe dont on veut recuperer les soldes des differents comptes
- * @param int $periode
- *   ID exercice ou annee (selon configuration)
- * @param int $destination
- *   ID destination
- * @param float $direction
- *   Le signe de ce parametre indique le type de compte (et donc le sens de calcul du solde)
- *   positif : comptes de credit (solde=recettes-depenses)
- *   negatif : comptes de debit (solde=depenses-recettes)
- * @return ressource $query
- *   Resultat de la requete donnant les soldes de chaque compte de la classe indiquee
- * @note
- *   d'apres http://www.lacompta.ch/MITIC/theorie.php?ID=26 c'est le solde qui est recherche, et il corresponde bien a :
- *  recettes-depenses=recettes pour les classes 6
- *  depenses-recettes=depenses pour les classes 7
- */
 function association_calcul_soldes_comptes_classe($classe, $periode=0, $destination=0, $direction='-1') {
     $c_group = (($classe==$GLOBALS['association_metas']['classe_banques'])?'journal':'imputation');
     $valeurs = (($direction)
@@ -746,116 +932,6 @@ function association_calcul_soldes_comptes_classe($classe, $periode=0, $destinat
 	$c_having. (($c_having && $p_having)?' AND ':'') .$p_having // having
     );
     return $query;
-}
-
-/**
- * On affiche les totaux (recettes et depenses) des differents comptes de la classe specifiee pour une periode donnee
- *
- * @param array $classes
- *   Liste des classes dont on veut afficher les soldes des differents comptes
- * @param string $prefixe
- *   Prefixe a applique aux termes qualifiant la direction pour former le titre du tableau
- * @param float $direction
- *   Le signe de ce parametre indique le type de compte (et donc le sens de calcul du solde)
- *   positif : comptes de credit (solde=recettes-depenses)
- *   negatif : comptes de debit (solde=depenses-recettes)
- * @param int $periode
- *   ID exercice ou annee (selon configuration)
- * @param int $destination
- *   ID destination
- * @return void
- *   HTML-Table listant les differents soldes ordonnes par classes puis par numeros de compte
- */
-function association_liste_totaux_comptes_classes($classes, $prefixe='', $direction='-1', $periode=0, $destination=0) {
-    if( !is_array($classes) ) { // a priori une chaine ou un entier d'une unique classe
-	$liste_classes = array( $classes ) ; // transformer en tableau (puisqu'on va operer sur des tableaux);
-    } else { // c'est un tableau de plusieurs classes
-	$liste_classes = $classes;
-    }
-    $titre = $prefixe.'_'. ( ($direction) ? (($direction<0)?'depenses':'recettes') : 'soldes' );
-    echo "<table width='100%' class='asso_tablo' id='asso_tablo_$titre'>\n";
-    echo "\n<tr>";
-    echo '<th scope="col" style="width:10px">&nbsp;</th>';
-    echo '<th scope="col" style="width:30px">&nbsp;</th>';
-    echo '<th scope="col">'. _T("asso:$titre") .'</th>';
-    if ($direction) { // mode liste comptable : charge, produit, actifs, passifs
-	echo '<th scope="col" style="width:80px">&nbsp;</th>';
-    } else { // mode liste standard : contributions volontaires et autres
-	echo '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_recettes') .'</th>';
-	echo '<th scope="col" style="width:80px">'. _T("asso:$prefixe".'_depenses') .'</th>';
-	// echo '<th scope="col" width="80">'. _T("asso:$prefixe".'_solde') .'</th>';
-    }
-    echo "</tr>\n";
-    $total_valeurs = $total_recettes = $total_depenses = 0;
-    $chapitre = '';
-    $i = 0;
-    foreach ( $liste_classes as $rang => $classe ) {
-	$query = association_calcul_soldes_comptes_classe($classe, $periode, $destination, $direction );
-	while ($data = sql_fetch($query)) {
-	    echo '<tr>';
-	    $new_chapitre = substr($data['code'], 0, 2);
-	    if ($chapitre!=$new_chapitre) {
-		echo '<td class="text">'. $new_chapitre . '</td>';
-		echo '<td colspan="3" class="text">'. comptabilite_reference_intitule($new_chapitre) .'</td>';
-		$chapitre = $new_chapitre;
-		echo "</tr>\n<tr>";
-	    }
-#	    if ( floatval($data['valeurs']) || floatval($data['recettes']) || floatval($data['depenses']) ) { // non-zero...
-		echo "<td>&nbsp;</td>";
-		echo '<td class="text">'. $data['code'] .'</td>';
-		echo '<td class="text">'. $data['intitule'] .'</td>';
-		if ($direction) { // mode liste comptable
-		    echo '<td class="decimal">'. association_formater_nombre($data['valeurs']) .'</td>';
-		    $total_valeurs += $data['valeurs'];
-		} else { // mode liste standard
-		    echo '<td class="decimal">'. association_formater_nombre($data['recettes']) .'</td>';
-		    $total_recettes += $data['recettes'];
-		    echo '<td class="decimal">'. association_formater_nombre($data['depenses']) .'</td>';
-		    $total_depenses += $data['depenses'];
-		    //echo '<td class="decimal">'. association_formater_nombre($data['soldes']) .'</td>';
-		    $total_valeurs += $data['soldes'];
-		}
-		echo "</tr>\n";
-#	    }
-	}
-    }
-    echo "\n<tr class='row_first'>";
-    echo '<th colspan="2">&nbsp;</th>';
-    echo '<th scope="row" class="text solde">'. _T("asso:$prefixe".'_total') .'</th>';
-    if ($direction) { // mode liste comptable
-	echo '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
-    } else { // mode liste standard
-	echo '<th class="entree decimal">'. association_formater_nombre($total_recettes) . '</th>';
-	echo '<th class="sortie decimal">'. association_formater_nombre($total_depenses) . '</th>';
-	// echo '<th class="solde decimal">'. association_formater_nombre($total_valeurs) . '</th>';
-    }
-    echo "</tr>\n</table>\n";
-    return $total_valeurs;
-}
-
-/**
- * On affiche la difference entre les recettes et les depenses (passees en parametre) pour les classes d'un exercice
- * @param float $recettes
- *   Total des recettes
- * @param float $depenses
- *   Total des depenses
- * @return void
- *   Table-HTML presentant le solde comptable (deficit ou benefice)
- */
-function association_liste_resultat_net($recettes, $depenses) {
-    echo "<table width='100%' class='asso_tablo' id='asso_tablo_bilan_solde'>\n";
-    echo "<tr>";
-    echo '<th style="width: 10px">&nbsp;</th>';
-    echo '<th style="width: 30px">&nbsp;</th>';
-    echo '<th scope="row">'. _T('asso:cpte_resultat_titre_resultat') .'</th>';
-    echo '<th style="width: 80px">&nbsp;</th>';
-    echo "</tr>";
-    echo "\n<tr>";
-    echo '<th colspan="2">&nbsp;</th>';
-    $res = $recettes-$depenses;
-    echo '<th class="solde text">'. (($res<0) ? _T('asso:cpte_resultat_perte') : _T('asso:cpte_resultat_benefice')) .'</th>';
-    echo '<th class="solde decimal">'. association_formater_nombre(abs($res)) .'</th>';
-    echo "</tr></table>";
 }
 
 function export_compte($ids, $mode, $icone = true)

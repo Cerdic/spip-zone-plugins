@@ -49,12 +49,10 @@ function exec_compte_resultat() {
 		'destination' => $ids['destination'],
 	), 'compte_resultat');
 /// AFFICHAGES_CENTRAUX : TABLEAU
-	// liste des charges (depenses d'exploitation) cumulees par comptes
-	$charges = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $ids['id_periode'], $ids['destination']);
-	// liste des produits (recettes d'exploitation) cumules par comptes
-	$produits = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['id_periode'], $ids['destination']);
-	// resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
-	association_liste_resultat_net($produits, $charges);
+	$regles = comptabilite_liste_planregles();
+	echo comptabilite_tableau_balances($GLOBALS['association_metas']['classe_charges'], 'cpte_resultat', '-1', $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // liste des charges (depenses d'exploitation) cumulees par comptes
+	echo comptabilite_tableau_balances($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // liste des produits (recettes d'exploitation) cumules par comptes
+	echo comptabilite_tableau_resultat($regles['A'], $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
 	// liste des contributions volontaires (emplois et ressources) par comptes
 	$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['id_periode'], $ids['destination']);
 /// AFFICHAGES_CENTRAUX : FIN

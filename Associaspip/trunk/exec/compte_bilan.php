@@ -61,12 +61,10 @@ function exec_compte_bilan() {
 	while ($data = sql_fetch($query)) {
 		$classes_bilan[] = $data['classe'];
 	}
-	// liste des passifs (le patrimoine/avoir) cumulees par comptes
-	$passifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '+1', $ids['id_periode'], $ids['destination']);
-	// liste des actifs (les dettes) cumulees par comptes
-	$actifs = association_liste_totaux_comptes_classes($classes_bilan, 'cpte_bilan', '-1', $ids['id_periode'], $ids['destination']);
-	// resultat comptable courant : en comptabilite francaise, la somme les actifs et les passifs doivent s'egaler, ce qui se fait en incorporant le resultat comptable (perte en actif et benefice en passif)
-	association_liste_resultat_net($passifs, $actifs);
+	$regles = comptabilite_liste_planregles();
+	echo comptabilite_tableau_balances($classes_bilan, 'cpte_bilan', '+1', $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // liste des passifs (le patrimoine/avoir) cumulees par comptes
+	echo comptabilite_tableau_balances($classes_bilan, 'cpte_bilan', '-1', $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // liste des actifs (les dettes) cumulees par comptes
+	echo comptabilite_tableau_resultat($regles['A'], $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // resultat comptable courant : en comptabilite francaise, la somme les actifs et les passifs doivent s'egaler, ce qui se fait en incorporant le resultat comptable (perte en actif et benefice en passif)
 	// liste des bilans (actifs et passifs) par comptes
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();

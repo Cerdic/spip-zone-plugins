@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 
 $pc_norme = array(
 	'[0-7]', //0: classes
-	'[0-9]', //1: sections (en fait, fins : 9,8,9,7,9,8,9,9 en gros --pas de 78)
+	'[0-9]', //1: sections (en fait, fins en : 9,8,9,7,9,8,9,9 ; et pas de 78)
 	'[0-9]', //2: groupes
 );
 
