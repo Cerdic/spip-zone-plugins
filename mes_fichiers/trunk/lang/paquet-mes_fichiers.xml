@@ -1,6 +1,6 @@
 <traduction module="paquet-mes_fichiers" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mes_fichiers/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-mes_fichiers?lang_cible=en">
-		<traducteur nom="_Eric_" lien="http://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 	</langue>
 	<langue code="fr" />
 </traduction>
