@@ -132,7 +132,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ En cochant «oui» ci-dessous, l\'état des blocs numérotés sera stocké dans un cookie le temps de la session, afin de conserver l\'aspect de la page en cas de retour.[[%blocs_cookie%]]
 
-@puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
+@puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise (&lt;hN&gt; ou &lt;div&gt;) :[[%bloc_h4%]]
 
 @puce@ Afin d\'obtenir un effet plus doux au moment du clic, vos blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Dépliables',
