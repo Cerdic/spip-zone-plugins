@@ -2,8 +2,11 @@
 
 /* appeler adminer depuis spip */
 
-while (!file_exists("ecrire/inc_version.php"))
+$GLOBALS['adminer_racine'] = "";
+while (!file_exists("ecrire/inc_version.php")){
+	$GLOBALS['adminer_racine'] .= "../";
 	chdir ('..');
+}
 
 require_once 'ecrire/inc_version.php';
 
@@ -29,7 +32,7 @@ if (!isset($_COOKIE['adminer_sid'])
 	// forcer un login sur les valeurs du site
 	function adminer_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
-		if($type !== 'mysql') {$db = '../../'._NOM_PERMANENTS_INACCESSIBLES . 'bases/' . $db . '.sqlite';}
+		if($type !== 'mysql') {$db = $GLOBALS['adminer_racine'] . _NOM_PERMANENTS_INACCESSIBLES . 'bases/' . $db . '.sqlite';}
 		if(!isset($drivers[$type])) die ('Type de base de donn&eacute;es '.$type.' non reconnu');
 		if ($port) $host.=':'.$port;
 		$_POST['auth'] = array(
@@ -45,6 +48,5 @@ if (!isset($_COOKIE['adminer_sid'])
 	eval('?'.'>'.$connect);
 }
 
-#var_dump($_COOKIE);
 chdir (_DIR_PLUGIN_ADMINER);
 require_once 'adminer.php';

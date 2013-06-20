@@ -2,7 +2,7 @@
 	<nom>Adminer</nom>
 	<slogan>Utiliser Adminer pour explorer la base SQL</slogan>
 	<auteur>Jakub Vrana (http://www.vrana.cz/), mis en plugin par Fil</auteur>
-	<version>3.7.1</version>
+	<version>3.7.2</version>
 	<etat>stable</etat>
 	<prefix>adminer</prefix>
 	<description>
