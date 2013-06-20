@@ -6,28 +6,28 @@
 <ul class="liste-items">
 <BOUCLE_infos(POUR){tableau #VALEUR}>
 	<BOUCLE_ss_infos(POUR){si #VALEUR|is_array|oui}{tableau #VALEUR}>
-	<BOUCLE_si_cover(POUR){si #CLE|in_array{#ARRAY{0,Cover_description,1,Cover_type,2,Cover_MIME}}|oui}{tableau #VALEUR}>
+		<BOUCLE_si_cover(POUR){si #CLE|in_array{#LISTE{Cover_description,Cover_type,Cover_MIME}}|oui}{tableau #VALEUR}>
 		#SET{cover_#_ss_infos:CLE,#VALEUR|explode{' / '}}
 		</BOUCLE_si_cover>
 		</B_si_cover>
-	<li class="item"><strong>[(#CLE|replace{'_',' '})]</strong> :
-	<B_ss_ss_infos>
-	<ul class="liste-items">
-		<BOUCLE_ss_ss_infos(POUR){tableau #VALEUR|array_unique}>
-			<BOUCLE_covers(POUR){si #_ss_infos:CLE|=={Cover_Data}|oui}{tableau #VALEUR|explode{' / '}}>
-			<li class="item">
-			[(#GET{cover_Cover_type}|table_valeur{#CLE})][ - (#GET{cover_Cover_description}|table_valeur{#CLE})]<br />
-			<img src="data:[(#GET{cover_Cover_MIME}|table_valeur{#CLE})];base64,#VALEUR" alt="[(#GET{cover_Cover_type}|table_valeur{#CLE}|attribut_html)]" />
-			</li>
-			</BOUCLE_covers>
-			</B_covers>
-			<li class="item">#VALEUR</li>
-			<//B_covers>
-		</BOUCLE_ss_ss_infos>
-	</ul>
-	</B_ss_ss_infos>
-	</li>
-	<//B_si_cover>
+		<li class="item"><strong>[(#CLE|replace{'_',' '})]</strong> :
+		<B_ss_ss_infos>
+		<ul class="liste-items">
+			<BOUCLE_ss_ss_infos(POUR){tableau #VALEUR|array_unique}>
+				<BOUCLE_covers(POUR){si #_ss_infos:CLE|=={Cover_Data}|oui}{tableau #VALEUR|explode{' / '}}>
+				<li class="item">
+				[(#GET{cover_Cover_type}|table_valeur{#CLE})][ - (#GET{cover_Cover_description}|table_valeur{#CLE})]<br />
+				<img src="data:[(#GET{cover_Cover_MIME}|table_valeur{#CLE})];base64,#VALEUR" alt="[(#GET{cover_Cover_type}|table_valeur{#CLE}|attribut_html)]" />
+				</li>
+				</BOUCLE_covers>
+				</B_covers>
+				<li class="item">#VALEUR</li>
+				<//B_covers>
+			</BOUCLE_ss_ss_infos>
+		</ul>
+		</B_ss_ss_infos>
+		</li>
+		<//B_si_cover>
 	</BOUCLE_ss_infos>
 	</B_ss_infos>
 		<li class="item"><strong>#CLE</strong> : 
