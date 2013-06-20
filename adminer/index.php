@@ -3,15 +3,14 @@
 /* appeler adminer depuis spip */
 
 $GLOBALS['adminer_racine'] = "";
-if (!defined('_ECRIRE_INC_VERSION')){
 
+if (!defined('_ECRIRE_INC_VERSION')){
 	while (!file_exists("ecrire/inc_version.php")){
 		$GLOBALS['adminer_racine'] .= "../";
 		chdir ('..');
 	}
 
 	require_once 'ecrire/inc_version.php';
-
 }
 
 include_spip('inc/autoriser');
@@ -39,14 +38,14 @@ if (isset($_POST['logout'])){
 }
 
 if (!isset($_COOKIE['adminer_sid'])
-	OR (!_request('username') AND !_request('file'))) {
+	OR (is_null(_request('username')) AND !_request('file'))) {
 
 	// forcer un login sur les valeurs du site
 	function adminer_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
 		if($type !== 'mysql') {
-			if (defined('_ROOT_RACINE') AND defined('_DIR_DB'))
-				$dir_base = _ROOT_RACINE . _DIR_DB;
+			if (defined('_ROOT_RACINE'))
+				$dir_base = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
 			else
 				$dir_base = $GLOBALS['adminer_racine'] . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
 			$db = $dir_base . $db . '.sqlite';
