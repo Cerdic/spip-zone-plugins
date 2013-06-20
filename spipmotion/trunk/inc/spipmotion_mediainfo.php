@@ -28,7 +28,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	if(file_exists($chemin)){
 		include_spip('inc/filtres');
 		include_spip('inc/charset');
-		
+
 		/**
 		 * On enregistre les metadonnées dans un fichier xml 
 		 * qui sera traité par la suite
@@ -69,7 +69,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['encodeur'] = $info[0]['Writing_library'][0];
 					if(!$infos['encodeur'])
 						$infos['encodeur'] = $info[0]['Writing_application'][0];
-					
+
 					if(isset($info[0]['comapplequicktimelocationISO6709'][0])){
 						$coords = preg_match('/((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)((\+|-)\d+\.\d+)\//',$info[0]['comapplequicktimelocationISO6709'][0],$matches);
 						if(isset($matches[1]) && isset($matches[3])){
@@ -104,16 +104,15 @@ function inc_spipmotion_mediainfo_dist($chemin){
 								$ext = 'jpg';
 						}
 						$tmp_file = 'spipmotion-'.str_replace('.','_',str_replace(':','_',str_replace(' ','_',$infos['titre']))).'.'.$ext;
-			            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo');
-						$dest = $dest.$tmp_file;
+			            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo').$tmp_file;
 						if ($ok = ecrire_fichier($dest, base64_decode($info[0]['Cover_Data'][0]))){
 							include_spip('inc/joindre_document');
 							$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-				
+
 							list($extension,$arg) = fixer_extension_document($dest);
 							$cover_ajout = array(array('tmp_name'=>$dest,'name'=> basename($dest)));
 							$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
-				
+
 							if (is_numeric($id_vignette = reset($ajoute)))
 							  	$infos['id_vignette'] = $id_vignette;
 							spip_unlink($dest);
@@ -150,7 +149,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							}
 						}
 					}
-					
+
 					/**
 					 * Si on a du contenu dans les messages de copyright, 
 					 * on essaie de trouver la licence, si on a le plugin Licence
@@ -162,8 +161,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						if(function_exists('licence_recuperer_texte')){
 							foreach(array($infos['descriptif'],$infos['credits']) as $contenu){
 								$infos['id_licence'] = licence_recuperer_texte($contenu);
-								if(intval($infos['id_licence']))
-									break;
+								if(intval($infos['id_licence'])) break;
 							}
 						}
 					}
@@ -192,7 +190,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						$infos['videocodecid'] = 'h263';
 					}
 					$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
-					
+
 					/**
 					 * On a un display aspect ratio
 					 * 
@@ -213,7 +211,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				/**
 				 * Les infos techniques audio
 				 */
-				if($track == 'track type="Audio"'){
+				if(($infos['hasaudio'] == 'non') && (substr($track,0,18) == 'track type="Audio"')){
 					$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
 					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
@@ -242,7 +240,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	}
 	else
 		spip_log('fichier_non_existant');
-	
+
 	return $infos;
 }
 ?>
