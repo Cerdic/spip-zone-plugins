@@ -1,7 +1,7 @@
 <paquet
 	prefix="paniers"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/paniers-32.png"

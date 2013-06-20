@@ -17,12 +17,12 @@ function paniers_id_panier_encours(){
 	include_spip('inc/cookie');
 	include_spip('inc/config');
 	include_spip('base/abstract_sql');
-	
+
 	$id_panier = 0;
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
 	$nom_cookie = $GLOBALS['cookie_prefix'].'_panier';
-	$cookie = $_COOKIE[$nom_cookie];
-	
+	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : null;
+
 	// On va chercher un panier existant en cours, correspondant au cookie
 	if ($cookie){
 		$id_panier = intval(sql_getfetsel(
