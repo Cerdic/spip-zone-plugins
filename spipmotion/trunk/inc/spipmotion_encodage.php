@@ -185,7 +185,7 @@ function encodage($source,$options){
 		 */
 		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis"))
 			$acodec = '--acodec libvorbis';
-		
+
 		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg2theora = $audiobitrate_ffmpeg = "--audioquality $qualite";
@@ -217,24 +217,16 @@ function encodage($source,$options){
 		 * Vérification des samplerates
 		 */
 		if(intval($source['audiosamplerate']) && (intval($source['audiosamplerate']) < lire_config("spipmotion/frequence_audio_$extension_attente","22050"))){
-			$audiosamplerates = array('4000','8000','11025','16000','22050','24000','32000','44100','48000');
 			/**
 			 * libmp3lame ne gère pas tous les samplerates
+			 * ni libfaac
 			 */
-			if($acodec == '--acodec libmp3lame'){
-				unset($audiosamplerates[0]);
-				unset($audiosamplerates[1]);
-				unset($audiosamplerates[3]);
-				unset($audiosamplerates[5]);
-				unset($audiosamplerates[6]);
-				unset($audiosamplerates[8]);
-			}
-			if($acodec == '--acodec libfaac'){
-				unset($audiosamplerates[0]);
-				unset($audiosamplerates[1]);
-				unset($audiosamplerates[2]);
-				unset($audiosamplerates[3]);
-			}
+			if($acodec == '--acodec libmp3lame')
+				$audiosamplerates = array('11025','22050','44100');
+			else if($acodec == '--acodec libfaac')
+				$audiosamplerates = array('22050','24000','32000','44100','48000');
+			else
+				$audiosamplerates = array('4000','8000','11025','16000','22050','24000','32000','44100','48000');
 			/**
 			 * ffmpeg ne peut resampler
 			 * On force le codec audio à aac s'il était à libmp3lame et que le nombre de canaux était > 2
@@ -268,7 +260,7 @@ function encodage($source,$options){
 		}
 		$audiofreq = "--audiofreq ".$samplerate;
 		$texte .= "ar=$samplerate\n";
-		
+
 		/**
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
@@ -337,7 +329,7 @@ function encodage($source,$options){
 			$height = $source['hauteur'];
 		}
 		$width_finale = lire_config("spipmotion/width_$extension_attente",480);
-		
+
 		/**
 		 * Les ipod/iphones 3Gs et inférieur ne supportent pas de résolutions > à 640x480
 		 */
@@ -411,7 +403,7 @@ function encodage($source,$options){
 
 		$texte .= intval($vbitrate) ? "vb=".$vbitrate."000\n" : '';
 		$bitrate = intval($vbitrate) ? "--bitrate ".$vbitrate : '';
-		
+
 		$configuration = array();
 		if(is_array($spipmotion_compiler['configuration']))
 			$configuration = $spipmotion_compiler['configuration'];
@@ -423,7 +415,7 @@ function encodage($source,$options){
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
 			if(in_array('--enable-pthreads',$configuration))
 				$infos_sup_normal .= " -threads 0 ";
-			
+
 			/**
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
@@ -437,20 +429,19 @@ function encodage($source,$options){
 			 * Encodage pour PSP
 			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
 			 */
-			else if($format == 'psp'){
+			else if($format == 'psp')
 				$infos_sup_normal .= ' -vpre main -level 21 -refs 2';
-			}
 		}
 		if(($vcodec == "--vcodec libtheora") && ($encodeur != 'ffmpeg2theora')){
 			if(in_array('--enable-pthreads',$configuration))
 				$infos_sup_normal .= " -threads 0 ";
 		}
-		
+
 		if($source['rotation'] != 90){
 			$aspect = $source['aspect_ratio'] ? $source['aspect_ratio']: "$width_finale:$height_finale";
 			$infos_sup_normal .= " -aspect $aspect";
 		}
-			
+
 		$fichier_texte = "$dossier$query.txt";
 
 		ecrire_fichier($fichier_texte,$texte);
@@ -462,7 +453,7 @@ function encodage($source,$options){
 		 */
 		$passes = lire_config("spipmotion/passes_$extension_attente",'1');
 		$pass_log_file = $dossier.$query.'-pass';
-		
+
 		if(($encodeur == 'ffmpeg2theora') && ($ffmpeg2theora['version'] > 0)){
 			if($passes == 2) $deux_passes = '--two-pass';
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
@@ -500,7 +491,7 @@ function encodage($source,$options){
 				 */
 				if($retour_int_1 == 0){
 					spip_log('Seconde passe','spipmotion');
-					
+
 					if ($ffmpeg_version < '0.7')
 						$preset_2 = $preset_quality ? " -vpre $preset_quality":'';
 					else
@@ -521,7 +512,7 @@ function encodage($source,$options){
 					$infos_sup_normal .= $preset_quality ? " -vpre $preset_quality":'';
 				else
 					$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
-				
+
 				if($source['rotation'] == '90'){
 					if ($ffmpeg_version < '1.0')
 						$rotation = "-vf transpose=1";
@@ -530,7 +521,7 @@ function encodage($source,$options){
 					$metadatas = "-metadata:s:v:0 rotate=0";
 					$infos_sup_normal .= " $rotation $metadatas";
 				}
-				
+
 				if(strlen($infos_sup_normal) > 1)
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				spip_log($infos_sup_normal,'spipmotion');
@@ -575,7 +566,7 @@ function encodage($source,$options){
 			  	$source['id_vignette'] = $id_vignette;
 		}else
 			$source['id_vignette'] = $id_vignette;
-		
+
 		/**
 		 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
 		 */
@@ -588,7 +579,7 @@ function encodage($source,$options){
 		if(_DIR_PLUGIN_MEDIAS)
 			$champs_recup['credits'] = '';
 		$champs_recup['id_vignette'] = '';
-			
+
 		$modifs = array_intersect_key($source, $champs_recup);
 		foreach($modifs as $champs=>$val){
 			set_request($champs,$val);
