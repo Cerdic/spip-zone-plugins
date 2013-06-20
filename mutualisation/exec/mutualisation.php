@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_mutualisation_dist() {
 	global $auteur_session;
-
+	
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
 
@@ -60,14 +60,14 @@ function exec_mutualisation_dist() {
 		else
 			$alias[$v] = $v;
 	}
-	
+
 	// Recuperer la liste des plugins connus de l'instance SPIP en cours (celle qui est appelee par ecrire/?exec=mutualisation)
 	include_spip('inc/plugin');
 	$liste_plug = liste_plugin_files();
 	$liste_plug_compat = liste_plugin_valides($liste_plug);
 	$liste_plug_compat_base = $liste_plug_compat[2];
 	$liste_plug_compat = $liste_plug_compat[0];
-	
+
 	foreach ($sites as $v) {
 		$nom_site=$stats=$plugins=$erreur=$version_installee="";
 
@@ -102,26 +102,20 @@ function exec_mutualisation_dist() {
 			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
-		
+
 		$compression = '';
-		if ($meta['auto_compress_css']=='oui') {
+		if ($meta['auto_compress_css']=='oui')
 			$compression .= 'CSS';
-		}
-		if ($meta['auto_compress_js']=='oui') {
-			
+		if ($meta['auto_compress_js']=='oui')
 			$compression .= ($compression!='') ? '+JS':'JS';
-		}
-		if ($meta['auto_compress_http']=='oui') {
-			
+		if ($meta['auto_compress_http']=='oui') 
 			$compression .= ($compression!='') ? '+HTTP':'HTTP';
-		}
-		if ($compression=='') {
-			$compression = 'Activer';
-		}
-		
+		if ($compression=='')
+			$compression = _L('Activer');
+	
 		$page .= '<script type="text/javascript">
 		//<![CDATA[
-		tableau_sites.push(["../../sites/'.$v.'"]);
+		tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
 		//]]>
 		</script>';
 
