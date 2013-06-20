@@ -1,16 +1,20 @@
 <plugin>
 	<nom>Adminer</nom>
 	<slogan>Utiliser Adminer pour explorer la base SQL</slogan>
-	<auteur>Jakub Vr‡na, mis en plugin par Fil</auteur>
-	<version>3.7.0</version>
+	<auteur>Jakub Vrana (http://www.vrana.cz/), mis en plugin par Fil</auteur>
+	<version>3.7.1</version>
 	<etat>stable</etat>
 	<prefix>adminer</prefix>
 	<description>
-		Utiliser Adminer sur la base SPIP
+		Utiliser Adminer v.3.7.0 sur la base SPIP
 	</description>
 	<lien>http://contrib.spip.net/Adminer</lien>
 	<licence>GNU/GPL</licence>
-	<icon>adminer-80.png</icon>
+	<icon>adminer-64.png</icon>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>outils</categorie>
+	<bouton id="adminer" parent="bando_administration">
+		<titre>Adminer</titre>
+		<icone>images/adminer-16.png</icone>
+	</bouton>
 </plugin>
