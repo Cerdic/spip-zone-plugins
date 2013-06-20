@@ -21,7 +21,7 @@ function paniers_id_panier_encours(){
 	$id_panier = 0;
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
 	$nom_cookie = $GLOBALS['cookie_prefix'].'_panier';
-	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : null;
+	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : null;
 
 	// On va chercher un panier existant en cours, correspondant au cookie
 	if ($cookie){
