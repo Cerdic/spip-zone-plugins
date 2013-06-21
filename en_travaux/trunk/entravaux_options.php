@@ -106,6 +106,8 @@ function entravaux_styliser($flux){
 		$pages_ok = array('login_sos','robots.txt','spip_pass','favicon.ico','informer_auteur');
 		if (!autoriser('travaux')
 			AND !in_array($flux['args']['fond'],$pages_ok)
+		        // des pages autorisees configurables vie mes_options
+			AND ((defined('_SKEL_HORS_TRAVAUX')) AND !in_array($flux['args']['fond'],explode(',',_SKEL_HORS_TRAVAUX)))
 			AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
 			// et on laisse passer modeles et formulaires,
 			// qui ne peuvent etre inclus ou appeles que legitimement
