@@ -1,0 +1,28 @@
+<BOUCLE_art_depub(ARTICLES_DEPUBLICATION){id_art_depub=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:art_depub:titre_art_depub:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ART_DEPUB</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{articles_depublication,#ID_ART_DEPUB})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(ARTICLES_DEPUBLICATION){id_art_depub}>
+	[(#VAL{redirect}
+		|generer_url_action{type=articles_depublication&id=#ID_ART_DEPUB}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,articles_depublication,#ID_ART_DEPUB,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=articles_depublication&id=#ID_ART_DEPUB}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_art_depub>

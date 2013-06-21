@@ -1,0 +1,54 @@
+<paquet
+	prefix="depublication2"
+	categorie="maintenance"
+	version="1.1.1"
+	etat="dev"
+	compatibilite="[3.0.10;3.0.*]"
+	logo="prive/themes/spip/images/depublication2-64.png"
+	documentation=""
+	schema="1.0.1" 
+>
+	<!--
+		Paquet genere le 2013-06-19 15:45:27
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Dépublication 2</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Web</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="depublication2_autorisations.php" />
+		<pipeline nom="insert_head" inclure="depublication2_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (A eviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="depublication2" titre="depublication2:depublication2_titre" parent="menu_edition"  icone="images/depublication2-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="depublication2" titre="depublication2:depublication2_titre" parent="configuration" icone="images/depublication2-24.png" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="depublication2_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/depublication2.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/depublication2.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/depublication2.php" /> 
+	<pipeline nom="affiche_milieu" inclure="depublication2_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="depublication2_pipelines.php" /> 
+	<!-- Cron de passage -->
+	<pipeline nom="taches_generales_cron" inclure="depublication2_pipelines.php" /> 
+
+</paquet>

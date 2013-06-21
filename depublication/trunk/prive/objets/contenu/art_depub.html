@@ -1,0 +1,23 @@
+<BOUCLE_art_depub(ARTICLES_DEPUBLICATION){id_art_depub}{statut?}>
+
+[<div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
+	<label><:art_depub:label_id_article:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>(#ID_ARTICLE)</span>
+</div>]
+
+[<div class="champ contenu_depublication[ (#DEPUBLICATION*|strlen|?{'',vide})]">
+	<label><:art_depub:label_depublication:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{depublication} depublication'>(#DEPUBLICATION)</span>
+</div>]
+
+[<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+	<label><:art_depub:label_statut:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{statut} statut'>(#STATUT)</span>
+</div>]
+
+[<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+	<label><:art_depub:label_maj:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{maj} maj'>(#MAJ)</span>
+</div>]
+
+</BOUCLE_art_depub>

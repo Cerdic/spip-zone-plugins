@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_articles_depublication_selectionnes>
+	<ul>
+	<BOUCLE_articles_depublication_selectionnes(ARTICLES_DEPUBLICATION){id_art_depub IN #GET*{valeur}}
+		{par num , }{statut?}{tout}>
+		<li class="choix"># (#ID_ART_DEPUB)</li>
+	</BOUCLE_articles_depublication_selectionnes>
+	</ul>
+	</B_articles_depublication_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_articles_depublication_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_art_depub_selectionne(ARTICLES_DEPUBLICATION){id_art_depub=#ENV{valeur}}
+		{par num , }{statut?}{tout}>
+	  	<p># (#ID_ART_DEPUB)</p>
+	</BOUCLE_art_depub_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_art_depub_selectionne>
+<//B_test_multiple>

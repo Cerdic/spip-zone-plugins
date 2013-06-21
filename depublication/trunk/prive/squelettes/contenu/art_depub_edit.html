@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,art_depub,#ID_ART_DEPUB}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,art_depub}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_ART_DEPUB|?{#ID_ART_DEPUB|generer_url_entite{art_depub},#URL_ECRIRE{articles_depublication}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_ART_DEPUB|oui)
+	[(#GET{redirect}|icone_verticale{Retour,art_depub,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_ART_DEPUB|?{<:art_depub:icone_modifier_art_depub:>,<:art_depub:icone_creer_art_depub:>})]
+		<h1>(#ENV{titre,#INFO_ID_ARTICLE{art_depub,#ID_ART_DEPUB}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_ART_DEPUB|generer_url_entite{art_depub}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_ART_DEPUB{#ENV{id_art_depub,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

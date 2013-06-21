@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,art_depub,#ID_ART_DEPUB}|sinon_interdire_acces)]
+<BOUCLE_art_depub(ARTICLES_DEPUBLICATION){id_art_depub}{statut==.*}{si #ENV{exec}|=={art_depub}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,art_depub,#ID_ART_DEPUB})
+		[(#ID_ART_DEPUB|afficher_qui_edite{art_depub}|non)
+			[(#URL_ECRIRE{art_depub_edit,id_art_depub=#ID_ART_DEPUB}|icone_verticale{<:art_depub:icone_modifier_art_depub:>,art_depub,edit,right ajax preload})]
+		]
+		[(#ID_ART_DEPUB|afficher_qui_edite{art_depub}|oui)
+			[(#URL_ECRIRE{art_depub_edit,id_art_depub=#ID_ART_DEPUB}|icone_verticale{#ID_ART_DEPUB|afficher_qui_edite{art_depub},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{art_depub-24.png}|balise_img{art_depub,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{art_depub,#ID_ART_DEPUB}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/art_depub,id=#ID_ART_DEPUB,id_art_depub=#ID_ART_DEPUB,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,art_depub,#ID_ART_DEPUB})
+	[(#ID_ART_DEPUB|afficher_qui_edite{art_depub}|non)
+		[(#URL_ECRIRE{art_depub_edit,id_art_depub=#ID_ART_DEPUB}|icone_verticale{<:art_depub:icone_modifier_art_depub:>,art_depub,edit,right ajax preload})]
+	]
+	[(#ID_ART_DEPUB|afficher_qui_edite{art_depub}|oui)
+		[(#URL_ECRIRE{art_depub_edit,id_art_depub=#ID_ART_DEPUB}|icone_verticale{#ID_ART_DEPUB|afficher_qui_edite{art_depub},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,art_depub,id,#ID_ART_DEPUB},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_art_depub>
+[(#ENV**{exec}|=={art_depub_edit}|?{#INCLURE{fond=prive/squelettes/contenu/art_depub_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_art_depub>

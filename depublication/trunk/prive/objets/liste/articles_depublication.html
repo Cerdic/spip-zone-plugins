@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1, 
+	id_art_depub,1,
+	points,-1
+}})]<B_liste_articles_depublication>
+#ANCRE_PAGINATION
+<div class="liste-objets articles_depublication">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{art_depub:info_1_art_depub,art_depub:info_nb_articles_depublication}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='' scope='col'>[(#TRI{,<:art_depub:label_:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_art_depub,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_articles_depublication(ARTICLES_DEPUBLICATION){id_article?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{art_depub-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{art_depub,#ID_ART_DEPUB})]</td> 
+			<td class=' principale'>[(#LOGO_ART_DEPUB|image_reduire{20,26})]<a href="[(#ID_ART_DEPUB|generer_url_entite{art_depub})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ART_DEPUB">[(#RANG). ]#</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,art_depub,#ID_ART_DEPUB}|?{
+				<a href="[(#URL_ECRIRE{art_depub_edit,id_art_depub=#ID_ART_DEPUB})]">#ID_ART_DEPUB</a>,
+				#ID_ART_DEPUB
+			})]</td>
+		</tr>
+	</BOUCLE_liste_articles_depublication>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_articles_depublication>[
+<div class="liste-objets articles_depublication caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_articles_depublication>
