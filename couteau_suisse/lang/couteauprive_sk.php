@@ -132,7 +132,7 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 
 @puce@ Ak nižšie zaškrtnete "Áno", stav očíslovaných blokov sa uloží do cookie, aby sa zachoval vzhľad stránky tak dlho, kým so stránkou budete pracovať.[[%blocs_cookie%]]
 
-@puce@ Podľa prvotných nastavení Vreckový nožík používa pre názvy skladacích blokov HTML tag <h4>. Iný tag môžete určiť tu <hN>:[[%bloc_h4%]]',
+@puce@ Podľa prvotných nastavení Vreckový nožík používa pre názvy skladacích blokov HTML tag <h4>. Iný tag môžete určiť tu <hN>:[[%bloc_h4%]]', # MODIF
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'Všetky polia opísané nižšie sú tu alebo v súkromnej zóne.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Aktualizácie nástroja Vreckový nožík:}} rámec tejto aktuálnej nastavovacej stránky, ktoré zobrazujú najnovšie úpravy kódu zásuvného modulu ([Source->@_CS_RSS_SOURCE@]).

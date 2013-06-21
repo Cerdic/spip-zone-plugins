@@ -135,7 +135,7 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 
 @puce@ By default, the Swiss Army Knife plugin uses the HTML tag <h4> for the titles of the collapsible blocks. You can specify another tag to use instead here <hN>:[[%bloc_h4%]]
 
-@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]',
+@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]', # MODIF
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All of the boxes described below appear either here in the private zone.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Updates to the Swiss Army Knife tool}}: a frame on this current configuration page indicating the most recent modifications made to the code of the ([Source->@_CS_RSS_SOURCE@]) plugin.

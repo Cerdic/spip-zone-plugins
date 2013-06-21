@@ -136,7 +136,7 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 
 @puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta <hN> :[[%bloc_h4%]]
 
-@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si \\"llisquessin\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si \\"llisquessin\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits més avall apareixen aquí o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisions del Ganivet Suís}}: un quadre a la pàgina actual de configuració, indicant les últimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).

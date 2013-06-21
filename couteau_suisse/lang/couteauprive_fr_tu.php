@@ -136,7 +136,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les révisions du Couteau Suisse}} : un cadre sur la présente page de configuration, indiquant les dernières modifications apportées au code du plugin ([Source->@_CS_RSS_SOURCE@]).
