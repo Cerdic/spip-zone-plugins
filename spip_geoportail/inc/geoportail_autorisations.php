@@ -42,9 +42,9 @@ function autoriser_auteur_positionner_dist ($faire, $type, $id, $qui, $opt)
 */
 function autoriser_geoproxy_dist ($faire, $type, $id, $qui, $opt)
 {	// Table des sites autorises (dans fichier Options)
-    $geoportail_url_autorisees = $GLOBALS['geoportail_url_autorisees'];
-    if (!$geoportail_url_autorisees OR !is_array($geoportail_url_autorisees))
-		$geoportail_url_autorisees = array();
+    $url_autorisees = $GLOBALS['geoportail_url_autorisees'];
+    if (!$url_autorisees OR !is_array($url_autorisees))
+		$url_autorisees = array();
 	// Pour les recherches par adresses (obsolete)
 	$url_autorisees[] = "http://wxs.ign.fr/";
 	
