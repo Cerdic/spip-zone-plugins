@@ -1,7 +1,7 @@
 <paquet
 	prefix="fil_ariane"
 	categorie="navigation"
-	version="0.1.11"
+	version="0.1.12"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="img/fil_ariane-128.png"
