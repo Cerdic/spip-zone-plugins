@@ -1,0 +1,33 @@
+<h3><:csv2spip:presentation_formulaire:></h3>
+
+<input type="radio"  name="choix" value="importer" checked> <:csv2spip:importer:><br>
+<input type="radio"  name="choix" value="exporter"> <:csv2spip:exporter:> <br>
+
+    <div id="exporter" class="aaa">
+        #FORMULAIRE_CSV2SPIP_EXPORTATION
+    </div>
+
+    <div id="importer" class="ajax">
+        #FORMULAIRE_CSV2SPIP_IMPORTATION
+    </div>
+
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+
+            jQuery("input[type=radio][name=choix]").change(function(event){
+                if ($('input[value=importer]').attr('checked')){
+                jQuery("#importer").css("display","block");
+                jQuery("#exporter").css("display","none");
+                };
+                if ($('input[value=exporter]').attr('checked')){
+                jQuery("#importer").css("display","none");
+                jQuery("#exporter").css("display","block");
+                };
+
+                });
+            });
+
+
+
+</script>

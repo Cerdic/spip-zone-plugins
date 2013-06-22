@@ -1,0 +1,29 @@
+<paquet
+	prefix="csv2spip"
+	categorie="outil"
+	version="5.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/csv2spip-128.png"
+	documentation=""
+>
+
+	<nom>csv2spip</nom>
+
+	<auteur>cy_altern</auteur>
+	<auteur>tofulm</auteur>
+	<licence>GNU/GPL</licence>
+
+    <necessite nom="saisies" compatibilite="[1.24.0;]" />
+
+    <pipeline nom="header_prive" inclure="csv2spip_pipelines.php" />
+
+
+	<menu nom="csv2spip" titre="csv2spip:csv2spip_titre" parent="menu_administration"  icone="images/csv2spip-16.png" />
+	<onglet nom="csv2spip" titre="csv2spip:onglet_csv2spip" parent="csv2spip"  icone="images/csv2spip-24.png" />
+	<onglet nom="csv2spip_restaurer" titre="csv2spip:onglet_csv2spip_restaurer" parent="csv2spip"  icone="images/csv2spip_restaurer-24.png" />
+	<onglet nom="csv2spip_outils" titre="csv2spip:onglet_csv2spip_outils" parent="csv2spip"  icone="images/csv2spip_outils-24.png" />
+
+
+
+</paquet>

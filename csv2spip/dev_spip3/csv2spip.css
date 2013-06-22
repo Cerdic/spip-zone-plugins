@@ -1,0 +1,31 @@
+div.choix {
+    margin-left:150px;
+}
+.formulaire_spip li label, .formulaire_spip li.gauche label{
+width : 280px;
+}
+input#champ_rubrique_defaut{
+    width:220px;
+}
+li.editer_creer_article,li.editer_maj_infoperso,li.editer_admin_a_zero,li.editer_nom_nouvel_auteur,li.editer_suppression_article_efface,li.editer_transfere_article,li.editer_nom_rubrique_archive,li.editer_transfere_article,li.editer_avenir_auteurs,div#exporter{
+    display:none;
+}
+input#champ_nom_nouvel_auteur,input#champ_rubrique_defaut{
+    width:200px;
+}
+input#champ_nom_rubrique_archive{
+    width:160px;
+}
+
+
+
+li.editer_transfere_article,li.editer_creer_article,li.editer_nom_rubrique_archive,li.editer_maj_infoperso,li.editer_admin_a_zero{
+    padding-left:160px;
+}
+li.editer_suppression_article_efface, li.editer_transfere_article,li.editer_nom_rubrique_archive{
+    background-color:#baefba;
+}
+li.editer_avenir_auteurs, li.editer_nom_nouvel_auteur{
+    background-color:#f2e5b1;
+    
+}

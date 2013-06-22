@@ -1,0 +1,117 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+    <form name="formulaire_#FORM" action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2spip:parametres_fichier_csv:></h3>
+
+                #SET{erreurs,#ENV**{erreurs}|table_valeur{fichier_csv}}
+                <li class="editer_fichier_csv obligatoire[ (#ENV**{erreurs}|table_valeur{fichier_csv}|oui)erreur]">  
+                <label for="champ_fichier_csv"><:csv2spip:fichier_uploader:></label>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_csv})</span>]
+                <input type="file" id="champ_fichier_csv" name="fichier_csv" value="[(#ENV{fichier_csv})]" />
+                </li>
+           </fieldset>
+            </li>
+
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2spip:mise_a_jour_utilisateur:></h3>
+                [(#SAISIE{oui_non,maj_utilisateur}
+                {label=<:csv2spip:mettre_a_jour_utilisateurs_existants:>})]
+            </fieldset>
+            </li>
+            
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2spip:suppression_absents:></h3>
+                [(#SAISIE{oui_non,abs_redac}
+                {label=<:csv2spip:abs_redac:>})]
+
+                [(#SAISIE{oui_non,abs_admin}
+                {label=<:csv2spip:abs_admin:>})]
+
+                [(#SAISIE{oui_non,abs_visiteur}
+                {label=<:csv2spip:abs_visiteur:>})]
+
+                    [(#SAISIE{oui_non,suppression_article_efface}
+                    {label=<:csv2spip:suppression_article_efface:>})]
+
+                        [(#SAISIE{oui_non,transfere_article}
+                        {label=<:csv2spip:transfere_article:>})]
+						
+						[(#SAISIE{selecteur_rubrique,rubrique_parent_archive}
+						{label=<:csv2spip:rubrique_parent_archive:>})]
+
+                        [(#SAISIE{input,nom_rubrique_archive}
+                        {label=<:csv2spip:nom_rubrique_archive:>})]
+            </fieldset>
+            </li>
+
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2spip:creation_rubrique:></h3>
+                [(#SAISIE{selecteur_rubrique,rubrique_parent}
+                {label=<:csv2spip:rubrique_parent:>})]
+            </fieldset>
+            </li>
+        </ul>
+    <p class="boutons"><input type="submit" class="submit" value="<:csv2spip:envoyer:>" /></p>
+    </div></form>
+]
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+            var redac  = false;
+            var  admin = false;
+            jQuery("#champ_abs_redac_oui").click(function(event){
+                redac = true;
+                jQuery("li.editer_suppression_article_efface").css("display","block");
+                jQuery("li.editer_avenir_auteurs").css("display","block");
+                
+                });
+            jQuery("#champ_abs_redac_non").click(function(event){
+                    if  (admin == false){
+                jQuery("li.editer_suppression_article_efface").css("display","none");
+                jQuery("li.editer_avenir_auteurs").css("display","none");
+                    }
+                redac = false;
+                });
+
+            jQuery("#champ_abs_admin_oui").click(function(event){
+                admin = true;
+                jQuery("li.editer_suppression_article_efface").css("display","block");
+                jQuery("li.editer_avenir_auteurs").css("display","block");
+                });
+            jQuery("#champ_abs_admin_non").click(function(event){
+                    if (redac == false){
+                jQuery("li.editer_suppression_article_efface").css("display","none");
+                jQuery("li.editer_avenir_auteurs").css("display","none");
+                    }
+                admin= false;
+                });
+
+            jQuery("#champ_transfere_article_oui").click(function(event){
+                    jQuery("li.editer_nom_rubrique_archive").css("display","block");
+                    jQuery("li.editer_nom_rubrique_parent_archive").css("display","block");
+                    });
+            jQuery("#champ_transfere_article_non").click(function(event){
+                    jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                    jQuery("li.editer_nom_rubrique_parent_archive").css("display","none");
+                    });
+
+            jQuery("#champ_suppression_article_efface_non").click(function(event){
+                    jQuery("li.editer_transfere_article").css("display","none");
+                    });
+            jQuery("#champ_suppression_article_efface_oui").click(function(event){
+                    jQuery("li.editer_transfere_article").css("display","block");
+                    });
+        });
+</script>

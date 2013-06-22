@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+    <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+            
+    [(#SAISIE{radio,delimiteur}
+    {label=<:csv2spip:delimiteur:>}
+    {datas=#ARRAY{
+    point-virgule,<:csv2spip:point_virgule:>,
+    virgule,<:csv2spip:virgule:>}
+    })]
+
+    [(#SAISIE{radio,toto}
+    {label=petit test}
+    {datas=#ENV{toto}}
+    )]
+
+
+    <p class="boutons"><input type="submit" class="submit" value="<:csv2spip:envoyer:>" /></p>
+    </div></form>
+]
+</div>
