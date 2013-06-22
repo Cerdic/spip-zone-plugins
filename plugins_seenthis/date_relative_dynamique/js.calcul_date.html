@@ -89,7 +89,10 @@ function afficher_dates() {
 			}
 		}
 		
-		if (age) $(this).html(age);
+		if (age) {
+			$(this).attr('title', $(this).html());
+			$(this).html(age);
+		}
 		
 	});
 }
