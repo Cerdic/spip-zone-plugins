@@ -1186,7 +1186,7 @@ $AutoEmbed_stubs = array(
    array(
     'title' => 'PDF file',
     'website' => '',
-    'url-match' => '(.*\.(xls|xlsx|ppt|pptx|pages|ai|psd|tiff|dxf|eps|ps))$', // pdf|doc|docx dŽsactivŽs
+    'url-match' => '//.*/(.*\.(xls|xlsx|ppt|pptx|pages|ai|psd|tiff|dxf|eps|ps))$', // pdf|doc|docx dŽsactivŽs
     'embed-width' => '480',
     'embed-height' => '400',
     'iframe-player' => 'http://docs.google.com/gview?url=$2&amp;embedded=true',
