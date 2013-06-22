@@ -104,10 +104,11 @@ function entravaux_styliser($flux){
 		include_spip('inc/autoriser');
 		// les pages exceptions
 		$pages_ok = array('login_sos','robots.txt','spip_pass','favicon.ico','informer_auteur');
+        // des squelettes autorisés configurables via mes_options
+		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX);
 		if (!autoriser('travaux')
 			AND !in_array($flux['args']['fond'],$pages_ok)
-		        // des pages autorisees configurables vie mes_options
-			AND ((defined('_SKEL_HORS_TRAVAUX')) AND !in_array($flux['args']['fond'],explode(',',_SKEL_HORS_TRAVAUX)))
+			AND !in_array($flux['args']['fond'],$skels_ok)
 			AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
 			// et on laisse passer modeles et formulaires,
 			// qui ne peuvent etre inclus ou appeles que legitimement
