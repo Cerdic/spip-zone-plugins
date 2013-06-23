@@ -2,18 +2,19 @@
 	<nom>Logs Javascript</nom>
 	<auteur>Michel Bystranowski</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1.1</version>
-	<slogan>Loger les erreurs javascript côté client</version>
+	<version>0.1.2</version>
+	<slogan>Loger les erreurs javascript côté client</slogan>
 	<description>
 	Ce plugin permet de récupérer les erreurs javascript qui se produisent
-	côté client. Un fichier <code>erreurs_js.log</cdse> sera créé dans le répertoire
+	côté client. Un fichier <code>erreurs_js.log</code> sera créé dans le répertoire
 	contenant les autres logs, et contiendra ces erreurs. Suivant le
-	mécanisme de la fonction spip_log(), les erreurs qui se produisent
+	mécanisme de la fonction <code>spip_log()</code>, les erreurs qui se produisent
 	dans l'espace privé seront dans le fichier prive_erreurs_js.log
 	</description>
 	<etat>dev</etat>
 	<prefix>js_log</prefix>
 	<categorie>outil</categorie>
+	<icon>logo_jslog-64.png</icon>
 
 	<necessite id="SPIP" version="[2.1.19;)" />
 	<necessite id="spip_bonux" version="[2.3.0;)" />
