@@ -1,39 +1,41 @@
 <plugin>
-  <nom>Logs Javascript</nom>
-  <auteur>Michel Bystranowski</auteur>
-  <licence>GNU/GPL</licence>
-  <version>0.1</version>
-  <description>
-    Ce plugin permet de récupérer les erreurs javascripts qui se produisent
-    côté client. Un fichier erreurs_js.log sera créé dans le répertoire
-    contenant les autres logs, et contiendra ces erreurs. Suivant le
-    mécanisme de la fonction spip_log, les erreurs qui se produisent
-    dans l'espace privé seront dans le fichier prive_erreurs_js.log
-  </description>
-  <etat>dev</etat>
-  <prefix>js_log</prefix>
+	<nom>Logs Javascript</nom>
+	<auteur>Michel Bystranowski</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1.1</version>
+	<slogan>Loger les erreurs javascript côté client</version>
+	<description>
+	Ce plugin permet de récupérer les erreurs javascript qui se produisent
+	côté client. Un fichier <code>erreurs_js.log</cdse> sera créé dans le répertoire
+	contenant les autres logs, et contiendra ces erreurs. Suivant le
+	mécanisme de la fonction spip_log(), les erreurs qui se produisent
+	dans l'espace privé seront dans le fichier prive_erreurs_js.log
+	</description>
+	<etat>dev</etat>
+	<prefix>js_log</prefix>
+	<categorie>outil</categorie>
 
-  <necessite id="SPIP" version="[2.1.19;)" />
-  <necessite id="spip_bonux" version="[2.3.0;)" />
+	<necessite id="SPIP" version="[2.1.19;)" />
+	<necessite id="spip_bonux" version="[2.3.0;)" />
 
-  <pipeline>
-    <nom>insert_head</nom>
-    <inclure>js_log_pipeline.php</inclure>
-  </pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>js_log_pipeline.php</inclure>
+	</pipeline>
 
-  <pipeline>
-    <nom>header_prive</nom>
-    <inclure>js_log_pipeline.php</inclure>
-  </pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>js_log_pipeline.php</inclure>
+	</pipeline>
 
-  <pipeline>
-    <nom>affichage_final</nom>
-    <inclure>js_log_pipeline.php</inclure>
-  </pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>js_log_pipeline.php</inclure>
+	</pipeline>
 
-  <pipeline>
-    <nom>body_prive</nom>
-    <inclure>js_log_pipeline.php</inclure>
-  </pipeline>
+	<pipeline>
+		<nom>body_prive</nom>
+		<inclure>js_log_pipeline.php</inclure>
+	</pipeline>
 
 </plugin>
