@@ -8,7 +8,13 @@ include_spip('inc/ckeditor_constantes_inc') ;
 define('_CKE_DEVTOOLS_DEF', false) ;
 define('SPIP_SITE', isset($GLOBALS['table_prefix'])?$GLOBALS['table_prefix']:'spip' );
 define('_CKE_JS', find_in_path('lib/ckeditor/ckeditor.js')) ;
-define('_CKE_JQUERY', find_in_path('lib/ckeditor/adapters/jquery.js')) ;
+$cke_adapter = find_in_path('lib/ckeditor/adapters/jquery.js') ;
+if (file_exists($cke_adapter)) {
+	define('_CKE_JQUERY', $cke_adapter) ;
+} else {
+	// on prépare le terrain pour ckeditor 4.x (les premiers paquetage ne contiennent pas l'adapter jquery
+	define('_CKE_JQUERY', find_in_path('adapters/jquery.js')) ;
+}
 define('_CKE_HTML2SPIP_VERSION', 'html2spip-0.6') ;
 define('_CKE_PATH', dirname(_CKE_JS)) ;
 define('_CKE_LARGE_DEF', 490 ) ;

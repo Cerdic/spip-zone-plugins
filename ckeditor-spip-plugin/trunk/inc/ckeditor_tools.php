@@ -84,11 +84,11 @@ function ckeditor_traite_lien_html($texte, $lien, $avant, $apres) {
 
 	$texte=preg_replace('~\\\(.)~',"$1",$texte);
 	if (preg_match("~spip\.php\?page=(\w+)(?:&amp;amp;|&amp;|&)id_\\1=(\d+)(#\w+)?$~", $lien, $match)) {
-		return "[".strip_tags($texte,"<strong><em><i><span><img>").$titre."->".$match[1]." ".$match[2].$match[3]."]" ;
+		return "[".strip_tags($texte,"<strong><em><i><span><img><sub><sup>").$titre."->".$match[1]." ".$match[2].$match[3]."]" ;
 	} else if ($avant || $apres) {
 		return "<a ".($avant?stripslashes($avant).' ':'')."href='$lien'".($apres?' '.stripslashes($apres):'').">$texte</a>" ;
 	} else {
-		return "[".strip_tags($texte,"<strong><em><i><span><img>").$titre."->".$lien."]" ;
+		return "[".strip_tags($texte,"<strong><em><i><span><img><sub><sup>").$titre."->".$lien."]" ;
 	}
 }
 
@@ -324,6 +324,9 @@ function ckeditor_tag_unprotect($code,$tag,$params) {
 function ckeditor_html2spip($texte) {
 	$ckeditor_html2spip_pre = charger_fonction('ckeditor_html2spip_pre','');
 	$texte = $ckeditor_html2spip_pre($texte);
+
+	$search[] = "~<br/?>(\s|\r|\n)*</li>(\s|\r|\n)*~" ; // fix: http://contrib.spip.net/CKeditor-3-0#forum468504
+	$replace[] = "</li>" ;
 
 	if (PROTECTED_SPIP_TAGS) {
 		$search[] = "#&lt;(".PROTECTED_SPIP_TAGS.".*?)&gt;#s" ;

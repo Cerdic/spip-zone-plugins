@@ -414,13 +414,12 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['toolbar'] = 'SpipFull' ;
 
 			// on essaie de faire en sorte que la couleur de ckeditor corresponde au theme spip actif
-			$choix = (is_array($visiteur_session) && is_array($visiteur_session['prefs']))
-				? $visiteur_session['prefs']['couleur']
-				: -1;
 			$couleurs = charger_fonction('couleurs', 'inc');
 			$couleurs_spip = $couleurs(array(), true) ;
-			// si pas de couleur : gris pale
-			$cke_cfg['uiColor'] = ($choix==-1?'#eee':couleur_pastelle($couleurs_spip[$choix]['couleur_claire'])) ;
+			$cke_cfg['uiColor'] = (is_array($visiteur_session) && is_array($visiteur_session['prefs']))
+				? couleur_pastelle($couleurs_spip[$visiteur_session['prefs']['couleur']]['couleur_claire'])
+				// si pas de couleur : gris pale
+				: '#eee' ;
 
 			// on fait correspondre l'url du site
 			($site_url = lire_config("ckeditor/siteurl")) || ($site_url = lire_meta("adresse_site")) ;
@@ -428,7 +427,11 @@ function ckeditor_preparescript($config) {
 			// on fait correspondre la langue
 			$cklanguage = ckeditor_lire_config("cklanguage", _CKE_LANGAGE_DEF) ;
 			if (($cklanguage == 'auto') || ($cklanguage == '')) {
-				($cklanguage = $visiteur_session['lang']) || ($cklanguage = lire_meta("langue_site")) ;
+				if (is_array($visiteur_session) && array_key_exists('lang', $visiteur_session)) {
+					$cklanguage = $visiteur_session['lang'] ;
+				} else {
+					$cklanguage = lire_meta("langue_site") ;
+				}
 			}
 			$cke_cfg['language'] = $cklanguage ;
 
@@ -470,8 +473,16 @@ function ckeditor_preparescript($config) {
 			$autorise_admin_telecharger = ckeditor_lire_config('autorise_telechargement', _CKE_UPLOAD_DEF) ;
 			$autorise_redac_telecharger = $autorise_admin_telecharger && ckeditor_lire_config('autorise_telechargement_redacteur', _CKE_UPLOAD_REDAC_DEF) ;
 
-			$est_admin = ($auteur_session['statut'] == '0minirezo') ;
-			$est_redac = ($auteur_session['statut'] == '0minirezo') || ($auteur_session['statut'] == '1comite') ;
+			$est_admin = (
+				is_array($auteur_session) && 
+				array_key_exists('statut', $auteur_session) &&
+				$auteur_session['statut'] == '0minirezo'
+			) ;
+			$est_redac = (
+				is_array($auteur_session) &&
+				array_key_exists('statut', $auteur_session) &&
+				(($auteur_session['statut'] == '0minirezo') || ($auteur_session['statut'] == '1comite'))
+			) ;
 			
 			$peut_parcourir = ($autorise_parcours && $est_redac) ;
 			$peut_telecharger = ( ($autorise_admin_telecharger && $est_admin) || ($autorise_redac_telecharger && $est_redac) ) ;
@@ -631,8 +642,14 @@ function loadCKEditor() {
 	} catch (E) {}
 	fullInitCKEDITOR(ajaxload) ;
 }
+
+// fix: http://contrib.spip.net/CKeditor-3-0#forum468153
+function ajaxLoadCKEditor() {
+	CKEDITOR = window.parent.document.CKEDITOR ;
+	loadCKEditor() ;
+}
 $(window).load(function(){
-	if(typeof onAjaxLoad == 'function') onAjaxLoad(loadCKEditor);
+	if(typeof onAjaxLoad == 'function') onAjaxLoad(ajaxLoadCKEditor);
 	loadCKEditor();
 }) ;
 
