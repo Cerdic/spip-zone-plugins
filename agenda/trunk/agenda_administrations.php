@@ -68,8 +68,14 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_drop_table',"spip_mots_evenements"),
 		array('sql_alter',"TABLE spip_evenements ADD statut varchar(10) DEFAULT 0 NOT NULL"),
 	);
+	
 	$maj['0.25.0'] = array(
 		array('upgrade_evenements_statut_025'),
+	);
+	
+	$maj['0.26.0'] = array(
+		array('maj_tables',array('spip_evenements')),
+		array('sql_update',"spip_evenements", array('date_creation'=>'maj')),
 	);
 
 	include_spip('base/upgrade');

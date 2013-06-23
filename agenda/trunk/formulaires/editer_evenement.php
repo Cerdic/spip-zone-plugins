@@ -123,7 +123,11 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 		// sera refuse si auteur pas autorise
 		evenement_modifier($res['id_evenement'],array('statut'=>'publie'));
 	}
-	$id_evenement = $res['id_evenement'];
+	// a la creation, documenter la date de creation
+	if (!intval($id_evenement))
+		evenement_modifier($res['id_evenement'],array('date_creation'=>date('Y-m-d H:i:s')));
+
+		$id_evenement = $res['id_evenement'];
 	if ($res['redirect']) {
 		if (strpos($res['redirect'],'article')!==false){
 			$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id_evenement));

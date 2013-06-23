@@ -92,7 +92,8 @@ function agenda_declarer_tables_objets_sql($tables){
 			"horaire" => "varchar(3) DEFAULT 'oui' NOT NULL",
 			"id_evenement_source"	=> "bigint(21) NOT NULL",
 			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-			"maj"	=> "TIMESTAMP"
+			"maj"	=> "TIMESTAMP",
+			"date_creation"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY"	=> "id_evenement",
@@ -133,7 +134,7 @@ function agenda_declarer_tables_objets_sql($tables){
 			'poubelle' => 'texte_statut_poubelle',
 		),
 		'texte_changer_statut' => 'agenda:texte_evenement_statut',
-		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse'),
+		'champs_versionnes' => array('id_article', 'titre', 'descriptif', 'lieu', 'adresse', 'date_debut', 'date_fin', 'horaire'),
 
 	);
 
