@@ -7,16 +7,17 @@
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
     #ACTION_FORMULAIRE{#ENV{action}}
             
-    [(#SAISIE{radio,delimiteur}
-    {label=<:csv2spip:delimiteur:>}
+    [(#SAISIE{checkbox,choix_statut}
+    {label=<:csv2spip:choix_statut:>}
     {datas=#ARRAY{
-    point-virgule,<:csv2spip:point_virgule:>,
-    virgule,<:csv2spip:virgule:>}
-    })]
+    0minirezo,<:csv2spip:admin_rub:>,
+    1comite,<:csv2spip:redacteur:>,
+    6forum,<:csv2spip:visiteur:>}}
+    )]
 
-    [(#SAISIE{radio,toto}
+    [(#SAISIE{checkbox,nom_champs}
     {label=petit test}
-    {datas=#ENV{toto}}
+    {datas=#ENV{nom_champs}}
     )]
 
 
