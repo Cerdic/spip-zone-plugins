@@ -35,6 +35,15 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 				"closeWith"		=> "\n</cadre>",
 				"display"		=> false,
 			),
+			// bouton <cadre css>
+			array(
+				"id"          => 'cadre_css',
+				"name"        => _T('pp_codes:outil_inserer_cadre_css'),
+				"className"   => 'outil_cadre_css', 
+				"openWith" => "<cadre class='css'>\n",
+				"closeWith" => "\n</cadre>",
+				"display"     => false,
+			),
 			// bouton <cadre xml>
 			 array(
 				"id"          => 'cadre_xml',

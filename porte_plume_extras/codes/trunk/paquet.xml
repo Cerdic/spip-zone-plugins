@@ -1,7 +1,7 @@
 <paquet
 	prefix="pp_codes"
 	categorie="edition"
-	version="2.0.0-alpha"
+	version="2.0.1-alpha"
 	etat="test"
 	compatibilite="[3.0.0-alpha2;3.1.0["
 	logo="images/porte_plume_codes-128.png"
