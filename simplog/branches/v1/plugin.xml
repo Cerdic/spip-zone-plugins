@@ -3,11 +3,11 @@
 	<slogan>Visualisation des logs SPIP par les administrateurs</slogan>
 	<auteur>luc.tech@free.fr</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<description>
 	Une fois le plugin activ&#233;, les administrateurs ont la possibilit&#233; de consulter tous les journaux disponibles sur le site. Une entr&#233;e du menu Maintenance permet de se rendre sur la page de consultation (simplog).
 	</description>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<icon>prive/themes/spip/images/simplog-24.gif</icon>
 	<prefix>simplog</prefix>
 	<categorie>outil</categorie>
@@ -28,7 +28,7 @@
 		<url>simplog</url>
 	</bouton>
 
-	<necessite id='spip' version='[2.1.0;3.0.99]' />
+	<necessite id='spip' version='[2.1.0;2.1.99]' />
 	<necessite id='iterateurs' />
 	<utilise id="bando" />
 </plugin>

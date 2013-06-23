@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplog"
 	categorie="outil"
-	version="0.4.3"
+	version="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/simplog-24.gif"
