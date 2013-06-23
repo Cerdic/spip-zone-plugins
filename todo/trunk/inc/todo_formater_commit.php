@@ -22,7 +22,7 @@ function inc_todo_formater_commit_dist($valeur) {
 			$href = 'http://zone.spip.org/trac/spip-zone/changeset/' . $m[2];
 		else
 			$href = 'http://core.spip.org/projects/spip/repository/revisions/' . $m[2];
-		$commit = "<a class=\"spip_out\" rel=\"external\" href=\"${href}\">${valeur}</a>";
+		$commit = '<a class="spip_out" rel="external" href="${href}">' . $m[2] . '</a>';
 	}
 
 	return $commit;
