@@ -67,6 +67,11 @@ function filtres_prix_formater_dist($prix){
 	  define('PRIX_DEVISE','fr_FR.utf8');
 	}
 	
+	// Pouvoir débrayer l'écriture de la devise par défaut
+	if (! defined('DEVISE_DEFAUT')) {
+	  define('DEVISE_DEFAUT','&nbsp;&euro;');
+	}
+	
 	setlocale(LC_MONETARY, PRIX_DEVISE); 
 	
 	if(function_exists(money_format)) {
@@ -74,9 +79,9 @@ function filtres_prix_formater_dist($prix){
 		$prix = money_format('%i', $prix); 
 		// Afficher la devise € si celle ci n'est pas remontée par la fonction money
 		if ((strlen(money_format('%#1.0n', 0)) < 2) || ((money_format('%#1.0n', 0) == 0) AND (strlen(money_format('%#1.0n', 0)) == 3)))
-		  $prix .= '&nbsp;&euro;'; 
+		  $prix .= DEVISE_DEFAUT; 
 	} else {
-		 $prix .= '&nbsp;&euro;'; 
+		 $prix .= DEVISE_DEFAUT; 
 	}
 	
 	
