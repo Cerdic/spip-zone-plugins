@@ -124,3 +124,18 @@ Les utilisations avec ou sans module sont détectées.
 2.4 - Pour les fichiers PHP
 
 
+	- cas P1	: l'item est utilisé dans la déclaration de certaines propriétés des objets de la base de données,
+				  'propriete' => 'module:raccourci_item',
+				  où module est forcément non vide
+	- exemples	:
+		'texte_objets' => 'breves:breves',
+		'texte_objet' => 'breves:breve',
+	- regexp	: %=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S
+
+
+	- cas P2	: l'item est utilisé au travers de l'écriture "classique" pour du PHP, à savoir,
+				  _T('module:raccourci_item', array('param1' => valeur1, 'param2' => valeur2), array('options1'=>valeur1)),
+				  où module est forcément non vide
+	- exemples	:
+	- regexp	: %=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S
+
