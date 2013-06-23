@@ -1,10 +1,11 @@
 <paquet
 	prefix="bibliocheck"
 	categorie="edition"
-	version="1.0.1"
-	etat="test"
+	version="1.0.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/bibliocheck-32.png"
+	schema="0.1.0"
 	documentation="http://contrib.spip.net/?article4310"
 >	
 
