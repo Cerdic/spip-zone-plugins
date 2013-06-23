@@ -39,8 +39,6 @@
 				<td>[(#VAL{voir_en_}|concat{#ENV{numero, defaut}}|_T)]</td>
 				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / indéfini  -->
 				<td>[(#VAL{verification:indefini_html_partiel_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
-
-				<!-- TODO : améliorer la regexp pour reconnaitre le cas ci-dessous -->
 				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / défini  -->
 				<td>[(#VAL{verification:defini_html_partiel_}|ajouter_numero|_T)]</td>
 			</tr>
