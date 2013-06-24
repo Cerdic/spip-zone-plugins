@@ -56,8 +56,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Événements',
 	'evenements_a_venir' => 'À venir',
 	'evenements_depuis_debut' => 'Depuis le début',
-	'explication_synchro_flux_ical_titre' => 'Synchronisation du flux iCal',
 	'explication_synchro_flux_ical' => 'Le plugin Agenda fournit un flux des évènements au format iCal. Certains clients ne mettent à jour un évènement que si un numéro de version (indiquant ansi qu\'il y a eu modification) est présent dans ce flux. Pour que ce numéro de version soit intégré dans le flux iCal généré, vous devez activer le suivi des révisions pour les évènements (menu Configuration > Révisions).',
+	'explication_synchro_flux_ical_titre' => 'Synchronisation du flux iCal',
 
 	// F
 	'fermer' => 'fermer',
