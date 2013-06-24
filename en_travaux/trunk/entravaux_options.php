@@ -105,7 +105,8 @@ function entravaux_styliser($flux){
 		// les pages exceptions
 		$pages_ok = array('login_sos','robots.txt','spip_pass','favicon.ico','informer_auteur');
         // des squelettes autorisés configurables via mes_options
-		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX);
+		if (defined('_SKEL_HORS_TRAVAUX')) $skels_ok = explode(',',_SKEL_HORS_TRAVAUX); 
+		else $skels_ok = array();
 		if (!autoriser('travaux')
 			AND !in_array($flux['args']['fond'],$pages_ok)
 			AND !in_array($flux['args']['fond'],$skels_ok)
