@@ -181,6 +181,7 @@ function langonet_reperer_items($utilises, $init)
 function langonet_classer_items($module, $utilises, $init=array(), $files=array()) {
 
 	$tous_lang = array();
+	if (!$init) $init = array();
 	foreach ($files as $_fichier) {
 		$module_def = preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $m) ? $m[1] : '';
 		foreach ($contenu = file($_fichier) as $ligne => $texte) {
