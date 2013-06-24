@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
+include_spip('action/editer_liens');
 include_spip('inc/editer');
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 /**
@@ -121,10 +122,10 @@ function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	# on passe par un fichier temp car notre librairie fonctionne comme ca
-	//$tmp = _DIR_TMP . 'ics-'.md5('url');
-	//ecrire_fichier($tmp, str_replace("\r\n", "\n", $u));
-	$config = array("unique_id"=>"","url"=>"http://www.latp.univ-mrs.fr/spip.php?page=seminaire_ical&id_article=351");
+	#on recupère l'id de l'almanach dont on aura besoin plus tard
+	$id_almanach = $chargement['id_almanach'];
+
+	$config = array("unique_id"=>"","url"=>_request('url'));
 	$cal = new vcalendar($config);
 	//$cal->setConfig( 'filename', $tmp );
 	$cal->parse();
@@ -160,7 +161,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
     $id_article = _request('id_article');
 	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0'));
 	#on associe l'évéenement à l'almanach
-	sql_insertq('spip_almanachs_liens',array('id_almanach'=>$chargement[1],'id_objet'=>$id_evenement,'objet'=>'evenement'));
+	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
  }
 
 	return $chargement;
