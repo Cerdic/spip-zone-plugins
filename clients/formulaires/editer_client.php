@@ -168,25 +168,30 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 	include_spip('inc/session');
 	$contexte = array();
 
-	// On vérifie qu'il y a un client correct (auteur+contact+adresse) quelque part
+	// On vérifie qu'il y a un client correct possible (auteur avec email) quelque part
+	// (cas d'un inscrit rédacteur qui deviendrait client)
+	// Si le contact est déjà renseigné, on remplit la fiche
 	if (
 		$id_auteur > 0
 		and $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.intval($id_auteur))
-		and $contact = sql_fetsel(
+	){
+
+		$contact = sql_fetsel(
 			'*',
 			'spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)',
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.intval($id_auteur)
 			)
-		)
-	){
+		);
 
 		$contexte['email_rien'] = $email;
-		foreach ($contact as $cle=>$valeur) {
-			$contexte[$cle] = $valeur;
+		if (is_array($contact)) {
+			foreach ($contact as $cle=>$valeur) {
+				$contexte[$cle] = $valeur;
+			}
 		}
-		
+
 		// S'il y a une adresse principale, on charge les infos
 		if ($adresse = sql_fetsel(
 			'*',
@@ -196,9 +201,10 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 				'id_objet = '.intval($id_auteur),
 				'type = '.sql_quote('principale')
 			)
-		))
+		)) {
 			$contexte = array_merge($contexte, $adresse);
-			
+		}
+
 		// S'il y a un numero principal, on charge les infos
 		if ($numero = sql_fetsel(
 			'*',
@@ -208,11 +214,12 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 				'id_objet = '.intval($id_auteur),
 				'type = '.sql_quote('principal')
 			)
-		))
+		)) {
 			$contexte = array_merge($contexte, $numero);
-			
+		}
+
 		$conf=lire_config('clients/elm',array());
-		if (in_array('portable', $conf)){	
+		if (in_array('portable', $conf)) {
 			// S'il y a un numero portable, on charge les infos
 			if ($portable = sql_fetsel(
 				'*',
@@ -222,17 +229,18 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 					'id_objet = '.intval($id_auteur),
 					'type = '.sql_quote('portable')
 				)
-			)){
+			)) {
 				foreach($portable as $c => $v){
 					if ($c == 'numero'){
 							$c = 'portable'; 
 							$_portable[$c] = $v;
 							}
-					}				
+					}
 				$contexte = array_merge($contexte, $_portable);
 			}
 		}
-		if (in_array('fax', $conf)){	
+
+		if (in_array('fax', $conf)) {
 			// S'il y a un numero fax, on charge les infos
 			if ($fax = sql_fetsel(
 				'*',
@@ -242,7 +250,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 					'id_objet = '.intval($id_auteur),
 					'type = '.sql_quote('fax')
 				)
-			)){
+			)) {
 				foreach($fax as $c => $v){
 					if ($c == 'numero'){
 							$c = 'fax'; 
@@ -253,19 +261,22 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			}
 		}
 	}
+
 	// Sinon rien
-	else{
+	else {
 		$contexte['editable'] = false;
 	}
-	
+
 	return $contexte;
 }
 
+
+
 function formulaires_editer_client_verifier_dist($id_auteur, $retour=''){
 	$erreurs = array();
-	
 	return $erreurs;
 }
+
 
 function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	// Si redirection demandée, on refuse le traitement en ajax
@@ -280,29 +291,29 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
 	);
 
-    //Si le contact n'existe pas encore, on doit le créer (cas d'un auteur prexistant à son statut de client)
-    if (is_null($id_contact)) {
-        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
-        $inscrire_client();
+	//Si le contact n'existe pas encore, on doit le créer (cas d'un auteur prexistant à son statut de client)
+	if (is_null($id_contact)) {
+		$inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
+		$inscrire_client();
 
-	    $id_contact = sql_getfetsel(
-		    'id_contact',
-		    'spip_contacts_liens',
-		    'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
-	    );
-    }
+		$id_contact = sql_getfetsel(
+			'id_contact',
+			'spip_contacts_liens',
+			'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
+		);
+	}
 
-    $editer_contact = charger_fonction('editer_contact', 'action/'); 
-    $editer_contact($id_contact);
+	$editer_contact = charger_fonction('editer_contact', 'action/'); 
+	$editer_contact($id_contact);
 
 	// Le pseudo SPIP est construit
 	$nom_save = _request('nom') ;
 	set_request('nom', trim(_request('prenom').' '._request('nom'))); 
-	
+
 	// On modifie l'auteur
 	$editer_auteur = charger_fonction('editer_auteur', 'action/');
 	$editer_auteur($id_auteur);
-	
+
 	// On modifie l'adresse
 	$id_adresse = sql_getfetsel(
 		'id_adresse',
@@ -313,6 +324,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			'type = '.sql_quote('principale')
 		)
 	);
+
 	// S'il n'y a pas d'adresse principale, on la crée
 	if (!$id_adresse){
 		$id_adresse = 'oui';
@@ -320,10 +332,10 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		set_request('id_objet', $id_auteur);
 		set_request('type', 'principale');
 	}
-	
+
 	$editer_adresse = charger_fonction('editer_adresse', 'action/');
 	$editer_adresse($id_adresse);
-	
+
 	// On modifie le numero
 	$id_numero = sql_getfetsel(
 		'id_numero',
@@ -334,20 +346,25 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			'type = '.sql_quote('principal')
 		)
 	);
-	
-	// S'il n'y a pas de numero de telephone principal, on le crée
-	if (!$id_numero){
-		$id_numero = 'oui';
-		set_request('objet', 'auteur');
-		set_request('id_objet', $id_auteur);
-		set_request('type', 'principal');
+
+	if (_request('numero')) {
+		// S'il n'y a pas de numero de telephone principal, on le crée
+		if (!$id_numero){
+			$id_numero = 'oui';
+			set_request('objet', 'auteur');
+			set_request('id_objet', $id_auteur);
+			set_request('type', 'principal');
+		}
+
+		$editer_numero = charger_fonction('editer_numero', 'action/');
+		$editer_numero($id_numero);
+	} elseif ($id_numero) {
+		// dans ce cas, c'est que le numéro a été supprimé par le client dans le formulaire
+		// [Todo] il faudrait effacer aussi le numéro dans la base !
 	}
-	
-	$editer_numero = charger_fonction('editer_numero', 'action/');
-	$editer_numero($id_numero);
-	
+
 	// On modifie le portable s'il existe dans l'environnement
-	if(_request('portable')){
+	if (_request('portable')){
 		// on stocke cette donnee
 		$numero = _request('numero');
 		set_request('numero', _request('portable'));
@@ -360,7 +377,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 				'type = '.sql_quote('portable')
 			)
 		);
-	
+
 		// S'il n'y a pas de numero de portable, on le crée
 		if (!$id_portable){
 			$id_portable = 'oui';
@@ -368,14 +385,13 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			set_request('id_objet', $id_auteur);
 			set_request('type', 'portable');
 		}
-		
+
 		$editer_portable = charger_fonction('editer_numero', 'action/');
 		$editer_portable($id_portable);
-		
 	}
-	
+
 	// On modifie le fax s'il existe dans l'environnement
-	if(_request('fax')){
+	if (_request('fax')){
 		// on stocke cette donnee si elle ne l'est pas deja
 		$numero ? '' : $numero = _request('numero');
 		set_request('numero', _request('fax'));
@@ -388,7 +404,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 				'type = '.sql_quote('fax')
 			)
 		);
-	
+
 		// S'il n'y a pas de numero de fax, on le crée
 		if (!$id_fax){
 			$id_fax = 'oui';
@@ -399,14 +415,14 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		
 		$editer_fax = charger_fonction('editer_numero', 'action/');
 		$editer_fax($id_fax);
-		
+
 	}
-	
+
 	// Quand on reste sur la même page, on peut toujours éditer après
 	$retours['editable'] = true;
 	// si necessaire on replace la bonne donnee dans l'environnement
 	$numero ? set_request('numero', $numero) : '';
-	
+
 	// Si on demande une redirection
 	if ($retour) $retours['redirect'] = $retour;
 
