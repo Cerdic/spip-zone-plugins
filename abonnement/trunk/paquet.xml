@@ -1,7 +1,7 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="2.1.1"
+	version="2.1.2"
 	schema="2.1.0"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"

@@ -10,13 +10,26 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Optimiser la base de donnees en supprimant les liens orphelins
- * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ * Optimiser la base de donnees des abonnements
  *
  * @param int $n
  * @return int
  */
 function abonnements_optimiser_base_disparus($flux){
+
+	//Offres d'abonnement à la poubelle
+	sql_delete("spip_abonnements_offres", "statut='poubelle' AND maj < ".$flux['args']['date']);
+	
+	//Supprimer les abonnements lies à une offre d'abonnement inexistante
+	$res = sql_select("DISTINCT abonnements.id_abonnements_offre","spip_abonnements AS abonnements
+						LEFT JOIN spip_abonnements_offres AS offres
+						ON abonnements.id_abonnements_offre=offres.id_abonnements_offre","offres.id_abonnements_offre IS NULL");
+	while ($row = sql_fetch($res))
+		sql_delete("spip_abonnements", "id_abonnements_offre=".$row['id_abonnements_offre']);
+
+	//Abonnements à la poubelle
+	sql_delete("spip_abonnements", "statut='poubelle' AND maj < ".$flux['args']['date']);
+	
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('abonnement'=>'*'),'*');
 	return $flux;
