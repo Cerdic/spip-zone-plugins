@@ -167,7 +167,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 	include_spip('inc/session');
 	$contexte = array();
-	
+
 	// On vérifie qu'il y a un client correct (auteur+contact+adresse) quelque part
 	if (
 		$id_auteur > 0
@@ -181,6 +181,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			)
 		)
 	){
+
 		$contexte['email_rien'] = $email;
 		foreach ($contact as $cle=>$valeur) {
 			$contexte[$cle] = $valeur;

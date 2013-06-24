@@ -8,13 +8,13 @@ include_spip('inc/filtres');
 
 function formulaires_inscription_client_saisies_dist($retour=''){
 	$mode = tester_config(0);
-	
+
 	$conf=lire_config('clients/elm',array());
-	
+
 	$civilite=array();	
 	$type_c = lire_config('clients/type_civ','i');
-	
-	if($type_c == 'c'){
+
+	if ($type_c == 'c'){
 		$civ=lire_config('clients/elm_civ',array('madame', 'monsieur'));
 		$civ_t=array();
 		if (in_array("civilite", $conf)) {		
@@ -32,7 +32,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				)
 			);
 		}
-	}else{
+	} else {
 		if (in_array("civilite", $conf)) {
 			$civilite=array(
 				'saisie' => 'input',
@@ -184,7 +184,7 @@ function formulaires_inscription_client_charger_dist($retour=''){
 function formulaires_inscription_client_verifier_dist($retour=''){
 	// On crée un faux positif pour le nom car on le construira nous-même plus tard
 	set_request('nom_inscription', 'glop');
-	
+
 	// On récupère les erreurs du formulaire d'inscription classique
 	$mode = tester_config(0);
 	$inscription_dist = charger_fonction('verifier', 'formulaires/inscription');
@@ -196,18 +196,18 @@ function formulaires_inscription_client_verifier_dist($retour=''){
 function formulaires_inscription_client_traiter_dist($retour=''){
 	// Si redirection demandée, on refuse le traitement en ajax
 	if ($retour) refuser_traiter_formulaire_ajax();
-	
+
 	// Le pseudo SPIP est construit
 	set_request('nom_inscription', trim(_request('prenom').' '._request('nom')));
-	
+
 	// On active le traitement du formulaire d'inscription classique, donc on crée un nouvel utilisateur
-    if (!($id_auteur = verifier_session())) {
-	    $mode = tester_config(0);
-	    $inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
-	    $retours = $inscription_dist($mode,'');
-    
-        $id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')));
-    }	
+	if (!($id_auteur = verifier_session())) {
+		$mode = tester_config(0);
+		$inscription_dist = charger_fonction('traiter', 'formulaires/inscription');
+		$retours = $inscription_dist($mode,'');
+
+		$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')));
+	}
 
 	// On récupère l'auteur qu'on vient de créer avec l'email du form
 	if ($id_auteur){
@@ -215,7 +215,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
 		set_request('type', 'principale');
-		
+
 		// On crée un contact pour cet utilisateur
 		$editer_contact = charger_fonction('editer_contact', 'action/');
 		list($id_contact, $err) = $editer_contact('nouveau');
@@ -224,49 +224,51 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		//assurer la compatibilite
 		sql_updateq('spip_contacts',array('id_auteur' => $id_auteur),"id_contact=".intval($id_contact));
 
-		
+
 		// On crée l'adresse
 		$editer_adresse = charger_fonction('editer_adresse', 'action/');
 		$editer_adresse('oui');
-		
+
 		// On crée le numero de tel
-		set_request('type', 'principal');
-		$editer_numero = charger_fonction('editer_numero', 'action/');
-		$editer_numero('oui');
-		
+		if (_request('numero')) {
+			set_request('type', 'principal');
+			$editer_numero = charger_fonction('editer_numero', 'action/');
+			$editer_numero('oui');
+		}
+
 		// On crée le portable
-		if(_request('portable')){
+		if (_request('portable')){
 			// on stocke cette donnee
 			$numero = _request('numero');
-			set_request('numero', _request('portable'));					
-			set_request('type', 'portable');			
+			set_request('numero', _request('portable'));
+			set_request('type', 'portable');
 			set_request('titre', 'Portable');
 			
 			$editer_portable = charger_fonction('editer_numero', 'action/');
-			$editer_portable('oui');		
+			$editer_portable('oui');
 		}
-	
+
 		// On crée le fax
-		if(_request('fax')){
+		if (_request('fax')){
 			// on stocke cette donnee si elle ne l'est pas deja
 			$numero ? '' : $numero = _request('numero');
 			set_request('numero', _request('fax'));
-			set_request('type', 'fax');			
+			set_request('type', 'fax');
 			set_request('titre', 'Fax');
-								
+
 			$editer_fax = charger_fonction('editer_numero', 'action/');
-			$editer_fax('oui');		
-		}		
+			$editer_fax('oui');
+		}
 	}
-	
+
 	// si necessaire on replace la bonne donnee dans l'environnement
 	$numero ? set_request('numero', $numero) : '';
-	
-   // Comme conseillé dans la documentation on informe de l'id auteur inscrit
-   $retours['id_auteur'] = $id_auteur;
+
+	// Comme conseillé dans la documentation on informe de l'id auteur inscrit
+	$retours['id_auteur'] = $id_auteur;
 
 	if ($retour) $retours['redirect'] = $retour;
-	
+
 	return $retours;
 }
 
