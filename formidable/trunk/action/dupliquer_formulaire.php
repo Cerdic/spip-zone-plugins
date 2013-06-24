@@ -3,6 +3,8 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/config');
+
 /**
  * Dupliquer un formulaire
  * @param unknown_type $arg
@@ -37,6 +39,14 @@ function action_dupliquer_formulaire_dist($arg=null) {
 				),
 				'id_formulaire = '.$id_formulaire
 			);
+			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
+			$auteurs = lire_config('formidable/analyse/auteur');
+			if ($auteurs == 'on') {
+				if ($id_auteur = session_get('id_auteur')) {
+					// association (par défaut) du formulaire et de l'auteur courant
+					objet_associer(array('formulaire'=>$id_formulaire), array('auteur'=>$id_auteur));
+				}
+			}
 			// Et on redirige vers la vue
 			$redirect = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire, '&');
 		}

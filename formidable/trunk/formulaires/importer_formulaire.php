@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/formidable');
+include_spip('inc/config');
 
 function formulaires_importer_formulaire_charger(){
 	
@@ -43,6 +44,14 @@ function formulaires_importer_formulaire_traiter(){
 		}
 		else{
 			$id_formulaire = intval($erreur_ou_id);
+			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
+			$auteurs = lire_config('formidable/analyse/auteur');
+			if ($auteurs == 'on') {
+				if ($id_auteur = session_get('id_auteur')) {
+					// association (par défaut) du formulaire et de l'auteur courant
+					objet_associer(array('formulaire'=>$id_formulaire), array('auteur'=>$id_auteur));
+				}
+			}
 			$retours['redirect'] = generer_url_ecrire('formulaire', "id_formulaire=$id_formulaire");
 		}
 	}
