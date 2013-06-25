@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Používateľské meno:',
 
 	// M
-	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
+	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.',
 
 	// N
 	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).',
