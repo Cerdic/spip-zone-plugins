@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_attributs_html_interdits' => 'Nie je povolené používať atribúty html <tt>class</tt> alebo <tt>style</tt>',
-	'erreur_blacklist' => 'Vous avez été mis sur liste noire, vous ne pouvez plus poster de message.', # NEW
+	'erreur_blacklist' => 'Zaradili vás na čiernu listinu, nemôžete posielať správy.',
 	'erreur_jeton' => 'Vaša správa sa nedá posúdiť. Ďakujeme vám, že ju pošlete znova.',
 	'erreur_spam' => 'Vaša správa sa nedá posúdiť.',
 	'erreur_spam_doublon' => 'Rovnaká správa už existuje!',
