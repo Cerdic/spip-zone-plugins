@@ -1,16 +1,18 @@
 [(#REM)
-	
+
 	Plugin doc2img
 	Code d'embed pour les documents pdf
-	
+
 	Utilisé par le plugin embed_code (http://plugins.spip.net/embed_code.html)
-	
+
 ]<BOUCLE_doc_orig(DOCUMENTS){id_document}>
 <BOUCLE_document(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ID_DOCUMENT}{par id_document} {statut==.*}{0,1}>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
     <title>[(#_doc_orig:TITRE|sinon{#_doc_orig:FICHIER|basename})] - #NOM_SITE_SPIP</title>
+    <base target="_parent" />
+    <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
     <meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
     [<link rel="stylesheet" href="(#CHEMIN{css/embed_code.css})">]
     [<link rel="stylesheet" href="(#CHEMIN{css/embed_code_doc2img.css})">]

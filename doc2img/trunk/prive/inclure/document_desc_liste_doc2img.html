@@ -1,5 +1,8 @@
 [(#REM)
-
+	
+	Options personnalisées :
+	- pagination int : nombre d'éléments par pagination (défaut 5)
+	- type_pagination string : le type de pagination (défaut prive)
 
 ]
 <B_facd_attentes>
@@ -8,7 +11,7 @@
 	<p id="em_attentes_[(#ENV{id_document})]">
 		[(#STATUT|=={non}|oui)<:facd:info_document_dans_file_attente:>]
 		[(#STATUT|=={erreur}|oui)<:facd:info_document_conversion_erreur:>]
-		[(#STATUT|in_array{#ARRAY{0,non,1,erreur}}|non)<:facd:info_document_conversion:>]
+		[(#STATUT|in_array{#LISTE{non,erreur}}|non)<:facd:info_document_conversion:>]
 	</p>
 	[(#STATUT|=={erreur}|non)
 	[(#BOITE_PIED)]
@@ -38,11 +41,11 @@
 <div class="doc2img_liste">
 	#ANCRE_PAGINATION
 	<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_une_page_convertie,doc2img:info_nb_pages_converties})]</strong>
-	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 5 doc#ID_DOCUMENT}>
+	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination #ENV{pagination,5} doc#ID_DOCUMENT}>
 	<div>
 		#MODELE{document_desc,id_document,objet=document,id_objet=#ENV{id_document}}
 	</div>
 	</BOUCLE_d2c>
-	[<p class="pagination">(#PAGINATION{prive})</p>]
+	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,prive}})</p>]
 </div>
 </B_d2c>
