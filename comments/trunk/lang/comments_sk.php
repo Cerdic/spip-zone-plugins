@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La saisie d\'un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d\'un courriel.', # NEW
+	'cfg_explication_nom_obligatoire' => 'Na to, aby mohol byť odoslaný komentár, je povinné zadanie mena alebo prezývky. Ako povinné môžete nastaviť aj zadávanie e-mailovej adresy.',
 	'cfg_forum_champs_obligatoires' => 'Povinné polia',
-	'cfg_forum_format_fil' => 'Liste ou thread ?', # NEW
+	'cfg_forum_format_fil' => 'Zoznam alebo vlákno?',
 	'cfg_forum_longueur' => 'Dĺžka správ',
 	'cfg_forum_longueur_maxi' => 'Maximálna dĺžka',
 	'cfg_forum_longueur_mini' => 'Minimálna dĺžka',
 	'cfg_forum_permalien' => 'Trvalý odkaz',
 	'cfg_label_apparence_permalien' => 'Štýl trvalého odkazu ku komentáru',
 	'cfg_label_apparence_permalien_aucun' => 'Žiaden',
-	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)', # NEW
-	'cfg_label_apparence_permalien_diese' => 'Dièse (#)', # NEW
-	'cfg_label_apparence_permalien_picto' => 'Picto', # NEW
-	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d\'un couriel', # NEW
-	'cfg_label_presentation_fil' => 'Présentation du fil de discussion', # NEW
-	'cfg_label_presentation_fil_liste' => 'Liste de commentaires (à plat)', # NEW
-	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)', # NEW
-	'cfg_label_presentation_fil_thread1' => 'Enfilade de commentaires à un niveau', # NEW
+	'cfg_label_apparence_permalien_compteur' => 'Počítadlo (1.)',
+	'cfg_label_apparence_permalien_diese' => 'Mriežka (#)',
+	'cfg_label_apparence_permalien_picto' => 'Obrázok',
+	'cfg_label_email_obligatoire' => 'Zadanie e-mailu nechať ako povinné',
+	'cfg_label_presentation_fil' => 'Vzhľad vlákna diskusie',
+	'cfg_label_presentation_fil_liste' => 'Zoznam komentárov (neformátovaný)',
+	'cfg_label_presentation_fil_thread' => 'Riadok komentárov (vo vlákne)',
+	'cfg_label_presentation_fil_thread1' => 'Riadok komentárov do úrovne',
 	'comment' => 'komentár',
 	'comments' => 'komentárov',
 	'comments_h' => 'Vaše komentáre',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email' => 'E-mail (nezverejňuje sa)',
 	'label_nom' => 'Meno',
-	'label_notification' => 'Prévenez-moi de tous les nouveaux commentaires de cette discussion par email', # NEW
+	'label_notification' => 'Chcem dostávať e-maily o nových komentároch do tejto diskusie',
 	'label_url' => 'Vaša webová stránka',
 	'lien_suivre_commentaires' => 'Sledovanie komentárov:',
 
