@@ -1,9 +1,10 @@
 #INCLURE{fond=a/top}
-<div class="skiplink" id="skiplinks"><a href="[(#CONFIG{skiplink/go_content}|sinon{#contenu})]" accesskey="s"><:skiplink:go_content:></a><span class="sep"> | </span><a href="[(#CONFIG{skiplink/go_nav}|sinon{#navigation})]" accesskey="n"><:skiplink:go_nav:></a>[(#ENV{recherche,oui}|=={oui}|oui)<span class="sep"> | </span><a href="[(#CONFIG{skiplink/go_search}|sinon{#recherche})]" accesskey="4"><:skiplink:go_search:></a>]<BOUCLE_go_plus(ARTICLES){id_article=#CONFIG{skiplink/go_plus}}><BOUCLE_go_plus_trad(ARTICLES){traduction}{lang=#ENV{lang}}><span class="sep"> | </span><a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}})]">#TITRE</a></BOUCLE_go_plus_trad></BOUCLE_go_plus>
+<div class="skiplink" id="skiplinks">
 [(#ARRAY{1comite, 0minirezo}|find{#SESSION{statut}}|oui)
-  <span class="sep"> | </span>
   <a href="#spip-admin">
     <:skiplink:go_admin:>
   </a>
+  <span class="sep"> | </span>
 ]
+<a href="[(#CONFIG{skiplink/go_content}|sinon{#contenu})]" accesskey="s"><:skiplink:go_content:></a><span class="sep"> | </span><a href="[(#CONFIG{skiplink/go_nav}|sinon{#navigation})]" accesskey="n"><:skiplink:go_nav:></a>[(#ENV{recherche,oui}|=={oui}|oui)<span class="sep"> | </span><a href="[(#CONFIG{skiplink/go_search}|sinon{#recherche})]" accesskey="4"><:skiplink:go_search:></a>]<BOUCLE_go_plus(ARTICLES){id_article=#CONFIG{skiplink/go_plus}}><BOUCLE_go_plus_trad(ARTICLES){traduction}{lang=#ENV{lang}}><span class="sep"> | </span><a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}})]">#TITRE</a></BOUCLE_go_plus_trad></BOUCLE_go_plus>
 </div>
