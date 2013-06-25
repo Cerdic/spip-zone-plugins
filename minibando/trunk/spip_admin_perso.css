@@ -11,8 +11,10 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando li a { display: block; background-color: #f8f8f8; height: 24px; width: 24px; text-indent: -10000px;
 	font-size: 0px; margin: 2px; border: 1px solid #bdbdbd;
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
-#minibando li a:hover,
-#minibando li li a:hover { background-color: white; }
+#minibando li a:hover, #minibando li a:focus,
+#minibando li li a:hover, #minibando li li a:focus { background-color: white; }
+#minibando > li > a:focus { border-color: black; }
+#minibando li a:focus, #minibando li li a:focus { text-decoration: underline; }
 #minibando #bando1_menu_accueil { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% 0  no-repeat; }
 #minibando #bando1_menu_edition { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -168px no-repeat; }
 #minibando #bando1_menu_publication { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -264px no-repeat; }
@@ -28,7 +30,8 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando li.minibando_sep { width: 1px; margin: 4px 2px 0 2px; height: 24px; background-color: #bdbdbd; }
 #minibando li li a { background-image: none; text-indent: 0; width: 190px; height: auto; border: none; text-decoration: none;
 	padding: 5px; color: black; margin: 1px; font-size: 12px; }
-#minibando > li > span { height: 6px; width: 100%; display: block; background: url(images/arrow.png) no-repeat top center; display: none; }
-#minibando ul { background-color: #bdbdbd; position: absolute; display: none; right: 2px;
+#minibando > li > span { height: 6px; width: 100%; display: block; background: url(images/arrow.png) no-repeat top center; position: absolute; left: -99999px; }
+#minibando ul { background-color: #bdbdbd; position: absolute; display: block; left: -99999px; right: 99999px;
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
-#minibando li:hover ul, #minibando li:hover span { display:  block; }
+#minibando li.afficher ul, #minibando li:hover ul { display: table; left: -174px;; }
+#minibando li.afficher span, #minibando li:hover span { display: block; position: relative; left: 0; right: 2px; }
