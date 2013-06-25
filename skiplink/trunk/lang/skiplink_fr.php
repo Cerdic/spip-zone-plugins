@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 /* Skip Links */
+'go_admin' => 'Aller au menu admin',
 'go_content' => 'Aller au contenu',
 'go_nav' => 'Aller au menu',
 'go_search' => 'Aller &agrave; la recherche',
