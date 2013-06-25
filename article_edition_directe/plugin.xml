@@ -15,9 +15,9 @@
 		[de]Erm&#246;glicht es den Artikel im Backoffice direkt auf der Artikel Seite zu bearbeiten.
 		</multi>	
 	</slogan>
-	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
+	<auteur>[Rainer Müller->http://websimple.be]</auteur>
 	<version>0.1.1</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 		[fr]Ce plugin rend l'article directement &#233;ditable depuis la page article dans l'espace priv&#233;, plus besoin donc d'appuyer sur le bouton modifier cet article. Toutes les manipulations de l'article (modifications, ajouter des mots cl&#233;s, auteurs,...) peuvent se faire depuis une seule page.
