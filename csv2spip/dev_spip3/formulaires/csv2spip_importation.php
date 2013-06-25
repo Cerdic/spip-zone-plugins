@@ -3,15 +3,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_csv2spip_importation_charger_dist(){
     $valeurs = array(
-        "fichier_csv"     => "",
-        "maj_utilisateur" => "",
-        "abs_redac" => "",
-        "abs_admin" => "",
-        "abs_visiteur" => "",
+        "fichier_csv"                => "",
+        "maj_utilisateur"            => "",
+        "abs_redac"                  => "",
+        "abs_admin"                  => "",
+        "abs_visiteur"               => "",
         "suppression_article_efface" => "",
-        "transfere_article" => "",
-        "rubrique_parent_archive" => "",
-        "nom_rubrique_archive"=> "Archive annee 2012-2013",
+        "transfere_article"          => "",
+        "rubrique_parent_archive"    => "",
+        "nom_rubrique_archive"       => "",
         "rubrique_parent" => "",
     );
         
@@ -62,14 +62,14 @@ function formulaires_csv2spip_importation_traiter_dist(){
 
     $i=0;
     while (($data= fgetcsv($fichiercsv,",")) !== FALSE){
-        $tableau_csv[$i]["login"]=$data[0];
-        $tableau_csv[$i]["nom"]=$data[1];
-        $tableau_csv[$i]["prenom"]=$data[2];
-        $tableau_csv[$i]["pass"]=$data[3];
-        $tableau_csv[$i]["bio"]=$data[4];
-        $tableau_csv[$i]["email"]=$data[5];
-        $tableau_csv[$i]["groupe"]=$data[6];
-        $tableau_csv[$i]["ss_groupe"]=$data[7];
+        $tableau_csv[$i]["login"]     = $data[0];
+        $tableau_csv[$i]["nom"]       = $data[1];
+        $tableau_csv[$i]["prenom"]    = $data[2];
+        $tableau_csv[$i]["pass"]      = $data[3];
+        $tableau_csv[$i]["bio"]       = $data[4];
+        $tableau_csv[$i]["email"]     = $data[5];
+        $tableau_csv[$i]["groupe"]    = $data[6];
+        $tableau_csv[$i]["ss_groupe"] = $data[7];
         $i++;
     }
     fclose($fichiercsv);
