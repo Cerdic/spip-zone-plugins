@@ -16,9 +16,9 @@ Prístup k tejto stránke alebo k tomuto dokumentu musí byť autorizovaný a�
 
 Prístup k tejto stránke alebo k tomuto dokumentu musí byť autorizovaný a identifikovaný. Ak máte dostatočné práva, prihláste sa pomocou formulára, ktorý sa nachádza nižšie.',
 	'404_error' => 'Požadovaná stránka alebo požadovaný dokument sa na stránke nedá nájsť.',
-	'404_error_comment' => '{{Ospravedlňujeme sa za všetky nepríjemnosti.}}
+	'404_error_comment' => '{{Ospravedlňujeme sa za túto nepríjemnosť.}}
 
-Niektoré stránky nie sú trvalé alebo stále menia svoju URL ({internetovú adresu, ktorá sa zadáva do panela v prehliadači}). 
+Niektoré stránky nie sú trvalé alebo stále menia svoju URL ({internetovú adresu, ktorá sa zadáva do panela v prehliadači}). 
 
 Na vylepšenie navigácie vám radíme urobiť tieto veci:
 -* skontrolujte adresu, ktorú ste zadali do panela s adresou vo svojom prehliadači a uistite sa, že je kompletná,
@@ -27,7 +27,7 @@ Na vylepšenie navigácie vám radíme urobiť tieto veci:
 -* vráťte sa na [úvodnú stránku|Vrátiť sa na úvodnú stránku->@sommaire@] a dostanete sa na začiatok hierarchie webu,
 -* pomocou tlačidla, ktoré sa nachádza nižšie, pošlite správu o chybe administrátorom stránky, aby opravili nefungujúci odkaz.
 
-V poslednom rade veľa internetových stránok má viac vyhradených zón pre administrátorov alebo abonentov, do ktorých sa treba prihlásiť. Ak ste sa prihlásili, [ak sa chcete dostať na prihlasovaciu stránku, kliknite sem|Budú sa od vás vyžadovať prihlasovacie údaje->@ecrire@].', # MODIF
+V poslednom rade veľa internetových stránok má viac vyhradených zón pre administrátorov alebo abonentov, do ktorých sa treba prihlásiť. Ak ste sa prihlásili, [ak sa chcete dostať na prihlasovaciu stránku, kliknite sem|Budú sa od vás vyžadovať prihlasovacie údaje->@ecrire@].',
 
 	// B
 	'backtrace' => 'PHP na spätné vystopovanie',
