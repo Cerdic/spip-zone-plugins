@@ -21,15 +21,12 @@
 
 			<li class="editer editer_fichiers">
 				#SET{extensions,#ARRAY}
-				#SET{extensions_images,#ARRAY|push{xcf}}
-				<BOUCLE_images(TYPES_DOCUMENTS){mime_type LIKE image/%}{extension !IN #GET{extensions}}>
-					#SET{extensions_images,#GET{extensions_images}|push{#EXTENSION}}
-				</BOUCLE_images>
+				#SET{extensions_images,#LISTE{xcf}}
 				<label><:emballe_medias:extensions_autorisees:></label>
 				<B_images_2>
 				<p class="explication"><:emballe_medias:extensions_images:></p>
 				<select name="fichiers_images[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
-					<BOUCLE_images_2(TYPES_DOCUMENTS){extension IN #GET{extensions_images}}{extension !IN #GET{extensions}}{par extension}>
+					<BOUCLE_images_2(TYPES_DOCUMENTS){media_defaut = image}{extension !IN #GET{extensions}}{par extension}>
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_images}}|oui) selected="selected"]>#EXTENSION[ - (#MIME_TYPE)]</option>
 						#SET{extensions,#GET{extensions}|push{#EXTENSION}}
 					</BOUCLE_images_2>
@@ -46,14 +43,10 @@
 				</select>
 				<p><a href="#" class="select_all"><:emballe_medias:select_all:></a> <a href="#" class="unselect_all"><:emballe_medias:unselect_all:></a></p>
 				</B_sons>
-				#SET{videos,#ARRAY|push{mp4}|push{m4v}}
-				<BOUCLE_videos(TYPES_DOCUMENTS){media_defaut = video}>
-					#SET{videos,#GET{videos}|push{#EXTENSION}}
-				</BOUCLE_videos>
 				<B_videos1>
 				<p class="explication"><:emballe_medias:extensions_video:></p>
 				<select name="fichiers_videos[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
-					<BOUCLE_videos1(TYPES_DOCUMENTS){extension IN #GET{videos}}{extension !IN #GET{extensions}}{par extension}>
+					<BOUCLE_videos1(TYPES_DOCUMENTS){media_defaut = video}{extension != m4u}{par extension}>
 						#SET{extensions,#GET{extensions}|push{#EXTENSION}}
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos}}|oui) selected="selected"]>#EXTENSION[ - (#MIME_TYPE)]</option>
 					</BOUCLE_videos1>
@@ -70,7 +63,7 @@
 				<BOUCLE_texte_bis(TYPES_DOCUMENTS){mime_type LIKE text/%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
 				#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
 				</BOUCLE_texte_bis>
-				<BOUCLE_texte_tre(TYPES_DOCUMENTS){extension IN pdf,ps,eps,ai,lyx,epub,gpx}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+				<BOUCLE_texte_tre(TYPES_DOCUMENTS){extension IN pdf,ps,eps,lyx,epub,gpx}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
 				#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
 				</BOUCLE_texte_tre>
 				<BOUCLE_texte_quat(TYPES_DOCUMENTS){mime_type LIKE %/vnd.google-earth%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
