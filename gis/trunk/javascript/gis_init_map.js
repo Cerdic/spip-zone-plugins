@@ -84,9 +84,10 @@ var gis_init_map = function(mapcfg) {
 			icon_options = {
 				'iconUrl': feature.properties.icon,
 				'iconSize': new L.Point( feature.properties.icon_size[0], feature.properties.icon_size[1] ),
-				'iconAnchor': new L.Point( feature.properties.icon_anchor[0], feature.properties.icon_anchor[1] ),
-				'popupAnchor': new L.Point( feature.properties.popup_anchor[0], feature.properties.popup_anchor[1] )
+				'iconAnchor': new L.Point( feature.properties.icon_anchor[0], feature.properties.icon_anchor[1] )
 			};
+			if (feature.properties.popup_anchor)
+				icon_options.popupAnchor = new L.Point( feature.properties.popup_anchor[0], feature.properties.popup_anchor[1] );
 			if (feature.properties.shadow)
 				icon_options.shadowUrl = feature.properties.shadow;
 			if (feature.properties.shadow_size)
