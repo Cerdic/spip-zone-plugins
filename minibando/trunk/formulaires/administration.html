@@ -57,12 +57,28 @@
 <script type="text/javascript">
   $(function () {
 
+      var li_deroulants = $('#minibando > li');
+
+      function afficherSousMenu (lien) {
+          li_deroulants.removeClass('afficher');
+          $(lien).parents('#minibando > li').addClass('afficher');
+      }
+
+      function masquerSousMenu (lien) {
+          $(lien).parents('#minibando > li').removeClass('afficher');
+      }
+
       $('#minibando a')
           .focusin(function () {
-              $(this).parents('#minibando > li').addClass('afficher');
+              afficherSousMenu(this);
           })
           .focusout(function () {
-              $(this).parents('#minibando > li').removeClass('afficher');
+              masquerSousMenu(this);
+          })
+          .hover(function () {
+              afficherSousMenu(this);
+          }, function () {
+              masquerSousMenu(this);
           });
 
   });
