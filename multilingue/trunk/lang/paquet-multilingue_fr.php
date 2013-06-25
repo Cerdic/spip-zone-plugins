@@ -15,14 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	- [Traductions de rubriques autrement->http://www.spip-contrib.net/Traductions-de-rubriques-autrement-3]
 	- [Traductions d’articles autremen->http://www.spip-contrib.net/Traductions-d-articles-autrement-3]
 	
-	Sous Spip 2 ou 2.1 il es recommendable d\'installer auparavant le plugin [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins], puis installer ce plugin ce qui forcera également l\'installation de tous les plugin nécessaires.
-	
+	Sous Spip 2 ou 2.1 il est recommendable d\'installer d\'abord le plugin [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins] avant d\'activer ce plugin ce qui forcera également l\'installation de tous les plugin nécessaires.
 	
 	Le plugin modifie quelques squelettes (rubriques et articles) et quelques noisettes de bases.
 	
-	Une fois installé les plugins nécessaires, il vous suffira de déterminer les langues du site dans "Configuration"->"Mulilinguisme/Gestion des langues
-
-	et voilà votre site est multilingue
+	Une fois installé les plugins nécessaires, il vous suffira de déterminer les langues du site dans "Configuration"->"Mulilinguisme/Gestion des langues, et voilà votre site est multilingue
 	
 	',
 	'multilingue_nom' => 'Site multilingue facile',
