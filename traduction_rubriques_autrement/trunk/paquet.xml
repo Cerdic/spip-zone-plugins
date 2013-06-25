@@ -3,7 +3,7 @@
 	   categorie="edition"
 	   version="1.2.3"
 	   etat="stable"
-	   compatibilite="[3.0.0-alpha2;3.0.*]"
+	   compatibilite="[3.0.10;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
 	   documentation="http://contrib.spip.net/Traductions-de-rubriques-autrement-3"
 >	
