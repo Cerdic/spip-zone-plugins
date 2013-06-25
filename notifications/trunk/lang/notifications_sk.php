@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'Logo zásuvného modulu Oznamy',
 	'article_prive' => 'Publikovanie článkov',
 	'article_prive_admins_restreints' => '<strong>Administrátori:</strong> administrátori s obmedzeniami dostávajú oznamy pri odoslaní článkov do ich rubriky',
-	'article_prive_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy pri publikovaní svojich článkov', # MODIF
+	'article_prive_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy pri odoslaní svojich článkov na schválenie, pri ich publikovaní alebo odstránení',
 	'article_propose_detail' => 'Článok "@titre@" bol odoslaný na publikovanie
 	z(o)',
 	'article_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Zatiaľ je zobrazený na tejto dočasnej adrese:',
 
 	// B
-	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
-	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
+	'bouton_changer_pass' => 'Zmeniť si heslo',
+	'bouton_finir_inscription' => 'Dokončiť registráciu',
 	'breve_propose_detail' => 'Novinka "@titre@" sa posiela na publikovanie
 	z(o)',
 	'breve_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Ďalšie udalosti môžu vyvolať odoslanie oznamu e-mailom.',
 
 	// F
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
+	'form_forum_confirmer_email' => 'Ak chcete potvrdiť svoju e-mailovú adresu, kliknite na toto tlačidlo: ',
 	'forum_prives_auteur' => '<strong>Autori:</strong> autori dostávajú oznamy odoslané z diskusných fór pod ich článkami alebo správami v súkromnej zóne.',
 	'forum_prives_moderateur' => 'Zadajte e-mailovú adresu moderátora súkromných diskusných fór (alebo viac, oddelených čiarkami).',
 	'forum_prives_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlánke dostávajú oznami z (verejných) diskusných fór.',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Na kontrolu tohto príspevku nemáte dostatočné práva',
 	'info_moderation_lien_titre' => 'Skontrolovať tento príspevok zo súkromnej zóny',
 	'info_moderation_url_perimee' => 'Tento odkaz na kontrolu už nie je platný.',
-	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
+	'info_nouveau_commentaire' => 'Nový komentár',
 	'inscription' => 'Prihlásenie redaktorov',
 	'inscription_admins' => 'Administrátori',
 	'inscription_explication' => 'Ktorí autori dostanú oznamy pri zaregistrovaní nových redaktorov?',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Príspevok na potvrdenie: ',
-	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
+	'message_spam_a_confirmer' => 'SPAM na potvrdenie: ',
 	'message_voir_configuration' => 'Zobraziť nastavenia oznamov',
 	'messagerie_interne' => 'Súkromný odkazovač',
 	'messagerie_interne_signaler' => '<strong>Označiť nové súkromné správy:</strong> aktivujte túto možnosť, ak chcete, aby stránka poslala oznam redaktorovi, v prípade, že si neprečítal novú správu vo svojej schránke. Systém počká 20 minút, predtým ako upozorní redaktora, a tak nespamuje redaktora, ktorý je už online v súkromnej zóne.',
@@ -92,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications' => 'Oznamy',
 
 	// P
-	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
-	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
+	'pass_mail_passcookie_1' => 'Ak chcete znovu získať prístup na stránku @nom_site_spip@, kliknite na tlačidlo: ',
+	'pass_mail_passcookie_2' => 'Potom môžete zadať nové heslo a znova sa prihlásiť na stránku.',
 
 	// S
 	'signature_petition' => 'Podpisy pod petíciu',
