@@ -45,12 +45,12 @@
 
                         [(#SAISIE{oui_non,transfere_article}
                         {label=<:csv2spip:transfere_article:>})]
-						
-						[(#SAISIE{selecteur_rubrique,rubrique_parent_archive}
-						{label=<:csv2spip:rubrique_parent_archive:>})]
 
                         [(#SAISIE{input,nom_rubrique_archive}
                         {label=<:csv2spip:nom_rubrique_archive:>})]
+						
+						[(#SAISIE{selecteur_rubrique,rubrique_parent_archive}
+						{label=<:csv2spip:rubrique_parent_archive:>})]
             </fieldset>
             </li>
 
@@ -69,6 +69,7 @@
 
 <script type="text/javascript" charset="utf-8">
     jQuery(document).ready(function(){
+            jQuery("li.editer_rubrique_parent_archive").css("background-color","#E1F4F2").css("padding-left","50px");
             var redac  = false;
             var  admin = false;
             jQuery("#champ_abs_redac_oui").click(function(event){
@@ -79,8 +80,13 @@
                 });
             jQuery("#champ_abs_redac_non").click(function(event){
                     if  (admin == false){
-                jQuery("li.editer_suppression_article_efface").css("display","none");
-                jQuery("li.editer_avenir_auteurs").css("display","none");
+                         jQuery("li.editer_suppression_article_efface").css("display","none");
+                         jQuery("li.editer_avenir_auteurs").css("display","none");
+                         jQuery("li.editer_transfere_article").css("display","none");
+                         jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                         jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                         jQuery("#champ_transfere_article_non").attr('checked', true);
+                         jQuery("#champ_suppression_article_efface_non").attr('checked', true);
                     }
                 redac = false;
                 });
@@ -92,23 +98,31 @@
                 });
             jQuery("#champ_abs_admin_non").click(function(event){
                     if (redac == false){
-                jQuery("li.editer_suppression_article_efface").css("display","none");
-                jQuery("li.editer_avenir_auteurs").css("display","none");
+                         jQuery("li.editer_suppression_article_efface").css("display","none");
+                         jQuery("li.editer_avenir_auteurs").css("display","none");
+                         jQuery("li.editer_transfere_article").css("display","none");
+                         jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                         jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                         jQuery("#champ_transfere_article_non").attr('checked', true);
+                         jQuery("#champ_suppression_article_efface_non").attr('checked', true);
                     }
                 admin= false;
                 });
 
             jQuery("#champ_transfere_article_oui").click(function(event){
                     jQuery("li.editer_nom_rubrique_archive").css("display","block");
-                    jQuery("li.editer_nom_rubrique_parent_archive").css("display","block");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","block");
                     });
             jQuery("#champ_transfere_article_non").click(function(event){
                     jQuery("li.editer_nom_rubrique_archive").css("display","none");
-                    jQuery("li.editer_nom_rubrique_parent_archive").css("display","none");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","none");
                     });
 
             jQuery("#champ_suppression_article_efface_non").click(function(event){
                     jQuery("li.editer_transfere_article").css("display","none");
+                    jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    jQuery("#champ_transfere_article_non").attr('checked', true);
                     });
             jQuery("#champ_suppression_article_efface_oui").click(function(event){
                     jQuery("li.editer_transfere_article").css("display","block");
