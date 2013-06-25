@@ -268,12 +268,13 @@ function document_fichier_revision($id, $data, $type, $ref) {
 // cette fonction de revision soit supprime la vignette d'un document,
 // soit recoit le fichier upload a passer ou remplacer la vignette du document
 function vignette_revision($id, $data, $type, $ref) {
-	$s = sql_fetsel("*","spip_documents","id_document=".intval($id));
+	$s = sql_fetsel("id_document,id_vignette","spip_documents","id_document=".intval($id));
 	if (!is_array($s))
 		return false;
 
 	include_spip('inc/modifier');
 	include_spip('inc/documents');
+	include_spip('action/editer_document');//pour revision_document
 	// Chargement d'un nouveau doc ?
 	if ($data['vignette']) {
 		define('FILE_UPLOAD', true);
@@ -286,7 +287,7 @@ function vignette_revision($id, $data, $type, $ref) {
 				supprimer_fichier($f); 
 			}
 			sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
-			sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
+			sql_delete('spip_documents_liens', 'id_document='.intval($s['id_vignette']));
 
 			pipeline('post_edition',
 				array(
@@ -298,15 +299,32 @@ function vignette_revision($id, $data, $type, $ref) {
 					'data' => null
 				)
 			);
-			
-			// On remet l'id_vignette a 0
-			revision_document($s['id_document'], array('id_vignette'=>0));
+			$id_vignette = 0;
 		}
-		// Ajout du document comme vignette
-		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+
 		$arg = $data['vignette'];
 		check_upload_error($arg['error']);
-		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
+		// Ajout du document comme vignette
+
+		/**
+		 * Méthode < SPIP 3.0
+		 */
+		if($ajouter_documents = charger_fonction('ajouter_documents','inc',true)){
+			// On remet l'id_vignette a 0 si on l'a supprimé
+			if($id_vignette) revision_document($s['id_document'], array('id_vignette'=>0));
+			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
+		}
+		/**
+		 * Méthode >= SPIP 3.0
+		 */
+		else if($ajouter_documents = charger_fonction('ajouter_documents','action',true)){
+			$x = $ajouter_documents(null,array($arg),'', 0, 'vignette');
+			$vignette = reset($x);
+			if(intval($vignette))
+				document_modifier($id, array('id_vignette'=>$vignette));
+			else if($id_vignette)
+				document_modifier($id, array('id_vignette'=>$id_vignette));
+		}
 	}else
 		// Suppression de la vignette ?
 		if ($wid = array_pop($ref)
@@ -320,7 +338,7 @@ function vignette_revision($id, $data, $type, $ref) {
 				}
 				sql_delete('spip_documents', 'id_document='.intval($s['id_vignette']));
 				sql_delete('spip_documents_liens',  'id_document='.intval($s['id_vignette']));
-				
+
 				pipeline('post_edition',
 					array(
 						'args' => array(
@@ -331,7 +349,7 @@ function vignette_revision($id, $data, $type, $ref) {
 						'data' => null
 					)
 				);
-				
+
 				// On remet l'id_vignette a 0
 				revision_document($s['id_document'], array('id_vignette'=>0));
 			}
