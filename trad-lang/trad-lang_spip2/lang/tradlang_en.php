@@ -240,7 +240,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
 	'message_info_choisir_langues_profiles' => 'You can select your favorites languages <a href="@url_profil@">in your profile</a> to use them as default.',
-	'message_lang_cible_selectionnee_auto_preferees' => 'The language you are going to translate to was picked up automatically ("@lang@") from your favourite languages. You can change it through the modules selection form.',
+	'message_lang_cible_selectionnee_auto_preferees' => 'The language you are going to translate to was picked up automatically ("@lang@") from your favourite languages. You can change it using the module selection form.',
 	'message_langues_choisies_affichees' => 'Only the languages ​​you have chosen are displayed: @langues@.',
 	'message_langues_preferees_affichees' => 'Only your favorites languages are displayed: @langues@.',
 	'message_langues_utilisees_affichees' => 'Only the @nb@ most used languages ​​are displayed: @langues@.',
