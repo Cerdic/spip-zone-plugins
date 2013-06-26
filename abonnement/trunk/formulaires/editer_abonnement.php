@@ -37,6 +37,27 @@ function formulaires_editer_abonnement_saisies_dist($id_abonnement='new', $retou
 			),
 		);
 	}
+	// Sinon si c'est une demande de création et qu'on trouve un auteur, on ne doit donner que les offres et l'utilisateur est défini caché
+	elseif ($id_abonnement == 0 and $id_auteur = _request('id_auteur')) {
+		$saisies = array(
+			array(
+				'saisie' => 'hidden',
+				'options' => array(
+					'nom' => 'id_auteur',
+					'defaut' => $id_auteur,
+				),
+			),
+			array(
+				'saisie' => 'abonnements_offres',
+				'options' => array(
+					'nom' => 'id_abonnements_offre',
+					'label' => _T('abonnement:champ_id_abonnements_offre_label'),
+					'obligatoire' => 'oui',
+					'cacher_option_intro' => 'oui',
+				),
+			),
+		);
+	}
 	// Sinon si c'est une demande de modification, on ne peut modifier que l'échéance
 	// Et uniquement en ajoutant avec durée et période
 	elseif ($id_abonnement > 0) {

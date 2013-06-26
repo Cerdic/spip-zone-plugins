@@ -113,5 +113,27 @@ function abonnements_affiche_gauche($flux){
 	
 	return $flux;
 }
+
+/*
+ * Ajouter la boite des abonnements sur la fiche auteur
+ */
+function abonnements_affiche_milieu($flux){
+
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+	  AND $e['type'] == 'auteur'
+	  AND $e['edition'] == false) {
+		
+		$id_auteur = $flux['args']['id_auteur'];
+
+		$ins = recuperer_fond('prive/squelettes/inclure/abonnements_auteur',array('id_auteur'=>$id_auteur));
+		if (($p = strpos($flux['data'],"<!--affiche_milieu-->")) !== false)
+			$flux['data'] = substr_replace($flux['data'],$ins,$p,0);
+		else
+			$flux['data'] .= $ins;
+		
+	}
+	
+	return $flux;
+}
  
 ?>

@@ -21,10 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_abonnement' => 'Créer un abonnement',
 	'icone_modifier_abonnement' => 'Modifier cet abonnement',
+	'icone_renouveler_abonnement' => 'Renouveler cet abonnement',
 	'info_1_abonnement' => 'Un abonnement',
 	'info_abonnements_auteur' => 'Les abonnements de cet auteur',
 	'info_aucun_abonnement' => 'Aucun abonnement',
 	'info_nb_abonnements' => '@nb@ abonnements',
+	'info_numero_abbr' => 'n°',
+	'info_numero_abbr_maj' => 'N°',
 	
 	// J
 	'job_desactivation' => 'Désactivation de l’abonnement @id@',
