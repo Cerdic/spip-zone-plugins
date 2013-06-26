@@ -111,7 +111,11 @@ function less_css($source){
 		if (ecrire_fichier($f.".last", $contenu, true)){
 			if ($changed OR md5_file($f)!=md5_file($f.".last")){
 				@copy($f.".last",$f);
-				clearstatcache(true,$f); // eviter que PHP ne reserve le vieux timestamp
+				// eviter que PHP ne reserve le vieux timestamp
+				if (version_compare(PHP_VERSION, '5.3.0') >= 0)
+					clearstatcache(true,$f);
+				else
+					clearstatcache();
 			}
 			return $done[$source] = $f;
 		}
