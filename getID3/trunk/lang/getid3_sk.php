@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_formats_ecriture_impossible' => 'Zápis značiek do týchto formátov sa nedá vykonať:',
 	'erreur_logiciels_indisponibles' => 'Momentálne nemôžete zapisovať značky do všetkých dostupných formátov.  Niektoré programy nie sú totiž k dispozícii.',
 	'erreur_necessite' => 'vyžaduje si @soft@',
-	'explication_cover_defaut' => 'V súboroch so zvukmi na internete je predvolená miniatúra (URL nastavte nižšie) priradená k súboru so zvukom. Ak je aktivovaná možnosť prepisovania značiek úpravy log, obal so značkami id3 bude aktualizovaný tiež.', # MODIF
+	'explication_cover_defaut' => 'Pri spúšťaní súborov so zvukmi je predvolená miniatúra priradená k súboru so zvukom (URL sa dá nastaviť nižšie). Ak je aktivovaná možnosť prepisovania značiek úpravy log, obal so značkami id3 bude aktualizovaný tiež.',
 
 	// F
 	'formulaire_modifier_id3' => 'Upraviť metadata súboru:',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_numero_document' => 'Súbor číslo',
 	'info_genre' => 'Žáner:',
 	'info_lossless' => 'Žiadna strata kompresie',
-	'info_media' => 'Type de média :', # NEW
+	'info_media' => 'Typ média:',
 	'info_mime' => 'Typ mime:',
 	'info_nom_fichier' => 'Názov súboru:',
 	'info_original_filename' => 'Pôvodný názov',
