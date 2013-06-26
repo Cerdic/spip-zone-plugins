@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Keď nainštalujete potrebné zásuvné moduly, jazyky stránky vyberte v menu  "Konfigurácia"->"Viacjazyčnosť/Riadenie jazykov"
 
-	a potom bude vaša stránka viacjazyčná',
+	a potom bude vaša stránka viacjazyčná', # MODIF
 	'multilingue_nom' => 'Jednoduchá viacjazyčná stránka',
 	'multilingue_slogan' => 'Vytvorte jednoduchú viacjazyčnú stránku'
 );
