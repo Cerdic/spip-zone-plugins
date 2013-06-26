@@ -49,6 +49,16 @@ function autoriser_collection_lierobjet_dist($faire, $type, $id, $qui, $opt) {
 }
 // modifier
 function autoriser_collection_modifier_dist($faire, $type, $id, $qui, $opt) {
+	/**
+	 * Si pas numérique, c'est une création
+	 * On se réfère à l'autorisation adéquate
+	 */
+	if(!is_numeric($id))
+		return autoriser('creer', $type, $id, $qui, $opt);
+	
+	/**
+	 * Sinon ce sont les admins de la collection et les administrateurs non restreints 
+	 */
 	return collection_admin($id,$qui) OR (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
