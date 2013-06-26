@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_titre' => 'Nastavenia patronátu',
 
 	// E
-	'erreur_aucun_contact' => 'Vous n\'avez importé aucun contact.', # NEW
+	'erreur_aucun_contact' => 'Nenahrali ste žiaden kontakt.',
 	'erreur_aucun_filleul' => 'Nevybrali ste žiadneho priateľa.',
-	'erreur_inscription_desactivee' => 'L\'inscription au site est désactivée. Vous ne pouvez donc parrainer personne.', # NEW
+	'erreur_inscription_desactivee' => 'Registrácia na stránku je deaktivovaná. Nemôžete nikoho sponzorovať.',
 	'erreur_invitation_invalide' => 'Vaša pozvánka sa nezhoduje so zadanou e-mailovou adresou',
 	'erreur_invitation_obligatoire' => 'Na to, aby ste sa mohli zaregistrovať na tejto stránke, musíte mať pozvánku.',
 
@@ -36,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'invitation_url' => 'Na prihlásenie navštívte túto adresu:',
 
 	// M
-	'message_insciption_fermee' => 'Attention, l\'inscription au site est fermée. Vous devez l\'activer pour utiliser ce plugin', # NEW
-	'message_ouvrir_visiteur' => 'Si vous souhaitez ouvrir l\'inscription au site à de nouveaux visiteurs, vous pouvez activer cette option ci-dessous (la configuration du plugin "Parrainage" oblige le nouvel inscrit à bénéficier d\'un code d\'invitation) : ', # NEW
+	'message_insciption_fermee' => 'Pozor, registrácia na stránku je vypnutá. Musíte ju aktivovať, aby ste mohli využívať tento zásuvný modul',
+	'message_ouvrir_visiteur' => 'Ak chcete registráciu na stránku otvoriť novým návštevníkom, môžete aktivovať túto možnosť (nastavenia zásuvného modulu "Patronát" vyžadujú, aby ten, kto sa má zaregistrovať, dostal pozývací kód): ',
 
 	// P
 	'parrainage_inviter' => 'Poslať pozvánku',
@@ -47,17 +47,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_message_label' => 'Vaša správa',
 	'parrainage_message_ok_pluriel' => '@nombre@ pozvánok bolo naprogramovaných, teraz sa posielajú.',
 	'parrainage_message_ok_singulier' => 'Pozvánka bola naprogramovaná, teraz sa posiela.',
-	'parrainage_supprime_nb' => '@nb@ contacts supprimés', # NEW
-	'parrainage_supprime_un' => '@nb@ contact supprimé', # NEW
-	'parrainage_supprimer_filleul' => 'Odstrániť tohto priateľa', # MODIF
+	'parrainage_supprime_nb' => '@nb@ vymazaných kontaktov',
+	'parrainage_supprime_un' => '@nb@ vymazaný kontakt',
+	'parrainage_supprimer_filleul' => 'Odstrániť tento kontakt',
 	'parrainage_supprimer_filleul_confirmation' => 'Určite chcete odstrániť @nom@ zo svojich kontaktov?',
-	'parrainage_supprimer_filleuls' => 'Supprimer les contacts sélectionnés', # NEW
-	'parrainage_supprimer_filleuls_confirmation' => 'Êtes-vous sûr de vouloir supprimer les contacts sélectionnés de vos contacts ?', # NEW
+	'parrainage_supprimer_filleuls' => 'Vymazať vybrané kontakty',
+	'parrainage_supprimer_filleuls_confirmation' => 'Určite chcete vymazať kontakty, ktoré ste vybrali vo svojich kontaktoch?',
 	'plugin_nom' => 'Patronát',
 
 	// S
-	'selectionner_rien' => 'Tout désélectionner', # NEW
-	'selectionner_tout' => 'Tout sélectionner', # NEW
+	'selectionner_rien' => 'Odznačiť všetko',
+	'selectionner_tout' => 'Vybrať všetko',
 	'statut_contact' => 'Kontakt',
 	'statut_contact_explication' => 'Tento človek je vo vašom adresári. Môžete ho pozvať, aby sa pridal na stránku.',
 	'statut_deja_inscrit' => 'Už zaregistrovaný',
