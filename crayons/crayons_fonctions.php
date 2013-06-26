@@ -231,7 +231,7 @@ function balise_EDIT($p) {
 		return $p;
 	}
 
-	// crayon sur une base distante 'nua:article-intro-5'
+	// crayon sur une base distante 'nua__article-intro-5'
 	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
 		$type = $distant.'__'.$type;
 
