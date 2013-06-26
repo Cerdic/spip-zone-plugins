@@ -1,7 +1,7 @@
 <plugin>
 	<nom>GIS</nom>
 	<auteur>b_b, kent1</auteur>
-	<version>2.4.7</version>
+	<version>2.4.8</version>
 	<version_base>2.0.2</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
@@ -97,7 +97,7 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 	<necessite id="saisies" version="[1.7.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="afficher_objets" version="[1.2.0;]" />
-	<necessite id="lib:mxn-gis-2.2.2" src="https://github.com/downloads/brunob/mxn/mxn-gis-2.2.2.zip" />
+	<necessite id="lib:mxn-gis-2.4.8" src="http://contrib.spip.net/IMG/zip/mxn-gis-2.4.8.zip" />
 	<categorie>divers</categorie>
 	<traduire gestionnaire="salvatore" module="gis" reference="fr" />
 </plugin>
