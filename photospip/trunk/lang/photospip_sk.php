@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_versions_une' => 'Jedna verzia',
 
 	// L
-	'label_angle_rotation' => 'Otočiť o uhol:', # MODIF
+	'label_angle_rotation' => 'Uhol otočenia:',
 	'label_choisir_filtres' => 'Vyberte si filter, ktorý sa má použiť',
 	'label_compression_rendu' => 'Kvalita kompresie (v %, predvolené 85):',
 	'label_couleur_sepia' => 'Farba:',
