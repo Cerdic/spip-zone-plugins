@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_relancer_tout' => 'Prekonvertovať všetky dokumenty',
 	'bouton_relancer_tout_format' => 'Prekonvertovať všetky dokumenty vo formáte @format@',
-	'bouton_relancer_tout_format_message' => 'Určite chcete znova spustiť zakódovanie všetkých súborov vo formáte @format@?', # MODIF
-	'bouton_relancer_tout_message' => 'Určite chcete znova spustiť zakódovanie všetkých súborov', # MODIF
+	'bouton_relancer_tout_format_message' => 'Určite chcete znova spustiť zakódovanie všetkých súborov vo formáte @format@?',
+	'bouton_relancer_tout_message' => 'Určite chcete znova spustiť zakódovanie všetkých súborov?',
 
 	// E
 	'erreur_document_plus_disponible' => 'Tento dokument už viac na stránke nie je dostupný',
