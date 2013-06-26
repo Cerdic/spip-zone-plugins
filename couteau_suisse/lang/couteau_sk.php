@@ -38,11 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Nanútiť aktualizáciu na diaľku',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
+	'maj_archive_ko' => 'Chyba [vzdialeného archívu->@zip@]. nedokončená operácia "svn.revision"?',
 	'maj_liste' => 'Zoznam nájdených zásuvných modulov:',
 	'maj_maj' => 'Aktualizovať vybraný (-é) zásuvný (-é) modul(y)',
 	'maj_ok' => 'Zdá sa, že tento [zásuvný modul->@zip@] je [aktuálny.->@url@]',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
+	'maj_poursuivre' => 'Časový limit servera uplynul. [Pokračujte.->#]',
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => '[Vzdialenú verziu->@url@] sa nepodarilo nájsť.',
 	'maj_rev_ok' => '[K dispozícii->@zip@] je verzia [@revision@.->@url@]',
@@ -83,17 +83,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Ďalšia strana',
 	'plug_actifs' => 'Aktívne zásuvné moduly',
 	'plug_inactifs' => 'Neaktívne zásuvné moduly',
-	'plugin_xml' => 'Kolekcia malých, užitočných nástrojov, aby bolo riadenie vašej stránky ešte ľahšie.
+	'plugin_xml' => 'Spolu v jednom zásuvnom module je  tu kolekcia malých, užitočných nástrojov, aby bolo riadenie vašej stránky v SPIPe ešte ľahšie.
 
-Každý nástroj sa dá osobitne (de)aktivovať  na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse]. Ak chcete nastaviť niekoľko možností stránky, kliknite na {{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
+Každý nástroj sa dá osobitne (de)aktivovať  na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse] a nastaviť na určitý počet premenných:  kliknite na {{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
 
-K dispozícii sú kategórie: Administrácia, Klávesové vylepšenia, Klávesové skratky, Zobraziť na verejnej stránke, Tagy, Filtre, Kritériá.
+K dispozícii sú kategórie: Administrácia, Zabezpečenie, Súkromná zóna, Vylepšenia textov, Klávesové skratky, Zobrazenie verejne prístupnej stránky, Tagy, filtre, kritériá.
 
-V tomto zásuvnom module je zaradených niekoľko populárnych nástrojov: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Spriatelené weby}, {SPIP a externé odkazy}, {Smajlíky}, {Zhrnutie pre vaše články}, {Rozdelenie na stránky a karty}, atď., atď.
+Objavte v tomto zásuvnom module svoje najobľúbenejšie nástroje: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Pekné URL}, {SPIP a externé odkazy}, {Smajlíky}, {Zhrnutie pre vaše články}, {Rozdelenie na stránky a karty}, atď., atď.
 
 Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibilita: SPIP 1.92x and v2.0.x', # MODIF
+Kompatibilita: SPIP 1.92x, v2.0.x a v3.0',
 	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',
 	'pp_blocs_bloc' => 'Vložiť poskladaný blok', # NEW
 	'pp_blocs_visible' => 'Vložiť rozložený blok', # NEW
