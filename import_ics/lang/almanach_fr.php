@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_almanachs_auteur' => 'Les almanachs de cet auteur',
 	'info_aucun_almanach' => 'Aucun almanach',
 	'info_nb_almanachs' => '@nb@ almanachs',
+	'info_supprimer_almanach' => 'Supprimer',
 
 	// L
 	'label_id_article' => 'Article d\'accueil de l\'almanach',
