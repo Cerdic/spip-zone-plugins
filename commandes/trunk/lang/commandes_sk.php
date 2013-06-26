@@ -53,28 +53,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 objednávka',
-	'info_1_commande_attente_livraison' => '1 commande à envoyer', # NEW
-	'info_1_commande_attente_paiement' => '1 commande en attente de paiement', # NEW
-	'info_aucun_commande' => 'Aucune commande', # NEW
-	'info_commandes' => 'Commandes', # NEW
-	'info_date_envoi_vide' => 'commande non envoyée', # NEW
-	'info_date_paiement_vide' => 'commande non payée', # NEW
-	'info_nb_commandes' => '@nb@ commandes', # NEW
-	'info_nb_commandes_attente_livraison' => '@nb@ commandes à envoyer', # NEW
-	'info_nb_commandes_attente_paiement' => '@nb@ commandes en attente de paiement', # NEW
+	'info_1_commande_attente_livraison' => '1 objednávka na odoslanie',
+	'info_1_commande_attente_paiement' => '1 objednávka čaká na schválenie',
+	'info_aucun_commande' => 'Žiadna objednávka',
+	'info_commandes' => 'Objednávky',
+	'info_date_envoi_vide' => 'neodoslaná objednávka',
+	'info_date_paiement_vide' => 'nezaplatená objednávka',
+	'info_nb_commandes' => '@nb@ objednávok',
+	'info_nb_commandes_attente_livraison' => '@nb@ objednávok na odoslanie',
+	'info_nb_commandes_attente_paiement' => '@nb@ objednávok, ktoré čakajú na schválenie',
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
 	// L
-	'label_commande_dates' => 'Dates', # NEW
-	'label_filtre_clients' => 'Clients', # NEW
-	'label_filtre_dates' => 'Dates', # NEW
-	'label_filtre_etats' => 'Etats', # NEW
-	'label_filtre_tous_clients' => 'Tous les clients', # NEW
-	'label_filtre_tous_statuts' => 'Tous les états', # NEW
-	'label_filtre_toutes_dates' => 'Toutes les dates', # NEW
-	'label_passee_le' => 'passée le', # NEW
-	'label_payee_le' => 'payée le', # NEW
+	'label_commande_dates' => 'Dátumy',
+	'label_filtre_clients' => 'Zákazníci',
+	'label_filtre_dates' => 'Dátumy',
+	'label_filtre_etats' => 'Stavy',
+	'label_filtre_tous_clients' => 'Všetci zákazníci',
+	'label_filtre_tous_statuts' => 'Všetky stavy',
+	'label_filtre_toutes_dates' => 'Všetky dátumy',
+	'label_passee_le' => 'objednané',
+	'label_payee_le' => 'zaplatené',
 	'label_recherche' => 'Vyhľadávať',
 
 	// M
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_choix_email' => 'e-mail',
 	'notifications_expediteur_choix_facteur' => 'rovnaký ako zásuvný modul Facteur',
 	'notifications_expediteur_choix_webmaster' => 'webmaster',
-	'notifications_expediteur_email_label' => 'Zadajte e-mailovú adresu:', # MODIF
+	'notifications_expediteur_email_label' => 'E-mail odosielateľa:',
 	'notifications_expediteur_explication' => 'Vyberte odosielateľa oznamov pre predávajúceho a kupujúceho',
 	'notifications_expediteur_label' => 'Odosielateľ',
 	'notifications_expediteur_webmaster_label' => 'Vybrať webmastera:',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_choix_email' => 'jeden e-mail alebo viacero e-mailov',
 	'notifications_vendeur_choix_webmaster' => 'jeden webmaster alebo viacerí',
 	'notifications_vendeur_email_explication' => 'Zadajte jednu e-mailovú adresu alebo viac e-mailových adries a oddeľte ich čiarkami:',
-	'notifications_vendeur_email_label' => 'E-mail(y) :', # MODIF
+	'notifications_vendeur_email_label' => 'E-mail(y) predávajúceho:',
 	'notifications_vendeur_explication' => 'Vyberte príjemcu (-ov) oznamov na odoslanie predávajúcemu ',
 	'notifications_vendeur_label' => 'Predávajúci',
 	'notifications_vendeur_webmaster_label' => 'Vyberte jedného webmastera alebo viacerých:',
@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
-	'titre_commandes_a_envoyer' => 'Commandes à envoyer', # NEW
+	'titre_commandes_a_envoyer' => 'Objednávky na odoslanie',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
