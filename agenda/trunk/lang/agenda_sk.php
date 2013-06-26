@@ -58,8 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Udalosti',
 	'evenements_a_venir' => 'Budúce',
 	'evenements_depuis_debut' => 'od začiatku',
-	'explication_synchro_flux_ical' => 'Le plugin Agenda fournit un flux des évènements au format iCal. Certains clients ne mettent à jour un évènement que si un numéro de version (indiquant ansi qu\'il y a eu modification) est présent dans ce flux. Pour que ce numéro de version soit intégré dans le flux iCal généré, vous devez activer le suivi des révisions pour les évènements (menu Configuration > Révisions).', # NEW
-	'explication_synchro_flux_ical_titre' => 'Synchronisation du flux iCal', # NEW
+	'explication_synchro_flux_ical' => 'Zásuvný modul Kalendár udalostí poskytuje výpis zoznamu udalostí vo formáte iCal. Niektoré programy aktualizujú udalosti, iba ak  je pri nich uvedené číslo verzie (a to, že nastala zmena). Na to, aby bolo toto číslo verzie zavedené do vygenerovaného zdroja iCal, treba aktivovať sledovanie zmien pre udalosti (menu Konfigurácia > Zmeny).',
+	'explication_synchro_flux_ical_titre' => 'Synchronizácia zdroja iCal',
 
 	// F
 	'fermer' => 'zatvoriť',
