@@ -21,9 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	Zásuvný modul mení aj niektoré šablóny (rubriky a články) a niekoľko základných orieškov.
 	
-	Keď nainštalujete potrebné zásuvné moduly, jazyky stránky vyberte v menu  "Konfigurácia"->"Viacjazyčnosť/Riadenie jazykov"
-
-	a potom bude vaša stránka viacjazyčná', # MODIF
+	Keď nainštalujete potrebné zásuvné moduly, jazyky stránky vyberte v menu  "Konfigurácia"->"Viacjazyčnosť/Riadenie jazykov"	a potom bude vaša stránka viacjazyčná',
 	'multilingue_nom' => 'Jednoduchá viacjazyčná stránka',
 	'multilingue_slogan' => 'Vytvorte jednoduchú viacjazyčnú stránku'
 );
