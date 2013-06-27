@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_almanach' => 'Aucun almanach',
 	'info_nb_almanachs' => '@nb@ almanachs',
 	'info_supprimer_almanach' => 'Supprimer',
+	'info_supprimer_evenements' => 'Supprimer ces événements',
 
 	// L
 	'label_id_article' => 'Article d\'accueil de l\'almanach',

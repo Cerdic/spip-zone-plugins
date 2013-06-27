@@ -13,6 +13,7 @@
 			<th class='picto' scope='col'></th>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class='titre' scope='col'>[(#TRI{titre,<:almanach:label_titre:>,ajax})]</th>
+			<th class='utilisations' scope='col'></th>
 			<th class='action' scope='col'></th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class='id' scope='col'>[(#TRI{id_almanach,<:info_numero_abbreviation:>,ajax})]</th>
@@ -24,10 +25,19 @@
 			<td class='picto'>[(#CHEMIN_IMAGE{almanach-16.png}|balise_img)]</td>
 			<td class='statut'>[(#STATUT|puce_statut{almanach,#ID_ALMANACH})]</td> 
 			<td class='titre principale'>[(#LOGO_ALMANACH|image_reduire{20,26})]<a href="[(#ID_ALMANACH|generer_url_entite{almanach})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ALMANACH">[(#RANG). ]#TITRE</a></td>
+			<td class='utilisations secondaire'>
+			<!--on compte le nombre d'événemnts liés à cet almanach et on regarde donc s'il est utilisé-->
+			<BOUCLE_combien(spip_almanachs_liens) {id_almanach}></BOUCLE_combien>
+			#SET{utilise,#TOTAL_BOUCLE}
+			[(#GET{utilise}) événements]
+			<//B_combien>
+			</td>
 			<td class='action'>
+				[(#GET{utilise}|=={0}|oui)
 					[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
 						[(#BOUTON_ACTION{<:almanach:info_supprimer_almanach:>,#URL_ACTION_AUTEUR{supprimer_almanach,#ID_ALMANACH,#SELF},ajax,'','','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
 					]
+				]
 			</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,almanach,#ID_ALMANACH}|?{

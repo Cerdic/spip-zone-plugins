@@ -33,5 +33,13 @@
 	</BOUCLE_evenements_lies>
 	</ul>
 	</B_evenements_lies>
+	<p>Aucun evenement n'est lié à cet almanach. Si vous le désirez, vous pouvez le supprimer.</p>
+	<//B_evenements_lies>
 </div>
+
+
+	[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
+		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,'','','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
+	]
+
 </BOUCLE_almanach>

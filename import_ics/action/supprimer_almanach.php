@@ -14,15 +14,6 @@ function action_supprimer_almanach_dist() {
 }
 
 function action_supprimer_almanach_post($id_almanach) {
-	//recuperer tous les evenemments lies à l'almanach en cours
-	$all = sql_allfetsel('id_objet', 'spip_almanachs_liens','id_almanach='.intval($id_almanach));
-	//pour chacun d'entre eux supprimer l'entree correspondante dans la table evenement
-	foreach ($all as $id_evenement_array) {
-		$id_evenement=$id_evenement_array['id_objet'];
-		sql_delete("spip_evenements","id_evenement=".intval($id_evenement));
-	}
-	//on supprime les entrees de la table de liaison
-	sql_delete("spip_almanachs_liens","id_almanach=".intval($id_almanach));
 	//on supprime l'almanach
 	sql_delete("spip_almanachs", "id_almanach=" . intval($id_almanach));
 
