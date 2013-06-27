@@ -14,23 +14,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Licencia',
 
 	// D
-	'description_art_libre' => 'Licencia Free Art', # MODIF
-	'description_cc0' => 'Creative Common – obsah oslobodený od všetkých práv', # MODIF
-	'description_cc_by' => 'Licencia Creative Commons - Attribution', # MODIF
-	'description_cc_by_nc' => 'Licencia Creative Commons - Attribution Non-Commercial', # MODIF
-	'description_cc_by_nc_nd' => 'Licencia Creative Commons - Attribution Non-Commercial No Derivatives', # MODIF
-	'description_cc_by_nc_sa' => 'Licencia Creative Commons - Attribution Non-Commercial Share Alike', # MODIF
-	'description_cc_by_nd' => 'Licencia Creative Commons - Attribution No Derivatives', # MODIF
-	'description_cc_by_sa' => 'Licencia Creative Commons - Attribution Share Alike', # MODIF
+	'description_art_libre' => 'Licencia Free Art',
+	'description_cc0' => 'Creative Common – obsah oslobodený od všetkých práv',
+	'description_cc_by' => 'Licencia Creative Commons – Attribution',
+	'description_cc_by_nc' => 'Licencia Creative Commons - Attribution Non-Commercial',
+	'description_cc_by_nc_nd' => 'Creative Commons - Attribution – na nekomerčné využívanie – bez modifikácií',
+	'description_cc_by_nc_sa' => 'Licencia Creative Commons - na nekomerčné používanie - zdieľanie za rovnakých podmienok ako originál',
+	'description_cc_by_nd' => 'Licencia Creative Commons - Attribution – bez vytvárania modifikácií',
+	'description_cc_by_sa' => 'Licencia Creative Commons – zdieľanie za rovnakých podmienok ako originál',
 	'description_copyright' => '© copyright autor článku',
-	'description_gfdl' => 'Licence de documentation libre GNU', # NEW
-	'description_gpl' => 'Licencia GNU/GPL', # MODIF
+	'description_gfdl' => 'Licencia slobodnej dokumentácie GNU',
+	'description_gpl' => 'Licencia GNU/GPL',
 	'description_wtfpl' => 'Verejná licencia žiadne porušenie',
 
 	// L
 	'label_select_licence' => 'Vyberte licenciu',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal/en', # MODIF
-	'lien_cc0' => 'http://vvlibri.org/en/licence/cc0/10/en/legalcode', # MODIF
+	'lien_art_libre' => 'http://artlibre.org/licence/lal/',
+	'lien_cc0' => 'http://vvlibri.org/en/licence/cc0/10/en/legalcode',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/legalcode',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/legalcode',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode',
