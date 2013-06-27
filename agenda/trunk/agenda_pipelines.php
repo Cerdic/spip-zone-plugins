@@ -21,7 +21,7 @@ function agenda_insert_head_css($flux){
 		include_spip("inc/config");
 		$cfg = (defined('_AGENDA_INSERT_HEAD_CSS')?_AGENDA_INSERT_HEAD_CSS:lire_config("agenda/insert_head_css"));
 		if ($cfg){
-			$flux .= '<link rel="stylesheet" href="'.find_in_path("css/spip.agenda.css").'" />';
+			$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/spip.agenda.css").'" />';
 		}
 	}
 	return $flux;
