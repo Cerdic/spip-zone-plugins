@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Zmeniť internetové adresy presmerovaných rubrík priamo v šablónach?',
 	'explication_regles' => 'Rôzne pravidlá budú testované v tomto poradí. Ak presmerovanie neupravuje žiadne pravidlo, potom bude rubrika zobrazená normálne.',
-	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la rediretion. Cette option n\'est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.', # NEW
+	'explication_restreindre_langue' => 'Ak aktivujete túto možnosť, do presmerovania budú zahrnuté iba články v aktívnom jazyku. Táto možnosť ju užitočná iba ak máte vo svojich rubrikách články v rôznych jazykoch. Nepoužívajte ju, ak máte rubriky rozdelené podľa jazykov alebo ak používate viac polí.',
 	'explication_sousrubrique' => 'Prehľadať prvú podrubriku (zotriedenú podľa čísla nadpisu a dátumu)? Pravidlá na presmerovanie budú v tejto podrubrike testované znova.',
 	'explication_variantes_squelettes' => 'Príklad: šablóny v podobe rubrique-2.html alebo rubrique=3.html.',
 
