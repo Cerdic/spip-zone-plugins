@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_sauvegarder' => 'Sauvegarder la base', # NEW
+	'bouton_sauvegarder' => 'Zálohovať databázu',
 
 	// C
-	'colonne_auteur' => 'Créé par', # NEW
+	'colonne_auteur' => 'Vytvoril(i)',
 	'colonne_nom' => 'Názov',
 
 	// E
@@ -46,16 +46,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).', # NEW
 
 	// I
-	'info_sql_auteur' => 'Auteur : ', # NEW
+	'info_sql_auteur' => 'Autor: ',
 	'info_sql_base' => 'Databáza:',
 	'info_sql_compatible_phpmyadmin' => 'Súbor SQL 100%-ne kompatibilný s programom PHPMyadmin',
 	'info_sql_date' => 'Dátum:',
 	'info_sql_debut_fichier' => 'Začiatok súboru',
-	'info_sql_donnees_table' => 'Údaje z tabuľky @table@', # MODIF
-	'info_sql_fichier_genere' => 'Tento súbor vytvára zásuvný modul saveauto', # MODIF
+	'info_sql_donnees_table' => 'Údaje z tabuľky @table@',
+	'info_sql_fichier_genere' => 'Tento súbor vytvára zásuvný modul Saveauto',
 	'info_sql_fin_fichier' => 'Koniec súboru',
 	'info_sql_ipclient' => 'IP klienta:',
-	'info_sql_mysqlversion' => 'Verzia MySQL:', # MODIF
+	'info_sql_mysqlversion' => 'Verzia MySQL:',
 	'info_sql_os' => 'Operačný systém servera:',
 	'info_sql_phpversion' => 'Verzia PHP:',
 	'info_sql_plugins_utilises' => 'používa sa @nb@ zásuvných modulov:',
@@ -64,20 +64,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sql_structure_table' => 'Štruktúra tabuľky @table@',
 
 	// L
-	'label_donnees' => 'Údaje z tabuliek:', # MODIF
-	'label_frequence' => 'Frekvencia zálohy: každých', # MODIF
+	'label_donnees' => 'Údaje z tabuliek',
+	'label_frequence' => 'Frekvencia zálohovania',
 	'label_mail_max_size' => 'Maximálna veľkosť súborov pripájaných k e-mailom (v MB):', # MODIF
 	'label_max_zip' => 'Seuil des zips', # NEW
 	'label_nettoyage_journalier' => 'Activer le nettoyage journalier des archives', # NEW
-	'label_notif_active' => 'Activer les notifications', # NEW
+	'label_notif_active' => 'Aktivovať oznamy',
 	'label_notif_mail' => 'Adresses email à notifier', # NEW
 	'label_obsolete_jours' => 'Zálohy sa pokladajú za neaktuálne po uplynutí:', # MODIF
 	'label_prefixe_sauvegardes' => 'Predpona zálohy:', # MODIF
-	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière', # NEW
+	'label_sauvegarde_reguliere' => 'Aktivovať pravidelné zálohovanie',
 	'label_structure' => 'Štruktúra tabuliek:', # MODIF
-	'label_toutes_tables' => 'Sauvegarder toutes les tables', # NEW
+	'label_toutes_tables' => 'Zálohovať všetky tabuľky',
 	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes', # NEW
-	'legend_cfg_notification' => 'Notifications', # NEW
+	'legend_cfg_notification' => 'Oznamy',
 	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques', # NEW
 
 	// M
@@ -87,15 +87,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.', # NEW
 	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.', # NEW
 	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.', # NEW
-	'message_sauver_sujet' => 'Sauvegarde de la base @base@', # NEW
-	'message_telechargement_nok' => 'Erreur lors du téléchargement.', # NEW
+	'message_sauver_sujet' => 'Záloha databázy @base@',
+	'message_telechargement_nok' => 'Chyba pri sťahovaní.',
 
 	// T
 	'titre_boite_historique' => 'História záloh', # MODIF
-	'titre_boite_sauver' => 'Zásuvný modul Saveauto: zálohy databázy SQL', # MODIF
-	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique', # NEW
-	'titre_page_saveauto' => 'Zálohy databázy', # MODIF
-	'titre_saveauto' => 'Automatické zálohy'
+	'titre_boite_sauver' => 'Vytvoriť zálohu MySQL',
+	'titre_page_configurer' => 'Nastavenia modulu Automatická záloha',
+	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL',
+	'titre_saveauto' => 'Automatická záloha'
 );
 
 ?>
