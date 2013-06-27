@@ -1,7 +1,7 @@
 <paquet
 	prefix="player"
 	categorie="multimedia"
-	version="2.1.2"
+	version="2.1.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/player-32.png"
@@ -10,7 +10,7 @@
 >	
 
 	<nom>Lecteur Multim&#233;dia</nom>
-	<!-- Lire des sons et des vidéos -->
+	<!-- Lire des sons -->
 
 	<auteur>BoOz</auteur>
 	<auteur>Cédric</auteur>
