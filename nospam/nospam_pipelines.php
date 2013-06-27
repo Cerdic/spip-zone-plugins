@@ -157,11 +157,11 @@ function nospam_pre_edition($flux) {
 			if ($spammeur_connu) {
 				// plus de 30 spams dans les dernieres 2h, faut se calmer ...
 				// ou plus de 10 spams dans la dernieres 1h, faut se calmer ...
-				// ou IP blacklistee et plus de 5 messages prop/spam dans les dernieres 24h, faut se calmer ...
+				// ou IP blacklistee et plus de 5 messages prop/spam dans les dernieres 48h, faut se calmer ...
 				if (
 					(isset($GLOBALS['ip_blacklist'][$GLOBALS['ip']])
-				   AND ($nb = sql_countsel('spip_forum', sql_in('statut',array('spam')).' AND (ip=' . sql_quote($GLOBALS['ip']).') AND ' . sql_date_proche('date_heure','-24','hour'))) >= 5
-					 AND $h=24
+				   AND ($nb = sql_countsel('spip_forum', sql_in('statut',array('spam')).' AND (ip=' . sql_quote($GLOBALS['ip']).') AND ' . sql_date_proche('date_heure','-48','hour'))) >= 5
+					 AND $h=48
 					)
 					OR
 					(($nb = sql_countsel('spip_forum', 'statut=\'spam\' AND (ip=' . sql_quote($GLOBALS['ip']) . $email . ') AND ' . sql_date_proche('date_heure','-120','minute'))) >= 30
@@ -299,7 +299,7 @@ function nospam_flush_and_update(){
 	nospam_update_ip_list();
 }
 
-if (!defined('_NOSPAM_IP_LIST_CACHE')) define('_NOSPAM_IP_LIST_CACHE',10800);
+if (!defined('_NOSPAM_IP_LIST_CACHE')) define('_NOSPAM_IP_LIST_CACHE',3600);
 /**
  * Recuperer la liste des IP black ou grey sur nospam.spip.net
  * si on a pas une liste a jour
