@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// G
 	'getid3_description' => 'Čítanie a zápis audio značiek do zvukových súborov
 _ [->http://getid3.sourceforge.net/]', # MODIF
-	'getid3_slogan' => 'Čítanie a zápis audio značiek' # MODIF
+	'getid3_slogan' => 'Čítanie metadát zvukových súborov a súborov videí a zápis audio tagov.'
 );
 
 ?>
