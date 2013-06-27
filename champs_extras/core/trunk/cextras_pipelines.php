@@ -147,11 +147,16 @@ function cextras_editer_contenu_objet($flux){
  * @return array      Données du pipeline
 **/ 
 function cextras_pre_edition($flux){
-	
+
 	include_spip('inc/cextras');
 	include_spip('inc/saisies_lister');
 	$table = $flux['args']['table'];
 	if ($saisies = champs_extras_objet( $table )) {
+
+		// Restreindre les champs postés en fonction des autorisations de les modifier
+		// au cas où un malin voudrait en envoyer plus que le formulaire ne demande
+		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
+
 		$saisies = saisies_lister_avec_sql($saisies);
 		foreach ($saisies as $saisie) {
 			$nom = $saisie['options']['nom'];
@@ -243,14 +248,16 @@ function cextras_formulaire_verifier($flux){
 		include_spip('inc/autoriser');
 		include_spip('inc/saisies');
 
-		$verifier   = charger_fonction('verifier', 'inc', true);
-		$saisies    = saisies_lister_avec_sql($saisies);
-
-		// restreindre la vue selon les autorisations
+		// restreindre les saisies selon les autorisations
 		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
 			'id' => $id_objet,
 			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
+
+		// restreindre les vérifications aux saisies enregistrables
+		$saisies = saisies_lister_avec_sql($saisies);
+
+		$verifier = charger_fonction('verifier', 'inc', true);
 
 		foreach ($saisies as $saisie) {
 			// verifier obligatoire
