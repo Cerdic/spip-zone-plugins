@@ -118,7 +118,7 @@ function nospam_pre_edition($flux) {
 		// ne pas publier automatiquement certains messages suspects ...
 		// sauf si le posteur a de toute facon le pouvoir de moderer et de se publier
 		include_spip('inc/autoriser');
-		if ($flux['data']['statut'] == 'publie'
+		if (in_array($flux['data']['statut'],array('prop','publie'))
 			AND (!isset($GLOBALS['visiteur_session']['statut']) OR !autoriser('modererforum'))
 		) {
 			// verifier le status de cette IP
@@ -342,7 +342,7 @@ function nospam_update_ip_list($async=false){
  */
 function nospam_check_ip_status($ip){
 	$file = _DIR_TMP."nospam_ip_list.txt";
-	if (!file_exists($file) OR filemtime($file)<time()-_NOSPAM_IP_LIST_CACHE)
+	if (!file_exists($file) OR filemtime($file)<time()-2*_NOSPAM_IP_LIST_CACHE)
 		return;
 
 	lire_fichier($file,$liste);
