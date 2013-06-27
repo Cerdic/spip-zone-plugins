@@ -12,76 +12,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Fonction préalable à la demande d'autorisation chez twitter
- * Elle permet également de dissocier un compte twitter en passant 
- * arg dans l'environnement à la valeur '-1'
+ * Ajouter un utilisateur
+ * Il faut lancer une demande d'autorisation chez Twitter (1er appel)
+ * Au second appel (avec $is_callback=true) on recupere les tokens et on ajoute l'utilisateur
+ * a la config du plugin
  */
-function action_ajouter_twitteraccount_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_ajouter_twitteraccount_dist($is_callback = false) {
+	if (!$is_callback){
+		// au premier appel
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
 
-	include_spip("inc/autoriser");
-	if(autoriser("ajouter","twitteraccount")){
+		include_spip("inc/autoriser");
+		if(autoriser("ajouter","twitteraccount")){
 
-		$cfg = @unserialize($GLOBALS['meta']['microblog']);
-
-		$redirect = _request('redirect');
-		$redirect = parametre_url(parametre_url($redirect,'erreur_code',''),'erreur','','&');
-
-		include_spip('inc/filtres');
-		include_spip('inc/twitteroauth');
-		include_spip('inc/session');
-		
-		/**
-		 * L'URL de callback qui sera utilisée suite à la validation chez twitter
-		 * Elle vérifiera le retour et finira la configuration
-		 */
-		$oauth_callback = url_absolue(generer_url_action('twitter_oauth_callback','',true));
-
-		/**
-		 * Récupération des tokens depuis twitter par rapport à notre application
-		 * On les place dans la session de l'individu en cours
-		 * Ainsi que l'adresse de redirection pour la seconde action
-		 */
-		try {
-			$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret']);
-			$request_token = $connection->getRequestToken($oauth_callback);
-			$token = $request_token['oauth_token'];
-			session_set('oauth_token',$token);
-			session_set('oauth_token_secret',$request_token['oauth_token_secret']);
-			session_set('twitter_redirect',str_replace('&amp;','&',$redirect));
-
-			/**
-			 * Vérification du code de retour
-			 */
-			switch ($code = $connection->http_code) {
-				/**
-				 * Si le code de retour est 200 (ok)
-				 * On envoie l'utilisateur vers l\'url d'autorisation
-				 */
-				case 200:
-					$url = $connection->getAuthorizeURL($token);
-					include_spip('inc/headers');
-					$GLOBALS['redirect'] = $url;
-					#echo redirige_formulaire($url);
-					break;
-				/**
-				 * Sinon on le renvoie vers une erreur
-				 */
-				default:
-					spip_log('Erreur connexion twitter','microblog');
-					spip_log($connection, 'twitter'._LOG_ERREUR);
-					$redirect = parametre_url($redirect,'erreur_code',$code);
-					$redirect = parametre_url($redirect,'erreur','erreur_conf_app','&');
-					$GLOBALS['redirect'] = $redirect;
-					break;
-			}
+			// lancer la demande d'autorisation en indiquant le nom de l'action qui sera rappelee au retour
+			include_spip("action/twitter_oauth_authorize");
+			twitter_oauth_authorize("ajouter_twitteraccount",_request('redirect'));
 		}
-		catch(Exception $e){
-			session_set('oauth_erreur_message',$e->getMessage());
-			$redirect = parametre_url($redirect,'erreur',"erreur_oauth",'&');
-			$GLOBALS['redirect'] = $redirect;
-		}
+	}
+	else {
+		// appel au retour de l'authorize
+		// recuperer le screenname
+		$tokens = array(
+			'twitter_token' => $GLOBALS['visiteur_session']['access_token']['oauth_token'],
+			'twitter_token_secret' => $GLOBALS['visiteur_session']['access_token']['oauth_token_secret'],
+		);
+		// ajouter le compte aux preferences
+		twitter_ajouter_twitteraccount($tokens);
 	}
 }
 
