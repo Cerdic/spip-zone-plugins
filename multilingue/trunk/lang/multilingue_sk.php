@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'afficher_menu_select' => 'Zobraziť v rozbaľovacom menu (select)',
 
 	// D
-	'desactiver_traduction_logo_objet' => 'Désactiver la possibilité que la balise #LOGO_OBJET inclut le logo de l\'objet d\'origine s\'elle ne trouve pas de logo pour l\'objet en question', # NEW
+	'desactiver_traduction_logo_objet' => 'Deaktivovať možnosť, že značka #LOGO_OBJET obsahuje logo pôvodného objektu, ale nenájde ho',
 
 	// E
-	'explication_desactiver_traduction_logo_objet' => 'Si l\'objet est traduit (présence d\'un id_trad comme pour les articles et rubriques) ce plugin fait en sorte que la balise #LOGO_ARTICLE p.ex cherche le logo de la traduction de l\'article (article de référence) si celui-ci ne dipose pas de logo.', # NEW
+	'explication_desactiver_traduction_logo_objet' => 'Ak bude objekt preložený (bude tam id_trad ako pri článkoch a rubrikách), tento zásuvný modul vytvorí tag #LOGO_ARTICLE napr. na vyhľadanie loga prekladu článku (podľa referenčného článku), ak nemá vlastné logo.',
 
 	// L
 	'logo_objet' => 'Logo Objekt',
