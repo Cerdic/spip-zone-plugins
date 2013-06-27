@@ -23,7 +23,7 @@
 <div class="nettoyeur"></div>
 
 [(#AUTORISER{creer,abonnement,#ID_ABONNEMENT})
-		[(#URL_ACTION_AUTEUR{renouveler_abonnement,#ID_ABONNEMENT,#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}}|icone_horizontale{<:abonnement:icone_renouveler_abonnement:>,abonnement,new,left})]
+		[(#URL_ACTION_AUTEUR{renouveler_abonnement,#ID_ABONNEMENT,#SELF}|icone_horizontale{<:abonnement:icone_renouveler_abonnement:>,abonnement,arrow_refresh-24.png,left})]
 ]
 [(#AUTORISER{modifier,abonnement,#ID_ABONNEMENT})
 	[(#ID_ABONNEMENT|afficher_qui_edite{abonnement}|non)
