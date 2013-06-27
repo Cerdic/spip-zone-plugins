@@ -1,0 +1,16 @@
+[(#REM)
+	Modele html audio
+	
+ Parametre:
+
+	
+]
+<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}{extension IN mp3}>
+<audio id="mejs-#ID_DOCUMENT" src="#FICHIER" type="audio/mp3" controls="controls"></audio>	
+<script>
+(function($) {
+  $('#mejs-#ID_DOCUMENT').mediaelementplayer({});
+})(jQuery);
+</script>
+</BOUCLE_tous>
+#FILTRE{trim}
