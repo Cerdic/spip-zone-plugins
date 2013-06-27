@@ -18,28 +18,31 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * a la config du plugin
  */
 function action_ajouter_twitteraccount_dist($is_callback = false) {
-	if (!$is_callback){
-		// au premier appel
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
+	include_spip("inc/autoriser");
+	if(autoriser("ajouter","twitteraccount")){
+		if (!$is_callback){
+			// au premier appel
+			$securiser_action = charger_fonction('securiser_action', 'inc');
+			$arg = $securiser_action();
 
-		include_spip("inc/autoriser");
-		if(autoriser("ajouter","twitteraccount")){
+			include_spip("inc/autoriser");
+			if(autoriser("ajouter","twitteraccount")){
 
-			// lancer la demande d'autorisation en indiquant le nom de l'action qui sera rappelee au retour
-			include_spip("action/twitter_oauth_authorize");
-			twitter_oauth_authorize("ajouter_twitteraccount",_request('redirect'));
+				// lancer la demande d'autorisation en indiquant le nom de l'action qui sera rappelee au retour
+				include_spip("action/twitter_oauth_authorize");
+				twitter_oauth_authorize("ajouter_twitteraccount",_request('redirect'));
+			}
 		}
-	}
-	else {
-		// appel au retour de l'authorize
-		// recuperer le screenname
-		$tokens = array(
-			'twitter_token' => $GLOBALS['visiteur_session']['access_token']['oauth_token'],
-			'twitter_token_secret' => $GLOBALS['visiteur_session']['access_token']['oauth_token_secret'],
-		);
-		// ajouter le compte aux preferences
-		twitter_ajouter_twitteraccount($tokens);
+		else {
+			// appel au retour de l'authorize
+			// recuperer le screenname
+			$tokens = array(
+				'twitter_token' => $GLOBALS['visiteur_session']['access_token']['oauth_token'],
+				'twitter_token_secret' => $GLOBALS['visiteur_session']['access_token']['oauth_token_secret'],
+			);
+			// ajouter le compte aux preferences
+			twitter_ajouter_twitteraccount($tokens);
+		}
 	}
 }
 

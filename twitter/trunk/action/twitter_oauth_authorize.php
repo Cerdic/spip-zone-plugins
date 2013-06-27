@@ -17,25 +17,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_twitter_oauth_authorize_dist(){
 
-	include_spip("inc/autoriser");
-	if(autoriser("ajouter","twitteraccount")){
-		include_spip('inc/twitteroauth');
-		include_spip('inc/session');
-		$cfg = @unserialize($GLOBALS['meta']['microblog']);
+	include_spip('inc/twitteroauth');
+	include_spip('inc/session');
 
-		$redirect = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
+	$redirect = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
+	if (isset($GLOBALS['visiteur_session']['oauth_token'])
+		AND $GLOBALS['visiteur_session']['oauth_token']){
 
 		if(_request('denied')){
+			spip_log("action_twitter_oauth_authorize_dist : denied",'twitter'._LOG_ERREUR);
 			$redirect = parametre_url($redirect,'erreur','auth_denied','&');
 			session_set('oauth_status','denied');
 			$GLOBALS['redirect'] = $redirect;
 		}
 		elseif (_request('oauth_token') && ($GLOBALS['visiteur_session']['oauth_token'] !== _request('oauth_token'))) {
+			spip_log("action_twitter_oauth_authorize_dist : old_token",'twitter'._LOG_ERREUR);
 			$redirect = parametre_url($redirect,'erreur','old_token','&');
 			session_set('oauth_status','oldtoken');
 			$GLOBALS['redirect'] = $redirect;
 		}
 		else {
+			$cfg = @unserialize($GLOBALS['meta']['microblog']);
 			$consumer_key = $cfg['twitter_consumer_key'];
 			$consumer_secret = $cfg['twitter_consumer_secret'];
 
@@ -54,13 +56,9 @@ function action_twitter_oauth_authorize_dist(){
 				if ($callback = session_get('twitter_callback')
 				  AND $callback = charger_fonction($callback,"action",true)){
 					// si la callback retourne quelque chose c'est une url de redirect
-					if ($r = $callback(true))
+					if ($r = $callback(true, $redirect))
 						$redirect = $r;
 				}
-
-				session_set('access_token');
-				session_set('twitter_redirect');
-				session_set('twitter_callback');
 
 				$GLOBALS['redirect'] = $redirect;
 			}
@@ -70,6 +68,15 @@ function action_twitter_oauth_authorize_dist(){
 			}
 		}
 	}
+	else {
+		// rien a faire ici !
+		$GLOBALS['redirect'] = $redirect;
+	}
+
+	// vider la session
+	foreach(array('access_token','oauth_token','oauth_token_secret','twitter_redirect','twitter_callback') as $k)
+		if (isset($GLOBALS['visiteur_session'][$k]))
+			session_set($k);
 }
 
 function twitter_oauth_authorize($callback, $redirect, $sign_in=true){
