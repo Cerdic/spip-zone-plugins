@@ -89,13 +89,15 @@ class Facteur extends PHPMailer {
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
 
-		if (!empty($options['cc'])) {
-			$this->AddCC( $options['cc'] );
+		if (!defined('_TEST_EMAIL_DEST')){
+			if (!empty($options['cc'])) {
+				$this->AddCC( $options['cc'] );
+			}
+			if (!empty($options['bcc'])) {
+				$this->AddBCC( $options['bcc'] );
+			}
 		}
-		if (!empty($options['bcc'])) {
-			$this->AddBCC( $options['bcc'] );
-		}
-		
+
 		if (isset($options['smtp']) AND $options['smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $options['smtp_host'];
