@@ -125,6 +125,8 @@ function twitter_connect($tokens=null){
  */
 function twitter_tokens($tokens=null){
 	$cfg = @unserialize($GLOBALS['meta']['microblog']);
+	if (!$cfg AND !$tokens) return false;
+	if (!$cfg) $cfg = array();
 
 	if(!is_array($tokens))
 		$tokens = array();
@@ -148,7 +150,7 @@ function twitter_tokens($tokens=null){
 		if (isset($t['twitter_account']) AND isset($cfg['twitter_accounts'][$t['twitter_account']]))
 			$account = $t['twitter_account'];
 
-		if (!isset($cfg['twitter_accounts'][$account]))
+		if (!isset($cfg['twitter_accounts'][$account]) AND isset($cfg['twitter_accounts']))
 			$account = reset(array_keys($cfg['twitter_accounts']));
 
 		if (isset($cfg['twitter_accounts'][$account])){

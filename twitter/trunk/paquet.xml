@@ -1,7 +1,7 @@
 <paquet
 	prefix="twitter"
 	categorie="communication"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	schema="0.1.0"
