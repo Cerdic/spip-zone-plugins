@@ -16,17 +16,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alexa_id' => 'Identifikátor stránky na Alexu',
 
 	// B
-	'bing_webmaster' => 'Bing Webmaster Tools', # NEW
-	'bing_webmaster_activate' => 'Activer Bing Webmaster Tools', # NEW
-	'bing_webmaster_id' => 'Meta code de vérification', # NEW
+	'bing_webmaster' => 'Bing Webmaster Tools',
+	'bing_webmaster_activate' => 'Aktivovať Bing Webmaster Tools',
+	'bing_webmaster_id' => 'Meta kód na overenie',
 
 	// C
 	'canonical_url' => 'Kanonická podoba adries',
 	'canonical_url_activate' => 'Aktivovať kanonické adresy URL',
 
 	// E
-	'explication_description' => 'Il est conseillé que la longueur soit inférieure ou égale à 160 caractères.', # NEW
-	'explication_title' => 'Il est conseillé que la longueur soit comprise entre 5 et 70 caractères.', # NEW
+	'explication_description' => 'Odporúča sa, aby mal 160 znakov alebo menej.',
+	'explication_title' => 'Odporúča sa, aby mal od 5 do 70 znakov.',
 
 	// F
 	'forcer_squelette_descriptif' => 'Hlavičky meta zo SEO majú prednosť pred tými, ktoré vygenerujú šablóny',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_webmaster_tools_id' => 'Kontrolný kód',
 
 	// I
-	'info_count_max' => 'Caractères pour atteindre la limite optimale : ', # NEW
+	'info_count_max' => 'Počet znakov na dosiahnutie optimálneho limitu:',
 	'insert_head' => 'Automatické vkladanie do #INSERT_HEAD',
 	'insert_head_activate' => 'Aktivovať automatické vkladanie',
 	'insert_head_descriptif' => 'Automatické vkladanie nastavenia SEO do &lt;hlavičky&gt;',
