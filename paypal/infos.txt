@@ -8,3 +8,17 @@ Alors on simplifie un peu pour le moment :
 - on utilise IPN pour verifier les transactions. Il faut donc activer cette option
   dans le compte du vendeur.
 - il faut définir la TVA dans les préférences du compte paypal
+
+
+Indiquer que l'IPN envoyé par PAYPAL est UTF-8
+-----------------------------------------------
+
+  Un titre d'objet avec des caractères utf-8 et hop, le signal de validation
+  IPN reçu par paypal foire (mauvais encodage). Pour corriger cela :
+
+ - Dans le compte marchand Paypal (s'y connecter).
+ - Cliquer l'onglet «Préférences»
+ - Partie «Préférences de ventes» (bas de la 2è colonne)
+ - Cliquer le lien « Encodage de la langue»
+ - Puis cliquer le bouton « Plus d'options»
+ - Définir les 2 sélecteurs sur UTF-8 et valider
