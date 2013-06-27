@@ -13,8 +13,8 @@ Pridáva údaje zo zariadení USB vo formáte .mp3.
 Funguje na všetkých <code><docXX|player></code> vložených v texte, ako aj v šablónach.
 
 -* v texte <code><docXX|player></code> zobrazí údaje zo zariadení USB (môžete si vybrať z viacerých zariadení),
--* v šablóne <code>#MODELE{playliste}</code> umožňuje zobraziť zoznam skladieb z posledných mp3',
-	'player_slogan' => 'Prehrávanie zvukov a videí'
+-* v šablóne <code>#MODELE{playliste}</code> umožňuje zobraziť zoznam skladieb z posledných mp3', # MODIF
+	'player_slogan' => 'Prehrávanie zvukov a videí' # MODIF
 );
 
 ?>

@@ -13,8 +13,8 @@ It adds flash player suitable the formats .mp3.
 It works on all <code><docXX|player></code> inserted in the texts, as well as in the templates.
 
 -* In a text, <code><docXX|player></code>, displays a flash audio player (several players to choose from);
--* In a template <code>#MODELE{playliste}</code> displays a playlist of the latest mp3',
-	'player_slogan' => 'Read sounds and videos'
+-* In a template <code>#MODELE{playliste}</code> displays a playlist of the latest mp3', # MODIF
+	'player_slogan' => 'Read sounds and videos' # MODIF
 );
 
 ?>

@@ -8,7 +8,9 @@
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=ru">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>

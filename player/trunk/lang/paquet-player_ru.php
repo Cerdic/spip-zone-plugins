@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Плеер выводится при выводе документа кодом <code><docXX|player></code> как в статье, так и в шаблоне.
 
 -* В тексте на сайте <code><docXX|player></code> выводится как flash плеер (есть несколько вариантов плеер на выбор);
--* В шаблоне <code>#MODELE{playliste}</code> отображает список последних mp3 файлов',
-	'player_slogan' => 'Аудио и видео плеер'
+-* В шаблоне <code>#MODELE{playliste}</code> отображает список последних mp3 файлов', # MODIF
+	'player_slogan' => 'Аудио и видео плеер' # MODIF
 );
 
 ?>
