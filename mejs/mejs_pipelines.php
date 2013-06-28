@@ -36,7 +36,7 @@ function mejs_insert_head_css($flux){
 function mejs_insert_head($flux){
 	  $js = find_in_path('mejs/mediaelement-and-player.min.js');     
     $flux .= "<script src='$js'></script>\n";
-    // $flux .= "<script>$('video,audio').mediaelementplayer();</script>\n";
+    // $flux .= "<script>$('video,audio').mediaelementplayer();</script>\n";     // l'appel se fait à la volee
     return $flux;
 }
 
@@ -45,6 +45,8 @@ function mejs_insert_head($flux){
  * Insertion dynamique du js en pied de page,
  * uniquement en presence de video sur la page
  * et sur les pages html ! (pas dans les flux rss ou autre)
+ * 
+ *(pas l'instant pas utilise)  
  * 
  * @param string $flux
  * @return string

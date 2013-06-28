@@ -1,11 +1,11 @@
 <paquet
 	prefix="mejs"
 	categorie="multimedia"
-	version="0.1.0"
+	version="0.1.1"
 	etat="dev"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/mejs-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4403"
 >
 
 	<nom>MediaElementPlayer</nom>
@@ -13,7 +13,7 @@
 	<licence>MIT</licence>
   
   <pipeline nom="insert_head_css" inclure="mejs_pipelines.php"/>
-  <!--<pipeline nom="insert_head" inclure="mejs_pipelines.php" /> -->
-  <pipeline nom="affichage_final" inclure="mejs_pipelines.php" />  
+  <pipeline nom="insert_head" inclure="mejs_pipelines.php" /> 
+  <!-- <pipeline nom="affichage_final" inclure="mejs_pipelines.php" /> --> 
   <pipeline nom="header_prive" inclure="mejs_pipelines.php" />
 </paquet>

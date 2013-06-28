@@ -2,14 +2,27 @@
 	Modele html audio
 	
  Parametre:
-
+  - id:     id_document
+  - skin:   habillage (facultatif) valeurs possibles: ted,wmp
+  - largeur
+  - hauteur
+  - loop
+  - autoplay
 	
 ]
 <BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}{extension IN mp3}>
-<audio id="mejs-#ID_DOCUMENT" src="#FICHIER" type="audio/mp3" controls="controls"></audio>	
+<audio id="mejs-#ID_DOCUMENT" src="#FICHIER" type="audio/mp3" controls="controls"  [class="mejs-(#ENV{skin})"] ></audio>	
 <script>
 (function($) {
-  $('#mejs-#ID_DOCUMENT').mediaelementplayer({});
+  var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',
+  {
+    [audioWidth: (#ENV{largeur}),]
+    [audioHeight: (#ENV{hauteur}),] 
+    [startVolume: (#ENV{volume}),]
+    [loop: (#ENV{loop}|oui)true,]            
+  }
+  );
+  [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
 })(jQuery);
 </script>
 </BOUCLE_tous>
