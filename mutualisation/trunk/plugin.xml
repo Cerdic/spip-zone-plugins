@@ -1,0 +1,29 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Mutualisation facile
+			[es]Mutualizaci&#243;n f&#225;cil
+			[en]Easy mutualisation
+		</multi>
+	</nom>
+	<slogan>Cr&#233;er une ferme &#224; Spip</slogan>
+	<auteur>Fil</auteur>
+	<licence>&#169; 2007-2012 GNU/LGPL</licence>
+	<version>0.9.2</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin contient quelques fonctions facilitant la mutualisation de sites : notamment <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> et <code>mutualiser_creer()</code>.
+		Attention ce plugin ne s'installe pas comme les autres (cf. documentation).
+		[es]Este plugin contiene algunas funciones que facilitan la mutualizaci&#243;n de sitios, en particular: <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> y <code>mutualiser_creer()</code>.  Cuidado, este plugin no se instala como los dem&#225;s (ver documentaci&#243;n).
+		[en]This plugin provides some function that facilitate site's mutualisation, particularly: <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> and <code>mutualiser_creer()</code>. Be careful, the installation of this plugin is different than general one (see documentation).
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/La-mutualisation-facile</lien>
+	<icon>mutualiser.png</icon>
+	<prefix>Mutualisation</prefix>
+	<necessite id='spip' version='[2.0.0;3.0.99]' />
+
+	<chemin dir='' type='aucun' />
+	<categorie>maintenance</categorie>
+</plugin>
