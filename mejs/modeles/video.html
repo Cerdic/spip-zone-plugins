@@ -5,19 +5,20 @@
   - id:     id_document
   - skin:   habillage (facultatif) valeurs possibles: ted,wmp
   - volume
-  - autoplay
+  - autoplay  buggué sur chrome ... pas documenté officiellement
   
-]<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>
+]<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>  
 <video id="mejs-#ID_DOCUMENT" src="#FICHIER"[ width="(#LARGEUR)"][ height="(#HAUTEUR)"]
       [(#MIME_TYPE|=={application/mp4}|oui) type="video/mp4"]   
        preload="none"  controls="controls"
-       [class="mejs-(#ENV{skin})"] 
+      [(#LOGO_DOCUMENT|extraire_attribut{src}|couper{23,''}|=={plugins-dist/medias}|non) [poster="(#LOGO_DOCUMENT|extraire_attribut{src})"]]
+      [class="mejs-(#ENV{skin})"] 
 ></video>	
 <script>
 (function($) {   
   var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',{
       [startVolume: (#ENV{volume}),]
-  });
+  });  
   [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
 })(jQuery); 
 </script>

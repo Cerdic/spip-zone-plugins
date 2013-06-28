@@ -10,6 +10,7 @@
 
 	<nom>MediaElementPlayer</nom>
 	<auteur lien='http://mediaelementjs.com/'>John Dyer</auteur>
+  <auteur lien='http://www.erational.org'>erational (mise en plugin)</auteur>
 	<licence>MIT</licence>
   
   <pipeline nom="insert_head_css" inclure="mejs_pipelines.php"/>
