@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lm2_jquery_plugins($plugins){
-	if(!test_espace_prive()){
+	if(!test_espace_prive() && (_request('page') !== 'login')){
 		$plugins[] = _DIR_LIB_SM.'script/soundmanager2.js';
 	}
 	return $plugins;
