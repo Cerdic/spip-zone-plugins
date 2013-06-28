@@ -29,7 +29,7 @@
 			<!--on compte le nombre d'événemnts liés à cet almanach et on regarde donc s'il est utilisé-->
 			<BOUCLE_combien(spip_almanachs_liens) {id_almanach}></BOUCLE_combien>
 			#SET{utilise,#TOTAL_BOUCLE}
-			[(#GET{utilise}) événements]
+			[(#TOTAL_BOUCLE|singulier_ou_pluriel{almanach:un_evenement,almanach:plusieurs_evenements})]
 			<//B_combien>
 			</td>
 			<td class='action'>

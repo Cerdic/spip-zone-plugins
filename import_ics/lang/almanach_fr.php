@@ -29,6 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
 
+	//P 
+	'plusieurs_evenements' => '@nb@ événements',
 	// R
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
@@ -42,6 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_almanachs_rubrique' => 'Almanachs de la rubrique',
 	'titre_langue_almanach' => 'Langue de cet almanach',
 	'titre_logo_almanach' => 'Logo de cet almanach',
+
+	//U
+	'un_evenement' => '@nb@ événement',
 );
 
 ?>
