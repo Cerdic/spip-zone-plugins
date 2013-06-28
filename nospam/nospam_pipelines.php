@@ -174,21 +174,26 @@ function nospam_pre_edition($flux) {
 					spip_log("[Refuse] $nb spam pour (ip=" . $GLOBALS['ip'] . "$email) dans les $h dernieres heures", 'nospam');
 					return $flux;
 				}
+				spip_log("POST *suspect* spammeur_connu","nospam");
 			}
 			// sinon regarder si l'objet a une langue, et si le post est dans la meme langue ou non
 			// en cas de langue differente, on se mefie
-			elseif ($flux['data']['objet']){
-				$table = table_objet_sql($flux['data']['objet']);
-				$trouver_table = charger_fonction("trouver_table","base");
-				if ($desc = $trouver_table($table)
-				  AND isset($desc['field']['lang'])){
-					$primary = id_table_objet($flux['data']['objet']);
-					$lang_objet = sql_getfetsel("lang",$table,"$primary=".intval($flux['data']['id_objet']));
-					include_spip("inc/detecter_langue");
-					$lang_post = _detecter_langue($flux['data']['texte']);
-					if ($lang_post!==$lang_objet)
-						$lang_suspecte = true;
+			else{
+				$lang_objet = ($GLOBALS['spip_lang']?$GLOBALS['spip_lang']:$GLOBALS['meta']['langue_site']);
+				if ($flux['data']['objet']){
+					$table = table_objet_sql($flux['data']['objet']);
+					$trouver_table = charger_fonction("trouver_table","base");
+					if ($desc = $trouver_table($table)
+						AND isset($desc['field']['lang'])){
+						$primary = id_table_objet($flux['data']['objet']);
+						$lang_objet = sql_getfetsel("lang",$table,"$primary=".intval($flux['data']['id_objet']));
+					}
 				}
+				include_spip("inc/detecter_langue");
+				$lang_post = _detecter_langue($flux['data']['texte']);
+				if ($lang_post!==$lang_objet)
+					$lang_suspecte = true;
+				spip_log("POST ".($lang_suspecte?"*suspect* ":"")."en langue [$lang_post] sur $primary=".$flux['data']['id_objet']." en langue [$lang_objet]","nospam");
 			}
 
 			// si c'est un message bourre de liens, on le modere
