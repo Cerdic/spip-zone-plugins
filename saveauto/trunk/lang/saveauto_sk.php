@@ -21,29 +21,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_repertoire_inaccessible' => 'Do priečinka @rep@ sa nedá zapisovať.',
 
 	// H
-	'help_cfg_generale' => 'Ces paramètres de configuration s\'appliquent à toutes les sauvegardes, manuelles ou automatiques.', # NEW
-	'help_contenu' => 'Choisissez les paramètres de contenu de votre fichier de sauvegarde.', # NEW
-	'help_contenu_auto' => 'Choisir le contenu des sauvegardes automatiques.', # NEW
-	'help_frequence' => 'Saisir la fréquence des sauvegardes automatiques en jours.', # NEW
-	'help_liste_tables' => 'Par défaut, toutes les tables sont exportées à l\'exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder ouvrez la liste en décochant la case ci-dessous.', # NEW
-	'help_mail_max_size' => 'Niektoré databázy môžu prevyšovať maximálnu veľkosť určenú pre dokumenty pripojené k e-mailom. Zistite u poskytovateľa hostingu, aká maximálna veľkosť je povolená. Predvolený limit je 2 MB.', # MODIF
-	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo.', # NEW
-	'help_notif_active' => 'Activer l\'envoi des sauvegardes par mail', # NEW
-	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s\'ajoutent à celle du webmestre du site.', # NEW
-	'help_obsolete' => 'Podľa počtu dní od vytvorenia určí, či sa archív považuje za neaktuálny a ak je neaktuálny, odstráni ho zo servera.
-             Na deaktivovanie tejto funkcie zadajte -1', # MODIF
-	'help_prefixe' => 'Nepovinné: zadajte predponu pre názvy súborov zálohy', # MODIF
-	'help_restauration' => '<strong>Pozor!!!</strong> vytvorené zálohy <strong>nie sú vo formáte SPIPu:</strong>
-                Je zbytočné snažiť sa ich použiť pomocou nástroja na riadenie SPIPu.<br /><br />
-             Na každú obnovu databázy musíte použiť rozhranie programu <strong>phpmyadmin</strong> svojho
-             databázového servera: na karte <strong>"SQL"</strong> použite tlačidlo s názvom
-             <strong>"Umiestnenie textového súboru"</strong> na výber súboru zálohy
-             (ak treba, zaškrtnite možnosť "gzipped" (= vo formáte gzip)) potom kliknite na OK.<br /><br />
-             Zálohy <strong>xxxx.gz</strong> alebo <strong>xxx.sql</strong> obsahujú súbor vo formáte SQL s príkami,
-             ktoré sa používajú na <strong>odstránenie</strong> existujúcich tabuliek SPIPu a na ich <strong>nahradenie</strong>
-             údajmi v archívoch. Všetky  <strong>novšie</strong> údaje ako tie v zálohe sa preto <strong>STRATIA!</strong>', # MODIF
-	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format SQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>', # NEW
-	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).', # NEW
+	'help_cfg_generale' => 'Tieto nastavenia sa použijú na všetky zálohy – manuálne aj automatické',
+	'help_contenu' => 'Zvoľte si vlastnosti obsahu svojho súboru zálohy.',
+	'help_contenu_auto' => 'Zvoľte si obsah automatických záloh.',
+	'help_frequence' => 'Zadajte frekvenciu automatického zálohovania v dňoch',
+	'help_liste_tables' => 'Podľa predvolených nastavení sa exportujú všetky tabuľky okrem tabuliek @noexport@. Ak chcete presne určiť, ktoré tabuľky sa majú zálohovať, odznačte toto políčko, čím otvoríte ich zoznam.',
+	'help_mail_max_size' => 'Zadajte maximálnu veľkosť súboru databázy v MB, po ktorej prekročení nebude odoslaný e-mail (hodnotu je dobré si overiť u poskytovateľa e-mailu).',
+	'help_max_zip' => 'Súbor zálohy bude automaticky "zazipovaný", ak jeho veľkosť bude menšia ako limit. Zadajte limit v megabytoch (Limit je potrebný na to, aby sa zabránilo zrúteniu servera preto, že bol vytvorený príliš veľký súbor zip)',
+	'help_notif_active' => 'Ak chcete mať prehľad o každom automatickom spracovaní, aktivujte si zasielanie oznamov. Pri automatickom zálohovaní dostanete na e-mail vygenerovaný súbor, či nie je príliš veľký a oznam o tom, že zásuvný modul Poštár je aktivovaný.',
+	'help_notif_mail' => 'Zadajte adresy oddelené čiarkami ",". Budú pridané k adrese webmastera stránky.',
+	'help_obsolete' => 'Zadajte dĺžku trvania databáz v dňoch',
+	'help_prefixe' => 'Zadajte predponu, ktorá bude pripojená k názvu každého súboru databázy',
+	'help_restauration' => '<strong>Pozor!!!</strong> vytvorené zálohy <strong>nie sú vo formáte záloh SPIPu</strong> a nemôže sa na ne použiť nástroj SPIPu na obnovenie údajov.<br /><br />
+            
+
+                                    Na obnovenie databázy treba použiť rozhranie  <strong>phpmyadmin</strong> vášho
+             databázového servera.
+Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej databázy v SPIPe a ich <strong>nahradenie</ strong> údajmi z archívu. <strong>Novšie údaje </strong> ako tie v databáze by sa preto mohli <strong>STRATIŤ!</ strong>',
+	'help_sauvegarde_1' => 'Táto možnosť vám umožňuje zálohovať štruktúru obsahu databázy do súboru vo formáte SQL, ktorý bude uložený v priečinku tmp/dump/. Súbor sa bude volať <em>@prefixe@_aaaammjj_hhmmss.</em>. Predpona tabuliek bude zachovaná.',
+	'help_sauvegarde_2' => 'Automatické zálohovanie je aktivované(frekvencia v dňoch: @frequence@).',
 
 	// I
 	'info_sql_auteur' => 'Autor: ',
@@ -66,32 +62,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_donnees' => 'Údaje z tabuliek',
 	'label_frequence' => 'Frekvencia zálohovania',
-	'label_mail_max_size' => 'Maximálna veľkosť súborov pripájaných k e-mailom (v MB):', # MODIF
-	'label_max_zip' => 'Seuil des zips', # NEW
-	'label_nettoyage_journalier' => 'Activer le nettoyage journalier des archives', # NEW
+	'label_mail_max_size' => 'Limit na posielanie e-mailom',
+	'label_max_zip' => 'Maximum pre zipy',
+	'label_nettoyage_journalier' => 'Aktivovať denné čistenie archívov',
 	'label_notif_active' => 'Aktivovať oznamy',
-	'label_notif_mail' => 'Adresses email à notifier', # NEW
-	'label_obsolete_jours' => 'Zálohy sa pokladajú za neaktuálne po uplynutí:', # MODIF
-	'label_prefixe_sauvegardes' => 'Predpona zálohy:', # MODIF
+	'label_notif_mail' => 'E-mailová adresa na oznamy',
+	'label_obsolete_jours' => 'Zachovávanie záloh',
+	'label_prefixe_sauvegardes' => 'Predpona',
 	'label_sauvegarde_reguliere' => 'Aktivovať pravidelné zálohovanie',
-	'label_structure' => 'Štruktúra tabuliek:', # MODIF
+	'label_structure' => 'Štruktúra tabuliek',
 	'label_toutes_tables' => 'Zálohovať všetky tabuľky',
-	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes', # NEW
+	'legend_cfg_generale' => 'Všeobecné vlastnosti databáz',
 	'legend_cfg_notification' => 'Oznamy',
-	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques', # NEW
+	'legend_cfg_sauvegarde_reguliere' => 'Automatické spracúvanie',
 
 	// M
-	'message_aucune_sauvegarde' => 'Žiadne zálohy neexistujú.', # MODIF
-	'message_cleaner_sujet' => 'Nettoyage des sauvegardes', # NEW
-	'message_notif_cleaner_intro' => 'La suppression automatique des sauvegardes obsolètes (dont la date est antérieure à @duree@ jours) a été effectuée avec succès. Les fichiers suivants ont été supprimés : ', # NEW
-	'message_notif_sauver_intro' => 'La sauvegarde de la base @base@ a été effectuée avec succès par l\'auteur @auteur@.', # NEW
-	'message_sauvegarde_nok' => 'Erreur lors de la sauvegarde SQL de la base.', # NEW
-	'message_sauvegarde_ok' => 'La sauvegarde SQL de la base a été faite avec succès.', # NEW
+	'message_aucune_sauvegarde' => 'Na stiahnutie nie je pripravená žiadna záloha.',
+	'message_cleaner_sujet' => 'Vyčistenie databáz',
+	'message_notif_cleaner_intro' => 'Automatické vymazanie zastaralých databáz  (tých, ktoré majú @duree@ dní) bolo úspešne dokončené. Vymazané boli tieto súbory: ',
+	'message_notif_sauver_intro' => 'Zálohu databázy @base@ úspešne vytvoril(a) @auteur@.',
+	'message_sauvegarde_nok' => 'Chyba pri vytváraní zálohy databázy.',
+	'message_sauvegarde_ok' => 'Záloha databázy bola úspešne vytvorená.',
 	'message_sauver_sujet' => 'Záloha databázy @base@',
 	'message_telechargement_nok' => 'Chyba pri sťahovaní.',
 
 	// T
-	'titre_boite_historique' => 'História záloh', # MODIF
+	'titre_boite_historique' => 'Zálohy MySQL dostupné na stiahnutie',
 	'titre_boite_sauver' => 'Vytvoriť zálohu MySQL',
 	'titre_page_configurer' => 'Nastavenia modulu Automatická záloha',
 	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL',
