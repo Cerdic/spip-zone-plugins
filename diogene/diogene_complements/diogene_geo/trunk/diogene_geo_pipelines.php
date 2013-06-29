@@ -144,7 +144,7 @@ function diogene_geo_diogene_traiter($flux){
 			$nb_gis = sql_countsel('spip_gis_liens','id_gis='.intval($id_gis));
 			if($nb_gis == 0)
 				supprimer_gis($id_gis);
-				
+
 			/**
 			 * On vide ensuite les request sur les données géo
 			 */
@@ -181,6 +181,29 @@ function diogene_geo_diogene_traiter($flux){
 			);
 			if(!intval($id_gis))
 				$id_gis = insert_gis();
+
+			if(isset($datas['lon'])){
+				if($datas['lon'] > 180){
+					while($datas['lon'] > 180){
+						$datas['lon'] = $datas['lon'] - 360;
+					}
+				}else if($datas['lon'] <= -180){
+					while($datas['lon'] <= -180){
+						$datas['lon'] = $datas['lon'] + 360;
+					}
+				}
+			}
+			if(isset($datas['lat'])){
+				if($datas['lat'] > 90){
+					while($datas['lat'] > 90){
+						$datas['lat'] = $datas['lat'] - 180;
+					}
+				}else if($datas['lat'] <= -90){
+					while($datas['lat'] <= -90){
+						$datas['lat'] = $datas['lon'] + 180;
+					}
+				}
+			}
 			sql_updateq('spip_gis',$datas,'id_gis='.intval($id_gis));
 			if($objet && $id_objet)
 				lier_gis($id_gis, $objet, $id_objet);
