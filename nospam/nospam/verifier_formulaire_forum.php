@@ -56,6 +56,8 @@ function nospam_verifier_formulaire_forum_dist($flux){
 			if ($_SESSION['notabuse_check']){
 				unset($_SESSION['notabuse_check']);
 				$_SESSION['notabuse_checked'] = true;
+				// on leve une globale pour la fin de ce hit, a toute fin utile (puisque plus rien en $_SESSION)
+				$GLOBALS['notabuse_checked'] = true;
 			}
 		}
 		if (!count($flux['data'])){
