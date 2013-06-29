@@ -17,7 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_deja_spammee' => 'V tejto správe sú podozrivé odkazy, ktoré vyzerajú ako spam. Ďakujeme vám za ich odstránenie.',
 
 	// F
-	'forum_saisie_texte_info' => 'Na formátovanie správy tento formulár akceptuje iba skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Ak chcete robiť odseky, jednoducho vynechajte niekoľko prázdnych riadkov.'
+	'forum_saisie_texte_info' => 'Na formátovanie správy tento formulár akceptuje iba skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Ak chcete robiť odseky, jednoducho vynechajte niekoľko prázdnych riadkov.',
+
+	// I
+	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.', # NEW
+
+	// L
+	'label_message_licite' => 'Ceci n\'est pas un message abusif' # NEW
 );
 
 ?>

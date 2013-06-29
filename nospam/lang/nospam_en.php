@@ -17,7 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_deja_spammee' => 'This message contains suspicious links that look like SPAM. Thanks to delete them.',
 
 	// F
-	'forum_saisie_texte_info' => 'For the formatting of your message, this form only accepts SPIP shortcuts <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. To create paragraphs, simply leave blank lines.'
+	'forum_saisie_texte_info' => 'For the formatting of your message, this form only accepts SPIP shortcuts <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. To create paragraphs, simply leave blank lines.',
+
+	// I
+	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.', # NEW
+
+	// L
+	'label_message_licite' => 'Ceci n\'est pas un message abusif' # NEW
 );
 
 ?>

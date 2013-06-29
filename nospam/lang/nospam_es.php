@@ -17,7 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_deja_spammee' => 'Este mensaje contiene enlaces sospechos de ser SPAM. Gracias por eliminarlos.',
 
 	// F
-	'forum_saisie_texte_info' => 'Para aplicar el formato de su mensaje, este formulario no acepta más que los atajos SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Para crear párrafos, deje simplemente una línea vacía entre los mismos.'
+	'forum_saisie_texte_info' => 'Para aplicar el formato de su mensaje, este formulario no acepta más que los atajos SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Para crear párrafos, deje simplemente una línea vacía entre los mismos.',
+
+	// I
+	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.', # NEW
+
+	// L
+	'label_message_licite' => 'Ceci n\'est pas un message abusif' # NEW
 );
 
 ?>

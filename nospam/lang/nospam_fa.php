@@ -17,7 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_deja_spammee' => 'Ce message contient des liens suspects qui ressemblent à du SPAM. Merci de les retirer.', # NEW
 
 	// F
-	'forum_saisie_texte_info' => 'اين فرم ميان‌ برهاي اسپيپ  <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code>و  كد اچ.تي.ام.ال را <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> مي‌پذيرد . براي ساختن پارگراف فقط يك سطر خالي بگذاريد. '
+	'forum_saisie_texte_info' => 'اين فرم ميان‌ برهاي اسپيپ  <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code>و  كد اچ.تي.ام.ال را <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> مي‌پذيرد . براي ساختن پارگراف فقط يك سطر خالي بگذاريد. ',
+
+	// I
+	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.', # NEW
+
+	// L
+	'label_message_licite' => 'Ceci n\'est pas un message abusif' # NEW
 );
 
 ?>
