@@ -49,6 +49,36 @@ function nospam_verifier_formulaire_forum_dist($flux){
 			}
 		}
 
+		// on prend en compte la checkbox de confirmation
+		// si le flag en session est bien leve
+		if (_request('notabuse')){
+			session_start();
+			if ($_SESSION['notabuse_check']){
+				unset($_SESSION['notabuse_check']);
+				$_SESSION['notabuse_checked'] = true;
+			}
+		}
+		if (!count($flux['data'])){
+			if (nospam_check_ip_status($GLOBALS['ip'])!=='ok'){
+				session_start();
+				if ($_SESSION['notabuse_checked']){
+					// ok on retire de la session le check qui ne sert qu'une fois
+					unset($_SESSION['notabuse_checked']);
+					// et on laisse passer
+				}
+				else {
+					$flux['data']['texte'] = _T('nospam:info_ip_suspecte')."<br />
+					<span class='choix'>
+					<input type='checkbox' name='notabuse' value='1' id='notabuse'/> <label for='notabuse'>"
+					._T('nospam:label_message_licite')."</label>
+					</span>";
+					session_start();
+					$_SESSION['notabuse_check'] = true;
+				}
+			}
+		}
+
+
 		if (isset($flux['data']['texte']))
 			unset($flux['data']['previsu']);
 	}

@@ -14,6 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_spam_ip' => 'Trop de commentaires nuit à la qualité !',
 	'erreur_url_deja_spammee' => 'Ce message contient des liens suspects qui ressemblent à du SPAM. Merci de les retirer.',
 
+	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.',
+	'label_message_licite' => 'Ceci n\'est pas un message abusif',
+
 	// F
 	'forum_saisie_texte_info' => 'Pour la mise en forme de votre message, ce formulaire n\'accepte que les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.'
 );
