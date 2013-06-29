@@ -74,8 +74,8 @@ function nospam_verifier_formulaire_forum_dist($flux){
 					<input type='checkbox' name='notabuse' value='1' id='notabuse'/> <label for='notabuse'>"
 					._T('nospam:label_message_licite')."</label>
 					</span>";
-					session_start();
 					$_SESSION['notabuse_check'] = true;
+					spip_log("notabuse_check sur IP ".$GLOBALS['ip'],"nospam");
 				}
 			}
 		}
