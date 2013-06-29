@@ -76,6 +76,28 @@ function gis_modifier($id_gis, $set=null) {
 		$set
 	);
 
+	if(isset($c['lon'])){
+		if($c['lon'] > 180){
+			while($c['lon'] > 180){
+				$c['lon'] = $c['lon'] - 360;
+			}
+		}else if($c['lon'] <= -180){
+			while($c['lon'] <= -180){
+				$c['lon'] = $c['lon'] + 360;
+			}
+		}
+	}
+	if(isset($c['lat'])){
+		if($c['lat'] > 90){
+			while($c['lat'] > 90){
+				$c['lat'] = $c['lat'] - 180;
+			}
+		}else if($c['lat'] <= -90){
+			while($c['lat'] <= -90){
+				$c['lat'] = $c['lon'] + 180;
+			}
+		}
+	}
 	if ($err = objet_modifier_champs('gis', $id_gis,
 		array(
 			//'nonvide' => array('nom' => _T('info_sans_titre')),

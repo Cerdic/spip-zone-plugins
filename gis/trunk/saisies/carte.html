@@ -59,10 +59,12 @@ var geocoder;]
 			var f = geocoder.geocode(data);
 		}]
 		var zoom = map.getZoom();
+		if(data.lng <= -180) data.lng = data.lng+360
+		else if(data.lng > 180) data.lng = data.lng-360;
 		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
 		if(action == 'click'){
 			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(data.lng);
+			$('#champ_#ENV{champ_lon,lon}').val(data.lng); 
 			annuler_geocoder = 1;
 			form_map.panTo(data);
 			marker.setLatLng(data);
