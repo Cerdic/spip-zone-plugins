@@ -47,8 +47,12 @@ function creer_jeton($form, $qui=NULL) {
 /**
  * Verifie une cle de jeton pour un formulaire
  *
+ * @param string $jeton
+ *   cle recue
  * @param string $form nom du formulaire
- * @param string cle recue
+ *   nom du formulaire
+ * @param string $qui
+ *   identifiant du visiteur a qui est attribue le jeton
  * @return bool cle correcte ?
  */
 function verifier_jeton($jeton, $form, $qui=NULL) {
