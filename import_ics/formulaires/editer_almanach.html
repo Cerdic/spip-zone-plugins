@@ -4,6 +4,19 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+[(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie]
+#SET{tableau_type_evenement, #ARRAY}
+
+
+[(#REM)Attention astuce inside pour que les clés numériques ne soient pas réindexées, on inverse l'ordre d'intégration dasn le tableau et ensuite on flip le tableau]
+<BOUCLE_groupe(GROUPES_MOTS){titre=Type}>
+<BOUCLE_mots(MOTS){id_groupe}>
+#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_merge{#ARRAY{#TITRE,#ID_MOT}}
+</BOUCLE_mots>
+</BOUCLE_groupe>
+[(#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_flip})]
+
+
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -14,13 +27,19 @@
 				label=<:almanach:label_titre:>,
 				explication=<:almanach:explication_titre:> })]
 
-			[(#SAISIE{input, url, obligatoire=oui,
+			[(#SAISIE{url, url, obligatoire=oui,
 				label=<:almanach:label_url:>,
 				explication=<:almanach:explication_url:> })]
 
 			[(#SAISIE{input, id_article, obligatoire=oui,
 				label=<:almanach:label_id_article:>,
 				explication=<:almanach:explication_id_article:> })]
+
+			[(#SAISIE{selection, id_mot, obligatoire=oui,
+				label=<:seminaire:choix_mot:>,
+				explication=<:almanach:type_evenement:>,
+				datas=#GET{tableau_type_evenement}	
+			})]
 
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

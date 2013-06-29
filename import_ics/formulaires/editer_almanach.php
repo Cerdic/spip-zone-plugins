@@ -91,7 +91,7 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
 function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	//version de base de la fabrique
 	//return formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
-	$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
+	$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article', 'id_mot'));
 	
 	//verification supplementaires
 
@@ -125,7 +125,13 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
 
-	$config = array("unique_id"=>"","url"=>_request('url'));
+
+	#on associe le mot à l'almanach
+	$id_mot = _request('id_mot');
+	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
+
+	#configuration nécessaire à la récupération
+	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
 	//$cal->setConfig( 'filename', $tmp );
 	$cal->parse();
@@ -160,8 +166,13 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	#on insere les infos des événements dans la base 
     $id_article = _request('id_article');
 	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0'));
+	
 	#on associe l'évéenement à l'almanach
 	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
+	#on associe l'événement à son mot
+	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
+
+
  }
 
 	return $chargement;
