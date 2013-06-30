@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_zone' => 'Vytvoriť novú oblasť',
 
 	// D
-	'descriptif' => 'Popis',
+	'descriptif' => 'Opis',
 
 	// E
 	'explication_creer_htaccess' => 'Táto možnosť bráni čítaniu pripojených súborov, ak text, ku ktorému sa pripoja, ešte nie je publikovaný',
