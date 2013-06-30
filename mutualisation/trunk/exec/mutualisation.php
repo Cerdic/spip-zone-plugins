@@ -76,9 +76,6 @@ function exec_mutualisation_dist() {
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon(importer_charset($meta['nom_site'], $meta['charset']), $v);
-			// on crée une variable pour l'alias du site qu'on pourra par exemple ajouter en id à la ligne correspondante au site.
-			// Il faudra trouver une astuce pour créer une ancre dans le tableau des plugins utilisés.
-			$alias_site = $alias[$v] ;
 			$stats = intval($meta['popularite_total']);
 			if ($cfg = @unserialize($meta['plugin'])) {
 				$plugins = array_keys($cfg);
@@ -123,7 +120,7 @@ function exec_mutualisation_dist() {
 		</script>';
 
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias_site'>
+			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>
 			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;'>$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
@@ -154,7 +151,7 @@ function exec_mutualisation_dist() {
 	$site = array();
 		foreach ($lsplugs as $plugin => $c){
 			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td>"
-				."<td>".$versionplug[$plugin]."</td><td>".join(', ', $c).'</td></tr>';
+				."<td>".$versionplug[$plugin]."</td><td>".join(', ', ancre_site($c)).'</td></tr>';
 		}
 		krsort($plnum);
 		$page .= join('', $plnum);
@@ -334,4 +331,13 @@ function mutualisation_lister_sites() {
 	return $sites;
 }
 */
+
+// faire une ancre vers le tableau des sites en haut de page
+function ancre_site($c) {
+	foreach ($c as $key => $value) {
+		$c[$key] = "<a href='#$value'>" . $value . "</a>";
+	}
+	return $c;
+}
+
 ?>
