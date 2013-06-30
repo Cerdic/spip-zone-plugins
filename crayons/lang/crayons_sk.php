@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Efekty',
 	'explication_exec_autorise' => 'Stránky, na ktorých je povolené vykonávať zmeny
   (?exec=...): (, na oddelenie viacerých stránok, * pre všetky).',
-	'explication_introduction_article' => 'Ako úvod článku sa zobrazí popis článku, ak nejaký existuje, v opačnom prípade sa zobrazí prvých 600 znakov (úvodného odseku a textu).',
+	'explication_introduction_article' => 'Ako úvod článku sa zobrazí opis článku, ak nejaký existuje, v opačnom prípade sa zobrazí prvých 600 znakov (úvodného odseku a textu).',
 	'explication_reduire_logo' => 'Zmenšiť veľkosť loga, ak presahuje
   maximálnu veľkosť (v pixeloch). Príklad: 100 (0 = nikdy).',
 
