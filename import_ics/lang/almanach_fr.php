@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_id_article' => 'Article d\'accueil de l\'almanach',
+	'label_id_mot' => 'Les événements de cet almanach sont, par défaut, du type :',
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
 
@@ -44,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_almanachs_rubrique' => 'Almanachs de la rubrique',
 	'titre_langue_almanach' => 'Langue de cet almanach',
 	'titre_logo_almanach' => 'Logo de cet almanach',
+	'type_evenement' => 'Tous les événements de l\'almanach auront le même type. Vous pourrez modifier cela individuellement.',
 
 	//U
 	'un_evenement' => '@nb@ événement',
