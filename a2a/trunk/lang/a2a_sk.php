@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_navigateur' => 'Ak sa chcete orientovať v stromovej štruktúre stránky, aby ste mohli vybrať, články, na ktoré chcete vytvoriť odkaz, kliknite na tlačidlo [Pridať].',
 	'explication_type_obligatoire' => 'Môžete zadať typ odkazov',
 	'explication_types_differents' => 'Zaškrtnite toto políčko, ak chcete niekoľko krát vytvoriť prepojenie na dva rovnaké články a hocikedy mať možnosť zmeniť jeho typ',
-	'explication_types_liaisons' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
+	'explication_types_liaisons' => 'Môžete definovať  typy vzťahov; prosím uveďte jeden vzťah na riadok,  napíšte čiarku a doplňte opis. Prázdny riadok znamená predvolenú hodnotu. Opis môže byť jazykový reťazec.',
 
 	// I
 	'info_nombre_articles_lies' => '@nb@ prepojených článkov',
