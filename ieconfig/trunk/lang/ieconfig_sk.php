@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_exporter' => 'Exportovať nastavenia?',
 	'label_ieconfig_export' => 'Všeobecné možnosti exportu',
 	'label_ieconfig_export_choix' => 'Čo chcete?',
-	'label_ieconfig_export_description' => 'Popis:',
+	'label_ieconfig_export_description' => 'Opis:',
 	'label_ieconfig_export_nom' => 'Názov exportu:',
 	'label_ieconfig_import_choix_fichier' => 'Výber súboru na nahratie',
 	'label_ieconfig_import_fichier' => 'Súbor na nahratie:',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_configuration_identique' => 'Nastavenia v tomto súbore sú rovnaké ako vaše aktuálne nastavenia.',
-	'texte_description' => 'Popis:',
+	'texte_description' => 'Opis:',
 	'texte_ieconfig_export_explication' => 'Váš export môžete uložiť lokálne vo formáte YAML do priečinka <i>tmp/ieconfig/</i> alebo si ho stiahnuť.',
 	'texte_importer_configuration' => 'Táto možnosť vám umožňuje obnoviť databázu vytvorenú pred vykonaním zmien v nastaveniach alebo nahrať nastavenia, ktoré poskytuje zásuvný modul. Túto funkciu používajte opatrne: <strong>zmeny, potenciálne straty sa nedajú vrátiť späť.</strong>',
 	'texte_nom' => 'Názov:',
