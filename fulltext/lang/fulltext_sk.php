@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'des_utilisations' => '@nb@ použití',
-	'descriptif' => 'Popis',
+	'descriptif' => 'Opis',
 	'documents_proteges' => 'Chránené dokumenty',
 
 	// E
