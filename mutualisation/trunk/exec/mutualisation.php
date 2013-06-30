@@ -76,6 +76,9 @@ function exec_mutualisation_dist() {
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon(importer_charset($meta['nom_site'], $meta['charset']), $v);
+			// on crée une variable pour l'alias du site qu'on pourra par exemple ajouter en id à la ligne correspondante au site.
+			// Il faudra trouver une astuce pour créer une ancre dans le tableau des plugins utilisés.
+			$alias_site = $alias[$v] ;
 			$stats = intval($meta['popularite_total']);
 			if ($cfg = @unserialize($meta['plugin'])) {
 				$plugins = array_keys($cfg);
@@ -120,7 +123,7 @@ function exec_mutualisation_dist() {
 		</script>';
 
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)'>
+			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias_site'>
 			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;'>$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
@@ -136,6 +139,7 @@ function exec_mutualisation_dist() {
 	}
 	$page .= "</tbody></table>";
 
+
 	if ($lsplugs) {
 		$page .= "<br /><br /><table style='clear:both;'>
 	<thead>
@@ -147,20 +151,67 @@ function exec_mutualisation_dist() {
 		</tr>
 	</thead>
 	<tbody>";
-		foreach ($lsplugs as $plugin => $c)
+	$site = array();
+		foreach ($lsplugs as $plugin => $c){
 			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td>"
 				."<td>".$versionplug[$plugin]."</td><td>".join(', ', $c).'</td></tr>';
+		}
 		krsort($plnum);
 		$page .= join('', $plnum);
 		$page .= "</tbody></table>\n";
 
 
 		$inutile = array();
-		foreach ( glob(_DIR_PLUGINS.'*/plugin.xml') as $pl) {
-			if (preg_match(',<prefix>([^<]+),ims', file_get_contents($pl), $r)
-			AND !$lsplugs[strtolower(trim($r[1]))])
-				$inutile[] = trim($r[1]);
+		$extract = array();
+		$list = array();
+		// En spip 3, avec SVP, on liste les plugins dans des sous-répertoires.
+		// Ca peut aller jusqu'a 3 sous-répertoires.
+		// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
+
+		// correspond à plugins/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
 		}
+		// correspond à plugins/auto/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
+		}
+		// correspond à plugins/auto/nom_plugin/x.y.z/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
+		}
+
+		// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
+		foreach ($list as $value) {
+			$extract[] = str_replace(array('plugin.xml','paquet.xml'), '', $value);
+		}
+		// On dédoublonne
+		$extract = array_unique($extract);
+		foreach ($extract as $url) {
+			// Et on refait une recherche pour paquet.xml d'abord
+			if(glob($url . 'paquet.xml', GLOB_NOSORT)) {
+				$result = glob($url . 'paquet.xml', GLOB_NOSORT);		
+				$result = $result[0] ;
+				// dans paquet.xml on cherche la valeur de l'attribut prefix
+				if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
+					AND !$lsplugs[strtolower(trim($r[1]))])
+						$inutile[] = trim($r[1]);
+			} else { // Si pas de paquet.xml, on cherche plugin.xml
+				$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
+				$result = $result[0] ;
+				// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
+				if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
+					AND !$lsplugs[strtolower(trim($r[1]))])
+						$inutile[] = trim($r[1]);
+			}
+		}
+
 		if ($inutile) {
 			$page .= "<p>"._L('Plugins inutilis&#233;s :')." ".join(', ', $inutile)."</p>";
 		}
@@ -175,7 +226,7 @@ function exec_mutualisation_dist() {
 	$page = str_replace('</head>', '
 		<style type="text/css">
 		a {color:#5a3463;}
-		table {border-collapse: collapse; border: 1px solid #999;}
+		table {border-collapse: collapse; border: 1px solid #999; width: 100%;}
 		tr {vertical-align:top;border: 1px solid #999;}
 		.tr0 {background-color:#ddded5}
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
