@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_cacher_defaut' => 'Skryť, keď nie je vybratá licencia?',
 	'noisette_hauteur_logo' => 'Maximálna výška loga (v pixeloch):',
 	'noisette_largeur_logo' => 'Maximálna šírka loga (v pixeloch):',
-	'noisette_lien' => 'Zobraziť odkaz na popis licencie?',
+	'noisette_lien' => 'Zobraziť odkaz na opis licencie?',
 	'noisette_logo' => 'Zobraziť logo licencie?',
 	'noisette_nom_licence' => 'Zobraziť názov licencie?',
 
