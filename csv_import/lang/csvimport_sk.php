@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'delimiteur_indefini' => 'Oddeľovač nie je definovaný',
-	'description_table_introuvable' => 'Popis tabuľky sa nedá nájsť',
+	'description_table_introuvable' => 'Opis tabuľky sa nedá nájsť',
 
 	// E
 	'erreurs_ajout_base' => 'Pri vkladaní do databázy vzniklo @nb@ chýb.',
