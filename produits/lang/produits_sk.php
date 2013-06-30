@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'produit_bouton_ajouter' => 'Pridať výrobok',
-	'produit_champ_descriptif_label' => 'Krátky popis',
+	'produit_champ_descriptif_label' => 'Krátky opis',
 	'produit_champ_prix_ht_label' => 'Cena bez dane',
 	'produit_champ_prix_ttc_label' => 'Cena s DPH',
 	'produit_champ_reference_label' => 'Referencie',
