@@ -49,10 +49,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'meta_author' => 'Autor(ka):',
 	'meta_copyright' => 'Autorské práva:',
-	'meta_description' => 'Popis:',
+	'meta_description' => 'Opis:',
 	'meta_keywords' => 'Kľúčové slová:',
-	'meta_page_description_sommaire_value' => 'Hodnota popisu stránky + hodnota tagu zhrnutie',
-	'meta_page_description_value' => 'Hodnota popisu stránky',
+	'meta_page_description_sommaire_value' => 'Hodnota opisu stránky + hodnota tagu Zhrnutie',
+	'meta_page_description_value' => 'Hodnota opisu stránky',
 	'meta_page_title_sommaire_value' => 'Hodnota nadpisu stránky + hodnota tagu Zhrnutie',
 	'meta_page_title_value' => 'Hodnota nadpisu stránky',
 	'meta_robots' => 'Roboty:',
