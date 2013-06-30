@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'ppp_description' => 'Porte Plume všade sa používa na pridávanie panela úprav k poliam POPIS, PEREX a PS',
+	'ppp_description' => 'Porte Plume všade sa používa na pridávanie panela úprav k poliam OPIS, PEREX a PS',
 	'ppp_nom' => 'Porte Plume všade',
 	'ppp_slogan' => 'Zobraziť Porte Plume pri väčšine textových polí'
 );
