@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_class' => 'Pridajte do objektu triedy CSS
 		a oddeľte ich medzerou. Napríklad: "inserer_barre_edition" pre blok
 		so zásuvným modulom Porte Plume',
-	'precisions_pour_datas' => 'Niektoré typy polí si vyžadujú zoznam akceptovaných hodnôt: každú zadajte na riadok, za ktorým dáte čiarku a popis.  Prázdny riadok znamená predvolenú hodnotu. Popis môže byť jazykový reťazec.',
+	'precisions_pour_datas' => 'Niektoré typy polí si vyžadujú zoznam akceptovaných hodnôt: na jeden riadok zadajte jednu hodnotu, oddeľte ju čiarkou a zadajte jej opis.  Prázdny riadok znamená predvolenú hodnotu. Opis môže byť jazykový reťazec.',
 	'precisions_pour_explication' => 'Môžete zadať viac informácií o vstupe 
 		Môže byť jazykový reťazec "plugin:chaine".',
 	'precisions_pour_label' => 'Môže byť jazykový reťazec «plugin:chaine».',
