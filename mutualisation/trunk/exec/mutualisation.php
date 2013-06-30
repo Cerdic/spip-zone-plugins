@@ -210,7 +210,7 @@ function exec_mutualisation_dist() {
 		}
 
 		if ($inutile) {
-			$page .= "<p>"._L('Plugins inutilis&#233;s :')." ".join(', ', $inutile)."</p>";
+			$page .= "<p><strong>"._L('Plugins inutilis&#233;s :')."</strong> ".join(', ', $inutile)."</p>";
 		}
 	}
 
@@ -238,6 +238,7 @@ function exec_mutualisation_dist() {
 		.erreur {color:red;font-weight:bold;}
 		.taille {text-align: right;}
 		.loading {background: url(../mutualisation/images/loading.gif) left center no-repeat}
+		p { margin-top: 1em;}
 		</style>
 		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
 		<script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
