@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'apercu' => 'Aperçu', # NEW
+	'apercu' => 'Vorschau',
 
 	// B
 	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.', # NEW
