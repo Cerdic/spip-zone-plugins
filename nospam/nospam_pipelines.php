@@ -249,6 +249,10 @@ function nospam_formulaire_verifier($flux) {
 			OR _request('email_nobot')
 			OR (!verifier_jeton($jeton, $form))
 		) {
+			if (_request('email_nobot'))
+				spip_log('email_nobot rempli : '._request('email_nobot'),'nospam');
+			if (_request('nobot'))
+				spip_log('nobot rempli : '._request('email_nobot'),'nospam');
 			#spip_log('pas de jeton pour '.var_export($flux,true),'nospam');
 			$flux['data']['message_erreur'] .= _T('nospam:erreur_jeton');
 			if ($form == 'forum')
