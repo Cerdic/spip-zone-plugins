@@ -85,7 +85,7 @@ function compositions_lister_disponibles($type, $informer=true){
 
 	// rechercher les skel du type article-truc.html
 	// truc ne doit pas commencer par un chiffre pour eviter de confondre avec article-12.html
-	$match = "/($type_match)("._COMPOSITIONS_MATCH.")?[.]html$";
+	$match = "($type_match)("._COMPOSITIONS_MATCH.")?[.]html$";
 
 	// lister les compositions disponibles
 	$liste = find_all_in_path(compositions_chemin(),$match);
@@ -93,7 +93,7 @@ function compositions_lister_disponibles($type, $informer=true){
 	if (count($liste)){
 		foreach($liste as $s) {
 			$base = preg_replace(',[.]html$,i','',$s);
-			if (preg_match(",$match,ims",$s,$regs)
+			if (preg_match(",$match,ims",basename($s),$regs)
 			  AND ($composition = !$informer
 				OR $composition = compositions_charger_infos($base)))
 				$res[$regs[1]][$regs[3]] = $composition;
