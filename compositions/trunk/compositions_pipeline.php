@@ -58,21 +58,23 @@ function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NU
  * @return array
  */
 function compositions_styliser($flux){
-	include_spip('compositions_fonctions');
 	// en contexte Z, c'est Z ou Z-core qui stylise (on ne n'en occupe donc pas ici)
-	if (compositions_styliser_auto() AND !defined('_DIR_PLUGIN_Z') AND !defined('_DIR_PLUGIN_ZCORE')){
-		$type = $flux['args']['fond']; // on fait l'approximation fond=type
-		// si le type n'est pas l'objet d'une composition, ne rien faire
-		if (in_array($type,compositions_types())){
-			$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
-			$serveur = $flux['args']['connect'];
+	if(!defined('_DIR_PLUGIN_Z') AND !defined('_DIR_PLUGIN_ZCORE')){
+		include_spip('compositions_fonctions');
+		if (compositions_styliser_auto()){
+			$type = $flux['args']['fond']; // on fait l'approximation fond=type
+			// si le type n'est pas l'objet d'une composition, ne rien faire
+			if (in_array($type,compositions_types())){
+				$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
+				$serveur = $flux['args']['connect'];
 
-			$ext = $flux['args']['ext'];
-			$_id_table = id_table_objet($type);
+				$ext = $flux['args']['ext'];
+				$_id_table = id_table_objet($type);
 
-			if ($id = $contexte[$_id_table] AND $composition = compositions_determiner($type,$id,$serveur)){
-				if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
-					$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+				if ($id = $contexte[$_id_table] AND $composition = compositions_determiner($type,$id,$serveur)){
+					if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
+						$flux['data'] = substr($fond, 0, - strlen(".$ext"));
+					}
 				}
 			}
 		}
