@@ -3,6 +3,7 @@ header( 'charset:UTF-8' );
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 function exec_mutualisation_dist() {
 	global $auteur_session;
 	$ustart = memory_get_peak_usage(true);
@@ -19,15 +20,8 @@ function exec_mutualisation_dist() {
 	$lister_sites = charger_fonction('lister_sites','mutualisation');
 	$sites = $lister_sites();
 
-;
-	foreach (glob('../svn.revision') as $value) {
-		if (preg_match(',<origine>([^<]+),ims', file_get_contents($value), $branche_numero)) {
-			$branche_numero = trim($branche_numero[1]);
-			$branche_numero = str_replace('svn://trac.rezo.net/spip/tags/spip-', '', $branche_numero);
-			$branche_nom = "spip-" . $branche_numero ;
-			$version_spip = intval($branche_numero) ;
-		}
-	}
+	$branche_nom = "spip-" . $GLOBALS['spip_version_branche'] ;
+	$version_spip = intval($GLOBALS['spip_version_branche']) ;
 
 
 	if ($version_spip == 3) {
@@ -299,7 +293,7 @@ function exec_mutualisation_dist() {
 		$page .= "<div class='toolbar-block'>";
 		$page .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>" ;
 		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $branche_numero . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>";
 		$page .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>";
 		$page .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>";
 		$page .= "</div></div>" ;
