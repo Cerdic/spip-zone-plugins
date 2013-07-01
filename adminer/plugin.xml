@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Adminer</nom>
-	<slogan>Utiliser Adminer v.3.7.1 pour explorer la base SQL</slogan>
+	<slogan>Utiliser Adminer pour explorer la base SPIP</slogan>
 	<auteur>Jakub Vrana (http://www.vrana.cz/), mis en plugin par Fil</auteur>
 	<version>3.7.1.5</version>
 	<etat>stable</etat>
@@ -13,7 +13,7 @@
 	<icon>adminer-64.png</icon>
 	<options>adminer_options.php</options>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
-	<categorie>outils</categorie>
+	<categorie>outil</categorie>
 	<bouton id="adminer" parent="bando_administration">
 		<titre>Adminer</titre>
 		<icone>images/adminer-16.png</icone>
