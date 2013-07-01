@@ -16,8 +16,8 @@
 ></video>	
 <script>
 (function($) {   
-  var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',{
-      [startVolume: (#ENV{volume}),]
+  var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',{       
+      [(#ENV{volume}|oui)  [startVolume:(#ENV{volume}|floatval),]]   
   });  
   [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
 })(jQuery); 

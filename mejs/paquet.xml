@@ -1,7 +1,7 @@
 <paquet
 	prefix="mejs"
 	categorie="multimedia"
-	version="0.1.1"
+	version="0.1.2"
 	etat="dev"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/mejs-64.png"

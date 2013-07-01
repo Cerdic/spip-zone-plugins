@@ -16,10 +16,10 @@
 (function($) {
   var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',
   {
-    [audioWidth: (#ENV{largeur}),]
-    [audioHeight: (#ENV{hauteur}),] 
-    [startVolume: (#ENV{volume}),]
-    [loop: (#ENV{loop}|oui)true,]            
+    [(#ENV{largeur}|oui) [audioWidth:(#ENV{largeur}|intval),]]
+    [(#ENV{hauteur}|oui) [audioHeight:(#ENV{hauteur}|intval),]] 
+    [(#ENV{volume}|oui)  [volume:(#ENV{volume}|floatval),]]     
+    [(#ENV{loop}|oui)    loop:true,]            
   }
   );
   [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
