@@ -7,7 +7,7 @@ function mosaique_declarer_champs_extras($champs = array()) {
       'options' => array(
             'nom' => 'mosaique',
             'label' => '',
-            'sql' => "varchar(255) NOT NULL DEFAULT ''",
+            'sql' => "varchar(1000) NOT NULL DEFAULT ''",
             'defaut' => '',// Valeur par defaut
             'env' => 'oui',
       ),
