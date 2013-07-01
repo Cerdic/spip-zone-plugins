@@ -1,0 +1,39 @@
+a {color:#5a3463;}
+table {border-collapse: collapse; border: 1px solid #999; width: 100%;}
+tr {vertical-align:top;border: 1px solid #999;}
+.tr0 {background-color:#ddded5}
+thead tr {font-weight:bold;background-color:#333;color:#fff;}
+thead tr input {font-weight:normal;font-size:0.9em;}
+thead tr .unite {font-weight:normal;font-size:0.9em;}
+td {text-align:left;border-left: 1px solid #ccc;}
+td em {color:#aaa;}
+#minipres{width:auto;}
+.upgrade {text-align: center; padding:0 .5em; display:inline;}
+.upgrade div {display:inline;}
+.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
+.erreur {color:red;font-weight:bold;}
+.taille {text-align: right;}
+.loading {background: url(images/loading.gif) left center no-repeat}
+p { margin-top: 1em;}
+
+.debug {
+	position: fixed;
+	display: block;
+	width: 90%;
+	min-height: 30px;
+	bottom: 0;
+	clear: both;
+	padding: 0 5%;
+	margin:0 -5%;
+	background-color: white;
+	border-top: 2px solid grey;
+	font-size: 0.825em;
+}
+.debug p {
+	float: left;
+	margin: 0;
+	padding: 0.5em 2%;
+	border-right: 1px solid grey;
+	height: 100%;
+	width: 45% ;
+}
