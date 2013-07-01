@@ -19,13 +19,22 @@ function exec_mutualisation_dist() {
 	$lister_sites = charger_fonction('lister_sites','mutualisation');
 	$sites = $lister_sites();
 
-	if (is_dir('../plugins-dist')) {
-		$version_spip = 3 ;
+;
+	foreach (glob('../svn.revision') as $value) {
+		if (preg_match(',<origine>([^<]+),ims', file_get_contents($value), $branche_numero)) {
+			$branche_numero = trim($branche_numero[1]);
+			$branche_numero = str_replace('svn://trac.rezo.net/spip/tags/spip-', '', $branche_numero);
+			$branche_nom = "spip-" . $branche_numero ;
+			$version_spip = intval($branche_numero) ;
+		}
+	}
+
+
+	if ($version_spip == 3) {
 		$url_stats = "ecrire/?exec=stats_visites";
 		$url_compresseur = "ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur";
 		$url_admin_plugin = "ecrire/?exec=admin_plugin";
-	} else {
-		$version_spip = 2;
+	} else if ($version_spip == 2){
 		$url_stats = "ecrire/?exec=statistiques_visites";
 		$url_compresseur = "ecrire/?exec=config_fonctions#configurer-compresseur";
 		$url_admin_plugin = "ecrire/?exec=admin_plugin";
@@ -34,8 +43,7 @@ function exec_mutualisation_dist() {
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
 
-	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version')
-		. ' ' . $GLOBALS['spip_version_base'].')</em>');
+	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>(' . _T('version') . ' ' . $GLOBALS['spip_version_base'].')</em>');
 
 	$page .= '<script type="text/javascript">
 	//<![CDATA[
@@ -291,7 +299,8 @@ function exec_mutualisation_dist() {
 		$page .= "<div class='toolbar-block'>";
 		$page .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>" ;
 		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>Version</b> <span>PHP " . phpversion() . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $branche_numero . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>";
 		$page .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>";
 		$page .= "</div></div>" ;
 
