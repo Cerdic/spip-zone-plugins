@@ -274,6 +274,7 @@ function exec_mutualisation_dist() {
 		<link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
 		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
 		<script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
+		<script src="../mutualisation/mutualisation_toolbar.js" type="text/javascript"></script>
 		</head>
 		', $page);
 
@@ -285,23 +286,40 @@ function exec_mutualisation_dist() {
 	$page_load_time = number_format($time, 3);
 
 	if (isset($_GET['debug'])) {
-		$page .= "<div class='debug'>";
-		$page .= "<p><strong>Mémoire :</strong> " ;
-		$page .= "<em>Au début :</em> " . memoryUsage($ustart) . " | " ;
-		$page .= "<em>À la fin :</em> " . memoryUsage($uend) . " | " ;
-		$page .= "<em>Différence :</em> " . memoryUsage($udiff) ;
-		$page .= "</p>" ;
-		$page .= "<p><strong>Temps d'exécution :</strong> " ;
-		$page .= "<em>Début du script :</em> " . date("H:i:s", $timestart) . " | " ;
-		$page .= "<em>Fin du script :</em> " . date("H:i:s", $timeend) . " | " ;
-		$page .= "<em>Script exécuté en </em> " . $page_load_time . "sec";
-		$page .= "</p>" ;
-		$page .= "<p><strong>Mémoires allouées PHP :</strong> " . $memory_limit . "</p>";
-		$page .= "<p><strong>Plugins :</strong> " ;
-		$page .= ($nombre_plugins_inutiles + $nombre_plugins ) . " | " ;
-		$page .= $nombre_plugins . " utilisés | " ;
-		$page .= $nombre_plugins_inutiles . " inutilisés | " ;
-		$page .= "</p>" ;
+		$page .= "<div class='toolbar'>";
+
+		$page .= "<div class='toolbar-block'>";
+		$page .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>" ;
+		$page .= "<div class='toolbar-info'>" ;
+		$page .= "<div class='toolbar-info-element'><b>Version</b> <span>PHP " . phpversion() . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>";
+		$page .= "</div></div>" ;
+
+		$page .= "<div class='toolbar-block'>";
+		$page .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>" ;
+		$page .= "<div class='toolbar-info'>" ;
+		$page .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>";
+		$page .= "</div></div>" ;
+
+		$page .= "<div class='toolbar-block'>";
+		$page .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>" ;
+		$page .= "<div class='toolbar-info'>" ;
+		$page .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>";
+		$page .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>";
+		$page .= "</div></div>" ;
+
+		$page .= "<div class='toolbar-block'>";
+		$page .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " ms</span></div>" ;
+		$page .= "<div class='toolbar-info'>" ;
+		$page .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>";
+		$page .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " ms</span></div>";
+		$page .= "</div></div>" ;
+
 		$page .= "</div>" ;
 
 	}

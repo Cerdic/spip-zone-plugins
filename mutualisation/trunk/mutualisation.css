@@ -16,24 +16,76 @@ td em {color:#aaa;}
 .loading {background: url(images/loading.gif) left center no-repeat}
 p { margin-top: 1em;}
 
-.debug {
+.toolbar {
 	position: fixed;
 	display: block;
 	width: 90%;
-	min-height: 30px;
+	min-height: 38px;
 	bottom: 0;
 	clear: both;
 	padding: 0 5%;
 	margin:0 -5%;
 	background-color: white;
 	border-top: 2px solid grey;
-	font-size: 0.825em;
+	font-size: 0.9em;
 }
-.debug p {
+.toolbar .toolbar-block {
 	float: left;
 	margin: 0;
-	padding: 0.5em 2%;
+	padding: 0;
 	border-right: 1px solid grey;
-	height: 100%;
-	width: 45% ;
+	height: 38px;
+	position: relative;
+}
+
+.toolbar .toolbar-block .toolbar-icon {
+	height: 28px;
+	line-height: 28px;
+	padding: 5px;
+}
+.toolbar .toolbar-block .toolbar-icon [class^=icon] {
+	width: 28px;
+	height: 28px;
+	background-position: middle;
+	background-repeat: no-repeat;
+	display: block;
+	float: left;
+}
+.toolbar .toolbar-block .toolbar-icon [class^=icon] + span {
+	height: 28px;
+	line-height: 28px;
+	padding: 0 5px;
+}
+
+.toolbar .toolbar-block .toolbar-info {
+	display:none;
+	bottom: 38px;
+	position: absolute;
+	width: 220px;
+	padding: 10px;
+	background-color: white;
+}
+.toolbar .toolbar-block .toolbar-info .toolbar-info-element {
+	overflow: hidden;
+}
+.toolbar .toolbar-block .toolbar-info .toolbar-info-element span {
+	float: left;
+	width: auto;
+}
+.toolbar .toolbar-block .toolbar-info .toolbar-info-element b {
+	width: 110px;
+	float: left;
+	clear: left;
+}
+.icon-time {
+	background-image: url(images/icon-time-grey.png);
+}
+.icon-memory {
+	background-image: url(images/icon-memory-grey.png);
+}
+.icon-php_info {
+	background-image: url(images/icon-php_info-grey.png);
+}
+.icon-plugins {
+	background-image: url(images/icon-plugins-grey.png);
 }
