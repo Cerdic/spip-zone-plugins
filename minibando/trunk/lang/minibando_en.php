@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mode_debug' => 'Debug mode',
 	'mode_inclure' => 'Inclusion mode',
 	'mode_profile' => 'Profiling mode',
+	'mode_traduction' => 'Mode traduction', # NEW
 
 	// T
 	'titre_debug' => 'Debug',
