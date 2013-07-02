@@ -27,10 +27,13 @@ function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$ve
 
 }
 function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
-	$param_cache = array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'verset_fin'=>$verset_fin,'lire'=>$lire);
-	if ($livre=='Ct'){
-		$param_cache['version'] = 1;	
-	}
+	$param_cache = array(	'version'=2,
+				'livre'=>$livre,
+				'chapitre_debut'=>$chapitre_debut,
+				'verset_debut'=>$verset_debut,
+				'chapitre_fin'=>$chapitre_fin,
+				'verset_fin'=>$verset_fin,
+				'lire'=>$lire);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
@@ -101,7 +104,9 @@ function lire_traiter_code($code){
 	return $code;
 	
 }
-
+function supprimer_rupture_ligne($code){
+	return preg_replace("#(\n|\r)#"," ",$code);
+	}
 function recuperer_versets($code,$vd,$vf){
 	
 	$resultat = array();
@@ -126,8 +131,8 @@ function recuperer_versets($code,$vd,$vf){
 		$resultat[$verset] = trim($texte_verset[$i]);
 		$i++;	
 	}
-
-	return $resultat;
+	
+	return supprimer_rupture_ligne($resultat);
 
 }
 
