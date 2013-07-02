@@ -5,7 +5,7 @@ tr {vertical-align:top;border: 1px solid #999;}
 thead tr {font-weight:bold;background-color:#333;color:#fff;}
 thead tr input {font-weight:normal;font-size:0.9em;}
 thead tr .unite {font-weight:normal;font-size:0.9em;}
-td {text-align:left;border-left: 1px solid #ccc;}
+td {text-align:left;border-left: 1px solid #ccc; padding: 0.5em 1em;}
 td em {color:#aaa;}
 #minipres{width:auto;}
 .upgrade {text-align: center; padding:0 .5em; display:inline;}
@@ -17,25 +17,37 @@ td em {color:#aaa;}
 p { margin-top: 1em;}
 
 .toolbar {
-	position: fixed;
-	display: block;
-	width: 90%;
-	min-height: 38px;
+	/* border-top: 2px solid #dfdfdf; */
 	bottom: 0;
 	clear: both;
-	padding: 0 5%;
-	margin:0 -5%;
-	background-color: white;
-	border-top: 2px solid grey;
+	display: block;
 	font-size: 0.9em;
+	left: 0;
+	margin: 0;
+	min-height: 38px;
+	padding: 0 5em;
+	position: fixed;
+	right: 0;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #dfdfdf 0%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dfdfdf), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #dfdfdf 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #dfdfdf 0%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #dfdfdf 0%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #dfdfdf 0%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfdfdf', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
 }
 .toolbar .toolbar-block {
 	float: left;
 	margin: 0;
 	padding: 0;
-	border-right: 1px solid grey;
+	border-right: 1px solid #dfdfdf;
 	height: 38px;
 	position: relative;
+}
+.toolbar .toolbar-block:hover {
+	background-color: #ffffff;
 }
 
 .toolbar .toolbar-block .toolbar-icon {
@@ -46,7 +58,7 @@ p { margin-top: 1em;}
 .toolbar .toolbar-block .toolbar-icon [class^=icon] {
 	width: 28px;
 	height: 28px;
-	background-position: middle;
+	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	display: block;
 	float: left;
@@ -61,31 +73,32 @@ p { margin-top: 1em;}
 	display:none;
 	bottom: 38px;
 	position: absolute;
-	width: 220px;
+	width: 20em;
 	padding: 10px;
 	background-color: white;
 }
 .toolbar .toolbar-block .toolbar-info .toolbar-info-element {
 	overflow: hidden;
+	padding: 0.25em 0;
 }
 .toolbar .toolbar-block .toolbar-info .toolbar-info-element span {
 	float: left;
 	width: auto;
 }
 .toolbar .toolbar-block .toolbar-info .toolbar-info-element b {
-	width: 110px;
+	width: 10em;
 	float: left;
 	clear: left;
 }
 .icon-time {
-	background-image: url(images/icon-time-grey.png);
+	background-image: url(images/icon-time-grey-20.png);
 }
 .icon-memory {
-	background-image: url(images/icon-memory-grey.png);
+	background-image: url(images/icon-memory-grey-20.png);
 }
 .icon-php_info {
-	background-image: url(images/icon-php_info-grey.png);
+	background-image: url(images/icon-php_info-grey-20.png);
 }
 .icon-plugins {
-	background-image: url(images/icon-plugins-grey.png);
+	background-image: url(images/icon-plugins-grey-20.png);
 }

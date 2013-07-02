@@ -236,6 +236,7 @@ function exec_mutualisation_dist() {
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $GLOBALS["HTTP_ENV_VARS"]["SERVER_SOFTWARE"] . "</span></div>\n";
 		$debug_toolbar .= "</div></div>\n" ;
 
 		$debug_toolbar .= "<div class='toolbar-block'>\n";

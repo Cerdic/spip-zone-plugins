@@ -24,15 +24,9 @@ function exec_mutualisation_dist() {
 	$version_spip = intval($GLOBALS['spip_version_branche']) ;
 
 
-	if ($version_spip == 3) {
-		$url_stats = "ecrire/?exec=stats_visites";
-		$url_compresseur = "ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur";
-		$url_admin_plugin = "ecrire/?exec=admin_plugin";
-	} else if ($version_spip == 2){
-		$url_stats = "ecrire/?exec=statistiques_visites";
-		$url_compresseur = "ecrire/?exec=config_fonctions#configurer-compresseur";
-		$url_admin_plugin = "ecrire/?exec=admin_plugin";
-	}
+	$url_stats = "ecrire/?exec=stats_visites";
+	$url_compresseur = "ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur";
+	$url_admin_plugin = "ecrire/?exec=admin_plugin";
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
@@ -137,7 +131,7 @@ function exec_mutualisation_dist() {
 
 		$page .= "<tr class='tr". $nsite % 2 ."'"
 			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>
-			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;'>$v$erreur$version_installee</td>
+			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td><div id='IMG$nsite' class='taille loading'></div></td>
@@ -178,84 +172,58 @@ function exec_mutualisation_dist() {
 		$extract = array();
 		$list = array();
 		
-		if ($version_spip AND $version_spip == 3) {
-			$ustart_glob = memory_get_peak_usage(true);
-			// Ici on est en SPIP 3.
-			// En spip 3, avec SVP, on liste les plugins dans des sous-répertoires.
-			// Ca peut aller jusqu'a 3 sous-répertoires.
-			// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
-	
-			// correspond à plugins/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE)) {
-				foreach (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
-					$list[] = $value;
-				}
-			}
-			// correspond à plugins/auto/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
-				foreach (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
-					$list[] = $value;
-				}
-			}
-			// correspond à plugins/auto/nom_plugin/x.y.z/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
-				foreach (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
-					$list[] = $value;
-				}
-			}
-	
-			// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
-			foreach ($list as $value) {
-				$extract[] = str_replace(array('plugin.xml','paquet.xml'), '', $value);
-			}
-			// On dédoublonne
-			$extract = array_unique($extract);
-			foreach ($extract as $url) {
-				// Et on refait une recherche pour paquet.xml d'abord
-				if(glob($url . 'paquet.xml', GLOB_NOSORT)) {
-					$result = glob($url . 'paquet.xml', GLOB_NOSORT);		
-					$result = $result[0] ;
-					// dans paquet.xml on cherche la valeur de l'attribut prefix
-					if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
-						AND !$lsplugs[strtolower(trim($r[1]))])
-							$inutile[] = trim($r[1]);
-				} else { // Si pas de paquet.xml, on cherche plugin.xml
-					$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
-					$result = $result[0] ;
-					// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
-					if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
-						AND !$lsplugs[strtolower(trim($r[1]))])
-							$inutile[] = trim($r[1]);
-				}
-			}
-			$uend_glob = memory_get_peak_usage(true);
-			
-		} else if ($version_spip AND $version_spip == 2) {
-			$ustart_glob = memory_get_peak_usage(true);
-			// Si on est sur un spip 2
-			// correspond à plugins/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/plugin.xml')) {
-				foreach (glob(_DIR_PLUGINS . '*/plugin.xml') as $value) {
-					$list[] = $value;
-				}
-			}
-			// correspond à plugins/auto/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/*/plugin.xml')) {
-				foreach (glob(_DIR_PLUGINS . '*/*/plugin.xml') as $value) {
-					$list[] = $value;
-				}
-			}
+		$ustart_glob = memory_get_peak_usage(true);
+		// Ici on est en SPIP 3.
+		// En spip 3, avec SVP, on liste les plugins dans des sous-répertoires.
+		// Ca peut aller jusqu'a 3 sous-répertoires.
+		// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
 
-			foreach ($list as $url) {
+		// correspond à plugins/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
+		}
+		// correspond à plugins/auto/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
+		}
+		// correspond à plugins/auto/nom_plugin/x.y.z/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			foreach (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+				$list[] = $value;
+			}
+		}
+
+		// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
+		foreach ($list as $value) {
+			$extract[] = str_replace(array('plugin.xml','paquet.xml'), '', $value);
+		}
+		// On dédoublonne
+		$extract = array_unique($extract);
+		foreach ($extract as $url) {
+			// Et on refait une recherche pour paquet.xml d'abord
+			if(glob($url . 'paquet.xml', GLOB_NOSORT)) {
+				$result = glob($url . 'paquet.xml', GLOB_NOSORT);		
+				$result = $result[0] ;
+				// dans paquet.xml on cherche la valeur de l'attribut prefix
+				if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
+					AND !$lsplugs[strtolower(trim($r[1]))])
+						$inutile[] = trim($r[1]);
+			} else { // Si pas de paquet.xml, on cherche plugin.xml
+				$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
+				$result = $result[0] ;
 				// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
-				if (preg_match(',<prefix>([^<]+),ims', file_get_contents($url), $r)
+				if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
 					AND !$lsplugs[strtolower(trim($r[1]))])
 						$inutile[] = trim($r[1]);
 			}
-
-			$uend_glob = memory_get_peak_usage(true);
 		}
-		
+		$uend_glob = memory_get_peak_usage(true);
+			
+
 		$inutile = array_map('mb_strtolower', $inutile);
 		sort($inutile);
 
@@ -288,42 +256,45 @@ function exec_mutualisation_dist() {
 	$page_load_time = number_format($time, 3);
 
 	if (isset($_GET['debug'])) {
-		$page .= "<div class='toolbar'>";
+		$debug_toolbar = "<div class='toolbar'>\n";
 
-		$page .= "<div class='toolbar-block'>";
-		$page .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>" ;
-		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>";
-		$page .= "</div></div>" ;
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouée</b> <span>" . $memory_limit . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $GLOBALS["HTTP_ENV_VARS"]["SERVER_SOFTWARE"] . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
 
-		$page .= "<div class='toolbar-block'>";
-		$page .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>" ;
-		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>";
-		$page .= "</div></div>" ;
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
 
-		$page .= "<div class='toolbar-block'>";
-		$page .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>" ;
-		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>";
-		$page .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>";
-		$page .= "</div></div>" ;
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
 
-		$page .= "<div class='toolbar-block'>";
-		$page .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " ms</span></div>" ;
-		$page .= "<div class='toolbar-info'>" ;
-		$page .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>";
-		$page .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " ms</span></div>";
-		$page .= "</div></div>" ;
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " s</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " s</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
 
-		$page .= "</div>" ;
+		$debug_toolbar .= "</div>\n" ;
+
+		$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
 
 	}
 	echo $page;

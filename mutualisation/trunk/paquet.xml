@@ -1,0 +1,22 @@
+<paquet
+	prefix="Mutualisation"
+	categorie="maintenance"
+	version="1.1.3"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="mutualiser.png"
+	documentation="http://www.spip-contrib.net/La-mutualisation-facile"
+>	
+
+	<nom>Mutualisation facile</nom>
+	<!-- Créer une ferme à Spip -->
+
+	<auteur>Fil</auteur>
+	<auteur mail="teddy.spip@gmail.com">Teddy, portage pour SPIP 3</auteur>
+
+	<copyright>2007-2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+
+	<chemin path="" type="aucun" />
+</paquet>
