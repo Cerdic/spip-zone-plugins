@@ -4,7 +4,7 @@
 		<h3 class="resume">
 			<ACM.[(#DATE_DEBUT|affdate{'YmdHi'})]>
 			[<span class="date">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})</span> - ][(#REM)date de l'evenement]
-			<ACM.nom><span class="#EDIT{name} name">#NAME</span>[ - <span class="#EDIT{origin} origin">(#ORIGIN)</span>]</ACM.nom>
+			<ACM.nom><span class="#EDIT{name} name">#ATTENDEE</span>[ - <span class="#EDIT{origin} origin">(#ORIGIN)</span>]</ACM.nom>
 		</h3>
 		<ACM.titre>
 			<span class="#EDIT{titre} titre summary">#TITRE</span> [(#REM)titre de l'evenement]
@@ -14,7 +14,7 @@
 		<ACM.msc>	
 			[(#REM)abstract de l'evenement, le filtre est là pour que les maths soient interprétés dans l'abstract (marche aussi avec le filtre typo). description est là pour le hcal]
 			[(#INSCRIPTION|?{' ',''})<p class="inscrits"><strong><:seminaire:inscriptions:> : </strong>#NB_INSCRITS[/(#PLACES) ]<:agenda:inscrits:></p>]
-			[<p class="#EDIT{abstract} abstract description"><strong><:seminaire:abstract:> : </strong>(#ABSTRACT|propre|PtoBR)</p>]
+			[<p class="#EDIT{abstract} abstract description"><strong><:seminaire:abstract:> : </strong>(#DESCRIPTIF|propre|PtoBR)</p>]
 			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span>[<span class="adresse #EDIT{adresse}"> - (#ADRESSE|PtoBR)</span>]</p>]
 			[<p class="#EDIT{notes} notes"><strong><:seminaire:notes:> :</strong> (#CHAMP_SQL{notes}|typo)</p>]
 		</ACM.msc>

@@ -1,0 +1,69 @@
+<BOUCLE_article_corps(ARTICLES){id_article}>
+
+<!-- Affichage de l'article -->
+
+<div class="groupetitre">
+    [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+    <?php $niveau = [(#ID_RUBRIQUE|niveau)];?>
+    <?php if ($niveau <= 2): ?>
+        [(#REM) Si l'article est dans une rubrique de niveau 1 (à la racine du site) ou 2, on affiche son titre en h2]
+        [<h2 class="#EDIT{titre}">(#TITRE)</h2>]
+    <?php elseif ($niveau > 2): ?>
+        <BOUCLE_plusieurs_articles(ARTICLES){id_rubrique}{par date}{inverse}{1,1}>
+            [(#REM) Si l'article a des frères, on affiche le titre de la rubrique en h2,
+                la liste a puces des articles de la rubrique mère et le titre de l'article en h2]
+            <BOUCLE_titre_rubrique(RUBRIQUES){id_rubrique}>
+                [<h2 class="#EDIT{titre}">(#TITRE)</h2>]
+            </BOUCLE_titre_rubrique>
+            <B_articles_de_la_rubrique_mere>
+                <ul class="liste-liens">
+            <BOUCLE_articles_de_la_rubrique_mere(ARTICLES){id_rubrique}{par num titre}{0,10}>
+                <li>
+                    [(#EXPOSE|?{#TITRE,<a href="#URL_ARTICLE">#TITRE</a>})]
+                </li>
+            </BOUCLE_articles_de_la_rubrique_mere>
+                </ul>
+            </B__articles_de_la_rubrique_mere>
+            [(#REM) titre de l'article en h2]
+            <h2 class="#EDIT{titre}">[(#_article_corps:TITRE)]</h2>
+        </BOUCLE_plusieurs_articles>
+        </B_plusieurs_articles>
+            [(#REM) Si l'article est fils unique, on affiche son titre en h2]
+            <h2 class="#EDIT{titre}">[(#TITRE)]</h2>
+        <//B_plusieurs_articles>
+    <?php endif; ?>
+    [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+    [<p class="auteur"><:par_auteur:> (#LESAUTEURS)[ - (#DATE|affdate_jourcourt)]</p>]
+    <B_motscles>
+    	<p class="mot-clef">
+    <BOUCLE_motscles(MOTS){id_article}{", "}{type=mots-clefs}>
+        [<a href="(#URL_MOT)">#TITRE</a>]
+    </BOUCLE_motscles>
+    	</p>
+    </B_motscles>    
+</div>
+
+[(#INCLURE{fond=inclure/agenda_article}{id_article}{env})]
+
+
+
+
+[<span class="vignette">(#LOGO_ARTICLE)</span>]
+[<div class="#EDIT{chapo} chapeau">(#CHAPO)</div>]
+[<div class="#EDIT{texte}">(#TEXTE|image_reduire{500})</div>]
+[<p class="lien_article"><:voir_en_ligne:>&nbsp;: <a href="(#URL_SITE)">[(#NOM_SITE)]</a></p>]
+[<p class="#EDIT{ps} postscriptum"><:kitcnrs:post_scriptum:>&nbsp;: (#PS)</p>] 
+[<div class="separateur">
+    <hr class="accessibility" />
+</div>
+<div class="notes">(#NOTES)</div>] 
+
+[(#REM) Gestion du portfolio et des documents
+    Le critere {env} permet de passer d'autres arguments de la page
+    par exemple l'id_document choisi pour un affichage complet
+]
+[(#INCLURE{fond=inc-documents}{id_article}{env})]
+
+<!-- Fin de l'affichage de l'article -->
+
+</BOUCLE_article_corps>
