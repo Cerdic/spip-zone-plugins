@@ -1,9 +1,14 @@
 <?php
+header( 'charset:UTF-8' );
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 function exec_mutualisation_dist() {
 	global $auteur_session;
+	$ustart = memory_get_peak_usage(true);
+	$timestart=microtime(true);
+	$memory_limit = strtolower(ini_get('memory_limit'));
 	
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
@@ -15,12 +20,18 @@ function exec_mutualisation_dist() {
 	$lister_sites = charger_fonction('lister_sites','mutualisation');
 	$sites = $lister_sites();
 
+	$branche_nom = "spip-" . $GLOBALS['spip_version_branche'] ;
+	$version_spip = intval($GLOBALS['spip_version_branche']) ;
+
+
+	$url_stats = "ecrire/?exec=statistiques_visites";
+	$url_compresseur = "ecrire/?exec=config_fonctions#configurer-compresseur";
+	$url_admin_plugin = "ecrire/?exec=admin_plugin";
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
 
-	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version')
-		. ' ' . $GLOBALS['spip_version_base'].')</em>');
+	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>(' . _T('version') . ' ' . $GLOBALS['spip_version_base'].')</em>');
 
 	$page .= '<script type="text/javascript">
 	//<![CDATA[
@@ -112,7 +123,6 @@ function exec_mutualisation_dist() {
 			$compression .= ($compression!='') ? '+HTTP':'HTTP';
 		if ($compression=='')
 			$compression = _L('Activer');
-	
 		$page .= '<script type="text/javascript">
 		//<![CDATA[
 		tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
@@ -120,49 +130,79 @@ function exec_mutualisation_dist() {
 		</script>';
 
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)'>
-			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;'>$v$erreur$version_installee</td>
+			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>
+			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td><div id='IMG$nsite' class='taille loading'></div></td>
 			<td><div id='local$nsite' class='taille loading'></div></td>
 			<td><div id='cache$nsite' class='taille loading'></div></td>
-			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
-			<td>$adminplugin<a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
-			<td><a href='${url}ecrire/index.php?exec=config_fonctions#configurer-compresseur'>$compression</a></td>
+			<td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>
+			<td>$adminplugin<a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
+			<td><a href='${url}$url_compresseur'>$compression</a></td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
 	}
 	$page .= "</tbody></table>";
 
+
 	if ($lsplugs) {
+		$nombre_plugins = count($lsplugs) ;
 		$page .= "<br /><br /><table style='clear:both;'>
 	<thead>
 		<tr>
 			<td>#</td>
-			<td>Plugins utilis&#233;s</td>
+			<td>Plugins utilis&#233;s ($nombre_plugins) </td>
 			<td>Version</td>
 			<td>Sites</td>
 		</tr>
 	</thead>
 	<tbody>";
-		foreach ($lsplugs as $plugin => $c)
+		foreach ($lsplugs as $plugin => $c){
 			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td>"
-				."<td>".$versionplug[$plugin]."</td><td>".join(', ', $c).'</td></tr>';
+				."<td>".$versionplug[$plugin]."</td><td>".join(', ', ancre_site($c)).'</td></tr>';
+		}
 		krsort($plnum);
 		$page .= join('', $plnum);
 		$page .= "</tbody></table>\n";
 
 
 		$inutile = array();
-		foreach ( glob(_DIR_PLUGINS.'*/plugin.xml') as $pl) {
-			if (preg_match(',<prefix>([^<]+),ims', file_get_contents($pl), $r)
-			AND !$lsplugs[strtolower(trim($r[1]))])
-				$inutile[] = trim($r[1]);
+		$extract = array();
+		$list = array();
+		
+		$ustart_glob = memory_get_peak_usage(true);
+		// Si on est sur un spip 2
+		// correspond à plugins/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/plugin.xml')) {
+			foreach (glob(_DIR_PLUGINS . '*/plugin.xml') as $value) {
+				$list[] = $value;
+			}
 		}
+		// correspond à plugins/auto/nom_plugin/fichier.xml
+		if (glob(_DIR_PLUGINS . '*/*/plugin.xml')) {
+			foreach (glob(_DIR_PLUGINS . '*/*/plugin.xml') as $value) {
+				$list[] = $value;
+			}
+		}
+
+		foreach ($list as $url) {
+			// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
+			if (preg_match(',<prefix>([^<]+),ims', file_get_contents($url), $r)
+				AND !$lsplugs[strtolower(trim($r[1]))])
+					$inutile[] = trim($r[1]);
+		}
+
+		$uend_glob = memory_get_peak_usage(true);
+		
+		$inutile = array_map('mb_strtolower', $inutile);
+		sort($inutile);
+
 		if ($inutile) {
-			$page .= "<p>"._L('Plugins inutilis&#233;s :')." ".join(', ', $inutile)."</p>";
+			$nombre_plugins_inutiles =count($inutile) ;
+			$page .= "<p><strong>"._L('Plugins inutilis&#233;s :')."</strong> ".join(', ', $inutile).".<br />";
+			$page .= "<em>Soit " . $nombre_plugins_inutiles . _L(' plugins inutilis&#233;s') . ".</em></p>";
 		}
 	}
 
@@ -173,29 +213,61 @@ function exec_mutualisation_dist() {
 	$page = minipres($titre, $page);
 	
 	$page = str_replace('</head>', '
-		<style type="text/css">
-		a {color:#5a3463;}
-		table {border-collapse: collapse; border: 1px solid #999;}
-		tr {vertical-align:top;border: 1px solid #999;}
-		.tr0 {background-color:#ddded5}
-		thead tr {font-weight:bold;background-color:#333;color:#fff;}
-		thead tr input {font-weight:normal;font-size:0.9em;}
-		thead tr .unite {font-weight:normal;font-size:0.9em;}
-		td {text-align:left;border-left: 1px solid #ccc;}
-		td em {color:#aaa;}
-		#minipres{width:auto;}
-		.upgrade {text-align: center; padding:0 .5em; display:inline;}
-		.upgrade div {display:inline;}
-		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
-		.erreur {color:red;font-weight:bold;}
-		.taille {text-align: right;}
-		.loading {background: url(../mutualisation/images/loading.gif) left center no-repeat}
-		</style>
+		<link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
 		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
 		<script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
+		<script src="../mutualisation/mutualisation_toolbar.js" type="text/javascript"></script>
 		</head>
 		', $page);
 
+	$uend = memory_get_peak_usage(true);
+	$udiff = $uend - $ustart;
+	$udiff_glob = $uend_glob - $ustart_glob ;
+	$timeend=microtime(true);
+	$time=$timeend-$timestart;
+	$page_load_time = number_format($time, 3);
+
+	if (isset($_GET['debug'])) {
+		$debug_toolbar = "<div class='toolbar'>\n";
+
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouées</b> <span>" . $memory_limit . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
+
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
+
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
+
+		$debug_toolbar .= "<div class='toolbar-block'>\n";
+		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " s</span></div>\n" ;
+		$debug_toolbar .= "<div class='toolbar-info'>" ;
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " s</span></div>\n";
+		$debug_toolbar .= "</div></div>\n" ;
+
+		$debug_toolbar .= "</div>\n" ;
+
+		$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
+
+	}
 	echo $page;
 }
 
@@ -283,4 +355,25 @@ function mutualisation_lister_sites() {
 	return $sites;
 }
 */
+
+// faire une ancre vers le tableau des sites en haut de page
+function ancre_site($c) {
+	foreach ($c as $key => $value) {
+		$c[$key] = "<a href='#$value'>" . $value . "</a>";
+	}
+	return $c;
+}
+
+function memoryUsage($bytes) {
+        $bytes = (int) $bytes;
+
+        if ($bytes > 1024*1024) {
+            return round($bytes/1024/1024, 2).' MB';
+        } elseif ($bytes > 1024) {
+            return round($bytes/1024, 2).' KB';
+        }
+
+        return $bytes . ' B';
+}
+
 ?>

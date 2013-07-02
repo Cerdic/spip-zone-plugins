@@ -54,7 +54,7 @@ function gerer_liste(liste,site,cible,taille_max,ident){
 		nb_demandes[ident] = 0;
 		// Si aucun sous-répertoire, on efface la roue loading
 		if(tableau_file.length == 0) $(ident).removeClass("loading") ;
-		// Pour chaque sous-eépertoire, on va demander sa taille
+		// Pour chaque sous-répertoire, on va demander sa taille
 		$.each(tableau_file,function(k,file){
 			$(ident).addClass("loading")
 			nb_demandes[ident] ++ ;
