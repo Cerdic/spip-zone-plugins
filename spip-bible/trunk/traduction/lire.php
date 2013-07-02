@@ -27,7 +27,7 @@ function lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$ve
 
 }
 function recuperer_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
-	$param_cache = array(	'version'=2,
+	$param_cache = array(	'version'=>2,
 				'livre'=>$livre,
 				'chapitre_debut'=>$chapitre_debut,
 				'verset_debut'=>$verset_debut,
