@@ -1,9 +1,9 @@
 <?php
-// Ce programme appelé en ajax renvoie une chaine de la forme XXX##erreur
-//			où XXX vaut -1 si erreur, -2 si taille max atteinte et sinon la taille du répertoire en Mo
-//			où erreur explicite le type d'arreur
-// Param dir : répertoire à explorer
-//       taille_max : taille max au delà de laquelle la recherche s'arrête et renvoie -2
+// Ce programme appelÃ© en ajax renvoie une chaine de la forme XXX##erreur
+//			oÃ¹ XXX vaut -1 si erreur, -2 si taille max atteinte et sinon la taille du rÃ©pertoire en Mo
+//			oÃ¹ erreur explicite le type d'arreur
+// Param dir : rÃ©pertoire Ã  explorer
+//       taille_max : taille max au delÃ  de laquelle la recherche s'arrÃªte et renvoie -2
 
 $retour = dirsize($_GET['dir'],$_GET['taille_max']) ;
 if ( is_numeric($retour) )
@@ -15,7 +15,7 @@ else
 /**
  * Calculate the size of a directory by iterating its contents
  *
- * @author      Aidan Lister <aidan@php.net>, modifié par Yffic pour SPIP
+ * @author      Aidan Lister <aidan@php.net>, modifiÃ© par Yffic pour SPIP
  * @version     1.2.0
  * @link        http://aidanlister.com/2004/04/calculating-a-directories-size-in-php/
  * @param       string   $directory    Path to directory

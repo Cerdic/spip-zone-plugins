@@ -1,9 +1,9 @@
 <?php
 
-// Ce programme appelé en ajax renvoie une  chaine de la forme XXX##rep1##rep2...
-//	    où XXX vaut -1 si erreur et sinon le poids des fichiers du répertoire (hors sous-répertoires) en Mo
-//	    où rep1, rep2,... le nom des sous-répertoires
-// Param dir : répertoire à explorer
+// Ce programme appelÃ© en ajax renvoie une  chaine de la forme XXX##rep1##rep2...
+//	    oÃ¹ XXX vaut -1 si erreur et sinon le poids des fichiers du rÃ©pertoire (hors sous-rÃ©pertoires) en Mo
+//	    oÃ¹ rep1, rep2,... le nom des sous-rÃ©pertoires
+// Param dir : rÃ©pertoire Ã  explorer
 
 echo dirliste($_GET['dir']);
 

@@ -1,13 +1,13 @@
-// Ces fonction ont pour but de lancer en ajax les calculs de tailles de répertoires et sous répertoire
-// pour l'ensemble des sites mutualisés.
-// Si c'est répertoire sont trop gros, il arrive qu'on atteigne le temps limite d'execution d'une requete php
-// Pour éviter cela, il est mis en place un système qui relance l'opération en descendant d'un cran dans l'arborescence
+// Ces fonction ont pour but de lancer en ajax les calculs de tailles de rÃ©pertoires et sous rÃ©pertoire
+// pour l'ensemble des sites mutualisÃ©s.
+// Si c'est rÃ©pertoire sont trop gros, il arrive qu'on atteigne le temps limite d'execution d'une requete php
+// Pour Ã©viter cela, il est mis en place un systÃ¨me qui relance l'opÃ©ration en descendant d'un cran dans l'arborescence
 
 nb_demandes = new Array();
 
-// Lance la recherche de taille sur le répertoire rep de tous les sites du tableau tableau_sites
+// Lance la recherche de taille sur le rÃ©pertoire rep de tous les sites du tableau tableau_sites
 // @author      Yffic
-// @param       string   rep    répertoire a dimensionner (typiquement local, IMG ou cache)
+// @param       string   rep    rÃ©pertoire a dimensionner (typiquement local, IMG ou cache)
 
 function rechercher_tailles(rep) {
 	var id ;
@@ -18,7 +18,7 @@ function rechercher_tailles(rep) {
 		// Cas particulier du dossier cache
 		if(rep=="cache") cible="tmp/cache" ;
 		else cible=rep ;
-		// Recherche des sous-répertoires
+		// Recherche des sous-rÃ©pertoires
 		$.get("../mutualisation/inc/dirliste.php",{
 			dir: site+"/"+cible
 		},function(liste){
@@ -28,15 +28,15 @@ function rechercher_tailles(rep) {
 	});
 }
 
-// Récupère la liste des sous-répertoires de cible
+// RÃ©cupÃ¨re la liste des sous-rÃ©pertoires de cible
 // @author      Yffic
 // @param       string   liste        chaine de la forme XXX##rep1##rep2...
-//										        où XXX vaut -1 si erreur et sinon le poids des fichiers du répertoire (hors sous-répertoires) en Mo
-//										        où rep1, rep2,... le nom des sous-répertoires
+//										        oÃ¹ XXX vaut -1 si erreur et sinon le poids des fichiers du rÃ©pertoire (hors sous-rÃ©pertoires) en Mo
+//										        oÃ¹ rep1, rep2,... le nom des sous-rÃ©pertoires
 //              string   site         site en cours de traitement
-//              string   cible        sous répertoire du site
+//              string   cible        sous rÃ©pertoire du site
 //              string   taille_max   taille_max au dessus de laquelle l'exploration doit descendre d'un niveau
-//              string   ident        ident du td à renseigner
+//              string   ident        ident du td Ã  renseigner
 
 function gerer_liste(liste,site,cible,taille_max,ident){
 	//$("#trace").append("liste: "+liste+" cible: "+cible+" ident: "+ident+"<br />") ;
@@ -44,17 +44,17 @@ function gerer_liste(liste,site,cible,taille_max,ident){
 		$(ident).removeClass("loading").append("<em><small><span class=\"erreur\">Erreur&nbsp;!"+site+"/"+cible+"</span></small></em>");
 	} else {
 		var tableau_file = liste.split("##");
-		// On récupère le contenu courant du ident et on y ajoute la taille des fichiers de la cible
+		// On rÃ©cupÃ¨re le contenu courant du ident et on y ajoute la taille des fichiers de la cible
 		if($(ident).text()=="") contenu=0;
 		else contenu=parseFloat($(ident).text());
 		somme = contenu + parseFloat(tableau_file[0]) ;
 		$(ident).empty().append(somme.toFixed(2)) ;
-		// On supprime le premier élément, Il ne reste donc plus que les sous-répertoires
+		// On supprime le premier Ã©lÃ©ment, Il ne reste donc plus que les sous-rÃ©pertoires
 		tableau_file.shift() ;
 		nb_demandes[ident] = 0;
-		// Si aucun sous-répertoire, on efface la roue loading
+		// Si aucun sous-rÃ©pertoire, on efface la roue loading
 		if(tableau_file.length == 0) $(ident).removeClass("loading") ;
-		// Pour chaque sous-eépertoire, on va demander sa taille
+		// Pour chaque sous-eÃ©pertoire, on va demander sa taille
 		$.each(tableau_file,function(k,file){
 			$(ident).addClass("loading")
 			nb_demandes[ident] ++ ;
@@ -66,15 +66,15 @@ function gerer_liste(liste,site,cible,taille_max,ident){
 	}
 }
 
-// Récupère la taille d'un des sous-répertoires de cible
+// RÃ©cupÃ¨re la taille d'un des sous-rÃ©pertoires de cible
 // @author      Yffic
 // @param       string   taille       chaine de la forme XXX##erreur
-//										        où XXX vaut -1 si erreur, -2 si taille max atteinte et sinon la taille du répertoire en Mo
-//										        où erreur explicite le type d'arreur
+//										        oÃ¹ XXX vaut -1 si erreur, -2 si taille max atteinte et sinon la taille du rÃ©pertoire en Mo
+//										        oÃ¹ erreur explicite le type d'arreur
 //              string   site         site en cours de traitement
-//              string   cible        sous répertoire du site
+//              string   cible        sous rÃ©pertoire du site
 //              string   taille_max   taille_max au dessus de laquelle l'exploration doit descendre d'un niveau
-//              string   ident        ident du td à renseigner
+//              string   ident        ident du td Ã  renseigner
 
 function gerer_taille(taille,site,cible,taille_max,ident){
 	//$("#trace").append("taille: "+taille+" cible: "+cible+" ident: "+ident+"<br />") ;
@@ -84,7 +84,7 @@ function gerer_taille(taille,site,cible,taille_max,ident){
 	if((retour[0]==-1) || (taille=="")) {
 		$(ident).removeClass("loading").append("<em><small><span class=\"erreur\">Erreur&nbsp;! "+retour[1]+"</span></small></em>");
 	} else if(retour[0]==-2) {
-		// On a atteint la limite, on va relancer l'opération en descendant d'un niveau
+		// On a atteint la limite, on va relancer l'opÃ©ration en descendant d'un niveau
 		// mais en mettant une taille max a 0 (soit pas de limite)
 		site=(retour[1])+"..";
 		cible="";
@@ -92,10 +92,10 @@ function gerer_taille(taille,site,cible,taille_max,ident){
 			dir: site+"/"+cible
 		},function(liste){gerer_liste(liste,site,cible,0,ident);});
 	} else {
-		// On ajoute le résultat au contenu du champs
+		// On ajoute le rÃ©sultat au contenu du champs
 		somme = parseFloat($(ident).text()) + parseFloat(retour[0]) ;
 		$(ident).empty().append(somme.toFixed(2));
-		// Si c'est la dernière demande qui revient, on supprime la roue loading
+		// Si c'est la derniÃ¨re demande qui revient, on supprime la roue loading
 		if(nb_demandes[ident] == 0) $(ident).removeClass("loading") ;
 	}
 }
