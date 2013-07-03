@@ -94,6 +94,9 @@ function exec_mutualisation_dist() {
 				foreach ($plugins as $plugin) {
 					$lsplugs[strtolower($plugin)][] = $alias[$v];
 					$versionplug[strtolower($plugin)] = $cfg[$plugin]['version'];
+					// Spip n'est pas un plugin… Mais en fait oui.
+					// unset($lsplugs['spip']);
+					// unset($versionplug['spip']);
 				}
 				$cntplugins = count($plugins);
 				$plugins = strtolower(join(', ', $plugins));
@@ -210,15 +213,20 @@ function exec_mutualisation_dist() {
 				$result = $result[0] ;
 				// dans paquet.xml on cherche la valeur de l'attribut prefix
 				if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
-					AND !$lsplugs[strtolower(trim($r[1]))])
-						$inutile[] = trim($r[1]);
+					AND !$lsplugs[strtolower(trim($r[1]))]){
+						preg_match('/version="([^"]*)"/i', file_get_contents($result), $n);
+						$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+				}
+
 			} else { // Si pas de paquet.xml, on cherche plugin.xml
 				$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
 				$result = $result[0] ;
 				// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
 				if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
-					AND !$lsplugs[strtolower(trim($r[1]))])
-						$inutile[] = trim($r[1]);
+					AND !$lsplugs[strtolower(trim($r[1]))]){
+						preg_match(',<version>([^<]+),ims', file_get_contents($result), $n);
+						$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+				}
 			}
 		}
 		$uend_glob = memory_get_peak_usage(true);
@@ -226,6 +234,7 @@ function exec_mutualisation_dist() {
 
 		$inutile = array_map('mb_strtolower', $inutile);
 		sort($inutile);
+
 
 		if ($inutile) {
 			$nombre_plugins_inutiles =count($inutile) ;
@@ -255,7 +264,7 @@ function exec_mutualisation_dist() {
 	$time=$timeend-$timestart;
 	$page_load_time = number_format($time, 3);
 
-	if (isset($_GET['debug'])) {
+	if (isset($_GET['toolbar']) AND $_GET['toolbar'] == 1) {
 		$debug_toolbar = "<div class='toolbar'>\n";
 
 		$debug_toolbar .= "<div class='toolbar-block'>\n";
@@ -264,7 +273,7 @@ function exec_mutualisation_dist() {
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
 		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouée</b> <span>" . $memory_limit . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $_SERVER['SERVER_SOFTWARE'] . "</span></div>\n";
+		$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $_SERVER["SERVER_SOFTWARE"] . "</span></div>\n";
 		$debug_toolbar .= "</div></div>\n" ;
 
 		$debug_toolbar .= "<div class='toolbar-block'>\n";
