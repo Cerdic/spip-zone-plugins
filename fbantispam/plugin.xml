@@ -1,0 +1,39 @@
+<plugin>
+	<nom>FB Antispam</nom>
+	<slogan>
+		Une protection pour les spams dans les forums introduisant un captcha dans le formulaire<br />
+	</slogan>
+	<auteur>Fabio Bertagnin - FBServices www.fbservices.fr</auteur>
+	<icon>images/beos-stop-icone-8929-32.png</icon>
+	<licence>(c) 2013 GPL</licence>
+	<version>1.0</version>
+	<etat>test</etat>
+	<description>
+	Le plugin modifie le formulaire du forum, en ajoutant un champ pour saisir un captcha.
+	La saisie n'est pas prise en compte si le captcha n'est pas correct.
+	</description>
+	<lien>http://contrib.spip.net/CAPTCHA-pour-forums</lien>
+	<prefix>fbantispam</prefix>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>fbantispam_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>fbantispam_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>fbantispam_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>fbantispam_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>fbantispam_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outils</categorie>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+</plugin>

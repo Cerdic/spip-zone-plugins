@@ -1,0 +1,25 @@
+<paquet
+	prefix="fbantispam"
+	categorie="performance"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[2.0.0;3.0.99]"
+	logo="images/beos-stop-icone-8929-32.png"
+	documentation="http://contrib.spip.net/CAPTCHA-pour-forums"
+>	
+
+	<nom>FB Antispam</nom>
+
+
+	<auteur lien="www.fbservices.fr">Fabio Bertagnin FBServices</auteur>
+
+	<copyright>2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="pre_edition" inclure="fbantispam_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="fbantispam_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="fbantispam_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="fbantispam_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="fbantispam_pipelines.php" />
+</paquet>
