@@ -35,5 +35,5 @@
 		<inclure>fbantispam_pipelines.php</inclure>
 	</pipeline>
 	<categorie>outils</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
