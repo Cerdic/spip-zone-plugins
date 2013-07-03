@@ -2,7 +2,7 @@
 	<nom>Produits</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.1</version>
+	<version>0.3.2</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
     <slogan>Creer des produits &#224; vendre</slogan>
@@ -10,12 +10,12 @@
 	<icon>prive/themes/spip/images/produits-32.png</icon>
 	<categorie>divers</categorie>
 	<traduire gestionnaire="salvatore" module="produits" reference="fr" />
-	
+
 	<prefix>produits</prefix>
-	
+
 	<install>base/produits_installation.php</install>
 	<options>produits_options.php</options>
-	
+
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/produits_autoriser.php</inclure>
@@ -68,6 +68,16 @@
 		<icone>prive/themes/spip/images/produits-16.png</icone>
 		<url>produit_edit</url>
 		<args>nouveau=oui&amp;id_rubrique=@id_rubrique@</args>
+	</bouton>
+	<bouton id='produits' parent="naviguer">
+		<url>produits</url>
+		<titre>produits:produits_titre</titre>
+		<icone>prive/themes/spip/images/produits-16.png</icone>
+	</bouton>
+	<bouton id='produits2' parent="bando_edition">
+		<url>produits</url>
+		<titre>produits:produits_titre</titre>
+		<icone>prive/themes/spip/images/produits-16.png</icone>
 	</bouton>
 
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
