@@ -65,7 +65,9 @@ function formulaires_csv2spip_importation_traiter_dist(){
         $retour['message_ok'] = _T('csv2spip:bravo');
     }
 
-    // transformation du fichier csv en array
+    // transformation du fichier csv en array : 
+    // 1 array = ligne entete 
+    // 1 array = donnees
     $fichiercsv= fopen($destination, "r");
     $i=0;
     while (($data= fgetcsv($fichiercsv,"~")) !== FALSE){
@@ -81,9 +83,75 @@ function formulaires_csv2spip_importation_traiter_dist(){
         $i++;
     }
     fclose($fichiercsv);
-    
-    
-    
+
+
+    //récupération des auteurs de la bdd
+    $visiteur_bdd        = sql_allfetsel('*', 'spip_auteurs','statut="6forum"');
+    foreach ($visiteur_bdd as $key) {
+        $visiteur_bdd_par_id[$key[id_auteur]]=$key;
+    }
+    $redacteur_bdd       = sql_allfetsel('*', 'spip_auteurs','statut="1comite"');
+    foreach ($redacteur_bdd as $key) {
+        $redacteur_bdd_par_id[$key[id_auteur]]=$key;
+    }
+    //on récupère seulement les admins restreints !!!
+    $from = array( 
+        "spip_auteurs AS auteurs",
+        "spip_auteurs_liens AS liens");
+    $where = array(
+        "auteurs.statut = '0minirezo'",
+        "liens.objet = 'rubrique'",
+        "liens.id_auteur = auteurs.id_auteur");
+    $admin_restreint_bdd       = sql_allfetsel("DISTINCT auteurs.*" ,$from, $where);
+    foreach ($admin_restreint_bdd as $key) {
+        $admin_restreint_bdd_par_id[$key[id_auteur]]=$key;
+    }
+
+
+
+
+
+
+
+
+    //$admin_bdd       = sql_allfetsel('*','spip_auteurs','statut="0minirezo"');
+    //foreach ($admin_bdd as $key) {
+    //$admin_bdd_par_id[$key[id_auteur]]=$key;
+    //}
+
+
+
+
+
+
+/*
+    // pour les administrateurs, on ne récupère que les admnistrateurs restreints !!!
+    // Etape 1 : on fait les jointures en 2 requetes !!
+    $admin_restreint_zone = sql_allfetsel('id_zone','spip_zones_liens','objet="rubrique"');
+    foreach ($admin_restreint_zone as $key) {
+        $numero_zone[]=$key[id_zone];
+    }
+    $admin_restreint_zone= implode(",",$numero_zone);
+    // Etape 2 : on récupère les id des admin restreint
+    $admin_restreint_id_bdd = sql_allfetsel('DISTINCT(id_objet)','spip_zones_liens',"objet='auteur' AND id_zone IN($admin_restreint_zone)");
+    foreach ($admin_restreint_id_bdd as $key) {
+        $numero_id_admin[]=$key[id_objet];
+    }
+    $id_admin_restreint_bdd=implode(",",$numero_id_admin); 
+    //Etape 3 : recuperation des administrateurs restreints !!
+    $administrateur_bdd  = sql_allfetsel('*', 'spip_auteurs',"id_auteur IN($id_admin_restreint_bdd)");
+
+ */
+
+
+
+
+    echo "<pre>";
+    //var_dump($admin_bdd);
+    print_r($admin_restreint_bdd_par_id);
+    echo "</pre>";
+
     return $retour;
 }
+
 ?>
