@@ -5,6 +5,9 @@ function embed_url($url) {
 	$max_w = 440;
 	$max_i = 300;
 
+	$afficher_soundmanager = false ;
+	//$afficher_soundmanager = true ;
+
 	$url = str_replace("/#/", "/", $url);
 	$url = str_replace("/#!/", "/", $url);
 
@@ -157,6 +160,35 @@ function embed_url($url) {
 			fwrite($f, $code_ae);
 			fclose($f);
 		}
+
+		/* Si c'est un mp3, envoyer le modèle du plugin Soundmanager   */
+		/* qui affiche un lecteur html5 en microformats.                 */
+		/* http://microformats.org/wiki/haudio                           */
+		/* http://www.schillmania.com/projects/soundmanager2/            */
+		
+		if(preg_match(',(http://[^"\'\`\<\>\@\*\$]*?\.mp3)$,', $url) and $afficher_soundmanager){
+			$rand = rand(10, 1000);
+			$code_ae = '<div class="haudio audio">' .
+				'<div class="lecture">' .
+					'<button class="play">play</button>' .
+				'</div>' .
+				'<div class="controles">	' .
+					'<div class="track">' .
+						'<a title="Ecouter" rel="enclosure" href="'.$url.'" data-soundid="'. $rand .'"><span class="fn"></span></a>' .
+					'</div>' .
+					'<div>' .
+						'<div class="position" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">' .
+							'<div class="loading ui-progressbar-value ui-widget-header ui-corner-left"></div>' .
+						'</div>' .
+						'<div class="lesinfos">' .
+							'<div class="time">00:00</div>	' .
+							'<div class="duration">/ 00:00</div>' .
+						'</div>	' .
+					'</div>' .
+				'</div>' .
+			'</div>' ;
+		}
+
 
 		return $code_ae;
 	}
