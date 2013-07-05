@@ -2,12 +2,13 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function minus_formulaire_verifier($flux){
-	if ($flux["args"]["form"] == "editer_article"){
+	if ($flux["args"]["form"] == "editer_article" and !(_request("id_article") > 0)){
 		$titre = _request("titre");
 		if (prop_minus($titre) < 0.7){ // si moins de 70% de minuscule > il y a un souci
 		    $flux["data"]["titre"] = _T("minus:trop_majuscule");
 			}
 		}
+		
 	
 	return $flux;
     }
