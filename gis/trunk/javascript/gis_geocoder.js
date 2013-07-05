@@ -22,6 +22,7 @@ L.Geocoder = L.Class.extend({
 		if (L.LatLng && (data instanceof L.LatLng)) {
 			this._reverse_geocode(data);
 		} else if (typeof(data) == 'string') {
+			this.options.search = data;
 			this._geocode(data);
 		}
 	},
@@ -61,20 +62,19 @@ L.Geocoder = L.Class.extend({
 		});
 	},
 	
-	_callback: function (response) {
+	_callback: function (response,textStatus,jqXHR) {
 		var return_location = {};
+		if(this.options.search)
+			return_location.search = this.options.search;
 		if (response instanceof Array && !response.length) {
-			return false;
+			return_location.error = 'not found';
 		} else {
-			return_location.street = '';
-			return_location.postcode = '';
-			return_location.locality = '';
-			return_location.region = '';
-			return_location.country = '';
-			
-			if (response.length > 0) {
+			return_location.street = return_location.postcode = return_location.postcode = 
+			return_location.locality = return_location.region = return_location.country  = '';
+
+			if (response.length > 0)
 				place = response[0];
-			} else {
+			else {
 				place = response;
 			}
 			
@@ -108,8 +108,7 @@ L.Geocoder = L.Class.extend({
 			}
 			
 			return_location.point = new L.LatLng(place.lat, place.lon);
-			
-			this._user_callback(return_location);
 		}
+		this._user_callback(return_location);
 	}
 });

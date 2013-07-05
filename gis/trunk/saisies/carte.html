@@ -35,24 +35,23 @@
 <div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
 <!--
-var form_map;
-var annuler_geocoder = 0;
+var form_map,
+	annuler_geocoder = 0;
 [(#ENV{recherche}|!={non}|oui|et{#CONFIG{gis/geocoder}|oui})
 [(#SET{geocoder,oui})]
 var geocoder;]
 
 (function($){
-	var champ_lat = $('#champ_#ENV{champ_lat,lat}');
-	var champ_lon = $('#champ_#ENV{champ_lon,lon}');
-	var champ_zoom = $('#champ_#ENV{champ_zoom,zoom}');
-	var champ_adresse = $('#champ_#ENV{champ_adresse,adresse}');
-	var champ_code_postal = $('##ENV{champ_code_postal,code_postal}');
-	var champ_ville = $('#champ_#ENV{champ_ville,ville}');
-	var champ_region = $('#champ_#ENV{champ_region,region}');
-	var champ_pays = $('#champ_#ENV{champ_pays,pays}');
-	
-	var marker;
-	
+	var champ_lat = $('#champ_#ENV{champ_lat,lat}'),
+		champ_lon = $('#champ_#ENV{champ_lon,lon}'),
+		champ_zoom = $('#champ_#ENV{champ_zoom,zoom}'),
+		champ_adresse = $('#champ_#ENV{champ_adresse,adresse}'),
+		champ_code_postal = $('##ENV{champ_code_postal,code_postal}'),
+		champ_ville = $('#champ_#ENV{champ_ville,ville}'),
+		champ_region = $('#champ_#ENV{champ_region,region}'),
+		champ_pays = $('#champ_#ENV{champ_pays,pays}'),
+		marker;
+
 	var maj_inputs = function(map,data,action) {
 		[(#GET{geocoder}|oui)
 		if (action != 'geocoding') {
@@ -85,15 +84,19 @@ var geocoder;]
 		if (!marker._map)
 			form_map.addLayer(marker);
 	}
-	
+
 	[(#GET{geocoder}|oui)
 	function geocode(query) {
-		$('#champ_#ENV{champ_adresse,adresse}').val(query.street);
-		$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
-		$('#champ_#ENV{champ_ville,ville}').val(query.locality);
-		$('#champ_#ENV{champ_region,region}').val(query.region);
-		$('#champ_#ENV{champ_pays,pays}').val(query.country);
-		maj_inputs(form_map,query,'geocoding');
+		if(! query.error){
+			$('#champ_#ENV{champ_adresse,adresse}').val(query.street);
+			$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
+			$('#champ_#ENV{champ_ville,ville}').val(query.locality);
+			$('#champ_#ENV{champ_region,region}').val(query.region);
+			$('#champ_#ENV{champ_pays,pays}').val(query.country);
+			maj_inputs(form_map,query,'geocoding');
+		}else{
+			alert('<:gis:erreur_geocoder:> '+query.search);
+		}
 	}]
 	
 	var init_map = function(callback) {
