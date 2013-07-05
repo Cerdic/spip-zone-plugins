@@ -1,7 +1,7 @@
 <paquet
 	prefix="minus"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 >
@@ -12,6 +12,6 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	
 	<copyright>2010-2011</copyright>
-	<pipeline nom="formulaire_traiter" inclure="minus_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="minus_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="minus_pipelines.php" />
 </paquet>
