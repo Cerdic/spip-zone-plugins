@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_version' => 'Attention les choix suivants peuvent ne pas fonctionner	avec votre version de SPIP :',
 	'auteur_message_advitam' => 'L\'auteur du message, ad vitam',
 	'auteur_message_heure' => 'L\'auteur du message, pendant une heure',
-	'auteur_modifie_article' => '<strong>Auteur modifie article</strong> : chaque rédacteur peut modifier les articles publiés dont il est l\'auteur (et, par conséquent, modérer le forum et la pétition associés).
+	'auteur_modifie_article' => '<strong>Auteur modifie article</strong> : chaque rédacteur peut modifier les articles publiés dont il est l\'auteur.
 	<br />
 	<i>N.B. : cette option s\'applique aussi aux visiteurs enregistrés, s\'ils sont auteurs et si une interface spécifique est prévue.</i>',
 	'auteur_modifie_email' => '<strong>Rédacteur modifie email</strong> : chaque rédacteur peut modifier son email sur sa fiche d\'informations personnelles.',

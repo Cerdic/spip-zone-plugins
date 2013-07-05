@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_version' => 'Note the following choices can not work with your version of SPIP:',
 	'auteur_message_advitam' => 'The author of the message ad vitam',
 	'auteur_message_heure' => 'The author of the message, during one hour',
-	'auteur_modifie_article' => '<strong>Author modify article</strong> : Each editor can edit the articles he has written (and, consequently, moderate the forum and the associated petition).
+	'auteur_modifie_article' => '<strong>Author modify article</strong> : Each editor can edit the articles he has written.
 	<br />
 	<i>N.B. : This option also applies to registered visitors, whether they are authors and a specific interface is provided.</i>',
 	'auteur_modifie_email' => '<strong>Editor modify email</strong> : Each editor can edit his email on his record of personal information.',
