@@ -372,9 +372,6 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 ##
 ## autoriser_modererforum
 ##
-if ($GLOBALS['autorite']['auteur_modere_forum']
-OR false // autre possibilite de surcharge ?
-) {
 if (!function_exists('autoriser_modererforum')) {
 function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 	if (intval($GLOBALS['spip_version_branche'])<3)
@@ -383,24 +380,19 @@ function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 		$auteurs_articles = "spip_auteurs_liens WHERE objet='article' AND id_objet=";
 
 	return
-		autoriser('modifier', $type, $id, $qui, $opt)
-		OR (
+		($qui['statut']=='0minirezo')
+		OR  (
 			$GLOBALS['autorite']['auteur_modere_forum']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND sql_fetch(spip_query("SELECT * FROM $auteurs_articles".intval($id)." AND id_auteur=".intval($qui['id_auteur'])))
 		);
 }
-} else
-	$autorite_erreurs[] = 'autoriser_modererforum';
 }
 
 ##
 ## autoriser_modererpetition
 ##
-if ($GLOBALS['autorite']['auteur_modere_petition']
-OR false // autre possibilite de surcharge ?
-) {
 if (!function_exists('autoriser_modererpetition')) {
 function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 	if (intval($GLOBALS['spip_version_branche'])<3)
@@ -408,18 +400,15 @@ function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 	else
 		$auteurs_articles = "spip_auteurs_liens WHERE objet='article' AND id_objet=";
 	return
-		autoriser('modifier', $type, $id, $qui, $opt)
-		OR (
+		($qui['statut']=='0minirezo')
+		OR  (
 			$GLOBALS['autorite']['auteur_modere_petition']
 			AND $type == 'article'
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND sql_fetch(spip_query("SELECT * FROM $auteurs_articles".intval($id)." AND id_auteur=".intval($qui['id_auteur'])))
 		);
 }
-} else
-	$autorite_erreurs[] = 'autoriser_modererpetition';
-}
-
+} 
 
 ##
 ## autoriser_voirstats
