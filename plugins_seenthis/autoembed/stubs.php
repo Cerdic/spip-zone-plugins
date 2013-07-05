@@ -909,7 +909,8 @@ $AutoEmbed_stubs = array(
     'embed-height' => '318',
     'flashvars' => 'CONFIG_URL=http://media.mtvu.com/player/embed/AS3/site/configuration.jhtml%3fid%3D$2%26vid%3D$3%26autoPlay%3Dfalse&amp;allowFullScreen=true'
   ),
-  array(
+/* 
+ array(
     'title' => 'MP3 Audio',
     'website' => '',
     'url-match' => '(http://[^"\'\`\<\>\@\*\$]*?\.mp3)$',
@@ -918,6 +919,7 @@ $AutoEmbed_stubs = array(
     'embed-height' => '27',
     'flashvars' => 'audioUrl=$2'
   ),
+*/
   array(
     'title' => 'MyNet',
     'website' => 'http://video.eksenim.mynet.com/',
