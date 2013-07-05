@@ -22,7 +22,7 @@ return $valeurs;
 function formulaires_csv2spip_importation_verifier_dist(){
         
     $erreurs = array();
-//champs obligatoire 
+	//champs obligatoire 
     if (!($_FILES['fichier_csv']['name'])) {
         $erreurs['fichier_csv'] = _T('csv2spip:obligatoire');
     } else {
@@ -36,7 +36,7 @@ function formulaires_csv2spip_importation_verifier_dist(){
         $extension_upload = strtolower(  substr(  strrchr($_FILES['fichier_csv']['name'], '.')  ,1)  );
         if (!in_array($extension_upload,$extensions_valides)) $erreurs['fichier_csv'] = _T('csv2spip:extension');
     }
-//Il y a des erreurs
+	//Il y a des erreurs
     if (count($erreurs)) $erreurs['message_erreur'] = _T('csv2spip:erreurs');
 
     return $erreurs;
@@ -53,7 +53,6 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $nom_rubrique_archive = _request('nom_rubrique_archive');
     $rubrique_parent = _request('rubrique_parent');
     
-    
     $retour = array();
 
 	if ($abs_redacs OR $abs_admins OR $abs_visiteurs){
@@ -62,7 +61,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
 		include_spip('action/editer_zone');
 	}
 
-// récupération du fichier csv
+	// récupération du fichier csv
     $tmp_name    = $_FILES['fichier_csv']['tmp_name'];
     $destination = _DIR_TMP.basename($tmp_name);
     $resultat    = move_uploaded_file($tmp_name,$destination);
@@ -79,7 +78,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $fichiercsv= fopen($destination, "r");
     $i=0;
     while (($data= fgetcsv($fichiercsv,"~")) !== FALSE){
-       // petit hack car fgetcsv ne reconnait pas la ~ comme séparateur !!!
+       // petit hack car fgetcsv ne reconnait pas le ~ comme séparateur !!!
        $data           = implode("~",$data);
        $data           = explode("~",$data);
        $nombre_elements = count($data);
@@ -141,25 +140,14 @@ echo '</pre>';
     }
     
     // traitement des suppressions
-    //$nom_rubrique_archive 
-	//$id_rubrique_parent
-echo "id_rubrique_parent: $id_rubrique_parent";
-	
 	if($traitement_article_efface == "transferer_articles"){
-		if(!$id_rubrique_archive=sql_fetsel('id_rubrique','spip_rubriques',array('titre ="'.$nom_rubrique_archive.'"',"id_parent=$id_rubrique_parent"))){
+		if(!$id_rubrique_archive = sql_fetsel('id_rubrique','spip_rubriques',array('titre ="'.$nom_rubrique_archive.'"',"id_parent=$id_rubrique_parent"))){
 			$objet = 'rubrique';
 			$set = array('titre'=>$nom_rubrique_archive);
 			$id_rubrique_archive = objet_inserer($objet,$id_rubrique_parent);
 			objet_modifier($objet, $id_rubrique_archive, $set);
 		}
-		$id_secteur_archive=($id_rubrique_archive=="0"?$id_rubrique_archive:sql_getfetsel('id_secteur','spip_rubriques',"id_rubrique=$id_rubrique_archive"));
-		
-		$Tarchive=array("id_secteur"=>intval($id_secteur_archive),"id_rubrique"=>$id_rubrique_archive);
-	}
-			
-		
-	
-	 
+	}	 
     
     if ($abs_visiteurs) {
 		$Tid_visiteurs = csv2spip_diff_absents($visiteur_bdd_par_id, $tableau_csv_visiteurs);
@@ -167,11 +155,11 @@ echo "id_rubrique_parent: $id_rubrique_parent";
 	}
     if ($abs_redacs) {
 		$Tid_redacs = csv2spip_diff_absents($redacteur_bdd_par_id, $tableau_csv_redacs);
-		csv2spip_supprimer($Tid_redacs, '1comite',$traitement_article_efface,$Tarchive);
+		csv2spip_supprimer($Tid_redacs, '1comite',$traitement_article_efface,$id_rubrique_archive);
 	}
     if ($abs_admins) {
 		$Tid_admins = csv2spip_diff_absents($admin_restreint_bdd_par_id, $tableau_csv_admins);
-		csv2spip_supprimer($Tid_admins, '0minirezo',$traitement_article_efface,$Tarchive);
+		csv2spip_supprimer($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_archive);
 	}
     
 /*
@@ -191,7 +179,7 @@ die;
 }
 
 /*
- *  générer l"array des id auteurs absents à supprimer
+ * générer l"array des id auteurs absents à supprimer
  * @param $Tbdd: l'array indexé login/mail extrait de la base
  * @param $Tfich: l'array indexé login/mail extrait du csv
  * @return l'array des id_auteurs
@@ -202,23 +190,18 @@ function csv2spip_diff_absents($Tbdd, $Tfich){
 	foreach ($T as $val)
 		$Tid[] = $val['id_auteur'];
 
-/*echo '<pre>$Tid';
-var_dump(array_keys($Tbdd));
-var_dump(array_keys($Tfich));
-var_dump($Tid);
-*/
 	return $Tid;
 }
 
 /*
  * supression propre des auteurs 
  * changement de statut à la poubelle + traitement des liaisons spip_auteurs_liens et spip_zones_liens
+ * gestion des articles des auteurs supprimés
  * @param $Tid array des id_auteurs à traiter
- * @statut
- * @return message d'erreur eventuel
+ * @statut des auteurs passes dans $Tid
+ * 
  */
-function csv2spip_supprimer($Tid, $statut,$traitement="",$Tarchive=array()) {
-//var_dump($Tid);
+function csv2spip_supprimer($Tid, $statut,$traitement="",$id_rubrique_archive=1) {
 	// passage à la poubelle
 	$objet = 'auteur';
 	$set = array('statut'=>'5poubelle');
@@ -228,39 +211,29 @@ function csv2spip_supprimer($Tid, $statut,$traitement="",$Tarchive=array()) {
 		$Tzones = sql_allfetsel('id_zone', 'spip_zones_liens', array('id_objet='.$id, 'objet="auteur"'));
 		foreach ($Tzones as $id_zone)
 			zone_lier($id_zone, 'auteur', $id, 'del');
+			
 		// suppression des rubriques des admins restreints
 		if ($statut == '0minirezo') {
 			$Trubriques = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="rubrique"'));
 			objet_dissocier(array('id_auteur'=>$id), array('rubrique'=>$Trubriques));
 		}
+		
 		// traitement des articles de l'auteur
 		if (in_array($statut, array('0minirezo','1comite'))){
 			$Tarticles = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="article"'));
+			// supprimer les articles
 			if ($traitement == 'supprimer_articles'){
 				objet_dissocier(array('id_auteur'=>$id), array('article'=>$Tarticles));
 				$inarticle = join(',',$Tarticles);
 				sql_delete('spip_articles', "id_article IN ($inarticle)");
 			}
-echo"<br> Tarticles:<br>";
-var_dump($Tarticles);
-echo"<br> Tarchives:<br>";
-$Tarchive=array(
-	"id_secteur"=>"66",
-	"id_rubrique"=>"66");
-var_dump($Tarchive);
+			// deplacer les articles dans la rubrique d'archivage
 			if ($traitement == 'transferer_articles'){
 				foreach($Tarticles as $idarticle)
-echo "idarticle :". $idarticle['id_objet'];
-$objet="article";
-$id_objet=86;
-
-					objet_modifier($objet,$id_objet,$Tarchive);
-					
+					objet_modifier('article', $idarticle['id_objet'], array('id_parent'=>$id_rubrique_archive));
 			}
 		}
-			
 	}
-		
 }
 
 ?>
