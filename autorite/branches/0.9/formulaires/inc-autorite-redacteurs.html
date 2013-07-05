@@ -1,0 +1,56 @@
+		[(#REM) ---------------------- DROITS DES REDACTEURS -------------------- ]
+
+		<fieldset>
+			<legend><:autorite:droits_des_redacteurs:></legend>
+			<ul>
+				#SET{name,auteur_mod_email}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:auteur_modifie_email:></label>
+					</div>
+				</li>
+				#SET{name,redacteur_mod_article}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:redacteur_modifie_article:></label>
+					</div>
+				</li>
+				#SET{name,editer_mots}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:autorite:mots_cles_qui:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,0}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_complets:></option>
+						#SET{val,1}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_tous:></option>
+						#SET{val,2}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:redac_tous:></option>
+					</select>
+				</li>
+				#SET{name,redacteurs_lire_stats}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:redacteur_lire_stats:></label>
+					</div>
+				</li>
+				#SET{name,redacteurs_ecrire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:pas_acces_espace_prive:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>

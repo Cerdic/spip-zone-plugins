@@ -1,0 +1,59 @@
+<!-- nom=autorite -->
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:autorite:reglage_autorisations:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[<!--(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ -->]
+	[(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
+
+		<div class="reponse_formulaire reponse_formulaire_erreur">
+			<h3><:avis_attention:></h3>
+			<p><:autorite:deja_defini:></p>
+			<ul class="spip"><li>
+				<tt>[(#CONFIG{autorite_erreurs}|unserialize|join{'</tt></li><li><tt>'})]</tt>
+				</li>
+			</ul>
+			<p><:autorite:deja_defini_suite:></p>
+		</div>
+	]
+	[
+		<div class="reponse_formulaire reponse_formulaire_erreur">
+			<h3><:autorite:attention_version:></h3>
+			<ul class="spip">
+				<li>(#REM|autorite_erreurs_version)</li>
+			</ul>
+		</div>
+	]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<INCLURE{fond=formulaires/inc-autorite-redacteurs,env} />
+
+		<INCLURE{fond=formulaires/inc-autorite-auteurs,env} />
+
+		[(#REM) : On teste si le plugin crayons est present pour afficher les fonctions relatives]
+		[(#PLUGIN{crayons}|oui)
+			<INCLURE{fond=formulaires/inc-autorite-crayons,env} />
+		]
+
+		<INCLURE{fond=formulaires/inc-autorite-publieurs,env} />
+
+		<INCLURE{fond=formulaires/inc-autorite-wiki,env} />
+
+		<INCLURE{fond=formulaires/inc-autorite-wiki-motscles,env} />
+
+		<INCLURE{fond=formulaires/inc-autorite-site-config,env} />
+
+		<INCLURE{fond=formulaires/inc-autorite-auteurs-config,env} />
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' name="_cfg_ok" value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+
+</div>

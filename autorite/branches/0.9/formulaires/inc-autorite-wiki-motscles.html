@@ -1,0 +1,82 @@
+		[(#REM) ------------------------ ESPACE WIKI MOTS CLEF------------------------ ]
+		<fieldset>
+			<legend><:autorite:espace_wiki_mots_cles:></legend>
+			<ul>
+				#SET{name,espace_wiki_motsclef}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"] />
+						<label for="#GET{name}"><:autorite:activer_mots_cles:></label>
+					</div>
+				</li>
+				<li class="fieldset" id="espace_wiki_motsclef_qui">
+					<fieldset>
+					<p><:autorite:espace_wiki_mots_cles_qui:></p>
+					<ul>
+						#SET{name,espace_wiki_motsclef_redacteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:autorite:ouvrir_redacs:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
+							<select name="#GET{name}" id="#GET{name}">
+									[(#REM) Mots clef Wiki Redacteurs]
+									<BOUCLE_gwr(GROUPES_MOTS){par num titre, titre}>
+									<BOUCLE_mwr(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+										<option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_redacteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+										#TITRE
+										</option>
+									</BOUCLE_mwr>
+									</BOUCLE_gwr>
+							</select>
+						</li>
+						#SET{name,espace_wiki_motsclef_visiteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:autorite:ouvrir_visiteurs_enregistres:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
+							<select name="#GET{name}" id="#GET{name}">
+								[(#REM) Mots clef Wiki Visiteurs]
+								<BOUCLE_gwv(GROUPES_MOTS){par num titre, titre}>
+								<BOUCLE_mwv(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+									<option value="#ID_MOT" [(#ENV{espace_wiki_motsclef_visiteurs}|=={#ID_MOT}|?{' selected="selected"'})]>
+									#TITRE
+									</option>
+								</BOUCLE_mwv>
+								</BOUCLE_gwv>
+							</select>
+						</li>
+						#SET{name,espace_wiki_motsclef_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:autorite:ouvrir_visiteurs_tous:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
+							<select name="#GET{name}" id="#GET{name}">
+								[(#REM) Mots clef Wiki Anonyme]
+								<BOUCLE_gwa(GROUPES_MOTS){par num titre, titre}>
+								<BOUCLE_mwa(MOTS){tout}{id_groupe}{par num titre, titre}{0,40}>
+									<option value="#ID_MOT"[(#ENV{espace_wiki_motsclef_anonyme}|=={#ID_MOT}|?{' selected="selected"'})]>
+									#TITRE
+									</option>
+								</BOUCLE_mwa>
+								</BOUCLE_gwa>
+							</select>
+						</li>
+					</ul>
+					</fieldset>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) Code jQuery de l'espace wiki par mots clef; plier/deplier la moderation ]
+		<script type="text/javascript"><!--
+			$('#espace_wiki_motsclef')
+			.bind('change', function() {
+				if ($('#espace_wiki_motsclef:checked').length == 0)
+					$('#espace_wiki_motsclef_qui').hide('fast');
+				else
+					$('#espace_wiki_motsclef_qui').show('fast');
+			})
+			if ($('#espace_wiki_motsclef:checked').length == 0)
+				$('#espace_wiki_motsclef_qui').hide('fast');
+		// --></script>

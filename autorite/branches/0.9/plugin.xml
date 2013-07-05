@@ -1,0 +1,80 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Autorit&#233;
+		[it]Autorit&#224;
+		[en]Authority
+		[de]Autorit&#228;t
+		[ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
+    	</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Quelques r&#233;glages d'autorisations : ajoutez les v&#244;tres !
+		[it]Qualche esempio di impostazioni d'autorizzazione : aggiungete le vostre!
+		[en]Some tweaks permissions: add yours!
+		[de]Feineinstellungen der Benutzerrechte: f&#252;ge eigene hinzu!
+		[ar]&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
+		</multi>
+	</slogan>
+	<auteur>Fil, James, Superyms</auteur>
+	<licence>GNU/LGPL</licence>
+	<version>0.9.13</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin permet de configurer des autorisations diff&#233;rentes de celles par d&#233;faut.
+		[it]Questo plugin vi permette di configurare autorizzazioni diverse da quella di default.
+		[en]This plugin allows you to configure different permissions than the default.
+		[de]Dieses Plugin erm&#246;glicht es Ihnen, unterschiedliche Berechtigungen als die Standard-Konfiguration.
+		[ar]&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-Autorite</lien>
+	<icon>illuminati-32.png</icon>
+	<prefix>autorite</prefix>
+	<options>autorite_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id='cfg' version='[1.5.0;]' />
+	<categorie>auteur</categorie>
+	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
+</plugin>
+<plugin spip="[3.0.0-dev;3.0.*]" >
+	<nom>
+		<multi>
+		[fr]Autorit&#233;
+		[it]Autorit&#224;
+		[en]Authority
+		[de]Autorit&#228;t
+		[ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Quelques r&#233;glages d'autorisations : ajoutez les v&#244;tres !
+		[it]Qualche esempio di impostazioni d'autorizzazione : aggiungete le vostre!
+		[en]Some tweaks permissions: add yours!
+		[de]Feineinstellungen der Benutzerrechte: f&#252;ge eigene hinzu!
+		[ar]&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
+		</multi>
+	</slogan>
+	<auteur>Fil, James, Superyms</auteur>
+	<licence>GNU/LGPL</licence>
+	<version>0.9.11</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin permet de configurer des autorisations diff&#233;rentes de celles par d&#233;faut.
+		[it]Questo plugin vi permette di configurare autorizzazioni diverse da quella di default.
+		[en]This plugin allows you to configure different permissions than the default.
+		[de]Dieses Plugin erm&#246;glicht es Ihnen, unterschiedliche Berechtigungen als die Standard-Konfiguration.
+		[ar]&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-Autorite</lien>
+	<icon>illuminati-32.png</icon>
+	<prefix>autorite</prefix>
+	<options>autorite_options.php</options>
+	<categorie>auteur</categorie>
+	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
+</plugin>

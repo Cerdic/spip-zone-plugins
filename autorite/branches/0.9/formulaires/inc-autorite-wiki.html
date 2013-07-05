@@ -1,0 +1,66 @@
+
+		[(#REM) ------------------------ ESPACE WIKI ------------------------ ]
+		<fieldset>
+			<legend><:autorite:espace_wiki:></legend>
+			<ul>
+				#SET{name,espace_wiki}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:autorite:espace_wiki_detail:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]#SET{selected,#CONFIG{autorite/espace_wiki,#ARRAY}}
+					<select name="#GET{name}[]" multiple="multiple" size="5" id="#GET{name}">
+					<BOUCLE_rmul(RUBRIQUES){racine}{tout}{par num titre, titre}>
+						<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+						#TITRE
+						</option>
+					</BOUCLE_rmul>
+					</select>
+					<p><:autorite:infos_selection:> | <a href="#" onclick="$('##GET{name}').find('option').attr('selected', false).end().trigger('change');return false"><:autorite:tout_deselectionner:></a></p>
+				</li>
+
+				#SET{name,espace_wiki_qui}
+				<li class="pleine_largeur editer_#GET{name}" id="#GET{name}">
+					<label><:autorite:espace_wiki_qui:></label>
+					#SET{name,espace_wiki_redacteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:redacs:></label>
+					</div>
+					#SET{name,espace_wiki_visiteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:visiteurs_enregistres:></label>
+					</div>
+					#SET{name,espace_wiki_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						<label for="#GET{name}"><:autorite:visiteurs_tous:></label>
+					</div>
+					#SET{name,espace_wiki_rubrique_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<div class="choix">
+						[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{espace_wiki_anonyme}|?{#ENV{espace_wiki_rubrique_anonyme}|?{checked}})"]/>
+						<label for="#GET{name}"><:autorite:visiteurs_anonymes:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) Code jQuery de l'espace wiki ; plier/deplier la moderation ]
+		<script type="text/javascript"><!--
+			$('#espace_wiki')
+			.bind('change', function() {
+				if (parseInt(this.value))
+					$('#espace_wiki_qui:hidden').slideDown('slow');
+				else
+					$('#espace_wiki_qui:visible').slideUp('slow');
+			})
+			if ($('#espace_wiki option:selected').length == 0)
+				$('#espace_wiki_qui').hide();
+		// --></script>

@@ -1,0 +1,49 @@
+		[(#REM) -------------------- CRAYONS -------------------------]
+		<fieldset>
+			<legend><:autorite:crayons:></legend>
+			<p><:autorite:attention_crayons:></p>
+			<ul>
+				[(#REM)
+					L'auteur d'un forum caracterise par son id_auteur, c'est deja pas mal ;
+					pour des auteurs anonymes, il faudrait leur poser un cookie qui leur
+					ouvrirait ce droit tant que le cookie vit (donc, TODO).
+				]
+
+				#SET{name,editer_forums}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:autorite:forums_qui:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,0}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:personne:> <:autorite:valeur_defaut:></option>
+						#SET{val,1}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:webmestre:></option>
+						#SET{val,2}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
+						#SET{val,3}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:auteur_message_heure:></option>
+						#SET{val,4}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:auteur_message_advitam:></option>
+					</select>
+					<p><:autorite:details_option_auteur:></p>
+				</li>
+
+				[(#REM)
+					Pour les signataires c'est plus dur, car a priori pas d'id_auteur :
+					il faudra absolument un cookie specialise
+				]
+				#SET{name,editer_signatures}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:autorite:petitions_qui:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,0}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:personne:> <:autorite:valeur_defaut:></option>
+						#SET{val,1}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:webmestre:></option>
+						#SET{val,2}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
+					</select>
+				</li>
+			</ul>
+		</fieldset>
