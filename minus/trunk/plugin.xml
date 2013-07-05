@@ -1,0 +1,24 @@
+<plugin>
+	<prefix>minus</prefix>
+	<nom>Minus !</nom>
+	<categorie>edition</categorie>
+	<version>1.0.2</version>
+	<etat>dev</etat>
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	
+
+	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+	<description>Permet de forcer les rédacteurs à ne pas mettre des titres entièrement en majuscules.</description>
+	<slogan>Ne criez pas !</slogan>
+	
+	<pipeline>
+	  <nom>formulaire_verifier</nom> 
+	  <inclure>minus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+	  <nom>formulaire_charger</nom> 
+	  <inclure>minus_pipelines.php</inclure>
+	</pipeline>
+
+</plugin>
