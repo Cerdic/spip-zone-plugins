@@ -16,7 +16,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"] />
 						<label for="#GET{name}"><:autorite:auteur_modifie_forum:></label>
 					</div>
 				</li>
@@ -25,7 +25,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"] />
 						<label for="#GET{name}"><:autorite:auteur_modifie_petition:></label>
 					</div>
 				</li>
