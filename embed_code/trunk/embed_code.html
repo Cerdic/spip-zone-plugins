@@ -1,5 +1,5 @@
 #HTTP_HEADER{Content-Type: text/html}
-<BOUCLE_document(DOCUMENTS){id_document=#ENV{id_objet,#ENV{id_document}}}{mode IN document,image}>
+<BOUCLE_document(DOCUMENTS){si #ENV{objet}|non}{id_document=#ENV{id_objet,#ENV{id_document}}}{mode IN document,image}>
 [(#CHEMIN{embed/#EXTENSION.html}|oui)
 [(#SET{done,oui})]
 #INCLURE{fond=embed/#EXTENSION,id_document=#ENV{id_objet,#ENV{id_document}},env}]
