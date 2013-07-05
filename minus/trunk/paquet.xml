@@ -1,0 +1,16 @@
+<paquet
+	prefix="minus"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+>
+	<nom>paquet-minus:nom</nom>
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	
+	<copyright>2010-2011</copyright>
+	<pipeline nom="formulaire_verifier" inclure="minus_pipelines.php" />
+</paquet>
