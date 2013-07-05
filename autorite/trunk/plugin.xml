@@ -34,6 +34,8 @@
 	<icon>illuminati-32.png</icon>
 	<prefix>autorite</prefix>
 	<options>autorite_options.php</options>
+	<install>autorite_administrations.php</install>
+	<version_base>0.1</version_base>
 	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<necessite id='cfg' version='[1.5.0;]' />
 	<categorie>auteur</categorie>

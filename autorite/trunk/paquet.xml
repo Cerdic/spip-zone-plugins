@@ -5,6 +5,7 @@
 	etat="test"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="illuminati-32.png"
+	schema="0.1"
 	documentation="http://www.spip-contrib.net/Le-plugin-Autorite"
 >	
 
@@ -16,7 +17,7 @@
 	<auteur>Superyms</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">GNU/LGPL</licence>
-
+	
 	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
 
 </paquet>
