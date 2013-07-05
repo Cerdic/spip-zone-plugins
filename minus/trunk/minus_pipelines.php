@@ -15,8 +15,11 @@ function minus_formulaire_verifier($flux){
 
 function prop_minus($txt){
   // return la proportion de minuscule
-  $nb_minuscule = levenshtein (mb_strtoupper($txt, 'UTF-8'),$txt);
-  return $nb_minuscule/mb_strlen($txt, 'UTF-8');
+  if (mb_strlen($txt, 'UTF-8') > 0){
+    $nb_minuscule = levenshtein (mb_strtoupper($txt, 'UTF-8'),$txt);
+    return $nb_minuscule/mb_strlen($txt, 'UTF-8');
+    }
+  else return 1;
 }
 
 ?>
