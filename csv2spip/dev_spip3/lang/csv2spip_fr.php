@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'creer_article'=> 'Créer un article dans chaque rubrique admin:',
 	'csv2spip_titre' => 'csv2spip',
     'choix_statut'=> 'Choisissez les types de statut que vous désirez exporter',
+    'champ_manquant' => 'Les champs : login, statut et email sont obligatoires !!',
 
     'delimiteur'=>'Choisissez le type de délimiteur que vous désirer pour créer votre fichier csv',
 
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'nom_champs'=>'Sélectionnez les champs que vous souhaitez exporter',
     'nom_rubrique_archive'=>'Nom de la rubrique d\'archives :',
     'nom_nouvel_auteur'=>'(mot de passe idem login)',
+    
     'obligatoire' => 'Ce champs est obligatoire !',
 
     'parametres_fichier_csv' => 'Paramètres du fichier CSV',
@@ -46,12 +48,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'rubrique_defaut' => 'Rubrique par défaut des admins restreints:',
     'rubrique_parent_archive'=>'Choisissez la rubrique parente pour votre répertoire d\'archive',
     'rubrique_parent'=>'Choisissez la rubrique parente',
+    'rien_faire' => 'Ne rien faire',
 
     'suppression_absents' => 'Suppression des absents:',
-    'suppression_article_efface' => 'Supprimer les articles des auteurs effacés :',
+    'suppression_article_efface' => 'Traitement des articles des auteurs effacés :',
+    'supprimer_articles' =>'Supprimer les articles des auteurs effacés',
+    
 
     'transfert' => 'Erreur lors du transfert !',
-    'transfere_article' => 'Transférer les articles des auteurs supprimés dans une rubrique d\'archives: ',
+    'transferer_articles' => 'Transférer les articles dans une rubrique d\'archives: ',
     'taille' => 'Le fichier est trop gros !',
 
     'visiteurs' => 'Visiteurs',

@@ -8,7 +8,7 @@ input#champ_rubrique_defaut{
     width:220px;
 }
 li.editer_transfere_article,li.editer_nom_rubrique_archive,li.editer_rubrique_parent_archive,div#exporter,li.editer_suppression_article_efface{
-    display:none;
+/*    display:none;*/
 }
 input#champ_nom_nouvel_auteur,input#champ_rubrique_defaut{
     width:200px;
