@@ -1,6 +1,10 @@
 #CACHE{600}
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})
-][(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api)]})]
+]<BOUCLE_condition_account(CONDITION) {si #ENV{twitter_account,''}|=={''}}>[
+(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api)]})]
+</BOUCLE_condition_account>[
+(#SET{infos_compte,[(#VAL{account/verify_credentials}|microblog_twitter_api{get,#ARRAY,'',[(#ARRAY{twitter_account,#ENV{twitter_account}})]})]})]
+<//B_condition_account>
 [<INCLURE{fond=feed/twitter_user_timeline,screen_name=#GET{infos_compte}|table_valeur{screen_name}} />
 (#GET{infos_compte}|table_valeur{protected}|non)]
 #FILTRE{trim}
