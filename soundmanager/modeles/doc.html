@@ -1,0 +1,53 @@
+[(#REM)
+	Modele pour <doc> modifié pour pour MP3 et FLV par le plugin Lecteur multimedia
+	http://spip-zone.info/spip.php?article18
+
+	Si les fichiers ne sont pas MP3 ou FLV, on utilise le comportement normal.
+	
+	Paramètres facultatifs à passer au modèle :
+	- left/right/center : Comme pour le modèle par défaut défini l'alignement
+	- largeur : défini la largeur du bloc entourant le document (ultilisé uniquement si alignement à droite ou à gauche)
+	- player : force l'usage d'un lecteur en particulier (sinon on prend celui défini dans la conf, à défaut le lecteur neolao)
+	- class : une class spécifique associée à l'élément parent du lecteur
+	- download : si la valeur est "non", on n'affiche pas le lien de téléchargement (affiché par défaut)
+	
+]
+<BOUCLE_doc(DOCUMENTS) {id_document} {extension IN mp3} {tout}>
+<BOUCLE_article(ARTICLES){id_document}>#SET{titre_art,#TITRE}</BOUCLE_article>
+[(#EXTENSION|=={mp3}|oui)
+<div class="haudio audio">
+	<div class="lecture">
+		<button class="play">play</button>
+	</div>
+	<div class="controles">	
+		<div class="track [(#EDIT{titre})]">
+		[<a href="(#URL_DOCUMENT)" rel="enclosure" title="Ecouter"><span class="fn">[(#TITRE|sinon{#GET{titre_art}})]</span></a>]
+		</div>
+		<div>
+			<div class="position">
+				<div class="loading ui-progressbar-value ui-widget-header ui-corner-left"></div>
+			</div>
+			<div class="lesinfos">
+				<div class="file">
+					<a href="[(#URL_DOCUMENT)]" class="inline-exclude" title="Télécharger le fichier - [(#TAILLE|taille_en_octets|texte_backend)]">[<small>(#TYPE_DOCUMENT|strtolower)</small>]</a>
+				</div>
+				<div class="time">00:00</div>	
+				<div class="duration">/ 00:00</div>
+			</div>	
+					</div>
+		<div class="descriptif [(#EDIT{descriptif})]">
+			[(#DESCRIPTIF|PtoBR)]
+		</div>
+	</div>
+	<br style="clear:both;" />
+</div>
+]
+</BOUCLE_doc>
+[(#REM)
+
+	Cas normal d'un document ne correspondant pas aux type de fichiers
+	gérés par le lecteur multimedia
+	
+]
+[(#INCLURE{fond=prive/modeles/doc,env})]
+<//B_doc>

@@ -1,0 +1,35 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Sound Manager
+			[en]Sound Manager
+		</multi>
+	</nom>
+	<auteur>BoOz</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>sm</prefix>
+	<icon>skins/soundmanager.png</icon>
+	<description>
+		<multi>
+			[fr]Lecture de sons avec le raccourci &lt;doc&gt; de SPIP par l'utilisation de la librairie [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/]. Avec un player html5 + microformat haudio. Les liens mp3 rel="encolure" sont également sonorisés.
+			[en]Allows playback of audio with SPIP using the [Soundmanager 2->http://www.schillmania.com/projects/soundmanager2/] library
+		</multi>
+	</description>
+	<lien>http://www.monde-diplomatique.fr/carnet/2013-07-02-La-bas-si-j-y-suis</lien>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sm_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_liens</nom>
+		<inclure>sm_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>sm_pipelines.php</inclure>
+	</pipeline>
+	<utilise "Z" />
+	<categorie>multimedia</categorie>
+</plugin>

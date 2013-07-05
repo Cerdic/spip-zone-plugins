@@ -1,0 +1,111 @@
+#HTTP_HEADER{Content-Type: text/css;}
+
+/* Lecteur audio */
+
+.audio {
+margin:25px 0;
+text-align: left;
+line-height:1.5em;
+width:auto;
+padding:15px 15px 20px 20px;
+background:#F4EDDF;	
+}
+
+.audio:after {
+	clear:both;
+}
+
+.lecture{
+	float:left;
+}
+
+.lecture button.play {
+float:left;
+background: #F4EDDF;
+border:0;
+margin:2px 0 0 0;
+}
+
+.lecture button.play .ui-icon {
+background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/play.png") no-repeat;
+margin:6px 0 0 0;
+position:relative;
+top:auto;
+left:auto;
+width:45px;
+height:41px;
+}
+
+.lecture button.play:hover .ui-icon {
+background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/playh.png") no-repeat;
+}
+
+.lecture button.play .ui-icon-pause {
+background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/pause.png") no-repeat;
+}
+
+.lecture button.play:hover .ui-icon-pause {
+background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/pauseh.png") no-repeat;
+}
+
+.lecture button.play .ui-button-text {
+padding:0;
+}
+
+.controles{
+float:left;
+width:440px;
+margin-left: 15px;
+}
+
+.controles .track {
+margin: 0 0 5px 0;
+font-family:helvetica,arial,sans-serif;
+}
+
+.controles .lesinfos {
+font-size: 0.8em;
+line-height: 1.3em;
+margin: 0 0 10px 315px;
+color:#999999;
+overflow: hidden;
+}
+.controles .lesinfos .file {
+display:none;
+}
+
+
+.time, .duration, .file{
+display:inline;
+font-family:helvetica,arial,sans-serif;
+}
+
+.controles .position{
+height:15px;
+width:300px;
+position:absolute;
+border-radius:0;
+border:1px solid #333333;
+padding:0;
+background:#ffffff;
+}
+.ui-progressbar-value{
+	position:absolute;
+}
+.loading{
+	position:absolute;
+	cursor:pointer;
+}
+
+.controles .ui-widget-header {
+margin:0;
+background: #333333;
+border:0;
+border-radius:0;
+}
+
+.controles .descriptif{
+text-align: left;
+line-height:1em;
+font-size:small;
+}
