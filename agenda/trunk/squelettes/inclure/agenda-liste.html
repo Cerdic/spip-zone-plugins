@@ -32,9 +32,10 @@
 
 <div class="pagination">
 	#SET{hasprev,''}
-	<BOUCLE_prev(EVENEMENTS){!evenement_a_venir #GET{date_debut}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasprev,1}</BOUCLE_prev>
+	<BOUCLE_prev(EVENEMENTS){id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{!evenement_a_venir #GET{date_prev}}{0,1}>#SET{hasprev,1}</BOUCLE_prev>
 	#SET{hasnext,''}
-	<BOUCLE_next(EVENEMENTS){!evenement_passe #GET{date_fin}}{0,1}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>#SET{hasnext,1}</BOUCLE_next>
+	<BOUCLE_next(EVENEMENTS){id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{!evenement_passe #GET{date_fin}}{0,1}>#SET{hasnext,1}</BOUCLE_next>
+	[(#GET{hasprev}|=={1}|ou{#GET{hasnext}|=={1}}|oui)
 	[(#INCLURE{fond=modeles/pagination_precedent_suivant,
 	label_precedent=#GET{date_prev}|affdate_periode{#GET{affichage_duree}},
 	label_suivant=#GET{date_fin}|affdate_periode{#GET{affichage_duree}},
@@ -43,7 +44,6 @@
 	url_precedent=#SELF|parametre_url{date_debut,#GET{date_prev}|affdate{Y-m-d}},
 	url_suivant=#SELF|parametre_url{date_debut,#GET{date_fin}|affdate{Y-m-d}},
 	ancre=agenda-liste,
-	separateur=' | ',
-	})]
+	separateur=' | '})]]
 </div>
 </div>

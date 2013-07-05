@@ -1,19 +1,19 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.12.0"
+	version="3.12.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
 	schema="0.26.0"
-	documentation="http://www.spip-contrib.net/article2858"
+	documentation="http://contrib.spip.net/article2858"
 >	
 
 	<nom>Agenda</nom>
 	<!-- Agenda Evenementiel -->
 
 	<auteur lien="http://www.yterium.net">Cedric MORIN</auteur>
-	<auteur lien="http://www.spip-contrib.net/b_b">b_b</auteur>
+	<auteur lien="http://contrib.spip.net/b_b">b_b</auteur>
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
 
