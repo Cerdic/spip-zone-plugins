@@ -403,7 +403,7 @@ add_outil( array(
 	'id' => 'spam',
 	'code:options' => "%%spam_mots%%\n%%spam_ips%%",
 	// sauvegarde de l'IP pour tests
-	'code:spip_options' => '$ip_=$ip;',
+	'code:spip_options' => '$ip_=isset($ip)?$ip:"";',
 	'categorie' => 'securite',
 ));
 
@@ -546,7 +546,7 @@ add_variables( array(
 ));
 add_outil( array(
 	'id' => 'spip_log',
-	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]][[->%log_non%]]':(defined('_SPIP20100')?'[[->%log_non%]]':'')) . "<:spip_log:4:>\n<:spip_log:3:>",
+	'description' => '<:spip_log::>' . (defined('_SPIP30000')?'[[->@puce@ %log_fileline%]][[->@puce@ %log_brut%]]<:spip_log:2:>[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]][[->%log_non%]]':(defined('_SPIP20100')?'[[->%log_non%]]':'')) . "<:spip_log:4:>\n_ <:spip_log:3:>",
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
 		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%%%log_non%%',
 	'categorie' =>'devel',
@@ -1108,7 +1108,7 @@ add_variables( array(
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
-	'code:%s<>-2' => defined('_SPIP19300')?"\n// Pas de traitement automatique des liens orphelins :\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
+	'code:%s<>-2' => defined('_SPIP19300')?"\n// Pas de traitement automatique des liens orphelins :\nif(isset(\$GLOBALS['spip_pipeline']['pre_liens']) \$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
 @define('_EXTRAIRE_LIENS',',^\$,');":'',
 ), array(
 	'nom' => 'long_url',

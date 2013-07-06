@@ -612,7 +612,7 @@ define('_CS_SPIP_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci"
 // verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
 function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
 	$include = str_replace('\\','/',realpath(_DIR_CS_TMP.'mes_spip_options.php'));
-	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
+	$include = "@include_once \"$include\";\nif(isset(\$GLOBALS['cs_spip_options']) && \$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
 	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don't modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($activer, $ecriture) : le code d'appel est $include");
 	if($fo = cs_spip_file_options(1)) {

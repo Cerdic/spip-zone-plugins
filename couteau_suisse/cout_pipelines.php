@@ -272,7 +272,7 @@ function cs_header_hit(&$flux, $type, $suffixe='') {
 	$f = "header$suffixe.$type";
 	$nom = sous_repertoire(_DIR_VAR,'couteau-suisse') . $f;
 	$tmp = _DIR_CS_TMP . $f;
-	if(!file_exists($tmp) || !file_exists($nom) || $GLOBALS['var_mode']=='recalcul') {
+	if(!file_exists($tmp) || !file_exists($nom) || (defined('_VAR_MODE') && _VAR_MODE=='recalcul') || _request('var_mode')=='recalcul') {
 		if (lire_fichier(_DIR_CS_TMP."header.$type.html", $t) && strlen($t)) {
 			if(strpos($t, '<cs_html>')!==false)
 				$t = preg_replace_callback(',<cs_html>(.*)</cs_html>,Ums', 'cs_compile_header_callback', $t);
@@ -297,7 +297,7 @@ function cs_header_hit(&$flux, $type, $suffixe='') {
 function cs_recuperer_code(&$code) {//, $contexte=array(), $options = array(), $connect=''){
 	$fond = _DIR_CS_TMP . md5($code);
 	$base = $fond . '.html';
-	if(!file_exists($base) OR $GLOBALS['var_mode']=='recalcul')
+	if(!file_exists($base) || (defined('_VAR_MODE') && _VAR_MODE=='recalcul') || _request('var_mode')=='recalcul')
 		ecrire_fichier($base, $code);
 	include_spip('public/assembler');
 	$fond = str_replace('../', '', $fond);
