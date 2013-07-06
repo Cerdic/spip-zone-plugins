@@ -1,4 +1,4 @@
-<traduction module="paquet-autorite" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/lang/" reference="fr">
+<traduction module="paquet-autorite" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
 	<langue code="ar" />
 	<langue code="de" />
 	<langue code="en" />
