@@ -2,11 +2,11 @@
 	<prefix>minus</prefix>
 	<nom>Minus !</nom>
 	<categorie>edition</categorie>
-	<version>1.0.2</version>
-	<etat>dev</etat>
+	<version>1.0.3</version>
+	<etat>test</etat>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
-	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	
+	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html] ; Logo CC Paternité-Partage à L'Identique [Willi Heidelbach->https://commons.wikimedia.org/wiki/File:Metal_movable_type.jpg]</licence>
+	<icon>minus.jpg</icon>
 
 	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
 	<description>Permet de forcer les rédacteurs à ne pas mettre des titres entièrement en majuscules.</description>
