@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'This page lists the whole location-based points of the website.',
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The location-based points',
+	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
 	'erreur_xmlrpc_lat_lon' => 'Latitude and longitude should be set as arguments',
 	'explication_api_forcee' => 'The is imposed by another plugin or skeleton.',

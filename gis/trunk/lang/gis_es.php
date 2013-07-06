@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'Esta página lista todos los puntos geolocalizados del sitio.',
 	'editer_gis_nouveau' => 'Crear un nuevo punto',
 	'editer_gis_titre' => 'Puntos geolocalizados',
+	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
 	'erreur_recherche_pas_resultats' => 'Ningún punto corresponde a la búsqueda.',
 	'erreur_xmlrpc_lat_lon' => 'La latitud y la longitud deben indicarse como parámetros',
 	'explication_api_forcee' => 'La API esta impuesta por otro plugin o esqueleto.',

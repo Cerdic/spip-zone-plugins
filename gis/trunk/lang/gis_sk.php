@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'Táto stránka uvádza všetky geolokalizované body na webe.',
 	'editer_gis_nouveau' => 'Vytvoriť nový bod',
 	'editer_gis_titre' => 'Geolokalizované body',
+	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
 	'erreur_recherche_pas_resultats' => 'Vyhľadávania sa netýka žiaden bod.',
 	'erreur_xmlrpc_lat_lon' => 'Zemepisná šírka a dĺžka musia byť odovzdané ako parameter',
 	'explication_api_forcee' => 'Túto aplikáciu používa iný zásuvný modul alebo iná šablóna.',

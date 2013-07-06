@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'Список всех точек, используемых на вашем сайте.',
 	'editer_gis_nouveau' => 'Создать точку',
 	'editer_gis_titre' => 'Точки на карте',
+	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
 	'erreur_recherche_pas_resultats' => 'Нет точек, соответствующих поисковому запросу.',
 	'erreur_xmlrpc_lat_lon' => 'В качестве аргумента должна быть указанна долгота и широта',
 	'explication_api_forcee' => 'На API накладывается другой плагин или шаблон.',
