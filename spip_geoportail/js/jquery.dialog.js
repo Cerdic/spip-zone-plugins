@@ -47,7 +47,7 @@
 		if (jQuery('#jqDialog').length != 0) jQuery('#jqDialog').remove();
 		var dialog = "<div class='"+param.classe+"' id=jqDialog "
 			+"style='position:absolute; z-index:2001; display:block; ' >"
-			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' ></div>"
+			+(param.closebt ? "<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' ></div>" : "")
 //			+"<input type=image class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' value='' />"
 			+(title ? "<p class='titre'>"+title+"</p>" : "")
 			+"<div class=jqDialogBlock >";
@@ -58,9 +58,9 @@
 		if (param.dialog) dialog += "<div class=jqDialogInner>"+param.dialog+"</div>"
 		if (param.icon) dialog += "</tr></table>"
 		dialog += "<div class=button style='text-align:right; '>";
-		if (param.ok) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"ok\")' type=button value='"+param.ok.replace("\'","&acute;")+"' />";
-		if (param.no) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"no\")' type=button value='"+param.no.replace("\'","&acute;")+"' />";
-		if (param.undo) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"undo\")' type=button value='"+param.undo.replace("\'","&acute;")+"' />";
+		if (param.ok) dialog += "<input class='jqDialogButton jqDialogButtonOk' onclick='javascript:jQuery.jqDialog.action(\"ok\")' type=button value='"+param.ok.replace("\'","&acute;")+"' />";
+		if (param.no) dialog += "<input class='jqDialogButton jqDialogButtonNo' onclick='javascript:jQuery.jqDialog.action(\"no\")' type=button value='"+param.no.replace("\'","&acute;")+"' />";
+		if (param.undo) dialog += "<input class='jqDialogButton jqDialogButtonCancel' onclick='javascript:jQuery.jqDialog.action(\"undo\")' type=button value='"+param.undo.replace("\'","&acute;")+"' />";
 		dialog += "</div></div></div>";
 		
 		var d = $(dialog).hide().appendTo("body");
@@ -111,13 +111,7 @@
 		// Affichage
 		$.jqDialog.replay(param.speed);
 		
-		// Gestion des raccourcis clavier
-		jQuery(document).keydown(function (e) 
-		{	var code = (e.keyCode ? e.keyCode : e.which); 
-//			if (param.ok && code == 13) { $.jqDialog.action('ok'); return false; }
-			if (code == 27) { $.jqDialog.action('undo'); return false; }
- 			return true;
-		});
+		// Focus 
 		jQuery('#jqDialog input[type=text]').focus().select();
 		
 	};
@@ -171,6 +165,7 @@
  		bgopacity : 0.4,			// Background Opacity
  		shadow	: 0,				// Shadow offset (px)
  		speed	: 0,				// Speed to fade in
+ 		closebt	: true,				// Dialog has a close button
  		callback : function(action)	// Function to callback when closing
  		{	// NB: $('#jqDialog') is not destroy at this step, 
  			// You can access the input you put in the dialog param
@@ -191,3 +186,10 @@
 	
 })(jQuery);
 
+// Gestion des raccourcis clavier
+jQuery(document).keydown(function (e) 
+{	var code = (e.keyCode ? e.keyCode : e.which); 
+	if (jQuery("#jqDialog .jqDialogButtonOk").length && ! jQuery("textarea:focus").length && code == 13) { $.jqDialog.action('ok'); return false; }
+	if (jQuery("#jqDialog .jqCloseButton").length && code == 27) { $.jqDialog.action('undo'); return false; }
+	return true;
+});
