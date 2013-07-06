@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
+$GLOBALS['marqueur_skel'] = (isset($GLOBALS['marqueur_skel'])?$GLOBALS['marqueur_skel']:'').':composition';
 
 /**
  * Lister les objets actives par configuration
