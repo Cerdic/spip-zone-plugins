@@ -18,7 +18,12 @@ if(!function_exists('test_espace_prive')) {
 		return !!_DIR_RACINE;
 	}
 }
-
+/* compat SPIP 2.1 */
+if(defined('_LOG_INFO_IMPORTANTE')) {
+	function memoization_log($log) { spip_log($log, _LOG_INFO_IMPORTANTE); }
+} else {
+	function memoization_log($log) { spip_log($log); }
+}
 
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
@@ -139,8 +144,8 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
 			$ok = $memo->set($chemin_cache, $tmp);
-			spip_log((_IS_BOT?"Bot:":"")."Creation du cache sessionne $chemin_cache ". $memo->methode ." pour "
-				. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'),_LOG_INFO_IMPORTANTE);
+			memoization_log((_IS_BOT?"Bot:":"")."Creation du cache sessionne $chemin_cache ". $memo->methode ." pour "
+				. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 		}
 		$chemin_cache .= '_'.$page['invalideurs']['session'];
 	}
@@ -170,8 +175,8 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 		unset($page['gz']);
 	}
 
-	spip_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
-		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'),_LOG_INFO_IMPORTANTE);
+	memoization_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
+		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
 	// Inserer ses invalideurs
 	/* compat SPIP 1.9 : ne pas appeler les invalideurs du tout */
