@@ -168,7 +168,6 @@ function demarrer_site($site = '', $options = array()) {
 				exit;
 			}
 		}
-
 	}
 
 	/*
@@ -217,9 +216,10 @@ function demarrer_site($site = '', $options = array()) {
 	 * A mettre au debut du pipe pour compatibilite avec fastcache
 	 */
 	if ($options['url_img_courtes']) {
+		$pre_affichage_final = isset($GLOBALS['spip_pipeline']['affichage_final']) ? $GLOBALS['spip_pipeline']['affichage_final'] : '';
 		$GLOBALS['spip_pipeline']['affichage_final']
 			= '|mutualisation_url_img_courtes'
-			. $GLOBALS['spip_pipeline']['affichage_final'];
+			. $pre_affichage_final;
 	}
 }
 
