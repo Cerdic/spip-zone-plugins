@@ -243,7 +243,7 @@ function mutu_etape_creer_base($e, $options){
 								// creer user
 								$req[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
 								$err[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
-								// affecter à sa base
+								// affecter a sa base
 									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '"
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
@@ -444,7 +444,7 @@ function mutu_etape_fin($e, $options){
 	// supprimer le fichier d'installation
 	include_spip('inc/flock');
 	@supprimer_fichier($e . _NOM_TEMPORAIRES_INACCESSIBLES . _MUTU_INSTALLATION_FILE);
-
+	$GLOBALS['profondeur_url'] = 0;
 	echo mutu_minipres(
 		_T('mutu:install_rep_bd_ok'),
 
