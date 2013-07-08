@@ -87,7 +87,7 @@ function formulaires_csv2spip_exportation_traiter_dist(){
 					    else 
 						    $tableau_csv[$i]["ss_groupe"]= "";
                     }
-                // Prise en compte des zones restreintes : plugin acces restreint si le plugin est installe
+/*
                 // comme je ne sais pas faire une double jointure, je réalise 2 requetes
                 // requete 1 => récupération de "id_zone"
                 if (test_plugin_actif("accesrestreint")){
@@ -124,11 +124,36 @@ function formulaires_csv2spip_exportation_traiter_dist(){
                         }
                     }
                 }
+*/
+                // Prise en compte des zones restreintes : plugin acces restreint si le plugin est installe
+                if (test_plugin_actif("accesrestreint")){
+                    $k=0;
+                    if ($res3 = sql_select(
+                        array(
+                            "rub.titre AS titre"),
+                        array(
+                            "spip_zones_liens AS zone_auteur",
+                            "spip_zones_liens AS zone_rubrique",
+                            "spip_rubriques AS rub"),
+                        array(
+                            "zone_auteur.id_zone = zone_rubrique.id_zone",
+                            "zone_auteur.objet='auteur' AND zone_auteur.id_objet =$row[id_auteur]",
+                            "zone_rubrique.objet='rubrique'AND zone_rubrique.id_objet = rub.id_rubrique")
+                        )) {
+                            while ($row3 = sql_fetch($res3)){
+                                $zones[$row[nom]][$k]=$row3[titre];
+                                $tableau_csv[$i]["zone"]=implode('|',$zones[$row[nom]]);
+                                $k++;
 
+                            }
+                        }
+                }
+                
             }
             $i++;
         }
     }
+    
     // création de la variable contenant l'intégralité des donnees
 	$a_ecrire = '';
 	foreach ($tableau_csv as $ligne) {
