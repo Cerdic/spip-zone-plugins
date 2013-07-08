@@ -25,3 +25,14 @@
     </div></form>
 ]
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+            var deactivator = function(event){ event.preventDefault(); };
+            jQuery("#champ_nom_champs_2").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_4").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_7").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_10").attr('checked',true).click(deactivator);
+
+    });
+</script>
