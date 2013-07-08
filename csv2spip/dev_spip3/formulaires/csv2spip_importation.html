@@ -109,6 +109,7 @@
             jQuery("#champ_traitement_article_efface_3").click(function(event){
                     jQuery("li.editer_nom_rubrique_archive").css("display","block");
                     jQuery("li.editer_rubrique_parent_archive").css("display","block");
+                    jQuery("li.editer_rubrique_parent_archive .bind-ajax").trigger("click");
                     });
             jQuery("#champ_traitement_article_efface_2").click(function(event){
                     jQuery("li.editer_nom_rubrique_archive").css("display","none");
