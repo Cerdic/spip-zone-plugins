@@ -47,18 +47,6 @@ function embed_url($url) {
 		else if (preg_match("/^http\:\/\/(www\.)?pastebin\.com\/(.*)/i", $url, $regs)) {
 			$val = $regs[2];
 
-			
-			/*
-			$html = join("", file($url));
-			$html = substr($html, strpos($html, '<div id="code_frame">'), strlen($html));
-			$html = substr($html, 0, strpos($html, '<div class="content_title">'));
-			
-			$html = preg_replace(',<div id\=\"code_buttons\">(.*)<\/div>,sU', '', $html);
-			if (preg_match(",<ol>(.*)<\/ol>,s", $html, $regs))
-					$html = $regs[0];
-			
-			$html = trim($html);
-			*/
 			$html = "<iframe src='http://pastebin.com/embed_iframe.php?i=".$val."' style='border:none;width:100%;'></iframe>";
 			//$html = "<script src='http://pastebin.com/embed_js.php?i=".$val."'></script>";
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
@@ -96,10 +84,20 @@ function embed_url($url) {
 			if (preg_match(",<html>(.*)</html>,i", $xml, $regs)){
 				$html = $regs[1];
 				$html = html_entity_decode($html, ENT_QUOTES, "UTF-8");
-				if ($html) $code_ae = "<div class='oembed-container'>$html</div>";	
-				
+				if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 			}
-		} 
+		}
+		else if (preg_match(",^http://[^\"\'\`\<\>\@\*\$]*?\.mp3$,i", $url)) {
+
+			$html = file_get_contents(dirname(__FILE__).'/modeles/mp3.html');
+			$html = str_replace('{source}', htmlspecialchars($url), $html);
+			$url_dewplayer = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/modeles/dewplayer.swf';
+			$html = str_replace('{dewplayer}', $url_dewplayer, $html);
+			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
+
+			echo $code_ae; exit;
+
+		}
 		else {
 			require_once "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
