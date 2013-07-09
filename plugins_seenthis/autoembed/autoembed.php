@@ -94,9 +94,6 @@ function embed_url($url) {
 			$url_dewplayer = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/modeles/dewplayer.swf';
 			$html = str_replace('{dewplayer}', $url_dewplayer, $html);
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
-
-			echo $code_ae; exit;
-
 		}
 		else {
 			require_once "AutoEmbed.class.php";
