@@ -19,7 +19,7 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_article"	=> "bigint(21) NOT NULL",
 		"id_article_lie"	=> "bigint(21) NOT NULL",
 		"rang"	=> "bigint(21) NOT NULL DEFAULT '0'",
-		"type_liaison" => "varchar(25)",
+		"type_liaison" => "varchar(25) DEFAULT ''",
 	);
 	
 	$spip_articles_lies_key = array(
