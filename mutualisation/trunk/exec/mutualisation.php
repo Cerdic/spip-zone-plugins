@@ -149,6 +149,18 @@ function exec_mutualisation_dist() {
 	}
 	$page .= "</tbody></table>";
 
+	// On liste ici tous les plugins-dist de la mutu.
+	// Ça sera calculé une seule fois pour toute et réutilisé dans la fonction plus loin.
+	$list_dist = array();
+	// correspond à plugins-dist/nom_plugin/paquet.xml
+	if (glob(_DIR_PLUGINS_DIST . '*/paquet.xml',GLOB_NOSORT)) {
+		foreach (glob(_DIR_PLUGINS_DIST . '*/paquet.xml',GLOB_NOSORT) as $value) {
+			if (preg_match('/prefix="([^"]*)"/i', file_get_contents($value), $r)){
+					$list_dist[] = strtolower(trim($r[1]));
+				}
+		}
+	}
+
 
 	if ($lsplugs) {
 		$nombre_plugins = count($lsplugs) ;
@@ -157,6 +169,7 @@ function exec_mutualisation_dist() {
 		<tr>
 			<td>#</td>
 			<td>Plugins utilis&#233;s ($nombre_plugins) </td>
+			<td>Plugins-dist</td>
 			<td>Version</td>
 			<td>Sites</td>
 		</tr>
@@ -164,7 +177,7 @@ function exec_mutualisation_dist() {
 	<tbody>";
 		foreach ($lsplugs as $plugin => $c){
 			$plnum[count($c)] .= "<tr><td>".count($c)."</td><td>$plugin</td>"
-				."<td>".$versionplug[$plugin]."</td><td>".join(', ', ancre_site($c)).'</td></tr>';
+				."<td>" . pluginDist($list_dist,$plugin) ."</td><td>".$versionplug[$plugin]."</td><td>".join(', ', ancre_site($c)).'</td></tr>';
 		}
 		krsort($plnum);
 		$page .= join('', $plnum);
@@ -199,6 +212,7 @@ function exec_mutualisation_dist() {
 				$list[] = $value;
 			}
 		}
+
 
 		// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
 		foreach ($list as $value) {
@@ -306,6 +320,7 @@ function exec_mutualisation_dist() {
 		$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
 
 	}
+
 	echo $page;
 }
 
@@ -412,6 +427,13 @@ function memoryUsage($bytes) {
         }
 
         return $bytes . ' B';
+}
+
+function pluginDist($array, $plugin) {
+
+	$p = "-";
+	if (in_array($plugin, $array)) $p = "Oui";
+	return $p;
 }
 
 ?>
