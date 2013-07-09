@@ -1,7 +1,7 @@
 <paquet
 	prefix="Mutualisation"
 	categorie="maintenance"
-	version="1.2.0"
+	version="1.2.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="mutualiser.png"
@@ -12,7 +12,7 @@
 	<!-- Créer une ferme à Spip -->
 
 	<auteur>Fil</auteur>
-	<auteur mail="teddy.spip@gmail.com">Teddy, portage pour SPIP 3</auteur>
+	<auteur mail="teddy.spip@gmail.com">Teddy (portage pour SPIP 3)</auteur>
 
 	<copyright>2007-2013</copyright>
 

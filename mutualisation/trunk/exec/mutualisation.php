@@ -278,48 +278,46 @@ function exec_mutualisation_dist() {
 	$time=$timeend-$timestart;
 	$page_load_time = number_format($time, 3);
 
-	if (isset($_GET['toolbar']) AND $_GET['toolbar'] == 1) {
-		$debug_toolbar = "<div class='toolbar'>\n";
+	// On génère le contenu de notre toolbar.
+	$debug_toolbar = "<div class='toolbar'>\n";
 
-		$debug_toolbar .= "<div class='toolbar-block'>\n";
-		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouée</b> <span>" . $memory_limit . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $_SERVER["SERVER_SOFTWARE"] . "</span></div>\n";
-		$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-block'>\n";
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouée</b> <span>" . $memory_limit . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $_SERVER["SERVER_SOFTWARE"] . "</span></div>\n";
+	$debug_toolbar .= "</div></div>\n" ;
 
-		$debug_toolbar .= "<div class='toolbar-block'>\n";
-		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
-		$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-block'>\n";
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
+	$debug_toolbar .= "</div></div>\n" ;
 
-		$debug_toolbar .= "<div class='toolbar-block'>\n";
-		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info'>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>\n";
-		$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-block'>\n";
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>\n";
+	$debug_toolbar .= "</div></div>\n" ;
 
-		$debug_toolbar .= "<div class='toolbar-block'>\n";
-		$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " s</span></div>\n" ;
-		$debug_toolbar .= "<div class='toolbar-info'>" ;
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>\n";
-		$debug_toolbar .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " s</span></div>\n";
-		$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-block'>\n";
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " s</span></div>\n" ;
+	$debug_toolbar .= "<div class='toolbar-info'>" ;
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " s</span></div>\n";
+	$debug_toolbar .= "</div></div>\n" ;
 
-		$debug_toolbar .= "</div>\n" ;
+	$debug_toolbar .= "</div>\n" ;
 
-		$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
-
-	}
+	$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
 
 	echo $page;
 }
