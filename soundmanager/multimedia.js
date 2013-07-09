@@ -96,13 +96,13 @@ $(function() {
 	      	// stop last sound
 	      	
 	      	// deplacer le son
-			$('.playing .loading').click(function(e){
+			$('.progress_bar').click(function(e){
 				e.preventDefault();
 				var duree = thisSound.durationEstimate;
-				var offset = $(".playing .loading").offset();
-				var x = Math.round((e.pageX - offset.left) / $(".playing .loading").width() * 100);
-				var temps = Math.round(duree * x / 100);
-				/* $(".playing .position").progressbar("value",Math.round(x)); */
+				var offset = $(this).offset();
+				var x = (e.pageX - offset.left) / $(this).width() ;
+				var temps = duree * x;
+				$(this).find(".position").css({width:x * 100 +"%"});
 				if(thisSound.playState == 0){
 					soundManager.play(thisSound);
 					thisSound.setPosition(temps);
