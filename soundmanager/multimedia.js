@@ -1,5 +1,4 @@
 $(function() {
-$.getScript(jqueryui, function() {
 
 	var lastSound = '' ;
 
@@ -15,34 +14,17 @@ $.getScript(jqueryui, function() {
 	
 	
 	// animation des boutons
-	
-	$(".loading").css("cursor","pointer");
-	
-	$( ".play" ).button({
-		text: false,
-		icons: {
-			primary: "ui-icon-play"
-		}
-	})
+		
+	$("button.play").html("<span class='ui-icon-play'>play</span>")
 	.click(function() {
 		$(".playing").removeClass("playing");
-		var options;
+		
 		if ( $( this ).text() === "play" ) {
-			options = {
-				label: "pause",
-				icons: {
-					primary: "ui-icon-pause"
-				}
-			};
+		
+			$( this ).html("<span class='ui-icon-pause'>pause</span>");
 		} else {
-			options = {
-				label: "play",
-				icons: {
-					primary: "ui-icon-play"
-				}
-			};
+			$( this ).html("<span class='ui-icon-play'>play</span>");
 		}
-		$(this).button( "option", options );
 		
 		var media_index = $(this).index();
 		var parent_track =  $(this).parents(".audio").eq(0) ;
@@ -86,6 +68,7 @@ $.getScript(jqueryui, function() {
 					if(minutes < 10) minutes = "0" + minutes ;
 										
 					$("." + this.sID +" .duration").html("/ " + minutes + ":" + secondes);
+					
 					$("." + this.sID +" .loading").css({width:Math.round(timer) +"%"});
 				},
 	    		whileplaying:function(){
@@ -95,7 +78,8 @@ $.getScript(jqueryui, function() {
 					if(minutes < 10) minutes = "0" + minutes ;
 					
 					var timer = this.position / this.durationEstimate * 100 ;
-					$("." + this.sID +" .position").progressbar("value",timer);
+					$("." + this.sID +" .position").css({width:Math.round(timer) +"%"}); 
+				
 					$("." + this.sID +" .time").html(minutes + ":" + secondes);
 				}
 	    	});
@@ -112,13 +96,13 @@ $.getScript(jqueryui, function() {
 	      	// stop last sound
 	      	
 	      	// deplacer le son
-			$('.playing .position').click(function(e){
+			$('.playing .loading').click(function(e){
 				e.preventDefault();
 				var duree = thisSound.durationEstimate;
 				var offset = $(".playing .loading").offset();
-				var x = Math.round((e.pageX - offset.left) / $(".playing .position").width() * 100);
+				var x = Math.round((e.pageX - offset.left) / $(".playing .loading").width() * 100);
 				var temps = Math.round(duree * x / 100);
-				$(".playing .position").progressbar("value",Math.round(x));
+				/* $(".playing .position").progressbar("value",Math.round(x)); */
 				if(thisSound.playState == 0){
 					soundManager.play(thisSound);
 					thisSound.setPosition(temps);
@@ -130,8 +114,4 @@ $.getScript(jqueryui, function() {
 	    }	
 	});
 	
-	$( ".position" ).progressbar({
-		value: 0
-	});
-});
 });

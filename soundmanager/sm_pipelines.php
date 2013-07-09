@@ -9,11 +9,7 @@ function sm_insert_head($flux){
 function sm_affichage_final($page) {
 	if (!strpos($page, 'script/soundmanager2.js')){
 		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'") AND $GLOBALS['html']){
-			
-			$script = "<link rel='stylesheet' href='" . find_in_path('jquery-ui/jquery-ui-1.8.13.custom.css') . "' type='text/css' media='projection, screen, tv' />"."\n";
-#			$script .= "<script type=\"text/javascript\" src=\"" . find_in_path('jquery-ui/jquery-ui-1.8.13.custom.min.js') . "\"></script>"."\n";
-			$script .= "<script type=\"text/javascript\">\nvar jqueryui="._q(find_in_path('jquery-ui/jquery-ui-1.8.13.custom.min.js')).";\n</script>"."\n";
-			
+						
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('script/soundmanager2.js') . "\"></script>"."\n";
 			$script .= "
 			<script>
@@ -21,7 +17,7 @@ function sm_affichage_final($page) {
 			  url: '" . find_in_path('swf') . "',
 			  flashVersion: 8, // optional: shiny features (default = 8)
 			  useFlashBlock: false, // optionally, enable when you're ready to dive in
-			  debugMode: true,
+			  debugMode: false,
 			  /**
 			   * read up on HTML5 audio support, if you're feeling adventurous.
 			   * iPad/iPhone and devices without flash installed will always attempt to use it.

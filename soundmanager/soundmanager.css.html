@@ -2,7 +2,7 @@
 
 /* Lecteur audio */
 
-.audio {
+.haudio, .audio {
 margin:25px 0;
 text-align: left;
 line-height:1.5em;
@@ -19,24 +19,114 @@ background:#F4EDDF;
 	float:left;
 }
 
+.controles{
+float:left;
+margin-left: 15px;
+width:440px;
+}
+
+.controles .track.sans_titre{
+	height:1em;
+}
+
+.controles .track {
+margin: 0 0 5px 0;
+font-family:helvetica,arial,sans-serif;
+}
+
+.controles .descriptif{
+text-align: left;
+line-height:1em;
+font-size:small;
+}
+
+.controles .lesinfos {
+font-size: 0.8em;
+line-height: 1.3em;
+margin: 0 0 10px 310px;
+color:#999999;
+overflow: hidden;
+}
+.controles .lesinfos .file {
+display:none;
+}
+
+.time, .duration, .file{
+display:inline;
+font-family:helvetica,arial,sans-serif;
+}
+
+.progress_bar{
+float:left;
+height:15px;
+width:300px;
+position:absolute;
+border-radius:0;
+border:1px solid #333333;
+padding:0;
+background:#ffffff;
+}
+
+.progress_bar .position{
+background:#990000;
+height: 15px;
+position: absolute;
+width:0px;
+}
+
+.ui-progressbar-value{
+position:absolute;
+height: 15px;
+}
+
+.progress_bar .loading{
+height: 15px;
+cursor:pointer;
+background:#000000;
+width:0px;
+}
+
+.controles .ui-widget-header {
+margin:0;
+background: #333333;
+border:0;
+border-radius:0;
+}
+
+
+
 .lecture button.play {
 float:left;
 background: #F4EDDF;
 border:0;
 margin:2px 0 0 0;
+cursor: pointer;
+display: inline-block;
+margin-right: 0.1em;
+overflow: visible;
+padding: 0;
+position: relative;
+text-align: center;
+text-decoration: none !important;
 }
 
-.lecture button.play .ui-icon {
-background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/play.png") no-repeat;
-margin:6px 0 0 0;
+.lecture button.play span{
 position:relative;
 top:auto;
 left:auto;
 width:45px;
 height:41px;
+display: block;
+overflow: hidden;
+text-indent: -99999px;
+margin:6px 0 0 0;
 }
 
-.lecture button.play:hover .ui-icon {
+.lecture button.play .ui-icon-play {
+background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/play.png") no-repeat;
+}
+
+.lecture button.play:hover .ui-icon-play {
 background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/playh.png") no-repeat;
 }
 
@@ -50,62 +140,4 @@ background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/pauseh.png") no-repeat
 
 .lecture button.play .ui-button-text {
 padding:0;
-}
-
-.controles{
-float:left;
-width:440px;
-margin-left: 15px;
-}
-
-.controles .track {
-margin: 0 0 5px 0;
-font-family:helvetica,arial,sans-serif;
-}
-
-.controles .lesinfos {
-font-size: 0.8em;
-line-height: 1.3em;
-margin: 0 0 10px 315px;
-color:#999999;
-overflow: hidden;
-}
-.controles .lesinfos .file {
-display:none;
-}
-
-
-.time, .duration, .file{
-display:inline;
-font-family:helvetica,arial,sans-serif;
-}
-
-.controles .position{
-height:15px;
-width:300px;
-position:absolute;
-border-radius:0;
-border:1px solid #333333;
-padding:0;
-background:#ffffff;
-}
-.ui-progressbar-value{
-	position:absolute;
-}
-.loading{
-	position:absolute;
-	cursor:pointer;
-}
-
-.controles .ui-widget-header {
-margin:0;
-background: #333333;
-border:0;
-border-radius:0;
-}
-
-.controles .descriptif{
-text-align: left;
-line-height:1em;
-font-size:small;
 }
