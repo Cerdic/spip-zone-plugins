@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_noisette' => 'Minivozík',
 
 	// P
-	'panier_description' => 'Popis',
+	'panier_description' => 'Opis',
 	'panier_erreur_quantites' => 'Množstvá musia byť celé čísla.',
 	'panier_montant' => 'Množstvo',
 	'panier_prix_unitaire' => 'Cena za jednotku',

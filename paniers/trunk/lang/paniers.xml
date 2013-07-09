@@ -1,4 +1,7 @@
-<traduction module="paniers" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/paniers/lang/" reference="fr">
+<traduction module="paniers" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/paniers/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=de">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
