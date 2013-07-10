@@ -54,9 +54,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//L
 	'label_actions'=>'Actions',
-	'label_numero'=>'N°',
+    'label_duree'=>'Durée',   
+    'label_numero'=>'N°',
+    'label_quand'=>'Quand',                                   
 	'label_texte'=>'Texte',
-	'liste_des_relances'=>'Liste des relances',
+    'label_titre'=>'Titre',
+    'liste_des_relances'=>'Liste des relances',
 	
 	//N
 	'notification_echeance_sujet_jours' => 'Votre abonnement se termine dans @duree@ jour(s) !',
