@@ -222,9 +222,23 @@ function csv2spip_supprimer($Tid, $statut,$traitement="",$id_rubrique_archive=1)
 		if (in_array($statut, array('0minirezo','1comite'))){
 			$Tarticles = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="article"'));
 			// supprimer les articles
+			$table_idarticle = array();
 			if ($traitement == 'supprimer_articles'){
 				objet_dissocier(array('id_auteur'=>$id), array('article'=>$Tarticles));
-				$inarticle = join(',',$Tarticles);
+                foreach ($Tarticles as $idarticle) {
+                    $table_idarticle[]=$idarticle['id_objet'];
+                }
+				$inarticle = join(',',$table_idarticle);
+echo "<pre>";
+var_dump($Tarticles);
+echo "<br>";
+var_dump($table_idarticle);
+
+
+echo "</pre>";
+
+echo "<br>$inarticle";
+
 				sql_delete('spip_articles', "id_article IN ($inarticle)");
 			}
 			// deplacer les articles dans la rubrique d'archivage
