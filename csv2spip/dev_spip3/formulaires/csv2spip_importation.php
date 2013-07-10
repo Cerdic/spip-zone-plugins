@@ -71,9 +71,12 @@ function formulaires_csv2spip_importation_traiter_dist(){
         $retour['message_ok'] = _T('csv2spip:bravo');
     }
 
-    // transformation du fichier csv en array : 
-    // 1 array = ligne entete 
-    // 1 array = donnees
+    // transformation du fichier csv en 4 array : 
+    // $en_tete = ligne entete 
+    // pour les 3 tableaux suivant, la cle est soit le login et s'il n'existe pas on prend le mail
+    // $tableau_csv_visiteurs
+    // $tableau_csv_redacs
+    // $tableau_csv_admins
     $tableau_csv_visiteurs = $tableau_csv_redacs = $tableau_csv_admins = array();
     $fichiercsv= fopen($destination, "r");
     $i=0;
@@ -82,10 +85,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
        $data           = implode("~",$data);
        $data           = explode("~",$data);
        $nombre_elements = count($data);
-/*echo '<pre>$data:';
-var_dump($data);
-echo '</pre>';
-*/      
+
 		if ($i==0) {
 			for ($j = 0; $j < $nombre_elements; $j++) {
 				$en_tete[$j]=$data[$j];    //Récupération de la ligne d'entete
@@ -116,14 +116,18 @@ echo '</pre>';
     }
     fclose($fichiercsv);
 
-    //récupération des auteurs de la bdd
-    $visiteur_bdd        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="" OR email!="")'));    
-    foreach ($visiteur_bdd as $key) {
-        $visiteur_bdd_par_id[$key['login']?$key['login']:$key['email']]=$key;
+    //récupération des auteurs de la bdd en 3 array 
+    // $visiteur_bdd
+    // $redacteur_bdd
+    // $admin_restreint_bdd
+    // la cle de chaque tableau est le login et s'il n'existe pas le mail
+    $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="" OR email!="")'));    
+    foreach ($visiteur_bdd_req as $key) {
+        $visiteur_bdd[$key['login']?$key['login']:$key['email']]=$key;
     }
-    $redacteur_bdd       = sql_allfetsel('*', 'spip_auteurs', array('statut="1comite"','(login!="" OR email!="")'));
-    foreach ($redacteur_bdd as $key) {
-        $redacteur_bdd_par_id[$key['login']?$key['login']:$key['email']]=$key;
+    $redacteur_bdd_req       = sql_allfetsel('*', 'spip_auteurs', array('statut="1comite"','(login!="" OR email!="")'));
+    foreach ($redacteur_bdd_req as $key) {
+        $redacteur_bdd[$key['login']?$key['login']:$key['email']]=$key;
     }
     //on récupère seulement les admins restreints !!!
     $from = array( 
@@ -134,12 +138,17 @@ echo '</pre>';
         "liens.objet = 'rubrique'",
         "liens.id_auteur = auteurs.id_auteur",
         '(login!="" OR email!="")');
-    $admin_restreint_bdd       = sql_allfetsel("DISTINCT auteurs.*" ,$from, $where);
-    foreach ($admin_restreint_bdd as $key) {
-        $admin_restreint_bdd_par_id[$key['login']?$key['login']:$key['email']]=$key;
+    $admin_restreint_bdd_req       = sql_allfetsel("DISTINCT auteurs.*" ,$from, $where);
+    foreach ($admin_restreint_bdd_req as $key) {
+        $admin_restreint_bdd[$key['login']?$key['login']:$key['email']]=$key;
     }
     
-    // traitement des suppressions
+    // PARTIE II : Suppresions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
+    // 1. ras
+    // 2. supprimer les articles 
+    // 3. transferer les articles dans une rubrique d'archivage
+
+    // Si choix3 : transferer les articles , création de la rubrique d'archive (en tenant compte d'une rubrique parent)
 	if($traitement_article_efface == "transferer_articles"){
 		if(!$id_rubrique_archive = sql_fetsel('id_rubrique','spip_rubriques',array('titre ="'.$nom_rubrique_archive.'"',"id_parent=$id_rubrique_parent"))){
 			$objet = 'rubrique';
@@ -150,25 +159,26 @@ echo '</pre>';
 	}	 
     
     if ($abs_visiteurs) {
-		$Tid_visiteurs = csv2spip_diff_absents($visiteur_bdd_par_id, $tableau_csv_visiteurs);
-		csv2spip_supprimer($Tid_visiteurs, '6forum');
+		$Tid_visiteurs = csv2spip_diff_absents($visiteur_bdd_par, $tableau_csv_visiteurs);
+		csv2spip_supprimer_auteurs($Tid_visiteurs, '6forum');
 	}
     if ($abs_redacs) {
-		$Tid_redacs = csv2spip_diff_absents($redacteur_bdd_par_id, $tableau_csv_redacs);
-		csv2spip_supprimer($Tid_redacs, '1comite',$traitement_article_efface,$id_rubrique_archive);
+		$Tid_redacs = csv2spip_diff_absents($redacteur_bdd, $tableau_csv_redacs);
+		csv2spip_supprimer_auteurs($Tid_redacs, '1comite',$traitement_article_efface,$id_rubrique_archive);
 	}
     if ($abs_admins) {
-		$Tid_admins = csv2spip_diff_absents($admin_restreint_bdd_par_id, $tableau_csv_admins);
-		csv2spip_supprimer($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_archive);
+		$Tid_admins = csv2spip_diff_absents($admin_restreint_bdd, $tableau_csv_admins);
+		csv2spip_supprimer_auteurs($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_archive);
 	}
+
     
 /*
-echo '<pre>$visiteur_bdd_par_id';
-var_dump($visiteur_bdd_par_id);
-echo '<br>$redacteur_bdd_par_id:';
-var_dump($redacteur_bdd_par_id);
-echo '<br>$admin_restreint_bdd_par_id';
-var_dump($admin_restreint_bdd_par_id);
+echo '<pre>$visiteur_bdd';
+var_dump($visiteur_bdd);
+echo '<br>$redacteur_bdd:';
+var_dump($redacteur_bdd);
+echo '<br>$admin_restreint';
+var_dump($admin_restreint);
 echo '</pre>';
 die;
 */
@@ -194,14 +204,16 @@ function csv2spip_diff_absents($Tbdd, $Tfich){
 }
 
 /*
- * supression propre des auteurs 
+ * Suppression propre des auteurs 
  * changement de statut à la poubelle + traitement des liaisons spip_auteurs_liens et spip_zones_liens
  * gestion des articles des auteurs supprimés
  * @param $Tid array des id_auteurs à traiter
- * @statut des auteurs passes dans $Tid
+ * @param $statut des auteurs passent dans $Tid
+ * $param $traitement : choix 2 (suppresion) ou 3 (transfere)
+ * $param $id_rubrique_archive
  * 
  */
-function csv2spip_supprimer($Tid, $statut,$traitement="",$id_rubrique_archive=1) {
+function csv2spip_supprimer_auteurs($Tid, $statut,$traitement="",$id_rubrique_archive=1) {
 	// passage à la poubelle
 	$objet = 'auteur';
 	$set = array('statut'=>'5poubelle');
