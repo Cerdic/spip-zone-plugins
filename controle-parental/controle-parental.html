@@ -1,0 +1,40 @@
+#CACHE{12*3600}
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+	<head>
+	<INCLURE{fond=noisettes/headers/entete-meta}{skel=controle-parental}{env}>
+	</head>
+
+	<body>
+	<div id="page">
+	
+		[(#REM) Entete de la page]
+
+		<INCLURE{fond=noisettes/entete/inc_entete-page}{lang}>	
+		
+		[(#REM) Conteneur]
+		<div id="conteneurseul">
+
+		[(#REM) Contenu de la page]
+		<div id="contenu">
+			<div class="bloc">
+				<div class="titre">
+					<div id="auteursdates">
+						<div><strong><:par:></strong>
+							<a href="http://www.ac-rouen.fr/l-academie/politiques-educatives/le-gapase-42196.kjsp"><abbr title="Groupe Académique de Prévention et d Appui à la Sécurisation des &Eacute;tablissements">GAPASE</abbr> de l'académie de Rouen</a>
+						</div>
+					</div>
+					<h2 class="titre">Prévention des dangers du numérique : le contrôle parental sur ordinateur</h2>
+					<div class="nettoyeur"></div>
+				</div>
+				<div class="texte">
+					#MODELE{controle-parental}
+				</div>
+			</div>
+		</div><!-- contenu -->
+		</div><!-- conteneurseul -->
+		<INCLURE{fond=noisettes/pied/inc_pied}{lang}>
+	</div>
+</body>
+</html>

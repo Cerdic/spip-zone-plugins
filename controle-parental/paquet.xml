@@ -1,0 +1,12 @@
+<paquet
+  prefix="controle_parental"
+  categorie="squelette"
+  version="1.0.0"
+  etat="stable"
+  compatibilite="[3.0.0;3.0.99]"
+  documentation="http://spip.ac-rouen.fr/?Controle-parental-information-sur"
+  logo="prive/themes/spip/images/charte_ministere.png"
+>
+  <nom>Contr&#244;le parental</nom>
+  <auteur>Textes cr&#233;&#233;s par le GAPASE de l'acad&#233;mie de Rouen, transform&#233;s en plugin par Olivier Gautier (mission TICE, rectorat de Rouen).</auteur>
+</paquet>
