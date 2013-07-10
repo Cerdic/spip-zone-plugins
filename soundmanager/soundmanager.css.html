@@ -22,7 +22,6 @@ float:left;
 .controles{
 float:left;
 margin-left: 15px;
-width:440px;
 }
 
 .controles .track.sans_titre{
@@ -43,7 +42,7 @@ font-size:small;
 .controles .lesinfos {
 font-size: 13px;
 line-height: 1.3em;
-margin: 0 0 10px 310px;
+margin: 0 0 10px 75%;
 color:#999999;
 overflow: hidden;
 }
@@ -59,8 +58,8 @@ font-family:helvetica,arial,sans-serif;
 .progress_bar{
 float:left;
 height:15px;
-width:300px;
-position:absolute;
+width:70%;
+position:relative;
 border-radius:0;
 border:1px solid #333333;
 padding:0;
@@ -95,7 +94,6 @@ border-radius:0;
 }
 
 .lecture button.play {
-float:left;
 background: #F4EDDF;
 border:0;
 margin:2px 0 0 0;
@@ -140,3 +138,26 @@ background:url("#URL_SITE_SPIP/plugins/soundmanager/skins/pauseh.png") no-repeat
 .lecture button.play .ui-button-text {
 padding:0;
 }
+
+
+/* #Mobile (Portrait)
+================================================== */
+
+/* Note: Design for a width of 320px */
+@media only screen and (max-width: 767px) {
+   .lecture, .controles, .progress_bar{
+   float:none;
+   }
+   .controles .lesinfos{
+   	 margin:10px 0 10px 0%;
+   	}
+   .controles .track.sans_titre{
+   	height:0;
+   	}
+   	.controles{
+   		width:100%;
+   	}
+   	.haudio, .audio{
+   	padding:15px 15px 0px;
+   	}
+}	
