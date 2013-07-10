@@ -49,9 +49,13 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $abs_visiteurs = _request('abs_visiteur');
     $suppression_article_efface = _request('suppression_article_efface');
     $traitement_article_efface = _request('traitement_article_efface');
-    $id_rubrique_parent = intval(_request('rubrique_parent_archive'));
+    $id_rubrique_parent = _request('rubrique_parent_archive');
     $nom_rubrique_archive = _request('nom_rubrique_archive');
     $rubrique_parent = _request('rubrique_parent');
+
+    //récupération de l'id de la rubrique parent
+    $id_rubrique_parent=explode('|',$id_rubrique_parent[0]);
+    $id_rubrique_parent=$id_rubrique_parent[1];
     
     $retour = array();
 
