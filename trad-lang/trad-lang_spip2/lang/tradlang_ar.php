@@ -9,11 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'لا توجد اي وحدة.',
-	'auteur_revision' => '@nb@ modification de traduction.', # NEW
+	'auteur_revision' => '@nb@ ترجمة معدّلة.',
 	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
-	'auteur_revisions' => '@nb@ modifications de traductions.', # NEW
-	'auteur_revisions_langue' => 'La langue de ses participations :', # NEW
-	'auteur_revisions_langues' => 'Les @nb@ langues de ses participations :', # NEW
+	'auteur_revisions' => '@nb@ ترجمة معدّلة.',
+	'auteur_revisions_langue' => 'لغة مساهماته (مساهماتها):',
+	'auteur_revisions_langues' => 'اللغات الـ@nb@ لمساهماته (لمساهماتها):',
 	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 
 	// B
@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_tradlang_module' => 'سلسلة لغة واحدة',
 	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_aucun_tradlang_module' => 'لا توجد اي سلسلة لغة',
-	'info_auteur_sans_favori' => 'Cet auteur n\'a aucun module en favori.', # NEW
+	'info_auteur_sans_favori' => 'هذا المترجم ليس لديه أي وحدة مفضلة.',
 	'info_chaine_jamais_modifiee' => 'لم يتم تعديل هذه السلسلة أبداً.',
 	'info_chaine_originale' => 'هذه السلسلة هي السلسلة الأصلية',
 	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_modif' => '@pc@٪ من البنود ذات الأولوية «@priorite@» معدلة وجاهزة للتدقيق بـ@lang@ (@langue_longue@)',
 	'info_nb_items_priorite_new' => '@pc@٪ من البنود ذات الأولوية «@priorite@» جديدة بـ@lang@ (@langue_longue@) ',
 	'info_nb_items_priorite_ok' => 'الوحدات ذات الأولوية «@priorite@» مترجمة بنسبة @pc@٪ الى @lang@ (@langue_longue@)',
-	'info_nb_modules_favoris' => '@nb@ modules favoris.', # NEW
+	'info_nb_modules_favoris' => '@nb@ وحدة مفضلة.',
 	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
 	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
@@ -137,11 +137,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_percent_chaines' => '@traduites@ / @total@ سلسلة مترجمة الى «[@langue@] @langue_longue@»',
 	'info_revisions_stats' => 'التعديلات',
 	'info_status_ok' => 'موافق',
-	'info_statut' => 'Statut', # NEW
+	'info_statut' => 'الوضعية',
 	'info_str' => 'نص سلسلة اللغة',
 	'info_textarea_readonly' => 'هذا الحقل ممنوع من الكتابة (قراءة فقط)',
 	'info_tradlangs_sans_version' => '@nb@ سلسلة لغة ليس لها أية مراجعة أولى (المراجعات الأولى ناتجة عن وظيفة CRON).',
-	'info_traducteur' => 'Traducteur(s)', # NEW
+	'info_traducteur' => 'مترجمون',
 	'info_traduire_module_lang' => 'ترجمة الوحدة «@module@» الى @langue_longue@ (@lang@)',
 	'infos_trad_module' => 'معلومات حول الترجمات',
 	'item_creer_langue_cible' => 'إنشاء هدف جديد',
@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_tradlang_module' => 'شعار الوحدة',
 	'titre_modifications_chaines' => 'أحدث تعديلات هذه السلسلة',
 	'titre_modifier' => 'تعديل',
-	'titre_page_auteurs' => 'Liste des contributeurs', # NEW
+	'titre_page_auteurs' => 'قائمة المساهمين',
 	'titre_page_configurer_tradlang' => 'إعداد ملحق Trad-lang',
 	'titre_page_tradlang_module' => 'الوحدة #@id@ : @module@',
 	'titre_profil_auteur' => 'تحرير سيرتك',
@@ -351,10 +351,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_revisions_ses' => 'مساهماته (ها)',
 	'titre_revisions_sommaire' => 'أحدث التعديلات',
 	'titre_revisions_vos' => 'مساهماتك',
-	'titre_stats_ses' => 'Ses statistiques', # NEW
+	'titre_stats_ses' => 'إحصاءاته (ها)',
 	'titre_stats_trads_journalieres' => 'عدد التعديلات اليومية',
 	'titre_stats_trads_mensuelles' => 'عدد التعديلات الشهري',
-	'titre_stats_vos' => 'Vos statistiques', # NEW
+	'titre_stats_vos' => 'إحصاءاتك',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'سلاسل اللغة',
 	'titre_tradlang_module' => 'وحدة لغة',
