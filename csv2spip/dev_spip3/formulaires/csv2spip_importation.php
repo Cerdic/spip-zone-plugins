@@ -229,16 +229,6 @@ function csv2spip_supprimer($Tid, $statut,$traitement="",$id_rubrique_archive=1)
                     $table_idarticle[]=$idarticle['id_objet'];
                 }
 				$inarticle = join(',',$table_idarticle);
-echo "<pre>";
-var_dump($Tarticles);
-echo "<br>";
-var_dump($table_idarticle);
-
-
-echo "</pre>";
-
-echo "<br>$inarticle";
-
 				sql_delete('spip_articles', "id_article IN ($inarticle)");
 			}
 			// deplacer les articles dans la rubrique d'archivage
