@@ -1,0 +1,15 @@
+<BOUCLE_abonnement(ABONNEMENTS){id_abonnement}>
+#SET{nom,#ENV{nom}}
+#SET{offre,#TITRE}
+#SET{echeance, #VAL{relance:champ_periode_nb_}|concat{#ENV{periode}}|_T{#ARRAY{nb,#ENV{duree}}}}
+<body>
+<BOUCLE_relance(RELANCES){id_relance}>
+[(#TEXTE*|replace{‹nom_abonne›,#GET{nom}}|replace{‹abonnement_offre›,#GET{offre}}|propre)]
+</BOUCLE_relance>
+</body>
+
+</BOUCLE_abonnement>
+[(#ENV{format_envoi}|=={plain}|oui)
+	#FILTRE{supprimer_tags|filtrer_entites|trim}]
+[(#ENV{format_envoi}|=={plain}|non)
+	#FILTRE{filtrer_entites|trim}]

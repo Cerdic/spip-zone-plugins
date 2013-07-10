@@ -1,0 +1,37 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_RELANCE|intval|et{#AUTORISER{voir,relance,#ID_RELANCE}})}>
+<BOUCLE_relance(RELANCES){id_relance}{tout}>
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,relance,#ID_RELANCE})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{relance_edit}
+				|parametre_url{id_relance,#ID_RELANCE}
+				|parametre_url{retour,#SELF}
+				|icone{<:relance:icone_modifier_relance:>, #CHEMIN{images/relance_24.png}, #LANG_RIGHT, edit.gif})]
+		</div>
+	]
+
+	<h1>#TITRE</h1>
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,relance,
+				id_objet,#ID_RELANCE,
+				contexte,[(#ARRAY{
+					id_relance,#ID_RELANCE})]})],
+			data,[(#INCLURE{fond=prive/contenu/relance,id=#ID_RELANCE})]})]})]
+	</div>
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,relance,
+			id,#ID_RELANCE})],
+		data,''})]})
+</div>]
+<!--/#navigation-->
+</BOUCLE_relance>
+</BOUCLE_si_autorise>

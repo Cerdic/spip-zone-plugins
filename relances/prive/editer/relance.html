@@ -1,0 +1,8 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	#ENV**{icone_retour}
+	[<:relance:info_modifier_relance:>
+	<h1>(#ENV{titre,<:relance:texte_nouveau_relance:>})</h1>]
+</div>
+#FORMULAIRE_EDITER_RELANCE{#ENV{id_relance,new},#ENV{redirect,#URL_ECRIRE{relance_voir}}}
+</div>

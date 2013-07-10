@@ -1,0 +1,18 @@
+#CACHE{0}
+[(#SET{id_relance,[(#VAL{id_relance}|_request|sinon{new})]})]
+<BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,relance,#GET{id_relance}})}>
+
+	[(#SET{retour, #URL_ECRIRE{relances}})]
+	<BOUCLE_titre(RELANCES){id_relance=#GET{id_relance}}{tout}>
+		[(#SET{titre, #TITRE})]
+		[(#SET{retour, [(#URL_ECRIRE{relance_voir}|parametre_url{id_relance,#ID_RELANCE})]})]
+	</BOUCLE_titre>
+		
+	[(#INCLURE{fond=prive/editer/relance,
+		id_relance=#GET{id_relance},
+		icone_retour=[(#ENV{retour,#GET{retour}}
+			|icone{<:icone_retour:>, #CHEMIN{images/relance_48.png}, #LANG_LEFT })],
+		titre=#GET{titre}
+	})]
+	
+</BOUCLE_si_autorise>

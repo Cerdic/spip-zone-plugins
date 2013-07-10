@@ -1,0 +1,24 @@
+<BOUCLE_afficher_contenu(RELANCES){id_relance=#ENV{id}}{tout}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:relance:label_titre:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class='label'><:relance:label_texte:></div>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</div>
+</div>
+<div class="champ contenu_duree[ (#DUREE*|strlen|?{'',vide})]">
+	<div class='label'><:relance:label_duree:></div>
+	<div dir='#LANG_DIR' class='#EDIT{duree} duree'>#DUREE</div>
+</div>
+<div class="champ periode[ (#PERIODE*|strlen|?{'',vide})]">
+	<div class='label'><:relance:label_periode:></div>
+	<div dir='#LANG_DIR' class='#EDIT{periode} periode'>#PERIODE</div>
+</div>
+<div class="champ quand[ (#QUAND*|strlen|?{'',vide})]">
+	<div class='label'><:relance:label_quand:></div>
+	<div dir='#LANG_DIR' class='#EDIT{quand} quand'>#QUAND</div>
+</div>
+
+
+</BOUCLE_afficher_contenu>

@@ -1,0 +1,18 @@
+[(#AUTORISER{voir,relances})
+	<h1><:relance:liste_des_relances:></h1>
+
+	<!--#navigation-->
+	<div class='cadre cadre-info'>
+		<p><:relance:description_relances:></p>
+	</div>
+	<!--/#navigation-->
+	
+	<div class='ajax'>
+	<INCLURE{fond=prive/liste/relances,env,ajax} />
+	[(#AUTORISER{modifier,relance})
+			[(#URL_ECRIRE{relance_edit}
+				|parametre_url{new,oui}
+				|icone{<:relance:action_ajouter_relance:>, #CHEMIN{images/relance_24.png}, right, creer.gif})]
+		]
+	</div>
+]

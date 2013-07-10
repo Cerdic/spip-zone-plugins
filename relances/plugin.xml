@@ -1,0 +1,46 @@
+<plugin>
+	<nom>Relances</nom>
+	<auteur>
+	Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net) [Les Développements Durables->http://www.ldd.fr] [Revue Ababord->http://ababord.org]
+	</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
+	<icon>images/relance_48.png</icon>
+   <slogan>
+   Envoyer des mails de relances.
+   </slogan>
+	<description>Créer et paramétrer des mails de relance.</description>
+	<etat>dev</etat>
+	<prefix>relance</prefix>
+	<lien>http://www.spip-contrib.net/?article4410</lien>
+	<install>base/relances_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/relances.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/relances.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>relances_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>relances_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id='relance' parent="naviguer">
+		<titre>relance:relances</titre>
+		<icone>images/relance_22.png</icone>
+		<url>relances</url>
+	</bouton>
+	<traduire gestionnaire="salvatore" module="relance" reference="fr" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
+	<necessite id="abonnement" version="[1.4.1;]" />
+    <necessite id="queue" version="[0.6.6;]" />
+    <utilise id="facteur" version="[1.0;]" />
+	<categorie>outil</categorie>
+</plugin>

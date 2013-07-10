@@ -1,0 +1,38 @@
+<B_liste_art>
+#ANCRE_PAGINATION
+<div class="liste-elements liste-objets relances">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:relance:info_les_relances:>}) ([(#GRAND_TOTAL)])</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id' scope='col'><:relance:label_numero:></th>
+			<th class='titre' scope='col'><:relance:label_titre:></th>
+			<th class='duree' scope='col'><:relance:label_duree:></th>
+			<th class='quand' scope='col'><:relance:label_quand:></th>
+			<th class='action' scope='col'><:relance:label_actions:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_art(RELANCES){par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='id'>[(#ID_RELANCE)]</td>
+			<td class='titre'>[(#LOGO_RELANCE||image_reduire{20,26})]
+			<a href="[(#URL_ECRIRE{relance_voir}|parametre_url{id_relance,#ID_RELANCE})]">[(#RANG).&nbsp;][(#TITRE|supprimer_numero)]</a></td>
+			<td class='duree'>[(#DUREE) ]#PERIODE</td>
+			<td class='quand'>[(#QUAND)]</td>
+			<td class='id'>			
+			[(#AUTORISER{modifier,relance,#ID_RELANCE}|non)
+				<a href='[(#URL_ECRIRE{relance_voir}|parametre_url{id_relance,#ID_RELANCE})]'><:relance:action_voir:></a>
+			]
+			[(#AUTORISER{modifier,relance,#ID_RELANCE})
+				<a href='[(#URL_ACTION_AUTEUR{supprimer_relance,#ID_RELANCE,#SELF})]'><:relance:action_supprimer:></a>
+			]</td>
+		</tr>
+	</BOUCLE_liste_art>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_art>[
+<div class="liste-elements liste-objets relances caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_art>

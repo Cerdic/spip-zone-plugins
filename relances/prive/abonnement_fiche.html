@@ -1,0 +1,45 @@
+[(#REM) ce fichier remplace par surcharge le fichier de même nom du plugin zabonnement]
+#SET{today,#DATE}
+<B_actifs>
+#ANCRE_PAGINATION
+<div id='contacts_#ENV{objet}_#ID_AUTEUR' class="liste-elements abonnement">
+<table class='spip liste'>
+	<tbody>
+<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=#ENV{objet}}{par validite}{pagination #ENV{nb,10}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<td>
+	<BOUCLE_lib0(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+	<p><strong><:abo:abonnement:></strong> : <a href="#URL_ECRIRE{abonnement_edit,id_abonnement=#ID_ABONNEMENT}">#TITRE</a></p>
+	</BOUCLE_lib0> 
+	<p><strong><:abo:statut_abonnement:></strong> : [(#VAL{abo:statut_#STATUT_ABONNEMENT}|_T)]</p>
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#GET{today}}|oui) (<:abo:terme_echu:>)]</p>
+	<p><strong><:relance:dates_relances_archives:></strong> : <BOUCLE_relances_archives(RELANCES_ARCHIVES){id_auteur}{id_abonnement=#ID_OBJET}{','}>[(#DATE|affdate)]</BOUCLE_relances_archives><:relance:aucune_relance:><//B_relances_archives></p>
+	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
+	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
+	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
+	</td>
+		<td class='action' style="vertical-align:bottom">
+			[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|oui)
+				[(#BOUTON_ACTION{[(#CHEMIN{images/editer-16.png}
+					|balise_img{<:abo:modifier_abonnement:>})],
+					[(#URL_ECRIRE{contacts_abonnement_edit}
+						|parametre_url{id_contacts_abonnement,#ID_CONTACTS_ABONNEMENT}
+						|parametre_url{objet,#OBJET}
+						|parametre_url{id_objet,#ID_OBJET}
+						|parametre_url{retour,[(#ENV{retour,#SELF})]})],ajax})]
+						
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_offre:>})],
+					[(#URL_ACTION_AUTEUR{supprimer_contacts_abonnement,contacts_abonnement-#ID_CONTACTS_ABONNEMENT-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
+					ajax,
+					<:abo:confirmer_supprimer_element:>})]
+			]
+		</td>
+	</tr>
+</BOUCLE_actifs>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_actifs>
+

@@ -1,0 +1,45 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_relance,nouveau}'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_chat' value='#ENV{id_chat}' />
+		<ul>
+		[(#SAISIE{input, titre,
+			label=<:relance:champ_titre_mail_label:>,
+			obligatoire=oui})]
+			
+		
+		[(#SAISIE{input, duree,
+			label=<:relance:champ_duree_label:>,
+			size=4})]
+			
+		[(#SAISIE{selection, periode,
+			label=<:relance:champ_periode_label:>,
+			defaut='mois',
+			datas=#ARRAY{
+				mois,<:relance:champ_periode_choix_mois:>,
+				jours,<:relance:champ_periode_choix_jours:>}
+		})]
+		
+		[(#SAISIE{selection, quand,
+			label=<:relance:champ_quand_label:>,
+			defaut='avant',
+			datas=#ARRAY{
+				avant,<:relance:champ_quand_label_avant:>,
+				apres,<:relance:champ_quand_label_apres:>}
+		})]
+
+		[(#SAISIE{textarea, texte,
+			label=<:relance:label_texte:>,
+			explication=<:relance:explication_texte:>})]			
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
