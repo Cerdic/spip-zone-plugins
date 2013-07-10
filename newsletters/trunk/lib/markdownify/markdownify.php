@@ -388,8 +388,9 @@ class Markdownify {
   function flushStacked() {
     # links
     foreach ($this->stack as $tag => $a) {
-      if (!empty($a)) {
-        call_user_func(array(&$this, 'flushStacked_'.$tag));
+      if (!empty($a)
+        AND is_callable($methodVariable = array(&$this, 'flushStacked_'.$tag))) {
+        call_user_func($methodVariable);
       }
     }
   }
