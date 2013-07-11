@@ -119,6 +119,8 @@ function formulaires_csv2spip_importation_traiter_dist(){
         $i++;
     }
     fclose($fichiercsv);
+    unlink($destination);
+    
 
     //récupération des auteurs de la bdd en 3 array 
     // $visiteur_bdd
@@ -146,7 +148,8 @@ function formulaires_csv2spip_importation_traiter_dist(){
     foreach ($admin_restreint_bdd_req as $key) {
         $admin_restreint_bdd[$key['login']?$key['login']:$key['email']]=$key;
     }
-    
+
+
     // PARTIE II : Suppresions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
     // 1. ras
     // 2. supprimer les articles 
