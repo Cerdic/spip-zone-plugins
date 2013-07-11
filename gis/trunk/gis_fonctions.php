@@ -345,8 +345,9 @@ function gis_modele_url_json_env($env){
 			if (isset($env[$primary]))
 				$contexte[$primary] = $env[$primary];
 		}
-		// puis cas particuliers
-		$keys = array("id_objet","id_secteur","id_parent","media","recherche","mots");
+		// puis cas particuliers et les champs de gis
+		// TODO Peut être passer par un pipeline ici
+		$keys = array("id_objet","id_secteur","id_parent","media","recherche","mots","pays","code_pays","region","ville","code_postal","adresse");
 		foreach ($keys as $key){
 			if (isset($env[$key]))
 				$contexte[$key] = $env[$key];
