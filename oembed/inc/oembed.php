@@ -19,6 +19,7 @@ function oembed_lister_providers(){
 	// http://oembed.com/
 	// http://code.google.com/p/oohembed/source/browse/app/provider/endpoints.json
 	// https://github.com/starfishmod/jquery-oembed-all/blob/master/jquery.oembed.js
+	// https://github.com/panzi/oembedendpoints/blob/master/endpoints-simple.json
 	// voir aussi http://embed.ly/providers qui donne les scheme mais pas les endpoint
 	$providers = array(
 		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
