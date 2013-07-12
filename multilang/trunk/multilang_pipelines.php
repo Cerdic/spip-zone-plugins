@@ -95,24 +95,24 @@ function multilang_inserer_head($config=array()){
  * @return string $flux Le contenu de la page modifiée 
  */
 function multilang_affichage_final($flux){
-	if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js'){
+	if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js' && (count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1)){
 		if(!function_exists('lire_config'))
 			include_spip('inc/config');
 		$config = lire_config('multilang',array());
-		
+
 		/**
 		 * On n'utilise multilang que si l'espace public est activé ainsi que les crayons
 		 */
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
 			unset($config['multilang_public']);
 			unset($config['multilang_crayons']);
-			$root = '' ;
-			
+			$root = '';
+
 			if(isset($config['siteconfig']) && $config['siteconfig']){
 				$root .= ',input[type=hidden][name*=name_][value|=meta-valeur]';
 				unset($config['siteconfig']);
 			}
-			
+
 			foreach($config as $conf => $val){
 				if($val == 'on') { // Articles
 					$root .= ',input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo])';
@@ -121,14 +121,16 @@ function multilang_affichage_final($flux){
 			}
 			$texte = '
 				var crayons_multilang_init = function(){
-					var crayons_root = ".formulaire_spip:has('.$root.')";
-					var fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)";
-					var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
-					var root_opt = "form:has(.multilang)";
-					var fields_selector_opt = ".multilang";
+					if(typeof(multilang_init_lang) == "function"){
+						var crayons_root = ".formulaire_spip:has('.$root.')",
+							fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)",
+							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']",
+							root_opt = "form:has(.multilang)",
+							fields_selector_opt = ".multilang";
 					multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
+					}
 				}
-				
+
 				cQuery(document).ready(function(){
 					if(typeof onAjaxLoad == "function") onAjaxLoad(crayons_multilang_init);
 					crayons_multilang_init();
