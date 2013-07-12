@@ -29,6 +29,7 @@ Parametres possibles :
 
 - autocenterandzoom|centrer_auto = oui        centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
 - localize_visitor|localiser_visiteur = oui   centrer la carte sur la position du visiteur (API geolocation HTML5)
+- localize_visitor_zoom = 12	niveau de zoom sur la position du visiteur (par défaut la valeur de zoom de la carte) 
 - id_a_ouvrir                                 id_gis de l'infobulle à afficher au chargement(marqueur uniquement)
 
 - objets = gis                     type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
@@ -113,6 +114,7 @@ map_cfg["[(#GET{id})]"] = {
 	"icone" : (#ENV{icone}|json_encode)]
 	},
 "localize_visitor":[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|?{true,false})],
+"localize_visitor_zoom":[(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
 "centrer_fichier":[(#ENV{centrer_fichier,oui}|=={oui}|?{true,false})],
 "kml":[(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
 "gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})]

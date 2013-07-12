@@ -244,8 +244,15 @@ var gis_init_map = function(mapcfg) {
 		}
 	}
 
-	if (mapcfg['localize_visitor'])
-		map.locate({setView: true, maxZoom: mapcfg['zoom']});
+	if (mapcfg['localize_visitor']) {
+		var maxZoom = mapcfg['localize_visitor_zoom'];
+		map.on('locationerror',function(e){
+			maxZoom = mapcfg['zoom'];
+			alert(e.message);
+		});
+
+		map.locate({setView: true, maxZoom: maxZoom});
+	}
 
 	// si pas de points trigger ici
 	if (!mapcfg['affiche_points'] || !mapcfg['json_points'].length)
