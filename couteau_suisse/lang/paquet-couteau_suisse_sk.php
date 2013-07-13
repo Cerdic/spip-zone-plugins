@@ -14,11 +14,11 @@ Každý z týchto nástrojov môže používateľ aktivovať alebo deaktivovať
 
 K dispozícii sú tieto kategórie: Riadenie, Zabezpečenie, Súkromné rozhranie, Vylepšenie textov, Klávesové skratky, Zobrazenie na verejne prístupnej stránke, Tagy, filtre, kritériá.
 
-Objavte svoje obľúbené nástroje v tomto zásuvnom module: {vymazanie čísla}, {formát internetových adries}, {klávesové indexy}, {inteligentné úvodzovky}, {pekné odrážky}, {boj proti SPAMU}, {šifrovanie pošty}, {pekné internetové adresy}, {SPIP a externé odkazy...}, {smajlíky}, {zhrnutie článku}, {vystrihovanie na stránkach a kartách} a tak ďalej, a tak ďalej.
+Objavte v tomto zásuvnom module svoje obľúbené nástroje: {Vymazanie čísla}, {Formát URL}, {Klávesové indexy}, {Inteligentné úvodzovky}, {Pekné odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Pekné internetové adresy}, {SPIP a externé odkazy...}, {Smajlíky}, {Zhrnutie článku}, {Vystrihovanie na stránkach a kartách} atď., atď.
 
-Pokojne si prečítajte dokumentáciu k zásuvnému modulu publikovanú na stránke: [spip-contrib.net.->http://www.spip-contrib.net/Le-Couteau-Suisse]
+Pokojne si prečítajte dokumentáciu k zásuvnému modulu publikovanú na: [spip-contrib.net.->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibilita: SPIP v1.92x, v2.x.x a v3.0', # MODIF
+Kompatibilita: SPIP v1.92x, v2.x.x a v3.0',
 	'couteau_suisse_slogan' => 'Veľa malých nových a užitočných funkcií pre vašu stránku!'
 );
 
