@@ -8,6 +8,20 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_evenement' value='#ID_EVENEMENT' />
 		<input type='hidden' name='id_parent' value='#ENV{id_parent}' />
+
+
+[(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie]
+#SET{tableau_type_evenement, #ARRAY}
+
+
+[(#REM)Attention astuce inside pour que les clés numériques ne soient pas réindexées, on inverse l'ordre d'intégration dasn le tableau et ensuite on flip le tableau]
+<BOUCLE_groupe(GROUPES_MOTS){titre=Type}>
+<BOUCLE_mots(MOTS){id_groupe}>
+#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_merge{#ARRAY{#TITRE,#ID_MOT}}
+</BOUCLE_mots>
+</BOUCLE_groupe>
+[(#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_flip})]
+
 	  <ul>
 			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:agenda:evenement_titre:></label>[
@@ -19,6 +33,13 @@
 	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
 	  	</li>
+
+		[(#SAISIE{selection, id_mot, obligatoire=oui,
+			label=<:seminaire:choix_mot:>,
+			explication=<:almanach:type_evenement:>,
+			datas=#GET{tableau_type_evenement}	
+		})]
+
 	    <li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
 				<ul>
 					<li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
