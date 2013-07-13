@@ -114,4 +114,5 @@ function bible_generer_doc_lang($lang,$original=false){
 
 
 	return $texte;
-}	?>
+}	
+?>
