@@ -42,8 +42,9 @@ var spipGeoportail = jQuery.geoportail =
 		if (typeof(OpenLayers)=='undefined' ||
 			typeof (Geoportal) == 'undefined' ||
 			typeof (Geoportal.Viewer) == 'undefined' ||
-			typeof (Geoportal.Viewer.Standard) == 'undefined' ||
-			(jQuery.browser["msie"] && typeof (document.namespaces) != 'object'))        
+			typeof (Geoportal.Viewer.Standard) == 'undefined' 
+			// || (jQuery.browser["msie"] && typeof (document.namespaces) != 'object')
+			)        
 		{
             window.setTimeout('jQuery.geoportail.initMap();', 300);
             return;
@@ -86,7 +87,7 @@ var spipGeoportail = jQuery.geoportail =
 			(	"GeoportalMapDiv"+carte.id,
 				OpenLayers.Util.extend({
 					mode:'normal',
-                    territory: carte.zone,
+                    territory: "WLD",//carte.zone,
                     projection: proj,
 					nameInstance: "map"+carte.id
 					},
@@ -861,36 +862,46 @@ var spipGeoportail = jQuery.geoportail =
 		return l;
 	},
 	
+	// Centre des cartes en fonction du territoires
+	geocentre : function(zone)
+	{	var gc = 
+		{	"FXX": { lon:1.7, lat:46.95, ech:5 },
+			"GLP": { lon:-61.42, lat:16.17, ech:9 },
+			"GUF": { lon:-53, lat:4.8, ech:8 },
+			"MTQ": { lon:-61, lat:14.65, ech:10 },
+			"MYT": { lon:45.13, lat:-12.82, ech:11 },
+			"NCL": { lon:165.9, lat:-21.2, ech:7 },
+			"PYF": { lon:-149.5, lat:-17.66, ech:10 },
+			"REU": { lon:55.53, lat:-21.13, ech:10 },
+			"SPM": { lon:-56.3,	 lat:46.94,	 ech:10 },
+			"WLF": { lon:-176.2, lat:-13.285,ech:12 },
+			"ATF": { lon:140, lat:-66.7, ech:9 },
+			"KER": { lon:69.7, lat:-49.25,  ech:8 },
+			"CRZ": { lon:51.28, lat:-46.35,  ech:8 },
+			"SMA": { lon:-63.08, lat:18.07,  ech:12 },
+			"SBA": { lon:-62.85, lat:17.91, ech:12 },
+			"ANF": { lon:-64.34, lat:15.78, ech:6 },
+			"EUE": { lon:9.4, lat:48.94, ech:2 }
+		}
+		var c = gc[zone];
+		if (!c && Geoportal.Catalogue.TERRITORIES[zone])
+		{	c = {	lon : Geoportal.Catalogue.TERRITORIES[zone].geocenter[0],
+					lat : Geoportal.Catalogue.TERRITORIES[zone].geocenter[0],
+					ech : 8
+				};
+		}
+		return c;
+	},
+
 	// Fonction principale pour l'affichage de la carte
 	showMap: function(map, mode, pos, box, visu) 
 	{	var lon = pos.lon;
 		var lat = pos.lat;
 		var ech = pos.zoom;
-		var geocentre =
-		{	"FXX": { lon:1.7, lat:46.95, ech:5 },
-			"GLP": { lon:-61.42, lat:16.17, ech:8 },
-			"GUF": { lon:-53, lat:4.8, ech:7 },
-			"MTQ": { lon:-61, lat:14.65, ech:9 },
-			"MYT": { lon:45.13, lat:-12.82, ech:9 },
-			"NCL": { lon:165.9, lat:-21.2, ech:6 },
-			"PYF": { lon:-149.5, lat:-17.66, ech:8 },
-			"REU": { lon:55.5, lat:-21.1, ech:8 },
-			"SPM": { lon:-56.3,	 lat:46.94,	 ech:9 },
-			"WLF": { lon:-176.2, lat:-13.285,ech:11 },
-			
-			"ATF": { lon:140, lat:-66.7, ech:8 },
-			"CRZ": { lon:Geoportal.Catalogue.TERRITORIES[pos.zone].geocenter[0], 
-						lat:Geoportal.Catalogue.TERRITORIES[pos.zone].geocenter[1], 
-						ech:9 },
-			"KER": { lon:69.7, lat:-49.25,  ech:8 },
-			"SMA": { lon:-63.08, lat:18.07,  ech:11 },
-			"SBA": { lon:-62.85, lat:17.91, ech:11 },
-			"ANF": { lon:-64.34, lat:15.78, ech:6 },
-			"EUE": { lon:9.4, lat:48.94, ech:2 }
-		};
-		if (!lon) lon = geocentre[pos.zone].lon;
-		if (!lat) lat = geocentre[pos.zone].lat;
-		if (!ech) ech = geocentre[pos.zone].ech;
+		var geocentre = spipGeoportail.geocentre(pos.zone);
+		if (!lon) lon = geocentre.lon;
+		if (!lat) lat = geocentre.lat;
+		if (!ech) ech = geocentre.ech;
 
 		// Rechercher les couches a afficher
 		if (map.getMap().allowedGeoportalLayers) 
@@ -1165,6 +1176,23 @@ var spipGeoportail = jQuery.geoportail =
 		return false;
 	},
 
+	// Territoire d'une carte
+	getTerritory : function(map)
+	{	var p = map.getMap().getCenter().transform(map.projection, OpenLayers.Projection.CRS84);
+		return map.getMap().catalogue.findTerritory(p);
+	},
+	
+	// Centrer sur un territoire
+	setTerritory : function(map, zone)
+	{	zone = map.getMap().catalogue.getTerritory(zone);
+		var c = spipGeoportail.geocentre(zone);
+		if (!c) 
+		{	c = map0.getMap().catalogue.getCenter(zone);
+			c.ech = 8;
+		}
+		map.getMap().setCenterAtLonLat(c.lon,c.lat,c.ech);
+	},
+	
 	/** Deselectionne tous les objets de la carte */
 	unselectAll : function(id)
 	{	if (typeof(id)=='undefined')

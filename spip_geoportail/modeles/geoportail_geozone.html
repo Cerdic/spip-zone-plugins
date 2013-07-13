@@ -1,4 +1,4 @@
 <?php
 /* Affichage du popup pour changer de zone */
-	echo geoportail_popup_zone ("[(#ENV{name,zone_geo})]", '[(#ENV{selected})]', '[(#ENV{class})]', "onchange='window.location = \"[(#SELF|parametre_url{zone,''})]&amp;zone=\"+this.value'");
+	echo geoportail_popup_zone ("[(#ENV{name,zone_geo})]", '[(#ENV{selected})]', '[(#ENV{class})]', "onchange='spipGeoportail.setTerritory([(#ENV{formulaire}|=={1}|?{carte_formulaire,map[(#ENV{id,0})]})],this.value);'");
 ?>

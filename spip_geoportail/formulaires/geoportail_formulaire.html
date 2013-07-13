@@ -272,7 +272,7 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 <span style="float:left; padding:0 1em;">
 <span class='verrou_location' title='<:geoportail:verrouiller:>' onclick='javascript:verrou_location();'><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 </span>
-[<form class=zone_geo>(#MODELE{geoportail_geozone}{selected=#GET{zone}}{class=fondl})</form>]
+[<form class=zone_geo>(#MODELE{geoportail_geozone}{formulaire=1}{selected=#GET{zone}}{class=fondl})</form>]
 <div class='mode' style="clear:both; margin-top:2px; ">
 	<a class='mode mode_geop' href="javascript:geoportail_formulaire_mode('GEOP')">Géoportail</a>
 	<a class='mode mode_osm' href="javascript:geoportail_formulaire_mode('OSM')">OSM</a>
@@ -342,7 +342,7 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 	</span>
 	<div class='[(#ENV{class,carto})]_show' style='margin-left:1em; padding:0; clear:both; display '>
 		<div id='geoportail_coord' [(#GET{lon}|=={""}|?{style='display:none'})]>
-			<input name=supprimer class='fondo' style='float:right;' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>') title='<:geoportail:info_supprimer:>' />
+			<input name=supprimer class='fondo' style='float:right;' type=button onclick='javascript:geoportail_editer_objet("supprimer")' value='<:geoportail:bouton_supprimer:>' title='<:geoportail:info_supprimer:>' />
 			<span><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 			<span style='padding:0.25em 0em; display:block;'>
 			<:geoportail:lon:> : <span id="alon">[(#GET{lon}|geoportail_longitude)]</span> &nbsp; <:geoportail:lat:> : <span id="alat">[(#GET{lat}|geoportail_latitude)]</span>
