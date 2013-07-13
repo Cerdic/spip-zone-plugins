@@ -20,10 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_saisie_texte_info' => 'Na formátovanie správy tento formulár akceptuje iba skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;quote&gt; &lt;code&gt;</code> &lt;cadre&gt;</cadre> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Ak chcete robiť odseky, jednoducho vynechajte niekoľko prázdnych riadkov.',
 
 	// I
-	'info_ip_suspecte' => 'Votre adresse IP est suspectée de procéder à du SPAM. Merci de confirmer votre bonne intention.', # NEW
+	'info_ip_suspecte' => 'Vaša IP adresa je podozrivá z vytvárania SPAMU. Ďakujeme, že potvrdíte svoj dobrý úmysel.',
 
 	// L
-	'label_message_licite' => 'Ceci n\'est pas un message abusif' # NEW
+	'label_message_licite' => 'Toto nie je nevhodná správa'
 );
 
 ?>
