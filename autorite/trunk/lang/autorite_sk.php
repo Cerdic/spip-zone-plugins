@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_version' => 'Majte na pamäti, že tieto nastavenia nemusia vo vašej verzii SPIPu fungovať:',
 	'auteur_message_advitam' => 'Autor správy natrvalo',
 	'auteur_message_heure' => 'Autor správy na hodinu',
-	'auteur_modifie_article' => '<strong>Článok upravuje autor:</strong> každý redaktor môže upravovať články, ktoré napísal  (a kvôli tomu moderuje diskusné fórum a pripojenú petíciu).
+	'auteur_modifie_article' => '<strong>Článok upravuje autor:</strong> každý redaktor môže upravovať publikované články, ktoré napísal.
 	<br />
-	<i>Pozn.: táto možnosť sa bude vzťahovať aj na zaregistrovaných návštevníkov, ak budú uvedení autori a ak sa použije špeciálne rozhranie.</i>', # MODIF
+	<i>Pozn.: táto možnosť sa bude vzťahovať aj pri zaregistrovaných návštevníkoch, ak budú uvedení ako autori a ak sa bude využívať špeciálne rozhranie.</i>',
 	'auteur_modifie_email' => '<strong>E-mailovú adresu upravuje redaktor:</strong> v zázname o svojich osobných údajoch si každý redaktor môže zmeniť e-mailovú adresu.',
 	'auteur_modifie_forum' => '<strong>Diskusné fórum moderuje autor:</strong> každý redaktor môže moderovať diskusné fórum k článkom, ktoré napísal.',
 	'auteur_modifie_petition' => '<strong>Petíciu moderuje autor:</strong> každý redaktor môže moderovať petíciu, ktorú sám vytvoril.',
