@@ -40,7 +40,9 @@ function _microcache($id, $fond, $calcul=false) {
 	OR !@file_exists($microcache)
 	OR filemtime($microcache) < time() - 60*60*24*7) {
 		$contenu = recuperer_fond($fond, array('id'=>$id));
-		if ($_GET['var_mode'] != 'inclure')
+		if ($_GET['var_mode'] != 'inclure'
+		AND !$_POST
+		)
 			ecrire_fichier($microcache, $contenu);
 	} else {
 		lire_fichier($microcache, $contenu);
