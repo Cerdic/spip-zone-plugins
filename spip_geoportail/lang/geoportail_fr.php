@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cle_info'				=> '<b>L\'utilisation des services cartographiques n&eacute;cessitent une cl&eacute; qui g&egrave;re les droits d\'acc&egrave;s aux donn&eacute;es au travers d\'un contrat et l\'acceptation des r&egrave;gles d\'utilisation du service.</b>
 							<br/><br/><i>Veuillez vous reporter aux sites des diff&eacute;rents fournisseur pour les modalit&eacute;s d\'acc&egrave;s &agrave; leurs services.</i>',
 'cle_geoportail'		=> 'Cl&eacute; d\'utilisation G&eacute;oportail',
-'geoportail_key'		=> 'Consultez le site du G&eacute;oportail pour obtenir une cl&eacute; pour votre site : <a href="http://pro.ign.fr/api-web">http://pro.ign.fr/api-web</a>. Pour une cl&eacute; de d&eacute;veloppement (localhost) : <a href="http://api.ign.fr/geoportail/" title="API Geoportail">http://api.ign.fr/geoportail/</a>.',
+'geoportail_key'		=> 'Consultez le site du G&eacute;oportail pour obtenir une cl&eacute; pour votre site : <a href="http://professionnels.ign.fr/api-web">professionnels.ign.fr</a>. Pour une cl&eacute; de d&eacute;veloppement (localhost) : <a href="http://api.ign.fr/" title="API Geoportail">api.ign.fr</a>.',
 'local_js'				=> 'Utiliser le code javascript local.',
 'gpp3'					=> 'Utiliser une cl&eacute; API v.2.0.0beta.',
 'cle_bing'				=> 'Cl&eacute; d\'utilisation BING',
