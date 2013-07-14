@@ -30,8 +30,8 @@ function info_bible_version($trad,$info){
 			$at = $tableau_trad['at'];
 			$at == true ? $i = _T('item_oui') : $i= _T('item_non');
 			return $i;
-        case 'domaine_public':
-            $tableau_trad['domaine_public'] ? $i = _T('item_oui') :  $i= _T('item_non');
+		case 'domaine_public':
+			$tableau_trad['domaine_public'] ? $i = _T('item_oui') :  $i= _T('item_non');
 			return $i;
 		case 'deutero':
 			$deutero = $tableau_trad['deutero'];
