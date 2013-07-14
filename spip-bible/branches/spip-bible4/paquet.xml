@@ -1,0 +1,26 @@
+<paquet
+	prefix="bible"
+	categorie="divers"
+	version="4.1.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="bible.jpg"
+	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
+	schema="0.1.1"
+>	
+
+	<nom>Spip-Bible</nom>
+	<!-- Pour faire rapidement des citations de la Bible -->
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<auteur>Teddy Payet (Auteur associé)</auteur>
+	<auteur>Cerdic (Idée du presse-papier)</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<menu nom="configurer_bible" titre="bible:cfg_configurer" parent="menu_configuration" icone="bible-16.jpg" />
+	<menu nom="configurer_bible_pp" titre="bible:cfg_pp" parent="menu_configuration" icone="bible-16.jpg" />
+	<pipeline nom="insert_head" action="insert_head" inclure="bible_pipelines.php" />
+	<pipeline nom="affiche_droite" action="affiche_droite" inclure="bible_pipelines.php" />
+	<necessite nom="querypath" />
+</paquet>

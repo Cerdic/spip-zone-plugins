@@ -1,0 +1,88 @@
+<form action="#SELF" method="post" class='formulaire_spip formulaire_configurer'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+    
+    <script type="text/javascript">
+    // <![CDATA[
+
+    $(document).ready(function() {
+        $(".version legend").after('<p><a class="coche" href="#">Tout cocher</a> | <a class="decoche" href="#">Tout decocher</a> </p>');
+        $("a.decoche").click(function() {
+                $(this).parents("fieldset").find(":checkbox").removeAttr("checked");
+                return false;
+        });
+        $("a.coche").click(function() {
+                $(this).parents("fieldset").find(":checkbox").attr("checked","checked");
+                return false;
+        });
+});
+    // ]]>
+    </script>
+    
+    #SET{langues,#VAL{langues}|bible_tableau}
+
+    <BOUCLE_langues(POUR){tableau #GET{langues}}>
+    <fieldset class="version">
+    #SET{lang,#VALEUR|traduire_nom_langue}
+    <legend><:bible:cfg_pp_version_par_lang{lang=#GET{lang}}:></legend>
+    
+    
+    
+    #SET{traduction,#BIBLE_TRADUCTIONS{#VALEUR,tous}}
+    
+        <B_versions>
+        <ul>
+        
+        <BOUCLE_versions(POUR){tableau #GET{traduction}}>
+            <li>
+            <label for="#VALEUR">[(#VALEUR|info_bible_version{traduction})]</label>
+            
+            <input type="checkbox" name="trad_prop[]" id="#VALEUR" value="#VALEUR"  [checked="(#VALEUR|in_array{#ENV{trad_prop,#ARRAY}})"] />
+            </li>
+        </BOUCLE_versions>
+        </ul>
+        </B_versions>
+    
+    </fieldset>
+    </BOUCLE_langues>
+
+    
+	<fieldset>
+    <legend><:bible:cfg_pp_choix_laisses:></legend>
+	<ul>
+            <li>
+					<label for="numeros"><:bible:cfg_pp_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#ENV{numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_pp_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#ENV{retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_pp_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#ENV{ref})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="lang_pas_art"><:bible:cfg_pp_lang_pas_art:></label>
+					<input type="checkbox" name="lang_pas_art"  id="lang_pas_art" [checked="(#ENV{lang_pas_art})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="lang_morte"><:bible:cfg_pp_lang_morte:></label>
+					<input type="checkbox" name="lang_morte"  id="lang_morte" [checked="(#ENV{lang_morte})"]  value="oui" />
+				
+			</li>
+			
+    </ul>
+	</fieldset>
+    <p class="boutons">
+		<input type="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</form>

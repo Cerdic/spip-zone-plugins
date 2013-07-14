@@ -1,0 +1,96 @@
+<form action="#SELF" method="post" class='formulaire_spip formulaire_configurer'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+	<legend><:bible:cfg_trad_defauts:></legend>
+	<ul>
+	
+	
+			
+			#SET{langues,#VAL{separateur}|bible_tableau}
+			<BOUCLE_langues(POUR){tableau #GET{langues}}>
+				<li>
+					<label for="traduction_#CLE">[(#VAL{bible:cfg_traduction_#CLE}|_T)]</label>
+					#SET{traduction,#BIBLE_TRADUCTIONS{#CLE,tous}}
+					<select name="traduction_#CLE" id="traduction_#CLE">
+					<BOUCLE_traduction(POUR){tableau #GET{traduction}}>
+						<option value="#VALEUR" [selected="(#CONFIG{bible/traduction_#_langues:CLE}|=={#VALEUR})"]>
+						[(#VALEUR|info_bible_version{traduction})]
+						</option>
+					</BOUCLE_traduction>
+					</select>
+				</li>
+			</BOUCLE_langues>
+	</ul>
+	</fieldset>	
+	<B_alias>
+	<fieldset>
+		<legend><:bible:cfg_alias_version:></legend>
+		
+		<ul>
+			<BOUCLE_alias(DATA){source tableau, #VAL{alias}|bible_tableau}>
+				<B_cesalias>
+				<li>
+				<label for="alias_#CLE">#CLE</label>
+					<select name='alias_#CLE' id='alias_#CLE'>
+					<BOUCLE_cesalias(DATA){source tableau, #VALEUR{options}}>
+						<option value='#VALEUR' [selected="(#CONFIG{bible/alias_#_alias:CLE}|=={#VALEUR})"]>#VALEUR</option>
+					</BOUCLE_cesalias>
+					</select>
+				</li>
+				</B_cesalias>
+			</BOUCLE_alias>
+		</ul>
+	</fieldset>
+	</B_alias>
+	<fieldset><legend><:bible:cfg_affichage:></legend>
+	<ul>		
+			<li>
+					<label for="numeros"><:bible:cfg_numeros:></label>
+					<input type="checkbox" name="numeros"  id="numeros" [checked="(#CONFIG{bible/numeros})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="retour"><:bible:cfg_retour:></label>
+					<input type="checkbox" name="retour"  id="retour" [checked="(#CONFIG{bible/retour})"]  value="oui" />
+				
+			</li>
+			
+			<li>
+					<label for="ref"><:bible:cfg_ref:></label>
+					<input type="checkbox" name="ref"  id="ref" [checked="(#CONFIG{bible/ref})"]  value="oui" />
+				
+			</li>
+	
+		
+	
+	
+			
+				<BOUCLE_polices(DATA){source tableau, #VAL{polices}|bible_tableau}>
+				
+				<B_polices_lang>
+				<li>
+				
+					<label for="police_#CLE">[(#VAL{bible:police_#CLE}|_T)]</label>
+					<select name="police_#CLE">
+					<option value="" [selected="(#CONFIG{bible/police_#CLE}|=={non})"]><:item_non:></option>
+					
+					<BOUCLE_polices_lang(DATA){source tableau, #VALEUR}>
+						<option value='DSiddur.ttf' [selected='(#CONFIG{bible/police_#_polices:CLE}|=={#VALEUR})']>#VALEUR</option>
+					</BOUCLE_polices_lang>
+					</select>
+				</li>
+				</BOUCLE_polices_lang>
+				
+				</BOUCLE_polices>
+
+	
+    </ul>
+    </fieldset>
+   
+    <p class="boutons">
+		<input type="submit" value="<:bouton_enregistrer:>" />
+	</p>
+	
+</form>
+

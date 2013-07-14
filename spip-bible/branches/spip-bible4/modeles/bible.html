@@ -1,0 +1,6 @@
+
+[(#SET{resultat,#ENV{passage}|bible{
+#ENV{traduction,#LANG|traduction_defaut},
+}})]
+<INCLURE{fond=bible_affichage/standard}{passage=#GET{resultat}|table_valeur{passage}}{passage_texte=#GET{resultat}|table_valeur{passage_texte}}{lang=#GET{resultat}|table_valeur{lang}}{lang_original=#GET{resultat}|table_valeur{lang_original}}{spip_lang=#GET{resultat}|table_valeur{spip_lang}}{retour=#ENV{retour,#CONFIG{bible/retour,non}}}{numeros=#ENV{numeros,#CONFIG{bible/numeros,non}}}{ref=#ENV{ref,#CONFIG{bible/ref,non}}}{traduction=#ENV{traduction,#LANG|traduction_defaut}}{separateur=#GET{resultat}|table_valeur{separateur}}{propre=#ENV{propre}}
+>
