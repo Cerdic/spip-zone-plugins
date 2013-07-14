@@ -21,18 +21,21 @@
 #SET{numeros,#ENV{erreurs}|table_valeur{numeros}}
 #SET{ref,#ENV{erreurs}|table_valeur{ref}}
 #SET{retour,#ENV{erreurs}|table_valeur{retour}}
+#SET{forme_livre,#ENV{erreurs}|table_valeur{forme_livre}}
 ]
 [(#ENV{erreurs}|table_valeur{erreur}|non)
 #SET{version,#ENV{version}}
 #SET{numeros,#ENV{numeros}}
 #SET{ref,#ENV{ref}}
 #SET{retour,#ENV{retour}}
+#SET{forme_livre,#ENV{forme_livre}}
 ]
 [(#ENV{message_ok}|oui)
 #SET{version,#ENV{message_ok}|table_valeur{version}}
 #SET{numeros,#ENV{message_ok}|table_valeur{numeros}}
 #SET{ref,#ENV{message_ok}|table_valeur{ref}}
 #SET{retour,#ENV{message_ok}|table_valeur{retour}}
+#SET{forme_livre,#ENV{message_ok}|table_valeur{forme_livre}}
 ]
 
 <form action="#ENV{action}" method="post" style="border: 0px none ; margin: 0px;">
@@ -85,11 +88,24 @@
 				
         </li>
         ]
+	
+	<B_forme_livre>
+		<li>
+		<label for="forme_livre"><:bible:form_forme_livre:></label>
+		<select name="forme_livre">
+		<BOUCLE_forme_livre(DATA){source tableau, #VAL{forme_livre}|bible_tableau}{si #CONFIG{bible_pp/forme_livre}|oui}>
+		    <option value="#VALEUR" [selected='(#GET{forme_livre}|=={#VALEUR})']>[(#VAL{bible:cfg_forme_livre_#VALEUR}|_T)]</option>
+		</BOUCLE_forme_livre>
+		</select>
+		</li>
+	 </B_forme_livre>
         
         [(#REM) si on ne laisse pas le choix au rédacteur, prendre version par défaut)]
         [(#CONFIG{bible_pp/numeros}|non)[(#CONFIG{bible/numeros}|oui)<input type="hidden" name="numeros" id="numeros" value="oui"/>]]
         [(#CONFIG{bible_pp/ref}|non)[(#CONFIG{bible/ref}|oui)<input type="hidden" name="ref" id="ref" value="oui"/>]]
-[(#CONFIG{bible_pp/retour}|non)[(#CONFIG{bible/retour}|oui)<input type="hidden" name="retour" id="retour" value="oui"/>]]
+	[(#CONFIG{bible_pp/retour}|non)[(#CONFIG{bible/retour}|oui)<input type="hidden" name="retour" id="retour" value="oui"/>]]
+	[(#CONFIG{bible_pp/forme_livre}|non)<input type="hidden" name="forme_livre" id="forme_livre" value="#CONFIG{bible/forme_livre}"/>]
+
     </ul>
             <p class="boutons"><input type="submit" name="ok" value="<:bible:ok:>" /></p>
     </div>
