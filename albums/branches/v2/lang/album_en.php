@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_associer' => 'Bind', # ou alors : link associate ?
-	'bouton_dissocier' => 'Unbind', # MODIF
+	'bouton_dissocier' => 'Unbind',
 	'bouton_valider_deplacer_documents' => 'Save changes',
 
 	// C
@@ -44,18 +44,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_fermer' => 'Close',
 	'icone_modifier_album' => 'Edit this album',
 	'info_1_album' => '1 album',
-	'info_1_association' => 'Associé à 1 objet', # NEW
+	'info_1_association' => 'Associated to 1 object',
 	'info_album_vide' => 'Album is empty',
 	'info_aucun_album' => 'No album',
 	'info_aucun_album_criteres' => 'No album match these criteria',
 	'info_aucun_album_supplementaire' => 'No additional album',
 	'info_aucun_album_vide' => 'No empty album',
-	'info_aucune_association' => 'Cet album n\'est associé à aucun objet', # NEW
+	'info_aucune_association' => 'This album isn\'t associated to any object',
 	'info_dans_objet' => 'in',
 	'info_documents_joints_albums' => 'Enable the interface to add documents to albums',
 	'info_js_prive' => 'animation desactivated in the private zone',
 	'info_nb_albums' => '@nb@ albums',
-	'info_nb_associations' => 'Associé à @nb@ objets', # NEW
+	'info_nb_associations' => 'Associated to @nb@ objects',
 	'info_nouvel_album' => 'New album',
 	'info_publier' => 'publish',
 	'info_recherche_album_zero' => 'No result for « @cherche_album@ »',
