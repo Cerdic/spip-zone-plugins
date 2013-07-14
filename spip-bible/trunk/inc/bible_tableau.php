@@ -14,7 +14,7 @@ function bible_tableau($i,$lang=''){
 	$alias 	= array(
 		'na'=>array(
 			'lang'=>'grc',
-			'options'=>array('na28')
+			'options'=>array('na28','na27')
 		)
 	);
 	$forme_livre = array('abbr','complete','raccourci');
