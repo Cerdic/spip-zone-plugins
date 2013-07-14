@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'player_description' => 'This plugin allows to read and display sounds and videos.
-It adds flash player suitable the formats .mp3.
+	'player_description' => 'This plugin allows to play sounds.
+It adds flash player suitable to the formats .mp3.
 It works on all <code><docXX|player></code> inserted in the texts, as well as in the templates.
 
 -* In a text, <code><docXX|player></code>, displays a flash audio player (several players to choose from);
--* In a template <code>#MODELE{playliste}</code> displays a playlist of the latest mp3', # MODIF
-	'player_slogan' => 'Read sounds and videos' # MODIF
+-* In a template <code>#MODELE{playliste}</code> displays a playlist of the latest mp3',
+	'player_slogan' => 'Read mp3 sounds'
 );
 
 ?>
