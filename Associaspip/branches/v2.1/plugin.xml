@@ -14,6 +14,14 @@
 	<icon>img_pack/annonce.gif</icon>
 	<options>association_options.php</options>
 	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>delete_tables</nom>
 	</pipeline>
 	<pipeline>
