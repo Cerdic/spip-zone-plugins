@@ -61,7 +61,17 @@
 					<input type="checkbox" name="ref"  id="ref" [checked="(#CONFIG{bible/ref})"]  value="oui" />
 				
 			</li>
-	
+			
+			<B_forme_livre>
+			<li>
+			<label for="forme_livre"><:bible:cfg_forme_livre:></label>
+			<select name="forme_livre">
+			<BOUCLE_forme_livre(DATA){source tableau, #VAL{forme_livre}|bible_tableau}>
+			    <option value="#VALEUR" [selected='(#CONFIG{bible/forme_livre}|=={#VALEUR})']>[(#VAL{bible:cfg_forme_livre_#VALEUR}|_T)]</option>
+			</BOUCLE_forme_livre>
+			</select>
+			</li>
+			</B_forme_livre>
 		
 	
 	
