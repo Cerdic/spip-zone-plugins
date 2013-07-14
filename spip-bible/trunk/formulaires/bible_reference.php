@@ -10,6 +10,7 @@ function formulaires_bible_reference_charger_dist($lang='fr',$cadre=1){
 	   'numeros'   => lire_config('bible/numeros'),
 	   'retour'    => lire_config('bible/retour'),
 	   'ref'       => lire_config('bible/ref'),
+	   'forme_livre' => lire_config('bible/forme_livre')
 	);
 	return $valeurs;
 }
@@ -20,6 +21,7 @@ function formulaires_bible_reference_verifier_dist(){
     $numeros    = _request('numeros');
     $retour     = _request('retour');
     $ref        = _request('ref');
+    $forme_livre  = _request('forme_livre');
     include_spip('bible_fonctions');
     $resultat = bible($passage,$version,true);
 
@@ -28,7 +30,8 @@ function formulaires_bible_reference_verifier_dist(){
                     'numeros'   =>  $numeros,
                     'retour'    =>  $retour,
                     'ref'       =>  $ref,
-                    'version'   =>  $version    
+                    'version'   =>  $version,
+		    'forme_livre'=> $forme_livre   
                     );
     
     }
@@ -42,9 +45,17 @@ function formulaires_bible_reference_traiter_dist(){
     $numeros    = _request('numeros');
     $retour     = _request('retour');
     $ref        = _request('ref');
+    $forme_livre  = _request('forme_livre');
     include_spip('bible_fonctions');
     include_spip('inc/utils');
-    $resultat = proteger_amp(recuperer_fond('modeles/bible',array('passage'=>$passage,'traduction'=>$version,'retour'=>!$retour ? 'non' : $retour,'numeros'=>!$numeros ? 'non' : $numeros,'ref'=>!$ref ? 'non' : $ref,'propre'=>'non')));
+    $resultat = proteger_amp(recuperer_fond('modeles/bible',
+	array(	'passage'=>$passage,
+		'traduction'=>$version,
+		'retour'=>!$retour ? 'non' : $retour,
+		'numeros'=>!$numeros ? 'non' : $numeros,
+		'ref'=>!$ref ? 'non' : $ref,
+		'forme_livre'=>$forme_livre ? 'abbr' : $forme_livre,
+		'propre'=>'non')));
     
 
 
@@ -53,7 +64,8 @@ function formulaires_bible_reference_traiter_dist(){
                 'numeros'   =>  $numeros,
                 'retour'    =>  $retour,
                 'ref'       =>  $ref,
-                'version'   =>  $version    
+                'version'   =>  $version,
+		'forme_livre'=>$forme_livre  
                 ));
 
 
