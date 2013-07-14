@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
 	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
-	schema="0.1.1"
+	schema="0.2.0"
 >	
 
 	<nom>Spip-Bible</nom>

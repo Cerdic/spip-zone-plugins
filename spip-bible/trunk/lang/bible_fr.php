@@ -59,11 +59,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	/*cfg du presse-papier*/
 	
-	'cfg_pp_choix_laisses'     => 'Laisser le choix aux r&eacute;dacteurs',
+	'cfg_pp_choix_laisses'     => 'Laisser la possibilité aux r&eacute;dacteurs',
 	'cfg_pp_numeros'           => "D'afficher ou non les num&eacute;ros",
 	'cfg_pp_ref'               => "D'afficher ou non les r&eacute;f&eacute;rences",
 	'cfg_pp_retour'            => "De mettre ou non des retours &agrave; la ligne",
 	'cfg_pp_lang_pas_art'      => "De choisir une version dans une langue - non morte - autre que celle de l'article ?",
+	'cfg_pp_forme_livre'		=>"De choisir la forme d'affichage du livre",
 	'cfg_pp_lang_morte'      => "De choisir une version dans une langue morte",
 	"cfg_pp_version_par_lang" => "@lang@ : traductions propos&eacute;es",
 	'cfg_pp_pas_bonux'        => 'Cette configuration nécéssite le plugin "SPIP-BONUX"',
