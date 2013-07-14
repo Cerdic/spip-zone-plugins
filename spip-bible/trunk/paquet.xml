@@ -1,8 +1,8 @@
 <paquet
 	prefix="bible"
 	categorie="divers"
-	version="4.1.4"
-	etat="stable"
+	version="5.0.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
 	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
@@ -22,5 +22,4 @@
 	<menu nom="configurer_bible_pp" titre="bible:cfg_pp" parent="menu_configuration" icone="bible-16.jpg" />
 	<pipeline nom="insert_head" action="insert_head" inclure="bible_pipelines.php" />
 	<pipeline nom="affiche_droite" action="affiche_droite" inclure="bible_pipelines.php" />
-	<necessite nom="querypath" />
 </paquet>
