@@ -1,7 +1,7 @@
 <paquet
 	prefix="association"
 	categorie="divers"
-	version="2.1.13"
+	version="2.1.14"
 	etat="stable"
 	compatibilite="[2.1.8;3.0.99]"
 	logo="img_pack/annonce.gif"
