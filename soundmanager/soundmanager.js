@@ -54,6 +54,7 @@ function sound_manager_init(){
 }
 
 function jouer_son(media_id, media_url){
+	
 	var soundURL = media_url;
     var soundId = media_id ;
     var thisSound = soundManager.getSoundById(soundId);
@@ -71,6 +72,7 @@ function jouer_son(media_id, media_url){
         if (lastSound) {
         	soundManager.stop(lastSound.sID);
    			soundManager.unload(lastSound.sID);
+			lastSound = thisSound ;
         }
       }
     } else {
@@ -115,9 +117,9 @@ function jouer_son(media_id, media_url){
 	    lastSound = thisSound ;
         
         thisSound.play();
-		
+
       	// deplacer le son
-		$('.progress_bar').click(function(e){
+		$("." + soundId + " .progress_bar").click(function(e){
 			e.preventDefault();
 			var duree = thisSound.durationEstimate;
 			var offset = $(this).offset();
