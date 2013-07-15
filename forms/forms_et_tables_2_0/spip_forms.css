@@ -126,7 +126,7 @@ list-style:none;float:left;padding-left:5px;width:45%;
 }
 .spip_forms .spip_sondage .ligne_barre {
 	height: 16px;
-	background: url(ligne.gif) repeat-x;
+	background: url(img_pack/ligne.gif) repeat-x;
 	border: 1px solid black;
 	width:80%;
 }
