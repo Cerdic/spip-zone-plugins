@@ -54,7 +54,7 @@ function formulaires_bible_reference_traiter_dist(){
 		'retour'=>!$retour ? 'non' : $retour,
 		'numeros'=>!$numeros ? 'non' : $numeros,
 		'ref'=>!$ref ? 'non' : $ref,
-		'forme_livre'=>$forme_livre ? 'abbr' : $forme_livre,
+		'forme_livre'=>$forme_livre ?  $forme_livre : 'abbr',
 		'propre'=>'non')));
     
 

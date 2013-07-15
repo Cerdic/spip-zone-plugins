@@ -248,7 +248,7 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$separateur = $tableau_separateur[$lang_version];
 	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui'){
+function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui',$forme_livre='abbr'){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$trad = strtolower($trad);
@@ -259,7 +259,13 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	$livre = str_replace('1','1 ',$livre);
 	$livre = str_replace('2','2 ',$livre);
 	$livre = str_replace('3','3 ',$livre);
-
+	
+	$affichage_livre = recuperer_fond("forme_livre/$forme_livre",
+		array(
+		    "livre_long"	=>$livre_long,
+		    "livre"		=>$livre,
+		))
+	    ." ";
     if ($nommer_trad=='true'){
         if ($url=='oui'){
              $url = bible_url_passage($livre,$cd,$vd,$cf,$vf,$trad,$lang);
@@ -274,17 +280,17 @@ function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nom
 	}
 	if ($cd==$cf and $vd=='' and $vf==''){
 		
-		$chaine = "[$livre|$livre_long] ".$cd;
+		$chaine = $affichage_livre.$cd;
 	
 	}
 	
 	else if ($vd=='' and $vf==''){
 		
-		$chaine = "[$livre|$livre_long] ".$cd.'-'.$cf;
+		$chaine = $affichage_livre.$cd.'-'.$cf;
 	
 	}
     else{
-    	$chaine = "[$livre|$livre_long] ".$cd.$separateur." ".$vd;
+    	$chaine = $affichage_livre.$cd.$separateur." ".$vd;
     	
     	if ($cd!=$cf){
     			
