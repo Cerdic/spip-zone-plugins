@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Fonction d'installation du plugin et de mise à jour.
 **/
 function seminaire_upgrade($nom_meta_base_version, $version_cible) {
-	$maj = array();
+
 	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['create']);
 /**activer les mots clés et leur configuration avancée s'ils ne le sont pas déjà**/
 	if ($GLOBALS['meta']['articles_mots']!=oui){
@@ -66,9 +66,13 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
         }
     }
 
+	$maj = array();
+	$maj['create']= array(
+	array('maj_tables',array('spip_evenements')),
+	);
 	$maj['1.0.1'] = array(
 /*Copie de abstract vers descriptif*/
-	array('sql_update',"spip_evenements", array('descriptif'=>'abstract')),
+	array('sql_update','spip_evenements', array('descriptif'=>'abstract')),
 	array('sql_alter',"TABLE spip_evenements DROP abstract"),	
 /*on change name en attendee*/
 	array('sql_alter',"TABLE spip_evenements ADD attendee text NOT NULL"),
@@ -76,13 +80,7 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	array('sql_alter',"TABLE spip_evenements DROP name"),	
 	);
 
-	$maj['1.0.3'] = array(
-/*on rajoute original uid (ouid) qui sera utile pour import_ics*/
-	array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL DEFAULT ''"),
-	);
-
 	include_spip('base/upgrade');
-
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
