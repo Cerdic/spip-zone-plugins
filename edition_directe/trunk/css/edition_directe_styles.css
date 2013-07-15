@@ -1,6 +1,8 @@
 #HTTP_HEADER{Content-Type: text/css;}
 
-.icone_edition_directe{float:right;}
+.icone_edition_directe{position:absolute;right:0.5em}
+
+.icone_edition_directe.icone a{width:auto}
 
 .inactive, .active:hover{
 opacity:0.4;
