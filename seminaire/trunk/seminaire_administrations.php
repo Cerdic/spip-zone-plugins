@@ -69,14 +69,20 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.1'] = array(
 /*Copie de abstract vers descriptif*/
 	array('sql_update',"spip_evenements", array('descriptif'=>'abstract')),
-	array('sql_alter',"TABLE spip_evenements DROP abstract"),
+	array('sql_alter',"TABLE spip_evenements DROP abstract"),	
 /*on change name en attendee*/
 	array('sql_alter',"TABLE spip_evenements ADD attendee text NOT NULL"),
 	array('sql_update',"spip_evenements", array('attendee'=>'name')),
-	array('sql_alter',"TABLE spip_evenements DROP name"),
+	array('sql_alter',"TABLE spip_evenements DROP name"),	
+	);
+
+	$maj['1.0.3'] = array(
+/*on rajoute original uid (ouid) qui sera utile pour import_ics*/
+	array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL DEFAULT ''"),
 	);
 
 	include_spip('base/upgrade');
+
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
