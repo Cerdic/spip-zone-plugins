@@ -143,6 +143,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	    $lieu = $comp->getProperty("location");#récupération du lieu
 	    $summary_array = $comp->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
 	    $descriptif_array = $comp->getProperty("description",1,TRUE);
+	    $uid = $comp->getProperty("UID");
 	#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
 	    $dtstart_array = $comp->getProperty("dtstart", 1, TRUE); 
 	    	$dtstart = $dtstart_array["value"];
@@ -165,7 +166,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
     		$date_fin = $endDate.$endTime;
 	#on insere les infos des événements dans la base 
     $id_article = _request('id_article');
-	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0'));
+	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid));
 	
 	#on associe l'évéenement à l'almanach
 	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));

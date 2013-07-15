@@ -24,7 +24,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_almanachs', 'spip_almanachs_liens')));
+	$maj['create'] = array(
+		array('maj_tables', array('spip_almanachs', 'spip_almanachs_liens')),
+		array('maj_tables',array('spip_evenements')),
+		array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
