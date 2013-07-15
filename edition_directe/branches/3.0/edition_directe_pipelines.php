@@ -30,6 +30,7 @@ function edition_directe_affiche_gauche($flux){
 //Modifié la page de l'objet
 function edition_directe_recuperer_fond($flux){	
 	include_spip('edition_directe_fonctions');
+	include_spip('inc/autoriser');    
 	$fond=$flux['args']['fond'] ;
 	$contexte=$flux['args']['contexte'] ;
 	$objet=_request('exec');
@@ -51,13 +52,11 @@ function edition_directe_recuperer_fond($flux){
 		// Insertion du formulaire d'édition	
 		if(in_array($objet,$objets)){		
 			  if ($fond == 'prive/squelettes/contenu/'.$objet){
-					
 					$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
 					$icone='
 					<span class="icone_edition_directe icone active">
 						<a href="'.generer_action_auteur('edition_directe_auteur','inactive-'.$objet,generer_url_ecrire($objet,$id.'='.$contexte['id_objet'],false)).'" title="'._T('edir:desactiver_edition_directe_objet').$objet.'">
 							<img src="'.find_in_path('prive/themes/spip/images/edir-24.png').'"/>
-							<b>'._T('edir:titre_plugin').'</b>
 						</a>
 					</span>';
 					$patterns = array('/class=\'icone/','/<!--\/hd-->/','/<h1>/');
@@ -68,7 +67,7 @@ function edition_directe_recuperer_fond($flux){
 			 if ($fond == 'prive/objets/contenu/'.$objet){	
 					$flux['data']['texte'] = '';
 			    }	
-			    	    
+			        
 			}
 		elseif ($fond == 'prive/squelettes/contenu/'.$objet AND in_array($objet,$objets_dispos)){
 			$icone='

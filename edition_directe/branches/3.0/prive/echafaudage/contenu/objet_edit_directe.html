@@ -11,11 +11,14 @@
 
 
 #SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+
+#GET{redirect}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{id_rubrique},#GET{redirect},#ENV{lier_trad}})]
+		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{id_rubrique},#ENV{lier_trad,0},#GET{redirect}})]
+		formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
