@@ -1,1 +1,20 @@
-[(#REM) Attention, ce fichier ne doit etre vu que comme une seule ligne. La RFC 5545 impose un codeage particulier sur les fins de lignes! ]BEGIN:VEVENT[(#VAL{13}|chr)][(#VAL{10}|chr)]SUMMARY:[(#EVTITRE|textebrut|folding_ical{'SUMMARY'})][(#VAL{13}|chr)][(#VAL{10}|chr)]UID:[(#DATE_DEBUT|date_ical)]-a#ID_ARTICLE-e#ID_EVENEMENT@[(#URL_SITE_SPIP||replace{http://})][(#VAL{13}|chr)][(#VAL{10}|chr)][DTSTAMP:(#DATE_DEBUT|date_ical)][(#HORAIRE|=={oui}|?{[(#VAL{13}|chr)][(#VAL{10}|chr)][DTSTART:(#DATE_DEBUT|date_ical)][(#VAL{13}|chr)][(#VAL{10}|chr)][DTEND:(#DATE_FIN|date_ical)],[(#VAL{13}|chr)][(#VAL{10}|chr)][DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][(#VAL{13}|chr)][(#VAL{10}|chr)][DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][(#VAL{13}|chr)][(#VAL{10}|chr)][LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical2)][(#VAL{13}|chr)][(#VAL{10}|chr)]ORGANIZER:<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>[ (#NOM|textebrut)][ - (#BIO|textebrut)]</BOUCLE_auteur>[(#VAL{13}|chr)][(#VAL{10}|chr)]ATTENDEE:[(#NAME)][ - (#ORIGIN)][(#VAL{13}|chr)][(#VAL{10}|chr)]DESCRIPTION:[(#ABSTRACT|textebrut|folding_ical{'DESCRIPTION'})][(#VAL{13}|chr)][(#VAL{10}|chr)]CATEGORIES:<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|textebrut)]</BOUCLE_article>[(#VAL{13}|chr)][(#VAL{10}|chr)][(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue|folding_ical{'URL'})][(#VAL{13}|chr)][(#VAL{10}|chr)]STATUS:CONFIRMED[(#VAL{13}|chr)][(#VAL{10}|chr)]END:VEVENT
+BEGIN:VEVENT
+SUMMARY:[(#EVTITRE|textebrut|filtrer_ical)]
+UID:[(#DATE_CREATION|date_ical)]-a#ID_ARTICLE-e#ID_EVENEMENT@[(#URL_SITE_SPIP||replace{http://})][
+DTSTAMP:(#DATE_CREATION|date_ical)][(#HORAIRE|=={oui}|?{[
+DTSTART:(#DATE_DEBUT|date_ical)][
+DTEND:(#DATE_FIN|date_ical)],[
+DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
+DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
+CREATED:(#DATE_CREATION|date_ical)][
+LAST-MODIFIED:(#MAJ|date_ical)][
+LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>[
+ORGANIZER:(#NOM|supprimer_tags|textebrut|filtrer_ical)][ - (#BIO|supprimer_tags|textebrut|filtrer_ical)]</BOUCLE_auteur>[
+ATTENDEE:(#ATTENDEE|supprimer_tags|textebrut|filtrer_ical)][ - (#ORIGIN|supprimer_tags|textebrut|filtrer_ical)][
+DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[
+CATEGORIES:(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>[
+URL:(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue|filtrer_ical)]<BOUCLE_sequence(VERSIONS ?){objet=evenement}{id_objet=#ID_EVENEMENT}{!par id_version}{0,1}>[
+SEQUENCE:(#ID_VERSION|moins{1})
+]</BOUCLE_sequence>
+STATUS:CONFIRMED
+END:VEVENT
