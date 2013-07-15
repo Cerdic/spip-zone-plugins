@@ -87,11 +87,11 @@ function embed_url($url) {
 				if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 			}
 		}
-		else if (preg_match(",^http://[^\"\'\`\<\>\@\*\$]*?\.mp3$,i", $url) and !$afficher_soundmanager) {
+		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp3$,i", $url) and !$afficher_soundmanager) {
 
 			$html = file_get_contents(dirname(__FILE__).'/modeles/mp3.html');
 			$html = str_replace('{source}', htmlspecialchars($url), $html);
-			$url_dewplayer = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/modeles/dewplayer.swf';
+			$url_dewplayer = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/autoembed/modeles/dewplayer.swf';
 			$html = str_replace('{dewplayer}', $url_dewplayer, $html);
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 		}
@@ -161,7 +161,7 @@ function embed_url($url) {
 		/* http://microformats.org/wiki/haudio                           */
 		/* http://www.schillmania.com/projects/soundmanager2/            */
 		
-		if(preg_match(',(http://[^"\'\`\<\>\@\*\$]*?\.mp3)$,', $url) and $afficher_soundmanager){
+		if(preg_match(',(https?://[^"\'\`\<\>\@\*\$]*?\.mp3)$,', $url) and $afficher_soundmanager){
 			$rand = rand(10, 1000);
 			$code_ae = '<div class="haudio audio">' .
 				'<div class="lecture">' .
