@@ -13,6 +13,8 @@ function geoportail_affichage_final($page)
 	// Version de l'API
 	$version = '2.0.3';
 	// if ($GLOBALS['meta']['geoportail_gpp3']) $version = '2.0.0beta';
+	// Cle GPP
+	$gppkey = $GLOBALS['meta']['geoportail_key'];
 
 	// Version debug de l'API
 	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/$version/lib/geoportal/lib/Geoportal.js";
@@ -38,9 +40,9 @@ function geoportail_affichage_final($page)
 	
 	$header =
 '<script type="text/javascript">
-jQuery.geoportail.hash = "'.$action.'";
-jQuery.geoportail.versionAPI = "'.$version.'";</script>
-<script type="text/javascript">jQuery(document).ready(	function() { loadAPI(); });</script>
+spipGeoportail.hash = "'.$action.'";
+spipGeoportail.versionAPI = "'.$version.'";</script>
+<script type="text/javascript">jQuery(document).ready(	function() { spipGeoportail.loadAPI("'.$gppkey.'"); });</script>
 
 <!-- OpenLayers styles : -->
 <link id="__OpenLayersCss__" rel="stylesheet" type="text/css" href="http://api.ign.fr/geoportail/api/js/'.$version.'/theme/default/style.css"/>

@@ -268,11 +268,12 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 <img class=[(#ENV{class,carto})]_patience style='display:none;' src='[(#CHEMIN{images/searching.gif})]' />
 </a>
 ]
+<form id=geoportail_edit_objet method=POST action='javascript:geoportail_editer_objet("valider")' >
 <div class=[(#ENV{class,carto})]_show style='display:none; text-align:right;'>
 <span style="float:left; padding:0 1em;">
 <span class='verrou_location' title='<:geoportail:verrouiller:>' onclick='javascript:verrou_location();'><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 </span>
-[<form class=zone_geo>(#MODELE{geoportail_geozone}{formulaire=1}{selected=#GET{zone}}{class=fondl})</form>]
+[(#MODELE{geoportail_geozone}{formulaire=1}{selected=#GET{zone}}{class=fondl})]
 <div class='mode' style="clear:both; margin-top:2px; ">
 	<a class='mode mode_geop' href="javascript:geoportail_formulaire_mode('GEOP')">Géoportail</a>
 	<a class='mode mode_osm' href="javascript:geoportail_formulaire_mode('OSM')">OSM</a>
@@ -294,7 +295,6 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 	if (autoriser($action, $objet, $id)) {  
 ?>
 
-<form id=geoportail_edit_objet method=POST action='javascript:geoportail_editer_objet("valider")' >
 	<input type=hidden name='id_objet' value='#ID_OBJET' />
 	<input type=hidden name='objet' value='#OBJET' />
 	<input type=hidden name='verrou' id='verrou' value='0' />

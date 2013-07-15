@@ -26,7 +26,8 @@ function action_geoportail_editer_objet_dist()
 	if (isset($_POST['valider']) || isset($_POST['supprimer']))
 	{	$lon = _request('lon');
 		$lat = _request('lat');
-		$zone = _request('idzone');
+		//$zone = _request('idzone');
+		$zone = _request('zone_geo');
 		$zoom = _request('zoom');
 		$action = 'modifier';
 		$alon = addslashes(geoportail_longitude($lon));

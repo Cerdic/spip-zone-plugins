@@ -22,6 +22,8 @@ var spipGeoportail = jQuery.geoportail =
 	profils: new Array(),
 	// hash code
 	hash: null,
+	// Timer pour le chargement de l'API
+	__Geoportal$timer: null,
 
 	getParam: function(param) {
 		var p = document.location.href.split("&" + param + "=");
@@ -35,23 +37,48 @@ var spipGeoportail = jQuery.geoportail =
 	setOriginator: function(logo, url) {
 		jQuery.geoportail.originators = Array({ logo: 'spip', pictureUrl: logo, url: url });
 	},
+	
+	// Verification que l'API est bien chargee : il se peut que l'init soit execute avant que l'API ne soit chargee
+	checkApiLoading: function(retryClbk,clss)
+	{	if (spipGeoportail.__Geoportal$timer!=null)
+		{	//clearTimeout: annule le minuteur "__Geoportal$timer" avant sa fin
+			window.clearTimeout(spipGeoportail.__Geoportal$timer);
+			spipGeoportail.__Geoportal$timer= null;
+		}
 
+		// Ajout d'un code temporisateur qui attend 300 ms avant de relancer l'init
+		var f, i;
+		var l=clss.length;
+		for (i=0; i<l; i++)
+		{	try {
+				f= eval(clss[i]);
+			} catch (e) {
+				f= undefined;
+			}
+			if (typeof(f)==='undefined') {
+				spipGeoportail.__Geoportal$timer= window.setTimeout(retryClbk, 300);
+				return false;
+			}
+		}
+		return true;
+	},
+	
+	// Chargement de l'API
+	loadAPI: function(key)
+	{	// on attend que les classes soient chargées
+		if (spipGeoportail.checkApiLoading(spipGeoportail.loadAPI,['OpenLayers','Geoportal','Geoportal.Viewer','Geoportal.Viewer.Default'])===false) {
+			return;
+		}
+
+		// on charge la configuration de la clef API, puis on charge l'application
+		Geoportal.GeoRMHandler.getConfig([key], null, null, {
+			onContractsComplete: function(){ spipGeoportail.initMap();}
+		});
+	},
+	
 	// Fonction d'initialisation des cartes
 	initMap: function(dirPlug) 
-	{	//alert ("initMap '"+typeof(Geoportal)+"'");
-		if (typeof(OpenLayers)=='undefined' ||
-			typeof (Geoportal) == 'undefined' ||
-			typeof (Geoportal.Viewer) == 'undefined' ||
-			typeof (Geoportal.Viewer.Standard) == 'undefined' 
-			// || (jQuery.browser["msie"] && typeof (document.namespaces) != 'object')
-			)        
-		{
-            window.setTimeout('jQuery.geoportail.initMap();', 300);
-            return;
-        }
-        // ready !
-
-		// Chargement des classes Geoportail 
+	{	// Chargement des modules complementaires
 		if (!OpenLayers.Layer.Vector.Locator) GeoportailInitLayerLocator();			// Geoportal.Util.loadJS(dirPlug + "js/Layer/Locator.js");
 		if (!OpenLayers.Layer.GXT) GeoportailInitLayerGXT();						// Geoportal.Util.loadJS(dirPlug + "js/Layer/GXT.js");
 		if (!Geoportal.Format.Geoconcept.rip) GeoportailInitFormatCeoconcept();		// Geoportal.Util.loadJS(dirPlug + "js/Format/Ceoconcept_rip.js");
