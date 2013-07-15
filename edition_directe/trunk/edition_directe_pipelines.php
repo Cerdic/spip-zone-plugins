@@ -52,7 +52,6 @@ function edition_directe_recuperer_fond($flux){
 		// Insertion du formulaire d'édition	
 		if(in_array($objet,$objets)){		
 			  if ($fond == 'prive/squelettes/contenu/'.$objet){
-					
 					$edition=recuperer_fond('prive/echafaudage/contenu/objet_edit_directe',$contexte,array('ajax'=>true));
 					$icone='
 					<span class="icone_edition_directe icone active">
@@ -70,7 +69,7 @@ function edition_directe_recuperer_fond($flux){
 			    }	
 			        
 			}
-		/*elseif ($fond == 'prive/squelettes/contenu/'.$objet AND in_array($objet,$objets_dispos)){
+		elseif ($fond == 'prive/squelettes/contenu/'.$objet AND in_array($objet,$objets_dispos)){
 			$icone='
 					<span class="icone_edition_directe icone inactive">
 						<a href="'.generer_action_auteur('edition_directe_auteur','active-'.$objet,generer_url_ecrire($objet,$id.'='.$contexte['id_objet'],false)).'" title="'._T('edir:activer_edition_directe_objet').$objet.'">
@@ -81,7 +80,7 @@ function edition_directe_recuperer_fond($flux){
 			$patterns = array('/<h1>/');
 			$replacements = array($icone.'<h1>');
 			$flux['data']['texte'] = preg_replace($patterns,$replacements,$texte,1);					
-			}*/
+			}
 		}
 
  return $flux;   
