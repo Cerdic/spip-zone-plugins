@@ -32,7 +32,7 @@ function edition_directe_recuperer_fond($flux){
 	include_spip('edition_directe_fonctions');
 	include_spip('inc/autoriser');    
 	$fond=$flux['args']['fond'] ;
-	$contexte=$flux['args']['contexte'] ;
+	$contexte=isset($flux['args']['contexte'])?$flux['args']['contexte']:array() ;
 	$objet=_request('exec');
 	$texte=$flux['data']['texte'];
 	$contexte['objet']=$objet;
@@ -57,6 +57,7 @@ function edition_directe_recuperer_fond($flux){
 					<span class="icone_edition_directe icone active">
 						<a href="'.generer_action_auteur('edition_directe_auteur','inactive-'.$objet,generer_url_ecrire($objet,$id.'='.$contexte['id_objet'],false)).'" title="'._T('edir:desactiver_edition_directe_objet').$objet.'">
 							<img src="'.find_in_path('prive/themes/spip/images/edir-24.png').'"/>
+							<b>'._T('edir:titre_plugin').'</b>
 						</a>
 					</span>';
 					$patterns = array('/class=\'icone/','/<!--\/hd-->/','/<h1>/');
