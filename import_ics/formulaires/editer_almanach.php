@@ -144,7 +144,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	    $summary_array = $comp->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
 	    $descriptif_array = $comp->getProperty("description",1,TRUE);
 	    $uid = $comp->getProperty("UID");#uid de l'evenement
-	    $sequence = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
+	   	$sequence = $comp->getProperty("SEQUENCE");#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
+	#données de localisation de l'évenement
+	    $localisation = $comp->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
+	    $latitude = $localisation['latitude'];
+	    $longitude = $localisation['longitude'];
 	#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
 	    $dtstart_array = $comp->getProperty("dtstart", 1, TRUE); 
 	    	$dtstart = $dtstart_array["value"];
