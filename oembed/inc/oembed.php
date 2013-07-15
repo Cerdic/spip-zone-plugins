@@ -24,15 +24,17 @@ function oembed_lister_providers(){
 	$providers = array(
 		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
 		'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
-		'http://blip.tv/file/*'          =>   'http://blip.tv/oembed/',
-		'http://*.vimeo.com/*'           =>   'http://www.vimeo.com/api/oembed.json',
-		'http://vimeo.com/*'             =>   'http://www.vimeo.com/api/oembed.json',
-		'http://*.dailymotion.com/*'     =>   'http://www.dailymotion.com/api/oembed',
+		'http://blip.tv/*'          =>   'http://blip.tv/oembed/',
+		'http://*.vimeo.com/*'           =>   'http://vimeo.com/api/oembed.json',
+		'http://vimeo.com/*'             =>   'http://vimeo.com/api/oembed.json',
+		'http://*.dailymotion.com/*'     =>   'http://www.dailymotion.com/services/oembed',
+		'http://dai.ly/*'     =>   'http://www.dailymotion.com/services/oembed',
 		'http://*.flickr.com/*'          =>   'http://www.flickr.com/services/oembed/',
 		'http://flickr.com/*'            =>   'http://www.flickr.com/services/oembed/',
+		'http://flic.kr/*'            =>   'http://www.flickr.com/services/oembed/',
 		'http://soundcloud.com/*'        =>   'http://soundcloud.com/oembed',
 		'http://*.soundcloud.com/*'      =>   'http://soundcloud.com/oembed',
-		'http://slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
+		'http://*.slideshare.net/*/*'      =>   'http://www.slideshare.net/api/oembed/2',
 		'http://www.slideshare.net/*/*'  =>   'http://www.slideshare.net/api/oembed/2',
 		'http://yfrog.com/*'         =>   'http://yfrog.com/api/oembed',
 		'http://yfrog.*/*'         =>   'http://yfrog.com/api/oembed',
@@ -179,7 +181,8 @@ function oembed_verifier_provider($url) {
 		return false;
 	$providers = oembed_lister_providers();
 	foreach ($providers as $scheme=>$endpoint) {
-		$regex = '/' . str_replace('\*', '(.+)', preg_quote($scheme, '/')) . '/';
+		$regex = '#' . str_replace('\*', '(.+)', preg_quote($scheme, '#')) . '#';
+		$regex = preg_replace( '|^#http\\\://|', '#https?\://', $regex );
 		if (preg_match($regex, $url)) {
 			return array('endpoint' => $endpoint);
 		}
