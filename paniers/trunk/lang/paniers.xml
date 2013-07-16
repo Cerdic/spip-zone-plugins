@@ -7,6 +7,9 @@
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=es">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
