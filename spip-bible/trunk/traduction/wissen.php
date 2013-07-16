@@ -10,7 +10,7 @@ function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fi
 	
 	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',"de",false,false,false,"raccourcie")));
 	//petit livre ?
-	var_dump($ref);
+
 	$petit_livre=bible_tableau('petit_livre','de');
 	
 	if (in_array(strtolower($livre),$petit_livre)) {
@@ -25,6 +25,7 @@ function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fi
 }
 
 function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
+	
 	include_spip('inc/bible_tableau');
 	$livre_gateways = bible_tableau('gateway');
 	$livre_lang = $livre_gateways[$lang][$livre];
@@ -33,7 +34,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre		= $livre_al[$livre_lang];
 	
 	$url = generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
-	var_dump($url);
+
 	$param_cache = array('url'=>$url,'wissen'=>$wissen,'version_wissen'=>2);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
@@ -48,79 +49,51 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	
 	
 
-	//recuperation du passage
+	//recuperation de la page
 
 
 	include_spip("inc/distant");
 	include_spip("inc/charsets");
+	
 	$code = importer_charset(recuperer_page($url),'utf-8');
 	
 	
-	
-	//selection du passage
-	$tableau = explode('<div class="boxcontent-bible">',$code);
-	$code = $tableau[1];
-	
-	$code = preg_replace('#<h1>[0-Z]*</h1>#','',$code);
-	
-	$tableau = explode('<div id="popupcontent">',$code);
-	$code = $tableau[0];
-	//suppression des intertitres
-	$n = 1;
-	while (preg_match('#<h[1-7]>#',$code)){
-	   $code = wissen_supprimer_intertitre($n,$code);
-	   $n++;
-	}
-	$resultat = array();		
-	$code = strip_tags($code,'<span>');
-	$tableau_chapitre = preg_split('!<span class="chapter">([0-9]*)</span> !',$code);
-	preg_match_all('!<span class="chapter">([0-9]*)</span> !',$code,$liste_chapitre);
-	$index = 0;
-	array_shift($tableau_chapitre);
-	
-	foreach ($liste_chapitre[1] as $chapitre){
-		
-		$tableau_verset = preg_split('!<span class="verse">([0-9]*)</span>!',$tableau_chapitre[$index]);
-		array_shift($tableau_verset);
+	// récupération du passage
+	$resultat = array();
 
-		preg_match_all('!<span class="verse">([0-9]*)</span>!',$tableau_chapitre[$index],$liste_verset);
-		$index2 = 0;
-
-		
+	// prendre juste la partie du html qui nous intéresse
+	$code 	= str_replace('<div class="lineBreak"></div>','',$code);
+	$tab 	= explode('<div class="markdown">',$code);
+	$code 	= $tab[1];
+	$tab 	= explode("</div>",$code);
+	$code 	= $tab[0]; 
 	
-		foreach($liste_verset[1] as $verset){
-				$resultat[$liste_chapitre[1][$index]][$verset] = trim(str_replace('&nbsp;',' ',strip_tags($tableau_verset[$index2])));
-				$index2++;	
+	// purger
+	$code 	= preg_replace("#</?(p|strong)>#","",$code);
+	$code	= preg_replace("#<h2.*.</h2>#U","",$code); // pas d'interitre
+	$code	= preg_replace('# data-location=".*"#U',"",$code);
+	$code   = trim($code);
+	// par chapitre
+	$chapitres = explode('<span class="chapter">',$code);
+	array_shift($chapitres);
+	foreach ($chapitres as $chapitre){
+		$tab = explode("</span>",$chapitre,2);
+		
+		$chap = $tab[0]; // le numéro de chapitre
+		$versets = explode('<span class="verse">',$tab[1]);
+		array_shift($versets);
+		// par versets
+		foreach ($versets as $verset){
+			$tab2 = explode("</span>",$verset,2);
+			$resultat[$chap][$tab2[0]] = $tab2[1];
+			
+			}
 		}
-				
-		$index ++;		
-	}
+	
 	if (_NO_CACHE == 0){
 		bible_ecrire_cache($param_cache,$resultat);
 	}
 
 	return $resultat;
-	}
-function wissen_supprimer_intertitre($n, $code){
-    if(preg_match('#<h'.$n.'>#',$code)){
-			$tableau = explode('<h'.$n.'>',$code);
-			
-			$d = 0;
-			$tableau2 = array();
-			foreach ($tableau as $j){
-				if (preg_match('#</h'.$n.'>#',$j)){
-					
-					$tableau3 = explode('</h'.$n.'>',$j);
-					$tableau2[$d]=$tableau3[1];
-					
-				
-				}
-				$d++;
-			
-			}
-			
-			$code = implode('',$tableau2);
-        }
-    return $code;
 }
 ?>

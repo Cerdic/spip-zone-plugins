@@ -22,4 +22,5 @@
 	<menu nom="configurer_bible_pp" titre="bible:cfg_pp" parent="menu_configuration" icone="bible-16.jpg" />
 	<pipeline nom="insert_head" action="insert_head" inclure="bible_pipelines.php" />
 	<pipeline nom="affiche_droite" action="affiche_droite" inclure="bible_pipelines.php" />
+
 </paquet>
