@@ -435,7 +435,7 @@ function bible_tableau($i,$lang=''){
 			),
 	'luther1984'		=> array(
 		
-		'wissen'=>'luther-bibel-1984',
+		'wissen'=>'LU',
 		'traduction'=> 'Bibel von Luther (1984)',
 		'lang'		=>'de',
 		'nt'=> true,
@@ -508,7 +508,7 @@ function bible_tableau($i,$lang=''){
 		'domaine_public'  => false
 			),
 	'lxx'		=> array(
-		'wissen' 	=> 'septuaginta-lxx',
+		'wissen' 	=> 'LXX',
 		'gateway'	=> false,
 		'traduction'=> 'Septante',
 		'lang'		=>'grc',
@@ -517,7 +517,7 @@ function bible_tableau($i,$lang=''){
 		'deutero'=> true
 			),
 	'vulg'		=> array(
-		'wissen' 	=> 'biblia-sacra-vulgata',
+		'wissen' 	=> 'VULG',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Sacra Vulgata',
 		'lang'		=>'la',
@@ -559,7 +559,7 @@ Editio Typica Altera ',
 			),
 		
 	'bhs'		=> array(
-		'wissen' 	=> 'biblia-hebraica-stuttgartensia-bhs',
+		'wissen' 	=> 'BHS',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Hebra&iuml;ca Stuttgartensia',
 		'lang'		=>'hbo',
@@ -570,13 +570,13 @@ Editio Typica Altera ',
 		'traduction'=> 'Nestl&eacute;-Aland (<sup>27</sup>&nbsp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
-		'wissen'	=>'novum-testamentum-graece-na-27',
+		'wissen'	=>'NA27',
 		'nt'=> true),
 	'na28'		=> array(
 		'traduction'=> 'Nestl&eacute;-Aland (<sup>28</sup>&nbsp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
-		'wissen'	=>'novum-testamentum-graece-na-28',
+		'wissen'	=>'NA',
 		'nt'=> true)
 		,
 	'jerusalem' => array(
