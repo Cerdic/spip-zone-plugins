@@ -85,7 +85,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 		// par versets
 		foreach ($versets as $verset){
 			$tab2 = explode("</span>",$verset,2);
-			$resultat[$chap][$tab2[0]] = $tab2[1];
+			$resultat[$chap][$tab2[0]] = trim($tab2[1]);
 			
 			}
 		}
