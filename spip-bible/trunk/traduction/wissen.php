@@ -2,13 +2,15 @@
 
 function generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang){
 	$ref = construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
-	return "http://www.bibelwissenschaft.de/nc/online-bibeln/".$wissen."/lesen-im-bibeltext/bibelstelle/".$ref."/anzeige/single/#iv";
+
+	return "http://www.bibelwissenschaft.de/bibelstelle/$ref/$wissen";
 }
 
 function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
 	
-	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',$lang,'false')));
+	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',"de",false,false,false,"raccourcie")));
 	//petit livre ?
+	var_dump($ref);
 	$petit_livre=bible_tableau('petit_livre','de');
 	
 	if (in_array(strtolower($livre),$petit_livre)) {
@@ -18,6 +20,7 @@ function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fi
 	else {
 		$ref = str_replace($livre,$livre,$ref);
 	}
+	
 	return $ref;
 }
 
@@ -29,9 +32,9 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre_or = $livre;
 	$livre		= $livre_al[$livre_lang];
 	
-	$ref = construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
-
-	$param_cache = array('ref'=>$ref,'wissen'=>$wissen,'version_wissen'=>2);
+	$url = generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$wissen,$lang);
+	var_dump($url);
+	$param_cache = array('url'=>$url,'wissen'=>$wissen,'version_wissen'=>2);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
@@ -47,8 +50,7 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 
 	//recuperation du passage
 
-	$url = "http://www.bibelwissenschaft.de/nc/online-bibeln/".$wissen."/lesen-im-bibeltext/bibelstelle/".$ref."/anzeige/single/#iv";
-	
+
 	include_spip("inc/distant");
 	include_spip("inc/charsets");
 	$code = importer_charset(recuperer_page($url),'utf-8');
