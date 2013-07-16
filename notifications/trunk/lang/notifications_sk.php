@@ -34,12 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_finir_inscription' => 'Dokončiť registráciu',
 	'breve_propose_detail' => 'Novinka "@titre@" sa posiela na publikovanie
 	z(o)',
-	'breve_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',
+	'breve_propose_sujet' => '[@nom_site_spip@] Článok odoslaný na schválenie: @titre@',
 	'breve_propose_titre' => 'Novinka bola odoslaná
 	---------------',
 	'breve_propose_url' => 'Pozvali vás, aby ste si pozreli túto novinku a svoj názor na ňu napísali  do diskusného fóra, ktoré je k nej pripojené. Novinku nájdete na adrese:',
 	'breve_publie_detail' => 'Novinku "@titre@" práve publikoval(a) @connect_nom@.',
-	'breve_publie_sujet' => '[@nom_site_spip@] PUBLIKOVANÝ: @titre@',
+	'breve_publie_sujet' => '[@nom_site_spip@] PUBLIKOVANÝ ČLÁNOK: @titre@',
 	'breve_publie_titre' => 'Novinka bola publikovaná
 	--------------',
 
