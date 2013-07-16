@@ -30,8 +30,8 @@ function recuperer_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapitre
 	$livre		= $livre_al[$livre_lang];
 	
 	$ref = construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
-	
-	$param_cache = array('ref'=>$ref,'wissen'=>$wissen,'version_wissen'=>1);
+
+	$param_cache = array('ref'=>$ref,'wissen'=>$wissen,'version_wissen'=>2);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
