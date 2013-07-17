@@ -17,6 +17,8 @@
 	<copyright>2007-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3 (2013)</licence>
+	<licence lien="http://www.wtfpl.net/about/">WTFPL 2 (2013)</licence>
 
 	<chemin path="" type="aucun" />
 </paquet>
