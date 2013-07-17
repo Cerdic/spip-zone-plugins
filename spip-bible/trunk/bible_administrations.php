@@ -7,6 +7,7 @@ function bible_upgrade($nom_meta_base_version,$version_cible) {
   $maj["0.1.1"]  = array(array("bible_maj_0_1_1"));
   $maj["0.2.0"]  = array(array("bible_maj_0_2_0"));
   $maj["0.2.1"]  = array(array("bible_maj_0_2_1"));
+  $maj["0.2.2"]  = array(array("bible_maj_0_2_2"));
   include_spip('base/upgrade');
   maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -27,11 +28,16 @@ function bible_maj_0_2_0(){
 function bible_maj_0_2_1(){
 	ecrire_config('bible/forme_livre','abbr');
 	}
+function bible_maj_0_2_2(){
+	ecrire_config('bible/url','oui');
+	ecrire_config('bible_pp/url','oui');
+	}
 function bible_conf(){
 	include_spip('inc/config');
 				ecrire_config('bible/numeros','oui');
 				ecrire_config('bible/retour','oui');
 				ecrire_config('bible/ref','oui');
+				ecrire_config('bible/url','oui');
 				ecrire_config('bible/forme_livre','abbr');
 				ecrire_config('bible/traduction_fr','jerusalem');
 				ecrire_config('bible/traduction_en','kj');
@@ -57,6 +63,7 @@ function bible_initialise_pp(){
     ecrire_config('bible_pp/numeros','oui');
     ecrire_config('bible_pp/retour','oui');
     ecrire_config('bible_pp/ref','oui');
+    ecrire_config('bible_pp/url','oui');
     ecrire_config('bible_pp/lang_pas_art','oui');
     ecrire_config('bible_pp/lang_morte','oui');
     ecrire_config("bible_pp/forme_livre","oui");
