@@ -1,12 +1,11 @@
 #HTTP_HEADER{Content-type:text/calendar; charset=#CHARSET}
-#CACHE{0}
-[(#REM) Attention, ce qui suit doit etre vu que comme une seule ligne. La RFC 5545 impose un codeage particulier sur les fins de lignes!]BEGIN:VCALENDAR
+#CACHE{3600}BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:#CONFIG{seminaire/prodid}-//SPIP//NONSGML v1.0//FR
+PRODID:-//SPIP/Plugin #PLUGIN{AGENDA,nom}//NONSGML v1.0//FR
 X-WR-TIMEZONE:Europe/Paris
 CALSCALE:GREGORIAN
-<BOUCLE_titre_article(ARTICLES){id_article=#ENV{id_article}}>X-WR-CALNAME;VALUE=TEXT:[(#TITRE|supprimer_numero|filtrer_ical)] -- [(#NOM_SITE_SPIP|filtrer_ical)]</BOUCLE_titre_article>
-X-WR-RELCALID:[(#URL_ARTICLE|filtrer_ical)]
+X-WR-CALNAME;VALUE=TEXT:[(#INFO_TITRE{article,#ENV{id_article}}|supprimer_numero|filtrer_ical)] -- [(#NOM_SITE_SPIP|filtrer_ical)]
+X-WR-RELCALID:[(#URL_ARTICLE|url_absolue|filtrer_ical)]
 <BOUCLE_evenement2(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin<=0}{0,50}{doublons}>[(#INCLURE{fond=inclure/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{attendee}{descriptif})]
 </BOUCLE_evenement2><BOUCLE_evenement3(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin>=0}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inclure/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{attendee}{descriptif})]
 </BOUCLE_evenement3><BOUCLE_evenement(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inclure/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{attendee}{descriptif})]
