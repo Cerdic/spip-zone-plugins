@@ -246,7 +246,7 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$tableau_separateur = bible_tableau('separateur');
 	$lang_version 		= info_bible_version($traduction,'lang_abrev');
 	$separateur = $tableau_separateur[$lang_version];
-	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
+	return afficher_references_archive($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
 function afficher_references_archive($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui',$forme_livre='abbr'){
 	// fonction archivistique, pour compat ascendante, mais déconseillé d'emploi
@@ -263,66 +263,63 @@ function afficher_references_archive($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$l
 	);
 	return afficher_references($tab);
 	}
-function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui',$forme_livre='abbr'){
+function afficher_references($param){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
-	$trad = strtolower($trad);
-	$traduction = $tableau_traduction[$trad]['traduction'];
+	$param["trad"] = strtolower($param["trad"]);
+	$param["trad"]uction = $tableau_traduction[$param["trad"]]['traduction'];
 	
-	$livre_long = $tableau_livres[$lang][$livre] ;
+	$livre_long = $tableau_livres[$param["lang"]][$param["livre"]] ;
 	
-	$livre = str_replace('1','1 ',$livre);
-	$livre = str_replace('2','2 ',$livre);
-	$livre = str_replace('3','3 ',$livre);
+	$param["livre"] = str_replace('1','1 ',$param["livre"]);
+	$param["livre"] = str_replace('2','2 ',$param["livre"]);
+	$param["livre"] = str_replace('3','3 ',$param["livre"]);
 	
-	$affichage_livre = recuperer_fond("forme_livre/$forme_livre",
+	$affichage_livre = recuperer_fond("forme_livre/$param["forme_livre"]",
 		array(
 		    "livre_long"	=>$livre_long,
-		    "livre"		=>$livre,
+		    "livre"		=>$param["livre"],
 		))
 	    ." ";
-    if ($nommer_trad=='true'){
-        if ($url=='oui'){
-             $url = bible_url_passage($livre,$cd,$vd,$cf,$vf,$trad,$lang);
-	         $bloc_fin = " ({[$traduction->$url]})";  
+    if ($param["nommer_trad"]=='oui'){
+        if ($param["url"]=='oui'){
+             $param["url"] = bible_url_passage($param["livre"],$param["cd"],$param["vd"],$param["cf"],$param["vf"],$param["trad"],$param["lang"]);
+	         $bloc_fin = " ({[$param["trad"]uction->$param["url"]]})";  
 	    }
 	    else{
-	          $bloc_fin = " ({$traduction})" ;
+	          $bloc_fin = " ({$param["trad"]uction})" ;
 	    }
     }
 	else {
 	    $bloc_fin='';
 	}
-	if ($cd==$cf and $vd=='' and $vf==''){
+	if ($param["cd"]==$param["cf"] and $param["vd"]=='' and $param["vf"]==''){
 		
-		$chaine = $affichage_livre.$cd;
+		$chaine = $affichage_livre.$param["cd"];
 	
 	}
 	
-	else if ($vd=='' and $vf==''){
+	else if ($param["vd"]=='' and $param["vf"]==''){
 		
-		$chaine = $affichage_livre.$cd.'-'.$cf;
+		$chaine = $affichage_livre.$param["cd"].'-'.$param["cf"];
 	
 	}
     else{
-    	$chaine = $affichage_livre.$cd.$separateur." ".$vd;
+    	$chaine = $affichage_livre.$param["cd"].$param["separateur"]." ".$param["vd"];
     	
-    	if ($cd!=$cf){
+    	if ($param["cd"]!=$param["cf"]){
     			
-    		$chaine .= '-'.$cf.$separateur.' '.$vf;
+    		$chaine .= '-'.$param["cf"].$param["separateur"].' '.$param["vf"];
     	
     	}
-    	elseif ($vd!=$vf) {
+    	elseif ($param["vd"]!=$param["vf"]) {
     		
-    		$chaine .= '-'.$vf;
+    		$chaine .= '-'.$param["vf"];
     		
     	}
     }
 	$chaine.= $bloc_fin;
     
-    
-	if ($propre!='non'){$chaine = propre($chaine);}
-
 	return $chaine;
 
 }
