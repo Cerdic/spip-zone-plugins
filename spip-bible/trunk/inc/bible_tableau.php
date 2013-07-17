@@ -566,13 +566,13 @@ Editio Typica Altera ',
 		'at'=> true
 				),
 	'na27'		=> array(
-		'traduction'=> 'Nestl&eacute;-Aland (<sup>27</sup>&nbsp;éd.)',
+		'traduction'=> 'Nestl&eacute;-Aland (27<sup>e</sup>&nbsp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
 		'wissen'	=>'NA27',
 		'nt'=> true),
 	'na28'		=> array(
-		'traduction'=> 'Nestl&eacute;-Aland (<sup>28</sup>&nbsp;éd.)',
+		'traduction'=> 'Nestl&eacute;-Aland (28<sup>e</sup>&nbsp;éd.)',
 		'gateway'	=> false,
 		'lang'		=>'grc',
 		'wissen'	=>'NA',
