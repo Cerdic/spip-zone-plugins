@@ -84,7 +84,7 @@ var geocoder;]
 			}
 			[(#ENV{nodraw}|oui)
 			$('#champ_#ENV{champ_type,type}').val('Point');
-			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));]
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));]
 		}
 		if (!marker._map)
 			form_map.addLayer(marker);
@@ -184,15 +184,13 @@ var geocoder;]
 			style: (#ENV*{path_styles}|json_encode),
 			]onEachFeature: function (feature, layer) {
 				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
-					if (feature.geometry.type == 'Polygon') // virer le dernier point du polygon pour faciliter l'edition
-						layer.spliceLatLngs(-1,1);
 					// centrer la carte sur les bounds de l'objet
 					form_map.fitBounds(layer.getBounds());
 					// activer l'édition sur l'objet
 					layer.editing.enable();
 					// surveiller les changements sur les points de l'objet
 					layer.on("edit", function(e){
-						$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+						$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
 						var center = e.target.getBounds().getCenter();
 						$('#champ_#ENV{champ_lat,lat}').val(center.lat);
 						$('#champ_#ENV{champ_lon,lon}').val(center.lng);
@@ -203,7 +201,7 @@ var geocoder;]
 					layer.options.draggable = true;
 					// surveiller les changements sur le point
 					layer.on("dragend", function(e){
-						$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+						$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
 						maj_inputs(form_map,e.target._latlng,'click');
 					});
 				}
@@ -211,41 +209,69 @@ var geocoder;]
 		}).addTo(form_map);
 		geojson.addData(data);
 		</BOUCLE_gis>
+		
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
 		[(#ENV{nodraw}|non)
+		// i18n des chaines de Leaflet.draw
+		L.drawLocal.draw.toolbar.actions.title = '<:gis:toolbar_actions_title|texte_script:>';
+		L.drawLocal.draw.toolbar.actions.text = '<:bouton_annuler|texte_script:>';
+		L.drawLocal.draw.toolbar.buttons.polyline = '<:gis:toolbar_buttons_polyline|texte_script:>';
+		L.drawLocal.draw.toolbar.buttons.polygon = '<:gis:toolbar_buttons_polygon|texte_script:>';
+		L.drawLocal.draw.toolbar.buttons.marker = '<:gis:toolbar_buttons_marker|texte_script:>';
+		L.drawLocal.draw.handlers.marker.tooltip.start = '<:gis:toolbar_handlers_marker_tooltip_start|texte_script:>';
+		L.drawLocal.draw.handlers.polygon.tooltip.start = '<:gis:toolbar_handlers_polygon_tooltip_start|texte_script:>';
+		L.drawLocal.draw.handlers.polygon.tooltip.cont = '<:gis:toolbar_handlers_polygon_tooltip_cont|texte_script:>';
+		L.drawLocal.draw.handlers.polygon.tooltip.end = '<:gis:toolbar_handlers_polygon_tooltip_end|texte_script:>';
+		L.drawLocal.draw.handlers.polyline.tooltip.start = '<:gis:toolbar_handlers_polyline_tooltip_start|texte_script:>';
+		L.drawLocal.draw.handlers.polyline.tooltip.cont = '<:gis:toolbar_handlers_polyline_tooltip_cont|texte_script:>';
+		L.drawLocal.draw.handlers.polyline.tooltip.end = '<:gis:toolbar_handlers_polyline_tooltip_end|texte_script:>';
 		var drawOptions = {
-			drawMarker: [(#ENV{boutons}|table_valeur{marker}|=={non}|?{false,true})],
-			drawPolyline: [(#ENV{boutons}|table_valeur{polyline}|=={non}|?{false,true})],
-			drawPolygon: [(#ENV{boutons}|table_valeur{polygon}|=={non}|?{false,true})],
-			drawRectangle: [(#ENV{boutons}|table_valeur{rectangle}|=={non}|?{false,true})]
+			position: 'topleft',
+			draw: {
+				polyline: [(#ENV{boutons}|table_valeur{polyline}|=={non}|oui)false][
+				(#ENV{boutons}|table_valeur{polyline}|=={non}|non){
+					shapeOptions: { color: '#0033ff' }
+				}],
+				polygon: [(#ENV{boutons}|table_valeur{polygon}|=={non}|oui)false][
+				(#ENV{boutons}|table_valeur{polygon}|=={non}|non){
+					shapeOptions: { color: '#0033ff' }
+				}],
+				marker: [(#ENV{boutons}|table_valeur{marker}|=={non}|?{false,true})],
+				circle: false,
+				rectangle: false
+			},
+			edit: false
 		};
 		var drawControl = new L.Control.Draw(drawOptions);
 		form_map.addControl(drawControl);
-		
-		form_map.on('drawend', function(e) {
+		form_map.on('draw:created', function(e) {
+			var type = e.layerType,
+				layer = e.layer;
+			console.log(e);
 			drawControl.removeFrom(form_map);
-			if (L.Marker && (e.marker instanceof L.Marker)) {
-				marker = e.marker;
+			if (type === 'marker') {
+				marker = layer;
 				$('#champ_#ENV{champ_type,type}').val('Point');
-				$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.marker));
-				maj_inputs(form_map,e.marker._latlng,'click');
-				e.marker.dragging.enable();
-				e.marker.on("dragend", function(e){
-					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+				$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
+				maj_inputs(form_map,layer._latlng,'click');
+				layer.dragging.enable();
+				layer.on("dragend", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
 					maj_inputs(form_map,e.target._latlng,'click');
 				});
 			} else {
-				if (L.Polygon && (e.poly instanceof L.Polygon))
+				layer.addTo(form_map);
+				if (type === 'polygon')
 					$('#champ_#ENV{champ_type,type}').val('Polygon');
-				else if (L.Polyline && (e.poly instanceof L.Polyline))
+				else if (type === 'polyline')
 					$('#champ_#ENV{champ_type,type}').val('LineString');
-				$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.poly));
-				var center = e.poly.getBounds().getCenter();
+				$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
+				var center = layer.getBounds().getCenter();
 				$('#champ_#ENV{champ_lat,lat}').val(center.lat);
 				$('#champ_#ENV{champ_lon,lon}').val(center.lng);
-				e.poly.editing.enable();
-				e.poly.on("edit", function(e){
-					$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(e.target));
+				layer.editing.enable();
+				layer.on("edit", function(e){
+					$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
 					var center = e.target.getBounds().getCenter();
 					$('#champ_#ENV{champ_lat,lat}').val(center.lat);
 					$('#champ_#ENV{champ_lon,lon}').val(center.lng);
@@ -258,12 +284,12 @@ var geocoder;]
 		// mettre a jour les coordonnees quand on clique la carte
 		form_map.on('click', function(e) {
 			maj_inputs(form_map,e.latlng,'click');
-			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
 		});
 		// mettre à jour les coordonnées quand on déplace le marker
-		marker.on("dragend", function(e){
+		marker.on('dragend', function(e){
 			maj_inputs(form_map,e.target._latlng,'click');
-			$('#champ_#ENV{champ_geojson,geojson}').val(layerToGeometry(marker));
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
 		});
 		// mettre à jour le champ geosjon et le marker quand on change les valeur de lat ou lon
 		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').change(function(){

@@ -9,7 +9,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function gisgeom_insert_head_css($flux){
-	$flux .= "\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.css') .'" />';
+	$flux .= "\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'leaflet.draw.css') .'" />';
+	$flux .="\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path(_DIR_LIB_LEAFLETDRAW.'leaflet.draw.ie.css') .'" /> <![endif]-->';
 	return $flux;
 }
 
@@ -35,9 +36,7 @@ function gisgeom_recuperer_fond($flux){
 		$flux['data']['texte'] = preg_replace('%<!--extra-->%is', '$0'.$saisie, $flux['data']['texte']);
 	}
 	if ($flux['args']['fond'] == 'javascript/gis.js') {
-		$ajouts = "\n". spip_file_get_contents(find_in_path(_DIR_LIB_LEAFLETDRAW.'Control.Draw.js'));
-		$ajouts .= "\n". spip_file_get_contents(find_in_path(_DIR_LIB_LEAFLETDRAW.'Map.Draw.js'));
-		$ajouts .= "\n". spip_file_get_contents(find_in_path('javascript/gisgeom.js'));
+		$ajouts = "\n". spip_file_get_contents(find_in_path(_DIR_LIB_LEAFLETDRAW.'leaflet.draw-src.js'));
 		$flux['data']['texte'] .= $ajouts;
 	}
 	return $flux;
