@@ -22,6 +22,7 @@
 #SET{ref,#ENV{erreurs}|table_valeur{ref}}
 #SET{retour,#ENV{erreurs}|table_valeur{retour}}
 #SET{forme_livre,#ENV{erreurs}|table_valeur{forme_livre}}
+#SET{url,#ENV{erreurs}|table_valeur{url}}
 ]
 [(#ENV{erreurs}|table_valeur{erreur}|non)
 #SET{version,#ENV{version}}
@@ -29,6 +30,7 @@
 #SET{ref,#ENV{ref}}
 #SET{retour,#ENV{retour}}
 #SET{forme_livre,#ENV{forme_livre}}
+#SET{url,#ENV{url}}
 ]
 [(#ENV{message_ok}|oui)
 #SET{version,#ENV{message_ok}|table_valeur{version}}
@@ -36,6 +38,7 @@
 #SET{ref,#ENV{message_ok}|table_valeur{ref}}
 #SET{retour,#ENV{message_ok}|table_valeur{retour}}
 #SET{forme_livre,#ENV{message_ok}|table_valeur{forme_livre}}
+#SET{url,#ENV{message_ok}|table_valeur{url}}
 ]
 
 <form action="#ENV{action}" method="post" style="border: 0px none ; margin: 0px;">
@@ -88,7 +91,14 @@
 				
         </li>
         ]
-	
+
+		[(#CONFIG{bible_pp/url}|oui)	
+        <li>
+					<label for="url"><:bible:form_url:></label>
+					<input type="checkbox" name="url"  id="url" [checked="(#GET{url})"]  value="oui" />
+				
+        </li>
+        ]	
 	<B_forme_livre>
 	    <li>
 	    <label for="forme_livre"><:bible:form_forme_livre:></label>

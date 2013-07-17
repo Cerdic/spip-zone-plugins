@@ -10,7 +10,8 @@ function formulaires_bible_reference_charger_dist($lang='fr',$cadre=1){
 	   'numeros'   => lire_config('bible/numeros'),
 	   'retour'    => lire_config('bible/retour'),
 	   'ref'       => lire_config('bible/ref'),
-	   'forme_livre' => lire_config('bible/forme_livre')
+	   'forme_livre' => lire_config('bible/forme_livre'),
+	   'url'	=> lire_config("bible/url")
 	);
 	return $valeurs;
 }
@@ -22,6 +23,7 @@ function formulaires_bible_reference_verifier_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     $forme_livre  = _request('forme_livre');
+    $url 	= _request('url');
     include_spip('bible_fonctions');
     $resultat = bible($passage,$version,true);
 
@@ -31,7 +33,8 @@ function formulaires_bible_reference_verifier_dist(){
                     'retour'    =>  $retour,
                     'ref'       =>  $ref,
                     'version'   =>  $version,
-		    'forme_livre'=> $forme_livre   
+		    'forme_livre'=> $forme_livre,
+		    'url'=> $url   
                     );
     
     }
@@ -46,6 +49,7 @@ function formulaires_bible_reference_traiter_dist(){
     $retour     = _request('retour');
     $ref        = _request('ref');
     $forme_livre  = _request('forme_livre');
+    $url  = _request('url');
     include_spip('bible_fonctions');
     include_spip('inc/utils');
     $resultat = proteger_amp(recuperer_fond('modeles/bible',
@@ -54,6 +58,7 @@ function formulaires_bible_reference_traiter_dist(){
 		'retour'=>!$retour ? 'non' : $retour,
 		'numeros'=>!$numeros ? 'non' : $numeros,
 		'ref'=>!$ref ? 'non' : $ref,
+		'url'=>!$url ? 'non' : $url,
 		'forme_livre'=>$forme_livre ?  $forme_livre : 'abbr',
 		'propre'=>'non')));
     
@@ -64,15 +69,10 @@ function formulaires_bible_reference_traiter_dist(){
                 'numeros'   =>  $numeros,
                 'retour'    =>  $retour,
                 'ref'       =>  $ref,
+		'url'	     => $url,
                 'version'   =>  $version,
 		'forme_livre'=>$forme_livre  
                 ));
 
-
-	
-	 // on vérifie pas ...
 }
-
-
-
 ?>
