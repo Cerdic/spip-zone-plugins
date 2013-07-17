@@ -248,6 +248,21 @@ function bible_afficher_references_direct($ref,$traduction,$lang,$nommer_trad=tr
 	$separateur = $tableau_separateur[$lang_version];
 	return afficher_references($t[0],$t[1],$t[2],$t[3],$t[4],$traduction,$separateur,$lang,$nommer_trad);
 }
+function afficher_references_archive($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui',$forme_livre='abbr'){
+	// fonction archivistique, pour compat ascendante, mais déconseillé d'emploi
+	$tab = array(
+	    "livre" 	=> $livre,
+	    "cd"	=> $cd,
+	    "vd"	=> $vd,
+	    "vf"	=> $vf,
+	    "trad"	=> $trad,
+	    "separateur"=> $separateur,
+	    "lang"	=> $nommer_trad == true ? "oui" : $nommer_trad,
+	    "url"	=> $url,
+	    "forme_livre" =>$forme_livre
+	);
+	return afficher_references($tab);
+	}
 function afficher_references($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$lang,$nommer_trad='true',$propre='oui',$url='oui',$forme_livre='abbr'){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
