@@ -8,7 +8,7 @@ function generer_url_passage_wissen($livre,$chapitre_debut,$verset_debut,$chapit
 
 function construire_ref_wissen($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang){
 	
-	$ref = str_replace(' ','',strip_tags(afficher_references($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',"de",false,false,false,"raccourcie")));
+	$ref = str_replace(' ','',strip_tags(afficher_references_archive($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,'',',',"de",false,false,false,"raccourcie")));
 	//petit livre ?
 
 	$petit_livre=bible_tableau('petit_livre','de');
