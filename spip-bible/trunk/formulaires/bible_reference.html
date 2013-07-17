@@ -90,14 +90,14 @@
         ]
 	
 	<B_forme_livre>
-		<li>
-		<label for="forme_livre"><:bible:form_forme_livre:></label>
-		<select name="forme_livre">
-		<BOUCLE_forme_livre(DATA){source tableau, #VAL{forme_livre}|bible_tableau}{si #CONFIG{bible_pp/forme_livre}|oui}>
-		    <option value="#VALEUR" [selected='(#GET{forme_livre}|=={#VALEUR})']>[(#VAL{bible:cfg_forme_livre_#VALEUR}|_T)]</option>
+	    <li>
+	    <label for="forme_livre"><:bible:form_forme_livre:></label>
+	    <select name="forme_livre">
+		<BOUCLE_forme_livre(DATA){source tableau, #VAL{forme_livre/}|find_all_in_path{""}|array_keys}{si #CONFIG{bible_pp/forme_livre}|oui}>
+		    <option value="[(#VALEUR|basename{.html})]" [selected='(#GET{forme_livre}|=={#VALEUR|basename{.html}})']>[(#VAL{bible:cfg_forme_livre_#VALEUR}|basename{.html}|_T)]</option>
 		</BOUCLE_forme_livre>
-		</select>
-		</li>
+	    </select>
+	    </li>
 	 </B_forme_livre>
         
         [(#REM) si on ne laisse pas le choix au rédacteur, prendre version par défaut)]
