@@ -267,7 +267,7 @@ function afficher_references($param){
 	$tableau_traduction = bible_tableau('traduction');
 	$tableau_livres = bible_tableau('livres');
 	$param["trad"] = strtolower($param["trad"]);
-	$param["trad"]uction = $tableau_traduction[$param["trad"]]['traduction'];
+	$traduction = $tableau_traduction[$param["trad"]]['traduction'];
 	
 	$livre_long = $tableau_livres[$param["lang"]][$param["livre"]] ;
 	
@@ -284,10 +284,10 @@ function afficher_references($param){
     if ($param["nommer_trad"]=='oui'){
         if ($param["url"]=='oui'){
              $param["url"] = bible_url_passage($param["livre"],$param["cd"],$param["vd"],$param["cf"],$param["vf"],$param["trad"],$param["lang"]);
-	         $bloc_fin = " ({[$param["trad"]uction->$param["url"]]})";  
+	         $bloc_fin = " ({[$traduction->$param["url"]]})";  
 	    }
 	    else{
-	          $bloc_fin = " ({$param["trad"]uction})" ;
+	          $bloc_fin = " ({$traduction})" ;
 	    }
     }
 	else {
