@@ -33,14 +33,14 @@
 [(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/Bing.js]})]})]
 ]
 
-#INCLURE{javascript/gis_init_map.js}
-
 [(#REM)
 Lib clustering si besoin
 ]
 [(#ENV{cluster}|=={oui}|oui)
 [(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/leaflet.markercluster-src.js]})]})]
 ]
+
+#INCLURE{javascript/gis_init_map.js}
 
 [(#CONFIG{auto_compress_js}|=={oui}|oui)
 #FILTRE{compacte}

@@ -1,4 +1,8 @@
-var gis_init_map = function(mapcfg) {
+var gis_init_map;
+
+(function() {
+
+gis_init_map = function(mapcfg) {
 	var map_container = mapcfg["mapid"];
 
 	// Création de la carte Leafleat
@@ -258,3 +262,5 @@ var gis_init_map = function(mapcfg) {
 	if (!mapcfg['affiche_points'] || !mapcfg['json_points'].length)
 		jQuery("#"+map_container).trigger('ready',map);
 }
+
+}());
