@@ -147,6 +147,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_nombre_utilisations' => '@nb@ utilisations',
 	'titre_nouveau_point' => 'Nouveau point',
 	'titre_objet' => 'Titre',
+	'toolbar_actions_title' => 'Annuler le tracé',
+	'toolbar_buttons_marker' => 'Tracer un point',
+	'toolbar_buttons_polygon' => 'Tracer un polygone',
+	'toolbar_buttons_polyline' => 'Tracer une ligne',
+	'toolbar_handlers_marker_tooltip_start' => 'Cliquez pour placer le marqueur',
+	'toolbar_handlers_polygon_tooltip_cont' => 'Cliquez pour continuer à tracer le polygone',
+	'toolbar_handlers_polygon_tooltip_end' => 'Cliquez sur le premier point pour fermer le polygone',
+	'toolbar_handlers_polygon_tooltip_start' => 'Cliquez pour commencer à tracer le polygone',
+	'toolbar_handlers_polyline_tooltip_cont' => 'Cliquez pour continuer à tracer la ligne',
+	'toolbar_handlers_polyline_tooltip_end' => 'Cliquez sur le dernier point pour terminer la ligne',
+	'toolbar_handlers_polyline_tooltip_start' => 'Cliquez pour commencer à tracer la ligne',
 
 	// Z
 	'zoom' => 'Zoom'
