@@ -1,7 +1,8 @@
 <B_galleria>
 #ANCRE_PAGINATION
+#SET{artUID,#UID}
 [<p class="pagination">(#PAGINATION)</p>]
-<div id="galleria#ENV{id}">
+<div id="galleria#GET{artUID}">
 <BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=image}>
   <a href="#FICHIER"><img src="#FICHIER" [title="(#TITRE|textebrut)" ][alt="(#DESCRIPTIF|textebrut)" ]/></a>
 </BOUCLE_galleria>
@@ -10,7 +11,7 @@
 <script>/*<![CDATA[*/
   Galleria.loadTheme('[(#CHEMIN{galleria/themes/[(#ENV{theme, "classic"})]/galleria.[(#ENV{theme, "classic"})].min.js})]');
 	jQuery(function(){
-		jQuery("#galleria[(#ENV{id})]").galleria({[
+		jQuery("#galleria[(#GET{artUID})]").galleria({[
     autoplay: (#ENV{autoplay}),][
     carousel: (#ENV{carousel}),][
     carouselFollow: (#ENV{carouselFollow}),][
