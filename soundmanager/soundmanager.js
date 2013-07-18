@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	soundManager.setup({
 	  url: '/plugins/soundmanager/swf/',
-	  flashVersion: 8, // optional: shiny features (default = 8)
+	  flashVersion: 9, // optional: shiny features (default = 8)
 	  useFlashBlock: false, // optionally, enable when you're ready to dive in
 	  debugMode: false,
 	  /**
@@ -82,6 +82,9 @@ function jouer_son(media_id, media_url){
 
     		id:soundId,
     		url:soundURL,
+	        multiShot: false,
+		    autoPlay: false,
+			autoLoad: true,
     		onplay:function(){
     		},
     		whileloading:function(){
