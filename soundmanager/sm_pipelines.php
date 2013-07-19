@@ -10,7 +10,7 @@ function sm_affichage_final($page) {
 	if (!strpos($page, 'script/soundmanager2.js')){
 		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'") AND $GLOBALS['html']){					
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('script/soundmanager2.js') . "\"></script>"."\n";
-			$script .= "<script type=\"text/javascript\" src=\"" . find_in_path('soundmanager.js') . "\"></script>"."\n";
+			$script .= "<script type=\"text/javascript\" src=\"" . generer_url_public('soundmanager.js') . "\"></script>"."\n";
 			$script .= "<link rel='stylesheet' href='" . generer_url_public('soundmanager.css') . "' type='text/css' media='projection, screen, tv' />"."\n";
 			
 			$page = substr_replace($page, $script, strpos($page, '</head>'), 0);

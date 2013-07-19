@@ -30,6 +30,5 @@
 		<nom>affichage_final</nom>
 		<inclure>sm_pipelines.php</inclure>
 	</pipeline>
-	<utilise "Z" />
 	<categorie>multimedia</categorie>
 </plugin>
