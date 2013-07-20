@@ -81,6 +81,9 @@ function ckeditor_prepare_champs($type, $default_tb = 'Full') {
 			$champs[] = array($item, $tb) ;
 		}
 	}
+	if ((_request('page')=='cisf_article')&&ckeditor_lire_config('cisf', _CKE_CISF_DEF)) {
+		$champs[] = array('article',ckeditor_lire_config('cisf_tb',_CKE_CISF_TB_DEF));
+	}
 
 	$ckeditor_prepare_champs_post = charger_fonction('ckeditor_prepare_champs_post','');
 	$champs = $ckeditor_prepare_champs_post($champs, $default_tb) ;
@@ -115,101 +118,101 @@ function ckeditor_get_scaytlang($type, $id_type) {
 }
 
 function ckeditor_header_prive($flux) {
-	$flux .= "\n<!-- début de : ckeditor_header_prive -->\n" ;
 	$exec = _request('exec') ;
-	if (version_compare($GLOBALS['spip_version_affichee'],'3.0','<') && preg_match('~^configurer_ckeditor~',$exec)) {
-		$head = inclure_page("prive/squelettes/head/".$exec."-v2",null) ;
-		$flux .= "<!-- fond=prive/squelettes/head/".$exec."-v2 -->\n" ;
-		$flux .= $head['texte'] ;
-	}
-	if (ckeditor_lire_config('insertcssprivee', _CKE_INSERT_CSSPRIVEE_DEF)) {
-		$flux .= ckeditor_getcss() ;
-	}
-	$flux .= "<link rel='stylesheet' href='".find_in_path('css/cked-cfg.css')."' type='text/css' />\n" ;
-
 	$config = array('ajaxload'=>array());
-	$exec = _request('exec') ;
-
-	if(preg_match('~^(\w+)s?_(edit)$~', $exec, $match) || preg_match('~^(\w+)s$~', $exec, $match)) {
-		$type = $match[1] ;
-		$id_type = _request('id_'.$type) ;
-		if ($id_type) {
-			$config['type']=$type;
-			$config['id']=$id_type;
-			switch($type) { 
-				case 'article':
-				case 'rubrique':
-					$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
-					break ;
-			}
-		}
-	}
-	if (!$config['type'] && !$config['id']) {
-		$type = $exec ;
-		switch($type) {
-			case 'article':
-			case 'rubrique':
-				$config['type'] = $type ;
-				$id_type = _request('id_'.$type) ;
-				if ($id_type) {
-					$config['id'] = $id_type ;
-					$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
-				}
-				break;
-			default: 
-		}
-	}
 	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('selecteurs_prive',_CKE_PRIVE_DEF)))
 		$config['ajaxload']=$champs;
 
-	if(_request('exec') == 'configurer_ckeditor_p6') {
+	if($exec == 'configurer_ckeditor_p6') {
 		$config['ajaxload'][] = array('textarea#champ_modele','Full') ;
 	}
 
-	if (count($config['ajaxload']))
-		$flux .= ckeditor_preparescript($config) ;
+	if (count($config['ajaxload'])) {
+		$flux .= "\n<!-- début de : ckeditor_header_prive -->\n" ;
+		$exec = _request('exec') ;
+		if (version_compare($GLOBALS['spip_version_affichee'],'3.0','<') && preg_match('~^configurer_ckeditor~',$exec)) {
+			$head = inclure_page("prive/squelettes/head/".$exec."-v2",null) ;
+			$flux .= "<!-- fond=prive/squelettes/head/".$exec."-v2 -->\n" ;
+			$flux .= $head['texte'] ;
+		}
+		if (ckeditor_lire_config('insertcssprivee', _CKE_INSERT_CSSPRIVEE_DEF)) {
+			$flux .= ckeditor_getcss() ;
+		}
+		$flux .= "<link rel='stylesheet' href='".find_in_path('css/cked-cfg.css')."' type='text/css' />\n" ;
 
-	return $flux."\n<!-- fin de : ckeditor_header_prive -->\n" ;
+		if(preg_match('~^(\w+)s?_(edit)$~', $exec, $match) || preg_match('~^(\w+)s$~', $exec, $match)) {
+			$type = $match[1] ;
+			$id_type = _request('id_'.$type) ;
+			if ($id_type) {
+				$config['type']=$type;
+				$config['id']=$id_type;
+				switch($type) { 
+					case 'article':
+					case 'rubrique':
+						$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
+						break ;
+				}
+			}
+		}
+		if (!$config['type'] && !$config['id']) {
+			$type = $exec ;
+			switch($type) {
+				case 'article':
+				case 'rubrique':
+					$config['type'] = $type ;
+					$id_type = _request('id_'.$type) ;
+					if ($id_type) {
+						$config['id'] = $id_type ;
+						$config['scayt_sLang'] = ckeditor_get_scaytlang($type, $id_type) ;
+					}
+					break;
+				default: 
+			}
+		}
+		$flux .= ckeditor_preparescript($config) ;
+		$flux .= "\n<!-- fin de : ckeditor_header_prive -->\n" ;
+	}
+	return $flux ;
 }
 
 function ckeditor_insert_head($flux) {
-	$flux .= "\n<!-- début de : ckeditor_insert_head -->\n" ;
-	if (ckeditor_lire_config('insertcsspublic', _CKE_INSERT_CSSPUBLIC_DEF)) {
-		$flux .= ckeditor_getcss() ;
-	}
 	$config=array('ajaxload'=>array());
-	if ((_request('page')=='cisf_article')&&ckeditor_lire_config('cisf', _CKE_CISF_DEF)) {
-		$config['ajaxload']=ckeditor_prepare_champs('article',ckeditor_lire_config('cisf_tb',_CKE_CISF_TB_DEF));
-		$config['type'] = 'article' ;
-		$id = _request('id_article') ;
-		if ($id) {
-			$config['id'] = $id ;
-			switch($type) { 
-				case 'article':
-				case 'rubrique':
-					$res = sql_select('lang', 'spip_'.$type.'s', 'id_'.$type.' = '.$id_type) ;
-					if ($row = sql_fetch($res)) {
-						$config['scayt_sLang'] = ckeditor_spiplang_to_scayt($row['lang']) ;
-					}
-					break ;
-			}		
-		}
-	} else // on essaie quand même de déterminer le contexte d'édition :
-	if (is_array($GLOBALS['page']) && is_array($GLOBALS['page']['contexte'])) {
-		$type=$GLOBALS['page']['contexte']['type'] ;
-		$id=$GLOBALS['page']['contexte']['id_'.$type];
-		if ($id) {
-			$config['type']=$type;
-			$config['id']=$id;
-		}
-	}
 	if($champs = ckeditor_prepare_champs(ckeditor_lire_config('selecteurs_public',_CKE_PUBLIC_DEF)))
 		$config['ajaxload']=$champs;
 
-	if (count($config['ajaxload'])) // s'il y a quelque chose à charger :
+	if (count($config['ajaxload'])) {// s'il y a quelque chose à charger :
+		$flux .= "\n<!-- début de : ckeditor_insert_head -->\n" ;
+		if (ckeditor_lire_config('insertcsspublic', _CKE_INSERT_CSSPUBLIC_DEF)) {
+			$flux .= ckeditor_getcss() ;
+		}
+		if ((_request('page')=='cisf_article')&&ckeditor_lire_config('cisf', _CKE_CISF_DEF)) {
+			$config['type'] = 'article' ;
+			$id = _request('id_article') ;
+			if ($id) {
+				$config['id'] = $id ;
+				switch($type) { 
+					case 'article':
+					case 'rubrique':
+						$res = sql_select('lang', 'spip_'.$type.'s', 'id_'.$type.' = '.$id_type) ;
+						if ($row = sql_fetch($res)) {
+							$config['scayt_sLang'] = ckeditor_spiplang_to_scayt($row['lang']) ;
+						}
+						break ;
+				}		
+			}
+		} else // on essaie quand même de déterminer le contexte d'édition :
+		if (is_array($GLOBALS['page']) && is_array($GLOBALS['page']['contexte'])) {
+			$type=$GLOBALS['page']['contexte']['type'] ;
+			$id=$GLOBALS['page']['contexte']['id_'.$type];
+			if ($id) {
+				$config['type']=$type;
+				$config['id']=$id;
+			}
+		}
 		$flux .= ckeditor_preparescript($config) ;
-
-	return $flux."\n<!-- fin de : ckeditor_insert_head -->\n" ;
+		$flux .= "\n<!-- fin de : ckeditor_insert_head -->\n" ;
+	}
+	return $flux ;
 }
 
 function ckeditor_prepare_champs_post_dist($editer_champs, $default_tb) {
@@ -271,6 +274,7 @@ function ckeditor_preparescript($config) {
 	global $visiteur_session ;
 	global $auteur_session ;
 	static $init_done = false ;
+
 	if (!$init_done) {
 			$cke_cfg= array() ;
 			$removePlugins = array() ;
@@ -617,39 +621,22 @@ function ckeditor_preparescript($config) {
 		$config['ajaxload'][$ndx][3] = md5($row[0]) ;
 	}
 	$script .= "	<script type=\"text/javascript\">
-function loadCKEditor() {
-	// la configuration de ckeditor :
-	CKEDITOR.ckeditorpath=".$ckeditor_json_encode(url_absolue(_CKE_JS)).";
-	CKEDITOR.spipurl=".$ckeditor_json_encode(url_absolue(_DIR_RACINE.'spip.php')).";
-	CKEDITOR.ckpreferedversion='"._CKE_PREFERED_VERSION."';
-	CKEDITOR.ckeditmode='$editmode';
-	CKEDITOR.cache_redim=".$ckeditor_json_encode(ckeditor_lire_config('cache_redim', _CKE_CACHE_REDIM_DEF)?true:false).";
-	CKEDITOR.ckConfig = ".$ckeditor_json_encode($ckeditor_config_post($cke_cfg)).";
+$(document).ready(function(){
+	function loadCKEditor() {
+		// la configuration de ckeditor :
+		CKEDITOR.ckeditorpath=".$ckeditor_json_encode(url_absolue(_CKE_JS)).";
+		CKEDITOR.spipurl=".$ckeditor_json_encode(url_absolue(_DIR_RACINE.'spip.php')).";
+		CKEDITOR.ckpreferedversion='"._CKE_PREFERED_VERSION."';
+		CKEDITOR.ckeditmode='$editmode';
+		CKEDITOR.cache_redim=".$ckeditor_json_encode(ckeditor_lire_config('cache_redim', _CKE_CACHE_REDIM_DEF)?true:false).";
+		CKEDITOR.ckConfig = ".$ckeditor_json_encode($ckeditor_config_post($cke_cfg)).";
 
-	var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
-	try {
-		var prefix_id = $(this).attr('id');
-		if ((prefix_id != undefined) && prefix_id.match(/^\w+$/)){
-			$.each(ajaxload, function(i){
-				ajaxload[i][2]=prefix_id;
-				ajaxload[i][0]='#'+prefix_id+' '+ajaxload[i][0];
-			});
-			for(name in CKEDITOR.instances) {
-				CKEDITOR.instances[name].destroy()
-			}
-			CKEDITOR.instances = [] ;
-		}
-	} catch (E) {}
-	fullInitCKEDITOR(ajaxload) ;
-}
+		var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
+		CKEDITOR.instances = [] ; // normalement aucune instances de CKEDITOR n'est valide à cet instant, on les vide.
+		fullInitCKEDITOR(ajaxload) ;
+	}
 
-// fix: http://contrib.spip.net/CKeditor-3-0#forum468153
-function ajaxLoadCKEditor() {
-	CKEDITOR = window.parent.document.CKEDITOR ;
-	loadCKEditor() ;
-}
-$(window).load(function(){
-	if(typeof onAjaxLoad == 'function') onAjaxLoad(ajaxLoadCKEditor);
+	if(typeof onAjaxLoad == 'function') onAjaxLoad(loadCKEditor);
 	loadCKEditor();
 }) ;
 

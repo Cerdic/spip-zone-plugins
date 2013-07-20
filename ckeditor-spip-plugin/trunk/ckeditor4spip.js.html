@@ -23,29 +23,29 @@ if (sansConversion) {
 } else {
 	spipDataProcessor={
 		toDataFormat:function(html, fixForBody){
-			return $.ajax({url:CKEDITOR.spipurl+'?page=ckspip_convert',data:{text_area:html.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g,'$1'),cvt:'html2spip',fix:fixForBody},global:false,type:'POST',dataType:'text',async:false}).responseText;
+			return jQuery.ajax({url:CKEDITOR.spipurl+'?page=ckspip_convert',data:{text_area:html.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g,'$1'),cvt:'html2spip',fix:fixForBody},global:false,type:'POST',dataType:'text',async:false}).responseText;
 		},
 		toHtml:function(data, fixForBody){
-			return $.ajax({url:CKEDITOR.spipurl+'?page=ckspip_convert',data:{text_area:data.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g,'$1'),cvt:'spip2html',fix:fixForBody},global:false,type:'POST',dataType:'text',async:false}).responseText;
+			return jQuery.ajax({url:CKEDITOR.spipurl+'?page=ckspip_convert',data:{text_area:data.replace(/<span\s+data-scayt[^>]*>\s*(.*?)\s*<\/span>/g,'$1'),cvt:'spip2html',fix:fixForBody},global:false,type:'POST',dataType:'text',async:false}).responseText;
 		}
 	};
 }
 
 function htmldecode(s){
-	return $('<div/>').html(s).text();
+	return jQuery('<div/>').html(s).text();
 }
 
 function HideSpipUI(editor_id){
-	if($(editor_id).size()==0){return;}
+	if(jQuery(editor_id).size()==0){return;}
 	var crayon=editor_id.match(/^(#crayon_\d+)\s/), item, editor_id_light = editor_id ;
 	if(crayon) {
 		editor_id_light='textarea.crayon-active' ;
-		stack[editor_id].crborder=$(crayon[1]+' .formulaire_spip').css('border');
-		stack[editor_id].crbg=$(crayon[1]+' .formulaire_spip').css('background-color');
-		$(crayon[1]+' .formulaire_spip')
+		stack[editor_id].crborder=jQuery(crayon[1]+' .formulaire_spip').css('border');
+		stack[editor_id].crbg=jQuery(crayon[1]+' .formulaire_spip').css('background-color');
+		jQuery(crayon[1]+' .formulaire_spip')
 			.css('border','none')
 			.css('background-color','white');
-		item=$(crayon+' div.edition');
+		item=jQuery(crayon+' div.edition');
 	} else {
 		editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
 		if (editor_id_light) {
@@ -54,17 +54,17 @@ function HideSpipUI(editor_id){
 			editor_id_light = editor_id ;
 		}
 
-		item=$(editor_id_light).parents().find('div.forum, div.edition:has('+editor_id_light+')');
+		item=jQuery(editor_id_light).parents().find('div.forum, div.edition:has('+editor_id_light+')');
 	}
 	item.each(function() {
-		if ($(this).find(editor_id_light).length == 1) {
+		if (jQuery(this).find(editor_id_light).length == 1) {
 			if (editor_id.match(/^#formulaire_forum\s/)) {
-				stack[editor_id].fobd=$(this).css('border');
-				stack[editor_id].fobg=$(this).css('background');
-				$(this).css('border','none');
-				$(this).css('background','none');
+				stack[editor_id].fobd=jQuery(this).css('border');
+				stack[editor_id].fobg=jQuery(this).css('background');
+				jQuery(this).css('border','none');
+				jQuery(this).css('background','none');
 			}
-			$(this).find('.spip_barre').css('display','none').end()
+			jQuery(this).find('.spip_barre').css('display','none').end()
 				.find('.explication').css('display','none').end()
 				.find('.markItUpHeader').css('display','none').end()
 				.find('.markItUpTabs').css('display','none').end()
@@ -75,34 +75,34 @@ function HideSpipUI(editor_id){
 }
 
 function ShowSpipUI(editor_id){
-	if($(editor_id).size()==0){return;}
+	if(jQuery(editor_id).size()==0){return;}
 	if (! stack[editor_id].nobarre) {
-		$(editor_id).removeClass('no_barre') ;
+		jQuery(editor_id).removeClass('no_barre') ;
 		barrebouilles_editor(editor_id) ;
 		stack[editor_id].nobarre = false ;
 	}
 	var crayon=editor_id.match(/^(#crayon_\d+)\s/), item ;
 	if(crayon) {
-		item=$(crayon+' div.edition');
+		item=jQuery(crayon+' div.edition');
 	} else {
-		item=$(editor_id).parents().find('div.forum, div.edition:has('+editor_id+')');
+		item=jQuery(editor_id).parents().find('div.forum, div.edition:has('+editor_id+')');
 	}
 	item.each(function() {
 		if (editor_id.match(/^#formulaire_forum\s/)) {
-			$(this).css('border',stack[editor_id].fobd);
-			$(this).css('background',stack[editor_id].fobg);
+			jQuery(this).css('border',stack[editor_id].fobd);
+			jQuery(this).css('background',stack[editor_id].fobg);
 		}
 		if(crayon) {
-			$(crayon[1]+' .formulaire_spip')
+			jQuery(crayon[1]+' .formulaire_spip')
 				.css('border',stack[editor_id].crborder)
 				.css('background-color',stack[editor_id].crbg);
 		}
-		if($(this).find('.markItUpTabs .previsuVoir').hasClass('on')){
-			$(this).find('.markItUpTabs').css('display','').end()
+		if(jQuery(this).find('.markItUpTabs .previsuVoir').hasClass('on')){
+			jQuery(this).find('.markItUpTabs').css('display','').end()
 				.find('.markItUpPreview').css('display','block').end()
 				.find('.markItUpEditor').css('display','none');
 		}else{
-			$(this).find('.spip_barre').css('display','').end()
+			jQuery(this).find('.spip_barre').css('display','').end()
 				.find('.explication').css('display','').end()
 				.find('.markItUpHeader').css('display','').end()
 				.find('.markItUpTabs').css('display','').end()
@@ -116,26 +116,17 @@ function ShowSpipUI(editor_id){
 var stack=[];
 
 function SpipEditor2CKEditor(editor_id){
-	if ($(editor_id).size()==0) {return;}
-	$('#swapeditor_'+stack[editor_id].ndx)
+	if (jQuery(editor_id).size()==0) {return;}
+	jQuery('#swapeditor_'+stack[editor_id].md5)
 		.attr('disabled',true)
 		.attr('title',htmldecode('<:ckeditor:loading:>'))
 		.find('img')
 			.attr('src','[(#CHEMIN{images/searching.gif}|url_absolue)]');
-	$(editor_id).attr('disabled',true);
-	var EdConfig={};$.extend(EdConfig,CKEDITOR.ckConfig) ;
+	jQuery(editor_id).attr('disabled',true);
+	var EdConfig={};jQuery.extend(EdConfig,CKEDITOR.ckConfig) ;
 	EdConfig.toolbar='Spip'+stack[editor_id].tb;
-	try { [(#REM) // fix les problèmes des instances de ckeditor répertoriées, mais non visibles/accessibles du fait du rechargement via ajax ]
-		var id = $(editor_id).attr('id') ;
-		if (id) {
-			var instance = CKEDITOR.instances[id] ;
-			if (instance) {
-				instance.destroy() ;
-			}
-		}
-	} catch (E) { /* rien */ }
 	try { 
-	$(editor_id).ckeditor(function(){
+	jQuery(editor_id).ckeditor(function(){
 		HideSpipUI(editor_id);
 		stack[editor_id].n='#'+this.container.getId();
 		stack[editor_id].editor=this.name ;
@@ -148,31 +139,28 @@ function SpipEditor2CKEditor(editor_id){
 		var pc=0,parent_trouve=false ;
 		do {
 			stack[editor_id].parent_id = parent_ids[pc++] ;
-			if ($(stack[editor_id].parent_id).length>0) {
+			if (jQuery(stack[editor_id].parent_id).length>0) {
 				parent_trouve=true ;
-				stack[editor_id].marges=$(editor_id).parents(stack[editor_id].parent_id).width()-$(stack[editor_id].n).width() ;
+				stack[editor_id].marges=jQuery(editor_id).parents(stack[editor_id].parent_id).width()-jQuery(stack[editor_id].n).width() ;
 			}
 		} while ((pc<parent_ids.length) && (!parent_trouve)) ;
-		
 
 		if (parent_trouve) {
 			this.on('resize', function(e) {
-				$(editor_id).parents(stack[editor_id].parent_id).width($(stack[editor_id].n).width()+stack[editor_id].marges);
+				jQuery(editor_id).parents(stack[editor_id].parent_id).width(jQuery(stack[editor_id].n).width()+stack[editor_id].marges);
 			});
 		}
 		contexteChange(editor_id);
-		$(editor_id).attr('disabled',false);
-		$('#swapeditor_'+stack[editor_id].ndx)
+		jQuery(editor_id).attr('disabled',false);
+		jQuery('#swapeditor_'+stack[editor_id].md5)
 			.attr('title',htmldecode('<:ckeditor:use_spip_editor:>'))
 			.find('img')
 				.attr('src','[(#CHEMIN{images/ckeditor_spip.png}|url_absolue)]') ;
-		$('#swapeditor_'+stack[editor_id].ndx).attr('disabled',false);
+		jQuery('#swapeditor_'+stack[editor_id].md5).attr('disabled',false);
 		this.setReadOnly(false);
 		this.on('dataReady', function(e){ 
 			this.resize(CKEDITOR.ckConfig.minwidth,CKEDITOR.ckConfig.height);
 		});
-		$(editor_id).parents().find('input[class=submit]') [(#REM) // fix: a priori ceci n'est nécessaire que pour les forums, mais il semble que cela fonctionne aussi pour les autres formulaires]
-			.attr('onclick', 'javacript:CKEditor2SpipEditor(\''+editor_id+'\');') ;
 	},EdConfig);
 	} catch (E) { /* rien */ }
 }
@@ -184,52 +172,52 @@ function barrebouilles_editor(editor_id){
 	// fonction generique appliquee aux classes CSS :
 	// inserer_barre_forum, inserer_barre_edition, inserer_previsualisation
 ]
-	if ($(editor_id).hasClass('inserer_barre_forum'))
-		$(editor_id).barre_outils('forum');
-	if ($(editor_id).hasClass('inserer_barre_edition'))
-		$(editor_id).barre_outils('edition');
-	if ($(editor_id).hasClass('inserer_previsualisation'))
-		$(editor_id).barre_previsualisation();
+	if (jQuery(editor_id).hasClass('inserer_barre_forum'))
+		jQuery(editor_id).barre_outils('forum');
+	if (jQuery(editor_id).hasClass('inserer_barre_edition'))
+		jQuery(editor_id).barre_outils('edition');
+	if (jQuery(editor_id).hasClass('inserer_previsualisation'))
+		jQuery(editor_id).barre_previsualisation();
 [(#REM)	// fonction specifique aux formulaires de SPIP :
 	// barre de forum
 ]
-	if ($(editor_id).hasClass('textarea_forum'))
-		$(editor_id).barre_outils('forum');
-	if($(editor_id).attr('name').match(/^(texte|\w+_texte)$/)) {
+	if (jQuery(editor_id).hasClass('textarea_forum'))
+		jQuery(editor_id).barre_outils('forum');
+	if(jQuery(editor_id).attr('name').match(/^(texte|\w+_texte)$/)) {
 		if (!editor_id.match(/\b#formulaire_forum\b/)) {
-			$(editor_id).barre_outils('edition').barre_previsualisation();
+			jQuery(editor_id).barre_outils('edition').barre_previsualisation();
 		}
 		[(#CONFIG{forums_afficher_barre}|=={non}|non)
 		else {
-			$(editor_id).barre_outils('forum');
+			jQuery(editor_id).barre_outils('forum');
 		}]
 	}
 }
 
 function CKEditor2SpipEditor(editor_id){
-	if($(editor_id).size()==0){return;}
-	$('#swapeditor_'+stack[editor_id].ndx)
+	if(jQuery(editor_id).size()==0){return;}
+	jQuery('#swapeditor_'+stack[editor_id].md5)
 		.attr('disabled',true)
 		.attr('title',htmldecode('<:ckeditor:loading:>'))
 		.find('img')
 			.attr('src','[(#CHEMIN{images/searching.gif}|url_absolue)]');
-	$(editor_id)
+	jQuery(editor_id)
 		.attr('disabled',true)
 		.css('display','block')
 		.ckeditorGet().destroy();
 	ShowSpipUI(editor_id);
-	$('#swapeditor_'+stack[editor_id].ndx)
+	jQuery('#swapeditor_'+stack[editor_id].md5)
 		.attr('title',htmldecode('<:ckeditor:use_ckeditor:>'))
 		.find('img')
 			.attr('src','[(#CHEMIN{images/ckeditor.png}|url_absolue)]')
 		.end()
 		.attr('disabled',false);
-	$(editor_id)
+	jQuery(editor_id)
 		.attr('disabled',false);
 }
 
 function SwapEditor(editor_id){
-	if($(editor_id).size()==0){return;}
+	if(jQuery(editor_id).size()==0){return;}
 	try{
 		CKEditor2SpipEditor(editor_id);
 	}catch(e){
@@ -238,41 +226,49 @@ function SwapEditor(editor_id){
 }
 
 function contexteChange(editor_id){
-	if($(editor_id).size()==0){return;}
-	if($("#contexte_"+stack[editor_id].ndx).length){
-		var contexte=$("#contexte_"+stack[editor_id].ndx).val().match(/^([\.#])(.*)$/);
+	if(jQuery(editor_id).size()==0){return;}
+	if(jQuery("#contexte_"+stack[editor_id].md5).length){
+		var contexte=jQuery("#contexte_"+stack[editor_id].md5).val().match(/^([\.#])(.*)$/);
 		if(stack[editor_id].ctx){[(#REM)// on supprime l'ancien contexte]
 			if(stack[editor_id].ctx[1]=="#"){[(#REM)// le contexte est donné via un identifiant]
-				$(stack[editor_id].n+' iframe').contents().find('body').attr('id','');
+				jQuery(stack[editor_id].n+' iframe').contents().find('body').attr('id','');
 			}else{
-				$(stack[editor_id].n+' iframe').contents().find('body').removeClass(stack[editor_id].ctx[2]);
+				jQuery(stack[editor_id].n+' iframe').contents().find('body').removeClass(stack[editor_id].ctx[2]);
 			}
 		}
 		stack[editor_id].ctx=contexte;
 		if(contexte){[(#REM)// on affecte  le nouveau contexte]
 			if(contexte[1]=="#"){[(#REM)// le contexte est donné via un identifiant]
-				$(stack[editor_id].n+' iframe').contents().find('body').attr('id', contexte[2]);
+				jQuery(stack[editor_id].n+' iframe').contents().find('body').attr('id', contexte[2]);
 			}else{[(#REM)// le contexte est donné via une class]
-				$(stack[editor_id].n+' iframe').contents().find('body').addClass(contexte[2]);
+				jQuery(stack[editor_id].n+' iframe').contents().find('body').addClass(contexte[2]);
 			}
 		}
 	}
 }
 
+function on_submit_destroy_cke() {
+	for(name in CKEDITOR.instances) {
+	    CKEDITOR.instances[name].destroy()
+	}
+}
+
 function cke_crayon_submit(editor_id){
-	if($(editor_id).size()==0){return;}
+	if(jQuery(editor_id).size()==0){return;}
 	try{[(#REM)// si on est en mode 'ckeditor', on synchronise le textarea]
-		$(editor_id).ckeditorGet().updateElement();
+		jQuery(editor_id).ckeditorGet().updateElement();
 	}catch(e){ /* rien */ }
-	$(this).parents('.formulaire_crayon').submit();
+	jQuery(this).parents('.formulaire_crayon').submit();
 }
 
 function fullInitCKEDITOR(editor_ids){
 	if(!editor_ids)editor_ids=[["textarea[name=texte]","Full"]];
-	CKEDITOR.ckConfig.on={
-		'pluginsLoaded':function(ev){ckeDataProcessor=ev.editor.dataProcessor;ev.editor.dataProcessor=spipDataProcessor;}
-	};
+	jQuery("input[type=submit]").click(on_submit_destroy_cke) ;
 	if (!CKEDITOR.fullInitDone) {
+		CKEDITOR.fullInitDone=true;
+		CKEDITOR.ckConfig.on={
+			'pluginsLoaded':function(ev){ckeDataProcessor=ev.editor.dataProcessor;ev.editor.dataProcessor=spipDataProcessor;}
+		};
 		CKEDITOR.on('dialogDefinition',function(ev){
 			var dialogName=ev.data.name,
 				dialogDefinition=ev.data.definition;
@@ -295,34 +291,38 @@ function fullInitCKEDITOR(editor_ids){
 		for(var plugin in CKEDITOR.ckConfig.loadExtraPlugins){
 			CKEDITOR.plugins.addExternal(plugin, CKEDITOR.ckConfig.loadExtraPlugins[plugin]);
 		}
-		CKEDITOR.fullInitDone=true;
 	}
 	for(var id in editor_ids){
-		if (($(editor_ids[id][0]).length > 0) && ($(editor_ids[id][0]).css('display') != 'none')) { 
+		if ((jQuery(editor_ids[id][0]).length > 0) && (jQuery(editor_ids[id][0]).css('display') != 'none')) { 
+			var editor_id=editor_ids[id][0], editor_tb=editor_ids[id][1], crayon=null, editor_md5=editor_ids[id][3] ;
+			if (jQuery(editor_id).parents("[id^=crayon_]").length>0) { // sommes-nous appelé depuis un crayon ?
+				crayon = jQuery(editor_id).parents("[id^=crayon_]").attr('id') ;
+				if (! editor_id.match(/^\s*#/)) {
+					editor_id = "#"+crayon+" "+editor_id ;
+				}
+			}
+	
 		try {
-			$(editor_ids[id][0]).ckeditorGet() ;
+			jQuery(editor_id).ckeditorGet() ;
 		} catch(e) {
-			var editor_id=editor_ids[id][0], editor_tb=editor_ids[id][1], crayon=editor_ids[id][2], editor_md5=editor_ids[id][3] ;
-				
-			var ndx=$('[id^=cke_cpt_]').size(),buttons='';
-			while ($('[id=cke_cpt_'+ndx+']').size()>0) { ndx++ ; }
+			
+			var buttons='';
 			if (typeof stack[editor_id] == 'undefined') {
 				stack[editor_id] = {} ;
 			}
 			stack[editor_id].crayons = 0 ;
-			stack[editor_id].ndx = ndx ;
 			stack[editor_id].tb = editor_tb ;
-			stack[editor_id].nobarre = ($(editor_id).hasClass('no_barre') || CKEDITOR.ckeditmode == 'spip') ;
+			stack[editor_id].nobarre = (jQuery(editor_id).hasClass('no_barre') || CKEDITOR.ckeditmode == 'spip') ;
 			stack[editor_id].md5 = editor_md5 ;
 			if (! stack[editor_id].nobarre)
-				$(editor_id).addClass('no_barre');[(#REM) // on fait en sorte de désactiver l'affichage du porte plume avant qu'il n'entre en scène ...]
+				jQuery(editor_id).addClass('no_barre');[(#REM) // on fait en sorte de désactiver l'affichage du porte plume avant qu'il n'entre en scène ...]
 
-			if ($('.after_'+editor_md5).length==0) {
-				$(editor_id).after('<span id="cke_cpt_'+ndx+'" class="after_'+editor_md5+'"></span>');
+			if (jQuery('#after_'+editor_md5).length==0) {
+				jQuery(editor_id).after('<span id="after_'+editor_md5+'"></span>');
 	[(#CONFIG{ckeditor/ignoreversion}|=={'on'}|non)
 				if(CKEDITOR.version<CKEDITOR.ckpreferedversion){
 					var pref='<:ckeditor:version_preferee:>';
-					$('#cke_cpt_'+ndx).prepend(
+					jQuery('#after_'+editor_md5).prepend(
 						'<div class="erreur_message">'+pref.replace(/%2/,CKEDITOR.ckpreferedversion).replace(/%1/,CKEDITOR.version)+'</div>'
 					);
 				}
@@ -331,46 +331,29 @@ function fullInitCKEDITOR(editor_ids){
 			
 			if(CKEDITOR.ckeditmode!='ckeditor-exclu'){
 				buttons=buttons +
-					'<button style="margin:0;width:40px;height:24px;" type="button" id="swapeditor_'+ndx+'" onclick="javascript:SwapEditor(\''+editor_id+'\');" title="' 
+					'<button style="margin:0;width:40px;height:24px;" type="button" id="swapeditor_'+editor_md5+'" onclick="javascript:SwapEditor(\''+editor_id+'\');" title="' 
 					+htmldecode(CKEDITOR.ckeditmode=='spip'?'<:ckeditor:use_ckeditor:>':'<:ckeditor:use_spip_editor:>') 
 					+'"><img src="[(#CHEMIN{images/ckeditor.png}|url_absolue)]"/></button>';
 			}
 
 	[(#REM)	// on insère le menu déroulant de changement de contexte s'il existe des contextes]
 	<B_options>		buttons=buttons+'<span style="padding-right:5px;"><:ckeditor:changer_de_contexte:></span>'
-				+'<select id="contexte_'+ndx+'" name="contexte_'+ndx+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
-			if(buttons && ($('.before_'+editor_md5).length == 0)) {
-				var div ;
+				+'<select id="contexte_'+editor_md5+'" name="contexte_'+editor_md5+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
+			if(buttons && (jQuery('#before_'+editor_md5).length == 0)) {
+				var div = jQuery(editor_id) ;
 				var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
-				if (crayon) {
-					div = $('textarea.crayon-active').closest('.formulaire_crayon') ;
-				} else {
-					editor_id_light = editor_id.match(/^#\S*\s+(.*)$/) ;
-					if (editor_id_light) {
-						editor_id_light = editor_id_light[1] ;
-					} else {
-						editor_id_light = editor_id ;
-					}
-
-					div = $(editor_id_light).closest('.markItUpContainer') ;
-					if (div.length == 0) { [(#REM) // cas où le porteplume n'est pas là... ]
-						div = $(editor_id).siblings('label:first') ;
-						style = "width;100%;text-align:right;position:relative;top:-8px;height:0px;" ;
-					}
-					
-				}
 				if (div.length != 0) {
-					div.prepend('<div id="cke_buttons_'+ndx+'" class="before_'+editor_md5+'" style="'+style+'"><a name="cke_buttons_ancre_'+ndx+'"></a>'+buttons+'</div>');
+					div.before('<div id="before_'+editor_md5+'" style="'+style+'"><a name="ancre_'+editor_md5+'"></a>'+buttons+'</div>');
 				}
 			}
-	[(#REM)	// gestion des crayons :]
+		[(#REM)	// gestion des crayons :]
 			if(crayon){
-				$('#'+crayon+' .crayon-submit')
-					.after('<button id="save" style=\'background:url("[(#CHEMIN{images/ok.png}|url_absolue)]") no-repeat scroll left top transparent;\' onclick="javascript:return cke_crayon_submit(\''+editor_id+'\');" title="<:bouton_enregistrer:>"><:bouton_enregistrer:></button>')[(#REM)// on ajoute notre bouton qui synchronisera le textarea avant l'editeur avec de soumettre le formulaire]
+				jQuery('#'+crayon+' .crayon-submit')
+					.after('<button class="crayon-submit" onclick="javascript:return cke_crayon_submit(\''+editor_id+'\');" title="<:bouton_enregistrer:>"><:bouton_enregistrer:></button>')[(#REM)// on ajoute notre bouton qui synchronisera le textarea avant l'editeur avec de soumettre le formulaire]
 					.remove();[(#REM)// on supprime le bouton original]
 			}
 			if(CKEDITOR.ckeditmode!='spip'){
-				SpipEditor2CKEditor(editor_ids[id][0]) ;
+				SpipEditor2CKEditor(editor_id) ;
 			}
 		}}
 	}
