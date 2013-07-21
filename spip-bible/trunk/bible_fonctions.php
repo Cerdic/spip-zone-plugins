@@ -254,10 +254,12 @@ function afficher_references_archive($livre,$cd,$vd,$cf,$vf,$trad,$separateur,$l
 	    "livre" 	=> $livre,
 	    "cd"	=> $cd,
 	    "vd"	=> $vd,
+	    "cf"	=> $cf,
 	    "vf"	=> $vf,
 	    "trad"	=> $trad,
 	    "separateur"=> $separateur,
-	    "lang"	=> $nommer_trad == true ? "oui" : $nommer_trad,
+	    "lang"	=> $lang,
+	    "nommer_trad" => $nommer_trad == true ? "oui" : $nommer_trad,
 	    "url"	=> $url,
 	    "forme_livre" =>$forme_livre
 	);
