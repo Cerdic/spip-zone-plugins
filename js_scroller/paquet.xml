@@ -1,11 +1,11 @@
 <paquet
 	prefix="js_scroller"
-	categorie="squelette"
+	categorie="multimedia"
 	version="1.44.1"
 	etat="stable"
-	compatibilite="[2.0.0;["
+	compatibilite="[2.0.0;3.0.*]"
 	logo="javascriptb.png"
-	documentation="http://www.spip-contrib.fr/?article3570"
+	documentation="http://contrib.spip.net/article3570"
 >	
 
 	<nom>Javascript Scroller</nom>
