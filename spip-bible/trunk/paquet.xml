@@ -18,8 +18,8 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
-	<menu nom="configurer_bible" titre="bible:cfg_configurer" parent="menu_configuration" icone="bible-16.jpg" />
-	<menu nom="configurer_bible_pp" titre="bible:cfg_pp" parent="menu_configuration" icone="bible-16.jpg" />
+	<menu nom="configurer_bible" titre="bible:cfg_configurer" parent="menu_configuration" icone="images/bible-16.jpg" />
+	<menu nom="configurer_bible_pp" titre="bible:cfg_pp" parent="menu_configuration" icone="images/bible-16.jpg" />
 	<pipeline nom="insert_head" action="insert_head" inclure="bible_pipelines.php" />
 	<pipeline nom="affiche_droite" action="affiche_droite" inclure="bible_pipelines.php" />
 
