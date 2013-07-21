@@ -275,7 +275,7 @@ function afficher_references($param){
 	$param["livre"] = str_replace('2','2 ',$param["livre"]);
 	$param["livre"] = str_replace('3','3 ',$param["livre"]);
 	
-	$affichage_livre = recuperer_fond("forme_livre/$param["forme_livre"]",
+	$affichage_livre = recuperer_fond("forme_livre/".$param['forme_livre'],
 		array(
 		    "livre_long"	=>$livre_long,
 		    "livre"		=>$param["livre"],
@@ -284,7 +284,7 @@ function afficher_references($param){
     if ($param["nommer_trad"]=='oui'){
         if ($param["url"]=='oui'){
              $param["url"] = bible_url_passage($param["livre"],$param["cd"],$param["vd"],$param["cf"],$param["vf"],$param["trad"],$param["lang"]);
-	         $bloc_fin = " ({[$traduction->$param["url"]]})";  
+	         $bloc_fin = " ({[".$traduction->$param['url']."]})";  
 	    }
 	    else{
 	          $bloc_fin = " ({$traduction})" ;
