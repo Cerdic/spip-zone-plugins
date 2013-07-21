@@ -14,5 +14,5 @@
 	<prefix>imagesactives</prefix>
 	<icon>prive/themes/spip/images/images_actives-32.png</icon>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
-	<categorie>squelette</categorie>
+	<categorie>multimedia</categorie>
 </plugin>

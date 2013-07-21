@@ -1,6 +1,6 @@
 <paquet
 	prefix="imagesactives"
-	categorie="squelette"
+	categorie="multimedia"
 	version="1.0.0"
 	etat="test"
 	compatibilite="[2.0.0;3.1.*["
