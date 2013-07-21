@@ -285,15 +285,16 @@ function afficher_references($param){
     if ($param["nommer_trad"]=='oui'){
         if ($param["url"]=='oui'){
              $param["url"] = bible_url_passage($param["livre"],$param["cd"],$param["vd"],$param["cf"],$param["vf"],$param["trad"],$param["lang"]);
-	         $bloc_fin = " ({[".$traduction->$param['url']."]})";  
+	         $bloc_fin = " ({[".$traduction."->".$param['url']."]})"; 
 	    }
 	    else{
 	          $bloc_fin = " ({$traduction})" ;
 	    }
-    }
+	}
 	else {
 	    $bloc_fin='';
 	}
+	
 	if ($param["cd"]==$param["cf"] and $param["vd"]=='' and $param["vf"]==''){
 		
 		$chaine = $affichage_livre.$param["cd"];
