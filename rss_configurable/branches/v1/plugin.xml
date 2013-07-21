@@ -23,7 +23,7 @@
 		<nom>ieconfig_metas</nom>
 		<inclure>rssconfig_ieconfig_metas.php</inclure>
 	</pipeline>
-	<categorie>squelette</categorie>
+	<categorie>communication</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="Iterateurs" />
 	<utilise id="Z" />

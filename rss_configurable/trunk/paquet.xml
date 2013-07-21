@@ -1,6 +1,6 @@
 <paquet
 	prefix="rssconfig"
-	categorie="squelette"
+	categorie="communication"
 	version="2.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
