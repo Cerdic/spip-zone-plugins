@@ -1,9 +1,9 @@
 <paquet
 	prefix="spipopup"
-	categorie="squelette"
-	version="1.4.1"
+	categorie="multimedia"
+	version="2.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-alpha2;["
+	compatibilite="[3.0.0;3.0.*["
 	logo="images/popup-128.png"
 	documentation="http://www.spip-contrib.net/?article3573"
 >      

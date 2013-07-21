@@ -44,5 +44,5 @@ Ce plugin permet de g&#233;rer d'une fen&#234;tre popup ({fen&#234;tre externe})
 	</pipeline>
 	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
 	<necessite id="porte_plume" version="[1.2.2;]" />
-	<categorie>squelette</categorie>
+	<categorie>multimedia</categorie>
 </plugin>
