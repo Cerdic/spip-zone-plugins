@@ -60,7 +60,6 @@ define('_CKE_PLUGIN',4);
 define('_CKE_CONVERSION_DEF', 'partielle') ;
 define('_CKE_HTML2SPIP_LIMITE_DEF', false ) ;
 define('_CKE_HTML2SPIP_IDENTITE', 'script;embed;param;object') ;
-define('_CKE_CACHE_REDIM_DEF', false ) ;
 define('_CKE_SPIPLINKS_DEF', true ) ;
 define('_CKE_INSERTALL_DEF', false ) ;
 define('_CKE_PASTETEXT_DEF', true ) ;

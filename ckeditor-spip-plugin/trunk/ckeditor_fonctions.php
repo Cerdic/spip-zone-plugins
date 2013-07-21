@@ -628,7 +628,6 @@ $(document).ready(function(){
 		CKEDITOR.spipurl=".$ckeditor_json_encode(url_absolue(_DIR_RACINE.'spip.php')).";
 		CKEDITOR.ckpreferedversion='"._CKE_PREFERED_VERSION."';
 		CKEDITOR.ckeditmode='$editmode';
-		CKEDITOR.cache_redim=".$ckeditor_json_encode(ckeditor_lire_config('cache_redim', _CKE_CACHE_REDIM_DEF)?true:false).";
 		CKEDITOR.ckConfig = ".$ckeditor_json_encode($ckeditor_config_post($cke_cfg)).";
 
 		var ajaxload=".$ckeditor_json_encode($config['ajaxload']).";
