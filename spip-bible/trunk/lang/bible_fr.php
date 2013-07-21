@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_numeros'             => 'Afficher num&eacute;ros chap./v.',
 	'form_retour'              => 'Retour-ligne entre v.',
 	'form_ref'                 => 'Mettre r&eacute;f&eacute;rences',
+	'form_nommer_trad'	   => 'Nommer la traduction',
 	'form_url'			=> "Pointer vers le site d'origine",
 	'form_forme_livre'	   => 'Forme du livre',
 	'form_passage'             => 'Passage',
