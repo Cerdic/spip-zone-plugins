@@ -10,6 +10,7 @@ function formulaires_bible_reference_charger_dist($lang='fr',$cadre=1){
 	   'numeros'   => lire_config('bible/numeros'),
 	   'retour'    => lire_config('bible/retour'),
 	   'ref'       => lire_config('bible/ref'),
+	   'nommer_trad' => lire_config("bible/nommer_trad"),
 	   'forme_livre' => lire_config('bible/forme_livre'),
 	   'url'	=> lire_config("bible/url")
 	);
@@ -22,6 +23,7 @@ function formulaires_bible_reference_verifier_dist(){
     $numeros    = _request('numeros');
     $retour     = _request('retour');
     $ref        = _request('ref');
+    $nommer_trad  = _request('nommer_trad');
     $forme_livre  = _request('forme_livre');
     $url 	= _request('url');
     include_spip('bible_fonctions');
@@ -33,6 +35,7 @@ function formulaires_bible_reference_verifier_dist(){
                     'retour'    =>  $retour,
                     'ref'       =>  $ref,
                     'version'   =>  $version,
+		    'nommer_trad'=>  $nommer_trad,
 		    'forme_livre'=> $forme_livre,
 		    'url'=> $url   
                     );
@@ -48,6 +51,7 @@ function formulaires_bible_reference_traiter_dist(){
     $numeros    = _request('numeros');
     $retour     = _request('retour');
     $ref        = _request('ref');
+    $nommer_trad        = _request('nommer_trad');
     $forme_livre  = _request('forme_livre');
     $url  = _request('url');
     include_spip('bible_fonctions');
@@ -58,6 +62,7 @@ function formulaires_bible_reference_traiter_dist(){
 		'retour'=>!$retour ? 'non' : $retour,
 		'numeros'=>!$numeros ? 'non' : $numeros,
 		'ref'=>!$ref ? 'non' : $ref,
+		'nommer_trad'=>!$nommer_trad ? 'non' : $nommer_trad,
 		'url'=>!$url ? 'non' : $url,
 		'forme_livre'=>$forme_livre ?  $forme_livre : 'abbr',
 		'propre'=>'non')));
@@ -69,6 +74,7 @@ function formulaires_bible_reference_traiter_dist(){
                 'numeros'   =>  $numeros,
                 'retour'    =>  $retour,
                 'ref'       =>  $ref,
+		'nommer_trad' =>  $nommer_trad,
 		'url'	     => $url,
                 'version'   =>  $version,
 		'forme_livre'=>$forme_livre  

@@ -21,6 +21,7 @@
 #SET{numeros,#ENV{erreurs}|table_valeur{numeros}}
 #SET{ref,#ENV{erreurs}|table_valeur{ref}}
 #SET{retour,#ENV{erreurs}|table_valeur{retour}}
+#SET{nommer_trad,#ENV{erreurs}|table_valeur{nommer_trad}}
 #SET{forme_livre,#ENV{erreurs}|table_valeur{forme_livre}}
 #SET{url,#ENV{erreurs}|table_valeur{url}}
 ]
@@ -29,6 +30,7 @@
 #SET{numeros,#ENV{numeros}}
 #SET{ref,#ENV{ref}}
 #SET{retour,#ENV{retour}}
+#SET{nommer_trad,#ENV{nommer_trad}}
 #SET{forme_livre,#ENV{forme_livre}}
 #SET{url,#ENV{url}}
 ]
@@ -37,6 +39,7 @@
 #SET{numeros,#ENV{message_ok}|table_valeur{numeros}}
 #SET{ref,#ENV{message_ok}|table_valeur{ref}}
 #SET{retour,#ENV{message_ok}|table_valeur{retour}}
+#SET{nommer_trad,#ENV{message_ok}|table_valeur{nommer_trad}}
 #SET{forme_livre,#ENV{message_ok}|table_valeur{forme_livre}}
 #SET{url,#ENV{message_ok}|table_valeur{url}}
 ]
@@ -91,7 +94,12 @@
 				
         </li>
         ]
-
+		[(#CONFIG{bible_pp/nommer_trad}|oui)
+        <li>
+					<label for="nommer_trad"><:bible:form_nommer_trad:></label>
+					<input type="checkbox" name="nommer_trad"  id="nommer_trad" [checked="(#GET{nommer_trad})"]  value="oui" />
+        </li>
+        ]
 		[(#CONFIG{bible_pp/url}|oui)	
         <li>
 					<label for="url"><:bible:form_url:></label>
@@ -113,6 +121,7 @@
         [(#REM) si on ne laisse pas le choix au rédacteur, prendre version par défaut)]
         [(#CONFIG{bible_pp/numeros}|non)[(#CONFIG{bible/numeros}|oui)<input type="hidden" name="numeros" id="numeros" value="oui"/>]]
         [(#CONFIG{bible_pp/ref}|non)[(#CONFIG{bible/ref}|oui)<input type="hidden" name="ref" id="ref" value="oui"/>]]
+	[(#CONFIG{bible_pp/nommer_trad}|non)[(#CONFIG{bible/nommer_trad}|oui)<input type="hidden" name="nommer_trad" id="nommer_trad" value="oui"/>]]
 	[(#CONFIG{bible_pp/retour}|non)[(#CONFIG{bible/retour}|oui)<input type="hidden" name="retour" id="retour" value="oui"/>]]
 	[(#CONFIG{bible_pp/forme_livre}|non)<input type="hidden" name="forme_livre" id="forme_livre" value="#CONFIG{bible/forme_livre}"/>]
 
