@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="javascriptb.png"
-	documentation="http://contrib.spip.net/article3570"
+	documentation="http://contrib.spip.net/?article3570"
 >	
 
 	<nom>Javascript Scroller</nom>

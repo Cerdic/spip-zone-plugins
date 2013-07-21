@@ -22,7 +22,7 @@ Le code javascript du {scroller} est tir&#233; de [->http://javascripts.vbarsan.
 
 Une documentation interne est disponible lorsque le plugin est actif sur la page publique [js_scroller_documentation_spip2->../?page=js_scroller_documentation_spip2].
 	</description>
-	<lien>http://contrib.spip.net/article3570</lien>
+	<lien>http://contrib.spip.net/?article3570</lien>
 	<options>js_scroller_options.php</options>
 	<prefix>js_scroller</prefix>
 	<chemin dir='' />
