@@ -1,0 +1,22 @@
+<paquet
+	prefix="bootstrap_jqueryui"
+	categorie="outil"
+	version="0.5.0"
+	etat="test"
+	compatibilite="[3.0.2;3.0.*]"
+	logo="img/bootstrap-32.png"
+	documentation="http://addyosmani.github.io/jquery-ui-bootstrap/"
+>
+
+	<nom>Bootstrap jQuery-UI</nom>
+
+	<auteur lien='http://www.kent1.info'>kent1</auteur>
+	<credit lien='http://addyosmani.github.io/jquery-ui-bootstrap/'>Addy Osmani</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="bootstrap_jqueryui_pipelines.php" />
+	
+	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
+	<necessite nom="bootstrap" compatibilite="[1.5.3;]" />
+</paquet>
