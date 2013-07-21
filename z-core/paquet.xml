@@ -1,6 +1,6 @@
 <paquet
 	prefix="Zcore"
-	categorie="squelette"
+	categorie="outil"
 	version="2.2.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
