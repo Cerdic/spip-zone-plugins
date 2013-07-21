@@ -53,7 +53,6 @@ function bible_analyser_ref($passage,$traduction){
 
 	$lang = $tableau_traduction[$traduction]['lang'];
     $langues_originales = bible_tableau('original');
-    //var_dump($langues_originales);
     array_key_exists($lang,$langues_originales) ? $lang = $spip_lang : $lang = $lang;
 	
 	$separateur = $tableau_separateur[$lang];
