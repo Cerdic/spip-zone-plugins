@@ -1,7 +1,7 @@
 #HTTP_HEADER{Content-Type: text/javascript;}
 $(document).ready(function(){
 	soundManager.setup({
-	  url: '#CHEMIN{swf/}',
+	  url: '[(#CHEMIN{swf/soundmanager2.swf}|url_absolue|dirname)/]',
 	  flashVersion: 9, // optional: shiny features (default = 8)
 	  useFlashBlock: false, // optionally, enable when you're ready to dive in
 	  debugMode: false,
@@ -27,8 +27,10 @@ function sound_manager_init(){
 	});
 	
 	// animation des boutons		
-	$("button.play").html("<span class='ui-icon-play'>play</span>")
-	.click(function() {
+	$("button.play")
+	.html("<span class='ui-icon-play'>play</span>")
+	.unbind('click')
+	.click( function() {
 		$(".playing").removeClass("playing");
 		
 		if ( $( this ).text() === "play" ) {
@@ -59,7 +61,7 @@ function jouer_son(media_id, media_url){
 	var soundURL = media_url;
     var soundId = media_id ;
     var thisSound = soundManager.getSoundById(soundId);
-  		  		  	 
+
     if (thisSound) {
 
       // already exists
