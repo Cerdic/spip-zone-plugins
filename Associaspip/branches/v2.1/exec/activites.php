@@ -89,9 +89,16 @@ function exec_activites_evenements($mot){
 
 		$max_par_page=30;
 		$debut=intval($_GET['debut']);
-		if (!$debut) { $debut=0; }
+		if (!$debut) {
+			$debut = 0;
+		}
 
-		$query = sql_select('*, E.id_evenement, E.titre AS intitule, M.titre AS motact', 'spip_evenements AS E LEFT JOIN spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot', "date_format( date_debut, '%Y' ) = $annee AND (M.titre like '$mot' OR M.titre IS NULL)", '', "date_debut DESC",  "$debut,$max_par_page");
+		$desc_table = charger_fonction('trouver_table', 'base');
+		if ( $desc_table('spip_mots_evenements') ) // SPIP2
+		$q_join .= 'spip_mots_evenements AS A ON  A.id_evenement=E.id_evenement';
+		elseif ( $desc_table('spip_mots_liens') ) // SPIP3
+		$q_join .= "spip_mots_liens AS A ON (A.id_objet=E.id_evenement AND A.objet='evenement')";
+		$query = sql_select('*, E.id_evenement, E.titre AS intitule, M.titre AS motact', 'spip_evenements AS E LEFT JOIN '.$q_join.' LEFT JOIN spip_mots AS M ON A.id_mot=M.id_mot', "date_format( date_debut, '%Y' ) = $annee AND (M.titre like '$mot' OR M.titre IS NULL)", '', "date_debut DESC",  "$debut,$max_par_page");
 		while ($data = sql_fetch($query)) {
 			$date = substr($data['date_debut'],0,10);
 			$heure = substr($data['date_debut'],10,6);
