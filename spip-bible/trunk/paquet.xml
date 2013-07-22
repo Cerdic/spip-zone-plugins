@@ -1,7 +1,7 @@
 <paquet
 	prefix="bible"
 	categorie="divers"
-	version="5.0.0"
+	version="5.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
