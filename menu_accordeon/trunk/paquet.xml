@@ -1,7 +1,7 @@
 <paquet
 	prefix="accordeon"
 	categorie="navigation"
-	version="3.1.0"
+	version="3.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/accordeon-32.png"

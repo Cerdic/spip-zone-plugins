@@ -14,7 +14,7 @@ function accordeon_jqueryui_plugins($array){
 }
 
 function accordeon_insert_head($flux){
-	$flux .="\n<script type='text/javascript' src='".generer_url_public('accordeon.js')."'></script>";
+	$flux .="\n<script type='text/javascript' src='".timestamp(produire_fond_statique('accordeon.js'))."'></script>";
 	return $flux;
 }
 ?>
