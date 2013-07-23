@@ -1,3 +1,13 @@
 #HTTP_HEADER{Content-type:text/calendar; charset=#CHARSET}
 #CACHE{0}
-[(#REM) Attention, ce qui suit doit etre vu que comme une seule ligne. La RFC 5545 impose un codeage particulier sur les fins de lignes!]BEGIN:VCALENDAR[(#VAL{13}|chr)][(#VAL{10}|chr)]VERSION:2.0[(#VAL{13}|chr)][(#VAL{10}|chr)]PRODID:-//SPIP//NONSGML v1.0//FR[(#VAL{13}|chr)][(#VAL{10}|chr)]X-WR-TIMEZONE:Europe/Paris[(#VAL{13}|chr)][(#VAL{10}|chr)]CALSCALE:GREGORIAN[(#VAL{13}|chr)][(#VAL{10}|chr)]<BOUCLE_titre_article(ARTICLES){id_article=#ENV{id_article}}>X-WR-CALNAME;VALUE=TEXT:[(#TITRE|supprimer_numero|filtrer_ical)] -- [(#NOM_SITE_SPIP|filtrer_ical)]</BOUCLE_titre_article>[(#VAL{13}|chr)][(#VAL{10}|chr)]X-WR-RELCALID:[(#URL_ARTICLE|filtrer_ical)][(#VAL{13}|chr)][(#VAL{10}|chr)]<BOUCLE_evenement2(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin<=0}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})][(#VAL{13}|chr)][(#VAL{10}|chr)]</BOUCLE_evenement2><BOUCLE_evenement3(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin>=0}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})][(#VAL{13}|chr)][(#VAL{10}|chr)]</BOUCLE_evenement3><BOUCLE_evenement(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{name}{abstract})][(#VAL{13}|chr)][(#VAL{10}|chr)]</BOUCLE_evenement>END:VCALENDAR
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SPIP//NONSGML v1.0//FR
+X-WR-TIMEZONE:Europe/Paris
+CALSCALE:GREGORIAN
+<BOUCLE_titre_article(ARTICLES){id_article=#ENV{id_article}}>X-WR-CALNAME;VALUE=TEXT:[(#TITRE|supprimer_numero|filtrer_ical)] -- [(#NOM_SITE_SPIP|filtrer_ical)]</BOUCLE_titre_article>
+X-WR-RELCALID:[(#URL_ARTICLE|filtrer_ical)]
+<BOUCLE_evenement2(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin<=0}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{name}{descriptif})]
+</BOUCLE_evenement2><BOUCLE_evenement3(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{age_fin>=0}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{name}{descriptif})]
+</BOUCLE_evenement3><BOUCLE_evenement(EVENEMENTS){branche ?}{id_article ?}{statut=publie}{par date_fin}{inverse}{0,50}{doublons}>[(#INCLURE{fond=inc/evenement-ical}{evtitre=#TITRE}{id_evenement}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{name}{descriptif})]
+</BOUCLE_evenement>END:VCALENDAR
