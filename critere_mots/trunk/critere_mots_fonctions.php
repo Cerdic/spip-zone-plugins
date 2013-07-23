@@ -41,6 +41,24 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
 	$boucle->where[] = "\n\t\t".'$mots_where';
 
+	if ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri"){
+		$_table = table_objet($boucle->id_table);
+		$objet_delatable=objet_type($_table);
+		$id_objet = id_table_objet($boucle->id_table);
+		$boucle->jointures[]="mots_liens" ;
+		$boucle->from['mots_liens'] = "spip_mots_liens";
+		$boucle->join["mots_liens"] = array(
+		    "'$boucle->id_table'",
+		    "'id_objet'",
+		    "'$id_objet'",
+		    "'mots_liens.objet='.sql_quote('$objet_delatable')");
+		$boucle->where[] = "\n\t\t".'sql_in(\'mots_liens.id_mot\',sql_quote('.$quoi.'))';
+		$boucle->group[] = "id_objet";
+		if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
+		    $boucle->order[] = "'COUNT(id_objet) ASC'";
+		else
+		    $boucle->order[] = "'COUNT(id_objet) DESC'";
+		}
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){

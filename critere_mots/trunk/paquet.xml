@@ -1,7 +1,7 @@
 <paquet
 	prefix="critere_mots"
 	categorie="navigation"
-	version="2.0.2"
+	version="2.1.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
