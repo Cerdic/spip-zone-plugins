@@ -2,7 +2,8 @@
 	<nom>E-Learning</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
+	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<slogan>Plate-forme simple de E-Learning</slogan>
 	<description>
@@ -36,5 +37,5 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, v
 	<necessite id='AccesRestreint' version="[0.3.0.3;]" />
 	<necessite id='bigbrother' version="[0.3;]" />
 	<necessite id='jeux' version="[1.8;]" />
-	<necessite id='Crayons' version="[1.3;]" />
+	<necessite id='crayons' version="[1.3;]" />
 </plugin>
