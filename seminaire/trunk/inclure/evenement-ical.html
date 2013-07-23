@@ -8,8 +8,8 @@ DTSTART;VALUE=DATE:(#DATE_DEBUT|affdate{Ymd})][
 DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 CREATED:(#DATE_CREATION|date_ical)][
 LAST-MODIFIED:(#MAJ|date_ical)][
-LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>[
-ORGANIZER:(#NOM|supprimer_tags|textebrut|filtrer_ical)][ - (#BIO|supprimer_tags|textebrut|filtrer_ical)]</BOUCLE_auteur>[
+LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]<B_auteur>ORGANIZER;<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}{0,1}>
+[CN=(#NOM|supprimer_tags|textebrut|filtrer_ical)][:mailto:#EMAIL]</BOUCLE_auteur>[
 ATTENDEE:(#ATTENDEE|supprimer_tags|textebrut|filtrer_ical)][ - (#ORIGIN|supprimer_tags|textebrut|filtrer_ical)][
 DESCRIPTION:(#DESCRIPTIF|supprimer_tags|textebrut|filtrer_ical)]<BOUCLE_article(ARTICLES) {id_article=#ID_ARTICLE}>[
 CATEGORIES:(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>[
