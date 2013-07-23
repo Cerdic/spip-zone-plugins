@@ -115,7 +115,7 @@ function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
 			$erreurs[] = _T('fusion_spip:manque_table_source', array('table' => $nom_table));
 		}
 	}
-
+	sort($erreurs);
 	return $erreurs;
 }
 
@@ -131,7 +131,12 @@ function fusion_spip_inserer_table_principale($nom_table, $shema, $secteur, $con
 	$time_start = microtime(true);
 
 	// liste des champs à recopier
-	$champs_select = array_keys($shema['field']);
+	// $champs_select = array_keys($shema['field']);
+
+	// on a déjà signalé par un warning que des champs manquaient dans la table source
+	// on va travailler sur l'intersection des champs de la table source et hote
+	$shema_source = sql_showtable($nom_table, false, $connect);
+	$champs_select = array_intersect(array_keys($shema['field']), array_keys($shema_source['field']));
 
 	// Retrouve la clé primaire à partir du nom d'objet ou de table
 	$nom_id_objet = id_table_objet($nom_table);
@@ -570,48 +575,52 @@ function fusion_spip_maj_liens_internes($principales, $connect) {
 		$table = table_objet_sql($objet);
 		$cle_primaire = id_table_objet($objet);
 
-		// selectionner les objets contenant des liens
-		$select = array();
-		$where = array();
-		foreach ($champs as $champ) {
-			$select[] = 'o.'.$champ;
-			$where[] = 'o.'.$champ.' regexp "\[.*\->('.join('|', array_keys($objets_liens)).')*[0-9]+\]"';
-		}
-		$select = join(', ', $select);
-		$where = join(' or ', $where);
-		$objets_import = sql_allfetsel(
-			'o.'.$cle_primaire.', '.$select,
-			'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
-			$where
-		);
+		// uniquement pour les clés primaires simples
+		if(strpos($cle_primaire,',')===false){
 
-		foreach ($objets_import as $obj_import) {
-			$update_array = array();
+			// selectionner les objets contenant des liens
+			$select = array();
+			$where = array();
 			foreach ($champs as $champ) {
-				// recenser tous les liens dans le champ
-				$nb_liens = preg_match_all('/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS', $obj_import[$champ], $liens_trouves, PREG_SET_ORDER);
-				if ($nb_liens) {
-					// pour chaque lien trouvé, remplacer id_origine par id_final
-					foreach ($liens_trouves as $lien_trouve) {
-						// extraire l'id du quatrieme motif du preg_matchall
-						$id_origine_lien = preg_replace('#[a-z]*#', '', $lien_trouve[4]);
-						$type_lien = preg_replace('#[0-9]*#', '', $lien_trouve[4]);
-						$objet_lien = $objets_liens[$type_lien];
-						$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
-						if ($nouveau_id['id_final']) {
-							$pattern_cherche = '#\[([^][]*?([[]\w*[]][^][]*)*)->'.$type_lien.$id_origine_lien.'\]#';
-							// ajouter une signature pour éviter les remplacements en cascade
-							$pattern_remplace = '[$1->__final__'.$type_lien.$nouveau_id['id_final'].']';
-							$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
-						}
-					}
-					$obj_import[$champ] = str_replace('__final__', '', $obj_import[$champ]);
-					$update_array[$champ] = $obj_import[$champ];
-				}
+				$select[] = 'o.'.$champ;
+				$where[] = 'o.'.$champ.' regexp "\[.*\->('.join('|', array_keys($objets_liens)).')*[0-9]+\]"';
 			}
-			if ($update_array) {
-				sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
-				$objets_mis_a_jour++;
+			$select = join(', ', $select);
+			$where = join(' or ', $where);
+			$objets_import = sql_allfetsel(
+				'o.'.$cle_primaire.', '.$select,
+				'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
+				$where
+			);
+
+			foreach ($objets_import as $obj_import) {
+				$update_array = array();
+				foreach ($champs as $champ) {
+					// recenser tous les liens dans le champ
+					$nb_liens = preg_match_all('/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS', $obj_import[$champ], $liens_trouves, PREG_SET_ORDER);
+					if ($nb_liens) {
+						// pour chaque lien trouvé, remplacer id_origine par id_final
+						foreach ($liens_trouves as $lien_trouve) {
+							// extraire l'id du quatrieme motif du preg_matchall
+							$id_origine_lien = preg_replace('#[a-z]*#', '', $lien_trouve[4]);
+							$type_lien = preg_replace('#[0-9]*#', '', $lien_trouve[4]);
+							$objet_lien = $objets_liens[$type_lien];
+							$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
+							if ($nouveau_id['id_final']) {
+								$pattern_cherche = '#\[([^][]*?([[]\w*[]][^][]*)*)->'.$type_lien.$id_origine_lien.'\]#';
+								// ajouter une signature pour éviter les remplacements en cascade
+								$pattern_remplace = '[$1->__final__'.$type_lien.$nouveau_id['id_final'].']';
+								$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
+							}
+						}
+						$obj_import[$champ] = str_replace('__final__', '', $obj_import[$champ]);
+						$update_array[$champ] = $obj_import[$champ];
+					}
+				}
+				if ($update_array) {
+					sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
+					$objets_mis_a_jour++;
+				}
 			}
 		}
 	}
@@ -649,44 +658,47 @@ function fusion_spip_maj_modeles($principales, $connect) {
 		$table = table_objet_sql($objet);
 		$cle_primaire = id_table_objet($objet);
 
-		// selectionner les objets contenant les modèles recherchés
-		$select = array();
-		$where = array();
-		foreach ($champs as $champ) {
-			$select[] = 'o.'.$champ;
-			$where[] = 'o.'.$champ.' regexp "<('.join('|', $modeles).')+[0-9]+"';
-		}
-		$select = join(', ', $select);
-		$where = join(' or ', $where);
-
-		$res = sql_select(
-			'o.'.$cle_primaire.', '.$select,
-			'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
-			$where
-		);
-		while ($obj_import = sql_fetch($res)) {
-			$update_array = array();
+		// uniquement pour les clés primaires simples
+		if(strpos($cle_primaire,',')===false){
+			// selectionner les objets contenant les modèles recherchés
+			$select = array();
+			$where = array();
 			foreach ($champs as $champ) {
-				// recenser tous les modèles dans le champ
-				$nb_liens = preg_match_all('#<('.join('|', $modeles).'){1}([0-9]+)#', $obj_import[$champ], $liens_trouves, PREG_SET_ORDER);
-				if ($nb_liens) {
-					// pour chaque lien trouvé, le remplacer id_origine par id_final
-					foreach ($liens_trouves as $lien_trouve) {
-						$id_origine_lien = $lien_trouve[2];
-						$modele = $lien_trouve[1];
-						$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="document" and site_origine="'.$connect.'"');
-						if ($nouveau_id['id_final']) {
-							$pattern_cherche = '#<'.$modele.$id_origine_lien.'#';
-							$pattern_remplace = '<'.$modele.$nouveau_id['id_final'];
-							$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
-						}
-					}
-					$update_array[$champ] = $obj_import[$champ];
-				}
+				$select[] = 'o.'.$champ;
+				$where[] = 'o.'.$champ.' regexp "<('.join('|', $modeles).')+[0-9]+"';
 			}
-			if ($update_array) {
-				sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
-				$objets_mis_a_jour++;
+			$select = join(', ', $select);
+			$where = join(' or ', $where);
+
+			$res = sql_select(
+				'o.'.$cle_primaire.', '.$select,
+				'spip_fusion_spip a join '.$table.' o on (a.id_final = o.'.$cle_primaire.' and a.objet="'.$objet.'" and a.site_origine='._q($connect).')',
+				$where
+			);
+			while ($obj_import = sql_fetch($res)) {
+				$update_array = array();
+				foreach ($champs as $champ) {
+					// recenser tous les modèles dans le champ
+					$nb_liens = preg_match_all('#<('.join('|', $modeles).'){1}([0-9]+)#', $obj_import[$champ], $liens_trouves, PREG_SET_ORDER);
+					if ($nb_liens) {
+						// pour chaque lien trouvé, le remplacer id_origine par id_final
+						foreach ($liens_trouves as $lien_trouve) {
+							$id_origine_lien = $lien_trouve[2];
+							$modele = $lien_trouve[1];
+							$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="document" and site_origine="'.$connect.'"');
+							if ($nouveau_id['id_final']) {
+								$pattern_cherche = '#<'.$modele.$id_origine_lien.'#';
+								$pattern_remplace = '<'.$modele.$nouveau_id['id_final'];
+								$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
+							}
+						}
+						$update_array[$champ] = $obj_import[$champ];
+					}
+				}
+				if ($update_array) {
+					sql_updateq($table, $update_array, $cle_primaire.'='._q($obj_import[$cle_primaire]));
+					$objets_mis_a_jour++;
+				}
 			}
 		}
 	}
