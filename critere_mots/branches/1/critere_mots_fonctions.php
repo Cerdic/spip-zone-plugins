@@ -39,6 +39,30 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
 	$boucle->where[] = "\n\t\t".'$mots_where';
+	
+	if ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri"){
+		$_table = table_objet($boucle->id_table);
+		$objet_delatable=objet_type($_table);
+		$id_objet = id_table_objet($boucle->id_table);
+		var_dump($_table);
+		$boucle->jointures[]="mots_liens" ;
+		$boucle->from['mots_liens'] = "spip_mots_$_table";
+		$boucle->join["mots_liens"] = array(
+		    "'$boucle->id_table'",
+		    "'$id_objet'",
+		    "'$id_objet'",
+		    "");
+		$boucle->where[] = "\n\t\t".'sql_in(\'mots_liens.id_mot\',sql_quote('.$quoi.'))';
+		$boucle->group[] = "$id_objet";
+		if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
+		    $boucle->order[] = "'COUNT($boucle->id_table.$id_objet) ASC'";
+		else
+		    $boucle->order[] = "'COUNT($boucle->id_table.$id_objet) DESC'";
+		
+		// Pseudo critère "Si"
+		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
+		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '1');";
+		}	
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
