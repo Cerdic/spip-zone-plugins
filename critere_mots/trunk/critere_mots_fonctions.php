@@ -40,7 +40,6 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
 
 	$boucle->where[] = "\n\t\t".'$mots_where';
-
 	if ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri"){
 		$_table = table_objet($boucle->id_table);
 		$objet_delatable=objet_type($_table);
@@ -58,6 +57,10 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		    $boucle->order[] = "'COUNT(id_objet) ASC'";
 		else
 		    $boucle->order[] = "'COUNT(id_objet) DESC'";
+		
+		// Pseudo critère "Si"
+		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
+		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '1');";
 		}
 }
 
