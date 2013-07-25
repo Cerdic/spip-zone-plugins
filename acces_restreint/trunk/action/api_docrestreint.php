@@ -53,6 +53,8 @@ function action_api_docrestreint_dist($arg=null) {
 		spip_log($file,'dbg');
 
 		$status = $dcc = false;
+		$dossiers_a_exclure = array('nl');
+		
 		// securite : on refuse tout ../ ou url absolue
 		if (strpos($f,'../') !== false
 		  OR preg_match(',^\w+://,', $f)) {
@@ -60,6 +62,12 @@ function action_api_docrestreint_dist($arg=null) {
 		}
 		else if (!file_exists($file) OR !is_readable($file)) {
 			$status = 404;
+		}
+		// Si c'est dans un sous-dossier explicitement utilisé pour autre chose que les documents
+		// (exemple : les newsletters)
+		// et bien on ne teste pas l'accès
+		elseif (preg_match('%^(' . join('|', $dossiers_a_exclure) . ')/%', $f)){
+			$status = 200;
 		}
 		else {
 			$where = "documents.fichier=".sql_quote(set_spip_doc($file))

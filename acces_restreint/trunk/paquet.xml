@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.8.6"
+	version="3.8.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zone-32.png"
