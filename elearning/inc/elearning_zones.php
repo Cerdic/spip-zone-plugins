@@ -7,6 +7,8 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-E-learning  #
 #-----------------------------------------------------------------#
 
+include_spip('inc/config');
+include_spip('inc/cfg_config');
 
 // Met à jour les accès restreint lorsque l'on modifie la configuration CFG du plugin E-Learning
 function elearning_mettre_a_jour_les_zones($id_nouvelle_rubrique){

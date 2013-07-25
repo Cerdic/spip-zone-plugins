@@ -2,7 +2,7 @@
 	<nom>E-Learning</nom>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1.0</version_base>
 	<etat>dev</etat>
 	<slogan>Plate-forme simple de E-Learning</slogan>
