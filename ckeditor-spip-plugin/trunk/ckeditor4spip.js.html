@@ -341,7 +341,7 @@ function fullInitCKEDITOR(editor_ids){
 				+'<select id="contexte_'+editor_md5+'" name="contexte_'+editor_md5+'" onchange="contexteChange(\''+editor_id+'\');" style="width:33%;"><option value="" selected><:ckeditor:sans_contexte:></option><BOUCLE_options(POUR){tableau #CONFIG{ckeditor/contextes}|ck_enliste{1}}><option value="[(#VALEUR|table_valeur{0})]">[(#VALEUR|table_valeur{1}|replace{(\.|#)})]</option></BOUCLE_options></select>';</B_options>;
 			if(buttons && (jQuery('#before_'+editor_md5).length == 0)) {
 				var div = jQuery(editor_id) ;
-				var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;" ;
+				var style = "width;100%;text-align:right;position:relative;top:-24px;height:0px;clear:both;" ;
 				if (div.length != 0) {
 					div.before('<div id="before_'+editor_md5+'" style="'+style+'"><a name="ancre_'+editor_md5+'"></a>'+buttons+'</div>');
 				}
