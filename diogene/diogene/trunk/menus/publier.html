@@ -33,11 +33,11 @@
 		</li>})]]
 	</BOUCLE_admin>
 	[(#GET{contenu}|strlen|>{1}|oui)
-		<li class="menu-entree item[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={publier}}) on]">
-			<a href="[(#URL_PAGE{#ENV{page,publier}})]">
+		<li class="menu-entree item dropdown[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={publier}}) on]">
+			<a href="[(#URL_PAGE{#ENV{page,publier}})]" data-toggle="dropdown">
 			#GET{titre}
 			</a>
-			<ul class="menu-liste">
+			<ul class="menu-liste dropdown-menu">
 				#GET{contenu}
 				#GET{contenu_prop}
 			</ul>
