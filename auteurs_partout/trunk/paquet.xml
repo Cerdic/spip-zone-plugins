@@ -2,7 +2,7 @@
 	prefix="auteurspartout"
 	categorie="edition"
 	version="0.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-rc;3.0.*]"
 	logo="prive/themes/spip/images/auteurspartout-64.png"
 	documentation=""
