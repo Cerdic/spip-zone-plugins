@@ -104,12 +104,6 @@ jQuery.geoportail.addMap(
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].externalGraphic = "#CHEMIN{img/punaise.gif}";
 			
-			<B_poubelle>
-			// Supprimer les layers Geoportail dans un geoservice refuse
-			<BOUCLE_poubelle(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=refuse}>
-				jQuery.geoportail.removeGeoservice ( map, "#TYPE", "#LAYERS" );
-			</BOUCLE_poubelle>
-
 			<B_services>
 			// Ajouter les services disponibles dans les geoservices en fonction de son niveau d'affichage
 			//{id_rubrique IN #GET{rubriques}}{zone IN WLD,#GET{zone}}{statut=publie}{par niveau}
@@ -132,6 +126,12 @@ jQuery.geoportail.addMap(
 						link: "#LINK"
 					});
 			</BOUCLE_services>
+			
+			<B_poubelle>
+			// Supprimer les layers Geoportail dans un geoservice refuse
+			<BOUCLE_poubelle(GEOSERVICES){id_rubrique IN #GET{rubriques}}{type='Geoportail'}{statut=refuse}>
+				jQuery.geoportail.removeGeoservice ( map, "#TYPE", "#LAYERS" );
+			</BOUCLE_poubelle>
 		}
 	}
 );
