@@ -34,6 +34,17 @@ RewriteCond %{QUERY_STRING} ^(\d+/[\da-f]+)$
 RewriteRule ^\w+/.*$     ../spip.php?action=api_docrestreint&arg=%1/$0 [skip=100]
 RewriteRule ^\w+/.*$     ../spip.php?action=api_docrestreint&arg=0/0/$0 [skip=100]
 rewrite;
+		
+		// On cherche si le dossier racine a un RewriteBase plus long que "/"
+		if (file_exists(_DIR_RACINE._ACCESS_FILE_NAME)){
+			$ht = '';
+			lire_fichier(_DIR_RACINE._ACCESS_FILE_NAME, $ht);
+			if ($ht and preg_match('|^RewriteBase\s+/.*$|m', $ht, $rewritebase)){
+				$rewritebase = rtrim(trim($rewritebase[0]), '/').'/'._NOM_PERMANENTS_ACCESSIBLES;
+				$rewrite = $rewritebase."\n".$rewrite;
+			}
+		}
+		
 		ecrire_fichier(_DIR_IMG . _ACCESS_FILE_NAME,$rewrite);
 		// verifier sur l'url de test
 		include_spip('inc/distant');
