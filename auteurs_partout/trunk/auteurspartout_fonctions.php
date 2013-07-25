@@ -17,5 +17,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array des tables des types à exclure
  */
 function auteurspartout_types_exclus(){
-	return array('spip_articles', 'spip_rubriques', 'spip_messages');
+	return array('spip_articles', 'spip_rubriques', 'spip_messages','spip_auteurs');
 }
