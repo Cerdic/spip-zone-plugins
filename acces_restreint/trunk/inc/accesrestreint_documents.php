@@ -39,7 +39,7 @@ rewrite;
 		if (file_exists(_DIR_RACINE._ACCESS_FILE_NAME)){
 			$ht = '';
 			lire_fichier(_DIR_RACINE._ACCESS_FILE_NAME, $ht);
-			if ($ht and preg_match('|^RewriteBase\s+/.*$|m', $ht, $rewritebase)){
+			if ($ht and preg_match('|^RewriteBase\s+/.+$|m', $ht, $rewritebase)){
 				$rewritebase = rtrim(trim($rewritebase[0]), '/').'/'._NOM_PERMANENTS_ACCESSIBLES;
 				$rewrite = $rewritebase."\n".$rewrite;
 			}
