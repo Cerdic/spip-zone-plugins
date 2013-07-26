@@ -52,13 +52,13 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		    "'$id_objet'",
 		    "'mots_liens.objet='.sql_quote('$objet_delatable')");
 		$boucle->where[] = "\n\t\t".'sql_in(\'mots_liens.id_mot\',sql_quote('.$quoi.'))';
-		$boucle->group[] = "id_objet";
+		$boucle->group[] = "mots_liens.id_objet";
 		if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
-		    $boucle->order[] = "'COUNT(id_objet) ASC'";
+		    $boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
 		else
-		    $boucle->order[] = "'COUNT(id_objet) DESC'";
+		    $boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
 		
-		// Pseudo critère "Si"
+//		// Pseudo critère "Si"
 		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
 		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '1');";
 		}
