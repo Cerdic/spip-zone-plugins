@@ -44,7 +44,6 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		$_table = table_objet($boucle->id_table);
 		$objet_delatable=objet_type($_table);
 		$id_objet = id_table_objet($boucle->id_table);
-		var_dump($_table);
 		$boucle->jointures[]="mots_liens" ;
 		$boucle->from['mots_liens'] = "spip_mots_$_table";
 		$boucle->join["mots_liens"] = array(
