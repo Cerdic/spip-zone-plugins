@@ -58,7 +58,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		else
 		    $boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
 		
-//		// Pseudo critère "Si"
+		// Pseudo critère "Si"
 		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
 		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
 		}
