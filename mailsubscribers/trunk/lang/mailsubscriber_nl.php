@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"subscribe_texte_email_1" => "We hebben rekening gehouden met uw registratie voor onze nieuwsbrief met het e-mailadres @e-mail@ .",
 	"subscribe_deja_texte" => "Het e-mailadres @email@ is al in onze mailinglist",
 	"subscribe_texte_email_2" => "Dank u voor de interesse die u toont in @nom_site_spip@.",
-	"subscribe_texte_email_3" => "En cas d'erreur de notre part, ou si vous changez d'avis, vous pouvez vous désinscrire à tout moment au moyen du lien suivant :
+	"subscribe_texte_email_3" => "Als er een fout van onze kant, of als u van gedachten verandert, kunt u op elk moment uitschrijven via de volgende link:
 @url_unsubscribe@",
 
 	// U
