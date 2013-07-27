@@ -7,7 +7,7 @@
 	<description>Faire un annuaire de sites suivant votre th&#232;me avec le concept Z.</description>
 	<lien>http://www.spip-contrib.net/?article3762</lien>
 	<etat>dev</etat>
-	<icon>img/annuaire.jpg</icon>
+	<icon>img/annuaire-64.png</icon>
 	<prefix>zannuaire</prefix>
 	<fonctions>zannuaire_fonctions.php</fonctions>
 
