@@ -186,9 +186,11 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							if(preg_match('/^High.*/',$info[0]['Format_profile'][0]))
 								$infos['videocodecid'] = 'avc1.64001E';
 						}
-					}else if($infos['videocodec'] == 'Sorenson Spark'){
-						$infos['videocodecid'] = 'h263';
 					}
+					else if($infos['videocodec'] == 'Sorenson Spark')
+						$infos['videocodecid'] = 'h263';
+					else if($infos['videocodecid'] == 'V_VP8')
+						$infos['videocodecid'] = 'vp8.0';
 					$infos['aspect_ratio'] = $info[0]['Display_aspect_ratio'][0] ? $info[0]['Display_aspect_ratio'][0] : '';
 
 					/**
@@ -218,10 +220,13 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 					$infos['audiocodec'] = $info[0]['Codec'][0];
 					$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
+					spip_log($infos,'test');
 					if($infos['audiocodec'] == 'AAC LC')
 						$infos['audiocodecid'] = 'mp4a.40.2';
 					else if($infos['audiocodec'] == 'MPA1L3')
 						$infos['audiocodecid'] = 'mp3a';
+					else if($infos['audiocodec'] == 'Vorbis')
+						$infos['audiocodecid'] = 'vorbis';
 					else
 						$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
 					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode'])
