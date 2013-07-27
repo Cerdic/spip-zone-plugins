@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Z Annuaire</nom>
-	<nom>Un annuaire pour le concept Z</nom>
+	<slogan>Un annuaire pour le concept Z</slogan>
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]</auteur>
 	<licence>(c) 2011 GPL</licence>
 	<version>0.1.0</version>
