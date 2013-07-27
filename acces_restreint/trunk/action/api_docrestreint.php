@@ -33,6 +33,18 @@ function action_api_docrestreint_dist($arg=null) {
 
 	$arg = explode("/",$arg);
 
+	// supprimer et vider les buffers qui posent des problemes de memory limit
+	// http://www.php.net/manual/en/function.readfile.php#81032
+	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+	@ini_set("output_buffering","off");
+	@ini_set('implicit_flush', 1);
+	@ob_implicit_flush(1);
+	$level = ob_get_level();
+	while ($level--){
+		@ob_end_clean();
+	}
+
+
 	if (count($arg)>=3){
 
 		$id_document = intval(array_shift($arg));
