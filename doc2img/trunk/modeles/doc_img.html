@@ -17,7 +17,7 @@
 	<div id="spip_docimg_#ID_DOCUMENT" class="spip_docimg spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style='float:(#ENV{align}|match{left|right});']>
 	[(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</p>]]
 	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination 1}>
-		[(#ENV{liens_documents,oui}|!={non}|oui)<a href="#URL_DOCUMENT" class="mediabox">]
+		[(#ENV{liens_documents,oui}|!={non}|oui)<a href="[(#FICHIER|image_reduire{1500,0}|extraire_attribut{src})]" class="mediabox">]
 		#SET{titre,#ENV{titre,#TITRE}|sinon{#FICHIER|basename}|couper{20}}
 		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,#VAL{doc2img:info_alt_image}|_T{#ARRAY{titre,#GET{titre},page,#PAGE}}|attribut_html})]
 		[(#ENV{liens_documents,oui}|!={non}|oui)</a>]
