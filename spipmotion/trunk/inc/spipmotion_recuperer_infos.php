@@ -34,9 +34,9 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		spip_log('SPIPMOTION est cassé','spipmotion');
 		return false;
 	}
-	
+
 	$fichier_tmp = false;
-	
+
 	if(!isset($fichier)){
 		spip_log("SPIPMOTION : recuperation des infos du document $id_document","spipmotion");
 		include_spip('inc/documents');
@@ -81,10 +81,10 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		$fichier_tmp = $fichier.'_tmp';
 		exec(escapeshellcmd("qt-faststart $fichier $fichier_tmp"),$retour,$retour_int);
 	}
-	
+
 	if($fichier_tmp && file_exists($fichier_tmp))
 		rename($fichier_tmp,$fichier);
-	
+
 	/**
 	 * Récupération des métadonnées par mediainfo
 	 * cf inc/spipmotion_mediainfo.php
@@ -106,7 +106,9 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 				$infos[$info] = $valeur;
 		}
 	}
-	
+
+	// TODO : Vérifier correctement si on un $info['date'] et si elle est valable, sinon la rendre valide
+
 	if(strlen($document['titre']) > 0)
 		unset($infos['titre']);
 
@@ -117,7 +119,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if(!$val)
 			unset($infos[$key]);
 	}
-	
+
 	/**
 	 * Si les champs sont vides, on ne les enregistre pas
 	 * Par contre s'ils sont présents dans le $_POST ou $_GET,
@@ -133,7 +135,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 				unset($infos[$champ]);	
 		}
 	}
-	
+
 	/**
 	 * La récupération de duree est importante
 	 * pour les vignettes
@@ -148,7 +150,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		if($duree > 0)
 			$infos['duree'] = $duree;
 	}
-	
+
 	/**
 	 * Filesize tout seul est limité à 2Go
 	 * cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
@@ -156,7 +158,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	$infos['taille'] = @intval(filesize($fichier));
 	if($infos['taille'] == '2147483647')
 		$infos['taille'] = sprintf("%u", filesize($fichier));
-	
+
 	if($logo){
 		$recuperer_logo = charger_fonction("spipmotion_recuperer_logo","inc");
 		$id_vignette = $recuperer_logo($id_document,1,$fichier,$infos,true);
@@ -192,9 +194,9 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			$geojson = '{"type":"Point","coordinates":['.$infos['lon'].','.$infos['lat'].']}';
 			set_request('geojson',$geojson);
 		}
-		
+
 		include_spip('action/editer_gis');
-		
+
 		if(intval($id_document)){
 			if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
 				/**
@@ -232,7 +234,6 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			include_spip('action/editer_document');
 			document_modifier($id_document, $infos);
 		}
-		
 		return true;
 	}
 	return $infos;

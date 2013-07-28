@@ -39,7 +39,8 @@ function inc_spipmotion_ffprobe_dist($chemin){
 					$metas['bitrate'] = $info[1];
 				if(preg_match('/^TAG:.*/',$infos)){
 					$info = explode('=',str_replace('TAG:','',$infos));
-					$metas[$info[0]] = trim($info[1]);
+					if($info[0] != 'date')
+						$metas[$info[0]] = trim($info[1]);
 				}
 			}
 		}
