@@ -2,7 +2,7 @@
 	prefix="bible"
 	categorie="divers"
 	version="5.0.1"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
 	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
