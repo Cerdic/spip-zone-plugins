@@ -1,8 +1,8 @@
 <paquet
 	prefix="signalement"
 	categorie="edition"
-	version="1.1.1"
-	etat="test"
+	version="1.2.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/signalement.png"
 	schema="0.1.0"
@@ -14,7 +14,7 @@
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<copyright>2012</copyright>
+	<copyright>2012-2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	

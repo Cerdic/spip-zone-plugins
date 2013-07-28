@@ -16,7 +16,7 @@
 	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
 	<form action="#ENV{action}" method="post" enctype="multipart/form-data">
 		#ACTION_FORMULAIRE{#SELF}
-		#SET{alertes,#REM|lister_signalements}
+		#SET{alertes,#ENV{objet}|lister_signalements{#ENV{id_objet}}}
 		<div>
 			<BOUCLE_si_pas_alerte(CONDITION){si #ENV{_deja_signale}|non}>
 			<ul>
@@ -28,8 +28,8 @@
 				(#ENV**{erreurs}|table_valeur{motif})</span>]
 				<select id="motif" name="motif">
 					<option value="">-</option>
-					<BOUCLE_signalements(DATA){source table,#CONFIG{signalement/motifs,#GET{alertes}|array_keys}}>
-					<option value="#VALEUR"[(#VALEUR|=={#ENV{motif}}|oui)selected="selected"]>[(#GET{alertes}|table_valeur{#VALEUR})]</option>
+					<BOUCLE_signalements(DATA){source table,#CONFIG{signalement/motifs,#GET{alertes}|array_keys}}>[
+					<option value="#VALEUR"[(#VALEUR|=={#ENV{motif}}|oui)selected="selected"]>(#GET{alertes}|table_valeur{#VALEUR})</option>]
 					</BOUCLE_signalements>
 				</select>
 			</B_signalements>
