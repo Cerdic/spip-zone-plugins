@@ -38,13 +38,13 @@
  * - boutons_caches array : un tableau des boutons à ne pas afficher ['fullscreen','volume','loop']
  * - messages bool : si false, n'affiche pas les messages au dessus du player lors d'actions utilisateur
  */
-    
+
 (function($) {
-	
+
 	/**
 	 * Vérifier si on a accès à l'API fullscreen de html5
 	 * http://johndyer.name/native-fullscreen-javascript-api-plus-jquery-plugin/
-	 */ 
+	 */
 	var fullScreenApi = {
 			supportsFullScreen: false,
 			isFullScreen: function() { return false; },
@@ -53,7 +53,7 @@
 			fullScreenEventName: '',
 			prefix: ''
 	},browserPrefixes = 'webkit moz o ms khtml'.split(' ');
-	
+
 	if (typeof document.cancelFullScreen != 'undefined') {
 		// check for native support
 		fullScreenApi.supportsFullScreen = true;
@@ -87,9 +87,9 @@
 	    	return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
 	    }
 	}
-	
+
 	window.fullScreenApi = fullScreenApi;
-	
+
 	var slider = (typeof($.ui) == 'object') && (typeof($.ui.slider) == 'function'),
 		cookies = (typeof($.cookie) == 'function'),
 		stop_message_timeout = false,
@@ -117,7 +117,7 @@
 			 * Si c'est iTruc, cela ne fonctionne pas => on sort direct et on laisse la balise html5 faire ce qu'elle peut
 			 */
 			if(IS_IPHONE || IS_ANDROID){ return;}
-			
+
 			var defaults = {
 				autoplay:false, // Lire automatiquement au chargement
 				autoload:true, // Précharger automatiquement au chargement
@@ -134,14 +134,14 @@
 				messages:true, // Affiche ou non les messages sur le lecteur
 				boutons_caches:[]
 			};
-			
+
 			options = $.extend(defaults, options);
-			
+
 			var media = $(this), id = media[0], playable = id.isFullScreen = id.has_html5_cover = false;
 
 			if(media.is(':hidden')) media.show();
 			if(media.is('audio')) options.movieSize = null;
-			
+
 			/**
 			 * Test si le navigateur dispose du support des balises <video> ou <audio>
 			 */
@@ -179,37 +179,36 @@
 					id.percent_loaded = 0;
 					id.messages = options.messages;
 					id.type = (media.is('video')) ? 'video' : 'audio';
-					
+
 					if(slider) id.slider = true;
-					
+
 					if(typeof(media.attr('loop')) == 'string'){
 						class_wrapper += 'loop';
 						id.loop = true;
 					}
 					else id.loop = false;
-					
-					
+
 					if(typeof(media.attr('muted')) == 'string') id.muted = true;
-					
+
 					if(!width){
 						if(media.attr('width')) width = media.attr('width');
 						else if(media.width() > 0) width = media.width();
 					}
-					
+
 					if(!height){
 						if(media.attr('height')) height = media.attr('height');
 						else if(media.height() > 0) height = media.height();
 					}
-					
+
 					if(!IS_IPAD){
 						if(id.controls) id.addcontrols = true;
 						id.controls = false;
 						class_wrapper += ' loading no_metadata';
 					}
-					
+
 					if(media.prev().is('img'))
 						media.prev().wrap('<div class="html5_cover"></div>');
-					
+
 					if(id.addcontrols){
 						media.wrap('<div class="media_wrapper '+id.type+' '+class_wrapper+'"></div>');
 						if(media.parents('.media_wrapper').prev().is('.html5_cover')){
@@ -226,7 +225,7 @@
 							controls = '<div class="ms_splash"></div><div class="ms-waiting"><em> </em><em> </em><em> </em></div>';
 						else
 							controls = '';
-								
+
 						controls += '<div class="controls small">'
 							+'<div class="buttons_left">'
 								+'<span class="play_pause_button" title="'+ms_player_lang.bouton_loading+'"></span>'
@@ -244,7 +243,7 @@
 								+'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>'
 							+'</div>'
 							+'<div class="buttons_right">';
-						controls += ($.inArray('volume',options.boutons_caches) == 0) ? '' : '<span class="volume_button '+ (id.muted ? 'muted' : '') +'" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)"></span>';
+						controls += ($.inArray('volume',options.boutons_caches) == '-1') ? '<span class="volume_button '+ (id.muted ? 'muted' : '') +'" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)"></span>' : '';
 
 						/**
 						 * Si on a les sliders, on ajoute une div ici pour avoir un slider de volume
@@ -269,25 +268,25 @@
 							id.options.movieSize = options.movieSize = 'adapt';
 					}else
 						media.parent().width(width);
-					
+
 					if(!wrapper) wrapper = media.parent();
-					
+
 					if(id.type== 'video' && !height){
 						height = media.parents('.media_wrapper').find('.controls').height();
 						media.parents('.media_wrapper').add(media).height(height)
 					}
-					
+
 					if(wrapper){
 						if(options.minwidth && media.width() > options.minwidth) wrapper.width(options.minwidth);
-					
+
 						if(wrapper.height() < 100) options.messages = false;
-					
+
 						if(!id.controls && options.messages){
 							bloc_messages = '<div class="messages" style="display:none"></div>';
 							wrapper.append(bloc_messages);
 						}
 					}
-					
+
 					if(control){
 						var elapsed_time = control.find('.elapsed_time'),
 							remaining_time = control.find('.remaining_time'),
@@ -336,18 +335,18 @@
 						}).bind("timeupdate", function(e){
 							if(control){
 								if(id.percent_loaded != 100) media.ms_update_loaded(e);
-		
+
 								var percent_time = ms_anything_to_percent(id.currentTime,id.duration);
 								if(remaining_time.is('.remaining') && (id.duration != 'Infinity'))
 									remaining_time.text('-'+ms_second_to_time(id.duration - id.currentTime));
-								
+
 								elapsed_time.text(ms_second_to_time(id.currentTime));
 								if(slider && (typeof(id.slider_control) == 'object')){
 									progress_elapse.css('width',percent_time+'%');
 									id.slider_control.slider("value", percent_time);
 								}else
 									progress_indicator.css('left',percent_time+'%');
-		
+
 								media.ms_resize_controls();
 							}
 						}).bind("seeking",function(e){
@@ -391,13 +390,13 @@
 							e.preventDefault();
 							e.stopPropagation();
 						});
-		
+
 						document.addEventListener(fullScreenApi.fullScreenEventName, function(e){
 							if(id.isFullScreen && !fullScreenApi.isFullScreen())
 								media.ms_fullscreen();
 							media.ms_resize_controls();
 						}, true);
-						
+
 						media.parent().find('.ms_splash').click(function(){
 							if(id.paused && $(this).is(':visible')){
 								if(!id.has_metadatas)
@@ -405,7 +404,7 @@
 								media.ms_play_pause();
 							}
 						});
-						
+
 						if(wrapper){
 							var stop_timeout = false,
 								last_moved=0,
@@ -425,7 +424,7 @@
 								}
 							});
 						}
-		
+
 						/**
 						 * Les actions sur les éléments des controles :
 						 *
@@ -438,24 +437,24 @@
 							control.find('.play_pause_button').click(function(){
 								media.ms_play_pause();
 							});
-							
+
 							control.find('.progress_back').click(function(e){
 								if(!slider)
 									media.ms_seek_to(e.clientX,slider);
 							});
-							
+
 							if($.inArray('volume',options.boutons_caches) == '-1' && !options.muted_bloque){
 								control.find('.volume_button').click(function(e){
 									media.ms_volume(true);
 								});
 							}
-							
+
 							if($.inArray('fullscreen',options.boutons_caches) == '-1'){
 								control.find('.fullwindow_button').click(function(e){
 									media.ms_fullscreen();
 								});
 							}
-							
+
 							if($.inArray('loop',options.boutons_caches) == '-1'){
 								control.find('.loop_button').click(function(e){
 									media.ms_loop();
@@ -511,7 +510,7 @@
 				control = !id.controls ? wrapper.find('.controls') : false,
 				elapsed_time = !id.controls ? control.find('.elapsed_time') : false,
 				remaining_time = !id.controls ? control.find('.remaining_time') : false;
-			
+
 			if(!id.mediacanplay || action == 'loadedmetadata'){
 				if(wrapper.hasClass('player_error'))
 					wrapper.removeClass('player_error').addClass('loading');
@@ -542,7 +541,7 @@
 						id.ratio = (id.videoWidth/id.videoHeight)
 					}else
 						var height_final = width_wrapper/id.ratio;
-					
+
 					if(id.type == 'video' && wrapper.height() != height_final){
 						wrapper.css({width:'auto'}).animate({height:height_final+'px'},'fast',function(){
 							media.animate({height:'100%',width:'100%'},'fast').removeAttr('height').removeAttr('width').ms_resize_controls();
@@ -572,23 +571,23 @@
 					}else if(id.type == 'video')
 						wrapper.add(media).width(media.height()*id.ratio).removeAttr('width');
 				}
-				
+
 				if(!id.controls){
 					if(wrapper.hasClass('loading'))
 						wrapper.removeClass('loading').addClass('paused').find('.play_pause_button').attr('title',ms_player_lang.bouton_lire);
-					
+
 					if(remaining_time && remaining_time.is('.remaining') && (id.duration != 'Infinity') && !isNaN(id.duration))
 						remaining_time.text('-'+ms_second_to_time(id.duration));
-	
+
 					elapsed_time.text(ms_second_to_time(id.currentTime));
-					
+
 					try {
 	                    arg.buffer = id.buffered.end(null);
 	                } catch (ignored) {}
-	                
+
 					if((id.networkState == 2) && id.duration && !isNaN(id.duration) && id.buffer)
 						control.find('.progress_buffered').css('width', ms_anything_to_percent(id.buffered.end(0),id.duration)+'%');
-					
+
 					if(slider){
 						var replay = false;
 						control.find('.progress_indicator').hide();
@@ -776,7 +775,7 @@
 						id.slider_volume.slider((options.volume_bloque) ? 'disable' : 'enable');
 					}
 					media.ms_messages('volume',volume_title);
-						
+
 					if(cookies && options.cookie_volume)
 						$.cookie('ms_volume', id.volume);
 				}
@@ -800,17 +799,17 @@
 					percent = Math.floor(((parseInt(cursor_position)-parseInt(progress.offset().left))/ parseInt(progress.width())) * 100),
 					time = Math.floor((id.duration * percent) / 100),
 					time_affiche = ms_second_to_time(time);
-				
+
 				if(typeof(id.slider_control) != "object"){
 					controls.find('.progress_elapsed_time').css('width',percent+'%');
 					controls.find('.progress_indicator').css('left',percent+'%');
 				}
-				
+
 				if(id.currentTime > time)
 					media.ms_messages('seek_back',ms_player_lang.statut_seek_back+' '+time_affiche);
 				else
 					media.ms_messages('seek_to',ms_player_lang.statut_seek_to+' '+time_affiche);
-				
+
 				id.currentTime = time;
 			}
 		},
@@ -830,20 +829,20 @@
 				id = media[0],
 				duration = id.duration, 
 				currenttime = id.currentTime;
-			
+
 			if(((currenttime == duration) && (percent == 100)) || ((currenttime == 0) && (percent == 0)))
 				return false;
-			
+
 			var time = (percent == 0) ? 0 : ((duration * percent) / 100),
 				time_affiche = ms_second_to_time(time);
-			
+
 			if(currenttime > time)
 				media.ms_messages('seek_back',ms_player_lang.statut_seek_back+' '+time_affiche);
 			else
 				media.ms_messages('seek_to',ms_player_lang.statut_seek_to+' '+time_affiche);
-			
+
 			id.currentTime = time;
-			
+
 			if(typeof(id.slider_control) != "object"){
 				var controls = media.parent().find('.controls');
 				controls.find('.progress_elapsed_time').css('width',percent+'%');
@@ -922,10 +921,10 @@
 		ms_fullscreen_resize : function(){
 			if($(this)[0].controls) return;
 			var media = $(this), id = media[0], wrapper = media.parent(), id_wrapper = wrapper[0];
-	
+
 			wrapper.css({width:'100%',height:'100%',left:'0',top:'0'}).addClass('media_wrapper_full').find('.controls').removeClass('small')
 				.find('span.fullwindow_button').attr('title',ms_player_lang.bouton_fullscreen_full);
-			
+
 			if (fullScreenApi.supportsFullScreen) {
 				(fullScreenApi.prefix === '') ? id_wrapper.requestFullScreen() : id_wrapper[fullScreenApi.prefix + 'RequestFullScreen']();
 			}else{
@@ -945,7 +944,7 @@
 			}
 			media.ms_resize_controls();
 		},
-	
+
 		/**
 		 * Change dynamiquement la taille de la barre de progression et de son conteneur
 		 * en fonction de la taille du lecteur.
@@ -973,16 +972,16 @@
 				play_width = controls.find('.buttons_left').outerWidth()+parseFloat(controls.find('.buttons_left').css('margin-left'))+parseFloat(controls.find('.buttons_left').css('margin-right')),
 				sound_width = controls.find('.buttons_right').outerWidth()+parseFloat(controls.find('.buttons_right').css('margin-left'))+parseFloat(controls.find('.buttons_right').css('margin-right')),
 				progresswidth = parseFloat(controls.width())-parseFloat(play_width)-parseFloat(sound_width) - parseFloat(controls.find('.progress_bar').css('border-left-width')) - parseFloat(controls.find('.progress_bar').css('border-right-width'))-parseFloat(controls.find('.progress_bar').css('margin-right')) - parseFloat(controls.find('.progress_bar').css('margin-left')) - parseFloat(controls.find('.progress_bar').css('padding-right')) - parseFloat(controls.find('.progress_bar').css('padding-left')) -1;
-			
+
 			controls.find('.progress_bar').width(progresswidth);
-			
+
 			var remaining_width = controls.find(".remaining_time").outerWidth()+parseFloat(controls.find('.remaining_time').css('margin-left'))+parseFloat(controls.find('.remaining_time').css('margin-right')),
 				elapsed_width = controls.find(".elapsed_time").outerWidth()+parseFloat(controls.find('.elapsed_time').css('margin-left'))+parseFloat(controls.find('.elapsed_time').css('margin-right'));
-			
+
 			if(controls.find(".remaining_time").is(':hidden')) remaining_width = 0;
 
 			var progressback_width = progresswidth - elapsed_width - remaining_width - parseFloat(controls.find('.progress_back').css('border-left-width')) - parseFloat(controls.find('.progress_back').css('border-right-width'))-parseFloat(controls.find('.progress_back').css('margin-right')) - parseFloat(controls.find('.progress_back').css('margin-left')) - parseFloat(controls.find('.progress_back').css('padding-right')) - parseFloat(controls.find('.progress_back').css('padding-left'))-2;
-			
+
 			if(slider && progressback_width < 0 && !force){
 				if(id.slider && (typeof(id.slider_volume) == 'object')){
 					id.slider_volume.slider('option',{'orientation':'vertical'});
@@ -1014,18 +1013,18 @@
 			var media = $(this),
 				id = media[0],
 				wrapper = $(this).is('.media_wrapper') ? $(this) : $(this).parents('.media_wrapper');
-			
+
 			if(!id.options.messages || id.controls) return;
-			
+
 			var messages = wrapper.find('.messages'),
 				message = (type == 'error') ? '<span>'+message+'</span>' : '<span class="'+type+'">'+message+'</span>';
-			
+
 			var fade_play = function() {
 				if(!messages.is('.error')) messages.fadeOut(function(){ $(this).html(''); });
 			};
 			if(type == 'error') messages.addClass('error');
 			else if(messages.is('.error')) return;
-			
+
 			messages.html(message);
 			if(messages.is(':hidden')){
 				messages.fadeIn('normal',function(){
@@ -1067,7 +1066,6 @@
 						return false;// On s'arrête au premier élément qui nous convient
 					}
 				});
-				
 			}
 		},
 		ms_update_loaded : function(e){
