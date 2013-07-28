@@ -47,31 +47,31 @@ function smush_post_image_filtrer($flux) {
 function image_smush($im) {
 	$fonction = array('smush', func_get_args());
 	$image = _image_valeurs_trans($im,"smush",false,$fonction);
-	
+
 	if (!$image) return("");
-	
+
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-	
+
 	$creer = $image["creer"];
 
 	if ($creer) {
 		$format = trim(exec('identify -format %m '.$im));
-	
+
 		if ($format == 'GIF') {
 			$dest = $dest.'.png';
 			exec('convert '.$im.' '.$dest);
 			$source = $dest;
 			$format = 'PNG';
 		}
-	
+
 		else if ($format == 'PNG') {
 			$nq = substr($im,0,-4).'-nq8.png';
 			exec('pngnq '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
 			if(file_exists($nq))
 				spip_unlink($nq);
 		}
-	
+
 		else if ($format == 'JPEG') {
 			$fsize = filesize($im);
 			if ($fsize < 10*1024)

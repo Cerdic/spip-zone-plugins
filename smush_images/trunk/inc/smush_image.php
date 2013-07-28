@@ -16,19 +16,19 @@ function inc_smush_image_dist($im){
 				return '';
 			}
 			spip_log("SMUSH : smush_image pour $im","smush");
-			
+
 			// L'adresse de l'API que l'on utilise
 			$url_smush = 'http://www.smushit.com/ysmush.it/ws.php';
-			
+
 			// On ajoute les paramètres nécessaires pour l'API
 			$url_smush_finale = parametre_url($url_smush,'img',url_absolue($im));
 			spip_log("SMUSH : recuperation du contenu de $url_smush_finale","smush");
-			
+
 			$content = file_get_contents($url_smush_finale);
 			$newcontent = json_decode($content, true);
-			
+
 			spip_log($newcontent,"smush."._LOG_ERREUR);
-			
+
 			if(!$newcontent['error']){
 				include_spip('inc/distant');
 				$new_url = $newcontent['dest'];
@@ -62,43 +62,41 @@ function image_smush($im) {
 	$fonction = array('smush', func_get_args());
 	$image = _image_valeurs_trans($im, "",false,$fonction);
 	if (!$image) return("");
-	
+
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-	
+
 	$creer = $image["creer"];
-	
+
 	// Methode precise
 	// resultat plus beau, mais tres lourd
 	// Et: indispensable pour preserver transparence!
 
 	if ($creer) {
-		$format = trim(exec('identify -format %m '.$source));
-	
+		$format = trim(exec('identify -format %m '.$im));
+
 		if ($format == 'GIF') {
 			$dest = $tmp.'.png';
-			exec('convert '.$source.' '.$dest);
+			exec('convert '.$im.' '.$dest);
 			$source = $dest;
 			$format = 'PNG';
 		}
-	
+
 		else if ($format == 'PNG') {
 			$nq = substr($source,0,-4).'-nq8.png';
-			exec('pngnq '.$source.' && optipng -o5 '.$nq.' -out '.$dest,$out);
+			exec('pngnq '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
 			if(file_exists($nq))
 				spip_unlink($nq);
 			return $dest;
 		}
-	
+
 		else if ($format == 'JPEG') {
-			$fsize = filesize($source);
+			$fsize = filesize($im);
 			$dest = $tmp.'.jpg';
-			if ($fsize < 10*1024) {
-				exec('jpegtran -copy none -optimize '.$source.' > '.$dest);
-			}
-			else {
-				exec('jpegtran -copy none -progressive '.$source.' > '.$dest);
-			}
+			if ($fsize < 10*1024)
+				exec('jpegtran -copy none -optimize '.$im.' > '.$dest);
+			else
+				exec('jpegtran -copy none -progressive '.$im.' > '.$dest);
 		}
 	}
 	return _image_ecrire_tag($image,array('src'=>$dest));
