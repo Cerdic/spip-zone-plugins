@@ -2,6 +2,8 @@
 
 function ajouter_script($flux) {
 
+  include_spip('public/spip_bonux_balises');
+
   $flux .= '<script type="text/javascript" src="' . produire_fond_statique('js_log.js') . '"></script>';
   return $flux;
 }
