@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_link_unsubscribe" => "Afmelden voor deze nieuwsbrief",
 
 	// S
-	"subscribe_message_ok" => "Uw registratie bij het adres @email@ is rekening gehouden met",
+	"subscribe_message_ok" => "Er wordt rekening gehouden met uw registratie voor het adres @email@",
 	"unsubscribe_message_ok" => "Het adres @email@ is geschrapt van de nieuwsbrief",
 
 
