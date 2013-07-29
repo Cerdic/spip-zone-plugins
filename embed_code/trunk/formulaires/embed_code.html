@@ -20,12 +20,12 @@
 			<li class="editer editer_largeur[(#ENV*{erreurs}|table_valeur{largeur}|oui)erreur]">
 				<label for="largeur"><:embed_code:label_largeur:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{largeur})</span>]
-				<input class="text" name="largeur" id="largeur" value="#ENV{largeur}" />
+				<input type="text" class="text" name="largeur" id="largeur" value="#ENV{largeur}" />
 			</li>
 			<li class="editer editer_hauteur[(#ENV*{erreurs}|table_valeur{hauteur}|oui)erreur]">
 				<label for="hauteur"><:embed_code:label_hauteur:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{hauteur})</span>]
-				<input class="text" name="hauteur" id="hauteur" value="#ENV{hauteur_ratio}" />
+				<input type="text" class="text" name="hauteur" id="hauteur" value="#ENV{hauteur_ratio}" />
 			</li>
 		</ul>
 		<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
