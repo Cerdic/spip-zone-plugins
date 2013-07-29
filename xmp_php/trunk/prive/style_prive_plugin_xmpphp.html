@@ -1,0 +1,29 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.infos_xmp_haut{
+	text-align:#GET{left};
+	background-color:#GET{claire};
+	padding:5px;
+	margin:0 0 5px 0;
+}
+.infos_xmp_haut img.logo{
+	vertical-align:middle;
+	margin: 0 5px;
+}
+.infos_xmp_bas{
+	display:none;
+	padding: 5px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	margin:5px 0;
+	overflow:hidden;
+	background-color:#fff;
+}

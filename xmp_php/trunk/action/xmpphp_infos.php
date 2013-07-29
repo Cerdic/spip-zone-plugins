@@ -1,38 +1,38 @@
 <?php
-
+/**
+ * XMP php
+ * Récupération des métadonnées XMP
+ *
+ * Auteur : kent1 (kent1@arscenic.info - http://www.kent1.info)
+ * ©2011-2013 - Distribué sous licence GNU/GPL
+ *
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/charsets');	# pour le nom de fichier
-include_spip('inc/actions');
 
 function action_xmpphp_infos_dist(){
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r)){
-		spip_log("action_infos_video_dist incompris: " . $arg);
-		$redirect = urldecode(_request('redirect'));
+	if (!intval($arg)){
+		spip_log("action_xmpphp_infos_dist incompris: " . $arg);
 		return;
 	}
 	else{
-		action_xmpphp_infos_post($r);
+		spip_log($arg,'xmp');
+		action_xmpphp_infos_post($arg);
+		if(_request('redirect')){
+			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+			$GLOBALS['redirect'] = $redirect;
+		}
 	}
 }
 
-function action_xmpphp_infos_post($r){
-	list(, $sign, $id_objet, $objet, $id_document, $suite) = $r;
-
+function action_xmpphp_infos_post($arg){
 	$recuperer_infos = charger_fonction('xmpphp_infos','inc');
-	$infos = $recuperer_infos($id_document);
-	if(_request("iframe") == 'iframe') {
-		$redirect = parametre_url(urldecode($iframe_redirect),"show_doc_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
-		spip_log($redirect,'xmp');
-	}else{
-		$redirect = urldecode(_request('redirect'));
-		spip_log($redirect,'xmp');
-	}
-	return $redirect;
+	$infos = $recuperer_infos($arg);
+	return $infos;
 }
 
 ?>

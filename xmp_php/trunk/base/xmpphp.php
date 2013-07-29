@@ -4,7 +4,7 @@
  * Récupération des métadonnées XMP
  *
  * Auteur : kent1
- * ©2011 - Distribué sous licence GNU/GPL
+ * ©2011-2013 - Distribué sous licence GNU/GPL
  *
  */
 

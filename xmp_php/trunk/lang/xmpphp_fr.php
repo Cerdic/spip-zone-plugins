@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_recuperer_infos' => 'Récupérer les données XMP',
+	
+	// T
+	'titre_infos_xmpphp' => 'Informations issues des XMP'
 
 );
 

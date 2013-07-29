@@ -1,0 +1,27 @@
+<BOUCLE_xmp(DOCUMENTS){id_document}{tout}>
+<B_data>
+<div id="infosdoc-#ID_DOCUMENT">
+	<div id="infos_xmp_haut_#ID_DOCUMENT" class="infos_xmp_haut">
+		<strong>[(#LOGO_DOCUMENT|image_reduire{24,24}|inserer_attribut{class,logo})]<a href="#" onclick="if(jQuery('#infos_xmp_bas_#ID_DOCUMENT').is(':visible')){jQuery('#infos_xmp_bas_#ID_DOCUMENT').slideUp(); return false;}else{jQuery('#infos_xmp_bas_#ID_DOCUMENT').slideDown(); return false;}"><:xmpphp:titre_infos_xmpphp:></a></strong>
+		<br class="nettoyeur" />
+		<div id="infos_xmp_bas_#ID_DOCUMENT" class="infos_xmp_bas">
+		<BOUCLE_data(DATA){si #METAS|strlen|>{0}|oui}{source tableau,#METAS|unserialize}>
+		<div>
+			<strong>#CLE</strong><br />
+			<B_data2>
+			<ul>
+			<BOUCLE_data2(DATA){source tableau,#VALEUR}{cle != Thumbnails}>
+			<li>#CLE : 
+				<BOUCLE_data3(DATA){source tableau,#VALEUR}{', '}>[(#VALEUR|is_array|?{[(#VALEUR|foreach)],#VALEUR})]</BOUCLE_data3>
+				</B_data3>#VALEUR<//B_data3>
+			</li>
+			</BOUCLE_data2>
+			</ul>
+			</B_data2>
+		</div>
+		</BOUCLE_data>
+		</div>
+	</div>
+</div>
+</B_data>
+</BOUCLE_xmp>
