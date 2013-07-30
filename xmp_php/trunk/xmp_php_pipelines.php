@@ -22,8 +22,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function xmpphp_recuperer_fond($flux){
 	if ($flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
-			$extension = sql_getfetsel("extension", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
-			if(in_array($extension,array('pdf','ai','psd')))
+			$infos_doc = sql_fetsel("distant,extension,mode", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
+			if(($infos_doc['distant'] == 'non') && in_array($infos_doc['mode'],array('document','image')) && in_array($infos_doc['extension'],array('ai','eps','jpg','pdf','png','psd','tif','tiff')))
 				$flux['data']['texte'] .= recuperer_fond('prive/xmpphp_infos_fichier', $flux['args']['contexte']);
 		}
 	}

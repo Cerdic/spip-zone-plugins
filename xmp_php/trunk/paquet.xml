@@ -1,12 +1,12 @@
 <paquet
 	prefix="xmpphp"
 	categorie="edition"
-	version="0.1.1"
-	etat="dev"
+	version="0.2.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/xmpphp-64.png"
 	schema="0.1"
->	
+>
 
 	<nom>XMP PHP</nom>
 	<!-- Récupération des données XMP des documents -->
@@ -21,5 +21,6 @@
 	<pipeline nom="document_desc_actions" inclure="xmp_php_pipelines.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/xmpphp.php" />
 	
+	<necessite nom="medias" compatibilite="[1.6.12;[" />
 	<utilise nom="doc2img" />
 </paquet>

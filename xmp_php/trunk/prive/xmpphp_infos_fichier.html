@@ -7,14 +7,56 @@
 		<div id="infos_xmp_bas_#ID_DOCUMENT" class="infos_xmp_bas">
 		<BOUCLE_data(DATA){si #METAS|strlen|>{0}|oui}{source tableau,#METAS|unserialize}>
 		<div>
-			<strong>#CLE</strong><br />
+			<strong>#CLE</strong>
 			<B_data2>
-			<ul>
-			<BOUCLE_data2(DATA){source tableau,#VALEUR}{cle != Thumbnails}>
-			<li>#CLE : 
-				<BOUCLE_data3(DATA){source tableau,#VALEUR}{', '}>[(#VALEUR|is_array|?{[(#VALEUR|foreach)],#VALEUR})]</BOUCLE_data3>
-				</B_data3>#VALEUR<//B_data3>
-			</li>
+			<ul class="spip">
+			<BOUCLE_data2(DATA){source tableau,#VALEUR}>
+				<B_data_thumbs>[(#REM)
+
+					Gestion spécifique des thumbnails pour les afficher
+
+				]<li>[(#_data2:CLE) :]
+					<BOUCLE_data_thumbs(DATA){si #CLE|=={Thumbnails}}{source tableau,#VALEUR}>
+					<ul>
+						<BOUCLE_data_thumb(DATA){source tableau,#VALEUR}>[
+						(#CLE|match{format}|oui)
+							[(#VALEUR|=={JPEG}|?{#SET{format,image/jpg},#SET{format,#VALEUR}})]
+						][
+						(#CLE|match{height}|oui)#SET{height,#VALEUR}][
+						(#CLE|match{width}|oui)#SET{width,#VALEUR}][
+						(#CLE|match{image}|oui)#SET{image,#VALEUR}][
+						(#CLE|match{image}|non)
+						<li>[(#CLE) :]#VALEUR</li>
+						]</BOUCLE_data_thumb>[
+						(#GET{image}|oui)
+						<li>
+							<img src="data:[(#GET{format})];base64,[(#GET{image})]" alt="" width="#GET{width}" height="#GET{height}" />
+						</li>
+						]</B_data_thumb>
+					</ul>
+					</BOUCLE_data_thumbs>
+				</li>
+				</B_data_thumbs>
+					<B_data3>
+					<li>[(#CLE) :]
+						<ul>
+						<BOUCLE_data3(DATA){si #VALEUR|is_array|et{#VALEUR|count|=={2}|et{#VALEUR|table_valeur{xml:lang}}|non}|oui}{source tableau,#VALEUR}>
+						<B_recursive>
+						<ul>
+							<BOUCLE_recursive(BOUCLE_data3)> </BOUCLE_recursive>
+						</ul>
+						</B_recursive>
+						</li>
+						</BOUCLE_data3>
+						</ul>
+					</li>
+					</B_data3>
+					[(#VALEUR|is_array|et{#VALEUR|count|=={2}|et{#VALEUR|table_valeur{xml:lang}}|oui}|oui)
+					<li>[(#CLE) : ][(#VALEUR|array_shift)][ ((#VALEUR|table_valeur{xml:lang}))]</li>]
+					[(#VALEUR|is_array|et{#VALEUR|count|=={2}|et{#VALEUR|table_valeur{xml:lang}}|oui}|non)
+					<li>[(#CLE) : ][(#VALEUR)]</li>]
+					<//B_data3>
+			<//B_data_thumbs>
 			</BOUCLE_data2>
 			</ul>
 			</B_data2>
