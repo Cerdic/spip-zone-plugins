@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
-	'getid3_description' => 'Čítanie a zápis audio značiek do zvukových súborov
-_ [->http://getid3.sourceforge.net/]', # MODIF
+	'getid3_description' => 'Tento zásuvný modul vám umožňuje získavať metadáta z audio a video súborov a ukladať ich do databázy. Získava aj obrázky v audio súboroch.
+_Dokáže tiež zapisovať niektoré tagy metadát do audio súborov.
+_Na to využíva knižnicu [GetID3->http://getid3.sourceforge.net/] s licenciou [GNU/GPL v2->http://www.getid3.org/source/license.txt] ',
 	'getid3_slogan' => 'Čítanie metadát zvukových súborov a súborov videí a zápis audio tagov.'
 );
 
