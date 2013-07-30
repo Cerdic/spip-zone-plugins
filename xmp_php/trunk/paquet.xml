@@ -1,7 +1,7 @@
 <paquet
 	prefix="xmpphp"
 	categorie="edition"
-	version="0.2.0"
+	version="0.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/xmpphp-64.png"
@@ -19,8 +19,9 @@
 	
 	<pipeline nom="recuperer_fond" inclure="xmp_php_pipelines.php" />
 	<pipeline nom="document_desc_actions" inclure="xmp_php_pipelines.php" />
+	<pipeline nom="renseigner_document" inclure="xmp_php_pipelines.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/xmpphp.php" />
-	
+
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
 	<utilise nom="doc2img" />
 </paquet>

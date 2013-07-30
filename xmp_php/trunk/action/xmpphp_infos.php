@@ -20,7 +20,6 @@ function action_xmpphp_infos_dist(){
 		return;
 	}
 	else{
-		spip_log($arg,'xmp');
 		action_xmpphp_infos_post($arg);
 		if(_request('redirect')){
 			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));

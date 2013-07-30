@@ -136,12 +136,14 @@ function inc_xmpphp_infos_dist($id_document=false,$fichier=null,$only_return=fal
 		elseif(!isset($infos_new['credits']))
 			$infos_new['credits'] = $content['xmpRights']['WebStatement'];
 	}
-
-	$infos_new['metas'] = serialize($content);
+	spip_log($content,'xmp');
+	if(is_array($content) && count($content) > 0)
+		$infos_new['metas'] = serialize($content);
 
 	/**
 	 * Si on a $only_return à true, on souhaite juste retourner les metas, sinon on les enregistre en base
-	 * Utile pour metadatas/video par exemple
+	 * Utile pour pour les fonctions de metadatas dans le plugin medias
+	 * inc/renseigner_document.php
 	 */
 	if(!$only_return && (intval($id_document) && (count($infos_new) > 0))){
 		$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));

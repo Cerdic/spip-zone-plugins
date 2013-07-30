@@ -41,4 +41,22 @@ function xmpphp_document_desc_actions($flux){
 	$flux['data'] .= recuperer_fond('prive/squelettes/inclure/xmpphp_document_desc_action',$flux['args']);
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline media_renseigner_metas (Medias)
+ * à partir de SPIP 3.11
+ * Récupérer les métas d'un document lors de son insertion en base
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return $flux Le contexte du pipeline complété
+ */
+function xmpphp_renseigner_document($flux){
+	if(isset($flux['args']['extension']) && isset($flux['args']['fichier']) && in_array($flux['args']['extension'],array('ai','eps','jpg','pdf','png','psd','tif','tiff'))){
+		$recuperer_infos = charger_fonction('xmpphp_infos','inc');
+		$infos = $recuperer_infos(false,$flux['args']['fichier'],true);
+		if(is_array($flux['data']) && is_array($infos))
+			$flux['data'] = array_merge($infos,$flux['data']);
+	}
+	return $flux;
+}
 ?>
