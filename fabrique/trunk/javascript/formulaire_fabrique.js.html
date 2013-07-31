@@ -27,8 +27,10 @@ $(document).ready(function(){
 
 		/* Deplier ou replier le diff */
 		$(".formulaire_fabriquer_plugin .reponse_formulaire_diff").find('>div.diff').hide();
-		$(".formulaire_fabriquer_plugin .reponse_formulaire_diff h4").on("click", function(){
-			$(this).parent().find('>div.diff').toggle();
+		/* TODO: la class .clicable est temporaire (bug spip qui double onAjaxLoad en 3.1-dev ?) */
+		$(".formulaire_fabriquer_plugin .reponse_formulaire_diff h4:not(.clicable)")
+			.addClass('clicable').on("click", function(){
+				$(this).parent().find('>div.diff').toggle();
 		});
 
 		[(#REM) faire dépendre le stockage de Basket de la version de jqueryUI ]
