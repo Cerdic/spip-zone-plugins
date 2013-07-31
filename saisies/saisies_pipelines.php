@@ -20,7 +20,6 @@ function saisies_affichage_final($flux){
 			$pi = $p; // si pas de <link inserer comme un goret entre 2 <li> de saisies
 		$css = generer_url_public('saisies.css');
 		$ins_css = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
-		$flux = substr_replace($flux, $ins_css, $pi, 0);
 
 		if (strpos($flux,"saisie_date")!==false){//si on a une saisie de type date, on va charger les css de jquery_ui
 		    $ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
@@ -32,7 +31,8 @@ function saisies_affichage_final($flux){
 			    }
 			}
 		}
-		
+
+		$flux = substr_replace($flux, $ins_css, $pi, 0);		
 		// On insère le JS à la fin du <head>
 		$pos_head = strpos($flux, '</head');
 		$js = find_in_path('javascript/saisies.js');
