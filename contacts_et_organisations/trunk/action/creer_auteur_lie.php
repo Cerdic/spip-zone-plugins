@@ -61,14 +61,22 @@ function action_creer_auteur_lie_dist($arg=null) {
 				break;
 
 			case 'organisation': 
-				
+
 				// Code pour le cas present ou le id_auteur est dans la table organisations...
 				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]"); 
 				$nom = trim($organisation);
-				$id_auteur = sql_insertq("spip_auteurs", array(
+
+				// créer l'auteur en suivant l'API pour que les pipelines s'activent
+				include_spip('action/editer_objet');
+				$id_auteur = objet_inserer('auteur');
+				autoriser_exception('modifier', 'auteur', $id_auteur);
+				objet_modifier('auteur', $id_auteur, array(
 						"nom"    =>  $nom,
 						"statut" => "1comite"
 				));
+				autoriser_exception('modifier', 'auteur', $id_auteur, false);
+
+
 				include_spip('action/editer_organisation');
 				organisation_modifier($arg[1], array("id_auteur" => $id_auteur));
 				break;
