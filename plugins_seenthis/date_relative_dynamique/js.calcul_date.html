@@ -29,7 +29,7 @@ function afficher_dates() {
 
 	$(".calcul_date").each(function() {
 		if ($(this).attr("datetime")) {
-			var date = new Date($(this).attr("datetime")); 
+			var date = new Date($(this).attr("datetime").replace(/T/,' ')); 
 			date = Math.floor(date.getTime()/1000);
 		} else if ($(this).attr("title")) {
 			var date = Math.floor($(this).attr("title"));
