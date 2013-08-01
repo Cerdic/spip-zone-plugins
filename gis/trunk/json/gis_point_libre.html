@@ -3,8 +3,8 @@
 	"geometry": {"type": "Point", "coordinates": [[(#ENV{lon})], [(#ENV{lat})]]},
 	"id":"1",
 	"properties": {
-		"title":[(#ENV{titre}|json_encode)],
-		"description":[(#ENV{description}|wrap{<p>}|json_encode)]
+		"title":[(#ENV{titre}|?{#ENV{titre},''}|json_encode)],
+		"description":[(#ENV{description}|?{#ENV{description}|wrap{<p>},''}|json_encode)]
 		#SET{icone, #CHEMIN_IMAGE{#ENV*{icone,0}}|sinon{#CHEMIN{#ENV*{icone,0}}}}
 		#SET{icone_defaut, #CHEMIN{images/marker_defaut.png}}
 		#SET{logo_doc,#GET{icone}|sinon{#GET{icone_defaut}}|image_passe_partout{32,32}|image_recadre{32,32,center}|extraire_attribut{src}|url_absolue}

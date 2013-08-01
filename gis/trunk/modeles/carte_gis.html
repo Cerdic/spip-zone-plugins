@@ -109,9 +109,9 @@ map_cfg["[(#GET{id})]"] = {
 	"objets":"(#ENV{objets,#ENV{class}}|trim)"],
 	"limit":[(#ENV{limit,#ENV{limite,500}}|trim)],
 	"env":[(#ENV*{args,#ENV*}|gis_modele_url_json_env|json_encode)][,
-	"titre" : (#ENV{titre}|json_encode)][,
-	"description" : (#ENV{description}|json_encode)][,
-	"icone" : (#ENV{icone}|json_encode)]
+	"titre":(#ENV{titre}|?{#ENV{titre},''}|json_encode)][,
+	"description":(#ENV{description}|?{#ENV{description},''}|json_encode)][,
+	"icone":(#ENV{icone}|?{#ENV{icone},''}|json_encode)]
 	},
 "localize_visitor":[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|?{true,false})],
 "localize_visitor_zoom":[(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
