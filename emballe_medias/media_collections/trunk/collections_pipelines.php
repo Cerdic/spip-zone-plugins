@@ -61,7 +61,6 @@ function collections_affiche_auteurs_interventions($flux) {
 			'id_auteur' => $id_auteur,
 			'titre' => _T('collection:info_collections_auteur')
 		), array('ajax' => true));
-
 	}
 	return $flux;
 }
@@ -91,15 +90,14 @@ function collections_editer_contenu_objet($flux){
 		 * Cas des pages uniques
 		 * On sort de suite
 		 */
-		if(!$id_secteur && (($args['contexte']['id_parent'] == 0) OR ($args['contexte']['id_parent'] == '-1') OR (!$args['contexte']['id_parent']  && !$args['contexte']['parents'])) && ($type=='article')){
+		if(!$id_secteur && (($args['contexte']['id_parent'] == 0) OR ($args['contexte']['id_parent'] == '-1') OR (!$args['contexte']['id_parent']  && !$args['contexte']['parents'])) && ($type=='article'))
 			return $flux;
-		}
+
 		if($type == 'article'){
-			if($id_diogene = intval(_request('id_diogene'))){
+			if($id_diogene = intval(_request('id_diogene')))
 				$where = "id_diogene = ".intval($id_diogene)." AND id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
-			}else{
+			else
 				$where = "id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
-			}
 		}
 		if($diogene = sql_fetsel('*','spip_diogenes',$where)){
 			if(is_array(unserialize($diogene['champs_ajoutes'])) && in_array('collection',unserialize($diogene['champs_ajoutes']))){
