@@ -21,7 +21,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return string        Texte
 **/
 function filtre_definitions_dist($texte) {
-
+	/**
+	 * Eviter d'être considéré comme spam lors du post si on met un mot considéré comme définition
+	 * par exemple dans le titre d'un commentaire (plugin forum) ou d'un ticket (plugin tickets)
+	 */
+	if(_request('formulaire_action') && (substr(_request('formulaire_action'),0,7) == 'editer_'))
+		return $texte;
 	$GLOBALS['dictionnaires_id_texte'] = uniqid();
 	include_spip('inc/dictionnaires');
 	$definitions = dictionnaires_lister_definitions();
