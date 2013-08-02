@@ -15,9 +15,9 @@
 		</label>
 	</div>	
 </BOUCLE_medias_collection_ajouter>
-[<p class="pagination">(#PAGINATION{page})</p>]
+[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]
 </B_medias_collection_ajouter>
-#BOITE_OUVRIR{'',notice}
+#BOITE_OUVRIR{'','notice warning'}
 <p class="explication"><:collection:message_collection_aucun_media_publie:></p>
 <BOUCLE_diogene_emballe_medias(DIOGENES){objet=emballe_media}>
 [(#AUTORISER{creerdans,diogene,#ID_DIOGENE}|oui)
