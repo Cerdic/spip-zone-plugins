@@ -1,0 +1,17 @@
+<!-- Set the viewport width to device width for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+[(#REM) On va chercher le CSS de foundation. ]
+[<link rel="stylesheet" href="(#CHEMIN{foundation/foundation-3/stylesheets/foundation.min.css}|direction_css)" type="text/css" />]
+
+[(#REM) Ce CSS règles les conflit entre les CSS de SPIP et ceux de Foundation ]
+[<link rel="stylesheet" href="(#CHEMIN{foundation/conflit_spip.css}|direction_css)" type="text/css" />]
+
+[(#REM) Inclusion de modernizr ]
+[<script src="(#CHEMIN{foundation/foundation-3/javascripts/modernizr.foundation.js})"></script>]
+
+[(#REM) Foundation JS ]
+[(#CONFIG{foundation/javascript}|oui) [<script src="(#CHEMIN{foundation/foundation-3/javascripts/foundation.min.js})"></script>] ]
+
+[(#REM) Et enfin lancement de fondation avec toutes options par défaut. ]
+[(#CONFIG{foundation/javascript}|oui) [<script src="(#CHEMIN{foundation/foundation-3/javascripts/app.js})"></script>] ]

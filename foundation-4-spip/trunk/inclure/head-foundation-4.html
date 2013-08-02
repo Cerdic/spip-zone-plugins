@@ -1,0 +1,26 @@
+<!-- Set the viewport width to device width for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+[(#REM) On va chercher le CSS de foundation. ]
+[<link rel="stylesheet" href="(#CHEMIN{foundation/foundation-4/css/foundation.min.css}|direction_css)" type="text/css" />]
+
+[(#REM) On va chercher le CSS de foundation. ]
+[<link rel="stylesheet" href="(#CHEMIN{foundation/ie8-grid-foundation-4.css}|direction_css)" type="text/css" />]
+
+[(#REM) Inclusion de modernizr, car c'est toujours hyper pratique ]
+[<script src="(#CHEMIN{foundation/foundation-4/js/vendor/custom.modernizr.js})"></script>]
+
+[(#REM) Foundation JS ]
+[(#CONFIG{foundation/javascript}|oui) [<script src="(#CHEMIN{foundation/foundation-4/js/foundation.min.js})"></script>] ]
+
+[(#REM) Ce CSS règles les conflit entre les CSS de SPIP et ceux de Foundation ]
+[<link rel="stylesheet" href="(#CHEMIN{foundation/conflit_spip.css}|direction_css)" type="text/css" />]
+
+[(#REM) Si le javascript est activé, lancement de fondation avec toutes options par défaut. ]
+[(#CONFIG{foundation/javascript}|oui)
+    <script>
+    jQuery(document).ready(function($) {
+        $(document).foundation();
+    });
+    </script>
+]

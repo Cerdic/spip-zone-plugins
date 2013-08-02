@@ -1,0 +1,30 @@
+<paquet
+    prefix="foundation"
+    categorie="squelette"
+    version="1.3.7"
+    etat="dev"
+    compatibilite="[3.0.8;3.0.*]"
+    logo="prive/themes/spip/images/foundation-64.png"
+    schema="1.0"
+    documentation="http://foundation.zurb.com/docs/"
+>
+    <nom>Foundation-4-spip</nom>
+    <!-- Plugin qui intégre le framework Foundation a l'interface public de SPIP. -->
+
+    <auteur lien='http://p.henix.be'>Phenix</auteur>
+
+    <licence>GNU/GPL</licence>
+
+    <!-- On active le pipeline pour modifier le header -->
+    <pipeline nom="insert_head" inclure="foundation_pipelines.php" />
+    
+    <!-- On ajoute un bouton pour la configuration -->
+    <!-- Bouton pour la configuration -->
+    <menu nom="foundation_titre" titre="foundation:foundation_titre" parent="menu_configuration" icone="images/foundation-16.png" action="configurer_foundation" />
+    
+    <!-- Les plugins indispensable -->
+    <necessite nom="saisies" compatibilite="[1.31;[" />
+
+    <!-- Vu qu'on ce base sur ZPIP pour la structure. -->
+    <necessite nom="Z" compatibilite="[1.7.21;[" /> 
+</paquet>

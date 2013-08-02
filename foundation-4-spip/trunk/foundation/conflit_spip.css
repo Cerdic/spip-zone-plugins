@@ -1,0 +1,37 @@
+/*
+*   Ce fichier CSS surcharge certaines class/ID de SPIP qui entre en conflit avec Foundation
+*/
+
+/*
+*   Surcharge du box-sizing car il fait bugger la lightbox de spip.
+*   Ça ne résoud pas tout les problèmes sur tout les types de lightbox. Celle par défaut marche bien.
+*/
+#colorbox {
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+/*
+*   Si on laisse le display: table; de SPIP on perd le redimentionnement de l'image en fonction.
+*/
+.spip_documents_center {
+    display: block;
+}
+
+/*
+*   La #page de SPIP est généralement incluse dans des éléments foundation, le CSS de base de SPIP interfère avec.
+*/
+#page {
+    width: 100%;
+    padding: 0;
+    background: none;
+    position: static;
+}
+
+/*
+*   Pas de font-size sur le pied de page.
+*/
+#pied {
+    font-size: 1em;
+}
