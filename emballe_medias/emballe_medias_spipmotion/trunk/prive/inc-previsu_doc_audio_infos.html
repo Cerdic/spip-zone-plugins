@@ -11,7 +11,7 @@
 		<div id="em_infos">
 			<BOUCLE_encodage(FACD_CONVERSIONS){id_document}{0,1}> </BOUCLE_encodage>
 			<B_facd_attentes>
-			<div id="em_attentes_#ID_DOCUMENT" class="notice">
+			<div id="em_attentes_#ID_DOCUMENT" class="notice warning">
 			<BOUCLE_facd_attentes(FACD_CONVERSIONS){id_document}{statut IN "en_cours","non","erreur"}{0,1}>
 				<p>
 					[(#STATUT|=={erreur}|oui)[(#SET{encodage_en_erreur,oui})]
