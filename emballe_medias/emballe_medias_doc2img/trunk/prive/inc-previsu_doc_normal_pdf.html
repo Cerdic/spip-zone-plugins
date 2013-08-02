@@ -78,7 +78,7 @@
 	</p>]
 	</B_nb_pages>
 	<B_facd_attentes>
-	<div id="em_attentes_#ID_DOCUMENT" class="notice">
+	<div id="em_attentes_#ID_DOCUMENT" class="notice warning">
 	<BOUCLE_facd_attentes(FACD_CONVERSIONS){id_document=#ID_DOCUMENT}{statut IN "en_cours","non","erreur"}{0,1}>
 	<p>
 		[(#STATUT|=={non}|?{<:facd:info_document_dans_file_attente:>,<:facd:info_document_conversion:>})]
