@@ -86,8 +86,12 @@ function tw_todo($t) {
 						}
 						else {
 							// -- les informations typées
-							if ($formater = charger_fonction("todo_formater_${type}", 'inc', true))
-								$infos[$type] = $formater($valeur);
+							if ($formater = charger_fonction("todo_formater_${type}", 'inc', true)) {
+								if ($type == 'commit')
+									$infos[$type] .= (!isset($infos[$type])) ? $formater($valeur) : ', ' . $formater($valeur);
+								else
+									$infos[$type] = $formater($valeur);
+							}
 							else
 								$infos[$type] = $valeur;
 							if (!in_array($type, $types_info[$index_todo]))
