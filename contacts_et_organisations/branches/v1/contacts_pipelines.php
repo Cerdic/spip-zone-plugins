@@ -306,4 +306,70 @@ function contacts_declarer_url_objets($array){
 	return $array;
 }
 
+
+
+
+/**
+ * Optimiser la base (suppression des contacts et organisations dont les auteurs liés ont disparu)
+ *
+ * Si la configuration du plugin indique que la suppression d'un auteur entraîne la suppression
+ * de la fiche de contact, alors on supprime effectivement ce contact.
+ * 
+ * @param array $flux
+ * @return array
+ */
+function contacts_optimiser_base_disparus($flux){
+
+	// supprimer un contact associé à un auteur disparu si demandé dans la configuration
+	include_spip('inc/config');
+	if (CONTACTS_SUPPRESSIONS_RECIPROQUES_AVEC_AUTEURS) {
+		$n = 0;
+
+		# supprimer les contacts dont les auteurs ont disparu
+		$res = sql_select(
+			"contacts.id_contact",
+			"spip_contacts AS contacts
+				LEFT JOIN spip_auteurs AS auteurs
+				ON contacts.id_auteur=auteurs.id_auteur",
+			array(
+				"auteurs.id_auteur IS NULL",
+				"contacts.id_auteur > 0"
+			)
+		);
+
+		while ($row = sql_fetch($res)) {
+			$id_contact = $row['id_contact'];
+			sql_delete("spip_contacts_liens", "id_contact=" . sql_quote($id_contact));
+			sql_delete("spip_contacts", "id_contact=" . sql_quote($id_contact));
+			sql_delete("spip_organisations_contacts", "id_contact=" . sql_quote($id_contact));
+			$n++;
+		}
+
+		# supprimer les organisations dont les auteurs ont disparu
+		$res = sql_select(
+			"organisations.id_organisation",
+			"spip_organisations AS organisations
+				LEFT JOIN spip_auteurs AS auteurs
+				ON organisations.id_auteur=auteurs.id_auteur",
+			array(
+				"auteurs.id_auteur IS NULL",
+				"organisations.id_auteur > 0"
+			)
+		);
+
+		while ($row = sql_fetch($res)) {
+			$id_organisation = $row['id_organisation'];
+			sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));
+			sql_delete("spip_organisations", "id_organisation=" . sql_quote($id_organisation));
+			sql_delete("spip_organisations_contacts", "id_organisation=" . sql_quote($id_organisation));
+			$n++;
+		}
+
+		$flux['data'] += $n;
+	}
+
+	return $flux;
+}
+
+
 ?>

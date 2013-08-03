@@ -50,3 +50,11 @@
     
 2.6.2 (2013-02-10)
     - Icones manquantes
+
+2.7.0 (2013-08-01)
+    - Lors de la création d'un auteur depuis la fiche contact, passer par l'API d'édition
+      pour que les pipelines soient appelés.
+
+2.8.0 (2013-08-03)
+    - Option pour supprimer les contacts/organisations si un auteur passe à la poubelle, et réciproquement.
+    

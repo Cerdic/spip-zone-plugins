@@ -28,7 +28,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 
 	<prefix>contacts</prefix>
 
-	<version>1.21.0</version>
+	<version>1.22.0</version>
 	<version_base>1.7.1</version_base>
 
 	<install>base/contacts_upgrade.php</install>
@@ -92,13 +92,16 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
 	<!-- pour charger les nouvelles balises #PSEUDO et #ORGANISATIONS -->
 	<fonctions>contacts_fonctions.php</fonctions>
 
 	<!-- generer_url (vivement la 3.0) -->
 	<options>contacts_options.php</options>
-
-	<fonctions>contacts_fonctions.php</fonctions>
 
 	<!-- des boutons pour un acces direct aux contacts / organsations (CRM) -->
 	<bouton id='contacts_organisations' parent='auteurs'>

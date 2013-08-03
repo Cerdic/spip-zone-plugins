@@ -37,5 +37,13 @@
 	Report (version 2.6.0) du critère (AUTEURS){organisations_auteurs}
 	et (ORGANISATIONS){organisations_auteurs} avec balise #NOM_ORGANISATION
 
+1.21.0 (2013-08-01)
+    Report des améliorations depuis le trunk (version 2.7.0) :
+    - Lors de la création d'un auteur depuis la fiche contact, passer par l'API d'édition
+      pour que les pipelines soient appelés.
+
+1.22.0 (2013-08-03)
+    Report des améliorations depuis le trunk (version 2.8.0) :
+    - Define à activer pour supprimer les contacts/organisations si un auteur passe à la poubelle, et réciproquement.
 
 

@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_contact' => 'Il n\'y a aucun contact !',
 	'aucune_organisation' => 'Il n\'y a aucune organisation !',
 	'auteur_lie' => 'Id de l\'auteur lié',
+	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
+	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -133,6 +135,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Statut juridique',
+	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de cette organisation dans les jours à venir.',
+	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de ce contact dans les jours à venir.',
 	'supprimer_contact' => 'Supprimer ce contact',
 	'supprimer_organisation' => 'Supprimer cette organisation',
 

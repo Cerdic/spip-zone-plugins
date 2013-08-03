@@ -23,24 +23,45 @@
 				[(#URL_ACTION_AUTEUR{lier_organisation_auteur,[(#ENV{id})/0],[(#ENV{redirect,#SELF})]})]})]		</div>
 		]
 	</div>
+
+	[(#STATUT|=={5poubelle}|oui)
+		<div class='notice'>
+			<p><:contacts:auteur_associe_est_a_la_poubelle:></p>
+
+			[(#VAL{CONTACTS_SUPPRESSIONS_RECIPROQUES_AVEC_AUTEURS}|constant|oui)
+				<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
+			]
+		</div>
+	]
+
 	</BOUCLE_auteur_lie>
-	
+
+		[(#ID_AUTEUR|oui)
+			<div class='notice'>
+				<p><:contacts:auteur_associe_inexistant:></p>
+
+				[(#VAL{CONTACTS_SUPPRESSIONS_RECIPROQUES_AVEC_AUTEURS}|constant|oui)
+					<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
+				]
+			</div>
+		]
+
 	<div class="liaison">
 		<h3><:contacts:organisation_associer_a_auteur:></h3>
 		<div class='ajax'>#FORMULAIRE_LIER_ORGANISATION_AUTEUR{#ID_ORGANISATION, #SELF}</div>
-        
-        [(#AUTORISER{modifier, organisation, #ENV{id_organisation}}|?{
-            [(#BOUTON_ACTION{
-            	<:contacts:creer_auteur_organisation:>,
-                [(#URL_ACTION_AUTEUR{
-                	creer_auteur_lie,
-                    organisation/#ID_ORGANISATION,
-                    [(#ENV{redirect,#SELF})]
-                 })]
-                 '',''
-            })]            
-        })]	
-        
+
+		[(#AUTORISER{modifier, organisation, #ENV{id_organisation}}|?{
+			[(#BOUTON_ACTION{
+				<:contacts:creer_auteur_organisation:>,
+				[(#URL_ACTION_AUTEUR{
+					creer_auteur_lie,
+					organisation/#ID_ORGANISATION,
+					[(#ENV{redirect,#SELF})]
+				 })]
+				 '',''
+			})]
+		})]
+
 	</div>
 	
 	<//B_auteur_lie>
