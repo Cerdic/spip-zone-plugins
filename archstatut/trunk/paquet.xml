@@ -1,0 +1,22 @@
+<paquet
+	prefix="archstatut"
+	categorie="navigation"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.10;3.0.*]"
+	logo="prive/themes/spip/images/arch-32.png"
+
+>
+
+	<nom>archstatut:archivage_nom</nom>
+
+	<auteur lien='mailto:luc.tech@free.fr'>LucTech</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/archstatut_base.php" />
+	<pipeline nom="affiche_milieu" inclure="archstatut_pipelines.php" />
+
+	<necessite nom="breves" />
+
+	
+</paquet>
