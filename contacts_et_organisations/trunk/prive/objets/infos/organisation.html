@@ -24,7 +24,28 @@
 		</div>
 		]
 	</div>
+
+	[(#STATUT|=={5poubelle}|oui)
+		<div class='notice'>
+			<p><:contacts:auteur_associe_est_a_la_poubelle:></p>
+
+			[(#CONFIG{contacts_et_organisations/supprimer_reciproquement_auteurs_et_contacts}|oui)
+				<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
+			]
+		</div>
+	]
+
 	</BOUCLE_auteur_lie>
+		[(#ID_AUTEUR|oui)
+			<div class='notice'>
+				<p><:contacts:auteur_associe_inexistant:></p>
+
+				[(#CONFIG{contacts_et_organisations/supprimer_reciproquement_auteurs_et_contacts}|oui)
+					<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
+				]
+			</div>
+		]
+	<//B_auteur_lie>
 </BOUCLE_si_auteurs>
 
 </div>

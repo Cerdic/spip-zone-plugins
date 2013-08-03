@@ -6,9 +6,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_contact' => 'Il n\'y a aucun contact !',
-	'aucune_organisation' => 'Il n\'y a aucune organisation !',
+	'aucun_contact' => 'Il n\'y a aucun contact !',
+	'aucune_organisation' => 'Il n\'y a aucune organisation !',
 	'auteur_lie' => 'Id de l\'auteur lié',
+	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
+	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -20,28 +22,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
-		permettant le parcourir les contacts et organisations dans l\'espace public ?',
-	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
+		permettant le parcourir les contacts et organisations dans l\'espace public ?',
+	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
 	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
-		également sur les pages auteurs dans l\'espace privé ?',
-	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?',
+		également sur les pages auteurs dans l\'espace privé ?',
+	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?',
 	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
 		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
 		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
-	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
+	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
+	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
+		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
+		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
+		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
+		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
+		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…',
 	'changer' => 'Changer',
 	'chercher_contact' => 'Chercher',
 	'chercher_organisation' => 'Chercher',
 	'chercher_statut' => 'Statut',
-	'confirmer_delier_contact' => 'Êtes-vous sûr de vouloir délier cette organisation de ce contact ?',
-	'confirmer_delier_organisation' => 'Êtes-vous sûr de vouloir délier ce contact de cette organisation ?',
-	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?',
+	'confirmer_delier_contact' => 'Êtes-vous sûr de vouloir délier cette organisation de ce contact ?',
+	'confirmer_delier_organisation' => 'Êtes-vous sûr de vouloir délier ce contact de cette organisation ?',
+	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?',
 	'confirmer_supprimer_contact' => 'Êtes-vous sûr de vouloir supprimer
-		les informations relatives à ce contact ?',
+		les informations relatives à ce contact ?',
 	'confirmer_supprimer_organisation' => 'Êtes-vous sûr de vouloir supprimer
-		les informations relatives à cette organisation ?',
+		les informations relatives à cette organisation ?',
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Ajouter un contact',
 	'contact_ajouter_lien' => 'Ajouter ce contact',
@@ -167,6 +177,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Statut juridique',
+	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de cette organisation dans les jours à venir.',
+	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de ce contact dans les jours à venir.',
 	'supprimer_contact' => 'Supprimer ce contact',
 	'supprimer_organisation' => 'Supprimer cette organisation',
 

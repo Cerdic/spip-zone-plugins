@@ -13,18 +13,29 @@
 		label=<:contacts:cfg_lier_organisations_rubriques:>,
 		explication=<:contacts:cfg_lier_organisations_rubriques_explication:>})]
 
-	[(#SAISIE{oui_non,associer_aux_auteurs,
-		label=<:contacts:cfg_associer_aux_auteurs:>,
-		explication=<:contacts:cfg_associer_aux_auteurs_explication:>})]
-		
-	[(#SAISIE{oui_non,afficher_infos_sur_auteurs,
-		label=<:contacts:cfg_afficher_infos_sur_auteurs:>,
-		explication=<:contacts:cfg_afficher_infos_sur_auteurs_explication:>})]
-
-		
 	[(#SAISIE{oui_non,activer_squelettes_publics_zpip1,
 		label=<:contacts:cfg_activer_squelettes_publics_zpip1:>,
 		explication=<:contacts:cfg_activer_squelettes_publics_zpip1_explication:>})]
+
+	<li class='fieldset'>
+		<fieldset>
+			<legend><:contacts:cfg_relations_avec_auteurs:></legend>
+			<ul>
+				[(#SAISIE{oui_non,associer_aux_auteurs,
+					label=<:contacts:cfg_associer_aux_auteurs:>,
+					explication=<:contacts:cfg_associer_aux_auteurs_explication:>})]
+
+				[(#SAISIE{oui_non,afficher_infos_sur_auteurs,
+					label=<:contacts:cfg_afficher_infos_sur_auteurs:>,
+					explication=<:contacts:cfg_afficher_infos_sur_auteurs_explication:>})]
+
+				[(#SAISIE{oui_non,supprimer_reciproquement_auteurs_et_contacts,
+					label=<:contacts:cfg_supprimer_reciproquement_auteurs_et_contacts:>,
+					explication=<:contacts:cfg_supprimer_reciproquement_auteurs_et_contacts_explication:>})]
+			</ul>
+		</fieldset>
+	</li>
+
 </ul>
 
 <input type="hidden" name="_meta_casier" value="contacts_et_organisations" />
