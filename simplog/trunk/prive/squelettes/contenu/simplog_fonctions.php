@@ -32,6 +32,7 @@ function simplog_phraser_ligne($contenu) {
 				$ligne['hit'] = _T('simplog:info_hit_'. strtolower(trim($matches[4])));
 				$ligne['gravite'] = strtolower(trim($matches[5]));
 				$ligne['texte'] = trim($matches[6]);
+				$ligne['index'] = count($tableau);
 				$tableau[] = $ligne;
 			}
 		}

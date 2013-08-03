@@ -4,7 +4,7 @@
 
 
 [(#SET{defaut_tri, #ARRAY{
-	date, -1,
+	index, -1,
 	gravite, 1,
 	hit, 1,
 	ip, 1,
@@ -27,7 +27,7 @@
 			[<caption><strong class="caption">(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:></strong></caption>]
 			<thead>
 				<tr class="first_row">
-					<th class="date secondaire" scope="col">[(#TRI{date, <:simplog:colonne_date:>, ajax})]</th>
+					<th class="date secondaire" scope="col">[(#TRI{index, <:simplog:colonne_date:>, ajax})]</th>
 					<th class="ip" scope="col">[(#TRI{ip, <:simplog:colonne_ip:>, ajax})]</th>
 					<th class="pid" scope="col">[(#TRI{pid, <:simplog:colonne_pid:>, ajax})]</th>
 					<th class="hit" scope="col">[(#TRI{hit, <:simplog:colonne_hit:>, ajax})]</th>
@@ -36,7 +36,7 @@
 				</tr>
 			</thead>
 			<tbody>
-<BOUCLE_lecture_log(DATA){source table, #ENV{fic}|simplog_phraser_log}{tri #ENV{par, date}, #GET{defaut_tri}}{pagination 100}>
+<BOUCLE_lecture_log(DATA){source table, #ENV{fic}|simplog_phraser_log}{tri #ENV{par, index}, #GET{defaut_tri}}{pagination 100}>
 				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 					<td class="date secondaire">[(#DATE)]</td>
 					<td class="ip">[(#IP)]</td>
