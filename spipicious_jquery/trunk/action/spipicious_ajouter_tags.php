@@ -67,17 +67,18 @@ function action_spipicious_ajouter_tags_dist(){
  * 		Retourne un tableau composé du message de retour et si on doit invalider le cache
  */
 function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$id_groupe){
-	$tag_analysed = array();
+	include_spip('action/editer_mot');
+	include_spip('action/editer_liens');
+	$tag_analysed = $mots_associes = array();
 	$position = 0;
 	$statut = 'publie';
-	
+
 	if (is_array($tableau_tags)) {
 		$table = table_objet_sql($type);
 		$statut_objet = sql_getfetsel('statut',$table,"$id_table_objet=$id_objet");
 		if($statut_objet && ($statut_objet != 'publie'))
 			$statut = 'prop';
 
-		include_spip('action/editer_mot');
 		foreach ($tableau_tags as $k=>$tag) {
 			$mot_cree = false;
 			$tag = trim($tag);
@@ -96,7 +97,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 						$id_tag = mot_inserer($id_groupe);
 						$c = array('titre' => $tag_propre);
 						mot_modifier($id_tag, $c);
-						mot_associer($id_tag,array($type=>$id_objet));
+						$mots_associes[] = $id_tag;
 						sql_insertq("spip_spipicious",array('id_mot' => intval($id_tag),'id_auteur' => intval($id_auteur),'id_objet' => intval($id_objet), 'objet'=>$type, 'position' => intval($position),'statut' => $statut));
 						$message = _T('spipicious:tag_ajoute',array('name'=>$tag));
 						$invalider = true;
@@ -113,7 +114,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 					 */
 					$result = sql_getfetsel("id_mot",'spip_mots_liens',"id_mot=".intval($id_tag)." AND objet=".sql_quote($objet)." AND id_objet=".intval($id_objet));
 					if (!$result)
-						mot_associer($id_tag,array($type=>$id_objet));
+						$mots_associes[] = $id_tag;
 					/**
 					 * La triplette id_mot, id_auteur, objet existe t elle déjà?
 					 * Si non on crée le lien dans la table spip_spipicious
@@ -135,6 +136,9 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 			}
 			$tag_analysed[] = $tag;
 		}
+
+		if(count($mots_associes) > 0)
+			objet_associer(array('mot'=>$mots_associes),array($type => $id_objet));
 
 		if($position > 1){
 			$tags = implode('<br />',$tag_analysed);

@@ -61,10 +61,13 @@ function action_spipicious_supprimer_tags_dist(){
  * 		Retourne un tableau composé du message de retour et si on doit invalider le cache
  */
 function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_table_objet){
+	include_spip('action/editer_mot');
+	include_spip('action/editer_liens');
 	$compte = 0;
 	$tags_removed = array();
+	$mots_supprimes = array();
+	$mots_dissocier = array();
 	foreach($remove_tags as $remove_tag){
-		include_spip('action/editer_mot');
 		/**
 		 * Suppression dans spip_spipicious du lien entre notre auteur, le mot et l'objet
 		 */
@@ -73,20 +76,21 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 		/**
 		 * On vérifie si le tag est utilisé par un autre utilisateur
 		 * 
-		 * -* Si non, on supprime le mot clé définitivement
+		 * -* Si non, on ajoute le mot clé dans le tableau $mots_supprimes qui le supprimera définitivement
 		 * -* Si oui, on vérifie si le mot est utilisé par un autre utilisateur sur le même objet:
-		 * -** Si non, on dissocie le mot de l'objet
+		 * -** Si non, on ajoute le mot dans le tableau $mots_dissocier qui le dissociera le mot de l'objet
 		 * -** Si oui, on ne fait rien de plus
 		 */
 		$tag_utilise = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag));
-		if (!$tag_utilise)
-			mot_supprimer($remove_tag);
-		else {
+		if (!$tag_utilise){
+			$mots_supprimes[] = $remove_tag;
+			$mots_dissocier[] = $remove_tag;
+		}else {
 			$tag_utilise_2 = sql_getfetsel("id_auteur","spip_spipicious","id_mot=".intval($remove_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type));
 			if(!$tag_utilise_2)
-				mot_dissocier($remove_tag,array($type=>$id_objet));
+				$mots_dissocier[] = $remove_tag;
 		}
-		
+
 		/**
 		 * On crée notre message
 		 */
@@ -94,6 +98,15 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 		$message = _T('spipicious:tag_supprime',array('name'=>$titre_mot));
 		$tags_removed[] = $titre_mot;
 		$compte++;
+	}
+
+	if(count($mots_dissocier) > 0)
+		objet_dissocier(array('mot'=>$mots_dissocier),array($type => $id_objet));
+
+	if(count($mots_supprimes) > 0){
+		foreach($mots_supprimes as $id_mot){
+			mot_supprimer($remove_tag);
+		}
 	}
 
 	/**
