@@ -1,0 +1,19 @@
+<paquet
+	prefix="dashbuild"
+	categorie="outil"
+	version="0.2.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="dashbuild_logo-64.png"
+>
+
+	<nom>Dashboard Builder</nom>
+	<!-- Outil de création de dashboard -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="declarer_dashboard" action="" />
+	<pipeline nom="autoriser" inclure="dashbuild_autorisations.php" />
+</paquet>

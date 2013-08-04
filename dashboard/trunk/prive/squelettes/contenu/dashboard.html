@@ -1,0 +1,12 @@
+[(#REM)
+	Contenu de la page affichant :
+	- la vue du dashboard demandé
+	- ou la vue par défaut si celle-ci n'est pas précisée
+]
+
+[(#AUTORISER{voir, dashboard, #ENV{dashboard}}|sinon_interdire_acces)]
+
+#SET{vue, #ENV{vue, #ENV{dashboard}|informer_dashboard{vue_defaut}}}
+
+[<h1>(#ENV{dashboard}|informer_dashboard{vue_titres}|table_valeur{#GET{vue}}|_T)</h1>]
+<INCLURE{fond=prive/dashboards/contenu/#ENV{dashboard}-#GET{vue},env,ajax,} />

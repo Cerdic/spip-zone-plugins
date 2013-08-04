@@ -1,0 +1,15 @@
+[(#REM) <!-- Navigation dans les vues d'un dashboard --> ]
+#SET{vue_defaut, #ENV{dashboard}|informer_dashboard{vue_defaut}}
+#SET{vues, #ENV{dashboard}|informer_dashboard{vue_titres}}
+<ul class="liste-items sous_navigation">
+<BOUCLE_navigation_dashboard(DATA){source table, #GET{vues}}{par cle}>
+	[<li class="item">
+		(#URL_ECRIRE{#ENV{exec}}
+			|parametre_url{dashboard, #ENV{dashboard}}
+			|parametre_url{vue, #CLE}
+			|lien_ou_expose{
+				[(#VALEUR|_T)],
+				[(#ENV{vue, vue_defaut}|=={#CLE})]})
+	</li>]
+</BOUCLE_navigation_dashboard>
+</ul>
