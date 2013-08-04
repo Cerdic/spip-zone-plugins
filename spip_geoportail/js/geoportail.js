@@ -245,11 +245,6 @@ var spipGeoportail = jQuery.geoportail =
 					l.addFeatures(feature);
 				}
 			}
-			// Affichage des profils
-			for (var p = 0; p < this.profils.length; p++) 
-			{	var pf = new jQuery.geoportail.elevation(this.profils[p].div, this.profils[p].options);
-				pf.loadGPX(this.profils[p].fichier);
-			}
 			// Fonctions d'initialisation
 			for (var f = 0; f < this.cinit.length; f++) {
 				if (id == this.cinit[f].id_map) this.cinit[f].init(map, id);
@@ -266,6 +261,11 @@ var spipGeoportail = jQuery.geoportail =
 			}
 			// Masquer la patience
 			jQuery("#GeoportalMapDiv" + i).css("background-image", "none");
+		}
+		// Affichage des profils
+		for (var p = 0; p < this.profils.length; p++) 
+		{	var pf = new jQuery.geoportail.elevation(this.profils[p].div, this.profils[p].options);
+			pf.loadGPX(this.profils[p].fichier);
 		}
 	},
 	
