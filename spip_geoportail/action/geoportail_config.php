@@ -53,13 +53,19 @@ function action_geoportail_config_dist()
  			ecrire_meta('geoportail_service',isset($_POST['service']));
  			ecrire_metas();
  		}
- 		
 		// Modif le fournisseur par defaut
  		if (isset($_POST['provider']))
  		{	ecrire_meta('geoportail_provider',$_POST['defaut_provider']);
  			ecrire_meta('geoportail_zone',$_POST['zone']);
  			ecrire_metas();
  		}
+ 		// Zoom client
+ 		if (isset($_POST['setzclient']))
+ 		{	// Services
+ 			ecrire_meta('geoportail_zclient',isset($_POST['zclient']));
+ 			ecrire_metas();
+ 		}
+ 		
 		// Type de popup
  		if (isset($_POST['setpopup']))
  		{	ecrire_meta('geoportail_popup',$_POST['popup']);

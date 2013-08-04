@@ -27,6 +27,8 @@ function geoportail_insert_head($flux)
 	// Repertoire du popup
 	$repop = dirname(find_in_path('img/cloud-popup-relative.png'));
 	$repop = "jQuery.geoportail.imgPath = '$repop/';";
+	// Zoom client
+	$zclient = "spipGeoportail.zoomClient = ".($GLOBALS['meta']['geoportail_zclient']?'true':'false').";";
 
 	$flux .=
 '
@@ -45,6 +47,7 @@ function geoportail_insert_head($flux)
 ."\n".$logo
 ."\n".$popup
 ."\n".$repop
+."\n".$zclient
 .'
 </script>';
 $flux .= recuperer_fond('geoportail_insert_head', array('key'=>$GLOBALS['meta']['geoportail_key']) );

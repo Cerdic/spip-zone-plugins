@@ -76,6 +76,62 @@ var spipGeoportail = jQuery.geoportail =
 		});
 	},
 	
+	/** Gestion du Zoom client sur les layers geoportail
+	*	@param viewer : la carte (mapX)
+	*	@param layers : tableau de layers, RegExp ou nom du layer a traiter
+	*/
+	setZoomClient: function (viewer, layers)
+	{	var layers2zoom;
+		if (typeof(layers) == "string") layers2zoom = viewer.getMap().getLayersByName(layers);
+		else if (layers instanceof RegExp) layers2zoom = viewer.getMap().getLayersByName(layers);
+		else if (layers instanceof Array) layers2zoom = layers;
+		else layers2zoom = [layers];
+		// Niveau de zoom => 20
+		for (var l=0; l<layers2zoom.length; l++)
+		{	var r = layers2zoom[l].resolutions[20];
+			layers2zoom[l].minResolution = r; //0.14929107086948493;
+			// Penser aux aggregats
+			if (layers2zoom[l].aggregate && layers2zoom[l].aggregate.minResolution > r)
+			layers2zoom[l].aggregate.minResolution = r;
+		}
+		Geoportal.Layer.WMTS.prototype.moveTo = function(bounds, zoomChanged, dragging)
+		{	if (zoomChanged || !this.matrix)
+			{	this.updateMatrixProperties();
+				//>>>> Correction
+				if (this.resample)
+				{	var z = (this.map.zoom < this.minZoomLevel ? this.minZoomLevel : this.maxZoomLevel);
+					var dr = this.resolutions[z] / this.resolutions[this.map.zoom]
+					this.tileSize.h = Math.round(this.tileSize.h * dr);
+					this.tileSize.w = Math.round(this.tileSize.w * dr);
+					if (this.forceRedrawTimer) return;
+				}
+				//<<<< Correction
+			}
+			return Geoportal.Layer.Grid.prototype.moveTo.apply(this, arguments);
+		}
+		// Cas de l'ortho => detection des zones HR/LR
+		ortho = viewer.getMap().getLayersByName("ORTHOIMAGERY.ORTHOPHOTOS").pop();
+		ortho.onLoadError = function()
+		{	this.isLoadError = true;
+			if (this.map.zoom > 18) return OpenLayers.Util.getImagesLocation()+'blank.gif';
+			else return Geoportal.Util.getImagesLocation()+'nodata.jpg';
+		}
+		ortho.events.register("moveend", ortho, function(e)
+			{	// Switch to normal mode (HR)
+				if (e.zoomChanged && this.map.zoom < 19)
+				{      this.maxZoomLevel = 19;
+				}
+			});
+		ortho.events.register("loadend", ortho, function(e)
+			{	// Switch to resample mode (LR)
+				if (this.isLoadError && this.map.zoom > 18 && this.maxZoomLevel != 18)
+				{	this.maxZoomLevel = 18;
+					this.redraw();
+				}
+				this.isLoadError = false;
+			});
+	},
+	
 	// Fonction d'initialisation des cartes
 	initMap: function(dirPlug) 
 	{	// Chargement des modules complementaires
@@ -1042,6 +1098,8 @@ var spipGeoportail = jQuery.geoportail =
 							else lyr.setOpacity(ortho); 
 						}
 					}
+					// Gestion du zoom client (couches orthos, maps et roads)
+					if (this.zoomClient) this.setZoomClient(map,/(ORTHOIMAGERY\.ORTHOPHOTOS|GEOGRAPHICALGRIDSYSTEMS\.MAPS|TRANSPORTNETWORKS\.ROADS)/);
 			
 				break;
 			};

@@ -75,6 +75,7 @@ function exec_geoportail_config_options()
  		$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
  		$geoportail_popup = $GLOBALS['meta']['geoportail_popup'];
 		$ghover = ($GLOBALS['meta']['geoportail_hover'])?"CHECKED":"";
+		$zclient = ($GLOBALS['meta']['geoportail_zclient'])?"CHECKED":"";
 
 		if ($geoportail_popup=='spip') $geoportail_popup = 'SpipPopup';
 		
@@ -93,7 +94,14 @@ function exec_geoportail_config_options()
 				."<br/>"
 				._T('geoportail:geoportail_zone')." : "
 				.geoportail_popup_zone('zone', $gzone, 'fondl')
-				."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+				."<input type='submit' name='provider' class='fondo' style='margin-left:2em;' value='"._T('bouton_valider')."' />"
+				."</p>"
+			.fin_cadre_relief(true)
+			.debut_cadre_relief("loupe-plus.gif",true,"", _T('geoportail:zoom_client'))
+				. _T('geoportail:zoom_client_info')."<br/>"
+				."<p>"
+				."<input type='checkbox' name='zclient' id='zclient' $zclient><label for=zclient>"._T('geoportail:zclient')."</label>"
+				."<input type='submit' name='setzclient' class='fondo' style='margin-left:2em;' value='"._T('bouton_valider')."' />"
 				."</p>"
 			.fin_cadre_relief(true)
 			.debut_cadre_relief("forum-public-24.gif",true,"", _T('geoportail:geoportail_popup'))

@@ -32,6 +32,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						Dans certains cas, pour s\'affranchir d\'effets de bords ou lors de d&eacute;boguage, il peut &ecirc;tre pr&eacute;f&eacute;rable d\'utiliser une version de l\'API en local. 
 						<br/>Pour cela, placez les ressources de l\'API (<i>GeoportalExtended.js, etc.</i>) dans le dossier /js de votre squelette.',
 
+'zoom_client'			=> 'Zoom Client',
+'zoom_client_info'		=> 'Le technique du zoom client permet d\'afficher les tuiles du G&eacute;oportail aux r&eacute;solutions non suport&eacute;es par le service. 
+							Il est alors possible d\'afficher les couches cartes et photo du G&eacute;oportail jusqu\'au zoom "Maison".
+							<br/><i>Attention : cette technique est exp&eacute;rimentale, si vous constatez des probl&egrave;mes &agrave; l\'affichage des couches, d&eacute;activez cette option.</i>',
+'zclient'				=> 'Activer le zoom client',
+
 'geoportail_services'	=> 'Ajouter un menu G&eacute;oservices.',
 'geoportail_defaut'		=> 'Affichage par d&eacute;faut',
 'geoportail_provider'	=> 'Fournisseur par d&eacute;faut',
