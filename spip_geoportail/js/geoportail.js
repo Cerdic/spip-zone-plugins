@@ -859,7 +859,7 @@ var spipGeoportail = jQuery.geoportail =
 				metadataURL: info.url,
 				isBaseLayer: true,
 				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"},
-					{ logo: "mquest", pictureUrl: "http://www.mapquestapi.com/cdn/common/images/large-logo.png", url: "http://www.mapquest.com/"}]
+					{ logo: "mquest", pictureUrl: "http://www.mapquestapi.com/cdn/common/images/small-logo.png", url: "http://www.mapquest.com/"}]
 			});
 		map.getMap().addLayer(l);
 		l.isBaseLayer = false;
