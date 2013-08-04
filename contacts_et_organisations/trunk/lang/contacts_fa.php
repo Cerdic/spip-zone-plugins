@@ -8,8 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_contact' => 'ارتباطي برقرار نيست!',
-	'aucune_organisation' => 'سازماني موجود نيست!',
+	'aucun_contact' => 'ارتباطي برقرار نيست!', # MODIF
+	'aucune_organisation' => 'سازماني موجود نيست!', # MODIF
+	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.', # NEW
+	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.', # NEW
 	'auteur_lie' => 'Id de l\'auteur lié', # NEW
 
 	// B
@@ -33,15 +35,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques', # NEW
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.', # NEW
+	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs', # NEW
+	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?', # NEW
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
+		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
+		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
+		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
+		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
+		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…', # NEW
 	'changer' => 'تغيير',
 	'chercher_contact' => 'جستجو',
 	'chercher_organisation' => 'جستجو',
 	'chercher_statut' => 'رتبه',
-	'confirmer_delier_contact' => 'مطمئن هستيد كه مي‌خواهيد پيوند اين سازمان و اين ارتباط را قطع كنيد؟',
-	'confirmer_delier_organisation' => 'مطمئن هستيد كه مي‌‌خواهيد پيوند با اين سازمان را قطع كنيد؟',
-	'confirmer_delier_organisation_rubrique' => 'مطمئن هستيد كه مي‌‌خواهيد ارتباط اين سازمان با اين بخش را قطع كنيد؟‌',
-	'confirmer_supprimer_contact' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط يه اين ارتباط را حذف كنيد؟‌',
-	'confirmer_supprimer_organisation' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط به اين سازمان را حذف كنيد؟‌',
+	'confirmer_delier_contact' => 'مطمئن هستيد كه مي‌خواهيد پيوند اين سازمان و اين ارتباط را قطع كنيد؟', # MODIF
+	'confirmer_delier_organisation' => 'مطمئن هستيد كه مي‌‌خواهيد پيوند با اين سازمان را قطع كنيد؟', # MODIF
+	'confirmer_delier_organisation_rubrique' => 'مطمئن هستيد كه مي‌‌خواهيد ارتباط اين سازمان با اين بخش را قطع كنيد؟‌', # MODIF
+	'confirmer_supprimer_contact' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط يه اين ارتباط را حذف كنيد؟‌', # MODIF
+	'confirmer_supprimer_organisation' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط به اين سازمان را حذف كنيد؟‌', # MODIF
 	'contact' => 'يك تماس', # MODIF
 	'contact_ajouter' => 'Ajouter un contact', # NEW
 	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
@@ -162,6 +172,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Statut juridique', # NEW
+	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de cette organisation dans les jours à venir.', # NEW
+	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
+		la configuration actuelle du plugin Contacts & Organisations entraînera
+		la suppression automatique de ce contact dans les jours à venir.', # NEW
 	'supprimer_contact' => 'حذف اين تماس ',
 	'supprimer_organisation' => 'حذف اين سازمان',
 

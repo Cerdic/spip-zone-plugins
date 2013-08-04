@@ -8,9 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'Il n\'y a aucun contact !',
 	'aucune_organisation' => 'Il n\'y a aucune organisation !',
-	'auteur_lie' => 'Id de l\'auteur lié',
 	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
 	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.',
+	'auteur_lie' => 'Id de l\'auteur lié',
 
 	// B
 	'bouton_contacts' => 'Contacts',
