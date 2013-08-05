@@ -104,6 +104,9 @@ var geocoder;]
 		var map_container = 'map_[(#ENV{nom})]';
 		form_map = new L.Map(map_container);
 		
+		// affecter sur l'objet du DOM
+		jQuery("#"+map_container).get(0).map=form_map;
+
 		// appeler l'éventuelle fonction de callback
 		if (callback && typeof(callback) === "function") {
 			form_map.on('load',function(e){
