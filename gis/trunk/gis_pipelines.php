@@ -78,7 +78,6 @@ function gis_afficher_contenu_objet($flux){
 }
 
 function gis_post_edition($flux){
-	
 	if (($flux['args']['operation'] == 'ajouter_document') 
 		AND ($document = sql_fetsel("*","spip_documents","id_document=".intval($flux['args']['id_objet'])))
 	) {
@@ -92,7 +91,7 @@ function gis_post_edition($flux){
 		}
 		if ($document['extension'] == 'jpg') {
 			// on recupere les coords definies dans les exif du document s'il y en a
-			if ($exifs =  @exif_read_data($fichier,'GPS')) {
+			if (function_exists('exif_read_data') AND $exifs =  @exif_read_data($fichier,'GPS')) {
 				if(!function_exists('dms_to_dec'))
 					include_spip('gis_fonctions');
 				spip_log("GIS EXIFS : Récuperation des coordonnees du fichier $fichier","gis");
