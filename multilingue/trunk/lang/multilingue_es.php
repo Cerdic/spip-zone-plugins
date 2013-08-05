@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'afficher_menu_select' => 'Mostrar el menú desplegable ("select")',
 
 	// D
-	'desactiver_traduction_logo_objet' => 'Désactiver la possibilité que la balise #LOGO_OBJET inclut le logo de l\'objet d\'origine s\'elle ne trouve pas de logo pour l\'objet en question', # NEW
+	'desactiver_traduction_logo_objet' => 'Desactivar la posibilidad de que la baliza  #LOGO_OBJET incluya el logotipo del objeto de origen si no encuentra logotipo para el objeto en cuestión. ',
 
 	// E
-	'explication_desactiver_traduction_logo_objet' => 'Si l\'objet est traduit (présence d\'un id_trad comme pour les articles et rubriques) ce plugin fait en sorte que la balise #LOGO_ARTICLE p.ex cherche le logo de la traduction de l\'article (article de référence) si celui-ci ne dipose pas de logo.', # NEW
+	'explication_desactiver_traduction_logo_objet' => 'Si lel objeto es traducido  (presencia  de un id_trad como por los artículos y secciones ) este  plugin actua de manera que la balisza #LOGO_ARTICLE p.ex busca  el logotipo de la traducción del artículo  (articculo de referencia) si este no dispone   de logotipo.', # Se puede decir 'logo' o 'logotipo'
 
 	// L
-	'logo_objet' => 'Logo Objet', # NEW
+	'logo_objet' => 'Logotipo Objeto',
 
 	// M
 	'menu_langue' => 'Menú de idioma',
