@@ -10,6 +10,7 @@ L.Geocoder = L.Class.extend({
 		forwardUrl: 'http://open.mapquestapi.com/nominatim/v1/search',
 		reverseUrl: 'http://open.mapquestapi.com/nominatim/v1/reverse',
 		limit: 1,
+		acceptLanguage:'fr',
 		addressdetails: 1
 	},
 
@@ -34,7 +35,8 @@ L.Geocoder = L.Class.extend({
 				format: 'json',
 				q: text,
 				limit: this.options.limit,
-				addressdetails: this.options.addressdetails
+				addressdetails: this.options.addressdetails,
+				"accept-language":this.options.acceptLanguage
 			}
 		);
 	},

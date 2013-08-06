@@ -155,7 +155,7 @@ var geocoder;]
 		]
 		
 		[(#GET{geocoder}|oui)
-		geocoder = new L.Geocoder(geocode);]
+		geocoder = new L.Geocoder(geocode,{acceptLanguage:'#ENV{lang}'});]
 		
 		[(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
 		        d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
