@@ -1,7 +1,7 @@
 <plugin>
 	<nom>CleverMail</nom>
 	<auteur>Thomas Beaumanoir, Nicolas Hoizey, Stéphanie Caron, [Clever Age->http://www.clever-age.com/]</auteur>
-	<version>2.6.11</version>
+	<version>2.6.12</version>
 	<version_base>0.8</version_base>
 	<etat>stable</etat>
 	<slogan>Gestion de lettres d'information</slogan>

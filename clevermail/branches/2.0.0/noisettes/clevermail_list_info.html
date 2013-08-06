@@ -21,7 +21,7 @@
         [(#GET{nbSubs}|>{0}|oui)
           <a href="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{lst_id,#LST_ID})]">#GET{nbSubs}[ (#GET{nbSubs}|singulier_ou_pluriel{clevermail:abonne,clevermail:abonnes})]</a>
           &nbsp;|&nbsp;
-          <a href="#URL_ACTION_AUTEUR{clevermail_list_subscribers_export,#LST_ID}"><:clevermail:exporter:></a>
+          <a href="#URL_ACTION_AUTEUR{clevermail_list_subscribers_export,#LST_ID}" target="_blank"><:clevermail:exporter:></a>
        ]
         [(#GET{nbSubs}|>{0}|non)
           <:clevermail:aucun_abonne:>
