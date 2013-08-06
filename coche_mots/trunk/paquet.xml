@@ -1,8 +1,8 @@
 <paquet
 	prefix="cmots"
 	categorie="edition"
-	version="1.0.0"
-	etat="test"
+	version="1.0.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/coche_mots-32.png"
 	documentation="http://contrib.spip.net/?article4342"
