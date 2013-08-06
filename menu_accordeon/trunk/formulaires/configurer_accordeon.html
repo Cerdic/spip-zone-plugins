@@ -8,16 +8,35 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
       <ul>
-       	<li>
+       	 [(#CHEMIN{accordeon/identifiant.html}|oui)
+       	 <li>
+             <label for="identifiant"><:accordeon:label_identifiant:></label>
+             <div class="explication"><:accordeon:explication_identifiant_ver:></div>
+             <input name="identifiant" id="identifiant" class="text" type="text" value="[(#INCLURE{fond=accordeon/identifiant})]" disabled="disabled" />
+	 </li>
+	 ]
+
+       	 [(#CHEMIN{accordeon/identifiant.html}|non)
+       	 <li>
              <label for="identifiant"><:accordeon:label_identifiant:></label>
              <div class="explication"><:accordeon:explication_identifiant:></div>
              <input name="identifiant" id="identifiant" class="text" type="text" value="[(#ENV{identifiant}|sinon{.accordeon})]" />
-         </li>
-         <li>
+	 </li>
+	 ]
+	 [(#CHEMIN{accordeon/options.html}|oui)
+	 <li>
+	    <label for="options_ver"><:accordeon:label_options:></label>
+	    <div class="explication"><:accordeon:explication_options_ver:></div>
+	    <textarea name="options_ver" id="options_vers" rows="3" cols="40" disabled="disabled">#INCLURE{fond=accordeon/options}</textarea>
+	</li>
+	]
+	 [(#CHEMIN{accordeon/options.html}|non)
+	 <li>
              <label for="options"><:accordeon:label_options:></label>
              <div class="explication"><:accordeon:explication_options:></div>
              <textarea name="options" id="options" rows="3" cols="40">#ENV{options}</textarea>
-         </li>
+	 </li>
+	 ]
       </ul>
 
 		<div class="boutons">

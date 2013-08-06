@@ -1,5 +1,4 @@
 #HTTP_HEADER{content-type:application/x-javascript}
-#CACHE{0}
 $(function() {
-		$( "[(#CONFIG{accordeon/identifiant}|sinon{.accordeon})]" ).accordion([{(#CONFIG{accordeon/options})}]);
+		$( "[(#INCLURE{fond=accordeon/identifiant}|sinon{#CONFIG{accordeon/identifiant}}|sinon{.accordeon})]" ).accordion([{(#INCLURE{fond=accordeon/options}|sinon{#CONFIG{accordeon/options}})}]);
 	});
