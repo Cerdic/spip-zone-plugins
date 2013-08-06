@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_partir_csv' => 'A partir d\'un fichier CSV :',
+	'a_partir_csv' => 'A partir d\'un fichier CSV&nbsp;:',
 	'abonne' => 'abonné',
 	'abonne_ajoute' => 'abonné ajouté',
 	'abonne_aucune_lettre' => 'Abonné à aucune newsletter',
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_votre_desinscription_text' => '
 Bonjour,
 
-Veuillez confirmer votre désinscription en cliquant sur ce lien :
+Veuillez confirmer votre désinscription en cliquant sur ce lien&nbsp;:
 
  @@URL_CONFIRMATION@@
 
@@ -98,7 +98,7 @@ Merci
 	'confirmation_votre_inscription_text' => '
 Bonjour,
 
-Pour confirmer votre inscription à la lettre d\'information @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
+Pour confirmer votre inscription à la lettre d\'information @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien&nbsp;:
 
  @@URL_CONFIRMATION@@
 
@@ -107,11 +107,11 @@ Merci
 	'confirmation_votre_inscription_text_multiple' => '
 Bonjour,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+Pour confirmer votre inscription aux lettres d\'information suivantes&nbsp;:
 
  @@NOM_COMPLET@@ 
 
-veuillez cliquer sur ce lien :
+veuillez cliquer sur ce lien&nbsp;:
 
  @@URL_CONFIRMATION@@
 
@@ -123,7 +123,7 @@ Merci
 
 Vous recevez ce message en tant que modérateur de la lettre @@NOM_LETTRE@@.
 
-Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
+Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien&nbsp;:
 
  @@URL_CONFIRMATION@@
 
@@ -135,9 +135,9 @@ Merci',
 	'creer_nouveau_message' => 'Créer un nouveau message',
 
 	// D
-	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ ». Votre mode d\'inscription a été mis à jour.',
+	'deja_inscrit' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;». Votre mode d\'inscription a été mis à jour.',
 	'deja_validee' => 'Cette opération a déjà été validée. Désolé.',
-	'demande_transmise' => 'Votre demande d\'inscription à la lettre « @lst_name@ » va être examinée dans les plus brefs délais.',
+	'demande_transmise' => 'Votre demande d\'inscription à la lettre «&nbsp;@lst_name@&nbsp;» va être examinée dans les plus brefs délais.',
 	'desabonner' => 'Désabonner',
 	'desabonner2' => 'désabonner',
 	'desabonner_abonnes' => 'Désabonner les abonnés selectionnés',
@@ -145,7 +145,7 @@ Merci',
 	'description' => 'Description',
 	'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
 	'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
-	'desinscription_validee' => 'Votre désinscription de la lettre « @lst_name@ » est validée. A bientôt.',
+	'desinscription_validee' => 'Votre désinscription de la lettre «&nbsp;@lst_name@&nbsp;» est validée. A bientôt.',
 
 	// E
 	'editer_lettre' => 'Editer la lettre d\'information',
@@ -161,6 +161,7 @@ Merci',
 	'erreur' => 'Erreur',
 	'erreur_contenu_vide' => 'Un nouveau message n\'a pas pu être créé faute de contenu.',
 	'et_ou_saisir_des_adresses' => '...et/ou saisir des adresses.',
+	'exporter' => 'Exporter la liste des abonnés',
 
 	// F
 	'front_clevermail_action_validation' => 'Validation d\'une opération',
@@ -171,21 +172,21 @@ Merci',
 	'info_parametres' => 'L\'e-mail de l\'administrateur est utilisé par défaut comme l\'e-mail du modérateur lors de la création d\'une newsletter',
 	'infolettres' => 'Infolettres',
 	'informations' => 'Informations',
-	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans un autre mode, changement opéré.',
-	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre « @lst_name@ » dans ce même mode. Néanmoins, nous apprécions votre enthousiasme.',
+	'inscription_deja_abonne_autre_mode' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;» dans un autre mode, changement opéré.',
+	'inscription_deja_abonne_meme_mode' => 'Vous étiez déjà inscrit à la lettre «&nbsp;@lst_name@&nbsp;» dans ce même mode. Néanmoins, nous apprécions votre enthousiasme.',
 	'inscription_encours' => 'Votre demande d\'inscription à la lettre @nom_lettre@ est en cours d\'examen. Merci de patienter.',
-	'inscription_mok' => 'Votre demande d\'inscription à la lettre « @lst_name@ » a été soumise au modérateur. Vous serez informé de sa décision.',
+	'inscription_mok' => 'Votre demande d\'inscription à la lettre «&nbsp;@lst_name@&nbsp;» a été soumise au modérateur. Vous serez informé de sa décision.',
 	'inscription_nok' => 'Inscription non authorisée pour cette lettre d\'information',
-	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre « @lst_name@ ».',
-	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre « @lst_name@ ».',
-	'inscription_validee' => 'Votre inscription à la lettre « @lst_name@ » est validée. Merci.',
+	'inscription_ok' => 'Vous allez recevoir un message de demande de confirmation de votre inscription à la lettre «&nbsp;@lst_name@&nbsp;».',
+	'inscription_ok_multiple' => 'Vous allez recevoir un message de demande de confirmation de votre inscription aux lettre «&nbsp;@lst_name@&nbsp;».',
+	'inscription_validee' => 'Votre inscription à la lettre «&nbsp;@lst_name@&nbsp;» est validée. Merci.',
 
 	// L
 	'label_contenu_html' => 'Contenu HTML',
 	'label_contenu_text' => 'Contenu texte',
-	'label_inscription_email' => 'Votre adresse e-mail :',
-	'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information :',
-	'label_inscription_version' => 'Type de message :',
+	'label_inscription_email' => 'Votre adresse e-mail&nbsp;:',
+	'label_inscription_lettres' => 'Choisissez parmi ces lettres d\'information&nbsp;:',
+	'label_inscription_version' => 'Type de message&nbsp;:',
 	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Le format des adresses e-mail ne semble pas bon.',
 	'lettre_meme_nom' => 'Une lettre d\'information porte déjà ce nom',
 	'lettre_sans_nom' => 'Une lettre d\'information doit avoir un nom',
@@ -198,20 +199,20 @@ Merci',
 	'liste_messages' => 'Messages',
 
 	// M
-	'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+	'mail_info_desinscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ )&nbsp;:
 
-Désinscription de @sub_email@ de la lettre « @lst_name@ »',
-	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ ) :
+Désinscription de @sub_email@ de la lettre «&nbsp;@lst_name@&nbsp;»',
+	'mail_info_inscription_corps' => 'Alerte envoyée par le plugin CleverMail du site @nom_site@ ( @url_site@ )&nbsp;:
 
-Inscription de @sub_email@ à la lettre « @lst_name@ »',
+Inscription de @sub_email@ à la lettre «&nbsp;@lst_name@&nbsp;»',
 	'mail_info_inscription_sujet' => 'Inscription de @sub_email@',
 	'mail_inscription_multiple' => 'Bonjour,
 
-Pour confirmer votre inscription aux lettres d\'information suivantes :
+Pour confirmer votre inscription aux lettres d\'information suivantes&nbsp;:
 
  @@NOM_COMPLET@@
 
-veuillez cliquer sur ce lien :
+veuillez cliquer sur ce lien&nbsp;:
 
  @@URL_CONFIRMATION@@
 
@@ -235,10 +236,10 @@ Merci',
 	'mod_closed' => 'Fermée',
 	'mod_email' => 'E-mail',
 	'mod_explication' => 'Les différents modes de modération sont décrits ci-contre.',
-	'mod_explication_closed' => 'Fermée : personne ne peut s\'inscrire',
-	'mod_explication_email' => 'E-mail : tout le monde peut s\'inscrire après confirmation par e-mail',
-	'mod_explication_mod' => 'Modérée : le modérateur doit accepter l\'inscription',
-	'mod_explication_open' => 'Ouverte : tout le monde peut s\'inscrire sans confirmation',
+	'mod_explication_closed' => 'Fermée&nbsp;: personne ne peut s\'inscrire',
+	'mod_explication_email' => 'E-mail&nbsp;: tout le monde peut s\'inscrire après confirmation par e-mail',
+	'mod_explication_mod' => 'Modérée&nbsp;: le modérateur doit accepter l\'inscription',
+	'mod_explication_open' => 'Ouverte&nbsp;: tout le monde peut s\'inscrire sans confirmation',
 	'mod_mod' => 'Modérée',
 	'mod_open' => 'Ouverte',
 	'mode' => 'Mode',
