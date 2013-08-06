@@ -5,7 +5,7 @@
   <label for="#GET{name}"><:clevermail:label_inscription_lettres:></label>
   [<span class='erreur_message'>(#GET{erreurs})</span>]
   <select name="#GET{name}[]" id="#GET{name}" class="select" multiple="multiple" size="4">
-    <BOUCLE_lists(CM_LISTS){par lst_name}>
+    <BOUCLE_lists(CM_LISTS){par lst_name}{lst_moderation!=closed}>
       <option value="#LST_ID"[(#LST_ID|in_array{#ENV{#GET{name}}}|oui) selected="selected"]>#LST_NAME</option>
     </BOUCLE_lists>
   </select>

@@ -2,7 +2,7 @@
 #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 #SET{obli,'obligatoire'}
 #SET{cat,''}
-<BOUCLE_category(CM_LISTS){par lst_name}>
+<BOUCLE_category(CM_LISTS){par lst_name}{lst_moderation!=closed}>
 	#SET{currentCat,#LST_NAME|supprimer_numero|substr{0,(#LST_NAME|supprimer_numero|strpos{"/"})}}
 	#SET{pos,#LST_NAME|supprimer_numero|strpos{"/"}|plus{1}}
 	[(#GET{currentCat}|!={#GET{cat}}|oui)
