@@ -2,10 +2,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function ieconfig_saisies_import() {
+function ieconfig_saisies_import(){
 	// Etape de selection du fichier
-	if (!_request('_code_yaml') or _request('annuler') or _request('importer')) {
-		$saisies = array (
+	if (!_request('_code_yaml') or _request('annuler') or _request('importer')){
+		$saisies = array(
 			array(
 				'saisie' => 'fieldset',
 				'options' => array(
@@ -36,13 +36,13 @@ function ieconfig_saisies_import() {
 				)
 			)
 		);
-	// Options d'importations
+		// Options d'importations
 	} else {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
-		$texte_explication = '<b>'._T('ieconfig:texte_nom').'</b> '._T_ou_typo($config['nom']);
-		if ($config['description']!= '')
-			$texte_explication .= '<br /><b>'._T('ieconfig:texte_description').'</b> '._T_ou_typo($config['description']);
+		$texte_explication = '<b>' . _T('ieconfig:texte_nom') . '</b> ' . _T_ou_typo($config['nom']);
+		if ($config['description']!='')
+			$texte_explication .= '<br /><b>' . _T('ieconfig:texte_description') . '</b> ' . _T_ou_typo($config['description']);
 		// On identifie les entrées ne correspondant pas à un plugin
 		// Ou bien non déclarées dans ieconfig_metas
 		// Convention : les clés du tableau de config correspondent aux préfixes des plugins
@@ -50,13 +50,13 @@ function ieconfig_saisies_import() {
 		unset($entrees['nom']);
 		unset($entrees['description']);
 		unset($entrees['necessite']);
-		$entrees = array_map('strtolower',array_keys($entrees));
-		$plugins = array_map('strtolower',array_keys(unserialize($GLOBALS['meta']['plugin'])));
-		$entrees_prises_en_charge = array_merge(array_keys(pipeline('ieconfig_metas',array())),$plugins);
-		$plugins_manquants = array_diff($entrees,$entrees_prises_en_charge);
+		$entrees = array_map('strtolower', array_keys($entrees));
+		$plugins = array_map('strtolower', array_keys(unserialize($GLOBALS['meta']['plugin'])));
+		$entrees_prises_en_charge = array_merge(array_keys(pipeline('ieconfig_metas', array())), $plugins);
+		$plugins_manquants = array_diff($entrees, $entrees_prises_en_charge);
 		if (count($plugins_manquants)>0)
-			$texte_explication .= '<p class="reponse_formulaire reponse_formulaire_erreur">'._T('ieconfig:texte_plugins_manquants',array('plugins' => implode(', ',$plugins_manquants))).'</p>';
-		
+			$texte_explication .= '<p class="reponse_formulaire reponse_formulaire_erreur">' . _T('ieconfig:texte_plugins_manquants', array('plugins' => implode(', ', $plugins_manquants))) . '</p>';
+
 		$saisies = array(
 			array(
 				'saisie' => 'explication',
@@ -66,16 +66,16 @@ function ieconfig_saisies_import() {
 				)
 			)
 		);
-		
+
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
 		$ieconfig_metas = array();
-		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-			if(isset($config[$prefixe])) {
-				if (isset($data['icone'])) {
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data){
+			if (isset($config[$prefixe])){
+				if (isset($data['icone'])){
 					$icone = chemin_image($data['icone']);
 					if (!$icone) $icone = find_in_path($data['icone']);
-					if ($icone) $icone = '<img src="'.$icone.'" alt="" style="margin-left:-50px; margin-right:34px;" />';
-				} else $icone= '';
+					if ($icone) $icone = '<img src="' . $icone . '" alt="" style="margin-left:-50px; margin-right:34px;" />';
+				} else $icone = '';
 				$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
 			}
 		}
@@ -99,9 +99,9 @@ function ieconfig_saisies_import() {
 					)
 				)
 			);
-		
+
 		// On passe via le pipeline ieconfig
-		$saisies = pipeline('ieconfig',array(
+		$saisies = pipeline('ieconfig', array(
 			'args' => array(
 				'action' => 'form_import',
 				'config' => $config
@@ -109,11 +109,11 @@ function ieconfig_saisies_import() {
 			'data' => $saisies
 		));
 	}
-        
+
 	return $saisies;
 }
 
-function formulaires_ieconfig_import_charger_dist() {
+function formulaires_ieconfig_import_charger_dist(){
 	include_spip('inc/saisies');
 	$saisies = ieconfig_saisies_import();
 	$contexte = array(
@@ -121,18 +121,17 @@ function formulaires_ieconfig_import_charger_dist() {
 	);
 	if (_request('_code_yaml') and !_request('annuler') and !_request('importer'))
 		$contexte['_code_yaml'] = _request('_code_yaml');
-	return array_merge(saisies_charger_champs($saisies),$contexte);
+	return array_merge(saisies_charger_champs($saisies), $contexte);
 }
 
-function formulaires_ieconfig_import_verifier_dist() {
+function formulaires_ieconfig_import_verifier_dist(){
 	$erreurs = array();
 	// Etape de selection du fichier
-	if (!_request('_code_yaml')) {
+	if (!_request('_code_yaml')){
 		// On a rien transmis et pas de fichier local
 		if (!_request('ieconfig_import_local') AND $_FILES['ieconfig_import_fichier']['name']=='')
 			$erreurs['message_erreur'] = _T('ieconfig:message_erreur_fichier_import_manquant');
-	}
-	// Options d'import
+	} // Options d'import
 	else {
 		include_spip('inc/saisies');
 		$erreurs = saisies_verifier(ieconfig_saisies_import());
@@ -140,53 +139,59 @@ function formulaires_ieconfig_import_verifier_dist() {
 	return $erreurs;
 }
 
-function formulaires_ieconfig_import_traiter_dist() {
-    
-        include_spip('inc/config');
-        
+function formulaires_ieconfig_import_traiter_dist(){
+
+	include_spip('inc/config');
+
 	// Si on est à l'étape de sélection d'un fichier de configuration
 	// On place le code YAML dans le contexte
-	if (!_request('_code_yaml')) {
-		if ($_FILES['ieconfig_import_fichier']['name']!='')
-			$fichier = $_FILES['ieconfig_import_fichier']['tmp_name'];
-		else
+	if (!_request('_code_yaml')){
+		if ($_FILES['ieconfig_import_fichier']['name']!=''){
+			$dir = sous_repertoire(_DIR_TMP, 'ieconfig');
+			$hash = md5("ieimport-".$GLOBALS['visiteur_session']['id_auteur'].time());
+			$fichier = $dir . $hash . "-" . $_FILES['ieconfig_import_fichier']['name'];
+			move_uploaded_file($_FILES['ieconfig_import_fichier']['tmp_name'],$fichier);
+			lire_fichier($fichier, $code_yaml);
+			@unlink($fichier);
+		}
+		else {
 			$fichier = _request('ieconfig_import_local');
-		lire_fichier($fichier, $code_yaml);
-		set_request('_code_yaml',$code_yaml);
-	}
-	// Si on valide l'import
+			lire_fichier($fichier, $code_yaml);
+		}
+		set_request('_code_yaml', $code_yaml);
+	} // Si on valide l'import
 	elseif (_request('importer') && _request('_code_yaml')) {
 		include_spip('inc/yaml');
 		$config = yaml_decode(_request('_code_yaml'));
-                
-                // On passe via le pipeline ieconfig
-		$message_erreur = pipeline('ieconfig',array(
+
+		// On passe via le pipeline ieconfig
+		$message_erreur = pipeline('ieconfig', array(
 			'args' => array(
 				'action' => 'import',
 				'config' => $config
 			),
 			'data' => ''
 		));
-		
+
 		// Gestion des plugins utilisant le pipeline ieconfig_metas
 		$import_metas = _request('import_metas');
 		if (!is_array($import_metas)) $import_metas = array();
-                
-		
-		foreach(pipeline('ieconfig_metas',array()) as $prefixe => $data){
-			if(in_array($prefixe,$import_metas) && isset($config[$prefixe])) {
-				if(isset($data['metas_brutes']))
-					foreach(explode(',',$data['metas_brutes']) as $meta)
+
+
+		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data){
+			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])){
+				if (isset($data['metas_brutes']))
+					foreach (explode(',', $data['metas_brutes']) as $meta)
 						if (isset($config[$prefixe][$meta]))
-							ecrire_config($meta.'/',$config[$prefixe][$meta]);
-				if(isset($data['metas_serialize']))
-					foreach(explode(',',$data['metas_serialize']) as $meta)
+							ecrire_config($meta . '/', $config[$prefixe][$meta]);
+				if (isset($data['metas_serialize']))
+					foreach (explode(',', $data['metas_serialize']) as $meta)
 						if (isset($config[$prefixe][$meta]))
-							ecrire_config($meta.'/',serialize($config[$prefixe][$meta]));
-                        }
+							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
+			}
 		}
 
-		
+
 		if ($message_erreur!='')
 			return array('message_erreur' => $message_erreur);
 		else
@@ -195,26 +200,26 @@ function formulaires_ieconfig_import_traiter_dist() {
 }
 
 // Renvoie la liste des fichiers de configurations présents dans un sous-répertoires ieconfig/
-function ieconfig_config_locales() {
+function ieconfig_config_locales(){
 	static $liste_config = null;
-	
+
 	if (is_null($liste_config)){
 		include_spip('inc/yaml');
 		$liste_config = array();
 		$match = ".+[.]yaml$";
-		foreach (array_merge(find_all_in_path('ieconfig/', $match),find_all_in_path(_DIR_TMP.'ieconfig/', $match)) as $fichier => $chemin) {
+		foreach (array_merge(find_all_in_path('ieconfig/', $match), find_all_in_path(_DIR_TMP . 'ieconfig/', $match)) as $fichier => $chemin){
 			$config = yaml_decode_file($chemin);
 			// On regarde s'il y a un necessite
 			$ok = true;
-			if (isset($config['necessite'])) {
+			if (isset($config['necessite'])){
 				if (!is_array($config['necessite']))
 					$config['necessite'] = array($config['necessite']);
-				foreach($config['necessite'] as $plugin)
-					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
+				foreach ($config['necessite'] as $plugin)
+					if (!defined('_DIR_PLUGIN_' . strtoupper($plugin)))
 						$ok = false;
 			}
 			//on vérifie s'il y a un champs nom
-			if ($ok) {
+			if ($ok){
 				if (isset($config['nom']))
 					$liste_config[$chemin] = _T_ou_typo($config['nom']);
 				else
