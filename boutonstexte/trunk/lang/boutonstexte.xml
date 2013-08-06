@@ -8,6 +8,9 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=es">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
