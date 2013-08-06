@@ -6,6 +6,9 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-boutonstexte?lang_cible=es">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/paquet-boutonstexte?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
