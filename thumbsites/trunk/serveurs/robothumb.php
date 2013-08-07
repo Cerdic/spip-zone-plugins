@@ -1,14 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-    /*! \file thumbshots.php 
-     *  \brief Fichier de fonctions personnalisées au serveur robothumb
-     *         
-     *  Défini la surcharge de thumb
-     *  Le nom du fichier doit être obligatoirement celui déclaré dans le fond pour le paramétre thumbsites/serveur
-     */
 
-
-    /*! \brief thumbsite_serveur() pour le serveur robothumb
+    /*! \brief url_thumbsite_serveur() pour le serveur robothumb
      *
      *  Surcharge de la fonction thumbs() exploitant le serveur d'aperçu de robothumb
      *  

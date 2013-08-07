@@ -13,9 +13,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!function_exists('url_thumbsite')) {
 	function url_thumbsite($url_site) {
 		$url_serveur = '';
-		//determine le serveur de vignettes a utiliser, defaut thumbshots.com
+		//determine le serveur de vignettes a utiliser, defaut apercite.fr
 		include_spip("inc/config");
-		$serveur = lire_config('thumbsites/serveur', 'thumbshots');
+		$serveur = lire_config('thumbsites/serveur', 'apercite');
 		//Charge le fichier de conf specifique au serveur
 		include_spip('serveurs/'.$serveur);
 		//execute la surcharge
