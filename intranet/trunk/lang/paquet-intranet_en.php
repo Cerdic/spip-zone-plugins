@@ -7,12 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// E
-	'entravaux_description' => 'Allow only logged in users to visit the site.',
-	'entravaux_slogan' => 'Allow only logged in users to visit the site.',
-
 	// I
+	'intranet_description' => 'Allow only logged in users to visit the site.',
 	'intranet_nom' => 'Intranet/Extranet'
+	'intranet_slogan' => 'Allow only logged in users to visit the site.',
 );
 
 ?>
