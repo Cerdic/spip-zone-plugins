@@ -1,7 +1,7 @@
 <paquet
 	prefix="intranet"
 	categorie="maintenance"
-	version="0.2.0"
+	version="0.3.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/intranet-64.png"
@@ -11,7 +11,7 @@
 	<nom>Intranet</nom>
 
 	<auteur mail="kent1@arscenic.info" lien="http://www.kent1.info">kent1</auteur>
-	<auteur>2013</auteur>
+	<copyright>2013</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
