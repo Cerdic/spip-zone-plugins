@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_partir_csv' => 'From a CSV file :',
+	'a_partir_csv' => 'From a CSV file :', # MODIF
 	'abonne' => 'subscriber',
 	'abonne_ajoute' => 'Added subscriber',
 	'abonne_aucune_lettre' => 'Subscribed to no newsletter',
@@ -92,7 +92,7 @@ Please confirm your deregistration by clicking on the following link :
 
  @@URL_CONFIRMATION@@
 
-Thanks',
+Thanks', # MODIF
 	'confirmation_votre_inscription' => 'Registration confirmation',
 	'confirmation_votre_inscription_multiple' => 'Registration confirmation',
 	'confirmation_votre_inscription_text' => '
@@ -103,7 +103,7 @@ Please confirm your registration  to the newsletter @@NOM_COMPLET@@ at the forma
  @@URL_CONFIRMATION@@
 
 Thanks
-',
+', # MODIF
 	'confirmation_votre_inscription_text_multiple' => '
 Hello,
 
@@ -116,7 +116,7 @@ by clicking on the link :
  @@URL_CONFIRMATION@@
 
 Thanks
-',
+', # MODIF
 	'confirme_desabonnement_multiple_lettre' => 'You are about to delete several subscribers from this letter. Are you sure ?',
 	'confirme_suppression_multiple_base' => 'You are about to delete subscribers from the database. Are you sure ?',
 	'corps_mail_mod' => 'Hello,
@@ -127,7 +127,7 @@ To valid the registration of @mail@ to this letter, click on the link :
 
  @@URL_CONFIRMATION@@
 
-Thanks',
+Thanks', # MODIF
 	'cree' => 'Created',
 	'creer' => 'Create',
 	'creer_lettre' => 'Create a newsletter',
@@ -135,9 +135,9 @@ Thanks',
 	'creer_nouveau_message' => 'Create a new message',
 
 	// D
-	'deja_inscrit' => 'You have already registered to the letter « @lst_name@ ». Your registration mode has been updated.',
+	'deja_inscrit' => 'You have already registered to the letter « @lst_name@ ». Your registration mode has been updated.', # MODIF
 	'deja_validee' => 'Sorry. This operation has already been validated.',
-	'demande_transmise' => 'Your subscription request to the letter « @lst_name@ » will be examined as soon as possible.',
+	'demande_transmise' => 'Your subscription request to the letter « @lst_name@ » will be examined as soon as possible.', # MODIF
 	'desabonner' => 'Unsubscribe',
 	'desabonner2' => 'unsubscribe',
 	'desabonner_abonnes' => 'Deregister the selected subscribers',
@@ -145,7 +145,7 @@ Thanks',
 	'description' => 'Description',
 	'desinscription_confirmation_debut' => 'Unsubscribe from the newsletter',
 	'desinscription_confirmation_fin' => 'requested. You will receive a message asking for confirmation.',
-	'desinscription_validee' => 'Unsubscribing to the letter « @lst_name@ » is enabled. See you soon.',
+	'desinscription_validee' => 'Unsubscribing to the letter « @lst_name@ » is enabled. See you soon.', # MODIF
 
 	// E
 	'editer_lettre' => 'Edit the newsletter',
@@ -161,6 +161,7 @@ Thanks',
 	'erreur' => 'Error',
 	'erreur_contenu_vide' => 'A new message could not be created due to lack of content.',
 	'et_ou_saisir_des_adresses' => '...and/or enter addresses.',
+	'exporter' => 'Exporter la liste des abonnés', # NEW
 
 	// F
 	'front_clevermail_action_validation' => 'Validation of an operation',
@@ -171,21 +172,21 @@ Thanks',
 	'info_parametres' => 'The e-mail address of the administrator is used by default e-mail of the moderator at the creation of a newsletter',
 	'infolettres' => 'Newsletters',
 	'informations' => 'Informations',
-	'inscription_deja_abonne_autre_mode' => 'You have already registered to the letter to the « @lst_name@ » in another mode, the modification is made.',
-	'inscription_deja_abonne_meme_mode' => 'You have already registered to the letter  « @lst_name@ » in the same mode. Nevertheless, we appreciate your enthusiasm.',
+	'inscription_deja_abonne_autre_mode' => 'You have already registered to the letter to the « @lst_name@ » in another mode, the modification is made.', # MODIF
+	'inscription_deja_abonne_meme_mode' => 'You have already registered to the letter  « @lst_name@ » in the same mode. Nevertheless, we appreciate your enthusiasm.', # MODIF
 	'inscription_encours' => 'Your subscription request to the letter @nom_lettre@ is under consideration. Thank you for your patience.',
-	'inscription_mok' => 'Your subscription request to the letter « @lst_name@ » was submitted to the moderator. You will be informed of his decision.',
+	'inscription_mok' => 'Your subscription request to the letter « @lst_name@ » was submitted to the moderator. You will be informed of his decision.', # MODIF
 	'inscription_nok' => 'Subscription is not authorized for this newsletter',
-	'inscription_ok' => 'You will receive a message of subscription confirmation for your registration to the letter « @lst_name@ ».',
-	'inscription_ok_multiple' => 'You will receive a message asking you to confirm your subscription to the letter « @lst_name@ ».',
-	'inscription_validee' => 'Your subscribtion to the letter « @lst_name@ » is enabled. Thank you.',
+	'inscription_ok' => 'You will receive a message of subscription confirmation for your registration to the letter « @lst_name@ ».', # MODIF
+	'inscription_ok_multiple' => 'You will receive a message asking you to confirm your subscription to the letter « @lst_name@ ».', # MODIF
+	'inscription_validee' => 'Your subscribtion to the letter « @lst_name@ » is enabled. Thank you.', # MODIF
 
 	// L
 	'label_contenu_html' => 'HTML content',
 	'label_contenu_text' => 'Text content',
-	'label_inscription_email' => 'Your e-mail address :',
-	'label_inscription_lettres' => 'Choose between the newsletters :',
-	'label_inscription_version' => 'Message type :',
+	'label_inscription_email' => 'Your e-mail address :', # MODIF
+	'label_inscription_lettres' => 'Choose between the newsletters :', # MODIF
+	'label_inscription_version' => 'Message type :', # MODIF
 	'le_format_des_adresses_email_ne_semble_pas_bon' => 'The e-mail address format doesn\'t seem to be right.',
 	'lettre_meme_nom' => 'Another newsletter already has this name',
 	'lettre_sans_nom' => 'A newsletter must have a name',
@@ -200,10 +201,10 @@ Thanks',
 	// M
 	'mail_info_desinscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
 
-Deregistration from @sub_email@ to the letter « @lst_name@ »',
+Deregistration from @sub_email@ to the letter « @lst_name@ »', # MODIF
 	'mail_info_inscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
 
-Subscription from @sub_email@ to the letter « @lst_name@ »',
+Subscription from @sub_email@ to the letter « @lst_name@ »', # MODIF
 	'mail_info_inscription_sujet' => 'Subscription to @sub_email@',
 	'mail_inscription_multiple' => 'Hello,
 
@@ -215,7 +216,7 @@ by clicking on the link :
 
  @@URL_CONFIRMATION@@
 
-Thanks',
+Thanks', # MODIF
 	'maj_inscription' => 'updated subscription',
 	'maj_inscriptions' => 'updated subscriptions',
 	'mauvais_affichage' => 'If you do not see this email properly, read it on the website',
@@ -235,10 +236,10 @@ Thanks',
 	'mod_closed' => 'Closed',
 	'mod_email' => 'E-mail',
 	'mod_explication' => 'The different modes of moderation are described there.',
-	'mod_explication_closed' => 'Closed : Nobody can subscribe',
-	'mod_explication_email' => 'E-mail: anyone can register after confirmation by e-mail',
-	'mod_explication_mod' => 'Moderated : the moderator must accept the subscription',
-	'mod_explication_open' => 'Open: anyone can register without confirmation',
+	'mod_explication_closed' => 'Closed : Nobody can subscribe', # MODIF
+	'mod_explication_email' => 'E-mail: anyone can register after confirmation by e-mail', # MODIF
+	'mod_explication_mod' => 'Moderated : the moderator must accept the subscription', # MODIF
+	'mod_explication_open' => 'Open: anyone can register without confirmation', # MODIF
 	'mod_mod' => 'Moderated',
 	'mod_open' => 'Open',
 	'mode' => 'Mode',

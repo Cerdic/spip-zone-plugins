@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_partir_csv' => 'Zo súboru CSV:',
+	'a_partir_csv' => 'Zo súboru CSV:', # MODIF
 	'abonne' => 'abonent',
 	'abonne_ajoute' => 'Abonent pridaný',
 	'abonne_aucune_lettre' => 'Neodoberať žiaden informačný materiál',
@@ -94,7 +94,7 @@ na tento odkaz:
  @@URL_CONFIRMATION@@
 
 Ďakujeme
-',
+', # MODIF
 	'confirmation_votre_inscription' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_multiple' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_text' => 'Dobrý deň,
@@ -105,7 +105,7 @@ na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_
 (=vo formáte... ,prosím kliknite na tento odkaz)
 
 Ďakujeme
-',
+', # MODIF
 	'confirmation_votre_inscription_text_multiple' => 'Dobrý deň,
 
 na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov:
@@ -118,7 +118,7 @@ veuillez cliquer sur ce lien :
 (= prosím, kliknite na tento odkaz)
 
 Ďakujeme
-',
+', # MODIF
 	'confirme_desabonnement_multiple_lettre' => 'Chystáte sa odhlásiť niekoľkých používateľov z odoberania tohto materiálu. Určite to chcete urobiť?',
 	'confirme_suppression_multiple_base' => 'Chystáte sa vymazať databázu odberateľov. Určite to chcete urobiť?',
 	'corps_mail_mod' => 'Dobrý deň,
@@ -131,7 +131,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 
 = (Na potvrdenie registrácie na odoberanie tohto materiálu, prosím kliknite na uvedený odkaz.)
 
-Ďakujeme',
+Ďakujeme', # MODIF
 	'cree' => 'Vytvorený',
 	'creer' => 'Vytvoriť',
 	'creer_lettre' => 'Vytvoriť informačný materiál',
@@ -139,9 +139,9 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'creer_nouveau_message' => 'Vytvoriť novú správu',
 
 	// D
-	'deja_inscrit' => 'Ak ste sa zaregistrovali na odoberanie informačného materiálu "@lst_name@". Váš spôsob registrácie bol aktualizovaný.',
+	'deja_inscrit' => 'Ak ste sa zaregistrovali na odoberanie informačného materiálu "@lst_name@". Váš spôsob registrácie bol aktualizovaný.', # MODIF
 	'deja_validee' => 'Táto operácia už bola potvrdená. Je mi to ľúto.',
-	'demande_transmise' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bude skontrolovaná tak skoro, ako to bude možné.',
+	'demande_transmise' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bude skontrolovaná tak skoro, ako to bude možné.', # MODIF
 	'desabonner' => 'Odhlásiť z odoberania',
 	'desabonner2' => 'odhlásiť z odoberania',
 	'desabonner_abonnes' => 'Odhlásiť vybraných abonentov z odoberania',
@@ -149,7 +149,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'description' => 'Opis',
 	'desinscription_confirmation_debut' => 'Odhlásiť sa z odoberania materiálu',
 	'desinscription_confirmation_fin' => 'sa vyžaduje. Dostanete správu so žiadosťou o potvrdenie.',
-	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.',
+	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.', # MODIF
 
 	// E
 	'editer_lettre' => 'Upraviť informačný materiál',
@@ -165,6 +165,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'erreur' => 'Chyba',
 	'erreur_contenu_vide' => 'Novú správu nemožno vytvoriť kvôli nedostatku obsahu.',
 	'et_ou_saisir_des_adresses' => '...a/lebo zadať adresy.',
+	'exporter' => 'Exporter la liste des abonnés', # NEW
 
 	// F
 	'front_clevermail_action_validation' => 'Potvrdenie operácie',
@@ -175,21 +176,21 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'info_parametres' => 'E-mail administrátora sa používa ako predvolený e-mail moderátora pri vytváraní informačného materiálu',
 	'infolettres' => 'Informačné materiály',
 	'informations' => 'Informácie',
-	'inscription_deja_abonne_autre_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali iným spôsobom, nastala zmena.',
-	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom. Oceňujeme však vaše zanietenie.',
+	'inscription_deja_abonne_autre_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali iným spôsobom, nastala zmena.', # MODIF
+	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom. Oceňujeme však vaše zanietenie.', # MODIF
 	'inscription_encours' => 'Vaša žiadosť o registráciu na odoberanie materiálu @nom_lettre@ sa kontroluje. Ďakujeme vám za trpezlivosť.',
-	'inscription_mok' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bola odoslaná moderátorovi. O jeho rozhodnutí vás budeme informovať.',
+	'inscription_mok' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bola odoslaná moderátorovi. O jeho rozhodnutí vás budeme informovať.', # MODIF
 	'inscription_nok' => 'Na odoberanie tohto informačného materiálu nie je povolená registrácia',
-	'inscription_ok' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".',
-	'inscription_ok_multiple' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".',
-	'inscription_validee' => 'Vaša registrácia na odoberanie materiálu "@lst_name@" bola potvrdená. Ďakujeme.',
+	'inscription_ok' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".', # MODIF
+	'inscription_ok_multiple' => 'Dostanete správu so žiadosťou o potvrdenie svojej registrácie na odoberanie materiálu "@lst_name@".', # MODIF
+	'inscription_validee' => 'Vaša registrácia na odoberanie materiálu "@lst_name@" bola potvrdená. Ďakujeme.', # MODIF
 
 	// L
 	'label_contenu_html' => 'Text v HTML',
 	'label_contenu_text' => 'Obyčajný text',
-	'label_inscription_email' => 'Vaša e-mailová adresa:',
-	'label_inscription_lettres' => 'Vyberte si z týchto informačných materiálov:',
-	'label_inscription_version' => 'Typ správy:',
+	'label_inscription_email' => 'Vaša e-mailová adresa:', # MODIF
+	'label_inscription_lettres' => 'Vyberte si z týchto informačných materiálov:', # MODIF
+	'label_inscription_version' => 'Typ správy:', # MODIF
 	'le_format_des_adresses_email_ne_semble_pas_bon' => 'Zdá sa, že formát e-mailových adries nie je správny.',
 	'lettre_meme_nom' => 'Materiál s takým názvom už existuje',
 	'lettre_sans_nom' => 'Materiál musí mať názov',
@@ -204,10 +205,10 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	// M
 	'mail_info_desinscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
 
-Odhlásenie @sub_email@ z odoberania materiálu "@lst_name@"',
+Odhlásenie @sub_email@ z odoberania materiálu "@lst_name@"', # MODIF
 	'mail_info_inscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
 
-Registrácia @sub_email@ na odoberanie materiálu "@lst_name@"',
+Registrácia @sub_email@ na odoberanie materiálu "@lst_name@"', # MODIF
 	'mail_info_inscription_sujet' => 'Registrácia @sub_email@',
 	'mail_inscription_multiple' => 'Dobrý deň,
 
@@ -221,7 +222,7 @@ veuillez cliquer sur ce lien :
 
 (= prosím, kliknite na tento odkaz.)
 
-Ďakujeme',
+Ďakujeme', # MODIF
 	'maj_inscription' => 'údaje o registrácii boli aktualizované',
 	'maj_inscriptions' => 'údaje o registráciách boli aktualizované',
 	'mauvais_affichage' => 'Ak sa vám tento e-mail nezobrazil správne, prečítajte si ho na stránke',
@@ -241,10 +242,10 @@ veuillez cliquer sur ce lien :
 	'mod_closed' => 'Uzavretý',
 	'mod_email' => 'E-mail',
 	'mod_explication' => 'Nižšie sú opísané rôzne režimy spravovania.',
-	'mod_explication_closed' => 'Uzavretý: nikto sa nemôže zaregistrovať',
-	'mod_explication_email' => 'E-mail: po overení e-mailu sa môže zaregistrovať každý',
-	'mod_explication_mod' => 'Moderovaný: registráciu musí potvrdiť moderátor',
-	'mod_explication_open' => 'Otvorený: každý sa môže zaregistrovať  bez potvrdzovania',
+	'mod_explication_closed' => 'Uzavretý: nikto sa nemôže zaregistrovať', # MODIF
+	'mod_explication_email' => 'E-mail: po overení e-mailu sa môže zaregistrovať každý', # MODIF
+	'mod_explication_mod' => 'Moderovaný: registráciu musí potvrdiť moderátor', # MODIF
+	'mod_explication_open' => 'Otvorený: každý sa môže zaregistrovať  bez potvrdzovania', # MODIF
 	'mod_mod' => 'Moderovaný',
 	'mod_open' => 'Otvorený',
 	'mode' => 'Režim',
