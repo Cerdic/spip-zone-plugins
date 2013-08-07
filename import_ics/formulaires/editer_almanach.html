@@ -21,6 +21,7 @@
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
+		<input type='hidden' name='id_article' value='#ENV{id_article}' />
 		<ul>
 
 			[(#SAISIE{input, titre, obligatoire=oui,
@@ -31,9 +32,10 @@
 				label=<:almanach:label_url:>,
 				explication=<:almanach:explication_url:> })]
 
-			[(#SAISIE{input, id_article, obligatoire=oui,
+			[(#SAISIE{selecteur_rubrique_article,id_article,obligatoire=oui,
 				label=<:almanach:label_id_article:>,
-				explication=<:almanach:explication_id_article:> })]
+				attention=vous devez avoir affecté un mot clé à cet article,
+			})]
 
 			[(#SAISIE{selection, id_mot, obligatoire=oui,
 				label=<:seminaire:choix_mot:>,
@@ -44,7 +46,8 @@
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p>
+		[(#REM)<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p> ça ce sera quand le formulaire en deux parties sera correct pour l'instant on fait un formulaire en une partie]
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 </div>

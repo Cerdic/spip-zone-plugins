@@ -3,7 +3,6 @@
 	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
                 [(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
                 #ACTION_FORMULAIRE{#ENV{action},#FORM}
@@ -17,6 +16,5 @@
                	<p>Si ces événements sont ceux que vous vous attendiez à trouver, vous pouvez valider la saisie et les associer à l'almanach <strong>[(#ENV{titre}) ]</strong> et à l'article <strong>#INFO_TITRE{article,#ENV{id_article}}</strong>, sinon retournez à l'étape précédente.</p>
 	 	<p class='boutons'><input type='submit' class='submit' name="_retour_etape_1" value='<:retour:>' /> <input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
-	]
 </div>
 </div>

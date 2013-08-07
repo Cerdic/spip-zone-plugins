@@ -61,7 +61,7 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	$valeurs[_etapes]=2;//on rajoute  un couple clé/valeur pour le nombre d'étapes du formulaire
+	//$valeurs[_etapes]=2;//on rajoute  un couple clé/valeur pour le nombre d'étapes du formulaire (pas la peine tant que je n'arrive pas à avoir un résutat correct)
 	return $valeurs;
 
 }
@@ -142,9 +142,10 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	    $attendee = $comp->getProperty( "attendee" ); #nom de l'attendee
 	    $lieu = $comp->getProperty("location");#récupération du lieu
 	    $summary_array = $comp->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
-	    $descriptif_array = $comp->getProperty("description",1,TRUE);
+	    $descriptif_array = $comp->getProperty("DESCRIPTION");
 	    $uid = $comp->getProperty("UID");#uid de l'evenement
-	   	$sequence = $comp->getProperty("SEQUENCE");#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
+	    $organizer = $comp->getProperty("ORGANIZER");#organisateur de l'evenement
+	   	$sequence = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 	#données de localisation de l'évenement
 	    $localisation = $comp->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 	    $latitude = $localisation['latitude'];
