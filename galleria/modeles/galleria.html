@@ -3,7 +3,7 @@
 #SET{artUID,#UID}
 [<p class="pagination">(#PAGINATION)</p>]
 <div id="galleria#GET{artUID}">
-<BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=image}>
+<BOUCLE_galleria (DOCUMENTS){id_article=#ENV{id}}{extension==jpg|gif|png} {pagination #ENV{pagesize,30}} {mode=#ENV{mode,image}}>
   <a href="#FICHIER"><img src="#FICHIER" [title="(#TITRE|textebrut)" ][alt="(#DESCRIPTIF|textebrut)" ]/></a>
 </BOUCLE_galleria>
 </div>
