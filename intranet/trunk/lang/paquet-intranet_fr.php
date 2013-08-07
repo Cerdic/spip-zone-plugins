@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'intranet_description' => 'N\'autoriser que les utilisateurs loggués à visiter le site.',
-	'intranet_nom' => 'Intranet/Extranet'
+	'intranet_nom' => 'Intranet/Extranet',
 	'intranet_slogan' => 'N\'autoriser que les utilisateurs loggués à visiter le site',
 );
 
