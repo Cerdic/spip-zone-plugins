@@ -228,7 +228,7 @@ function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
 
 	// -- Titre court de l'evangile : on extrait la reference du verset uniquement
 	//    Ce titre court est de la forme "Lc 11,25-23"
-	$no_tag = false;
+	$no_tag = true;
 	$url = $url_base . '&type=reading_st&content=' . lecture2code($lecture);
 	$tableau['verset'] = flux2element($url, $charset, $no_tag);
 
@@ -239,6 +239,7 @@ function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
 
 	// -- Texte de la lecture
 	//    On decoupe le texte en 3 parties : le texte proprement dit, sa reference de traduction et un credit
+    $no_tag = false;
 	$url = $url_base . '&type=reading&content=' . lecture2code($lecture);
 	$textes = flux2texte($url, $charset, $lettrine);
 	$tableau = array_merge($tableau, $textes);
