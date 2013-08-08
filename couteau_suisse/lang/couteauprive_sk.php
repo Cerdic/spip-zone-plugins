@@ -109,30 +109,32 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'blocs:aide' => 'Folding blocks: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) and <b><visible></visible></b>',
 	'blocs:description' => 'Umožňuje vám vytvárať bloky, ktoré sa zobrazujú/schovávajú, keď kliknete na názov.
 
-@puce@ {{V textoch SPIPU:}} autori môžu používať tagy <bloc> (alebo <invisible>) a <visible> rovnakým spôsobom: 
+@puce@ {{V textoch SPIPU:}} redaktori majú k dispozícii nové tagy &lt;bloc&gt; (alebo &lt;invisible&gt;) a &lt;visible&gt; a v svojich textoch ich môžu používať takto: 
 
 <quote><code>
 <bloc>
- Klikateľný názov
+Nadpis, na ktorý sa bude dať kliknúť
  
- Text, ktorý sa zobrazí/skryje po dvoch nových riadkoch.
+ Text, ktorý sa zobrazí/skryje po vynechaní dvoch riadkov.
  </bloc>
 </code></quote>
 
-@puce@ {{V šablónach:}} môžete používať tagy #BLOC_TITRE, #BLOC_DEBUT a #BLOC_FIN takto: 
-<quote><code> #BLOC_TITRE
- Môj názov
- #BLOC_RESUME    (voliteľné)
+@puce@ {{V šablónach:}} máte k dispozícii nové tagy #BLOC_TITRE, #BLOC_DEBUT a môžete ich používať #BLOC_FIN takto: 
+<quote><code> #BLOC_TITRE{mon_URL}
+ Môj nadpis
+ #BLOC_RESUME (voliteľné)
  zhrnutie nasledujúceho bloku
  #BLOC_DEBUT
- Môj skladací blok (ktorý, ak treba, vie spustiť internetová adresa typu AJAX URL)
+ Môj skladací blok (v ktorom bude internetová adresa, ak bude treba)
  #BLOC_FIN</code></quote>
 
-@puce@ Ak nižšie zaškrtnete "Áno", pri otvorení jedného bloku sa všetky ostatné bloky na stránke zatvoria. Tzn., že naraz je otvorený len jeden blok.[[%bloc_unique%]]
+@puce@ Ak nižšie zaškrtnete "Áno", pri otvorení jedného bloku sa všetky ostatné bloky na stránke zatvoria, aby bol naraz otvorený len jeden blok.[[%bloc_unique%]]
 
-@puce@ Ak nižšie zaškrtnete "Áno", stav očíslovaných blokov sa uloží do cookie, aby sa zachoval vzhľad stránky tak dlho, kým so stránkou budete pracovať.[[%blocs_cookie%]]
+@puce@ Ak nižšie zaškrtnete "Áno", stav očíslovaných blokov sa uloží do cookie na čas session kvôli uloženiu vzhľadu stránky pre prípad, že by ste sa k nej chceli vrátiť.[[%blocs_cookie%]]
 
-@puce@ Podľa prvotných nastavení Vreckový nožík používa pre názvy skladacích blokov HTML tag <h4>. Iný tag môžete určiť tu <hN>:[[%bloc_h4%]]', # MODIF
+@puce@ Podľa prvotných nastavení Vreckový nožík používa pre názvy skladacích blokov HTML tag <h4>. Iný tag môžete určiť tu <hN>:[[%bloc_h4%]]
+
+@puce@ Na vylešenie efektu pri skladaní vašich blokov ich možno animovať efektom „šmýkania“.[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'Všetky polia opísané nižšie sú tu alebo v súkromnej zóne.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Aktualizácie nástroja Vreckový nožík:}} rámec tejto aktuálnej nastavovacej stránky, ktoré zobrazujú najnovšie úpravy kódu zásuvného modulu ([Source->@_CS_RSS_SOURCE@]).
