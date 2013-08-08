@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function odt2spip_affiche_gauche($flux){
 	if ($flux['args']['exec']=='rubrique'
 	  AND $id_rubrique = $flux['args']['id_rubrique']
-	  AND autoriser('publierdans','rubrique',$flux['args']['id_rubrique'])){
+	  AND autoriser('ecrire')){
 		$out = recuperer_fond('formulaires/odt2spip', array('id_rubrique' => $id_rubrique));
 		$flux['data'] .= $out;
 	}
