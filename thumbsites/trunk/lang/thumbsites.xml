@@ -1,9 +1,4 @@
 <traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
-	</langue>
-	<langue code="ca" />
-	<langue code="de" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=en">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
@@ -11,10 +6,6 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" />
-	<langue code="fr_tu" />
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=pt_br">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
-	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>

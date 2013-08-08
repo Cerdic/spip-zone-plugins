@@ -17,14 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_choix_serveur' => 'Choisissez le serveur qui fournira les vignettes de vos sites référencés et compléter éventuellement son paramétrage.', # NEW
 	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.', # NEW
 	'cfg_inf_rotothumb_presentation' => 'براي استفاده از اين خدمت لازم نيست ثبت نام كنيد اما بايد يك پيوند با سايت <a href="http://www.robothumb.com">Robothumb</a> برقرار كنيد. تدوام اين پيوند به صورت دوره‌اي توسط سرور‌هاي خودشان بررسي مي‌شود. ',
-	'cfg_inf_thumbshots_de_presentation' => '<a href="http://www.thumbshots.de">Thumbshots.de</a> خدمتي معادل سايت  Thumbshots.comارايه مي‌دهد. هرچند اين دو خدمت يكي هستند اما عملاً دو سايت متمايز مي‌باشند. ',
-	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> خدمتي رايگان ارايه مي‌دهد كه به شناسايي نيازي نيست. ',
 	'cfg_inf_websnapr_presentation' => 'براي استفاده از اين خدمت بايد در سايت <a href="http://www.websnapr.com">Websnapr</a> ثبت نام كنيد. نسخه‌ي رايگان مي‌تواند 250 هزار كاپچبر (گيراندازي) سايت را در طول يك ماه و با آهنگ 80 كاپچر در ساعت پردازش كند. ',
 	'cfg_itm_serveur_apercite' => 'Apercite.fr',
 	'cfg_itm_serveur_miwim' => 'Miwim', # NEW
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
-	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com',
-	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de',
 	'cfg_itm_serveur_websnapr' => 'Websnapr',
 	'cfg_itm_taille_vignette' => '@taille@ پيكسل',
 	'cfg_lbl_cle' => 'كليد شما',
