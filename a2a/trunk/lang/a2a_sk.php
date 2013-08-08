@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_cet_article_deux_cotes' => 'Prepojiť obe strany',
 
 	// O
-	'ob_pb' => 'Il n\'est pas possible de rendre obligatoire le type de liaison : en effet les articles ci-dessous possèdent des liaisons non typées. Typez les d\'abords, puis rendez-obligatoire le typage.', # NEW
+	'ob_pb' => 'Tento typ pripojenia sa nedá nastaviť ako povinný: nasledujúce články nemajú vypísané odkazy. Vypíšte, čo treba, potom prejdite na povinné údaje.',
 
 	// P
 	'pas_articles_lies' => 'Žiadne prepojené články',
@@ -49,12 +49,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rechercher_un_article_a_lier' => 'Nájsť článok:',
 
 	// S
-	'sup_pb' => 'Impossible de supprimer les types de liaisons suivantes : des liaisons les utilisent. Il vous faut donc modifier au préalable ces liaions.', # NEW
+	'sup_pb' => 'Tieto typy odkazov sa nedajú odstrániť. Odkazy ich stále používajú. Najprv musíte zmeniť tie odkazy.',
 	'supprimer_le_lien' => 'Zrušiť odkazy',
 	'supprimer_le_lien_deux_cotes' => 'Zrušiť prepojenie',
 
 	// T
-	'td_pb' => 'Vous demandez l\'interdiction de lier plusieurs fois deux mêmes articles. Or certains articles possèdent plusieurs liaisons avec d\'autres articles. Corrigez cela avant.', # NEW
+	'td_pb' => 'Žiadate o zákaz na vytváranie viacnásobných odkazov na dva rovnaké články. Niektoré články však majú viac odkazov na iné články. Najprv opravte toto.',
 	'type' => 'Typ',
 	'type_inexistant' => 'Typ prepojenia neexistuje',
 	'type_liaison' => 'Typ prepojenia',
