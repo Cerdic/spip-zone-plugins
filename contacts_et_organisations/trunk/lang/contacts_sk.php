@@ -8,50 +8,44 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_contact' => 'Žiaden kontakt tu nie je!', # MODIF
-	'aucune_organisation' => 'Žiadna organizácia tu nie je!', # MODIF
-	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.', # NEW
-	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.', # NEW
-	'auteur_lie' => 'Id prepojeného autora',
+	'aucun_contact' => 'Neexistuje žiaden kontakt!',
+	'aucune_organisation' => 'Neexistuje žiadna organizácia!',
+	'auteur_associe_est_a_la_poubelle' => 'Autor je zaradený v smetnom koši! Tento autor bude odstránený za niekoľko dní.',
+	'auteur_associe_inexistant' => 'Priradený autor neexistuje! Pravdepodobne bol už premiestnený do smetného koša a odstránený.',
+	'auteur_lie' => 'Id pripojeného autora',
 
 	// B
-	'bouton_contacts' => 'Kontakty',
-	'bouton_contacts_organisations' => 'Osobné kontakty a spoločnosti',
-	'bouton_organisations' => 'Spoločnosti',
+	'bouton_contacts' => 'Kontakty na ľudí',
+	'bouton_contacts_organisations' => 'Kontakty na ľudí a organizácie',
+	'bouton_organisations' => 'Organizácie',
 	'bouton_rechercher' => 'Vyhľadať',
 	'bouton_repertoire' => 'Adresár',
 
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Verejné šablóny ZPIPu v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Aktivovať verejné šablóny pre ZPIP vo verzii 1,
-		ktoré umožňujú prehliadať kontakty na ľudí a spoločnosti na verejne prístupnej stránke?', # MODIF
-	'cfg_afficher_infos_sur_auteurs' => 'Podrobné zobrazenie autorov?', # MODIF
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Zobraziť kontaktné údaje spoločnosti
-		alebo aj na autorov v súkromnej zóne?', # MODIF
-	'cfg_associer_aux_auteurs' => 'Prepojiť s autormi?', # MODIF
-	'cfg_associer_aux_auteurs_explication' => 'Umožňuje prepájať kontakty na ľudí a spoločnosti 
-		s autormi. Pridá formulár na prepojenie autora na stránky s kontaktmi na ľudí alebo spoločnosti,
-		a aj opačne pridá formulár na prepojenie kontaktov na ľudí alebo spoločnosti so stránku s autormi.',
+		ktoré umožňujú prehliadať kontakty a organizácie na verejne prístupnej stránke?',
+	'cfg_afficher_infos_sur_auteurs' => 'Podrobné zobrazenie autorov?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Zobraziť kontaktné údaje organizácie
+		aj na stránkach autorov v súkromnej zóne?',
+	'cfg_associer_aux_auteurs' => 'Pripojiť autorov?',
+	'cfg_associer_aux_auteurs_explication' => 'Umožňuje prepájať kontakty na ľudí a organizácie s autormi. Pridá formulár na prepojenie autora na stránky s kontaktmi na ľudí alebo organizácie,
+		a aj opačne pridá formulár na prepojenie kontaktov na ľudí alebo organizácie so stránku s autormi.',
 	'cfg_lier_organisations_rubriques' => 'Prepojiť s rubrikami',
-	'cfg_lier_organisations_rubriques_explication' => 'Umožniť prepájať spoločnosti s rubrikami?
-		Táto funkcia zobrazí oddeľovač spoločností podľa rubrík a oddeľovač rubrík podľa spoločností.', # MODIF
-	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
-		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
-		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
-		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
-		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
-		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…', # NEW
+	'cfg_lier_organisations_rubriques_explication' => 'Umožniť prepájnie organizácií s rubrikami?
+		Táto funkcia zobrazí výber organizácií podľa rubrík a výber rubrík podľa organizácií.',
+	'cfg_relations_avec_auteurs' => 'Vzťah k autorom',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Vymazať kontakty na autorov, ktoré sa opakujú?',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Ak aktivujete túto možnosť, pri vymazaní kontaktu na osobu (alebo  organizáciu) autor priradený k tomuto kontaktu  bude presunutý do koša. Podobne pri vymazaní autora bude vymazaný aj kontakt naňho. To môže pomôcť k tomu, aby sa nehromadili neaktuálne kontakty, ale pozor: vymazanie je definitívne a autor bude presunutý do koša aj vtedy, ak napísal nejaké články.',
 	'changer' => 'Zmeniť',
 	'chercher_contact' => 'Vyhľadať',
 	'chercher_organisation' => 'Vyhľadať',
 	'chercher_statut' => 'Stav',
-	'confirmer_delier_contact' => 'Určite chcete zrušiť prepojenie tejto organizácie s týmto kontaktom?', # MODIF
-	'confirmer_delier_organisation' => 'Určite chcete zrušiť prepojenie tohto kontaktu s touto organizáciou?', # MODIF
-	'confirmer_delier_organisation_rubrique' => 'Určite chcete zrušiť prepojenie tejto organizácie s touto rubrikou?', # MODIF
-	'confirmer_supprimer_contact' => 'Určite chcete zmazať všetky údaje o tomto kontakte?', # MODIF
-	'confirmer_supprimer_organisation' => 'Určite chcete zmazať všetky údaje o tejto organizácii?', # MODIF
+	'confirmer_delier_contact' => 'Určite chcete zrušiť prepojenie tejto organizácie s týmto kontaktom?',
+	'confirmer_delier_organisation' => 'Určite chcete zrušiť prepojenie tohto kontaktu s touto organizáciou?',
+	'confirmer_delier_organisation_rubrique' => 'Určite chcete zrušiť prepojenie tejto organizácie s touto rubrikou?',
+	'confirmer_supprimer_contact' => 'Určite chcete zmazať všetky údaje o tomto kontakte?',
+	'confirmer_supprimer_organisation' => 'Určite chcete zmazať všetky údaje o tejto organizácii?',
 	'contact' => 'Kontakt',
 	'contact_ajouter' => 'Pridať kontakt',
 	'contact_ajouter_lien' => 'Pridať tento kontakt',
@@ -70,23 +64,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'Zobraziť',
 	'contacts' => 'Kontakty',
 	'contacts_nb' => '@nb@ kontaktov',
-	'creer_auteur_contact' => 'Vytvoriť nového autora a prepojiť ho s týmto kontaktom',
+	'creer_auteur_contact' => 'Zapísať nového autora a prepojiť ho s týmto kontaktom',
 	'creer_auteur_organisation' => 'Vytvoriť nového autora a prepojiť ho s touto organizáciou',
 
 	// D
-	'definir_auteur_comme_contact' => 'Nastaviť ako kontakt',
-	'definir_auteur_comme_organisation' => 'Definovať ako organizáciu',
+	'definir_auteur_comme_contact' => 'Označiť ako kontakt',
+	'definir_auteur_comme_organisation' => 'Označiť ako organizáciou',
 	'delier_cet_auteur' => 'Zrušiť prepojenie',
 	'delier_contact' => 'Zrušiť prepojenie',
 	'delier_organisation' => 'Zrušiť prepojenie',
 
 	// E
 	'est_un_contact' => 'Tento autor je nastavený ako kontakt',
-	'est_une_organisation' => 'Tento autor je nastavený ako organizácia',
+	'est_une_organisation' => 'Tento autor je nastavený ako organizácia.',
 	'explication_activite' => 'Činnosť organizácie: mimovládna organizácia, vzdelávanie, publikovanie a pod.',
-	'explication_contacts_ou_organisations' => 'Môžete tohto autora nastaviť ako kontakt alebo ako organizáciu.  Ďalšie polia potom môžete vyplniť na stránke Upraviť autora.',
-	'explication_identification' => 'Identifikácia organizácie: napr. DIČ.',
-	'explication_statut_juridique' => 'spoločnosť, organizácia, združenie a pod.',
+	'explication_contacts_ou_organisations' => 'Tohto autora môžete označiť ako kontakt alebo ako organizáciu.  Ďalšie polia potom môžete vyplniť na stránke Upraviť autora.',
+	'explication_identification' => 'Identifikátor organizácie, napr. IČO DIČ, IČ DPH, a pod.',
+	'explication_statut_juridique' => 'a. s., s. r. o., o. z., a t. ď.',
 	'explication_supprimer_contact' => 'Vymazaním tohto kontaktu vymažete všetky ďalšie údaje, ktoré boli vyplnené na stránke autora.',
 	'explication_supprimer_organisation' => 'Odstránením tejto organizácie odstránite všetky ďalšie údaje, ktoré boli vyplnené na autorskej stránke.',
 	'explications_page_contacts' => 'Stránka sa rekonštruuje.<br /><br />Plánované akcie:<ul>
@@ -97,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_contacts_organisation' => 'Kontakty organizácie',
 	'info_nb_contacts' => 'Prepojené kontakty',
-	'info_organisation_appartenance' => 'Organizácia',
+	'info_organisation_appartenance' => 'Členstvo v organizácii',
 	'info_organisations_appartenance' => 'Členstvo v organizáciách',
 	'info_organisations_filles' => 'Podradené organizácie',
 	'info_organisations_meres' => 'Nadradené organizácie',
 	'info_tous_contacts' => 'Všetky kontakty',
 	'info_toutes_organisations' => 'Všetky organizácie',
-	'infos_contacts_ou_organisations' => 'Kontakty a organizácie',
+	'infos_contacts_ou_organisations' => 'Kontakty na ľudí a organizácie',
 
 	// L
 	'label_activite' => 'Aktivita',
@@ -122,18 +116,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prenom_nom' => 'Meno a priezvisko',
 	'label_pseudo' => 'Prezývka',
 	'label_recherche_auteurs' => 'Vyhľadať v autoroch',
-	'label_recherche_contacts' => 'Vyhľadať v kontaktoch',
+	'label_recherche_contacts' => 'Vyhľadať v kontaktoch na ľudí',
 	'label_recherche_organisations' => 'Vyhľadať v organizáciách',
-	'label_statut_juridique' => 'Právne postavenie',
+	'label_statut_juridique' => 'Právna forma',
 	'label_telephone' => 'Telefón',
 	'label_type_liaison' => 'Odkaz',
 	'lier_ce_contact' => 'Pripojiť tento kontakt',
 	'lier_cet_auteur' => 'Odkaz',
-	'lier_cette_organisation' => 'Pripojiť k tejto organizácii',
+	'lier_cette_organisation' => 'Pripojiť túto organizáciu',
 	'lier_contact' => 'Pripojiť kontakt',
-	'lier_organisation' => 'Pripojiť k organizácii',
-	'liste_contacts' => 'Zoznam všetkých kontaktov v databáze',
-	'liste_organisations' => 'Zoznam všetkých organizácií v databáze',
+	'lier_organisation' => 'Pripojiť organizáciu',
+	'liste_contacts' => 'Zoznam kontaktov na ľudí',
+	'liste_organisations' => 'Zoznam organizácií',
 
 	// N
 	'nb_contact' => '1 kontakt',
@@ -143,21 +137,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_renseigne' => 'Neznámy',
 
 	// O
-	'organisation' => 'Spoločnosť',
-	'organisation_ajouter' => 'Pridať spoločnosť',
-	'organisation_ajouter_lien' => 'Pridať túto spoločnosť',
+	'organisation' => 'Organizácia',
+	'organisation_ajouter' => 'Pridať organizáciu',
+	'organisation_ajouter_lien' => 'Pridať túto organizáciu',
 	'organisation_associe_a_auteur_numero' => 'Prepojené s autorom číslo',
 	'organisation_associer_a_auteur' => 'Prepojiť s autorom',
-	'organisation_aucun' => 'Žiadna spoločnosť',
+	'organisation_aucun' => 'Žiadna organizácia',
 	'organisation_creer' => 'Zapísať organizáciu',
-	'organisation_creer_associer' => 'Vytvoriť a vytvoriť prepojiť so spoločnosťou',
+	'organisation_creer_associer' => 'Vytvoriť a pripojiť organizáciu',
 	'organisation_creer_fille' => 'Zapísať podradenú organizáciu',
 	'organisation_editer' => 'Upraviť túto organizáciu',
-	'organisation_logo' => 'Logo spoločnosti',
-	'organisation_nouveau_titre' => 'Nová spoločnosť',
+	'organisation_logo' => 'Logo organizácie',
+	'organisation_nouveau_titre' => 'Nová organizácia',
 	'organisation_numero' => 'Organizácia číslo',
-	'organisation_retirer_lien' => 'Odstrániť spoločnosť',
-	'organisation_retirer_tous_lien' => 'Odstrániť všetky spoločnosti',
+	'organisation_retirer_lien' => 'Odstrániť organizáciu',
+	'organisation_retirer_tous_lien' => 'Odstrániť všetky organizácie',
 	'organisation_un' => 'Jedna organizácia',
 	'organisation_voir' => 'Zobraziť',
 	'organisations' => 'Organizácie',
@@ -172,19 +166,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Právna forma',
-	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de cette organisation dans les jours à venir.', # NEW
-	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de ce contact dans les jours à venir.', # NEW
+	'suppression_automatique_de_organisation_prochainement' => 'Aktuálne nastavenia
+zásuvného modulu Kontakty na ľudí a organizácie budú mať za následok automatické vymazanie tejto organizácie.',
+	'suppression_automatique_du_contact_prochainement' => 'Bez vášho zásahu
+sa za niekoľko dní automaticky vymažú
+súčasné nastavenia zásuvného modulu Kontakty a  nštitúcie.
+		',
 	'supprimer_contact' => 'Odstrániť tento kontakt',
 	'supprimer_organisation' => 'Odstrániť túto organizáciu',
 
 	// T
 	'titre_contact' => 'Kontaktné údaje',
 	'titre_organisation' => 'Informácie o organizácii',
-	'titre_page_configurer_contacts_et_organisations' => 'Nastaviť Kontakty a spoločnosti',
+	'titre_page_configurer_contacts_et_organisations' => 'Nastaviť Kontakty na ľudí a organizácie',
 	'titre_page_contacts' => 'Riadenie kontaktov',
 	'titre_page_organisations' => 'Riadenie organizácií',
 	'titre_page_repertoire' => 'Adresár',
