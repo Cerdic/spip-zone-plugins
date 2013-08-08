@@ -92,6 +92,24 @@ function css_contruire($css, $niveau, $chemin, $classe, $enfants, $definition) {
 function css_imbriques_couleurs_ie ($coul) {
 	if (preg_match(",^\#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])$,", $coul, $conv)) {
 		$coul = "#".$conv[1].$conv[1].$conv[2].$conv[2].$conv[3].$conv[3];
+	} else if ( preg_match("#([0-9]+),\ ?([0-9]+),\ ?([0-9]+),\ ?([0-9\.]+)#", $coul, $conv) ) {
+		$r = css_imbriques_conv_dec255($conv[1]);
+		$g = css_imbriques_conv_dec255($conv[2]);
+		$b = css_imbriques_conv_dec255($conv[3]);
+		$a = $conv[4];
+
+				$red = dechex($r);
+				$green = dechex($g);
+				$blue = dechex($b);
+				$alpha = dechex(round($a * 255));
+				
+				if (strlen($red) == 1) $red = "0".$red;
+				if (strlen($green) == 1) $green = "0".$green;
+				if (strlen($blue) == 1) $blue = "0".$blue;
+				if (strlen($alpha) == 1) $alpha = "0".$alpha;
+
+		
+		$coul = "$alpha$red$green$blue";
 	}
 	
 	return $coul;
@@ -216,7 +234,41 @@ function css_imbriques_traiter_spip($regs) {
 		case "gradient": 
 			// -spip-gradient: top, #000000, #ffffff;
 			// directions: "top" (vertical) ou "left" (horizontal)
-			if (preg_match("#\ ?(.*)\ ?\,\ ?(.*)\ ?\,\ ?(.*)\ ?#", $val, $conv)) {
+			if (preg_match("#\ ?(.*)\ ?\,\ ?rgba\((.*)\)\ ?\,\ ?rgba\((.*)\)\ ?#", $val, $conv)) {
+				$dir = strtolower($conv[1]);
+				$debut = "rgba(".$conv[2].")";
+				$fin = "rgba(".$conv[3].")";
+
+				$debut_ie = css_imbriques_couleurs_ie($debut);
+				$fin_ie = css_imbriques_couleurs_ie($fin);
+
+
+				if ($dir == "top") {
+					$ret = "background: -webkit-gradient(linear, left top, left bottom, from($debut), to($fin));";
+					$ret .= "background-image: -webkit-linear-gradient(top, $debut, $fin);";
+					$ret .= "background-image: -moz-linear-gradient(top, $debut, $fin);";
+					$ret .= "background-image: -ms-linear-gradient(top, $debut, $fin);";
+					$ret .= "background-image: -o-linear-gradient(top, $debut, $fin);";
+					$ret .= "background-image: linear-gradient(top, $debut, $fin);";
+					$ret .= "filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='$debut_ie', endColorstr='$fin_ie');";
+					// La version IE8 n'a pas l'air necessaire
+					//$ret .= "-ms-filter: \"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='$debut_ie', endColorstr='$fin_ie')\";";
+				}
+				else {
+				
+					$ret = "background: -webkit-gradient(linear, left top, right top, from($debut), to($fin));";
+					$ret .= "background-image: -webkit-linear-gradient(left, $debut, $fin);";
+					$ret .= "background-image: -moz-linear-gradient(left, $debut, $fin);";
+					$ret .= "background-image: -ms-linear-gradient(left, $debut, $fin);";
+					$ret .= "background-image: -o-linear-gradient(left, $debut, $fin);";
+					$ret .= "background-image: linear-gradient(left, $debut, $fin);";
+					$ret .= "filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='$debut_ie', endColorstr='$fin_ie');";
+					//$ret .= "-ms-filter: \"progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='$debut_ie', endColorstr='$fin_ie')\";";
+				}
+
+				
+			}
+			else if (preg_match("#\ ?(.*)\ ?\,\ ?(.*)\ ?\,\ ?(.*)\ ?#", $val, $conv)) {
 				$dir = strtolower($conv[1]);
 				$debut = $conv[2];
 				$fin = $conv[3];
