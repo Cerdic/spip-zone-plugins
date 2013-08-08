@@ -2,4 +2,7 @@
 	<langue code="en" />
 	<langue code="fr" />
 	<langue code="it" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-saveauto?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
 </traduction>
