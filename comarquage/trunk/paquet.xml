@@ -1,7 +1,7 @@
 <paquet
     prefix="comarquage"
     categorie="divers"
-    version="0.40.0"
+    version="0.40.1"
     etat="dev"
     compatibilite="[3.0.0;3.0.*]"
     logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
@@ -16,6 +16,6 @@
     <pipeline nom="insert_head_css" inclure="comarquage_pipeline.php" />
     <pipeline nom="taches_generales_cron" inclure="comarquage_pipeline.php" />
 
-    <menu nom="configurer_comarquage" titre="comarquage:titre_config" parent="menu_squelette" icone="prive/themes/spip/images/picto-comarquage-service-public-16.png" />
+    <menu nom="configurer_comarquage" titre="comarquage:titre_config" parent="menu_squelette" icone="images/picto-comarquage-service-public-16.png" />
 
 </paquet>

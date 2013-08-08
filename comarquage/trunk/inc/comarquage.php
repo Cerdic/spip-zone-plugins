@@ -22,7 +22,7 @@ define('_DIR_PLUGIN_COMARQUAGE_IMAGES',_DIR_PLUGIN_COMARQUAGE."images");
 define('_DIR_CACHE_COMARQUAGE_XML',"comarq_xml"); // sous repertoire de _DIR_CACHE
 define('_DIR_CACHE_COMARQUAGE_CACHE',"comarq_cache");// sous repertoire de _DIR_CACHE
 
-include_spip('inc/cfg_config');
+include_spip('inc/config');
 
 
 $local_refresh = lire_config('comarquage/local_refresh');
