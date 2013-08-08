@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_demo' => 'Testovacia stránka, ktorá sa nanovo inštaluje každú noc DEMO.SPIP.org umožňuje každému otestovať najnovšiu stabilnú verziu SPIPu (s výberom funkcie redaktora alebo administrátora) jedným klikom a bez inštalácie.',
 	'descriptif_site_spip_doc' => 'DOC.SPIP.org je referenčná stránka, kde nájdete podrobnosti, analýzy a komentáre ku každej funkcii zdrojového kódu SPIPu (jej názov, miesto a úloha pri používaní).',
 	'descriptif_site_spip_edgard' => 'Edgard je verný spoločník a neúnavný SPIP IRC, ktorý vždy pracuje múdro, s ľahkosťou a humorom. Zo svojho domova na EDGARD.SPIP.org prináša na IRC rady, odpovede a správny humor. Mimochodom, Edgard je robot (ale zdá sa, že o tom nevie)',
-	'descriptif_site_spip_forum' => 'FORUM.SPIP.org je stránka na výmenu informácií a vzájomnú pomoc pre používateľov SPIPu. Stránka, ktorá existuje v mnohých jazykoch, má niekoľko rubrík: Inštalácia a aktualizácia, Používanie súkromnej zóny, Spravovanie, Riadenie, Konfigurácia stránky, vytváranie šablón.', # MODIF
-	'descriptif_site_spip_herbier' => 'Herbár SPIPu nie je  katalóg odkazov ako iné. Nie. Je to <strong>fotoalbum</strong> zo stránok vytvorených v SPIPe, ktoré sú zachytené v istom okamihu svojej existencie na webe. Zachytáva históriu stránky, v prípade SPIPu od roku 2001. Tento herbár obsahuje stránky, ktoré sme tam chceli zaradiť, lebo sú zaujímavé svojím obsahom, ktorý je dobre zvýraznený, také ľudské dobrodružstvo, alebo len také stránky, ktoré sú atraktívne graficky. Stránky, ktoré si pamätáte, na ktoré sa vraciame, ktoré nejakým spôsobom uvádzajú čas poslednej aktualizácie.', # MODIF
+	'descriptif_site_spip_forum' => 'FORUM.SPIP.org je stránka na výmenu informácií a vzájomnú pomoc pre používateľov SPIPu. Stránka, ktorá existuje v mnohých jazykoch, má štyri hlavné rubriky: Inštalácia a aktualizácia, Používanie súkromnej zóny, Spravovanie, Riadenie a konfigurácia stránky a vytváranie šablón.',
+	'descriptif_site_spip_herbier' => 'Herbár SPIPu nie je  katalóg odkazov ako iné. Nie. Je to album suvenírov zo stránok vytvorených v SPIPe, ktoré sú zachytené v istom okamihu svojej existencie na webe. Zachytáva históriu stránky, v prípade SPIPu od roku 2001. Tento herbár obsahuje stránky, ktoré sme tam chceli zaradiť, lebo sú zaujímavé svojím obsahom, ktorý zvýrazňuje také ľudské dobrodružstvo, alebo  stránky, ktoré sú atraktívne vizuálne. Stránky, na ktoré si pamätáme, na ktoré sa vraciame, ktoré nejakým spôsobom poznačia svoju dobu.',
 	'descriptif_site_spip_info' => 'Na niekoľkých stránkach SPIP-INFO.net odpovedá na otázky tých, ktorí pochybujú o tom, že SPIP môže poskytnúť základňu pre internetovú stránku projektu, ktorý vyvíjajú. Jednotlivci, združenia, obchodné spoločnosti tu nájdu všetky informácie na to,  aby sa mohli správne rozhodnúť.',
 	'descriptif_site_spip_irc' => 'Komunita okolo SPIPu, ktorá nikdy nespí, založila kanál IRC (chat na internete v reálnom čase) otvorený pre všetkých: http://webchat.freenode.net/?channels=#spip',
 	'descriptif_site_spip_mag' => 'Opis stránky SPIP Mag\'',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_programmer' => 'PROGRAMMER.SPIP.org, stránka  určená skôr pre vývojárov alebo webmasterov, ktorí už vedia programovať v PHP, SQL, HTML, CSS a JavaScripte,  poskytuje množstvo funkcií (aplikácie API, nadmerné zaťaženie servera, prepojenia, atď.) SPIPu s mnohými príkladmi použitia kódu. Stránka ponúka používateľom možnosť stiahnuť si celý jej obsah vo formáte pdf so slobodnou licenciou cc-by-sa. PROGRAMMER.SPIP.org je dostupná vo francúzštine, v angličtine a v španielčine.',
 	'descriptif_site_spip_sedna' => 'SEDNA.SPIP.org je agregátor RSS všetkých správ galaxie SPIPu. Najnovšie informácie z viac ako 70 stránok, ktoré sa točia okolo SPIPu a na ktorých sa dá ľahko vyhľadávať.',
 	'descriptif_site_spip_test' => 'Na GRML.EU ľahko nainštalujete svoju vlastnú stránku v SPIPe do najnovšej verzie vo vývoji. Vďaka možnostiam spoločného používania SPIPu: jedinou inštaláciou "jadra" pre viacero stránok ste "doma", na "svojej" stránke so "svojimi" nastaveniami. Vhodné najmä na nácvik používania SPIPu.',
-	'descriptif_site_spip_trad' => 'L\'espace des traducteurs accueille tous ceux qui souhaitent aider la communauté des utilisateurs de SPIP en participant aux travaux de traduction de SPIP lui-même et de ses diverses contributions.', # NEW
+	'descriptif_site_spip_trad' => 'Prekladateľská zóna privíta všetkých, ktorí chcú pomôcť používateľom SPIPu  prekladom samotného SPIPu a jeho rôznych rozšírení.',
 	'descriptif_site_spip_twit' => 'SPIP.ORG umožňuje používateľom posielať na internet krátke správy (maximálne 140 znakov) na verejne prístupnú stránku alebo ich priateľom. Správy sa dajú uverejniť cez internetovú stránku, kanál RSS alebo odkazovač.',
 	'descriptif_site_spip_user' => 'SPIP@REZO.net je diskusná skupina na vzájomnú pomoc používateľov SPIPu. Archívy tejto diskusnej skupiny sú dostupné na http://archives.rezo.net/archives/spip.mbox/ alebo dokonca v podobe blogu na http://blog.gmane.org/gmane.comp.web.spip.user.',
 	'descriptif_site_spip_video' => 'Opis stránky Videá',
@@ -60,12 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_trad' => 'Preložiť SPIP',
 	'nom_site_spip_twit' => 'SPIP.org',
 	'nom_site_spip_user' => 'SPIP User',
-	'nom_site_spip_video' => 'Multimédiá SPIPu', # MODIF
+	'nom_site_spip_video' => 'Médiá SPIPu',
 	'nom_site_spip_zine' => 'SPIPZine',
 	'nom_site_spip_zone' => 'SPIP Zone',
 
 	// S
-	'slogan_boussole_spip' => 'Obľúbené adresy galaxie SPIPu!', # MODIF
+	'slogan_boussole_spip' => 'Stratili ste sa v galaxii SPIPu!',
 	'slogan_site_spip_blog' => 'O slobodnom softvére a jednoduchosti ',
 	'slogan_site_spip_contrib' => 'Rozhranie príspevkov k SPIP',
 	'slogan_site_spip_core' => 'Rozhranie vývoja verzií SPIPu',
