@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_adresse_existante' => 'Diese Adresse ist bereits in der Liste eingetragen.',
 	// I
-	'icone_creer_mailsubscriber' => 'Abeonnement hinzufügen',
+	'icone_creer_mailsubscriber' => 'Abonnement hinzufügen',
 	'icone_modifier_mailsubscriber' => 'Abonnement ändern',
 	'info_1_mailsubscriber' => '1 Abonnent',
 	'info_aucun_mailsubscriber' => 'Keine Abonnenten',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_sujet_email' => '[@nom_site_spip@] Newsletter-Anmeldung',
 	'subscribe_titre_email' => 'Newsletter-Anmeldung',
-	'subscribe_texte_email_1' => 'Ihre Nesletter-Anmeldung mit der Adresse email @email@ wurde entgegengenommen.',
+	'subscribe_texte_email_1' => 'Ihre Newsletter-Anmeldung mit der Adresse email @email@ wurde entgegengenommen.',
 	'subscribe_deja_texte' => 'Die Mailadresse @email@ befindet sich bereits in der Empfängerliste.',
 	'subscribe_texte_email_2' => 'Vielen Dank für Ihr Interesse an @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'Falls ein Irrtum vorliegt, oder Sie Ihre Meinung ändern, können Sie sich jederzeit bei der folgenden Adresse abmelden : @url_unsubscribe@',
