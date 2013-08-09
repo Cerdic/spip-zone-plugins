@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     Dans votre squelette, tapez les code suivant : <br />
 	
+	<code><INCLURE{fond=modeles/apropos_lister_tout}></code> pour afficher la liste de tous plugins tiers et plugins verrouill&eacute;s actifs et inactifs ;<br />
 	<code><INCLURE{fond=modeles/apropos_liste}></code> pour afficher la liste des plugins et plugins verrouill&eacute;s actifs ;<br />
 	<code><INCLURE{fond=modeles/apropos_nombre></code> pour n\'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs ;<br />
 	<code><INCLURE{fond=modeles/apropos_plugins></code> pour n\'afficher que le nombre de plugins actifs ;<br />
@@ -27,7 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<code><INCLURE{fond=modeles/apropos}{prefixe=le préfixe du plugin}></code> si vous souhaitez afficher la description compl&egrave;te d\'un plugin sp&eacute;cifique. Ainsi, par exemple, pour afficher dans un article la description compl&egrave;te du plugin À propos des plugins, utilisez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>.<hr />
 	
 	Dans un article, &eacute;crivez :<br>
-
+	
+	<code><apropos|lister_tout></code> pour afficher la liste de tous plugins tiers et plugins verrouill&eacute;s actifs et inactifs ;<br />
 	<code><apropos|liste></code> pour afficher la liste des plugins et plugins verrouill&eacute;s actifs ;<br />
 	<code><apropos|nombre></code> pour n\'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs ;<br />
 	<code><apropos|plugins></code> pour n\'afficher que le nombre de plugins actifs ;<br />

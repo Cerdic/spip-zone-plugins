@@ -16,14 +16,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 // E
 	'extensions_automatiquement' => 'locked plugins automaticly enabled',
-	'erreur_prefixe' => 'Vous avez entr&eacute; <b>@params@</b>',
+	'extensions_tout' => 'plugins verrouill&eacute;s à disposition',
+	'erreur_prefixe' => 'You type <b>@params@</b>',
 	
 // L
 	'les_plugins' => 'It use these plugins:',
+	'plugins_tout' => 'Third plugins.',
 
 //P
 	
 	'plugins_actives' => 'plugins are enabled.',
+	'plugins_inactives' => 'plugins are disabled.',
+	'plugins_tout' => 'plugins tiers.',
 
 // S
 	'site_utilise' => 'This site use a <a href=\"http://en.wikipedia.org/wiki/Content_management_system\" title=\"Definition of a Content management system on Wikipedia\">CMS</a>. It is developed and works with <a href=\"http://www.spip.net/rubrique25.html\" title=\"The official site of SPIP\">SPIP</a>, version',

@@ -10,11 +10,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'extensions_automatiquement' => 'plugins verrouill&eacute;s sont automatiquement activ&eacute;s',
+	'extensions_tout' => 'plugins verrouill&eacute;s à disposition',
 	'erreur_prefixe' => 'Vous avez entr&eacute; <b> @params@ </b>',
 	
-	// P
+	// L
 	'les_plugins' => 'Il utilise les plugins suivants :',
+
+	// P
 	'plugins_actives' => 'plugins tiers sont activés.',
+	'plugins_inactives' => 'plugins tiers sont inactifs.',
+	'plugins_tout' => 'plugins tiers à disposition.',
 
 	// S
 	'site_utilise' => 'Ce site utilise un <a href="http://fr.wikipedia.org/wiki/Systeme_de_gestion_de_contenu" title="D&eacute;finition de CMS sur Wikipedia">CMS</a>. Il est &eacute;labor&eacute; et tourne avec <a href="http://www.spip.net/fr" title="Aller sur le site officiel de SPIP">SPIP</a> version ',

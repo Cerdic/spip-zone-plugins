@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	You can use the new balise #APROPOS into your templates. This balise has 4 parameters:<br />
 
+	- if you wrote: <code><INCLURE{fond=modeles/apropos_lister_tout}></code>, you get the list of the actives and inactives plugins,
+
 	- if you wrote: <code><INCLURE{fond=modeles/apropos_liste}></code>, you get the list of the actives plugins,
 
 	- if you wrote: <code><INCLURE{fond=modeles/apropos_nombre}></code>, you get the number of all the actives plugins AND locked plugins.
@@ -37,6 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 
 	To personalize the informations which are displayed before and after the list, modify the file modeles/apropos_liste.html after copying it into your folder squelettes/modeles. 
+
+	<br />To view the list of all the activated and inactivated in an article, you must write <code><apropos|lister_tout></code>. 
 
 	<br />To view the list in an article, you must write <code><apropos|liste></code>. 
 
