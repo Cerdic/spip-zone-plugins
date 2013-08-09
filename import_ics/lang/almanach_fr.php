@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_almanach' => 'Ajouter cet almanach',
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.
 ',
+	//C
+	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer ces événements ?',
 
 	// E
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés',

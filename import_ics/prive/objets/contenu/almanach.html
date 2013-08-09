@@ -50,7 +50,7 @@
 	<BOUCLE_nb_evenement(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>
 	</BOUCLE_nb_evenement>
 	[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
-		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,'','','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
+		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
 	]	
 	</B_nb_evenement>
 
