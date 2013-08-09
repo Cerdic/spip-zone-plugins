@@ -299,7 +299,7 @@ Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://www.spip-contrib.ne
 	'le' => 'Am',
 	'liste_des_messages' => 'Liste der Posts',
 	'liste_inscrits' => 'Mitgliederliste',
-	'login' => 'Verbinden',
+	'login' => 'Login',
 
 	// M
 	'maintenance' => 'Wartung',
