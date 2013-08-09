@@ -25,4 +25,9 @@ function import_ics_optimiser_base_disparus($flux){
 	return $flux;
 }
 
+
+function import_ics_taches_generales_cron($taches_generales){
+	$taches_generales['import_ics_synchro'] = 3600*24;
+	return $taches_generales;
+}
 ?>

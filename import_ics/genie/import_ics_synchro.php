@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-genie_synchro_dist(){
+genie_synchro_dist($t){
 
 // récupérer url fichier distant
 // parser le fichier distant
