@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
+	'retour_liste' => 'Retour à la liste',
 
 	// T
 	'texte_ajouter_almanach' => 'Ajouter un almanach',
