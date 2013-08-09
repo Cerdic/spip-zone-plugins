@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_double_optin' => 'Validation des inscriptions',
+	'label_double_optin' => 'Überprüfung der Anmeldungen',
 	'label_double_optin_0' => 'Einfache Anmeldung',
 	'label_double_optin_1' => 'Doppeltes Opt-in (Bestätigungsmail mit Überprüfungslink)',
 
