@@ -3,7 +3,7 @@
 	<!-- Sites de reference SPIP -->
 	<groupe type="reference">
 		<site alias="net" src="http://www.spip.net/" actif="oui" />
-		<site alias="doc" src="http://doc.spip.org/" actif="oui" />
+		<site alias="doc" src="http://code.spip.net/" actif="oui" />
 		<site alias="programmer" src="http://programmer.spip.net/" actif="oui" />
 		<site alias="core" src="http://core.spip.org/" actif="oui" />
 		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
