@@ -56,7 +56,7 @@ function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 			if ($infos_texte['caracteres_texte_lien_min'] < 3) {
 				$erreurs['texte_message'] = _T('nospam:erreur_spam');
 			}
-			// si le texte contient plus de trois lien = spam !
+			// si le texte contient plus de trois liens = spam !
 			if ($infos_texte['nombre_liens'] >= 3)
 				$erreurs['texte_message'] = _T('nospam:erreur_spam');
 		}
