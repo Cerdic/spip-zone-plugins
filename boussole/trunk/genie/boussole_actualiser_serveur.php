@@ -13,11 +13,11 @@ function genie_boussole_actualiser_serveur_dist($last) {
 	if ($boussoles) {
 		// Génération du cache de chaque boussole disponible pour l'action serveur_informer_boussole
 		foreach($boussoles as $_alias => $_infos) {
-			boussole_cacher($_alias, $_infos['prefixe']);
+			boussole_cacher_xml($_alias, $_infos['prefixe']);
 		}
 
 		// Génération du cache de la liste des boussoles disponibles pour l'action serveur_lister_boussoles
-		boussole_lister($boussoles);
+		boussole_cacher_liste($boussoles);
 	}
 
 	return 1;

@@ -4,12 +4,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Ajout de la boussole dans la base de donnees
+ * Ajout de la boussole dans la base de donnees du site client
  *
+ * @package	BOUSSOLE\Client
  * @api
  *
  * @param string $boussole	Alias de la boussole
  * @param string $serveur	Alias du serveur fournissant les données sur la boussole
+ *
  * @return array
  */
 function boussole_ajouter($boussole, $serveur='spip') {
@@ -90,9 +92,11 @@ function boussole_ajouter($boussole, $serveur='spip') {
 /**
  * Suppression de la boussole dans la base de donnees
  *
+ * @package	BOUSSOLE\Client
  * @api
  *
  * @param string $aka_boussole	alias de la boussole
+ *
  * @return boolean
  */
 function boussole_supprimer($aka_boussole) {
@@ -117,8 +121,11 @@ function boussole_supprimer($aka_boussole) {
  * Renvoie, a partir du fichier xml de la boussole, un tableau des sites de la boussole
  * Les cles du tableau correspondent au nom des champs en base de donnees
  *
+ * @package	BOUSSOLE\Client
+ *
  * @param string $boussole	Alias de la boussole
  * @param string $serveur	Alias du serveur fournissant les données sur la boussole
+ *
  * @return array()
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {

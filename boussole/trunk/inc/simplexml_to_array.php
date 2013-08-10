@@ -6,7 +6,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Transforme un objet SimpleXML en tableau PHP
  *
+ * @package	BOUSSOLE\Outils
+ *
  * @param object $obj
+ *
  * @return array
 **/
 // http://www.php.net/manual/pt_BR/book.simplexml.php#108688

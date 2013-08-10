@@ -6,16 +6,18 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
 /**
- * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à parti d'un xml déjà traduit.
+ * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à partir d'un xml déjà traduit.
  * Ce cache est renvoyé sur l'action serveur_informer_boussole
  *
+ * @package	BOUSSOLE\Serveur
  * @api
  *
  * @param string	$alias
  * @param string	$prefixe_plugin
+ *
  * @return bool
  */
-function boussole_cacher($alias, $prefixe_plugin='') {
+function boussole_cacher_xml($alias, $prefixe_plugin='') {
 	$retour = false;
 
 	/* Détermination du mode de génération du fichier cache xml
@@ -53,11 +55,14 @@ function boussole_cacher($alias, $prefixe_plugin='') {
  * Génération du cache de la liste des boussoles disponibles
  * Ce cache est renvoyé sur l'action serveur_lister_boussoles
  *
+ * @package	BOUSSOLE\Serveur
  * @api
  *
  * @param array $boussoles
+ *
+ * @return bool
  */
-function boussole_lister($boussoles) {
+function boussole_cacher_liste($boussoles) {
 	$retour = false;
 
 	if ($boussoles) {
@@ -110,10 +115,12 @@ function boussole_lister($boussoles) {
 /**
  * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
  *
+ * @package	BOUSSOLE\Serveur
  * @api
  *
  * @param string $url
  * @param array &$erreur
+ *
  * @return boolean
  */
 
@@ -142,10 +149,13 @@ function boussole_valider_xml($url, &$erreur) {
 
 /**
  * Lecture du xml non traduit (donc issu d'un plugin) et génération du xml traduit et incluant les logos
+
+ * @package	BOUSSOLE\Serveur
  *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
  * @param string	$prefixe_plugin
+ *
  * @return bool
  */
 function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
@@ -166,8 +176,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 		// -- url absolue du logo à fournir dans la balise
 		$att_boussole['logo'] = url_absolue(find_in_path("images/boussole/boussole-${alias_boussole}.png"));
 		// -- insertion de la version du plugin comme version du xml
-		$versionner = charger_filtre('info_plugin');
-		$att_boussole['version'] = $versionner(strtoupper($prefixe_plugin), 'version');
+		$att_boussole['version'] = acquerir_version($prefixe_plugin);
 		// -- insertion de l'alias du serveur
 		$att_boussole['serveur'] = _BOUSSOLE_ALIAS_SERVEUR;
 		// -- insertion du pattern pour le sha1 du contenu
@@ -229,8 +238,11 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 /**
  * Lecture du xml traduit (donc non issu d'un plugin) et génération du xml complet incluant les logos
  *
+ * @package	BOUSSOLE\Serveur
+ *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
+ *
  * @return bool
  */
 function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
@@ -355,12 +367,44 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 
 
 /**
+ * Récupération de la version d'un plugin connu par son préfixe.
+ * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
+ * de lire la version à jour
+ *
+ * @package	BOUSSOLE\Outils
+ *
+ * @param $prefixe
+ *
+ * @return string
+ */function acquerir_version($prefixe) {
+
+	include_spip('inc/plugin');
+	$prefixe = strtoupper($prefixe);
+	$plugins_actifs = liste_plugin_actifs();
+
+	if (!is_dir($plugins_actifs[$prefixe]['dir_type']))
+		$dir_plugins = constant($plugins_actifs[$prefixe]['dir_type']);
+	else
+		$dir_plugins = $plugins_actifs[$prefixe]['dir_type'];
+
+	$informer = charger_fonction('get_infos','plugins');
+	$infos = $informer($plugins_actifs[$prefixe]['dir'], true, $dir_plugins);
+	$version = (is_array($infos) AND isset($infos['version'])) ? $infos['version'] : '';
+
+	return $version;
+}
+
+
+/**
  * Insertion d'un balise ouvrante, fermante ou vide
+ *
+ * @package	BOUSSOLE\Outils
  *
  * @param string	$type
  * @param string	$balise
  * @param array		$attributs
  * @param int		$indentation
+ *
  * @return string
  */
 function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentation=0) {
@@ -385,10 +429,13 @@ function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentat
 /**
  * Insertion d'une balise complète <nom>, <slogan> ou <description> incluant les traductions en <multi>
  *
+ * @package	BOUSSOLE\Outils
+ *
  * @param string	$alias
  * @param string	$type_objet
  * @param string	$objet
  * @param string	$indentation
+ *
  * @return string
  */
 function inserer_traductions($alias, $type_objet, $objet, $indentation=0) {
@@ -450,7 +497,10 @@ function inserer_traductions($alias, $type_objet, $objet, $indentation=0) {
 /**
  * Contruction de la chaine de tabulations correspondant au décalage souhaité
  *
+ * @package	BOUSSOLE\Outils
+ *
  * @param int	$decalage
+ *
  * @return string
  */
 function indenter($decalage) {
