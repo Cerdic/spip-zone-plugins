@@ -47,7 +47,12 @@
 	<BOUCLE_lesplugins_inactifs(PAQUETS plugins) {actif=non} {tout}{id_paquet}>
 	<div class='apropos-resume'>
 	<div class='apropos-icon'>
-		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{"<img src=\"#CHEMIN{img/generique.png}" alt="" />"})] 
+
+		<BOUCLE_logo(PAQUETS){id_plugin}{!par version}{0,1}>[
+		(#LOGO|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|image_nb)
+		]</BOUCLE_logo>
+
+
 	</div>
 	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span> 
 	<span class='apropos-version'>version [#VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]], #ETAT.</span>
