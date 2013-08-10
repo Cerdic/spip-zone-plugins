@@ -6,25 +6,27 @@
 </div>]
 
 [<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
-	<label><:almanach:label_url:> : </label>
+	<label><strong><:almanach:label_url:> : </strong></label>
 	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
 </div>]
 
 <div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
-<BOUCLE_details_article_lie(ARTICLES){id_article=#ID_ARTICLE}>
-	<label><:almanach:label_id_article:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>  #TITRE (article n°#ID_ARTICLE)</span> 
-</BOUCLE_details_article_lie>
+<label><strong><:almanach:label_id_article:> :</strong> </label> 
+<span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>
+	#INFO_TITRE{article,#ID_ARTICLE}&nbsp;(article n°#ID_ARTICLE)
+</span>	
 </div>
 
 <div class="champ contenu_id_mot[ (#ID_MOT*|strlen|?{'',vide})]">
 <BOUCLE_mot_lie(MOTS){id_mot=#ID_MOT}>
-	<label><:almanach:label_id_mot:></label>
+	<label><strong><:almanach:label_id_mot:></strong></label>
 	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'>  #TITRE (mot n°#ID_MOT)</span> 	
 </BOUCLE_mot_lie>
 
-
+<p></p>
 </div>
+
+
 
 <div>
 	[(#REM) On boucle sur la table de liens pour récupérer l'id de l'objet evenement voulu puis on boucle sur la table evenement pour recuperer les détails de l'événement ]

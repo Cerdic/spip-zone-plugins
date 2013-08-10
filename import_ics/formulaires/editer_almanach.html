@@ -1,6 +1,8 @@
 <div class="ajax">
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
-	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>
+	[(#REM) titre pour un formulaire en plusieurs étapes
+	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>]
+	<h3> Création d'un almanach et importation d'événements</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -32,9 +34,9 @@
 				label=<:almanach:label_url:>,
 				explication=<:almanach:explication_url:> })]
 
-			[(#SAISIE{selecteur_rubrique_article,id_article,obligatoire=oui,
+			[(#SAISIE{input, id_article, obligatoire=oui,
 				label=<:almanach:label_id_article:>,
-				attention=vous devez avoir affecté un mot clé à cet article,
+				explication=<:almanach:explication_id_article:>,
 			})]
 
 			[(#SAISIE{selection, id_mot, obligatoire=oui,

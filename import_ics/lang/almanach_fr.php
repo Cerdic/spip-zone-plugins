@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer ces événements ?',
 
 	// E
-	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés',
+	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_titre' => 'Titre de l\'almanach',
 	'explication_url' => 'URL d\'origine du calendrier',
 
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_id_article' => 'Article d\'accueil de l\'almanach',
-	'label_id_mot' => 'Les événements de cet almanach sont, par défaut, du type :',
+	'label_id_mot' => 'Type des événements de cet almanach :',
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
 

@@ -18,20 +18,6 @@ include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse d
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
- * @param int|string $id_almanach
- *     Identifiant du almanach. 'new' pour un nouveau almanach.
- * @param string $retour
- *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un almanach source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du almanach, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
- * @return string
- *     Hash du formulaire
  */
 function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return serialize(array(intval($id_almanach)));
@@ -41,23 +27,6 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  * Chargement du formulaire d'édition de almanach
  *
  * Déclarer les champs postés et y intégrer les valeurs par défaut
- *
- * @uses formulaires_editer_objet_charger()
- *
- * @param int|string $id_almanach
- *     Identifiant du almanach. 'new' pour un nouveau almanach.
- * @param string $retour
- *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un almanach source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du almanach, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
- * @return array
- *     Environnement du formulaire
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
@@ -69,24 +38,6 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
 /**
  * Vérifications du formulaire d'édition de almanach
  *
- * Vérifier les champs postés et signaler d'éventuelles erreurs
- *
- * @uses formulaires_editer_objet_verifier()
- *
- * @param int|string $id_almanach
- *     Identifiant du almanach. 'new' pour un nouveau almanach.
- * @param string $retour
- *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un almanach source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du almanach, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
- * @return array
- *     Tableau des erreurs
  */
 function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	//version de base de la fabrique
@@ -103,22 +54,6 @@ function formulaires_editer_almanach_verifier_1_dist($id_almanach='new', $retour
  *
  * Traiter les champs postés
  *
- * @uses formulaires_editer_objet_traiter()
- *
- * @param int|string $id_almanach
- *     Identifiant du almanach. 'new' pour un nouveau almanach.
- * @param string $retour
- *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un almanach source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du almanach, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
- * @return array
- *     Retours des traitements
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
@@ -171,7 +106,8 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
 	#on insere les infos des événements dans la base 
-    $id_article = _request('id_article');
+	# ca ce sera pour quand j'arriverai à faire fonctionner le selecteur d'articles $id_article = preg_replace('(article\|)','',_request('id_article')); #le selecteur d'article fournit un tableau, on se débarasse du mot article dedans et on appellera ensuite la première valeur (il pourrait y avoir des saisies multiples même si ici on ne les autorise pas)
+	$id_article = _request('id_article'); 
 	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid,'sequence'=>$sequence));
 	
 	#on associe l'évéenement à l'almanach
