@@ -1,0 +1,142 @@
+
+<div class="apropos">
+<!-- Liste des plugins tiers actifs et inactifs -->
+
+<B_pluginstiers>
+<h2>[(#TOTAL_BOUCLE)] <:apropos:plugins_tout:></h2>
+<BOUCLE_pluginstiers(spip_paquets){constante=_DIR_PLUGINS} {par prefixe}>
+</BOUCLE_pluginstiers>
+</B_pluginstiers>
+
+<!-- affiche les plugins tiers activés -->
+
+<B_pluginstiers_actifs>
+	<h3>[(#TOTAL_BOUCLE)] plugins tiers actifs</h3>
+
+<BOUCLE_pluginstiers_actifs(spip_paquets){constante=_DIR_PLUGINS} {actif=oui} {par prefixe}>
+	<BOUCLE_lesplugins_actifs(PAQUETS plugins) {actif=oui} {tout}{id_paquet}>
+	<div class='apropos-resume'>
+	<div class='apropos-icon'>
+		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{apropos/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
+	</div>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span> 
+	<span class='apropos-version'>version [#VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]], #ETAT.</span>
+	
+	<div class='apropos-description'>
+		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
+	</div>
+	<span class='apropos-auteur'>
+		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
+		<span class='apropos-etat'><br />
+			[(#NBR_SITES|?{
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],<:svpstats:info_nbr_sites_0:>}).]
+			<br />
+		</span>
+	</div>
+	</BOUCLE_lesplugins_actifs>
+
+</BOUCLE_pluginstiers_actifs>
+</B_pluginstiers_actifs>
+
+<!-- affiche les plugins tiers désactivés -->
+
+<B_pluginstiers_inactifs>
+	<h3>[(#TOTAL_BOUCLE)] plugins tiers inactifs</h3>
+<BOUCLE_pluginstiers_inactifs(spip_paquets){constante=_DIR_PLUGINS} {actif=non} {par prefixe}>
+
+	<BOUCLE_lesplugins_inactifs(PAQUETS plugins) {actif=non} {tout}{id_paquet}>
+	<div class='apropos-resume'>
+	<div class='apropos-icon'>
+		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{"<img src=\"#CHEMIN{img/generique.png}" alt="" />"})] 
+	</div>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span> 
+	<span class='apropos-version'>version [#VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]], #ETAT.</span>
+	
+	<div class='apropos-description'>
+		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
+	</div>
+	<span class='apropos-auteur'>
+		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
+		<span class='apropos-etat'><br />
+			[(#NBR_SITES|?{
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],<:svpstats:info_nbr_sites_0:>}).]
+			<br />
+		</span>
+	</div>
+	</BOUCLE_lesplugins_inactifs>
+
+</BOUCLE_pluginstiers_inactifs>
+</B_pluginstiers_inactifs>
+
+<!-- Liste des plugins verrouillés, anciennement extensions, activés -->
+
+<B_total_extensions>
+<h2>[(#TOTAL_BOUCLE) <:apropos:extensions_tout:>.]</h2>
+<BOUCLE_total_extensions(spip_paquets){constante=_DIR_PLUGINS_DIST} {par prefixe}>
+</BOUCLE_total_extensions>
+</B_total_extensions>
+
+<B_extensions_actives>
+	<h3>[(#TOTAL_BOUCLE) plugins verrouillés actifs.]</h3>
+<BOUCLE_extensions_actives(spip_paquets){constante=_DIR_PLUGINS_DIST} {actif=oui} {par prefixe}>
+<B_lesextensions_actives>
+	<BOUCLE_lesextensions_actives(PAQUETS plugins){tout}{actif=oui}{id_paquet}>
+	<div class='apropos-resume'>
+	<div class='apropos-icon'>
+		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{plugins/apropos_3/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
+	</div>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span>
+	<span class='apropos-version'>version #VERSION, #ETAT.</span>
+	
+	<div class='apropos-description'>
+		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
+	</div>
+	<span class='apropos-auteur'>
+		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
+		<span class='apropos-etat'><br />
+			[(#NBR_SITES|>{0}|oui)
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n}).]
+			]
+		</span>
+	</div>
+	</BOUCLE_lesextensions_actives>
+</B_lesextensions_actives>
+</BOUCLE_extensions_actives>
+</B_extensions_actives>
+
+<B_extensions_inactives>
+	<h3>[(#TOTAL_BOUCLE) plugins verrouillés actifs.]</h3>
+<BOUCLE_extensions_inactives(spip_paquets){constante=_DIR_PLUGINS_DIST} {actif=non} {par prefixe}>
+<B_lesextensions_inactives>
+	<BOUCLE_lesextensions_inactives(PAQUETS plugins){tout}{actif=non}{id_paquet}>
+	<div class='apropos-resume'>
+	<div class='apropos-icon'>
+		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{plugins/apropos_3/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
+	</div>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span>
+	<span class='apropos-version'>version #VERSION, #ETAT.</span>
+	
+	<div class='apropos-description'>
+		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
+	</div>
+	<span class='apropos-auteur'>
+		[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]</span>
+		<span class='apropos-etat'><br />
+			[(#NBR_SITES|>{0}|oui)
+			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n}).]
+			]
+		</span>
+	</div>
+	</BOUCLE_lesextensions_inactives>
+</B_lesextensions_inactives>
+<B_extensions_inactives>
+</BOUCLE_extensions_inactives>
+
+
+
+<br />
+
+<!-- Informations en pied de liste sur spip-contrib et plugin-spip.net -->
+<:apropos:spip_contrib:>
+<:apropos:spip_plugins:>
+</div>
