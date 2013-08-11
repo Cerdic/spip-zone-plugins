@@ -129,13 +129,29 @@ function formulaires_ieconfig_export_traiter_dist() {
 		if(in_array($prefixe,$export_metas)) {
 			$export_plugin = array();
 			if(isset($data['metas_brutes']))
-				foreach(explode(',',$data['metas_brutes']) as $meta)
-					if (isset($GLOBALS['meta'][$meta]))
+				foreach(explode(',',$data['metas_brutes']) as $meta) {
+					// On teste le cas ou un prefixe est indique (dernier caractere est *)
+					if (substr($meta,-1)=='*') {
+						$p = substr($meta,0,-1);
+						foreach ($GLOBALS['meta'] as $m => $v) {
+							if (substr($m,0,strlen($p))==$p)
+								$export_plugin[$m] = $v;
+						}
+					} elseif (isset($GLOBALS['meta'][$meta]))
 						$export_plugin[$meta] = $GLOBALS['meta'][$meta];
+				}
 			if(isset($data['metas_serialize']))
-				foreach(explode(',',$data['metas_serialize']) as $meta)
-					if (isset($GLOBALS['meta'][$meta]))
+				foreach(explode(',',$data['metas_serialize']) as $meta) {
+					// On teste le cas ou un prefixe est indique (dernier caractere est *)
+					if (substr($meta,-1)=='*') {
+						$p = substr($meta,0,-1);
+						foreach ($GLOBALS['meta'] as $m => $v) {
+							if (substr($m,0,strlen($p))==$p)
+								$export_plugin[$m] = unserialize($v);
+						}
+					} elseif (isset($GLOBALS['meta'][$meta]))
 						$export_plugin[$meta] = unserialize($GLOBALS['meta'][$meta]);
+				}
 			if (count($export_plugin)>0)
 				$export[$prefixe] = $export_plugin;
 		}

@@ -181,13 +181,29 @@ function formulaires_ieconfig_import_traiter_dist(){
 		foreach (pipeline('ieconfig_metas', array()) as $prefixe => $data){
 			if (in_array($prefixe, $import_metas) && isset($config[$prefixe])){
 				if (isset($data['metas_brutes']))
-					foreach (explode(',', $data['metas_brutes']) as $meta)
-						if (isset($config[$prefixe][$meta]))
+					foreach (explode(',', $data['metas_brutes']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta,-1)=='*') {
+							$p = substr($meta,0,-1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m,0,strlen($p))==$p)
+									ecrire_config($m . '/', $v);
+							}
+						} elseif (isset($config[$prefixe][$meta]))
 							ecrire_config($meta . '/', $config[$prefixe][$meta]);
+					}
 				if (isset($data['metas_serialize']))
-					foreach (explode(',', $data['metas_serialize']) as $meta)
-						if (isset($config[$prefixe][$meta]))
+					foreach (explode(',', $data['metas_serialize']) as $meta) {
+						// On teste le cas ou un prefixe est indique (dernier caractere est *)
+						if (substr($meta,-1)=='*') {
+							$p = substr($meta,0,-1);
+							foreach ($config[$prefixe] as $m => $v) {
+								if (substr($m,0,strlen($p))==$p)
+									ecrire_config($m . '/', serialize($v));
+							}
+						} elseif (isset($config[$prefixe][$meta]))
 							ecrire_config($meta . '/', serialize($config[$prefixe][$meta]));
+					}
 			}
 		}
 

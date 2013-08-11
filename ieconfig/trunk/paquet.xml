@@ -1,8 +1,8 @@
 <paquet
 	prefix="ieconfig"
 	categorie="maintenance"
-	version="1.2.2"
-	etat="test"
+	version="1.3.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/ieconfig-32.png"
 	documentation="http://contrib.spip.net/spip.php?article3703"
