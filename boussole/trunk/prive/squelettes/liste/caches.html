@@ -1,0 +1,48 @@
+[(#REM) <!-- Liste des caches :
+
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- where		: condition supplementaire construite par l'appelant (exclusion de certaines lignes par ex)
+ -->]
+
+[(#SET{sens_tri,#ARRAY{
+	maj, -1,
+	nom, 1
+}})]
+<B_liste_caches>
+#ANCRE_PAGINATION
+<div class="liste-objets boussoles">
+	<table class="spip liste">
+		[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale" scope="col">[(#TRI{nom, <:boussole:colonne_fichier_cache:>, ajax})]</th>
+				<th class="date" scope="col">[(#TRI{maj, <:boussole:label_actualise_le:>, ajax})]</th>
+				<th class="texte" scope="col"><:boussole:colonne_description_cache:></th>
+				<th class="texte" scope="col"><:boussole:colonne_prefixe_plugin:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_liste_caches(DATA) {source table, #VAL|lister_caches}{where?}{tri #ENV{par, maj}, #GET{sens_tri}}{pagination #ENV{pas, 5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="titre principale">
+					[<a[ href="(#URL_ACTION_AUTEUR{serveur_telecharger_cache,#VALEUR|table_valeur{fichier}})"]>
+						(#VALEUR|table_valeur{nom})
+					</a>]
+				</td>
+				<td class="date">[(#VALEUR|table_valeur{maj})]</td>
+				<td class="texte">[(#VALEUR|table_valeur{description})]</td>
+				<td class="texte">[(#VALEUR|table_valeur{plugin})]</td>
+			</tr>
+</BOUCLE_liste_caches>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_caches>
+	#BOITE_OUVRIR{'','notice'}
+		<p><:boussole:info_liste_aucun_cache:></p>
+	#BOITE_FERMER
+<//B_liste_caches>

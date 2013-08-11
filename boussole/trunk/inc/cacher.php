@@ -5,6 +5,37 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_BOUSSOLE_PATTERN_SHA'))
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
+
+/**
+ * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste
+ * de ces boussoles.
+ *
+ * @package BOUSSOLE\Serveur
+ * @api
+ *
+ * @return bool
+ */
+function boussole_actualiser_caches() {
+
+	// Acquisition de la liste des boussoles disponibles sur le serveur.
+	// (on sait déjà que le mode serveur est actif)
+	$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
+	$boussoles = pipeline('declarer_boussoles', $boussoles);
+
+	if ($boussoles) {
+		// Génération du cache de chaque boussole disponible pour l'action serveur_informer_boussole
+		foreach($boussoles as $_alias => $_infos) {
+			boussole_cacher_xml($_alias, $_infos['prefixe']);
+		}
+
+		// Génération du cache de la liste des boussoles disponibles pour l'action serveur_lister_boussoles
+		boussole_cacher_liste($boussoles);
+	}
+
+	return true;
+}
+
+
 /**
  * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à partir d'un xml déjà traduit.
  * Ce cache est renvoyé sur l'action serveur_informer_boussole
@@ -176,7 +207,9 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 		// -- url absolue du logo à fournir dans la balise
 		$att_boussole['logo'] = url_absolue(find_in_path("images/boussole/boussole-${alias_boussole}.png"));
 		// -- insertion de la version du plugin comme version du xml
-		$att_boussole['version'] = acquerir_version($prefixe_plugin);
+		$informer = charger_fonction('informer_plugin', 'inc');
+		$infos_plugin = $informer($prefixe_plugin);
+		$att_boussole['version'] = (isset($infos_plugin['version']) ? $infos_plugin['version'] : '');
 		// -- insertion de l'alias du serveur
 		$att_boussole['serveur'] = _BOUSSOLE_ALIAS_SERVEUR;
 		// -- insertion du pattern pour le sha1 du contenu
@@ -363,35 +396,6 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 	}
 
 	return $retour;
-}
-
-
-/**
- * Récupération de la version d'un plugin connu par son préfixe.
- * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
- * de lire la version à jour
- *
- * @package	BOUSSOLE\Outils
- *
- * @param $prefixe
- *
- * @return string
- */function acquerir_version($prefixe) {
-
-	include_spip('inc/plugin');
-	$prefixe = strtoupper($prefixe);
-	$plugins_actifs = liste_plugin_actifs();
-
-	if (!is_dir($plugins_actifs[$prefixe]['dir_type']))
-		$dir_plugins = constant($plugins_actifs[$prefixe]['dir_type']);
-	else
-		$dir_plugins = $plugins_actifs[$prefixe]['dir_type'];
-
-	$informer = charger_fonction('get_infos','plugins');
-	$infos = $informer($plugins_actifs[$prefixe]['dir'], true, $dir_plugins);
-	$version = (is_array($infos) AND isset($infos['version'])) ? $infos['version'] : '';
-
-	return $version;
 }
 
 

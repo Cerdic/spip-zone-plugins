@@ -1,15 +1,30 @@
 [(#AUTORISER{webmestre}|sinon_interdire_acces)]
 <h1><:boussole:titre_page_boussole:></h1>
 
-[(#REM) <!-- Liste des boussoles --> ]
-<INCLURE{fond=prive/squelettes/liste/boussoles,
-	titre=<:boussole:titre_liste_boussoles:>,
-	par=aka_boussole,
-	pas=10,
-	affichage=complet,
-	env, ajax} />
+[(#REM) <!-- Suivant la fonction client ou serveur affichée, le contenu est soit :
+	- la liste des boussoles et le formulaire d'ajout/mise à jour (client)
+	- la liste des caches pour les boussoles hébergées
+ --> ]
 
-[(#REM) <!-- Formulaire d'ajout ou de mise à jour manuelle d'une boussole --> ]
-<div class="noajax">
-	#FORMULAIRE_AJOUTER_BOUSSOLE
-</div>
+[(#ENV{fonction, client}|=={client}|oui)
+	[(#REM) <!-- Liste des boussoles --> ]
+	<INCLURE{fond=prive/squelettes/liste/boussoles,
+		titre=<:boussole:titre_liste_boussoles:>,
+		par=aka_boussole,
+		pas=10,
+		affichage=complet,
+		env, ajax} />
+
+	[(#REM) <!-- Formulaire d'ajout ou de mise à jour manuelle d'une boussole --> ]
+	<div class="noajax">
+		#FORMULAIRE_AJOUTER_BOUSSOLE
+	</div>
+]
+
+[(#ENV{fonction, client}|=={serveur}|oui)
+	<INCLURE{fond=prive/squelettes/liste/caches,
+		titre=<:boussole:titre_liste_caches:>,
+		par=maj,
+		pas=10,
+		env, ajax} />
+]

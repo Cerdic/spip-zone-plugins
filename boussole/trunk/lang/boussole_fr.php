@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_caches' => 'Actualiser les caches',
 	'bouton_boussole' => 'Boussole',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_afficher' => 'Afficher dans les modèles',
@@ -19,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_nbr_sites' => 'Contient',
 	'colonne_titre' => 'Titre',
 	'colonne_version' => 'Version',
+	'colonne_fichier_cache' => 'Cache',
+	'colonne_description_cache' => 'Description',
+	'colonne_prefixe_plugin' => 'Plugin ?',
 
 	// D
 	'description_noisette_boussole' => 'Affichage standard d\'une boussole. Vous pouvez choisir le modèle d\'affichage (liens textuels, logos...) ainsi que sa configuration précise',
@@ -29,12 +33,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
-	'info_boite_boussoles_gerer' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole.</p>',
+	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>',
+	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>',
 	'info_configurer_boussole' => 'Ce formulaire vous permet de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
+	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton &#171;actualiser les caches&#187; pour les générer.',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
+	'info_boussole_manuelle' => 'Manuelle',
+	'info_cache_boussoles' => 'Cache des boussoles hébergées',
+	'info_cache_boussole' => 'Cache de la boussole &#171;@boussole@&#187;',
 
 	// L
 	'label_1_boussole' => '@nb@ boussole',
@@ -94,6 +103,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Galerie des logos avec effet sépia',
 
 	// O
+	'onglet_client' => 'Fonction Client',
+	'onglet_serveur' => 'Fonction Serveur',
 	'option_aucune_description' => 'Aucune description',
 	'option_descriptif_site' => 'Descriptif du site',
 	'option_nom_site' => 'Nom du site',
@@ -106,7 +117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre à jour une boussole',
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
-	'titre_liste_boussoles' => 'Liste des boussoles disponibles',
+	'titre_liste_boussoles' => 'Liste des boussoles disponibles à l\'affichage',
+	'titre_liste_caches' => 'Liste des caches des boussoles hébergées',
 	'titre_page_boussole' => 'Gestion des boussoles'
 );
 
