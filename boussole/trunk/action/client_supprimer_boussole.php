@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_client_supprimer_boussole_dist(){
 
-	// Securisation car action auteur: argument attendu est l'alias de la boussole
+	// Securisation et autorisation car c'est une action auteur:
+	// -> argument attendu est l'alias de la boussole
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$alias = $securiser_action();
 

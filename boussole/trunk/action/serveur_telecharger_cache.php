@@ -3,11 +3,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  
 function action_serveur_telecharger_cache_dist(){
 
-	// Securisation: aucun argument attendu
+	// Securisation: le nom du fichier est attendu en argument
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$fichier = $securiser_action();
 	if (!@is_readable($fichier)) {
 		spip_log("Téléchargement impossible du cache, $fichier pas accessible en lecture", 'boussole' . _LOG_ERREUR);
+		return;
 	}
 
 	// Telechargement du fichier cache (.xml)

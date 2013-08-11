@@ -2,7 +2,7 @@
 [#BOITE_OUVRIR{#CHEMIN_IMAGE{boussole_gerer-24.png}|balise_img{'',cadre-icone}, info}
 	(#VAL{boussole:info_boite_boussoles_gerer_}|concat{#ENV{fonction, client}}|_T)
 	[(#ENV{fonction, client}|=={serveur}|oui)
-		[(#BOUTON_ACTION{<:boussole:bouton_actualiser_caches:>, #URL_ACTION_AUTEUR{serveur_actualiser_caches, '', #SELF}, '', '', ''})]
+		[(#BOUTON_ACTION{<:boussole:bouton_actualiser_caches:>, #URL_ACTION_AUTEUR{serveur_actualiser_caches, 'bidon', #SELF}, '', '', ''})]
 	]
 #BOITE_FERMER]
 
