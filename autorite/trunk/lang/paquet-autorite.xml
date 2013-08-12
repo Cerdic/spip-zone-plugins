@@ -1,6 +1,8 @@
 <traduction module="paquet-autorite" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
 	<langue code="ar" />
-	<langue code="de" />
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=de">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" />
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />

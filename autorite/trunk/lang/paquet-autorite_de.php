@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'autorite_description' => 'Dieses Plugin ermöglicht es Ihnen, unterschiedliche Berechtigungen als die Standard-Konfiguration.',
+	'autorite_description' => 'Dieses Plugin ermöglicht es Ihnen, Berechtigungen feiner als in der  Standard-Konfiguration einzustellen.',
 	'autorite_nom' => 'Autorität',
-	'autorite_slogan' => 'Feineinstellungen der Benutzerrechte (füge eigene hinzu!)'
+	'autorite_slogan' => 'Feineinstellungen der Benutzerrechte (Sie können eigene Rechte hinzufügen!)'
 );
 
 ?>
