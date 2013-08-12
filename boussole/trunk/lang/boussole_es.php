@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_caches' => 'Actualiser les caches', # NEW
 	'bouton_boussole' => 'Brújula',
 	'bouton_supprimer' => 'Eliminar',
 	'bulle_afficher' => 'Mostrar en los modelos',
@@ -18,7 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_alias' => 'Alias',
+	'colonne_description_cache' => 'Description', # NEW
+	'colonne_fichier_cache' => 'Cache', # NEW
 	'colonne_nbr_sites' => 'Contiene',
+	'colonne_prefixe_plugin' => 'Plugin ?', # NEW
 	'colonne_titre' => 'Título',
 	'colonne_version' => 'Versión',
 
@@ -31,9 +35,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Añadiendo las brújulas a su base de datos, tendrá la posibilidad de utilizar los modelos proporcionados para mostrarlos en sus páginas públicas.<br />Si la brújula ya existe este formulario permitirá actualizarla conservando la configuración de la visualización. ',
-	'info_boite_boussoles_gerer' => '<strong>A esta página sólo pueden acceder los responsables del sitio.</strong><p>Permite añadir, actualizar y eliminar las brújulas. También es posible visitar la página de configuración de la visualización de cada brújula.</p>',
+	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>', # NEW
+	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>', # NEW
+	'info_boussole_manuelle' => 'Manuelle', # NEW
+	'info_cache_boussole' => 'Cache de la boussole «@boussole@»', # NEW
+	'info_cache_boussoles' => 'Cache des boussoles hébergées', # NEW
 	'info_configurer_boussole' => 'Este formulario le permite configurar la visualización de la brújula eligiendo los sitios a mostrar o no y el orden de visualización en un grupo. Los sitios no mostrados se indican por un fondo tramado y una fuente color gris. ',
 	'info_fichier_boussole' => 'Introduzca la url del archivo de descripción de su brújula',
+	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.', # NEW
 	'info_liste_aucune_boussole' => 'Ninguna brújula se ha cargado aún en su base de datos. Utilice el siguiente formulario para añadir una.',
 	'info_site_boussole' => 'Este sitio forma parte de la brújula:',
 	'info_site_boussoles' => 'Este sitio forma parte de las brújulas:',
@@ -96,6 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Galería de los logos con efecto sepia',
 
 	// O
+	'onglet_client' => 'Fonction Client', # NEW
+	'onglet_serveur' => 'Fonction Serveur', # NEW
 	'option_aucune_description' => 'Ninguna descripción',
 	'option_descriptif_site' => 'Descriptivo del sitio',
 	'option_nom_site' => 'Nombre del sitio',
@@ -108,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'LOGO DE LA BRÚJULA',
 	'titre_form_ajouter_boussole' => 'Añadir o actualizar una brújula',
 	'titre_formulaire_configurer' => 'Configuración de la visualización de la brújula',
-	'titre_liste_boussoles' => 'Lista de las brújulas disponibles',
+	'titre_liste_boussoles' => 'Lista de las brújulas disponibles', # MODIF
+	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
 	'titre_page_boussole' => 'Gestión de las brújulas'
 );
 

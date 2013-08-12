@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_caches' => 'Actualiser les caches', # NEW
 	'bouton_boussole' => 'Compass',
 	'bouton_supprimer' => 'Delete',
 	'bulle_afficher' => 'Display in the models',
@@ -18,7 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_alias' => 'Alias',
+	'colonne_description_cache' => 'Description', # NEW
+	'colonne_fichier_cache' => 'Cache', # NEW
 	'colonne_nbr_sites' => 'Contains',
+	'colonne_prefixe_plugin' => 'Plugin ?', # NEW
 	'colonne_titre' => 'Title',
 	'colonne_version' => 'Version',
 
@@ -31,9 +35,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display them in your public pages.<br />If the compass already exists, this form allows to update it while keeping the same display configuration.',
-	'info_boite_boussoles_gerer' => '<strong>This page can be accessed by webmasters only.</strong><p>There, you can add, update and delate compasses. You can also go to the configuration page of each compass display.</p>',
+	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>', # NEW
+	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>', # NEW
+	'info_boussole_manuelle' => 'Manuelle', # NEW
+	'info_cache_boussole' => 'Cache de la boussole «@boussole@»', # NEW
+	'info_cache_boussoles' => 'Cache des boussoles hébergées', # NEW
 	'info_configurer_boussole' => 'This form allows you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
 	'info_fichier_boussole' => 'Enter the url of your compass description file.',
+	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.', # NEW
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
 	'info_site_boussole' => 'This website belongs to the compass :',
 	'info_site_boussoles' => 'This website belongs to the compasses :',
@@ -96,6 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Logos galery with sepia effect ',
 
 	// O
+	'onglet_client' => 'Fonction Client', # NEW
+	'onglet_serveur' => 'Fonction Serveur', # NEW
 	'option_aucune_description' => 'No description',
 	'option_descriptif_site' => 'Website description',
 	'option_nom_site' => 'Website name',
@@ -108,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'COMPASS LOGO',
 	'titre_form_ajouter_boussole' => 'Add or update a compass',
 	'titre_formulaire_configurer' => 'Compass display configuration',
-	'titre_liste_boussoles' => 'List of available compasses',
+	'titre_liste_boussoles' => 'List of available compasses', # MODIF
+	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
 	'titre_page_boussole' => 'Compass management'
 );
 

@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_caches' => 'Actualiser les caches', # NEW
 	'bouton_boussole' => 'Kompas',
 	'bouton_supprimer' => 'Odstrániť',
 	'bulle_afficher' => 'Zobraziť v šablónach',
@@ -18,7 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_alias' => 'Prezývka',
+	'colonne_description_cache' => 'Description', # NEW
+	'colonne_fichier_cache' => 'Cache', # NEW
 	'colonne_nbr_sites' => 'Obsahuje',
+	'colonne_prefixe_plugin' => 'Plugin ?', # NEW
 	'colonne_titre' => 'Nadpis',
 	'colonne_version' => 'Verzia',
 
@@ -31,9 +35,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
-	'info_boite_boussoles_gerer' => '<strong>Táto stránka je prístupná iba pre manažérov webu.</strong><p>Umožňuje pridávať, aktualizovať a mazať kompasy. Môžete navštíviť aj stránku s nastaveniami zobrazenia každého kompasu.</p>',
+	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>', # NEW
+	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>', # NEW
+	'info_boussole_manuelle' => 'Manuelle', # NEW
+	'info_cache_boussole' => 'Cache de la boussole «@boussole@»', # NEW
+	'info_cache_boussoles' => 'Cache des boussoles hébergées', # NEW
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
+	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.', # NEW
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
@@ -97,6 +106,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Galéria log s efektom sépia',
 
 	// O
+	'onglet_client' => 'Fonction Client', # NEW
+	'onglet_serveur' => 'Fonction Serveur', # NEW
 	'option_aucune_description' => 'Žiaden opis',
 	'option_descriptif_site' => 'Opis stránky',
 	'option_nom_site' => 'Názov stránky',
@@ -109,7 +120,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
-	'titre_liste_boussoles' => 'Zoznam dostupných kompasov',
+	'titre_liste_boussoles' => 'Zoznam dostupných kompasov', # MODIF
+	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
 	'titre_page_boussole' => 'Riadenie kompasov'
 );
 
