@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Die Sicherungen werden in einem Verzeichnis auf dem Server gespeichert (Grundeinstellung: /tmp/dump) und können per Mail verschickt werden. Die Sicherungsdateien können ab einem einstellbaren Alter automatisch gelöscht werden.
 
-Est steht ein Interface zum manuellen Start des Backups und für die Vewaltung der Sicherungsdateien zur Verfügung.',
+Es steht ein Interface zum manuellen Start des Backups und für die Vewaltung der Sicherungsdateien zur Verfügung.',
 	'saveauto_nom' => 'Automatisches Backup',
 	'saveauto_slogan' => 'Automatisches Backup der MySQL-Dtanbank von SPIP'
 );
