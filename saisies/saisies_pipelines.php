@@ -22,6 +22,7 @@ function saisies_affichage_final($flux){
 		$ins_css = "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 
 		if (strpos($flux,"saisie_date")!==false){//si on a une saisie de type date, on va charger les css de jquery_ui
+		    include_spip("jqueryui_pipelines");
 		    $ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
 		    array_push($ui_plugins,"jquery.ui.theme");
 		    foreach ($ui_plugins as $ui_plug){
