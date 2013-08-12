@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_serveur_informer_boussole_dist(){
 
 	// Aucune sécurisation ni autorisation:
-	// -> c'est une action anonyme pouvant être appeler de l'extérieur
+	// -> c'est une action anonyme pouvant être appelée de l'extérieur
 	// -> par contre, cette action nécessite en argument l'alias de la boussole
 	$alias = _request('arg');
 

@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_serveur_lister_boussoles_dist(){
 
 	// Aucune sécurisation ni autorisation:
-	// -> c'est une action anonyme pouvant être appeler de l'extérieur
+	// -> c'est une action anonyme pouvant être appelée de l'extérieur
 
 	if (_BOUSSOLE_ALIAS_SERVEUR) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
