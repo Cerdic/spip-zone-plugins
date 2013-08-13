@@ -23,7 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_almanach' => 'Modifier cet almanach',
 	'info_1_almanach' => 'Un almanach',
 	'info_almanachs_auteur' => 'Les almanachs de cet auteur',
+	'info_evenement_almanach' => 'Les événements de cet almanach',
 	'info_aucun_almanach' => 'Aucun almanach',
+	'info_derniere_synchronisation' => 'La dernière synchronisation de cet almanach a été effectuée le ',
 	'info_nb_almanachs' => '@nb@ almanachs',
 	'info_supprimer_almanach' => 'Supprimer',
 	'info_supprimer_evenements' => 'Supprimer ces événements',
@@ -33,10 +35,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_mot' => 'Type des événements de cet almanach :',
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
+	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 
 	//P 
 	'plusieurs_evenements' => '@nb@ événements',
+	'purger_almanach' => 'Si vous voulez supprimer cet almanach, vous devez tout d\'abord en supprimer le contenu.',
 	// R
+	'regenerer_almanach' => 'Vous pouvez aussi restaurer son contenu en tentant une nouvelle synchronisation.',
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
 	'retour_liste' => 'Retour à la liste',

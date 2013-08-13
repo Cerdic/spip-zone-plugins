@@ -10,8 +10,6 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  *
@@ -51,7 +49,8 @@ function import_ics_declarer_tables_objets_sql($tables) {
 			"id_mot"        	 => "bigint(21) NOT NULL DEFAULT 0",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
-			"maj"                => "TIMESTAMP"
+			"maj"                => "TIMESTAMP",
+			"statut_maj"		 => "varchar(20) DEFAULT '0' NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_almanach",

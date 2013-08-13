@@ -32,9 +32,11 @@
 
 			[(#SAISIE{url, url, obligatoire=oui,
 				label=<:almanach:label_url:>,
-				explication=<:almanach:explication_url:> })]
+				explication=<:almanach:explication_url:>,
+				verifier => array('type' => 'url',),
+			})]
 
-			[(#SAISIE{input, id_article, obligatoire=oui,
+			[(#SAISIE{selecteur_article, id_article, obligatoire=oui,
 				label=<:almanach:label_id_article:>,
 				explication=<:almanach:explication_id_article:>,
 			})]
