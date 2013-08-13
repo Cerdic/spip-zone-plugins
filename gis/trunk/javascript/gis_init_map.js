@@ -50,7 +50,7 @@ gis_init_map = function(mapcfg) {
 	map.addLayer(default_layer);
 
 	if (mapcfg['control_type'] && !mapcfg['no_control'] && mapcfg['affiche_layers'].length>1){
-		var layers_control = new L.Control.Layers();
+		var layers_control = new L.Control.Layers('','',{collapsed: mapcfg['control_type_collapsed'] ? true : false});
 		layers_control.addBaseLayer(default_layer,mapcfg['layers'][mapcfg['default_layer']]["nom"]);
 		for(var l in mapcfg['affiche_layers']){
 			if (mapcfg['affiche_layers'][l]!==mapcfg['default_layer']){

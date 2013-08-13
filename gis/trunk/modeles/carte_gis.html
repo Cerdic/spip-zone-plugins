@@ -22,8 +22,9 @@ Parametres possibles :
 
 - fullscreen = oui                     afficher un bouton pour passer la carte en plein écran
 - zoom_molette|zoom_wheel = non        désactiver le zoom avec la molette de la souris, actif par defaut
-- control_type|controle_type = non     ne pas afficher les controles de changement de type
-- no_control|aucun_controle = oui      ne pas afficher les controles de la carte
+- control_type|controle_type = non     ne pas afficher le contrôle de changement de couche
+- control_type_collapsed = non			afficher le contrôle de changement de couhe replié (oui par défaut)
+- no_control|aucun_controle = oui      ne pas afficher les contrôles de la carte
 - scale = oui                          afficher l'échelle de la carte
 - overview = oui                       afficher une mini carte de situation
 
@@ -93,6 +94,7 @@ map_cfg["[(#GET{id})]"] = {
 "layers":#EVAL{json_encode($GLOBALS['gis_layers'])},
 "affiche_layers":[(#CONFIG{gis/layers,#ARRAY}|json_encode)],
 "control_type":[(#ENV{control_type,#ENV{controle_type}}|=={non}|?{false,true})],
+"control_type_collapsed":[(#ENV{control_type_collapsed,#ENV{control_type_collapsed}}|=={non}|?{false,true})],
 "no_control":[(#ENV{no_control,#ENV{aucun_controle}}|=={oui}|?{true,false})],
 "scale":[(#ENV{scale}|=={oui}|?{true,false})],
 "overview":[(#ENV{overview}|=={oui}|?{true,false})],
