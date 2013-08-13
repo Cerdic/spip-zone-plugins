@@ -17,7 +17,7 @@
     - N&#233;cessite ou utilise les plugins Z, Z-commerce et montants.
     - Le plugin inscription2 est &#224; remplac&#233; par le plugin clients.
 	</description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://contrib.spip.net/4061</lien>
 	<prefix>abonnement</prefix>
 	<fonctions>abonnement_fonctions.php</fonctions>
 	<options>abonnement_options.php</options>
