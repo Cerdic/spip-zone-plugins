@@ -4,7 +4,12 @@
 <h3 class="#EDIT{titre}">[(#TITRE|supprimer_numero|sinon{[(#FICHIER|basename)]})]</h3>
 <div class="em_vignette spip_documents_center #EDIT{vignette}[ resize-(#GET{largeur_previsu})]">
 	<BOUCLE_d2c(DOCUMENTS){mode=doc2img}{objet=document}{id_objet=#ENV{id_document}}{statut==.*}{0,1}> </BOUCLE_d2c>
-	[(#MODELE{doc_img,id=#_documents_en_cours:ID_DOCUMENT,id_document=#_documents_en_cours:ID_DOCUMENT,largeur=#GET{largeur_previsu},ajax})]
+	[(#EXTENSION|=={pdf}|et{#PLUGIN{pdfjs}}|oui)
+		#MODELE{lecteurpdf,id_document=#_documents_en_cours:ID_DOCUMENT,largeur=#GET{largeur_previsu},ajax}
+	]
+	[(#EXTENSION|=={pdf}|et{#PLUGIN{pdfjs}}|non)
+		#MODELE{doc_img,id=#_documents_en_cours:ID_DOCUMENT,id_document=#_documents_en_cours:ID_DOCUMENT,largeur=#GET{largeur_previsu},ajax}
+	]
 	</B_d2c>
 	<a href="#URL_DOCUMENT" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
 		[(#_documents_en_cours:LOGO_DOCUMENT|image_reduire{#GET{largeur_previsu},#GET{hauteur_previsu}})]

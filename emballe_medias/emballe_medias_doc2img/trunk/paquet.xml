@@ -20,4 +20,5 @@
 	<necessite nom="doc2img" compatibilite="[1.3.1;[" />
 
 	<utilise nom="Fulltext" />
+	<utilise nom="pdfjs" compatibilite="[0.2.3;]" />
 </paquet>
