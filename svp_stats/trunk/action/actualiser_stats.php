@@ -5,9 +5,11 @@
  */
 function action_actualiser_stats_dist(){
 
-	// Securisation: aucun argument attendu
+	// Securisation: aucun argument attendu, mais étant donné le bug de la balise
+	// #URL_ACTION_AUTEUR il est préférable d'en passer un : on fait donc ça le plus
+	// proprement possible en passant l'argument "tout".
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+	$mode = $securiser_action();
 
 	// Verification des autorisations
 	if (!autoriser('webmestre')) {
@@ -19,7 +21,7 @@ function action_actualiser_stats_dist(){
 	// Actualisation des statistiques d'utilisation des plugins en provenance de 
 	// stats.spip.org
 	// On verife tout de meme qu'il y a au moins un depot
-	if (sql_countsel('spip_depots')) {
+	if (($mode === 'tout') AND sql_countsel('spip_depots')) {
 		include_spip('inc/svp_statistiquer');
 		svp_actualiser_stats();
 		// On consigne l'action
