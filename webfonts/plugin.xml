@@ -4,7 +4,7 @@
 	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<icon>images/webfonts-32.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>
 	Les navigateurs modernes permettent l&#8217;utilisation de polices de caract&#232;res enrichies, non disponibles par d&#233;faut sur le poste des utilisateurs. Par un coup de chance, Internet Explorer permet aussi cela (avec quelques diff&#233;rences de syntaxe) ce qui rend la fonctionnalit&#233; utilisable par tous les visiteurs.

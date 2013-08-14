@@ -18,7 +18,12 @@ function webfonts_insert_head_css($flux){
 		$fonts = implode('|',$fonts);
 		if (strlen($fonts)) {
 			$code = '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.$fonts.'" id="webfonts" />';
-			$flux = $code.$flux; // on le place en premier !
+			// le placer avant les autres CSS du flux
+			if (($p = strpos($flux,"<link"))!==false)
+				$flux = substr_replace($flux,$code,$p,0);
+			// sinon a la fin
+			else
+				$flux .= $code;
 		}
 
 		// version loader js, mais qui genere une requete google api...
