@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_desc_page' => 'This document is composed by one sheet.',
 	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 	'info_nb_pages' => 'Number of pages:',
-	'info_nb_pages_converties' => '@nb@ of converted pages related',
-	'info_une_page_convertie' => 'One linke converted page'
+	'info_nb_pages_converties' => '@nb@ related converted pages ',
+	'info_une_page_convertie' => 'One related converted page'
 );
 
 ?>
