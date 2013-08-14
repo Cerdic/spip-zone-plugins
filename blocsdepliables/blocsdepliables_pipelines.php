@@ -9,33 +9,30 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function blocsdepliables_insert_head($flux){
+	$flux .= "<script type='text/javascript' src='".find_in_path("js/blocs.js")."'></script>";
+	return $flux;
+}
+
+function blocsdepliables_insert_head_css($flux){
 	include_spip("inc/config");
 	$slide = lire_config('blocsdepliables/animation','aucun');
 	if ($slide=="millisec") $slide = lire_config('blocsdepliables/duree',100);
 	$js_cookie = "";
 	if (lire_config('blocsdepliables/cookie',0)){
 		$js_cookie = find_in_path("javascript/jquery.cookie.js");
-		$js_cookie = "if(jQuery('div.cs_blocs').length) jQuery.getScript('$js_cookie', cs_blocs_cookie);";
 	}
 
 	$js = "var blocs_replier_tout = ".intval(lire_config('blocsdepliables/unique',0)).";
 var blocs_slide = "._q($slide).";
 var blocs_title_sep = /".preg_quote(_BLOC_TITLE_SEP)."/g;
 var blocs_title_def = "._q(_T('couteau:bloc_deplier')._BLOC_TITLE_SEP._T('couteau:bloc_replier')).";
-jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
-var cs_sel_jQuery='';
-jQuery(function(){
-blocs_init.apply(document);
-if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);
-$js_cookie });";
+var blocs_js_cookie = '$js_cookie';
+";
+	$flux =
+		"<script type='text/javascript'>/*<![CDATA[*/\n$js\n/*]]>*/</script>"
+		. $flux
+		. '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/blocs.css").'" />';
 
-	$flux .= "<script type='text/javascript' src='".find_in_path("js/blocs.js")."'></script>
-<script type='text/javascript'>/*<![CDATA[*/\n$js\n/*]]>*/</script>";
-	return $flux;
-}
-
-function blocsdepliables_insert_head_css($flux){
-	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/blocs.css").'" />';
 	return $flux;
 }
 

@@ -1,8 +1,8 @@
 <paquet
 	prefix="blocsdepliables"
 	categorie="edition"
-	version="1.0.1"
-	etat="test"
+	version="1.1.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/blocsdepliables-64.png"
 	documentation="http://contrib.spip.net/Des-blocs-depliables"

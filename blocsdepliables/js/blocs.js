@@ -216,3 +216,12 @@ jQuery(document).ready(function(){
 		});
 });
 */
+
+/* Init */
+jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};
+var cs_sel_jQuery='';
+jQuery(function(){
+blocs_init.apply(document);
+if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);
+if(blocs_js_cookie && jQuery('div.cs_blocs').length) jQuery.getScript(blocs_js_cookie, cs_blocs_cookie);
+});
