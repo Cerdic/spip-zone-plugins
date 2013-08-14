@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function blocsdepliables_insert_head($flux){
-	$flux .= "<script type='text/javascript' src='".find_in_path("js/blocs.js")."'></script>";
+	$flux .= "<script type='text/javascript' src='".timestamp(find_in_path("js/blocs.js"))."'></script>";
 	return $flux;
 }
 
@@ -31,7 +31,7 @@ var blocs_js_cookie = '$js_cookie';
 	$flux =
 		"<script type='text/javascript'>/*<![CDATA[*/\n$js\n/*]]>*/</script>"
 		. $flux
-		. '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/blocs.css").'" />';
+		. '<link rel="stylesheet" type="text/css" href="'.timestamp(find_in_path("css/blocs.css")).'" />';
 
 	return $flux;
 }
