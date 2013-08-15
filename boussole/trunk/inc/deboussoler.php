@@ -4,6 +4,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
+ * Mise à jour en base de données des boussoles installées sur le site client.
+ *
+ * @package BOUSSOLE\Client
+ * @api
+ *
+ * @return bool
+ */
+function boussole_actualiser_boussoles() {
+
+	// Recherche des metas commençant par "boussole_infos" pour connaitre la liste des boussoles ajoutées par le client
+	$boussoles_ajoutees = sql_allfetsel('valeur', 'spip_meta', array('nom LIKE ' . sql_quote('boussole_infos%')));
+	if ($boussoles_ajoutees) {
+		$infos = array_map('unserialize', array_map('reset', $boussoles_ajoutees));
+		foreach($infos as $_infos) {
+			list($ok, $message) = boussole_ajouter($_infos['alias'], $_infos['serveur']);
+			if (!$ok)
+				spip_log("Actualisation en erreur (boussole = " . $_infos['alias'] . ") : " . $message, 'boussole' . _LOG_ERREUR);
+			else
+				spip_log("Actualisation ok (boussole = " . $_infos['alias'] . ")", 'boussole' . _LOG_INFO);
+		}
+	}
+
+	return true;
+}
+
+
+/**
  * Ajout de la boussole dans la base de donnees du site client
  *
  * @package	BOUSSOLE\Client

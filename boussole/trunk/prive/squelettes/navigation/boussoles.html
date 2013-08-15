@@ -1,6 +1,9 @@
 [(#REM) <!-- Boite d'information sur la fonction client ou serveur --> ]
 [#BOITE_OUVRIR{#CHEMIN_IMAGE{boussole_gerer-24.png}|balise_img{'',cadre-icone}, info}
 	(#VAL{boussole:info_boite_boussoles_gerer_}|concat{#ENV{fonction, client}}|_T)
+[(#ENV{fonction, client}|=={client}|oui)
+	[(#BOUTON_ACTION{<:boussole:bouton_actualiser_boussoles:>, #URL_ACTION_AUTEUR{client_actualiser_boussoles, tout, #SELF}, '', '', ''})]
+]
 	[(#ENV{fonction, client}|=={serveur}|oui)
 		[(#BOUTON_ACTION{<:boussole:bouton_actualiser_caches:>, #URL_ACTION_AUTEUR{serveur_actualiser_caches, tout, #SELF}, '', '', ''})]
 	]

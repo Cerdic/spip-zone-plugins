@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_boussoles' => 'Actualiser les boussoles',
 	'bouton_actualiser_caches' => 'Actualiser les caches',
 	'bouton_boussole' => 'Boussole',
 	'bouton_supprimer' => 'Supprimer',
