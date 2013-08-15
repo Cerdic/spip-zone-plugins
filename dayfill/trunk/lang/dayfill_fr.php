@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'affichage_liste'               => 'Liste',
 	'affichage_calendrier'          => 'Calendrier',
+    'ajouter_activite'              => 'Ajouter une activité',
 
 	// D
 	'dayfill_titre'                 => 'DayFill',
