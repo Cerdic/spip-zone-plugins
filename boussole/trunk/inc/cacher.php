@@ -104,7 +104,8 @@ function boussole_cacher_liste($boussoles) {
 				// Extraction des seules informations de la boussole pour créer le cache (pas de groupe ni site)
 				lire_fichier($fichier_xml, $xml);
 				$convertir = charger_fonction('simplexml_to_array', 'inc');
-				$tableau = $convertir(simplexml_load_string($xml), false);
+				$converti = $convertir(simplexml_load_string($xml), false);
+				$tableau = $converti['root'];
 
 				if  (isset($tableau['name'])
 				AND ($tableau['name'] == 'boussole')) {
@@ -196,7 +197,8 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 	// Extraction du contenu du xml source
 	lire_fichier($fichier_xml, $xml);
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
-	$tableau = $convertir(simplexml_load_string($xml), false);
+	$converti = $convertir(simplexml_load_string($xml), false);
+	$tableau = $converti['root'];
 
 	if  (isset($tableau['name'])
 	AND ($tableau['name'] == 'boussole')) {
@@ -285,7 +287,8 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 	// Extraction du contenu du xml source
 	lire_fichier($fichier_xml, $xml);
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
-	$tableau = $convertir(simplexml_load_string($xml), false);
+	$converti = $convertir(simplexml_load_string($xml), false);
+	$tableau = $converti['root'];
 
 	if  (isset($tableau['name'])
 	AND ($tableau['name'] == 'boussole')) {

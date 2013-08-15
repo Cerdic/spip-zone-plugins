@@ -22,7 +22,8 @@ function lister_caches() {
 
 			lire_fichier($_fichier, $contenu);
 			$convertir = charger_fonction('simplexml_to_array', 'inc');
-			$tableau = $convertir(simplexml_load_string($contenu), false);
+			$converti = $convertir(simplexml_load_string($contenu), false);
+			$tableau = $converti['root'];
 			if ($cache['nom'] == 'boussoles.xml') {
 				// C'est le cache qui liste les boussoles hébergées
 				$cache['description'] = _T('boussole:info_cache_boussoles');

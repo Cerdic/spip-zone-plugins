@@ -63,7 +63,8 @@ function charger_boussoles() {
 		$page = recuperer_page($action);
 
 		$convertir = charger_fonction('simplexml_to_array', 'inc');
-		$tableau = $convertir(simplexml_load_string($page), false);
+		$converti = $convertir(simplexml_load_string($page), false);
+		$tableau = $converti['root'];
 
 		if (isset($tableau['name'])
 		AND ($tableau['name'] == 'boussoles')) {
