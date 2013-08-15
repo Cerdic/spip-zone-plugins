@@ -1,6 +1,6 @@
 #CACHE{0}
 
-<!-- formulaire ajouter_action_quick.html -->
+<!-- formulaire ajouter_action.html -->
 
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [<p class='formulaire_ok'>(#ENV*{message_ok})&nbsp;-&nbsp;<a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ENV{id_projet}})]">Aller sur la fiche projet</a></p>
@@ -25,8 +25,8 @@ On met à jour le id_projet à [<a href="#URL_PAGE{fiche_projet, id_projet=#GET{
 	#ACTION_FORMULAIRE{#ENV{action}}
 
 	[(#REM) Je détermine quel est le id_user de la personne loguée ]
-	<BOUCLE_n(USERS){login=#SESSION{login}}>
-	[(#SET{id,#ID_USER})]
+	<BOUCLE_n(AUTEURS){login=#SESSION{login}}>
+	[(#SET{id,#ID_AUTEUR})]
 	</BOUCLE_n>
 
 	<fieldset id="date">
@@ -34,8 +34,8 @@ On met à jour le id_projet à [<a href="#URL_PAGE{fiche_projet, id_projet=#GET{
 		<input type="text" id="date_action" name="date_action" value="[(#ENV{date_action}|sinon{[(#DATE|affdate{'d/m/Y'})]})]" />
 		<select name="id_user" class="initiales" onchange="check_input(this.value)" >
 			<option value="">---</option>
-			<BOUCLE_auteur(USERS){par nom_user}{statut='actif'}>
-			[<option value="#ID_USER" [(#GET{id}|=={#ID_USER}|?{'selected="selected"'})]>(#INITIALES)</option>]
+			<BOUCLE_auteur(AUTEURS){par nom}>
+			[<option value="#ID_AUTEUR" [(#GET{id}|=={#ID_AUTEUR}|?{'selected="selected"'})]>(#LOGIN)</option>]
 			</BOUCLE_auteur>
 		</select>
 	</fieldset>
@@ -47,8 +47,8 @@ On met à jour le id_projet à [<a href="#URL_PAGE{fiche_projet, id_projet=#GET{
 		[(#REM) Ici, faire apparaitre la liste des types d'actions possibles ]
 		<B_presta>
 		<select name="id_type_action">
-		<BOUCLE_presta(TYPES_ACTIONS){tout}{par num nom_type_action}>
-			[<option value="#ID_TYPE_ACTION" [(#GET{id_type_action}|=={#ID_TYPE_ACTION}|?{'selected="selected"'})]>(#NOM_TYPE_ACTION|supprimer_numero)</option>]
+		<BOUCLE_presta(MOTS){id_groupe==18}{par num titre}>
+			[<option value="#ID_MOT" [(#GET{id_type_action}|=={#ID_MOT}|?{'selected="selected"'})]>(#TITRE|supprimer_numero)</option>]
 		</BOUCLE_presta>
 		</select>
 		</B_presta>
@@ -81,7 +81,7 @@ On met à jour le id_projet à [<a href="#URL_PAGE{fiche_projet, id_projet=#GET{
 
 		<select name="id_projet">
 			<option value="">---</option>
-		<BOUCLE_projets(PROJETS){id_organisation=#GET{id_organisation}}{actif='oui'}{!par date_saisie}>
+		<BOUCLE_projets(PROJETS){id_organisation=#GET{id_organisation}}{actif='oui'}{!par maj}>
 			[<option value="#ID_PROJET" [(#GET{id_projet}|=={#ID_PROJET}|?{'selected="selected"'})]>(#NOM_PROJET)</option>]
 		</BOUCLE_projets>
 		</select>
