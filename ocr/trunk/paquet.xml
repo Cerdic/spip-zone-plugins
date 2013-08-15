@@ -1,0 +1,23 @@
+<paquet
+	prefix="ocr"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.12-dev;3.0.*]"
+	logo="prive/themes/spip/images/ocr-64.png"
+	documentation="http://contrib.spip.net/ocr?var_mode=preview"
+	schema="0.1.0" 
+>
+	<!--
+		Paquet genere le 2013-08-15 15:59:34
+	-->
+
+	<nom>ocr</nom>
+
+	<auteur>Sylvain Lesage</auteur>
+	<credit lien="http://deleket.deviantart.com/art/Scrap-Icons-50032701">Icône de deleket sous licence CC BY-NC-ND</credit>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
