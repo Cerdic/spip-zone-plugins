@@ -38,7 +38,7 @@ function ocr_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function ocr_vider_tables($nom_meta_base_version) {
 
-
+	effacer_meta('ocr');
 	effacer_meta($nom_meta_base_version);
 }
 

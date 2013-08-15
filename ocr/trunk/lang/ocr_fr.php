@@ -29,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'indiquer_options_bin' => 'Indiquer les options pour la reconnaissance de caractères',
 	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).',
 	
+	// M
+	'message_ok_configuration' => 'Enregistrement de vos préférences terminé',
+
 	// N
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON',
 	
