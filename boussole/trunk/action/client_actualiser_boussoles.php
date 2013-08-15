@@ -14,7 +14,7 @@ function action_client_actualiser_boussoles_dist(){
 	$mode = $securiser_action();
 
 	// Verification des autorisations
-	if (!autoriser('configurer')) {
+	if (!autoriser('webmestre')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit();
