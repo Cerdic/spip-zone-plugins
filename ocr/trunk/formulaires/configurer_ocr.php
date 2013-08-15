@@ -12,7 +12,6 @@ function formulaires_configurer_ocr_charger_dist(){
 	$valeur = array(
 		'intervalle_cron' =>  $ocr['intervalle_cron'] ? $ocr['intervalle_cron'] : 600,
 		'nb_docs' =>  $ocr['nb_docs'] ? $ocr['nb_docs'] : 5,
-		
 		'ocr_bin' => $ocr['ocr_bin'] ? $ocr['ocr_bin'] : '/usr/bin/tesseract',
 		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : '-fra',
 	);

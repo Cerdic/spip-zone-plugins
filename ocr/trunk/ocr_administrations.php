@@ -24,10 +24,42 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function ocr_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	/**
+	 * Première installation
+	 * On ajoute les champs spécifiques à spip_documents
+	 * On crée la première configuration
+	 */
+	$maj['create'] = array(
+		array('maj_tables', array('spip_documents')),
+		array('ocr_creer_config')
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Fonction de génération de configuration à l'installation
+ * 
+ * Si pas de configuration enregistrée, ajoute une configuration par défaut :
+ * -* intervalle de 600s entre les lancements de CRON
+ * -* 5 fichiers analysés par CRON
+ * -* binaire de reconnaissance des caractères : /usr/bin/tesseract
+ * -* options du binaire : -fra (modèle de langue : français)
+ * 
+ */
+function ocr_creer_config(){
+	include_spip('inc/config');
+    if(!is_array(lire_config('ocr'))){
+        $cfg = array(
+            "intervalle_cron" => "600",
+        	"nb_docs" => "5",
+            "ocr_bin" => "/usr/bin/tesseract",
+            "ocr_opt" => "-fra"
+        );
+		ecrire_meta('ocr',serialize($cfg));
+    }
+}
 
 /**
  * Fonction de désinstallation du plugin ocr.
