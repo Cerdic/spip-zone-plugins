@@ -6,7 +6,7 @@
 	compatibilite="[3.0.12-dev;3.0.*]"
 	logo="prive/themes/spip/images/ocr-64.png"
 	documentation="http://contrib.spip.net/ocr?var_mode=preview"
-	schema="0.1.0" 
+	schema="0.2" 
 >
 	<!--
 		Paquet genere le 2013-08-15 15:59:34
@@ -21,5 +21,8 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<traduire module="ocr" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/ocr.php" />
 	
 </paquet>

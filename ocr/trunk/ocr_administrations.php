@@ -33,7 +33,12 @@ function ocr_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_documents')),
 		array('ocr_creer_config')
 	);
-	
+
+	$maj['0.2'] = array(
+		array('maj_tables', array('spip_documents')),
+		array('ocr_creer_config'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
