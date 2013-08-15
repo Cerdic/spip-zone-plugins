@@ -1,7 +1,7 @@
-<!ENTITY % NAME "CDATA"> <!-- identificateur -->
+<!ENTITY % NAME "CDATA"> <!-- identifiant -->
 <!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
-<!ENTITY % GROUP "(reference|aide|extension|decouverte|actualite)">
+<!ENTITY % GROUP "CDATA"> <!-- identifiant -->
 <!ENTITY % ACTIVITY "(oui|non)"> <!-- indicateur d'activite du site : permet de retirer temporairement un site de la boussole sans perdre sa definition -->
 
 <!ELEMENT boussole groupe+>
