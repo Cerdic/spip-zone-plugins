@@ -1,0 +1,36 @@
+[(#SET{actif, #ARRAY})]
+<BOUCLE_actif(PLUGINS) {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_actif>
+<BOUCLE_plugindist(PAQUETS) {tout} {actif=="oui"} {constante=='_DIR_PLUGINS_DIST'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_plugindist>
+
+		<h1 class="grostitre"><:lister_config:titre_page:></h1>
+		<p><:lister_config:description_page:></p>
+
+<B_config>
+<div class="liste-plugins">
+	<div class="liste plugins" id="liste_plugins">
+		<ul class="liste-items">
+			<BOUCLE_config(PLUGINS) {tout} {par nom} {prefixe IN #GET{actif}}>
+			<li class="item" id="[(#PREFIXE|strtolower)]">
+				<div class="resume">
+					<h3 class="nom">[(#NOM)]</h3>
+					<div class="short">
+						[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]
+					</div>
+					<div class="icon">
+						[(#CHEMIN{#LOGO}|balise_img|image_reduire{32})]
+					[(#LOGO|non)<INCLURE{fond=prive/squelettes/inclure/icon-logo,id_plugin=#ID_PLUGIN} />]
+					</div>
+				#SET{prefixe,#PREFIXE|strtolower}
+					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{<:svp:plugin_info_actif:>,picto_actif}|inserer_attribut{title,<:svp:plugin_info_actif:>})]
+					[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
+				</div>
+			</li>
+			</BOUCLE_config>
+		</ul>
+	</div>
+</div>
+</B_config>

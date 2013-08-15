@@ -1,0 +1,20 @@
+<paquet
+	prefix="lister_config"
+	categorie="outil"
+	version="0.10.0"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.1.0["
+	logo="prive/themes/spip/images/lister_config-32.png"
+	documentation=""
+	>
+
+	<nom>Lister les formulaires de configuration</nom>
+	<!-- Ce plugin permet de lister sur une page tous les liens vers les pages de configuration des plugins -->
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
+
+</paquet>
