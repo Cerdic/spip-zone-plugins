@@ -1,13 +1,12 @@
 /*!
  * jQuery.ScrollTo
- * Copyright (c) 2007-2012 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
+ * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
  * Dual licensed under MIT and GPL.
- * Date: 22/08/2012
  *
  * @projectDescription Easy element scrolling using jQuery.
  * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
  * @author Ariel Flesler
- * @version 1.4.3
+ * @version 1.4.6
  *
  * @id jQuery.scrollTo
  * @id jQuery.fn.scrollTo
@@ -113,7 +112,7 @@
 
 		return this._scrollable().each(function(){
 			// Null target yields nothing, just like jQuery does
-			if (!target) return;
+			if (target == null) return;
 
 			var elem = this,
 				$elem = $(elem),
@@ -124,7 +123,7 @@
 				// A number will pass the regex
 				case 'number':
 				case 'string':
-					if( /^([+-]=)?\d+(\.\d+)?(px|%)?$/.test(targ) ){
+					if( /^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ) ){
 						targ = both( targ );
 						// We are done
 						break;
@@ -187,7 +186,7 @@
 
 			function animate( callback ){
 				$elem.animate( attr, duration, settings.easing, callback && function(){
-					callback.call(this, target, settings);
+					callback.call(this, targ, settings);
 				});
 			};
 

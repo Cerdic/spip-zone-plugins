@@ -1,13 +1,10 @@
-/**
+/*!
  * jQuery.LocalScroll
- * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
+ * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
  * Dual licensed under MIT and GPL.
- * Date: 3/11/2009
- *
- * @projectDescription Animated scrolling navigation, using anchors.
  * http://flesler.blogspot.com/2007/10/jquerylocalscroll-10.html
  * @author Ariel Flesler
- * @version 1.2.7
+ * @version 1.2.8
  *
  * @id jQuery.fn.localScroll
  * @param {Object} settings Hash of settings, it is passed in to jQuery.ScrollTo, none is required.
@@ -25,7 +22,7 @@
  *	- jQuery.localScroll can be used if the desired links, are all over the document, it accepts the same settings.
  *  - If the setting 'lazy' is set to true, then the binding will still work for later added anchors.
   *	- If onBefore returns false, the event is ignored.
- **/
+ */
 ;(function( $ ){
 	var URI = location.href.replace(/#.*/,''); // local url without hash
 
@@ -104,11 +101,11 @@
 		var $target = $( settings.target );
 
 		if( settings.lock && $target.is(':animated') ||
-			settings.onBefore && settings.onBefore.call(settings, e, elem, $target) === false ) 
+			settings.onBefore && settings.onBefore(e, elem, $target) === false ) 
 			return;
 
 		if( settings.stop )
-			$target.stop(true); // remove all its animations
+			$target._scrollable().stop(true); // remove all its animations
 
 		if( settings.hash ){
 			var attr = elem.id == id ? 'id' : 'name',
