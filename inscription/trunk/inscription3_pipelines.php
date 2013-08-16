@@ -226,8 +226,7 @@ function inscription3_i3_definition_champs($flux){
 	$flux['mobile']['verifier']['type'] = 'telephone';
 	$flux['mobile']['options'] = array('class'=>'nomulti');
 	$flux['code_postal']['verifier']['type'] = 'code_postal';
-	$flux['code_postal']['options'] = array('class'=>'nomulti');
-
+	$flux['code_postal']['options']['class'] = 'nomulti';
 	return $flux;
 }
 
