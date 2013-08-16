@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_config"
 	categorie="outil"
-	version="0.10.1"
+	version="0.10.3"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.1.0["
 	logo="prive/themes/spip/images/lister_config-32.png"
