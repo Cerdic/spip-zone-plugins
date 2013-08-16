@@ -1,19 +1,15 @@
 [(#SET{actif, #ARRAY})]
-<BOUCLE_actif(PLUGINS) {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+<BOUCLE_actif(PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
 [(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
 </BOUCLE_actif>
-<BOUCLE_plugindist(PAQUETS) {tout} {actif=="oui"} {constante=='_DIR_PLUGINS_DIST'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
-[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
-</BOUCLE_plugindist>
 
 		<h1 class="grostitre"><:lister_config:titre_page:></h1>
 		<p><:lister_config:description_page:></p>
-
 <B_config>
 <div class="liste-plugins">
 	<div class="liste plugins" id="liste_plugins">
 		<ul class="liste-items">
-			<BOUCLE_config(PLUGINS) {tout} {par nom} {prefixe IN #GET{actif}}>
+			<BOUCLE_config(PAQUETS plugins) {tout} {par nom} {prefixe IN #GET{actif}}>
 			<li class="item" id="[(#PREFIXE|strtolower)]">
 				<div class="resume">
 					<h3 class="nom">[(#NOM)]</h3>
