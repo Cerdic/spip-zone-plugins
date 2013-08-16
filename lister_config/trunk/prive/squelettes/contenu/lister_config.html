@@ -17,7 +17,7 @@
 						[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]
 					</div>
 					<div class="icon">[
-						(#CHEMIN_IMAGE{#LOGO}|balise_img|image_reduire{32})][
+						(#CHEMIN{#LOGO}|balise_img|image_reduire{32})][
 						(#LOGO|non)<INCLURE{fond=prive/squelettes/inclure/icon-logo,id_plugin=#ID_PLUGIN} />]
 					</div>
 				#SET{prefixe,#PREFIXE|strtolower}
