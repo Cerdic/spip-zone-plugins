@@ -41,14 +41,28 @@ function lister_caches() {
 					$cache['sha'] = $tableau['attributes']['sha'];
 					$cache['nom'] .= " ({$tableau['attributes']['version']})";
 				}
-				if (isset($boussoles[$alias_boussole]['prefixe'])) {
+				if (isset($boussoles[$alias_boussole]['prefixe'])
+				AND ($boussoles[$alias_boussole]['prefixe'])) {
+					// Boussole utilisant un plugin
 					$informer = charger_fonction('informer_plugin', 'inc');
 					$infos = $informer($boussoles[$alias_boussole]['prefixe']);
 					if ($infos)
 						$cache['plugin'] = "{$infos['nom']} ({$boussoles[$alias_boussole]['prefixe']}/{$infos['version']})";
 				}
-				else
+				else {
+					// Boussole utilisant un plugin
 					$cache['plugin'] = _T('boussole:info_boussole_manuelle');
+
+					// Ajout de la version dans le fichier XML source de la boussole
+					$fichier_source = find_in_path("boussole_traduite-${alias_boussole}.xml");
+					lire_fichier($fichier_source, $contenu_source);
+					$tableau_source = $convertir(simplexml_load_string($contenu_source), false);
+					$tableau_source = $tableau_source['root'];
+					if  (isset($tableau_source['name'])
+					AND ($tableau_source['name'] == 'boussole')) {
+						$cache['plugin'] .= " ({$tableau_source['attributes']['version']})";
+					}
+				}
 			}
 			$caches[] = $cache;
 		}
