@@ -2,7 +2,7 @@
 	<nom>Google Viewer</nom>
 	<slogan>Mod&#232;les d’insertion de documents utilisant le lecteur de documents de Google</slogan>
 	<auteur>Joseph</auteur>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>stable</etat>
 	<description>
 	Mod&#232;le pour utiliser le [lecteur de documents en ligne de Google->http://docs.google.com/viewer]. Ce plugin &#233;tend le mod&#232;ve <code><mediaXX|embed></code> pour les documents de type doc, docx, xls, xlsx, ppt, pptx, pdf, ai, psd, eps, ps, et ttf. En l'absence des mod&#232;les media, il est possible d'utiliser <code><embXX|google></code>.

@@ -2,19 +2,19 @@
 [(#HTML5|non)
 	[(#MEDIA_AFFICHER_LEGENDE|non)
 		<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_google media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-			<iframe src="http://docs.google.com/viewer?url=[(#FICHIER|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
+			<iframe src="http://docs.google.com/viewer?url=[(#URL_DOCUMENT|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
 		</div>
 	]
 	[(#MEDIA_AFFICHER_LEGENDE|oui)
 		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_google media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-		<dt><iframe src="http://docs.google.com/viewer?url=[(#FICHIER|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe></dt>
+		<dt><iframe src="http://docs.google.com/viewer?url=[(#URL_DOCUMENT|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe></dt>
 		[(#MEDIA_LEGENDE{'dl',#MEDIA_TAILLE{largeur}})]
 		</dl>
 	]
 ]
 [(#HTML5|oui)
 	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_google media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-	<iframe src="http://docs.google.com/viewer?url=[(#FICHIER|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
+	<iframe src="http://docs.google.com/viewer?url=[(#URL_DOCUMENT|url_absolue|urlencode)]&embedded=true" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
 	[(#MEDIA_AFFICHER_LEGENDE|oui)<figcaption>[(#MEDIA_LEGENDE{'div',#MEDIA_TAILLE{largeur}})]</figcaption>]
 	</figure>
 ]

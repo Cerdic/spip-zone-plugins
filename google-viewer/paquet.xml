@@ -1,7 +1,7 @@
 <paquet
 	prefix="gviewer"
 	categorie="edition"
-	version="0.3.0"
+	version="0.3.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="images/gviewer.png"
