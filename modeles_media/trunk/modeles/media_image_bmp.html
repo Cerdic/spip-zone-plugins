@@ -5,7 +5,7 @@
 ]
 [(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]
 [(#SET{alt,#GET{alt}|=={titre}|?{#TITRE|sinon{#TYPE_DOCUMENT|concat{' - '}|concat{#TAILLE|taille_en_octets}},#GET{alt}}})]
-[(#SET{img,[<img src="(#FICHIER)" style="height: #MEDIA_TAILLE{hauteur} px; width: #MEDIA_TAILLE{largeur} px;" height="#MEDIA_TAILLE{hauteur}" width="#MEDIA_TAILLE{largeur}" alt="#GET{alt}" />]})]
+[(#SET{img,[<img src="(#URL_DOCUMENT)" style="height: #MEDIA_TAILLE{hauteur} px; width: #MEDIA_TAILLE{largeur} px;" height="#MEDIA_TAILLE{hauteur}" width="#MEDIA_TAILLE{largeur}" alt="#GET{alt}" />]})]
 [(#SET{width,#MEDIA_TAILLE{largeur}})]
 [(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
 	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>

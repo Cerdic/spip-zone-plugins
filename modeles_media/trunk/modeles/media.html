@@ -28,4 +28,4 @@
 #SET{variante,#ENV{text}|=={text}|?{text,#GET{variante}}}
 #SET{variante,#ENV{application}|=={application}|?{application,#GET{variante}}}
 
-[(#INCLURE{fond=modeles/media_#GET{variante},legende=#GET{legende},lien=#GET{lien},titre=#GET{titre},descriptif=#GET{descriptif},credits=#GET{credits},type=#GET{type},poids=#GET{poids},class=#GET{class},env})]
+<INCLURE{fond=modeles/media_#GET{variante},legende=#GET{legende},lien=#GET{lien},titre=#GET{titre},descriptif=#GET{descriptif},credits=#GET{credits},type=#GET{type},poids=#GET{poids},class=#GET{class},env,connect}>

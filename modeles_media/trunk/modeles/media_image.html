@@ -7,12 +7,12 @@
 ]
 [(#REM) Existe-il un modèle spécifique à cette extension ?]
 [(#CHEMIN{modeles/media_image_#EXTENSION.html}|oui)
-	[(#INCLURE{fond=modeles/media_image_#EXTENSION}{id=#ID_DOCUMENT}{env})]
+	<INCLURE{fond=modeles/media_image_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
 ]
 [(#CHEMIN{modeles/media_image_#EXTENSION.html}|non)
 	[(#REM) Cas d'une inclusion avec <img>.]
 	[(#INCLUS|=={image}|oui)
-		[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#FICHIER}})]
+		[(#SET{img,#MEDIA_IMAGE_RETAILLEE{#URL_DOCUMENT}})]
 		[(#SET{width,[(#GET{img}|extraire_attribut{width})]})]
 		[(#MEDIA_AFFICHER_LEGENDE|et{#HTML5|non})
 			<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_image media_image_#EXTENSION[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
@@ -67,7 +67,7 @@
 	]
 	[(#REM) Cas d'un type de fichier ne pouvant être inclu : on renvoie la vignette.]
 	[(#INCLUS|=={non}|oui)
-		[(#INCLURE{fond=modeles/media_vignette}{id=#ID_DOCUMENT}{env})]
+		<INCLURE{fond=modeles/media_vignette, id=#ID_DOCUMENT, env, connect}>
 	]
 ]
 </BOUCLE_doc>

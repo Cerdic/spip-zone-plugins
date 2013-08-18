@@ -1,7 +1,7 @@
 <BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
 [(#REM) Existe-il un modèle spécifique à cette extension ?]
 [(#CHEMIN{modeles/media_audio_#EXTENSION.html}|oui)
-	[(#INCLURE{fond=modeles/media_audio_#EXTENSION}{id=#ID_DOCUMENT}{env})]
+	<INCLURE{fond=modeles/media_audio_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
 ]
 [(#CHEMIN{modeles/media_audio_#EXTENSION.html}|non)
 	[(#SET{alt,#ENV{alt}|sinon{#ENV{titre}}|sinon{titre}})]

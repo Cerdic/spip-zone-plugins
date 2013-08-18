@@ -1,25 +1,25 @@
 <BOUCLE_doc (DOCUMENTS) {id_document=#ENV{id}} {tout}>
 [(#REM) Existe-il un modèle spécifique à cette extension ?]
 [(#CHEMIN{modeles/media_text_#EXTENSION.html}|oui)
-	[(#INCLURE{fond=modeles/media_text_#EXTENSION}{id=#ID_DOCUMENT}{env})]
+	<INCLURE{fond=modeles/media_text_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
 ]
 [(#CHEMIN{modeles/media_text_#EXTENSION.html}|non)
 	[(#HTML5|non)
 		[(#MEDIA_AFFICHER_LEGENDE|non)
 			<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_text media_text_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-			[(#FICHIER|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})]
+			[(#URL_DOCUMENT|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})]
 			</div>
 		]
 		[(#MEDIA_AFFICHER_LEGENDE|oui)
 			<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_text media_text_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-			[<dt>(#FICHIER|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})</dt>]
+			[<dt>(#URL_DOCUMENT|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})</dt>]
 			[(#MEDIA_LEGENDE{'dl',''})]
 			</dl>
 		]
 	]
 	[(#HTML5|oui)
 		<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_text media_text_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-		[(#FICHIER|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})]
+		[(#URL_DOCUMENT|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})]
 		[(#MEDIA_AFFICHER_LEGENDE|oui)<figcaption>[(#MEDIA_LEGENDE{'div',''})]</figcaption>]
 		</figure>
 	]

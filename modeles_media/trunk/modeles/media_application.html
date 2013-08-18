@@ -1,7 +1,7 @@
 <BOUCLE_doc (DOCUMENTS types_documents) {id_document=#ENV{id}} {tout}>
 [(#REM) Existe-il un modèle spécifique à cette extension ?]
 [(#CHEMIN{modeles/media_application_#EXTENSION.html}|oui)
-	[(#INCLURE{fond=modeles/media_application_#EXTENSION}{id=#ID_DOCUMENT}{env})]
+	<INCLURE{fond=modeles/media_application_#EXTENSION, id=#ID_DOCUMENT, env, connect}>
 ]
 [(#CHEMIN{modeles/media_application_#EXTENSION.html}|non|et{#INCLUS|=={embed}|oui})
 	#SET{hauteur,#MEDIA_TAILLE{hauteur}} #SET{largeur,#MEDIA_TAILLE{largeur}}
