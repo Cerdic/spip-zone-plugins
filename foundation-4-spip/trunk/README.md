@@ -18,6 +18,12 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
+## Foundation-4-SPIP 1.3.9
+
+* Mise à jour de foundation. (4.3.0 => 4.3.1) 
+* Signaler que le fichier htc est expérimental. 
+* Version 1.3.9, et passer en stable. 
+
 ## Foundation-4-SPIP 1.3.7
 
 * Activer Foundation 4 à l'installation de foundation.
