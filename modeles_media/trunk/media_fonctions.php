@@ -17,11 +17,15 @@ function balise_MEDIA_LEGENDE_dist($p) {
 	$sql_credits = champ_sql('credits', $p);
 	$sql_type = champ_sql('type_document', $p);
 	$sql_poids = champ_sql('taille', $p);
-	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0]['args'])";
+	$connect = '';
+	if (isset($p->boucles[$p->id_boucle]))
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = _q($connect);
+	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0]['args'],$connect)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,$args){
+function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,$args,$connect=''){
 	$ret = '';
 	$env_legende = $args['legende'];
 	$env_titre = $args['titre'];
@@ -46,18 +50,19 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				'poids' => $env_poids,
 				'width' => $width,
 				'conteneur' => $conteneur
-			));
+			),array(),$connect);
 		} else {
 			$width = is_numeric($width) ? 'width: '.intval($width).'px;' : '';
 			$dt = $conteneur=='dl' ? 'dt' : 'div';
 			$dd = $conteneur=='dl' ? 'dd' : 'div';
+			$distant = ($connect) ? $connect.'__' : '';
 			// Titre
 			if ($env_titre && $env_titre!='titre') {
 				$titre = typo($env_titre);
 				$crayons_titre = '';
 			} elseif ($env_titre=='titre' || $env_legende) {
 				$titre = typo(supprimer_numero($sql_titre));
-				$crayons_titre = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-titre-'.$sql_id_document : '';
+				$crayons_titre = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon '.$distant.'document-titre-'.$sql_id_document : '';
 			} else {
 				$titre = '';
 				$crayons_titre = '';
@@ -68,7 +73,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$crayons_descriptif = '';
 			} elseif ($env_descriptif=='descriptif' || $env_legende) {
 				$descriptif = propre($sql_descriptif);
-				$crayons_descriptif = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-descriptif-'.$sql_id_document : '';
+				$crayons_descriptif = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon '.$distant.'document-descriptif-'.$sql_id_document : '';
 			} else {
 				$descriptif = '';
 				$crayons_descriptif = '';
@@ -83,7 +88,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$crayons_credits = '';
 			} elseif ($env_credits=='credits' || $env_legende=='complete') {
 				$credits = typo($sql_credits);
-				$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_MEDIAS') ? ' crayon document-credits-'.$sql_id_document : '';
+				$crayons_credits = defined('_DIR_PLUGIN_CRAYONS') && defined('_DIR_PLUGIN_MEDIAS') ? ' crayon '.$distant.'document-credits-'.$sql_id_document : '';
 			} else {
 				$credits = '';
 				$crayons_credits = '';
@@ -199,11 +204,15 @@ function balise_MEDIA_LIEN_dist($p) {
 	$forcer_lien = interprete_argument_balise(2,$p);
 	$forcer_lien = is_null($forcer_lien) ? "''" : $forcer_lien;
 	$id_document = champ_sql('id_document', $p);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['args'])";
+	$connect = '';
+	if (isset($p->boucles[$p->id_boucle]))
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = _q($connect);
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['args'],$connect)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$args) {
+function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$args,$connect='') {
 	$lien = $args['lien'];
 	$titre_lien = $args['titre_lien'];
 	$titre = $args['titre'];
@@ -218,10 +227,13 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$args) {
 		if (!$titre_lien && $titre && $titre!='titre')
 			$titre_lien = $titre;
 	}
-	$l = calculer_url($lien, $titre_lien, 'tout');
+	$l = calculer_url($lien, $titre_lien, 'tout', $connect);
 	if (!$l['url']) 
 		return $object;
-	$a = '<a href="'.$l['url'].'"';
+	if ($connect) #Si connexion précisée, alors on fournit une URL absolue
+		$a = '<a href="'.url_absolue($l['url']).'"';
+	else
+		$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html($l['titre']).'"' : '';
 	$a .= $l['lang'] ? ' hreflang="'.$l['lang'].'"' : '';
