@@ -174,7 +174,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$img = image_reduire($src,$largeur,$hauteur);
 		}
 	else
-		$img = "<img src=\"$src\" style=\"height: $height px; width: $width px;\" height=\"$height\" width=\"$width\" />";
+		$img = "<img src=\"$src\" style=\"height: $height"."px; width: $width"."px;\" height=\"$height\" width=\"$width\" />"; // Pas d'espace
 	// Ajouter une alternative
 	// Variable alt si transmise, sinon le titre du document, sinon type et poids
 	if ($alt)
