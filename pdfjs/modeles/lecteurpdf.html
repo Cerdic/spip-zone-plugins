@@ -9,4 +9,5 @@
 
 
 
-]<iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="[(#ENV{largeur}|?{#ENV{largeur},490})]" height="[(#ENV{hauteur}|?{#ENV{hauteur},600})]" class="lecteurpdf lecteufpdf-#ENV{id} spip_documents[ spip_documents_(#ENV{align})]"></iframe>
+]<!--#EVAL{chr('91')}if !IE#EVAL{chr('93')}><!--><iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="[(#ENV{largeur}|?{#ENV{largeur},490})]" height="[(#ENV{hauteur}|?{#ENV{hauteur},600})]" class="lecteurpdf lecteufpdf-#ENV{id} spip_documents[ spip_documents_(#ENV{align})]"></iframe><!--<!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+<!--#EVAL{chr('91')}if IE#EVAL{chr('93')}><iframe src="[(#URL_DOCUMENT)]" width="[(#ENV{largeur}|?{#ENV{largeur},490})]" height="[(#ENV{hauteur}|?{#ENV{hauteur},600})]" class="lecteurpdf lecteufpdf-#ENV{id} spip_documents[ spip_documents_(#ENV{align})]"></iframe><!#EVAL{chr('91')}endif#EVAL{chr('93')}-->

@@ -2,20 +2,25 @@
 [(#HTML5|non)
 	[(#MEDIA_AFFICHER_LEGENDE|non)
 		<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_pdfjs media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-			<iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
+			<!--#EVAL{chr('91')}if !IE#EVAL{chr('93')}><!--><iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!--<!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+			<!--#EVAL{chr('91')}if IE#EVAL{chr('93')}><iframe src="[(#URL_DOCUMENT)]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
 		</div>
 	]
 	[(#MEDIA_AFFICHER_LEGENDE|oui)
 		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_pdfjs media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-		<dt><iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe></dt>
+		<dt>
+			<!--#EVAL{chr('91')}if !IE#EVAL{chr('93')}><!--><iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!--<!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+			<!--#EVAL{chr('91')}if IE#EVAL{chr('93')}><iframe src="[(#URL_DOCUMENT)]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+		</dt>
 		[(#MEDIA_LEGENDE{'dl',#MEDIA_TAILLE{largeur}})]
 		</dl>
 	]
 ]
 [(#HTML5|oui)
 	<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media_pdfjs media_[(#MIME_TYPE|groupe_mime)] media_[(#MIME_TYPE|groupe_mime)]_#EXTENSION[ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>
-	<iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe>
-	[(#MEDIA_AFFICHER_LEGENDE|oui)<figcaption>[(#MEDIA_LEGENDE{'div',#MEDIA_TAILLE{largeur}})]</figcaption>]
+		<!--#EVAL{chr('91')}if !IE#EVAL{chr('93')}><!--><iframe src="[(#URL_PAGE{pdfjs}|parametre_url{id_document,#ENV{id}})]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!--<!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+		<!--#EVAL{chr('91')}if IE#EVAL{chr('93')}><iframe src="[(#URL_DOCUMENT)]" width="#MEDIA_TAILLE{largeur}" height="#MEDIA_TAILLE{hauteur}" style="border: none;"></iframe><!#EVAL{chr('91')}endif#EVAL{chr('93')}-->
+		[(#MEDIA_AFFICHER_LEGENDE|oui)<figcaption>[(#MEDIA_LEGENDE{'div',#MEDIA_TAILLE{largeur}})]</figcaption>]
 	</figure>
 ]
 </BOUCLE_doc>
