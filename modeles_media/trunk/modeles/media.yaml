@@ -29,7 +29,7 @@ parametres:
       datas:
         icone: '<:media:item_icone:>'
         vignette: '<:media:item_vignette:>'
-        embed: '<:media:item_embed:>'
+        insert: '<:media:item_insert:>'
   -
     saisie: 'selection'
     options:

@@ -18,9 +18,9 @@ function media_raccourcis_doc($id_document){
 		. affiche_raccourci_media('media', $id_document,'vignette',  'right');
 	$raccourci .= 
 		  "<span>"._T('medias:info_inclusion_directe')."</span>"
-		. affiche_raccourci_media('media', $id_document,'embed',  'left')
-		. affiche_raccourci_media('media', $id_document,'embed',  'center')
-		. affiche_raccourci_media('media', $id_document,'embed',  'right');
+		. affiche_raccourci_media('media', $id_document,'insert',  'left')
+		. affiche_raccourci_media('media', $id_document,'insert',  'center')
+		. affiche_raccourci_media('media', $id_document,'insert',  'right');
 	return "<div class='raccourcis'>".$raccourci."</div>";
 }
 
