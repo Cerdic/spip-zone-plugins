@@ -1,6 +1,7 @@
 <BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
+[(#SET{annee,#DATE_DEBUT|annee})][(#SET{mois,#DATE_DEBUT|nom_mois})][(#SET{jour,#DATE_DEBUT|jour})]
 <article class="entry evenement vevent id_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
-	<span class="banner #EDIT{date_debut}"><span class="label label-inverse"><b class="day">[(#DATE_DEBUT|jour)]</b> <b class="month">[(#DATE_DEBUT|nom_mois)]</b> <b class="year">[(#DATE_DEBUT|annee)]</b></span></span>
+	<span class="banner #EDIT{date_debut}"><span class="label label-inverse"><:agenda:date_fmt_agenda_label{annee=#GET{annee},mois=#GET{mois},jour=#GET{jour}}:></span></span>
 	<strong class="h3-like summary entry-title #EDIT{titre}"><a itemprop="url" class="url" href="[(#URL_EVENEMENT)]">[(#LOGO_EVENEMENT|image_reduire{150,100}|inserer_attribut{itemprop,image})]<span itemprop="name">#TITRE</span><span
 			class="lire-la-suite hide"><i class="icon-chevron-right" title="<:zpip:lire_la_suite|attribut_html:><:zpip:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></strong>
 	<meta itemprop="startDate" content="[(#DATE_DEBUT|date_iso)]" />
