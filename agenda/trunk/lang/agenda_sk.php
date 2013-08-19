@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion_necessaire_pour_inscription' => 'Ďakujeme vám, že sa prihlásite predtým, ako sa zaregistrujete na túto udalosť.',
 	'creer_evenement' => 'Vytvoriť udalosť',
 
+	// D
+	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>', # NEW
+
 	// E
 	'erreur_article_interdit' => 'Nemáte dostatočné práva na to, aby ste mohli priradiť túto udalosť k tomuto článku',
 	'erreur_article_manquant' => 'Musíte uviesť článok',

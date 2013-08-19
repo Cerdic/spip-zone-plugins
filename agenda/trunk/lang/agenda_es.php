@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion_necessaire_pour_inscription' => 'Gracias por <a href=\'#LOGIN_PUBLIC\'>conectarse</a> para poder inscribirse a este evento.',
 	'creer_evenement' => 'Crear un evento',
 
+	// D
+	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>', # NEW
+
 	// E
 	'erreur_article_interdit' => 'No tiene permiso para asociar este evento a este artículo',
 	'erreur_article_manquant' => 'Debe indicar un artículo',

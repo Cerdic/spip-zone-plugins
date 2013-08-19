@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_evenement' => 'Créer un événement',
 
 	// D
-	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>', // Crée la date pour le label des résumés, reçoit en argument 'annee' (int), 'mois' (string), 'jour' (int)
-	
+	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>',
+
 	// E
 	'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet événement à cet article',
 	'erreur_article_manquant' => 'Vous devez indiquer un article',
