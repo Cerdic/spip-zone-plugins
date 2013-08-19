@@ -13,6 +13,18 @@
 						label=<:dayfill:label_auteurs_potentiels:>,
 						class=chosen,
 						explication=<:dayfill:explication_id_auteur:> })]
+
+		[(#SAISIE{groupe_mots, types_activite,
+						label=<:dayfill:label_groupe_mots_activites:>,
+						class=chosen,
+						explication=<:dayfill:explication_groupe_mots_activites:> })]
+
+		[(#SAISIE{mot, activite_par_defaut,
+			label=<dayfill:label_activite_par_defaut:>,
+			id_groupe=#CONFIG{dayfill/types_activite},
+			class=chosen,
+			explication=<:dayfill:explication_activite_par_defaut:> })]
+
 		</ul>
 		<input type="hidden" name="_meta_casier" value="dayfill" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
