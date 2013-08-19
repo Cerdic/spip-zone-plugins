@@ -46,17 +46,17 @@ input.submit {.btn}
 
 /* choix de mot dans le form forum notamment */
 .formulaire_spip .choix_mots {#grid > .fluid > .row-fluid}
-.formulaire_spip .saisie_mot {
+.formulaire_spip .choix_mots .saisie_mot {
   .input-block-level();
   float: left;
   margin-left: @fluidGridGutterWidth;
   *margin-left: @fluidGridGutterWidth - (.5 / @gridRowWidth * 100 * 1%);
   #grid > .fluid > .span(4);
 }
-.formulaire_spip .saisie_mot:nth-child(3n-2) {margin-left: 0;clear: both;}
-.formulaire_spip .saisie_mot label {display:inline;font-weight:normal;}
-.formulaire_spip .saisie_mot input.radio,
-.formulaire_spip .saisie_mot input.checkbox {width:auto;margin: @paddingMini;margin-left:0;margin-bottom: 1px;}
+.formulaire_spip .choix_mots .saisie_mot:nth-child(3n-2) {margin-left: 0;clear: both;}
+.formulaire_spip .choix_mots .saisie_mot label {display:inline;font-weight:normal;}
+.formulaire_spip .choix_mots .saisie_mot input.radio,
+.formulaire_spip .choix_mots .saisie_mot input.checkbox {width:auto;margin: @paddingMini;margin-left:0;margin-bottom: 1px;}
 
 
 /* Champs de saisie */
