@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objectifs'                => 'Objectifs à atteindre',
 
 	//P
+	'page_ajouter_activite'    => 'Ajouter une activité',
 	'page_ajouter_client'      => "Ajouter un client",
 	'projet_precedent'         => 'Projet précédent',
 	'projet_suivant'           => 'Projet suivant',
