@@ -17,25 +17,27 @@
 				explication=<:projets_activite:explication_id_auteur:> })]
 
 			<li class='fieldset obligatoire'>
-			    <fieldset class='date'>
-			        <label for="date_debut"><:dayfill:label_duree:></label>
-			        <p class="explication"><:dayfill:explication_duree:></p>
-			        <ul>
-			            [(#SAISIE{date,
-			                date_debut,
-			                defaut=#DATE,
-			                label=<:dayfill:label_date_action:>})]
-			            [(#SAISIE{heure,
-			                heure_debut,
-			                horaire=oui,heure_pas=5,
-			                label=<:dayfill:label_heure_de:>})]
-			            [(#SAISIE{heure,
-			                heure_fin,
-			                horaire=oui,heure_pas=5,
-                            label=<:dayfill:label_heure_a:>})]
-			        </ul>
-			    </fieldset>
+				<fieldset class='date'>
+					<label for="date_debut"><:dayfill:label_duree:></label>
+					<p class="explication"><:dayfill:explication_duree:></p>
+					<ul>
+						[(#SAISIE{date,
+							date_debut,
+							label=<:dayfill:label_date_action:>})]
+						[(#SAISIE{heure,
+							heure_debut,
+							heure_pas=5,
+							label=<:dayfill:label_heure_de:>})]
+						[(#SAISIE{heure,
+							heure_fin,
+							heure_pas=5,
+							label=<:dayfill:label_heure_a:>})]
+					</ul>
+				</fieldset>
 			</li>
+
+			[(#SAISIE{input, nb_heures_passees, label=<:dayfill:label_temps_passe:>})]
+			[(#SAISIE{input, nb_heures_facturees, label=<:dayfill:label_temps_facture:>})]
 
 			[(#SAISIE{textarea, detail_activite, obligatoire=oui,
 				rows=3,
@@ -55,9 +57,9 @@
 				explication=<:dayfill:explication_quelle_organisation:>})]
 
 			[(#ID_ORGANISATION|oui)
-                [(#SAISIE{projets_organisation,id_projet,obligatoire=oui,
-                    id_organisation=#ID_ORGANISATION,
-	                class="chosen",
+				[(#SAISIE{projets_organisation,id_projet,obligatoire=oui,
+					id_organisation=#ID_ORGANISATION,
+					class="chosen",
 					label=<:dayfill:label_quel_projet:>,
 					explication=<:dayfill:explication_quel_projet:>})]]
 

@@ -10,8 +10,8 @@ function formulaires_ajouter_action_charger_dist()
 
 	return array(
 		'id_auteur'       => $id_auteur,
-		'date_debut'      => $date_debut,
-		'date_fin'        => $date_fin,
+		'date_debut'      => date('Y-m-d H:i:s'),
+		'date_fin'        => date('Y-m-d H:i:s'),
 		'heure_debut'     => date('H:i', strtotime('now - 10 minute')),
 		'heure_fin'       => date('H:i'),
 		'type_activite'   => $type_activite,

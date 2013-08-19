@@ -1,0 +1,19 @@
+[(#REM)
+	Zone de saisie d'heure utilisant le dateur de Bonux si présent.
+	Pour tous on utilise class="heure" pour activer le dateur.
+
+	La valeur fournie doit être au format : 'hh:mm'
+]
+
+[(#REM) Initialisation de la valeur ]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+
+[(#INCLURE{fond=saisies/input,
+	env,
+	nom=#ENV{nom},
+	valeur=#GET{valeur},
+	size=5,
+	maxlength=5,
+	class=[(#ENV{class}) ]heure})]
+
+[(#ENV{disable}|non|et{#ENV{readonly}|non})[(#INCLURE{fond=formulaires/dateur/inc-dateur, heure_pas=#ENV{heure_pas,30}})]]

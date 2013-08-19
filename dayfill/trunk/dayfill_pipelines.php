@@ -43,5 +43,9 @@ function dayfill_affiche_enfants($flux) {
 	return $flux;
 }
 
+function dayfill_insert_head_css($flux){
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/dayfill.css').'" media="all" />';
+	return $flux;
+}
 
 ?>

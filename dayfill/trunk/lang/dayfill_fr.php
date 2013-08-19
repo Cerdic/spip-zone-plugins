@@ -20,8 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_id_auteur'             => "Sélectionnez des collaborateurs potentiels parmi tous les auteurs du site.",
+	'explication_duree'                 => "Indiquez la date de l'activité, en précisant les horaires de début et de fin",
 	'explication_groupe_mots_activites' => "Sélectionnez le groupe de mots-clé utilisé pour définir les activités",
-	'explication_type_activite'         => "Sélectionner le type d'activité qui a été effectuée",
+	'explication_type_activite'         => "Sélectionner le type qui correspond le mieux à cette activité",
 	'explication_activite_par_defaut'   => "Précisez le type d'activité sélectionné par défaut",
 	'explication_detail_activite'       => "Décrivez l'activité effectuée",
 	'explication_quelle_organisation'   => "Sélectionez le client pour qui l'activité a été effectuée",
@@ -34,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_action'                 => "Date",
 	'label_detail_activite'             => "Détail de l'activité",
 	'label_decrire_action'              => "Décrivez le type d'action effectuée",
+	'label_duree'                       => "Date et durée de l'activité",
 	'label_groupe_mots_activites'       => "Groupe de mots-clé pour les activités",
 	'label_heure_debut'                 => "Début",
 	'label_heure_fin'                   => "Fin",
@@ -43,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_quel_client'                 => "Pour quel client ?",
 	'label_quelle_organisation'         => "Pour quel client ?",
 	'label_quel_projet'                 => "Dans le cadre de quel projet ?",
+	'label_temps_passe'                 => "Combien de temps passé ?",
+	'label_temps_facture'               => "Combien de temps facturé ?",
 	'label_quel_temps_passe'            => "Combien de temps &agrave; facturer ?",
 	'label_quel_type_action'            => "Quel type d'action a été effectué ?",
 	'label_type_action'                 => "Type d'action",

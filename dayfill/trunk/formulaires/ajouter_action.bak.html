@@ -1,0 +1,126 @@
+#CACHE{0}
+
+<!-- formulaire ajouter_action.html -->
+
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[<p class='formulaire_ok'>(#ENV*{message_ok})&nbsp;-&nbsp;<a href="[(#URL_PAGE{fiche_projet}|parametre_url{'id_projet',#ENV{id_projet}})]">Aller sur la fiche projet</a></p>
+	<script type="text/javascript" language="javascript">
+	document.forms.ajouter_action_rapide.reset();
+	</script>
+]
+
+[(#SET{id_type_action,[(#EVAL{_request('id_type_action')})]} )]
+On met à jour le id_type_action à [(#GET{id_type_action})]<br />
+
+[(#SET{id_organisation,[(#EVAL{_request('id_organisation')})]} )]
+On met à jour le id_organisation à [(#GET{id_organisation})]<br />
+
+[(#SET{id_projet,[(#EVAL{_request('id_projet')})]} )]
+On met à jour le id_projet à [<a href="#URL_PAGE{fiche_projet, id_projet=#GET{id_projet}}">(#GET{id_projet})</a>]<br />
+
+[(#EDITABLE|oui)]
+
+<form name="ajouter_action_rapide" id="ajouter_action_rapide" action="#ENV{action}" method="post">
+
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	[(#REM) Je détermine quel est le id_user de la personne loguée ]
+	<BOUCLE_n(AUTEURS){login=#SESSION{login}}>
+	[(#SET{id,#ID_AUTEUR})]
+	</BOUCLE_n>
+
+	<fieldset id="date">
+		<label for="date_action">Actions du : </label>
+		<input type="text" id="date_action" name="date_action" value="[(#ENV{date_action}|sinon{[(#DATE|affdate{'d/m/Y'})]})]" />
+		<select name="id_user" class="initiales" onchange="check_input(this.value)" >
+			<option value="">---</option>
+			<BOUCLE_auteur(AUTEURS){par nom}>
+			[<option value="#ID_AUTEUR" [(#GET{id}|=={#ID_AUTEUR}|?{'selected="selected"'})]>(#LOGIN)</option>]
+			</BOUCLE_auteur>
+		</select>
+	</fieldset>
+
+
+	<fieldset id="action">
+		<legend><:dayfill:label_quel_type_action:></legend>
+
+		[(#REM) Ici, faire apparaitre la liste des types d'actions possibles ]
+		<B_presta>
+		<select name="id_type_action">
+		<BOUCLE_presta(MOTS){id_groupe==18}{par num titre}>
+			[<option value="#ID_MOT" [(#GET{id_type_action}|=={#ID_MOT}|?{'selected="selected"'})]>(#TITRE|supprimer_numero)</option>]
+		</BOUCLE_presta>
+		</select>
+		</B_presta>
+	</fieldset>
+
+
+	<fieldset id="client">
+		<legend><:dayfill:label_quel_client:></legend>
+
+		[(#REM)
+			Ici, faire apparaitre uniquement la liste des clients en cours
+			(limiter à ceux ayant des projets en cours de validité)
+		]
+		<B_clients>
+		<select name="id_client" onchange="document.forms.ajouter_action_rapide.submit()">
+			<option value="">---</option>
+			<BOUCLE_clients(ORGANISATIONS){tout}{par nom}>
+			<option value="#ID_ORGANISATION" [(#GET{id_organisation}|=={#ID_ORGANISATION}|?{'selected="selected"'})]>#NOM</option>
+			</BOUCLE_clients>
+		</select>
+		</B_clients>
+	</fieldset>
+
+
+	<B_projets>
+	<fieldset id="projet">
+		<legend><:dayfill:label_quel_projet:></legend>
+
+		[(#REM) Ici, faire apparaitre la liste des projets en cours pour ce client : ]
+
+		<select name="id_projet">
+			<option value="">---</option>
+		<BOUCLE_projets(PROJETS){id_organisation=#GET{id_organisation}}{actif='oui'}{!par maj}>
+			[<option value="#ID_PROJET" [(#GET{id_projet}|=={#ID_PROJET}|?{'selected="selected"'})]>(#NOM_PROJET)</option>]
+		</BOUCLE_projets>
+		</select>
+		<input type="button" onclick="this.form.ajouter_projet.style.display='block'" value="+" />
+		<input type="text" name="ajouter_projet" id="ajouter_projet" value="#ENV{ajouter_projet}" style="display:none;" size="40"  />
+
+	</fieldset>
+	</B_projets>        aucun projet trouvé pour ce client #ID_ORGANISATION !
+
+<//B_projets>
+
+	<fieldset>
+		<legend><:dayfill:label_decrire_action:></legend>
+		<textarea name="description" cols="50" rows="4">#ENV{description}</textarea>
+	</fieldset>
+
+	<fieldset id="temps">
+		<legend><:dayfill:label_quel_temps_passe:></legend>
+
+		<?php
+		$error = "";
+		$error .= "[(#ENV**{erreurs}|table_valeur{nb_heure_passees})]";
+		$error .= "[(#ENV**{erreurs}|table_valeur{nb_heure_facturees})]";
+		if( $error != "" ) echo "<p style='color:red;'>Saisissez les heures pass&eacute;es et factur&eacute;es</p>";
+		?>
+
+		<label for="heure_debut"><:dayfill:label_heure_de:></label>
+			<input value="#ENV{heure_debut}" type="text" id="heure_debut" name="heure_debut" />
+		<label for="heure_fin"><:dayfill:label_heure_a:></label>
+			<input value="#ENV{heure_fin}" type="text" id="heure_fin" name="heure_fin" /><br />
+		<label for="nb_heures_passees">Soient :</label>
+			<input value="#ENV{nb_heures_passees}" type="text" id="nb_heures_passees" name="nb_heures_passees" onfocus="calcule_temps('ajouter_action_rapide')" />
+		<label for="nb_heures_facturees"> heures brutes pass&eacute;es,<br />dont </label>
+			<input value="#ENV{nb_heures_facturees}" type="text" id="nb_heures_facturees" name="nb_heures_facturees" /> heures effectives compt&eacute;es.
+	</fieldset>
+
+	<fieldset>
+		<input type="submit" name="ok" value="Ajouter" />
+		<input type="button" name="effacer" value="Effacer" onclick="document.location.href='[(#SELF|parametre_url{id_organisation,0}|parametre_url{id_type_action,0}|parametre_url{id_projet,0})]'; return false" />
+	</fieldset>
+</form>
+
