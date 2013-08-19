@@ -39,7 +39,8 @@ function boussole_actualiser_boussoles() {
  * @param string $boussole	Alias de la boussole
  * @param string $serveur	Alias du serveur fournissant les données sur la boussole
  *
- * @return array
+ * @return array()	index 0 : true ou false
+ * 					index 1 : libellé traduit du message d'erreur
  */
 function boussole_ajouter($boussole, $serveur='spip') {
 
@@ -56,8 +57,8 @@ function boussole_ajouter($boussole, $serveur='spip') {
 
 	// On recupere les infos du fichier xml de description de la boussole
 	$infos = phraser_xml_boussole($boussole, $serveur);
-	if (!$infos OR !$infos['boussole']['alias']){
-		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $boussole));
+	if ($infos['erreur']){
+		$message = _T("boussole:message_nok_{$infos['erreur']}", array('alias' => $boussole, 'serveur' => $serveur));
 		return array(false, $message);
 	}
 
@@ -153,11 +154,12 @@ function boussole_supprimer($aka_boussole) {
  * @param string $boussole	Alias de la boussole
  * @param string $serveur	Alias du serveur fournissant les données sur la boussole
  *
- * @return array()
+ * @return array()	index 0 : true ou false
+ * 					index 1 : id de l'erreur (l'item associé se construit en rajoutant message_nok_ en préfixe)
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {
 
-	$infos = array();
+	$infos = array('erreur' => '');
 
 	// Acquérir les informations de la boussole à partir du serveur
 	include_spip('inc/distant');
@@ -244,6 +246,13 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 				}
 			}
 		}
+	}
+	else if (isset($tableau['name'])
+		 AND ($tableau['name'] == 'erreur')) {
+		$infos['erreur'] = $tableau['attributes']['id'];
+	}
+	else {
+		$infos['erreur'] = 'reponse_invalide';
 	}
 	
 	return $infos;

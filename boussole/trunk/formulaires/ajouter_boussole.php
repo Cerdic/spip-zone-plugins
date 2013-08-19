@@ -4,10 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_ajouter_boussole_charger_dist() {
 
-	$boussoles = charger_boussoles();
+	list($boussoles, $message) = charger_boussoles();
 	return array(
 			'boussole' => _request('boussole'),
-			'_boussoles' => $boussoles);
+			'_boussoles' => $boussoles,
+			'message_erreur' => $message,
+			'editable' => ($message ? false : true));
 }
 
 
@@ -54,6 +56,7 @@ function charger_boussoles() {
 	// On boucle sur tous les serveurs configurés pour le site client
 	// -- pour chacun on acquiert la liste des boussoles disponibles
 	$liste = array();
+	$message = '';
 	$index = 1;
 	foreach($GLOBALS['client_serveurs_disponibles'] as $_serveur => $_infos) {
 		$action = str_replace(
@@ -83,9 +86,16 @@ function charger_boussoles() {
 				}
 			}
 		}
+		else if (isset($tableau['name'])
+				 AND ($tableau['name'] == 'erreur')) {
+			$message .= _T("boussole:message_nok_{$tableau['attributes']['id']}", array('serveur' => $_serveur)) . ' ';
+		}
+		else {
+			$message .= _T('boussole:message_nok_reponse_invalide', array('serveur' => $_serveur)) . ' ';
+		}
 	}
 
-	return $liste;
+	return array($liste, $message);
 }
 
 ?>

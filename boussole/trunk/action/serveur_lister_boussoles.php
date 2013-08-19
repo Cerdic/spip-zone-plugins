@@ -16,20 +16,27 @@ function action_serveur_lister_boussoles_dist(){
 		$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
 
+		// Si erreur, on renvoie un id sous forme d'une balise erreur
+		$erreur = '';
+		$fichier_liste = '';
 		if ($boussoles) {
 			// Vérifier que le cache existe
 			$fichier_liste = _DIR_VAR . "cache-boussoles/boussoles.xml";
 			if (!file_exists($fichier_liste)) {
-				spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias)", 'boussole' . _LOG_ERREUR);
+				$erreur = 'cache_liste_indisponible';
+				spip_log("Le fichier cache de la liste des boussoles n'est pas disponible (alias = $alias)", 'boussole' . _LOG_ERREUR);
 			}
 			else {
-				$page = recuperer_fond('actionner', array('fichier' => $fichier_liste));
-				echo $page;
 				spip_log("Liste des boussoles disponibles fournie", 'boussole' . _LOG_INFO);
 			}
 		}
-		else
+		else {
+			$erreur = 'aucune_boussole_hebergee';
 			spip_log("Aucune boussole disponible sur ce serveur", 'boussole' . _LOG_ERREUR);
+		}
+
+		$page = recuperer_fond('actionner', array('fichier' => $fichier_liste, 'erreur' => $erreur));
+		echo $page;
 	}
 }
 
