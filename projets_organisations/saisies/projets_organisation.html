@@ -1,0 +1,7 @@
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_projets(PROJETS){id_organisation}{statut !IN cloture,arrete,abandonne,poubelle}{!par date}>
+		<option value="#ID_PROJET"[(#ID_PROJET|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>]
+	</BOUCLE_projets>
+</select>
