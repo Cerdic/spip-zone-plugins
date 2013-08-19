@@ -1,3 +1,6 @@
+@import "css/bootjquery.mixins.less";
+@import "css/mixins.less";
+@import "css/bootjquery.variables.less";
 @import "css/variables.less";
 
 /*
@@ -54,7 +57,9 @@
 		margin: 0 2.3em;
 		line-height: 1.8em;
 		text-align: center;
-		select { 
+		select {
+		  line-height:auto;
+		  height:auto;
 			font-size:1em; 
 			margin:1px 0; 
 		}
@@ -87,6 +92,9 @@
 			text-decoration: none; 
 		}
 	}
+	td.ui-state-highlight{
+    border: 0; 
+  }
 	.ui-datepicker-buttonpane { 
 		background-image: none; 
 		margin: .7em 0 0 0; 
@@ -106,6 +114,40 @@
 			}
 		}
 	}
+	.ui-state-default {
+    border: 0;
+    background:none;
+    margin-bottom: 0;
+    padding: 5px;
+    color: gray;
+    text-align: center;
+    filter: none;
+    &:hover{
+      background:@linkColor;
+      color:white;
+      .border-radius( 4px );
+    }
+  }
+  
+  .ui-state-highlight{
+    color: #404040;
+    background: #eedc94;
+    #gradient > .vertical (#fceec1, #eedc94);
+    .reset-filter();
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-color: #eedc94 #eedc94 #e4c652;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    .border-radius(4px);
+  }
+  
+  .ui-state-active {
+    background:@grayLight;
+    margin-bottom:0px;
+    font-size:normal;
+    text-shadow: 0px;
+    color:white;  
+    .border-radius( 4px );
+  }
 }
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi { width:auto; }
@@ -187,7 +229,7 @@
 
 .ui-datepicker-today {
 	a{
-		background-color: @blueDark;
+		background-color: @linkColor;
 		cursor: pointer;
 		padding: 0 4px;
 		margin-bottom:0px;
@@ -209,38 +251,5 @@
 		color:white;
 	}
 
-	.ui-state-default {
-		border: 0;
-		background:none;
-		margin-bottom: 0;
-		padding: 5px;
-		color: gray;
-		text-align: center;
-		filter: none;
-		&:hover{
-			background:@blueDark;
-			color:white;
-			.border-radius( 4px );
-		}
-	}
 	
-	.ui-state-highlight{
-		color: #404040;
-		background: #eedc94;
-		#gradient > .vertical (#fceec1, #eedc94);
-		.reset-filter();
-		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-		border-color: #eedc94 #eedc94 #e4c652;
-		border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-		.border-radius(4px);
-	}
-	
-	.ui-state-active {
-		background:@grayLight;
-		margin-bottom:0px;
-		font-size:normal;
-		text-shadow: 0px;
-		color:white;  
-		.border-radius( 4px );
-	}
 }
