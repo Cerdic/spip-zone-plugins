@@ -16,17 +16,31 @@
 				label=<:projets_activite:label_id_auteur:>,
 				explication=<:projets_activite:explication_id_auteur:> })]
 
-			[(#SAISIE{date, date_debut, obligatoire=oui,
-				label=<:projets_activite:label_date_debut:>,
-				defaut=#DATE,
-				explication=<:projets_activite:explication_date_debut:>,
-				horaire=oui,heure_pas=5})]
+			<li class='fieldset obligatoire'>
+			    <fieldset class='date'>
+			        <label for="date_debut"><:dayfill:label_duree:></label>
+			        <p class="explication"><:dayfill:explication_duree:></p>
+			        <ul>
+			            [(#SAISIE{date,
+			                date_debut,
+			                defaut=#DATE,
+			                label=<:dayfill:label_date_action:>})]
+			            [(#SAISIE{heure,
+			                heure_debut,
+			                horaire=oui,heure_pas=5,
+			                label=<:dayfill:label_heure_de:>})]
+			            [(#SAISIE{heure,
+			                heure_fin,
+			                horaire=oui,heure_pas=5,
+                            label=<:dayfill:label_heure_a:>})]
+			        </ul>
+			    </fieldset>
+			</li>
 
-			[(#SAISIE{date, date_fin, obligatoire=oui,
-				label=<:projets_activite:label_date_fin:>,
-				defaut=#DATE,
-				explication=<:projets_activite:explication_date_fin:>,
-				horaire=oui,heure_pas=5})]
+			[(#SAISIE{textarea, detail_activite, obligatoire=oui,
+				rows=3,
+				label=<:dayfill:label_detail_activite:>,
+				explication=<:dayfill:explication_detail_activite:>})]
 
 			[(#SAISIE{mot, type_activite,
 				class="chosen",
@@ -34,11 +48,6 @@
 				defaut=#CONFIG{dayfill/activite_par_defaut},
 				label=<:dayfill:label_type_activite:>,
 				explication=<:dayfill:explication_type_activite:>})]
-
-			[(#SAISIE{textarea, description_activite, obligatoire=oui,
-				rows=3,
-				label=<:dayfill:label_detail_activite:>,
-				explication=<:dayfill:explication_detail_activite:>})]
 
 			[(#SAISIE{organisations_select, id_organisation, obligatoire=oui,
 				class="chosen",
