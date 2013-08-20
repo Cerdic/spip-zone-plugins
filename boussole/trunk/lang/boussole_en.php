@@ -92,11 +92,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
-	'message_nok_boussole_inconnue' => 'No compass correspond to the alias "@alias@"',
-	'message_nok_champ_obligatoire' => 'Mandatory field',
-	'message_nok_ecriture_bdd' => 'Database writing error (table @table@)',
-	'message_nok_xml_introuvable' => 'The file « @fichier@ » cannot be found',
-	'message_nok_xml_invalide' => 'The XML description file « @fichier@ » of the compass is not conform to the DTD',
+	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n\'est encore hébergée sur le serveur «@serveur@».', # NEW
+	'message_nok_boussole_inconnue' => 'No compass correspond to the alias "@alias@"', # MODIF
+	'message_nok_boussole_non_hebergee' => 'La boussole «@alias@» n\'est pas hébergée sur le serveur «@serveur@».', # NEW
+	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole «@alias@» n\'est pas disponible sur le serveur «@serveur@».', # NEW
+	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur «@serveur@».', # NEW
+	'message_nok_ecriture_bdd' => 'Database writing error (table @table@)', # MODIF
+	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
 	'message_ok_boussole_actualisee' => 'The compass « @fichier@ » has been updated.',
 	'message_ok_boussole_ajoutee' => 'The compass « @fichier@ » has been added.',
 	'modele_boussole_liste_avec_logo' => 'List of links with names, logos and descritpion',

@@ -92,12 +92,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
-	'message_nok_champ_obligatoire' => 'Toto pole je povinné',
+	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n\'est encore hébergée sur le serveur «@serveur@».', # NEW
+	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"', # MODIF
+	'message_nok_boussole_non_hebergee' => 'La boussole «@alias@» n\'est pas hébergée sur le serveur «@serveur@».', # NEW
+	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole «@alias@» n\'est pas disponible sur le serveur «@serveur@».', # NEW
+	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur «@serveur@».', # NEW
 	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy
-(tabuľka @table@)',
-	'message_nok_xml_introuvable' => 'Súbor "@fichier@" sa nenašiel',
-	'message_nok_xml_invalide' => 'Súbor XML "@fichier@" s opisom kompasu nevyhovuje štandardu DTD',
+(tabuľka @table@)', # MODIF
+	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
 	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.',
 	'modele_boussole_liste_avec_logo' => 'Zoznam odkazov s názvami, logami a opisom',
