@@ -135,7 +135,7 @@
 			<source[ type='(#EXTENSION|in_array{#LISTE{mp4,m4v}}|?{'video/mp4',#MIME_TYPE}|trim)[; codecs="(#VIDEOCODECID)[,(#AUDIOCODECID)]"]'] src="[(#FICHIER|timestamp|url_absolue)]" />
 		</BOUCLE_ssdoc>[(#ENV{fichier}|oui)
 		<source type="#GET{type}" src="[(#ENV{fichier}|timestamp|url_absolue)]" />]
-		<BOUCLE_doc_orig(DOCUMENTS){id_document}{tout}>
+		<BOUCLE_doc_orig(DOCUMENTS){id_document=#ID}{tout}>
 			<source[ type='(#EXTENSION|in_array{#LISTE{mp4,m4v}}|?{"video/mp4",#MIME_TYPE}|trim)[; codecs="(#VIDEOCODECID)[,(#AUDIOCODECID)]"]'] src="[(#FICHIER|timestamp|url_absolue)]" />
 		</BOUCLE_doc_orig>
 	</video>[(#ENV{infos}|=={non}|non)
@@ -160,7 +160,6 @@
 				width:'(#ENV{align}|match{^(left|right)$}|et{#ENV{largeur}|match{%}}|?{100%,[(#ENV{largeur}|replace{px,''})]})',]
 				][height:'(#ENV{hauteur})',
 				]volume_slider_orientation:'#ENV{volume_slider_orientation,#CONFIG{mediaspip_player/slider_volume_orientation,horizontal}}'
-				
 			});
 		}
 	}
