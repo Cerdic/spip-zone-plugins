@@ -1,3 +1,23 @@
+/* mettre les input cote-a-cote */
 .formulaire_ajouter_action fieldset.date li label { display:none; }
 .formulaire_ajouter_action fieldset.date li { display:inline; margin: 0; padding: 0;}
-/* */
+.formulaire_ajouter_action fieldset.date li.saisie_input input.text {width:3em}
+
+/* changer de style en fonction du profil*/
+.formulaire_ajouter_action.operateur { background-color: #FFEF73 }
+.formulaire_ajouter_action.developpeur { background-color: #FFE940 }
+.formulaire_ajouter_action.developpeur li.editer_id_auteur {display:none}
+.formulaire_ajouter_action.ticketteur { background-color: #BFAF30 }
+.formulaire_ajouter_action.admin { background-color: #FFE200 }
+
+/* adapter les styles SPIP */
+.formulaire_ajouter_action .boutons {background-color: transparent; border-top: 1px solid transparent}
+
+/* gerer les inputs imbriques */
+.formulaire_ajouter_action .editer_type_activite,
+.formulaire_ajouter_action .editer_id_projet {margin-left:1em}
+
+/* le formulaire sur une seule ligne */
+.formulaire_ajouter_ligne_action label,
+.formulaire_ajouter_ligne_action p.explication {display:none}
+.formulaire_ajouter_ligne_action fieldset.ligne li {display:inline; margin:0; padding:0}

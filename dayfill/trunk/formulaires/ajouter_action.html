@@ -1,20 +1,35 @@
-<div class='formulaire_spip formulaire_ajouter formulaire_#FORM'>
+
+<div class='formulaire_spip formulaire_ajouter formulaire_#FORM[ (#ENV{profil})]'>
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
+
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<input type='hidden' name='id_evaluation' value='#ENV{id_evaluation}' />
+		<input type="hidden" name="profil" value="#ENV{profil}" />
 
 		<ul>
 
 			[(#SAISIE{auteurs_activite, id_auteur, obligatoire=oui,
 				class="chosen",
 				id_projet=#ID_PROJET,
-				label=<:projets_activite:label_id_auteur:>,
-				explication=<:projets_activite:explication_id_auteur:> })]
+				label=<:dayfill:label_id_auteur:>,
+				explication=<:dayfill:explication_id_auteur:> })]
+
+			[(#SAISIE{organisations_select, id_organisation, obligatoire=oui,
+				class="chosen",
+				label=<:dayfill:label_quel_client:>,
+				explication=<:dayfill:explication_quelle_organisation:>})]
+
+			[(#ID_ORGANISATION|oui)
+				[(#SAISIE{projets_organisation,id_projet,obligatoire=oui,
+					id_organisation=#ID_ORGANISATION,
+					class="chosen",
+					label=<:dayfill:label_quel_projet:>,
+					explication=<:dayfill:explication_quel_projet:>})]]
 
 			<li class='fieldset obligatoire'>
 				<fieldset class='date'>
@@ -32,12 +47,16 @@
 							heure_fin,
 							heure_pas=5,
 							label=<:dayfill:label_heure_a:>})]
+						[(#SAISIE{input,
+							nb_heures_passees,
+							readonly=oui,
+							label=<:dayfill:label_temps_passe:>})]
+						[(#SAISIE{input,
+							nb_heures_facturees,
+							label=<:dayfill:label_temps_facture:>})]
 					</ul>
 				</fieldset>
 			</li>
-
-			[(#SAISIE{input, nb_heures_passees, label=<:dayfill:label_temps_passe:>})]
-			[(#SAISIE{input, nb_heures_facturees, label=<:dayfill:label_temps_facture:>})]
 
 			[(#SAISIE{textarea, detail_activite, obligatoire=oui,
 				rows=3,
@@ -51,23 +70,42 @@
 				label=<:dayfill:label_type_activite:>,
 				explication=<:dayfill:explication_type_activite:>})]
 
-			[(#SAISIE{organisations_select, id_organisation, obligatoire=oui,
-				class="chosen",
-				label=<:dayfill:label_quel_client:>,
-				explication=<:dayfill:explication_quelle_organisation:>})]
+				[(#ID_ORGANISATION|oui)
 
-			[(#ID_ORGANISATION|oui)
-				[(#SAISIE{projets_organisation,id_projet,obligatoire=oui,
-					id_organisation=#ID_ORGANISATION,
-					class="chosen",
-					label=<:dayfill:label_quel_projet:>,
-					explication=<:dayfill:explication_quel_projet:>})]]
+					[(#SET{nom,[(#INFO_NOM{organisations,#ENV{id_organisation}})]})]
+					[(#SET{chaine,[(#VAL{dayfill:explication_facture_activite}|_T{#ARRAY{organisation,#GET{nom}}})]})]
+
+					[(#SAISIE{factures_activite, id_facture,
+						id_organisation=#ID_ORGANISATION,
+						label=<:dayfill:label_facture_activite:>,
+						explication=#GET{chaine}})]
+				]
 
 		</ul>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class="boutons"><input type='submit' class='submit' name='enregistrer_activite' value='<:bouton_enregistrer:>' /></p>
+
+		<p class="boutons">
+			<label for="changer_profil"><:dayfill:label_changer_profil:></label>
+			<button class="btn btn-small[ (#ENV{profil}|=={'operateur'}|oui)btn-info]"
+			    name="changer_profil" value='operateur'
+			    title="<:dayfill:explication_profil_operateur:>"><:dayfill:label_profil_operateur:></button>
+
+			<button class="btn btn-small[ (#ENV{profil}|=={'developpeur'}|oui)btn-info]"
+			    name="changer_profil" value='developpeur'
+			    title="<:dayfill:explication_profil_developpeur:>"><:dayfill:label_profil_developpeur:></button>
+
+			<button class="btn btn-small[ (#ENV{profil}|=={'ticketteur'}|oui)btn-info]"
+			    name="changer_profil" value='ticketteur'
+			    title="<:dayfill:explication_profil_ticketteur:>"><:dayfill:label_profil_ticketteur:></button>
+
+			<button class="btn btn-small[ (#ENV{profil}|=={'admin'}|oui)btn-info]"
+			    name="changer_profil" value='admin'
+			    title="<:dayfill:explication_profil_admin:>"><:dayfill:label_profil_admin:></button>
+		</p>
+
 	</div></form>
 	]
 </div>
@@ -75,9 +113,77 @@
 <script type='text/javascript'>
 (function($){
 $(document).ready(function(){
+
+	// calcule la duree de l'activite en heures (base 10)
+	calcul_duree = function() {
+		// $dates      = $('.formulaire_ajouter_action fieldset.date');
+		heure_debut = $dates.find('.editer_heure_debut input').val();
+		heure_fin   = $dates.find('.editer_heure_fin input').val();
+		heureDeb    = heure_debut.substr(0, 2);
+		minDeb      = heure_debut.substr(3, 2);
+		heureFin    = heure_fin.substr(0, 2);
+		minFin      = heure_fin.substr(3, 2);
+		duree       = (Math.round((((heureFin - heureDeb) * 60 + (minFin - minDeb)) / 60)*100))/100;
+		return duree;
+	}
+
+	// si l'heure de debut est apres l'heure de fin, on decale l'heure de fin de 10 minute
+	redefinir_heure_fin = function() {
+		heure_debut = $dates.find('.editer_heure_debut input').val();
+		heureDeb    = heure_debut.substr(0, 2);
+		minDeb      = heure_debut.substr(3, 2);
+
+		heureFin = parseInt(heureDeb);
+		minFin = parseInt(minDeb) + 10;
+
+		if (minFin >= 60) {
+			minFin -= 60;
+			heureFin++;
+		}
+
+		if (!minFin) { minFin = '00'; }
+		if (minFin.toString().length < 2)   { minFin   = '0' + minFin.toString(); }
+		if (heureFin.toString().length < 2) { heureFin = '0' + heureFin.toString(); }
+
+		$dates.find('.editer_heure_fin input').val( heureFin + ':' + minFin );
+	}
+
+	// on calcule le temps passe (duree)
+	$dates      = $('.formulaire_ajouter_action fieldset.date');
+	$dates.find('.editer_nb_heures_passees input').val(calcul_duree());
+
+	// on calcule le formulaire pour faire apparaitre les projets une fois l'organisation saisie
 	$('.formulaire_ajouter_action #champ_id_organisation').change(function(){
 		$(this).submit();
 	});
+
+	// on cache le type d'activité mais on le montre si le textarea n'est pas vide
+	if (!$('.formulaire_ajouter_action .editer_detail_activite textarea').val()) {
+        $('.formulaire_ajouter_action .editer_type_activite').hide();
+    }
+
+	// et on refait un nouveau test à chaque fois qu'on passe sur le textarea
+	$('.formulaire_ajouter_action .editer_detail_activite textarea').blur(function(){
+		if (!$('.formulaire_ajouter_action .editer_detail_activite textarea').val()) {
+			$('.formulaire_ajouter_action .editer_type_activite').hide();
+    	} else {
+			$('.formulaire_ajouter_action .editer_type_activite').show('fast');
+		}
+	});
+
+	// des que les heures de debut ou de fin changent on fait des verifications
+	$('.formulaire_ajouter_action .saisie_heure').change(function(){
+		if(calcul_duree() < 0) redefinir_heure_fin();
+		// alert("l'heure a changé ! La nouvelle durée est " + calcul_duree() + "h");
+		$dates.find('.editer_nb_heures_passees input').val(calcul_duree());
+	});
+
+	/*
+	console.log(
+		calcul_duree()
+	);
+	*/
+
 });
 })(jQuery);
 </script>
