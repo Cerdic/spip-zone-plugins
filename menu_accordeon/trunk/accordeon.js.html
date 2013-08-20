@@ -1,4 +1,4 @@
 #HTTP_HEADER{content-type:application/x-javascript}
 $(function() {
-		$( "[(#CHEMIN{fond=accordeon/identifiant.html}|?{#INCLURE{fond=accordeon/identifiant},#CONFIG{accordeon/identifiant}}|sinon{.accordeon})]" ).accordion([{(#CHEMIN{accordeon/options.html}|?{#INCLURE{fond=accordeon/options},#CONFIG{accordeon/options}})}]);
+		$( "[(#CHEMIN{accordeon/identifiant.html}|?{#INCLURE{fond=accordeon/identifiant},#CONFIG{accordeon/identifiant}}|sinon{.accordeon})]" ).accordion([{(#CHEMIN{accordeon/options.html}|?{#INCLURE{fond=accordeon/options},#CONFIG{accordeon/options}})}]);
 	});
