@@ -6,14 +6,13 @@
 ]
 
 [(#REM) Fil d'Ariane ]
-#SET{jour_evangile, #ENV{jour, #DATE}}
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:spiperipsum:evangile_quotidien|ucfirst:></strong></p>
 
 [(#REM) Cartouche avec la date du jour ]
 <div class="cartouche">
 	<h1 class="h1"><:spiperipsum:evangile_quotidien|ucfirst:></h1>
 	<p class="info-publi">
-		<small>[(#GET{jour_evangile}|nom_jour)][&nbsp;(#GET{jour_evangile}|affdate)]</small>
+		<small>[(#MODELE{spiperipsum, langue=#ENV{langue, #LANG}, jour=#ENV{jour}, lecture=date, mode=page})]</small>
 	</p>
 </div>
 <br class="nettoyeur"/>

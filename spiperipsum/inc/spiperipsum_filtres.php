@@ -13,17 +13,27 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode){
 	$tableau = unserialize($tableau);
 	
 	$contexte = array();
-	if ($tableau[$lecture])
-		$contexte = $tableau[$lecture];
-	$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
-	
-	if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
-		$texte = recuperer_fond("modeles/saint", $contexte);
-	else if ($lecture == _SPIPERIPSUM_LECTURE_COMMENTAIRE)
-		$texte = recuperer_fond("modeles/commentaire", $contexte);
-	else
-		$texte = recuperer_fond("modeles/lecture", $contexte);
-	
+
+	if (($lecture == _SPIPERIPSUM_LECTURE_DATE)
+	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_ISO)
+	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_LITURGIQUE)) {
+		$contexte = $tableau['date'];
+		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
+		$texte = recuperer_fond("modeles/date", $contexte);
+	}
+	else {
+		if ($tableau[$lecture])
+			$contexte = $tableau[$lecture];
+		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
+
+		if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
+			$texte = recuperer_fond("modeles/saint", $contexte);
+		else if ($lecture == _SPIPERIPSUM_LECTURE_COMMENTAIRE)
+			$texte = recuperer_fond("modeles/commentaire", $contexte);
+		else
+			$texte = recuperer_fond("modeles/lecture", $contexte);
+	}
+
 	return $texte;
 }
 

@@ -13,7 +13,7 @@
 <div class="cartouche">
 	<h1 class="h1"><:spiperipsum:saint_quotidien|ucfirst:></h1>
 	<p class="info-publi">
-		<small>[(#GET{jour_evangile}|nom_jour)][&nbsp;(#GET{jour_evangile}|affdate)]</small>
+		<small>[(#MODELE{spiperipsum, langue=#ENV{langue, #LANG}, jour=#ENV{jour}, lecture=date_iso, mode=page})]</small>
 	</p>
 </div>
 <br class="nettoyeur"/>

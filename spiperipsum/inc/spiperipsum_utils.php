@@ -1,6 +1,8 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_SPIPERIPSUM_FORCER_CHARGEMENT'))
+	define('_SPIPERIPSUM_FORCER_CHARGEMENT', false);
 
 // Convertir le code de langue SPIP en code langue du serveur
 function langue2code($langue) {
@@ -165,8 +167,8 @@ function page2page_propre($page, $charset, $no_tag=false) {
 	}
 
 	if ($no_tag) {
-		$regexp = array_merge($regexp, array('#<p\b.*>.*</p>#UimsS', '#(<br />)+$#UimS', '#</?font\b.*>#UimsS'));
-		$replace = array_merge($replace, array('', '', ''));
+		$regexp = array_merge($regexp, array('#<p\b.*>.*</p>#UimsS', '#<a\b.*>.*</a>$#UimsS', '#(<br />)+$#UimS', '#</?font\b.*>#UimsS'));
+		$replace = array_merge($replace, array('', '', '', ''));
 	}
 
 	$page = preg_replace($regexp, $replace, $page);
@@ -339,6 +341,22 @@ function flux2fete($url_base, $charset) {
 	return $tableau;
 }
 
+
+function flux2date($url_base, $charset, $date) {
+	$tableau = array('date_iso' => '', 'date_liturgique' => '');
+
+	// Date iso
+	$tableau['date_iso'] = $date;
+
+	// Date liturgique
+	$no_tag = false;
+	$url = $url_base . '&type=liturgic_t';
+	$tableau['date_liturgique'] = flux2element($url, $charset, $no_tag);
+
+	return $tableau;
+}
+
+
 // Charger le fichier des lectures et du saint du jour j
 // - si le fichier existe on retourne directement son nom complet
 // - sinon on le cree dans le cache du plugin
@@ -353,15 +371,16 @@ function charger_lectures($langue, $jour) {
 
 	$dir = sous_repertoire(_DIR_CACHE,"spiperipsum");
 	$dir = sous_repertoire($dir,substr(md5($code_langue),0,1));
-	$f = $dir . $code_langue . "_" . $date . ".txt";
+	$cache = $dir . $code_langue . "_" . $date . ".txt";
 
-	if (!file_exists($f)) {
+	if (!file_exists($cache) OR _SPIPERIPSUM_FORCER_CHARGEMENT) {
 		// Determination de la sous-chaine url correspondant a la date (vide si jour courant)
 		$url_date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? '' : date2url_date($date);
-		// Date du jour
-		$tableau['date'] = $date;
 		// Url de base de tous les flux
 		$url_base = 'http://feed.evangelizo.org/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
+
+		// traitement des différentes versions de la date
+		$tableau['date'] = flux2date($url_base, $charset, $date);
 
 		// Traitement de l'evangile
 		$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
@@ -388,9 +407,9 @@ function charger_lectures($langue, $jour) {
 		$tableau['fete'] = flux2fete($url_base, $charset);
 
 //		var_dump($tableau);
- 		ecrire_fichier($f, serialize($tableau));
+ 		ecrire_fichier($cache, serialize($tableau));
 	}
-	return $f;
+	return $cache;
 }
 
 ?>
