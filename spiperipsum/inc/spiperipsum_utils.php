@@ -1,4 +1,5 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 // Convertir le code de langue SPIP en code langue du serveur

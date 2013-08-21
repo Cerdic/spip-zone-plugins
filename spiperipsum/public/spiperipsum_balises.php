@@ -1,4 +1,6 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function balise_SPIPERIPSUM($p) {
 
 	$langue = interprete_argument_balise(1,$p);

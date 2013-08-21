@@ -1,4 +1,6 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Langue par defaut si non supportee par le site serveur
 define ('_SPIPERIPSUM_LANGUE_DEFAUT','en');
 

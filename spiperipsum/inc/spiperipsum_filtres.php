@@ -1,4 +1,6 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function spiperipsum_afficher($langue, $jour, $lecture, $mode){
 	include_spip('inc/spiperipsum_utils');
 
