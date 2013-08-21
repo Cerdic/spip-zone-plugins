@@ -93,11 +93,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n\'est encore hébergée sur le serveur «@serveur@».', # NEW
-	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»', # MODIF
+	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»',
 	'message_nok_boussole_non_hebergee' => 'La boussole «@alias@» n\'est pas hébergée sur le serveur «@serveur@».', # NEW
 	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole «@alias@» n\'est pas disponible sur le serveur «@serveur@».', # NEW
 	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur «@serveur@».', # NEW
-	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)', # MODIF
+	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)',
 	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
 	'message_ok_boussole_actualisee' => 'La brújula «@fichier@» ha sido actualizada. ',
 	'message_ok_boussole_ajoutee' => 'La brújula «@fichier@» ha sido añadida. ',
@@ -122,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'LOGO DE LA BRÚJULA',
 	'titre_form_ajouter_boussole' => 'Añadir o actualizar una brújula',
 	'titre_formulaire_configurer' => 'Configuración de la visualización de la brújula',
-	'titre_liste_boussoles' => 'Lista de las brújulas disponibles', # MODIF
+	'titre_liste_boussoles' => 'Lista de las brújulas disponibles a la visualización',
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
 	'titre_page_boussole' => 'Gestión de las brújulas'
 );
