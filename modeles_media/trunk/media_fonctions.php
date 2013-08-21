@@ -204,7 +204,7 @@ function balise_MEDIA_LIEN_dist($p) {
 	$forcer_lien = interprete_argument_balise(2,$p);
 	$forcer_lien = is_null($forcer_lien) ? "''" : $forcer_lien;
 	$id_document = champ_sql('id_document', $p);
-	include_spip('balise/url_')​;
+	include_spip('balise/url_');
 	$url_document = generer_generer_url_arg('document', $p, $id_document);
 	$connect = '';
 	if (isset($p->boucles[$p->id_boucle]))
