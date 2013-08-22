@@ -15,6 +15,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 # ToDo
 
 * Activer les javascripts de foundation séparément plutôt que de charger l'intégralité des scripts.
+* Utiliser la classe flex-video de foundation et adapter les paramètres en fonction de la vidéo (classe widescreen et Vimeo).
 
 # Version
 
