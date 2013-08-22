@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'config_info_enregistree' => 'Die Konfiguration des Briedträgers wurde gespeichert',
-	'configuration_adresse_envoi' => 'Absendeadresse einstellen',
+	'config_info_enregistree' => 'Die Konfiguration des Briefträgers wurde gespeichert.',
+	'configuration_adresse_envoi' => 'Absenderadresse einstellen',
 	'configuration_facteur' => 'Briefträger',
 	'configuration_mailer' => 'Konfiguration des Mailers',
 	'configuration_smtp' => 'Auswahl der Versandmethode',
@@ -17,27 +17,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Das ist ein Versandtest mit Sondärzeichen: Bär Größe Maß accentué',
 
 	// E
-	'email_test_envoye' => 'Die Testmail wurde fehlerfrei versand. Falls sie nicht richtig ankommt,
-                      bearbeiten sie ihre Serverkonfiguration oder kontaktieren sie den Administrator.',
+	'email_test_envoye' => 'Die Testmail wurde fehlerfrei verschickt. Falls sie nicht richtig ankommt, bearbeiten sie ihre Serverkonfiguration oder kontaktieren sie den Administrator.',
 	'erreur' => 'Fehler',
-	'erreur_dans_log' => ' : siehe Logdatei für mehr Details',
-	'erreur_generale' => 'Mehrere Konfigurationsfehler. Bitte Inhalt des Formulars korrigieren.',
-	'erreur_invalid_host' => 'Servername inkorrekt',
-	'erreur_invalid_port' => 'Portnummer inkorrekt',
+	'erreur_dans_log' => ' : mehr Details in der Logdatei',
+	'erreur_generale' => 'Konfigurationsfehler. Bitte Inhalt des Formulars korrigieren.',
+	'erreur_invalid_host' => 'falscher Servername',
+	'erreur_invalid_port' => 'falsche Portnummer',
 
 	// F
 	'facteur_adresse_envoi_email' => 'E-Mail :',
 	'facteur_adresse_envoi_nom' => 'Name:',
 	'facteur_bcc' => 'Blindkopie (BCC) :',
-	'facteur_cc' => 'kopie (CC) :',
+	'facteur_cc' => 'Kopie (CC) :',
 	'facteur_copies' => 'Kopien:',
-	'facteur_copies_descriptif' => 'Eine Kopie der E-Mails wird an die angegebenen Adressen verschick. Eine einzelne Adresse für Kopiene und/oder eine einzelne Adresse für Blindkopie.',
+	'facteur_copies_descriptif' => 'Eine Kopie der E-Mails wird an die angegebenen Adressen geschickt. Geben sie eine Adresse als Empfänger der Kopie bzw. Blindkopie an.',
 	'facteur_filtre_accents' => 'Sonderzeichen in HTML-Entitäten umwandeln (z.B. für Hotmail).',
-	'facteur_filtre_css' => 'Stile zwischen <head> und </head> zu "inline" Stilen umwandeln, sinnvoll für Webmail die interne Stile externen vorzieht.',
+	'facteur_filtre_css' => 'Stile zwischen <head> und </head> zu "inline" Stilen umwandeln, sinnvoll für Webmail die inline-Stile externen vorzieht.',
 	'facteur_filtre_images' => 'Verlinkte Bilder in E-Mail einbetten',
 	'facteur_filtre_iso_8859' => 'Nach ISO-8859-1 umwandeln',
 	'facteur_filtres' => 'Filter',
-	'facteur_filtres_descriptif' => 'Beim Versand können mehrere Filter eingesetzt werden.',
+	'facteur_filtres_descriptif' => 'Beim Versand können die Mails durch mehrere Filter behandelt werden.',
 	'facteur_smtp_auth' => 'Autorisierung erforderlich:',
 	'facteur_smtp_auth_non' => 'nein',
 	'facteur_smtp_auth_oui' => 'ja',
@@ -53,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Benutzername:',
 
 	// M
-	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l\'envoi de courriels.', # NEW
+	'message_identite_email' => 'Die Konfiguration des Plugins Briefträger (facteur) überschreibt diese Adresse für den Mailversand.',
 
 	// N
 	'note_test_configuration' => 'Eine Mail wird an die Absendeadresse geschickt (oder an den Webmaster).',
