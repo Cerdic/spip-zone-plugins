@@ -1,0 +1,8 @@
+<h2>Exemple complet de la doc</h2>
+
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+	<h1>#NOM</h1>
+	[(#INCLURE{fond=inclure/mesfavoris}{env}{id_auteur}{ajax})]
+</BOUCLE_auteur>
+Veuillez vous identifier !
+<//B_auteur>
