@@ -9,7 +9,7 @@ if (!defined('_SPIPERIPSUM_LANGUE_DEFAUT'))
 if (!defined('_SPIPERIPSUM_JOUR_DEFAUT'))
 	define('_SPIPERIPSUM_JOUR_DEFAUT','aujourdhui');
 
-// Valeurs de l'argument lecture dans le modele evangile
+// Valeurs de l'argument lecture dans le modele spiperipum
 if (!defined('_SPIPERIPSUM_LECTURE_EVANGILE'))
 	define('_SPIPERIPSUM_LECTURE_EVANGILE','evangile');
 if (!defined('_SPIPERIPSUM_LECTURE_PREMIERE'))
@@ -25,7 +25,7 @@ if (!defined('_SPIPERIPSUM_LECTURE_SAINT'))
 if (!defined('_SPIPERIPSUM_LECTURE_FETE'))
 	define('_SPIPERIPSUM_LECTURE_FETE','fete');
 if (!defined('_SPIPERIPSUM_LECTURE_DATE'))
-	define('_SPIPERIPSUM_LECTURE_DATE','date');
+	define('_SPIPERIPSUM_LECTURE_DATE_TITRE','date_titre');
 if (!defined('_SPIPERIPSUM_LECTURE_DATE_ISO'))
 	define('_SPIPERIPSUM_LECTURE_DATE_ISO','date_iso');
 if (!defined('_SPIPERIPSUM_LECTURE_DATE_LITURGIQUE'))

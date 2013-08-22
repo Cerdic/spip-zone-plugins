@@ -17,7 +17,7 @@
 	
 	<div id="evangile">
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>spiperipsum</strong> pour la date</p>
-		[(#MODELE{spiperipsum, jour=#ENV{jour,aujourdhui}, langue=#ENV{langue,#LANG}, lecture=date})]
+		[(#MODELE{spiperipsum, jour=#ENV{jour,aujourdhui}, langue=#ENV{langue,#LANG}, lecture=date_titre})]
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>spiperipsum</strong> pour l'&eacute;vangile</p>
 		[(#MODELE{spiperipsum, jour=#ENV{jour,aujourdhui}, langue=#ENV{langue,#LANG}, lecture=evangile})]
 		<br /><br />
@@ -43,6 +43,8 @@
 			<li>Titre de l'Evangile du 24 D&eacute;cembre 2009 en anglais:&nbsp;<strong>#SPIPERIPSUM{en, #ENV{jour,aujourdhui}, evangile, titre}</strong></li>
 			<li>Texte de l'Evangile du 24 D&eacute;cembre 2009 en anglais:&nbsp;#SPIPERIPSUM{en, #ENV{jour,aujourdhui}, evangile, texte}</li>
 			<li>Texte du saint du jour en br&eacute;silien (la langue sera automatiquement chang&eacute;e en portugais):&nbsp;#SPIPERIPSUM{pt_br, #ENV{jour,aujourdhui}, saint, texte}</li>
+			<li>Date liturgique avec lecture 'date' en français:&nbsp;#SPIPERIPSUM{fr, #ENV{jour,aujourdhui}, date, liturgique}</li>
+			<li>Date liturgique avec lecture 'date_liturgique' en français:&nbsp;#SPIPERIPSUM{fr, #ENV{jour,aujourdhui}, date_liturgique}</li>
 		</ul>
 		<br /><hr /><br />
 

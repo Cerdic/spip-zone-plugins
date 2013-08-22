@@ -5,19 +5,18 @@
 		- dans la langue du contexte courant
 		- et suivant le mode d'appel article ou page
  -->]
-[(#SET{jour_iso, [(#ENV{date_iso}|nom_jour)][&nbsp;(#ENV{date_iso}|affdate)]})]
-[(#ENV{lecture}|=={date_iso}|oui)
-	#SET{date_affichee, #GET{jour_iso}|ucfirst}]
-[(#ENV{lecture}|=={date_liturgique}|oui)
-	#SET{date_affichee, #ENV{date_liturgique}|ucfirst}]
-[(#ENV{lecture}|=={date}|oui)
-	[(#SET{date_affichee, [(#GET{jour_iso}|ucfirst)][#EVAL{_SPIPERIPSUM_SEPARATEUR_DATE}(#ENV{date_liturgique}|strtolower)]})]]
+[(#ENV{lecture}|=={#EVAL{_SPIPERIPSUM_LECTURE_DATE_ISO}}|oui)
+	[(#SET{jour_iso, [(#ENV{iso}|nom_jour)][&nbsp;(#ENV{iso}|affdate)]})]
+	#SET{date_affichee, #GET{jour_iso}}
+]
+[(#ENV{lecture}|=={#EVAL{_SPIPERIPSUM_LECTURE_DATE_ISO}}|non)
+	#SET{date_affichee, #ENV{#ENV{lecture}|replace{date_}}}]
 
 <div class="lecture date">
 	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_ARTICLE}}|oui)
-		[<h2 class="h2 date">(#GET{date_affichee})</h3>]
+		[<h2 class="h2 date">(#GET{date_affichee}|ucfirst)</h3>]
 	]
 	[(#ENV{mode}|=={#EVAL{_SPIPERIPSUM_MODE_PAGE}}|oui)
-		[(#GET{date_affichee})]
+		[(#GET{date_affichee}|ucfirst)]
 	]
 </div>

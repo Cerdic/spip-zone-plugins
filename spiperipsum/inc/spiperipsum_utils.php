@@ -346,12 +346,17 @@ function flux2date($url_base, $charset, $date) {
 	$tableau = array('date_iso' => '', 'date_liturgique' => '');
 
 	// Date iso
-	$tableau['date_iso'] = $date;
+	$tableau['iso'] = $date;
 
 	// Date liturgique
 	$no_tag = false;
 	$url = $url_base . '&type=liturgic_t';
-	$tableau['date_liturgique'] = flux2element($url, $charset, $no_tag);
+	$tableau['liturgique'] = flux2element($url, $charset, $no_tag);
+
+	// Date titre, regroupant les deux autres dates. Cet index permet l'utilisation standard
+	// de la balise #SPIPERIPSUM
+	$tableau['titre'] = nom_jour($date) . '&nbsp;' . affdate($date)
+					  . ($tableau['liturgique'] ? _SPIPERIPSUM_SEPARATEUR_DATE . strtolower($tableau['liturgique']) : '');
 
 	return $tableau;
 }
