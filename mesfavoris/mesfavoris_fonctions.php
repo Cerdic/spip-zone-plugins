@@ -40,12 +40,12 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	$objet = objet_type($primary,$boucle->serveur);
 	$id_table_objet = $primary;
 	$table_objet = table_objet_sql($primary);
-	$not = $crit->not;
+	$not = ($crit->not == '!') ? 'non':'oui';
 	
 	/**
 	 * On récupère un paramètre potentiel
 	 */
-	$type = !isset($crit->param[0][0]) ? "''"
+	$type = !isset($crit->param[0][0]) ? "'$not'"
 		: calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
 
 	$boucle->where[] = mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type);
