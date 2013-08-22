@@ -213,7 +213,7 @@ function flux2texte($url, $charset, $lettrine=false) {
 			unset($segments[$index]);
 			$index = $index - 1;
 		}
-		$page = trim(implode('<br />', $segments));
+		$page = trim(preg_replace('#</?font\b.*>#UimsS','', implode('<br />', $segments)));
 		if ($lettrine) {
 			$lettre = mb_substr($page, 0, 1, $GLOBALS['meta']['charset']);
 			$texte['texte'] = '<span class="lettrine">' . $lettre . '</span>' . mb_substr($page, 1);
@@ -327,15 +327,21 @@ function flux2fete($url_base, $charset) {
 
 	$page = recuperer_page($url_base.'&type=feast');
 	if ($page AND (strpos($page, 'Error : ') === false)) {
-		// -- nom
-		$balises_a = extraire_balises($page, 'a');
-		$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
-		$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
+		if ($titre = page2page_propre(importer_charset($page, $charset), $charset, true)) {
+			// Dans ce cas seul le nom de la fête est fourni, l'url est absente.
+			$tableau['titre'] = $titre;
+		}
+		else {
+			// -- nom
+			$balises_a = extraire_balises($page, 'a');
+			$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
+			$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
 
-		// -- url
-		$attribut = extraire_attribut($balises_a, 'onclick');
-		preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
-		$tableau['url'] = $url_texte[1];
+			// -- url
+			$attribut = extraire_attribut($balises_a, 'onclick');
+			preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
+			$tableau['url'] = $url_texte[1];
+		}
 	}
 
 	return $tableau;
@@ -408,7 +414,6 @@ function charger_lectures($langue, $jour) {
 		$tableau['saint'] = flux2saint($url_base, $charset);
 
 		// Traitement de la fête du jour
-		// TODO : à faire
 		$tableau['fete'] = flux2fete($url_base, $charset);
 
 //		var_dump($tableau);
