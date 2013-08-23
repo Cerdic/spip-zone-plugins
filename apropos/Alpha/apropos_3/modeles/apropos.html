@@ -3,13 +3,23 @@ SVP crée 2 tables (spip_paquets et spip-plugins) pour stocker différentes info
 Ces informations n'étant pas redondantes, il nous faut piocher dans l'une et l'autre
 D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des tables.
 
-
-[<pre>(#ENV**|unserialize|print_r{1})</pre>]
-#ENV{prefixe}
+fichier modele/apropos.html
  -->
+
 <div class='apropos'>
 <!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
 #SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
+
+#SET{lastatistique,#ENV*{stats}|mb_strtoupper} 
+<BOUCLE_statistique(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{lastatistique}}>
+
+	<BOUCLE_statistiques(PLUGINS) {prefixe=#GET{lastatistique}} {tout}>
+	<!-- on récupère le nombre de visites du plugin depuis la table spip_plugins -->
+		#NBR_SITES
+	</BOUCLE_statistiques>
+
+</BOUCLE_statistique>
+
 
 <B_utilisation>
 <BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{leprefixe}}>
@@ -18,13 +28,27 @@ D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des ta
 	<!-- on récupère le nom, le nombre de visites du plugin depuis la table spip_plugins -->
 		#SET{lenom,#NOM} 
 		#SET{nombresite,#NBR_SITES}
+		<!-- #SET{idPlugin,#ID_PLUGIN}
+		- idPlugin : #GET{idPlugin} <br />
+		
+		info bonux : #INFO_CATEGORIE{spip_plugins, #GET{idPlugin}} <br />
+		http://contrib.spip.net/Balises-Bonux
+		prefixe
+		
+	le tablo est [(#GET{mon_tableaux}|table_valeur{1})] - #GET{caca} <br />
+le foreach est [(#GET{mon_tableaux}|foreach)] <br />
+[(#ENV**{info})] )))) #CATEGORIE 
+
+-->
+		 <br />
+		<!-- <a href="[(#SELF|concat{'#'}|concat{ID_RUBRIQUE})]" [ title="(#INTRODUCTION|textebrut)"]" >zobi</a> -->
 	</BOUCLE_plugin>
 	
 	<div class='apropos-resume'>
 		<div class='apropos-icon'>
 			[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{plugins/apropos_3/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
 		</div>
-		[<span class='apropos-nom'>(#GET{lenom}),</span>]
+		[<span class='apropos-nom'>(#GET{lenom}), #GET{linformation}</span>]
 		<span class='apropos-version'>version #VERSION, [(#ETAT|svp_afficher_etat)].</span>
 		
 		<div class='apropos-description'>
@@ -34,8 +58,11 @@ D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des ta
 			[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]
 		</span><br />
 		<div class='apropos-etat'>
-			[(#NBR_SITES|?{
-			[(#NBR_SITES|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],<:svpstats:info_nbr_sites_0:>}).]
+		
+			[(#GET{nombresite}|?{
+				[(#GET{nombresite}|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],
+				<:svpstats:info_nbr_sites_0:> 
+			}).]
 			<br />
 			
 				[<:apropos:la_documentation:> <a href="#LIEN_DOC" title="Lisez la documentation du plugin [(#GET{lenom})].">(#LIEN_DOC)</a><br />]
@@ -48,8 +75,8 @@ D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des ta
 </BOUCLE_utilisation>
 </B_utilisation>
 <div class="apropos-erreur">
-<!-- Affiche un message d'erreur si le préfixe saisi n'est pas bon. -->
-Impossible d'afficher les informations relatives au préfixe : <b>#ENV{prefixe}</b> devenu #GET{leprefixe}.
+<!-- Affiche un message d'erreur si le préfixe saisi n'est pas bon.
+Impossible d'afficher les informations relatives au préfixe : <b>#ENV{prefixe}</b> devenu #GET{leprefixe}. -->
 </div>
 <//B_utilisation>
 </div>
