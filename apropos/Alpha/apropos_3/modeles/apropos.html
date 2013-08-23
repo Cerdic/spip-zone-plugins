@@ -11,7 +11,7 @@ fichier modele/apropos.html
 #SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
 
 #SET{lastatistique,#ENV*{stats}|mb_strtoupper} 
-<BOUCLE_statistique(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{lastatistique}}>
+<BOUCLE_statistique(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{prefixe=#GET{lastatistique}}>
 
 	<BOUCLE_statistiques(PLUGINS) {prefixe=#GET{lastatistique}} {tout}>
 	<!-- on récupère le nombre de visites du plugin depuis la table spip_plugins -->
