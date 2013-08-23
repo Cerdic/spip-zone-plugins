@@ -14,11 +14,17 @@ function ocr_analyser($id_document, $bin) {
 
 	$exe='/usr/bin/tesseract';
 	$options = ' ';
-
+	$resultat = array('texte'=>'','erreur'=>'');
 	$document = ocr_document($id_document);
 	spip_log($document, 'ocr');
 
 	$fichier = $document['fichier'];
+
+	if (!$fichier) {
+		$resultat['erreur'] = _T('ocr:analyser_erreur_document_inexistant');
+		return $resultat;
+	}
+	
 	$dest = $document['cible_url'].$document['basename'];
 	
 	$cmd = $exe.$options.' '.$fichier.' '.$dest.' '.$options;
@@ -29,7 +35,7 @@ function ocr_analyser($id_document, $bin) {
 	$resultat['erreur'] = ocr_texte_erreur($status_code);
 
 	if ($resultat['erreur']) {
-		spip_log('Erreur : '.$status_code.$resultat['erreur'], 'ocr');
+		spip_log('Erreur : '.$resultat['erreur'], 'ocr');
 	} else  {
 		// on ouvre et on lit le .txt
 		// TODO : comment connaitre l'encoding du fichier ?

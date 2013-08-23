@@ -8,8 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'analyser_erreur_1' => 'Appel incorrect de l\'executable d\'analyse OCR',
 	'analyser_erreur_2' => 'Problème de mémoire',
-	'analyser_erreur_3' => 'Impossible d\'analyser le fichier',
+	'analyser_erreur_3' => 'Impossible d\'analyser le fichier, il doit être dans un format non pris en charge.',
 	'analyser_erreur_autre' => 'Erreur inconnue',
+	'analyser_erreur_document_inexistant' => 'Document inexistant', 
 	'analyser_erreur_fichier_resultat' => 'Le fichier de résultat de l\'analyse OCR n\'existe pas ou n\'est pas lisible.',
 	
 	// C
@@ -48,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'test_label_id_document' => 'Document à analyser',
 	'test_label_resultat' => 'Résultat de l\'analyse',
 	'test_erreur_id_document' => 'Numéro de document non valide.',
-	'test_erreur_regarder_logs' => 'Une problème a été rencontré - voir les fichiers de log pour plus de détails.',
+	'test_erreur_regarder_logs' => '@message@ - voir le fichier de log pour plus de détails.',
 	'test_message_resultat' => 'Voici le résultat de l\'analyse OCR.',
 	'titre_page_configurer_ocr' => 'Plugin d\'analyse OCR',
 );
