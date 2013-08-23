@@ -7,12 +7,12 @@
  */
 
 /**
- * Définit les autorisations du plugin forum
+ * Définit les autorisations du plugin mesfavoris
  *
  * @package SPIP\Mesfavoris\Autorisations
  */
 
-/ Sécurité
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mesfavoris_autoriser(){}
