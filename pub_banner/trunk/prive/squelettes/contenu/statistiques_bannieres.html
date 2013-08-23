@@ -1,9 +1,6 @@
 <h1 class="grostitre"><:pubban:stats_pubban:></h1>
 
-[(#BOITE_OUVRIR{
-	[(#CHEMIN_IMAGE{ico-pubban.png}|balise_img{'','cadre-icone'})]
-	<br /><:pubban:intro_stats_banner:>
-,'simple right'})]
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{ico-pubban.png}|balise_img{'',cadre-icone}|concat{#VAL{pubban:intro_stats_banner}|_T}, 'simple'})]
 	<:pubban:intro_texte_stats_banner:>
 	<:pubban:voir_page:>
 	[(#URL_ECRIRE{pubban_info}|icone_horizontale{<:pubban:page_infos:>,status-dock-24.gif})]

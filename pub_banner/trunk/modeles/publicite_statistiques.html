@@ -2,16 +2,15 @@
 [(#SET{tablo_publicites,#ENV**{tablo_publicites}})]
 [(#SET{tablo_bannieres,#ENV**{tablo_bannieres}})]
 
-<BOUCLE_bannieres_publicites(bannieres_publicites){id_banniere IN #GET{tablo_bannieres}}{tout}>
+<BOUCLE_bannieres_publicites(BANNIERES_PUBLICITES){id_banniere IN #GET{tablo_bannieres}}{tout}>
 	#SET{tablo_publicites,#GET{tablo_publicites}|push{#ID_PUBLICITE}}
 </BOUCLE_bannieres_publicites>
 
 <BOUCLE_publicites(PUBLICITES){id_publicite IN #GET{tablo_publicites}}{statut?}{tout}>
 
-#SET{apercu_url,#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}}
-<a href="#GET{apercu_url}" target="_blank" onclick="popup(600,600,'[(#GET{apercu_url})]');return false;"><:pubban:apercu:></a>
+<a href="[(#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}|parametre_url{type,apercu})]" ><:pubban:apercu:></a>
 &nbsp;|&nbsp;
-<a href="[(#URL_PAGE{stat_pub}|parametre_url{type,export}|parametre_url{id_publicite,#ID_PUBLICITE})]" title="<:pubban:exporter_csv:>"><:pubban:exporter_donnees:></a>
+<a href="[(#URL_PAGE{stat_pub,id_publicite=#ID_PUBLICITE}|parametre_url{type,export})]" title="<:pubban:exporter_csv:>"><:pubban:exporter_donnees:></a>
 &nbsp;|&nbsp;
 <a href="[(#SELF|retirer_lien_pub{pub,#ID_PUBLICITE})]"><:pubban:retirer_arg:></a>
 <table class="table_statpub">

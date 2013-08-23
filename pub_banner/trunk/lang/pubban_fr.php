@@ -405,9 +405,9 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'vider_trash' => 'Vider la poubelle',
 	'view_pub' => 'Détails d\'un encart publicitaire',
 	'voir_bordure' => 'Voir les bordures des bannières',
-	'voir_les_statistiques' => 'Voir les statistiques (fenêtre popup)',
+	'voir_les_statistiques' => 'Voir les statistiques',
 	'voir_page' => '<br /><b>Voir la page :</b>',
-	'voir_un_apercu' => 'Voir un aperçu (fenêtre popup)',
+	'voir_un_apercu' => 'Voir un aperçu',
 
 	// W
 	'width' => 'Largeur'

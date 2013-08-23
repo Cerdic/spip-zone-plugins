@@ -1,30 +1,18 @@
 #CACHE{0}
 <BOUCLE_payer(PUBLICITES){id_publicite}{tout}>
 	<BOUCLE_banniere(BANNIERES){id_banniere}>
-#SET{width, #WIDTH}
-#SET{height, #HEIGHT}
+		#SET{width, #WIDTH}
+		#SET{height, #HEIGHT}
 	</BOUCLE_banniere>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
-<head>
-<title><:pubban:publicite_apercu:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
-<INCLURE{fond=inclure/head}>
-<style>
-.spip-admin-float { display:none; }
-</style>
-</head>
-<body>
+<br />
 <center>
+[(#ENV{type}|=={apercu}|oui)
+	&#091;&nbsp;<a href="#URL_PAGE{publicites_statistiques,id_publicite=#ID_PUBLICITE}"><:pubban:retour:></a>&nbsp;&#093;
+]
 	[&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;]
-	&nbsp;&nbsp;
-	[&nbsp;<a href="javascript:window.close()"><:pubban:fermer:></a>&nbsp;]
 	<hr>
-[(#MODELE{publicite}{type=#TYPE}{objet=#OBJET}{url=#URL}{width=#GET{width}}{height=#GET{height}}{apercu=oui})]
+		[(#MODELE{publicite, type=#TYPE, objet=#OBJET, url=#URL, width=#GET{width}, height=#GET{height}, apercu=oui})]
 	<hr>
 	[&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;]
-	&nbsp;&nbsp;
-	[&nbsp;<a href="javascript:window.close()"><:pubban:fermer:></a>&nbsp;]
 </center>
-</body>
-</html>
 </BOUCLE_payer>

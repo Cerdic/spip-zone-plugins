@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 {{UTILISATION}}
 
--* Ce plugin ajoute la balise {{ #PUBBAN{nom de la bannière} }} pour les squelettes, qui est remplacée par une frame englobant la bannière.
+-* Ce plugin ajoute la balise {{ <code>#PUBBAN{nom de la bannière}</code> }} pour les squelettes, qui est remplacée par une frame englobant la bannière.
 -* Une page publique vous permet de présenter les statistiques des encarts et de les exporter au format \'.xls\'.
 
 {{VALEURS PAR DEFAUT}}

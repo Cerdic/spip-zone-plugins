@@ -21,6 +21,7 @@ function pubban_declarer_tables_interfaces($interface){
 	// Tables principales
 	$interface['table_des_tables']['publicites'] = 'publicites';
 	$interface['table_des_tables']['bannieres'] = 'bannieres';
+	$interface['table_des_tables']['bannieres_publicites'] = 'bannieres_publicites';
 
 	// Table de jointure
 	$interface['tables_jointures']['spip_bannieres_publicites'][] = 'publicites';

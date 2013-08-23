@@ -1,49 +1,27 @@
-#CACHE{0}[(#ENV{publicites}|=={''}|?{
+#CACHE{0}
+[(#ENV{publicites}|=={''}|?{
 	#SET{tablo_publicites,#ARRAY{1,#ENV{id_publicite,''}}}
 	,
 	#SET{tablo_publicites,#ENV{publicites,''}|explode{','}}
-})][(#ENV{bannieres}|=={''}|?{
+})]
+[(#ENV{bannieres}|=={''}|?{
 	#SET{tablo_bannieres,#ARRAY{1,#ENV{id_banniere,''}}}
 	,
 	#SET{tablo_bannieres,#ENV{bannieres,''}|explode{','}}
-})][(#ENV{type,''}|=={export}|oui)
+})]
+[(#ENV{type}|=={export}|oui)
 	[(#GET{tablo_publicites}|pubban_exporter{#GET{tablo_bannieres}})]
-][(#ENV{type,''}|=={export}|non)
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
-<head>
-<title><:pubban:statistiques:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
-<INCLURE{fond=inclure/head}>
-<style>
-.spip-admin-float { display:none; }
-.table_statpub { border:2px solid #ccc;text-align:left;}
-.header_th { background-color: #ccc; line-height:1.8em; font-size:1.4em;}
-.header_td { background-color: #ccc; }
-.pubban_statpub_entry {font-variant:italic;}
-abbr { border-bottom: 1px dotted; cursor: help; }
-</style>
-<script type='text/javascript'>
-function popup(l,h,url) {
-	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
-	pp.focus();
-}
-</script>
-</head>
-<body>
+<br />
+]
+[(#ENV{type}|=={export}|non)
+<br />
 <center>
 	&#091;&nbsp;<a href="[(#SELF|parametre_url{type,export})]"><:pubban:exporter:></a>&nbsp;&#093;
 	&nbsp;&nbsp;
 	&#091;&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;&#093;
-	&nbsp;&nbsp;
-	&#091;&nbsp;<a href="javascript:window.close()"><:pubban:fermer:></a>&nbsp;&#093;
 	<hr>
-
-[(#MODELE{publicite_statistiques}{tablo_publicites=#GET{tablo_publicites}}{tablo_bannieres=#GET{tablo_bannieres}})]
-
+		[(#MODELE{publicite_statistiques, tablo_publicites=#GET{tablo_publicites}, tablo_bannieres=#GET{tablo_bannieres}})]
 	<hr>
 	&#091;&nbsp;<a href="javascript:print()"><:pubban:imprimer:></a>&nbsp;&#093;
-	&nbsp;&nbsp;
-	&#091;&nbsp;<a href="javascript:window.close()"><:pubban:fermer:></a>&nbsp;&#093;
 </center>
-</body>
-</html>]
+]

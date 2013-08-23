@@ -1,6 +1,26 @@
 <div class='formulaire_spip formulaire_editer formulaire_editer_publicite formulaire_editer_publicite-#ENV{id_publicite,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{illimite, oui}|=={oui}|oui)
+			jQuery(".nbr_clic_aff").hide();
+		]
+
+		jQuery("input[name='illimite']").change(function() {
+			if (jQuery("input[name='illimite']:checked").val() == "oui")
+				jQuery(".nbr_clic_aff").hide();
+			else {
+				jQuery(".nbr_clic_aff").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
+
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -66,19 +86,21 @@
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
 	      		<label for="illimite"><:pubban:illimite:>&nbsp;:</label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_aff})</span>]
-				<input type='checkbox' class='checkbox' name='illimite' id='illimite' value="oui"[(#ENV**{illimite}|=={oui}|oui) checked="checked"] />
+				<input type='checkbox' class='checkbox' name='illimite' id='illimite' value="oui"[(#ENV{illimite, oui}|=={oui}|?{checked="checked"})] />
 				<span class='explication'><:pubban:comment_illimite:></span>
 		    </li>
-		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
-	      		<label for="affichages_restant"><:pubban:droits_aff_pub:>&nbsp;:</label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_aff})</span>]
-				<input type='text' class='text' name='affichages_restant' id='affichages_restant' value="[(#ENV**{affichages_restant})]" style="width:100px" />
-		    </li>
-		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_clic}|oui)erreur]">
-	      		<label for="clics_restant"><:pubban:droits_clic_pub:>&nbsp;:</label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_clic})</span>]
-				<input type='text' class='text' name='clics_restant' id='clics_restant' value="[(#ENV**{clics_restant})]" style="width:100px" />
-		    </li>
+		    <div class="nbr_clic_aff">
+				<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_aff}|oui)erreur]">
+					<label for="affichages_restant"><:pubban:droits_aff_pub:>&nbsp;:</label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_aff})</span>]
+					<input type='text' class='text' name='affichages_restant' id='affichages_restant' value="[(#ENV**{affichages_restant})]" style="width:100px" />
+				</li>
+				<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_clic}|oui)erreur]">
+					<label for="clics_restant"><:pubban:droits_clic_pub:>&nbsp;:</label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_clic})</span>]
+					<input type='text' class='text' name='clics_restant' id='clics_restant' value="[(#ENV**{clics_restant})]" style="width:100px" />
+				</li>
+		    </div>
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{droits_dates}|oui)erreur]">
 	      		<label for="date_debut"><:pubban:droits_dates_pub:>&nbsp;:</label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{droits_dates})</span>]
