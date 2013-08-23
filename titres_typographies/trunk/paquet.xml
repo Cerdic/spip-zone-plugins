@@ -7,11 +7,9 @@
 	compatibilite="[3.0;3.0.99]"
 	logo="titres_typographies.jpg"
 >	
-
 	<nom>Titres typographiés</nom>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
     <credit lien="http://fr.wikipedia.org/wiki/Fichier:Garamond_type_fi-ligature_2.jpg">Wikipédia</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-
 </paquet>
 
