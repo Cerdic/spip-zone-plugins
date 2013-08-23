@@ -97,11 +97,12 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 			        //on accede à la page $frame
 			        spip_log("page $frame",'docimg');
 						
-						$image_frame->readImage($document['fichier'].'['.$frame.']');
-						$image_frame->setImageFormat($format_cible);
+						// Il faut définir la résolution avant de charger l'image (cf. Notes dans http://www.php.net/manual/en/imagick.setresolution.php)
 						if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
 				        	$image_frame->setResolution($resolution,$resolution);
 			        	}
+						$image_frame->readImage($document['fichier'].'['.$frame.']');
+						$image_frame->setImageFormat($format_cible);
 						if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
 							$image_frame->setImageCompressionQuality($config['compression']);
 						}
