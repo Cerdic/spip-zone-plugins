@@ -4,7 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang='',$objet_dest='rubrique') {
     include_spip('inc/config');
-    
+    include_spip('inc/presentation');    
+    include_spip('inc/layer');      
+     
     //Les objets destinataires choisies
      $special=array('article','rubrique');
      if(in_array($objet_dest,$special)) $choisies= picker_selected(lire_config('selection_objet/selection_'.$objet_dest.'_dest',array()),$objet_dest);
@@ -27,8 +29,8 @@ function formulaires_bouton_objet_charger_dist($id_objet,$objet,$langue,$lang=''
     //Préparer la requette
     $where=array();
     if(isset($tables[$table_dest]['statut'][0]['publie']))$statut=$tables[$table_dest]['statut'][0]['publie'];
-    if($statut AND $objet_dest !='rubrique')  $where[]='statut='.sql_quote($statut);
     if($objet=='auteur') $where[]='statut !='.sql_quote('5poubelle');
+    elseif($statut AND $objet_dest !='rubrique')  $where[]='statut='.sql_quote($statut);
     if($choisies)$where[]='id_'.$objet_dest.' IN ('.implode(',',$choisies).')';
     if($tables[$table_dest]['field']['lang'] and $lang){
         if($objet_dest!='rubrique')$where[]='lang IN ('.sql_quote($lang).')';

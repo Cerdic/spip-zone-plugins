@@ -84,6 +84,7 @@ function selection_objet_affiche_milieu ($flux="") {
         if($objet=='rubrique'){
             if (!$trad_rub=test_plugin_actif('tradrub')) $contexte['langue']=explode(',',lire_config('langues_multilingue'));
             }
+        if($objet=='auteur')$contexte['langue']='';
            $flux["data"] .= recuperer_fond('prive/objets/liste/selection_interface', $contexte);
             }
         }
