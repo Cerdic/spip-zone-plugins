@@ -5,13 +5,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// O
-	'ocr_titre' => 'ocr',
-
+	// A
+	'analyser_erreur_1' => 'Appel incorrect de l\'executable d\'analyse OCR',
+	'analyser_erreur_2' => 'Problème de mémoire',
+	'analyser_erreur_3' => 'Impossible d\'analyser le fichier',
+	'analyser_erreur_autre' => 'Erreur inconnue',
+	'analyser_erreur_fichier_resultat' => 'Le fichier de résultat de l\'analyse OCR n\'existe pas ou n\'est pas lisible.',
+	
 	// C
+	'cfg_bouton_test' => 'Tester',
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_titre_test' => 'Test de l\'analyse OCR',
 
 	// E
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.',
@@ -35,8 +41,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON',
 	
+	// O
+	'ocr_titre' => 'ocr',
+
 	// T
-	'titre_page_configurer_ocr' => 'OCR',
+	'test_label_id_document' => 'Document à analyser',
+	'test_label_resultat' => 'Résultat de l\'analyse',
+	'test_erreur_id_document' => 'Numéro de document non valide.',
+	'test_erreur_regarder_logs' => 'Une problème a été rencontré - voir les fichiers de log pour plus de détails.',
+	'test_message_resultat' => 'Voici le résultat de l\'analyse OCR.',
+	'titre_page_configurer_ocr' => 'Plugin d\'analyse OCR',
 );
 
 ?>

@@ -22,6 +22,8 @@
 
 	<traduire module="ocr" reference="fr" gestionnaire="salvatore" />
 
+	<necessite nom="saisies" compatibilite="[1.32.4;]" />
+
 	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/ocr.php" />
 	
