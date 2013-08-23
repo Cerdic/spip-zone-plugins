@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin mesfavoris
- * (c) 2009-2012 Olivier Sallou, Cedric Morin
+ * (c) 2009-2013 Olivier Sallou, Cedric Morin, Gilles Vincent
  * Distribue sous licence GPL
  *
  */
@@ -19,9 +19,13 @@ function action_ajouter_favori_dist(){
 		$id_auteur = $arg[2];
 	else
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	if (count($arg)>3)
+		$categorie = $arg[3];
+	else
+		$categorie = '';
 
 	include_spip('inc/mesfavoris');
-	mesfavoris_ajouter($id_favori);
+	mesfavoris_ajouter($id_objet,$objet,$id_auteur,$categorie);
 }
 
 ?>

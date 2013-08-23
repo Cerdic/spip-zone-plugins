@@ -3,7 +3,7 @@
   Squelette inclure/mesfavoris
   Distribue sous licence GPL
   
-  Affiche les favoirs d'un auteur particulier
+  Affiche les favoris d'un auteur particulier
   
   Paramètres possibles :
   -* id_auteur int : l'identifiant numérique de l'auteur
@@ -14,17 +14,17 @@
   -* bouton_ajout string : si égal à oui, on affiche le formulaire de favoris (un bouton d'ajout et donc de suppression en somme)
   -* type_pagination string : le type de pagination souhaitée sinon celle par défaut de SPIP
   -* sinon string : le texte à afficher dans le cas ou la liste est vide (par défaut aucun)
-
+  -* categorie string : le type de favori à afficher
 ]
 <B_selections>
-	<div id="selection" class="liste favoris[ (#ENV{class})]">
+	<div id="selection" class="liste favoris[ (#ENV{categorie})][ (#ENV{class})]">
 		<h2>[(#ENV{titre,<:mesfavoris:mes_favoris:>})]</h2>
 		[<p class="pagination">(#PAGINATION)</p>]
 		<ul class="liste-items">
-			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{pagination #ENV{pagination,10}}>
+			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{categorie ?}{pagination #ENV{pagination,10}}>
 				<li class="item">
 					<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
-					<span class="date"><span class="sep"> - </span>[<:mesfavoris:ajoute_le:> (#MAJ|affdate_court)]</span>
+					<span class="date"><span class="sep"> - </span>[<:mesfavoris:ajoute_le:> (#MAJ|affdate_court)] [dans la catégorie (#CATEGORIE)]</span>
 					[(#ENV{bouton_suppression,oui}|=={non}|non)
 					[(#AUTORISER{modifier,favori,#ID_FAVORI}|oui)[(#BOUTON_ACTION{<:mesfavoris:remove:>,#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},ajax})]]]
 					[(#ENV{bouton_ajout,non}|=={oui}|oui)[(#FORMULAIRE_FAVORI{#OBJET,#ID_OBJET})]]

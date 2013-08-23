@@ -2,11 +2,11 @@
 	<nom>Mes Favoris 2</nom>
 	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
-	<version>2.3.4</version>
-	<version_base>1.1.0</version_base>
-	<etat>stable</etat>
+	<version>2.4.0</version>
+	<version_base>1.2.0</version_base>
+	<etat>test</etat>
 	<prefix>mesfavoris</prefix>
-	<auteur>Olivier Sallou, [C&#233;dric Morin->yterium.net]</auteur>
+	<auteur>Olivier Sallou, [C&#233;dric Morin->http://www.yterium.net], [Gilles Vincent->http://www.tech-nova.fr]</auteur>
 	<description>(D&#233;)S&#233;lectionne un objet pour g&#233;rer des objets (articles, rubriques ...) favoris pour un visiteur authentifi&#233;</description>
 	<install>mesfavoris_administrations.php</install>
 	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>

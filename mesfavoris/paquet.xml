@@ -1,11 +1,11 @@
 <paquet
 	prefix="mesfavoris"
 	categorie="navigation"
-	version="2.3.4"
-	etat="stable"
+	version="2.4.0"
+	etat="test"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="images/mesfavoris-128.png"
-	schema="1.1.0"
+	schema="1.2.0"
 	documentation="http://www.spip-contrib.net/Mes-Favoris-2-0"
 >	
 
@@ -13,7 +13,8 @@
 	<!-- Sélection de favoris -->
 
 	<auteur>Olivier Sallou</auteur>
-	<auteur lien="yterium.net">Cédric Morin</auteur>
+	<auteur lien="http://www.yterium.net">Cédric Morin</auteur>
+	<auteur lien="http://www.tech-nova.fr">Gilles Vincent</auteur>
 
 	<pipeline nom="declarer_tables_principales" inclure="mesfavoris_administrations.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_administrations.php" />

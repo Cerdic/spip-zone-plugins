@@ -1,17 +1,21 @@
 <?php
 /**
  * Plugin mesfavoris
- * (c) 2009-2012 Olivier Sallou, Cedric Morin
+ * (c) 2009-2013 Olivier Sallou, Cedric Morin, Gilles Vincent
  * Distribue sous licence GPL
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Déclaration de l'index de $tables_principales qui sera utilisé dans les 'spip_'
+ * 
+ * @param  array $interface Array contenant les infos des tables visibles par recherche sur 'spip_bidule'
+ * @return array            Cet Array de description modifié
+ */
 function mesfavoris_declarer_tables_interfaces($interface){
-	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['favoris']='favoris';
-
 	return $interface;
 }
 
@@ -27,6 +31,7 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 		"id_auteur"	=> "bigint DEFAULT '0' NOT NULL",
 		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+		"categorie"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP"
 	);
 
@@ -35,7 +40,8 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 		"KEY auteur_objet"	=> "id_auteur,id_objet,objet",
 		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_objet" => "id_objet",
-		"KEY objet" => "objet"
+		"KEY objet" => "objet",
+		"KEY categorie" => "categorie",
 	);
 
 	$tables_principales['spip_favoris'] =
@@ -78,6 +84,11 @@ function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_favoris ADD INDEX objet (objet)");
 			sql_alter("TABLE spip_favoris ADD INDEX id_objet (id_objet)");
 			ecrire_meta($nom_meta_base_version,$current_version="1.1.0",'non');
+		}
+		if (version_compare($current_version,'1.2.0','<')){
+			sql_alter("TABLE spip_favoris ADD COLUMN categorie VARCHAR(50) DEFAULT '' NOT NULL");
+			sql_alter("TABLE spip_favoris ADD INDEX categorie (categorie)");
+			ecrire_meta($nom_meta_base_version,$current_version="1.2.0",'non');
 		}
 	}
 }
