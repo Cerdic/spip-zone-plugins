@@ -12,11 +12,11 @@
 	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>mesfavoris_administrations.php</inclure>
+		<inclure>mesfavoris_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>mesfavoris_administrations.php</inclure>
+		<inclure>mesfavoris_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head_css</nom>

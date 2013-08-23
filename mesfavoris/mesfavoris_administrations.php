@@ -6,11 +6,18 @@
  *
  */
 
+/**
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @package SPIP\Mesfavoris\Installation
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Déclaration de l'index de $tables_principales qui sera utilisé dans les 'spip_'
- * 
+ *
+ * @pipeline declarer_tables_interfaces
  * @param  array $interface Array contenant les infos des tables visibles par recherche sur 'spip_bidule'
  * @return array            Cet Array de description modifié
  */
@@ -22,6 +29,7 @@ function mesfavoris_declarer_tables_interfaces($interface){
 /**
  * Declaration des tables principales
  *
+ * @pipeline declarer_tables_principales
  * @param array $tables_principales Un array de description des tables
  * @return array $tables_principales L'Array de description complété
  */
@@ -51,10 +59,14 @@ function mesfavoris_declarer_tables_principales($tables_principales){
 }
 
 /**
- * Mise à jour des tables
+ * Installation / Mise à jour des tables des favoris
+ *
+ * Crée les tables SQL du plugin (spip_favoris)
  *
  * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  */
 function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('inc/meta');
@@ -95,9 +107,12 @@ function mesfavoris_upgrade($nom_meta_base_version,$version_cible){
 
 
 /**
- * Desinstallation du plugin
+ * Désinstallation du plugin
  *
+ * Supprime les tables SQL du plugin (spip_favoris)
+ * 
  * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  */
 function mesfavoris_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');

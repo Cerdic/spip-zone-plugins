@@ -16,8 +16,8 @@
 	<auteur lien="http://www.yterium.net">Cédric Morin</auteur>
 	<auteur lien="http://www.tech-nova.fr">Gilles Vincent</auteur>
 
-	<pipeline nom="declarer_tables_principales" inclure="mesfavoris_administrations.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_administrations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="mesfavoris_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="mesfavoris_pipelines.php" />
 	<pipeline nom="autoriser" inclure="mesfavoris_autoriser.php" />
 </paquet>

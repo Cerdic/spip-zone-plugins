@@ -6,7 +6,13 @@
  *
  */
 
-// Sécurité
+/**
+ * Définit les autorisations du plugin forum
+ *
+ * @package SPIP\Mesfavoris\Autorisations
+ */
+
+/ Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mesfavoris_autoriser(){}
@@ -15,7 +21,8 @@ function mesfavoris_autoriser(){}
  * Contrôle l'accès sur la modification d'un favori via le plugin
  * Ici les admins (non restreint) ont tous les droits
  * Et les auteurs peuvent modifier leurs favoris
- * 
+ *
+ * @pipeline autoriser
  * @param  string $faire Action
  * @param  string $type  Type d'objet
  * @param  integer $id   id de l'objet
