@@ -19,6 +19,9 @@
 [(#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_flip})]
 
 
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -36,9 +39,9 @@
 				verifier => array('type' => 'url',),
 			})]
 
-			[(#SAISIE{selecteur_article, id_article, obligatoire=oui,
-				label=<:almanach:label_id_article:>,
-				explication=<:almanach:explication_id_article:>,
+			[(#SAISIE{input, id_article, obligatoire=oui,
+				label=<:agenda:evenement_article:>,
+				explication=<:almanach:explication_id_article:>
 			})]
 
 			[(#SAISIE{selection, id_mot, obligatoire=oui,
