@@ -1,7 +1,7 @@
 <paquet
 	prefix="titres_typographies"
 	categorie="edition"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	documentation="http://contrib.spip.net/Titres-typographies"
 	compatibilite="[3.0;3.0.99]"
