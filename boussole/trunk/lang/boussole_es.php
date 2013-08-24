@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_actualiser_boussoles' => 'Actualiser les boussoles', # NEW
-	'bouton_actualiser_caches' => 'Actualiser les caches', # NEW
+	'bouton_actualiser_boussoles' => 'Actualizar las brújulas',
+	'bouton_actualiser_caches' => 'Actualizar las cachés',
 	'bouton_boussole' => 'Brújula',
 	'bouton_supprimer' => 'Eliminar',
 	'bulle_afficher' => 'Mostrar en los modelos',
@@ -20,10 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_alias' => 'Alias',
-	'colonne_description_cache' => 'Description', # NEW
-	'colonne_fichier_cache' => 'Cache', # NEW
+	'colonne_description_cache' => 'Descripción',
+	'colonne_fichier_cache' => 'Caché',
 	'colonne_nbr_sites' => 'Contiene',
-	'colonne_prefixe_plugin' => 'Plugin ?', # NEW
+	'colonne_prefixe_plugin' => '¿Plugin?',
 	'colonne_titre' => 'Título',
 	'colonne_version' => 'Versión',
 
@@ -36,14 +36,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Añadiendo las brújulas a su base de datos, tendrá la posibilidad de utilizar los modelos proporcionados para mostrarlos en sus páginas públicas.<br />Si la brújula ya existe este formulario permitirá actualizarla conservando la configuración de la visualización. ',
-	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>', # NEW
-	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>', # NEW
-	'info_boussole_manuelle' => 'Manuelle', # NEW
-	'info_cache_boussole' => 'Cache de la boussole «@boussole@»', # NEW
-	'info_cache_boussoles' => 'Cache des boussoles hébergées', # NEW
+	'info_boite_boussoles_gerer_client' => '<strong>Esta página sólo es accesible para los responsables del sitio.</strong><p>Permite agregar, actualizar y eliminar brújulas en base de datos para su visualizacion en el sitio. Se puede también ir a la página de configuración de la visualización de cada brújula haciendo clic sobre su nombre en la lista.</p>',
+	'info_boite_boussoles_gerer_serveur' => '<strong>Esta página sólo es accesible para los responsables del sitio.</strong><p>Permite actualzar manualmente la caché de las brújulas albergadas por este servidor. Las cachés pueden descargarse haciendo clic sobre su nombre en la lista.</p>',
+	'info_boussole_manuelle' => 'Manual',
+	'info_cache_boussole' => 'Caché de la brújula «@boussole@»',
+	'info_cache_boussoles' => 'Caché de las brújulas alojadas',
 	'info_configurer_boussole' => 'Este formulario le permite configurar la visualización de la brújula eligiendo los sitios a mostrar o no y el orden de visualización en un grupo. Los sitios no mostrados se indican por un fondo tramado y una fuente color gris. ',
 	'info_fichier_boussole' => 'Introduzca la url del archivo de descripción de su brújula',
-	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.', # NEW
+	'info_liste_aucun_cache' => 'Ninguna caché ha sido todavía creada para las brújulas albergadas. Utilice el botón «actualizar las cachés» para crearlas.',
 	'info_liste_aucune_boussole' => 'Ninguna brújula se ha cargado aún en su base de datos. Utilice el siguiente formulario para añadir una.',
 	'info_site_boussole' => 'Este sitio forma parte de la brújula:',
 	'info_site_boussoles' => 'Este sitio forma parte de las brújulas:',
@@ -92,10 +92,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Versión',
 
 	// M
-	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n\'est encore hébergée sur le serveur «@serveur@».', # NEW
+	'message_nok_aucune_boussole_hebergee' => 'Ninguna brújula está todavía alojada en el servidor «@serveur@».',
 	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»',
-	'message_nok_boussole_non_hebergee' => 'La boussole «@alias@» n\'est pas hébergée sur le serveur «@serveur@».', # NEW
-	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole «@alias@» n\'est pas disponible sur le serveur «@serveur@».', # NEW
+	'message_nok_boussole_non_hebergee' => 'La brújula «@alias@» no está alojada en el servidor «@serveur@».',
+	'message_nok_cache_boussole_indisponible' => 'El archivo caché de la brújula «@alias@» no está disponible en el servidor «@serveur@».',
 	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur «@serveur@».', # NEW
 	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)',
 	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Añadir o actualizar una brújula',
 	'titre_formulaire_configurer' => 'Configuración de la visualización de la brújula',
 	'titre_liste_boussoles' => 'Lista de las brújulas disponibles a la visualización',
-	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
+	'titre_liste_caches' => 'Lista de brújulas alojadas',
 	'titre_page_boussole' => 'Gestión de las brújulas'
 );
 
