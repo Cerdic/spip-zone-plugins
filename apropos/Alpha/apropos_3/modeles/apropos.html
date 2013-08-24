@@ -10,6 +10,7 @@ fichier modele/apropos.html
 <!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
 #SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
 
+<!-- on récupère le préfixe passé par le paramètre statistique et on le passe en majuscule pour être sûr du traitement -->
 #SET{lastatistique,#ENV*{stats}|mb_strtoupper} 
 <BOUCLE_statistique(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{prefixe=#GET{lastatistique}}>
 
@@ -22,34 +23,24 @@ fichier modele/apropos.html
 
 
 <B_utilisation>
-<BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{leprefixe}}>
+<BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{prefixe=#GET{leprefixe}}>
 
 	<BOUCLE_plugin(PLUGINS) {prefixe=#GET{leprefixe}} {tout}>
 	<!-- on récupère le nom, le nombre de visites du plugin depuis la table spip_plugins -->
 		#SET{lenom,#NOM} 
 		#SET{nombresite,#NBR_SITES}
-		<!-- #SET{idPlugin,#ID_PLUGIN}
-		- idPlugin : #GET{idPlugin} <br />
-		
-		info bonux : #INFO_CATEGORIE{spip_plugins, #GET{idPlugin}} <br />
-		http://contrib.spip.net/Balises-Bonux
-		prefixe
-		
-	le tablo est [(#GET{mon_tableaux}|table_valeur{1})] - #GET{caca} <br />
-le foreach est [(#GET{mon_tableaux}|foreach)] <br />
-[(#ENV**{info})] )))) #CATEGORIE 
-
--->
-		 <br />
-		<!-- <a href="[(#SELF|concat{'#'}|concat{ID_RUBRIQUE})]" [ title="(#INTRODUCTION|textebrut)"]" >zobi</a> -->
 	</BOUCLE_plugin>
 	
 	<div class='apropos-resume'>
 		<div class='apropos-icon'>
-			[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{plugins/apropos_3/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
+
+		<BOUCLE_logo(PAQUETS){id_plugin}{!par version}{0,1}>[
+			(#LOGO|balise_img{"L'icone du plugin "#NOM}|image_reduire{32})
+		]</BOUCLE_logo>
+
 		</div>
 		[<span class='apropos-nom'>(#GET{lenom}), #GET{linformation}</span>]
-		<span class='apropos-version'>version #VERSION, [(#ETAT|svp_afficher_etat)].</span>
+		<span class='apropos-version'>version #VERSION, [(#ETAT|svp_afficher_etat)]#FICHIER.</span>
 		
 		<div class='apropos-description'>
 			[(#DESCRIPTION|extraire_multi)]
