@@ -16,7 +16,7 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{id_rubrique},#ENV{lier_trad,0},#GET{redirect}})]
+		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{id_rubrique},#GET{redirect},#ENV{lier_trad,0}})]
 		
 [(#ENV{retourajax,''}|oui)
 	</div>
