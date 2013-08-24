@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 -* Podrobné vysvetlenie a príklady nájdete v dokumentácii, ktorá vám umožňuje aj zobraziť si ukážku integrácie pútačov do šablón. Táto dokumentácia vám bude k dispozícii, ak si zásuvný modul aktivujete na verejne prístupnej stránke "pubban_documentation".
 
--* Stránka so štatistikami zásuvného modulu je jednoduchým prispôsobením skriptu "{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}," ktorý naprogramoval {{Vincent Roseberry}} ({toho času s licenciou GPL.})',
+-* Stránka so štatistikami zásuvného modulu je jednoduchým prispôsobením skriptu "{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}," ktorý naprogramoval {{Vincent Roseberry}} ({toho času s licenciou GPL.})', # MODIF
 	'pubban_slogan' => 'Ovládanie reklamných pútačov'
 );
 
