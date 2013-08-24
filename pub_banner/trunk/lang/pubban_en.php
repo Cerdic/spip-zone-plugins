@@ -407,9 +407,9 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'vider_trash' => 'Empty trash',
 	'view_pub' => 'Details of an advertising insert',
 	'voir_bordure' => 'See the borders banners',
-	'voir_les_statistiques' => 'Show Stats (popup window)',
+	'voir_les_statistiques' => 'Show Stats (popup window)', # MODIF
 	'voir_page' => '<br /><b>See the page :</b>',
-	'voir_un_apercu' => 'See a preview (popup window)',
+	'voir_un_apercu' => 'See a preview (popup window)', # MODIF
 
 	// W
 	'width' => 'Width'
