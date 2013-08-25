@@ -94,15 +94,12 @@ function edition_directe_formulaire_traiter($flux){
          $form = $flux['args']['form'];
          $objet=str_replace('editer_','',$form);
         
-        if(in_array($objet,$objets)  AND ! $_REQUEST['redirect']){
+        if(in_array($objet,$objets)  AND ! $_REQUEST['redirect'] AND _request('exec')){
             if($objet=='site'){
              $id_objet=$flux['data']['id_syndic'];
             $flux['data']['redirect']=generer_url_ecrire($objet,'id_syndic='.$id_objet);   
             }
-            else{
-                $id_objet=$flux['data']['id_'.$objet];
-                $flux['data']['redirect']=generer_url_ecrire($objet,'id_'.$objet.'='.$id_objet);
-                }
+            elseif($id_objet=$flux['data']['id_'.$objet])$flux['data']['redirect']=generer_url_ecrire($objet,'id_'.$objet.'='.$id_objet);               
                 
         }
 
