@@ -123,7 +123,7 @@ function boussole_cacher_liste($boussoles) {
 		}
 
 		if ($cache) {
-			$cache = inserer_balise('ouvrante', 'boussoles', array('sha' => _BOUSSOLE_PATTERN_SHA))
+			$cache = inserer_balise('ouvrante', 'boussoles', array('serveur' => _BOUSSOLE_ALIAS_SERVEUR, 'sha' => _BOUSSOLE_PATTERN_SHA))
 				   . $cache
 				   . inserer_balise('fermante', 'boussoles', '');
 			$sha = sha1($cache);
