@@ -56,7 +56,7 @@ fichier modeles/apropos_lister_tout
 
 	</div>
 	[<span class='apropos-nom'>(#NOM|extraire_multi)],</span> 
-	<span class='apropos-version'>[version #VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\],] [(#OBSOLETE|choixsiegal{oui,<:apropos:obsolete:>})] #ETAT.</span>
+	<span class='apropos-version'>[version #VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\],] [(#OBSOLETE|choixsiegal{oui,<:apropos:obsolete:>,""})] #ETAT.</span>
 	
 	<div class='apropos-description'>
 		[(#DESCRIPTION|extraire_multi|propre|couper{280})]

@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_plugins' => 'Il utilise les plugins suivants :',
 
 	// O
-	'obsolete' => 'obsolète, ',
+	'obsolete' => 'version obsolète, ',
 	
 	// P
 	'plugins_actives' => 'plugins tiers sont activés.',
