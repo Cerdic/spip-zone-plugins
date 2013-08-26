@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_evenement' => 'Crear un evento',
 
 	// D
-	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>', # NEW
+	'date_fmt_agenda_label' => '<b class="day">@jour@</b> <b class="month">@mois@</b> <b class="year">@annee@</b>',
 
 	// E
 	'erreur_article_interdit' => 'No tiene permiso para asociar este evento a este artículo',
@@ -61,8 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Eventos',
 	'evenements_a_venir' => 'Próximos',
 	'evenements_depuis_debut' => 'Desde el inicio',
-	'explication_synchro_flux_ical' => 'Le plugin Agenda fournit un flux des évènements au format iCal. Certains clients ne mettent à jour un évènement que si un numéro de version (indiquant ansi qu\'il y a eu modification) est présent dans ce flux. Pour que ce numéro de version soit intégré dans le flux iCal généré, vous devez activer le suivi des révisions pour les évènements (menu Configuration > Révisions).', # NEW
-	'explication_synchro_flux_ical_titre' => 'Synchronisation du flux iCal', # NEW
+	'explication_synchro_flux_ical' => 'El plugin Agenda proporciona una fuente de eventos en formato iCal. Algunos clientes sólo actualizan un evento si un número de versión (indicando así que ha habido una actualización) está presente en esta fuente. Para que este número de versión se integre en la fuente iCal generado, debe activar el seguimiento de las revisiones para los eventos (menú Configuración > Revisiones).',
+	'explication_synchro_flux_ical_titre' => 'Sincronización de la fuente iCal',
 
 	// F
 	'fermer' => 'cerrar',
