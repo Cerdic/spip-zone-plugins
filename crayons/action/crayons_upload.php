@@ -44,7 +44,7 @@ function action_crayons_upload() {
 		} else {
 			include_spip('inc/ajouter_documents');
 			
-			$id = ajouter_un_document($source, $nom_envoye, $type, $id, 'document', $id_document=0, &$documents_actifs, $titrer=true);
+			$id = ajouter_un_document($source, $nom_envoye, $type, $id, 'document', $id_document=0, $documents_actifs, $titrer=true);
 		}
 	}
 
