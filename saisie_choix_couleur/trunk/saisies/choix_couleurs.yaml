@@ -1,6 +1,6 @@
 
-titre: '<:saisie_choix_couleurs:choix_couleurs_titre:>'
-description: '<:saisie_choix_couleurs:choix_couleurs_explication:>'
+titre: '<:saisie_choix_couleur:choix_couleur_titre:>'
+description: '<:saisie_choix_couleur:choix_couleur_explication:>'
 icone: 'images/saisies_radio.png'
 options:
   -
@@ -28,7 +28,7 @@ options:
         options:
           nom: 'datas'
           label: '<:saisies:option_datas_label:>'
-          explication: '<:saisie_choix_couleurs:choix_couleurs_datas_explication:>'
+          explication: '<:saisie_choix_couleur:choix_couleur_datas_explication:>'
           rows: 10
           cols: 50
       -
@@ -99,10 +99,10 @@ options:
           explication: '<:saisies:option_erreur_obligatoire_explication:>'
 defaut:
   options:
-    label: '<:saisie_choix_couleurs:choix_couleurs_titre:>'
+    label: '<:saisie_choix_couleur:choix_couleur_titre:>'
     datas:
-      choix1: '<:saisie_choix_couleurs:choix_couleurs_defaut_choix1:>'
-      choix2: '<:saisie_choix_couleurs:choix_couleurs_defaut_choix2:>'
-      choix3: '<:saisie_choix_couleurs:choix_couleurs_defaut_choix3:>'
+      choix1: '<:saisie_choix_couleur:choix_couleur_defaut_choix1:>'
+      choix2: '<:saisie_choix_couleur:choix_couleur_defaut_choix2:>'
+      choix3: '<:saisie_choix_couleur:choix_couleur_defaut_choix3:>'
     # champs extras (definition du champ sql)
     sql: "text DEFAULT '' NOT NULL"
