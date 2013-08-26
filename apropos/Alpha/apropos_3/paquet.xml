@@ -1,7 +1,7 @@
 <paquet
 	prefix="apropos"
 	categorie="divers"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[3.0.0-rc;3.0.*]"
 	logo="apropos.png"

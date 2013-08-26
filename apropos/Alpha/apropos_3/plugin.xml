@@ -1,7 +1,7 @@
 <plugin>
     <nom>À propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <etat>Dev</etat>
 	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
     <description>

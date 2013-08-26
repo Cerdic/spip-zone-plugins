@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'la_demonstration' => 'Le plugin en action :',
 	
 	// E
-	'extensions_automatiquement' => 'plugins verrouill&eacute;s sont automatiquement activ&eacute;s',
+	'extensions_actives' => 'plugins verrouill&eacute;s sont automatiquement activ&eacute;s',
 	'extensions_tout' => 'plugins verrouill&eacute;s à disposition',
 	'erreur_prefixe' => 'Vous avez entr&eacute; <b> @params@ </b>',
 	

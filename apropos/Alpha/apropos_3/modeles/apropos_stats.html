@@ -2,23 +2,20 @@
 SVP crée 2 tables (spip_paquets et spip-plugins) pour stocker différentes informations relatives aux plugins installés
 Ces informations n'étant pas redondantes, il nous faut piocher dans l'une et l'autre
 D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des tables.
+
+fichier modele/apropos_stats.html
+
  -->
 
 <!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
-#SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
+#SET{lastatistique,#ENV*{prefixe}|mb_strtoupper} 
+<B_statistique>
+<BOUCLE_statistique(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{lastatistique}}>
 
-<B_utilisation>
-<BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{leprefixe}}>
-
-	<BOUCLE_plugin(PLUGINS) {prefixe=#GET{leprefixe}} {tout}>
+	<BOUCLE_plugin(PLUGINS) {prefixe=#GET{lastatistique}} {tout}>
 	<!-- on récupère le nombre de visites du plugin depuis la table spip_plugins -->
 		#NBR_SITES
 	</BOUCLE_plugin>
 
-</BOUCLE_utilisation>
-</B_utilisation>
-<div class="apropos-erreur">
-<!-- Affiche un message d'erreur si le préfixe saisi n'est pas bon. -->
-Impossible d'afficher les informations relatives au préfixe : <b>#ENV{prefixe}</b>.
-</div>
-<//B_utilisation>
+</BOUCLE_statistique>
+</B_statistique>

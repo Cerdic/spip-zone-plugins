@@ -1,6 +1,8 @@
+<!-- Liste tous les plugins actifs et inactifs 
+fichier modeles/apropos_lister_tout
+-->
 
 <div class="apropos">
-<!-- Liste des plugins tiers actifs et inactifs -->
 
 <B_pluginstiers>
 <h2>[(#TOTAL_BOUCLE)] <:apropos:plugins_tout:></h2>
@@ -11,7 +13,7 @@
 <!-- affiche les plugins tiers activés -->
 
 <B_pluginstiers_actifs>
-	<h3>[(#TOTAL_BOUCLE)] plugins tiers actifs</h3>
+	<h3>[(#TOTAL_BOUCLE)] <:apropos:plugins_actives:></h3>
 
 <BOUCLE_pluginstiers_actifs(spip_paquets){constante=_DIR_PLUGINS} {actif=oui} {par prefixe}>
 	<BOUCLE_lesplugins_actifs(PAQUETS plugins) {actif=oui} {tout}{id_paquet}>
@@ -19,8 +21,8 @@
 	<div class='apropos-icon'>
 		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{apropos/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
 	</div>
-	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span> 
-	<span class='apropos-version'>version [#VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]], #ETAT.</span>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)],</span> 
+	<span class='apropos-version'>[version #VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\],] #ETAT.</span>
 	
 	<div class='apropos-description'>
 		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
@@ -41,7 +43,7 @@
 <!-- affiche les plugins tiers désactivés -->
 
 <B_pluginstiers_inactifs>
-	<h3>[(#TOTAL_BOUCLE)] plugins tiers inactifs</h3>
+	<h3>[(#TOTAL_BOUCLE)] <:apropos:plugins_inactives:></h3>
 <BOUCLE_pluginstiers_inactifs(spip_paquets){constante=_DIR_PLUGINS} {actif=non} {par prefixe}>
 
 	<BOUCLE_lesplugins_inactifs(PAQUETS plugins) {actif=non} {tout}{id_paquet}>
@@ -49,13 +51,12 @@
 	<div class='apropos-icon'>
 
 		<BOUCLE_logo(PAQUETS){id_plugin}{!par version}{0,1}>[
-		(#LOGO|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|image_nb)
+		(#LOGO|balise_img{"L'icone du plugin "#NOM}|image_reduire{32})
 		]</BOUCLE_logo>
 
-
 	</div>
-	[<span class='apropos-nom'>(#NOM|extraire_multi)</b>],</span> 
-	<span class='apropos-version'>version [#VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]], #ETAT.</span>
+	[<span class='apropos-nom'>(#NOM|extraire_multi)],</span> 
+	<span class='apropos-version'>[version #VERSION SVN \[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\],] #ETAT.</span>
 	
 	<div class='apropos-description'>
 		[(#DESCRIPTION|extraire_multi|propre|couper{280})]
@@ -73,16 +74,17 @@
 </BOUCLE_pluginstiers_inactifs>
 </B_pluginstiers_inactifs>
 
-<!-- Liste des plugins verrouillés, anciennement extensions, activés -->
+<!-- Liste des plugins verrouillés, anciennement extensions, activés
 
 <B_total_extensions>
 <h2>[(#TOTAL_BOUCLE) <:apropos:extensions_tout:>.]</h2>
 <BOUCLE_total_extensions(spip_paquets){constante=_DIR_PLUGINS_DIST} {par prefixe}>
 </BOUCLE_total_extensions>
 </B_total_extensions>
-
+ -->
+ 
 <B_extensions_actives>
-	<h3>[(#TOTAL_BOUCLE) plugins verrouillés actifs.]</h3>
+	<h2>[(#TOTAL_BOUCLE) <:apropos:extensions_actives:>.]</h2>
 <BOUCLE_extensions_actives(spip_paquets){constante=_DIR_PLUGINS_DIST} {actif=oui} {par prefixe}>
 <B_lesextensions_actives>
 	<BOUCLE_lesextensions_actives(PAQUETS plugins){tout}{actif=oui}{id_paquet}>
@@ -110,7 +112,7 @@
 </B_extensions_actives>
 
 <B_extensions_inactives>
-	<h3>[(#TOTAL_BOUCLE) plugins verrouillés actifs.]</h3>
+	<h3>[(#TOTAL_BOUCLE) <:apropos:extensions_tout:>.]</h3>
 <BOUCLE_extensions_inactives(spip_paquets){constante=_DIR_PLUGINS_DIST} {actif=non} {par prefixe}>
 <B_lesextensions_inactives>
 	<BOUCLE_lesextensions_inactives(PAQUETS plugins){tout}{actif=non}{id_paquet}>
