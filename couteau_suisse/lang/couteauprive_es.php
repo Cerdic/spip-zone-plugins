@@ -685,7 +685,7 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volverá a co
 	'rss_actualiser' => 'Actualizar',
 	'rss_attente' => 'Esperando RSS...',
 	'rss_desactiver' => 'Desactivar las « Revisiones de la Navaja Suiza »',
-	'rss_edition' => 'Flujo RSS actualizado el:',
+	'rss_edition' => 'Fuente RSS actualizado el:',
 	'rss_source' => 'Origen RSS',
 	'rss_titre' => '« La Navaja Suiza » en desarrollo:',
 	'rss_var' => 'Las revisiones de La Navaja Suiza',
