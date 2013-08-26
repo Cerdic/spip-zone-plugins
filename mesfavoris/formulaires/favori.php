@@ -21,7 +21,8 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie){
 	$valeur = array(
 		'editable'=>true,
 		'_deja_favori'=>false,
-		'_objet'=>$objet
+		'_objet'=>$objet,
+		'categorie'=>$categorie
 	);
 	if (defined('_MESFAVORIS_PERSO_ID_OBJET'))
 		$valeur['_id_objet'] = $id_objet;
