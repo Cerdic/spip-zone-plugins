@@ -161,12 +161,14 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 
 	$infos = array('erreur' => '');
 
+	// Détermination des serveurs configurés
+	include_spip('inc/config');
+	$serveurs = lire_config('boussole/client/serveurs_disponibles');
+
 	// Acquérir les informations de la boussole à partir du serveur
 	include_spip('inc/distant');
-	$action = str_replace(
-				array('[action]','[arguments]'),
-				array('serveur_informer_boussole', "&arg=${boussole}"),
-				$GLOBALS['client_serveurs_disponibles'][$serveur]['api']);
+	$action = rtrim($serveurs[$serveur]['url'], '/')
+			. "/spip.php?action=serveur_informer_boussole&arg=${boussole}";
 	$page = recuperer_page($action);
 
 	$convertir = charger_fonction('simplexml_to_array', 'inc');

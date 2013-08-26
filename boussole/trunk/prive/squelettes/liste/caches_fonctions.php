@@ -8,7 +8,8 @@ function lister_caches() {
 	$dir_caches = _DIR_VAR . 'cache-boussoles';
 	if ($fichiers_cache = glob($dir_caches . "/boussole*.xml")) {
 		// (on sait déjà que le mode serveur est actif)
-		$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
+		include_spip('inc/config');
+		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
 
 		foreach ($fichiers_cache as $_fichier) {

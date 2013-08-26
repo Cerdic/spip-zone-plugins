@@ -15,7 +15,8 @@ function action_serveur_informer_boussole_dist(){
 
 	if (_BOUSSOLE_ALIAS_SERVEUR AND $alias) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
-		$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
+		include_spip('inc/config');
+		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
 
 		// Si erreur, on renvoie un id sous forme d'une balise erreur

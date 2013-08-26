@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser_boussoles' => 'Actualiser les boussoles',
 	'bouton_actualiser_caches' => 'Actualiser les caches',
 	'bouton_boussole' => 'Boussole',
+	'bouton_retirer_serveur' => 'Retirer le serveur',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_afficher' => 'Afficher dans les modèles',
 	'bulle_aller_site' => 'Se rendre sur la page du site référencé',
@@ -23,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_nbr_sites' => 'Contient',
 	'colonne_prefixe_plugin' => 'Plugin ?',
 	'colonne_titre' => 'Titre',
+	'colonne_url' => 'URL',
+	'colonne_serveur' => 'Serveur',
 	'colonne_version' => 'Version',
 
 	// D
@@ -36,12 +39,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
 	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>',
 	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>',
-	'info_boussole_manuelle' => 'Manuelle',
+	'info_boussole_manuelle' => 'Boussole Manuelle',
 	'info_cache_boussole' => 'Cache de la boussole «@boussole@»',
 	'info_cache_boussoles' => 'Cache des boussoles hébergées',
 	'info_configurer_boussole' => 'Ce formulaire vous permet de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
+	'info_ajouter_serveur' => 'Ce formulaire vous permet d\'ajouter un serveur de boussoles. Par défaut, le serveur &#171;spip&#187; est toujours disponible sur les sites client. La liste des serveurs disponibles est affichée ci-dessus et permet aussi de retirer un serveur configuré.',
+	'info_url_serveur' => 'Saisissez l\'URL du serveur pour l\'ajouter à la liste.',
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.',
+	'info_liste_aucun_serveur' => 'Aucun serveur n\'a encore été configuré pour le site client.',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
@@ -87,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_description' => 'Description affichée à coté du logo',
 	'label_ul_class' => 'Classe de la balise ul de la liste',
 	'label_url' => 'URL',
+	'label_url_serveur' => 'URL du serveur',
 	'label_version' => 'Version',
 
 	// M
@@ -99,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.',
 	'message_ok_boussole_actualisee' => 'La boussole « @fichier@ » a été mise à jour.',
 	'message_ok_boussole_ajoutee' => 'La boussole « @fichier@ » a été ajoutée.',
+	'message_ok_serveur_ajoute' => 'Le serveur « @serveur@ » a été ajouté (@url@).',
 	'modele_boussole_liste_avec_logo' => 'Liste de liens avec noms, logos et description',
 	'modele_boussole_liste_par_groupe' => 'Liste de liens textuels par groupe',
 	'modele_boussole_liste_simple' => 'Liste simple de liens textuels',
@@ -119,9 +127,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_infos_boussole' => 'BOUSSOLE D\'ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre à jour une boussole',
+	'titre_form_ajouter_serveur' => 'Ajouter un serveur de boussoles',
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles à l\'affichage',
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées',
+	'titre_liste_serveurs' => 'Liste des serveurs disponibles',
 	'titre_page_boussole' => 'Gestion des boussoles'
 );
 

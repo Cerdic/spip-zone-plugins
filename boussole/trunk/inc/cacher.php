@@ -17,9 +17,19 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
  */
 function boussole_actualiser_caches() {
 
+	// Suppression de tous les caches afin de ne pas conserver des boussoles qui ne sont plus disponibles
+	$dir_caches = _DIR_VAR . 'cache-boussoles';
+	if ($fichiers_cache = glob($dir_caches . "/*.*")) {
+		foreach ($fichiers_cache as $_fichier) {
+			supprimer_fichier($_fichier);
+		}
+	}
+
+
 	// Acquisition de la liste des boussoles disponibles sur le serveur.
 	// (on sait déjà que le mode serveur est actif)
-	$boussoles = $GLOBALS['serveur_boussoles_disponibles'];
+	include_spip('inc/config');
+	$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 	$boussoles = pipeline('declarer_boussoles', $boussoles);
 
 	if ($boussoles) {

@@ -2,8 +2,9 @@
 <h1><:boussole:titre_page_boussole:></h1>
 
 [(#REM) <!-- Suivant la fonction client ou serveur affichée, le contenu est soit :
-	- la liste des boussoles et le formulaire d'ajout/mise à jour (client)
-	- la liste des caches pour les boussoles hébergées
+	- la liste des boussoles, le formulaire d'ajout/mise à jour des boussoles,
+	  la liste des serveurs et le formulaire d'ajout d'un serveur (client)
+	- la liste des caches pour les boussoles hébergées (serveur)
  --> ]
 
 [(#ENV{fonction, client}|=={client}|oui)
@@ -15,9 +16,19 @@
 		affichage=complet,
 		env, ajax} />
 
-	[(#REM) <!-- Formulaire d'ajout ou de mise à jour manuelle d'une boussole --> ]
+	[(#REM) <!-- Formulaire d'ajout ou de mise à jour manuelle d'une boussole en BDD --> ]
 	<div class="noajax">
 		#FORMULAIRE_AJOUTER_BOUSSOLE
+	</div>
+
+	[(#REM) <!-- Liste des serveurs --> ]
+	<INCLURE{fond=prive/squelettes/liste/serveurs,
+		titre=<:boussole:titre_liste_serveurs:>,
+		env, ajax} />
+
+	[(#REM) <!-- Formulaire d'ajout d'un serveur de boussoles --> ]
+	<div class="noajax">
+		#FORMULAIRE_AJOUTER_SERVEUR_BOUSSOLES
 	</div>
 ]
 

@@ -1,0 +1,50 @@
+[(#REM) <!-- Liste des caches :
+
+	Les parametres d'environnement specifiques sont :
+	- titre     : le titre de la liste
+	- par       : le champ tri principal
+	- pas       : le pas de pagination
+	- where		: condition supplementaire construite par l'appelant (exclusion de certaines lignes par ex)
+ -->]
+
+[(#SET{sens_tri,#ARRAY{
+	nom, 1,
+	url, 1
+}})]
+<B_liste_serveurs>
+#ANCRE_PAGINATION
+<div class="liste-objets serveurs">
+	<table class="spip liste">
+		[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre" scope="col">[(#TRI{nom, <:boussole:colonne_serveur:>, ajax})]</th>
+				<th class="url principale" scope="col">[(#TRI{url, <:boussole:colonne_url:>, ajax})]</th>
+				<th class="lien" scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_liste_serveurs(DATA) {source table, #CONFIG{boussole/client/serveurs_disponibles}}{where?}{tri #ENV{par, nom}, #GET{sens_tri}}{pagination #ENV{pas, 5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="titre">#CLE</td>
+				<td class="url principale">[(#VALEUR|table_valeur{url})]</td>
+				<td class="lien">
+					[(#CLE|=={spip}|?{
+						&nbsp;,
+						[(#BOUTON_ACTION{
+							<:boussole:bouton_retirer_serveur:>,
+							#URL_ACTION_AUTEUR{client_retirer_serveur, #CLE, #SELF},
+							'', '', ''})]
+					})]
+				</td>
+			</tr>
+</BOUCLE_liste_serveurs>
+		</tbody>
+	</table>
+	[<p class='pagination'>(#PAGINATION{#ENV{pagination, prive}})</p>]
+</div>
+</B_liste_serveurs>
+	#BOITE_OUVRIR{'','notice'}
+		<p><:boussole:info_liste_aucun_serveur:></p>
+	#BOITE_FERMER
+<//B_liste_serveurs>

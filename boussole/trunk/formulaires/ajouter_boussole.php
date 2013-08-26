@@ -53,16 +53,18 @@ function charger_boussoles() {
 
 	include_spip('inc/distant');
 
+	// Détermination des serveurs configurés
+	include_spip('inc/config');
+	$serveurs = lire_config('boussole/client/serveurs_disponibles');
+
 	// On boucle sur tous les serveurs configurés pour le site client
 	// -- pour chacun on acquiert la liste des boussoles disponibles
 	$liste = array();
 	$message = '';
 	$index = 1;
-	foreach($GLOBALS['client_serveurs_disponibles'] as $_serveur => $_infos) {
-		$action = str_replace(
-					array('[action]','[arguments]'),
-					array('serveur_lister_boussoles', ""),
-					$_infos['api']);
+	foreach($serveurs as $_serveur => $_infos) {
+		$action = rtrim($_infos['url'], '/')
+				. "/spip.php?action=serveur_lister_boussoles";
 		$page = recuperer_page($action);
 
 		$convertir = charger_fonction('simplexml_to_array', 'inc');
