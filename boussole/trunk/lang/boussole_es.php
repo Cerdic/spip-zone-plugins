@@ -96,9 +96,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»',
 	'message_nok_boussole_non_hebergee' => 'La brújula «@alias@» no está alojada en el servidor «@serveur@».',
 	'message_nok_cache_boussole_indisponible' => 'El archivo caché de la brújula «@alias@» no está disponible en el servidor «@serveur@».',
-	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur «@serveur@».', # NEW
+	'message_nok_cache_liste_indisponible' => 'El archivo caché de la lista de brújulas no se halla disponible en el servidor «@serveur@».',
 	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)',
-	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
+	'message_nok_reponse_invalide' => 'La respuesta del servidor «@serveur@» está mal formada.',
 	'message_ok_boussole_actualisee' => 'La brújula «@fichier@» ha sido actualizada. ',
 	'message_ok_boussole_ajoutee' => 'La brújula «@fichier@» ha sido añadida. ',
 	'modele_boussole_liste_avec_logo' => 'Lista de enlaces con nombres, logos y descripción',
@@ -108,8 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Galería de los logos con efecto sepia',
 
 	// O
-	'onglet_client' => 'Fonction Client', # NEW
-	'onglet_serveur' => 'Fonction Serveur', # NEW
+	'onglet_client' => 'Función Cliente',
+	'onglet_serveur' => 'Función Servidor',
 	'option_aucune_description' => 'Ninguna descripción',
 	'option_descriptif_site' => 'Descriptivo del sitio',
 	'option_nom_site' => 'Nombre del sitio',
