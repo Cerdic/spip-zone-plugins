@@ -13,7 +13,7 @@
 		]
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre_2:>})[(#CHEMIN_IMAGE{banniere-24.png}|balise_img{banniere,cadre-icone})]</h1>
-	<p>&nbsp;Banner ID : <strong>#TITRE_ID</strong></p>
+	<p>&nbsp;<:pubban:info_titre_id_banniere:> : <strong>#TITRE_ID</strong></p>
 ],simple fiche_objet})]
 
 <!--decomptes-->
@@ -22,7 +22,7 @@
 #SET{decompte_pub_inactives,0}
 #SET{decompte_pub_obsoletes,0}
 #SET{listing_pub,#ARRAY{}}
-<BOUCLE_decompte_objets(bannieres_publicites){id_banniere=#ID_BANNIERE}>
+<BOUCLE_decompte_objets(BANNIERES_PUBLICITES){id_banniere=#ID_BANNIERE}>
 	<BOUCLE_statut_objets(PUBLICITES){id_publicite=#ID_PUBLICITE}{statut!=5poubelle}>
 	[(#SET{decompte_pub,#GET{decompte_pub}|plus{1}})]
 	[(#SET{listing_pub,#GET{listing_pub}|push{#ID_PUBLICITE}})]
@@ -59,13 +59,11 @@
 } />
 ]
 
+[(#GET{decompte_pub}|=={0}|?{
 #BOITE_OUVRIR
 <div class="label"><strong>&nbsp;<:pubban:apercu:></strong></div>
-#BOITE_FERMER
-[(#GET{decompte_pub}|=={0}|?{
 	<p><:pubban:apercu_indisponible:></p>
-	,
-	[(#PUBBAN{#TITRE_ID,tout})]
+#BOITE_FERMER
 })]
 
 #BOITE_FERMER

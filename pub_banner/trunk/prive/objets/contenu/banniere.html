@@ -19,11 +19,11 @@
 <div dir='#LANG_DIR' class='donnees_banniere'>
 	<ul>
 		<li><:pubban:ratio_pages:>&nbsp;:&nbsp;<strong>#RATIO_PAGES %</strong></li>
-		<li><:pubban:nb_pub:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub}&nbsp;<:pubban:pub:></strong>
+		<li><:pubban:nb_pub:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
 		<ul>
-			<li><:pubban:nb_pub_actives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_actives}&nbsp;<:pubban:pub:></strong>
-			<li><:pubban:nb_pub_inactives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_inactives}&nbsp;<:pubban:pub:></strong>
-			<li><:pubban:nb_pub_obsoletes:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_obsoletes}&nbsp;<:pubban:pub:></strong>
+			<li><:pubban:nb_pub_actives:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_actives}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+			<li><:pubban:nb_pub_inactives:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_inactives}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
+			<li><:pubban:nb_pub_obsoletes:>&nbsp;:&nbsp;<strong>[(#ENV{decompte_pub_obsoletes}|singulier_ou_pluriel{pubban:publicite_1,pubban:publicites}|sinon{<:pubban:publicite_0:>})]</strong>
 		</ul></li>
 	</ul>
 </div>

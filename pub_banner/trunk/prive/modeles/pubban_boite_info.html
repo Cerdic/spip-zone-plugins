@@ -6,10 +6,7 @@
 		<br />
 		<img src='[(#CHEMIN_IMAGE{ico-pubban.png})]' border='0' style='margin-top:1em' />
 	</center>
-	<p><strong>
-		<:pubban:num_version_base:> : [(#PLUGIN{pubban,version_base})]
-		<br /><:pubban:num_version_svn:> : [(#EVAL{_DIR_PLUGIN_PUBBAN}|version_svn_courante)]		
-	</strong></p>
+	<p><strong><:pubban:num_version_base:> : [(#PLUGIN{pubban,schema})]</strong></p>
 	<p><strong><:pubban:documentation_info:> :</strong><br /><a href='#EVAL{_PUBBAN_URL}'>#EVAL{_PUBBAN_URL}</a></p>
 	<p><strong><:pubban:url_update:> :</strong><br /><a href='#EVAL{_PUBBAN_UPDATE}'>#EVAL{_PUBBAN_UPDATE}</a></p>
 	<p><strong><:pubban:url_traceur:> :</strong><br /><a href='#EVAL{_PUBBAN_TRAC}'>#EVAL{_PUBBAN_TRAC}</a></p>

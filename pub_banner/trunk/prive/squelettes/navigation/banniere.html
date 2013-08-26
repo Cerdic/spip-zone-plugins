@@ -2,7 +2,10 @@
 #BOITE_OUVRIR{'','info'}
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','banniere','id',#ENV{id_banniere}}}}
 <:pubban:url_stats_banniere:>
-[(#SET{popup_url_stats,#URL_PAGE{publicites_statistiques,id_banniere=#ID_BANNIERE}})]
-[(#GET{popup_url_stats}|icone_horizontale{<:pubban:voir_les_statistiques:>,stock-tool-button-color-balance.png,'','',onclick="return popup(700,700,'[(#GET{popup_url_stats})]');" target="_blank"})]
+<br />
+<a href="#URL_PAGE{publicites_statistiques,id_banniere=#ID_BANNIERE}" class='mediabox boxIframe boxWidth-700px boxHeight-90%'>
+	<img width="24" height="24" alt="<:pubban:voir_les_statistiques:>" src="#CHEMIN_IMAGE{stock-tool-button-color-balance.png}">
+	<:pubban:voir_les_statistiques:>
+</a>
 #BOITE_FERMER
 </BOUCLE_nav>

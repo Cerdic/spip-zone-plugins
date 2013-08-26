@@ -9,46 +9,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * <BOUCLE(PUBLICITES)>
- */
-function boucle_PUBLICITES($id_boucle, &$boucles) {
-	global $table_des_tables;
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$type = $boucle->type_requete;
-	$id_table = $table_des_tables[$type];
-	if (!$id_table)
-	//      table hors SPIP
-		$boucle->from[$type] =  $type;
-	else {
-	// les tables declarees par spip ont un prefixe et un surnom
-		$boucle->from[$id_table] =  'spip_' . $type ;
-	}
-	
-	return (calculer_boucle($id_boucle, $boucles));
-}
-
-/**
- * <BOUCLE(BANNIERES)>
- */
-function boucle_BANNIERES($id_boucle, &$boucles) {
-	global $table_des_tables;
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$type = $boucle->type_requete;
-	$id_table = $table_des_tables[$type];
-	if (!$id_table)
-	//      table hors SPIP
-		$boucle->from[$type] =  $type;
-	else {
-	// les tables declarees par spip ont un prefixe et un surnom
-		$boucle->from[$id_table] =  'spip_' . $type ;
-	}
-	
-	return (calculer_boucle($id_boucle, $boucles));
-}
-
-/**
  * Renvoie la puce d'un element en fonction de son statut
  */
 function pubban_recup_puce_pub($statut, $type=false) {

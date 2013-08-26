@@ -1,7 +1,7 @@
 <paquet
 	prefix="pubban"
 	categorie="multimedia"
-	version="1.30.4"
+	version="1.30.5"
 	etat="test"
 	compatibilite="[3.0.10;["
 	logo="img/ico-pubban.png"

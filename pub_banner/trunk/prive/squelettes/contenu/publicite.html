@@ -17,17 +17,16 @@
 <!--affiche_milieu-->
 <div id="wysiwyg">
 	<div class="champ contenu_descriptif">
-<INCLURE{fond=prive/objets/contenu/publicite,
-	id=#ID_PUBLICITE,
-	id_publicite=#ID_PUBLICITE,
-	wysiwyg=1
-} />
+	<INCLURE{fond=prive/objets/contenu/publicite,
+		id=#ID_PUBLICITE,
+		id_publicite=#ID_PUBLICITE,
+		wysiwyg=1
+	} />
 	</div>
 </div>
 
 #BOITE_OUVRIR
 <div class="label"><strong>&nbsp;<:pubban:apercu:></strong></div>
-#BOITE_FERMER
 <div style="text-align: center; padding: 1em 0; overflow-x: scroll;">
 	[(#MODELE{publicite}{type=#TYPE}
 		{objet=#OBJET}
@@ -36,21 +35,10 @@
 		{nom_pub=#TITRE}
 	)]
 </div>
+#BOITE_FERMER
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
 ]
 </BOUCLE_publicite>
-<script type='text/javascript'>
-function popup(l,h,url) {
-	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
-	pp.focus();
-	return false;
-}
-function delete_entry(url, mess){
-	if(confirm(mess)){
-		window.location.href = url;
-	}
-}
-</script>

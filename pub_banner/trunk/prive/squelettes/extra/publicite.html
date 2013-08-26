@@ -1,15 +1,13 @@
-#SET{open,#BOITE_OUVRIR{'',raccourcis}}
-	[(#GET{open}|unique)]
-[(#URL_ECRIRE{pubbanner}|icone_horizontale{<:pubban:home:>,stock_home.png})]
-[(#AUTORISER{creer,publicite})
-	[(#GET{open}|unique)]
-[(#URL_ECRIRE{publicite_edit,id_publicite=new}|icone_horizontale{<:pubban:nouveau_pub:>,publicite-24.png,new})]
-][(#GET{open}|unique)]
-[(#URL_ECRIRE{statistiques_bannieres}|icone_horizontale{<:pubban:page_stats:>,stock-tool-button-color-balance.png})]
-[(#EVAL{pubban_poubelle_pleine()}|=={false}|non)
-	[(#URL_ECRIRE{pubbanner,mode=trash}|icone_horizontale{<:pubban:open_trash:>,stock_delete.png})]
-]
-[(#GET{open}|unique|?{'',#BOITE_FERMER})]
+#BOITE_OUVRIR{'',raccourcis}
+	[(#URL_ECRIRE{pubbanner}|icone_horizontale{<:pubban:home:>,stock_home.png})]
+	[(#AUTORISER{creer,publicite})
+		[(#URL_ECRIRE{publicite_edit,id_banniere=new}|icone_horizontale{<:pubban:nouveau_pub:>,publicite-24.png,new})]
+	]
+	[(#URL_ECRIRE{statistiques_bannieres}|icone_horizontale{<:pubban:page_stats:>,stock-tool-button-color-balance.png})]
+	[(#EVAL{pubban_poubelle_pleine()}|=={false}|non)
+		[(#URL_ECRIRE{pubbanner,mode=trash}|icone_horizontale{<:pubban:open_trash:>,stock_delete.png})]
+	]
+#BOITE_FERMER
 
 [(#ENV{retour}|=={''}|non)
 	[(#ENV{retour}|icone_horizontale{<:pubban:retour_search:>,stock_search.png})]

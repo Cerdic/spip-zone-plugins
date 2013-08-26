@@ -2,25 +2,25 @@
 /**
  * Gestionnaire de bannieres publicitaires
  *
- * Le statut des pub peut tre :
- * - 0cree	=> cas exceptionnel de cration via ADDS
+ * Le statut des pub peut ï¿½tre :
+ * - 0cree	=> cas exceptionnel de crï¿½ation via ADDS
  * - 1inactif
  * - 2actif
  * - 3obsolete
  * - 4rompu
  * - 5poubelle
  *
- * <b>Tailles classiques des bannires publicitaires</b>
+ * <b>Tailles classiques des banniï¿½res publicitaires</b>
  * - banniere : 468x60 px | 35 Ko
  * - skyscraper : 120x600 px | 50 Ko
  * - pave : 300x250 px | 50 Ko
  * - carre : 250x250 px | 50 Ko
- * - bouton (logos ...) : jusqu'ˆ 120 px (120x60 px)
- * - pour les animations, recommander des gif anims de 15 secondes max
+ * - bouton (logos ...) : jusqu'ï¿½ 120 px (120x60 px)
+ * - pour les animations, recommander des gif animï¿½s de 15 secondes max
  *
  * <b>Les tarifs</b>
- * - CPM : cot pour mille affichages
- * - CPC : cot par clic
+ * - CPM : coï¿½t pour mille affichages
+ * - CPC : coï¿½t par clic
  *
  * @name 		Options
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -103,7 +103,7 @@ $GLOBALS['pubban_pub_icons'] = array(
 /**
  * URL de documentation/information
  */
-define('_PUBBAN_URL', 'http://www.spip-contrib.net/?article3637');
+define('_PUBBAN_URL', 'http://contrib.spip.net/?article3637');
 /**
  * URL de telechargement des mises a jour
  */
@@ -115,11 +115,5 @@ define('_PUBBAN_TRAC', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/pu
 
 // Si admin, lib pubban_prive
 if(test_espace_prive()) include_spip('inc/pubban_prive');
-
-/**
- * Test de la nouveaute SPIP 2.1 : etendre l'aide de SPIP (ici pour l'aide du plugin)
- */
-if (isset($GLOBALS['help_server']) && is_array($GLOBALS['help_server']))
-	$GLOBALS['help_server'][] = url_de_base(1).str_replace("../", "", _DIR_PLUGIN_PUBBAN)."aide/";
 
 ?>

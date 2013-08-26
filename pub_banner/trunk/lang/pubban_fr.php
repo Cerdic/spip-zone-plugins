@@ -301,7 +301,6 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'nouveau_pub' => 'Créer une nouvelle publicité',
 	'nouveau_pub_dans_banniere' => 'Ajouter une nouvelle publicité',
 	'num_version_base' => 'Version des tables SQL',
-	'num_version_svn' => 'Numéro de révision SVN',
 
 	// O
 	'obsolete' => 'Obsolète',
@@ -315,13 +314,12 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'pas_banniere_selectionne' => 'Vous n\'avez pas sélectionné de bannière ...',
 	'perf_empl' => 'Performance des bannières',
 	'period' => 'Période du ',
-	'plugin_spip' => 'un plugin pour <b>SPIP 2.0+</b>',
+	'plugin_spip' => 'un plugin pour <b>SPIP 3.0+</b>',
 	'poubelle' => 'À la poubelle',
 	'poubelle_contenu' => 'Contenu de la poubelle',
 	'pour' => 'Pour',
 	'pratique' => 'Dans la pratique',
 	'prerequis' => 'Pré-requis',
-	'pub' => 'publicité(s)',
 	'pub_actives' => 'Liste des publicités actives',
 	'pub_edit' => 'Édition d\'un encart publicitaire',
 	'pub_inactives' => 'Liste des publicités inactives',
@@ -332,6 +330,9 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'pubban_stats_pub' => 'Statistiques des publicités',
 	'pubban_titre' => 'Bannières publicitaires',
 	'publicite_apercu' => 'Aperçu d\'une publicité',
+	'publicite_0' => '0 publicité',
+	'publicite_1' => '1 publicité',
+	'publicites' => '@nb@ publicités',
 
 	// R
 	'ratio' => 'Ratio (clics/affichages)',

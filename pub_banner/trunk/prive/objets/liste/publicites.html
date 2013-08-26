@@ -21,7 +21,7 @@
 	<tbody>
 	<BOUCLE_liste_publicites(PUBLICITES){id_publicite?}{where?}{recherche?}{statut?}{tri #ENV{par,id_publicite},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#STATUT|puce_statut{publicite}) ]</td>
+			<td class='statut'>[(#STATUT|puce_statut{publicite,#ID_PUBLICITE})]</td>
 			<td class='type'>
 				<img src='[(#TYPE|pubban_recup_puce_pub)]' title='[(#TYPE|pubban_recup_puce_pub{type})]' alt='[(#TYPE|pubban_recup_puce_pub{type})]' border='0' />
 			</td>
@@ -29,7 +29,7 @@
 				<a href="[(#ID_PUBLICITE|generer_url_entite{publicite})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PUBLICITE">#TITRE</a>
 			</td>
 			<td class='outils secondaire'>
-				<a href="javascript:popup(600,600,'#URL_SITE_SPIP/?page=publicite_apercu&id_publicite=#ID_PUBLICITE');">
+				<a href="#URL_PAGE{publicite_apercu,id_publicite=#ID_PUBLICITE}" class="mediabox boxIframe boxWidth-600px boxHeight-90%">
 					<img src='#CHEMIN_IMAGE{stock_search-16.png}' title='<:pubban:btn_apercu:>' alt='<:pubban:btn_apercu:>' border="0" align="absmiddle" hspace="3" />
 				</a>
 				[(#STATUT|=={5poubelle}|non)<a href='[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE})]'>
@@ -52,16 +52,3 @@
 </B_liste_publicites>[
 <div class="liste-objets publicites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_publicites>
-<script type='text/javascript'>
-<!--
-function popup(l,h,url) {
-	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
-	pp.focus();
-}
-function delete_entry(url, mess){
-	if(confirm(mess)){
-		window.location.href = url;
-	}
-}
-//-->
-</script>
