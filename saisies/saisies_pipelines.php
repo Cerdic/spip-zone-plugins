@@ -23,13 +23,16 @@ function saisies_affichage_final($flux){
 
 		if (strpos($flux,"saisie_date")!==false){//si on a une saisie de type date, on va charger les css de jquery_ui
 		    include_spip("jqueryui_pipelines");
-		    $ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
-		    array_push($ui_plugins,"jquery.ui.theme");
-		    foreach ($ui_plugins as $ui_plug){
-			    $ui_plug_css = find_in_path("css/$ui_plug.css");
-			    if (strpos($flux,"css/$ui_plug.css")===false){// si pas déjà chargé
-				$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
-			    }
+			if (function_exists("jqueryui_dependances")){
+				$ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
+			
+				array_push($ui_plugins,"jquery.ui.theme");
+				foreach ($ui_plugins as $ui_plug){
+					$ui_plug_css = find_in_path("css/$ui_plug.css");
+					if (strpos($flux,"css/$ui_plug.css")===false){// si pas déjà chargé
+					$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
+					}
+				}
 			}
 		}
 
