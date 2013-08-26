@@ -2,11 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if(function_exists('jqueryui_insert_head_css_dist')){
-	function jqueryui_insert_head_css($flux) {
-		return $flux;	
-	}
-}
+if(!defined('_JQUERYUI_CSS_NON'))
+	define('_JQUERYUI_CSS_NON','oui');
 /**
  * Ajout des css de jQuery UI pour les pages publiques
  * 
