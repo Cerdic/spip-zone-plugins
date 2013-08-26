@@ -1,0 +1,17 @@
+<plugin>
+    <nom>Choix parmi des couleurs</nom>
+	<slogan>Une saisie pour formulaire</slogan>
+    <auteur>Maïeul Rouquette</auteur>
+    <licence>GNU/GPL</licence>
+    <version>0.1.0</version>
+    <etat>dev</etat>
+    <categorie>outil</categorie>
+    
+	<description>
+		Une saisie de formulaire pour proposer plusieurs choix de couleurs.
+	</description>
+    
+    <prefix>saisie_choix_couleurs</prefix>
+    
+	<necessite id="saisies" version="[1.32.4;]" />
+</plugin>
