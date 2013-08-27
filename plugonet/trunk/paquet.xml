@@ -1,0 +1,28 @@
+<paquet
+	prefix="plugonet"
+	categorie="outil"
+	version="0.7.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="plugonet-64.png"
+	documentation="http://blog.smellup.net/spip.php?article7"
+>	
+
+	<nom>PlugOnet</nom>
+	<!-- Migrer de la DTD plugin à celle de paquet -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>Emmanuel Saint-James</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="autoriser" inclure="inc/plugonet_autoriser.php" />
+
+	<necessite nom="langonet" compatibilite="[0.6.3;[" />
+
+	<menu nom="plugonet-21" titre="plugonet:bouton_plugonet" parent="bando_administration" icone="images/plugonet-16.png" action="plugonet_generer" />
+
+	<onglet nom="plugonet_verifier" titre="plugonet:onglet_verifier" parent="plugonet" icone="images/plugonet-verifier.png" action="plugonet_verifier" />
+	<onglet nom="plugonet_generer" titre="plugonet:onglet_generer" parent="plugonet" icone="images/plugonet-generer.png" action="plugonet_generer" />
+	<onglet nom="plugonet_valider" titre="plugonet:onglet_valider" parent="plugonet" icone="images/plugonet-valider.png" action="plugonet_valider" />
+</paquet>
