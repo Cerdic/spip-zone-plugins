@@ -1,0 +1,8 @@
+[(#REM)
+
+  inspire de prive/modeles/mail_oubli
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[\[(#NOM_SITE_SPIP|concat{'\] ',<:pass_oubli_mot:>}|nettoyer_titre_email)]
+
+<:motpasseexpirable:pass_mail_expire{nom_site_spip=#NOM_SITE_SPIP,adresse_site=#URL_SITE_SPIP,sendcookie=#ENV{url_reset}}:>
