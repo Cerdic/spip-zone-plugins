@@ -42,7 +42,7 @@ options:
     options:
       nom: 'utilisation'
       label: '<:saisies:option_groupe_utilisation:>'
-    saisie_choix_couleur:
+    saisies:
       -
         saisie: 'oui_non'
         options:
@@ -53,8 +53,8 @@ options:
         saisie: 'oui_non'
         options:
           nom: 'disable_avec_post'
-          label: '<:saisie_choix_couleur:option_disable_avec_post_label:>'
-          explication: '<:saisie_choix_couleur:option_disable_avec_post_explication:>'
+          label: '<:saisies:option_disable_avec_post_label:>'
+          explication: '<:saisies:option_disable_avec_post_explication:>'
       -
         saisie: 'oui_non'
         options:
@@ -66,31 +66,31 @@ options:
     options:
       nom: 'affichage'
       label: '<:saisies:option_groupe_affichage:>'
-    saisie_choix_couleur:
+    saisies:
       -
         saisie: 'input'
         options:
           nom: 'attention'
-          label: '<:saisie_choix_couleur:option_attention_label:>'
-          explication: '<:saisie_choix_couleur:option_attention_explication:>'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
           size: 50
       -
         saisie: 'input'
         options:
           nom: 'info_obligatoire'
-          label: '<:saisie_choix_couleur:option_info_obligatoire_label:>'
-          explication: '<:saisie_choix_couleur:option_info_obligatoire_explication:>'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
   -
     saisie: 'fieldset'
     options:
       nom: 'obligatoire'
       label: '<:saisies:option_groupe_validation:>'
-    saisie_choix_couleur:
+    saisies:
       -
         saisie: 'oui_non'
         options:
           nom: 'obligatoire'
-          label: '<:saisie:option_obligatoire_label:>'
+          label: '<:saisies:option_obligatoire_label:>'
       -
         saisie: 'input'
         options:
