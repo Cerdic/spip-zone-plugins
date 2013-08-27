@@ -329,9 +329,9 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	'pubban_stats_banner' => 'Statistiques des bannières',
 	'pubban_stats_pub' => 'Statistiques des publicités',
 	'pubban_titre' => 'Bannières publicitaires',
-	'publicite_apercu' => 'Aperçu d\'une publicité',
 	'publicite_0' => '0 publicité',
 	'publicite_1' => '1 publicité',
+	'publicite_apercu' => 'Aperçu d\'une publicité',
 	'publicites' => '@nb@ publicités',
 
 	// R

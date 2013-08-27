@@ -303,7 +303,6 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'nouveau_pub' => 'Create a new advertising',
 	'nouveau_pub_dans_banniere' => 'Add a new advertisement',
 	'num_version_base' => 'Version of SQL tables',
-	'num_version_svn' => 'SVN revision number',
 
 	// O
 	'obsolete' => 'Obsolete',
@@ -317,13 +316,12 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'pas_banniere_selectionne' => 'You didn\'t select any banner ...',
 	'perf_empl' => 'Banners performance',
 	'period' => 'Period from ',
-	'plugin_spip' => 'A plugin for <b>SPIP 2.0+</b>',
+	'plugin_spip' => 'A plugin for <b>SPIP 2.0+</b>', # MODIF
 	'poubelle' => 'In the bin',
 	'poubelle_contenu' => 'Bin content',
 	'pour' => 'For',
 	'pratique' => 'In practice',
 	'prerequis' => 'Required',
-	'pub' => 'ad(s)',
 	'pub_actives' => 'List of active ads',
 	'pub_edit' => 'Edit an advertising',
 	'pub_inactives' => 'List of inactive ads',
@@ -333,7 +331,10 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'pubban_stats_banner' => 'Banners statistics',
 	'pubban_stats_pub' => 'Ads statistics',
 	'pubban_titre' => 'Banners',
+	'publicite_0' => '0 publicité', # NEW
+	'publicite_1' => '1 publicité', # NEW
 	'publicite_apercu' => 'Ad overview',
+	'publicites' => '@nb@ publicités', # NEW
 
 	// R
 	'ratio' => 'Ratio (clicks / views)',
