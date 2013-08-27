@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_bd_echec' => 'La creación de la base de datos @nombase@ fracasó.',
 	'install_bd_reessayer' => 'Volver a intentar',
 	'install_code' => 'Favor ingresar el código de activación del sitio:',
-	'install_code_panel' => 'Veuillez entrer votre mot de passe habituel ou le code d\'activation fourni par l\'hébergeur :', # NEW
+	'install_code_panel' => 'Introduzca por favor su contraseña habitual o el código de activación proporcionado por el alojamiento:',
 	'install_creation_bd' => 'Creación de la base de datos @nombase@',
 	'install_creation_bd_site' => 'Creación de la base de datos del sitio ',
 	'install_creation_bd_site_2' => 'La base de datos @base@ fue creada para el sitio @site@.',
@@ -34,16 +34,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_site' => 'Instalación de tu sitio SPIP',
 	'install_spip_1' => 'Puedes ',
 	'install_spip_2' => 'proseguir con la instalación de SPIP',
-	'install_spip_3' => 'Vous pouvez <a href="@url@">poursuivre l\'installation de SPIP</a>.', # NEW
+	'install_spip_3' => 'Puede <a href="@url@">continuar la instalación de SPIP</a>.',
 
 	// M
-	'message_site_desactive' => 'Veuillez contacter l\'<a href="@lien@">hébergeur</a> pour de plus amples détails', # NEW
+	'message_site_desactive' => 'Contacte por favor el<a href="@lien@">alojamiento</a> para más detalles',
 
 	// S
-	'site_non_active' => 'Ce site n\'a pas encore été validé par un administrateur.', # NEW
-	'site_non_demande' => 'Ce site n\'existe pas.', # NEW
-	'site_supprime' => 'Ce site est en attente de suppression définitive.', # NEW
-	'site_suspendu' => 'Ce site est suspendu.' # NEW
+	'site_non_active' => 'Este sitio aún no ha sido validado por un administrador.',
+	'site_non_demande' => 'Este sitio ya no existe.',
+	'site_supprime' => 'Este sitio está a la espera de eliminación definitiva.',
+	'site_suspendu' => 'Este sitio está suspendido.'
 );
 
 ?>
