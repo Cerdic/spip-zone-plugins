@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.11;3.1.*]"
+	compatibilite="[3.0.11;3.0.*]"
 	logo="prive/themes/spip/images/motpasseexpirable-64.png"
 	documentation="http://contrib.spip.net/4425"
 	schema="1.0.0" 
