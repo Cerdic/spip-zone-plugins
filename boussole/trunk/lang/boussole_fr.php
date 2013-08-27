@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles à l\'affichage',
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées',
-	'titre_liste_serveurs' => 'Liste des serveurs accessible depuis le site',
+	'titre_liste_serveurs' => 'Liste des serveurs accessibles depuis le site',
 	'titre_page_boussole' => 'Gestion des boussoles'
 );
 
