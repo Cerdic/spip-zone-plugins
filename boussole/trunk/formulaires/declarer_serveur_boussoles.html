@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})]">
+	<h3 class="titrem"><:boussole:titre_form_ajouter_serveur:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:boussole:info_ajouter_serveur:></p>
+		<ul>
+			<li class="editer editer_url obligatoire[ (#ENV**{erreurs}|table_valeur{url}|oui)erreur]">
+				<p class="explication"><:boussole:info_url_serveur:></p>
+				<label for="url"><:boussole:label_url_serveur:></label>
+				[<span class="erreur">(#ENV**{erreurs}|table_valeur{url})</span>]
+				<input type="text" name="url" class="text" value="#ENV{url}" id="url" />
+			</li>
+		</ul>
+
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

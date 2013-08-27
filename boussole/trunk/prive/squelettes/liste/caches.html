@@ -13,7 +13,7 @@
 }})]
 <B_liste_caches>
 #ANCRE_PAGINATION
-<div class="liste-objets boussoles">
+<div class="liste-objets caches">
 	<table class="spip liste">
 		[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
 		<thead>
@@ -22,10 +22,11 @@
 				<th class="date" scope="col">[(#TRI{maj, <:boussole:label_actualise_le:>, ajax})]</th>
 				<th class="texte" scope="col"><:boussole:colonne_description_cache:></th>
 				<th class="texte" scope="col"><:boussole:colonne_prefixe_plugin:></th>
+				<th class="lien" scope="col">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_liste_caches(DATA) {source table, #VAL|lister_caches}{where?}{tri #ENV{par, maj}, #GET{sens_tri}}{pagination #ENV{pas, 5}}>
+<BOUCLE_liste_caches(DATA) {source table, #VAL|boussole_lister_caches}{where?}{tri #ENV{par, maj}, #GET{sens_tri}}{pagination #ENV{pas, 5}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="titre principale">
 					[<a[ href="(#URL_ACTION_AUTEUR{serveur_telecharger_cache,#VALEUR|table_valeur{fichier}})"]>
@@ -35,6 +36,15 @@
 				<td class="date">[(#VALEUR|table_valeur{maj})]</td>
 				<td class="texte">[(#VALEUR|table_valeur{description})]</td>
 				<td class="texte">[(#VALEUR|table_valeur{plugin})]</td>
+				<td class="action">
+					[(#VALEUR|table_valeur{manuelle}|?{
+						[(#BOUTON_ACTION{
+							<:boussole:bouton_retirer_boussole:>,
+							#URL_ACTION_AUTEUR{serveur_retirer_boussole, #VALEUR|table_valeur{alias}, #SELF},
+							'', '', ''})],
+							&nbsp;
+					})]
+				</td>
 			</tr>
 </BOUCLE_liste_caches>
 		</tbody>
@@ -43,6 +53,10 @@
 </div>
 </B_liste_caches>
 	#BOITE_OUVRIR{'','notice'}
-		<p><:boussole:info_liste_aucun_cache:></p>
+		<p>
+			[(#VAL|boussole_compteur_hebergement|>{0}|?{
+			<:boussole:info_liste_aucun_cache:>,
+			<:boussole:info_liste_aucun_hebergement:>})]
+		</p>
 	#BOITE_FERMER
 <//B_liste_caches>

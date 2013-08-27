@@ -26,9 +26,9 @@
 		titre=<:boussole:titre_liste_serveurs:>,
 		env, ajax} />
 
-	[(#REM) <!-- Formulaire d'ajout d'un serveur de boussoles --> ]
+	[(#REM) <!-- Formulaire de déclaration d'un serveur de boussoles --> ]
 	<div class="noajax">
-		#FORMULAIRE_AJOUTER_SERVEUR_BOUSSOLES
+		#FORMULAIRE_DECLARER_SERVEUR_BOUSSOLES
 	</div>
 ]
 
@@ -38,4 +38,9 @@
 		par=maj,
 		pas=10,
 		env, ajax} />
+
+	[(#REM) <!-- Déclarer une boussole manuelle hébergée par le site --> ]
+	<div class="noajax">
+		#FORMULAIRE_DECLARER_BOUSSOLE_MANUELLE
+	</div>
 ]

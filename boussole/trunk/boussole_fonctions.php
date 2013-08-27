@@ -55,6 +55,7 @@ function calcul_boussole_infos($alias) {
  * Renvoie la traduction d'un champ d'une boussole, d'un groupe ou d'un site
  *
  * @api
+ * @filtre boussole_traduire
  *
  * @param string $aka_boussole	alias de la boussole
  * @param string $champ			champ a traduire

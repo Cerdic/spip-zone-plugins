@@ -9,7 +9,7 @@ function formulaires_ajouter_boussole_charger_dist() {
 			'boussole' => _request('boussole'),
 			'_boussoles' => $boussoles,
 			'message_erreur' => $message,
-			'editable' => ($message ? false : true));
+			'editable' => (count($boussoles)==0 ? false : true));
 }
 
 

@@ -3,9 +3,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Action de retrait d'un serveur de la liste des serveurs configurés
- * comme disponibles pour le site client
+ * Action de retrait d'un serveur de la liste des serveurs accessibles
+ * par le site client
+ * *
+ * @package BOUSSOLE\Client\Action
  *
+ * @return void
  */
 function action_client_retirer_serveur_dist(){
 
@@ -26,8 +29,10 @@ function action_client_retirer_serveur_dist(){
 		include_spip('inc/config');
 		$serveurs = lire_config('boussole/client/serveurs_disponibles');
 		if (isset($serveurs[$alias_serveur])) {
+			// Retrait du serveur de la configuration client
 			unset($serveurs[$alias_serveur]);
 			ecrire_config('boussole/client/serveurs_disponibles', $serveurs);
+
 			spip_log("ACTION RETRAIT SERVEUR : alias = ". $alias_serveur, 'boussole' . _LOG_INFO);
 		}
 	}

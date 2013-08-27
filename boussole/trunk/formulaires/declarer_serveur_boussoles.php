@@ -2,13 +2,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_ajouter_serveur_boussoles_charger_dist() {
+function formulaires_declarer_serveur_boussoles_charger_dist() {
 	$valeurs = array();
 	return $valeurs;
 }
 
 
-function formulaires_ajouter_serveur_boussoles_verifier_dist() {
+function formulaires_declarer_serveur_boussoles_verifier_dist() {
 	$erreurs = array();
 	if (!$nom = _request('url'))
 		$erreurs['url'] = _T('info_obligatoire');
@@ -16,7 +16,7 @@ function formulaires_ajouter_serveur_boussoles_verifier_dist() {
 }
 
 
-function formulaires_ajouter_serveur_boussoles_traiter_dist() {
+function formulaires_declarer_serveur_boussoles_traiter_dist() {
 	$retour = array();
 	$ok = false;
 

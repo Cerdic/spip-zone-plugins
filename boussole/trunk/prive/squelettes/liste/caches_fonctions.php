@@ -2,12 +2,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function lister_caches() {
+function boussole_lister_caches() {
 	$caches = array();
 
 	$dir_caches = _DIR_VAR . 'cache-boussoles';
 	if ($fichiers_cache = glob($dir_caches . "/boussole*.xml")) {
-		// (on sait déjà que le mode serveur est actif)
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
@@ -20,6 +19,8 @@ function lister_caches() {
 
 			$cache['sha'] = '';
 			$cache['plugin'] = '';
+			$cache['alias'] = '';
+			$cache['manuelle'] = false;
 
 			lire_fichier($_fichier, $contenu);
 			$convertir = charger_fonction('simplexml_to_array', 'inc');
@@ -36,6 +37,7 @@ function lister_caches() {
 			else {
 				// C'est le cache d'une boussole hébergée
 				$alias_boussole = str_replace('boussole-', '', basename($_fichier, '.xml'));
+				$cache['alias'] = $alias_boussole;
 				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $alias_boussole));
 				if  (isset($tableau['name'])
 				AND ($tableau['name'] == 'boussole')) {
@@ -51,7 +53,8 @@ function lister_caches() {
 						$cache['plugin'] = "{$infos['nom']} ({$boussoles[$alias_boussole]['prefixe']}/{$infos['version']})";
 				}
 				else {
-					// Boussole utilisant un plugin
+					// Boussole n'utilisant pas un plugin, nommée boussole manuelle
+					$cache['manuelle'] = true;
 					$cache['plugin'] = _T('boussole:info_boussole_manuelle');
 
 					// Ajout de la version dans le fichier XML source de la boussole
@@ -72,4 +75,12 @@ function lister_caches() {
 	return $caches;
 }
 
+
+function boussole_compteur_hebergement() {
+	include_spip('inc/config');
+	$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
+	$boussoles = pipeline('declarer_boussoles', $boussoles);
+
+	return count($boussoles);
+}
 ?>
