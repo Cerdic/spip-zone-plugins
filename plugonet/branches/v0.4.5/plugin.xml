@@ -1,0 +1,66 @@
+<plugin>
+	<nom>PlugOnet</nom>
+	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
+	<version>0.4.5</version>
+	<etat>stable</etat>
+	<licence>GNU/GPL v3</licence>
+	<icon>prive/themes/spip/images/plugonet-32.png</icon>
+	<slogan>Migrer de la DTD plugin &agrave; celle de paquet</slogan>
+	<description>
+Ce plugin permet de produire le nouveau fichier paquet.xml &agrave; partir du fichier
+plugin.xml. Des options de v&eacute;rification sont disponibles pour nettoyer au pr&eacute;alable
+certaines balises du fichier d'origine.
+
+En outre, PlugOnet permet de valider des fichiers paquet.xml &eacute;crits manuellement et fournit
+une aide sur chaque balise de la nouvelle DTD.
+	</description>
+	<lien>http://blog.smellup.net/spip.php?article7</lien>
+	<prefix>plugonet</prefix>
+
+	<options>plugonet_options.php</options>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/plugonet_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inc/plugonet_afficher.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>inc/plugonet_afficher.php</inclure>
+	</pipeline>
+
+	<bouton id="plugonet" parent="configuration">
+		<icone>prive/themes/spip/images/plugonet-24.png</icone>
+		<titre>plugonet:bouton_plugonet</titre>
+		<url>plugonet_generer</url>
+	</bouton>
+	<bouton id="plugonet-21" parent="bando_administration">
+		<icone>images/plugonet-16.png</icone>
+		<titre>plugonet:bouton_plugonet</titre>
+		<url>plugonet_generer</url>
+	</bouton>
+
+	<onglet id="plugonet_verifier" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-verifier.png</icone>
+		<titre>plugonet:onglet_verifier</titre>
+		<url>plugonet_verifier</url>
+	</onglet>
+	<onglet id="plugonet_generer" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-generer.png</icone>
+		<titre>plugonet:onglet_generer</titre>
+		<url>plugonet_generer</url>
+	</onglet>	
+	<onglet id="plugonet_valider" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-valider.png</icone>
+		<titre>plugonet:onglet_valider</titre>
+		<url>plugonet_valider</url>
+	</onglet>
+
+	<necessite id="SPIP" version="[2.1.10;3.0.0-dev)" />
+	<necessite id="langonet" version="[0.6.3;]" />
+	<necessite id="Iterateurs" version="[0.3.0;]" />
+	<categorie>outil</categorie>
+</plugin>
