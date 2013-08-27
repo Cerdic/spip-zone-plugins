@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser_boussoles' => 'Actualiser les boussoles', # NEW
 	'bouton_actualiser_caches' => 'Actualiser les caches', # NEW
 	'bouton_boussole' => 'Kompas',
+	'bouton_retirer_serveur' => 'Retirer le serveur', # NEW
 	'bouton_supprimer' => 'Odstrániť',
 	'bulle_afficher' => 'Zobraziť v šablónach',
 	'bulle_aller_site' => 'Prejsť na odkazovanú stránku',
@@ -24,7 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_fichier_cache' => 'Cache', # NEW
 	'colonne_nbr_sites' => 'Obsahuje',
 	'colonne_prefixe_plugin' => 'Plugin ?', # NEW
+	'colonne_serveur' => 'Serveur', # NEW
 	'colonne_titre' => 'Nadpis',
+	'colonne_url' => 'URL', # NEW
 	'colonne_version' => 'Verzia',
 
 	// D
@@ -36,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
+	'info_ajouter_serveur' => 'Ce formulaire vous permet d\'ajouter un serveur de boussoles. Par défaut, le serveur «spip» est toujours disponible sur les sites client. La liste des serveurs disponibles est affichée ci-dessus et permet aussi de retirer un serveur configuré.', # NEW
 	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>', # NEW
 	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>', # NEW
 	'info_boussole_manuelle' => 'Manuelle', # NEW
@@ -44,9 +48,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
 	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.', # NEW
+	'info_liste_aucun_serveur' => 'Aucun serveur n\'a encore été configuré pour le site client.', # NEW
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
+	'info_url_serveur' => 'Saisissez l\'URL du serveur pour l\'ajouter à la liste.', # NEW
 
 	// L
 	'label_1_boussole' => '@nb@ kompas',
@@ -89,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_description' => 'Opis zobrazený vedľa loga',
 	'label_ul_class' => 'Trieda tagu ul v zozname',
 	'label_url' => 'URL',
+	'label_url_serveur' => 'URL du serveur', # NEW
 	'label_version' => 'Verzia',
 
 	// M
@@ -102,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
 	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.',
+	'message_ok_serveur_ajoute' => 'Le serveur « @serveur@ » a été ajouté (@url@).', # NEW
 	'modele_boussole_liste_avec_logo' => 'Zoznam odkazov s názvami, logami a opisom',
 	'modele_boussole_liste_par_groupe' => 'Zoznam textových odkazov podľa skupiny',
 	'modele_boussole_liste_simple' => 'Jednoduchý zoznam textových odkazov',
@@ -122,9 +130,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_infos_boussole' => 'KOMPAS PREZÝVKY',
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
+	'titre_form_ajouter_serveur' => 'Ajouter un serveur de boussoles', # NEW
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
 	'titre_liste_boussoles' => 'Zoznam dostupných kompasov', # MODIF
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
+	'titre_liste_serveurs' => 'Liste des serveurs disponibles', # NEW
 	'titre_page_boussole' => 'Riadenie kompasov'
 );
 

@@ -23,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_fichier_cache' => 'Cache',
 	'colonne_nbr_sites' => 'Contient',
 	'colonne_prefixe_plugin' => 'Plugin ?',
+	'colonne_serveur' => 'Serveur',
 	'colonne_titre' => 'Titre',
 	'colonne_url' => 'URL',
-	'colonne_serveur' => 'Serveur',
 	'colonne_version' => 'Version',
 
 	// D
@@ -37,20 +37,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
+	'info_ajouter_serveur' => 'Ce formulaire vous permet d\'ajouter un serveur de boussoles. Par défaut, le serveur «spip» est toujours disponible sur les sites client. La liste des serveurs disponibles est affichée ci-dessus et permet aussi de retirer un serveur configuré.',
 	'info_boite_boussoles_gerer_client' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet l’ajout, la mise à jour et la suppression des boussoles en base de données en vue de leur affichage sur ce site. Il est aussi possible de se rendre sur la page de configuration de l\'affichage de chaque boussole en cliquant sur son nom dans la liste.</p>',
 	'info_boite_boussoles_gerer_serveur' => '<strong>Cette page est uniquement accessible aux responsables du site.</strong><p>Elle permet de mettre à jour manuellement le cache des boussoles hébergées par ce site serveur. Il est possible de télécharger les caches en cliquant sur leur nom dans la liste.</p>',
 	'info_boussole_manuelle' => 'Boussole Manuelle',
 	'info_cache_boussole' => 'Cache de la boussole «@boussole@»',
 	'info_cache_boussoles' => 'Cache des boussoles hébergées',
 	'info_configurer_boussole' => 'Ce formulaire vous permet de configurer l\'affichage de la boussole en choisissant les sites à afficher ou pas et l\'ordre d\'affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
-	'info_ajouter_serveur' => 'Ce formulaire vous permet d\'ajouter un serveur de boussoles. Par défaut, le serveur &#171;spip&#187; est toujours disponible sur les sites client. La liste des serveurs disponibles est affichée ci-dessus et permet aussi de retirer un serveur configuré.',
-	'info_url_serveur' => 'Saisissez l\'URL du serveur pour l\'ajouter à la liste.',
 	'info_fichier_boussole' => 'Saisissez l\'url du fichier de description de votre boussole',
 	'info_liste_aucun_cache' => 'Aucun cache n\'a encore été créé pour les boussoles hébérgées. Utilisez le bouton «actualiser les caches» pour les générer.',
 	'info_liste_aucun_serveur' => 'Aucun serveur n\'a encore été configuré pour le site client.',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
+	'info_url_serveur' => 'Saisissez l\'URL du serveur pour l\'ajouter à la liste.',
 
 	// L
 	'label_1_boussole' => '@nb@ boussole',
