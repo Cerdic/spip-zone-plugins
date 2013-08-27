@@ -3,6 +3,9 @@
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=fr">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>

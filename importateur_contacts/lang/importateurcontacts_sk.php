@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_liste' => 'Zoznam e-mailov',
 	'email_simple' => 'Jednoduchý e-mail',
 	'erreur_aucun_fournisseur' => 'Žiadna služba vám teraz nemôže zabezpečiť, aby ste našli svoje kontakty. Nainštalujte si, prosím, aspoň jednu knižnicu na nahrávanie kontaktov.',
-	'erreur_aucun_fournisseur_configure' => 'Neaktivovali ste žiadnu službu na prenos kontaktov.',
+	'erreur_aucun_fournisseur_configure' => 'Neaktivovali ste žiadnu službu na prenos kontaktov.', # MODIF
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Získať kontakty',
