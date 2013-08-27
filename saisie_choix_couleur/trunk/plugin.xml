@@ -1,6 +1,5 @@
 <plugin>
     <nom>Choix parmi des couleurs</nom>
-	<slogan>Une saisie pour formulaire</slogan>
     <auteur>Maïeul Rouquette</auteur>
     <licence>GNU/GPL</licence>
     <version>0.1.0</version>
@@ -12,5 +11,6 @@
 	</description>
     
     <prefix>saisie_choix_couleur</prefix>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="saisies" version="[1.32.4;]" />
 </plugin>
