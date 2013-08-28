@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/signalement.png"
 	schema="0.1.0"
-	documentation="http://www.mediaspip.net/ticket/faire-un-plugin-de-signalement"
+	documentation="http://www.mediaspip.net/documentation/les-plugins-utilises-par-mediaspip/signal-alert-on-the-validity-of/article/signalement-alerter-sur-la"
 >	
 
 	<nom>Signalement de contenus illicites</nom>
