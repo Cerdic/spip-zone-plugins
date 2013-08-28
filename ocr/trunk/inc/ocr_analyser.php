@@ -9,11 +9,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $id_document identifiant du document à convertir
  */
-function ocr_analyser($id_document, $bin) {
+function ocr_analyser($id_document) {
 	spip_log('Analyse OCR du document '.$id_document, 'ocr');
 
-	$exe='/usr/bin/tesseract';
-	$options = ' ';
+	include_spip('inc/config');
+	$config = lire_config('ocr',array());
+	if ($config['ocr_bin']) {
+		$bin = $config['ocr_bin'];
+	} else {
+		// TODO : essayer de trouver tout seul l'exécutable
+		spip_log('Erreur analyse OCR : Il faut specifier l\'exécutable dans le panneau de configuration');
+		$resultat['erreur'] = _T('ocr:analyser_erreur_executable_introuvable');
+		return $resultat;
+	}
+	$opt = $config['ocr_opt'] ? $config['ocr_opt'] : '';
+
 	$resultat = array('texte'=>'','erreur'=>'');
 	$document = ocr_document($id_document);
 	spip_log($document, 'ocr');
@@ -27,7 +37,7 @@ function ocr_analyser($id_document, $bin) {
 	
 	$dest = $document['cible_url'].$document['basename'];
 	
-	$cmd = $exe.$options.' '.$fichier.' '.$dest.' '.$options;
+	$cmd = $bin.$options.' '.$fichier.' '.$dest.' '.$opt;
 	spip_log('Commande d\'analyse OCR : "'.$cmd.'"', 'ocr');
 	exec($cmd, $output, $status_code);
 	

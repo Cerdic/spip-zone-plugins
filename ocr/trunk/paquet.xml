@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.12-dev;3.0.*]"
 	logo="prive/themes/spip/images/ocr-64.png"
-	documentation="http://contrib.spip.net/ocr?var_mode=preview"
+	documentation="http://contrib.spip.net/ocr"
 	schema="0.2" 
 >
 	<!--
@@ -23,6 +23,7 @@
 	<traduire module="ocr" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[1.32.4;]" />
+	<necessite nom="cfg" compatibilite="[3.0.0;]" />
 
 	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/ocr.php" />

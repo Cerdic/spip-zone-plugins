@@ -1,13 +1,12 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/config');
 
 function formulaires_configurer_ocr_charger_dist(){
 	//Recuperation de la configuration
-	$ocr = @unserialize($GLOBALS['meta']['ocr']);
-	if(!is_array($ocr)){
-		$ocr = array();
-	}
+	$ocr = lire_config('ocr',array());
+
 	//Valeurs prealablement saisie ou par defaut/d'exemple 
 	$valeur = array(
 		'intervalle_cron' =>  $ocr['intervalle_cron'] ? $ocr['intervalle_cron'] : 600,
@@ -63,15 +62,15 @@ function formulaires_configurer_ocr_verifier_dist(){
 
 function formulaires_configurer_ocr_traiter_dist(){
 	//Recuperation de la configuration et serialization
-	$ocr = serialize(array(
+	$ocr = array(
 		'intervalle_cron' => intval(_request('intervalle_cron')),
 		'nb_docs' => intval(_request('nb_docs')),
 		
 		'ocr_bin' => _request('ocr_bin'),
 		'ocr_opt' => _request('ocr_opt'),
-	));
+	);
 	//Insere ou update ?
-	ecrire_meta('ocr',$ocr);
+	ecrire_config('ocr',$ocr);
 	$res = array('message_ok'=>_T('ocr:message_ok_configuration'));
 	return $res;
 	

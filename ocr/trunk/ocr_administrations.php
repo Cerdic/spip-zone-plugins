@@ -62,7 +62,7 @@ function ocr_creer_config(){
             "ocr_bin" => "/usr/bin/tesseract",
             "ocr_opt" => "-fra"
         );
-		ecrire_meta('ocr',serialize($cfg));
+		ecrire_config('ocr',$cfg);
     }
 }
 

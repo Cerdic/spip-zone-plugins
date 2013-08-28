@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyser_erreur_3' => 'Impossible d\'analyser le fichier, il doit être dans un format non pris en charge.',
 	'analyser_erreur_autre' => 'Erreur inconnue',
 	'analyser_erreur_document_inexistant' => 'Document inexistant', 
+	'analyser_erreur_executable_introuvable' => 'Exécutable introuvable', 
 	'analyser_erreur_fichier_resultat' => 'Le fichier de résultat de l\'analyse OCR n\'existe pas ou n\'est pas lisible.',
 	
 	// C
