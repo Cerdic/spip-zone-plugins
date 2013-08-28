@@ -1,10 +1,12 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © 2007-2013 - cmtmt, BoOz, kent1
  * Licence GPL v3
  *
- * Fonctions d'insertion dans les pipelines
+ * Utilisations de pipelines
+ * 
+ * @package SPIP\Mots\Pipelines
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -297,19 +299,22 @@ function inscription3_formulaire_charger($flux){
  * 
  * Vérifie des valeurs spécifiques dans le formulaire d'inscription
  * 
- * @param array $flux Le contexte d'environnement du pipeline
- * @return array $flux Le contexte d'environnement modifié
+ * @pipeline formulaire_verifier
+ * @param array $flux 
+ * 		Le contexte d'environnement du pipeline
+ * @return array $flux 
+ * 		Le contexte d'environnement modifié
  */
 function inscription3_formulaire_verifier($flux){
 	include_spip('inc/config');
-	if ($flux['args']['form']=='configurer_inscription3'){
+	if ($flux['args']['form'] == 'configurer_inscription3'){
 		/**
 		 * On supprime l'ancienne configuration pour avoir la nouvelle dans l'ordre
 		 */
 		include_spip('inc/meta');
 		effacer_meta('inscription3');
 	}
-	if ($flux['args']['form']=='oubli'){
+	if($flux['args']['form']=='oubli'){
 		$erreurs = $flux['args']['erreurs'];
 		if(!$erreurs OR (count($erreurs) == 0)){
 			$email = _request('oubli');
@@ -343,36 +348,40 @@ function inscription3_formulaire_verifier($flux){
 		$erreurs = array_merge($erreurs,formulaires_editer_objet_verifier('auteur',null,$obligatoires));
 
 		if($flux['args']['form'] == 'inscription'){
-			if(lire_config('inscription3/pass_obligatoire') == 'on' && lire_config('inscription3/pass') == 'on'){
-				if(!_request('pass') OR !_request('password1'))
-					$erreurs['pass'] = _T('info_obligatoire');
-			}
+			if(lire_config('inscription3/pass_obligatoire') == 'on' && lire_config('inscription3/pass') == 'on' && (!_request('pass') OR !_request('password1')))
+				$erreurs['pass'] = _T('info_obligatoire');
 			else if(lire_config('inscription3/pass') == 'on'){
-				if(_request('pass') != _request('password1')){
+				if(_request('pass') != _request('password1'))
 					$erreurs['pass'] = _T('info_passes_identiques');
-				}else if(strlen(_request('pass')) > 0){
+				else if(strlen(_request('pass')) > 0){
 					$pass_min = !defined('_PASS_MIN') ? 6 : _PASS_MIN;
 					if (strlen(_request('pass')) < $pass_min) 
 						$erreurs['pass'] = _T('info_passe_trop_court');	
 				}
 			}
-				
-			if($erreurs['reglement']){
+
+			if($erreurs['reglement'])
 				$erreurs['reglement'] = _T('inscription3:erreur_reglement_obligatoire');
-			}
 		}
-		
+
 		if(count($erreurs))
 			$erreurs_obligatoires = true;
-	
+
 	    $valeurs = array();
-	
+
 	    $verifier = charger_fonction('verifier','inc',true);
-		
+
 	    if($verifier){
 	    	/**
 			 * Vérification des champs de champs extras
 			 */
+			$options = array();
+			if($flux['args']['form'] == 'editer_auteur' && intval(_request('id_auteur'))){
+				$infos_auteurs = sql_fetsel('*','spip_auteurs','id_auteur='.intval(_request('id_auteur')));
+				if(intval($infos_auteurs['id_auteur']) > 0)
+					$options['id_auteur'] = $infos_auteurs['id_auteur'];
+			}
+
 			$champs_a_verifier = pipeline('i3_verifications_specifiques',array());
 			//gere la correspondance champs -> _request(champs)
 			foreach($champs_a_verifier as $clef => $type) {
@@ -381,22 +390,17 @@ function inscription3_formulaire_verifier($flux){
 				 * On s'assure qu'il est bien présent dans le formulaire également
 				 */
 				if($flux['args']['form'] == 'editer_auteur' && intval(_request('id_auteur')) > 0 && in_array($type['type'],array('email','signature'))){
-					$infos_auteurs = sql_fetsel('*','spip_auteurs','id_auteur='.intval(_request('id_auteur')));
-					if($type['type'] == 'email' && isset($type['options']['disponible'])){
-						if($infos_auteurs[$clef] == _request($clef))
-							unset($type['options']['disponible']);
-					}else if($type['type'] == 'signature'){
-						if($infos_auteurs[$clef] == _request($clef))
-							continue;
-					}
+					if($type['type'] == 'email' && isset($type['options']['disponible']) && $infos_auteurs[$clef] == _request($clef))
+						unset($type['options']['disponible']);
+					else if(($type['type'] == 'signature') && ($infos_auteurs[$clef] == _request($clef)))
+						continue;
 				}
 				if(!isset($erreurs[$clef]) && _request($clef)){
 					$valeurs[$clef] = trim(_request($clef));
-					$type['options'] = array_merge(is_array($type['options']) ? $type['options'] : array(),$_GET);
+					$type['options'] = array_merge(array_merge(is_array($type['options']) ? $type['options'] : array(),$_GET),$options);
 					$erreurs[$clef] = $verifier($valeurs[$clef],$type['type'],$type['options']);
-					if($erreurs[$clef] == null){
+					if($erreurs[$clef] == null)
 						unset($erreurs[$clef]);
-					}
 				}
 			}
 			/**
@@ -408,15 +412,15 @@ function inscription3_formulaire_verifier($flux){
 			if (($flux['args']['form'] == 'inscription') && $saisies = champs_extras_objet( $table = 'spip_auteurs' )) {
 				include_spip('inc/autoriser');
 				include_spip('inc/saisies');
-				
+
 				$saisies = saisies_lister_avec_sql($saisies);
-		
+
 				// restreindre la vue selon les autorisations
 				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 				$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
 					'id' => $id_objet,
 					'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
-		
+
 				foreach ($saisies as $saisie) {
 					$nom = $saisie['options']['nom'];
 					// verifier (api) + normalisation
@@ -425,12 +429,11 @@ function inscription3_formulaire_verifier($flux){
 					   AND $verif = $saisie['verifier']['type']){
 						$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
 						$normaliser = null;
-						if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
+						if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser))
 							$erreurs[$nom] = $erreur;
-						// si une valeur de normalisation a ete transmis, la prendre.
-						} elseif (!is_null($normaliser)) {
+						// si une valeur de normalisation a ete transmis, la prendre. 
+						elseif (!is_null($normaliser)) 
 							set_request($nom, $normaliser);
-						}
 					}
 				}
 			}
@@ -443,10 +446,8 @@ function inscription3_formulaire_verifier($flux){
 			$annee = trim(_request('naissance_annee'));
 			$mois = trim(_request('naissance_mois'));
 			$jour = trim(_request('naissance_jour'));
-			if((!$annee || !$mois || !$jour) && $config_i3['naissance_obligatoire'] != 'on'){
-				if(trim(_request('naissance')) == '0000-00-00')
-					unset($erreurs['naissance']);
-			}
+			if((!$annee || !$mois || !$jour) && $config_i3['naissance_obligatoire'] != 'on' && (trim(_request('naissance')) == '0000-00-00'))
+				unset($erreurs['naissance']);
 		}
 		if(!$erreurs['naissance'] && _request('naissance') && (_request('naissance') != '0000-00-00')){
 			if(_request('naissance_annee') > (date('Y')))
@@ -456,9 +457,9 @@ function inscription3_formulaire_verifier($flux){
 			elseif((date('Y') - _request('naissance_annee')) > 110)
 				$erreurs['naissance'] = _T('inscription3:erreur_naissance_plus_110');
 		}
-		
+
 		$args = array_merge($flux['args'],array('champs' => $valeurs));
-		
+
 		/**
 		 * Offrir aux autres plugins la possibilite de verifier les donnees
 		 */
@@ -468,7 +469,7 @@ function inscription3_formulaire_verifier($flux){
 				'data' => $erreurs
 			)
 		);
-		
+
 		/**
 		 * Message d'erreur generalise
 		 */
