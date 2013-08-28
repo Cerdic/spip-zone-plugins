@@ -2,8 +2,8 @@
     <nom>Choix parmi des couleurs</nom>
     <auteur>Maïeul Rouquette</auteur>
     <licence>GNU/GPL</licence>
-    <version>0.3.0</version>
-    <etat>dev</etat>
+    <version>0.3.1</version>
+    <etat>test</etat>
     <categorie>outil</categorie>
     
 	<description>
