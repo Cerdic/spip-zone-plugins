@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_bd_echec' => 'Creation of @nombase@ database failed.',
 	'install_bd_reessayer' => 'Try again...',
 	'install_code' => 'Please, enter the activation code:',
-	'install_code_panel' => 'Veuillez entrer votre mot de passe habituel ou le code d\'activation fourni par l\'hébergeur :', # NEW
+	'install_code_panel' => 'Please type your usual password or the activation code provided by the hosting service:',
 	'install_creation_bd' => 'Creation of @nombase@ database',
 	'install_creation_bd_site' => 'Creation of the database for the website ',
 	'install_creation_bd_site_2' => 'The database @bqse@ for the website @site@ has been created.',
@@ -37,13 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_spip_3' => 'You can <a href="@url@">continue with SPIP installation</a>.',
 
 	// M
-	'message_site_desactive' => 'Veuillez contacter l\'<a href="@lien@">hébergeur</a> pour de plus amples détails', # NEW
+	'message_site_desactive' => 'Please contact the <a href="@lien@">hosting service</a> for more details',
 
 	// S
-	'site_non_active' => 'Ce site n\'a pas encore été validé par un administrateur.', # NEW
-	'site_non_demande' => 'Ce site n\'existe pas.', # NEW
-	'site_supprime' => 'Ce site est en attente de suppression définitive.', # NEW
-	'site_suspendu' => 'Ce site est suspendu.' # NEW
+	'site_non_active' => 'This site has not yet been validated by an administrator.',
+	'site_non_demande' => 'This website doesn\'t exist.',
+	'site_supprime' => 'This site is awaiting definitive deletion.',
+	'site_suspendu' => 'This site is suspended.'
 );
 
 ?>
