@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.2.15"
+	version="3.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/inscription3-64.png"

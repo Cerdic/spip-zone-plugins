@@ -49,4 +49,10 @@
 	</ul>
 </fieldset>
 </BOUCLE_a>
+</B_a>
+<li class="editer">
+	[(#ENV**|unserialize|foreach)]
+	<label><:inscription3:label_adresse:></label>
+	<textarea class="crayon-active text adresse" name="#ENV{name_adresse}" rows="3">[(#ADRESSE**|entites_html)]</textarea>
+</li>
 <//B_a>
