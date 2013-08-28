@@ -10,7 +10,7 @@ function formulaires_declarer_boussole_manuelle_charger_dist() {
 
 function formulaires_declarer_boussole_manuelle_verifier_dist() {
 	$erreurs = array();
-	if (!$nom = _request('alias'))
+	if (!_request('alias'))
 		$erreurs['alias'] = _T('info_obligatoire');
 	return $erreurs;
 }

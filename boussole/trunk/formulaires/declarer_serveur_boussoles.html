@@ -14,7 +14,7 @@
 			<li class="editer editer_url obligatoire[ (#ENV**{erreurs}|table_valeur{url}|oui)erreur]">
 				<p class="explication"><:boussole:info_url_serveur:></p>
 				<label for="url"><:boussole:label_url_serveur:></label>
-				[<span class="erreur">(#ENV**{erreurs}|table_valeur{url})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{url})</span>]
 				<input type="text" name="url" class="text" value="#ENV{url}" id="url" />
 			</li>
 		</ul>

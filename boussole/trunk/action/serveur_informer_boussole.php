@@ -11,9 +11,13 @@ function action_serveur_informer_boussole_dist(){
 	// Aucune sécurisation ni autorisation:
 	// -> c'est une action anonyme pouvant être appelée de l'extérieur
 	// -> par contre, cette action nécessite en argument l'alias de la boussole
-	$alias = _request('arg');
+	$alias_boussole = _request('arg');
 
-	if (_BOUSSOLE_ALIAS_SERVEUR AND $alias) {
+	// Récupération de l'activité du serveur
+	include_spip('inc/config');
+	$serveur_actif = lire_config('boussole/serveur/actif') == 'on';
+
+	if ($serveur_actif AND $alias_boussole) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
@@ -24,20 +28,20 @@ function action_serveur_informer_boussole_dist(){
 		$fichier_xml = '';
 		if ($boussoles) {
 			// Vérifier que la boussole demandée est bien disponible sur le serveur
-			if (array_key_exists($alias, $boussoles)) {
+			if (array_key_exists($alias_boussole, $boussoles)) {
 				// Si la boussole n'est pas encoe en cache on retourne une erreur
-				$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${alias}.xml";
+				$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${alias_boussole}.xml";
 				if (!file_exists($fichier_xml)) {
 					$erreur = 'cache_boussole_indisponible';
-					spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias)", 'boussole' . _LOG_ERREUR);
+					spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias_boussole)", 'boussole' . _LOG_ERREUR);
 				}
 				else {
-					spip_log("Information fournie sur la boussole d'alias = $alias", 'boussole' . _LOG_INFO);
+					spip_log("Information fournie sur la boussole d'alias = $alias_boussole", 'boussole' . _LOG_INFO);
 				}
 			}
 			else {
 				$erreur = 'boussole_non_hebergee';
-				spip_log("Boussole non disponible sur ce serveur (alias = $alias)", 'boussole' . _LOG_ERREUR);
+				spip_log("Boussole non disponible sur ce serveur (alias = $alias_boussole)", 'boussole' . _LOG_ERREUR);
 			}
 		}
 		else {

@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:boussole:titre_form_configurer_serveur:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_actif obligatoire[ (#GET{erreurs}|oui)erreur]">
+				<p class="explication"><:boussole:info_activite_serveur:></p>
+				<label><:boussole:label_activite_serveur:></label>
+				[<span class="erreur_message">(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="radio" name="actif" class="radio" id="actif_oui" value="on"[ (#ENV{actif,''}|=={on}|oui)checked="checked"] />
+					<label for="actif_oui"><:item_oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="actif" class="radio" id="actif_non" value=""[ (#ENV{actif,''}|=={''}|oui)checked="checked"] />
+					<label for="actif_non"><:item_non:></label>
+				</div>
+			</li>
+			<li class="editer editer_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]" id="nom_serveur">
+				<p class="explication"><:boussole:info_nom_serveur:></p>
+				<label for="nom"><:boussole:label_nom_serveur:></label>
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{nom})</span>]
+				<input type="text" name="nom" class="text" value="#ENV{nom}" id="nom" />
+			</li>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="boussole/serveur" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{actif, ''}|=={''}|oui)
+			jQuery("#nom_serveur").hide();
+		]
+		jQuery("input[name='actif']").change(function() {
+			if (jQuery("input[name='actif']:checked").val() == '') {
+				jQuery("input[name='nom']").val('');
+				jQuery("#nom_serveur").hide('fast');
+			}
+			else {
+				jQuery("#nom_serveur").show('fast');
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

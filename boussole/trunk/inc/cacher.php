@@ -133,7 +133,11 @@ function boussole_cacher_liste($boussoles) {
 		}
 
 		if ($cache) {
-			$cache = inserer_balise('ouvrante', 'boussoles', array('serveur' => _BOUSSOLE_ALIAS_SERVEUR, 'sha' => _BOUSSOLE_PATTERN_SHA))
+			// Récupération du nom du serveur. On sait que le serveur et actif.
+			include_spip('inc/config');
+			$nom_serveur = lire_config('boussole/serveur/nom');
+
+			$cache = inserer_balise('ouvrante', 'boussoles', array('serveur' => $nom_serveur, 'sha' => _BOUSSOLE_PATTERN_SHA))
 				   . $cache
 				   . inserer_balise('fermante', 'boussoles', '');
 			$sha = sha1($cache);
@@ -223,7 +227,9 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 		$infos_plugin = $informer($prefixe_plugin);
 		$att_boussole['version'] = (isset($infos_plugin['version']) ? $infos_plugin['version'] : '');
 		// -- insertion de l'alias du serveur
-		$att_boussole['serveur'] = _BOUSSOLE_ALIAS_SERVEUR;
+		include_spip('inc/config');
+		$nom_serveur = lire_config('boussole/serveur/nom');
+		$att_boussole['serveur'] = $nom_serveur;
 		// -- insertion du pattern pour le sha1 du contenu
 		$att_boussole['sha'] = _BOUSSOLE_PATTERN_SHA;
 		// -- merge de tous les attributs
@@ -309,7 +315,9 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 		// -- url absolue du logo à fournir dans la balise
 		$att_boussole['logo'] = url_absolue(find_in_path("images/boussole/boussole-${alias_boussole}.png"));
 		// -- insertion de l'alias du serveur
-		$att_boussole['serveur'] = _BOUSSOLE_ALIAS_SERVEUR;
+		include_spip('inc/config');
+		$nom_serveur = lire_config('boussole/serveur/nom');
+		$att_boussole['serveur'] = $nom_serveur;
 		// -- insertion du pattern pour le sha1 du contenu
 		$att_boussole['sha'] = _BOUSSOLE_PATTERN_SHA;
 		// -- merge de tous les attributs

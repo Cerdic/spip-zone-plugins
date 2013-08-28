@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Page des informations détaillées d\'une boussole',
 
 	// I
+	'info_activite_serveur' => 'Par défaut, la fonction serveur du plugin n\'est pas active. Vous pouvez l\'activer en choisissant l\'option adéquate ci-dessous et en lui affectant un nom.',
 	'info_ajouter_boussole' => 'En ajoutant des boussoles à votre base de données, vous aurez la possiblité d\'utiliser les modèles fournis pour les afficher dans vos pages publiques.<br />Si la boussole existe déjà ce formulaire permettra de la mettre à jour en conservant la configuration d\'affichage.',
 	'info_ajouter_serveur' => 'Ce formulaire vous permet de déclarer un serveur de boussoles. Par défaut, le serveur «spip» est toujours accessible depuis les sites client.',
 	'info_alias_boussole_manuelle' => 'Saisissez l\'alias de la boussole manuelle telle que définie dans son fichier XML.',
@@ -52,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucun_hebergement' => 'Aucune boussole n\'est encore hébergée sur ce serveur. Utilisez le formulaire ci-dessous pour déclarer une boussole manuelle ou activez un plugin de boussole sur ce site.',
 	'info_liste_aucun_serveur' => 'Aucun serveur n\'a encore été configuré pour le site client.',
 	'info_liste_aucune_boussole' => 'Aucune boussole n\'a encore été chargée dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
+	'info_nom_serveur' => 'Saisissez le nom que vous souhaitez donner à votre serveur de boussoles. Le nom «spip» est réservé et ne peut donc pas être utilisé.',
 	'info_site_boussole' => 'Ce site fait partie de la boussole :',
 	'info_site_boussoles' => 'Ce site fait partie des boussoles :',
 	'info_url_serveur' => 'Saisissez l\'URL du site serveur.',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_boussole' => '@nb@ boussole',
 	'label_1_site' => '@nb@ site',
 	'label_a_class' => 'Classe de l\'ancre englobant le logo',
+	'label_activite_serveur' => 'Activer la fonction serveur ?',
 	'label_actualise_le' => 'Actualisée le',
 	'label_affiche' => 'Affiché ?',
 	'label_afficher_descriptif' => 'Afficher le descriptif des sites ?',
@@ -84,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_boussoles' => '@nb@ boussoles',
 	'label_n_sites' => '@nb@ sites',
 	'label_nom' => 'Nom',
+	'label_nom_serveur' => 'Nom du serveur',
 	'label_p_class' => 'Classe du paragraphe englobant le descriptif',
 	'label_sepia' => 'Code de la couleur de sépia (sans #)',
 	'label_slogan' => 'Slogan',
@@ -110,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_declaration_boussole_xml' => 'La boussole manuelle « @boussole@ » ne peut pas être déclarée car son fichier XML est introuvable.',
 	'message_nok_ecriture_bdd' => 'Erreur d\'écriture en base de données (table @table@).',
 	'message_nok_reponse_invalide' => 'La réponse du serveur « @serveur@ » est mal formée.',
+	'message_nok_nom_serveur_spip' => 'Le nom de serveur « spip » est réservé. Choisissez en un autre.',
 	'message_ok_boussole_actualisee' => 'La boussole « @fichier@ » a été mise à jour.',
 	'message_ok_boussole_ajoutee' => 'La boussole « @fichier@ » a été ajoutée.',
 	'message_ok_boussole_manuelle_ajoutee' => 'La boussole manuelle « @boussole@ » a été déclarée au serveur et les caches ont été mis à jour.',
@@ -123,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_client' => 'Fonction Client',
 	'onglet_serveur' => 'Fonction Serveur',
+	'onglet_configuration' => 'Configuration du plugin',
 	'option_aucune_description' => 'Aucune description',
 	'option_descriptif_site' => 'Descriptif du site',
 	'option_nom_site' => 'Nom du site',
@@ -136,11 +142,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Ajouter ou mettre à jour une boussole',
 	'titre_form_ajouter_serveur' => 'Déclarer un serveur de boussoles',
 	'titre_form_boussole_manuelle' => 'Déclarer une boussole manuelle',
+	'titre_form_configurer_serveur' => 'Configurer la fonction serveur',
 	'titre_formulaire_configurer' => 'Configuration de l\'affichage de la boussole',
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles à l\'affichage',
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées',
 	'titre_liste_serveurs' => 'Liste des serveurs accessibles depuis le site',
-	'titre_page_boussole' => 'Gestion des boussoles'
+	'titre_page_boussole' => 'Gestion des boussoles',
+	'titre_page_configurer' => 'Configuration du plugin Boussole'
 );
 
 ?>

@@ -9,7 +9,9 @@ function boussole_taches_generales_cron($taches_generales) {
 
 	// -- Pour le CRON serveur on vérifie que le mode serveur est actif
 	//    (l'existence d'une boussole disponible est vérifiée dans la tache elle-même)
-	if (_BOUSSOLE_ALIAS_SERVEUR) {
+	include_spip('inc/config');
+	$serveur_actif = lire_config('boussole/serveur/actif') == 'on';
+	if ($serveur_actif) {
 		$taches_generales['boussole_actualiser_serveur'] = 24*3600;
 	}
 

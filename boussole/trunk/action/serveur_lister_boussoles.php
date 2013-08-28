@@ -11,7 +11,11 @@ function action_serveur_lister_boussoles_dist(){
 	// Aucune sécurisation ni autorisation:
 	// -> c'est une action anonyme pouvant être appelée de l'extérieur
 
-	if (_BOUSSOLE_ALIAS_SERVEUR) {
+	// Récupération de l'activité du serveur
+	include_spip('inc/config');
+	$serveur_actif = lire_config('boussole/serveur/actif') == 'on';
+
+	if ($serveur_actif) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');

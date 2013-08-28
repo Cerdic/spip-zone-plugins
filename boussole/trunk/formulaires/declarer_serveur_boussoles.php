@@ -10,7 +10,7 @@ function formulaires_declarer_serveur_boussoles_charger_dist() {
 
 function formulaires_declarer_serveur_boussoles_verifier_dist() {
 	$erreurs = array();
-	if (!$nom = _request('url'))
+	if (!_request('url'))
 		$erreurs['url'] = _T('info_obligatoire');
 	return $erreurs;
 }

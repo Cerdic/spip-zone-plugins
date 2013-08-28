@@ -13,14 +13,17 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
 
 	// Configuration par défaut à la première activation du plugin
-	$defaut_config = array(
+	$defaut_config_03 = array(
 		'client' => array('serveurs_disponibles' =>
 							array('spip' => array('url' => 'http://boussole.spip.net'))),
 		'serveur' => array('boussoles_disponibles' => array())
 	);
+	$defaut_config_04 = array(
+		'serveur' => array('actif' => '', 'nom' => '')
+	);
 	$maj['create'] = array(
 		array('maj_tables', array('spip_boussoles', 'spip_boussoles_extras')),
-		array('ecrire_config', 'boussole', $defaut_config)
+		array('ecrire_config', 'boussole', array_merge($defaut_config_03, $defaut_config_04))
 	);
 
 	// On ajoute la table des extras et on supprime toutes les boussoles
@@ -33,7 +36,12 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 
 	// A partir de ce schéma, le plugin migre ses globales en configuration
 	$maj['0.3'] = array(
-		array('maj03', $defaut_config)
+		array('maj03', $defaut_config_03)
+	);
+
+	// A partir de ce schéma, le plugin migre la constante _BOUSSOLE_ALIAS_SERVEUR en configuration
+	$maj['0.4'] = array(
+		array('maj04', $defaut_config_04)
 	);
 
 	include_spip('base/upgrade');
@@ -83,6 +91,7 @@ function boussole_vider_tables($nom_meta_base_version) {
 
 
 /**
+ * Migration du schéma 0.1 au 0.2
  * Suppression des boussoles autres que la boussole spip car on ne peut pas les mettre à jour,
  * leur serveur n'étant pas connu
  *
@@ -102,20 +111,20 @@ function maj02() {
 
 
 /**
- * Suppression des boussoles autres que la boussole spip car on ne peut pas les mettre à jour,
- * leur serveur n'étant pas connu
+ * Migration du schéma 0.2 au 0.3
+ * Les globales $serveur_boussoles_disponibles et $client_serveurs_disponibles sont
+ * transférées dans des variables de configuration
  *
  */
 function maj03($defaut_config) {
 
-	// On initialise la configuration du plugin avec celle par défaut
+	// On initialise la configuration ajoutée avec celle par défaut
 	$config = $defaut_config;
 
 	// Migration des éventuels serveurs configurés autres que "spip"
 	if (isset($GLOBALS['client_serveurs_disponibles'])) {
 		// On boucle sur tous les serveurs configurés
 		foreach($GLOBALS['client_serveurs_disponibles'] as $_serveur => $_infos) {
-			$casier = array_shift(explode('_', $config));
 			if ($_serveur != 'spip') {
 				if (isset($_infos['api'])) {
 					$config['client']['serveurs_disponibles'][$_serveur]['url'] = str_replace('/spip.php?action=[action][arguments]', '', $_infos['api']);
@@ -141,11 +150,40 @@ function maj03($defaut_config) {
 		unset($GLOBALS['serveur_boussoles_disponibles']);
 	}
 
-	// Mise à jour de la configuration migrée
+	// Mise à jour de la configuration migrée. Il n'y a pas de configuration existante.
 	include_spip('inc/config');
 	ecrire_config('boussole', $config);
 
 	spip_log('Maj 0.3 des données du plugin','boussole' . _LOG_INFO);
+}
+
+
+/**
+ * Migration du schéma 0.3 au 0.4.
+ * La constante _BOUSSOLE_ALIAS_SERVEUR est transformée en deux variables de configuration,
+ * l'une pour l'activité de la fonction serveur et l'autre pour le nom du serveur.
+ *
+ */
+function maj04($defaut_config) {
+
+	// On initialise la configuration ajoutée avec celle par défaut
+	$config_04 = $defaut_config;
+
+	// Migration des éventuels serveurs configurés autres que "spip"
+	if (_BOUSSOLE_ALIAS_SERVEUR) {
+		// On met à jour l'activité et le nom du serveur
+		$config_04['serveur']['actif'] = 'on';
+		$config_04['serveur']['nom'] = _BOUSSOLE_ALIAS_SERVEUR;
+	}
+
+	// Mise à jour de la configuration migrée.
+	// On la merge avec la configuration existante.
+	include_spip('inc/config');
+	$config_03 = lire_config('boussole');
+	$config_04 = array($config_03, $config_04);
+	ecrire_config('boussole', $config);
+
+	spip_log('Maj 0.4 des données du plugin','boussole' . _LOG_INFO);
 }
 
 ?>

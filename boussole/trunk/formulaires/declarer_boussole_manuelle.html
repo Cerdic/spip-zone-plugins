@@ -14,7 +14,7 @@
 			<li class="editer editer_alias obligatoire[ (#ENV**{erreurs}|table_valeur{alias}|oui)erreur]">
 				<p class="explication"><:boussole:info_alias_boussole_manuelle:></p>
 				<label for="alias"><:boussole:label_alias_boussole:></label>
-				[<span class="erreur">(#ENV**{erreurs}|table_valeur{alias})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{alias})</span>]
 				<input type="text" name="alias" class="text" value="#ENV{alias}" id="alias" />
 			</li>
 		</ul>
