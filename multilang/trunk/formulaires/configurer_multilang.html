@@ -25,19 +25,6 @@
 	                     label=#GET{label},
 	                     defaut=''})]
 					]</BOUCLE_objets>
-                  
-				  [(#PLUGIN{agenda}|oui)
-					  [(#SAISIE{oui_non,evenement,
-	                     label=<:multilang:cfg_lbl_evenement:>,
-	                     defaut=''}
-	                  )]
-				  ]
-				  [(#PLUGIN{gis}|oui)
-					  [(#SAISIE{oui_non,gis,
-	                     label=<:multilang:cfg_lbl_gis:>,
-	                     defaut=''}
-	                  )]
-				  ]
 				  [(#SAISIE{oui_non,multilang_public,
                      label=<:multilang:cfg_lbl_espace_public:>,
                      defaut=off}
