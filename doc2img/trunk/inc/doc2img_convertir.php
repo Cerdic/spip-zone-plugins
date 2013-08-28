@@ -1,4 +1,8 @@
 <?php
+/**
+ * Plugin Doc2img
+ * Conversion du fichier
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -22,9 +26,9 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 	spip_log('conversion du doc '.$id_document,'docimg');
 	@set_time_limit(0);
 	if(!in_array($opt,array('full','vignette'))){
-		if(isset($opt['options']) && in_array($opt['options'],array('full','vignette'))){
+		if(isset($opt['options']) && in_array($opt['options'],array('full','vignette')))
 			$type = $opt['options'];
-		}else
+		else
 			$type = 'full';
 	}else
 		$type = $opt;
@@ -33,7 +37,8 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 	if(class_exists('Imagick')){
 	    include_spip('inc/documents');
 		include_spip('inc/config');
-		
+		include_spip('action/editer_document');
+
 		/**
 		 * Si cette action est lancée en CRON, on ne peut supprimer les documents ensuite
 		 * TODO trouver mieux
@@ -55,22 +60,17 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 
 	    $frame = 0;
 
-		$resolution = $config['resolution'] ? $config['resolution'] : 150;
-		
+		$resolution = (isset($config['resolution']) && intval($config['resolution']) > 150) ? $config['resolution'] : 150;
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		
+
 		if($type == 'full'){
 			try{
 				$image = new Imagick($document['fichier']);
 				$identify = $image->identifyImage();
-				spip_log($identify,"docimg");
-				$identify2 = $image->getImageProperties();
-				spip_log($identify2,"docimg");
 				$nb_pages = $image->getNumberImages();
-				spip_log($nb_pages.' pages','docimg');
 				$image->clear();
 				$image->destroy();
-				include_spip('action/editer_document');
+
 				/**
 				 * Est ce que ce document a déja été converti
 				 * Si oui, on supprime son ancienne conversion
@@ -78,7 +78,7 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 				$documents_doc2img = sql_select('L1.id_document',
 												'spip_documents AS L1 LEFT JOIN spip_documents_liens AS L2 ON L1.id_document=L2.id_document',
 												'L1.mode="doc2img" AND L2.objet="document" AND L2.id_objet='.intval($id_document));
-				
+
 				$documents_a_supprimer = array();
 				while($document_doc2img = sql_fetch($documents_doc2img)){
 					$documents_a_supprimer[] = $document_doc2img['id_document'];
@@ -95,29 +95,27 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 			    do {
 			    	$image_frame = new Imagick();
 			        //on accede à la page $frame
-			        spip_log("page $frame",'docimg');
-						
-						// Il faut définir la résolution avant de charger l'image (cf. Notes dans http://www.php.net/manual/en/imagick.setresolution.php)
-						if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+
+						if(is_numeric($resolution) && ($resolution <= '600'))
 				        	$image_frame->setResolution($resolution,$resolution);
-			        	}
+
 						$image_frame->readImage($document['fichier'].'['.$frame.']');
 						$image_frame->setImageFormat($format_cible);
-						if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
+
+						if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100))
 							$image_frame->setImageCompressionQuality($config['compression']);
-						}
-			
+
 				        //calcule des dimensions
 				        //$dimensions = doc2img_ratio($image_frame,$config);
-			
+
 				        //nom du fichier cible, c'est à dire la frame (image) indexée
 				        $frame_name = $document['name'].'-'.$frame.'.'.$format_cible;
 						$dest = $document['cible_url'].$frame_name;
 				        //on sauvegarde la page
-				        
+
 			        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
 			            $image_frame->writeImage($dest);
-						
+
 						/**
 						 * On ajoute le document dans la table spip_documents avec comme type "doc2img"
 						 * Il sera automatiquement lié au document original
@@ -130,19 +128,17 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 							$frame_tmp = $document['cible_url'].$document['name'].'-logo.'.$format_cible;
 							$image_frame->writeImage($frame_tmp);
 							$files = array(array('tmp_name'=>$frame_tmp,'name'=>$frame_name));
-			        		if(is_numeric($id_vignette) && ($id_vignette > 0)){
+			        		if(is_numeric($id_vignette) && ($id_vignette > 0))
 			        			$vignette = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
-			        		}else{
+			        		else
 								$vignette = $ajouter_documents('new', $files,'', 0, 'vignette');
-							}
-							if (is_numeric(reset($vignette))
-							  AND $id_vignette = reset($vignette))
+
+							if (is_numeric(reset($vignette)) AND $id_vignette = reset($vignette))
 								document_modifier($id_document,array("id_vignette" => intval($id_vignette)));
 							spip_unlink($document['cible_url'].$frame_tmp);
 							unset($vignette,$files);
 				        }
-						
-						
+
 				        spip_unlink($document['cible_url'].$frame_name);
 			            unset($frame_name,$dest);
 						$frame++;
@@ -150,20 +146,20 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 						unset($x);
 						$image_frame->clear();
 						$image_frame->destroy();
+						$invalider = true;
 					} while($frame < $nb_pages);
 				}
 			catch ( ImagickException $e ){
 				    spip_log('On a une erreur','docimg');
 					spip_log($e,'docimg');
 			}
-			include_spip('inc/invalideur');
-			suivre_invalideur('id_document="$id_document"');
 	    }else{
 	    	try{
 		    	do {
 		    		if(in_array($format_cible,array('png','jpg'))){
 			        	$image_frame = new Imagick();
-			        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+			        	if(is_numeric($resolution) && ($resolution <= '600')){
+			        		spip_log('set resolution','docimg');
 				        	$image_frame->setResolution($resolution,$resolution);
 			        	}
 						$image_frame->readImage($document['fichier'].'['.$frame.']');
@@ -171,42 +167,41 @@ function inc_doc2img_convertir($id_document,$opt='full') {
 						if(is_numeric($config['compression']) && ($config['compression'] > 50) && ($config['compression'] <= 100)){
 							$image_frame->setImageCompressionQuality($config['compression']);
 						}
-			
+
 				        //nom du fichier cible, c'est à dire la frame (image) indexée
 				        $frame_name = $document['name'].'-logo.'.$format_cible;
-			
+
 				        //on sauvegarde la page
 			            $image_frame->writeImage($document['cible_url'].$frame_name);
 						$image_frame->clear();
 			            $image_frame->destroy();
-						
+
 						$files = array(array('tmp_name'=>$document['cible_url'].$frame_name,'name'=>$frame_name));
 						$id_vignette = $document['id_vignette'];
-			        	if(is_numeric($id_vignette) && ($id_vignette > 0)){
+			        	if(is_numeric($id_vignette) && ($id_vignette > 0))
 		        			$x = $ajouter_documents($id_vignette, $files,'', 0, 'vignette');	
-		        		}else{
+		        		else
 							$x = $ajouter_documents('new', $files,'', 0, 'vignette');
-						}
-						if (is_numeric(reset($x))
-						  AND $id_vignette = reset($x)){
-						  	spip_log('On modifie','docimg');
-							include_spip('action/editer_document');
+
+						if (is_numeric(reset($x)) AND $id_vignette = reset($x))
 							document_modifier($id_document,array("id_vignette" => intval($id_vignette)));
-						}
+
 						spip_unlink($document['cible_url'].$frame_name);
-		            }else{
+		            }else
 						spip_log("DOC2IMG : le format de sortie sélectionné dans la configuration ne permet pas de créer une vignette",'docimg');
-		            }
+					$invalider = true;
 			        $frame++;
 			    } while($frame < 1 );
 			}catch ( ImagickException $e ){
 				    spip_log('On a une erreur','docimg');
 					spip_log($e,'docimg');
 			}
-			include_spip('inc/invalideur');
-			suivre_invalideur('id_document="$id_document"');
 	    }
 		$ret['success'] = true;
+		if($invalider){
+			include_spip('inc/invalideur');
+			suivre_invalideur('id_document="$id_document"');
+		}
 	    return $ret;
 	}else{
 		spip_log('Erreur Doc2Img : La class doc2img n est pas disponible');
