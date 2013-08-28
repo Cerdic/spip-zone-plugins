@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © 2007-2013 - cmtmt, BoOz, kent1
  * Licence GPL v3
  *
  * Définitions des tables et insertion dans les champs extras
@@ -44,13 +44,12 @@ function inscription3_declarer_champs_extras($champs = array()){
 	include_spip('inc/config');
 
 	$exceptions_des_champs_auteurs_elargis = pipeline('i3_exceptions_des_champs_auteurs_elargis',array());
-	
+
 	$definitions_champs = pipeline('i3_definition_champs',array());
-	
+
 	$config = lire_config('inscription3');
-	if(($config == '') OR !is_array($config)){
+	if(!is_array($config))
 		return $champs;
-	}
 
 	$champ_presents = array();
 

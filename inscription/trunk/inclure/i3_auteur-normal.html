@@ -12,7 +12,8 @@
 
 <BOUCLE_contenu_auteur(AUTEURS){id_auteur}{tout}>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:info_auteurs:></span>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
+[(#PLUGINS{spipr_dist}|non)
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:info_auteurs:></span>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>]
 <div class="contenu-principal">
 	<div class="vcard">[(#REM) microformat vcard]
 		<div class="cartouche">

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © 2007-2013 - cmtmt, BoOz, kent1
  * Licence GPL v3
  *
  * Fonctions d'installation et de désinstallation du plugin
@@ -25,10 +25,8 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	 * Certaines montées de version ont oublié de corriger la meta de I2
 	 * si ce n'est pas un array alors il faut supprimer la meta pour la réinstaller
 	 */
-	if ($inscription3_meta && !is_array(@unserialize($inscription3_meta))) {
-		spip_log("INSCRIPTION 3 : effacer la meta inscription3 et relancer l'install","inscription3");
+	if ($inscription3_meta && !is_array(@unserialize($inscription3_meta)))
 		effacer_meta('inscription3');
-	}
 
 	/**
 	 * Inscription2 semble installé, on tranfère sa configuration vers inscription3
@@ -51,7 +49,9 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	if(!is_array($inscription3_meta)){
 		$maj['create'][] = array('ecrire_meta','inscription3',serialize(array(
 						'nom_fiche_mod' => 'on',
+						'nom_fiche_table' => 'on',
 						'email_fiche_mod' => 'on',
+						'email_fiche_table' => 'on',
 						'pass_fiche_mod' => 'on',
 						'bio_fiche_mod' => 'on',
 						'login_fiche_mod' => 'on',
@@ -62,13 +62,13 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 						'statut_interne' => ''
 					)));
 	}
-	
+
 	cextras_api_upgrade(inscription3_declarer_champs_extras(), $maj['create']);
-	
+
 	$maj['3.0.2'] = array(
 		array('i3_installer_pays',array()),
 	);
-	
+
 	include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -84,9 +84,8 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
  */
 function inscription3_vider_tables($nom_meta_base_version) {
 	effacer_meta('inscription3');
-	if (!defined('_DIR_PLUGIN_GEOGRAPHIE')) {
+	if (!defined('_DIR_PLUGIN_GEOGRAPHIE'))
 		sql_drop_table("spip_geo_pays");
-	}
 	effacer_meta($nom_meta_base_version);
 }
 
@@ -134,11 +133,12 @@ function inscription3_transfert_infos_auteurs(){
 	if (is_array($config)){
 		foreach($config as $clef=>$val){
 			$cle = preg_replace("/_(obligatoire|fiche|table).*/", "", $clef);
-			if(!in_array($cle,$champs)){
-				if(!in_array($cle,$exceptions_des_champs_auteurs_elargis) and !preg_match(",(categories|zone|newsletter).*$,", $cle) and ($val == 'on')){
-					$champs[] = $cle;
-				}
-			}
+			if(!in_array($cle,$champs)
+				AND !in_array($cle,$exceptions_des_champs_auteurs_elargis) 
+				AND !preg_match(",(categories|zone|newsletter).*$,", $cle) 
+				AND ($val == 'on')
+			)
+				$champs[] = $cle;
 		}
 	}
 

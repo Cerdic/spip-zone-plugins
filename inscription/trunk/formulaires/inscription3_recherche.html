@@ -23,8 +23,7 @@
 		<p class="boutons">
 			<input type="submit" class="submit" name="rechercher" value="<:info_rechercher:>" />
 			[(#ENV{case}|oui)
-			<input type="submit" class="submit" name="afficher_tous" value="<:inscription3:afficher_tous:>" />
-			]
+			<input type="submit" class="submit" name="afficher_tous" value="<:inscription3:afficher_tous:>" />]
 		</p>
 
 		<fieldset class="legend">
@@ -37,12 +36,9 @@
 			<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:autre|lcfirst:>
 		</fieldset>
 
-		[(#ENV{case}|oui)
-			<INCLURE{fond=prive/table_adherent_auteur_recherche}{ajax}{ordre}{env}>
-		]
-		[(#ENV{case}|non)
-			<INCLURE{fond=prive/table_adherent_auteur}{ajax}{ordre}{env}>
-		]
+		[(#ENV{case}|?{
+			<INCLURE{fond=prive/table_adherent_auteur_recherche}{ajax}{ordre}{env}>,
+			<INCLURE{fond=prive/table_adherent_auteur}{ajax}{ordre}{env}>})]
 
 		<p class="boutons">
 			<input type="submit" class="submit" name="supprimer_auteurs" value="<:inscription3:delete_user_select:>" />
