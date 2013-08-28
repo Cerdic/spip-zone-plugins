@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_liste' => 'A list of e-mails',
 	'email_simple' => 'A simple e-mail',
 	'erreur_aucun_fournisseur' => 'No service providing contacts has been found. Please, install at least one contact importation library.',
-	'erreur_aucun_fournisseur_configure' => 'No service for importing contacts has been activated.', # MODIF
+	'erreur_aucun_fournisseur_configure' => 'No import contacts service has been activated.',
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Recover my contacts',
