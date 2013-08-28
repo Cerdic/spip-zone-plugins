@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'This page lists the whole location-based points of the website.',
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The location-based points',
-	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
+	'erreur_geocoder' => 'No results for your search:',
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
 	'erreur_xmlrpc_lat_lon' => 'Latitude and longitude should be set as arguments',
 	'explication_api_forcee' => 'The is imposed by another plugin or skeleton.',
@@ -65,8 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_maptype_force' => 'The base map is imposed by another plugin or skeleton.',
 
 	// F
-	'formulaire_creer_gis' => 'Create a new location-based point :',
-	'formulaire_modifier_gis' => 'Modify the location-based point :',
+	'formulaire_creer_gis' => 'Create a new location-based point:',
+	'formulaire_modifier_gis' => 'Modify the location-based point:',
 
 	// G
 	'gis_pluriel' => 'Location-based points',
@@ -149,17 +149,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_nombre_utilisations' => '@nb@ uses',
 	'titre_nouveau_point' => 'New point',
 	'titre_objet' => 'Title',
-	'toolbar_actions_title' => 'Annuler le tracé', # NEW
-	'toolbar_buttons_marker' => 'Tracer un point', # NEW
-	'toolbar_buttons_polygon' => 'Tracer un polygone', # NEW
-	'toolbar_buttons_polyline' => 'Tracer une ligne', # NEW
-	'toolbar_handlers_marker_tooltip_start' => 'Cliquez pour placer le marqueur', # NEW
-	'toolbar_handlers_polygon_tooltip_cont' => 'Cliquez pour continuer à tracer le polygone', # NEW
-	'toolbar_handlers_polygon_tooltip_end' => 'Cliquez sur le premier point pour fermer le polygone', # NEW
-	'toolbar_handlers_polygon_tooltip_start' => 'Cliquez pour commencer à tracer le polygone', # NEW
-	'toolbar_handlers_polyline_tooltip_cont' => 'Cliquez pour continuer à tracer la ligne', # NEW
-	'toolbar_handlers_polyline_tooltip_end' => 'Cliquez sur le dernier point pour terminer la ligne', # NEW
-	'toolbar_handlers_polyline_tooltip_start' => 'Cliquez pour commencer à tracer la ligne', # NEW
+	'toolbar_actions_title' => 'Cancel the drawing',
+	'toolbar_buttons_marker' => 'Plot a point',
+	'toolbar_buttons_polygon' => 'Draw a polygon',
+	'toolbar_buttons_polyline' => 'Draw a line',
+	'toolbar_handlers_marker_tooltip_start' => 'Click to set marker',
+	'toolbar_handlers_polygon_tooltip_cont' => 'Click to continue drawing the polygon',
+	'toolbar_handlers_polygon_tooltip_end' => 'Click the first point to close the polygon',
+	'toolbar_handlers_polygon_tooltip_start' => 'Click to start drawing the polygon',
+	'toolbar_handlers_polyline_tooltip_cont' => 'Click to continue to draw the line',
+	'toolbar_handlers_polyline_tooltip_end' => 'Click the last point to end line',
+	'toolbar_handlers_polyline_tooltip_start' => 'Click to start drawing the line',
 
 	// Z
 	'zoom' => 'Zoom'
