@@ -9,7 +9,8 @@ function formulaires_configurer_boussole_serveur_verifier() {
 		$nom = _request('nom');
 		if (!$nom)
 			$erreurs['nom'] = _T('info_obligatoire');
-		else if ($nom == 'spip')
+		else if (($nom == 'spip')
+			AND (rtrim($GLOBALS['meta']['adresse_site'], '/') != 'http://boussole.spip.net'))
 			$erreurs['nom'] = _T('boussole:message_nok_nom_serveur_spip');
 	}
 	return $erreurs;

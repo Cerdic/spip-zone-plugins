@@ -195,8 +195,8 @@ function maj04($defaut_config) {
 
 	// Migration de l'éventuel serveur installé sur le site
 	// -- On met à jour l'activité et le nom du serveur
-	$config['serveur']['actif'] = defined(_BOUSSOLE_ALIAS_SERVEUR) ? 'on' : $defaut_config['serveur']['actif'];
-	$config['serveur']['nom'] = defined(_BOUSSOLE_ALIAS_SERVEUR) ? _BOUSSOLE_ALIAS_SERVEUR : $defaut_config['serveur']['nom'];
+	$config['serveur']['actif'] = defined('_BOUSSOLE_ALIAS_SERVEUR') ? 'on' : $defaut_config['serveur']['actif'];
+	$config['serveur']['nom'] = defined('_BOUSSOLE_ALIAS_SERVEUR') ? _BOUSSOLE_ALIAS_SERVEUR : $defaut_config['serveur']['nom'];
 
 	// Mise à jour en BDD de la confguration migrée
 	ecrire_config('boussole', $config);
