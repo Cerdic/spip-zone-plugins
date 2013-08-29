@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $id_document identifiant du document à convertir
  */
-function ocr_analyser($id_document) {
+function ocr_analyser($id_document, $dry_run=false) {
 	spip_log('Analyse OCR du document '.$id_document, 'ocr');
 
 	include_spip('inc/config');
@@ -58,6 +58,12 @@ function ocr_analyser($id_document) {
 			$resultat['erreur'] = _T('ocr:analyser_erreur_fichier_resultat');
 		}
 	}
+	
+	if (!$dry_run) {
+		// on modifie le champ "ocr" du document dans la base
+		spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
+	}
+	
 	return $resultat;
 }
 

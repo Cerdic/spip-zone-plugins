@@ -22,7 +22,7 @@ function formulaires_tester_ocr_verifier_dist(){
 function formulaires_tester_ocr_traiter_dist(){
 
 	include_spip('inc/ocr_analyser');
-	$resultat = ocr_analyser(_request('id_document'));
+	$resultat = ocr_analyser(_request('id_document'), true);
 
 	if ($resultat['erreur']){
 		return array(
