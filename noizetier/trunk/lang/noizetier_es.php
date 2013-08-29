@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_bloc_contenu' => 'Contenido principal de cada página.',
-	'description_bloc_extra' => 'Informaciones extra contextuales  para  cada página.',
+	'description_bloc_extra' => 'Información extra contextual  para cada página.',
 	'description_bloc_navigation' => 'Informaciones de navegación propias a cada página.',
 	'description_bloctexte' => 'El título es opcional. Para el texto, puede utilizar los atajos tipográficos de SPIP. ',
 
