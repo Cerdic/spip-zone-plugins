@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_info_titre' => 'Título del punto',
 
 	// L
-	'label_geo_afficher' => 'Mostrar las informaciones de geolocalización',
+	'label_geo_afficher' => 'Mostrar la información de geolocalización',
 	'label_geo_cacher' => 'Ocultar el mapa por defecto',
 	'label_geo_cacher_defaut' => 'Esconde el mapa y los campos de geolocalización por defecto',
 	'label_recherche' => 'Mostrar un campo de búsqueda debajo del mapa.',
