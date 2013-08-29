@@ -26,5 +26,6 @@
 
 	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
 	<pipeline nom="taches_generales_cron" inclure="ocr_pipelines.php" />
-	
+	<pipeline nom="rechercher_liste_des_champs" inclure="ocr_pipelines.php" />
+
 </paquet>
