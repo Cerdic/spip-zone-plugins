@@ -6,7 +6,7 @@
 	compatibilite="[3.0.12-dev;3.0.*]"
 	logo="prive/themes/spip/images/ocr-64.png"
 	documentation="http://contrib.spip.net/ocr"
-	schema="0.2" 
+	schema="0.3" 
 >
 	<!--
 		Paquet genere le 2013-08-15 15:59:34

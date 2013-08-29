@@ -21,6 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function ocr_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['ocr'] = "longtext DEFAULT '' NOT NULL";
+	$tables_principales['spip_documents']['field']['ocr_analyse'] = "VARCHAR(3) NOT NULL default 'non'";
 	return $tables_principales;
 }
 

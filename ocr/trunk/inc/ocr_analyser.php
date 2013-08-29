@@ -47,6 +47,7 @@ function ocr_analyser($id_document, $dry_run=false) {
 		spip_log('Erreur : '.$erreur, 'ocr');
 		$resultat['info'] = $erreur;
 		$resultat['erreur'] = true;
+		sql_updateq("spip_documents", array('ocr_analyse' => 'err'), "id_document=".intval($id_document));
 	} else  {
 		// on ouvre et on lit le .txt
 		// TODO : comment connaitre l'encoding du fichier ?
@@ -59,12 +60,13 @@ function ocr_analyser($id_document, $dry_run=false) {
 			} else {
 				// on modifie le champ "ocr" du document dans la base
 				spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
-				sql_updateq("spip_documents", array('ocr' => $texte), "id_document=".intval($id_document));
+				sql_updateq("spip_documents", array('ocr' => $texte, 'ocr_analyse' => 'oui'), "id_document=".intval($id_document));
 			}
 			$resultat['success'] = true;
 		} else {
 			$resultat['info'] = _T('ocr:analyser_erreur_fichier_resultat');
 			$resultat['erreur'] = true;
+			sql_updateq("spip_documents", array('ocr_analyse' => 'err'), "id_document=".intval($id_document));
 		}
 	}
 	
