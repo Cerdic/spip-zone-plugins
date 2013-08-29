@@ -281,7 +281,7 @@ function ajax_action_rapide_simple($id, $corps, $button='bouton_valider', $legen
 		. attribut_html(_T($button)).'" /></div>';
 	$corps = $legend?"<fieldset><legend>"._T($legend)."</legend>$corps</fieldset>"
 		:"<div style='$align padding:0.4em;'>$corps</div>";
-	return ($outil || ($outil = _request('outil')) || ($outil = array_shift(explode('|', _request('arg'),2))))
+	return ($outil || ($outil = _request('outil')) || ($outil = reset(explode('|', _request('arg'),2))))
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 		?ajax_action_auteur('action_rapide', $id, 'admin_couteau_suisse', "arg=$outil|description_outil&cmd=descrip#cs_action_rapide",
 			"\n<div>$corps</div>")
@@ -290,7 +290,7 @@ function ajax_action_rapide_simple($id, $corps, $button='bouton_valider', $legen
 
 // bouton d'acualisation pour action_rapide
 function bouton_actualiser_action_rapide($outil='') {
-	return ($outil || ($outil = _request('outil')) || ($outil = array_shift(explode('|', _request('arg'),2))))
+	return ($outil || ($outil = _request('outil')) || ($outil = reset(explode('|', _request('arg'),2))))
 		?ajax_action_auteur('action_rapide', 'actualise', 'admin_couteau_suisse', "arg=$outil|description_outil&cmd=descrip#cs_action_rapide",
 		"\n<div class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
 		. attribut_html(_T('couteauprive:rss_actualiser')).']" /></div>')

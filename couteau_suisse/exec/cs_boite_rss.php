@@ -26,11 +26,8 @@ function exec_cs_boite_rss_dist() {
 	include_spip('action/editer_site');
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
-	if(function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
-	else {
-		$r2 = !is_array($r)?array():array_shift(array_shift(array_shift(array_shift($r))));
-		$c = count($r2);
-	}
+	$c = function_exists('spip_xml_match_nodes')?spip_xml_match_nodes(',^item$,', $r, $r2)
+		:count($r2 = !is_array($r)?array():reset(reset(reset(reset($r)))));
 	if($c) {
 		$r3 = &$r2['item'];
 		$c = count($r3); $p='';

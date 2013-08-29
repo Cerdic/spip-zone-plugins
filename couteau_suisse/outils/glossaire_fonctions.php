@@ -271,7 +271,7 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 	$mots = cs_echappe_balises(_GLOSSAIRE_ECHAPPER, 'cs_rempl_glossaire', $texte, true);
 	if(!count($mots)) return strlen($sep)?'':$mots;
 	$lien = '$v="<a href=\"$v[2]\"';
-	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'array_shift(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
+	$titre = strpos($type,'_unique')===false?'str_replace("<br />"," / ", $v[3])':'reset(explode(_GLOSSAIRE_TITRE_SEP, $v[3]))';
 	switch($type) {
 		case '':return $mots;
 		case 'id_mot':

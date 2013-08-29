@@ -63,7 +63,7 @@ function type_urls_URL_objet_exec() {
 	include_spip('inc/charsets');
 	$titre = charset2unicode($rows[0]['titre']);
 	$info = ' ('._T('couteau:url_verrouillee').')';
-	array_shift($rows); $toutes=$url2.($verrou?$info:'');
+	array_shift($rows); $toutes = $url2.($verrou?$info:'');
 	foreach($rows as $r) $toutes .= '<br/>'.$r['url'].($r['date']>$now?$info:'');
 	//  titre || URL complete || type d'URLs || URL recalculee || URL propre en base || verrou || toutes les URLs trouvees en base
 	echo $titre.'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2.'||'.($verrou?'oui':'non').'||'.$toutes;
