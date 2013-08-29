@@ -17,6 +17,13 @@ function ocr_taches_generales_cron($taches_generales) {
 
 function ocr_rechercher_liste_des_champs($tables){
 	$tables['document']['ocr'] = 1;
+	return $tables;
+}
+
+function ocr_rechercher_liste_des_jointures($tables){
+	$tables['article']['document']['ocr'] = 1;
+	$tables['rubrique']['document']['ocr'] = 1;
+	$tables['breve']['document']['ocr'] = 1;
 	spip_log($tables ,'ocr');
 	return $tables;
 }

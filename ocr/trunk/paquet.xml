@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.1.0"
 	etat="dev"
-	compatibilite="[3.0.12-dev;3.0.*]"
+	compatibilite="[3.0.11;]"
 	logo="prive/themes/spip/images/ocr-64.png"
 	documentation="http://contrib.spip.net/ocr"
 	schema="0.3" 
@@ -27,5 +27,6 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
 	<pipeline nom="taches_generales_cron" inclure="ocr_pipelines.php" />
 	<pipeline nom="rechercher_liste_des_champs" inclure="ocr_pipelines.php" />
+	<pipeline nom="rechercher_liste_des_jointures" inclure="ocr_pipelines.php" />
 
 </paquet>
