@@ -1,6 +1,5 @@
 <traduction module="multilang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilang/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/multilang?lang_cible=en">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/multilang?lang_cible=es">
