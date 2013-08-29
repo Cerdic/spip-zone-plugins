@@ -43,10 +43,11 @@ function formulaires_declarer_serveur_boussoles_traiter_dist() {
 	}
 	else if (isset($tableau['name'])
 		AND ($tableau['name'] == 'erreur')) {
-		$message = _T("boussole:message_nok_{$tableau['attributes']['id']}", array('serveur' => $_serveur));
+		$serveur = $tableau['attributes']['serveur'];
+		$message = _T("boussole:message_nok_{$tableau['attributes']['id']}", array('serveur' => $serveur));
 	}
 	else {
-		$message = _T('boussole:message_nok_reponse_invalide', array('serveur' => $_serveur));
+		$message = _T('boussole:message_nok_reponse_invalide', array('serveur' => $url_serveur));
 	}
 
 	// Determination des messages de retour

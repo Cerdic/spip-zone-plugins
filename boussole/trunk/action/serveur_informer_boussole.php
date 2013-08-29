@@ -16,6 +16,7 @@ function action_serveur_informer_boussole_dist(){
 	// Récupération de l'activité du serveur
 	include_spip('inc/config');
 	$serveur_actif = lire_config('boussole/serveur/actif') == 'on';
+	$nom_serveur = lire_config('boussole/serveur/nom');
 
 	if ($serveur_actif AND $alias_boussole) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
@@ -50,7 +51,7 @@ function action_serveur_informer_boussole_dist(){
 		}
 
 		// Envoi du fichier ou de l'erreur
-		$page = recuperer_fond('actionner', array('fichier' => $fichier_xml, 'erreur' => $erreur));
+		$page = recuperer_fond('actionner', array('fichier' => $fichier_xml, 'erreur' => $erreur, 'serveur' => $nom_serveur));
 		echo $page;
 	}
 }

@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/deboussoler');
+include_spip('inc/client');
 include_spip('inc/actions');
 
 function formulaires_editer_boussole_charger($aka_boussole){

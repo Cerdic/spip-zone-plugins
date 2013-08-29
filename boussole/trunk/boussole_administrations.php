@@ -55,7 +55,7 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 
 	// Quelque que soit l'action en cours, on ajoute ou on met à jour systématiquement la boussole SPIP.
-	include_spip('inc/deboussoler');
+	include_spip('inc/client');
 	list($ok, $message) = boussole_ajouter('spip', 'spip');
 	if (!$ok)
 		spip_log("Administrations - Erreur lors de l'ajout de la boussole spip : " . $message, 'boussole' . _LOG_ERREUR);
@@ -107,7 +107,7 @@ function boussole_vider_tables($nom_meta_base_version) {
  * @return void
  */
 function maj02() {
-	include_spip('inc/deboussoler');
+	include_spip('inc/client');
 
 	$akas_boussole = sql_allfetsel('aka_boussole', 'spip_boussoles', array(), 'aka_boussole');
 	if ($akas_boussole) {

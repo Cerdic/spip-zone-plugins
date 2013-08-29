@@ -26,7 +26,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 	list($boussole, $serveur) = explode(':', $choix);
 
 	// On insere la boussole dans la base
-	include_spip('inc/deboussoler');
+	include_spip('inc/client');
 	list($ok, $message) = boussole_ajouter($boussole, $serveur);
 		
 	// Determination des messages de retour

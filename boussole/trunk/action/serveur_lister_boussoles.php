@@ -14,6 +14,7 @@ function action_serveur_lister_boussoles_dist(){
 	// Récupération de l'activité du serveur
 	include_spip('inc/config');
 	$serveur_actif = lire_config('boussole/serveur/actif') == 'on';
+	$nom_serveur = lire_config('boussole/serveur/nom');
 
 	if ($serveur_actif) {
 		// Acquerir la liste des boussoles prêtes à être diffusées
@@ -40,7 +41,7 @@ function action_serveur_lister_boussoles_dist(){
 			spip_log("Aucune boussole disponible sur ce serveur", 'boussole' . _LOG_ERREUR);
 		}
 
-		$page = recuperer_fond('actionner', array('fichier' => $fichier_liste, 'erreur' => $erreur));
+		$page = recuperer_fond('actionner', array('fichier' => $fichier_liste, 'erreur' => $erreur, 'serveur' => $nom_serveur));
 		echo $page;
 	}
 }

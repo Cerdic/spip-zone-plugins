@@ -22,7 +22,7 @@ function action_client_supprimer_boussole_dist(){
 
 	// Suppression de la boussole connue par son alias
 	if ($alias) {
-		include_spip('inc/deboussoler');
+		include_spip('inc/client');
 		boussole_supprimer($alias);
 		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, 'boussole' . _LOG_INFO);
 	}

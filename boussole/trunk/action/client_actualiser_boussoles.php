@@ -22,7 +22,7 @@ function action_client_actualiser_boussoles_dist(){
 
 	// Actualisation de toutes les boussoles installées sur le site client
 	if ($mode === 'tout') {
-		include_spip('inc/deboussoler');
+		include_spip('inc/client');
 		boussole_actualiser_boussoles();
 	}
 }

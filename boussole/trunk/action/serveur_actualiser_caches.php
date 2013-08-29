@@ -22,7 +22,7 @@ function action_serveur_actualiser_caches_dist(){
 
 	// Actualisation de tous les caches du serveur
 	if ($mode === 'tout') {
-		include_spip('inc/cacher');
+		include_spip('inc/serveur');
 		boussole_actualiser_caches();
 	}
 }

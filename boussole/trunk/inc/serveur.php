@@ -74,7 +74,7 @@ function boussole_cacher_xml($alias, $prefixe_plugin='') {
 	}
 	elseif ($fichier_xml = find_in_path("boussole-${alias}.xml")) {
 		// Validation du fichier XML source (boussole.dtd)
-		include_spip('inc/deboussoler');
+		include_spip('inc/client');
 		if (!boussole_valider_xml($fichier_xml, $erreur))
 			spip_log("XML source non conforme (alias = $alias) : " . var_export($erreur['detail'], true), 'boussole' . _LOG_ERREUR);
 

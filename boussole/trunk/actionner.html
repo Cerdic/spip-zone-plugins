@@ -2,6 +2,6 @@
 [(#ENV{erreur}|non)
 	[(#SET{contenu, #INCLURE{#ENV{fichier}|copie_locale{modif}}})]
 ][(#ENV{erreur}|oui)
-	[(#SET{contenu, [<erreur id="(#ENV{erreur})" />]})]
+	[(#SET{contenu, [<erreur id="(#ENV{erreur})"[ serveur="(#ENV{serveur})"] />]})]
 ][(#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET})
 ]#GET{contenu}

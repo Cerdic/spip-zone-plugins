@@ -33,7 +33,7 @@ function formulaires_declarer_boussole_manuelle_traiter_dist() {
 		ecrire_config('boussole/serveur/boussoles_disponibles', $boussoles_manuelles);
 
 		// Mise à jour des caches en conséquence
-		include_spip('inc/cacher');
+		include_spip('inc/serveur');
 		boussole_actualiser_caches();
 
 		$ok = true;

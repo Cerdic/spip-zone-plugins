@@ -37,7 +37,7 @@ function action_serveur_retirer_boussole_dist(){
 			ecrire_config('boussole/serveur/boussoles_disponibles', $boussoles_manuelles);
 
 			// Mise à jour des caches en conséquence
-			include_spip('inc/cacher');
+			include_spip('inc/serveur');
 			boussole_actualiser_caches();
 
 			spip_log("ACTION RETRAIT BOUSSOLE MANUELLE : alias = ". $alias_boussole, 'boussole' . _LOG_INFO);
