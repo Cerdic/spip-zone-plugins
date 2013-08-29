@@ -3,10 +3,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Installation du schéma de données propre au plugin en tenant compte des évolutions
+ * Installation du schéma de données propre au plugin en tenant compte des évolutions.
+ *
+ * Le schéma comprend des tables en BDD :
+ * - spip_boussoles,
+ * - spip_boussoles_extras,
+ * et des variables de configuration
  *
  * @param $nom_meta_base_version
+ * 		Nom de la meta dans laquelle sera rangée la version du schéma
  * @param $version_cible
+ * 		Version du schéma de données en fin d'upgrade
  */
 function boussole_upgrade($nom_meta_base_version, $version_cible){
 
@@ -63,6 +70,7 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
  * Suppression de l'ensemble du schéma de données propre au plugin
  *
  * @param $nom_meta_base_version
+ * 		Nom de la meta dans laquelle sera rangée la version du schéma
  */
 function boussole_vider_tables($nom_meta_base_version) {
 	// On nettoie les metas de mises a jour des boussoles
@@ -91,10 +99,12 @@ function boussole_vider_tables($nom_meta_base_version) {
 
 
 /**
- * Migration du schéma 0.1 au 0.2
- * Suppression des boussoles autres que la boussole spip car on ne peut pas les mettre à jour,
- * leur serveur n'étant pas connu
+ * Migration du schéma 0.1 au 0.2.
  *
+ * Suppression des boussoles autres que la boussole spip car on ne peut pas les mettre à jour,
+ * leur serveur n'étant pas connu.
+ *
+ * @return void
  */
 function maj02() {
 	include_spip('inc/deboussoler');
@@ -111,10 +121,17 @@ function maj02() {
 
 
 /**
- * Migration du schéma 0.2 au 0.3
+ * Migration du schéma 0.2 au 0.3.
+ *
  * Les globales $serveur_boussoles_disponibles et $client_serveurs_disponibles sont
  * transférées dans des variables de configuration
  *
+ * @param array
+ * 		Configuration par défaut supplémentaire ajoutée pour ce schéma. Si le site a
+ * 		déjà personnalisé les globales la configuration par défaut sera écrasée par
+ * 		celle des globales migrées.
+ *
+ * @return void
  */
 function maj03($defaut_config) {
 
@@ -154,36 +171,37 @@ function maj03($defaut_config) {
 	include_spip('inc/config');
 	ecrire_config('boussole', $config);
 
-	spip_log('Maj 0.3 des données du plugin','boussole' . _LOG_INFO);
+	spip_log('Maj 0.3 des données du plugin : ' . serialize(lire_config('boussole')),'boussole' . _LOG_INFO);
 }
 
 
 /**
  * Migration du schéma 0.3 au 0.4.
+ *
  * La constante _BOUSSOLE_ALIAS_SERVEUR est transformée en deux variables de configuration,
  * l'une pour l'activité de la fonction serveur et l'autre pour le nom du serveur.
  *
+ * @param array
+ * 		Configuration par défaut supplémentaire ajoutée pour ce schéma. Si le site est
+ * 		déjà un serveur, la configuration par défaut sera écrasée par celle de la constante migrée.
+ *
+ * @return void
  */
 function maj04($defaut_config) {
 
-	// On initialise la configuration ajoutée avec celle par défaut
-	$config_04 = $defaut_config;
-
-	// Migration des éventuels serveurs configurés autres que "spip"
-	if (_BOUSSOLE_ALIAS_SERVEUR) {
-		// On met à jour l'activité et le nom du serveur
-		$config_04['serveur']['actif'] = 'on';
-		$config_04['serveur']['nom'] = _BOUSSOLE_ALIAS_SERVEUR;
-	}
-
-	// Mise à jour de la configuration migrée.
-	// On la merge avec la configuration existante.
+	// Initialisation de la configuration migrée avec la configuration existante.
 	include_spip('inc/config');
-	$config_03 = lire_config('boussole');
-	$config_04 = array($config_03, $config_04);
+	$config = lire_config('boussole');
+
+	// Migration de l'éventuel serveur installé sur le site
+	// -- On met à jour l'activité et le nom du serveur
+	$config['serveur']['actif'] = defined(_BOUSSOLE_ALIAS_SERVEUR) ? 'on' : $defaut_config['serveur']['actif'];
+	$config['serveur']['nom'] = defined(_BOUSSOLE_ALIAS_SERVEUR) ? _BOUSSOLE_ALIAS_SERVEUR : $defaut_config['serveur']['nom'];
+
+	// Mise à jour en BDD de la confguration migrée
 	ecrire_config('boussole', $config);
 
-	spip_log('Maj 0.4 des données du plugin','boussole' . _LOG_INFO);
+	spip_log('Maj 0.4 des données du plugin : ' . serialize(lire_config('boussole')),'boussole' . _LOG_INFO);
 }
 
 ?>
