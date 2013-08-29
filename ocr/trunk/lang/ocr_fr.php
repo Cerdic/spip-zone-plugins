@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle supérieur à une seconde.',
 	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents à traiter par itération supérieur à un.',
 	'erreur_ocr_bin' => 'Vous devez renseigner le binaire à utiliser pour la reconnaissance de caractères',
+	'erreur_taille_texte_max' => 'Vous devez indiquer un nombre de caractères max supérieur à un.',
 	'erreur_verifier_configuration' => 'Il y a des erreurs de configuration.',
 	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.',
 	
@@ -47,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ocr_titre' => 'ocr',
 
 	// T
+	'taille_texte_max' => 'Limite de caractères dans le texte extrait',
 	'test_label_id_document' => 'Document à analyser',
 	'test_label_resultat' => 'Résultat de l\'analyse',
 	'test_erreur_id_document' => 'Numéro de document non valide.',

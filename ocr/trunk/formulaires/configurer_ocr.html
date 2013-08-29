@@ -25,6 +25,11 @@
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
 						]<input type="text" class="text" name="nb_docs" id="nb_docs" value="[(#ENV{nb_docs})]" />
 					</li>
+					<li class="editer ocr_taille_texte_max[ (#ENV**{erreurs}|table_valeur{taille_texte_max}|oui)erreur]">
+						<label for="taille_texte_max"><:ocr:taille_texte_max:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{taille_texte_max})</span>
+						]<input type="text" class="text" name="taille_texte_max" id="taille_texte_max" value="[(#ENV{taille_texte_max})]" />
+					</li>
 					<li class="editer ocr_ocr_bin[ (#ENV**{erreurs}|table_valeur{ocr_bin}|oui)erreur]">
 						<label for="ocr_bin"><:ocr:indiquer_chemin_bin:> .pdf</label>
 						[(#ENV{ocr_bin_readonly}|oui)<p class="explication"><:ocr:explication_option_readonly:></p>][
