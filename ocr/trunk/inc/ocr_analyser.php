@@ -25,6 +25,9 @@ function ocr_analyser($id_document, $dry_run=false) {
 	}
 	$opt = $config['ocr_opt'] ? $config['ocr_opt'] : '';
 
+	// Ne retenir que les 50 000 premiers caracteres (ou la valeur choisie)
+	$taille_texte_max = $config['taille_texte_max'] ? $config['taille_texte_max'] : @define('_OCR_TAILLE_TEXTE_MAX',50000);
+	
 	$document = ocr_document($id_document);
 	spip_log($document, 'ocr');
 
@@ -55,6 +58,7 @@ function ocr_analyser($id_document, $dry_run=false) {
 		if (file_exists($nouveaufichier) && is_readable($nouveaufichier)) {
 			$texte = file_get_contents($nouveaufichier);
 			unlink($nouveaufichier);
+			$texte = substr($texte, 0, $taille_texte_max);
 			if ($dry_run) {
 				$resultat['info'] = $texte;
 			} else {
