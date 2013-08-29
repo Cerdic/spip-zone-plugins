@@ -2,15 +2,24 @@
 /**
  * Ce fichier contient les déclarations des tables supplémentaires créées par le plugin.
  *
- * Les tables sont :
- * - spip_boussoles, qui contient les éléments constitutifs de toutes les boussoles;
- * - spip_boussoles_extras, qui contient les traductions de ces éléments.
- *
  * @package SPIP\BOUSSOLE\Schema\Declaration
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Pipeline de déclaration des tables de la base de données SPIP. Le plugin Boussole
+ * déclare deux nouvelles tables qui sont :
+ * - spip_boussoles, qui contient les éléments constitutifs de toutes les boussoles;
+ * - spip_boussoles_extras, qui contient les traductions de ces éléments.
+ *
+ * @pipeline declarer_tables_principales
+ *
+ * @param array $tables_principales
+ *		Tableau global des tables de la base de données
+ * @return array
+ *		Tableau fourni en entrée et mis à jour avec les nouvelles déclarations
+ */
 function boussole_declarer_tables_principales($tables_principales) {
 
 	// Tables des boussoles : spip_boussoles
@@ -55,6 +64,16 @@ function boussole_declarer_tables_principales($tables_principales) {
 }
 
 
+/**
+ * Pipeline xxxx
+ *
+ * @pipeline declarer_tables_interfaces
+ *
+ * @param array $interface
+ * 		xxxx
+ * @return array
+ *		Tableau fourni en entrée et mis à jour avec les nouvelles déclarations
+ */
 function boussole_declarer_tables_interfaces($interface) {
 	// Les tables
 	$interface['table_des_tables']['boussoles'] = 'boussoles';
