@@ -62,6 +62,7 @@ function ocr_analyser($id_document, $dry_run=false) {
 	if (!$dry_run) {
 		// on modifie le champ "ocr" du document dans la base
 		spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
+		sql_updateq("spip_documents", array('ocr' => $resultat['texte']), "id_document=".intval($id_document));
 	}
 	
 	return $resultat;
