@@ -68,7 +68,7 @@ function boites_privees_affiche_milieu($flux){
 
 function boites_privees_affiche_droite($flux) {
 	switch($flux['args']['exec']) {
-		case 'auteurs':case 'auteur_infos':case 'auteurs_edit': 
+		case 'auteur':case 'auteurs':/* Pour SPIP < v3 : */case 'auteur_infos':case 'auteurs_edit': 
 			$flux['data'] .= cs_infos_webmasters() . cs_infos_connection();	break;
 		case 'admin_couteau_suisse':
 			$flux['data'] .= cs_boite_rss(); break;
