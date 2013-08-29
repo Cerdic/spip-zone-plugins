@@ -109,7 +109,7 @@ function ocr_document($id_document) {
     $fichier = sql_fetsel(
         'fichier,extension',
         'spip_documents',
-        'id_document='.$id_document
+        'id_document='.intval($id_document)
     );
 
     //chemin relatif du fichier
