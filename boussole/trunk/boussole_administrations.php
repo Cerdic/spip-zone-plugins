@@ -1,19 +1,28 @@
 <?php
+/**
+ * Ce fichier contient les fonctions de création, de mise à jour et de suppression
+ * du schéma de données propres au plugin (tables de la base de données et configuration meta)
+ *
+ * @package SPIP\BOUSSOLE\Schema\Installation
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 /**
- * Installation du schéma de données propre au plugin en tenant compte des évolutions.
+ * Installation du schéma de données propre au plugin et gestion des migrations suivant
+ * les évolutions.
  *
- * Le schéma comprend des tables en BDD :
- * - spip_boussoles,
- * - spip_boussoles_extras,
- * et des variables de configuration
+ * Le schéma comprend des tables en BDD et des variables de configuration
  *
- * @param $nom_meta_base_version
+ * @api
+ *
+ * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma
- * @param $version_cible
+ * @param string $version_cible
  * 		Version du schéma de données en fin d'upgrade
+ *
+ * @return void
  */
 function boussole_upgrade($nom_meta_base_version, $version_cible){
 
@@ -69,8 +78,12 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 /**
  * Suppression de l'ensemble du schéma de données propre au plugin
  *
- * @param $nom_meta_base_version
+ * @api
+ *
+ * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma
+ *
+ * @return void
  */
 function boussole_vider_tables($nom_meta_base_version) {
 	// On nettoie les metas de mises a jour des boussoles
@@ -126,7 +139,7 @@ function maj02() {
  * Les globales $serveur_boussoles_disponibles et $client_serveurs_disponibles sont
  * transférées dans des variables de configuration
  *
- * @param array
+ * @param array $defaut_config
  * 		Configuration par défaut supplémentaire ajoutée pour ce schéma. Si le site a
  * 		déjà personnalisé les globales la configuration par défaut sera écrasée par
  * 		celle des globales migrées.
@@ -181,7 +194,7 @@ function maj03($defaut_config) {
  * La constante _BOUSSOLE_ALIAS_SERVEUR est transformée en deux variables de configuration,
  * l'une pour l'activité de la fonction serveur et l'autre pour le nom du serveur.
  *
- * @param array
+ * @param array $defaut_config
  * 		Configuration par défaut supplémentaire ajoutée pour ce schéma. Si le site est
  * 		déjà un serveur, la configuration par défaut sera écrasée par celle de la constante migrée.
  *

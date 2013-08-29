@@ -1,4 +1,13 @@
 <?php
+/**
+ * Ce fichier contient les déclarations des tables supplémentaires créées par le plugin.
+ *
+ * Les tables sont :
+ * - spip_boussoles, qui contient les éléments constitutifs de toutes les boussoles;
+ * - spip_boussoles_extras, qui contient les traductions de ces éléments.
+ *
+ * @package SPIP\BOUSSOLE\Schema\Declaration
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
