@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Page of a compass detailled information.',
 
 	// I
+	'info_activite_serveur' => 'Par défaut, la fonction serveur du plugin n\'est pas active. Vous pouvez l\'activer en choisissant l\'option adéquate ci-dessous et en lui affectant un nom.', # NEW
 	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display them in your public pages.<br />If the compass already exists, this form allows to update it while keeping the same display configuration.',
 	'info_ajouter_serveur' => 'This form allows you to add a compasses server. By default, the "spip" server is always available on customer websites. The list of available servers is displayed above and allows you also to remove a configured server.', # MODIF
 	'info_alias_boussole_manuelle' => 'Saisissez l\'alias de la boussole manuelle telle que définie dans son fichier XML.', # NEW
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucun_hebergement' => 'Aucune boussole n\'est encore hébergée sur ce serveur. Utilisez le formulaire ci-dessous pour déclarer une boussole manuelle ou activez un plugin de boussole sur ce site.', # NEW
 	'info_liste_aucun_serveur' => 'No server has been configured to the customer site.',
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
+	'info_nom_serveur' => 'Saisissez le nom que vous souhaitez donner à votre serveur de boussoles. Le nom «spip» est réservé et ne peut donc pas être utilisé.', # NEW
 	'info_site_boussole' => 'This website belongs to the compass:',
 	'info_site_boussoles' => 'This website belongs to the compasses:',
 	'info_url_serveur' => 'Type in the URL of the server to add it to the list.', # MODIF
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_boussole' => '@nb@ compass',
 	'label_1_site' => '@nb@ websites',
 	'label_a_class' => 'Class of the anchor including the logo',
+	'label_activite_serveur' => 'Activer la fonction serveur ?', # NEW
 	'label_actualise_le' => 'Updated on',
 	'label_affiche' => 'Displayed?',
 	'label_afficher_descriptif' => 'Display the websites description?',
@@ -86,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_boussoles' => '@nb@ compasses',
 	'label_n_sites' => '@nb@ websites',
 	'label_nom' => 'Name',
+	'label_nom_serveur' => 'Nom du serveur', # NEW
 	'label_p_class' => 'Paragraph class including the description',
 	'label_sepia' => 'Sepia color code (without #)',
 	'label_slogan' => 'Slogan',
@@ -111,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_cache_liste_indisponible' => 'File cache of hosted compasses list is not available on server "@serveur@".', # MODIF
 	'message_nok_declaration_boussole_xml' => 'La boussole manuelle « @boussole@ » ne peut pas être déclarée car son fichier XML est introuvable.', # NEW
 	'message_nok_ecriture_bdd' => 'Error when writing in database (table @table@)',
+	'message_nok_nom_serveur_spip' => 'Le nom de serveur « spip » est réservé. Choisissez en un autre.', # NEW
 	'message_nok_reponse_invalide' => 'Answer of server "@serveur@" is malformed.', # MODIF
 	'message_ok_boussole_actualisee' => 'The compass "@fichier@" has been updated.', # MODIF
 	'message_ok_boussole_ajoutee' => 'The compass "@fichier@" has been added.', # MODIF
@@ -124,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_client' => 'Client',
+	'onglet_configuration' => 'Configuration du plugin', # NEW
 	'onglet_serveur' => 'Server',
 	'option_aucune_description' => 'No description',
 	'option_descriptif_site' => 'Website description',
@@ -138,11 +144,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Add or update a compass',
 	'titre_form_ajouter_serveur' => 'Add a compasses server', # MODIF
 	'titre_form_boussole_manuelle' => 'Déclarer une boussole manuelle', # NEW
+	'titre_form_configurer_serveur' => 'Configurer la fonction serveur', # NEW
 	'titre_formulaire_configurer' => 'Compass display configuration',
 	'titre_liste_boussoles' => 'List of compasses available for display',
 	'titre_liste_caches' => 'List of file caches for hosted compasses',
 	'titre_liste_serveurs' => 'List of available servers', # MODIF
-	'titre_page_boussole' => 'Compass management'
+	'titre_page_boussole' => 'Compass management',
+	'titre_page_configurer' => 'Configuration du plugin Boussole' # NEW
 );
 
 ?>

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Página de información detallada de una brújula',
 
 	// I
+	'info_activite_serveur' => 'Par défaut, la fonction serveur du plugin n\'est pas active. Vous pouvez l\'activer en choisissant l\'option adéquate ci-dessous et en lui affectant un nom.', # NEW
 	'info_ajouter_boussole' => 'Añadiendo las brújulas a su base de datos, tendrá la posibilidad de utilizar los modelos proporcionados para mostrarlos en sus páginas públicas.<br />Si la brújula ya existe este formulario permitirá actualizarla conservando la configuración de la visualización. ',
 	'info_ajouter_serveur' => 'Este formulario le permite añadir un servidor de brújulas. Por defecto, el servidor «spip» está siempre disponible en los sitios clientes. La lista de servidores disponibles se muestra a continuación y permite asismismo retirar un servidor configurado.', # MODIF
 	'info_alias_boussole_manuelle' => 'Saisissez l\'alias de la boussole manuelle telle que définie dans son fichier XML.', # NEW
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucun_hebergement' => 'Aucune boussole n\'est encore hébergée sur ce serveur. Utilisez le formulaire ci-dessous pour déclarer une boussole manuelle ou activez un plugin de boussole sur ce site.', # NEW
 	'info_liste_aucun_serveur' => 'Ningún servidor está todavía configurado para el sitio cliente.',
 	'info_liste_aucune_boussole' => 'Ninguna brújula se ha cargado aún en su base de datos. Utilice el siguiente formulario para añadir una.',
+	'info_nom_serveur' => 'Saisissez le nom que vous souhaitez donner à votre serveur de boussoles. Le nom «spip» est réservé et ne peut donc pas être utilisé.', # NEW
 	'info_site_boussole' => 'Este sitio forma parte de la brújula:',
 	'info_site_boussoles' => 'Este sitio forma parte de las brújulas:',
 	'info_url_serveur' => 'Introduzca la URL del servidor para añadirla a la lista.', # MODIF
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_boussole' => '@nb@ brújula',
 	'label_1_site' => '@nb@ sitio',
 	'label_a_class' => 'Clase de anclaje englobando el logo',
+	'label_activite_serveur' => 'Activer la fonction serveur ?', # NEW
 	'label_actualise_le' => 'Actualizada el',
 	'label_affiche' => '¿Mostrado?',
 	'label_afficher_descriptif' => '¿Mostrar la descripción de los sitios?',
@@ -86,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_boussoles' => '@nb@ brújulas',
 	'label_n_sites' => '@nb@ sitios',
 	'label_nom' => 'Nombre',
+	'label_nom_serveur' => 'Nom du serveur', # NEW
 	'label_p_class' => 'Clase de párrafo englobando la descripción',
 	'label_sepia' => 'Código del color sepia (sin #)',
 	'label_slogan' => 'Eslogan',
@@ -111,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_cache_liste_indisponible' => 'El archivo caché de la lista de brújulas no se está disponible en el servidor «@serveur@».', # MODIF
 	'message_nok_declaration_boussole_xml' => 'La boussole manuelle « @boussole@ » ne peut pas être déclarée car son fichier XML est introuvable.', # NEW
 	'message_nok_ecriture_bdd' => 'Error de escritura en la base de datos (tabla @table@)',
+	'message_nok_nom_serveur_spip' => 'Le nom de serveur « spip » est réservé. Choisissez en un autre.', # NEW
 	'message_nok_reponse_invalide' => 'La respuesta del servidor «@serveur@» está mal formada.', # MODIF
 	'message_ok_boussole_actualisee' => 'La brújula «@fichier@» ha sido actualizada. ', # MODIF
 	'message_ok_boussole_ajoutee' => 'La brújula «@fichier@» ha sido añadida. ', # MODIF
@@ -124,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_client' => 'Función Cliente',
+	'onglet_configuration' => 'Configuration du plugin', # NEW
 	'onglet_serveur' => 'Función Servidor',
 	'option_aucune_description' => 'Ninguna descripción',
 	'option_descriptif_site' => 'Descriptivo del sitio',
@@ -138,11 +144,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Añadir o actualizar una brújula',
 	'titre_form_ajouter_serveur' => 'Añadir un servidor de brújulas', # MODIF
 	'titre_form_boussole_manuelle' => 'Déclarer une boussole manuelle', # NEW
+	'titre_form_configurer_serveur' => 'Configurer la fonction serveur', # NEW
 	'titre_formulaire_configurer' => 'Configuración de la visualización de la brújula',
 	'titre_liste_boussoles' => 'Lista de las brújulas disponibles a la visualización',
 	'titre_liste_caches' => 'Lista de brújulas alojadas',
 	'titre_liste_serveurs' => 'Lista de servidores disponibles', # MODIF
-	'titre_page_boussole' => 'Gestión de las brújulas'
+	'titre_page_boussole' => 'Gestión de las brújulas',
+	'titre_page_configurer' => 'Configuration du plugin Boussole' # NEW
 );
 
 ?>

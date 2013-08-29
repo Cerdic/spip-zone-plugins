@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Stránka s podrobnými údajmi o kompase',
 
 	// I
+	'info_activite_serveur' => 'Par défaut, la fonction serveur du plugin n\'est pas active. Vous pouvez l\'activer en choisissant l\'option adéquate ci-dessous et en lui affectant un nom.', # NEW
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
 	'info_ajouter_serveur' => 'Ce formulaire vous permet d\'ajouter un serveur de boussoles. Par défaut, le serveur «spip» est toujours disponible sur les sites client. La liste des serveurs disponibles est affichée ci-dessus et permet aussi de retirer un serveur configuré.', # NEW
 	'info_alias_boussole_manuelle' => 'Saisissez l\'alias de la boussole manuelle telle que définie dans son fichier XML.', # NEW
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_liste_aucun_hebergement' => 'Aucune boussole n\'est encore hébergée sur ce serveur. Utilisez le formulaire ci-dessous pour déclarer une boussole manuelle ou activez un plugin de boussole sur ce site.', # NEW
 	'info_liste_aucun_serveur' => 'Aucun serveur n\'a encore été configuré pour le site client.', # NEW
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
+	'info_nom_serveur' => 'Saisissez le nom que vous souhaitez donner à votre serveur de boussoles. Le nom «spip» est réservé et ne peut donc pas être utilisé.', # NEW
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
 	'info_url_serveur' => 'Saisissez l\'URL du serveur pour l\'ajouter à la liste.', # NEW
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_boussole' => '@nb@ kompas',
 	'label_1_site' => '@nb@ stránka',
 	'label_a_class' => 'Trieda so záložkou (kotvou) loga',
+	'label_activite_serveur' => 'Activer la fonction serveur ?', # NEW
 	'label_actualise_le' => 'Aktualizovaný',
 	'label_affiche' => 'Zobrazí sa?',
 	'label_afficher_descriptif' => 'Zobraziť opisy stránok?',
@@ -86,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_n_boussoles' => '@nb@ kompasov',
 	'label_n_sites' => '@nb@ stránok',
 	'label_nom' => 'Názov',
+	'label_nom_serveur' => 'Nom du serveur', # NEW
 	'label_p_class' => 'Trieda odseku pri opise',
 	'label_sepia' => 'Kód sépiovej farby (sans #)',
 	'label_slogan' => 'Slogan',
@@ -112,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_declaration_boussole_xml' => 'La boussole manuelle « @boussole@ » ne peut pas être déclarée car son fichier XML est introuvable.', # NEW
 	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy
 (tabuľka @table@)', # MODIF
+	'message_nok_nom_serveur_spip' => 'Le nom de serveur « spip » est réservé. Choisissez en un autre.', # NEW
 	'message_nok_reponse_invalide' => 'La réponse du serveur «@serveur@» est mal formée.', # NEW
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.', # MODIF
 	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.', # MODIF
@@ -125,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_client' => 'Fonction Client', # NEW
+	'onglet_configuration' => 'Configuration du plugin', # NEW
 	'onglet_serveur' => 'Fonction Serveur', # NEW
 	'option_aucune_description' => 'Žiaden opis',
 	'option_descriptif_site' => 'Opis stránky',
@@ -139,11 +145,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
 	'titre_form_ajouter_serveur' => 'Ajouter un serveur de boussoles', # NEW
 	'titre_form_boussole_manuelle' => 'Déclarer une boussole manuelle', # NEW
+	'titre_form_configurer_serveur' => 'Configurer la fonction serveur', # NEW
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
 	'titre_liste_boussoles' => 'Zoznam dostupných kompasov', # MODIF
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées', # NEW
 	'titre_liste_serveurs' => 'Liste des serveurs disponibles', # NEW
-	'titre_page_boussole' => 'Riadenie kompasov'
+	'titre_page_boussole' => 'Riadenie kompasov',
+	'titre_page_configurer' => 'Configuration du plugin Boussole' # NEW
 );
 
 ?>

@@ -113,8 +113,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_cache_liste_indisponible' => 'Le fichier cache de la liste des boussoles n\'est pas disponible sur le serveur « @serveur@ ».',
 	'message_nok_declaration_boussole_xml' => 'La boussole manuelle « @boussole@ » ne peut pas être déclarée car son fichier XML est introuvable.',
 	'message_nok_ecriture_bdd' => 'Erreur d\'écriture en base de données (table @table@).',
-	'message_nok_reponse_invalide' => 'La réponse du serveur « @serveur@ » est mal formée.',
 	'message_nok_nom_serveur_spip' => 'Le nom de serveur « spip » est réservé. Choisissez en un autre.',
+	'message_nok_reponse_invalide' => 'La réponse du serveur « @serveur@ » est mal formée.',
 	'message_ok_boussole_actualisee' => 'La boussole « @fichier@ » a été mise à jour.',
 	'message_ok_boussole_ajoutee' => 'La boussole « @fichier@ » a été ajoutée.',
 	'message_ok_boussole_manuelle_ajoutee' => 'La boussole manuelle « @boussole@ » a été déclarée au serveur et les caches ont été mis à jour.',
@@ -127,8 +127,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_client' => 'Fonction Client',
-	'onglet_serveur' => 'Fonction Serveur',
 	'onglet_configuration' => 'Configuration du plugin',
+	'onglet_serveur' => 'Fonction Serveur',
 	'option_aucune_description' => 'Aucune description',
 	'option_descriptif_site' => 'Descriptif du site',
 	'option_nom_site' => 'Nom du site',
