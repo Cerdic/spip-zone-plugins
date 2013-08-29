@@ -27,12 +27,12 @@ function formulaires_tester_ocr_traiter_dist(){
 	if ($resultat['erreur']){
 		return array(
 			"editable" => true,
-			"message_erreur" => _T('ocr:test_erreur_regarder_logs',array('message'=>$resultat['erreur'])),
+			"message_erreur" => _T('ocr:test_erreur_regarder_logs',array('message'=>$resultat['info'])),
 		);
 	}
 	
 	// envoi à la fonction charger
-	set_request('resultat', $resultat['texte']?$resultat['texte']:' ');
+	set_request('resultat', $resultat['info']?$resultat['info']:' ');
 	
 	// message
 	return array(

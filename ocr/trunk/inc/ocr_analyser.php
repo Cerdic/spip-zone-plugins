@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function ocr_analyser($id_document, $dry_run=false) {
 	spip_log('Analyse OCR du document '.$id_document, 'ocr');
-
+	
 	include_spip('inc/config');
 	$config = lire_config('ocr',array());
 	if ($config['ocr_bin']) {
@@ -19,19 +19,20 @@ function ocr_analyser($id_document, $dry_run=false) {
 	} else {
 		// TODO : essayer de trouver tout seul l'exécutable
 		spip_log('Erreur analyse OCR : Il faut specifier l\'exécutable dans le panneau de configuration');
-		$resultat['erreur'] = _T('ocr:analyser_erreur_executable_introuvable');
+		$resultat['info'] = _T('ocr:analyser_erreur_executable_introuvable');
+		$resultat['erreur'] = true;
 		return $resultat;
 	}
 	$opt = $config['ocr_opt'] ? $config['ocr_opt'] : '';
 
-	$resultat = array('texte'=>'','erreur'=>'');
 	$document = ocr_document($id_document);
 	spip_log($document, 'ocr');
 
 	$fichier = $document['fichier'];
 
 	if (!$fichier) {
-		$resultat['erreur'] = _T('ocr:analyser_erreur_document_inexistant');
+		$resultat['info'] = _T('ocr:analyser_erreur_document_inexistant');
+		$resultat['erreur'] = true;
 		return $resultat;
 	}
 	
@@ -40,11 +41,12 @@ function ocr_analyser($id_document, $dry_run=false) {
 	$cmd = $bin.$options.' '.$fichier.' '.$dest.' '.$opt;
 	spip_log('Commande d\'analyse OCR : "'.$cmd.'"', 'ocr');
 	exec($cmd, $output, $status_code);
-	
-	$resultat['erreur'] = ocr_texte_erreur($status_code);
+	$erreur = ocr_texte_erreur($status_code);
 
-	if ($resultat['erreur']) {
-		spip_log('Erreur : '.$resultat['erreur'], 'ocr');
+	if ($erreur) {
+		spip_log('Erreur : '.$erreur, 'ocr');
+		$resultat['info'] = $erreur;
+		$resultat['erreur'] = true;
 	} else  {
 		// on ouvre et on lit le .txt
 		// TODO : comment connaitre l'encoding du fichier ?
@@ -53,14 +55,16 @@ function ocr_analyser($id_document, $dry_run=false) {
 			$texte = file_get_contents($nouveaufichier);
 			unlink($nouveaufichier);
 			if ($dry_run) {
-				$resultat['texte'] = $texte;
+				$resultat['info'] = $texte;
 			} else {
 				// on modifie le champ "ocr" du document dans la base
 				spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
-				sql_updateq("spip_documents", array('ocr' => $resultat['texte']), "id_document=".intval($id_document));
+				sql_updateq("spip_documents", array('ocr' => $texte), "id_document=".intval($id_document));
 			}
+			$resultat['success'] = true;
 		} else {
-			$resultat['erreur'] = _T('ocr:analyser_erreur_fichier_resultat');
+			$resultat['info'] = _T('ocr:analyser_erreur_fichier_resultat');
+			$resultat['erreur'] = true;
 		}
 	}
 	
