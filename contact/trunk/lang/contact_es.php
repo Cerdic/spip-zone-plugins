@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'inforigine' => 'Información transmitida por el formulario: ',
 	'informez_moi' => 'Estoy de acuerdo en recibir, por correo electrónico, información de su organización.',
-	'infos_collecte' => 'Informaciones recogidas',
+	'infos_collecte' => 'Información recogida',
 	'infos_supplementaires' => 'Informaciones suplementarias',
 
 	// M
