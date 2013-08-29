@@ -14,6 +14,9 @@ function Fulltext_index($table, $champs, $nom=null) {
 	if (!$nom)
 		list(,$nom) = each($champs);
 
+	if ($nom !== 'tout')
+		$champs = array($nom);
+
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($table));
 
