@@ -32,9 +32,7 @@ function formulaires_tester_ocr_traiter_dist(){
 	}
 	
 	// envoi à la fonction charger
-	if ($resultat['texte']) {
-		set_request('resultat', $resultat['texte']);
-	}
+	set_request('resultat', $resultat['texte']?$resultat['texte']:' ');
 	
 	// message
 	return array(

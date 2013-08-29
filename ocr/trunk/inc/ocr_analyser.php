@@ -41,7 +41,6 @@ function ocr_analyser($id_document, $dry_run=false) {
 	spip_log('Commande d\'analyse OCR : "'.$cmd.'"', 'ocr');
 	exec($cmd, $output, $status_code);
 	
-	$resultat['texte'] = '';
 	$resultat['erreur'] = ocr_texte_erreur($status_code);
 
 	if ($resultat['erreur']) {
@@ -53,16 +52,16 @@ function ocr_analyser($id_document, $dry_run=false) {
 		if (file_exists($nouveaufichier) && is_readable($nouveaufichier)) {
 			$texte = file_get_contents($nouveaufichier);
 			unlink($nouveaufichier);
-			$resultat['texte'] = $texte;
+			if ($dry_run) {
+				$resultat['texte'] = $texte;
+			} else {
+				// on modifie le champ "ocr" du document dans la base
+				spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
+				sql_updateq("spip_documents", array('ocr' => $resultat['texte']), "id_document=".intval($id_document));
+			}
 		} else {
 			$resultat['erreur'] = _T('ocr:analyser_erreur_fichier_resultat');
 		}
-	}
-	
-	if (!$dry_run) {
-		// on modifie le champ "ocr" du document dans la base
-		spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
-		sql_updateq("spip_documents", array('ocr' => $resultat['texte']), "id_document=".intval($id_document));
 	}
 	
 	return $resultat;
