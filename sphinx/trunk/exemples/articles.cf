@@ -1,3 +1,7 @@
+#########################
+# Remarque: UNIX_TIMESTAMP ne permet pas d'indexer des dates < 1970-01-01 ;
+# le cas echeant, il faut utiliser une autre fonction (ex: DATE_DIFFÉ)
+# pour garantir un entier positif
 ##############################################################################
 source articles
 {
