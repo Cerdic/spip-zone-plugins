@@ -1,0 +1,3 @@
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV{datas}|saisies_chaine2tableau}
+[<p><span class="choix_couleur_couleur" style="background-color:#[(#ENV{valeur}|lambda_to_css_hexa)]"></span>(#GET{datas}|table_valeur{#ENV{valeur}})</p>]

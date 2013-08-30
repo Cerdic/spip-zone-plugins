@@ -1,4 +1,5 @@
-.choix_couleur span{
+.choix_couleur_couleur{
 		border:1px solid black;
 		padding-left:3em;
+		margin-right:0.5em;
 }

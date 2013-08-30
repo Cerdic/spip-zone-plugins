@@ -24,6 +24,6 @@
 <BOUCLE_radio(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix_couleur,choix_couleur}[ (#ENV{choix,choix})][ (#ENV{choix_couleur,choix_couleur})_#CLE]">
 	<input type="radio" name="#ENV{nom}" class="radio" id='champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE'[ (#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)checked='checked'] value='#CLE' [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] />
-	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"><span style="background-color:#[(#CLE|lambda_to_css_hexa)]"></span>&nbsp;[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)<strong>]#VALEUR[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)</strong>]</label>
+	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"><span class="choix_couleur_couleur" style="background-color:#[(#CLE|lambda_to_css_hexa)]"></span>&nbsp;[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)<strong>]#VALEUR[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}|=={#CLE}|oui)</strong>]</label>
 </div>
 </BOUCLE_radio>
