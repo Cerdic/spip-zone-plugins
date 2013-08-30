@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_editer_url_rubrique' => 'Url de la rubrique',
 	'label_editer_url_secteur' => 'Url du secteur',
 	'label_squelette' => 'Dossier des secteurs',
-	'label_squelette_secteur' => 'Dossiers des squelettes de la rubrique',
+	'label_squelette_rubrique' => 'Dossiers des squelettes de la rubrique',
 	'label_squelette_secteur' => 'Dossiers des squelettes du secteur',
 
 //T
