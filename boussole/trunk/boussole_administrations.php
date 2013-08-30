@@ -11,13 +11,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Installation du schéma de données propre au plugin et gestion des migrations suivant
- * les évolutions.
+ * les évolutions du schéma.
  *
- * Le schéma comprend des tables en BDD et des variables de configuration
+ * Le schéma comprend des tables en BDD et des variables de configuration.
  *
  * @api
  * @see boussole_declarer_tables_principales()
- * @see declarer_tables_interfaces()
+ * @see boussole_declarer_tables_interfaces()
  *
  * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma
@@ -48,7 +48,6 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	// Seule la boussole SPIP sera réinstallée par défaut.
 	// Pour les autres il faudra de toute façon adapter la boussole avant de les réinstaller
 	$maj['0.2'] = array(
-		array('maj_tables', array('spip_boussoles_extras')),
 		array('maj02')
 	);
 
@@ -78,7 +77,8 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 
 
 /**
- * Suppression de l'ensemble du schéma de données propre au plugin
+ * Suppression de l'ensemble du schéma de données propre au plugin, c'est-à-dire
+ * les tables et les metas de configuration.
  *
  * @api
  *
@@ -116,14 +116,19 @@ function boussole_vider_tables($nom_meta_base_version) {
 /**
  * Migration du schéma 0.1 au 0.2.
  *
- * Suppression des boussoles autres que la boussole spip car on ne peut pas les mettre à jour,
+ * Ajout de la table spip_boussoles_extras et suppression des boussoles autres que
+ * la boussole spip car il n'est pas possible de les mettre à jour,
  * leur serveur n'étant pas connu.
  *
  * @return void
  */
 function maj02() {
-	include_spip('inc/client');
 
+	// Ajout de la table
+	maj_tables(array('spip_boussoles_extras'));
+
+	// Suppression des boussoles non "spip"
+	include_spip('inc/client');
 	$akas_boussole = sql_allfetsel('aka_boussole', 'spip_boussoles', array(), 'aka_boussole');
 	if ($akas_boussole) {
 		foreach (array_map('reset', $akas_boussole) as $_aka_boussole) {

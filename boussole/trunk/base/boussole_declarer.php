@@ -1,6 +1,7 @@
 <?php
 /**
- * Ce fichier contient les déclarations des tables supplémentaires créées par le plugin.
+ * Ce fichier contient les déclarations des modifications de la base de données requises
+ * par le plugin.
  *
  * @package SPIP\BOUSSOLE\Schema\Declaration
  */
@@ -8,8 +9,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Pipeline de déclaration des tables de la base de données SPIP. Le plugin Boussole
- * déclare deux nouvelles tables qui sont :
+ * Pipeline de déclaration des nouvelles tables de la base de données propres au plugin.
+ *
+ * Le plugin déclare deux nouvelles tables qui sont :
  * 
  * - spip_boussoles, qui contient les éléments constitutifs de toutes les boussoles;
  * - spip_boussoles_extras, qui contient les traductions de ces éléments.
@@ -66,11 +68,11 @@ function boussole_declarer_tables_principales($tables_principales) {
 
 
 /**
- * Pipeline de déclaration des informations tierces sur les tables SQL
- * (alias, traitements, jointures, ...).
+ * Pipeline de déclaration des informations tierces (alias, traitements, jointures, etc)
+ * sur les tables de la base de données modifiées ou ajoutées par le plugin.
  *
- * Le plugin Boussole se contente de déclarer les alias des tables spip_boussoles et
- * spip_boussoles_extra ainsi que des traitements classiques sur les url et les textes.
+ * Le plugin se contente de déclarer les alias des tables qu'il ajoute
+ * ainsi que des traitements classiques sur les url et les textes.
  *
  * @pipeline declarer_tables_interfaces
  *

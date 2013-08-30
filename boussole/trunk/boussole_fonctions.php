@@ -4,12 +4,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // ----------------------- Balises propres a Boussole ---------------------------------
 
 /**
- * La balise #BOUSSOLE_INFOS renvoie :
- * - soit le tableau des infos contenues dans la meta boussole_infos_<alias> si l'alias est fourni
- * - soit la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon
+ * Balise retournant les informations sur une boussole.
  *
- * @param string $p	alias de la boussole ou vide
- * @return array	tableau des informations demandees (une boussole ou toutes les boussoles)
+ * La balise #BOUSSOLE_INFOS renvoie :
+ *
+ * - le tableau des infos contenues dans la meta boussole_infos_alias si l'alias est fourni,
+ * - la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon.
+ *
+ * @balise boussole_infos
+ *
+ * @param string $p
+ * 		alias de la boussole ou vide
+ * @return array
+ * 		tableau des informations demandees (une boussole ou toutes les boussoles)
  */
 function balise_BOUSSOLE_INFOS($p) {
 	
