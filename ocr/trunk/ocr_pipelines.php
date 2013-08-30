@@ -24,7 +24,6 @@ function ocr_rechercher_liste_des_jointures($tables){
 	$tables['article']['document']['ocr'] = 1;
 	$tables['rubrique']['document']['ocr'] = 1;
 	$tables['breve']['document']['ocr'] = 1;
-	spip_log($tables ,'ocr');
 	return $tables;
 }
 

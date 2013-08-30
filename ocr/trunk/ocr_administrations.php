@@ -41,10 +41,19 @@ function ocr_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_documents')),
 	);
 
+	// Forcer l'analyse de tous les documents (changement avec doc2img)
+	$maj['0.4'] = array(
+		array('ocr_reinitialiser_totalement_document'),
+	);
 	ecrire_config('palette/palette_public','');
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+
+function ocr_reinitialiser_totalement_document() {
+	sql_updateq("spip_documents", array('ocr' => '', 'ocr_analyse' => 'non'));
 }
 
 /**

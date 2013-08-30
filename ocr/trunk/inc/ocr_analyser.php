@@ -62,9 +62,20 @@ function ocr_analyser($id_document, $dry_run=false) {
 			if ($dry_run) {
 				$resultat['info'] = $texte;
 			} else {
-				// on modifie le champ "ocr" du document dans la base
-				spip_log('Modification du champ "ocr" du document id_document='.$id_document.' dans la base', 'ocr');
-				sql_updateq("spip_documents", array('ocr' => $texte, 'ocr_analyse' => 'oui'), "id_document=".intval($id_document));
+				// On teste si le document est une image générée par doc2img (mode='doc2img' + présente dans spip_documents_liens, liée avec un objet 'document')
+				$id_document_original = sql_getfetsel("L2.id_objet AS id_document_original","spip_documents as L1 LEFT JOIN spip_documents_liens as L2 ON L1.id_document=L2.id_document","L2.id_document=".intval($id_document).' AND L2.objet="document" AND L1.mode="doc2img"');
+				if ($id_document_original) {
+					// Si oui, on colle le texte dans le champ "ocr" du document original (on ne teste pas s'il y a plusieurs documents, ça ne devrait pas)
+					spip_log('Modification du champ "ocr" du document id_document='.$id_document_original.' - c\'est le document original qui avait été converti par doc2img' , 'ocr');
+					$ocr_original = sql_getfetsel("ocr","spip_documents","id_document=".intval($id_document_original));
+					sql_updateq("spip_documents", array('ocr' => $ocr_original.' '.$texte), "id_document=".intval($id_document_original));
+					// Indique que l'image doc2img a été analysée
+					sql_updateq("spip_documents", array('ocr_analyse' => 'oui'), "id_document=".intval($id_document));
+				} else {
+					// sinon, on modifie le champ "ocr" de l'image
+					spip_log('Modification du champ "ocr" du document id_document='.$id_document, 'ocr');
+					sql_updateq("spip_documents", array('ocr' => $texte, 'ocr_analyse' => 'oui'), "id_document=".intval($id_document));
+				}
 			}
 			$resultat['success'] = true;
 		} else {

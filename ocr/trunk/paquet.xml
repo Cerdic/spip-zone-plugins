@@ -6,7 +6,7 @@
 	compatibilite="[3.0.11;]"
 	logo="prive/themes/spip/images/ocr-64.png"
 	documentation="http://contrib.spip.net/ocr"
-	schema="0.3" 
+	schema="0.4" 
 >
 	<!--
 		Paquet genere le 2013-08-15 15:59:34
@@ -23,6 +23,8 @@
 	<traduire module="ocr" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[1.32.4;]" />
+
+	<utilise nom="doc2img" compatibilite="[1.4.3;]" />
 
 	<pipeline nom="declarer_tables_principales" inclure="base/ocr.php" />
 	<pipeline nom="taches_generales_cron" inclure="ocr_pipelines.php" />
