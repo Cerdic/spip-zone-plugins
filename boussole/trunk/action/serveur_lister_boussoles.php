@@ -1,10 +1,38 @@
 <?php
+/**
+ * Ce fichier contient l'action serveur_lister_boussoles utilisée par un site client
+ * pour obtenir la liste des boussoles hébergée par le serveur.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Action permettant de renvoyer à un site utilisateur la liste des boussoles disponibles sur un serveur
  *
+ */
+/**
+ * Cette action permet à un site client d'interroger un serveur actif et d'obtenir en retour
+ * la liste des boussoles qu'il héberge.
+ *
+ * Cette action est anonyme car elle doit pouvoir être appelée par tout utilisateur.
+ * Elle nécessite aucun argument. L'action renvoie :
+ *
+ * - le fichier cache XML de la liste des boussoles, si il existe;
+ * - un fichier XML d'erreur contenant l'id de l'erreur;
+ * - rien si le serveur n'est pas actif (l'erreur doit être traitée par l'appelant).
+ *
+ * @note
+ * 		Les cas d'erreur retournés par un serveur actif sont :
+ *
+ * 		- le cache de la liste des boussoles n'est pas disponible,
+ * 		- aucune boussole n'est hébergée par le serveur.
+ *
+ * @pipeline_appel declarer_boussoles
+ *
+ * @return void
  */
 function action_serveur_lister_boussoles_dist(){
 

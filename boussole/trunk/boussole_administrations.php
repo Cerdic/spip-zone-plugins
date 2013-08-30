@@ -16,6 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Le schéma comprend des tables en BDD et des variables de configuration
  *
  * @api
+ * @see boussole_declarer_tables_principales()
+ * @see declarer_tables_interfaces()
  *
  * @param string $nom_meta_base_version
  * 		Nom de la meta dans laquelle sera rangée la version du schéma

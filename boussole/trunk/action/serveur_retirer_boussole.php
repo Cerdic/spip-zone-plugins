@@ -1,4 +1,11 @@
 <?php
+/**
+ * Ce fichier contient l'action serveur_retirer_boussole utilisée
+ * pour retirer une boussole manuelle de la liste des boussoles hébergées par le serveur.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
