@@ -661,7 +661,15 @@ add_outil( array(
 	'id' => 'boites_privees',
 	'auteur'=>'Pat, Joseph LARMARANGE (format SPIP)',
 	'contrib' => 2564,
-	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%qui_webmasters%%%%bp_urls_propres%%%%bp_tri_auteurs%%",
+	'code:options' => "%%cs_rss%%%%format_spip%%%%stat_auteurs%%%%qui_webmasters%%%%bp_urls_propres%%%%bp_tri_auteurs%%"
+		// Bug SPIP2.1.(<=23), surcharge de la fonction action/instituer_auteur()
+		.((defined('_SPIP20100') && !defined('_SPIP30000'))?'function action_instituer_auteur() {
+	$securiser_action = charger_fonction("securiser_action", "inc");
+	list($id_auteur, $statut) = preg_split("/\\W/", $securiser_action());
+	if (!$statut && !($statut = _request("statut"))) return;
+	include_spip("action/editer_auteur");
+	instituer_auteur(intval($id_auteur), array("statut"=>$statut,"id_parent"=>intval(_request("id_parent")),"restreintes"=>_request("restreintes")));
+}':''),
 	'categorie' => 'interface',
 	'pipeline:affiche_milieu' => 'boites_privees_affiche_milieu',
 	'pipeline:affiche_droite' => 'boites_privees_affiche_droite',
