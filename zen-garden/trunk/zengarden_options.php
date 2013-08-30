@@ -49,7 +49,7 @@ if (!defined('_DIR_PLUGIN_THEME')){
 	
 	// @experimental : balise #THEME qui retourne le nom du theme selectionne
 	function balise_THEME_dist($p){
-		$p->code = "(defined('NOM_THEME') ? NOM_THEME : '')";
+		$p->code = champ_sql('theme', $p,"(defined('NOM_THEME') ? NOM_THEME : '')");
 		return $p;
 	}
 }
