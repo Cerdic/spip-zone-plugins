@@ -8,8 +8,8 @@
 	[(#GET{anonymiser}|=={on}|oui)<h3><:formidable:formulaire_anonyme_explication:></h3>]
 </BOUCLE_formulaire>
 <div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
-    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}|propre)</p>]
-    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}|propre)</p>]
+    [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}|propre)</div>]
+    [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}|propre)</div>]
 
     [(#ENV{editable}|oui)
     <form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
