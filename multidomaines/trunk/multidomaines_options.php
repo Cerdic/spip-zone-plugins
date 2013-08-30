@@ -4,6 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
 $options = lire_config('multidomaines');
 $GLOBALS['multidomaine_id_secteur_courant'] = NULL;
+if (!defined('_MULTIDOMAINE_RUBRIQUE')) define('_MULTIDOMAINE_RUBRIQUE', '0');
 
 if (is_array($options)) {
 	foreach ($options as $cle => $valeur) {

@@ -1,7 +1,7 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="2.1.2"
+	version="2.2.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"

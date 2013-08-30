@@ -1,8 +1,4 @@
-<!-- autoriser=configurer -->
-<!-- refus=<:cfg:refus_configuration_administrateur:> -->
-<!-- nom=multidomaines -->
-
-<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+<div class="formulaire_spip formulaire_#FORM">
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
@@ -35,7 +31,7 @@
 				</fieldset>
 					<B_multidomaines>
 					<ul>
-						<BOUCLE_multidomaines(RUBRIQUES){id_parent}{tous}>
+						<BOUCLE_multidomaines(RUBRIQUES) {si #EVAL{_MULTIDOMAINE_RUBRIQUE}|=={1}} {id_parent}{tous}>
 							<li>
 								<fieldset><legend>#TITRE</legend>
 								<ul>
