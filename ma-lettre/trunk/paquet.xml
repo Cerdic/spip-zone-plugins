@@ -1,25 +1,25 @@
 <paquet
 	prefix="malettre"
 	categorie="communication"
-	version="3.0.6"
-  schema="1.0.0"
+	version="3.0.7"
+	schema="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/malettre.png"
 	documentation="http://www.spip-contrib.net/Plugin-Ma-lettre"
 >
-  <nom>Ma lettre</nom>  
+	<nom>Ma lettre</nom>  
 	<!-- Compose sur mesure une lettre d'information -->
 
 	<auteur lien="http://www.erational.org">erational</auteur>
 	<copyright>2012</copyright>
 	<licence>GPL v3</licence>
     
-  <necessite nom="saisies" compatibilite="[1.19.0;]" />
+	<necessite nom="saisies" compatibilite="[1.19.0;]" />
   
-  <pipeline  		nom="declarer_tables_interfaces"  inclure="base/malettre.php"   />
-	<pipeline     nom="declarer_tables_objets_sql"  inclure="base/malettre.php" 	/>	
-  <pipeline   	nom="autoriser"               		inclure="malettre_autoriser.php"  	/>  
-  
+	<pipeline nom="declarer_tables_interfaces" inclure="base/malettre.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/malettre.php" />
+	<pipeline nom="autoriser" inclure="malettre_autoriser.php" />
+	
 	<menu nom="malettre" titre="malettre:ma_lettre" parent="menu_edition" icone="images/malettre-16.png" /> 
 </paquet>

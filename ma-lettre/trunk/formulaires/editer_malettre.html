@@ -15,10 +15,9 @@
       
       <!-- edito -->
       [(#CONFIG{malettre/id_article_edito}|=={0}|non)
-       <h5><:malettre:compose_contenu:> - <a href="[(#URL_ECRIRE{article}|parametre_url{id_article,#CONFIG{malettre/id_article_edito}})]"><:malettre:compose_edito:></a></h5>
-       <div style="background:#eee;padding:10px;margin:0 10px 10px 10px;border:1px solid #999;"> 
-       [(#INFO_TEXTE{article,#CONFIG{malettre/id_article_edito}})]
-       </div>
+       <h5><:malettre:compose_contenu:> - <a href="[(#URL_ECRIRE{article}|parametre_url{id_article,#CONFIG{malettre/id_article_edito}})]" class="popin"><:malettre:compose_edito:></a></h5>
+       <INCLURE{fond=inclure/contenu_edito,ajax=edito} />
+       <p style="text-align:right;padding:0 10px;"><a href="#" onclick="ajaxReload('edito');" title="Après l'avoir édité, vous avez certainement besoin de mettre à jour cet affichage.">recharger ce texte</a></p>
        ] 
       
       <!-- liste articles -->
