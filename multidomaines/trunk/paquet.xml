@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"
-	documentation="http://www.spip-contrib.net/article4182"
+	documentation="http://contrib.spip.net/?article4182"
 	schema="0.0.2" 
 >
 	<nom>Multidomaines</nom>
@@ -16,5 +16,6 @@
 	<menu nom="configurer_multidomaines" titre="multidomaines:titre_multidomaines" parent="menu_configuration" icone="images/multidomaines-24.png" />
 
 	<pipeline nom="calculer_URL_SECTEUR" inclure="multidomaines_fonctions.php" />
+	<pipeline nom="calculer_URL_RUBRIQUE" inclure="multidomaines_fonctions.php" />
 	<pipeline nom="" inclure="multidomaines_options.php" />
 </paquet>
