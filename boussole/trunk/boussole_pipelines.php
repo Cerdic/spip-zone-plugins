@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Affiche un bloc l'identification de la boussole a laquelle appartient le site edite
  *
  * @param object $flux
- * @return $flux
+ * @return object
  */
 function boussole_affiche_milieu($flux){
 	if (($flux['args']['exec'] == 'site') AND $flux['args']['id_syndic']) {

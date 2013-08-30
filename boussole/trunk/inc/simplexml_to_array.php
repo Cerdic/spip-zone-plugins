@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Transforme un texte XML en tableau PHP
  *
- * @package BOUSSOLE\Outils
+ * @package SPIP\BOUSSOLE\Outils\XML
  *
  * @param string|object $u
  * @param bool $utiliser_namespace

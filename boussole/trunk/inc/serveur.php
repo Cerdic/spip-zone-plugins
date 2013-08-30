@@ -3,6 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_BOUSSOLE_PATTERN_SHA'))
+	/** Pattern pour insérer le sha du XML calculé à posteriori dans le cache */
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
 
@@ -10,7 +11,7 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
  * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste
  * de ces boussoles.
  *
- * @package BOUSSOLE\Serveur
+ * @package BOUSSOLE\Serveur\Cache
  * @api
  *
  * @return bool
@@ -50,7 +51,7 @@ function boussole_actualiser_caches() {
  * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à partir d'un xml déjà traduit.
  * Ce cache est renvoyé sur l'action serveur_informer_boussole
  *
- * @package	BOUSSOLE\Serveur
+ * @package	SPIP\BOUSSOLE\Serveur\Cache
  * @api
  *
  * @param string	$alias
@@ -96,7 +97,7 @@ function boussole_cacher_xml($alias, $prefixe_plugin='') {
  * Génération du cache de la liste des boussoles disponibles
  * Ce cache est renvoyé sur l'action serveur_lister_boussoles
  *
- * @package	BOUSSOLE\Serveur
+ * @package	SPIP\BOUSSOLE\Serveur\Cache
  * @api
  *
  * @param array $boussoles
@@ -161,17 +162,16 @@ function boussole_cacher_liste($boussoles) {
 /**
  * Teste la validite du fichier xml de la boussole en fonction de la DTD boussole.dtd
  *
- * @package	BOUSSOLE\Serveur
+ * @package	SPIP\BOUSSOLE\Outils\XML
  * @api
  *
  * @param string $url
+ * 		url absolue du fichier xml de description de la boussole
  * @param array &$erreur
+ * 		tableau des erreurs collectees suite a la validation xml
  *
  * @return boolean
  */
-
-// $url	=> url absolue du fichier xml de description de la boussole
-// $erreur	=> tableau des erreurs collectees suite a la validation xml
 function boussole_valider_xml($url, &$erreur) {
 	include_spip('inc/distant');
 
@@ -196,7 +196,7 @@ function boussole_valider_xml($url, &$erreur) {
 /**
  * Lecture du xml non traduit (donc issu d'un plugin) et génération du xml traduit et incluant les logos
 
- * @package	BOUSSOLE\Serveur
+ * @package	SPIP\BOUSSOLE\Serveur\Cache
  *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
@@ -289,7 +289,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 /**
  * Lecture du xml traduit (donc non issu d'un plugin) et génération du xml complet incluant les logos
  *
- * @package	BOUSSOLE\Serveur
+ * @package	SPIP\BOUSSOLE\Serveur\Cache
  *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
@@ -423,7 +423,7 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 /**
  * Insertion d'un balise ouvrante, fermante ou vide
  *
- * @package	BOUSSOLE\Outils
+ * @package	SPIP\BOUSSOLE\Outils\XML
  *
  * @param string	$type
  * @param string	$balise
@@ -454,7 +454,7 @@ function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentat
 /**
  * Insertion d'une balise complète <nom>, <slogan> ou <description> incluant les traductions en <multi>
  *
- * @package	BOUSSOLE\Outils
+ * @package	SPIP\BOUSSOLE\Outils\XML
  *
  * @param string	$alias
  * @param string	$type_objet
@@ -522,7 +522,7 @@ function inserer_traductions($alias, $type_objet, $objet, $indentation=0) {
 /**
  * Contruction de la chaine de tabulations correspondant au décalage souhaité
  *
- * @package	BOUSSOLE\Outils
+ * @package	SPIP\BOUSSOLE\Outils\XML
  *
  * @param int	$decalage
  *

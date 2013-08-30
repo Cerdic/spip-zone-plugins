@@ -8,7 +8,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
  * de lire les informations à jour
  *
- * @package	BOUSSOLE\Outils
+ * @package	SPIP\BOUSSOLE\Outils
  *
  * @param $prefixe
  *
