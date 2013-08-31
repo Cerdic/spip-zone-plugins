@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Display the language',
 	'option_aff_rub_interface_explication' => 'Display only the sections in the user\'s language',
 	'option_aff_rub_interface_label' => 'Multilingual display',
+	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L\'identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l\'affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>.', # NEW
+	'option_afficher_si_label' => 'Affichage conditionnel', # NEW
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
 	'option_autocomplete_defaut' => 'Leave the default',
