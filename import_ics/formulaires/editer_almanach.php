@@ -57,7 +57,7 @@ function importation_evenement($objet_evenement,$id_almanach){
 	    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
 	    $summary_array = $objet_evenement->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
 		$url = $objet_evenement->getProperty( "URL");#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
-	    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION");
+	    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
 	    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
 	#données de localisation de l'évenement
 	    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
