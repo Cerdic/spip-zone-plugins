@@ -250,6 +250,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
  * - une ligne devient une case
  * - si la ligne est de la forme truc|bidule alors truc est la clé et bidule la valeur
  * - si la ligne commence par * alors on commence un sous-tableau
+ * - si la ligne est égale à /*, alors on fini le sous-tableau
  * @param string $chaine Une chaine à transformer
  * @return array Retourne un tableau PHP
  */
@@ -265,12 +266,15 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 			if ($ligne !== ''){
 				// si ca commence par * c'est qu'on va faire un sous tableau
 				if (strpos($ligne,"*")===0){
-						$soustab=True;
-						$soustab_cle 	= _T_ou_typo(substr($ligne,1), 'multi');
-						if (!isset($tableau[$soustab_cle])){
-							$tableau[$soustab_cle] = array();
-						}
+					$soustab=True;
+					$soustab_cle 	= _T_ou_typo(substr($ligne,1), 'multi');
+					if (!isset($tableau[$soustab_cle])){
+						$tableau[$soustab_cle] = array();
 					}
+				}
+				elseif ($ligne=="/*"){//si on finit sous tableau
+					$soustab=False;
+				}
 				else{//sinon c'est une entrée normale
 				// Si on trouve un découpage dans la ligne on fait cle|valeur
 					if (strpos($ligne, '|') !== false){
