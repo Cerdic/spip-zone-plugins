@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
+	'message_nok_alias_boussole_manquant' => 'L\'alias de la boussole n\'a pas été fournie au serveur « @serveur@ ».', # NEW
 	'message_nok_aucune_boussole_hebergee' => 'No compass is still hosted on the server "@serveur@".', # MODIF
 	'message_nok_boussole_inconnue' => 'Compass named "@alias@ is unknown"', # MODIF
 	'message_nok_boussole_non_hebergee' => 'Compass named "@alias@" is not hosted on server "@serveur@".', # MODIF

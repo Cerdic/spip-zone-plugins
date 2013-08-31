@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
+	'message_nok_alias_boussole_manquant' => 'L\'alias de la boussole n\'a pas été fournie au serveur « @serveur@ ».', # NEW
 	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n\'est encore hébergée sur le serveur «@serveur@».', # NEW
 	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"', # MODIF
 	'message_nok_boussole_non_hebergee' => 'La boussole «@alias@» n\'est pas hébergée sur le serveur «@serveur@».', # NEW

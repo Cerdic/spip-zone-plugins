@@ -108,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Versión',
 
 	// M
+	'message_nok_alias_boussole_manquant' => 'L\'alias de la boussole n\'a pas été fournie au serveur « @serveur@ ».', # NEW
 	'message_nok_aucune_boussole_hebergee' => 'Ninguna brújula está todavía alojada en el servidor «@serveur@».', # MODIF
 	'message_nok_boussole_inconnue' => 'Ninguna brújula se corresponde al alias «@alias@»', # MODIF
 	'message_nok_boussole_non_hebergee' => 'La brújula «@alias@» no está alojada en el servidor «@serveur@».', # MODIF
