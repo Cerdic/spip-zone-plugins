@@ -174,20 +174,22 @@ function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 // si $liste=true alors la fonction renvoie la liste des mots trouves
 // chaque element du tableau renvoye est array('mot trouve', id_mot, 'lien mot', 'titre mot');
 function cs_rempl_glossaire($texte, $liste=false) {
-	global $gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id;
+	global $gloss_tab1, $gloss_tab2, $gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id;
 	// si [!glossaire] est trouve on sort
 	if(strpos($texte, _CS_SANS_GLOSSAIRE)!==false)
 		return $liste?array():str_replace(_CS_SANS_GLOSSAIRE, '', $texte);
 	// mise en static de la table des mots pour eviter d'interrroger la base a chaque fois
 	// attention aux besoins de memoire...
-	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_array = NULL;
+	static $limit, $glossaire_generer_url, $glossaire_generer_mot, $glossaire_echappements, $glossaire_array = NULL;
 	if(!isset($glossaire_array)) {
 		$glossaire_array = glossaire_query_tab();
 		$glossaire_generer_url = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
 		$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 		$glossaire_generer_mot = function_exists('glossaire_generer_mot')
-			?'glossaire_generer_mot(\'\\2\', $GLOBALS[\'gloss_mots\'][\\1])':'$GLOBALS[\'gloss_mots\'][\\1]'; // 'glossaire_generer_mot_dist(\'\\2\', $GLOBALS[\'gloss_mots\'][\\1])';
-		$glossaire_generer_mot = '"<a $table1[\\2]_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>$table2[\\2]</a>"';
+			?'glossaire_generer_mot($m[2], $GLOBALS[\'gloss_mots\'][$m[1]])':'$GLOBALS[\'gloss_mots\'][$m[1]]';
+		$glossaire_generer_mot = 'return "<a ".$GLOBALS["gloss_tab1"][$m[2]]."_".$GLOBALS["gl_i"]++."\' class=\'cs_glossaire\'><span class=\'gl_mot\'>".'.$glossaire_generer_mot.'."</span>".$GLOBALS["gloss_tab2"][$m[2]]."</a>";';
+		$glossaire_generer_mot = create_function('$m', $glossaire_generer_mot);
+		$glossaire_echappements = create_function('$m','return $GLOBALS[\'gloss_ech\'][$m[1]];');
 	}
 	$unicode = false;
 	// initialisation des globales d'echappement
@@ -197,7 +199,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	if(strpos($texte, '[') !== false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
-	$mot_contexte=$GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
+	$mot_contexte = $GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// parser le mot-cle du glossaire
 		// contexte de langue a prendre en compte ici
@@ -225,13 +227,13 @@ function cs_rempl_glossaire($texte, $liste=false) {
 			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
 			if($liste)
 				// on ne renvoie que la liste des mots trouves
-				$table1[$gloss_id] = array($gloss_id, $lien, $les_titres);
+				$gloss_tab1[$gloss_id] = array($gloss_id, $lien, $les_titres);
 			else {
 				// l'attribut 'name' en fin de chaine est complete plus tard pour eviter les doublons :
-				$table1[$gloss_id] = (function_exists('glossaire_attributs_lien')
+				$gloss_tab1[$gloss_id] = (function_exists('glossaire_attributs_lien')
 					?glossaire_attributs_lien($gloss_id, $lien, $titre, explode(_GLOSSAIRE_TITRE_SEP, $les_titres))
 					:"href='$lien'") . " name='mot$gloss_id";
-				$table2[$gloss_id] = defined('_CS_PRINT')?'':recuperer_fond(
+				$gloss_tab2[$gloss_id] = defined('_CS_PRINT')?'':recuperer_fond(
 					defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
 					array('id_mot' => $gloss_id, 'titre' => $les_titres, 
 						'texte' => glossaire_safe($mot['texte']), 
@@ -242,16 +244,16 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	$GLOBALS['gl_i'] = 0;
 	if($liste) $texte = (preg_match_all(',@@M(\d+)#(\d+)@@,', $texte, $reg, PREG_SET_ORDER) 
 			&& array_walk($reg,
-		create_function('&$v,$k,&$t1', '$v=array_merge(array($GLOBALS[\'gloss_mots\'][$v[1]]),$t1[$v[2]]);'), $table1)
+		create_function('&$v,$k', '$v=array_merge(array($GLOBALS[\'gloss_mots\'][$v[1]]),$GLOBALS[\'gloss_tab1\'][$v[2]]);'))
 		)?$reg:array();
 	else {
 		// remplacement des echappements
-		$texte = preg_replace(',@@E(\d+)@@,e', '$GLOBALS[\'gloss_ech\'][\\1]', $texte);
+		$texte = preg_replace_callback(',@@E(\d+)@@,', $glossaire_echappements, $texte);
 		// remplacement final des balises posees ci-dessus
-		$texte = preg_replace(',@@M(\d+)#(\d+)@@,e', $glossaire_generer_mot, $texte);
+		$texte = preg_replace_callback(',@@M(\d+)#(\d+)@@,', $glossaire_generer_mot, $texte);
 	}
 	// nettoyage
-	unset($gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id);
+	unset($gloss_tab1, $gloss_tab2, $gloss_id, $gloss_mots, $gloss_mots_id, $gloss_ech, $gloss_ech_id);
 	// ordre correct des balises en cas d'acronyme ou d'abreviation
 	if(strpos($texte, '</span></a></a')!==false)
 		$texte = preg_replace(',(<a(bbr|cronym) [^>]+>)(<a [^>]+class=\'cs_glossaire\'><span class=\'gl_mot\'>)(.*?)</span>(<span class="gl_.*?</span>)</a></a\\2>,smS', '$3$1$4</a$2></span>$5</a>', $texte);

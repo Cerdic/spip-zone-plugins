@@ -179,7 +179,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 			$descrip = preg_replace_callback(',<:([a-z_][a-z0-9_-]*):([0-9]*):>,i', 
 				create_function('$m','return couteauprive_T($m[1].":description".$m[2]);'), $descrip);
 		// chaines de langue personnalisees
-		$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
+		$descrip = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $descrip);
 	}
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));

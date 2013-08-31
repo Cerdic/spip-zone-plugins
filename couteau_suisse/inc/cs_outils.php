@@ -31,7 +31,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 		if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
 		if(!isset($outil['nom'])) $outil['nom'] = couteauprive_T($outil['id'].':nom');
 		if(strpos($outil['nom'], '<:')!==false)
-			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
+			$outil['nom'] = preg_replace_callback(',<:([:a-z0-9_-]+):>,i', create_function('$m','return _T($m[1]);'), $outil['nom']);
 		// $outil['surcharge'] n'est pas encore renseigne si la fonction d'installation est surchargee
 		if(isset($outil['surcharge']) || (function_exists($outil_.'_installe') && $outil['surcharge']=1))
 			$outil['nom'] = $outil['nom'].' *';
