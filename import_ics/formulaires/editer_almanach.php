@@ -63,6 +63,8 @@ function importation_evenement($objet_evenement,$id_almanach){
 	    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 	    $latitude = $localisation['latitude'];
 	    $longitude = $localisation['longitude'];
+	//un petit coup avec l'uid
+	    $uid_distante = $objet_evenement->getProperty("UID");#uid de l'evenement
 	#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
 	    $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
 	    	$dtstart = $dtstart_array["value"];
@@ -105,38 +107,26 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
-
-
 	#on associe le mot à l'almanach
 	$id_mot = _request('id_mot');
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
-
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
-	//$cal->setConfig( 'filename', $tmp );
 	$cal->parse();
-
-
-	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est 
-	//déjà (ça ne se fait pas en une ligne...°)
+	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
 	$liens = sql_allfetsel('id_evenement, uid, sequence', 'spip_evenements');
 	// on definit un tableau des uid présentes dans la base
 	$uid ="";
 	foreach ($liens as $u ) {
 		$uid[] = $u['uid'];
 	};
-
-
  while ($comp = $cal->getComponent())
  {
-
-	#les variables qui vont servir à vérifier l'existence et l'unicité 
-		
+#les variables qui vont servir à vérifier l'existence et l'unicité 
 	   	$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 	    $uid_distante = $comp->getProperty("UID");#uid de l'evenement
 		if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
-
 //On commence à vérifier l'existence et l'unicité  maintenant et on met à jour ou on importe selon le cas
 	if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd
 		$cle = array_search($uid_distante, $uid); // on utilise le fait que les deux tableaux ont le même index pour le récupérer
@@ -146,12 +136,6 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			echo "c'est pas pareil, il faut mettre à jour l'événement ".$liens[$cle]['id_evenement']."<br/>";
 		} 
 	} else {importation_evenement($comp,$id_almanach);};//l'evenement n'est pas dans la bdd, on va l'y mettre
-
-
-
-
-
-
  }
 
 	return $chargement;
