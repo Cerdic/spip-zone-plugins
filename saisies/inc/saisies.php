@@ -270,7 +270,7 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 				}
 				// Sinon on génère la clé
 				else{
-					$tableau[$i] = $ligne;
+					$tableau[$i] = _T_ou_typo($ligne);
 				}
 			}
 		}
