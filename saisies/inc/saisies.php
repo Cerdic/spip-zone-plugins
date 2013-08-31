@@ -315,18 +315,24 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
  * - une case de vient une ligne de la chaine
  * - chaque ligne est générée avec la forme cle|valeur
  * - si une entrée du tableau est elle même un tableau, on met une ligne de la forme *clef
+ * - pour marquer que l'on quitte un sous-tableau, on met une ligne commencant par /*, sauf si on bascule dans un autre sous-tableau.
  */
 function saisies_tableau2chaine($tableau){
 	if ($tableau and is_array($tableau)){
 		$chaine = '';
-	
+		$avant_est_tableau = False;
 		foreach($tableau as $cle=>$valeur){
 			if (is_array($valeur)){
+				$avant_est_tableau = True;
 				$ligne=trim("*$cle");
 				$chaine .= "$ligne\n";
 				$chaine .= saisies_tableau2chaine($valeur)."\n";
 				}
 			else{	
+				if ($avant_est_tableau == True){
+						$avant_est_tableau = False;
+						$chaine.="/*\n";
+					}
 				$ligne = trim("$cle|$valeur");
 				$chaine .= "$ligne\n";
 			}
