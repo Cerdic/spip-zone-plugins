@@ -47,9 +47,14 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_selection_objet",
+			"PRIMARY KEY"        => "id_selection_objet",	
+            "KEY id_objet"       => "id_objet",
+            "KEY id_objet_dest"  => "id_objet_dest",             
+            "KEY objet"          => "objet",             
+            "KEY objet_dest"     => "objet_dest", 							
 			"KEY lang"           => "lang", 
 			"KEY statut"         => "statut",
+			
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",

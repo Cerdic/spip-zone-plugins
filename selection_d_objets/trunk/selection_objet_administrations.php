@@ -28,8 +28,16 @@ function selection_objet_upgrade($nom_meta_base_version, $version_cible) {
     $maj['0.2.4'] = array(array('maj_tables', array('spip_selection_objets')));   
     $maj['0.3.0'] = array(array('maj_tables', array('spip_selection_objets'))); 
     $maj['0.4.0'] = array(array('maj_tables', array('spip_selection_objets'))); 
-    $maj['0.5.0'] = array(array('maj_tables', array('spip_selection_objets')));             
-        
+    $maj['0.5.0'] = array(array('maj_tables', array('spip_selection_objets')));  
+    $maj['0.5.1'] = array(
+                        array('sql_alter', "TABLE spip_selection_objets ADD KEY (id_objet)"),
+                        array('sql_alter', "TABLE spip_selection_objets ADD KEY (id_objet_dest)"),
+                        array('sql_alter', "TABLE spip_selection_objets ADD KEY (objet)"),
+                        array('sql_alter', "TABLE spip_selection_objets ADD KEY (objet_dest)"),
+                        );
+
+
+                
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
