@@ -1,0 +1,26 @@
+<plugin>
+	<nom>SpiPDF</nom>
+	<slogan>Conversion d'article en Pdf</slogan>
+	<auteur>[Yves Tannier->yvestanSANSPAM@gmail.com], [grafactory.net->http://www.grafactory.net]</auteur>
+	<icon>img_pack/spipdf.png</icon>
+	<licence>(c) 2010 GPL</licence>
+	<lien>http://www.spip-contrib.net/spiPDF-v0-2-0-generer-des-contenus-sur-mesure-en-PDF</lien>
+	<version>0.2.2</version>
+	<etat>stable</etat>
+	<description>
+		Ce plugin permet de convertir un article au format PDF par le biais d'un simple squelette cod&#233; en HTML 4.01.	Il utilise la librairie [HTML2PDF->http://www.html2pdf.fr] ou la librairie [mPDF->http://mpdf.bpm1.com]. Il n&#233;cessite PHP 5.
+	</description>
+	<prefix>spipdf</prefix>
+	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>spipdf_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>spipdf_fonctions.php</inclure>
+	</pipeline>
+	<categorie>edition</categorie>
+    <!--<necessite id="lib:html2pdf" src="http://sourceforge.net/projects/phphtml2pdf/files/current release PHP5/html2pdf_v4.01_php5.zip/download?use_mirror=freefr" />
+    <necessite id="lib:mpdf" src="http://mpdf1.com/repos/download.php?file=MPDF50" />-->
+</plugin>
