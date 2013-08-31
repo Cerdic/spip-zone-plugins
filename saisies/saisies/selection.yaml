@@ -28,7 +28,7 @@ options:
         options:
           nom: 'datas'
           label: '<:saisies:option_datas_label:>'
-          explication: '<:saisies:option_datas_explication:>'
+          explication: '<:saisies:option_datas_sous_groupe_explication:>'
           rows: 10
           cols: 50
       -
