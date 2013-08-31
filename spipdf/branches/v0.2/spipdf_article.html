@@ -1,0 +1,53 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<page lib_pdf="mpdf" orientation="P" format="A4" backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
+
+	[(#REM) Les styles de spip,  il est possible d'utiliser sa propre feuille de style !]
+	[<link rel="stylesheet" href="(#CHEMIN{spip_style.css}|direction_css)" type="text/css" media="all" />]
+	[<link rel="stylesheet" href="(#CHEMIN{habillage.css}|direction_css)" type="text/css" media="all" />]
+
+	<style type="text/css">
+		/* quelques styles en plus */
+		table { margin-top: 10px; }
+		img { margin: 10px; }
+		.bloc_simple h2 {
+		   font-size: 16px;
+		   font-weight: bold;
+		   margin: 0;
+		   margin-bottom: 5px;
+		}
+		.bloc_simple {
+			border-top: 1px solid #ccc;
+			padding-top: 5px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.chapo_simple { font-weight: bold; }
+		.notes h2 { margin-bottom: 10px; }
+		.notes p { margin: 10px; }
+        /* pour le float des images avec mPDF surtout */
+        .pdf_img_float_left { float: left; }
+        .pdf_img_float_right { float: right; }
+        .pdf_img_float_center { float: center; }
+	</style>
+
+	<div id="hierarchie">#NOM_SITE_SPIP<BOUCLE_ariane(HIERARCHIE){id_article}> &gt; [(#TITRE|supprimer_numero|couper{80})]</BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|supprimer_numero|couper{80})</strong>]</div>
+
+	[(#LOGO_ARTICLE|image_reduire{200,200})]
+	[<p class="surtitre">(#SURTITRE)</p>]
+	[<h1>(#TITRE|supprimer_numero)</h1>]
+	[<p class="soustitre">(#SOUSTITRE)</p>]
+
+	<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+
+	[<div class="chapo_simple">(#CHAPO|abs_url|image_reduire{500,0})</div>]
+
+	[(#TEXTE|abs_url|image_reduire{300,0})]
+
+	[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	
+	[<div class="bloc_simple postscriptum"><h2><:info_ps:></h2>(#PS|abs_url|image_reduire{500,0})</div>]
+
+	[<div class="bloc_simple notes"><h2><:info_notes:></h2>(#NOTES|abs_url)</div>]
+
+</page>
+</BOUCLE_principale>
