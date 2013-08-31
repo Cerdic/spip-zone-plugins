@@ -286,10 +286,10 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 				// Sinon on génère la clé
 					else{
 						if ($soustab == True){
-							$tableau[$soustab_cle][$i] = _T_ou_typo($ligne);
+							$tableau[$soustab_cle][$i] = _T_ou_typo($ligne,'multi');
 							}
 						else{
-							$tableau[$i] = _T_ou_typo($ligne);
+							$tableau[$i] = _T_ou_typo($ligne,'multi');
 							}
 					}
 				}
