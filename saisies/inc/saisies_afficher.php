@@ -292,7 +292,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 	$saisies = saisies_lister_par_nom($saisies,true);
 	$code = '';
 	$code .= '(function($){';
-	$code .= '$(document).ready(function(){';
+	$code .= '$(document).ready(function(){chargement=true;';
 		$code .= 'verifier_saisies_'.$id_form.' = function(form){';
 				foreach ($saisies as $saisie) {
 					// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
@@ -352,13 +352,13 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							$sel = "li.$class_li";
 						}
 						$code .= 'if ('.$condition.') {$(form).find("'.$sel.'").show(400);} ';
-						$code .= 'else {$(form).find("'.$sel.'").hide(400).css("display", "none");} ';
+						$code .= 'else {if (chargement==true) {$(form).find("'.$sel.'").hide(400).css("display","none");} else {$(form).find("'.$sel.'").hide(400);};} ';
 					}
 				}
 		$code .= '};';
 		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
 		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
-	$code .= '});';
+	$code .= 'chargement=false;})';
 	$code .= '})(jQuery);';
 	return $i>0 ? $code : '';
 }
