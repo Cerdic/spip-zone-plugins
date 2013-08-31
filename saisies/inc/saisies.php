@@ -310,14 +310,22 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
  * Transforme un tableau en chaine de caractères avec comme principe :
  * - une case de vient une ligne de la chaine
  * - chaque ligne est générée avec la forme cle|valeur
+ * - si une entrée du tableau est elle même un tableau, on met une ligne de la forme *clef
  */
 function saisies_tableau2chaine($tableau){
 	if ($tableau and is_array($tableau)){
 		$chaine = '';
 	
 		foreach($tableau as $cle=>$valeur){
-			$ligne = trim("$cle|$valeur");
-			$chaine .= "$ligne\n";
+			if (is_array($valeur)){
+				$ligne=trim("*$cle");
+				$chaine .= "$ligne\n";
+				$chaine .= saisies_tableau2chaine($valeur)."\n";
+				}
+			else{	
+				$ligne = trim("$cle|$valeur");
+				$chaine .= "$ligne\n";
+			}
 		}
 		$chaine = trim($chaine);
 	
