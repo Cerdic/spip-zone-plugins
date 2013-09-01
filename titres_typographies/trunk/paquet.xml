@@ -1,7 +1,7 @@
 <paquet
 	prefix="titres_typographies"
 	categorie="edition"
-	version="1.0.4"
+	version="1.1.0"
 	etat="test"
 	documentation="http://contrib.spip.net/Titres-typographies"
 	compatibilite="[3.0;3.0.99]"
@@ -11,5 +11,7 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
     <credit lien="http://fr.wikipedia.org/wiki/Fichier:Garamond_type_fi-ligature_2.jpg">Wikipédia</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<utilise nom="forum" />
+	<pipeline nom="declarer_tables_interfaces" inclure="titres_typographies_pipelines.php"/>
 </paquet>
 
