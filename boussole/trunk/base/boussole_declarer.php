@@ -9,12 +9,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Pipeline de déclaration des nouvelles tables de la base de données propres au plugin.
+ * Déclaration des nouvelles tables de la base de données propres au plugin.
  *
  * Le plugin déclare deux nouvelles tables qui sont :
  * 
- * - spip_boussoles, qui contient les éléments constitutifs de toutes les boussoles;
- * - spip_boussoles_extras, qui contient les traductions de ces éléments.
+ * - `spip_boussoles`, qui contient les éléments constitutifs de toutes les boussoles;
+ * - `spip_boussoles_extras`, qui contient les traductions de ces éléments.
  *
  * @pipeline declarer_tables_principales
  *
@@ -68,7 +68,7 @@ function boussole_declarer_tables_principales($tables_principales) {
 
 
 /**
- * Pipeline de déclaration des informations tierces (alias, traitements, jointures, etc)
+ * Déclaration des informations tierces (alias, traitements, jointures, etc)
  * sur les tables de la base de données modifiées ou ajoutées par le plugin.
  *
  * Le plugin se contente de déclarer les alias des tables qu'il ajoute
@@ -77,7 +77,7 @@ function boussole_declarer_tables_principales($tables_principales) {
  * @pipeline declarer_tables_interfaces
  *
  * @param array $interface
- * 		Tableau global fournissant les informations tierces sur les tables de la base de données
+ * 		Tableau global des informations tierces sur les tables de la base de données
  * @return array
  *		Tableau fourni en entrée et mis à jour avec les nouvelles informations
  */

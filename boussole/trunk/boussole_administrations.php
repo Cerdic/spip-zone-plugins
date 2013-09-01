@@ -78,7 +78,7 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 
 /**
  * Suppression de l'ensemble du schéma de données propre au plugin, c'est-à-dire
- * les tables et les metas de configuration.
+ * les tables et les variables de configuration.
  *
  * @api
  *
@@ -116,8 +116,8 @@ function boussole_vider_tables($nom_meta_base_version) {
 /**
  * Migration du schéma 0.1 au 0.2.
  *
- * Ajout de la table spip_boussoles_extras et suppression des boussoles autres que
- * la boussole spip car il n'est pas possible de les mettre à jour,
+ * Ajout de la table spip_boussoles_extras` et suppression des boussoles autres que
+ * la boussole 'spip' car il n'est pas possible de les mettre à jour,
  * leur serveur n'étant pas connu.
  *
  * @return void
@@ -143,7 +143,7 @@ function maj02() {
 /**
  * Migration du schéma 0.2 au 0.3.
  *
- * Les globales $serveur_boussoles_disponibles et $client_serveurs_disponibles sont
+ * Les globales `$serveur_boussoles_disponibles` et `$client_serveurs_disponibles` sont
  * transférées dans des variables de configuration
  *
  * @param array $defaut_config
@@ -198,7 +198,7 @@ function maj03($defaut_config) {
 /**
  * Migration du schéma 0.3 au 0.4.
  *
- * La constante _BOUSSOLE_ALIAS_SERVEUR est transformée en deux variables de configuration,
+ * La constante `_BOUSSOLE_ALIAS_SERVEUR` est transformée en deux variables de configuration,
  * l'une pour l'activité de la fonction serveur et l'autre pour le nom du serveur.
  *
  * @param array $defaut_config
