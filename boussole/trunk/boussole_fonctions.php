@@ -30,8 +30,8 @@ function balise_BOUSSOLE_INFOS($p) {
 }
 
 /**
- * @param $boussole
- * 		Alias de la boussole ou vide
+ * @param string $boussole
+ * 		Alias de la boussole ou chaine vide
  *
  * @return array
  */
