@@ -11,7 +11,7 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
  * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste
  * de ces boussoles.
  *
- * @package BOUSSOLE\Serveur\Cache
+ * @package SPIP\BOUSSOLE\Serveur\Cache
  * @api
  *
  * @return bool

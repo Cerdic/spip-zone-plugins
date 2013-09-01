@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Action de retrait d'un serveur de la liste des serveurs accessibles
  * par le site client
  * *
- * @package BOUSSOLE\Client\Action
+ * @package SPIP\BOUSSOLE\Client\Action
  *
  * @return void
  */

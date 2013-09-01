@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Cette action retire la boussole désignée de cette configuration et lance l'actualisation
  * des caches pour assurer la cohérence avec la nouvelle configuration.
  *
- * @package BOUSSOLE\Serveur\Action
+ * @package SPIP\BOUSSOLE\Serveur\Action
  *
  * @return void
  */
