@@ -1,18 +1,27 @@
 <?php
+/**
+ * Ce fichier contient la fonction surchargeable de récupération des informations d'un plugin.
+ *
+ * @package SPIP\BOUSSOLE\Outils\Plugins
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
  * Récupération des informations d'un plugin connu par son préfixe.
- * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
- * de lire les informations à jour
  *
- * @package	SPIP\BOUSSOLE\Outils
+ * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
+ * de lire les informations à jour.
+ *
+ * @todo
+ * 		Elle pourrait être avantageusement remplacé par le filtre SPIP info_plugin() si
+ * 		celui-ci pouvait forcer la relecture du XML (ajout d'un argument reload suffirait).
  *
  * @param $prefixe
- *
+ * 		Préfixe du plugin en minuscules.
  * @return array
+ * 		Tableau de toutes les informations du plugin ou tableau vide en cas d'erreur.
  */
 function inc_informer_plugin_dist($prefixe) {
 

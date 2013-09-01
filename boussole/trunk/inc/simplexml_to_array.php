@@ -1,11 +1,10 @@
 <?php
 /**
  * Ce fichier contient la fonction surchargeable de transformation d'un XML en tableau PHP.
- * Cette fonction est une réplication de la fonction identique de SPIP. Elle est dupliquée
- * pour pallier au fait que la fonction SPIP n'est dispobible qu'à partir de SPIP 3.0.10.
+ * Cette fonction est une réplication de la fonction homonyme de SPIP. Elle est dupliquée
+ * dans le plugin car la fonction SPIP n'est disponible qu'à partir de la version 3.0.10.
  *
  * @package SPIP\BOUSSOLE\Outils\XML
- *
  */
 
 
@@ -13,13 +12,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Transformation d'un texte XML ou d'un objet SimpleXML en tableau PHP.
+ * Transformation d'un texte XML ou d'un objet *SimpleXML* en tableau PHP.
  *
- * Si l'argument XML est un texte, il est au préalable converti en objet SimpleXML
+ * Si l'argument XML est un texte, il est au préalable converti en objet *SimpleXML*
  * par la fonction `simplexml_load_string()`. Ensuite, c'est l'objet *SimpleXML* qui est
- * traduit en tableau PHP à partir de la fonction xmlObjToArr()`.
+ * traduit en tableau PHP à partir de la fonction `xmlObjToArr()`.
  *
- * @uses xmlObjToArr
+ * @uses xmlObjToArr()
  * @example
  *	```
  * $page = recuperer_page($action);
@@ -35,15 +34,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		XML à phraser et à transformer en tableau PHP. Le XML peut être fourni :
  *
  * 		- soit comme une chaine de caractères représentant le texte XML lui-même,
- * 		- soit comme un objet XML produit par la fonction simplexml_load_string() de PHP.
+ * 		- soit comme un objet XML produit à partir du texte par la fonction
+ * 		`simplexml_load_string()` de PHP.
  * @param bool $utiliser_namespace
- * 		Indicateur d'utilisation des namespaces dans le XML. Si aucun namespace est
- * 		utilisé, il est plus performant de mettre l'argument à `false afin
- * 		d'éviter l'appel à la fonction getDocNamespaces()` qui peut-être lourd.
+ * 		Indicateur d'utilisation des namespaces dans le XML. Si aucun namespace n'est
+ * 		utilisé dans le XML, il est préférable de forcer l'argument à `false` afin
+ * 		d'éviter l'appel à la fonction `getDocNamespaces()`.
  * @return array
  */
 function inc_simplexml_to_array_dist($xml, $utiliser_namespace=false){
-	// decoder la chaine en SimpleXML si pas deja fait
+	// Décoder la chaine en SimpleXML si pas deja fait
 	if (is_string($xml))
 		$xml = simplexml_load_string($xml);
 	return array('root'=>@xmlObjToArr($xml, $utiliser_namespace));
@@ -51,17 +51,16 @@ function inc_simplexml_to_array_dist($xml, $utiliser_namespace=false){
 
 
 /**
- * Transformation d'un objet SimpleXML en tableau PHP.
+ * Transformation d'un objet *SimpleXML* en tableau PHP.
  *
- * @link http://www.php.net/manual/pt_BR/book.simplexml.php#108688
  * @autor xaviered at gmail dot com 17-May-2012 07:00
  *
  * @param object $objet_xml
- * 		Objet SimpleXML à phraser et à transformer en tableau PHP.
+ * 		Objet *SimpleXML* à phraser et à transformer en tableau PHP.
  * @param bool $utiliser_namespace
- * 		Indicateur d'utilisation des namespaces dans le XML. Si aucun namespace est
- * 		utilisé, il est plus performant de mettre l'argument à `false afin
- * 		d'éviter l'appel à la fonction getDocNamespaces()` qui peut-être lourd.
+ * 		Indicateur d'utilisation des namespaces dans le XML. Si aucun namespace n'est
+ * 		utilisé dans le XML, il est préférable de forcer l'argument à `false` afin
+ * 		d'éviter l'appel à la fonction getDocNamespaces()`.
  * @return array
 **/
 function xmlObjToArr($objet_xml, $utiliser_namespace=false) {
