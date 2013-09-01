@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		celui-ci pouvait forcer la relecture du XML. Il suffit pour cela de propager l'argument
  *		`$reload` de la fonction `get_infos()` de base.
  *
- * @param $prefixe
+ * @param string $prefixe
  * 		Préfixe du plugin en minuscules.
  * @return array
  * 		Tableau de toutes les informations du plugin ou tableau vide en cas d'erreur.

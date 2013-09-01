@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'API de gestion des boussoles sur le site client (base de données).
+ * Ce fichier contient l'API de gestion en base de données des boussoles installées sur le site client.
  *
  * @package SPIP\BOUSSOLE\Client\BDD
  */
@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Mise à jour en base de données de toutes les boussoles installées sur le site client.
  *
  * La fonction appelle, pour toutes les boussoles installées dans la base de données du site client,
- * l'api d'ajout d'une boussole.
+ * l'api d'ajout/actualisation d'une boussole.
  *
  * @api
  * @uses boussole_ajouter()
@@ -136,9 +136,9 @@ function boussole_ajouter($boussole, $serveur='spip') {
  * @api
  *
  * @param string $boussole
- * 	Alias de la boussole
+ * 		Alias de la boussole
  * @return boolean
- * 		`false` si l'alias de la boussole est vide, `true`sinon
+ * 		`false` si l'alias de la boussole est vide, `true` sinon
  */
 function boussole_supprimer($boussole) {
 	
