@@ -46,7 +46,7 @@ function boussole_actualiser_boussoles() {
  * 		rencontrée. Les erreurs possibles sont :
  *
  *		- celles retournées par la fonction de phrasage du XML, `phraser_xml_boussole()`,
- * 		- une erreur d'écriture en base de données.
+ *		- une erreur d'écriture en base de données.
  *
  * @param string $boussole
  * 		Alias de la boussole
@@ -168,7 +168,7 @@ function boussole_supprimer($boussole) {
  * @note
  * 		Les cas d'erreur retournés par cette fonction sont :
  *
- * 		- ceux de l'action action_serveur_informer_boussole_dist` si le serveur est actif,
+ * 		- ceux de l'action `action_serveur_informer_boussole_dist` si le serveur est actif,
  * 		- la réponse du serveur est invalide ou le serveur est inactif, sinon.
  *
  * @param string $boussole

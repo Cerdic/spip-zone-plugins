@@ -72,7 +72,7 @@ function boussole_declarer_tables_principales($tables_principales) {
  * sur les tables de la base de données modifiées ou ajoutées par le plugin.
  *
  * Le plugin se contente de déclarer les alias des tables qu'il ajoute
- * ainsi que des traitements classiques sur les url et les textes.
+ * ainsi que des traitements classiques sur les champs ajoutés de type url et texte.
  *
  * @pipeline declarer_tables_interfaces
  *

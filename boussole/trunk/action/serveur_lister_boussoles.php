@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'action serveur_lister_boussoles utilisée par un site client
+ * Ce fichier contient l'action `serveur_lister_boussoles` utilisée par un site client
  * pour obtenir la liste des boussoles hébergée par le serveur.
  *
  * @package SPIP\BOUSSOLE\Serveur\Action

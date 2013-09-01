@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'action serveur_informer_boussole utilisée par un site client
+ * Ce fichier contient l'action `serveur_informer_boussole` utilisée par un site client
  * pour obtenir les informations complètes sur une boussole.
  *
  * @package SPIP\BOUSSOLE\Serveur\Action
