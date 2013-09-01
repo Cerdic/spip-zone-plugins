@@ -15,8 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action est réservée aux webmestres. Elle nécessite un seul argument, le nom du serveur
  * à retirer.
  *
- * @uses boussole_actualiser_boussoles()
- *
  * @return void
  */
 function action_client_retirer_serveur_dist(){

@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Cette action est réservée aux webmestres. Elle nécessite un seul argument,
  * l'alias de la boussole.
  *
- * @uses boussole_actualiser_boussoles()
+ * @uses boussole_supprimer()
  *
  * @return void
  */
