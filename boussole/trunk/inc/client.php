@@ -37,13 +37,16 @@ function boussole_actualiser_boussoles() {
 
 
 /**
- * Ajout ou actualisation de la boussole dans la base de donnees du site client.
- *
- * Suivant que la boussole existe ou pas, la fonction renvoie le message adapté. Néanmoins,
- * le traitement est toujours le même et la boussole, si elle eexiste est préalablement supprimée
- * avant d'être insérée à nouveau.
+ * Ajout ou actualisation de la boussole dans la base de données du site client.
  *
  * @api
+ * @uses phraser_xml_boussole()
+ * @note
+ * 		Le message de retour reflète soit l'ajout ou l'actualisation de la boussole, soit l'erreur
+ * 		rencontrée. Les erreurs possibles sont :
+ *
+ *		- celles retournées par la fonction de phrasage du XML, `phraser_xml_boussole()`,
+ * 		- une erreur d'écriture en base de données.
  *
  * @param string $boussole
  * 		Alias de la boussole
@@ -53,7 +56,7 @@ function boussole_actualiser_boussoles() {
  * 		Tableau décrivant le statut des traitements effectués :
  *
  * 		- index 0 : `true` ou `false`,
- * 		- index 1 : libellé traduit du message d'erreur.
+ * 		- index 1 : libellé traduit du message.
  */
 function boussole_ajouter($boussole, $serveur='spip') {
 
@@ -161,26 +164,25 @@ function boussole_supprimer($boussole) {
 /**
  * Conversion du fichier XML de la boussole en un tableau des sites de la boussole.
  *
- * Les cles du tableau correspondent au nom des champs en base de donnees.
- *
  * @uses action_serveur_informer_boussole_dist()
-
  * @note
  * 		Les cas d'erreur retournés par cette fonction sont :
  *
  * 		- ceux de l'action action_serveur_informer_boussole_dist` si le serveur est actif,
- * 		- la réponse du serveur est invalide ou le serveur est inactif.
+ * 		- la réponse du serveur est invalide ou le serveur est inactif, sinon.
  *
  * @param string $boussole
  * 		Alias de la boussole
  * @param string $serveur
  * 		Nom du serveur fournissant les données sur la boussole
  * @return array
- * 		Tableau décrivant le statut des traitements effectués :
+ * 		Tableau décrivant tous les éléments de la boussole prêts à être insérés tels quels dans
+ *		la base de données et le message d'erreur éventuel :
  *
- * 		- index 0 : `true` ou `false`,
- * 		- index 1 : identifiant du message en cas d'erreur. Pour construire l'item de langue associé,
- * 					il faut que l'appelant préfixe l'identifiant par la chaine `message_nok_`.
+ * 		- index 'boussole' : les champs spécifiques de la boussole,
+ * 		- index 'sites' : les champs des sites de la boussole,
+ * 		- index 'extras' : les traductions de chaque éléments (boussole, site, groupe) de la boussole,
+ * 		- index 'erreur' : libellé traduit du message d'erreur.
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {
 
@@ -197,8 +199,8 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 	$page = recuperer_page($action);
 
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
-	$converti = $convertir(simplexml_load_string($page), false);
-	$tableau = $converti['root'];
+	$tableau = $convertir(simplexml_load_string($page), false);
+	$tableau = $tableau['root'];
 
 	if (isset($tableau['name'])
 	AND ($tableau['name'] == 'boussole')) {
