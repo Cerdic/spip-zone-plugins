@@ -4,7 +4,6 @@
  * pour obtenir les informations complètes sur une boussole.
  *
  * @package SPIP\BOUSSOLE\Serveur\Action
- *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

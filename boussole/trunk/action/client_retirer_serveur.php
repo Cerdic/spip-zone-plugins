@@ -1,12 +1,21 @@
 <?php
+/**
+ * Ce fichier contient l'action `client_retirer_serveur` utilisée par un site client pour
+ * retirer un serveur donné de la liste des serveurs consultables.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Action de retrait d'un serveur de la liste des serveurs accessibles
- * par le site client
- * *
- * @package SPIP\BOUSSOLE\Client\Action
+ * Cette action permet au site client de retirer un serveur donné de sa liste des serveurs
+ * qu'il est autorisé à interroger (variable de configuration).
+ *
+ * Cette action est réservée aux webmestres. Elle nécessite un seul argument, le nom du serveur
+ * à retirer.
+ *
+ * @uses boussole_actualiser_boussoles()
  *
  * @return void
  */

@@ -1,10 +1,23 @@
 <?php
+/**
+ * Ce fichier contient l'action `client_supprimer_boussole` utilisée par un site client pour
+ * supprimer de façon sécurisée une boussole donnée.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Action de suppression en base de donnees de la boussole
+ * Cette action permet au site client de supprimer de sa base de données, de façon sécurisée,
+ * une boussole donnée.
  *
+ * Cette action est réservée aux webmestres. Elle nécessite un seul argument,
+ * l'alias de la boussole.
+ *
+ * @uses boussole_actualiser_boussoles()
+ *
+ * @return void
  */
 function action_client_supprimer_boussole_dist(){
 
