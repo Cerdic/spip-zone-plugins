@@ -13,7 +13,9 @@
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
