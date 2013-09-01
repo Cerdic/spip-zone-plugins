@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon.
  *
  * @balise BOUSSOLE_INFOS
+ * @uses calcul_boussole_infos()
  *
  * @param string $p
  * 		alias de la boussole ou vide
@@ -20,27 +21,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function balise_BOUSSOLE_INFOS($p) {
 	
-	$alias = interprete_argument_balise(1,$p);
-	$alias = isset($alias) ? str_replace('\'', '"', $alias) : '""';
+	$alias_boussole = interprete_argument_balise(1,$p);
+	$alias_boussole = isset($alias_boussole) ? str_replace('\'', '"', $alias_boussole) : '""';
 
-	$p->code = 'calcul_boussole_infos('.$alias.')';
+	$p->code = 'calcul_boussole_infos('.$alias_boussole.')';
 
 	return $p;
 }
 
 /**
- * @param $alias
+ * @param $boussole
+ * 		Alias de la boussole ou vide
  *
  * @return array
  */
-function calcul_boussole_infos($alias) {
+function calcul_boussole_infos($boussole) {
 
 	$infos = array();
 	
 	$where = array();
 	$group_by = array();
-	if ($alias)
-		$where[] = 'aka_boussole=' . sql_quote($alias);
+	if ($boussole)
+		$where[] = 'aka_boussole=' . sql_quote($boussole);
 	else
 		$group_by[] = 'aka_boussole';
 
@@ -49,7 +51,7 @@ function calcul_boussole_infos($alias) {
 		foreach (array_map('reset', $akas_boussole) as $_aka_boussole) {
 			$meta = sql_fetsel('valeur, maj', 'spip_meta', 'nom=' . sql_quote('boussole_infos_' . $_aka_boussole));
 			if ($meta) {
-				if ($alias)
+				if ($boussole)
 					$infos = array_merge(unserialize($meta['valeur']), array('maj' => $meta['maj']));
 				else
 					$infos[] = array_merge(unserialize($meta['valeur']), array('maj' => $meta['maj']));
@@ -138,6 +140,7 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
  *
  * @api
  * @filtre boussole_lister_caches
+ * @pipeline_appel declarer_boussoles()
  *
  * @return array
  */
@@ -220,6 +223,7 @@ function boussole_lister_caches() {
  *
  * @api
  * @filtre boussole_compteur_hebergement
+ * @pipeline_appel declarer_boussoles()
  *
  * @return int
  */

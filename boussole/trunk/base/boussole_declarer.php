@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Le plugin déclare deux nouvelles tables qui sont :
  * 
- * - `spip_boussoles`, qui contient les éléments constitutifs de toutes les boussoles;
+ * - `spip_boussoles`, qui contient les éléments constitutifs des boussoles,
  * - `spip_boussoles_extras`, qui contient les traductions de ces éléments.
  *
  * @pipeline declarer_tables_principales
