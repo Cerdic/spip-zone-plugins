@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient les déclarations des modifications de la base de données requises
+ * Ce fichier contient les modifications de la base de données requises
  * par le plugin.
  *
  * @package SPIP\BOUSSOLE\Schema\Declaration

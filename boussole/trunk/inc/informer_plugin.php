@@ -9,14 +9,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Récupération des informations d'un plugin connu par son préfixe.
+ * Récupération des informations d'un plugin désigné par son préfixe.
  *
- * Cette fonction reloade systématiquement le cache des plugins afin d'être sur
+ * Cette fonction recharge systématiquement le cache des plugins afin d'être sur
  * de lire les informations à jour.
  *
  * @todo
- * 		Elle pourrait être avantageusement remplacé par le filtre SPIP info_plugin() si
- * 		celui-ci pouvait forcer la relecture du XML (ajout d'un argument reload suffirait).
+ * 		Cette fonction pourrait être avantageusement remplacée par le filtre SPIP `info_plugin()` si
+ * 		celui-ci pouvait forcer la relecture du XML. Il suffit pour cela de propager l'argument
+ *		`$reload` de la fonction `get_infos()` de base.
  *
  * @param $prefixe
  * 		Préfixe du plugin en minuscules.

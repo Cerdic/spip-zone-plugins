@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient les fonctions de création, de mise à jour et de suppression
- * du schéma de données propres au plugin (tables de la base de données et configuration meta)
+ * du schéma de données propres au plugin (tables et configuration).
  *
  * @package SPIP\BOUSSOLE\Schema\Installation
  */
@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Installation du schéma de données propre au plugin et gestion des migrations suivant
  * les évolutions du schéma.
  *
- * Le schéma comprend des tables en BDD et des variables de configuration.
+ * Le schéma comprend des tables et des variables de configuration.
  *
  * @api
  * @see boussole_declarer_tables_principales()

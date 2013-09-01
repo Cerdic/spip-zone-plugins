@@ -1,9 +1,17 @@
 <?php
+/**
+ * Ce fichier contient l'API de gestion des caches des boussoles hébergées par le site serveur.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Cache
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 if (!defined('_BOUSSOLE_PATTERN_SHA'))
-	/** Pattern pour insérer le sha du XML calculé à posteriori dans le cache */
+	/**
+	 * Pattern permettant d'insérer le sha256 calculé à partir du XML d'origine d'une boussole
+	 * dans le cache produit */
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
 
@@ -11,10 +19,11 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
  * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste
  * de ces boussoles.
  *
- * @package SPIP\BOUSSOLE\Serveur\Cache
  * @api
+ * @uses boussole_cacher_xml()
+ * @uses boussole_cacher_liste()
  *
- * @return bool
+ * @return void
  */
 function boussole_actualiser_caches() {
 
@@ -25,7 +34,6 @@ function boussole_actualiser_caches() {
 			supprimer_fichier($_fichier);
 		}
 	}
-
 
 	// Acquisition de la liste des boussoles disponibles sur le serveur.
 	// (on sait déjà que le mode serveur est actif)
@@ -42,8 +50,6 @@ function boussole_actualiser_caches() {
 		// Génération du cache de la liste des boussoles disponibles pour l'action serveur_lister_boussoles
 		boussole_cacher_liste($boussoles);
 	}
-
-	return true;
 }
 
 
@@ -51,12 +57,10 @@ function boussole_actualiser_caches() {
  * Génération du cache xml de la boussole contruit soit à partir de xml non traduit soit à partir d'un xml déjà traduit.
  * Ce cache est renvoyé sur l'action serveur_informer_boussole
  *
- * @package	SPIP\BOUSSOLE\Serveur\Cache
  * @api
  *
  * @param string	$alias
  * @param string	$prefixe_plugin
- *
  * @return bool
  */
 function boussole_cacher_xml($alias, $prefixe_plugin='') {
@@ -97,7 +101,6 @@ function boussole_cacher_xml($alias, $prefixe_plugin='') {
  * Génération du cache de la liste des boussoles disponibles
  * Ce cache est renvoyé sur l'action serveur_lister_boussoles
  *
- * @package	SPIP\BOUSSOLE\Serveur\Cache
  * @api
  *
  * @param array $boussoles
@@ -195,13 +198,12 @@ function boussole_valider_xml($url, &$erreur) {
 
 /**
  * Lecture du xml non traduit (donc issu d'un plugin) et génération du xml traduit et incluant les logos
-
+ *
  * @package	SPIP\BOUSSOLE\Serveur\Cache
  *
  * @param string	$fichier_xml
  * @param string	$alias_boussole
  * @param string	$prefixe_plugin
- *
  * @return bool
  */
 function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {

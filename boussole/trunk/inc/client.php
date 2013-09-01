@@ -1,15 +1,23 @@
 <?php
+/**
+ * Ce fichier contient l'API de gestion des boussoles sur le site client (base de données).
+ *
+ * @package SPIP\BOUSSOLE\Client\BDD
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Mise à jour en base de données des boussoles installées sur le site client.
+ * Mise à jour en base de données de toutes les boussoles installées sur le site client.
  *
- * @package SPIP\BOUSSOLE\Client
+ * La fonction appelle, pour toutes les boussoles installées dans la base de données du site client,
+ * l'api d'ajout d'une boussole.
+ *
  * @api
+ * @uses boussole_ajouter()
  *
- * @return bool
+ * @return void
  */
 function boussole_actualiser_boussoles() {
 
@@ -25,22 +33,27 @@ function boussole_actualiser_boussoles() {
 				spip_log("Actualisation ok (boussole = " . $_infos['alias'] . ")", 'boussole' . _LOG_INFO);
 		}
 	}
-
-	return true;
 }
 
 
 /**
- * Ajout de la boussole dans la base de donnees du site client
+ * Ajout ou actualisation de la boussole dans la base de donnees du site client.
  *
- * @package	SPIP\BOUSSOLE\Client
+ * Suivant que la boussole existe ou pas, la fonction renvoie le message adapté. Néanmoins,
+ * le traitement est toujours le même et la boussole, si elle eexiste est préalablement supprimée
+ * avant d'être insérée à nouveau.
+ *
  * @api
  *
- * @param string $boussole	Alias de la boussole
- * @param string $serveur	Alias du serveur fournissant les données sur la boussole
+ * @param string $boussole
+ * 		Alias de la boussole
+ * @param string $serveur
+ * 		Alias du serveur fournissant les données sur la boussole
+ * @return array
+ * 		Tableau décrivant le statut des traitements effectués :
  *
- * @return array()	index 0 : true ou false
- * 					index 1 : libellé traduit du message d'erreur
+ * 		- index 0 : `true` ou `false`,
+ * 		- index 1 : libellé traduit du message d'erreur.
  */
 function boussole_ajouter($boussole, $serveur='spip') {
 
@@ -118,44 +131,56 @@ function boussole_ajouter($boussole, $serveur='spip') {
 
 
 /**
- * Suppression de la boussole dans la base de donnees
+ * Suppression de la boussole dans la base de données du site client.
  *
- * @package	SPIP\BOUSSOLE\Client
  * @api
  *
- * @param string $aka_boussole	alias de la boussole
- *
+ * @param string $boussole
+ * 	Alias de la boussole
  * @return boolean
+ * 		`false` si l'alias de la boussole est vide, `true`sinon
  */
-function boussole_supprimer($aka_boussole) {
+function boussole_supprimer($boussole) {
 	
 	// Alias non conforme
-	if (!$aka_boussole)
+	if (!$boussole)
 		return false;
 
 	// On supprime les sites de cette boussole
-	sql_delete('spip_boussoles','aka_boussole='.sql_quote($aka_boussole));
+	sql_delete('spip_boussoles','aka_boussole='.sql_quote($boussole));
 	// On supprime les extras de cette boussole
 	$trouver = charger_fonction('trouver_table', 'base');
 	if ($trouver('spip_boussoles_extras'))
-		sql_delete('spip_boussoles_extras','aka_boussole='.sql_quote($aka_boussole));
+		sql_delete('spip_boussoles_extras','aka_boussole='.sql_quote($boussole));
 	// On supprime ensuite la meta consignant la derniere mise a jour de cette boussole
-	effacer_meta('boussole_infos_' . $aka_boussole);
+	effacer_meta('boussole_infos_' . $boussole);
 
 	return true;
 }
 
 /**
- * Renvoie, a partir du fichier xml de la boussole, un tableau des sites de la boussole
- * Les cles du tableau correspondent au nom des champs en base de donnees
+ * Conversion du fichier XML de la boussole en un tableau des sites de la boussole.
  *
- * @package	SPIP\BOUSSOLE\Client
+ * Les cles du tableau correspondent au nom des champs en base de donnees.
  *
- * @param string $boussole	Alias de la boussole
- * @param string $serveur	Alias du serveur fournissant les données sur la boussole
+ * @uses action_serveur_informer_boussole_dist()
+
+ * @note
+ * 		Les cas d'erreur retournés par cette fonction sont :
  *
- * @return array()	index 0 : true ou false
- * 					index 1 : id de l'erreur (l'item associé se construit en rajoutant message_nok_ en préfixe)
+ * 		- ceux de l'action action_serveur_informer_boussole_dist` si le serveur est actif,
+ * 		- la réponse du serveur est invalide ou le serveur est inactif.
+ *
+ * @param string $boussole
+ * 		Alias de la boussole
+ * @param string $serveur
+ * 		Nom du serveur fournissant les données sur la boussole
+ * @return array
+ * 		Tableau décrivant le statut des traitements effectués :
+ *
+ * 		- index 0 : `true` ou `false`,
+ * 		- index 1 : identifiant du message en cas d'erreur. Pour construire l'item de langue associé,
+ * 					il faut que l'appelant préfixe l'identifiant par la chaine `message_nok_`.
  */
 function phraser_xml_boussole($boussole, $serveur='spip') {
 
