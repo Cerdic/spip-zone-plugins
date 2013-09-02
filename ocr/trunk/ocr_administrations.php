@@ -45,7 +45,11 @@ function ocr_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.4'] = array(
 		array('ocr_reinitialiser_totalement_document'),
 	);
-	ecrire_config('palette/palette_public','');
+
+	// Forcer l'analyse de tous les documents (changement de format du contenu du champ "ocr")
+	$maj['0.5'] = array(
+		array('ocr_reinitialiser_totalement_document'),
+	);
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

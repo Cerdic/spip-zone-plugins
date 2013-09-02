@@ -1,12 +1,12 @@
 <paquet
 	prefix="ocr"
 	categorie="multimedia"
-	version="0.2.0"
+	version="0.2.1"
 	etat="test"
 	compatibilite="[3.0.11;]"
 	logo="prive/themes/spip/images/ocr-64.png"
 	documentation="http://contrib.spip.net/ocr"
-	schema="0.4" 
+	schema="0.5" 
 >
 	<!--
 		Paquet genere le 2013-08-15 15:59:34
