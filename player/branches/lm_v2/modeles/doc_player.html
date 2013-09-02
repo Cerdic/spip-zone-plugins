@@ -27,13 +27,13 @@
 ][(#EXTENSION|=={mp3}|oui)
 
 [(#GET{player}|in_array{#ARRAY{0,players/360player,1,players/lecteur_audio}}|oui)
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align,center})][ (#ENV{class})] spip_lien_ok'[
+<div class='spip_document_#ID_DOCUMENT spip_documents spip_documents_player[ spip_documents_(#ENV{align,center})][ (#ENV{class})] spip_lien_ok'[
 	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#ENV{largeur}|max{120})px]']>
 	<INCLURE{fond=#GET{player},id_document,env}>
 </div>
 ]
 [(#GET{player}|in_array{#ARRAY{0,players/360player,1,players/lecteur_audio}}|non)
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dl class='spip_document_#ID_DOCUMENT spip_documents spip_documents_player[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#ID_VIGNETTE|oui)
 	<dt>
 	<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
