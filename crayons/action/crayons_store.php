@@ -206,9 +206,19 @@ function crayons_store_set_modifs($modifs, $return) {
 				include_spip('action/editer_site');
 				$fun = 'revisions_sites';
 				break;
+			case 'document':
+				include_spip('plugins/installer');
+				include_spip('inc/plugin');
+				if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
+						include_spip('action/editer_document');
+						$fun = 'document_modifier';
+				} else {
+						include_spip('inc/modifier');
+						$fun = 'revision_document';
+				}
+				break;
 			// cas geres de la maniere la plus standard
 			case 'auteur':
-			case 'document':
 			case 'mot':
 			case 'signature':
 			case 'petition':
