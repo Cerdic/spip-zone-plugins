@@ -48,6 +48,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'ocr_titre' => 'ocr',
 
+	// S
+	'statistiques_titre' => 'Statistiques',
+	'statistiques_bouton_tout' => 'Relancer tout',
+	'statistiques_label_nb_err' => 'Erreur lors de l\'analyse, ou pas analysables',
+	'statistiques_label_nb_non' => 'Pas encore analysés',
+	'statistiques_label_nb_oui' => 'Analysés',
+	'statistiques_message_relance' => 'L\'analyse OCR a été relancée sur tous les documents',
+
 	// T
 	'taille_texte_max' => 'Limite de caractères dans le texte extrait',
 	'test_label_id_document' => 'Document à analyser',
