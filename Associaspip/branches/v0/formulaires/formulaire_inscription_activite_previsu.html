@@ -1,0 +1,73 @@
+<div class="spip_forms">
+<fieldset>
+<legend>Confirmation d'inscription</legend>
+<form action="#" method="POST">
+<input name="id_evenement" type="hidden" value="[(#ENV{id_evenement})]" />
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="nom"><:asso:adherent_libelle_nom:> :</label>[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]</span>
+		<input name="nom" type="text" class="choix" size="40" value="[(#ENV{nom})]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="id_adherent"><:asso:adherent_libelle_adherent:> :</label>
+		</span>
+		<input name="id_adherent" type="text" class="choix" size="40" value="[(#ENV{id_adherent})]"  /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="email"><:asso:adherent_libelle_email:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_email})</span>]
+		</span>
+		<input name="email" type="text" class="choix" size="40" value="[(#ENV{email})]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="adresse"><:asso:adherent_libelle_adresse:> :</label> 
+		</span>
+		<textarea name="adresse" type="text" class="choix" rows="2" cols="30" />[(#ENV{adresse})]</textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone"><:asso:adherent_libelle_telephone:> :</label>
+		</span>	
+		<input name="cp" type="text" class="choix" size="40" value="[(#ENV{telephone})]" /> 
+	</div>
+	<p class='spip_form_label'><:asso:activite_libelle_accompagne_de:> :</p>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="membres"><:asso:activite_libelle_membres:> :</label>
+		</span>
+		<input name="membres" type="text" id="membres" size="40" value="[(#ENV{membres})]" />
+	</div>	
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="non_membres"><:asso:activite_libelle_non_membres:> :</label>
+		</span>
+		<input name="non_membres" type="text" id="non_membres" size="40" value="[(#ENV{non_membres})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="inscrits"><:asso:activite_libelle_nombre_inscrit:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_inscrits})</span>]
+		</span>
+		<input name="inscrits" type="text" id="inscrits" size="40" value="[(#ENV{inscrits})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="montant"><:asso:activite_libelle_montant_inscription:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_montant})</span>]
+		</span>
+		<input name="montant" type="text" id="montant" size="40" value="[(#ENV{montant})]" />
+	</div>
+	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="commentaire"><:asso:activite_libelle_commentaires:>:</label>
+		</span>
+		<textarea name="commentaire" id="commentaire" rows="10" cols="30" />[(#ENV{commentaire})]</textarea>
+	</div>
+	<div>
+		<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />	
+	</div>
+</form>
+</fieldset>
+</div>

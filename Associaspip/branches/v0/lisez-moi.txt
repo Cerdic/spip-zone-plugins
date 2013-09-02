@@ -1,0 +1,22 @@
+NOTES DE VERSION
+
+** Version 0.21
+- Bug d'entrée de plugin en l'absence d'adhérent
+- Bug filtres sur les relances
+- Nouvelle date de validité automatisée
+
+** Version 0.3
+- Gestion des dons
+- Bouton retour sur actions
+- Liste de l'équipe dirigeante 
+- Page Voir adhérent
+- Champ autorisation de publication
+- Statut bienfaiteur pour les adhérents
+- Nouvelle table des financiers
+- Ajout d'opérations comptable
+
+** Version 0.31
+- Bug d'encodage sur les banques
+- Ajout automatisé du visiteur SPIP
+- Recherche sur ID (ou ref int)
+- Renommage de fichiers

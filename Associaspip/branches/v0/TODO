@@ -1,0 +1,80 @@
+*** Bugs ***
+- Double envoi du mail d'adhésion
+- Charset dans le pdf Adhérents
+
+*** Mise en forme ***
+
+==Compatibilite XHTML==
+A faire
+- supprimer les tableaux de presentation ?
+- mettre les libelles des TD en white-space:nowrap en attendant
+
+== Charset ==
+Passer tout le code en UTF-8 plutot qu'en entites HTML ?
+
+== Indenter le code ==
+Il serait plus propre d'homogeneiser l'indentation du code.
+Utiliser l'indentation de SPIP serait le mieux selon moi.
+
+== Visualisation de source ==
+Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
+source PHP, afin d'avoir un code lisible en sortie.
+
+*** Gestion comptable  ***
+
+== Gestion des droits==
+Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
+
+== Comptes ==
+- Ajouter une fonction de transfert de compte à compte
+- Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
+- Tendre vers une gestion normalisée de la compta (compta a double ecriture) ?
+
+== ID membres ==
+Dans la config, faire le choix entre une gestion par l'ID ou par l'id_asso (codification structuree): c'est utile pour la recherche et les enregistrements comptables
+
+
+*** Gros Travaux ***
+
+== Internationalisation ==
+En cours.
+- Activites OK
+- Adherents OK
+
+==Requetes SQL==
+- Utiliser la fonction _q($variable) plutot que les addslashes
+		$var = "toto";
+		echo _q($var); // prints 'toto'
+		echo addslashes($var); // prints toto
+
+- Il faudrait egalement faire un _q sur tous les elements recuperes de $_POST
+		ou _$GET ou $_REQUEST, afin d'eviter les erreurs SQL generes avec les
+		apostrophes dans les noms, prenoms, etc (et pas seulement dans les
+		commentaires)
+
+== Templates==
+- #FORMULAIRE_MODIFICATION_ADHERENT (v0.4)
+
+
+*** Architecture ***
+
+== Spip_listes 1.9.2 ==
+Ajouter l'inscription aux listes de diffusion
+
+*** Suggestions ***
+
+== Logo activites==
+A changer
+
+== Format des dates ==
+Il serait vraiment excellent que les francais puissent saisir une date en francais
+et que les anglais puissent saisir une date en anglais
+(avec widget calendar ?)
+
+== Devises ==
+Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
+dans l'internationalisation. (euro, dollar, livre, etc).
+
+== Creer_login == 
+Fabrication du login a discuter
+
