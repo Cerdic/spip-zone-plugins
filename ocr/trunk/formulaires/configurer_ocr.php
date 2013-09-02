@@ -11,14 +11,14 @@ function formulaires_configurer_ocr_charger_dist(){
 	 * -* intervalle de 600s entre les lancements de CRON
 	 * -* 5 fichiers analysés par CRON
 	 * -* binaire de reconnaissance des caractères : /usr/bin/tesseract
-	 * -* options du binaire : -fra (modèle de langue : français)
+	 * -* options du binaire : -l fra (modèle de langue : français)
 	 * -* taille maximale du texte inséré dans la base de données
 	 * */
 	$valeur = array(
 		'intervalle_cron' =>  $ocr['intervalle_cron'] ? $ocr['intervalle_cron'] : 600,
 		'nb_docs' =>  $ocr['nb_docs'] ? $ocr['nb_docs'] : 5,
 		'ocr_bin' => $ocr['ocr_bin'] ? $ocr['ocr_bin'] : '/usr/bin/tesseract',
-		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : '-fra',
+		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : '-l fra',
 		'taille_texte_max' => $ocr['taille_texte_max'] ? $ocr['taille_texte_max'] : '50000',
 	);
 	return $valeur;
