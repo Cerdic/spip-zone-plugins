@@ -1,4 +1,14 @@
 <BOUCLE_definition(DEFINITIONS){id_definition}>
-<h1>#TITRE</h1>
-#TEXTE
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(DICTIONNAIRES){id_dictionnaire}> &gt; <a href="#URL_DICTIONNAIRE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+<div class="contenu-principal">
+	<div class="cartouche">
+		[(#LOGO_DEFINITION|image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
+	</div>
+
+	[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+</div>
 </BOUCLE_definition>
