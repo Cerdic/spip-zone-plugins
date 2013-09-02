@@ -8,5 +8,4 @@ function titres_typographies_declarer_tables_interfaces($interfaces){
 	}
 	return $interfaces;
 }
-
 ?>
