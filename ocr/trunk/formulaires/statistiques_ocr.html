@@ -12,11 +12,11 @@
 		<input type="hidden" name="_meta_casier" value="ocr" />
 		
 		<ul>
-			<BOUCLE_oui(DOCUMENTS){ocr_analyse=oui}></BOUCLE_oui>
+			<BOUCLE_oui(DOCUMENTS){ocr_analyse=oui}{tout}></BOUCLE_oui>
 			[(#SAISIE{input,nb_oui,label=<:ocr:statistiques_label_nb_oui:>,disable=oui,valeur=#_oui:GRAND_TOTAL})]
-			<BOUCLE_non(DOCUMENTS){ocr_analyse=non}></BOUCLE_non>
+			<BOUCLE_non(DOCUMENTS){ocr_analyse=non}{tout}></BOUCLE_non>
 			[(#SAISIE{input,nb_non,label=<:ocr:statistiques_label_nb_non:>,disable=oui,valeur=#_non:GRAND_TOTAL})]
-			<BOUCLE_err(DOCUMENTS){ocr_analyse=err}></BOUCLE_err>
+			<BOUCLE_err(DOCUMENTS){ocr_analyse=err}{tout}></BOUCLE_err>
 			[(#SAISIE{input,nb_err,label=<:ocr:statistiques_label_nb_err:>,disable=oui,valeur=#_err:GRAND_TOTAL})]
 		</ul>
 		
