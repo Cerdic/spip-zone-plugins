@@ -24,7 +24,7 @@ Sinon, utiliser le comportement normal.
 [(#GET{player}|=={dewplayer}|oui)#SET{my_width,#ENV{width,200}}]
 #SET{my_width,#LOGO_DOCUMENT||largeur|min{350}|max{120,#GET{my_width}}}
 
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_doc_player spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dl class='spip_document_#ID_DOCUMENT spip_documents spip_documents_player[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_doc_player spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#ID_VIGNETTE|et{#ENV{afficher_vignette}|!={non}}|?{
 	<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
 	<img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a></dt>
