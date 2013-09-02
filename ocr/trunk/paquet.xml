@@ -31,4 +31,6 @@
 	<pipeline nom="rechercher_liste_des_champs" inclure="ocr_pipelines.php" />
 	<pipeline nom="rechercher_liste_des_jointures" inclure="ocr_pipelines.php" />
 
+	<menu nom="configurer_ocr" titre="ocr:configuration_ocr" parent="menu_configuration" icone="images/ocr-16.png" />
+
 </paquet>

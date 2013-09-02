@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'cfg_titre_test' => 'Test de l\'analyse OCR',
+	'configuration_ocr' => 'Analyse OCR',
 
 	// E
 	'erreur_binaire_indisponible' => 'Ce logiciel n\'est pas disponible sur le serveur.',
