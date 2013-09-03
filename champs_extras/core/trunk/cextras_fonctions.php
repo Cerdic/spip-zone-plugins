@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     </BOUCLE_x>
  *     ```
  *
- * @balise CHAMP_EXTRA
+ * @balise
  * @note
  *     Lève une erreur de squelette si le nom de champs extras
  *     n'est pas indiqué en premier paramètre de la balise
@@ -106,7 +106,7 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
  *     #LISTER_CHOIX**{champ} // retourne un tableau cle/valeur
  *     ```
  *
- * @balise LISTER_CHOIX
+ * @balise
  * @param Champ $p
  *     AST au niveau de la balise
  * @return Champ
@@ -194,7 +194,7 @@ function calculer_balise_LISTER_CHOIX($objet, $colonne) {
  *     Si cette restriction est trop limitative, on verra par la suite
  *     pour l'instant, on laisse comme ca...
  *
- * @balise LISTER_VALEURS
+ * @balise
  * @param Champ $p
  *     AST au niveau de la balise
  * @return Champ
