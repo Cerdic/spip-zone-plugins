@@ -215,7 +215,7 @@ function cs_urls_propres($type, $id) {
 		$s = sql_select("url, date", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
 		$now = date('Y-m-d H:i:s');
 		$info = ' ('._T('couteau:url_verrouillee').')';
-		while ($t = sql_fetch($s)) $res .= ($res?'<br />':'').'&bull;&nbsp;<html>'.$t['url'].($t[date]>$now?$info:'')."</html>\n";
+		while ($t = sql_fetch($s)) $res .= ($res?'<br />':'').'&bull;&nbsp;<html>'.$t['url'].($t['date']>$now?$info:'')."</html>\n";
 		if(!find_in_path($f = $type."."._EXTENSION_SQUELETTES))
 			$lien_public .= '{{[!]}} {'._T('info_erreur_squelette2',array('fichier'=>$f))."}\n\n";
 	// SPIP 1.92

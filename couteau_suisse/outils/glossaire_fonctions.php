@@ -35,8 +35,9 @@ if(!defined('_SPIP19300'))
 //   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre_mot) { return 'javascript:;'; }
 function glossaire_generer_url_dist($id_mot, $titre_mot) {
 	if(defined('_SPIP19300')) 
-		return generer_url_entite($id_mot, 'mot'); // depuis SPIP 2.0
-		else { charger_generer_url(); return generer_url_mot($id_mot); } // avant SPIP 2.0
+		return generer_url_entite($id_mot, 'mot');
+	// avant SPIP 2.0 :
+	charger_generer_url(); return generer_url_mot($id_mot);
 }
 
 // surcharge possible de cette fonction glossaire_generer_mot_dist par : glossaire_generer_mot($id_mot, $mot) 
@@ -151,8 +152,8 @@ function glossaire_parse($titre) {
 		// expliciter l'apostrophe et les accents
 		$mots = str_replace("'", "(?:'|&#8217;)", glossaire_accents(join('|', $mots)));
 	} else $mots = '';
-	$ok_regexp = @preg_replace_callback($regs, 'glossaire_echappe_mot_callback', 'test', 1)!==false;
-	return array($mots, $regs, $titres, $ok_regexp);
+	$ok_regexp = count($regs)?preg_replace($regs, 't', 'test', 1)!==null:true;
+	return array($mots,$ok_regexp?$regs:array(), $titres, $ok_regexp);
 }
 
 function glossaire_gogogo($texte, $mots, $limit, &$unicode) {

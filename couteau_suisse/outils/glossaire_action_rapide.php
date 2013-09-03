@@ -8,32 +8,37 @@
 // verifie les entrees mortes
 function glossaire_verifie(&$c) {
 	include_spip('public/parametrer'); // pour mes_fonctions
-	$res = array();
+	$res = $res2 = array();
 	$c = count($gloss = glossaire_query_tab());
-	for($i=0; $i<$c; $i++) for($j=$i+1; $j<$c; $j++) {
-		$gi = &$gloss[$i]; $gj = &$gloss[$j];
-		if(!isset($gi['mots'])) {
-			list($gi['mots'],$gi['regs'],$gi['titre2'], $ok_regexp) = glossaire_parse(extraire_multi($gi['titre']));
-			if(!$ok_regexp) $res[] = "&bull; ".htmlentities(_L('Erreur Regexp : @reg@ tirée du titre "@titre@"', array('reg'=>var_export($gi['regs'], 1), 'titre'=>extraire_multi($gi['titre']))))."\n_ ";
-		}
-		if(!isset($gj['mots'])) {
-			list($gj['mots'],$gj['regs'],$gj['titre2'], $ok_regexp) = glossaire_parse(extraire_multi($gj['titre']));
-			if(!$ok_regexp) $res[] = "&bull; ".htmlentities(_L('Erreur Regexp : @reg@ tirée du titre "@titre@"', array('reg'=>var_export($gi['regs'], 1), 'titre'=>extraire_multi($gi['titre']))))."\n_ ";
-		}
-		$u = false;
-		$titre = $gi['mots']?glossaire_gogogo($gj['titre2'], $gi['mots'], -1, $u):'';
-		if(count($gi['regs']))
-			$titre .= preg_replace_callback($gi['regs'], "glossaire_echappe_mot_callback", $gj[titre], -1);
-		if(strpos($titre,'@@GLOSS')!==false) {	
-			$a = '['.$gi['titre'].'->mot'.$gi['id_mot'].']';
-			$b = '['.$gj['titre'].'->mot'.$gj['id_mot'].']';
-			$res[] = "&bull; "._T('couteauprive:glossaire_erreur', array('mot1'=>$a, 'mot2'=>$b))."\n_ ";
+	for($i=0; $i<$c; $i++) {
+		$gi = &$gloss[$i]; glossaire_verifie_init($gi, $res);
+		for($j=$i+1; $j<$c; $j++) {
+			$gj = &$gloss[$j]; glossaire_verifie_init($gj, $res);
+			$u = false;
+			$titre = $gi['mots']?glossaire_gogogo($gj['titre2'], $gi['mots'], -1, $u):'';
+			if(count($gi['regs']))
+				$titre .= preg_replace_callback($gi['regs'], "glossaire_echappe_mot_callback", $gj['titre'], -1);
+			if(strpos($titre,'@@GLOSS')!==false) {	
+				$a = '['.$gi['titre'].'->mot'.$gi['id_mot'].']';
+				$b = '['.$gj['titre'].'->mot'.$gj['id_mot'].']';
+				$res2[] = "&bull; ".couteauprive_T('glossaire_erreur', array('mot1'=>$a, 'mot2'=>$b));
+			}
 		}
 	}
-	if(count($res)) return propre(join('', $res)._T('couteauprive:glossaire_inverser'));
-	return '';
+	if(count($res)) $res[] = couteauprive_T('glossaire_verifier');
+	if(count($res2)) $res2[] = couteauprive_T('glossaire_inverser');
+	return propre(join("\n_ ", array_merge($res, $res2)));
 }
 
+// function d'initialisation utilisee par la precedente
+function glossaire_verifie_init(&$g, &$res) {
+	static $gu;
+	if(!isset($g['mots'])) {
+		if(!isset($gu)) $gu = function_exists('glossaire_generer_url')?'glossaire_generer_url':'glossaire_generer_url_dist';
+		list($g['mots'], $g['regs'], $g['titre2'], $ok_regexp) = glossaire_parse(extraire_multi($g['titre']));
+		if(!$ok_regexp) $res[] = "&bull; <html>"._L('Erreur : ') . cs_lien(glossaire_generer_url_dist($g['id_mot']), htmlentities(extraire_multi($g['titre'])))."</html>";
+	}
+}
 
 function glossaire_action_rapide($actif) {
 	if(_request('test_bd')) {
