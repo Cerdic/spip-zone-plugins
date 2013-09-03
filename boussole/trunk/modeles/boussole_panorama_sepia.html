@@ -29,7 +29,7 @@
 <B_boussole>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 [(#ENV{titre_boussole, non}|=={oui}|oui)
-	[<h2>(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
+	[<h2 class="h2">(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
 ]
 <BOUCLE_boussole(BOUSSOLES){aka_boussole=#ENV{boussole}}{affiche=oui}{aka_groupe?}{par rang_groupe, rang_site}>
 	[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle, nom_slogan_site}, #AKA_SITE})]})]

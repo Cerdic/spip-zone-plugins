@@ -27,13 +27,13 @@
 <B_groupe>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 [(#ENV{titre_boussole, non}|=={oui}|oui)
-	[<h2>(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
+	[<h2 class="h2">(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
 ]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 	[(#REM) <!-- Liste des site du groupe en cours -->]
 	<B_site>
 [(#ENV{titre_groupe, non}|=={oui}|oui)
-	[<h3>(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
+	[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
 ]
 	<ul[ class="(#ENV{ul_class})"]>
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>

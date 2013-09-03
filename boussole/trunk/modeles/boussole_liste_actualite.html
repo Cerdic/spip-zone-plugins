@@ -22,7 +22,7 @@
 
 <B_boussole>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
-	[<h2>(#ENV{titre_actualite})</h2>]
+	[<h2 class="h2">(#ENV{titre_actualite})</h2>]
 <BOUCLE_boussole(BOUSSOLES)	{aka_boussole=#ENV{boussole}}
 							{aka_groupe?}
 							{id_syndic > 0}
@@ -31,7 +31,7 @@
 	[(#REM) <!-- Liste des site articles syndiques des sites -->]
 	<B_syndication>
 [(#ENV{titre_site}|=={oui}|oui)
-	[<h3>(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})</h3>]
+	[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})</h3>]
 ]
 	<ul[ class="(#ENV{ul_class})"]>
 	<BOUCLE_syndication(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0, #ENV{max_articles, 5}}>
