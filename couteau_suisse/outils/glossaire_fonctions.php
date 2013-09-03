@@ -169,7 +169,7 @@ function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 		$texte = preg_replace_callback(",(?:$mots)&(?:"._GLOSSAIRE_ACCENTS.');,i', 'glossaire_echappe_balises_callback', $texte);
 	}
 	// a chaque mot reconnu, on pose une balise temporaire cryptee
-	return trim(preg_replace_callback(",(?<=\W)(?:$mots)(?=\W),i", "glossaire_echappe_mot_callback", " $texte ", $limit));
+	return trim(preg_replace_callback(",(?<=\W)(?:$mots)(?=\W),i", 'glossaire_echappe_mot_callback', " $texte ", $limit));
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|abbr|a
@@ -209,7 +209,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 		list($les_mots, $les_regexp, $les_titres, $ok_regexp) = glossaire_parse($titre = extraire_multi($mot['titre']));
 		$mot_present = false;
 		if(!$ok_regexp) 
-			spip_log(couteauprive_T('glossaire:nom').' - Erreur REGEXP : '.var_export($les_regexp, 1));
+			spip_log(couteauprive_T('glossaire:nom').'. '.couteauprive_T('erreur_syntaxe').$titre);
 		elseif(count($les_regexp)) {
 			// a chaque expression reconnue, on pose une balise temporaire cryptee
 			// ce remplacement est puissant, attention aux balises HTML ; par exemple, eviter : ,div,i
@@ -220,11 +220,9 @@ function cs_rempl_glossaire($texte, $liste=false) {
 			// en attendant, construisons qd meme la fenetre...
 			$mot_present = true;
 		}
-		if($les_mots) {
-			if(preg_match(",\W(?:$les_mots)\W,i", " $texte ")) {
-				$texte = glossaire_gogogo($texte, $les_mots, $limit, $unicode);
-				$mot_present = true;
-			}
+		if($les_mots && preg_match(",\W(?:$les_mots)\W,i", " $texte ")) {
+			$texte = glossaire_gogogo($texte, $les_mots, $limit, $unicode);
+			$mot_present = true;
 		}
 		// si un mot est trouve, on construit la fenetre de glossaire
 		if($mot_present) {
