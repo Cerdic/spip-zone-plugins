@@ -151,7 +151,8 @@ function glossaire_parse($titre) {
 		// expliciter l'apostrophe et les accents
 		$mots = str_replace("'", "(?:'|&#8217;)", glossaire_accents(join('|', $mots)));
 	} else $mots = '';
-	return array($mots, $regs, $titres);
+	$ok_regexp = @preg_replace_callback($regs, 'glossaire_echappe_mot_callback', 'test', 1)!==false;
+	return array($mots, $regs, $titres, $ok_regexp);
 }
 
 function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
@@ -199,16 +200,19 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	if(strpos($texte, '[') !== false) 
 		$texte = preg_replace_callback(',\[[^][]*->>?[^]]*\],msS', 'glossaire_echappe_balises_callback', $texte);
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
-	$mot_contexte = $GLOBALS['contexte']['id_mot']?$GLOBALS['contexte']['id_mot']:_request('id_mot');
+	$mot_contexte = (isset($GLOBALS['contexte']['id_mot']) && $GLOBALS['contexte']['id_mot'])
+		?$GLOBALS['contexte']['id_mot']:_request('id_mot');
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// parser le mot-cle du glossaire
 		// contexte de langue a prendre en compte ici
-		list($les_mots, $les_regexp, $les_titres) = glossaire_parse($titre = extraire_multi($mot['titre']));
+		list($les_mots, $les_regexp, $les_titres, $ok_regexp) = glossaire_parse($titre = extraire_multi($mot['titre']));
 		$mot_present = false;
-		if(count($les_regexp)) {
+		if(!$ok_regexp) 
+			spip_log(couteauprive_T('glossaire:nom').' - Erreur REGEXP : '.var_export($les_regexp, 1));
+		elseif(count($les_regexp)) {
 			// a chaque expression reconnue, on pose une balise temporaire cryptee
 			// ce remplacement est puissant, attention aux balises HTML ; par exemple, eviter : ,div,i
-			$texte = preg_replace_callback($les_regexp, "glossaire_echappe_mot_callback", $texte, $limit);
+			$texte = preg_replace_callback($les_regexp, 'glossaire_echappe_mot_callback', $texte, $limit);
 			// TODO 1 : sous PHP 5.0, un parametre &$count permet de savoir si un remplacement a eu lieu
 			// et s'il faut construire la fenetre de glossaire.
 			// TODO 2 : decrementer le parametre $limit pour $les_mots, si &$count est renseigne.

@@ -12,10 +12,14 @@ function glossaire_verifie(&$c) {
 	$c = count($gloss = glossaire_query_tab());
 	for($i=0; $i<$c; $i++) for($j=$i+1; $j<$c; $j++) {
 		$gi = &$gloss[$i]; $gj = &$gloss[$j];
-		if(!isset($gi['mots']))
-			list($gi['mots'],$gi['regs'],$gi['titre2']) = glossaire_parse(extraire_multi($gi['titre']));
-		if(!isset($gj['mots']))
-			list($gj['mots'],$gj['regs'],$gj['titre2']) = glossaire_parse(extraire_multi($gj['titre']));
+		if(!isset($gi['mots'])) {
+			list($gi['mots'],$gi['regs'],$gi['titre2'], $ok_regexp) = glossaire_parse(extraire_multi($gi['titre']));
+			if(!$ok_regexp) $res[] = "&bull; ".htmlentities(_L('Erreur Regexp : @reg@ tirée du titre "@titre@"', array('reg'=>var_export($gi['regs'], 1), 'titre'=>extraire_multi($gi['titre']))))."\n_ ";
+		}
+		if(!isset($gj['mots'])) {
+			list($gj['mots'],$gj['regs'],$gj['titre2'], $ok_regexp) = glossaire_parse(extraire_multi($gj['titre']));
+			if(!$ok_regexp) $res[] = "&bull; ".htmlentities(_L('Erreur Regexp : @reg@ tirée du titre "@titre@"', array('reg'=>var_export($gi['regs'], 1), 'titre'=>extraire_multi($gi['titre']))))."\n_ ";
+		}
 		$u = false;
 		$titre = $gi['mots']?glossaire_gogogo($gj['titre2'], $gi['mots'], -1, $u):'';
 		if(count($gi['regs']))
