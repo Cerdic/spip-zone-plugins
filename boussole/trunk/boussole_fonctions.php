@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - le tableau des infos contenues dans la meta boussole_infos_alias si l'alias est fourni,
  * - la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon.
  *
- * @balise BOUSSOLE_INFOS
+ * @balise
  * @uses calcul_boussole_infos()
  *
  * @param string $p
@@ -69,7 +69,7 @@ function calcul_boussole_infos($boussole) {
  * Traduction d'un champ d'une boussole, d'un groupe de sites ou d'un site
  *
  * @api
- * @filtre boussole_traduire
+ * @filtre
  *
  * @param string $aka_boussole
  * 		Alias de la boussole
@@ -139,7 +139,7 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
  * Cette fonction est utilisée pour l'affichage de la fonction serveur dans l'espace privé.
  *
  * @api
- * @filtre boussole_lister_caches
+ * @filtre
  * @pipeline_appel declarer_boussoles()
  *
  * @return array
@@ -222,7 +222,7 @@ function boussole_lister_caches() {
  * Récupération du nombre de boussoles hébergées sur le site serveur.
  *
  * @api
- * @filtre boussole_compteur_hebergement
+ * @filtre
  * @pipeline_appel declarer_boussoles()
  *
  * @return int

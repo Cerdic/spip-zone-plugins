@@ -297,7 +297,7 @@ function analyser_saisie($saisie) {
  * Si c'est une chaîne, tente de la désérialiser, sinon
  * retourne la chaîne.
  *
- * @filtre tenter_unserialize
+ * @filtre
  *
  * @param string|array $texte
  *     Le texte (possiblement sérializé) ou un tableau
