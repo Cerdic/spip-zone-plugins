@@ -2,5 +2,11 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=en">
 		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
 </traduction>

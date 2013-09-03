@@ -1,7 +1,13 @@
 <traduction module="album" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 	</langue>
-	<langue code="fr" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/album?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/album?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 </traduction>
