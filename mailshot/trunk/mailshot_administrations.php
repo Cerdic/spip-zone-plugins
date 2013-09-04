@@ -38,7 +38,7 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_mailshot')),
 	);
 	$maj['0.2.0'] = array(
-		array('maj_tables', array('spip_mailshot_destinataires')),
+		array('maj_tables', array('spip_mailshots_destinataires')),
 	);
 	$maj['0.2.1'] = array(
 		array('sql_alter', 'TABLE spip_mailshot DROP next'),
@@ -46,6 +46,9 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.3.0'] = array(
 		array('sql_alter', 'TABLE spip_mailshot RENAME spip_mailshots'),
 		array('sql_alter', 'TABLE spip_mailshot_destinataires RENAME spip_mailshots_destinataires'),
+	);
+	$maj['0.3.2'] = array(
+		array('sql_alter', 'TABLE spip_mailshots_destinataires ADD try tinyint NOT NULL DEFAULT 0'),
 	);
 
 	include_spip('base/upgrade');
