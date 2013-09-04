@@ -1,22 +1,16 @@
 <plugin>
 	<nom>FPDF</nom>
-	<slogan>Librairie FPDF pour fabriquer des pdfs.</slogan>
-
+	<slogan>Librairie FPDF / FPDI pour fabriquer des pdfs.</slogan> 
 	<description>
-		Ce plugin sert à générer des pdfs via la librairie fpdf pour n'importe quelle table.
+		Ce plugin sert à générer des pdfs via la librairie fpdf.
 		Adapter le en vous servant des tutoriaux du dossier demo.
 	</description>
-
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Olivier PLATHEY</auteur>
-	<version>0.0.2</version>
-
+	<version>0.0.3</version> 
 	<licence>Apache license - (c) 2004-2011</licence>
-	<etat>dev</etat>
-
+	<etat>test</etat>
 	<prefix>fpdf</prefix>
-
 	<icon>prive/themes/spip/images/logo-64.png</icon>
-	<lien>http://contrib.spip.net/?article4185</lien>
-
+	<lien>http://contrib.spip.net/4185</lien>
 	<categorie>divers</categorie>
 </plugin>
