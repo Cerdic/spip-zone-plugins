@@ -360,6 +360,7 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 	'erreur:version' => 'Aquesta eina és indispensable en aquesta versió d\'SPIP.',
 	'erreur_groupe' => 'Atenció: el grup «@groupe@» no està definit!',
 	'erreur_mot' => 'Atenció: la paraula clau «@mot@» no s\'ha definit!',
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Estès',
 
 	// F
@@ -411,6 +412,8 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 	'glossaire_inverser' => 'Correcció que es proposa: invertir l\'ordre de paraules a la base.',
 	'glossaire_js' => 'Solució JavaScript',
 	'glossaire_ok' => 'La llista de @nb@ paraula(es) estudiada(es) a la base sembla correcta.', # MODIF
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Substitueix automàticament les cometes (") per les cometes tipogràfiques de la llengua de composició. La substitució, transparent per l\'usuari, no modifica el text original sinó només la seva publicació final. ',
 	'guillemets:nom' => 'Cometes tipogràfiques',
 

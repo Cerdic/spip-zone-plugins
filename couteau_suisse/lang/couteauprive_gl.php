@@ -349,6 +349,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:version' => 'Esta ferramenta non está dispoñíbel nesta versión de SPIP.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !', # NEW
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !', # NEW
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Estendido',
 
 	// F
@@ -398,6 +399,8 @@ Os bloques multi móstranse entón sempre na lingua demandada polo visitante.', 
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Solución Javascript',
 	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.', # NEW
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Substitución automática das comas dereitas (") polas tipográficas da lingua de composición. A substitución, transparente para o usuario, non modifica o texto orixinal senón que soamente cambia a presentación final.',
 	'guillemets:nom' => 'Vírgulas tipográficas',
 

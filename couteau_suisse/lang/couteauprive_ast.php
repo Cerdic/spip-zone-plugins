@@ -346,6 +346,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:version' => 'Esta ferramienta nun ta disponible pa esta versión de SPIP.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !', # NEW
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !', # NEW
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Estendíu',
 
 	// F
@@ -396,6 +397,8 @@ Los bloques multi s\'amuesen siempre na llingua pidía pol visitante.', # MODIF
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Solución JavaScript',
 	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.', # NEW
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Camuda automáticamente les comines dereches (") por les comines tipográfiques de la llingua de composición. El cambéu, tresparente pa l\'usuariu, nun camuda el testu orixinal sinon sólo l\'aspeutu final.',
 	'guillemets:nom' => 'Comines tipográfiques',
 

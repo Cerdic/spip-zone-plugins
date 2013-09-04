@@ -327,6 +327,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:version' => 'Bu gereç SPIP\'in bu sürümünde mevcut değil.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !', # NEW
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !', # NEW
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Kapsam',
 
 	// F
@@ -371,6 +372,8 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Javascript çözümü',
 	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.', # NEW
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Normal tırnak işaretlerini (") tipografik tırnak işaretleriyle değiştirir. Değiştirme kullanıcı tarafından görülmez ve orijinal metni etkilemez sadece gösterilen metni etkiler.',
 	'guillemets:nom' => 'Tipografik tırnaklar',
 

@@ -344,6 +344,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:version' => 'Esta herramienta no está disponible en esta versión de SPIP.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !', # NEW
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !', # NEW
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Extendido',
 
 	// F
@@ -394,6 +395,8 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.', # NEW
 	'glossaire_js' => 'Solución JavaScript',
 	'glossaire_ok' => 'La liste des @nb@ mot(s) étudié(s) en base semble correcte.', # NEW
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Reemplaza automáticamente las comillas rectas (") por las comillas tipográficas en el idioma de composición. El reemplazo, transparente para el usuario, no modifica el texto original sino sólo su presentación final.',
 	'guillemets:nom' => 'Comillas tipográficas',
 

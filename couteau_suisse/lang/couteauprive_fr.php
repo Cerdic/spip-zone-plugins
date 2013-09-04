@@ -357,6 +357,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !',
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !',
+	'erreur_syntaxe' => 'Erreur de syntaxe : ',
 	'etendu' => 'Étendu',
 
 	// F
@@ -405,11 +406,10 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	'glossaire_css' => 'Solution CSS',
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»',
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',
-	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.',
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\bABC\b,».',
-	'erreur_syntaxe' => 'Erreur de syntaxe : ',
 	'glossaire_js' => 'Solution JavaScript',
 	'glossaire_ok' => '@nb@ mot(s) étudié(s). Tout semble correct.',
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».',
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.',
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 

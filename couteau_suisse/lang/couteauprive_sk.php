@@ -351,6 +351,7 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 	'erreur:version' => 'Tento nástroj je v tejto verzii SPIPU nedostupný.',
 	'erreur_groupe' => 'Varovanie: skupina "@groupe@" nebola definovaná!',
 	'erreur_mot' => 'Varovanie: Kľúčové slovo "@mot@" nebolo definované!',
+	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Expanded',
 
 	// F
@@ -401,6 +402,8 @@ Takto sa multibloky vždy zobrazia v jazyku podľa požiadavky návštevníka.'
 	'glossaire_inverser' => 'Navrhnutá oprava: prehoďte poradie kľúčových slov v databáze.',
 	'glossaire_js' => 'Riešenie JavaScriptom',
 	'glossaire_ok' => '@nb@ skontrolovaných slov. Zdá sa, že všetky sú v poriadku.',
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
+	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Automaticky nahrádza rovné úvodzovky (") okrúhlymi, pričom používa správne úvodzovky pre aktuálny jazyk. Nahradenie nemení text uložený v databáze, ale iba jeho zobrazenie na obrazovke.',
 	'guillemets:nom' => 'Okrúhle opačné bodky',
 
