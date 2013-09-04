@@ -16,6 +16,8 @@ function ocr_analyser($id_document, $dry_run=false) {
 	$config = lire_config('ocr',array());
 	if ($config['ocr_bin']) {
 		$bin = $config['ocr_bin'];
+	} elseif (defined('_OCR_BIN')) {
+		$bin = _OCR_BIN;
 	} else {
 		// TODO : essayer de trouver tout seul l'exécutable
 		spip_log('Erreur analyse OCR : Il faut specifier l\'exécutable dans le panneau de configuration');
@@ -23,10 +25,10 @@ function ocr_analyser($id_document, $dry_run=false) {
 		$resultat['erreur'] = true;
 		return $resultat;
 	}
-	$opt = $config['ocr_opt'] ? $config['ocr_opt'] : '';
+	$opt = $config['ocr_opt'] ? $config['ocr_opt'] : (defined('_OCR_OPT') ? _OCR_OPT : '');
 
 	// Ne retenir que les 50 000 premiers caracteres (ou la valeur choisie)
-	$taille_texte_max = $config['taille_texte_max'] ? $config['taille_texte_max'] : @define('_OCR_TAILLE_TEXTE_MAX',50000);
+	$taille_texte_max = $config['taille_texte_max'] ? $config['taille_texte_max'] : (defined('_OCR_TAILLE_TEXTE_MAX') ? _OCR_TAILLE_TEXTE_MAX : 50000);
 	
 	$document = ocr_document($id_document);
 	spip_log($document, 'ocr');

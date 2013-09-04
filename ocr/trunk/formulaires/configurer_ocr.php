@@ -6,6 +6,9 @@ include_spip('inc/config');
 function formulaires_configurer_ocr_charger_dist(){
 	//Recuperation de la configuration
 	$ocr = lire_config('ocr',array());
+	if (empty($ocr)) {
+		$ocr = null;
+	}
 
 	/* Valeurs prealablement saisie ou par defaut/d'exemple 
 	 * -* intervalle de 600s entre les lancements de CRON
@@ -15,13 +18,12 @@ function formulaires_configurer_ocr_charger_dist(){
 	 * -* taille maximale du texte inséré dans la base de données
 	 * */
 	$valeur = array(
-		'intervalle_cron' =>  $ocr['intervalle_cron'] ? $ocr['intervalle_cron'] : 600,
-		'nb_docs' =>  $ocr['nb_docs'] ? $ocr['nb_docs'] : 5,
-		'ocr_bin' => $ocr['ocr_bin'] ? $ocr['ocr_bin'] : '/usr/bin/tesseract',
-		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : '-l fra',
-		'taille_texte_max' => $ocr['taille_texte_max'] ? $ocr['taille_texte_max'] : '50000',
+		'intervalle_cron' =>  $ocr['intervalle_cron'] ? $ocr['intervalle_cron'] : (defined('_OCR_INTERVALLE_CRON') ? _OCR_INTERVALLE_CRON : 600),
+		'nb_docs' =>  $ocr['nb_docs'] ? $ocr['nb_docs'] : (defined('_OCR_NB_DOCS') ? _OCR_NB_DOCS : 5),
+		'ocr_bin' => $ocr['ocr_bin'] ? $ocr['ocr_bin'] : (defined('_OCR_BIN') ? _OCR_BIN : '/usr/bin/tesseract'),
+		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : (defined('_OCR_OPT') ? _OCR_OPT : '-l fra'),
+		'taille_texte_max' => $ocr['taille_texte_max'] ? $ocr['taille_texte_max'] : (defined('_OCR_TAILLE_TEXTE_MAX') ? _OCR_TAILLE_TEXTE_MAX : 50000),
 	);
-	return $valeur;
 }
 function formulaires_configurer_ocr_verifier_dist(){
 	$erreurs = array();
