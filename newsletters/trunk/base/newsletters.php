@@ -63,7 +63,10 @@ function newsletters_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('titre','chapo','texte','date_redac','patron','baked','html_email','texte_email','html_page','recurrence','email_test','liste'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
-		'tables_jointures'  => array('newsletters_liens'),
+		'tables_jointures'  => array(
+			'mots_liens',
+			'newsletters_liens'
+		),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -86,6 +89,7 @@ function newsletters_declarer_tables_objets_sql($tables) {
 	);
 
 	$tables['spip_articles']['tables_jointures'][]= 'newsletters_liens';
+	$tables['spip_rubriques']['tables_jointures'][]= 'newsletters_liens';
 	$tables['spip_rubriques']['tables_jointures'][]= 'newsletters_liens';
 
 	return $tables;
