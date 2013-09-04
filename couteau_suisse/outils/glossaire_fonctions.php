@@ -126,7 +126,7 @@ function glossaire_query_tab() {
 // parse toutes les formes du titre d'un mot-cle du glossaire
 // prendre en compte les formes du mot : architrave/architraves
 function glossaire_parse($titre) {
-	$mots = $regs = $titres = array();
+	$mots = $regs = $titres = array(); $ok_mots = true;
 	foreach(explode(_GLOSSAIRE_TITRE_BASE_SEP, str_replace('</','@@tag@@',$titre)) as $m) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 		$m = trim(str_replace('@@tag@@','</',$m));
@@ -134,6 +134,7 @@ function glossaire_parse($titre) {
 		else {
 			$mots[] = charset2unicode($m);
 			$titres[] = $m;
+			$ok_mots &= mb_strlen($m)>3;
 		}
 	}
 	if(count($titres))
@@ -153,7 +154,7 @@ function glossaire_parse($titre) {
 		$mots = str_replace("'", "(?:'|&#8217;)", glossaire_accents(join('|', $mots)));
 	} else $mots = '';
 	$ok_regexp = count($regs)?preg_replace($regs, 't', 'test', 1)!==null:true;
-	return array($mots,$ok_regexp?$regs:array(), $titres, $ok_regexp);
+	return array($mots, $ok_regexp?$regs:array(), $titres, $ok_regexp, $ok_mots);
 }
 
 function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
@@ -206,7 +207,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 	foreach ($glossaire_array as $mot) if (($gloss_id = $mot['id_mot']) <> $mot_contexte) {
 		// parser le mot-cle du glossaire
 		// contexte de langue a prendre en compte ici
-		list($les_mots, $les_regexp, $les_titres, $ok_regexp) = glossaire_parse($titre = extraire_multi($mot['titre']));
+		list($les_mots, $les_regexp, $les_titres, $ok_regexp, $ok_mots) = glossaire_parse($titre = extraire_multi($mot['titre']));
 		$mot_present = false;
 		if(!$ok_regexp) 
 			spip_log(couteauprive_T('glossaire:nom').'. '.couteauprive_T('erreur_syntaxe').$titre);
