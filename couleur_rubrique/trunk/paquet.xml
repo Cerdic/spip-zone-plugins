@@ -2,7 +2,7 @@
 prefix="pb_couleur_rubrique"
 categorie="maintenance"
 version="2.3.5"
-etat="test"
+etat="stable"
 compatibilite="[3.0.0;3.*]"
 logo="img_pack/pb_couleur_rubrique.png"
 documentation="http://www.spip-contrib.net/Couleur-de-Rubrique"
