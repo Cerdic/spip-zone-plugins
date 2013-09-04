@@ -154,6 +154,10 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	$src = extraire_attribut($image, 'src');
 	if (!$src)
 		$src = $image;
+	if(preg_match('/[jpg|gif|png]\?/i',$src,$matches)){
+		$pos = strpos($src,'?');
+		$src = substr($src,0,$pos);
+	}
 	list($width, $height) = getimagesize($src);
 	// hauteur du redimensionnement
 	if (is_numeric($hauteur) && intval($hauteur)>0)
