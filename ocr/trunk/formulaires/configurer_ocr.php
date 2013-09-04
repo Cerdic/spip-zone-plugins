@@ -24,6 +24,7 @@ function formulaires_configurer_ocr_charger_dist(){
 		'ocr_opt' => $ocr['ocr_opt'] ? $ocr['ocr_opt'] : (defined('_OCR_OPT') ? _OCR_OPT : '-l fra'),
 		'taille_texte_max' => $ocr['taille_texte_max'] ? $ocr['taille_texte_max'] : (defined('_OCR_TAILLE_TEXTE_MAX') ? _OCR_TAILLE_TEXTE_MAX : 50000),
 	);
+	return $valeur;
 }
 function formulaires_configurer_ocr_verifier_dist(){
 	$erreurs = array();
