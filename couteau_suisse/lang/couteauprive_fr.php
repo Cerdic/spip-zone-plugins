@@ -406,7 +406,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	'glossaire_erreur' => 'Le mot «@mot1@» rend indétectable le mot «@mot2@»',
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',
 	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.',
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière du type ",\bABC\b,".',
+	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\bABC\b,».',
 	'erreur_syntaxe' => 'Erreur de syntaxe : ',
 	'glossaire_js' => 'Solution JavaScript',
 	'glossaire_ok' => '@nb@ mot(s) étudié(s). Tout semble correct.',

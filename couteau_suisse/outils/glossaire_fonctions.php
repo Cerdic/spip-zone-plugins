@@ -130,7 +130,8 @@ function glossaire_parse($titre) {
 	foreach(explode(_GLOSSAIRE_TITRE_BASE_SEP, str_replace('</','@@tag@@',$titre)) as $m) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 		$m = trim(str_replace('@@tag@@','</',$m));
-		if(strncmp($m,',',1)===0) $regs[] = $m;
+		if(strncmp($m,',',1)===0)
+			$ok_mots &= !preg_match('/^,\w{1,3},$/', $regs[] = $m);
 		else {
 			$mots[] = charset2unicode($m);
 			$titres[] = $m;
