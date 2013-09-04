@@ -6,10 +6,9 @@ include_spip('inc/config');
 function formulaires_configurer_ocr_charger_dist(){
 	//Recuperation de la configuration
 	$ocr = lire_config('ocr',array());
-	if (empty($ocr)) {
+	if (!is_array($ocr) || empty($ocr)) {
 		$ocr = null;
 	}
-
 	/* Valeurs prealablement saisie ou par defaut/d'exemple 
 	 * -* intervalle de 600s entre les lancements de CRON
 	 * -* 5 fichiers analysés par CRON
