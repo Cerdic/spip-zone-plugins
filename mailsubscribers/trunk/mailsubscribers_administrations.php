@@ -69,6 +69,7 @@ function mailsubscribers_import_from_spiplistes(){
 			if (time() >= _TIME_OUT)
 				return;
 		}
+		mailsubscribers_finaliser_listes();
 		sql_alter("TABLE spip_auteurs_elargis DROP imported");
 	}
 }
@@ -103,6 +104,7 @@ function mailsubscribers_import_from_mesabonnes(){
 			if (time() >= _TIME_OUT)
 				return;
 		}
+		mailsubscribers_finaliser_listes();
 		sql_alter("TABLE spip_mesabonnes DROP imported");
 	}
 }
@@ -173,6 +175,7 @@ function mailsubscribers_import_from_spiplettres(){
 			if (time() >= _TIME_OUT)
 				return;
 		}
+		mailsubscribers_finaliser_listes();
 		sql_alter("TABLE spip_abonnes DROP imported");
 		sql_alter("TABLE spip_desabonnes DROP imported");
 	}
@@ -192,7 +195,7 @@ function mailsubscribers_import_from_clevermail(){
 		$rows = sql_allfetsel("lst_id,lst_name","spip_cm_lists");
 		$listes = array();
 		foreach ($rows as $row){
-			$listes[$row['lst_id']] = mailsubscribers_normaliser_nom_liste($row['lst_id']."-".strtolower($row['titre']));
+			$listes[$row['lst_id']] = mailsubscribers_normaliser_nom_liste($row['lst_id']."-".strtolower($row['lst_name']));
 		}
 
 
@@ -228,6 +231,7 @@ function mailsubscribers_import_from_clevermail(){
 			if (time() >= _TIME_OUT)
 				return;
 		}
+		mailsubscribers_finaliser_listes();
 		sql_alter("TABLE spip_cm_subscribers DROP imported");
 	}
 }
@@ -247,6 +251,22 @@ function mailsubscriber_import_one($email,$set){
 		objet_modifier("mailsubscriber",$id,$set); // double detente
 		return $id;
 	}
+}
+
+
+function mailsubscribers_finaliser_listes(){
+	include_spip("inc/mailsubscribers");
+	$listes = mailsubscribers_listes();
+	$l = array();
+	foreach ($listes as $k => $v){
+		$l[] = array(
+			'id' => $v['id'],
+			'titre' => $v['titre'],
+			'status' => in_array($v['status'],array('open','?'))?'open':'close',
+		);
+	}
+	include_spip('inc/config');
+	ecrire_config("mailsubscribers/lists",$l);
 }
 
 
