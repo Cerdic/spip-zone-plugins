@@ -72,30 +72,13 @@ function mailshot_update_meta_processing($force = false){
 }
 
 /**
- * Envoyer un lot, y compris en relancant un job si besoin pour finir le nombre demande
- * (cas des smtp trop lents)
- *
- * @param $nb_max
- * @param bool $exact
- * @return int
- */
-function mailshot_envoyer_un_lot_par_morceaux($nb_max,$exact=true){
-	$nb = mailshot_envoyer_lot($nb_max);
-	if ($nb<$nb_max AND $exact){
-		spip_log("envoi lot par morceau : $nb/$nb_max on relance","mailshot"._LOG_INFO_IMPORTANTE);
-		#job_queue_add("mailshot_envoyer_un_lot_par_morceaux","Newsletter",array($nb_max-$nb),"inc/mailshot");
-	}
-	return $nb;
-}
-
-/**
  * Envoyer une serie de mails
  * @param int $nb_max
  * @return int
  *   nombre de mails envoyes
  */
 function mailshot_envoyer_lot($nb_max=5){
-	$nb = 0;
+	$nb_restant = $nb_max;
 	$now = $_SERVER['REQUEST_TIME'];
 	if (!$now) $now=time();
 	define('_MAILSHOT_MAX_TIME',$now+15); // 15s maxi
@@ -108,7 +91,7 @@ function mailshot_envoyer_lot($nb_max=5){
 
 		// verifier que la liste des destinataires est OK
 		mailshot_initialiser_destinataires($shoot);
-		if (time()>_MAILSHOT_MAX_TIME) return $nb;
+		if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 
 		// chercher les N prochains destinataires
 		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"0,$nb_max");
@@ -118,7 +101,7 @@ function mailshot_envoyer_lot($nb_max=5){
 			$send = charger_fonction("send","newsletter");
 			$corps = array("sujet"=>&$shoot['sujet'],"html"=>&$shoot['html'],"texte"=>&$shoot['texte']);
 			foreach($dests as $d){
-				if (time()>_MAILSHOT_MAX_TIME) return $nb;
+				if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 				$s = $subscriber($d['email']);
 				$erreur = $send($s, $corps, $options);
 				$try = $d['try']+1;
@@ -136,7 +119,7 @@ function mailshot_envoyer_lot($nb_max=5){
 					}
 				}
 				else {
-					$nb++;
+					$nb_restant--;
 					sql_updateq("spip_mailshots_destinataires",array('statut'=>'sent','try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
 					sql_update("spip_mailshots",array("current"=>"current+1"),"id_mailshot=".intval($shoot['id_mailshot']));
 					spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." OK","mailshot");
@@ -161,10 +144,10 @@ function mailshot_envoyer_lot($nb_max=5){
 			sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($shoot['id_mailshot']));
 			mailshot_update_meta_processing();
 		}
-		if (time()>_MAILSHOT_MAX_TIME) return $nb;
+		if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 	}
 
-	return $nb;
+	return 0; // plus rien a envoyer sur ce lot
 }
 
 
