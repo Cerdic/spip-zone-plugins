@@ -39,7 +39,7 @@ function mailsubscribers_obfusquer_email($email){
 }
 
 function mailsubscribers_test_email_obfusque($email){
-	return preg_match(",^[a-f0-9]+@example.org$,",$email);
+	return preg_match(",^[a-f0-9]+@example\.org$,",$email);
 }
 
 /**
