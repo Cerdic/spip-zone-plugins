@@ -37,8 +37,8 @@
 		</fieldset>
 
 		[(#ENV{case}|?{
-			<INCLURE{fond=prive/table_adherent_auteur_recherche}{ajax}{ordre}{env}>,
-			<INCLURE{fond=prive/table_adherent_auteur}{ajax}{ordre}{env}>})]
+			[(#INCLURE{fond=prive/table_adherent_auteur_recherche,ajax,ordre,env})],
+			[(#INCLURE{fond=prive/table_adherent_auteur,ajax,ordre,env})]})]
 
 		<p class="boutons">
 			<input type="submit" class="submit" name="supprimer_auteurs" value="<:inscription3:delete_user_select:>" />

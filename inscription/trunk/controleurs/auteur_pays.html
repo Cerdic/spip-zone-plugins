@@ -46,7 +46,7 @@
 		<li class="editer[(#GET{pays_obl}|oui)obligatoire]">
 			<label><:inscription3:label_pays:></label>
 			#SET{id,#PAYS}
-			<select class="crayon-active text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}"[(#GET{pays_obl}|oui) onchange="validation()"]>
+			<select class="crayon-active no_multi text[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}"[(#GET{pays_obl}|oui) onchange="validation()"]>
 				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>
 			</select>
 		</li>]

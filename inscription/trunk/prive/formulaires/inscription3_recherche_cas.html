@@ -2,12 +2,12 @@
 	<label for="case"><:info_rechercher_02:></label>
 	<select name="case" id="case">
 		<BOUCLE_recherche_champs(DATA){source table,#CONFIG{inscription3}}{valeur = 'on'}>
-		[(#CLE|match{_table}|oui)
+		[(#CLE|match{_table$}|oui)
 			[(#SET{cle,[(#CLE|replace{'_table',''})]})]
-			[(#GET{cle}|=={#ENV{case}}|?{
-				<option value='#GET{cle}' selected="selected">[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>,
-				<option value='#GET{cle}'>[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>
-			})]
-		</BOUCLE_recherche_champs>
+			[(#GET{cle}|=={#ENV{case}}|oui)
+				<option value='#GET{cle}' selected="selected">[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>]
+			[(#GET{cle}|=={#ENV{case}}|non)
+				<option value='#GET{cle}'>[(#VAL{inscription3:label_}|concat{#GET{cle}}|_T)]</option>]
+		]</BOUCLE_recherche_champs>
 	</select>
 </li>
