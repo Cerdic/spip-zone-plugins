@@ -86,7 +86,8 @@ function zotspip_declarer_tables_principales($tables_principales){
 	$zcreators = array(
 		"auteur" => "varchar(150) DEFAULT '' NOT NULL",
 		"id_zitem" => "varchar(16) DEFAULT '' NOT NULL",
-		"role" => "varchar(30) DEFAULT '' NOT NULL"
+		"role" => "varchar(30) DEFAULT '' NOT NULL",
+		"rang" => "smallint DEFAULT '1' NOT NULL"
 	);
 	
 	$zcreators_cles = array(

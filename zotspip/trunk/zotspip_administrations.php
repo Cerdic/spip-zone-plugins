@@ -23,6 +23,11 @@ function zotspip_upgrade($nom_meta_base_version, $version_cible){
   $maj['0.3'] = array(
     array('sql_alter',"TABLE spip_zitems CHANGE type type_ref varchar(255) DEFAULT '' NOT NULL")
   );
+  
+  $maj['0.4'] = array(
+    array('maj_tables',array('spip_zcreators')),
+	array('zotspip_maj_items',true,5)
+  );
 
   include_spip('base/upgrade');
   maj_plugin($nom_meta_base_version, $version_cible, $maj);

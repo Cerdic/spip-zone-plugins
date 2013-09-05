@@ -212,12 +212,15 @@ function zotspip_maj_items($forcer=false, $n=50) {
 			// Gestion des creators
 			$creators = array();
 			if (is_array($data['creators'])) {
+				$rang = 1;
 				foreach($data['creators'] as $creator) {
 					$creators[] = array(
 						'auteur' => isset($creator['name']) ? $creator['name'] : ($creator['lastName'] . ($creator['firstName'] ? (', '.$creator['firstName']) : '')),
 						'id_zitem' => $id_zitem,
-						'role' => $creator['creatorType']
+						'role' => $creator['creatorType'],
+						'rang' => $rang
 					);
+					$rang++;
 					if ($insertion['auteurs'] == '')
 						$insertion['auteurs'] .= isset($creator['name']) ? $creator['name'] : ($creator['lastName'] . ($creator['firstName'] ? (' '.$creator['firstName']) : ''));
 					else
