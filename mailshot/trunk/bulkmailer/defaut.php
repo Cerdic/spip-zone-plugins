@@ -55,8 +55,8 @@ function &bulkmailer_defaut_dist($to_send,$options=array()){
 
 	$options = array_merge($defaut,$options);
 
-	if (isset($defaut['adresse_envoi_email']))
-		$defaut['adresse_envoi'] = 'oui';
+	if (isset($options['adresse_envoi_email']))
+		$options['adresse_envoi'] = 'oui';
 
 	// regler le smtp au format facteur
 	if (isset($options['smtp'])){
