@@ -4,9 +4,10 @@
 <html>
 <head>
 	<style type="text/css">
-		html,body {height: 100%;width: 100%;margin: 0;padding: 0;[(#GET{quoi}|=={texte_email}|oui)overflow: hidden]}
+		html,body {height: 100%;width: 100%;margin: 0;padding: 0;overflow: hidden}
 		iframe {border: 0;width: 100%;height: 100%;margin:0;padding:0;}
 		.none {display: none;}
+		#var_mode {display: none;}
 		#nav {position: absolute;position: fixed; top:3em;right:0;z-index: 100;margin: 0;padding: 0}
 		#nav li {
 			list-style: none;
@@ -27,22 +28,20 @@
 </head>
 <body>
 [(#GET{quoi}|=={html_email}|oui)
-<object class="html_email" type="text/html" >[(#HTML_EMAIL**)]</object>
-][(#GET{quoi}|=={texte_email}|oui)
+<iframe
+	class="html_email" src="[(#HTML_EMAIL**|trim|newsletters_inline_base64src{text/html})]" style="">
+</iframe>][(#GET{quoi}|=={texte_email}|oui)
 <iframe
 	class="texte_email" src="[(#TEXTE_EMAIL**|trim|newsletters_inline_base64src{text/plain})]" style=""></iframe>
 ][(#GET{quoi}|=={html_page}|oui)
-<object class="html_page" type="text/html" >[(#HTML_PAGE**|sinon{#HTML_EMAIL**}|newsletter_affiche_version_enligne)]</object>
-]
-<ul id="nav">
+<iframe
+	class="html_page" src="[(#HTML_PAGE**|sinon{#HTML_EMAIL**}|newsletter_affiche_version_enligne|trim|newsletters_inline_base64src{text/html})]" style=""></iframe>
+]<ul id="nav">
 	<li>[(#SELF|parametre_url{var_mode,preview}|parametre_url{var_quoi,html_email}|lien_ou_expose{<:newsletter:info_preview_version_html_email:>,#GET{quoi}|=={html_email}})]</li>
 	<li>[(#SELF|parametre_url{var_mode,preview}|parametre_url{var_quoi,texte_email}|lien_ou_expose{<:newsletter:info_preview_version_texte_email:>,#GET{quoi}|=={texte_email}})]</li>
 	<li>[(#SELF|parametre_url{var_mode,preview}|parametre_url{var_quoi,html_page}lien_ou_expose{<:newsletter:info_preview_version_html_page:>,#GET{quoi}|=={html_page}})]</li>
 	<li>[(#SELF|parametre_url{var_mode,preview}|parametre_url{var_quoi,raw}|lien_ou_expose{<:newsletter:info_preview_version_html_page_noiframe:>,#GET{quoi}|=={raw}})]</li>
-</ul>
-<div class="#EDIT{titre} none">#TITRE</div>
-</body>
-</html>
+</ul><div class="#EDIT{titre} none">#TITRE</div></body></html>
 </BOUCLE_previewnewsletter>
 <BOUCLE_newsletter(NEWSLETTERS){id_newsletter}>[
 (#HTML_PAGE**|sinon{#HTML_EMAIL**}|newsletter_affiche_version_enligne)
