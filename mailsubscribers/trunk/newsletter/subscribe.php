@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("action/editer_objet");
 include_spip('inc/mailsubscribers');
 include_spip('inc/config');
+include_spip('inc/filtres');
 include_spip('inc/autoriser');
 
 /**
@@ -38,6 +39,11 @@ include_spip('inc/autoriser');
 function newsletter_subscribe_dist($email,$options = array()){
 
 	if (!$email = trim($email)) return false;
+	// on abonne pas un email invalide ou obfusque !
+	if (!email_valide($email) OR mailsubscribers_test_email_obfusque($email)){
+		spip_log("email invalide pour abonnement : $email","mailsubscribers."._LOG_INFO_IMPORTANTE);
+		return false;
+	}
 
 	$set = array();
 	foreach (array('lang', 'nom') as $k){

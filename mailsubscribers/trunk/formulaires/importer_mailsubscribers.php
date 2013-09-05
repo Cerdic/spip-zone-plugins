@@ -195,7 +195,7 @@ function importer_mailsubscribers_importe($filename){
 		// si pas de colonne email explicite, on prend la premiere colonne et on importe en mail si valide, tel quel
 		// mais graceful (sans forcer le reabonnement d'un desabonne)
 		$email = $d['email'];
-		if (email_valide($email)){
+		if (email_valide($email) AND !mailsubscribers_test_email_obfusque($email)){
 			$set = array();
 			if (isset($d['nom'])) $set['nom'] = $d['nom'];
 			if (isset($d['lang'])) $set['lang'] = $d['lang'];

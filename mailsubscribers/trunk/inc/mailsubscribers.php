@@ -38,6 +38,10 @@ function mailsubscribers_obfusquer_email($email){
 	return md5($email)."@example.org";
 }
 
+function mailsubscribers_test_email_obfusque($email){
+	return preg_match(",^[a-f0-9]+@example.org$,",$email);
+}
+
 /**
  * Informer un subscriber : ici juste l'url unsubscribe a calculer
  * @param array $infos
