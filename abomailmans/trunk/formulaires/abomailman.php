@@ -7,14 +7,14 @@ include_spip('base/abstract_sql');
 // chargement des valeurs par defaut des champs du formulaire
 //une seule liste = [(#FORMULAIRE_ABOMAILMAN{1})]
 function formulaires_abomailman_charger_dist($id_abomailman = ""){
-	global $visiteur_session;
 
 	//initialise les variables d'environnement pas défaut
 	$valeurs = array();
 
 	// Si le visiteur est logue au site on utilise ses informations de connexion par défaut
-	$valeurs['email'] = _request('email') ? _request('email') : $visiteur_session['email'];
-	$valeurs['nom'] = _request('nom') ? _request('nom') : $visiteur_session['nom'];
+	include_spip('inc/session');
+	$valeurs['email'] = _request('email') ? _request('email') : session_get('email');
+	$valeurs['nom'] = _request('nom') ? _request('nom') : session_get('nom');
 
 	//si id_abomailman est renseigne, on envoie qu'une liste
 	if(intval($id_abomailman)){
