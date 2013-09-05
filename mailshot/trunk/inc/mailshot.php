@@ -105,10 +105,10 @@ function mailshot_envoyer_lot($nb_max=5){
 				$erreur = $send($s, $corps, $options);
 				$try = $d['try']+1;
 				if ($erreur){
-					if ($try>=_MAILSHOT_MAX_TRY){
+					if ($try>=_MAILSHOT_MAX_TRY OR preg_match(",@example\.org$,i",$s['email'])){
 						sql_updateq("spip_mailshots_destinataires",array('statut'=>'fail','try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));
 						sql_update("spip_mailshots",array("current"=>"current+1","failed"=>"failed+1"),"id_mailshot=".intval($shoot['id_mailshot']));
-						spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : $erreur / failed car $try essais","mailshot"._LOG_ERREUR);
+						spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." : $erreur / failed apres $try essais","mailshot"._LOG_ERREUR);
 					}
 					else {
 						sql_updateq("spip_mailshots_destinataires",array('try'=>$try,'date'=>date('Y-m-d H:i:s')),"id_mailshot=".intval($shoot['id_mailshot'])." AND email=".sql_quote($d['email']));

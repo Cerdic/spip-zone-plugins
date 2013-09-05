@@ -50,6 +50,10 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 		if (!isset($config['mailer'])) $config['mailer'] = 'defaut';
 	}
 
+	if (preg_match(",@example\.org$,i",$destinataire['email'])){
+		return "email invalide (@example.org)";
+	}
+
 	// refuser si pas de reglage specifique d'envoi mailshot et que facteur est configure pour utiliser mail()
 	if ($config['mailer']=='defaut' AND lire_config("facteur_smtp")=='non'){
 		$url_config = generer_url_ecrire("configurer_mailshot");
