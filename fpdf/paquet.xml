@@ -1,6 +1,6 @@
 <paquet
 	prefix="fpdf"
-	categorie="divers"
+	categorie="outil"
 	version="1.0.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
