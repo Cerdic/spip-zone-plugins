@@ -102,6 +102,7 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_documents CHANGE `taille` `taille` bigint");
 			ecrire_meta($nom_meta_base_version,$current_version="0.12",'non');
 		}
+		// la version SPIP 3 a en v 0.14 une màj nécessaire à l'upgrade réussie. A résoudre si on passe en 0.14 ici...
 	}
 	medias_check_statuts();
 	medias_check_type_media();
