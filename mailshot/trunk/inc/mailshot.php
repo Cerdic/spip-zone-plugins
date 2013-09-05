@@ -81,7 +81,7 @@ function mailshot_update_meta_processing($force = false){
 function mailshot_envoyer_un_lot_par_morceaux($nb_max,$exact=true){
 	$nb = mailshot_envoyer_lot($nb_max);
 	if ($nb<$nb_max AND $exact){
-		spip_log("envoi lot par morceau : $nb/$nb_max on relance","bulksend"._LOG_INFO_IMPORTANTE);
+		spip_log("envoi lot par morceau : $nb/$nb_max on relance","mailshot"._LOG_INFO_IMPORTANTE);
 		job_queue_add("mailshot_envoyer_un_lot_par_morceaux","Newsletter",array($nb_max-$nb),"inc/mailshot");
 	}
 	return $nb;
