@@ -70,6 +70,22 @@ function mailshot_update_meta_processing($force = false){
 	return $new;
 }
 
+/**
+ * Envoyer un lot, y compris en relancant un job si besoin pour finir le nombre demande
+ * (cas des smtp trop lents)
+ *
+ * @param $nb_max
+ * @param bool $exact
+ * @return int
+ */
+function mailshot_envoyer_un_lot_par_morceaux($nb_max,$exact=true){
+	$nb = mailshot_envoyer_lot($nb_max);
+	if ($nb<$nb_max AND $exact){
+		spip_log("envoi lot par morceau : $nb/$nb_max on relance","bulksend"._LOG_INFO_IMPORTANTE);
+		job_queue_add("mailshot_envoyer_un_lot_par_morceaux","Newsletter",array($nb_max-$nb),"inc/mailshot");
+	}
+	return $nb;
+}
 
 /**
  * Envoyer une serie de mails
@@ -81,7 +97,7 @@ function mailshot_envoyer_lot($nb_max=5){
 	$nb = 0;
 	$now = $_SERVER['REQUEST_TIME'];
 	if (!$now) $now=time();
-	define('_MAILSHOT_MAX_TIME',$now+25); // 25s maxi
+	define('_MAILSHOT_MAX_TIME',$now+15); // 15s maxi
 	define('_MAILSHOT_MAX_TRY',5); // 5 essais maxis par destinataires
 
 	// on traite au maximum 2 serie d'envois dans un appel
