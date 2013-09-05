@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © 2007-2013 - cmtmt, BoOz, kent1
  * Licence GPL v3
  * 
  * Fichier des fonctions spécifiques du plugin
@@ -26,6 +26,15 @@ if(!function_exists('id_pays_to_pays')){
 	}
 }
 
+/**
+ * Si pas de fonction lcfirst => PHP < 5.3
+ * On définit la fonction comme http://www.php.net/manual/fr/function.lcfirst.php#87176
+ */
+if(!function_exists('lcfirst')){
+    function lcfirst( $str ){
+    	return strtolower(substr($str,0,1)).substr($str,1);
+	}
+} 
 /**
  *
  * Fonction utilisée par le critère i3_recherche
