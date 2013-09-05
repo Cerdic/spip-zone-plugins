@@ -19,7 +19,7 @@ function mailshot_taches_generales_cron($taches_generales){
 	if (isset($GLOBALS['meta']['mailshot_processing'])){
 		include_spip('inc/mailshot');
 		list($periode,$nb) = mailshot_cadence();
-		$taches_generales['mailshot_bulksend'] = $periode;
+		$taches_generales['mailshot_bulksend'] = max(60,$periode-15);
 	}
 
 	return $taches_generales;
