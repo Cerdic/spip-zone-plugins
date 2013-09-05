@@ -6,9 +6,9 @@
 		Adapter le en vous servant des tutoriaux du dossier demo.
 	</description>
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Olivier PLATHEY</auteur>
-	<version>0.0.3</version> 
+	<version>1.0.0</version> 
 	<licence>Apache license - (c) 2004-2011</licence>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<prefix>fpdf</prefix>
 	<icon>prive/themes/spip/images/logo-64.png</icon>
 	<lien>http://contrib.spip.net/4185</lien>

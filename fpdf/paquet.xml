@@ -1,0 +1,19 @@
+<paquet
+	prefix="fpdf"
+	categorie="divers"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="prive/themes/spip/images/logo-64.png"
+	documentation="http://contrib.spip.net/4185"
+>	
+
+	<nom>FPDF</nom>
+	<!-- Librairie FPDF / FPDI pour fabriquer des pdfs. -->
+
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
+	<auteur>Olivier PLATHEY</auteur>
+
+	<copyright>2004-2011</copyright>
+	<licence lien="http://www.apache.org/licenses/LICENSE-2.0">Apache Licence, Version 2.0</licence>
+</paquet>
