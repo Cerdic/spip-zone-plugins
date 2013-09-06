@@ -18,6 +18,7 @@ function genie_mailshot_bulksend_dist($t){
 
 		$nb = 0;
 		$f_relance = _DIR_TMP."bulksend_relance.txt";
+		$f_last = _DIR_TMP."bulksend_last.txt";
 		$relance = true;
 		if (!$boost){
 			lire_fichier($f_relance,$nb);
@@ -30,7 +31,6 @@ function genie_mailshot_bulksend_dist($t){
 			// corriger par le nombre que l'on envoi
 			// par le ratio de delta de time effectif depuis le dernier cron
 			// sur la periode visee
-			$f_last = _DIR_TMP."bulksend_last.txt";
 			$now = time();
 			lire_fichier($f_last,$last);
 			if ($last=intval($last)
@@ -48,8 +48,19 @@ function genie_mailshot_bulksend_dist($t){
 			ecrire_fichier($f_relance,$restant);
 			$boost = true;
 		}
-		elseif($relance)
+		elseif($relance){
 			@unlink($f_relance);
+			// regarder si par hasard on a pas deja depasse le temps prevu par la cadence normale
+			// dans ce cas on redemande la main aussitot
+			// concerne les cas ou le smtp fait tellement attendre qu'on peine a respecter le rythme
+			list($periode,$nb) = mailshot_cadence();
+			$now = time();
+			lire_fichier($f_last,$last);
+			if ($last=intval($last)
+			  AND ($dt = $now-$last)>$periode){
+				$boost = true;
+			}
+		}
 
 		// dire qu'on a pas fini si mode boost pour se relancer aussi vite que possible
 		if ($boost)

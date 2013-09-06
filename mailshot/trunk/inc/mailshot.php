@@ -19,7 +19,7 @@ function mailshot_cadence(){
 		return array(30,100); // autant que possible, toutes les 30s
 
 	// cadence maxi
-	$cadence = array(60,5);
+	$cadence = array(60,10);
 	$max_rate = lire_config("mailshot/rate_limit");
 	if ($max_rate = intval($max_rate)){
 		$rate_one_per_one = 24*60*60/$cadence[0];
@@ -81,7 +81,7 @@ function mailshot_envoyer_lot($nb_max=5){
 	$nb_restant = $nb_max;
 	$now = $_SERVER['REQUEST_TIME'];
 	if (!$now) $now=time();
-	define('_MAILSHOT_MAX_TIME',$now+15); // 15s maxi
+	define('_MAILSHOT_MAX_TIME',$now+20); // 15s maxi
 	define('_MAILSHOT_MAX_TRY',5); // 5 essais maxis par destinataires
 
 	// on traite au maximum 2 serie d'envois dans un appel
