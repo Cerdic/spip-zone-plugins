@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.9.4"
+	version="4.9.5"
 	schema="2.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -16,7 +16,7 @@
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<credit lien="http://leafletjs.com/">Leaflet</credit>
-	<credit lien="https://github.com/shramov/leaflet-plugins">Leaflet plugins</credit>
+	<credit lien="https://github.com/brunob/leaflet-plugins">Leaflet plugins</credit>
 	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
@@ -29,7 +29,6 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="leaflet-gis-4.9.0" lien="http://contrib.spip.net/IMG/zip/leaflet-gis-4.9.0.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"

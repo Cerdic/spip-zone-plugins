@@ -9,11 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function gis_insert_head_css($flux){
-	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.css') .'" />';
-	$flux .="\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'dist/leaflet.ie.css') .'" /> <![endif]-->';
-	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path(_DIR_LIB_GIS.'plugins/leaflet-plugins.css') .'" />';
-	$flux .="\n".'<link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet.markercluster.css'),find_in_path(_DIR_LIB_GIS.'plugins/leaflet.markercluster.css')) .'" />';
-	$flux .="\n".'<!--[if lte IE 8]><link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet.markercluster.ie.css'),find_in_path(_DIR_LIB_GIS.'plugins/leaflet.markercluster.ie.css')) .'" /><![endif]-->';
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('lib/leaflet/dist/leaflet.css') .'" />';
+	$flux .="\n".'<!--[if lte IE 8]> <link rel="stylesheet" href="'. find_in_path('lib/leaflet/dist/leaflet.ie.css') .'" /> <![endif]-->';
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('lib/leaflet/plugins/leaflet-plugins.css') .'" />';
+	$flux .="\n".'<link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet.markercluster.css'),find_in_path('lib/leaflet/plugins/leaflet.markercluster.css')) .'" />';
+	$flux .="\n".'<!--[if lte IE 8]><link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet.markercluster.ie.css'),find_in_path('lib/leaflet/plugins/leaflet.markercluster.ie.css')) .'" /><![endif]-->';
 	return $flux;
 }
 

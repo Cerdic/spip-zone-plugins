@@ -1,24 +1,24 @@
 #HTTP_HEADER{Content-type:text/javascript}
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})dist/[(#CONFIG{auto_compress_js}|=={oui}|?{'leaflet','leaflet-src'})].js]})]})]
+[(#INCLURE{lib/leaflet/dist/[(#CONFIG{auto_compress_js}|=={oui}|?{'leaflet','leaflet-src'})].js})]
 
-[L.Icon.Default.imagePath = "(#CHEMIN{#EVAL{_DIR_LIB_GIS}dist/images}|url_absolue)";]
+[L.Icon.Default.imagePath = "(#CHEMIN{lib/leaflet/dist/images}|url_absolue)";]
 
 [(#INCLURE{javascript/gis_geocoder.js})]
 
 [(#INCLURE{javascript/gis_utils.js})]
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/KML.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/KML.js})]
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/GPX.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/GPX.js})]
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/leaflet-providers.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/leaflet-providers.js})]
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/Control.FullScreen.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/Control.FullScreen.js})]
 
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/Control.MiniMap.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/Control.MiniMap.js})]
 
-[(#REM) Tester suivant la config pour ces deux scripts ]
+[(#REM) Scripts de google et bing si besoin ]
 
 #SET{layers,#CONFIG{gis/layers,#ARRAY{0,openstreetmap_mapnik}}}
 [(#VAL|gis_layer_defaut|in_array{#GET{layers}}|non)
@@ -26,21 +26,19 @@
 ]
 
 [(#LISTE{google_roadmap,google_satellite,google_terrain}|array_intersect{#GET{layers}}|count|>{0}|oui)
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/Google.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/Google.js})]
 ]
 
 [(#VAL{bing_aerial}|in_array{#GET{layers}}|oui)
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/Bing.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/Bing.js})]
 ]
 
-[(#REM)
-Lib clustering si besoin
-]
+[(#REM) Lib clustering si besoin ]
 [(#ENV{cluster}|=={oui}|oui)
-[(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_GIS})plugins/leaflet.markercluster-src.js]})]})]
+[(#INCLURE{lib/leaflet/plugins/leaflet.markercluster-src.js})]
 ]
 
-#INCLURE{javascript/gis_init_map.js}
+[(#INCLURE{javascript/gis_init_map.js})]
 
 [(#CONFIG{auto_compress_js}|=={oui}|oui)
 #FILTRE{compacte}
