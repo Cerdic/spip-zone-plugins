@@ -33,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_boussole_spip' => 'Galaxie SPIP',
-	'nom_groupe_spip_actualite' => 'Actualité de SPIP',
-	'nom_groupe_spip_aide' => 'Aide et échanges autour de SPIP',
-	'nom_groupe_spip_decouverte' => 'A la découverte de SPIP',
-	'nom_groupe_spip_extension' => 'Extensions et contributions à SPIP',
-	'nom_groupe_spip_reference' => 'Références SPIP',
+	'nom_groupe_spip_actualite' => 'Actualité',
+	'nom_groupe_spip_aide' => 'Entraide',
+	'nom_groupe_spip_decouverte' => 'Découverte',
+	'nom_groupe_spip_extension' => 'Contributions',
+	'nom_groupe_spip_reference' => 'Documentation',
 	'nom_site_spip_blog' => 'SPIP Blog',
 	'nom_site_spip_contrib' => 'SPIP-Contrib',
 	'nom_site_spip_core' => 'SPIP Core',
@@ -64,6 +64,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'slogan_boussole_spip' => 'Perdu dans la Galaxie SPIP ?',
+	'slogan_groupe_spip_actualite' => 'Actualité de SPIP',
+	'slogan_groupe_spip_aide' => 'Aide et échanges autour de SPIP',
+	'slogan_groupe_spip_decouverte' => 'A la découverte de SPIP',
+	'slogan_groupe_spip_extension' => 'Extensions et contributions à SPIP',
+	'slogan_groupe_spip_reference' => 'Références SPIP',
 	'slogan_site_spip_blog' => 'Du logiciel libre et de la tendresse',
 	'slogan_site_spip_contrib' => 'L\'espace des contributions à SPIP',
 	'slogan_site_spip_core' => 'L\'espace de développement des versions de SPIP',
