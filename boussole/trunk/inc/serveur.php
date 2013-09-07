@@ -360,6 +360,13 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 							. inserer_balise('fermante', 'multi', '', 3)
 							. inserer_balise('fermante', 'nom', '', 2);
 				}
+				if (isset($_groupe['children']['slogan'])) {
+					$cache .= inserer_balise('ouvrante', 'slogan', '', 2)
+							. inserer_balise('ouvrante', 'multi', '', 3)
+							. indenter(3) . $_groupe['children']['slogan'][0]['children']['multi'][0]['text'] . "\n"
+							. inserer_balise('fermante', 'multi', '', 3)
+							. inserer_balise('fermante', 'slogan', '', 2);
+				}
 
 				// Insertion des éléments site du groupe en cours
 				if (isset($_groupe['children']['site'])) {

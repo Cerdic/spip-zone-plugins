@@ -234,7 +234,8 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 				$extra['logo_objet'] = '';
 				if (isset($_groupe['children']['nom']))
 					$extra['nom_objet'] = '<multi>' . $_groupe['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
-				$extra['slogan_objet'] = '';
+				if (isset($_groupe['children']['slogan']))
+					$extra['slogan_objet'] = '<multi>' . $_groupe['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
 				$extra['descriptif_objet'] = '';
 				$infos['extras'][] = $extra;
 

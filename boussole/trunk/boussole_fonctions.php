@@ -82,7 +82,7 @@ function calcul_boussole_infos($boussole) {
  */
 function boussole_traduire($aka_boussole, $champ, $alias='') {
 	static	$champs_boussole = array('nom_boussole', 'slogan_boussole', 'descriptif_boussole');
-	static	$champs_groupe = array('nom_groupe');
+	static	$champs_groupe = array('nom_groupe', 'slogan_groupe');
 	static	$champs_site = array('nom_site', 'slogan_site', 'descriptif_site');
 
 	$traduction = '';

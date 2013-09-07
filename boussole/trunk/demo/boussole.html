@@ -1,13 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
 <head>
-<title>Demo Boussole</title>
-<style type="text/css">
-body { padding: 0 10%; text-align: left; }
-</style>
+	<title>Demo Boussole</title>
+	<style type="text/css">
+		body { padding: 0 10%; text-align: left; }
+	</style>
+	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.less}|less_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.css})" type="text/css" />]
 </head>
 
 <body>
+<INCLURE{fond=modeles/boussole_topnav,
+	boussole=spip,
+	titre_boussole=oui,
+	type_bulle=slogan_site,
+	titre_menu_mobile=SPIP} />
+
 	<hr />
 	<strong>BOUSSOLES</strong>
 	<hr />
