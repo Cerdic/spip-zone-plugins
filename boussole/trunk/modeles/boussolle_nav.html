@@ -1,0 +1,69 @@
+[(#REM) <!--  MODELE DE BOUSSOLE
+
+        TOP NAV POUR LA Galaxie SPIP
+        
+
+        
+
+	BOUSSOLE_LISTE_PAR_GROUPE
+	Pour chaque groupe, une liste ul/li simple avec nom et bulle d'info pour chaque site.
+	Les titres des groupes peuvent etre affiches.
+	Seuls les sites configures comme tel sont affiches.
+	Le classement se fait par rang de groupe, puis rang de site dans le groupe.
+-->]
+
+[(#REM) <!-- UTILISATION
+
+        [<link rel="stylesheet" href="(#CHEMIN{css/boussole_nav.less}|less_css)" type="text/css" />]
+        [<link rel="stylesheet" href="(#CHEMIN{css/boussole_nav.css)" type="text/css" />]
+        
+        <INCLURE{fond=modeles/bousolle_nav,boussole=spip}{type_bulle=descriptif_site}{titre_menu_mobile=Spip Net} />
+
+	- boussole :		alias de la boussole a afficher. spip, pour la galaxie SPIP
+	- titre_boussole :	indicateur oui/non d'affichage du titre de la boussole. Vide correspond a non
+	- titre_groupe :	indicateur oui/non d'affichage du titre de chaque groupe. Vide correspond a non
+	- type_bulle :		type de bulle d'info parmi dont les valeurs possibles sont :
+                                    + nom_site
+                                    + slogan_site
+                                    + nom_slogan_site correspond a la chaine "nom, slogan"
+                                    + descriptif_site correspond a une intro de 100 caracteres du descriptif
+                                    Pour ce modele, vide correspond a aucune bulle
+
+        - titre_menu_mobile :    Titre du menu en mode mobile
+
+-->]
+<B_groupe>
+<div id="menu1" class="menu_container spip-theme full_width">
+    <div class="mobile_collapser">
+        <label for="hidden_menu_collapser"><span class="mobile_menu_icon"></span>[(#ENV{titre_menu_mobile,MENU})]</label>
+    </div>
+    <input id="hidden_menu_collapser" type="checkbox">
+    <ul>
+        <li>
+            <a href="http://boussole.spip.net/">[(#ENV{boussole}|boussole_traduire{nom_boussole})]</a>
+        </li>
+        <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
+        <li>
+            <a href="#">[(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})]</a>
+            [(#REM) <!-- Liste des site du groupe en cours -->]
+            <B_site>
+            <div class="menu_dropdown_block">
+                <div class="ssmenu_container">
+                    <ul class="menu_submenu">
+                    <BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
+                            [(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
+                            [<li>
+                                <a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|couper{80}|attribut_html)"] class="spip_out">
+                                        (#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
+                                </a>
+                            </li>]
+                    </BOUCLE_site>
+                    </ul>
+                </div>
+            </div>
+            </B_site>
+        </li>
+        </BOUCLE_groupe>
+    </ul>
+</div>
+</B_groupe>
