@@ -1,7 +1,7 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="2.3.11"
+	version="2.3.12"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="boussole_logo-64.png"
@@ -22,5 +22,5 @@
 	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
 
-	<menu nom="boussole" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole-16.png" action="boussoles" />
+	<menu nom="boussole" titre="boussole:bouton_boussole" parent="bando_squelette" icone="images/boussole_gerer-16.png" action="boussoles" />
 </paquet>
