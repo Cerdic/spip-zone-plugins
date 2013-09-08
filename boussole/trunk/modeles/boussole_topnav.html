@@ -20,18 +20,21 @@
                                     + descriptif_site correspond a une intro de 100 caracteres du descriptif
                                     Pour ce modele, vide correspond a aucune bulle
 	- titre_menu_mobile :    Titre du menu en mode mobile
-
+            
+            Fichier de travail .less à utiliser ou dupliquer pour modifier le menu
 	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.less}|less_css)" type="text/css" />]
+            ou bien css généré utilisable directement en production
 	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.css})" type="text/css" />]
 
 	<INCLURE{fond=modeles/boussole_topnav,
 		boussole=spip,
 		titre_boussole=oui,
+                taille_logo=24,
 		type_bulle=descriptif_site,
 		titre_menu_mobile=Spip Net} />
 -->]
 <B_groupe>
-<div id="menu1" class="menu_container spip-theme full_width">
+<div id="boussole" class="menu_container spip-theme full_width">
     <div class="mobile_collapser">
         <label for="hidden_menu_collapser">
 			<span class="mobile_menu_icon"></span>
@@ -56,12 +59,18 @@
                 <div class="ssmenu_container">
                     <ul class="menu_submenu">
 			<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
-						[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
-						[<li>
-							<a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|couper{80}|attribut_html)"] class="spip_out">
-								(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})
-							</a>
-						</li>]
+                                [(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
+                                <li>
+                                    <a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|couper{80}|attribut_html)"] class="spip_out">
+                                        <BOUCLE_logo_site(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
+                                                [(#CHAMP_SQL{logo_objet}
+                                                |image_reduire{#ENV{taille_logo, 40}}
+                                                |image_recadre{#ENV{taille_logo, 40},#ENV{taille_logo, 40},center,transparent}
+                                                |inserer_attribut{alt,[(#GET{bulle}|couper{60}|attribut_html)]})]  
+                                        </BOUCLE_logo_site>   
+                                        [(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
+                                    </a>
+                                </li>
 			</BOUCLE_site>
                     </ul>
                 </div>

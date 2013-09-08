@@ -14,12 +14,13 @@ http://romy.tetue.net/selecteurs-conditionnels-pour-ie
 @spipFont : "Georgia,Cambria,Times New Roman,Times,serif";
 @spipSansFont : "Georgia,Cambria,Times New Roman,Times,serif";
 
+@1linkColor : #FFFFFF ;   // Couleur ldes liens de menu niv1
 @menuContainerHeight : 48px ;
 @mobileColapser_background : "none no-repeat #353535";
 
 
 
-//MARK : MIXINS
+// MARK : MIXINS
 // Drop shadows
 .box-shadow(@shadow) {
   -webkit-box-shadow: @shadow;
@@ -39,13 +40,12 @@ http://romy.tetue.net/selecteurs-conditionnels-pour-ie
 .menu_container.spip-theme {
     .spip_theme;
     > ul > li a {
-        color:@white;
+        color   :  @1linkColor;
         font-family: @spipFont;
         font-size: 16px;
     }
     > ul > li:hover > a {
-        background-color: @spipMauve ;
-        
+        background-color: @spipMauve ;   
     }
     ul.menu_submenu_block li a:hover {
         background: none repeat scroll 0% 0% @spipMauve2;
@@ -91,7 +91,7 @@ http://romy.tetue.net/selecteurs-conditionnels-pour-ie
         display: block;
         color: rgb(255, 255, 255);
         text-decoration: none;
-        box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.2) inset;
+        .box-shadow(-1px 0px 0px rgba(0, 0, 0, 0.2) inset);
         border-right: 1px solid rgba(255, 255, 255, 0.25);
         text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
         transition: background-color 200ms linear 0s;
@@ -120,7 +120,7 @@ http://romy.tetue.net/selecteurs-conditionnels-pour-ie
     > li > .menu_dropdown_block {
         visibility: hidden;
         display:none;
-        position: relative;
+        position: absolute;
         border-right: 1px solid rgb(221, 221, 221);
         border-width: 0px 1px 1px;
         border-style: none solid solid;
@@ -157,37 +157,36 @@ http://romy.tetue.net/selecteurs-conditionnels-pour-ie
 }
 
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container {
-    padding: 15px 20px;
-}
-    
- 
-// MARK : SubMenu Styles
-
-ul.menu_submenu {
-    list-style: none outside none;
-    padding: 0px;
-    margin: 0px 0px 10px;
-    li {
-        display: block;
-        > a {
-        display: block;
-        padding: 4px 0px;
-        text-decoration: none;
-        color: rgb(102, 102, 102);
-        margin: 2px 0px;
-        font-family: @spipSansFont;
-        &:hover {
-            color: rgb(17, 17, 17);
-            background: none;
+    padding: 15px 15px 5px 15px;
+    // MARK : SubMenu Styles
+    ul.menu_submenu {
+        list-style: none outside none;
+        padding: 0px;
+        margin: 0px 0px 10px;
+        li {
+            display: block;
+            > a {
+            display: block;
+            padding: 4px 0px;
+            text-decoration: none;
+            color: rgb(102, 102, 102);
+            //margin: 2px 0px;
+            font-family: @spipSansFont;
+                &:hover {
+                color: rgb(17, 17, 17);
+                background: none;
+                }
+                > img {
+                float:left;
+                margin-right:5px;
+                }
             }
         }
     }
 }
-
- 
-        
+    
+   
 // MARK : Mobile Collapser
-
 .mobile_collapser {
     display: none ; 
     > label {
@@ -235,7 +234,7 @@ ul.menu_submenu {
         }
 }
 
-@media only screen and (max-width: 980px) { 
+@media only screen and (max-width: 940px) { 
     .mobile_collapser {
         background: @mobileColapser_background;
         display: block;
