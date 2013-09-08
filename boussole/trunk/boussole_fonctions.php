@@ -35,7 +35,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses calcul_boussole_infos()
  *
  * @example
- * 		#BOUSSOLE_INFOS{spip}|table_valeur{logo} renvoie l'url du logo de la boussole "spip"
+ * 		`#BOUSSOLE_INFOS{spip}|table_valeur{logo}` renvoie l'url du logo de la boussole "spip"
  *
  * @param champ $p
  * 		Pile transmise en entrée à la balise

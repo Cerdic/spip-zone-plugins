@@ -1,14 +1,24 @@
 <?php
+/**
+ * Ce fichier contient les cas d'utilisation des pipelines d'affichage.
+ *
+ * @package SPIP\BOUSSOLE\Pipelines
+ */
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 /**
- * Insertion dans le pipeline affiche_milieu
- * Affiche un bloc l'identification de la boussole a laquelle appartient le site edite
+ * Affichage, dans la fiche d'un objet site dans l'espace privé, d'un bloc identifiant
+ * la boussole à laquelle appartient le site édité.
  *
- * @param object $flux
- * @return object
+ * @pipeline affiche_milieu
+ *
+ * @param array $flux
+ * 		Données de contexte fournies au pipeline
+ * @return array
+ * 		Données d'entrées complétées par la fonction
  */
 function boussole_affiche_milieu($flux){
 	if (($flux['args']['exec'] == 'site') AND $flux['args']['id_syndic']) {
