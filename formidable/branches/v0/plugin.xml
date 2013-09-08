@@ -3,7 +3,7 @@
 	<slogan>G&#233;n&#233;rateur de formulaires</slogan>
 	<auteur>RastaPopoulos, [Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.6.7</version>
+	<version>0.7.0</version>
 	<version_base>0.5.1</version_base>
 	<etat>stable</etat>
 	<description>Cr&#233;ation de formulaires avec une interface graphique et configuration des traitements associ&#233;s (envoyer par courriel, enregistrer les r&#233;ponses, etc).</description>
