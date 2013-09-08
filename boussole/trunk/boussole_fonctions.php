@@ -8,21 +8,27 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+// ----------------------- Balises propres à Boussole ---------------------------------
+
 /**
- * Balise retournant les informations sur une boussole.
+ * Compilation de la balise `#BOUSSOLE_INFOS` retournant les informations générales sur une
+ * boussole.
  *
  * La balise #BOUSSOLE_INFOS renvoie :
  *
- * - le tableau des infos contenues dans la meta boussole_infos_alias si l'alias est fourni,
- * - la liste de tous les tableaux d'infos des meta boussole_infos_xxxx sinon.
+ * - le tableau des infos contenues dans la meta boussole_infos_xxx si l'alias "xxx" est fourni,
+ * - la liste de tous les tableaux d'infos des meta boussole_infos_* sinon.
  *
  * @balise
  * @uses calcul_boussole_infos()
  *
- * @param string $p
- * 		alias de la boussole ou vide
- * @return array
- * 		tableau des informations demandees (une boussole ou toutes les boussoles)
+ * @example
+ * 		#BOUSSOLE_INFOS{spip}|table_valeur{logo} renvoie l'url du logo de la boussole "spip"
+ *
+ * @param champ $p
+ * 		Pile transmise en entrée à la balise
+ * @return champ
+ * 		Pile fournie en entrée et complétée par le code à générer
  */
 function balise_BOUSSOLE_INFOS($p) {
 	
@@ -44,6 +50,7 @@ function balise_BOUSSOLE_INFOS($p) {
  * 		Alias de la boussole ou chaine vide
  *
  * @return array
+ * 		Tableau de la ou des boussoles installées.
  * 		Si l'alias de la boussole est erroné, la fonction retourne un tableau vide
  */
 function calcul_boussole_infos($boussole) {
@@ -74,7 +81,7 @@ function calcul_boussole_infos($boussole) {
 }
 
 
-// ----------------------- Filtres propres a Boussole ---------------------------------
+// ----------------------- Filtres propres à Boussole ---------------------------------
 
 /**
  * Traduction d'un champ d'une boussole, d'un groupe de sites ou d'un site
