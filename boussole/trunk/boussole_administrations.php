@@ -117,7 +117,7 @@ function boussole_vider_tables($nom_meta_base_version) {
  * Migration du schéma 0.1 au 0.2.
  *
  * Ajout de la table `spip_boussoles_extras` et suppression des boussoles autres que
- * la boussole 'spip' car il n'est pas possible de les mettre à jour,
+ * la boussole "spip" car il n'est pas possible de les mettre à jour,
  * leur serveur n'étant pas connu.
  *
  * @return void

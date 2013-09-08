@@ -1,7 +1,12 @@
 <?php
+/**
+ * Ce fichier contient les balises et les filtres fournis par le plugin.
+ *
+ * @package SPIP\BOUSSOLE\Squelettes
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// ----------------------- Balises propres a Boussole ---------------------------------
 
 /**
  * Balise retournant les informations sur une boussole.
@@ -30,10 +35,16 @@ function balise_BOUSSOLE_INFOS($p) {
 }
 
 /**
+ * Récupération des informations sur une boussole donnée ou sur toutes les boussoles installées.
+ *
+ * Les informations retournées pour une boussole d'alias "xxx" sont celles stockées dans la meta
+ * `boussole_infos_xxx` auxquelles on adjoint la date de la dernière mise à jour de cette meta.
+ *
  * @param string $boussole
  * 		Alias de la boussole ou chaine vide
  *
  * @return array
+ * 		Si l'alias de la boussole est erroné, la fonction retourne un tableau vide
  */
 function calcul_boussole_infos($boussole) {
 
@@ -140,7 +151,7 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
  *
  * @api
  * @filtre
- * @pipeline_appel declarer_boussoles()
+ * @pipeline_appel declarer_boussoles
  *
  * @return array
  */
@@ -223,11 +234,11 @@ function boussole_lister_caches() {
  *
  * @api
  * @filtre
- * @pipeline_appel declarer_boussoles()
+ * @pipeline_appel declarer_boussoles
  *
  * @return int
  */
-function boussole_compteur_hebergement() {
+function boussole_compter_hebergements() {
 	include_spip('inc/config');
 	$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 	$boussoles = pipeline('declarer_boussoles', $boussoles);
