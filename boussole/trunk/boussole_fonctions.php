@@ -19,6 +19,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - le tableau des infos contenues dans la meta boussole_infos_xxx si l'alias "xxx" est fourni,
  * - la liste de tous les tableaux d'infos des meta boussole_infos_* sinon.
  *
+ * La liste des informations disponibles est la suivante :
+ *
+ * - 'logo' : l'url du logo de la boussole
+ * - 'version' : la version de la boussole
+ * - 'serveur' : le nom du serveur fournissant la boussole
+ * - 'sha' : sha256 du fichier cache de la boussole
+ * - 'alias' : alias de la boussole
+ * - 'demo' : url de la page de démo de la boussole
+ * - 'nbr_sites' : nombre de sites intégrés dans la boussole
+ * - 'maj' : date de la dernière mise à jour des informations
+ *
+ * @api
  * @balise
  * @uses calcul_boussole_infos()
  *
@@ -84,21 +96,26 @@ function calcul_boussole_infos($boussole) {
 // ----------------------- Filtres propres à Boussole ---------------------------------
 
 /**
- * Traduction d'un champ d'une boussole, d'un groupe de sites ou d'un site
+ * Traduction d'un champ d'une boussole, d'un groupe de sites ou d'un site.
  *
  * @api
  * @filtre
  *
- * @param string $aka_boussole
+ * @param string $boussole
  * 		Alias de la boussole
  * @param string $champ
- * 		Champ à traduire
- * @param string $alias
- * 		Identifiant du groupe ou du site
+ * 		Champ à traduire. La liste des champs possibles est :
+ *
+ * 		- 'nom_boussole', 'slogan_boussole', 'descriptif_boussole' pour un objet boussole
+ * 		- 'nom_groupe', 'slogan_groupe' pour un objet groupe
+ * 		- 'nom_site', 'slogan_site', 'descriptif_site' pour un objet site
+ * @param string $objet
+ * 		Identifiant d'un objet groupe ou site. Vide pour la traduction d'un champ d'un objet
+ * 		boussole
  * @return string
  * 		Champ traduit dans la langue du site
  */
-function boussole_traduire($aka_boussole, $champ, $alias='') {
+function boussole_traduire($boussole, $champ, $objet='') {
 	static	$champs_boussole = array('nom_boussole', 'slogan_boussole', 'descriptif_boussole');
 	static	$champs_groupe = array('nom_groupe', 'slogan_groupe');
 	static	$champs_site = array('nom_site', 'slogan_site', 'descriptif_site');
@@ -110,25 +127,25 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
 
 
 	// Détermination de la traduction à rechercher dans les extras de boussole
-	if ($aka_boussole) {
+	if ($boussole) {
 		if (in_array($champ, $champs_boussole)) {
 			$type_objet = 'boussole';
-			$aka_objet = $aka_boussole;
+			$aka_objet = $boussole;
 			$info = str_replace('boussole', 'objet', $champ);
 		}
 		elseif (in_array($champ, $champs_groupe)) {
 			$type_objet = 'groupe';
-			$aka_objet = $alias;
+			$aka_objet = $objet;
 			$info = str_replace('groupe', 'objet', $champ);
 		}
 		elseif (in_array($champ, $champs_site)) {
 			$type_objet = 'site';
-			$aka_objet = $alias;
+			$aka_objet = $objet;
 			$info = str_replace('site', 'objet', $champ);
 		}
 		elseif ($champ == 'nom_slogan_site') {
 			$type_objet = 'site';
-			$aka_objet = $alias;
+			$aka_objet = $objet;
 			$info = array('nom_objet', 'slogan_objet');
 		}
 		else
@@ -137,7 +154,7 @@ function boussole_traduire($aka_boussole, $champ, $alias='') {
 
 	// Accès à la table boussoles_extras où sont stockées les traductions
 	$where = array(
-		'aka_boussole=' . sql_quote($aka_boussole),
+		'aka_boussole=' . sql_quote($boussole),
 		'type_objet=' . sql_quote($type_objet),
 		'aka_objet=' . sql_quote($aka_objet));
 	$traductions = sql_fetsel($info, 'spip_boussoles_extras', $where);
