@@ -5,12 +5,11 @@
  * @package SPIP\BOUSSOLE\Pipelines
  */
 
-// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Affichage, dans la fiche d'un objet site dans l'espace privé, d'un bloc identifiant
+ * Affichage, dans la fiche d'un objet site, d'un bloc identifiant
  * la boussole à laquelle appartient le site édité.
  *
  * @pipeline affiche_milieu
@@ -18,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $flux
  * 		Données de contexte fournies au pipeline
  * @return array
- * 		Données d'entrées complétées par la fonction
+ * 		Données de contexte complétées par la fonction
  */
 function boussole_affiche_milieu($flux){
 	if (($flux['args']['exec'] == 'site') AND $flux['args']['id_syndic']) {
