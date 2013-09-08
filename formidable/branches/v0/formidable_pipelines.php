@@ -32,12 +32,13 @@ function formidable_optimiser_base_disparus($flux){
 	//
 	## date de reference = 4 mois
 	## definir a 0 pour desactiver
-	if (!defined('_CNIL_PERIODE_FORMIDABLE')) {
-		define('_CNIL_PERIODE_FORMIDABLE', 3600*24*31*4);
+	## même constante que pour les forums
+	if (!defined('_CNIL_PERIODE')) {
+		define('_CNIL_PERIODE', 3600*24*31*4);
 	}
 	
-	if (_CNIL_PERIODE_FORMIDABLE) {
-		$critere_cnil = 'date<"'.date('Y-m-d', time()-_CNIL_PERIODE_FORMIDABLE).'"'
+	if (_CNIL_PERIODE) {
+		$critere_cnil = 'date<"'.date('Y-m-d', time()-_CNIL_PERIODE).'"'
 			. ' AND statut != "spam"'
 			. ' AND (ip LIKE "%.%" OR ip LIKE "%:%")'; # ipv4 ou ipv6
 		$c = sql_countsel('spip_formulaires_reponses', $critere_cnil);
