@@ -35,11 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom_boussole_spip' => 'SPIP Galaxy',
-	'nom_groupe_spip_actualite' => 'SPIP News',
-	'nom_groupe_spip_aide' => 'SPIP help and exchange',
-	'nom_groupe_spip_decouverte' => 'SPIP discovery',
-	'nom_groupe_spip_extension' => 'SPIP add-ons and contributions',
-	'nom_groupe_spip_reference' => 'SPIP References',
+	'nom_groupe_spip_actualite' => 'SPIP News', # MODIF
+	'nom_groupe_spip_aide' => 'SPIP help and exchange', # MODIF
+	'nom_groupe_spip_decouverte' => 'SPIP discovery', # MODIF
+	'nom_groupe_spip_extension' => 'SPIP add-ons and contributions', # MODIF
+	'nom_groupe_spip_reference' => 'SPIP References', # MODIF
 	'nom_site_spip_blog' => 'SPIP Blog',
 	'nom_site_spip_contrib' => 'SPIP-Contrib',
 	'nom_site_spip_core' => 'SPIP Core',
@@ -66,6 +66,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'slogan_boussole_spip' => 'Lost in SPIP Galaxy?',
+	'slogan_groupe_spip_actualite' => 'Actualité de SPIP', # NEW
+	'slogan_groupe_spip_aide' => 'Aide et échanges autour de SPIP', # NEW
+	'slogan_groupe_spip_decouverte' => 'A la découverte de SPIP', # NEW
+	'slogan_groupe_spip_extension' => 'Extensions et contributions à SPIP', # NEW
+	'slogan_groupe_spip_reference' => 'Références SPIP', # NEW
 	'slogan_site_spip_blog' => 'Free software and tenderness',
 	'slogan_site_spip_contrib' => 'SPIP contribution area',
 	'slogan_site_spip_core' => 'SPIP versions development area ',
