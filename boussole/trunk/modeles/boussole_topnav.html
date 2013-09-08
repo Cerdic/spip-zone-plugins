@@ -47,6 +47,7 @@
 	[(#ENV{titre_boussole, non}|=={oui}|oui)
 		[<li>
             <a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"]>
+                                [(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo, 40}}|image_recadre{#ENV{taille_logo, 40},#ENV{taille_logo, 40},center,transparent}|inserer_attribut{alt,[(#GET{bulle}|couper{60}|attribut_html)]})]
 				(#ENV{boussole}|boussole_traduire{nom_boussole})
 			</a>
         </li>]
