@@ -13,18 +13,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_tradlang_exporter_langue_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-
-	if (!preg_match(",^([0-9]+)\/(\w+)?(\/?(\w*))$,", $arg, $r))
+	if (!preg_match(",^([0-9]+)\/(\w+)?(\/?(\w*))?(\/?(\w*))$,", $arg, $r))
 		spip_log("action_tradlang_exporter_langue_dist $arg pas compris","tradlang");
 
 	$id_tradlang_module = intval($r[1]);
 	$lang_cible = $r[2];
 	$type = $r[4] ? $r[4] : false;
-
+	$tout = ($r[6] == 'non') ? false : true;
 	if($lang_cible && intval($id_tradlang_module) && sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible))){
 		$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 		$tradlang_sauvegarde_module = charger_fonction('tradlang_sauvegarde_module','inc');
-		$fichier = $tradlang_sauvegarde_module($module,$lang_cible,false,$type);
+		$fichier = $tradlang_sauvegarde_module($module,$lang_cible,false,$type,$tout);
 		if(file_exists($fichier)){
 			switch($type){
 				case 'po':

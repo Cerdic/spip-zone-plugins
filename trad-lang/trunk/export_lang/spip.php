@@ -13,12 +13,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Fonction d'export d'une langue d'un module SPIP en php
  * 
- * @param string $module Le module à exporter
- * @param string $langue La langue à exporter
- * @param string $dir_lang Le répertoire où stocker les fichiers de langue
- * @return string $fichier Le fichier final
+ * @param string $module
+ * 		Le module à exporter
+ * @param string $langue
+ * 		La langue à exporter
+ * @param string $dir_lang
+ * 		Le répertoire où stocker les fichiers de langue
+ * @param bool $tout
+ * 		Si true, exporte toutes les chaines même non traduites
+ * @return string $fichier
+ * 		Le fichier final
  */
-function export_lang_spip_dist($module,$langue,$dir_lang){
+function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
 	/**
 	 * Le fichier final
 	 * local/cache-lang/module_lang.php
@@ -26,8 +32,10 @@ function export_lang_spip_dist($module,$langue,$dir_lang){
 	$fichier = $dir_lang."/".$module."_".$langue.".php";
 
 	$tab = "\t";
-
-	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
+	$where = "module=".sql_quote($module)." AND lang=".sql_quote($langue);
+	if(!$tout)
+		$where .= " AND statut IN ('OK','MODIF')";
+	$res=sql_select("id,str,comm,statut","spip_tradlangs",$where,"id");
 	$x=array();
 	$prev="";
 	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)

@@ -36,7 +36,9 @@
 	<h2 class="h2"><:tradlang:titre_traduction_module_de_vers{module=#NOM_MOD,lang_orig=#GET{lang_orig},lang_orig_long=#GET{orig_lng},lang_cible=#GET{lang_cible},lang_cible_long=#GET{cible_lng}}:></h2>
 
 	[(#ENV{vue}|=={upload}|oui)
-		<p><a href="[(#SELF|parametre_url{vue,''})]" class="ajax btn"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></p>
+		<div class="actions">
+			<a href="[(#SELF|parametre_url{vue,''})]" class="ajax btn icon-back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a>
+		</div>
 		<INCLURE{fond=noisettes/vues/tradlang_upload_module,lang_orig=#GET{lang_orig},lang_cible=#GET{lang_cible},lang_cible_forcee=#GET{lang_cible_forcee},env,ajax}>]
 	[(#ENV{vue}|=={upload}|non)
 		<INCLURE{fond=noisettes/listes/tradlang_liste_tous,lang_orig=#GET{lang_orig},lang_cible=#GET{lang_cible},lang_cible_forcee=#GET{lang_cible_forcee},env,ajax}>]

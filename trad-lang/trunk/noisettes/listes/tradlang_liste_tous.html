@@ -62,60 +62,64 @@
 			</div>
 		</li>
 	</ul>]
-	[(#SET{texte_bouton_upload,<:tradlang:bouton_upload_langue_module:>}|attribut_html)]
 	[(#GET{total_ok}|=={0}|et{#GET{total_cible}|>{0}}|et{#GET{autoriser_modifier}}|oui)
 	[(#SET{texte_bouton_delete,<:tradlang:bouton_supprimer_langue_module:>}|attribut_html)]
 	<div class="actions">
 		[(#BOUTON_ACTION{#GET{texte_bouton_delete},[(#URL_ACTION_AUTEUR{tradlang_supprimer_langue_cible,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
-		[<span class="sep"> | </span>(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})]})]
 	</div>]
 	[(#GET{total_ok}|>{0}|et{#GET{total_cible}|>{0}}|et{#GET{autoriser_modifier}}|oui)
 	<div class="actions">
-		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})]})]
+		<p class="info_export"><:tradlang:info_export:></p>
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}}|concat{/#TYPE_EXPORT}|concat{/non})],#SELF})],icon-export})]
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue_complet}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}})],#SELF})],icon-export,<:tradlang:message_avertissement_export_langue_complet:>})]
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue_po}|_T{#ARRAY{lang,#ENV{lang_cible}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#ENV{lang_cible}|concat{/po}})],#SELF})],icon-export,<:tradlang:message_avertissement_export_langue_po:>})]
 		[(#GET{lang_orig}|et{#GET{lang_orig}|!={#LANG_MERE}}|oui)
-		[<span class="sep"> | </span>(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],#SELF})]})]]
-		[<span class="sep"> | </span>(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],#SELF})]})]
-		[<span class="sep"> | </span>(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})]})]
+		[(#BOUTON_ACTION{[(#VAL{tradlang:bouton_exporter_fichier_langue}|_T{#ARRAY{lang,#GET{lang_orig}}})],[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#GET{lang_orig}})],#SELF})],icon-export})]]
+		[(#BOUTON_ACTION{<:tradlang:bouton_exporter_fichier_langue_original{lang_mere=#LANG_MERE}|attribut_html:>,[(#URL_ACTION_AUTEUR{tradlang_exporter_langue,[(#ID_TRADLANG_MODULE|concat{/#LANG_MERE})],#SELF})],icon-export})]
 	</div>]
 </div>
 [(#REM)	
 [(#GET{total_mere}|>{0}|oui)<p> <:tradlang:nb_items_langue_cible{nb=#GET{total_mere},langue=#ENV{lang_cible}}:></p>]]
-[(#ENV{edit}|=={1}|oui)
-<p><a href="[(#SELF|parametre_url{edit,2})]" class="ajax btn back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></p>]
-[(#ENV{edit}|=={1}|non|et{#GET{module_existant,non}|=={oui}|oui}|et{#GET{percent_ok}|!={100}|oui}|et{#GET{autoriser_modifier}|oui}|oui)
-	<div class="actions"><p><a href="[(#SELF|parametre_url{edit,1})]" class="ajax btn edit"><:tradlang:lien_editer_tous:></a></p></div>
-]
+<div class="actions">
+	<p><:tradlang:info_edition_par_lot:></p>
+	[(#SET{texte_bouton_upload,<:tradlang:bouton_upload_langue_module:>}|attribut_html)]
+	[(#ENV{edit}|=={1}|oui)
+	<a href="[(#SELF|parametre_url{edit,2})]" class="ajax btn icon-back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a>]
+	[(#ENV{edit}|=={1}|non|et{#GET{module_existant,non}|=={oui}|oui}|et{#GET{percent_ok}|!={100}|oui}|et{#GET{autoriser_modifier}|oui}|oui)
+	<a href="[(#SELF|parametre_url{edit,1})]" class="ajax btn icon-edit"><:tradlang:lien_editer_tous:></a>]
+	[(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})],icon-upload})]
+</div>
+
 <BOUCLE_si_edit(CONDITION){si #GET{autoriser_modifier}|et{#ENV{edit}|=={1}}}>
 [(#_module:CRAYON{tradlang_tous})]
 </BOUCLE_si_edit>
 </B_si_edit>
+
 <B_statut>
 	[(#GRAND_TOTAL|>{1}|oui)
-	<div class="actions"><p class="filtrer"><:tradlang:info_filtrer_status:>
-	[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
-	[(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
-<BOUCLE_statut(TRADLANGS){module}{id IN #GET{str_mere}}{lang=#ENV{lang_cible}}{fusion statut}{'<span class="sep"> | </span>'}>
-[(#GRAND_TOTAL|>{1}|oui)
-	[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">#STATUT</a>]
-	[(#STATUT|!={#ENV{statut}}|non)#STATUT]
-]
-#SET{statut,#STATUT}
-</BOUCLE_statut>
-[(#GRAND_TOTAL|>{1}|oui)
-</p></div>]
-
-[(#REM) 
+	<div class="actions">
+		<p class="filtrer"><:tradlang:info_filtrer_status:></p>
+		[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a>]
+		[(#ENV{statut}|non)<strong class="on"><:tradlang:lien_aucun_status:></strong>]]
+	<BOUCLE_statut(TRADLANGS){module}{id IN #GET{str_mere}}{lang=#ENV{lang_cible}}{fusion statut}>
+	[(#GRAND_TOTAL|>{1}|oui)[(#SET{statut,#STATUT})]
+		[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">#STATUT</a>]
+		[(#STATUT|!={#ENV{statut}}|non)<strong class="on">#STATUT</strong>]]
+	</BOUCLE_statut>
+	[(#GRAND_TOTAL|>{1}|oui)
+	</div>]
+</B_statut>[(#REM)
+ 
 	Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après
-]
-[(#GRAND_TOTAL|=={1}|et{#ENV{statut}}|et{#GET{statut}|!={#ENV{statut}}}|oui)
+
+][(#GRAND_TOTAL|=={1}|et{#ENV{statut}}|et{#GET{statut}|!={#ENV{statut}}}|oui)
 	<p><:tradlang:message_aucun_resultat_statut:></p>
-	<p><a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
-]
-</B_statut>
-[(#REM) 
+	<p><a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>]
+</B_statut>[(#REM)
+
 	On affiche les id qui n'existent pas dans la langue cible
-]
-<B_revise_inexistants>[(#SET{total_inexistants,#GRAND_TOTAL})]
+
+]<B_revise_inexistants>[(#SET{total_inexistants,#GRAND_TOTAL})]
 [(#GET{total_inexistants}|=={#GET{total_mere}}|oui)
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#GET{autoriser_modifier}|oui)
@@ -127,9 +131,7 @@
 		[(#ENV{lang_cible}|langue_possible|non)
 		#BOITE_OUVRIR{'',error}
 			<:tradlang:erreur_langue_activer_impossible{lang=#ENV{lang_cible}}:>
-		#BOITE_FERMER]
-	]
-]
+		#BOITE_FERMER]]
 [(#GET{total_inexistants}|=={#GET{total_mere}}|non)
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#GET{autoriser_modifier}|oui)
@@ -161,11 +163,11 @@
 	</BOUCLE_revise_inexistants>
 	</tbody>
 </table>
-</B_revise_inexistants>
-[(#REM) 
+</B_revise_inexistants>[(#REM)
+
 	On affiche les id qui n'existent pas dans la langue cible
-]<B_revise_en_trop>
-#SET{total_en_trop,#GRAND_TOTAL}
+
+]<B_revise_en_trop>[(#SET{total_en_trop,#GRAND_TOTAL})]
 [<p>(#GET{total_en_trop}|singulier_ou_pluriel{tradlang:nb_items_langue_en_trop,tradlang:nb_item_langue_en_trop,nb,#ARRAY{langue,#ENV{lang_cible},langue_longue,#GET{langue_longue}}})</p>]
 <table class="spip liste_traductions tablesorter">
 	<thead>
@@ -187,9 +189,10 @@
 	</BOUCLE_revise_en_trop>
 	</tbody>
 </table>
-</B_revise_en_trop>
-[(#REM) 
+</B_revise_en_trop>[(#REM)
+
 	On affiche finalement le tableau de traductions
+
 ]<B_revise_cible>
 <table class="spip liste_traductions tablesorter">
 	<thead>
@@ -202,9 +205,10 @@
 			<th class="modifier ts_disabled">&nbsp;</th>
 		</tr>
 	</thead>
-	<tbody>
-	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANGS trandlang_modules){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+	<tbody>[(#REM)
+	
+		on n'affiche que les id qui existent dans la langue mère
+	]<BOUCLE_revise_cible(TRADLANGS trandlang_modules){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANGS){module}{id=#ID}{lang=#GET{lang_orig,#LANG_MERE}}>
@@ -223,9 +227,10 @@
 </B_revise_cible>
 <//B_si_edit>
 </BOUCLE_module>
-</B_module>
-[(#REM)
+</B_module>[(#REM)
+
 	Le module n'existe pas
+
 ][(#BOITE_OUVRIR{'',error})]
 	<:tradlang:erreur_module_inconnu:>
 [(#BOITE_FERMER)]
