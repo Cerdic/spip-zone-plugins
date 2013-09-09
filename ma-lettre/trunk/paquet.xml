@@ -1,9 +1,9 @@
 <paquet
 	prefix="malettre"
 	categorie="communication"
-	version="3.0.7"
+	version="3.1.0"
 	schema="1.0.0"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/malettre.png"
 	documentation="http://www.spip-contrib.net/Plugin-Ma-lettre"
@@ -12,7 +12,7 @@
 	<!-- Compose sur mesure une lettre d'information -->
 
 	<auteur lien="http://www.erational.org">erational</auteur>
-	<copyright>2012</copyright>
+	<copyright>2012-2013</copyright>
 	<licence>GPL v3</licence>
     
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />

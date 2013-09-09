@@ -191,17 +191,15 @@ function formulaires_envoi_malettre_traiter_dist(){
 	                $mail->Body     =  $recup;
 	                $mail->AltBody  =  $recup_txt;
 		              $res = $mail->Send();
-	              }
-	              else {
+	              } else {    // envoi via facteur
 		              $envoyer_mail = charger_fonction('envoyer_mail','inc');
 		              $corps = array(
 			              "html" => $recup,
 			              "texte" => $recup_txt,
 			              "nom_envoyeur" => $exp_name,
-			              "from" => $exp_email,
-			              "renvoyer_a" => $exp_email
+			              "from" => $exp_email			              
 		              );
-		              $res = $envoyer_mail($adresse,$lettre_title,$corps);
+		              $res = $envoyer_mail($destinataire,$lettre_title,$corps);
 	              }
 
                 if (!$res) {
