@@ -5,6 +5,7 @@
 #grid {
   .hashgrid (@gridColumnWidth, @gridGutterWidth, @baseLineHeight) {
     #bsgrid{
+      z-index:1000;
       /* Dimensions - same width as your grid with gutters */
       width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns + 1));
       margin-left: -((@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns + 1)))/2;
