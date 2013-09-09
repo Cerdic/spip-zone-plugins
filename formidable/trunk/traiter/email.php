@@ -105,8 +105,8 @@ function traiter_email_dist($args, $retours){
 		);
 		
 		// On génère le texte brut
-		include_spip('classes/facteur');
-		$texte = Facteur::html2text($html);
+		include_spip('facteur_fonctions');
+		$texte = facteur_mail_html2text($html);
 		
 		// On utilise la forme avancé de Facteur
 		$corps = array(
@@ -168,7 +168,7 @@ function traiter_email_dist($args, $retours){
 			);
 			
 			// On génère le texte brut
-			$texte = Facteur::html2text($html_accuse);
+			$texte = facteur_mail_html2text($html_accuse);
 			
 			$corps = array(
 				'html' => $html_accuse,

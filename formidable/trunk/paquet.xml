@@ -1,9 +1,9 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="1.5.1"
+	version="1.5.2"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/formidable-64.png"
 	schema="0.5.1"
 	documentation="http://www.spip-contrib.net/Formidable-le-generateur-de"
@@ -29,7 +29,7 @@
 	<necessite nom="saisies" compatibilite="[1.10.1;[" />
 	<necessite nom="verifier" compatibilite="[0.1;[" />
 	<necessite nom="yaml" compatibilite="[1.1;[" />
-	<necessite nom="facteur" compatibilite="[1.5.3;[" />
+	<necessite nom="facteur" compatibilite="[3.0.3;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>
