@@ -25,6 +25,18 @@ function action_tradlang_exporter_langue_dist(){
 		$tradlang_sauvegarde_module = charger_fonction('tradlang_sauvegarde_module','inc');
 		$fichier = $tradlang_sauvegarde_module($module,$lang_cible,false,$type,$tout);
 		if(file_exists($fichier)){
+
+			// supprimer et vider les buffers qui posent des problemes de memory limit
+			// http://www.php.net/manual/en/function.readfile.php#81032
+			// Copie du plugin acces restreint action/api_docrestreint.php
+			@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+			@ini_set("output_buffering","off");
+			@ini_set('implicit_flush', 1);
+			@ob_implicit_flush(1);
+			while ($level--){
+				@ob_end_clean();
+			}
+
 			switch($type){
 				case 'po':
 					header('Content-Type: application/x-gettext;');
@@ -33,17 +45,12 @@ function action_tradlang_exporter_langue_dist(){
 					header('Content-Type: application/x-httpd-php;');
 			}
 			header('Content-Length: '.filesize($fichier));
-			header("Pragma: public"); // required
-    		header("Expires: 0");
-    		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-    		header("Cache-Control: private",false); // required for certain browsers 
-			header('Content-Disposition: attachment; filename="'.basename($fichier).'"');
 			header('Content-Transfer-Encoding: binary'); 
+			header("Pragma: public"); // required
 			header("Expires: 0");
-			header("Cache-Control: no-cache, must-revalidate");
-			ob_clean();
-    		flush();
-			//header("Pragma: no-cache"); 
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			header("Cache-Control: private",false); // required for certain browsers 
+			header('Content-Disposition: attachment; filename="'.basename($fichier).'"');
 			readfile($fichier);
 			die();
 		}else{
