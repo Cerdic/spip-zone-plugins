@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deja_selectionne' => 'Este objeto ya está seleccionado para esta lista',
 	'explication_choix_multi' => 'Puedes seleccionar a varios utilizando la tecla Mayus o ctrl (manzana o mayus para mac)',
-	'explication_selection_choix_illimite' => 'Par defaut un objet ne peut être attaché qu\'ne fois à un Objet Cible, voulez-vous désactiver cette limitation.  ?', # NEW
 	'explication_selection_cible' => 'Si no se ha seleccionada a ningún objeto, todos serán disponibles',
 	'explication_selection_objets_cible' => 'Los Objetos Diana que pueden ser vinculados con "Objetos de Selección"',
 	'explication_selection_type_liens' => 'Puedes definir tipos de relación: pon uno por línea, seguido de una coma et de una descripción. La descripción puede ser una cadena de idioma',
@@ -53,7 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques_choisis' => 'Secciones seleccionadas:',
 
 	// S
-	'selection_choix_illimite' => 'Desactiver la limite de sélection par Objet Cible', # NEW
 	'selection_cible' => 'Selección de objetos diana para',
 	'selection_objet' => 'Selección',
 	'selection_objet_cible_titre' => 'Selección de Objetos Diana',
