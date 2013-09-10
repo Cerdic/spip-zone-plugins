@@ -161,7 +161,6 @@ Thanks', # MODIF
 	'erreur' => 'Error',
 	'erreur_contenu_vide' => 'A new message could not be created due to lack of content.',
 	'et_ou_saisir_des_adresses' => '...and/or enter addresses.',
-	'exporter' => 'Exporter la liste des abonnés', # NEW
 
 	// F
 	'front_clevermail_action_validation' => 'Validation of an operation',

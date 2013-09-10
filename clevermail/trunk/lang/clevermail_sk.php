@@ -165,7 +165,6 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'erreur' => 'Chyba',
 	'erreur_contenu_vide' => 'Novú správu nemožno vytvoriť kvôli nedostatku obsahu.',
 	'et_ou_saisir_des_adresses' => '...a/lebo zadať adresy.',
-	'exporter' => 'Exporter la liste des abonnés', # NEW
 
 	// F
 	'front_clevermail_action_validation' => 'Potvrdenie operácie',
