@@ -10,9 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'ارتباطي برقرار نيست!', # MODIF
 	'aucune_organisation' => 'سازماني موجود نيست!', # MODIF
-	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.', # NEW
-	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.', # NEW
-	'auteur_lie' => 'Id de l\'auteur lié', # NEW
 
 	// B
 	'bouton_contacts' => 'تماس‌ها',
@@ -22,27 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_repertoire' => 'دايركتوري',
 
 	// C
-	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1', # NEW
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
-		permettant le parcourir les contacts et organisations dans l\'espace public ?', # NEW
-	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?', # NEW
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
-		également sur les pages auteurs dans l\'espace privé ?', # NEW
-	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?', # NEW
-	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
-		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
-		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.', # NEW
-	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques', # NEW
-	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
-		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.', # NEW
-	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
-		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
-		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
-		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
-		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
-		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…', # NEW
 	'changer' => 'تغيير',
 	'chercher_contact' => 'جستجو',
 	'chercher_organisation' => 'جستجو',
@@ -53,20 +29,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_contact' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط يه اين ارتباط را حذف كنيد؟‌', # MODIF
 	'confirmer_supprimer_organisation' => 'مطمئن هستيد كه مي‌خواهيد تمام اطلاعات مربوط به اين سازمان را حذف كنيد؟‌', # MODIF
 	'contact' => 'يك تماس', # MODIF
-	'contact_ajouter' => 'Ajouter un contact', # NEW
-	'contact_ajouter_lien' => 'Ajouter ce contact', # NEW
 	'contact_associe_a_auteur_numero' => 'پيوند به نويسنده‌ي شماره‌ي ',
 	'contact_associer_a_auteur' => 'پيوند به يك نويسنده',
-	'contact_aucun' => 'Aucun contact', # NEW
 	'contact_creer' => 'ايجاد يك تماس',
-	'contact_creer_associer' => 'Créer et associer un contact', # NEW
 	'contact_editer' => 'ويرايش اين تماس',
-	'contact_logo' => 'Logo de ce contact', # NEW
-	'contact_nouveau_titre' => 'Nouveau contact', # NEW
 	'contact_numero' => 'تماس شماره‌ي',
-	'contact_retirer_lien' => 'Retirer le contact', # NEW
-	'contact_retirer_tous_lien' => 'Retirer tous les contacts', # NEW
-	'contact_un' => 'Un contact', # NEW
 	'contact_voir' => 'بنگريد',
 	'contacts' => 'تماس‌ها',
 	'contacts_nb' => '@nb@ تماس ',
@@ -77,8 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'definir_auteur_comme_contact' => 'تعريف به عنوان تماس ',
 	'definir_auteur_comme_organisation' => 'تعريف به عنوان سازمان',
 	'delier_cet_auteur' => 'قطع',
-	'delier_contact' => 'Désassocier', # NEW
-	'delier_organisation' => 'Désassocier', # NEW
 
 	// E
 	'est_un_contact' => 'اين نويسنده به عنوان يك تماس تعريف مي‌شود.',
@@ -89,10 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_statut_juridique' => 'سازمان، انجمن، شركت . . . ',
 	'explication_supprimer_contact' => 'حذف اين تماس تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف مي‌كند. ',
 	'explication_supprimer_organisation' => 'حذف اين سازمان تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف خواهد كرد. ',
-	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
-	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)', # NEW
 
 	// I
 	'info_contacts_organisation' => 'تماس‌هاي سازمان',
@@ -138,58 +99,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_contact' => 'تماس 1',
 	'nb_contacts' => '@nb@ تماس ',
-	'nom_contact' => 'Nom', # NEW
-	'nom_organisation' => 'Nom', # NEW
-	'non_renseigne' => 'Non renseigné', # NEW
 
 	// O
-	'organisation' => 'Organisation', # NEW
-	'organisation_ajouter' => 'Ajouter une organisation', # NEW
-	'organisation_ajouter_lien' => 'Ajouter cette organisation', # NEW
 	'organisation_associe_a_auteur_numero' => 'ارتباط با شماره‌ي نويسنده',
 	'organisation_associer_a_auteur' => 'ارتباط با يك نويسنده',
-	'organisation_aucun' => 'Aucune organisation', # NEW
 	'organisation_creer' => 'ايجاد يك سازمان',
-	'organisation_creer_associer' => 'Créer et associer une organisation', # NEW
 	'organisation_creer_fille' => 'ايجاد يك پرونده‌ي سازمان',
 	'organisation_editer' => 'ويرايش اين سازمان',
-	'organisation_logo' => 'Logo de l\'organisation', # NEW
-	'organisation_nouveau_titre' => 'Nouvelle organisation', # NEW
 	'organisation_numero' => 'شماره‌ي سازمان',
-	'organisation_retirer_lien' => 'Retirer l\'organisation', # NEW
-	'organisation_retirer_tous_lien' => 'Retirer toutes les organisations', # NEW
 	'organisation_un' => 'يك سازمان',
 	'organisation_voir' => 'بنگريد',
 	'organisations' => 'سازمان‌ها',
 	'organisations_nb' => '@nb@ سازمان',
-
-	// P
-	'prenom' => 'Prénom', # NEW
 
 	// R
 	'recherche_de' => ' جستجوي «@recherche@»',
 	'rechercher' => 'جستجو',
 
 	// S
-	'statut_juridique' => 'Statut juridique', # NEW
-	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de cette organisation dans les jours à venir.', # NEW
-	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de ce contact dans les jours à venir.', # NEW
 	'supprimer_contact' => 'حذف اين تماس ',
 	'supprimer_organisation' => 'حذف اين سازمان',
 
 	// T
 	'titre_contact' => 'حزئيات تماس',
 	'titre_organisation' => 'جزئيات سازمان',
-	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations', # NEW
 	'titre_page_contacts' => 'مديريت تماس‌ها',
 	'titre_page_organisations' => 'مديريت سازمان‌ها',
-	'titre_page_repertoire' => 'ديركتور',
-	'titre_parametrages' => 'Paramétrages', # NEW
-	'tous' => 'Tous' # NEW
+	'titre_page_repertoire' => 'ديركتور'
 );
 
 ?>

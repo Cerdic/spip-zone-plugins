@@ -10,8 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'There is no contact !', # MODIF
 	'aucune_organisation' => 'There is no organization', # MODIF
-	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.', # NEW
-	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.', # NEW
 	'auteur_lie' => 'Id of the linked author',
 
 	// B
@@ -31,14 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lier_organisations_rubriques' => 'Link to sections',
 	'cfg_lier_organisations_rubriques_explication' => 'Allow to link organizations to sections ?
 		This display the organization selector on sections and the section selector on organizations.', # MODIF
-	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?', # NEW
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
-		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
-		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
-		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
-		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
-		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…', # NEW
 	'changer' => 'Change',
 	'chercher_contact' => 'Search',
 	'chercher_organisation' => 'Search',
@@ -171,12 +161,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Legal status',
-	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de cette organisation dans les jours à venir.', # NEW
-	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de ce contact dans les jours à venir.', # NEW
 	'supprimer_contact' => 'Delete this contact',
 	'supprimer_organisation' => 'Delete this organisation',
 
