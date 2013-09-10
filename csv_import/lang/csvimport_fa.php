@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'caracteres_separation' => 'كارآكتر جداساز',
 	'champs_csv' => 'ميدان‌هاي پرونده‌ي سي.اس.وي (CSV)',
 	'champs_table' => 'ميدان‌هاي جدول', # MODIF
-	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !', # NEW
 	'correspondance_incomplete' => 'تطابقات جدول-سي.اس.وي ناكامل است',
 	'correspondance_indefinie' => 'تطابقات جدول-سي.اس.وي تعريف نشده',
 	'csvimport' => 'واردسازي سي.اس.وي',
@@ -31,15 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'در گنجاندن داده‌هاي جدول تعداد @nb@ خطا رخ داده است',
-	'etape' => '(Étape @step@ sur 3)', # NEW
 	'export_classique' => 'سي.اس.وي استاندارد (،)',
 	'export_excel' => 'سي.وي.اس براي اكسل (؛)',
 	'export_format' => 'فرمت پرونده :‌',
 	'export_table' => 'صادرسازي جدول: @table@',
 	'export_tabulation' => 'سي.اس.وي با تب‌ جداساز',
 	'exporter' => 'صادرسازي',
-	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ', # NEW
-	'extrait_table' => 'Extrait de la table "@nom_table@" : ', # NEW
 
 	// F
 	'fichier_absent' => 'پرونده مفقود',
@@ -58,12 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ ركورد ضبط شده',
-	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ', # NEW
 
 	// P
 	'pas_importer' => 'صادر نسازي ',
 	'premieres_lignes' => '@nb@ رديف‌ نخست از پرونده',
-	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ', # NEW
 	'probleme_chargement_fichier' => 'مشكل در بارگذاري پرونده',
 	'probleme_chargement_fichier_erreur' => 'مشكل در بارگذاري پرونده (خطاي @erreur@).',
 	'probleme_inextricable' => 'مشكل بي‌سابقه...',

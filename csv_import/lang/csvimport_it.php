@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'caracteres_separation' => 'Carattere di separazione',
 	'champs_csv' => 'Campi del file CSV',
 	'champs_table' => 'Campi della tabella', # MODIF
-	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !', # NEW
 	'correspondance_incomplete' => 'Mappa CSV-Tabella incompleta',
 	'correspondance_indefinie' => 'Mappa CSV-Tabella non definita',
 	'csvimport' => 'Importazione CSV',
@@ -31,15 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'Si sono verificati @nb@ errori durante l\'inserimento in database.',
-	'etape' => '(Étape @step@ sur 3)', # NEW
 	'export_classique' => 'CSV classico (,)',
 	'export_excel' => 'CSV per Excel (;)',
 	'export_format' => 'Formato del file:',
 	'export_table' => 'Esportazione della tabella: @table@',
 	'export_tabulation' => 'CSV con tabulazioni',
 	'exporter' => 'Esportare',
-	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ', # NEW
-	'extrait_table' => 'Extrait de la table "@nom_table@" : ', # NEW
 
 	// F
 	'fichier_absent' => 'File non trovato',
@@ -58,12 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ inserimenti',
-	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ', # NEW
 
 	// P
 	'pas_importer' => 'Non importare',
 	'premieres_lignes' => '@nb@ prime righe del file.',
-	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ', # NEW
 	'probleme_chargement_fichier' => 'Problema durante il caricamento del file',
 	'probleme_chargement_fichier_erreur' => 'Problema durante il caricamento del file (errore @erreur@).',
 	'probleme_inextricable' => 'Errore fatale...',

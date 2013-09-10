@@ -1,15 +1,22 @@
 <traduction module="csvimport" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/csv_import/lang/" reference="fr">
-	<langue code="ca" />
-	<langue code="de" />
-	<langue code="en" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=en">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=ca" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=de" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=en" total="49" traduits="49" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fa" />
-	<langue code="fr" />
-	<langue code="fr_tu" />
-	<langue code="gl" />
-	<langue code="it" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=sk">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=fa" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=fr" total="49" traduits="49" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=fr_tu" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=gl" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=it" total="49" traduits="40" modifs="3" nouveaux="6" pourcent="81.63">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=sk" total="49" traduits="49" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
