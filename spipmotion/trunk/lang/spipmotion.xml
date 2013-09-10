@@ -1,10 +1,11 @@
 <traduction module="spipmotion" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipmotion/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=en" total="188" traduits="188" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=es" total="188" traduits="188" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=fr" total="188" traduits="188" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
