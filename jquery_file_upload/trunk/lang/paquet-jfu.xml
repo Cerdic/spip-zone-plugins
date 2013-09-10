@@ -1,7 +1,9 @@
 <traduction module="paquet-jfu" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jquery_file_upload/trunk/lang/" reference="fr">
-	<langue code="en" />
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=es">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=en" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=es" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-jfu?lang_cible=fr" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
