@@ -1,16 +1,17 @@
 <traduction module="paquet-twidget" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/twidget/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=en" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fr" />
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=nl">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=fr" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=nl" total="2" traduits="1" modifs="1" nouveaux="0" pourcent="50.00">
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=ru">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=ru" total="2" traduits="1" modifs="1" nouveaux="0" pourcent="50.00">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-twidget?lang_cible=sk" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
