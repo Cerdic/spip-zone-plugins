@@ -42,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_password' => 'اي.پي.آي گذر واژه (گذرواژه)',
 	'label_signature' => 'امضاء  ',
 	'label_soumission' => 'فرم ارايه',
-	'label_tax' => 'Taxes', # NEW
 	'label_username' => 'اي.پي.آي يوزرنيم (شناسه)'
 );
 
