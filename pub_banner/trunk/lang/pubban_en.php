@@ -331,10 +331,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'pubban_stats_banner' => 'Banners statistics',
 	'pubban_stats_pub' => 'Ads statistics',
 	'pubban_titre' => 'Banners',
-	'publicite_0' => '0 publicité', # NEW
-	'publicite_1' => '1 publicité', # NEW
 	'publicite_apercu' => 'Ad overview',
-	'publicites' => '@nb@ publicités', # NEW
 
 	// R
 	'ratio' => 'Ratio (clicks / views)',
