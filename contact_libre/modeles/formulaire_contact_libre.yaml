@@ -16,5 +16,5 @@ parametres:
     saisie: 'input'
     options:
       nom: 'adresse'
-      label: '<:entree_adresse_email_2:>'
+      label: '<:entree_adresse_email:>'
       obligatoire: 'oui'

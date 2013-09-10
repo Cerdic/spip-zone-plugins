@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function formulaires_contact_libre_charger_dist($adresse, $url='', $sujet=''){
 	include_spip('inc/texte');
 	

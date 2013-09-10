@@ -2,7 +2,7 @@
 	<nom>Contact libre</nom>
 	<slogan>Formulaire de contact libre</slogan>
 	<auteur>b_b</auteur>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<etat>stable</etat>
 	<prefix>contact_libre</prefix>
 	<icon>images/contact_libre-48.png</icon>
