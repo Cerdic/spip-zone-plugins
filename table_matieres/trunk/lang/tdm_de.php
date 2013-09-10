@@ -17,10 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_longueur' => 'Legt die maximale Zeichenzahl für jeden Anker fest.', # MODIF
 	'explication_min' => 'Legit die Mindestanzahl der Zwischentitel fest, ab der ein Inhaltsverzeichnis eingeblendet wird.',
 	'explication_separateur' => 'Legt das Zeichen fest, daß anstelle von Leerzeichen zwischen Worte eigefügt wird.',
-	'explication_tdm_flottante' => 'Lorsque la table des matières devient invisible lors du scroll de la page, celle-ci se positionne en haut de l\'écran afin d\'être constamment visible.', # NEW
 
 	// L
-	'label_tdm_flottante' => 'Table des matières flottante', # NEW
 	'longueur' => 'Länge:',
 
 	// M
