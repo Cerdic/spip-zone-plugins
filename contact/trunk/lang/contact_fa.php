@@ -93,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'خانم',
 	'mademoiselle' => 'دوشيزه',
-	'message_redemander_pass' => 'Votre adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider votre compte, demandez un <a href="@url_pass@">changement de mot de passe</a> et identifiez vous une première fois.', # NEW
 	'modele_label_auteur' => 'پيش‌ گزينش يك نويسنده (دلبخواهي)؟',
 	'modele_nom_formulaire' => 'فرم تماس پيشرفته',
 	'monsieur' => 'آقا',
@@ -107,7 +106,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'تيتر شخصي',
 
 	// P
-	'par_qui' => 'Par : ', # NEW
 	'preselection' => 'انداختن تمام اقلام از ليست دريافت‌ كنندگان ',
 
 	// S

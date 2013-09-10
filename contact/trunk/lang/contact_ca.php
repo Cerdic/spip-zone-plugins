@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Telèfon',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'Ciutat',
-	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
 	'configuration_barre_impossible' => 'Un altre connector impedeix l\'ús del portaplomes a l\'espai públic; els canvis de sota quedaran sense efecte.',
 	'configuration_barre_oui' => 'Mostrar la barre tipus completa.',
 	'configuration_champs_message' => 'Configuració del portaplomes.',
@@ -58,15 +57,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'Per utilitzar aquesta funció, heu d\'instal·lar el connector Carter.',
 	'configuration_pj_nb_max' => 'Número màxim d\'adjuncions',
 	'configuration_regle_liste_explication' => 'Escolliu una regla de càlcul de la llista de destinataris potencials i del mètode de selecció proposat a l\'internauta.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Aquest missatge s\'ha enregistrat al vostre lloc:',
 	'courriel_de' => 'De',
 
 	// D
 	'deplacement_possible' => 'Desplaçament vertical per arrossegar-deixar',
 	'description_menu_contact' => 'Element del menú cap a la pàgina del formulari de contacte',
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez à ajouter un lien dans vos menus).', # NEW
 
 	// F
 	'form_destinataire' => 'Escolliu un destinatari',
@@ -93,21 +89,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Senyora',
 	'mademoiselle' => 'Senyoreta',
-	'message_redemander_pass' => 'Votre adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider votre compte, demandez un <a href="@url_pass@">changement de mot de passe</a> et identifiez vous une première fois.', # NEW
-	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
-	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'Senyor',
 	'msg_messagerie' => 'Correu electrònic de contacte',
 
-	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
-
 	// P
-	'par_qui' => 'Par : ', # NEW
 	'preselection' => 'Desmarcar tots els ítems de la llista de destinataris',
 
 	// S

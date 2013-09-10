@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'الهاتف',
 	'champ_texte' => 'النص',
 	'champ_ville' => 'المدينة',
-	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
 	'configuration_barre_impossible' => 'هناك ملحق آخر يمنع استخدام الريشة في الموقع العمومي. ستبقى الاعدادات أدناه دون اي مفعول.',
 	'configuration_barre_oui' => 'عرض شريط كامل للتصحيح المطبعي.',
 	'configuration_champs_message' => 'إعدادات حاملة الريشة.',
@@ -59,15 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'لاستخدام هذه الميزة ، يجب تثبيت البرنامج المساعد Facteur.',
 	'configuration_pj_nb_max' => 'الحد الأقصى لعدد المرفقات',
 	'configuration_regle_liste_explication' => 'اختيار طريقة حساب قائمة المستلمين المحتملين وطريقة الاختيار المقترحة للزائر.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'يتم تسجيل هذه الرسالة على موقعك :',
 	'courriel_de' => 'من',
 
 	// D
 	'deplacement_possible' => 'الحركة العمودية بواسطة السحب والإسقاط',
 	'description_menu_contact' => 'عنصر القائمة إلى صفحة إستمارة الاتصال',
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez à ajouter un lien dans vos menus).', # NEW
 
 	// F
 	'form_destinataire' => 'اختيار المستلم',
@@ -94,21 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'السيدة',
 	'mademoiselle' => 'انسة',
-	'message_redemander_pass' => 'Votre adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider votre compte, demandez un <a href="@url_pass@">changement de mot de passe</a> et identifiez vous une première fois.', # NEW
-	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
-	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'السيد',
 	'msg_messagerie' => 'بريد الاتصال',
 
-	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
-
 	// P
-	'par_qui' => 'Par : ', # NEW
 	'preselection' => 'قم بإلغاء كافة العناصر الموجودة في قائمة المستلمين',
 
 	// S

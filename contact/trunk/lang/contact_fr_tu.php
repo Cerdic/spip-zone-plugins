@@ -93,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madame',
 	'mademoiselle' => 'Mademoiselle',
-	'message_redemander_pass' => 'Votre adresse email "@email@" était déjà enregistrée suite à un message de contact. Pour valider votre compte, demandez un <a href="@url_pass@">changement de mot de passe</a> et identifiez vous une première fois.', # NEW
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?',
 	'modele_nom_formulaire' => 'le formulaire de contact avancé',
 	'monsieur' => 'Monsieur',
@@ -101,13 +100,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
 	'noisette_titre_perso' => 'Titre personnalisé',
 
 	// P
-	'par_qui' => 'Par : ', # NEW
 	'preselection' => 'Décocher tous les éléments de la liste de destinataires',
 
 	// S
