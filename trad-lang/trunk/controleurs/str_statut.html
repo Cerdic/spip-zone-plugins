@@ -4,7 +4,6 @@
 
 ]
 #CACHE{0}
-<B_a>
 <BOUCLE_a(TRADLANGS tradlang_modules){id_tradlang}>
 <fieldset[ style="min-width:(#ENV{largeur}|<{400}|?{#ENV{largeur}|mult{2},''})px]">
 <legend>TRADLANG ##ID_TRADLANG</legend>
@@ -33,32 +32,29 @@
 </ul>
 </fieldset>
 <script type='text/javascript'>
-	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
-	var statut_orig = '#STATUT';
-	var me = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG");
-	var id = me.crayon().find('form');
-	var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
+	var contenu_orig = '[(#STR**|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
+		statut_orig = '#STATUT',
+		id = cQuery(".tradlang-str_statut-#_a:ID_TRADLANG").crayon().find('form'),
+		vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^<@]+@','gi');
 	cQuery(id).bind('form-submit-validate',function(truc,a, e, options, veto){
-		var vars = cQuery('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
 		if(vars){
 			erreur_chaine = '<:tradlang:erreur_variable_manquante:>';
-			var trad = cQuery('#str_#ID_TRADLANG').val();
 			jQuery(vars).each(function(i,elt){
-				var val = elt;
-				if(!trad.match(val,'g')){
-					erreur_chaine += '\n'+val;
+				if(!cQuery('#str_#ID_TRADLANG').val().match(elt,'g')){
+					erreur_chaine += '\n'+elt;
 					alert(erreur_chaine);
 					veto.veto = true;
 					return;
 				}
 			});
 		}
-		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val();
-		var new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
+		var newstatut = cQuery(id).find('#statut_#ID_TRADLANG').val(),
+			new_contenu = cQuery(id).find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
 		if((new_contenu != contenu_orig) && ((statut_orig != 'OK') && (newstatut == statut_orig)))
-			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>'))
+			if(!window.confirm('<:tradlang:crayon_changer_statut|filtrer_entites|texte_script:>')){
 				veto.veto = true;
+				jQuery('#statut_#ID_TRADLANG').focus();
+			}
 	});
 </script>
 </BOUCLE_a>
-</B_a>
