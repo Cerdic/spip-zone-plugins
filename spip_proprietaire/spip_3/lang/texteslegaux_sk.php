@@ -20,43 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conditions_utilisation_abus' => '{{{Zneužite stránky}}}
 
 Podľa [francúzskeho zákona č.  2004-575 z 21. júna 2004 o dôverných informáciách v digitálnej ekonomike|Zobraziť text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164], ak chcete nahlásiť pochybný text na stránke alebo ak ste sa stali obeťou zneužitia stránky {{[@nom_site@->@url_site@],}} prosím, kontaktujte administrátora stránky prostredníctvom e-mailu: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].',
-	'conditions_utilisation_cookies' => '{{{Cookies}}}
-
-Some personal information and some witnesses markers may be recorded by {{[@nom_site@->@url_site@]}} on the personal computer of the user without his permission ({"cookies" or "Java applets"}). Unless explicitly stated otherwise [*], these technical procedures are not essential for the proper functioning of {{[@nom_site@->@url_site@]}} and their use can of course be disabled in the browser used by the Internet user without its navigation may be affected. {{None of this information is retained by the site after disconnecting from the Internet.}}
- 
-<small>[*] It is worth to precise here that access to different private areas of the site may require acceptance by the user of the deposit of a cookie on his personal computer to a security issue.</small>
-', # NEW
-	'conditions_utilisation_infos_personnelles' => '{{{Collection and processing of personal data}}}
-
-{{Any information collected by {{[@nom_site@->@url_site@]}} are never disclosed to third parties.}}
-<br />Except in special cases, this information comes from voluntary registration of an email provided by the user, allowing him to receive a brochure or newsletter, to request its inclusion in the editorial board of the site or to inquire about a point whatever.
-
-Pursuant to [French law n° 78-17 of 6 january 1978 relating to data, files and freedoms|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460], {{the user has a right to access, correct or delete personal information stored on the {{[@nom_site@->@url_site@]}}, exercisable at any time with the administrator of {{[@nom_site@->@url_site@]}}.}} For such requests, please send a letter to @proprietaire_forme@ @proprietaire_nom@ or contact email address: [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
-@cnil_texte@
-', # NEW
 	'conditions_utilisation_intro' => '{{{Akceptovanie de facto}}}
 
 {{Využívaním stránky {{[@nom_site@->@url_site@]}} používateľ potvrdzuje a akceptuje podmienky, ktoré sú tu uvedené.}}
 ',
-	'conditions_utilisation_liens' => '{{{Links to @nom_site@}}}
-
-The establishment of {{[@nom_site@->@url_site@]}} links does not require authorization if they are not used for commercial or advertising purposes. You can freely use the links below into any type of support.
-
-||@nom_site@ hypertext links|You can freely use the links below.||
-|{{Link overview}}|{{HTML Code}}|
-|<a href="@url_site@" title="@nom_site@ - @descriptif_site@">@url_site@</a>|<code>
-<a href="@url_site@" title="@nom_site@ - @descriptif_site@">@url_site@</a>
-</code>|
-|<a href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>|<code>
-<a href="@url_site@" title="@nom_site@ - @descriptif_site@"><img src="@logo_site@" border="0" /></a>
-</code>|
-', # NEW
-	'conditions_utilisation_responsabilite' => '{{{Disclaimer}}}
-
-{{[@nom_site@->@url_site@]}} includes information provided by external companies or hypertext links to other sites or other external sources that have not been developed by {{[@nom_site@->@url_site@]}}. Behaviors of target sites, possibly malicious, cannot be attached to the responsibility of {{[@nom_site@->@url_site@]}}. More generally, the content available on this site is for informational purposes. It is up to the user to use this information wisely. {{[@nom_site@->@url_site@]}} is not responsible for informations, opinions and recommendations of third parties.
-
-Because {{[@nom_site@->@url_site@]}} can not control these sites or external sources, {{[@nom_site@->@url_site@]}} cannot be held responsible for the availability of these sites or external sources and cannot accept any responsibility for the content, advertising, products, services or other materials available from such sites or resources. In addition, {{[@nom_site@->@url_site@]}} cannot be held responsible for any damage or loss or alleged consequential in connection with the use or the fact of having trusted the content, goods or services available from such sites or sources external.
-', # NEW
 	'copyright_info' => '© Copyright @date@ @nom_site@ | Všetky práva vyhradené.',
 	'createur_mentions_legales' => '[createur<-]{{{Dizajnér/autor}}}
 
@@ -118,15 +85,7 @@ Stránky a obsah týchto stránok je vytvorený v programe {{SPIP,}} v slobodnom
 	'sur_un_serveur' => ', na serveri {{@serveur@}}',
 
 	// T
-	'test_fichier_langue' => 'TEST',
-
-	// V
-	'vcard_info' => 'If you use a mail manager, mobile phone, an address book or organizer, you can download our contact details at {{\'vCard\' format}} ({Virtual Card}) below.
-
-You can, depending on your system:
-- directly use the following URL to download this information automatically: {{@vcard_url@}}
-- view the card in your browser: {{[->@vcard_url@]}}
-- save it to your computer ({put the file extension {{\'.VCF\'}} if it\'s not the case}): {{[->@vcard_url_download@]}}' # NEW
+	'test_fichier_langue' => 'TEST'
 );
 
 ?>
