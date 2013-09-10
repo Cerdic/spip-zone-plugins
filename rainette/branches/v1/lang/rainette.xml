@@ -1,15 +1,19 @@
 <traduction module="rainette" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/rainette/branches/v1/lang/" reference="fr">
-	<langue code="ca" />
-	<langue code="de" />
-	<langue code="en" />
-	<langue code="es" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=es">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=ca" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=de" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=en" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=es" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=fa" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=fr" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=sk" total="111" traduits="111" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
