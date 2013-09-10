@@ -1,26 +1,26 @@
 <traduction module="autorite" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=ar">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="78" traduits="77" modifs="1" nouveaux="0" pourcent="98.72">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="78" traduits="72" modifs="6" nouveaux="0" pourcent="92.31">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fa" total="78" traduits="77" modifs="1" nouveaux="0" pourcent="98.72">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fr">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="78" traduits="3" modifs="51" nouveaux="24" pourcent="3.85">
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=sk" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
