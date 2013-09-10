@@ -29,12 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_panier_voir' => 'Ver mi cesta',
 
 	// N
-	'noisette_label_afficher_lien_page_panier' => 'Afficher un lien vers la page spip.php?page=panier ?', # NEW
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 	'nom_bouton_plugin' => 'Cestas',
 	'nom_noisette' => 'Minicesta',
 
