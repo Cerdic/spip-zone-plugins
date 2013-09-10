@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_descr_gravatar' => 'Configurez le rendu des gravatars', # NEW
 	'cfg_titre_gravatar' => 'Gravatars',
 
 	// E
