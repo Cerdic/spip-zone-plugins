@@ -1,13 +1,14 @@
 <traduction module="tipafriend" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tipafriend/spip_3/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=en" total="114" traduits="114" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="PieroWbmstr" lien="http://trad.spip.net/auteur/pierowbmstr" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=fr" total="114" traduits="114" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tipafriend?lang_cible=sk" total="114" traduits="114" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
