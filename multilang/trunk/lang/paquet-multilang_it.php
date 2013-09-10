@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'multilang_description' => 'Questo plugin aggiunge un menu di linguaggi di tipo <code>[fr] [it] [it]</code> nella parte superiore di ogni modulo, a seconda della lingua selezionata nella configurazione del sito.',
-	'multilang_slogan' => 'Gérer l\'affichage du contenu des tags multi par un menu' # NEW
+	'multilang_description' => 'Questo plugin aggiunge un menu di linguaggi di tipo <code>[fr] [it] [it]</code> nella parte superiore di ogni modulo, a seconda della lingua selezionata nella configurazione del sito.'
 );
 
 ?>
