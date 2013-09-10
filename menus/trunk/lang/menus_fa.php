@@ -25,7 +25,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques_articles' => 'نمايش يك فهرست از بخش‌ها، و اگر مي‌خواهيد، زيربخش‌ها و مقاله‌ها در چندين سطح. 
 به صورت پيش‌گزيده، نمايش تمام بخش‌ها ريشه، مرتب شده بر اساس تيتر(شماره‌اي و بعد الفبايي). مقاله‌ها به طور نظام‌مند بعد از بخش‌ها قرار مي‌گيرند. 
 ',
-	'description_menu_rubriques_completes' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).', # NEW
 	'description_menu_secteurlangue' => 'اين مدخل به سايت‌هايي اختصاص دارد كه يك بخش براي زبان دارند. اين مدخل به صورت خودكار منيويي را نشان مي‌دهد كه بخش‌ها آن قسمت منطبق با آن زبان و صفحه، و اگر بخواهند زيربخش‌ها را تا چندين سطح، را فهرست مي‌كنند. به صورت پيش‌گزيده، تمام بخش‌هاي عد از ريشه را، به ترتيب تيتر (طبق شماره و بعد طبق الفا) نشان مي‌دهد. 
 ',
 	'description_menu_texte_libre' => 'فقط متني كه دوست داريد، يا يك كد زباني اسپيپ  (<:...:>)',
@@ -177,7 +176,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'مقاله، بخش يا ساير چيزهاي اسپيپي ',
 	'nom_menu_page_speciale' => 'پيوند به يك صفحه‌ي اسكلت',
 	'nom_menu_page_speciale_zajax' => 'يك بلوك از صفحه‌ي ازپيپ',
-	'nom_menu_rubriques_completes' => 'Liste ou arborescence de rubriques et d\'articles (avec beaucoup d\'options)', # NEW
 	'nom_menu_rubriques_evenements' => 'برنامه‌هاي مربوط به بخش‌ها',
 	'nom_menu_secteurlangue' => 'بخش‌هاي زباني ',
 	'nom_menu_texte_libre' => 'متن آزاد',
