@@ -1,21 +1,21 @@
 <traduction module="boussole-spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="82" traduits="76" modifs="6" nouveaux="0" pourcent="92.68">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="eo" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo">
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="82" traduits="35" modifs="12" nouveaux="35" pourcent="42.68">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=es" total="82" traduits="82" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr" total="82" traduits="82" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk" total="82" traduits="69" modifs="13" nouveaux="0" pourcent="84.15">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
