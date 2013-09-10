@@ -1,15 +1,16 @@
 <traduction module="agenda" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/agenda/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=de">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=de" total="117" traduits="91" modifs="4" nouveaux="22" pourcent="77.78">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="117" traduits="114" modifs="0" nouveaux="3" pourcent="97.44">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=es" total="117" traduits="117" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="117" traduits="117" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=sk" total="117" traduits="116" modifs="0" nouveaux="1" pourcent="99.15">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
