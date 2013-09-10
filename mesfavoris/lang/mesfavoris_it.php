@@ -15,9 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'configurer' => 'Configura',
 
-	// I
-	'info_nombre_favoris_objet' => 'Ajouté @nb@ fois en favori.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes NEW
-
 	// L
 	'label_style_formulaire16' => 'Piccolo (16px)',
 	'label_style_formulaire24' => 'Medio (24px)',
@@ -31,13 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'remove' => 'Elimina',
-	'remove_from' => 'Elimina da Preferiti',
-
-	// S
-	'ses_favoris' => 'Ses favoris', # NEW
-
-	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
+	'remove_from' => 'Elimina da Preferiti'
 );
 
 ?>

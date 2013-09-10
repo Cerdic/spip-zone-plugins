@@ -15,9 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'configurer' => 'پيكربندي',
 
-	// I
-	'info_nombre_favoris_objet' => 'Ajouté @nb@ fois en favori.', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes NEW
-
 	// L
 	'label_style_formulaire16' => 'كوچك (160 پيكسل)',
 	'label_style_formulaire24' => 'متوسط (240 پيكسل)',
@@ -34,10 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'حذف از گزينه‌هاي من',
 
 	// S
-	'ses_favoris' => 'دوستداشتني‌هاي او ',
-
-	// V
-	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion NEW
+	'ses_favoris' => 'دوستداشتني‌هاي او '
 );
 
 ?>
