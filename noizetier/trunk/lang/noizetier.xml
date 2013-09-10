@@ -1,22 +1,23 @@
 <traduction module="noizetier" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/noizetier/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=de">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=de" total="105" traduits="74" modifs="9" nouveaux="22" pourcent="70.48">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=en" total="105" traduits="105" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=es" total="105" traduits="105" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=fa" total="105" traduits="77" modifs="6" nouveaux="22" pourcent="73.33">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=fr" total="105" traduits="105" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/noizetier?lang_cible=sk" total="105" traduits="105" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

@@ -10,9 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'apercu' => 'Vorschau',
 
-	// B
-	'bloc_sans_noisette' => 'Ce bloc ne contient pas de noisette.', # NEW
-
 	// C
 	'choisir_noisette' => 'Wählen sie die Nuss, welche sie hinzufügen wollen:',
 	'compositions_non_installe' => 'Das Plugin <b>Kompositionen:</b> ist nicht installiert. Das Plugin Nussbaum funktioniert auch ohne, jedoch können sie ihre Kompositionen direkt im Nussbaum-Plugin deklarieren, wenn es aktiv ist.', # MODIF
@@ -31,11 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_importer_configuration' => 'Konfiguration importieren',
 	'editer_noizetier_explication' => 'Konfigurieren sie hier die Code-Nüsse für die Seiten ihrer Website.', # MODIF
 	'editer_noizetier_titre' => 'Nussbaum', # MODIF
-	'editer_nouvelle_page' => 'Créer une nouvelle page / composition', # NEW
-	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !', # NEW
 	'erreur_doit_choisir_noisette' => 'Sie müssen eine Code-Nuss auswählen.',
 	'erreur_mise_a_jour' => 'Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten.',
-	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.', # NEW
 	'explication_heritages_composition' => 'Hier können sie die Kompositionen festlegen, die den Objekten des Zweigs vererbt weden.',
 	'explication_noizetier_css' => 'Sie können der Code-Nus zusätzliche CSS-Lassen zuordnen.',
 	'explication_raccourcis_typo' => 'Sie können SPIP-Tags verwenden.',
@@ -63,7 +57,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_composition' => 'Diese Komposition ändern:',
 	'formulaire_modifier_composition_heritages' => 'Vererbungen dieser Komposition ändern:', # MODIF
 	'formulaire_modifier_noisette' => 'Diese Code-Nuss ändern',
-	'formulaire_modifier_page' => 'Modifier cette page', # NEW
 	'formulaire_noisette_sans_parametre' => 'Diese Code-Nuss bietet keine Parameter.',
 	'formulaire_nom' => 'Titre',
 	'formulaire_nom_explication' => 'Sie können des SPIP-Tag &lt;multi&gt; verwenden.',
@@ -71,14 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_obligatoire' => 'Pflichtfeld',
 	'formulaire_supprimer_noisette' => 'Diese Code-Nuss löschen',
 	'formulaire_supprimer_noisettes_page' => 'Code-Nüsse dieser Seite löschen',
-	'formulaire_supprimer_page' => 'Supprimer cette page', # NEW
 	'formulaire_type' => 'Kompositionstyp', # MODIF
 	'formulaire_type_explication' => 'Geben sie an, für welches Objekt bzw. welchen Seitentyp diese Komposition gestaltet ist.', # MODIF
 	'formulaire_type_import' => 'Importtyp',
 	'formulaire_type_import_explication' => 'Sie können diese Konfigurationsdatei mit ihrer aktuellen Konfiguration zusammenführen (die Code-Nüsse werden den bereits vorhandenen hinzugefügt) oder sie ersetzen.',
 
 	// I
-	'icone_introuvable' => 'Icône introuvable !', # NEW
 	'ieconfig_ne_pas_importer' => 'Nicht importieren',
 	'ieconfig_noizetier_export_explication' => 'Exporiert die Konfiguration der Code-Nüsse und die Kompsitionen des Nussbaums.',
 	'ieconfig_noizetier_export_option' => 'In den Export einbeziehen?',
@@ -94,27 +85,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_niveau_titre' => 'Ebene des Titels:',
 	'label_noizetier_css' => 'CSS-Klassen:',
 	'label_texte' => 'Text:',
-	'label_texte_introductif' => 'Texte introductif (optionnel) :', # NEW
 	'label_titre' => 'Titel:',
 	'label_titre_noisette' => 'Titel der Code-Nuss:',
 	'label_titre_noisette_perso' => 'Individueller Titel:',
 	'liste_icones' => 'Icon-Liste',
-	'liste_pages' => 'Liste des pages', # NEW
-
-	// M
-	'masquer' => 'Masquer', # NEW
-	'mode_noisettes' => 'Éditer les noisettes', # NEW
-	'modif_en_cours' => 'Modifications en cours', # NEW
-	'modifier_dans_prive' => 'Modifier dans l\'espace privé', # NEW
 
 	// N
 	'ne_pas_definir_d_heritage' => 'Keine Vererbung festlegen',
-	'noisette_numero' => 'noisette numéro :', # NEW
 	'noisettes_composition' => 'Code-Nüsse der Komposition <i>@composition@</i> :',
-	'noisettes_disponibles' => 'Noisettes disponibles', # NEW
 	'noisettes_page' => 'Code-Nüsse der Seite <i>@type@</i> :',
 	'noisettes_toutes_pages' => 'Code-Nüsse für alle Seiten:',
-	'noizetier' => 'noiZetier', # NEW
 	'nom_bloc_contenu' => 'Inhalt',
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigation',
@@ -123,22 +103,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notice_enregistrer_rang' => 'Klicken sie auf Speichern um die Anordnung der Code-Nüsse zu sichern.',
 
 	// O
-	'operation_annulee' => 'Opération annulée.', # NEW
 	'oui' => 'Ja',
 
 	// P
 	'page' => 'Seite',
-	'page_autonome' => 'Page autonome', # NEW
-	'probleme_droits' => 'Vous n\'avez pas les droits nécessaires pour effectuer cette modification.', # NEW
-
-	// Q
-	'quitter_mode_noisettes' => 'Quitter l\'édition des noisettes', # NEW
-
-	// R
-	'retour' => 'Retour', # NEW
-
-	// S
-	'suggestions' => 'Suggestions', # NEW
 
 	// W
 	'warning_noisette_plus_disponible' => 'ACHTUNG: Diese Code-Nuss ist nicht merh verfügbar.',
