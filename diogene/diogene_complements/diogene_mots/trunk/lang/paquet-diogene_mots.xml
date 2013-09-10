@@ -1,7 +1,9 @@
 <traduction module="paquet-diogene_mots" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_mots/trunk/lang/" reference="fr">
-	<langue code="en" />
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-diogene_mots?lang_cible=es">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-diogene_mots?lang_cible=en" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-diogene_mots?lang_cible=es" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-diogene_mots?lang_cible=fr" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
