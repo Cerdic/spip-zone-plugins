@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'ពិនិត្យចេញ',
-	'derniere_syndication' => 'Dernière syndication de ce site effectuée', # NEW
 	'deuxjours' => 'ពីរថ្ងៃ',
 
 	// L
@@ -31,18 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'ខែ',
 
 	// P
-	'pas_articles' => 'Pas d\'article dans cette période !', # NEW
-	'pas_synchro' => 'Ne pas synchroniser', # NEW
 	'preferences' => 'ចំណូលចិត្ត',
-	'probleme_de_syndication' => 'problème de syndication', # NEW
 
 	// S
 	'semaine' => 'សប្តាហ៍',
 	'sources' => 'ប្រភព',
-	'synchro' => 'Synchroniser', # NEW
-	'synchro_titre' => 'Enregistrer sur le site la liste des articles lus', # NEW
-	'syndication_ajour' => 'Mettre à jour maintenant', # NEW
-	'syndication_fait' => 'Syndication effectuée', # NEW
 
 	// T
 	'toutes' => 'ទាំងអស់'
