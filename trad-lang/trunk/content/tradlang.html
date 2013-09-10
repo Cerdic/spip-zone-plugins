@@ -1,17 +1,13 @@
 <BOUCLE_tradlang(TRADLANGS){id_tradlang}>
 <div class="contenu-principal">
-<INCLURE{fond=inclure/tradlang_entete,env}>
 <BOUCLE_auth_voir(CONDITION){si #AUTORISER{voir,tradlang}|oui}>
 	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)[(#SET{auth_modifier,oui})]]
-	<BOUCLE_module(TRADLANG_MODULES){module}>
-	#SET{lang_mere,#LANG_MERE}
-	<div id="hierarchie"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
+	<BOUCLE_module(TRADLANG_MODULES){module}>[(#SET{lang_mere,#LANG_MERE})]
+	<div class="actions"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="btn icon-back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
 	</BOUCLE_module>
 	<div class="cartouche">
-		[(#ENV{lang_orig}|non)
-		#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue}]
-		[(#ENV{lang_orig}|oui)
-		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}]
+		[(#ENV{lang_orig}|non)[(#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue})]]
+		[(#ENV{lang_orig}|oui)[(#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue})]]
 		#SET{lang_orig,#ENV{lang_orig,#GET{lang_mere}}}
 		#SET{lang_cible_long,#LANG|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#MODULE,chaine=#ID,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#LANG,lang_cible_long=#GET{lang_cible_long}}:></h1>

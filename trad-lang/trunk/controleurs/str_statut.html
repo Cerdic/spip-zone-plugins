@@ -6,19 +6,21 @@
 #CACHE{0}
 <B_a>
 <BOUCLE_a(TRADLANGS tradlang_modules){id_tradlang}>
-<fieldset style="width:#ENV{largeur}px">
+<fieldset[ style="min-width:(#ENV{largeur}|<{400}|?{#ENV{largeur}|mult{2},''})px]">
 <legend>TRADLANG ##ID_TRADLANG</legend>
 <ul>
+	#SET{lines,1}
 	<BOUCLE_orig(TRADLANGS){id=#ID}{module=#MODULE}{lang=#VAL{lang_orig}|_request|sinon{#LANG_MERE}}>
-	<li class="editer original">
+	[(#SET{lines,#STR*|strlen|div{40}|intval|plus{1}})]
+	<li class="editer editer_str_orig">
 		<label for="str_orig_#_a:ID_TRADLANG"><:tradlang:label_version_originale{lang=#LANG}:></label>
-		<textarea readonly="readonly" title="<:tradlang:info_textarea_readonly|attribut_html:>" id="str_orig_#_a:ID_TRADLANG" rows="4" class="crayon-active readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+		<textarea readonly="readonly" title="<:tradlang:info_textarea_readonly|attribut_html:>" rows="#GET{lines}" id="str_orig_#_a:ID_TRADLANG" rows="4" class="crayon-active readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</li>
 	</BOUCLE_orig>
 	<li class="editer editer_str">
 		<label for="str_#ID_TRADLANG"><:tradlang:label_tradlang_str{lang=#LANG}:></label>
-		<textarea class="crayon-active" name="#ENV{name_str}" rows="4" id="str_#ID_TRADLANG"
-		 style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
+		<textarea class="crayon-active" name="#ENV{name_str}" id="str_#ID_TRADLANG"
+		 style="text-align:#LANG_LEFT;" rows="#GET{lines}" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 	</li>
 	<li class="editer editer_statut">
 		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>

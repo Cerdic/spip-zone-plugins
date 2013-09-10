@@ -21,16 +21,17 @@
 <B_nb_tradlangs>
 <h4>[(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:titre_tradlang_non_traduit,tradlang:titre_tradlang_non_traduits})]</h4>
 [(#GRAND_TOTAL|>{30}|oui)
-<div class="notice">
+#BOITE_OUVRIR{'',notice}
 	<p><:tradlang:notice_affichage_limite{nb=30}:></p>
-</div>
-]
+#BOITE_FERMER]
 <div class="formulaire_spip">
 <form action="spip.php" method="post" enctype="multipart/form-data" class="formulaire_crayon" id="formulaire_tradlang_tous_#ENV{id_tradlang_module}">
 <input type="hidden" name="action" value="crayons" />
 <input type="hidden" name="redirect" value="[(#SELF|parametre_url{edit,''})]" />
 <ul>
 <BOUCLE_nb_tradlangs(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}>
+</BOUCLE_nb_tradlangs>
+<BOUCLE_nb_tradlangs_affiche(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}{0,30}>
 <li class="editer editer_tradlang">
 #CRAYON{str_statut}
 <script type='text/javascript'>
@@ -59,7 +60,7 @@
 	});
 </script>
 </li>
-</BOUCLE_nb_tradlangs>
+</BOUCLE_nb_tradlangs_affiche>
 </ul>
 <p class="boutons">
 	<input type='submit' class="submit" />

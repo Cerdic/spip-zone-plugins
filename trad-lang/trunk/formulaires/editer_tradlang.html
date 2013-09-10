@@ -7,16 +7,19 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer readonly">
+			<li class="notice_statut" style="display:none;">
+				<div class="notice"><:tradlang:crayon_changer_statut:></div>
+			</li>
+			<li class="editer editer_str_orig readonly">
 				<BOUCLE_orig(TRADLANGS){id=#ENV{id}}{lang=#ENV{lang_orig}}{0,1}>
-				#SET{comm_orig,#COMM}
+				[(#SET{comm_orig,#COMM})][(#SET{lines,#STR*|strlen|div{40}|intval|plus{1}})]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale{lang=#ENV{lang_orig}}:></label>]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|non)<label><:tradlang:label_version_selectionnee{lang=#ENV{lang_orig}}:></label>]
-				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|tradlang_utf8|entites_html)]</textarea>
+				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR" rows="#GET{lines}">[(#STR*|tradlang_utf8|entites_html)]</textarea>
 				</BOUCLE_orig>
 				</B_orig>
 				<BOUCLE_mere(TRADLANGS){id=#ENV{id}}{lang=#ENV{lang_mere}}{0,1}>
-				#SET{comm_orig,#COMM}
+				[(#SET{comm_orig,#COMM})][(#SET{lines,#STR*|strlen|div{40}|intval|plus{2}})]
 				<label><:tradlang:label_version_originale{lang=#ENV{lang_mere}}:></label>
 				<textarea class="texte" name="lang_orig" id="lang_orig_str" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR*|tradlang_utf8|entites_html)]</textarea>
 				</BOUCLE_mere>
@@ -24,22 +27,15 @@
 				<input type="hidden" class="hidden" value="#ENV{lang_orig}" />
 			</li>
 			<li class='editer editer_str obligatoire[(#ENV{erreurs}|table_valeur{str}|oui)erreur]'>
-				<label for='str'><:tradlang:label_tradlang_str:></label>[
+				<label for='str'><:tradlang:label_tradlang_str{lang=#ENV{langue}}:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{str})</span>]
-				<div class="notice" style="display:none;"><:tradlang:crayon_changer_statut:></div>
-				<textarea class="texte" name="str" id="str">[(#ENV**{str}|tradlang_utf8)]</textarea>
+				<textarea class="texte" name="str" id="str" rows="#GET{lines}">[(#ENV**{str}|tradlang_utf8)]</textarea>
 			</li>
-			<li class='editer readonly'>
+			[(#COMM|oui)<li class='editer editer_comm_orig readonly'>
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|oui)<label><:tradlang:label_version_originale_comm{lang=#ENV{lang_orig}}:></label>]
 				[(#ENV{lang_orig}|=={#ENV{lang_mere}}|non)<label><:tradlang:label_version_selectionnee_comm{lang=#ENV{lang_orig}}:></label>]
 				<textarea class="texte" name="comm_orig" id="comm_orig" readonly="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#GET*{comm}|entites_html)]</textarea>
-			</li>
-			<li class='editer editer_comm[(#ENV{erreurs}|table_valeur{comm}|oui)erreur]'>
-				<label for='comm'><:tradlang:label_tradlang_comm:></label>[
-				<span class="erreur_message">(#ENV{erreurs}|table_valeur{comm})</span>]
-				<p class="explication"><:tradlang:explication_comm:></p>
-				<textarea class="texte" name="comm" id="comm" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#ENV*{comm}|entites_html)]</textarea>
-			</li>
+			</li>]
 			<li class="editer editer_statut obligatoire[(#ENV{erreurs}|table_valeur{statut}|oui)erreur]">
 				<label for="statut"><:tradlang:label_tradlang_status:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{statut})</span>]
@@ -58,8 +54,8 @@
 </div>
 
 <script type='text/javascript'>
-	var contenu_orig = '[(#ENV**{str}|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]';
-	var statut_orig = '#STATUT';
+	var contenu_orig = '[(#ENV**{str}|tradlang_utf8|entites_html|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""})]',
+		statut_orig = '#STATUT';
 	jQuery('#formulaire_tradlang_ajout_codelangue form').submit(function(){
 		var newstatut = jQuery(this).find('#statut').val();
 		var new_contenu = jQuery(this).find('#str').val().replace(/\n/,'_');
@@ -70,22 +66,19 @@
 	jQuery('#formulaire_tradlang_ajout_codelangue #str').keyup(function(){
 		var newstatut = jQuery('#formulaire_tradlang_ajout_codelangue #statut').val();
 		var new_contenu = jQuery(this).val().replace(/\n/,'_');
-		if((new_contenu != contenu_orig) && (newstatut != 'OK') && jQuery(this).parent('li').find('.notice').is(':hidden')){
-			jQuery(this).parent('li').find('.notice').toggle();
-		}else if((new_contenu == contenu_orig) && jQuery(this).parent('li').find('.notice').is(':visible')){
-			jQuery(this).parent('li').find('.notice').toggle();
-		}
+		if((new_contenu != contenu_orig) && (newstatut != 'OK') && jQuery(this).parents('form').find('.notice_statut').is(':hidden'))
+			jQuery(this).parents('form').find('.notice_statut').toggle();
+		else if((new_contenu == contenu_orig) && jQuery(this).parents('form').find('.notice_statut').is(':visible'))
+			jQuery(this).parents('form').find('.notice_statut').toggle();
 	});
 	jQuery('#formulaire_tradlang_ajout_codelangue #statut').change(function(){
 		var newstatut = jQuery(this).val();
 		var new_contenu = jQuery('#formulaire_tradlang_ajout_codelangue #str').val().replace(/\n/,'_');
-		if((new_contenu != contenu_orig) && (newstatut != 'OK') && (newstatut == statut_orig) && jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').is(':hidden')){
-			jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').toggle();
-		}else if((new_contenu != contenu_orig) && (newstatut == 'OK') && jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').is(':visible')){
-			jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').toggle();
-		}
-		else if((new_contenu == contenu_orig) && jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').is(':visible')){
-			jQuery('#formulaire_tradlang_ajout_codelangue .editer_str .notice').toggle();
-		}
+		if((new_contenu != contenu_orig) && (newstatut != 'OK') && (newstatut == statut_orig) && jQuery('#formulaire_tradlang_ajout_codelangue .form').is(':hidden'))
+			jQuery('#formulaire_tradlang_ajout_codelangue .notice_statut').toggle();
+		else if((new_contenu != contenu_orig) && (newstatut == 'OK') && jQuery('#formulaire_tradlang_ajout_codelangue .notice_statut').is(':visible'))
+			jQuery('#formulaire_tradlang_ajout_codelangue .notice_statut').toggle();
+		else if((new_contenu == contenu_orig) && jQuery('#formulaire_tradlang_ajout_codelangue.notice_statut').is(':visible'))
+			jQuery('#formulaire_tradlang_ajout_codelangue .notice_statut').toggle();
 	});
 </script>
