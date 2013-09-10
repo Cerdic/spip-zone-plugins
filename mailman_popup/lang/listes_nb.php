@@ -37,16 +37,12 @@ Takk, ha en fin dag.
 
 	// P
 	'pasabo' => 'Adressen &lt;@var_email@&gt; er ikke påmeldt epostlisten &lt;@liste@&gt;.',
-	'patientez' => 'Veuillez patienter...', # NEW
 
 	// Q
 	'quitter' => 'Avmelding',
 
 	// S
 	'subject_removed' => 'Adressen din er meldt av epostlisten @liste@.',
-
-	// T
-	'titrefenetre' => ' Inscription', # NEW
 
 	// V
 	'veuillez' => 'Oppgi din adresse.',

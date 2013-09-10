@@ -1,46 +1,87 @@
 <traduction module="listes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mailman_popup/lang/" reference="fr">
-	<langue code="ar" />
-	<langue code="ast" />
-	<langue code="bg" />
-	<langue code="br" />
-	<langue code="ca" />
-	<langue code="cpf" />
-	<langue code="cpf_hat" />
-	<langue code="cs" />
-	<langue code="da" />
-	<langue code="de" />
-	<langue code="en" />
-	<langue code="en_hx" />
-	<langue code="eo" />
-	<langue code="es" />
-	<langue code="eu" />
-	<langue code="fa" />
-	<langue code="fi" />
-	<langue code="fon" />
-	<langue code="fr" />
-	<langue code="fr_tu" />
-	<langue code="gl" />
-	<langue code="hu" />
-	<langue code="it" />
-	<langue code="it_fem" />
-	<langue code="ja" />
-	<langue code="km" />
-	<langue code="lb" />
-	<langue code="nb" />
-	<langue code="nl" />
-	<langue code="oc_lnc" />
-	<langue code="oc_ni" />
-	<langue code="oc_ni_la" />
-	<langue code="pl" />
-	<langue code="pt" />
-	<langue code="pt_br" />
-	<langue code="ro" />
-	<langue code="sc" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/listes?lang_cible=sk">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/listes?lang_cible=ar" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/listes?lang_cible=ast" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="bg" url="http://trad.spip.net/tradlang_module/listes?lang_cible=bg" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="br" url="http://trad.spip.net/tradlang_module/listes?lang_cible=br" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/listes?lang_cible=ca" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="cpf" url="http://trad.spip.net/tradlang_module/listes?lang_cible=cpf" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="cpf_hat" url="http://trad.spip.net/tradlang_module/listes?lang_cible=cpf_hat" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="cs" url="http://trad.spip.net/tradlang_module/listes?lang_cible=cs" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="da" url="http://trad.spip.net/tradlang_module/listes?lang_cible=da" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/listes?lang_cible=de" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/listes?lang_cible=en" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="en_hx" url="http://trad.spip.net/tradlang_module/listes?lang_cible=en_hx" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/listes?lang_cible=eo" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/listes?lang_cible=es" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/listes?lang_cible=eu" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/listes?lang_cible=fa" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fi" url="http://trad.spip.net/tradlang_module/listes?lang_cible=fi" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fon" url="http://trad.spip.net/tradlang_module/listes?lang_cible=fon" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/listes?lang_cible=fr" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/listes?lang_cible=fr_tu" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/listes?lang_cible=gl" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="hu" url="http://trad.spip.net/tradlang_module/listes?lang_cible=hu" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/listes?lang_cible=it" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/listes?lang_cible=it_fem" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ja" url="http://trad.spip.net/tradlang_module/listes?lang_cible=ja" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="km" url="http://trad.spip.net/tradlang_module/listes?lang_cible=km" total="15" traduits="8" modifs="0" nouveaux="7" pourcent="53.33">
+	</langue>
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/listes?lang_cible=lb" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nb" url="http://trad.spip.net/tradlang_module/listes?lang_cible=nb" total="15" traduits="13" modifs="0" nouveaux="2" pourcent="86.67">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/listes?lang_cible=nl" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/listes?lang_cible=oc_lnc" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/listes?lang_cible=oc_ni" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/listes?lang_cible=oc_ni_la" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="pl" url="http://trad.spip.net/tradlang_module/listes?lang_cible=pl" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/listes?lang_cible=pt" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/listes?lang_cible=pt_br" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/listes?lang_cible=ro" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sc" url="http://trad.spip.net/tradlang_module/listes?lang_cible=sc" total="15" traduits="13" modifs="2" nouveaux="0" pourcent="86.67">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/listes?lang_cible=sk" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="sq" />
-	<langue code="sv" />
-	<langue code="tr" />
-	<langue code="wa" />
+	<langue code="sq" url="http://trad.spip.net/tradlang_module/listes?lang_cible=sq" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sv" url="http://trad.spip.net/tradlang_module/listes?lang_cible=sv" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/listes?lang_cible=tr" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="wa" url="http://trad.spip.net/tradlang_module/listes?lang_cible=wa" total="15" traduits="15" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
