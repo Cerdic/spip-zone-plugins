@@ -143,9 +143,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	$max_par_page=30;
 
 	if ($lettre)
-		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
+		$critere .= " AND upper( substring( A.nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = voir_adherent_infos("*", '', $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = voir_adherent_infos("*", '', $critere, '', "A.nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {
 		$id_auteur=$data['id_auteur'];
