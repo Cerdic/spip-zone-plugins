@@ -11,40 +11,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_avec_reponse' => 'Ausgefüllte Antworten',
 	'analyse_exporter' => 'Analyse exportieren',
 	'analyse_longueur_moyenne' => 'Durchschnittliche Anzahl Worte',
-	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Leere Antworten',
-	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
-	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
-	'aucun_traitement' => 'Aucun traitement', # NEW
 
 	// B
 	'bouton_formulaires' => 'Formulare',
 
 	// C
-	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
-		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
-	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
-	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
-	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
 	'champs' => 'Felder',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
 	'echanger_formulaire_yaml_importer' => 'Formidable (.yaml)',
-	'editer_apres_choix_formulaire' => 'Le formulaire, à nouveau', # NEW
-	'editer_apres_choix_redirige' => 'Rediriger vers une nouvelle adresse', # NEW
-	'editer_apres_choix_rien' => 'Rien du tout', # NEW
-	'editer_apres_choix_stats' => 'Les statistiques des réponses', # NEW
-	'editer_apres_choix_valeurs' => 'Les valeurs saisies', # NEW
-	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire :', # NEW
-	'editer_apres_label' => 'Afficher ensuite', # NEW
 	'editer_descriptif' => 'Beschreibung',
 	'editer_descriptif_explication' => 'Eine Beschreibung des Formulars für das Backend.',
 	'editer_identifiant' => 'Bezeichnung',
 	'editer_identifiant_explication' => 'Gegen sie eine Bezeichnung an, mit dem sie das Formular ansprechen können.',
-	'editer_menu_auteurs' => 'Configurer les auteurs', # NEW
 	'editer_menu_champs' => 'Felder konfigurieren',
 	'editer_menu_formulaire' => 'Formular konfigurieren',
 	'editer_menu_traitements' => 'Verarbeitung konfigurieren',
@@ -52,8 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_message_ok_explication' => 'Sie können die Nachricht festlegen, die nach dem Absenden des Formulars angezeigt wird.',
 	'editer_modifier_formulaire' => 'Formular ändern',
 	'editer_nouveau' => 'Neues Formular',
-	'editer_redirige_url' => 'Adresse de redirection après validation', # NEW
-	'editer_redirige_url_explication' => 'Laissez vide si vous souhaitez rester sur la même page', # NEW
 	'editer_titre' => 'Titel',
 	'erreur_autorisation' => 'Sie sind nicht berechtigt, die Formulare der Website zu ändern.',
 	'erreur_base' => 'Beim Speichern ist ein technischer Fehler aufgetreten.',
@@ -76,29 +56,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaires_tous' => 'Alle Formulare',
 
 	// I
-	'identification_par_cookie' => 'Par cookie', # NEW
-	'identification_par_id_auteur' => 'Par l\'identifiant (id_auteur) de la personne authentifiée', # NEW
 	'importer_formulaire' => 'Formular importieren',
 	'importer_formulaire_fichier_label' => 'Dateien importeieren',
 	'importer_formulaire_format_label' => 'Format der Datei',
 
-	// M
-	'modele_label_formulaire_formidable' => 'Quel formulaire ?', # NEW
-	'modele_nom_formulaire' => 'un formulaire', # NEW
-
-	// N
-	'noisette_label_afficher_titre_formulaire' => 'Afficher le titre du formulaire ?', # NEW
-	'noisette_label_identifiant' => 'Formulaire à afficher :', # NEW
-	'noisette_nom_noisette_formulaire' => 'Formulaire', # NEW
-
 	// R
-	'reponse_aucune' => 'Aucune réponse', # NEW
 	'reponse_intro' => '@auteur@ hat auf das Formular geantwortet @formulaire@',
 	'reponse_numero' => 'Antwort Nummer:',
 	'reponse_statut' => 'Diese Antwort ist:',
 	'reponse_supprimer' => 'Diese Antwort löschen',
 	'reponse_supprimer_confirmation' => 'Wollen sie diese Antwor wirklich löschen?',
-	'reponse_une' => '1 réponse', # NEW
 	'reponses_analyse' => 'Analyse der Antworten',
 	'reponses_anonyme' => 'Anonym',
 	'reponses_auteur' => 'Nutzer',
@@ -107,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Liste der Antworten',
 	'reponses_liste_prop' => 'Nicht freigegebene Antworten',
 	'reponses_liste_publie' => 'Alle freigegebenen Antworten',
-	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Antwort anzeigen',
 	'retour_aucun_traitement' => 'Ihre Antwort wurde gesendet, jedoch wurde keine Verarbeitungsoption für das Formular festgelegt. Deshalb geschieht mit den Daten aus diesem Formular überhaupt nichts. :)',
 
@@ -115,8 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Unbeantwortet',
 
 	// T
-	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
-	'traitements_actives' => 'Traitements activés', # NEW
 	'traitements_aide_memoire' => 'Merkzettel:',
 	'traitements_avertissement_creation' => 'Die Änderungen der Felder des Formulars wurden erfolgreich gespeichert. Jetzt können sie festlege, welche Verarbeitungsschritte nach dem Senden des Formulars ausgef',
 	'traitements_avertissement_modification' => 'Die Änderungen der Felder des Formulars wurden erfolgreich gespeichert. <strong>Manche Verarbeitungsoptionen müssen entsprechend neu konfiguriert werden.</strong>',
@@ -138,8 +102,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Betreff der Empfangsbestätigung',
 	'traiter_email_option_sujet_explication' => 'Definieren sie den Betreff mit Hilf der @raccourcis@. Wenn sie das Feld freilassen, wird der Inhalt automatisch erstellt.',
 	'traiter_email_option_sujet_label' => 'Betreff der Nachricht',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d\'utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l\'envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".', # NEW
-	'traiter_email_option_vrai_envoyeur_label' => 'Insérer le courriel de l\'envoyeur dans le champ "From"', # NEW
 	'traiter_email_page' => '<a href="@url@">Aus der Seite</a>.',
 	'traiter_email_sujet' => '@nom@ hat ihnen geschrieben.',
 	'traiter_email_sujet_accuse' => 'Danke für ihre Antwort.',
@@ -148,16 +110,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_description' => 'Einträge in das Formular in der Datenbank speichern',
 	'traiter_enregistrement_erreur_base' => 'Beim Speichern in der Datenbank ist ein Fehler aufgetreten',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Sie haben dieses Formular bereits ausgefüllt.',
-	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.', # NEW
 	'traiter_enregistrement_option_anonymiser_explication' => 'Stellen die Ergebnisse der anonymen Form (nicht halten Trace-Kennung der Befragten).', # MODIF
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymisierter Form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Welches System Variable verwendet, um einen einzelnen Wert für jeden Autor ohne Offenlegung seiner Identität zu berechnen.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable aus dem anonymisierter Form.',
-	'traiter_enregistrement_option_auteur' => 'Utiliser les auteurs pour les formulaires', # NEW
-	'traiter_enregistrement_option_auteur_explication' => 'Attribuer un ou plusieurs auteurs à un formulaire. Si cette option est activée, seuls les auteurs d\'un formulaire pourront accéder à leurs données.', # NEW
 	'traiter_enregistrement_option_choix_select_label' => 'Wählen eine Variable von denen zur Verfügung.',
-	'traiter_enregistrement_option_identification_explication' => 'Si les réponses sont modifiables, quel procédé utiliser en priorité pour connaitre la réponse à modifier ?', # NEW
-	'traiter_enregistrement_option_identification_label' => 'Identification', # NEW
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
 	'traiter_enregistrement_option_modifiable_explication' => 'Sollen die Besucher ihre Antworten nachträglich &aauml;ndern können?',
 	'traiter_enregistrement_option_modifiable_label' => 'Antworten editierbar',

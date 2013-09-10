@@ -11,22 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_avec_reponse' => 'Risposte non vuote',
 	'analyse_exporter' => 'Esporta l\'analisi',
 	'analyse_longueur_moyenne' => 'Lunghezza media in numero di parole',
-	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.', # NEW
 	'analyse_sans_reponse' => 'Risposte vuote',
-	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.', # NEW
-	'analyse_zero_reponse_total' => 'Aucune personne n\'a répondu à ce formulaire.', # NEW
-	'aucun_traitement' => 'Aucun traitement', # NEW
 
 	// B
 	'bouton_formulaires' => 'Moduli',
 
 	// C
-	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
-		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
-		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !', # NEW
-	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression', # NEW
-	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable', # NEW
-	'cfg_titre_parametrages_analyse' => 'Paramétrages de l\'analyse des réponses', # NEW
 	'champs' => 'Campi',
 
 	// E
@@ -36,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_formulaire' => 'Il modulo, nuovamente',
 	'editer_apres_choix_redirige' => 'Redirigi verso un nuovo indirizzo',
 	'editer_apres_choix_rien' => 'Assolutamente niente',
-	'editer_apres_choix_stats' => 'Les statistiques des réponses', # NEW
 	'editer_apres_choix_valeurs' => 'I valori immessi',
 	'editer_apres_explication' => 'Dopo la validazione, mostra al posto del modulo:',
 	'editer_apres_label' => 'Mostra di seguito',
@@ -44,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_descriptif_explication' => 'Una spiegazione del modulo destinata allo spazio redazionale.',
 	'editer_identifiant' => 'Identificativo',
 	'editer_identifiant_explication' => 'Fornisci un identificativo testuale unico che ti permetterà di richiamare più facilmente il modulo.',
-	'editer_menu_auteurs' => 'Configurer les auteurs', # NEW
 	'editer_menu_champs' => 'Configura i campi',
 	'editer_menu_formulaire' => 'Configura il modulo',
 	'editer_menu_traitements' => 'Configura i trattamenti',
@@ -65,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_inexistant' => 'Il modulo non esiste.',
 
 	// F
-	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme ; c\'est à dire que l\'identité de l\'utilisateur n\'est pas enregistrée.', # NEW
 	'formulaires_aucun' => 'Al momento non è presente alcun modulo.',
 	'formulaires_dupliquer' => 'Duplica il modulo',
 	'formulaires_dupliquer_copie' => '(copia)',
@@ -92,13 +79,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_noisette_formulaire' => 'Modulo',
 
 	// R
-	'reponse_aucune' => 'Aucune réponse', # NEW
 	'reponse_intro' => '@auteur@ ha risposto al modulo @formulaire@',
 	'reponse_numero' => 'Risposta numero:',
 	'reponse_statut' => 'Questa risposta è:',
 	'reponse_supprimer' => 'Elimina questa risposta',
 	'reponse_supprimer_confirmation' => 'Sei sicuro di voler eliminare questa risposta?',
-	'reponse_une' => '1 réponse', # NEW
 	'reponses_analyse' => 'Analisi delle risposte',
 	'reponses_anonyme' => 'Anonimo',
 	'reponses_auteur' => 'Utente',
@@ -107,7 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'Elenco delle risposte',
 	'reponses_liste_prop' => 'Risposte in attesa di validazione',
 	'reponses_liste_publie' => 'Tutte le risposte valide',
-	'reponses_nb' => '@nb@ réponses', # NEW
 	'reponses_voir_detail' => 'Vedi la risposta',
 	'retour_aucun_traitement' => 'La risposta è stata correttamente inviata. Grazie :)',
 
@@ -115,8 +99,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Senza risposta',
 
 	// T
-	'titre_cadre_raccourcis' => 'Raccourcis', # NEW
-	'traitements_actives' => 'Traitements activés', # NEW
 	'traitements_aide_memoire' => 'Promemoria:',
 	'traitements_avertissement_creation' => 'Le modifiche ai campi del modulo sono state registrate con successo. Ora puoi definire quali trattamenti saranno effettuati all\'atto dell\'invio del modulo.',
 	'traitements_avertissement_modification' => 'La modifiche ai campi del modulo sono state registrate con successo. <strong>Alcuni trattamenti devono forse essere riconfigurati di conseguenza.</strong>',
@@ -138,8 +120,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Oggetto della conferma di ricezione',
 	'traiter_email_option_sujet_explication' => 'Costruisci l\'oggetto grazie all\'aiuto dei @segnaposto@. Se non inserisci nulla, l\'oggetto verrà generato automaticamente.',
 	'traiter_email_option_sujet_label' => 'Oggetto del messaggio',
-	'traiter_email_option_vrai_envoyeur_explication' => 'Certains serveurs SMTP ne permettent pas d\'utiliser un courriel arbitraire pour le champ "From". Pour cette raison Formidable insère par défaut le courriel de l\'envoyeur dans le champ "Reply-To". Cocher ici pour insèrer le courriel dans le champ "From".', # NEW
-	'traiter_email_option_vrai_envoyeur_label' => 'Insérer le courriel de l\'envoyeur dans le champ "From"', # NEW
 	'traiter_email_page' => '<a href="@url@">Da questa pagina</a>.',
 	'traiter_email_sujet' => '@nom@ ti ha scritto.',
 	'traiter_email_sujet_accuse' => 'Grazie per aver risposto.',
@@ -153,9 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_anonymiser_label' => 'Modo anonimo',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quale variabile di sistema utilizzato per calcolare un singolo valore per ogni autore, senza rivelare la propria identità.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variabile da cui la forma anonima',
-	'traiter_enregistrement_option_auteur' => 'Utiliser les auteurs pour les formulaires', # NEW
-	'traiter_enregistrement_option_auteur_explication' => 'Attribuer un ou plusieurs auteurs à un formulaire. Si cette option est activée, seuls les auteurs d\'un formulaire pourront accéder à leurs données.', # NEW
-	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées', # NEW
 	'traiter_enregistrement_option_identification_explication' => 'Se le risposte sono modificabili, quale procedura si dovrà utilizzare in priorità per individuare la risposta da modificare?',
 	'traiter_enregistrement_option_identification_label' => 'Identificazione',
 	'traiter_enregistrement_option_moderation_label' => 'Moderazione',
