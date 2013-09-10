@@ -56,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_explication' => 'Список всех точек, используемых на вашем сайте.',
 	'editer_gis_nouveau' => 'Создать точку',
 	'editer_gis_titre' => 'Точки на карте',
-	'erreur_geocoder' => 'Aucun résultat pour votre recherche :', # NEW
 	'erreur_recherche_pas_resultats' => 'Нет точек, соответствующих поисковому запросу.',
 	'erreur_xmlrpc_lat_lon' => 'В качестве аргумента должна быть указанна долгота и широта',
 	'explication_api_forcee' => 'На API накладывается другой плагин или шаблон.',
@@ -149,17 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_nombre_utilisations' => 'используется @nb@ раз',
 	'titre_nouveau_point' => 'Новая точка',
 	'titre_objet' => 'Название',
-	'toolbar_actions_title' => 'Annuler le tracé', # NEW
-	'toolbar_buttons_marker' => 'Tracer un point', # NEW
-	'toolbar_buttons_polygon' => 'Tracer un polygone', # NEW
-	'toolbar_buttons_polyline' => 'Tracer une ligne', # NEW
-	'toolbar_handlers_marker_tooltip_start' => 'Cliquez pour placer le marqueur', # NEW
-	'toolbar_handlers_polygon_tooltip_cont' => 'Cliquez pour continuer à tracer le polygone', # NEW
-	'toolbar_handlers_polygon_tooltip_end' => 'Cliquez sur le premier point pour fermer le polygone', # NEW
-	'toolbar_handlers_polygon_tooltip_start' => 'Cliquez pour commencer à tracer le polygone', # NEW
-	'toolbar_handlers_polyline_tooltip_cont' => 'Cliquez pour continuer à tracer la ligne', # NEW
-	'toolbar_handlers_polyline_tooltip_end' => 'Cliquez sur le dernier point pour terminer la ligne', # NEW
-	'toolbar_handlers_polyline_tooltip_start' => 'Cliquez pour commencer à tracer la ligne', # NEW
 
 	// Z
 	'zoom' => 'Zoom'
