@@ -1,21 +1,34 @@
 <traduction module="forms" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/forms/forms_et_tables_1_9_1/lang/" reference="fr">
-	<langue code="ar" />
-	<langue code="ast" />
-	<langue code="ca" />
-	<langue code="de" />
-	<langue code="en" />
-	<langue code="es" />
-	<langue code="fa" />
-	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/forms?lang_cible=fr_tu">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/forms?lang_cible=ar" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/forms?lang_cible=ast" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/forms?lang_cible=ca" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/forms?lang_cible=de" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/forms?lang_cible=en" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/forms?lang_cible=es" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/forms?lang_cible=fa" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/forms?lang_cible=fr" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/forms?lang_cible=fr_tu" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="gl" />
-	<langue code="it" />
-	<langue code="nl" />
-	<langue code="pt_br" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/forms?lang_cible=sk">
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/forms?lang_cible=gl" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/forms?lang_cible=it" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/forms?lang_cible=nl" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/forms?lang_cible=pt_br" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/forms?lang_cible=sk" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="tr" />
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/forms?lang_cible=tr" total="177" traduits="177" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
