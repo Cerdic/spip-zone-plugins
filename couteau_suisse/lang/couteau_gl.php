@@ -38,17 +38,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forzar a actualización remota',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Lista de módulos detectados :',
 	'maj_maj' => 'Actualizar o módulo selecccionado', # MODIF
 	'maj_ok' => 'Este [módulo->@zip@] parece [actualizado->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'A [revisión remota ->@url@] non foi posíbel encontrala.',
 	'maj_rev_ok' => 'A revisión [@revision@->@url@] está [dispoñíbel->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Este módulo SVN parece [actualizado->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifique previamente o arquivo que corresponda :',
 	'maj_verif2' => 'Atención : despois de ter premido sobre o botón seguinte, comprobe que o arquivo descargado corresponde co módulo que cómpre actualizar.',
 	'maj_zip_ko' => 'O ficheiro .zip remoto non puido ser identificado.',
@@ -94,7 +90,6 @@ Descubra neste módulo as súas ferramentas favoritas : {Suprimir o numéro}, {F
 Non dubide en consultar os artigos de documentación do módulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilidade : SPIP todas as versións 1.9x, v2.0 e v2.1.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Inserir un bloque repregado',
 	'pp_blocs_visible' => 'Inserir un bloque despregado',
 	'pp_chatons_inserer' => 'Inserir « @chaton@ »',
@@ -134,7 +129,6 @@ Compatibilidade : SPIP todas as versións 1.9x, v2.0 e v2.1.x', # MODIF
 	'tri_monter' => 'Montar este autor',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Este formato non toma en conta os URL propios listados a seguir.',
 	'urls_propres_format' => 'O formato actual dos URL é : {{« @format@ »}}. [<span>[Configuración->@url@]</span>]',
 	'urls_propres_lien' => 'Ligazón pública de acceso',

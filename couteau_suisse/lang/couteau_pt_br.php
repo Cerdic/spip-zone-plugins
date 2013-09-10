@@ -38,17 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forçar a atualização remota',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Lista dos plugins detectados:',
 	'maj_maj' => 'Atualizar o plugin selecionado', # MODIF
 	'maj_ok' => 'Este [plugin->@zip@] parece estar [em dia->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'A [revisão remota->@url@] não foi encontrada.',
 	'maj_rev_ok' => 'A revisão [@revision@->@url@] está [disponível->@zip@].',
 	'maj_spip' => 'Após ter atualizado todos os seus plugins com precaução, é fortemente aconselhável atualizar o próprio SPIP, clicando no link abaixo e seguindo as instruções apresentadas.',
 	'maj_svn' => 'Este plugin SVN parece estar [em dia->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifique previamente o arquivo que lhe convém:',
 	'maj_verif2' => 'Atenção: após ter clicado no botão abaixo, certifique-se que o arquivo transferido corresponde ao plugin que deseja atualizar.',
 	'maj_zip_ko' => 'O arquivo .zip remoto não pode ser identificado.',
@@ -134,7 +131,6 @@ Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x', # MODIF
 	'tri_monter' => 'Subir este autor',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Este formato não leva em conta os URLs limpos listados acima.',
 	'urls_propres_format' => 'O formato atual dos URLs é: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Link público de acesso',

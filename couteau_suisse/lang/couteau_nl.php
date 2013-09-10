@@ -38,17 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Force een refresh op afstand',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Lijst van ontdekte plugins :',
 	'maj_maj' => 'Geselecteerde plugin bijwerken', # MODIF
 	'maj_ok' => 'Dit [plugin->@zip@] lijkt [aan dag->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => '[Verwijderde revisie->@url@] kon niet gevonden worden.',
 	'maj_rev_ok' => 'De revisie [@revisie@->@url@] is [beschikbaar->@zip@].',
 	'maj_spip' => 'Nadat u uw plugins goed updaten, is het sterk aanbevolen om zichzelf updaten SPIP door te klikken op de link hierboven en volgenen instructies.',
 	'maj_svn' => 'Dit plugin SVN lijkt [aan dag->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Controleert van te voren het archief dat u past :',
 	'maj_verif2' => 'Opgelet: na op de knoop geklikt te hebben hierboven, controleert goed dat het gedownloade archief met plugin overeenstemt die hij u nodig is bij te werken.',
 	'maj_zip_ko' => 'Het remote .zip kan worden geïdentificeerd.',

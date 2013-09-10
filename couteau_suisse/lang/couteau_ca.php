@@ -38,17 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forçar l\'actualització distant',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Llista dels plugins detectats: ',
 	'maj_maj' => 'Actualitzar el plugin seleccionat', # MODIF
 	'maj_ok' => 'Aquest [plugin->@zip@] sembla [a dia->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => 'La [revisió a distància->@url@] no s\'ha trobat.',
 	'maj_rev_ok' => 'La revisió [@revision@->@url@] està [disponible->@zip@].',
 	'maj_spip' => 'Després d\'haver actualitzar tots els connectors amb precaució, és recomanable que actualitzeu el propi SPIP clicant a l\'enllaç que hi ha més amunt i seguint les instruccions que s\'hi donen.',
 	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifiqueu prèviament l\'arxiu que us convé:',
 	'maj_verif2' => 'Atenció: després de clicar el botó que hi ha més amunt, verifiqueu bé que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
 	'maj_zip_ko' => 'No s\'ha pogut identificar el fitxer .zip distant.',
@@ -134,7 +131,6 @@ Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
 	'tri_monter' => 'Pujar aquest autors',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Aquest format no té en compte els URLs propis llistats més avall. ',
 	'urls_propres_format' => 'L\'actual format dels URLs és: {{« @format@ »}}. [<span>[Configuració->@url@]</span>]',
 	'urls_propres_lien' => 'Enllaç públic d\'accés',

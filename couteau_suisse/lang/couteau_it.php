@@ -13,14 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'attente_confirmation' => 'In attesa di conferma',
 
-	// B
-	'base_donnees' => 'Base de données', # NEW
-	'bloc_deplier' => 'Déplier', # NEW
-	'bloc_replier' => 'Replier', # NEW
-
 	// C
-	'colorer_fond' => 'Colorer le fond', # NEW
-	'colorer_texte' => 'Colorer le texte', # NEW
 	'configurer' => 'Configura il Coltello Svizzero',
 	'connections' => 'Connessioni',
 
@@ -33,26 +26,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'Attenzione: hai utilizzato dei tag, dei catarreti o delle parole vietate.<br /><br />Riprova!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
 	'lutte_spam' => 'Lotta contro lo SPAM',
 
 	// M
 	'maj_actu' => 'Forza l\'aggiornamento', # MODIF
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'Elenco dei plugin rilevati:',
 	'maj_maj' => 'Aggiorna il plugin selezionato', # MODIF
 	'maj_ok' => 'Questo [plugin->@zip@] sembra [aggiornato->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'La [revisione remota->@url@] non è stata trovata.',
 	'maj_rev_ok' => 'La revisione [@revision@->@url@] è [disponibile->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Questo plugin SVN sembra [aggiornato->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'Verifica prima l\'archivio:',
 	'maj_verif2' => 'Attenzione: dopo aver cliccato sul tasto qui in basso, verifica attentamente che l\'archivio scaricato corrisponda al plugin da aggiornare.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
-	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
 	'nom_email_forum' => 'Si prega di inserire il nome o l\'indirizzo email!',
@@ -94,26 +80,6 @@ Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Format
 Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilità : SPIP v1.92x e v2.0.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
-	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
-	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
-	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
-	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
-	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
-	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
-	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Smiley disponibili:',
@@ -124,8 +90,6 @@ Compatibilità : SPIP v1.92x e v2.0.x', # MODIF
 	'stats_date' => '@jour@/@mois@/@annee@ alle @h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de données', # NEW
-	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TESTO ORIGINALE NEL FORMATO SPIP',
 	'textes_formatspip' => 'TESTI ORIGINALI NEL FORMATO SPIP',
 	'titre' => 'Coltellino svizzero',
@@ -134,7 +98,6 @@ Compatibilità : SPIP v1.92x e v2.0.x', # MODIF
 	'tri_monter' => 'Sposta in alto questo autore',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Questo formato non tiene conto delle URL "propres" elencate qui sotto.',
 	'urls_propres_format' => 'il formato attuale delle URL è: {{« @format@ »}}. [<span>[Configruazione->@url@]</span>]',
 	'urls_propres_lien' => 'Link pubblico di accesso',

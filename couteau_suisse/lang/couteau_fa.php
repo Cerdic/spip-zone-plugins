@@ -38,17 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'اعمال روزآمدسازي دور',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'فهرست پلاگين‌هاي شناسايي شده:',
 	'maj_maj' => 'روزآمدسازي پلاگين انتخابي', # MODIF
 	'maj_ok' => 'به نظر مي‌رسد اين [پلاگين->@zip@] [روز آمد->@url@] باشد.',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => '[نسخه‌‌ي دور->@url@] يافت نمي‌شود.',
 	'maj_rev_ok' => 'نسخه[@revision@->@url@] در [دسترس->@zip@] است.',
 	'maj_spip' => 'پس از روزآمدسازي دقيق تمام پلاگين‌ها، جداً توصيه مي‌شود كه خود اسپيپ را هم با كليك پيوند بالا و  پيگيري دستور‌هاي پيشنهادي روزآمد بسازيد.',
 	'maj_svn' => 'به نظر مي‌رسد اين پلاگين SVN [روزآمد->@url@] باشد.',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
 	'maj_verif' => 'ابتدا چك كنيد كدام فايل مناسب شماست :',
 	'maj_verif2' => 'توجه: پس از كليك كردن دكمه‌ي بالا، مطمئن شويد فايلي را كه دانلود كرديد با پلاگيني كه مي‌خواهيد روزآمد كنيد تطابق داشته باشد.',
 	'maj_zip_ko' => 'فايل zip. دور غيرقابل شناسايي است.',

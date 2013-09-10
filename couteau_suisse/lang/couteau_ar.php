@@ -38,20 +38,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'فرض التحديث البعيد',
-	'maj_archive_ko' => 'Erreur d\'[archive distante->@zip@]. «svn.revision» incomplet ?', # NEW
 	'maj_liste' => 'لائحة الملحقات التي تم العثور عليها:',
 	'maj_maj' => 'تحديث الملحق المحدد', # MODIF
 	'maj_ok' => 'هذا [الملحق->@zip@] يبدو [حديثاً->@url@].',
-	'maj_poursuivre' => 'Temps serveur écoulé : [poursuivre->#].', # NEW
 	'maj_rev' => 'الإصدار @revision@',
 	'maj_rev_ko' => 'لم يتم العثور على [التحديث البعيد->@url@]. ',
 	'maj_rev_ok' => 'الإصدار [@revision@->@url@] [متوافر->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
-	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].', # NEW
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
-	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
-	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
 	'msg_publies' => 'الرشائل المنشورة فقط',
 
 	// N
@@ -97,23 +89,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pp_autobr' => 'إدراج كتلة حيث العودة الى السطر آلية',
 	'pp_blocs_bloc' => 'إدراج كتلة مطوية',
 	'pp_blocs_visible' => 'إدراج كتلة مكشوفة',
-	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
-	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'الخلفية @couleur@',
 	'pp_couleur_icone_fond' => 'خلفية',
 	'pp_couleur_icone_texte' => 'نص',
 	'pp_couleur_texte' => 'النص @couleur@',
 	'pp_couteau_suisse_drop' => 'استخدام أداة من سكين الجيب',
-	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
-	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
-	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
-	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
-	'pp_un_titre' => 'Un titre', # NEW
-	'pp_votre_texte' => 'Placez votre texte ici', # NEW
-	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'رموز متوافرة:',
@@ -124,8 +104,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'stats_date' => '@يوم@/@شهر@/@سنة@ على الساعة @س@د@ث@',
 
 	// T
-	'test_base' => 'Test de la base de données', # NEW
-	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'النص الأصلي بتنسيق SPIP',
 	'textes_formatspip' => 'النصوص الأصلية بتنسيق SPIP',
 	'titre' => 'سكين الجيب',
@@ -134,7 +112,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_monter' => 'هذا المؤلف الى الأعلى',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'هذا التنسيق يتجاهل عناوين URL النظيفة الظاهرة أدناه.',
 	'urls_propres_format' => 'التنسيق الحالي لعناوين URL هو:{{«@format@»}}. [<span>[إعداد->@url@]</span>]',
 	'urls_propres_lien' => 'رابط الوصول العمومي',
