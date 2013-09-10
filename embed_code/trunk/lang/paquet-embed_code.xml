@@ -1,9 +1,10 @@
 <traduction module="paquet-embed_code" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/embed_code/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-embed_code?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-embed_code?lang_cible=en" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-embed_code?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-embed_code?lang_cible=es" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-embed_code?lang_cible=fr" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
