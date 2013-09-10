@@ -29,9 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_reduire_logo' => 'Riduci il logo se supera
   la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)', # MODIF
 
-	// I
-	'info_experimental' => 'Expérimental', # NEW
-
 	// L
 	'label_activer_barre_typo' => 'Attivare la barra tipografica per i pennarelli?',
 	'label_activer_crayons_prive' => 'Attivare i pennarelli per la parte redazionale.',
@@ -45,15 +42,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Sull\'abbandono',
 	'label_msg_no_change' => 'Se non c\'è nessuna modifica',
 	'label_reduire_logo' => 'Riduci i logo',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Fade',
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
 	'legend_controleur_logo' => 'Scegli un logo:',
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
 	'legend_controleur_vignette' => 'Scegli una miniatura:',
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Modifica lo spazio redazionale (sperimentale)',
 	'legend_introduction_article' => 'Testo introduttivo dell\'articolo',
 

@@ -29,9 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_reduire_logo' => 'Amenorgar el logo si pasa del
   tamañu máximu indicáu en pixels. Exemplu: 100. (0 = enxamás)', # MODIF
 
-	// I
-	'info_experimental' => 'Expérimental', # NEW
-
 	// L
 	'label_activer_barre_typo' => '¿Activar la barra tipográfica nos llápices?',
 	'label_activer_crayons_prive' => 'Activar los llápices pa la parte privada.',
@@ -40,20 +37,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_effets' => 'Esbilla de los efeutos',
 	'label_espaceprive' => '¿Llápices nel espaciu priváu?',
 	'label_exec_autorise' => 'Páxines autorizaes',
-	'label_filet' => 'Filet', # NEW
 	'label_message' => 'Escoyer un mensaxe',
-	'label_msg_abandon' => 'Sur abandon', # NEW
 	'label_msg_no_change' => 'Si nun hai cambeos',
 	'label_reduire_logo' => 'Amenorgar los logos',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Dilir',
 	'legend_controleur_hyperlien' => 'Hiperenllaz',
 	'legend_controleur_logo' => 'Escoyer un logo:',
 	'legend_controleur_logo_remplacer' => 'Trocar esti logo',
 	'legend_controleur_qui' => '¿Quién?',
-	'legend_controleur_vignette' => 'Choisir une vignette :', # NEW
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Editar l\'espaciu priváu (esperimental)',
 	'legend_introduction_article' => 'Testu introductoriu del artículu',
 

@@ -29,9 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
   la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)', # MODIF
 
-	// I
-	'info_experimental' => 'Expérimental', # NEW
-
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?',
 	'label_activer_crayons_prive' => 'Activer crayons pour la partie privée.',
@@ -45,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Sur abandon',
 	'label_msg_no_change' => 'Si pas de changement',
 	'label_reduire_logo' => 'Réduire les logos',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Fade',
 	'legend_controleur_hyperlien' => 'Hyperlien',
 	'legend_controleur_logo' => 'Choisir un logo :',
@@ -53,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'Qui ?',
 	'legend_controleur_vignette' => 'Choisir une vignette :',
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette',
-	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Éditer l\'espace privé (expérimental)',
 	'legend_introduction_article' => 'Texte introductif de l\'article',
 

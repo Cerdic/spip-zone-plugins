@@ -8,11 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
 	'annuler' => '取消', # MODIF
-
-	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
 
 	// D
 	'deja_modifie' => '已经修改', # MODIF
@@ -23,14 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => '编辑@type@@id@所有内容', # MODIF
 	'editer_tout' => '编辑所有内容', # MODIF
 	'effets' => 'Effets', # NEW
-	'explication_exec_autorise' => 'Pages autorisées à la modification
-		(?exec=...) : (, pour séparer les exec).', # NEW
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
-
-	// I
-	'info_experimental' => 'Expérimental', # NEW
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
@@ -45,20 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'Sur abandon', # NEW
 	'label_msg_no_change' => 'Si pas de changement', # NEW
 	'label_reduire_logo' => 'Réduire les logos', # NEW
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
-	'legend_controleur_logo' => 'Choisir un logo :', # NEW
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette :', # NEW
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'Éditer l\'espace privé (expérimental)',
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
 	'messages' => 'Messages', # NEW
 	'modifie_par_ailleurs' => '被别人修改', # MODIF
 
@@ -76,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_config_crayons' => 'Configurer les crayons', # NEW
-	'titre_crayons' => 'Crayons', # NEW
 
 	// U
 	'update_impossible' => 'La mise à jour a échoué.', # NEW

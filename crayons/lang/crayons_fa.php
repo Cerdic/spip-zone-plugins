@@ -28,9 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_introduction_article' => 'پيشگفتار يك مقاله توصيف يك مقاله را اگر باشد، نشان مي‌دهد، و اگر نباشد 600 كاراكتر اول (ليد و متن)را نشان خواهد داد.',
 	'explication_reduire_logo' => 'اندازه‌ي لوگ را اگر از بيشترين حد بالا زده باشد كم مي‌كند (به پيكسل). نمونه : 100. ( 0 = هرگز)',
 
-	// I
-	'info_experimental' => 'Expérimental', # NEW
-
 	// L
 	'label_activer_barre_typo' => 'فعال‌سازي ميل حروف‌نگاري در پلاگين «مدادها»؟',
 	'label_activer_crayons_prive' => 'فعال سازي «مدادها» راي قسمت خصوصي.',
@@ -44,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_abandon' => 'در جريان ابطال',
 	'label_msg_no_change' => 'در صورت عدم تغيير ',
 	'label_reduire_logo' => 'كاهش لوگوها',
-	'label_upload_document' => 'Autoriser l\'ajout de documents par glisser/déposer sur le crayon article.texte', # NEW
 	'label_yellow_fade' => 'محو',
 	'legend_controleur_hyperlien' => 'ابرپيوند',
 	'legend_controleur_logo' => 'گزينش يك لوگو :',
@@ -52,7 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_qui' => 'كي؟',
 	'legend_controleur_vignette' => 'گزيش يك صورتك  :',
 	'legend_controleur_vignette_remplacer' => 'جايگزيني اين صورت',
-	'legend_documents' => 'Upload de documents', # NEW
 	'legend_editer_prive' => 'استفاده در محوطه‌ي خصوصي (تجربي)',
 	'legend_introduction_article' => 'متن مقدماتي مقاله',
 
