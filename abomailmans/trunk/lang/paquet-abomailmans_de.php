@@ -10,8 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'abomailmans_description' => 'Dieses Plugin ermöglich mit dem TAG #FORMULAIRE_ABOMAILMAN das Abnonnieren von Mailinglisten.
 			Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verfügung.',
-	'abomailmans_nom' => 'Abonnieren Sie Mailing-Listen',
-	'abomailmans_slogan' => 'Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP' # NEW
+	'abomailmans_nom' => 'Abonnieren Sie Mailing-Listen'
 );
 
 ?>
