@@ -1,12 +1,12 @@
 <traduction module="mediaspip_player" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mediaspip_player/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=en" total="54" traduits="54" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=es" total="54" traduits="54" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=fr">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=fr" total="54" traduits="54" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 </traduction>
