@@ -1,23 +1,26 @@
 <traduction module="licence" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
-	<langue code="ca" />
-	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="47" traduits="22" modifs="10" nouveaux="15" pourcent="46.81">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de" total="47" traduits="27" modifs="10" nouveaux="10" pourcent="57.45">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en" total="47" traduits="47" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/licence?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/licence?lang_cible=es" total="47" traduits="47" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="47" traduits="47" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="47" traduits="27" modifs="10" nouveaux="10" pourcent="57.45">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="it" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/licence?lang_cible=sk">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/licence?lang_cible=it" total="47" traduits="22" modifs="10" nouveaux="15" pourcent="46.81">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/licence?lang_cible=sk" total="47" traduits="47" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

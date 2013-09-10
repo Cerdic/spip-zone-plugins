@@ -15,7 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Lizenz Freie Kunst', # MODIF
-	'description_cc0' => 'Creative Common - Contenu libre de tout droit', # NEW
 	'description_cc_by' => 'Creative Commons - Namensnennung', # MODIF
 	'description_cc_by_nc' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung', # MODIF
 	'description_cc_by_nc_nd' => 'Creative Commons -  Namensnennung, keine kommerzielle Nutzung, keine Bearbeitung', # MODIF
@@ -23,26 +22,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nd' => 'Creative Commons - Namensnennung, keine Bearbeitung', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Namensnennung, Weitergabe unter gleichen Bedingungen', # MODIF
 	'description_copyright' => '© Copyright liegt beim Autor des Artikels',
-	'description_gfdl' => 'Licence de documentation libre GNU', # NEW
 	'description_gpl' => 'GPL-Lizenz', # MODIF
-	'description_wtfpl' => 'Licence Publique Rien À Branler', # NEW
 
 	// L
 	'label_select_licence' => 'Wählen sie eine Lizenz',
 	'lien_art_libre' => 'http://artlibre.org/licence/lal/de', # MODIF
-	'lien_cc0' => 'http://vvlibri.org/fr/licence/cc0/10/fr/legalcode', # NEW
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.de',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.de',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.de',
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.de',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.de',
-	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html', # NEW
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
-	'lien_whfpl' => 'http://sam.zoy.org/lprab/', # NEW
 
 	// N
-	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?', # NEW
 	'noisette_hauteur_logo' => 'Maximale Höhe des Logos (in Pixel):',
 	'noisette_largeur_logo' => 'Maximale Breite des Logos (in Pixel):',
 	'noisette_lien' => 'Link zur Breschreibung der Lizenz anzeigen?',
@@ -54,7 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'LFK',
-	'titre_cc0' => 'CC0', # NEW
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
@@ -62,9 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_nd' => 'CC by-nd',
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
-	'titre_gfdl' => 'GNU FDL', # NEW
-	'titre_gpl' => 'GNU GPL', # MODIF
-	'titre_wtfpl' => 'LPRAB' # NEW
+	'titre_gpl' => 'GNU GPL' # MODIF
 );
 
 ?>
