@@ -7,12 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
-
 	// C
-	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
-	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
 	'changer_langue' => 'Changer la langue de l\'article',
 
 	// F
@@ -29,10 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Modifier les options de langues',
-	'oui' => 'Oui', # NEW
-
-	// R
-	'rang' => 'Rang', # NEW
 
 	// T
 	'titre_plugin' => 'Traduction d\'articles autrement',

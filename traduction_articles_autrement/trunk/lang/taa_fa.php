@@ -11,8 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage_liste_compacte_desactive' => 'غيرفعال‌سازي نمايش فشرده‌ي فهرست مقاله‌ها را ', # MODIF
 
 	// C
-	'cfg_limiter_secteur' => 'Ne pas afficher la barre de langue dans le secteur :', # NEW
-	'cfg_utiliser_langues' => 'Utiliser les langues suivantes :', # NEW
 	'changer_langue' => 'تغيير زبان مقاله',
 
 	// F
@@ -29,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'اصلاح گزينه‌هاي زبان ',
-	'oui' => 'Oui', # NEW
 
 	// R
 	'rang' => 'رتبه',
