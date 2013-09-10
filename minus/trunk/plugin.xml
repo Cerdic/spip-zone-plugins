@@ -11,6 +11,7 @@
 	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
 	<description>Permet de forcer les rédacteurs à ne pas mettre des titres entièrement en majuscules.</description>
 	<slogan>Ne criez pas !</slogan>
+	<lien>http://contrib.spip.net/4408</lien>
 	
 	<pipeline>
 	  <nom>formulaire_verifier</nom> 
