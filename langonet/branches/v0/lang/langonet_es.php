@@ -115,50 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmaisnok_definis_0' => 'Los archivos de la carpeta «<em>@ou_fichier@</em>» no utilizan ningún ítem de idioma que sea incorrectamente definido en un otro módulo que «<em>@module@</em>».',
 	'message_ok_nonmaisnok_definis_1' => 'El ítem de idioma siguiente esta utilizado en los archivos de la carpeta «<em>@ou_fichier@</em>» pero no como un ítem del módulo «<em>@module@</em>». No esta definido en su propio módulo, así que le invitamos a verificarlo:',
 	'message_ok_nonmaisnok_definis_n' => 'Los @nberr@ ítems de idioma siguientes están utilizados en archivos de la carpeta «<em>@ou_fichier@</em>» pero no como ítems del módulo «<em>@module@</em>». No están definidos en su propio módulo, así que le invitamos a verificarlos uno por uno:',
-	'message_ok_table_creee' => 'La tabla de ítems del archivo de idioma @langue@ fue creada con éxito.',
-	'message_ok_utilises_incertains_0' => 'Aucun item de langue n\'est utilisé dans un contexte complexe (par exemple :  _T(\'@module@:item_\'.$variable)).', # NEW
-	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-être utilisé dans un contexte complexe. Nous vous invitons à le vérifier :', # NEW
-	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :', # NEW
-
-	// O
-	'onglet_generer' => 'Générer une langue', # NEW
-	'onglet_lister' => 'Afficher une langue', # NEW
-	'onglet_rechercher' => 'Rechercher un item', # NEW
-	'onglet_verifier' => 'Vérifier une langue', # NEW
-	'option_aucun_dossier' => 'aucune arborescence sélectionnée', # NEW
-	'option_aucun_fichier' => 'aucune langue sélectionnée', # NEW
-	'option_mode_index' => 'Item de la langue source', # NEW
-	'option_mode_new' => 'Balise &lt;NEW&gt; uniquement', # NEW
-	'option_mode_new_index' => 'Item de la langue source précédé de &lt;NEW&gt;', # NEW
-	'option_mode_new_valeur' => 'Chaîne dans la langue source précédée de &lt;NEW&gt;', # NEW
-	'option_mode_pas_item' => 'Ne pas créer d\'item', # NEW
-	'option_mode_valeur' => 'Chaîne dans la langue source', # NEW
-	'option_mode_vide' => 'Une chaîne vide', # NEW
-
-	// T
-	'test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et est égal à test.', # NEW
-	'test_item_1_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
-	'test_item_2_variable' => 'TEST : Cet item de langue est bien défini dans le fichier de langue, mais est utilisé sous forme "complexe" dans les fichiers du répertoire scanné.', # NEW
-	'test_item_non_utilise_1' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().', # NEW
-	'test_item_non_utilise_2' => 'TEST : Cet item de langue est bien défini dans le fichier de langue (), mais n\'est pas utilisé dans les fichiers du répertoire scanné ().', # NEW
-	'texte_item_defini_ou' => '<em>défini dans :</em>', # NEW
-	'texte_item_mal_defini' => '<em>mais pas défini dans le bon module :</em>', # NEW
-	'texte_item_non_defini' => '<em>mais défini nulle part !</em>', # NEW
-	'texte_item_utilise_ou' => '<em>utilisé dans :</em>', # NEW
-	'titre_bloc_langues_generees' => 'Fichiers de langue', # NEW
-	'titre_bloc_logs_definition' => 'Définitions manquantes', # NEW
-	'titre_bloc_logs_fonction_l' => 'Utilisations de _L()', # NEW
-	'titre_bloc_logs_utilisation' => 'Définitions obsolètes', # NEW
-	'titre_form_generer' => 'Génération des fichiers de langue', # NEW
-	'titre_form_lister' => 'Affichage des fichiers de langue', # NEW
-	'titre_form_rechercher_item' => 'Recherche de raccourcis dans les fichiers de langue', # NEW
-	'titre_form_rechercher_texte' => 'Recherche de textes dans les fichiers de langue SPIP', # NEW
-	'titre_form_verifier' => 'Vérification des fichiers de langue', # NEW
-	'titre_page' => 'LangOnet', # NEW
-	'titre_page_navigateur' => 'LangOnet', # NEW
-
-	// Z
-	'z_test' => 'TEST : Cet item de langue sert pour la recherche de raccourci et contient test.' # NEW
+	'message_ok_table_creee' => 'La tabla de ítems del archivo de idioma @langue@ fue creada con éxito.'
 );
 
 ?>
