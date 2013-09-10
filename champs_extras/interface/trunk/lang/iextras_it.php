@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_deja_existant' => 'Un campo con lo stesso nome già esiste per questa tabella.',
 	'champ_sauvegarde' => 'Campo extra salvato!',
 	'champs_extras' => 'Campi Extra',
-	'champs_extras_de' => 'Champs Extras de : @objet@', # NEW
 
 	// E
 	'erreur_action' => 'Azione @action@ sconosciuta.',
@@ -46,41 +45,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
             verranno mostrati nel riquadro "Lista dei campi presenti e non gestiti".',
 	'info_modifier_champ_extra' => 'Modifica il campo extra',
 	'info_nouveau_champ_extra' => 'Nuovo campo extra',
-	'info_saisie' => 'Saisie :', # NEW
 
 	// L
 	'label_attention' => 'Istruzioni importanti',
 	'label_champ' => 'Nome del campo',
 	'label_class' => 'Classi CSS',
-	'label_datas' => 'Liste de valeurs', # NEW
 	'label_explication' => 'Istruzioni di inserimento',
 	'label_label' => 'Etichetta di inserimento',
 	'label_li_class' => 'Classi CSS dell\'&lt;li&gt; padre',
 	'label_obligatoire' => 'Campo obbligatorio?',
 	'label_rechercher' => 'Ricerca',
-	'label_rechercher_ponderation' => 'Pondération de la recherche', # NEW
-	'label_restrictions_auteur' => 'Par auteur', # NEW
-	'label_restrictions_branches' => 'Par branche', # NEW
-	'label_restrictions_groupes' => 'Par groupe', # NEW
-	'label_restrictions_secteurs' => 'Par secteur', # NEW
-	'label_saisie' => 'Type de saisie', # NEW
 	'label_sql' => 'Definizione SQL',
 	'label_table' => 'Oggetto',
 	'label_traitements' => 'Trattamenti automatici',
-	'label_versionner' => 'Versionner le contenu du champ', # NEW
 	'legend_declaration' => 'Dichiarazione',
 	'legend_options_saisies' => 'Opzioni di inserimento',
 	'legend_options_techniques' => 'Opzioni tecniche',
-	'legend_restriction' => 'Restriction', # NEW
-	'legend_restrictions_modifier' => 'Modifier la saisie', # NEW
-	'legend_restrictions_voir' => 'Voir la saisie', # NEW
 	'liste_des_extras' => 'Lista dei campi extra',
 	'liste_des_extras_possibles' => 'Lista dei campi presenti e non gestiti',
-	'liste_objets_applicables' => 'Liste des objets éditoriaux', # NEW
-
-	// N
-	'nb_element' => '1 élément', # NEW
-	'nb_elements' => '@nb@ éléments', # NEW
 
 	// P
 	'precisions_pour_attention' => 'Per indicare un\'informazione importante.
@@ -89,31 +71,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_class' => 'Aggiungi delle classi CSS all\'elemento,
 		separate da uno spazio. Esempio: "inserer_barre_edition" per un riquadro
     con il plugin Porte Plume',
-	'precisions_pour_datas' => 'Certains types de champ demandent une liste des valeurs acceptées : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par défaut. La description peut être une chaîne de langue.', # NEW
 	'precisions_pour_explication' => 'Puoi fornire più informazioni riguardanti l\'inserimento. 
 		Può essere una stringa di traduzione «plugin:stringa».',
 	'precisions_pour_label' => 'Può essere una stringa di traduzione «plugin:stringa».',
 	'precisions_pour_li_class' => 'Aggiungi delle classi CSS all\'elemento &lt;li&gt; padre,
 		separate da uno spazio. Esempio: "haut" per avere tutta la larghezza del form',
-	'precisions_pour_nouvelle_saisie' => 'Permet de changer le type de saisie utilisée pour ce champ', # NEW
-	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !', # NEW
 	'precisions_pour_rechercher' => 'Includere questo campo nel motore di ricerca?',
-	'precisions_pour_rechercher_ponderation' => 'SPIP pondère une recherche dans une colonne par un coefficient de ponderation.
-		Celui-ci permet de mettre en avant les colonnes les plus pertinentes (titre par exemple) par rapport à d\'autres qui le sont moins.
-		Le coefficient appliqué sur les champs extras est par défaut 2. Pour vous donner un ordre d\'idée, notez que SPIP utilise 8 pour le titre, 1 pour le texte.', # NEW
-	'precisions_pour_restrictions_branches' => 'Identifiants de branches à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_restrictions_groupes' => 'Identifiants de groupes à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_restrictions_secteurs' => 'Identifiants de secteurs à restreindre (séparateur «:»)', # NEW
-	'precisions_pour_saisie' => 'Afficher une saisie de type :', # NEW
 	'precisions_pour_traitements' => 'Applica automaticamente un trattamento
 		per il segnaposto #NOME_DEL_CAMPO:',
-	'precisions_pour_versionner' => 'Le versionnage s\'appliquera uniquement si le plugin
-		«révisions» est actif et que l\'objet éditorial du champs extra est lui-même versionné', # NEW
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs', # NEW
-	'radio_restrictions_auteur_aucune' => 'Tout le monde peut', # NEW
-	'radio_restrictions_auteur_webmestre' => 'Seulement les webmestres', # NEW
 	'radio_traitements_aucun' => 'Nessuno',
 	'radio_traitements_raccourcis' => 'Trattamento delle scorciatoie di SPIP (propre)',
 	'radio_traitements_typo' => 'Solo trattamento tipografico (typo)',
