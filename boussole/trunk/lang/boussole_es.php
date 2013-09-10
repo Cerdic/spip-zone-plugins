@@ -41,9 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_activite_serveur' => 'Par défaut, la fonction serveur du plugin n\'est pas active. Vous pouvez l\'activer en choisissant l\'option adéquate ci-dessous et en lui affectant un nom.', # NEW
 	'info_ajouter_boussole' => 'Añadiendo las brújulas a su base de datos, tendrá la posibilidad de utilizar los modelos proporcionados para mostrarlos en sus páginas públicas.<br />Si la brújula ya existe este formulario permitirá actualizarla conservando la configuración de la visualización. ',
-	'info_ajouter_serveur' => 'Este formulario le permite añadir un servidor de brújulas. Por defecto, el servidor «spip» está siempre disponible en los sitios clientes. La lista de servidores disponibles se muestra a continuación y permite asismismo retirar un servidor configurado.', # MODIF
+	'info_ajouter_serveur' => 'Este formulario le permite añadir un servidor de brújulas. Por defecto, el servidor «spip» está siempre disponible en los sitios clientes. ',
 	'info_alias_boussole_manuelle' => 'Saisissez l\'alias de la boussole manuelle telle que définie dans son fichier XML.', # NEW
-	'info_boite_boussoles_gerer_client' => '<strong>Esta página sólo es accesible para los responsables del sitio.</strong><p>Permite agregar, actualizar y eliminar brújulas en base de datos para su visualizacion en el sitio. Se puede también ir a la página de configuración de la visualización de cada brújula haciendo clic sobre su nombre en la lista.</p>', # MODIF
+	'info_boite_boussoles_gerer_client' => '<strong>Esta página sólo es accesible para los responsables del sitio.</strong><p>Permite agregar, actualizar y eliminar brújulas en base de datos para su visualizacion en el sitio. Se puede también ir a la página de configuración de la visualización de cada brújula haciendo clic sobre su nombre en la lista.</p><p>Un formulario permite asimismo configurar los servidores de brújulas accesibles desde la web.</p>',
 	'info_boite_boussoles_gerer_serveur' => '<strong>Esta página sólo es accesible para los responsables del sitio.</strong><p>Permite actualzar manualmente la caché de las brújulas albergadas por este servidor. Las cachés pueden descargarse haciendo clic sobre su nombre en la lista.</p>', # MODIF
 	'info_boussole_manuelle' => 'Brújula manual',
 	'info_cache_boussole' => 'Caché de la brújula «@boussole@»', # MODIF
