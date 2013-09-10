@@ -1,12 +1,13 @@
 <traduction module="prix" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/prix/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/prix?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/prix?lang_cible=en" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/prix?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/prix?lang_cible=fa" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/prix?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/prix?lang_cible=fr" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/prix?lang_cible=sk" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
