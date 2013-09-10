@@ -1,9 +1,10 @@
 <traduction module="intranet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/intranet/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/intranet?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/intranet?lang_cible=en" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/intranet?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/intranet?lang_cible=es" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/intranet?lang_cible=fr" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
 </traduction>
