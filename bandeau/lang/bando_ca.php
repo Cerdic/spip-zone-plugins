@@ -37,8 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Aquestes adreces seran redirigides automàticament cap a l\'adreça principal. Indiqueu una adreça per línia ',
 	'titre_config_langage' => 'Configurar la llengua',
 	'titre_configurer_preferences' => 'Configurar les teves preferències',
-	'titre_identite_site' => 'Identitat del lloc',
-	'titre_infos_perso' => 'Mes informations personnelles' # NEW
+	'titre_identite_site' => 'Identitat del lloc'
 );
 
 ?>

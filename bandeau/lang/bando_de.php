@@ -22,10 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_visiter_site' => 'Website ansehen',
 
 	// L
-	'label_adresses_secondaires' => 'Adresses ALIAS du site public', # NEW
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
 	'label_choix_langue' => 'Ihre Sprache wählen',
 	'label_slogan_site' => 'Slogan der Website',
 	'label_taille_ecran' => 'Bildschirmbreite',
@@ -33,8 +29,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Auf der Seite anzeigen',
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'accèder à votre site.
-		Ces adresses seront redirigées automatiquement vers l\'adresse principale. Indiquez une adresse par ligne', # NEW
 	'titre_config_langage' => 'Spracheinstellung',
 	'titre_configurer_preferences' => 'Persönliche Einstellungen',
 	'titre_identite_site' => 'Identität der Site',
