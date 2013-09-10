@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -232,11 +232,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_info_interface' => 'Affiche un lien menant vers l\'interface de traduction',
 	'menu_titre_interface' => 'Interface de traduction',
 	'message_afficher_vos_modules' => 'Afficher les modules :',
-	'message_avertissement_export_langue_complet' => 'Il est préconisé de ne pas utiliser ce fichier en production. Il est préférable de ne l\'utiliser que pour base de traduction.',
-	'message_avertissement_export_langue_po' => 'Ce fichier ne peut servir que pour traduire dans un logiciel spécialisé, vous pourrez ensuite l\'importer via le bouton adéquat.',
 	'message_aucun_resultat_chaine' => 'Aucun résultat correspondant à vos critères dans les chaînes de langue.',
 	'message_aucun_resultat_statut' => 'Aucune chaine ne correspond au statut demandé.',
 	'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
+	'message_avertissement_export_langue_complet' => 'Il est préconisé de ne pas utiliser ce fichier en production. Il est préférable de ne l\'utiliser que pour base de traduction.',
+	'message_avertissement_export_langue_po' => 'Ce fichier ne peut servir que pour traduire dans un logiciel spécialisé, vous pourrez ensuite l\'importer via le bouton adéquat.',
 	'message_changement_lang_orig' => 'La langue d\'origine de traduction choisie ("@lang_orig@") n\'est pas assez traduite, elle est remplacée par la langue "@lang_nouvelle@".',
 	'message_changement_lang_orig_inexistante' => 'La langue d\'origine de traduction choisie ("@lang_orig@") est inexistante, elle est remplacée par la langue "@lang_nouvelle@".',
 	'message_changement_statut' => 'Modification du statut de "@statut_old@" en "@statut_new@"',

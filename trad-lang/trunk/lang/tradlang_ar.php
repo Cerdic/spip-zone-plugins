@@ -10,11 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucunmodule' => 'لا توجد اي وحدة.',
 	'auteur_revision' => '@nb@ ترجمة معدّلة.',
-	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'auteur_revisions' => '@nb@ ترجمة معدّلة.',
 	'auteur_revisions_langue' => 'لغة مساهماته (مساهماتها):',
 	'auteur_revisions_langues' => 'اللغات الـ@nb@ لمساهماته (لمساهماتها):',
-	'auteur_revisions_specifique' => '@nb@ modifications de traductions en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 
 	// B
 	'bouton_activer_lang' => 'تفعيل اللغة "@lang@" لهذه الوحدة',
@@ -96,18 +94,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importermodule' => 'جلب وحدة',
 	'info_1_tradlang' => '@nb@ سلسلة لغة',
 	'info_1_tradlang_module' => 'سلسلة لغة واحدة',
-	'info_aucun_participant_lang' => 'Aucun auteur du site n\'a encore traduit en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_aucun_tradlang_module' => 'لا توجد اي سلسلة لغة',
 	'info_auteur_sans_favori' => 'هذا المترجم ليس لديه أي وحدة مفضلة.',
 	'info_chaine_jamais_modifiee' => 'لم يتم تعديل هذه السلسلة أبداً.',
 	'info_chaine_originale' => 'هذه السلسلة هي السلسلة الأصلية',
-	'info_choisir_langue' => 'Dans une langue spécifique', # NEW
 	'info_contributeurs' => 'المساهمون',
 	'info_filtrer_status' => 'الترشيح حسب الوضعية:',
 	'info_langue_mere' => '(اللغة الأم)',
 	'info_langues_non_preferees' => 'اللغات الأخرى:',
 	'info_langues_preferees' => 'اللغة او الغات المفضلة:',
-	'info_module_nb_items_langue_mere' => 'La langue mère du module est <abbr title="@lang_mere@">@lang_mere_longue@</abbr> et comporte @nb@ items de langue.', # NEW
 	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
 	'info_module_traduit_langues' => 'هذه الوحدة مترجمة او مترجمة جزئياً الى @nb@ لغة.',
 	'info_module_traduit_pc' => 'وحدة مترجمة بنسبة @pc@٪',
@@ -128,10 +123,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_priorite_new' => '@pc@٪ من البنود ذات الأولوية «@priorite@» جديدة بـ@lang@ (@langue_longue@) ',
 	'info_nb_items_priorite_ok' => 'الوحدات ذات الأولوية «@priorite@» مترجمة بنسبة @pc@٪ الى @lang@ (@langue_longue@)',
 	'info_nb_modules_favoris' => '@nb@ وحدة مفضلة.',
-	'info_nb_participant' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction.', # NEW
-	'info_nb_participant_lang' => '@nb@ auteur inscrit sur ce site a participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
-	'info_nb_participants' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction.', # NEW
-	'info_nb_participants_lang' => '@nb@ auteurs inscrits sur ce site ont participé au moins une fois à la traduction en <abbr title="@lang@">@langue_longue@</abbr>.', # NEW
 	'info_nb_tradlang' => '@nb@ سلسلة لغة',
 	'info_nb_tradlang_module' => '@nb@ وحدة لغة',
 	'info_percent_chaines' => '@traduites@ / @total@ سلسلة مترجمة الى «[@langue@] @langue_longue@»',
