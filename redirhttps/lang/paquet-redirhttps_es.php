@@ -9,8 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'redirhttps_description' => 'Redirección hacía HTTPS cuando el contendio le necesita (espacio privado, login, páginas públicas con el usuario conectado)',
-	'redirhttps_nom' => 'Redireciones HTTPS',
-	'redirhttps_slogan' => 'Sécuriser l\'accès à certaines pages du site' # NEW
+	'redirhttps_nom' => 'Redireciones HTTPS'
 );
 
 ?>
