@@ -145,7 +145,6 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'choix_rubrique_selection' => 'Seleccionar un sector que servirá de base para tus foros. Desde ahí, cada subsección será un grupo de foros, y cada artículo publicado abrirá un foro.',
 	'choix_squelettes' => 'Puedes elegir otros, ¡pero deben existir los ficheros que reemplacen a groupeforum.html y filforum.html!',
 	'citer' => 'Citar',
-	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Fecha de inscripción',
 	'col_marquer' => 'Marcar',

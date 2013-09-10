@@ -145,7 +145,6 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'choix_rubrique_selection' => 'Forumlara temel oluşturacak bir sektör seçiniz. Bu sektörün içinde, her alt başlık bir forum grubu olacaktır, yayınlanan her makale bir forum açacaktır.',
 	'choix_squelettes' => 'Başkalarını da seçebilirsiniz ama groupeforum.html ve filforum.html dosyalarının yerine konan dosyalar mevcut olmalıdır !',
 	'citer' => 'Listele',
-	'cocher' => 'cocher', # NEW
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Kayıt tarihi',
 	'col_marquer' => 'İşaretle',
