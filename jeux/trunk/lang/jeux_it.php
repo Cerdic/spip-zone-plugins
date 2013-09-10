@@ -27,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_scores' => 'Les scores du jeu',
 	'cfg_type_resultat' => 'Enregistrement des scores :', # MODIF
 	'colonne_n' => 'colonna @n@',
-	'configuration_jeux' => 'Configurer les jeux', # NEW
 	'correction' => 'Correzione:',
 	'corriger' => 'Controlla',
 
@@ -51,17 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'ligne_n' => 'riga @n@',
 
-	// M
-	'modules_dispos' => 'Modules disponibles', # NEW
-	'multi_jeux' => 'Multi Jeux', # NEW
-
 	// N
 	'n_erreurs' => '@n@ errori',
 	'n_vides' => '@n@ caselle bianche',
 	'nouveau_jeu' => 'Nouveau jeu',
-
-	// O
-	'options' => 'Options', # NEW
 
 	// P
 	'point' => 'punto', # MODIF
@@ -94,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultats' => 'Résultats', # MODIF
 	'resultats_auteur' => 'Les résultats de @nom@', # MODIF
 	'resultats_jeu' => 'Les résultats du jeu numéro @id@ (@nom@)', # MODIF
-	'resultats_jeux' => 'Résultats des jeux', # NEW
 
 	// S
 	'sans_titre_prive' => 'Sans titre privé', # MODIF
@@ -103,8 +94,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'solution' => 'Soluzione',
 
 	// T
-	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
-	'total' => 'Total', # NEW
 	'type_resultat' => 'Type de résultats', # MODIF
 
 	// U
@@ -114,7 +103,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier' => 'Controlla', # MODIF
 	'verifier_validite' => 'Controlla la validità', # MODIF
-	'voir_auteur' => 'Voir l\'auteur', # NEW
 	'voir_jeu' => 'Voir le jeu',
 	'voir_resultats' => 'Voir les résultats', # MODIF
 	'votre_choix' => 'La tua risposta: ',

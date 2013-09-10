@@ -1,8 +1,11 @@
 <traduction module="jeux" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang/" reference="fr">
-	<langue code="de" />
-	<langue code="en" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=en">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="79" traduits="34" modifs="27" nouveaux="18" pourcent="43.04">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
-	<langue code="fr" />
-	<langue code="it" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="79" traduits="39" modifs="32" nouveaux="8" pourcent="49.37">
+	</langue>
 </traduction>

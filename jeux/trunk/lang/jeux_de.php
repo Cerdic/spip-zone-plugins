@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_solution' => 'Lösung anzeigen',
-	'alphabet' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-', # NEW
 	'aucune_erreur' => 'Kein Fehler',
 	'auteur' => 'Autor',
 
@@ -18,16 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bravo' => 'Herzlichen Glückwunsch!',
 
 	// C
-	'cfg_affichage' => 'L\'affichage du jeu', # NEW
-	'cfg_correction' => 'La correction du jeu', # NEW
-	'cfg_donner_indices' => 'Afficher des indices', # NEW
-	'cfg_donner_reponse' => 'Afficher la réponse', # NEW
-	'cfg_donner_solution' => 'Donner les bonnes réponses', # NEW
-	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.', # NEW
-	'cfg_scores' => 'Les scores du jeu', # NEW
-	'cfg_type_resultat' => 'Enregistrement des scores :', # NEW
 	'colonne_n' => 'Spalte @n@',
-	'configuration_jeux' => 'Configurer les jeux', # NEW
 	'correction' => 'Lösung:',
 	'corriger' => 'Antwort',
 
@@ -51,17 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'ligne_n' => 'Zeile @n@',
 
-	// M
-	'modules_dispos' => 'Modules disponibles', # NEW
-	'multi_jeux' => 'Multi Jeux', # NEW
-
 	// N
 	'n_erreurs' => '@n@ Fehler',
 	'n_vides' => '@n@ leere Zellen',
 	'nouveau_jeu' => 'Neues Spiel',
-
-	// O
-	'options' => 'Options', # NEW
 
 	// P
 	'point' => ' Punkt', # MODIF
@@ -76,7 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponseJuste' => 'Richtig!', # MODIF
 	'reponseNulle' => 'Unbeantwortet!', # MODIF
 	'resultat' => 'Ergebnis', # MODIF
-	'resultat2_' => 'Non défini ?', # NEW
 	'resultat2_aucun' => 'Pas d\'enregistrement',
 	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
 	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
@@ -94,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultats' => 'Ergebnisse', # MODIF
 	'resultats_auteur' => 'Die Ergebnisse von @nom@', # MODIF
 	'resultats_jeu' => 'Ergebnisse von Spiel no. @id@ (@nom@)', # MODIF
-	'resultats_jeux' => 'Résultats des jeux', # NEW
 
 	// S
 	'sans_titre_prive' => 'Ohne internen Titel', # MODIF
@@ -103,8 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'solution' => 'Lösung',
 
 	// T
-	'titre_page_configurer_jeux' => 'Configuration du plugin jeux', # NEW
-	'total' => 'Total', # NEW
 	'type_resultat' => 'Enregistrement des scores :', # MODIF
 
 	// U
@@ -114,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier' => 'Überprüfen', # MODIF
 	'verifier_validite' => 'Validität überprüfen ', # MODIF
-	'voir_auteur' => 'Voir l\'auteur', # NEW
 	'voir_jeu' => 'Spiel ansehen',
 	'voir_resultats' => 'Ergebnisse ansehen', # MODIF
 	'votre_choix' => 'Deine Antwort: ',
