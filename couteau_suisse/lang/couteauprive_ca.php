@@ -41,13 +41,6 @@ El valor de 1~000~000 píxels sembla correcte per una configuració amb poca mem
 	'action_rapide' => 'Acció ràpida, només si sabeu què us feu! ',
 	'action_rapide_non' => 'Acció ràpida, disponible un cop aquesta eina siga activada :',
 	'admins_seuls' => 'Només els administradors',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
-
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.', # NEW
-	'aff_tout:nom' => 'Affiche tout', # NEW
-	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
-_ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]', # NEW
-	'alerte_urgence:nom' => 'Message d\'alerte', # NEW
 	'attente' => 'Espera...',
 	'auteur_forum:description' => 'Incita a tots els autors de missatges públics a omplir (amb una lletra com a mínim!) un nom i/o un correu electrònic per tal d\'evitar les contribucions totalment anònimes. Fixeu-vos que aquesta eina fa una verificació del JavaScript al lloc del visitant.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Alerta: Escollir la tercera opció anul·la les 2 primeres. És important verificar que els formularis del vostre esquelet són compatibles completament amb aquesta eina.}',
@@ -63,40 +56,10 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Pàgina d\'autors',
 	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML <br />.[[%alinea%]][[->%alinea2%]]', # MODIF
-	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
-	'autobr:description2' => 'Objets contenant cette balise (non exhaustif) :
-- Articles : @ARTICLES@.
-- Rubriques : @RUBRIQUES@.
-- Forums : @FORUMS@.', # NEW
 	'autobr:nom' => 'Retorns de línia automàtics',
 	'autobr_non' => 'A l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles i missatges públics (etiquetes @BALISES@)',
 	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>', # MODIF
-	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
-<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
-    return false; // aucun troll permis, non mais !
-}</cadre>
-Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
-
-Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
-
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
-_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
-@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
-', # NEW
-	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
-	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
-	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
-	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
-	'autorisations_surcharge' => 'Fonction surchargée', # NEW
-	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
-	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
-	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Per simplificar les escriptures del tipus <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la següent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
@@ -163,7 +126,6 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'cache_permanent' => 'Memòria cau permanent',
 	'cache_sans' => 'Sense memòria cau',
 	'categ:admin' => '1. Administració',
-	'categ:devel' => '55. Développement', # NEW
 	'categ:divers' => '60. Divers',
 	'categ:interface' => '10. Interfície privada',
 	'categ:public' => '40. Visualització pública',
@@ -248,7 +210,6 @@ Dos exemples idèntics per canviar el color del text:@_CS_EXEMPLE_COULEURS2@
 
 Si els requeriments externs del vostre servidor us posen problemes o teniu problemes de millora de seguretat, marqueu les següents caselles.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Comportaments del Ganivet Suís',
-	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Les verificacions de versions distants',
 	'cs_distant_outils_off' => 'Les eines del Ganivet Suís que tenen fitxers distants',
 	'cs_log_couteau_suisse' => 'Els logs detallats del Ganivet Suís',
@@ -318,8 +279,6 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'distant_echoue' => 'Error en la càrrega distant, aquesta eina té el risc de no funcionar!',
 	'distant_inactif' => 'Fitxer introbable )eina inactiva).',
 	'distant_present' => 'Fitxer present a la llibreria a partir del @date@.',
-	'docgen' => 'Documentation générale', # NEW
-	'docwiki' => 'Carnet d\'idées', # NEW
 	'dossier_squelettes:description' => 'Modifica la carpeta de l\'esquelet utilitzat. Per exemple: "esquelets/elmeuesquelet". Podeu inscriure diverses carpetes separant-les pels dos punts <html>« : »</html>. Deixar buida la caixa que segueix (o teclejant "dist"), és l\'esquelet original "dist" subministrat per SPIP el que es farà servir.[[%dossier_squelettes%]]',
 	'dossier_squelettes:nom' => 'Carpeta de l\'esquelet',
 
@@ -360,7 +319,6 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 	'erreur:version' => 'Aquesta eina és indispensable en aquesta versió d\'SPIP.',
 	'erreur_groupe' => 'Atenció: el grup «@groupe@» no està definit!',
 	'erreur_mot' => 'Atenció: la paraula clau «@mot@» no s\'ha definit!',
-	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Estès',
 
 	// F
@@ -368,9 +326,6 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 
 Atenció: certes eines del Ganivet Suís necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
-	'fichiers_detectes' => 'Fichiers détectés :', # NEW
-	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
-	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Línies de Separació: <b>__i__</b> o <b>i</b> és un nombre de <b>0</b> a <b>@max@</b>.<br />Altres línies disponibles: @liste@',
 	'filets_sep:description' => 'Insereix línies de separació, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
 _ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.', # MODIF
@@ -406,14 +361,11 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 
 @puce@ S\'ofereixen dues solucions per gestionar la petita finestra automàtica que apareix quan hi passes per sobre el ratolí. [[%glossaire_js%]]', # MODIF
 	'glossaire:nom' => 'Glossari intern',
-	'glossaire_abbr' => 'Ignorer les balises <code><abbr></code> et <code><acronym></code>', # NEW
 	'glossaire_css' => 'Solució CSS',
 	'glossaire_erreur' => 'La paraula «@mot1@» fa que no es detecti la paraula «@mot2@»',
 	'glossaire_inverser' => 'Correcció que es proposa: invertir l\'ordre de paraules a la base.',
 	'glossaire_js' => 'Solució JavaScript',
 	'glossaire_ok' => 'La llista de @nb@ paraula(es) estudiada(es) a la base sembla correcta.', # MODIF
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
-	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Substitueix automàticament les cometes (") per les cometes tipogràfiques de la llengua de composició. La substitució, transparent per l\'usuari, no modifica el text original sinó només la seva publicació final. ',
 	'guillemets:nom' => 'Cometes tipogràfiques',
 
@@ -473,12 +425,9 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	// L
 	'label:admin_travaux' => 'Tancar el lloc públic per:',
 	'label:alinea' => 'Camp d\'aplicació:',
-	'label:alinea2' => 'Sauf :', # NEW
-	'label:alinea3' => 'Désactiver la prise en compte des alinéas :', # NEW
 	'label:arret_optimisation' => 'Impedir que SPIP buidi la paperera automàticament:',
 	'label:auteur_forum_nom' => 'El visitant ha d\'especificar:',
 	'label:auto_sommaire' => 'Creació sistemàtica del sumari:',
-	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Activar l\'etiqueta #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activar l\'etiqueta #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Etiqueta pels títols:',
@@ -502,7 +451,6 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:duree_cache_mutu' => 'Durada de la memòria cau en mutualització:',
 	'label:enveloppe_mails' => 'Petit sobre davant dels correus electrònics:',
 	'label:expo_bofbof' => 'Escriptura com exponents de: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
-	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Valor (en caràcters):',
 	'label:glossaire_groupes' => 'Grup(s) utilitzat(s):',
 	'label:glossaire_js' => 'Tècnica utilitzada:',
@@ -533,7 +481,6 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
 	'label:moderation_admin' => 'Validar automàticament els missatges de: ',
 	'label:mot_masquer' => 'Paraula clau amagant els continguts:',
-	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Obertura i tancament de les notes a peu de pàgina',
 	'label:ouvre_ref' => 'Obertura i tancament de les crides de les notes a peu de pàgina',
 	'label:paragrapher' => 'Sempre paràgrafs:',
@@ -562,7 +509,6 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:terminaison_urls_page' => 'Terminacions dels URls (ex : « .html ») :',
 	'label:titre_travaux' => 'Títol del missatge:',
 	'label:titres_etendus' => 'Activar la utilització àmplia d\'etiquetes #TITRE_XXX :',
-	'label:tout_rub' => 'Afficher en public tous les objets suivants :', # NEW
 	'label:url_arbo_minuscules' => 'Conservar els tipus dels títols en els URLs:',
 	'label:url_arbo_sep_id' => 'Caràcter de separació \'titre-id\' en cas de doublon:<br />(no utilitzar \'/\')',
 	'label:url_glossaire_externe2' => 'Enllaç al glossari extern:',
@@ -589,26 +535,16 @@ _ • {Par defecte): substitució automàtica d\'origen (a partir de la versió 
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL trobat sobrepassa els %long_url% caràcters, SPIP el redueix llavors a %coupe_url% caràcters]].',
 	'liens_orphelins:nom' => 'URLs bonics',
-	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
-	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
-	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
-	'log_gravite' => 'Gravité', # NEW
-	'log_non' => 'Désactiver totalement les logs', # NEW
 
 	// M
 	'mailcrypt:description' => 'Amaga tots els enllaços de correus presents als vostres textos substituint-los per un enllaç JavaScript que permet malgrat tot activar la missatgeria del lector. Aquesta eina antispam impedeix que els robots recullin les adreces electròniques deixades visibles als fòrums o a les etiquetes dels vostres esquelets.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
-	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
-	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Aquesta eina us permet gestionar fàcilment l\'actualització dels vostres connectors (plugins), recuperant sobretot el número de revisió que conté el fitxer <code>svn.revision</code> i comparant-lo amb el trobat a <code>zone.spip.org</code>.
 
 La llista de més amunt ofereix la possibilitat de llançar el procés d\'actualització automàtic d\'SPIP a cadascun dels connectors (plugins) instal·lats prèviament a la carpeta <code>plugins/auto/</code>. El altres plugins que es troben a dins de la carpeta <code>plugins/</code> només es llisten com a mera informació. Si la revisió a distància no s\'ha trobat, proveu llavors de fer l\'actualització del connector manualment.
 
 Nota: com que els paquets <code>.zip</code> no es poden reconstruir instantàniament, es probable que estigueu obligat a esperar un cert temps abans de poder efectuar l\'actualització total d\'un connector recentment modificat.',
 	'maj_auto:nom' => 'Actualitzacions automàtiques',
-	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
-	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Aquesta eina permet amagar al lloc públic, i sense modificar els vostres esquelets, els continguts (seccions o articles) que tinguin la paraula clau definida més avall. Si una secció està amagada, també ho estarà tota la branca. [[%mot_masquer%]]
 
 Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el criteri <code>{tout_voir}</code> als bucles de la vostra plantilla.', # MODIF
@@ -636,7 +572,6 @@ Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el crite
 	'outil_actif_court' => 'actiu',
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar l\'eina',
-	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'No visualitzar més',
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar l\'eina',
@@ -706,7 +641,6 @@ Per tal de conservar l\'accés al caràcter imatge original d\'SPIP (el petit tr
 	// R
 	'raccourcis' => 'Dreceres tipogràfiques actives del Ganivet Suís:',
 	'raccourcis_barre' => 'Les dreceres tipogràfiques del Ganivet Suís',
-	'rafraichir' => 'Afin de terminer la configuration du plugin, merci d\'actualiser la page courante.', # NEW
 	'reserve_admin' => 'Accés reservat als administradors.',
 	'rss_actualiser' => 'Actualitzar',
 	'rss_attente' => 'Esperant RSS...',
@@ -720,12 +654,6 @@ Per tal de conservar l\'accés al caràcter imatge original d\'SPIP (el petit tr
 	'sauf_admin' => 'Tots, excepte els administradors',
 	'sauf_admin_redac' => 'Tots, excepte els administradors i els redactors',
 	'sauf_identifies' => 'Tots, excepte els autors identificats',
-	'sessions_anonymes:description' => 'Chaque semaine, cet outil vérifie les sessions anonymes et supprime les fichiers qui sont trop anciens (plus de @_NB_SESSIONS3@ jours) afin de ne pas surcharger le serveur, notamment en cas de SPAM sur le forum.
-
-Dossier stockant les sessions : @_DIR_SESSIONS@
-
-Votre site stocke actuellement @_NB_SESSIONS1@ fichier(s) de session, @_NB_SESSIONS2@ correspondant à des sessions anonymes.', # NEW
-	'sessions_anonymes:nom' => 'Sessions anonymes', # NEW
 	'set_options:description' => 'Selecciona d\'entrada el tipus d\'interfície privada (simple o avançada) per tots els redactors ja existents o per aquells que poden venir i suprimeix el botó corresponent de la banda on hi ha les icones petites.[[%radio_set_options4%]]', # MODIF
 	'set_options:nom' => 'Tipus d\'interfície privada',
 	'sf_amont' => 'Més amunt',
@@ -802,14 +730,7 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'spip_cache:nom' => 'SPIP i la memòria cau…',
 	'spip_ecran:description' => 'Determina l\'amplada de la pantalla imposada a tots a la part privada. Una pantalla estreta presentarà dues columnes i una pantalla ampla en presentarà tres. ésentera trois. La configuració per defecta deixa que l\'usuari trii, emmagatzemant en una galeta la tria feta.[[%spip_ecran%]]', # MODIF
 	'spip_ecran:nom' => 'Amplada de pantalla',
-	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
-[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
-	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
-	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
-	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
-	'spip_log:nom' => 'SPIP et les logs', # NEW
 	'stat_auteurs' => 'Els autors en stat',
-	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Només els statuts SPIP següents:',
 	'statuts_tous' => 'Tots els statuts',
 	'suivi_forums:description' => 'Un autor d\'un article està sempre informat quan es publica un missatge al fòrum que aquest té associat. Però, a més, també es possible advertir a: tots els participants al fòrum o només als autors dels missatges en endavant.[[%radio_suivi_forums3%]]',
@@ -819,19 +740,6 @@ _ • {Control de la memòria cau}: opció idèntica a l\'anterior, amb una escr
 	'supprimer_numero:nom' => 'Suprimeix el número',
 
 	// T
-	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
-_ Utile pour n\'en oublier aucune !
-
-@puce@ Un test : ', # NEW
-	'test_i18n:nom' => 'Traductions manquantes', # NEW
-	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
-_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
-
-Réglage actuellement détecté : @_CS_TZ@.
-
-@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
-[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
-	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'El Ganivet Suís',
 	'titre_parent:description' => 'Al si d\'un bucle, és corrent voler mostrar el títol del parent de l\'objecte en curs. Tradicionalment, n\'hi hauria prou utilitzant un segon bucle, però aquesta nova etiqueta #TITRE_PARENT alleugerarà l\'escriptura dels vostres esquelets. El resultat que torna és: el títol del grup d\'una paraula clau o el de la secció parenta (si existeix) de qualsevol altre objecte (article, secció, breu, etc.).
 
@@ -850,11 +758,6 @@ Fonts disponibles : @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_paddin
 
 Aquesta eina és compatible amb: « [.->sommaire] ».',
 	'titres_typo:nom' => 'Subtítols en imatge',
-	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans vos squelettes.
-_ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
-
-Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
-	'titres_typographies:nom' => 'Titres typographiés', # NEW
 	'tous' => 'Tots',
 	'toutes_couleurs' => 'Els 36 colors dels estils CSS :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingües : <b><:trad:></b>', # MODIF
@@ -868,22 +771,7 @@ La funció SPIP utilitzada en PHP és <code>_T(\'chaine\')</code> sense argument
 
 Per tant, no oblideu verificar que la clau  <code>\'chaine\'</code> està ben definida en els fitxers de llengües. ', # MODIF
 	'toutmulti:nom' => 'Blocs multilingües',
-	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
-
-N\'hésitez pas à offrir votre contribution si vous décelez quelques soucis dans les textes du plugin. Toute l\'équipe vous en remercie d\'avance.
-
-Pour vous inscrire à l\'espace de traduction : @url@
-
-Pour accéder directement aux traductions des modules du Couteau Suisse, cliquez ci-dessous sur la langue cible de votre choix. Une fois identifié, repérez ensuite le petit crayon qui apparait en survolant le texte traduit puis cliquez dessus.
-
-Vos modifications seront prises en compte quelques jours plus tard sous forme d\'une mise à jour disponible pour le Couteau Suisse. Si votre langue n\'est pas dans la liste, alors le site de traduction vous permettra facilement de la créer.
-
-{{Traductions actuellement disponibles}} :@trad@
-
-{{Merci aux traducteurs actuels}} : @contrib@.', # NEW
-	'trad_mod' => 'Module « @mod@ » : ', # NEW
 	'travaux_masquer_avert' => 'Amagar el requadre indicant al lloc públic que s\'està fent un manteniment.',
-	'travaux_nocache' => 'Désactiver également le cache de SPIP', # NEW
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Aquest lloc es restablirà ben aviat.
 _ Gràcies per la vostra comprensió.',
@@ -957,7 +845,6 @@ _ Exemple : <code>article.php3?id_article=123</code>
 <q1>• Assegurar-se que l\'URL produïda estigui totalment {{en minúscules}}.</q1>[[%urls_minuscules%]]
 <q1>• Provocar l\'afegit sistemàtic de {{l\'id de l\'objecte}} al seu URL (en sufix, en prefix, etc.).
 _ (exemples: <code>/El-meu-títol-d-article,457</code> o <code>/457-El-meu-títol-d-article</code>)</q1>',
-	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
 	'type_urls:nom' => 'Format dels URLs',
 	'typo_exposants:description' => '((Textos francesos)): millora el retorn tipogràfic de les abreviacions corrents, exposant els elements necessaris (així, {<acronym>Mme</acronym>} esdevé {M<sup>me</sup>}) i corregint-ne els errors normals ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, per exemple, esdevenen {2<sup>e</sup>}, única abreviació correcta).
 

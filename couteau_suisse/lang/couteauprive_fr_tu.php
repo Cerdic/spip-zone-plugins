@@ -72,31 +72,6 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
-	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
-<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
-    return false; // aucun troll permis, non mais !
-}</cadre>
-Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
-
-Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
-
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
-_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
-@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
-', # NEW
-	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
-	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
-	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
-	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
-	'autorisations_surcharge' => 'Fonction surchargée', # NEW
-	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
-	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
-	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Afin d\'alléger les écritures du type <code>#SET{x,#GET{x}|un_filtre}</code>, cet outil t\'offre le raccourci suivant : <code>#SET_UN_FILTRE{x}</code>. Le filtre appliqué à une variable passe donc dans le nom de la balise.
@@ -359,7 +334,6 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 	'erreur:version' => 'Cet outil est indisponible dans cette version de SPIP.',
 	'erreur_groupe' => 'Attention : le groupe «@groupe@» n\'est pas défini !',
 	'erreur_mot' => 'Attention : le mot-clé «@mot@» n\'est pas défini !',
-	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Étendu',
 
 	// F
@@ -367,9 +341,6 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 
 Attention : certains outils du Couteau Suisse nécessitent les fonctions de {jQuery}. ',
 	'f_jQuery:nom' => 'Désactive jQuery',
-	'fichiers_detectes' => 'Fichiers détectés :', # NEW
-	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
-	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Filets de Séparation : <b>__i__</b> où <b>i</b> est un nombre de <b>0</b> à <b>@max@</b>.<br />Autres filets disponibles : @liste@',
 	'filets_sep:description' => 'Insère des filets de séparation, personnalisables par des feuilles de style, dans tous les textes de SPIP.
 _ La syntaxe est : «__code__», où «code» représente soit le numéro d\'identification (de 0 à 7) du filet à insérer en relation directe avec les styles correspondants, soit le nom d\'une image placée dans le dossier <code>dossier_de_mon_squelette/img/filets/</code>, ou par défaut, dans le dossier <code>@_DIR_CS_ROOT@img/filets/</code>.',
@@ -410,8 +381,6 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	'glossaire_inverser' => 'Correction proposée : inverser l\'ordre des mots en base.',
 	'glossaire_js' => 'Solution JavaScript',
 	'glossaire_ok' => '@nb@ mot(s) étudié(s). Tout semble correct.',
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
-	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 	'guillemets:nom' => 'Guillemets typographiques',
 
@@ -475,7 +444,6 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:arret_optimisation' => 'Empêcher SPIP de vider la corbeille automatiquement :',
 	'label:auteur_forum_nom' => 'Le visiteur doit spécifier :',
 	'label:auto_sommaire' => 'Création systématique du sommaire :',
-	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Activer la balise #CS_DECOUPE :',
 	'label:balise_sommaire' => 'Activer la balise #CS_SOMMAIRE :',
 	'label:bloc_h4' => 'Balise pour les titres :',
@@ -589,8 +557,6 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tente une mise à jour manuelle.',
 	'log_brut' => 'Données écrites en format brut (non HTML)',
 	'log_fileline' => 'Informations supplémentaires de débogage',
-	'log_gravite' => 'Gravité', # NEW
-	'log_non' => 'Désactiver totalement les logs', # NEW
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',
@@ -807,7 +773,6 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]',
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».
 _ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se configure ici : «[.->timezone]» {(PHP 5.1 minimum)}.',
-	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP et les logs',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statut' => 'Statut',

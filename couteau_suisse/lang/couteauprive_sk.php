@@ -71,31 +71,6 @@ _ Na viacjazyčnej stránke sa odporúča používať tagy <code><multi/></code>
 	'autobr_non' => 'Vnútorné tagy &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Články a verejné správy (tagy @BALISES@)',
 	'autobr_racc' => 'Zlomov riadkov: <b>&lt;alinea>&lt;/alinea></b>',
-	'autorisations:description' => 'Cet outil est réservé aux webmestres du site. Pour créer une autorisation SPIP, il suffit de créer les fonctions adéquates. L\'exemple ci-dessous permet d\'utiliser la fonction <code>autoriser(\'troller\',\'doc\')</code> ou la balise <code>#AUTORISER{troller, doc}</code> :
-<cadre>function autoriser_doc_troller_dist($faire, $type=\'\', $id=0, $qui=NULL, $opt=NULL) {
-    return false; // aucun troll permis, non mais !
-}</cadre>
-Signification des paramètres :
--* <code>$faire</code> : une action (\'modifier\', \'publier\', ...)
--* <code>$type</code> : un type d\'objet ou nom de table (\'article\', \'auteur\', ...)
--* <code>$id</code> : l\'identifiant  de l\'objet sur lequel on veut agir
--* <code>$qui</code> : un {id_auteur} (ou vide pour un auteur connecté)
--* <code>$opt</code> : tableau d\'option, généralement vide
-
-Après récupération/valorisation contextuelle des valeurs par défaut, SPIP tente de d\'exécuter la meilleure autorisation déclarée et va chercher dans l\'ordre : <code>autoriser_type_faire()</code>, <code>autoriser_type()</code>, <code>autoriser_faire()</code>, puis <code>autoriser_defaut()</code>.
-
-@puce@ Utilisez cet outil pour définir des alias d\'autorisations simples.
-_ La syntaxe est : «<code>qui : faire type id = alias</code>»[[%autorisations_alias%]]
-@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%autorisations_debug%]]
-', # NEW
-	'autorisations:nom' => 'Fonctions d\'autorisations', # NEW
-	'autorisations_bilan' => '@nb1@ fonctions d\'autorisations trouvées, dont @nb2@ fonction(s) surchargée(s).', # NEW
-	'autorisations_creees' => 'Fonctions créées dans {@_CS_DIR_TMP@mes_autorisations.php} : ', # NEW
-	'autorisations_debug' => 'Tracer les autorisations dans @_CS_DIR_LOG@spip.log', # NEW
-	'autorisations_surcharge' => 'Fonction surchargée', # NEW
-	'autorisations_titre1' => 'Autorisations sur les objets [@nb@ objets]', # NEW
-	'autorisations_titre2' => 'Autorisations sur les objets [@nb@ actions]', # NEW
-	'autorisations_titre3' => 'Autorisations diverses [@nb@ items]', # NEW
 
 	// B
 	'balise_set:description' => 'Na zjednodušenie prvkov kódu, ako <code>#SET{x,#GET{x}|a_filter}</code>, tento nástroj ponúka tieto skratky: <code>#SET_UN_FILTRE{x}.</code> Filter, ktorý sa použil na premennú sa preto prenáša v názve tagu.
@@ -239,7 +214,6 @@ _ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».
 
 @puce@ {{External requests.}} The Penknife checks regularly for new versions of the plugin and shows available updates on its configuration page. If the external requests involved do not work from your server, check this box to turn this off.[[%distant_off%]][[->%distant_outils_off%]]', # MODIF
 	'cs_comportement:nom' => 'Správanie sa modulu Vreckový nožík',
-	'cs_comportement_ko' => '{{Note :}} ce paramètre requiert un filtre de gravité réglé à plus de @gr2@ au lieu de @gr1@ actuellement.', # NEW
 	'cs_distant_off' => 'Checks of remote versions',
 	'cs_distant_outils_off' => 'Nástroje modulu Vreckový nožík so vzdialenými súbormiVypočuť',
 	'cs_log_couteau_suisse' => 'Detailed logs of the Penknife',
@@ -351,7 +325,6 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 	'erreur:version' => 'Tento nástroj je v tejto verzii SPIPU nedostupný.',
 	'erreur_groupe' => 'Varovanie: skupina "@groupe@" nebola definovaná!',
 	'erreur_mot' => 'Varovanie: Kľúčové slovo "@mot@" nebolo definované!',
-	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Expanded',
 
 	// F
@@ -359,9 +332,6 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 
 Pozor: Niektoré nástroje modulu Vreckový nožík si vyžadujú, aby bol {jQuery} nainštalovaný.',
 	'f_jQuery:nom' => 'Deactivate jQuery',
-	'fichiers_detectes' => 'Fichiers détectés :', # NEW
-	'fichiers_introuvables' => 'Fichiers introuvables', # NEW
-	'fichiers_vider' => 'Supprimer les fichiers sélectionnés', # NEW
 	'filets_sep:aide' => 'Oddeľovacie čiary: <b>__i__</b> alebo <b>i</b> je číslo.<br />Iné dostupné čiary: @liste@',
 	'filets_sep:description' => 'Vloží oddeľujúce čiary do hocijakého textu v SPIPe, čo sa dá prispôsobiť v súbore so štýlom.
 _ Syntax je: "__code__", ke "code" je buď identifikačné číslo (od 0 do 7) čiary, ktorú chcete vložiť a ktorá je prepojená s príslušným štýlom, alebo názov obrázka v priečinku plugins/couteau_suisse/img/filets.', # MODIF
@@ -402,8 +372,6 @@ Takto sa multibloky vždy zobrazia v jazyku podľa požiadavky návštevníka.'
 	'glossaire_inverser' => 'Navrhnutá oprava: prehoďte poradie kľúčových slov v databáze.',
 	'glossaire_js' => 'Riešenie JavaScriptom',
 	'glossaire_ok' => '@nb@ skontrolovaných slov. Zdá sa, že všetky sú v poriadku.',
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
-	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Automaticky nahrádza rovné úvodzovky (") okrúhlymi, pričom používa správne úvodzovky pre aktuálny jazyk. Nahradenie nemení text uložený v databáze, ale iba jeho zobrazenie na obrazovke.',
 	'guillemets:nom' => 'Okrúhle opačné bodky',
 
@@ -467,7 +435,6 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:arret_optimisation' => 'Stop SPIP from emptying the wastebin automatically:',
 	'label:auteur_forum_nom' => 'The visitor must specify:',
 	'label:auto_sommaire' => 'Systematic creation of a summary:',
-	'label:autorisations_alias' => 'Vos alias :', # NEW
 	'label:balise_decoupe' => 'Aktivovať tag #CS_DECOUPE:',
 	'label:balise_sommaire' => 'Aktivovať tag #CS_SOMMAIRE:',
 	'label:bloc_h4' => 'Tag for the titles:',
@@ -491,7 +458,6 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:duree_cache_mutu' => 'Duration of mutualised cache:',
 	'label:enveloppe_mails' => 'Malá obálka pred e-mailovou adresou:',
 	'label:expo_bofbof' => 'Na horný index meniť: <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
-	'label:filtre_gravite' => 'Gravité maximale acceptée :', # NEW
 	'label:forum_lgrmaxi' => 'Value (in characters):',
 	'label:glossaire_groupes' => 'Group(s) used:',
 	'label:glossaire_js' => 'Technique used:',
@@ -522,7 +488,6 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:message_travaux' => 'Vaša správa týkajúca sa údržby:',
 	'label:moderation_admin' => 'Automaticky schvaľovať príspevky od:',
 	'label:mot_masquer' => 'Kľúčové slovo skrývajúce obsah:',
-	'label:nombre_de_logs' => 'Rotation des fichiers :', # NEW
 	'label:ouvre_note' => 'Otváracie a uzatváracie označenia koncových poznámok',
 	'label:ouvre_ref' => 'Otváracie a uzatváracie označenia odkazov na koncové poznámky',
 	'label:paragrapher' => 'Vždy vkladať odseky:',
@@ -578,26 +543,18 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
-	'local_ko' => 'La mise à jour automatique du fichier local «@file@» a échoué. Si l\'outil dysfonctionne, tentez une mise à jour manuelle.', # NEW
 	'log_brut' => 'Údaje zapísané ako neformátovaný text (nie ako HTML)',
 	'log_fileline' => 'Doplňujúce údaje o ladení',
-	'log_gravite' => 'Gravité', # NEW
-	'log_non' => 'Désactiver totalement les logs', # NEW
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'Šifrovanie pošty',
-	'mailcrypt_balise_email' => 'Traiter également la balise #EMAIL de vos squelettes', # NEW
-	'mailcrypt_fonds' => 'Ne pas protéger les fonds suivants :<br /><q4>{Séparez-les par les deux points «~:~» et vérifiez bien que ces fonds restent totalement inaccessibles aux robots du Net.}</q4>', # NEW
-	'maj_actualise_ok' => 'Le plugin « @plugin@ » n\'a pas officiellement changé de version, mais ses fichiers ont quand même été actualisés afin de bénéficier de la dernière révision de code.', # NEW
 	'maj_auto:description' => 'Tento nástroj vám umožňuje ľahko riadiť aktualizáciu rôznych zásuvných modulov, vrátane zistenia čísla revízie v súbore <code>svn.revision</code> a jeho porovnanie s tým, ktoré sa nachádza na stránke <code>zone.spip.org</code>.
 
 Zoznam, ktorý sa nachádza vyššie, vám ponúka možnosť spustiť automatickú aktualizáciu   každého zásuvného modulu SPIPu, ktorý bol predtým nainštalovaný v priečinku <code>plugins/auto/</code>. Ostatné zásuvné moduly z priečinku <code>plugins/</code> alebo <code>extensions/</code> sú uvedené len pre vašu informáciu. Ak sa nenájde vzdialená revízia, skúste zásuvný modul nainštalovať manuálne.
 
 Poznámka: balíky <code>.zip</code> sa nevytvoria nanovo ihneď; môže sa stať, že predtým, ako budete môcť začať s úplnou aktualizáciou zásuvného modulu, ktorý bol nedávno zmenený, budete musieť nejaký čas počkať.',
 	'maj_auto:nom' => 'Automatické aktualizácie',
-	'maj_fichier_ko' => 'Le fichier « @file@ » est introuvable !', # NEW
-	'maj_librairies_ko' => 'Librairies introuvables !', # NEW
 	'masquer:description' => 'Tento nástroj vám umožňuje schovať na verejnej stránke bez akejkoľvek zmeny svojich šablón obsah (rubriky alebo články), ktorého kľúčové slová sú zadané nižšie. Ak schováte rubriku, bude schovaná aj celá jej vetva.[[%mot_masquer%]]
 
 Ak chcete zobraziť skrytý obsah, stačí, keď do cyklov svojej šablóny pridáte kritérium <code>{tout_voir}</code>.
@@ -629,7 +586,6 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_actif_court' => 'aktívny',
 	'outil_activer' => 'Aktivovať',
 	'outil_activer_le' => 'Aktivovať nástroj',
-	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'Už viac nezobrazovať',
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',
@@ -791,14 +747,9 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_cache:nom' => 'SPIP and the cache',
 	'spip_ecran:description' => 'Nastaví šírku obrazovky pre každého v súkromnej zóne. Úzka obrazovka zobrazí dva stĺpce a široká obrazovka zobrazí tri. Predvolené nastavenia nechávajú používateľa, aby sa rozhodol sám, čo sa uloží v cookie prehliadača.[[%spip_ecran%]]', # MODIF
 	'spip_ecran:nom' => 'Šírka obrazovky',
-	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
-[[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
-	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
 	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».', # MODIF
-	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».', # NEW
 	'spip_log:nom' => 'SPIP a jeho protokoly',
 	'stat_auteurs' => 'Autori v štatistikách',
-	'statut' => 'Statut', # NEW
 	'statuts_spip' => 'Iba tento status SPIPU:',
 	'statuts_tous' => 'Všetky stavy',
 	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
@@ -808,19 +759,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'supprimer_numero:nom' => 'Delete the number',
 
 	// T
-	'test_i18n:description' => 'Toutes les chaînes de langue qui ne sont pas internationalisées (donc présentes dans les fichiers lang/*_XX.php) vont apparaitre en rouge.
-_ Utile pour n\'en oublier aucune !
-
-@puce@ Un test : ', # NEW
 	'test_i18n:nom' => 'Chýbajúce preklady',
-	'timezone:description' => 'Depuis PHP 5.1.0, chaque appel à une fonction date/heure génère une alerte de niveau E_NOTICE si le décalage horaire n\'est pas valide et/ou une alerte de niveau E_WARNING si vous utilisez des configurations système, ou la variable d\'environnement TZ.
-_ Depuis PHP 5.4.0, la variable d\'environnement TZ et les informations disponibles via le système d\'exploitation ne sont plus utilisées pour deviner le décalage horaire.
-
-Réglage actuellement détecté : @_CS_TZ@.
-
-@puce@ {{Définissez ci-dessous le décalage horaire à utiliser sur ce site.}}
-[[%timezone%<q3>Liste complète des fuseaux horaires : [->http://www.php.net/manual/fr/timezones.php].</q3>]].', # NEW
-	'timezone:nom' => 'Décalage horaire', # NEW
 	'titre' => 'Vreckový nožík',
 	'titre_parent:description' => 'Within a loop it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objetcs (articles, sections, news items, etc.) it gives the title of the parent section (if it exists).
 
@@ -837,10 +776,6 @@ Dostupné písma: @_CS_FONTS@]][[%i_largeur% px]][[%i_hauteur% pt]][[%i_padding%
 
 Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 	'titres_typo:nom' => 'Medzititulok v obrázku',
-	'titres_typographies:description' => 'Par défaut, les raccourcis typographiques de SPIP <html>({, {{, etc.)</html> ne s\'appliquent pas aux titres d\'objets dans vos squelettes.
-_ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
-
-Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
 	'titres_typographies:nom' => 'Typografické nadpisy',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',

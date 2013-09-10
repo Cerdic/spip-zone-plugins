@@ -1,9 +1,10 @@
 <traduction module="couteauprive" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
-	<langue code="ast" />
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=ca">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=ast" total="583" traduits="322" modifs="76" nouveaux="185" pourcent="55.23">
+	</langue>
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=ca" total="583" traduits="490" modifs="31" nouveaux="62" pourcent="84.05">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=en" total="583" traduits="579" modifs="1" nouveaux="3" pourcent="99.31">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
@@ -12,26 +13,27 @@
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=es" total="583" traduits="305" modifs="72" nouveaux="206" pourcent="52.32">
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr" total="583" traduits="583" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr_tu">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr_tu" total="583" traduits="557" modifs="7" nouveaux="19" pourcent="95.54">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
-	<langue code="gl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=gl">
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=gl" total="583" traduits="344" modifs="76" nouveaux="163" pourcent="59.01">
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=nl">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=nl" total="583" traduits="307" modifs="96" nouveaux="180" pourcent="52.66">
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=sk" total="583" traduits="521" modifs="26" nouveaux="36" pourcent="89.37">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 	</langue>
-	<langue code="tr" />
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=tr" total="583" traduits="320" modifs="74" nouveaux="189" pourcent="54.89">
+	</langue>
 </traduction>

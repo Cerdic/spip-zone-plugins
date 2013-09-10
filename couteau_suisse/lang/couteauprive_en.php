@@ -357,7 +357,6 @@ When making an official update, update the associated remote file (click above o
 	'erreur:version' => 'This tool is unavailable in this version of SPIP.',
 	'erreur_groupe' => 'Warning: the "@groupe@" group has not been defined!',
 	'erreur_mot' => 'Warning: the "@mot@" keyword has not been defined!',
-	'erreur_syntaxe' => 'Erreur de syntaxe : ', # NEW
 	'etendu' => 'Expanded',
 
 	// F
@@ -408,8 +407,6 @@ This means that multi blocks will always displayed in the language requested by 
 	'glossaire_inverser' => 'Correction proposed: reverse the order of the keywords in the database.',
 	'glossaire_js' => 'JavaScript solution',
 	'glossaire_ok' => 'The list of @nb@ keyword(s) checked in the database appears to be correct.',
-	'glossaire_trop_court' => 'Précaution proposée : utiliser des mots de plus de 3 lettres, ou les passer en expression régulière avec délimiteurs du type «,\\bABC\\b,».', # NEW
-	'glossaire_verifier' => 'Correction proposée : vérifier les expressions régulières.', # NEW
 	'guillemets:description' => 'Automatically replaces straight inverted commas (") by curly ones, using the correct ones for the current language. The replacement does not change the text stored in the database, but only the display on the screen.',
 	'guillemets:nom' => 'Curly inverted commas',
 
