@@ -1,10 +1,12 @@
 <traduction module="selecteurgenerique" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/selecteur_generique/trunk/lang/" reference="fr">
-	<langue code="en" />
-	<langue code="es" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=es">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=en" total="1" traduits="1" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=es" total="1" traduits="1" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=sk">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=fr" total="1" traduits="1" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/selecteurgenerique?lang_cible=sk" total="1" traduits="1" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
