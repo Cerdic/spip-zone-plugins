@@ -50,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deces' => 'Defunció',
 	'dep' => 'Dep.',
 	'departement' => 'Departament',
-	'depose_par' => 'Déposé par', # NEW
 	'derniere_modif_le' => 'Darrera modificació el ',
 	'derniere_modification' => 'Darrera actualització de la fitxa',
 	'descriptif_cfg' => '<p>Aquesta zona permet configurar les variables de base del connector.</p><p> Per funcionar correctament aquest connector s\'ha d\'instal·lar en paral·lel amb el connector cfg</p>',

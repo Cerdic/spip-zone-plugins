@@ -50,13 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deces' => 'مرگ',
 	'dep' => 'دپارت.',
 	'departement' => 'دپارتمان',
-	'depose_par' => 'Déposé par', # NEW
 	'derniere_modif_le' => 'آخرين اصلاحيه در ',
 	'derniere_modification' => 'آخرين روزآمدسازي پرونده',
 	'descriptif_cfg' => '<p>اين منطقه براي پيكربندي داده‌هاي تغييرپذير پلاكين است.</p><p> براي خوب كاركردن اين پلاگين بايد همراه با پلاگين سي.اف.جي نصب شود</p>',
 	'detail_fiche' => 'جزئيات پرونده',
 	'document' => 'سندها', # MODIF
-	'documents' => 'Documents', # NEW
 
 	// E
 	'enfant' => 'بچه‌ها',
