@@ -1,22 +1,24 @@
 <traduction module="entravaux" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/en_travaux/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=de">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=de" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=en" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=es" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fa" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="it" />
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=ru">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=fr" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=it" total="11" traduits="7" modifs="0" nouveaux="4" pourcent="63.64">
+	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=ru" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=sk" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
