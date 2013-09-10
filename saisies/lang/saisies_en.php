@@ -55,8 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Display the language',
 	'option_aff_rub_interface_explication' => 'Display only the sections in the user\'s language',
 	'option_aff_rub_interface_label' => 'Multilingual display',
-	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L\'identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l\'affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>.', # NEW
-	'option_afficher_si_label' => 'Affichage conditionnel', # NEW
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
 	'option_autocomplete_defaut' => 'Leave the default',
@@ -72,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_cols_label' => 'Width',
 	'option_datas_explication' => 'You need to specify a choice for each row in the form of "key|label of the choice"', # MODIF
 	'option_datas_label' => 'List of the available choices',
-	'option_datas_sous_groupe_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label" du choix. <br />Vous pouvez indiquer le début d\'un sous-groupe sous la forme "*Titre du sous-groupe". Pour finir un sous-groupe vous pouvez en entamez un autre, ou bien mettre une ligne contenant unique "/*".', # NEW
 	'option_defaut_label' => 'Default value',
 	'option_disable_avec_post_explication' => 'Same as previous option position but still post value in a hidden field.',
 	'option_disable_avec_post_label' => 'Disabled but posted.',

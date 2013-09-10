@@ -55,8 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Mostra la lingua',
 	'option_aff_rub_interface_explication' => 'Mostra unicamente le rubriche della lingua dell\'utente',
 	'option_aff_rub_interface_label' => 'Visualizzazione multilingua',
-	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L\'identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l\'affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>.', # NEW
-	'option_afficher_si_label' => 'Affichage conditionnel', # NEW
 	'option_attention_explication' => 'Un messaggio più importante dei una spiegazione.',
 	'option_attention_label' => 'Avvertimento',
 	'option_autocomplete_defaut' => 'Lascia predefinito',
@@ -72,24 +70,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_cols_label' => 'Larghezza',
 	'option_datas_explication' => 'Indica una scelta per riga con il formato "chiave|Etichetta della scelta"', # MODIF
 	'option_datas_label' => 'Elenco delle scelte possibili',
-	'option_datas_sous_groupe_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label" du choix. <br />Vous pouvez indiquer le début d\'un sous-groupe sous la forme "*Titre du sous-groupe". Pour finir un sous-groupe vous pouvez en entamez un autre, ou bien mettre une ligne contenant unique "/*".', # NEW
 	'option_defaut_label' => 'Valore predefinito',
 	'option_disable_avec_post_explication' => 'Identica all\'opzione precedente ma invia lo stesso il valore in un campo nascosto.',
 	'option_disable_avec_post_label' => 'Disattiva ma invia',
 	'option_disable_explication' => 'Il campo non può ottenere il focus.',
 	'option_disable_label' => 'Disattiva il campo',
-	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
-	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'Se necessario, una frase breve che descrive il campo.',
 	'option_explication_label' => 'Spiegazione',
 	'option_groupe_affichage' => 'Visualizzazione',
 	'option_groupe_description' => 'Descrizione',
 	'option_groupe_utilisation' => 'Utilizzazione',
 	'option_groupe_validation' => 'Validazione',
-	'option_heure_pas_explication' => 'Lorsque vous utilisez l’horaire, un menu s’affiche pour aider à saisir heures et minutes. Vous pouvez ici choisir l’intervalle de temps entre chaque choix (par défaut 30min).', # NEW
-	'option_heure_pas_label' => 'Intervalle des minutes dans le menu d’aide à la saisie', # NEW
-	'option_horaire_label' => 'Horaire', # NEW
-	'option_horaire_label_case' => 'Permettre de saisie aussi l’horaire', # NEW
 	'option_info_obligatoire_explication' => 'Puoi modificare l\'indicazione predefinita per i campi obbligatori : <i>[Obbligatorio]</i>.',
 	'option_info_obligatoire_label' => 'Indicazione obbligatorio',
 	'option_inserer_barre_choix_edition' => 'barra del testo completa',
@@ -171,7 +162,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Tutti gli utenti (anche non registrati)',
-	'tout_selectionner' => 'Tout sélectionner', # NEW
 
 	// V
 	'vue_sans_reponse' => '<i>Senza risposta</i>',

@@ -13,36 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_docs_rubrique' => 'مرور بخش',
 	'bouton_parcourir_mediatheque' => 'مرور كتابخانه چندرسانه‌اي',
 
-	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
-	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
-
-	// E
-	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
-
-	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
-
 	// L
 	'label_annee' => 'سال',
 	'label_jour' => 'روز',
@@ -55,15 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'نمايش زبان',
 	'option_aff_rub_interface_explication' => 'نمايش بخش‌ها فقط به زبان كاربر',
 	'option_aff_rub_interface_label' => 'نمايش چندزبانه',
-	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L\'identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l\'affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>.', # NEW
-	'option_afficher_si_label' => 'Affichage conditionnel', # NEW
 	'option_attention_explication' => 'پيامي مهم‌تر از توضيح.',
 	'option_attention_label' => 'هشدار',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
-	'option_autocomplete_off' => 'Désactiver', # NEW
-	'option_autocomplete_on' => 'Activer', # NEW
 	'option_cacher_option_intro_label' => 'پنهان‌سازي نخستين انتخاب خالي ',
 	'option_choix_destinataires_explication' => 'يك يا چند نويسنده كه كاربر مي‌تواند از ميانشان انتخاب كند. اگر كسي انتخاب نشود،‌ نويسنده‌اي كه سايت را نصب كرده انتخاب خواهد شد.<NEW>Un ou plusieurs auteurs parmis lesquels l\'utilisateur pourra faire son choix. Si rien n\'est sélectionné, c\'est l\'auteur qui a installé le site qui sera choisi.',
 	'option_choix_destinataires_label' => '<دريافت‌ كنندگان محتمل',
@@ -72,24 +35,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_cols_label' => 'پهنا',
 	'option_datas_explication' => 'لازم است براي هر رديف يك گزينه در قالب «گزينه‌ي كليد|برچسبِ» انتخاب كنيد.', # MODIF
 	'option_datas_label' => 'فهرست گزينه‌هاي ممكن ',
-	'option_datas_sous_groupe_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label" du choix. <br />Vous pouvez indiquer le début d\'un sous-groupe sous la forme "*Titre du sous-groupe". Pour finir un sous-groupe vous pouvez en entamez un autre, ou bien mettre une ligne contenant unique "/*".', # NEW
 	'option_defaut_label' => 'مقدار پيش‌ گزيده',
 	'option_disable_avec_post_explication' => 'همانند وضعيت گزينه‌ي قبلي اما هنوز مقدار در ميدان مخفي پست شود.',
 	'option_disable_avec_post_label' => 'غيرفعال اما پست شده',
 	'option_disable_explication' => 'ميدان نمي‌‌تواند تمركز بيشتري بگيرد.',
 	'option_disable_label' => 'غيرفعال سازي ميدن',
-	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
-	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'در هنگام نياز، يك عبارت كوتاه موضوع ميدان را بيان كند.',
 	'option_explication_label' => 'توضيح',
 	'option_groupe_affichage' => 'نمايش ',
 	'option_groupe_description' => 'توصيف',
 	'option_groupe_utilisation' => 'كاربرد',
 	'option_groupe_validation' => 'ارزش‌گذاري',
-	'option_heure_pas_explication' => 'Lorsque vous utilisez l’horaire, un menu s’affiche pour aider à saisir heures et minutes. Vous pouvez ici choisir l’intervalle de temps entre chaque choix (par défaut 30min).', # NEW
-	'option_heure_pas_label' => 'Intervalle des minutes dans le menu d’aide à la saisie', # NEW
-	'option_horaire_label' => 'Horaire', # NEW
-	'option_horaire_label_case' => 'Permettre de saisie aussi l’horaire', # NEW
 	'option_info_obligatoire_explication' => 'مي‌توانيد كاربرد پيش‌ گزيده‌ي الزامي را اصلاح كنيد: <i>[Obligatoire]</i>.',
 	'option_info_obligatoire_label' => 'نشان الزام',
 	'option_inserer_barre_choix_edition' => 'ميل‌ابزار ويرايش كامل ',
@@ -107,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'اسم ميدان',
 	'option_obligatoire_label' => 'ميدان الزامي',
 	'option_option_intro_label' => 'برچسب نخستين گزينه‌ي خالي ',
-	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'گسترشي ',
 	'option_pliable_label_case' => 'گروه‌ ميدان‌هاي چين خور.',
 	'option_plie_label' => 'چين خورده',
@@ -129,8 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'عادي',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
-	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'فعال يا غيرفعال‌سازي يك گزينه‌ي مشخص.',
 	'saisie_case_titre' => 'تك چك‌ باكش',
 	'saisie_checkbox_explication' => 'اجازه‌ي گزينش چك‌ باكس چندگزينه‌اي.',
@@ -171,7 +124,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'تمام بازديدكنندگان (حتي ثبت ‌نام ناشدگان)',
-	'tout_selectionner' => 'Tout sélectionner', # NEW
 
 	// V
 	'vue_sans_reponse' => '<i>بي‌ پاسخ</i>',

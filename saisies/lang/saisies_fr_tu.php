@@ -13,36 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique',
 	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque',
 
-	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est différent du formulaire initial. Vous avez la possibilité de le réinitialiser à son état avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera placé celui-ci.', # NEW
-	'construire_position_fin_formulaire' => 'À la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => 'À la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'Réinitialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. Êtes-vous sûr de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de vérification à effectuer', # NEW
-
-	// E
-	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier vos saisies', # NEW
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
-
-	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
-
 	// L
 	'label_annee' => 'Année',
 	'label_jour' => 'Jour',
@@ -55,15 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_langue_label' => 'Afficher la langue',
 	'option_aff_rub_interface_explication' => 'Afficher uniquement les rubriques de la langue de l\'utilisateur',
 	'option_aff_rub_interface_label' => 'Affichage multilingue',
-	'option_afficher_si_explication' => 'Indiquez les conditions pour afficher le champ en fonction de la valeur des autres champs. L\'identifiant des autres champs doit être mis entre <code>@</code>. <br />Exemple <code>@selection_1@=="Toto"</code> conditionne l\'affichage du champ à ce que le champ <code>selection_1</code> ait pour valeur <code>Toto</code>.', # NEW
-	'option_afficher_si_label' => 'Affichage conditionnel', # NEW
 	'option_attention_explication' => 'Un message plus important que l\'explication.',
 	'option_attention_label' => 'Avertissement',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
-	'option_autocomplete_off' => 'Désactiver', # NEW
-	'option_autocomplete_on' => 'Activer', # NEW
 	'option_cacher_option_intro_label' => 'Cacher le premier choix vide',
 	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l\'utilisateur pourra faire son choix. Si rien n\'est sélectionné, c\'est l\'auteur qui a installé le site qui sera choisi.',
 	'option_choix_destinataires_label' => 'Destinataires possibles',
@@ -72,24 +35,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_cols_label' => 'Largeur',
 	'option_datas_explication' => 'Tu dois indiquez un choix par ligne sous la forme "cle|Label du choix"', # MODIF
 	'option_datas_label' => 'Liste des choix possibles',
-	'option_datas_sous_groupe_explication' => 'Vous devez indiquez un choix par ligne sous la forme "cle|Label" du choix. <br />Vous pouvez indiquer le début d\'un sous-groupe sous la forme "*Titre du sous-groupe". Pour finir un sous-groupe vous pouvez en entamez un autre, ou bien mettre une ligne contenant unique "/*".', # NEW
 	'option_defaut_label' => 'Valeur par défaut',
 	'option_disable_avec_post_explication' => 'Identique à l\'option précédente mais poste quand même la valeur dans un champ caché.',
 	'option_disable_avec_post_label' => 'Désactiver mais poster',
 	'option_disable_explication' => 'Le champ ne peut plus obtenir le focus.',
 	'option_disable_label' => 'Désactiver le champ',
-	'option_erreur_obligatoire_explication' => 'Vous pouvez personnaliser le message d\'erreur affiché pour indiquer l\'obligation (sinon laisser vide).', # NEW
-	'option_erreur_obligatoire_label' => 'Message d\'obligation', # NEW
 	'option_explication_explication' => 'Si besoin, une courte phrase décrivant l\'objet du champ.',
 	'option_explication_label' => 'Explication',
 	'option_groupe_affichage' => 'Affichage',
 	'option_groupe_description' => 'Description',
 	'option_groupe_utilisation' => 'Utilisation',
 	'option_groupe_validation' => 'Validation',
-	'option_heure_pas_explication' => 'Lorsque vous utilisez l’horaire, un menu s’affiche pour aider à saisir heures et minutes. Vous pouvez ici choisir l’intervalle de temps entre chaque choix (par défaut 30min).', # NEW
-	'option_heure_pas_label' => 'Intervalle des minutes dans le menu d’aide à la saisie', # NEW
-	'option_horaire_label' => 'Horaire', # NEW
-	'option_horaire_label_case' => 'Permettre de saisie aussi l’horaire', # NEW
 	'option_info_obligatoire_explication' => 'Tu peux modifier l\'indication d\'obligation par défaut : <i>[Obligatoire]</i>.',
 	'option_info_obligatoire_label' => 'Indication d\'obligation',
 	'option_inserer_barre_choix_edition' => 'barre d\'édition complète',
@@ -107,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_label' => 'Nom du champ',
 	'option_obligatoire_label' => 'Champ obligatoire',
 	'option_option_intro_label' => 'Label du premier choix vide',
-	'option_option_statut_label' => 'Afficher les statuts', # NEW
 	'option_pliable_label' => 'Pliable',
 	'option_pliable_label_case' => 'Le groupe de champs pourra être replié.',
 	'option_plie_label' => 'Déjà plié',
@@ -129,8 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_text' => 'Normal',
 
 	// S
-	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs', # NEW
-	'saisie_auteurs_titre' => 'Auteurs', # NEW
 	'saisie_case_explication' => 'Permet d\'activer ou de désactiver quelque chose.',
 	'saisie_case_titre' => 'Case unique',
 	'saisie_checkbox_explication' => 'Permet de choisir plusieurs options avec des cases.',
@@ -171,7 +124,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Tous les visiteurs (même non enregistrés)',
-	'tout_selectionner' => 'Tout sélectionner', # NEW
 
 	// V
 	'vue_sans_reponse' => '<i>Sans réponse</i>',
