@@ -65,41 +65,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_merchant_id_explication' => 'Numéro d\'identification de votre compte marchand Google', # MODIF
 
 	// H
-	'header_name' => 'Nom', # NEW
-	'header_price' => 'Prix', # NEW
 	'header_quantity' => 'Quantité', # MODIF
-	'header_total' => 'Total', # NEW
 
 	// O
 	'ok_url' => 'URL achat réussi', # MODIF
 	'ok_url_explication' => 'URL où sera redirigé l\'acheteur en cas de transaction réussie.', # MODIF
 	'other_parameters' => 'Autres paramètres', # MODIF
 
-	// P
-	'paypal_account' => 'Compte PayPal', # NEW
-	'paypal_account_explication' => 'Si vous avez un compte PayPal, enregistrez l\'email de votre compte.', # NEW
-	'pending_url' => 'URL achat en suspend', # NEW
-	'pending_url_explication' => 'URL de redirection pour l\'acheteur en cas de transaction suspendue.', # NEW
-
 	// S
 	'shipping_cost' => 'Coût d\'envoi', # MODIF
-	'shipping_flat_rate' => 'Taxe fixe de l\'envoi', # NEW
 	'shipping_flat_rate_explication' => 'Ajouter une taxe fixe à l\'ordre complet', # MODIF
 	'shipping_quantity_rate' => 'Coût de l\'envoi par quantité', # MODIF
-	'shipping_quantity_rate_explication' => 'Ajouter un montant fixe pour chaque item', # NEW
 	'shipping_total_rate' => 'Coût d\'envoi en pourcentage de la somme totale', # MODIF
 	'shipping_total_rate_explication' => 'Ajouter un coût d\'envoi proportionnel au coût de la commande', # MODIF
-	'subtotal' => 'Sous-total', # NEW
 
 	// T
-	'tax_and_shipping' => 'Frais et coût d\'envoi', # MODIF
-	'tax_cost' => 'Frais', # NEW
-	'tax_rate' => 'Taxe imposable', # NEW
-	'tax_rate_explication' => 'Taux imposable. Exemple: 0.19 de frais de TVA', # NEW
-	'title' => 'SimpleCart', # NEW
-
-	// Y
-	'your_cart' => 'Votre panier' # NEW
+	'tax_and_shipping' => 'Frais et coût d\'envoi' # MODIF
 );
 
 ?>
