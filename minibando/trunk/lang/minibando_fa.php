@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mode_debug' => 'حالت خطاياب',
 	'mode_inclure' => 'حالت گنجاندن',
 	'mode_profile' => 'حالت پروفايل',
-	'mode_traduction' => 'Mode traduction', # NEW
 
 	// T
 	'titre_debug' => 'خطازدايي',
