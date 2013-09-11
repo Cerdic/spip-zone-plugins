@@ -38,7 +38,7 @@
 #ENV*{inserer_debut}
 <div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
-<!--
+/*<![CDATA[*/
 var form_map,
 	annuler_geocoder = 0;
 [(#ENV{recherche}|!={non}|oui|et{#CONFIG{gis/geocoder}|oui})
@@ -339,7 +339,7 @@ var geocoder;]
 	});
 	
 })(jQuery);
--->
+/*]]>*/
 </script>
 #ENV*{inserer_fin}
 </li>
