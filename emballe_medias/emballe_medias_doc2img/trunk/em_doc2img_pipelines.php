@@ -34,7 +34,9 @@ function em_doc2img_em_post_upload_medias($flux){
 				sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
 			}
 		}
-		if($contenu && ($flux['args']['objet'] == 'article') && intval($flux['args']['id_objet'])){
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
+		if((lire_config('emballe_medias/fichiers/remplir_texte_article', 'on') != 'off') && $contenu && ($flux['args']['objet'] == 'article') && intval($flux['args']['id_objet'])){
 			$texte = sql_getfetsel('texte','spip_articles','id_article='.intval($flux['args']['id_objet']));
 			if(strlen(trim($texte)) == 0){
 				spip_log('on va ajouter le contenu du coup','fulltext');
