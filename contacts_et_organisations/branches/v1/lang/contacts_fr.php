@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delier_organisation' => 'Désassocier',
 
 	// E
-    'erreur_aucun_contact_trouve' => "Acun contact trouvé avec cet identifiant",
+    'erreur_aucun_contact_trouve' => "Aucun contact trouvé avec cet identifiant",
     'erreur_liaison_contact_auteur' => "Attention, aucune liaison contact/auteur trouvée dans la table contacts_liens.",
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
 	'est_une_organisation' => 'Cet auteur est défini comme étant une organisation.',
