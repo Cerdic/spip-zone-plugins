@@ -4,7 +4,7 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form method="post" action="#ENV{action}">
+<form method="post" action="#ENV{action}" autocomplete="off">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
@@ -112,6 +112,15 @@
 				cols=50,
 				label=<:emballe_medias:label_texte_upload:>,
 				class=multilang})]
+
+			[(#PLUGIN{em_doc2img}|et{#PLUGIN{fulltext}|oui})
+				[(#SAISIE{oui_non,remplir_texte_article,
+					defaut=on,
+					valeur_non=off,
+					label=<:emballe_medias:label_remplir_texte_article:>,
+					explication=<:emballe_medias:explication_remplir_texte_article:>})]
+			]
+			
 		</ul>
 		<input type="hidden" name="_meta_casier" value="emballe_medias/fichiers" />
 		<p class="boutons">
