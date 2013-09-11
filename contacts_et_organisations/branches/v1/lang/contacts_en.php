@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'There is no contact !',
 	'aucune_organisation' => 'There is no organization',
+	'auteur_lie' => 'Linked author ID',
+	'auteur_associe_est_a_la_poubelle' => 'The linked author is in the dustbin ! This author will be deleted in a few days.',
+	'auteur_associe_inexistant' => 'The linked author does not exist ! The author should have been deleted.',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -49,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delier_cet_auteur' => 'Unlink',
 
 	// E
+	'erreur_aucun_contact_trouve' => "No contact fund with this idea",
+	'erreur_liaison_contact_auteur' => "Warning, no contact/author link found in contacts_liens table.",
 	'est_un_contact' => 'This author is set as a contact.',
 	'est_une_organisation' => 'This author is set as an organization.',
 	'explication_activite' => 'Activity of the organization : NGO, education, edition...',
