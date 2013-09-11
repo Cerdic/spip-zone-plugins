@@ -1,14 +1,25 @@
 <BOUCLE_logo_contact(CONTACTS){id_contact}>
-<BOUCLE_liens(contacts_liens){id_contact}{objet=auteur}>
-<BOUCLE_auteur(AUTEURS){id_contact}>
-	[(#LOGO_AUTEUR
-		|sinon{#_logo_contact:LOGO_CONTACT}
-		|sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
-		|image_reduire{20,26})]
-</BOUCLE_auteur>
-</BOUCLE_liens>
-	[(#LOGO_CONTACT
-		|sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
-		|image_reduire{20,26})]
-<//B_liens>
+    <BOUCLE_liens(contacts_liens){id_contact}{objet=auteur}>
+        <BOUCLE_auteur(AUTEURS){id_contact}>
+        [(#LOGO_AUTEUR
+            |sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
+            |image_reduire{20,26}
+        )]
+        </BOUCLE_auteur>
+    </BOUCLE_liens>
+        [(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_liaison_contact_auteur:>})]
+        <BOUCLE_auteur_direct(AUTEURS){id_auteur}>
+            [(#LOGO_AUTEUR
+            |sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
+            |image_reduire{20,26}
+            )]
+        </BOUCLE_auteur_direct>
+            [(#LOGO_CONTACT
+                |sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
+                |image_reduire{20,26}
+            )]
+        <//B_auteur_direct>
+    <//B_liens>
 </BOUCLE_logo_contact>
+[(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_aucun_contact_trouve:>})]
+<//B_logo_contact>
