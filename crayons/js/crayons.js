@@ -35,10 +35,10 @@ $.prototype.cfgCrayons.prototype.iconclick = function(c, type) {
 	// comme article-texte-10 pour le texte de l'article 10
 	// ou meta-valeur-meta
 	var cray =
-			   c.match(/\b\w+-(\w+)-\d(?:-\w+)+\b/)   // numeros_lien-type-2-3-article (table-champ-cles)
-			|| c.match(/\b\w+-(\w+)-\d+\b/)           // article-texte-10 (inclu dans le precedent, mais bon)
-	        || c.match(/\b\meta-valeur-(\w+)\b/)      // meta-valeur-xx
-	        ;
+				c.match(/\b\w+-(\w+)-\d(?:-\w+)+\b/)   // numeros_lien-type-2-3-article (table-champ-cles)
+				|| c.match(/\b\w+-(\w+)-\d+\b/)           // article-texte-10 (inclu dans le precedent, mais bon)
+				|| c.match(/\b\meta-valeur-(\w+)\b/)      // meta-valeur-xx
+				;
 
 	var boite = !cray ? '' : this.mkimg(type, ' (' + cray[1] + ')');
 
@@ -216,6 +216,7 @@ $.fn.hidecrayon = function() {
 
 // active un crayon qui vient d'etre charge
 $.fn.activatecrayon = function(percent) {
+	var focus = false;
 	this
 	.crayon()
 	.click(function(e){
@@ -368,19 +369,24 @@ $.fn.activatecrayon = function(percent) {
 				e.cancelBubble = true;
 			})
 			// focus par defaut (crayons sans textarea/text, mais uniquement menus ou fichiers)
-			.find('input:visible:first').focus().end()
+			.find('input:visible:not(:disabled):not([readonly]):first').focus().end()
 			.find("textarea.crayon-active,input.crayon-active[type=text]")
 				.each(function(n){
-					// focus pour commencer a taper son texte directement dans le champ
+					// focus pour commencer a taper son texte directement dans le champ 
+					// sur le premier textarea non readonly ni disabled
 					// on essaie de positionner la selection (la saisie) au niveau du clic
 					// ne pas le faire sur un input de [type=file]
 					if (n==0) {
-						this.focus();
+						if(!$(this).is(':disabled, [readonly]')){
+							this.focus();
+							focus = true;
+						}
 						// premiere approximation, en fonction de la hauteur du clic
 						var position = parseInt(percent * this.textLength);
 						this.selectionStart=position;
 						this.selectionEnd=position;
-					}
+					}else if(!focus && !$(this).is(':disabled, [readonly]'))
+						this.focus();
 				})
 			.end()
 			.keydown(function(e){
