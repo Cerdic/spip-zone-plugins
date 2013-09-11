@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'M\'ajouter les droits d\'accès à cette zone',
 	'aucune_zone' => 'Aucune zone',
+	'auteur' => 'auteur',
 	'auteurs' => 'auteurs',
 
 	// B
@@ -65,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Publique',
 
 	// R
+	'rubrique' => 'rubrique',
 	'rubriques' => 'rubriques',
 	'rubriques_zones_acces' => 'Rubriques de la zone',
 

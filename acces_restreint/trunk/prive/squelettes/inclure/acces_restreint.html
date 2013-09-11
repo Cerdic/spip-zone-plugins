@@ -17,8 +17,15 @@
 <ul class='liste-items zones'>
 <BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}{recherche ?}>
 <li class='item zone[ (#ID_ZONE|accesrestreint_acces_zone|?{ok,interdit})][ (#EXPOSE)]'><h3>#TITRE</h3>
-<span class='contenu'>[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count) <:accesrestreint:rubriques:>, ]
-[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count) <:accesrestreint:auteurs:>]
+<span class='contenu'>
+[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count) 
+	[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count|>{1}|non)<:accesrestreint:rubrique:>]
+	[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count|>{1}|oui)<:accesrestreint:rubriques:>]
+, ]
+[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count) 
+	[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count|>{1}|non)<:accesrestreint:auteur:>]
+	[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count|>{1}|oui)<:accesrestreint:auteurs:>]
+]
 </span>
 <span class='descriptif'>#DESCRIPTIF</span>
 <span class='quoi'>[(#PUBLIQUE|=={oui}|oui)<:accesrestreint:publique:>[, (#PRIVEE|=={oui}|oui)]][ (#PRIVEE|=={oui}|oui)<:accesrestreint:privee:>]</span>
