@@ -117,6 +117,7 @@
 				[(#SAISIE{oui_non,remplir_texte_article,
 					defaut=on,
 					valeur_non=off,
+					valeur_forcee=[(#ENV{remplir_texte_article}|in_array{#LISTE{on,off}}|?{'',on})],
 					label=<:emballe_medias:label_remplir_texte_article:>,
 					explication=<:emballe_medias:explication_remplir_texte_article:>})]
 			]
