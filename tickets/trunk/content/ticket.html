@@ -1,4 +1,4 @@
-<BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}>
+<BOUCLE_ticket_contenu(TICKETS){si #PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}|oui}{id_ticket}{tout}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
 <BOUCLE_si_ouvert(TICKETS){id_ticket}>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)

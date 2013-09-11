@@ -1,7 +1,4 @@
-[(#PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}|oui})
-	[(#SET{affichage_autorise, on})]
-]
-<BOUCLE_si_afficher_public(CONDITION){si #GET{affichage_autorise, off}|=={on}|oui}>
+<BOUCLE_si_afficher_public(CONDITION){si #PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}|oui}>
 [(#SET{texte,[(#ENV{id_ticket}|intval|?{<:tickets:icone_modifier_ticket:>, <:tickets:nouveau_ticket:>})]})]
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a><span class="sep"> &gt; </span><strong class="on">#GET{texte}</strong></div>
 

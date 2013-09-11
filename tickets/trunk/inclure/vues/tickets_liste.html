@@ -24,7 +24,7 @@
 			recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="sticked",
 			titre=<:tickets:tickets_sticked:>}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 	</div>[(#SET{affiche,oui})]]
 
@@ -34,7 +34,7 @@
 				recherche,jalon,composant,version,navigateur,projet,id_auteur,tri_nom="tickets_assigne",
 				titre=<:tickets:vos_tickets_assignes:>}|trim)
 			<div class="actions rss">
-				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 			</div>
 		</div>[(#SET{affiche,oui})]]
 	]
@@ -44,7 +44,7 @@
 			recherche,jalon,composant,version,navigateur,projet,tri_nom="tickets_en_cours",
 			titre=<:tickets:vos_tickets_en_cours:>}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur,#SESSION{id_auteur}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 		</div>[(#SET{affiche,oui})]]
 	]
@@ -56,7 +56,7 @@
 	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},tri_nom="tickets_autres",
 		titre=#GET{titre}}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur_non,#SESSION{id_auteur}}|parametre_url{id_assigne_non,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur_non,#SESSION{id_auteur}}|parametre_url{id_assigne_non,#SESSION{id_auteur}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 	</div>]
 	
@@ -64,7 +64,7 @@
 	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{resolu,ferme},tri_nom="tickets_traites",
 		titre=<:tickets:tickets_traites:>}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 	</div>]
 
@@ -73,7 +73,7 @@
 	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},tri_nom="tickets_auteur",
 		titre=<:tickets:tous_vos_tickets:>}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 	</div>]]
 	
@@ -83,7 +83,7 @@
 			titre=<:tickets:tickets_derniers_commentaires:>}|trim)
 		</div>
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets_comments}|parametre_url{lang,#ENV{lang}})]"><:tickets:suivre_tickets_comments_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets_comments}|parametre_url{lang,#ENV{lang}})]" class="i_rss"><:tickets:suivre_tickets_comments_rss:></a>
 	</div>]
 ]
 
@@ -92,7 +92,7 @@
 	[<div class="ajax">
 	(#INCLURE{fond=inclure/liste_tickets,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statuts=#GET{statut},titre=<:tickets:tickets_tries:>,env,ajax}|trim)
 		<div class="actions rss">
-			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]"><:tickets:suivre_tickets_rss:></a>
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]" class="i_rss"><:tickets:suivre_tickets_rss:></a>
 		</div>
 	</div>]]
 	
