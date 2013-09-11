@@ -5,6 +5,9 @@
 	<BOUCLE_module(TRADLANG_MODULES){module}>[(#SET{lang_mere,#LANG_MERE})]
 	<div class="actions"><a href="[(#URL_TRADLANG_MODULE{#ID_TRADLANG_MODULE}|parametre_url{lang_cible,#_tradlang:LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="btn icon-back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a></div>
 	</BOUCLE_module>
+	<BOUCLE_tradlang_orig(TRADLANGS){module}{id}{lang=#GET{lang_mere}}>
+	#SET{id_tradlang_orig,#ID_TRADLANG}
+	</BOUCLE_tradlang_orig>
 	<div class="cartouche">
 		[(#ENV{lang_orig}|non)[(#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue})]]
 		[(#ENV{lang_orig}|oui)[(#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue})]]
@@ -77,20 +80,23 @@
 	</div>
 	</B_recherche_tradlang>
 	</BOUCLE_si_pas_modif>
+	[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
+	[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
 	<div>
 		<h2 class="h2">
 			<:tradlang:titre_modifications_chaines:>
 		</h2>
 		
-		[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
-		[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
-			#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
-			[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
-		]
-	</div>
+		<h3><:tradlang:titre_modifications_chaine_traduite:></h3>
+		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+		<h3><:tradlang:titre_modifications_chaine_originale:></h3>
+		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#GET{id_tradlang_orig},env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+	</div>]
 	<div>
 		[(#REM) Forum de la chaine de langue ]
-		[(#INCLURE{fond=inclure/forum,objet=tradlang,id_objet=#ID_TRADLANG,repondre_url=oui}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
+		[(#INCLURE{fond=inclure/forum,objet=tradlang,titre_liste_commentaires=<:tradlang:titre_commentaires_chaines:>,repondre_titre=<:tradlang:titre_commenter_chaine:>,id_objet=#ID_TRADLANG,repondre_url=oui}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
 		[(#PLUGIN{comments}|non)
 		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}]
 	</div>

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trad-lang_spip2/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_choisir_langue' => 'Dans une langue spécifique',
 	'info_contributeurs' => 'Contributeurs',
 	'info_edition_par_lot' => 'Édition par lot :',
-	'info_export' => 'Export :',
+	'info_export' => 'Exports :',
 	'info_filtrer_status' => 'Filtrer par statut :',
 	'info_langue_mere' => '(langue mère)',
 	'info_langues_non_preferees' => 'Autres langues :',
@@ -341,11 +341,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_changer_langue_selection' => 'Changer la langue sélectionnée',
 	'titre_changer_langues_affichees' => 'Changer les langues affichées',
 	'titre_commentaires_chaines' => 'Commentaires au sujet de cette chaine',
+	'titre_commenter_chaine' => 'Commenter cette chaîne',
 	'titre_form_import_step_1' => 'Etape 1 : envoyez votre fichier',
 	'titre_form_import_step_2' => 'Etape 2 : vérification de vos modifications',
 	'titre_inscription' => 'Inscription',
 	'titre_logo_tradlang_module' => 'Logo du module',
-	'titre_modifications_chaines' => 'Les dernières modifications de cette chaine',
+	'titre_modifications_chaine_traduite' => 'De cette chaine',
+	'titre_modifications_chaine_originale' => 'De la chaîne originale',
+	'titre_modifications_chaines' => 'Les dernières modifications',
 	'titre_modifier' => 'Modifier',
 	'titre_page_auteurs' => 'Liste des contributeurs',
 	'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
