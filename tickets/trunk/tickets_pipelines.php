@@ -154,7 +154,7 @@ function tickets_recuperer_fond($flux){
 	if (($flux['args']['fond'] == 'formulaires/forum')
 		&& is_numeric($flux['args']['contexte']['id_ticket'])){
 		$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($flux['args']['contexte']['id_ticket']));
-		foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+		foreach(objet_info('ticket','champs_editables') as $champ){
 			if(_request($champ))
 				$infos_ticket[$champ] = _request($champ);
 		}
@@ -179,7 +179,7 @@ function tickets_recuperer_fond($flux){
 function tickets_formulaire_verifier($flux){
 	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][0]=='ticket') && isset($flux['data']['previsu'])) {
 		$flux['data']['previsu'] .= '<input type="hidden" name="ticket_statut" value="'._request('ticket_statut').'" />';
-		foreach(array('projet','composant','version','severite','navigateur','tracker','id_assigne','exemple') as $champ){
+		foreach(objet_info('ticket','champs_editables') as $champ){
 			if(_request($champ))
 				$flux['data']['previsu'] .= '<input type="hidden" name="'.$champ.'" value="'._request($champ).'" />';
 		}
