@@ -7,65 +7,67 @@
 	 * error_tradlang_statut_X boolean : une erreur sur l'oubli de changement de statut (pas importante)
 	 * error_tradlang_statut_X boolean : une erreur sur l'oubli de changement de statut (très importante)
 	 */
-	var error_tradlang_statut_#ID_TRADLANG_MODULE = false;
-	var error_tradlang_variables_#ID_TRADLANG_MODULE = false;
-	var tradlang_errors_statut_#ID_TRADLANG_MODULE = [];
-	var tradlang_errors_variables_#ID_TRADLANG_MODULE = [];
+	var error_tradlang_statut_#ID_TRADLANG_MODULE = false,
+		error_tradlang_variables_#ID_TRADLANG_MODULE = false,
+		tradlang_errors_statut_#ID_TRADLANG_MODULE = [],
+		tradlang_errors_variables_#ID_TRADLANG_MODULE = [];
 	/**
 	 * Les messages d'erreur ajoutés au li parent
 	 */
-	var erreur_statut = '<:tradlang:erreur_statut_js|texte_script:>';
-	var erreur_variable = '<:tradlang:erreur_variable_manquante_js|texte_script:>';
+	var erreur_statut = '<:tradlang:erreur_statut_js|texte_script:>',
+		erreur_variable = '<:tradlang:erreur_variable_manquante_js|texte_script:>';
 </script>
 
 <B_nb_tradlangs>
-<h4>[(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:titre_tradlang_non_traduit,tradlang:titre_tradlang_non_traduits})]</h4>
+<h3 class="h3">[(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:titre_tradlang_non_traduit,tradlang:titre_tradlang_non_traduits})]</h3>
 [(#GRAND_TOTAL|>{30}|oui)
 #BOITE_OUVRIR{'',notice}
 	<p><:tradlang:notice_affichage_limite{nb=30}:></p>
 #BOITE_FERMER]
 <div class="formulaire_spip">
-<form action="spip.php" method="post" enctype="multipart/form-data" class="formulaire_crayon" id="formulaire_tradlang_tous_#ENV{id_tradlang_module}">
-<input type="hidden" name="action" value="crayons" />
-<input type="hidden" name="redirect" value="[(#SELF|parametre_url{edit,''})]" />
-<ul>
-<BOUCLE_nb_tradlangs(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}>
-</BOUCLE_nb_tradlangs>
-<BOUCLE_nb_tradlangs_affiche(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}{0,30}>
-<li class="editer editer_tradlang">
-#CRAYON{str_statut}
-<script type='text/javascript'>
-	var contenu_orig_#ID_TRADLANG = '[(#STR**|tradlang_utf8|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""}|texte_script)]';
-	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
-		var newstatut_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#statut_[(#ID_TRADLANG)]').val();
-		var new_contenu_#ID_TRADLANG =$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,'');
-		var vars_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_orig_#ID_TRADLANG').val().match('@[^@]+@','gi');
-		if(vars_#ID_TRADLANG){
-			trad_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val();
-			jQuery(vars_#ID_TRADLANG).each(function(i,elt){
-				if(!trad_#ID_TRADLANG.match(elt,'g')){
-					tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].push('#ID_TRADLANG');
-					error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = true;
-					break;
-				}
-			}
-		}
-		if((new_contenu_#ID_TRADLANG != contenu_orig_#ID_TRADLANG) && (newstatut_#ID_TRADLANG != 'OK')){
-			/**
-			 * On remplit les erreurs si besoin
-			 */
-			error_tradlang_statut_#ID_TRADLANG_MODULE = true;
-			tradlang_errors_statut_#ID_TRADLANG_MODULE.push('#ID_TRADLANG');
-		}
-	});
-</script>
-</li>
-</BOUCLE_nb_tradlangs_affiche>
-</ul>
-<p class="boutons">
-	<input type='submit' class="submit" />
-</p>
-</form>
+	<form action="spip.php" method="post" enctype="multipart/form-data" class="formulaire_crayon" id="formulaire_tradlang_tous_#ENV{id_tradlang_module}">
+		<input type="hidden" name="action" value="crayons" />
+		<input type="hidden" name="redirect" value="[(#SELF|parametre_url{edit,''})]" />
+		<ul>
+			<BOUCLE_nb_tradlangs(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}> </BOUCLE_nb_tradlangs>
+			<BOUCLE_nb_tradlangs_affiche(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}{0,30}>
+			<li class="editer editer_tradlang">
+				<div style="width:100%">
+					[(#CRAYON{str_statut})]
+					<script type="text/javascript">
+						var contenu_orig_#ID_TRADLANG = '[(#STR**|tradlang_utf8|replace{"\n","_"}|replace{"\r",""}|replace{"\t",""}|texte_script)]';
+						console.log(contenu_orig_#ID_TRADLANG);
+						$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
+							var newstatut_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#statut_[(#ID_TRADLANG)]').val(),
+								new_contenu_#ID_TRADLANG =$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val().replace(/\n/g,'_').replace(/\r/g,'').replace(/\t/g,''),
+								vars_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_orig_#ID_TRADLANG').val().match('@[^<@]+@','gi');
+							if(vars_#ID_TRADLANG){
+								trad_#ID_TRADLANG = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').find('#str_#ID_TRADLANG').val();
+								jQuery(vars_#ID_TRADLANG).each(function(i,elt){
+									if(!trad_#ID_TRADLANG.match(elt,'g')){
+										tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].push('#ID_TRADLANG');
+										error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = true;
+										break;
+									}
+								}
+							}
+							if((new_contenu_#ID_TRADLANG != contenu_orig_#ID_TRADLANG) && (newstatut_#ID_TRADLANG != 'OK')){
+								/**
+								 * On remplit les erreurs si besoin
+								 */
+								error_tradlang_statut_#ID_TRADLANG_MODULE = true;
+								tradlang_errors_statut_#ID_TRADLANG_MODULE.push('#ID_TRADLANG');
+							}
+						});
+					</script>
+				</div
+			</li>
+			</BOUCLE_nb_tradlangs_affiche>
+		</ul>
+		<p class="boutons">
+			<input type='submit' class="submit" />
+		</p>
+	</form>
 </div>
 </B_nb_tradlangs>
 <div class="error">
@@ -77,12 +79,12 @@ if (window.jQuery)(function($){
 	/**
 	 * On déplace le bouton de submit du formulaire au scroll si le formulaire est grand
 	 */
-	var boutons = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})] .boutons');
-	var boutons_width = boutons.width();
+	var boutons = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})] .boutons'),
+		boutons_width = boutons.width();
 	$(window).scroll(function() {
-		var offset = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').offset();
-		var limite_haut = offset.top;
-		var limite_bas = limite_haut+$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').height();
+		var offset = $('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').offset(),
+			limite_haut = offset.top,
+			limite_bas = limite_haut+$('#formulaire_tradlang_tous_[(#ENV{id_tradlang_module})]').height();
 		if(($(window).scrollTop() >= limite_haut) || (($(window).scrollTop()+$(window).height()) <= limite_bas)){
 			if(!boutons.hasClass('boutons_float'))
 				boutons.addClass('boutons_float')
@@ -95,35 +97,30 @@ if (window.jQuery)(function($){
 	 * On traite les erreurs potentielles
 	 */
 	$('#formulaire_tradlang_tous_#ENV{id_tradlang_module}').bind('submit',function(){
-		$('li.erreur .erreur_message').detach();
-		$('li.erreur').removeClass('erreur');
+		$('li.erreur').removeClass('erreur').find('.erreur_message').detach();
 		if(error_tradlang_variables_[(#ID_TRADLANG_MODULE)]){
 			for (var i=0; i<tradlang_errors_variables_[(#ID_TRADLANG_MODULE)].length; i++) {
 				erreur = tradlang_errors_variables_[(#ID_TRADLANG_MODULE)][i];
-				$('#str_'+erreur).parent('li').addClass('erreur');
-				$('#str_'+erreur).parent('li').prepend('<span class="erreur_message">'+erreur_variable+'<\/span>');
+				$('#str_'+erreur).parent('li').addClass('erreur').prepend('<span class="erreur_message">'+erreur_variable+'<\/span>');
 			}
 			tradlang_errors_variables_[(#ID_TRADLANG_MODULE)] = [];
 			error_tradlang_variables_[(#ID_TRADLANG_MODULE)] = false;
-			jQuery('li.erreur').eq(0).positionner(true,true);
+			$('li.erreur').eq(0).positionner(true,true);
 			return false;
 		}
 		if(error_tradlang_statut_#ID_TRADLANG_MODULE){
 			if(!window.confirm('<:tradlang:crayon_changer_statuts|filtrer_entites|texte_script:>')){
 				for (var i=0; i<tradlang_errors_statut_#ID_TRADLANG_MODULE.length; i++) {
 					erreur = tradlang_errors_statut_[(#ID_TRADLANG_MODULE)][i];
-    				$('#statut_'+erreur).parent('li').addClass('erreur');
-    				$('#statut_'+erreur).parent('li').prepend('<span class="erreur_message">'+erreur_statut+'<\/span>');
+    				$('#statut_'+erreur).parent('li').addClass('erreur').prepend('<span class="erreur_message">'+erreur_statut+'<\/span>');
 				}
 				tradlang_errors_statut_#ID_TRADLANG_MODULE = [];
 				error_tradlang_statut_#ID_TRADLANG_MODULE = false;
 				$('li.erreur select').change(function(){
-					if($(this).val() == 'OK'){
-						$(this).parent('.erreur').find('.erreur_message').detach();
-						$(this).parent('.erreur').removeClass('erreur');
-					}
+					if($(this).val() == 'OK')
+						$(this).parent('.erreur').removeClass('erreur').find('.erreur_message').detach();
 				});
-				jQuery('li.erreur').eq(0).positionner(true,true);
+				$('li.erreur').eq(0).positionner(true,true);
 				return false;
 			}
 		}
