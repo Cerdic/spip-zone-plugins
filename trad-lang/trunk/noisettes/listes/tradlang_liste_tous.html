@@ -80,15 +80,16 @@
 </div>
 [(#REM)	
 [(#GET{total_mere}|>{0}|oui)<p> <:tradlang:nb_items_langue_cible{nb=#GET{total_mere},langue=#ENV{lang_cible}}:></p>]]
+[(#GET{autoriser_modifier}|oui)
 <div class="actions">
 	<p><:tradlang:info_edition_par_lot:></p>
 	[(#SET{texte_bouton_upload,<:tradlang:bouton_upload_langue_module:>}|attribut_html)]
 	[(#ENV{edit}|=={1}|oui)
 	<a href="[(#SELF|parametre_url{edit,2})]" class="ajax btn icon-back"><:tradlang:lien_retour_module{module=#NOM_MOD}:></a>]
-	[(#ENV{edit}|=={1}|non|et{#GET{module_existant,non}|=={oui}|oui}|et{#GET{percent_ok}|!={100}|oui}|et{#GET{autoriser_modifier}|oui}|oui)
+	[(#ENV{edit}|=={1}|non|et{#GET{module_existant,non}|=={oui}|oui}|et{#GET{percent_ok}|!={100}|oui}|oui)
 	<a href="[(#SELF|parametre_url{edit,1})]" class="ajax btn icon-edit"><:tradlang:lien_editer_tous:></a>]
 	[(#BOUTON_ACTION{#GET{texte_bouton_upload},[(#SELF|parametre_url{vue,upload})],icon-upload})]
-</div>
+</div>]
 
 <BOUCLE_si_edit(CONDITION){si #GET{autoriser_modifier}|et{#ENV{edit}|=={1}}}>
 [(#_module:CRAYON{tradlang_tous})]
