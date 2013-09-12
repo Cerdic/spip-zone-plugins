@@ -1,0 +1,26 @@
+<paquet
+	prefix="chosen"
+	categorie="navigation"
+	version="1.0.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/chosen-64.png"
+	documentation=""
+>
+
+	<nom>Chosen</nom>
+
+	<auteur>Marcillaud Matthieu</auteur>
+
+	<credit lien="http://iconblock.com/">IconBlock (logo)</credit>
+	<credit lien="http://harvesthq.github.com/chosen/">Patrick Filler (Chosen)</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="jquery_plugins"       inclure="chosen_pipelines.php" />
+	<pipeline nom="header_prive"     inclure="chosen_pipelines.php" />
+	<pipeline nom="header_prive_css"     inclure="chosen_pipelines.php" />
+	<pipeline nom="insert_head" 	    inclure="chosen_pipelines.php" />
+	<pipeline nom="insert_head_css"     inclure="chosen_pipelines.php" />
+
+</paquet>
