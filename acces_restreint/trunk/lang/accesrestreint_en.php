@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'Give me access to this area',
 	'aucune_zone' => 'No zones',
-	'auteurs' => 'authors',
+	'auteurs' => 'authors', # MODIF
 
 	// B
 	'bouton_configurer_acces' => 'Configuring .htaccess access',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Public',
 
 	// R
-	'rubriques' => 'sections',
+	'rubriques' => 'sections', # MODIF
 	'rubriques_zones_acces' => 'Sections in this area',
 
 	// S

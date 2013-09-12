@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'Udeliť mi prístup do tejto oblasti',
 	'aucune_zone' => 'Žiadna oblasť',
-	'auteurs' => 'autori',
+	'auteurs' => 'autori', # MODIF
 
 	// B
 	'bouton_configurer_acces' => 'Nastavenie prístupu cez .htaccess',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Verejná',
 
 	// R
-	'rubriques' => 'rubriky',
+	'rubriques' => 'rubriky', # MODIF
 	'rubriques_zones_acces' => 'Rubriky v tejto oblasti',
 
 	// S

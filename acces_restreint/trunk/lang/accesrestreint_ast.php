@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'Axuntame a los que tienen permitío entrar n\'esta estaya',
 	'aucune_zone' => 'Denguna zona',
-	'auteurs' => 'autores',
+	'auteurs' => 'autores', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'Crear la estaya nueva',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Públicu',
 
 	// R
-	'rubriques' => 'seiciones',
+	'rubriques' => 'seiciones', # MODIF
 	'rubriques_zones_acces' => 'Seiciones de la estaya',
 
 	// S

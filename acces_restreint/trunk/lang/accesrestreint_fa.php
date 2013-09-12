@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'حق دسترسي به اين عرصه را به من بدهيد',
 	'aucune_zone' => 'هيچ منطقه',
-	'auteurs' => 'نويسندگان',
+	'auteurs' => 'نويسندگان', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'ايجاد منطقه‌ي جديد',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'همگاني',
 
 	// R
-	'rubriques' => 'بخش‌ها',
+	'rubriques' => 'بخش‌ها', # MODIF
 	'rubriques_zones_acces' => 'بخش‌هاي منطقه',
 
 	// S

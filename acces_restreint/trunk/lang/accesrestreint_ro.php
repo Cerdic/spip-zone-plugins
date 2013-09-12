@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Adaugă-mi drepturile de acces la această zonă',
-	'auteurs' => 'autori',
+	'auteurs' => 'autori', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'Creaţi noua zonă',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Publică',
 
 	// R
-	'rubriques' => 'rubrici',
+	'rubriques' => 'rubrici', # MODIF
 	'rubriques_zones_acces' => 'Rubricile zonei',
 
 	// S

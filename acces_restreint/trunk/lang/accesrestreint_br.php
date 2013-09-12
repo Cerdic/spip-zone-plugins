@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Ouzhpennañ gwirioù moned din-me evit an takad-mañ',
-	'auteurs' => 'skridaozerien',
+	'auteurs' => 'skridaozerien', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'Krouiñ an takad nevez',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Foran',
 
 	// R
-	'rubriques' => 'rubrikennoù',
+	'rubriques' => 'rubrikennoù', # MODIF
 	'rubriques_zones_acces' => 'Rubrikennoù an takad',
 
 	// S

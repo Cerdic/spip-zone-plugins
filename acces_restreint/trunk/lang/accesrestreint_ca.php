@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_droits_auteur' => 'Afegir-me els drets d\'accés a aquesta zona',
 	'aucune_zone' => 'Cap zona',
-	'auteurs' => 'autors',
+	'auteurs' => 'autors', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'Crear la nova zona',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Públic',
 
 	// R
-	'rubriques' => 'seccions',
+	'rubriques' => 'seccions', # MODIF
 	'rubriques_zones_acces' => 'Seccions de la zona',
 
 	// S

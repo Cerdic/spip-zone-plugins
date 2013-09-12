@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_droits_auteur' => 'Bana, bu bölgeye erişim haklarını ver',
-	'auteurs' => 'yazar',
+	'auteurs' => 'yazar', # MODIF
 
 	// B
 	'bouton_creer_la_zone' => 'Yeni bölgeyi oluştur',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publique' => 'Kamusal',
 
 	// R
-	'rubriques' => 'başlıklar',
+	'rubriques' => 'başlıklar', # MODIF
 	'rubriques_zones_acces' => 'Bölge başlıkları',
 
 	// S
