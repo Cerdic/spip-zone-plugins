@@ -115,7 +115,50 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmaisnok_definis_0' => 'Los archivos de la carpeta «<em>@ou_fichier@</em>» no utilizan ningún ítem de idioma que sea incorrectamente definido en un otro módulo que «<em>@module@</em>».',
 	'message_ok_nonmaisnok_definis_1' => 'El ítem de idioma siguiente esta utilizado en los archivos de la carpeta «<em>@ou_fichier@</em>» pero no como un ítem del módulo «<em>@module@</em>». No esta definido en su propio módulo, así que le invitamos a verificarlo:',
 	'message_ok_nonmaisnok_definis_n' => 'Los @nberr@ ítems de idioma siguientes están utilizados en archivos de la carpeta «<em>@ou_fichier@</em>» pero no como ítems del módulo «<em>@module@</em>». No están definidos en su propio módulo, así que le invitamos a verificarlos uno por uno:',
-	'message_ok_table_creee' => 'La tabla de ítems del archivo de idioma @langue@ fue creada con éxito.'
+	'message_ok_table_creee' => 'La tabla de ítems del archivo de idioma @langue@ fue creada con éxito.',
+	'message_ok_utilises_incertains_0' => 'Ningún ítem de idioma utilizado en un contexto complejo (por ejemplo:  _T(\'@module@:item_\'.$variable)).',
+	'message_ok_utilises_incertains_1' => 'Se puede que el ítem de idioma siguiente este utilizado en un contexto complejo. Le invitamos a verificarlo:',
+	'message_ok_utilises_incertains_n' => 'Puede ser que los @nberr@ ítems de idioma siguientes estén utilizados en un contexto complejo. Le invitamos a verificarlos uno por uno:',
+
+	// O
+	'onglet_generer' => 'Generar un idioma',
+	'onglet_lister' => 'Mostrar un idioma',
+	'onglet_rechercher' => 'Buscar un ítem',
+	'onglet_verifier' => 'Verificar un idioma',
+	'option_aucun_dossier' => 'ninguna arborescencia seleccionada',
+	'option_aucun_fichier' => 'ningún idioma seleccionado',
+	'option_mode_index' => 'Ítem del idioma fuente',
+	'option_mode_new' => 'Baliza &lt;NEW&gt; unicamente',
+	'option_mode_new_index' => 'Ítem del idioma fuente precedido por &lt;NEW&gt;',
+	'option_mode_new_valeur' => 'Cadena en el idioma fuente precedida por &lt;NEW&gt;',
+	'option_mode_pas_item' => 'No crear ítem',
+	'option_mode_valeur' => 'Cadena en el idioma fuente',
+	'option_mode_vide' => 'Una cadena vacía',
+
+	// T
+	'test' => 'PRUEBA: Este ítem de idioma sirve para la búsqueda de atajos y vale "test"',
+	'test_item_1_variable' => 'PRUEBA: Este ítem de idioma esta definido correctamente en el archivo de idioma, pero esta utilizado en su forma "compleja" en los archivos de la carpeta escaneada.',
+	'test_item_2_variable' => 'PRUEBA: Este ítem de idioma esta definido correctamente en el archivo de idioma, pero esta utilizado en su forma "compleja" en los archivos de la carpeta escaneada.',
+	'test_item_non_utilise_1' => 'PRUEBA: Este ítem de idioma esta definido correctamente en el archivo de idioma (), pero no esta utilizado en los archivos de la carpeta escaneada ().',
+	'test_item_non_utilise_2' => 'PRUEBA: Este ítem de idioma esta definido correctamente en el archivo de idioma (), pero no esta utilizado en los archivos de la carpeta escaneada ().',
+	'texte_item_defini_ou' => '<em>definido en :</em>',
+	'texte_item_mal_defini' => '<em>pero no definido en el módulo correcto:</em>',
+	'texte_item_non_defini' => '<em>¡pero no definido en ninguna parte!</em>',
+	'texte_item_utilise_ou' => '<em>utilizado en:</em>',
+	'titre_bloc_langues_generees' => 'Archivos de idioma',
+	'titre_bloc_logs_definition' => 'Definiciones faltantes',
+	'titre_bloc_logs_fonction_l' => 'Usos de _L()',
+	'titre_bloc_logs_utilisation' => 'Definiciones obsoletas',
+	'titre_form_generer' => 'Generación de los archivos de idioma',
+	'titre_form_lister' => 'Visualización de los archivos de idioma',
+	'titre_form_rechercher_item' => 'Búsqueda de atajos en los archivos de idioma',
+	'titre_form_rechercher_texte' => 'Búsqueda de textos en los archivos de idioma SPIP',
+	'titre_form_verifier' => 'Verificación de los archivos de idioma',
+	'titre_page' => 'LangOnet',
+	'titre_page_navigateur' => 'LangOnet',
+
+	// Z
+	'z_test' => 'PRUEBA: Este ítem de idioma sirve para la búsqueda de atajos y contiene "test"'
 );
 
 ?>
