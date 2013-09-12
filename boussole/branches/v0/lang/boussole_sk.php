@@ -164,6 +164,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'slogan_boussole_spip' => 'Obľúbené adresy galaxie SPIPu!',
+	'slogan_groupe_spip_actualite' => 'Novinky SPIPu',
+	'slogan_groupe_spip_aide' => 'Pomoc a výmena skúseností so SPIPom',
+	'slogan_groupe_spip_decouverte' => 'Objavovanie SPIPu',
+	'slogan_groupe_spip_extension' => 'Rožírenia a príspevky k SPIPu',
+	'slogan_groupe_spip_reference' => 'Stránky, na ktoré SPIP odkazuje',
 	'slogan_site_spip_blog' => 'O slobodnom softvére a jednoduchosti ',
 	'slogan_site_spip_contrib' => 'Rozhranie príspevkov k SPIP',
 	'slogan_site_spip_core' => 'Rozhranie vývoja verzií SPIPu',
