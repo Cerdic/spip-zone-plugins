@@ -6,10 +6,11 @@
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="78" traduits="72" modifs="6" nouveaux="0" pourcent="92.31">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="78" traduits="78" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fa" total="78" traduits="77" modifs="1" nouveaux="0" pourcent="98.72">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />

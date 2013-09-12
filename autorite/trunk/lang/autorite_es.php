@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_version' => 'Cuidado, los siguientes parámetrospueden no funcionar con tu versión de SPIP:',
 	'auteur_message_advitam' => 'El autor del mensaje, ad vitam',
 	'auteur_message_heure' => 'El autor del mensaje, durante una hora',
-	'auteur_modifie_article' => '<strong>Autor modifica artículo</strong> : cada redactor puede modificar los artículos publicados de los cuales es autor. (y, en consecuencia, moderar el foro y la recolección de firmas asociada).
+	'auteur_modifie_article' => '<strong>Autor modifica artículo</strong> : cada redactor puede modificar los artículos publicados de los cuales es autor.
 	<br />
-	<i>OjO: esta opción se aplica también a los visitantes registrados, si son autores y si una interfaz específica está prevista.</i>', # MODIF
+	<i>OjO: esta opción se aplica también a los visitantes registrados, si son autores y si una interfaz específica está prevista.</i>',
 	'auteur_modifie_email' => '<strong>Redactor modifica correo electrónico</strong>: cada redactor puede modificar su correo electrónico en la ficha de datos personales.',
 	'auteur_modifie_forum' => '<strong>Autor modera foro</strong> : cada redactor puede moderar el foro de los articulos de los cuales él es autor.',
 	'auteur_modifie_petition' => '<strong>Autor modera petición</strong> : cada redactor puede moderar la petición de los articulos de los cuales él es autor.',
@@ -34,24 +34,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_plugin_qui' => 'Quién puede <strong>modificar la configuración</strong> de los plugins (activación...) ?',
 	'config_site' => 'Configuración del sitio',
 	'config_site_qui' => '¿ Quién puede <strong>modificar la configuración</strong> del sitio ?',
-	'crayons' => 'Lápices', # MODIF
+	'crayons' => 'Lápices',
 
 	// D
 	'deja_defini' => 'Las autorizaciones siguientes ya están definidas :',
 	'deja_defini_suite' => 'El plugin « Autoridad» no puede modificarlos,  ciertos ajustes  podrían no funcionar.
-	<br />Para corregir este problema, deberá verificar si el archivo <tt>mes_options.php</tt> (o algún otro  plugin activo) ha definido estas funciones.', # MODIF
+	<br />Para corregir este problema, deberá verificar si el archivo <tt>mes_options.php</tt> (o algún otro plugin activo) ha definido estas funciones.',
 	'descriptif_1' => 'Esta página de configuración está reservada a los webmasters del sitio :',
 	'descriptif_2' => '<p>Si desea modificar esta lista, edite el archivo <tt>config/mes_options.php</tt> (o crearlo en dado caso) e indicar la lista de los nombres de usuario de los autores webmasters, de la siguiente forma :</p>
-<pre><?php
+<pre>&lt;?php
   define (
   \'_ID_WEBMESTRES\',
   \'1:5:8\');
-?></pre>
+?&gt;</pre>
 <p>A partir de SPIP 2.1, también es  posible dar derechos de webmestre a un administrador en la página de edición del autor.</p>
 <p>Nota : los webmasters definidos de esta manera ya no tienen necesidad de proceder a la autentificación FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
 
 <a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Documentación</a>
-', # MODIF
+',
 	'details_option_auteur' => '<small><br />Por el momento, la opctión « autor » sólo funciona para los autores registrados (foros con suscripción, por ejemplo). Y, si está  activada, los administradores del sitio también tienen la capacidad de editar los foros.
 	</small>',
 	'droits_des_auteurs' => 'Derechos de los autores',
@@ -63,10 +63,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacer_base_option' => '<small><br />La opción recomendada es  « persona », la opción standard de SPIP es « los administradores » (pero siempre con una verificación FTP).</small>',
 	'effacer_base_qui' => 'Quién puede <strong>borrar</strong> la base de datos del sitio ?',
 	'espace_publieur' => 'Espacio de publicación abierta',
-	'espace_publieur_detail' => 'Seleccione de abajo un sector a tratar como un espacio de publicación abierta para los redactores y / o visitantes registrados (a condición de tener una interfaz, por ejemplo los lápices y un formulario para enviar un articulo) :', # MODIF
+	'espace_publieur_detail' => 'Seleccione de abajo un sector a tratar como un espacio de publicación abierta para los redactores y / o visitantes registrados (a condición de tener una interfaz, por ejemplo los lápices y un formulario para enviar un articulo) :',
 	'espace_publieur_qui' => 'Desea abrir la publicación — más allá de los administradores :',
 	'espace_wiki' => 'Espacio wiki',
-	'espace_wiki_detail' => 'Seleccione un sector a tratar como un wiki, es decir, editable por todos desde el espacio público (a condición de tener una  interfaz, por ejemplo los lápices) :', # MODIF
+	'espace_wiki_detail' => 'Seleccione un sector a tratar como un wiki, es decir, editable por todos desde el espacio público (a condición de tener una  interfaz, por ejemplo los lápices) :',
 	'espace_wiki_mots_cles' => 'Espacio wiki por palabras clave',
 	'espace_wiki_mots_cles_detail' => 'Seleccione las palabras clave que activarán el modo wiki, es decir, editable por todos desde el espacio público (a condición de tener una interfaz, por elemplo los lápices) :',
 	'espace_wiki_mots_cles_qui' => 'Desea abrir este wiki — más allá de los administradores :',
