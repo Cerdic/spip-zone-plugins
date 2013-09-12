@@ -1,15 +1,15 @@
 <BOUCLE_autoriser(CONDITION){si #ENV{id_organisation}|et{#AUTORISER{modifier,organisation,#ENV{id_organisation}}}|ou{#ENV{id_organisation}|non|et{#AUTORISER{creer,organisation}}}}>
-#SET{id_parent,#ENV{id_parent}|sinon{#INFO_ID_PARENT{organisation,#ENV{id_organisation}}}}
 
 <!--#hierarchie-->
 
 <!--/#hierarchie-->
 
-[(#SET{redirect,#ENV{redirect,#URL_ECRIRE{organisation}}})]
+#SET{retour,#ENV{redirect}|sinon{#ID_ORGANISATION|intval|?{#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION},#URL_ECRIRE{organisations}}}}
+#SET{id_parent,#ENV{id_parent}|sinon{#INFO_ID_PARENT{organisation,#ENV{id_organisation}}}}
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{images/co_organisation-24.png}})]
+		[(#GET{retour}|icone{<:icone_retour:>,#CHEMIN{images/co_organisation-24.png}})]
 		<:contacts:organisation_modifier:>
 		<h1>
 			[(#ENV{id_organisation}|oui)#INFO_TITRE{organisation,#ENV{id_organisation}}]

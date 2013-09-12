@@ -3,11 +3,11 @@
 <!--#hierarchie-->
 
 <!--/#hierarchie-->
-[(#SET{redirect,#ENV{redirect,#URL_ECRIRE{contacts}}})]
+#SET{retour,#ENV{redirect}|sinon{#ID_CONTACT|intval|?{#URL_ECRIRE{contact,id_contact=#ID_CONTACT},#URL_ECRIRE{contacts}}}}
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{images/co_contact-24.png}})]
+		[(#GET{retour}|icone{<:icone_retour:>,#CHEMIN{images/co_contact-24.png}})]
 		<:contacts:contact_modifier:>
 		<h1>
 			[(#ENV{id_contact}|oui)#INFO_TITRE{contact,#ENV{id_contact}}]
