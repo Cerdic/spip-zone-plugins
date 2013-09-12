@@ -23,9 +23,7 @@
 	- taille_logo_site: taille max du logo de chaque site (en pixels). 0 ou vide correspond à aucun logo
 	- titre_menu_mobile :    Titre du menu en mode mobile
             
-            Fichier de travail .less à utiliser ou dupliquer pour modifier le menu
-	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.less}|less_css)" type="text/css" />]
-            ou bien css généré utilisable directement en production
+    css généré utilisable directement en production
 	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.css})" type="text/css" />]
 
 	<INCLURE{fond=modeles/boussole_topnav,
@@ -70,12 +68,10 @@
 						[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{80})]})]
 						<li>
 							<a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|attribut_html)"] class="spip_out">
-							<BOUCLE_logo_site(BOUSSOLES_EXTRAS){si #ENV{taille_logo_site}>0}{aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
-								[(#CHAMP_SQL{logo_objet}
+								[(#CHEMIN{images/boussole/site[-(#AKA_BOUSSOLE)][-(#AKA_SITE)].png}
 									|image_reduire{#ENV{taille_logo_site}}
 									|image_recadre{#ENV{taille_logo_site},#ENV{taille_logo_site},center,transparent}
 									|inserer_attribut{alt,[(#GET{bulle}|attribut_html)]})]
-							</BOUCLE_logo_site>
 								[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
 							</a>
 						</li>
