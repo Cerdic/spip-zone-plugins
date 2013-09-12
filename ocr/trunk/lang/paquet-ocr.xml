@@ -1,4 +1,7 @@
 <traduction module="paquet-ocr" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/ocr/trunk/lang/" reference="fr">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-ocr?lang_cible=es" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-ocr?lang_cible=fr" total="3" traduits="3" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
