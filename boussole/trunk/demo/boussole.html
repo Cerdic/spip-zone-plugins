@@ -50,6 +50,12 @@
 	[(#SET{ titre, [Actualit&eacute;s de (#VAL{spip}|boussole_traduire{nom_boussole})]})]
 	[(#MODELE{boussole_liste_actualite, boussole=spip, titre_actualite=#GET{titre}, titre_site=oui, max_sites=3, max_articles=5})]
 
-	<INCLURE{fond=modeles/boussole_topnav_spip} />
+	<INCLURE{fond=modeles/boussole_topnav,
+		boussole=spip,
+		titre_boussole=oui,
+		taille_logo_boussole=32,
+		taille_logo_site=16,
+		type_bulle=slogan_site,
+		titre_menu_mobile=SPIP} />
 </body>
 </html>
