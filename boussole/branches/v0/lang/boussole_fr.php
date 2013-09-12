@@ -191,7 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_user' => 'La liste d\'entraide des utilisateurs de SPIP',
 	'slogan_site_spip_video' => 'La médiathèque de SPIP',
 	'slogan_site_spip_zine' => 'Le webzine sur et autour de SPIP',
-	'slogan_site_spip_zone' => 'L\'espace de développement des contributions à SPIP'
+	'slogan_site_spip_zone' => 'L\'espace de développement des contributions à SPIP',
 
 	// T
 	'titre_actualite_spip' => 'Actualités de la Galaxie SPIP',
