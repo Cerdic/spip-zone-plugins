@@ -46,7 +46,7 @@
 	<ul>
 	[(#ENV{titre_boussole, non}|=={oui}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
 		<li>
-			<a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"]>
+			<a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>
 			[(#ENV{taille_logo_boussole}|>{0}|oui)
 				[(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]
 			]
