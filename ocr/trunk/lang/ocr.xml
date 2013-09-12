@@ -1,4 +1,8 @@
 <traduction module="ocr" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/ocr/trunk/lang/" reference="fr">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/ocr?lang_cible=es" total="40" traduits="40" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/ocr?lang_cible=fr" total="40" traduits="40" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
