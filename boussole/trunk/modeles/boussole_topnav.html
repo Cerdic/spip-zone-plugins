@@ -38,17 +38,17 @@
 -->]
 <B_groupe>
 <div id="boussole" class="menu_container spip-theme full_width">
-    <div class="mobile_collapser">
-        <label for="hidden_menu_collapser">
+	<div class="mobile_collapser">
+		<label for="hidden_menu_collapser">
 			<span class="mobile_menu_icon"></span>
 			[(#ENV{titre_menu_mobile})]
 		</label>
-    </div>
-    <input id="hidden_menu_collapser" type="checkbox">
-    <ul>
+	</div>
+	<input id="hidden_menu_collapser" type="checkbox">
+	<ul>
 	[(#ENV{titre_boussole, non}|=={oui}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
 		<li>
-            <a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"]>
+			<a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"]>
 			[(#ENV{taille_logo_boussole}|>{0}|oui)
 				[(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]
 			]
@@ -56,16 +56,16 @@
 				[(#ENV{boussole}|boussole_traduire{nom_boussole})]
 			]
 			</a>
-        </li>
+		</li>
 	]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
-        <li>
-            <a href="#">[(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})]</a>
-            [(#REM) <!-- Liste des site du groupe en cours -->]
+		<li>
+			<a href="#">[(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})]</a>
+			[(#REM) <!-- Liste des site du groupe en cours -->]
 			<B_site>
-            <div class="menu_dropdown_block">
-                <div class="ssmenu_container">
-                    <ul class="menu_submenu">
+			<div class="menu_dropdown_block">
+				<div class="ssmenu_container">
+					<ul class="menu_submenu">
 			<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
 						[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{80})]})]
 						<li>
@@ -80,12 +80,12 @@
 							</a>
 						</li>
 			</BOUCLE_site>
-                    </ul>
-                </div>
-            </div>
+					</ul>
+				</div>
+			</div>
 			</B_site>
-        </li>
+		</li>
 </BOUCLE_groupe>
-    </ul>
+	</ul>
 </div>
 </B_groupe>
