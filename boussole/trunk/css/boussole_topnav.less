@@ -3,18 +3,72 @@
 // #MARK: SPIP Galaxy Theme
 
 
-@spipMauve : #d2a3d8 ;  // hover sur niv1
-@spipMauve2 : #F9F9F9; // Fond de la nav
-@spipFont : "Georgia,Cambria,Times New Roman,Times,serif";
-@spipSansFont : "Georgia,Cambria,Times New Roman,Times,serif";
 
-@1linkColor : #4b4b4b ;   // Couleur des liens de menu niv1
-@menuContainerHeight : 45px ;
-@mobileColapser_background : "none no-repeat #353535";
-@mobileMenuIcon : 'mobile-menu-icon-black.png';
+// ------------------------------------------------*/
+//// theme V1b
+// ------------------------------------------------*/
+
+// Couleurs 
+//@color1                     : #d2a3d8 ;  // hover sur niv1
+//@color2                     : #F9F9F9; // Fond de la nav
+//// Fonts
+//@spipFont                   : "Georgia,Cambria,Times New Roman,Times,serif";
+//@spipSansFont               : "Georgia,Cambria,Times New Roman,Times,serif";
+//
+//@1linkColor                 : #4b4b4b ;   // Couleur des liens de menu niv1
+//@1txtShadow                 : none ; //Ombrage sur les titres de niv1
+//@1fontSize                  : 14px;
+//
+//@menuContainerHeight        : 40px ;
+//
+//@mobileColapser_background  : "none no-repeat #353535";
+//@mobileMenuIcon             : 'mobile-menu-icon-black.png';
+//
+//
+//.spip_theme {
+//    background: @color2; /* Old browsers */
+//    //#gradient > .vertical(@color2,@color1);
+//    .box-shadow(0px 3px 5px #aaa); 
+//}
 
 
-// MARK : MIXINS
+
+// ------------------------------------------------*/
+//// theme : Anthracite 
+// ------------------------------------------------*/
+
+//
+//// Couleurs 
+@color1                     : #544f52 ;  // hover sur niv1
+@color2                     : #2e2e2e; // Fond de la nav
+// Fonts
+@spipFont                   : "Georgia,Cambria,Times New Roman,Times,serif";
+@spipSansFont               : "Georgia,Cambria,Times New Roman,Times,serif";
+
+@1linkColor                 : #ffffff ;   // Couleur des liens de menu niv1
+@1txtShadow                 : none ; //Ombrage sur les titres de niv1
+@1fontSize                  : 15px;
+
+@menuContainerHeight        : 40px ;
+
+@mobileColapser_background  : "none no-repeat #353535";
+@mobileMenuIcon             : 'mobile-menu-icon-black.png';
+
+
+
+// Theme Anthracite
+.spip_theme {
+    background: @color2; /* Old browsers */
+    #gradient > .vertical(@color2,@color1);
+    .box-shadow(0px 3px 5px #aaa); 
+}
+
+
+
+// ------------------------------------------------*/
+// MARK : MIXINS // Bootstrap 
+// ------------------------------------------------*/
+    
 // Drop shadows
 .box-shadow(@shadow) {
   -webkit-box-shadow: @shadow;
@@ -22,38 +76,78 @@
           box-shadow: @shadow;
 }
 
+#gradient {
+  .horizontal(@startColor: #555, @endColor: #333) {
+    background-color: @endColor;
+    background-image: -moz-linear-gradient(left, @startColor, @endColor); // FF 3.6+
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(left, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(left, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(to right, @startColor, @endColor); // Standard, IE10
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@startColor),argb(@endColor))); // IE9 and down
+  }
+  .vertical(@startColor: #555, @endColor: #333) {
+    background-color: mix(@startColor, @endColor, 60%);
+    background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(to bottom, @startColor, @endColor); // Standard, IE10
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+  }
+}
+
+.caret {
+    content: "";
+    display: inline-block;
+    height: 0;
+    vertical-align: middle;
+    width: 0;
+    margin-right: 10px;
+}
 
 // MARK : THEME
-
-
-.spip_theme {
-    background: @spipMauve2; /* Old browsers */
-    .box-shadow(0px 3px 5px #aaa);
-}
-
 .menu_container.spip-theme {
     .spip_theme;
-    > ul > li a {
+    > ul > li {
+        a {
         color   :  @1linkColor;
         font-family: @spipFont;
-        font-size: 16px;
-        &:hover,&:active,&:focus{
-            background: none;
+        font-size: @1fontSize;
+            &:hover,&:active,&:focus{
+                background: none;
+            }
         }
+        .caret {
+            border-bottom-color: @color1;
+            border-top-color: @color1;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid @color1;
+        }
+        
     }
     > ul > li:hover {
-        background-color: @spipMauve ;   
+        background-color: @color1;
+         .caret{
+            border-bottom-color: @color2;
+            border-top-color: @color2;
+            border-top: 4px solid @color2;
+        }
     }
-    ul.menu_submenu_block li a:hover {
-        background: none repeat scroll 0% 0% @spipMauve2;
+    ul.menu_submenu_block li:hover {
+        background: none repeat scroll 0% 0% @color2;
+       
     }
 }
+  
+  
     
-
+// ------------------------------------------------*/
 // MARK : STYLES
-// -----------------------------------------------------   
-// ------------------------------------------------
-
+// ------------------------------------------------*/
 
 .menu_container {
     margin-bottom: 0;
@@ -82,18 +176,18 @@
         padding: 0px;
         margin: 0px;
         text-align: left;
-        border-right: 1px solid rgba(255, 255, 255, 0.25);
-        .box-shadow(-1px 0px 0px rgba(0, 0, 0, 0.2) inset);
+        //border-right: 1px solid rgba(255, 255, 255, 0.25);
+        //.box-shadow(-1px 0px 0px rgba(0, 0, 0, 0.2) inset);
         transition: background-color 200ms linear 0s;
     }
     > li > a {
-        padding: 0 17px;
+        padding: 0 7px 0 17px ;
         line-height : @menuContainerHeight ;
         vertical-align: middle;
         color: rgb(255, 255, 255);
         text-decoration: none;
-        text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-        font-size: 13px;
+        text-shadow: @1txtShadow;
+        font-size: @1fontSize;
         font-family: @spipFont ;
         > img {
             margin-right:10px;
@@ -108,7 +202,7 @@
         border-right: 0px none;
     }
     > li:hover {
-        margin-left: -1px;
+        //margin-left: -1px;
         //box-shadow: 2px 0px 10px -5px rgba(0, 0, 0, 0.6) inset, -2px 0px 10px -5px rgba(0, 0, 0, 0.6) inset;
         cursor: pointer;
     }
@@ -137,7 +231,7 @@
         overflow: hidden;
         z-index: 30;
     }
-    > li:hover > .menu_dropdown_block {
+    > li:hover > .menu_dropdown_block, > li:focus > .menu_dropdown_block{
         visibility: visible;
         display: block;
         opacity: 1;
