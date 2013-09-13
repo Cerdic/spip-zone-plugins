@@ -33,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'mettre_a_jour_utilisateurs_existants' => 'Mettre à jour les utilisateurs existants :',
     'mise_a_jour_utilisateur' => 'Mise à jour des utilisateurs existant déja dans SPIP :',
     'maj_infoperso' => 'Mise à jour des infos personnelles (mail, pseudo, pass):',
+    'type_maj_remplacer'=>'Remplacer',
+    'type_maj_ajouter'=>'Ajouter',
+    'type_maj_label'=>'Gestion des rubriques administrées et des zones d\'accès des utilisateurs',
 
     'nom_champs'=>'Sélectionnez les champs que vous souhaitez exporter',
     'nom_rubrique_archive'=>'Nom de la rubrique d\'archives :',

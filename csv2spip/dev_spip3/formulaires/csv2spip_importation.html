@@ -25,6 +25,14 @@
                 <h3 class="legend"><:csv2spip:mise_a_jour_utilisateur:></h3>
                 [(#SAISIE{oui_non,maj_utilisateur}
                 {label=<:csv2spip:mettre_a_jour_utilisateurs_existants:>})]
+
+                 [(#SAISIE{radio,type_maj}
+                    {label=<:csv2spip:type_maj_label:>}
+                    {datas=#ARRAY{
+						ajouter,<:csv2spip:type_maj_ajouter:>,
+						remplacer,<:csv2spip:type_maj_remplacer:>
+						}
+					})]
             </fieldset>
             </li>
             
