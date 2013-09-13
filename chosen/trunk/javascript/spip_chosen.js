@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 
 	/* Remet le title sur les chosen s'il en existait un sur le select */
 	spip_chosen_title = function() {
-		$('.chzn-container').each(function () {
+		$('.chosen-container').each(function () {
 			/* Si un title était sur le sélect d'origine, le remettre sur le html de Chosen */
 			if (title = $(this).prev().attr('title')) {
 				$(this).attr('title', title);
@@ -23,14 +23,14 @@ jQuery(document).ready(function(){
 	 * on applique sa taille aux autres chosen de cette colonne.
 	 */
 	spip_chosen_table_width = function() {
-		$('table').has('.chzn-container').each(function() {
+		$('table').has('.chosen-container').each(function() {
 			$taille = []; // la taille des premiers chosen pour chaque colonne
-			$(this).find('.chzn-container').each(function () {
+			$(this).find('.chosen-container').each(function () {
 				index = $(this).parent('td').index();
 				if (!$taille[index]) {
 					$taille[index] = $(this).width() + 10; // un tout petit rien de plus en général
 				}
-				$(this).css('width', $taille[index]).find("> .chzn-drop").css('width', $taille[index] - 2);
+				$(this).css('width', $taille[index]).find("> .chosen-drop").css('width', $taille[index] - 2);
 			});
 		});
 		
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
 
 	/* Ajoute la propriete overflow:visible au li contenant le select chosen (pour contrer le css de SPIP) */
 	spip_chosen_visible = function() {
-		$('.chzn-container').parent('li').each(function () {
+		$('.chosen-container').parent('li').each(function () {
 			$(this).css("overflow", "visible");
 		});
 	}
