@@ -31,19 +31,21 @@ var em_markitup = function(){
 	}
 }
 
+/**
+ * Charger les tabs si on a l'upload ftp
+ * Charger les tabs si on a le choix traitement par lot ou unique
+ */
 var em_tabs_charger = function(){
-    cookie_name = 'ui-tab-em_charger_ftp'
-    jQuery('.em_charger_fichiers').tabs({
+	jQuery('.em_charger_fichiers').tabs({
 		cookie: {
-			name:cookie_name,
+			name: 'ui-tab-em_charger_ftp',
 			expires: 1
 		}
 	});
 	
-	cookie_name_lot = 'ui-tab-em_traitement'
-    jQuery('#emballe_media_edition').tabs({
+	jQuery('#emballe_media_edition').tabs({
 		cookie: {
-			name:cookie_name_lot,
+			name: 'ui-tab-em_traitement',
 			expires: 1
 		}
 	});
@@ -71,25 +73,29 @@ var medias_init_select_all = function(){
 	});
 }
 
-var medias_init_clicks = function(){
-	jQuery('.selection_documents .choix input:checked').parents('.choix').addClass('selected');
+/**
+ * Au chargement :
+ * On ajoute la class selected au div.choix parent des checkbox selectionnées (cookie ou navigateur) et on lui change son title
+ * Au click sur un media de la sélection multiple :
+ * On ajoute ou on enlève la class selected du div.choix parent et on change le title du label
+ */
+var medias_selection_multiple_init_clicks = function(){
+	jQuery('.selection_documents .choix input:checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
 	jQuery('.selection_documents .choix input[type=checkbox]').change(function(){
-		if(jQuery(this).is(':checked')){
-			jQuery(this).parents('.choix').addClass('selected');
-		}else{
-			jQuery(this).parents('.choix').removeClass('selected');
-		}
+		if(jQuery(this).is(':checked'))
+			jQuery(this).parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
+		else
+			jQuery(this).parents('.choix').removeClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection_non|texte_script:>');
 	});
-	jQuery('.selection_documents .choix input').hide();
 }
 
 jQuery(document).ready(function(){
-	medias_init_clicks();
+	medias_selection_multiple_init_clicks();
 	medias_init_select_all();
 	em_markitup();
 	onAjaxLoad(em_markitup);
 	onAjaxLoad(em_tabs_charger);
-	onAjaxLoad(medias_init_clicks);
+	onAjaxLoad(medias_selection_multiple_init_clicks);
 	onAjaxLoad(medias_init_select_all);
 });
 
