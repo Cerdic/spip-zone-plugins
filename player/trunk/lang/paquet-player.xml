@@ -6,6 +6,9 @@
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=es" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=fa" total="2" traduits="0" modifs="2" nouveaux="0" pourcent="0.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
