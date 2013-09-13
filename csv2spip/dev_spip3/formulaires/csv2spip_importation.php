@@ -11,9 +11,9 @@ function formulaires_csv2spip_importation_charger_dist(){
         "abs_visiteur"               => "",
         "traitement_article_efface"  => "rien_faire",
         "transfere_article"          => "",
-        "rubrique_parent_archive"    => "0",
+        "id_rubrique_parent_archive"    => "0",
         "nom_rubrique_archive"       => "archive_$annee",
-        "rubrique_parent"            => "0",
+        "id_rubrique_parent"            => "0",
     );
         
 return $valeurs;
@@ -49,16 +49,21 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $abs_visiteurs = _request('abs_visiteur');
     $suppression_article_efface = _request('suppression_article_efface');
     $traitement_article_efface = _request('traitement_article_efface');
-    $id_rubrique_parent = _request('rubrique_parent_archive');
     $nom_rubrique_archive = _request('nom_rubrique_archive');
-    $rubrique_parent = _request('rubrique_parent');
 
-    //récupération de l'id de la rubrique parent
-    $id_rubrique_parent=explode('|',$id_rubrique_parent[0]);
-    $id_rubrique_parent=$id_rubrique_parent[1];
+    // recuperation de l'id de la rubrique parent des rubriques admins
+    $id_rubrique_parent_admin = _request('id_rubrique_parent');
+    $id_rubrique_parent_admin = explode('|',$id_rubrique_parent_admin[0]);
+    $id_rubrique_parent_admin = $id_rubrique_parent_admin[1];
+
+    //récupération de l'id de la rubrique parent archive
+    $id_rubrique_parent_archive = _request('id_rubrique_parent_archive');
+    $id_rubrique_parent_archive=explode('|',$id_rubrique_parent[0]);
+    $id_rubrique_parent_archive=$id_rubrique_parent_archive[1];
     
     $retour = array();
 
+	include_spip('action/editer_rubrique');
 	if ($abs_redacs OR $abs_admins OR $abs_visiteurs){
 		include_spip('action/editer_objet');
 		include_spip('action/editer_liens');
@@ -82,6 +87,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     // $tableau_csv_redacs
     // $tableau_csv_admins
     $tableau_csv_visiteurs = $tableau_csv_redacs = $tableau_csv_admins = array();
+    $tableau_csv_rubriques_admins = array();
     $fichiercsv= fopen($destination, "r");
     $i=0;
     while (($data= fgetcsv($fichiercsv,"~")) !== FALSE){
@@ -105,14 +111,23 @@ function formulaires_csv2spip_importation_traiter_dist(){
 				return  $retour;
 			}
 	   } else {
+			// correspondance statut spip / statut csv
+			$Tcorrespondances = array('administrateur'=>'0minirezo', 'redacteur'=>'1comite', 'visiteur'=>'5forum');
 			for ($j = 0; $j < $nombre_elements; $j++) {
 				if ($data[$num_login] OR $data[$num_email]) { 	//creation du tableau contenant l'ensemble des données à importer
-				   if ($data[$num_statut] == '6forum')
+				   if ($Tcorrespondances[$data[$num_statut]] == '6forum')
 						$tableau_csv_visiteurs[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
-				   if ($data[$num_statut] == '1comite')
+				   if ($Tcorrespondances[$data[$num_statut]] == '1comite')
 						$tableau_csv_redacs[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
-				   if ($data[$num_statut] == '0minirezo')
+				   if ($Tcorrespondances[$data[$num_statut]] == '0minirezo') {
 						$tableau_csv_admins[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
+						if ($en_tete[$j] == 'ss_groupe' AND $data[$j]) {
+							$Trub = explode('|', $data[$j]);
+							foreach($Trub as $rub)
+								if (!in_array($rub, $tableau_csv_rubriques_admins))
+									$tableau_csv_rubriques_admins[] = $rub;
+						}
+					}
 				}
 			}
 		}
@@ -120,7 +135,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     }
     fclose($fichiercsv);
     unlink($destination);
-    
+   
 
     //récupération des auteurs de la bdd en 3 array 
     // $visiteur_bdd
@@ -149,6 +164,26 @@ function formulaires_csv2spip_importation_traiter_dist(){
         $admin_restreint_bdd[$key['login']?$key['login']:$key['email']]=$key;
     }
 
+	// traitement rubriques admin
+    // construction du tableau de correspondance nom_rubrique avec leur id
+    // création des rubriques n'existant pas
+    $tableau_bdd_rubriques_admins = array();
+    $result = sql_select(array('id_rubrique', 'titre'), 'spip_rubriques');
+    while ($row = sql_fetch($result)){
+		$tableau_bdd_rubriques_admins[$row['id_rubrique']] = strtolower($row['titre']);
+	}
+
+
+	// créer les rubriques admins du csv n'existant pas et les indexer
+	foreach($tableau_csv_rubriques_admins as $id_rub=>$rub){
+		if (!in_array(strtolower($rub), $tableau_bdd_rubriques_admins)) {
+			$set = array('titre'=>$rub);
+			$id_rub = rubrique_inserer($id_rubrique_parent_admin);
+			rubrique_modifier($id_rub, $set);
+			$tableau_bdd_rubriques_admins[$id_rub] = $rub;
+		}
+	}
+
 
     // PARTIE II : Suppresions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
     // 1. ras
@@ -157,10 +192,10 @@ function formulaires_csv2spip_importation_traiter_dist(){
 
     // Si choix3 : transferer les articles , création de la rubrique d'archive (en tenant compte d'une rubrique parent)
 	if($traitement_article_efface == "transferer_articles"){
-		if(!$id_rubrique_archive = sql_fetsel('id_rubrique','spip_rubriques',array('titre ="'.$nom_rubrique_archive.'"',"id_parent=$id_rubrique_parent"))){
+		if(!$id_rubrique_archive = sql_fetsel('id_rubrique','spip_rubriques',array('titre ="'.$nom_rubrique_archive.'"',"id_parent=$id_rubrique_parent_archive"))){
 			$objet = 'rubrique';
 			$set = array('titre'=>$nom_rubrique_archive);
-			$id_rubrique_archive = objet_inserer($objet,$id_rubrique_parent);
+			$id_rubrique_archive = objet_inserer($objet,$id_rubrique_parent_archive);
 			objet_modifier($objet, $id_rubrique_archive, $set);
 		}
 	}	 
@@ -177,6 +212,11 @@ function formulaires_csv2spip_importation_traiter_dist(){
 		$Tid_admins = csv2spip_diff_absents($admin_restreint_bdd, $tableau_csv_admins);
 		csv2spip_supprimer_auteurs($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_archive);
 	}
+
+    // PARTIE III : maj des existants 
+    // 1. ras
+    // 2. supprimer les articles 
+    // 3. transferer les articles dans une rubrique d'archivage
 
     
 /*
