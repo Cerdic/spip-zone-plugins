@@ -1,4 +1,4 @@
-<traduction module="chosen" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/chosen/lang/" reference="fr">
+<traduction module="chosen" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/chosen/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/chosen?lang_cible=en" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/chosen?lang_cible=es" total="11" traduits="11" modifs="0" nouveaux="0" pourcent="100.00">
