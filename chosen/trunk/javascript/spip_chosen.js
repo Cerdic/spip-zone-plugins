@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
 
 	/* Ajoute la propriete overflow:visible au li contenant le select chosen (pour contrer le css de SPIP) */
 	spip_chosen_visible = function() {
-		$('.chosen-container').parent('li').each(function () {
+		$('.chosen-container').parents('li,fieldset,form').each(function () {
 			$(this).css("overflow", "visible");
 		});
 	}
