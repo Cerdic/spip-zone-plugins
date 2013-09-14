@@ -168,6 +168,7 @@
   display: block;
 }
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li > a {
+  background: transparent;
   display: block;
   padding: 4px 0px;
   text-decoration: none;
