@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="icon/tooltip.png"
+	documentation="http://contrib.spip.net/?article4437"
 >
 	<nom>Tooltip</nom>
 	<auteur lien="http://bassistance.de">Jörn Zaefferer</auteur>
