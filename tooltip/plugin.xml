@@ -3,8 +3,8 @@
 <prefix>tooltip</prefix>
 <icon>icon/tooltip.png</icon>
 
-<version>1.3.3</version>
-<etat>test</etat>
+<version>1.4.0</version>
+<etat>stable</etat>
 <categorie>navigation</categorie>
 
 <slogan>Infobulles jQuery</slogan>

@@ -1,8 +1,8 @@
 <paquet
 	prefix="tooltip"
 	categorie="navigation"
-	version="1.3.3"
-	etat="test"
+	version="1.4.0"
+	etat="stable"
 	compatibilite="[3.0.0-dev;3.0.99]"
 	logo="icon/tooltip.png"
 >
@@ -13,6 +13,7 @@
 	<pipeline nom="insert_head_css" inclure="tooltip_pipelines.php" />
 	<pipeline nom="insert_head" inclure="tooltip_pipelines.php" />
 	<pipeline nom="jquery_plugins" inclure="tooltip_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="tooltip_pipelines.php" />
 
 	<menu nom="tooltips" titre="tooltip:titre_menu_tooltips" parent="menu_squelette" icone="" action="configurer_tooltip" />
 </paquet>
