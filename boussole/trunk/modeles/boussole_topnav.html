@@ -22,7 +22,8 @@
                                     Pour ce modele, vide correspond a aucune bulle
 	- taille_logo_site: taille max du logo de chaque site (en pixels). 0 ou vide correspond à aucun logo
 	- titre_menu_mobile :    Titre du menu en mode mobile
-            
+	- div_id : id du div englobant. Vide correspond a aucun id
+
     css généré utilisable directement en production
 	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.css})" type="text/css" />]
 
@@ -35,7 +36,7 @@
 		titre_menu_mobile=Spip Net} />
 -->]
 <B_groupe>
-<div id="boussole" class="menu_container spip-theme full_width">
+<div[ id="(#ENV{div_id})"] class="menu_container spip-theme full_width">
 	<div class="mobile_collapser">
 		<label for="hidden_menu_collapser">
 			<span class="mobile_menu_icon"></span>

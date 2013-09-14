@@ -37,6 +37,7 @@
   -webkit-box-shadow: 0px 3px 5px #aaaaaa;
   -moz-box-shadow: 0px 3px 5px #aaaaaa;
   box-shadow: 0px 3px 5px #aaaaaa;
+  z-index: 99;
 }
 .menu_container.spip-theme > ul > li a {
   color: #eeeeee;
