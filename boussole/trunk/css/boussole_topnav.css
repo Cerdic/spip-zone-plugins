@@ -1,4 +1,3 @@
-/* CSS crunched with Crunch - http://crunchapp.net/ */
 .spip_theme {
   background: #2e2e2e;
   /* Old browsers */
@@ -50,19 +49,19 @@
   background: none;
 }
 .menu_container.spip-theme > ul > li .caret {
-  border-bottom-color: #544f52;
-  border-top-color: #544f52;
+  border-bottom-color: #ffffff;
+  border-top-color: #ffffff;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 4px solid #544f52;
+  border-top: 4px solid #ffffff;
 }
 .menu_container.spip-theme > ul > li:hover {
   background-color: #544f52;
 }
 .menu_container.spip-theme > ul > li:hover .caret {
-  border-bottom-color: #2e2e2e;
-  border-top-color: #2e2e2e;
-  border-top: 4px solid #2e2e2e;
+  border-bottom-color: #ffffff;
+  border-top-color: #ffffff;
+  border-top: 4px solid #ffffff;
 }
 .menu_container.spip-theme ul.menu_submenu_block li:hover {
   background: none repeat scroll 0% 0% #2e2e2e;
