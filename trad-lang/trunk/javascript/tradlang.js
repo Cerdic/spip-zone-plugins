@@ -4,11 +4,10 @@ var tradlang_switchers = function(){
 		if($(this).find('a.legend_link').size() == 0){
 			$(this).wrapInner('<a href="#" class="legend_link"></a>');
 			$(this).find('a.legend_link').unbind('click').click(function(){
-				if($(this).parent('h3').next('ul').is(':hidden') || $(this).parent('caption').next('tbody').is(':hidden')){
+				if($(this).parent('h3').next('ul').is(':hidden') || $(this).parent('caption').next('tbody').is(':hidden'))
 					$(this).parents('.formulaire_spip,table').find('.fieldset ul:hidden,.boutons:hidden,tbody:hidden').slideDown();
-				}else{
+				else
 					$(this).parents('.formulaire_spip,table').find('.fieldset ul,.boutons,tbody').slideUp();
-				}
 				return false;
 			});
 		}
@@ -18,15 +17,15 @@ var tradlang_switchers = function(){
 var tradlang_thead_flottant = function(){
 	if($(".bilan table.spip").not('.flotting').length > 0){
 		$("table.spip").not('.flotting').each(function(){
-			var table = $(this);
-			var thead = $(this).find('thead');
-			var thead_width = $(this).width();
-			var offset = thead.offset();
-			var limite_multilang = offset.top;
-			var limite_bas = limite_multilang+$(this).height()-$(this).find("tfoot").height()-thead.height();
+			var table = $(this),
+				thead = $(this).find('thead'),
+				thead_width = $(this).width(),
+				offset = thead.offset(),
+				limite_thead= offset.top,
+				limite_bas = limite_thead+$(this).height()-$(this).find("tfoot").height()-thead.height();
 			$(window).scroll(function() {
 				var pos_bas = thead.offset().top+thead.height();
-				if(($(window).scrollTop() >= limite_multilang) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
+				if(($(window).scrollTop() >= limite_thead) && (pos_bas <= limite_bas) && ($(window).scrollTop() < limite_bas)){
 					if(!thead.hasClass("thead_flottant")){
 						thead.find('th').each(function(){
 							$(this).css({'width':$(this).width()+'px'});
@@ -34,11 +33,10 @@ var tradlang_thead_flottant = function(){
 						table.find('tfoot tr').eq(0).find('td').each(function(){
 							$(this).css({'width':$(this).width()+'px'});
 						});
-						thead.addClass("thead_flottant");
+						thead.addClass("thead_flottant").css({"position": "fixed", "top": '0px', "width": thead_width+"px","z-index":"999"});
 					}
-					thead.css({"position": "absolute", "top": $(window).scrollTop()+'px', "width": thead_width+"px","z-index":"999"});
 				}
-				if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas)){
+				if(($(window).scrollTop() < limite_thead) || (pos_bas > limite_bas)){
 					thead.removeClass("thead_flottant").css({"position": "static", "width": "auto"});
 					thead.find('th').css({'width':'auto'});
 					table.find('tbody tr').eq(0).find('td').css({'width':'inherit'});
@@ -50,7 +48,7 @@ var tradlang_thead_flottant = function(){
 }
 
 var tradlang_tabs_charger = function(){
-    jQuery('#infos_auteur_tabs').tabs();
+	jQuery('#infos_auteur_tabs').tabs();
 };
 
 (function($) {
