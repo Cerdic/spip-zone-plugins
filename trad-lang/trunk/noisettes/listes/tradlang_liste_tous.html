@@ -133,7 +133,7 @@
 		#BOITE_OUVRIR{'',error}
 			<:tradlang:erreur_langue_activer_impossible{lang=#ENV{lang_cible}}:>
 		#BOITE_FERMER]]
-[(#GET{total_inexistants}|=={#GET{total_mere}}|non)
+][(#GET{total_inexistants}|=={#GET{total_mere}}|non)
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#GET{autoriser_modifier}|oui)
 	#BOITE_OUVRIR{'',error}

@@ -69,9 +69,8 @@ var tradlang_tabs_charger = function(){
 
 
 var tradlang_hauteur_blocs = function(){
-	if(typeof(jQuery.fn.equalHeights) ==  'function'){
+	if(typeof(jQuery.fn.equalHeights) ==  'function')
 		jQuery('.traducteurs li.item').equalHeights();
-	}
 }
 
 $(document).ready(function(){

@@ -26,9 +26,9 @@
 	<BOUCLE_si_pas_profil(CONDITION){si #ENV{vue}|in_array{#ARRAY{0,profil}}|non}>
 		<div id="infos_auteur_tabs">
 			<ul class="liste-items">
-				[(#PLUGIN{mesfavoris}|oui)<li class="item"><a href="&#35;favoris">[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]</a></li>]
-				<li class="item"><a href="&#35revisions">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</a></li>
-				<li class="item"><a href="&#35stats">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_stats_vos:>,<:tradlang:titre_stats_ses:>})]</a></li>
+				[(#PLUGIN{mesfavoris}|oui)<li class="item"><a href="#favoris">[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]</a></li>]
+				<li class="item"><a href="#revisions">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</a></li>
+				<li class="item"><a href="#stats">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_stats_vos:>,<:tradlang:titre_stats_ses:>})]</a></li>
 			</ul>
 			[(#PLUGIN{mesfavoris}|oui)
 				[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
