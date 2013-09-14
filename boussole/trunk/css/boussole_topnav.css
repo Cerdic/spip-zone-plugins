@@ -170,6 +170,7 @@
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li > a {
   background: transparent;
   display: block;
+  border: 0;
   padding: 4px 0px;
   text-decoration: none;
   color: #666666;
