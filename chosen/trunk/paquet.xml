@@ -1,11 +1,11 @@
 <paquet
 	prefix="chosen"
 	categorie="navigation"
-	version="1.1.0"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/chosen-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/?article4438"
 >
 
 	<nom>Chosen</nom>
@@ -23,4 +23,5 @@
 	<pipeline nom="insert_head" 	    inclure="chosen_pipelines.php" />
 	<pipeline nom="insert_head_css"     inclure="chosen_pipelines.php" />
 
+	<menu nom="chosen" titre="chosen:chosen_titre" parent="menu_squelette" icone="images/chosen-16.png" action="configurer_chosen" />
 </paquet>
