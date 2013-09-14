@@ -25,27 +25,27 @@
 [(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#ENV{langues_choisies}}|implode{', '})]})]
 [(#BOITE_OUVRIR{'',notice})]
 	<:tradlang:message_langues_choisies_affichees{langues=#GET{langues_string}}:>
-[(#BOITE_FERMER)]]
+[(#BOITE_FERMER)]
 
-[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#ENV{langues_choisies},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
+[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#ENV{langues_choisies},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]]
 
 [(#ENV{langues_choisies}|is_array|non)
 [(#GET{langues_preferees_auteur}|is_array|oui)
 [(#GET{langues_preferees_auteur}|count|>{0}|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_preferees_auteur}}|implode{', '})]})]
 	[(#BOITE_OUVRIR{'',notice})]
-		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_preferees_auteur},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',' '})]
 		<:tradlang:message_langues_preferees_affichees{langues=#GET{langues_string}}:>
-	[(#BOITE_FERMER)]]]]
+	[(#BOITE_FERMER)]
+	[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_preferees_auteur},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',' '})]]]]
 [(#ENV{langues_choisies}|is_array|non|et{#GET{langues_preferees_auteur}|is_array|non|ou{#GET{langues_preferees_auteur}|count|>{0}|non}|oui})
 [(#GET{langues_utilisees}|is_array|oui)
 	[(#SET{langues_string,[(#VAL{traduire_nom_langue}|array_map{#GET{langues_utilisees}}|implode{', '})]})]
 	[(#BOITE_OUVRIR{'',notice})]
-		[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_utilisees},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]
 		<:tradlang:message_langues_utilisees_affichees{langues=#GET{langues_string},nb=#GET{nb_utilisees}}:>
 		[(#SESSION{id_auteur}|oui)#SET{url_profil,#URL_AUTEUR{#SESSION{id_auteur}}|parametre_url{vue,profil}}
 		<br /><:tradlang:message_info_choisir_langues_profiles{url_profil=#GET{url_profil}}:>]
-	[(#BOITE_FERMER)]]]
+	[(#BOITE_FERMER)]
+	[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'',#GET{langues_utilisees},<:tradlang:titre_changer_langues_affichees:>,'langues_choisies',true})]]]
 ]
 </B_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
