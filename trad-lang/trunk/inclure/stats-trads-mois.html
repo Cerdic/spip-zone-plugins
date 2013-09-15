@@ -1,10 +1,10 @@
-<p class="pagination">
+<div class="pagination">
 	[<span class="duree">(#ENV{duree_mois,365}|div{30}|intval) <:date_mois:></span>] |
 	<a href="[(#SELF|parametre_url{duree_mois,#ENV{duree_mois,365}|duree_zoom{moins}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
 	<a href="[(#SELF|parametre_url{duree_mois,#ENV{duree_mois,365}|duree_zoom{plus}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
-</p>
+</div>
 <B_statsm>
 	<table class='trads' id='trads_mensuelles'>
 		<caption><:tradlang:titre_stats_trads_mensuelles:></caption>
@@ -26,4 +26,3 @@
 		</tbody>
 	</table>
 </B_statsm>
-

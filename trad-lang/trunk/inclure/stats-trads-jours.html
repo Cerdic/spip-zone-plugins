@@ -1,10 +1,10 @@
-<p class="pagination">
+<div class="pagination">
 	[<span class="duree">(#ENV{duree,90}) <:info_jours:></span>] |
 	<a href="[(#SELF|parametre_url{duree,#ENV{duree,90}|duree_zoom{moins}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
 	<a href="[(#SELF|parametre_url{duree,#ENV{duree,90}|duree_zoom{plus}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
-</p>
+</div>
 [(#SET{max,0})][(#SET{moy,0})][(#SET{last,0})][(#SET{lastlast,0})]
 <B_statsj>
 	<table class='spip info trads' style="width:145px;">

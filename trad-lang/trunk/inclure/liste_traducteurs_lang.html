@@ -5,8 +5,7 @@
 [<h2 class="h2">(#ENV*{titre})</h2>]
 #ANCRE_PAGINATION
 [<p>(#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_nb_participant_lang,tradlang:info_nb_participants_lang,nb,#ARRAY{lang,#GET{langue_choisie},langue_longue,#GET{langue_longue}}})</p>]
-[<p class="pagination">(#PAGINATION)</p>]
-<p class="pagination_tri"></p>
+[<div class="pagination">(#PAGINATION)</div>]
 <ul class="liste-items traducteurs">
 <BOUCLE_auteurs(DATA){source sql,#GET{req}}{pagination #ENV{pagination,12}}>
 <li class="item">
@@ -31,7 +30,7 @@
 </li>
 </BOUCLE_auteurs>
 </ul>
-[<p class="pagination">(#PAGINATION)</p>]
+[<div class="pagination">(#PAGINATION)</div>]
 </B_auteurs>
 <p><:tradlang:info_aucun_participant_lang{lang=#GET{langue_choisie},langue_longue=#GET{langue_longue}}:></p>
 <//B_auteurs>

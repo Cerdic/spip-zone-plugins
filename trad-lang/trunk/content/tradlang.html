@@ -76,7 +76,7 @@
 			</BOUCLE_recherche_tradlang>
 			</tbody>
 		</table>
-		[<p class="pagination">(#PAGINATION)</p>]
+		[<div class="pagination">(#PAGINATION)</div>]
 	</div>
 	</B_recherche_tradlang>
 	</BOUCLE_si_pas_modif>
@@ -86,7 +86,6 @@
 		<h2 class="h2">
 			<:tradlang:titre_modifications_chaines:>
 		</h2>
-		
 		<h3><:tradlang:titre_modifications_chaine_traduite:></h3>
 		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
 		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
