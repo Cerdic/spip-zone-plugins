@@ -13,6 +13,9 @@
 
 	- boussole :		alias de la boussole a afficher. spip, pour la galaxie SPIP
 	- titre_boussole :	indicateur oui/non d'affichage du titre de la boussole. Vide correspond a non
+						possible de passer directement le texte à afficher si différent de oui/non.
+	- titre_boussole_mobile : Titre de la boussole en mode mobile
+	- lien_boussole :	lien à afficher sur le titre de la boussole. Vide correspond au lien de demo si il existe.
 	- taille_logo_boussole : taille du logo de la boussole. 0 ou vide correspond à aucun logo
 	- type_bulle :		type de bulle d'info parmi dont les valeurs possibles sont :
                                     + nom_site
@@ -21,9 +24,8 @@
                                     + descriptif_site correspond a une intro de 80 caracteres du descriptif
                                     Pour ce modele, vide correspond a aucune bulle
 	- taille_logo_site: taille max du logo de chaque site (en pixels). 0 ou vide correspond à aucun logo
-	- titre_menu_mobile :    Titre du menu en mode mobile
 	- div_id : id du div englobant. Vide correspond a aucun id
-            
+
     css généré utilisable directement en production
 	[<link rel="stylesheet" href="(#CHEMIN{css/boussole_topnav.css})" type="text/css" />]
 
@@ -33,26 +35,29 @@
 		taille_logo_boussole=24,
 		taille_logo_site=16,
 		type_bulle=descriptif_site,
-		titre_menu_mobile=Spip Net} />
+		titre_boussole_mobile=SPIP} />
 -->]
 <B_groupe>
 <div[ id="(#ENV{div_id})"] class="menu_container spip-theme full_width">
 	<div class="mobile_collapser">
 		<label for="hidden_menu_collapser">
 			<span class="mobile_menu_icon"></span>
-			[(#ENV{titre_menu_mobile})]
+			[(#ENV{titre_boussole_mobile})]
 		</label>
 	</div>
 	<input id="hidden_menu_collapser" type="checkbox">
 	<ul>
-	[(#ENV{titre_boussole, non}|=={oui}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
+	[(#ENV{titre_boussole, non}|!={non}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
 		<li>
-			<a[ href="(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>
+			<a[ href="(#ENV{lien_boussole, #BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>
 			[(#ENV{taille_logo_boussole}|>{0}|oui)
 				[(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]
 			]
 			[(#ENV{titre_boussole, non}|=={oui}|oui)
 				[(#ENV{boussole}|boussole_traduire{nom_boussole})]
+			]
+			[(#ENV{titre_boussole, non}|!={oui}|et{#ENV{titre_boussole, non}|!={non}}|oui)
+				[(#ENV{titre_boussole})]
 			]
 			</a>
 		</li>

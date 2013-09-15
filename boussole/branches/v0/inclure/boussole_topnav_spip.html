@@ -1,8 +1,12 @@
-	<INCLURE{fond=modeles/boussole_topnav,
-		boussole=spip,
-		titre_boussole=oui,
-		taille_logo_boussole=36,
-		taille_logo_site=16,
-		type_bulle=slogan_site,
-		div_id=boussole_spip,
-		titre_menu_mobile=SPIP} />
+<BOUCLE_lien_spip(BOUSSOLES){aka_boussole=spip}{aka_site=net}>
+	#SET{lien_spip, #URL_SITE}
+</BOUCLE_lien_spip>
+<INCLURE{fond=modeles/boussole_topnav,
+	boussole=spip,
+	titre_boussole=SPIP,
+	lien_boussole=#GET{lien_spip},
+	taille_logo_boussole=36,
+	taille_logo_site=16,
+	type_bulle=slogan_site,
+	div_id=boussole_spip,
+	titre_boussole_mobile=SPIP} />
