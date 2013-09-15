@@ -29,8 +29,8 @@
 		<input type="hidden" name="action" value="crayons" />
 		<input type="hidden" name="redirect" value="[(#SELF|parametre_url{edit,''})]" />
 		<ul>
-			<BOUCLE_nb_tradlangs(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}> </BOUCLE_nb_tradlangs>
-			<BOUCLE_nb_tradlangs_affiche(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW}{lang=#GET{lang_cible}}{0,30}>
+			<BOUCLE_nb_tradlangs(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW,RELIRE}{lang=#GET{lang_cible}}> </BOUCLE_nb_tradlangs>
+			<BOUCLE_nb_tradlangs_affiche(TRADLANGS){id_tradlang_module}{statut IN MODIF,NEW,RELIRE}{lang=#GET{lang_cible}}{0,30}>
 			<li class="editer editer_tradlang">
 				<div style="width:100%">
 					[(#CRAYON{str_statut})]

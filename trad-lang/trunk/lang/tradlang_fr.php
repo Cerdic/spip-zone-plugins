@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Autres langues :',
 	'info_langues_preferees' => 'Langue(s) préférée(s) :',
 	'info_module_nb_items_langue_mere' => 'La langue mère du module est <abbr title="@lang_mere@">@lang_mere_longue@</abbr> et comporte @nb@ items de langue.',
-	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
+	'info_module_traduction' => '@statut@ : @total@ (@percent@%)',
 	'info_module_traduit_langues' => 'Ce module est traduit ou partiellement traduit dans @nb@ langues.',
 	'info_module_traduit_pc' => 'Module traduit à @pc@%',
 	'info_module_traduit_pc_lang' => 'Module "@module@" traduit à @pc@% en @lang@ (@langue_longue@)',
@@ -119,6 +119,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_module_modif' => '@nb@ items du module "@module@" sont modifiés et à vérifier en @lang@ (@langue_longue@)"',
 	'info_nb_items_module_modif_aucun' => 'Aucun item du module "@module@" n\'est modifié et à vérifier en @lang@ (@langue_longue@)',
 	'info_nb_items_module_modif_un' => 'Un item du module "@module@" est modifié et à vérifier en @lang@ (@langue_longue@)"',
+	'info_nb_items_module_relire' => '@nb@ items du module "@module@" sont à relire en @lang@ (@langue_longue@)"',
+	'info_nb_items_module_relire_aucun' => 'Aucun item du module "@module@" n\'est à relire en @lang@ (@langue_longue@)',
+	'info_nb_items_module_relire_un' => 'Un item du module "@module@" est à relire en @lang@ (@langue_longue@)"',
 	'info_nb_items_module_new' => '@nb@ items du module "@module@" sont à traduire en @lang@ (@langue_longue@)"',
 	'info_nb_items_module_new_aucun' => 'Aucun item du module "@module@" n\'est à traduire en @lang@ (@langue_longue@)',
 	'info_nb_items_module_new_un' => 'Un item du module "@module@" est à traduire en @lang@ (@langue_longue@)"',
@@ -127,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_items_module_ok_un' => 'Un item du module "@module@" est traduit en @lang@ (@langue_longue@)"',
 	'info_nb_items_priorite' => 'Les modules de priorité "@priorite@" ont @nb@ items',
 	'info_nb_items_priorite_modif' => '@pc@% des items de priorité "@priorite@" sont modifiés et à vérifier en @lang@ (@langue_longue@)',
+	'info_nb_items_priorite_relire' => '@pc@% des items de priorité "@priorite@" sont à relire en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_new' => '@pc@% des items de priorité "@priorite@" sont nouveaux en @lang@ (@langue_longue@)',
 	'info_nb_items_priorite_ok' => 'Les modules de priorité "@priorite@" sont traduits à @pc@% en @lang@ (@langue_longue@)',
 	'info_nb_modules_favoris' => '@nb@ modules favoris.',
@@ -154,6 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_manquants' => '@nb@ items sont manquants dans cette langue (par rapport à la langue mère)',
 	'items_modif' => 'Items modifiés :',
 	'items_new' => 'Nouveaux items :',
+	'items_relire' => 'Items à relire :',
 	'items_total_nb' => 'Nombre total d\'items :',
 
 	// J
@@ -274,8 +279,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Ce plugin permet de gérer les fichiers langues',
 
 	// S
-	'str_status_modif' => 'Modifié (MODIF)',
-	'str_status_new' => 'Nouveau (NEW)',
+	'str_status_modif' => 'Modifié',
+	'str_status_new' => 'Nouveau',
+	'str_status_relire' => 'À relire',
 	'str_status_traduit' => 'Traduit',
 
 	// T
@@ -325,6 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_date' => 'Date',
 	'th_items_modifs' => 'Items modifiés',
 	'th_items_new' => 'Nouveaux items',
+	'th_items_relire' => 'Items à relire',
 	'th_items_traduits' => 'Items traduits',
 	'th_langue' => 'Langue',
 	'th_langue_mere' => 'Langue mère',

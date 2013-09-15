@@ -6,9 +6,9 @@
 [(#SET{langue_longue,#ENV{lang_cible}|traduire_nom_langue})]
 [(#SET{defaut_tri,#ARRAY{statut,#ENV{statut_sens,1},id,1,str,1,maj,-1}})]
 [(#SET{autoriser_modifier,#AUTORISER{modifier,tradlang}})]
-
+[(#SET{statuts,[(#ENV{statut}|in_array{#LISTE{OK,NEW,MODIF,RELIRE}}|?{#ENV{statut},#LISTE{OK,NEW,MODIF,RELIRE}})]})]
 <BOUCLE_revise(TRADLANGS){module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
-#SET{total_mere,#GRAND_TOTAL}
+[(#SET{total_mere,#GRAND_TOTAL})]
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
 	<BOUCLE_total_orig(TRADLANGS){module}{statut=OK}{lang=#ENV{lang_orig}}> </BOUCLE_total_orig>
 		[(#GRAND_TOTAL|<{#GET{total_mere}}|oui)
@@ -37,28 +37,36 @@
 <BOUCLE_total_item_new(TRADLANGS){module}{id IN #GET{str_mere}}{statut=NEW}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_new>
 [(#SET{total_new,#GRAND_TOTAL})]
 </B_total_item_new>[(#SET{total_new,0})]<//B_total_item_new>
+<BOUCLE_total_item_relire(TRADLANGS){module}{id IN #GET{str_mere}}{statut=RELIRE}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_relire>
+[(#SET{total_relire,#GRAND_TOTAL})]
+</B_total_item_relire>#SET{total_relire,0}<//B_total_item_relire>
 <BOUCLE_total_item_modif(TRADLANGS){module}{id IN #GET{str_mere}}{statut=MODIF}{lang=#ENV{lang_cible}}> </BOUCLE_total_item_modif>
 [(#SET{total_modif,#GRAND_TOTAL})]
 </B_total_item_modif>#SET{total_modif,0}<//B_total_item_modif>
 [(#SET{percent_ok,#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor})]
+[(#SET{percent_relire,#GET{total_relire}|div{#GET{total_mere}}|mult{100}|floor})]
 [(#SET{percent_modif,#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor})]
-[(#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}}})]
-
+[(#SET{percent_new,#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_relire}}|moins{#GET{percent_modif}}})]
+[(#SET{statuts_texte,#VAL{tradlang}|objet_info{statut_textes_instituer}})]
 <div class="info_module">
-	[(#GET{total_new}|plus{#GET{total_modif}}|plus{#GET{total_ok}}|>{0}|oui)
+	[(#GET{total_new}|plus{#GET{total_relire}}|plus{#GET{total_modif}}|plus{#GET{total_ok}}|>{0}|oui)
 	<p><:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:></p>
 	<ul>[(#SET{module_existant,oui})][(#GET{total_new}|>{0}|oui)
-		<li>
-			<:tradlang:info_module_traduction{total=#GET{total_new},percent=#GET{percent_new},statut=NEW}:>
+		<li>#SET{statut,#GET{statuts_texte}|table_valeur{NEW}|_T}
+			<:tradlang:info_module_traduction{total=#GET{total_new},percent=#GET{percent_new},statut=#GET{statut}}:>
+		</li>][(#GET{total_relire}|>{0}|oui)
+		<li>#SET{statut,#GET{statuts_texte}|table_valeur{RELIRE}|_T}
+			<:tradlang:info_module_traduction{total=#GET{total_relire},percent=#GET{percent_relire},statut=#GET{statut}}:>
 		</li>][(#GET{total_modif}|>{0}|oui)
-		<li>
-			<:tradlang:info_module_traduction{total=#GET{total_modif},percent=#GET{percent_modif},statut=MODIF}:>
+		<li>#SET{statut,#GET{statuts_texte}|table_valeur{MODIF}|_T}
+			<:tradlang:info_module_traduction{total=#GET{total_modif},percent=#GET{percent_modif},statut=#GET{statut}}:>
 		</li>]
 		<li>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc{pc=#GET{percent_ok}}:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="modif" style="[#LANG_LEFT: (#GET{percent_ok})px;][width: (#GET{percent_modif})px]"></div>
-				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+				<div class="relire" style="[#LANG_LEFT: (#GET{percent_ok})px;][width: (#GET{percent_relire})px]"></div>
+				<div class="modif" style="[#LANG_LEFT: (#GET{percent_ok}|plus{#GET{percent_relire}})px;][width: (#GET{percent_modif})px]"></div>
+				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</li>
 	</ul>]
@@ -100,12 +108,12 @@
 	[(#GRAND_TOTAL|>{1}|oui)
 	<div class="actions">
 		<p class="filtrer"><:tradlang:info_filtrer_status:></p>
-		[(#ENV{statut}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,''}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a>]
-		[(#ENV{statut}|non)<strong class="on"><:tradlang:lien_aucun_status:></strong>]]
+		[(#ENV{statut}|et{#ENV{statut}|=={aucun}|non}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,aucun}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton"><:tradlang:lien_aucun_status:></a>]
+		[(#ENV{statut}|non|ou{#ENV{statut}|=={aucun}|oui}|oui)<strong class="on"><:tradlang:lien_aucun_status:></strong>]]
 	<BOUCLE_statut(TRADLANGS){module}{id IN #GET{str_mere}}{lang=#ENV{lang_cible}}{fusion statut}>
 	[(#GRAND_TOTAL|>{1}|oui)[(#SET{statut,#STATUT})]
-		[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">#STATUT</a>]
-		[(#STATUT|!={#ENV{statut}}|non)<strong class="on">#STATUT</strong>]]
+		[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#_module:URL_TRADLANG_MODULE|parametre_url{statut,#STATUT}|parametre_url{lang_cible,#ENV{lang_cible}}|parametre_url{lang_orig,#ENV{lang_orig}})]" class="ajax bouton">[(#GET{statuts_texte}|table_valeur{#STATUT}|_T)]</a>]
+		[(#STATUT|!={#ENV{statut}}|non)<strong class="on">[(#GET{statuts_texte}|table_valeur{#STATUT}|_T)]</strong>]]
 	</BOUCLE_statut>
 	[(#GRAND_TOTAL|>{1}|oui)
 	</div>]
@@ -194,7 +202,8 @@
 
 	On affiche finalement le tableau de traductions
 
-]<B_revise_cible>
+]
+<B_revise_cible>
 <table class="spip liste_traductions tablesorter">
 	<thead>
 		<tr class="row_first">
@@ -209,7 +218,8 @@
 	<tbody>[(#REM)
 	
 		on n'affiche que les id qui existent dans la langue mère
-	]<BOUCLE_revise_cible(TRADLANGS trandlang_modules){module}{id IN #GET{str_mere}}{statut ?}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
+		
+	]<BOUCLE_revise_cible(TRADLANGS trandlang_modules){module}{id IN #GET{str_mere}}{statut IN #GET{statuts}}{lang=#ENV{lang_cible}}{tri #ENV{par,statut},#GET{defaut_tri}}{par id}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]" id="tradlang-#ID_TRADLANG">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANGS){module}{id=#ID}{lang=#GET{lang_orig,#LANG_MERE}}>
@@ -219,7 +229,7 @@
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html|nl2br)]</td>
 		<td class="date">#MAJ</td>
-		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="statut" width="50px">[(#GET{statuts_texte}|table_valeur{#STATUT}|_T)]</td>
 		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#GET{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
 	</BOUCLE_revise_cible>

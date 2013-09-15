@@ -17,6 +17,7 @@
 	[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]]
 </div>]
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>[(#SET{total_ok_full,0})
+][(#SET{total_relire_full,0})
 ][(#SET{total_modif_full,0})
 ][(#SET{total_new_full,0})
 ][(#SET{total_chaines,0})
@@ -35,6 +36,9 @@
 			</th>
 			<th class="items_traduits">
 				<:tradlang:th_items_traduits:>
+			</th>
+			<th class="items_relire">
+				<:tradlang:th_items_relire:>
 			</th>
 			<th class="items_modifs">
 				<:tradlang:th_items_modifs:>
@@ -71,6 +75,17 @@
 			[(#GET{total_ok})]
 			</abbr>
 		</td><//B_ok_langue>
+		<BOUCLE_relire_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=RELIRE}> </BOUCLE_relire_langue>
+		<td>[(#SET{total_relire,#GRAND_TOTAL})]
+			<abbr title="[(#GET{total_relire}|singulier_ou_pluriel{tradlang:info_nb_items_module_relire_un,tradlang:info_nb_items_module_relire,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
+				[(#GRAND_TOTAL)]
+			</abbr>
+		</td></B_relire_langue>[(#SET{total_relire,0})]
+		<td>
+			<abbr title="<:tradlang:info_nb_items_module_relire_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
+				[(#GET{total_relire})]
+			</abbr>
+		</td><//B_relire_langue>
 		<BOUCLE_modif_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
 		<td>[(#SET{total_modif,#GRAND_TOTAL})]
 			<abbr title="[(#GET{total_modif}|singulier_ou_pluriel{tradlang:info_nb_items_module_modif_un,tradlang:info_nb_items_module_modif,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
@@ -88,7 +103,7 @@
 				[(#GET{total_new})]
 			</abbr>
 		</td>
-		</B_new_langue>[(#SET{total_new,[(#GET{total_mere}|moins{[(#GET{total_ok})]}|moins{[(#GET{total_modif})]})]})]
+		</B_new_langue>[(#SET{total_new,[(#GET{total_mere}|moins{[(#GET{total_ok})]}|moins{[(#GET{total_relire})]}|moins{[(#GET{total_modif})]})]})]
 		<td>
 			[(#GET{total_new}|=={0}|oui)<abbr title="<:tradlang:info_nb_items_module_new_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">]
 			[(#GET{total_new}|=={0}|non)<abbr title="<:tradlang:info_nb_items_module_new{module=#NOM_MOD,nb=#GET{total_new},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">]
@@ -97,16 +112,19 @@
 		</td><//B_new_langue>
 		<td>[
 			(#SET{percent_ok,[(#GET{total_ok}|div{#GET{total_mere}}|mult{100}|floor)]})
+			][(#SET{percent_relire,[(#GET{total_relire}|div{#GET{total_mere}}|mult{100}|floor)]})
 			][(#SET{percent_modif,[(#GET{total_modif}|div{#GET{total_mere}}|mult{100}|floor)]})
-			][(#SET{percent_new,[(#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_modif}})]})
+			][(#SET{percent_new,[(#VAL{100}|moins{#GET{percent_ok}}|moins{#GET{percent_relire}}|moins{#GET{percent_modif}})]})
 			][(#SET{total_ok_full,[(#GET{total_ok_full}|plus{#GET{percent_ok}})]})
+			][(#SET{total_relire_full,[(#GET{total_relire_full}|plus{#GET{percent_relire}})]})
 			][(#SET{total_modif_full,[(#GET{total_modif_full}|plus{#GET{percent_modif}})]})
 			][(#SET{total_new_full,[(#GET{total_new_full}|plus{#GET{percent_new}})]})
 			]<span class="valeur_traduit">#GET{percent_ok}%</span>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc_lang{pc=#GET{percent_ok},module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
 				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="modif" style="#LANG_LEFT: #GET{percent_ok}px; width: #GET{percent_modif}px"></div>
-				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+				<div class="relire" style="#LANG_LEFT: #GET{percent_ok}px; width: #GET{percent_relire}px"></div>
+				<div class="modif" style="#LANG_LEFT:[(#GET{percent_ok}|plus{#GET{percent_relire}})]px; width: #GET{percent_modif}px"></div>
+				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
 			</div>
 		</td>
 		<td>[(#ENV{langue_modules}|=={#LANG_MERE}|non)
@@ -129,6 +147,12 @@
 				</abbr>
 			</td>
 			<td>
+				[(#SET{percent_ok_relire,[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]
+				<abbr title="<:tradlang:info_nb_items_priorite_relire{priorite=#PRIORITE,pc=#GET{percent_ok_relire},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
+					[(#GET{percent_ok_relire})%]
+				</abbr>
+			</td>
+			<td>
 				[(#SET{percent_ok_modif,[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]
 				<abbr title="<:tradlang:info_nb_items_priorite_modif{priorite=#PRIORITE,pc=#GET{percent_ok_modif},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
 					[(#GET{percent_ok_modif})%]
@@ -144,8 +168,9 @@
 				<span class="valeur_traduit">[(#GET{percent_ok_full}|floor)%]</span>
 				<div class="graph" title="<:tradlang:info_modules_priorite_traduits_pc{priorite=#PRIORITE,pc=#GET{percent_ok_full},lang=#ENV{langue_modules}}|attribut_html:>">
 					<div class="ok"[ style="width: (#GET{percent_ok_full})px"]> </div>
-					<div class="modif" style="#LANG_LEFT: [(#GET{percent_ok_full})]px; width: [(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
-					<div class="new" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
+					<div class="relire" style="#LANG_LEFT: [(#GET{percent_ok_full})]px; width: [(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
+					<div class="modif" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
+					<div class="new" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
 				</div>
 			</td>
 			<td></td>

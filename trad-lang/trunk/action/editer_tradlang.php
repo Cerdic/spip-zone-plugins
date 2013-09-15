@@ -70,9 +70,8 @@ function tradlang_set($id_tradlang,$set=null){
 		return $err;
 	}
 	
-	if($statut = (in_array(_request('statut'),array('NEW','MODIF','OK'))) ? _request('statut') : $c['statut']){
+	if($statut = (in_array(_request('statut'),array('NEW','MODIF','OK','RELIRE'))) ? _request('statut') : $c['statut'])
 		sql_updateq('spip_tradlangs',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
-	}
 	
 	//$c = collecter_requests(array('statut'),array(),$set);
 	//$err .= instituer_tradlang($id_tradlang, $c);

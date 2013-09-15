@@ -41,6 +41,7 @@
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{statut})</span>]
 				<select class="text crayon_active" name="statut" id="statut">
 					<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+					<option value="RELIRE"[(#STATUT|=={RELIRE}|oui)selected="selected"]><:tradlang:str_status_relire:></option>
 					<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 					<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
 				</select>

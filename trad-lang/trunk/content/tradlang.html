@@ -14,7 +14,7 @@
 		#SET{lang_orig,#ENV{lang_orig,#GET{lang_mere}}}
 		#SET{lang_cible_long,#LANG|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#MODULE,chaine=#ID,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#LANG,lang_cible_long=#GET{lang_cible_long}}:></h1>
-		[(#INCLURE{fond=inclure/tradlang_precedent_suivant,id_tradlang,id_tradlang_module,lang_orig=#GET{lang_orig},lang_cible=#GET{lang_cible},statuts=#ARRAY{0,NEW,1,MODIF}})]
+		[(#INCLURE{fond=inclure/tradlang_precedent_suivant,id_tradlang,id_tradlang_module,lang_orig=#GET{lang_orig},lang_cible=#GET{lang_cible},statuts=#LISTE{NEW,MODIF,RELIRE}})]
 	</div>
 	[(#GET{auth_modifier}|=={oui}|oui)
 	<div class="ajax">

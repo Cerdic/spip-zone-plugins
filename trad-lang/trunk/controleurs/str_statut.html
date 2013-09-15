@@ -25,6 +25,7 @@
 		<label for="statut_#ID_TRADLANG"><:tradlang:label_tradlang_status:></label>
 		<select class="text crayon_active" name="#ENV{name_statut}" id="statut_#ID_TRADLANG" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">
 			<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+			<option value="RELIRE"[(#STATUT|=={RELIRE}|oui)selected="selected"]><:tradlang:str_status_relire:></option>
 			<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 			<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
 		</select>

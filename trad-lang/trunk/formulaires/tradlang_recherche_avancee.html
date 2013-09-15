@@ -15,7 +15,7 @@
 			<BOUCLE_tradlangs_lang(TRADLANGS){fusion lang}{par lang}{0,1}>
 			<B_module_langue_dispo_pref>
 				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
-				<BOUCLE_module_langue_dispo_pref(TRADLANGS){langues_preferees}{statut IN 'OK','MODIF'}{fusion lang}{par lang}>
+				<BOUCLE_module_langue_dispo_pref(TRADLANGS){langues_preferees}{statut IN 'OK','MODIF','RELIRE'}{fusion lang}{par lang}>
 					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
 				</BOUCLE_module_langue_dispo_pref>
 				[(#SET{optgroup,'oui'})]
@@ -23,7 +23,7 @@
 				</B_module_langue_dispo_pref>
 				<B_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
-				<BOUCLE_module_langue_dispo(TRADLANGS){!langues_preferees}{statut IN 'OK','MODIF'}{fusion lang}{par lang}>
+				<BOUCLE_module_langue_dispo(TRADLANGS){!langues_preferees}{statut IN 'OK','MODIF','RELIRE'}{fusion lang}{par lang}>
 					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
 				</BOUCLE_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})</optgroup>]
@@ -38,6 +38,7 @@
 				<option value=""[(#ENV{statut}|=={''}|oui)selected="selected"]>--</option>
 				<option value="NEW"[(#ENV{statut}|=={NEW}|oui)selected="selected"]>NEW</option>
 				<option value="MODIF"[(#ENV{statut}|=={MODIF}|oui)selected="selected"]>MODIF</option>
+				<option value="RELIRE"[(#ENV{statut}|=={RELIRE}|oui)selected="selected"]>RELIRE</option>
 				<option value="OK"[(#ENV{statut}|=={OK}|oui)selected="selected"]>OK</option>
 			</select>
 		</li>

@@ -33,7 +33,7 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 						$langues_base = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
 						$modifs = array();
 						while($strings = sql_fetch($langues_base)){
-							$str_lang[$strings['id']] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]);
+							$str_lang[$strings['id']] = preg_replace(',^(<(MODIF|NEW|RELIRE|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]);
 							if($strings['str'] != $str_lang[$strings['id']]){
 								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
 							}

@@ -88,7 +88,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		 * Laisser le statut ici sinon on n'agit plus sur le pipeline pre_boucle
 		 */
 		'statut' => array( 
-			array('champ'=>'statut','publie'=>'OK,NEW,MODIF','previsu'=>'OK,NEW,MODIF','exception'=>'statut') 
+			array('champ'=>'statut','publie'=>'OK,NEW,MODIF,RELIRE','previsu'=>'OK,NEW,MODIF,RELIRE','exception'=>'statut') 
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang",
@@ -103,16 +103,17 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"id_tradlang"=>"id_tradlang",
 			"module"=>"module"
 		),
-
 		'statut_images' => array(
 			'OK' => 'tradlang_statut_ok.png',
 			'NEW' => 'tradlang_statut_new.png',
-			'MODIF' => 'tradlang_statut_modif.png'
+			'MODIF' => 'tradlang_statut_modif.png',
+			'RELIRE' => 'tradlang_statut_relire.png'
 		),
 		'statut_textes_instituer' => 	array(
-			'OK' => 'tradlang:texte_statut_ok',
-			'NEW' => 'tradlang:texte_statut_new',
-			'MODIF' => 'tradlang:texte_statut_modif',
+			'OK' => 'tradlang:str_status_traduit',
+			'NEW' => 'tradlang:str_status_new',
+			'MODIF' => 'tradlang:str_status_modif',
+			'RELIRE' => 'tradlang:str_status_relire'
 		),
 		'rechercher_champs' => array(
 			'id' => 8,

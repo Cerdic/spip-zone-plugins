@@ -1,10 +1,10 @@
 <BOUCLE_tradlang_precedent(TRADLANGS){precedent}{par id_tradlang}
 	{id_tradlang_module?}
-	{statut IN #ENV{statuts,#ARRAY{0,NEW,1,MODIF,2,OK}}}>
+	{statut IN #ENV{statuts,#LISTE{NEW,MODIF,RELIRE,OK}}}>
 	[<a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{lang_cible,#ENV{lang_cible}})]" rel="prev" class="spip_in prev" title="[(#ID|couper{20}|attribut_html)]">(#CHEMIN{images/precedent.png}|image_reduire{20,20}|inserer_attribut{alt,<:suivant_precedent:alt_lien_prev:>})</a>]
 </BOUCLE_tradlang_precedent>
 <BOUCLE_tradlang_suivant(TRADLANGS){suivant}{par id_tradlang}
 	{id_tradlang_module?}
-	{statut IN #ENV{statuts,#ARRAY{0,NEW,1,MODIF,2,OK}}}>
+	{statut IN #ENV{statuts,#LISTE{NEW,MODIF,RELIRE,OK}}}>
 		[<a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{lang_cible,#ENV{lang_cible}})]" rel="next" class="spip_in next" title="[(#TITRE|couper{20}|attribut_html)]">(#CHEMIN{images/suivant.png}|image_reduire{20,20}|inserer_attribut{alt,<:suivant_precedent:alt_lien_next:>})</a>]
 </BOUCLE_tradlang_suivant>

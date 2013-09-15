@@ -29,33 +29,11 @@ table.liste_traductions .date{
 }
 table.liste_traductions .statut{
 	width:50px;
-	vertical-align:middle;
 }
 
 .bilan{
 	width:100%;
 	overflow:auto;
-}
-table.liste_traductions tr.statut_new td.statut,.traducteur #navigation ul.infos p.items_new{
-	background-image:url(images/back_new.png);
-	background-repeat:no-repeat;
-	background-position:2px center;
-	padding-left:10px;
-}
-
-#bilan table td.non_traduit{
-	background-image:url(images/back_new.png);
-}
-
-table.liste_traductions tr.statut_modif td.statut,.traducteur #navigation ul.infos p.items_modif{
-	background-image:url(images/back_modify.png);
-	background-repeat:no-repeat;
-	background-position:2px center;
-	padding-left:10px;
-}
-
-#bilan table td.traduit{
-	background-image:url(images/back_modify.png);
 }
 
 .liste-objets .caption{background-repeat:no-repeat;height:24px;display:block;padding-left: 30px;}
@@ -67,39 +45,41 @@ div.graph {
     border: 0 none;
     height: 14px;
     position: relative;
-    width: 100px;
 }
 
 div.graph[dir="ltr"] div.translated {
-    left: 0;
+	left: 0;
 }
 
 .graph div.ok {
-    background: url("images/green-bar.png") repeat-x scroll 0 0 transparent;
-    color: black;
-    height: 100%;
-    position: absolute;
-    top: 2px;
+	background: #7bd250;
+	height: 100%;
+	position: absolute;
+	top: 2px;
 }
 
+.graph div.relire {
+	background: #fb9c2b;
+	height: 100%;
+	position: absolute;
+	top: 2px;
+}
 .graph div.modif {
-    background: url("images/purple-bar.png") repeat-x scroll 0 0 transparent;
-    color: black;
-    height: 100%;
-    position: absolute;
-    top: 2px;
+	background: #2b3ffb;
+	height: 100%;
+	position: absolute;
+	top: 2px;
 }
 
 .graph div.new {
-    background: url("images/red-bar.png") repeat-x scroll 0 0 transparent;
-    color: black;
-    height: 100%;
-    position: absolute;
-    top: 2px;
+	background: #c62b49;
+	height: 100%;
+	position: absolute;
+	top: 2px;
 }
 
 .none, .js .none-js, .no-js .none-nojs {
-    display: none;
+	display: none;
 }
 
 .formulaire_spip li.editer_version_originale_choisie{
