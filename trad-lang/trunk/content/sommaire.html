@@ -26,8 +26,5 @@
 </div>
 [(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
 [(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)
-<INCLURE{fond=noisettes/listes/tradlang_liste_revision,env,ajax} />
-]
-[(#PLUGIN{boussole}|oui)
-[(#INCLURE{fond=noisettes/boussole,modele=boussole_panorama,boussole=spip,titre_boussole=oui,div_id=boussole})]
-]</div>
+<INCLURE{fond=noisettes/listes/tradlang_liste_revision,env,ajax} />]
+</div>
