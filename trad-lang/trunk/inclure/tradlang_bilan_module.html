@@ -80,7 +80,6 @@
 	<tfoot>
 		<tr>
 			<td><:tradlang:tfoot_total:></td>
-			<td></td>
 			<td>[(#SET{percent_ok_full,[(#GET{total_ok_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_full})%]</td>
 			<td>[(#SET{percent_ok_modif,[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_modif})%]</td>
 			<td>[(#SET{percent_ok_new,[(#GET{total_new_full}|div{#TOTAL_BOUCLE}|floor)]})][(#GET{percent_ok_new})%]</td>
