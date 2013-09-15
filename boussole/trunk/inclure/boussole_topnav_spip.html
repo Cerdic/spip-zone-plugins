@@ -1,6 +1,4 @@
-<BOUCLE_lien_spip(BOUSSOLES){aka_boussole=spip}{aka_site=net}>
-	#SET{lien_spip, #URL_SITE}
-</BOUCLE_lien_spip>
+<BOUCLE_lien_spip(BOUSSOLES){aka_boussole=spip}{aka_site=net}>[(#SET{lien_spip, #URL_SITE})]</BOUCLE_lien_spip>
 <INCLURE{fond=modeles/boussole_topnav,
 	boussole=spip,
 	titre_boussole=SPIP,

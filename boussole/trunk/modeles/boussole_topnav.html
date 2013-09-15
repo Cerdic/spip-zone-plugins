@@ -46,41 +46,34 @@
 		</label>
 	</div>
 	<input id="hidden_menu_collapser" type="checkbox">
-	<ul>
-	[(#ENV{titre_boussole, non}|!={non}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
+	<ul>[(#ENV{titre_boussole, non}|!={non}|ou{#ENV{taille_logo_boussole}|>{0}}|oui)
 		<li>
-			<a[ href="(#ENV{lien_boussole, #BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>
-			[(#ENV{taille_logo_boussole}|>{0}|oui)
-				[(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]
-			]
-			[(#ENV{titre_boussole, non}|=={oui}|oui)
-				[(#ENV{boussole}|boussole_traduire{nom_boussole})]
-			]
-			[(#ENV{titre_boussole, non}|!={oui}|et{#ENV{titre_boussole, non}|!={non}}|oui)
-				[(#ENV{titre_boussole})]
-			]
+			<a[ href="(#ENV{lien_boussole, #BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>[
+			(#ENV{taille_logo_boussole}|>{0}|oui)[
+				(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]][
+			(#ENV{titre_boussole, non}|=={oui}|?{
+				[(#ENV{boussole}|boussole_traduire{nom_boussole})],
+				[[(#ENV{titre_boussole})](#ENV{titre_boussole,non}|!={non}|oui)]
+			}|trim)]
 			</a>
-		</li>
-	]
+		</li>]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 		<li>
 			<a href="#">[(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})]</a>
-			<b class="caret"></b>
-			[(#REM) <!-- Liste des site du groupe en cours -->]
-			<B_site>
+			<b class="caret"></b>[(#REM) 
+				<!-- Liste des site du groupe en cours -->
+			]<B_site>
 			<div class="menu_dropdown_block">
 				<div class="ssmenu_container">
 					<ul class="menu_submenu">
 			<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
-						[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{80})]})]
-						<li>
+						<li>[(#SET{bulle,[(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{80})]})]
 							<a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|attribut_html)"] class="spip_out">
 							<BOUCLE_logo_site(BOUSSOLES_EXTRAS){si #ENV{taille_logo_site}>0}{aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
 								[(#CHAMP_SQL{logo_objet}
 									|image_reduire{#ENV{taille_logo_site}}
 									|image_recadre{#ENV{taille_logo_site},#ENV{taille_logo_site},center,transparent}
-									|inserer_attribut{alt,[(#GET{bulle}|attribut_html)]})]
-							</BOUCLE_logo_site>
+									|inserer_attribut{alt,[(#GET{bulle}|attribut_html)]})]</BOUCLE_logo_site>
 								[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
 							</a>
 						</li>
