@@ -1,0 +1,18 @@
+<div id="modules_favoris_recherche">
+<h3><:tradlang:tire_recherche_modules_favoris:></h3>
+[(#FORMULAIRE_RECHERCHE{[(#URL_AUTEUR{#SESSION{id_auteur}}|ancre_url{modules_favoris_recherche})]})]
+<B_recherche_favoris>
+<ul class="liste-items" style="clear:both">
+<BOUCLE_recherche_favoris(TRADLANG_MODULES){recherche}>
+	<li class="item">
+		<BOUCLE_favoris(FAVORIS){id_auteur=#SESSION{id_auteur}}{objet=tradlang_module}{id_objet=#ID_TRADLANG_MODULE}>
+		#NOM_MOD [<span class="date"><span class="sep"> - </span><:mesfavoris:ajoute_le:> (#MAJ|affdate)</span>][(#AUTORISER{modifier,favori,#ID_FAVORI}|oui)[(#BOUTON_ACTION{<:mesfavoris:remove:>,#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},ajax})]]
+		</BOUCLE_favoris>
+		</B_favoris>
+		[(#FORMULAIRE_FAVORI{#OBJET,#ID_OBJET})] #NOM_MOD
+		<//B_favoris>
+	</li>
+</BOUCLE_recherche_favoris>
+</ul>
+</B_recherche_favoris>
+</div>

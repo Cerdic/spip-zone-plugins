@@ -30,13 +30,16 @@
 				<li class="item"><a href="#revisions">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_revisions_vos:>,<:tradlang:titre_revisions_ses:>})]</a></li>
 				<li class="item"><a href="#stats">[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:tradlang:titre_stats_vos:>,<:tradlang:titre_stats_ses:>})]</a></li>
 			</ul>
-			[(#PLUGIN{mesfavoris}|oui)
+			<BOUCLE_si_favoris(CONDITION){si #PLUGIN{mesfavoris}|oui}>
 				[(#SET{titre,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:tradlang:favoris_vos_modules:>,<:tradlang:favoris_ses_modules:>})]})]
 				[(#SET{bouton_ajout,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{non,oui})]})]
 				<div id="favoris">
 				[(#INCLURE{fond=inclure/mesfavoris,id_auteur=#ID_AUTEUR,titre=#GET{titre},bouton_ajout=#GET{bouton_ajout},sinon=<:tradlang:info_auteur_sans_favori:>,ajax})]
+				<BOUCLE_si_auteur_courant(CONDITION){si #SESSION{id_auteur}|=={#ID_AUTEUR}|oui}>
+					<INCLURE{fond=inclure/recherche_modules_favoris,id_auteur,recherche,ajax,env} />
+				</BOUCLE_si_auteur_courant>
 				</div>
-			]
+			</BOUCLE_si_favoris>
 			[(#CONFIG{objets_versions}|unserialize|is_array|?{#SET{objets_versions,#CONFIG{objets_versions}|unserialize},#SET{objets_versions,#ARRAY}})]
 			[(#VAL{spip_tradlangs}|in_array{#GET{objets_versions}}|oui)[(#SET{url_modif,#URL_PAGE{tradlang_revision}})]
 			[<div id="revisions">

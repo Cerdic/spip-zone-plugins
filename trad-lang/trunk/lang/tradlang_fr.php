@@ -355,6 +355,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_tradlang_module' => 'Module #@id@ : @module@',
 	'titre_profil_auteur' => 'Éditez votre profil',
 	'titre_profil_autre' => 'Éditez son profil',
+	'tire_recherche_modules_favoris' => 'Rechercher des modules',
 	'titre_recherche_tradlang' => 'Chaines de langue',
 	'titre_revisions_ses' => 'Ses contributions',
 	'titre_revisions_sommaire' => 'Dernières modifications',
