@@ -45,6 +45,12 @@ options:
         php_auth_user: "Variable serveur : PHP_AUTH_USER"
       defaut: ''
   -
+    saisie: 'oui_non'
+    options:
+      nom: 'ip'
+      label: '<:formidable:traiter_enregistrement_option_ip_label:>'
+      defaut: 'on'
+  -
     saisie: 'radio'
     options:
       nom: 'moderation'

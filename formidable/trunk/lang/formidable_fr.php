@@ -156,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_choix_select_label' => 'Choisir une variable parmi celles proposées',
 	'traiter_enregistrement_option_identification_explication' => 'Si les réponses sont modifiables, quel procédé utiliser en priorité pour connaitre la réponse à modifier ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
+	'traiter_enregistrement_option_ip_label'			=> 'Enregistrer les IPs (masqués à intervalle régulière)',
 	'traiter_enregistrement_option_moderation_label' => 'Modération',
 	'traiter_enregistrement_option_modifiable_explication' => 'Les visiteurs pourront-ils modifier leurs réponses après coup ?',
 	'traiter_enregistrement_option_modifiable_label' => 'Réponses modifiables',

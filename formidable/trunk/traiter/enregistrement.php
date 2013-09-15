@@ -50,7 +50,7 @@ function traiter_enregistrement_dist($args, $retours){
                 'id_formulaire' => $id_formulaire,
                 'id_auteur' => $id_auteur,
                 'cookie' => $cookie,
-                'ip' => $GLOBALS['ip'],
+                'ip' => $args['options']['ip'] == 'on' ? $GLOBALS['ip'] : '',
                 'date' => 'NOW()',
                 'statut' => $statut
             )

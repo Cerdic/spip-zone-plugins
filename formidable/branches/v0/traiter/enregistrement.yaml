@@ -27,6 +27,12 @@ options:
         id_auteur: '<:formidable:identification_par_id_auteur:>'
       defaut: 'cookie'
   -
+    saisie: 'oui_non'
+    options:
+      nom: 'ip'
+      label: '<:formidable:traiter_enregistrement_option_ip_label:>'
+      defaut: 'on'
+  -
     saisie: 'radio'
     options:
       nom: 'moderation'
