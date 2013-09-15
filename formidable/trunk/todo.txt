@@ -3,7 +3,6 @@
 ---------
 + Ajouter des liens "réponse précédente/suivante" dans la visualisation d'une réponse
 + Afficher une boite listant les formulaires disponibles dans l'édition d'un article
-+ Afficher des saisies en javascript suivant des conditions
 + Utiliser le plugin CVT multi-pages de Cédric
 + Afficher des pages suivant des conditions (scénarios)
 + Pouvoir attacher des fichiers (et donc les envoyer par mail et les enregistrer en base comme document)
