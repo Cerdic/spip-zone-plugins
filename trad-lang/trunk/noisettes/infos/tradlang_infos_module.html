@@ -2,6 +2,7 @@
 [(#AUTORISER{configurer,tradlang}|oui)[(#SET{auth_trad,oui})]]
 [(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)[(#SET{sauvegarde_locale,oui})]]
 [(#SET{str_mere,#ARRAY})]
+
 <div class="menu" id="menu_infos_trad">
 	<h2><:tradlang:infos_trad_module:></h2>
 	<ul class="menu-items infos">
@@ -30,7 +31,10 @@
 	[(#SET{str_cible,#ARRAY})][(#SET{total,0})]
 	<li class="menu-entree item [(#COMPTEUR_BOUCLE|alterner{even,odd})]">
 		[(#SET{update,non})][(#SET{str_cible,#ARRAY})]
-		<strong><span class="lang" dir="#LANG_DIR">[[(#LANG)]]</span>[ (#LANG|traduire_nom_langue)]</strong>
+		<strong>
+			[(#LANG|=={#ENV{lang_cible}}|non)<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#LANG}|parametre_url{lang_orig,#ENV{lang_orig}})]"><span class="lang" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)][ ((#LANG))]</span></a>]
+			[(#LANG|=={#ENV{lang_cible}}|oui)<span class="lang" dir="#LANG_DIR">[ (#LANG|traduire_nom_langue)][ ((#LANG))]</span>]
+		</strong>
 		<BOUCLE_total_item(TRADLANGS){module}{lang=#LANG}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 		[(#SET{total,#TOTAL_BOUCLE})]</B_total_item>
 		<BOUCLE_total_item_ok(TRADLANGS){module}{statut=OK}{lang=#LANG}> </BOUCLE_total_item_ok>
@@ -71,7 +75,7 @@
 	</li>
 	</BOUCLE_langues>
 	</ul>
-	<p class="pagination">#PAGINATION</p>
+	[<div class="pagination">(#PAGINATION)</div>]
 	</B_langues>
 </div>
 </BOUCLE_module>
