@@ -1,9 +1,7 @@
 #SET{langue_longue,#ENV{langue_modules}|traduire_nom_langue}
 <h2><:tradlang:titre_bilan_langue{lang=#ENV{langue_modules}}:></h2>
 
-[(#SET{titre,<:tradlang:titre_changer_langue_selection:>})]
-
-[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',[(#GET{titre}|attribut_html)]})]
+[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',<:tradlang:titre_changer_langue_selection:>})]
 
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]"><:tradlang:lien_trier_langue_non:></a></p>
 

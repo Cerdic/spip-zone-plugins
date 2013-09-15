@@ -1,21 +1,16 @@
 #SET{langue_longue,#ENV{langue_modules}|traduire_nom_langue}
 <h2><:tradlang:titre_bilan_langue{lang=#ENV{langue_modules}}:></h2>
 
-[(#SET{titre,<:tradlang:titre_changer_langue_selection:>})]
-
-[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',[(#GET{titre}|attribut_html)]})]
+[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',<:tradlang:titre_changer_langue_selection:>})]
 
 <p><a href="[(#SELF|parametre_url{langue_modules,''})]" class="btn"><:tradlang:lien_trier_langue_non:></a></p>
 [(#SESSION{id_auteur}|>={1}|et{#PLUGIN{mesfavoris}|oui}|oui)
 <div class="actions">
-	<p><:tradlang:message_afficher_vos_modules:></p>
-	[(#ENV{mesfavoris,oui}|=={oui}|non)
-	[<a href="(#SELF|parametre_url{mesfavoris,oui})" class="bouton ajax"><:tradlang:bouton_vos_favoris_oui:></a>]]
-	[(#ENV{mesfavoris,oui}|=={non}|non)
-	[<a href="(#SELF|parametre_url{mesfavoris,non})" class="bouton ajax"><:tradlang:bouton_vos_favoris_non:></a>]]
-	[(#ENV{mesfavoris,oui}|=={aucun}|non)
-	[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]]
-</div>]
+	<p><:tradlang:message_afficher_vos_modules:></p>[(#ENV{mesfavoris,oui}|=={oui}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,oui})" class="bouton ajax"><:tradlang:bouton_vos_favoris_oui:></a>]][(#ENV{mesfavoris,oui}|=={non}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,non})" class="bouton ajax"><:tradlang:bouton_vos_favoris_non:></a>]][(#ENV{mesfavoris,oui}|=={aucun}|non)
+	[<a href="(#SELF|parametre_url{mesfavoris,aucun})" class="bouton ajax"><:tradlang:bouton_vos_favoris_tous:></a>]
+]</div>]
 <BOUCLE_priorites(TRADLANG_MODULES){fusion priorite}>[(#SET{total_ok_full,0})
 ][(#SET{total_relire_full,0})
 ][(#SET{total_modif_full,0})
@@ -28,86 +23,51 @@
 	<thead>
 		<tr class="row_first">
 			<th><:tradlang:th_module:></th>
-			<th class="lang">
-				<:tradlang:th_langue_mere:>
-			</th>
-			<th class="total_items">
-				<:tradlang:th_total_items_module:>
-			</th>
-			<th class="items_traduits">
-				<:tradlang:th_items_traduits:>
-			</th>
-			<th class="items_relire">
-				<:tradlang:th_items_relire:>
-			</th>
-			<th class="items_modifs">
-				<:tradlang:th_items_modifs:>
-			</th>
-			<th class="items_new">
-				<:tradlang:th_items_new:>
-			</th>
-			<th class="avancement">
-				<:tradlang:th_avancement:>
-			</th>
+			<th class="lang"><:tradlang:th_langue_mere:></th>
+			<th class="total_items"><:tradlang:th_total_items_module:></th>
+			<th class="items_traduits"><:tradlang:th_items_traduits:></th>
+			<th class="items_relire"><:tradlang:th_items_relire:></th>
+			<th class="items_modifs"><:tradlang:th_items_modifs:></th>
+			<th class="items_new"><:tradlang:th_items_new:></th>
+			<th class="avancement"><:tradlang:th_avancement:></th>
 			<th class="ts_disabled"></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){mesfavoris #ENV{mesfavoris,oui}}{priorite}>
 	<tr class="module #MODULE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<td>[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE}) ]<a href="[(#SELF|parametre_url{langue_modules,''}|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
+		<td>[(#FORMULAIRE_FAVORI{tradlang_module,#ID_TRADLANG_MODULE})]<a href="[(#SELF|parametre_url{langue_modules,''}|parametre_url{id_tradlang_module,#ID_TRADLANG_MODULE})]" title="<:tradlang:lien_voir_bilan_module{module=#MODULE,nom_mod=#NOM_MOD}|attribut_html:>">[(#NOM_MOD)]</a></td>
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
-		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>
-		#SET{total_mere,#GRAND_TOTAL}
-		[(#SET{total_chaines,[(#GET{total_chaines}|plus{#GRAND_TOTAL})]})]
-		<td><abbr title="<:tradlang:info_nb_items_module{module=#NOM_MOD,nb=#GET{total_mere}}|attribut_html:>">#GRAND_TOTAL</abbr></td>
-		</B_compte_langue_mere>[(#SET{total_mere,0})]
-		<td>#GET{total_mere}</td>
-		<//B_compte_langue_mere>
+		<td><abbr title="[(#LANG_MERE|traduire_nom_langue)]">#LANG_MERE</abbr></td>[(#SET{total_mere,#GRAND_TOTAL})][(#SET{total_chaines,[(#GET{total_chaines}|plus{#GRAND_TOTAL})]})]
+		<td><abbr title="<:tradlang:info_nb_items_module{module=#NOM_MOD,nb=#GET{total_mere}}|attribut_html:>">#GRAND_TOTAL</abbr></td></B_compte_langue_mere>[(#SET{total_mere,0})]
+		<td>#GET{total_mere}</td><//B_compte_langue_mere>
 		<BOUCLE_ok_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=OK}> </BOUCLE_ok_langue>
 		<td>[(#SET{total_ok,#GRAND_TOTAL})]
-			<abbr title="[(#GET{total_ok}|singulier_ou_pluriel{tradlang:info_nb_items_module_ok_un,tradlang:info_nb_items_module_ok,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
-				#GRAND_TOTAL
-			</abbr>
+			<abbr title="[(#GET{total_ok}|singulier_ou_pluriel{tradlang:info_nb_items_module_ok_un,tradlang:info_nb_items_module_ok,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">#GRAND_TOTAL</abbr>
 		</td></B_ok_langue>[(#SET{total_ok,0})]
 		<td>
-			<abbr title="<:tradlang:info_nb_items_module_ok_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-			[(#GET{total_ok})]
-			</abbr>
+			<abbr title="<:tradlang:info_nb_items_module_ok_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{total_ok})]</abbr>
 		</td><//B_ok_langue>
 		<BOUCLE_relire_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=RELIRE}> </BOUCLE_relire_langue>
 		<td>[(#SET{total_relire,#GRAND_TOTAL})]
-			<abbr title="[(#GET{total_relire}|singulier_ou_pluriel{tradlang:info_nb_items_module_relire_un,tradlang:info_nb_items_module_relire,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
-				[(#GRAND_TOTAL)]
-			</abbr>
-		</td></B_relire_langue>[(#SET{total_relire,0})]
-		<td>
-			<abbr title="<:tradlang:info_nb_items_module_relire_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-				[(#GET{total_relire})]
-			</abbr>
+			<abbr title="[(#GET{total_relire}|singulier_ou_pluriel{tradlang:info_nb_items_module_relire_un,tradlang:info_nb_items_module_relire,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">[(#GRAND_TOTAL)]</abbr>
+		</td></B_relire_langue><td>[(#SET{total_relire,0})]
+			<abbr title="<:tradlang:info_nb_items_module_relire_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{total_relire})]</abbr>
 		</td><//B_relire_langue>
 		<BOUCLE_modif_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=MODIF}> </BOUCLE_modif_langue>
 		<td>[(#SET{total_modif,#GRAND_TOTAL})]
-			<abbr title="[(#GET{total_modif}|singulier_ou_pluriel{tradlang:info_nb_items_module_modif_un,tradlang:info_nb_items_module_modif,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
-				[(#GRAND_TOTAL)]
-			</abbr>
-		</td></B_modif_langue>[(#SET{total_modif,0})]
-		<td>
-			<abbr title="<:tradlang:info_nb_items_module_modif_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-				[(#GET{total_modif})]
-			</abbr>
+			<abbr title="[(#GET{total_modif}|singulier_ou_pluriel{tradlang:info_nb_items_module_modif_un,tradlang:info_nb_items_module_modif,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">[(#GRAND_TOTAL)]</abbr>
+		</td></B_modif_langue><td>[(#SET{total_modif,0})]
+			<abbr title="<:tradlang:info_nb_items_module_modif_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{total_modif})]</abbr>
 		</td><//B_modif_langue>
 		<BOUCLE_new_langue(TRADLANGS){module}{lang=#ENV{langue_modules}}{statut=NEW}> </BOUCLE_new_langue>[(#SET{total_new,#GRAND_TOTAL})]
 		<td>
-			<abbr title="[(#GET{total_new}|singulier_ou_pluriel{tradlang:info_nb_items_module_new_un,tradlang:info_nb_items_module_new,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">
-				[(#GET{total_new})]
-			</abbr>
-		</td>
-		</B_new_langue>[(#SET{total_new,[(#GET{total_mere}|moins{[(#GET{total_ok})]}|moins{[(#GET{total_relire})]}|moins{[(#GET{total_modif})]})]})]
-		<td>
-			[(#GET{total_new}|=={0}|oui)<abbr title="<:tradlang:info_nb_items_module_new_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">]
-			[(#GET{total_new}|=={0}|non)<abbr title="<:tradlang:info_nb_items_module_new{module=#NOM_MOD,nb=#GET{total_new},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">]
-			#GET{total_new}
+			<abbr title="[(#GET{total_new}|singulier_ou_pluriel{tradlang:info_nb_items_module_new_un,tradlang:info_nb_items_module_new,nb,#ARRAY{module,#NOM_MOD,lang,#ENV{langue_modules},langue_longue,#GET{langue_longue}}}|attribut_html)]">[(#GET{total_new})]</abbr>
+		</td></B_new_langue>[(#SET{total_new,[(#GET{total_mere}|moins{[(#GET{total_ok})]}|moins{[(#GET{total_relire})]}|moins{[(#GET{total_modif})]})]})]
+		<td>[(#GET{total_new}|=={0}|oui)
+			<abbr title="<:tradlang:info_nb_items_module_new_aucun{module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">][(#GET{total_new}|=={0}|non)
+			<abbr title="<:tradlang:info_nb_items_module_new{module=#NOM_MOD,nb=#GET{total_new},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">]
+				#GET{total_new}
 			</abbr>
 		</td><//B_new_langue>
 		<td>[
@@ -121,16 +81,14 @@
 			][(#SET{total_new_full,[(#GET{total_new_full}|plus{#GET{percent_new}})]})
 			]<span class="valeur_traduit">#GET{percent_ok}%</span>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc_lang{pc=#GET{percent_ok},module=#NOM_MOD,lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="relire" style="#LANG_LEFT: #GET{percent_ok}px; width: #GET{percent_relire}px"></div>
-				<div class="modif" style="#LANG_LEFT:[(#GET{percent_ok}|plus{#GET{percent_relire}})]px; width: #GET{percent_modif}px"></div>
-				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+				<div class="ok"[ style="width:(#GET{percent_ok})%"]> </div>
+				<div class="relire" style="[#LANG_LEFT:(#GET{percent_ok})%;][width:(#GET{percent_relire})%]"></div>
+				<div class="modif" style="[#LANG_LEFT:(#GET{percent_ok}|plus{#GET{percent_relire}})%;][width:(#GET{percent_modif})%]"></div>
+				<div class="new" style="[#LANG_LEFT:(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})%;][width:(#GET{percent_new})%]"> </div>
 			</div>
 		</td>
 		<td>[(#ENV{langue_modules}|=={#LANG_MERE}|non)
-			<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>">
-			<:tradlang:bouton_traduire:>
-			</a>]
+			<a href="[(#URL_TRADLANG_MODULE|parametre_url{lang_cible,#ENV{langue_modules}})]" title="<:tradlang:info_traduire_module_lang{lang=#ENV{langue_modules},langue_longue=#GET{langue_longue},module=#NOM_MOD}|attribut_html:>"><:tradlang:bouton_traduire:></a>]
 		</td>
 	</tr>
 	</BOUCLE_modules_lang>
@@ -140,37 +98,25 @@
 			<td><:tradlang:tfoot_total:></td>
 			<td></td>
 			<td><abbr title="<:tradlang:info_nb_items_priorite{priorite=#PRIORITE,nb=#GET{total_chaines}}|attribut_html:>">#GET{total_chaines}</abbr></td>
-			<td>
-				[(#SET{percent_ok_full,[(#GET{total_ok_full}|div{#TOTAL_BOUCLE}|floor)]})]
-				<abbr title="<:tradlang:info_nb_items_priorite_ok{priorite=#PRIORITE,pc=#GET{percent_ok_full},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-					[(#GET{percent_ok_full})%]
-				</abbr>
+			<td>[(#SET{percent_ok_full,[(#GET{total_ok_full}|div{#TOTAL_BOUCLE}|floor)]})]
+				<abbr title="<:tradlang:info_nb_items_priorite_ok{priorite=#PRIORITE,pc=#GET{percent_ok_full},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{percent_ok_full})%]</abbr>
 			</td>
-			<td>
-				[(#SET{percent_ok_relire,[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]
-				<abbr title="<:tradlang:info_nb_items_priorite_relire{priorite=#PRIORITE,pc=#GET{percent_ok_relire},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-					[(#GET{percent_ok_relire})%]
-				</abbr>
+			<td>[(#SET{percent_ok_relire,[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]
+				<abbr title="<:tradlang:info_nb_items_priorite_relire{priorite=#PRIORITE,pc=#GET{percent_ok_relire},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{percent_ok_relire})%]</abbr>
 			</td>
-			<td>
-				[(#SET{percent_ok_modif,[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]
-				<abbr title="<:tradlang:info_nb_items_priorite_modif{priorite=#PRIORITE,pc=#GET{percent_ok_modif},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-					[(#GET{percent_ok_modif})%]
-				</abbr>
+			<td>[(#SET{percent_ok_modif,[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]
+				<abbr title="<:tradlang:info_nb_items_priorite_modif{priorite=#PRIORITE,pc=#GET{percent_ok_modif},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{percent_ok_modif})%]</abbr>
 			</td>
-			<td>
-				[(#SET{percent_ok_new,[(#GET{total_new_full}|div{#TOTAL_BOUCLE}|floor)]})]
-				<abbr title="<:tradlang:info_nb_items_priorite_new{priorite=#PRIORITE,pc=#GET{percent_ok_new},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">
-					[(#GET{percent_ok_new})%]
-				</abbr>
+			<td>[(#SET{percent_ok_new,[(#GET{total_new_full}|div{#TOTAL_BOUCLE}|floor)]})]
+				<abbr title="<:tradlang:info_nb_items_priorite_new{priorite=#PRIORITE,pc=#GET{percent_ok_new},lang=#ENV{langue_modules},langue_longue=#GET{langue_longue}}|attribut_html:>">[(#GET{percent_ok_new})%]</abbr>
 			</td>
 			<td>
 				<span class="valeur_traduit">[(#GET{percent_ok_full}|floor)%]</span>
 				<div class="graph" title="<:tradlang:info_modules_priorite_traduits_pc{priorite=#PRIORITE,pc=#GET{percent_ok_full},lang=#ENV{langue_modules}}|attribut_html:>">
-					<div class="ok"[ style="width: (#GET{percent_ok_full})px"]> </div>
-					<div class="relire" style="#LANG_LEFT: [(#GET{percent_ok_full})]px; width: [(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
-					<div class="modif" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
-					<div class="new" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
+					<div class="ok"[ style="width:(#GET{percent_ok_full})%"]> </div>
+					<div class="relire" style="[#LANG_LEFT:(#GET{percent_ok_full})%;][width:(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)%]"></div>
+					<div class="modif" style="[#LANG_LEFT:(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})%;][width:(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)%]"></div>
+					<div class="new" style="[#LANG_LEFT:(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})%;][width:(#GET{percent_ok_new})%]"> </div>
 				</div>
 			</td>
 			<td></td>
@@ -183,6 +129,5 @@
 </div>
 <//B_modules_lang>
 </B_langues_totales>
-<//B_langues_totales>
 </div>
 </BOUCLE_priorites>
