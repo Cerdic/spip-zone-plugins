@@ -1,9 +1,0 @@
-<div class="contenu-principal">
-<INCLURE{fond=inclure/tradlang_entete,env}>
-[(#AUTORISER{voir,tradlang}|oui)
-	<INCLURE{fond=noisettes/vues/tradlang-revision,env,ajax}>
-]
-[(#AUTORISER{voir,tradlang}|non)
-	#LOGIN_PUBLIC
-]
-</div>

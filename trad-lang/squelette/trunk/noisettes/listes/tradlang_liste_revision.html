@@ -1,7 +1,0 @@
-<B_versions>
-<BOUCLE_versions(VERSIONS){objet=tradlang}{id_auteur > 0}{0,1}>
-<div>
-	<h3><:tradlang:titre_revisions_sommaire:></h3>#SET{url_modif,#URL_PAGE{tradlang_revision}}
-	<INCLURE{fond=prive/objets/liste/versions,where="id_auteur > 0",objet=tradlang,url_modif=#GET{url_modif},ajax,sinon=<:revisions:info_aucune_revision:>} />
-</div>
-</BOUCLE_versions>

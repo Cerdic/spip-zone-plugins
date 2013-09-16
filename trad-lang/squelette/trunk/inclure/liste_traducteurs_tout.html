@@ -1,5 +1,0 @@
-[(#FORMULAIRE_TRADLANG_SWITCHER_LANGUE{'','',[(#VAL{tradlang:info_choisir_langue}_T)],langue_choisie,'',oui})]
-[(#ENV{langue_choisie}|strlen|>{0}|non)
-<INCLURE{fond=inclure/liste_traducteurs,env,ajax} />]
-[(#ENV{langue_choisie}|strlen|>{0}|oui)
-<INCLURE{fond=inclure/liste_traducteurs_lang,env,ajax} />]
