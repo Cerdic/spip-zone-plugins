@@ -68,12 +68,12 @@
 			(#SET{total_relire_full,[(#GET{total_relire_full}|plus{#GET{percent_relire}})]})][
 			(#SET{total_modif_full,[(#GET{total_modif_full}|plus{#GET{percent_modif}})]})][
 			(#SET{total_new_full,[(#GET{total_new_full}|plus{#GET{percent_new}})]})
-			]<span class="valeur_traduit">#GET{percent_ok}%</span>
+			]<span class="valeur_traduit">[(#GET{percent_ok})%]</span>
 			<div class="graph" title="<:tradlang:info_module_traduit_pc_lang{pc=#GET{percent_ok},module=#NOM_MOD,lang=#CLE,langue_longue=#GET{langue_longue}}|attribut_html:>">
-				<div class="ok"[ style="width: (#GET{percent_ok})px"]> </div>
-				<div class="relire" style="#LANG_LEFT: #GET{percent_ok}px; width: #GET{percent_relire}px"></div>
-				<div class="modif" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_relire}})]px; width: #GET{percent_modif}px"></div>
-				<div class="new" style="#LANG_LEFT: [(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})]px; width: #GET{percent_new}px"> </div>
+				<div class="ok"[ style="width: (#GET{percent_ok})%"]> </div>[(#GET{percent_relire}|>{0}|oui)
+				<div class="relire" style="[#LANG_LEFT:(#GET{percent_ok})%;][width:(#GET{percent_relire})%"]> </div>][(#GET{percent_modif}|>{0}|oui)
+				<div class="modif" style="[#LANG_LEFT:(#GET{percent_ok}|plus{#GET{percent_relire}})%;][width:(#GET{percent_modif})%]"> </div>]
+				<div class="new" style="[#LANG_LEFT:(#GET{percent_ok}|plus{#GET{percent_relire}}|plus{#GET{percent_modif}})%;][width:(#GET{percent_new})%]"> </div>
 			</div>
 		</td>
 		<td>[(#CLE|=={#LANG_MERE}|non)
@@ -94,10 +94,10 @@
 			<td>
 				<span class="valeur_traduit">[(#GET{percent_ok_full}|floor)%]</span>
 				<div class="graph">
-					<div class="ok"[ style="width: (#GET{percent_ok_full})px"]> </div>
-					<div class="relire" style="#LANG_LEFT: [(#GET{percent_ok_full})]px; width: [(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
-					<div class="modif" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]px"></div>
-					<div class="new" style="#LANG_LEFT: [(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})]px; width: [(#GET{percent_ok_new})]px"> </div>
+					<div class="ok"[ style="width:(#GET{percent_ok_full})%"]> </div>
+					<div class="relire" style="[#LANG_LEFT:(#GET{percent_ok_full})%;][width:(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)%]"></div>
+					<div class="modif" style="[#LANG_LEFT:(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]})%;][width:(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)%]"></div>
+					<div class="new" style="[#LANG_LEFT:(#GET{percent_ok_full}|plus{[(#GET{total_relire_full}|div{#TOTAL_BOUCLE}|floor)]}|plus{[(#GET{total_modif_full}|div{#TOTAL_BOUCLE}|floor)]})%;][width:(#GET{percent_ok_new})%]"> </div>
 				</div>
 			</td>
 			<td></td>
