@@ -252,7 +252,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
  * @return $chaine
  */
 function saisies_aplatir_chaine($chaine){
-    return preg_replace("#(?:^|\n)(\*(?:.*)|/\*)\n#i","",$chaine);
+    return trim(preg_replace("#(?:^|\n)(\*(?:.*)|/\*)\n#i","\n",$chaine));
     }
 /*
  * Transforme une chaine en tableau avec comme principe :
