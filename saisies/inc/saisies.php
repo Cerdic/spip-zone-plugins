@@ -245,6 +245,15 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 	return $erreurs;
 }
 
+
+/*
+ * Applati une description chaînée, en supprimant les sous-groupes.
+ * @param string $string, la chaîne à aplatir
+ * @return $chaine
+ */
+function saisies_aplatir_chaine($chaine){
+    return preg_replace("#(?:^|\n)(\*(?:.*)|/\*)\n#i","",$chaine);
+    }
 /*
  * Transforme une chaine en tableau avec comme principe :
  * - une ligne devient une case
