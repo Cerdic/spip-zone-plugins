@@ -1,0 +1,77 @@
+[(#REM) modèle Nivoslider pour une rubrique : 
+ - Depuis un article : < nivoslider_rubXX >, alors affiche les docs de la rubrique XX
+ - Selon le modele CROCHET(# MODELE{nivoslider_rub}{id_nivoslider_rub=XX})CROCHET
+]
+
+[(#SET{id_rubrique,[(#ENV{id_nivoslider_rub, #CONFIG{nivoslider/id_defaut, 0} })]} )]
+
+[(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
+[(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
+[(#SET{slices,[(#ENV{slices, #CONFIG{nivoslider/slices,15} })]} )]
+[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
+[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
+[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
+[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true} })]} )]
+[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
+[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
+[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
+[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
+[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center'} })]} )]
+[(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
+[(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
+[(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
+[(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
+
+[(#SET{id_rand,	#VAL{1}|rand{1000}})]
+
+<B_doc>
+<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+	<div id="slider_#GET{id_rand}" class="nivoSlider">
+	<BOUCLE_doc(DOCUMENTS){mode=document}{id_rubrique=#GET{id_rubrique}}{extension IN png,jpg,gif}{par num titre}>
+		[(#DESCRIPTIF|?{'',' '})
+			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
+		]
+		[(#DESCRIPTIF|?{' ',''})
+			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
+			[(#SET{fancyornot,''})]
+			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+				[(#PLUGIN{FANCYBOX}|oui)
+					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+				]
+				[(#SET{lien, #URL_DOCUMENT})]
+			})]
+			[(#DESCRIPTIF|match{http}|=={http}|?{
+				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
+			})]
+			<a href="#GET{lien}" [class="(#GET{fancyornot})"]>
+			[(#FICHIER|image_passe_partout{#GET{width},#GET{height}}|image_recadre{#GET{width},#GET{height}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]}|inserer_attribut{rel,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}})]
+			</a>
+		]
+	</BOUCLE_doc>
+	</div>
+</div>
+<br style="clear:both"/>
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(function() {
+		$('#slider_#GET{id_rand}').nivoSlider({
+			[effect:'(#GET{effect})',]
+			[slices:(#GET{slices}),]
+			[animSpeed:(#GET{animSpeed}),]
+			[pauseTime:(#GET{pauseTime}),]
+			[directionNav:(#GET{directionNav}),]
+			[directionNavHide:(#GET{directionNavHide}),]
+			[(#CONFIG{nivoslider/controlNavThumbs}|=={'false'}|?{' ',''})
+				[controlNav:(#GET{controlNav}),]
+			]
+			[keyboardNav:(#GET{keyboardNav}),]
+			[pauseOnHover:(#GET{pauseOnHover}),]
+			[(#CONFIG{nivoslider/controlNavThumbs}|=={'true'}|?{' ',''})
+				[controlNavThumbs:(#GET{controlNavThumbs}),]
+				[controlNavThumbsFromRel:(#GET{controlNavThumbs}),]
+			]
+			[captionOpacity:(#GET{captionOpacity})]
+		});
+	});
+/*]]>*/</script>
+</B_doc>

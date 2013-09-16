@@ -1,0 +1,247 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,nivoslider}
+		<fieldset>
+			<legend><:nivoslider:general:></legend>
+			<ul>
+				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},500}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,height}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},240}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,effect}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect(POUR){tableau #LISTE{random,sliceDown,sliceDownLeft,sliceUp,sliceUpLeft,sliceUpDown,sliceUpDownLeft,fold,fade,slideInRight,slideInLeft,boxRandom,boxRain,boxRainReverse,boxRainGrow,boxRainGrowReverse}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect>
+					</select>
+				</li>
+				#SET{name,slices}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},15}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,animSpeed}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},500}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,pauseTime}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},3000}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,imageAlign}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect1(POUR){tableau #LISTE{left top,left center,left bottom,center top,center center,center bottom,right top,right center,right bottom}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect1>
+					</select>
+				</li>
+				#SET{name,imageBackcolor}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},transparent}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:nivoslider:controls:></legend>
+			<ul>
+				#SET{name,directionNav}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,directionNavHide}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,keyboardNav}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,pauseOnHover}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,controlNavThumbs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,controlNav}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,controlNavThumbsWidth}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:nivoslider:label_width:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},50}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,controlNavThumbsHeight}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:nivoslider:label_height:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},50}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,bottomMargin}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},0}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:nivoslider:legend:></legend>
+			<ul>
+				#SET{name,captionBackcolor}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},'#000000'}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,captionFrontcolor}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},'#FFFFFF'}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,captionOpacity}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},'0.8'}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:nivoslider:default:></legend>
+			<ul>
+				#SET{name,id_defaut}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}>
+						<optgroup label="[(#TITRE|supprimer_numero)]">
+							<BOUCLE_articles_secteur(ARTICLES){id_rubrique}{par num titre, titre}>
+							<option value="#ID_ARTICLE"[(#ENV{id_defaut}|=={#ID_ARTICLE}|?{selected="selected",''})]>[(#TITRE|supprimer_numero)]</option>
+							</BOUCLE_articles_secteur>
+							<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre, titre}>
+							<optgroup label="[(#TITRE|supprimer_numero)]">
+								<BOUCLE_articles_rubrique(ARTICLES){id_rubrique}{par num titre, titre}>
+									<option value="#ID_ARTICLE"[(#ENV{id_defaut}|=={#ID_ARTICLE}|?{selected="selected",''})]>[(#TITRE|supprimer_numero)]</option>
+								</BOUCLE_articles_rubrique>
+								<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+							</optgroup>
+							</BOUCLE_rubriques>
+						</optgroup>
+						</BOUCLE_secteurs>
+					</select>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+function CheckThumb(t){
+	if(t=='true'){
+		$("select#controlNav").val('false');
+		$(".editer_controlNav").hide('slow');
+		$(".editer_controlNavThumbsWidth").show('slow');
+		$(".editer_controlNavThumbsHeight").show('slow');
+	}else{
+		$(".editer_controlNav").show('slow');
+		$(".editer_controlNavThumbsWidth").hide('slow');
+		$(".editer_controlNavThumbsHeight").hide('slow');
+	}
+	return false;
+}
+
+function CheckNav(t){
+	if(t=='false')
+		$(".editer_directionNavHide").hide('slow');
+	else
+		$(".editer_directionNavHide").show('slow');
+	return false;
+}
+function nivoslider_forminit(){
+	CheckThumb($("select#controlNavThumbs option:selected").val());
+	CheckNav($("select#directionNav option:selected").val());
+	$('select#controlNavThumbs').change(function() { CheckThumb($("select#controlNavThumbs option:selected").val()); });
+	$('select#directionNav').change(function() { CheckNav($("select#directionNav option:selected").val()); });
+}
+jQuery(document).ready(nivoslider_forminit);
+onAjaxLoad(nivoslider_forminit);
+</script>
