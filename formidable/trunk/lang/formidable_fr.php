@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Réponses non-vide',
+    'analyse_exclure_champs_label'=>'Champs à exclure',
+    'analyse_exclure_champs_explication'=>'Mettre le nom des champs à exclure dans l\'analyse, séparé par des <code>|</code>. Ne pas mettre les <code>@</code>.',
 	'analyse_exporter' => 'Exporter l\'analyse',
 	'analyse_longueur_moyenne' => 'Longueur moyenne en nombre de mots',
 	'analyse_nb_reponses_total' => '@nb@ personnes ont répondu à ce formulaire.',

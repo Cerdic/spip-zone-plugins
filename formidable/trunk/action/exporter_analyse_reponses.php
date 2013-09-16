@@ -25,9 +25,14 @@ function action_exporter_analyse_reponses_dist($arg=null) {
 		include_spip('classes/facteur');
 		include_spip('inc/filtres');
         $reponses_completes = array();
-
+        
         $saisies = saisies_lister_par_nom(unserialize($formulaire['saisies']), false);
-
+        
+        // exclure les champs non analysés
+        $traitement = unserialize($formulaire['traitements']);
+        foreach (explode("|",$traitement['enregistrement']['analyse_exclure_champs']) as $exclure){
+            unset($saisies[$exclure]);
+        }
 		$res = sql_select(
             array('nom, valeur'),
 
