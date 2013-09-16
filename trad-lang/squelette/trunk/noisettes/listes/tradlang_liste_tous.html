@@ -88,7 +88,7 @@
 </div>
 [(#REM)	
 [(#GET{total_mere}|>{0}|oui)<p> <:tradlang:nb_items_langue_cible{nb=#GET{total_mere},langue=#ENV{lang_cible}}:></p>]]
-[(#GET{autoriser_modifier}|oui)
+[(#GET{autoriser_modifier}|et{#GET{module_existant,non}|=={oui}}|oui)
 <div class="actions">
 	<p><:tradlang:info_edition_par_lot:></p>
 	[(#SET{texte_bouton_upload,<:tradlang:bouton_upload_langue_module:>}|attribut_html)]
@@ -133,10 +133,12 @@
 	[(#SET{texte_bouton,[(#VAL{tradlang:bouton_activer_lang}|_T{#ARRAY{lang,#ENV{lang_cible}}})]})]
 	[(#GET{autoriser_modifier}|oui)
 		[(#ENV{lang_cible}|langue_possible|oui)
-			[<div class="error">(#GET{total_inexistants}|singulier_ou_pluriel{tradlang:nb_item_langue_inexistant,tradlang:nb_items_langue_inexistants,nb,#ARRAY{langue,#ENV{lang_cible},langue_longue,#GET{langue_longue}}})</div>]
-		<div class="actions">
-			[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]
-		</div>]
+			[<div class="error">
+				(#GET{total_inexistants}|singulier_ou_pluriel{tradlang:nb_item_langue_inexistant,tradlang:nb_items_langue_inexistants,nb,#ARRAY{langue,#ENV{lang_cible},langue_longue,#GET{langue_longue}}})
+				<div class="actions">
+					[(#BOUTON_ACTION{#GET{texte_bouton},[(#URL_ACTION_AUTEUR{tradlang_creer_langue_cible,#ID_TRADLANG_MODULE,#SELF}|parametre_url{lang_crea,#ENV{lang_cible}})]})]
+				</div>
+			</div>]]
 		[(#ENV{lang_cible}|langue_possible|non)
 		#BOITE_OUVRIR{'',error}
 			<:tradlang:erreur_langue_activer_impossible{lang=#ENV{lang_cible}}:>
@@ -202,8 +204,7 @@
 
 	On affiche finalement le tableau de traductions
 
-]
-<B_revise_cible>
+]<B_revise_cible>
 <table class="spip liste_traductions tablesorter">
 	<thead>
 		<tr class="row_first">
