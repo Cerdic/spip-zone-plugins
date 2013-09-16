@@ -234,11 +234,8 @@ function tradlang_forum_objets_depuis_env($array){
  * 		Le contexte du pipeline modifié
  */
 function tradlang_revisions_chercher_label($flux){
-	if($flux['args']['objet'] == 'tradlang'){
-		if(in_array($flux['args']['champ'],array('str','traducteur','statut'))){
-			$flux['data'] = 'tradlang:info_'.$flux['args']['champ'];
-		}
-	}
+	if($flux['args']['objet'] == 'tradlang' && in_array($flux['args']['champ'],array('str','traducteur','statut')))
+		$flux['data'] = 'tradlang:info_'.$flux['args']['champ'];
 	return $flux;
 }
 ?>
