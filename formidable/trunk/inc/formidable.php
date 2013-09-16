@@ -222,6 +222,7 @@ function analyser_saisie($saisie) {
         case 'radio' :
         case 'selection' :
         case 'selection_multiple' :
+        case 'choix_couleur':
         case 'checkbox' :
             $stats = array();
             foreach($saisie['valeurs'] as $valeur) {
