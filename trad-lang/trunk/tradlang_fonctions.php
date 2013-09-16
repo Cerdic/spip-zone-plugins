@@ -97,11 +97,6 @@ function tradlang_testesynchro($id_tradlang_module, $lang){
 	return ($tsb == $tsf);
 }
 
-function tradlang_to_langue($id,$lang){
-	$str_lang = sql_getfetsel('str','spip_tradlangs','id='.sql_quote($id).' AND lang='.sql_quote($lang));
-	return $str_lang;
-}
-
 function tradlang_dir_lang(){
 	global $dossier_squelettes;
 	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes'))
