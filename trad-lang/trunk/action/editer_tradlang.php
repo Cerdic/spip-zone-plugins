@@ -10,9 +10,8 @@ function action_editer_tradlang_dist($arg=null) {
 
 	// si id_tradlang n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
-	if (!$id_tradlang = intval($arg)) {
+	if (!$id_tradlang = intval($arg))
 		return false;
-	}
 
 	// Enregistre l'envoi dans la BD
 	$err = tradlang_set($arg);
@@ -39,10 +38,10 @@ function tradlang_set($id_tradlang,$set=null){
 	 * On vérifie s'il y a au moins un champ modifié pour ajouter l'id_auteur dans les traducteurs
 	 */
 	$infos_tradlang = sql_fetsel('*','spip_tradlangs','id_tradlang='.intval($id_tradlang));
-	
+
 	$modifie = false;
-	foreach(objet_info('tradlang','champs_editables') as $champ){
-		if($c[$champ] != $infos_tradlang[$champ]){
+	foreach($c as $champ => $valeur){
+		if($valeur != $infos_tradlang[$champ]){
 			$modifie = true;
 			break;
 		}
@@ -50,10 +49,8 @@ function tradlang_set($id_tradlang,$set=null){
 	
 	if($modifie && ($GLOBALS['visiteur_session']['id_auteur'] > 0)){
 		$traducteurs = array();
-		$traducteur = sql_getfetsel('traducteur','spip_tradlangs','id_tradlang='.intval($id_tradlang));
-		if($traducteur){
-			$traducteurs = array_map('trim',explode(',',$traducteur));
-		}
+		if($infos_tradlang['traducteur'])
+			$traducteurs = array_map('trim',explode(',',$infos_tradlang['traducteur']));
 		if(!in_array($GLOBALS['visiteur_session']['id_auteur'],$traducteurs)){
 			$traducteurs[] = $GLOBALS['visiteur_session']['id_auteur'];
 			$c['traducteur'] = implode(', ',$traducteurs);
@@ -70,7 +67,7 @@ function tradlang_set($id_tradlang,$set=null){
 		return $err;
 	}
 	
-	if($statut = (in_array(_request('statut'),array('NEW','MODIF','OK','RELIRE'))) ? _request('statut') : $c['statut'])
+	if(($statut = (in_array(_request('statut'),array('NEW','MODIF','OK','RELIRE'))) ? _request('statut') : $c['statut']) && ($statut != $infos_tradlang['statut']))
 		sql_updateq('spip_tradlangs',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
 	
 	//$c = collecter_requests(array('statut'),array(),$set);
