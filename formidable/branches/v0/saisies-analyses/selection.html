@@ -7,7 +7,7 @@
 
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
 #SET{datas, #ENV{datas}}
-#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_aplatir_chaine|saisies_chaine2tableau), #GET{datas}}}
 
 <BOUCLE_datas(POUR){tableau #GET{datas}}>
 <tr class="tr_liste">

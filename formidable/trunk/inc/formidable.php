@@ -238,7 +238,7 @@ function analyser_saisie($saisie) {
                 }
             }
             $datas = is_string($saisie['datas'])
-                ? saisies_chaine2tableau($saisie['datas'])
+                ? saisies_chaine2tableau(saisies_aplatir_chaine($saisie['datas']))
                 : $saisie['datas'];
             foreach($datas as $key => $val) {
                 $nb = (isset($stats["choix-$key"]))
