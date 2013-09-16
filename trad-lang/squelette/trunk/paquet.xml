@@ -11,9 +11,9 @@
 
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 
-	<pipeline nom="insert_head" inclure="tradlang_pipelines.php" />
-	<pipeline nom="insert_head_css" inclure="tradlang_pipelines.php" />
-	<pipeline nom="jqueryui_plugins" inclure="tradlang_pipelines.php" />
+	<pipeline nom="insert_head" inclure="tradlang_skel_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="tradlang_skel_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="tradlang_skel_pipelines.php" />
 	
 	<necessite nom="revisions" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.9.1;[" />
