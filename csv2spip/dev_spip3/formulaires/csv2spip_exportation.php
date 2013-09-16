@@ -1,7 +1,6 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
 function formulaires_csv2spip_exportation_charger_dist(){
 
     $nom_champs=csv2spip_exportation();
@@ -15,11 +14,7 @@ return $valeurs;
 }
 
 function formulaires_csv2spip_exportation_verifier_dist(){
-        
     $erreurs = array();
-    //champs obligatoire
-    //$champs_obligatoire= _T('csv2spip:obligatoire');
-
     return $erreurs;
 }
 
@@ -29,8 +24,8 @@ function formulaires_csv2spip_exportation_traiter_dist(){
     $retour = array();
     
     // creation du nom du fichier
-    $date_du_jour=date(d_m_Y);
-    $nom_fichier_csv = "export_table_auteurs_$date_du_jour.csv";
+    $date_du_jour=date(Y_m_d);
+    $nom_fichier_csv = $date_du_jour.'_export_table_auteurs.csv';
 
     $statut = array(
         "0minirezo" => "administrateur",
@@ -49,119 +44,89 @@ function formulaires_csv2spip_exportation_traiter_dist(){
     $tableau_csv[0]["zone"]="zone";
     }
     $i=1;
-    
-    if ($res = sql_select('*', 'spip_auteurs')){
+
+    // création d'un array contenant tous les logins des admins restreints
+    if(in_array("0minirezo",$choix_statut)){
+        $r = sql_select("DISTINCT auteur.login AS login",array("spip_auteurs AS auteur","spip_auteurs_liens AS liens"),array("auteur.statut='0minirezo'","liens.id_auteur=auteur.id_auteur","liens.objet='rubrique'"));
+        while($row = sql_fetch($r)){
+            $login_restreint[]=$row['login'];
+        }
+    }
+
+    if ($res = sql_select('*', 'spip_auteurs AS auteur')){
         while ($row = sql_fetch($res)){
             // test les statuts demandés
             if (in_array($row[statut],$choix_statut)){
-                // Prise en compte de tous les champs selectionnés
-                foreach($nom_champs as $nom_champ){
-                    // Prise en compte du champ statut
-                    if ($nom_champ == "statut"){
-                        $tableau_csv[$i]["statut"] = $statut[$row[statut]];
-                    }else {
-                        $tableau_csv[$i][$nom_champ]=$row[$nom_champ];
-                    }
-                };
-                // on selectionne les noms des rubriques pour les admins restreints
-                if($res2 = sql_select(
-                    array(
-                        "rub.titre AS titre"),
-                    array(
-                        "spip_rubriques AS rub",
-                        "spip_auteurs_liens AS lien"),
-                    array(
-                        "rub.id_rubrique = lien.id_objet",
-                        "lien.id_auteur  = $row[id_auteur]",
-                        "lien.objet      = 'rubrique'")
-                    )) {
-
-                        $j=0;
-                        while ($row2 = sql_fetch($res2)) {
-                            $input[$row[nom]][$j]=$row2[titre];
-                            $j++;
+                // si c'est un admin, on ne selectionne que les admins restreints !!!
+                if ((($row['statut'] == "0minirezo") AND (in_array($row['login'],$login_restreint))) OR $row['statut']=="1comite" OR $row['statut'] == "6forum"){
+                    // Prise en compte de tous les champs selectionnés
+                    foreach($nom_champs as $nom_champ){
+                        // Prise en compte du champ statut
+                        if ($nom_champ == "statut"){
+                            $tableau_csv[$i]["statut"] = $statut[$row[statut]];
+                        }else {
+                            $tableau_csv[$i][$nom_champ]=$row[$nom_champ];
                         }
-                        if ($input[$row[nom]]){
-                            $tableau_csv[$i]["ss_groupe"]=implode('|',$input[$row[nom]]);
-                        }
-					    else 
-						    $tableau_csv[$i]["ss_groupe"]= "";
-                    }
-/*
-                // comme je ne sais pas faire une double jointure, je réalise 2 requetes
-                // requete 1 => récupération de "id_zone"
-                if (test_plugin_actif("accesrestreint")){
-                    if ($res3 = sql_select(
-                        array(
-                            "lien.id_zone AS id_zone"),
-                        array(
-                            "spip_zones_liens AS lien"),
-                        array(
-                            "lien.objet = 'auteur'",
-                            "lien.id_objet = $row[id_auteur]",
-                        )
-                    )) {
-                        $k=0;
-                        while ($row3 = sql_fetch($res3)){
-                            // requete 2 => grace à id_zone, récupération des noms de rubriques
-                            if ($res4 = sql_select(
-                                array(
-                                    "rub.titre AS titre"),
-                                array(
-                                    "spip_rubriques AS rub",
-                                    "spip_zones_liens AS lien"),
-                                array(
-                                    "lien.id_zone = $row3[id_zone]",
-                                    "lien.objet = 'rubrique'",
-                                    "lien.id_objet = id_rubrique")
-                                )) {
-                                    while ($row4 = sql_fetch($res4)){
-                                        $zones[$row[nom]][$k]=$row4[titre];
-                                        $tableau_csv[$i]["zone"]=implode('|',$zones[$row[nom]]);
-                                        $k++;
-                                    }
-                                }
-                        }
-                    }
-                }
-*/
-                // Prise en compte des zones restreintes : plugin acces restreint si le plugin est installe
-                if (test_plugin_actif("accesrestreint")){
-                    $k=0;
-                    if ($res3 = sql_select(
+                    };
+                    // on selectionne les noms des rubriques pour les admins restreints
+                    if($res2 = sql_select(
                         array(
                             "rub.titre AS titre"),
                         array(
-                            "spip_zones_liens AS zone_auteur",
-                            "spip_zones_liens AS zone_rubrique",
-                            "spip_rubriques AS rub"),
+                            "spip_rubriques AS rub",
+                            "spip_auteurs_liens AS lien"),
                         array(
-                            "zone_auteur.id_zone = zone_rubrique.id_zone",
-                            "zone_auteur.objet='auteur' AND zone_auteur.id_objet =$row[id_auteur]",
-                            "zone_rubrique.objet='rubrique'AND zone_rubrique.id_objet = rub.id_rubrique")
+                            "rub.id_rubrique = lien.id_objet",
+                            "lien.id_auteur  = $row[id_auteur]",
+                            "lien.objet      = 'rubrique'")
                         )) {
-                            while ($row3 = sql_fetch($res3)){
-                                $zones[$row[nom]][$k]=$row3[titre];
-                                $tableau_csv[$i]["zone"]=implode('|',$zones[$row[nom]]);
-                                $k++;
 
+                            $j=0;
+                            while ($row2 = sql_fetch($res2)) {
+                                $input[$row[nom]][$j]=$row2[titre];
+                                $j++;
                             }
+                            if ($input[$row[nom]]){
+                                $tableau_csv[$i]["ss_groupe"]=implode('|',$input[$row[nom]]);
+                            }
+					        else 
+						        $tableau_csv[$i]["ss_groupe"]= "";
                         }
+                    // Prise en compte des zones restreintes : plugin acces restreint si le plugin est installe
+                    if (test_plugin_actif("accesrestreint")){
+                        $k=0;
+                        if ($res3 = sql_select(
+                            array(
+                                "rub.titre AS titre"),
+                            array(
+                                "spip_zones_liens AS zone_auteur",
+                                "spip_zones_liens AS zone_rubrique",
+                                "spip_rubriques AS rub"),
+                            array(
+                                "zone_auteur.id_zone = zone_rubrique.id_zone",
+                                "zone_auteur.objet='auteur' AND zone_auteur.id_objet =$row[id_auteur]",
+                                "zone_rubrique.objet='rubrique'AND zone_rubrique.id_objet = rub.id_rubrique")
+                            )) {
+                                while ($row3 = sql_fetch($res3)){
+                                    $zones[$row[nom]][$k]=$row3[titre];
+                                    $tableau_csv[$i]["zone"]=implode('|',$zones[$row[nom]]);
+                                    $k++;
+
+                                }
+                            }
+                    }
+
                 }
-                
             }
             $i++;
         }
     }
-    
     // création de la variable contenant l'intégralité des donnees
 	$a_ecrire = '';
 	foreach ($tableau_csv as $ligne) {
 		$a_ecrire .= implode('~', $ligne);
 		$a_ecrire .= "\r\n";
 	}
-	//var_dump($tableau_csv);
-
     // telechargement du fichier csv	
     header("Content-Type: application/download");
     header("Content-Disposition: attachment; filename=$nom_fichier_csv");
@@ -173,9 +138,6 @@ function formulaires_csv2spip_exportation_traiter_dist(){
 
     return $retour;
 }
-
-
-
 function csv2spip_exportation(){
 
     //récupération des noms des champs
@@ -188,9 +150,4 @@ function csv2spip_exportation(){
     }
     return $nom_champs;
 }
-
-
-
-
-
 ?>
