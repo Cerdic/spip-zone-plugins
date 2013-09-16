@@ -70,7 +70,7 @@
 		[(#SET{full,''})][(#SET{langue_mere,#LANG_MERE})]
 		<BOUCLE_compte_langue_mere(TRADLANGS){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
 		<td><abbr title="[(#GET{langue_mere}|traduire_nom_langue)]">[(#GET{langue_mere})]</abbr> [((#GRAND_TOTAL))]</td>[(#SET{full,#GRAND_TOTAL})]</B_compte_langue_mere>
-		<BOUCLE_langue_module(POUR){tableau #GET{langues}}>
+		<BOUCLE_langue_module(DATA){source table, #GET{langues}}>
 			<BOUCLE_compte_tradlang(TRADLANGS){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
 			[(#SET{class,'non_traduit'})][
 			(#TOTAL_BOUCLE|=={#GET{full}}|oui)[(#SET{class,traduit_full})][(#SET{percent,100})]][
