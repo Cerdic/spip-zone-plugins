@@ -13,4 +13,7 @@
 	<licence lien="https://github.com/mozilla/pdf.js/blob/master/LICENSE">license</licence>
 	<copyright>2011 Mozilla Foundation</copyright>
 	<utilise nom="gviewer" />
+	
+	<!--pipeline nom="jquery_plugins" inclure="pdfjs_pipelines.php" />
+	<pipeline nom="insert_head" inclure="pdfjs_pipelines.php" /-->
 </paquet>

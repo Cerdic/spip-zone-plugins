@@ -1,0 +1,11 @@
+TODO
+----
+
+Proposition d'améliorations possibles :
+* installer la librairie pdf.js dans le répertoire lib/ de spip, avec installation automatique à l'activation du plugin.
+* internationaliser en prenant en compte le paramètre #ENV{lang}
+* créer trunk et branches ?
+* compresser js et css
+* mettre le document PDF en cache dans le navigateur (à voir si la librairie pdf.js le permet)
+* voir l'option fullscreen (elle n'est pas visible actuellement dans l'iframe)
+* insérer directement le PDF dans un <div> (ou un <canvas>) au lieu d'une iframe ?
