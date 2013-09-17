@@ -1,0 +1,112 @@
+[(#REM) modele Nivoslider generique, utilise par les autres modeles
+	Parametres :
+	Selection des documents
+		id_objet
+	  objet
+	  id_document
+	  vu
+	  limite
+	Affichage du slider
+		width:			hauteur
+		height:			largeur
+		manuel:
+		effect:
+		slices:
+		animSpeed:
+		pauseTime:
+		directionNav:
+		directionNavHide:
+		controlNav:
+		keyboardNav:
+		pauseOnHover:
+		captionOpacity:
+		imageAlign:
+		imageBackcolor:
+		controlNavThumbs:
+		controlNavThumbsWidth:
+		controlNavThumbsHeight:
+]
+
+[(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
+[(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
+[(#SET{slices,[(#ENV{slices, #CONFIG{nivoslider/slices,15} })]} )]
+[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
+[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
+[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
+[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true} })]} )]
+[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
+[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
+[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
+[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
+[(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center'} })]} )]
+[(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
+[(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
+[(#SET{controlNavThumbsWidth,[(#ENV{controlNavThumbsWidth, #CONFIG{nivoslider/controlNavThumbsWidth,50} })]} )]
+[(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
+
+[(#SET{uniqid,#ENV|md5|substr{0,8}})]
+
+<B_doc>
+<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+	<div id="slider_#GET{uniqid}" class="nivoSlider">
+	<BOUCLE_doc(DOCUMENTS)
+		{id_objet?}{objet?}
+		{id_document?}
+		{mode?}
+		{extension IN png,jpg,gif}
+		{par num titre,titre}
+		{doublons}
+		{vu?}
+		{0,#ENV{limite,1000}}>
+
+		#SET{lien,''}
+		[(#DESCRIPTIF|oui)
+			[(#SET{lien,#VAL{'spip.php?'#DESCRIPTIF}|attribut_html|replace{' ',''}})]
+			[(#SET{fancyornot,''})]
+			[(#DESCRIPTIF|match{doc}|=={doc}|?{
+				[(#PLUGIN{FANCYBOX}|oui)
+					[(#SET{fancyornot, [(#CONFIG{fancybox/selecteur_commun,'.fancybox'}|replace{'\.',''})]})]
+				]
+				[(#SET{lien, #URL_DOCUMENT})]
+			})]
+			[(#DESCRIPTIF|match{http}|=={http}|?{
+				[(#SET{lien, [(#DESCRIPTIF|textebrut)]})]
+			})]
+		][
+		<a href="(#GET{lien})" [class="(#GET{fancyornot})"]>
+		][(#FICHIER
+				|image_passe_partout{#GET{width},#GET{height}}
+				|image_recadre{#GET{width},#GET{height}}
+				|inserer_attribut{title,#TITRE}
+				|inserer_attribut{data-thumb,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}}
+		)]
+		[</a>(#GET{lien}|oui)
+	]</BOUCLE_doc>
+	</div>
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(function() {
+		jQuery('#slider_#GET{uniqid}').nivoSlider({
+			[effect:'(#GET{effect})',]
+			[slices:(#GET{slices}),]
+			[animSpeed:(#GET{animSpeed}),]
+			[pauseTime:(#GET{pauseTime}),]
+			[directionNav:(#GET{directionNav}),]
+			[directionNavHide:(#GET{directionNavHide}),]
+			[(#GET{controlNavThumbs}|=={'false'}|oui)
+				[controlNav:(#GET{controlNav}),]
+			]
+			[keyboardNav:(#GET{keyboardNav}),]
+			[pauseOnHover:(#GET{pauseOnHover}),]
+			[(#GET{controlNavThumbs}|=={'true'}|oui)
+				[controlNavThumbs:(#GET{controlNavThumbs}),]
+			]
+			[captionOpacity:(#GET{captionOpacity})]
+		});
+	});
+	[(#ENV{manuel}|=={oui}|oui)
+	$('#slider_#GET{uniqid}').data('nivoslider').stop();
+	]
+/*]]>*/</script>
+</B_doc>

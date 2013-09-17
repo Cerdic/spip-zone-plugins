@@ -1,8 +1,8 @@
 <paquet
 	prefix="nivoslider"
 	categorie="multimedia"
-	version="2.0.1"
-	etat="test"
+	version="3.0.0"
+	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/nivoslider-32.png"
 	documentation="http://www.spip-contrib.net/Nivo-Slider-pour-SPIP"
