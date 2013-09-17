@@ -19,9 +19,12 @@ function nivoslider_affichage_final($texte){
 	if (($GLOBALS['html'] OR test_espace_prive())
 	  AND strpos($texte,"nivoSlider")!==false
 		AND stripos($texte,"</script>")
-	  AND $p = stripos($texte,"</head>")
+	  AND $p = stripos($texte,"</body>")
 	){
-		$ins = '<script src="'.find_in_path('js/jquery.nivo.slider.pack.js').'" type="text/javascript"></script>';
+		$js = find_in_path('javascript/jquery.nivo.slider.pack.js');
+		lire_fichier(find_in_path('javascript/nivoslider.init.js'),$init);
+		$ins = '<script type="text/javascript">/*<![CDATA[*/
+jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
 		$texte = substr_replace($texte,$ins,$p,0);
 	}
 	return $texte;
