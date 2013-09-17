@@ -9,7 +9,7 @@ function activite_editoriale_declarer_champs_extras($champs = array()){
 			'sql' => "tinytext NOT NULL DEFAULT ''", // declaration sql
 			'rechercher'=>false,
             'label' => _T('activite_editoriale:delai'), // chaine de langue 'mon_plug:mon_label'
-            'explication' => 'activite_editoriale:delai_precisions', // precisions sur le champ
+            'explication' => _T('activite_editoriale:delai_precisions'), // precisions sur le champ
             'obligatoire' => false, // 'true', 'false' ou ''
             )
 			);
@@ -19,7 +19,7 @@ function activite_editoriale_declarer_champs_extras($champs = array()){
 			'nom'=>'extras_identifiants',
 			'rechercher'=>false,
             'label' => _T('activite_editoriale:identifiants'), // chaine de langue 'mon_plug:mon_label'
-            'explication' => 'activite_editoriale:identifiants_precisions', // precisions sur le champ
+            'explication' => _T('activite_editoriale:identifiants_precisions'), // precisions sur le champ
             'obligatoire' => false, // 'true', 'false' ou ''
 			'sql' => "tinytext NOT NULL DEFAULT ''") // declaration sql
 	);
