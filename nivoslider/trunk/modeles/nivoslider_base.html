@@ -102,19 +102,30 @@
 				|image_recadre{#GET{width},#GET{height}}
 				|inserer_attribut{title,#TITRE}
 				|inserer_attribut{data-thumb,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}}
+		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE}
+		    |inserer_attribut{class,no_image_filtrer}
 		)]
 		[</a>(#GET{lien}|oui)
 	]</BOUCLE_doc>
 	</div>
 </div>
 <script type="text/javascript">/*<![CDATA[*/
-	jQuery(function() {
-		jQuery('.nivoSlider').each(function(){
-			var me=jQuery(this);
-			var options=eval('options='+me.attr('data-slider')+';');
-			if (options)
-				me.nivoSlider(options);
-		});
+function nivoslider_load_next_img(slider){
+	var toload = jQuery("img:not(.loaded)[data-src^=]",slider);
+	if (toload.length) { toload = toload.eq(0); toload.attr('src',toload.attr('data-src')).attr('data-src','').addClass('loaded');}
+}
+jQuery(function() {
+	jQuery('.nivoSlider').each(function(){
+		var me=jQuery(this);
+		var options=eval('options='+me.attr('data-slider')+';');
+		if (options){
+			options = jQuery.extend({
+					afterLoad: function(){nivoslider_load_next_img(me)},
+				  afterChange: function(){nivoslider_load_next_img(me)}
+				},options);
+			me.nivoSlider(options);
+		}
 	});
+});
 /*]]>*/</script>
 </B_doc>

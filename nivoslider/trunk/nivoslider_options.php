@@ -28,4 +28,15 @@ function nivoslider_affichage_final($texte){
 }
 
 
+function nivoslider_img_display_first_only($img, $compteur){
+	if ($compteur==1) return $img;
+
+	$src = extraire_attribut($img,"src");
+	$img = inserer_attribut($img,"data-src",$src);
+	// gif transparent 1px
+	// http://proger.i-forge.net/The_smallest_transparent_pixel/eBQ
+	$img = inserer_attribut($img,"src","data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
+	return $img;
+}
+
 ?>
