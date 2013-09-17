@@ -9,7 +9,6 @@
 	Affichage du slider
 		width:			hauteur
 		height:			largeur
-		manuel:
 		effect:
 		slices:
 		animSpeed:
@@ -25,6 +24,7 @@
 		controlNavThumbs:
 		controlNavThumbsWidth:
 		controlNavThumbsHeight:
+    manualAdvance:
 ]
 
 [(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
@@ -34,11 +34,10 @@
 [(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{nivoslider/animSpeed,500} })]} )]
 [(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{nivoslider/pauseTime,3000} })]} )]
 [(#SET{directionNav,[(#ENV{directionNav, #CONFIG{nivoslider/directionNav,true} })]} )]
-[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{nivoslider/directionNavHide,true} })]} )]
+[(#SET{manualAdvance,[(#ENV{manualAdvance, #CONFIG{nivoslider/manualAdvance,false} })]} )]
 [(#SET{controlNav,[(#ENV{controlNav, #CONFIG{nivoslider/controlNav,true} })]} )]
 [(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{nivoslider/keyboardNav,false} })]} )]
 [(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{nivoslider/pauseOnHover,true} })]} )]
-[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{nivoslider/captionOpacity,0.8} })]} )]
 [(#SET{imageAlign,[(#ENV{imageAlign, #CONFIG{nivoslider/imageAlign,'center'} })]} )]
 [(#SET{imageBackcolor,[(#ENV{imageBackcolor, #CONFIG{nivoslider/imageBackcolor,'transparent'} })]} )]
 [(#SET{controlNavThumbs,[(#ENV{controlNavThumbs, #CONFIG{nivoslider/controlNavThumbs,false} })]} )]
@@ -49,7 +48,30 @@
 
 <B_doc>
 <div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]' style="[width:(#GET{width})px;][height:(#GET{height})px]">
-	<div id="slider_#GET{uniqid}" class="nivoSlider">
+	<div id="slider_#GET{uniqid}"
+	     class="nivoSlider"
+		   data-slider="{
+				effect:'[(#GET{effect})]',
+				slices:[(#GET{slices}|intval)],
+				boxCols: 8,
+				boxRows: 4,
+				animSpeed:[(#GET{animSpeed}|intval)],
+				pauseTime:[(#GET{pauseTime}|intval)],
+				startSlide: 0,
+				directionNav:[(#GET{directionNav}|=={true}|?{true,false})],
+				[(#GET{controlNavThumbs}|=={'true'}|oui)
+				controlNav:true,
+				controlNavThumbs:true,
+				]
+				[(#GET{controlNavThumbs}|=={'true'}|non)
+				controlNav:[(#GET{controlNav}|=={true}|?{true,false})],
+				]
+				pauseOnHover: [(#GET{pauseOnHover}|=={true}|?{true,false})],
+				manualAdvance: [(#GET{manualAdvance}|=={true}|?{true,false})],
+				prevText: '<:precedent|ucfirst|attribut_html|texte_script:>',
+				nextText: '<:suivant|ucfirst|attribut_html|texte_script:>',
+				randomStart: false
+		   }">
 	<BOUCLE_doc(DOCUMENTS)
 		{id_objet?}{objet?}
 		{id_document?}
@@ -87,26 +109,12 @@
 </div>
 <script type="text/javascript">/*<![CDATA[*/
 	jQuery(function() {
-		jQuery('#slider_#GET{uniqid}').nivoSlider({
-			[effect:'(#GET{effect})',]
-			[slices:(#GET{slices}),]
-			[animSpeed:(#GET{animSpeed}),]
-			[pauseTime:(#GET{pauseTime}),]
-			[directionNav:(#GET{directionNav}),]
-			[directionNavHide:(#GET{directionNavHide}),]
-			[(#GET{controlNavThumbs}|=={'false'}|oui)
-				[controlNav:(#GET{controlNav}),]
-			]
-			[keyboardNav:(#GET{keyboardNav}),]
-			[pauseOnHover:(#GET{pauseOnHover}),]
-			[(#GET{controlNavThumbs}|=={'true'}|oui)
-				[controlNavThumbs:(#GET{controlNavThumbs}),]
-			]
-			[captionOpacity:(#GET{captionOpacity})]
+		jQuery('.nivoSlider').each(function(){
+			var me=jQuery(this);
+			var options=eval('options='+me.attr('data-slider')+';');
+			if (options)
+				me.nivoSlider(options);
 		});
 	});
-	[(#ENV{manuel}|=={oui}|oui)
-	$('#slider_#GET{uniqid}').data('nivoslider').stop();
-	]
 /*]]>*/</script>
 </B_doc>
