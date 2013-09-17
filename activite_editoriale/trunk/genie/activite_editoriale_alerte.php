@@ -66,7 +66,7 @@ function activite_editoriale_envoyer_mail($list){
     $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
     $subject = _T('activite_editoriale:rubrique_doit_maj');
     include_spip('activite_editoriale_fonctions');
-    $url = $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=naviguer&id_rubrique='.$list['id_rubrique'];
+    $url = $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=rubrique&id_rubrique='.$list['id_rubrique'];
     $body = _T('activite_editoriale:rubrique_pas_maj',array('titre'=>$list['titre'],'jours'=>age_rubrique($list['maj'])))."\n\n";
     $body = $body._T('activite_editoriale:gestionnaire')."\n\n";
     $body = $body.$url;
