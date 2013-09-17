@@ -135,7 +135,14 @@
 .nivo-caption {
  	background:#CONFIG{nivoslider/captionBackcolor,'#000'};
  	color:#CONFIG{nivoslider/captionFrontcolor,'#FFF'};
+  opacity:#CONFIG{nivoslider/captionOpacity,0.8};
+  filter: "alpha(opacity=[(#CONFIG{nivoslider/captionOpacity,0.8}|mult{100})])";
 }
+[(#CONFIG{nivoslider/directionNavHide,true}|=={true}|oui)
+.nivo-directionNav {visibility: hidden}
+.nivoSlider:hover .nivo-directionNav {visibility: visible}
+]
+
 
 /* Control nav bullet styles (e.g. 1,2,3...) */
 .nivoSlider-wrap.nav-bullet .nivo-controlNav {
