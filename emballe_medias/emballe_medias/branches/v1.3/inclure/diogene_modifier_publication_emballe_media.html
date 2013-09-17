@@ -133,11 +133,12 @@
 		[(#SET{doc2img_types,[(#CONFIG{doc2img/format_document,''}|explode{','})]})]
 		[(#VAL{tiff}|in_array{[(#GET{doc2img_types})]}|?{[(#SET{doc2img_types,[(#GET{doc2img_types}|push{tif})]})]})]
 		[(#PLUGIN{doc2img}|et{[(#EXTENSION|in_array{#GET{doc2img_types}})]}|oui)
-		<li class="menu-entree">
-			<a href="[(#URL_ACTION_AUTEUR{doc2img_convert,#ID_DOCUMENT,#SELF})]">
-				<:doc2img:doc2img_reconvertir_doc:>
-			</a>
-		</li>]
+			[(#PLUGIN{pdfjs}|et{#EXTENSION|=={pdf}}|et{#AUTORISER{mstelecharger,document,#ID_ARTICLE}}|et{#CONFIG{mediaspip/squelettes/autoriser_telecharger_original}|=={on}|oui}|non)
+			<li class="menu-entree">
+				<a href="[(#URL_ACTION_AUTEUR{doc2img_convert,#ID_DOCUMENT,#SELF})]">
+					<:doc2img:doc2img_reconvertir_doc:>
+				</a>
+			</li>]]
 		<//B_attente>
 		</BOUCLE_document>
 		<BOUCLE_si_geo(CONDITION){si #PLUGIN{diogene_geo}|et{#VAL{geo}|in_array{#GET{champs_ajoutes}|unserialize|sinon{#ARRAY}}}|oui}>
