@@ -16,7 +16,7 @@
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<credit lien="http://leafletjs.com/">Leaflet</credit>
-	<credit lien="https://github.com/brunob/leaflet-plugins">Leaflet plugins</credit>
+	<credit lien="https://github.com/shramov/leaflet-plugins">Leaflet plugins</credit>
 	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
