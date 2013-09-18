@@ -2,7 +2,7 @@
 	prefix="menus"
 	categorie="navigation"
 	version="1.4.6"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"
 	documentation="http://www.spip-contrib.net/Plugin-Menus"
