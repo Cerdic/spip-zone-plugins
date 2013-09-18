@@ -145,7 +145,7 @@ function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
 			"maj" => "timestamp(14) NOT NULL");
 
 	$spip_tradlangs_bilans_keys = array(
-			"UNIQUE id_module_lang" => "id_tradlang_module,lang"
+			"UNIQUE id_module_lang" => "id_tradlang_module,lang",
 			"KEY module" => "module",
 			"KEY lang" => "lang"
 	);

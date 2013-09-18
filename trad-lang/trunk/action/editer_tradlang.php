@@ -76,7 +76,7 @@ function tradlang_set($id_tradlang,$set=null){
 		else if($statut == 'RELIRE')
 			$infos_maj['chaines_relire'] = ($bilan['chaines_relire']+1);
 		else if($statut == 'MODIF')
-			$infos_maj['chaines_modif'] = $bilan['chaines_modif']+1);
+			$infos_maj['chaines_modif'] = ($bilan['chaines_modif']+1);
 		else if($statut == 'NEW')
 			$infos_maj['chaines_new'] = ($bilan['chaines_new']+1);
 		
