@@ -24,7 +24,7 @@ function sparkstats_insert_head($flux){
   .each(function() {
     if (sparkstats_done) return;
     var m;
-    if ((m = $(this).attr("className").match(/article-titre-(\d+)/)) && (m=m[1])) {
+    if ((m = $(this).attr("class").match(/article-titre-(\d+)/)) && (m=m[1])) {
       sparkstats_done = true;
       $.get("'.generer_url_public('sparkstats','id_article=', '&').'"+m, function(e){
         if(e)
