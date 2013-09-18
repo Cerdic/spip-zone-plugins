@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * On ajoute une tache cron toutes les 4 minutes afin de créer les premières révisions des 
  * tradlang pour éviter de perdre du temps par la suite.
+ * Une autre tâche CRON "maintenance" toutes les 24h pour diverses opérations.
  * 
  * @param array $taches_generales
  * 		Le tableau des taches à réaliser
@@ -24,6 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function tradlang_taches_generales_cron($taches_generales) {
 	$taches_generales['tradlang_verifier_versions'] = 240;
+	$taches_generales['tradlang_maintenance'] = 24*3600;
 	return $taches_generales;
 }
 /**
