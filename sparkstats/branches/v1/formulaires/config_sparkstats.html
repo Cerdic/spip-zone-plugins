@@ -1,0 +1,25 @@
+#CACHE{0}
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=sparkstats -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="editer_sparkstats_cible[ (#ENV**{erreurs}|table_valeur{sparkstats_cible}|oui)erreur]">
+				<label for="sparkstats_cible"><:sparkstats:sparkstats_cible:></label>
+				[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{sparkstats_cible})</span>]
+				<input type="text" name="sparkstats_cible" id="sparkstats_cible" class="text" value="[(#ENV*{sparkstats_cible,'.cartouche small,.info-publi:eq(0)'})]" />
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+</form>
+</div>

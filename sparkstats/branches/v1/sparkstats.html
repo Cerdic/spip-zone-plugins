@@ -1,0 +1,7 @@
+#HTTP_HEADER{Content-Type: text/plain}
+[(#REM)
+
+	On affiche les 39 dernieres visites de l'article, et la popularite
+
+]<BOUCLE_a(ARTICLES){id_article}{statut?}><BOUCLE_s(spip_visites_articles)
+{id_article}{par date}{n-40,39}>#VISITES, </BOUCLE_s>#POPULARITE_ABSOLUE</BOUCLE_a>

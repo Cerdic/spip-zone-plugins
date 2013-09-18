@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Sparkstats
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	fil@rezo.net
+	</auteur>
+	<version>
+	0.1.2
+	</version>
+	<etat>
+	dev
+	</etat>
+	<icon>images/sparkstats-128.png</icon>
+	<description>
+		<multi>
+			[fr]sparklines des stats d'un article, avec [->http://omnipotent.net/jquery.sparkline/]
+			[en]Stats sparklines of an article, with [->http://omnipotent.net/jquery.sparkline/]
+		</multi>
+	</description>
+	<prefix>
+	sparkstats
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>sparkstats_fonctions.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>statistique</categorie>
+</plugin>
