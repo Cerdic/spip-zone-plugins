@@ -1,7 +1,7 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.4.5"
+	version="1.4.6"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"

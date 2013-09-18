@@ -2,17 +2,17 @@
 <BOUCLE_menu(MENUS){id_menu?}{identifiant?}>
 	
 	<B_entrees>
-	<ul class="menu-liste menu-items nav[ (#CHAMP_SQL{css})]">
-		<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
-		#MENUS_AFFICHER_ENTREE
-			<BOUCLE_sous_menu(MENUS){id_menus_entree}>
+	<ul class="menu-liste menu-items[ (#ENV{class})][(#VAL{_MENUS_EXTRA_CLASS}|defined|oui)[(#VAL{_MENUS_EXTRA_CLASS}|constant)]][ (#CHAMP_SQL{css})]">
+		<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>#SET{entree,''}
+		[(#MENUS_AFFICHER_ENTREE)#SET{entree,' '}
+			]<BOUCLE_sous_menu(MENUS){id_menus_entree}>
 				#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
 			</BOUCLE_sous_menu>
 		[(#REM)
 			On ferme le li si le type d'entrée accepte des sous-menus
 			et si on a bien quelque chose dans le li (cas des menus sur Balise SESSION)
-		][(#TYPE_ENTREE|menus_type_refuser_sous_menu|non)
-			[(#MENUS_AFFICHER_ENTREE|trim|oui)</li>]
+		][(#GET{entree}|et{#TYPE_ENTREE|menus_type_refuser_sous_menu|non})
+			</li>
 		]
 		</BOUCLE_entrees>
 	</ul>
