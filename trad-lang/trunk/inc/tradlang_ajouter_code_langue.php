@@ -19,6 +19,7 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	 * Sélection des chaînes de la langue mère du module
 	 */
 	$chaines_mere = sql_select('*','spip_tradlangs',"module=".sql_quote($module['module'])." AND lang=".sql_quote($module['lang_mere']));
+	$total = 0;
 	while($chaine = sql_fetch($chaines_mere)){
 		/**
 		 * Insertion en base :
@@ -41,6 +42,7 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 		unset($chaine['maj']);
 		unset($chaine['id_tradlang']);
 		$res = sql_insertq('spip_tradlangs',$chaine);
+		$total++;
 	}
 	
 	/**
@@ -63,6 +65,21 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	spip_log('Ajouter job suite à ajout de code base','revisions_cron');
 	job_queue_add("tradlang_creer_premieres_revisions", $job_description, array('module'=>$module['module'],'lang'=>$lang),'inc/', false, 0, 10);
 	
+	/**
+	 * On ajoute la ligne du bilan
+	 */
+	$bilan = array(
+				'id_tradlang_module' => $module['id_tradlang_module'],
+				'module' => $module['module'],
+				'lang'=> $lang,
+				'chaines_total' => $total,
+				'chaines_ok' => 0,
+				'chaines_relire' => 0,
+				'chaines_modif' => 0,
+				'chaines_new' => $total
+			);
+	sql_insertq('spip_tradlangs_bilans',$bilan);
+
 	/**
 	 * On invalide
 	 */

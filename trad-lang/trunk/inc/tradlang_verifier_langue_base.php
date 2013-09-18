@@ -66,15 +66,14 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 		}
 
 		foreach($diff2 as $key => $id){
-			$array['id'] = $module.'_'.$id;
-			$array['module'] = 'attic%'.$module;
+			$array['id'] = $id;
+			$array['statut'] = 'attic';
 			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlangs','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
 			sql_updateq('spip_tradlangs',$array,'id_tradlang='.intval($id_tradlang));
 			$supprimees++;
 		}
-	}else{
+	}else
 		return array('0','0');
-	}
 	include_spip('inc/invalideur');
 	suivre_invalideur('1');
 	return array($inserees,$supprimees);

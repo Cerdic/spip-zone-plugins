@@ -23,6 +23,7 @@ function action_tradlang_supprimer_langue_cible_dist(){
 	include_spip('inc/autoriser');
 	if($lang_cible && intval($id_tradlang_module) && autoriser('modifier','tradlang') && !sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible).' AND statut="0K"')){
 		sql_delete('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible));
+		sql_delete('spip_tradlangs_bilans','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible));
 		include_spip('inc/invalideur');
 		suivre_invalideur('1');
 	}else

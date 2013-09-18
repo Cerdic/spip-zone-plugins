@@ -37,9 +37,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		 */
 		$res = sql_insertq("spip_tradlang_modules",$module);
 		$mode = 'new';	
-	}else{
+	}else
 		$mode = 'update';
-	}
 	
 	if ($new_only && ($mode=='update')){
 		$ret .= propre(_T('tradlang:module_deja_importe',array('module'=>$module['module'])));
@@ -56,18 +55,16 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		$chs = null;
 		$fichier = $module_choisi[$langue]['fichier'];
 		$orig = 0;
-		if ($langue == $module['lang_mere']){
+		if ($langue == $module['lang_mere'])
 			$orig = 1;
-		}
-			
+
 		$ret .= _T('tradlang:insertionlangue')." : ".$langue."<br />";
 		$nom_fichier = _DIR_RACINE.$module['dir_lang']."/".$fichier;
 		
 		include($nom_fichier);
 		$chs = $GLOBALS[$GLOBALS['idx_lang']];
-		if (is_null($chs)) {
+		if (is_null($chs))
 			return false;
-		}
 		
 		reset($chs);
 		
@@ -84,9 +81,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		
 		$res = sql_select("id, str, md5","spip_tradlangs","module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
 		if($mode == 'update'){
-			if(sql_count($res)>0){
+			if(sql_count($res)>0)
 				spip_log("Fichier de langue $langue du module $nom_mod deja inclus dans la base\n","tradlang");
-			}
 		}
 		$existant = array();
 		while ($t = sql_fetch($res))
@@ -100,14 +96,13 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				) as $id) {
 			if (isset($chs[$id]) AND !isset($existant[$id])){
 				unset($md5);
-				if ($orig) {
+				if ($orig)
 					$md5 = md5($chs[$id]);
-				} else if (!isset($liste_id_orig[$id])) {
+				else if (!isset($liste_id_orig[$id])) {
 					spip_log("!-- Chaine $id inconnue dans la langue principale\n","tradlang");
 					$ignorees++;
-				} else {
+				}else
 					$md5 = $liste_id_orig[$id];
-				}
 
 				/**
 				 * zz_timestamp_nepastraduire est ce qui nous permet de vérifier la synchro
@@ -133,9 +128,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				spip_log('cas 2','tradlang');
 				// * identique ? => NOOP
 				$md5 = md5($chs[$id]);
-				if ($md5 == $existant[$id]) {
+				if ($md5 == $existant[$id])
 					$inchangees++;
-				}
 				// * modifiee ? => UPDATE
 				else {
 					// modifier la chaine
@@ -147,10 +141,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 						), "module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue)." AND id=".sql_quote($id));
 					
 					// signaler le statut MODIF de ses traductions
-					if ($orig){
+					if ($orig)
 						sql_updateq("spip_tradlangs",array('statut'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
-					}
-					
 					$modifiees++;
 				}
 			}
@@ -160,8 +152,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				spip_log('cas 3','tradlang');
 				// mettre au grenier
 				sql_updateq("spip_tradlangs",array(
-					'id' => $nom_mod.'_'.$id,
-					'module' => 'attic'),"id=".sql_quote($id)." AND module=".sql_quote($nom_mod));
+					'id' => $id,
+					'statut' => 'attic'),"id=".sql_quote($id)." AND module=".sql_quote($nom_mod));
 				$supprimees++;
 			}
 
@@ -174,7 +166,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		/**
 		 * Si ce n'est pas la langue mère que l'on importe :
 		 * - On ajoute dans la base les chaines manquantes dans le fichier de la langue
-		 * - On place dans le module attic les chaines en trop dans les fichiers
+		 * - On met le statut attic pour les chaines en trop dans les fichiers
 		 */
 		if($langue != $module['lang_mere']){
 			$tradlang_verifier_langue_base = charger_fonction('tradlang_verifier_langue_base','inc');
@@ -232,15 +224,13 @@ function tradlang_select_liste_rep_lang($name="repertoirelangue",$selected='',$n
 							}
 						}
 						if(!array_key_exists($module[1],$tous_modules)){
-							if($module[1] == $selected){
+							if($module[1] == $selected)
 								$sel = "selected=\"selected\"";
-							}
 							$ret .= "<option value=\"".$module[1]."\"$sel>".$module[1]."</option>\n";
 							$tous_modules[$module[1]]['repertoire'] = dirname($chemin);
 							$tous_modules[$module[1]]['langues'] = $module[2];
-						}else{
+						}else
 							$tous_modules[$module[1]]['langues'] .= ",".$module[2];
-						}
 						$tous_modules[$module[1]][$module[2]] = array('fichier' => basename($chemin));
 					}
 				}
@@ -250,21 +240,18 @@ function tradlang_select_liste_rep_lang($name="repertoirelangue",$selected='',$n
 							if(strpos($chemin, _DIR_RACINE) !== false){
 								$search = _DIR_RACINE;
 								$chemin = str_replace($search,'',$chemin);
-							}else{
+							}else
 								$chemin = _DIR_RESTREINT_ABS.$chemin;
-							}
 						}
 						if(!in_array($module[1],$tous_modules_en_base)){
 							if(!array_key_exists($module[1],$tous_modules)){
-								if($module[1] == $selected){
+								if($module[1] == $selected)
 									$sel = "selected=\"selected\"";
-								}
 								$ret .= "<option value=\"".$module[1]."\"$sel>".$module[1]."</option>\n";
 								$tous_modules[$module[1]]['repertoire'] = dirname($chemin);
 								$tous_modules[$module[1]]['langues'] = $module[2];
-							}else{
+							}else
 								$tous_modules[$module[1]]['langues'] .= ",".$module[2];	
-							}
 							
 							$tous_modules[$module[1]][$module[2]] = array('fichier' => basename($chemin));
 						}

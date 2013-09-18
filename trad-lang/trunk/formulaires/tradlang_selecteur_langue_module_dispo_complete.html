@@ -3,9 +3,6 @@
 	Sélecteur de langues pouvant être considérées comme langue de traduction
 	
 	Ressort un select de langues qui sont supposées traduites à 100% 
-	 
-	A noter que l'on utilise dans les boucles "BOUCLE_module_langue_dispo_pref" et "BOUCLE_module_langue_dispo"
-	le critère {module} et non {id_tradlang_module} pour éviter tous les "attic" qui gardent l'id_tradlang_module
 	
 	Ce squelette accepte comme paramètres :
 	-* id_tradlang_module int (obligatoire) : identifiant numérique du module
@@ -17,11 +14,11 @@
 	<select name="#ENV{name,langues}" id="#ENV{name,langues}">[(#ENV{option_vide}|oui)
 		<option value="">--</option>]<B_module_langue_dispo_pref>
 		<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
-		<BOUCLE_module_langue_dispo_pref(TRADLANGS){module}{langues_preferees}{langue_complete}{lang != #ENV{lang_exclue}}{par lang}>
+		<BOUCLE_module_langue_dispo_pref(TRADLANGS){id_tradlang_module}{langues_preferees}{langue_complete}{lang != #ENV{lang_exclue}}{par lang}>
 			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option></BOUCLE_module_langue_dispo_pref>
 		</optgroup>[(#SET{optgroup,'oui'})]</B_module_langue_dispo_pref><B_module_langue_dispo>
 		[(#GET{optgroup}|=={oui}|oui)<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
-		<BOUCLE_module_langue_dispo(TRADLANGS){module}{lang != #ENV{lang_exclue}}{!langues_preferees}{langue_complete}{par lang}>
+		<BOUCLE_module_langue_dispo(TRADLANGS){id_tradlang_module}{lang != #ENV{lang_exclue}}{!langues_preferees}{langue_complete}{par lang}>
 			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option></BOUCLE_module_langue_dispo>
 		[(#GET{optgroup}|=={oui}|oui)</optgroup>]
 		</B_module_langue_dispo>

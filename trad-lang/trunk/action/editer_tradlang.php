@@ -67,8 +67,30 @@ function tradlang_set($id_tradlang,$set=null){
 		return $err;
 	}
 	
-	if(($statut = (in_array(_request('statut'),array('NEW','MODIF','OK','RELIRE'))) ? _request('statut') : $c['statut']) && ($statut != $infos_tradlang['statut']))
+	if(($statut = (in_array(_request('statut'),array('NEW','MODIF','OK','RELIRE'))) ? _request('statut') : $c['statut']) && ($statut != $infos_tradlang['statut'])){
 		sql_updateq('spip_tradlangs',array('statut' => $statut),'id_tradlang='.intval($id_tradlang));
+		$infos_maj = array();
+		$bilan = sql_fetsel('chaines_ok,chaines_relire,chaines_modif,chaines_new','spip_tradlangs_bilans','module='.sql_quote($infos_tradlang['module']).' AND lang='.sql_quote($infos_tradlang['lang']));
+		if($statut == 'OK')
+			$infos_maj['chaines_ok'] = ($bilan['chaines_ok']+1);
+		else if($statut == 'RELIRE')
+			$infos_maj['chaines_relire'] = ($bilan['chaines_relire']+1);
+		else if($statut == 'MODIF')
+			$infos_maj['chaines_modif'] = $bilan['chaines_modif']+1);
+		else if($statut == 'NEW')
+			$infos_maj['chaines_new'] = ($bilan['chaines_new']+1);
+		
+		if($infos_tradlang['statut'] == 'OK')
+			$infos_maj['chaines_ok'] = ($bilan['chaines_ok']-1);
+		else if($infos_tradlang['statut'] == 'RELIRE')
+			$infos_maj['chaines_relire'] = ($bilan['chaines_relire']-1);
+		else if($infos_tradlang['statut'] == 'MODIF')
+			$infos_maj['chaines_modif'] = ($bilan['chaines_modif']-1);
+		else if($infos_tradlang['statut'] == 'NEW')
+			$infos_maj['chaines_new'] = ($bilan['chaines_new']-1);
+		
+		sql_updateq('spip_tradlangs_bilan',$infos_maj,'module='.sql_quote($infos_tradlang['module']).' AND lang='.sql_quote($infos_tradlang['lang']));
+	}
 	
 	//$c = collecter_requests(array('statut'),array(),$set);
 	//$err .= instituer_tradlang($id_tradlang, $c);

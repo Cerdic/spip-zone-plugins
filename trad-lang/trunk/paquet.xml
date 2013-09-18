@@ -1,11 +1,11 @@
 <paquet
 	prefix="tradlang"
 	categorie="outil"
-	version="2.3.0"
+	version="2.3.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spip_lang.png"
-	schema="0.4.6"
+	schema="0.5.1"
 >
 
 	<nom>Trad-Lang</nom>
@@ -14,6 +14,7 @@
 	
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/tradlang.php" />
 	<pipeline nom="pre_edition" inclure="tradlang_pipelines.php" />
 	<pipeline nom="post_edition" inclure="tradlang_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="tradlang_pipelines.php" />

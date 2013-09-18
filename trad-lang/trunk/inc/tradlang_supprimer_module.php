@@ -8,6 +8,7 @@ function inc_tradlang_supprimer_module($id_tradlang_module){
 		if($module){
 			$traductions = sql_delete('spip_tradlangs','module='.sql_quote($module));
 			sql_delete('spip_tradlang_modules','module='.sql_quote($module));
+			sql_delete('spip_tradlangs_bilans','module='.sql_quote($module));
 			return $traductions;
 		}else{
 			return false;

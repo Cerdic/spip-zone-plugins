@@ -12,9 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_tradlang_creer_premieres_revisions_dist($module=false,$lang=false,$nb=false){
 	include_spip('inc/revisions');
-	spip_timer('genie_tradlang');
 	$count = 0;
-	spip_log($module,'revisions_cron');
 	if ($versionnes = liste_champs_versionnes('spip_tradlangs')) {
 		$where = 'b.id_objet IS NULL';
 		$where .= (isset($module) AND $module) ? ' AND a.module = '.sql_quote($module) : '';
@@ -30,8 +28,6 @@ function inc_tradlang_creer_premieres_revisions_dist($module=false,$lang=false,$
 			$count++;
 		}
 	}
-	$blam = spip_timer('genie_tradlang');
-	spip_log($blam,'revisions_cron');
 	return $count;
 }
 

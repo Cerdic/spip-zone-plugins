@@ -10,6 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlangs'] = 'tradlangs';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
+	$interface['table_des_tables']['tradlangs_bilans'] = 'tradlangs_bilans';
 	$interface['table_des_traitements']['PRIORITE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	return $interface;
 }
@@ -73,7 +74,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"titre"	=> "text DEFAULT '' NOT NULL",
 			"id" => "varchar(128) NOT NULL default ''",
 			"module" => "varchar(32) NOT NULL default 0",
-			"lang" => "varchar(16) NOT NULL default ''",
+			"lang" => "varchar(10) DEFAULT '' NOT NULL",
 			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 			"str" => "text NOT NULL", 
 			"comm" => "text NOT NULL",
@@ -125,4 +126,34 @@ function tradlang_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
+/**
+ * Table des bilans spip_tradlangs_bilans
+ * @param array $tables_auxiliaires
+ * @return array
+ */
+function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
+
+	$spip_tradlangs_bilans = array(
+			"id_tradlang_module" => "bigint(21) NOT NULL",
+			"module" => "varchar(128) NOT NULL",
+			"lang" => "varchar(10) DEFAULT '' NOT NULL",
+			"chaines_total"	=> "smallint(5) DEFAULT '0' NOT NULL",
+			"chaines_ok"	=> "smallint(5) DEFAULT '0' NOT NULL",
+			"chaines_relire" => "smallint(5) DEFAULT '0' NOT NULL",
+			"chaines_modif" => "smallint(5) DEFAULT '0' NOT NULL",
+			"chaines_new" => "smallint(5) DEFAULT '0' NOT NULL",
+			"maj" => "timestamp(14) NOT NULL");
+
+	$spip_tradlangs_bilans_keys = array(
+			"UNIQUE id_module_lang" => "id_tradlang_module,lang"
+			"KEY module" => "module",
+			"KEY lang" => "lang"
+	);
+
+	$tables_auxiliaires['spip_tradlangs_bilans'] = array(
+		'field' => &$spip_tradlangs_bilans,
+		'key' => &$spip_tradlangs_bilans_keys);
+
+	return $tables_auxiliaires;
+}
 ?>

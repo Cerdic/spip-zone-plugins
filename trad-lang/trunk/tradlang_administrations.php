@@ -77,6 +77,13 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.4.6'] = array(
 		array('sql_alter',"TABLE spip_tradlangs ADD INDEX statut (statut)"),
 	);
+	$maj['0.5.0'] = array(
+		array('creer_base'),
+		array('tradlang_maj_bilans')
+	);
+	$maj['0.5.1'] = array(
+		array('tradlang_maj_attic')
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -177,11 +184,77 @@ function tradlang_maj_traducteurs($affiche=false){
 		sql_updateq('spip_tradlangs',array('traducteur'=>$traduction['traducteur']),'module = '.sql_quote($traduction['module']).' AND id='.sql_quote($traduction['id']).' AND lang='.sql_quote($traduction['lang']));
 	}
 }
+
+/**
+ * On crée les bilans de chaque langue de chaque module
+ */
+function tradlang_maj_bilans($affiche=false){
+	$modules = sql_select('id_tradlang_module,module,lang_mere','spip_tradlang_modules');
+	
+	/**
+	 * On passe d'abord les modules un par un
+	 * On récupère $total qui est le total des chaines de la langue mère
+	 */
+	while($module = sql_fetch($modules)){
+		/**
+		 * Si on n'est pas dans un module type attic
+		 */
+		if(substr($module['module'],0,5) != 'attic'){
+			$total = sql_countsel('spip_tradlangs','module='.sql_quote($module['module']).' AND lang='.sql_quote($module['lang_mere']));
+			$langues_base = sql_select('lang','spip_tradlangs','module='.sql_quote($module['module']),'lang');
+			/**
+			 * On passe ensuite chaque langue de ce module en revue
+			 * On insère une entrée pour chaque langue de chaque module
+			 */
+			while($langue = sql_fetch($langues_base)){
+				$lang = $langue['lang'];
+				$chaines_ok = sql_countsel('spip_tradlangs','module='.sql_quote($module['module']).' AND lang='.sql_quote($lang).' AND statut="OK"');
+				$chaines_relire = sql_countsel('spip_tradlangs','module='.sql_quote($module['module']).' AND lang='.sql_quote($lang).' AND statut="RELIRE"');
+				$chaines_modif = sql_countsel('spip_tradlangs','module='.sql_quote($module['module']).' AND lang='.sql_quote($lang).' AND statut="MODIF"');
+				$chaines_new = sql_countsel('spip_tradlangs','module='.sql_quote($module['module']).' AND lang='.sql_quote($lang).' AND statut="NEW"');
+				$infos_bilan = array(
+									'id_tradlang_module' => $module['id_tradlang_module'],
+									'module' => $module['module'],
+									'lang' => $lang,
+									'chaines_total' => $total,
+									'chaines_ok' => $chaines_ok,
+									'chaines_relire' => $chaines_relire,
+									'chaines_modif' => $chaines_modif,
+									'chaines_new' => $chaines_new
+								);
+				sql_insertq('spip_tradlangs_bilans',$infos_bilan);
+			}
+		}
+	}
+}
+
+function tradlang_maj_attic($affiche=false){
+	/**
+	 * Dans un premier temps, on supprimer les attics qui ont un statut NEW,
+	 * il ne serviront jamaiscar même récupérés, ils ne sont pas traduit
+	 */
+	sql_delete('spip_tradlangs','module LIKE "attic%" AND statut="NEW"');
+	$select_attic_id_module = sql_select('*','spip_tradlangs','module LIKE "attic%"','id_tradlang_module');
+	while($id_module = sql_fetch($select_attic_id_module)){
+		$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_module['id_tradlang_module']));
+		if($module){
+			$attics_module = sql_select('id_tradlang,id,module,lang','spip_tradlangs','id_tradlang_module='.intval($id_module['id_tradlang_module']).' AND module LIKE "attic%"');
+			while($id_tradlang = sql_fetch($attics_module)){
+				if(!sql_getfetsel('id_tradlang','spip_tradlangs','id='.sql_quote($id_tradlang['id']).' AND module='.sql_quote($id_tradlang['module']).' AND lang='.sql_quote($id_tradlang['lang'])))
+					sql_updateq('spip_tradlangs',array('statut'=>'attic','module'=>$module),'id_tradlang='.intval($id_tradlang['id_tradlang']));
+				else
+					sql_delete('spip_tradlangs','id_tradlang='.intval($id_tradlang['id_tradlang']));
+			}
+		}
+	}
+	sql_delete('spip_tradlang_modules','module LIKE "attic%"');
+}
 /**
  * Fonction de desinstallation
  * On supprime :
  * -* la table spip_tradlangs
  * -* la table spip_tradlang_modules
+ * -* la table spip_tradlangs_bilans
  * -* les éléments de spip_versions concernant l'obet tradlang
  * -* les éléments de spip_versions_fragments concernant l'obet tradlang
  * @param unknown_type $nom_meta_base_version
@@ -189,6 +262,7 @@ function tradlang_maj_traducteurs($affiche=false){
 function tradlang_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_tradlangs");
 	sql_drop_table("spip_tradlang_modules");
+	sql_drop_table("spip_tradlangs_bilans");
 	sql_delete('spip_versions','objet='.sql_quote('tradlang'));
 	sql_delete('spip_versions_fragments','objet='.sql_quote('tradlang'));
 	effacer_meta($nom_meta_base_version);

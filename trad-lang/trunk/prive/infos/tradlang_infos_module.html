@@ -5,11 +5,11 @@
 	<BOUCLE_langue_mere(TRADLANGS){id_tradlang_module}{lang=#LANG_MERE}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_langue_mere>
 	#SET{total_mere,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p>
 	</B_langue_mere>
-	<BOUCLE_total_item_langue_mere_new(TRADLANGS){module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_langue_mere_new>
+	<BOUCLE_total_item_langue_mere_new(TRADLANGS){id_tradlang_module}{statut=NEW}{lang=#LANG}> </BOUCLE_total_item_langue_mere_new>
 	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
-	<BOUCLE_total_item_langue_mere_relire(TRADLANGS){module}{statut=RELIRE}{lang=#LANG}> </BOUCLE_total_item_langue_mere_relire>
+	<BOUCLE_total_item_langue_mere_relire(TRADLANGS){id_tradlang_module}{statut=RELIRE}{lang=#LANG}> </BOUCLE_total_item_langue_mere_relire>
 	<p><:tradlang:items_relire:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_relire>
-	<BOUCLE_total_item_langue_mere_modif(TRADLANGS){module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_langue_mere_modif>
+	<BOUCLE_total_item_langue_mere_modif(TRADLANGS){id_tradlang_module}{statut=MODIF}{lang=#LANG}> </BOUCLE_total_item_langue_mere_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
 	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|oui)<p><img src="#CHEMIN{images/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
 	[(#IDMODULE|tradlang_testesynchro{#LANG_MERE}|non)<p><img src="#CHEMIN{images/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>]

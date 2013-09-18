@@ -34,7 +34,7 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		if(!intval($id_tradlang_module))
 			$id_tradlang_module = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','','','priorite,nom_mod');
 		if(!$infos_module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module))){
-			$valeurs['id_tradlang_module'] = $id_tradlang_module = $module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module NOT LIKE "attic%" AND module != "contrib"',array('priorite','nom_mod'),'','0,1');
+			$valeurs['id_tradlang_module'] = $id_tradlang_module = $module_defaut = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','',array('priorite','nom_mod'),'','0,1');
 			/**
 			 * Si aucun module dans la base
 			 */

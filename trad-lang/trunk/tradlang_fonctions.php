@@ -130,21 +130,10 @@ function langues_sort($array,$defaut=null){
 
 /**
  * <BOUCLE(TRADLANG_MODULES)>
- * On enlève les modules attic*
  */
 function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-
-	/**
-	 * Par defaut, selectionner uniquement les modules qui ne sont pas attic*
-	 */ 
-	if (!isset($boucle->modificateur['tout'])
-	&& !isset($boucle->modificateur['criteres']['module'])
-	&& !isset($boucle->modificateur['criteres']['id_tradlang_module'])) {
-		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
-		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
-	}
 	
 	/**
 	 * Par défaut on tri par priorité et nom_mod
@@ -159,24 +148,12 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 
 /**
  * <BOUCLE(TRADLANGS)>
- * On enlève les modules attic*
  */
 function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	// Par defaut, selectionner uniquement les modules qui ne sont pas attic*
-	if (!isset($boucle->modificateur['tout'])
-		&& !isset($boucle->modificateur['criteres']['module'])
-		&& !isset($boucle->modificateur['criteres']['id_tradlang'])
-		&& !isset($boucle->modificateur['criteres']['id_tradlang_module'])
-	) {
-		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"attic%\"'"));
-		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"%attic\"'"));
-		array_unshift($boucle->where,array("'NOT LIKE'", "'$id_table." ."module'", "'\"contrib\"'"));
-	}
-	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang')
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
-	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -239,7 +216,7 @@ function prepare_langues_preferees() {
  */
 function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 	$boucle = &$boucles[$id_boucle];
-    $id_table = $boucle->id_table;
+	$id_table = $boucle->id_table;
 	if($id_table == 'tradlangs'){
 		if(isset($crit->param[0][0]))
 			$id_module = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$id_boucle]->id_parent);
@@ -251,7 +228,7 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 			$module_having = $prepare_module('.$id_module.', "' . $boucle->sql_serveur . '");
 		';
 
-        array_unshift($boucle->where,array("'='", "'$id_table." ."statut'", "'\"OK\"'"));
+		array_unshift($boucle->where,array("'='", "'$id_table." ."statut'", "'\"OK\"'"));
         $boucles[$id_boucle]->group[] = "$id_table.lang";
         $boucles[$id_boucle]->having[] = "\n\t\t".'$module_having';
     }else
