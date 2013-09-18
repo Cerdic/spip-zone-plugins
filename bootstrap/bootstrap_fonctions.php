@@ -2,6 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined('_MENUS_EXTRA_CLASS')) define('_MENUS_EXTRA_CLASS','nav');
 
 /**
  * Ajouter le markup html pour une navbar responsive
