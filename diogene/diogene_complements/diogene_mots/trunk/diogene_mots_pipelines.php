@@ -107,14 +107,14 @@ function diogene_mots_diogene_traiter($flux){
 		include_spip('inc/editer_mots');
 		$groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
 
-		$mots_multiples = array();
-		
 		/**
 		 * On traite chaque groupe séparément
 		 * Si c'est une modification d'objet il se peut qu'il faille supprimer les anciens mots
 		 * On fait une vérifications sur chaque groupe
 		 */
 		foreach($groupes_possibles as $groupe){
+			$mots_multiples = array();
+
 			/**
 			 * Si le select est multiple
 			 */
