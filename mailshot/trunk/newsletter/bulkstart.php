@@ -60,6 +60,11 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	$id_mailshot = sql_insertq("spip_mailshots",$bulk);
 
 	if ($id_mailshot){
+		// mettre a jour la meta en priorite car l'init du maileur peut faire timeout
+		// et dans ce cas on ne declenche jamais vraiment l'envoi
+		include_spip('inc/mailshot');
+		mailshot_update_meta_processing($options['statut']=='processing');
+
 		// initialiser le mailer si necessaire
 		// On cree l'objet Mailer (PHPMailer) pour le manipuler ensuite
 		if ($mailer = lire_config("mailshot/mailer")
@@ -67,9 +72,6 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 			AND $init = charger_fonction($mailer."_init",'bulkmailer',true)){
 			$init($id_mailshot);
 		}
-
-		include_spip('inc/mailshot');
-		mailshot_update_meta_processing($options['statut']=='processing');
 	}
 
 	return $id_mailshot;
