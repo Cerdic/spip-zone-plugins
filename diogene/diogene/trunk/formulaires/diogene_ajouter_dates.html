@@ -6,29 +6,27 @@
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
 			<label for="date_orig"><:diogene:champ_date_publication:></label>
 			<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
-			<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' value="[(#ENV{heure_orig})]"
-			/>
+			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' value="[(#ENV{heure_orig})]" />]
 		</li>
 		<li class="editer editer_date_redac[ (#ENV**{erreurs}|table_valeur{date_redac}|oui)erreur]">
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac})</span>]
 			<label for="date_redac" class='date_redac'><:diogene:champ_date_publication_anterieure:></label>
 			<input type='text' class='text date' name='date_redac' id='date_redac' size='10' maxlength='10' value="[(#ENV{date_redac})]" />
-			<input type='text' class='text heure' name='heure_redac' id='heure_redac' size='5' maxlength='5' value="[(#ENV{heure_redac})]"
-			/>
+			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac' id='heure_redac' size='5' maxlength='5' value="[(#ENV{heure_redac})]" />]
 	    </li>]
 		[(#ENV{dates_ajoutees}|=={date_redac}|oui)
 		<li class="editer editer_date_redac[ (#ENV**{erreurs}|table_valeur{date_redac}|oui)erreur]">
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac})</span>]
 			<label for="date_redac" class='date_redac'><:diogene:champ_date_publication_anterieure:></label>
 			<input type='text' class='text date' name='date_redac' id='date_redac' size='10' maxlength='10' value="[(#ENV{date_redac})]" />
-			<input type='text' class='text heure' name='heure_redac' id='heure_redac' size='5' maxlength='5' value="[(#ENV{heure_redac})]" />
+			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac' id='heure_redac' size='5' maxlength='5' value="[(#ENV{heure_redac})]" />]
 		</li>]
 		[(#ENV{dates_ajoutees}|=={date_orig}|oui)
 		<li class="editer editer_date_orig[ (#ENV**{erreurs}|table_valeur{date_orig}|oui)erreur]">
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
 			<label for="date_orig"><:diogene:champ_date_publication:></label>
 			<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
-			<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' maxlength='5' value="[(#ENV{heure_orig})]" />
+			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' maxlength='5' value="[(#ENV{heure_orig})]" />]
 		</li>]
 	</ul>
 </li>

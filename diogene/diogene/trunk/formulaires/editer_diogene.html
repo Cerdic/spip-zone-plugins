@@ -49,7 +49,6 @@
 						label=<:diogene:label_champs_caches:>,
 						size=40,
 						type=#ENV{objet,article}})]
-					
 					[(#PLUGIN{cextras}|oui)
 						<INCLURE{fond=formulaires/cextras_diogene,env}>
 					]
@@ -71,7 +70,11 @@
 							champs_ajouts=#GET{champs_ajouts},
 							size=#GET{size}})]
 					]
-					
+					[(#CHAMPS_AJOUTES|unserialize|find{date}|ou{#CHAMPS_AJOUTES|unserialize|find{date_redac}}|oui)
+						[(#SAISIE{case,cacher_heure,
+							label=<:diogene:label_cacher_heure:>})]
+					]
+
 					[(#PLUGIN{polyhier}|et{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non}|oui)
 						[(#SAISIE{case, polyhier_desactiver,
 							label=<:diogene:label_polyhier:>,

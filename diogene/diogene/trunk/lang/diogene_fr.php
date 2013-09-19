@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type' => 'Identifiant',
 
 	// L
+	'label_cacher_heure' => 'Ne pas afficher l\'heure pour les dates',
 	'label_cextras_enleves' => 'Champs extras à ne pas afficher',
 	'label_champs_ajoutes' => 'Champs à ajouter',
 	'label_champs_caches' => 'Champs à ne pas afficher',

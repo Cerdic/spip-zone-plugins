@@ -497,7 +497,7 @@ function diogene_pre_edition($flux){
 	}
 	
 	if($flux['args']['table'] == 'spip_diogenes'){
-		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves'));
+		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves','cacher_heure'));
 		if(isset($flux['data']['options_complements']))
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
 
@@ -633,6 +633,7 @@ function diogene_diogene_ajouter_saisies($flux){
 		}
 		if($dates_ajoutees){
 			$flux['args']['contexte']['dates_ajoutees'] = $dates_ajoutees;
+			$flux['args']['contexte']['cacher_heure'] = $flux['args']['options_complements']['cacher_heure'];
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_dates',$flux['args']['contexte']);
 		}
 		if(in_array('forum',unserialize($flux['args']['champs_ajoutes']))){
