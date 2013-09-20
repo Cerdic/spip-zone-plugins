@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Together</nom>
+	<auteur>Cedric Morin [->http://www.nursit.com]</auteur>
+	<version>0.1.0</version>
+	<icon>together-32.png</icon>
+	<lien>https://togetherjs.com/</lien>
+	<etat>test</etat>
+	<description>Coopérer dans l'espace privé</description>
+	<prefix>together</prefix>
+	<pipeline>
+		<nom>affichage_final_prive</nom>
+		<inclure>together_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outils</categorie>
+</plugin>
