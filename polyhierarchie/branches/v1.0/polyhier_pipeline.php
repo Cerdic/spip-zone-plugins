@@ -58,7 +58,7 @@ function polyhier_affiche_enfants($flux) {
 function polyhier_formulaire_charger($flux){
 	$form = $flux['args']['form'];
 	if (
-		($objet = $flux['data']['_polyhier'] AND in_array($objet,array('article','rubrique')))
+		(array_key_exists('_polyhier', $flux['data']) AND $objet = $flux['data']['_polyhier'] AND in_array($objet,array('article','rubrique')))
 		OR ($objet = substr($form,7) AND in_array($form,array('editer_article','editer_rubrique')))
 		){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
