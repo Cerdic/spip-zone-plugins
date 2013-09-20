@@ -144,7 +144,8 @@ function csv2spip_exportation(){
     $nom_champs= array();
     $champ_supprimer = array(0,8,15,16,17,18,19);
     $desc = sql_showtable('spip_auteurs',true);
-    foreach ($desc[field] as $cle => $valeur) $nom_champs[$cle]="-> $cle";
+    foreach ($desc[field] as $cle => $valeur)
+		$nom_champs[$cle]="-> $cle";
     foreach ($champ_supprimer as $cle){
         unset($nom_champs[$cle]);
     }

@@ -9,6 +9,7 @@ function formulaires_csv2spip_importation_charger_dist(){
         "type_maj"                   => "ajouter",
         "abs_redac"                  => "",
         "abs_admin"                  => "",
+        "abs_poubelle"               => "supprimer",
         "abs_visiteur"               => "",
         "traitement_article_efface"  => "rien_faire",
         "transfere_article"          => "",
@@ -48,25 +49,30 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $abs_redacs = _request('abs_redac');
     $abs_admins = _request('abs_admin');
     $abs_visiteurs = _request('abs_visiteur');
+    $abs_poubelle = _request('abs_poubelle');
     $suppression_article_efface = _request('suppression_article_efface');
     $traitement_article_efface = _request('traitement_article_efface');
     $nom_rubrique_archive = _request('nom_rubrique_archive');
     $type_maj=_request('type_maj');
 
     // recuperation de l'id de la rubrique parent des rubriques admins
-    $id_rubrique_parent_admin = _request('id_rubrique_parent');
+    $id_rubrique_parent_admin = _request('rubrique_parent');
     $id_rubrique_parent_admin = explode('|',$id_rubrique_parent_admin[0]);
     $id_rubrique_parent_admin = $id_rubrique_parent_admin[1];
 
     //récupération de l'id de la rubrique parent archive
-    $id_rubrique_parent_archive = _request('id_rubrique_parent_archive');
-    $id_rubrique_parent_archive=explode('|',$id_rubrique_parent[0]);
-    $id_rubrique_parent_archive=$id_rubrique_parent_archive[1];
+    $id_rubrique_parent_archive = _request('rubrique_parent_archive');
+    $id_rubrique_parent_archive = explode('|',$id_rubrique_parent_archive[0]);
+    $id_rubrique_parent_archive = $id_rubrique_parent_archive[1];
     
     $retour = array();
 
 	include_spip('action/editer_rubrique');
-	if ($abs_redacs OR $abs_admins OR $abs_visiteurs){
+    if (test_plugin_actif("accesrestreint"))
+		include_spip('action/editer_zone');
+	include_spip('action/editer_auteur');
+	
+	if ($abs_redacs OR $abs_admins OR $abs_visiteurs OR $abs_poubelle == 'supprimer'){
 		include_spip('action/editer_objet');
 		include_spip('action/editer_liens');
 		include_spip('action/editer_zone');
@@ -94,7 +100,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $i=0;
     
 	// correspondance statut spip / statut csv
-	$Tcorrespondances = array('administrateur'=>'0minirezo', 'redacteur'=>'1comite', 'visiteur'=>'6forum');
+	$Tcorrespondances = array('administrateur'=>'0minirezo', 'redacteur'=>'1comite', 'visiteur'=>'6forum', 'poubelle' => '5poubelle');
 	    
 	// tableau de tous les admins
 	$result = sql_select(array('login', 'email'), 'spip_auteurs', array('statut = "0minirezo"'));
@@ -104,6 +110,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
 			$Tadmin_tous[] = $r['email'];
 	}
 	// tableau des admins restreints
+	$Tadmin_restreint=array();
 	$from = array( 
 		"spip_auteurs AS auteurs",
 		"spip_auteurs_liens AS liens");
@@ -173,11 +180,17 @@ function formulaires_csv2spip_importation_traiter_dist(){
     $tableau_csv_total = array_merge($tableau_csv_visiteurs, $tableau_csv_redacs, $tableau_csv_admins);
 
 
-    //récupération des auteurs de la bdd en 3 array 
-    // $visiteur_bdd
+    //récupération des auteurs de la bdd en 4 array
+    // $poubelle_bdd = les auteurs à la poubelle
+    // $visiteur_bdd = les visiteurs
     // $redacteur_bdd
     // $admin_restreint_bdd
     // la cle de chaque tableau est le login et s'il n'existe pas le mail
+    $poubelle_bdd=$visiteur_bdd=$redacteur_bdd=$admin_restreint_bdd=array();
+    $poubelle_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="5poubelle"','(login!="" OR email!="")'));    
+    foreach ($poubelle_bdd_req as $key) {
+        $poubelle_bdd[$key['login']?$key['login']:$key['email']]=$key;
+    }    
     $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="" OR email!="")'));    
     foreach ($visiteur_bdd_req as $key) {
         $visiteur_bdd[$key['login']?$key['login']:$key['email']]=$key;
@@ -201,7 +214,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     }
 
     // tableau BDD total
-    $tableau_bdd_total = array_merge($visiteur_bdd, $redacteur_bdd, $admin_restreint_bdd);
+    $tableau_bdd_total = array_merge($poubelle_bdd, $visiteur_bdd, $redacteur_bdd, $admin_restreint_bdd);
 
 	// traitement rubriques admin
     // construction du tableau de correspondance nom_rubrique avec leur id
@@ -215,9 +228,11 @@ function formulaires_csv2spip_importation_traiter_dist(){
 	// traitement zones
     // construction du tableau de correspondance nom_zone avec leur id
     $tableau_bdd_zones_admins = array();
-    $result = sql_select(array('id_zone', 'titre'), 'spip_zones');
-    while ($row = sql_fetch($result)){
-		$tableau_bdd_zones_admins[$row['id_zone']] = strtolower($row['titre']);
+	if (test_plugin_actif("accesrestreint")){
+		$result = sql_select(array('id_zone', 'titre'), 'spip_zones');
+		while ($row = sql_fetch($result)){
+			$tableau_bdd_zones_admins[$row['id_zone']] = strtolower($row['titre']);
+		}
 	}
 
 	// créer les rubriques admins du csv n'existant pas et les indexer
@@ -226,20 +241,29 @@ function formulaires_csv2spip_importation_traiter_dist(){
 			$set = array('titre'=>$rub);
 			$id_rub = rubrique_inserer($id_rubrique_parent_admin);
 			rubrique_modifier($id_rub, $set);
-			$tableau_bdd_rubriques_admins[$id_rub] = $rub;
+			$tableau_bdd_rubriques_admins[$id_rub] = strtolower($rub);
 		}
 	}
 
+	//Récuperer les champs de la table auteurs
+	$Tnom_champs_bdd=array();
+    $desc = sql_showtable('spip_auteurs',true);
+    foreach ($desc['field'] as $cle => $valeur)
+		$Tnom_champs_bdd[] = $cle;
+
+	
 	// PARTIE I : maj ou ajout des auteurs
 	// cas 1 : ajout
 	if (!$maj_utilisateur) {
 		$tableau_nouveaux_auteurs = csv2spip_diff_nouveaux($tableau_csv_total, $tableau_bdd_total);
+		foreach($tableau_nouveaux_auteurs as $login => $Tauteur)
+			csv2spip_ajout_utilisateur($login,$Tauteur,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins);
 	}
 
 
 	
 
-    // PARTIE II : Suppresions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
+    // PARTIE II : Suppressions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
     // 1. ras
     // 2. supprimer les articles 
     // 3. transferer les articles dans une rubrique d'archivage
@@ -254,17 +278,21 @@ function formulaires_csv2spip_importation_traiter_dist(){
 		}
 	}	 
     
+    if ($abs_poubelle == 'supprimer') {		
+		$Tid_poubelle = csv2spip_diff_absents($poubelle_bdd);
+		csv2spip_supprimer_auteurs($Tid_poubelle, '5poubelle', $traitement_article_efface,$id_rubrique_parent_archive);
+	}
     if ($abs_visiteurs) {
-		$Tid_visiteurs = csv2spip_diff_absents($visiteur_bdd_par, $tableau_csv_visiteurs);
-		csv2spip_supprimer_auteurs($Tid_visiteurs, '6forum');
+		$Tid_visiteurs = csv2spip_diff_absents($visiteur_bdd, $tableau_csv_visiteurs);
+		csv2spip_supprimer_auteurs($Tid_visiteurs, '6forum', $traitement_article_efface,$id_rubrique_parent_archive);
 	}
     if ($abs_redacs) {
 		$Tid_redacs = csv2spip_diff_absents($redacteur_bdd, $tableau_csv_redacs);
-		csv2spip_supprimer_auteurs($Tid_redacs, '1comite',$traitement_article_efface,$id_rubrique_archive);
+		csv2spip_supprimer_auteurs($Tid_redacs, '1comite',$traitement_article_efface,$id_rubrique_parent_archive);
 	}
     if ($abs_admins) {
 		$Tid_admins = csv2spip_diff_absents($admin_restreint_bdd, $tableau_csv_admins);
-		csv2spip_supprimer_auteurs($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_archive);
+		csv2spip_supprimer_auteurs($Tid_admins, '0minirezo',$traitement_article_efface,$id_rubrique_parent_archive);
 	}
 
     // PARTIE III : maj des existants 
@@ -295,7 +323,7 @@ die;
  * @param $Tcsv: l'array indexé login/mail extrait du csv
  * @return l'array des id_auteurs
  */
-function csv2spip_diff_absents($Tbdd, $Tcsv){
+function csv2spip_diff_absents($Tbdd, $Tcsv=array()){
 	$Tid = array();
 	$T = array_diff_key($Tbdd, $Tcsv);
 	foreach ($T as $val)
@@ -319,11 +347,46 @@ function csv2spip_diff_nouveaux($Tcsv, $Tbdd){
 
 /*
  * ajout d'un utilisateur
- * @param array associatif : nom_champ : valeur
+ * @param login de l'auteur
+ * @param array associatif CSV: Tauteur_csv  nom_champ : valeur
  */
+function csv2spip_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins){
+echo '<br>login: '.$login;
+	$set = $Tzones = $Trubadmin = array();
+	foreach($Tauteur_csv as $champ => $valeur){
+		if($champ == "ss_groupe"){
+			$T = explode('|',$valeur);
+			foreach($T as $rub){
+				$Trubadmin[] = array_search(strtolower($rub),$tableau_bdd_rubriques_admins);
+			}
+		}
+		if($champ == "zone"){
+			$T = explode('|',$valeur);
+			foreach($T as $zone){
+				$Tzones[] = array_search(strtolower($zone),$tableau_bdd_zones_admins);
+			}
 
-function csv2spip_ajout_utilisateur($tableau){
-	
+		}
+		if(in_array($champ,$Tnom_champs_bdd)){
+			$set[$champ] = ($champ == "statut" AND array_key_exists($valeur,$Tcorrespondances)) ? $Tcorrespondances[$valeur] : $valeur;
+		}
+	}
+	if ($set["login"] == "")
+		$set["login"]=$login;
+
+
+	//inserer l'auteur
+	$id_auteur=auteur_inserer();
+	auteur_modifier($id_auteur,$set);
+
+	//liaison des rubriques
+	if(count($Trubadmin) AND $set["statut"] == "0minirezo")
+		objet_associer(array("auteur"=>$id_auteur),array("rubrique"=>$Trubadmin));
+		
+	//liaison des zones
+	if(count($Tzones) AND test_plugin_actif("accesrestreint"))
+		zone_lier($Tzones, 'auteur', $id_auteur, 'add');
+
 }
 	 
 
@@ -338,12 +401,40 @@ function csv2spip_ajout_utilisateur($tableau){
  * $param $id_rubrique_archive
  * 
  */
-function csv2spip_supprimer_auteurs($Tid, $statut,$traitement="",$id_rubrique_archive=1) {
+function csv2spip_supprimer_auteurs($Tid, $statut,$traitement="supprimer",$id_rubrique_archive=1) {
 	// passage à la poubelle
 	$objet = 'auteur';
 	$set = array('statut'=>'5poubelle');
 	foreach ($Tid as $id){
-		objet_modifier($objet, $id, $set);
+		$Tarticles = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="article"'));
+
+		// auteur sans article et demande de suppression: suppression complète
+		if (count($Tarticles) == 0 AND _request('abs_poubelle') == 'supprimer')
+			sql_delete('spip_auteurs', "id_auteur=$id");
+		// passage à la poubelle
+		else
+			objet_modifier($objet, $id, $set);
+
+		// traitement des articles de l'auteur
+		if (count($Tarticles) != 0) {
+
+			// supprimer les articles
+			$table_idarticle = array();
+			if ($traitement == 'supprimer_articles'){
+				objet_dissocier(array('id_auteur'=>$id), array('article'=>$Tarticles));
+				foreach ($Tarticles as $idarticle) {
+					$table_idarticle[]=$idarticle['id_objet'];
+				}
+				$inarticle = join(',',$table_idarticle);
+				sql_delete('spip_articles', "id_article IN ($inarticle)");
+			}
+			// deplacer les articles dans la rubrique d'archivage
+			if ($traitement == 'transferer_articles'){
+				foreach($Tarticles as $idarticle)
+					objet_modifier('article', $idarticle['id_objet'], array('id_parent'=>$id_rubrique_archive));
+			}
+		}
+			
 		// suppression des zones de l'auteur
 		$Tzones = sql_allfetsel('id_zone', 'spip_zones_liens', array('id_objet='.$id, 'objet="auteur"'));
 		foreach ($Tzones as $id_zone)
@@ -353,26 +444,6 @@ function csv2spip_supprimer_auteurs($Tid, $statut,$traitement="",$id_rubrique_ar
 		if ($statut == '0minirezo') {
 			$Trubriques = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="rubrique"'));
 			objet_dissocier(array('id_auteur'=>$id), array('rubrique'=>$Trubriques));
-		}
-		
-		// traitement des articles de l'auteur
-		if (in_array($statut, array('0minirezo','1comite'))){
-			$Tarticles = sql_allfetsel('id_objet', 'spip_auteurs_liens', array('id_auteur='.$id, 'objet="article"'));
-			// supprimer les articles
-			$table_idarticle = array();
-			if ($traitement == 'supprimer_articles'){
-				objet_dissocier(array('id_auteur'=>$id), array('article'=>$Tarticles));
-                foreach ($Tarticles as $idarticle) {
-                    $table_idarticle[]=$idarticle['id_objet'];
-                }
-				$inarticle = join(',',$table_idarticle);
-				sql_delete('spip_articles', "id_article IN ($inarticle)");
-			}
-			// deplacer les articles dans la rubrique d'archivage
-			if ($traitement == 'transferer_articles'){
-				foreach($Tarticles as $idarticle)
-					objet_modifier('article', $idarticle['id_objet'], array('id_parent'=>$id_rubrique_archive));
-			}
 		}
 	}
 }

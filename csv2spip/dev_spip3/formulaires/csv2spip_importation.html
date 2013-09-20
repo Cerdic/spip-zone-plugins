@@ -48,6 +48,14 @@
                 [(#SAISIE{oui_non,abs_visiteur}
                 {label=<:csv2spip:abs_visiteur:>})]
 
+                [(#SAISIE{radio,abs_poubelle}
+                {label=<:csv2spip:abs_poubelle:>}
+				{datas=#ARRAY{
+					supprimer,<:csv2spip:supprimer_auteur:>,
+					passage_poubelle,<:csv2spip:passage_poubelle:>
+					}
+				})]				
+
                     [(#SAISIE{radio,traitement_article_efface}
                     {label=<:csv2spip:suppression_article_efface:>}
                     {datas=#ARRAY{

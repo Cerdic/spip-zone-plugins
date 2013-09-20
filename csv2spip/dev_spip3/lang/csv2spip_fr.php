@@ -4,6 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'abs_redac' => 'Rédacteurs absents',
     'abs_admin' => 'Administrateurs restreints absents',
     'abs_visiteur' => 'Visiteurs absents',
+    'abs_poubelle' => 'Traitement des auteurs absents sans articles',
     'administrateurs' => 'Administrateurs',
     'admin_a_zero' => 'Réinitialisation des rubriques administrées :',
     'auteur_poubelle'=>'mettre les auteurs "à la poubelle" sans les supprimer complètement',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'parametres_fichier_csv' => 'Paramètres du fichier CSV',
     'presentation_formulaire' => 'CSV2SPIP : gestion des utilisateurs de SPIP à partir de fichiers CSV',
     'point_virgule'=>'Point-virgule ";"',
+    'passage_poubelle' => 'passer à la poubelle',
 
     'redacteurs' => 'Rédacteurs',
     'rubrique_defaut' => 'Rubrique par défaut des admins restreints:',
@@ -56,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'suppression_absents' => 'Suppression des absents:',
     'suppression_article_efface' => 'Traitement des articles des auteurs effacés :',
     'supprimer_articles' =>'Supprimer les articles des auteurs effacés',
+    'supprimer_auteur' => 'suppression complète',
     
 
     'transfert' => 'Erreur lors du transfert !',
@@ -64,5 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'visiteurs' => 'Visiteurs',
     'virgule'=>'virgule ","',
+    'vidage_poubelle' => 'Vider la poubelle',
 );
 ?>
