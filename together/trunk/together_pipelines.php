@@ -42,5 +42,6 @@ function together_privacy_js(){
 		}
 	}
 
-	return "<script src='$local_js'></script>";
+	return "<script>var _tohether_jqs = jQuery;</script>
+	<script src='$local_js'></script>";
 }
