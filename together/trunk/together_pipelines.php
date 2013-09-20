@@ -1,16 +1,16 @@
 <?php
 
 function together_affichage_final_prive($texte){
-	$js = '
-<script type="text/javascript">
-jQuery(function(){
-	jQuery(".rapides.collaborer").append(\'<li class="bouton">\'
-	+\'<button id="start-togetherjs" type="button" style="line-height:20px;margin:2px 0;"\'
-	+\'onclick="TogetherJS(this);return false" \'
-	+\'data-end-togetherjs-html="Arrêter">Coopérer</button>\'
-	+\'</li>\');
-});
-</script>'.together_privacy_js();
+	$b = '<li class="bouton">'
+		.'<button id="start-togetherjs" type="button" style="line-height:20px;margin:2px 0;"'
+		.'onclick="TogetherJS(this);return false" '
+		.'data-end-togetherjs-html="Arrêter">Coopérer</button>'
+		.'</li>';
+
+	$texte = preg_replace(",(<ul class='rapides collaborer'>)(.*)(</ul>),Uims","\\1\\2$b\\3",$texte);
+
+
+	$js = together_privacy_js();
 
 	if ($p = strpos($texte,"</body>"))
 		$texte = substr_replace($texte,$js,$p,0);
