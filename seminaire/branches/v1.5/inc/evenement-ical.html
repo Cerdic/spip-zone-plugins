@@ -8,7 +8,7 @@ UID:[(#DATE_DEBUT|date_ical)]-a#ID_ARTICLE-e#ID_EVENEMENT@[(#URL_SITE_SPIP||repl
 [DTEND;VALUE=DATE:(#DATE_FIN|agenda_jourdecal{1,Ymd})]})][
 LOCATION:(#LIEU|PtoBR|textebrut|filtrer_ical)]<B_auteur>
 ORGANIZER;<BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}{0,1}>[CN=(#NOM|textebrut|filtrer_ical):mailto:#EMAIL]</BOUCLE_auteur>[
-DESCRIPTION:(#ABSTRACT|textebrut|folding_ical{'DESCRIPTION'})]
+DESCRIPTION:(#ABSTRACT|textebrut|filtrer_ical)]
 CATEGORIES:<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}>[(#TITRE|textebrut|filtrer_ical)]</BOUCLE_article>[
 URL:(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)]
 STATUS:CONFIRMED

@@ -9,9 +9,9 @@ jQuery(document).ready(function() {
 	// page is now ready, initialize the calendar...
 
 	$('#calendrier').fullCalendar({
-			weekends: false, // will hide Saturdays and Sundays
+			weekends: true, // will hide Saturdays and Sundays
 			editable: false,
-			events: "[(#URL_ACTION_AUTEUR{quete_calendrier_prive,calendrier}|replace{'&amp;','&'})]",
+			events: "[(#URL_PAGE{agenda.json})]",
 			header: {
 				left: [(#LANG_DIR|=={ltr}|?{"'prevYear,prev,next,nextYear today'","'month,agendaWeek,agendaDay'"})],
 				center: 'title',
