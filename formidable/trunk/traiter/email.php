@@ -180,10 +180,10 @@ function traiter_email_dist($args, $retours){
 		}
 		
 		if ($ok){
-			$retours['message_ok'] .= "\n<br/>"._T('formidable:traiter_email_message_ok');
+			$retours['message_ok'] .= "\n"._T('formidable:traiter_email_message_ok');
 		}
 		else{
-			$retours['message_erreur'] .= "\n<br/>"._T('formidable:traiter_email_message_erreur');
+			$retours['message_erreur'] .= "\n"._T('formidable:traiter_email_message_erreur');
 		}
 	}
 	
