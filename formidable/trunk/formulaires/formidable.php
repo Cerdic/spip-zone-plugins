@@ -205,8 +205,7 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
  *     Tableau des erreurs
 **/
 function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
-    $retours = array();
-
+	$retours = array('message_ok'=>'');
     $id_formulaire = intval(_request('id_formulaire'));
     $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
     $traitements = unserialize($formulaire['traitements']);

@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="1.7.0"
+	version="1.7.1"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/formidable-64.png"
