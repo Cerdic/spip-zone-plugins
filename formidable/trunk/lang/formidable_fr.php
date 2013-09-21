@@ -150,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez déjà répondu à ce formulaire.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La réponse à éditer est introuvable.',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Rendre les résultats du formulaire anonymes (ne pas garder de traces de l\'identifiant des personnes ayant répondu).',
+    'traiter_enregistrement_message_ok'     =>'Merci. Vos réponses ont bien été enregistrées',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymiser le formulaire',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Quelle variable système utiliser pour calculer une valeur unique pour chaque auteur sans pour autant révéler son identité.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable à partir de laquelle anonymiser le formulaire',

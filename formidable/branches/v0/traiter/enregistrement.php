@@ -92,8 +92,8 @@ function traiter_enregistrement_dist($args, $retours){
 				$insertions
 			);
 		}
+        $retours['message_ok'] .= "\n<br/>"._T('formidable:traiter_enregistrement_message_ok');
 	}
-	
 	return $retours;
 }
 
