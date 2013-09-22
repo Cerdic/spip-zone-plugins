@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_zotspip' => 'Configure ZotSpip',
-	'confimer_remplacement' => 'Replace <strong>@source@</strong> by <strong>@dest@</strong>? Be carefull, this operation can\'t be undone!',
+	'confimer_remplacement' => 'Replace <strong>@source@</strong> by <strong>@dest@</strong>? Be carefull, this operation can’t be undone!',
 	'confirmer' => 'Confirm',
 	'connexion_ok' => 'The connexion with Zotero is working.',
 	'contributeurs' => 'Creators',
@@ -30,14 +30,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_page-biblio' => 'Search and display of the bibliographical references from the library Zotero synchronised with ZotSpip.',
 	'deselectionner_tout' => 'Unselect all',
-	'droits_insuffisants' => 'You don\'t have the permission to do this modification.',
+	'droits_insuffisants' => 'You don’t have the permission to do this modification.',
 
 	// E
-	'erreur_connexion' => 'ZotSpip cannot connect to Zotero. Please check your settings. If you are using a proxy, please check if the proxy is correctly defined in Spip (Configuration > Advanced functions). Please note that ZotSpip don\'t always work properly with a proxy.',
+	'erreur_connexion' => 'ZotSpip cannot connect to Zotero. Please check your settings. If you are using a proxy, please check if the proxy is correctly defined in Spip (Configuration > Advanced functions). Please note that ZotSpip don’t always work properly with a proxy.',
 	'erreur_dom' => 'ZotSpip needs DOM extension. Please activate/install this PHP extension.',
 	'erreur_openssl' => 'ZotSpip needs openSSL extension. Please activate/install this PHP extension.',
 	'erreur_simplexml' => 'ZotSpip needs SimpleXML extension. Please activate/install this PHP extension.',
-	'explication_api_key' => 'You can create a private Key on the <a href="https://www.zotero.org/settings/keys">Feeds/API page</a> in your Zotero settings. Don\'t forget to provide adequate access to this key.',
+	'explication_api_key' => 'You can create a private Key on the <a href="https://www.zotero.org/settings/keys">Feeds/API page</a> in your Zotero settings. Don’t forget to provide adequate access to this key.',
 	'explication_autoriser_modif_zotero' => 'Activate modification options (as the fusion of two authors)? If yes, who has the right to modify the Zotero library? WARNING: you should also check that your <em>API key</em> has write permissions.',
 	'explication_corriger_date' => 'Zotero provides publication dates in the same way they have been captured. Due to the great variety of date format, the CSL processor is not always able to interpret the date correctly. In this situation, the publication date will not be displayed in the reference. ZotSpip could correct the publication dates before sending the reference to the CSL processor. Be careful: only the publication year will be identified, except if the date is using the formats yyyy-mm-dd or yyyy-mm. This option does not modify the original Zotero library.',
 	'explication_depuis' => 'It could be a year (example: <em>2009</em>), or a period in years followed by the English word <em>years</em> (example: <em>3years</em>) or the French word <em>ans</em> (example: <em>3ans</em>).',
