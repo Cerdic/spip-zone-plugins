@@ -19,9 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ajouter_donnees' => 'Ajouter des réponses',
 	'icone_creer_table' => 'Créer un nouveau formulaire',
 	'importer_donnees_csv' => 'Importer des réponses',
-	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer ce formulaire ?',
+	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer ce formulaire ?',
 	'info_supprimer_formulaire_reponses' => 'Des Réponse sont associées à ce formulaire. 
-Voulez-vous vraiment le supprimer ?',
+Voulez-vous vraiment le supprimer ?',
 
 	// L
 	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette réponse',

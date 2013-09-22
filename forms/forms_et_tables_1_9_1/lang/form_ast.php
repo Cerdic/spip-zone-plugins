@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ¿De verdá quies desanicialu?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retirar el enllaz d\'esta respuesta',
+	'lien_retirer_donnee_liante' => 'Retirar el enllaz d’esta respuesta',
 	'lien_retirer_donnee_liee' => 'Retirar esta respuesta',
 
 	// N
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger_reponses' => 'Descargar les respuestes',
-	'texte_donnee_statut' => 'Estáu d\'esta respuesta',
+	'texte_donnee_statut' => 'Estáu d’esta respuesta',
 	'texte_statut_poubelle' => 'Respuesta desaniciada',
 	'texte_statut_prepa' => 'Respuesta en cursu de redaición',
 	'texte_statut_prop' => 'Repuesta propuesta',
