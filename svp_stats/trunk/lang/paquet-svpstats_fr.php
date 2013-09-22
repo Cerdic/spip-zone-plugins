@@ -7,9 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'svpstats_description' => 'Ce plugin est un module optionnel de SVP. 
-_ Il permet d\'acquérir, de mettre à jour et de restituer les statistiques d\'utilisation des plugins SPIP sur le net. 
+_ Il permet d’acquérir, de mettre à jour et de restituer les statistiques d’utilisation des plugins SPIP sur le net. 
 Ces statistiques sont issues du site <a href="http://stats.spip.org">stats.spip.org</a>.',
-	'svpstats_slogan' => 'Module SVP de gestion des statistiques d\'utilisation des plugins'
+	'svpstats_slogan' => 'Module SVP de gestion des statistiques d’utilisation des plugins'
 );
 
 ?>
