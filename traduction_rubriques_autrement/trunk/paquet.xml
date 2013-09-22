@@ -1,7 +1,7 @@
 <paquet
 	   prefix="trad_rub"
 	   categorie="edition"
-	   version="1.2.3"
+	   version="1.2.4"
 	   etat="stable"
 	   compatibilite="[3.0.10;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
