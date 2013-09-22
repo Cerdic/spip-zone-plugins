@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_preview_embed' => 'Prévisualiser le rendu',
 
 	// M
-	'message_document_inexistant' => 'Ce document n\'est pas disponible sur le site <a href="@url_site@">@nom_site@</a>.'
+	'message_document_inexistant' => 'Ce document n’est pas disponible sur le site <a href="@url_site@">@nom_site@</a>.'
 );
 
 ?>
