@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_champs' => 'Events content',
 	'config_champs_explication' => 'Based on the layout chosen for your site, you can decide which elements in the following list should be available.',
 	'config_minicalendrier' => 'little calendar',
-	'config_refobj_explication' => 'Enable \'text by reference\' to allow articles/breves to be in calendar.',
+	'config_refobj_explication' => 'Enable ’text by reference’ to allow articles/breves to be in calendar.',
 	'config_refobj_non' => 'Disable text by reference',
 	'config_refobj_oui' => 'Enable text by reference',
 	'config_rubrique_explication' => 'If you want to manage a simple calendar for your site, let this option disabled. It is possible to use keywords for categorised your events.<br />But, if you want to manage multiple calendar, and display distinct events for each folder, you can enable it.',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_rubrique_partout' => 'Yes, create events in folder.',
 	'config_rubrique_secteur' => 'Yes, create events in 1st level folder (sector).',
 	'config_themepublic' => 'Public area theme',
-	'config_themes_explication' => 'You can choose a theme (color set) for the \'little calendar\' in public area.',
+	'config_themes_explication' => 'You can choose a theme (color set) for the ’little calendar’ in public area.',
 	'config_titre' => 'Simple calendrier',
 	'corbeille_tous' => '@nb@ events in garbage',
 	'corbeille_un' => '1 event in garbage',
@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_plugin' => 'Calendar',
 
 	// E
-	'enregistrer_dabord_une_fois' => 'It\'s possible ! <br /><br />But first, please save this page one time...',
+	'enregistrer_dabord_une_fois' => 'It’s possible ! <br /><br />But first, please save this page one time...',
 	'entree_evenement_publie' => 'Status of the event :',
 	'explication_ref' => 'Reference to an article or news (ex : article23 ; breve45)',
 	'explication_texte' => 'Text for event description.',
@@ -118,14 +118,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_lieu' => 'Place',
 	'info_n_evenements' => 'events',
 	'info_ref' => 'Text : by reference',
-	'info_ref_1pos' => 'Text : by reference (1\'st possibility)',
+	'info_ref_1pos' => 'Text : by reference (1’st possibility)',
 	'info_statut_encours' => 'In progress',
 	'info_statut_poubelle' => 'In the dustbin',
 	'info_statut_proposee' => 'Submitted for publication',
 	'info_statut_refusee' => 'Rejected',
 	'info_statut_validee' => 'Published',
 	'info_texte' => 'Text',
-	'info_texte_2possibilites' => 'Text : specific (2\'nd possibility)',
+	'info_texte_2possibilites' => 'Text : specific (2’nd possibility)',
 	'info_titre' => 'Title',
 	'item_mots_cles_association_evenements' => 'events',
 
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_evenements' => 'Events list',
 	'liste_des_evenements_rubrique' => 'Events list for folder',
 	'liste_evenements_a_valider' => 'Events items to be validated.',
-	'liste_evenements_auteur' => 'This author\'s events',
+	'liste_evenements_auteur' => 'This author’s events',
 	'liste_evenements_poubelle' => 'Event in the dustbin',
 	'liste_evenements_prepa' => 'Events in progress.',
 	'liste_evenements_prop' => 'Events submitted for publication.',
@@ -181,7 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'validation_refobj_format' => 'Format must be : [type][id]. ex : article23 ; breve45',
 	'validation_rubrique' => 'Folder is required.',
 	'validation_titre' => 'Title is required !',
-	'validation_type_nexiste_pas' => '@type@ n° @id_objet@ doesn\'t exist !'
+	'validation_type_nexiste_pas' => '@type@ n° @id_objet@ doesn’t exist !'
 );
 
 ?>

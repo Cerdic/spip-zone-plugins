@@ -1,6 +1,6 @@
 <traduction module="simplecal" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/simple_calendrier/branches/v1/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=en" total="150" traduits="150" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=en" total="150" traduits="150" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=fr" total="150" traduits="150" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=fr" total="150" traduits="150" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
