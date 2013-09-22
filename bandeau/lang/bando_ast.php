@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Posición na páxina',
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Los Alias son URL alternatives que tamién permiten l\'accesu al to sitiu.
+	'texte_redirection_adresses_secondaires' => 'Los Alias son URL alternatives que tamién permiten l’accesu al to sitiu.
   Estes direiciones se van redirixir automáticamente a la direición principal. Indica una direición por llinia',
 	'titre_config_langage' => 'Configurar la llingua',
 	'titre_configurer_preferences' => 'Configurar les tos preferencies',

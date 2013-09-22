@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   These addresses will be automatically redirected to the main address. Enter one address per line',
 	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configure your preferences',
-	'titre_identite_site' => 'Site\'s identity',
+	'titre_identite_site' => 'Site’s identity',
 	'titre_infos_perso' => 'My personal details'
 );
 

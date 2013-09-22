@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adresses_secondaires' => 'Adreces ÀLIES del lloc públic',
-	'label_bando_outils' => 'Barra d\'eines',
+	'label_bando_outils' => 'Barra d’eines',
 	'label_bando_outils_afficher' => 'Mostrar les eines',
 	'label_bando_outils_masquer' => 'Amagar les eines',
 	'label_choix_langue' => 'Seleccioneu la vostra llengua',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_redirection_adresses_secondaires' => 'Els Àlies són URL alternatives que també permeten accedir al vostre lloc.
-  Aquestes adreces seran redirigides automàticament cap a l\'adreça principal. Indiqueu una adreça per línia ',
+  Aquestes adreces seran redirigides automàticament cap a l’adreça principal. Indiqueu una adreça per línia ',
 	'titre_config_langage' => 'Configurar la llengua',
 	'titre_configurer_preferences' => 'Configurar les teves preferències',
 	'titre_identite_site' => 'Identitat del lloc'

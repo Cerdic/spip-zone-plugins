@@ -1,36 +1,36 @@
 <traduction module="bando" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bandeau/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/bando?lang_cible=ast" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/bando?lang_cible=ast" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/bando?lang_cible=ca" total="26" traduits="25" modifs="0" nouveaux="1" pourcent="96.15">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/bando?lang_cible=ca" total="26" traduits="25" relire="0" modifs="0" nouveaux="1" pourcent="96.15">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/bando?lang_cible=de" total="26" traduits="21" modifs="0" nouveaux="5" pourcent="80.77">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/bando?lang_cible=de" total="26" traduits="21" relire="0" modifs="0" nouveaux="5" pourcent="80.77">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/bando?lang_cible=en" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/bando?lang_cible=en" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/bando?lang_cible=es" total="26" traduits="25" modifs="0" nouveaux="1" pourcent="96.15">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/bando?lang_cible=es" total="26" traduits="25" relire="0" modifs="0" nouveaux="1" pourcent="96.15">
 		<traducteur nom="davux" lien="http://trad.spip.net/auteur/davux" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fa" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fa" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fr" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fr_tu" total="26" traduits="25" modifs="1" nouveaux="0" pourcent="96.15">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/bando?lang_cible=fr_tu" total="26" traduits="25" relire="0" modifs="1" nouveaux="0" pourcent="96.15">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/bando?lang_cible=pt_br" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/bando?lang_cible=pt_br" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/bando?lang_cible=sk" total="26" traduits="26" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/bando?lang_cible=sk" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
