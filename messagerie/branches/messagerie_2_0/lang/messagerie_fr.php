@@ -6,15 +6,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_message_envoye' => 'Vous n\'avez envoyé aucun message.',
-	'aucun_message_recu' => 'Vous n\'avez reçu aucun message.',
+	'aucun_message_envoye' => 'Vous n’avez envoyé aucun message.',
+	'aucun_message_recu' => 'Vous n’avez reçu aucun message.',
 
 	// L
 	'label_selection' => 'Selectionner',
 
 	// M
 	'mail_sujet_envoyermessage' => '[@nom_site@] Vous avez un nouveau message',
-	'mail_texte_envoyermessage' => '@nom@ vous a envoyé un nouveau message (@url_site@) !',
+	'mail_texte_envoyermessage' => '@nom@ vous a envoyé un nouveau message (@url_site@) !',
 
 	// R
 	'replier' => 'Replier ce message',

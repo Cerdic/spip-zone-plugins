@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_message_envoye' => 'You didn\'t send any messages.',
-	'aucun_message_recu' => 'You didn\'t receive any message.',
+	'aucun_message_envoye' => 'You didn’t send any messages.',
+	'aucun_message_recu' => 'You didn’t receive any message.',
 
 	// L
 	'label_selection' => 'Select',
