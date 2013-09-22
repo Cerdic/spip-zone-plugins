@@ -14,17 +14,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bonneReponse' => 'Die richtige Antwort ist:', # MODIF
-	'bravo' => 'Herzlichen Glückwunsch!',
+	'bravo' => 'Herzlichen Glückwunsch!', # MODIF
 
 	// C
 	'colonne_n' => 'Spalte @n@',
-	'correction' => 'Lösung:',
+	'correction' => 'Lösung:', # MODIF
 	'corriger' => 'Antwort',
 
 	// E
 	'erreur_scripts' => 'Skripte verboten: Dieses Spiel kann nicht ausgeführt zerden!', # MODIF
 	'erreur_syntaxe' => 'Syntaxfehler',
-	'erreur_taille_grille' => 'Fehler: Ungültige Grö',
+	'erreur_taille_grille' => 'Fehler: Ungültige Grö', # MODIF
 
 	// G
 	'grille_invalide' => 'Ungültiges Raster',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponseJuste' => 'Richtig!', # MODIF
 	'reponseNulle' => 'Unbeantwortet!', # MODIF
 	'resultat' => 'Ergebnis', # MODIF
-	'resultat2_aucun' => 'Pas d’enregistrement',
+	'resultat2_aucun' => 'Pas d’enregistrement', # MODIF
 	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
 	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
 	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_validite' => 'Validität überprüfen ', # MODIF
 	'voir_jeu' => 'Spiel ansehen',
 	'voir_resultats' => 'Ergebnisse ansehen', # MODIF
-	'votre_choix' => 'Deine Antwort: ',
+	'votre_choix' => 'Deine Antwort: ', # MODIF
 	'votre_reponse' => 'Deine Antwort: ' # MODIF
 );
 

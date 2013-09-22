@@ -15,10 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bonneReponse' => 'La risposta esatta è:', # MODIF
-	'bravo' => 'Complimenti!',
+	'bravo' => 'Complimenti!', # MODIF
 
 	// C
-	'cfg_affichage' => 'L’affichage du jeu',
+	'cfg_affichage' => 'L’affichage du jeu', # MODIF
 	'cfg_correction' => 'La correction du jeu',
 	'cfg_donner_indices' => 'Afficher des indices',
 	'cfg_donner_reponse' => 'Afficher la réponse', # MODIF
@@ -27,13 +27,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_scores' => 'Les scores du jeu',
 	'cfg_type_resultat' => 'Enregistrement des scores :', # MODIF
 	'colonne_n' => 'colonna @n@',
-	'correction' => 'Correzione:',
+	'correction' => 'Correzione:', # MODIF
 	'corriger' => 'Controlla',
 
 	// E
 	'erreur_scripts' => 'Gli script non sono permessi: qui non puoi giocare a questo gioco!', # MODIF
 	'erreur_syntaxe' => 'Errore di sintassi',
-	'erreur_taille_grille' => 'Errore: dimensioni errate',
+	'erreur_taille_grille' => 'Errore: dimensioni errate', # MODIF
 
 	// G
 	'grille_invalide' => 'Lo schema non è valido',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponseNulle' => 'Non hai ancora risposto', # MODIF
 	'resultat' => 'Résultat', # MODIF
 	'resultat2_' => 'Non défini ?', # MODIF
-	'resultat2_aucun' => 'Pas d’enregistrement',
+	'resultat2_aucun' => 'Pas d’enregistrement', # MODIF
 	'resultat2_defaut' => 'Selon la configuration générale du plugin', # MODIF
 	'resultat2_dernier' => 'Pour chaque auteur, le dernier résultat uniquement', # MODIF
 	'resultat2_meilleur' => 'Pour chaque auteur, le meilleur résultat uniquement', # MODIF
@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_validite' => 'Controlla la validità', # MODIF
 	'voir_jeu' => 'Voir le jeu',
 	'voir_resultats' => 'Voir les résultats', # MODIF
-	'votre_choix' => 'La tua risposta: ',
+	'votre_choix' => 'La tua risposta: ', # MODIF
 	'votre_reponse' => 'La tua risposta: ' # MODIF
 );
 
