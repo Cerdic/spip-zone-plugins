@@ -1,19 +1,19 @@
 <traduction module="gravatar" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gravatar/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=de" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=de" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=en" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=en" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=es" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=es" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fa" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fa" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fr" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fr" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=it" total="14" traduits="13" modifs="0" nouveaux="1" pourcent="92.86">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=it" total="14" traduits="13" relire="0" modifs="0" nouveaux="1" pourcent="92.86">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=sk" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=sk" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

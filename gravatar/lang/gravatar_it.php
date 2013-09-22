@@ -19,12 +19,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_image_defaut' => 'immagine standard',
-	'label_image_defaut_404' => 'Non c\'� immagine',
+	'label_image_defaut_404' => 'Non c’� immagine',
 	'label_image_defaut_gravatar' => 'Logo di Gravatar',
-	'label_image_defaut_identicon' => '<i>Identicon</i> (generato dall\'indirizzo email)',
-	'label_image_defaut_monsterid' => '<i>MonsterID</i> (generato dall\'indirizzo email)',
+	'label_image_defaut_identicon' => '<i>Identicon</i> (generato dall’indirizzo email)',
+	'label_image_defaut_monsterid' => '<i>MonsterID</i> (generato dall’indirizzo email)',
 	'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
-	'label_image_defaut_wavatar' => '<i>Wavatar</i> (generato dall\'indirizzo email)',
+	'label_image_defaut_wavatar' => '<i>Wavatar</i> (generato dall’indirizzo email)',
 	'label_taille' => 'Dimensioni dei Gravatar',
 
 	// T
