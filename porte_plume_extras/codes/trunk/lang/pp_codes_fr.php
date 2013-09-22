@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_activer_barre_edition' => 'Barre d\'édition',
+	'label_activer_barre_edition' => 'Barre d’édition',
 	'label_activer_barre_forum' => 'Barre de forum',
 	'label_outils_actifs' => 'Outils actifs',
 
@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pp_codes' => 'Codes informatiques pour Porte Plume',
 
 	// T
-	'titre_activer_extension_sur' => 'Activer sur quelles barres d\'outils ?',
-	'titre_configurer_pp_codes' => 'Configurer l\'extension codes informatiques pour Porte Plume'
+	'titre_activer_extension_sur' => 'Activer sur quelles barres d’outils ?',
+	'titre_configurer_pp_codes' => 'Configurer l’extension codes informatiques pour Porte Plume'
 );
 
 ?>
