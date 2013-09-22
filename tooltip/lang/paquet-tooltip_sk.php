@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tooltip_description' => 'Bublinková nápoveda v jQuery a CSS dostupné prostredníctvom klávesnice.
-_ D\'après le script jQuery « Tooltip ».',
+_ D’après le script jQuery « Tooltip ».',
 	'tooltip_nom' => 'Bublinková nápoveda',
 	'tooltip_slogan' => 'Bublinková nápoveda v jQuery'
 );

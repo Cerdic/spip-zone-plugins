@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tooltip_description' => 'Infobulles en jQuery et CSS, accessibles au clavier.
-_ D\'après le script jQuery « Tooltip ».',
+_ D’après le script jQuery « Tooltip ».',
 	'tooltip_nom' => 'Tooltips',
 	'tooltip_slogan' => 'Infobulles jQuery'
 );
