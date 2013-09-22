@@ -1,14 +1,14 @@
 <traduction module="minical" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/minical?lang_cible=en" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/minical?lang_cible=en" total="21" traduits="14" relire="0" modifs="0" nouveaux="7" pourcent="66.67">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/minical?lang_cible=es" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/minical?lang_cible=es" total="21" traduits="14" relire="0" modifs="0" nouveaux="7" pourcent="66.67">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/minical?lang_cible=fr" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/minical?lang_cible=fr" total="21" traduits="14" relire="0" modifs="0" nouveaux="7" pourcent="66.67">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sk" total="14" traduits="14" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sk" total="21" traduits="14" relire="0" modifs="0" nouveaux="7" pourcent="66.67">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
