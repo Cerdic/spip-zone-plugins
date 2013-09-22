@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'selecteurgenerique_description' => 'Remplace les sélecteurs (auteurs, mots, rubriques) par quelque chose de plus léger & rapide, capable de traiter autant de données que possible.',
 	'selecteurgenerique_nom' => 'Sélecteur générique',
-	'selecteurgenerique_slogan' => 'Amélioration des sélecteurs de l\'espace privé'
+	'selecteurgenerique_slogan' => 'Amélioration des sélecteurs de l’espace privé'
 );
 
 ?>
