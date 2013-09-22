@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			l’affichage HTML5 des vidéos aux formats MP4, H264, Ogg,
 			WebM et Mkv même dans les navigateurs mobiles.',
 	'videos_nom' => 'Vidéo(s)',
-	'videos_slogan' => 'Interface de gestion et modèles d\'insertion de vidéos'
+	'videos_slogan' => 'Interface de gestion et modèles d’insertion de vidéos'
 );
 
 ?>
