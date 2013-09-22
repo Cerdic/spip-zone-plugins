@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date' => 'Cette date est incorrecte',
 	'erreur_date_corrigee' => 'La date a été corrigée',
 	'erreur_heure' => 'Cette heure est incorrecte',
-	'erreur_heure_corrigee' => 'L\'heure a été corrigée',
+	'erreur_heure_corrigee' => 'L’heure a été corrigée',
 
 	// I
 	'id_rapide' => 'Ajout rapide',
