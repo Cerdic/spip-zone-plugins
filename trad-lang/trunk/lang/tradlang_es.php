@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Otros idiomas:',
 	'info_langues_preferees' => 'Idioma(s) preferente(s):',
 	'info_module_nb_items_langue_mere' => 'El idioma madre del módulo es <abbr title="@lang_mere@">@lang_mere_longue@</abbr> y comporta @nb@ items de idioma.',
-	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
+	'info_module_traduction' => '@total@ @statut@ (@percent@%)', # MODIF
 	'info_module_traduit_langues' => 'Este módulo está traducido o parcialmente traducido en @nb@ idiomas.',
 	'info_module_traduit_pc' => 'Módulo traducido un @pc@%',
 	'info_module_traduit_pc_lang' => 'Módulo "@module@" traducido un @pc@% en @lang@ (@langue_longue@)',
@@ -224,7 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_module' => 'Módulo',
 	'lien_traduction_vers' => ' a',
 	'lien_traduire_suivant_str_module' => 'Traducir la siguiente cadena no traducida del módulo "@module@"',
-	'lien_trier_langue_non' => 'Mostrar el balance global',
+	'lien_trier_langue_non' => 'Mostrar el balance global', # MODIF
 	'lien_utiliser_google_translate' => 'Utilizar esta versión',
 	'lien_voir_bilan_lang' => 'Ver el balance del idioma @langue_longue@ (@lang@)',
 	'lien_voir_bilan_module' => 'Ver el balance del módulo @nom_mod@ - @module@',
@@ -276,8 +276,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Este plugin permite administrar los archivos de idioma',
 
 	// S
-	'str_status_modif' => 'Modificado (MODIF)',
-	'str_status_new' => 'Nuevo (NEW)',
+	'str_status_modif' => 'Modificado (MODIF)', # MODIF
+	'str_status_new' => 'Nuevo (NEW)', # MODIF
 	'str_status_traduit' => 'Traducido',
 
 	// T
@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_module' => 'módulo de idioma a traducir;',
 	'texte_module_traduire' => 'Módulo a traducir:',
 	'texte_non_traduit' => 'no traducido',
-	'texte_operation_impossible' => 'Operación imposible. Cuando la casilla \'marcar todo\' está marcada,<br> las operaciones han de ser del tipo \'Consultar\'.',
+	'texte_operation_impossible' => 'Operación imposible. Cuando la casilla ’marcar todo’ está marcada,<br> las operaciones han de ser del tipo ’Consultar’.',
 	'texte_pas_autoriser_traduire' => 'Usted no dispone de los derechos necesarios para acceder a las traducciones.',
 	'texte_pas_de_reponse' => '... ninguna respuesta',
 	'texte_recapitulatif' => 'Traducciones globales',

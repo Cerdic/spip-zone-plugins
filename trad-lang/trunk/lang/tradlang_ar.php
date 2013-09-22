@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langue_mere' => '(اللغة الأم)',
 	'info_langues_non_preferees' => 'اللغات الأخرى:',
 	'info_langues_preferees' => 'اللغة او الغات المفضلة:',
-	'info_module_traduction' => '@total@ @statut@ (@percent@%)',
+	'info_module_traduction' => '@total@ @statut@ (@percent@%)', # MODIF
 	'info_module_traduit_langues' => 'هذه الوحدة مترجمة او مترجمة جزئياً الى @nb@ لغة.',
 	'info_module_traduit_pc' => 'وحدة مترجمة بنسبة @pc@٪',
 	'info_module_traduit_pc_lang' => 'الوحدة «@module@» مترجمة بنسبة @pc@٪ الى @lang@ (@langue_longue@)',
@@ -211,7 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_module' => 'وحدة ',
 	'lien_traduction_vers' => ' نحو ',
 	'lien_traduire_suivant_str_module' => 'ترجمة السلسلة غير المترجمة التالية من الوحدة «@module@»',
-	'lien_trier_langue_non' => 'عرض الجردة الاجمالية.',
+	'lien_trier_langue_non' => 'عرض الجردة الاجمالية.', # MODIF
 	'lien_utiliser_google_translate' => 'استخدام هذا الاصدار',
 	'lien_voir_bilan_lang' => 'عرضة جردة اللغة @langue_longue@ (@lang@)',
 	'lien_voir_bilan_module' => 'عرض جردة الوحدة @nom_mod@ - @module@',
@@ -261,8 +261,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'يتيح هذا الملحق إدارة ملفات اللغات',
 
 	// S
-	'str_status_modif' => 'معدْل (MODIF)',
-	'str_status_new' => 'جديد (NEW)',
+	'str_status_modif' => 'معدْل (MODIF)', # MODIF
+	'str_status_new' => 'جديد (NEW)', # MODIF
 	'str_status_traduit' => 'مترجم',
 
 	// T
