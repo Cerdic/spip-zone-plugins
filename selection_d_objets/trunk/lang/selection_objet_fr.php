@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_section' => 'Afficher dans :',
+	'affichage_section' => 'Afficher dans :',
 	'ajouter_lien_objet' => 'Sélectionner cet objet',
 	'ajouter_objet' => 'Ajoutez un objet',
 
@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deja_selectionne' => 'Cet objet a déjà été sélectionné pour cette liste',
 	'explication_choix_multi' => 'Vous pouvez en choisir plusieurs en utilisant les touches ctrl ou maj (pomme ou maj pour macs)',
-	'explication_selection_choix_illimite' => 'Par defaut un objet ne peut être attaché qu\'une fois à un Objet Cible, voulez-vous désactiver cette limitation ?',
-	'explication_selection_cible' => 'Si aucun cible n\'est choisit, tous seront retenus.',
+	'explication_selection_choix_illimite' => 'Par defaut un objet ne peut être attaché qu’une fois à un Objet Cible, voulez-vous désactiver cette limitation ?',
+	'explication_selection_cible' => 'Si aucun cible n’est choisit, tous seront retenus.',
 	'explication_selection_objets_cible' => 'Les objets cibles auxquelles des "Objets Sélection" pourront être attachés',
-	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d\'une virgule et d\'une description. La description peut être une chaîne de langue.',
+	'explication_selection_type_liens' => 'Vous pouvez définir des types de relations : indiquez-en une par ligne, suivie d’une virgule et d’une description. La description peut être une chaîne de langue.',
 
 	// I
 	'icone_creer_selection_objet' => 'Sélectionner un objet',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Url',
 
 	// O
-	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
+	'objet_destination_choisis' => 'Destination(s) choisie(s) :',
 	'objet_lie_a' => 'Lié à',
 	'objets_cible' => 'Les Objets Cible',
 	'objets_selection' => 'Les Objets Sélection',
@@ -47,19 +47,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'racine' => 'Racine',
 	'retirer_lien_objet' => 'Retirer cet objet de la sélection',
-	'retirer_tous_liens_selection_objets' => 'Retirer toutes les sélection d\'objets',
-	'rubriques_choisis' => 'Rubriques choisies :',
+	'retirer_tous_liens_selection_objets' => 'Retirer toutes les sélection d’objets',
+	'rubriques_choisis' => 'Rubriques choisies :',
 
 	// S
 	'selection_choix_illimite' => 'Desactiver la limite de sélection par Objet Cible',
 	'selection_cible' => 'Seléction des cibles pour',
 	'selection_objet' => 'Sélection',
-	'selection_objet_cible_titre' => 'Selection d\'Objets Cibles',
+	'selection_objet_cible_titre' => 'Selection d’Objets Cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
 	'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
 	'selection_type_lien' => 'Type lien',
 	'selection_type_liens' => 'Définition de types de liens',
-	'selectione' => 'Sélectionné :',
+	'selectione' => 'Sélectionné :',
 
 	// T
 	'texte_ajouter_objet' => 'Sélectionner un objet',

@@ -1,15 +1,15 @@
 <traduction module="selection_objet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/selection_d_objets/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=de" total="50" traduits="49" modifs="1" nouveaux="0" pourcent="98.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=de" total="55" traduits="49" relire="0" modifs="1" nouveaux="5" pourcent="89.09">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=en" total="50" traduits="50" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=en" total="55" traduits="50" relire="0" modifs="0" nouveaux="5" pourcent="90.91">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=es" total="50" traduits="48" modifs="0" nouveaux="2" pourcent="96.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=es" total="55" traduits="48" relire="0" modifs="0" nouveaux="7" pourcent="87.27">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=fr" total="50" traduits="50" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/selection_objet?lang_cible=fr" total="55" traduits="50" relire="0" modifs="0" nouveaux="5" pourcent="90.91">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 </traduction>
