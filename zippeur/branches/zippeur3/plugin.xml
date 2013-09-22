@@ -1,0 +1,54 @@
+<plugin>
+	<nom>Zippeur</nom>
+	<slogan>Zippez facilement vos fichiers</slogan>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
+	<version>3.1.0</version>
+	<version_base>0.5</version_base>
+  	<categorie>multimedia</categorie>
+   <etat>stable</etat>
+	<lien>http://www.spip-contrib.net/Zippeur</lien>
+	<icon>images/zip.png</icon>
+	<description>Il est parfois utile, notamment quand un article comprend beaucoup de documents joints, de proposer l’ensemble des documents sous forme de zip. Ce plugin permet à SPIP de g&#233;n&#233;rer une archive zip &#224; partir d’une liste de documents.</description>
+	<install>base/zippeur.php</install>
+   <prefix>zippeur</prefix>
+	<fonctions>zippeur_fonctions.php</fonctions>
+	<necessite id="spip" version="[2.0.0;2.1.99)" />
+	<necessite id='cfg' version='[1.10.0;]' />
+    <utilise nom="albums" />
+	<pipeline>
+       <nom>declarer_tables_principales</nom>
+       <inclure>zippeur_pipelines.php</inclure>
+   </pipeline>
+   <pipeline>
+   		<nom>taches_generales_cron</nom>
+   		<inclure>zippeur_pipelines.php</inclure>
+   	</pipeline>
+   	<options>zippeur_options.php</options>
+	<licence>GPL</licence>
+</plugin>
+<plugin spip='[3.0.0-dev;3.0.99]'>
+	<nom>Zippeur</nom>
+	<slogan>Zippez facilement vos fichiers</slogan>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
+	<version>3.1.0</version>
+	<version_base>0.5</version_base>
+  	<categorie>multimedia</categorie>
+   <etat>stable</etat>
+	<icon>images/zip.png</icon>
+	<description>Il est parfois utile, notamment quand un article comprend beaucoup de documents joints, de proposer l’ensemble des documents sous forme de zip. Ce plugin permet à SPIP de g&#233;n&#233;rer une archive zip &#224; partir d’une liste de documents.</description>
+	<install>base/zippeur.php</install>
+   <prefix>zippeur</prefix>
+	<fonctions>zippeur_fonctions.php</fonctions>
+	<pipeline>
+       <nom>declarer_tables_principales</nom>
+       <inclure>zippeur_pipelines.php</inclure>
+   </pipeline>
+   <pipeline>
+   		<nom>taches_generales_cron</nom>
+   		<inclure>zippeur_pipelines.php</inclure>
+   	</pipeline>
+   	<options>zippeur_options.php</options>
+	<licence>GPL</licence>
+	<lien>http://www.spip-contrib.net/Zippeur</lien>
+    <utilise nom="albums" />
+</plugin>

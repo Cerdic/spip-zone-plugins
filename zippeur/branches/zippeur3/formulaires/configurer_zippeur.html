@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+<h3 class='titrem'>[(#CHEMIN{images/zip_cfg.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:zippeur:cfg_titre:></h3>
+<form method="post" action="#ENV{action}">
+#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset>
+<legend><:zippeur:choix_module:></legend>
+	<select name="zippeur_cmd">
+		<option value="PclZip" [(#ENV{zippeur_cmd}|=={PclZip}|oui)selected="selected"]>Lib php PclZip</option>
+		<option value="7zip" [(#ENV{zippeur_cmd}|=={7zip}|oui)selected="selected"]>Utilisation de 7-Zip</option>
+		<option value="zip" [(#ENV{zippeur_cmd}|=={zip}|oui)selected="selected"]>Utilisation de Zip</option>
+	</select>
+
+	<input type="submit" name="_cfg_ok" value="<:zippeur:ok:>" />
+	<input type="reset" value="<:zippeur:reset:>" />
+	<input type="submit" name="_cfg_delete" value="<:zippeur:supprimer:>" />
+</fieldset>
+</form>
+</div>
