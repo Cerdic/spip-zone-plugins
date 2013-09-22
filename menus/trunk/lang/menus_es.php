@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Exportar el menú',
 	'editer_menus_nouveau' => 'Crear un nuevo menú',
 	'editer_menus_titre' => 'Menús del sitio',
-	'entree_afficher_articles' => 'Incluir los artículos en en el menú  ? (escribe "oui" para para que ocurra)',
+	'entree_afficher_articles' => 'Incluir los artículos en en el menú ? (escribe "oui" para para que ocurra)',
 	'entree_afficher_item_suite' => 'Incluir los artículos en el menu ? (escribe "oui" para esto)',
 	'entree_articles_max' => 'Si es así, ¿ver los artículos sólo si la sección contiene como máximo xx artículos? (indicar el máximo número de artículos, o bien dejar en blanco para mostrar todos los artículos)',
 	'entree_articles_max_affiches' => 'Si es así, ¿limitar el número de artículos listados en xx máximo (seguidos de un ítem "... Todos los artículos", con un enlace a la sección padre)? (Indique el número máximo de artículos, dejar en blanco para mostrar todos los artículos)',
@@ -148,7 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'noisette_description' => 'Inserta un menú definido con el plugin Menús',
 	'noisette_label_afficher_titre_menu' => 'Mostrar el título del menú ?',
-	'noisette_label_identifiant' => 'Menú a mostrar  :',
+	'noisette_label_identifiant' => 'Menú a mostrar :',
 	'noisette_nom_noisette' => 'Menú',
 	'nom_menu_accueil' => 'Inicio',
 	'nom_menu_articles_rubrique' => 'Artículos de una sección',

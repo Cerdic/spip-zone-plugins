@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_entree' => 'Do you really want delete this entry?',
 
 	// D
-	'description_menu_accueil' => 'Link to website\'s home page.',
+	'description_menu_accueil' => 'Link to website’s home page.',
 	'description_menu_articles_rubrique' => 'Display the list of articles in a section.',
 	'description_menu_deconnecter' => 'If the visitor is connected, add an entry offering disconnection.',
-	'description_menu_espace_prive' => 'Link enabling the connection to the site if you aren\'t already connected, and then to enter the private space if you are authorised to do so.',
+	'description_menu_espace_prive' => 'Link enabling the connection to the site if you aren’t already connected, and then to enter the private space if you are authorised to do so.',
 	'description_menu_groupes_mots' => 'Automatically show a menu listing the keyword of the group and the linked articles. By default it shows the list of keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.',
 	'description_menu_lien' => 'Adds an individually specified link, either an internal one (relative URL), or an external one (http://...).',
 	'description_menu_mapage' => 'If visitors are connected, add a link to their author page.',
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
 	'erreur_identifiant_forme' => 'Identifier must contain only letters, digits or underscores.',
-	'erreur_menu_inexistant' => 'Menu number @id@ doesn\'t exist.',
+	'erreur_menu_inexistant' => 'Menu number @id@ doesn’t exist.',
 	'erreur_mise_a_jour' => 'An error occured during database update.',
 	'erreur_parametres' => 'There is an error in the parameters of the page',
 	'erreur_type_menu' => 'You need to choose a type of menu',
