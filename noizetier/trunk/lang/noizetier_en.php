@@ -11,11 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu' => 'Preview',
 
 	// B
-	'bloc_sans_noisette' => 'This block doesn\'t contain nuts.',
+	'bloc_sans_noisette' => 'This block doesn’t contain nuts.',
 
 	// C
 	'choisir_noisette' => 'Choose the nut you want to add:',
-	'compositions_non_installe' => '<b>Plugin Compositions:</b> this plugin isn\'t installed on your site. It\'s not necessary to the correct working of the nuts. However, when it\'s activated, you can create compositions directly inside your Nuts Manager.',
+	'compositions_non_installe' => '<b>Plugin Compositions:</b> this plugin isn’t installed on your site. It’s not necessary to the correct working of the nuts. However, when it’s activated, you can create compositions directly inside your Nuts Manager.',
 
 	// D
 	'description_bloc_contenu' => 'Main content of each page.',
@@ -83,7 +83,7 @@ nuts on the following pages:',
 	'ieconfig_ne_pas_importer' => 'Do not import',
 	'ieconfig_noizetier_export_explication' => 'Will export the configuration of the nuts and compositions of the Nuts Manager.',
 	'ieconfig_noizetier_export_option' => 'Included in the export?',
-	'ieconfig_non_installe' => '<b>Configuration Import/Export Plugin:</b> this plugin isn\'t installed on your site. It is not necessarry to the correct working of the Nuts Manager. However, when it\'s activated, you can  export and import some nuts configurations into the Nuts Manager.',
+	'ieconfig_non_installe' => '<b>Configuration Import/Export Plugin:</b> this plugin isn’t installed on your site. It is not necessarry to the correct working of the Nuts Manager. However, when it’s activated, you can  export and import some nuts configurations into the Nuts Manager.',
 	'ieconfig_probleme_import_config' => 'A problem occured while importing the Nuts Manager configuration.',
 	'info_composition' => 'COMPOSITION:',
 	'info_page' => 'PAGE:',
@@ -130,7 +130,7 @@ nuts on the following pages:',
 	// P
 	'page' => 'Page',
 	'page_autonome' => 'Specific page',
-	'probleme_droits' => 'You don\'t have the permission to make this change.',
+	'probleme_droits' => 'You don’t have the permission to make this change.',
 
 	// Q
 	'quitter_mode_noisettes' => 'Quit editing nuts',
