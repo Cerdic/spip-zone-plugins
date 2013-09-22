@@ -1,16 +1,16 @@
 <traduction module="paquet-nospam" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/nospam/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=ar" total="2" traduits="1" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=ar" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=de" total="2" traduits="1" modifs="0" nouveaux="1" pourcent="50.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=de" total="2" traduits="1" relire="0" modifs="0" nouveaux="1" pourcent="50.00">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=en" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=es" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=es" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=fr" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=sk" total="2" traduits="2" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-nospam?lang_cible=sk" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
