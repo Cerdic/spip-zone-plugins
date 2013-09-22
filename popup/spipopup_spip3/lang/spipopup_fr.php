@@ -14,12 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_imprimer_ttl' => 'Imprimer cette page',
 
 	// D
-	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
+	'descr_cfg' => 'Documentation du plugin pour plus d’infos : [spip-contrib.net/ ?article3573->http://www.spip-contrib.net/?article3573]',
 
 	// E
 	'editor' => 'Editeur de lien popup',
 	'editor_enregistrer' => 'Enregistrer',
-	'editor_erreur_entree_obligatoire' => 'Cette entrée est obligatoire !',
+	'editor_erreur_entree_obligatoire' => 'Cette entrée est obligatoire !',
 	'editor_lien' => 'Lien à insérer (URL ou objet SPIP)',
 	'editor_skel' => 'Squelette de page SPIP',
 	'editor_texte' => 'Texte du lien',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options_popup' => 'Options JavaScript passées à la nouvelle fenêtre',
-	'options_popup_comment' => 'Indiquez ici un tableau d\'options qui seront passées à la nouvelle fenêtre sous la forme d\'un tableau du genre : "variable1: valeur1, variable2: valeur2, ..." ({ex.: "location: 0, scrollbars: 1"}).',
+	'options_popup_comment' => 'Indiquez ici un tableau d’options qui seront passées à la nouvelle fenêtre sous la forme d’un tableau du genre : "variable1 : valeur1, variable2 : valeur2, ..." ({ex. : "location : 0, scrollbars : 1"}).',
 
 	// P
 	'popup_titre' => 'Boîte de dialogue',
@@ -51,11 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'skel_defaut' => 'Squelette par défaut utilisé pour afficher le contenu de la fenêtre',
-	'skel_defaut_comment' => 'Il s\'agit initialement du squelette "popup_defaut.html" présent à la racine du plugin.',
+	'skel_defaut_comment' => 'Il s’agit initialement du squelette "popup_defaut.html" présent à la racine du plugin.',
 	'spipopup' => 'SPIPopup',
 
 	// T
-	'titre_descr_cfg' => 'Configuration de l\'outil "Popup"',
+	'titre_descr_cfg' => 'Configuration de l’outil "Popup"',
 	'titre_popup' => 'Nom JavaScript de la fenêtre',
 	'titre_popup_comment' => 'Vous pourrez par la suite utiliser ce nom pour la désigner dans vos scripts ("window.popup").',
 
