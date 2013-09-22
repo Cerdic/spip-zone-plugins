@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication OpenID',
+	'erreur_librairies' => 'Impossible de trouver les librairies d’authenfication OpenID',
 	'erreur_openid' => 'Cette adresse OpenID ne semble pas valide',
 	'erreur_openid_info_manquantes' => 'Votre fournisseur OpenID ne nous a pas envoyé toutes les informations nécessaires',
 

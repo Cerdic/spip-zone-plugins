@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_forum_indiquer_openid' => 'You can sign up on this site with your OpenID address',
 	'form_forum_openid' => 'Sign up with OpenID',
-	'form_login_openid' => 'You can use your <a href=\'http://en.wikipedia.org/wiki/OpenID\'>OpenID</a> as login',
+	'form_login_openid' => 'You can use your <a href=’http://en.wikipedia.org/wiki/OpenID’>OpenID</a> as login',
 	'form_login_openid_inconnu' => 'This OpenID address is unknown. Correct, or save it in your profile.',
 	'form_login_openid_ok' => 'This login uses OpenID.',
 	'form_login_openid_pass' => 'Connect with password.',
