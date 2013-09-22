@@ -26,9 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lire_la_suite_de' => ' de ',
 
 	// P
-	'pagination_next' => 'Suivant »',
+	'pagination_next' => 'Suivant »',
 	'pagination_pages' => 'Pages',
-	'pagination_prev' => '« Précédent',
+	'pagination_prev' => '« Précédent',
 	'personaliser_nav' => 'Personnaliser ce menu',
 
 	// S
