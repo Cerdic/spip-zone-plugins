@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Il ajoute des lecteurs flash adaptés aux formats .mp3.
 Il agit sur tous les <code><docXX|player></code> insérés dans les textes, aussi bien que dans les squelettes.
 
--* Dans un texte <code><docXX|player></code> affiche un lecteur flash audio (plusieurs lecteurs au choix);
--* Dans un squelette <code>#MODELE{playliste}</code> permet d\'afficher une playliste des derniers mp3',
+-* Dans un texte <code><docXX|player></code> affiche un lecteur flash audio (plusieurs lecteurs au choix) ;
+-* Dans un squelette <code>#MODELE{playliste}</code> permet d’afficher une playliste des derniers mp3',
 	'player_slogan' => 'Lire des sons mp3'
 );
 
