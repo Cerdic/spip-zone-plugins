@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_configurations_a_exporter' => 'Configurations à exporter',
 	'label_exporter' => 'Exporter la configuration ?',
-	'label_ieconfig_export' => 'Options générales d\'export',
+	'label_ieconfig_export' => 'Options générales d’export',
 	'label_ieconfig_export_choix' => 'Que souhaitez-vous ?',
 	'label_ieconfig_export_description' => 'Description :',
-	'label_ieconfig_export_nom' => 'Nom de l\'export :',
+	'label_ieconfig_export_nom' => 'Nom de l’export :',
 	'label_ieconfig_import_choix_fichier' => 'Choix du fichier à importer',
 	'label_ieconfig_import_fichier' => 'Fichier à importer :',
 	'label_ieconfig_import_local' => 'Configurations disponibles localement :',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_importer_metas' => 'Éléments à importer',
 
 	// M
-	'message_erreur_export' => 'Une erreur s\'est produite lors de l\'enregistrement du fichier <i>@filename@</i> dans le répertoire <i>tmp/ieconfig/</i>.',
+	'message_erreur_export' => 'Une erreur s’est produite lors de l’enregistrement du fichier <i>@filename@</i> dans le répertoire <i>tmp/ieconfig/</i>.',
 	'message_erreur_fichier_import_manquant' => 'Vous devez spécifier un fichier de configuration à importer.',
 	'message_ok_export' => 'Le fichier <i>@filename@</i> a été sauvegardé dans le répertoire <i>tmp/ieconfig/</i>.',
 	'message_ok_import' => 'La configuration a été correctement importée.',
