@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_commit' => 'Révision',
 	'label_debut' => 'Début',
 	'label_fin' => 'Fin',
-	'label_priorite' => '!',
+	'label_priorite' => ' !',
 	'label_statut' => 'Statut',
 	'label_titre' => 'Titre',
 	'label_version' => 'Version',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_termine' => 'Terminé',
 
 	// T
-	'tri_cle' => 'Remettre dans l\'ordre',
+	'tri_cle' => 'Remettre dans l’ordre',
 	'tri_commit' => 'Trier par révision',
 	'tri_debut' => 'Trier par date de début',
 	'tri_fin' => 'Trier par date de fin',
