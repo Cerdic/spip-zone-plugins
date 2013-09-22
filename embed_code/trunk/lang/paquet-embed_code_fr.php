@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'embed_code_description' => 'Génèrer des codes d\'incrustation distants de documents pour utilisation sur d\'autres sites.',
+	'embed_code_description' => 'Génèrer des codes d’incrustation distants de documents pour utilisation sur d’autres sites.',
 	'embed_code_nom' => 'Embed code',
-	'embed_code_slogan' => 'Génération de code d\'incrustation pour documents'
+	'embed_code_slogan' => 'Génération de code d’incrustation pour documents'
 );
 
 ?>
