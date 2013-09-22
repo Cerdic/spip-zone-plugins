@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_copie_fichier' => 'Impossible copiar el fitxer @fichier@ al seu emplaçament definitiu',
-	'erreur_enregistrement' => 'Hi ha hagut un error durant l\'enregistrament de <b>@nom@</b>',
+	'erreur_enregistrement' => 'Hi ha hagut un error durant l’enregistrament de <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible llegir @nom@',
 	'erreur_open_w_fichier' => 'Impossible obrir el fitxer @fichier@ en escriptura',
 	'erreur_suppression' => 'Ha ocorregut un errror durant la supressió de <b>@nom@</b>',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_manquant' => 'Falta identificador ',
 	'installation_librairies' => 'Descàrrega de llibreries',
 	'installation_liste_libs' => 'Llista de llibreries',
-	'installer_dossier_lib' => 'Heu de crear una carpeta @dir@ a l\'arrel del vostre SPIP que tingui permisos d\'escriptura.',
+	'installer_dossier_lib' => 'Heu de crear una carpeta @dir@ a l’arrel del vostre SPIP que tingui permisos d’escriptura.',
 	'installer_lib_192' => 'Per instal·lar una llibreria, descomprimiu manualment el zip i copieu el seu contingut a dins de la carpeta @dir@.',
 
 	// L
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'No s\'ha trobat cap camp a @nom@',
+	'pas_de_champs_dans' => 'No s’ha trobat cap camp a @nom@',
 	'pas_de_changement' => 'Cap canvi a <b>@nom@</b>',
 
 	// R

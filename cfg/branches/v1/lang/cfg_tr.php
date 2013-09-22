@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_enregistrement' => '<b>@nom@</b> kaydı esnasında bir hata oluştu',
 	'erreur_lecture' => '@nom@ okumak olanaksız',
 	'erreur_open_w_fichier' => '@fichier@ dosyasını yazma amaçlı açmak olanaksız',
-	'erreur_suppression' => '<b>@nom@</b>\'nin silinmesi esnasında hata oluştu',
+	'erreur_suppression' => '<b>@nom@</b>’nin silinmesi esnasında hata oluştu',
 	'erreur_suppression_fichier' => '@fichier@ dosyasını silmek olanaksız.',
 	'erreur_type_id' => '@champ@ alanı bir harfle veya altçizgiyle başlamalı',
 	'erreur_type_idnum' => '@champ@ alanı sayısal olmalı',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_manquant' => 'Tanımlayıcı eksik',
 	'installation_librairies' => 'Kütüphaneler indiriliyor',
 	'installation_liste_libs' => 'Kütüphane listesi',
-	'installer_dossier_lib' => 'SPIP\'inizin kök dizininde @dir@ isimli, yazma haklarına sahip bir dizin oluşturmalısınız.',
+	'installer_dossier_lib' => 'SPIP’inizin kök dizininde @dir@ isimli, yazma haklarına sahip bir dizin oluşturmalısınız.',
 	'installer_lib_192' => 'Bir kütüphane kurmak için zip dosyasını el ile açınız ve içeriğini @dir@ dizinine kopyalayınız.',
 
 	// L
@@ -47,8 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => '@nom@\'de hiçbir alan bulunamadı', # MODIF
-	'pas_de_changement' => '<b>@nom@</b>\'de değişiklik yok',
+	'pas_de_champs_dans' => '@nom@’de hiçbir alan bulunamadı', # MODIF
+	'pas_de_changement' => '<b>@nom@</b>’de değişiklik yok',
 
 	// R
 	'refus_configuration_administrateur' => 'Bu parametreleri yalnız idareciler ("administrateur") değiştirebilir.',

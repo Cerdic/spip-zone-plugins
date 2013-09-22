@@ -21,9 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_copie_fichier' => 'Impossible de copier le fichier @fichier@ à son emplacement définitif',
-	'erreur_enregistrement' => 'Une erreur est survenue lors de l\'enregistrement de <b>@nom@</b>',
+	'erreur_enregistrement' => 'Une erreur est survenue lors de l’enregistrement de <b>@nom@</b>',
 	'erreur_lecture' => 'Impossible de lire @nom@',
-	'erreur_open_w_fichier' => 'Impossible d\'ouvrir le fichier @fichier@ en écriture',
+	'erreur_open_w_fichier' => 'Impossible d’ouvrir le fichier @fichier@ en écriture',
 	'erreur_suppression' => 'Une erreur est survenue lors de la suppression de <b>@nom@</b>',
 	'erreur_suppression_fichier' => 'Impossible de supprimer le fichier @fichier@.',
 	'erreur_type_id' => 'Le champ @champ@ doit commencer par une lettre ou un souligné',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_manquant' => 'Identifiant manquant',
 	'installation_librairies' => 'Téléchargement de librairie',
 	'installation_liste_libs' => 'Liste des librairies',
-	'installer_dossier_lib' => 'Tu dois créer un dossier @dir@ à la racine de ton SPIP ayant des permissions d\'écriture.',
+	'installer_dossier_lib' => 'Tu dois créer un dossier @dir@ à la racine de ton SPIP ayant des permissions d’écriture.',
 	'installer_lib_192' => 'Pour installer une librairie, décompresse manuellement le zip et copie son contenu dans le dossier @dir@.',
 
 	// L
