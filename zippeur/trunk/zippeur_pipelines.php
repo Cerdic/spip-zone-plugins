@@ -23,7 +23,7 @@ function zippeur_taches_generales_cron($taches){
 }
 function zippeur_pre_liens($txt){
     $match = array();
-    $regexp = "#\[(.*)->(zip_doc_article|zip_doc_album)(\d*)\]#";
+    $regexp = "#\[(.*)->(zip_doc_article|zip_doc_album)(\d*)\]#U";
     preg_match_all($regexp,$txt,$match,PREG_SET_ORDER);
     foreach ($match as $lien){
         // construires les ≠ paramètres
@@ -31,7 +31,7 @@ function zippeur_pre_liens($txt){
         $id_objet   = $lien[3];
         $texte      = $lien[1]!=''?$lien[1] : generer_info_entite($id_objet,$objet,'titre',true) .' - '. _T('zippeur:ensemble_fichier');
         $nom_zip    = $objet."_".$id_objet;
-       
+        
         // constuire la liste des fichiers
         $fichiers   = array();
         $sql        = sql_select('maj,fichier','spip_documents INNER JOIN spip_documents_liens as L1',"spip_documents.statut='publie' AND L1.id_objet='$id_objet' AND L1.objet='$objet'",'','spip_documents.maj DESC');
