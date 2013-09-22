@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'autorite_description' => 'Ce plugin permet de configurer des autorisations différentes de celles par défaut.',
 	'autorite_nom' => 'Autorité',
-	'autorite_slogan' => 'Quelques réglages d\'autorisations (ajoutez les vôtres !)'
+	'autorite_slogan' => 'Quelques réglages d’autorisations (ajoutez les vôtres !)'
 );
 
 ?>
