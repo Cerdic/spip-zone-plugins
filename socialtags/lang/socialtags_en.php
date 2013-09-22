@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_selector' => 'Selector:',
 	'cfg_sous_bloc' => 'Beneath the title block on the article pages',
 	'cfg_sous_div' => 'Beneath the div named id=socialtags',
-	'cfg_titre_boite_info' => 'Social tags plugin\'s configuration',
+	'cfg_titre_boite_info' => 'Social tags plugin’s configuration',
 	'cfg_titre_socialtags' => 'Social tags',
 	'cfg_tout_cocher' => 'Check all',
 	'cfg_tout_decocher' => 'Uncheck all',
