@@ -9,8 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function genie_mailshot_bulksend_dist($t){
-	// Rien a faire si la meta n'est pas la
-	if (isset($GLOBALS['meta']['mailshot_processing'])){
+	spip_log("bulksend:meta_processing:".$GLOBALS['meta']['mailshot_processing'],"mailshot");
+	// Rien a faire si la meta pas de mailshots en cours
+	// ne pas se fier a la meta ici pour des raisons de concurrence au demarrage d'un envoi
+	if (sql_countsel("spip_mailshots","statut=".sql_quote('processing'))){
+		// securite pour que le cron se relance
+		// sera effacee dans mailshot_envoyer_lot si envoi fini
+		$GLOBALS['meta']['mailshot_processing'] = 'oui';
 
 		include_spip('inc/mailshot');
 		include_spip('inc/config');
@@ -65,6 +70,9 @@ function genie_mailshot_bulksend_dist($t){
 		// dire qu'on a pas fini si mode boost pour se relancer aussi vite que possible
 		if ($boost)
 			return -($t-$periode);
+	}
+	else {
+		mailshot_update_meta_processing();
 	}
 	return 0;
 }
