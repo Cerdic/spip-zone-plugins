@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_texte' => 'Ricerca testuale',
 	'rechercher' => 'Ricerca',
 	'rechercher_seulement_titres' => 'Ricerca solamente nei titoli',
-	'rechercher_tip_articles_ids' => 'Per mostrare direttamente l\'articolo numero 123, inserire \'art123\'.',
+	'rechercher_tip_articles_ids' => 'Per mostrare direttamente l’articolo numero 123, inserire ’art123’.',
 	'rechercher_un_article_a_lier' => 'Ricerca un articolo:',
 
 	// S

@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_texte' => 'Textual search',
 	'rechercher' => 'Search',
 	'rechercher_seulement_titres' => 'Search only in titles',
-	'rechercher_tip_articles_ids' => 'To find article number 123 directly, type \'art123\'.',
+	'rechercher_tip_articles_ids' => 'To find article number 123 directly, type ’art123’.',
 	'rechercher_un_article_a_lier' => 'Search for an article:',
 
 	// S
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_obligatoire' => 'Typing mandatory',
 	'types_differents' => 'Multiple links',
 	'types_liaisons' => 'Types of link',
-	'types_liaisons_non_modifiables' => 'The following types of links can\'t be changed using the configuration',
+	'types_liaisons_non_modifiables' => 'The following types of links can’t be changed using the configuration',
 
 	// U
 	'utilise_par_articles' => ', used by articles links:',
