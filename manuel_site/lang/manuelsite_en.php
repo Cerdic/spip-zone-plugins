@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configure the Website Editor Handbook',
 
 	// E
-	'erreur_article' => 'The article of the handbook defined in the plugin\'s configuration is not found: #@idart@',
+	'erreur_article' => 'The article of the handbook defined in the plugin’s configuration is not found: #@idart@',
 	'erreur_article_publie' => 'The article defined in the configuration of the handbook plugin is not published online: <a href="@url@">#@idart@</a>',
-	'erreur_pas_darticle' => 'The article of the handbook is not defined in the plugin\'s configuration',
-	'explication_afficher_bord_gauche' => 'Display the handbook\'s icon in the top left corner (if not, the handbook will be displayed in a column)',
+	'erreur_pas_darticle' => 'The article of the handbook is not defined in the plugin’s configuration',
+	'explication_afficher_bord_gauche' => 'Display the handbook’s icon in the top left corner (if not, the handbook will be displayed in a column)',
 	'explication_background_color' => 'Type in the background color of the handbook display area',
 	'explication_cacher_public' => 'Hide this article in the public space, even in rss flow',
 	'explication_email' => 'Contact email for editors',
