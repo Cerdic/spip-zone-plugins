@@ -1,0 +1,24 @@
+<paquet
+	prefix="zippeur"
+	categorie="multimedia"
+	version="4.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/zip.png"
+	schema="0.5"
+	documentation="http://www.spip-contrib.net/Zippeur"
+>	
+
+	<nom>Zippeur</nom>
+	<!-- Zippez facilement vos fichiers -->
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<auteur>Julien Coste-Louret</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="zippeur_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="zippeur_pipelines.php" />
+
+	<utilise nom="album" />
+</paquet>
