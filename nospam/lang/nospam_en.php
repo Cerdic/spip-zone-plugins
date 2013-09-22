@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_attributs_html_interdits' => 'It\'s not allowed to use the html attributes <tt>class</tt> or <tt>style</tt>',
+	'erreur_attributs_html_interdits' => 'It’s not allowed to use the html attributes <tt>class</tt> or <tt>style</tt>',
 	'erreur_blacklist' => 'You have been blacklisted, you can not post messages anymore.',
 	'erreur_jeton' => 'Unable to take account of your message. Thank you to resubmit!',
 	'erreur_spam' => 'Unable to take account of your message!',
