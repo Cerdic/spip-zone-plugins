@@ -95,9 +95,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inscription' => 'Online registration',
 	'label_periode_saison' => 'Season',
 	'label_places' => 'Limit the seats number',
-	'label_reponse_jyparticipe' => 'I\'ll be there',
-	'label_reponse_jyparticipe_pas' => 'I won\'t be there',
-	'label_reponse_jyparticipe_peutetre' => 'Maybe I\'ll be there',
+	'label_reponse_jyparticipe' => 'I’ll be there',
+	'label_reponse_jyparticipe_pas' => 'I won’t be there',
+	'label_reponse_jyparticipe_peutetre' => 'Maybe I’ll be there',
 	'label_vous_inscrire' => 'Your participation',
 	'lien_desinscrire' => 'Remove',
 	'lien_desinscrire_tous' => 'Delete all registrations',
@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_toutes_tous_evenements' => 'All answers to registrations',
 	'texte_agenda' => 'Agenda',
 	'texte_evenement_statut' => 'This event is:',
-	'texte_logo_objet' => 'Event\'s logo',
+	'texte_logo_objet' => 'Event’s logo',
 	'titre_cadre_ajouter_evenement' => 'Add one event',
 	'titre_cadre_modifier_evenement' => 'Modify one event',
 	'titre_sur_l_agenda' => 'On agenda',
@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_repetition' => '1 repetition',
 
 	// V
-	'voir_evenements_rubrique' => 'See this section\'s events'
+	'voir_evenements_rubrique' => 'See this section’s events'
 );
 
 ?>
