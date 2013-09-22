@@ -7,9 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tablematieres_description' => 'Introduit une ancre translitterée pour chaque intertitre du champ #TEXTE des ARTICLES,
-	ainsi qu\'une balise #TABLE_MATIERES (facultative) associée à placer, bien sûr, dans une boucle ARTICLES.',
+	ainsi qu’une balise #TABLE_MATIERES (facultative) associée à placer, bien sûr, dans une boucle ARTICLES.',
 	'tablematieres_nom' => 'Table des Matières',
-	'tablematieres_slogan' => 'Créer le sommaire d\'un article'
+	'tablematieres_slogan' => 'Créer le sommaire d’un article'
 );
 
 ?>
