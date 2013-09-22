@@ -12,7 +12,7 @@
 		<a type="application/zip" href="[(#GET{urlzip})]" title="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])">
 		<img src='[(#CHEMIN{prive/vignettes/zip.png}|sinon{#CHEMIN{vignettes/zip.png}})]' alt="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])" /></a>
 	</dt>
-	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{urlzip}|filesize|taille_en_octets)])</strong></dt>
+	<dt class='spip_doc_titre'><strong>(<BOUCLE_album(ALBUMS){id_album}>[(#TITRE) -] <:zippeur:ensemble_fichier:></BOUCLE_album> - [(#GET{urlzip}|filesize|taille_en_octets)])</strong></dt>
 </dl>
 </BOUCLE_date>
 </B_doc>
