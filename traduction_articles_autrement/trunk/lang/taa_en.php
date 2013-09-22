@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_limiter_secteur' => 'Do not show the language menu un the following sections:',
 	'cfg_utiliser_langues' => 'Use the following languages:',
-	'changer_langue' => 'Modify the article\'s language',
+	'changer_langue' => 'Modify the article’s language',
 
 	// F
 	'fermer' => 'Close',

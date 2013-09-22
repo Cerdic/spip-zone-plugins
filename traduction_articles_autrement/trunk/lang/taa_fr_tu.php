@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'changer_langue' => 'Changer la langue de l\'article',
+	'changer_langue' => 'Changer la langue de l’article',
 
 	// F
 	'fermer' => 'Fermer',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'options' => 'Modifier les options de langues',
 
 	// T
-	'titre_plugin' => 'Traduction d\'articles autrement',
+	'titre_plugin' => 'Traduction d’articles autrement',
 	'traductions' => 'Traductions', # MODIF
 
 	// V

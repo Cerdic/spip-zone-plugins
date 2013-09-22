@@ -20,13 +20,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_options_langue' => 'opciones',
 
 	// N
-	'necesite_afficher_objet' => 'Pa poder utilizar esta función tienes d\'instalar el complementu',
+	'necesite_afficher_objet' => 'Pa poder utilizar esta función tienes d’instalar el complementu',
 
 	// O
 	'options' => 'Camudar les opciones de llingua',
 
 	// T
-	'titre_plugin' => 'Traducción d\'artículos d\'otra miente',
+	'titre_plugin' => 'Traducción d’artículos d’otra miente',
 	'traductions' => 'Traducciones', # MODIF
 
 	// V

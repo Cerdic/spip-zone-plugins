@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'changer_langue' => 'Canviar la llengua de l\'article',
+	'changer_langue' => 'Canviar la llengua de l’article',
 
 	// F
 	'fermer' => 'Tancar',
@@ -20,13 +20,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_options_langue' => 'opcions',
 
 	// N
-	'necesite_afficher_objet' => 'Per poder utiiltzar aquesta funció heu d\'instal·lar el connector',
+	'necesite_afficher_objet' => 'Per poder utiiltzar aquesta funció heu d’instal·lar el connector',
 
 	// O
 	'options' => 'Opcions', # MODIF
 
 	// T
-	'titre_plugin' => 'Traducció d\'articles d\'una altra manera',
+	'titre_plugin' => 'Traducció d’articles d’una altra manera',
 	'traductions' => 'Traduccions', # MODIF
 
 	// V
