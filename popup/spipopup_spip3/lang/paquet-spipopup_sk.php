@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <code>
 #POPUP{objekt SPIPu,šablóna,šírka,výška,nadpis,vlastnosti}
 </code>
-- {{objekt SPIPu:}} \'article1\' alebo \'id_article=1\' (predvolená premenná pre každý redakčný objekt SPIPu).
-- {{šablóna:}} šablóna, ktorá sa použije na zobrazenie okna  ({nepovinné – predvolené: \'{{popup_defaut.html}}\'}).
+- {{objekt SPIPu:}} ’article1’ alebo ’id_article=1’ (predvolená premenná pre každý redakčný objekt SPIPu).
+- {{šablóna:}} šablóna, ktorá sa použije na zobrazenie okna  ({nepovinné – predvolené: ’{{popup_defaut.html}}’}).
 - {{šírka:}} šírka okna v pixeloch ({nepovinné – predvolené}{{620 px}}).
 - {{výška:}} výška okna v pixeloch ({nepovinné – predvolené} {{640 px}}).
 - {{nadpis:}} nadpis, ktorý bude pripojený k odkazu.
@@ -38,7 +38,7 @@ Rovnaké vlastnosti ako tag, text odkazu a iné.
 
 Tag vypíše tag odkazu (<code>a</code>) s týmito parametrami:
 - href = " url "
-- onclick = " _popup_set(\'url\', šírka, výška, vlastnosti); return false; " 
+- onclick = " _popup_set(’url’, šírka, výška, vlastnosti); return false; " 
 - title = " nadpis – nové okno "',
 	'spipopup_slogan' => 'Ovládanie jedinečnej šablóny SPIPu pre vyskakovacie okno'
 );

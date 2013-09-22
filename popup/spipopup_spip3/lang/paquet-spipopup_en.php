@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <code>
 #POPUP{object SPIP,skeleton,width,height,title,options}
 </code>
-- {{objet SPIP}} : \'article1\' or \'id_article=1\' (Valid by default  for any editorial SPIP purpose).
-- {{squelette}} : skeleton used to display the window ({optionnal - by default : \'{{popup_defaut.html}}\'}).
+- {{objet SPIP}} : ’article1’ or ’id_article=1’ (Valid by default  for any editorial SPIP purpose).
+- {{squelette}} : skeleton used to display the window ({optionnal - by default : ’{{popup_defaut.html}}’}).
 - {{width}} : window width in pixels ({optionnel - {{620px}} by default}).
 - {{height}} : window height in pixels ({optionnal - {{640px}} by default}).
 - {{titre}} : the title added to the link.
@@ -38,7 +38,7 @@ Same options than the tag, the text of the link has been added.
 
 The tag gives a tag link (<code>a</code>) with the following attributs :
 - href = " url "
-- onclick = " _popup_set(\'url\', width, height, options); return false; " 
+- onclick = " _popup_set(’url’, width, height, options); return false; " 
 - title = " title - new window "
 ',
 	'spipopup_slogan' => 'Manage a single popup window in SPIP skeleton'
