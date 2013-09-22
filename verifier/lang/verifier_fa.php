@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_entier' => 'عدد صحيح',
 	'type_entier_description' => 'چك كنيد كه مقدار يك عدد صحيح باشد،‌ با گزينه‌ي محدوديت بين دو مقدار.',
 	'type_regex' => 'عبارت عادي',
-	'type_regex_description' => '<چك كنيد كه مقدار با عبارت خواسته شد جور باشد. براي اطلاعات بيشتر در مورد استفاده از عبارت درخواست شده به اينجا رجوع كنيد: <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'aide en ligne de PHP</a>.',
+	'type_regex_description' => '<چك كنيد كه مقدار با عبارت خواسته شد جور باشد. براي اطلاعات بيشتر در مورد استفاده از عبارت درخواست شده به اينجا رجوع كنيد: <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l’aide en ligne de PHP</a>.',
 	'type_siren_siret' => 'شماره‌ي نظام ملي اطلاعات فهرست بنگاه‌ها يا شماره‌ي ملي فهرست بنگاه‌ها و تأسيسات (سرواژه به فرانسه:SIREN ياSIRET)',
 	'type_siren_siret_description' => 'چك كنيد كه مقدار يك شماره‌ي معتبر است <a href="http://fr.wikipedia.org/wiki/SIREN">نظامل اطلاعات بنگاه‌ها به فرانسه s</a> .',
 	'type_taille' => 'اندازه',
