@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saveauto_description' => 'Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
-			Il file .zip (o .sql) ottenuto è memorizzato all\'interno di una cartella (in maniera predefinita /tmp/dump, configurabile)
+			Il file .zip (o .sql) ottenuto è memorizzato all’interno di una cartella (in maniera predefinita /tmp/dump, configurabile)
 			e può essere inviato per posta elettronica.
 			
 			I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
