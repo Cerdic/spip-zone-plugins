@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_choisir_version' => 'Choose a version',
 	'erreur_doc_numero' => 'You must indicate an existing document.',
 	'erreur_form_filtre' => 'Please specify a filter to apply.',
-	'erreur_form_filtre_sstest' => 'The filter you tried can\'t be tested. You can only apply it.',
+	'erreur_form_filtre_sstest' => 'The filter you tried can’t be tested. You can only apply it.',
 	'erreur_form_filtre_valeur_obligatoire' => 'You must choose a value.',
 	'erreur_form_type_resultat' => 'You must choose the type of result',
 	'erreur_image_process' => 'The site does not use GD2 to manage images, please use it to process them.',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_angle_rotation' => 'Rotation angle:',
 	'label_choisir_filtres' => 'Choose filters to enable',
-	'label_compression_rendu' => 'Compression quality for rendering (in %, default 85):',
+	'label_compression_rendu' => 'Compression quality for rendering (in %, default 85):',
 	'label_couleur_sepia' => 'Color :',
 	'label_hauteur_previsu' => 'Maximum height of the preview in px (450 by default):',
 	'label_image_aplatir' => 'Flatten the image',

@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_angle_rotation' => 'Ángulo de rotación:',
 	'label_choisir_filtres' => 'Elija los filtros a activar',
-	'label_compression_rendu' => 'Calidad de comprensión del resultado (en %, 85 por defecto) :',
+	'label_compression_rendu' => 'Calidad de comprensión del resultado (en %, 85 por defecto) :',
 	'label_couleur_sepia' => 'Color:',
 	'label_hauteur_previsu' => 'Altura máxima de la previsualización en px (450 por defecto): ',
 	'label_image_aplatir' => 'Aplastar la imagen',
