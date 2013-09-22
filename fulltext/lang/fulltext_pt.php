@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'casse_indifferente' => 'O uso de maíusculas ou minúsculas é indiferente.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Converter em MyISAM',
 	'convertir_toutes' => 'Converter todas as tabelas em MyISAM',
 	'convertir_utf8' => 'converter em UTF-8 para repor a coerência.',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 

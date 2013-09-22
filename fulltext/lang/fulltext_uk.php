@@ -8,17 +8,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Позначки над/між буквами не беруться до уваги ("різдв\'яний" чи "різдвяний", і дадуть такий ж результат, включаючи "різдв\'яний", "різдвяний" ...)',
+	'accents_pas_pris' => 'Позначки над/між буквами не беруться до уваги ("різдв’яний" чи "різдвяний", і дадуть такий ж результат, включаючи "різдв’яний", "різдвяний" ...)',
 	'asie' => 'азія',
 	'asterisque_terminale' => 'не дасть ніякого результату: зірочка має бути в кінці', # MODIF
 	'aussi' => 'також',
 
 	// C
 	'casse_indifferente' => 'Написання (з великої/ з малої) букв у словах не має значення.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Переміна на MyISAM',
 	'convertir_toutes' => 'Перемінити всі вікна в MyISAM',
-	'convertir_utf8' => 'перемінити в UTF-8, щоб відновити зв\'язок ',
+	'convertir_utf8' => 'перемінити в UTF-8, щоб відновити зв’язок ',
 	'creer_tous' => 'Створіть усі запропоновані індекси ПОВНОГО ТЕКСТУ',
 
 	// D
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'видалений індекс',
 
 	// L
-	'liste_tables_connues' => 'Ось список вікон, взятих до уваги при пошуку. Ви можете додати більше елементів ПОВНОГО ТЕКСТУ -- перегляньте документацію на',
+	'liste_tables_connues' => 'Ось список вікон, взятих до уваги при пошуку. Ви можете додати більше елементів ПОВНОГО ТЕКСТУ — перегляньте документацію на',
 
 	// M
 	'mais_pas' => 'але НЕ',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 

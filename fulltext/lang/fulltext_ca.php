@@ -10,12 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'accents_pas_pris' => 'Els accents no es tenen en compte (« déjà » o « deja », ens retornaran el mateix « déjà », « dejà », « déja »...)',
 	'asie' => 'àsia ',
-	'asterisque_terminale' => 'no retornarà res: l\'asterisc* ha de ser terminal', # MODIF
+	'asterisque_terminale' => 'no retornarà res: l’asterisc* ha de ser terminal', # MODIF
 	'aussi' => 'també',
 
 	// C
 	'casse_indifferente' => 'La caixa (minúscula/majúscula) de les paraules cercades és indiferent.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir totes les taules en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 per restaurar la coherència',
@@ -40,22 +40,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
 	'et' => 'I',
 	'etranger' => 'estranger',
-	'exemples' => 'Exemples d\'ús',
+	'exemples' => 'Exemples d’ús',
 
 	// F
 	'fant' => 'fant',
-	'fonctionnement_recherche' => 'Funcionament del motor de cerca d\'aquest lloc',
+	'fonctionnement_recherche' => 'Funcionament del motor de cerca d’aquest lloc',
 	'fulltext_cree' => 'FULLTEXT creat',
 
 	// I
 	'il_faut_myisam' => 'cal MyISAM',
 	'incoherence_charset' => 'Una incoherència entre el joc de caràcters del vostre lloc i el de les taules de la vostra base de dades pot falsejar les cerques amb caràcters accentuats:',
 	'index_regenere' => 'índex de la taula reconstruïda',
-	'index_reinitialise' => 'Els documents amb error s\'han reinicialitzat',
+	'index_reinitialise' => 'Els documents amb error s’han reinicialitzat',
 	'index_supprime' => 'índex suprimit',
 
 	// L
-	'liste_tables_connues' => 'Heus ací la llista de les taules conegudes de la cerca. Podeu afegir-hi elements FULLTEXT, segons la documentació, a l\'adreça',
+	'liste_tables_connues' => 'Heus ací la llista de les taules conegudes de la cerca. Podeu afegir-hi elements FULLTEXT, segons la documentació, a l’adreça',
 
 	// M
 	'mais_pas' => 'però NO',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 

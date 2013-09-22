@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'casse_indifferente' => 'Hoofdletters of kleine letters in woorden hebben geen effect.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Converteer naar MyISAM',
 	'convertir_toutes' => 'Converteer alle tekstConverteer alle tekstvelden naar MyISAM',
 	'convertir_utf8' => 'converteer naar UTF-8 om de coherentie te herstellen',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'index verwijderd',
 
 	// L
-	'liste_tables_connues' => 'Hier volgt een lijst van tekstvelden die beschikbaar zijn voor zoekopdrachten. Je kunt meer FULLTEXT elementen toevoegen -- zie de  toelichting bij',
+	'liste_tables_connues' => 'Hier volgt een lijst van tekstvelden die beschikbaar zijn voor zoekopdrachten. Je kunt meer FULLTEXT elementen toevoegen — zie de  toelichting bij',
 
 	// M
 	'mais_pas' => 'maar NIET',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 

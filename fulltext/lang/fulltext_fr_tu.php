@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Les accents ne sont pas pris en compte (« déjà » ou « deja », retourneront à l\'identique « déjà », « dejà », « déja »...)',
+	'accents_pas_pris' => 'Les accents ne sont pas pris en compte (« déjà » ou « deja », retourneront à l’identique « déjà », « dejà », « déja »...)',
 	'asie' => 'asie',
-	'asterisque_terminale' => 'ne retournera rien: l\'astérisque * doit être terminale', # MODIF
+	'asterisque_terminale' => 'ne retournera rien : l’astérisque * doit être terminale', # MODIF
 	'aussi' => 'aussi',
 
 	// C
 	'casse_indifferente' => 'La casse (minuscule/majuscule) des mots recherchés est indifférente.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir toutes les tables en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 pour restaurer la cohérence',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
 	'et' => 'ET',
 	'etranger' => 'étranger',
-	'exemples' => 'Exemples d\'utilisation',
+	'exemples' => 'Exemples d’utilisation',
 
 	// F
 	'fant' => 'fant',
@@ -49,13 +49,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'il_faut_myisam' => 'il faut MyISAM',
-	'incoherence_charset' => 'Une incohérence entre le charset de ton site et celui des tables de ta base de données risque de fausser les recherches avec caractères accentués :',
+	'incoherence_charset' => 'Une incohérence entre le charset de ton site et celui des tables de ta base de données risque de fausser les recherches avec caractères accentués :',
 	'index_regenere' => 'index de la table régénérés',
 	'index_reinitialise' => 'Les documents en erreur ont été réinitialisés',
 	'index_supprime' => 'index supprimé',
 
 	// L
-	'liste_tables_connues' => 'Voici la liste des tables connues de la recherche. Tu peux y ajouter des éléments FULLTEXT, cf. documentation à l\'adresse',
+	'liste_tables_connues' => 'Voici la liste des tables connues de la recherche. Tu peux y ajouter des éléments FULLTEXT, cf. documentation à l’adresse',
 
 	// M
 	'mais_pas' => 'mais PAS',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
@@ -74,15 +74,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ou_bien' => 'ou bien',
 
 	// P
-	'pas_index' => 'Pas d\'index FULLTEXT',
+	'pas_index' => 'Pas d’index FULLTEXT',
 	'premier_soit' => 'SOIT',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
+	'que_des_exemples' => 'NB : les adresses de binaires et options proposées ici ab initio ne sont que des exemples.', # MODIF
 
 	// R
 	'regenerer_tous' => 'Régénérer tous les index FULLTEXT',
-	'reinitialise_index_doc' => 'Réinitialiser l\'indexation des documents en erreur',
+	'reinitialise_index_doc' => 'Réinitialiser l’indexation des documents en erreur',
 	'reserve_webmestres' => 'Page réservée aux webmestres',
 	'retour_configuration_fulltext' => 'Retour à la configuration de Fulltext', # MODIF
 	'retourne' => 'Retourne les textes qui contiennent',

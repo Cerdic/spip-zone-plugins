@@ -1,58 +1,58 @@
 <traduction module="fulltext" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ar" total="92" traduits="92" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ar" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ast" total="92" traduits="35" modifs="20" nouveaux="37" pourcent="38.04">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ast" total="92" traduits="35" relire="0" modifs="20" nouveaux="37" pourcent="38.04">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ca" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ca" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="cs" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=cs" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="cs" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=cs" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="da" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=da" total="92" traduits="27" modifs="20" nouveaux="45" pourcent="29.35">
+	<langue code="da" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=da" total="92" traduits="27" relire="0" modifs="20" nouveaux="45" pourcent="29.35">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=de" total="92" traduits="43" modifs="20" nouveaux="29" pourcent="46.74">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=de" total="92" traduits="43" relire="0" modifs="20" nouveaux="29" pourcent="46.74">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="el" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=el" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="el" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=el" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en" total="92" traduits="92" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=es" total="92" traduits="92" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=es" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="et" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=et" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="et" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=et" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fa" total="92" traduits="90" modifs="2" nouveaux="0" pourcent="97.83">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fa" total="92" traduits="90" relire="0" modifs="2" nouveaux="0" pourcent="97.83">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr" total="92" traduits="92" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="id" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=id" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="id" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=id" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=it" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=it" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="lv" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=lv" total="92" traduits="40" modifs="20" nouveaux="32" pourcent="43.48">
+	<langue code="lv" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=lv" total="92" traduits="40" relire="0" modifs="20" nouveaux="32" pourcent="43.48">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=nl" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=nl" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="no" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=no" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="no" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=no" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="pl" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=pl" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="pl" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=pl" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="pt" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=pt" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=pt" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="ro" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ro" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ro" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=sk" total="92" traduits="92" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=sk" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="tr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=tr" total="92" traduits="30" modifs="20" nouveaux="42" pourcent="32.61">
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=tr" total="92" traduits="30" relire="0" modifs="20" nouveaux="42" pourcent="32.61">
 	</langue>
-	<langue code="uk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=uk" total="92" traduits="42" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=uk" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
 </traduction>

@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'casse_indifferente' => 'Burtu lielums vārdos (lielie/mazie burti) nav nozīmīgs.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Pārveidot uz MyISAM',
 	'convertir_toutes' => 'Pārveidot visu uz MyISAM',
 	'convertir_utf8' => 'pārveidot uz UTF-8 lai atjaunotu saskaņotību',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'rādītājs izdzēsts',
 
 	// L
-	'liste_tables_connues' => 'Šeit ir tabulu saraksts, kas tiek ņemts vērā, izmantojot meklētāju. Jūs varat pievienot papildus FULLTEXT elementus -- skatīt dokumentāciju',
+	'liste_tables_connues' => 'Šeit ir tabulu saraksts, kas tiek ņemts vērā, izmantojot meklētāju. Jūs varat pievienot papildus FULLTEXT elementus — skatīt dokumentāciju',
 
 	// M
 	'mais_pas' => 'bet NE',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 

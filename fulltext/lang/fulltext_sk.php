@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'intervalle_cron' => 'Časový interval medzi dvomi časťami CRONu (v sekundách).',
 
 	// L
-	'liste_tables_connues' => 'Tu je zoznam tabuliek, ktoré vyhľadávanie zohľadňuje. Môžete vložiť viaceré prvky FULLTEXTu -- pozri dokumentáciu v',
+	'liste_tables_connues' => 'Tu je zoznam tabuliek, ktoré vyhľadávanie zohľadňuje. Môžete vložiť viaceré prvky FULLTEXTu — pozri dokumentáciu v',
 	'logo' => 'Logo',
 
 	// M

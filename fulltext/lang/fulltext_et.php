@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'casse_indifferente' => 'Tähtede suurus sõnades ei mõjuta otsingut.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Convert to MyISAM',
 	'convertir_toutes' => 'Convert all tables to MyISAM',
 	'convertir_utf8' => 'convert to UTF-8 to restore coherency',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'index deleted',
 
 	// L
-	'liste_tables_connues' => 'Here is the list of tables taken into account for searches. You can add more FULLTEXT elements -- see the documentation at',
+	'liste_tables_connues' => 'Here is the list of tables taken into account for searches. You can add more FULLTEXT elements — see the documentation at',
 
 	// M
 	'mais_pas' => 'kuid MITTE',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'table_convertie' => 'table converted to MyISAM',
-	'table_format' => 'This table\'s format is',
+	'table_format' => 'This table’s format is',
 	'table_non_reconnue' => 'unrecognised table',
 	'textes_premier' => 'kuid näitab esmalt teksti, milles leidub',
 

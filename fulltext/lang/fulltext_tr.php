@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'casse_indifferente' => 'Aranan sözcüğün büyük harf / küçük kombinasyonu önemsiz.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
-	'convertir_myisam' => 'MyISAM\'e dönüştür',
-	'convertir_toutes' => 'Tüm tabloları MyISAM\'e dönüştür',
-	'convertir_utf8' => 'Uyumluluğu geri almak için UTF-8\'e dönüştür',
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
+	'convertir_myisam' => 'MyISAM’e dönüştür',
+	'convertir_toutes' => 'Tüm tabloları MyISAM’e dönüştür',
+	'convertir_utf8' => 'Uyumluluğu geri almak için UTF-8’e dönüştür',
 	'creer_tous' => 'Önerilen tüm FULLTEXT endekslerini oluştur',
 
 	// D
@@ -56,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Sİl',
 
 	// T
-	'table_convertie' => 'tablo MyISAM\'e dönüştürüldü',
+	'table_convertie' => 'tablo MyISAM’e dönüştürüldü',
 	'table_format' => 'Bu tablonun formatı ',
 	'table_non_reconnue' => 'tanınmayan tablo',
 	'textes_premier' => 'ama ilk önce şunu içeren metinleri gösterir',

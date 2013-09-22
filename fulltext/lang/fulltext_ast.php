@@ -10,12 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta («cuánto» o «cuanto», devuelven el mesmu «cuánto», «cuanto», «cuantó»...)',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'nun devolverá nada: l\'asteriscu * tien que tar al final', # MODIF
+	'asterisque_terminale' => 'nun devolverá nada: l’asteriscu * tien que tar al final', # MODIF
 	'aussi' => 'tamién',
 
 	// C
 	'casse_indifferente' => 'La capitalización (minúscules/mayúscules) de les pallabres guetáes ye indiferente.',
-	'configurer_egalement_doc' => 'Vous pouvez également configurer l\'indexation des documents :', # MODIF
+	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir toles tables en MyISAM',
 	'convertir_utf8' => 'convertir a UTF-8 pa restaurar la coherencia',
@@ -34,15 +34,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_xls_bin' => 'Vous devez renseigner le binaire à utiliser pour extraire les .xls', # MODIF
 	'et' => 'Y',
 	'etranger' => 'estranxeru',
-	'exemples' => 'Exemplos d\'usu',
+	'exemples' => 'Exemplos d’usu',
 
 	// F
-	'fonctionnement_recherche' => 'Funcionamientu del motor de gueta d\'esti sitiu',
+	'fonctionnement_recherche' => 'Funcionamientu del motor de gueta d’esti sitiu',
 	'fulltext_cree' => 'FULLTEXT creáu',
 
 	// I
 	'il_faut_myisam' => 'fai falta MyISAM',
-	'incoherence_charset' => 'Una incoherencia ente\'l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
+	'incoherence_charset' => 'Una incoherencia ente’l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
 	'index_regenere' => 'índices de la tabla rexeneraos',
 	'index_reinitialise' => 'Los documentos en error se reaniciaron',
 	'index_supprime' => 'indiz desaniciáu',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexés', # MODIF
 	'nb_non_index' => 'Non-indexés', # MODIF
 	'nb_ptg' => 'Protégés (non-indexés)', # MODIF
-	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # MODIF
+	'necessite_version_php' => 'Nécessite PHP 5.2 au minimum, ainsi que l’option -enable-zip.', # MODIF
 	'nombre_caracteres' => 'Nombre de caractères indexés (depuis le debut du document).', # MODIF
 	'nombre_documents' => 'Nombre de documents à traiter par itération du CRON', # MODIF
 
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'regenerer_tous' => 'Rexenerar tolos índices FULLTEXT',
-	'reinitialise_index_doc' => 'Reaniciar l\'indizamientu de los documentos en error',
+	'reinitialise_index_doc' => 'Reaniciar l’indizamientu de los documentos en error',
 	'reserve_webmestres' => 'Páxina acutada pa los webmasters',
 	'retour_configuration_fulltext' => 'Retour à la configuration de Fulltext', # MODIF
 	'retourne' => 'Tornar los testos que contengan',

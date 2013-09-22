@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'intervalle_cron' => 'Time interval between two passages of CRON (in seconds).',
 
 	// L
-	'liste_tables_connues' => 'Here is the list of tables taken into account for searches. You can add more FULLTEXT elements -- see the documentation at',
+	'liste_tables_connues' => 'Here is the list of tables taken into account for searches. You can add more FULLTEXT elements — see the documentation at',
 	'logo' => 'Logo',
 
 	// M
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'table_convertie' => 'table converted to MyISAM',
-	'table_format' => 'This table\'s format is',
+	'table_format' => 'This table’s format is',
 	'table_non_reconnue' => 'unrecognised table',
 	'textes_premier' => 'but shows first the texts which contain',
 	'titre_page_fulltext_index' => 'Configuration of search indexes',
