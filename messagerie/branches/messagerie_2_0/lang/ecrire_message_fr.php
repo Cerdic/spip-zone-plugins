@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_envoye' => 'Votre message a bien été envoyé',
-	'message_envoye_erreur' => 'Une erreur s\'est produite, votre message n\'a pas été envoyé',
+	'message_envoye_erreur' => 'Une erreur s’est produite, votre message n’a pas été envoyé',
 
 	// S
 	'selection_aucun' => 'aucun',
