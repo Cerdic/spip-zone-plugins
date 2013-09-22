@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'canonical_url' => 'URL Canoniques',
-	'canonical_url_activate' => 'Activer la meta d\'URL Canoniques',
+	'canonical_url_activate' => 'Activer la meta d’URL Canoniques',
 
 	// E
 	'explication_description' => 'Il est conseillé que la longueur soit inférieure ou égale à 160 caractères.',
@@ -39,29 +39,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'google_webmaster_tools_id' => 'Meta code de vérification',
 
 	// I
-	'info_count_max' => 'Caractères pour atteindre la limite optimale : ',
+	'info_count_max' => 'Caractères pour atteindre la limite optimale : ',
 	'insert_head' => 'Insertion automatique dans #INSERT_HEAD',
-	'insert_head_activate' => 'Activer l\'insertion automatique',
+	'insert_head_activate' => 'Activer l’insertion automatique',
 	'insert_head_descriptif' => 'Insertion automatique de la configuration SEO dans le &lt;head&gt;',
 
 	// M
-	'meta_author' => 'Auteur :',
-	'meta_copyright' => 'Copyright :',
-	'meta_description' => 'Description :',
-	'meta_keywords' => 'Mots Clefs :',
+	'meta_author' => 'Auteur :',
+	'meta_copyright' => 'Copyright :',
+	'meta_description' => 'Description :',
+	'meta_keywords' => 'Mots Clefs :',
 	'meta_page_description_sommaire_value' => 'Valeur de la Description de la Page + Valeur Meta du Sommaine',
 	'meta_page_description_value' => 'Valeur de la Description de la Page',
 	'meta_page_title_sommaire_value' => 'Valeur du Titre de la Page + Valeur Meta du Sommaire',
 	'meta_page_title_value' => 'Valeur du Titre de la Page',
-	'meta_robots' => 'Robots :',
+	'meta_robots' => 'Robots :',
 	'meta_sommaire_value' => 'Valeur de la Meta du Sommaire',
 	'meta_tags' => 'Meta Tags',
 	'meta_tags_activate' => 'Activer les balises metas éditoriales',
 	'meta_tags_default' => 'Valeur des balises metas par défaut (pour les articles et les rubriques)',
-	'meta_tags_edit_activate' => 'Activer l\'édition des meta tags dans les rubriques et les articles',
+	'meta_tags_edit_activate' => 'Activer l’édition des meta tags dans les rubriques et les articles',
 	'meta_tags_editing' => 'Édition des balises metas',
-	'meta_tags_sommaire' => 'Valeur des balises metas du sommaire (page d\'accueil)',
-	'meta_title' => 'Titre :',
+	'meta_tags_sommaire' => 'Valeur des balises metas du sommaire (page d’accueil)',
+	'meta_title' => 'Titre :',
 
 	// S
 	'seo' => 'Search Engine Optimisation'

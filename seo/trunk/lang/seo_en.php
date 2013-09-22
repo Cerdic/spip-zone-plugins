@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alexa' => 'Alexa',
 	'alexa_activate' => 'Activate Alexa',
-	'alexa_id' => 'Website Alexa\'s ID',
+	'alexa_id' => 'Website Alexa’s ID',
 
 	// B
 	'bing_webmaster' => 'Bing Webmaster Tools',
