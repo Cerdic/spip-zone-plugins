@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mois',
 
 	// P
-	'pas_articles' => 'Pas d\'article dans cette période !',
+	'pas_articles' => 'Pas d’article dans cette période !',
 	'pas_synchro' => 'Ne pas synchroniser',
 	'preferences' => 'Préférences',
 	'probleme_de_syndication' => 'problème de syndication',

@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'semaine' => 'Settimana',
 	'sources' => 'Fonti',
 	'synchro' => 'Sincronizza',
-	'synchro_titre' => 'Salva sul sito l\'elenco degli articoli letti',
+	'synchro_titre' => 'Salva sul sito l’elenco degli articoli letti',
 	'syndication_ajour' => 'Aggiorna adesso',
 	'syndication_fait' => 'Syndication effettuata',
 

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Desconnexion',
-	'derniere_syndication' => 'La darrièra sindicacion facha d\'aquel sit',
+	'derniere_syndication' => 'La darrièra sindicacion facha d’aquel sit',
 	'deuxjours' => 'Dos jorns',
 
 	// L
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'I a pas cap d\'article dins aquel periòde!',
+	'pas_articles' => 'I a pas cap d’article dins aquel periòde!',
 	'pas_synchro' => 'Sincronizar pas',
 	'preferences' => 'Preferéncias',
 	'probleme_de_syndication' => 'Problèma de sindicacion',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'synchro' => 'Sincronizar',
 	'synchro_titre' => 'Registrar dins aquel sit la lista dels articles legits',
 	'syndication_ajour' => 'Actualizar ara',
-	'syndication_fait' => 'La sincronizacion s\'es facha',
+	'syndication_fait' => 'La sincronizacion s’es facha',
 
 	// T
 	'toutes' => 'Totas'

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Desconexón',
-	'derniere_syndication' => 'La cabera sindicación d\'esti sitiu fízose',
+	'derniere_syndication' => 'La cabera sindicación d’esti sitiu fízose',
 	'deuxjours' => 'Dos díes',
 
 	// L
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'semaine' => 'Selmana',
 	'sources' => 'Fontes',
 	'synchro' => 'Sincronizar',
-	'synchro_titre' => 'Grabar nel sitiu la llista d\'artículos lleíos',
+	'synchro_titre' => 'Grabar nel sitiu la llista d’artículos lleíos',
 	'syndication_ajour' => 'Actualizar agora',
 	'syndication_fait' => 'Fecha la sindicación',
 

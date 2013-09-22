@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'semaine' => 'Woch',
 	'sources' => 'Sourcen',
 	'synchro' => 'Synchroniséieren',
-	'synchro_titre' => 'D\'Lëscht vun de geliesenen Artikelen um Site späicheren',
+	'synchro_titre' => 'D’Lëscht vun de geliesenen Artikelen um Site späicheren',
 	'syndication_ajour' => 'Elo updaten',
 	'syndication_fait' => 'Syndicatioun färdeg',
 

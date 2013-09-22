@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Desconnexió',
-	'derniere_syndication' => 'La darrera sindicació realitzada d\'aquest lloc',
+	'derniere_syndication' => 'La darrera sindicació realitzada d’aquest lloc',
 	'deuxjours' => 'Dos dies',
 
 	// L

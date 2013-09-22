@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Digennaskañ',
-	'derniere_syndication' => 'Dastumet titouroù diwar al lec\'hienn-mañ ar wech diwezhañ d\'an',
+	'derniere_syndication' => 'Dastumet titouroù diwar al lec’hienn-mañ ar wech diwezhañ d’an',
 	'deuxjours' => 'Daou zevezh',
 
 	// L
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'semaine' => 'Sizhun',
 	'sources' => 'Orinoù',
 	'synchro' => 'Kenamzeriañ',
-	'synchro_titre' => 'Enrollañ war al lec\'hienn listenn ar pennadoù bet lennet',
+	'synchro_titre' => 'Enrollañ war al lec’hienn listenn ar pennadoù bet lennet',
 	'syndication_ajour' => 'Hizivaat bremañ',
 	'syndication_fait' => 'Dastumet eo bet an titouoù',
 
