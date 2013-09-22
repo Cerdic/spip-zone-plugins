@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_style_formulaire32' => 'Grand (32px)',
 	'legend_formulaire_public' => 'Formulaire public',
 	'legend_style_formulaire' => 'Style du formulaire',
-	'login_first' => 'Désolé l\'action requiert d\'être enregistré, authentifiez-vous d\'abord',
+	'login_first' => 'Désolé l’action requiert d’être enregistré, authentifiez-vous d’abord',
 
 	// M
 	'mes_favoris' => 'Mes favoris',
