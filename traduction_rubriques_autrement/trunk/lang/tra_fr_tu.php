@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_traduction' => 'Ajouter une traduction',
-	'avis_rubrique_source' => 'Tu dois d\'abord traduire toutes les rubrique parentes',
+	'avis_rubrique_source' => 'Tu dois d’abord traduire toutes les rubrique parentes',
 
 	// R
 	'rubrique_reference' => '(rubrique de référence)',
