@@ -1,0 +1,48 @@
+[(#REM)
+	Vignettes des documents d'un album.
+][(#REM)
+	inclus dans le squelette /prive/squelettes/objets/liste/albums_lies.html
+	inclus dans le squelette /prive/squelettes/objets/liste/albumotheque.html
+	Paramètres obligatoires:
+		id_album
+	Paramètres optionnels:
+		largeur		largeur des vignettes
+		hauteur		hauteur des vignettes
+]
+#SET{largeur, #ENV{largeur,0}}
+#SET{hauteur, #ENV{hauteur,52}}
+#SET{largeur_hauteur, #GET{largeur}|>{#GET{hauteur}}|?{#GET{largeur},#GET{hauteur}}}
+#SET{style, #GET{hauteur}|!={0}|?{height:#GET{hauteur}px;line-height:#GET{hauteur}px;}|concat{#GET{largeur}|!={0}|?{width:#GET{largeur}px;}}}
+#SET{documents, #VAL{documents}|lister_objets_lies{album,#ID_ALBUM,'documents_liens'}|implode{','}}
+[(#REM) style du placeholder quand déplacement d'un document ]
+<style type='text/css'>.placeholder-album{width:#GET{largeur_hauteur}px;height:#GET{largeur_hauteur}px;}</style>
+
+<ul id="docs-album#ID_ALBUM" class='liste_docs clearfix' data-objet='album' data-id_objet="#ID_ALBUM" data-documents="\[#GET{documents}\]">
+	<B_contenu>
+	#ANCRE_PAGINATION
+	<BOUCLE_contenu(DOCUMENTS){id_album}{!par media, date}{tout}{pagination #ENV{nb,30}}>
+	#SET{titre, #VAL{N° }|concat{#ID_DOCUMENT,' - '}|concat{#EXTENSION}|concat{' - ',#TAILLE|taille_en_octets}|concat{' - ',#TITRE|couper{20}|sinon{#FICHIER|basename}}|attribut_html}
+	[<li class='doc'[(#REM) style="#GET{style}" ]data-id_document="#ID_DOCUMENT" data-objet="album" data-id_objet="#ID_ALBUM">
+		<figure>
+		<a href="#URL_DOCUMENT" rel="album#ID_ALBUM" type="#MIME_TYPE" title="#GET{titre}"[ alt="(#DESCRIPTIF|couper{100}|attribut_html)"]>
+		(#LOGO_DOCUMENT|image_reduire{#GET{largeur},#GET{hauteur}})
+		</a>
+		<figcaption>[<:info_numero_abbreviation:>(#ID_DOCUMENT)][ - (#EXTENSION)]</figcaption>
+		</figure>
+		[(#REM) Bouton pour retirer le document ]
+		[(#AUTORISER{modifier,album, #ID_ALBUM}|oui)
+		[(#BOUTON_ACTION{
+			'',
+			#URL_ACTION_AUTEUR{
+				dissocier_document,
+				#ID_ALBUM-album-#ID_DOCUMENT--safe,#SELF},
+			'ajax retirer link',
+			'',
+			<:medias:bouton_enlever_document:>}
+		)]
+		]
+	</li>]
+	</BOUCLE_contenu>
+	[<li class='pagination actions reveal'>(#PAGINATION{prive})</li>]
+	</B_contenu>
+</ul>

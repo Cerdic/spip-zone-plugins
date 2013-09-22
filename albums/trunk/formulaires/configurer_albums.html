@@ -1,0 +1,55 @@
+[(#REM)
+	Formulaire de configuration des albums.
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/configurer_albums.html
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{album-24.png}" class="cadre-icone" /><:album:titre_albums:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#REM) message affiché si l'ajout de document aux albums n'est pas activé ]
+	[(#VAL{spip_albums}|in_array{#CONFIG{documents_objets}|explode{','}}|non)
+	<p class="reponse_formulaire reponse_formulaire_erreur"><a href='[(#URL_ECRIRE{configurer_contenu})]'><:album:info_documents_joints_albums:></a></p>
+	]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+
+			[(#REM) choix des objets sur lesquels l'ajout d'albums est possible ]
+			#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:album:label_activer_album_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}
+			</li>
+
+			[(#REM) titre par défaut d'un nouvel album ]
+			#SET{name,utiliser_titre_defaut} #SET{obli,''} #SET{defaut,#CONFIG{albums/utiliser_titre_defaut}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:album:label_utiliser_titre_defaut:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,on}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:album:label_case_utiliser_titre_defaut:></label>
+				</div>
+			</li>
+
+		</ul>
+
+
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+
+</div>

@@ -1,0 +1,132 @@
+[(#REM)
+	Affiche les critères de sélection pour l'affichage de la liste des albums
+	Paramètres d'inclusion :
+		les paramètres indiqués (liste) peuvent être soit une #LISTE,
+		soit une chaine de mots séparés par des caractères non alphanumériques (afin de pouvoir transmettre via l'url).
+ 
+		navigation (liste)	parents, divers, contenus
+					filtres de navigation a afficher
+		liste			albumotheque / associer / choisir
+					definit le squelette a inclure :
+						albumotheque -> albumotheque.html
+						associer / choisir -> albums.html
+][(#REM)
+	Inclus dans /prive/squelettes/contenu/albums.html
+	Inclus dans /prive/squelettes/contenu/albums_complement_objet.html
+	Inclus dans /prive/squelettes/contenu/popin-choisir_album.html
+]
+
+#SET{self,#SELF|parametre_url{debut_albums,''}}
+#SET{liste, #ENV{liste}|=={albumotheque}|?{albumotheque,albums_nav}}
+[(#REM)
+	Variables pour définir les éléments à afficher 
+	On convertit en tableau si nécessaire, et on donne les valeurs par défaut
+]
+#SET{navigation, #ENV{navigation}|?{
+	#ENV{navigation}|is_array|?{#ENV{navigation},#VAL{'/\W/'}|preg_split{#ENV{navigation}}},
+	#LISTE{parents, divers, contenus}}
+}
+
+
+[(#REM) Onglets : objets parents et albums auteur]
+<BOUCLE_afficher_parents(CONDITION){si #VAL{parents}|in_array{#GET{navigation}}}>
+<div class='onglets_simple clearfix'>
+<ul class='auteur'>
+	[<li class='first'>(#GET{self}|parametre_url{id_auteur,''}|lien_ou_expose{
+		<:album:onglet_tous:>,
+		#ENV{id_auteur,''}|=={''},
+		ajax}
+	)</li>]
+	[<li>(#GET{self}|parametre_url{id_auteur,#SESSION{id_auteur}}|lien_ou_expose{
+		<:album:onglet_mes_albums:>,
+		#ENV{id_auteur}|=={#SESSION{id_auteur}},
+		ajax}
+	)</li>]
+</ul>
+<B_objets>
+<ul class='parents'>
+	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_parents_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
+	<BOUCLE_objets(ALBUMS liens){fusion objet}>
+	[(#OBJET|objet_info{type}|oui)
+	[<li>(#GET{self}|parametre_url{objet,#OBJET}|lien_ou_expose{
+		#OBJET|objet_icone{16}|concat{#OBJET|objet_info{info_nb_objets}|_T|replace{'@nb@ ',''}},
+		#OBJET|=={#ENV{objet}},
+		ajax}
+	)</li>]
+	]
+	</BOUCLE_objets>
+</ul>
+</B_objets>
+</div>
+</BOUCLE_afficher_parents>
+
+
+[(#REM) Filtres : Statuts, vus, orphelins ]
+<BOUCLE_afficher_divers(CONDITION){si #VAL{divers}|in_array{#GET{navigation}}}>
+<div class='onglets_simple second clearfix'>
+<ul class='statut'>
+	[<li class='first'>(#GET{self}|parametre_url{statut,publie|prepa|poubelle}|lien_ou_expose{<:medias:documents_tous:>,#ENV{statut}|=={publie|prepa|poubelle},ajax})</li>]
+	[<li>(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:medias:documents_publies:>,#ENV{statut}|=={''},ajax})</li>]
+	[<li>(#GET{self}|parametre_url{statut,'prepa|poubelle'}|lien_ou_expose{<:medias:documents_non_publies:>,#ENV{statut}|=={prepa|poubelle},ajax})</li>]
+</ul>
+<ul class='brises'>
+	[<li class='first'>(#GET{self}|parametre_url{vu,''}|lien_ou_expose{<:album:filtre_tous:>,#ENV{vu}|non|et{#ENV{vu}|non},ajax})</li>]
+	[<li>(#GET{self}|parametre_url{vu,''}|parametre_url{vu,oui}|lien_ou_expose{<:album:filtre_vus:>,#ENV{vu}|=={oui},ajax})</li>]
+	[<li>(#GET{self}|parametre_url{vu,''}|parametre_url{vu,non}|lien_ou_expose{<:album:filtre_non_vus:>,#ENV{vu}|=={non},ajax})</li>]
+</ul>
+<ul class='brises'>
+[<li class='first'>(#GET{self}|parametre_url{brise|orphelins,''}|lien_ou_expose{<:medias:documents_tous:>,#ENV{brise,0}|non|et{#ENV{orphelins,0}|non},ajax})</li>]
+[<li>(#GET{self}|parametre_url{brise,''}|parametre_url{orphelins,1}|lien_ou_expose{<:medias:documents_orphelins:>,#ENV{orphelins,0}|=={1},ajax})</li>]
+</ul>
+</div>
+</BOUCLE_afficher_divers>
+
+
+[(#REM) Filtres : types de medias contenus (image, audio, video, file) ]
+<BOUCLE_afficher_contenu(CONDITION){si #VAL{contenus}|in_array{#GET{navigation}}}>
+<div class='onglets_simple second clearfix filtres'>
+	<ul class='contenus'>
+	[(#REM) Tous ]
+	<li class='tous'>
+		[(#GET{self}|parametre_url{contenu,''}|lien_ou_expose{
+			<:album:filtre_tous:>,
+			#ENV{contenu}|=={''},
+			ajax}
+		)]
+	</li>
+	[(#REM) Vides ]
+	<li class='vides[ (#ENV{contenu}|=={0}|oui)on]'>
+		[(#GET{self}|parametre_url{contenu,non}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{album-vide-16.png}|balise_img)]<:album:filtre_sans_contenu:>,
+			#ENV{contenu}|=={non},
+			ajax,
+			<:album:filtre_sans_contenu:>}
+		)]
+	</li>
+	[(#REM) Pleins ]
+	<li class='tous'>
+		[(#GET{self}|parametre_url{contenu,oui}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{album-plein-16.png}|balise_img)]<:album:filtre_avec_contenu:>,
+			#ENV{contenu}|=={oui},
+			ajax,
+			<:album:filtre_avec_contenu:>}
+		)]
+	</li>
+	[(#REM) Medias ]
+	<BOUCLE_contenu(DATA){liste image,audio,video,file}>
+	<li class='#VALEUR[ (#ENV{contenu}|=={#VALEUR}|oui)on]'>
+		[(#GET{self}|parametre_url{contenu,#VALEUR}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{#VAL{media-}|concat{#VALEUR}|concat{-16.png}}|balise_img)][(#VAL{medias:media_}|concat{#VALEUR}|_T)],
+			#ENV{contenu}|=={#VALEUR},
+			ajax,
+			#VAL{medias:media_}|concat{#VALEUR}|_T}
+		)]
+	</li>
+	</BOUCLE_contenu>
+	</ul>
+</div>
+</BOUCLE_afficher_contenu>
+
+
+[(#REM) LISTE DES ALBUMS EN FONCTION DES CRITERES CI-DESSUS]
+<INCLURE{fond=prive/objets/liste/#GET{liste}, env}>
