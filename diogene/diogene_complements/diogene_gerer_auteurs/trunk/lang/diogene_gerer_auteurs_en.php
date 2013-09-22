@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_gerer_auteurs_remove' => 'Delete author(s)',
 
 	// M
-	'message_impossible_supprimer_auteur' => 'You can\'t remove yourself from the list of authors. You will lose your editing rights.'
+	'message_impossible_supprimer_auteur' => 'You can’t remove yourself from the list of authors. You will lose your editing rights.'
 );
 
 ?>
