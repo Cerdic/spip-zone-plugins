@@ -1,15 +1,15 @@
 <traduction module="commandes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="109" traduits="109" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="109" traduits="109" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="jaro" lien="" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="109" traduits="108" modifs="1" nouveaux="0" pourcent="99.08">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="109" traduits="108" relire="0" modifs="1" nouveaux="0" pourcent="99.08">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="109" traduits="109" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="109" traduits="109" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
