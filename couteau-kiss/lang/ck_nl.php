@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_cache_taille_mini' => 'De grootte van de cache kan niet kleiner dan 10Mo zijn',
 	'erreur_dossier_squelette_invalide' => 'Skelettendossier kan geen absolute path zijn noch <tt>../</tt> referentie bevatten',
-	'explication_dossier_squelettes' => 'Je mag meerdere dossiers in volgorde aanduiden. Scheid ze met  \':\' . "<tt>squelettes</tt>" dossier wordt altijd ten laatste in acht genomen of hij bestaat.',
+	'explication_dossier_squelettes' => 'Je mag meerdere dossiers in volgorde aanduiden. Scheid ze met  ’:’ . "<tt>squelettes</tt>" dossier wordt altijd ten laatste in acht genomen of hij bestaat.',
 	'explication_image_seuil_document' => 'De geuploaden beelden kunnen vanaf een bepaalde breedte automatisch naar het document modus veranderd worden ',
 	'explication_introduction_suite' => 'De opvolgingspunten worden door de baken <tt>#INTRODUCTION</tt> bijgevoegd wanneer ze een tekst verkort. Standaard is <tt> (...)</tt>',
 
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_imgs_seuils' => 'De grootte van de beelden beperken tijdens het downloaden',
 	'label_inhiber_javascript_ecrire' => 'Javascript deactiveren in de artikels',
 	'label_introduction_suite' => 'Opvolgpunten',
-	'label_logo_seuils' => 'De grootte van logo\'s bij het uploaden beperken ',
+	'label_logo_seuils' => 'De grootte van logo’s bij het uploaden beperken ',
 	'label_longueur_login_mini' => 'Minimale lengt van de logins',
 	'label_max_height' => 'Max hoogte (pixel)',
 	'label_max_size' => 'Max gewicht (ko)',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_no_set_html_base' => '<tt>&lt;base href="..."&gt;</tt> NIET automatisch bijvoegen',
 	'label_options_ecrire_perfo' => 'Prestatie',
 	'label_options_ecrire_secu' => 'Veiligheid',
-	'label_options_skel' => 'Berekening van de pagina\'s ',
+	'label_options_skel' => 'Berekening van de pagina’s ',
 	'label_options_typo' => 'Verwerkingen van de teksten',
 	'label_supprimer_numero' => 'Nummers van de titels automatisch afschaffen',
 	'label_toujours_paragrapher' => 'Alle paragrafen met een <tt>&lt;p&gt;</tt> bebakenen (zelfs als er maar een paragraaf is in de tekst)',

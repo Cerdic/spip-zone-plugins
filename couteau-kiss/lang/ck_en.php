@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_cache_taille_mini' => 'The cache can\'t be smaller than 10MB',
-	'erreur_dossier_squelette_invalide' => 'The skeleton folder can\'t be an absolute path or contain reference <tt>../</tt>',
-	'explication_dossier_squelettes' => 'You can specify multiple directories separated by \':\', they will be taken in order. The directory named"<tt>squelettes</tt>" is always taken in the last position if it exists.',
+	'erreur_cache_taille_mini' => 'The cache can’t be smaller than 10MB',
+	'erreur_dossier_squelette_invalide' => 'The skeleton folder can’t be an absolute path or contain reference <tt>../</tt>',
+	'explication_dossier_squelettes' => 'You can specify multiple directories separated by ’:’, they will be taken in order. The directory named"<tt>squelettes</tt>" is always taken in the last position if it exists.',
 	'explication_image_seuil_document' => 'Uploaded images can be automatically placed in the document mode beyond a predefined width',
 	'explication_introduction_suite' => 'Dot leaders are added by the tag <tt>#INTRODUCTION</tt> when cutting a text. Default <tt> (...)</tt>',
 

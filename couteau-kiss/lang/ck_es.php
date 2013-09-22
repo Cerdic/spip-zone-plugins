@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_cache_taille_mini' => 'La caché no puede tener un tamaño inferior a 10Mo',
 	'erreur_dossier_squelette_invalide' => 'El dosier esqueleto no puede ser una ruta absoluta ni contener referencias <tt>../</tt>',
-	'explication_dossier_squelettes' => 'Puede indicar varios repertorios separados por \':\', que se tomarán en orden. El repertorio titulado "<tt>squelettes</tt>" es siempre el último, en caso de que exista.',
+	'explication_dossier_squelettes' => 'Puede indicar varios repertorios separados por ’:’, que se tomarán en orden. El repertorio titulado "<tt>squelettes</tt>" es siempre el último, en caso de que exista.',
 	'explication_image_seuil_document' => 'Las imágenes descargadas pueden pasarse automáticamente a modo documento, más allá de una anchura determinada',
 	'explication_introduction_suite' => 'Los siguientes puntos son añadidos por la etiqueta <tt>#INTRODUCTION</tt> cuando se corta un texto. Por defecto <tt> (...)</tt>',
 
