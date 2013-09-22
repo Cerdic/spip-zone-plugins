@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'toocool_alt' => 'Gayaspero enforma pa IE',
 	'toocool_info' => 'El sitiu que tentas amosar xulgose como «demasiao bono pa Internet Explorer ».
-<br />Si quies, tómate un momentu pa prebar algún d\'estos escelentes ñavegadores: <a href="http://www.w3junkies.com/toocool/index.php?language=es">http://www.w3junkies.com/toocool/</a>',
+<br />Si quies, tómate un momentu pa prebar algún d’estos escelentes ñavegadores: <a href="http://www.w3junkies.com/toocool/index.php?language=es">http://www.w3junkies.com/toocool/</a>',
 	'toocool_titre' => 'Gayaspero enforma pa Internet Explorer'
 );
 
