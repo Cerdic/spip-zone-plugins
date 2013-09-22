@@ -1,7 +1,7 @@
 <paquet
 	prefix="albums"
 	categorie="multimedia"
-	version="2.2.9"
+	version="3.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
