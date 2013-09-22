@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alerte_publie_contenant' => 'Be careful, this content is published, but contains links to other contents that are not!',
 	'alerte_publie_contenant_ko' => 'Beware, this content is published, but contains links to non-existing contents !',
-	'aucun_objets_avec_lien_depuis_courant' => 'This content doesn\'t contain any link to another content.',
+	'aucun_objets_avec_lien_depuis_courant' => 'This content doesn’t contain any link to another content.',
 	'aucun_objets_avec_lien_vers_courant' => 'No other content contain link to this one.',
 
 	// C
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_element_contenu' => 'Be careful, another content links to this one!',
 
 	// L
-	'legende_liens_faux_objets' => 'Red and striked links are linked content that don\'t exist.',
+	'legende_liens_faux_objets' => 'Red and striked links are linked content that don’t exist.',
 	'liens_entre_contenus' => 'Links between contents',
 
 	// O
