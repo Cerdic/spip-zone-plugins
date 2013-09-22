@@ -1,0 +1,20 @@
+#SET{doc,#ARRAY}
+#SET{id_album,#ENV{id_zip_doc_album,#ENV{id_album}}}
+#SET{cmd,#ENV{cmd,#CONFIG{zippeur/zippeur_cmd}}}
+<BOUCLE_doc(DOCUMENTS){id_album}{mode?}>
+[(#SET{doc,#GET{doc}|push{#FICHIER|copie_locale}})]
+</BOUCLE_doc>
+<BOUCLE_date(DOCUMENTS){!par maj}{id_album=#GET{id_album}}{0,1}>
+[(#SET{nomdoc,album_#GET{id_album}[_(#ENV{mode})]})]
+[(#SET{urlzip,#GET{doc}|zippeur{#MAJ,#GET{cmd},#GET{nomdoc}}})]
+<dl class='spip_documents'>
+	<dt>
+		<a type="application/zip" href="[(#GET{urlzip})]" title="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])">
+		<img src='[(#CHEMIN{prive/vignettes/zip.png}|sinon{#CHEMIN{vignettes/zip.png}})]' alt="<:zippeur:ensemble_fichier:> [(#GET{urlzip}|filesize|taille_en_octets)])" /></a>
+	</dt>
+	<dt class='spip_doc_titre'><strong>(<:zippeur:ensemble_fichier:> - [(#GET{urlzip}|filesize|taille_en_octets)])</strong></dt>
+</dl>
+</BOUCLE_date>
+</B_doc>
+
+

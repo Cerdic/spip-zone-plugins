@@ -2,7 +2,7 @@
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos fichiers</slogan>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
-	<version>3.0.3</version>
+	<version>3.1.0</version>
 	<version_base>0.5</version_base>
   	<categorie>multimedia</categorie>
    <etat>stable</etat>
@@ -14,6 +14,7 @@
 	<fonctions>zippeur_fonctions.php</fonctions>
 	<necessite id="spip" version="[2.0.0;2.1.99)" />
 	<necessite id='cfg' version='[1.10.0;]' />
+    <utilise nom="albums" />
 	<pipeline>
        <nom>declarer_tables_principales</nom>
        <inclure>zippeur_pipelines.php</inclure>
@@ -29,7 +30,7 @@
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos fichiers</slogan>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
-	<version>3.0.3</version>
+	<version>3.1.0</version>
 	<version_base>0.5</version_base>
   	<categorie>multimedia</categorie>
    <etat>stable</etat>
@@ -49,4 +50,5 @@
    	<options>zippeur_options.php</options>
 	<licence>GPL</licence>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
+    <utilise nom="albums" />
 </plugin>
