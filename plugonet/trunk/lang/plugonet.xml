@@ -1,10 +1,10 @@
 <traduction module="plugonet" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/plugonet/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=en" total="84" traduits="84" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=en" total="84" traduits="84" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=fr" total="84" traduits="84" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=fr" total="84" traduits="84" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=sk" total="84" traduits="84" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=sk" total="84" traduits="84" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
