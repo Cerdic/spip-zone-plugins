@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 {{USE}}
 
 - * This plugin adds the {{ # PUBBAN {banner name} }} to the skeleton, which is replaced by a frame encompassing the banner.
-- * A public page allows you to present the statistics of inserts and export them on \'.xls\' format.
+- * A public page allows you to present the statistics of inserts and export them on ’.xls’ format.
 
 {{DEFAULT VALUES}}
 
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 - * An explanation and a complete example is available in the documentation, you will also see the integration of banners in your skeletons. This documentation is available if the plugin is active on your site, on the public page "pubban_documentation."
 
-- * The statistics page of the plugin is a free adaptation of the script \'{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}\', developed by {{Vincent Roseberry}} ({GPL licensed at the time}).', # MODIF
+- * The statistics page of the plugin is a free adaptation of the script ’{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}’, developed by {{Vincent Roseberry}} ({GPL licensed at the time}).', # MODIF
 	'pubban_slogan' => ' Ads banners manager'
 );
 
