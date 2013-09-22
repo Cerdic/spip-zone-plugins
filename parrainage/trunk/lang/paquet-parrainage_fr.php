@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'parrainage_description' => 'Permet d\'importer des contacts puis d\'envoyer en masse des invitations à rejoindre le site. Si des personnes s\'inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).',
+	'parrainage_description' => 'Permet d’importer des contacts puis d’envoyer en masse des invitations à rejoindre le site. Si des personnes s’inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).',
 	'parrainage_slogan' => 'Proposer aux utilisateurs un outil de parrainage.'
 );
 
