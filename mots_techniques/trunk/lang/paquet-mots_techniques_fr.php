@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				techniques. Cependant, le critère <code>{tout}</code> permettra de renvoyer tous 
 				les mots clés et le critère <code>{technique=oui}</code> 
 				permet de sélectionner par type technique.',
-	'mots_techniques_slogan' => 'Ajoute une spécialisation «technique» aux groupes de mots clés.',
+	'mots_techniques_slogan' => 'Ajoute une spécialisation « technique » aux groupes de mots clés.',
 	'mots_techniques_titre' => 'Mots techniques'
 );
 
