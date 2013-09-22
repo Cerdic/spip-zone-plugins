@@ -1,0 +1,20 @@
+[(#REM) 
+	Surcharge du squelette de la dist :
+	liste des documents joints & portfolio affichés en bas d'un article.
+	On inclut le squelette "normal" puis on ajoute les albums.
+][
+
+(#REM) Documents joints & portfolio classiques
+]<INCLURE{fond=squelettes-dist/inclure/documents, env}>
+[
+
+(#REM) Albums liés à l'article et non insérés dans le texte
+]
+<B_albums>
+<div class="bloc clearfix" id="albums">
+<h2><:album:titre_albums:></h2>
+<BOUCLE_albums(ALBUMS){id_article}{vu=non}>
+[(#MODELE{album_liste, id_album})]
+</BOUCLE_albums>
+</div>
+</B_albums>
