@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alt_cover_fichier' => 'Document\'s logo',
+	'alt_cover_fichier' => 'Document’s logo',
 
 	// B
 	'bouton_ajouter_conversion' => 'Add a conversion',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_erreur_flash_mobile' => 'This media is available only via a flash reader. Your platform does not allow the installation of this software.',
 
 	// S
-	'statut_error' => 'Your browser doesn\'t seem to read this document.',
+	'statut_error' => 'Your browser doesn’t seem to read this document.',
 	'statut_error_broken' => 'The video seems unreadable.',
 	'statut_error_network' => 'Network problem, try again later.',
 	'statut_error_stopped' => 'The loading was stopped.',
