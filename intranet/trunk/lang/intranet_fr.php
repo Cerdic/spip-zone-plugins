@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_intranet' => 'Intranet/Extranet',
 
 	// E
-	'explications_message' => 'Message personnalisé à afficher au dessus du formulaire d\'identification.',
+	'explications_message' => 'Message personnalisé à afficher au dessus du formulaire d’identification.',
 	'explications_pages_intranet' => 'Ajouter certaines pages SPIP spécifiques accessibles sans être connectés (à séparer par des virgules ",").',
 
 	// I
 	'info_intranet' => 'Identification obligatoire',
-	'info_intranet_texte' => 'Ce site n\'est accessible qu\'aux personnes identifiées.',
+	'info_intranet_texte' => 'Ce site n’est accessible qu’aux personnes identifiées.',
 
 	// L
 	'label_message' => 'Personnalisation du message',
