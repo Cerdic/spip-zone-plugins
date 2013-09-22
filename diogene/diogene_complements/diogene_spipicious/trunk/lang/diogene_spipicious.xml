@@ -1,9 +1,9 @@
 <traduction module="diogene_spipicious" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_spipicious/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=en" total="5" traduits="5" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=en" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=es" total="5" traduits="5" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=es" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=fr" total="5" traduits="5" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/diogene_spipicious?lang_cible=fr" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
