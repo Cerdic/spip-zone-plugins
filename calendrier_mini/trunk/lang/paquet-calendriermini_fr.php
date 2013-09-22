@@ -7,9 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'calendriermini_description' => '#CALENDRIER_MINI affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce système de blog.
-_ Lui sont adjoints d\'autre éléments, tels que balises, critères, modèles...',
+_ Lui sont adjoints d’autre éléments, tels que balises, critères, modèles...',
 	'calendriermini_nom' => 'Mini Calendrier',
-	'calendriermini_slogan' => 'Permet l\'utilisation d\'une balise #CALENDRIER_MINI'
+	'calendriermini_slogan' => 'Permet l’utilisation d’une balise #CALENDRIER_MINI'
 );
 
 ?>
