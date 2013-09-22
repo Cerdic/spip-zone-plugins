@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_memcache_servers' => 'indicate a server line, as <kbd>host:port</kbd>',
 
 	// I
-	'info_taille_cache_inconnue' => '@methode@ method doesn\'t allow to know the size of the cache.',
+	'info_taille_cache_inconnue' => '@methode@ method doesn’t allow to know the size of the cache.',
 
 	// L
 	'label_cache_pages' => 'Manage the page cache',
