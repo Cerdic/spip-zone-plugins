@@ -34,21 +34,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lancer_test' => 'Iniciar el test!',
-	'lutte_spam' => 'Lluita contra l\'SPAM',
+	'lutte_spam' => 'Lluita contra l’SPAM',
 
 	// M
-	'maj_actu' => 'Forçar l\'actualització distant',
+	'maj_actu' => 'Forçar l’actualització distant',
 	'maj_liste' => 'Llista dels plugins detectats: ',
 	'maj_maj' => 'Actualitzar el plugin seleccionat', # MODIF
 	'maj_ok' => 'Aquest [plugin->@zip@] sembla [a dia->@url@].',
 	'maj_rev' => 'Rév. @revision@',
-	'maj_rev_ko' => 'La [revisió a distància->@url@] no s\'ha trobat.',
+	'maj_rev_ko' => 'La [revisió a distància->@url@] no s’ha trobat.',
 	'maj_rev_ok' => 'La revisió [@revision@->@url@] està [disponible->@zip@].',
-	'maj_spip' => 'Després d\'haver actualitzar tots els connectors amb precaució, és recomanable que actualitzeu el propi SPIP clicant a l\'enllaç que hi ha més amunt i seguint les instruccions que s\'hi donen.',
+	'maj_spip' => 'Després d’haver actualitzar tots els connectors amb precaució, és recomanable que actualitzeu el propi SPIP clicant a l’enllaç que hi ha més amunt i seguint les instruccions que s’hi donen.',
 	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
-	'maj_verif' => 'Verifiqueu prèviament l\'arxiu que us convé:',
-	'maj_verif2' => 'Atenció: després de clicar el botó que hi ha més amunt, verifiqueu bé que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
-	'maj_zip_ko' => 'No s\'ha pogut identificar el fitxer .zip distant.',
+	'maj_verif' => 'Verifiqueu prèviament l’arxiu que us convé:',
+	'maj_verif2' => 'Atenció: després de clicar el botó que hi ha més amunt, verifiqueu bé que l’arxiu descarregat correspongui al plugin que us calia actualitzar. ',
+	'maj_zip_ko' => 'No s’ha pogut identificar el fitxer .zip distant.',
 	'msg_publies' => 'Només els missatges publicats',
 
 	// N
@@ -82,11 +82,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Plugins inactius',
 	'plugin_xml' => 'Reuneix en un únic connector (plugin) una llista de petites noves funcionalitats i eines que milloren la gestió del vostre lloc SPIP.
 
-Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la pàgina d\'administració del connector->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: cliqueu damunt de {{Configuració}}, després escolliu la pestanya {{El Ganivet Suís}}.
+Cadascuna d’aquestes eines pot ser activada o no per l’usuari a [la pàgina d’administració del connector->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: cliqueu damunt de {{Configuració}}, després escolliu la pestanya {{El Ganivet Suís}}.
 
 Les categories disponibles són: Administració, Millores tipogràfiques, Dreceres tipogràfiques, Visualització pública, Etiquetes, filtres, criteris.
 
-Descobriu en aquest connector les vostres eines favorites: {Suprimir el número}, {Format dels URLs}, {Exponents tipogràfics}, {Cometes tipogràfiques}, {Bonics símbols gràfics}, {Lluita contra l\'SPAM}, {Encriptació del correu electrònic}, {Bonics URLs}, {SPIP i els enllaços... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en pàgines i pestanyes}, etc., etc.
+Descobriu en aquest connector les vostres eines favorites: {Suprimir el número}, {Format dels URLs}, {Exponents tipogràfics}, {Cometes tipogràfiques}, {Bonics símbols gràfics}, {Lluita contra l’SPAM}, {Encriptació del correu electrònic}, {Bonics URLs}, {SPIP i els enllaços... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en pàgines i pestanyes}, etc., etc.
 
 No dubteu a consultar els articles de la documentació del connector publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
@@ -105,7 +105,7 @@ Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
 	'pp_decoration_inserer_drop' => 'Aplicar al text una « decoració » persoalitzada',
 	'pp_decoupe_onglets' => 'Inserir un sistema de pestanyes',
 	'pp_decoupe_separateur' => 'Inserir un separador de la pàgina o de pestanya',
-	'pp_filets_inserer' => 'Inserir un filet de l\'estil « @filet@ »',
+	'pp_filets_inserer' => 'Inserir un filet de l’estil « @filet@ »',
 	'pp_filets_inserer_drop' => 'Inserir un filet de separació',
 	'pp_smileys_inserer' => 'Inserir una cara @smiley@',
 	'pp_un_titre' => 'Un títol',
@@ -132,8 +132,8 @@ Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
 
 	// U
 	'urls_propres_erreur' => 'Aquest format no té en compte els URLs propis llistats més avall. ',
-	'urls_propres_format' => 'L\'actual format dels URLs és: {{« @format@ »}}. [<span>[Configuració->@url@]</span>]',
-	'urls_propres_lien' => 'Enllaç públic d\'accés',
+	'urls_propres_format' => 'L’actual format dels URLs és: {{« @format@ »}}. [<span>[Configuració->@url@]</span>]',
+	'urls_propres_lien' => 'Enllaç públic d’accés',
 	'urls_propres_objet' => 'Aquí es llisten els URLs propis emmagatzemats a la base gràcies a les que els visitants podran navegar pel vostre lloc. ',
 	'urls_propres_titre' => 'URLS PRÒPIES',
 

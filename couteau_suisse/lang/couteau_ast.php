@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts' => '@objet@:',
 
 	// A
-	'attente_confirmation' => 'N\'espera de confirmación',
+	'attente_confirmation' => 'N’espera de confirmación',
 
 	// C
 	'configurer' => 'Configurar la Navaya Suiza',
@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniers_connectes' => 'Caberos coneutáos:',
 
 	// E
-	'explique_spam' => 'Atención: usaste etiquetes, carauteres o pallabres torgaos.<br /><br />¡Vuelve p\'atrás!',
+	'explique_spam' => 'Atención: usaste etiquetes, carauteres o pallabres torgaos.<br /><br />¡Vuelve p’atrás!',
 
 	// L
-	'lutte_spam' => 'Llucha escontra\'l SPAM',
+	'lutte_spam' => 'Llucha escontra’l SPAM',
 
 	// N
 	'nom_forum' => '¡Ties que poner el to nome!',
@@ -55,11 +55,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Páxina siguiente',
 	'plugin_xml' => 'Xunta nun solu plugin una llista de pequeñes funciones nueves y ferramientes pa meyorar la xestión del to sitiu SPIP.
 
-Cauna d\'estes ferramientes puede activase o non pol usuariu so [la páxina d\'alministración del plugin->./?exec=admin_couteau_suisse] y xestionar ciertu númberu de variables: calcar en {{Configuración}}, llueu escoyer la llingüeta {{La Navaya Suiza}}.
+Cauna d’estes ferramientes puede activase o non pol usuariu so [la páxina d’alministración del plugin->./?exec=admin_couteau_suisse] y xestionar ciertu númberu de variables: calcar en {{Configuración}}, llueu escoyer la llingüeta {{La Navaya Suiza}}.
 
 Les categoríes disponibles son: Alministración, Meyores tipográfiques, Atayos tipográficos, Aspeutu públicu, Balices, filtros, criterios.
 
-Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l númberu}, {Formatu de les URLs}, {Esponentes tipográficos}, {Comines tipográfiques}, {Marques de llista guapes}, {Llucha escontra la Puxarra}, {Mailcrypt}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Caruques}, {Un sumariu pa los tos artículos}, {Divide en páxines y llingüetes}, etc., etc.
+Descubre nesti plugin les tos ferramientes favorites: {Suprime’l númberu}, {Formatu de les URLs}, {Esponentes tipográficos}, {Comines tipográfiques}, {Marques de llista guapes}, {Llucha escontra la Puxarra}, {Mailcrypt}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Caruques}, {Un sumariu pa los tos artículos}, {Divide en páxines y llingüetes}, etc., etc.
 
 Si quies consultar los artículos de la documentación del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
@@ -84,7 +84,7 @@ Compatibilidá: SPIP v1.9x y v2.0', # MODIF
 	// U
 	'urls_propres_erreur' => 'Esti formatu nun tien en cuenta les URLs propies llistáes embaxo.',
 	'urls_propres_format' => 'El formatu actual de les URLs ye: {{« @format@ »}}. [<span>[Axuste->@url@]</span>]',
-	'urls_propres_lien' => 'Enllaz públicu d\'accesu',
+	'urls_propres_lien' => 'Enllaz públicu d’accesu',
 	'urls_propres_objet' => 'Equí llístense les URLs propies guardáes na base gracies a le cuales les visites van poder ñavegar pol to sitiu.',
 	'urls_propres_titre' => 'URLS PROPIES',
 

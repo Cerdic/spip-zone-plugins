@@ -22,14 +22,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'derniers_connectes' => 'Ultimi connessi:',
 
 	// E
-	'email_forum' => 'Si prega di inserire l\'indirizzo email!',
+	'email_forum' => 'Si prega di inserire l’indirizzo email!',
 	'explique_spam' => 'Attenzione: hai utilizzato dei tag, dei catarreti o delle parole vietate.<br /><br />Riprova!',
 
 	// L
 	'lutte_spam' => 'Lotta contro lo SPAM',
 
 	// M
-	'maj_actu' => 'Forza l\'aggiornamento', # MODIF
+	'maj_actu' => 'Forza l’aggiornamento', # MODIF
 	'maj_liste' => 'Elenco dei plugin rilevati:',
 	'maj_maj' => 'Aggiorna il plugin selezionato', # MODIF
 	'maj_ok' => 'Questo [plugin->@zip@] sembra [aggiornato->@url@].',
@@ -37,11 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev_ko' => 'La [revisione remota->@url@] non è stata trovata.',
 	'maj_rev_ok' => 'La revisione [@revision@->@url@] è [disponibile->@zip@].',
 	'maj_svn' => 'Questo plugin SVN sembra [aggiornato->@url@].',
-	'maj_verif' => 'Verifica prima l\'archivio:',
-	'maj_verif2' => 'Attenzione: dopo aver cliccato sul tasto qui in basso, verifica attentamente che l\'archivio scaricato corrisponda al plugin da aggiornare.',
+	'maj_verif' => 'Verifica prima l’archivio:',
+	'maj_verif2' => 'Attenzione: dopo aver cliccato sul tasto qui in basso, verifica attentamente che l’archivio scaricato corrisponda al plugin da aggiornare.',
 
 	// N
-	'nom_email_forum' => 'Si prega di inserire il nome o l\'indirizzo email!',
+	'nom_email_forum' => 'Si prega di inserire il nome o l’indirizzo email!',
 	'nom_forum' => 'Si prega di inserire il nome!',
 	'non_confirmes' => 'Non confermati:',
 
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Plugins non attivi',
 	'plugin_xml' => 'Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
 
-Ciascuna di queste funzioni può essere attivata o meno dall\'utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
+Ciascuna di queste funzioni può essere attivata o meno dall’utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
 
 Le categorie disponibili sono:Amministrazione, Miglioramenti tipografici, Scorciatoie tipografiche, Visualizzazione del sito pubblico, Segnaposti, filtri, criteri.
 

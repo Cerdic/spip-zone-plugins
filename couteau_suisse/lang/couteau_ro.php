@@ -70,7 +70,7 @@ Compatibilitate : SPIP 1.9x şi v2.0', # MODIF
 	'sommaire_page' => ', p@page@',
 	'sommaire_page_long' => ', page @page@',
 	'sommaire_titre' => 'Sumar',
-	'stats_auteur' => '@icon@ @nom@,  @date@',
+	'stats_auteur' => '@icon@ @nom@, @date@',
 	'stats_date' => '@jour@/@mois@/@annee@ la @h@h@m@',
 
 	// T
