@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_aucun_tags' => 'No tag associated',
 
 	// N
-	'no_tags_associes' => 'You don\'t have any tag associated',
+	'no_tags_associes' => 'You don’t have any tag associated',
 	'nom_groupe_tag' => 'Keyword group associated',
 
 	// T
