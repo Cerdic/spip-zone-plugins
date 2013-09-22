@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'non_localisable' => 'Not localizable',
-	'non_localisable_case' => 'This media can\'t be geolocated',
+	'non_localisable_case' => 'This media can’t be geolocated',
 
 	// R
 	'recherche' => 'Search',
