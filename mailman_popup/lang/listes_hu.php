@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 A cim <@var_email@> lett törölve a listából @liste@.
 
-En cas de problème, ou si vous n\'avez pas demandé ce désabonnement,
+En cas de problème, ou si vous n’avez pas demandé ce désabonnement,
 veuillez écrire à <@responsable@>.
 
 Au revoir, et merci.

@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajoutee' => '@liste@: آدرس ايميل &lt;@var_email@&gt; به ليست اضافه شد',
 
 	// C
-	'confirm' => '@var_email@   : يك درخواست تأئيد به آدرس
+	'confirm' => '@var_email@ : يك درخواست تأئيد به آدرس
 زير فرستاده شده',
 
 	// D

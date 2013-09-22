@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'indirizzo &lt;@var_email@&gt; sarà aggiunto all\'elenco &lt;@liste@&gt; dopo essere stato verificato. Rispondere al messaggio di conferma che vi verrà inviato, per favore.',
+	'ajoutee' => 'L’indirizzo &lt;@var_email@&gt; sarà aggiunto all’elenco &lt;@liste@&gt; dopo essere stato verificato. Rispondere al messaggio di conferma che vi verrà inviato, per favore.',
 
 	// C
 	'confirm' => 'La richiesta di conferma è stata inviata a &lt;@var_email@&gt;.',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_removed' => '
 
-L\'indirizzo <@var_email@> è stato cancellato dalla lista @liste@.
+L’indirizzo <@var_email@> è stato cancellato dalla lista @liste@.
 
 In caso di problemi, oppure se tale cancellazione non è stata richiesta,
 scrivere a <@responsable@>.
@@ -36,7 +36,7 @@ Grazie.
 	'merci' => 'Grazie.',
 
 	// P
-	'pasabo' => 'L\'indirizzo <@var_email@> non risulta abbonato alla lista <@liste@>.',
+	'pasabo' => 'L’indirizzo <@var_email@> non risulta abbonato alla lista <@liste@>.',
 	'patientez' => 'Attendere prego...',
 
 	// Q

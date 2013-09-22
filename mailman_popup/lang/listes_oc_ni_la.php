@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adreiça &lt;@var_email@&gt; s\'apondrà a la lista &lt;@liste@&gt; après verificacion. Mercé de respòndre au messatge que venèm de vos mandar.',
+	'ajoutee' => 'L’adreiça &lt;@var_email@&gt; s’apondrà a la lista &lt;@liste@&gt; après verificacion. Mercé de respòndre au messatge que venèm de vos mandar.',
 
 	// C
-	'confirm' => 'Una demanda de confirmacion s\'es adreiçada a &lt;@var_email@&gt;.',
+	'confirm' => 'Una demanda de confirmacion s’es adreiçada a &lt;@var_email@&gt;.',
 
 	// D
 	'deja' => '&lt;@var_email@&gt; : ja siatz inscrich(a) a la lista &lt;@liste@&gt;.',
@@ -26,9 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_removed' => '
 
-L\'adreiça <@var_email@> es estada suprimida de la lista @liste@.
+L’adreiça <@var_email@> es estada suprimida de la lista @liste@.
 
-En cas de problèma, ò se non demandat minga d\'abonament,
+En cas de problèma, ò se non demandat minga d’abonament,
 vorgatz escriure a <@responsable@>.
 
 Adieu-siatz e mercé.
@@ -36,14 +36,14 @@ Adieu-siatz e mercé.
 	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adreiça &lt;@var_email@&gt; non es abonada a la lista &lt;@liste@&gt;.',
+	'pasabo' => 'L’adreiça &lt;@var_email@&gt; non es abonada a la lista &lt;@liste@&gt;.',
 	'patientez' => 'Mercé de pacientar...',
 
 	// Q
 	'quitter' => 'Desabonament',
 
 	// S
-	'subject_removed' => 'S\'es suprimit la vòstra adreiça de la lista @liste@.',
+	'subject_removed' => 'S’es suprimit la vòstra adreiça de la lista @liste@.',
 
 	// T
 	'titrefenetre' => 'Inscripcion',

@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'D\'Adress &lt;@var_email@&gt; gëtt op d\'Lëscht &lt;@liste@&gt; no enger Kontroll abonnéiert. Äntwert weg op de Message deen Iech geschéckt ginn ass.',
+	'ajoutee' => 'D’Adress &lt;@var_email@&gt; gëtt op d’Lëscht &lt;@liste@&gt; no enger Kontroll abonnéiert. Äntwert weg op de Message deen Iech geschéckt ginn ass.',
 
 	// C
-	'confirm' => 'Eng Konfirmatiouns-Demande ass un d\'Adress &lt;@var_email@&gt; geschéckt ginn.',
+	'confirm' => 'Eng Konfirmatiouns-Demande ass un d’Adress &lt;@var_email@&gt; geschéckt ginn.',
 
 	// D
 	'deja' => '&lt;@var_email@&gt; : dir sidd schon un der Lëscht &lt;@liste@&gt; abonnéiert.',
@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'zoumaachen',
 
 	// I
-	'inscription' => 'Aschreiwung op d\'Lëscht &lt;@liste@&gt;',
+	'inscription' => 'Aschreiwung op d’Lëscht &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-D\'Adress <@var_email@> ass vun der Lëscht @liste@ geläscht ginn.
+D’Adress <@var_email@> ass vun der Lëscht @liste@ geläscht ginn.
 
 Wann dat e Problem ass oder wann dier dës Annulatioun nët gefrot hut,
 schreiwt weg un <@responsable@>.
@@ -36,7 +36,7 @@ Au revoir a merci.
 	'merci' => 'Merci.',
 
 	// P
-	'pasabo' => 'D\'Adress &lt;@var_email@&gt; ass nët un der Lëscht &lt;@liste@&gt; abonnéiert.',
+	'pasabo' => 'D’Adress &lt;@var_email@&gt; ass nët un der Lëscht &lt;@liste@&gt; abonnéiert.',
 	'patientez' => 'Waart weg...',
 
 	// Q

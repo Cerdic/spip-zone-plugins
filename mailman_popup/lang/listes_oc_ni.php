@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adreça &lt;@var_email@&gt; serà ajustada à la tièra &lt;@liste@&gt; après verificacion. Mercé de respoandre au messatge que vene de v\'èstre mandat.',
+	'ajoutee' => 'L’adreça &lt;@var_email@&gt; serà ajustada à la tièra &lt;@liste@&gt; après verificacion. Mercé de respoandre au messatge que vene de v’èstre mandat.',
 
 	// C
 	'confirm' => 'Une demanda de confirmacion es estada mandada à &lt;@var_email@&gt;.',
@@ -26,9 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_removed' => '
 
-L\'adreça &lt;@var_email@&gt; es estada suprimida de la tièra @liste@.
+L’adreça &lt;@var_email@&gt; es estada suprimida de la tièra @liste@.
 
-En cas de problema, ò s\'avetz pas demandat aquest desabonament,
+En cas de problema, ò s’avetz pas demandat aquest desabonament,
 vorgatz escriure à &lt;@responsable@&gt;.
 
 À ben lèu, e mercé.
@@ -36,7 +36,7 @@ vorgatz escriure à &lt;@responsable@&gt;.
 	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adreça &lt;@var_email@&gt; es pas abonada à la tièra &lt;@liste@&gt;.',
+	'pasabo' => 'L’adreça &lt;@var_email@&gt; es pas abonada à la tièra &lt;@liste@&gt;.',
 	'patientez' => 'Vorgatz esperar...',
 
 	// Q

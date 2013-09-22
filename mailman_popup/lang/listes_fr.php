@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adresse &lt;@var_email@&gt; sera ajoutée à la liste &lt;@liste@&gt; après vérification. Merci de répondre au message qui vient de vous être envoyé.',
+	'ajoutee' => 'L’adresse &lt;@var_email@&gt; sera ajoutée à la liste &lt;@liste@&gt; après vérification. Merci de répondre au message qui vient de vous être envoyé.',
 
 	// C
 	'confirm' => 'Une demande de confirmation a été adressée à &lt;@var_email@&gt;.',
@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_removed' => '
 
-L\'adresse <@var_email@> a été supprimée de la liste @liste@.
+L’adresse <@var_email@> a été supprimée de la liste @liste@.
 
-En cas de problème, ou si vous n\'avez pas demandé ce désabonnement,
+En cas de problème, ou si vous n’avez pas demandé ce désabonnement,
 veuillez écrire à <@responsable@>.
 
 Au revoir, et merci.
@@ -34,7 +34,7 @@ Au revoir, et merci.
 	'merci' => 'Merci.',
 
 	// P
-	'pasabo' => 'L\'adresse &lt;@var_email@&gt; n\'est pas abonnée à la liste &lt;@liste@&gt;.',
+	'pasabo' => 'L’adresse &lt;@var_email@&gt; n’est pas abonnée à la liste &lt;@liste@&gt;.',
 	'patientez' => 'Veuillez patienter...',
 
 	// Q
