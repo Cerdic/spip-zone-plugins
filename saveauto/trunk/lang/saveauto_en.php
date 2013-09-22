@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_notif_mail' => 'Enter addresses separated by commas ",". These addresses are added to the one of the webmaster.',
 	'help_obsolete' => 'Enter the storage life of the backups in days',
 	'help_prefixe' => 'Enter a prefix added to the name of each  backup file',
-	'help_restauration' => '<strong>Warning !!!</strong> the backups made are <strong>not in SPIP format</strong> and can\'t be used with the restore tool of the database from SPIP.<br /><br />
+	'help_restauration' => '<strong>Warning !!!</strong> the backups made are <strong>not in SPIP format</strong> and can’t be used with the restore tool of the database from SPIP.<br /><br />
 
 For restoration, you must use the <strong>phpmyadmin</strong> interface of your database server.<br /><br />
 

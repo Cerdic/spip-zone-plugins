@@ -1,15 +1,13 @@
 <traduction module="saveauto" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/trunk/lang/" reference="fr">
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=ca" total="65" traduits="18" modifs="17" nouveaux="30" pourcent="27.69">
-	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="65" traduits="65" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="99" traduits="65" relire="0" modifs="0" nouveaux="34" pourcent="65.66">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=en" total="65" traduits="65" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=en" total="99" traduits="65" relire="0" modifs="0" nouveaux="34" pourcent="65.66">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=fr" total="65" traduits="65" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=fr" total="99" traduits="65" relire="0" modifs="0" nouveaux="34" pourcent="65.66">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=sk" total="65" traduits="65" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=sk" total="99" traduits="65" relire="0" modifs="0" nouveaux="34" pourcent="65.66">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
