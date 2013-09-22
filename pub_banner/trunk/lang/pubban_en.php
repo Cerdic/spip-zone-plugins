@@ -48,10 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'clics' => 'Hits',
 	'clics_txt' => 'Hit(s)',
 	'code_pub' => 'code or address of the object to display',
-	'comment_code_pub' => '<em>For advertising such as type \\ "image \\" or \\ swf \', you must indicate here the url address of this image. For a flash object, you must specify the complete code ...</em>',
-	'comment_dates' => 'Note the dates as \'YYYY-MM-DD\'',
+	'comment_code_pub' => '<em>For advertising such as type \\ "image \\" or \\ swf ’, you must indicate here the url address of this image. For a flash object, you must specify the complete code ...</em>',
+	'comment_dates' => 'Note the dates as ’YYYY-MM-DD’',
 	'comment_illimite' => '<em>Views and unlimited clicks ; you can specify a start date or an end one for the period display.</em>',
-	'comment_multiple_empl' => ' can select multiple banners by using \'SHIFT KEY.\' on your keyboard.',
+	'comment_multiple_empl' => ' can select multiple banners by using ’SHIFT KEY.’ on your keyboard.',
 	'comment_ratio' => '(number of clicks / number of displays)',
 	'comment_url_optionnel' => 'You can leave this field blank, clicking on the ad will then return to the page to purchase advertising space.',
 	'confirm_delete' => 'Warning: you requested to put an advertisement in the trash ...\\n\\nPress OK to confirm:',
@@ -100,7 +100,7 @@ These banners fit in your skeletons simply stating the tag:
 #PUBBAN{id_banner}
 </cadre>
 Followed by the name of the banner you want to display. The tag is replaced by a frame with the size of the banner.',
-	'documentation_2' => 'For a practical reason [[Spip Bonux is used by Banner Pub for its functionality \'POUR\', that creates loops from the PHP array (Editor\'s note) ...]], the plugin "Ad Banner" requires you have previously installed the plugin {{Spip Bonux}} in version 1.3 minimum.
+	'documentation_2' => 'For a practical reason [[Spip Bonux is used by Banner Pub for its functionality ’POUR’, that creates loops from the PHP array (Editor’s note) ...]], the plugin "Ad Banner" requires you have previously installed the plugin {{Spip Bonux}} in version 1.3 minimum.
 
 -* You can read a description of this plugin on the site Spip-Contrib : [->http://www.spip-contrib.net/SPIP-Bonux].
 -* You can download it here : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({here in version 2}).
@@ -119,13 +119,13 @@ Followed by the name of the banner you want to display. The tag is replaced by a
 	'edit_pub_ok_bannieres_differents' => 'OK - values ​​recorded but the selected advertising banners have different sizes ... This may generate display errors.',
 	'empl_is' => 'This banner is',
 	'en_pixels' => '<em>(in pixels)</em>',
-	'en_pourcent' => '<em>(in %)</em>',
+	'en_pourcent' => '<em>(in %)</em>',
 	'en_secondes' => '<em>(in secondes)</em>',
 	'erreur_code' => 'Please enter the code of advertising',
-	'erreur_empl' => 'You didn\'t chose any banner for your advertising...',
-	'erreur_img_not_img' => 'L\'url does not seem to capture an image ...',
+	'erreur_empl' => 'You didn’t chose any banner for your advertising...',
+	'erreur_img_not_img' => 'L’url does not seem to capture an image ...',
 	'erreur_img_not_url' => 'The web address entry is inaccessible ... ...',
-	'erreur_nb_aff' => 'You didn\'t precise the number of display ...',
+	'erreur_nb_aff' => 'You didn’t precise the number of display ...',
 	'erreur_titre' => 'You must specify a title for your advertising (<em>it will appear on mouseover</em>)',
 	'erreur_url' => 'You must specify a URL redirection for your advertising',
 	'erreur_url_no_response' => 'The address entered does not respond ... Are you sure that it is valid ?',
@@ -268,7 +268,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	// L
 	'leaderboard_banner' => 'Banner "Leaderboard"',
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] licensed under [Creative Commons BY-SA|Creative Commons - Paternite - Identical distribution ->http://creativecommons.org/licenses/by-sa/3.0/].',
-	'licence_stats' => '{{LICENSES :}}<br />{{\'wz_jsgraphics.js\'}} :: v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{\'graph.js\', \'line.js\' & \'pie.js\'}} :: (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
+	'licence_stats' => '{{LICENSES :}}<br />{{’wz_jsgraphics.js’}} :: v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{’graph.js’, ’line.js’ & ’pie.js’}} :: (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
 	'lien_page' => 'View the page',
 	'list_empl' => 'List of banners',
 	'liste_pub' => 'List of ads',
@@ -288,15 +288,15 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'nb_pub_inactives' => 'Inactive ones',
 	'nb_pub_obsoletes' => 'Obsoletesones ',
 	'new_window' => 'New Window',
-	'no_clic_for_emp' => 'Some locations are not shown in the graph because it doesn\'t have any click in the selected period.',
+	'no_clic_for_emp' => 'Some locations are not shown in the graph because it doesn’t have any click in the selected period.',
 	'no_clic_in_period' => 'There was no click in the selected period.',
-	'no_datas_yet' => 'There \' s not yet usable statistic ...',
+	'no_datas_yet' => 'There ’ s not yet usable statistic ...',
 	'no_empl_found' => 'Banner not found ...',
-	'no_empl_yet' => 'There \' s not yet a configured banner ...',
+	'no_empl_yet' => 'There ’ s not yet a configured banner ...',
 	'no_limit' => 'unlimited',
-	'no_pub_active_yet' => 'There \' s not yet an activated advertising ...',
+	'no_pub_active_yet' => 'There ’ s not yet an activated advertising ...',
 	'no_pub_found' => 'Advertising not found ...',
-	'no_pub_yet' => 'There \' s not yet registered advertising ...',
+	'no_pub_yet' => 'There ’ s not yet registered advertising ...',
 	'no_results_match' => 'No entries match your search.',
 	'non' => 'No',
 	'nouveau_empl' => 'Create a new banner',
@@ -313,7 +313,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	// P
 	'page_infos' => 'Advice and information',
 	'page_stats' => 'Statistics page',
-	'pas_banniere_selectionne' => 'You didn\'t select any banner ...',
+	'pas_banniere_selectionne' => 'You didn’t select any banner ...',
 	'perf_empl' => 'Banners performance',
 	'period' => 'Period from ',
 	'plugin_spip' => 'A plugin for <b>SPIP 2.0+</b>', # MODIF
@@ -331,7 +331,10 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'pubban_stats_banner' => 'Banners statistics',
 	'pubban_stats_pub' => 'Ads statistics',
 	'pubban_titre' => 'Banners',
+	'publicite_0' => '0 adverts',
+	'publicite_1' => '1 advert',
 	'publicite_apercu' => 'Ad overview',
+	'publicites' => '@nb@ adverts',
 
 	// R
 	'ratio' => 'Ratio (clicks / views)',
