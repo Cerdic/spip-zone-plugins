@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_mots_cles_techniques' => 'Les mots-clés de ce groupe seront cachés par défaut dans l\'espace public ?',
+	'bouton_mots_cles_techniques' => 'Les mots-clés de ce groupe seront cachés par défaut dans l’espace public ?',
 
 	// I
 	'info_mots_cles_techniques' => 'Groupe de mots-clés techniques : '
