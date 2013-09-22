@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => 'Artículos qu\'usen esta tabla',
+	'articles_utilisant' => 'Artículos qu’usen esta tabla',
 	'aucune_reponse' => 'Dengún datu',
 
 	// C
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_supprimer_formulaire_reponses' => 'Hai datos asociaos con esta tabla. ¿De verdá quies desaniciala?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Quitar l\'enllaz d\'esti datu',
+	'lien_retirer_donnee_liante' => 'Quitar l’enllaz d’esti datu',
 	'lien_retirer_donnee_liee' => 'Desaniciar esti datu',
 
 	// N
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger_reponses' => 'Descargar los datos',
-	'texte_donnee_statut' => 'Estáu d\'esti datu',
+	'texte_donnee_statut' => 'Estáu d’esti datu',
 	'texte_statut_poubelle' => 'Datu desaniciáu',
 	'texte_statut_prepa' => 'Datu en cursu de redaición',
 	'texte_statut_prop' => 'Datu propuestu',

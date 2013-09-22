@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_supprimer_formulaire_reponses' => 'Hi ha dades associades a aquesta taula. Realment la voleu suprimir?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Treure l\'enllaç des d\'aquesta dada',
+	'lien_retirer_donnee_liante' => 'Treure l’enllaç des d’aquesta dada',
 	'lien_retirer_donnee_liee' => 'Treure aquesta dada',
 
 	// N
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger_reponses' => 'Baixeu les dades',
-	'texte_donnee_statut' => 'Estat d\'aquesta dada',
+	'texte_donnee_statut' => 'Estat d’aquesta dada',
 	'texte_statut_poubelle' => 'Dada suprimida',
 	'texte_statut_prepa' => 'Dada en curs de redacció',
 	'texte_statut_prop' => 'Dada proposada',

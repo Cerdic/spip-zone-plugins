@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ajouter_donnees' => 'Ajouter des données',
 	'icone_creer_table' => 'Créer une nouvelle table',
 	'importer_donnees_csv' => 'Importer des données',
-	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer cette table ?',
-	'info_supprimer_formulaire_reponses' => 'Des données sont associées à cette table. Voulez-vous vraiment la supprimer ?',
+	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer cette table ?',
+	'info_supprimer_formulaire_reponses' => 'Des données sont associées à cette table. Voulez-vous vraiment la supprimer ?',
 
 	// L
 	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette donnée',
