@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'saisies_description' => 'Ce plugin permet de faciliter l\'écriture de champs de formulaires en proposant une
+	'saisies_description' => 'Ce plugin permet de faciliter l’écriture de champs de formulaires en proposant une
 		balise #SAISIE. Le HTML généré est compatible avec la nomenclature des formulaires
 		proposée par SPIP > 2.0 et avec le plugin de configuration CFG.',
 	'saisies_nom' => 'Saisies pour formulaires',
