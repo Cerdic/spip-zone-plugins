@@ -1,25 +1,25 @@
 <traduction module="palette" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/palette/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/palette?lang_cible=ast" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/palette?lang_cible=ast" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/palette?lang_cible=ca" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/palette?lang_cible=ca" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/palette?lang_cible=de" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/palette?lang_cible=de" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/palette?lang_cible=en" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/palette?lang_cible=en" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/palette?lang_cible=es" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/palette?lang_cible=es" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fa" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fa" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fr" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fr_tu" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/palette?lang_cible=fr_tu" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/palette?lang_cible=sk" total="7" traduits="7" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/palette?lang_cible=sk" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
