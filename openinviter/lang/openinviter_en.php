@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_email_label' => 'Your email @fournisseur@',
-	'champ_password_explication' => 'It won\'t be stored.',
+	'champ_password_explication' => 'It won’t be stored.',
 	'champ_password_label' => 'Password',
 
 	// E

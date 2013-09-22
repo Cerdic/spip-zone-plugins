@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_password_label' => 'Mot de passe',
 
 	// E
-	'erreur_authentification' => 'L\'authentification a échoué. Vérifiez l\'adresse et le mot de passe et réessayez.',
+	'erreur_authentification' => 'L’authentification a échoué. Vérifiez l’adresse et le mot de passe et réessayez.',
 	'erreur_generale' => 'Une erreur interne empêche la récupération de vos contacts.'
 );
 
