@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_simplog' => 'Cette page permet de visualiser simplement les journaux contenus dans les répertoires de SPIP.',
 
 	// F
-	'fichier' => 'Fichier « @fichier@ »',
+	'fichier' => 'Fichier « @fichier@ »',
 
 	// I
 	'info_hit_pri' => 'Privé',
