@@ -1,12 +1,12 @@
 <traduction module="parrainage" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/parrainage/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=en" total="51" traduits="51" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=en" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=fr" total="51" traduits="51" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=fr" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=sk" total="51" traduits="51" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/parrainage?lang_cible=sk" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
