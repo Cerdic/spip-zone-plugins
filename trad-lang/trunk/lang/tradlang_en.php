@@ -224,7 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' to ',
 	'lien_traduire_suivant_str_module' => 'Translate the next untranslated string of the module "@module@"',
-	'lien_trier_langue_non' => 'Show the global state of translations.', # MODIF
+	'lien_trier_langue_non' => 'Show the global state of translations',
 	'lien_utiliser_google_translate' => 'Use this version',
 	'lien_voir_bilan_lang' => 'Display the state of the language @langue_longue@ (@lang@)',
 	'lien_voir_bilan_module' => 'Display the translation state of module @nom_mod@ - @module@',
@@ -275,8 +275,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'This plugin allows you to manage the language files',
 
 	// S
-	'str_status_modif' => 'Edited (MODIF)', # MODIF
-	'str_status_new' => 'New (NEW)', # MODIF
+	'str_status_modif' => 'Edited',
+	'str_status_new' => 'New',
 	'str_status_traduit' => 'Translated',
 
 	// T
