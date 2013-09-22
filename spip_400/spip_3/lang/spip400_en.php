@@ -33,15 +33,15 @@ Finally, many websites have one or several spaces reserved for their administrat
 	'backtrace' => 'PHP Backtrace',
 
 	// C
-	'cfg_comment_email' => 'Use the form below to select the email addresses of sender and receiver for error reports ({these reports are sent when the user clicks the button in question - by default, webmaster\'s email is used}).',
+	'cfg_comment_email' => 'Use the form below to select the email addresses of sender and receiver for error reports ({these reports are sent when the user clicks the button in question - by default, webmaster’s email is used}).',
 	'cfg_descr' => 'Here you can set some options of the "HTTP 400 Error Management" plugin.',
 	'cfg_label_receipt_email' => 'Email address of recipient reports error',
 	'cfg_label_sender_email' => 'Email address of sender reports error',
 	'cfg_label_titre' => 'Setup of HTTP 400 Error Management',
 
 	// E
-	'email_webmestre' => 'Webmaster\'s email',
-	'email_webmestre_ttl' => 'Webmaster\'s email auto-insertion',
+	'email_webmestre' => 'Webmaster’s email',
+	'email_webmestre_ttl' => 'Webmaster’s email auto-insertion',
 
 	// H
 	'http_headers' => 'HTTP Headers',
