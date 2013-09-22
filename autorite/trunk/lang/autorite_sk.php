@@ -44,13 +44,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_2' => '<p>Ak chcete upraviť tento zoznam, upravte, prosím, súbor <tt>config/mes_options.php</tt> (ak treba, vytvorte ho) a zadajte zoznam prihlasovacích údajov webmasterov v tejto podobe:</p>
 <pre>&lt;?php
   define (
-  \'_ID_WEBMESTRES\',
-  \'1:5:8\');
+  ’_ID_WEBMESTRES’,
+  ’1:5:8’);
 ?&gt;</pre>
 <p>Počnúc verziou 2.1 sa práva webmastera dajú administrátorovi prideliť na stránke na úpravu údajov o autorovi.</p>
 <p>Poznámka: webmasteri definovaní týmto spôsobom už viac nemusia overovať svoju totožnosť cez FTP pri vykonávaní zásadných operácií (napríklad pri aktualizácii databázy na novú verziu).</p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
+<a href=’http://www.spip-contrib.net/-Autorite-’ class=’spip_out’>Prečítajte si dokumentáciu</a>
 ',
 	'details_option_auteur' => '<small><br />Nateraz možnosť "autor" funguje iba pre zaregistrovaných autorov (napríklad diskusné fóra, na ktoré sa treba prihlásiť). A ak je táto možnosť aktivovaná, možnosť upravovať diskusné fóra majú aj administrátori stránky.
 	</small>',

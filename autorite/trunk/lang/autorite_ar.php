@@ -44,12 +44,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_2' => '<hr />
 <p><small>إذا كنت تريد تغيير هذه القائمة، الرجاء تحرير الملف config/mes_options.php (أمشاءه إذا لم يكن موجوداً) وتحديد قائمة معرفات المشرفين، على النحو التالي:</small></p>
 <html><pre>&lt;?php
-  define (\'_ID_WEBMESTRES\',
-  \'1:5:8\');
+  define (’_ID_WEBMESTRES’,
+  ’1:5:8’);
 ?&gt;</pre></html>
 <p><small>ملاحظة : لا يعود المشرفون المحددون بهذه الطريقة يحتاجون إلى التعريف عن نفسهم بواسطة FTP لتنفيذ العمليات الحساسة (كترقية قاعدة البيانات، مثلاً).</small></p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>انظر التعليمات</a>
+<a href=’http://www.spip-contrib.net/-Autorite-’ class=’spip_out’>انظر التعليمات</a>
 ',
 	'details_option_auteur' => '<small><br />حالياًو لا يعمل خيار «المؤلف» الا للمؤلفين المسجلين (منتديات بالاستراك مثلاً). واذا تم تفعيل الخيار، يتمكن مدراء الموقع أيضاً من تحرير المنتديات.
 	</small>',
