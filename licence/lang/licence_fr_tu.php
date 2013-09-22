@@ -16,12 +16,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'description_art_libre' => 'licence Art libre', # MODIF
 	'description_cc_by' => 'Creative Commons - Paternité', # MODIF
-	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale', # MODIF
-	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification', # MODIF
-	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Partage des Conditions Initiales à l\'Identique', # MODIF
+	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale', # MODIF
+	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale Pas de Modification', # MODIF
+	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale Partage des Conditions Initiales à l’Identique', # MODIF
 	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification', # MODIF
-	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l\'Identique', # MODIF
-	'description_copyright' => '© copyright auteur de l\'article',
+	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l’Identique', # MODIF
+	'description_copyright' => '© copyright auteur de l’article',
 	'description_gpl' => 'licence GPL', # MODIF
 
 	// L

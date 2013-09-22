@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Reconeixement No ús comercial Compartir amb les mateixes condicions inicials i amb llicència idèntica', # MODIF
 	'description_cc_by_nd' => 'Creative Commons - Reconeixement sense modificació', # MODIF
 	'description_cc_by_sa' => 'Creative Commons - Reconeixement Compartir amb les mateixes condicions inicials i llicència idèntica', # MODIF
-	'description_copyright' => '© copyright autor de l\'article',
+	'description_copyright' => '© copyright autor de l’article',
 	'description_gpl' => 'llicència GPL', # MODIF
 
 	// L

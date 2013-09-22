@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions',
 	'description_cc_by_nd' => 'Creative Commons - Attribution - Pas de Modification ',
 	'description_cc_by_sa' => 'Creative Commons - Attribution - Partage dans les Mêmes Conditions',
-	'description_copyright' => '© copyright auteur de l\'article',
+	'description_copyright' => '© copyright auteur de l’article',
 	'description_gfdl' => 'Licence de documentation libre GNU',
 	'description_gpl' => 'Licence GNU/GPL',
 	'description_wtfpl' => 'Licence Publique Rien À Branler',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
-	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?',
+	'noisette_cacher_defaut' => 'Cacher lorsque la licence n’est pas spécifiée ?',
 	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels) :',
 	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels) :',
 	'noisette_lien' => 'Afficher le lien vers la description de la licence ?',
