@@ -17,7 +17,7 @@ function trad_rub_header_prive($flux){
 /*Ajoute la langue de traduction dans le chargement du formulaire edition_rubrique*/ 
  function trad_rub_formulaire_charger($flux){
    $form = $flux['args']['form'];
-   if ($form=='editer_rubrique'){
+   if ($form=='editer_rubrique' AND _request('new')=='oui'){
 
 	if(!$flux['data']['lang_dest'] = _request('lang_dest')){
 	    $flux['data']['lang_dest']=sql_getfetsel('lang','spip_rubriques','id_rubrique='._request('id_parent'));
