@@ -38,11 +38,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_resultat' => 'No result',
 	'aucune_inscription' => 'No subscription correspond to this parameter.',
 	'aucune_liste' => 'Please select at least one newsletter',
-	'auto_erreur_ce_jour_mois_existe_pas' => 'This day doesn\'t exist in the month.',
+	'auto_erreur_ce_jour_mois_existe_pas' => 'This day doesn’t exist in the month.',
 	'auto_erreur_ce_jour_mois_pas_possible' => 'The choice of this day is not possible.',
 	'auto_erreur_ce_jour_semaine_existe_pas' => 'There is no such day in the week.',
-	'auto_erreur_ce_mode_automatisation_existe_pas' => 'This automation mode doesn\'t exist.',
-	'auto_erreur_cette_heure_existe_pas' => 'This time doesn\'t exist.',
+	'auto_erreur_ce_mode_automatisation_existe_pas' => 'This automation mode doesn’t exist.',
+	'auto_erreur_cette_heure_existe_pas' => 'This time doesn’t exist.',
 	'auto_erreur_choisir_un_jour_minimum' => 'You must chose one day at least.',
 	'auto_heure_creation' => 'Message creation time',
 	'auto_heure_creation_explication' => 'Messages will be generated at this time and directly put in the waiting list to be send.',
@@ -161,6 +161,7 @@ Thanks', # MODIF
 	'erreur' => 'Error',
 	'erreur_contenu_vide' => 'A new message could not be created due to lack of content.',
 	'et_ou_saisir_des_adresses' => '...and/or enter addresses.',
+	'exporter' => 'Export the list of subscribers',
 
 	// F
 	'front_clevermail_action_validation' => 'Validation of an operation',
@@ -186,7 +187,7 @@ Thanks', # MODIF
 	'label_inscription_email' => 'Your e-mail address :', # MODIF
 	'label_inscription_lettres' => 'Choose between the newsletters :', # MODIF
 	'label_inscription_version' => 'Message type :', # MODIF
-	'le_format_des_adresses_email_ne_semble_pas_bon' => 'The e-mail address format doesn\'t seem to be right.',
+	'le_format_des_adresses_email_ne_semble_pas_bon' => 'The e-mail address format doesn’t seem to be right.',
 	'lettre_meme_nom' => 'Another newsletter already has this name',
 	'lettre_sans_nom' => 'A newsletter must have a name',
 	'lettres_information' => 'Newsletters',

@@ -125,7 +125,7 @@ veuillez cliquer sur ce lien :
 
 túto správu ste dostali ako moderátor materiálu @@NOM_LETTRE@@.
 
-Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
+Pour valider l’inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
 
  @@URL_CONFIRMATION@@
 
