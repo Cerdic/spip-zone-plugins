@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Dës Säit erlaabt de Style vun der Loupe anzestëllen. E personaliséierte Style kann gemaach gin; liest <a href="http://plugins.spip.net/?page=article&id_article=48">d\'Dokumentatioun</a>.', # MODIF
+	'descriptif' => 'Dës Säit erlaabt de Style vun der Loupe anzestëllen. E personaliséierte Style kann gemaach gin; liest <a href="http://plugins.spip.net/?page=article&id_article=48">d’Dokumentatioun</a>.', # MODIF
 
 	// E
 	'example' => 'Graphëscht Resultat',
