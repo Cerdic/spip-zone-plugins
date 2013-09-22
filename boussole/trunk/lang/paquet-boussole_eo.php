@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boussole_description' => 'Instalu tiun kromprogramon sur vian retejon kaj vi aliros, en viaj skeletoj, la tuton de la retejoj de la SPIP-Galakcio uzante la ŝablonojn, la nuksetojn kaj la Z-paĝo proponita.
 _ Memfarantoj, vi povas uzi ankaŭ tiun kromprogramon por afiŝi vian propran retejliston kaj koncepti viajn proprajn afiŝadojn.',
 	'boussole_nom' => 'Kompaso',
-	'boussole_slogan' => 'La taŭgaj adresoj de la SPIP-galakcio aŭ aliloke !'
+	'boussole_slogan' => 'La taŭgaj adresoj de la SPIP-galakcio aŭ aliloke !'
 );
 
 ?>
