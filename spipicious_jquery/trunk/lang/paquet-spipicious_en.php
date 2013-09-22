@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'spipicious_description' => 'Help authenticated users to add keywords/tags to objects from the public area.
-_ Keywords are added to a group we can configure (\'{{- tags -}}\' by default)
+_ Keywords are added to a group we can configure (’{{- tags -}}’ by default)
 _ Icon from [Pawel Kadysz->http://oneseventyseven.com/]',
 	'spipicious_slogan' => 'Tag each objects'
 );
