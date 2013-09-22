@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'intranet_description' => 'N\'autoriser que les utilisateurs loggués à visiter le site.',
+	'intranet_description' => 'N’autoriser que les utilisateurs loggués à visiter le site.',
 	'intranet_nom' => 'Intranet/Extranet',
-	'intranet_slogan' => 'N\'autoriser que les utilisateurs loggués à visiter le site'
+	'intranet_slogan' => 'N’autoriser que les utilisateurs loggués à visiter le site'
 );
 
 ?>
