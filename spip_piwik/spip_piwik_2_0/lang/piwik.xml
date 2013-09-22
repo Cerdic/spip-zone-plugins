@@ -1,21 +1,21 @@
 <traduction module="piwik" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_piwik/spip_piwik_2_0/lang/" reference="fr">
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=ca" total="35" traduits="28" modifs="0" nouveaux="7" pourcent="80.00">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=ca" total="35" traduits="28" relire="0" modifs="0" nouveaux="7" pourcent="80.00">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=de" total="35" traduits="28" modifs="0" nouveaux="7" pourcent="80.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=de" total="35" traduits="28" relire="0" modifs="0" nouveaux="7" pourcent="80.00">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=en" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=en" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=es" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=es" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fa" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fa" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fr" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fr" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fr_tu" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=fr_tu" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=sk" total="35" traduits="35" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=sk" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
