@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pages_description' => 'Данный плагин позволяет создавать отдельные страницы вне любых разделов сайта. Это отличное решения для размещения контактной информации, условий и правил использования, а так же для любой информации, которая логически не встраивается в структуру сайта.
-Cela permet notamment de créer des pages de notice légale, d\'à-propos, de contact, etc.',
+Cela permet notamment de créer des pages de notice légale, d’à-propos, de contact, etc.',
 	'pages_slogan' => 'Отдельные страницы'
 );
 
