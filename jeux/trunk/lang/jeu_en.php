@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_developpement' => '<b>Beware</b> : part of the plugin is still being developped. Thanks for tracking the eventual bugs and/or contribute to improvements.',
-	'explication_jeu_edit' => 'The private title is only to identify the game in private play.<br />The game content has to follow the syntax described in <a href=\'http://www.spip-contrib.net/Des-jeux-dans-vos-articles\'>the documentation</a> of the plugin.<br />Here markers &lt;jeux> and &lt;/jeux> are useless.',
+	'explication_jeu_edit' => 'The private title is only to identify the game in private play.<br />The game content has to follow the syntax described in <a href=’http://www.spip-contrib.net/Des-jeux-dans-vos-articles’>the documentation</a> of the plugin.<br />Here markers &lt;jeux> and &lt;/jeux> are useless.',
 	'explication_modules' => 'Her is the list of the add-ons available on this website.
 
 - The signatures are the mandatory separators which allow the game identification by the compiler.
