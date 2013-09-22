@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'document_ajoute' => 'Le document a été ajouté.',
 
 	// E
-	'erreur_ajout_document' => 'Une erreur est survenue lors de l\'ajout du document.',
+	'erreur_ajout_document' => 'Une erreur est survenue lors de l’ajout du document.',
 
 	// L
 	'logo' => 'Logo',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_survol' => 'Logo survolé',
 
 	// M
-	'mauvaise_reception' => 'Oups ! Erreur dans la réception du fichier. Réessayez...'
+	'mauvaise_reception' => 'Oups ! Erreur dans la réception du fichier. Réessayez...'
 );
 
 ?>

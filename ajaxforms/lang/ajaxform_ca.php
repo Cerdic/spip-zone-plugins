@@ -12,21 +12,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'changer_document' => 'Canviar el document',
-	'confirmer_suppression' => 'La supressió s\'ha realitzat.',
+	'confirmer_suppression' => 'La supressió s’ha realitzat.',
 
 	// D
-	'document_ajoute' => 'El document s\'ha afegit.',
+	'document_ajoute' => 'El document s’ha afegit.',
 
 	// E
-	'erreur_ajout_document' => 'S\'ha produït un error mentre s\'afegia el document.',
+	'erreur_ajout_document' => 'S’ha produït un error mentre s’afegia el document.',
 
 	// L
 	'logo' => 'Logotip',
-	'logo_maj' => 'El logotip s\'ha actualitzat.', # MODIF
+	'logo_maj' => 'El logotip s’ha actualitzat.', # MODIF
 	'logo_survol' => 'Logotip sobrevolat ',
 
 	// M
-	'mauvaise_reception' => 'Ui! Error en la recepció de l\'arxiu. Torneu-ho a provar...'
+	'mauvaise_reception' => 'Ui! Error en la recepció de l’arxiu. Torneu-ho a provar...'
 );
 
 ?>

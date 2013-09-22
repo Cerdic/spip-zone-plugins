@@ -15,14 +15,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_suppression' => 'El desaniciu ta fechu.',
 
 	// D
-	'document_ajoute' => 'S\'amestó el documentu.',
+	'document_ajoute' => 'S’amestó el documentu.',
 
 	// E
 	'erreur_ajout_document' => 'Hebo un error al amestar el documentu.',
 
 	// L
 	'logo' => 'Logo',
-	'logo_maj' => 'El logo s\'anovó.',
+	'logo_maj' => 'El logo s’anovó.',
 	'logo_survol' => 'Logo de pasu del mur',
 
 	// M
