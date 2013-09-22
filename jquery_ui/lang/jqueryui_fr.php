@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
-	'cfg_explication_plugins' => 'Choisissez les plugins à insérer dans l\'entête des pages publiques.',
-	'cfg_explication_themes' => 'Choisissez le thèmes pour l\'habillage de jQuery-UI.',
+	'cfg_explication_plugins' => 'Choisissez les plugins à insérer dans l’entête des pages publiques.',
+	'cfg_explication_themes' => 'Choisissez le thèmes pour l’habillage de jQuery-UI.',
 	'cfg_lbl_plugins' => 'Plugins',
 	'cfg_lbl_themes' => 'Thème',
 	'cfg_no_css' => 'ne pas charger les CSS de jQuery-UI',
