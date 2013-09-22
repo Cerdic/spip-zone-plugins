@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - * <u>Legal texts are based by default on the legislation in France ({on the 1 January 2010}) </ u> and are largely {{legal minimum for any website}}. They can be changed in a specific language file to customize.
 - * A set of models are available:
 - Tools to enhance your SPIP site: vCard, cards, blocks of information ...
-- Tools to organize your SPIP site: two new models {header} and {pied}, based on the distribution of SPIP skeletons (\'inc-header.html\' and \'inc-pied.html\'), with copyright information and access to legal statements page.
+- Tools to organize your SPIP site: two new models {header} and {pied}, based on the distribution of SPIP skeletons (’inc-header.html’ and ’inc-pied.html’), with copyright information and access to legal statements page.
 
 Some icons plugin in the public template, comes from the set "{{[bwpx.icns->http://paularmstrongdesigns.com/portfolio/bwpx-icns/]}}" from {{Paul Armstrong}}, distributed under {license Creative Commons Attribution-Share Alike 3.0} (U.S.).
 

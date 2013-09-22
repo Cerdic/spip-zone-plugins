@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* <u>Informácie právneho charakteru v predvolených nastaveniach vychádzajú z aktuálne platnej legislatívy vo Francúzsku ({od 1. januára 2010})</u> a spĺňajú veľkú časť z {{právneho minima pre každú internetovú stránku.}} Dajú sa upraviť v jazykovom súbore pre konkrétny jazyk, aby ste si ich mohli prispôsobiť.
 -* K dispozícii máte niekoľko šablón: 
 - nástroje na vylepšenie stránky v SPIPe: vCard, vizitky, bloky s údajmi atď.
-- nástroje na usporiadanie stránky v SPIPe: dve nové šablóny pre {hlavičku} a {pätu} vytvorené podľa distribúcie SPIPu (\'inc-header.html\' a \'inc-pied.html\') s uvedením informácií o autorských právach a prístupe k stránke s informáciami právneho charakteru.
+- nástroje na usporiadanie stránky v SPIPe: dve nové šablóny pre {hlavičku} a {pätu} vytvorené podľa distribúcie SPIPu (’inc-header.html’ a ’inc-pied.html’) s uvedením informácií o autorských právach a prístupe k stránke s informáciami právneho charakteru.
 
 Niektoré ikony zásuvného modulu vo verejných šablónach sú zo sady {{"[bwpx.icns->http://paularmstrongdesigns.com/portfolio/bwpx-icns/]",}} ktorú vytvoril {{Paul Armstrong}} a ktorá je distribuovaná s licenciou {Creative Commons Attribution-Share Alike 3.0.}
 
