@@ -14,14 +14,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tout_cocher' => 'Select all',
 	'bouton_tout_decocher' => 'Deselect all',
 	'bouton_voir' => 'Show',
-	'bulle_bouton_voir' => 'Visualise archive\'s content',
+	'bulle_bouton_voir' => 'Visualise archive’s content',
 
 	// C
 	'colonne_nom' => 'Filename',
 
 	// E
 	'erreur_aucun_fichier_sauver' => 'No file to backup',
-	'erreur_repertoire_trop_grand' => 'This folder exceeds the limit of @taille_max@ MB and won\'t be saved.',
+	'erreur_repertoire_trop_grand' => 'This folder exceeds the limit of @taille_max@ MB and won’t be saved.',
 	'explication_cfg_duree_sauvegarde' => 'Enter the preservation period of the backups (in days)',
 	'explication_cfg_frequence' => 'Enter backup frequency (in days)',
 	'explication_cfg_notif_mail' => 'Enter email addresses separated by comma ",". Webmaster address is always added to this list.',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cfg_notif_mail' => 'Email addresses to notify',
 	'label_cfg_prefixe' => 'Préfix',
 	'label_cfg_sauvegarde_reguliere' => 'Enable automatic backups',
-	'label_cfg_taille_max_rep' => 'Maximum folder\'s size',
+	'label_cfg_taille_max_rep' => 'Maximum folder’s size',
 	'legende_cfg_generale' => 'Common backup parameters',
 	'legende_cfg_notification' => 'Notifications',
 	'legende_cfg_sauvegarde_reguliere' => 'Automatic actions',
