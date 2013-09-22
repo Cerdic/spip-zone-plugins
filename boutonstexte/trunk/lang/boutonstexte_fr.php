@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_seulement' => 'Texte seulement',
-	'textes_icones' => 'Textes des bulles d\'icones'
+	'textes_icones' => 'Textes des bulles d’icones'
 );
 
 ?>

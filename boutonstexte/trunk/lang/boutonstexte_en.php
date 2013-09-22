@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'diminuer_police' => 'Diminish font size',
-	'donnees_techniques' => 'Technical data that shouldn\'t change',
+	'donnees_techniques' => 'Technical data that shouldn’t change',
 
 	// L
 	'label_selector' => 'CSS expression or jQuery extended',
