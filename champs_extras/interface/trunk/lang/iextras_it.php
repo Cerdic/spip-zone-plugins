@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'modifica',
 	'action_modifier_title' => 'Modifica i parametri del campo extra',
 	'action_monter' => 'sposta su',
-	'action_monter_title' => 'Sposta il campo verso l\'alto',
+	'action_monter_title' => 'Sposta il campo verso l’alto',
 	'action_supprimer' => 'elimina',
 	'action_supprimer_title' => 'Elimina totalmente il campo dal database',
 
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_champ_extra' => 'Crea un nuovo campo extra',
 	'info_description_champ_extra' => 'Questa pagina consente di gestire i campi extra, 
-						e cioè dei campi supplementari all\'interno delle tabelle di SPIP,
+						e cioè dei campi supplementari all’interno delle tabelle di SPIP,
 						gestiti dai form di modifica e creazione.',
 	'info_description_champ_extra_creer' => 'Puoi creare dei nuovi campi che verranno quindi visualizzati
 						su questa pagina, nel riquadro "Lista dei campi extra", oltre che nei form.',
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_class' => 'Classi CSS',
 	'label_explication' => 'Istruzioni di inserimento',
 	'label_label' => 'Etichetta di inserimento',
-	'label_li_class' => 'Classi CSS dell\'&lt;li&gt; padre',
+	'label_li_class' => 'Classi CSS dell’&lt;li&gt; padre',
 	'label_obligatoire' => 'Campo obbligatorio?',
 	'label_rechercher' => 'Ricerca',
 	'label_sql' => 'Definizione SQL',
@@ -65,16 +65,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras_possibles' => 'Lista dei campi presenti e non gestiti',
 
 	// P
-	'precisions_pour_attention' => 'Per indicare un\'informazione importante.
+	'precisions_pour_attention' => 'Per indicare un’informazione importante.
 		Utilizzare con moderazione!!
 		Può essere una stringa di traduzione «plugin:stringa».',
-	'precisions_pour_class' => 'Aggiungi delle classi CSS all\'elemento,
+	'precisions_pour_class' => 'Aggiungi delle classi CSS all’elemento,
 		separate da uno spazio. Esempio: "inserer_barre_edition" per un riquadro
     con il plugin Porte Plume',
-	'precisions_pour_explication' => 'Puoi fornire più informazioni riguardanti l\'inserimento. 
+	'precisions_pour_explication' => 'Puoi fornire più informazioni riguardanti l’inserimento. 
 		Può essere una stringa di traduzione «plugin:stringa».',
 	'precisions_pour_label' => 'Può essere una stringa di traduzione «plugin:stringa».',
-	'precisions_pour_li_class' => 'Aggiungi delle classi CSS all\'elemento &lt;li&gt; padre,
+	'precisions_pour_li_class' => 'Aggiungi delle classi CSS all’elemento &lt;li&gt; padre,
 		separate da uno spazio. Esempio: "haut" per avere tutta la larghezza del form',
 	'precisions_pour_rechercher' => 'Includere questo campo nel motore di ricerca?',
 	'precisions_pour_traitements' => 'Applica automaticamente un trattamento
