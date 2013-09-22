@@ -9,10 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_mll' => 'Menu de langues sous forme de liens',
 
 	// E
-	'explication_langues_invisibles' => 'Permet d\'enlever certaines langues du menu',
+	'explication_langues_invisibles' => 'Permet d’enlever certaines langues du menu',
 
 	// L
-	'label_format' => 'Format d\'affichage des langues',
+	'label_format' => 'Format d’affichage des langues',
 	'label_format_abrege' => 'Abrégé (par exemple, Fr)',
 	'label_format_complet' => 'Complet (par exemple, Français)',
 	'label_format_liste' => 'Format de la liste des langues',
