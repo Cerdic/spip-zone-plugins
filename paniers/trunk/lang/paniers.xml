@@ -1,18 +1,18 @@
 <traduction module="paniers" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/paniers/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=de" total="38" traduits="38" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=de" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=en" total="38" traduits="38" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=en" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=es" total="38" traduits="32" modifs="0" nouveaux="6" pourcent="84.21">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=es" total="38" traduits="32" relire="0" modifs="0" nouveaux="6" pourcent="84.21">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=fr" total="38" traduits="38" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=fr" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=sk" total="38" traduits="38" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paniers?lang_cible=sk" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

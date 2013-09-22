@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre' => 'Configurer le plugin Paniers',
 
 	// D
-	'description_noisette' => 'Affiche le mini-panier (Nombre d\'articles et prix total)',
+	'description_noisette' => 'Affiche le mini-panier (Nombre d’articles et prix total)',
 	'dont_total_taxe' => 'Dont total des taxes',
 
 	// L
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_panier_voir' => 'Voir mon panier',
 
 	// N
-	'noisette_label_afficher_lien_page_panier' => 'Afficher un lien vers la page spip.php?page=panier ?',
+	'noisette_label_afficher_lien_page_panier' => 'Afficher un lien vers la page spip.php ?page=panier ?',
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
 	'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
 	'noisette_label_titre_noisette' => 'Titre :',
