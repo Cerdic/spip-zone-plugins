@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercevoir_ce_theme' => 'Apercevoir',
 
 	// B
-	'bandeau_personalisable' => 'Vous pouvez personnaliser l\'image du bandeau de ce thème',
+	'bandeau_personalisable' => 'Vous pouvez personnaliser l’image du bandeau de ce thème',
 
 	// C
 	'choisir_ce_theme' => 'Choisir',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desactiver_ce_theme' => 'Désactiver et revenir au style par défaut',
 
 	// I
-	'info_page' => 'Vous pouvez choisir un thème proposé ou simplement apercevoir son rendu sans modifier l\'affichage pour vos visiteurs',
+	'info_page' => 'Vous pouvez choisir un thème proposé ou simplement apercevoir son rendu sans modifier l’affichage pour vos visiteurs',
 	'intitule_compatiblite_squelette' => 'Compatible uniquement avec les squelettes',
 	'intitule_version' => 'version',
 
