@@ -1,16 +1,16 @@
 <traduction module="notation" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/notation/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/notation?lang_cible=en" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/notation?lang_cible=en" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/notation?lang_cible=es" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/notation?lang_cible=es" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/notation?lang_cible=fr" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/notation?lang_cible=fr" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/notation?lang_cible=ru" total="79" traduits="77" modifs="2" nouveaux="0" pourcent="97.47">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/notation?lang_cible=ru" total="79" traduits="77" relire="0" modifs="2" nouveaux="0" pourcent="97.47">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/notation?lang_cible=sk" total="79" traduits="79" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/notation?lang_cible=sk" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

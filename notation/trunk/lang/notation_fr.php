@@ -29,27 +29,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date' => 'date',
 	'derniers_votes' => 'Derniers votes',
 	'destruction' => 'Destruction des tables',
-	'detruire' => '<strong style="color:red">Attention, cette commande va détruire les tables du plugin !</strong><br />Vous ne devez l\'utiliser que si vous voulez déactiver le plugin...',
+	'detruire' => '<strong style="color:red">Attention, cette commande va détruire les tables du plugin !</strong><br />Vous ne devez l’utiliser que si vous voulez déactiver le plugin...',
 	'detruit' => 'Tables détruites...',
 
 	// E
 	'effacer_tables' => 'Éffacer les tables',
-	'err_balise' => '[ NOTATION_ERR : balise en dehors d\'un article ]',
-	'err_db_notation' => '[ NOTATION ERREUR : une seule notation par article ]',
-	'exemple' => 'Distribution des notes (note = 5, facteur de pondération = @ponderation@) : ',
+	'err_balise' => '[ NOTATION_ERR : balise en dehors d’un article ]',
+	'err_db_notation' => '[ NOTATION ERREUR : une seule notation par article ]',
+	'exemple' => 'Distribution des notes (note = 5, facteur de pondération = @ponderation@) : ',
 	'explication_accepter_note' => 'Si "fermée", la notation sera activable au cas par cas sur les objets ayant cette fonctionnalité.',
 
 	// I
-	'info_acces' => 'Ouvrir le vote : ',
-	'info_etoiles' => 'Ce paramètre vous permet de modifier la valeure maximale de la note (le nombre d\'étoiles, entre 1 et 10, et 5 par défaut).<br />
-                    <strong style="color:red">/!\\ Attention</strong> : vous ne devez pas toucher à ce paramètre une fois la notation engagée car les notes ne seront pas recalculées et cela peut provoquer des incohérences dans la notation...<br />
+	'info_acces' => 'Ouvrir le vote : ',
+	'info_etoiles' => 'Ce paramètre vous permet de modifier la valeure maximale de la note (le nombre d’étoiles, entre 1 et 10, et 5 par défaut).<br />
+                    <strong style="color:red">/ !\\ Attention</strong> : vous ne devez pas toucher à ce paramètre une fois la notation engagée car les notes ne seront pas recalculées et cela peut provoquer des incohérences dans la notation...<br />
                     Ce paramètres doit être fixé une fois pour toute à la création des notes.',
 	'info_fonctionnement_note' => 'Fonctionnement de la notation',
-	'info_ip' => 'Pour être le plus facile possible d\'utilisation, la note est fixée sur l\'adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si vous gérez des votes d\'auteurs.<br />
-                Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistré, bien sûr).<br />
-                Si vous voulez garantir l\'unicité de la note, limitez le vote aux <b>seules</b> personnes enregistrées (ci-dessus).',
+	'info_ip' => 'Pour être le plus facile possible d’utilisation, la note est fixée sur l’adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si vous gérez des votes d’auteurs.<br />
+                Dans ce cas, on fixe la note sur l’identifiant de l’utilisateur (quand celui-ci est enregistré, bien sûr).<br />
+                Si vous voulez garantir l’unicité de la note, limitez le vote aux <b>seules</b> personnes enregistrées (ci-dessus).',
 	'info_modifications' => 'Modifications des notes',
-	'info_ponderation' => 'Le facteur de pondération permet d\'accorder plus de valeur aux articles ayant reçu suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au delà duquel vous pensez que la note est fiable.',
+	'info_ponderation' => 'Le facteur de pondération permet d’accorder plus de valeur aux articles ayant reçu suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au delà duquel vous pensez que la note est fiable.',
 	'ip' => 'IP',
 	'item_adm' => 'aux administrateurs ',
 	'item_all' => 'à tous ',
@@ -59,10 +59,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_ip' => 'un vote par IP',
 
 	// J
-	'jaidonnemonavis' => 'J\'ai donné mon avis !',
-	'jaime' => 'J\'aime',
-	'jaimepas' => 'Je n\'aime pas',
-	'jaimeplus' => 'Je n\'aime plus',
+	'jaidonnemonavis' => 'J’ai donné mon avis !',
+	'jaime' => 'J’aime',
+	'jaimepas' => 'Je n’aime pas',
+	'jaimeplus' => 'Je n’aime plus',
 	'jechangedavis' => 'Je retire mon avis',
 
 	// L
@@ -74,22 +74,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_etoiles' => 'Valeur des notes',
-	'nbobjets_note' => 'Nombre d\'objets ayant une note : ',
+	'nbobjets_note' => 'Nombre d’objets ayant une note : ',
 	'nbvotes' => 'Nombre de votes',
-	'nbvotes_moyen' => 'Nombre de votes moyens par objet : ',
-	'nbvotes_total' => 'Nombre de votes total sur le site : ',
+	'nbvotes_moyen' => 'Nombre de votes moyens par objet : ',
+	'nbvotes_total' => 'Nombre de votes total sur le site : ',
 	'notation' => 'Notations',
-	'note' => 'Note : ',
-	'note_1' => 'Note : 1',
-	'note_10' => 'Note : 10',
-	'note_2' => 'Note : 2',
-	'note_3' => 'Note : 3',
-	'note_4' => 'Note : 4',
-	'note_5' => 'Note : 5',
-	'note_6' => 'Note : 6',
-	'note_7' => 'Note : 7',
-	'note_8' => 'Note : 8',
-	'note_9' => 'Note : 9',
+	'note' => 'Note : ',
+	'note_1' => 'Note : 1',
+	'note_10' => 'Note : 10',
+	'note_2' => 'Note : 2',
+	'note_3' => 'Note : 3',
+	'note_4' => 'Note : 4',
+	'note_5' => 'Note : 5',
+	'note_6' => 'Note : 6',
+	'note_7' => 'Note : 7',
+	'note_8' => 'Note : 8',
+	'note_9' => 'Note : 9',
 	'note_pond' => 'Notes ponderées',
 	'notes' => 'Notes',
 
@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ponderation' => 'Pondération de la note',
 
 	// T
-	'titre_ip' => 'Mode de fonctionnement :',
+	'titre_ip' => 'Mode de fonctionnement :',
 	'topnb' => 'Les 10 objets les plus notés',
 	'topten' => 'Les 10 meilleures notes',
 	'toptenp' => 'Les 10 meilleures notes (pondérées)',
@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'valeur_ponderation' => 'Facteur de pondération',
 	'vos_notes' => 'Vos 5 meilleurs notes',
 	'vote' => 'vote',
-	'voter' => 'Voter : ',
+	'voter' => 'Voter : ',
 	'votes' => 'votes',
 	'votre_note' => 'Votre note'
 );

@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                     <strong style="color:red">/!\\ Warning</strong> : you should not modify this setting after the scoring to be initiated because the ratings will not be calculated again and this can cause inconsistencies in the scoring ...<br />
                     This parameter must be fixed once and for all when creating ratings.',
 	'info_fonctionnement_note' => 'How rating works',
-	'info_ip' => 'To be the easiest possible to use, the rating is attached to the IP address of the voter, which avoids two successive votes in the database, with a few drawbacks ...  especially if you manage author\'s votes.<br />
+	'info_ip' => 'To be the easiest possible to use, the rating is attached to the IP address of the voter, which avoids two successive votes in the database, with a few drawbacks ...  especially if you manage author’s votes.<br />
 				In this case, we set the note on the user identifier (when he is registered, of course).<br />
                 If you want to guarantee the uniqueness of the note, limit the voting <b>only</b> to registered users (above).',
 	'info_modifications' => 'Changing of the ratings',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// J
 	'jaidonnemonavis' => 'I gave my opinion !',
 	'jaime' => 'I like',
-	'jaimepas' => 'I don\'t like',
+	'jaimepas' => 'I don’t like',
 	'jaimeplus' => 'I no longer like',
 	'jechangedavis' => 'I withdraw my opinion',
 
