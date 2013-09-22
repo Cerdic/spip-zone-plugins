@@ -1,11 +1,11 @@
 <traduction module="smush" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/smush_images/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/smush?lang_cible=en" total="18" traduits="18" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/smush?lang_cible=en" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/smush?lang_cible=es" total="18" traduits="18" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/smush?lang_cible=es" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/smush?lang_cible=fr" total="18" traduits="18" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/smush?lang_cible=fr" total="18" traduits="18" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 </traduction>
