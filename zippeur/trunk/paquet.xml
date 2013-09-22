@@ -19,6 +19,6 @@
 
 	<pipeline nom="declarer_tables_principales" inclure="zippeur_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="zippeur_pipelines.php" />
-
+    <pipeline nom="pre_liens" inclure="zippeur_pipelines.php" />
 	<utilise nom="album" />
 </paquet>
