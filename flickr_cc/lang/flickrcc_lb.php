@@ -18,14 +18,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fermer' => 'Zoumaachen',
-	'flickr_cc_explication' => '<p>Sicht Creative Commons Biller op Flickr andeem dir hei eng Sich agidd. Präziséiert och wéi eng Lizenz d\'Biller sollen hun.</p>
-<p>Klickt op d\'Bild oder op d\'Biller vum Resultat: si ginn direkt un ären Artikel ugebonnen. Klickt op de Numm vum Auteur fir op d\'Flickr-Säit vun dësem Bild ze kommen.</p>
+	'flickr_cc_explication' => '<p>Sicht Creative Commons Biller op Flickr andeem dir hei eng Sich agidd. Präziséiert och wéi eng Lizenz d’Biller sollen hun.</p>
+<p>Klickt op d’Bild oder op d’Biller vum Resultat: si ginn direkt un ären Artikel ugebonnen. Klickt op de Numm vum Auteur fir op d’Flickr-Säit vun dësem Bild ze kommen.</p>
 <p>Dës Biller ginn vun den Auteuren zur Verfügung gestallt: fir hier Rechter an hier Aarbecht ze respektéieren,</p>
-<ul><li>läscht d\'Mentioun vum Auteur an de Link op d\'Flickr-Säit nët;</li>
-<li>respektéiert genee d\'Creative Commons Lizenz vun all Bild;</li>
-<li>wann den Auteur dat verlaangt musst dir innerhalb vu 24 Stonnen d\'Bild vun ärem Site läschen.</li>
+<ul><li>läscht d’Mentioun vum Auteur an de Link op d’Flickr-Säit nët;</li>
+<li>respektéiert genee d’Creative Commons Lizenz vun all Bild;</li>
+<li>wann den Auteur dat verlaangt musst dir innerhalb vu 24 Stonnen d’Bild vun ärem Site läschen.</li>
 </ul>
-<p>Dëst Produkt benotzt d\'API vu Flickr mais ass awer nët vu Flickr ënnerstëtzt oder zertifiéiert.</p>',
+<p>Dëst Produkt benotzt d’API vu Flickr mais ass awer nët vu Flickr ënnerstëtzt oder zertifiéiert.</p>',
 
 	// R
 	'rechercher_flickr' => 'Op Flickr sichen',
