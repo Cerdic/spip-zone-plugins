@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'crayons_description' => 'Snel bewerken van de publieke pagina\'s van de site.',
+	'crayons_description' => 'Snel bewerken van de publieke pagina’s van de site.',
 	'crayons_nom' => 'Potloden',
-	'crayons_slogan' => 'Snel bewerken van de publieke pagina\'s van de site.'
+	'crayons_slogan' => 'Snel bewerken van de publieke pagina’s van de site.'
 );
 
 ?>
