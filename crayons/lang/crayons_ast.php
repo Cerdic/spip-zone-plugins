@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Hai otru complementu que torga l\'usu del portaplumes nel espaciu públicu.',
+	'activation_barre_impossible' => 'Hai otru complementu que torga l’usu del portaplumes nel espaciu públicu.',
 	'annuler' => 'Anular',
 
 	// B
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Efeutos',
 	'explication_exec_autorise' => 'Páxines que se permite camudar
   (?exec=...) : (, pa xebrar los exec).', # MODIF
-	'explication_introduction_article' => 'La introducción d\'un artículu amuesa la descripción del artículu, sinón amuesa los sos primeros 600 caráuteres (la entrada siguía pol testu).',
+	'explication_introduction_article' => 'La introducción d’un artículu amuesa la descripción del artículu, sinón amuesa los sos primeros 600 caráuteres (la entrada siguía pol testu).',
 	'explication_reduire_logo' => 'Amenorgar el logo si pasa del
   tamañu máximu indicáu en pixels. Exemplu: 100. (0 = enxamás)', # MODIF
 
@@ -45,13 +45,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controleur_logo' => 'Escoyer un logo:',
 	'legend_controleur_logo_remplacer' => 'Trocar esti logo',
 	'legend_controleur_qui' => '¿Quién?',
-	'legend_editer_prive' => 'Editar l\'espaciu priváu (esperimental)',
+	'legend_editer_prive' => 'Editar l’espaciu priváu (esperimental)',
 	'legend_introduction_article' => 'Testu introductoriu del artículu',
 
 	// M
-	'message_image_obligatoire' => 'Hai qu\'escoyer una imaxe',
+	'message_image_obligatoire' => 'Hai qu’escoyer una imaxe',
 	'messages' => 'Mensaxes',
-	'modifie_par_ailleurs' => 'Modificao n\'otru llau',
+	'modifie_par_ailleurs' => 'Modificao n’otru llau',
 
 	// N
 	'non_autorise' => 'Non autorizao',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_crayons' => 'Llápices',
 
 	// U
-	'update_impossible' => 'Falló l\'anovación.',
+	'update_impossible' => 'Falló l’anovación.',
 
 	// V
 	'veuillez_patienter' => 'Un momentu...'

@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_msg_no_change' => 'Si pas de changement', # NEW
 	'label_reduire_logo' => 'Réduire les logos', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
-	'legend_editer_prive' => 'Éditer l\'espace privé (expérimental)',
+	'legend_editer_prive' => 'Éditer l’espace privé (expérimental)',
 
 	// M
 	'messages' => 'Messages', # NEW
