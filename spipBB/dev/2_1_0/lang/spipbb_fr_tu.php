@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_propos_auteur_dpt' => 'Tout à propos de :',
+	'a_propos_auteur_dpt' => 'Tout à propos de :',
 	'admin_action_01_configuration' => 'Configuration',
 	'admin_action_02_etat' => 'Etat des forums',
 	'admin_action_ZZ_debug' => 'Debogage',
@@ -30,12 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_avatar_taille_profil' => 'Taille des avatars (en pixels) sur page profil',
 	'admin_avatar_taille_sujet' => 'Taille des avatars (en pixels) sur page sujets',
 	'admin_average_posts' => 'Moyenne de messages/jour',
-	'admin_average_users' => 'Moyenne d\'inscriptions/jour',
+	'admin_average_users' => 'Moyenne d’inscriptions/jour',
 	'admin_ban_email' => 'Gestion des adresses email bannies',
-	'admin_ban_email_info' => 'Pour spécifier plus d\'une adresse e-mail, sépare-les par des virgules. Pour spécifier un joker pour le nom d\'utilisateur, utilise * ; par exemple *@hotmail.com',
+	'admin_ban_email_info' => 'Pour spécifier plus d’une adresse e-mail, sépare-les par des virgules. Pour spécifier un joker pour le nom d’utilisateur, utilise * ; par exemple *@hotmail.com',
 	'admin_ban_email_none' => 'Aucune adresse bannie',
 	'admin_ban_ip' => 'Gestion des adresses IP bannies',
-	'admin_ban_ip_info' => 'Pour spécifier plusieurs IP ou noms de serveurs différents, sépare-les par des virgules. Pour spécifier un intervalle d\'adresses IP, sépare le début et la fin avec un trait d\'union (-), pour spécifier un joker, utilise une étoile (*)',
+	'admin_ban_ip_info' => 'Pour spécifier plusieurs IP ou noms de serveurs différents, sépare-les par des virgules. Pour spécifier un intervalle d’adresses IP, sépare le début et la fin avec un trait d’union (-), pour spécifier un joker, utilise une étoile (*)',
 	'admin_ban_ip_none' => 'Aucune adresse bannie',
 	'admin_ban_user' => 'Gestion des login bannis',
 	'admin_ban_user_info' => 'Tu peux bannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
@@ -44,14 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_cat_outils' => 'Outils',
 	'admin_cat_spam' => 'Anti Spam',
 	'admin_config_prerequis' => 'Prérequis',
-	'admin_config_spam_words' => 'Configuration de l\'anti-spam',
+	'admin_config_spam_words' => 'Configuration de l’anti-spam',
 	'admin_config_spipbb' => 'Activation de SpipBB',
 	'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB',
 	'admin_config_tables' => 'Configuration des tables de SpipBB',
-	'admin_config_tables_erreur' => 'Problème avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
+	'admin_config_tables_erreur' => 'Problème avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
 Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Table de SpipBB correctement installée',
-	'admin_date_ouverture' => 'Date d\'ouverture',
+	'admin_date_ouverture' => 'Date d’ouverture',
 	'admin_debug_log' => 'Fichier de log @log_name@',
 	'admin_debug_metas' => 'SpipBB METAs',
 	'admin_form_action' => 'Action',
@@ -63,7 +63,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_form_messages' => ' ',
 	'admin_form_monter' => 'Monter',
 	'admin_form_sujets' => ' ',
-	'admin_forums_affiche_membre_defaut' => 'Veux-tu afficher les membres dans la liste de membres lorsqu\'il n\'ont pas fait de choix ?<br />[ Non par défaut ]',
+	'admin_forums_affiche_membre_defaut' => 'Veux-tu afficher les membres dans la liste de membres lorsqu’il n’ont pas fait de choix ?<br />[ Non par défaut ]',
 	'admin_forums_configuration' => 'Configuration de SpipBB',
 	'admin_forums_configuration_avatar' => 'Gestion des avatars, réglage général',
 	'admin_forums_configuration_options' => 'Options de SpipBB',
@@ -74,23 +74,23 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_forums_log_level_3' => 'Enormément de logs',
 	'admin_id_mjsc' => 'N°',
 	'admin_infos' => 'SpipBB - Administration - Récapitulatif',
-	'admin_interface' => 'Options de l\'interface',
+	'admin_interface' => 'Options de l’interface',
 	'admin_nombre_lignes_messages' => 'Nombre de lignes de messages',
 	'admin_plugin_requis_erreur' => 'Plugin requis manquant',
-	'admin_plugin_requis_erreur_balisesession' => 'Installe le plugin Balise SESSION et active le ! [Documentation ici->http://www.spip-contrib.net/?article1224], [Archive ZIP là->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Installe le plugin CFG et active le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP là->http://files.spip.org/spip-zone/cfg.zip].',
-	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Active-les !',
+	'admin_plugin_requis_erreur_balisesession' => 'Installe le plugin Balise SESSION et active le ! [Documentation ici->http://www.spip-contrib.net/?article1224], [Archive ZIP là->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Installe le plugin CFG et active le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP là->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Active-les !',
 	'admin_plugin_requis_ok' => 'Plugin requis installé',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifié.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.',
-	'admin_sous_titre' => 'Accèder au panneau d\'administration des forums avec SpipBB',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifié.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.',
+	'admin_sous_titre' => 'Accèder au panneau d’administration des forums avec SpipBB',
 	'admin_spip_config_forums' => 'Configuration de SPIP :',
 	'admin_spip_forums_ok' => 'Les forums publics sont bien activés dans SPIP',
-	'admin_spip_forums_warn' => '<p>{{Attention}} : tes forums sont désactivés par défaut, il est recommandé d\'utiliser la publication immédiate : [voir ici->@config_contenu@].</p><p>Sinon tu devras les activer articles par articles.</p>',
+	'admin_spip_forums_warn' => '<p>{{Attention}} : tes forums sont désactivés par défaut, il est recommandé d’utiliser la publication immédiate : [voir ici->@config_contenu@].</p><p>Sinon tu devras les activer articles par articles.</p>',
 	'admin_spip_mots_cles_ok' => 'Les mot-clefs sont bien activés dans SPIP',
-	'admin_spip_mots_cles_warn' => '<p>{{Attention}} : Les mots-clés sont pas actifs dans SPIP, tu ne pourras pas utiliser les fonctions avancées associées.</p><p>Il  est recommandé de les activer : [voir ici->@configuration@].</p>',
+	'admin_spip_mots_cles_warn' => '<p>{{Attention}} : Les mots-clés sont pas actifs dans SPIP, tu ne pourras pas utiliser les fonctions avancées associées.</p><p>Il  est recommandé de les activer : [voir ici->@configuration@].</p>',
 	'admin_spip_mots_forums_ok' => 'Les mot-clefs associés aux forums sont bien activés dans SPIP',
-	'admin_spip_mots_forums_warn' => '<p>{{Attention}} : Les mots-clés dans les forums du site public sont pas actifs dans SPIP, tu ne pourras pas utiliser les fonctions avancées associées.</p><p>Il est recommandé de permettre leur utilisation : [voir ici->@configuration@].</p>',
+	'admin_spip_mots_forums_warn' => '<p>{{Attention}} : Les mots-clés dans les forums du site public sont pas actifs dans SPIP, tu ne pourras pas utiliser les fonctions avancées associées.</p><p>Il est recommandé de permettre leur utilisation : [voir ici->@configuration@].</p>',
 	'admin_spipbb_release' => 'Version de SpipBB',
 	'admin_statistique' => 'Information',
 	'admin_surtitre' => 'Gérer les forums',
@@ -108,7 +108,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_titre_page_spipbb_configuration' => 'Configuration de SpipBB',
 	'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejetés',
 	'admin_titre_page_spipbb_inscrits' => 'Gestion des membres',
-	'admin_titre_page_spipbb_sujet' => 'Édition d\'un fil',
+	'admin_titre_page_spipbb_sujet' => 'Édition d’un fil',
 	'admin_total_posts' => 'Nombre total de messages',
 	'admin_total_users' => 'Nombre de membres',
 	'admin_total_users_online' => 'Membres en ligne',
@@ -116,10 +116,10 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_unban_ip_info' => 'Tu peux débannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
 	'admin_unban_user_info' => 'Tu peux débannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier',
 	'admin_valeur' => 'Valeur',
-	'aecrit' => 'a écrit :',
+	'aecrit' => 'a écrit :',
 	'alerter_abus' => 'Signaler ce message comme abusif/injurieux...',
 	'alerter_sujet' => 'Message abusif',
-	'alerter_texte' => 'Nous attirons ton attention sur le message suivant :',
+	'alerter_texte' => 'Nous attirons ton attention sur le message suivant :',
 	'annonce' => 'Annonce',
 	'annonce_dpt' => 'Annonce : ',
 	'anonyme' => 'Anonyme',
@@ -132,25 +132,25 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'bouton_unselect_all' => 'Tout dé-sélectionner',
 
 	// C
-	'champs_obligatoires' => 'Les champs marqués d\'une * sont obligatoires.',
+	'champs_obligatoires' => 'Les champs marqués d’une * sont obligatoires.',
 	'chercher' => 'Chercher',
 	'choix_mots_annonce' => 'Faire une annonce',
 	'choix_mots_creation' => 'Si tu veux créer <strong>automatiquement</strong> les mot-clés dédiés à SpipBB, appuye sur ce bouton. Ces mot-clefs peuvent être modifiés ou supprimés ultérieurement...',
 	'choix_mots_creation_submit' => 'Configuration auto des mots-clefs',
 	'choix_mots_ferme' => 'Pour fermer un fil',
 	'choix_mots_postit' => 'Mettre en post-it',
-	'choix_mots_selection' => 'Le groupe de mot doit contenir trois mot-clefs. Normalement, le plugin les a créé au moment de son installation. SpipBB utilise en général les mots {ferme}, {annonce} et {postit}, mais tu peux en choisir d\'autres.',
+	'choix_mots_selection' => 'Le groupe de mot doit contenir trois mot-clefs. Normalement, le plugin les a créé au moment de son installation. SpipBB utilise en général les mots {ferme}, {annonce} et {postit}, mais tu peux en choisir d’autres.',
 	'choix_rubrique_creation' => 'Si tu veux créer <strong>automatiquement</strong> le secteur contenant les forums SpipBB et un premier forum vide, appuye sur ce bouton. Ce forum et la hiérarchie créés peuvent être modifiés ou supprimés ultérieurement...',
 	'choix_rubrique_creation_submit' => 'Configuration auto du secteur',
 	'choix_rubrique_selection' => 'Sélectionne un secteur qui sera la base de tes forums. Chaque sous-rubrique de ce secteur sera un groupe de forums, chaque article publié ouvrira un forum.',
-	'choix_squelettes' => 'Tu peux en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
+	'choix_squelettes' => 'Tu peux en choisir d’autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 	'citer' => 'Citer',
 	'cocher' => 'cocher',
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Date inscription',
 	'col_marquer' => 'Marquer',
 	'col_signature' => 'Signature',
-	'config_affiche_champ_extra' => 'Afficher le champ : @nom_champ@',
+	'config_affiche_champ_extra' => 'Afficher le champ : @nom_champ@',
 	'config_affiche_extra' => 'Afficher ces champs dans les squelettes',
 	'config_champs_auteur' => 'Champs SPIPBB',
 	'config_champs_auteurs_plus' => 'Gestion champs auteurs supplémentaires',
@@ -173,29 +173,29 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'deplacer_confirmer' => 'Confirmer le déplacement',
 	'deplacer_dans_dpt' => 'À déplacer dans le forum :',
 	'deplacer_sujet_dpt' => 'Déplacement de :',
-	'deplacer_vide' => 'Pas d\'autre forum : déplacement impossible.',
+	'deplacer_vide' => 'Pas d’autre forum : déplacement impossible.',
 	'dernier' => ' Dernier',
-	'dernier_membre' => 'Dernier membre enregistré : ',
+	'dernier_membre' => 'Dernier membre enregistré : ',
 	'derniers_messages' => 'Derniers Messages',
 	'diviser' => 'Diviser',
 	'diviser_confirmer' => 'Confirmer la séparation des messages',
 	'diviser_dans_dpt' => 'À mettre dans le forum :',
-	'diviser_expliquer' => 'A l\'aide du formulaire ci-dessous, tu pourras séparer ce fil en deux, soit : en sélectionnant les messages individuellement; soit en choisissant le message à partir duquel il faut les diviser en deux.',
+	'diviser_expliquer' => 'A l’aide du formulaire ci-dessous, tu pourras séparer ce fil en deux, soit : en sélectionnant les messages individuellement ; soit en choisissant le message à partir duquel il faut les diviser en deux.',
 	'diviser_selection_dpt' => 'Sélection :',
 	'diviser_separer_choisis' => 'Séparer les messages sélectionnés',
 	'diviser_separer_suite' => 'Séparer à partir du message sélectionné',
-	'diviser_vide' => 'Pas d\'autre forum : division impossible.',
+	'diviser_vide' => 'Pas d’autre forum : division impossible.',
 
 	// E
 	'ecrirea' => 'Ecrire un email à',
 	'effacer' => 'Effacer',
 	'email' => 'E-mail',
-	'en_ligne' => 'Qui est en ligne ?',
-	'en_rep_sujet_' => ' ::: Sujet : ',
+	'en_ligne' => 'Qui est en ligne ?',
+	'en_rep_sujet_' => ' :: : Sujet : ',
 	'en_reponse_a' => 'En réponse au message',
 	'etplus' => '... et plus ...',
 	'extra_avatar_saisie_url' => 'URL de ton avatar (http://... ...)',
-	'extra_avatar_saisie_url_info' => 'URL de l\'avatar du visiteur',
+	'extra_avatar_saisie_url_info' => 'URL de l’avatar du visiteur',
 	'extra_date_crea' => 'Date de premiere saisie profil SpipBB',
 	'extra_date_crea_info' => 'Date de premiere saisie profil SpipBB',
 	'extra_emploi' => 'Emploi',
@@ -205,12 +205,12 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'extra_nom_msnm' => 'Contacts chat (MSN Messenger)',
 	'extra_nom_yahoo' => 'Contacts chat (Yahoo)',
 	'extra_numero_icq' => 'Contacts chat (ICQ)',
-	'extra_refus_suivi_thread' => '(refus suivi) Ne pas modifier !',
+	'extra_refus_suivi_thread' => '(refus suivi) Ne pas modifier !',
 	'extra_refus_suivi_thread_info' => 'Liste des threads pour lesquels on ne souhaite plus recevoir de notification',
 	'extra_signature_saisie_texte' => 'Saisir ici le texte de ta signature',
 	'extra_signature_saisie_texte_info' => 'Court texte de signature des messages',
 	'extra_visible_annuaire' => 'Apparaitre dans la liste des Inscrits (publique)',
-	'extra_visible_annuaire_info' => 'Permet de refuser l\'affichage dans l\'annuaire des inscrits en zone publique',
+	'extra_visible_annuaire_info' => 'Permet de refuser l’affichage dans l’annuaire des inscrits en zone publique',
 
 	// F
 	'fiche_contact' => 'Fiche Contact',
@@ -219,8 +219,8 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'fil_deplace' => 'Déplacer ce fil',
 	'filtrer' => 'Filtrer',
 	'forum' => 'Forums',
-	'forum_annonce_annonce' => 'Poser le marquage d\'annonce',
-	'forum_annonce_desannonce' => 'Supprimer le marquage d\'annonce',
+	'forum_annonce_annonce' => 'Poser le marquage d’annonce',
+	'forum_annonce_desannonce' => 'Supprimer le marquage d’annonce',
 	'forum_dpt' => 'Forum : ',
 	'forum_ferme' => 'Ce forum est fermé',
 	'forum_ferme_texte' => 'Ce forum est fermé. Tu ne peux plus y poster.',
@@ -251,7 +251,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Ajout admin restreint',
 	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Déjà admin restreint',
 	'fromphpbb_migre_utilisateurs_impossible' => 'Impossible de récupérer les utilisateurs',
-	'fromphpbb_migre_utilisateurs_total_dpt' => 'Nombre total d\'utilisateurs ajoutés :',
+	'fromphpbb_migre_utilisateurs_total_dpt' => 'Nombre total d’utilisateurs ajoutés :',
 
 	// H
 	'haut_page' => 'Haut de page',
@@ -269,15 +269,15 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'import_fichier' => 'Fichier de configuration @nom_base@ trouvé :',
 	'import_host' => 'Nom/adresse du serveur',
 	'import_login' => 'Identifiant :',
-	'import_parametres_base' => 'Choisis soit le chemin vers le fichier de configuration de @nom_base@, soit de renseigner les paramètres d\'accès à la base contenant les forums de @nom_base@ :',
+	'import_parametres_base' => 'Choisis soit le chemin vers le fichier de configuration de @nom_base@, soit de renseigner les paramètres d’accès à la base contenant les forums de @nom_base@ :',
 	'import_parametres_rubrique' => 'Choisis la rubrique dans laquelle seront importés les forums de @nom_base@',
 	'import_parametres_titre' => 'Informations sur la base @nom_base@',
 	'import_password' => 'Mot de passe :',
 	'import_prefix' => 'Préfixe des tables :',
 	'import_racine' => 'Chemin vers @nom_base@ (avatars) :',
 	'import_table' => 'Table de configuration @nom_base@ trouvée :',
-	'import_titre' => 'Import d\'un forum @nom_base@',
-	'import_titre_etape' => 'Import d\'un forum  @nom_base@ - étape',
+	'import_titre' => 'Import d’un forum @nom_base@',
+	'import_titre_etape' => 'Import d’un forum  @nom_base@ - étape',
 	'info' => 'Informations',
 	'info_annonce_ferme' => 'Etat Annonce / Fermer',
 	'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
@@ -288,7 +288,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'infos_suivi_forum_par_inscription' => 'Suivi du forum par inscription',
 	'inscription' => 'Inscription',
 	'inscrit_le' => 'Inscrit le',
-	'inscrit_le_dpt' => 'Inscrit le :',
+	'inscrit_le_dpt' => 'Inscrit le :',
 	'inscrit_s' => 'Inscrits',
 	'ip_adresse_autres' => 'Autres adresses IP à partir desquelles cet auteur a posté',
 	'ip_adresse_membres' => 'Membres ayant posté de cette adresse IP',
@@ -303,7 +303,7 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 
 	// M
 	'maintenance' => 'Maintenance',
-	'maintenance_fermer' => 'a fermé l\'article/forum :',
+	'maintenance_fermer' => 'a fermé l’article/forum :',
 	'maintenance_pour' => 'pour MAINTENANCE.',
 	'membres_en_ligne' => 'membres en ligne',
 	'membres_inscrits' => 'membres inscrits',
@@ -327,15 +327,15 @@ Consulte la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'mot_annonce' => 'Annonce
 _ Une annonce est située en tête de forum sur toutes les pages.',
 	'mot_ferme' => 'Fermé
--* Lorsqu\'un article-forum a ce mot-clef, seul les modérateurs peuvent y ajouter des messages.
--* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
+-* Lorsqu’un article-forum a ce mot-clef, seul les modérateurs peuvent y ajouter des messages.
+-* Lorsqu’un sujet de forum est ferm&ecute ;, seuls les modérateurs peuvent y ajouter des réponses.',
 	'mot_groupe_moderation' => 'Goupe de mot-clefs utilisé pour la modération de SpipBB',
 	'mot_postit' => 'Postit
- _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'apparaît qu\'une seule fois dans la liste.',
+ _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n’apparaît qu’une seule fois dans la liste.',
 
 	// N
 	'no_message' => 'Aucun sujet ou message ne correspond à tes critères de recherche',
-	'nom_util' => 'Nom d\'utilisateur',
+	'nom_util' => 'Nom d’utilisateur',
 	'non' => 'Non',
 
 	// O
@@ -351,31 +351,31 @@ _ Une annonce est située en tête de forum sur toutes les pages.',
 	'pagine_sujet_' => ' sujet',
 	'pagine_sujet_s' => ' sujets',
 	'par_' => 'par ',
-	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
-	'plugin_description' => 'Le plugin SpipBB permet :
+	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_description' => 'Le plugin SpipBB permet :
 -* De gérer de façon centralisée les forums de SPIP (interface privée),
--* D\'utiliser un secteur comme base d\'un groupe de forums comme les «Bulletin Board» tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y démarre un thread.
+-* D’utiliser un secteur comme base d’un groupe de forums comme les « Bulletin Board » tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d’un article y démarre un thread.
 
-{{Consulte :}}
--* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+{{Consulte :}}
+-* •[l’aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de développement. Tu l\'utilises à tes risques et périls}}
+_ {{Plugin spipbb en cours de développement. Tu l’utilises à tes risques et périls}}
 
-_ [Accès au panneau d\'administration-> .?exec=spipbb_configuration]',
+_ [Accès au panneau d’administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribué sous licence GPL',
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
-	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec ta version de SPIP !',
-	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
+	'plugin_mauvaise_version' => 'Cette version du plugin n’est pas compatible avec ta version de SPIP !',
+	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP',
 	'post_aucun_pt' => 'aucun !',
 	'post_efface_lui' => 'Ce sujet comprend @nbr_post@ message(s). Effacés avec lui !\\n',
-	'post_ip' => 'Messages posté à partie de l\'adresse IP',
+	'post_ip' => 'Messages posté à partie de l’adresse IP',
 	'post_propose' => 'Message proposé',
 	'post_rejete' => 'Message rejeté',
-	'post_titre' => ' ::: Titre : ',
+	'post_titre' => ' :: : Titre : ',
 	'post_verifier_sujet' => 'Vérifier ce sujet',
 	'poste_valide' => 'Post(s) à valider ...',
-	'poster_date_' => 'Posté le : ',
+	'poster_date_' => 'Posté le : ',
 	'poster_message' => 'Poste ton message',
 	'postit' => 'Postit',
 	'postit_dpt' => 'Postit : ',
@@ -390,7 +390,7 @@ _ [Accès au panneau d\'administration-> .?exec=spipbb_configuration]',
 	'recherche' => 'Recherche',
 	'recherche_elargie' => 'Recherche élargie',
 	'redige_post' => 'Ecrire message',
-	'reglement' => '<p>Les administrateurs et modérateurs de ce forum s\'efforceront de supprimer
+	'reglement' => '<p>Les administrateurs et modérateurs de ce forum s’efforceront de supprimer
     ou éditer tous les messages à caractère répréhensible
     aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous
     les messages. Tu admets donc que tous les messages postés sur ces forums
@@ -400,48 +400,48 @@ _ [Accès au panneau d\'administration-> .?exec=spipbb_configuration]',
 
     <p>Tu consens à ne pas poster de messages injurieux, obscènes,
     vulgaires, diffamatoires, menaçants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut te conduire à être banni
-    immédiatement de façon permanente (et ton fournisseur d\'accès
-    à internet en sera informé). L\'adresse IP de chaque message est enregistrée afin d\'aider à faire respecter ces conditions.
-    Tu es d\'accord sur le fait que le webmestre, l\'administrateur
+    immédiatement de façon permanente (et ton fournisseur d’accès
+    à internet en sera informé). L’adresse IP de chaque message est enregistrée afin d’aider à faire respecter ces conditions.
+    Tu es d’accord sur le fait que le webmestre, l’administrateur
     et les modérateurs de ce forum ont le droit de supprimer, éditer,
-    déplacer ou verrouiller n\'importe quel sujet de discussion à tout moment.
-    En tant qu\'utilisateur, tu es d\'accord sur le fait que toutes les informations
+    déplacer ou verrouiller n’importe quel sujet de discussion à tout moment.
+    En tant qu’utilisateur, tu es d’accord sur le fait que toutes les informations
     que tu donneras ci-après seront stockées dans une base de données.
     Cependant, ces informations ne seront divulguées à aucune tierce personne
-    ou société sans ton accord. Le webmestre, l\'administrateur,
+    ou société sans ton accord. Le webmestre, l’administrateur,
     et les modérateurs ne peuvent pas être tenus pour responsables si une
-    tentative de piratage informatique conduit à l\'accès de ces données.</p>
+    tentative de piratage informatique conduit à l’accès de ces données.</p>
     <p>Ce forum utilise les cookies pour stocker des informations sur ton ordinateur.
     Ces cookies ne contiendront aucune information que tu auras entré ci-après,
-    ils servent uniquement à améliorer le confort d\'utilisation.
-    L\'adresse e-mail est uniquement utilisée afin de confirmer les détails
-    de ton enregistrement ainsi que ton mot de passe (et aussi pour t\'envoyer un nouveau
-    mot de passe dans la cas où tu l\'oublierais).</p>
-    <p>En t\'enregistrant, tu te portes garant du fait d\'être en accord avec le règlement ci-dessus.</p>',
+    ils servent uniquement à améliorer le confort d’utilisation.
+    L’adresse e-mail est uniquement utilisée afin de confirmer les détails
+    de ton enregistrement ainsi que ton mot de passe (et aussi pour t’envoyer un nouveau
+    mot de passe dans la cas où tu l’oublierais).</p>
+    <p>En t’enregistrant, tu te portes garant du fait d’être en accord avec le règlement ci-dessus.</p>',
 	'repondre' => 'Répondre',
 	'reponse_s_' => 'Réponses',
 	'resultat_s_pour_' => ' résultats pour ',
-	'retour_forum' => 'Retour à l\'accueil du forum',
+	'retour_forum' => 'Retour à l’accueil du forum',
 
 	// S
-	's_abonner_a' => 'RSS . S\'abonner à : ',
+	's_abonner_a' => 'RSS . S’abonner à : ',
 	'secteur_forum' => 'RACINE',
 	'selection_efface' => 'Effacer la sélection ..',
 	'selection_tri_dpt' => 'Sélectionner la méthode de tri :',
-	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès à la configuration du plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ainsi qu\'à la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte :
+	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès à la configuration du plugin « {{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}} » ainsi qu’à la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consulte :
 _ • [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
+_ • [L’aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Version plus récente disponible : @version@',
 	'sign_ok' => 'à jour.',
 	'sign_reinit' => '<p>Ré-initialisation :
 _ • [de tout le plugin->@plugin@]</p>',
 	'sign_tempo' => 'Réalisé avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signature',
-	'sinscrire' => 'S\'inscrire',
+	'sinscrire' => 'S’inscrire',
 	'site_propose' => 'Site proposé par @auteur_post@',
 	'site_web' => 'Site web',
-	'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
-	'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
+	'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
+	'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
 	'statut' => 'Statut',
 	'statut_admin' => 'Administrateur',
 	'statut_redac' => 'Rédacteur',
@@ -451,7 +451,7 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'sujet_clos_texte' => 'Ce sujet est clos, tu ne peux pas y poster.',
 	'sujet_clos_titre' => 'Sujet Clos',
 	'sujet_dpt' => 'Sujet : ',
-	'sujet_ferme' => 'Sujet : fermé',
+	'sujet_ferme' => 'Sujet : fermé',
 	'sujet_nombre' => 'Nombre de Sujets',
 	'sujet_nouveau' => 'Nouveau sujet',
 	'sujet_rejete' => 'Sujet rejeté',
@@ -459,32 +459,32 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'sujet_s' => 'Sujets',
 	'sujet_valide' => 'Sujet à valider',
 	'sujets' => 'Sujets',
-	'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
+	'sujets_aucun' => 'Pas de sujet dans ce forum pour l’instant',
 	'support_extra_normal' => 'extra',
 	'support_extra_table' => 'table',
 	'supprimer' => 'Supprimer',
 	'sw_admin_can_spam' => 'Les admins sont autorisés',
 	'sw_admin_no_spam' => 'Pas de spam',
-	'sw_ban_ip_titre' => 'Bannir l\'IP en même temps',
+	'sw_ban_ip_titre' => 'Bannir l’IP en même temps',
 	'sw_config_exceptions' => 'Tu peux activer des exceptions pour des utilisateurs privilégiés ici. Ils pourront quand même publier avec des mots bannis.',
 	'sw_config_exceptions_titre' => 'Gestion des exceptions',
-	'sw_config_generale' => 'Configuration actuelle du filtrage :',
+	'sw_config_generale' => 'Configuration actuelle du filtrage :',
 	'sw_config_generale_titre' => 'Configuration générale du filtrage du spam',
 	'sw_config_warning' => 'Tu peux choisir le texte du MP envoyé si tu actives cette option (maxi 255 caractères).',
 	'sw_config_warning_titre' => 'Configuration des avertissements par message privé',
 	'sw_disable_sw_titre' => '<strong>Active le filtrage</strong><br />Si tu dois te passer du filtrage,<br />clique sur Non',
 	'sw_modo_can_spam' => 'Les modérateurs sont autorisés',
 	'sw_nb_spam_ban_titre' => 'Nombre de spams avant banissement',
-	'sw_pm_spam_warning_message' => 'Ceci est un avertissement. Tu as essayé de poster un message analysé comme du spam sur ce site web. Merci d\'éviter de recommencer.',
+	'sw_pm_spam_warning_message' => 'Ceci est un avertissement. Tu as essayé de poster un message analysé comme du spam sur ce site web. Merci d’éviter de recommencer.',
 	'sw_pm_spam_warning_titre' => 'Attention.',
-	'sw_send_pm_warning' => '<strong>Envoie un MP à l\'utilisateur</strong><br />lorsqu\'il poste un message avec un mot interdit',
+	'sw_send_pm_warning' => '<strong>Envoie un MP à l’utilisateur</strong><br />lorsqu’il poste un message avec un mot interdit',
 	'sw_spam_forum_titre' => 'Gestion des messages de spam',
 	'sw_spam_titre' => 'Filtrage du spam',
 	'sw_spam_words_action' => 'A partir de cette page, tu peux ajouter, éditer et supprimer des mots associés à du spam. Le caractère (*) est accepté dans le mot. Par exemple : {{*tes*}} capturera {détestable}, {{tes*}} capturera {tester}, {{*tes}} capturera {portes}.',
 	'sw_spam_words_mass_add' => 'Copier-coller ou saisir tes mots dans cette zone. Séparer chaque mot par une virgule, deux points ou un retour à la ligne.',
 	'sw_spam_words_titre' => 'Filtrage de mots',
-	'sw_spam_words_url_add' => 'Saisir l\'URL d\'un fichier contenant une liste de mots formatée comme ci-dessus. Exemple : http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
-	'sw_warning_from_admin' => 'Choisir l\'admin auteur du message envoyé',
+	'sw_spam_words_url_add' => 'Saisir l’URL d’un fichier contenant une liste de mots formatée comme ci-dessus. Exemple : http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
+	'sw_warning_from_admin' => 'Choisir l’admin auteur du message envoyé',
 	'sw_warning_pm_message' => 'Texte du message privé',
 	'sw_warning_pm_titre' => 'Sujet du message privé',
 	'sw_word' => 'Mot',
@@ -502,7 +502,7 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'tous' => 'Tous',
 	'tous_forums' => 'Tous les forums',
 	'trier' => 'Trier',
-	'trouver_messages_auteur_dpt' => 'Trouver tous les messages de :',
+	'trouver_messages_auteur_dpt' => 'Trouver tous les messages de :',
 
 	// V
 	'visible_annuaire_forum' => 'Apparaître dans la liste des Inscrits',
@@ -514,7 +514,7 @@ _ • [de tout le plugin->@plugin@]</p>',
 	'votre_signature' => 'Ta signature',
 	'votre_site' => 'Le nom de ton site',
 	'votre_url_avatar' => 'URL de ton Avatar (http://...)',
-	'votre_url_site' => 'L\'adresse (URL) de ton site'
+	'votre_url_site' => 'L’adresse (URL) de ton site'
 );
 
 ?>

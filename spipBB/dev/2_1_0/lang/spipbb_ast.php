@@ -22,20 +22,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_action_swforum' => 'Mensaxes marcaos',
 	'admin_action_swlog' => 'Rexistru de puxarra',
 	'admin_action_swwords' => 'Xestión de les pallabres',
-	'admin_afficher_bouton_alerte_abus' => 'Amosar los botones d\'alerta Abusu',
+	'admin_afficher_bouton_alerte_abus' => 'Amosar los botones d’alerta Abusu',
 	'admin_afficher_bouton_rss' => 'Amosar los botones RSS',
 	'admin_age_forum' => 'Antigüedá del foru Años/meses',
-	'admin_avatar_affiche' => 'Almitir y amosar los avatares (sí por omisión n\'instalación prem)',
-	'admin_avatar_taille_contact' => 'Tamañu de l\'avatar (en pixels) na páxina de contautu',
-	'admin_avatar_taille_profil' => 'Tamañu de l\'avatar (en pixels) na páxina de perfil',
-	'admin_avatar_taille_sujet' => 'Tamañu de l\'avatar (en pixels) na páxina d\'asuntos',
+	'admin_avatar_affiche' => 'Almitir y amosar los avatares (sí por omisión n’instalación prem)',
+	'admin_avatar_taille_contact' => 'Tamañu de l’avatar (en pixels) na páxina de contautu',
+	'admin_avatar_taille_profil' => 'Tamañu de l’avatar (en pixels) na páxina de perfil',
+	'admin_avatar_taille_sujet' => 'Tamañu de l’avatar (en pixels) na páxina d’asuntos',
 	'admin_average_posts' => 'Media de mensaxes/día',
-	'admin_average_users' => 'Media d\'inscripciones/día',
-	'admin_ban_email' => 'Xestión de les señes d\'email torgáes',
-	'admin_ban_email_info' => 'Pa especificar más d\'una direición d\'e-mail, sepártales con comes. Pa indicar un comodín nel nome d\'usuariu, utiliza * ; per exemplu *@hotmail.com',
+	'admin_average_users' => 'Media d’inscripciones/día',
+	'admin_ban_email' => 'Xestión de les señes d’email torgáes',
+	'admin_ban_email_info' => 'Pa especificar más d’una direición d’e-mail, sepártales con comes. Pa indicar un comodín nel nome d’usuariu, utiliza * ; per exemplu *@hotmail.com',
 	'admin_ban_email_none' => 'Nun hai señes torgáes',
 	'admin_ban_ip' => 'Xestión de les señes IP torgáes',
-	'admin_ban_ip_info' => 'Pa especificar delles IP o nomes de sirvidores diferentes, sepártales con comes. Pa indicar un intervalu de señes IP, separta el primeru y l\'ultimu con un guión (-); pa especificar un comodín, utilza un asteriscu (*)',
+	'admin_ban_ip_info' => 'Pa especificar delles IP o nomes de sirvidores diferentes, sepártales con comes. Pa indicar un intervalu de señes IP, separta el primeru y l’ultimu con un guión (-); pa especificar un comodín, utilza un asteriscu (*)',
 	'admin_ban_ip_none' => 'Nun hai señes torgáes',
 	'admin_ban_user' => 'Xestión de los usuarios torgáos',
 	'admin_ban_user_info' => 'Puedes torgar dellos usuarios d’una vez utilizando la combinación CTRL o MAY col mur o col tecláu',
@@ -44,14 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_cat_outils' => 'Ferramientes',
 	'admin_cat_spam' => 'Anti Puxarra',
 	'admin_config_prerequis' => 'Requisitos',
-	'admin_config_spam_words' => 'Configuración de l\'anti-puxarra',
+	'admin_config_spam_words' => 'Configuración de l’anti-puxarra',
 	'admin_config_spipbb' => 'Aniciu de SpipBB',
 	'admin_config_spipbb_info' => 'Calcar enriba de Sí pa aniciar SpipBB',
 	'admin_config_tables' => 'Configuración de les tables de SpipBB',
 	'admin_config_tables_erreur' => 'Problema coles tables de SpipBB: @tables_erreur@ son incorreutes (les tables @tables_ok@ paecen correutes).
 Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] o el [sofitu de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les tables de SpipBB instaláronse correutamente (@tables_ok@)',
-	'admin_date_ouverture' => 'Fecha d\'apertura',
+	'admin_date_ouverture' => 'Fecha d’apertura',
 	'admin_debug_log' => 'Archivu de rexistru @log_name@',
 	'admin_debug_metas' => 'SpipBB METAs',
 	'admin_form_action' => 'Aición',
@@ -74,16 +74,16 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_forums_log_level_3' => 'Rexistros enormes',
 	'admin_id_mjsc' => 'N°',
 	'admin_infos' => 'SpipBB - Alministración - Resumen',
-	'admin_interface' => 'Opciones de l\'interfaz',
+	'admin_interface' => 'Opciones de l’interfaz',
 	'admin_nombre_lignes_messages' => 'Númberu de llinies de mensaxes',
 	'admin_plugin_requis_erreur' => 'Falta el siguiente plugin requeríu. ¡Actívalu!',
-	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalu! [La documentación ta equí->http://www.spip-contrib.net/?article1224], [l\'archivu ZIP ta nesti lláu->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_balisesession' => '¡Instala el plugin Balise SESSION y actívalu! [La documentación ta equí->http://www.spip-contrib.net/?article1224], [l’archivu ZIP ta nesti lláu->http://files.spip.org/spip-zone/balise_session.zip].',
 	'admin_plugin_requis_erreur_cfg' => '¡Instala el plugin CFG y actívalu! [Documentación per equí->http://www.spip-contrib.net/?article1605], [archivu ZIP allá->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Falten los siguientes plugins requeríos. ¡Actívalos!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instaláu(os) y activu(os):',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224]: ufre información tocante a los visitantes autentificaos.',
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605]: ufre funciones y balices.',
-	'admin_sous_titre' => 'Acceder al panel d\'alministración de los foros con SpipBB',
+	'admin_sous_titre' => 'Acceder al panel d’alministración de los foros con SpipBB',
 	'admin_spip_config_forums' => 'Configuración de SPIP:',
 	'admin_spip_forums_ok' => 'Los foros públicos activáronse bien.',
 	'admin_spip_forums_warn' => '<p>{{Atención}}: los foros tan desactiváos por omisión, recomiéndase utilizar la publicación inmediata: [ver equí->@config_contenu@].</p><p>Sinon tendrás que los activar artículu por artículu.</p>',
@@ -108,7 +108,7 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'admin_titre_page_spipbb_configuration' => 'Configuración de SpipBB',
 	'admin_titre_page_spipbb_effacer' => 'Xestión de los mensaxes refugáos',
 	'admin_titre_page_spipbb_inscrits' => 'Xestión de los miembros',
-	'admin_titre_page_spipbb_sujet' => 'Edición d\'un filu',
+	'admin_titre_page_spipbb_sujet' => 'Edición d’un filu',
 	'admin_total_posts' => 'Númberu total de mensaxes',
 	'admin_total_users' => 'Númberu de miembros',
 	'admin_total_users_online' => 'Miembros en llinia',
@@ -142,18 +142,18 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'choix_mots_selection' => 'El grupu de pallabres debe contener tres pallabres-clave. Normalmente, el plugin créales nel momentu de instalase. SpipBB utiliza en xeneral les pallabres {ferme}, {annonce} y {postit}, pero puedes escoyer otres.',
 	'choix_rubrique_creation' => 'Si quies crear <strong>automáticamente</strong> el sector que contenga los foros de SpipBB y un primer foru vacíu, calca nesti botón. Esti foru y la xerarquía que se crea pueden cambease o desaniciase lluéu...',
 	'choix_rubrique_creation_submit' => 'Auto axuste del sector',
-	'choix_rubrique_selection' => 'Escoyer un sector que será la base de los foros. Dientro d\'el, cada so-estaya será un grupu de foros, y cada artículu espublizáu abrirá un foru.',
+	'choix_rubrique_selection' => 'Escoyer un sector que será la base de los foros. Dientro d’el, cada so-estaya será un grupu de foros, y cada artículu espublizáu abrirá un foru.',
 	'choix_squelettes' => 'Puedes escoyer otres, pero ¡los archivos que reemplacen groupeforum.html y filforum.html deben existir!',
 	'citer' => 'Citar',
 	'cocher' => 'marcar',
 	'col_avatar' => 'Avatar',
-	'col_date_crea' => 'Fecha d\'inscripción',
+	'col_date_crea' => 'Fecha d’inscripción',
 	'col_marquer' => 'Marcar',
 	'col_signature' => 'Robla',
 	'config_affiche_champ_extra' => 'Amosar el campu: <b>@nom_champ@</b>',
 	'config_affiche_extra' => 'Amosar estos campos nes cadarmes',
 	'config_champs_auteur' => 'Campos SPIPBB',
-	'config_champs_auteurs_plus' => 'Xestión de los campos d\'autor suplementarios',
+	'config_champs_auteurs_plus' => 'Xestión de los campos d’autor suplementarios',
 	'config_champs_requis' => 'Los campos necesarios pa SpipBB',
 	'config_choix_mots' => 'Escoyer el grupu de pallabres-clave',
 	'config_choix_rubrique' => 'Escoyer la estaya que contién los foros spipBB',
@@ -180,7 +180,7 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'diviser' => 'Dividir',
 	'diviser_confirmer' => 'Confirmar la separación de los mensaxes',
 	'diviser_dans_dpt' => 'Pa meter nel foru:',
-	'diviser_expliquer' => 'Con l\'aida del formulariu d\'embaxo, vas poder dividir esti filu en dos; seya seleicionando los mensaxes individualmente, o escoyendo el mensaxe a partir del que hai que dividilos en dos.',
+	'diviser_expliquer' => 'Con l’aida del formulariu d’embaxo, vas poder dividir esti filu en dos; seya seleicionando los mensaxes individualmente, o escoyendo el mensaxe a partir del que hai que dividilos en dos.',
 	'diviser_selection_dpt' => 'Seleición:',
 	'diviser_separer_choisis' => 'Separar los mensaxes seleicionáos',
 	'diviser_separer_suite' => 'Separar a partir del mensaxe seleicionáo',
@@ -195,7 +195,7 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'en_reponse_a' => 'Respondiendo al mensaxe',
 	'etplus' => '... y más ...',
 	'extra_avatar_saisie_url' => 'URL del to avatar (http://... ...)',
-	'extra_avatar_saisie_url_info' => 'URL de l\'avatar del visitante',
+	'extra_avatar_saisie_url_info' => 'URL de l’avatar del visitante',
 	'extra_date_crea' => 'Fecha de la primera edición del perfil SpipBB',
 	'extra_date_crea_info' => 'Fecha de la primera edición del perfil SpipBB',
 	'extra_emploi' => 'Emplegu',
@@ -210,17 +210,17 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'extra_signature_saisie_texte' => 'Iguar equí el testu de la to robla',
 	'extra_signature_saisie_texte_info' => 'Testu curtiu pa roblar los tos mensaxes',
 	'extra_visible_annuaire' => 'Apaecer na llista de Apuntáos (pública)',
-	'extra_visible_annuaire_info' => 'Permite refugar l\'apaecer na guía de los apuntáos na zona pública',
+	'extra_visible_annuaire_info' => 'Permite refugar l’apaecer na guía de los apuntáos na zona pública',
 
 	// F
 	'fiche_contact' => 'Ficha de Contautu',
-	'fil_annonce_annonce' => 'Pasar l\'Asuntu a Anunciu',
+	'fil_annonce_annonce' => 'Pasar l’Asuntu a Anunciu',
 	'fil_annonce_desannonce' => 'Suprimir el mou Anunciu',
 	'fil_deplace' => 'Desplazar esti filu',
 	'filtrer' => 'Filtriar',
 	'forum' => 'Foros',
-	'forum_annonce_annonce' => 'Poner la marca d\'anunciu',
-	'forum_annonce_desannonce' => 'Quitar la marca d\'anunciu',
+	'forum_annonce_annonce' => 'Poner la marca d’anunciu',
+	'forum_annonce_desannonce' => 'Quitar la marca d’anunciu',
 	'forum_dpt' => 'Foru: ',
 	'forum_ferme' => 'Esti foru ta peslláu',
 	'forum_ferme_texte' => 'Esti foru ta peslláu. Ya nun se pue escribir.',
@@ -246,12 +246,12 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'fromphpbb_migre_thread_ferme' => 'Peslláo',
 	'fromphpbb_migre_thread_impossible_dpt' => 'Ye imposible recuperar los mensaxes:',
 	'fromphpbb_migre_thread_postit' => 'Apegadizu',
-	'fromphpbb_migre_thread_total_dpt' => 'Númberu total d\'asuntos y de mensaxes amestaos:',
+	'fromphpbb_migre_thread_total_dpt' => 'Númberu total d’asuntos y de mensaxes amestaos:',
 	'fromphpbb_migre_utilisateurs' => 'Importación de los usuarios',
 	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Amestar almin restrinxíos',
 	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Ya ye almin restrinxíu',
 	'fromphpbb_migre_utilisateurs_impossible' => 'Nun ye posible recuperar los usuarios',
-	'fromphpbb_migre_utilisateurs_total_dpt' => 'Númberu total d\'usuarios amestaos:',
+	'fromphpbb_migre_utilisateurs_total_dpt' => 'Númberu total d’usuarios amestaos:',
 
 	// H
 	'haut_page' => 'Entamu de páxina',
@@ -266,18 +266,18 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'import_erreur_db_rappel_connexion' => 'Nun ye posible la reconexón cola base @nom_base@',
 	'import_erreur_db_spip' => 'Nun ye posible la conexón cola base SPIP',
 	'import_erreur_forums' => 'Ye imposible recuperar los foros',
-	'import_fichier' => 'Alcontróse l\'archivu de configuración de @nom_base@:',
+	'import_fichier' => 'Alcontróse l’archivu de configuración de @nom_base@:',
 	'import_host' => 'Nome/señes del sirvidor',
 	'import_login' => 'Identificador:',
-	'import_parametres_base' => 'Escueye ente conseñar el camín a l\'archivu de configuración de @nom_base@, o escribir los parámetros d\'accesu a la base que contien los foros de @nom_base@:',
+	'import_parametres_base' => 'Escueye ente conseñar el camín a l’archivu de configuración de @nom_base@, o escribir los parámetros d’accesu a la base que contien los foros de @nom_base@:',
 	'import_parametres_rubrique' => 'Escueye la estaya na que van importase los foros de @nom_base@',
 	'import_parametres_titre' => 'Información de la base @nom_base@',
 	'import_password' => 'Contraseña:',
 	'import_prefix' => 'Prefixu de les tables:',
 	'import_racine' => 'Camín a @nom_base@ (avatares):',
 	'import_table' => 'Alcontrose la tabla de configuración @nom_base@:',
-	'import_titre' => 'Importación d\'un foru @nom_base@',
-	'import_titre_etape' => 'Importación d\'un foru  @nom_base@ - etapa',
+	'import_titre' => 'Importación d’un foru @nom_base@',
+	'import_titre_etape' => 'Importación d’un foru  @nom_base@ - etapa',
 	'info' => 'Información',
 	'info_annonce_ferme' => 'Estáu Anunciu / Pesllar',
 	'info_confirmer_passe' => 'Confirmar esta contraseña nueva:',
@@ -292,7 +292,7 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'inscrit_s' => 'Inscritos',
 	'ip_adresse_autres' => 'Otres señes IP dende les que mando mensaxes esti autor',
 	'ip_adresse_membres' => 'Miembros que mandaron mensaxes dende estes señes IP',
-	'ip_adresse_post' => 'Señes IP d\'esti mensaxe',
+	'ip_adresse_post' => 'Señes IP d’esti mensaxe',
 	'ip_informations' => 'Información tocante a unes señes IP y un autor',
 
 	// L
@@ -303,7 +303,7 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 
 	// M
 	'maintenance' => 'Mantenimientu',
-	'maintenance_fermer' => 'peslló l\'artículu/foru:',
+	'maintenance_fermer' => 'peslló l’artículu/foru:',
 	'maintenance_pour' => 'por MANTENIMIENTU.',
 	'membres_en_ligne' => 'miembros en llinia',
 	'membres_inscrits' => 'miembros apuntaos',
@@ -328,14 +328,14 @@ Consulta la [documentación de Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 _ Un anunciu ponse en cabeza del foru en toes les páxines.',
 	'mot_ferme' => 'Pesllao
 -* Si un artículu-foru tien esta pallabra-clave, sólo los llendadores pueden amesta-y mensaxes.
--* Cuando l\'asuntu del foru ta pesllau, sólo los llendadores pueden amesta-y respuestes.',
+-* Cuando l’asuntu del foru ta pesllau, sólo los llendadores pueden amesta-y respuestes.',
 	'mot_groupe_moderation' => 'Grupu de pallabres-clave utilizáes pa llendar SpipBB',
 	'mot_postit' => 'Apegadizu
 _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordinarios. Nun apaez na llista más que una sola vegada.',
 
 	// N
 	'no_message' => 'Dengún asuntu o mensaxe nun correspuende colos criterios guetaos',
-	'nom_util' => 'Nome d\'usuariu',
+	'nom_util' => 'Nome d’usuariu',
 	'non' => 'Non',
 
 	// O
@@ -351,18 +351,18 @@ _ Un mensaxe apegadizu ta embaxo de los anuncios, enantes de los mensaxes ordina
 	'pagine_sujet_' => ' asuntu',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
-	'plugin_auteur' => 'L\'Equipu SpipBB: [ver la llista de collaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'L’Equipu SpipBB: [ver la llista de collaboradores en Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permite:
 -* Xestionar de mou centralizáu los foros de SPIP (interfaz privada),
--*Utilizar una estaya como base d\'un grupu de foros como los «Bulletin Board» asemeyáos a phpBB. Nesa estaya, les so-estayes son grupos de foros, los artículos son foros, y cada mensaxe nel foru d\'un artículu entama un filu de discutiniu.
+-*Utilizar una estaya como base d’un grupu de foros como los «Bulletin Board» asemeyáos a phpBB. Nesa estaya, les so-estayes son grupos de foros, los artículos son foros, y cada mensaxe nel foru d’un artículu entama un filu de discutiniu.
 
 {{Consulta:}}
--* •[l\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* •[l’aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
 -* •[La documentación en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
 _ {{El plugin spipbb ta en procesu de desendolcu. Utilíceslu pola to cuenta y riesgu}}
 
-_ [Accesu al tableru d\'alministración-> .?exec=spipbb_configuration]',
+_ [Accesu al tableru d’alministración-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuyíu embaxo la llicencia GPL',
 	'plugin_lien' => '[Consultar la documentación del plugin en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => '¡Esta versión del plugin nun ye compatible cola to versión de SPIP!',
@@ -390,49 +390,49 @@ _ [Accesu al tableru d\'alministración-> .?exec=spipbb_configuration]',
 	'recherche' => 'Gueta',
 	'recherche_elargie' => 'Gueta estendida',
 	'redige_post' => 'Escribir mensaxe',
-	'reglement' => '<p>Los alministradores y llendadores d\'esti foru van enfotase en desaniciar
+	'reglement' => '<p>Los alministradores y llendadores d’esti foru van enfotase en desaniciar
     o iguar toos los mensaxes de calter dañible
     tan apriesa como seya posible. Sicasí, pa ellos ye imposible revisar toos
     los mensaxes. Poro, almites que toos los mensaxes unviaos a estos foros
     amuesen les opiniones de los respeutivos autores, y non les de los alministradores,
     o llendadores, o webmasters (esceuto los mensaxes unviaos por
-    ellos mesmos) y darréu d\'esto nun pueden considerase responsables d\'ellos.</p>
+    ellos mesmos) y darréu d’esto nun pueden considerase responsables d’ellos.</p>
     <p>Aceutes que nun vas unviar mensaxes de calter inxuriosu, obscenu,
     vulgar, bilordiosu, amenazante, sexual o mensaxes de toa triba que violen
     les lleis aplicables. Facelo pue llevate a quedar torgáu
-    dafechu de mou permanente (y va informase al fornidor d\'accesu
+    dafechu de mou permanente (y va informase al fornidor d’accesu
     a internet). Les señes IP de cada mensaxe queden
     rexistráes col envís de facer que estes condiciones se respeten.
-    Das el to acuerdu col fechu que\'l webmaster, l\'alministrador
-    y los llendadores d\'esti foru tienen drechu a desaniciar, iguar,
+    Das el to acuerdu col fechu que’l webmaster, l’alministrador
+    y los llendadores d’esti foru tienen drechu a desaniciar, iguar,
     mover o pesllar cualisquier asuntu en discutiniu en tou momentu.
     Como usuariu, das consentimientu al fechu de que toa la información
     que conseñes darréu va guardase nuna base de datos.
     Sicasí, esa información nun va divulgase a denguna tercera persona
-    o socieda ensin el to alcuerdu. El webmaster, l\'alministrador,
+    o socieda ensin el to alcuerdu. El webmaster, l’alministrador,
     y los moderadores nun pueden considerase responsables si una
-    tentativa de pirateu informáticu llevare a l\'accesu a estos datos.</p>
+    tentativa de pirateu informáticu llevare a l’accesu a estos datos.</p>
     <p>Esti foru utiliza les cookies pa guardar información nel to ordenador.
     Estes cookies nun contendrán información denguna de les que conseñes darréu,
-    sirven namái pa meyorar la comodidá d\'utilización.
-    Les señes d\'e-mail úsense unicamente col fin de confirmar los detais
+    sirven namái pa meyorar la comodidá d’utilización.
+    Les señes d’e-mail úsense unicamente col fin de confirmar los detais
     del to rexistru lo mesmo que la contraseña (y amás pa unviate una nueva
     contraseña nel casu que la escaezas).</p>
-    <p>Al rexistrate, reconoces tar d\'alcuerdu col
+    <p>Al rexistrate, reconoces tar d’alcuerdu col
     reglamentu de más enriba.</p>',
 	'repondre' => 'Responder',
 	'reponse_s_' => 'Respuestes',
 	'resultat_s_pour_' => ' resultaos por ',
-	'retour_forum' => 'Tornar a l\'entamu del foru',
+	'retour_forum' => 'Tornar a l’entamu del foru',
 
 	// S
 	's_abonner_a' => 'RSS . Soscribise a: ',
 	'secteur_forum' => 'RAIZ',
 	'selection_efface' => 'Desaniciar la seleición... ',
-	'selection_tri_dpt' => 'Seleicionar la métodu d\'ordenación:',
+	'selection_tri_dpt' => 'Seleicionar la métodu d’ordenación:',
 	'sign_admin' => '{{Esta páxina únicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a la configuración del plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» igual que a la xestión de los foros del sitiu.</p><p>Versión: @version@ @distant@</p><p>Consulta:
 _ • [La documentación en Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ • [L\'aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
+_ • [L’aida y sofitu en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versión más reciente disponible: @version@',
 	'sign_ok' => 'actualizao.',
 	'sign_reinit' => '<p>Reinicialización:
@@ -454,7 +454,7 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'sujet_clos_titre' => 'Asuntu Peslláu',
 	'sujet_dpt' => 'Asuntu: ',
 	'sujet_ferme' => 'Asuntu: peslláu',
-	'sujet_nombre' => 'Númberu d\'Asuntos',
+	'sujet_nombre' => 'Númberu d’Asuntos',
 	'sujet_nouveau' => 'Asuntu nuevu',
 	'sujet_rejete' => 'Asuntu refugáu',
 	'sujet_repondre' => 'Responder al asuntu',
@@ -479,14 +479,14 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'sw_nb_spam_ban_titre' => 'Númberu de puxarres enantes de la torga',
 	'sw_pm_spam_warning_message' => 'Esti ye un avisu. Vienes de tentar espublizar un mensaxe analizáu como puxarra nesti sitiu web. Encamentámoste que evites facelo otra vegada.',
 	'sw_pm_spam_warning_titre' => 'Atención.',
-	'sw_send_pm_warning' => '<strong>Unvía un MP a l\'usuariu</strong><br />cuando mande un mensaxe con una pallabra torgada',
+	'sw_send_pm_warning' => '<strong>Unvía un MP a l’usuariu</strong><br />cuando mande un mensaxe con una pallabra torgada',
 	'sw_spam_forum_titre' => 'Xestión de los mensaxes de puxarra',
 	'sw_spam_titre' => 'Filtráu de puxarra',
 	'sw_spam_words_action' => 'Dende esta páxina, puedes amestar, iguar y desaniciar pallabress asociáes cola puxarra. El carauter (*) almitese na pallabra. Por exemplu: {{*tes*}} capturará {detestable}, {{tes*}} capturará {testu}, {{*tes}} capturará {puertes}.',
 	'sw_spam_words_mass_add' => 'Copia-pega o igua les pallabres nesta zona. Separtar cada pallabra con una coma, dos puntos o un retornu de llinia.',
 	'sw_spam_words_titre' => 'Filtráu de pallabres',
-	'sw_spam_words_url_add' => 'Amestar l\'URL d\'un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
-	'sw_warning_from_admin' => 'Escoyer l\'almin autor del mensaxe unviáu',
+	'sw_spam_words_url_add' => 'Amestar l’URL d’un ficheru que contenga una llista de pallabres formateada como embaxo. Exemplu: http://spipbb.free.fr/IMG/csv/spamwordlist.csv .',
+	'sw_warning_from_admin' => 'Escoyer l’almin autor del mensaxe unviáu',
 	'sw_warning_pm_message' => 'Testu del mensaxe priváu',
 	'sw_warning_pm_titre' => 'Asuntu del mensaxe priváu',
 	'sw_word' => 'Pallabra',
@@ -511,7 +511,7 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'visites' => 'Vistu',
 	'voir' => 'VER',
 	'votre_bio' => 'Biografía curtia en delles pallabres.',
-	'votre_email' => 'Les tos señes d\'email',
+	'votre_email' => 'Les tos señes d’email',
 	'votre_nouveau_passe' => 'Contraseña nueva',
 	'votre_signature' => 'La to robla',
 	'votre_site' => 'Nome del to sitiu web',

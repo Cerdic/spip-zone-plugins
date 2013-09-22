@@ -32,10 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_average_posts' => 'Gemiddelde van berichten/dag',
 	'admin_average_users' => 'Gemiddelde van inschrijvingen/dag',
 	'admin_ban_email' => 'Beleid van de verbannen adressen e-mail',
-	'admin_ban_email_info' => 'Om meer dan een adres e-mail, scheidt ze door komma\'s te specificeren. Om een joker voor de naam van gebruiker te specificeren, gebruikt * ; bijvoorbeeld *@hotmail.com',
+	'admin_ban_email_info' => 'Om meer dan een adres e-mail, scheidt ze door komma’s te specificeren. Om een joker voor de naam van gebruiker te specificeren, gebruikt * ; bijvoorbeeld *@hotmail.com',
 	'admin_ban_email_none' => 'Geen enkel verbannen adres',
 	'admin_ban_ip' => 'Beleid van de verbannen IP adressen',
-	'admin_ban_ip_info' => 'Om verschillende IP of namen van verschillende servers, scheidt ze door komma\'s te specificeren. Om een tussenpoos van adressen IP te specificeren, scheidt het begin en het eind met een koppelteken (-), om een joker te specificeren, gebruikt een ster (*)',
+	'admin_ban_ip_info' => 'Om verschillende IP of namen van verschillende servers, scheidt ze door komma’s te specificeren. Om een tussenpoos van adressen IP te specificeren, scheidt het begin en het eind met een koppelteken (-), om een joker te specificeren, gebruikt een ster (*)',
 	'admin_ban_ip_none' => 'Geen enkel verbannen adres',
 	'admin_ban_user' => 'Beleid van login verbannen',
 	'admin_ban_user_info' => 'U kunt verschillende gebruikers in verbannen eens door de combinatie CTRL of MAJ met de muis of het klavier te gebruiken',
@@ -360,7 +360,7 @@ _ Een positie bevindt zich onder de mededelingen voor de gewone berichten. Het l
 -* •[de hulp en steun op spipbb.spip-zone.info - > http://spipbb.free.fr/spip.php?article11], 
  -* •[De documentatie over Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum]. 
 
-_ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}} 
+_ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico’s en gevaren}} 
 
 _ [Toegang tot het administratie paneel ->.?exec=spipbb_configuration]',
 	'plugin_licence' => 'Verdeeld onder GPL vergunning',
