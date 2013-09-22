@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_droits_auteur' => 'Afegir-me els drets d\'accés a aquesta zona',
+	'ajouter_droits_auteur' => 'Afegir-me els drets d’accés a aquesta zona',
 	'aucune_zone' => 'Cap zona',
 	'auteurs' => 'autors', # MODIF
 
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_id' => 'Núm',
 	'confirmer_ajouter_auteurs' => 'Esteu segurs de voler afegir aquest autor a la zona?',
 	'confirmer_retirer_auteur_zone' => 'Estàs segur que vols retirar aquest autor de la zona?',
-	'confirmer_retirer_auteurs' => 'Estàs segur que vols retirar tots els autors d\'aquesta zona?',
+	'confirmer_retirer_auteurs' => 'Estàs segur que vols retirar tots els autors d’aquesta zona?',
 	'confirmer_supprimer_zone' => 'Estàs segur que vols suprimir aquesta zona?',
 	'creer_zone' => 'Crear una nova zona',
 
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Accés Restringit ',
 	'icone_supprimer_zone' => 'Suprimir aquesta zona',
-	'info_acces_restreint' => 'L\'accés a aquesta pàgina està restringit. Us heu d\'identificar per accedir-hi',
+	'info_acces_restreint' => 'L’accés a aquesta pàgina està restringit. Us heu d’identificar per accedir-hi',
 	'info_ajouter_auteur' => 'Afegir aquest autor',
 	'info_ajouter_auteurs' => 'Afegir tots els autors',
 	'info_ajouter_zones' => 'Afegir totes les zones',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Cap autor a la zona',
 	'info_aucune_zone' => 'Cap zona',
 	'info_auteurs_lies_zone' => 'Els autors que tenen accés a aquesta zona',
-	'info_page' => 'Aquesta pàgina permet gestionar les zones d\'accés restringit del vostre lloc',
+	'info_page' => 'Aquesta pàgina permet gestionar les zones d’accés restringit del vostre lloc',
 	'info_retirer_auteurs' => 'Retirar tots els autors',
 	'info_retirer_zone' => 'Treure de la zona',
 	'info_retirer_zones' => 'Treure de totes les zones',
@@ -62,9 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Títol',
 	'titre_ajouter_zone' => 'Tornar a la zona',
 	'titre_cadre_modifier_zone' => 'Modificar una zona',
-	'titre_page_config' => 'Configuració de l\'accés',
-	'titre_table' => 'Totes les zones d\'accés',
-	'titre_zones_acces' => 'Zones d\'accés restringit',
+	'titre_page_config' => 'Configuració de l’accés',
+	'titre_table' => 'Totes les zones d’accés',
+	'titre_zones_acces' => 'Zones d’accés restringit',
 	'toutes' => 'Totes',
 
 	// V
@@ -72,8 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'ZONA NÚMERO :',
-	'zone_restreinte_espace_prive' => 'Restringir l\'accés a aquesta zona a l\'espai privat',
-	'zone_restreinte_publique' => 'Restringir l\'accés a aquesta zona a la part pública'
+	'zone_restreinte_espace_prive' => 'Restringir l’accés a aquesta zona a l’espai privat',
+	'zone_restreinte_publique' => 'Restringir l’accés a aquesta zona a la part pública'
 );
 
 ?>

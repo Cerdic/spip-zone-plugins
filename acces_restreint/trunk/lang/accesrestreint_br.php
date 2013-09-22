@@ -16,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_id' => 'Niv.',
-	'confirmer_retirer_auteur_zone' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an aozer-mañ eus an takad ?',
-	'confirmer_retirer_auteurs' => 'Ha sur oc\'h e fell deoc\'h lemel kuit an holl aozerien eus an takad ?',
-	'confirmer_supprimer_zone' => 'Ha sur oc\'h e fell deoc\'h diverkañ an takad ?',
+	'confirmer_retirer_auteur_zone' => 'Ha sur oc’h e fell deoc’h lemel kuit an aozer-mañ eus an takad ?',
+	'confirmer_retirer_auteurs' => 'Ha sur oc’h e fell deoc’h lemel kuit an holl aozerien eus an takad ?',
+	'confirmer_supprimer_zone' => 'Ha sur oc’h e fell deoc’h diverkañ an takad ?',
 	'creer_zone' => 'Krouiñ un takad nevez',
 
 	// D
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Aozer ebet en takad',
 	'info_aucune_zone' => 'Takad ebet',
 	'info_auteurs_lies_zone' => 'Ar skridaozerien ganto ur moned war-zu an takad-mañ',
-	'info_page' => 'Gant ar bajenn-mañ e c\'hellit merañ takadoù eus ho lec\'hienn bevennet ar moned outo.',
+	'info_page' => 'Gant ar bajenn-mañ e c’hellit merañ takadoù eus ho lec’hienn bevennet ar moned outo.',
 	'info_retirer_auteurs' => 'Lemel kuit an holl aozerien',
 	'info_retirer_zone' => 'Lemel kuit eus an takad',
 	'info_retirer_zones' => 'Lemel kuit eus an holl dakadoù',

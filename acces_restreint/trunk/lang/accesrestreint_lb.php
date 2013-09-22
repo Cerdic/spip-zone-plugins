@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_id' => 'Num',
 	'confirmer_ajouter_auteurs' => 'Soll dësen Auteur wierklech bei dës Zone bäigesat ginn?',
 	'confirmer_retirer_auteur_zone' => 'Wëllt dir dësen Auteur aus dëser Zone ewech huelen?',
-	'confirmer_retirer_auteurs' => 'Wëllt dir wierklech all d\'Auteuren aus dëser Zone ewech huelen?',
+	'confirmer_retirer_auteurs' => 'Wëllt dir wierklech all d’Auteuren aus dëser Zone ewech huelen?',
 	'confirmer_retirer_rubrique_zone' => 'Wëllt dir dës Rubrik aus dëser Zone ewech huelen?',
 	'confirmer_supprimer_zone' => 'Wëllt dir dës Zone wierklech läschen?',
 	'creer_zone' => 'Eng nei Zone derbäi setzen',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Beschreiwung',
 
 	// E
-	'explication_creer_htaccess' => 'Dës Optioun verhënnert d\'Uweisen vu verlinkten Dokumenter wann den Text nët verëffentlecht ass', # MODIF
+	'explication_creer_htaccess' => 'Dës Optioun verhënnert d’Uweisen vu verlinkten Dokumenter wann den Text nët verëffentlecht ass', # MODIF
 
 	// I
 	'icone_menu_config' => 'Limitéierten Zougang',
@@ -37,23 +37,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_zone' => '1 Zone',
 	'info_acces_restreint' => 'Den Zougang zu dëser Säit ass beschränkt. Loggt Iech an',
 	'info_ajouter_auteur' => 'Dësen Auteur bäiflécken',
-	'info_ajouter_auteurs' => 'All d\'Auteure bäiflécken',
-	'info_ajouter_zones' => 'All d\'Zonen derbäi setzen',
+	'info_ajouter_auteurs' => 'All d’Auteure bäiflécken',
+	'info_ajouter_zones' => 'All d’Zonen derbäi setzen',
 	'info_aucun_acces' => 'Keen erlaabten Zougang',
 	'info_aucun_auteur' => 'Keen Auteur an dëser Zone',
 	'info_aucune_zone' => 'Keng Zone',
-	'info_auteurs_lies_zone' => 'D\'Auteuren déi Zougang an dës Zone hun',
+	'info_auteurs_lies_zone' => 'D’Auteuren déi Zougang an dës Zone hun',
 	'info_lien_action_proteger' => 'Den Zougang op dës Rubrik aschränken.',
 	'info_nb_zones' => '@nb@ Zonen',
 	'info_page' => 'Dës Säit erlabt déi limitéiert Zonen vun ärem Site anzestellen',
-	'info_retirer_auteurs' => 'All d\'Auteuren ewech huelen',
+	'info_retirer_auteurs' => 'All d’Auteuren ewech huelen',
 	'info_retirer_zone' => 'Vun der Zone ewech huelen',
 	'info_retirer_zones' => 'Vun allen Zonen ewech huelen',
 	'info_rubrique_dans_zone' => 'Dës Rubrik gehéiert zur Zone:',
 	'info_rubrique_dans_zones' => 'Dës Rubrik gehéiert zu den Zonen:',
 
 	// L
-	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d\'Url', # MODIF
+	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d’Url', # MODIF
 	'label_creer_htaccess_non' => 'Liesen erlaaben',
 	'label_creer_htaccess_oui' => 'Liesen verbidden',
 
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_zone' => 'Eng Zone bäiflécken',
 	'texte_creer_associer_zone' => 'Eng Zone erstellen an zouweisen',
 	'titre' => 'Titel',
-	'titre_ajouter_zone' => 'Bei d\'Zone derbäi kommen',
+	'titre_ajouter_zone' => 'Bei d’Zone derbäi kommen',
 	'titre_boite_protegee_non' => 'Zougang nët ageschränkt',
 	'titre_boite_protegee_oui' => 'Zougang ageschränkt',
 	'titre_cadre_modifier_zone' => 'Eng Zone änneren',
