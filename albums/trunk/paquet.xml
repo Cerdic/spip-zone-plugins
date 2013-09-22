@@ -1,5 +1,5 @@
 <paquet
-	prefix="Albums"
+	prefix="albums"
 	categorie="multimedia"
 	version="2.2.9"
 	etat="dev"
