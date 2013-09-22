@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 zásuvného modulu Kontakty na ľudí a organizácie budú mať za následok automatické vymazanie tejto organizácie.',
 	'suppression_automatique_du_contact_prochainement' => 'Bez vášho zásahu
 sa za niekoľko dní automaticky vymažú
-súčasné nastavenia zásuvného modulu Kontakty a  nštitúcie.
+súčasné nastavenia zásuvného modulu Kontakty a nštitúcie.
 		',
 	'supprimer_contact' => 'Odstrániť tento kontakt',
 	'supprimer_organisation' => 'Odstrániť túto organizáciu',

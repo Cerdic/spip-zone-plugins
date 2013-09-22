@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aucun_contact' => 'There is no contact !', # MODIF
 	'aucune_organisation' => 'There is no organization', # MODIF
+	'auteur_associe_est_a_la_poubelle' => 'The associated author is in the rubbish bin! This author will be deleted in a few days.',
+	'auteur_associe_inexistant' => 'The associated author does not exist! The author must have been put in the rubbish bin and has been deleted.',
 	'auteur_lie' => 'Id of the linked author',
 
 	// B
@@ -23,12 +25,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_activer_squelettes_publics_zpip1' => 'Public skeleton of ZPIP v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public skeletons for  ZPIP version 1, which allow to go to the contacts and organizations in the public space?', # MODIF
 	'cfg_afficher_infos_sur_auteurs' => 'Detail display of the authors ?', # MODIF
-	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact infos or organization also on the authors pages in the private area?', # MODIF
+	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact or organisation information on the authors pages in the private area?', # RELIRE
 	'cfg_associer_aux_auteurs' => 'Associate to the authors ?', # MODIF
 	'cfg_associer_aux_auteurs_explication' => 'Allow to associate contacts or organizations to authors. This adds a form to associate an author on the contact pages or organization, and conversely it adds a form to link to a contact or an organization on the authors pages.',
 	'cfg_lier_organisations_rubriques' => 'Link to sections',
 	'cfg_lier_organisations_rubriques_explication' => 'Allow to link organizations to sections ?
 		This display the organization selector on sections and the section selector on organizations.', # MODIF
+	'cfg_relations_avec_auteurs' => 'Relationship with authors', # MODIF
+	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Mutually delete authors and contacts? ', # MODIF
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'By activating this option, when a contact (or an organisation) is deleted, the author associated with this contact, if one exists, sees their status move to the rubbish bin. Inversely, in the same way, if an author is put in the rubbish bin, the contact associated is deleted. This option can be useful on certain sites in order to avoid contacts left without an author (if the latter has been deleted) but be vigilent: deletion is definitive and authors are put in the rubbish ben even if they have written articles...',
 	'changer' => 'Change',
 	'chercher_contact' => 'Search',
 	'chercher_organisation' => 'Search',
@@ -84,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
 
 	// I
-	'info_contacts_organisation' => 'Organisation\'s contacts',
+	'info_contacts_organisation' => 'Organisation’s contacts',
 	'info_nb_contacts' => 'Linked contacts',
 	'info_organisation_appartenance' => 'Belonging Organisation',
 	'info_organisations_appartenance' => 'Membership organizations',
@@ -161,6 +166,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Legal status',
+	'suppression_automatique_de_organisation_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this organisation in the next few days.',
+	'suppression_automatique_du_contact_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this contact in the next few days.',
 	'supprimer_contact' => 'Delete this contact',
 	'supprimer_organisation' => 'Delete this organisation',
 

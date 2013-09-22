@@ -6,11 +6,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_contact' => 'Il n\'y a aucun contact !',
-	'aucune_organisation' => 'Il n\'y a aucune organisation !',
-	'auteur_associe_est_a_la_poubelle' => 'L\'auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
-	'auteur_associe_inexistant' => 'L\'auteur associé est inexistant ! L\'auteur avait du être mis à la poubelle et a été supprimé.',
-	'auteur_lie' => 'Id de l\'auteur lié',
+	'aucun_contact' => 'Il n’y a aucun contact !',
+	'aucune_organisation' => 'Il n’y a aucune organisation !',
+	'auteur_associe_est_a_la_poubelle' => 'L’auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
+	'auteur_associe_inexistant' => 'L’auteur associé est inexistant ! L’auteur avait du être mis à la poubelle et a été supprimé.',
+	'auteur_lie' => 'Id de l’auteur lié',
 
 	// B
 	'bouton_contacts' => 'Contacts',
@@ -22,25 +22,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1',
 	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
-		permettant le parcourir les contacts et organisations dans l\'espace public ?',
+		permettant le parcourir les contacts et organisations dans l’espace public ?',
 	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d\'organisation
-		également sur les pages auteurs dans l\'espace privé ?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d’organisation
+		également sur les pages auteurs dans l’espace privé ?',
 	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?',
-	'cfg_associer_aux_auteurs_explication' => 'Permettre d\'associer des contacts ou organisations
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d’associer des contacts ou organisations
 		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
 		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
-		Cela affiche le sélecteur d\'organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
+		Cela affiche le sélecteur d’organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
 	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?',
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu\'un contact
-		(ou une organisation) est supprimé, l\'auteur associé à ce contact, s\'il en existe un, voit son statut
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu’un contact
+		(ou une organisation) est supprimé, l’auteur associé à ce contact, s’il en existe un, voit son statut
 		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
 		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
-		afin d\'éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
-		une suppression est définitive et les auteurs passent à la poubelle même s\'ils ont écrit des articles…',
+		afin d’éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
+		une suppression est définitive et les auteurs passent à la poubelle même s’ils ont écrit des articles…',
 	'changer' => 'Changer',
 	'chercher_contact' => 'Chercher',
 	'chercher_organisation' => 'Chercher',
@@ -83,27 +83,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
 	'est_une_organisation' => 'Cet auteur est défini comme étant une organisation.',
-	'explication_activite' => 'Activité de l\'organisation : humanitaire, formation, édition...',
+	'explication_activite' => 'Activité de l’organisation : humanitaire, formation, édition...',
 	'explication_contacts_ou_organisations' => 'Vous pouvez définir cet auteur
 		comme étant un contact ou comme étant une organisation.
 		Ces attributions donnent accès à des champs de saisies supplémentaires
-		dans la fiche de renseignement de l\'auteur.',
-	'explication_identification' => 'Identifiant de l\'organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
+		dans la fiche de renseignement de l’auteur.',
+	'explication_identification' => 'Identifiant de l’organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explication_statut_juridique' => 'SA, SARL, association...',
 	'explication_supprimer_contact' => 'La suppression du contact supprimera
-		toutes les informations supplémentaires renseignées sur l\'auteur.',
-	'explication_supprimer_organisation' => 'La suppression de l\'organisation supprimera
-		toutes les informations supplémentaires renseignées sur l\'auteur.',
-	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
-	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+		toutes les informations supplémentaires renseignées sur l’auteur.',
+	'explication_supprimer_organisation' => 'La suppression de l’organisation supprimera
+		toutes les informations supplémentaires renseignées sur l’auteur.',
+	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
+	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
+	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 
 	// I
-	'info_contacts_organisation' => 'Contacts de l\'organisation',
+	'info_contacts_organisation' => 'Contacts de l’organisation',
 	'info_nb_contacts' => 'Contacts liés',
-	'info_organisation_appartenance' => 'Organisation d\'appartenance',
-	'info_organisations_appartenance' => 'Organisations d\'appartenance',
+	'info_organisation_appartenance' => 'Organisation d’appartenance',
+	'info_organisations_appartenance' => 'Organisations d’appartenance',
 	'info_organisations_filles' => 'Organisations filles',
 	'info_organisations_meres' => 'Organisations mères',
 	'info_tous_contacts' => 'Tous les contacts',
@@ -158,10 +158,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_creer_associer' => 'Créer et associer une organisation',
 	'organisation_creer_fille' => 'Créer une organisation fille',
 	'organisation_editer' => 'Éditer cette organisation',
-	'organisation_logo' => 'Logo de l\'organisation',
+	'organisation_logo' => 'Logo de l’organisation',
 	'organisation_nouveau_titre' => 'Nouvelle organisation',
 	'organisation_numero' => 'Organisation numéro',
-	'organisation_retirer_lien' => 'Retirer l\'organisation',
+	'organisation_retirer_lien' => 'Retirer l’organisation',
 	'organisation_retirer_tous_lien' => 'Retirer toutes les organisations',
 	'organisation_un' => 'Une organisation',
 	'organisation_voir' => 'Voir',
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prenom' => 'Prénom',
 
 	// R
-	'recherche_de' => 'Recherche de «@recherche@»',
+	'recherche_de' => 'Recherche de « @recherche@ »',
 	'rechercher' => 'Rechercher',
 
 	// S
@@ -188,7 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_contact' => 'Détails du contact',
-	'titre_organisation' => 'Détails de l\'organisation',
+	'titre_organisation' => 'Détails de l’organisation',
 	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations',
 	'titre_page_contacts' => 'Gestion des contacts',
 	'titre_page_organisations' => 'Gestion des organisations',

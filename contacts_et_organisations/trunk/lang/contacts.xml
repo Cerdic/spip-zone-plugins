@@ -1,16 +1,17 @@
 <traduction module="contacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="142" traduits="123" modifs="12" nouveaux="7" pourcent="86.62">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="148" traduits="128" relire="1" modifs="13" nouveaux="6" pourcent="86.49">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fa" total="142" traduits="88" modifs="8" nouveaux="46" pourcent="61.97">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fa" total="148" traduits="88" relire="0" modifs="8" nouveaux="52" pourcent="59.46">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fr" total="142" traduits="142" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fr" total="148" traduits="142" relire="0" modifs="0" nouveaux="6" pourcent="95.95">
 		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=sk" total="142" traduits="142" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=sk" total="148" traduits="142" relire="0" modifs="0" nouveaux="6" pourcent="95.95">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
