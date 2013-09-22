@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bravo' => 'Congratulation !',
 
 	// C
-	'cfg_affichage' => 'L\'affichage du jeu',
+	'cfg_affichage' => 'L’affichage du jeu',
 	'cfg_correction' => 'La correction du jeu',
 	'cfg_donner_indices' => 'Afficher des indices',
 	'cfg_donner_reponse' => 'Display the answer',
@@ -74,10 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse' => 'Answer',
 	'reponseFausse' => 'The answer is incorrect!',
 	'reponseJuste' => 'This answer is correct!',
-	'reponseNulle' => 'You didn\'t answer this question!',
+	'reponseNulle' => 'You didn’t answer this question!',
 	'resultat' => 'Results',
 	'resultat2_' => 'Not defined ?',
-	'resultat2_aucun' => 'Pas d\'enregistrement',
+	'resultat2_aucun' => 'Pas d’enregistrement',
 	'resultat2_defaut' => 'Depending on the general configuration of the plugin',
 	'resultat2_dernier' => 'For each author, the last result only',
 	'resultat2_meilleur' => 'For each author, the best result only',

@@ -12,27 +12,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Auteur',
 
 	// B
-	'bonneReponse' => 'La bonne réponse est :',
-	'bravo' => 'Bravo !',
+	'bonneReponse' => 'La bonne réponse est :',
+	'bravo' => 'Bravo !',
 
 	// C
-	'cfg_affichage' => 'L\'affichage du jeu',
+	'cfg_affichage' => 'L’affichage du jeu',
 	'cfg_correction' => 'La correction du jeu',
 	'cfg_donner_indices' => 'Afficher des indices',
 	'cfg_donner_reponse' => 'Afficher la réponse',
 	'cfg_donner_solution' => 'Donner les bonnes réponses',
-	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l\'ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n\'utilisent pas certains des paramètres listés ci-dessous.',
+	'cfg_introduction' => 'Les paramètres regroupés ici correspondent à la configuration par défaut de l’ensemble des jeux du site. Ils peuvent être surchargées au cas par cas grâce à la configuration interne des jeux (séparateur [config]).<br/><br/>Il est possible que certains jeux n’utilisent pas certains des paramètres listés ci-dessous.',
 	'cfg_scores' => 'Les scores du jeu',
 	'cfg_type_resultat' => 'Enregistrement des scores :',
 	'colonne_n' => 'colonne @n@',
 	'configuration_jeux' => 'Configurer les jeux',
-	'correction' => 'Correction :',
+	'correction' => 'Correction :',
 	'corriger' => 'Corriger',
 
 	// E
-	'erreur_scripts' => 'Scripts désactivés : vous ne pouvez pas jouer à ce jeu ici !',
+	'erreur_scripts' => 'Scripts désactivés : vous ne pouvez pas jouer à ce jeu ici !',
 	'erreur_syntaxe' => 'Erreur de syntaxe',
-	'erreur_taille_grille' => 'Erreur : taille invalide',
+	'erreur_taille_grille' => 'Erreur : taille invalide',
 
 	// G
 	'grille_invalide' => 'La grille est invalide',
@@ -72,14 +72,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse' => 'Réponse',
 	'reponseFausse' => 'La réponse est fausse',
 	'reponseJuste' => 'La réponse est juste',
-	'reponseNulle' => 'Vous n\'avez pas répondu',
+	'reponseNulle' => 'Vous n’avez pas répondu',
 	'resultat' => 'Résultat',
-	'resultat2_' => 'Non défini ?',
-	'resultat2_aucun' => 'Pas d\'enregistrement',
+	'resultat2_' => 'Non défini ?',
+	'resultat2_aucun' => 'Pas d’enregistrement',
 	'resultat2_defaut' => 'Selon la configuration générale du plugin',
 	'resultat2_dernier' => 'Pour chaque auteur le dernier résultat uniquement',
 	'resultat2_meilleur' => 'Pour chaque auteur le meilleur résultat uniquement',
-	'resultat2_meilleurs' => 'L\'ensemble des meilleurs résultats',
+	'resultat2_meilleurs' => 'L’ensemble des meilleurs résultats',
 	'resultat2_premier' => 'Pour chaque auteur le premier résultat uniquement',
 	'resultat2_tous' => 'Tous les résultats',
 	'resultat_aucun' => 'Aucun',
@@ -112,11 +112,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier' => 'Vérifier',
 	'verifier_validite' => 'Vérifier la validité',
-	'voir_auteur' => 'Voir l\'auteur',
+	'voir_auteur' => 'Voir l’auteur',
 	'voir_jeu' => 'Voir le jeu',
 	'voir_resultats' => 'Voir les résultats',
-	'votre_choix' => 'Votre choix : ',
-	'votre_reponse' => 'Votre réponse : '
+	'votre_choix' => 'Votre choix : ',
+	'votre_reponse' => 'Votre réponse : '
 );
 
 ?>
