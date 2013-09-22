@@ -4,7 +4,7 @@
 <BOUCLE_doc(DOCUMENTS){id_album}{mode?}>
 [(#SET{doc,#GET{doc}|push{#FICHIER|copie_locale}})]
 </BOUCLE_doc>
-<BOUCLE_date(DOCUMENTS){!par maj}{id_album=#GET{id_album}}{0,1}>
+<BOUCLE_date(DOCUMENTS){!par maj}{id_album=#GET{id_album}}{0,1}{mode?}>
 [(#SET{nomdoc,album_#GET{id_album}[_(#ENV{mode})]})]
 [(#SET{urlzip,#GET{doc}|zippeur{#MAJ,#GET{cmd},#GET{nomdoc}}})]
 <dl class='spip_documents'>
