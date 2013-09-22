@@ -18,15 +18,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_paypal' => 'Configure the online payment system Paypal',
 
 	// E
-	'explication_account' => 'Corresponds to email the seller\'s account',
+	'explication_account' => 'Corresponds to email the seller’s account',
 	'explication_environnement' => 'You can indicate in this form datas for the Paypal test website (Sandbox, for development) and the ones for real transaction only.
 		Which environment do you want to use ?',
-	'explication_identifiant_vendeur' => 'Corresponds to email the seller\'s account',
+	'explication_identifiant_vendeur' => 'Corresponds to email the seller’s account',
 	'explication_soumission' => 'On what page of Paypal is submitted the form?',
 	'explication_tax' => 'Eventually the value of the tax to apply (for example, French VAT: 19.60)',
 
 	// I
-	'info_bouton_paypal' => 'Make payments with PayPal: it\'s fast, free and secure!',
+	'info_bouton_paypal' => 'Make payments with PayPal: it’s fast, free and secure!',
 
 	// L
 	'label_account' => 'Account (email)',

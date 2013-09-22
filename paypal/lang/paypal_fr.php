@@ -16,17 +16,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_paypal' => 'Configurer le systeme de paiement en ligne Paypal',
 
 	// E
-	'explication_account' => 'Correspond à l\'adresse email du compte du vendeur',
+	'explication_account' => 'Correspond à l’adresse email du compte du vendeur',
 	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des données
 		qui concernent le site de test de Paypal (Sandbox, pour le développement)
 		ainsi que celles valables uniquement pour de vraies transactions.
-		Quel environnement souhaitez-vous utiliser ?',
-	'explication_identifiant_vendeur' => 'Correspond à l\'adresse email du compte du vendeur',
-	'explication_soumission' => 'Sur quelle page de paypal est soumis le formulaire ?',
-	'explication_tax' => 'Éventuellement la valeur de la taxe qui doit s\'appliquer (exemple pour TVA : 19.60)',
+		Quel environnement souhaitez-vous utiliser ?',
+	'explication_identifiant_vendeur' => 'Correspond à l’adresse email du compte du vendeur',
+	'explication_soumission' => 'Sur quelle page de paypal est soumis le formulaire ?',
+	'explication_tax' => 'Éventuellement la valeur de la taxe qui doit s’appliquer (exemple pour TVA : 19.60)',
 
 	// I
-	'info_bouton_paypal' => 'Effectuez vos paiements via PayPal :
+	'info_bouton_paypal' => 'Effectuez vos paiements via PayPal :
 		une solution rapide, gratuite et sécurisée',
 
 	// L
