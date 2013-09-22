@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'img' => 'There is no "right" size to display an image in an article. In any case, no need to send an image of 3000 pixels wide, no screen can display it in its entirety! Unless the document is to be printed. 
--* If the picture has to be inserted into the text of an article,It depends on its content: if it\'s a portrait, a height of 200px should be sufficient, and if it is a beautiful landscape, you can go up to @largeur_max@ pixels width;
+-* If the picture has to be inserted into the text of an article,It depends on its content: if it’s a portrait, a height of 200px should be sufficient, and if it is a beautiful landscape, you can go up to @largeur_max@ pixels width;
 -* If the picture is supposed to be placed in the portfolio of an article, avoid to exceed 1000 pixels wide and 600 pixels high;
 
 {Please, note that the maximum weight should not exceed {{@poids_max@}}Mo otherwise the upload will be denied}.',
