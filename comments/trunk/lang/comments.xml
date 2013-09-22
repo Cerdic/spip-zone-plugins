@@ -1,34 +1,15 @@
 <traduction module="comments" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/comments/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/comments?lang_cible=ast" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
-	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/comments?lang_cible=ca" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/comments?lang_cible=de" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/comments?lang_cible=en" total="37" traduits="37" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/comments?lang_cible=en" total="49" traduits="37" relire="0" modifs="0" nouveaux="12" pourcent="75.51">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/comments?lang_cible=es" total="37" traduits="37" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/comments?lang_cible=es" total="49" traduits="37" relire="0" modifs="0" nouveaux="12" pourcent="75.51">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fa" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr" total="49" traduits="37" relire="0" modifs="0" nouveaux="12" pourcent="75.51">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr" total="37" traduits="37" modifs="0" nouveaux="0" pourcent="100.00">
-	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr_tu" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
-	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/comments?lang_cible=it" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-	</langue>
-	<langue code="pt" url="http://trad.spip.net/tradlang_module/comments?lang_cible=pt" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/comments?lang_cible=pt_br" total="37" traduits="21" modifs="0" nouveaux="16" pourcent="56.76">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
-	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/comments?lang_cible=sk" total="37" traduits="37" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/comments?lang_cible=sk" total="49" traduits="37" relire="0" modifs="0" nouveaux="12" pourcent="75.51">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

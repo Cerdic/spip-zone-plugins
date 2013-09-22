@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La saisie d\'un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d\'un courriel.',
+	'cfg_explication_nom_obligatoire' => 'La saisie d’un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d’un courriel.',
 	'cfg_forum_champs_obligatoires' => 'Champs obligatoires',
-	'cfg_forum_format_fil' => 'Liste ou thread ?',
+	'cfg_forum_format_fil' => 'Liste ou thread ?',
 	'cfg_forum_longueur' => 'Longueur des messages',
 	'cfg_forum_longueur_maxi' => 'Longueur maximale',
 	'cfg_forum_longueur_mini' => 'Longueur minimale',
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)',
 	'cfg_label_apparence_permalien_diese' => 'Dièse (#)',
 	'cfg_label_apparence_permalien_picto' => 'Picto',
-	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d\'un couriel',
+	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d’un couriel',
 	'cfg_label_presentation_fil' => 'Présentation du fil de discussion',
 	'cfg_label_presentation_fil_liste' => 'Liste de commentaires (à plat)',
 	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_suivre_commentaires' => 'Suivre les commentaires :',
 
 	// M
-	'moderation_info' => 'Attention, votre message n\'apparaîtra qu\'après avoir été relu et approuvé.',
+	'moderation_info' => 'Attention, votre message n’apparaîtra qu’après avoir été relu et approuvé.',
 
 	// P
 	'permalink_to' => 'Lien permanent vers le commentaire',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.',
 	'saisie_texte_legend' => 'Ajoutez votre commentaire ici',
 	'submit1' => 'Prévisualiser',
-	'submit2' => 'Confirmer l\'envoi',
+	'submit2' => 'Confirmer l’envoi',
 
 	// T
 	'titre_comments' => 'Comments'
