@@ -22,13 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'collections_titre' => 'Les collections',
 
 	// D
-	'description_page_collections' => 'L\'ensemble des collections du site.',
+	'description_page_collections' => 'L’ensemble des collections du site.',
 	'diogene_champ_collection' => 'Ajout à une collection',
 
 	// E
-	'erreur_association_collection' => 'L\'association à la collection a échoué.',
-	'erreur_autorisation_statut_modifier' => 'Vous n\'êtes pas autorisé à modifier cette collection.',
-	'erreur_collection_non_existante' => 'Cette collection n\'existe pas.',
+	'erreur_association_collection' => 'L’association à la collection a échoué.',
+	'erreur_autorisation_statut_modifier' => 'Vous n’êtes pas autorisé à modifier cette collection.',
+	'erreur_collection_non_existante' => 'Cette collection n’existe pas.',
 	'erreur_media_document' => 'Attention. Le type de ce document ne correspond pas au genre de la collection.',
 	'erreur_selectionner_un_media' => 'Veuillez sélectionner au moins un média.',
 	'explication_genre' => 'Quels types de médias peuvent être attachés à cette collection ?',
@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_medias_modifier_drag' => 'Vous pouvez les réordonner via glisser / déposer.',
 	'explication_participer' => 'Cliquez sur le bouton ci-dessous pour participer à cette collection.',
 	'explication_participer_non' => 'Cliquez sur le bouton ci-dessous pour ne plus participer à cette collection.',
-	'explication_type' => 'Quel est l\'usage de la collection ?',
-	'explication_type_defaut' => 'Valeur par défaut de l\'usage de la collection (utile lors de la création rapide).',
+	'explication_type' => 'Quel est l’usage de la collection ?',
+	'explication_type_defaut' => 'Valeur par défaut de l’usage de la collection (utile lors de la création rapide).',
 
 	// G
 	'genre_mixed' => 'Mix (tous les types)',
@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_medias_aucun' => 'Aucun média',
 	'info_medias_nb' => '@nb@ médias',
 	'info_nb_collections' => '@nb@ collections',
-	'info_non_autorise_creer_collection' => 'L\'auteur "@id_auteur@" n\'est pas autorisé à créer une collection.',
-	'info_non_autorise_modifier_collection' => 'L\'auteur "@id_auteur@" n\'est pas autorisé à modifier la collection @id@.',
+	'info_non_autorise_creer_collection' => 'L’auteur "@id_auteur@" n’est pas autorisé à créer une collection.',
+	'info_non_autorise_modifier_collection' => 'L’auteur "@id_auteur@" n’est pas autorisé à modifier la collection @id@.',
 	'info_rang_collection' => 'Rang dans la collection',
 
 	// L
@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_admin' => 'Administrateur de la collection',
 	'label_id_admin_point' => 'Administrateur de la collection :',
 	'label_mediabox' => 'MediaBox',
-	'label_mediabox_long' => 'Ne pas utiliser la MediaBox pour afficher le formulaire d\'association de média à une collection.',
+	'label_mediabox_long' => 'Ne pas utiliser la MediaBox pour afficher le formulaire d’association de média à une collection.',
 	'label_titre' => 'Titre',
 	'label_titre_creer_rapide' => 'Titre de la collection',
 	'label_titre_point' => 'Titre :',
@@ -95,10 +95,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_aucune_collection_critere' => 'Aucune collection ne correspond à vos critères.', # Utile pour des squelettes
-	'message_aucune_collection_publiee' => 'Aucune collection n\'est actuellement publiée.', # Utile pour des squelettes
-	'message_collection_aucun_media_publie' => 'Aucun média dont vous êtes l\'auteur et correspondant au genre de la collection n\'est disponible.',
-	'message_collection_media_utiliser_autres_auteurs' => 'Vous pouvez lier les médias d\'autres auteurs en utilisant le formulaire d\'ajout sur chaque page de média.',
-	'message_collection_media_utiliser_interface' => 'Publiez un ou plusieurs médias via l\'interface dédiée afin de pouvoir les ajouter à cette collection.',
+	'message_aucune_collection_publiee' => 'Aucune collection n’est actuellement publiée.', # Utile pour des squelettes
+	'message_collection_aucun_media_publie' => 'Aucun média dont vous êtes l’auteur et correspondant au genre de la collection n’est disponible.',
+	'message_collection_media_utiliser_autres_auteurs' => 'Vous pouvez lier les médias d’autres auteurs en utilisant le formulaire d’ajout sur chaque page de média.',
+	'message_collection_media_utiliser_interface' => 'Publiez un ou plusieurs médias via l’interface dédiée afin de pouvoir les ajouter à cette collection.',
 	'message_collection_reorganisee' => 'La collection a été réorganisée.',
 	'message_collection_vide' => 'Cette collection est vide',
 	'message_nombre_ajoute' => '1 média a été associé à la collection.',

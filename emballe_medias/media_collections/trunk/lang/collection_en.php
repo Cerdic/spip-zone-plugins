@@ -24,13 +24,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'collections_titre' => 'Collections',
 
 	// D
-	'description_page_collections' => 'All the website\'s collections.',
+	'description_page_collections' => 'All the website’s collections.',
 	'diogene_champ_collection' => 'Add to collection',
 
 	// E
 	'erreur_association_collection' => 'The ombination with the collection failed.',
 	'erreur_autorisation_statut_modifier' => 'You are not allowed to edit this collection.',
-	'erreur_collection_non_existante' => 'This collection doesn\'t exist.',
+	'erreur_collection_non_existante' => 'This collection doesn’t exist.',
 	'erreur_media_document' => 'Warning. The type of this document does not match the type of the collection..',
 	'erreur_selectionner_un_media' => 'Select at least one media',
 	'explication_genre' => 'Which kind of medias can be linked to that collection?',
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_collaborateurs' => 'Contributors:',
 	'info_collection_creation' => 'Collection created on <abbr title="@date_abbr@">@date@</abbr> <span class="auteurs">by @auteurs@</span>.',
 	'info_collection_maj' => 'Updated: ',
-	'info_collections_auteur' => 'This author\'s  collections',
+	'info_collections_auteur' => 'This author’s  collections',
 	'info_media_dans_collection' => 'In the collection: ',
 	'info_media_dans_collections' => 'In the @nb@ collections: ',
 	'info_medias_1' => 'A media',
