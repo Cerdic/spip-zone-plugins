@@ -19,7 +19,7 @@
 				</BOUCLE_jours>
 			</select>
 		</li>
-		#SET{name,format_jour}#SET{defaut,1}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		#SET{name,format_jour}#SET{defaut,initiale}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
