@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'administrer_tables' => 'Administrar les taules',
 	'ajouter_donnees' => 'Afegir dades ',
 	'ajouter_table' => 'Afegir a la taula',
-	'aucune_donnee' => 'No hi ha dades a l\'arxiu.',
+	'aucune_donnee' => 'No hi ha dades a l’arxiu.',
 	'aucune_table_declaree' => 'Cap taula declarada per la importació CSV',
-	'avertissement_ajout' => 'Les dades de l\'arxiu CSV seran afegides a la taula "@table@" tal i com es mostra a continuació.', # MODIF
-	'avertissement_remplacement' => 'Aquesta operació suposarà la supressió de totes les dades que hi ha a la taula. Les dades del fitxer s\'inseriran com més avall:  ',
+	'avertissement_ajout' => 'Les dades de l’arxiu CSV seran afegides a la taula "@table@" tal i com es mostra a continuació.', # MODIF
+	'avertissement_remplacement' => 'Aquesta operació suposarà la supressió de totes les dades que hi ha a la taula. Les dades del fitxer s’inseriran com més avall:  ',
 
 	// C
 	'caracteres_separation' => 'Caràcter separador',
-	'champs_csv' => 'Camps de l\'arxiu CSV',
+	'champs_csv' => 'Camps de l’arxiu CSV',
 	'champs_table' => 'Camps de la taula', # MODIF
 	'correspondance_incomplete' => 'Correspondències CSV-Taula incompletes',
 	'correspondance_indefinie' => 'Correspondències CSV-Table no definides',
@@ -29,10 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_table_introuvable' => 'Descripció de la taula introbable',
 
 	// E
-	'erreurs_ajout_base' => 'Hi ha hagut @nb@ errors quan s\'ha afegit a la base. ',
+	'erreurs_ajout_base' => 'Hi ha hagut @nb@ errors quan s’ha afegit a la base. ',
 	'export_classique' => 'CSV clàssic (,)',
 	'export_excel' => 'CSV per Excel (;)',
-	'export_format' => 'Format de l\'arxiu:',
+	'export_format' => 'Format de l’arxiu:',
 	'export_table' => 'Exportar la taula: @table@',
 	'export_tabulation' => 'CSV amb tabulacions',
 	'exporter' => 'Exportar',
@@ -50,16 +50,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ligne_entete' => '1a. línia de capçalera',
 	'lignes_table' => 'Hi ha @nb_resultats@ línies a la taula "@table@".',
 	'lignes_totales' => '@nb@ línies en total.',
-	'lignes_totales_csv' => '@nb@ línies en total a l\'arxiu CSV.',
+	'lignes_totales_csv' => '@nb@ línies en total a l’arxiu CSV.',
 
 	// N
 	'nb_enregistrements' => '@nb@ registres',
 
 	// P
 	'pas_importer' => 'No importar',
-	'premieres_lignes' => '<@nb@ primeres línies de l\'arxiu.',
-	'probleme_chargement_fichier' => 'Problema durant la càrrega de l\'arxiu',
-	'probleme_chargement_fichier_erreur' => 'Problema durant la càrrega de l\'arxiu (error @erreur@).',
+	'premieres_lignes' => '<@nb@ primeres línies de l’arxiu.',
+	'probleme_chargement_fichier' => 'Problema durant la càrrega de l’arxiu',
+	'probleme_chargement_fichier_erreur' => 'Problema durant la càrrega de l’arxiu (error @erreur@).',
 	'probleme_inextricable' => 'Problema inextricable...',
 
 	// R

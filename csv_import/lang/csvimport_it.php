@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_donnees' => 'Aggiungi dati',
 	'ajouter_table' => 'Aggiungi alla tabella',
 	'aucune_donnee' => 'Il file non contiene alcun dato.',
-	'aucune_table_declaree' => 'Nessuna tabella dichiarata per l\'importazione CSV',
+	'aucune_table_declaree' => 'Nessuna tabella dichiarata per l’importazione CSV',
 	'avertissement_ajout' => 'I dati del file CSV saranno aggiunti alla tabella "@table@" come mostrato di seguito.', # MODIF
 	'avertissement_remplacement' => 'Questa operazione sopprimerà tutti i dati presenti nella tabella. I dati del file saranno inseriti come mostrato di seguito:',
 
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_table_introuvable' => 'Descrizione della tabella non trovata',
 
 	// E
-	'erreurs_ajout_base' => 'Si sono verificati @nb@ errori durante l\'inserimento in database.',
+	'erreurs_ajout_base' => 'Si sono verificati @nb@ errori durante l’inserimento in database.',
 	'export_classique' => 'CSV classico (,)',
 	'export_excel' => 'CSV per Excel (;)',
 	'export_format' => 'Formato del file:',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_export_tables' => 'Importazione / Esportazione nelle tabelle',
 
 	// L
-	'ligne_entete' => '1<sup>a</sup> riga d\'intestazione',
+	'ligne_entete' => '1<sup>a</sup> riga d’intestazione',
 	'lignes_table' => 'Ci sono @nb_resultats@ righe nella tabella "@table@".',
 	'lignes_totales' => '@nb@ righe totali.',
 	'lignes_totales_csv' => '@nb@ righe totali nel file CSV.',
