@@ -62,25 +62,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'google_merchant_id' => 'ID شناسايي بازرگاني ',
-	'google_merchant_id_explication' => 'Numéro d\'identification de votre compte marchand Google', # MODIF
+	'google_merchant_id_explication' => 'Numéro d’identification de votre compte marchand Google', # MODIF
 
 	// H
 	'header_quantity' => 'Quantité', # MODIF
 
 	// O
 	'ok_url' => 'URL achat réussi', # MODIF
-	'ok_url_explication' => 'URL où sera redirigé l\'acheteur en cas de transaction réussie.', # MODIF
+	'ok_url_explication' => 'URL où sera redirigé l’acheteur en cas de transaction réussie.', # MODIF
 	'other_parameters' => 'Autres paramètres', # MODIF
 
 	// S
-	'shipping_cost' => 'Coût d\'envoi', # MODIF
-	'shipping_flat_rate_explication' => 'Ajouter une taxe fixe à l\'ordre complet', # MODIF
-	'shipping_quantity_rate' => 'Coût de l\'envoi par quantité', # MODIF
-	'shipping_total_rate' => 'Coût d\'envoi en pourcentage de la somme totale', # MODIF
-	'shipping_total_rate_explication' => 'Ajouter un coût d\'envoi proportionnel au coût de la commande', # MODIF
+	'shipping_cost' => 'Coût d’envoi', # MODIF
+	'shipping_flat_rate_explication' => 'Ajouter une taxe fixe à l’ordre complet', # MODIF
+	'shipping_quantity_rate' => 'Coût de l’envoi par quantité', # MODIF
+	'shipping_total_rate' => 'Coût d’envoi en pourcentage de la somme totale', # MODIF
+	'shipping_total_rate_explication' => 'Ajouter un coût d’envoi proportionnel au coût de la commande', # MODIF
 
 	// T
-	'tax_and_shipping' => 'Frais et coût d\'envoi' # MODIF
+	'tax_and_shipping' => 'Frais et coût d’envoi' # MODIF
 );
 
 ?>

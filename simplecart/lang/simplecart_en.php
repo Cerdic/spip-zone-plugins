@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_payments_methods_explication' => 'Text string which defines the authorised payment methods. Leave it blank to enable all methods available for the country',
 	'dineromail_see' => 'See',
 	'dineromail_seller_name' => 'Seller name',
-	'dineromail_seller_name_explication' => 'Text replacement for \'email\' in the header. Leave it blank if you do not want it replaced',
+	'dineromail_seller_name_explication' => 'Text replacement for ’email’ in the header. Leave it blank if you do not want it replaced',
 
 	// E
 	'empty' => 'Empty',
