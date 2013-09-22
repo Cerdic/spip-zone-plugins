@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'plugonet_description' => 'Ce plugin permet de produire le nouveau fichier paquet.xml à partir du fichier
 plugin.xml. Des options de vérification sont disponibles pour nettoyer au préalable
-certaines balises du fichier d\'origine.
+certaines balises du fichier d’origine.
 
 En outre, PlugOnet permet de valider des fichiers paquet.xml écrits manuellement et fournit
 une aide sur chaque balise de la nouvelle DTD.',
