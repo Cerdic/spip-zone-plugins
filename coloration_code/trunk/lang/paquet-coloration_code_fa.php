@@ -17,11 +17,11 @@ _ {{<cadre class="langage">...</cadre>}}.
 
 به صورت پيش‌گزيده، اگر كد برجسته‌ شده بيش از يك خط باشد، مانند يك متن در حافظه‌ي نزديك گذاشته خواهد شد تا بارگذاري شود. اين خصوصيت مي‌تواند به صورت جهاني توسط يك ثابت PLUGIN_COLORATION_CODE_TELECHARGE كتنرل شود.
 
- Il peut être forcé localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l\'autre comme
+ Il peut être forcé localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l’autre comme
 _ {{<code class="php sans_telechargement">}}
 
 Vous pouvez aussi utiliser le filtre {coloration_code_color} dans un squelette comme
-_ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L\'url depuis l\'article serait <code>#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}</code>',
+_ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L’url depuis l’article serait <code>#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}</code>',
 	'coloration_code_nom' => 'كد برجسته سازي ',
 	'coloration_code_slogan' => 'سينتاكس برجسته‌ سازي منبع كد در داخل مقاله‌ها'
 );
