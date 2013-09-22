@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_fichier_log' => 'Súbor protokolu s výsledkami overovania sa nedá vytvoriť!',
 	'message_nok_fichier_script' => 'Súbor skriptu s príkazmi  na nahradenie funkcií _L za _T sa nepodarilo vytvoriť!',
 	'message_nok_item_trouve' => 'Podmienkam vyhľadávania nevyhovuje žiadna jazyková položka!',
-	'message_ok_definis_incertains_0' => 'Žiadna položka jazyka sa nepoužíva v celom kontexte, napríklad _T(\'@module@:item_\'.$variable).',
+	'message_ok_definis_incertains_0' => 'Žiadna položka jazyka sa nepoužíva v celom kontexte, napríklad _T(’@module@:item_’.$variable).',
 	'message_ok_definis_incertains_1' => 'Táto jazyková položka sa používa v ucelenom kontexte a možno že nie je definovaná v jazykovom súbore  <em>"@langue@".</em> Môžete to skontrolovať:',
 	'message_ok_definis_incertains_n' => 'Týchto @nberr@ jazykových položiek sa používa v ucelenom kontexte a možno že nie je definovaná v jazykovom súbore <em>"@langue@".</em> Môžete to skontrolovať:
 
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmaisnok_definis_1' => 'Táto jazyková položka sa používa v súboroch priečinka <em>"@ou_fichier@",</em> ale nie ako položka modulu <em>"@module@".</em> Keďže táto položka nie je definovaná v prílohe k svojmu modulu, skontrolujte ju, prosím:',
 	'message_ok_nonmaisnok_definis_n' => 'Týchto @nberr@ jazykových položiek sa používa v súboroch priečinka <em>"@ou_fichier@",</em> ale tieto položky sa nepoužívajú ako položky modulu <em>"@module@".</em> Keďže nie sú definované v prílohe k svojmu modulu, každú z nich, prosím, skontrolujte:',
 	'message_ok_table_creee' => 'Tabuľka položiek jazykového súboru @langue@ bola úspešne vytvorená.',
-	'message_ok_utilises_incertains_0' => 'V celom kontexte sa nepoužíva žiadna jazyková položka (napríklad:  _T(\'@module@:item_\'.$variable)).',
+	'message_ok_utilises_incertains_0' => 'V celom kontexte sa nepoužíva žiadna jazyková položka (napríklad:  _T(’@module@:item_’.$variable)).',
 	'message_ok_utilises_incertains_1' => 'Jazyková položka sa možno používa v celom kontexte. Pozývame vás, aby ste to skontrolovali:',
 	'message_ok_utilises_incertains_n' => '@nberr@ týchto jazykových položiek sa možno používa v ucelenom kontexte. Môžete to skontrolovať:',
 

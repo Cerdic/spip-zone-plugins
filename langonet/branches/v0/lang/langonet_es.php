@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_fichier_log' => '¡El archivo de log con los resultados de la verificación no pudo ser creado!',
 	'message_nok_fichier_script' => '¡El archivo de script con los comandos de replazo de las funciones _L por _T no pudo ser creado!',
 	'message_nok_item_trouve' => '¡Ningún ítem de idioma corresponde a la búsqueda!',
-	'message_ok_definis_incertains_0' => 'Ningún ítem de idioma utilizado en un contexto complejo, como por ejemplo, _T(\'@module@:item_\'.$variable).',
+	'message_ok_definis_incertains_0' => 'Ningún ítem de idioma utilizado en un contexto complejo, como por ejemplo, _T(’@module@:item_’.$variable).',
 	'message_ok_definis_incertains_1' => 'El ítem de idioma siguiente esta utilizado en un contexto complejo y podría ser no definido en el archivo de idioma «<em>@langue@</em>». Le invitamos a verificarlo:',
 	'message_ok_definis_incertains_n' => 'Los @nberr@ ítems de idioma siguientes son utilizados en un contexto complejo y podrían ser definidos en el archivo de idioma «<em>@langue@</em>». Le invitamos a verificarlos uno por uno:',
 	'message_ok_fichier_genere' => 'El archivo de idioma «<em>@langue@</em>» del módulo «<em>@module@</em>» a sido generado con éxito .<br />Puede recuperar el archivo «<em>@fichier@</em>».',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmaisnok_definis_1' => 'El ítem de idioma siguiente esta utilizado en los archivos de la carpeta «<em>@ou_fichier@</em>» pero no como un ítem del módulo «<em>@module@</em>». No esta definido en su propio módulo, así que le invitamos a verificarlo:',
 	'message_ok_nonmaisnok_definis_n' => 'Los @nberr@ ítems de idioma siguientes están utilizados en archivos de la carpeta «<em>@ou_fichier@</em>» pero no como ítems del módulo «<em>@module@</em>». No están definidos en su propio módulo, así que le invitamos a verificarlos uno por uno:',
 	'message_ok_table_creee' => 'La tabla de ítems del archivo de idioma @langue@ fue creada con éxito.',
-	'message_ok_utilises_incertains_0' => 'Ningún ítem de idioma utilizado en un contexto complejo (por ejemplo:  _T(\'@module@:item_\'.$variable)).',
+	'message_ok_utilises_incertains_0' => 'Ningún ítem de idioma utilizado en un contexto complejo (por ejemplo:  _T(’@module@:item_’.$variable)).',
 	'message_ok_utilises_incertains_1' => 'Se puede que el ítem de idioma siguiente este utilizado en un contexto complejo. Le invitamos a verificarlo:',
 	'message_ok_utilises_incertains_n' => 'Puede ser que los @nberr@ ítems de idioma siguientes estén utilizados en un contexto complejo. Le invitamos a verificarlos uno por uno:',
 

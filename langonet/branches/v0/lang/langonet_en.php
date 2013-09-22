@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rechercher_item' => 'This option allows you to search for language items in all the language files available on the site. For performance reasons, only French language files will be scanned.',
 	'info_rechercher_texte' => 'This option allows you to search for language items by their French translation in the SPIP language files <em>ecrire_fr</em>, <em>public_fr</em> and <em>spip_fr</em>. The goal is to check whether a text already exists in SPIP before creating it yourself.',
 	'info_table' => 'You can consult below the alphabetical list of language items of the file "<em>@langue@</em>" (@total@). Each block displays items with the same initial, the bold shortcut and the text displayed next. Hover over an initial to display the corresponding list.',
-	'info_verifier' => 'This option allows you, on one hand, to check the language files for a given module in two complementary angles. It\'s possible, whether checking if language items used in a group of files (a plugin, for example) are not defined in the suitable language file, whether some defined language items are no longer used. <br />On the other hand, it is possible to list and correct all uses of the function _L() in PHP files in a given tree.',
+	'info_verifier' => 'This option allows you, on one hand, to check the language files for a given module in two complementary angles. It’s possible, whether checking if language items used in a group of files (a plugin, for example) are not defined in the suitable language file, whether some defined language items are no longer used. <br />On the other hand, it is possible to list and correct all uses of the function _L() in PHP files in a given tree.',
 
 	// L
 	'label_arborescence_scannee' => 'Directory tree to be scanned',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_fichier_log' => 'The log file containing the results of the verification could not be created!',
 	'message_nok_fichier_script' => 'The script file containing the replacement commands of the functions _L by _T could not be created!',
 	'message_nok_item_trouve' => 'No language item matches the search!',
-	'message_ok_definis_incertains_0' => 'No language item is used in a complex environment, eg, _T(\'@module@:item_\'.$variable).',
+	'message_ok_definis_incertains_0' => 'No language item is used in a complex environment, eg, _T(’@module@:item_’.$variable).',
 	'message_ok_definis_incertains_1' => 'The language item below is used in a complex environment and could be undefined in the language file "<em>@langue@</em>". We invite you to check it:',
 	'message_ok_definis_incertains_n' => 'The @nberr@ language items below are used in a complex environment and could be undefined in the language file "<em>@langue@</em>". We invite you to check them one by one:',
 	'message_ok_fichier_genere' => 'The language file  "<em>@langue@</em>" of the module "<em>@module@</em>" has been correctly created.<br />You can retrieve the file "<em>@fichier@</em>".',
@@ -113,10 +113,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmais_definis_1' => 'The language item below is correctly used in the files of the folder "<em>@ou_fichier@</em>" but is defined in an other module than "<em>@module@</em>". Please check it:',
 	'message_ok_nonmais_definis_n' => 'The @nberr@ language items below are correctly used in files of the folder "<em>@ou_fichier@</em>" but are not defined in an other module than "<em>@module@</em>". Please check them one by one:',
 	'message_ok_nonmaisnok_definis_0' => 'The files of the fonder "<em>@ou_fichier@</em>" do not use language item incorrectly defined in another module than "<em>@module@</em>".',
-	'message_ok_nonmaisnok_definis_1' => 'The language item below is used in the files of the folder "<em>@ou_fichier@</em>" but not as an item of the module "<em>@module@</em>". Since it\'s not defined in its own module, please check it:',
+	'message_ok_nonmaisnok_definis_1' => 'The language item below is used in the files of the folder "<em>@ou_fichier@</em>" but not as an item of the module "<em>@module@</em>". Since it’s not defined in its own module, please check it:',
 	'message_ok_nonmaisnok_definis_n' => 'The @nberr@ language items below are used in the files of the folder "<em>@ou_fichier@</em>" but not as items of the module "<em>@module@</em>". Since they are not defined in their own module, please check them one by one:',
 	'message_ok_table_creee' => 'The table of items od the language file @langue@ has been correctly created',
-	'message_ok_utilises_incertains_0' => 'No language item is used in a complex context (for example:  _T(\'@module@:item_\'.$variable)).',
+	'message_ok_utilises_incertains_0' => 'No language item is used in a complex context (for example:  _T(’@module@:item_’.$variable)).',
 	'message_ok_utilises_incertains_1' => 'The item language below may be used in a complex context. We invite you to check it:',
 	'message_ok_utilises_incertains_n' => 'The @nberr@ language items belowmay be used in a complex context. We invite you to check them one by one:',
 
@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'test' => 'TEST: this language item is used for the search of shortcuts and is equal to test.',
 	'test_item_1_variable' => 'TEST: this language item is correctly defined in the language file, but its use is a "complex" form in the files of the scanned folder.',
-	'test_item_2_variable' => 'TEST: this language item is correctly defined in the language file, but it\'s used in a "complex" formulation in the files of the scanned directory.',
+	'test_item_2_variable' => 'TEST: this language item is correctly defined in the language file, but it’s used in a "complex" formulation in the files of the scanned directory.',
 	'test_item_non_utilise_1' => 'TEST: this language item is correctly defined in the language file (), but is not used in the scanned folder ().',
 	'test_item_non_utilise_2' => 'TEST: This language item is correctly defined in the language file (), but is not used in the files of the scanned folder ().',
 	'texte_item_defini_ou' => '<em>defined in:</em>',
