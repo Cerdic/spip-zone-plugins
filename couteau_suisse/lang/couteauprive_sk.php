@@ -29,10 +29,10 @@ Nulová alebo prázdna hodnota určuje neobmedzenú hodnotu.
 
 @puce@ Aby sa predišlo preťaženiu PHP pamäte pri spracúvaní veľkých obrázkov knižnicou GD2, SPIP otestuje možnosti servera a potom môžu odmietnuť spracovať obrázky, ktoré sú príliš veľké. Tento test sa dá deaktivovať tak, že manuálne definujete maximálny počet pixelov podporovaný pre proces spracovania.
 
-Hodnota 1~000~000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo dostupnej pamäte. Nulová alebo prázdna hodnota bude znamenať, že na serveri sa uskutoční test.
+Hodnota 1 000 000 pixelov sa zdá byť rozumná na nastavenie, ak máte málo dostupnej pamäte. Nulová alebo prázdna hodnota bude znamenať, že na serveri sa uskutoční test.
 [[%img_GDmax% pixels au maximum]]
 @puce@ Knižnica GD2 sa používa na upravenie kvality kompresie každého obrázka JPG. Vyššie percento znamená lepšiu kvalitu.
-[[%img_GDqual% %]]',
+[[%img_GDqual% %]]',
 	'SPIP_tailles:nom' => 'Obmedzenia pamäte',
 
 	// A
@@ -115,7 +115,7 @@ Nadpis, na ktorý sa bude dať kliknúť
 - {{Aktualizácie nástroja Vreckový nožík:}} rámec tejto aktuálnej nastavovacej stránky, ktoré zobrazujú najnovšie úpravy kódu zásuvného modulu ([Source->@_CS_RSS_SOURCE@]).
 - {{Články vo formáte SPIP:}} skladací rám na články, ktorý vám umožňuje vidieť zdrojový kód, ktorý použili ich autori.
 - {{Aktualizácie autorov:}} skladací rám na [authors page->./?exec=auteurs], ktorý zobrazuje 10 najneskôr pripojených autorov a nepotvrdený obsah, ktorý vytvorili. Tieto údaje môžu vidieť iba administrátori.
-- {{Webmasteri SPIPU:}} skladací rám na [author\'s page->./?exec=auteurs], ktorá obsahuje zoznam administrátorov, ktorým bola pridelená funkcie webmastera. Tieto údaje môtu vidieť len administrátori. Ak ste sám jedným z webmasterov, tiež môžete vidieť nástroj " [.->webmestres] ".
+- {{Webmasteri SPIPU:}} skladací rám na [author’s page->./?exec=auteurs], ktorá obsahuje zoznam administrátorov, ktorým bola pridelená funkcie webmastera. Tieto údaje môtu vidieť len administrátori. Ak ste sám jedným z webmasterov, tiež môžete vidieť nástroj " [.->webmestres] ".
 - {{Čisté www adresy:}} skladací rám na každý prvok obsahu (článok, rubriku, autora,...) s čistou adresou, ako aj možnými aliasmi, ktoré existujú. Nástroj " [.->type_urls] " vám ponúka podrobné nastavenie adriesť webu.
 - {{Zotriedení autori:}} skladací rám na články, ktoré majú viac ako jedného autora, a ktorý poskytuje jednoduchý mechanizmus na prispôsobenie triedenia ich poradia.',
 	'boites_privees:nom' => 'Private boxes',
@@ -206,7 +206,7 @@ Rovnako na zmenu písma, ak je povolená táto možnosť:@_CS_EXEMPLE_COULEURS3@
 	'couleurs:nom' => 'Zafarbený text',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
 	'cs_comportement:description' => '@puce@ {{Logs.}} Record a lot of information about the working of the Penknife in the {spip.log} files which can be found in this directory: {<html>@_CS_DIR_LOG@</html>}.
-_ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».[[%log_couteau_suisse%]]
+_ Configurez les options de journalisation grâce à l’outil «[.->spip_log]».[[%log_couteau_suisse%]]
 
 @puce@ {{SPIP options.}} SPIP places plugins in order. To be sure that the Penknife is at the head and is thus able to control certain SPIP options, check the following option. If the permissions on your server allow it, the file {<html>@_CS_FILE_OPTIONS@</html>} will be modified to include {<html>@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php</html>}.
 
@@ -316,12 +316,12 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 	'erreur:bt' => '<span style=\\"color:red;\\">Pozor:</span> zdá sa, že verzia typografického panela je stará(@version@).<br />Modul Vreckový nožík je kompatibilný iba s verziou @mini@ alebo s novšou.',
 	'erreur:description' => 'V definícii nástroja chýba id!',
 	'erreur:distant' => 'Vzdialený server',
-	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.', # MODIF
+	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin’s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.', # MODIF
 	'erreur:js' => 'A Javascript error appears to have occurred on this page, hindering its action. Please activate Javascript in your browser, or try deactivating some SPIP plugins which may be causing interference.',
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Chyba!',
 	'erreur:probleme' => 'Problem with: @pb@',
-	'erreur:traitements' => 'The Penknife - Compilation error: forbidden mixing of \'typo\' and \'propre\'!',
+	'erreur:traitements' => 'The Penknife - Compilation error: forbidden mixing of ’typo’ and ’propre’!',
 	'erreur:version' => 'Tento nástroj je v tejto verzii SPIPU nedostupný.',
 	'erreur_groupe' => 'Varovanie: skupina "@groupe@" nebola definovaná!',
 	'erreur_mot' => 'Varovanie: Kľúčové slovo "@mot@" nebolo definované!',
@@ -504,7 +504,7 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:radio_target_blank3' => 'New window for external links:',
 	'label:radio_type_urls3' => 'Formát www adries:',
 	'label:scrollTo' => 'Nainštalovať tieto zásuvné moduly {jQuery:}',
-	'label:separateur_urls_page' => 'Oddeľovač \'type-id\'<br/>(napr.: ?article-123):',
+	'label:separateur_urls_page' => 'Oddeľovač ’type-id’<br/>(napr.: ?article-123):',
 	'label:set_couleurs' => 'Set to be used ',
 	'label:spam_ips' => 'IP adresy, ktoré treba zablokovať:',
 	'label:spam_mots' => 'Prohibited sequences:',
@@ -518,13 +518,13 @@ Pozor! Na to, aby fungoval, tento nástroj potrebuje  zásuvný modul {Zaoblené
 	'label:titres_etendus' => 'Activate the extended use of the tags #TITRE_XXX:',
 	'label:tout_rub' => 'Verejne zobraziť všetky tieto objekty:',
 	'label:url_arbo_minuscules' => 'Nechať veľkosť písma podľa názvu vo www adrese:',
-	'label:url_arbo_sep_id' => 'Oddeľovač \'title-id\', ktorý sa použije v prípade duplicity:<br/>(nepoužívajte /)',
+	'label:url_arbo_sep_id' => 'Oddeľovač ’title-id’, ktorý sa použije v prípade duplicity:<br/>(nepoužívajte /)',
 	'label:url_glossaire_externe2' => 'Odkaz na externý slovník:',
 	'label:url_max_propres' => 'Maximálna dĺžka URL (v znakoch):',
 	'label:urls_arbo_sans_type' => 'Vo www adresách zobraziť typ objektu SPIPU:',
 	'label:urls_avec_id' => 'A systematic id, but ...',
 	'label:webmestres' => 'Zoznam webmasterov:',
-	'liens_en_clair:description' => 'Makes the filter: \'liens_en_clair\' available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter \'cs=print\' or \'page=print\' in the URL), this treatment is automatically applied.',
+	'liens_en_clair:description' => 'Makes the filter: ’liens_en_clair’ available to you. Your text probably contains hyperlinks which are not visible when the page is printed. This filter adds the link code between square brackets for every clickabel link (external links and email addresses). N.B: in printing mode (when using the parameter ’cs=print’ or ’page=print’ in the URL), this treatment is automatically applied.',
 	'liens_en_clair:nom' => 'Viditeľné odkazy',
 	'liens_orphelins:description' => 'Tento nástroj má dve funkcie:
 
@@ -547,7 +547,7 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 	'log_fileline' => 'Doplňujúce údaje o ladení',
 
 	// M
-	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
+	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor’s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
 	'mailcrypt:nom' => 'Šifrovanie pošty',
 	'maj_auto:description' => 'Tento nástroj vám umožňuje ľahko riadiť aktualizáciu rôznych zásuvných modulov, vrátane zistenia čísla revízie v súbore <code>svn.revision</code> a jeho porovnanie s tým, ktoré sa nachádza na stránke <code>zone.spip.org</code>.
 
@@ -567,7 +567,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'message_perso' => 'Veľká vďaka prekladateľom, ktorí sa dostali až sem. Pat ;-)',
 	'moderation_admins' => 'authenticated administrators',
 	'moderation_message' => 'This forum is pre-moderated: your contribution will only appear once it has been validated by one of the site administrators (unless you are logged in and authorised to post directly).',
-	'moderation_moderee:description' => 'Makes it possible to moderate the moderation of the <b>pre-moderated</b> public forums for logged-in visitors.<br />Example: I am the webmaster of a site, and I reply to the message of a user who asks why they need to validate their own message. Moderating moderation does it for me! [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => 'Makes it possible to moderate the moderation of the <b>pre-moderated</b> public forums for logged-in visitors.<br />Example: I am the webmaster of a site, and I reply to the message of a user who asks why they need to validate their own message. Moderating moderation does it for me! [[%moderation_admin%]][[—>%moderation_redac%]][[—>%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderate moderation',
 	'moderation_redacs' => 'authenticated authors',
 	'moderation_visits' => 'Visitors authenticated',
@@ -591,7 +591,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Neaktívny nástroj',
 	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Penknife tools.',
-	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\’./?exec=admin_couteau_suisse\\’>the new interface</a>, please let us know in the forum of <a href=\\’http://www.spip-contrib.net/?article2166\\’>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ nástroj',
 	'outil_nbs' => '@pipe@: @nb@ nástrojov',
 	'outil_permuter' => 'Switch the tool: « @text@ » ?',
@@ -691,7 +691,7 @@ Pozor, na to aby tento nástroj fungoval, musí byť použitý na stránkach «D
 	'soft_scroller:nom' => 'Ľahké kotvy',
 	'sommaire:description' => 'Builds a summary of your articles in order to access the main headings quickly (HTML tags &lt;h3>A Subtitle&lt;/h3> or SPIP subtitle shortcuts in the form: <code>{{{My subtitle}}}</code>).
 
-Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
+Pour information, l’outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
 
 @puce@ Définissez ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
 
@@ -718,9 +718,9 @@ The summary can be used in conjunction with : « [.->decoupe] » and « [.->t
 <q1>• Expressions containing spaces should be placed within inverted commas.
 _ • To specify a whole word, place it in brackets. For example: {(asses)}.
 _ • To use a regular expression, first check the syntax, then place it between slashes and inverted commas.
-_ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
+_ Example: {<html>\\"/@test.(com|en)/\\"</html>}.
 _ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
-_ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Example: {<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sachez toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
 <q1>• Utilisez le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
@@ -732,7 +732,7 @@ _ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 	'spam_tester_label' => 'Tu otestujte svoj zoznam zakázaných slov:',
 	'spip_cache:description' => '@puce@ The cache occupies disk space and SPIP can limit the amount of space taken up. Leaving empty or putting 0 means that no limit will be applied.[[%quota_cache% Mo]]
 
-@puce@ When the site\'s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]
+@puce@ When the site’s contents are changed, SPIP immediately invalidates the cache without waiting for the next periodic recalculation. If your site experiences performance problems because of the load of repeated recalculations, you can choose "no" for this option.[[%derniere_modif_invalide%]]
 
 @puce@ If the #CACHE tag is not found in a template then by default SPIP caches a page for 24 hours before recalculating it. You can modify this default here.[[%duree_cache% heures]]
 
@@ -752,7 +752,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',
 	'statuts_tous' => 'Všetky stavy',
-	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article\'s public forum. It is also possible to inform others: either all the forum\'s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
+	'suivi_forums:description' => 'The author of an article is always informed when a message is posted in the article’s public forum. It is also possible to inform others: either all the forum’s participants, or  just all the authors of messages higher in the thread.[[%radio_suivi_forums3%]]',
 	'suivi_forums:nom' => 'Zoznam verejných diskusných fór',
 	'supprimer_cadre' => 'Odstrániť tento rám',
 	'supprimer_numero:description' => 'Applies the supprimer_numero() SPIP function to all {{titles}}, {{names}} and {{types}} (of keywords) of the public site, without needing the filter to be present in the templates.<br />For a multilingual site, follow this syntax: <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>',
@@ -765,9 +765,9 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 
 Note: For keywords, #TITRE_GROUPE is an alias of #TITRE_PARENT. SPIP treats the contents of these new tags as it does other #TITRE tags.
 
-@puce@ If you are using SPIP 2.0, then you can use an array of tags of this form: #TITRE_XXX, which give you the title of the object \'xxx\', provided that the field \'id_xxx\' is present in the current table (i.e. #ID_XXX is available in the current loop).
+@puce@ If you are using SPIP 2.0, then you can use an array of tags of this form: #TITRE_XXX, which give you the title of the object ’xxx’, provided that the field ’id_xxx’ is present in the current table (i.e. #ID_XXX is available in the current loop).
 
-For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  \'id_secteur\') is available in the loop.[[%titres_etendus%]]', # MODIF
+For example, in an (ARTICLES) loop, #TITRE_SECTEUR will give the title of the sector of the current article, since the identifier #ID_SECTEUR (or the field  ’id_secteur’) is available in the loop.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Tagy #TITRE_PARENT/OBJECT',
 	'titre_tests' => 'The Penknife - Test page',
 	'titres_typo:description' => 'Zmení všetky nadpisy <html> "{{{Môj nadpis}}}"</html> na nastaviteľný typografický obrazec.[[%i_taille% pt]][[%i_couleur%]][[%i_police%
@@ -780,15 +780,15 @@ Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF
-	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP\'s own or your customised ones, anywhere in the text, titles, etc. of an article.
+	'toutmulti:description' => 'Makes it possible to use the shortcut <code><:a_text:></code> in order to place multilingual blocks from language files, whether SPIP’s own or your customised ones, anywhere in the text, titles, etc. of an article.
 
 More information on this can be found in [this article->http://www.spip.net/en_article2444.html].
 
-User variables can also be added to the shortcuts. This was introduced with SPIP 2.0. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>\'a_text\'=>\'Please contact @name@, the administrator, on @tel@.</code>.
+User variables can also be added to the shortcuts. This was introduced with SPIP 2.0. For example, <code><:a_text{name=John, tel=2563}:></code> makes it possible to pass the values to the SPIP language file: <code>’a_text’=>’Please contact @name@, the administrator, on @tel@.</code>.
 
-The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), and <code>_T(\'a_text\', array(\'arg1\'=>\'some words\', \'arg2\'=>\'other words\'))</code> (with parameters).
+The SPIP function used is: <code>_T(’a_text’)</code> (with no parmameters), and <code>_T(’a_text’, array(’arg1’=>’some words’, ’arg2’=>’other words’))</code> (with parameters).
 
-Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
+Do not forget to check that the variable used <code>’a_text’</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
 	'trad_help' => '{{Modul Vreckový nožík dobrovoľníci prekladajú do mnohých jazykov a jeho rodným jazykom je francúzština.}}
 
@@ -812,7 +812,7 @@ _ Thank you for your understanding.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => 'Choose the sort order to be used for displaying articles in the editing interface ([->./?exec=auteurs]), within the sections.
 
-The options below use the SQL function \'ORDER BY\'. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+The options below use the SQL function ’ORDER BY’. Only use the customised option if you know what you are doing (the available fields are: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
 	'tri_articles:nom' => 'Triedenie SPIPU',
 	'tri_groupe' => 'Zotriediť podľa čísla skupiny (ZORADIŤ PODĽA id_groupe)',
@@ -822,10 +822,10 @@ The options below use the SQL function \'ORDER BY\'. Only use the customised opt
 	'tri_titre' => 'Zotriediť podľa názvu (ZORADIŤ PODĽA 0+názov, názov)',
 	'trousse_balises:description' => 'Tool in development. It offers a few simple tags for templates.
 
-@puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" ou "lorem ipsum") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP\'s filters. For example, <code>[(#BOLO|majuscules)]</code>.
+@puce@ {{#BOLO}}: generates a dummy text of about 3000 characters ("bolo" ou "lorem ipsum") for use with templates in development. An optional argument specifies the length of the text, e.g. <code>#BOLO{300}</code>. The tag accepts all SPIP’s filters. For example, <code>[(#BOLO|majuscules)]</code>.
 _ It can also be used as a model in content. Place <code><bolo300></code> in any text zone in order to obtain 300 characters of dummy text.
 
-@puce@ {{#MAINTENANT}} (or {{#NOW}}): renders the current date, just like: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. An optional argument specifies the format. For example, <code>#MAINTENANT{Y-m-d}</code>. As with <code>#DATE</code> the display can be customised using filters: <code>[(#MAINTENANT|affdate)]</code>.
+@puce@ {{#MAINTENANT}} (or {{#NOW}}): renders the current date, just like: <code>#EVAL{date(’Y-m-d H:i:s’)}</code>. An optional argument specifies the format. For example, <code>#MAINTENANT{Y-m-d}</code>. As with <code>#DATE</code> the display can be customised using filters: <code>[(#MAINTENANT|affdate)]</code>.
 
 - {{#CHR<html>{XX}</html>}}: a tag equivalent to <code>#EVAL{"chr(XX)"}</code> which is useful for inserting special characters (such as a line feed) or characters which are reserved for special use by the SPIP compiler (e.g. square and curly brackets).
 
@@ -844,14 +844,14 @@ _ Example: <code>/spip.php?article123</code>.
 <radio_type_urls3 valeur="html">@puce@ {{URLs «html»}}: URLs take the form of classic html pages.
 _ Example : <code>/article123.html</code></radio_type_urls3>
 
-<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres»}}: URLs are constructed using the title of the object. Markers (_, -, +, @, etc.) surround the titles, depending on the type of object.
+<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres»}}: URLs are constructed using the title of the object. Markers (_, -, +, @, etc.) surround the titles, depending on the type of object.
 _ Examples : <code>/My-article-title</code> or <code>/-My-section-</code> or <code>/@My-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2»}}: the extension \'.html\' is added to the URLs generated.
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2»}}: the extension ’.html’ is added to the URLs generated.
 _ Example : <code>/My-article-title.html</code> or <code>/-My-section-.html</code>
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}} : the URLs are like {«propres»}, but without markers  (_, -, +, @, etc.) to differentiate the objects.
+<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}} : the URLs are like {«propres»}, but without markers  (_, -, +, @, etc.) to differentiate the objects.
 _ Example : <code>/My-article-title</code> or <code>/My-section</code>
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
 
@@ -875,9 +875,9 @@ _ Example : <code>article.php3?id_article=123</code>
 _ (Príklady: <code>/Nadpis-mojho-clanku,457</code> alebo <code>/457-Nadpis-mojho-clanku</code>)</q1>',
 	'type_urls:description2' => '{Poznámka:} zmena v tomto odseku si môže vyžadovať vyprázdnenie tabuľky internetových adries (URL), aby SPIP mohol zohľadniť nové nastavenia.',
 	'type_urls:nom' => 'Formát www adries',
-	'typo_exposants:description' => '{{Text vo francúzštine:}} vylepšuje typografické spracovanie bežných skratiek pridaním horného indexu tam, kde je to potrebné (takto sa z {<acronym>Mme</acronym>} stane {M<sup>me</sup>}). Opravuje bežné chyby:  (z {<acronym>2ème</acronym>} a  {<acronym>2me</acronym>,} sa napríklad stane {2<sup>e</sup>,} jediná správna skratka).
+	'typo_exposants:description' => '{{Text vo francúzštine:}} vylepšuje typografické spracovanie bežných skratiek pridaním horného indexu tam, kde je to potrebné (takto sa z {<acronym>Mme</acronym>} stane {M<sup>me</sup>}). Opravuje bežné chyby:  (z {<acronym>2ème</acronym>} a {<acronym>2me</acronym>,} sa napríklad stane {2<sup>e</sup>,} jediná správna skratka).
 
-Spracúvané skratky sa zhodujú s Imprimerie nationale uvedenými v {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (článok "Skratky", Presses de l\'Imprimerie nationale, Paríž, 2002).
+Spracúvané skratky sa zhodujú s Imprimerie nationale uvedenými v {Lexique des règles typographiques en usage à l’Imprimerie nationale} (článok "Skratky", Presses de l’Imprimerie nationale, Paríž, 2002).
 
 Spracúvajú sa aj tieto výrazy: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, Vve, bd, Cie, 1o, 2o, etc.</html>
 

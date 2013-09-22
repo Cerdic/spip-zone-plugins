@@ -12,10 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todas as ligazóns do web se abren predeterminadamente na mesma ventá de navegación en curso. Mais pode ser útil abril ligazóns externas ao web nunha nova ventá exterior -- iso implica engadir {target=\\"_blank\\"} a todas as balizas &lt;a&gt; dotadas por  SPIP de clases {spip_out}, {spip_url} ou {spip_glossaire}. Se cadra é necesario engadir unha destas clases nas ligazóns do esqueleto do web (ficheiros html) co fin de estender ao máximo esta funcionalidade.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todas as ligazóns do web se abren predeterminadamente na mesma ventá de navegación en curso. Mais pode ser útil abril ligazóns externas ao web nunha nova ventá exterior — iso implica engadir {target=\\"_blank\\"} a todas as balizas &lt;a&gt; dotadas por  SPIP de clases {spip_out}, {spip_url} ou {spip_glossaire}. Se cadra é necesario engadir unha destas clases nas ligazóns do esqueleto do web (ficheiros html) co fin de estender ao máximo esta funcionalidade.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite ligar palabras á súa definición mercé ao atallo tipográfico <code>[?mot]</code>. Predeterminadamente (ou se vostede  deixa baleira a caixa seguinte), o glosario externo reenvía sobre a enciclopedia libre wikipedia.org. Pode escoller o enderezo que se vaia utilizar. <br />Ligazón de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
-	'SPIP_liens:description1' => '@puce@ SPIP prevé un estilo CSS para as ligazóns «~mailto:~» : un pequeno cadro debería aparecer para cada ligazón relacionada cun enderezo de correo; mais para que todos os navegadores non o poidan mostrar (nomeadamente IE6, IE7 e SAF3), decida se cómpre conservar este engadido.
+	'SPIP_liens:description1' => '@puce@ SPIP prevé un estilo CSS para as ligazóns « mailto: » : un pequeno cadro debería aparecer para cada ligazón relacionada cun enderezo de correo; mais para que todos os navegadores non o poidan mostrar (nomeadamente IE6, IE7 e SAF3), decida se cómpre conservar este engadido.
 _ Ligazón de test : [->test@test.com] (vexa a páxina completamente).[[%enveloppe_mails%]]', # MODIF
 	'SPIP_liens:nom' => 'SPIP e as ligazóns externas',
 
@@ -24,9 +24,9 @@ _ Ligazón de test : [->test@test.com] (vexa a páxina completamente).[[%envelop
 	'action_rapide' => 'Acción rápida, unicamente se sabe do que fai!',
 	'action_rapide_non' => 'Acción rápida, dispoñible tras a activación desta utilidade :',
 	'admins_seuls' => 'Só para administradores/as',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de ton site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+	'aff_tout:description' => 'Il parfois utile d’afficher toutes les rubriques ou tous les auteurs de ton site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n’affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t\'évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
+Bien qu’il soit possible de contourner ce comportement à l’aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et t’évite d’ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de tes squelettes.',
 	'aff_tout:nom' => 'Affiche tout',
 	'attente' => 'En espera...',
 	'auteur_forum:description' => 'Invite a todos os autores de mensaxes públicas a fornecer (cando menos cunha letra!) un nome e/ou un correo co fin de evitar as colaboracións totalmente anónimas. Esta utilidade procede a facer unha verificación JavaScript sobre a caixa de correo do visitante.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
@@ -230,7 +230,7 @@ _ Esta utilidade pode ser emparellada con « [.->sommaire] ».', # MODIF
 	'erreur:nojs' => 'O JavaScript está desactivado nesta páxina.',
 	'erreur:nom' => 'Erro !',
 	'erreur:probleme' => 'Problema en : @pb@',
-	'erreur:traitements' => 'A Navalla Suíza - Erro de compilation dos tratamentos : mestura \'typo\' e \'propre\' prohibida !',
+	'erreur:traitements' => 'A Navalla Suíza - Erro de compilation dos tratamentos : mestura ’typo’ e ’propre’ prohibida !',
 	'erreur:version' => 'Esta ferramenta non está dispoñíbel nesta versión de SPIP.',
 	'etendu' => 'Estendido',
 
@@ -381,7 +381,7 @@ Atención, esta ferramenta, precisa para funcionar do módulo {jQuery} : {Round 
 	'label:radio_target_blank3' => 'Nova xanela para as ligazóns externas :',
 	'label:radio_type_urls3' => 'Formato dos URL :',
 	'label:scrollTo' => 'Instalar os módulos {jQuery} seguintes :',
-	'label:separateur_urls_page' => 'Carácter de separación \'type-id\'<br/>(ex. : ?article-123) :', # MODIF
+	'label:separateur_urls_page' => 'Carácter de separación ’type-id’<br/>(ex. : ?article-123) :', # MODIF
 	'label:set_couleurs' => 'Conxunto para usar :',
 	'label:spam_mots' => 'Secuencias prohibidas :',
 	'label:spip_options_on' => 'Incluír :',
@@ -393,12 +393,12 @@ Atención, esta ferramenta, precisa para funcionar do módulo {jQuery} : {Round 
 	'label:titre_travaux' => 'Título da mensaxe :',
 	'label:titres_etendus' => 'Activr a utilización estendida das balizas #TITRE_XXX :',
 	'label:url_arbo_minuscules' => 'Conservar a altura tipográfica dos títulos nos URL :',
-	'label:url_arbo_sep_id' => 'Carácter de separación \'titulo-id\' para o caso de repetición (doublon) :<br/>(non empregue \'/\')', # MODIF
+	'label:url_arbo_sep_id' => 'Carácter de separación ’titulo-id’ para o caso de repetición (doublon) :<br/>(non empregue ’/’)', # MODIF
 	'label:url_glossaire_externe2' => 'Ligazón sobre o glosario externo :',
 	'label:urls_arbo_sans_type' => 'Mostrar o tipo de obxecto SPIP nos URL :',
 	'label:urls_avec_id' => 'Un id sistemáticos, mais...',
 	'label:webmestres' => 'Lista de webmásters do web:',
-	'liens_en_clair:description' => 'Pon á súa disposición o filtro : \'liens_en_clair\'. O seu texto contén probablemente ligazóns de hipertexto que non son visibles tras unha impresión. Este filtro engade entre corchetes o destino de cada ligazón activa (ligazóns externas ou correos). Atención : en modo de impresión (parámetro \'cs=print\' ou \'page=print\' no url da páxina), esta funcionalidade aplícase automaticamente.',
+	'liens_en_clair:description' => 'Pon á súa disposición o filtro : ’liens_en_clair’. O seu texto contén probablemente ligazóns de hipertexto que non son visibles tras unha impresión. Este filtro engade entre corchetes o destino de cada ligazón activa (ligazóns externas ou correos). Atención : en modo de impresión (parámetro ’cs=print’ ou ’page=print’ no url da páxina), esta funcionalidade aplícase automaticamente.',
 	'liens_en_clair:nom' => 'Ligazóns en claro',
 	'liens_orphelins:description' => 'Esta ferramenta ten dúas funcións :
 
@@ -429,7 +429,7 @@ Nota : os paquetes <code>.zip</code> non son reconstruídos instantaneamente, po
 	'message_perso' => 'Un profundo recoñecemento para os tradutores que pasaran por aquí. Pat ;-)',
 	'moderation_admins' => 'administradores autenticados',
 	'moderation_message' => 'Este foro está moderado a priori : o seu comentario non aparecerá ata que sexa validada por un administrador do web, salvante o caso de que vostede xa estea identificado e autorizado para publicar comentarios directamente.',
-	'moderation_moderee:description' => 'Permite moderar a moderación dos foros públicos <b>configurados a priori</b> para os usuarios inscritos.<br/> Exemplo: Eu son o webmáster do meu web, e respondo a unha mensaxe dunha persoa, por qué debo validar a miña propia mensaxe ?Moderación moderada faino por min. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
+	'moderation_moderee:description' => 'Permite moderar a moderación dos foros públicos <b>configurados a priori</b> para os usuarios inscritos.<br/> Exemplo: Eu son o webmáster do meu web, e respondo a unha mensaxe dunha persoa, por qué debo validar a miña propia mensaxe ?Moderación moderada faino por min. [[%moderation_admin%]][[—>%moderation_redac%]][[—>%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderación moderada',
 	'moderation_redacs' => 'redactores autenticados',
 	'moderation_visits' => 'visitantes autenticados',
@@ -452,7 +452,7 @@ Nota : os paquetes <code>.zip</code> non son reconstruídos instantaneamente, po
 	'outil_desactiver_le' => 'Desactivar a ferramenta',
 	'outil_inactif' => 'Utilidade inactiva',
 	'outil_intro' => 'Esta páxina lista as características do módulo postas á súa disposición. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o botón central: as ferramentas activadas serán desactivadas e <i> viceversa </ i>. Con cada clic, a descrición aparece a seguir das listas. As categorías son pregables e as ferramentas pódense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recoméndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros módulos. <br /> <br /> Nota: a simple carga desta páxina compila o conxunto das ferramentas da Navalla Suíza .',
-	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en facérnolo saber no foro <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=’./?exec=admin_couteau_suisse’>nova     interface</a>, non dubide en facérnolo saber no foro <a href=’http://www.spip-contrib.net/?article2166’>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ ferramenta', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ ferramentas', # MODIF
 	'outil_permuter' => 'Cambiar a ferramenta : « @text@ » ?',
@@ -530,7 +530,7 @@ _ Deseños : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Risoños',
 	'soft_scroller:description' => 'Ofrece na parte pública do seu web un esvaramento suavizado da páxina logo de que o visitante prema sobre unha ligazón que apunte sobre unha áncora: resulta moi útil para evitar perderse nunha páxina complexa ou un texto moi longo...
 
-Aviso, esta utilidade precisa para funcionar páxinas con «DOCTYPE XHTML» (non HTML !) e que haxa dous módulos instalados {jQuery} : {ScrollTo} e {LocalScroll}. A Navalla Suíza pódeos instalar directamente se vostede selecciona as opcións seguintes. [[%scrollTo%]][[-->%LocalScroll%]]
+Aviso, esta utilidade precisa para funcionar páxinas con «DOCTYPE XHTML» (non HTML !) e que haxa dous módulos instalados {jQuery} : {ScrollTo} e {LocalScroll}. A Navalla Suíza pódeos instalar directamente se vostede selecciona as opcións seguintes. [[%scrollTo%]][[—>%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Áncoras suaves',
 	'sommaire:description' => 'Constrúe un sumario para o texto dos seus artigos e das súas seccións co fin de acceder rapidamente  a títulos de alto tamaño (balizas HTML &lt;h3>Un intertítulo&lt;/h3> ou a atallos de SPIP : intertítulos do estilo :<code>{{{Un título grande}}}</code>).
@@ -553,9 +553,9 @@ Este sumario pode ser aparellado con : « [.->decoupe] ».', # MODIF
 	'spam:description' => 'Tenta loitar contra os envíos de mensaxes automáticas e impertinentes na parte pública. Algunhas palabras e as balizas en claro &lt;a>&lt;/a> están prohibidas.Anime os seus redactores a empregar os atallos de SPIP
 
 Liste aquí, separándoas por espazos, as secuencias prohibidas [[%spam_mots%]]
-• Para unha expresión con espazos, sitúea entre parénteses. Exemplo:~{(asses)}.
-_ • Para especificar unha palabra enteira, situéa ente parénteses. Exemplo~:~{(asses)}.
-_ • Para unha expresión regular, comprobe ben a sintaxe e sitúea entre barras e comas. Exemplos:~{<html>\\"/@test\\.(com|fr)/\\"</html>}.', # MODIF
+• Para unha expresión con espazos, sitúea entre parénteses. Exemplo: {(asses)}.
+_ • Para especificar unha palabra enteira, situéa ente parénteses. Exemplo : {(asses)}.
+_ • Para unha expresión regular, comprobe ben a sintaxe e sitúea entre barras e comas. Exemplos: {<html>\\"/@test\\.(com|fr)/\\"</html>}.', # MODIF
 	'spam:nom' => 'Loita contra o SPAM',
 	'spam_test_ko' => 'Esta mensaxe será bloqueada polo filtro antispam!',
 	'spam_test_ok' => 'Esta mensaxe será aceptada polo filtro antispam.',
@@ -589,9 +589,9 @@ _ • {Control da caché} : opción idéntica á precedente, con unha escritura 
 
 Note que : para as palabras clave, un alias de #TITRE_PARENT é  #TITRE_GROUPE. O tratamento de SPIP destas novas balizas é semellante a aquel de #TITRE.
 
-@puce@ De estar con SPIP 2.0, tamén ten á súa disposición todo un conxunto de balizas #TITRE_XXX que poderán darlle o título do obxecto \'xxx\', coa condición de que o campo \'id_xxx\' estea presente na táboa en curso (#ID_XXX utilizable no bucle en curso).
+@puce@ De estar con SPIP 2.0, tamén ten á súa disposición todo un conxunto de balizas #TITRE_XXX que poderán darlle o título do obxecto ’xxx’, coa condición de que o campo ’id_xxx’ estea presente na táboa en curso (#ID_XXX utilizable no bucle en curso).
 
-Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolverá o título da sección na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de aí o campo \'id_secteur\') está dispoñible neste caso.[[%titres_etendus%]]
+Por exemplo, nun bucle sobre  (ARTICLES), #TITRE_SECTEUR devolverá o título da sección na que estea situado o artigo en curso, xa que o identificador #ID_SECTEUR (de aí o campo ’id_secteur’) está dispoñible neste caso.[[%titres_etendus%]]
 A sintaxe <html>#TITRE_XXX{yy}</html> é igualmente aceptada. Exemplo : <html>#TITRE_ARTICLE{10}</html> reenviará ao título do artigo #10.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Baliza #TITRE_PARENT',
 	'titre_tests' => 'A Navalla Suíza - Páxina de tests…',
@@ -602,11 +602,11 @@ A sintaxe <html>#TITRE_XXX{yy}</html> é igualmente aceptada. Exemplo : <html>#T
 
 Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentación de SPIP sobre este asunto.
 
-Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:miña_cadea{nome=Carlos Martín, idade=37}:>/code> permite pasar dous parámetros á cadea seguinte: <code>\'miña_cadea\'=>"Bos días, eu son @nome@ e teño @idade@ anos\\"</code>.
+Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:miña_cadea{nome=Carlos Martín, idade=37}:>/code> permite pasar dous parámetros á cadea seguinte: <code>’miña_cadea’=>"Bos días, eu son @nome@ e teño @idade@ anos\\"</code>.
 
-A función SPIP usada en PHP é : <code>_T(\'chaine\')</code>. sen argumento, e <code>_T(\'chaine\', array(\'arg1\'=>\'un texto\', \'arg2\'=>\'un outro texto\'))</code> con argumentos.
+A función SPIP usada en PHP é : <code>_T(’chaine’)</code>. sen argumento, e <code>_T(’chaine’, array(’arg1’=>’un texto’, ’arg2’=>’un outro texto’))</code> con argumentos.
 
-Non esqueza verificar que a clave <code>\'cadea\'</code> está ben definida nos ficheiros de lingua.', # MODIF
+Non esqueza verificar que a clave <code>’cadea’</code> está ben definida nos ficheiros de lingua.', # MODIF
 	'toutmulti:nom' => 'Bloques multilingües',
 	'travaux_masquer_avert' => 'Ocultar o cadro que indica no web público que unha operación de mantemento está en curso',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
@@ -615,7 +615,7 @@ _ Grazas pola súa comprensión.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => 'En navegando o web na zona privada([->./?exec=auteurs]), escolla aquí a ordenación que usará para mostrar os artigos no interior das seccións.
 
-As propostas que seguen están baseadas na funcionalidade SQL \'ORDER BY\' : non empregue unha ordenación personalizada se non está seguro do que está a facer (campos dispoñíbeis : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+As propostas que seguen están baseadas na funcionalidade SQL ’ORDER BY’ : non empregue unha ordenación personalizada se non está seguro do que está a facer (campos dispoñíbeis : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
 	'tri_articles:nom' => 'Ordenación de artigos', # MODIF
 	'tri_modif' => 'Ordenación coa data de modificación (ORDER BY date_modif DESC)',
@@ -627,7 +627,7 @@ As propostas que seguen están baseadas na funcionalidade SQL \'ORDER BY\' : non
 @puce@ {{#BOLO}} : xera un falso texto de 3000 caracteres ("bolo" ou "[?lorem ipsum]") nos esqueletos durante a súa preparación. O argumentos opcional desta función especifica a lonxitude do texto querido. Exemplo : <code>#BOLO{300}</code>. Esta baliza acepta todos os filtros de  SPIP. Exemplo : <code>[(#BOLO|majuscules)]</code>.
 _ Está dispoñible igualmente un argumento para os seus contidos: sitúe <code><bolo300></code> en calquera zona de texto (entrada, descrición, texto, etc.) para obter 300 caracteres de texto falso.
 
-@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : reenvíe simplemente a data do momento, do seguinte xeito: <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. O argumento opcional desta función especifica a formato. Exemplo : <code>#MAINTENANT{Y-m-d}</code>. Como con #DATE, personalice a presentación grazas aos filtros de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
+@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : reenvíe simplemente a data do momento, do seguinte xeito: <code>#EVAL{date(’Y-m-d H:i:s’)}</code>. O argumento opcional desta función especifica a formato. Exemplo : <code>#MAINTENANT{Y-m-d}</code>. Como con #DATE, personalice a presentación grazas aos filtros de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
 
 - {{#CHR<html>{XX}</html>}} : baliza equivalente a <code>#EVAL{"chr(XX)"}</code> e práctica para codificar os caracteres especiais (o retorno de liña por exemplo) ou dos caracteres reservados polo compilador de SPIP (parénteses ou comiñas).
 
@@ -647,14 +647,14 @@ _ Exemplo : <code>/spip.php?article123</code>.
 <radio_type_urls3 valor="html">@puce@ {{URL «html»}} : as ligazóns teñen a forma de páxinas html clásicas.
 _ Exemplo : <code>/article123.html</code>.</radio_type_urls3>
 
-<radio_type_urls3 valor="propias">@puce@ {{URL «propias»}} : as ligazóns son calculadas conforme o título dos obxectos demandados. Os marcadores (_, -, +, etc.) encadran os títulos en función do tipo de obxecto.
+<radio_type_urls3 valor="propias">@puce@ {{URL «propias»}} : as ligazóns son calculadas conforme o título dos obxectos demandados. Os marcadores (_, -, +, etc.) encadran os títulos en función do tipo de obxecto.
 _ Exemplos : <code>/Meu-titulo-de-artigo</code> ou <code>/-Miña-seccion-</code> ou <code>/@Meu-web@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
 
-<radio_type_urls3 valor="propres2">@puce@ {{URLs «propres2»}} : a extensión \'.html\' engádese ás ligazóns {«propias»}.
+<radio_type_urls3 valor="propres2">@puce@ {{URLs «propres2»}} : a extensión ’.html’ engádese ás ligazóns {«propias»}.
 _ Exemplo : <code>/Meu-titulo-de-artigo.html</code> ou <code>/-Miña-seccion-.html</code>
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
 
-<radio_type_urls3 valor="libres">@puce@ {{URL «libres»}} : as ligazóns son {«propias»}, mais sen marcadores (_, -, +, etc.).
+<radio_type_urls3 valor="libres">@puce@ {{URL «libres»}} : as ligazóns son {«propias»}, mais sen marcadores (_, -, +, etc.).
 _ Exemplo : <code>/Meu-titulo-de-artigo</code> ou <code>/Miña-sección</code>
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
 
@@ -681,7 +681,7 @@ _(exemplos : <code>/Meu-titulo-de-artigo,457</code> ou <code>/457-Meu-titulo-de-
 	'type_urls:nom' => 'Formato das URL',
 	'typo_exposants:description' => 'Textos franceses : mellora o rendemento tipográfico das abreviacións correntes, metendo en superíndice os elementos necesarios (así, {<acronym>Mme</acronym>} produce {M<sup>me</sup>}) e corrixindo os erros correntes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, por exemplo, produce {2<sup>e</sup>}, só abreviatura correcta).
 
-As abreviacións obtidas están conformes con aquelas da Imprenta nacional como constan en {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (artigo « Abréviations », imprentas da Imprimerie nationale, Paris, 2002).
+As abreviacións obtidas están conformes con aquelas da Imprenta nacional como constan en {Lexique des règles typographiques en usage à l’Imprimerie nationale} (artigo « Abréviations », imprentas da Imprimerie nationale, Paris, 2002).
 Tamén son tratadas as expresións seguintes: <html>Dr, Pr, Mgr, m2, m3, Mn, Md, Sté, Éts, Vve, Cie, 1o, 2o, etc.</html> 
 
 Escolla aquí se quere poñer en superíndice certos atallos suplementarios, malia que sexa desaconsellado pola Imprimerie nationale :[[%expo_bofbof%]]
@@ -751,7 +751,7 @@ Engada simplemente<code><INCLURE{fond=fonds/visiteurs_connectes}></code> nas sú
 Webmáster(es) actual(is) : {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(es) elixible(s) : {@_CS_LISTE_ADMINS@}.
 
-En tanto que webmáster, ten dereito a modificar esta lista de id -- separados por dous puntos « : » de seren varios. Exemplo : «1:5:6».[[%webmestres%]]', # MODIF
+En tanto que webmáster, ten dereito a modificar esta lista de id — separados por dous puntos « : » de seren varios. Exemplo : «1:5:6».[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Lista de webmásters',
 
 	// X

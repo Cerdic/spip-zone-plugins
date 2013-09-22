@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ begint Alle band van de plaats bij verstek in het lopende venster van scheepvaart. Maar het kan nuttig zijn om de externe band te openen aan de plaats in een nieuw buitenlands venster  dat komt terug om {target toe te voegen =\\"_blank\\"} aan alle bakens &lt;a&gt; voorzien door SPIP van klasse {spip_out}, {spip_url} of {spip_glossaire}. Het is soms noodzakelijk om één van deze klassen toe te voegen aan de band van het skelet van de plaats (bestanden HTML) teneinde deze functionaliteit zoveel mogelijk uit te breiden. [[%radio_target_blank3%]]
 @puce@ SPIP maakt het mogelijk om woorden te verbinden met hun definitie dank zij de typografische kortere weg <code> [? woord] </code>. Per gebrek (of als u leegte het hokje hieronder laat), stuurt het externe glossarium naar de vrije encyclopedie wikipedia.org terug. Om het te gebruiken adres te kiezen. <br/>Band van test: [? SPIP] [[%url_glossaire_externe2%]]', # MODIF
-	'SPIP_liens:description1' => '<REVIEW>@puce@ SPIP voorziet een CSS stijl voor de «~mailto:~» linken : een briefje komtzich plaatsen voor ieder maillink; aangezien een aantal browsers kunnen die stijl niet aanpassen (o.a. IE6, IE7 et SAF3), besluit hier dit stijl te houden of niet.
+	'SPIP_liens:description1' => '<REVIEW>@puce@ SPIP voorziet een CSS stijl voor de « mailto: » linken : een briefje komtzich plaatsen voor ieder maillink; aangezien een aantal browsers kunnen die stijl niet aanpassen (o.a. IE6, IE7 et SAF3), besluit hier dit stijl te houden of niet.
 _ Testlink : [->test@test.com] (herlaad het hele pagina).[[%enveloppe_mails%]]', # MODIF
 	'SPIP_liens:nom' => 'SPIP en de externe band…',
-	'SPIP_tailles:description' => '@puce@ Teneinde het geheugen van uw server te verlichten, laat SPIP u toe om de afmetingen (grootte en breedte) en de omvang van het bestand van de beelden, logo\'s of documenten te beperken die met de verschillende inhoud van uw plaats worden samengevoegd. Als een bestand de aangegeven omvang overschrijdt, zal het formulier vele gegevens verzenden maar zij zullen vernietigd worden en SPIP zal er geen rekening mee, noch in de lijst IMG/, noch in database houden. Een waarschuwingsbericht zal dan verzonden worden naar de gebruiker.
+	'SPIP_tailles:description' => '@puce@ Teneinde het geheugen van uw server te verlichten, laat SPIP u toe om de afmetingen (grootte en breedte) en de omvang van het bestand van de beelden, logo’s of documenten te beperken die met de verschillende inhoud van uw plaats worden samengevoegd. Als een bestand de aangegeven omvang overschrijdt, zal het formulier vele gegevens verzenden maar zij zullen vernietigd worden en SPIP zal er geen rekening mee, noch in de lijst IMG/, noch in database houden. Een waarschuwingsbericht zal dan verzonden worden naar de gebruiker.
 
 Een nul of niet op de hoogte gebrachte waarde stemt met een onbegrensde waarde overeen.
 [[Grootte : %img_Hmax% pixels]][[->Breedte : %img_Wmax% pixels]][[->Gewicht van het bestand : %img_Smax% Ko]]
@@ -28,7 +28,7 @@ Een nul of niet op de hoogte gebrachte waarde stemt met een onbegrensde waarde o
 
 @puce@ Teneinde een overschrijding van geheugen PHP in de behandeling van de grote beelden door de boekhandel GD2 te vermijden, test SPIP de capaciteiten van de server en kan dus weigeren om de te grote beelden te behandelen. Het is mogelijk om désactiver deze test door manueel het maximumaantal van pixels te bepalen die voor de berekeningen worden gedragen.
 
-De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig geheugen. Een nul of niet op de hoogte gebrachte waarde zal de test van de server tot gevolg hebben.
+De waarde van 1 000 000 pixels lijkt juist voor een configuratie met weinig geheugen. Een nul of niet op de hoogte gebrachte waarde zal de test van de server tot gevolg hebben.
 [[%img_GDmax% pixels maximum]]', # MODIF
 	'SPIP_tailles:nom' => 'Grenzen geheugen',
 
@@ -94,8 +94,8 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 - {{De revisies van het Zwitserse Mes}} : een kader op deze bladzijde van configuratie, laatste wijzigingen aangebracht aan de code van plugin  ([Source->@_CS_RSS_SOURCE@]).
 - {{De artikelen aan het SPIP formaat}} : een aanvullend opvouwbaar kader voor uw artikelen ten einde de code bron te kennen die door hun auteurs wordt gebruikt.
 - {{De auteurs in stat}} : een kader aanvullend op [de bladzijde van de auteurs->./?exec=auteurs] wijst op de  10 laatst aangeslotenen en de niet bevestigde inschrijvingen. Enkel de beheerders zien deze informatie.
-- {{De SPIP webmasters}} : een opvouwbare kader op het [auteur\'s pagina->./?exec=auteurs] duit de beheerders aan die ook SPIP webmasters zijn. Allen door beheerders zichtbaar. Was u zelfs webmaster, zie ook het werktuig  « [.->webmestres] ».
-- {{"Proper" URLs }}: een opvouwbare kader voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig   [. - >type_urls]   laat u een fijne configuratie van URLs van uw plaats toe.- {{Sorteren van auteurs}} : een opvouwbare kader voor de artikels met meer dan een auteur en die eenvoudig de mogelijkheid geeft ze van verschillende maniers te sorteren.', # MODIF
+- {{De SPIP webmasters}} : een opvouwbare kader op het [auteur’s pagina->./?exec=auteurs] duit de beheerders aan die ook SPIP webmasters zijn. Allen door beheerders zichtbaar. Was u zelfs webmaster, zie ook het werktuig  « [.->webmestres] ».
+- {{"Proper" URLs }}: een opvouwbare kader voor elk onderwerp van inhoud (artikel, rubriek, auteur,…) aangevend URL eigen verenigd alsmede van hen alias eventueel. Het werktuig  [. - >type_urls]  laat u een fijne configuratie van URLs van uw plaats toe.- {{Sorteren van auteurs}} : een opvouwbare kader voor de artikels met meer dan een auteur en die eenvoudig de mogelijkheid geeft ze van verschillende maniers te sorteren.', # MODIF
 	'boites_privees:nom' => 'Particuliere dozen',
 	'bp_tri_auteurs' => 'Sorteren van auteurs',
 	'bp_urls_propres' => 'Eigen URLs ',
@@ -119,7 +119,7 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 	'chatons:description' => 'Neemt beelden (of katjes voor {tchats}) op in alle teksten waar een keten van het soort blijkt {{<code>:nom</code>}}.
 _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in uw dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code> vindt.', # MODIF
 	'chatons:nom' => 'Katjes',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent ?tre entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # MODIF
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n’y a pas de retour à la ligne. En effet, les citations courtes doivent ?tre entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # MODIF
 	'citations_bb:nom' => 'Goed bebakende aanhalingen',
 	'class_spip:description1' => 'U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{De kortere wegen van SPIP}}.
@@ -136,7 +136,7 @@ SPIP heeft verkozen om het baken &lt;strong> te gebruiken om vette letters te sc
 
 SPIP heeft gekozen om &lt;i> te gebruiken om italiques te schrijven. Maar &lt;em> zou ook gekunt hebben, met of zonder stijl.Aan u om te beslissen[[%racc_i1%]][[->%racc_i2%]]
 
-Vous pouvez aussi définir le code ouvrant et fermant pour les appels de notes de bas de pages (Attention ! Les modifications ne seront visibles que sur l\'espace public.) : [[%ouvre_ref%]][[->%ferme_ref%]]
+Vous pouvez aussi définir le code ouvrant et fermant pour les appels de notes de bas de pages (Attention ! Les modifications ne seront visibles que sur l’espace public.) : [[%ouvre_ref%]][[->%ferme_ref%]]
  
  Vous pouvez définir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
 
@@ -160,7 +160,7 @@ Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstij
 	'compacte_prive' => 'Niet compact gedeeltelijk prive',
 	'compacte_tout' => 'Niet comprimeren op alle (annuleert de vorige opties)',
 	'contrib' => 'Meer info : @url@',
-	'corbeille:description' => 'SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u \'s morgens, dit dankzij «CRON» (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]', # MODIF
+	'corbeille:description' => 'SPIP verwijdert automatisch de objecten mis au rebuts na 24 uren, en dit meestal rond 4u ’s morgens, dit dankzij «CRON» (een periodieke en/of een automatische lancering van het voorgeprogrammeerde proces). Hier kunt u het proces verhinderen zodanig dat u beter vat hebt op het beheer van prullenmand.[[%arret_optimisation%]]', # MODIF
 	'corbeille:nom' => 'Het mandje',
 	'corbeille_objets' => '@nb@ onderwerp(en) in het mandje.',
 	'corbeille_objets_lies' => '@nb_lies@ ontdekte(n) verbinding.',
@@ -176,15 +176,15 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 
 [[%couleurs_fonds%]]
 [[%set_couleurs%]][[-><set_couleurs valeur="1">%couleurs_perso%</set_couleurs>]]
-@_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren «balise=couleur», bepalen, alles die door komma\'s wordt gescheiden. Voorbeelden. Exemples : «grijs, rood», «zwak=geel, sterk=rood», «beneden=#99CC11, boven=brown» of nog «grijs=#DDDDCC, rood=#EE3300». Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[grijs]</code> en <code>[rood]</code> (<code>[fond grijs]</code> en <code>[fond rood]</code> als de middelen toegestaan zijn).', # MODIF
+@_CS_ASTER@Het formaat van deze verpersoonlijkte bakens moet bestaande kleuren op een lijst zetten of paren «balise=couleur», bepalen, alles die door komma’s wordt gescheiden. Voorbeelden. Exemples : «grijs, rood», «zwak=geel, sterk=rood», «beneden=#99CC11, boven=brown» of nog «grijs=#DDDDCC, rood=#EE3300». Voor de eerste en het laatste voorbeeld, zijn de toegelaten bakens : <code>[grijs]</code> en <code>[rood]</code> (<code>[fond grijs]</code> en <code>[fond rood]</code> als de middelen toegestaan zijn).', # MODIF
 	'couleurs:nom' => 'Erg in kleuren',
 	'couleurs_fonds' => ', <b>[fond coul]text[/coul]</b>, <b>[bg coul]text[/coul]</b>',
-	'cs_comportement:description' => '@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin \'Couteau Suisse (Zwitsers mesje)\' in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
+	'cs_comportement:description' => '@puce@ {{Logs.}}Vele inlichtingen zijn te verkrijgen over de plugin ’Couteau Suisse (Zwitsers mesje)’ in de folders {spip.log} deze kunt U vinden in het repertoire: {@_CS_DIR_TMP@}[[%log_couteau_suisse%]]
 
-@puce@{{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat \'le Couteau Suisse\' in het begin staat en zo enkele SPIP opties automatisch beïnvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder{@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
+@puce@{{Options SPIP.}} SPIP zet de  plugins in een specifieke orde. Om zeker te zijn dat ’le Couteau Suisse’ in het begin staat en zo enkele SPIP opties automatisch beïnvloedt, moet u de volgende optie aanvinken. Indien de rechten van u server het toestaan, zal de folder{@_CS_FILE_OPTIONS@} automatisch gemodifieerd worden en de volgende folder insluiten {@_CS_DIR_TMP@couteau-suisse/mes_spip_options.php}.
 [[%spip_options_on%]]
 
-@puce@ {{Requêtes externes.}} \'Le Couteau Suisse\' verifieert regelmatig het bestaan van een recentere versie en geeft de informatie door waar deze  ter beschikking is. Indien dit een probleem vertoont bij u server probeer dan de volgende link.[[%distant_off%]]', # MODIF
+@puce@ {{Requêtes externes.}} ’Le Couteau Suisse’ verifieert regelmatig het bestaan van een recentere versie en geeft de informatie door waar deze  ter beschikking is. Indien dit een probleem vertoont bij u server probeer dan de volgende link.[[%distant_off%]]', # MODIF
 	'cs_comportement:nom' => 'Gedrag van het Zwitserland Mes',
 	'cs_distant_off' => 'De verificaties van verwijderde versies',
 	'cs_distant_outils_off' => 'De werktuigen van het Zwitserland Mes die verwijderde bestanden hebben',
@@ -211,12 +211,12 @@ De parameter {type} hieronder kan drie verschillende waarden:
 	'decoration:nom' => 'Versiering',
 	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br/>Séparateur van bladzijdes of tabben : @sep@', # MODIF
 	'decoupe:aide2' => 'Alias : @sep@',
-	'decoupe:description' => '@puce@ Découpe l\'affichage public d\'un article en plusieurs pages grâce à une pagination automatique. Placez simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l\'endroit qui doit recevoir la coupure.
+	'decoupe:description' => '@puce@ Découpe l’affichage public d’un article en plusieurs pages grâce à une pagination automatique. Placez simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l’endroit qui doit recevoir la coupure.
 
-Par défaut, le Couteau Suisse insère la pagination en tête et en pied d\'article automatiquement. Mais vous avez la possibilité de placer cette pagination ailleurs dans votre squelette grâce à une balise #CS_DECOUPE que vous pouvez activer ici :
+Par défaut, le Couteau Suisse insère la pagination en tête et en pied d’article automatiquement. Mais vous avez la possibilité de placer cette pagination ailleurs dans votre squelette grâce à une balise #CS_DECOUPE que vous pouvez activer ici :
 [[%balise_decoupe%]]
 
-@puce@ Si vous utilisez ce séparateur à l\'intérieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d\'onglets.
+@puce@ Si vous utilisez ce séparateur à l’intérieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d’onglets.
 
 Dans les squelettes : vous avez à votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 
@@ -251,12 +251,12 @@ Cet outil peut être couplé avec « [.->sommaire] ».', # MODIF
 	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) schijnt oud.<br />Het Zwitsers mes  (Couteau Suisse)stemt overeen met een hogere versie of gelijk aan @mini@.', # MODIF
 	'erreur:description' => 'id gebrek hebbend aan in de definitie van het werktuig !',
 	'erreur:distant' => 'de verwijderde server',
-	'erreur:jquery' => '{{Note}} : de bibliotheek {jQuery} schijnt inactief op deze pagina. Consulteer:[ici->http://www.spip-contrib.net/?article2166] de paragraaf op de \'dépendances\' van de plugin of  herlaad deze pagina.', # MODIF
+	'erreur:jquery' => '{{Note}} : de bibliotheek {jQuery} schijnt inactief op deze pagina. Consulteer:[ici->http://www.spip-contrib.net/?article2166] de paragraaf op de ’dépendances’ van de plugin of  herlaad deze pagina.', # MODIF
 	'erreur:js' => 'Een fout JavaScript schijnt op deze bladzijde voorgekomen zijn en verhindert zijn goede werking. Gelieve JavaScript op uw navigator activeren om af-activeren sommige plugins SPIP van uw site.',
 	'erreur:nojs' => 'JavaScript wordt op deze bladzijde af-activeerd.',
 	'erreur:nom' => 'Fout !',
 	'erreur:probleme' => 'Zurig probleem : @pb@',
-	'erreur:traitements' => 'Het Mes Zwitserland - De compilatie fout van de behandelingen: verboden \'typo\' en \'eigen\' mengeling !',
+	'erreur:traitements' => 'Het Mes Zwitserland - De compilatie fout van de behandelingen: verboden ’typo’ en ’eigen’ mengeling !',
 	'erreur:version' => 'Dit werktuig is niet beschikbaar in deze versie van SPIP.',
 	'etendu' => 'Uitgestrekt',
 
@@ -305,7 +305,7 @@ _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@insta
 	'horloge:nom' => 'Klok',
 
 	// I
-	'icone_visiter:description' => 'Remplace l\'image du bouton standard « Visiter » (en haut à droite sur cette page)  par le logo du site, s\'il existe.
+	'icone_visiter:description' => 'Remplace l’image du bouton standard « Visiter » (en haut à droite sur cette page)  par le logo du site, s’il existe.
 
 Pour définir ce logo, rendez-vous sur la page « Configuration du site » en cliquant sur le bouton « Configuration ».', # MODIF
 	'icone_visiter:nom' => 'Knoop « Bezoeken »', # MODIF
@@ -325,12 +325,12 @@ Pour définir ce logo, rendez-vous sur la page « Configuration du site » en 
 	'introduction:nom' => 'Baken #INTRODUCTION',
 
 	// J
-	'jcorner:description' => '« Jolis Coins » est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres colorés}} en partie publique de votre site. Tout est possible, ou presque !
+	'jcorner:description' => '« Jolis Coins » est un outil permettant de modifier facilement l’aspect des coins de vos {{cadres colorés}} en partie publique de votre site. Tout est possible, ou presque !
 _ Voyez le résultat sur cette page : [->http://www.malsup.com/jquery/corner/].
 
 Listez ci-dessous les objets de votre squelette à arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe « = » pour spécifier la commande jQuery à utiliser et un double slash (« // ») pour les commentaires. En absence du signe égal, des coins ronds seront appliqués (équivalent à : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
-Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l\'installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]', # MODIF
+Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corners}. Le Couteau Suisse peut l’installer directement si vous cochez la case suivante. [[%jcorner_plugin%]]', # MODIF
 	'jcorner:nom' => 'Mooie Hoeken',
 	'jcorner_plugin' => '« Round Corners plugin »',
 	'jq_localScroll' => 'jQuery.LocalScroll ([demo->http://demos.flesler.com/jquery/localScroll/])',
@@ -346,7 +346,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 
 	// L
 	'label:admin_travaux' => 'De openbare site sluiten voor :',
-	'label:arret_optimisation' => 'SPIP\'s automatische leegmaken van het vuilnisbak vermijden :',
+	'label:arret_optimisation' => 'SPIP’s automatische leegmaken van het vuilnisbak vermijden :',
 	'label:auteur_forum_nom' => 'Bezoeker moet aanduiden :',
 	'label:auto_sommaire' => 'Systematische oprichting van het overzicht :',
 	'label:balise_decoupe' => 'Baken #CS_DECOUPE activeren :',
@@ -392,7 +392,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:radio_target_blank3' => 'Nieuw venster voor de externe band :',
 	'label:radio_type_urls3' => 'Formaat van URLs :',
 	'label:scrollTo' => 'Plaatsen volgend {jQuery} plugins :',
-	'label:separateur_urls_page' => 'Caractère de séparation \'type-id\'<br/>(ex. : ?article-123) :', # MODIF
+	'label:separateur_urls_page' => 'Caractère de séparation ’type-id’<br/>(ex. : ?article-123) :', # MODIF
 	'label:set_couleurs' => 'Te gebruiken set :',
 	'label:spam_mots' => 'Verboden sequenties :',
 	'label:spip_script' => 'Verzoek script :',
@@ -402,17 +402,17 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:terminaison_urls_page' => 'De uitgang van URls (ex : .html) :', # MODIF
 	'label:titre_travaux' => 'Titel van het bericht :',
 	'label:url_arbo_minuscules' => 'Het breken van de titels in URLs behouden :',
-	'label:url_arbo_sep_id' => 'Het scheidingskarakter \'titel-idem\' in geval van doublon: <br/>(niet gebruiken \'/\')', # MODIF
+	'label:url_arbo_sep_id' => 'Het scheidingskarakter ’titel-idem’ in geval van doublon: <br/>(niet gebruiken ’/’)', # MODIF
 	'label:url_glossaire_externe2' => 'Band naar het externe glossarium :',
 	'label:urls_arbo_sans_type' => 'Het soort onderwerp SPIP in URLs te kennen geven :',
-	'label:webmestres' => 'Lijst van de site\'s webmasters :',
-	'liens_en_clair:description' => 'Ter beschikking uw stelt de filter: \'liens_en_clair\'. Uw tekst bevat waarschijnlijk een band hypertexte die niet zichtbaar bij een indruk is. Deze filter voegt tussen haken de bestemming van elke band cliquable (externe band of mails) toe. Opgelet: in manier indruk (parameter \'cs=print\' of \'page=print\' in url van de bladzijde), is deze functionaliteit automatisch toegepast.',
+	'label:webmestres' => 'Lijst van de site’s webmasters :',
+	'liens_en_clair:description' => 'Ter beschikking uw stelt de filter: ’liens_en_clair’. Uw tekst bevat waarschijnlijk een band hypertexte die niet zichtbaar bij een indruk is. Deze filter voegt tussen haken de bestemming van elke band cliquable (externe band of mails) toe. Opgelet: in manier indruk (parameter ’cs=print’ of ’page=print’ in url van de bladzijde), is deze functionaliteit automatisch toegepast.',
 	'liens_en_clair:nom' => 'Band in klaarheid',
 	'liens_orphelins:description' => 'Cet outil a deux fonctions :
 
 @puce@ {{Liens corrects}}.
 
-SPIP a pour habitude d\'insérer un espace avant les points d\'interrogation ou d\'exclamation, typo française oblige. Voici un outil qui protège le point d\'interrogation dans les URLs de vos textes.[[%liens_interrogation%]]
+SPIP a pour habitude d’insérer un espace avant les points d’interrogation ou d’exclamation, typo française oblige. Voici un outil qui protège le point d’interrogation dans les URLs de vos textes.[[%liens_interrogation%]]
 
 @puce@ {{Liens orphelins}}.
 
@@ -425,15 +425,15 @@ _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net<
 	'liens_orphelins:nom' => 'Mooi URLs',
 
 	// M
-	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien Javascript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.', # MODIF
+	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien Javascript permettant quand même d’activer la messagerie du lecteur. Cet outil antispam tente d’empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.', # MODIF
 	'mailcrypt:nom' => 'MailCrypt',
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d’information. Si la révision distante n’a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
-Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # MODIF
+Note : les paquets <code>.zip</code> n’étant pas reconstruits instantanément, il se peut que vous soyez obligé d’attendre un certain délai avant de pouvoir effectuer la totale mise à jour d’un plugin tout récemment modifié.', # MODIF
 	'message_perso' => 'Groot dank aan de vertalers die hierdoor komen lopen. Pat ;-)',
-	'moderation_moderee:description' => 'Permet de modérer la modération des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]', # MODIF
+	'moderation_moderee:description' => 'Permet de modérer la modération des forums pour les utilisateurs inscrits. [[%moderation_admin%]][[—>%moderation_redac%]][[—>%moderation_visit%]]', # MODIF
 	'modifier_vars' => 'Dit @nb@ parameters wijzigen',
 
 	// N
@@ -442,7 +442,7 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 	'nouveaux' => 'Nieuw',
 
 	// O
-	'orientation:description' => '3 nieuwe criteria voor uw skeletten: <code>{portret}</code>, <code>{vierkant}</code> en <code>{landschap}</code>. Ideaal voor de foto\'s indeling in functie van hun vorm.',
+	'orientation:description' => '3 nieuwe criteria voor uw skeletten: <code>{portret}</code>, <code>{vierkant}</code> en <code>{landschap}</code>. Ideaal voor de foto’s indeling in functie van hun vorm.',
 	'orientation:nom' => 'De beelden oriëntatie',
 	'outil_actif' => 'Actief werktuig',
 	'outil_activer' => 'Activeren',
@@ -452,7 +452,7 @@ Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément,
 	'outil_desactiver_le' => 'het werktuig buiten dienst zetten.',
 	'outil_inactif' => 'Inactief werktuig',
 	'outil_intro' => 'Deze bladzijde zet de functies van plugin op een lijst die uw ter beschikking worden gesteld.<br /><br />Door op de naam van de werktuigen te klikken hieronder, selecteert u degenen waarvan zult kunnen verwisselen u de stand met behulp van de centrale knoop: de geactiveerde werktuigen désactivés en <i>vice versa</i>. Aan elke klik, blijkt de beschrijving onder de lijsten. De categorieën zijn opvouwbaar en de werktuigen kunnen verborgen worden. Het dubbele-Voor een eerste gebruik, wordt hij aanbevolen om de werktuigen één voor één te activeren, ingeval zeker de onverenigbaarheden met uw skelet, SPIP of anderen plugins zouden blijkenklik maakt het mogelijk om een werktuig snel te verwisselen.<br /><br />.<br /><br />Nota : de eenvoudige lading van deze bladzijde compileert het geheel van de werktuigen van het Zwitserland Mes opnieuw.', # MODIF
-	'outil_intro_old' => 'Deze interface is oud.<br /><br />Als u problemen in het gebruik van <a href=\' ./? exec=admin_couteau_suisse\'> nieuwe interface ondervindt</a>, aarzelt niet aandeel ervan doen over het forum van <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'Deze interface is oud.<br /><br />Als u problemen in het gebruik van <a href=’ ./? exec=admin_couteau_suisse’> nieuwe interface ondervindt</a>, aarzelt niet aandeel ervan doen over het forum van <a href=’http://www.spip-contrib.net/?article2166’>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ werktuig', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ werktuigen', # MODIF
 	'outil_permuter' => 'Het werktuig verwisselen : « @text@ » ?',
@@ -526,7 +526,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 	'smileys:nom' => 'Smileys',
 	'soft_scroller:description' => 'Offre à votre site public un défilement  adouci de la page lorsque le visiteur clique sur un lien pointant vers une ancre : très utile pour éviter de se perdre dans une page complexe ou un texte très long...
 
-Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
+Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[—>%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Zachte ankers',
 	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
@@ -539,7 +539,7 @@ _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@
 
 [[%auto_sommaire%]]
 
-@puce@ Par défaut, le Couteau Suisse insère le sommaire en tête d\'article automatiquement. Mais vous avez la possibilité de placer ce sommaire ailleurs dans votre squelette grâce à une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ Par défaut, le Couteau Suisse insère le sommaire en tête d’article automatiquement. Mais vous avez la possibilité de placer ce sommaire ailleurs dans votre squelette grâce à une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[%balise_sommaire%]]
 
 Ce sommaire peut être couplé avec : « [.->decoupe] ».', # MODIF
@@ -557,12 +557,12 @@ Listez ici les séquences interdites@_CS_ASTER@ en les séparant par des espaces
 	'spam_test_ko' => 'Dit boodschap zou door het anti-SPAM filter gezeeft worden !',
 	'spam_test_ok' => 'Dit boodschap zou door het anti-SPAM filter goedgekeurd worden.',
 	'spam_tester_label' => 'Proef hier uw lijst van verboden teksten :', # MODIF
-	'spip_cache:description' => '@puce@ Par défaut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en accélérer la consultation. Désactiver temporairement le cache peut aider au développement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l\'importance. Une valeur vide ou égale à 0 signifie qu\'aucun quota ne s\'applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n\'est pas trouvée dans vos squelettes locaux, SPIP considère par défaut que le cache d\'une page a une durée de vie de 24 heures avant de la recalculer. Afin de mieux gérer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez spécifier ici la valeur par défaut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]', # MODIF
-	'spip_cache:description1' => '@puce@ Par défaut, SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en accélérer la consultation. Désactiver temporairement le cache peut aider au développement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
+	'spip_cache:description' => '@puce@ Par défaut, SPIP calcule toutes les pages publiques et les place dans le cache afin d’en accélérer la consultation. Désactiver temporairement le cache peut aider au développement du site.[[%radio_desactive_cache3%]]@puce@ Le cache occupe un certain espace disque et SPIP peut en limiter l’importance. Une valeur vide ou égale à 0 signifie qu’aucun quota ne s’applique.[[%quota_cache% Mo]]@puce@ Si la balise #CACHE n’est pas trouvée dans vos squelettes locaux, SPIP considère par défaut que le cache d’une page a une durée de vie de 24 heures avant de la recalculer. Afin de mieux gérer la charge de votre serveur, vous pouvez ici modifier cette valeur.[[%duree_cache% heures]]@puce@ Si vous avez plusieurs sites en mutualisation, vous pouvez spécifier ici la valeur par défaut prise en compte par tous les sites locaux (SPIP 1.93).[[%duree_cache_mutu% heures]]', # MODIF
+	'spip_cache:description1' => '@puce@ Par défaut, SPIP calcule toutes les pages publiques et les place dans le cache afin d’en accélérer la consultation. Désactiver temporairement le cache peut aider au développement du site. @_CS_CACHE_EXTENSION@[[%radio_desactive_cache3%]]', # MODIF
 	'spip_cache:description2' => '@puce@ Quatre options pour orienter le fonctionnement du cache de SPIP : <q1>
-_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d\'en accélérer la consultation. Après un certain délai, le cache est recalculé et stocké.
-_ • {Cache permanent} : les délais d\'invalidation du cache sont ignorés.
-_ • {Pas de cache} : désactiver temporairement le cache peut aider au développement du site. Ici, rien n\'est stocké sur le disque.
+_ • {Usage normal} : SPIP calcule toutes les pages publiques et les place dans le cache afin d’en accélérer la consultation. Après un certain délai, le cache est recalculé et stocké.
+_ • {Cache permanent} : les délais d’invalidation du cache sont ignorés.
+_ • {Pas de cache} : désactiver temporairement le cache peut aider au développement du site. Ici, rien n’est stocké sur le disque.
 _ • {Contrôle du cache} : option identique à la précédente, avec une écriture sur le disque de tous les résultats afin de pouvoir éventuellement les contrôler.</q1>[[%radio_desactive_cache4%]]', # MODIF
 	'spip_cache:nom' => 'SPIP en het dekblad…',
 	'stat_auteurs' => 'De auteurs in stat',
@@ -570,40 +570,40 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'statuts_tous' => 'Alle statuten',
 	'suivi_forums:nom' => 'Opvolging van de openbare forums',
 	'supprimer_cadre' => 'Dit kader afschaffen',
-	'supprimer_numero:description' => 'Applique la fonction SPIP supprimer_numero() à l\'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit présent dans les squelettes.<br />Voici la syntaxe à utiliser dans le cadre d\'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>', # MODIF
+	'supprimer_numero:description' => 'Applique la fonction SPIP supprimer_numero() à l’ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit présent dans les squelettes.<br />Voici la syntaxe à utiliser dans le cadre d’un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code>', # MODIF
 	'supprimer_numero:nom' => 'Schaft het nummer af',
 
 	// T
 	'titre' => 'Het Zwitserland Mes',
-	'titre_parent:description' => 'Au sein d\'une boucle, il est courant de vouloir afficher le titre du parent de l\'objet en cours. Traditionnellement, il suffirait d\'utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l\'écriture de vos squelettes. Le résultat renvoyé est : le titre du groupe d\'un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
+	'titre_parent:description' => 'Au sein d’une boucle, il est courant de vouloir afficher le titre du parent de l’objet en cours. Traditionnellement, il suffirait d’utiliser une seconde boucle, mais cette nouvelle balise #TITRE_PARENT allégera l’écriture de vos squelettes. Le résultat renvoyé est : le titre du groupe d’un mot-clé ou celui de la rubrique parente (si elle existe) de tout autre objet (article, rubrique, brève, etc.).
 
 Notez : Pour les mots-clés, un alias de #TITRE_PARENT est #TITRE_GROUPE. Le traitement SPIP de ces nouvelles balises est similaire à celui de #TITRE.
 
-@puce@ Si vous êtes sous SPIP 2.0, alors vous avez ici à votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l\'objet \'xxx\', à condition que le champ \'id_xxx\' soit présent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
+@puce@ Si vous êtes sous SPIP 2.0, alors vous avez ici à votre disposition tout un ensemble de balises #TITRE_XXX qui pourront vous donner le titre de l’objet ’xxx’, à condition que le champ ’id_xxx’ soit présent dans la table en cours (#ID_XXX utilisable dans la boucle en cours).
 
-Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est placé l\'article en cours, puisque l\'identifiant #ID_SECTEUR (ou le champ \'id_secteur\') est disponible dans ce cas.[[%titres_etendus%]]', # MODIF
+Par exemple, dans une boucle sur (ARTICLES), #TITRE_SECTEUR donnera le titre du secteur dans lequel est placé l’article en cours, puisque l’identifiant #ID_SECTEUR (ou le champ ’id_secteur’) est disponible dans ce cas.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Balise #TITRE_PARENT', # MODIF
 	'titre_tests' => 'Het Zwitserland Mes - Tests Bladzijde…',
 	'tous' => 'Iedereen',
 	'toutes_couleurs' => 'De 36 kleuren van de css stijlen :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Meertalige blokken : <b><:trad:></b>', # MODIF
-	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:chaine:></code>.
+	'toutmulti:description' => 'À l’instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d’utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l’aide du raccourci <code><:chaine:></code>.
  
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
-Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans\\"</code>.
+Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>’ma_chaine’=>"Bonjour, je suis @nom@ et j’ai @age@ ans\\"</code>.
 
-La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
+La fonction SPIP utilisée en PHP est <code>_T(’chaine’)</code> sans argument, et  <code>_T(’chaine’, array(’arg1’=>’un texte’, ’arg2’=>’un autre texte’))</code> avec arguments.
 
- N\'oubliez donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.', # MODIF
+ N’oubliez donc pas de vérifier que la clef <code>’chaine’</code> est bien définie dans les fichiers de langues.', # MODIF
 	'toutmulti:nom' => 'Meertalige blokken',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Deze site zal zeer binnenkort hersteld worden.
 _ Bedankt voor uw begrip.', # MODIF
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
-	'tri_articles:description' => 'En naviguant sur le site en partie privée ([->./?exec=auteurs]), choisissez ici le tri à utiliser pour afficher vos articles à l\'intérieur de vos rubriques.
+	'tri_articles:description' => 'En naviguant sur le site en partie privée ([->./?exec=auteurs]), choisissez ici le tri à utiliser pour afficher vos articles à l’intérieur de vos rubriques.
 
-Les propositions ci-dessous sont basées sur la fonctionnalité SQL \'ORDER BY\' : n\'utilisez le tri personnalisé que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+Les propositions ci-dessous sont basées sur la fonctionnalité SQL ’ORDER BY’ : n’utilisez le tri personnalisé que si vous savez ce que vous faites (champs disponibles : {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
 	'tri_articles:nom' => 'Sorteren van de artikelen', # MODIF
 	'tri_modif' => 'Sorteren op de wijzigingsdatum (ORDER BY date_modif DESC)',
@@ -612,19 +612,19 @@ Les propositions ci-dessous sont basées sur la fonctionnalité SQL \'ORDER BY\'
 	'tri_titre' => 'Sorteren op de titel (ORDER BY 0+titre,titre)',
 	'trousse_balises:description' => 'Outil en cours de développement. Vous offre quelques balises très simples et bien pratiques pour améliorer la lisibilité de vos squelettes.
 
-@puce@ {{#BOLO}} : génère un faux texte d\'environ 3000 caractères ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L\'argument optionnel de cette fonction spécifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
-_ Un modèle est également disponible pour vos contenus : placez <code><bolo300></code> dans n\'importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caractères de faux texte.
+@puce@ {{#BOLO}} : génère un faux texte d’environ 3000 caractères ("bolo" ou "[?lorem ipsum]") dans les squelettes pendant leur mise au point. L’argument optionnel de cette fonction spécifie la longueur du texte voulu. Exemple : <code>#BOLO{300}</code>. Cette balise accepte tous les filtres de SPIP. Exemple : <code>[(#BOLO|majuscules)]</code>.
+_ Un modèle est également disponible pour vos contenus : placez <code><bolo300></code> dans n’importe quelle zone de texte (chapo, descriptif, texte, etc.) pour obtenir 300 caractères de faux texte.
 
-@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : renvoie simplement la date du moment, tout comme : <code>#EVAL{date(\'Y-m-d H:i:s\')}</code>. L\'argument optionnel de cette fonction spécifie le format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tout comme avec #DATE, personnalisez l\'affichage grâce aux filtres de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
+@puce@ {{#MAINTENANT}} (ou {{#NOW}}) : renvoie simplement la date du moment, tout comme : <code>#EVAL{date(’Y-m-d H:i:s’)}</code>. L’argument optionnel de cette fonction spécifie le format. Exemple : <code>#MAINTENANT{Y-m-d}</code>. Tout comme avec #DATE, personnalisez l’affichage grâce aux filtres de SPIP. Exemple : <code>[(#MAINTENANT|affdate)]</code>.
 
 - {{#CHR<html>{XX}</html>}} : balise équivalente à <code>#EVAL{"chr(XX)"}</code> et pratique pour coder des caractères spéciaux (le retour à la ligne par exemple) ou des caractères réservés par le compilateur de SPIP (les crochets ou les accolades).
 
 @puce@ {{#LESMOTS}} : ', # MODIF
-	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
+	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d’URLs pour fabriquer les liens d’accès aux pages de votre site.
 
-Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l\'URL propre associée.
+Plus d’infos : [->http://www.spip.net/fr_article765.html]. L’outil « [.->boites_privees] » vous permet de voir sur la page de chaque objet SPIP l’URL propre associée.
 [[%radio_type_urls3%]]
-<q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier "htaccess.txt" du répertoire de base du site SPIP sous le sous le nom ".htaccess" (attention à ne pas écraser d\'autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-répertoire", vous devrez aussi éditer la ligne "RewriteBase" ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</q3>
+<q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier "htaccess.txt" du répertoire de base du site SPIP sous le sous le nom ".htaccess" (attention à ne pas écraser d’autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en "sous-répertoire", vous devrez aussi éditer la ligne "RewriteBase" ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</q3>
 
 <radio_type_urls3 valeur="page">@puce@ {{URLs «page»}} : ce sont les liens par défaut, utilisés par SPIP depuis sa version 1.9x.
 _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
@@ -632,14 +632,14 @@ _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separ
 <radio_type_urls3 valeur="html">@puce@ {{URLs «html»}} : les liens ont la forme des pages html classiques.
 _ Exemple : <code>/article123.html</code></radio_type_urls3>
 
-<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres»}} : les liens sont calculés grâce au titre des objets demandés. Des marqueurs (_, -, +, @, etc.) encadrent les titres en fonction du type d\'objet.
+<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres»}} : les liens sont calculés grâce au titre des objets demandés. Des marqueurs (_, -, +, @, etc.) encadrent les titres en fonction du type d’objet.
 _ Exemples : <code>/Mon-titre-d-article</code> ou <code>/-Ma-rubrique-</code> ou <code>/@Mon-site@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2»}} : l\'extension \'.html\' est ajoutée aux liens {«propres»}.
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2»}} : l’extension ’.html’ est ajoutée aux liens {«propres»}.
 _ Exemple : <code>/Mon-titre-d-article.html</code> ou <code>/-Ma-rubrique-.html</code>
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}} : les liens sont {«propres»}, mais sans marqueurs dissociant les objets (_, -, +, @, etc.).
+<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}} : les liens sont {«propres»}, mais sans marqueurs dissociant les objets (_, -, +, @, etc.).
 _ Exemple : <code>/Mon-titre-d-article</code> ou <code>/Ma-rubrique</code>
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
 
@@ -647,32 +647,32 @@ _ Exemple : <code>/Mon-titre-d-article</code> ou <code>/Ma-rubrique</code>
 _ Exemple : <code>/secteur/rubrique1/rubrique2/Mon-titre-d-article</code>
 [[%url_arbo_minuscules%]][[%urls_arbo_sans_type%]][[%url_arbo_sep_id%]][[%terminaison_urls_arbo%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs «propres-qs»}} : ce système fonctionne en "Query-String", c\'est-à-dire sans utilisation de .htaccess ; les liens sont {«propres»}.
+<radio_type_urls3 valeur="propres-qs">@puce@ {{URLs «propres-qs»}} : ce système fonctionne en "Query-String", c’est-à-dire sans utilisation de .htaccess ; les liens sont {«propres»}.
 _ Exemple : <code>/?Mon-titre-d-article</code>
 [[%terminaison_urls_propres_qs%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres_qs">@puce@ {{URLs «propres_qs»}} : ce système fonctionne en "Query-String", c\'est-à-dire sans utilisation de .htaccess ; les liens sont {«propres»}.
+<radio_type_urls3 valeur="propres_qs">@puce@ {{URLs «propres_qs»}} : ce système fonctionne en "Query-String", c’est-à-dire sans utilisation de .htaccess ; les liens sont {«propres»}.
 _ Exemple : <code>/?Mon-titre-d-article</code>
 [[%terminaison_urls_propres_qs%]][[%marqueurs_urls_propres_qs%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="standard">@puce@ {{URLs «standard»}} : ces liens désormais obsolètes étaient utilisés par SPIP jusqu\'à sa version 1.8.
+<radio_type_urls3 valeur="standard">@puce@ {{URLs «standard»}} : ces liens désormais obsolètes étaient utilisés par SPIP jusqu’à sa version 1.8.
 _ Exemple : <code>article.php3?id_article=123</code>
 </radio_type_urls3>
 
-@puce@ Si vous utilisez le format {page} ci-dessus ou si l\'objet demandé n\'est pas reconnu, alors il vous est possible de choisir {{le script d\'appel}} à SPIP. Par défaut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument créer le fichier correspondant dans la racine de SPIP, à l\'image de celui qui existe déjà : {index.php}.
+@puce@ Si vous utilisez le format {page} ci-dessus ou si l’objet demandé n’est pas reconnu, alors il vous est possible de choisir {{le script d’appel}} à SPIP. Par défaut, SPIP choisit {spip.php}, mais {index.php} (exemple de format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument créer le fichier correspondant dans la racine de SPIP, à l’image de celui qui existe déjà : {index.php}.
 [[%spip_script%]]', # MODIF
-	'type_urls:description1' => '@puce@ Si vous utilisez un format à base d\'URLs «propres»  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), le Couteau Suisse peut :
-<q1>• S\'assurer que l\'URL produite soit totalement {{en minuscules}}.</q1>[[%urls_minuscules%]]
-<q1>• Provoquer l\'ajout systématique de {{l\'id de l\'objet}} à son URL (en suffixe, en préfixe, etc.).
+	'type_urls:description1' => '@puce@ Si vous utilisez un format à base d’URLs «propres»  ({propres}, {propres2}, {libres}, {arborescentes} ou {propres_qs}), le Couteau Suisse peut :
+<q1>• S’assurer que l’URL produite soit totalement {{en minuscules}}.</q1>[[%urls_minuscules%]]
+<q1>• Provoquer l’ajout systématique de {{l’id de l’objet}} à son URL (en suffixe, en préfixe, etc.).
 _ (exemples : <code>/Mon-titre-d-article,457</code> ou <code>/457-Mon-titre-d-article</code>)</q1>', # MODIF
 	'type_urls:nom' => 'Formaat van URLs',
 	'typo_exposants:description' => '{{Textes français}} : améliore le rendu typographique des abréviations courantes, en mettant en exposant les éléments nécessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2ème</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abréviation correcte).
 
-Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale telles qu\'indiquées dans le {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (article « Abréviations », presses de l\'Imprimerie nationale, Paris, 2002).
+Les abréviations obtenues sont conformes à celles de l’Imprimerie nationale telles qu’indiquées dans le {Lexique des règles typographiques en usage à l’Imprimerie nationale} (article « Abréviations », presses de l’Imprimerie nationale, Paris, 2002).
 
 Sont aussi traitées les expressions suivantes : <html>Dr, Pr, Mgr, m2, m3, Mn, Md, Sté, Éts, Vve, Cie, 1o, 2o, etc.</html> 
 
-Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgré un avis défavorable de l\'Imprimerie nationale :[[%expo_bofbof%]]
+Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgré un avis défavorable de l’Imprimerie nationale :[[%expo_bofbof%]]
 
 {{Textes anglais}} : mise en exposant des nombres ordinaux : <html>1st, 2nd</html>, etc.', # MODIF
 	'typo_exposants:nom' => 'Typografische inzenders',
@@ -690,16 +690,16 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_3_chiffres' => '3 cijfers minimum eisen',
 	'urls_base_total' => 'Er zijn momenteel @nb@ URL(s) in de database',
 	'urls_base_vide' => 'De database van de URLs is leeg',
-	'urls_choix_objet' => 'Edition en base de l\'URL d\'un objet spécifique :', # MODIF
+	'urls_choix_objet' => 'Edition en base de l’URL d’un objet spécifique :', # MODIF
 	'urls_enregistrer' => 'Dit URL in de database opslaan',
 	'urls_id_sauf_rubriques' => 'Exclure les rubriques', # MODIF
-	'urls_nouvelle' => 'Éditer l\'URL « propres » :', # MODIF
+	'urls_nouvelle' => 'Éditer l’URL « propres » :', # MODIF
 	'urls_num_objet' => 'Nummer :',
 	'urls_purger' => 'Alles legen',
 	'urls_purger_tables' => 'De geselecteerde tafels legen',
 	'urls_url_calculee' => 'Publiek URL « @type@ » :',
 	'urls_url_objet' => 'URL « propres » enregistrée :', # MODIF
-	'urls_valeur_vide' => '(Une valeur vide entraine la suppression de l\'URL)', # MODIF
+	'urls_valeur_vide' => '(Une valeur vide entraine la suppression de l’URL)', # MODIF
 
 	// V
 	'validez_page' => 'Om de wijzigingen te bereiken :',
