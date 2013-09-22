@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autres_versions_formats' => 'This document was automatically encoded formats:',
 
 	// I
-	'info_encodage_pas_prevu' => 'This document won\'t be encoded.',
+	'info_encodage_pas_prevu' => 'This document won’t be encoded.',
 	'info_previsu' => 'Preview',
 
 	// L

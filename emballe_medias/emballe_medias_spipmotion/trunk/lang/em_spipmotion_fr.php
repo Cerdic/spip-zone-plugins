@@ -7,8 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'autre_version_format' => 'Ce document a été automatiquement encodé en @format@.',
-	'autres_versions' => 'Autres versions :',
-	'autres_versions_formats' => 'Ce document a été automatiquement encodé aux formats : ',
+	'autres_versions' => 'Autres versions :',
+	'autres_versions_formats' => 'Ce document a été automatiquement encodé aux formats : ',
 
 	// I
 	'info_encodage_pas_prevu' => 'Ce document ne sera pas encodé.',
@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_recharger_voir_player' => 'Recharger le lecteur',
 
 	// M
-	'message_document_attente_encodage' => 'Ce document est dans la file d\'attente d\'encodage.',
-	'message_document_encours_encodage' => 'Ce document est en cours d\'encodage.',
+	'message_document_attente_encodage' => 'Ce document est dans la file d’attente d’encodage.',
+	'message_document_encours_encodage' => 'Ce document est en cours d’encodage.',
 
 	// T
 	'title_infos_cacher' => 'Cacher les informations supplémentaires',
