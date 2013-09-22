@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_description_ticket_ss_nav' => 'Describe as precisely as possible the need or problem.
 	Indicate in particular if it occurs consistently or occasionally.',
 	'explication_fichier' => 'Add a file to the bug report.',
-	'explication_redaction' => 'When you\'re finished writing your bug report, select the status «open and discussed».',
+	'explication_redaction' => 'When you’re finished writing your bug report, select the status «open and discussed».',
 	'explication_url_exemple' => 'Enter here the URL of a page covered by this bug report.',
 
 	// I
@@ -176,9 +176,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_vue_tous' => 'Complete list',
 
 	// M
-	'mail_texte_message_auto' => 'This is an automatic message: please don\'t answer.',
+	'mail_texte_message_auto' => 'This is an automatic message: please don’t answer.',
 	'message_aucun_ticket_recherche' => 'No ticket matches your search',
-	'message_automatique' => 'This is an automatic message: please don\'t answer.',
+	'message_automatique' => 'This is an automatic message: please don’t answer.',
 	'message_page_publique_indisponible' => 'This page is unavailable. check that ZPIP is enabled and your plugin configuration allows public access to bug reports.',
 	'message_zpip_inactif' => 'This option is disabled because it requires the plugin ZPIP.',
 
