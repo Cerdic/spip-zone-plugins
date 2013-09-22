@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
-	'openinviter_description' => 'Intégration de la librairie OpenInviter avec l\'API du plugin Importateur de contacts.',
+	'openinviter_description' => 'Intégration de la librairie OpenInviter avec l’API du plugin Importateur de contacts.',
 	'openinviter_slogan' => 'Intégration de la librairie OpenInviter.'
 );
 
