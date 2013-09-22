@@ -49,11 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mois' => 'Month',
 
 	// O
-	'option_aff_art_interface_explication' => 'Display only the articles in the user\'s language',
+	'option_aff_art_interface_explication' => 'Display only the articles in the user’s language',
 	'option_aff_art_interface_label' => 'Multilingual display',
 	'option_aff_langue_explication' => 'Display the selected language of the article or section before the title',
 	'option_aff_langue_label' => 'Display the language',
-	'option_aff_rub_interface_explication' => 'Display only the sections in the user\'s language',
+	'option_aff_rub_interface_explication' => 'Display only the sections in the user’s language',
 	'option_aff_rub_interface_label' => 'Multilingual display',
 	'option_attention_explication' => 'A message more important than the explanation.',
 	'option_attention_label' => 'Warning',
