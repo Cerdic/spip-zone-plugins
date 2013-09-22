@@ -2,7 +2,7 @@
 	prefix="zippeur"
 	categorie="multimedia"
 	version="4.0.0"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/zip.png"
 	schema="0.5"
