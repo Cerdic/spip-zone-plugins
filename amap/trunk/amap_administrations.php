@@ -1,11 +1,13 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin Amap
+ * Fichier gérant l'installation et désinstallation du plugins Amap
  *
  * @plugin     Amap
- * @copyright  2013
+ * @copyright  2010-2013
+ * @author     Stephane Moulinet
+ * @author     E-cosystems
  * @author     Pierre KUHN
- * @licence    GNU/GPL
+ * @licence    GPL v3
  * @package    SPIP\Amap\Installation
  */
 
@@ -15,7 +17,7 @@ include_spip('inc/rubriques');
 include_spip('base/amap');
 
 /**
- * Fonction d'installation et de mise à jour du plugin Amap.
+ * Fonction d'installation et de mise à jour du @plugin     Amap.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -50,7 +52,7 @@ function amap_rubriques(){
 }
 
 /**
- * Fonction de désinstallation du plugin Amap.
+ * Fonction de désinstallation du @plugin     Amap.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP

@@ -3,9 +3,11 @@
  * Définit les autorisations du plugin Amap
  *
  * @plugin     Amap
- * @copyright  2013
+ * @copyright  2010-2013
+ * @author     Stephane Moulinet
+ * @author     E-cosystems
  * @author     Pierre KUHN
- * @licence    GNU/GPL
+ * @licence    GPL v3
  * @package    SPIP\Amap\Autorisations
  */
 

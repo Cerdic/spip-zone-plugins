@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Amap
  *
  * @plugin     Amap
- * @copyright  2013
+ * @copyright  2010-2013
  * @author     Stephane Moulinet
  * @author     E-cosystems
  * @author     Pierre KUHN
