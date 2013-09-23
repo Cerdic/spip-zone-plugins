@@ -10,14 +10,17 @@ function frimousses_liste_smileys() {
 
 	$les_smileys = array();
 	$les_smileys[':-)*'] = 'smiley-kiss-16.png';
+	$les_smileys[':-))'] = 'smiley-lol-16.png';
 	$les_smileys[':-)'] = 'smiley-16.png';
 	$les_smileys['o:)'] = 'smiley-angel-16.png';
 	$les_smileys['O:)'] = 'smiley-angel-16.png';
 	$les_smileys['0:)'] = 'smiley-angel-16.png';
+	$les_smileys[':))'] = 'smiley-lol-16.png';
 	$les_smileys[':)'] = 'smiley-16.png';
 	$les_smileys['%-)'] = 'smiley-eek-16.png';
 	$les_smileys[';-)'] = 'smiley-wink-16.png';
 	$les_smileys[';)'] = 'smiley-wink-16.png';
+	$les_smileys[':-(('] = 'smiley-sad-16.png';
 	$les_smileys[':-('] = 'smiley-sad-16.png';
 	$les_smileys[':('] = 'smiley-sad-16.png';
 	$les_smileys[':-O'] = 'smiley-yell-16.png';
@@ -33,7 +36,9 @@ function frimousses_liste_smileys() {
 	$les_smileys[':-/'] = 'smiley-confuse-16.png';
 	$les_smileys[':/'] = 'smiley-confuse-16.png';
 	$les_smileys[':-p'] = 'smiley-razz-16.png';
+	$les_smileys[':-P'] = 'smiley-razz-16.png';
 	$les_smileys[':p'] = 'smiley-razz-16.png';
+	$les_smileys[':P'] = 'smiley-razz-16.png';
 	$les_smileys[':\'-('] = 'smiley-cry-16.png';
 	$les_smileys[':\'('] = 'smiley-cry-16.png';
 	$les_smileys[':-...'] = 'smiley-red-16.png';
