@@ -1,22 +1,57 @@
 <div class="formulaire_spip formulaire_editer formulaire_rechercher_remplacer">
 
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form action="#ENV{action}" method="post" style="padding:15px;">
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<p class="explication">Recherche et remplace du texte dans les champs texte de la BDD</p>
-	
-	<br><br>
-	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{txt_search})</span><br>]
-	Texte à rechercher : <input type="text" name="txt_search" value="#ENV{txt_search}" size="55px" />
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:rechremp:explication_rechremp:></p>
 
-	<br><br>Remplacement du texte <input type="checkbox" name="remplace" value="oui"><br>	
-	<br>Remplacer le texte recherché par : <input type="text" name="remplacer_par" value="#ENV{remplacer_par}" size="55px" />
+		#SET{fl,rechremp}
+		<ul>
+			#SET{name,search}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+			#SET{name,replace}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				#SET{val,yes}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}_#GET{val}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}_#GET{val},''}}|oui)checked="checked"] onchange="update_do_replace()"/>
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				<div class="do_replace[(#ENV{replace_yes,''}|non)none]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</div>
+			</li>
+		</ul>
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' name="rechercher" class='submit' value='<:rechremp:bouton_rechercher|attribut_html:>' /></p>
 
-	
-	<p class="boutons">
-	<input type='submit' name='ok' value="Rechercher" />
-	</p>
-</form>
+		<!-- Resultat de la recherche -->
+		[<ul><li class="editer pleine_largeur">
+		<h3><:resultats_recherche:> [<small>&#171;&nbsp;(#ENV{search})&nbsp;&#187;</small>]</h3>
+		(#ENV**{erreurs/search_results})
+		</li></ul>
+		[(#ENV{replace_yes,''}|oui)
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+		<input type='submit' name="remplacer" class='submit' value='<:rechremp:bouton_remplacer|attribut_html:>' /></p>
+		]
+		]
+	</form>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+
 </div>
+<script type="text/javascript">
+function update_do_replace(){
+	if (jQuery('input.checkbox[name="replace_yes"]').is(":checked"))
+		jQuery(".do_replace").show("fast");
+	else
+		jQuery(".do_replace").hide("fast");
+}
+jQuery(update_do_replace);
+</script>

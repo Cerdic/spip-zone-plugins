@@ -1,14 +1,14 @@
 <paquet
 	prefix="rechremp"
 	categorie="outil"
-	version="1.0.0"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/loupe-64.png"
+	logo="images/rechremp-32.png"
 	documentation="http://www.spip-contrib.net/3941"
->	
+>
 
-	<nom>Rechercher-Remplacer</nom>
+	<nom>Rechercher/Remplacer</nom>
 	<!-- Rechercher des chaines dans la BDD SPIP et eventuellement les remplacer par une autre chaine -->
 
 	<auteur lien="http://www.ouhpla.net">Didier</auteur>
@@ -16,5 +16,5 @@
 
 	<licence>GNU/GLP</licence>
 
-	<menu nom="rechremp" titre="Rechercher/Remplacer" parent="menu_edition" icone="prive/images/loupe-24.png" action="rechercher_remplacer" />
+	<menu nom="rechremp" titre="rechremp:titre_rechremp" parent="menu_administration" icone="images/rechremp-16.png" />
 </paquet>
