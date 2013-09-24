@@ -1,7 +1,7 @@
 <BOUCLE_article(ARTICLES){id_article}{statut?}>
 <BOUCLE_document(DOCUMENTS){id_article}{0,1}{tout}>
 [(#EXTENSION|in_array{#LISTE{jpg,png,gif}}|?{
-[(#FICHIER|image_passe_partout{200,200}|image_reduire{200,200}|image_recadre{200,200,"top center"}|inserer_attribut{class,spip_logos})],
+[(#FICHIER|image_passe_partout{200,200}|image_reduire{200,200}|image_recadre{200,200,"center"}|inserer_attribut{class,spip_logos})],
 [(#LOGO_DOCUMENT|image_passe_partout{200,200}|image_reduire{200,200}|image_recadre{200,200,"top center"}|inserer_attribut{class,spip_logos})]
 })]
 </BOUCLE_document>
