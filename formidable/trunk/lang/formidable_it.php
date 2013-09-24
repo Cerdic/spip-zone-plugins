@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Risposte non vuote',
-	'analyse_exporter' => 'Esporta l\'analisi',
+	'analyse_exporter' => 'Esporta l’analisi',
 	'analyse_longueur_moyenne' => 'Lunghezza media in numero di parole',
 	'analyse_sans_reponse' => 'Risposte vuote',
 
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menu_formulaire' => 'Configura il modulo',
 	'editer_menu_traitements' => 'Configura i trattamenti',
 	'editer_message_ok' => 'Messaggio di risposta',
-	'editer_message_ok_explication' => 'Puoi personalizzare il messaggio che sarà mostrato all\'utente dopo l\'invio di un modulo valido.',
+	'editer_message_ok_explication' => 'Puoi personalizzare il messaggio che sarà mostrato all’utente dopo l’invio di un modulo valido.',
 	'editer_modifier_formulaire' => 'Modifica il modulo',
 	'editer_nouveau' => 'Nuovo modulo',
 	'editer_redirige_url' => 'Indirizzo di redirezione dopo la validazione',
@@ -47,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_base' => 'Un problema tecnico si è verificato rurante il salvataggio.',
 	'erreur_generique' => 'Ci sono degli errori nei campi di seguito, si prega di verificare i dati.',
 	'erreur_identifiant' => 'Questo identificativo è già utilizzato.',
-	'erreur_importer_forms' => 'Errore durante l\'importazione del modulo Forms&Tables',
-	'erreur_importer_wcs' => 'Errore durante l\'importazione del modulo W.C.S',
-	'erreur_importer_yaml' => 'Errore durante l\'importazione del modulo YAML',
+	'erreur_importer_forms' => 'Errore durante l’importazione del modulo Forms&Tables',
+	'erreur_importer_wcs' => 'Errore durante l’importazione del modulo W.C.S',
+	'erreur_importer_yaml' => 'Errore durante l’importazione del modulo YAML',
 	'erreur_inexistant' => 'Il modulo non esiste.',
 
 	// F
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'identification_par_cookie' => 'Con i cookie',
-	'identification_par_id_auteur' => 'con l\'identificativo (id_auteur) dell\'utente autentificato',
+	'identification_par_id_auteur' => 'con l’identificativo (id_auteur) dell’utente autentificato',
 	'importer_formulaire' => 'Importa un modulo',
 	'importer_formulaire_fichier_label' => 'File da importare',
 	'importer_formulaire_format_label' => 'Formato del file',
@@ -100,25 +100,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'traitements_aide_memoire' => 'Promemoria:',
-	'traitements_avertissement_creation' => 'Le modifiche ai campi del modulo sono state registrate con successo. Ora puoi definire quali trattamenti saranno effettuati all\'atto dell\'invio del modulo.',
+	'traitements_avertissement_creation' => 'Le modifiche ai campi del modulo sono state registrate con successo. Ora puoi definire quali trattamenti saranno effettuati all’atto dell’invio del modulo.',
 	'traitements_avertissement_modification' => 'La modifiche ai campi del modulo sono state registrate con successo. <strong>Alcuni trattamenti devono forse essere riconfigurati di conseguenza.</strong>',
 	'traitements_champ_aucun' => 'Nessuno',
 	'traiter_email_description' => 'Invia il risultato del modulo per posta a un elenco di destinatari.',
 	'traiter_email_horodatage' => 'Modulo "@formulaire@" inviato il @date@ alle @heure@.',
-	'traiter_email_message_erreur' => 'Si è verificato un errore all\'atto dell\'invio dell\'email.',
+	'traiter_email_message_erreur' => 'Si è verificato un errore all’atto dell’invio dell’email.',
 	'traiter_email_message_ok' => 'Il tuo messaggio è stato inviato per posta elettronica.',
 	'traiter_email_option_activer_accuse_label' => 'Conferma di ricezione',
-	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all\'indirizzo del mittente con un messaggio di conferma.',
+	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all’indirizzo del mittente con un messaggio di conferma.',
 	'traiter_email_option_destinataires_explication' => 'Scegli il campo che corrisponde al destinatario del messaggio.',
 	'traiter_email_option_destinataires_label' => 'Destinatari',
 	'traiter_email_option_destinataires_plus_explication' => 'Un elenco di indirizzi separati da virgole.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinatari supplementari',
-	'traiter_email_option_envoyeur_courriel_explication' => 'Scegli il campo che contiene l\'indirizzo dell\'utente.',
+	'traiter_email_option_envoyeur_courriel_explication' => 'Scegli il campo che contiene l’indirizzo dell’utente.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Indirizzo del mittente',
-	'traiter_email_option_envoyeur_nom_explication' => 'Costruisci questo nome grazie all\'aiuto dei @segnaposto@ (vedi il promemoria). Se non inserisci nulla, verrà inserito il nome del sito.',
+	'traiter_email_option_envoyeur_nom_explication' => 'Costruisci questo nome grazie all’aiuto dei @segnaposto@ (vedi il promemoria). Se non inserisci nulla, verrà inserito il nome del sito.',
 	'traiter_email_option_envoyeur_nom_label' => 'Nome del mittente',
 	'traiter_email_option_sujet_accuse_label' => 'Oggetto della conferma di ricezione',
-	'traiter_email_option_sujet_explication' => 'Costruisci l\'oggetto grazie all\'aiuto dei @segnaposto@. Se non inserisci nulla, l\'oggetto verrà generato automaticamente.',
+	'traiter_email_option_sujet_explication' => 'Costruisci l’oggetto grazie all’aiuto dei @segnaposto@. Se non inserisci nulla, l’oggetto verrà generato automaticamente.',
 	'traiter_email_option_sujet_label' => 'Oggetto del messaggio',
 	'traiter_email_page' => '<a href="@url@">Da questa pagina</a>.',
 	'traiter_email_sujet' => '@nom@ ti ha scritto.',

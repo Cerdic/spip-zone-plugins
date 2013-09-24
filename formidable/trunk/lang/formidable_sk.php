@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_analyse_classe_label' => 'Trieda CSS stĺpca dokončenia úkonu',
 	'cfg_titre_page_configurer_formidable' => 'Nastaviť Formidable',
 	'cfg_titre_parametrages_analyse' => 'Nastavenia analýzy odpovedí',
-	'champs' => 'Pol\'a',
+	'champs' => 'Pol’a',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'formuláre Forms & Tables (.xml)',
