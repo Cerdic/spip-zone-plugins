@@ -167,7 +167,7 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 
 	// D
 	'dans_forum' => 'en el foro',
-	'deconnexion_' => 'Desconecci&oacute;n',
+	'deconnexion_' => 'Desconección',
 	'deplacer' => 'Desplazar',
 	'deplacer_confirmer' => 'Confirmar el desplazamiento',
 	'deplacer_dans_dpt' => 'A desplazar en el foro:',
@@ -221,8 +221,8 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'forum_annonce_annonce' => 'Poner la marca de anuncio',
 	'forum_annonce_desannonce' => 'Quitar la marca de anuncio',
 	'forum_dpt' => 'Foro: ',
-	'forum_ferme' => 'Este foro est&aacute; desactivado',
-	'forum_ferme_texte' => 'Este foro est&aacute; desactivado. Ya no puedes contribuir.',
+	'forum_ferme' => 'Este foro está desactivado',
+	'forum_ferme_texte' => 'Este foro está desactivado. Ya no puedes contribuir.',
 	'forum_maintenance' => 'Este foro está cerrado por mantenimiento',
 	'forum_ouvrir' => 'Abrir este Foro',
 	'forums_categories' => 'Varios',
@@ -317,7 +317,7 @@ Consulta la [documentación en Spip-Contrib->http://www.spip-contrib.net/SpipBB-
 	'messages_supprimer_titre_dpt' => 'Para los mensajes:',
 	'messages_supprimer_tous' => 'suprimirlos',
 	'messages_voir_dernier' => 'Ver el último mensaje',
-	'messages_voir_dernier_s' => 'Ver el &uacute;ltimo mensaje',
+	'messages_voir_dernier_s' => 'Ver el último mensaje',
 	'moderateur' => 'Moderador(es)/a(s)',
 	'moderateur_dpt' => 'Moderador: ',
 	'moderateurs' => 'Moderador(es)',
@@ -386,7 +386,7 @@ _ [Acceso al panel de administración-> .?exec=spipbb_configuration]',
 	// R
 	'raison_clic' => 'pulsa aquí',
 	'raison_texte' => 'Para conocer el motivo',
-	'recherche' => 'B&uacute;squeda',
+	'recherche' => 'Búsqueda',
 	'recherche_elargie' => 'Búsqueda extendida',
 	'redige_post' => 'Escribir mensaje',
 	'reglement' => '<p>Los administradores y moderadores de este foro se esforzarán en suprimir o editar todos los mensajes de carácter reprensible tan rápidamente como sea posible. De cualquier modo, les resulta imposible revisar todos los mensajes. Por tanto, admites que todos los mensajes publicados en esto foros expresan el punto de vista y la opinión de sus autores respectivos, y no la de los administradores, moderadores, o webmasters (excepto los mensajes publicados por ellos mismos) y, por consiguiente, no pueden ser considerados responsables de ellos.</p>
