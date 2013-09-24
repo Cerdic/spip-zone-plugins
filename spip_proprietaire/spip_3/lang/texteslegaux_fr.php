@@ -83,7 +83,7 @@ Le site {{[@nom_site@->@url_site@]}} est hébergé par l’éditeur.
 ',
 
 	// M
-	'mention_cnil' => 'À ce titre, {{[@nom_site@->@url_site@]}} a fait l’objet d’une déclaration auprès de la {{<abbr title="Commission Nationale de l\'Informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} le @date_cnil@, enregistrée sous la référence {{@numero_cnil@.}}',
+	'mention_cnil' => 'À ce titre, {{[@nom_site@->@url_site@]}} a fait l’objet d’une déclaration auprès de la {{<abbr title="Commission Nationale de l’Informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} le @date_cnil@, enregistrée sous la référence {{@numero_cnil@.}}',
 	'mentions_legales_copyright' => '{{{Contenus et droits de reproduction}}}
 
 En application des [articles L. 111-1 et L. 123-1 du Code de la Propriété Intellectuelle|Voir le texte (legifrance.gouv.fr)->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414], l’ensemble des contenus de ce site ({textes, images, vidéos et tout média en général}), sauf mention contraire explicite, est {{protégé par le droit d’auteur}}. La reproduction, même partielle, des contenus des pages de ce site sans accord préalable de @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] est strictement interdite.
