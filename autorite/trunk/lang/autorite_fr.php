@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvelles_sous_rubriques' => 'de nouvelles sous-rubriques dans l’arborescence.',
 
 	// O
-	'ouvrir_redacs' => 'Ouvrir aux rédacteurs du site  :',
+	'ouvrir_redacs' => 'Ouvrir aux rédacteurs du site :',
 	'ouvrir_visiteurs_enregistres' => 'Ouvrir aux visiteurs enregistrés :',
 	'ouvrir_visiteurs_tous' => 'Ouvrir à tous les visiteurs du site :',
 
