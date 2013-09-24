@@ -88,4 +88,23 @@ function mailshot_post_edition($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Appeler une fonction de configuration pour le mailer selectionne
+ * si elle existe
+ *
+ * @param array $flux
+ * @return array
+ */
+function mailshot_formulaire_traiter($flux){
+	if ($flux['args']['form']=='configurer_mailshot'){
+		$config = lire_config("mailshot/");
+		if ($mailer = $config['mailer']
+		  AND include_spip("bulkmailer/$mailer")
+		  AND $config = charger_fonction($mailer."_config","bulkmailer",true)){
+			$config();
+		}
+	}
+	return $flux;
+}
 ?>

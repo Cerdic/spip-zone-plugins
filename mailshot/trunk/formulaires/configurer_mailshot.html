@@ -98,6 +98,25 @@
 									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 								</li>
 							</ul>
+							<div class="choix">
+								<input type="radio" name="mailer" class="radio" value="mailjet" id="mailer_mailjet"[(#ENV{mailer,'defaut'}|=={mailjet}|oui)checked="checked"]/>
+								<label for="mailer_mailjet"><:mailshot:label_mailer_mailjet:></label>
+								<a href="http://www.mailjet.com/">http://www.mailjet.com/</a>
+							</div>
+							<ul class="suite">
+								#SET{name,mailjet_api_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+								#SET{name,mailjet_secret_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								</li>
+							</ul>
 							<!--editer_mailer_choix-->
 						</li>
 						<!--EX01-->
