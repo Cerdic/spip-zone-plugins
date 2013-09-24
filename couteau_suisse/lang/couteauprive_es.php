@@ -269,13 +269,13 @@ Para definir el logo, entra en la página de «Configuración de sitio» pulsand
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN : ¡¡herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones automáticas',
-	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, las breves, etc.</p>
-<p>{{Atenci&oacute;n}} : Antes de activar esta funci&oacute;n, comprueba bien que no exista ninguna otra funci&oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&aacute; un error de compilaci&oacute;n.</p>
-@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&oacute;n utilizando en este caso los siguientes valores por omisi&oacute;n: 500 caracteres para los art&iacute;culos, 300 para las breves y 600 para los foros o las secciones.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Por omisi&oacute;n, los puntos de seguir a&ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&aacute;s largo son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Puedes precisar aqu&iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&uacute;a.
+	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los artículos, las breves, etc.</p>
+<p>{{Atención}} : Antes de activar esta función, comprueba bien que no exista ninguna otra función {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producirá un error de compilación.</p>
+@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisión) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducción utilizando en este caso los siguientes valores por omisión: 500 caracteres para los artículos, 300 para las breves y 600 para los foros o las secciones.
+[[%lgr_introduction% %]]
+@puce@ Por omisión, los puntos de seguir añadidos al resultado de la baliza #INTRODUCTION si el texto es más largo son: <html>« (…)»</html>. Puedes precisar aquí tu propia cadena de caracteres para indicar al lector que el texto truncado continúa.
 [[%suite_introduction%]]
-@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &laquo;Leer el resto del art&iacute;culo…&raquo;
+@puce@ Si se usa la baliza #INTRODUCTION para resumir un artículo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: «Leer el resto del artículo…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',

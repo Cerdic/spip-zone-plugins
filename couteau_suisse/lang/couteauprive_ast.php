@@ -284,13 +284,13 @@ Pa definir esti logo, vete a la páxina de «Configuración del sitiu» calcando
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN: ¡¡ferramienta en cursu de desendolcu!! [[%insertions%]]',
 	'insertions:nom' => 'Correiciones automátiques',
-	'introduction:description' => 'Esta baliza pa amestar nes cadarmes sirve en xeneral pa la portada o pa les estayes col env&iacute;s de producir un resume de art&iacute;culos, de breves, etc...</p>
-<p>{{Atenci&oacute;n}}: Enantes d’activar esta funci&oacute;n, compreba bien que denguna funci&oacute;n {balise_INTRODUCTION()} nun esista ya na cadarma o nos plugins, la sobrecarga producir&iacute;a un error de compilaci&oacute;n.</p>
-@puce@ Puedes precisar (en porcentaxe relativu del valor utiliz&aacute;u por omisi&oacute;n) el llargu del testu devueltu pela baliza #INTRODUCTION. Un valor nulu o igual a 100 nun modifica l’aspeutu de la introducci&oacute;n utilizando ent&oacute;s los valores por omisi&oacute;n siguientes: 500 carauteres pa los art&iacute;culos, 300 pa les breves y 600 pa los foros o les estayes.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Por omisi&oacute;n, los puntos de siguir amestaos al resultau de la baliza #INTRODUCTION si el testu ye enforma llargu son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Equ&iacute; pues conse&ntilde;ar una cadena de carauteres propia que indique al llector que el testu cort&aacute;u tien una continuaci&oacute;n.
+	'introduction:description' => 'Esta baliza pa amestar nes cadarmes sirve en xeneral pa la portada o pa les estayes col envís de producir un resume de artículos, de breves, etc...</p>
+<p>{{Atención}}: Enantes d’activar esta función, compreba bien que denguna función {balise_INTRODUCTION()} nun esista ya na cadarma o nos plugins, la sobrecarga produciría un error de compilación.</p>
+@puce@ Puedes precisar (en porcentaxe relativu del valor utilizáu por omisión) el llargu del testu devueltu pela baliza #INTRODUCTION. Un valor nulu o igual a 100 nun modifica l’aspeutu de la introducción utilizando entós los valores por omisión siguientes: 500 carauteres pa los artículos, 300 pa les breves y 600 pa los foros o les estayes.
+[[%lgr_introduction% %]]
+@puce@ Por omisión, los puntos de siguir amestaos al resultau de la baliza #INTRODUCTION si el testu ye enforma llargu son: <html>« (…)»</html>. Equí pues conseñar una cadena de carauteres propia que indique al llector que el testu cortáu tien una continuación.
 [[%suite_introduction%]]
-@puce@ Si la baliza #INTRODUCTION util&iacute;zase pa resumir un art&iacute;culu, la Navaya Suiza pue fabricar un enllaz d’hipertestu pa amestar a los puntos de siguir definios enriba, col fin de llevar al llector al testu orixinal. Por exemplu: &laquo;Lleer el restu de l’art&iacute;culu…&raquo;
+@puce@ Si la baliza #INTRODUCTION utilízase pa resumir un artículu, la Navaya Suiza pue fabricar un enllaz d’hipertestu pa amestar a los puntos de siguir definios enriba, col fin de llevar al llector al testu orixinal. Por exemplu: «Lleer el restu de l’artículu…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',

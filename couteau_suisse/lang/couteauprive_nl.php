@@ -316,10 +316,10 @@ Pour définir ce logo, rendez-vous sur la page « Configuration du site » en 
 	'introduction:description' => 'Dit baken dat in de skeletten moet geplaatst worden, dient in het algemeen tot een of in de rubrieken teneinde een samenvatting van de artikelen, van kort te produceren, enz..</p>
 <p>{{Opgelet}} : Alvorens deze functionaliteit te activeren, controleert goed dat geen enkele functie {balise_INTRODUCTION ()} bestaat niet reeds in uw plugins skelet , overbelasting zouden dan een fout van compilatie produceren.</p>
 @puce@ U kunt (in percent ten opzichte van de waarde die per gebrek wordt gebruikt) de lengte van de tekst aangeven die per baken #INTRODUCTION wordt teruggestuurd. Een nul of gelijke waarde aan 100 wijzigt het aspect van de inleiding niet en gebruikt dus de waarden per gebrek volgend: 500 karakters voor de artikelen, 300 voor kort en 600 voor de forums of de rubrieken.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. U kunt hier uw eigen keten van carat&egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
+[[%lgr_introduction% %]]
+@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>« (…)»</html>. U kunt hier uw eigen keten van caratère aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
 [[%suite_introduction%]]
-@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &laquo;Het vervolg van het artikel lezen…&raquo;
+@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: «Het vervolg van het artikel lezen…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baken #INTRODUCTION',

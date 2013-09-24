@@ -391,13 +391,13 @@ Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>»
 	'insertions:description' => 'ATENCIÓ: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions automàtiques',
 	'introduction:description' => 'Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la pàgina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
-<p>{{Atenció}}: Abans d’activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
-@puce@ Podeu precisar (en percentatge per relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l’etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l’aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
-[[%lgr_introduction%&nbsp;%]]
+<p>{{Atenció}}: Abans d’activar aquesta funcionalitat, verifiqueu bé que no existeix ja cap funció {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrecàrrega produïra un error de compilació.</p>
+@puce@ Podeu precisar (en percentatge per relació al valor utilitzat per defecte) la llargada del text a retornar per l’etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l’aspecte de la introducció i utilitza, per tant, els valors per defecte següents: 500 caràcters pels articles, 300 per les notes breus i 600 pels fòrums i les seccions.
+[[%lgr_introduction% %]]
 
-@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l’etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>«&nbsp;(…)»</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
+@puce@ Per defecte, els punts de continuació afegits al resultat de l’etiqueta #INTRODUCTION si el text és massa llarg són: <html>« (…)»</html>. Aquí podeu precisar la vostra pròpia cadena de caràcters que indiqui al lector que el text tallat té una continuació.
 [[%suite_introduction%]]
-@puce@ Si l’etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l’article…&raquo;
+@puce@ Si l’etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Suís pot fabricar un hipervincle al damunt dels punts de continuació definits més amunt per tal portar al lector cap al text original. Per exemple: «Llegir la continuació de l’article…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Etiqueta #INTRODUCTION',

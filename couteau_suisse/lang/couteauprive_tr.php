@@ -246,13 +246,13 @@ Bu logoyu tanımlamak için « Konfigürasyon » düğmesine tıklayarak « S
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geliştirilmekte olan gereç !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik düzeltmeler',
-	'introduction:description' => 'İskeletlere yerleştirilecek bu komut genelde ana sayfaya veya başlıklarda makalelerin veya kısa haberlerin bir &ouml;zetini oluşturmaya yarar.</p>
-<p>{{Dikkat}} : Bu işlevi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmadığından emin olun, aksi halde derleme hatası oluşacaktır.</p>
-@puce@ #INTRODUCTION komutu tarafından g&ouml;nderilen metnin uzunluğunu (varsayılan değere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Boş bir değer veya 100 değeri metni değiştirmeyecektir ve şu varsayılan değerleri kullanacaktır : makaleler i&ccedil;in 500 karakter, kısa haberler i&ccedil;in 300karakter, forumlar veya başlıklar i&ccedil;in 600 karakter.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Eğer metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsayılan &uuml;&ccedil; nokta ş&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildiğini ve devamı olduğunu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucularınıza belirtebilirsiniz.
+	'introduction:description' => 'İskeletlere yerleştirilecek bu komut genelde ana sayfaya veya başlıklarda makalelerin veya kısa haberlerin bir özetini oluşturmaya yarar.</p>
+<p>{{Dikkat}} : Bu işlevi aktive etmeden önce iskeletinizde veya eklentilerinizde hiçbir {balise_INTRODUCTION()} fonksiyonunun  olmadığından emin olun, aksi halde derleme hatası oluşacaktır.</p>
+@puce@ #INTRODUCTION komutu tarafından gönderilen metnin uzunluğunu (varsayılan değere göre yüzde olarak) belirtebilirsiniz. Boş bir değer veya 100 değeri metni değiştirmeyecektir ve şu varsayılan değerleri kullanacaktır : makaleler için 500 karakter, kısa haberler için 300karakter, forumlar veya başlıklar için 600 karakter.
+[[%lgr_introduction% %]]
+@puce@ Eğer metin çok uzunsa, #INTRODUCTION komutuna eklenen varsayılan üç nokta şöyledir : <html>« (…)»</html>. Burada, metnin kesildiğini ve devamı olduğunu siz kendi özel karakter zincirinizi kullanarak okuyucularınıza belirtebilirsiniz.
 [[%suite_introduction%]]
-@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulanılmışsa İsvi&ccedil;re &Ccedil;akısı &uuml;&ccedil; noktaların &uuml;zerine bir hipermetin oluşturarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rneğin : &laquo;Makalenin devamı i&ccedil;in…&raquo;
+@puce@ #INTRODUCTION komutu bir makaleyi özetlemek için kulanılmışsa İsviçre Çakısı üç noktaların üzerine bir hipermetin oluşturarak okuru orijinal metne yönlendirir. Örneğin : «Makalenin devamı için…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => '#INTRODUCTION komutu',

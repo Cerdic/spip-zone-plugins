@@ -296,13 +296,13 @@ Para definir o logo, vaia á páxina « Configuración do web » premendo sobr
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'AVISO : ferramenta en proceso de desenvolvemento !! [[%insertions%]]',
 	'insertions:nom' => 'Correccións automáticas',
-	'introduction:description' => 'Esta baliza situable nos esqueletos serve xeralmente para unha &uacute;ltima hora ou nas secci&oacute;ns co fin de producir un resumo de artigos, de breves, etc.</p>
-<p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha funci&oacute;n {balise_INTRODUCTION()} exista xa no seu esqueleto ou nos m&oacute;dulos, a sobrecarga producir&iacute;a un erro de compilaci&oacute;n.</p>
-@puce@ Pode precisar (porcentualmente en relaci&oacute;n co valor usado de modo predeterminado) a lonxitude do texto reeenviado pola baliza #INTRODUCTION. Un valor nulo ou igual a 100 non modifica o aspecto da introduci&oacute;n e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as secci&oacute;ns.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto &eacute; demasiado longo son : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Pode precisar aqu&iacute; a s&uacute;a propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
+	'introduction:description' => 'Esta baliza situable nos esqueletos serve xeralmente para unha última hora ou nas seccións co fin de producir un resumo de artigos, de breves, etc.</p>
+<p>{{Aviso}} : Antes de activar esta funcionalidade, comprobe ben que ningunha función {balise_INTRODUCTION()} exista xa no seu esqueleto ou nos módulos, a sobrecarga produciría un erro de compilación.</p>
+@puce@ Pode precisar (porcentualmente en relación co valor usado de modo predeterminado) a lonxitude do texto reeenviado pola baliza #INTRODUCTION. Un valor nulo ou igual a 100 non modifica o aspecto da introdución e usa daquela os valores predeterminados seguintes : 500 caracteres para os artigos, 300 para as breves e 600 para os foros ou as seccións.
+[[%lgr_introduction% %]]
+@puce@ De modo predeterminado, os puntos suspensivos engadidos ao resultado da baliza #INTRODUCTION se o texto é demasiado longo son : <html>« (…)»</html>. Pode precisar aquí a súa propia cadea de caracteres que indiquen ao lector que o texto truncado ten unha continuidade.
 [[%suite_introduction%]]
-@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, ent&oacute;n A Navalla Su&iacute;za pode crear unha ligaz&oacute;n sobre eses puntos suspensivos definidos co fin de levar o lector ao texto orixinal. Por exemplo : &laquo;Ler a continuidade deste artigo…&raquo;
+@puce@ Se a baliza #INTRODUCTION se emprega para resumir un artigo, entón A Navalla Suíza pode crear unha ligazón sobre eses puntos suspensivos definidos co fin de levar o lector ao texto orixinal. Por exemplo : «Ler a continuidade deste artigo…»
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',
