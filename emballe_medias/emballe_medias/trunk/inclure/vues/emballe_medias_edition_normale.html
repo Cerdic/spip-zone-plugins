@@ -26,14 +26,14 @@
 		</li>
 		</BOUCLE_articles>
 		</ul>
-		[<p class="pagination">(#PAGINATION{page})</p>]
+		[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]
 		</B_articles>
 	</div>
 	<div id="edition_emballe_media">
 	<BOUCLE_article(ARTICLES){id_article=#ENV{id_media}}{statut !IN publie,poubelle,refuse}>
 	<B_document_up>
 	#SET{statut,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{#STATUT}|_T}
-	[(#BOITE_OUVRIR{'',notice})]
+	[(#BOITE_OUVRIR{'','notice warning'})]
 		<p><:emballe_medias:message_info_media_statut{statut=#GET{statut}}:></p>
 		[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|oui)
 			#SET{statut_nouveau,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{'publie'}|_T}
@@ -63,7 +63,7 @@
 	<//B_document_up>
 	</BOUCLE_article>
 	</B_article>
-		[(#BOITE_OUVRIR{'','notice'})]
+		[(#BOITE_OUVRIR{'','notice warning'})]
 		<B_medias_non_publies>
 		<BOUCLE_medias_non_publies(ARTICLES){si #ENV{vue}|!={liste_a_publier}|oui}{id_auteur=#SESSION{id_auteur}}{id_article != #ENV{id_article}}{id_secteur = #_diogene:ID_SECTEUR}{statut IN prop,prepa}> </BOUCLE_medias_non_publies>
 			[(#SET{nb,#GRAND_TOTAL})]

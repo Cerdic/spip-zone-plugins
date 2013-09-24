@@ -25,12 +25,13 @@
 		</script>
 		<ul>
 			<li class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
+				<fieldset>
 			[(#FICHIER|get_spip_doc|file_exists|oui)
 				[(#MIME_TYPE|match{video/}|ou{[(#EXTENSION|match{mp4})]}|oui)#SET{em_type,video}]
 				[(#MIME_TYPE|match{audio/}|oui)#SET{em_type,audio}]
 				[(#EXTENSION|match{gif|png|jpg}|oui)#SET{em_type,image}]
 				[(#GET{em_type}|non)#SET{em_type,normal}]
-					<h3 class="legend"><:emballe_medias:previsu_document:></h3>
+					<legend><:emballe_medias:previsu_document:></legend>
 					<ul>
 						<li class="previsu_document #GET{type}">
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
@@ -49,7 +50,6 @@
 				#SET{types,#FORM_TYPE{#GET{type}}}
 				[(#SET{file_types,[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]})]})]
 				[(#SET{afficher_ftp,[(#AUTORISER{em_chargerftp,'','',#SESSION,#ARRAY{extensions,#GET{file_types},type,#GET{type},max,#GET{file_upload_limite}}}|?{'oui','non'})]})]
-				
 				[(#GET{afficher_ftp}|=={oui}|ou{#GET{afficher_doc_trad}|=={oui}}|oui)
 					<script type="text/javascript"><!--
 						var em_tabs_charger = function(){
@@ -98,6 +98,7 @@
 					</div>
 				]
 			]
+			</fieldset>
 			</li>
 		</ul>
 		</BOUCLE_documents_en_cours>

@@ -4,34 +4,36 @@
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{medias})</span>]
 <B_medias>
 	[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
-	<p class="explication">
+	<p class="explication warning">
 		<:emballe_medias:explication_medias_prepas_auth_publier:>
 	</p>]
 	[(#ENV{statuts_medias,prepa}|=={prepa}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
-	<p class="explication">
+	<p class="explication warning">
 		<:emballe_medias:explication_medias_prepas:>
 	</p>]
 	[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|oui}|oui)
-	<p class="explication">
+	<p class="explication warning">
 		<:emballe_medias:explication_medias_props_auth_publier:>
 	</p>]
 	[(#ENV{statuts_medias,prepa}|=={prop}|et{#ENV{autoriser_publier}|=={oui}|non}|oui)
-	<p class="explication">
+	<p class="explication warning">
 		<:emballe_medias:explication_medias_props:>
 	</p>]
 	#ANCRE_PAGINATION
-	[<p class="pagination">(#PAGINATION)</p>]
+	[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]
+	<div class="editer_liste_medias">
 	<BOUCLE_medias(ARTICLES){id_secteur}{id_auteur=#SESSION{id_auteur}}{!par date}{statut IN #ENV{statuts_medias}}{pagination #ENV{pagination,100}}>
 	<div class="choix">
 		<input type="checkbox" name="medias[]" id="medias_#ID_ARTICLE" value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{medias,#ARRAY}}|oui) checked="checked"] />
-		<label for="medias_#ID_ARTICLE">
+		<label for="medias_#ID_ARTICLE" title="<:emballe_medias:info_media_selection_non|attribut_html:>">
 		<INCLURE{fond=inclure/resume/choix_media_lot,id_article} />
 		</label>
 	</div>
-	</BOUCLE_medias> 
-	[<p class="pagination">(#PAGINATION)</p>]
+	</BOUCLE_medias>
+	</div> 
+	[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]
 </B_medias>
-	[(#BOITE_OUVRIR{'',notice})]
+	[(#BOITE_OUVRIR{'',error})]
 	<p><:emballe_medias:erreur_aucun_media_correspondant:></p>
 	[(#BOITE_FERMER)]
 <//B_medias>

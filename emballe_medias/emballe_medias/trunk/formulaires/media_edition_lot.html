@@ -3,36 +3,32 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
-	<form method='post' action='#SELF' enctype='multipart/form-data'><div>
+	<form method='post' action='#SELF' enctype='multipart/form-data'>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div>
-			<p class="explication">
+			<p class="explication warning">
 				<:emballe_medias:explication_traitement_lot_intro:>
 			</p>
 		</div>
+		<div>
 		<ul class="selection_statut">
 			<li class="editer boutons">
 				<label><:emballe_medias:label_selectionnez_types_medias:></label>
 				<input type="hidden" name="statuts_medias" value="#ENV{statuts_medias}" />
 				<input style="height:0;width:0;visibility: hidden;" type="submit" class="submit" name="valider" value="<:bouton_valider:>" />
-				[(#ENV{statuts_medias,prepa}|=={prepa}|oui)
-				<:emballe_medias:info_statut_prepa:>]
-				[(#ENV{statuts_medias,prepa}|=={prepa}|non)
-				<button class="submit" name="change_statut_prepa" value="prepa"><:emballe_medias:info_statut_prepa:></button>]
-				[(#ENV{statuts_medias,prepa}|=={prop}|oui)
-				<:emballe_medias:info_statut_prop:>]
-				[(#ENV{statuts_medias,prepa}|=={prop}|non)
-				<button class="submit" name="change_statut_prop" value="prop"><:emballe_medias:info_statut_prop:></button>]
-				[(#ENV{statuts_medias,prepa}|=={publie}|oui)
-				<:emballe_medias:info_statut_publies:>]
-				[(#ENV{statuts_medias,prepa}|=={publie}|non)
-				<button class="submit" name="change_statut_publie" value="publie"><:emballe_medias:info_statut_publies:></button>]
+				<div class="btn-group">
+					<button class="btn submit" name="change_statut_prepa" value="prepa"[(#ENV{statuts_medias,prepa}|=={prepa}|oui) disabled="disabled"]><:emballe_medias:info_statut_prepa:></button>
+					<button class="btn submit" name="change_statut_prop" value="prop"[(#ENV{statuts_medias,prepa}|=={prop}|oui) disabled="disabled"]><:emballe_medias:info_statut_prop:></button>
+					<button class="btn submit" name="change_statut_publie" value="publie"[(#ENV{statuts_medias,prepa}|=={publie}|oui) disabled="disabled"]><:emballe_medias:info_statut_publies:></button>
+				</div>
 			</li>
 		</ul>
+		</div>
 		[(#SET{pagination_attente,[(#ENV{statuts_medias,prepa}|=={prepa}|?{100000,20})]})]
 		<INCLURE{fond=formulaires/media_edition_lot_liste,medias,autoriser_publier,id_diogene,id_secteur,erreurs,statuts_medias=#ENV{statuts_medias,prepa},pagination=#GET{pagination_attente},debut_medias,ajax} />
-		<ul class="edition_par_lot">
+		<div class="edition_par_lot">
 			<h3 class="legend"><:emballe_medias:label_choisir_modifications:></h3>
+			<ul>
 			[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
 			    <li class="editer editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
 				<label for="surtitre"><:texte_sur_titre:></label>[
@@ -63,7 +59,7 @@
 						]
 						(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent,#ENV{id_secteur}},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 			    </li>]
-				
+
 			  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
 			    <li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:></label>[
@@ -101,7 +97,7 @@
 						</ul>
 					</fieldset>
 				</li>]
-				
+
 				[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
 			    <li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 					<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>[
@@ -115,15 +111,13 @@
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
 					]<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 			    </li>]
-			    
 			    [(#PIPELINE{diogene_ajouter_saisies,#ARRAY{args,#ENV**{diogene_args},data,''}})]
-			    
-			    <!--extra-->
-		</ul>
+			</ul>
+			<!--extra-->
+		</div>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
 		</p>
-	</div>
 	</form>
 	</BOUCLE_si_editable>
 </div>
