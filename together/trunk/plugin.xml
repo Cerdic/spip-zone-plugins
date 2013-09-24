@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Together</nom>
 	<auteur>Cedric Morin [->http://www.nursit.com]</auteur>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<icon>together-32.png</icon>
 	<lien>https://togetherjs.com/</lien>
 	<etat>test</etat>

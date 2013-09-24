@@ -42,6 +42,26 @@ function together_privacy_js(){
 		}
 	}
 
-	return "<script>var _tohether_jqs = jQuery;</script>
-	<script src='$local_js'></script>";
+	if (!isset($GLOBALS['visiteur_session']['together_js_avatar'])){
+		include_spip("inc/auth");
+		$infos = auth_informer_login($GLOBALS['visiteur_session']['login']);
+		$logo = "";
+		include_spip("inc/filtres");
+		if (isset($infos['logo']) AND $infos['logo'])
+			$logo = url_absolue(extraire_attribut($infos['logo'],"src"));
+		session_set("together_js_avatar",$logo);
+	}
+	$avatarjs = "";
+	if (isset($GLOBALS['visiteur_session']['together_js_avatar'])
+	  AND $GLOBALS['visiteur_session']['together_js_avatar']){
+		$avatarjs = "TogetherJSConfig_getUserAvatar = function () {return '".addslashes($GLOBALS['visiteur_session']['together_js_avatar'])."';};";
+	}
+
+	return "<script>var _tohether_jqs = jQuery;"
+	."TogetherJSConfig_siteName = '".addslashes($GLOBALS['meta']['nom_site'])."';"
+	."TogetherJSConfig_toolName = 'Coopérer';"
+	."TogetherJSConfig_getUserName = function () {return '".addslashes($GLOBALS['visiteur_session']['nom'])."';};"
+	. $avatarjs
+	."</script>
+<script src='$local_js'></script>";
 }
