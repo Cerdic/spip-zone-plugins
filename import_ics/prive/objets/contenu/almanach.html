@@ -71,7 +71,7 @@
 	]
 
 	<div class='synchro_almanach'>
-		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax})]
+		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_mise_a_jour_evenements{titre_almanach=#TITRE}:>,})]
 	</div>
 
 
@@ -80,7 +80,7 @@
 	</BOUCLE_nb_evenement>
 	<div class='purge'><:almanach:purger_almanach:></div>
 	[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
-		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
+		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements{titre_almanach=#TITRE}:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
 	]	
 	</B_nb_evenement>
 	</div>

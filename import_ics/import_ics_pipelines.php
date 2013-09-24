@@ -27,7 +27,7 @@ function import_ics_optimiser_base_disparus($flux){
 
 
 function import_ics_taches_generales_cron($taches_generales){
-	$taches_generales['import_ics_synchro'] = 3600*24;
+	$taches_generales['import_ics_synchro'] = 3600*24;/*mettre à jour toutes les 24 heures parait bien*/
 	return $taches_generales;
 }
 ?>

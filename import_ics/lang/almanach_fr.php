@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.
 ',
 	//C
-	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer ces événements ?',
-
+	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer les événements de l\'almanach \"@titre_almanach@\" ?',
+	'confirmation_mise_a_jour_evenements' => 'Voulez-vous réellement mettre à jour la liste des événements de l\'almanach \"@titre_almanach@\" ?\nCela peut prendre un certain temps.',
 	// E
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_titre' => 'Titre de l\'almanach',

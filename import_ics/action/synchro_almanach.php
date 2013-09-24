@@ -12,24 +12,20 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// honteusement pompé sur http://doc.spip.org/@action_editer_site_dist
-function action_synchro_almanach_dist($id_almanach=null) {
+include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 
-	if (is_null($id_almanach)){
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$id_alamanach = $securiser_action();
+function action_synchro_almanach_dist() {
+
+//vérification de l'auteur en cours//
+$securiser_action = charger_fonction('securiser_action', 'inc');
+$arg = $securiser_action();
+
+	if (!preg_match(",^(\d+)$,", $arg, $r)) {
+		 spip_log("action_synchro_almanach_dist $arg pas compris");
+		 return;
 	}
 
-
-	$id_job = job_queue_add('synchro_a_jour','synchro_a_jour',array($id_synchro),'genie/synchro',true);
-	// l'executer immediatement si possible
-	if ($id_job) {
-		include_spip('inc/queue');
-		queue_schedule(array($id_job));
-	}
-	else {
-		spip_log("Erreur insertion synchro_a_jour($id_synchro) dans la file des travaux",_LOG_ERREUR);
-	}
+	$id_almanach = $r[1];
 
 }
 
