@@ -1,7 +1,7 @@
 <paquet
 	prefix="parrainage"
 	categorie="communication"
-	version="0.6.1"
+	version="0.6.2"
 	etat="test"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="images/parrainage-48.png"

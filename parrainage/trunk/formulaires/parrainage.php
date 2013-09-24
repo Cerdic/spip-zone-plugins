@@ -21,12 +21,11 @@ function formulaires_parrainage_charger(){
 					'supprimer_filleul' => '',
 					'_id_parrain' => $id_auteur
 				);
-			}else{
+			}else
 				$contexte = array(
 					'editable' => false,
 					'message_erreur' => _T('parrainage:erreur_aucun_contact')
 				);
-			}
 		}
 	}else{
 		$contexte = array(
@@ -54,6 +53,12 @@ function formulaires_parrainage_traiter(){
 	// Si c'est une supression d'un seul filleul
 	if ($id_filleul = intval(_request('supprimer_filleul'))){
 		sql_delete('spip_filleuls', 'id_filleul = '.$id_filleul);
+		$nb_contacts = sql_countsel('spip_filleuls','id_parrain='.intval($id_auteur));
+		if($nb_contacts == 0)
+			$retours = array(
+					'editable' => false,
+					'message_erreur' => _T('parrainage:erreur_aucun_contact')
+				);
 	}
 	else if($filleuls = _request('filleuls') and is_array($filleuls) and _request('submit_supprimer')){
 		$count = 0;
@@ -63,12 +68,16 @@ function formulaires_parrainage_traiter(){
 				$count++;
 		}
 		$retours['message_ok'] = singulier_ou_pluriel($count,'parrainage:parrainage_supprime_un','parrainage:parrainage_supprime_nb');
+		$nb_contacts = sql_countsel('spip_filleuls','id_parrain='.intval($id_auteur));
+		if($nb_contacts == 0){
+			$retours['editable'] = false;
+			$retours['message_erreur'] = _T('parrainage:erreur_aucun_contact');
+		}
 	}
 	// Sinon ce sont des envois d'invitations
-	elseif ($filleuls = _request('filleuls') and is_array($filleuls)){
+	elseif ($filleuls = _request('filleuls') and is_array($filleuls))
 		$retours = array_merge($retours,traiter_inviter_filleuls($filleuls));
-	}
-	
+
 	return $retours;
 }
 
