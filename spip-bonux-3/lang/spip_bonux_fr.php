@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_calendrier' => 'Afficher le calendrier',
-	'annee_precedente' => 'Anée précédente',
+	'annee_precedente' => 'Année précédente',
 	'annee_suivante' => 'Année suivante',
 	'annuler_recherche' => 'Annuler la recherche',
 
