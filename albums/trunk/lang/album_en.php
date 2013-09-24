@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_album_criteres' => 'No album match these criteria',
 	'info_aucun_album_supplementaire' => 'No additional album',
 	'info_aucun_album_vide' => 'No empty album',
-	'info_aucune_association' => 'This album isn\'t associated to any object',
+	'info_aucune_association' => 'This album isn’t associated to any object',
 	'info_dans_objet' => 'in',
 	'info_documents_joints_albums' => 'Enable the interface to add documents to albums',
 	'info_js_prive' => 'animation desactivated in the private zone',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
-	'label_case_utiliser_titre_defaut' => 'By default, use the parent object\'s title',
+	'label_case_utiliser_titre_defaut' => 'By default, use the parent object’s title',
 	'label_modele_alignement' => 'Alignment',
 	'label_modele_alignement_centre' => 'Center',
 	'label_modele_alignement_defaut' => 'Default',

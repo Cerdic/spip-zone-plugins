@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_albums' => 'Albums',
 
 	// E
-	'erreur_deplacement' => 'Le traitement n\'a pas pu être effectué',
+	'erreur_deplacement' => 'Le traitement n’a pas pu être effectué',
 
 	// F
 	'filtre_avec_contenu' => 'Remplis',
@@ -48,10 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_album_criteres' => 'Aucun album ne correspond à ces critères',
 	'info_aucun_album_supplementaire' => 'Aucun album supplémentaire',
 	'info_aucun_album_vide' => 'Aucun album vide',
-	'info_aucune_association' => 'Cet album n\'est associé à aucun objet',
+	'info_aucune_association' => 'Cet album n’est associé à aucun objet',
 	'info_dans_objet' => 'dans des',
-	'info_documents_joints_albums' => 'Veillez à activer l\'ajout de documents-joints aux albums',
-	'info_js_prive' => 'animation désactivée dans l\'espace privé',
+	'info_documents_joints_albums' => 'Veillez à activer l’ajout de documents-joints aux albums',
+	'info_js_prive' => 'animation désactivée dans l’espace privé',
 	'info_nb_albums' => '@nb@ albums',
 	'info_nb_associations' => 'Associé à @nb@ objets',
 	'info_nouvel_album' => 'Nouvel album',
@@ -63,21 +63,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_modele' => 'Album non publié',
 
 	// L
-	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
-	'label_case_utiliser_titre_defaut' => 'Par défaut, utiliser le titre de l\'objet parent',
+	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
+	'label_case_utiliser_titre_defaut' => 'Par défaut, utiliser le titre de l’objet parent',
 	'label_modele_alignement' => 'Alignement',
 	'label_modele_alignement_centre' => 'Centré',
 	'label_modele_alignement_defaut' => 'Défaut',
 	'label_modele_alignement_droite' => 'Droite',
 	'label_modele_alignement_gauche' => 'Gauche',
-	'label_modele_identifiant' => 'Numéro de l\'album',
+	'label_modele_identifiant' => 'Numéro de l’album',
 	'label_modele_parcourir_albums' => 'Parcourir les albums',
 	'label_modele_titre' => 'Titre personnalisé',
 	'label_modele_variante' => 'Variante',
 	'label_modele_variante_defaut' => 'Vignettes (défaut)',
 	'label_modifier_balise' => 'Modifier la balise',
 	'label_titre' => 'Titre',
-	'label_utiliser_titre_defaut' => 'Titre d\'un nouvel album',
+	'label_utiliser_titre_defaut' => 'Titre d’un nouvel album',
 
 	// M
 	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte',
