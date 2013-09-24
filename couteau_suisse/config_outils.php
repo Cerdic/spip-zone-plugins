@@ -1227,6 +1227,7 @@ add_outil( array(
 	// fonction glossaire_init() codee dans glossaire.js : executee lors du chargement de la page et a chaque hit ajax
 	'code:jq_init' => 'glossaire_init.apply(this);',
 	'pipelinecode:nettoyer_raccourcis_typo' => '$flux=str_replace(_CS_SANS_GLOSSAIRE, "", $flux);',
+	'pipeline:affiche_milieu' => defined('_SPIP30000')?'glossaire_affiche_milieu':'', // pas teste sous SPIP<3 ...
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins

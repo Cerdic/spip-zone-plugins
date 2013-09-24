@@ -29,11 +29,15 @@ if(!defined('_GLOSSAIRE_ECHAPPER')) define('_GLOSSAIRE_ECHAPPER', 'html|code|cad
 // chaine pour interroger la base (SPIP <= 1.92)
 if(!defined('_SPIP19300'))
 	@define('_GLOSSAIRE_QUERY', 'SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE type=' . glossaire_groupes() . ' ORDER BY id_mot ASC');
-		
+
 // surcharge possible de cette fonction glossaire_generer_url_dist par : glossaire_generer_url($id_mot, $titre_mot) 
 // si elle existe, elle sera utilisee pour generer l'url cliquable des mots trouves
 //   exemple pour annuler le clic : function glossaire_generer_url($id_mot, $titre_mot) { return 'javascript:;'; }
 function glossaire_generer_url_dist($id_mot, $titre_mot) {
+	if(strpos($titre_mot, '=')!==false) {
+		list(, $lien) = glossaire_redirection($titre_mot);
+		if($lien) return calculer_url($lien);
+	}
 	if(defined('_SPIP19300')) 
 		return generer_url_entite($id_mot, 'mot');
 	// avant SPIP 2.0 :
@@ -64,7 +68,7 @@ function glossaire_attributs_lien_dist($id_mot, $lien, $titre, $les_titres) {
 
 // traitement pour #TITRE/mots : retrait des expressions regulieres
 function cs_glossaire_titres($titre) {
-	if(strpos($titre, ',')===false) return $titre;
+	if(strpos($titre, ',')===false && strpos($titre, '=')===false) return $titre;
 	list(,,$mots) = glossaire_parse($titre);
 	return $mots;
 }
@@ -123,10 +127,17 @@ function glossaire_query_tab() {
 	return sql_allfetsel('id_mot,titre,texte,descriptif', 'spip_mots', 'type='.glossaire_groupes(), '', 'id_mot ASC');
 }
 
+function glossaire_redirection($titre) {
+	$titre = preg_split(','.preg_quote(_GLOSSAIRE_TITRE_BASE_SEP,',').'\s*=,', $titre, 2);
+	return array(trim($titre[0]), isset($titre[1])?trim($titre[1]):'');
+}
+
 // parse toutes les formes du titre d'un mot-cle du glossaire
 // prendre en compte les formes du mot : architrave/architraves
 function glossaire_parse($titre) {
 	$mots = $regs = $titres = array(); $ok_mots = true;
+	// cas d'une redirection
+ 	if(strpos($titre, '=')!==false) list($titre) = glossaire_redirection($titre);
 	foreach(explode(_GLOSSAIRE_TITRE_BASE_SEP, str_replace('</','@@tag@@',$titre)) as $m) {
 		// interpretation des expressions regulieres grace aux virgules : ,un +mot,i
 		$m = trim(str_replace('@@tag@@','</',$m));
@@ -229,7 +240,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 		// si un mot est trouve, on construit la fenetre de glossaire
 		if($mot_present) {
 			$lien = $glossaire_generer_url($gloss_id, $titre);
-			// $definition =strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
+			// $definition = strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte'];
 			if($liste)
 				// on ne renvoie que la liste des mots trouves
 				$gloss_tab1[$gloss_id] = array($gloss_id, $lien, $les_titres);
@@ -303,10 +314,25 @@ function cs_mots_glossaire($texte, $type='', $sep='') {
 			array_walk($stats, create_function('&$v',  $d?"\$v=round((\$v-$m)*9/$d)+1;":'$v=1;')); // valeurs de 1 a 10
 			array_walk($mots, create_function('&$v,$k,&$s', $lien.' class=\"nuage".$s[$v[1]]."\">".'.$titre.'."</a>";'), $stats);
 			break;
-		default:return "#GLOSSAIRE/$type?";
+		default: return "#GLOSSAIRE/$type?";
 	}
 	$mots = array_unique($mots);
 	return strlen($sep)?join($sep, $mots):$mots;
 }
 
+// fonction pipeline SPIP>=3.0
+function glossaire_affiche_milieu($flux) {
+	if($flux['args']['exec']=='mot') {
+		$titre = sql_getfetsel('titre', 'spip_mots', '(id_mot='.intval($flux['args']['id_mot']).') AND (type='.glossaire_groupes().')');
+		if(!$titre) return $flux; // Ce n'est pas un mot du glossaire
+		$flux['data'] .= debut_cadre_relief(cs_icone(24), true).'<b>'
+			. cs_lien(generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=glossaire#cs_infos'), couteauprive_T('glossaire:nom')).'</b>'
+			. '<br/>&nbsp; > <b>'._T('info_titre').'</b> '.htmlentities($titre, ENT_QUOTES, $GLOBALS['meta']['charset']);
+		list(,$lien) = glossaire_redirection($titre);
+		if($lien && $lien = calculer_url($lien, '', 'tout')) 
+			$flux['data'] .= '<br/>&nbsp; > <b>'._T('info_lien_hypertexte').'</b> '.cs_lien($lien['url'], $lien['titre']);
+		$flux['data'] .= fin_cadre_relief(true);
+	}
+	return $flux;
+}
 ?>
