@@ -14,8 +14,8 @@ function formulaires_exporter_champs_extras_charger_dist(){
 		// recuperer la liste des champs geres par iextras
 		$ichamps = array();
 		include_spip('inc/iextras');
-		if (function_exists('iextras_get_extras')) {
-			$ichamps = iextras_get_extras();
+		if (function_exists('iextras_champs_extras_definis')) {
+			$ichamps = iextras_champs_extras_definis();
 		}
 		$valeurs['champs'] = @serialize(array($champs, $ichamps));
 		// effacer ce qui a pu deja etre poste
