@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Import/Export de Champs Extras</nom>
+	<slogan>Importer / Exporter des descriptions de champs extras</slogan>
+	<auteur>[Matthieu Marcillaud->magraine.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.2.0</version>
+	<description>Pour importer ou exporter les descriptions des Champs Extras install&#233;s sur un SPIP</description>
+	<lien>http://www.spip-contrib.net/Importer-Exporter-des-descriptions-de-champs-extras</lien>
+	<icon>images/ieextras-64.png</icon>
+	<etat>test</etat>
+	<prefix>ie_extras</prefix>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="cextras" version="[1.4.5;]" />
+	<necessite id="saisies" version="[1.3;]" />
+	<utilise id="iextras" version="[1.1.0;]" />
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>ie_extras_pipelines.php</inclure>
+	</pipeline>	
+	<categorie>outil</categorie>
+</plugin>
