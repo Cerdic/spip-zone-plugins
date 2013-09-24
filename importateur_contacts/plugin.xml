@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Importateur de contacts [en]Contacts importer</multi></nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>1.2.1</version>
+	<version>1.2.2</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<slogan>Formulaire d'importation de contacts.</slogan>
