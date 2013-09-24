@@ -237,7 +237,7 @@ noscript.alternative_js{
 	float:none;
 }
 
-#formulaire_media_edition_lot{width:100%}
+#formulaire_media_edition_lot{width:100%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 #formulaire_media_edition_lot .selection_documents,
 #navigation_liste{
 	width:50%;float:left;padding:0;
@@ -247,6 +247,10 @@ noscript.alternative_js{
 	width:49%;
 }
 
+#formulaire_media_edition_lot .selection_documents .editer_liste_medias{
+	clear:both;
+	overflow:auto;
+}
 #formulaire_media_edition_lot .selection_documents label{
 	margin-left:0;
 	float: none;
@@ -259,9 +263,12 @@ noscript.alternative_js{
 	margin-top:2%;
 	float:left;
 	clear:none;
+	padding:0;
 }
+
+#liste_medias_publication .item:nth-child(even),
 .selection_documents .choix:nth-child(even){
-	margin-right:2%;
+	float:right;
 }
 .selection_documents .choix label{
 	width:100%;
@@ -288,18 +295,19 @@ noscript.alternative_js{
 	vertical-align:bottom;
 	float:none;
 	border:none;
-	height:auto
+	height:auto;
+	background-color:#fff;
 }
 
 .selection_documents .choix.selected,
 #liste_medias_publication li.on{
-	background:#4EBAFF
+	background:#4EBAFF;
 }
 
 #formulaire_media_edition_lot .edition_par_lot,
 #edition_emballe_media{
 	width:50%;
-	float:right
+	float:right;
 }
 
 .content #liste_medias_publication .formulaire_spip{
@@ -309,16 +317,16 @@ noscript.alternative_js{
 }
 
 #formulaire_media_edition_lot .boutons{
-	clear:both
+	clear:both;
 }
 
 #liste_medias_publication{
 	margin-top:15px;
-	overflow:auto
+	overflow:auto;
 }
 
 #liste_medias_publication li.item a{
-	display:block
+	display:block;
 }
 
 .formulaire_spip .selection_documents .choix label{
@@ -326,8 +334,12 @@ noscript.alternative_js{
 	position:relative;
 	overflow:auto;
 	margin:0;
+	cursor:pointer;
 }
 
+.formulaire_spip .selection_documents .choix input{
+	display:none;
+}
 #liste_medias_publication span.titre_media,
 .selection_documents .choix .titre{
 	display:block;
@@ -344,7 +356,7 @@ noscript.alternative_js{
 
 #liste_medias_publication li.on .titre_media,
 .selection_documents .choix.selected .titre{
-	background-color:#4EBAFF
+	background-color:#4EBAFF;
 }
 
 .selection_documents .choix .erreur_message{
@@ -373,7 +385,13 @@ noscript.alternative_js{
 }
 
 .previsu_document .em_vignette a.mediabox{display:block}
-.previsu_document .em_vignette img{max-width:100%;height:auto;width:inherit;}
+.previsu_document .em_vignette img{
+	max-width:100%;
+	height:auto;
+	width:inherit;
+	margin:0;
+	float:none;
+}
 
 <BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_em_}}>
 	#SET{fond,prive/#VALEUR|basename{'.html'}}

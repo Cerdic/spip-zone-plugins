@@ -1,6 +1,7 @@
 #CACHE{7*24*3600}
 #HTTP_HEADER{Content-Type: text/javascript;}
 
+[(#INCLURE{javascript/jquery.shiftcheckbox.js}|appliquer_filtre{minifier,js})]
 [(#INCLURE{javascript/jfu_spip_fonctions.js}|appliquer_filtre{minifier,js})]
 
 //*** jQuery File Upload ***//
@@ -80,12 +81,22 @@ var medias_init_select_all = function(){
  * On ajoute ou on enlève la class selected du div.choix parent et on change le title du label
  */
 var medias_selection_multiple_init_clicks = function(){
-	jQuery('.selection_documents .choix input:checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
-	jQuery('.selection_documents .choix input[type=checkbox]').change(function(){
-		if(jQuery(this).is(':checked'))
-			jQuery(this).parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
-		else
-			jQuery(this).parents('.choix').removeClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection_non|texte_script:>');
+	if(typeof($.fn.shiftcheckbox) == 'function'){
+		$('.editer_liste_medias div.choix').shiftcheckbox({
+			checkboxSelector: ':checkbox',
+			onChange: function(checked) {
+				jQuery('.selection_documents :checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
+				jQuery('.selection_documents :checkbox').not(':checked').parents('.choix').removeClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection_non|texte_script:>');
+			}
+		});
+	}
+	jQuery('.selection_documents input:checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
+	jQuery('.selection_documents :checkbox').change(function(){
+		jQuery('.selection_documents :checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
+		jQuery('.selection_documents :checkbox').not(':checked').parents('.choix').removeClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection_non|texte_script:>');
+	}).click(function(){
+		jQuery('.selection_documents :checked').parents('.choix').addClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection|texte_script:>');
+		jQuery('.selection_documents :checkbox').not(':checked').parents('.choix').removeClass('selected').find('label').attr('title','<:emballe_medias:info_media_selection_non|texte_script:>');
 	});
 }
 
