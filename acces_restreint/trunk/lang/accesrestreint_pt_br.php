@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_creer_la_zone' => 'Criar a nova área',
 
 	// C
-	'colonne_id' => 'N&ordm;.',
+	'colonne_id' => 'Nº.',
 	'confirmer_ajouter_auteurs' => 'Você quer realmente incluir este autor na zona?',
 	'confirmer_retirer_auteur_zone' => 'Você quer mesmo retirar este autor da zona?',
 	'confirmer_retirer_auteurs' => 'Voc6e quer mesmo retirar todos os autores da zona?',
