@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_auto_fr' => 'Champs automatiques pour la France',
-	'bouton_exporter' => 'Lancer l\'exportation',
-	'bouton_importer' => 'Lancer l\'importation',
+	'bouton_exporter' => 'Lancer l’exportation',
+	'bouton_importer' => 'Lancer l’importation',
 	'bouton_saisie_libre' => 'Saisie libre',
 
 	// C
@@ -59,11 +59,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrement_organisme_label' => 'Enregistré auprès de',
 	'enregistrement_ou_label' => 'Saisie automatique pour la France (<i>option remplaçant le champ ci-dessus</i>)',
 	'enregistrement_siren_comment' => 'ex. : 123 456 78 (9 : clé automatique)',
-	'enregistrement_siren_label' => 'SIREN [<abbr title="Système d\'Identification du Répertoire des ENtreprises - code INSEE unique désignant la personne juridique de l\'entreprise"> ?</abbr>]',
-	'enregistrement_siren_title' => 'Référence de l\'entreprise à neuf chiffres, vous pouvez n\'indiquer que les huit premiers chiffres.',
+	'enregistrement_siren_label' => 'SIREN [<abbr title="Système d’Identification du Répertoire des ENtreprises - code INSEE unique désignant la personne juridique de l’entreprise"> ?</abbr>]',
+	'enregistrement_siren_title' => 'Référence de l’entreprise à neuf chiffres, vous pouvez n’indiquer que les huit premiers chiffres.',
 	'enregistrement_siret_comment' => 'ex. : 1234 (5 : clé automatique)',
-	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d\'établissement - Numéro Interne de Classement"> ?</abbr>]',
-	'enregistrement_siret_title' => 'Référence d\'établissement à cinq chiffres, vous pouvez ne pas indiquer les zéros initiaux ni le dernier chiffre.',
+	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d’établissement - Numéro Interne de Classement"> ?</abbr>]',
+	'enregistrement_siret_title' => 'Référence d’établissement à cinq chiffres, vous pouvez ne pas indiquer les zéros initiaux ni le dernier chiffre.',
 	'enregistrement_tvaintra_comment' => 'ex. : FR 45 (automatique)',
 	'enregistrement_tvaintra_label' => 'TVA Intra. [<abbr title="Numéro de T.V.A. Intracommunautaire"> ?</abbr>]',
 	'enregistrement_tvaintra_title' => 'Calculé automatiquement à partir du SIREN.',
@@ -266,9 +266,9 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'serveur_type_comment' => 'Caractéristiques techniques du serveur qui héberge le site.',
 	'serveur_type_label' => 'Type du serveur',
 	'siege' => 'Siège',
-	'siren' => '<abbr title="Système d\'Identification du Répertoire des ENtreprises">SIREN</abbr>',
+	'siren' => '<abbr title="Système d’Identification du Répertoire des ENtreprises">SIREN</abbr>',
 	'siren_abbrev' => 'Siren',
-	'siret' => '<abbr title="Système d\'Identification du Répertoire des ETablissements">SIRET</abbr>',
+	'siret' => '<abbr title="Système d’Identification du Répertoire des ETablissements">SIRET</abbr>',
 	'siret_abbrev' => 'Siret',
 	'site_web_label' => 'Adresse de site web',
 	'sous_le_numero' => ' sous le numéro ',
