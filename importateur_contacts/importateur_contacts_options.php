@@ -58,16 +58,10 @@ function importateurcontacts_parse_email($email){
 	if(!is_string($email))
 		return false;
 	
-	// cas email@domaine.tld
-	if(email_valide($email)){
-		$email_explode = preg_split("/[@]+/",$email,2);
-		return array(
-				'email'=> $email,
-				'nom' => $email_explode[0]
-			);
-	}
+	
 	// cas Nom de la personne <email@domaine.tld>
-	else if(preg_match('/(.*) <(.*@.*)>/',$email,$matches) && isset($matches[2]) && email_valide($matches[2])){
+	if(preg_match('/(.*) <(.*@.*)>/',$email,$matches) && isset($matches[2]) && email_valide($matches[2])){
+		spip_log($matches,'test.'._LOG_ERREUR);
 		return array(
 					'email'=> $matches[2],
 					'nom' => $matches[1]
@@ -80,6 +74,14 @@ function importateurcontacts_parse_email($email){
 		return array(
 				'email'=> $email_explode[0],
 				'nom' => $email_explode[1]
+			);
+	}
+	// cas email@domaine.tld
+	else if(email_valide($email)){
+		$email_explode = preg_split("/[@]+/",$email,2);
+		return array(
+				'email'=> $email,
+				'nom' => $email_explode[0]
 			);
 	}
 	return false;
