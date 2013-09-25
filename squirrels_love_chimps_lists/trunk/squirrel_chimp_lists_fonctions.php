@@ -169,10 +169,10 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 		if($data)$where_1[]=$data;
 		}
 	
-	$where=implode(' AND ',$where_1);
+	if (is_array($where))$where=implode(' AND ',$where_1);
 	
 	
-	$champs=implode(',',$champs);
+	$$champs=$champs?implode(',',$champs):'*';
 
 
 	// La concordance entre les champs
