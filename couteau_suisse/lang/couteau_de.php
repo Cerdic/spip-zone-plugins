@@ -38,14 +38,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Update erzwingen',
+	'maj_archive_ko' => 'Fehler des [Fernarchivs->@zip@]. «svn.revision» unvollständig?',
 	'maj_liste' => 'Liste der gefundenen Plugins:',
 	'maj_maj' => 'Ausgewählte(s) Plugin(s) aktualisieren',
 	'maj_ok' => 'Dieses[Plugin->@zip@] scheint [auf dem neuesten Stand->@url@] zu sein.',
+	'maj_poursuivre' => 'Serverzeit abgelaufen : [fortsetzen->#].',
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'Die [Revision->@url@] konnte nicht gefunden werden.',
 	'maj_rev_ok' => 'Die Revision [@revision@->@url@] ist [verfügbar->@zip@].',
 	'maj_spip' => 'Wenn sie alle Plugins mit Bedacht auf den neuesten Stand gebracht haben, sollten sie SPIP selber ebenfalls updaten, indem sie auf den untenstehenden Link klicken und den Anweisungen folgen.',
 	'maj_svn' => 'Dieses SVN Plugin scheint [aktuell->@url@] zu sein.',
+	'maj_tiers' => 'Erfordert/Nutzt/Besorgt',
 	'maj_verif' => 'Prüfen sie vorab, welche Archiv sie verwenden möchten:',
 	'maj_verif2' => 'Achtng: Nachdem sie auf diese Schaltfläche geklickt haben, prüfen sie bitte genau, ob das Archiv, das geladen werden soll, auch dem Plugin entspricht, das sie updaten wollen.',
 	'maj_zip_ko' => 'Die externe ZIP-Datei konnte nicht identifiziert werden.',
@@ -80,17 +83,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Nächste Seite',
 	'plug_actifs' => 'Aktive Plugins',
 	'plug_inactifs' => 'Inaktive Plugins',
-	'plugin_xml' => 'Fasst einige neue Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser verwalten können.
+	'plugin_xml' => 'Zusammengefasst in einem einzigen Plug-in, einige kleine, neue und nützliche Zusatzfunktionen, mit denen sie ihre SPIP-Website besser verwalten können.
 
-Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann den Reiter {{Schweizer Taschenmesser}}.
+Jedes dieser Werkzeuge kann vom Administrator auf der [Seite zur Verwaltung des Plug-ins->./ ?exec=admin_couteau_suisse] aktiviert oder abgeschaltet werden, und eine gewisse Anzahl von Variablen verwalten: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann den Reiter {{Schweizer Taschenmesser}} bzw. {{Le Couteau Suisse}}.
 
-Sie können folgende Einstellungen vornehmen: Verwaltung, typografische Verbesserungen, typografische Kürzel, Anzeigeoptionen, SPIP-Tags, Filter, Kriterien.
+Die verfügbaren Kategorien sind: Verwaltung, Sicherheit, privates Interface, typografische Verbesserung, typografische Abkürzungen, Anzeigeoptionen, SPIP-Tags, Filter, Kriterien.
 
-Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Format der URLs}, {typografische Hochstellungen}, {typografische Anführungszeichen}, {schöne Listen-Punkte}, {SPAM Bekämpfung}, {MailCrypt}, {ästhetische URLs},  {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis für Artikel},  {Aufteilung in Seiten und Reiter}, etc. pp.
+Wählen Sie in diesem Plug-in Ihre bevorzugten Funktionen: {Ziffern entfernen}, {Format der URL}, {typografische Exponenten}, { typografische Anführungszeichen}, {Schöne Aufzählungszeichen}, {SPAM Bekämpfung}, {Mailcrypt}, {ästhetische URL}, {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis für Artikel}, {Aufteilung in Seiten und Reiter}, usw.
 
-Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Lesen Sie auch die Dokumentation des Plug-ins im folgenden Artikel: [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
-Kompatibil mit SPIP v1.92x, v2.x.x und v3.0', # MODIF
+Kompatibilität: SPIP v1.92x, v2.x.x und v3.0',
 	'pp_autobr' => 'Block mit automatischen Zeilenumbrüchen einfügen',
 	'pp_blocs_bloc' => 'Eingeklappten Block einfügen',
 	'pp_blocs_visible' => 'Geöffneten Block einfügen',
@@ -131,6 +134,7 @@ Kompatibil mit SPIP v1.92x, v2.x.x und v3.0', # MODIF
 	'tri_monter' => 'Autor nach oben',
 
 	// U
+	'url_verrouillee' => 'gesperrte URL',
 	'urls_propres_erreur' => 'Dieses Format berücksichtigt die angepassten URLs weiter unten nicht.',
 	'urls_propres_format' => 'Das Format der URLs ist: {{« @format@ »}}. [<span>[Konfiguration->@url@]</span>]',
 	'urls_propres_lien' => 'Öffentlicher Zugangslink',

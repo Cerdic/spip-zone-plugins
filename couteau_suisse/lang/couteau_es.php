@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => 'Forzar la actualisación', # MODIF
+	'maj_archive_ko' => 'Fehler des [Onlinearchivs->@zip@]. «svn.revision» unvollständig ?', # RELIRE
 
 	// N
 	'nom_email_forum' => 'Por favor, ingresa tu nombre o tu email!',

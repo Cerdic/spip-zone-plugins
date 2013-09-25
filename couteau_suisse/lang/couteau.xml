@@ -9,8 +9,9 @@
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=ca" total="99" traduits="92" relire="0" modifs="3" nouveaux="4" pourcent="92.93">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=de" total="99" traduits="94" relire="0" modifs="1" nouveaux="4" pourcent="94.95">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=de" total="99" traduits="99" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Martin" lien="http://trad.spip.net/auteur/martin" />
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=en" total="99" traduits="99" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
@@ -18,7 +19,8 @@
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=es" total="99" traduits="51" relire="0" modifs="2" nouveaux="46" pourcent="51.52">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=es" total="99" traduits="51" relire="1" modifs="2" nouveaux="45" pourcent="51.52">
+		<traducteur nom="Martin" lien="http://trad.spip.net/auteur/martin" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/couteau?lang_cible=fa" total="99" traduits="94" relire="0" modifs="2" nouveaux="3" pourcent="94.95">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
