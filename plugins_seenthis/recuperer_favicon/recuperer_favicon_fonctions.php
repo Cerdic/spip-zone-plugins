@@ -9,14 +9,15 @@
 function recuperer_favicon($url) {
 
 	$url = parse_url($url, PHP_URL_HOST);
-	$racine = ereg_replace("^www\.", "", $url);
-	$racine = str_replace(".", "-", $racine) . "-";
+	$racine = preg_replace("/^www\./", "", $url);
+	$racine = preg_replace("/[^a-z0-9]+/", "-", $racine) . "-";
 
 	$destination = sous_repertoire(_DIR_VAR, 'cache-favicon') .$racine.md5($url).".png";
+
 	if (!file_exists($destination)
 	AND $copie = copie_locale("http://www.google.com/s2/favicons?domain=$url")
 	) {
-		copy($copie, $destination);
+		rename($copie, $destination);
 	}
 	
 	$destination = inserer_attribut($destination, "alt", "favicon $url");

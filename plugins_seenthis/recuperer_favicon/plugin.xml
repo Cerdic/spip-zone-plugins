@@ -1,7 +1,7 @@
 <plugin>
 	<nom>R&eacute;cup&eacute;rer Favicon</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet de r&eacute;cup&eacute;rer le favicon d'une page distante.</description>
 	<prefix>recuperer_favicon</prefix>
