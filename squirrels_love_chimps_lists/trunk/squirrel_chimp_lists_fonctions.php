@@ -8,7 +8,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function array_filtre_lists($mailinglists){
 
 	if(is_array($mailinglists)){
-		if(count($mailinglists)>0)$lists=implode(array_keys($mailinglists),',');
+		if(count($mailinglists)>1)$lists=$mailinglists;
+        else {$lists=implode(',',$mailinglists); echo 1;}
 	}
 	else $lists=$mailinglists;
 	return array('list_id'=>$lists);
@@ -231,7 +232,7 @@ function recuperer_listes($apiKey,$filters='',$start='0',$limit='100'){
 		
 		//récuperation des listes
 		
-		$retval = $api->lists();
+		$retval = $api->lists($filters);
 		
 		$return=array();
 

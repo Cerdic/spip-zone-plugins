@@ -83,7 +83,7 @@
 				<B_champs_mc>
 					<select name="mapping[#GET{name}]">
 					<option value=""><:scl:pas_accorder:></option>	
-					<BOUCLE_champs_mc(DATA){source table, #GET{champs_mailchimp}}>
+					<BOUCLE_champs_mc(DATA){source table, #GET{champs_mailchimp}}{cle!=email}>
 					<option value="[(#VALEUR|table_valeur{tag})]"[(#ENV{mapping}|table_valeur{#GET{name}}|=={[(#VALEUR|table_valeur{tag})]}|oui) selected="selected"]>[(#VALEUR|table_valeur{name})]</option>
 					</BOUCLE_champs_mc>
 					</select>
