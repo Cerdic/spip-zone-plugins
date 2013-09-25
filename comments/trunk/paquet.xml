@@ -1,7 +1,7 @@
 <paquet
 	prefix="comments"
 	categorie="communication"
-	version="3.2.6"
+	version="3.2.7"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/comment-32.png"

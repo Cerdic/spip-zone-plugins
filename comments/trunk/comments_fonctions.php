@@ -60,7 +60,8 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 
 		$p->code = "
 '<'.'?php
-	if (\$GLOBALS[\'visiteur_session\'][\'statut\']==\'0minirezo\'
+	if (isset(\$GLOBALS[\'visiteur_session\'][\'statut\'])
+	  AND \$GLOBALS[\'visiteur_session\'][\'statut\']==\'0minirezo\'
 		AND (\$id = '.intval($_id).')
 		AND	include_spip(\'inc/autoriser\')
 		AND autoriser(\'moderer\',\'forum\',\$id)) {
