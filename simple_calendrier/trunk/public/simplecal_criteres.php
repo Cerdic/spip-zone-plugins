@@ -20,26 +20,14 @@ function critere_a_venir_dist($idb, &$boucles, $crit) {
 	$table = $boucle->id_table;
 	$not = $crit->not;
 	
-	$date_now = date('Y-m-d'); // 'Y-m-d H:i:s'
-	
-	/*
-	if ($not){
-		$c = "'($table.date_debut < \'$date_now\' AND $table.date_fin < \'$date_now\')'";
-	} else {
-		$c = "'($table.date_debut >= \'$date_now\' OR $table.date_fin >= \'$date_now\')'";
-	}
-	*/
-	
 	$c = array("'OR'",
-			array("'>='", "'$table.date_debut'", "'\'$date_now\''"),
-			array("'>='", "'$table.date_fin'", "'\'$date_now\''"));
+			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-d'))"),
+			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-d'))"));
 	
 	// Inversion de la condition ?
 	$c = ($not ? array("'NOT'", $c) : $c);
 	
 	$boucle->where[] = $c;
-	
-	
 }
 
 /**
@@ -57,25 +45,14 @@ function critere_du_mois_dist($idb, &$boucles, $crit) {
 	$date_premier = date('Y-m-01');
 	$date_dernier = date('Y-m-31'); // meme pas faux (pour la comparaison) ...
 	
-	
-	/* c'est pareil ! */
-	/*
-	$c = "";
-	$c .= "'(";
-	$c .= "($table.date_debut >= \'$date_premier\' AND $table.date_debut <= \'$date_dernier\')"; 
-	$c .= " OR ";
-	$c .= "($table.date_fin >= \'$date_premier\' AND $table.date_fin <= \'$date_dernier\')";
-	$c .= ")'";
-	*/   
-	
 	$c = array("'OR'",
 		array("'AND'",
-			array("'>='", "'$table.date_debut'", "'\'$date_premier\''"),
-			array("'<='", "'$table.date_debut'", "'\'$date_dernier\''")
+			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-01'))"),
+			array("'<='", "'$table.date_debut'", "sql_quote(date('Y-m-31'))")
 		),
 		array("'AND'",
-			array("'>='", "'$table.date_fin'", "'\'$date_premier\''"),
-			array("'<='", "'$table.date_fin'", "'\'$date_dernier\''")
+			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-01'))"),
+			array("'<='", "'$table.date_fin'", "sql_quote(date('Y-m-31'))")
 		)
 	);
 	
