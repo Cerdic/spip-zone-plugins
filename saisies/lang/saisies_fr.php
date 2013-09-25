@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_explication' => 'Un nom informatique qui identifiera le champ. Il ne doit contenir que des caractères alpha-numériques minuscules ou le caractère "_".',
 	'option_nom_label' => 'Nom du champ',
 	'option_obligatoire_label' => 'Champ obligatoire',
+    'option_option_destinataire_intro_label' => 'Label du premier choix vide (lorsque sous forme de liste)',
 	'option_option_intro_label' => 'Label du premier choix vide',
 	'option_option_statut_label' => 'Afficher les statuts',
 	'option_pliable_label' => 'Pliable',

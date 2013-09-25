@@ -40,6 +40,12 @@ options:
             un_radio: '<:saisies:option_type_choix_un_radio:>'
             plusieurs: '<:saisies:option_type_choix_plusieurs:>'
           defaut: 'tous'
+      -
+        saisie: 'input'
+        options:
+          nom: 'option_intro'
+          label: '<:saisies:option_option_destinataire_intro_label:>'
+          size: 50
   -
     saisie: 'fieldset'
     options:

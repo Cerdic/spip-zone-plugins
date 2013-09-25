@@ -39,6 +39,7 @@
 	<B_destinataires>
 		[(#GET{type_choix}|=={un}|oui)
 			<select name="#ENV{nom}&#91;&#93;" id="champ_[(#ENV{nom}|saisie_nom2classe)]">
+                [<option value="">(#ENV{option_intro})</option>]
 		]
 		<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
 			[(#GET{type_choix}|=={plusieurs}|ou{#GET{type_choix}|=={un_radio}}|oui)
