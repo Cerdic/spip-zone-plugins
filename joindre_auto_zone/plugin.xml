@@ -11,7 +11,7 @@
 	</description>
 	<icon>img/jaz-48.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-JAZ</lien>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<etat>test</etat>
 	<prefix>jaz</prefix>
     <fonctions>jaz_fonctions.php</fonctions>
