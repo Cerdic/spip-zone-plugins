@@ -15,10 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_simple' => 'Un simple email',
 	'erreur_aucun_fournisseur' => 'Aucun service pouvant fournir des contacts n’a été trouvé. Veuillez installer au moins une librairie d’importation de contacts.',
 	'erreur_aucun_fournisseur_configure' => 'Aucun service d’import de contacts n’est activé.',
-	'explications_liste_email' => 'Saisissez une liste d\'adresses en en indiquant une seule par ligne.
+	'explications_liste_email' => 'Saisissez une liste d’adresses en en indiquant une seule par ligne.
 
-Plusieurs formats sont acceptés : "Nom de la personne &lt;email@domaine.tld&gt;", "couriel@domaine.tld Nom de la personne", "couriel@domaine.tld".
+Plusieurs formats sont acceptés : "Nom de la personne &lt;email@domaine.tld&gt;", "couriel@domaine.tld Nom de la personne", "couriel@domaine.tld".
 ',
+
 	// I
 	'importer_bouton_recuperer_contacts' => 'Récupérer mes contacts',
 	'importer_fournisseur_label' => 'Choisissez le service avec lequel récupérer vos contacts',
