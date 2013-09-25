@@ -31,7 +31,7 @@
 </BOUCLE_choix>
 <li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]">
 	#ENV*{inserer_debut}
-	[<label[(#GET{type_choix}|=={un}|oui)for="champ_#ENV{nom}"]>(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	[<label[(#GET{type_choix}|=={un}|ou{#GET{type_choix}|=={un_radio}}|oui)for="champ_#ENV{nom}"]>(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	[<p class='explication'>(#ENV*{explication})</p>]
 	[<em class='attention'>(#ENV*{attention})</em>]
@@ -41,9 +41,9 @@
 			<select name="#ENV{nom}&#91;&#93;" id="champ_[(#ENV{nom}|saisie_nom2classe)]">
 		]
 		<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
-			[(#GET{type_choix}|=={plusieurs}|oui)
+			[(#GET{type_choix}|=={plusieurs}|ou{#GET{type_choix}|=={un_radio}}|oui)
 				<div class="choix">
-					<input type="checkbox" name="#ENV{nom}&#91;&#93;" class="checkbox"
+					<input type="[(#GET{type_choix}|=={plusieurs}|?{checkbox,radio})]" name="#ENV{nom}&#91;&#93;" class="checkbox"
 						id="champ_[(#ENV{nom}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
 						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 					/>
@@ -53,6 +53,7 @@
 			[(#GET{type_choix}|=={un}|oui)
 				<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)selected="selected"]>#NOM</option>
 			]
+            
 		</BOUCLE_destinataires>
 		[(#GET{type_choix}|=={un}|oui)
 			</select>

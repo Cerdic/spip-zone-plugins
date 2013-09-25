@@ -37,6 +37,7 @@ options:
           datas:
             tous: '<:saisies:option_type_choix_tous:>'
             un: '<:saisies:option_type_choix_un:>'
+            un_radio: '<:saisies:option_type_choix_un_radio:>'
             plusieurs: '<:saisies:option_type_choix_plusieurs:>'
           defaut: 'tous'
   -
