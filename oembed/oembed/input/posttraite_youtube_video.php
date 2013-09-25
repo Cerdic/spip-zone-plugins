@@ -16,7 +16,7 @@ function oembed_input_posttraite_youtube_video_dist($data,$url_orig){
 	}
 	// On regarde si l'attribut rel est placé dans l'URL
 	// pour éviter l'affichage des vidéo liées à la fin de la vidéo
-	if (strpos($url_orig,"&rel=0"))
+	if (strpos($url_orig,"&rel=0") OR strpos($url_orig, "?rel=0"))
 		$data['html'] = str_replace('feature=oembed', 'feature=oembed&#038;rel=0', $data['html']);
 	
 	return $data;
