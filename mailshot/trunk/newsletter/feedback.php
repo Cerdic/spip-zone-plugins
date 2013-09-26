@@ -14,7 +14,7 @@ include_spip("inc/config");
  * pour mettre a jour le status de l'envoi correspondant
  *
  * @param string $quoi
- *   open : l'email a ete ouvert
+ *   read : l'email a ete ouvert
  *   clic : un lien a ete clique
  *   soft_bounce : refus temporaire pour cause de boite mail pleine ou autre
  *   hard_bounce : adresse foireuse, refus definitif

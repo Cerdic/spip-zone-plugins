@@ -137,6 +137,17 @@ function mailjet_add_sender($sender_email, $force = false){
 
 }
 
+function mailjet_id_from_custom_campaign($tracking_id){
+	$mj = mailjet_api();
+	$params = array(
+		'custom_campaign' => protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$tracking_id,
+	);
+	$res = (array)$mj->messageList($params);
+	if (!isset($res['status']) OR $res['status']!=='OK') return null;
+	if (!$res['total_cnt']) return false;
+	$res = reset($res['result']);
+	return $res->id;
+}
 
 class FacteurMailjet extends Facteur {
 

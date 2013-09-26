@@ -15,12 +15,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function mailshot_taches_generales_cron($taches_generales){
 
-	// on active la tache cron uniquement si necessaire (un envoi en cours)
+	// on active la tache cron d'envoi uniquement si necessaire (un envoi en cours)
 	if (isset($GLOBALS['meta']['mailshot_processing'])){
 		include_spip('inc/mailshot');
 		list($periode,$nb) = mailshot_cadence();
 		$taches_generales['mailshot_bulksend'] = max(60,$periode-15);
 	}
+
+	// gerer les feedback par pooling sur mailjet (on ne sait pas faire mieux simplement)
+	include_spip("inc/config");
+	$config = lire_config("mailshot/");
+	if ($config['mailer']=="mailjet")
+		$taches_generales['mailjet_feedback'] = 3400;
 
 	return $taches_generales;
 }
