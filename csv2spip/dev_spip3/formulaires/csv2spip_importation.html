@@ -39,6 +39,13 @@
             <li class="fieldset">
             <fieldset>
                 <h3 class="legend"><:csv2spip:suppression_absents:></h3>
+                [(#SAISIE{radio,abs_poubelle}
+                {label=<:csv2spip:abs_poubelle:>}
+				{datas=#ARRAY{
+					supprimer,<:csv2spip:supprimer_auteur:>,
+					passage_poubelle,<:csv2spip:passage_poubelle:>}
+                })]				
+
                 [(#SAISIE{oui_non,abs_redac}
                 {label=<:csv2spip:abs_redac:>})]
 
@@ -48,21 +55,12 @@
                 [(#SAISIE{oui_non,abs_visiteur}
                 {label=<:csv2spip:abs_visiteur:>})]
 
-                [(#SAISIE{radio,abs_poubelle}
-                {label=<:csv2spip:abs_poubelle:>}
-				{datas=#ARRAY{
-					supprimer,<:csv2spip:supprimer_auteur:>,
-					passage_poubelle,<:csv2spip:passage_poubelle:>
-					}
-				})]				
-
                     [(#SAISIE{radio,traitement_article_efface}
                     {label=<:csv2spip:suppression_article_efface:>}
                     {datas=#ARRAY{
 						rien_faire,<:csv2spip:rien_faire:>,
 						supprimer_articles,<:csv2spip:supprimer_articles:>,
-						transferer_articles,<:csv2spip:transferer_articles:>
-						}
+						transferer_articles,<:csv2spip:transferer_articles:>}
 					})]
 
                         [(#SAISIE{input,nom_rubrique_archive}
@@ -91,8 +89,9 @@
             jQuery("li.editer_traitement_article_efface").css("display","none");
             jQuery("li.editer_nom_rubrique_archive").css("display","none");
             jQuery("li.editer_rubrique_parent_archive").css("display","none").css("background-color","#E1F4F2").css("padding-left","50px");
-            var redac  = false;
-            var  admin = false;
+            var redac     = false;
+            var  admin    = false;
+            var  visiteur = false;
             
             jQuery("#champ_abs_redac_oui").click(function(event){
                 redac = true;
@@ -100,6 +99,11 @@
                 });
             jQuery("#champ_abs_admin_oui").click(function(event){
                 admin = true;
+                jQuery("li.editer_traitement_article_efface").css("display","block");
+                });
+
+            jQuery("#champ_abs_visiteur_oui").click(function(event){
+                visiteur = true;
                 jQuery("li.editer_traitement_article_efface").css("display","block");
                 });
 
@@ -120,6 +124,16 @@
                         jQuery("li.editer_rubrique_parent_archive").css("display","none");
                     }
                 admin= false;
+                });
+
+            jQuery("#champ_abs_visiteur_non").click(function(event){
+                    if (redac == false){
+                        jQuery("li.editer_traitement_article_efface").css("display","none");
+                        jQuery("#champ_traitement_article_efface_1").attr("checked",true);
+                        jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                        jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    }
+                visiteur = false;
                 });
 
             jQuery("#champ_traitement_article_efface_3").click(function(event){
