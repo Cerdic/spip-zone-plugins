@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación — esto se reduce a añadir {target=\\"_blank\\"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target=\\"_blank\\"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enlazar palabras con su definición gracias al atajo tipográfico <code>[?palabra]</code>. Por omisión (o si dejas en blanco este cuadro), el glosario externo reenvía hacia la enciclopedia libre wikipedia.org. Aquí puedes elegir la dirección que se utilizará. <br />Enlace de prueba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:nom' => 'SPIP y los enlaces… externos',
@@ -204,7 +204,7 @@ Esta herramienta puede acoplarse con « [.->sommaire] ».', # MODIF
 	'erreur:nojs' => 'JavaScript está desactivado en esta página.',
 	'erreur:nom' => '¡Error!',
 	'erreur:probleme' => 'Problema en: @pb@',
-	'erreur:traitements' => 'La Navaja Suiza - Error de compilación en el procesado: ¡mezclar ’typo’ y ’propre’ está prohibido!',
+	'erreur:traitements' => 'La Navaja Suiza - Error de compilación en el procesado: ¡mezclar \'typo\' y \'propre\' está prohibido!',
 	'erreur:version' => 'Esta herramienta no está disponible en esta versión de SPIP.',
 	'etendu' => 'Extendido',
 
@@ -269,13 +269,13 @@ Para definir el logo, entra en la página de «Configuración de sitio» pulsand
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN : ¡¡herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones automáticas',
-	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los artículos, las breves, etc.</p>
-<p>{{Atención}} : Antes de activar esta función, comprueba bien que no exista ninguna otra función {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producirá un error de compilación.</p>
-@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisión) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducción utilizando en este caso los siguientes valores por omisión: 500 caracteres para los artículos, 300 para las breves y 600 para los foros o las secciones.
-[[%lgr_introduction% %]]
-@puce@ Por omisión, los puntos de seguir añadidos al resultado de la baliza #INTRODUCTION si el texto es más largo son: <html>« (…)»</html>. Puedes precisar aquí tu propia cadena de caracteres para indicar al lector que el texto truncado continúa.
+	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, las breves, etc.</p>
+<p>{{Atenci&oacute;n}} : Antes de activar esta funci&oacute;n, comprueba bien que no exista ninguna otra funci&oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&aacute; un error de compilaci&oacute;n.</p>
+@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&oacute;n utilizando en este caso los siguientes valores por omisi&oacute;n: 500 caracteres para los art&iacute;culos, 300 para las breves y 600 para los foros o las secciones.
+[[%lgr_introduction%&nbsp;%]]
+@puce@ Por omisi&oacute;n, los puntos de seguir a&ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&aacute;s largo son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Puedes precisar aqu&iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&uacute;a.
 [[%suite_introduction%]]
-@puce@ Si se usa la baliza #INTRODUCTION para resumir un artículo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: «Leer el resto del artículo…»
+@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &laquo;Leer el resto del art&iacute;culo…&raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -342,7 +342,7 @@ Atención, esta herramienta necesita el plugin {jQuery} : {Round Corners} para f
 	'label:radio_target_blank3' => 'Enlaces externos en ventana nueva:',
 	'label:radio_type_urls3' => 'Formato de las URLs:',
 	'label:scrollTo' => 'Instalar los plugins {jQuery} siguientes:',
-	'label:separateur_urls_page' => 'Carácter de separación ’type-id’<br/>(ej.: ?article-123):', # MODIF
+	'label:separateur_urls_page' => 'Carácter de separación \'type-id\'<br/>(ej.: ?article-123):', # MODIF
 	'label:set_couleurs' => 'Esquema a utilizar:',
 	'label:spam_mots' => 'Secuencias prohibidas:',
 	'label:spip_options_on' => 'Incluir:',
@@ -354,11 +354,11 @@ Atención, esta herramienta necesita el plugin {jQuery} : {Round Corners} para f
 	'label:titre_travaux' => 'Título del mensaje:',
 	'label:titres_etendus' => 'Activar el uso extendido de las balizas #TITRE_XXX:',
 	'label:url_arbo_minuscules' => 'Conservar los espacios de los títulos en las URLs:',
-	'label:url_arbo_sep_id' => 'Carácter de separación ’titre-id’ en caso de duplicidad:<br/>(no utilizar ’/’)', # MODIF
+	'label:url_arbo_sep_id' => 'Carácter de separación \'titre-id\' en caso de duplicidad:<br/>(no utilizar \'/\')', # MODIF
 	'label:url_glossaire_externe2' => 'Enlace al glosario externo:',
 	'label:urls_arbo_sans_type' => 'Mostrar el tipo de objeto SPIP en las URLs:',
 	'label:webmestres' => 'Lista de los y las webmasters del sitio:',
-	'liens_en_clair:description' => 'Pone a tu disposición el filtro: ’liens_en_clair’. Probablemente tu texto contiene enlaces de hipertexto que no son visibles al imprimir. Este filtro añade entre corchetes el destino de cada enlace pulsable (enlaces externos o de correo). Atención: en el modo de impresión (parámetro ’cs=print’ o ’page=print’ en la url de la página), esta característica se aplica automáticamente.',
+	'liens_en_clair:description' => 'Pone a tu disposición el filtro: \'liens_en_clair\'. Probablemente tu texto contiene enlaces de hipertexto que no son visibles al imprimir. Este filtro añade entre corchetes el destino de cada enlace pulsable (enlaces externos o de correo). Atención: en el modo de impresión (parámetro \'cs=print\' o \'page=print\' en la url de la página), esta característica se aplica automáticamente.',
 	'liens_en_clair:nom' => 'Ver enlaces',
 	'liens_orphelins:description' => 'Esta herramienta tiene dos aplicaciones:
 
@@ -382,7 +382,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 	'message_perso' => 'Muchas gracias a los traductores que pasaron por aquí. Pat ;-)',
 	'moderation_admins' => 'administradores autentificados',
 	'moderation_message' => 'Este foro está moderado a priori: tu contribución no aparecerá hasta que haya sido validada por un administrador del sitio, salvo si te has identificado y estás autorizado a escribir directamente.',
-	'moderation_moderee:description' => 'Permite moderar la moderación de los foros públicos <b>configurados a priori</b> por los usuarios inscritos.<br />Por ejemplo: Si soy el webmaster de mi sitio, y respondo al mensaje de un usuario, ¿por qué debo validar mi propio mensaje? ¡Moderación moderada lo hace para mí!  [[%moderation_admin%]][[—>%moderation_redac%]][[—>%moderation_visit%]]',
+	'moderation_moderee:description' => 'Permite moderar la moderación de los foros públicos <b>configurados a priori</b> por los usuarios inscritos.<br />Por ejemplo: Si soy el webmaster de mi sitio, y respondo al mensaje de un usuario, ¿por qué debo validar mi propio mensaje? ¡Moderación moderada lo hace para mí!  [[%moderation_admin%]][[-->%moderation_redac%]][[-->%moderation_visit%]]',
 	'moderation_moderee:nom' => 'Moderación moderada',
 	'moderation_redacs' => 'redactores autentificados',
 	'moderation_visits' => 'visitantes autentificados',
@@ -405,7 +405,7 @@ _ • {Extendido}: se reemplazan además los enlaces del tipo {<html>yo@spip.net
 	'outil_desactiver_le' => 'Desactivar la herramienta',
 	'outil_inactif' => 'Herramienta inactiva',
 	'outil_intro' => 'Esta página lista las funciones que el plugin pone a tu disposición.<br /><br />Pulsando sobre el nombre de los útiles de más abajo, los seleccionas y podrás cambiar su estado con ayuda del botón central: los útiles activados se desactivarán y <i>viceversa</i>. Con cada pulsación, aparece la descripción bajo las listas. Las categorías son desplegables y los útiles se pueden ocultar. El doble-clic permite cambiar rápidamente de herramienta.<br /><br />En la primera utilización, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta página recompila el conjunto de herramientas de la Navaja Suiza.',
-	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=’./?exec=admin_couteau_suisse’>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=’http://www.spip-contrib.net/?article2166’>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'Esta interfaz está anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ útil', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ útiles', # MODIF
 	'outil_permuter' => '¿Cambiar la herramienta: « @text@ »?',
@@ -529,9 +529,9 @@ _ • {Control de la caché}: opción idéntica a la anterior, con escritura en 
 
 Nota: Para las palabras-clave, un alias de #TITRE_PARENT es #TITRE_GROUPE. El tratamiento por SPIP de estas balizas nuevas es similar al de #TITRE.
 
-@puce@ Si utilizas SPIP 2.0, aquí tienes disponible todo un conjunto de balizas #TITRE_XXX que podrán devolver el título del objeto ’xxx’, a condición de que el campo ’id_xxx’ esté presente en la tabla en curso (#ID_XXX utilizable en el bucle en curso).
+@puce@ Si utilizas SPIP 2.0, aquí tienes disponible todo un conjunto de balizas #TITRE_XXX que podrán devolver el título del objeto \'xxx\', a condición de que el campo \'id_xxx\' esté presente en la tabla en curso (#ID_XXX utilizable en el bucle en curso).
 
-Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolverá el título del sector en el que está situado el artículo en curso, pues el identificador #ID_SECTEUR (o el campo ’id_secteur’) está disponible en ese caso.
+Por ejemplo, en un bucle sobre (ARTICLES), #TITRE_SECTEUR devolverá el título del sector en el que está situado el artículo en curso, pues el identificador #ID_SECTEUR (o el campo \'id_secteur\') está disponible en ese caso.
 
 Igualmente está soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <html>#TITRE_ARTICLE{10}</html> devolverá el título del artículo #10.[[%titres_etendus%]]', # MODIF
 	'titre_parent:nom' => 'Balizas #TITRE_PARENT/OBJET',
@@ -543,11 +543,11 @@ Igualmente está soportada la sintaxis <html>#TITRE_XXX{yy}</html>. Ejemplo: <ht
 
 Consulta [aquí ->http://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.
 
-Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>’cadena’=>"Hola, soy @nombre@ y tengo @edad@ años\\"</code>.
+Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años\\"</code>.
 
-La función de SPIP utilizada en PHP es  <code>_T(’cadena’)</code> sin argumentos, y <code>_T(’cadena, array(’arg1’=>’un texto’, ’arg2’=>’otro texto’))</code> con argumentos.
+La función de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumentos, y <code>_T(\'cadena, array(\'arg1\'=>\'un texto\', \'arg2\'=>\'otro texto\'))</code> con argumentos.
 
-No te olvides de verificar que la clave <code>’cadena’</code> esté bien definida en los ficheros de idiomas. ', # MODIF
+No te olvides de verificar que la clave <code>\'cadena\'</code> esté bien definida en los ficheros de idiomas. ', # MODIF
 	'toutmulti:nom' => 'Bloques multilingües',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'Este sitio se reactivará en breve.
@@ -555,7 +555,7 @@ _ Gracias por la comprensión.',
 	'travaux_titre' => '@_CS_TRAVAUX_TITRE@',
 	'tri_articles:description' => 'Elige aquí la ordenación que se usará para mostrar tus artículos dentro de las secciones cuando navegues por la parte privada del sitio ([->./?exec=auteurs]).
 
-Las propuestas siguientes se basan en la función SQL ’ORDER BY’: utiliza la ordenación personalizada sólo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
+Las propuestas siguientes se basan en la función SQL \'ORDER BY\': utiliza la ordenación personalizada sólo si sabes muy bien lo que haces (campos disponibles: {id_article, id_rubrique, titre, soustitre, surtitre, statut, date_redac, date_modif, lang, etc.})
 [[%tri_articles%]][[->%tri_perso%]]', # MODIF
 	'tri_articles:nom' => 'Ordenación de los artículos', # MODIF
 	'tri_modif' => 'Ordenar por fecha de modificación (ORDER BY date_modif DESC)',
@@ -574,14 +574,14 @@ _ Ejemplo: <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separa
 <radio_type_urls3 valeur="html">@puce@ {{URLs «html»}}: los enlaces tienen forma de páginas html clásicas.
 _ Ejemplo: <code>/article123.html</code></radio_type_urls3>
 
-<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres» (propias)}}: los enlaces se calculan mediante el título de los objetos solicitados. Los títulos se rodean con marcadores (_, -, +, @, etc.) en función del tipo de objeto.
+<radio_type_urls3 valeur="propres">@puce@ {{URLs «propres» (propias)}}: los enlaces se calculan mediante el título de los objetos solicitados. Los títulos se rodean con marcadores (_, -, +, @, etc.) en función del tipo de objeto.
 _ Ejemplos: <code>/Mi-titulo-de-articulo</code> o <code>/-Mi-seccion-</code> o <code>/@Mi-sitio@</code>[[%terminaison_urls_propres%]][[%debut_urls_propres%]][[%marqueurs_urls_propres%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2» (propias 2)}}: se añade la extension ’.html’ a los enlaces {«propios»}.
+<radio_type_urls3 valeur="propres2">@puce@ {{URLs «propres2» (propias 2)}}: se añade la extension \'.html\' a los enlaces {«propios»}.
 _ Ejemplo: <code>/Mi-titulo-de-articulo.html</code> o <code>/-Mi-seccion-.html</code>
 [[%debut_urls_propres2%]][[%marqueurs_urls_propres2%]]</radio_type_urls3>
 
-<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}}: los enlaces son {«propios»}, pero sin marcadores separando los objetos (_, -, +, @, etc.).
+<radio_type_urls3 valeur="libres">@puce@ {{URLs «libres»}}: los enlaces son {«propios»}, pero sin marcadores separando los objetos (_, -, +, @, etc.).
 _ Ejemplo: <code>/Mi-titulo-de-articulo</code> o <code>/Mi-seccion</code>
 [[%terminaison_urls_libres%]][[%debut_urls_libres%]]</radio_type_urls3>
 
@@ -610,11 +610,11 @@ _ (ejemplos: <code>/Mi-titulo-de-articulo,457</code> o <code>/457-Mi-titulo-de-a
 	'type_urls:nom' => 'Formato de las URLs',
 	'typo_exposants:description' => '{{Textos en francés}}: mejora la presentación tipográfica de las abreviaturas corrientes, poniendo como superíndices los elementos necesarios (así, {<acronym>Mme</acronym>} se transforma en {M<sup>me</sup>}) y corrigiendo los errores comunes ({<acronym>2ème</acronym>} o  {<acronym>2me</acronym>}, por ejemplo, se transforman en {2<sup>e</sup>}, única abreviatura correcta).
 
-Las abreviaturas obtenidas son conformes con las de la Imprenta nacional francesa, tal como se indican en el {Lexique des règles typographiques en usage à l’Imprimerie nationale} (artículo « Abréviations », presses de l’Imprimerie nationale, Paris, 2002).
+Las abreviaturas obtenidas son conformes con las de la Imprenta nacional francesa, tal como se indican en el {Lexique des règles typographiques en usage à l\'Imprimerie nationale} (artículo « Abréviations », presses de l\'Imprimerie nationale, Paris, 2002).
 
 También se procesan las expresiones siguientes: <html>Dr, Pr, Mgr, m2, m3, Mn, Md, Sté, Éts, Vve, Cie, 1o, 2o, etc.</html>
 
-Aquí puedes escoger escribir como superíndices otras abreviaturas suplementarias, que se desaconsejan por l’Imprimerie nationale :[[%expo_bofbof%]]
+Aquí puedes escoger escribir como superíndices otras abreviaturas suplementarias, que se desaconsejan por l\'Imprimerie nationale :[[%expo_bofbof%]]
 
 {{Textos en inglés}}: paso a superíndice de los números ordinales: <html>1st, 2nd</html>, etc.', # MODIF
 	'typo_exposants:nom' => 'Abreviaturas tipográficas',
@@ -679,7 +679,7 @@ Añade sencillamente <code><INCLURE{fond=fonds/visiteurs_connectes}></code> en t
 Webmaster(s) actual(es): {@_CS_LISTE_WEBMESTRES@}.
 _ Administrador(es) elegible(s): {@_CS_LISTE_ADMINS@}.
 
-Al ser webmaster tu mismo, aquí tienes permisos para modificar esta lista de ids — separadas por dos puntos « : » si son varias. Ejemplo: «1:5:6».[[%webmestres%]]', # MODIF
+Al ser webmaster tu mismo, aquí tienes permisos para modificar esta lista de ids -- separadas por dos puntos « : » si son varias. Ejemplo: «1:5:6».[[%webmestres%]]', # MODIF
 	'webmestres:nom' => 'Lista de webmasters',
 
 	// X
