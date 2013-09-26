@@ -102,7 +102,7 @@ function mailshot_formulaire_traiter($flux){
 		if ($mailer = $config['mailer']
 		  AND include_spip("bulkmailer/$mailer")
 		  AND $config = charger_fonction($mailer."_config","bulkmailer",true)){
-			$config();
+			$config($flux);
 		}
 	}
 	return $flux;

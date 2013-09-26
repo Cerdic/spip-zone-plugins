@@ -52,11 +52,34 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 	return $mailer_defaut($to_send,$options);
 }
 
+/**
+ * Configurer mailjet : declarer le sender si besoin
+ * @param $flux
+ */
+function bulkmailer_mailjet_config_dist(&$flux){
+	$sender_mail = "";
+
+	include_spip('inc/config');
+	$config = lire_config('mailshot/');
+	if ($config['adresse_envoi']=='oui')
+		$sender_mail = $config['adresse_envoi_email'];
+	else {
+		include_spip("classes/facteur");
+		$facteur = new Facteur("example@example.org","","","");
+		$sender_mail = $facteur->From;
+	}
+
+	// si le sender n'est pas dans les emails de mailjet l'ajouter
+	if ($sender_mail)
+		mailjet_add_sender($sender_mail, true);
+}
+
+
 function &mailjet_api(){
 	static $mj = null;
 	if (is_null($mj)){
 		include_spip('inc/config');
-		$config = lire_config('mailshot');
+		$config = lire_config('mailshot/');
 
 		include_spip('lib/mailjet-api-php/mailjet-0.1');
 		$mj = new Mailjet($config['mailjet_api_key'],$config['mailjet_secret_key']);
