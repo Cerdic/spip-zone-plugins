@@ -87,11 +87,13 @@ function importation_evenement($objet_evenement,$id_almanach){
     		$date_fin = $endDate.$endTime;
 	#on insere les infos des événements dans la base 
 	# ca ce sera pour quand j'arriverai à faire fonctionner le selecteur d'articles $id_article = preg_replace('(article\|)','',_request('id_article')); #le selecteur d'article fournit un tableau, on se débarasse du mot article dedans et on appellera ensuite la première valeur (il pourrait y avoir des saisies multiples même si ici on ne les autorise pas)
+	$id_mot = _request('id_mot');
 	$id_article = _request('id_article'); 
 	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid_distante,'sequence'=>$sequence_distante,'notes'=>$url));
 	
 	#on associe l'évéenement à l'almanach
-	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
+	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
+	sql_insertq("spip_almanachs_liens",array('id_almanach'=>$id_almanach,'id_objet'=>$id_evenement,'objet'=>'evenement','vu'=>'oui'));
 	#on associe l'événement à son mot
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
 }
