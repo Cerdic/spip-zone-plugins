@@ -69,7 +69,14 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 		if (count($set)){
 			autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
 			autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
-			objet_modifier("mailsubscriber",$row['id_mailsubscriber'],$set);
+			// d'abord le statut pour notifier avec le bon mail
+			if (isset($set['statut'])){
+				objet_modifier("mailsubscriber",$row['id_mailsubscriber'],array('statut'=>$set['statut']));
+				unset($set['statut']);
+			}
+			// ensuite l'email ou autre si besoin
+			if (count($set))
+				objet_modifier("mailsubscriber",$row['id_mailsubscriber'],$set);
 			autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
 			autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
 		}

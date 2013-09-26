@@ -44,10 +44,17 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 				'data'=>$destinataires)
 		);
 
-		$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
-		$texte = recuperer_fond($modele,array('id_mailsubscriber'=>$id_mailsubscriber));
+		// precaution : enlever les adresses en "@example.org"
+		foreach($destinataires as $k=>$email){
+			if (preg_match(",@example.org$,i",$email))
+				unset($destinataires[$k]);
+		}
 
-		notifications_envoyer_mails($destinataires, $texte);
+		if (count($destinataires)){
+			$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
+			$texte = recuperer_fond($modele,array('id_mailsubscriber'=>$id_mailsubscriber));
+			notifications_envoyer_mails($destinataires, $texte);
+		}
 	}
 }
 
