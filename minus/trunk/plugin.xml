@@ -2,7 +2,7 @@
 	<prefix>minus</prefix>
 	<nom>Minus !</nom>
 	<categorie>edition</categorie>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html] ; Logo CC Paternité-Partage à L'Identique [Willi Heidelbach->https://commons.wikimedia.org/wiki/File:Metal_movable_type.jpg]</licence>
