@@ -2,7 +2,7 @@
 	<prefix>minus</prefix>
 	<nom>Minus !</nom>
 	<categorie>edition</categorie>
-	<version>1.0.3</version>
+	<version>1.1.0</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<licence>[GNU/GPL 3->https://www.gnu.org/licenses/gpl-3.0.html] ; Logo CC Paternité-Partage à L'Identique [Willi Heidelbach->https://commons.wikimedia.org/wiki/File:Metal_movable_type.jpg]</licence>
@@ -11,7 +11,6 @@
 	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
 	<description>Permet de forcer les rédacteurs à ne pas mettre des titres entièrement en majuscules.</description>
 	<slogan>Ne criez pas !</slogan>
-	<lien>http://contrib.spip.net/4408</lien>
 	
 	<pipeline>
 	  <nom>formulaire_verifier</nom> 
@@ -21,5 +20,6 @@
 	  <nom>formulaire_charger</nom> 
 	  <inclure>minus_pipelines.php</inclure>
 	</pipeline>
+    <utilise nom="agenda" />
 
 </plugin>
