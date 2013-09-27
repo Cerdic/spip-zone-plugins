@@ -16,13 +16,12 @@
 [(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
 <B_motsElement>
 	<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
-	<ul>
+	<ul class="tags">
 		<BOUCLE_motsElement(SPIPICIOUS mots){id_objet}{objet}{fusion spipicious.id_mot}{mots.id_groupe=#GET{id_groupe}}>
-			<li><a href="#URL_MOT" rel="tag">#TITRE</a>
-			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>
-				#SET{total,#TOTAL_BOUCLE}
-				[(#TOTAL_BOUCLE|>{1}|oui)(<abbr title="<:spipicious:title_tag_utilise_nb{nb=#GET{total}}:>">#TOTAL_BOUCLE</abbr>)]
-				[(#TOTAL_BOUCLE|=={1}|oui)(<abbr title="<:spipicious:title_tag_utilise_un:>">#TOTAL_BOUCLE</abbr>)]		
+			<li class="tag"><a href="#URL_MOT" rel="tag">#TITRE</a>
+			<BOUCLE_nb(SPIPICIOUS){id_mot}{objet}{id_objet}> </BOUCLE_nb>[(#SET{total,#TOTAL_BOUCLE})]
+				[(#TOTAL_BOUCLE|>{1}|oui)<abbr title="<:spipicious:title_tag_utilise_nb{nb=#GET{total}}:>">[((#TOTAL_BOUCLE))]</abbr>]
+				[(#TOTAL_BOUCLE|=={1}|oui)<abbr title="<:spipicious:title_tag_utilise_un:>">[((#TOTAL_BOUCLE))]</abbr>]
 			</B_nb>
 			</li>
 		</BOUCLE_motsElement>
@@ -32,11 +31,8 @@
 	[(#ENV{message_aucun}|!={non}|oui)
 	<div class="tags[_(#ENV{objet})][_(#ENV{id_objet})] tags_liste">
 		[(#ENV{message_aucun}|oui)
-			[(#ENV{message_aucun}|propre)]
-		]
+			[(#ENV{message_aucun}|propre)]]
 		[(#ENV{message_aucun}|non)
-			<p><:spipicious:message_aucun_tags:></p>
-		]
-	</div>
-	]
+			<p><:spipicious:message_aucun_tags:></p>]
+	</div>]
 <//B_motsElement>
