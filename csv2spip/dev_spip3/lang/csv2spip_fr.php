@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'maj_infoperso' => 'Mise à jour des infos personnelles (mail, pseudo, pass):',
     'type_maj_remplacer'=>'Remplacer',
     'type_maj_ajouter'=>'Ajouter',
-    'type_maj_label'=>'Gestion des rubriques administrées et des zones d\'accès des utilisateurs',
+    'type_maj_label'=>'Gestion des rubriques administrées et des zones d\'accès des utilisateurs existants',
 
     'nom_champs'=>'Sélectionnez les champs que vous souhaitez exporter',
     'nom_rubrique_archive'=>'Nom de la rubrique d\'archives :',

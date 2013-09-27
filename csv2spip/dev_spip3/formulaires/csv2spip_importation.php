@@ -103,11 +103,9 @@ function formulaires_csv2spip_importation_traiter_dist(){
 	$Tcorrespondances = array('administrateur'=>'0minirezo', 'redacteur'=>'1comite', 'visiteur'=>'6forum', 'poubelle' => '5poubelle');
 	    
 	// tableau de tous les admins
-	$result = sql_select(array('login', 'email'), 'spip_auteurs', array('statut = "0minirezo"'));
+	$result = sql_select(array('login'), 'spip_auteurs', array('statut = "0minirezo"'));
 	while ($r = sql_fetch($result)) {
 		$Tadmin_tous[] = $r['login'];
-		if ($r['email'] AND $r['email'] != '')
-			$Tadmin_tous[] = $r['email'];
 	}
 	// tableau des admins restreints
 	$Tadmin_restreint=array();
@@ -118,49 +116,44 @@ function formulaires_csv2spip_importation_traiter_dist(){
 		"auteurs.statut = '0minirezo'",
 		"liens.objet = 'rubrique'",
 		"liens.id_auteur = auteurs.id_auteur",
-		'(login!="" OR email!="")');
-	$result = sql_select(array('login', 'email'),$from, $where);
+		'login!=""');
+	$result = sql_select(array('login'),$from, $where);
 	while ($r = sql_fetch($result)) {
 		$Tadmin_restreint[] = $r['login'];
-		if ($r['email'] AND $r['email'] != '')
-			$Tadmin_restreint[] = $r['email'];
 	}
 	// tableau admins complets
 	$Tadmin_complet = array_diff($Tadmin_tous, $Tadmin_restreint);
-
 	// traiter fichier CSV
+	$num_statut = $num_login = -1;
     while (($data= fgetcsv($fichiercsv,"~")) !== FALSE){
        // petit hack car fgetcsv ne reconnait pas le ~ comme séparateur !!!
        $data           = implode("~",$data);
        $data           = explode("~",$data);
        $nombre_elements = count($data);
-
 		if ($i==0) {
 			for ($j = 0; $j < $nombre_elements; $j++) {
-				$en_tete[$j]=$data[$j];    //Récupération de la ligne d'entete
+				$en_tete[$j] = strtolower($data[$j]);    //Récupération de la ligne d'entete
 				if ($en_tete[$j] == 'statut')
 					$num_statut = $j;
 				if ($en_tete[$j] == 'login')
 					$num_login = $j;
-				if ($en_tete[$j] == 'email')
-					$num_email = $j;
 		   }
-			if (!$num_statut OR !$num_login OR !$num_email){
-				$retour['message_erreur'] = _T('csv2spip:champ_manquant').'email:'.$num_email.' login:'.$num_login.' statut'.$num_statut;
+			if ($num_statut < 0 OR $num_login < 0){
+				$retour['message_erreur'] = _T('csv2spip:champ_manquant').' login:'.$num_login.' statut'.$num_statut;
 				return  $retour;
 			}
-	   } else {
+	   } 
+	   else {
 			for ($j = 0; $j < $nombre_elements; $j++) {
-				// on ne veut pas les auteurs du CSV ayant login ou mail égal à celui d'un admin complet
-				if (($data[$num_login] AND !in_array($data[$num_login], $Tadmin_complet))
-					OR ($data[$num_email] AND !in_array($data[$num_email], $Tadmin_complet))
-				) { 	// creation du tableau contenant l'ensemble des données à importer
-				   if ($Tcorrespondances[$data[$num_statut]] == '6forum')
-						$tableau_csv_visiteurs[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
-				   if ($Tcorrespondances[$data[$num_statut]] == '1comite')
-						$tableau_csv_redacs[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
-				   if ($Tcorrespondances[$data[$num_statut]] == '0minirezo') {
-						$tableau_csv_admins[$data[$num_login]?$data[$num_login]:$data[$num_email]][$en_tete[$j]] = $data[$j];
+				// on ne veut pas les auteurs du CSV ayant login égal à celui d'un admin complet
+				if (($data[$num_login] AND !in_array($data[$num_login], $Tadmin_complet))) {
+					// creation du tableau contenant l'ensemble des données à importer
+				   if ($Tcorrespondances[strtolower($data[$num_statut])] == '6forum')
+						$tableau_csv_visiteurs[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "6forum" : $data[$j];
+				   if ($Tcorrespondances[strtolower($data[$num_statut])] == '1comite')
+						$tableau_csv_redacs[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "1comite" : $data[$j];
+				   if ($Tcorrespondances[strtolower($data[$num_statut])] == '0minirezo') {
+						$tableau_csv_admins[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "0minirezo" : $data[$j];
 						if ($en_tete[$j] == 'ss_groupe' AND $data[$j]) {
 							$Trub = explode('|', $data[$j]);
 							foreach($Trub as $rub)
@@ -178,26 +171,28 @@ function formulaires_csv2spip_importation_traiter_dist(){
 
     // tableau CSV total
     $tableau_csv_total = array_merge($tableau_csv_visiteurs, $tableau_csv_redacs, $tableau_csv_admins);
-
+spip_log("tableau csv total","csvspip");
+//spip_log($tableau_csv_total,"csvspip");
 
     //récupération des auteurs de la bdd en 4 array
+    // on ne prend pas les auteurs sans login
     // $poubelle_bdd = les auteurs à la poubelle
     // $visiteur_bdd = les visiteurs
     // $redacteur_bdd
     // $admin_restreint_bdd
-    // la cle de chaque tableau est le login et s'il n'existe pas le mail
+    // la cle de chaque tableau est le login
     $poubelle_bdd=$visiteur_bdd=$redacteur_bdd=$admin_restreint_bdd=array();
-    $poubelle_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="5poubelle"','(login!="" OR email!="")'));    
+    $poubelle_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="5poubelle"','(login!="")'));    
     foreach ($poubelle_bdd_req as $key) {
-        $poubelle_bdd[$key['login']?$key['login']:$key['email']]=$key;
+        $poubelle_bdd[$key['login']]=$key;
     }    
-    $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="" OR email!="")'));    
+    $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="")'));    
     foreach ($visiteur_bdd_req as $key) {
-        $visiteur_bdd[$key['login']?$key['login']:$key['email']]=$key;
+        $visiteur_bdd[$key['login']]=$key;
     }
-    $redacteur_bdd_req       = sql_allfetsel('*', 'spip_auteurs', array('statut="1comite"','(login!="" OR email!="")'));
+    $redacteur_bdd_req       = sql_allfetsel('*', 'spip_auteurs', array('statut="1comite"','(login!="")'));
     foreach ($redacteur_bdd_req as $key) {
-        $redacteur_bdd[$key['login']?$key['login']:$key['email']]=$key;
+        $redacteur_bdd[$key['login']]=$key;
     }
     //on récupère seulement les admins restreints !!!
     $from = array( 
@@ -207,10 +202,10 @@ function formulaires_csv2spip_importation_traiter_dist(){
         "auteurs.statut = '0minirezo'",
         "liens.objet = 'rubrique'",
         "liens.id_auteur = auteurs.id_auteur",
-        '(login!="" OR email!="")');
+        '(login!="")');
     $admin_restreint_bdd_req       = sql_allfetsel("DISTINCT auteurs.*" ,$from, $where);
     foreach ($admin_restreint_bdd_req as $key) {
-        $admin_restreint_bdd[$key['login']?$key['login']:$key['email']]=$key;
+        $admin_restreint_bdd[$key['login']]=$key;
     }
 
     // tableau BDD total
@@ -234,7 +229,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
 			$tableau_bdd_zones_admins[$row['id_zone']] = strtolower($row['titre']);
 		}
 	}
-
+	spip_log($tableau_bdd_zones_admins,"csvspip");
 	// créer les rubriques admins du csv n'existant pas et les indexer
 	foreach($tableau_csv_rubriques_admins as $id_rub=>$rub){
 		if (!in_array(strtolower($rub), $tableau_bdd_rubriques_admins)) {
@@ -253,15 +248,53 @@ function formulaires_csv2spip_importation_traiter_dist(){
 
 	
 	// PARTIE I : maj ou ajout des auteurs
-	// cas 1 : ajout
-	if (!$maj_utilisateur) {
-		$tableau_nouveaux_auteurs = csv2spip_diff_nouveaux($tableau_csv_total, $tableau_bdd_total);
-		foreach($tableau_nouveaux_auteurs as $login => $Tauteur)
-			csv2spip_ajout_utilisateur($login,$Tauteur,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins);
+	$tableau_nouveaux_auteurs = array_diff_key($tableau_csv_total, $tableau_bdd_total);
+	// si maj demandée
+	if ($maj_utilisateur) {
+		// construire le tableau des utilisateurs à mettre à jour, indexé sur le login
+		$tableau_maj_auteurs = array_diff_key($tableau_csv_total, $tableau_nouveaux_auteurs);
+		
+		// construire le tableau de correspondance login csv => id_auteur bdd
+		$tableau_maj_auteurs_id = array();
+		$Tlogins = array_keys($tableau_maj_auteurs);
+		$chaine_in = implode('","', $Tlogins);
+		$chaine_in = '"'.$chaine_in.'"';
+		$res = sql_select('id_auteur, login', 'spip_auteurs', array('login IN ('.$chaine_in.')'));
+		while ($row = sql_fetch($res)) {
+			$tableau_maj_auteurs_id[$row['login']] = $row['id_auteur'];
+		}
+
+		// si remplacer les données zones et rubriques administrées: supprimer les liens existant
+		if ($type_maj == 'remplacer') {
+			// suppression des liens des rubriques administrées
+			objet_dissocier(array("auteur"=>array_values($tableau_maj_auteurs_id)), array("rubrique"=>"*"));	
+			// suppression des zones des auteurs
+			zone_lier('',"auteur",array_values($tableau_maj_auteurs_id),'del');
+		}
+//spip_log("table zone admin","csvspip");
+
+//spip_log($tableau_bdd_zones_admins,"csvspip");
+
+		// maj des données des auteurs
+		foreach($tableau_maj_auteurs as $login => $Tauteur)
+			csv2spip_ajout_utilisateur($login, $Tauteur, $Tnom_champs_bdd, $Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins, $tableau_maj_auteurs_id[$login]);
+
+/*		
+echo '<br><pre>';
+var_dump($tableau_maj_auteurs_id);
+*/
+		
 	}
-
-
 	
+	
+	// dans tous les cas ajout des nouveaux
+	foreach($tableau_nouveaux_auteurs as $login => $Tauteur)
+		csv2spip_ajout_utilisateur($login,$Tauteur,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins);
+
+		
+	
+
+
 
     // PARTIE II : Suppressions des absents (changer le statut des auteurs en 5.poubelle)  avec 3 choix pour la gestion des articles associés
     // 1. ras
@@ -332,26 +365,13 @@ function csv2spip_diff_absents($Tbdd, $Tcsv=array()){
 	return $Tid;
 }
 
-/*
- * générer l"array des logins ou mails n'existant pas encore dans la base
- * @param $Tbdd: l'array indexé login/mail extrait de la base
- * @param $Tcsv: l'array indexé login/mail extrait du csv
- * @return l'array des logins ou mails
- */
-function csv2spip_diff_nouveaux($Tcsv, $Tbdd){
-	$Tid = array();
-	$T = array_diff_key($Tcsv, $Tbdd);
-	return $T;
-}
-
 
 /*
  * ajout d'un utilisateur
  * @param login de l'auteur
  * @param array associatif CSV: Tauteur_csv  nom_champ : valeur
  */
-function csv2spip_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins){
-echo '<br>login: '.$login;
+function csv2spip_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tcorrespondances, $tableau_bdd_rubriques_admins, $tableau_bdd_zones_admins, $id_auteur=0){
 	$set = $Tzones = $Trubadmin = array();
 	foreach($Tauteur_csv as $champ => $valeur){
 		if($champ == "ss_groupe"){
@@ -363,20 +383,25 @@ echo '<br>login: '.$login;
 		if($champ == "zone"){
 			$T = explode('|',$valeur);
 			foreach($T as $zone){
-				$Tzones[] = array_search(strtolower($zone),$tableau_bdd_zones_admins);
+spip_log("zone","csvspip");
+spip_log("|".$zone."|","csvspip");
+				$Tzones[] = array_search(trim(rtrim(strtolower($zone))),$tableau_bdd_zones_admins);
 			}
+spip_log("tzone de id_auteur $id_auteur","csvspip");
+spip_log($tableau_bdd_zones_admins,"csvspip");
+spip_log($Tzones,"csvspip");
 
 		}
 		if(in_array($champ,$Tnom_champs_bdd)){
 			$set[$champ] = ($champ == "statut" AND array_key_exists($valeur,$Tcorrespondances)) ? $Tcorrespondances[$valeur] : $valeur;
 		}
 	}
-	if ($set["login"] == "")
-		$set["login"]=$login;
 
-
-	//inserer l'auteur
-	$id_auteur=auteur_inserer();
+	//inserer l'auteur si il n'y a pas d'id_auteur transmis
+	if (!$id_auteur)
+		$id_auteur = auteur_inserer();
+	
+	// remplir les champs ou les maj
 	auteur_modifier($id_auteur,$set);
 
 	//liaison des rubriques

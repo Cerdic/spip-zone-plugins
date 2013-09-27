@@ -1,7 +1,7 @@
 <paquet
 	prefix="csv2spip"
 	categorie="outil"
-	version="5.0.0"
+	version="5.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/csv2spip-128.png"
