@@ -36,7 +36,7 @@
 				</li>
 			]
 			</BOUCLE_article_traduit>
-			
+
 			#SET{langues_creees,#GET{langues_creees}|array_unique}
 			#SET{langues,#GET{langues}|array_diff{#GET{langues_creees}}}
 			<BOUCLE_langues(POUR){tableau #GET{langues}}>

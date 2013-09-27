@@ -3,9 +3,9 @@
 <BOUCLE_diogene(DIOGENES){type=#ENV{type_objet}}>
 <BOUCLE_autorise_utiliser(CONDITION){si #AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui}>
 	[(#REM) Fil d'Ariane ]
-	<p id="hierarchie">
-		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep">
-		&gt; </span><a href="#GET{url_orig}"><:diogene:publier_titre_hierarchie:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]
+	<p id="hierarchie" class="breadcrumb">
+		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider">
+		&gt; </span><a href="#GET{url_orig}"><:diogene:publier_titre_hierarchie:></a>[<span class="sep divider"> &gt; </span><strong class="on active">(#TITRE|couper{80})</strong>]
 	</p>
 	<div class="content-principal">
 		<div class="cartouche">
@@ -19,8 +19,8 @@
 	</div>
 </BOUCLE_autorise_utiliser>
 </B_autorise_utiliser>
-<div id="hierarchie">
-	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><:diogene:publier_titre_hierarchie:>
+<div id="hierarchie" class="breadcrumb">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><:diogene:publier_titre_hierarchie:>
 </div>
 <div class="content-principal">
 	<div class="cartouche">
@@ -55,8 +55,8 @@
 	[(#SET{contenu_attente,[(#GET{contenu_attente}|concat{[(#INCLURE{fond=[(#GET{fond})],id_diogene=#ID_DIOGENE,auteur_exclu=#SESSION{id_auteur},page,env,ajax}|trim)]})]})]]
 ]
 </BOUCLE_diogene_principaux>
-<div id="hierarchie">
-	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:diogene:publier_titre_hierarchie:></strong>
+<div id="hierarchie" class="breadcrumb">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><strong class="on active"><:diogene:publier_titre_hierarchie:></strong>
 </div>
 <div class="content-principal">
 	[(#GET{contenu}|ou{#GET{contenu_attente_vous}}|ou{#GET{contenu_attente}}|non)
