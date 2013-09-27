@@ -45,12 +45,13 @@ function responsive_logo($logo){
 	list($h,$w) = taille_image($img);
 	$src = extraire_attribut($img,"src");
 	$style = extraire_attribut($img,"style");
-	$style = "background:url($src) no-repeat center;background-size:100%;height:{$h}px;$style";
+	$style = "background:url($src) no-repeat center;background-size:100%;position:absolute;top:0;left:0;width:100%;height:100%;$style";
 	$class = extraire_attribut($img,"class");
 	$img = inserer_attribut($img,"src",$gif);
 	$img = inserer_attribut($img,"style",$style);
 	$img = inserer_attribut($img,"class","");
 
-	return "<span class='$class'>$img</span>";
+	$ratio = round($h*100/$w,2);
+	return "<span class='$class' style=\"width:{$w}px;max-width:100%;\"><span style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;\">$img</span></span>";
 }
 ?>
