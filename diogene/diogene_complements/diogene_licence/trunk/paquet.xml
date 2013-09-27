@@ -8,10 +8,10 @@
 >	
 
 	<nom>Diogene - Licence</nom>
-	<!-- Complément "licence" pour "Diogene" (utilise le plugin Licences) -->
 
 	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+	<copyright>2010-2013</copyright>
 
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_licence_pipelines.php" />
 	<pipeline nom="diogene_verifier" inclure="diogene_licence_pipelines.php" />
