@@ -5,13 +5,7 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer editer_hauteur_defaut_son [ (#ENV**{erreurs}|table_valeur{hauteur_defaut_son}|oui)erreur]">
-				<label><:mediaspip_player:label_hauteur_defaut_son:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{hauteur_defaut_son})</span>]
-				<p class="explication"><:mediaspip_player:explication_hauteur_defaut_son:></p>
-				<input type="text" name="hauteur_defaut_son" class="text" id="hauteur_defaut_son" value="#ENV{hauteur_defaut_son}" size="3" maxlength="3" />
-			</li>
-	    	<li class="editer editer_cookie_volume [ (#ENV**{erreurs}|table_valeur{cookie_volume}|oui)erreur]">
+			<li class="editer editer_cookie_volume [ (#ENV**{erreurs}|table_valeur{cookie_volume}|oui)erreur]">
 				<label><:mediaspip_player:label_cookie_volume:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{cookie_volume})</span>]
 				<p class="explication"><:mediaspip_player:explication_cookie_volume:></p>
@@ -38,19 +32,19 @@
 				</div>
 			</li>
 			<li class="editer editer_video_largeur_embed [ (#ENV**{erreurs}|table_valeur{video_largeur_embed}|oui)erreur]">
-				<label><:mediaspip_player:label_video_largeur_embed:></label>[
+				<label for="video_largeur_embed"><:mediaspip_player:label_video_largeur_embed:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{video_largeur_embed})</span>]
 				<p class="explication"><:mediaspip_player:explication_video_largeur_embed:></p>
 				<input type="text" name="video_largeur_embed" class="text" id="video_largeur_embed" value="#ENV{video_largeur_embed}" size="4" maxlength="4" />
 			</li>
 			<li class="editer editer_video_hauteur_embed [ (#ENV**{erreurs}|table_valeur{video_hauteur_embed}|oui)erreur]">
-				<label><:mediaspip_player:label_video_hauteur_embed:></label>[
+				<label for="video_hauteur_embed"><:mediaspip_player:label_video_hauteur_embed:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{video_hauteur_embed})</span>]
 				<p class="explication"><:mediaspip_player:explication_video_hauteur_embed:></p>
 				<input type="text" name="video_hauteur_embed" class="text" id="video_hauteur_embed" value="#ENV{video_hauteur_embed}" size="4" maxlength="4" />
 			</li>
 			<li class="editer editer_infos_embed [ (#ENV**{erreurs}|table_valeur{infos_embed}|oui)erreur]">
-				<label><:mediaspip_player:label_infos_embed:></label>[
+				<label for="infos_embed"><:mediaspip_player:label_infos_embed:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{infos_embed})</span>]
 				<p class="explication"><:mediaspip_player:explication_infos_embed:></p>
 				<input type="checkbox" name="infos_embed" id="infos_embed"[(#ENV{infos_embed}|=={on}|oui)checked="checked"] />
