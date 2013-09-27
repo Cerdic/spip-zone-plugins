@@ -15,7 +15,7 @@ function action_spipmotion_infos_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!intval($arg)){
-		spip_log("action_infos_video_dist incompris: " . $arg);
+		spip_log("action_spipmotion_infos_dist incompris: " . $arg);
 		return;
 	}
 	else{

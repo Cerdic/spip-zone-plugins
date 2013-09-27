@@ -2,8 +2,8 @@
 	On crée deux arrays pour compter les encodages par jour
 	=> troisième boucle
 ]
-
 #SET{class,row_odd}
+<BOUCLE_au_moins_un(FACD_CONVERSIONS){0,1}>
 <B_profils>
 #BOITE_OUVRIR
 <div class="liste-elements conversions">
@@ -148,3 +148,5 @@
 //--></script>
 #BOITE_FERMER
 </B_profils>
+</BOUCLE_au_moins_un>
+#FILTRE{trim}

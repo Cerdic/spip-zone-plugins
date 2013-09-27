@@ -70,7 +70,7 @@ function spipmotion_taches_generales_cron($taches_generales){
 function spipmotion_post_edition($flux){
 	if(isset($flux['args']['operation']) && in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))){
 		$id_document = isset($flux['args']['id_objet']) ? intval($flux['args']['id_objet']) : 0;
-		
+
 		/**
 		 * Si les metadatas/* on renvoyé un id_gis_meta, on l'associe au document
 		 */
@@ -82,7 +82,7 @@ function spipmotion_post_edition($flux){
 			 */
 			lier_gis(intval(_request('id_gis_meta')), 'document', $id_document);
 		}
-		
+
 		/**
 		 * Si on ajoute le document et que :
 		 * -* son extension est ogg
@@ -102,7 +102,7 @@ function spipmotion_post_edition($flux){
 		){
 			include_spip('inc/documents');
 			$rep_ogv = creer_repertoire_documents('ogv');
-			
+
 			$new_file = str_replace('.ogg','.ogv',basename($infos_doc['fichier']));
 			$renomme = rename(get_spip_doc($infos_doc['fichier']),$rep_ogv.$new_file);
 			if($renomme){
@@ -116,7 +116,7 @@ function spipmotion_post_edition($flux){
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette ni d'un document distant
 		 * ni ses infos.
 		 */
-		
+
 		if(($infos_doc['mode'] != 'vignette') && ($infos_doc['distant'] == 'non')){
 			if(!function_exists('lire_config'))
 				include_spip('inc/config');
@@ -194,7 +194,7 @@ function spipmotion_post_spipmotion_encodage($flux){
 					'tracknumber' => 0
 				);
 				$infos_origine = $recuperer_id3(get_spip_doc($origine['fichier']));
-				
+
 				if($extension_nouveau == 'mp3'){
 					$images = array();
 					foreach($infos_origine as $info_origine => $info){
@@ -252,10 +252,10 @@ function spipmotion_formulaire_verifier($flux){
 function spipmotion_formulaire_traiter($flux){
 	if($flux['args']['form'] == 'configurer_spipmotion'){
 		$valeurs = $_POST;
-	
+
 		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
 		$erreurs = $verifier_binaires($valeurs);
-		
+
 		if(!in_array('ffmpeg',$erreurs)){
 			/**
 			 * On récupère les informations du nouveau ffmpeg
@@ -263,7 +263,7 @@ function spipmotion_formulaire_traiter($flux){
 			$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 		}
-	
+
 		if(count($erreurs) > 0){
 			include_spip('inc/invalideur');
 			suivre_invalideur('1');
@@ -271,7 +271,6 @@ function spipmotion_formulaire_traiter($flux){
 	}
 	return $flux;
 }
-
 
 /**
  * Insertion dans le pipeline recuperer_fond (SPIP)
@@ -287,17 +286,14 @@ function spipmotion_recuperer_fond($flux){
 	if (!defined('_DIR_PLUGIN_GETID3') && $flux['args']['fond']=='modeles/document_desc'){
 		if(isset($flux['args']['contexte']['id_document']) && ($flux['args']['contexte']['id_document'] > 0)){
 			$media = sql_getfetsel("media", "spip_documents","id_document=".intval($flux['args']['contexte']['id_document']));
-			if(in_array($media,array('video','audio'))){
+			if(in_array($media,array('video','audio')))
 				$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/prive_infos_media', $flux['args']['contexte']);
-			}
 		}
 	}
-	if ($flux['args']['fond']=='prive/squelettes/contenu/facd'){
+	if ($flux['args']['fond']=='prive/squelettes/contenu/facd')
 		$flux['data']['texte'] .= recuperer_fond('prive/squelettes/inclure/file_stats', $flux['args']['contexte']);
-	}
-	if ($flux['args']['fond']=='prive/squelettes/navigation/facd'){
+	if ($flux['args']['fond']=='prive/squelettes/navigation/facd')
 		$flux['data']['texte'] .= recuperer_fond('prive/squelettes/navigation/spipmotion_file', $flux['args']['contexte']);
-	}
 	return $flux;
 }
 
