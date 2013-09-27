@@ -300,8 +300,7 @@
 			});
 
 			$('[#(#ENV{id_formulaire,fileupload}) ]#swfupload_messages,[#(#ENV{id_formulaire,fileupload}) ]#divSWFUploadUI').detach();
-			$('[#(#ENV{id_formulaire,fileupload}) ].fileinput-button span,.btn').button();
-			
+			$('.btn').button();
 			$(window).unload(function(){
 				$('[#(#ENV{id_formulaire,fileupload})]').fileupload('destroy');
 			});
@@ -332,9 +331,8 @@
 		[<input type="hidden" name="id_document" value="(#ENV{id_document})" />]
 		[<input type="hidden" name="action_document" value="(#ENV{action_document})" />]
         <div class="fileupload-buttonbar ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-            <div class="btn btn-success fileinput-button" id="fileinput-button">
-            	<i class="icon-plus icon-white"></i>
-                [<span>(#ENV{legende_upload,[(#ENV{file_upload_limite,1}|is_numeric|?{#ENV{file_upload_limite,1}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>},<:emballe_medias:legend_mise_en_ligne_multiple:>})]})</span>]
+            <div class="fileinput-button" id="fileinput-button">
+                [<span class="btn btn-success"><i class="icon-plus icon-white"></i>(#ENV{legende_upload,[(#ENV{file_upload_limite,1}|is_numeric|?{#ENV{file_upload_limite,1}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>},<:emballe_medias:legend_mise_en_ligne_multiple:>})]})</span>]
                 <input type="file" name="files[]" id="fileupload_input" multiple>
             </div>
             <button type="submit" class="btn btn-primary start" style="display:none">Start upload</button>
