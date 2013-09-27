@@ -133,6 +133,7 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'paniers_disponibles' => 'Paniers disponibles',
 	'paniers_disposition' => 'IL y a @nb@ paniers à disposition',
 	'paniers_distribuer' => 'paniers à distribuer',
+	'pas_article_agenda' => 'Vous n’avez pas créé d’article avec l’agenda.',
 	'pas_connecte_ou_reconnu' => 'Vous n’êtes pas connecté ou vous n’avez pas été reconnu.',
 	'pas_date_distributions' => 'Pas de date de distribution renseignée.',
 	'pas_paniers' => 'Vous ne disposez d’aucun panier durant cette saison. En effet, aucun contrat vous concernant n’est actuellement en cours',
