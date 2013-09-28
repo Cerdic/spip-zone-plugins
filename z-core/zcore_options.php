@@ -39,9 +39,13 @@ else {
 function responsive_logo($logo){
 	// gif transparent 1px
 	// http://proger.i-forge.net/The_smallest_transparent_pixel/eBQ
-	$gif = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
-	include_spip('inc/filtres');
-	$img = extraire_balise($logo,"img");
+	static $gif = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+
+	if (!function_exists('extraire_balise'))
+		include_spip('inc/filtres');
+	if (!$logo
+	  OR !$img = extraire_balise($logo,"img"))
+		return $logo;
 	list($h,$w) = taille_image($img);
 	$src = extraire_attribut($img,"src");
 	$style = extraire_attribut($img,"style");
@@ -52,6 +56,6 @@ function responsive_logo($logo){
 	$img = inserer_attribut($img,"class","");
 
 	$ratio = round($h*100/$w,2);
-	return "<span class='$class' style=\"width:{$w}px;max-width:100%;\"><span style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;\">$img</span></span>";
+	return "<span class='$class' style=\"width:{$w}px;\"><span style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;\">$img</span></span>";
 }
 ?>
