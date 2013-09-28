@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function lazyload_insert_head($flux){
 	if (function_exists('lire_config')) {
 		
