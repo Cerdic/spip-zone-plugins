@@ -93,6 +93,7 @@
   padding: 0px;
   margin: 0px;
   text-align: left;
+  background: none;
   transition: background-color 200ms linear 0s;
 }
 .menu_container > ul > li > a {
@@ -166,6 +167,8 @@
 }
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li {
   display: block;
+  background: none;
+  padding: 0;
 }
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li > a {
   background: transparent;
