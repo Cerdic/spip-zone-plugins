@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function jaz_post_insertion($flux)
 {
 	if ($flux['args']['table'] == 'spip_auteurs'
-		and $id_auteur = $flux['args']['id_auteur'])
+		and $id_auteur = $flux['args']['id_objet'])
 	{
 		// On ajoute cet auteur aux zones
 		jaz_ajouter_auteur_zones($id_auteur);
@@ -47,7 +47,7 @@ function jaz_ajouter_auteur_zones($id_auteur)
 		$zones = explode(':', _ZONES_AUTO_JOINTES);
 	} else {
 		include_spip('inc/config');
-		$zones = explode(',', lire_config('jaz/zones_automatiques'));
+		$zones = lire_config('jaz/zones_automatiques');
 	}
 
 	if ($zones) {

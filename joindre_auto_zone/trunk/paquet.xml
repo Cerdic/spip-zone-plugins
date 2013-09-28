@@ -2,7 +2,7 @@
 	prefix="jaz"
 	categorie="divers"
 	version="2.0.0"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/jaz-48.png"
 	documentation="http://www.spip-contrib.net/Plugin-JAZ"
