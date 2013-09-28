@@ -591,7 +591,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Neaktívny nástroj',
 	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Penknife tools.',
-	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ nástroj',
 	'outil_nbs' => '@pipe@: @nb@ nástrojov',
 	'outil_permuter' => 'Switch the tool: « @text@ » ?',

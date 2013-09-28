@@ -638,7 +638,7 @@ Published objects but hidden from the editorial content :
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Inactive tool',
 	'outil_intro' => 'This page lists the functionalities provided by the plugin.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Swiss Army Knife tools.',
-	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\\\'./?exec=admin_couteau_suisse\\\'>the new interface</a>, please let us know in the forum of <a href=\\\'http://www.spip-contrib.net/?article2166\\\'>contrib.spip</a>.',
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://www.spip-contrib.net/?article2166\'>contrib.spip</a>.',
 	'outil_nb' => '@pipe@: @nb@ tool',
 	'outil_nbs' => '@pipe@: @nb@ tools',
 	'outil_permuter' => 'Switch the tool: « @text@ » ?',

@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Plugins inactifs',
 	'plugin_xml' => 'Réunit en un seul plugin une liste de petites fonctionnalités nouvelles et utiles améliorant la gestion de ton site SPIP.
 
-Chacun de ces outils peut être activé ou non par l’utilisateur sur [la page d’administration du plugin->./ ?exec=admin_couteau_suisse] et gérer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l’onglet {{Le Couteau Suisse}}.
+Chacun de ces outils peut être activé ou non par l’utilisateur sur [la page d’administration du plugin->./?exec=admin_couteau_suisse] et gérer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l’onglet {{Le Couteau Suisse}}.
 
 Les catégories disponibles sont : Administration, Sécurité, Interface privée, Améliorations des textes, Raccourcis typographiques, Affichage public, Balises, filtres, critères.
 

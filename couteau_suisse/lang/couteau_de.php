@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Inaktive Plugins',
 	'plugin_xml' => 'Zusammengefasst in einem einzigen Plug-in, einige kleine, neue und nützliche Zusatzfunktionen, mit denen sie ihre SPIP-Website besser verwalten können.
 
-Jedes dieser Werkzeuge kann vom Administrator auf der [Seite zur Verwaltung des Plug-ins->./ ?exec=admin_couteau_suisse] aktiviert oder abgeschaltet werden, und eine gewisse Anzahl von Variablen verwalten: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann den Reiter {{Schweizer Taschenmesser}} bzw. {{Le Couteau Suisse}}.
+Jedes dieser Werkzeuge kann vom Administrator auf der [Seite zur Verwaltung des Plug-ins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet werden, und eine gewisse Anzahl von Variablen verwalten: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann den Reiter {{Schweizer Taschenmesser}} bzw. {{Le Couteau Suisse}}.
 
 Die verfügbaren Kategorien sind: Verwaltung, Sicherheit, privates Interface, typografische Verbesserung, typografische Abkürzungen, Anzeigeoptionen, SPIP-Tags, Filter, Kriterien.
 
