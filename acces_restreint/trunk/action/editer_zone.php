@@ -120,16 +120,18 @@ function zone_modifier ($id_zone, $set=null) {
 
 
 /**
- * Mettre a jour les liens objets/zones.
- * si zones vaut '', associe toutes les zones a(aux) objets(s).
- * $ids est une liste d'id.
- * $type est le type de l'objet (rubrique, auteur).
- * $operation = add/set/del pour ajouter, affecter uniquement, ou supprimer les objets listes dans ids.
- *
- * @param int|array $zones
+ * Mettre à jour les liens objets/zones.
+ * 
+ * @param int|array|string $zones
+ *     Identifiant ou liste d'identifiants zones à affecter.
+ *     Si zones vaut '', associe toutes les zones a(aux) objets(s).
  * @param string $type
+ *     Type d'objet (rubrique, auteur).
  * @param int|array $ids
+ *     Identifiant ou liste d'identifiants de l'objet
  * @param string $operation
+ *     Action à effectuer parmi `add`, `set` ou `del` pour ajouter, affecter uniquement,
+ *     ou supprimer les objets listés dans ids.
  */
 function zone_lier($zones,$type,$ids,$operation = 'add'){
 	include_spip('inc/autoriser');
