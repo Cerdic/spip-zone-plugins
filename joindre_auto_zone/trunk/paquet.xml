@@ -4,7 +4,7 @@
 	version="2.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="img/jaz-48.png"
+	logo="prive/themes/spip/images/jaz-48.png"
 	documentation="http://www.spip-contrib.net/Plugin-JAZ"
 >
 	<nom>JAZ</nom>
@@ -14,6 +14,6 @@
 	<licence>&copy;2012 GPL v3</licence>
 
 	<pipeline nom="formulaire_traiter" inclure="jaz_pipelines.php" />
-	<necessite nom="accesrestreint" compatibilite="[3.0.0;]" />
-	<utilise nom="polyhierarchie" compatibilite="[1.0.0;]" />
+	<necessite nom="accesrestreint" compatibilite="[3.8.0;]" />
+	<utilise nom="polyhierarchie" compatibilite="[3.0.0;]" />
 </paquet>
