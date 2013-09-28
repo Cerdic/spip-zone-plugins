@@ -13,7 +13,7 @@
 
 	<licence>&copy;2012 GPL v3</licence>
 
-	<pipeline nom="formulaire_traiter" inclure="jaz_pipelines.php" />
+	<pipeline nom="post_insertion" inclure="jaz_pipelines.php" />
 
 	<necessite nom="accesrestreint" compatibilite="[3.8.0;]" />
 	<necessite nom="saisies" compatibilite="[1.35.0;]" />
