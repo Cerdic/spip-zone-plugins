@@ -15,6 +15,6 @@ _ Ic&ocirc;ne de www.iconshock.com
 		<nom>insert_head</nom>
 		<inclure>lazyload_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
