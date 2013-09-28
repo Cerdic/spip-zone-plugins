@@ -5,6 +5,12 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+	[(#VAL{_ZONES_AUTO_JOINTES}|defined|oui)
+		[(#BOITE_OUVRIR{'','notice'})]
+			<:jaz:cfg_define_zones_automatiques:>
+		#BOITE_FERMER
+	]
+
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
