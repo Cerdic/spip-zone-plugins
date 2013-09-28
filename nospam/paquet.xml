@@ -1,7 +1,7 @@
 <paquet
 	prefix="nospam"
 	categorie="performance"
-	version="1.5.4"
+	version="1.5.5"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="images/nospam-32.png"

@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_attributs_html_interdits' => 'Il n’est pas permis d’utiliser les attributs html <tt>class</tt> ou <tt>style</tt>',
+	'erreur_attributs_html_interdits' => 'Il n’est pas permis d’insérer des images ni d’utiliser les attributs html <tt>class</tt> ou <tt>style</tt>',
 	'erreur_blacklist' => 'Vous avez été mis sur liste noire, vous ne pouvez plus poster de message.',
 	'erreur_jeton' => 'Impossible de prendre en compte votre message. Merci de le soumettre à nouveau !',
 	'erreur_spam' => 'Impossible de prendre en compte votre message !',

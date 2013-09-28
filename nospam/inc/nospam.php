@@ -139,7 +139,7 @@ function analyser_spams($texte) {
 	// soyons donc mefiant
 	// (mais en enlevant le base64 !)
 	$texte_humain = str_replace('class="base64"','',$texte_humain);
-	$hidden = ",\s(?:style|class)\s*=[^>]+>,UimsS";
+	$hidden = ",(<(img|object)|\s(?:style|class)\s*=[^>]+>),UimsS";
 	if (preg_match($hidden,$texte_humain)) {
 		// suspicion de spam
 		$infos['contenu_cache'] = true;
