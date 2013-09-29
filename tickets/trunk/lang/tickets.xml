@@ -1,20 +1,19 @@
 <traduction module="tickets" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="225" traduits="129" relire="0" modifs="1" nouveaux="95" pourcent="57.33">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="219" traduits="129" relire="0" modifs="1" nouveaux="89" pourcent="58.90">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="225" traduits="219" relire="0" modifs="0" nouveaux="6" pourcent="97.33">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="219" traduits="219" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=es" total="225" traduits="219" relire="0" modifs="0" nouveaux="6" pourcent="97.33">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=es" total="219" traduits="219" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="225" traduits="219" relire="0" modifs="0" nouveaux="6" pourcent="97.33">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="219" traduits="219" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=sk" total="225" traduits="219" relire="0" modifs="0" nouveaux="6" pourcent="97.33">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=sk" total="219" traduits="219" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
