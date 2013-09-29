@@ -39,17 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deja_defini_suite' => 'Le plugin « Autorité » ne peut pas les modifier certains des réglages ci-dessous risquent par conséquent de ne pas fonctionner.
 	<br />Pour régler ce problème, vous devrez vérifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a défini ces fonctions.',
 	'descriptif_1' => 'Cette page de configuration est réservée aux webmestres du site :',
-	'descriptif_2' => '
-<p>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le créer le cas échéant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</p>
-<pre>&lt; ?php
-  define (
-  ’_ID_WEBMESTRES’,
-  ’1:5:8’) ;
- ?&gt;</pre>
+	'descriptif_2' => '<p>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le créer le cas échéant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</p>
+<pre><?php
+  define(\'_ID_WEBMESTRES\',\'1:5:8\');
+ ?></pre>
 <p>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre à un administrateur via la page d’édition de l’auteur.</p>
 <p>A noter : les webmestres définis de cette manière n’ont plus besoin de procéder à l’authentification par FTP pour les opérations délicates (mise à niveau de la base de données, par exemple).</p>
 
-<a href=’http://www.spip-contrib.net/-Autorite-’ class=’spip_out’>Cf. documentation</a>
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>
 ',
 	'details_option_auteur' => '<small><br />Pour le moment, l’option « auteur » ne fonctionne que pour les auteurs enregistrés (forums sur abonnement, par exemple). Et, si elle est activée, les administrateurs du site ont aussi la capacité d’éditer les forums.
 	</small>',

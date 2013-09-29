@@ -16,7 +16,6 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="78" traduits="3" relire="0" modifs="51" nouveaux="24" pourcent="3.85">
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />

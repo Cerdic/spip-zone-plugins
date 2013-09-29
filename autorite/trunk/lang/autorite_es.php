@@ -42,15 +42,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<br />Para corregir este problema, deberá verificar si el archivo <tt>mes_options.php</tt> (o algún otro plugin activo) ha definido estas funciones.',
 	'descriptif_1' => 'Esta página de configuración está reservada a los webmasters del sitio :',
 	'descriptif_2' => '<p>Si desea modificar esta lista, edite el archivo <tt>config/mes_options.php</tt> (o crearlo en dado caso) e indicar la lista de los nombres de usuario de los autores webmasters, de la siguiente forma :</p>
-<pre>&lt;?php
-  define (
-  ’_ID_WEBMESTRES’,
-  ’1:5:8’);
-?&gt;</pre>
+<pre><?php
+  define(\'_ID_WEBMESTRES\',\'1:5:8\');
+?></pre>
 <p>A partir de SPIP 2.1, también es  posible dar derechos de webmestre a un administrador en la página de edición del autor.</p>
 <p>Nota : los webmasters definidos de esta manera ya no tienen necesidad de proceder a la autentificación FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
 
-<a href=’http://www.spip-contrib.net/-Autorite-’ class=’spip_out’>Documentación</a>
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Documentación</a>
 ',
 	'details_option_auteur' => '<small><br />Por el momento, la opctión « autor » sólo funciona para los autores registrados (foros con suscripción, por ejemplo). Y, si está  activada, los administradores del sitio también tienen la capacidad de editar los foros.
 	</small>',

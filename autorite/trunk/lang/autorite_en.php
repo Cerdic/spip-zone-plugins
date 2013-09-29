@@ -43,14 +43,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_1' => 'This setup page is reserved for the webmaster of the site:',
 	'descriptif_2' => '<hr />
 <p><small>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it needed) and indicate the list of identifiers of webmasters, as follows:</small></p>
-<html><pre>&lt;?php
-  define (’_ID_WEBMESTRES’,
-  ’1:5:8’);
-?&gt;</pre></html>
+<pre><?php
+  define(\'_ID_WEBMESTRES\',\'1:5:8\') ;
+ ?></pre>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
-<a href=’http://www.spip-contrib.net/-Autorite-’ class=’spip_out’>Cf. documentation</a>
-',
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>',
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',
