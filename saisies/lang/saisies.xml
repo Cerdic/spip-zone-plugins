@@ -1,33 +1,32 @@
 <traduction module="saisies" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/lang/" reference="fr">
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="152" traduits="86" relire="0" modifs="8" nouveaux="58" pourcent="56.58">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="154" traduits="86" relire="0" modifs="8" nouveaux="60" pourcent="55.84">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="152" traduits="144" relire="0" modifs="1" nouveaux="7" pourcent="94.74">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="154" traduits="143" relire="0" modifs="2" nouveaux="9" pourcent="92.86">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="152" traduits="149" relire="0" modifs="0" nouveaux="3" pourcent="98.03">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="154" traduits="148" relire="0" modifs="1" nouveaux="5" pourcent="96.10">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=es" total="152" traduits="152" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=es" total="154" traduits="151" relire="0" modifs="1" nouveaux="2" pourcent="98.05">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fa" total="152" traduits="109" relire="0" modifs="1" nouveaux="42" pourcent="71.71">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fa" total="154" traduits="108" relire="0" modifs="2" nouveaux="44" pourcent="70.13">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr" total="152" traduits="152" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr" total="154" traduits="154" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="152" traduits="109" relire="0" modifs="1" nouveaux="42" pourcent="71.71">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="154" traduits="108" relire="0" modifs="2" nouveaux="44" pourcent="70.13">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="152" traduits="141" relire="0" modifs="1" nouveaux="10" pourcent="92.76">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="154" traduits="140" relire="0" modifs="2" nouveaux="12" pourcent="90.91">
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="152" traduits="143" relire="0" modifs="1" nouveaux="8" pourcent="94.08">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="154" traduits="142" relire="0" modifs="2" nouveaux="10" pourcent="92.21">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="152" traduits="149" relire="0" modifs="0" nouveaux="3" pourcent="98.03">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="154" traduits="148" relire="0" modifs="1" nouveaux="5" pourcent="96.10">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
