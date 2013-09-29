@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_geo_description' => 'Ajoute la possibilité de sélectionner une position géogrphique d\'un objet depuis son formulaire d\'édition si cette option est activés dans le masque de formulaire de Diogène',
+	'diogene_geo_description' => 'Ajoute la possibilité de sélectionner une position géogrphique d’un objet depuis son formulaire d’édition si cette option est activés dans le masque de formulaire de Diogène',
 	'diogene_geo_nom' => 'Diogène - Géo',
 	'diogene_geo_slogan' => 'Complément géographique pour "Diogène"'
 );

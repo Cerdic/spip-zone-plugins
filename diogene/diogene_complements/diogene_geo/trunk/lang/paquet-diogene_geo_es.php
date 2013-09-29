@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_geo_description' => 'Complemento geográfico para "Diógenes"',
-	'diogene_geo_nom' => 'Diógenes - Geo',
-	'diogene_geo_slogan' => 'Complemento geográfico para "Diógenes"'
+	'diogene_geo_description' => 'Complemento geográfico para "Diógenes"', # MODIF
+	'diogene_geo_nom' => 'Diógenes - Geo', # MODIF
+	'diogene_geo_slogan' => 'Complemento geográfico para "Diógenes"' # MODIF
 );
 
 ?>
