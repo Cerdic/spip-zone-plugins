@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Добавьте код в шаблон для того чтобы отобразить виджет :
 _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
  или
-<code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=’Suivez twitter’,subject=’SPIP’}</code>
+<code>#INCLURE{fond=inclure/twidget_search,search=#SPIP,title=\'Suivez twitter\',subject=\'SPIP\'}</code>
 
 Плагин работает по принципу прокси, таким образом, посетители не делают никаких запросов, и проследить их активность становится невозможным.', # MODIF
 	'twidget_slogan' => 'Виджет Twitter легко установить '
