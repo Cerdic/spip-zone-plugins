@@ -8,7 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bouton_actualiser_boussoles' => 'Actualizovať kompasy',
 	'bouton_boussole' => 'Kompas',
+	'bouton_retirer_boussole' => 'Odstrániť kompas',
+	'bouton_retirer_serveur' => 'Odstrániť server',
 	'bouton_supprimer' => 'Odstrániť',
 	'bulle_afficher' => 'Zobraziť v šablónach',
 	'bulle_aller_site' => 'Prejsť na odkazovanú stránku',
@@ -18,8 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'colonne_alias' => 'Prezývka',
+	'colonne_description_cache' => 'Opis',
+	'colonne_fichier_cache' => 'Cache',
 	'colonne_nbr_sites' => 'Obsahuje',
+	'colonne_prefixe_plugin' => 'Zásuvný modul ?',
+	'colonne_serveur' => 'Server',
 	'colonne_titre' => 'Nadpis',
+	'colonne_url' => 'URL',
 	'colonne_version' => 'Verzia',
 
 	// D
@@ -31,6 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
+	'info_boussole_manuelle' => 'Príručka ku Kompasu',
+	'info_cache_boussole' => 'Cache kompasu "@boussole@"',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
@@ -41,11 +51,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_boussole' => '@nb@ kompas',
 	'label_1_site' => '@nb@ stránka',
 	'label_a_class' => 'Trieda so záložkou (kotvou) loga',
+	'label_activite_serveur' => 'Aktivovať funkciu server ?',
 	'label_actualise_le' => 'Aktualizovaný',
 	'label_affiche' => 'Zobrazí sa?',
 	'label_afficher_descriptif' => 'Zobraziť opisy stránok?',
 	'label_afficher_lien_accueil' => 'Zobraziť odkaz na úvodnú stránku?',
 	'label_afficher_slogan' => 'Zobraziť slogany stránok?',
+	'label_alias_boussole' => 'Prezývka kompasu',
 	'label_ariane_separateur' => 'Oddeľovač:',
 	'label_boussole' => 'Kompas, ktorý sa má zobraziť',
 	'label_cartouche_boussole' => 'Zobraziť rám kompasu?',
@@ -59,11 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_max_articles' => 'Maximálny počet zobrazených článkov na stránku',
 	'label_max_sites' => 'Maximálny počet stránok',
 	'label_mode' => 'Vyberte si kompas',
-	'label_mode_standard' => '"@boussole@", oficiálny kompas stránok SPIPu', # MODIF
+	'label_mode_standard' => '"@boussole@", oficiálny kompas stránok SPIPu',
 	'label_modele' => 'Spôsob zobrazenia',
 	'label_n_boussoles' => '@nb@ kompasov',
 	'label_n_sites' => '@nb@ stránok',
 	'label_nom' => 'Názov',
+	'label_nom_serveur' => 'Názov servera',
 	'label_p_class' => 'Trieda odseku pri opise',
 	'label_sepia' => 'Kód sépiovej farby (sans #)',
 	'label_slogan' => 'Slogan',
@@ -78,14 +91,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_description' => 'Opis zobrazený vedľa loga',
 	'label_ul_class' => 'Trieda tagu ul v zozname',
 	'label_url' => 'URL',
+	'label_url_serveur' => 'URL servera',
 	'label_version' => 'Verzia',
 
 	// M
-	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"', # MODIF
+	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
 	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy
-(tabuľka @table@)', # MODIF
-	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.', # MODIF
-	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.', # MODIF
+(tabuľka @table@).',
+	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
+	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.',
+	'message_ok_serveur_ajoute' => 'Server "@serveur@" bol pridaný (@url@).',
 	'modele_boussole_liste_avec_logo' => 'Zoznam odkazov s názvami, logami a opisom',
 	'modele_boussole_liste_par_groupe' => 'Zoznam textových odkazov podľa skupiny',
 	'modele_boussole_liste_simple' => 'Jednoduchý zoznam textových odkazov',
@@ -93,6 +108,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_boussole_panorama_sepia' => 'Galéria log s efektom sépia',
 
 	// O
+	'onglet_client' => 'Funkcia Klient',
+	'onglet_configuration' => 'Nastavenia zásuvného modulu',
+	'onglet_serveur' => 'Funkcia Server',
 	'option_aucune_description' => 'Žiaden opis',
 	'option_descriptif_site' => 'Opis stránky',
 	'option_nom_site' => 'Názov stránky',
@@ -104,9 +122,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_infos_boussole' => 'KOMPAS PREZÝVKY',
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
+	'titre_form_ajouter_serveur' => 'Pridať server kompasov',
+	'titre_form_configurer_serveur' => 'Nastaviť funkciu server',
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
-	'titre_liste_boussoles' => 'Zoznam dostupných kompasov', # MODIF
-	'titre_page_boussole' => 'Riadenie kompasov'
+	'titre_liste_boussoles' => 'Zoznam dostupných kompasov',
+	'titre_liste_serveurs' => 'Zoznam prístupných serverov zo stránky',
+	'titre_page_boussole' => 'Riadenie kompasov',
+	'titre_page_configurer' => 'Nastavenia zásuvného modulu Kompas'
 );
 
 ?>

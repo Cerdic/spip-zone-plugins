@@ -1,9 +1,16 @@
 <traduction module="boussole" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole/trunk/lang/" reference="fr">
-	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=es" total="228" traduits="130" relire="0" modifs="0" nouveaux="98" pourcent="57.02">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=en" total="130" traduits="95" relire="0" modifs="18" nouveaux="17" pourcent="73.08">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=es" total="130" traduits="130" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=fr" total="228" traduits="130" relire="0" modifs="0" nouveaux="98" pourcent="57.02">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=fr" total="130" traduits="130" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=sk" total="130" traduits="106" relire="0" modifs="0" nouveaux="24" pourcent="81.54">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
