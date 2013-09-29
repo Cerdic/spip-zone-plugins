@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_trad' => 'Prekladateľská zóna privíta všetkých, ktorí chcú pomôcť používateľom SPIPu  prekladom samotného SPIPu a jeho rôznych rozšírení.',
 	'descriptif_site_spip_twit' => 'SPIP.ORG umožňuje používateľom posielať na internet krátke správy (maximálne 140 znakov) na verejne prístupnú stránku alebo ich priateľom. Správy sa dajú uverejniť cez internetovú stránku, kanál RSS alebo odkazovač.',
 	'descriptif_site_spip_user' => 'SPIP@REZO.net je diskusná skupina na vzájomnú pomoc používateľov SPIPu. Archívy tejto diskusnej skupiny sú dostupné na http://archives.rezo.net/archives/spip.mbox/ alebo dokonca v podobe blogu na http://blog.gmane.org/gmane.comp.web.spip.user.',
-	'descriptif_site_spip_video' => 'Opis stránky Videá',
+	'descriptif_site_spip_video' => 'Opis stránky Videá', # MODIF
 	'descriptif_site_spip_zine' => 'Opis stránky SPIPZine',
 	'descriptif_site_spip_zone' => 'Vývojová zóna, ktorá sa riadi chartou ZONE.SPIP.org, poskytuje prístup k verziám všetkých doplnkov k SPIPu (zásuvné moduly, šablóny, farebné motívy, modely, nástroje, a i.).',
 

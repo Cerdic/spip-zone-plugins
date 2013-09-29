@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_trad' => 'The translator space welcome those who want to help the SPIP user community by participating to translation work of SPIP itself and its miscellaneous contributions',
 	'descriptif_site_spip_twit' => 'SPIP.ORG allows to users to publish short messages on the web (140 character maximum) to public or friends. he publishing can be done on the website, RSS feed or instant messaging programmes.',
 	'descriptif_site_spip_user' => 'SPIP@REZO.net is a helping list of SPIP users. The archives of this list can be consulted on http://archives.rezo.net/archives/spip.mbox/ or, even on the blog http://blog.gmane.org/gmane.comp.web.spip.user.',
-	'descriptif_site_spip_video' => 'Video website description',
+	'descriptif_site_spip_video' => 'Video website description', # MODIF
 	'descriptif_site_spip_zine' => 'SPIPZine website description',
 	'descriptif_site_spip_zone' => 'Development area ruled by a chart, ZONE.SPIP.org give access to all contributions versioning (plugins, skeletons, themes, models, tools,...).',
 
