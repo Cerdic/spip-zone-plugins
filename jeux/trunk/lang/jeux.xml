@@ -1,12 +1,11 @@
 <traduction module="jeux" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/jeux/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="81" traduits="29" relire="0" modifs="32" nouveaux="20" pourcent="35.80">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=de" total="79" traduits="29" relire="0" modifs="32" nouveaux="18" pourcent="36.71">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="81" traduits="65" relire="0" modifs="14" nouveaux="2" pourcent="80.25">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="79" traduits="65" relire="0" modifs="14" nouveaux="0" pourcent="82.28">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="81" traduits="79" relire="0" modifs="0" nouveaux="2" pourcent="97.53">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="81" traduits="33" relire="0" modifs="38" nouveaux="10" pourcent="40.74">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="79" traduits="33" relire="0" modifs="38" nouveaux="8" pourcent="41.77">
 	</langue>
 </traduction>
