@@ -3,7 +3,7 @@
 	<slogan>Des boucles sur n'importe quoi !</slogan>
 	<auteur>Fil, Marcimat</auteur>
 	<licence>&#169; 2010-2011 GNU/GPL</licence>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description>Les it&#233;rateurs sont une fonctionnalit&#233; de SPIP 3. Ils permettent de faire des boucles non plus seulement sur des articles et autres objets de la base de donn&#233;es SQL de SPIP, mais sur n'importe quoi : fichiers, tableaux de donn&#233;es, webservices, etc.
 
