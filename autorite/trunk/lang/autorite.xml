@@ -1,6 +1,7 @@
 <traduction module="autorite" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/autorite/trunk/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=ar" total="78" traduits="77" relire="0" modifs="1" nouveaux="0" pourcent="98.72">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
@@ -8,6 +9,7 @@
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
@@ -22,5 +24,6 @@
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=sk" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 </traduction>
