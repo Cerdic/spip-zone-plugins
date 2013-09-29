@@ -49,7 +49,7 @@ Chaque modèle peut recevoir une liste d’options, dont certaines sont nécessa
 Le plugin propose également un modèle générant des informations {{Open Graph}}, les metas informations utilisées par Facebook, propres à chaque objet SPIP. Pour l’utiliser, vous devez ajouter manuellement en en-tête de vos squelettes le modèle "{{insert_head_og}}".
 
 {{Attention - }}Ce modèle nécessite de recevoir l’environnement courant, vous devez donc l’inclure dans chacun des squelettes de pages ({"article.html", "rubrique.html" ...}) et non dans l’inclusion globale en en-tête ({"inc_head.html"}) en indiquant : 
-<cadre class=’spip’>
+<cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
 </cadre>
 ',

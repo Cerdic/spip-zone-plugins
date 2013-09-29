@@ -51,10 +51,10 @@ Každá šablóna môže mať niekoľko nastavení, z ktorých niektoré sú po
 Zásuvný modul ponúka aj informácie súvisiace s vytvorením šablóny {{Open Graph}}, meta dáta, ktoré využíva Facebook, samostatne pre každý objekt SPIPu. Na to, aby ste túto funkciu mohli využívať, musíte do hlavičky svojich šablón manuálne pridať šablónu  "{{insert_head_og}}".
 
 {{Pozor}} – táto šablóna si vyžaduje aktuálne prostredie, musíte ju vložiť do šablóny každej stránky  ({"article.html", "rubrique.html" ...}) a nielen do globálnej hlavičky ({"inc_head.html"}), a to takto: 
-<cadre class=’spip’>
+<cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
 </cadre>
-',
+', # MODIF
 
 	// E
 	'exemple' => '{{{Príklad}}}

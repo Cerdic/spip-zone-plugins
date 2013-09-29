@@ -51,9 +51,9 @@ Each model has a list of options, some of which are necessary for its display. F
 The plugin also provides a {{Open Graph}} model generating information, the meta information used by Facebook, specific to each object SPIP. To use it, you must manually "{{insert_head_og}}" add in the header of your skeleton model.
 
 {{Warning -}} This model needs to receive the current environment, you must include in each of the pages skeletons  ({"article.html", "rubrique.html" ...}) and not in the global header inclusion ({"inc_head.html"}) :
-<cadre class=’spip’>
+<cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
-</cadre>',
+</cadre>', # MODIF
 
 	// E
 	'exemple' => '{{{Exemple}}}
