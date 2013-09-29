@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_attributs_html_interdits' => 'Nie je povolené používať atribúty html <tt>class</tt> alebo <tt>style</tt>',
+	'erreur_attributs_html_interdits' => 'Nie je povolené používať atribúty html <tt>class</tt> alebo <tt>style</tt>', # MODIF
 	'erreur_blacklist' => 'Zaradili vás na čiernu listinu, nemôžete posielať správy.',
 	'erreur_jeton' => 'Vaša správa sa nedá posúdiť. Ďakujeme vám, že ju pošlete znova.',
 	'erreur_spam' => 'Vaša správa sa nedá posúdiť.',
