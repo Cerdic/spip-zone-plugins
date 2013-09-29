@@ -271,7 +271,7 @@ function calcul_prevision_visites() {
 		
 		if ($tps_file < $date_init) {
 			# lire fichier tmp/visites
-			acj_compte_fichier_visite($item,
+			compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
 
 			if (--$compteur <= 0)
