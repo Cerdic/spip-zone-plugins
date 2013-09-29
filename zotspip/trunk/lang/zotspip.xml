@@ -1,13 +1,13 @@
 <traduction module="zotspip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/zotspip/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=en" total="128" traduits="125" relire="0" modifs="0" nouveaux="3" pourcent="97.66">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=en" total="125" traduits="125" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Joseph" lien="http://trad.spip.net/auteur/joseph-larmarange" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=es" total="128" traduits="122" relire="0" modifs="1" nouveaux="5" pourcent="95.31">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=es" total="125" traduits="122" relire="0" modifs="1" nouveaux="2" pourcent="97.60">
 		<traducteur nom="agnesg63" lien="http://trad.spip.net/auteur/agnesg63" />
 		<traducteur nom="Joseph" lien="http://trad.spip.net/auteur/joseph-larmarange" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=fr" total="128" traduits="125" relire="0" modifs="0" nouveaux="3" pourcent="97.66">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/zotspip?lang_cible=fr" total="125" traduits="125" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
