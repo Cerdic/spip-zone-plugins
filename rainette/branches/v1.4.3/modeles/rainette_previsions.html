@@ -1,0 +1,7 @@
+[(#REM) <!-- Afficher les prévisions meteo 
+	pour le code #ENV{code}
+	le type 24h (affichage de 24h) ou x_jours (affichage de x jours)
+	le nombre de jours #ENV{jours} 
+	avec le sous-modele #ENV{modele}
+ -->]
+[(#ENV{code}|rainette_croaaaaa_previsions{#ENV{type, x_jours}, #ENV{jour,3}, #ENV{sous_modele,previsions_jour}})]
