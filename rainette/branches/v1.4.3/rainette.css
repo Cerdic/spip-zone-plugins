@@ -16,45 +16,50 @@
 /* CONDITIONS: Styles utilises par le modele rainette_conditions */
 .rainette_conditions {
 	float: left;
-	width: 400px;
+	width: 36em;
 	background: #fcfcfc;
-	border: 2px solid #dddddd;
-	margin: 5px 0 20px 0;
-	padding:0 0 5px 0;}
-.rainette_conditions .statut {float: left; width: 260px;}
+	border: 0.15em solid #dddddd;
+	margin: 0.5em 0 2em 0;
+	padding:0 0 0.5em 0;}
+.rainette_conditions .statut {float: left; width: 21em;}
 .rainette_conditions .cadre {
 	float: left;
-	width: 234px;
-	border: 1px solid #dddddd;
+	width: 19em;
+	border: 0.1em solid #dddddd;
 	background: #ffffff;
-	margin: 11px 0 0 11px;
-	padding:0 0 5px 0;}
-.rainette_conditions .icone {float: left; margin: 3px 0 -5px 7px;}
+	margin: 1em 0 0 1em;
+	padding: 0 0 0.5em 0;
+}
+.rainette_conditions .icone {float: left; margin: 0.3em 0 -0.5em 0.7em;}
 .rainette_conditions .t_reelle {
 	float: left;
 	color: #333333;
-	font-size: 33px;
+	font-size: 3em;
 	font-weight: bold;
-	line-height: 1em;
-	margin: 20px 0 0 15px;
+	margin: 0.5em 0 0 0.25em;
 }
-.rainette_conditions .t_ressentie {float: left; width: 95px; color: #333333; margin: 0 0 0 15px;}
-.rainette_conditions .resume {text-align: center; font-weight: bold; padding-top: 5px;}
+.rainette_conditions .t_ressentie {
+	float: left; color: #333333; margin: 0 0 0 0.75em;
+}
+.rainette_conditions .resume {
+	text-align: center; font-weight: bold; padding-top: 0.5em;
+}
 .rainette_conditions .maj {
 	float: left;
-	font-size: 10px;
+	font-size: 0.9em;
 	color: #000000;
-	width: 236px;
-	padding: 6px 0 0 11px;
+	padding: 0.5em 0 1.75em 1.25em;
 }
-.rainette_conditions .details {
+.rainette_conditions ul li {
 	float: left;
 	color: #000000;
-	line-height: 12px;
-	width: 134px;
-	padding: 12px 5px 5px 1px;
+	width: 13em;
+	padding: 0 0 0.8em 0.1em;
+	list-style-type: none;
 }
-.rainette_conditions .details  span {color: #6E6E6E; font-weight: bold;}
+.rainette_conditions li span {color: #6E6E6E; font-weight: bold; display: block;}
+
+.rainette_conditions li img { margin: -1em 0 0 0}
 
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur 1 jour presente en 2x12h */
 .rainette_previsions_2x12h {
