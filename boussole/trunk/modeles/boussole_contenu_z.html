@@ -15,7 +15,10 @@
 							Le cartouche comprends le logo, le titre et le slogan de la boussole.
 							Vide correspond a non
 	- taille_logo :			taille max du logo de la boussole (en pixels). Vide correspond a 64
-	- titre_groupe :		indicateur oui/non d'affichage du titre de chaque groupe. Vide correspond a non
+	- titre_groupe :		indicateur d'affichage du titre ou du slogan de chaque groupe :
+							+ nom_groupe
+							+ slogan_groupe
+							Vide correspond a non
 	- type_bulle :			type de bulle d'info parmi dont les valeurs possibles sont :
 							+ nom_site
 							+ slogan_site
@@ -51,8 +54,8 @@
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 	[(#REM) <!-- Liste des site du groupe en cours -->]
 	<B_site>
-	[(#ENV{titre_groupe, non}|=={oui}|oui)
-		[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{nom_groupe, #AKA_GROUPE})</h3>]
+	[(#ENV{titre_groupe}|oui)
+		[<h3 class="h3">(#AKA_BOUSSOLE|boussole_traduire{#ENV{titre_groupe}, #AKA_GROUPE})</h3>]
 	]
 	<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
 		[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{100})]})]
