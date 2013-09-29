@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_licence_description' => '"License" add-on for "Diogene" (use the Licences plugin)',
-	'diogene_licence_nom' => 'Diogene - License',
-	'diogene_licence_slogan' => '"License" add-on for "Diogene" (use the Licences plugin)'
+	'diogene_licence_description' => '"License" add-on for "Diogene" (use the Licences plugin)', # MODIF
+	'diogene_licence_nom' => 'Diogene - License', # MODIF
+	'diogene_licence_slogan' => '"License" add-on for "Diogene" (use the Licences plugin)' # MODIF
 );
 
 ?>
