@@ -1,17 +1,17 @@
 <traduction module="gis" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gis/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/gis?lang_cible=en" total="138" traduits="137" relire="0" modifs="0" nouveaux="1" pourcent="99.28">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/gis?lang_cible=en" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/gis?lang_cible=es" total="138" traduits="137" relire="0" modifs="0" nouveaux="1" pourcent="99.28">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/gis?lang_cible=es" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/gis?lang_cible=fr" total="138" traduits="137" relire="0" modifs="0" nouveaux="1" pourcent="99.28">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/gis?lang_cible=fr" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="138" traduits="125" relire="0" modifs="0" nouveaux="13" pourcent="90.58">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="137" traduits="125" relire="0" modifs="0" nouveaux="12" pourcent="91.24">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="138" traduits="137" relire="0" modifs="0" nouveaux="1" pourcent="99.28">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="137" traduits="137" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
