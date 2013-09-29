@@ -1,29 +1,28 @@
 <traduction module="spipicious" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipicious_jquery/trunk/lang/" reference="fr">
-	<langue code="ast" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=ast" total="28" traduits="15" relire="0" modifs="5" nouveaux="8" pourcent="53.57">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=ast" total="20" traduits="15" relire="0" modifs="5" nouveaux="0" pourcent="75.00">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=ca" total="28" traduits="13" relire="0" modifs="7" nouveaux="8" pourcent="46.43">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=ca" total="20" traduits="13" relire="0" modifs="7" nouveaux="0" pourcent="65.00">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=de" total="28" traduits="13" relire="0" modifs="7" nouveaux="8" pourcent="46.43">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=de" total="20" traduits="13" relire="0" modifs="7" nouveaux="0" pourcent="65.00">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=en" total="28" traduits="20" relire="0" modifs="0" nouveaux="8" pourcent="71.43">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=en" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=es" total="28" traduits="20" relire="0" modifs="0" nouveaux="8" pourcent="71.43">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=es" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fa" total="28" traduits="19" relire="0" modifs="1" nouveaux="8" pourcent="67.86">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fa" total="20" traduits="19" relire="0" modifs="1" nouveaux="0" pourcent="95.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fr" total="28" traduits="20" relire="0" modifs="0" nouveaux="8" pourcent="71.43">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fr" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fr_tu" total="28" traduits="15" relire="0" modifs="5" nouveaux="8" pourcent="53.57">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=fr_tu" total="20" traduits="15" relire="0" modifs="5" nouveaux="0" pourcent="75.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=sk" total="28" traduits="20" relire="0" modifs="0" nouveaux="8" pourcent="71.43">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spipicious?lang_cible=sk" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
