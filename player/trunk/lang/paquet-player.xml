@@ -13,7 +13,6 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-player?lang_cible=ru" total="2" traduits="0" relire="0" modifs="2" nouveaux="0" pourcent="0.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
