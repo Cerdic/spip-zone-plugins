@@ -271,7 +271,7 @@ function calcul_prevision_visites() {
 		
 		if ($tps_file < $date_init) {
 			# lire fichier tmp/visites
-			compte_fichier_visite($item,
+			acj_compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
 
 			if (--$compteur <= 0)
@@ -518,8 +518,10 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // prendre en compte un fichier de visite
 //
-// http://doc.spip.org/@compte_fichier_visite
-function compte_fichier_visite($fichier,
+// ajoute &articles à la fonction native de SPIP (ecrire/genie/visites)
+// compte_fichier_visite
+// 
+function acj_compte_fichier_visite($fichier,
 &$visites, &$visites_a, &$referers, &$referers_a, &$articles) {
 
 	// Noter la visite du site (article 0)
