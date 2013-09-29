@@ -23,7 +23,6 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fr_tu" total="62" traduits="47" relire="0" modifs="2" nouveaux="13" pourcent="75.81">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
