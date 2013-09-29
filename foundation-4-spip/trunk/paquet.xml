@@ -1,7 +1,7 @@
 <paquet
     prefix="foundation"
     categorie="outil"
-    version="1.4"
+    version="1.4.1"
     etat="stable"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/foundation-64.png"
@@ -24,8 +24,4 @@
     
     <!-- Les plugins indispensable -->
     <necessite nom="saisies" compatibilite="[1.31;[" />
-
-    <!-- Vu qu'on se base sur ZPIP pour la structure. -->
-    <necessite nom="zcore" compatibilite="[2.2.3;[" />
-    <necessite nom="z5" compatibilite="[2.0.1;[" />
 </paquet>

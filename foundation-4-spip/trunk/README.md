@@ -21,6 +21,10 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.4
 
+* Finalement les dépendances casse tout, on va retirer les dépendances et laisser le choix au dev de faire avec ce qu'il veux
+
+## Foundation-4-SPIP 1.4
+
 * Mise à jour de foundation 4.3.1 => 4.3.2
 * Changement dans les dépendances, on passe à Zcore et Z5.
 * Utiliser le responsive de foundation pour les iFrames et détecter vimeo pour ajouter la bonne class.
