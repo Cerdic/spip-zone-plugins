@@ -34,14 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'permalink_to' => 'Enllaç permanent cap el comentari',
 
 	// R
-	'reponse_comment_modere' => 'El teu comentari s\'ha enregistrat correctament i està esperant la relectura abans de ser publicat.',
+	'reponse_comment_modere' => 'El teu comentari s’ha enregistrat correctament i està esperant la relectura abans de ser publicat.',
 	'reponse_comment_ok' => 'Gràcies pel comentari!',
 
 	// S
 	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[-&gt;url] {{italique}} {italique} &lt;quote&gt; &lt;code&gt;</code> i el codi HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per crear paràgrafs, deixeu simplement línies buides.',
 	'saisie_texte_legend' => 'Afegeix el comentari aquí',
 	'submit1' => 'Visualització prèvia',
-	'submit2' => 'Confirmar l\'enviament',
+	'submit2' => 'Confirmar l’enviament',
 
 	// T
 	'titre_comments' => 'Comentaris'

@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Ton site web',
 
 	// M
-	'moderation_info' => 'Attention, ton message n\'apparaîtra qu\'après avoir été relu et approuvé.',
+	'moderation_info' => 'Attention, ton message n’apparaîtra qu’après avoir été relu et approuvé.',
 
 	// P
 	'permalink_to' => 'Lien permanent vers le commentaire',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laisse simplement des lignes vides.',
 	'saisie_texte_legend' => 'Ajoute ton commentaire ici',
 	'submit1' => 'Prévisualiser',
-	'submit2' => 'Confirmer l\'envoi',
+	'submit2' => 'Confirmer l’envoi',
 
 	// T
 	'titre_comments' => 'Comments'

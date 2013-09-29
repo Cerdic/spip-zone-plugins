@@ -34,14 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'permalink_to' => 'Enllaz permanente al comentariu',
 
 	// R
-	'reponse_comment_modere' => 'El to comentariu se guardó correutamente y ta esperando revisión enantes d\'espublizase.',
+	'reponse_comment_modere' => 'El to comentariu se guardó correutamente y ta esperando revisión enantes d’espublizase.',
 	'reponse_comment_ok' => '¡Gracies pol to comentariu!',
 
 	// S
 	'saisie_texte_info' => 'Esti formulariu permite los atayos de SPIP <code>[-&gt;url] {{negrina}} {cursiva} &lt;quote&gt; &lt;code&gt;</code> y el códigu HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pa crear párrafos, basta namái con dexar llinies baleres.',
 	'saisie_texte_legend' => 'Escribe equí el to comentariu',
 	'submit1' => 'Vista previa',
-	'submit2' => 'Confirmar l\'unviu',
+	'submit2' => 'Confirmar l’unviu',
 
 	// T
 	'titre_comments' => 'Comentarios'
