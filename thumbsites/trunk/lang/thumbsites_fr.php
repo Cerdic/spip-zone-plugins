@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_descriptif' => 'Cette page vous permez de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
-	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.',
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d’identification.',
 	'cfg_inf_choix_serveur' => 'Choisissez le serveur qui fournira les vignettes de vos sites référencés et compléter éventuellement son paramétrage.',
 	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.',
 	'cfg_inf_rotothumb_presentation' => 'Pour utiliser ce service vous ne devez pas vous enregistrer mais vous devez mettre un lien vers le site <a href="http://www.robothumb.com">Robothumb</a>. La présence de ce lien est vérifié périodiquement par leur soin.',
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)',
 	'cfg_lbl_serveur' => 'Serveur',
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
-	'cfg_lbl_usage' => 'Conditions d\'utilisation',
+	'cfg_lbl_usage' => 'Conditions d’utilisation',
 	'cfg_lgd_cache' => 'Cache',
 	'cfg_lgd_choix_serveur' => 'Service',
 	'cfg_titre_form' => 'Configurer Thumbsites',
