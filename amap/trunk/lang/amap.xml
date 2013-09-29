@@ -1,10 +1,9 @@
 <traduction module="amap" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/amap/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/amap?lang_cible=en" total="143" traduits="132" relire="0" modifs="0" nouveaux="11" pourcent="92.31">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/amap?lang_cible=en" total="133" traduits="132" relire="0" modifs="0" nouveaux="1" pourcent="99.25">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Pierre KUHN" lien="http://trad.spip.net/auteur/pierre-kuhn" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/amap?lang_cible=fr" total="143" traduits="132" relire="0" modifs="0" nouveaux="11" pourcent="92.31">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/amap?lang_cible=fr" total="133" traduits="133" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
