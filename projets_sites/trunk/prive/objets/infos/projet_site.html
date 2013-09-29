@@ -1,0 +1,7 @@
+<BOUCLE_projet_site(PROJETS_SITES){id_site=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:projet_site:titre_projet_site:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_SITE</p></div>
+
+</div>
+</BOUCLE_projet_site>

@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,projet_site,#ID_SITE}|sinon_interdire_acces)]
+<BOUCLE_projet_site(PROJETS_SITES){id_site}{si #ENV{exec}|=={projet_site}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,projet_site,#ID_SITE})
+		[(#ID_SITE|afficher_qui_edite{projet_site}|non)
+			[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE}|icone_verticale{<:projet_site:icone_modifier_projet_site:>,projet_site,edit,right ajax preload})]
+		]
+		[(#ID_SITE|afficher_qui_edite{projet_site}|oui)
+			[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE}|icone_verticale{#ID_SITE|afficher_qui_edite{projet_site},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TYPE_SITE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{projet_site-24.png}|balise_img{projet_site,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{projet_site,#ID_SITE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projet_site,id=#ID_SITE,id_site=#ID_SITE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,projet_site,#ID_SITE})
+	[(#ID_SITE|afficher_qui_edite{projet_site}|non)
+		[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE}|icone_verticale{<:projet_site:icone_modifier_projet_site:>,projet_site,edit,right ajax preload})]
+	]
+	[(#ID_SITE|afficher_qui_edite{projet_site}|oui)
+		[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE}|icone_verticale{#ID_SITE|afficher_qui_edite{projet_site},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projet_site,id,#ID_SITE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_projet_site>
+[(#ENV**{exec}|=={projet_site_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projet_site_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projet_site>

@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	type_site,1, 
+	date_creation,-1, 
+	id_site,1,
+	points,-1
+}})]<B_liste_projets_sites>
+#ANCRE_PAGINATION
+<div class="liste-objets projets_sites">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet_site:info_1_projet_site,projet_site:info_nb_projets_sites}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='type_site' scope='col'>[(#TRI{type_site,<:projet_site:label_type_site:>,ajax})]</th>
+			<th class='nom' scope='col'><:projet:label_nom:></th>
+			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_site,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num type_site},#GET{defaut_tri}}{par type_site}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{projet_site-16.png}|balise_img)]</td>
+			<td class='type_site principale'>[(#LOGO_PROJET_SITE|image_reduire{20,26})]<a href="[(#ID_SITE|generer_url_entite{projet_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ][(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)]</a></td>
+			<td class='nom'><small><BOUCLE_projet(PROJETS) {tout} {id_site}{par nom}{0,1}>[(#LOGO_PROJET|image_reduire{12,12})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></BOUCLE_projet> &mdash;<//B_projet></small></td>
+			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,projet_site,#ID_SITE}|?{
+				<a href="[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
+				#ID_SITE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_projets_sites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_projets_sites>[
+<div class="liste-objets projets_sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets_sites>
