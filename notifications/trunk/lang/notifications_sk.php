@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmasteri',
 
 	// L
-	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
 
 	// M
 	'message_a_valider' => 'Príspevok na potvrdenie: ',
