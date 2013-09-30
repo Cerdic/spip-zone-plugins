@@ -1,12 +1,12 @@
 /* Styles generaux  */
-.rainette_titre {margin: 5px 0 5px 10px; 	padding:0 0 0 0;}
+.rainette_titre {margin: 0.5em 0 0.5em 1em; 	padding:0 0 0 0;}
 
 /* INFOS: Styles utilises par le modele rainette_infos */
 .rainette_infos {
 	float: left;
 	width: 36em;
 	background: #ffffff;
-	border: 2px solid #dddddd;
+	border: 0.2em solid #dddddd;
 	margin: 0.5em 0 1em 0;
 	padding: 0;
 }
@@ -132,32 +132,38 @@
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur x jours presente en 24h simple */
 .rainette_previsions_24h {
 	float: left;
-	border: 1px solid #dddddd;
-	width: 120px;
-	margin: 5px 5px 20px 0;
+	border: 0.1em solid #dddddd;
+	width: 11em;
+	margin: 0.4em 0.4em 2em 0;
 }
 .rainette_previsions_24h .jour {
-	height: 19px;
+	height: 1.9em;
 	font-weight: bold;
 	background: #fcfcfc;
-	width: 120px;
-	border-bottom: 1px solid #dddddd;
-	padding: 5px 0 0 0;
+	width: 11em;
+	border-bottom: 0.1em solid #dddddd;
+	padding: 0.4em 0 0 0;
 	text-align: center;
 }
 .rainette_previsions_24h .date {
-	height: 19px;
+	height: 1.9em;
 	font-weight: bold;
 	background: #fcfcfc;
-	width: 120px;
-	border-bottom: 1px solid #dddddd;
-	padding: 5px 0 0 0;
+	width: 11em;
+	border-bottom: 0.1em solid #dddddd;
+	padding: 0.4em 0 0 0;
 	text-align: center;
 }
-.rainette_previsions_24h .contenu {width: 120px; border: 0; padding: 10px 0 10px 0; text-align: center; min-height: 20em;}
+.rainette_previsions_24h .contenu {
+	min-height: 20em;
+	width: 11em;
+	padding: 1em 0 1em 0;
+	border: 0;
+	text-align: center; 
+}
 * html .rainette_previsions_24h .contenu {height: 20em;}
-.rainette_previsions_24h .icone {margin-bottom: 10px;}
-.rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 5px 10px 5px; min-height: 35px}
-.rainette_previsions_24h .resume {font-weight: bold; margin: 0 5px 10px 5px; min-height: 45px}
-.rainette_previsions_24h .details {font-weight: normal; margin: 0 5px 10px 5px;}
+.rainette_previsions_24h .icone {margin-bottom: 1em;}
+.rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 0.4em 1em 0.4em; min-height: 3em}
+.rainette_previsions_24h .resume {font-weight: bold; margin: 0 0.4em 1em 0.4em; min-height: 4em}
+.rainette_previsions_24h .details {font-weight: normal; margin: 0 0.4em 1em 0.4em;}
 .rainette_previsions_24h .details ul {list-style-type: none; padding: 0; margin: 0;}
