@@ -1,0 +1,1 @@
+<h4 class='projets_lies'><BOUCLE_projet(PROJETS projets_sites_liens) {tout} {id_site=#ENV{id_site}} {objet=projet} {par nom}{" / "}><a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></BOUCLE_projet></B_projet><:projet_site:site_orphelin:>[(#ENV{id_site})]<//B_projet></h4>

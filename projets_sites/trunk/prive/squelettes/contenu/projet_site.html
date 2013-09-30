@@ -9,13 +9,13 @@
 			[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE}|icone_verticale{#ID_SITE|afficher_qui_edite{projet_site},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
-
-	<h1>[(#RANG). ](#TYPE_SITE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{projet_site-24.png}|balise_img{projet_site,cadre-icone})]</h1>
+	[(#INCLURE{fond=prive/objets/liste/projets_associes_nom,id_site=#ID_SITE})]
+	<h1>[(#RANG). ](#TYPE_SITE|?{[(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)],<:info_sans_titre:>})[(#CHEMIN_IMAGE{projet_site-24.png}|balise_img{projet_site,cadre-icone})]</h1>
 
 ],simple fiche_objet})]
 
 <div class="ajax">
-	#FORMULAIRE_DATER{projet_site,#ID_SITE}
+	[(#FORMULAIRE_DATER{projet_site,#ID_SITE})]
 </div>
 
 <!--affiche_milieu-->

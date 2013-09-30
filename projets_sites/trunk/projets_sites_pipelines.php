@@ -46,7 +46,13 @@ function projets_sites_affiche_milieu($flux) {
 	return $flux;
 }
 
-
+/**
+ * Insert header prive
+ */
+function projets_sites_header_prive($flux){
+	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PROJETS_SITES  .'css/projets_sites_prive.css" type="text/css" media="all" />';
+	return $flux;
+}
 /**
  * Optimiser la base de données en supprimant les liens orphelins
  * de l'objet vers quelqu'un et de quelqu'un vers l'objet.

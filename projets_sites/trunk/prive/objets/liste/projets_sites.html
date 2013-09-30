@@ -22,7 +22,10 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projet_site-16.png}|balise_img)]</td>
 			<td class='type_site principale'>[(#LOGO_PROJET_SITE|image_reduire{20,26})]<a href="[(#ID_SITE|generer_url_entite{projet_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ][(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)]</a></td>
-			<td class='nom'><small><BOUCLE_projet(PROJETS) {tout} {id_site}{par nom}{0,1}>[(#LOGO_PROJET|image_reduire{12,12})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></BOUCLE_projet> &mdash;<//B_projet></small></td>
+			[(#REM) Comme la table spip_projets a déjà une table de liens, SPIP n'arrive pas à faire la jointure avec spip_projets_sites_liens pour avoir cette requête : 
+			"SELECT projets.nom, projets.id_projet FROM spip_projets AS `projets` INNER JOIN spip_projets_sites_liens AS L1 ON ( L1.id_objet = projets.id_projet AND L1.objet='projet') WHERE (L1.id_site = 1) AND (L1.objet = 'projet')". 
+			De ce fait, on doit forcer la jointure :]
+			<td class='nom'><BOUCLE_projet(PROJETS projets_sites_liens) {tout} {id_site} {objet=projet}{par nom}{" / "}>[(#LOGO_PROJET|image_reduire{12,12})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></BOUCLE_projet> &mdash;<//B_projet></td>
 			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td> 
 			<td class='id'>[(#AUTORISER{modifier,projet_site,#ID_SITE}|?{
 				<a href="[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
