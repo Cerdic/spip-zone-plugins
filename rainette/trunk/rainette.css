@@ -1,148 +1,174 @@
 /* Styles generaux  */
-.rainette_titre {margin: 5px 0 5px 10px; padding:0 0 0 0;}
+.rainette_titre {margin: 0.5em 0 0.5em 1em; 	padding:0 0 0 0;}
 .rainette_credits {margin: 0; text-align: center; clear:both; font-size: 10px;}
-.rainette_credits.infos {float: left; margin-left: 10px; margin-top: 10px;}
-.rainette_credits.condtr {padding-top: 10px;}
-.rainette_credits.prev24h {}
+.rainette_credits.infos {float: left; margin-left: 0.85em; margin-bottom: 0.5em;}
+.rainette_credits.condtr {}
+.rainette_credits.prev24h {margin-bottom: 0.5em;}
 .rainette_credits.prev2x12h {}
 
 /* INFOS: Styles utilises par le modele rainette_infos */
 .rainette_infos {
 	float: left;
-	width: 400px;
+	width: 36em;
 	background: #ffffff;
-	border: 2px solid #dddddd;
-	margin: 4px 0 17px 0;
-	padding: 0 0 5px 0;
+	border: 0.2em solid #dddddd;
+	margin: 0.5em 0 1em 0;
+	padding: 0;
 }
-.rainette_infos .ville {margin: 5px 0 5px 10px; padding: 0 0 0 0;}
-.rainette_infos .coordonnees {float: left; line-height: 12px; padding: 0 0 0 10px;}
+.rainette_infos .ville {margin: 0.5em 0 0 0.5em;}
+.rainette_infos .coordonnees {
+    margin: 0.5em 0 0.5em 0.85em; 
+    list-style-type: none;
+    font-size: 0.85em;
+    padding: 0;
+}
 
 /* CONDITIONS: Styles utilises par le modele rainette_conditions */
 .rainette_conditions {
 	float: left;
-	width: 400px;
+	width: 36em;
 	background: #fcfcfc;
-	border: 2px solid #dddddd;
-	margin: 5px 0 20px 0;
-	padding:0 0 5px 0;}
-.rainette_conditions .statut {float: left; width: 260px;}
+	border: 0.15em solid #dddddd;
+	margin: 0.5em 0 2em 0;
+	padding:0 0 0.5em 0;}
+.rainette_conditions .statut {float: left; width: 21em;}
 .rainette_conditions .cadre {
 	float: left;
-	width: 234px;
-	border: 1px solid #dddddd;
+	width: 19em;
+	border: 0.1em solid #dddddd;
 	background: #ffffff;
-	margin: 11px 0 0 11px;
-	padding:0 0 5px 0;}
-.rainette_conditions .icone {float: left; margin: 3px 0 -5px 7px; min-height: 110px; min-width: 110px;}
+	margin: 1em 0 0 1em;
+	padding: 0 0 0.5em 0;
+}
+.rainette_conditions .icone {float: left; margin: 0.3em 0 -0.5em 0.7em;}
 .rainette_conditions .t_reelle {
 	float: left;
 	color: #333333;
-	font-size: 33px;
+	font-size: 3em;
 	font-weight: bold;
-	line-height: 1em;
-	margin: 20px 0 0 15px;
+	margin: 0.5em 0 0 0.25em;
 }
-.rainette_conditions .t_ressentie {float: left; width: 95px; color: #333333; margin: 0 0 0 15px;}
-.rainette_conditions .resume {text-align: center; font-weight: bold; padding-top: 5px;}
+.rainette_conditions .t_ressentie {
+	float: left; color: #333333; margin: 0 0 0 0.75em;
+}
+.rainette_conditions .resume {
+	text-align: center; font-weight: bold; padding-top: 0.5em;
+}
 .rainette_conditions .maj {
 	float: left;
-	font-size: 10px;
+	font-size: 0.85em;
 	color: #000000;
-	width: 236px;
-	padding: 6px 0 0 11px;
+	padding: 0.5em 0 1.75em 1.25em;
 }
-.rainette_conditions .details {
+.rainette_conditions ul li {
 	float: left;
 	color: #000000;
-	line-height: 12px;
-	width: 134px;
-	padding: 12px 5px 5px 1px;
+	width: 13em;
+	padding: 0 0 0.7em 0.1em;
+	list-style-type: none;
 }
-.rainette_conditions .details  span {color: #6E6E6E; font-weight: bold;}
+.rainette_conditions li span {color: #6E6E6E; font-weight: bold; display: block;}
+
+.rainette_conditions li img { margin: -1em 0 0 0}
 
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur 1 jour presente en 2x12h */
 .rainette_previsions_2x12h {
 	float: left;
-	border: 2px solid #dddddd;
-	border-right: 1px solid #dddddd;
-	width: 596px;
-	margin: 5px 0 20px 0;
+	border: 0.2em solid #dddddd;
+	border-right: 0.1em solid #dddddd;
+	width: 54em;
+	margin: 0.5em 0 0 0;
 }
 .rainette_previsions_2x12h .entete {
 	float: left;
-	height: 19px;
-	width: 297px;
+	height: 1.8em;
+	width: 26.9em;
+	border-right: 0.1em solid #dddddd;
+	border-bottom: 0.1em solid #dddddd;
+	padding: 0.5em 0 0 0;
+	text-align: center;
 	font-weight: bold;
 	background: #fcfcfc;
-	border-bottom: 1px solid #dddddd;
-	border-right: 1px solid #dddddd;
-	padding: 5px 0 0 0;
-	text-align: center;
 }
 .rainette_previsions_2x12h .cadre {float: left; background: #ffffff;}
-.rainette_previsions_2x12h .cellule {float: left; width: 297px; border-right: 1px solid #dddddd;}
-.rainette_previsions_2x12h .contenu {float: left; width: 277px; margin: 5px 10px 10px 10px;}
-.rainette_previsions_2x12h .icone {float: left; width: 110px; height:110px; padding: 0 10px 0 10px;}
+.rainette_previsions_2x12h .cellule {
+	float: left;
+	width: 26.9em;
+	border-style: solid;
+	border-color: #dddddd;
+	border-width: 0 0.1em 0.1em 0;
+}
+.rainette_previsions_2x12h .contenu {
+	float: left; width: 24em; margin: 0.5em 1em 1em 1em;
+}
+.rainette_previsions_2x12h .icone {
+	float: left; width: 11em; height:11em; padding: 0 1em 0 1em;
+}
 .rainette_previsions_2x12h .t_reelle {
-	width: 137px;
+	width: 10em;
 	float: left;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 1em;
 	color: #333333;
-	margin: 10px 0 0 10px;
+	margin: 1em 0 0 1em;
 }
-.rainette_previsions_2x12h .t_reelle span {font-size: 33px;}
+.rainette_previsions_2x12h .t_reelle span {font-size: 3em;}
 .rainette_previsions_2x12h .details {
 	float: left;
 	clear: both;
 	color: #6e6e6e;
-	width: 267px;
-	padding: 5px 10px 0;
+	width: 26em;
+	padding: 0.5em 0 0 0;
 }
-.rainette_previsions_2x12h .details ul {list-style-type: none; padding: 0; margin: 0;}
-.rainette_previsions_2x12h .details li {margin-left: 130px; clear:both;} 
-.rainette_previsions_2x12h .details li span {margin-left:-130px; float:left; display:inline; font-weight: bold;}
+.rainette_previsions_2x12h .details ul {
+	list-style-type: none; padding: 0; margin: 0;
+}
+.rainette_previsions_2x12h .details li {margin-left: 12em; clear:both;} 
+.rainette_previsions_2x12h .details li span {margin-left:-12em; float:left; display:inline; font-weight: bold;}
 .rainette_previsions_2x12h .maj {
-	border-top: 1px solid #dddddd;
-	border-right: 1px solid #dddddd;
-	color: #333333;
 	float: left;
-	font-size: 10px;
-	padding: 4px 0;
+	width: inherit; /* sinon le text-align est inoperant */
 	text-align: center;
-	width: 595px;
+	color: #333333;
+	font-size: 0.9em;
+	padding: 0.5em;
 }
 
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur x jours presente en 24h simple */
 .rainette_previsions_24h {
 	float: left;
-	border: 1px solid #dddddd;
-	width: 120px;
-	margin: 5px 5px 20px 0;
+	border: 0.1em solid #dddddd;
+	width: 11em;
+	margin: 0.4em 0.4em 2em 0;
 }
 .rainette_previsions_24h .jour {
-	height: 19px;
+	height: 1.9em;
 	font-weight: bold;
 	background: #fcfcfc;
-	width: 120px;
-	border-bottom: 1px solid #dddddd;
-	padding: 5px 0 0 0;
+	width: 11em;
+	border-bottom: 0.1em solid #dddddd;
+	padding: 0.4em 0 0 0;
 	text-align: center;
 }
 .rainette_previsions_24h .date {
-	height: 19px;
+	height: 1.9em;
 	font-weight: bold;
 	background: #fcfcfc;
-	width: 120px;
-	border-bottom: 1px solid #dddddd;
-	padding: 5px 0 0 0;
+	width: 11em;
+	border-bottom: 0.1em solid #dddddd;
+	padding: 0.4em 0 0 0;
 	text-align: center;
 }
-.rainette_previsions_24h .contenu {width: 120px; border: 0; padding: 10px 0 10px 0; text-align: center; min-height: 20em;}
+.rainette_previsions_24h .contenu {
+	min-height: 20em;
+	width: 11em;
+	padding: 1em 0 1em 0;
+	border: 0;
+	text-align: center; 
+}
 * html .rainette_previsions_24h .contenu {height: 20em;}
-.rainette_previsions_24h .icone {margin-bottom: 10px;}
-.rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 5px 10px 5px; min-height: 35px}
-.rainette_previsions_24h .resume {font-weight: bold; margin: 0 5px 10px 5px; min-height: 45px}
-.rainette_previsions_24h .details {font-weight: normal; margin: 0 5px 10px 5px;}
+.rainette_previsions_24h .icone {margin-bottom: 1em;}
+.rainette_previsions_24h .t_reelle {font-weight: bold; margin: 0 0.4em 1em 0.4em; min-height: 3em}
+.rainette_previsions_24h .resume {font-weight: bold; margin: 0 0.4em 1em 0.4em; min-height: 4em}
+.rainette_previsions_24h .details {font-weight: normal; margin: 0 0.4em 1em 0.4em;}
 .rainette_previsions_24h .details ul {list-style-type: none; padding: 0; margin: 0;}

@@ -9,7 +9,7 @@
 			<div class="icone">[(#ENV{icone}|rainette_icone_meteo{grand, #ENV{service}})]</div>
 			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
 			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
-			<br clear="all"/>
+			<br style="clear:both" />
 			<div class="resume">[(#ENV{resume}|rainette_resume_meteo)]</div>
 		</div>
 		<div class="maj">
@@ -18,20 +18,20 @@
 		</div>
 	</div>
 
-	<div class="details">
-		<span><:rainette:vent|ucfirst:></span><br/>
+	<ul class="details">
+		<li><span><:rainette:vent|ucfirst:></span>
 		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
-		[ - (#ENV{direction_vent}|rainette_afficher_direction)]<br/><br/>
-		<span><:rainette:humidite|ucfirst:></span><br/>
-		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]<br/><br/>
-		<span><:rainette:pression|ucfirst:></span><br/>
+		[ - (#ENV{direction_vent}|rainette_afficher_direction)]</li>
+		<li><span><:rainette:humidite|ucfirst:></span>
+		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]</li>
+		<li><span><:rainette:pression|ucfirst:></span>
 		[(#ENV{pression}|rainette_afficher_unite{pression})]
-		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]<br/><br/>
-		[<span><:rainette:point_rosee|ucfirst:></span><br/>
-		(#ENV{point_rosee}|rainette_afficher_unite{temperature})<br/><br/>]
-		[<span><:rainette:visibilite|ucfirst:></span><br/>
-		(#ENV{visibilite}|rainette_afficher_unite{distance})]
-	</div>
+		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]</li>
+		[<li><span><:rainette:point_rosee|ucfirst:></span>
+		(#ENV{point_rosee}|rainette_afficher_unite{temperature})</li>]
+		[<li><span><:rainette:visibilite|ucfirst:></span>
+		(#ENV{visibilite}|rainette_afficher_unite{distance})</li>]
+	</ul>
 
 	#INCLURE{fond=modeles/inc-credits,
 		classe_div=condtr,
