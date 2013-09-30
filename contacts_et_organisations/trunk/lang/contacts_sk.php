@@ -84,9 +84,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_contact' => 'Vymazaním tohto kontaktu vymažete všetky ďalšie údaje, ktoré boli vyplnené na stránke autora.',
 	'explication_supprimer_organisation' => 'Odstránením tejto organizácie odstránite všetky ďalšie údaje, ktoré boli vyplnené na autorskej stránke.',
 	'explications_page_contacts' => 'Stránka sa rekonštruuje.<br /><br />Plánované akcie:<ul>
-<li>zobraziť všetky kontakty,</li><li>zmeniť autorov v kontaktoch,</li><li>nahrať kontakty,</li><li>li>...</li></ul><br />Ďakujeme vám za podnety na  <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">diskuskom fóre;-)</ a>',
+<li>zobraziť všetky kontakty,</li><li>zmeniť autorov v kontaktoch,</li><li>nahrať kontakty,</li><li>li>...</li></ul><br />Ďakujeme vám za podnety na  <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">diskuskom fóre;-)</ a>',
 	'explications_page_organisations' => 'Stránka sa rekonštruuje. <br /> <br /> Plánované akcie: 
- <ul>  <li> zobraziť všetky organizácie, </ li> upraviť autorov v organizáciách, </ li> nahrať organizácie, </ li> ...</ li> </ ul> <br / > Ďakujeme vám za podnety na <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list"> diskusnom fóre;-) </ a>',
+ <ul>  <li> zobraziť všetky organizácie, </ li> upraviť autorov v organizáciách, </ li> nahrať organizácie, </ li> ...</ li> </ ul> <br / > Ďakujeme vám za podnety na <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list"> diskusnom fóre;-) </ a>',
 
 	// I
 	'info_contacts_organisation' => 'Kontakty organizácie',
