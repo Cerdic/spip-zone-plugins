@@ -42,9 +42,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<br />Ak chcete vyriešiť tento problém, mali by ste skontrolovať, či sú v súbore  <tt>mes_options.php</tt> (alebo v inom aktívnom zásuvnom module) definované tieto funkcie.',
 	'descriptif_1' => 'Táto stránka s nastaveniami je vyhradená pre webmasterov stránky:',
 	'descriptif_2' => '<p>Ak chcete upraviť tento zoznam, upravte, prosím, súbor <tt>config/mes_options.php</tt> (ak treba, vytvorte ho) a zadajte zoznam prihlasovacích údajov webmasterov v tejto podobe:</p>
-<pre><?php
-  define(\'_ID_WEBMESTRES\',\'1:5:8\');
-?></pre>
+<pre>&lt;?php
+  define(
+    \'_ID_WEBMESTRES\',
+    \'1:5:8\');
+?&gt;</pre>
 <p>Počnúc verziou 2.1 sa práva webmastera dajú administrátorovi prideliť na stránke na úpravu údajov o autorovi.</p>
 <p>Poznámka: webmasteri definovaní týmto spôsobom už viac nemusia overovať svoju totožnosť cez FTP pri vykonávaní zásadných operácií (napríklad pri aktualizácii databázy na novú verziu).</p>
 

@@ -43,9 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_1' => 'This setup page is reserved for the webmaster of the site:',
 	'descriptif_2' => '<hr />
 <p><small>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it needed) and indicate the list of identifiers of webmasters, as follows:</small></p>
-<pre><?php
-  define(\'_ID_WEBMESTRES\',\'1:5:8\') ;
- ?></pre>
+<pre>&lt;?php
+  define(
+    \'_ID_WEBMESTRES\',
+    \'1:5:8\');
+?&gt;</pre>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
 <a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>',

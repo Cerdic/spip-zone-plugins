@@ -40,9 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<br />Pour régler ce problème, vous devrez vérifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a défini ces fonctions.',
 	'descriptif_1' => 'Cette page de configuration est réservée aux webmestres du site :',
 	'descriptif_2' => '<p>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le créer le cas échéant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</p>
-<pre><?php
-  define(\'_ID_WEBMESTRES\',\'1:5:8\');
- ?></pre>
+<pre>&lt;?php
+  define(
+    \'_ID_WEBMESTRES\',
+    \'1:5:8\');
+?&gt;</pre>
 <p>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre à un administrateur via la page d’édition de l’auteur.</p>
 <p>A noter : les webmestres définis de cette manière n’ont plus besoin de procéder à l’authentification par FTP pour les opérations délicates (mise à niveau de la base de données, par exemple).</p>
 
