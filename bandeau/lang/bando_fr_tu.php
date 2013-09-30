@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_bando_outils_masquer' => 'Masquer les outils',
 	'label_choix_langue' => 'Selectionne votre langue',
 	'label_slogan_site' => 'Slogan du site',
-	'label_taille_ecran' => 'Largeur de l’ecran',
+	'label_taille_ecran' => 'Largeur de l’écran',
 	'label_texte_et_icones_navigation' => 'Menu de navigation',
 	'label_texte_et_icones_page' => 'Affichage dans la page',
 
