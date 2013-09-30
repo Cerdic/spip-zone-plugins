@@ -4,14 +4,19 @@
 /* INFOS: Styles utilises par le modele rainette_infos */
 .rainette_infos {
 	float: left;
-	width: 400px;
+	width: 36em;
 	background: #ffffff;
 	border: 2px solid #dddddd;
-	margin: 4px 0 17px 0;
-	padding: 0 0 5px 0;
+	margin: 0.5em 0 1em 0;
+	padding: 0;
 }
-.rainette_infos .ville {margin: 5px 0 5px 10px; padding: 0 0 0 0;}
-.rainette_infos .coordonnees {float: left; line-height: 12px; padding: 0 0 0 10px;}
+.rainette_infos .ville {margin: 0.5em 0 0 0.5em;}
+.rainette_infos .coordonnees {
+    margin: 0.5em 0 0.5em 0.85em; 
+    list-style-type: none;
+    font-size: 0.85em;
+    padding: 0;
+}
 
 /* CONDITIONS: Styles utilises par le modele rainette_conditions */
 .rainette_conditions {
@@ -46,7 +51,7 @@
 }
 .rainette_conditions .maj {
 	float: left;
-	font-size: 0.9em;
+	font-size: 0.85em;
 	color: #000000;
 	padding: 0.5em 0 1.75em 1.25em;
 }
@@ -54,7 +59,7 @@
 	float: left;
 	color: #000000;
 	width: 13em;
-	padding: 0 0 0.8em 0.1em;
+	padding: 0 0 0.7em 0.1em;
 	list-style-type: none;
 }
 .rainette_conditions li span {color: #6E6E6E; font-weight: bold; display: block;}
