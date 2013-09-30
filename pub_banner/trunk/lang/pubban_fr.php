@@ -100,7 +100,7 @@ Ces bannières s’intègrent dans vos squelettes en indiquant simplement la bal
 Suivie du nom de la bannière que vous souhaitez afficher. La balise est remplacée par une frame de la taille de la bannière.',
 	'documentation_2' => 'Pour une raison pratique [[Spip Bonux est utilisé par Pub Banner pour sa fonctionnalité ’POUR’, qui permet de créer des boucles depuis des array PHP (ndlr) ...]], le plugin PUB BANNER nécessite d’avoir installé au préalable le plugin {{Spip Bonux}} en version 1.3 au minimum.
 
--* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib à l’adresse : [->http://www.spip-contrib.net/SPIP-Bonux].
+-* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib à l’adresse : [->http://contrib.spip.net/SPIP-Bonux].
 -* Vous pouvez le télécharger à l’adresse : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
 ',
 	'documentation_3' => 'Le plugin propose de suivre l’efficacité des campagnes de plusieurs façons :
@@ -265,8 +265,8 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 
 	// L
 	'leaderboard_banner' => 'Bannière "Leaderboard"',
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l’Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
-	'licence_stats' => '{{LICENCES :}}<br />{{’wz_jsgraphics.js’}} :: v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{’graph.js’, ’line.js’ & ’pie.js’}} :: (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l’Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
+	'licence_stats' => '{{LICENCES :}}<br />{{’wz_jsgraphics.js’}} : : v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{’graph.js’, ’line.js’ & ’pie.js’}} : : (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
 	'lien_page' => 'Voir la page',
 	'list_empl' => 'Liste des bannières',
 	'liste_pub' => 'Liste des publiclités',
