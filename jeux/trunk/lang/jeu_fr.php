@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_developpement' => '<b>Attention</b> : partie du plugin en cours de développement. Merci de rapporter les bugs éventuels et/ou de contribuer aux améliorations.',
-	'explication_jeu_edit' => 'Le titre privé sert simplement à identifier le jeu en partie privée.<br />Le contenu du jeu doit suivre la syntaxe décrite dans <a href=\'http://www.spip-contrib.net/Des-jeux-dans-vos-articles\'>la documentation</a> du plugin.<br />Ici les balises <jeux> et </jeux> sont inutiles.',
+	'explication_jeu_edit' => 'Le titre privé sert simplement à identifier le jeu en partie privée.<br />Le contenu du jeu doit suivre la syntaxe décrite dans <a href=\'http://contrib.spip.net/Des-jeux-dans-vos-articles\'>la documentation</a> du plugin.<br />Ici les balises <jeux> et </jeux> sont inutiles.',
 	'explication_modules' => 'Voici la liste des modules présents sur ce site.
 
 - Les signatures sont les séparateurs indispensables qui permettent l’identification du jeu par le compilateur.
