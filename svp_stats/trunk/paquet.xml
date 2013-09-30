@@ -1,11 +1,11 @@
 <paquet
 	prefix="svpstats"
 	categorie="statistique"
-	version="0.1.4"
+	version="0.2.0"
 	etat="dev"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/svp_stats-64.png"
-	schema="0.1"
+	schema="0.2"
 >	
 
 	<nom>SVP Statistiques</nom>
