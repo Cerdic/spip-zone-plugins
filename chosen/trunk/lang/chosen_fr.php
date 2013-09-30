@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_selecteur' => 'Indiquez la cible des éléments qui déclencheront chosen. (Expression CSS ou étendue jQuery)',
 
 	// L
-	'label_active' => 'Activer Chosen dans le site public',
+	'label_active' => 'Activer "Chosen" dans le site public',
 	'label_selecteur' => 'Sélecteur',
 	'lang_no_result' => 'Aucun résultat',
 	'lang_select_an_option' => 'Sélectionnez une option',
