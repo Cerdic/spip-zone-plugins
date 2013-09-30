@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,itineraire,#ID_ITINERAIRE}|sinon_interdire_acces)]
+<BOUCLE_itineraire(ITINERAIRES){id_itineraire}{statut==.*}{si #ENV{exec}|=={itineraire}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,itineraire,#ID_ITINERAIRE})
+		[(#ID_ITINERAIRE|afficher_qui_edite{itineraire}|non)
+			[(#URL_ECRIRE{itineraire_edit,id_itineraire=#ID_ITINERAIRE}|icone_verticale{<:itineraire:icone_modifier_itineraire:>,itineraire,edit,right ajax preload})]
+		]
+		[(#ID_ITINERAIRE|afficher_qui_edite{itineraire}|oui)
+			[(#URL_ECRIRE{itineraire_edit,id_itineraire=#ID_ITINERAIRE}|icone_verticale{#ID_ITINERAIRE|afficher_qui_edite{itineraire},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{itineraire-24.png}|balise_img{itineraire,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{itineraire,#ID_ITINERAIRE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/itineraire,id=#ID_ITINERAIRE,id_itineraire=#ID_ITINERAIRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,itineraire,#ID_ITINERAIRE})
+	[(#ID_ITINERAIRE|afficher_qui_edite{itineraire}|non)
+		[(#URL_ECRIRE{itineraire_edit,id_itineraire=#ID_ITINERAIRE}|icone_verticale{<:itineraire:icone_modifier_itineraire:>,itineraire,edit,right ajax preload})]
+	]
+	[(#ID_ITINERAIRE|afficher_qui_edite{itineraire}|oui)
+		[(#URL_ECRIRE{itineraire_edit,id_itineraire=#ID_ITINERAIRE}|icone_verticale{#ID_ITINERAIRE|afficher_qui_edite{itineraire},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,itineraire,id,#ID_ITINERAIRE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_itineraire>
+[(#ENV**{exec}|=={itineraire_edit}|?{#INCLURE{fond=prive/squelettes/contenu/itineraire_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_itineraire>

@@ -1,0 +1,28 @@
+<BOUCLE_itineraire(ITINERAIRES){id_itineraire=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:itineraire:titre_itineraire:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ITINERAIRE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{itineraires,#ID_ITINERAIRE})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(ITINERAIRES){id_itineraire}>
+	[(#VAL{redirect}
+		|generer_url_action{type=itineraires&id=#ID_ITINERAIRE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,itineraires,#ID_ITINERAIRE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=itineraires&id=#ID_ITINERAIRE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_itineraire>

@@ -1,0 +1,53 @@
+<BOUCLE_itineraire(ITINERAIRES){id_itineraire}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_texte_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_distance[ (#DISTANCE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_distance_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{distance} distance'>(#DISTANCE) km</span>
+</div>]
+
+[<div class="champ contenu_denivele[ (#DENIVELE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_denivele_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{denivele} denivele'>(#DENIVELE) m</span>
+</div>]
+
+[<div class="champ contenu_difficulte[ (#DIFFICULTE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_difficulte_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{difficulte} difficulte'>(#DIFFICULTE) / #CONFIG{itineraires/difficulte_max,5}</span>
+</div>]
+
+[<div class="champ contenu_depart[ (#DEPART*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_depart_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{depart} depart'>(#DEPART)</span>
+</div>]
+
+[<div class="champ contenu_balisage[ (#BALISAGE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_balisage_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{balisage} balisage'>(#BALISAGE)</span>
+</div>]
+
+[<div class="champ contenu_boucle[ (#BOUCLE*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_boucle_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{boucle} boucle'>(#BOUCLE|?{<:item_oui:>,<:item_non:>})</span>
+</div>]
+
+[<div class="champ contenu_transport[ (#TRANSPORT*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_transport_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{transport} transport'>(#TRANSPORT|?{<:item_oui:>,<:item_non:>})</span>
+</div>]
+
+[<div class="champ contenu_handicap[ (#HANDICAP*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_handicap_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{handicap} handicap'>(#HANDICAP|?{<:item_oui:>,<:item_non:>})</span>
+</div>]
+
+</BOUCLE_itineraire>

@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/itineraires, par=titre, env, ajax, sinon=<:itineraire:info_aucun_itineraire:>}>
+
+[(#AUTORISER{creer,itineraire})
+	[(#URL_ECRIRE{itineraire_edit,new=oui}|icone_verticale{<:itineraire:icone_creer_itineraire:>,itineraire,new,right})]
+]

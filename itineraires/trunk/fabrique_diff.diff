@@ -1,0 +1,17 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_itineraires.php ../tmp/cache/fabrique/.backup/itineraires/paquet.xml ../tmp/cache/fabrique/itineraires/paquet.xml
+12c12
+< 		Paquet genere le 2013-09-27 16:10:32
+---
+> 		Paquet genere le 2013-09-27 16:12:36
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-12.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-12.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-24.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-24.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-32.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-add-24.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-add-24.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-add-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-add-32.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-del-24.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-del-24.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-del-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-del-32.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-edit-24.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-edit-24.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-edit-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-edit-32.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-new-24.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-new-24.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraire-new-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraire-new-32.png differ
+Binary files ../tmp/cache/fabrique/.backup/itineraires/prive/themes/spip/images/itineraires-32.png and ../tmp/cache/fabrique/itineraires/prive/themes/spip/images/itineraires-32.png differ
