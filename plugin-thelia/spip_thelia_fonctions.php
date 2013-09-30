@@ -74,9 +74,13 @@ function spip_thelia_insert_head($flux) {
 function spip_thelia_appeler_moteur_thelia($texte) {
 	
 	include_spip("inc/utils");
+
+	//Obtenir les arguments de requete
+	$keys_request = array_keys($_REQUEST);
 	
-	//si pas de boucle ou de balise th�lia dans la page on sort	
-	if ((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE))
+	
+	//si pas de boucle ou de balise th�lia ou pas d'action thelia dans la page on sort	
+	if (((strpos($texte, "THELIA-") === FALSE) && (strpos($texte, "<THELIA") == FALSE)) && !count(preg_grep("#thelia.*#",$keys_request)))
 		return $texte;
 	
 	//convertion utf-8 vers ISO des variables $_REQUEST
