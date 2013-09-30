@@ -20,7 +20,7 @@
 	<br /><br />
 	
 	<div id="#ENV{ville, FRXX0076}">
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
+		<p id='rainette_infos' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
 		[(#MODELE{rainette_infos,code=#ENV{ville, FRXX0076},sous_modele=infos_ville})]
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
@@ -32,17 +32,17 @@
 			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
 		</ul>
 		<br clear="all"/><br /><br />
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
+		<p id='rainette_conditions' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
 		[(#MODELE{rainette_conditions,code=#ENV{ville, FRXX0076},sous_modele=conditions_tempsreel})]
 		<br clear="all"/><br /><br />
 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)<br />
 		Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
  		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=0,sous_modele=previsions_2x12h})]
 		<br clear="all"/><br /><br />
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</p>
+		<p id='rainette_previsions_2x12' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</p>
  		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=2,sous_modele=previsions_2x12h})]
 		<br clear="all"/><br /><br />
- 		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</p>
+ 		<p id='rainette_previsions_24' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</p>
 		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=x_jours,jour=5,sous_modele=previsions_24h})]
 	</div>
 </body>
