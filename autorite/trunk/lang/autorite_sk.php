@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administrátori',
 	'admins_redacs' => 'Administrátori a redaktori',
 	'admins_rubriques' => 'administrátori prepojení s rubrikami majú:',
-	'attention_crayons' => '<small><strong>Pozor.</strong> Tieto nastavenia môžu fungovať iba ak použijete zásuvný modul, ktorý ponúka rozhranie na úpravu (ako napríklad <a href="http://www.spip-contrib.net/Les-Crayons">Farbičky.</a>)</small>',
+	'attention_crayons' => '<small><strong>Pozor.</strong> Tieto nastavenia môžu fungovať iba ak použijete zásuvný modul, ktorý ponúka rozhranie na úpravu (ako napríklad <a href="http://contrib.spip.net/Les-Crayons">Farbičky.</a>)</small>',
 	'attention_version' => 'Majte na pamäti, že tieto nastavenia nemusia vo vašej verzii SPIPu fungovať:',
 	'auteur_message_advitam' => 'Autor správy natrvalo',
 	'auteur_message_heure' => 'Autor správy na hodinu',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Počnúc verziou 2.1 sa práva webmastera dajú administrátorovi prideliť na stránke na úpravu údajov o autorovi.</p>
 <p>Poznámka: webmasteri definovaní týmto spôsobom už viac nemusia overovať svoju totožnosť cez FTP pri vykonávaní zásadných operácií (napríklad pri aktualizácii databázy na novú verziu).</p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
 ', # MODIF
 	'details_option_auteur' => '<small><br />Nateraz možnosť "autor" funguje iba pre zaregistrovaných autorov (napríklad diskusné fóra, na ktoré sa treba prihlásiť). A ak je táto možnosť aktivovaná, možnosť upravovať diskusné fóra majú aj administrátori stránky.
 	</small>',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Redactor upravuje odoslané články:</strong> každý redaktor môže upravovať články odoslaný na publikovanie aj ak je bez autora.',
 	'refus_1' => '<p>Iba webmasteri stránky',
 	'refus_2' => 'majú povolené meniť tieto parametre.</p>
-<p>Ak chcete zistiť viac informácií, prečítajte si <a href="http://www.spip-contrib.net/-Autorite-">dokumentáciu.</a></p>',
+<p>Ak chcete zistiť viac informácií, prečítajte si <a href="http://contrib.spip.net/Autorite">dokumentáciu.</a></p>',
 	'reglage_autorisations' => 'Nastavenie povolení',
 
 	// S

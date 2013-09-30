@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Les administrateurs',
 	'admins_redacs' => 'Administrateurs et Rédacteurs',
 	'admins_rubriques' => 'les administrateurs associés à des rubriques ont :',
-	'attention_crayons' => '<small><strong>Attention.</strong> Les réglages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d’édition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).</small>',
+	'attention_crayons' => '<small><strong>Attention.</strong> Les réglages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d’édition (comme par exemple <a href="http://contrib.spip.net/Les-Crayons">les Crayons</a>).</small>',
 	'attention_version' => 'Attention les choix suivants peuvent ne pas fonctionner	avec votre version de SPIP :',
 	'auteur_message_advitam' => 'L’auteur du message, ad vitam',
 	'auteur_message_heure' => 'L’auteur du message, pendant une heure',
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre à un administrateur via la page d’édition de l’auteur.</p>
 <p>A noter : les webmestres définis de cette manière n’ont plus besoin de procéder à l’authentification par FTP pour les opérations délicates (mise à niveau de la base de données, par exemple).</p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>
 ',
 	'details_option_auteur' => '<small><br />Pour le moment, l’option « auteur » ne fonctionne que pour les auteurs enregistrés (forums sur abonnement, par exemple). Et, si elle est activée, les administrateurs du site ont aussi la capacité d’éditer les forums.
 	</small>',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Rédacteur modifie proposés</strong> : chaque rédacteur peut modifier un article proposé à la publication, même s’il n’en est pas auteur.',
 	'refus_1' => '<p>Seuls les webmestres du site',
 	'refus_2' => 'sont autorisés à modifier ces paramètres.</p>
-<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>',
+<p>Pour en savoir plus, voir <a href="http://contrib.spip.net/Autorite">la documentation</a>.</p>',
 	'reglage_autorisations' => 'Réglage des autorisations',
 
 	// S

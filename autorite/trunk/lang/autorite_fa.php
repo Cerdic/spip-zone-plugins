@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'مديران',
 	'admins_redacs' => 'مديران و نويسندگان',
 	'admins_rubriques' => 'مديران مربطو به بخش‌ها عبارتند از: ',
-	'attention_crayons' => '<small><strong>توجه..</strong> تنظيم‌هاي زير ني‌توانند كاركردي داشته باشند مگر آنكه شما پلاگيني را مورد استفاده قرار دهيد كه يك واسطه‌ي ويرايش ارايه دهد (به عنوان نمونه مانند <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).</small>',
+	'attention_crayons' => '<small><strong>توجه..</strong> تنظيم‌هاي زير ني‌توانند كاركردي داشته باشند مگر آنكه شما پلاگيني را مورد استفاده قرار دهيد كه يك واسطه‌ي ويرايش ارايه دهد (به عنوان نمونه مانند <a href="http://contrib.spip.net/Les-Crayons">les Crayons</a>).</small>',
 	'attention_version' => 'توجه گزينه‌هاي بعدي با نسخه‌ي اسپيپ شما كاركرد ندارد: ',
 	'auteur_message_advitam' => 'نويسنده‌ي پيام، ad vitam',
 	'auteur_message_heure' => 'نوسينده‌ي پيام، طي يك ساعت ',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>از اسپيپ 2.1.دادن حق وب مستر‌ها به مديران از طريق صفحه ويرايش نويسندگان ممكن شده است.</p>
 <p>توجه: وب‌ مسترهايي تعريف شده به اين شيوه نيازي به مجوز اف.تي.پي براي فعاليت‌هاي حساس (به هنگام سازي پايگاه داده‌ها، به عنوان نمونه) ندارند</p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
 	'details_option_auteur' => '<small><br />در اين لحظه، گزينه‌ي «مؤلف» فقط براي مؤلف‌هاي ثبت نام شده كار مي‌كند (به عنوان نمونه، سخنگاه‌هاي مشتركين). و اگر فعال باشد، مديران سايت نيز توانايي ويراش سخنگاه‌ها را خواهند داشت. 
 </small>
 ',
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>ويراستار پيشنهادها را تعديل مي‌كند</strong>: هر ويراستار مي‌تواند يك مقاله‌ي پيشنهادي براي انتشار را تعديل كند، حتي اگر نويسنده نباشد.',
 	'refus_1' => '<p>فقط وب مسترهاي سايت ',
 	'refus_2' => 'مجازاند اين پارامتر‌ها را تعديل كنند.</p>
-<p>براي آگاهي بيشتر، بنگريد <a href="http://www.spip-contrib.net/-Autorite-">مستندات </a>.</p>',
+<p>براي آگاهي بيشتر، بنگريد <a href="http://contrib.spip.net/Autorite">مستندات </a>.</p>',
 	'reglage_autorisations' => 'تنظيم مجوز‌ها',
 
 	// S

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'المدراء',
 	'admins_redacs' => 'مدراء ومحررين',
 	'admins_rubriques' => 'المدراء المقترنون بأقسام يتمتعون بـ:',
-	'attention_crayons' => '<small><strong>تنبيه.</strong> لا يمكن تفعيل الإعدادات أدناه إلا في حال استخدام ملحق يتيح واجهة تحرير (كما هي الحال مثلاً مع <a href=\\"http://www.spip-contrib.net/Les-Crayons\\">القلم</a>).</small>',
+	'attention_crayons' => '<small><strong>تنبيه.</strong> لا يمكن تفعيل الإعدادات أدناه إلا في حال استخدام ملحق يتيح واجهة تحرير (كما هي الحال مثلاً مع <a href=\\"http://contrib.spip.net/Les-Crayons\\">القلم</a>).</small>',
 	'attention_version' => 'تنبيه. قد لا تعمل الخيارات التالية مع إصدار SPIP لديك:',
 	'auteur_message_advitam' => 'كاتب الرسالة، دائماً',
 	'auteur_message_heure' => 'كاتب الرسالة، لمدة ساعة واحدة',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ?&gt;</pre>
 <p><small>ملاحظة : لا يعود المشرفون المحددون بهذه الطريقة يحتاجون إلى التعريف عن نفسهم بواسطة FTP لتنفيذ العمليات الحساسة (كترقية قاعدة البيانات، مثلاً).</small></p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>انظر التعليمات</a>', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>انظر التعليمات</a>', # MODIF
 	'details_option_auteur' => '<small><br />حالياًو لا يعمل خيار «المؤلف» الا للمؤلفين المسجلين (منتديات بالاستراك مثلاً). واذا تم تفعيل الخيار، يتمكن مدراء الموقع أيضاً من تحرير المنتديات.
 	</small>',
 	'droits_des_auteurs' => 'حقوق المؤلفين',
@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>المحرر يعدّل المقالات المعروضة</strong>: كل محرر يمكنه تعديل مقال معروض للنشر، حتى إذا لم يكن مؤلفه.',
 	'refus_1' => '<p>مشرفو الموقع فقط',
 	'refus_2' => 'مخولون تعديل هذه الإعدادات.</p>
-<p>للمزيد من المعلومات، انظر <a href="http://www.spip-contrib.net/-Autorite-">التعليمات</a>.</p>',
+<p>للمزيد من المعلومات، انظر <a href="http://contrib.spip.net/Autorite">التعليمات</a>.</p>',
 	'reglage_autorisations' => 'إعداد الأذونات',
 
 	// S

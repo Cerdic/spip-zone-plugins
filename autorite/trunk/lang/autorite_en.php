@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Administrators',
 	'admins_redacs' => 'Administrators and Editors',
 	'admins_rubriques' => 'The administrators associated to sections have:',
-	'attention_crayons' => '<small><strong>Alert.</strong> The settings below can only work if you use a plugin providing an editing interface (like done by <a href="http://www.spip-contrib.net/Crayons,2698">Crayons</a>).</small>',
+	'attention_crayons' => '<small><strong>Alert.</strong> The settings below can only work if you use a plugin providing an editing interface (like done by <a href="http://contrib.spip.net/Crayons,2698">Crayons</a>).</small>',
 	'attention_version' => 'Note the following choices can not work with your version of SPIP:',
 	'auteur_message_advitam' => 'The author of the message ad vitam',
 	'auteur_message_heure' => 'The author of the message, during one hour',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ?&gt;</pre>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',
@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacteur_modifie_article' => '<strong>Editor changes proposed</strong> : 	Each editor can edit an article proposed for publication, even if he is not the author.',
 	'refus_1' => '<p>Only webmasters of the site',
 	'refus_2' => 'are allowed to change these settings.</p>
-<p>For more information, see <a href="http://www.spip-contrib.net/-Autorite-">the documentation</a>.</p>',
+<p>For more information, see <a href="http://contrib.spip.net/Autorite">the documentation</a>.</p>',
 	'reglage_autorisations' => 'Setting Permissions',
 
 	// S
