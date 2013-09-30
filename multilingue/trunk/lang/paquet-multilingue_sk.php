@@ -13,11 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Zásuvný modul si vynúti inštaláciu viacerých zásuvných modulov
 	
 	- [preklad rubrík,->http://plugins.spip.net/tradrub.html]
-	- [jazyk, ktorý preferuje používateľ,->http://www.spip-contrib.net/Plugin-Langue-preferee-par-l-internaute]
-	- [preklady iných rubrík,->http://www.spip-contrib.net/Traductions-de-rubriques-autrement-3]
-	- [preklady iných článkov.->http://www.spip-contrib.net/Traductions-d-articles-autrement-3]
+	- [jazyk, ktorý preferuje používateľ,->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+	- [preklady iných rubrík,->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+	- [preklady iných článkov.->http://contrib.spip.net/Traductions-d-articles-autrement-3]
 	
-	V Spipe 2 alebo 2.1 sa odporúča nainštalovať ich pred inštaláciou zásuvného modulu [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins], potom nainštalujte tento zásuvný modul, ktorý si vynúti aj inštaláciu všetkých potrebných zásuvných modulov.
+	V Spipe 2 alebo 2.1 sa odporúča nainštalovať ich pred inštaláciou zásuvného modulu [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], potom nainštalujte tento zásuvný modul, ktorý si vynúti aj inštaláciu všetkých potrebných zásuvných modulov.
 	
 	Zásuvný modul mení aj niektoré šablóny (rubriky a články) a niekoľko základných orieškov.
 	

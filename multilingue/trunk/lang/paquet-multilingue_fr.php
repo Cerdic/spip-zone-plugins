@@ -11,11 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Le plugin force l’installation de plusieurs plugin
 	
 	- [Traduction entre rubriques->http://plugins.spip.net/tradrub.html]
-	- [Langue préférée par l’internaute ->http://www.spip-contrib.net/Plugin-Langue-preferee-par-l-internaute]
-	- [Traductions de rubriques autrement->http://www.spip-contrib.net/Traductions-de-rubriques-autrement-3]
-	- [Traductions d’articles autremen->http://www.spip-contrib.net/Traductions-d-articles-autrement-3]
+	- [Langue préférée par l’internaute ->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+	- [Traductions de rubriques autrement->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+	- [Traductions d’articles autremen->http://contrib.spip.net/Traductions-d-articles-autrement-3]
 	
-	Sous Spip 2 ou 2.1 il est recommendable d’installer d’abord le plugin [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins] avant d’activer ce plugin ce qui forcera également l’installation de tous les plugin nécessaires.
+	Sous Spip 2 ou 2.1 il est recommendable d’installer d’abord le plugin [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] avant d’activer ce plugin ce qui forcera également l’installation de tous les plugin nécessaires.
 	
 	Le plugin modifie quelques squelettes (rubriques et articles) et quelques noisettes de bases.
 	

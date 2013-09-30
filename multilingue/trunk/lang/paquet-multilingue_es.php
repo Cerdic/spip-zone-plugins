@@ -13,10 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	El plugin instala varios plugins
 	
 	- [Traducción entre secciones->http://plugins.spip.net/tradrub.html]
-	- [Idioma preferido del visitante->http://www.spip-contrib.net/Plugin-Langue-preferee-par-l-internaute]
-	- [Traducciones de secciones de otra forma->http://www.spip-contrib.net/Traductions-de-rubriques-autrement-3]
+	- [Idioma preferido del visitante->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+	- [Traducciones de secciones de otra forma->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 	
-	Con Spip 2 o 2.1, se recomienda instalar primero el plugin [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins] antes de activar este plugin, lo que permitirá instalar automáticamente todos los plugins necesarios.
+	Con Spip 2 o 2.1, se recomienda instalar primero el plugin [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] antes de activar este plugin, lo que permitirá instalar automáticamente todos los plugins necesarios.
 	
 	El plugin modifica algunos esqueletos (secciones y artículos) y algunas avellanas básicas.
 	
