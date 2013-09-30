@@ -6,13 +6,13 @@
 </div>]
 
 [<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
-	<label><:itineraire:champ_texte_label:> : </label>
+	<label class="label"><:itineraire:champ_texte_label:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
 </div>]
 
-[<div class="champ contenu_distance[ (#DISTANCE*|strlen|?{'',vide})]">
-	<label><:itineraire:champ_distance_label:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{distance} distance'>(#DISTANCE) km</span>
+[<div class="champ contenu_longueur[ (#LONGUEUR*|strlen|?{'',vide})]">
+	<label><:itineraire:champ_longueur_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{longueur} longueur'>(#LONGUEUR|floatval) km</span>
 </div>]
 
 [<div class="champ contenu_denivele[ (#DENIVELE*|strlen|?{'',vide})]">

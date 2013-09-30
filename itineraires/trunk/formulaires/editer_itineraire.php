@@ -98,9 +98,9 @@ function formulaires_editer_itineraire_saisies_dist($id_itineraire='new', $retou
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'distance',
-				'label' => _T('itineraire:champ_distance_label'),
-				'explication' => _T('itineraire:champ_distance_explication'),
+				'nom' => 'longueur',
+				'label' => _T('itineraire:champ_longueur_label'),
+				'explication' => _T('itineraire:champ_longueur_explication'),
 			),
 			'verifier' => array(
 				'type' => 'decimal',
@@ -199,11 +199,14 @@ function formulaires_editer_itineraire_charger_dist($id_itineraire='new', $retou
 	$valeurs = formulaires_editer_objet_charger('itineraire',$id_itineraire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	
 	// Pour les trucs numériques, laisser vide si c'est 0
-	foreach (array('distance', 'denivele', 'difficulte') as $champ_num){
+	foreach (array('longueur', 'denivele', 'difficulte') as $champ_num){
 		if ($valeurs[$champ_num] == 0){
 			$valeurs[$champ_num] = '';
 		}
 	}
+	
+	// Enlever les 0 superflus
+	$valeurs['longueur'] = floatval($valeurs['longueur']);
 	
 	// On ajoute l'identifiant dans l'envoi
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_itineraire" value="'.$id_itineraire.'" />';
