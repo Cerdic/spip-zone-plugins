@@ -76,7 +76,7 @@ Les différents blocs ci-dessous vous présentent un exemple de chaque modèle a
 	'javascript_inactif' => 'Le javascript est inactif sur votre navigateur. Certaines fonctionnalités de cet outil seront inactives ...',
 
 	// L
-	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
+	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] sous licence [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
 
 	// N
 	'new_window' => 'Nouvelle fenêtre',

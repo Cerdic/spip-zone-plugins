@@ -78,7 +78,7 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	'javascript_inactif' => 'Javascript je vo vašom prehliadači vypnutý. Niektoré funkcie nebudú fungovať.',
 
 	// L
-	'licence' => 'Zásuvný modul pre SPIP >2.0: {{"Šablóny pre Facebook" – copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] s licenciou [GPL->http://www.opensource.org/licenses/gpl-3.0.html].}}',
+	'licence' => 'Zásuvný modul pre SPIP >2.0: {{"Šablóny pre Facebook" – copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] s licenciou [GPL->http://www.opensource.org/licenses/gpl-3.0.html].}}',
 
 	// N
 	'new_window' => 'Nové okno',
