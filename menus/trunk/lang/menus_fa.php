@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'خودكار يك منوي فهرست تمام مقالات مرتبط با كليدواژه را نشان بده.',
 	'description_menu_objet' => 'ايجاد پيوند به چيزهاي اسپيپي: مقاله، بخش يا چيزهاي ديگر. پيش‌گزيده، هر مدخل تيتر آن چيز را داراست.',
 	'description_menu_page_speciale' => 'افزودن پيوند به صفحه‌ي اسكلت با استفاده از يوآرال اين فرم <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. چنين صفحه‌هايي اغلب توسط پلاگين‌ها استفاده مي‌شوند.  ',
-	'description_menu_page_speciale_zajax' => 'افزودن يك پيوند به يك بلوك در صفحه‌اي قابل دسترس به وسيله‌ي يك يوآرال از نوع <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. اين مستلزم يك استكلت نوع z و يك پلاگين <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> خواهد بود.  ',
+	'description_menu_page_speciale_zajax' => 'افزودن يك پيوند به يك بلوك در صفحه‌اي قابل دسترس به وسيله‌ي يك يوآرال از نوع <code>spip.php?page=nom&param1=xx&param2=yyy...</code>. اين مستلزم يك استكلت نوع z و يك پلاگين <a href="http://contrib.spip.net/MediaBox">médiabox</a> خواهد بود.  ',
 	'description_menu_rubriques_articles' => 'نمايش يك فهرست از بخش‌ها، و اگر مي‌خواهيد، زيربخش‌ها و مقاله‌ها در چندين سطح. 
 به صورت پيش‌گزيده، نمايش تمام بخش‌ها ريشه، مرتب شده بر اساس تيتر(شماره‌اي و بعد الفبايي). مقاله‌ها به طور نظام‌مند بعد از بخش‌ها قرار مي‌گيرند. 
 ',
