@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_desc' => '<strong>Palette</strong> automatically adds a colour picker wheel to an input field,
   by simply applying the CSS class "palette" to it',
 	'config_exemple' => 'Example:',
-	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Cf. documentation</a>',
+	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Cf. documentation</a>',
 
 	// F
 	'fermer' => 'Close palette',
