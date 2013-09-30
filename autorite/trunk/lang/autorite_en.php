@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ?&gt;</pre>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>',
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',

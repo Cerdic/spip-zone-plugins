@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ?&gt;</pre>
 <p><small>ملاحظة : لا يعود المشرفون المحددون بهذه الطريقة يحتاجون إلى التعريف عن نفسهم بواسطة FTP لتنفيذ العمليات الحساسة (كترقية قاعدة البيانات، مثلاً).</small></p>
 
-<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>انظر التعليمات</a>',
+<a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>انظر التعليمات</a>', # MODIF
 	'details_option_auteur' => '<small><br />حالياًو لا يعمل خيار «المؤلف» الا للمؤلفين المسجلين (منتديات بالاستراك مثلاً). واذا تم تفعيل الخيار، يتمكن مدراء الموقع أيضاً من تحرير المنتديات.
 	</small>',
 	'droits_des_auteurs' => 'حقوق المؤلفين',

@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Nota : los webmasters definidos de esta manera ya no tienen necesidad de proceder a la autentificación FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
 
 <a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Documentación</a>
-',
+', # MODIF
 	'details_option_auteur' => '<small><br />Por el momento, la opctión « autor » sólo funciona para los autores registrados (foros con suscripción, por ejemplo). Y, si está  activada, los administradores del sitio también tienen la capacidad de editar los foros.
 	</small>',
 	'droits_des_auteurs' => 'Derechos de los autores',

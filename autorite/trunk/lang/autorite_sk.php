@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Poznámka: webmasteri definovaní týmto spôsobom už viac nemusia overovať svoju totožnosť cez FTP pri vykonávaní zásadných operácií (napríklad pri aktualizácii databázy na novú verziu).</p>
 
 <a href=\'http://www.spip-contrib.net/-Autorite-\' class=\'spip_out\'>Prečítajte si dokumentáciu</a>
-',
+', # MODIF
 	'details_option_auteur' => '<small><br />Nateraz možnosť "autor" funguje iba pre zaregistrovaných autorov (napríklad diskusné fóra, na ktoré sa treba prihlásiť). A ak je táto možnosť aktivovaná, možnosť upravovať diskusné fóra majú aj administrátori stránky.
 	</small>',
 	'droits_des_auteurs' => 'Práva autorov',
