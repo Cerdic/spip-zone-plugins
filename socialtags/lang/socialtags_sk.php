@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Vloženie medzi stránky:',
 	'cfg_liste_site' => 'Zoznam sociálnych stránok',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'Na aktivovanie Google+1 inštalovať zásuvný modul (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">pomoc pre spip-contrib.</a>)',
+	'cfg_plusone_existe' => 'Na aktivovanie Google+1 inštalovať zásuvný modul (<a href="http://contrib.spip.net/Google-1" class="spip_out">pomoc pre spip-contrib.</a>)',
 	'cfg_referer' => 'Zobraziť len odznak a tlačidlá pre návštevníkov týchto stránok.',
 	'cfg_selector' => 'Oddeľovač:',
 	'cfg_sous_bloc' => 'Pod blokom názvu stránok "článok"',

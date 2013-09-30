@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertion' => 'Insertion into web pages:',
 	'cfg_liste_site' => 'List of the social websites',
 	'cfg_plusone' => 'Google plus one',
-	'cfg_plusone_existe' => 'To work with Google+1, install the plugin (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
+	'cfg_plusone_existe' => 'To work with Google+1, install the plugin (<a href="http://contrib.spip.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
 	'cfg_referer' => 'Only display the badge and buttons for native visitors of the sites concerned.',
 	'cfg_selector' => 'Selector:',
 	'cfg_sous_bloc' => 'Beneath the title block on the article pages',
