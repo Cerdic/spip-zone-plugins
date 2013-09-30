@@ -14,7 +14,7 @@ function svpstats_declarer_tables_auxiliaires($tables_auxiliaires) {
 	// Tables de liens entre plugins et les stats : spip_plugins_stats
 	$spip_plugins_stats = array(
 		"prefixe"		=> "varchar(30) DEFAULT '' NOT NULL",
-		"branche_spip"	=> "varchar(255) DEFAULT '' NOT NULL", // branche spip référencée
+		"branche_spip"	=> "varchar(255) DEFAULT '' NOT NULL",
 		"nbr_sites" 	=> "integer DEFAULT 0 NOT NULL",
 		"popularite"	=> "double DEFAULT '0' NOT NULL",
 		"historique"	=> "text DEFAULT '' NOT NULL", // Historique mensuel
