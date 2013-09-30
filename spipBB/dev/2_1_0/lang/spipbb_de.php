@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Klicken sie auf Ja um SpipBB zu aktivieren',
 	'admin_config_tables' => 'Konfiguration der Datenbanktabellen von SpipBB',
 	'admin_config_tables_erreur' => 'Es ist ein Problem mit den Datenbanktabellen von SpipBB aufgetreten: @tables_erreur@ sind fehlerhaft (die Tabellen @tables_ok@ scheinen OK zu sein).
-Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] zu Rate oder  [fragen auf spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] zu Rate oder  [fragen auf spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Die Datenbanktabellen von SpipBB wurde fehlerfrei eingerichtet:(@tables_ok@)',
 	'admin_date_ouverture' => 'Eröffnungsdatum',
 	'admin_debug_log' => 'Logdatei @log_name@',
@@ -77,12 +77,12 @@ Bitte ziehen sie die [Dokumentation auf Spip-Contrib->http://www.spip-contrib.ne
 	'admin_interface' => 'Einstellungen der Oberfläche',
 	'admin_nombre_lignes_messages' => 'Zeilen an Beiträgen',
 	'admin_plugin_requis_erreur' => 'Das erforderliche Plugin fehlt. Bitte aktivieren!',
-	'admin_plugin_requis_erreur_balisesession' => 'Bitte instalieren und aktivieren sie das Plugin Balise SESSION! [Dokumentation->http://www.spip-contrib.net/?article1224], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Bitte instalieren und aktivieren sie das Plugin CFG! [Dokumentation->http://www.spip-contrib.net/?article1605], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Bitte instalieren und aktivieren sie das Plugin Balise SESSION! [Dokumentation->http://contrib.spip.net/?article1224], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Bitte instalieren und aktivieren sie das Plugin CFG! [Dokumentation->http://contrib.spip.net/?article1605], [ZIP-Archiv zum runterladen->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Die folgenden erforderlichen Plugins fehlen. Bitte aktivieren!',
 	'admin_plugin_requis_ok' => 'Installierte und aktivierte Plugin(s):',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224]: liefert Informationen über athentifizierte Benutzer.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605]: stellt Funktionen und Tags bereit.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224]: liefert Informationen über athentifizierte Benutzer.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net/?article1605]: stellt Funktionen und Tags bereit.',
 	'admin_sous_titre' => 'Zugang zur Verwaltung der Foren mit SpipBB',
 	'admin_spip_config_forums' => 'SPIP-Einstellungen:',
 	'admin_spip_forums_ok' => 'Öffentliche Foren sind aktiviert.',
@@ -351,20 +351,20 @@ _ Ein Post-It erscheint unter den Ankündigungen und vor den Posts. Es erscheint
 	'pagine_sujet_' => ' Thema',
 	'pagine_sujet_s' => ' Themen',
 	'par_' => 'nach',
-	'plugin_auteur' => 'Das SpipBB Team : [siehe Liste der Unterstützer auf Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'Das SpipBB Team : [siehe Liste der Unterstützer auf Spip-contrib->http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'Mit SpipBB kann man:
 -* SPIP-Foren zentral verwalten (im Redaktionssystem),
 -* Eine Rubrik (Top Level / Sektor) als Container für eine Gruppe Foren wie in «bulletin boards» à la phpBB nutzen. In diesem Sektor sind Unterrubriken Forengruppen und Artikel Foren. Jeder Eintrag im Forum eines Artikels startet einen Diskussionsstrang (thread).
 
 {{Siehe auch:}}
 -* •[Hilfe ud Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Die Dokumentation auf Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[Die Dokumentation auf Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Das Plugin SpipBB befindet sich in Entwicklung. Sie verwenden es auf eigene Gefahr}}
 
 _ [Zur SpipBB-Administration-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Bereitgestellt unter der GPL',
-	'plugin_lien' => '[Lesen sie die Dokumentation des Plugins auf Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Lesen sie die Dokumentation des Plugins auf Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Diese Version des Plugins ist nicht kompatibel mit Ihrer Version von SPIP !',
 	'plugin_nom' => 'SpipBB : Verwaltung der SPIP-Foren',
 	'post_aucun_pt' => 'keins!',
@@ -409,14 +409,14 @@ nbr_post@ Post(s). Sie werden mit ihm gelöscht!n',
 	'secteur_forum' => 'HAUPTRUBRIK DER FOREN',
 	'selection_efface' => 'Auswahl löschen ...',
 	'selection_tri_dpt' => 'Sortierung wählen:',
-	'sign_admin' => '{{Diese Seite ist nur für den/Webmaster zugänglich.}}<p>Sie ermöglicht die Steuerung des Plugins «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» und die Verwaltung der SPIP-Foren.</p><p>Version : @version@ @distant@</p><p>Consultez :
-_ • [Dokumentation auf Spip-Contrib->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Diese Seite ist nur für den/Webmaster zugänglich.}}<p>Sie ermöglicht die Steuerung des Plugins «{{<a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» und die Verwaltung der SPIP-Foren.</p><p>Version : @version@ @distant@</p><p>Consultez :
+_ • [Dokumentation auf Spip-Contrib->http://contrib.spip.net/?article2460]
 _ • [Hilfe und Support auf spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Neuests verfügbare Version: @version@',
 	'sign_ok' => 'aktuell.',
 	'sign_reinit' => '<p>Rest:
 _ • [des Plugins->@plugin@]</p>',
-	'sign_tempo' => 'Realisiert mit <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Realisiert mit <a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signatur',
 	'sinscrire' => 'anmelden',
 	'site_propose' => 'Website vorgeschlagen von @auteur_post@',

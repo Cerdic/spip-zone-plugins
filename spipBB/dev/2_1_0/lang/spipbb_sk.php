@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Ak chcete aktivovať SpipBB, kliknite na Áno',
 	'admin_config_tables' => 'Nastavenie tabuliek SpipBB',
 	'admin_config_tables_erreur' => 'Problém s tabuľkami SpipBB: @tables_erreur@ sú nesprávne (tabuľky @tables_ok@ sa zdajú byť v poriadku).
- Pozrite si [dokumentáciu k Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] alebo [podporu k spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+ Pozrite si [dokumentáciu k Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] alebo [podporu k spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Databázové tabuľky SpipBB sa nainštalovali správne (@tables_ok@)',
 	'admin_date_ouverture' => 'Dátum otvorenia',
 	'admin_debug_log' => 'Súbor protokolu @log_name@',
@@ -77,12 +77,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_interface' => 'Možnosti rozhrania',
 	'admin_nombre_lignes_messages' => 'Počet riadkov správy',
 	'admin_plugin_requis_erreur' => 'Tento požadovaný zásuvný modul chýba. Aktivujte ho!',
-	'admin_plugin_requis_erreur_balisesession' => 'Nainštalujte si zásuvný modul "Balise SESSION" a aktivujte si ho! [Dokumentácia,->http://www.spip-contrib.net/?article1224] [Súbor ZIP.->http://files.spip.org/spip-zone/balise_session.zip]',
-	'admin_plugin_requis_erreur_cfg' => 'Nainštalujte si zásuvný modul CFG a aktivujte si ho![Dokumentácia,->http://www.spip-contrib.net/?article1605] [Súbor ZIP.->http://files.spip.org/spip-zone/cfg.zip]',
+	'admin_plugin_requis_erreur_balisesession' => 'Nainštalujte si zásuvný modul "Balise SESSION" a aktivujte si ho! [Dokumentácia,->http://contrib.spip.net/?article1224] [Súbor ZIP.->http://files.spip.org/spip-zone/balise_session.zip]',
+	'admin_plugin_requis_erreur_cfg' => 'Nainštalujte si zásuvný modul CFG a aktivujte si ho![Dokumentácia,->http://contrib.spip.net/?article1605] [Súbor ZIP.->http://files.spip.org/spip-zone/cfg.zip]',
 	'admin_plugin_requis_erreur_s' => 'Tieto požiadované zásuvné moduly chýbajú. Aktivujte ich!',
 	'admin_plugin_requis_ok' => 'Nainštalované a aktivované zásuvné moduly:',
-	'admin_plugin_requis_ok_balisesession' => '[Zásuvný modul BALISE_SESSION:->http://www.spip-contrib.net/?article1224] poskytuje informácie o prihlásených návštevníkoch.',
-	'admin_plugin_requis_ok_cfg' => '[Zásuvný modul CFG->http://www.spip-contrib.net/?article1605]: poskytuje tagy a funkcie.',
+	'admin_plugin_requis_ok_balisesession' => '[Zásuvný modul BALISE_SESSION:->http://contrib.spip.net/?article1224] poskytuje informácie o prihlásených návštevníkoch.',
+	'admin_plugin_requis_ok_cfg' => '[Zásuvný modul CFG->http://contrib.spip.net/?article1605]: poskytuje tagy a funkcie.',
 	'admin_sous_titre' => 'Prejsť na panel správcu diskusných fór SpipBB',
 	'admin_spip_config_forums' => 'Nastavenie SPIPu:',
 	'admin_spip_forums_ok' => 'Verejné diskusné fóra sú aktivované.',
@@ -351,20 +351,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_' => 'téma',
 	'pagine_sujet_s' => ' témy',
 	'par_' => 'autor(ka) ',
-	'plugin_auteur' => 'Tím SpipBB: [Pozrite si zoznam prispievateľov modulu Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'Tím SpipBB: [Pozrite si zoznam prispievateľov modulu Spip-contrib->http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'Zásuvný modul SpipBB ponúka tieto funkcie:
 -* Sústreďuje riadenie diskusných fór v SPIPe (v súkromnej zóne),
 -* Mení hlavnú rubriku stránky na skupinu diskusných fór v štýle "nástenky" podobne ako v phpBB. V tejto rubrike sa podrubriky používajú ako skupiny diskusných fór, články sú diskusné fóra, kde sa témy vytvárajú z príspevkov poslaných k článkom.
 
 {{Prosím, prečítajte si:}}
-- [pomocníka a podporu k spipbb.spip-zone.info,->http://spipbb.spip-zone.info/spip.php?article11]
-- [dokumentáciu k Spip-contrib.->http://www.spip-contrib.net/SpipBB-le-forum]
+-* [pomocníka a podporu k spipbb.spip-zone.info,->http://spipbb.spip-zone.info/spip.php?article11]
+-* [dokumentáciu k Spip-contrib.->http://contrib.spip.net/SpipBB-le-forum]
 
 _ {{Zásuvný modul SpipBB sa stále vyvíja. Používate ho na svoje vlastné riziko.}}
 
 _ [Prístup na riadiaci panel-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuované s licenciou GPL licence',
-	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Túto verziu zásuvného modulu memôžete použiť s vašou verziou SPIPU!',
 	'plugin_nom' => 'SpipBB: Riadenie diskusných fór SPIPU',
 	'post_aucun_pt' => 'žiadne!',
@@ -406,14 +406,14 @@ nbr_post@ príspevkov. Budú vymazané spolu s ňou!\\n',
 	'secteur_forum' => 'KOREŇOVÝ ADRESÁR',
 	'selection_efface' => 'Zmazať výber...',
 	'selection_tri_dpt' => 'Vyberte si kritérium triedenia:',
-	'sign_admin' => '{{Túto stránku môže vidieť iba vlastník webu.}}<p>Poskytuje prístup k nastaveniu zásuvného modulu {{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB,</a>}} ako aj k riadeniu diskusných fór vašej stránky.</p><p>Verzia: @version@ @distant@</p><p>Pozrite si:
-_ • [dokumentáciu k Spip-Contrib->http://www.spip-contrib.net/?article2460],
+	'sign_admin' => '{{Túto stránku môže vidieť iba vlastník webu.}}<p>Poskytuje prístup k nastaveniu zásuvného modulu {{<a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB,</a>}} ako aj k riadeniu diskusných fór vašej stránky.</p><p>Verzia: @version@ @distant@</p><p>Pozrite si:
+_ • [dokumentáciu k Spip-Contrib->http://contrib.spip.net/?article2460],
 _ • [pomocníka a podporu na spipbb.spip-zone.info.->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />k dispozícii je aktualizácia: @version@',
 	'sign_ok' => 'aktuálna.',
 	'sign_reinit' => '<p>Obnoviť:
  _ • [celý zásuvný modul->@plugin@]</p>',
-	'sign_tempo' => 'Vytvorené pomocou <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Vytvorené pomocou <a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Podpis',
 	'sinscrire' => 'Zaregistrovať sa',
 	'site_propose' => 'Navrhovaná internetová stránka – @auteur_post@',

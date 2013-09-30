@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'SpipBB’yi aktive etmek için Evet’e tıklayın',
 	'admin_config_tables' => 'SpipBB tabloları konfigürasyonu',
 	'admin_config_tables_erreur' => 'SpipBB tablolarında sorun var : @tables_erreur@ hatalı (@tables_ok@ tabloları doğru görünüyor).
-Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
+Bkz [Spip-Contrib ile ilgili belgeler->http://contrib.spip.net/SpipBB-le-forum] veya [spipbb.spip-zone ile ilgili belgeler->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'SpipBB tabloları düzgün biçimde kuruldu (@tables_ok@)',
 	'admin_date_ouverture' => 'Açılış tarihi',
 	'admin_debug_log' => '@log_name@ rapor dosyası',
@@ -77,12 +77,12 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 	'admin_interface' => 'Arayüz seçenekleri',
 	'admin_nombre_lignes_messages' => 'İleti satırı sayısı',
 	'admin_plugin_requis_erreur' => 'Şu eklenti eksik. Aktive edin !',
-	'admin_plugin_requis_erreur_balisesession' => 'Balise SESSION eklentisini kurun ve aktive edin ! [Belge için bkz->http://www.spip-contrib.net/?article1224], [Zip arşivi için bkz->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge için bkz->http://www.spip-contrib.net/?article1605], [Zip arşivi için bkz->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Balise SESSION eklentisini kurun ve aktive edin ! [Belge için bkz->http://contrib.spip.net/?article1224], [Zip arşivi için bkz->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'CFG eklentisini kurun ve aktive edin ![Belge için bkz->http://contrib.spip.net/?article1605], [Zip arşivi için bkz->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Şu eklentiler eksik. Aktive edin !',
 	'admin_plugin_requis_ok' => 'Kurulu ve aktif eklentiler :',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : güvenlik kontrolünden geçmiş ziyaretçilerin bilgilerini sunar.',
-	'admin_plugin_requis_ok_cfg' => '[CFG eklentisi->http://www.spip-contrib.net/?article1605] : fonksiyon ve komutları içerir.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224] : güvenlik kontrolünden geçmiş ziyaretçilerin bilgilerini sunar.',
+	'admin_plugin_requis_ok_cfg' => '[CFG eklentisi->http://contrib.spip.net/?article1605] : fonksiyon ve komutları içerir.',
 	'admin_sous_titre' => 'SpipBB ile forumların yönetim panosuna erişim',
 	'admin_spip_config_forums' => 'SPIP konfigürasyonu :',
 	'admin_spip_forums_ok' => 'Kamu forumları sorunsuz aktive edildi.',
@@ -350,20 +350,20 @@ _ Duyuruların altında, basit mesajlardan önce bir postit vardır. Listede yal
 	'pagine_sujet_' => ' konu',
 	'pagine_sujet_s' => ' konu',
 	'par_' => '—> ',
-	'plugin_auteur' => 'SpipBB Takımı : [katılımcıların listesini görmek için Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'SpipBB Takımı : [katılımcıların listesini görmek için Spip-contrib->http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs]',
 	'plugin_description' => 'SpipBB eklentisi şunları sağlar :
 -* SPIP forumlarını tek merkezden yönetmek (özel arayüz),
 -* Bir sektörü forumlar grubu veritabanı olarak phpBB benzeri «Bulletin Board» gibi kullanmak. Bu sektörde; alt başlıklar forum grupları ve forum makaleleridir. Bir makalenin forumuna yazılan her yeni mesaj orada bir "thread" başlatır.
 
 {{İnceleyiniz :}}
 -* •[spipbb’de yardım ve destek.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[Belgeler Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[Belgeler Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{spipbb eklentisi geliştirilme aşamasındadır. Kullanım esnasında oluşabilecek sorunlar tamamen size aittir.}}
 
 _ [Yönetim panosuna erişim-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'GPL lisansı ile dağıtılan',
-	'plugin_lien' => 'Spip-contrib’de eklenti hakkındaki belgelere bkz->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_lien' => 'Spip-contrib’de eklenti hakkındaki belgelere bkz->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Eklentinin bu sürümü sizin SPIP sürümünüzle uyumlu değil !',
 	'plugin_nom' => 'SpipBB : SPIP forumlarının yönetimi',
 	'post_aucun_pt' => 'hiçbiri !',
@@ -401,14 +401,14 @@ nbr_post@ mesaj içerir. Bu mesajlar da konuyla birlikte silinecektir !n',
 	'secteur_forum' => 'KÖK DİZİN',
 	'selection_efface' => 'Seçimi sil ...',
 	'selection_tri_dpt' => 'Sıralama yöntemini seç :',
-	'sign_admin' => '{{Bu sayfa sadece site sorumlularının erişimine açıktır.}}<p>Eklentinin konfigürasyonuna erişim hakkı verir «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ayrıca sitenin forumlarının yönetimine olanak tanır. </p><p>Sürüm : @version@ @distant@</p><p>Bkz :
-_ • [Spip-Contrib’deki belgeler->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Bu sayfa sadece site sorumlularının erişimine açıktır.}}<p>Eklentinin konfigürasyonuna erişim hakkı verir «{{<a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ayrıca sitenin forumlarının yönetimine olanak tanır. </p><p>Sürüm : @version@ @distant@</p><p>Bkz :
+_ • [Spip-Contrib’deki belgeler->http://contrib.spip.net/?article2460]
 _ • [spipbb.spip-zone.info yardım dosyaları->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Daha yeni bir sürüm mevcut : @version@',
 	'sign_ok' => 'güncel.',
 	'sign_reinit' => '<p>Yeniden başlatılması :
 _ • [eklenti->@plugin@]</p>',
-	'sign_tempo' => '<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a> ile gerçekleştirilmiştir',
+	'sign_tempo' => '<a href="http://contrib.spip.net/Plugin-Forum-SpipBB#contributeurs" class="copyright">SpipBB</a> ile gerçekleştirilmiştir',
 	'signature' => 'İmza',
 	'sinscrire' => 'Kayıt ol',
 	'site_propose' => '@auteur_post@ tarafından önerilen site',
