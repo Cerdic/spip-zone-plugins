@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_imprimer_ttl' => 'Vytlačiť túto stránku',
 
 	// D
-	'descr_cfg' => 'Dokumentácia zásuvného modulu pre viac informácií: [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
+	'descr_cfg' => 'Dokumentácia zásuvného modulu pre viac informácií: [spip-contrib.net/?article3573->http://contrib.spip.net/?article3573]',
 
 	// E
 	'editor' => 'Upraviť vyskakovací odkaz',
