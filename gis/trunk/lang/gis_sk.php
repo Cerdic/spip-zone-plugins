@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Odstrániť tento odkaz',
 
 	// C
-	'cfg_descr_gis' => 'Geografický informačný systém.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Prejsť na dokumentáciu.</a>',
+	'cfg_descr_gis' => 'Geografický informačný systém.<br /><a href="http://contrib.spip.net/3887" class="spip_out">Prejsť na dokumentáciu.</a>',
 	'cfg_inf_adresse' => 'Zobrazí ďalšie polia adresy (krajinu, mesto, štát, adresu a pod.)',
 	'cfg_inf_bing' => 'Vrstva Bing Aerial si vyžaduje, aby ste <a href=\'@url@\' class="spip_out">na stránke vyhľadávača Bing</a> vytvorili kľúč.',
 	'cfg_inf_cloudmade' => 'Táto aplikácia potrebuje kľúč na vytvorenie <a href=\'@url@\' class="spip_out">stránky v Cloude.</a>',

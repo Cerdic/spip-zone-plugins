@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Удалить связь',
 
 	// C
-	'cfg_descr_gis' => 'Географическая Информационная Система (GIS).<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Документация</a>.',
+	'cfg_descr_gis' => 'Географическая Информационная Система (GIS).<br /><a href="http://contrib.spip.net/3887" class="spip_out">Документация</a>.',
 	'cfg_inf_adresse' => 'Показываются дополнительные поля для ввода адреса (страна, город, область, адрес...)',
 	'cfg_inf_bing' => 'Для использования карты Bing Aerial необходимо создать ключ  <a href=\'@url@\' class="spip_out">на сайте Bing</a>.',
 	'cfg_inf_cloudmade' => 'Для использования карты необходимо создать ключ <a href=\'@url@\' class="spip_out">на сайте CloudMade</a>.',

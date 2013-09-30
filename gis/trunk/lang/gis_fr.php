@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Supprimer ce lien',
 
 	// C
-	'cfg_descr_gis' => 'Système d’Information Géographique.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Accéder la documentation</a>.',
+	'cfg_descr_gis' => 'Système d’Information Géographique.<br /><a href="http://contrib.spip.net/3887" class="spip_out">Accéder la documentation</a>.',
 	'cfg_inf_adresse' => 'Affiche des champs supplémentaires d’adresse (pays, ville, région, adresse...)',
 	'cfg_inf_bing' => 'La couche Bing Aerial nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de Bing</a>.',
 	'cfg_inf_cloudmade' => 'Cette API nécessite une clé à créer sur <a href=\'@url@\' class="spip_out">le site de CloudMade</a>.',
