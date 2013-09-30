@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_squelette' => 'If you have created a personal skeleton for the dialog plugin window (<i>like the model file "tip_a_friend.html"</i>) enter it here ; your skeleton will necessarily include the form "<b>tipafriend_form</b>".',
 	'cfgform_comment_taf_css' => 'the plugin defines CSS styles on the model of the SPIP’s distribution ; by default, these styles are included in the form but you can here choose not to include them.',
 	'cfgform_info_balise' => 'The tag returns the link to open the form page. You can change the image displayed by directly editing the skeleton "<strong>modeles/tipafriend.html</strong>" in the plugin.',
-	'cfgform_info_patron_html' => 'If the plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> is installed and running on your site it is possible to construct an HTML version of the email sent.',
+	'cfgform_info_patron_html' => 'If the plugin <a href="http://contrib.spip.net/?article3371"><strong>Facteur</strong></a> is installed and running on your site it is possible to construct an HTML version of the email sent.',
 	'cfgform_info_patrons' => 'Your personal patrons are to be placed in the subdirectory "<strong>patrons/</strong>" of your skeletons directory.',
 	'cfgform_info_squelettes' => 'Your personal skeletons are to be placed directly in your home skeletons directory.',
 	'cfgform_option_contenu_introduction' => 'The title and introduction',
@@ -96,11 +96,11 @@ To change the argument of the tag in the test page, add the argument "arg = {{..
 The links below allow you to test the models used in web page ({with dummy values ​}) or to include them in the current page.
 - [Include the model ’tipafriend_mail_default.html’->@url_model@] <small>(model=...)</small>
 - [See the raw model with dummy values->@url_model_brut@]
-- [See the HTML model with dummy values->@url_model_html@] <small>(you need the plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
+- [See the HTML model with dummy values->@url_model_html@] <small>(you need the plugin {{[Facteur->http://contrib.spip.net/?article3371]}})</small>
 
 {{{CFG Configuration Settings of TIPAFRIEND}}}
 
-If the plugin {{[CFG : Configuration Engine->http://www.spip-contrib.net/?rubrique575]}} is active on your site, the link below shows you the configuration values ​​recorded for the plugin "Tip A Friend".
+If the plugin {{[CFG : Configuration Engine->http://contrib.spip.net/?rubrique575]}} is active on your site, the link below shows you the configuration values ​​recorded for the plugin "Tip A Friend".
 
 @cfg_param@',
 
@@ -131,7 +131,7 @@ If the plugin {{[CFG : Configuration Engine->http://www.spip-contrib.net/?rubriq
 -* ["SPIP skeleton mode->@mode_spip@] ({distribution compatible})',
 
 	// L
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distributed under [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html] license.',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] distributed under [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html] license.',
 
 	// M
 	'mail_body_01' => '@nom_exped@ (contact : @mail_exped@) invites you to consult the document below, taken from the website @nom_site@, you may be interested in.',
@@ -155,7 +155,7 @@ If the plugin {{[CFG : Configuration Engine->http://www.spip-contrib.net/?rubriq
 	// P
 	'page_test' => 'Test page (local)',
 	'page_test_balise' => 'TIPAFRIEND tag render',
-	'page_test_cfg_pas_installe' => 'The [CFG-> http://www.spip-contrib.net/?rubrique575] plugin does not seem to be installed ...',
+	'page_test_cfg_pas_installe' => 'The [CFG-> http://contrib.spip.net/?rubrique575] plugin does not seem to be installed ...',
 	'page_test_fin_simulation' => '— End of the inclusion for simulation',
 	'page_test_in_new_window' => 'Test page in a new window',
 	'page_test_menu_inclure' => 'Include the model ’tipafriend_mail_default.html’',

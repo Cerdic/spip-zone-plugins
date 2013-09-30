@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Zásuvný modul definuje štýly CSS na modely štýlov distribúcie SPIPu; tieto štýly sa podľa predvolených nastavení vkladajú do formulára, ale môžete sa rozhodnúť, že ich tam nevložíte.',
 	'cfgform_info_balise' => 'Tag vypíše odkaz na otvorenie stránky s formulárom na odoslanie. Zobrazený obrázok môžete zmeniť priamo úpravou šablóny  <strong>"modeles/tipafriend.html"</strong> zásuvného modulu.',
-	'cfgform_info_patron_html' => '<strong>Ak je na vašej stránke nainštalovaný a aktivovaný zásuvný modul <a href="http://www.spip-contrib.net/?article3371"><strong>Faktor,</strong></a> dá sa vytvoriť HTML verzia odoslaného e-mailu.',
+	'cfgform_info_patron_html' => '<strong>Ak je na vašej stránke nainštalovaný a aktivovaný zásuvný modul <a href="http://contrib.spip.net/?article3371"><strong>Faktor,</strong></a> dá sa vytvoriť HTML verzia odoslaného e-mailu.',
 	'cfgform_info_patrons' => 'Vaše vlastné vzory sa umiestňujú do podpriečinka  <strong>patrons/</strong> vášho priečinka so šablónami.',
 	'cfgform_info_squelettes' => 'Vaše vlastné šablóny sa priamo umiestňujú do priečinka so šablónami.',
 	'cfgform_option_contenu_introduction' => 'Názov a úvod',
@@ -104,11 +104,11 @@ Ak chcete zmeniť parameter tagu na tejto testovacej stránke, k aktuálnej adr
 Tieto odkazy vám umožňujú otestovať šablóny využívané na vašej webovej stránke ({s fiktívnymi hodnotami}) alebo ich pridať na aktuálnu stránku.
 - [Vložiť šablónu "tipafriend_mail_default.html"->@url_model@] <small>(model=...)</small>
 - [Zobraziť šablónu ako nenaformátovaný text s fiktívnymi hodnotami->@url_model_brut@]
-- [Zobraziť šablónu ako HTML s fiktívnymi hodnotami->@url_model_html@] <small>(vyžaduje si zásuvný modul {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
+- [Zobraziť šablónu ako HTML s fiktívnymi hodnotami->@url_model_html@] <small>(vyžaduje si zásuvný modul {{[Facteur->http://contrib.spip.net/?article3371]}})</small>
 
 {{{Parametre CFG pre TIPAFRIEND}}}
 
-Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.net/?rubrique575]}} aktivovaný na vašej stránky, po kliknutí na tento odkaz sa zobrazia hodnoty na nastavení uložené pre zásuvný modul "Odporučiť priateľom".
+Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://contrib.spip.net/?rubrique575]}} aktivovaný na vašej stránky, po kliknutí na tento odkaz sa zobrazia hodnoty na nastavení uložené pre zásuvný modul "Odporučiť priateľom".
 
 @cfg_param@',
 
@@ -139,7 +139,7 @@ Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.ne
 -* [Režim "šablóna SPIP"->@mode_spip@] ({kompatibilné s distribúciou})',
 
 	// L
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribuovaný s licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] distribuovaný s licenciou [GNU GPL v3.->http://www.opensource.org/licenses/gpl-3.0.html]',
 
 	// M
 	'mail_body_01' => '@nom_exped@ (kontakt: @mail_exped@) vás pozýva, aby ste si pozreli tento dokument zo stránky @nom_site@, možno vás bude zaujímať.',
@@ -163,7 +163,7 @@ Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://www.spip-contrib.ne
 	// P
 	'page_test' => 'Testovacia stránka (lokálne)',
 	'page_test_balise' => 'Zápis tagu TIPAFRIEND',
-	'page_test_cfg_pas_installe' => 'Zdá sa, že zásuvný modul [CFG->http://www.spip-contrib.net/?rubrique575] nie je nainštalovaný.',
+	'page_test_cfg_pas_installe' => 'Zdá sa, že zásuvný modul [CFG->http://contrib.spip.net/?rubrique575] nie je nainštalovaný.',
 	'page_test_fin_simulation' => '— Koniec pridávania na simuláciu',
 	'page_test_in_new_window' => 'Testovacia stránka v novom okne',
 	'page_test_menu_inclure' => 'Vložiť šablónu "tipafriend_mail_default.html"',

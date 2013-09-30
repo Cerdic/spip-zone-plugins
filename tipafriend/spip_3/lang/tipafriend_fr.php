@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_squelette' => 'Si vous avez créé un squelette personnel pour la boîte de dialogue du plugin (<i>sur le modèle du fichier "tip_a_friend.html"</i>) indiquez-le ici ; votre squelette devra obligatoirement inclure le formulaire "<b>tipafriend_form</b>".',
 	'cfgform_comment_taf_css' => 'Le plugin définit des styles CSS sur le modèle des styles de la distribution de SPIP ; ces styles sont inclus au formulaire par défaut mais vous pouvez ici choisir de ne pas les inclure.',
 	'cfgform_info_balise' => 'La balise renvoie le lien ouvrant la page du formulaire d’envoi. Vous pouvez changer l’image affichée en modifiant une copie du squelette "<strong>modeles/tipafriend.html</strong>" du plugin.',
-	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://www.spip-contrib.net/?article3371"><strong>Facteur</strong></a> est installé et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoyé.',
+	'cfgform_info_patron_html' => '<strong>Si le plugin <a href="http://contrib.spip.net/?article3371"><strong>Facteur</strong></a> est installé et actif sur votre site</strong>, il est possible de construire une version HTML du mail envoyé.',
 	'cfgform_info_patrons' => 'Vos patrons personnels sont à placer dans le sous-répertoire "<strong>patrons/</strong>" de votre répertoire de squelettes.',
 	'cfgform_info_squelettes' => 'Vos squelettes personnels sont à placer directement dans votre répertoire de squelettes.',
 	'cfgform_option_contenu_introduction' => 'Le titre et l’introduction',
@@ -95,7 +95,7 @@ Pour modifier l’argument de la balise dans cette page de tests, ajoutez l’ar
 Les liens ci-dessous vous permettent de tester les modèles utilisés en page web ({avec des valeurs fictives}) ou de les inclure à la page courante.
 - [Inclure le modèle ’tipafriend_mail_default.html’->@url_model@] <small>(model=...)</small>
 - [Voir le modèle brut avec des données fictives->@url_model_brut@]
-- [Voir le modèle HTML avec des données fictives->@url_model_html@] <small>(nécessite le plugin {{[Facteur->http://www.spip-contrib.net/?article3371]}})</small>
+- [Voir le modèle HTML avec des données fictives->@url_model_html@] <small>(nécessite le plugin {{[Facteur->http://contrib.spip.net/?article3371]}})</small>
 
 {{{Paramètres de configuration}}}
 
@@ -130,7 +130,7 @@ Le bloc ci-dessous vous présente les valeurs de configuration enregistrées pou
 -* [Mode "squelette SPIP"->@mode_spip@] ({compatible distribution})',
 
 	// L
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html].',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] distribué sous licence [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html].',
 
 	// M
 	'mail_body_01' => '@nom_exped@ (contact : @mail_exped@) vous invite à consulter le document ci-dessous, tiré du site @nom_site@, susceptible de vous intéresser.',
@@ -154,7 +154,7 @@ Le bloc ci-dessous vous présente les valeurs de configuration enregistrées pou
 	// P
 	'page_test' => 'Page de test (locale)',
 	'page_test_balise' => 'Rendu de la balise TIPAFRIEND',
-	'page_test_cfg_pas_installe' => 'Le Plugin [CFG->http://www.spip-contrib.net/?rubrique575] ne semble pas installé ...',
+	'page_test_cfg_pas_installe' => 'Le Plugin [CFG->http://contrib.spip.net/?rubrique575] ne semble pas installé ...',
 	'page_test_fin_simulation' => '— Fin de l’inclusion pour simulation',
 	'page_test_in_new_window' => 'Page de test en nouvelle fenêtre',
 	'page_test_menu_inclure' => 'Inclure le modèle ’tipafriend_mail_default.html’',
