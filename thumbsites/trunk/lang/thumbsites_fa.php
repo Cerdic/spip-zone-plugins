@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'تازه‌سازي صورتك',
 
 	// C
-	'cfg_descriptif' => 'اين صفحه به شما اجازه مي‌دهد تا پلاگين تام‌سايتز (Thumbsites) را پيكربندي كنيد، و به ويژه، سرور ريزنش‌ها را انتخاب كنيد. براي اطلاعات بيشتر به اينجا مراجعه كنيد: <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
+	'cfg_descriptif' => 'اين صفحه به شما اجازه مي‌دهد تا پلاگين تام‌سايتز (Thumbsites) را پيكربندي كنيد، و به ويژه، سرور ريزنش‌ها را انتخاب كنيد. براي اطلاعات بيشتر به اينجا مراجعه كنيد: <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> خدمات رايگاني را پيشنهاد مي‌دهد كه نيازي به شناسايي ندارد.',
 	'cfg_inf_rotothumb_presentation' => 'براي استفاده از اين خدمت لازم نيست ثبت نام كنيد اما بايد يك پيوند با سايت <a href="http://www.robothumb.com">Robothumb</a> برقرار كنيد. تدوام اين پيوند به صورت دوره‌اي توسط سرور‌هاي خودشان بررسي مي‌شود. ',
 	'cfg_inf_websnapr_presentation' => 'براي استفاده از اين خدمت بايد در سايت <a href="http://www.websnapr.com">Websnapr</a> ثبت نام كنيد. نسخه‌ي رايگان مي‌تواند 250 هزار كاپچبر (گيراندازي) سايت را در طول يك ماه و با آهنگ 80 كاپچر در ساعت پردازش كند. ',

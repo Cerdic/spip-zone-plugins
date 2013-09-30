@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Refresh the thumbnail',
 
 	// C
-	'cfg_descriptif' => 'This page is sued for configuring the Thumbsites plugin, and in particular, to select the thumbnails server. To find out more, please refer to the <a href="http://www.spip-contrib.net/?article2584">documentation on contrib</a>',
+	'cfg_descriptif' => 'This page is sued for configuring the Thumbsites plugin, and in particular, to select the thumbnails server. To find out more, please refer to the <a href="http://contrib.spip.net/?article2584">documentation on contrib</a>',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose a free service without identification.',
 	'cfg_inf_choix_serveur' => 'Choose the server which will provide thumbnails of your favorite referenced websites and eventually complete the configuration.',
 	'cfg_inf_miwim_presentation' => 'To use this service, you need to implement a link to <a href="http://thumbs.miwim.fr">Miwim</a>. The presence of this link is verified periodically by a script.',

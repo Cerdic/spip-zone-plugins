@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_rafraichir' => 'Obnoviť miniatúru',
 
 	// C
-	'cfg_descriptif' => 'Táto stránka vám umožňuje nastaviť zásuvný modul Thumbsites a najmä vybrať si server pre miniatúry. Ak chcete zistiť viac informácií, pozrite si <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>dokumentáciu na contribe</a>',
+	'cfg_descriptif' => 'Táto stránka vám umožňuje nastaviť zásuvný modul Thumbsites a najmä vybrať si server pre miniatúry. Ak chcete zistiť viac informácií, pozrite si <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>dokumentáciu na contribe</a>',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</ a> ponúka bezplatnú službu, ktorá si nevyžaduje identifikáciu.',
 	'cfg_inf_choix_serveur' => 'Vyberte si server, čo poskytuje miniatúry stránok, na ktoré odkazujete, a prípadne vyplňte jeho parametre ',
 	'cfg_inf_miwim_presentation' => 'Na to, aby ste mohli využívať túto službu, musíte pridať odkaz na stránku <a href="http://thumbs.miwim.fr">Miwim.</a> Existenciu tohto odkazu pravidelne kontroluje skript.',
