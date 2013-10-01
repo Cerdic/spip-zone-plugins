@@ -13,7 +13,7 @@
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_selection(ARTICLES){par titre}{id_rubrique<0>
+<BOUCLE_selection(ARTICLES){par titre}{id_rubrique<0}>
 	<option value="#PAGE" [(#PAGE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE (#PAGE)</option>
 </BOUCLE_selection>
 </select>
