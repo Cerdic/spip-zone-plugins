@@ -75,8 +75,7 @@
 .rainette_previsions_2x12h {
 	float: left;
 	border: 0.2em solid #dddddd;
-	border-right: 0.1em solid #dddddd;
-	width: 54em;
+	width: 54.2em;
 	margin: 0.5em 0 0 0;
 }
 .rainette_previsions_2x12h .entete {
@@ -90,6 +89,10 @@
 	font-weight: bold;
 	background: #fcfcfc;
 }
+.rainette_previsions_2x12h .entete+.entete {
+	width: 27.2em;
+	border-right: 0;
+}
 .rainette_previsions_2x12h .cadre {float: left; background: #ffffff;}
 .rainette_previsions_2x12h .cellule {
 	float: left;
@@ -97,6 +100,10 @@
 	border-style: solid;
 	border-color: #dddddd;
 	border-width: 0 0.1em 0.1em 0;
+}
+.rainette_previsions_2x12h .cellule+.cellule {
+	width: 27.2em;
+	border-width: 0 0 0.1em 0;
 }
 .rainette_previsions_2x12h .contenu {
 	float: left; width: 24em; margin: 0.5em 1em 1em 1em;
