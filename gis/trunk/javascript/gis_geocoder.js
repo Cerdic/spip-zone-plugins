@@ -7,8 +7,8 @@ L.Geocoder = L.Class.extend({
 	includes: L.Mixin.Events,
 
 	options: {
-		forwardUrl: 'http://open.mapquestapi.com/nominatim/v1/search',
-		reverseUrl: 'http://open.mapquestapi.com/nominatim/v1/reverse',
+		forwardUrl: '//open.mapquestapi.com/nominatim/v1/search',
+		reverseUrl: '//open.mapquestapi.com/nominatim/v1/reverse',
 		limit: 1,
 		acceptLanguage:'fr',
 		addressdetails: 1
