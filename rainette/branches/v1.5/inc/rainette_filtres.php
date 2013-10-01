@@ -99,10 +99,9 @@ function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $mo
 		else {
 			$d = intval(ceil(($d-time())/(24*3600)));
 			if (($d < 0) OR ($d >= _RAINETTE_JOURS_PREVISION))
-				return  _T('rainette:meteo') . '&nbsp;: ' .
-					_T('rainette:meteo_previsions') . ' ' .
-					 $jour . '&nbsp;: ' .
-					_T('rainette:meteo_na');
+				return '<div class="rainette_previsions_2x12h"><div class="maj">' .
+				  _T('rainette:meteo_na') .
+				  '</div></div>';
 			$jour = $d;
 		}
 		
