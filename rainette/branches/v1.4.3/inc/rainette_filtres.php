@@ -81,18 +81,30 @@ function rainette_afficher_unite($valeur, $type_valeur=''){
 
 /**
  * Charger le fichier des infos meteos jour par jour
- * et rendre l'affichage pour les N premiers jours
+ * et rendre l'affichage pour les $nb_jours_affiche premiers jours
+ * $nb_jours_affiche peut aussi etre de la forme Y/m/D ou Y-m-D
+ * auquel cas on prend le nb de jours separant cette date de la courante.
+ * Si negatif ou superieur au max, on retourne "indisponible".
  *
  * @param string $code_meteo
- * @param int $nb_jours_affiche
+ * @param int|string $nb_jours_affiche
  * @return string
  * @author Cedric Morin
  */
 function rainette_croaaaaa_previsions($code_meteo, $type='x_jours', $jour=0, $modele='previsions_24h'){
 	include_spip('inc/rainette_utils');
-
 	if ($type == '1_jour') {
-		$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
+		if (($d = intval(strtotime(strval($jour)))) <= 0) 
+			$jour = min($jour, _RAINETTE_JOURS_PREVISION-1);
+		else {
+			$d = intval(ceil(($d-time())/(24*3600)));
+			if (($d < 0) OR ($d >= _RAINETTE_JOURS_PREVISION))
+				return  _T('rainette:meteo') . '&nbsp;: ' .
+					_T('rainette:meteo_previsions') . ' ' .
+					 $jour . '&nbsp;: ' .
+					_T('rainette:meteo_na');
+			$jour = $d;
+		}
 		
 		$nom_fichier = charger_meteo($code_meteo, 'previsions');
 		lire_fichier($nom_fichier,$tableau);
