@@ -1,0 +1,16 @@
+<paquet
+	prefix="oficina"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.11;]"
+	documentation="http://office.rezo.net/"
+>
+	<nom>oficina</nom>
+
+	<auteur>Fil</auteur>
+
+	<copyright>2013</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+</paquet>
