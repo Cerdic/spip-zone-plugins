@@ -1,5 +1,7 @@
 <?php
 
+die('ce brouillon code ne marche pas encore ; a revoir');
+
 // Open an inotify instance
 $fd = inotify_init();
 
