@@ -106,10 +106,6 @@
   font-size: 15px;
   font-family: "Georgia,Cambria,Times New Roman,Times,serif";
 }
-.menu_container > ul > li > a > img {
-  margin-right: 10px;
-  vertical-align: middle;
-}
 .menu_container > ul > li.right {
   float: right;
 }
@@ -175,13 +171,16 @@
   display: block;
   border: 0;
   padding: 4px 0px;
+  padding-left: 24px;
+  background-position: left center;
+  background-repeat: no-repeat;
   text-decoration: none;
   color: #666666;
   font-family: "Georgia,Cambria,Times New Roman,Times,serif";
 }
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li > a:hover {
   color: #111111;
-  background: none;
+  background-color: none;
 }
 .menu_container > ul > li > .menu_dropdown_block .ssmenu_container ul.menu_submenu li > a > img {
   float: left;

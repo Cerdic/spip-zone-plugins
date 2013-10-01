@@ -50,7 +50,7 @@
 		<li>
 			<a[ href="(#ENV{lien_boussole, #BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{demo}}|sinon{#})"][ alt="(#ENV{boussole}|strtoupper)"]>[
 			(#ENV{taille_logo_boussole}|>{0}|oui)[
-				(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent})]][
+				(#BOUSSOLE_INFOS{#ENV{boussole}}|table_valeur{logo}|image_reduire{#ENV{taille_logo_boussole}}|image_recadre{#ENV{taille_logo_boussole},#ENV{taille_logo_boussole},center,transparent}|filtre_embarque_src)]][
 			(#ENV{titre_boussole, non}|=={oui}|?{
 				[(#ENV{boussole}|boussole_traduire{nom_boussole})],
 				[[(#ENV{titre_boussole})](#ENV{titre_boussole,non}|!={non}|oui)]
@@ -68,12 +68,13 @@
 					<ul class="menu_submenu">
 			<BOUCLE_site(BOUSSOLES){aka_boussole}{aka_groupe}{affiche=oui}{par rang_site}>
 						<li>[(#SET{bulle,[(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle}, #AKA_SITE}|couper{80})]})]
-							<a rel="external" href="#URL_SITE"[ title="(#GET{bulle}|attribut_html)"] class="spip_out">
+							#SET{logo,''}
 							<BOUCLE_logo_site(BOUSSOLES_EXTRAS){si #ENV{taille_logo_site}>0}{aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
-								[(#CHAMP_SQL{logo_objet}
-									|image_reduire{#ENV{taille_logo_site}}
-									|image_recadre{#ENV{taille_logo_site},#ENV{taille_logo_site},center,transparent}
-									|inserer_attribut{alt,[(#GET{bulle}|attribut_html)]})]</BOUCLE_logo_site>
+							[(#SET{logo,[(#CHAMP_SQL{logo_objet}
+																|image_reduire{#ENV{taille_logo_site}}
+																|image_recadre{#ENV{taille_logo_site},#ENV{taille_logo_site},center,transparent}
+																|extraire_attribut{src}|url_absolue)]})]</BOUCLE_logo_site>
+							<a rel="external" href="#URL_SITE" class="spip_out" style="background-image: url(#GET{logo});">
 								[(#AKA_BOUSSOLE|boussole_traduire{nom_site, #AKA_SITE})]
 							</a>
 						</li>
