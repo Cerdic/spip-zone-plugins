@@ -17,12 +17,15 @@
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[1.35.0;]" /> 
+	<necessite nom="saisies" compatibilite="[1.35.0;]" />
+	<necessite nom="verifier" compatibilite="[1.0.3;]" />
+	<necessite nom="yaml" compatibilite="[1.5.1;]" /> 
 
 	<pipeline nom="autoriser" inclure="itineraires_autorisations.php" /> 
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/itineraires.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/itineraires.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/itineraires.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/itineraires.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/itineraires.php" />
 	<pipeline nom="affiche_milieu" inclure="itineraires_pipelines.php" /> 
 	<pipeline nom="affiche_auteurs_interventions" inclure="itineraires_pipelines.php" /> 
 

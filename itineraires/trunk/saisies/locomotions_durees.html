@@ -1,0 +1,23 @@
+#SET{valeur,#ENV{valeur,#ENV{defaut}}}
+
+<BOUCLE_locomotions(DATA){source table,#EVAL{$GLOBALS['itineraires_locomotions']}}{par valeur}>
+<div class="choix">
+	<input
+		type="checkbox"
+		name=#ENV{nom}[actives][]"
+		id="#ENV{nom}_actives_#CLE"
+		value="#CLE"
+		onchange="javascript:if (jQuery(this).is(':checked')){jQuery(this).siblings('.duree').show().removeClass('none');} else{jQuery(this).siblings('.duree').hide().addClass('none');}"
+		[(#CLE|in_array{#GET{valeur/actives}}|oui)checked="checked"]
+	/>
+	<label for="#ENV{nom}_actives_#CLE">#VALEUR</label>
+	
+	<span class="duree[(#CLE|in_array{#GET{valeur/actives}}|non) none]">
+		: <:itineraire:champ_duree_en:>
+		<input type="text" size="2" name="#ENV{nom}[durees][#CLE][heures]" value="#GET{valeur/durees/#CLE/heures}" />
+		<abbr title="<:itineraire:champ_duree_heures:>"><:itineraire:champ_duree_heures_abbr:></abbr>
+		<input type="text" size="2" name="#ENV{nom}[durees][#CLE][minutes]" value="#GET{valeur/durees/#CLE/minutes}" />
+		<abbr title="<:itineraire:champ_duree_minutes:>"><:itineraire:champ_duree_minutes_abbr:></abbr>
+	</span>
+</div>
+</BOUCLE_locomotions>

@@ -20,14 +20,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_depart_label' => 'Départ',
 	'champ_difficulte_explication' => 'Entre @min@ et @max@',
 	'champ_difficulte_label' => 'Difficulté',
+	'champ_duree_en' => 'en',
+	'champ_duree_heures' => 'heure(s)',
+	'champ_duree_heures_abbr' => 'h',
+	'champ_duree_minutes' => 'minutes(s)',
+	'champ_duree_minutes_abbr' => 'min',
 	'champ_handicap_label' => 'Handicap',
 	'champ_handicap_label_case' => 'L\'itinéraire est-il accessible aux handicapés ?',
+	'champ_locomotions_durees' => 'Moyens de locomotion et durées',
 	'champ_longueur_explication' => 'En kilomètres',
 	'champ_longueur_label' => 'Longueur',
 	'champ_texte_label' => 'Texte',
 	'champ_titre_label' => 'Titre',
 	'champ_transport_label' => 'Transport',
 	'champ_transport_label_case' => 'Existe-t-il un transport autour de cet itinéraire ?',
+	
+	// E
+	'erreur_type_locomotion_inconnu' => 'Un moyen de locomotion choisi ne fait pas partie de la liste.',
 	
 	// I
 	'icone_creer_itineraire' => 'Créer un itinéraire',
@@ -36,6 +45,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_itineraire' => 'Aucun itinéraire',
 	'info_itineraires_auteur' => 'Les itinéraires de cet auteur',
 	'info_nb_itineraires' => '@nb@ itinéraires',
+	
+	// L
+	'locomotion_canoe' => 'Canoë',
+	'locomotion_cheval' => 'Cheval',
+	'locomotion_pied' => 'Pédestre',
+	'locomotion_velo' => 'Vélo de route',
+	'locomotion_vtt' => 'VTT',
 
 	// R
 	'retirer_lien_itineraire' => 'Retirer cet itinéraire',

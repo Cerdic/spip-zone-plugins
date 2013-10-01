@@ -80,6 +80,14 @@ function formulaires_editer_itineraire_saisies_dist($id_itineraire='new', $retou
 			),
 		),
 		array(
+			'saisie' => 'locomotions_durees',
+			'options' => array(
+				'nom' => 'locomotions_durees',
+				'label' => _T('itineraire:champ_locomotions_durees'),
+				'defaut' => array('actives' => array('pied')),
+			),
+		),
+		array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'depart',
@@ -197,6 +205,10 @@ function formulaires_editer_itineraire_saisies_dist($id_itineraire='new', $retou
  */
 function formulaires_editer_itineraire_charger_dist($id_itineraire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('itineraire',$id_itineraire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$id_itineraire = intval($id_itineraire);
+	
+	// Enlever les 0 superflus
+	$valeurs['longueur'] = floatval($valeurs['longueur']);
 	
 	// Pour les trucs numériques, laisser vide si c'est 0
 	foreach (array('longueur', 'denivele', 'difficulte') as $champ_num){
@@ -205,8 +217,25 @@ function formulaires_editer_itineraire_charger_dist($id_itineraire='new', $retou
 		}
 	}
 	
-	// Enlever les 0 superflus
-	$valeurs['longueur'] = floatval($valeurs['longueur']);
+	// On ajoute locomotions_durees
+	$valeurs['locomotions_durees'] = array();
+	// Si c'est une modif on cherche l'existant
+	if ($id_itineraire > 0
+		and $locomotions = sql_allfetsel('*', 'spip_itineraires_locomotions', 'id_itineraire = '.$id_itineraire)
+		and is_array($locomotions)
+	){
+		$valeurs['locomotions_durees'] = array('actives'=>array(), 'durees'=>array());
+		foreach ($locomotions as $locomotion){
+			$valeurs['locomotions_durees']['actives'][] = $locomotion['type_locomotion'];
+			// Seulement s'il y a une durée
+			if ($duree = $locomotion['duree']){
+				$h = floor($duree/3600);
+				$m = floor(($duree-$h*3600)/60);
+				if ($h) { $valeurs['locomotions_durees']['durees'][$locomotion['type_locomotion']]['heures'] = $h; }
+				if ($m) { $valeurs['locomotions_durees']['durees'][$locomotion['type_locomotion']]['minutes'] = $m; }
+			}
+		}
+	}
 	
 	// On ajoute l'identifiant dans l'envoi
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_itineraire" value="'.$id_itineraire.'" />';
@@ -237,7 +266,30 @@ function formulaires_editer_itineraire_charger_dist($id_itineraire='new', $retou
  *     Tableau des erreurs
  */
 function formulaires_editer_itineraire_verifier_dist($id_itineraire='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('itineraire',$id_itineraire, array('titre'));
+	$erreurs = formulaires_editer_objet_verifier('itineraire',$id_itineraire, array('titre'));
+	
+	if ($locomotions_durees = _request('locomotions_durees')){
+		// S'il y a au moins une cochée
+		if (!empty($locomotions_durees['actives'])) {
+			$verifier = charger_fonction('verifier', 'inc/');
+			foreach($locomotions_durees['actives'] as $type_locomotion){
+				if (!in_array($type_locomotion, array_keys($GLOBALS['itineraires_locomotions']))) {
+					$erreurs['locomotions_durees'] = _T('itineraire:erreur_type_locomotion_inconnu');
+				}
+				else{
+					// Si heures ou minutes sont en erreur
+					if (
+						$erreur = $verifier($locomotions_durees['durees'][$type_locomotion]['heures'], 'entier', array('min'=>0))
+						or $erreur = $verifier($locomotions_durees['durees'][$type_locomotion]['minutes'], 'entier', array('min'=>0, 'max'=>59))
+					){
+						$erreurs['locomotions_durees'] = $erreur;
+					}
+				}
+			}
+		}
+	}
+	
+	return $erreurs;
 }
 
 /**
@@ -267,6 +319,24 @@ function formulaires_editer_itineraire_traiter_dist($id_itineraire='new', $retou
 		if (!_request($case)){ set_request($case, 0); }
 	}
 	$retours = formulaires_editer_objet_traiter('itineraire',$id_itineraire,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$id_itineraire = intval($retours['id_itineraire']);
+	
+	// On traite les locomotions et durées
+	// On supprime tout pour cet itinéraire
+	sql_delete('spip_itineraires_locomotions', 'id_itineraire = '.$id_itineraire);
+	// On ajoute la nouvelle config
+	$locomotions_durees = _request('locomotions_durees');
+	foreach ($locomotions_durees['actives'] as $type_locomotion){
+		sql_insertq(
+			'spip_itineraires_locomotions',
+			array(
+				'id_itineraire' => $id_itineraire,
+				'type_locomotion' => $type_locomotion,
+				'duree' => intval($locomotions_durees['durees'][$type_locomotion]['heures'])*3600 + intval($locomotions_durees['durees'][$type_locomotion]['minutes']) * 60,
+			)
+		);
+	}
+	
 	return $retours;
 }
 

@@ -22,8 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Déclarations d'interface pour le compilateur
  */
 function itineraires_declarer_tables_interfaces($interfaces) {
-
 	$interfaces['table_des_tables']['itineraires'] = 'itineraires';
+	$interfaces['table_des_traitements']['LONGUEUR']['itineraires'] = 'floatval(%s)';
 
 	return $interfaces;
 }
@@ -39,7 +39,6 @@ function itineraires_declarer_tables_interfaces($interfaces) {
  *     Description complétée des tables
  */
 function itineraires_declarer_tables_objets_sql($tables) {
-
 	$tables['spip_itineraires'] = array(
 		'type' => 'itineraire',
 		'principale' => "oui",
@@ -86,13 +85,37 @@ function itineraires_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'itineraire:texte_changer_statut_itineraire', 
-		
-
 	);
 
 	return $tables;
 }
 
-
+/**
+ * Déclarer les tables auxiliaires des itinéraires
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * 
+ * @param array $tables_auxiliaires
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function itineraires_declarer_tables_auxiliaires($tables_auxiliaires){
+	//-- Table organisations_contacts -------------------------------------
+	$itineraires_locomotions = array(
+		"id_itineraire"       => "bigint(21) not null",
+		"type_locomotion"     => "varchar(25) not null default ''",
+		"duree"			  	  => "int(11) not null default 0",
+	);
+	$itineraires_locomotions_key = array(
+		"PRIMARY KEY"          => "id_itineraire, type_locomotion",
+		"KEY id_itineraire"    => "id_itineraire",
+		"KEY type_locomotion"  => "type_locomotion"
+	);
+	$tables_auxiliaires['spip_itineraires_locomotions'] =
+		array('field' => &$itineraires_locomotions, 'key' => &$itineraires_locomotions_key);
+	
+	return $tables_auxiliaires;
+}
 
 ?>
