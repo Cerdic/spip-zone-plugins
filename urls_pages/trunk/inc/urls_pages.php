@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   - racine du ou des dossiers de squelettes (si Z: /content ou /contenu)
  *   - racine des dossiers des plugins actifs de catégorie "squelette" (si Z: /content ou /contenu)
  * Puis on filtres les squelettes qui ne sont pas des pages :
- *  - ceux correspondant à un objet éditorial (article*, rurbique*, etc.)
+ *  - ceux correspondant à un objet éditorial (article*, rubrique*, etc.)
  *  - liste prédéfinie à exclure : sommaire, login, inc-*...
  *  - squelettes 'techniques' (z_apl, 404...)
  *
@@ -54,12 +54,39 @@ function urls_pages_lister_pages () {
 		))) {
 		while ($ligne = sql_fetch($r)) {
 			$prefixe = strtolower($ligne['prefixe']);
-			// stocker la liste des dossiers des plugins
-			// ne pas prendre en compte les dossiers de Z
-			if ( $prefixe != "zcore" and $prefixe != 'z' )
+			// stocker la liste des dossiers des plugins squelettes, en excluant Z (v1)
+			if ( $prefixe != 'z' )
 				$dossiers_plugins[] = _DIR_PLUGINS.$ligne['dossier'];
 			// noter quand même les repertoires de Z pour la suite
-			else if ( $prefixe == 'zcore' OR $prefixe == 'z') {
+			else {
+				$z = $prefixe;
+				$dossiers_z[] = _DIR_PLUGINS.$ligne['dossier'];
+			}
+		}
+	}
+	// rebelote pour Zcore qui est un outil
+	if ($r = sql_select(
+		array(
+			'paquets.id_plugin',
+			'plugins.id_plugin',
+			'plugins.prefixe AS prefixe',
+			'plugins.categorie AS categorie',
+			'paquets.actif AS actif',
+			'paquets.src_archive AS dossier',
+			'paquets.constante'
+		),
+		array(
+			'spip_paquets AS paquets',
+			'spip_plugins AS plugins'
+		),
+		array (
+			'paquets.id_plugin = plugins.id_plugin',
+			'categorie = "outil"',
+			'actif = "oui"'
+		))) {
+		while ($ligne = sql_fetch($r)) {
+			$prefixe = strtolower($ligne['prefixe']);
+			if ( $prefixe == 'zcore' ) {
 				$z = $prefixe;
 				$dossiers_z[] = _DIR_PLUGINS.$ligne['dossier'];
 			}
@@ -78,12 +105,19 @@ function urls_pages_lister_pages () {
 	// les squelettes 'techniques' de Z
 	$exclure_z = array();
 	if ( $z and is_array($dossiers_z) ) {
-		foreach ( $dossiers_z as $dossier ) {
-			foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
-				$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
-			foreach ( preg_files("$dossier/content/" . $pattern_html) as $chemin )
-				$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
-		}
+		// Z v1
+		if ( $z == 'z' )
+			foreach ( $dossiers_z as $dossier )
+				foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
+					$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
+		// Z v2
+		elseif ( $z == 'zcore' )
+			foreach ( $dossiers_z as $dossier ) {
+				foreach ( preg_files("$dossier/content/" . $pattern_html) as $chemin )
+					$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
+				//foreach ( preg_files("$dossier/" . $pattern_html) as $chemin )
+				//	$exclure_z[] = pathinfo($chemin, PATHINFO_FILENAME);
+			}
 	}
 	// les squelettes des objets éditoriaux
 	if ( $objets_sql = lister_tables_objets_sql() and is_array($objets_sql) )
@@ -101,12 +135,12 @@ function urls_pages_lister_pages () {
 				foreach ( preg_files("$dossier/" . $pattern_html) as $chemin )
 					$squelettes[$dossier][] = pathinfo($chemin, PATHINFO_FILENAME);
 			// avec Z, rechercher dans les sous-repertoires 'content' ou 'contenu'
-			// Z 2
+			// Z v2
 			} else if ($z == 'zcore') {
 				foreach ( preg_files("$dossier/content/" . $pattern_html) as $chemin )
 					$squelettes[$dossier.'/content'][] = pathinfo($chemin, PATHINFO_FILENAME);
 			}
-			// Z 1 : squelettes préfixés par "page-"
+			// Z v1 : squelettes préfixés par "page-"
 			else if ($z == 'z') {
 				foreach ( preg_files("$dossier/contenu/" . $pattern_html) as $chemin )
 					if ( preg_match('/^page-/',pathinfo($chemin, PATHINFO_FILENAME)) )
