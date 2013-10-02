@@ -12,6 +12,7 @@ function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_des_tables']['tradlangs_bilans'] = 'tradlangs_bilans';
 	$interface['table_des_traitements']['PRIORITE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
+	$interface['table_des_traitements']['NOM_MOD'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	return $interface;
 }
 
@@ -66,7 +67,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'info_1_objet' => 'tradlang:info_1_tradlang',
 		'info_nb_objets' => 'tradlang:info_nb_tradlang',
 		'date' => 'date_modif',
-		'champs_editables' => array('str','comm','traducteur','statut'),
+		'champs_editables' => array('str','comm','traducteur','statut','md5'),
 		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
