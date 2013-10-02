@@ -56,6 +56,9 @@ function tradlang_set($id_tradlang,$set=null){
 			$c['traducteur'] = implode(', ',$traducteurs);
 		}
 	}
+	
+	if(_request('str'))
+		set_request('md5',md5(_request('str')));
 	$invalideur = "id='id_tradlang/$id_tradlang'";
 	if ($err = objet_modifier_champs('tradlang', $id_tradlang,
 		array(
@@ -89,7 +92,7 @@ function tradlang_set($id_tradlang,$set=null){
 		else if($infos_tradlang['statut'] == 'NEW')
 			$infos_maj['chaines_new'] = ($bilan['chaines_new']-1);
 		
-		sql_updateq('spip_tradlangs_bilan',$infos_maj,'module='.sql_quote($infos_tradlang['module']).' AND lang='.sql_quote($infos_tradlang['lang']));
+		sql_updateq('spip_tradlangs_bilans',$infos_maj,'module='.sql_quote($infos_tradlang['module']).' AND lang='.sql_quote($infos_tradlang['lang']));
 	}
 	
 	//$c = collecter_requests(array('statut'),array(),$set);
