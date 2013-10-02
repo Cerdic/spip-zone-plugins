@@ -10,7 +10,6 @@ function formulaires_editer_tradlang_module_charger($id_tradlang_module,$retour=
 	$valeurs = formulaires_editer_objet_charger('tradlang_module',$id_tradlang_module,0,'',$retour,$config_fonc,$row,$hidden);
 	
 	$modules = tradlang_getmodules_base();
-	spip_log($modules,'tradlang');
 	$modok = $modules[$valeurs['module']];
 	foreach($modok as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0)
@@ -39,11 +38,10 @@ function formulaires_editer_tradlang_module_verifier($id_tradlang_module,$retour
 	
 	include_spip('inc/lang_liste');
 	if($nouvelle_langue){
-		if(in_array($nouvelle_langue,$lgs)){
+		if(in_array($nouvelle_langue,$lgs))
 			$erreur['codelangue'] = _T('tradlang:erreur_code_langue_existant');
-		}else if(!array_key_exists($nouvelle_langue,$GLOBALS['codes_langues'])){
+		else if(!array_key_exists($nouvelle_langue,$GLOBALS['codes_langues']))
 			$erreur['codelangue'] = _T('tradlang:erreur_code_langue_invalide');
-		}
 	}
 	
 	return $erreur;
@@ -55,12 +53,11 @@ function formulaires_editer_tradlang_module_traiter($id_tradlang_module,$retour=
 	if(_request('delete_module')){
 		$supprimer_module = charger_fonction('tradlang_supprimer_module','inc');
 		$suppressions = $supprimer_module($id_tradlang_module);
-		$editable = false;
-		if(intval($suppressions) && ($suppressions > 1)){
+		$ret['editable'] = false;
+		if(intval($suppressions) && ($suppressions > 1))
 			$ret['message_ok'] = _T('tradlang:message_suppression_module_trads_ok',array('nb'=>$suppressions,'module'=>$module));
-		}else{
+		else
 			$ret['message_ok'] = _T('tradlang:message_suppression_module_ok',array('module'=>$module));
-		}
 	}
 	else{
 		$res = sql_select('*','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
@@ -82,9 +79,9 @@ function formulaires_editer_tradlang_module_traiter($id_tradlang_module,$retour=
 			$sauvegarde($modok, $langue);
 			$ret['message_ok'] .= "<br />"._T('tradlang:message_module_langue_ajoutee',array('module'=>$module,'langue'=>$langue));
 		}
-		$editable = true;
+		$ret['editable'] = true;
+		$ret['redirect'] = $retour;
 	}
-	$ret['editable'] = $editable;
 	return $ret;
 }
 ?>
