@@ -10,13 +10,12 @@
 		<B_tradlangs_lang>
 		<li>
 			<label for="lang_string"><:tradlang:item_langue_cible:></label>
-			<select name="lang_string" id="lang_string">
-				<option value="">--</option>
+			<select name="lang_string[]" id="lang_string" multiple="multiple">
 			<BOUCLE_tradlangs_lang(TRADLANGS){fusion lang}{par lang}{0,1}>
 			<B_module_langue_dispo_pref>
 				<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
 				<BOUCLE_module_langue_dispo_pref(TRADLANGS){langues_preferees}{statut IN 'OK','MODIF','RELIRE'}{fusion lang}{par lang}>
-					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+					<option value="#LANG"[(#LANG|in_array{#ENV{lang_string,#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
 				</BOUCLE_module_langue_dispo_pref>
 				[(#SET{optgroup,'oui'})]
 				</optgroup>
@@ -24,7 +23,7 @@
 				<B_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">]
 				<BOUCLE_module_langue_dispo(TRADLANGS){!langues_preferees}{statut IN 'OK','MODIF','RELIRE'}{fusion lang}{par lang}>
-					<option value="#LANG"[(#LANG|=={#ENV{lang_string}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
+					<option value="#LANG"[(#LANG|in_array{#ENV{lang_string,#ARRAY}}|oui)selected="selected"] dir="#LANG_DIR">&#91;#LANG&#93; [(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>
 				</BOUCLE_module_langue_dispo>
 				[(#GET{optgroup}|=={oui})</optgroup>]
 				</B_module_langue_dispo>
@@ -34,12 +33,11 @@
 		</B_tradlangs_lang>
 		<li>
 			<label for="statut"><:tradlang:label_recherche_status:></label>
-			<select name="statut" id="statut">
-				<option value=""[(#ENV{statut}|=={''}|oui)selected="selected"]>--</option>
-				<option value="NEW"[(#ENV{statut}|=={NEW}|oui)selected="selected"]>NEW</option>
-				<option value="MODIF"[(#ENV{statut}|=={MODIF}|oui)selected="selected"]>MODIF</option>
-				<option value="RELIRE"[(#ENV{statut}|=={RELIRE}|oui)selected="selected"]>RELIRE</option>
-				<option value="OK"[(#ENV{statut}|=={OK}|oui)selected="selected"]>OK</option>
+			<select name="statut[]" id="statut" multiple="multiple">
+				<option value="NEW"[(#VAL{NEW}|in_array{#ENV{statut,#ARRAY}}|oui)selected="selected"]>NEW</option>
+				<option value="MODIF"[(#VAL{MODIF}|in_array{#ENV{statut,#ARRAY}}|oui)selected="selected"]>MODIF</option>
+				<option value="RELIRE"[(#VAL{RELIRE}|in_array{#ENV{statut,#ARRAY}}|oui)selected="selected"]>RELIRE</option>
+				<option value="OK"[(#VAL{OK}|in_array{#ENV{statut,#ARRAY}}|=={OK}|oui)selected="selected"]>OK</option>
 			</select>
 		</li>
 		<li>
