@@ -106,6 +106,10 @@
   font-size: 15px;
   font-family: "Georgia,Cambria,Times New Roman,Times,serif";
 }
+.menu_container > ul > li > a > img {
+ margin-right: 10px;
+ vertical-align: middle;
+}
 .menu_container > ul > li.right {
   float: right;
 }
