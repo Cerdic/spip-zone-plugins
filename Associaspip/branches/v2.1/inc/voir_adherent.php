@@ -120,9 +120,9 @@ function voir_adherent_recus($id_auteur)
 /* Cette fonction permet entre autres de recuperer tous les membres qui ont un email dans la table spip_auteurs, a reprendre lors de l'interfacage avec Coordonnees car les emails peuvent alors etre uniquement dans spip_emails
  et ils peuvent etre plusieurs, il faudrait peut etre laisser la possibilite de choisir ou prendre la/les adresses email qui sont de toute facon recuperes dans action/modifier_relances.php, le JOIN sur la
 table spip_auteurs permet d'afficher uniquement les membres qui ont un email dans cette table */
-
 function voir_adherent_infos($sel='*', $from='', $where='', $group='', $order='', $limit='')
 {
-  return sql_select($sel,"spip_asso_membres AS A  LEFT JOIN spip_auteurs AS B ON A.id_auteur=B.id_auteur $from",  $where, $group, $order, $limit);
+  return sql_select($sel, "spip_asso_membres AS A  LEFT JOIN spip_auteurs AS B ON A.id_auteur=B.id_auteur $from", $where, $group, $order, $limit);
 }
+
 ?>
