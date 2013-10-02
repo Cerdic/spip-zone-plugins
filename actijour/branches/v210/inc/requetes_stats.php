@@ -53,11 +53,15 @@ function max_visites_stats() {
 	$qv = sql_select(" MAX(visites) as maxvi FROM spip_visites");
 	$rv = sql_fetch($qv);
 	$valmaxi = $rv['maxvi'];
-
-	$qd = sql_select(" DATE_FORMAT(date,'%d/%m/%y') AS jmax FROM spip_visites WHERE visites = $valmaxi");
-	$rd = sql_fetch($qd);
-	$jourmaxi = $rd['jmax'];
-	$a = array($valmaxi,$jourmaxi);
+    if (isset($valmaxi)){
+        $qd = sql_select(" DATE_FORMAT(date,'%d/%m/%y') AS jmax FROM spip_visites WHERE visites = $valmaxi");
+        $rd = sql_fetch($qd);
+        $jourmaxi = $rd['jmax'];
+        $a = array($valmaxi,$jourmaxi);
+    }
+    else{
+        $a = array(0,0);
+        }
 	return $a;
 }
 
