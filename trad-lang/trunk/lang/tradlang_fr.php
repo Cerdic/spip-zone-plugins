@@ -165,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_creation_revisions_modules' => 'Création des révisions d’origine du module "@module@"',
 
 	// L
+	'label_descriptif_priorite' => 'Priorité "@priorite@"',
 	'label_fichier_langue' => 'Fichier de langue à mettre en ligne',
 	'label_id_tradlang' => 'Identifiant de la chaîne',
 	'label_idmodule' => 'ID du module',
@@ -200,6 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version_selectionnee_comm' => 'Commentaire dans la langue sélectionnée (@lang@)',
 	'languesdispo' => 'Langues disponibles',
 	'legend_conf_bilan' => 'Affichage du bilan',
+	'legend_descriptifs_priorites' => 'Descriptifs des priorités',
 	'lien_accueil_interface' => 'Accueil de l’interface de traduction',
 	'lien_aide_recherche' => 'Aide à la recherche',
 	'lien_aucun_status' => 'Aucun',
@@ -224,6 +226,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_revenir_traduction' => 'Revenir à la page de traduction',
 	'lien_sauvegarder' => 'Sauvegarder/Restaurer le fichier actuel.',
 	'lien_telecharger' => '[Télécharger]',
+	'lien_toutes_priorite' => 'Toutes',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' vers ',
 	'lien_traduire_suivant_str_module' => 'Traduire la chaîne non traduite suivante du module "@module@"',
