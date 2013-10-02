@@ -39,6 +39,22 @@
 					</ul>
 				</fieldset>
 			</li>
+			<B_priorites>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:tradlang:legend_descriptifs_priorites:></h3>
+					<ul>
+						<BOUCLE_priorites(DATA){source table,#EVAL{_TRAD_PRIORITES}|explode{';'}}>
+						[(#SAISIE{textarea,[(#VALEUR|supprimer_numero|replace{' ','_'})],
+							rows=10,
+							label=<:tradlang:label_descriptif_priorite{priorite=#VALEUR}:>,
+							class=multilang,
+							inserer_barre=edition})]
+						</BOUCLE_priorites>
+					</ul>
+				</fieldset>
+			</li>
+			</B_priorites>
 		</ul>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />

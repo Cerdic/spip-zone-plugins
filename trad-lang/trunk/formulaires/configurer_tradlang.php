@@ -6,7 +6,7 @@ function formulaires_configurer_tradlang_charger_dist(){
 	$valeurs = @unserialize($GLOBALS['meta']['tradlang']);
 	if (!is_array($valeurs))
 		$valeurs = array();
-	
+
 	include_spip('inc/lang_liste');
 	include_spip('tradlang_fonctions');
 	$valeurs['_langues_possibles'] = $GLOBALS['codes_langues'];
@@ -15,9 +15,8 @@ function formulaires_configurer_tradlang_charger_dist(){
 
 function formulaires_configurer_tradlang_verifier_dist(){
 	$erreurs = array();
-	if(($langues_autorisees = _request('langues_autorisees')) && (count($langues_autorisees)<2)){
+	if(($langues_autorisees = _request('langues_autorisees')) && (count($langues_autorisees)<2))
 		$erreurs['langues_autorisees'] = _T('tradlang:erreur_langues_autorisees_insuffisantes');
-	}
 	return $erreurs;
 }
 
@@ -42,6 +41,12 @@ function formulaires_configurer_tradlang_traiter_dist(){
 			if (!is_null($v=_request($m)))
 				$config[$m] = _request($m);
 		}
+		$priorites = explode(';',_TRAD_PRIORITES);
+		foreach($priorites as $priorite){
+			$priorite = str_replace(' ','_',supprimer_numero($priorite));
+			if (!is_null($v=_request($priorite)))
+				$config[$priorite] = _request($priorite);
+		}
 		ecrire_meta('tradlang',serialize($config));
 	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;
@@ -49,15 +54,12 @@ function formulaires_configurer_tradlang_traiter_dist(){
 
 function tradlang_test_repertoire_local(){
 	global $dossier_squelettes;
-	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
+	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes'))
 		return false;
-	}
-	else{
+	else
 		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
-	}
-	if(!is_dir($dir_lang=$squelettes.'lang')){
+	if(!is_dir($dir_lang=$squelettes.'lang'))
 		return false;
-	}else{
-		return $dir_lang;
-	}
+	
+	return $dir_lang;
 }
