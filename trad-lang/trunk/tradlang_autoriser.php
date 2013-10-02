@@ -135,7 +135,9 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
-	
+
+	if($qui['webmestre'] == 'oui')
+		return true;
 	/**
 	 * Retourner false si c'est une chaîne de la langue mère
 	 */
