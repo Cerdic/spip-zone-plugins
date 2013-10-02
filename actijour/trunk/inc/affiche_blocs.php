@@ -144,7 +144,7 @@ function tous_auteurs_date_passage() {
 	// recup $vl dans URL
 	$dl=intval(_request('vl'));
 	$dl=($dl+0);
-	// valeur de tranche affichée
+	// valeur de tranche affichê¥
 	$nba1 = $dl+1;
 	
 	$p_st=_request('st');
@@ -301,7 +301,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 	
 	// texte entete
 	if(empty($date_maj_art)) {
-		# La date du jour passé en 1er arg (jour, hier ...)
+		# La date du jour passÃ© en 1er arg (jour, hier ...)
 		$tbdate = recup_date($date_jour);
 		$date_maj_art = date('d/m/y',mktime(0,0,0,$tbdate[1],$tbdate[2],$tbdate[0]));
 	}
@@ -313,7 +313,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 
 	// affichage tableau
 	if (sql_count($q)) {
-		// valeur de tranche affichée	
+		// valeur de tranche affichê¥‰
 		$nba1 = $dl+1;
 		//	
 		$ifond = 0;
@@ -340,8 +340,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 			$id_art = $row['id_article'];
 			$titre = $row['titre'];
 			$etat = $row['statut'];			
-			// round sur popularité
-			$pop = round($row['popularite']);
+			// round sur popularitéŠ			$pop = round($row['popularite']);
 			// Le total-visites de l'article
 			#$tt_visit = $visit + $ipv;
 

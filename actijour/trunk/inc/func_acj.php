@@ -259,7 +259,7 @@ function calcul_prevision_visites() {
 	// charger un certain nombre de fichiers de visites,
 	// et faire les calculs correspondants
 
-	# h. passe à 5 minutes
+	# h. passe 5 minutes
 	#Traiter jusqu'a 100 sessions datant d'au moins "5" minutes
 	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 	$compteur = 100;
