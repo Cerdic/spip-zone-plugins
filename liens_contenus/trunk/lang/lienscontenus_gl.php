@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=gl
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_publie_contenant' => 'Aviso, este contido ten © público, mais contén ligazóns a contidos que non o son!',
-	'alerte_publie_contenant_ko' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui n\'existent pas !', # NEW
 	'aucun_objets_avec_lien_depuis_courant' => 'Este contido non ten ningunha ligazón sobre ningún outro contido.',
 	'aucun_objets_avec_lien_vers_courant' => 'Ningún outro contido ten ligazón sobre este.',
 
@@ -19,12 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression' => 'Aviso, un contido con © público apunta sobre este, e © será afectado se o suprime!nnSeguro que o quere suprimir?', # MODIF
 
 	// I
-	'inexistant' => 'inexistant (@id_objet@)', # NEW
 	'information_element_contenu' => 'Aviso, outro contido apunta sobre este!', # MODIF
 
 	// L
 	'legende_liens_faux_objets' => 'As ligazóns en vermello e as barras indican contidos ligados que non existen.',
-	'liens_entre_contenus' => 'Liens entre contenus', # NEW
 
 	// O
 	'objets_avec_liens_depuis_courant' => 'Este contido ten ligazóns sobre aqueles:', # MODIF
@@ -35,25 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_prepa' => 'En preparación',
 	'statut_prop' => 'Proposto',
 	'statut_publie' => 'Publicado',
-	'statut_refuse' => 'Rexeitado',
-
-	// T
-	'type_article' => '@titre@ (@id_objet@)', # NEW
-	'type_article_inexistant' => 'Article inexistant (@id_objet@)', # NEW
-	'type_auteur' => '@titre@', # NEW
-	'type_auteur_inexistant' => 'Auteur inexistant (@id_objet@)', # NEW
-	'type_breve' => '@titre@ (@id_objet@)', # NEW
-	'type_breve_inexistant' => 'Brève inexistante (@id_objet@)', # NEW
-	'type_document' => '@titre@ (@id_objet@)', # NEW
-	'type_document_inexistant' => 'Document inexistant (@id_objet@)', # NEW
-	'type_forum' => '@titre@ (@id_objet@)', # NEW
-	'type_forum_inexistant' => 'Message inexistant (@id_objet@)', # NEW
-	'type_modele' => 'Modèle "@id_objet@"', # NEW
-	'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)', # NEW
-	'type_rubrique' => '@titre@ (@id_objet@)', # NEW
-	'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)', # NEW
-	'type_syndic' => '@titre@ (@id_objet@)', # NEW
-	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)' # NEW
+	'statut_refuse' => 'Rexeitado'
 );
 
 ?>

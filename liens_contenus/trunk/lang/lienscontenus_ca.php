@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ca
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,22 +9,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_publie_contenant' => 'Alerta, aquest contingut és públic, però conté enllaços cap a continguts que no ho són!',
-	'alerte_publie_contenant_ko' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui n\'existent pas !', # NEW
 	'aucun_objets_avec_lien_depuis_courant' => 'Aquest contingut no conté cap enllaç cap a un altre contingut. ',
 	'aucun_objets_avec_lien_vers_courant' => 'Cap altre contingut conté un enllaç cap aquest. ',
 
 	// C
-	'confirmation_depublication' => 'Atenció, un contingut públic apunta cap aquí, i es pot modificar si el despubliqueu! nnVoleu veritablement canviar l\'estat?', # MODIF
-	'confirmation_publication' => 'Atenció, un contingut cap al que apunta aquest no és públic!nnVoleu realment canviar l\'estat?', # MODIF
+	'confirmation_depublication' => 'Atenció, un contingut públic apunta cap aquí, i es pot modificar si el despubliqueu! nnVoleu veritablement canviar l’estat?', # MODIF
+	'confirmation_publication' => 'Atenció, un contingut cap al que apunta aquest no és públic!nnVoleu realment canviar l’estat?', # MODIF
 	'confirmation_suppression' => 'Atenció, un contingut públic apunta cap aquest, i serà modificat si el suprimiu!nnVoleu realment suprimir-lo?', # MODIF
 
 	// I
-	'inexistant' => 'inexistant (@id_objet@)', # NEW
 	'information_element_contenu' => 'Alerta, un altre contingut apunta cap aquest!', # MODIF
 
 	// L
 	'legende_liens_faux_objets' => 'Els enllaços en vermell indiquen continguts relacionats que no existeixen.',
-	'liens_entre_contenus' => 'Liens entre contenus', # NEW
 
 	// O
 	'objets_avec_liens_depuis_courant' => 'Aquest contingut conté enllaços cap aquests:', # MODIF
@@ -35,25 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_prepa' => 'En preparació',
 	'statut_prop' => 'Proposat',
 	'statut_publie' => 'Publicat',
-	'statut_refuse' => 'Refusat',
-
-	// T
-	'type_article' => '@titre@ (@id_objet@)', # NEW
-	'type_article_inexistant' => 'Article inexistant (@id_objet@)', # NEW
-	'type_auteur' => '@titre@', # NEW
-	'type_auteur_inexistant' => 'Auteur inexistant (@id_objet@)', # NEW
-	'type_breve' => '@titre@ (@id_objet@)', # NEW
-	'type_breve_inexistant' => 'Brève inexistante (@id_objet@)', # NEW
-	'type_document' => '@titre@ (@id_objet@)', # NEW
-	'type_document_inexistant' => 'Document inexistant (@id_objet@)', # NEW
-	'type_forum' => '@titre@ (@id_objet@)', # NEW
-	'type_forum_inexistant' => 'Message inexistant (@id_objet@)', # NEW
-	'type_modele' => 'Modèle "@id_objet@"', # NEW
-	'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)', # NEW
-	'type_rubrique' => '@titre@ (@id_objet@)', # NEW
-	'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)', # NEW
-	'type_syndic' => '@titre@ (@id_objet@)', # NEW
-	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)' # NEW
+	'statut_refuse' => 'Refusat'
 );
 
 ?>

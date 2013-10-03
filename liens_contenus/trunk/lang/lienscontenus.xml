@@ -1,10 +1,26 @@
 <traduction module="lienscontenus" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/liens_contenus/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ast" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ca" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=de" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=en" total="34" traduits="34" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=fa" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=fr" total="34" traduits="34" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=fr_tu" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=gl" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
+	</langue>
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=ro" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=sk" total="34" traduits="34" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/lienscontenus?lang_cible=tr" total="34" traduits="9" relire="0" modifs="6" nouveaux="19" pourcent="26.47">
 	</langue>
 </traduction>
