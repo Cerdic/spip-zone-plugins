@@ -1,0 +1,21 @@
+<paquet
+	prefix="respim"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.12-dev;3.0.*]"
+	logo="prive/themes/spip/images/respim-32.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2013-10-03 15:44:15
+	-->
+
+	<nom>Responsive Images</nom>
+
+	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cedric</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="affichage_final" />
+
+</paquet>
