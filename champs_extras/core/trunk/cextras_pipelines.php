@@ -54,7 +54,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
 			'type' => $quoi,
 			'id_objet' => $id,
-			'contexte' => $args['contexte'],
+			'contexte' => isset($args['contexte']) ? $args['contexte'] : array(),
 			'table' => table_objet_sql($quoi),
 			'saisie' => $saisie,
 			'champ' => $saisie['options']['nom'],
@@ -210,7 +210,9 @@ function cextras_afficher_contenu_objet($flux){
 				$valeurs[$nom] = $val;
 			}
 		}
-		$contexte = array_merge($flux['args']['contexte'], $valeurs);
+
+		$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array();
+		$contexte = array_merge($contexte, $valeurs);
 
 		// restreindre la vue selon les autorisations
 		$saisies = champs_extras_autorisation('voir', $objet, $saisies, $flux['args']);
