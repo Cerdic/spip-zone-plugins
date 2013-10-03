@@ -1,4 +1,7 @@
 <traduction module="coordonnees" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/coordonnees/branches/v2/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=ar" total="81" traduits="25" relire="0" modifs="2" nouveaux="54" pourcent="30.86">
+		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=en" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
