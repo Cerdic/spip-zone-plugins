@@ -6,6 +6,9 @@
 		<traducteur nom="jaro" lien="" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="108" traduits="25" relire="0" modifs="2" nouveaux="81" pourcent="23.15">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="108" traduits="108" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="108" traduits="109" relire="0" modifs="0" nouveaux="-1" pourcent="100.93">

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.net/tradlang_module/commandes?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_facture' => 'فاكتور',
-	'action_modifier' => 'Modifier', # NEW
 	'action_supprimer' => 'حذف ',
 	'adresse_facturation' => 'نشاني فاكتور',
 	'adresse_livraison' => 'نشاني ارسال',
@@ -18,23 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_client' => 'خريدار',
 	'commande_date' => 'تاريخ سفارش', # MODIF
 	'commande_date_paiement' => 'تاريخ پرداخت', # MODIF
-	'commande_editer' => 'Éditer la commande', # NEW
-	'commande_modifier' => 'Modifier la commande :', # NEW
 	'commande_montant' => 'مبلغ',
-	'commande_nouvelle' => 'Nouvelle commande', # NEW
-	'commande_numero' => 'Commande n° ', # NEW
 	'commande_reference' => 'مرجع',
-	'commande_reference_numero' => 'Référence n° ', # NEW
 	'commande_statut' => 'وضعيت',
 	'confirmer_supprimer_commande' => 'حذف اين سفارش را تأييد مي‌كنيد؟',
-	'contact_label' => 'Contact :', # NEW
 	'contenu' => 'مفاد',
 
 	// D
-	'date_commande_label' => 'Date de création :', # NEW
-	'date_envoi_label' => 'Date d\'envoi :', # NEW
-	'date_maj_label' => 'Date de mise à jour :', # NEW
-	'date_paiement_label' => 'Date de paiement :', # NEW
 	'designation' => 'عنوان',
 
 	// E
@@ -45,11 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facture_num' => 'فاكتور شماره‌ي <span>@num@</span>',
 
 	// I
-	'info_numero_commande' => 'COMMANDE NUMÉRO :', # NEW
 	'info_toutes_commandes' => 'تمام سفارش‌ها',
 
 	// M
-	'modifier_commande_statut' => 'Cette commande est :', # NEW
 	'montant' => 'مبلغ',
 
 	// N
@@ -57,14 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reference' => 'ارجاع',
-	'reference_label' => 'Référence :', # NEW
-	'reference_ref' => 'Référence @ref@', # NEW
 
 	// S
 	'statut_attente' => 'در دست بررسي',
 	'statut_encours' => 'در جريان',
 	'statut_envoye' => 'ارسال شده',
-	'statut_label' => 'Statut :', # NEW
 	'statut_partiel' => 'بخشي از مبلغ پرداخت شده',
 	'statut_paye' => 'پرداخت',
 	'statut_retour' => 'برگشت',
