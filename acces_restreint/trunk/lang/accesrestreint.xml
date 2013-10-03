@@ -19,6 +19,9 @@
 	<langue code="es" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=es" total="62" traduits="58" relire="0" modifs="2" nouveaux="2" pourcent="93.55">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=eu" total="62" traduits="20" relire="0" modifs="2" nouveaux="40" pourcent="32.26">
+		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=fa" total="62" traduits="47" relire="0" modifs="2" nouveaux="13" pourcent="75.81">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
@@ -29,6 +32,8 @@
 		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=gl" total="62" traduits="38" relire="0" modifs="2" nouveaux="22" pourcent="61.29">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=it" total="62" traduits="25" relire="0" modifs="2" nouveaux="35" pourcent="40.32">
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=lb" total="62" traduits="56" relire="0" modifs="4" nouveaux="2" pourcent="90.32">
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
@@ -44,6 +49,8 @@
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sk" total="62" traduits="58" relire="0" modifs="2" nouveaux="2" pourcent="93.55">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="sv" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=sv" total="62" traduits="2" relire="0" modifs="0" nouveaux="60" pourcent="3.23">
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=tr" total="62" traduits="38" relire="0" modifs="2" nouveaux="22" pourcent="61.29">
 	</langue>
