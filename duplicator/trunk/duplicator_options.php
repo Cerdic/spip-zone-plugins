@@ -35,6 +35,13 @@ function dupliquer_article($article,$rubrique){
 	array_walk($champs_dupliques, 'trim_value');
 	
 	if ($champs_dupliques[0]==''){ $champs_dupliques = array( 'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site' ); }
+	
+	// Si le plugin composition est présent
+	if (test_plugin_actif('compositions')) {
+		$champs_dupliques[] = 'composition';
+		$champs_dupliques[] = 'composition_lock';
+	}
+	
 	foreach ($champs_dupliques as $key => $value) {
 		$infos_de_l_article[$value] = $infos[0][$value];
 	}
@@ -102,6 +109,14 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	array_walk($champs_dupliques, 'trim_value');
 	
 	if ($champs_dupliques[0]=="") $champs_dupliques = array('id_parent','titre','descriptif','texte','lang','langue_choisie');
+	
+	// Si le plugin composition est présent
+	if (test_plugin_actif('compositions')) {
+		$champs_dupliques[] = 'composition';
+		$champs_dupliques[] = 'composition_lock';
+		$champs_dupliques[] = 'composition_branche_lock';
+	}
+	
 	foreach ($champs_dupliques as $key => $value) {
 		$infos_de_la_rubrique[$value] = $infos[0][$value];
 	}
