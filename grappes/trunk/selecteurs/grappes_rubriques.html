@@ -3,7 +3,7 @@
 #SET{resultats, #LISTE}
 <BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
 <BOUCLE_h(HIERARCHIE){statut==.}{n-2,1}>[(#SET{rub,[(#TITRE|couper{12,''}) > ]})]</BOUCLE_h>
-#SET{resultats, #GET{resultats}|push{#ARRAY{label,[(#GET{rub}|textebrut)][(#TITRE|textebrut)],value,[(#TITRE|textebrut)],id,#ID_RUBRIQUE}}}
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#GET{rub}|textebrut)][(#TITRE|textebrut)],value,[(#TITRE|textebrut)],id,#ID_RUBRIQUE})]})]})]
 </BOUCLE_s>
 [(#GET{resultats}|json_encode)]
 #FILTRE{trim}
