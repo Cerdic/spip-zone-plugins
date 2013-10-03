@@ -1,4 +1,8 @@
 <traduction module="simplecart" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/simplecart/lang/" reference="es">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/simplecart?lang_cible=ca" total="68" traduits="3" relire="0" modifs="0" nouveaux="65" pourcent="4.41">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/simplecart?lang_cible=de" total="68" traduits="3" relire="0" modifs="0" nouveaux="65" pourcent="4.41">
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/simplecart?lang_cible=en" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
