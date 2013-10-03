@@ -28,6 +28,8 @@
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/form?lang_cible=sk" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
+	<langue code="sv" url="http://trad.spip.net/tradlang_module/form?lang_cible=sv" total="26" traduits="1" relire="0" modifs="0" nouveaux="25" pourcent="3.85">
+	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/form?lang_cible=tr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
