@@ -18,15 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignes_a' => 'Zugewiesen zu',
 
 	// C
-	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l’utilisation des forums publics.', # MODIF
 	'cfg_form_tickets_autorisations' => 'Zugriffsrechte einstellen', # MODIF
-	'cfg_form_tickets_general' => 'Configuration générale', # MODIF
 	'cfg_inf_type_autorisation' => 'Wenn Sie Status oder Autor als Kriterium festlegen,
 	müssen Sie weiter unten Status oder Autor/en auswählen.',
 	'cfg_lbl_autorisation_auteurs' => 'Mehrere Autoren autorisieren',
 	'cfg_lbl_autorisation_statuts' => 'Nach Autorenstatus autorisieren',
 	'cfg_lbl_autorisation_webmestre' => 'Nur Webmaster autorisieren',
-	'cfg_lbl_case_notification_publique' => 'Être notifié dans l’espace public plutôt que dans l’espace privé (Nécessite Zpip)', # MODIF
 	'cfg_lbl_liste_auteurs' => 'Autoren der Website',
 	'cfg_lbl_statuts_auteurs' => 'Mögliche Status-Zustände',
 	'cfg_lbl_type_autorisation' => 'Anmeldemethode',
@@ -34,10 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_commenter' => 'Tickets kommentieren',
 	'cfg_lgd_autorisation_ecrire' => 'Tickets anlegen',
 	'cfg_lgd_autorisation_modifier' => 'Tickets ändern',
-	'cfg_titre_tickets' => 'Tickets', # MODIF
 	'champ_assigner' => 'Zuweisen:', # MODIF
 	'champ_composant' => 'Element:', # MODIF
-	'champ_createur' => 'Créé par :', # MODIF
 	'champ_date' => 'Datum:', # MODIF
 	'champ_date_modif' => 'Bearbeitet am',
 	'champ_description' => 'Beschreibung des Tickets',
@@ -45,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_id' => 'Nummmer',
 	'champ_importance' => 'Bedeutung:', # MODIF
 	'champ_jalon' => 'Meilenstein:', # MODIF
-	'champ_navigateur' => 'Navigateur :', # MODIF
 	'champ_nouveau_commentaire' => 'Neuer Kommentar',
 	'champ_projet' => 'Projekt:', # MODIF
 	'champ_severite' => 'Kritisch:', # MODIF
@@ -74,8 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_description_ticket' => 'Beschreiben Sie die Anforderung oder das Problem so genau wie möglich.
 	Geben Sie insbesondere an, ob das Problem immer oder nur gelegentlich auftritt.
 	Wenn es sich um einen Darstellungsfehler handelt, geben Sie bitte Bezeichnung und Versionsnummer Ihres Webbrowsers an.', # MODIF
-	'explication_description_ticket_ss_nav' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
-	Indiquez en particulier s’il se produit systématiquement ou occasionnellement.', # MODIF
 	'explication_redaction' => 'Wenn Sie das Ticket fertig eingegeben haben,
 	geben Sie ihm den Status «Geöffnet und beschrieben.', # MODIF
 	'explication_url_exemple' => 'Geben Sie hier den URL einer Seite mit dem Problem an.', # MODIF
@@ -87,9 +79,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets' => 'Tickets',
 	'info_tickets_ouvert' => 'geöffnet und beschrieben',
 	'info_tickets_redac' => 'in Bearbeitung',
-
-	// L
-	'label_paginer_par' => 'Paginer par :', # MODIF
 
 	// M
 	'mail_texte_message_auto' => 'Dies ist eine automatisch erstellte Nachricht: Bitte nicht beantworten.',
@@ -121,7 +110,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'In Bearbeitung',
 	'statut_resolu' => 'Erledigt',
 	'statut_resolu_long' => 'Alle erledigten Tickets',
-	'syndiquer_ticket' => 'Syndiquer le ticket :', # MODIF
 
 	// T
 	'ticket' => 'Ticket',
