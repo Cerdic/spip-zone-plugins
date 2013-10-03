@@ -1,6 +1,10 @@
 <traduction module="crayons" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/crayons/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ar" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
 	<langue code="ast" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ast" total="49" traduits="40" relire="0" modifs="2" nouveaux="7" pourcent="81.63">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
+	</langue>
+	<langue code="br" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=br" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
 	</langue>
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ca" total="49" traduits="38" relire="0" modifs="2" nouveaux="9" pourcent="77.55">
 	</langue>
@@ -11,9 +15,13 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=eo" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=es" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=eu" total="49" traduits="12" relire="0" modifs="0" nouveaux="37" pourcent="24.49">
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=fa" total="49" traduits="46" relire="0" modifs="0" nouveaux="3" pourcent="93.88">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
@@ -23,12 +31,27 @@
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=fr_tu" total="49" traduits="45" relire="0" modifs="1" nouveaux="3" pourcent="91.84">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=gl" total="49" traduits="15" relire="0" modifs="0" nouveaux="34" pourcent="30.61">
+	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=it" total="49" traduits="41" relire="0" modifs="1" nouveaux="7" pourcent="83.67">
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
+	</langue>
+	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=it_fem" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
+	<langue code="km" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=km" total="49" traduits="5" relire="0" modifs="0" nouveaux="44" pourcent="10.20">
+	</langue>
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=lb" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=nl" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
+	</langue>
+	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=oc_lnc" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=pt_br" total="49" traduits="16" relire="0" modifs="0" nouveaux="33" pourcent="32.65">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ro" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=ru" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
@@ -36,6 +59,14 @@
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=sk" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
+	<langue code="sv" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=sv" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
+	<langue code="tr" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=tr" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
+	<langue code="tw" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=tw" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
+	</langue>
 	<langue code="zh" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=zh" total="49" traduits="18" relire="0" modifs="14" nouveaux="17" pourcent="36.73">
+	</langue>
+	<langue code="zh_tw" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=zh_tw" total="49" traduits="14" relire="0" modifs="0" nouveaux="35" pourcent="28.57">
 	</langue>
 </traduction>
