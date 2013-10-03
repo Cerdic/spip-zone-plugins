@@ -1,9 +1,19 @@
 <traduction module="spipbb" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipBB/dev/2_1_0/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ar" total="430" traduits="86" relire="0" modifs="1" nouveaux="343" pourcent="20.00">
+	</langue>
 	<langue code="ast" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ast" total="430" traduits="430" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
+	<langue code="bg" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=bg" total="430" traduits="44" relire="0" modifs="5" nouveaux="381" pourcent="10.23">
+	</langue>
+	<langue code="br" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=br" total="430" traduits="166" relire="0" modifs="6" nouveaux="258" pourcent="38.60">
+	</langue>
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ca" total="430" traduits="430" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
+	</langue>
+	<langue code="cs" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=cs" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
+	</langue>
+	<langue code="da" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=da" total="430" traduits="207" relire="0" modifs="3" nouveaux="220" pourcent="48.14">
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=de" total="430" traduits="430" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
@@ -12,6 +22,8 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+	</langue>
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=eo" total="430" traduits="55" relire="0" modifs="6" nouveaux="369" pourcent="12.79">
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=es" total="430" traduits="427" relire="0" modifs="2" nouveaux="1" pourcent="99.30">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
@@ -26,12 +38,26 @@
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=gl" total="430" traduits="429" relire="0" modifs="0" nouveaux="1" pourcent="99.77">
 	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=it" total="430" traduits="101" relire="0" modifs="7" nouveaux="322" pourcent="23.49">
+	</langue>
+	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=it_fem" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
+	</langue>
 	<langue code="km" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=km" total="430" traduits="218" relire="0" modifs="0" nouveaux="212" pourcent="50.70">
+	</langue>
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=lb" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=nl" total="430" traduits="430" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
+	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=oc_lnc" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
+	</langue>
+	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=oc_ni" total="430" traduits="45" relire="0" modifs="6" nouveaux="379" pourcent="10.47">
+	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=pt" total="430" traduits="427" relire="0" modifs="2" nouveaux="1" pourcent="99.30">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=pt_br" total="430" traduits="90" relire="0" modifs="9" nouveaux="331" pourcent="20.93">
+	</langue>
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=ro" total="430" traduits="191" relire="0" modifs="7" nouveaux="232" pourcent="44.42">
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/spipbb?lang_cible=sk" total="430" traduits="430" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
