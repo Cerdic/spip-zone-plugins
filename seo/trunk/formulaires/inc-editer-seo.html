@@ -1,7 +1,8 @@
 <fieldset class="meta-tags">
-	<legend>[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
+	<legend class="poignee">[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
+	<span class='poignee porte_fermee'>> Configurer les meta-tags</span><span class='poignee porte_ouverte'>> Replier les meta-tags</span>
 	<input type="hidden" name="seo_metas" value="1" />
-	<ul>
+	<ul class='porte'>
 		 #SET{name,meta_title}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:seo:meta_title:></label>[
@@ -41,3 +42,14 @@
 		jQuery.getScript('[(#PRODUIRE{fond=javascript/seo.js,lang=#ENV{lang}}|compacte)]',function(){seo_init();});
 	});}/*]]>*/</script>
 </fieldset>
+
+<script>
+	$(function(){
+		jQuery('.porte').hide();
+		jQuery('.poignee').on('click', function(e) { jQuery('.porte').slideToggle(); jQuery(".poignee").toggleClass("porte_ouverte"); e.preventDefault(); });
+	});
+</script>
+<style type="text/css">
+	.poignee{cursor: pointer;margin-bottom: 10px}
+	.porte_ouverte{display: none;}
+</style>
