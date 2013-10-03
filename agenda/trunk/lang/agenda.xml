@@ -10,6 +10,8 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=fr" total="117" traduits="117" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=nl" total="117" traduits="31" relire="0" modifs="1" nouveaux="85" pourcent="26.50">
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=sk" total="117" traduits="116" relire="0" modifs="0" nouveaux="1" pourcent="99.15">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>

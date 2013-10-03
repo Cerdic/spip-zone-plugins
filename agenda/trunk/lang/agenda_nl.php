@@ -1,23 +1,21 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Produit automatiquement par le plugin LangOnet a partir de la langue source nl
-// Module: agenda
-// Langue: nl
-// Date: 27-05-2011 12:08:10
-// Items: 35
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/agenda?lang_cible=nl
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
+	// A
 	'activite_editoriale' => 'Hoofdactiviteit',
 	'ajouter_un_evenement' => 'een gebeurtenis toevoegen aan dit artikel',
-// B
+
+	// B
 	'bouton_annuler' => 'Annuleren',
 	'bouton_supprimer' => 'Afschaffen',
-// E
+
+	// E
 	'evenement_autres_occurences' => 'Andere omstandigheden:',
 	'evenement_date' => 'Date',
 	'evenement_date_a' => 'tot ',
@@ -33,28 +31,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_repetitions' => 'Herhalingen',
 	'evenement_titre' => 'Titel',
 	'evenements' => 'Gebeurtenissen',
-// I
+
+	// I
 	'icone_creer_evenement' => 'Een nieuwe gebeurtenis creëren',
 	'info_evenements' => 'Gebeurtenissen',
 	'info_nombre_evenements' => '@nb@ gebeurtenissen,',
 	'info_un_evenement' => 'een gebeurtenis,',
-	'item_mots_cles_association_evenements' => 'aan de gebeurtenissen',
-// L
+
+	// L
 	'lien_retirer_evenement' => 'Afschaffen',
-// N
-	'nb_mots_clefs' => '@nb@ trefwoorden',
+
+	// N
 	'nb_repetitions' => '@nb@ herhalingen',
-// R
+
+	// R
 	'repetition_de' => 'Herhaling van',
-// S
+
+	// S
 	'sans_titre' => '(zonder titel)',
-// T
-	'texte_agenda' => 'AGENDA',
+
+	// T
+	'texte_agenda' => 'AGENDA', # MODIF
 	'titre_cadre_ajouter_evenement' => 'Een gebeurtenis toevoegen',
 	'titre_cadre_modifier_evenement' => 'Een gebeurtenis wijzigen',
 	'titre_sur_l_agenda' => 'Op de agenda',
-// U
-	'un_mot_clef' => '1 trefwoord',
-	'une_repetition' => '1 herhaling',
+
+	// U
+	'une_repetition' => '1 herhaling'
 );
+
 ?>
