@@ -16,6 +16,8 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=it" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
 	</langue>
+	<langue code="km" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=km" total="49" traduits="21" relire="0" modifs="3" nouveaux="25" pourcent="42.86">
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=sk" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
