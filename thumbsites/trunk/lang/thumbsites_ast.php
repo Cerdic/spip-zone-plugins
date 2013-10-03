@@ -7,35 +7,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_copier_comme_logo' => 'Définir comme logo', # NEW
-	'bouton_rafraichir' => 'Rafraichir la vignette', # NEW
-
 	// C
-	'cfg_descriptif' => 'Esta páxina permite configurar el complementu Thumbsites, y, n\'especial, escoyer el sirvidor de viñetes. Pa saber más, consulte la <a href="http://www.spip-contrib.net/?article2584">documentación en contrib</a>',
-	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
-	'cfg_inf_choix_serveur' => 'Choisissez le serveur qui fournira les vignettes de vos sites référencés et compléter éventuellement son paramétrage.', # NEW
-	'cfg_inf_miwim_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwim</a>. La présence de ce lien est vérifié périodiquement par un script.', # NEW
-	'cfg_inf_rotothumb_presentation' => 'Pa utilizar esti serviciu nun necesites rexistrate, pero tienes de poner un enllaz al sitiu <a href="http://www.robothumb.com">Robothumb</a>. La presencia d\'esti enllaz se comprueba de vezu polos sos medios.',
-	'cfg_inf_thumbshots_de_presentation' => '<a href="http://www.thumbshots.de">Thumbshots.de</a> ufre un serviciu equivalente a Thumbshots.com. Anque los servicios son idénticos, se trata de 2 sitios distintos.',
-	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> ufre un serviciu de baldre que nun necesita identificación.',
+	'cfg_descriptif' => 'Esta páxina permite configurar el complementu Thumbsites, y, n’especial, escoyer el sirvidor de viñetes. Pa saber más, consulte la <a href="http://contrib.spip.net/?article2584">documentación en contrib</a>',
+	'cfg_inf_rotothumb_presentation' => 'Pa utilizar esti serviciu nun necesites rexistrate, pero tienes de poner un enllaz al sitiu <a href="http://www.robothumb.com">Robothumb</a>. La presencia d’esti enllaz se comprueba de vezu polos sos medios.',
 	'cfg_inf_websnapr_presentation' => 'Pa utilizar esti serviciu tienes de tar rexistráu nel sitiu <a href="http://www.websnapr.com">Websnapr</a>. La versión de baldre permite tratar 250.000 imaxes del sitiu al mes, a un ritmu de 80 imaxes por hora.',
-	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
-	'cfg_itm_serveur_miwim' => 'Miwim', # NEW
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
-	'cfg_itm_serveur_thumbshots' => 'Thumbshots.com',
-	'cfg_itm_serveur_thumbshots_de' => 'Thumbshots.de',
 	'cfg_itm_serveur_websnapr' => 'Websnapr',
 	'cfg_itm_taille_vignette' => '@taille@ pixels',
 	'cfg_lbl_cle' => 'La to clave',
-	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
-	'cfg_lbl_serveur' => 'Serveur', # NEW
 	'cfg_lbl_taille_vignette' => 'Tamañu de les miniatures',
-	'cfg_lbl_usage' => 'Conditions d\'utilisation', # NEW
-	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'Sirvidor', # MODIF
-	'cfg_titre_form' => 'Configurer Thumbsites', # NEW
-	'cfg_titre_page' => 'Thumbsites', # NEW
 
 	// T
 	'titre_thumbshot_site' => 'MINIATURA DEL SITIU'

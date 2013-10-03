@@ -1,4 +1,11 @@
 <traduction module="thumbsites" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/thumbsites/trunk/lang/" reference="fr">
+	<langue code="ast" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=ast" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
+	</langue>
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=ca" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=de" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=en" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
@@ -6,6 +13,13 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fr" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fr_tu" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=gl" total="23" traduits="1" relire="0" modifs="0" nouveaux="22" pourcent="4.35">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=pt_br" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=sk" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
