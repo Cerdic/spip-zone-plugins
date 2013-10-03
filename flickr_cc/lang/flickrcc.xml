@@ -19,6 +19,8 @@
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=gl" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="km" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=km" total="11" traduits="2" relire="0" modifs="0" nouveaux="9" pourcent="18.18">
+	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=lb" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=nl" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
@@ -29,6 +31,8 @@
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=sk" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="sv" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=sv" total="11" traduits="1" relire="0" modifs="0" nouveaux="10" pourcent="9.09">
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/flickrcc?lang_cible=tr" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
