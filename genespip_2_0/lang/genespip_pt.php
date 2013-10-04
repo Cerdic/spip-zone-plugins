@@ -75,7 +75,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mariage_le' => 'União dia',
 	'media' => 'Media',
 	'mere' => 'Mãe',
-	'mere_inconnu' => 'Mère inconnu',
 	'metier' => 'Arte',
 	'modifier' => 'Modificar',
 
