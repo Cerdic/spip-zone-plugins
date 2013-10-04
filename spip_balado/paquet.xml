@@ -1,0 +1,15 @@
+<paquet
+	prefix="balado"
+	categorie="outil"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="img/balado.jpg"
+	documentation="http://www.spip-contrib.net/SpipBalado"
+>	
+
+	<nom>SpipBalado</nom>
+	<!-- Générer un flux RSS spécifique à iTunes -->
+
+	<auteur lien="http://www.spip-contrib.net/jsb">Jean-S&eacute;bastien Barboteu</auteur>
+</paquet>

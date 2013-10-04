@@ -4,13 +4,13 @@
 ?>
 <rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0">
   <channel>
-    <title>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]</title>
+    <title>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)]</title>
     <link>#URL_SITE_SPIP/spiptunes.php3</link>
-    <description>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]</description>
+    <description>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)]</description>
     <generator>SPIP</generator>
     <docs>http://www.spip-contrib.net/SpipBalado</docs>
     <language>#LANG</language>
-    <copyright>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)] [(#DATE_annee|textebrut|entites_html|entites_unicode)]</copyright>
+    <copyright>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)] [(#DATE_annee|textebrut|entites_html|charset2unicode)]</copyright>
     <managingEditor>#EMAIL_WEBMASTER</managingEditor>
     <webMaster><BOUCLE_webmaster(AUTEURS) {id_auteur=1}>
            [(#NOM|texte_backend)]
