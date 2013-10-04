@@ -1,0 +1,49 @@
+<?php
+        @header('Content-type: text/xml[; charset=(#CHARSET)]');
+        echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n";
+?>
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)]</title>
+    <link>#URL_SITE_SPIP/spiptunes.php3</link>
+    <description>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)]</description>
+    <generator>SPIP</generator>
+    <docs>http://www.spip-contrib.net/SpipBalado</docs>
+    <language>#LANG</language>
+    <copyright>[(#NOM_SITE_SPIP|textebrut|entites_html|charset2unicode)] [(#DATE_annee|textebrut|entites_html|charset2unicode)]</copyright>
+    <managingEditor>#EMAIL_WEBMASTER</managingEditor>
+    <webMaster><BOUCLE_webmaster(AUTEURS) {id_auteur=1}>
+           [(#NOM|texte_backend)]
+            </BOUCLE_webmaster></webMaster>
+    <pubDate>[(#DATE|affdate{'r'})]</pubDate>
+    <lastBuildDate>[(#DATE_NOUVEAUTES|affdate)] [(#DATE_NOUVEAUTES|heures)]:[(#DATE_NOUVEAUTES|minutes)]:[(#DATE_NOUVEAUTES|secondes)]</lastBuildDate>
+    <image>
+      <url>[href="(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)"]
+</url>      <title>#NOM_SITE_SPIP</title>
+      <link>#URL_SITE_SPIP</link>
+      <description>#NOM_SITE_SPIP</description>
+    </image>
+        <BOUCLE_article(ARTICLES) {titre_mot=podcast}{par date} {inverse} {0,10}>
+
+    <item>
+      <title>[(#TITRE|texte_backend)]</title>
+      <link>[(#URL_ARTICLE|url_absolue|unique)]</link>
+      <description>[(#INTRODUCTION|liens_absolus|texte_backend)]</description>
+      <pubDate>[(#DATE|affdate{'r'})]</pubDate>
+      <BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}{extension==mp3|ogg|mpeg|avi|mov|mp4}>[
+                        <enclosure url="(#URL_DOCUMENT|url_absolue|unique)" length="[(#TAILLE)]" type="#MIME_TYPE" />]
+                </BOUCLE_podcast>
+
+      <guid isPermaLink="false">[(#URL_ARTICLE|url_absolue|unique)]</guid>
+      <itunes:author><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></itunes:author>
+      [<itunes:subtitle>(#SOUS_TITRE|texte_backend)</itunes:subtitle>]
+      <itunes:summary>[(#INTRODUCTION|liens_absolus|texte_backend)]</itunes:summary>
+      <itunes:keywords><BOUCLE_articles_mots(ARTICLES) {id_mot} {!titre_mot=podcast}>
+#TITRE
+</BOUCLE_articles_mots></itunes:keywords>  
+
+    </item>
+    </BOUCLE_article>
+
+  </channel>
+</rss>
