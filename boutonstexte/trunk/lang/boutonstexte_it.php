@@ -15,7 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'diminuer_police' => 'Diminuisci la dimensione del testo',
-	'donnees_techniques' => 'Données techniques à ne pas changer', # MODIF
 
 	// R
 	'retour_a_spip' => 'Ritorna a Spip',
