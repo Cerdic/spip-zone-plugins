@@ -9,7 +9,7 @@
 			|parametre_url{vue, #CLE}
 			|lien_ou_expose{
 				[(#VALEUR|_T)],
-				[(#ENV{vue, vue_defaut}|=={#CLE})]})
+				[(#ENV{vue, #GET{vue_defaut}}|=={#CLE})]})
 	</li>]
 </BOUCLE_navigation_dashboard>
 </ul>
