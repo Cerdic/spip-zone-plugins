@@ -37,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_boite_postale' => 'صندوق بريد',
 	'label_code_postal' => 'رمز البريدي',
-	'label_complement' => 'Complément', # MODIF
 	'label_email' => 'بريد إلكتروني',
 	'label_numero' => 'رقم',
 	'label_pays' => 'البلد',
