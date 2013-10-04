@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_donnees' => 'បន្ថែមទិន្នន័យ',
 	'ajouter_table' => 'បន្ថែម ទៅតារាង',
 	'aucune_donnee' => 'គ្មានទិន្នន័យ ក្នុងឯកសារ។',
-	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessous.', # MODIF
 
 	// C
 	'champs_table' => 'វាល នៃតារាង', # MODIF
