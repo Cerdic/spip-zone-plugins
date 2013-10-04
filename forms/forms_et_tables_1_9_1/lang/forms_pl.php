@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'info_obligatoire_02' => '[Obowiązkowo]',
-	'info_rubriques_liees_donnee' => 'Les rubriques liées'
+	'info_obligatoire_02' => '[Obowiązkowo]'
 );
 
 ?>
