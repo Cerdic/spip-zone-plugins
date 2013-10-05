@@ -34,7 +34,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function critere_mesfavoris_dist($idb,&$boucles,$crit){
 	$boucle = &$boucles[$idb];
-    $id_table = $boucle->id_table;
+	$id_table = $boucle->id_table;
 	$primary = $boucles[$idb]->primary;
 	
 	$objet = objet_type($primary,$boucle->serveur);
@@ -56,17 +56,16 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 function mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type){
 	$in = "sql_in('$primary', prepare_mesfavoris($objet,$type), '')";
 	$type1 = "mesfavoris_definir_type($type)";
-	return "$type1 ? array($type1,'$primary','('.sql_get_select('zzza.$primary','$table_objet as zzza',$in,'','','','',\$connect).')'):''";
+	return "$type1 ? array($type1,'$id_table.$primary','('.sql_get_select('zzza.$primary','$table_objet as zzza',$in,'','','','',\$connect).')'):''";
 }
 
 function mesfavoris_definir_type($type){
-	if($type == 'oui'){
+	if($type == 'oui')
 		return 'IN';
-	}else if($type == 'non'){
+	else if($type == 'non')
 		return 'NOT IN';
-	}else{
+	else
 		return false;
-	}
 }
 /**
  * Fonction de préparation du critère {!mesfavoris}
