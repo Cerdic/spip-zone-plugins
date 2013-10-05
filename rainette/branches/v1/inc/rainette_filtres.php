@@ -53,7 +53,7 @@ function rainette_afficher_direction($direction){
 		14 => 'NW',
 		15 => 'NNW'
 					);
-	if (is_int($direction))
+	if (is_numeric($direction))
 		$direction = $liste_direction[round($direction / 22.5) % 16];
 	elseif (!in_array($direction, $liste_direction))
 		return _T('rainette:valeur_indeterminee');
