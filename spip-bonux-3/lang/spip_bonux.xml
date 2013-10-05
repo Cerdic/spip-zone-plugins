@@ -14,7 +14,7 @@
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=ru" total="13" traduits="12" relire="0" modifs="1" nouveaux="0" pourcent="92.31">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=sk" total="13" traduits="12" relire="0" modifs="1" nouveaux="0" pourcent="92.31">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=sk" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
