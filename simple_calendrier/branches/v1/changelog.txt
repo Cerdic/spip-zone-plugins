@@ -1,6 +1,11 @@
 ﻿Plugin Simple Calendrier pour SPIP 2.1
 ------------------------------------------
 
+1.2.11 le 05/10/2013
+--------------------
+Surcharge de la fonction 'boucle_DOCUMENTS_dist' du core, afin qu'elle puisse retourner les documents rattachés aux évènements.
+
+
 1.2.10 le 25/09/2013
 --------------------
 Correction d'un gros bug sur les critères 'a_venir' et 'du_mois' 
