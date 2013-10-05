@@ -1,21 +1,17 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-grappes
-// Langue: es
-// Date: 10-10-2012 16:25:01
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-grappes?lang_cible=es
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// G
+	// G
 	'grappes_description' => 'Permite agrupar elementos de SPIP
         como autores/as, secciones, artículos (cuando hay una interfaz que lo permite)...
         en un mismo universo (un racimo)',
-	'grappes_nom' => 'Racimos',
+	'grappes_nom' => 'Racimos'
 );
+
 ?>
