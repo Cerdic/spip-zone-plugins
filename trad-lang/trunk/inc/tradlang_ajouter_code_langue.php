@@ -62,7 +62,6 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	 * On ajoute un job tout de suite pour générer les premières révisions
 	 */
 	$job_description = _T('tradlang:job_creation_revisions_modules',array('module' => $module['module']));
-	spip_log('Ajouter job suite à ajout de code base','revisions_cron');
 	job_queue_add("tradlang_creer_premieres_revisions", $job_description, array('module'=>$module['module'],'lang'=>$lang),'inc/', false, 0, 10);
 	
 	/**
