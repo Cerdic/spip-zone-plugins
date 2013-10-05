@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Rainette</nom>
-	<auteur>Cedric Morin, Eric Lupinacci</auteur>
+	<auteur>Cedric Morin, Eric Lupinacci, Emmanuel Saint-James</auteur>
 	<version>1.5.0</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<slogan>La m&#233;t&#233;o au quotidien</slogan>
 	<description>
