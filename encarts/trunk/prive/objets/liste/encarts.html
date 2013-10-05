@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_encart,1,
+	points,-1
+}})]<B_liste_encarts>
+#ANCRE_PAGINATION
+<div class="liste-objets encarts">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{encart:info_1_encart,encart:info_nb_encarts}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:encart:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_encart,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_encarts(ENCARTS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{encart-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_ENCART|image_reduire{20,26})]<a href="[(#ID_ENCART|generer_url_entite{encart})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ENCART">[(#RANG). ]#TITRE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,encart,#ID_ENCART}|?{
+				<a href="[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART})]">#ID_ENCART</a>,
+				#ID_ENCART
+			})]</td>
+		</tr>
+	</BOUCLE_liste_encarts>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_encarts>[
+<div class="liste-objets encarts caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_encarts>

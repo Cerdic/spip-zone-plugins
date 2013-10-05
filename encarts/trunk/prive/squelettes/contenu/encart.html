@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,encart,#ID_ENCART}|sinon_interdire_acces)]
+<BOUCLE_encart(ENCARTS){id_encart}{si #ENV{exec}|=={encart}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,encart,#ID_ENCART})
+		[(#ID_ENCART|afficher_qui_edite{encart}|non)
+			[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART}|icone_verticale{<:encart:icone_modifier_encart:>,encart,edit,right ajax preload})]
+		]
+		[(#ID_ENCART|afficher_qui_edite{encart}|oui)
+			[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART}|icone_verticale{#ID_ENCART|afficher_qui_edite{encart},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{encart-24.png}|balise_img{encart,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{encart,#ID_ENCART}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/encart,id=#ID_ENCART,id_encart=#ID_ENCART,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,encart,#ID_ENCART})
+	[(#ID_ENCART|afficher_qui_edite{encart}|non)
+		[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART}|icone_verticale{<:encart:icone_modifier_encart:>,encart,edit,right ajax preload})]
+	]
+	[(#ID_ENCART|afficher_qui_edite{encart}|oui)
+		[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART}|icone_verticale{#ID_ENCART|afficher_qui_edite{encart},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,encart,id,#ID_ENCART},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_encart>
+[(#ENV**{exec}|=={encart_edit}|?{#INCLURE{fond=prive/squelettes/contenu/encart_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_encart>

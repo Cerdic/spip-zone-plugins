@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/encarts, par=titre, env, ajax, sinon=<:encart:info_aucun_encart:>}>
+
+[(#AUTORISER{creer,encart})
+	[(#URL_ECRIRE{encart_edit,new=oui}|icone_verticale{<:encart:icone_creer_encart:>,encart,new,right})]
+]

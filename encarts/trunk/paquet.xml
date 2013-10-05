@@ -1,0 +1,54 @@
+<paquet
+	prefix="encarts"
+	categorie="edition"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.12-dev;3.0.*]"
+	logo="prive/themes/spip/images/encarts-64.png"
+	documentation="http://contrib.spip.net/Plugin-Encarts"
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2013-10-05 18:19:53
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>encarts</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Cyril</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="encarts_autorisations.php" />
+		<pipeline nom="insert_head" inclure="encarts_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (A eviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="encarts" titre="encarts:encarts_titre" parent="menu_edition"  icone="images/encarts-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="encarts" titre="encarts:encarts_titre" parent="configuration" icone="images/encarts-24.png" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="encarts_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/encarts.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/encarts.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/encarts.php" /> 
+	<pipeline nom="affiche_milieu" inclure="encarts_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="encarts_pipelines.php" /> 
+
+	<menu nom="encarts" titre="encart:titre_encarts" parent="menu_edition" icone="images/encart-16.png" action="encarts" /> 
+	<menu nom="encart_creer" titre="encart:icone_creer_encart" parent="outils_rapides" icone="images/encart-new-16.png" action="encart_edit" parametres="new=oui" /> 
+</paquet>
