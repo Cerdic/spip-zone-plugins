@@ -1,8 +1,8 @@
 <traduction module="tradlang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="357" traduits="322" relire="0" modifs="6" nouveaux="29" pourcent="90.20">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="360" traduits="322" relire="0" modifs="6" nouveaux="32" pourcent="89.44">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=en" total="357" traduits="343" relire="0" modifs="2" nouveaux="12" pourcent="96.08">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=en" total="360" traduits="343" relire="0" modifs="2" nouveaux="15" pourcent="95.28">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
@@ -10,12 +10,12 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=es" total="357" traduits="336" relire="0" modifs="7" nouveaux="14" pourcent="94.12">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=es" total="360" traduits="336" relire="0" modifs="7" nouveaux="17" pourcent="93.33">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=fr" total="357" traduits="357" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=fr" total="360" traduits="360" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="357" traduits="336" relire="0" modifs="5" nouveaux="16" pourcent="94.12">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="360" traduits="350" relire="0" modifs="1" nouveaux="9" pourcent="97.22">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

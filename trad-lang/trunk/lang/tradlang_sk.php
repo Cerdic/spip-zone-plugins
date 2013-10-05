@@ -105,13 +105,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_originale' => 'Tento reťazec je reťazec originálu',
 	'info_choisir_langue' => 'V určitom jazyku',
 	'info_contributeurs' => 'Prispievatelia',
+	'info_edition_par_lot' => 'Celkové úpravy:',
 	'info_export' => 'Exporty:',
 	'info_filtrer_status' => 'Filtrovať podľa stavu:',
 	'info_langue_mere' => '(jazyk autora)',
 	'info_langues_non_preferees' => 'Iné jazyky:',
 	'info_langues_preferees' => 'Obľúbené jazyky:',
 	'info_module_nb_items_langue_mere' => 'Pôvodný jazyk modulu je <abbr title="@lang_mere@">@lang_mere_longue@</abbr> a obsahuje @nb@ ijazykových položiek.',
-	'info_module_traduction' => '@total@ @statut@ (@percent@ %)', # MODIF
+	'info_module_traduction' => '@total@ @statut@ (@percent@ %)',
 	'info_module_traduit_langues' => 'Tento modul je preložený alebo čiastočne preložený do @nb@ jazykov.',
 	'info_module_traduit_pc' => 'Modul preložený na @pc@ %',
 	'info_module_traduit_pc_lang' => 'Modul "@module@" je do jazyka @lang@ (@langue_longue@) preložený na @pc@ % ',
@@ -155,12 +156,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_manquants' => 'v tomto jazyku chýba @nb@ položiek (z jazyka autora)',
 	'items_modif' => 'Zmenené položky:',
 	'items_new' => 'Nových položiek:',
+	'items_relire' => 'Položky na čítanie:',
 	'items_total_nb' => 'Celkový počet položiek:',
 
 	// J
 	'job_creation_revisions_modules' => 'Vytváranie pôvodných úprav modulu "@module@"',
 
 	// L
+	'label_descriptif_priorite' => 'Priorita "@priorite@"',
 	'label_fichier_langue' => 'Jazykový súbor, ktorý chcete nahrať',
 	'label_id_tradlang' => 'ID reťazca',
 	'label_idmodule' => 'ID modulu',
@@ -196,6 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version_selectionnee_comm' => 'Komentár vo vybranom jazyku (@lang@)',
 	'languesdispo' => 'Dostupné jazyky',
 	'legend_conf_bilan' => 'Zobrazenie bilancie',
+	'legend_descriptifs_priorites' => 'Opisy priorít',
 	'lien_accueil_interface' => 'Úvodná stránka prekladateľského rozhrania',
 	'lien_aide_recherche' => 'Pomoc s vyhľadávaním',
 	'lien_aucun_status' => 'Žiadny',
@@ -220,10 +224,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_revenir_traduction' => 'Vrátiť sa na stránku s prekladom',
 	'lien_sauvegarder' => 'Zálohovať/obnoviť aktuálny súbor.',
 	'lien_telecharger' => '[Stiahnuť]',
+	'lien_toutes_priorite' => 'Všetky',
 	'lien_traduction_module' => 'Modul ',
 	'lien_traduction_vers' => ' do ',
 	'lien_traduire_suivant_str_module' => 'Preložiť ďalší nepreložený reťazec modulu "@module@"',
-	'lien_trier_langue_non' => 'Zobraziť celý zoznam.', # MODIF
+	'lien_trier_langue_non' => 'Zobraziť celý zoznam',
 	'lien_utiliser_google_translate' => 'Používať túto verziu',
 	'lien_voir_bilan_lang' => 'Zobraziť štatistiku jazyka @langue_longue@ (@lang@)',
 	'lien_voir_bilan_module' => 'Zobraziť bilanciu modulu @nom_mod@ @module@',
@@ -273,8 +278,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Tento modul umožňuje správu jazykových súborov',
 
 	// S
-	'str_status_modif' => 'Zmenený (MODIF)', # MODIF
-	'str_status_new' => 'Nový (NEW)', # MODIF
+	'str_status_modif' => 'Zmenené',
+	'str_status_new' => 'Nové',
+	'str_status_relire' => 'Na čítanie',
 	'str_status_traduit' => 'Preložený',
 
 	// T
@@ -323,6 +329,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_date' => 'Dátum',
 	'th_items_modifs' => 'Zmenené položky',
 	'th_items_new' => 'Nové položky',
+	'th_items_relire' => 'Položky na čítanie',
 	'th_items_traduits' => 'Preložené položky',
 	'th_langue' => 'Jazyk',
 	'th_langue_mere' => 'Jazyk autora',
@@ -333,6 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_total_items_module' => 'Počet položiek celkom',
 	'th_traduction' => 'Preklad',
 	'th_traduction_voulue' => 'Preklad v jazyku "@lang@"',
+	'tire_recherche_modules_favoris' => 'Vyhľadávanie modulov',
 	'titre_bilan' => 'Bilancia prekladov',
 	'titre_bilan_langue' => 'Bilancia prekladov do jazyka "@lang@"',
 	'titre_bilan_module' => 'Bilancia prekladov modulu "@module@"',
@@ -344,6 +352,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_import_step_2' => '2. krok: Potvrdenie vašich zmien',
 	'titre_inscription' => 'Registrácia',
 	'titre_logo_tradlang_module' => 'Logo modulu',
+	'titre_modifications_chaine_originale' => 'Z pôvodného reťazca',
+	'titre_modifications_chaine_traduite' => 'Z tohto reťazca',
 	'titre_modifications_chaines' => 'Posledné zmeny',
 	'titre_modifier' => 'Upraviť',
 	'titre_page_auteurs' => 'Zoznam prispievateľov',
