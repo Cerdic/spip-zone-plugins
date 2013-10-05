@@ -91,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_7' => 'مخلوط برف و برفباران',
 	'meteo_8' => 'بارن يخي ',
 	'meteo_9' => 'بارش نم‌نم',
-	'meteo_conditions' => 'وضعيت فعلي ',
+	'meteo_conditions' => 'وضعيت فعلي ', # MODIF
 	'meteo_consultation' => 'هوايِ @ville@',
 	'meteo_de' => 'هواي @ville@',
 	'meteo_na' => 'ناشناخته',
-	'meteo_previsions' => 'پيش‌ بيني وضعيت ',
-	'meteo_previsions_aujourdhui' => 'پيش‌ بيني امروز',
-	'meteo_previsions_n_jours' => 'پيش بيني @nbj@ روز ',
+	'meteo_previsions' => 'پيش‌ بيني وضعيت ', # MODIF
+	'meteo_previsions_aujourdhui' => 'پيش‌ بيني امروز', # MODIF
+	'meteo_previsions_n_jours' => 'پيش بيني @nbj@ روز ', # MODIF
 
 	// N
 	'nuit' => 'شب ',

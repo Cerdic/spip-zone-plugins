@@ -91,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_7' => 'sneh a poľadovica',
 	'meteo_8' => 'mrznúce mrholenie',
 	'meteo_9' => 'mrholenie',
-	'meteo_conditions' => 'súčasné poveternostné podmienky',
+	'meteo_conditions' => 'súčasné poveternostné podmienky', # MODIF
 	'meteo_consultation' => 'Počasie pre @ville@ ',
 	'meteo_de' => 'Počasie – @ville@ ',
 	'meteo_na' => 'neznáme',
-	'meteo_previsions' => 'predpovedané poveternostné podmienky',
-	'meteo_previsions_aujourdhui' => 'predpoveď na dnes',
-	'meteo_previsions_n_jours' => '@nbj@-dňová predpoveď',
+	'meteo_previsions' => 'predpovedané poveternostné podmienky', # MODIF
+	'meteo_previsions_aujourdhui' => 'predpoveď na dnes', # MODIF
+	'meteo_previsions_n_jours' => '@nbj@-dňová predpoveď', # MODIF
 
 	// N
 	'nuit' => 'noc',

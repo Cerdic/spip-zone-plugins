@@ -91,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_7' => 'nieve y hielo',
 	'meteo_8' => 'llovizna heladiza',
 	'meteo_9' => 'llovizna',
-	'meteo_conditions' => 'condiciones actuales',
+	'meteo_conditions' => 'condiciones actuales', # MODIF
 	'meteo_consultation' => 'Consulte el tiempo para @ville@',
 	'meteo_de' => 'Tiempo para @ville@',
 	'meteo_na' => 'desconocido',
-	'meteo_previsions' => 'pronóstico',
-	'meteo_previsions_aujourdhui' => 'pronóstico para hoy',
-	'meteo_previsions_n_jours' => 'pronósticos a @nbj@ días',
+	'meteo_previsions' => 'pronóstico', # MODIF
+	'meteo_previsions_aujourdhui' => 'pronóstico para hoy', # MODIF
+	'meteo_previsions_n_jours' => 'pronósticos a @nbj@ días', # MODIF
 
 	// N
 	'nuit' => 'noche',
