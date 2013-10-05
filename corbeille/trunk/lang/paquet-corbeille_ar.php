@@ -1,18 +1,15 @@
 <?php
-
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Fichier produit par PlugOnet
-// Module: paquet-corbeille
-// Langue: ar
-// Date: 18-10-2011 14:28:32
-// Items: 2
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-corbeille?lang_cible=ar
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// C
+	// C
 	'corbeille_nom' => 'سلة المهملات',
-	'corbeille_slogan' => 'إدارة المستندات الموجودة في سلة المهملات',
+	'corbeille_slogan' => 'إدارة المستندات الموجودة في سلة المهملات'
 );
+
 ?>
