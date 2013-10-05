@@ -8,11 +8,11 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-		    <li class="editer editer_nom_mod obligatoire[(#ENV{erreurs}|table_valeur{nom_mod}|oui)erreur]">
-		    	<label for="nom_mod"><:tradlang:label_nommodule:></label>[
+			<li class="editer editer_nom_mod obligatoire[(#ENV{erreurs}|table_valeur{nom_mod}|oui)erreur]">
+				<label for="nom_mod"><:tradlang:label_nommodule:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{nom_mod})</span>]
 				<input type="text" class="text multilang" name="nom_mod" id="nom_mod" value="#ENV{nom_mod}" />
-		    </li>
+			</li>
 			<li>
 				<label><:tradlang:label_idmodule:></label>
 				#ENV{module}
@@ -47,6 +47,11 @@
 				</select>
 			</li>
 			</B_priorites>
+			<li class='editer editer_limite_trad[(#ENV{erreurs}|table_valeur{limite_trad}|oui)erreur]'>
+				<label for='limite_trad'><:tradlang:label_limite_trad:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{limite_trad})</span>]
+				<input type='text' size='3' maxlength="3" class='text' id='limite_trad' name='limite_trad' value='#ENV{limite_trad,0}' />
+			</li>
 			<li class='editer editer_texte[(#ENV{erreurs}|table_valeur{texte}|oui)erreur]'>
 				<label for='texte'><:tradlang:label_texte:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{texte})</span>]

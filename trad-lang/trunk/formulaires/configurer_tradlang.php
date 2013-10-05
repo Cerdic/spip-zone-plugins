@@ -17,6 +17,9 @@ function formulaires_configurer_tradlang_verifier_dist(){
 	$erreurs = array();
 	if(($langues_autorisees = _request('langues_autorisees')) && (count($langues_autorisees)<2))
 		$erreurs['langues_autorisees'] = _T('tradlang:erreur_langues_autorisees_insuffisantes');
+	$limite_trad = _request('seuil_export_tradlang');
+	if(!is_numeric($limite_trad) || (intval($limite_trad) < 0) || (intval($limite_trad) > 100))
+		$erreurs['seuil_export_tradlang'] = _T('tradlang:erreur_limite_trad_invalide');
 	return $erreurs;
 }
 
@@ -25,6 +28,7 @@ function formulaires_configurer_tradlang_traiter_dist(){
 	foreach(array(
 		"sauvegarde_locale",
 		"sauvegarde_post_edition",
+		"seuil_export_tradlang",
 		"langues_autorisees",
 		"limiter_langues_bilan",
 		"limiter_langues_bilan_nb",

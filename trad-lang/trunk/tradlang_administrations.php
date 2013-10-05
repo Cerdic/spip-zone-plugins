@@ -84,6 +84,9 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.5.1'] = array(
 		array('tradlang_maj_attic')
 	);
+	$maj['0.5.2'] = array(
+		array('maj_tables',array('spip_tradlang_modules'))
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

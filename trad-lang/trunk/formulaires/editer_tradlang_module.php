@@ -18,15 +18,16 @@ function formulaires_editer_tradlang_module_charger($id_tradlang_module,$retour=
 	
 	$valeurs['_langues'] = $lgs;
 	$valeurs['codelangue'] = _request('codelangue');
+	spip_log($valeurs,'test.'._LOG_ERREUR);
 	return $valeurs;
 }
 
 function formulaires_editer_tradlang_module_verifier($id_tradlang_module,$retour=''){
 	$erreur = array();
-	
+	$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 	$modules = tradlang_getmodules_base();
 	if(!isset($modules[$module])){
-		return $erreur;
+		$erreur['module'] = _T('tradlang:erreur_module_inexistant');
 	}
 	$modok = $modules[$module];
 	foreach($modok as $cle=>$item){
@@ -44,6 +45,10 @@ function formulaires_editer_tradlang_module_verifier($id_tradlang_module,$retour
 			$erreur['codelangue'] = _T('tradlang:erreur_code_langue_invalide');
 	}
 	
+	$limite_trad = _request('limite_trad');
+	if(!is_numeric($limite_trad) || (intval($limite_trad) < 0) || (intval($limite_trad) > 100))
+		$erreur['limite_trad'] = _T('tradlang:erreur_limite_trad_invalide');
+
 	return $erreur;
 }
 
@@ -70,7 +75,8 @@ function formulaires_editer_tradlang_module_traiter($id_tradlang_module,$retour=
 			'texte' => _request('texte'),
 			'priorite' => _request('priorite')
 		);
-		
+		$limite_trad = _request('limite_trad') ? _request('limite_trad') : 0;
+		$datas['limite_trad'] = $limite_trad;
 		sql_updateq('spip_tradlang_modules',$datas,'id_tradlang_module='.intval($id_tradlang_module));
 		$ret['message_ok'] = _T('tradlang:message_module_updated',array('module'=>$module));
 		

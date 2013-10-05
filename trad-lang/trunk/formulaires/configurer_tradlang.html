@@ -24,6 +24,7 @@
 					<input type="checkbox" name="sauvegarde_post_edition" class="checkbox" id='champ_sauvegarde_post_edition'[(#ENV{sauvegarde_post_edition}|=={on}|oui)checked='checked'] />
 				</div>
 			</li>
+			[(#SAISIE{input,seuil_export_tradlang,label=<:tradlang:label_seuil_export_tradlang:>,maxlength=3,defaut=50})]
 			[(#SAISIE{selection_multiple,langues_autorisees,
 				label=<:tradlang:label_langues_autorisees:>,
 				explication=<:tradlang:explication_langues_autorisees:>,
@@ -35,7 +36,7 @@
 					<h3 class="legend"><:tradlang:legend_conf_bilan:></h3>
 					<ul>
 						[(#SAISIE{case,limiter_langues_bilan,label=<:tradlang:label_limiter_langues_bilan:>,explication=<:tradlang:explication_limiter_langues_bilan{nb=10}:>})]
-						[(#SAISIE{input,limiter_langues_bilan_nb,label=<:tradlang:label_limiter_langues_bilan_nb:>,explication=<:tradlang:explication_limiter_langues_bilan_nb:>,maxlength=2,defaut=10	})]
+						[(#SAISIE{input,limiter_langues_bilan_nb,label=<:tradlang:label_limiter_langues_bilan_nb:>,explication=<:tradlang:explication_limiter_langues_bilan_nb:>,maxlength=2,defaut=10})]
 					</ul>
 				</fieldset>
 			</li>
