@@ -1,7 +1,12 @@
 <?php
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
+ * 
+ * Fichier des fonctions d'installation, de mise à jour et de suppression
+ * du plugin
+ * 
+ * @package SPIP\Grappes\Installation
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -10,8 +15,10 @@ include_spip('inc/meta');
 /**
  * Fonction d'installation, mise a jour de la base
  *
- * @param unknown_type $nom_meta_base_version
- * @param unknown_type $version_cible
+ * @param string $nom_meta_base_version
+ * 	Le nom de la meta d'installation
+ * @param float $version_cible
+ * 	Version du shema d'installation de la base
  */
 function grappes_upgrade($nom_meta_base_version,$version_cible){
 
@@ -30,9 +37,15 @@ function grappes_upgrade($nom_meta_base_version,$version_cible){
 }
 
 /**
- * Fonction de desinstallation
- *
- * @param unknown_type $nom_meta_base_version
+ * Fonction de desinstallation du plugin
+ * 
+ * Supprime les deux tables :
+ * - spip_grappes
+ * - spip_grappes_liens
+ * Supprime la meta d'installation
+ * 
+ * @param string $nom_meta_base_version
+ * 	Le nom de la meta d'installation
  */
 function grappes_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_grappes");

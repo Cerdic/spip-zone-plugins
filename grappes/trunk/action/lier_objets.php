@@ -1,8 +1,9 @@
 <?php
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
  */
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

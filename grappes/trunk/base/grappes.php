@@ -1,12 +1,24 @@
 <?php
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
+ * 
+ * Fichier de déclaration de la base de donnée
+ * 
+ * @package SPIP\Grappes\Pipelines
  */
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion dans le pipeline declarer_tables_interfaces (SPIP)
+ * 
+ * Déclaration des jointures spécifiques
+ * 
+ * @param array $interface
+ * @return array $interface
+ */
 function grappes_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_grappes'][] = 'grappes_liens';
 	$interface['tables_jointures']['spip_grappes_liens'][] = 'grappes';
@@ -25,6 +37,16 @@ function grappes_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
+/**
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * 
+ * Déclaration de l'objet supplémentaire grappes
+ * 
+ * @param array $tables
+ * 	Le tableau de définition de tous les objets
+ * @return array $tables
+ * 	Le tableau complété avec notre objet supplémentaire
+ */
 function grappes_declarer_tables_objets_sql($tables){
 	$tables['spip_grappes'] = array(
 		'type' => 'grappe',
@@ -66,6 +88,16 @@ function grappes_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
+/**
+ * Insertion dans le pipeline declarer_tables_auxiliaires (SPIP)
+ * 
+ * Déclaration de la table de liaison spip_grappes_liens
+ * 
+ * @param array $tables_auxiliaires
+ * 	Le tableau des tables auxiliaires
+ * @return array $tables_auxiliaires
+ * 	Le tableau des tables auxiliaires complétées
+ */
 function grappes_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_grappes_liens = array(
 		"id_grappe" 	=> "bigint(21) NOT NULL",

@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
+ * 
+ * Fichier de pipelines du plugin
+ * 
+ * @package SPIP\Grappes\Pipelines
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -8,10 +16,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 
 /**
- * Insertion dans les pipelines insert_head et header_prive
+ * Insertion dans les pipelines insert_head et header_prive (SPIP
+ * )
  * Insérer les js du séleceteur générique s'ils ne sont pas déjà là
  *
  * @param string $flux
+ * 	Le contenu textuel de la balise #INSERT_HEAD
+ * @return string
+ * 	Le contenu modifié
  */
 function grappes_inserer_javascript($flux){
 	include_spip('selecteurgenerique_fonctions');
@@ -20,10 +32,14 @@ function grappes_inserer_javascript($flux){
 }
 
 /**
- * Insertion dans le pipeline afficher_contenu_objet
- * Ajouter le bloc des grappes aux pages qui peuvent êtres liées à une grappe
+ * Insertion dans le pipeline afficher_contenu_objet (SPIP)
  * 
- * @param array $flux La liste des champs pour les diogenes
+ * Ajouter le bloc des grappes aux pages d'objets pouvant être liés à une grappe
+ * 
+ * @param array $flux 
+ * 	Le contexte du pipeline
+ * @return array $flux 
+ * 	Le contexte du pipeline modifié
  */
 function grappes_afficher_contenu_objet($flux){
 	if ($objet = $flux['args']['type']
@@ -46,6 +62,17 @@ function grappes_afficher_contenu_objet($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline grappes_objets_lies (Plugin Grappes)
+ * 
+ * Définis le tableau des objets pouvant être liés aux grappes, la clé est le type d'objet (au pluriel),
+ * la valeur, le label affiché dans le formulaire d'édition de grappe
+ * 
+ * @param array $array
+ * 	Le tableau du pipeline
+ * @return array $array
+ * 	Le tableau complété
+ */
 function grappes_grappes_objets_lies($array){
 	$array['articles'] = _T('grappes:item_groupes_association_articles');
 	$array['auteurs'] = _T('grappes:item_groupes_association_auteurs');

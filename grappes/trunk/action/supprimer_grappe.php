@@ -1,15 +1,16 @@
 <?php
-
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/filtres');
-
-// http://doc.spip.org/@action_instituer_groupe_mots_dist
+/**
+ * Action de suppression d'une grappe
+ * 
+ * Doit recevoir comme argument (arg) "-#ID_GRAPPE" les "-" étant obligatoire
+ */
 function action_supprimer_grappe_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -20,7 +21,13 @@ function action_supprimer_grappe_dist()
 	} else action_supprimer_grappe_post($r[1]);
 }
 
-// http://doc.spip.org/@action_instituer_groupe_mots_post
+/**
+ * Suppression d'une grappe
+ * 
+ * @param int $id_grappe
+ * 	Identifiant de la grappe à supprimer avec un "-"
+ * @return
+ */
 function action_supprimer_grappe_post($id_grappe)
 {
 	if ($id_grappe < 0){

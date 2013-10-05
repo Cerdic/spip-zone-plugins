@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
+ * Plugin Grappes
+ * Licence GPL (c) Matthieu Marcillaud
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -31,7 +30,8 @@ function action_editer_grappe_dist($arg=null) {
 /**
  * Inserer une nouvelle grappe en base
  *
- * @return bool
+ * @return int $id_grappe
+ * 	L'identifiant numérique de la nouvelle grappe
  */
 function grappe_inserer() {
 
