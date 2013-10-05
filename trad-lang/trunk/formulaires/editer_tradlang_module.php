@@ -18,7 +18,6 @@ function formulaires_editer_tradlang_module_charger($id_tradlang_module,$retour=
 	
 	$valeurs['_langues'] = $lgs;
 	$valeurs['codelangue'] = _request('codelangue');
-	spip_log($valeurs,'test.'._LOG_ERREUR);
 	return $valeurs;
 }
 
