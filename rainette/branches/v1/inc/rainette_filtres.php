@@ -35,13 +35,29 @@ function rainette_resume_meteo($code_icon){
 }
 
 function rainette_afficher_direction($direction){
-	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW';
-	
-	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;
-	if (!in_array($direction_abregee, explode(':', $liste_direction)))
+	static $liste_direction = array(
+		0 => 'N',
+		1 => 'NNE',
+		2 => 'NE',
+		3 => 'ENE',
+		4 => 'E',
+		5 => 'ESE',
+		6 => 'SE',
+		7 => 'SSE',
+		8 => 'S',
+		9 => 'SSW',
+		10 => 'SW',
+		11 => 'WSW',
+		12 => 'W',
+		13 => 'WNW',
+		14 => 'NW',
+		15 => 'NNW'
+					);
+	if (is_int($direction))
+		$direction = $liste_direction[round($direction / 22.5) % 16];
+	elseif (!in_array($direction, $liste_direction))
 		return _T('rainette:valeur_indeterminee');
-	else
-		return _T('rainette:direction_'.$direction_abregee);
+	return _T('rainette:direction_'.$direction);
 }
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
