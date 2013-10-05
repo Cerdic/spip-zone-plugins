@@ -15,9 +15,7 @@ function multilang_insert_head_css($flux){
 	
 	$multilang_public = lire_config('multilang/multilang_public','off');
 	if($multilang_public == 'on'){
-
 		static $done = false;
-
 		if (!$done) {
 			$done = true;
 			$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
@@ -106,23 +104,23 @@ function multilang_affichage_final($flux){
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
 			unset($config['multilang_public']);
 			unset($config['multilang_crayons']);
-			$root = '';
+			$root = array();
 
 			if(isset($config['siteconfig']) && $config['siteconfig']){
-				$root .= ',input[type=hidden][name*=name_][value|=meta-valeur]';
+				$root[] = 'input[type=hidden][name*=name_][value|=meta-valeur]';
 				unset($config['siteconfig']);
 			}
 
 			foreach($config as $conf => $val){
 				if($val == 'on') { // Articles
-					$root .= ',input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo])';
+					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo])';
 					unset($config[$conf]);
 				}
 			}
 			$texte = '
 				var crayons_multilang_init = function(){
 					if(typeof(multilang_init_lang) == "function"){
-						var crayons_root = ".formulaire_spip:has('.$root.')",
+						var crayons_root = ".formulaire_spip:has('.implode(",",$root).')",
 							fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)",
 							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']",
 							root_opt = "form:has(.multilang)",

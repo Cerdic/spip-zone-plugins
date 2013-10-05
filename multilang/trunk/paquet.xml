@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilang"
 	categorie="edition"
-	version="0.9.4"
+	version="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/multilang-32.png"
@@ -22,8 +22,9 @@
 	<pipeline nom="insert_head_css" inclure="multilang_pipelines.php" />
 	<pipeline nom="insert_head" inclure="multilang_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="multilang_pipelines.php" />
+	
 	<menu nom="configurer_multilangue" titre="multilang:configuration_multilang" parent="menu_configuration" icone="images/multilang-16.png" />
+	
 	<necessite nom="saisies" compatibilite="[1.1;[" />
-
 	<utilise nom="crayons" />
 </paquet>

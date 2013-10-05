@@ -7,22 +7,22 @@ function generer_multilang_init(){
 	if(count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
 		include_spip('inc/config');
 		$config = lire_config('multilang',array());
-		$root = '' ;
+		$root = array();
 		if(isset($config['multilang_public']))
 			unset($config['multilang_public']);
 		if(isset($config['multilang_crayons']))
 			unset($config['multilang_crayons']);
 		if(isset($config['siteconfig']) && $config['siteconfig']){
-			$root .= 'div#configurer-accueil,div.formulaire_configurer_identite' ; // Config Site
+			$root[] = 'div#configurer-accueil,div.formulaire_configurer_identite' ; // Config Site
 			unset($config['siteconfig']);
 		}
 		
 		foreach($config as $conf => $val){
 			if($val == 'on') {
 				if($conf == 'document')
-					$root .= ',div#portfolio_portfolio,div#portfolio_documents,div#liste_documents,div.formulaire_editer_document' ;
+					$root[] = 'div#portfolio_portfolio,div#portfolio_documents,div#liste_documents,div.formulaire_editer_document' ;
 				else
-					$root .= ',div.formulaire_editer_'.$conf;
+					$root[] .= 'div.formulaire_editer_'.$conf;
 				unset($config[$conf]);
 			}
 		}
@@ -52,7 +52,7 @@ function generer_multilang_init(){
 
 	jQuery(document).ready(function(){
 		function multilang_init(){
-			var root = "'.$root.'";
+			var root = "'.implode(",",$root).'";
 			var fields_selector = "textarea:not(textarea#adresses_secondaires,textarea#repetitions),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,#champ_geocoder,#champ_lat,#champ_lon,#champ_zoom,#places,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
