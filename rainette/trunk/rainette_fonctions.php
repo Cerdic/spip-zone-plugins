@@ -82,15 +82,44 @@ function rainette_resume_meteo($meteo) {
 	return ucfirst($resume);
 }
 
+/**
+ * Conversion une indication de direction en une chaine traduite pour
+ * l'affichage dans les modèles.
+ *
+ * @param	mixed	$direction
+ * 		La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
+ * 		d'une chaine. Certains services utilisent la chaine "V" pour indiquer une direction
+ * 		variable.
+ * @return	string
+ * 		La chaine traduite indiquant la direction du vent.
+ */
 function rainette_afficher_direction($direction) {
-	static $liste_direction = 'N:NNE:NE:ENE:E:ESE:SE:SSE:S:SSW:SW:WSW:W:WNW:NW:NNW:V';
+	static $liste_direction = array(
+		0 => 'N',
+		1 => 'NNE',
+		2 => 'NE',
+		3 => 'ENE',
+		4 => 'E',
+		5 => 'ESE',
+		6 => 'SE',
+		7 => 'SSE',
+		8 => 'S',
+		9 => 'SSW',
+		10 => 'SW',
+		11 => 'WSW',
+		12 => 'W',
+		13 => 'WNW',
+		14 => 'NW',
+		15 => 'NNW',
+		16 => 'N',
+		17 => 'V'
+	);
 
-	include_spip('inc/convertir');
-	$direction_abregee = (intval($direction)) ? angle2direction($direction) : $direction;
-	if (!in_array($direction_abregee, explode(':', $liste_direction)))
+	if (is_int($direction))
+		$direction = $liste_direction[round($direction / 22.5) % 16];
+	elseif (!in_array($direction, $liste_direction))
 		return _T('rainette:valeur_indeterminee');
-	else
-		return _T('rainette:direction_'.$direction_abregee);
+	return _T('rainette:direction_'.$direction);
 }
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){

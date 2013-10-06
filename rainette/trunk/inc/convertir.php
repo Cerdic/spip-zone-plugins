@@ -3,37 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Conversion d'une valeur d'angle entre 0 et 360 degrés en une direction textuelle
- * abrégée à 16 points.
- *
- * @param	int		$angle	Valeur d'angle en degrés
- * @return	string			La direction abrégée à partir des termes anglais
- */
-function angle2direction($angle) {
-	$direction = '';
-	switch(round($angle / 22.5) % 16)
-	{
-		case 0:  $direction = 'N'; break;
-		case 1:  $direction = 'NNE'; break;
-		case 2:  $direction = 'NE'; break;
-		case 3:  $direction = 'ENE'; break;
-		case 4:  $direction = 'E'; break;
-		case 5:  $direction = 'ESE'; break;
-		case 6:  $direction = 'SE'; break;
-		case 7:  $direction = 'SSE'; break;
-		case 8:  $direction = 'S'; break;
-		case 9:  $direction = 'SSW'; break;
-		case 10: $direction = 'SW'; break;
-		case 11: $direction = 'WSW'; break;
-		case 12: $direction = 'W'; break;
-		case 13: $direction = 'WNW'; break;
-		case 14: $direction = 'NW'; break;
-		case 15: $direction = 'NNW'; break;
-	}
-	return $direction;
-}
-
-/**
  * Conversion des kilomètres en miles.
  *
  * @param	float	$kilometre
