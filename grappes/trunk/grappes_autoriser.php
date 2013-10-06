@@ -5,7 +5,7 @@
  * 
  * Fichier des fonctions du plugin
  * 
- * @package SPIP\Grappes\Fonctions
+ * @package Grappes\Autorisations
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Fonction d'autorisation de base
  */
-function autoriser_grappe(){}
+function grappes_autoriser(){}
 
 /**
  * Autorisation de création de grappe

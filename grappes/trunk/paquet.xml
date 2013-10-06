@@ -18,6 +18,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/grappes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/grappes.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/grappes.php" />
+	<pipeline nom="autoriser" inclure="grappes_autoriser.php" />
 	<pipeline nom="insert_head" action="inserer_javascript" inclure="grappes_pipelines.php" />
 	<pipeline nom="header_prive" action="inserer_javascript" inclure="grappes_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="grappes_pipelines.php" />
