@@ -14,6 +14,7 @@ function url2flux_xml($url, $utiliser_namespace='false') {
 
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
 	$xml = $convertir(simplexml_load_string($flux), $utiliser_namespace);
+	$xml = $xml['root'];
 
 	return $xml;
 }

@@ -5,12 +5,12 @@
 ]
 <div class="rainette_infos">
 	<h2 class="ville">[(#ENV{ville})]</h2>
-	<div class="coordonnees">
+	<ul class="coordonnees">
 		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle, 2})</li>]
 		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle, 2})</li>]
 		[<li><:rainette:population|ucfirst:>&nbsp;:&nbsp;(#ENV{population}|rainette_afficher_unite{population})</li>]
 		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{region})</li>]
-	</div>
+	</ul>
 
 	#INCLURE{fond=modeles/inc-credits,
 		classe_div=infos,

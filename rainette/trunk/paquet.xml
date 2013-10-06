@@ -1,7 +1,7 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.0.17"
+	version="2.0.18"
 	etat="dev"
 	compatibilite="[3.0.0;3.*]"
 	logo="rainette-64.png"
@@ -14,6 +14,7 @@
 
 	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<auteur>Cedric Morin</auteur>
+	<credit>Touti, pour le plugin Grenouille</credit>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

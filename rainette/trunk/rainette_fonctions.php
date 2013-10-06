@@ -94,32 +94,14 @@ function rainette_resume_meteo($meteo) {
  * 		La chaine traduite indiquant la direction du vent.
  */
 function rainette_afficher_direction($direction) {
-	static $liste_direction = array(
-		0 => 'N',
-		1 => 'NNE',
-		2 => 'NE',
-		3 => 'ENE',
-		4 => 'E',
-		5 => 'ESE',
-		6 => 'SE',
-		7 => 'SSE',
-		8 => 'S',
-		9 => 'SSW',
-		10 => 'SW',
-		11 => 'WSW',
-		12 => 'W',
-		13 => 'WNW',
-		14 => 'NW',
-		15 => 'NNW',
-		16 => 'N',
-		17 => 'V'
-	);
 
-	if (is_int($direction))
-		$direction = $liste_direction[round($direction / 22.5) % 16];
-	elseif (!in_array($direction, $liste_direction))
+	include_spip('inc/convertir');
+	$direction = angle2direction($direction);
+
+	if ($direction)
+		return _T('rainette:direction_'.$direction);
+	else
 		return _T('rainette:valeur_indeterminee');
-	return _T('rainette:direction_'.$direction);
 }
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
