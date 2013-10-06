@@ -1,6 +1,6 @@
 /* Styles generaux  */
 .rainette_titre {margin: 0.5em 0 0.5em 1em; 	padding:0 0 0 0;}
-.rainette_credits {margin: 0; text-align: center; clear:both; font-size: 10px;}
+.rainette_credits {margin: 0.5em 0 0; text-align: center; clear:both; font-size: 10px;}
 .rainette_credits.infos {float: left; margin-left: 0.85em; margin-bottom: 0.5em;}
 .rainette_credits.condtr {}
 .rainette_credits.prev24h {margin-bottom: 0.5em;}
@@ -49,13 +49,15 @@
 	color: #333333;
 	font-size: 3em;
 	font-weight: bold;
-	margin: 0.5em 0 0 0.25em;
+	margin: 0.25em 0 0 0.25em;
 }
 .rainette_conditions .t_ressentie {
 	float: left; color: #333333; margin: 0.5em 0 0 0.75em;
 }
 .rainette_conditions .resume {
-	text-align: center; font-weight: bold; padding-top: 0.5em;
+	text-align: center;
+	font-weight: bold;
+	padding: 1em 0 0.25em;
 }
 .rainette_conditions .maj {
 	float: left;
@@ -65,7 +67,7 @@
 }
 .rainette_conditions .details {
 	list-style-type: none;
-	padding: 0;
+	padding: 0 0 0 21em;
 	margin: 1em 0 0;
 }
 .rainette_conditions li {

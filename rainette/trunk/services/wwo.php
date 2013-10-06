@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_WWO_URL_BASE'))
-	define('_RAINETTE_WWO_URL_BASE', 'http://free.worldweatheronline.com/feed/weather.ashx');
+	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/free/v1/weather.ashx');
 if (!defined('_RAINETTE_WWO_JOURS_PREVISIONS'))
 	define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 
