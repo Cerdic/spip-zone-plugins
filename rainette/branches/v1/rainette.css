@@ -9,6 +9,7 @@
 	border: 0.2em solid #dddddd;
 	margin: 0.5em 0 1em 0;
 	padding: 0;
+	line-height: normal;
 }
 .rainette_infos .ville {margin: 0.5em 0 0 0.5em;}
 .rainette_infos .coordonnees {
@@ -25,7 +26,9 @@
 	background: #fcfcfc;
 	border: 0.15em solid #dddddd;
 	margin: 0.5em 0 2em 0;
-	padding:0 0 0.5em 0;}
+	padding:0 0 0.5em 0;
+	line-height: normal;
+}
 .rainette_conditions .statut {float: left; width: 21em;}
 .rainette_conditions .cadre {
 	float: left;
@@ -72,6 +75,7 @@
 	border: 0.2em solid #dddddd;
 	width: 54.2em;
 	margin: 0.5em 0 0 0;
+	line-height: normal;
 }
 .rainette_previsions_2x12h .entete {
 	float: left;
@@ -142,6 +146,7 @@
 	border: 0.1em solid #dddddd;
 	width: 11em;
 	margin: 0.4em 0.4em 2em 0;
+	line-height: normal;
 }
 .rainette_previsions_24h .jour {
 	height: 1.9em;
