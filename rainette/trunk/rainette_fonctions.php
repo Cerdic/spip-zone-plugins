@@ -41,31 +41,37 @@ function calculer_infos($lieu, $type, $service) {
 // Filtres du plugin utilisables dans les squelettes et modeles
 function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chemin='', $extension="png"){
 
-	$html_icone = '';
-
 	if (is_array($icone)) {
 		// Utilisation des icones natifs des services autres que weather.com
-		list ($l,$h) = @getimagesize($icone['url']);
-		$html_icone = '<img src="'.$icone['url'].'" alt="etat meteo" title="'.rainette_resume_meteo($icone['code']).'" width="'.$l.'" height="'.$h.'" />';
+		$file = $icone['url'];
+		$icone = $icone['code'];
 	}
 	else {
 		// Utilisation des icones weather.com
-		$icone = ($icone AND (($icone >= 0) AND ($icone < 48))) ? strval($icone) : 'na';
-		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-
-		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
-		if ($img = find_in_path($chemin.$icone.'.'.$extension)) {
-			list ($l,$h) = @getimagesize($img);
-			$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($icone).'" width="'.$l.'" height="'.$h.'" />';
-		}
-		// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
-		elseif (($chemin = 'img_meteo/'.$taille.'/') && ($img = find_in_path($chemin.$icone.'.'.$extension))) {
-			list ($l,$h) = @getimagesize($img);
-			$html_icone = '<img src="'.$img.'" alt="etat meteo" title="'.rainette_resume_meteo($icone).'" width="'.$l.'" height="'.$h.'" />';
-		}
+		$file = ($icone AND (($icone >= 0) AND ($icone < 48))) ? strval($icone) : 'na';
 	}
+	return rainette_icone($file,
+			rainette_resume_meteo($icone),
+			$chemin,
+			$extension,
+			$taille);
+}
 
-	return $html_icone;
+function rainette_icone($nom, $texte, $chemin='', $extension="png", $taille=''){
+
+	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
+	$file = $nom . '.' . $extension;
+	// Le dossier personnalise ou le dossier passe en argument
+	// a-t-il bien l'icone requise ?
+	$img = find_in_path($file, $chemin);
+	if (!$img) {
+	// Non, on prend l'icone par defaut dans le repertoire img_meteo/
+		$img = find_in_path($file, 'img_meteo/'.$taille.'/');
+		if (!$img)  return ''; //???
+	}
+	$a = ($a = @getimagesize($img)) ? " width='$a[0]' height='$a[1]'":'';
+	$r = attribut_html($texte);
+	return "<img src='$img' alt='$r' title='$r'$a />";
 }
 
 function rainette_resume_meteo($meteo) {
@@ -105,29 +111,12 @@ function rainette_afficher_direction($direction) {
 }
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
-	$html = '';
 
-	if ($methode == 'texte') {
-		$html = _T('rainette:tendance_texte_'.$tendance_en);
-	}
-	else if ($methode == 'symbole') {
-		$html = _T('rainette:tendance_symbole_'.$tendance_en);
-	}
-	else if ($methode == 'icone') {
-		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH;
+	if ($methode == 'symbole') return _T('rainette:tendance_symbole_'.$tendance_en);
 
-		// Le dossier personnalise ou le dossier passe en argument a bien l'icone requise
-		if ($img = find_in_path($chemin.$tendance_en.'.'.$extension)) {
-			list ($l,$h) = @getimagesize($img);
-			$html = '<img src="'.$img.'" alt="'._T('rainette:tendance_texte_'.$tendance_en).'" title="'._T('rainette:tendance_texte_'.$tendance_en).'" width="'.$l.'" height="'.$h.'" />';
-		}
-		// Le dossier personnalise n'a pas d'image, on prend l'icone par defaut dans le repertoire img_meteo/
-		elseif (($chemin = 'img_meteo/') && ($img = find_in_path($chemin.$tendance_en.'.'.$extension))) {
-			list ($l,$h) = @getimagesize($img);
-			$html = '<img src="'.$img.'" alt="'._T('rainette:tendance_texte_'.$tendance_en).'" title="'._T('rainette:tendance_texte_'.$tendance_en).'" width="'.$l.'" height="'.$h.'" />';
-		}
-	}
-	return $html;
+	$t = _T('rainette:tendance_texte_'.$tendance_en);
+
+	return ($methode == 'texte') ? $t : rainette_icone($tendance_en, $t, $chemin, $extension);
 }
 
 /**
