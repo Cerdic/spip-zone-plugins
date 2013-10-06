@@ -5,7 +5,7 @@
  * 
  * Fichier de pipelines du plugin
  * 
- * @package SPIP\Grappes\Pipelines
+ * @package Grappes\Pipelines
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;

@@ -6,7 +6,7 @@
  * Fichier des fonctions d'installation, de mise à jour et de suppression
  * du plugin
  * 
- * @package SPIP\Grappes\Installation
+ * @package Grappes\Installation
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
