@@ -2,7 +2,7 @@
         <nom>Grenouille</nom>
         <auteur>[Art&eacute;go->http://www.artego.fr] + touti</auteur>
         <version>1.4</version>
-        <etat>stable</etat>
+        <etat>obsolete</etat>
         <description>Pr&eacute;visions m&eacute;t&eacute;o extraites du xml comme xoap.weather.com/weather/local/FRXX0337?cc=*&amp;unit=s&amp;dayf=7
 _ Compatible avec {{SPIP 1.9.3}}
 _ D&eacute;posez vos images numerotees.png dans le dossier grenouille! cf http://liquidweather.net/icons.php
