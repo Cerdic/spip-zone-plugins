@@ -21,6 +21,7 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>
+	<options>rainette_options.php</options>
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>rainette_pipelines.php</inclure>
@@ -38,12 +39,13 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 	</bouton>
 
 	<bouton id='rainette21' parent='bando_squelette'>
-		<icone>images/rainette-16.png</icone>
+		<icone>prive/themes/spip/images/rainette-16.png</icone>
 		<titre>rainette:titre_page_configurer</titre>
 		<url>configurer_rainette</url>
 	</bouton>
 
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="Iterateurs" version="[0.2.5;]" />
 	<traduire gestionnaire="salvatore" module="rainette" reference="fr" />
 </plugin>
