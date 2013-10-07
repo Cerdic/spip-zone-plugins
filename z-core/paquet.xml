@@ -1,7 +1,7 @@
 <paquet
 	prefix="Zcore"
 	categorie="outil"
-	version="2.2.4"
+	version="2.2.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/z-core-32.png"
