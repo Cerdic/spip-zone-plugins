@@ -4,7 +4,6 @@
  * Plugin SPIP de traduction de fichiers de langue
  * © Florent Jugla, Fil, kent1
  * 
- * @package SPIP\Tradlang\
  */
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -23,35 +22,44 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	 */
 	$langue_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($module));
 	
+	$trad_langue_mere_id = $trad_langue_cible_id = array();
+	
 	/**
-	 * On teste et on ajoute ce qu'il y a en trop
+	 * On crée deux tableaux: 
+	 * -* l'ensemble des id de la langue mère non supprimés 
+	 * -* l'ensemble des id de la langue cible non supprimés
 	 */
-	$trad_langue_mere_id = array();
-	$trad_langue_mere = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere));
-	while($row_langue_mere = sql_fetch($trad_langue_mere)){
-		$trad_langue_mere_id[] = $row_langue_mere['id']; 
+	$trad_langue_meres = sql_allfetsel('id','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND statut !="attic"');
+	foreach($trad_langue_meres as $trad_langue_mere){
+		$trad_langue_mere_id[] = $trad_langue_mere['id']; 
 	}
-	$trad_langue_cible_id = array();
-	$trad_langue_cible  = sql_select('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue));
-	while($row_langue_cible = sql_fetch($trad_langue_cible)){
-		$trad_langue_cible_id[] = $row_langue_cible['id']; 
+	$trad_langue_cibles  = sql_allfetsel('id','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue).' AND statut !="attic"');
+	foreach($trad_langue_cibles as $trad_langue_cible){
+		$trad_langue_cible_id[] = $trad_langue_cible['id']; 
 	}
 
+	$inserees = $supprimees = 0;
 	/**
-	 * $diff1 est l'ensemble des chaines manquantes dans la langue fille
+	 * $diff1 est l'ensemble des chaines manquantes dans la langue cible
 	 * et donc à insérer
+	 * 
+	 * On met dans un tableau les chaines en question si on a au moins un résultat
 	 */
 	$diff1 = array_diff($trad_langue_mere_id, $trad_langue_cible_id);
-	$diff1_array = sql_allfetsel('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
-	$inserees = 0;
+	if(count($diff1) > 0)
+		$diff1_array = sql_allfetsel('*','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue_mere).' AND '.sql_in('id',$diff1));
+	
 	/**
 	 * $diff2 est l'ensemble des chaines en trop dans la langue fille
 	 * et donc à supprimer
 	 */
 	$diff2 = array_diff($trad_langue_cible_id,$trad_langue_mere_id);
-	$supprimees = 0;
+	
+	/**
+	 * Si on a des éléments dans les diffs, on applique les modifications
+	 */
 	if((count($diff1)>0) OR (count($diff2)>0)){
-		if(is_array($diff1_array)){
+		if(isset($diff1_array) && is_array($diff1_array)){
 			foreach($diff1_array as $key => $array){
 				$array['orig'] = 0;
 				$array['lang'] = $langue;
@@ -64,13 +72,15 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 				$inserees++;
 			}
 		}
-
-		foreach($diff2 as $key => $id){
-			$array['id'] = $id;
-			$array['statut'] = 'attic';
-			$id_tradlang = sql_getfetsel('id_tradlang','spip_tradlangs','id='.sql_quote($id)." AND module=".sql_quote($module)." AND lang=".sql_quote($langue));
-			sql_updateq('spip_tradlangs',$array,'id_tradlang='.intval($id_tradlang));
-			$supprimees++;
+		/**
+		 * On donne le statut attic aux chaînes en trop
+		 * On incrémente le nombre de chaînes supprimées
+		 */
+		if(count($diff2) > 0){
+			foreach($diff2 as $key => $id){
+				sql_updateq('spip_tradlangs',array('statut' => 'attic'),'id='.sql_quote($id).' AND lang='.sql_quote($langue).' AND module='.sql_quote($module));
+				$supprimees++;
+			}
 		}
 	}else
 		return array('0','0');
