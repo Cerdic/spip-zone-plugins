@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langues_non_preferees' => 'Other languages :',
 	'info_langues_preferees' => 'Favorite language(s):',
 	'info_module_nb_items_langue_mere' => 'The parent language of the module is <abbr title="@lang_mere@">@lang_mere_longue@</abbr> and comprises of @nb@ language items.',
-	'info_module_traduction' => '@total@ @statut@ (@percent@%)', # MODIF
+	'info_module_traduction' => '@statut@: @total@ (@percent@%)',
 	'info_module_traduit_langues' => 'This module is translated or partially translated into ​​@nb@ languages.',
 	'info_module_traduit_pc' => 'Module @pc@% translated',
 	'info_module_traduit_pc_lang' => 'Module "@module@" is @pc@% translated in @lang@ (@langue_longue@)',
