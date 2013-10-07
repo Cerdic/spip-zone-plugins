@@ -12,28 +12,26 @@
 
 function rainette_icone_meteo($code_icon, $taille='petit', $chemin='', $extension="png"){
 
-	return rainette_icone(code2icone($code_icon),
-			rainette_resume_meteo($code_icon),
-			$chemin,
-			$extension,
-			$taille);
+	list($src, $w, $h) = rainette_icone(code2icone($code_icon), $chemin, $extension, $taille);
+	if (!$src) return '';
+	$r = attribut_html(rainette_resume_meteo($code_icon));
+	return "<img src='$src' alt='$r' title='$r' width='$w' height='$h' />";
 }
 
-function rainette_icone($nom, $texte, $chemin='', $extension="png", $taille=''){
-
+function rainette_icone($nom, $chemin='', $extension='', $taille='', $size=true){
 	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-	$file = $nom . '.' . $extension;
+	$file = $nom . '.' . ($extension ? $extension : 'png');
 	// Le dossier personnalise ou le dossier passe en argument
 	// a-t-il bien l'icone requise ?
 	$img = find_in_path($file, $chemin);
 	if (!$img) {
 	// Non, on prend l'icone par defaut dans le repertoire img_meteo/
 		$img = find_in_path($file, 'img_meteo/'.$taille.'/');
-		if (!$img)  return ''; //???
+		if (!$img) return array('',0,0); //???
 	}
-	$a = ($a = @getimagesize($img)) ? " width='$a[0]' height='$a[1]'":'';
-	$r = attribut_html($texte);
-	return "<img src='$img' alt='$r' title='$r'$a />";
+
+	@list($w, $h) = $size ? getimagesize($img) : array();
+	return array($img, intval($w), intval($h));
 }
 
 function rainette_resume_meteo($code_icon){
@@ -73,7 +71,10 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 		return _T('rainette:tendance_texte_'.$tendance_en);
 	if ($methode == 'symbole')
 		return _T('rainette:tendance_symbole_'.$tendance_en);
-	return rainette_icone($tendance_en, _T('rainette:tendance_texte_'.$tendance_en), $chemin, $extension);
+	list($src, $w, $h) = rainette_icone($tendance_en, $chemin, $extension);
+	if (!$src) return '';
+	$r = attribut_html( _T('rainette:tendance_texte_'.$tendance_en));
+	return "<img src='$src' alt='$r' title='$r' width='$w' height='$h' />";
 }
 
 function rainette_afficher_unite($valeur, $type_valeur=''){
@@ -164,5 +165,39 @@ function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
 	$tableau = unserialize($tableau);
 	$texte = recuperer_fond("modeles/$modele", $tableau);			
 	return $texte;
+}
+
+/**
+ * Charger le fichier des previsions meteos
+ * et retourne une feuille de styles,
+ * un style ayant pour selecteur #D$annee-$mois-$jour sur 8 chiffres
+ * et pour propriete un background-url sur l'icone de la prevision.
+ * 
+ * @param string $code_meteo
+ * @return string
+ */
+function rainette_croaaaaa_previsions_css($code_meteo){
+	include_spip('inc/rainette_utils');
+
+	$texte = $vus = array();
+	lire_fichier(charger_meteo($code_meteo, 'previsions'), $previsions);
+	foreach(unserialize($previsions) as $j => $prevision) {
+		if (empty($prevision['date'])) continue;
+		$icone = code2icone($prevision["code_icone_jour"]);
+		list($src,,) = rainette_icone($icone, '', '', 'petit', false);
+		if ($src) {
+			$src = "{ background: url($src) }";
+			$sel = "#D" . $prevision['date'];
+			// Si deja vu, partager pour reduire la feuille
+			$k = array_search($src, $vus);
+			if (!$k) {
+				$vus[$j] = $src;
+				$texte[$j] = "$sel $src";
+			} else {
+				$texte[$k] = "$sel, " . $texte[$k];
+			}
+		}
+	}
+	return join("\n", $texte);
 }
 ?>
