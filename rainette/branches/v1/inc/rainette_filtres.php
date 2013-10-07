@@ -190,9 +190,9 @@ function rainette_croaaaaa_previsions_css($code_meteo){
 			$sel = "#D" . $prevision['date'];
 			// Si deja vu, partager pour reduire la feuille
 			$k = array_search($src, $vus);
-			if (!$k) {
+			if ($k===false) {
 				$vus[$j] = $src;
-				$texte[$j] = "$sel $src";
+				$texte[$j] = "$sel\n $src";
 			} else {
 				$texte[$k] = "$sel, " . $texte[$k];
 			}
