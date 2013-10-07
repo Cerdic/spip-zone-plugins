@@ -43,11 +43,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_configurer_unite' => 'Choisissez le système d\'unité dans lequel seront exprimées les données météorologiques.',
-	'info_configurer_cle' => 'Ce service nécessite une clé d\'inscription pour être utilisé. Veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
+	'info_configurer_cle_obligatoire' => 'Ce service nécessite une clé d\'inscription pour être utilisé. Veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
+	'info_configurer_cle_facultative' => 'Ce service <strong>ne nécessite pas une clé d\'inscription</strong> pour être utilisé mais vous pouvez en préciser une comme le recommande le fournisseur. Si vous le decidez, veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
 	'info_configurer_cle_aucune' => 'Ce service ne nécessite aucune clé d\'inscription pour être utilisé.',
 	'info_configurer_condition' => 'Choisissez le mode d\'affichage du résumé et de l\'icone représentatifs d\'une condition météorologique donnée.',
 	'info_utilisation_rainette' => 'Les modèles d\'affichage fournis par Rainette suivent les règles d\'usage de chaque service. Si vous créez vos propres modèles veillez également à les respecter.',
 	'info_utilisation_weather' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec un lien vers le site web et le logo du service.',
+	'info_utilisation_owm' => 'Le service fournit gratuitement les données météorologiques sous licence CC-BY-SA 2.0 pour une utilisation commerciale ou pas. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://openweathermap.org/copyright">Terms and Conditions</a>.',
 	'info_utilisation_wwo' => 'Le service fournit gratuitement les données météorologiques pour une utilisation commerciale ou pas. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://developer.worldweatheronline.com/api_terms_and_conditions">API Terms and Conditions</a>.',
 	'info_utilisation_wunderground' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec le nom et le logo du service. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://www.wunderground.com/weather/api/d/terms.html">Weather API Terms of Service</a>.',
 	'info_utilisation_yahoo' => 'Le service fournit gratuitement les données météorologiques pour les usages personnel et à but non lucratif. Il est demandé de créditer le service avec le nom du service ou le logo. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://developer.yahoo.com/weather/#terms">Terms of Use</a>.',
@@ -218,6 +220,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
 
+	'titre_service_owm' => 'Open Weather Map',
 	'titre_service_weather' => 'weather.com&reg;',
 	'titre_service_wwo' => 'World Weather Online',
 	'titre_service_wunderground' => 'Weather Underground',

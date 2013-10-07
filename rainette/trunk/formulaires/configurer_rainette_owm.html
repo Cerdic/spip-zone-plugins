@@ -1,0 +1,45 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:rainette:titre_service_owm:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:rainette:legende_configurer_inscription:></legend>
+			<ul>
+				#SET{url, <a class="spip_out" href="http://openweathermap.org/login">Open Weather Map</a>}
+				<INCLURE{fond=formulaires/inc-configurer_cle,
+					service=owm,
+					type_cle=facultative,
+					url=#GET{url},
+					taille=32,
+					env } />
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:rainette:legende_configurer_affichage:></legend>
+			<ul>
+				<INCLURE{fond=formulaires/inc-configurer_unite,
+					service=owm,
+					env} />
+
+				<INCLURE{fond=formulaires/inc-configurer_condition,
+					service=owm,
+					env } />
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend><:rainette:legende_configurer_utilisation:></legend>
+			<INCLURE{fond=formulaires/inc-configurer_usage,
+				service=owm,
+				env} />
+		</fieldset>
+
+		<input type="hidden" name="_meta_casier" value="rainette/owm" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>
