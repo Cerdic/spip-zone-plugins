@@ -172,17 +172,25 @@ function rainette_croaaaaa_infos($code_meteo, $modele='infos_ville'){
  * et retourne une feuille de styles,
  * un style ayant pour selecteur #D$annee-$mois-$jour sur 8 chiffres
  * et pour propriete un background-url sur l'icone de la prevision.
- * 
+ * Si le 2e argument est fourni a True, renvoie les dates Unix
+ * de la derniere prevision et de la suivante, separees par --.
+ *
  * @param string $code_meteo
+ * @param boolean $intervalle
  * @return string
  */
-function rainette_croaaaaa_previsions_css($code_meteo){
+function rainette_croaaaaa_previsions_css($code_meteo, $intervalle=false){
 	include_spip('inc/rainette_utils');
 
 	$texte = $vus = array();
+	$maj = '';
 	lire_fichier(charger_meteo($code_meteo, 'previsions'), $previsions);
 	foreach(unserialize($previsions) as $j => $prevision) {
-		if (empty($prevision['date'])) continue;
+		if (empty($prevision['date'])) {
+			$maj = @$prevision['derniere_maj'];
+			if ($intervalle AND $maj) break; else continue;
+		}
+		if ($intervalle) continue;
 		$icone = code2icone($prevision["code_icone_jour"]);
 		list($src,,) = rainette_icone($icone, '', '', 'petit', false);
 		if ($src) {
@@ -198,6 +206,10 @@ function rainette_croaaaaa_previsions_css($code_meteo){
 			}
 		}
 	}
-	return join("\n", $texte);
+	if (!$intervalle) return join("\n", $texte);
+	if (!$maj) return '';
+	$maj = strtotime($maj);
+	$j = $maj + _RAINETTE_RELOAD_TIME_PREVISIONS;
+	return "$maj -- $j";
 }
 ?>
