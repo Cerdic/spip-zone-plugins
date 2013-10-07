@@ -57,7 +57,7 @@ SVG;
 
 	$out = "<object role=\"img\"$alt tab-index=\"0\"
 data=\"data:image/svg+xml,$svg\" type=\"image/svg+xml\"
-width=\"$width\" height=\"$height\" style=\"max-width: 100%;height:auto;\";
+width=\"$width\" height=\"$height\" style=\"max-width: 100%;height:auto;\"
 $class$id></object>";
 	return $out;
 }
