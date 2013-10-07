@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_trad' => 'El espacio de los traductores acoge a todos aquéllos que desean ayudar a la comunidad de usuarios de SPIP participando en el trabajo de traducción de SPIP en sí mismo y de sus diversas contribuciones.',
 	'descriptif_site_spip_twit' => 'SPIP.ORG permite a los usuarios publicar mensajes cortos en la Web (140 caracteres como máximo) destinados al público o a sus amigos. La publicación puede hacerse a través del sitio, de los flujos RSS o por mensajería instantánea.',
 	'descriptif_site_spip_user' => 'SPIP@REZO.net es la lista de ayuda entre usuarios SPIP. Los archivos de esta lista pueden consultarse en http://archives.rezo.net/archives/spip.mbox/ o, también, bajo la forma de blog en http://blog.gmane.org/gmane.comp.web.spip.user.',
-	'descriptif_site_spip_video' => 'Descripción del sitio Vídeos', # MODIF
+	'descriptif_site_spip_video' => 'El sitio MEDIAS.SPIP es un punto de entrada para la difusión de vídeos realizados para o en torno a SPIP. Todo usuario de SPIP puede aportar su contribución proponiendo nuevos soportes de vídeos relatando tutoriales, conferencias, formaciones... La única debilidad radica en compartir vídeos libres de derechos para que cada uno pueda consultarlos y explotarlos libremente.',
 	'descriptif_site_spip_zine' => 'Descripción del sitio SPIPZine',
 	'descriptif_site_spip_zone' => 'Espacio de desarrollo regido por un reglamento, ZONE.SPIP.org da acceso al versionado de todas las contribuciones complementarias a SPIP(plugins, esqueletos, temas, modelos, herramientas...).',
 
