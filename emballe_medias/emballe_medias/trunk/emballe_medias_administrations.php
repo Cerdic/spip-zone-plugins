@@ -61,7 +61,7 @@ function emballe_medias_initialiser(){
 				'fichiers_videos' => array('flv','mp4','ogv'),
 				'fichiers_audios' => array('mp3','ogg'),
 				'fichiers_images' => array('jpg','png','gif'),
-				'fichiers_textes' => array('doc','odt','pdf'),
+				'fichiers_textes' => array('doc','docx','odt','pdf'),
 				'file_size_limit' => @ini_get('upload_max_filesize') ? ((str_replace('M','',@ini_get('upload_max_filesize')) < str_replace('M','',@ini_get('post_max_size'))) ? str_replace('M','',@ini_get('upload_max_filesize')) : str_replace('M','',@ini_get('post_max_size'))) : '2',
 				'file_upload_limit' => '1',
 				'file_queue_limit' => '1'

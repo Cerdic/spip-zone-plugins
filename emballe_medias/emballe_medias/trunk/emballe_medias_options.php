@@ -21,8 +21,8 @@ if(!function_exists('lire_config'))
 define('_FORM_TYPE_IMAGE','jpg,gif,png,jpeg');
 define('_FORM_TYPE_VIDEO',implode(',', lire_config('emballe_medias/fichiers/fichiers_videos',array('mp4,flv,mov,avi'))));
 define('_FORM_TYPE_AUDIO',implode(',', lire_config('emballe_medias/fichiers/fichiers_audios',array('wav,mp3'))));
-define('_FORM_TYPE_TEXTE','pdf,doc,odt,xls,ods');
-define('_FORM_TYPE_DEFAULT','jpg,jpeg,gif,png,mp4,flv,mov,avi,wav,mp3,pdf,doc,odt');
+define('_FORM_TYPE_TEXTE','pdf,doc,docx,odt,xls,xlsx,ods');
+define('_FORM_TYPE_DEFAULT','jpg,jpeg,gif,png,mp4,flv,mov,avi,wav,mp3,pdf,doc,docx,odt');
 
 /**
  * On active l'auto rotation selon EXIF
