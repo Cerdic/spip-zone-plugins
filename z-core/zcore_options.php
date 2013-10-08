@@ -47,7 +47,7 @@ function responsive_logo($logo){
 	$class = extraire_attribut($img,"class");
 
 	$ratio = round($h*100/$w,2);
-	return "<span class='$class' style=\"width:{$w}px;\"><span style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"> </span></span>";
+	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"> </span></span>";
 }
 
 ?>
