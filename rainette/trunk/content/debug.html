@@ -50,6 +50,21 @@
 <hr />
 <br />
 
+[(#REM) <!--Les informations d'une ville - owm--> ]
+#SET{code, #ENV{ville,'Paris,Fr'}}
+<div class="cartouche">
+	<h1 class="h1">Open Weather Map</h1>
+	[(#MODELE{rainette_infos,
+		code=#GET{code},
+		sous_modele=infos_ville,
+		service=owm})]
+</div>
+<br class="nettoyeur"/>
+
+<br />
+<hr />
+<br />
+
 [(#REM) <!--Les informations d'une ville - wwo--> ]
 #SET{code, #ENV{ville,'Paris,France'}}
 <div class="cartouche">

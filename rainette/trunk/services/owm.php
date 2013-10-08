@@ -186,17 +186,17 @@ function owm_flux2infos($flux, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children']['location'][0]['children'])) {
-		$infos = $flux['children']['location'][0]['children'];
+	if (isset($flux['children']['city'][0]['attributes']['name'])) {
+		$tableau['ville'] = $flux['children']['city'][0]['attributes']['name'];
+	}
 
-		if (isset($infos['city'])) {
-			$tableau['ville'] = $infos['city'][0]['text'];
-			$tableau['ville'] .= (isset($infos['country_name'])) ? ', ' . $infos['country_name'][0]['text'] : '';
-		}
+	if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
+		$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
+
 		$tableau['region'] = '';
 
-		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
-		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
 
 		$tableau['population'] = '';
 	}
