@@ -57,8 +57,16 @@ function responsive_logo($logo){
 	$src = extraire_attribut($img,"src");
 	$class = extraire_attribut($img,"class");
 
+	$hover = "";
+	if ($hover_on = extraire_attribut($img,"onmouseover")){
+		$hover_off = extraire_attribut($img,"onmouseout");
+		$hover_on = str_replace("this.src=","jQuery(this).css('background-image','url('+",$hover_on)."+')')";
+		$hover_off = str_replace("this.src=","jQuery(this).css('background-image','url('+",$hover_off)."+')')";
+		$hover = " onmouseover=\"$hover_on\" onmouseout=\"$hover_off\"";
+	}
+
 	$ratio = round($h*100/$w,2);
-	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"> </span></span>";
+	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"$hover> </span></span>";
 }
 
 ?>
