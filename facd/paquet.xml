@@ -1,7 +1,7 @@
 <paquet
 	prefix="facd"
 	categorie="outil"
-	version="0.2.0"
+	version="0.3.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	schema="0.0.1"

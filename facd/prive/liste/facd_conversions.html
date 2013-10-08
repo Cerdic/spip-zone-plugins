@@ -20,9 +20,11 @@
 	extension,1
 }})
 ]
-<BOUCLE_log(FACD_CONVERSIONS){si #ENV{afficher_log}|=={oui}|oui}{id_facd_conversion = #ENV{log}}>
-<h3><:facd:titre_log_conversion{id=#ID_FACD_CONVERSION}:></h3>
+<BOUCLE_log(FACD_CONVERSIONS){si #ENV{afficher_log}|=={oui}|et{#ENV{logs}|=={oui}}|oui}{id_facd_conversion = #ENV{log}}>
+<div id="afficher_log">
+<h3><:facd:titre_log_conversion{id=#ID_FACD_CONVERSION}:> <a class="frame_close ajax" href="[(#SELF|parametre_url{afficher_log,non}|parametre_url{log,''})]"><img src="#CHEMIN_IMAGE{fermer-16}" alt="<:bouton_fermer:>" width="16" height="16" /></a></h3>
 <pre style="white-space: pre-wrap;">[(#INFOS|unserialize|table_valeur{log})]</pre>
+</div>
 </BOUCLE_log>
 <B_conversions>
 #ANCRE_PAGINATION
@@ -63,7 +65,7 @@
 				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|oui)
 					[(#BOUTON_ACTION{[(#VAL{facd:info_statut_conversion_#STATUT}|_T)],[(#URL_ACTION_AUTEUR{facd_relancer_conversion,#ID_FACD_CONVERSION,[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],ajax,'',<:facd:label_relancer_conversion|attribut_html:>})]]
 				[(#AUTORISER{relancerconversion,facd,#ID_FACD_CONVERSION}|non)[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]]
-				[(#INFOS|unserialize|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
+				[(#INFOS|unserialize|table_valeur{log}|strlen|>{1}|oui)<a href="[(#SELF|parametre_url{log,#ID_FACD_CONVERSION}|parametre_url{afficher_log,oui}|ancre_url{afficher_log})]" class="ajax"><:facd:info_voir_log_erreur:></a>]
 			]
 			[(#STATUT|=={erreur}|non)
 				[(#VAL{facd:info_statut_conversion_#STATUT}|_T)]
