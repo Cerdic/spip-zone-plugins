@@ -70,22 +70,22 @@
 	// update methods to do something useful
 	if (fullScreenApi.supportsFullScreen) {
 		fullScreenApi.fullScreenEventName = fullScreenApi.prefix + 'fullscreenchange';
-	    fullScreenApi.isFullScreen = function() {
-	    	switch (this.prefix) {
-	    		case '':
-	    			return document.fullScreen;
-	    		case 'webkit':
-	    			return document.webkitIsFullScreen;
-	    		default:
-	    			return document[this.prefix + 'FullScreen'];
-	    	}
-	    }
-	    fullScreenApi.requestFullScreen = function(el) {
-	    	return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
-	    }
-	    fullScreenApi.cancelFullScreen = function(el) {
-	    	return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
-	    }
+		fullScreenApi.isFullScreen = function() {
+			switch (this.prefix) {
+				case '':
+					return document.fullScreen;
+				case 'webkit':
+					return document.webkitIsFullScreen;
+				default:
+					return document[this.prefix + 'FullScreen'];
+			}
+		}
+		fullScreenApi.requestFullScreen = function(el) {
+			return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
+		}
+		fullScreenApi.cancelFullScreen = function(el) {
+			return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
+		}
 	}
 
 	window.fullScreenApi = fullScreenApi;
@@ -94,8 +94,8 @@
 		cookies = (typeof($.cookie) == 'function'),
 		stop_message_timeout = false,
 		browser = $.browser,
-	    IS_IE = browser.msie,
-	    UA = navigator.userAgent,
+		IS_IE = browser.msie,
+		UA = navigator.userAgent,
 		IS_IPAD = /iPad|MeeGo/.test(UA),
 		IS_IPHONE = /iP(hone|od)/i.test(UA),
 		IS_ANDROID = /Android/.test(UA),
@@ -376,7 +376,7 @@
 									id.paused = true;
 								}else{
 									id.currentTime = 0;
-								    id.play();
+									id.play();
 								}
 							}
 						}).bind("loadeddata", function(e){
@@ -398,9 +398,10 @@
 						}, true);
 
 						media.parent().find('.ms_splash').click(function(){
-							if(id.paused && $(this).is(':visible')){
+							if((id.paused || id.ended) && $(this).is(':visible')){
+								wrapper.removeClass('paused');
 								if(!id.has_metadatas)
-									wrapper.addClass('loading').removeClass('paused');
+									wrapper.addClass('loading');
 								media.ms_play_pause();
 							}
 						});
@@ -582,8 +583,8 @@
 					elapsed_time.text(ms_second_to_time(id.currentTime));
 
 					try {
-	                    arg.buffer = id.buffered.end(null);
-	                } catch (ignored) {}
+						arg.buffer = id.buffered.end(null);
+					} catch (ignored) {}
 
 					if((id.networkState == 2) && id.duration && !isNaN(id.duration) && id.buffer)
 						control.find('.progress_buffered').css('width', ms_anything_to_percent(id.buffered.end(0),id.duration)+'%');
@@ -712,9 +713,11 @@
 			if(!id.controls && id.mediacanplay && !id.seeking){
 				if(id.paused || id.ended){
 					id.play();
+					$(this).parent().removeClass('paused');
 					this.trigger('ms_play');
 				}else{
 					id.pause();
+					$(this).parent().addClass('paused');
 					this.trigger('ms_pause');
 				}
 			}
@@ -929,7 +932,7 @@
 				(fullScreenApi.prefix === '') ? id_wrapper.requestFullScreen() : id_wrapper[fullScreenApi.prefix + 'RequestFullScreen']();
 			}else{
 				var window_width = window.innerWidth,
-		    		window_height = window.innerHeight,
+					window_height = window.innerHeight,
 					ratio = (window_height/id.videoHeight),
 					width_final = (id.videoWidth*ratio).toFixed();
 				if(width_final > window_width){
@@ -1094,57 +1097,57 @@
 				switch (e.keyCode) {
 					case 27 :
 						/**
-					     * Touche esc : sort du mode fullscreen (uniquement sur videos)
-					     */
+						 * Touche esc : sort du mode fullscreen (uniquement sur videos)
+						 */
 						e.preventDefault();
-			        	if (!fullScreenApi.supportsFullScreen && media.find('video')[0].isFullScreen)
-			        		media.find('video').ms_fullscreen();
+						if (!fullScreenApi.supportsFullScreen && media.find('video')[0].isFullScreen)
+							media.find('video').ms_fullscreen();
 						break;
 					case 70 :
 						/**
-					     * Touche f
-					     * Active le fullscreen sur la video en lecture ou la video en hover/focus (uniquement sur videos)
-					     */
-			        	if(!media.find('video')[0].isFullScreen && ($('input:focus,textarea:focus').size() == 0)){
-			        		media.find('video').ms_fullscreen();
-			        		e.preventDefault();
-			        	}
+						 * Touche f
+						 * Active le fullscreen sur la video en lecture ou la video en hover/focus (uniquement sur videos)
+						 */
+						if(!media.find('video')[0].isFullScreen && ($('input:focus,textarea:focus').size() == 0)){
+							media.find('video').ms_fullscreen();
+							e.preventDefault();
+						}
 						break;
 					case 76 :
 						/**
-					     * Touche l
-					     * Active ou désactive le mode boucle (loop) sur le média en cours de lecture
-					     */
+						 * Touche l
+						 * Active ou désactive le mode boucle (loop) sur le média en cours de lecture
+						 */
 						if(media.find('video,audio')[0].isFullScreen || $('input:focus,textarea:focus').size() == 0){
 							media.find('video,audio').ms_loop();
-				        	e.preventDefault();
+							e.preventDefault();
 						}
 						break;
 					case 77 :
 						/**
-					     * Touche M : mute ou unmute
-					     */
+						 * Touche M : mute ou unmute
+						 */
 						if(media.find('video,audio')[0].isFullScreen || $('input:focus,textarea:focus').size() == 0){
 							media.find('video,audio').ms_volume(true);
-			        		e.preventDefault();
+							e.preventDefault();
 						}
 						break;
 					case 32 :
 						 /**
-					      * Touche Space : lance la lecture ou met le media en pause
-					      */
-			    		if(media.find('video,audio')[0].isFullScreen || ($('input:focus,textarea:focus').size() == 0)){
-			    			media.find('video,audio').ms_play_pause();
-			        		e.preventDefault();
-			    		}
-				        break;
+						  * Touche Space : lance la lecture ou met le media en pause
+						  */
+						if(media.find('video,audio')[0].isFullScreen || ($('input:focus,textarea:focus').size() == 0)){
+							media.find('video,audio').ms_play_pause();
+							e.preventDefault();
+						}
+						break;
 					case 38 : case 40 :
-					    /**
-					     * Touches Up (38) et Down (40)
-					     * Baisse ou augmente de 10% le volume de la video en cours de lecture
-					     */
-			    		if(media.find('video,audio')[0].duration && (media.find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus').size() == 0))){
-			        		if(!media.find('video,audio')[0].muted){
+						/**
+						 * Touches Up (38) et Down (40)
+						 * Baisse ou augmente de 10% le volume de la video en cours de lecture
+						 */
+						if(media.find('video,audio')[0].duration && (media.find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus').size() == 0))){
+							if(!media.find('video,audio')[0].muted){
 								var delta  = (e.keyCode == 38) ? 1 : -1,
 									volume = media.find('video,audio')[0].volume,
 									volume_diff = (delta > 0) ? '0.1' : '-0.1',
@@ -1152,27 +1155,27 @@
 								if((volume_new <= 1) && (volume_new >= 0))
 									media.find('video,audio')[0].volume = volume_new;
 							}
-			        		e.preventDefault();
-			        		e.stopPropagation();
-			    		}
-				        break;
+							e.preventDefault();
+							e.stopPropagation();
+						}
+						break;
 					case 37 : case 39 :
-					    /**
-					     * Gauche (37) et droite (39)
-					     * Avance ou recule de 5% la video en cours de lecture
-					     * Il faut également modifier la valeur de la barre
-					     */
-			    		if(media.find('video,audio')[0].duration && (media.find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus,select:focus').size() == 0))){
-			    			var pourcent_actuel = ((media.find('video,audio')[0].currentTime / media.find('video,audio')[0].duration) * 100);
-			    			if(e.keyCode == 37)
-				    			var new_percent = (pourcent_actuel >= 5) ? (pourcent_actuel - 5) : 0;
-			    			else
-				    			var new_percent = (pourcent_actuel > 95) ? 100 : (pourcent_actuel + 5);
-			    			media.find('video,audio').ms_seek_to_percent(new_percent,true);
-			    			e.preventDefault();
-			    			e.stopPropagation();
-			        	}
-			    		break;
+						/**
+						 * Gauche (37) et droite (39)
+						 * Avance ou recule de 5% la video en cours de lecture
+						 * Il faut également modifier la valeur de la barre
+						 */
+						if(media.find('video,audio')[0].duration && (media.find('video,audio')[0].isFullScreen||($('input:focus,textarea:focus,select:focus').size() == 0))){
+							var pourcent_actuel = ((media.find('video,audio')[0].currentTime / media.find('video,audio')[0].duration) * 100);
+							if(e.keyCode == 37)
+								var new_percent = (pourcent_actuel >= 5) ? (pourcent_actuel - 5) : 0;
+							else
+								var new_percent = (pourcent_actuel > 95) ? 100 : (pourcent_actuel + 5);
+							media.find('video,audio').ms_seek_to_percent(new_percent,true);
+							e.preventDefault();
+							e.stopPropagation();
+						}
+						break;
 				}
 			}
 		}
