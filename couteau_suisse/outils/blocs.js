@@ -183,6 +183,13 @@ function blocs_get_pagination(url) {
 var blocs_pagination = blocs_get_pagination(window.location.hash);
 
 /*
+// Ouvrir un bloc qui contiendrait un formulaire renvoyant une erreur
+jQuery(document).ready(function() {
+	jQuery('.cs_blocs').has('.erreur_message').find('.blocs_titre.blocs_replie').blocs_toggle();
+});
+*/
+
+/*
 // Si un bloc contient une pagination inseree dans un bloc,
 // code JS a inserer dans le header de votre squelette APRES les appels du Couteau Suisse :
 jQuery(document).ready(function() {
