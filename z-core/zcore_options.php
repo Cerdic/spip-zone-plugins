@@ -28,10 +28,21 @@ else {
  * il faut le mettre dans un conteneur parent que l'on masque
  * http://timkadlec.com/2012/04/media-query-asset-downloading-results/
  *
- * on fixe le height en CSS pour que le height:auto par defaut sur img ne s'applique pas ici
- * (un logo est toujours plus petit que l'ecran, donc max-width:100% ne fait rien)
- * Pour le reduire dans une liste en colonne par exemple il faut faire en css
- * max-width:50px;height:auto!important;
+ * On utilise un double conteneur :
+ * le premier fixe la largeur, le second la hauteur par le ratio hauteur/largeur
+ * grace a la technique des intrinsic-ratio ou padding-bottom-hack
+ * http://mobile.smashingmagazine.com/2013/09/16/responsive-images-performance-problem-case-study/
+ * http://alistapart.com/article/creating-intrinsic-ratios-for-video
+ *
+ * Le span interieur porte l'image en background CSS
+ * Le span conteneur ne porte pas de style display car trop prioritaire.
+ * Sans CSS il occupe la largeur complete disponible, car en inline par defaut
+ * Il suffit de lui mettre un float:xxx ou un display:block pour qu'il respecte la largeur initiale du logo
+ *
+ * Pour masquer les logos :
+ * .spip_logos {display:none}
+ * Pour forcer une taille maxi :
+ * .spip_logos {max-width:25%;float:right}
  *
  * @param $logo
  * @return string
