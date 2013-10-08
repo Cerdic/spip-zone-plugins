@@ -1,13 +1,13 @@
 <paquet
 	prefix="spipmotion"
 	categorie="multimedia"
-	version="1.2.14"
+	version="1.3.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/spipmotion.png"
 	schema="1.2.10"
 	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/"
->	
+>
 
 	<nom>SPIPMotion</nom>
 	<!-- Encodage de documents multimedia -->
@@ -38,7 +38,7 @@
 	<utilise nom="podcast" />
 	<utilise nom="licence" />
 	<utilise nom="fonctions_images" />
-	
+
 	<menu nom="configurer_spipmotion" titre="spipmotion:spipmotion_boite" parent="menu_administration" icone="images/spipmotion-16.png" action="configurer_spipmotion" />
 	<menu nom="ffmpeg_infos" titre="spipmotion:titre_page_ffmpeg_infos" parent="menu_administration" icone="images/spipmotion-16.png" action="ffmpeg_infos" />
 	<menu nom="spipmotion_erreurs" titre="spipmotion:titre_page_erreurs" parent="menu_administration" icone="images/spipmotion-16.png" action="spipmotion_erreurs" />

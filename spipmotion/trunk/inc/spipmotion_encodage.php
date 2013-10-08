@@ -27,7 +27,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 		$ret['statut'] = 'non';
 		return $ret;
 	}
-	
+
 	$format = $options['format'];
 	$source = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
 	/**
@@ -39,7 +39,7 @@ function inc_spipmotion_encodage_dist($id_document,$options = array()){
 									'lien.id_objet='.intval($source['id_document']).' AND lien.objet='.sql_quote("document").' AND document.extension='.sql_quote($format).' AND document.mode='.sql_quote("conversion"))){
 		spip_log("Il faut supprimer $id_document",'spipmotion');
 		$v = sql_fetsel("id_document,id_vignette,fichier","spip_documents","id_document=".intval($id_document));
-		
+
 		include_spip('inc/documents');
 		/**
 		 * On ajoute l'id_document dans la liste des documents
@@ -97,7 +97,7 @@ function encodage($source,$options){
 		$ret['erreur'] = 'spipmotion_casse';
 		return false;
 	}
-	
+
 	include_spip('inc/config');
 	$spipmotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
@@ -106,23 +106,20 @@ function encodage($source,$options){
 	$extension_attente = $options['format'];
 
 	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
-	
+
 	$ffmpeg2theora = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
-	
+
 	if(
 		($source['rotation'] == '90')
 		 OR ($encodeur == 'ffmpeg2theora' && !$ffmpeg2theora['version'])){
 		$encodeur = 'ffmpeg';
 	}
-	
-	//$chemin_ffmpeg = (strlen(lire_config('spipmotion/chemin')) > 0) ? "--p ".lire_config('spipmotion/chemin') : '';
-	$chemin_ffmpeg = '';
-	
+
 	include_spip('inc/documents');
 	$chemin = get_spip_doc($source['fichier']);
 	$fichier = basename($source['fichier']);
 	spip_log("encodage de $chemin","spipmotion");
-	
+
 	/**
 	 * Génération des noms temporaires et finaux
 	 * - Le nom du dossier temporaire (tmp/spipmotion)
@@ -135,7 +132,7 @@ function encodage($source,$options){
 	$fichier_final = substr($fichier,0,-(strlen($source['extension'])+1)).'-encoded.'.$extension_attente;
 	$fichier_temp = "$dossier$query.$extension_attente";
 	$fichier_log = "$dossier$query.log";
-	
+
 	/**
 	 * Si on n'a pas l'info hasaudio c'est que la récupération d'infos n'a pas eu lieu
 	 * On relance la récupération d'infos sur le document
@@ -179,14 +176,24 @@ function encodage($source,$options){
 	 * -* nombre de canaux
 	 */
 	if($source['hasaudio'] == 'oui'){
-		$acodec = lire_config("spipmotion/acodec_$extension_attente") ? "--acodec ".lire_config("spipmotion/acodec_$extension_attente") :'';
+		$codec_audio = lire_config("spipmotion/acodec_$extension_attente");
+		if($extension_attente == "mp3")
+			$codec_audio = "libmp3lame";
+		else if(in_array($extension_attente,array('ogg','oga')))
+			$codec_audio = "libvorbis";
+		else if(!$codec_audio){
+			if($extension_attente == 'ogv')
+				$codec_audio = "libvorbis";
+		}
+		$acodec = $codec_audio ? "--acodec ".$codec_audio :'';
+
 		/**
 		 * Forcer libvorbis si on utilise ffmpeg
 		 */
 		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis"))
 			$acodec = '--acodec libvorbis';
 
-		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
+		if(in_array($codec_audio,array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg2theora = $audiobitrate_ffmpeg = "--audioquality $qualite";
 		}else{
@@ -287,7 +294,6 @@ function encodage($source,$options){
 	}else
 		$ss_audio = '-an';
 
-
 	if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 		$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
 	else
@@ -301,7 +307,7 @@ function encodage($source,$options){
 		/**
 		 * Encodage du son
 		 */
-		$encodage = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' -f '.$chemin_ffmpeg.' --log '.$fichier_log;
+		$encodage = $spipmotion_sh.' --e '.$chemin.' --s '.$fichier_temp.' '.$acodec.' '.$audiobitrate_ffmpeg.' '.$audiofreq.' '.$audiochannels_ffmpeg.' --log '.$fichier_log;
 		spip_log("$encodage",'spipmotion');
 		$lancement_encodage = exec($encodage,$retour,$retour_int);
 		if($retour_int == 0){
@@ -420,7 +426,7 @@ function encodage($source,$options){
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
 			if($format == 'ipod'){
-				if(spip_version_compare($ffmpeg_version,'0.7.10','<'))
+				if(spip_version_compare($ffmpeg_version,'0.7.20','<'))
 					$infos_sup_normal .= ' -vpre baseline -vpre ipod640 -bf 0';
 				else
 					$infos_sup_normal .= ' -profile:v baseline -vpre ipod640 -bf 0';	
@@ -482,7 +488,7 @@ function encodage($source,$options){
 				 * Du coup on utilise exactement les mêmes réglages dans les 2 passes
 				 */
 				$infos_sup_normal_1 = "--params_supp \"$preset_1 -passlogfile $pass_log_file $infos_sup_normal\"";
-				$encodage_1 = $spipmotion_sh." --force true --pass 1 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
+				$encodage_1 = $spipmotion_sh." --force true --pass 1 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --log $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
 				/**
@@ -498,7 +504,7 @@ function encodage($source,$options){
 						$preset_2 = $preset_quality ? " -preset $preset_quality":'';
 
 					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $ss_audio $preset_2 $infos_sup_normal $metadatas\"";
-					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp $chemin_ffmpeg --log $fichier_log";
+					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
 				}else{
@@ -524,8 +530,7 @@ function encodage($source,$options){
 
 				if(strlen($infos_sup_normal) > 1)
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
-				spip_log($infos_sup_normal,'spipmotion');
-				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte $chemin_ffmpeg --log $fichier_log";
+				$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --log $fichier_log";
 				spip_log($encodage,'spipmotion');
 				$lancement_encodage = exec($encodage,$retour,$retour_int);
 			}
@@ -541,6 +546,9 @@ function encodage($source,$options){
 	}
 
 	if($ret['success'] && file_exists(get_spip_doc($source['fichier']))){
+		if(!sql_getfetsel('id_document','spip_documents','id_document='.intval($source['id_document']))){
+			spip_connect_db('mysql-master','','mediaspip','zjX5uPfP','mu_filmscanece5','mysql', 'spip','');
+		}
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
 		 * NB : la récupération des infos et du logo est faite automatiquement par
@@ -555,8 +563,7 @@ function encodage($source,$options){
 		 * Tentative de récupération d'un logo du document original
 		 * si pas déjà de vignette
 		 */
-		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x));
-		if((!$id_vignette OR ($id_vignette == 0)) && ($source['id_vignette'] > 0)){
+		if($source['id_vignette'] > 0){
 			$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
 			$fichier_vignette = get_spip_doc($vignette['fichier']);
 			$vignette = array(array('tmp_name'=>$fichier_vignette,'name'=>$fichier_vignette));
@@ -571,13 +578,12 @@ function encodage($source,$options){
 		 * Champs que l'on souhaite réinjecter depuis l'original ni depuis un ancien encodage
 		 */
 		$champs_recup = array('titre' => '','descriptif' => '');
-		if(_DIR_PLUGIN_PODCAST)
+		if(defined('_DIR_PLUGIN_PODCAST')){
 			$champs_recup['podcast'] = 0;
 			$champs_recup['explicit'] = 'non';
-		if(_DIR_PLUGIN_LICENCES)
+		}if(defined('_DIR_PLUGIN_LICENCES'))
 			$champs_recup['id_licence'] = 0;
-		if(_DIR_PLUGIN_MEDIAS)
-			$champs_recup['credits'] = '';
+		$champs_recup['credits'] = '';
 		$champs_recup['id_vignette'] = '';
 
 		$modifs = array_intersect_key($source, $champs_recup);
@@ -629,8 +635,7 @@ function encodage($source,$options){
 					_DIR_RACINE.$query.'-pass'
 				);
 		foreach($files as $file){
-			if(file_exists($file))
-				supprimer_fichier($file);
+			if(file_exists($file)) supprimer_fichier($file);
 		}
 	}
 	pipeline('post_spipmotion_encodage',
