@@ -36,7 +36,7 @@ function emballe_medias_em_types($array){
 	$array['IMAGE'] = lire_config('emballe_medias/fichiers/fichiers_images',array('jpg','gif','png'));
 	$array['VIDEO'] = lire_config('emballe_medias/fichiers/fichiers_videos',array('flv'));
 	$array['SON'] = lire_config('emballe_medias/fichiers/fichiers_audios',array('mp3'));
-	$array['TEXTE'] = lire_config('emballe_medias/fichiers/fichiers_textes',array('doc','pdf','odt'));
+	$array['TEXTE'] = lire_config('emballe_medias/fichiers/fichiers_textes',array('doc','docx','pdf','odt'));
 
 	return $array;
 }
