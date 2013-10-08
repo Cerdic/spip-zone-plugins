@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'forum' => 'Les forums sont activés par défaut sur vos articles @complement@ ; ils sont désactivables au cas par cas... Les visiteurs peuvent donc réagir à vos articles... Vous serez prévenu par mail à chaque fois qu’un message est posté sur un de vos articles. Petit revers de médaille : les spams qui ne sont pas toujours évident à repérer et que vous devrez parfois gérer manuellement. Pour traiter un message de forum (le supprimer s’il ne vous plait pas ou le signaler comme spam si c’en est un) :
+	'forum' => 'Les forums sont activés par défaut sur vos articles @complement@ ; ils sont désactivables au cas par cas... Les visiteurs peuvent donc réagir à vos articles... Vous serez prévenu par mail à chaque fois qu’un message est posté sur un de vos articles. Petit revers de médaille : les spams qui ne sont pas toujours évidents à repérer et que vous devrez parfois gérer manuellement. Pour traiter un message de forum (le supprimer s’il ne vous plait pas ou le signaler comme spam si c’en est un) :
 -* Dans le site public, sur la page de l’article, si vous êtes identifiés, il y a 2 boutons "Supprimer ce Message" ou "SPAM"
 -* Dans l’espace privé, via le menu Activité / Suivre les Forums',
 	'forum_q' => 'Comment gérer les forums ?',
