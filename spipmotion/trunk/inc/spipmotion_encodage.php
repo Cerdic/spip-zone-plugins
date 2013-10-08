@@ -252,7 +252,6 @@ function encodage($source,$options){
 						break;
 					}
 				}
-				$samplerate = $audiosamplerate_final;
 			}else
 				$samplerate = $source['audiosamplerate'];
 		}else{
@@ -265,9 +264,10 @@ function encodage($source,$options){
 			}else
 				$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
 		}
-		$audiofreq = "--audiofreq ".$samplerate;
-		$texte .= "ar=$samplerate\n";
-
+		if($samplerate){
+			$audiofreq = "--audiofreq ".$samplerate;
+			$texte .= "ar=$samplerate\n";
+		}
 		/**
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
@@ -468,17 +468,19 @@ function encodage($source,$options){
 		}else{
 			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($vcodec == '--vcodec libtheora') OR ($extension_attente == 'webm'))){
 				spip_log('Premiere passe','spipmotion');
-				if ($ffmpeg_version < '0.7'){
+				if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
 					$preset_1 = $preset_quality ? ' -vpre '.$preset_quality.'_firstpass' : '';
 				}else
 					$preset_1 = $preset_quality ? ' -preset '.$preset_quality : '';
 
 				if($source['rotation'] == '90'){
-					if ($ffmpeg_version < '1.0')
+					$metadatas = '';
+					if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
 						$rotation = "-vf transpose=1";
-					else
+					}else{
+						$metadatas = "-metadata:s:v:0 rotate=0";
 						$rotation = "-filter:v transpose=1";
-					$metadatas = "-metadata:s:v:0 rotate=0";
+					}
 					$infos_sup_normal .= "$rotation $metadatas";
 				}
 
@@ -498,7 +500,7 @@ function encodage($source,$options){
 				if($retour_int_1 == 0){
 					spip_log('Seconde passe','spipmotion');
 
-					if ($ffmpeg_version < '0.7')
+					if (spip_version_compare($ffmpeg_version,'0.7.20','<'))
 						$preset_2 = $preset_quality ? " -vpre $preset_quality":'';
 					else
 						$preset_2 = $preset_quality ? " -preset $preset_quality":'';
@@ -514,17 +516,19 @@ function encodage($source,$options){
 			}else{
 				$metadatas = $metadatas_supp = "";
 				$infos_sup_normal .= " $ss_audio ";
-				if ($ffmpeg_version < '0.7')
+				if (spip_version_compare($ffmpeg_version,'0.7.0','<'))
 					$infos_sup_normal .= $preset_quality ? " -vpre $preset_quality":'';
 				else
 					$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
 
 				if($source['rotation'] == '90'){
-					if ($ffmpeg_version < '1.0')
+					$metadatas = "";
+					if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
 						$rotation = "-vf transpose=1";
-					else
+					}else{
+						$metadatas = "-metadata:s:v:0 rotate=0";
 						$rotation = "-filter:v transpose=1";
-					$metadatas = "-metadata:s:v:0 rotate=0";
+					}
 					$infos_sup_normal .= " $rotation $metadatas";
 				}
 
