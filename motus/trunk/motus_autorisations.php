@@ -170,9 +170,12 @@ function motus_autoriser_groupe_si_selection_rubrique($restrictions, $objet, $id
 		
 		// trouver la rubrique de l'objet en question
 		if ($objet != 'rubrique') {
-			$table = table_objet_sql($objet);
-			$desc = sql_showtable($table);	
+
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$desc = $trouver_table( table_objet($objet) );
+
 			if ($desc and isset($desc['field']['id_rubrique'])) {
+				$table = table_objet_sql($objet);
 				$id_rub = sql_getfetsel('id_rubrique', $table, id_table_objet($table) . '=' . intval($id_objet));
 			}
 		} else {
