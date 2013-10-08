@@ -72,6 +72,9 @@
 				<BOUCLE_texte_quint(TYPES_DOCUMENTS){mime_type LIKE %officedocument%}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
 				#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
 				</BOUCLE_texte_quint>
+				<BOUCLE_texte_sext(TYPES_DOCUMENTS){mime_type LIKE application/rtf}{extension !IN #GET{extensions}}{extension !IN #GET{extensions_texte}}>
+				#SET{extensions_texte,#GET{extensions_texte}|push{#EXTENSION}}
+				</BOUCLE_texte_sext>
 				<B_texte>
 				<p class="explication"><:emballe_medias:extensions_texte:></p>
 				<select name="fichiers_textes[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
