@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	comme des auteurs, rubriques, articles (lorsque l’interface existe pour)...
 	dans un même univers (une grappe)',
 	'grappes_nom' => 'Grappes',
-	'grappes_slogan' => 'Regrouper des objets Spip dans un même univers'
+	'grappes_slogan' => 'Regrouper des objets SPIP dans un même univers'
 );
 
 ?>
