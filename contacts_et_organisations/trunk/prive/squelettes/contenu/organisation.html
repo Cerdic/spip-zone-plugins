@@ -27,10 +27,12 @@
 	titre=<:contacts:info_organisations_filles:>,
 	ajax}>
 
+[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|oui)
 [(#AUTORISER{creer,organisation})
 	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
 		|parametre_url{redirect,#SELF}
 		|icone_verticale{<:contacts:organisation_creer_fille:>,organisation,add,right})]
+]
 ]
 
 <div class="nettoyeur"></div>
