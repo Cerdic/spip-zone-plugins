@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.3.4"
+	version="3.3.5"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/inscription3-64.png"
@@ -14,7 +14,7 @@
 
 	<auteur>cmtmt2003</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
-	<auteur>BoOz and co</auteur>
+	<auteur>BoOz</auteur>
 
 	<copyright>2007-2013</copyright>
 
