@@ -12,11 +12,12 @@ function projets_organisations_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	// organisations sur les projets
+	// On utilise la table projets_liens pour la liaison et non organisations_liens
 	if (!$e['edition'] AND $e['type'] == 'projet') {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'projet',
-			'objet' => $flux['args'][$e['id_table_objet']],
-			'id_objet' => 'organisation'
+			'table_source' => 'projets',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
 	}
 

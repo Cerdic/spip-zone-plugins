@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_organisations"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets-32.png"
