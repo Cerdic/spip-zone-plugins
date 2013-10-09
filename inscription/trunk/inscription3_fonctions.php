@@ -120,11 +120,9 @@ if(function_exists('restreindre_extras'))
 function critere_reglement_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$id_article = false;
-	if(defined('_DIR_PLUGIN_PAGES')){
-		if($id_article = sql_getfetsel('id_article','spip_articles','page="reglement"')){
-			$sous = "sql_get_select('art.id_article','spip_articles as art','page=\'reglement\'')";
-			$where = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '('.$sous.')')";
-		}
+	if(defined('_DIR_PLUGIN_PAGES') && ($id_article = sql_getfetsel('id_article','spip_articles','page="reglement"'))){
+		$sous = "sql_get_select('art.id_article','spip_articles as art','page=\'reglement\'')";
+		$where = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '('.$sous.')')";
 	}
 	if(!$id_article){
 		if(!function_exists('lire_config'))
