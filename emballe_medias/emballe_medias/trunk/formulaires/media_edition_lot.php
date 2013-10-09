@@ -88,9 +88,8 @@ function formulaires_media_edition_lot_verifier_dist(){
 
 function formulaires_media_edition_lot_traiter_dist(){
 	$res = array('editable'=> true);
-	if(_request('change_statut_tout') || _request('change_statut_publie') || _request('change_statut_prepa') || _request('change_statut_prop')){
+	if(_request('change_statut_tout') || _request('change_statut_publie') || _request('change_statut_prepa') || _request('change_statut_prop'))
 		return $res;
-	}
 
 	$medias_a_traiter = _request('medias');
 	
@@ -120,6 +119,12 @@ function formulaires_media_edition_lot_traiter_dist(){
 		}
 		$res_id = formulaires_editer_objet_traiter('article',$id_article,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	}
+	
+	if(defined('_DIR_PLUGIN_COLLECTIONS') && _request('id_collection')){
+		$organiser = charger_fonction('collection_organiser_rangs','inc');
+		$organiser(_request('id_collection'));
+	}
+		
 	$res['message_ok'] = singulier_ou_pluriel(count($medias_a_traiter),'emballe_medias:message_medias_maj_un','emballe_medias:message_medias_maj_nb');
 	if($statut != _request('statuts_medias')){
 		$texte_statuts = objet_info('article','statut_titres');
