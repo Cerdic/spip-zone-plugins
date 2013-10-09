@@ -127,9 +127,13 @@ function critere_reglement_dist($idb, &$boucles, $crit){
 		if(!function_exists('lire_config'))
 			include_spip('inc/config');
 		$reglement = lire_config('inscription3/reglement_article',0);
-		$where = "array('=', '".$boucle->id_table.".id_article', '".$reglement."')";
+		if(is_array($reglement))
+			$reglement = str_replace('article|','',$reglement[0]);
+		if(is_numeric($reglement) && intval($reglement) > 0)
+			$where = "array('=', '".$boucle->id_table.".id_article', '".$reglement."')";
 	}
-	$boucle->where[]= $where;
+	if($where)
+		$boucle->where[]= $where;
 }
 
 function envoyer_inscription3($desc, $nom, $mode, $id) {
