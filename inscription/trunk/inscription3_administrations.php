@@ -49,9 +49,9 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	if(!is_array($inscription3_meta)){
 		$maj['create'][] = array('ecrire_meta','inscription3',serialize(array(
 						'nom_fiche_mod' => 'on',
-						'nom_fiche_table' => 'on',
+						'nom_table' => 'on',
 						'email_fiche_mod' => 'on',
-						'email_fiche_table' => 'on',
+						'email_table' => 'on',
 						'pass_fiche_mod' => 'on',
 						'bio_fiche_mod' => 'on',
 						'login_fiche_mod' => 'on',
