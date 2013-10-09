@@ -4,6 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_OWM_URL_BASE_REQUETE'))
 	define('_RAINETTE_OWM_URL_BASE_REQUETE', 'http://api.openweathermap.org/data/2.5/');
+if (!defined('_RAINETTE_OWM_URL_BASE_ICONE'))
+	define('_RAINETTE_OWM_URL_BASE_ICONE', 'http://openweathermap.org/img/w');
 if (!defined('_RAINETTE_OWM_JOURS_PREVISIONS'))
 	define('_RAINETTE_OWM_JOURS_PREVISIONS', 14);
 
@@ -97,59 +99,45 @@ function owm_flux2conditions($flux, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children']['current_observation'][0]['children'])) {
-		$conditions = $flux['children']['current_observation'][0]['children'];
+	if (isset($flux['children'])) {
+		$conditions = $flux['children'];
 
 		// Date d'observation
-		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch'][0]['text']) : 0;
+		$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
-		// TODO : pour l'instant le champ full n'est pas complet et a une virgule apres la ville - http://gsfn.us/t/329p4
-		$tableau['station'] = (isset($conditions['observation_location']))
-			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
-			: '';
+		$tableau['station'] = '';
 
-		// Identification des suffixes d'unite pour choisir le bon champ
-		// -> owm fournit toujours les valeurs dans les deux systemes d'unites
-		include_spip('inc/config');
-		$unite = lire_config('rainette/owm/unite', 'm');
-		if ($unite == 'm')
-			$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE);
-		else
-			$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD);
-		list($ut, $up, $ud, $uv) = $suffixes;
+		// Liste des conditions meteo
+		if ($conditions['wind'][0]['children']) {
+			$conditions_vent = $conditions['wind'][0]['children'];
 
+			$tableau['vitesse_vent'] = (isset($conditions_vent['speed'])) ? floatval($conditions_vent['speed'][0]['attributes']['value']) : '';
+			$tableau['angle_vent'] = (isset($conditions_vent['direction'])) ? intval($conditions_vent['direction'][0]['attributes']['value']) : '';
+			$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
+		}
 
-		// Liste des conditions meteo extraites dans le systeme demande
-		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv][0]['text']) : '';
-		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
-		// TODO : a confirmer suite a la reponse au post - http://gsfn.us/t/32w74
-		// -> La documentation indique que les directions uniques sont fournies sous forme de texte comme North
-		//    alors que les autres sont des acronymes. On passe donc tout en acronyme
-		$tableau['direction_vent'] = (isset($conditions['wind_dir']))
-			? (strlen($conditions['wind_dir'][0]['text']) <= 3 ? $conditions['wind_dir'][0]['text'] : strtoupper(substr($conditions['wind_dir'][0]['text'], 0, 1))) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? intval($conditions['temperature'][0]['attributes']['value']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
-		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? intval($conditions['temp_'.$ut][0]['text']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? intval($conditions['feelslike_'.$ut][0]['text']) : '';
+		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
+		$tableau['point_rosee'] = '';
 
-		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
-		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
+		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
+		$tableau['tendance_pression'] = '';
 
-		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? $tendance[$conditions['pressure_trend'][0]['text']] : '';
-
-		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
+		$tableau['visibilite'] = '';
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
-		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
-		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+		$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
 
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
-		// TODO : prendre en compte a terme le nouvel indicateur de jour/nuit dans une prochaine version de WUI
+		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+		// par "n" pour la nuit.
 		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, 'nt_') === false)
+		if (strpos($icone, 'n') === false)
 			$tableau['periode'] = 0; // jour
 		else
 			$tableau['periode'] = 1; // nuit
@@ -160,9 +148,7 @@ function owm_flux2conditions($flux, $lieu) {
 			// On affiche les conditions natives fournies par le service.
 			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
 			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$theme = lire_config('rainette/owm/theme', 'a');
-			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme 
-				 . '/' . ($tableau['periode'] == 1 ? 'nt_' : '') . $tableau['code_meteo'] . '.gif';
+			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
 			$tableau['icone']['url'] = copie_locale($url);
 			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
 		}
@@ -209,9 +195,8 @@ function owm_flux2infos($flux, $lieu) {
 
 function owm_service2credits() {
 
-	$credits = array('titre' => '');
-	$credits['lien'] = 'http://www.wunderground.com/';
-	$credits['logo'] = 'wunderground-126.png';
+	$credits = array('titre' => '', 'logo' => '');
+	$credits['lien'] = 'http://openweathermap.org/';
 
 	return $credits;
 }

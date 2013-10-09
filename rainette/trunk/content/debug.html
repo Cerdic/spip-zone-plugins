@@ -61,6 +61,16 @@
 </div>
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
+[(#MODELE{rainette_conditions,
+	code=#GET{code},
+	sous_modele=conditions_tempsreel,
+	service=owm})]
+<br class="nettoyeur"/>
+
+[(#GET{code}|rainette_debug{infos, owm})]
+[(#GET{code}|rainette_debug{conditions, owm})]
+
 <br />
 <hr />
 <br />
