@@ -38,8 +38,8 @@ function emballe_medias_liste_mimes($array){
 	if(!is_array($array))
 		return false;
 	$mimes_finaux = array();
-	$mimes = sql_select('*','spip_types_documents',sql_in('extension',$array));
-	while($mime=sql_fetch($mimes)){
+	$mimes = sql_allfetsel('mime_type','spip_types_documents',sql_in('extension',$array));
+	foreach($mimes as $mime){
 		$mimes_finaux[] = $mime['mime_type'];
 	}
 	$mimes_finaux = array_unique($mimes_finaux);
