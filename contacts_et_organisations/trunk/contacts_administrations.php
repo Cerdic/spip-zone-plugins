@@ -164,6 +164,12 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', "TABLE spip_contacts_liens CHANGE type_liaison type_liaison VARCHAR(25) NOT NULL DEFAULT ''"),
 		array('sql_alter', 'TABLE spip_contacts_liens ADD PRIMARY KEY ( id_contact, id_objet, objet, type_liaison)'),
 	);
+	
+	// Pour ceux qui ont déjà le plugin installé, on 
+	$maj['1.8.0'] = array(
+		array('include_spip', 'inc/config'),
+		array('ecrire_config', 'contacts_et_organisations/utiliser_organisations_arborescentes', 'on'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

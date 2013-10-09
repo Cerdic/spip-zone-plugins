@@ -9,6 +9,10 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 
 <ul>
+	[(#SAISIE{oui_non,utiliser_organisations_arborescentes,
+		label=<:contacts:cfg_utiliser_organisations_arborescentes_label:>,
+		explication=<:contacts:cfg_utiliser_organisations_arborescentes_explication:>})]
+		
 	[(#SAISIE{oui_non,lier_organisations_rubriques,
 		label=<:contacts:cfg_lier_organisations_rubriques:>,
 		explication=<:contacts:cfg_lier_organisations_rubriques_explication:>})]

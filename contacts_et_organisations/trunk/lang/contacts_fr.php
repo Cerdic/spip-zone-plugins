@@ -41,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
 		afin d’éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
 		une suppression est définitive et les auteurs passent à la poubelle même s’ils ont écrit des articles…',
+	'cfg_utiliser_organisations_arborescentes_explication' => 'Il est possible de définir qu’une organisation est enfant d’une autre. Lorsque cette option est activée, cela ajoute un champ dans l’édition d’une organisation pour préciser ce lien de parenté.',
+	'cfg_utiliser_organisations_arborescentes_label' => 'Utiliser une arborescence d’organisations',
 	'changer' => 'Changer',
 	'chercher_contact' => 'Chercher',
 	'chercher_organisation' => 'Chercher',

@@ -11,10 +11,12 @@
 				[(#SAISIE{input, nom,
 					label=<:contacts:label_nom:>})]
 					
+				[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|oui)
 				[(#SAISIE{organisations, id_parent,
 					id_organisation=#ENV{id_organisation},
 					label=<:contacts:label_organisation_parente:>})]
-					
+				]
+				
 				[(#SAISIE{input, statut_juridique,
 					label=<:contacts:label_statut_juridique:>,
 					explication=<:contacts:explication_statut_juridique:>})]
