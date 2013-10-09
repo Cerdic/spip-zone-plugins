@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets"
 	categorie="divers"
-	version="1.0.9"
+	version="1.0.11"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets-64.png"
@@ -27,6 +27,7 @@
 	<pipeline nom="affiche_milieu" inclure="projets_pipelines.php" />
 	<pipeline nom="affiche_auteurs_interventions" inclure="projets_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="projets_pipelines.php" />
+	<pipeline nom="header_prive" inclure="projets_pipelines.php" /> 
 
 	<menu nom="projets" titre="projet:titre_projets" parent="menu_edition" icone="images/projet-16.png" action="projets" />
 </paquet>

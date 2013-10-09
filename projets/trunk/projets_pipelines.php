@@ -73,4 +73,13 @@ function projets_optimiser_base_disparus($flux){
 	return $flux;
 }
 
+/**
+ * Insert header prive
+ */
+function projets_sites_header_prive($flux){
+	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PROJETS .'css/projets_prive.css" type="text/css" media="all" />';
+	return $flux;
+}
+
+
 ?>
