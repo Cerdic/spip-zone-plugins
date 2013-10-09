@@ -17,11 +17,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function inc_collection_organiser_rangs_dist($id_collection) {
 	$rang = 1;
-	$medias = sql_select('*','spip_collections_liens','id_collection='.intval($id_collection),'','rang ASC');
-	while($media = sql_fetch($medias)){
-		if($media['rang'] != $rang){
-			$test = sql_updateq('spip_collections_liens',array('rang' => $rang),'id_collection = '.intval($media['id_collection']).' AND rang='.intval($media['rang']));
-		}
+	$medias = sql_allfetsel('*','spip_collections_liens','id_collection='.intval($id_collection),'','rang ASC');
+	foreach($medias as $media){
+		if($media['rang'] != $rang)
+			$test = sql_updateq('spip_collections_liens',array('rang' => $rang),'id_collection = '.intval($media['id_collection']).' AND id_objet='.intval($media['id_objet']).' AND objet="article"');
 		$rang++;
 	}
 }

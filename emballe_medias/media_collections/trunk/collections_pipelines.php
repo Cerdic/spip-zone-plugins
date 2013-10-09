@@ -23,12 +23,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Le contexte du pipeline complété
  */
 function collections_affiche_milieu($flux) {
-	$texte = "";
+	$texte = false;
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	// auteurs sur les collections
 	if (!$e['edition'] AND in_array($e['type'], array('collection'))) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+		$texte = recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
@@ -56,7 +56,7 @@ function collections_affiche_milieu($flux) {
  * 		Le contexte du pipeline complété
  */
 function collections_affiche_auteurs_interventions($flux) {
-	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+	if (isset($flux['args']['id_auteur']) && ($id_auteur = intval($flux['args']['id_auteur']))) {
 		$flux['data'] .= recuperer_fond('prive/objets/liste/collections', array(
 			'id_auteur' => $id_auteur,
 			'titre' => _T('collection:info_collections_auteur')
@@ -107,7 +107,7 @@ function collections_editer_contenu_objet($flux){
 			}
 		}
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
@@ -270,15 +270,14 @@ function collections_collections_liste_genres($flux){
 function collections_diogene_objets($flux){
 	$flux['collection']['diogene_max'] = 1;
 	$flux['collection']['ss_rubrique'] = 1;
-	if(defined('_DIR_PLUGIN_DIOGENE_SPIPICIOUS')){
+	if(defined('_DIR_PLUGIN_DIOGENE_SPIPICIOUS'))
 		$flux['collection']['champs_sup']['spipicious'] = _T('diogene_spipicious:tags_spipicious');
-	}
-	if(defined('_DIR_PLUGIN_DIOGENE_MOTS')){
+
+	if(defined('_DIR_PLUGIN_DIOGENE_MOTS'))
 		$flux['collection']['champs_sup']['mots'] = _T('diogene_mots:form_legend');
-	}
-	if(defined('_DIR_PLUGIN_DIOGENE_GERER_AUTEURS')){
+
+	if(defined('_DIR_PLUGIN_DIOGENE_GERER_AUTEURS'))
 		$flux['collection']['champs_sup']['auteurs'] = _T('diogene_gerer_auteurs:label_cfg_ajout_auteurs');
-	}
 	
 	$flux['emballe_media']['champs_sup']['collection'] = _T('collection:diogene_champ_collection');
 	return $flux;
@@ -297,9 +296,9 @@ function collections_diogene_objets($flux){
  */
 function collections_diogene_traiter($flux){
 	if(($id_collection = _request('id_collection')) && is_numeric($flux['args']['id_objet']) && ($flux['args']['id_objet'] > 0)){
-		if(is_numeric($id_collection)){
-			include_spip('action/editer_liens');
-			if (autoriser('modifier', 'article', $flux['args']['id_objet']))
+		if(is_numeric($id_collection)
+			&& autoriser('modifier', 'article', $flux['args']['id_objet'])){
+				include_spip('action/editer_liens');
 				objet_associer(array('collection' => $id_collection), array('article' => $flux['args']['id_objet']));
 		}
 	}
