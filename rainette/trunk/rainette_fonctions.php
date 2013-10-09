@@ -43,7 +43,7 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 
 	if (is_array($icone)) {
 		// Utilisation des icones natifs des services autres que weather.com
-		$file = $icone['url'];
+		$file = $icone;
 		$icone = $icone['code'];
 	}
 	else {
@@ -59,15 +59,20 @@ function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chem
 
 function rainette_icone($nom, $texte, $chemin='', $extension="png", $taille=''){
 
-	if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-	$file = $nom . '.' . $extension;
-	// Le dossier personnalise ou le dossier passe en argument
-	// a-t-il bien l'icone requise ?
-	$img = find_in_path($file, $chemin);
-	if (!$img) {
-	// Non, on prend l'icone par defaut dans le repertoire img_meteo/
-		$img = find_in_path($file, 'img_meteo/'.$taille.'/');
-		if (!$img)  return ''; //???
+	if (is_array($icone)) {
+		$img = $icone['url'];
+	}
+	else {
+		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
+		$file = $nom . '.' . $extension;
+		// Le dossier personnalise ou le dossier passe en argument
+		// a-t-il bien l'icone requise ?
+		$img = find_in_path($file, $chemin);
+		if (!$img) {
+		// Non, prendre l'icone par defaut dans le repertoire img_meteo
+			$img = find_in_path($file, 'img_meteo/'.$taille.'/');
+			if (!$img)  return ''; //???
+		}
 	}
 	$a = ($a = @getimagesize($img)) ? " width='$a[0]' height='$a[1]'":'';
 	$r = attribut_html($texte);
