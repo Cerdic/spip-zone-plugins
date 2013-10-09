@@ -52,6 +52,10 @@ var em_tabs_charger = function(){
 	});
 };
 
+var em_boutons = function(){
+	if(typeof($.fn.button) == 'function')
+		$('.btn').button();
+}
 var medias_init_select_all = function(){
 	jQuery('.selection_documents').each(function(){
 		var me = jQuery(this);
@@ -101,9 +105,11 @@ var medias_selection_multiple_init_clicks = function(){
 }
 
 jQuery(document).ready(function(){
+	em_boutons();
 	medias_selection_multiple_init_clicks();
 	medias_init_select_all();
 	em_markitup();
+	onAjaxLoad(em_boutons);
 	onAjaxLoad(em_markitup);
 	onAjaxLoad(em_tabs_charger);
 	onAjaxLoad(medias_selection_multiple_init_clicks);
