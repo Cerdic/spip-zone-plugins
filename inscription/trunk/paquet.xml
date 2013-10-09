@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.3.5"
+	version="3.3.6"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/inscription3-64.png"
@@ -47,7 +47,7 @@
 	<pipeline nom="openid_recuperer_identite" inclure="inscription3_pipelines.php" />
 	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.8.5;[" />
+	<necessite nom="saisies" compatibilite="[1.36.0;[" />
 	<necessite nom="cextras" compatibilite="[1.4.3;[" />
 	<necessite nom="verifier" compatibilite="[0.1.18;[" />
 	

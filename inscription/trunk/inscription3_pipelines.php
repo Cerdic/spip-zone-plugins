@@ -186,14 +186,15 @@ function inscription3_i3_definition_champs($flux){
 		'restrictions' => array(
 			'voir' => array('auteur' => ''),
 			'modifier' => array('auteur' => 'webmestre')
-        )
+		)
 	);
 	$flux['naissance'] = array(
 		'saisie' => 'date_jour_mois_annee', // type de saisie
 		'options' => array(
 			'sql' => "DATE DEFAULT '0000-00-00' NOT NULL", // declaration sql
 			'obligatoire' => ($config_i3['naissance_obligatoire'] == 'on') ? true : false,
-			'class'=>'nomulti'
+			'class'=>'nomulti',
+			'datetime'=>'non'
 		),
 		'verifier' => array(
 			'type' => 'date',

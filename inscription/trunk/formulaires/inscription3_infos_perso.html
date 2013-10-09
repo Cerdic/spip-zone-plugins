@@ -72,12 +72,13 @@ On teste la présence d'au moins un des champs pour l'afficher]
 				size=30})]
 		]
 
-        [(#GET{config_inscription3}|table_valeur{naissance}|=={on}|oui)
-        	[(#GET{config_inscription3}|table_valeur{naissance_obligatoire}|=={on}|oui)#SET{naissance_obligatoire,oui}]
-	        [(#SAISIE{date_jour_mois_annee,
-	        	naissance,
-	        	obligatoire=#GET{naissance_obligatoire},
-	        	label=<:inscription3:label_naissance:>})]
+		[(#GET{config_inscription3}|table_valeur{naissance}|=={on}|oui)
+			[(#GET{config_inscription3}|table_valeur{naissance_obligatoire}|=={on}|oui)#SET{naissance_obligatoire,oui}]
+			[(#SAISIE{date_jour_mois_annee,
+				naissance,
+				obligatoire=#GET{naissance_obligatoire},
+				datetime=non,
+				label=<:inscription3:label_naissance:>})]
 		]
 
 		[(#GET{config_inscription3}|table_valeur{bio}|=={on}|oui)
