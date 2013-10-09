@@ -184,8 +184,8 @@ function inscription3_i3_definition_champs($flux){
 			'sql' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // declaration sql
 		),
 		'restrictions' => array(
-            'voir' => array('auteur' => ''),
-            'modifier' => array('auteur' => 'webmestre')
+			'voir' => array('auteur' => ''),
+			'modifier' => array('auteur' => 'webmestre')
         )
 	);
 	$flux['naissance'] = array(
@@ -246,23 +246,22 @@ function inscription3_formulaire_charger($flux){
 		$chercher_champs = charger_fonction('inscription3_champs_formulaire','inc');
 		$champs = $chercher_champs(null,'inscription');
 		foreach($champs as $clef =>$valeur) {
-            $valeurs[$valeur] = _request($valeur);
-			if (is_array($valeurs[$valeur])) {
+			$valeurs[$valeur] = _request($valeur);
+			if (is_array($valeurs[$valeur]))
 				$valeurs[$valeur] = implode(',',$valeurs[$valeur]);
-			}
 			$valeurs[$valeur] = trim($valeurs[$valeur]);
-            if($valeur == 'naissance'){
-            	if(_request('naissance') && preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request('naissance'),$date_naissance)){
+			if($valeur == 'naissance'){
+				if(_request('naissance') && preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/",_request('naissance'),$date_naissance)){
 					$valeurs['naissance_annee'] = $date_naissance[1];
 					$valeurs['naissance_mois'] = $date_naissance[2];
 					$valeurs['naissance_jour'] = $date_naissance[3];
-            	}else{
+				}else{
 					$valeurs['naissance_annee'] = _request('naissance_annee');
 					$valeurs['naissance_mois'] = _request('naissance_mois');
 					$valeurs['naissance_jour'] = _request('naissance_jour');
-            	}
-            }
-	    }
+				}
+			}
+		}
 		
 		include_spip('cextras_pipelines');
 		$saisies = champs_extras_objet($table = 'spip_auteurs');
@@ -271,13 +270,13 @@ function inscription3_formulaire_charger($flux){
 				if(array_key_exists($valeur, $saisies)){
 					$saisie_nom = $saisies[$valeur]['options']['nom'];
 					if (_request($saisie_nom)) {
-		                $valeurs[$saisie_nom] = trim(_request($saisie_nom));
-		            }
+						$valeurs[$saisie_nom] = trim(_request($saisie_nom));
+					}
 				}
 			}
 			
 		}
-	    $valeurs = pipeline('i3_charger_formulaire',
+		$valeurs = pipeline('i3_charger_formulaire',
 			array(
 				'args' => $flux['args'],
 				'data' => $valeurs
@@ -437,7 +436,7 @@ function inscription3_formulaire_verifier($flux){
 					}
 				}
 			}
-	    }
+		}
 		/**
 		 * Naisance est un champs spécifique coupé en trois on le vérifie séparément
 		 * s'il est obligatoire
@@ -541,14 +540,14 @@ function inscription3_formulaire_traiter($flux){
 			$mode = 'inscription_pass';
 		else
 			$mode = 'inscription';
-	
+
 		/**
 		 * Generer la liste des champs a traiter
 		 * champ => valeur formulaire
 		 */
 		$chercher_champs = charger_fonction('inscription3_champs_formulaire','inc');
 		$champs = $chercher_champs(null,'inscription');
-	
+
 		foreach($champs as $clef => $valeur) {
 			$valeurs[$valeur] = _request($valeur);
 			if (is_array($valeurs[$valeur])) {
@@ -597,7 +596,7 @@ function inscription3_formulaire_traiter($flux){
 			if (strlen(_request('password')) != 0)
 				$new_pass = _request('password');
 			elseif($mode == 'inscription_pass')
-	            $new_pass = _request('pass');
+				$new_pass = _request('pass');
 	
 			if (strlen($new_pass)>0) {
 				include_spip('inc/acces');
@@ -632,7 +631,7 @@ function inscription3_formulaire_traiter($flux){
 		
 		if(strlen($val['pass']) == 0)
 			unset($val['pass']);
-	
+
 		if (function_exists('test_inscription'))
 			$f = 'test_inscription';
 		else $f = 'test_inscription_dist';
@@ -655,21 +654,21 @@ function inscription3_formulaire_traiter($flux){
 				$val,
 				'id_auteur = '.$user['id_auteur']
 			);
-		
+
 			$args = array_merge($flux['args'],array(
 				'id_auteur' => $user['id_auteur'],
 				'champs' => $valeurs
 			));
-			
+
 			/**
 			 * Prise en charge du logo
 			 */
 			if(isset($_FILES['logo']) && ($_FILES['logo']['error'] == 0)){
-			    $chercher_logo = charger_fonction('chercher_logo', 'inc');
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
 				
 				// supprimer l'ancien logo
 				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) @unlink($on[0]);
-		
+
 				// ajouter le nouveau
 				include_spip('action/iconifier');
 				action_spip_image_ajouter_dist(
@@ -678,14 +677,14 @@ function inscription3_formulaire_traiter($flux){
 				// indiquer qu'on doit recalculer les images
 				$GLOBALS['var_images'] = true;
 			}
-		    /**
-		     * On appelle le pipeline traiter de inscription3
-		     * On connait dorénavant l'id_auteur
-		     * Ce pipeline doit retourner un array avec les valeurs possibles suivantes :
-		     * - ne_pas_confirmer_par_mail boolean (permet de squeezer la notification)
-		     * - message_ok string (permet de modifier le message de retour du formulaire)
-		     * - editable boolean (permet de modifier le comportement d'affichage au retour) 
-		     */
+			/**
+			 * On appelle le pipeline traiter de inscription3
+			 * On connait dorénavant l'id_auteur
+			 * Ce pipeline doit retourner un array avec les valeurs possibles suivantes :
+			 * - ne_pas_confirmer_par_mail boolean (permet de squeezer la notification)
+			 * - message_ok string (permet de modifier le message de retour du formulaire)
+			 * - editable boolean (permet de modifier le comportement d'affichage au retour) 
+			 */
 			$traiter_plugin = pipeline('i3_traiter_formulaire',
 				array(
 					'args' => $args,
@@ -762,7 +761,7 @@ function inscription3_recuperer_fond($flux){
 					$texte = PtoBR(propre($config['inscription_texte_libre']));
 					$flux['data']['texte'] = preg_replace(",(<p class=[\"']explication mode[\"']>)(.*)(<\/p>),Uims","\\1".$texte."\\3",$flux['data']['texte'],1);
 					break;
-			}		
+			}
 		}
 	}
 	if ($flux['args']['fond']=='formulaires/login'){
@@ -872,7 +871,7 @@ function inscription3_notifications_destinataires($flux){
 		AND $options['type'] == 'user') OR
 		($quoi=='i3_inscriptionauteur' 
 		AND $options['type'] == 'user')){
-	
+
 		$id_auteur = $flux['args']['id']; 
 		include_spip('base/abstract_sql'); 
 		$mail = sql_getfetsel("email", "spip_auteurs", "id_auteur=".intval($id_auteur));
@@ -888,7 +887,7 @@ function inscription3_notifications_destinataires($flux){
 		($quoi=='i3_inscriptionauteur' 
 		AND $options['type'] == 'admin')){
 		$admins = sql_select('email','spip_auteurs','statut="0minirezo"');
-		
+
 		while ($qui = sql_fetch($admins)) {
 			$flux['data'][] = $qui['email'];
 		}
@@ -937,19 +936,19 @@ function inscription3_pre_insertion($flux){
  * 	Le contexte du pipeline décrypté, on place dans $flux['data'] les informations qui nous intéresse 
  */
 function inscription3_openid_recuperer_identite($flux){
-	if(isset($flux['args']['dob'])){
+	if(isset($flux['args']['dob']))
 		$flux['data']['naissance'] = $flux['args']['dob'];
-	}
+
 	if(isset($flux['args']['country'])){
 		$id_pays = sql_getfetsel('id_pays','spip_geo_pays','code_iso='.sql_quote($flux['args']['country']));
 		$flux['data']['pays'] = $id_pays;
 	}
-	if(isset($flux['args']['postcode'])){
+	if(isset($flux['args']['postcode']))
 		$flux['data']['code_postal'] = $flux['args']['postcode'];
-	}
-	if(isset($flux['args']['gender'])){
+
+	if(isset($flux['args']['gender']))
 		$flux['data']['sexe'] = $flux['args']['gender'];
-	}
+
 	if(isset($flux['args']['fullname'])){
 		$noms = explode(' ',$flux['args']['fullname']);
 		$flux['data']['prenom'] = $noms[0];
