@@ -31,8 +31,8 @@ if(!function_exists('id_pays_to_pays')){
  * On définit la fonction comme http://www.php.net/manual/fr/function.lcfirst.php#87176
  */
 if(!function_exists('lcfirst')){
-    function lcfirst( $str ){
-    	return strtolower(substr($str,0,1)).substr($str,1);
+	function lcfirst( $str ){
+		return strtolower(substr($str,0,1)).substr($str,1);
 	}
 } 
 /**
@@ -111,7 +111,7 @@ if(function_exists('restreindre_extras'))
 /**
  * Un critère règlement permettant de :
  * - Trouver les pages uniques avec le champ page reglement
- * - Retourner sinon l'article de règlement sélectionné dans la conf
+ * - Sinon retourner sinon l'article de règlement sélectionné dans la conf
  * 
  * @param unknown_type $idb
  * @param unknown_type $boucles
@@ -119,11 +119,16 @@ if(function_exists('restreindre_extras'))
  */
 function critere_reglement_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
+	$id_article = false;
 	if(defined('_DIR_PLUGIN_PAGES')){
-		$sous = "sql_get_select('art.id_article','spip_articles as art','page=\'reglement\'')";
-		$where = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '('.$sous.')')";
+		if($id_article = sql_getfetsel('id_article','spip_articles','page="reglement"')){
+			$sous = "sql_get_select('art.id_article','spip_articles as art','page=\'reglement\'')";
+			$where = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '('.$sous.')')";
+		}
 	}
-	if(!$sous){
+	if(!$id_article){
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
 		$reglement = lire_config('inscription3/reglement_article',0);
 		$where = "array('=', '".$boucle->id_table.".id_article', '".$reglement."')";
 	}
