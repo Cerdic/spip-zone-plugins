@@ -14,7 +14,7 @@ function action_image_responsive() {
 		
 		if (!file_exists($dest) OR filemtime($dest) < filemtime($img)) {
 			include_spip("filtres/images_transforme");
-			$img = image_reduire($img, $taille);
+			$img = image_reduire($img, $taille, 0);
 			
 			if (largeur($img) > 1.5*$taille) $img = image_renforcement($img, 0.1);
 			
