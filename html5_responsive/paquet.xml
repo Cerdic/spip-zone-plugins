@@ -1,0 +1,20 @@
+<paquet
+	prefix="html5_responsive"
+	categorie="outil"
+	version="1.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+>	
+
+	<nom>Outils de base pour HTML5 et responsive</nom>
+
+	<auteur>ARNO*</auteur>
+	<credit lien="http://code.google.com/p/css3-mediaqueries-js/">Wouter van der Graaf</credit>
+	<credit lien="http://code.google.com/p/html5shiv/">Alexander Farkas, Jonathan Neal, Paul Irish, John-David Dalton</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
+	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
+
+	<pipeline nom="insert_head" action="insert_head" inclure="html5_responsive.php" />
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="html5_responsive.php" />
+</paquet>

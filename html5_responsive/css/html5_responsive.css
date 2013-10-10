@@ -1,0 +1,12 @@
+html { 
+	-webkit-text-size-adjust:none; 
+    -ms-content-zooming: none;
+}
+img { 
+	border: 0;
+	-ms-interpolation-mode: bicubic; 
+}
+body {
+	margin: 0;
+	padding: 0;
+}
