@@ -19,6 +19,10 @@ $GLOBALS['gis_layers'] = array (
 		'nom' => 'OpenStreetMap DE',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap.DE")'
 	),
+	'openstreetmap_hot' => array(
+		'nom' => 'OpenStreetMap H.O.T.',
+		'layer' => 'L.tileLayer.provider("OpenStreetMap.HOT")'
+	),
 	'google_roadmap' => array(
 		'nom' => 'Google Roadmap',
 		'layer' => 'L.Google("ROADMAP")'
