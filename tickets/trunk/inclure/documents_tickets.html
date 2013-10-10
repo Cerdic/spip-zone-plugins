@@ -11,7 +11,7 @@
 		|image_reduire{0,100}
 		|inserer_attribut{class,spip_logos}
 		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
-	<strong class="#EDIT{titre}"><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+	<strong class="#EDIT{titre}"><a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
 	<span class="small">(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</span>
 	[<div class="#EDIT{descriptif}">(#DESCRIPTIF|sinon{...})</div>]
 	<BOUCLE_compte(documents_liens){id_document}{0,2} />

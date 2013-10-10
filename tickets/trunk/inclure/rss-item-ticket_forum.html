@@ -2,18 +2,16 @@
 	Cette page génère le contenu d'un article
 	pour un flux RSS, appelé depuis backend.html
 
-]<BOUCLE_un_ticket(FORUMS){id_forum} {statut?}>
+]<BOUCLE_un_ticket(FORUMS){id_forum}{id_ticket} {statut?}>
 	<item[ xml:lang="(#LANG)"]>
 		<title><:tickets:info_commentaire{id=#ID_FORUM}:> [(#TITRE|supprimer_tags|texte_backend)]</title>
-		<link>[(#URL_TICKET{#ENV{id_ticket}}|ancre_url{forum#ID_FORUM}|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_TICKET{#ENV{id_ticket}}|ancre_url{forum#ID_FORUM}|url_absolue)</guid>]
+		<link>[(#URL_TICKET|ancre_url{forum#ID_FORUM}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_TICKET|ancre_url{forum#ID_FORUM}|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG)</dc:language>]
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
-
 		<description>[(#INTRODUCTION|texte_backend)]</description>
-
 [(#REM)
 	Le bloc qui suit diffuse aussi le texte integral de l'article,
 	ce qui permet une syndication plus riche (mais plus "lourde").
@@ -34,3 +32,4 @@
 		</BOUCLE_documents>
 	</item>
 </BOUCLE_un_ticket>
+#FILTRE{trim}

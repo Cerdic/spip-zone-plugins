@@ -34,7 +34,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 <BOUCLE_recents_forums_tickets(FORUMS){objet=ticket}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
-<INCLURE{fond=inclure/rss-item-ticket_forum,id_forum,id_ticket}>
+<INCLURE{fond=inclure/rss-item-ticket_forum,id_forum,id_ticket=#ID_OBJET}>
 </BOUCLE_recents_forums_tickets>
 </channel>
 </rss>
