@@ -10,41 +10,43 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * tout en mettant le statut "NEW"
  * 
  * @param array $module
- * 		Les informations du module en base (on a besoin des champs "module","lang_mere")
+ * 		Les informations du module en base (on a besoin des champs "id_tradlang_module","module","lang_mere")
  * @param string $lang
  * 		La langue dans laquelle on souhaite créer la nouvelle version 
  */
 function inc_tradlang_ajouter_code_langue($module,$lang){
 	/**
 	 * Sélection des chaînes de la langue mère du module
+	 * 
+	 * On ne sélectionne que les champs qui seront définitivement insérés tels quel en base pour simplifier le tableau
 	 */
-	$chaines_mere = sql_select('*','spip_tradlangs',"module=".sql_quote($module['module'])." AND lang=".sql_quote($module['lang_mere']));
-	$total = 0;
-	while($chaine = sql_fetch($chaines_mere)){
+	$chaines_mere = sql_allfetsel('str,id,comm','spip_tradlangs',"id_tradlang_module=".intval($module['id_tradlang_module'])." AND lang=".sql_quote($module['lang_mere']));
+	$total = count($chaines_mere);
+	$chaines_inserees = array();
+	$date = date('Y-m-d H:i:s');
+	foreach($chaines_mere as $id => $chaine){
 		/**
-		 * Insertion en base :
+		 * On ajoute une entrée au tableau $chaines_inserees qui insèrera toutes les chaînes d'un coup
 		 * - On crée un titre qui doit être unique
 		 * - On change la langue avec le $lang passé en paramètre
-		 * - On vide les traducteurs
 		 * - On recrée le md5
 		 * - On met la date_modif à tout de suite
 		 * - On met langue_choisie à "oui"
-		 * - On vire "maj" et "id_tradlang" qui sont des champs automatiquement incrémentés 
+		 * - les champs orig, statut, traducteur prennent les valeurs par défaut (0 et NEW), id_tradlang et maj sont incrémentés par mysql 
 		 */
-		$chaine['titre'] = $chaine['id'].' : '.$chaine['module'].' - '.$lang;
+		$chaine['id_tradlang_module'] = intval($module['id_tradlang_module']);
+		$chaine['titre'] = $chaine['id'].' : '.$module['module'].' - '.$lang;
+		$chaine['module'] = $module['module'];
 		$chaine['lang'] = $lang;
-		$chaine['statut'] = 'NEW';
-		$chaine['orig'] = 0;
-		$chaine['traducteur'] = '';
-		$chaine['md5'] = md5($chaine['str']);
-		$chaine['date_modif'] = date('Y-m-d H:i:s');
 		$chaine['langue_choisie'] = 'oui';
-		unset($chaine['maj']);
-		unset($chaine['id_tradlang']);
-		$res = sql_insertq('spip_tradlangs',$chaine);
-		$total++;
+		$chaine['statut'] = 'NEW';
+		$chaine['md5'] = md5($chaine['str']);
+		$chaine['date_modif'] = $date;
+		$chaines_inserees[] = $chaine;
+		unset($chaines_mere[$id]);
 	}
-	
+	if(intval($total) > 0)
+		$res = sql_insertq_multi('spip_tradlangs',$chaines_inserees);
 	/**
 	 * On génère le fichier correspondant si la configuration de tradlang le demande
 	 */
