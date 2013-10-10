@@ -1,0 +1,18 @@
+<paquet
+	prefix="image_responsive"
+	categorie="outil"
+	version="1.4"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+>	
+
+	<nom>Filtre image_responsive</nom>
+
+	<auteur>ARNO*</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
+
+
+	<pipeline nom="insert_head_css" action="insert_head_css" />
+	<pipeline nom="insert_head" action="insert_head" />
+
+</paquet>
