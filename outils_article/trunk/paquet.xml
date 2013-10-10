@@ -1,10 +1,11 @@
 <paquet
 	prefix="outils_article"
 	categorie="navigation"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="outilsarticle.png"
+    schema="0.1.0"
 	documentation="http://www.spip-contrib.net/Boite-a-outils-pour-articles"
 >	
 

@@ -21,14 +21,14 @@
 
 [(#CONFIG{outils_article/texte}|?{' ',''})
 <div class="textemoins">
-<img src="[(#CONFIG{outils_article/theme})]/textemoins.png" alt="fontsizedown" class="textsizedown" />
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/textemoins.png}" alt="fontsizedown" class="textsizedown" />
 
 [(#CONFIG{outils_article/textemoinsint}|?{' ',''})
 [<span>(#CONFIG{outils_article/textemoinsdesc})</span>]
 ]
 </div>
 <div class="texteplus">
-<img src="[(#CONFIG{outils_article/theme})]/texteplus.png" alt="fontsizeup" class="textsizeup" /> 
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/texteplus.png}" alt="fontsizeup" class="textsizeup" /> 
 [(#CONFIG{outils_article/texteplusint}|?{' ',''})
 [<span>(#CONFIG{outils_article/texteplusdesc})</span>]
 ]
@@ -49,7 +49,7 @@
 <div class="impression">
 [(#CONFIG{outils_article/impression}|?{' ',''})
 <a href="javascript:window.print()" title="afficher une version imprimable de cet article">
-<img src="[(#CONFIG{outils_article/theme})]/printer.png" alt="impression" title="impression" />
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/printer.png}" alt="impression" title="impression" />
 </a>
 ]
 [(#CONFIG{outils_article/impressionint}|?{' ',''})
@@ -84,7 +84,7 @@
 <a rel="alternate" type="application/rss+xml" 
 href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 [ title="RSS (#TITRE|texte_backend)"]>
-<img src="[(#CONFIG{outils_article/theme})]/rss_black.png" alt="suivre la vie du site" title="suivre la vie du site"  /></a>
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/rss_black.png}" alt="suivre la vie du site" title="suivre la vie du site"  /></a>
 [(#CONFIG{outils_article/rssint}|?{' ',''})
 [<span>(#CONFIG{outils_article/rssdesc})</span>]
 ]
@@ -97,7 +97,7 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 <BOUCLE_forum_rss(ARTICLES){id_article}>
 [(#CONFIG{outils_article/rssforum}|?{' ',''})
 <a href="[(#PARAMETRES_FORUM|url_rss_forum)]" rel="nofollow">
-<img src="[(#CONFIG{outils_article/theme})]/feed.png" alt="syndiquer le forum" title="syndiquer le forum" /></a>
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/feed.png}" alt="syndiquer le forum" title="syndiquer le forum" /></a>
 [(#CONFIG{outils_article/rssforumint}|?{' ',''})
 [<span>(#CONFIG{outils_article/rssforumdesc})</span>]
 ]
@@ -110,7 +110,7 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 <BOUCLE_auteur_article(AUTEURS){id_article}>
 [(#CONFIG{outils_article/auteur}|?{' ',''})
 <a href="#URL_AUTEUR">
-<img src="[(#CONFIG{outils_article/theme})]/auteur.png" alt="articles du meme auteur" title="articles du meme auteur"></a>
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/auteur.png}" alt="articles du meme auteur" title="articles du meme auteur"></a>
 [(#CONFIG{outils_article/auteurint}|?{' ',''})
 [<span>(#CONFIG{outils_article/auteurdesc})</span>]
 ]
@@ -122,7 +122,7 @@ href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 <div class="reagir">
 [(#CONFIG{outils_article/reagir}|?{' ',''})
 [<a href="(#PARAMETRES_FORUM|url_reponse_forum)" title="réagir à l'article">
-<img src="[(#CONFIG{outils_article/theme})]/chat.png"></a>]
+<img src="#CHEMIN{css/images/#CONFIG{outils_article/theme}/chat.png}"></a>]
 [(#CONFIG{outils_article/reagirint}|?{' ',''})
 [<span>(#CONFIG{outils_article/reagirdesc})</span>]
 ]
