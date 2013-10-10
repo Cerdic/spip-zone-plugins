@@ -14,6 +14,7 @@
 		'config_titre'		=>	'Boite &agrave; outils pour article',
 		'config_descr'		=>	'vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans la boite &agrave; outils',
 		'elements'			=>	'El&eacute;ments &agrave; afficher',
+        'intitule'          =>'Intitulé',
 		'mail'				=>	'envoyer par mail',
 		'compteur'			=>	'nombre de r&eacute;actions',
 		'note'				=>	'donner une note &agrave; l\'article avec le plugin notation',
