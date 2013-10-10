@@ -24,7 +24,7 @@ function action_tradlang_supprimer_langue_cible_dist(){
 	include_spip('inc/autoriser');
 	if($lang_cible && intval($id_tradlang_module) && autoriser('modifier','tradlang') && !sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible).' AND statut="0K"')){
 		/**
-		 * Suppression des versions
+		 * Suppression des versions et urls
 		 */
 		$tradlangs = sql_allfetsel('id_tradlang','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang_cible));
 		$tradlangs_supprimer = array();
@@ -34,6 +34,7 @@ function action_tradlang_supprimer_langue_cible_dist(){
 		if(count($tradlangs_supprimer)){
 			sql_delete('spip_versions','objet="tradlang" AND '.sql_in('id_objet',$tradlangs_supprimer));
 			sql_delete('spip_versions_fragments','objet="tradlang" AND '.sql_in('id_objet',$tradlangs_supprimer));
+			sql_delete('spip_urls','type="tradlang" AND '.sql_in('id_objet',$tradlangs_supprimer));
 		}
 		/**
 		 * Suppression des chaînes de langue
