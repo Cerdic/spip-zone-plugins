@@ -170,10 +170,10 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 		if($data)$where_1[]=$data;
 		}
 	
-	if (is_array($where))$where=implode(' AND ',$where_1);
+	if (is_array($where_1))$where=implode(' AND ',$where_1);
 	
 	
-	$$champs=$champs?implode(',',$champs):'*';
+	$champs=$champs?implode(',',$champs):'*';
 
 
 	// La concordance entre les champs
@@ -208,7 +208,7 @@ function champs_pour_concordance($id_liste=''){
 	if(!$concordances)$concordances=array();
 
 	$concordances_fixes=array('email'=>'EMAIL');
-	$champs_sync=array_merge($concordances_fixes,$concordances);
+	$champs_sync=array_merge($concordances,$concordances_fixes);
 
 	return $champs_sync;
 }
