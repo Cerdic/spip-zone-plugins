@@ -11,6 +11,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/lang_liste');
+
 $GLOBALS['url_arbo_parents']['tradlang'] = array('id_tradlang_module','tradlang_module');
 
 /**
