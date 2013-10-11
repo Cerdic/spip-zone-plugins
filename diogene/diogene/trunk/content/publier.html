@@ -1,12 +1,13 @@
 #CACHE{0}
+#SET{test_breadcrumb,#EVAL{$GLOBALS['z_blocs']}|find{breadcrumb}}
 [(#SET{url_orig,#SELF|parametre_url{type_objet,''}|parametre_url{em_type,''}|parametre_url{id_syndic,''}|parametre_url{id_article,''}|parametre_url{id_rubrique,''}|parametre_url{id_site,''}})]
 <BOUCLE_diogene(DIOGENES){type=#ENV{type_objet}}>
 <BOUCLE_autorise_utiliser(CONDITION){si #AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui}>
 	[(#REM) Fil d'Ariane ]
-	<p id="hierarchie" class="breadcrumb">
+	[(#GET{test_breadcrumb}|non)<p id="hierarchie" class="breadcrumb">
 		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider">
 		&gt; </span><a href="#GET{url_orig}"><:diogene:publier_titre_hierarchie:></a>[<span class="sep divider"> &gt; </span><strong class="on active">(#TITRE|couper{80})</strong>]
-	</p>
+	</p>]
 	<div class="content-principal">
 		<div class="cartouche">
 			<h1 class="h1 #_diogene:EDIT{titre}"><:diogene:publier_titre:>[(#_diogene:TITRE|lcfirst)]</h1>
@@ -19,9 +20,9 @@
 	</div>
 </BOUCLE_autorise_utiliser>
 </B_autorise_utiliser>
-<div id="hierarchie" class="breadcrumb">
+[(#GET{test_breadcrumb}|non)<div id="hierarchie" class="breadcrumb">
 	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><:diogene:publier_titre_hierarchie:>
-</div>
+</div>]
 <div class="content-principal">
 	<div class="cartouche">
 		<h1 class="h1"><:diogene:erreur:></h1>
@@ -55,9 +56,9 @@
 	[(#SET{contenu_attente,[(#GET{contenu_attente}|concat{[(#INCLURE{fond=[(#GET{fond})],id_diogene=#ID_DIOGENE,auteur_exclu=#SESSION{id_auteur},page,env,ajax}|trim)]})]})]]
 ]
 </BOUCLE_diogene_principaux>
-<div id="hierarchie" class="breadcrumb">
+[(#GET{test_breadcrumb}|non)<div id="hierarchie" class="breadcrumb">
 	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><strong class="on active"><:diogene:publier_titre_hierarchie:></strong>
-</div>
+</div>]
 <div class="content-principal">
 	[(#GET{contenu}|ou{#GET{contenu_attente_vous}}|ou{#GET{contenu_attente}}|non)
 	<div class="cartouche">

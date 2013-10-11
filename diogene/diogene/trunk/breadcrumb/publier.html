@@ -1,0 +1,22 @@
+#CACHE{0}
+#SET{test_breadcrumb,#EVAL{$GLOBALS['z_blocs']}|find{breadcrumb}}
+[(#SET{url_orig,#SELF|parametre_url{type_objet,''}|parametre_url{em_type,''}|parametre_url{id_syndic,''}|parametre_url{id_article,''}|parametre_url{id_rubrique,''}|parametre_url{id_site,''}})]
+<BOUCLE_diogene(DIOGENES){type=#ENV{type_objet}}>
+<BOUCLE_autorise_utiliser(CONDITION){si #AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui}>
+	[(#REM) Fil d'Ariane ]
+	[(#GET{test_breadcrumb}|oui)<p id="hierarchie" class="breadcrumb">
+		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider">
+		&gt; </span><a href="#GET{url_orig}"><:diogene:publier_titre_hierarchie:></a>[<span class="sep divider"> &gt; </span><strong class="on active">(#TITRE|couper{80})</strong>]
+	</p>]
+</BOUCLE_autorise_utiliser>
+</B_autorise_utiliser>
+[(#GET{test_breadcrumb}|oui)<div id="hierarchie" class="breadcrumb">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><:diogene:publier_titre_hierarchie:>
+</div>]
+<//B_autorise_utiliser>
+</BOUCLE_diogene>
+</B_diogene>
+[(#GET{test_breadcrumb}|oui)<div id="hierarchie" class="breadcrumb">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep divider"> &gt; </span><strong class="on active"><:diogene:publier_titre_hierarchie:></strong>
+</div>]
+<//B_diogene>
