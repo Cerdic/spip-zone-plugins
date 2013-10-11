@@ -10,7 +10,7 @@
 				<option value="publie"[(#ENV{statut}|=={publie}|oui) selected="selected"]>
 					[(#ENV{statut}|=={publie}|oui)<:diogene:texte_statut_en_cours_publie_normal:>]
 					[(#ENV{statut}|=={publie}|non)<:diogene:texte_statut_publie_normal:>]
-				</option>]]
+				</option>]
 				[(#ENV{statut}|=={prop}|ou{#ENV{statut}|=={''}|oui}|ou{#AUTORISER{instituer,article,#ENV{id_article},'',#ARRAY{statut,prop}}|oui}|ou{#AUTORISER{publierdans,diogene,#ENV{id_diogene}}|oui}|oui)
 				<option value="prop"[(#ENV{statut}|=={prop}|oui) selected="selected"]>
 					[(#ENV{statut}|=={prop}|oui)<:diogene:texte_statut_en_cours_prop_normal:>]
