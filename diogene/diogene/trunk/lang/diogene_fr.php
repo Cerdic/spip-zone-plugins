@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_rubrique_statut' => 'Une rubrique est considérée comme visible (publiée) lorsqu’elle contient au moins un autre objet publié.',
 	'explication_statut_auteur' => 'Ce champ défini le statut minimal pour pouvoir créer un objet correspondant à ce template.',
 	'explication_statut_auteur_publier' => 'Ce champ défini le statut minimal pour pouvoir publier définitiment un objet correspondant à ce template.',
-	'explication_workflow_simplifie' => 'Seulement gérer les actions "Publier", "Dépublier" et "Supprimer"',
+	'explication_workflow_simplifie' => 'Seulement gérer les actions "Publier" et "Supprimer"',
 
 	// F
 	'formulaire_modifier_diogene' => 'Modifier le template (Diogène)',

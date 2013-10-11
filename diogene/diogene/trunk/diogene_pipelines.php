@@ -207,6 +207,11 @@ function diogene_editer_contenu_objet($flux){
 				if($type=='page')
 					$type='article';
 
+				if ($args['options_complements']['workflow_simplifie']=='on') {
+					spip_log('Gestion simplifiée du workflow de publication', "diogene"._LOG_DEBUG);
+					$args['contexte']['workflow_simplifie']=$args['options_complements']['workflow_simplifie'];
+				}
+
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html'))
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']));
 				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html'))
