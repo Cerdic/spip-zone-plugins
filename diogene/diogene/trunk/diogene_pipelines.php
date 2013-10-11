@@ -497,7 +497,7 @@ function diogene_pre_edition($flux){
 	}
 	
 	if($flux['args']['table'] == 'spip_diogenes'){
-		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves','cacher_heure'));
+		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves','cacher_heure','workflow_simplifie'));
 		if(isset($flux['data']['options_complements']))
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
 
