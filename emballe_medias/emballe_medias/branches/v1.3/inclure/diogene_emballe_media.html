@@ -300,10 +300,12 @@
 						#SET{secteur_existant,non}
 						<:diogene:erreur_secteur_diogene_inexistant:>
 					]
+					<BOUCLE_diogene_rubriques(DIOGENES){objet=rubrique}{id_secteur=#ID_SECTEUR}>
+					#SET{url,#URL_PAGE{#VAL{_PAGE_PUBLIER}|defined|?{#EVAL{_PAGE_PUBLIER},publier}}|parametre_url{type_objet,#TYPE}}
+					</BOUCLE_diogene_rubriques>
 					[(#GET{secteur_existant}|=={oui}|oui)
-						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|oui)<:emballe_medias:erreur_publier_categorie_avant:>]
-						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|non)<:emballe_medias:erreur_publier_categorie_avant_demander_admin:>]
-					]
+						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|et{#GET{url}}|oui)<:emballe_medias:erreur_publier_categorie_avant{url=#GET{url}}:>]
+						[(#AUTORISER{creerrubriquedans,#ID_SECTEUR}|et{#GET{url}}|non)<:emballe_medias:erreur_publier_categorie_avant_demander_admin:>]]
 				</p>
 			#BOITE_FERMER
 			<//B_rubriques_disponibles>
