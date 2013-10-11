@@ -172,4 +172,32 @@ function pages_boite_infos($flux){
 	return $flux;
 }
 
+
+/**
+ * Insertion dans le pipeline affiche_hierarchie (SPIP)
+ * Pour les pages, faire pointer la racine vers la liste des pages au lieux des rubriques
+ * Pour savoir si on se trouve sur une page, on vérifie que le champ "page" existe, faute de mieux  
+ *
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
+ */
+function pages_affiche_hierarchie($flux){
+
+	$objet = $flux['args']['objet'];
+	$id_article = $flux['args']['id_objet'];
+	if (
+		$objet == 'article'
+		and sql_getfetsel('page', 'spip_articles', 'id_article='.sql_quote($id_article))
+	){
+		$cherche = "<a href=\"". generer_url_ecrire('rubriques') . "\">" . _T('info_racine_site') . "</a>";
+		$remplace = "<a href=\"". generer_url_ecrire('pages_tous') . "\">" . _T('pages:pages_uniques') . "</a>";
+		$flux['data'] = str_replace($cherche,$remplace,$flux['data']);
+	}
+
+
+	return $flux;
+}
+
 ?>
