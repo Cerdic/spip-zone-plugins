@@ -127,8 +127,9 @@ function commandes_post_edition($flux){
 		and $id_commande = $flux['args']['id_objet'] // on a bien un identifiant pour la commande
 		and include_spip('inc/config')
 		and $config = lire_config('commandes')
+		and $quand = $config['quand'] ? $config['quand'] : array()
 		and ($config['activer']) // les notifications sont activées
-		and (in_array($statut, $config['quand'])) // le nouveau statut est valide pour envoyer une notification
+		and (in_array($statut, $quand)) // le nouveau statut est valide pour envoyer une notification
 		and ($notifications = charger_fonction('notifications', 'inc', true)) // la fonction est bien chargée
 	) {
 		// Déterminer l'expediteur
