@@ -2,7 +2,7 @@
 #SET{prefixes,#ARRAY{0,configurer_,1,modifier_,2,voir_}}
 <B_bloc_autorisation>
 <ul>
-	<BOUCLE_bloc_autorisation(POUR){tableau #GET{legendes}}>
+	<BOUCLE_bloc_autorisation(DATA){source table,#GET{legendes}}>
 	#SET{prefixe, #GET{prefixes}|table_valeur{#CLE}}
 	<li class="fieldset">
 		<fieldset>

@@ -4,7 +4,7 @@
 	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{creer_lang_cible})</span>]
 	<select name="creer_lang_cible" id="creer_lang_cible">
 		<option value="">--</option>
-		<BOUCLE_module_langue_possible(POUR){tableau #ENV{_langues_possibles}}>
+		<BOUCLE_module_langue_possible(DATA){source table,#ENV{_langues_possibles,#ARRAY}}>
 		<option value="#CLE"[(#CLE|=={#ENV{creer_lang_cible}}|oui)selected="selected"] dir="[(#CLE|lang_dir{ltr,rtl})]">[#CLE] #VALEUR</option></BOUCLE_module_langue_possible>
 	</select>
 </li>

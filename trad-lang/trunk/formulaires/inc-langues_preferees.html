@@ -7,20 +7,20 @@
 	<BOUCLE_si_langues(CONDITION){si #GET{langues_preferees}|count|>{1}|oui}>
 	#SET{langues_preferees_ok,oui}
 	<optgroup label="<:tradlang:info_langues_preferees|attribut_html:>">
-		<BOUCLE_langues_preferees(POUR){tableau #GET{langues_preferees}}>
+		<BOUCLE_langues_preferees(DATA){source table,#GET{langues_preferees}}>
 			<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
 		</BOUCLE_langues_preferees>
 	</optgroup>
 	<B_langues_pas_preferees>
 	<optgroup label="<:tradlang:info_langues_non_preferees|attribut_html:>">
-		<BOUCLE_langues_pas_preferees(POUR){tableau #GET{langues}}{valeur !IN #GET{langues_preferees}}>
+		<BOUCLE_langues_pas_preferees(DATA){source table,#GET{langues}}{valeur !IN #GET{langues_preferees}}>
 			<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
 		</BOUCLE_langues_pas_preferees>
 	</optgroup>
 	</B_langues_pas_preferees>
 	</BOUCLE_si_langues>
 	</B_si_langues>
-	<BOUCLE_langues(POUR){tableau #GET{langues}}>
+	<BOUCLE_langues(DATA){source table,#GET{langues}}>
 	<option value="#VALEUR"[(#VALEUR|in_array{#GET{langues_preferees}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
 	</BOUCLE_langues>
 	<//B_si_langues>

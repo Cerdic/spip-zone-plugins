@@ -25,7 +25,7 @@
 			<B_langues>
 			<li>
 				<label><:tradlang:languesdispo:></label>
-				<BOUCLE_langues(POUR){tableau #ENV{_langues}}>
+				<BOUCLE_langues(DATA){source table, #ENV{_langues}}>
 				<abbr title="[(#VALEUR|traduire_nom_langue)]">#VALEUR</abbr>
 				</BOUCLE_langues>
 			</li>
@@ -41,7 +41,7 @@
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{priorite})</span>]
 				<select name="priorite">
 				<option value=''>--</option>
-				<BOUCLE_priorites(POUR){tableau #EVAL{_TRAD_PRIORITES}|explode{';'}}>
+				<BOUCLE_priorites(DATA){source table,#EVAL{_TRAD_PRIORITES}|explode{';'}}>
 				<option value="#VALEUR"[(#ENV{priorite}|=={#VALEUR}|oui)selected="selected"]>[(#VALEUR|supprimer_numero)]</option>
 				</BOUCLE_priorites>
 				</select>
