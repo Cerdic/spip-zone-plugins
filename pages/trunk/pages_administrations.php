@@ -1,6 +1,6 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin Pages Uniques Hierarchisées
+ * Fichier gérant l'installation et désinstallation du plugin Pages Uniques
  *
  * @plugin     Pages
  * @copyright  2013
