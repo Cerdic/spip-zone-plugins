@@ -240,7 +240,7 @@ function tickets_notifications_destinataires($flux){
 	/**
 	 * Notification des auteurs de tickets et des assignés et des autres forumeurs lorsque le post est validé
 	 */
-	if(($flux['args']['quoi'] == 'forumvalide')
+	if(($flux['args']['quoi'] == 'forumvalide' or $flux['args']['quoi'] == 'forumprive')
 		&& ($flux['args']['options']['forum']['objet'] == 'ticket') 
 		&& ($id_ticket = intval($flux['args']['options']['forum']['id_objet']))){
 		/**
