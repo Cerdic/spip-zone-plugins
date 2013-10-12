@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function pages_declarer_tables_objets_sql($tables){
 	
-	$tables['spip_articles']['field']['page'] = "VARCHAR(20) DEFAULT '' NOT NULL";
+	$tables['spip_articles']['field']['page'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	return $tables;
 
 }

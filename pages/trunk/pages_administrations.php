@@ -1,40 +1,54 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Pages                                  #
-#  Auteur  : RastaPopoulos                          #
-#  Licence : GPL                                    #
-#--------------------------------------------------------------- -#
-#  Documentation : http://www.spip-contrib.net/Plugin-Pages       #
-#-----------------------------------------------------------------#
+/**
+ * Fichier gérant l'installation et désinstallation du plugin Pages Uniques Hierarchisées
+ *
+ * @plugin     Pages
+ * @copyright  2013
+ * @author     RastaPopoulos 
+ * @licence    GNU/GPL
+ * @package    SPIP\Pages\Installation
+ * @link       http://www.spip-contrib.net/Plugin-Pages
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
 
+/**
+ * Fonction d'installation et de mise à jour du plugin
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+**/
+function pages_upgrade($nom_meta_base_version, $version_cible) {
+	$maj = array();
 
-function pages_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.0;
+	$maj['create'] = array(
+		array('maj_tables', 'spip_articles')
+	);
+	$maj['1.0.1'] = array(
+		array('sql_alter', "TABLE spip_articles CHANGE page page VARCHAR(255) DEFAULT '' NOT NULL"),
+	);
 
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)) {
-		if ($current_version==0.0) {
-			include_spip('base/create');
-			maj_tables('spip_articles');
-			ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');
-		}
-		// remise a jour du nouveau version base pour les anciennes installations.
-		if ($current_version<1.0){
-			ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');				
-		}
-	}
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-// Supprimer la colonne 'page' du plugin
+
+/**
+ * Fonction de désinstallation du plugin
+ * Supprimer la colonne 'page' du plugin
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+**/
 function pages_vider_tables($nom_meta_base_version) {
 	sql_alter("TABLE spip_articles DROP page");
 	effacer_meta($nom_meta_base_version);
 }
-
 
 
 ?>
