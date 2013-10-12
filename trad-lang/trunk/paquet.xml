@@ -10,6 +10,8 @@
 
 	<nom>Trad-Lang</nom>
 
+	<auteur>Fil</auteur>
+	<auteur>Florent Jugla</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
@@ -25,9 +27,11 @@
 	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="tradlang_pipelines.php" />
 	<pipeline nom="revisions_chercher_label" inclure="tradlang_pipelines.php" />
+	<pipeline nom="grappes_objets_lies" inclure="tradlang_pipelines.php" />
 
 	<utilise nom="fulltext" compatibilite="[0.6.7;[" />
 	<utilise nom="crayons" compatibilite="[1.13.3;[" />
+	<utilise nom="grappes" compatibilite="[1.0.0;[" />
 	
 	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="menu_configuration" icone="images/spip_lang-16.png" />
 	<menu nom="tradlang_modules" titre="tradlang:titre_tradlang" parent="menu_edition" icone="images/spip_lang-16.png" />

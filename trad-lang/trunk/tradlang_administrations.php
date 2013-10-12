@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Tradlang
- * Licence GPL (c) 2009-2012
+ * Licence GPL (c) 2009-2013
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 /**
- * Fonction d'installation, mise a jour de la base
+ * Fonction d'installation, mise à jour de la base
  *
  * @param unknown_type $nom_meta_base_version
  * @param unknown_type $version_cible
@@ -138,21 +138,20 @@ function tradlang_maj_id_tradlang_modules($affiche = false){
 			sql_updateq('spip_tradlangs',array('id_tradlang_module' => $id_tradlang_module),'id_tradlang='.intval($id_tradlang));
 		}
 		if ($affiche) echo " .";
-	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"id_tradlang_module='0'",'','',"0,100"));
+		$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"id_tradlang_module='0'",'','',"0,100"));
 	}
 }
 
 function tradlang_maj_tradlang_titre($affiche = false){
 	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"titre=''",'','',"0,500"));
 	while (count($strings)){
-		spip_log(count($strings),'maj');
 		foreach($strings as $id_tradlang){
 			$tradlang = sql_fetsel('*','spip_tradlangs','id_tradlang='.intval($id_tradlang));
 			$titre = $tradlang['id'].' : '.$tradlang['module'].' - '.$tradlang['lang'];
 			sql_updateq('spip_tradlangs',array('titre' => $titre),'id_tradlang='.intval($id_tradlang));
 		}
 		if ($affiche) echo " .";
-	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"titre=''",'','',"0,500"));
+		$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlangs',"titre=''",'','',"0,500"));
 	}
 }
 

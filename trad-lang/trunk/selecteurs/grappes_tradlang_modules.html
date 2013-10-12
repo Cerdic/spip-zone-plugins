@@ -1,0 +1,8 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+#CACHE{0}
+#SET{resultats, #LISTE}
+<BOUCLE_s(TRADLANG_MODULES){nom_mod LIKE %(#ENV{q})%}{0,20}{par multi nom_mod}>
+[(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM_MOD|textebrut)],value,[(#NOM_MOD|textebrut)],id,#ID_TRADLANG_MODULE})]})]})]
+</BOUCLE_s>
+[(#GET{resultats}|json_encode)]
+#FILTRE{trim}

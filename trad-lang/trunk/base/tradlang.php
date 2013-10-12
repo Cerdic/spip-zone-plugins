@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Tradlang
- * Licence GPL (c) 2009-2012 
+ * Licence GPL (c) 2009-2013
  */
 
 
@@ -11,6 +11,7 @@ function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlangs'] = 'tradlangs';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_des_tables']['tradlangs_bilans'] = 'tradlangs_bilans';
+	$interface['tables_jointures']['spip_tradlang_modules'][] = 'grappes_liens';
 	$interface['table_des_traitements']['PRIORITE'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	$interface['table_des_traitements']['NOM_MOD'][]= 'typo(supprimer_numero(%s), "TYPO", $connect)';
 	return $interface;
@@ -18,6 +19,7 @@ function tradlang_declarer_tables_interfaces($interface){
 
 function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_auteurs']['field']['langues_preferees'] = "text DEFAULT '' NOT NULL";
+	$tables['spip_grappes']['champs_versionnes'][] = 'jointure_tradlang_modules';
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
 		'texte_objet' => 'tradlang:titre_tradlang_module',

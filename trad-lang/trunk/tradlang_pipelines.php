@@ -184,4 +184,10 @@ function tradlang_revisions_chercher_label($flux){
 		$flux['data'] = 'tradlang:info_'.$flux['args']['champ'];
 	return $flux;
 }
+
+function tradlang_grappes_objets_lies($flux){
+	if(is_array($flux) && !isset($flux['tradlang_modules']))
+		$flux['tradlang_modules'] = _T('tradlang:item_groupes_association_modules');
+	return $flux;
+}
 ?>
