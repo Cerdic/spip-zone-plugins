@@ -246,11 +246,13 @@ function tickets_notifications_destinataires($flux){
 		/**
 		 * On notifie l'id_auteur et l'id_assigné du ticket s'ils ne sont pas l'auteur du post en question
 		 */
-		$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket).' AND id_auteur !='.intval($flux['args']['options']['forum']['id_auteur']));
+		$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket));
 		if(is_array($auteurs)){
 			foreach($auteurs as $auteur){
-				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
-				$flux['data'][] = $email;
+                if ($auteur!=$flux['args']['options']['forum']['id_auteur']){
+                    $email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+                    $flux['data'][] = $email;
+                }
 			}
 		}
 		/**
