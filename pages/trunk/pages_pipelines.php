@@ -70,17 +70,41 @@ function pages_formulaire_charger($flux){
 }
 
 
-// Vérifier que la page n'est pas vide
+/**
+ * Vérifications de l'identifiant d'une page
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
 function pages_formulaire_verifier($flux){
-	// Si on est dans l'édition d'un article
-	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
-		// Si on est dans un article de type page mais que le champ "page" est vide
-		if (_request('modele') == 'page' and !_request('champ_page'))
+	// Si on est dans l'édition d'un article de type page
+	if (
+		is_array($flux)
+		and $flux['args']['form'] == 'editer_article'
+		and _request('modele') == 'page'
+	){
+		$erreur = '';
+		$page = _request('champ_page');
+		// champ "page" vide
+		if ( !$page )
 			$flux['data']['champ_page'] .= _T('info_obligatoire');
+		// nombre de charactères : 255 max
+		elseif (strlen($page) > 255)
+			 $erreur = _T('pages:erreur_champ_page_taille');
+		// format : charactères alphanumériques en minuscules ou "_"
+		elseif (!preg_match('/^[a-z0-9_]+$/', $page))
+			 $erreur = _T('pages:erreur_champ_page_format');
+		// doublon
+		elseif (sql_countsel(table_objet_sql('article'), "page=".sql_quote($page) . " AND id_article!=".intval($id_page)))
+			$erreur = _T('pages:erreur_champ_page_doublon');
+		if ($erreur) $flux['data']['champ_page'] .= $erreur;
 	}
 	return $flux;
 
 }
+
 
 /**
  * Insertion dans le pipeline editer_contenu_objet (SPIP)
