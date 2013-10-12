@@ -18,6 +18,7 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pages_tables.php" />
 	<pipeline nom="affiche_milieu" action="affiche_milieu_ajouter_page" inclure="pages_pipelines.php" />
+	<pipeline nom="affiche_milieu" action="affiche_milieu_identifiant" inclure="pages_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="pages_pipelines.php" />
 	<pipeline nom="affiche_hierarchie" inclure="pages_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="pages_pipelines.php" />

@@ -51,6 +51,50 @@ function pages_affiche_milieu_ajouter_page($flux){
 }
 
 
+/**
+ * Saisie de l'identifiant de la page sur la fiche d'une page
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
+function pages_affiche_milieu_identifiant($flux){
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
+	$id_article = $flux['args'][$e['id_table_objet']];
+
+	// Si on est sur la fiche d'un article...
+	if ( !$e['edition'] and $e['type']=='article' ) {
+		include_spip('base/abstract_sql');
+		// ... et s'il s'agit d'une page
+		if (
+			_request('modele') == 'page'
+			or
+			(
+				$id_article > 0
+				and
+				(sql_getfetsel('page', 'spip_articles', 'id_article='.sql_quote($id_article)))
+			)
+		) {
+			$texte .= recuperer_fond('prive/objets/editer/identifiant_page',
+				array('id_article' => $id_article),
+				array('ajax'=>true)
+			);
+		}
+	}
+
+	if ($texte) {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+
+
 // Vérifier que la page n'est pas vide
 function pages_formulaire_charger($flux){
 
@@ -79,18 +123,23 @@ function pages_formulaire_charger($flux){
  * 		Le contexte du pipeline modifié
  */
 function pages_formulaire_verifier($flux){
-	// Si on est dans l'édition d'un article de type page
-	if (
+
+	// Si on est dans l'édition d'un article/page ou dans le formulaire d'édition d'un identifiant page
+	if ( 
 		is_array($flux)
-		and $flux['args']['form'] == 'editer_article'
-		and _request('modele') == 'page'
+		and (
+			( $flux['args']['form'] == 'editer_article' and _request('modele') == 'page' )
+			or $flux['args']['form'] == 'editer_identifiant_page'
+		)
 	){
 		$erreur = '';
 		$page = _request('champ_page');
-		// champ "page" vide
-		if ( !$page )
-			$flux['data']['champ_page'] .= _T('info_obligatoire');
-		// nombre de charactères : 255 max
+		$id_page = $flux['args']['args'][0];
+
+		// champ vide
+		if (!$page)
+			$erreur .= _T('info_obligatoire');
+		// nombre de charactères : 40 max
 		elseif (strlen($page) > 255)
 			 $erreur = _T('pages:erreur_champ_page_taille');
 		// format : charactères alphanumériques en minuscules ou "_"
@@ -99,7 +148,9 @@ function pages_formulaire_verifier($flux){
 		// doublon
 		elseif (sql_countsel(table_objet_sql('article'), "page=".sql_quote($page) . " AND id_article!=".intval($id_page)))
 			$erreur = _T('pages:erreur_champ_page_doublon');
-		if ($erreur) $flux['data']['champ_page'] .= $erreur;
+
+		if ($erreur)
+			$flux['data']['champ_page'] .= $erreur;
 	}
 	return $flux;
 
