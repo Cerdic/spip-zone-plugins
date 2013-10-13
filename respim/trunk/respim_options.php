@@ -1,6 +1,6 @@
 <?php
 /**
- * Options du plugin Responsive Imagesau chargement
+ * Options du plugin Responsive Images
  *
  * @plugin     Responsive Images
  * @copyright  2013
@@ -22,14 +22,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param int $height
  * @return string
  */
-function respim_embed($img, $rwd_images, $width, $height){
-
+function respim_markup($img, $rwd_images, $width, $height){
+	$class = extraire_attribut($img,"class");
+	if (strpos($class,"respim")!==false) return $img;
 	ksort($rwd_images);
 	$cid = "c".crc32(serialize($rwd_images));
 	$style =
-"img.$cid{opacity:0.01;filter:alpha(opacity=1);width:{$width}px;max-width:100%;height:auto;}
-b.$cid{background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%}
-";
+"img.respim{opacity:0.01;max-width:100%;height:auto;}"
+."b.respwrapper{background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%}";
+	if ($class) $class = " $class";
+	$class = "$cid$class";
+	$img = inserer_attribut($img,"class","respim-fallback $class");
 
 	// image de fallback fournie ?
 	if (isset($rwd_images['fallback'])){
@@ -53,28 +56,34 @@ b.$cid{background-size:100%;background-repeat:no-repeat;display:inline-block;max
 		$prev_width = $w+1;
 	}
 	$style .= "b.$cid{background-image:url($file);}";
-	$style .= implode("\n",$medias);
+	$style .= implode("",$medias);
 
-	$class = extraire_attribut($img,"class");
-	if ($class) $class = " $class";
-	$class = "responsive $cid$class";
 
-	$out = "<!--[if IE]>$img<![endif]-->";
+	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
-	$img = inserer_attribut($img,"class",$class);
-	$img = inserer_attribut($img,"onmousedown","var i=window.getComputedStyle(this.parentNode).backgroundImage.replace(/\W\)$/,'').replace(/^url\(\W|/,'');this.src=(i&&i!='none'?i:this.src);");
-	$out .= "<!--[if !IE]--><b class=\"$cid\">$img</b><style>$style</style><!--[endif]-->";
+	$img = inserer_attribut($img,"class","respim $class");
+	$img = inserer_attribut($img,"onmousedown","var i=window.getComputedStyle(this.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');this.src=(i&&i!='none'?i:this.src);");
+	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid\">$img</b>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
 }
 
 /**
+ * extrait les infos d'une image,
+ * calcule les variantes en fonction des breakpoints
+ * si l'image est de taille superieure au plus petit breakpoint
+ * et renvoi un markup responsive si il y a lieu
+ *
  * @param string $img
  * @param array $bkpt
  * @return string
  */
 function respim_image($img, $bkpt = array(320,480,780)){
 	if (!$img) return $img;
+	if (strpos($img,"respim")!==false
+	  OR strpos($img,"spip_logos")!==false)
+		return $img;
+
 	if (!function_exists("taille_image"))
 		include_spip("inc/filtres");
 	if (!function_exists("image_reduire"))
@@ -101,6 +110,7 @@ function respim_image($img, $bkpt = array(320,480,780)){
 	if (!file_exists($src))
 		return $img;
 
+	// calculer les variantes d'image sur les breakpoints
 	$large = "";
 	foreach($bkpt as $wk){
 		if ($wk>$w) break;
@@ -108,18 +118,24 @@ function respim_image($img, $bkpt = array(320,480,780)){
 		$large = $images[$wk] = extraire_attribut($i,"src");
 	}
 
+	// l'image de fallback en jpg tres compresse
 	if (function_exists("image_aplatir")){
 		// image de fallback : la plus petite en jpg compresse
 		$fallback = image_aplatir($large,'jpg','ffffff',15);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
-	// pour les autres (les mobiles ou autres trucs tactiles apparentes, sauf android2, donc)
-  // on renvoie un conteneur svg
-
-	return respim_embed($img,$images,$w,$h);
+	// generer le markup
+	return respim_markup($img,$images,$w,$h);
 }
 
+/**
+ * Traiter les images de la page et les passer en responsive
+ * si besoin
+ *
+ * @param $texte
+ * @return mixed
+ */
 function respim_affichage_final($texte){
 	if ($GLOBALS['html']){
 		#spip_timer();
