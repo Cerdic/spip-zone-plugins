@@ -264,6 +264,17 @@ function tickets_notifications_destinataires($flux){
 			$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
 			$flux['data'][] = $email;
 		}
+        /** On notifie les personnes référencées dans le ticket via [->autXXX] ou [->autWWW]
+        */
+        $match=array();
+        preg_match_all("#\[(.*)->(aut|auteur)(\d*)\]#U",$flux['args']['options']['forum']['texte'],$match);
+        $auteurs = $match[3];
+        foreach($auteurs as $auteur){
+                if ($auteur!=$flux['args']['options']['forum']['id_auteur']){
+                    $email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+                    $flux['data'][] = $email;
+                }    
+            }
 	}
 	return $flux;
 }
