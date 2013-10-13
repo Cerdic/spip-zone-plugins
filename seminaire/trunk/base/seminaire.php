@@ -31,7 +31,6 @@ function seminaire_declarer_champs_extras($champs = array()){
 			'rows' => 4,
 			'traitements' => '_TRAITEMENT_RACCOURCIS',
 			'class'	=>'inserer_barre_edition',
-
 	));
 	
 	return $champs;

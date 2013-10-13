@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_evenement'			 =>		'Titre à préciser',
 	'titre_page_configurer_seminaire' => 'seminaire',
 	'type'						 =>		'Type d&rsquo;&eacute;v&eacute;nement',
+	'type_evenement'			 => ' Le choix d\'un type d\'événement est obligatoire.',
 );
 
 ?>
