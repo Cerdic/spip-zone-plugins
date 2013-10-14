@@ -35,7 +35,7 @@
 	  			<option></option>
 	  		<BOUCLE_groupe2(GROUPES_MOTS){titre=Type}>
 				<BOUCLE_mots2(MOTS){id_groupe}>
-				<option value="#ID_MOT" [(#ENV{id_mot}|=={#GET{id_mot_recupere}}|?{' selected="selected"',''})]>#TITRE</option>
+				<option value="#ID_MOT" [(#ID_MOT|=={#GET{id_mot_recupere}}|?{' selected="selected"',''})]>#TITRE</option>
 				</BOUCLE_mots2>	
 	  		</BOUCLE_groupe2>	
 	  		</select>
