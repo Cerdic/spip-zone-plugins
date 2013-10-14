@@ -1,6 +1,141 @@
 
 [(#VAL{contacts}|barre_onglets{repertoire})]
 
-<h1><:contacts:titre_page_repertoire:></h1>
+<h1><:contacts:bouton_contacts_organisations:></h1>
 
-[(#INCLURE{fond=prive/objets/liste/repertoire, env, ajax})]
+<BOUCLE_test_annuaires(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
+	<div class="liste-objets annuaires">
+		<table class="spip liste icones_img">
+			<caption><strong class="caption"><:contacts:resume_annuaires:></strong></caption>
+			<thead>
+				<tr>
+					<th class="annuaire principale"><:contacts:annuaires:></th>
+					<th class="organisation"><:contacts:organisations:></th>
+					<th class="contact"><:contacts:contacts:></th>
+				</tr>
+			</thead>
+			<tbody>	
+				<BOUCLE_annuaires(ANNUAIRES){par titre}>
+				<tr>
+					<td class="annuaire principale">
+						<a href="#URL_ECRIRE{annuaire,id_annuaire=#ID_ANNUAIRE}">#TITRE</a>
+					</td>
+					<td class="organisation">
+						<BOUCLE_comptage_organisations_annuaire(ORGANISATIONS){id_annuaire} />
+						<a href="#URL_ECRIRE{organisations,id_annuaire=#ID_ANNUAIRE}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:organisation_un, contacts:organisations_nb}|sinon{<:contacts:organisation_aucun:>})]
+						</a>
+						<//B_comptage_organisations_annuaire>
+						[(#AUTORISER{creer,organisation})
+							[(#URL_ECRIRE{organisation_edit,new=oui&id_annuaire=#ID_ANNUAIRE}
+								|icone_verticale{<:contacts:organisation_creer_dans_cet_annuaire:>,organisation-16.png,new,right})]
+						]
+					</td>
+					<td class="contact">
+						<BOUCLE_comptage_contacts_annuaire(CONTACTS){id_annuaire} />
+						<a href="#URL_ECRIRE{contacts,id_annuaire=#ID_ANNUAIRE}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:contact_un, contacts:contacts_nb}sinon{<:contacts:contact_aucun:>})]
+						</a>
+						<//B_comptage_contacts_annuaire>
+						[(#AUTORISER{creer,contact})
+							[(#URL_ECRIRE{contact_edit,new=oui&id_annuaire=#ID_ANNUAIRE}
+								|icone_verticale{<:contacts:contact_creer_dans_cet_annuaire:>,contact-16.png,new,right})]
+						]
+					</td>
+				</tr>
+				</BOUCLE_annuaires>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="annuaire principale">
+						<:contacts:annuaire_aucun:>
+					</td>
+					<td class="organisation">
+						<BOUCLE_comptage_organisations_aucun(ORGANISATIONS){id_annuaire=0} />
+						<a href="#URL_ECRIRE{organisations,id_annuaire=0}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:organisation_un, contacts:organisations_nb}|sinon{<:contacts:organisation_aucun:>})]
+						</a>
+						<//B_comptage_organisations_aucun>
+						[(#AUTORISER{creer,organisation})
+							[(#URL_ECRIRE{organisation_edit,new=oui}
+								|icone_verticale{<:contacts:organisation_creer:>,organisation-16.png,new,right})]
+						]
+					</td>
+					<td class="contact">
+						<BOUCLE_comptage_contacts_aucun(CONTACTS){id_annuaire=0} />
+						<a href="#URL_ECRIRE{contacts,id_annuaire=0}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:contact_un, contacts:contacts_nb}sinon{<:contacts:contact_aucun:>})]
+						</a>
+						<//B_comptage_contacts_aucun>
+						[(#AUTORISER{creer,contact})
+							[(#URL_ECRIRE{contact_edit,new=oui}
+								|icone_verticale{<:contacts:contact_creer:>,contact-16.png,new,right})]
+						]
+					</td>
+				</tr>
+				<tr class="on">
+					<td class="annuaire principale">
+						<:contacts:annuaires_tout:>
+					</td>
+					<td class="organisation">
+						<BOUCLE_comptage_organisations_tous(ORGANISATIONS) />
+						<a href="#URL_ECRIRE{organisations}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:organisation_un, contacts:organisations_nb}|sinon{<:contacts:organisation_aucun:>})]
+						</a>
+						<//B_comptage_organisations_tous>
+					</td>
+					<td class="contact">
+						<BOUCLE_comptage_contacts_tous(CONTACTS) />
+						<a href="#URL_ECRIRE{contacts}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:contact_un, contacts:contacts_nb}sinon{<:contacts:contact_aucun:>})]
+						</a>
+						<//B_comptage_contacts_tous>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	
+	[(#AUTORISER{creer,organisation})
+		[(#URL_ECRIRE{annuaire_edit,new=oui}
+			|icone_verticale{<:contacts:annuaire_creer:>,annuaire,new,left})]
+	]
+</BOUCLE_test_annuaires>
+	<div class="liste-objets">
+		<table class="spip liste">
+			<caption><:contacts:resume_annuaire:></caption>
+			<thead>
+				<tr>
+					<th class="organisation"><:contacts:organisations:></th>
+					<th class="contact"><:contacts:contacts:></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="organisation">
+						<BOUCLE_comptage_organisations(ORGANISATIONS) />
+						<a href="#URL_ECRIRE{organisations}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:organisation_un, contacts:organisations_nb}|sinon{<:contacts:organisation_aucun:>})]
+						</a>
+						<//B_comptage_organisations>
+						[(#AUTORISER{creer,organisation})
+							[(#URL_ECRIRE{organisation_edit,new=oui}
+								|icone_verticale{<:contacts:organisation_creer:>,organisation,new,right})]
+						]
+					</td>
+					<td class="contact">
+						<BOUCLE_comptage_contacts(CONTACTS) />
+						<a href="#URL_ECRIRE{contacts}">
+							[(#TOTAL_BOUCLE|singulier_ou_pluriel{contacts:contact_un, contacts:contacts_nb}sinon{<:contacts:contact_aucun:>})]
+						</a>
+						<//B_comptage_contacts>
+						[(#AUTORISER{creer,contact})
+							[(#URL_ECRIRE{contact_edit,new=oui}
+								|icone_verticale{<:contacts:contact_creer:>,contact,new,right})]
+						]
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<//B_test_annuaires>

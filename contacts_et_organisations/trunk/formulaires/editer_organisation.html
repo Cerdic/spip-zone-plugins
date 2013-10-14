@@ -8,6 +8,13 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_organisation' value='#ENV{id_organisation}' />
 			<ul>
+				[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+				[(#SAISIE{annuaires, id_annuaire,
+					defaut=#ENV{id_annuaire},
+					label=<:contacts:annuaire:>,
+					option_intro=<:contacts:annuaire_aucun:>})]
+				]
+				
 				[(#SAISIE{input, nom,
 					label=<:contacts:label_nom:>})]
 					

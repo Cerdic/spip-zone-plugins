@@ -1,0 +1,10 @@
+<BOUCLE_annuaire(ANNUAIRES){id_annuaire}>
+[<div class="champ contenu_identifiant[ (#IDENTIFIANT*|strlen|?{'',vide})]">
+	<strong><:contacts:annuaire_champ_identifiant_label:> : </strong>
+	<span dir="#LANG_DIR" class="civilite">(#IDENTIFIANT)</span>
+</div>]
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<strong><:contacts:annuaire_champ_descriptif_label:> : </strong>
+	<span dir="#LANG_DIR" class="#EDIT{prenom} prenom">(#DESCRIPTIF)</span>
+</div>]
+</BOUCLE_annuaire>

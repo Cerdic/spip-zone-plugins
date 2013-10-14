@@ -30,6 +30,9 @@ include_spip('inc/editer');
 **/
 function formulaires_editer_organisation_charger_dist($id_organisation='new', $id_parent=0, $redirect='', $associer_objet=''){
 	$contexte = formulaires_editer_objet_charger('organisation', $id_organisation, $id_parent, 0, $redirect, '');
+	if (!intval($id_organisation) and $id_annuaire = _request('id_annuaire')){
+		$contexte['id_annuaire'] = $id_annuaire;
+	}
 	return $contexte;
 }
 

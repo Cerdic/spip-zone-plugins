@@ -1,5 +1,8 @@
 <BOUCLE_contact(CONTACTS){id_contact}{tous}>
-<:contacts:bouton_contacts_organisations:></a>
-&gt; <a href="[(#URL_ECRIRE{contacts})]"><:contacts:contacts:></a>
-&gt; <strong>#PRENOM #NOM</strong>
+<a href="#URL_ECRIRE{repertoire}"><:contacts:bouton_contacts_organisations:></a><span class="sep divider">
+&gt; </span><a href="[(#URL_ECRIRE{contacts})]"><:contacts:contacts:></a><span class="sep divider">
+[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+&gt; </span><a href="#URL_ECRIRE{contacts,id_annuaire=#ID_ANNUAIRE}">[(#ID_ANNUAIRE|?{#INFO_TITRE{annuaire,#ID_ANNUAIRE}, <:contacts:annuaire_aucun:>})]</a><span class="sep divider">
+]
+&gt; </span><strong>#PRENOM #NOM</strong>
 </BOUCLE_contact>

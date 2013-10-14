@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_contact,nouveau}">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_annuaire' value='#ENV{id_annuaire}' />
+			<ul>
+			[(#SAISIE{input, titre,
+				obligatoire=oui, label=<:contacts:annuaire_champ_titre_label:>})]
+				
+			[(#SAISIE{input, identifiant,
+				obligatoire=oui, label=<:contacts:annuaire_champ_identifiant_label:>, explication=<:contacts:annuaire_champ_identifiant_explication:>})]
+				
+			[(#SAISIE{textarea, descriptif,
+				rows=5, inserer_barre=edition, label=<:contacts:annuaire_champ_descriptif_label:>})]
+				
+			</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class="boutons">
+				<input type="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
+			</p>
+			
+		</div></form>
+	]
+</div>

@@ -23,6 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function contacts_declarer_tables_interfaces($interface){
 	
+	$interface['table_des_tables']['annuaires'] = 'annuaires';
 	$interface['table_des_tables']['organisations'] = 'organisations';
 	$interface['table_des_tables']['organisations_liens'] = 'organisations_liens';
 	$interface['table_des_tables']['contacts'] = 'contacts';
@@ -41,7 +42,11 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['CIVILITE'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['FONCTION'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['ACTIVITE'][] = _TRAITEMENT_TYPO;
-
+	
+	// Chercher plus facilement dans les annuaires avec {annuaire=truc}
+	$interface['exceptions_des_tables']['organisations']['annuaire'] = array('spip_annuaires', 'identifiant');
+	$interface['exceptions_des_tables']['contacts']['annuaire'] = array('spip_annuaires', 'identifiant');
+	
 	return $interface;
 }
 
@@ -57,6 +62,49 @@ function contacts_declarer_tables_interfaces($interface){
  *     Description complétée des tables
  */
 function contacts_declarer_tables_objets_sql($tables){
+	//-- Table annuaires ----------------------------------------
+	$tables['spip_annuaires'] = array(
+		// Caractéristiques
+		'principale' => 'oui',
+		'page'=>'annuaire',
+		// Les champs et leurs particularités (clés etc)
+		'field'=> array(
+			'id_annuaire' 		=> "bigint(21) NOT NULL auto_increment",
+			'identifiant'		=> 'varchar(255) not null default ""',
+			'titre' 			=> "text DEFAULT '' NOT NULL",
+			'descriptif'		=> "TEXT DEFAULT '' NOT NULL",
+			'maj'				=> "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"		=> "id_annuaire",
+			'KEY identifiant'	=> 'identifiant',
+		),
+		'join' => array(
+			"id_annuaire" 	=> "id_annuaire",
+		),
+		'titre' => 'titre, "" AS lang',
+		'champs_editables' => array('identifiant', 'titre', 'descriptif'),
+		'champs_versionnes' => array('identifiant', 'titre', 'descriptif'),
+		'rechercher_champs' => array(
+			'identifiant' => 8, 'titre' => 8, 'descriptif' => 4,
+		),
+		'tables_jointures' => array(
+			'contacts',
+			'organisations',
+		),
+		// Chaînes de langue explicite
+		'texte_objets' => 'contacts:annuaires',
+		'texte_objet' => 'contacts:annuaire',
+		'texte_modifier' => 'contacts:annuaire_editer',
+		'texte_creer' => 'contacts:annuaire_creer',
+		'texte_creer_associer' => 'contacts:annuaire_creer_associer',
+		'texte_ajouter' => 'contacts:annuaire_ajouter',
+		'texte_logo_objet' => 'contacts:annuaire_logo',
+		'info_aucun_objet'=> 'contacts:annuaire_aucun',
+		'info_1_objet' => 'contacts:annuaire_un',
+		'info_nb_objets' => 'contacts:annuaires_nb',
+	);
+	
 	//-- Table organisations ----------------------------------------
 	$tables['spip_organisations'] = array(
 		'page'=>'organisation',
@@ -70,16 +118,17 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_logo_objet' => 'contacts:organisation_logo',
 		'info_aucun_objet'=> 'contacts:organisation_aucun',
 		'info_1_objet' => 'contacts:organisation_un',
-		'info_nb_objets' => 'contacts:organisation_nb',
+		'info_nb_objets' => 'contacts:organisations_nb',
 		'titre' => 'nom AS titre, "" AS lang',
 		'date' => 'date_creation',
 		'principale' => 'oui',
 		'champs_editables' => array(
-			'id_parent', 'id_auteur',
+			'id_parent', 'id_auteur', 'id_annuaire',
 			'nom', 'statut_juridique', 'identification', 'activite',
 			'date_creation', 'descriptif'),
 		'field'=> array(
 			"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
+			'id_annuaire'		=> 'bigint(21) NOT NULL default 0',
 			"id_parent"			=> "bigint(21) NOT NULL default 0",
 			"id_auteur"   		=> "bigint(21) NOT NULL default 0",
 			"nom" 				=> "tinytext DEFAULT '' NOT NULL",
@@ -93,13 +142,15 @@ function contacts_declarer_tables_objets_sql($tables){
 		'key' => array(
 			"PRIMARY KEY"		=> "id_organisation",
 			"KEY id_auteur"		=> "id_auteur",
+			'KEY id_annuaire'	=> 'id_annuaire',
 		),
 		'join' => array(
 			"id_organisation" 	=> "id_organisation",
-			"id_auteur" 	=> "id_auteur"
+			"id_auteur" 		=> "id_auteur",
+			'id_annuaire'		=> 'id_annuaire',
 		),
 		'tables_jointures' => array(
-			'auteurs',
+			'auteurs', 'annuaires',
 			'organisations_contacts',
 			'organisations_liens',
 		),
@@ -111,7 +162,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'auteur' => array('nom' => 2, 'bio' => 1)
 		),*/
 		'champs_versionnes' => array(
-			'id_parent', 'id_auteur',
+			'id_parent', 'id_auteur', 'id_annuaire',
 			 'nom', 'descriptif', 'identification', 'statut_juridique',
 			 'activite', 'date_creation'),
 	);
@@ -130,15 +181,16 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_logo_objet' => 'contacts:contact_logo',
 		'info_aucun_objet'=> 'contacts:contact_aucun',
 		'info_1_objet' => 'contacts:contact_un',
-		'info_nb_objets' => 'contacts:contact_nb',
+		'info_nb_objets' => 'contacts:contacts_nb',
 		'titre' => 'nom AS titre, "" AS lang',
 		'date' => 'date_naissance',
 		'principale' => 'oui',
 		'champs_editables' => array(
-			'id_auteur', 'civilite', 'nom', 'prenom', 'fonction', 
+			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction', 
 			'date_naissance', 'descriptif'),
 		'field'=> array(
 			"id_contact"	=> "bigint(21) NOT NULL auto_increment",
+			'id_annuaire'		=> 'bigint(21) NOT NULL default 0',
 			"id_auteur"   	=> "bigint(21) NOT NULL default 0",
 			"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 			"nom" 			=> "tinytext DEFAULT '' NOT NULL",
@@ -151,13 +203,15 @@ function contacts_declarer_tables_objets_sql($tables){
 		'key' => array(
 			"PRIMARY KEY"		=> "id_contact",
 			"KEY id_auteur"		=> "id_auteur",
+			'KEY id_annuaire'	=> 'id_annuaire',
 		),
 		'join' => array(
 			"id_contact" 	=> "id_contact",
-			"id_auteur" 	=> "id_auteur"
+			"id_auteur" 	=> "id_auteur",
+			'id_annuaire'	=> 'id_annuaire',
 		),
 		'tables_jointures' => array(
-			'auteurs',
+			'auteurs', 'annuaires',
 			'organisations_contacts',
 			'contacts_liens',
 		),
@@ -169,7 +223,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'auteur' => array('nom' => 2, 'bio' => 1)
 		),*/
 		'champs_versionnes' => array(
-			'id_auteur', 'civilite', 'nom', 'prenom', 'fonction', 
+			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction', 
 			'date_naissance', 'descriptif'),
 	);
 

@@ -6,6 +6,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'annuaire' => 'Annuaire',
+	'annuaire_ajouter' => 'Ajouter un annuaire',
+	'annuaire_aucun' => 'Aucun annuaire',
+	'annuaire_champ_descriptif_label' => 'Descriptif',
+	'annuaire_champ_identifiant_explication' => 'Un identifiant informatique unique, pour aider à filtrer vos contenus, par exemple avec {annuaire=associations} pour l’identifiant "associations".',
+	'annuaire_champ_identifiant_label' => 'Identifiant',
+	'annuaire_champ_titre_label' => 'Titre',
+	'annuaire_creer' => 'Créer un nouvel annuaire',
+	'annuaire_creer_associer' => 'Créer et associer un nouvel annuaire',
+	'annuaire_editer' => 'Modifier cet annuaire',
+	'annuaire_logo' => 'Logo de cet annuaire',
+	'annuaire_un' => 'Un annuaire',
+	'annuaire_supprimer' => 'Supprimer cet annuaire',
+	'annuaires' => 'Annuaires',
+	'annuaires_nb' => '@nb@ annuaires',
+	'annuaires_tout' => 'Tous les annuaires',
 	'aucun_contact' => 'Il n’y a aucun contact !',
 	'aucune_organisation' => 'Il n’y a aucune organisation !',
 	'auteur_associe_est_a_la_poubelle' => 'L’auteur associé est à la poubelle ! Cet auteur sera effacé dans quelques jours.',
@@ -41,6 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
 		afin d’éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
 		une suppression est définitive et les auteurs passent à la poubelle même s’ils ont écrit des articles…',
+	'cfg_utiliser_annuaires_explication' => 'Activer la possibilité de classer vos contacts et organisations dans plusieurs annuaires différents.',
+	'cfg_utiliser_annuaires_label' => 'Utiliser plusieurs annuaires',
 	'cfg_utiliser_organisations_arborescentes_explication' => 'Il est possible de définir qu’une organisation est enfant d’une autre. Lorsque cette option est activée, cela ajoute un champ dans l’édition d’une organisation pour préciser ce lien de parenté.',
 	'cfg_utiliser_organisations_arborescentes_label' => 'Utiliser une arborescence d’organisations',
 	'changer' => 'Changer',
@@ -62,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_aucun' => 'Aucun contact',
 	'contact_creer' => 'Créer un contact',
 	'contact_creer_associer' => 'Créer et associer un contact',
+	'contact_creer_dans_cet_annuaire' => 'Créer un contact dans cet annuaire',
 	'contact_editer' => 'Éditer ce contact',
 	'contact_logo' => 'Logo de ce contact',
 	'contact_nouveau_titre' => 'Nouveau contact',
@@ -72,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'Voir',
 	'contacts' => 'Contacts',
 	'contacts_nb' => '@nb@ contacts',
+	'contacts_tout' => 'Tous les contacts',
 	'creer_auteur_contact' => 'Créer un nouvel auteur et le lier à ce contact',
 	'creer_auteur_organisation' => 'Créer un nouvel auteur et le lier à cette organisation',
 
@@ -83,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delier_organisation' => 'Désassocier',
 
 	// E
+	'erreur_annuaire_identifiant_existant' => 'Cet identifiant est déjà utilisé par l’un de vos annuaires.',
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
 	'est_une_organisation' => 'Cet auteur est défini comme étant une organisation.',
 	'explication_activite' => 'Activité de l’organisation : humanitaire, formation, édition...',
@@ -159,6 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_creer' => 'Créer une organisation',
 	'organisation_creer_associer' => 'Créer et associer une organisation',
 	'organisation_creer_fille' => 'Créer une organisation fille',
+	'organisation_creer_dans_cet_annuaire' => 'Créer une organisation dans cet annuaire',
 	'organisation_editer' => 'Éditer cette organisation',
 	'organisation_logo' => 'Logo de l’organisation',
 	'organisation_nouveau_titre' => 'Nouvelle organisation',
@@ -169,6 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_voir' => 'Voir',
 	'organisations' => 'Organisations',
 	'organisations_nb' => '@nb@ organisations',
+	'organisations_tout' => 'Toutes les organisations',
 
 	// P
 	'prenom' => 'Prénom',
@@ -176,6 +199,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recherche_de' => 'Recherche de « @recherche@ »',
 	'rechercher' => 'Rechercher',
+	'resume_annuaire' => 'Résumé de votre annuaire',
+	'resume_annuaires' => 'Résumé de vos annuaires',
 
 	// S
 	'statut_juridique' => 'Statut juridique',

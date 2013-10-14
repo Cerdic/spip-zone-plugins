@@ -165,10 +165,15 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_contacts_liens ADD PRIMARY KEY ( id_contact, id_objet, objet, type_liaison)'),
 	);
 	
-	// Pour ceux qui ont déjà le plugin installé, on 
+	// Pour ceux qui ont déjà le plugin installé, on active déjà la gestion de l'arborescence pour garder la compat
 	$maj['1.8.0'] = array(
 		array('include_spip', 'inc/config'),
 		array('ecrire_config', 'contacts_et_organisations/utiliser_organisations_arborescentes', 'on'),
+	);
+	
+	// Ajout de la gestion d'annuaires différents
+	$maj['1.9.0'] = array(
+		array('maj_tables', array('spip_annuaires', 'spip_organisations', 'spip_contacts')),
 	);
 
 	include_spip('base/upgrade');

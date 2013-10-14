@@ -12,6 +12,13 @@
 				[<input type='hidden' name='id_parent' value='(#ENV{id_parent})' />]
 			]
 			<ul>
+			[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+			[(#SAISIE{annuaires, id_annuaire,
+				defaut=#ENV{id_annuaire},
+				label=<:contacts:annuaire:>,
+				option_intro=<:contacts:annuaire_aucun:>})]
+			]
+			
 			[(#SAISIE{input, civilite,
 				label=<:contacts:label_civilite:>})]
 				

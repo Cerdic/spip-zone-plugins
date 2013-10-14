@@ -1,10 +1,13 @@
 <BOUCLE_orga(ORGANISATIONS){id_organisation}{tous}>
-<:contacts:bouton_contacts_organisations:></a>
-&gt; <a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a>
+<a href="#URL_ECRIRE{repertoire}"><:contacts:bouton_contacts_organisations:></a><span class="sep divider">
+&gt; </span><a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a><span class="sep divider">
 	<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
 		<BOUCLE_orga_chemin_recursif(BOUCLE_orga_chemin) />
 		[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
-&gt; <a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
+		&gt; </span><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a><span class="sep divider">
 	</BOUCLE_orga_chemin>
-&gt; <strong>#NOM</strong>
+[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
+&gt; </span><a href="#URL_ECRIRE{organisations,id_annuaire=#ID_ANNUAIRE}">[(#ID_ANNUAIRE|?{#INFO_TITRE{annuaire,#ID_ANNUAIRE}, <:contacts:annuaire_aucun:>})]</a><span class="sep divider">
+]
+&gt; </span><strong>#NOM</strong>
 </BOUCLE_orga>

@@ -60,4 +60,56 @@ function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt){
 		);
 }
 
+/**
+ * Autorisation de créer un annuaire
+ *
+ * Ceux qui peuvent configurer le site
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_annuaire_creer_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer', $type, $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier un annuaire
+ *
+ * Ceux qui peuvent configurer le site
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_annuaire_modifier_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer', $type, $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de supprimer un annuaire
+ *
+ * Ceux qui peuvent configurer le site ET qu'il n'y ait rien dans l'annuaire
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_annuaire_supprimer_dist($faire, $type, $id, $qui, $opt){
+	return (
+		autoriser('configurer', $type, $id, $qui, $opt)
+		and !sql_count(sql_select('id_organisation', 'spip_organisations', 'id_annuaire = '.intval($id)))
+		and !sql_count(sql_select('id_contact', 'spip_contacts', 'id_annuaire = '.intval($id)))
+	);
+}
+
 ?>
