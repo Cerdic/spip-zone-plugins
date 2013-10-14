@@ -115,8 +115,6 @@ function contacts_afficher_contenu_objet($flux) {
  * 
  * - Affichage du formulaire de choix Contact/Organisation
  *   dans la colonne de vue d'un auteur
- * - Affichage du formulaire de recherche et de sélection d'Organisations
- *   dans la colonne de vue d'une rubrique
  *
  * @pipeline affiche_gauche
  * 
@@ -126,7 +124,6 @@ function contacts_afficher_contenu_objet($flux) {
  *     Données du pipeline
 **/
 function contacts_affiche_gauche($flux){
-
 	if ($flux['args']['exec'] == 'auteur'){
 		if (lire_config('contacts_et_organisations/associer_aux_auteurs')) {
 			$flux['data'] .= recuperer_fond('prive/squelettes/extra/selecteur_contacts_organisations', array(
