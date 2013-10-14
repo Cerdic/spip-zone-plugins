@@ -3,7 +3,8 @@
 	nom,1,
 	id_auteur,1
 }})
-]
+]<B_liste_orga>
+#ANCRE_PAGINATION
 
 <BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
 <div class="onglets_simple clearfix">
@@ -15,14 +16,14 @@
 		</li>
 		<BOUCLE_filtre_annuaires(ANNUAIRES){par titre}>
 		<li>
-			<BOUCLE_comptage_organisations_annuaire(ORGANISATIONS){id_annuaire}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_annuaire>
+			<BOUCLE_comptage_organisations_annuaire(ORGANISATIONS){id_annuaire}{id_parent ?= #ENV{id_parent}}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_annuaire>
 			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,#ID_ANNUAIRE})]">})]
 			#TITRE (#GET{nb_organisations})
 			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{</strong>,</a>})]
 		</li>
 		</BOUCLE_filtre_annuaires>
 		<li>
-			<BOUCLE_comptage_organisations_aucun(ORGANISATIONS){id_annuaire=0}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_aucun>
+			<BOUCLE_comptage_organisations_aucun(ORGANISATIONS){id_annuaire=0}{id_parent ?= #ENV{id_parent}}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_aucun>
 			[(#ENV{id_annuaire}|=={0}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,0})]">})]
 			<:contacts:annuaire_aucun:> (#GET{nb_organisations})
 			[(#ENV{id_annuaire}|=={0}|?{</strong>, </a>})]
@@ -31,8 +32,6 @@
 </div>
 </BOUCLE_test_annuaire>
 
-<B_liste_orga>
-#ANCRE_PAGINATION
 <div class="liste-objets organisations">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:contacts:info_toutes_organisations:>})</strong></caption>]

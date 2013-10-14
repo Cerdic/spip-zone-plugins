@@ -3,7 +3,8 @@
 	nom,1,
 	id_contact,1
 }})
-]
+]<B_liste_contacts>
+#ANCRE_PAGINATION
 
 <BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
 <div class="onglets_simple clearfix">
@@ -31,8 +32,6 @@
 </div>
 </BOUCLE_test_annuaire>
 
-<B_liste_contacts>
-#ANCRE_PAGINATION
 <div class="liste-objets contacts">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
