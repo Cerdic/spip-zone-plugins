@@ -41,7 +41,7 @@
 	#FORMULAIRE_EDITER_LIENS_SIMPLES{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
 </div>
 
-[(#CONFIG{contacts_et_organisations/lier_organisations_rubriques}|oui)
+[(#VAL{spip_rubriques}|in_array{#CONFIG{contacts_et_organisations/lier_organisations_objets}}|oui)
 <div class="ajax">
 	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,rubriques,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
 </div>
