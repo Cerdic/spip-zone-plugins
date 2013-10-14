@@ -102,8 +102,8 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 			$erreurs['id_parent'] = _T('agenda:erreur_article_interdit');
 	}
 
-	if (!isset($id_mot))
-		$erreurs['id_mot'] = _T('seminaire:mot_obligatoire');
+	//if (!isset($id_mot))
+	//	$erreurs['id_mot'] = _T('seminaire:mot_obligatoire');
 	#if (!count($erreurs))
 	#	$erreurs['message_erreur'] = 'ok?';
 	return $erreurs;
@@ -132,6 +132,7 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 	if (!intval($id_evenement))
 		evenement_modifier($res['id_evenement'],array('date_creation'=>date('Y-m-d H:i:s')));
 
+
 	$id_evenement = $res['id_evenement'];
 	if ($res['redirect']) {
 		if (strpos($res['redirect'],'article')!==false){
@@ -139,6 +140,10 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 			$res['redirect'] = parametre_url($res['redirect'],'id_article',$id_article);
 		}
 	}
+	//Saisir un mot clé
+	$id_mot=_request('id_mot');
+	$id=sql_insertq('spip_mots_liens',array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
+	$res['id_mot']=$id_mot;
 	return $res;
 }
 
