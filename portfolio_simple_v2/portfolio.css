@@ -1,0 +1,497 @@
+/* @override 
+	http://portfolio.h2v.fr/squelettes/portfolio.css
+*/
+
+/* @group Toutes pages */
+
+html {
+	background-color: #333;
+}
+
+body {
+	background-color: #333 !important;
+	margin: auto !important;
+	color: silver;
+}
+
+a, a:hover {
+	text-decoration: underline;
+	color: white !important;
+}
+
+
+#entete {
+	border-bottom: 1px solid white;
+}
+
+#entete #menu {
+	background-color: #333;
+	padding-left: 15px;
+	float: right;
+	list-style-type: none;
+}
+
+.menu-liste
+ {
+	list-style-type: none;
+	padding: 0;
+	font-style: italic;
+	font-size: 0.9em;
+}
+
+#entete #menu a, #entete #menu a:visited {
+	text-decoration: none;
+	color: silver;
+}
+
+.menu-entree .menu-liste {
+	list-style-type: circle;
+	list-style-position: inside;
+}
+
+#entete #menu .on.active {
+	color: red !important;
+	font-weight: bold;
+	font-style: italic;
+	font-size: larger;
+}
+
+#entete #menu a:hover {
+	text-decoration: underline;
+	color: silver;
+}
+
+
+.chapo {
+	color: white;
+	display: none;
+}
+
+#conteneur {
+	width: 100%;
+	float: none !important;
+}
+
+#contenu{
+	display: block;
+	position: relative;
+}
+
+#nom_site_spip, #nom_site_spip a, #entete .accueil {
+	text-decoration: none !important;
+	font-family: Lucida, "Lucida Grande", Verdana, sans-serif !important;
+}
+
+#page {
+	background-color: #333;
+	width: 750px;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	margin-left: -375px;
+	margin-top: -175px;
+	height: 700px;
+}
+
+ .bloc_photo {
+	width: 360px;
+	display: block;
+	float: left;
+}
+
+.formulaire_notation {
+	margin-left: 36px;
+	margin-bottom: 16px;
+	z-index: 10;
+	padding-top: 1px;
+}
+
+.formulaire_guestbook {
+	color: white !important;
+	background-color: silver;
+	width: 90% !important;
+}
+
+.formulaire_gestbook input {
+	width: 70px !important;
+	margin-left: 100px !important;
+}
+
+
+
+/* @end */
+
+/* @group sommaire */
+
+.page_sommaire {
+	background-color: transparent;
+}
+
+#contenu .vignettes_portfolio {
+	text-align: left;
+}
+
+.vignettes_portfolio {
+	color: gray;
+	position: relative;
+	display: inline-block;
+	float: left;
+}
+
+
+
+.vignettes_portfolio a.portfolio_titre {
+	color: silver !important;
+	text-decoration: none;
+	position: absolute;
+	top: 121px;
+	left: 33px;
+	background-color: rgba(0,0,0,0.5);
+	/background-color: #7f7f7f;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	z-index: 10;
+	width: 286px;
+}
+
+.portfolio .modifier{
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+
+
+/* @end */
+
+/* @group Page : article */
+
+ul li, a img .spip_logos {
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none !important;
+	list-style-type: none;
+}
+#documents_portfolio .titre{
+	font-size: 110%;
+	text-align: left;
+	border-bottom: 1px solid silver;
+	clear: both;
+}
+#documents_portfolio a:focus .spip_logos,
+#documents_portfolio a:hover .spip_logos { border-color: gray; }
+
+#extra {
+	display: none;
+}
+
+h1.entry-title {
+	margin-top: 31px;
+	color: white;
+}
+
+#documents_portfolio {
+	margin-top: 15px;
+}
+
+#documents_portfolio .spip_logos {
+	border: thin solid white;
+	margin-right: 33px;
+	margin-left: 33px;
+	margin-bottom: 18px;
+}
+
+
+
+/* @end */
+
+/* @group Pied de page */
+
+#pied {
+	border-top-color: gray;
+	display: block;
+}
+
+
+
+/* @end */
+
+/* @group Types de polices */
+
+body, h1 {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+}
+
+
+
+/* @end */
+
+/* @group Couleur des polices */
+
+a.url, h2 {
+	color: white;
+}
+
+
+
+/* @end */
+
+/* @group annulation dist spip */
+
+.spip-admin-float a {
+	color: maroon !important;
+}
+
+#hierarchie, .cartouche {
+	display: none;
+}
+
+#formulaire_recherche {
+	display: none;
+}
+
+#formulaire_menu_lang {
+	display: none !important;
+}
+
+.menu.rubriques {
+	background-color: transparent !important;
+	display: none;
+}
+
+.spip_surligne {
+	background: transparent !important;
+}
+
+
+
+/* @end */
+
+/* @group Hack Thickbox */
+
+#TB_window, #TB_window a  {
+	color: gray;
+	text-decoration: none;
+	font: normal normal normal 11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+
+
+/* @end */
+
+/* @group le blog */
+
+.pages {
+	clear: both;
+	text-align: center;
+	width: 750px;
+	margin-bottom: 14px;
+}
+
+.more_info_date {
+	color: maroon;
+	text-decoration: none;
+	position: absolute;
+	/background-color: #7f7f7f;
+	z-index: 10;
+	top: 0;
+	left: 33px;
+	background-color: #eaeaea;
+	padding: 2px 4px;
+	text-shadow: gray 1px 1px 0;
+	opacity: 0.75;
+}
+
+.more_info {
+	float: none;
+	clear: none;
+	text-align: right;
+	border-top: 1px solid gray;
+	font-size: smaller;
+	padding-top: 15px;
+	display: none;
+}
+
+a.commentaire {
+	position: absolute;
+	top: 122px;
+	right: 40px;
+	z-index: 12;
+	text-decoration: none;
+	color: silver !important;
+}
+
+.infos_article {
+	float: none;
+	clear: none;
+	padding-top: 5px;
+	text-align: left;
+	font-size: smaller;
+}
+
+#formulaire_forum, .formulaire_ecrire_auteur {
+	width: 75%;
+	margin: 39px auto auto;
+	border: thin solid silver;
+	padding: 19px;
+	color: white !important;
+	background-color: silver;
+}
+
+.forum-chapo {
+	background-color: #333 !important;
+}
+
+.forum-texte {
+	color: silver !important;
+}
+
+
+
+/* @group barre latérale */
+
+#navigation {
+	width: inherit;
+	font-size: smaller;
+	float: none !important;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#navigation .menu-titre {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+#navigation ul {
+	padding-left: 5px;
+	border-left: 1px solid silver;
+	margin-left: 5px;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 2px;
+}
+
+#navigation .forums {
+	width: 25%;
+	vertical-align: top;
+	float: left;
+	padding-left: 50px;
+}
+
+.forums img {
+	vertical-align: sub;
+}
+
+hr {
+	border-color: #b3b3b3;
+	border-bottom-width: 0.2px;
+	border-style: solid;
+	text-align: center;
+	width: 50%;
+}
+
+
+
+/* @end */
+
+
+
+/* @end */
+
+/* @override 
+	http://portfolio.h2v.fr/squelettes/view.css */
+
+.vignettes_portfolio {
+	width: 100% !important;
+}
+.vignettes_portfolio h1{
+	display: block;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	color: silver;
+	margin-top: 40px;
+}
+
+.vignettes_portfolio .portfolio img{
+	display: block;
+	margin: 5px auto 10px;
+	max-width: 90%;
+	width: auto;
+	max-height: 600px;
+	height: auto;
+	border: 1px solid black;
+	padding: 13px;
+	box-shadow: 0 0 2px #f9f9f9;
+	background-color: #e9e8e8;
+}
+
+.precedent, .suivant{
+	position: absolute;
+	top: 40px;
+	opacity: 0.23;
+}
+.precedent:hover, .suivant:hover{
+	opacity: 0.53;
+	box-shadow: 0 0 5px #fbfbfa;
+	background-color: white;
+}
+
+.precedent{
+	margin-left: 5px;
+}
+.suivant{
+	right: 0;
+	margin-right: 5px;
+}
+
+.vignettes_portfolio .suivant button, .vignettes_portfolio .precedent button {
+	color: maroon;
+	font: bold 20px "Courier New", Courier, mono;
+}
+.vignettes_portfolio .description{
+	display: block;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+	border-top: 1px solid gray;
+}
+.vignettes_portfolio .complements{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	float: right;
+}
+.socialtags{
+	text-align: right;
+	top: 10px;
+	position: relative;
+}
+.socialtags:before{
+	content: "partager :";
+	float: left;
+}
+.commentaires{
+	clear: both;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	margin-bottom: 20px;
+	padding-top: 10px;
+}
+.comment-meta, .comment-meta a{
+	text-decoration: none;
+}
+
+#formulaire_contact{
+	background-color: silver;
+	padding: 20px;
+	box-shadow: 0 0 5px #f9f8f8;
+	border: 1px solid white;
+}
+#formulaire_contact .previsu{
+	color: black;
+}

@@ -1,0 +1,83 @@
+/* @override 
+	http://portfolio.h2v.fr/squelettes/habillage.css */
+
+	
+.vignettes_portfolio {
+	width: 100% !important;
+}
+.vignettes_portfolio h1{
+	display: block;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	color: silver;
+	margin-top: 40px;
+}
+
+.vignettes_portfolio .portfolio img{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 90%;
+	width: auto;
+	max-height: 500px;
+	height: auto;
+	border: 2px solid black;
+	padding: 3px;
+	box-shadow: 0 0 5px #f9f9f9;
+	background-color: #dad9d9;
+}
+
+.precedent, .suivant{
+	position: absolute;
+	top: 40px;
+	-webkit-border-radius: 80px;
+	-moz-border-radius: 80px;
+	border-radius: 80px;
+	opacity: 0.23;
+	background-color: #a0a09e;
+}
+.precedent:hover, .suivant:hover{
+	opacity: 0.53;
+	box-shadow: 0 0 5px #fbfbfa;
+	background-color: white;
+}
+
+.precedent{
+	margin-left: 5px;
+}
+.suivant{
+	right: 0;
+	margin-right: 5px;
+}
+
+.vignettes_portfolio .suivant button, .vignettes_portfolio .precedent button {
+	border: 1px solid white;
+	color: maroon;
+	font: bold 19px "Courier New", Courier, mono;
+	text-shadow: 0 0 3px white;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-border-radius: 80px;
+	-moz-border-radius: 80px;
+	border-radius: 80px;
+	padding: 4px;
+	background-color: transparent;
+}
+.vignettes_portfolio .description{
+	display: block;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+	border-top: 1px solid gray;
+}
+.vignettes_portfolio .complements{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	float: right;
+}
+.commentaires{
+	clear: both;
+}

@@ -1,0 +1,76 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{id_rubrique ?}>
+
+	[(#REM) Contenu principal : derniers articles publies ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		
+		<div class="cartouche invisible">
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+		</div>
+		
+		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+		
+		<div class="vignettes_portfolio">
+
+
+
+[(#REM) Portfolio : album d'images ]
+<div id="documents_portfolio">
+	<h2 class="invisible"><:info_portfolio:></h2>
+	<h3>derniers ajouts
+	</h3>
+		<BOUCLE_rubriques(RUBRIQUES){par date} {tout}>
+			<div class="titre">#TITRE</div>
+		<B_documents_portfolio>
+			<BOUCLE_documents_portfolio(DOCUMENTS){tout}{id_rubrique}{par num titre, date}{inverse}{0,2}>
+			<div class="bloc_photo">
+				<a href="#URL_RUBRIQUE?id_document=#ID_DOCUMENT">
+				[(#FICHIER
+					|image_masque{masque/paysage_l.png}
+					|inserer_attribut{class,spip_logos}
+					|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
+			<br>
+			</div>
+			</BOUCLE_documents_portfolio>
+		</B_documents_portfolio>
+		</BOUCLE_rubriques>
+</div>
+
+		</div>
+
+
+			
+	
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	
+	
+	[(#REM) Menu de navigation laterale ]
+	<div id="extra">
+		
+		[(#REM) Inscription au site ]
+		#FORMULAIRE_INSCRIPTION
+		
+	</div><!--#extra-->
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>

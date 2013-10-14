@@ -1,0 +1,25 @@
+<paquet
+prefix="portfolio_simple_v2"
+categorie="multimedia"
+version="0.1.0"
+etat="test"
+compatibilite="[3.0.0;3.0.*]"
+logo="portfolio_simple.png"
+documentation="http://contrib.spip.net/spip.php?article4445"
+demonstration="http://portfolio.h2v.fr/"
+>
+<nom>Portfolio simple v2</nom>
+<!-- Gestion des objets Farfelus -->
+ 
+<auteur lien="http://ydikoi.net/">ydikoi</auteur>
+ 
+<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+<copyright>2013-</copyright>
+ 
+<traduire module="farfelu" reference="fr" gestionnaire="salvatore" />
+  
+<necessite nom="menus" />
+<necessite nom="suivant_precedent" />
+ 
+ 
+</paquet>
