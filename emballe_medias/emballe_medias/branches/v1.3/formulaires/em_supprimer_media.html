@@ -1,8 +1,17 @@
 #CACHE{0}
+
+[(#REM) Si l'option de suppression de l'article lié est activée, alors 
+  l'article lié risque d'être supprimé si on valide le formulaire (si le
+  document était le dernier lié à l'article). Dans ce cas, on ajoute un 
+  message de confirmation]
+[(#CONFIG{emballe_medias/fichiers/statut_article_apres_dernier_document,prepa}|=={poubelle}|oui)
+	#SET{message_confirmation, oui}
+]
+
 <div class="formulaire_spip formulaire_supprimer_document formulaire_emballe_medias" id='formulaire_supprimer_document[_(#ENV{compteur})]'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#SELF' enctype='multipart/form-data'><div>
+	<form method='post' action='#SELF' enctype='multipart/form-data' [(#GET{message_confirmation}|oui) onsubmit="return confirm('<:diogene:message_confirm_poubelle:>')"]><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<BOUCLE_documents_en_cours(DOCUMENTS){id_document}{tous}>
 		<ul>
