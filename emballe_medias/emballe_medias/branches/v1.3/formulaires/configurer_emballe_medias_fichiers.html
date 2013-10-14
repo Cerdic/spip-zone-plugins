@@ -127,7 +127,15 @@
 					label=<:emballe_medias:label_remplir_texte_article:>,
 					explication=<:emballe_medias:explication_remplir_texte_article:>})]
 			]
-			
+
+			[(#SAISIE{selection,statut_article_apres_dernier_document,
+				label=<:emballe_medias:label_statut_article_apres_dernier_document:>,
+				explication=<:emballe_medias:explication_statut_article_apres_dernier_document:>,
+				defaut=prepa,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					prepa,<:emballe_medias:statut_prepa:>,
+					poubelle,<:emballe_medias:statut_poubelle:>}})] 
 		</ul>
 		<input type="hidden" name="_meta_casier" value="emballe_medias/fichiers" />
 		<p class="boutons">

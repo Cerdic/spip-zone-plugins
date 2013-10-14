@@ -78,7 +78,11 @@ function formulaires_em_supprimer_media_traiter_dist($id_document,$type='',$obje
 			$statut = sql_getfetsel("statut","$table","$id_table=$id_objet");
 			if(in_array($statut,array('prop','publie'))){
 				include_spip('action/editer_objet');
-				$c = array('statut' => 'prepa');
+				include_spip('inc/config');
+				if(lire_config('emballe_medias/fichiers/statut_article_apres_dernier_document','prepa') == 'poubelle')
+					$c = array('statut' => 'poubelle');
+				else
+					$c = array('statut' => 'prepa');
 				objet_instituer($objet,$id_objet, $c);
 			}
 		}
