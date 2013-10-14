@@ -625,10 +625,10 @@ function diogene_diogene_ajouter_saisies($flux){
 			else
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
 			if($flux['args']['contexte']['date_redac'])
-				list($flux['args']['contexte']['date_redac'],$flux['args']['contexte']['heure_redac']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
+				list($flux['args']['contexte']['date_redac_orig'],$flux['args']['contexte']['heure_redac_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
 		}elseif(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
-			list($flux['args']['contexte']['date_redac'],$flux['args']['contexte']['heure_redac']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
-			$dates_ajoutees = 'date_redac';
+			list($flux['args']['contexte']['date_redac_orig'],$flux['args']['contexte']['heure_redac_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
+			$dates_ajoutees = 'date_redac_orig';
 		}elseif(in_array('date',unserialize($flux['args']['champs_ajoutes']))){
 			if(!$flux['args']['contexte']['date'])
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',time()));
@@ -666,7 +666,7 @@ function diogene_diogene_ajouter_saisies($flux){
  */
 function diogene_diogene_verifier($flux){
 	$erreurs = &$flux['args']['erreurs'];
-	if(_request('date_orig') || _request('date_redac')){
+	if(_request('date_orig') || _request('date_redac_orig')){
 		/**
 		 * Ce fichier se trouve dans plugins-dist/organiseur/inc/date_gestion.php
 		 * Mériterait une réincorporation dans SPIP?
@@ -674,8 +674,8 @@ function diogene_diogene_verifier($flux){
 		include_spip('inc/date_gestion');
 		if(!$erreurs['date'] && ($date = _request('date_orig')))
 			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $erreurs);
-		if(!$erreurs['date_redac'] && ($date = _request('date_redac')))
-			$date_redac = verifier_corriger_date_saisie('redac', 'oui', $erreurs);
+		if(!$erreurs['date_redac'] && ($date = _request('date_redac_orig')))
+			$date_redac_orig = verifier_corriger_date_saisie('redac_orig', 'oui', $erreurs);
 	}
 	if(!$erreurs['forums'] && ($forums = _request('forums')) && !in_array($forums,array('pos','pri','abo','non')))
 		$erreurs['forums'] = _T('diogene:erreur_forums');
@@ -698,12 +698,12 @@ function diogene_diogene_verifier($flux){
 function diogene_diogene_traiter($flux){
 	$id_objet = $flux['args']['id_objet'];
 
-	if(_request('date_orig') || _request('date_redac')){
+	if(_request('date_orig') || _request('date_redac_orig')){
 		include_spip('inc/date_gestion');
 		if(_request('date_orig'))
 			$flux['data']['date'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('orig', 'oui', $erreurs));
-		if(_request('date_redac'))
-			$flux['data']['date_redac'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('redac','oui', $erreurs));
+		if(_request('date_redac_orig'))
+			$flux['data']['date_redac'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('redac_orig','oui', $erreurs));
 	}
 	if($forums = _request('forums')){
 		$flux['data']['accepter_forum'] = $forums;
