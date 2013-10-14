@@ -2,7 +2,11 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
-#ENV{id_mot} tata
+
+<BOUCLE_recup_id_mot(spip_mots_liens){id_objet=#ID_EVENEMENT}{objet=evenement}>
+	#SET{id_mot_recupere,#ID_MOT}
+</BOUCLE_recup_id_mot>
+
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -23,13 +27,15 @@
 	  	</li>
 
 	  	<li class='editer_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]'>
-	  		<label for="id_mot"><:seminaire:choix_mot:></label>
+	  		<label for="id_mot"><:seminaire:choix_mot:></label>[
+	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>
+	    	]
 	  		<p class="explication"><:seminaire:type_evenement:></p>
 	  		<select name="id_mot" id="id_mot">
 	  			<option></option>
 	  		<BOUCLE_groupe2(GROUPES_MOTS){titre=Type}>
 				<BOUCLE_mots2(MOTS){id_groupe}>
-				<option value="#ID_MOT" [(#ENV{id_mot}|=={#ID_MOT}|?{' selected="selected"',''})]>#TITRE</option>
+				<option value="#ID_MOT" [(#ENV{id_mot}|=={#GET{id_mot_recupere}}|?{' selected="selected"',''})]>#TITRE</option>
 				</BOUCLE_mots2>	
 	  		</BOUCLE_groupe2>	
 	  		</select>
