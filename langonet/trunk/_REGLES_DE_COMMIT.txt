@@ -76,7 +76,7 @@ occurrence d'utilisation d'un item de langue :
 	- préfixe  : occurrence
 	- exemples : $occurrence, $_occurrence, $occurrences, $occurences_regexp...
 	- note     : une occurrence est en général un tableau contenant divers éléments
-	             représentatifs (numéros de ligne te colonne, item, expression fournie par la regexp...)
+	             représentatifs (numéros de ligne, de colonne, item, expression fournie par la regexp...)
 
 
 En outre, d'autres règles génériques sont utilisées dans le code du plugin, à savoir :
@@ -103,12 +103,12 @@ arborescence de recherche des cas d'utilisation :
 3- Règles de nommage des fonctions
 ----------------------------------
 
-- le nom des fonctions doit contenir un verbe à l'intransitif pour expliquer le but
+- le nom des fonctions doit contenir un verbe à l'infinitif pour expliquer le but
 - seules les fonctions dont la visibilité est externe (API) sont préfixées par "langonet_"
   (par exemple celles de langonet_fonctions.php).
-  Cela ne concernent pas les fonctions de "personnalisation de SPIP" (pipeline, formulaire...)
+  Cela ne concerne pas les fonctions de "personnalisation de SPIP" (pipeline, formulaire...)
   qui suivent des règles propres.
-- les fonctions doivent renvoyer un résultat, a minima, true/false.
+- les fonctions doivent renvoyer un résultat ; a minima : true/false.
 
 
 3- Règles de nommage des constantes
@@ -117,4 +117,4 @@ arborescence de recherche des cas d'utilisation :
 - les constantes doivent être nommées avec le préfixe "_LANGONET_".
 - leur définition doit être prioritairement locale à un fichier afin d'éviter la création d'un
   fichier langonet_options.php.
-- la définition d'une constante doit être précédée d'un test : if (defined('nom de la constante') ...
+- la définition d'une constante doit être précédée d'un test : if (!defined('nom de la constante') define('nom de la constante', 'valeur'))
