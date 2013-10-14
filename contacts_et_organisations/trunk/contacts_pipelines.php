@@ -57,10 +57,10 @@ function contacts_affiche_hierarchie($flux)
  * @return array
  *     Données du pipeline
  */
-function contacts_afficher_contenu_objet($flux)
-{
+function contacts_afficher_contenu_objet($flux) {
+	include_spip('inc/config');
+	
 	if ($flux['args']['type'] == 'auteur') {
-
 		if (lire_config('contacts_et_organisations/associer_aux_auteurs') and
 			lire_config('contacts_et_organisations/afficher_infos_sur_auteurs')) {
 
@@ -80,19 +80,29 @@ function contacts_afficher_contenu_objet($flux)
 			}
 		}
 	}
-
-	if ($flux['args']['type'] == 'rubrique')
-	{
-		if (lire_config('contacts_et_organisations/lier_organisations_rubriques')) {
-			$id = $flux['args']['id_objet'];
-			$infos = recuperer_fond('prive/objets/editer/liens', array(
-				'table_source'=>'organisations',
-				'objet'=>'rubrique',
-				'id_objet'=>$id,
-				'editable'=>autoriser('associerorganisation', 'rubrique', $id) ? 'oui':'non'
-			));
-			$flux['data'] .= $infos;
-		}
+	
+	// Ajouter un bloc de liaison avec les organisations sur les objets configurés pour ça
+	if ($table = table_objet_sql($flux['args']['type']) and in_array($table, lire_config('contacts_et_organisations/lier_organisations_objets', array()))) {
+		$id = $flux['args']['id_objet'];
+		$infos = recuperer_fond('prive/objets/editer/liens', array(
+			'table_source'=>'organisations',
+			'objet'=>$flux['args']['type'],
+			'id_objet'=>$id,
+			'editable'=>autoriser('associerorganisation', $flux['args']['type'], $id) ? 'oui':'non'
+		));
+		$flux['data'] .= $infos;
+	}
+	
+	// Ajouter un bloc de liaison avec les contacts sur les objets configurés pour ça
+	if ($table = table_objet_sql($flux['args']['type']) and in_array($table, lire_config('contacts_et_organisations/lier_contacts_objets', array()))) {
+		$id = $flux['args']['id_objet'];
+		$infos = recuperer_fond('prive/objets/editer/liens', array(
+			'table_source'=>'contacts',
+			'objet'=>$flux['args']['type'],
+			'id_objet'=>$id,
+			'editable'=>autoriser('associercontact', $flux['args']['type'], $id) ? 'oui':'non'
+		));
+		$flux['data'] .= $infos;
 	}
 
 	return $flux;

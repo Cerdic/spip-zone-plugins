@@ -46,10 +46,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_associer_aux_auteurs_explication' => 'Permettre d’associer des contacts ou organisations
 		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
 		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
+	'cfg_lier_contacts_objets_explication' => 'Permettre d’associer les contacts aux contenus éditoriaux suivants. Cela affiche le sélecteur de contacts dans les pages d’administration de ces contenus.',
+	'cfg_lier_contacts_objets_label' => 'Associer les contacts',
+	'cfg_lier_organisations_objets_explication' => 'Permettre d’associer les organisations aux contenus éditoriaux suivants. Cela affiche le sélecteur d’organisations dans les pages d’administration de ces contenus.',
+	'cfg_lier_organisations_objets_label' => 'Associer les organisations',
 	'cfg_lier_organisations_rubriques' => 'Lier aux rubriques',
 	'cfg_lier_organisations_rubriques_explication' => 'Permettre de lier les organisations aux rubriques ?
 		Cela affiche le sélecteur d’organisations sur les rubriques ainsi que le sélecteur de rubriques sur les organisations.',
 	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs',
+	'cfg_relations_avec_objets' => 'Relation avec les contenus éditoriaux (autres que les auteurs)',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu’un contact
 		(ou une organisation) est supprimé, l’auteur associé à ce contact, s’il en existe un, voit son statut

@@ -175,6 +175,12 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	$maj['1.9.0'] = array(
 		array('maj_tables', array('spip_annuaires', 'spip_organisations', 'spip_contacts')),
 	);
+	
+	// Ajout de la possibilité de lier les fiches à n'importe quels objets, pas juste les rubriques
+	// Il faut donc migrer l'option lier_organisations_rubriques vers une autre plus générique
+	$maj['1.10.0'] = array(
+		array('contacts_maj_1_10_0'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -277,6 +283,26 @@ function contacts_migrer_liens_auteurs() {
 				sql_delete($table . '_liens', 'objet='.sql_quote('auteur'));
 			} 
 		}
+	}
+}
+
+/**
+ * Mise à jour de la base 1.10.0
+ * 
+ * Déplace l'option lier_organisations_rubriques vers lier_organisations_objets plus générique
+ *
+ * @return void
+ */
+function contacts_maj_1_10_0() {
+	include_spip('inc/config');
+	$lier_organisations_rubriques = lire_config('contacts_et_organisations/lier_organisations_rubriques');
+	
+	// On supprime l'ancienne option
+	effacer_config('contacts_et_organisations/lier_organisations_rubriques');
+	
+	// Si l'option était activée, on la réactive autre part
+	if ($lier_organisations_rubriques){
+		ecrire_config('contacts_et_organisations/lier_organisations_objets', array('spip_rubriques'));
 	}
 }
 

@@ -17,10 +17,6 @@
 		label=<:contacts:cfg_utiliser_organisations_arborescentes_label:>,
 		explication=<:contacts:cfg_utiliser_organisations_arborescentes_explication:>})]
 		
-	[(#SAISIE{oui_non,lier_organisations_rubriques,
-		label=<:contacts:cfg_lier_organisations_rubriques:>,
-		explication=<:contacts:cfg_lier_organisations_rubriques_explication:>})]
-
 	[(#SAISIE{oui_non,activer_squelettes_publics_zpip1,
 		label=<:contacts:cfg_activer_squelettes_publics_zpip1:>,
 		explication=<:contacts:cfg_activer_squelettes_publics_zpip1_explication:>})]
@@ -40,6 +36,23 @@
 				[(#SAISIE{oui_non,supprimer_reciproquement_auteurs_et_contacts,
 					label=<:contacts:cfg_supprimer_reciproquement_auteurs_et_contacts:>,
 					explication=<:contacts:cfg_supprimer_reciproquement_auteurs_et_contacts_explication:>})]
+			</ul>
+		</fieldset>
+	</li>
+	
+	<li class='fieldset'>
+		<fieldset>
+			<legend><:contacts:cfg_relations_avec_objets:></legend>
+			<ul>
+				[(#SAISIE{choisir_objets,lier_organisations_objets,
+					label=<:contacts:cfg_lier_organisations_objets_label:>,
+					explication=<:contacts:cfg_lier_organisations_objets_explication:>,
+					exclus=#LISTE{spip_auteurs, spip_organisations, spip_contacts}})]
+				
+				[(#SAISIE{choisir_objets,lier_contacts_objets,
+					label=<:contacts:cfg_lier_contacts_objets_label:>,
+					explication=<:contacts:cfg_lier_contacts_objets_explication:>,
+					exclus=#LISTE{spip_auteurs, spip_organisations, spip_contacts}})]
 			</ul>
 		</fieldset>
 	</li>

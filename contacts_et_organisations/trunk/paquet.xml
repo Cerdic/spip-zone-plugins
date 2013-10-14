@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/contacts-128.png"
-	schema="1.9.0"
+	schema="1.10.0"
 	documentation="http://www.spip-contrib.net/Plugin-Contacts-Organisations"
 >
 
