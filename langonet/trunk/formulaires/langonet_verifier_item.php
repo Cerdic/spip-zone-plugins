@@ -65,6 +65,13 @@ function formulaires_langonet_verifier_item_traiter() {
 
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
 		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+		if ($corrections['fichier']) {
+			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];
+			$retour['message_ok']['corrections']['explication'] = _T('langonet:message_ok_corrections_utilisation',
+														array('fichier' => $corrections['fichier']));
+		}
+		else
+			$retour['message_ok']['corrections']['explication'] = _T('langonet:message_nok_corrections');
 	}
 
 	// Traitement des resultats
@@ -72,12 +79,10 @@ function formulaires_langonet_verifier_item_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		if ($version == 'new') {
-			$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
-			$retour['message_ok']['resultats'] = $resultats;
-		}
-		else
-			$retour = formater_resultats($verification, $resultats, $corrections, $ou_fichiers);
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
+		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
+		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['item_non'];
+		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['item_peut_etre'];
 	}
 	$retour['editable'] = true;
 	return $retour;

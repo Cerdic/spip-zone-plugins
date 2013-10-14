@@ -1,4 +1,18 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
-[<p>(#ENV{explication})</p>]
-[(#ENV**{resultats})]
+#SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}|implode{','}}
+<p><:langonet:info_verification_utilisation{arborescence=#GET{arborescence}}:></p>
+[<p>
+	(#ENV{corrections}|table_valeur{explication})
+	[(#BOUTON_ACTION{
+		<:langonet:bouton_corriger:>,
+		#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections}|table_valeur{fichier}},
+		'', '', ''})]
+</p>]
+
+<BOUCLE_pertinences(DATA) {liste non,peut_etre}{par cle}>
+	#INCLURE{fond=prive/squelettes/liste/items_utilisation,
+		items=#ENV{resultats}|table_valeur{occurrences_#VALEUR},
+		pertinence=#VALEUR,
+		env}
+</BOUCLE_pertinences>

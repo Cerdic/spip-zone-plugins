@@ -44,7 +44,7 @@ function inc_langonet_verifier_l($ou_fichier) {
 	if ($fichiers) {
 		include_spip('inc/langonet_utils');
 
-		$occurences = array();
+		$occurrences = array();
 		$nb_occurrences = 0;
 		$items = array();
 		foreach ($fichiers as $_fichier) {
@@ -56,14 +56,14 @@ function inc_langonet_verifier_l($ou_fichier) {
 							// Calcul du nom du raccourci de l'item de langue
 							$traduction = $_occurrence[0];
 							list($raccourci, $raccourci_brut) = calculer_raccourci_unique($traduction, $items);
-							// Stockage de ce raccourci et du texte exact contenu dans l'occurence _L() pour les corrections
+							// Stockage de ce raccourci et du texte exact contenu dans l'occurrence _L() pour les corrections
 							$items[$raccourci] = $traduction;
 							// Ajout de l'occurrence trouvée dans la liste des erreurs
 							$expression = $matches[0][$_cle][0];
 							$no_colonne = $matches[0][$_cle][1];
-							$occurences[$raccourci][$_fichier][$_no_ligne][$no_colonne] =
+							$occurrences[$raccourci][$_fichier][$_no_ligne][$no_colonne] =
 								array($expression, $raccourci_brut, $traduction, $_ligne);
-							// Compteur d'occurences
+							// Compteur d'occurrences
 							$nb_occurrences++;
 						}
 					}
@@ -73,7 +73,7 @@ function inc_langonet_verifier_l($ou_fichier) {
 
 		$resultats['ou_fichier'] = $ou_fichier;
 		$resultats['total_occurrences'] = $nb_occurrences;
-		$resultats['occurrences_non'] = $occurences;
+		$resultats['occurrences_non'] = $occurrences;
 		$resultats['items_a_corriger'] = $items;
 	}
 	else {

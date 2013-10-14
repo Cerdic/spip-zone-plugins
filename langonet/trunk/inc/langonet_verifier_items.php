@@ -4,8 +4,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Items de langue dans les fichiers PHP
 // déclaration d'items dans base/module.php
-if (!defined('_LANGONET_ITEM_B'))
-	define("_LANGONET_ITEM_B", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
+if (!defined('_LANGONET_ITEM_PHP_OBJET'))
+	define("_LANGONET_ITEM_PHP_OBJET", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
 // Fontions PHP _T ou _U avec apostrophe
 if (!defined('_LANGONET_ITEM_A'))
 	define("_LANGONET_ITEM_A", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
@@ -157,7 +157,7 @@ function collecter_occurrences($fichiers) {
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 				else {
-					if (preg_match_all(_LANGONET_ITEM_B, $_ligne, $occurrences, PREG_SET_ORDER))
+					if (preg_match_all(_LANGONET_ITEM_PHP_OBJET, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 					if (preg_match_all(_LANGONET_ITEM_A, $_ligne, $occurrences, PREG_SET_ORDER))

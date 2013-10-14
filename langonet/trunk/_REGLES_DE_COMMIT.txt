@@ -74,7 +74,7 @@ fichier de langue :
 
 occurrence d'utilisation d'un item de langue :
 	- préfixe  : occurrence
-	- exemples : $occurrence, $_occurrence, $occurrences, $occurences_regexp...
+	- exemples : $occurrence, $_occurrence, $occurrences, $occurrences_regexp...
 	- note     : une occurrence est en général un tableau contenant divers éléments
 	             représentatifs (numéros de ligne, de colonne, item, expression fournie par la regexp...)
 

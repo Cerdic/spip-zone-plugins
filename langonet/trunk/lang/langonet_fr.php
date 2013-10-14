@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tradlang_statut_modif' => 'item dont la traduction est obsolète (référence modifiée)',
 	'info_tradlang_statut_new' => 'item non encore traduit',
 	'info_verification_l' => 'Vous avez choisi de rechercher les cas d\'utilisation de la fonction _L() dans les fichiers PHP de l\'arborescence <code>@arborescence@</code>.',
+	'info_verification_utilisation' => 'Vous avez choisi de rechercher les items de langues obsolètes dans les fichiers de l\'arborescence <code>@arborescence@</code>.',
 	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
 	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 
@@ -145,6 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :',
 	'message_ok_fichier_verification' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas dans le formulaire.',
 	'message_ok_corrections_fonction_l' => 'Les items construits à partir des cas d\'utilisation de la fonction _L() ont été intégrés dans le fichier de langue <code>@fichier@</code>.',
+	'message_ok_corrections_utilisation' => 'Les items obsolètes ont été supprimés du fichier de langue <code>@fichier@</code>.',
 
 	// O
 	'onglet_generer' => 'Générer une langue',

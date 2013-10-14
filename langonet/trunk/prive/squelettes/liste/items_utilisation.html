@@ -1,0 +1,24 @@
+<B_liste_items>
+<div class="liste-objets items_langue">
+	<table class="spip liste">
+		<caption>
+			<strong class="caption">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
+									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_1},
+									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_n},
+									sous_total})]
+			</strong>
+		</caption>
+		<tbody>
+<BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
+			<tr class="trouve row_odd">
+				<td class="raccourci">
+					[<strong>(#VALEUR)</strong>]
+				</td>
+			</tr>
+</BOUCLE_liste_items>
+		</tbody>
+	</table>
+</div>
+</B_liste_items>
+<//B_liste_items>
