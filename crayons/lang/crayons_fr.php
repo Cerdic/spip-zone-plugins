@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'Réduire les logos',
 	'label_upload_document' => 'Autoriser l’ajout de documents par glisser/déposer sur le crayon article.texte',
 	'label_yellow_fade' => 'Fade',
+	'legend_controleur_fichier_remplacer' => 'Remplacer ce document "@extension@"',
 	'legend_controleur_hyperlien' => 'Hyperlien',
 	'legend_controleur_logo' => 'Choisir un logo :',
 	'legend_controleur_logo_remplacer' => 'Remplacer ce logo',

@@ -8,7 +8,7 @@
 
 [(#REM) En fonction de du contexte, choisir un logo ]
 
-<BOUCLE_d(DOCUMENTS){id_document}>
+<BOUCLE_d(DOCUMENTS){id_document}{tout}>
 
 [(#SET{image,[<img src="(#LOGO_DOCUMENT||extraire_attribut{src})" />]})]
 
@@ -22,10 +22,10 @@
 
 	<small>[(#GET{logo}|inserer_attribut{src,#GET{url}}
 		|inserer_attribut{style,vertical-align:middle;})]
-	&nbsp; remplacer ce document #EXTENSION
+	&nbsp; <:crayons:legend_controleur_fichier_remplacer{extension=#EXTENSION}:>
 	[((#GET{image}
 		|extraire_attribut{width})&times;[(#GET{image}
-		|extraire_attribut{height})]px)]&nbsp;:</small>
+		|extraire_attribut{height})]px)]</small>
 
 </legend>
 

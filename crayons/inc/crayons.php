@@ -140,7 +140,6 @@ function valeur_champ_vignette($table, $id, $champ) {
 // en reference : le nom du widget, pour aller chercher d'autres donnees
 // (ex: supprimer)
 function logo_revision($id, $file, $type, $ref) {
-
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$_id_objet = id_table_objet($type);
 
@@ -194,7 +193,7 @@ function logo_revision($id, $file, $type, $ref) {
 // cette fonction de revision recoit le fichier upload a passer en document
 function document_fichier_revision($id, $data, $type, $ref) {
 
-	$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id));
+	$s = spip_query("SELECT * FROM spip_documents WHERE id_document=".intval($id));
 	if (!$t = sql_fetch($s))
 		return false;
 
@@ -216,50 +215,66 @@ function document_fichier_revision($id, $data, $type, $ref) {
 	// Chargement d'un nouveau doc ?
 	if ($data['document']) {
 
-		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 		$arg = $data['document'];
-		check_upload_error($arg['error']);
-		$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
-			'article', 0, 'document', null, $actifs);
-
-		// $actifs contient l'id_document nouvellement cree
-		// on recopie les donnees interessantes dans l'ancien
-		$extension=", extension ";
-		//compat 192
-		if ($GLOBALS['spip_version_code'] < '1.93')
-			$extension="";
-
-		if ($id_new = array_pop($actifs)
-		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
-			WHERE id_document="._q($id_new))
-		AND $new = sql_fetch($s)) {
-			define('FILE_UPLOAD', true); // message pour crayons_json_export :(
-
-			// Une vignette doit rester une image
-			if ($t['mode'] == 'vignette'
-			AND !in_array($new['extension'], array('jpg', 'gif', 'png')))
+		
+		/** 
+ 		 * Méthode >= SPIP 3.0 
+		 * ou SPIP 2.x + Mediathèque
+ 		 */ 
+ 		if($ajouter_documents = charger_fonction('ajouter_documents','action',true)){ 
+ 			$actifs = $ajouter_documents($id,array($arg),'', 0,$t['mode']);
+			$x = reset($actifs);
+			if(is_numeric($x))
+				return true;
+			else
 				return false;
+		}
+		/**
+		 * Méthode SPIP < 3.0
+		 */
+		else if($ajouter_documents = charger_fonction('ajouter_documents','inc',true)){ 
+			check_upload_error($arg['error']);
+			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],
+					'article', 0, 'document', null, $actifs);
+			// $actifs contient l'id_document nouvellement cree
+			// on recopie les donnees interessantes dans l'ancien
+			$extension=", extension ";
+			//compat 192
+			if ($GLOBALS['spip_version_code'] < '1.93')
+				$extension="";
 
-			// Maintenant on est bon, on recopie les nouvelles donnees
-			// dans l'ancienne ligne spip_documents
-			include_spip('inc/modifier');
-			modifier_contenu('document', $id,
-				# 'champs' inutile a partir de SPIP 11348
-				array('champs' => array_keys($new)),
-				$new);
+			if ($id_new = array_pop($actifs)
+			AND $s = spip_query("SELECT fichier, taille, largeur, hauteur $extension, distant FROM spip_documents
+				WHERE id_document="._q($id_new))
+			AND $new = sql_fetch($s)) {
+				define('FILE_UPLOAD', true); // message pour crayons_json_export :(
 
-			// supprimer l'ancien document (sauf s'il etait distant)
-			if ($t['distant'] != 'oui'
-			AND file_exists(get_spip_doc($t['fichier'])))
-				supprimer_fichier(get_spip_doc($t['fichier']));
+				// Une vignette doit rester une image
+				if ($t['mode'] == 'vignette'
+				AND !in_array($new['extension'], array('jpg', 'gif', 'png')))
+					return false;
 
-			// Effacer la ligne temporaire de spip_document
-			spip_query("DELETE FROM spip_documents WHERE id_document="._q($id_new));
+				// Maintenant on est bon, on recopie les nouvelles donnees
+				// dans l'ancienne ligne spip_documents
+				include_spip('inc/modifier');
+				modifier_contenu('document', $id,
+					# 'champs' inutile a partir de SPIP 11348
+					array('champs' => array_keys($new)),
+					$new);
 
-			// oublier id_document temporaire (ca marche chez moi, sinon bof)
-			spip_query("ALTER TABLE spip_documents AUTO_INCREMENT="._q($id_new));
+				// supprimer l'ancien document (sauf s'il etait distant)
+				if ($t['distant'] != 'oui'
+				AND file_exists(get_spip_doc($t['fichier'])))
+					supprimer_fichier(get_spip_doc($t['fichier']));
 
-			return true;
+				// Effacer la ligne temporaire de spip_document
+				spip_query("DELETE FROM spip_documents WHERE id_document="._q($id_new));
+
+				// oublier id_document temporaire (ca marche chez moi, sinon bof)
+				spip_query("ALTER TABLE spip_documents AUTO_INCREMENT="._q($id_new));
+
+				return true;
+			}
 		}
 	}
 
@@ -307,17 +322,10 @@ function vignette_revision($id, $data, $type, $ref) {
 		// Ajout du document comme vignette
 
 		/**
-		 * Méthode < SPIP 3.0
+		 * Méthode >= SPIP 3.0 
+		 * ou SPIP 2.x + Mediatheque
 		 */
-		if($ajouter_documents = charger_fonction('ajouter_documents','inc',true)){
-			// On remet l'id_vignette a 0 si on l'a supprimé
-			if($id_vignette) revision_document($s['id_document'], array('id_vignette'=>0));
-			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
-		}
-		/**
-		 * Méthode >= SPIP 3.0
-		 */
-		else if($ajouter_documents = charger_fonction('ajouter_documents','action',true)){
+		if($ajouter_documents = charger_fonction('ajouter_documents','action',true)){
 			$x = $ajouter_documents(null,array($arg),'', 0, 'vignette');
 			$vignette = reset($x);
 			if(intval($vignette))
@@ -325,6 +333,15 @@ function vignette_revision($id, $data, $type, $ref) {
 			else if($id_vignette)
 				document_modifier($id, array('id_vignette'=>$id_vignette));
 		}
+		/**
+		 * Méthode < SPIP 3.0
+		 */
+		else if($ajouter_documents = charger_fonction('ajouter_documents','inc',true)){
+			// On remet l'id_vignette a 0 si on l'a supprimé
+			if($id_vignette) revision_document($s['id_document'], array('id_vignette'=>0));
+			$x = $ajouter_documents($arg['tmp_name'], $arg['name'],'','', 'vignette', $id, $actifs);
+		}
+		
 	}else
 		// Suppression de la vignette ?
 		if ($wid = array_pop($ref)
