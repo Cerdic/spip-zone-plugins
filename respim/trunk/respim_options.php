@@ -27,9 +27,7 @@ function respim_markup($img, $rwd_images, $width, $height){
 	if (strpos($class,"respim")!==false) return $img;
 	ksort($rwd_images);
 	$cid = "c".crc32(serialize($rwd_images));
-	$style =
-"img.respim{opacity:0.01;max-width:100%;height:auto;}"
-."b.respwrapper{background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%}";
+	$style = "";
 	if ($class) $class = " $class";
 	$class = "$cid$class";
 	$img = inserer_attribut($img,"class","respim-fallback $class");
@@ -48,16 +46,18 @@ function respim_markup($img, $rwd_images, $width, $height){
 	$prev_width = 0;
 	$medias = array();
 	foreach ($rwd_images as $w=>$file){
+		// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
+		// $file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
 		$mw = ($prev_width?"(min-width:{$prev_width}px)":"(max-width:{$w}px)");
 		$mw20 = ($prev_width?"(min-width:".round($prev_width/2)."px)":"(max-width:".round($w/2)."px)");
 		$mw15 = ($prev_width?"(min-width:".round($prev_width/1.5)."px)":"(max-width:".round($w/1.5)."px)");
-		// ?rwd pour le debug (etre sur qu'on charge bien l'image issue des medias queries)
-		$medias[$w] = "@media screen and $mw,screen and (-webkit-min-device-pixel-ratio: 2) and $mw20,screen and (-webkit-min-device-pixel-ratio: 1.5) and $mw15,screen and (min--moz-device-pixel-ratio: 2) and $mw20,screen and (min--moz-device-pixel-ratio: 1.5) and $mw15{b.$cid{background-image:url($file?rwd);}}";
+		$medias[$w] = "@media screen and $mw,screen and (-webkit-min-device-pixel-ratio: 2) and $mw20,screen and (-webkit-min-device-pixel-ratio: 1.5) and $mw15,screen and (min--moz-device-pixel-ratio: 2) and $mw20,screen and (min--moz-device-pixel-ratio: 1.5) and $mw15{b.$cid,b.$cid:after{background-image:url($file?);}}";
 		$prev_width = $w+1;
 	}
-	$style .= "b.$cid{background-image:url($file);}";
+	// en premier : la plus grande image par defaut
+	$style .= "b.$cid,b.$cid:after{background-image:url($file)}";
+	// puis surcharge en Media Queries
 	$style .= implode("",$medias);
-
 
 	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
@@ -150,6 +150,20 @@ function respim_affichage_final($texte){
 		if (count($replace))
 			$texte = str_replace(array_keys($replace),array_values($replace),$texte);
 		#var_dump(spip_timer());
+		// les styles communs a toutes les images responsive en cours de chargement
+		$ins = "<style type='text/css'>"."img.respim{opacity:0.70;max-width:100%;height:auto;}"
+		."b.respwrapper{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
+		."b.respwrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%;content:\"\"}"
+		."</style>";
+		// le script qui est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
+		$async_style = "html img.respim{opacity:0.01}html b.respwrapper:after{display:none;}";
+		$ins .= "<script>window.onload = function(){"
+		  ."var sa = document.createElement('style'); sa.type = 'text/css';"
+		  ."sa.innerHTML = '$async_style';"
+		  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);}</script>";
+		// inserer abant le premier <script> ou <link a defaut
+		if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
+			$texte = substr_replace($texte,"<!--[if !IE]-->$ins<!--[endif]-->\n",$p,0);
 	}
 	return $texte;
 }
