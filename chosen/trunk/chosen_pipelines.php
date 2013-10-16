@@ -29,7 +29,9 @@ function chosen_jquery_plugins($flux) {
  * @return string       Contenu du head HTML concernant les CSS
  */
 function chosen_header_prive($texte) {
+	include_spip('inc/config');
 	$texte .= '<script type="text/javascript">/* <![CDATA[ */
+			var selecteur_chosen = "' . trim(lire_config('chosen/selecteur_commun')) . '";
 			var langue_chosen = {
 				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
 				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
