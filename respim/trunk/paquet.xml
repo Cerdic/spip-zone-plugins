@@ -1,9 +1,9 @@
 <paquet
 	prefix="respim"
 	categorie="multimedia"
-	version="0.4.1"
+	version="0.4.2"
 	etat="dev"
-	compatibilite="[3.0.12-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/respim-32.png"
 	documentation=""
 >

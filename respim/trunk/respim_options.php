@@ -163,7 +163,19 @@ function respim_affichage_final($texte){
 			$ins .= "<script>var respim_onload = function(){"
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
-			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
+			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);
+var lowBandWidth = false;
+if (typeof window.performance!==\"undefined\"){
+var perfData = window.performance.timing;
+var speed = ~~(document.getElementsByTagName('html')[0].innerHTML.length/(perfData.responseEnd - perfData.requestStart)); // approx, *1000/1024 to be exact
+lowBandWidth = (speed && speed<150);
+}else{
+//https://github.com/Modernizr/Modernizr/blob/master/feature-detects/network/connection.js
+var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+if (typeof connection!==\"undefined\") lowBandWidth = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));
+}
+console.log(lowBandWidth);
+				};"
 				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(respim_onload)}); else window.onload=respim_onload;</script>";
 			// inserer abant le premier <script> ou <link a defaut
 			if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
