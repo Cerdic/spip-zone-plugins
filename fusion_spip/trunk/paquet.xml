@@ -2,7 +2,7 @@
 	prefix="fusion_spip"
 	categorie="maintenance"
 	version="0.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/base-add-24.png"
 	schema="1.0.0"
@@ -10,7 +10,7 @@
 
 	<nom>Fusion de sites Spip</nom>
 	
-	<auteur mail="mailto:nicolas.dorigny@gmail.com">Nico D.</auteur>
+	<auteur mail="mailto:nicolas.dorigny@gmail.com">nicod_</auteur>
 
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
