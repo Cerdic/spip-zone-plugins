@@ -6,8 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucunmodule' => 'Aucun module.',
 	'aucune_distribution' => 'Aucune distribution disponible.',
+	'aucunmodule' => 'Aucun module.',
 	'auteur_revision' => '@nb@ modification de traduction.',
 	'auteur_revision_specifique' => '@nb@ modification de traduction en <abbr title="@lang@">@langue_longue@</abbr>.',
 	'auteur_revisions' => '@nb@ modifications de traductions.',
@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_variable_manquantes' => 'Les @nb@ parties de la chaîne suivantes ne doivent pas être modifiées :',
 	'explication_comm' => 'Le commentaire est une information ajoutée dans le fichier de langue afin d’expliciter par exemple un choix de traduction particulier.',
 	'explication_export_fichier_complet' => 'Le fichier suivant est complet. Toutes les chaînes de langues, traduites ou pas y sont disponibles.<br />Il peut être utilisé comme base de traduction.',
-	'explication_export_fichier_original' => 'Le fichier suivant est le fichier de langue dans sa langue d\'origine.<br />Il doit servir de base de traduction.',
+	'explication_export_fichier_original' => 'Le fichier suivant est le fichier de langue dans sa langue d’origine.<br />Il doit servir de base de traduction.',
 	'explication_export_fichier_po' => 'Le fichier suivant est au format "po". Toutes les chaînes de langues, traduites ou pas y sont disponibles.<br />Il doit être utilisé avec un logiciel de traduction acceptant ce format et peut être ensuite importé dans le site via le bouton pour envoyer un fichier de langue.',
 	'explication_langue_cible' => 'La langue vers laquelle vous traduisez.',
 	'explication_langue_origine' => 'La langue depuis laquelle vous traduisez (Seules les langues 100% complètes sont disponibles).',
@@ -388,7 +388,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Chaines de langue',
 	'titre_tradlang_export' => 'Exporter le module "@module@" en "@lang_longue@ (@lang@)"',
 	'titre_tradlang_export_traduire' => 'Pour le traduire localement',
-	'titre_tradlang_export_utiliser' => 'Pour l\'utiliser en production',
+	'titre_tradlang_export_utiliser' => 'Pour l’utiliser en production',
 	'titre_tradlang_module' => 'Module de langue',
 	'titre_tradlang_modules' => 'Modules de langue',
 	'titre_tradlang_non_traduit' => '1 chaîne de langue non traduite',
