@@ -316,4 +316,24 @@ function gis_xmlrpc_server_class($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le traitement du formulaire de configuration
+ * 
+ * Purger le répertoire js si on a une carte google dans les layers pour recalculer le js statique
+ * Peut être à améliorer
+ * 
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ */
+function gis_formulaire_traiter($flux){
+	if($flux['args']['form'] == 'configurer_gis'){
+		if (count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), _request('layers'))) > 0){
+			include_spip('inc/invalideur');
+			purger_repertoire(_DIR_VAR.'cache-js');
+			suivre_invalideur(1);
+		}
+	}
+	return $flux;
+}
 ?>

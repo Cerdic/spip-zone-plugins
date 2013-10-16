@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.9.9"
+	version="4.9.10"
 	schema="2.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -80,6 +80,10 @@
 	/>
 	<pipeline
 		nom="xmlrpc_server_class"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="formulaire_traiter"
 		inclure="gis_pipelines.php"
 	/>	
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
