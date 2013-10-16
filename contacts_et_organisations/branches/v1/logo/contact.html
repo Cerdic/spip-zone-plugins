@@ -7,7 +7,7 @@
         )]
         </BOUCLE_auteur>
     </BOUCLE_liens>
-        [(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_liaison_contact_auteur:>})]
+        [<!--(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_liaison_contact_auteur:>})-->]
         <BOUCLE_auteur_direct(AUTEURS){id_auteur}>
             [(#LOGO_AUTEUR
             |sinon{[<img src="(#CHEMIN{images/co_contact-24.png})" alt="picto contact" class="spip_logos" />]}
@@ -21,5 +21,5 @@
         <//B_auteur_direct>
     <//B_liens>
 </BOUCLE_logo_contact>
-[(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_aucun_contact_trouve:>})]
+[<!--(#CHEMIN{img/warn.png}|balise_img|image_reduire{20,26}|inserer_attribut{title,<:contacts:erreur_aucun_contact_trouve:>})-->]
 <//B_logo_contact>
