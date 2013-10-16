@@ -527,6 +527,8 @@ function nospam_update_ip_list($async=false){
 	include_spip("inc/distant");
 	include_spip("inc/json");
 	$res = recuperer_page($url_api);
+	if (!$res AND file_exists($f=_DIR_TMP."spamsignal-api-list.txt"))
+		lire_fichier($f,$res);
 	if ($res
 	  AND function_exists("json_decode")
 	  AND $liste = json_decode($res,true)){
