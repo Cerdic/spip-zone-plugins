@@ -113,7 +113,7 @@ function multilang_affichage_final($flux){
 
 			foreach($config as $conf => $val){
 				if($val == 'on') { // Articles
-					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo])';
+					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo]):not(input[value|='.$conf.'-vignette]):not(input[value|='.$conf.'-fichier])';
 					unset($config[$conf]);
 				}
 			}
