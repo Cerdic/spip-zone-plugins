@@ -1,4 +1,11 @@
 <?php
+/**
+ * Crayons 
+ * plugin for spip 
+ * (c) Fil, toggg 2006-2013
+ * licence GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -18,7 +25,7 @@ function pack_cQuery($chemin) {
 	OR _request('debug_crayons')
 	// le vieil auto_compress_js
 	OR ($GLOBALS['meta']['auto_compress_js'] == 'oui'
-	  AND @file_exists(_DIR_RESTREINT.'inc/compacte_js.php'))
+	AND @file_exists(_DIR_RESTREINT.'inc/compacte_js.php'))
 	// ou l'espace prive
 	OR !function_exists('test_espace_prive')
 	OR test_espace_prive())

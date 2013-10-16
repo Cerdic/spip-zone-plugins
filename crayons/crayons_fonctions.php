@@ -1,9 +1,13 @@
 <?php
-/** 
- * Crayons plugin for spip (c) Fil, toggg 2006-2013 -- licence GPL
- * 
+/**
+ * Crayons 
+ * plugin for spip 
+ * (c) Fil, toggg 2006-2013
+ * licence GPL
+ *
  * @package SPIP\Crayons\Fonctions
  */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -31,7 +35,7 @@ function Crayons_insert_head($head) {
 	if ($config_espace_prive['espaceprive'] == 'on') {
 		// determine les pages (exec) crayonnables
 		if (($config_espace_prive['exec_autorise'] == '*') ||
-	       in_array(_request('exec'),explode(',',$config_espace_prive['exec_autorise']))) {
+			in_array(_request('exec'),explode(',',$config_espace_prive['exec_autorise']))) {
 			// Calcul des droits
 			include_spip('inc/crayons');
 			$head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
@@ -180,10 +184,9 @@ EOH;
 	// css avant la fin du head
 	$pos_head = strpos($page, '</head>');
 		$page = substr_replace($page, $incCSS, $pos_head, 0);
-	
+
 	return $page;
 }
-
 
 /**
  * Balise indiquant un champ SQL crayonnable
@@ -261,7 +264,6 @@ function balise_EDIT($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
-
 
 /**
  * Balise indiquant une configuration crayonnable
@@ -353,20 +355,20 @@ function classe_boucle_crayon($type, $champ, $id) {
 	$type = $type[strlen($type) - 1] == 's' ?
 		substr($type, 0, -1) :
 		str_replace(
-			array('hierarchie', 'syndication'),
-			array('rubrique',   'site'),
+			array('hierarchie','syndication'),
+			array('rubrique','site'),
 		$type);
 
 	$plus = (substr($champ, -1) == '+' AND $champ = substr($champ, 0, -1))
 		? " $type--$id"
 		: '';
-	
+
 	// test rapide pour verifier que l'id est valide (a-zA-Z0-9)
 	if (false !== strpos($id, ' ')) {
 		spip_log("L'identifiant ($id) ne pourra être géré ($type | $champ)", 'crayons');
 		return 'crayon_id_ingerable';
 	}
-	
+
 	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
 

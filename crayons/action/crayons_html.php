@@ -1,4 +1,10 @@
 <?php
+/**
+ * Crayons 
+ * plugin for spip 
+ * (c) Fil, toggg 2006-2013
+ * licence GPL
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -32,15 +38,13 @@ function affiche_controleur($class, $c=null) {
 			OR $f = charger_fonction($type, 'controleurs', true)
 			OR $f = 'controleur_dist';
 			list($html,$status) = $f($regs, $c);
-			if ($status) {
+			if ($status)
 				$return['$erreur'] = $html;
-			} else {
+			else
 				$return['$html'] = $html;
-			}
 		}
-	} else {
+	} else
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
-	}
 
 	return $return;
 }
@@ -64,21 +68,18 @@ function controleur_dist($regs, $c=null) {
 		if (!lire_fichier($fichier, $controldata))
 			die('erreur lecture controleur');
 		if (preg_match_all('/\bname=(["\'])#ENV\{name_(\w+)\}\1/',
-		$controldata, $matches, PREG_PATTERN_ORDER)) {
+			$controldata, $matches, PREG_PATTERN_ORDER))
 			$champ = $matches[2];
-		}
-	} else {
+	} else
 		$controleur = '';
-	}
 
 	$valeur = valeur_colonne_table($type, $champ, $id);
 
 	#spip_log("$valeur = valeur_colonne_table($type, $champ, $id);");
 	#spip_log($champ);
 
-	if ($valeur === false) {
+	if ($valeur === false)
 		return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
-	}
 /*	if (is_scalar($valeur)) {
 		$valeur = array($champ => $valeur);
 	}*/
@@ -93,14 +94,15 @@ function controleur_dist($regs, $c=null) {
 	// si la valeur fait plusieurs lignes on doit mettre un textarea
 	// derogation specifique pour descriptif_site de spip_metas
 	if (
-	preg_match(",[\n\r],", $valeur[$champ])
+		preg_match(",[\n\r],", $valeur[$champ])
 		OR (($champ == 'valeur') && ($id == 'descriptif_site'))
 		OR
 	// on regarde le type tel que defini dans serial
 	// (attention il y avait des blob dans les vieux spip)
-	($sqltype = colonne_table($type, $champ)) &&
-	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob', 'longtext')) ||
-	   (($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') && in_array($champ, array('descriptif', 'bio'))))) {
+		($sqltype = colonne_table($type, $champ)) &&
+		(in_array($sqltype['type'] , array('mediumtext', 'longblob', 'longtext')) ||
+		(($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') 
+		&& in_array($champ, array('descriptif', 'bio'))))) {
 		$options['hauteurMini'] = 80; // hauteur mini d'un textarea
 		$option['inmode'] = 'texte';
 	} else { // ligne, hauteur naturelle
@@ -128,7 +130,7 @@ function controleur_dist($regs, $c=null) {
 
 	if (!$controleur) {
 		$inputAttrs['style'] .= 'width:' . $crayon->largeur . 'px;' .
-		 ($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
+		($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
 	}
 
 	$html = $controleur ? $crayon->formulaire(null, $inputAttrs) :
@@ -222,7 +224,7 @@ class Crayon {
 
 		$property = 'background-color';
 		if (!$p = _request($property)
-		OR $p == 'transparent') {
+			OR $p == 'transparent') {
 			$p = 'white';
 		}
 		$this->styles[] = "$property:$p;";
@@ -252,10 +254,14 @@ class Crayon {
 		;
 	}
 
-/*
- Fabriquer les balises des champs d'apres un modele controleurs/(type_)modele.html
-	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
-*/
+/**
+ * Fabriquer les balises des champs d'apres un modele controleurs/(type_)modele.html
+ * 
+ * @param array $contexte
+ * 	tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
+ * @return string
+ *  le contenu de recuperer_fond du controleur
+ */
 	function fond($contexte = array()) {
 		include_spip('inc/filtres');
 		$contexte['id_' . $this->type] = $this->id;
@@ -275,12 +281,16 @@ class Crayon {
 		return recuperer_fond($this->controleur, $contexte);
 	}
 
-/*
- Fabriquer les balises du ou des champs
-	$spec est soit un scalaire 'ligne' ou 'texte' précisant le type de balise
-	soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
-	$attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
-*/
+/**
+ * Fabriquer les balises du ou des champs
+ * $attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
+ * 
+ * @param string|array $spec
+ *  soit un scalaire 'ligne' ou 'texte' précisant le type de balise
+ *  soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
+ * @return string
+ * 	le html de l'input
+ */
 	function input($spec = 'ligne', $attrs = array()) {
 		if ($this->controleur) {
 			return $this->fond($spec);
@@ -344,13 +354,16 @@ class Crayon {
 		}
 		return $return;
 	}
-
 }
 
-
-/*
-	Fabriquer les boutons du formulaire
-*/
+/**
+ *	Fabriquer les boutons du formulaire
+ * 
+ *  @param array $boutons
+ * 	 Le tableau des boutons
+ *  @return string
+ * 	 Le html des boutons
+ */
 function crayons_boutons($boutons = array()) {
 	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
 	$boutons['cancel'] = array('cancel', texte_backend(_T('crayons:annuler')));
@@ -407,21 +420,26 @@ class SecureCrayon extends Crayon {
 	}
 }
 
+/**
+ * Action affichant le controleur html ou php adéquat
+ * 
+ * on affiche le formulaire demande (controleur associe au crayon)
+ * Si le crayon n'est pas de type "crayon", c'est un crayon etendu, qui
+ * integre le formulaire requis à son controleur (pour avoir les boutons
+ * du formulaire dans un controleur Draggable, par exemple, mais il y a
+ * d'autres usages possibles)
+ * 
+ */
 function action_crayons_html_dist() {
-	// CONTROLEUR
-	// on affiche le formulaire demande (controleur associe au crayon)
-	// Si le crayon n'est pas de type "crayon", c'est un crayon etendu, qui
-	// integre le formulaire requis à son controleur (pour avoir les boutons
-	// du formulaire dans un controleur Draggable, par exemple, mais il y a
-	// d'autres usages possibles)
 	include_spip('inc/crayons');
 
+	// Utiliser la bonne langue d'environnement
 	if(!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang'] OR ($GLOBALS['forcer_lang'] === 'non'))
 		lang_select($GLOBALS['auteur_session']['lang']);
-	
+
 	$return = affiche_controleur(_request('class'));
 	if (!_request('type') OR _request('type') == 'crayon')
-	  $return['$html'] = crayons_formulaire($return['$html']);
+		$return['$html'] = crayons_formulaire($return['$html']);
 
 	$json = trim(crayons_json_encode($return));
 

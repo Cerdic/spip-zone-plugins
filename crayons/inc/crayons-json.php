@@ -1,14 +1,10 @@
 <?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2010                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+/**
+ * Crayons 
+ * plugin for spip 
+ * (c) Fil, toggg 2006-2013
+ * licence GPL
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -16,12 +12,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Transform a variable into its javascript equivalent (recursive)
+ * http://doc.spip.org/@var2js
+ * 
  * @access private
  * @param mixed the variable
  * @return string js script | boolean false if error
  */
-
-// http://doc.spip.org/@var2js
 function crayons_var2js($var) {
 	$asso = false;
 	switch (true) {
@@ -91,9 +87,6 @@ function crayons_json_export($var) {
 	else
 		return $var;
 */
-
 }
-
-
 
 ?>

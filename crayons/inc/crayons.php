@@ -1,4 +1,10 @@
 <?php
+/**
+ * Crayons 
+ * plugin for spip 
+ * (c) Fil, toggg 2006-2013
+ * licence GPL
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -12,13 +18,13 @@ if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_cra
 // Par defaut : oui (pour les admins complets, si autoriser_defaut_dist()) ;
 // mettre a false en cas de mutualisation par prefixe de table,
 // sinon on ne peut pas garantir que les sites sont hermetiques
-define('_CRAYONS_TABLES_EXTERNES', true);
+if(!defined('_CRAYONS_TABLES_EXTERNES'))
+	define('_CRAYONS_TABLES_EXTERNES', true);
 
 // Autorisations non prevues par le core
 include_spip('inc/autoriser');
 
 include_spip('inc/crayons-json');
-
 
 if (!function_exists('autoriser_meta_modifier_dist')) {
 /**
@@ -62,20 +68,20 @@ if (!function_exists('autoriser_message_modifier_dist')) {
 //compat 192 documents
 if ($GLOBALS['spip_version_code'] < '1.93'){
 	if (!function_exists('get_spip_doc')){
-			function get_spip_doc($fichier) {
-					// fichier distant
-					if (preg_match(',^\w+://,', $fichier))
-							return $fichier;
+		function get_spip_doc($fichier) {
+			// fichier distant
+			if (preg_match(',^\w+://,', $fichier))
+					return $fichier;
 
-					// gestion d'erreurs, fichier=''
-					if (!strlen($fichier))
-							return false;
+			// gestion d'erreurs, fichier=''
+			if (!strlen($fichier))
+					return false;
 
-					// fichier normal
-					return (strpos($fichier, _DIR_IMG) === false)
-					? _DIR_IMG . $fichier
-					: $fichier;
-		   }
+			// fichier normal
+			return (strpos($fichier, _DIR_IMG) === false)
+			? _DIR_IMG . $fichier
+			: $fichier;
+		}
 	}
 }
 
@@ -166,7 +172,6 @@ function logo_revision($id, $file, $type, $ref) {
 		if ($on = $chercher_logo($id, $_id_objet, 'on'))
 			@unlink($on[0]);
 	}
-
 
 	// Reduire le logo ?
 	if (is_array($cfg = @unserialize($GLOBALS['meta']['crayons']))
@@ -277,7 +282,6 @@ function document_fichier_revision($id, $data, $type, $ref) {
 			}
 		}
 	}
-
 }
 
 // cette fonction de revision soit supprime la vignette d'un document,
@@ -437,8 +441,7 @@ function colonne_table($type, $col) {
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function table_where($type, $id, $where_en_tableau = false)
-{
+function table_where($type, $id, $where_en_tableau = false) {
 	list($distant,$table) = distant_table($type);
 	$nom_table = '';
 	if (!(($tabref = &crayons_get_table($type, $nom_table))
@@ -446,9 +449,8 @@ function table_where($type, $id, $where_en_tableau = false)
 		spip_log('crayons: table ' . $table . ' inconnue');
 		return array(false, false);
 	}
-	if (is_scalar($id)) {
+	if (is_scalar($id))
 		$id = explode('-', $id);
-	}
 	// sortie tableau pour sql_updateq
 	if ($where_en_tableau) {
 		$where = array();
@@ -556,10 +558,9 @@ function return_log($var) {
 	die(crayons_json_export(array('$erreur'=> var_export($var,true))));
 }
 
-function _U($texte, $params=array())
-{
-    include_spip('inc/charsets');
-    return unicode2charset(html2unicode(_T($texte, $params)));
+function _U($texte, $params=array()) {
+	include_spip('inc/charsets');
+	return unicode2charset(html2unicode(_T($texte, $params)));
 }
 
 // wdgcfg = widget config :-)
@@ -607,8 +608,7 @@ function &crayons_get_table($type, &$nom_table) {
 			include_spip('base/serial');
 			include_spip('base/auxiliaires');
 			include_spip('public/parametrer');
-			foreach(array('tables_principales', 'tables_auxiliaires') as $categ)
-			{
+			foreach(array('tables_principales', 'tables_auxiliaires') as $categ) {
 				foreach ($try as $nom) {
 					if (isset($GLOBALS[$categ][$nom])) {
 						$noms[$table] = $nom;
@@ -618,7 +618,6 @@ function &crayons_get_table($type, &$nom_table) {
 				}
 			}
 		}
-
 	}
 
 	$nom_table = $noms[$table];
