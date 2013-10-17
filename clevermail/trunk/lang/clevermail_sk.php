@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_partir_csv' => 'Zo súboru CSV:', # MODIF
+	'a_partir_csv' => 'Zo súboru CSV:',
 	'abonne' => 'abonent',
 	'abonne_ajoute' => 'Abonent pridaný',
 	'abonne_aucune_lettre' => 'Neodoberať žiaden informačný materiál',
@@ -86,26 +86,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_inscription' => 'Potvrdenie prihlásenia odoslané e-mailom',
 	'confirmation_inscription_multiple' => 'Potvrdenie prihlásenia na odoberanie viacerých materiálov odoslané e-mailom',
 	'confirmation_votre_desinscription' => 'Potvrdenie vášho odhlásenia',
-	'confirmation_votre_desinscription_text' => 'Dobrý deň,
+	'confirmation_votre_desinscription_text' => '
+Dobrý deň,
 
-Svoje odhlásenie, prosím, potvrďte kliknutím 
+svoje odhlásenie, prosím, potvrďte kliknutím 
 na tento odkaz:
 
  @@URL_CONFIRMATION@@
 
 Ďakujeme
-', # MODIF
+',
 	'confirmation_votre_inscription' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_multiple' => 'Potvrdenie registrácie',
-	'confirmation_votre_inscription_text' => 'Dobrý deň,
+	'confirmation_votre_inscription_text' => '
+Dobrý deň,
 
-na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
+na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_COMPLET@@ vo formáte @@FORMAT_INSCRIPTION@@, prosím, kliknite na tento odkaz:
 
  @@URL_CONFIRMATION@@
-(=vo formáte... ,prosím kliknite na tento odkaz)
 
 Ďakujeme
-', # MODIF
+',
 	'confirmation_votre_inscription_text_multiple' => 'Dobrý deň,
 
 na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov:
@@ -165,6 +166,7 @@ Pour valider l’inscription de @mail@ à cette lettre, veuillez cliquer sur ce 
 	'erreur' => 'Chyba',
 	'erreur_contenu_vide' => 'Novú správu nemožno vytvoriť kvôli nedostatku obsahu.',
 	'et_ou_saisir_des_adresses' => '...a/lebo zadať adresy.',
+	'exporter' => 'Exportovať zoznam abonentov',
 
 	// F
 	'front_clevermail_action_validation' => 'Potvrdenie operácie',
