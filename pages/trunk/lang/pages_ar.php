@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_page' => 'لا توجد صفحات في هذه اللحظة.',
+	'aucune_page' => 'لا توجد صفحات في هذه اللحظة.', # MODIF
 
 	// C
 	'convertir_article' => 'تحويل الى مقال',
@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_page' => 'إنشاء صفحة جديدة',
 
 	// M
-	'modifier_page' => 'تغيير الصفحة :',
+	'modifier_page' => 'تغيير الصفحة :', # MODIF
 
 	// P
 	'pages_uniques' => 'صفحات فريدة',

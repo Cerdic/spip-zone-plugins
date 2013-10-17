@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_page' => 'No hay ninguna página por el momento.',
+	'aucune_page' => 'No hay ninguna página por el momento.', # MODIF
 
 	// C
 	'convertir_article' => 'Convertir en artículo',
@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_page' => 'Crear una nueva página',
 
 	// M
-	'modifier_page' => 'Modificar la página:',
+	'modifier_page' => 'Modificar la página:', # MODIF
 
 	// P
 	'pages_uniques' => 'Páginas únicas',

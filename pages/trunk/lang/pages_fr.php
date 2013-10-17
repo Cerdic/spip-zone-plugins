@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_page' => 'Il n\'y a aucune page pour l\'instant.',
+	'aucune_page' => 'Il n’y a aucune page pour l’instant.',
 
 	// C
 	'convertir_article' => 'Convertir en article',
@@ -19,10 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_champ_page_taille' => '255 charactères maximum',
 
 	// L
-	'label_champ_page' => 'Page :',
+	'label_champ_page' => 'Page :',
 
 	// M
-	'modifier_page' => 'Modifier la page :',
+	'modifier_page' => 'Modifier la page :',
 
 	// P
 	'pages_uniques' => 'Pages uniques',

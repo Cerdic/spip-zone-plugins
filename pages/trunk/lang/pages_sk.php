@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_page' => 'Momentálne žiadne stránky neexistujú.',
+	'aucune_page' => 'Momentálne žiadne stránky neexistujú.', # MODIF
 
 	// C
 	'convertir_article' => 'Zmeniť na článok',
@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_page' => 'Vytvoriť novú stránku',
 
 	// M
-	'modifier_page' => 'Upraviť stránku:',
+	'modifier_page' => 'Upraviť stránku:', # MODIF
 
 	// P
 	'pages_uniques' => 'Jedinečné stránky',
