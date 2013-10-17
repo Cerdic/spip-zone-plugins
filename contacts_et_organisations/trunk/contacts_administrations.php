@@ -195,6 +195,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
  * @return void
  */
 function contacts_vider_tables($nom_meta_base_version) {
+	sql_drop_table('spip_annuaires');
 	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
 	sql_drop_table("spip_contacts_liens");
@@ -202,11 +203,11 @@ function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations_liens");
 
 	# Nettoyer les versionnages, forums et urls
-	$in = sql_in("objet", array('organisations', 'contacts'));
+	$in = sql_in("objet", array('organisations', 'contacts', 'annuaires'));
 	sql_delete("spip_versions", $in);
 	sql_delete("spip_versions_fragments", $in);
 	sql_delete("spip_forum", $in);
-	sql_delete("spip_urls", sql_in("type", array('organisation', 'contact')));
+	sql_delete("spip_urls", sql_in("type", array('organisation', 'contact', 'annuaire')));
 
 	effacer_meta($nom_meta_base_version);
 }

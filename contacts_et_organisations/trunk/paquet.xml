@@ -1,7 +1,7 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.10.1"
+	version="2.10.2"
 	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/contacts-128.png"
