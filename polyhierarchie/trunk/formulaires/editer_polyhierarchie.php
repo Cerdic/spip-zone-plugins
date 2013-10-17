@@ -47,7 +47,7 @@ function formulaires_editer_polyhierarchie_verifier($objet, $id_objet, $retour='
 	if ($objet = _request('_polyhier')
 		AND in_array($objet,array('article','rubrique'))){
 		// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
-		if (_request('id_parent') < 0) return $flux;
+		if (_request('id_parent') < 0) return $erreurs;
 		
 		$id_table_objet = id_table_objet($objet);
 

@@ -20,9 +20,11 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+.formulaire_editer_polyhierarche .editer_parents,
 .formulaire_editer_rubrique .editer_parents,
 .formulaire_editer_article .editer_parents {padding-#GET{left}:5px;background:#eee url(#CHEMIN{images/polyhier-32.png}) no-repeat top right;}
 
+.formulaire_editer_polyhierarche .editer_parents label,
 .formulaire_editer_rubrique .editer_parents label,
 .formulaire_editer_article .editer_parents label {margin-#GET{left}:0;display:block;float:left;padding:2px 0;}
 
