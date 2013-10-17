@@ -28,9 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact or organisation information on the authors pages in the private area?', # RELIRE
 	'cfg_associer_aux_auteurs' => 'Associate to the authors ?', # MODIF
 	'cfg_associer_aux_auteurs_explication' => 'Allow to associate contacts or organizations to authors. This adds a form to associate an author on the contact pages or organization, and conversely it adds a form to link to a contact or an organization on the authors pages.',
-	'cfg_lier_organisations_rubriques' => 'Link to sections',
-	'cfg_lier_organisations_rubriques_explication' => 'Allow to link organizations to sections ?
-		This display the organization selector on sections and the section selector on organizations.', # MODIF
 	'cfg_relations_avec_auteurs' => 'Relationship with authors', # MODIF
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Mutually delete authors and contacts? ', # MODIF
 	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'By activating this option, when a contact (or an organisation) is deleted, the author associated with this contact, if one exists, sees their status move to the rubbish bin. Inversely, in the same way, if an author is put in the rubbish bin, the contact associated is deleted. This option can be useful on certain sites in order to avoid contacts left without an author (if the latter has been deleted) but be vigilent: deletion is definitive and authors are put in the rubbish ben even if they have written articles...',

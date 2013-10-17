@@ -31,9 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_associer_aux_auteurs' => 'Pripojiť autorov?',
 	'cfg_associer_aux_auteurs_explication' => 'Umožňuje prepájať kontakty na ľudí a organizácie s autormi. Pridá formulár na prepojenie autora na stránky s kontaktmi na ľudí alebo organizácie,
 		a aj opačne pridá formulár na prepojenie kontaktov na ľudí alebo organizácie so stránku s autormi.',
-	'cfg_lier_organisations_rubriques' => 'Prepojiť s rubrikami',
-	'cfg_lier_organisations_rubriques_explication' => 'Umožniť prepájnie organizácií s rubrikami?
-		Táto funkcia zobrazí výber organizácií podľa rubrík a výber rubrík podľa organizácií.',
 	'cfg_relations_avec_auteurs' => 'Vzťah k autorom',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Vymazať kontakty na autorov, ktoré sa opakujú?',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Ak aktivujete túto možnosť, pri vymazaní kontaktu na osobu (alebo  organizáciu) autor priradený k tomuto kontaktu  bude presunutý do koša. Podobne pri vymazaní autora bude vymazaný aj kontakt naňho. To môže pomôcť k tomu, aby sa nehromadili neaktuálne kontakty, ale pozor: vymazanie je definitívne a autor bude presunutý do koša aj vtedy, ak napísal nejaké články.',
