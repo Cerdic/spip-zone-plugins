@@ -6,6 +6,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="79" traduits="33" relire="0" modifs="38" nouveaux="8" pourcent="41.77">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="79" traduits="34" relire="0" modifs="37" nouveaux="8" pourcent="43.04">
+		<traducteur nom="Alessandra" lien="http://trad.spip.net/auteur/alessandra" />
 	</langue>
 </traduction>
