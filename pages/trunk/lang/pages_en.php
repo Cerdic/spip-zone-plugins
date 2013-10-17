@@ -15,6 +15,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_page' => 'Convert to a page',
 	'creer_page' => 'Create a new page',
 
+	// E
+	'erreur_champ_page_doublon' => 'That ID is already in use',
+	'erreur_champ_page_format' => 'Lowercase alphanumeric caracters or "_" only', # RELIRE
+	'erreur_champ_page_taille' => 'Up to 255 characters max',
+
+	// L
+	'label_champ_page' => 'Page :',
+
 	// M
 	'modifier_page' => 'Edit page:',
 
