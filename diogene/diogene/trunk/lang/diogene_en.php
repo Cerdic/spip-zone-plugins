@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_secteur_diogene_inexistant' => 'Warning, the section of the form template doesn’t exist.',
 	'erreur_valeur_float' => 'The value for "@champ@" should be a number.',
 	'erreur_valeur_int' => 'The value for "@champ@" should be a fixed number.',
-	'explication_article_deja_traduit' => 'This article has allready been translated in: ',
+	'explication_article_deja_traduit' => 'This has already been translated in:',
 	'explication_info_type' => 'This identifier must be unique and contain no specific character',
 	'explication_nombre_attente' => 'Maximum number of objects which can be pending publication (does not affect administrators, leave 0 for unlimited).',
 	'explication_rubrique_statut' => 'A section is considered as visible (published) when it contains at least an other published element.',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_version' => 'Version: @lang@',
 
 	// M
-	'message_article_traduit_en' => 'This article allready exists in:',
+	'message_article_traduit_en' => 'This article already exists in:',
 	'message_confirm_depublier' => 'Are you sure you want to unpublish it?',
 	'message_confirm_poubelle' => 'Are you sure you want to delete it?',
 	'message_confirm_sup' => 'Are you sure you continue to delete?',
