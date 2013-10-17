@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'forum' => 'Diskusné fóra sú podľa predvolených nastavení aktivované v článkoch  @complement@; dajú sa deaktivovať jedno po druhom. Návštevníci môžu reagovať na vaše články. Ak niekto pošle príspevok k vášmu článku, dostanete o tom oznam cez e-mail.  Malé negatívum: spamy nie je vždy ľahké nájsť, a tak ich budete musieť vytriediť manuálne. Ak chcete spracovať príspevok v diskusnom fóre (vymazať ho, ak sa vám nepáči, alebo ho označiť ako spam, ak to je spam):
 -* Ak ste prihlásený (-á), na verejne prístupnej stránke na stránke s článkom sú zobrazené dve tlačidlá "Odstrániť príspevok" alebo "SPAM"
--* V súkromnej zóne prejdite do menu Aktivita / Riadiť diskusné fóra',
+-* V súkromnej zóne prejdite do menu Aktivita / Riadiť diskusné fóra', # MODIF
 	'forum_q' => 'Ako riadiť diskusné fóra?',
 
 	// I

@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'forum' => 'The forums are enabled by default on your articles @complement@ and they are deactivated on an individual basis... Visitors can then react to your articles... You will be contacted by email each time a message is posted on one of your articles. Small flip side: spams which are not always easy to identify and that sometimes you need to manually manage. To process a forum message (remove it if it does not please you or report spam if it is one):
 -* In the public site on the page of the article, if you are identified, there are two buttons "Delete this Message" or "SPAM"
--* In the private area, via the activity menu / Manage Forums',
+-* In the private area, via the activity menu / Manage Forums', # MODIF
 	'forum_q' => 'How to manage the forums?',
 
 	// I
