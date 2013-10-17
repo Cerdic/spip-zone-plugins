@@ -47,11 +47,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     \'_ID_WEBMESTRES\',
     \'1:5:8\');
 ?&gt;</pre>
-<p>A partir de SPIP 2.1, también es  posible dar derechos de webmestre a un administrador en la página de edición del autor.</p>
-<p>Nota : los webmasters definidos de esta manera ya no tienen necesidad de proceder a la autentificación FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
+<p>A partir de SPIP 2.1, también es  posible dar derechos de webmaster a un administrador en la página de edición del autor.</p>
+<p>Nota: los webmasters definidos de esta manera ya no necesitan proceder a la autentificación por FTP para operaciones delicadas (mejorar la base de datos, por ejemplo).</p>
 
-<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Documentación</a>
-', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>
+',
 	'details_option_auteur' => '<small><br />Por el momento, la opctión « autor » sólo funciona para los autores registrados (foros con suscripción, por ejemplo). Y, si está  activada, los administradores del sitio también tienen la capacidad de editar los foros.
 	</small>',
 	'droits_des_auteurs' => 'Derechos de los autores',
