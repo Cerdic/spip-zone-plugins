@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_licence_description' => 'Complemento "licencia" para "Diógenes" (utiliza el plugin Licencias)', # MODIF
-	'diogene_licence_nom' => 'Diógenes - Licencia', # MODIF
-	'diogene_licence_slogan' => 'Complemento "licencia" para "Diógenes" (utiliza el plugin Licencias)' # MODIF
+	'diogene_licence_description' => 'Añade la posibilidad de seleccionar la licencia de un objeto desde su formulario de edición si esta opción está activada en la plantilla de formulario de Diógenes',
+	'diogene_licence_nom' => 'Diógenes - Licencia',
+	'diogene_licence_slogan' => 'Complemento "licencia" para "Diógenes"'
 );
 
 ?>
