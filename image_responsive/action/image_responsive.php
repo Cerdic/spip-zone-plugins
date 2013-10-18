@@ -18,7 +18,7 @@ function action_image_responsive() {
 			
 			if (largeur($img) > 1.5*$taille) $img = image_renforcement($img, 0.1);
 			
-			$img = extraire_attribut(image_reduire($img, $taille), "src");
+			$img = extraire_attribut($img, "src");
 			
 			copy($img, $dest);
 		}

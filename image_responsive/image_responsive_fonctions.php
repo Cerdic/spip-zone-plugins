@@ -41,6 +41,11 @@ function _image_responsive($img, $taille=120) {
 		else {
 			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille";
 		}
+		
+		if ($taille == 0) $src = "rien.gif";
+		
+		
+
 
 		$img = inserer_attribut($img, "src", $src);
 	}
