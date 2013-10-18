@@ -36,6 +36,28 @@ function formidable_autoriser_par_auteur($id, $id_auteur = 0) {
 		$autorisations = objet_trouver_liens(array('formulaire'=>$id),array('auteur'=>$id_auteur));
 		$retour = count($autorisations) > 0;
 	}
+
+	return $retour;
+}
+
+/**
+ * Réponses à un formulaire éditable par un auteur
+ *
+ * Est-on en présence d'un auteur qui tente de modifier les réponses d'un formulaire
+ * et que Formidable est configuré pour prendre en compte les auteurs
+ * et que les auteurs sont en droit de modifier les réponses de leurs formulaires ?
+ *
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @return bool  true s'il a le droit, false sinon
+ *
+*/
+function formidable_auteur_admin_reponse($qui) {
+	// L'auteur peut-il administrer les réponses ?
+	$admin_reponses_auteur = lire_config('formidable/analyse/admin_reponses_auteur');
+	$auteurs = lire_config('formidable/analyse/auteur');
+	$is_admin = (isset($qui['statut']) and $qui['statut'] == '0minirezo');
+	$retour = ($is_admin or (($auteurs == 'on') and ($admin_reponses_auteur == 'on')));
+
 	return $retour;
 }
 
@@ -178,9 +200,8 @@ function autoriser_formulaire_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulaires_reponse_instituer_dist($faire, $type, $id, $qui, $opt){
-    if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
-    else return false;
+function autoriser_formulairesreponse_instituer_dist($faire, $type, $id, $qui, $opt){
+	return formidable_auteur_admin_reponse($qui);
 }
 
 /**
@@ -200,9 +221,10 @@ function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
- * Autorisation de supprimer une réponse d'un formulaire formidable
+ * Autorisation de modifier une réponse d'un formulaire formidable
  *
- * Il faut pouvoir éditer un formulaire pour pouvoir en supprimer des réponses
+ * suivant la config, un administrateur ou l'auteur du formulaire peuvent
+ * voir les résultats
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -211,12 +233,31 @@ function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulairesreponse_supprimer_dist($faire, $type, $id, $qui, $opt){
-    // On récupère l'id du formulaire
-    if ($id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires_reponses', $id)))
-        return autoriser('editer', 'formulaire', $id_formulaire);
-    else
-        return false;
+function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt){
+    if ($id_formulaire = intval(sql_getfetsel(
+			'id_formulaire', 'spip_formulaires_reponses', "id_formulaires_reponse=$id"))) {
+
+		$retour = (autoriser_formulaire_editer_dist($faire, $type, $id_formulaire, $qui, $opt)
+				and formidable_auteur_admin_reponse($qui));
+	}
+	return $retour;
+}
+
+/**
+ * Autorisation de supprimer une réponse d'un formulaire formidable
+ *
+ * Il faut pouvoir modifier les réponses d'un formulaire pour pouvoir les en supprimer
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_formulairesreponse_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	$retour = autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt);
+	return $retour;
 }
 
 ?>
