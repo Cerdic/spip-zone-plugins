@@ -1,76 +1,104 @@
 [(#REM)
 	Un cache plus court, pour la boucle syndic_articles
 ]#CACHE{3600}
-<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
+[(#REM) Feuille de style specifique a la page ]
 </head>
 
 <body class="page_sommaire">
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{id_rubrique}>
+	<INCLURE{fond=inc-entete}{env}>
 
 	[(#REM) Contenu principal : derniers articles publies ]
 	<div class="hfeed" id="conteneur">
-	<div id="contenu">
+		<div id="contenu">
 		
-		<div class="cartouche invisible">
-			<h1 class="invisible">#NOM_SITE_SPIP</h1>
-		</div>
+			<div class="cartouche invisible">
+				<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			</div>
 		
-		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 		
-		<div class="vignettes_portfolio">
+			<div class="vignettes_portfolio">
+
+				<B_article_en_cours>
+				<BOUCLE_article_en_cours(DOCUMENTS){id_document}{id_rubrique}{tout}>
+					<h1 class="#EDIT{titre}">[(#TITRE)]&nbsp;</h1>
 
 
-<B_documents_portfolio>
-<div id="documents_portfolio">
-	<h2 class="invisible"><:info_portfolio:></h2>
-	<h3>#TITRE
-	</h3>
-
-	<BOUCLE_documents_portfolio(DOCUMENTS){id_rubrique}{tout} {doublons}{par num titre, date}{inverse}{pagination 6}>[
-	<div class="bloc_photo">
-	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"  class="fancybox" rel="recents">[(#FICHIER
-		|image_masque{masque/paysage_l.png}
-		|inserer_attribut{class,spip_logos}
-		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
-	]<br>
-	</div>
-	</BOUCLE_documents_portfolio>
-</div>
-<div class="pages">#PAGINATION</div>
-</B_documents_portfolio>
-
-		</div>
-
-
-
-	<div class="tout">
-		[(#REM) Portfolio : album d'images ]
-			[(#REM) diaporama de toutes les images de la rubrique]
-		<B_premier_doc_all>
+					<BOUCLE_article_precedent(DOCUMENTS) {id_rubrique}{par id_document} {tout}  {precedent}>
+						<div class="precedent">
+							#BOUTON_ACTION{<, #URL_RUBRIQUE|parametre_url{id_document,#ID_DOCUMENT}, ajax}
+						</div>
+					</BOUCLE_article_precedent>
+				 
+					<BOUCLE_article_suivant(DOCUMENTS) {id_rubrique} {par id_document} {tout} {suivant}>
+						<div class="suivant">
+							#BOUTON_ACTION{>, #URL_RUBRIQUE|parametre_url{id_document,#ID_DOCUMENT}, ajax}
+						</div>
+					</BOUCLE_article_suivant>
+					
+					<br/>
+					
+					<div class="portfolio">
+						<div class="modifier">
+						[(#AUTORISER{modifier, document, #ID_DOCUMENT})
+							#BOUTON_ACTION{〔modifier〕, ecrire/?exec=document_edit&id_document=#ID_DOCUMENT}
+						]
+						</div>
+						<a href="#URL_DOCUMENT" class="mediabox">[(#FICHIER|image_reduire{700,600})]</a>
+					</div>
+					
+					<div class="description">
+						<div class="#EDIT{descriptif}">[(#DESCRIPTIF)] &nbsp;</div>
+						<span class="#EDIT{credits}">[© (#CREDITS|?{#CREDITS, #NOM_SITE_SPIP}) -]&nbsp;</span> <span class="#EDIT{date}">[(#DATE|affdate{'d/m/Y'})]</span><br />
+					</div>
+					
+					<div class="complements">
+						[(#FORMULAIRE_NOTATION)]
+						<div id="socialtags"></div>
+					</div>
+					
+					<div class="commentaires">
+						<INCLURE{fond=inclure/forum}{id_document}>
+						[(#FORMULAIRE_FORUM{#SELF})]
+					</div>
+					
+				</BOUCLE_article_en_cours>
 		
-			<BOUCLE_premier_doc_all(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{tout} {doublons all}{par num titre, date}{inverse}{0,1}>
-			[( <a href="(#URL_DOCUMENT)" type="#MIME_TYPE"  class="fancybox" rel="tout">tout voir</a>
-			 )]
-			</BOUCLE_premier_doc_all>
-			<BOUCLE_documents_portfolio_all(DOCUMENTS){id_rubrique}{extension IN png,jpg,gif}{tout}{doublons all} {par num titre, date}{inverse}>[
-			<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"  class="fancybox" rel="tout"></a>
-			]
-			</BOUCLE_documents_portfolio_all>
-		</B_premier_doc_all>
-		<//B_premier_doc_all>
-	</div>
+				</B_article_en_cours>
+					[(#REM) Portfolio : album d'images ]
+					<div id="documents_portfolio">
+						<h3>derniers ajouts</h3>
+						<B_documents_portfolio>
+							<BOUCLE_documents_portfolio(DOCUMENTS){tout}{id_rubrique?}{par id_document}{inverse}{pagination 6}>
+							<div class="bloc_photo">
+								<a href="[(#URL_RUBRIQUE|parametre_url{id_document,#ID_DOCUMENT})]">
+								[(#FICHIER
+									|image_masque{masque/paysage_l.png}
+									|inserer_attribut{class,spip_logos}
+									|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
+							<br>
+							</div>
+							</BOUCLE_documents_portfolio>
+							<div class="pages">#PAGINATION</div>
+						</B_documents_portfolio>
+					</div>
+		
+					
+				<//B_article_en_cours>
+		
+			</div>
+	
 
 
-			
 	
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
@@ -90,4 +118,3 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_principale>

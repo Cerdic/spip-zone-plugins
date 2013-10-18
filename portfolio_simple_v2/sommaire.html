@@ -39,7 +39,7 @@
 		<B_documents_portfolio>
 			<BOUCLE_documents_portfolio(DOCUMENTS){tout}{id_rubrique}{par num titre, date}{inverse}{0,2}>
 			<div class="bloc_photo">
-				<a href="#URL_RUBRIQUE?id_document=#ID_DOCUMENT">
+				<a href="[(#URL_RUBRIQUE|parametre_url{id_document,#ID_DOCUMENT})]">
 				[(#FICHIER
 					|image_masque{masque/paysage_l.png}
 					|inserer_attribut{class,spip_logos}
