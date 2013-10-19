@@ -7,10 +7,12 @@
 >
 
 	<nom>Réponses commentées avec Formidable</nom>
-	<!-- Générateur de formulaires -->
+    <auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+    <licence>GPL 3</licence>
+    <traduire module="formidable_reponses_commentees" reference="fr" />
 
-	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
-
+    
+    <pipeline nom="formulaire_verifier" inclure="formidable_reponses_commentees_pipelines.php" />
 
 	<necessite nom="formidable" compatibilite="[1.7.4;[" />
 </paquet>
