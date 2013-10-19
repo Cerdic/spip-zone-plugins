@@ -100,6 +100,9 @@ function multilang_inserer_head($config=array()){
 		if(isset($config['gis']) && $config['gis']) { // GIS
 			$root .= ',div.formulaire_editer_gis';
 		}
+		foreach (pipeline('multilang_objets_supplementaires', array()) as $type => $titre) {
+			$root .= ',div.formulaire_editer_' . $type;
+		}
 
 		// Docs traites a part dans pages d'edition d'articles et de rubriques
 		if($config['document']){
@@ -217,6 +220,11 @@ function multilang_affichage_final($flux){
 			}
 			if(isset($config['gis']) && $config['gis']) { // GIS
 				$root .= ',input[type=hidden][name*=name_][value|=gis]:not(input[value|=gis-logo])';
+			}
+			foreach (pipeline('multilang_objets_supplementaires', array()) as $type => $titre) {
+				if(isset($config[$type]) && $config[$type]) {
+					$root .= ",input[type=hidden][name*=name_][value|=$type]:not(input[value|=$type-logo])";
+				}
 			}
 			$texte = '
 				var crayons_multilang_init = function(){

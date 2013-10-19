@@ -60,6 +60,14 @@
 								defaut=''}
 							)]
 						]
+
+						<BOUCLE_autres(POUR){tableau #PIPELINE{multilang_objets_supplementaires,#ARRAY}}>
+							[(#SAISIE{oui_non,#CLE,
+								label=#VALEUR,
+								defaut=''}
+							)]
+						</BOUCLE_autres>
+
 						[(#SAISIE{oui_non,multilang_public,
 							label=<:multilang:cfg_lbl_espace_public:>,
 							defaut=off}
