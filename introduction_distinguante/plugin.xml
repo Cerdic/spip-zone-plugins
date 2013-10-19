@@ -11,4 +11,5 @@
     <necessite id="SPIP" version="[2.0.0;3.0.99]" />
     <fonctions>introduction_distinguante_fonctions.php</fonctions>
     <lien>http://contrib.spip.net/4449</lien>
+    <categorie>outil</categorie>
 </plugin>
