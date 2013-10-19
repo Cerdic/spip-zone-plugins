@@ -1,6 +1,44 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function css_hexa_to_lambda($d,$gamma=0.8){
+
+    // réciproque de lambda_to_css_hexa, aux erreurs d'arrondies près
+    // récupération des composant
+    $r =    hexdec(substr($d,0,2));
+    $v =    hexdec(substr($d,2,2));
+    $b =    hexdec(substr($d,4,2));
+    // prise en compte du gamma et de la mise sur 255
+    $r = pow($r/255,1/$gamma); 
+    $v = pow($v/255,1/$gamma); 
+    $b = pow($b/255,1/$gamma); 
+    if ($v == 0  and $b!=0 and $b!=1){// 380<= lambda < 420. 
+        $lambda = ($b * 40 + 254)/0.7;
+        }
+    elseif ($v == 0 and $r!=0 and $b==1){// 420<= lambda < 440
+        $lambda = 440-60*$r;
+        }
+    elseif ($r == 0 and $b == 1){ // 440 <= lambda < 490
+        $lambda = 50 * $v +440;
+        }
+    elseif ($r == 0 and $v == 1){ // 490 <= lambda < 510
+        $lambda = 510-20*$b;
+        }
+    elseif ($v == 1 and $b ==0){ // 510 <= lambda < 580
+        $lambda = 510 + 70*$r;
+    }
+    elseif ($r ==1 and $v>0 and $b==0){ // 580 <= lambda < 645
+        $lambda = 645-65 *$v;
+        }
+    elseif ($r==1 and $v==0 and $b==0){ // 645 <= lambda <=700, on ne peut déeterminer lambda
+        $lambda = 672.5;
+    }
+    else{   // 700 < lambda
+        $lambda = (570-80*$r)/0.7;
+        }
+    return round($lambda);
+    }
+
 function lambda_to_css_hexa($donnee,$gamma=0.8){
 	// conversion d'une couleur exprimée sous la forme lambdelongueur d'onde dans la vide (en nm) vers du css_hexa  décimal.
 	// algorithme : http://www.physics.sfasu.edu/astro/color/spectra.html, mais en fait http://mirrors.ctan.org/macros/latex/contrib/xcolor/xcolor.pdf, "The wave model"
@@ -56,6 +94,7 @@ function lambda_to_css_hexa($donnee,$gamma=0.8){
 	else{
 		$f = 0.3 + 0.7*((780-$lambda)/(780-700)); 
 		}
+    
 	// les r,v,b final (paragraphe 99 de xcolor) * 255, arrondi puis mis en hexadecimal
 	$r = str_pad(dechex(round((pow($f*$r,$gamma))*255)),2,"0",STR_PAD_LEFT);
 	$g = str_pad(dechex(round((pow($f*$g,$gamma))*255)),2,"0",STR_PAD_LEFT);
