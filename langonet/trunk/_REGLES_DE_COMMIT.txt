@@ -117,4 +117,6 @@ arborescence de recherche des cas d'utilisation :
 - les constantes doivent être nommées avec le préfixe "_LANGONET_".
 - leur définition doit être prioritairement locale à un fichier afin d'éviter la création d'un
   fichier langonet_options.php.
-- la définition d'une constante doit être précédée d'un test : if (!defined('nom de la constante')) define('nom de la constante', 'valeur');
+- la définition d'une constante doit être précédée d'un test :
+	if (!defined('nom de la constante'))
+		define('nom de la constante', 'valeur');
