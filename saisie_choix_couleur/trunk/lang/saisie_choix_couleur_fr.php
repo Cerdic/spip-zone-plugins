@@ -4,7 +4,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	"choix_couleur_datas_explication"=>"Vous devez indiquez un choix par ligne sous la forme <code>code couleur|Label du choix</code>. Le code couleur peut-être :
+	
+    "analyse_moyenne_temperature_label"=>"Analyse : température de corps noirs",
+    "analyse_moyenne_temperature_explication"=>"Pour l'analyse des réponses, afficher la moyenne des températures de corps noirs.",
+    "choix_couleur_datas_explication"=>"Vous devez indiquez un choix par ligne sous la forme <code>code couleur|Label du choix</code>. Le code couleur peut-être :
 	<br />
 	-Un code CSS/HTML non précédé de <code>#</code>. Par exemple <code>ffccff</code>.<br />
 	-Une longueur d'onde dans le vide, exprimée en nm, écrite sous la forme <code>lamdalongueur_d'onde</code>. Par exemple : <code>lamda500</code>. La longuer d'onde doit être comprise entre 380 (inclu) et 780 (inclu) nm.

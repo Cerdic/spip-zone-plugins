@@ -104,6 +104,19 @@ options:
           nom: 'erreur_obligatoire'
           label: '<:saisies:option_erreur_obligatoire_label:>'
           explication: '<:saisies:option_erreur_obligatoire_explication:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'analyse'
+      label: '<:formidable:reponses_analyse:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'analyse_moyenne_temperature'
+          label: '<:saisie_choix_couleur:analyse_moyenne_temperature_label:>'
+          explication: '<:saisie_choix_couleur:analyse_moyenne_temperature_explication:>'
+          defaut: ''
 defaut:
   options:
     label: '<:saisie_choix_couleur:choix_couleur_titre:>'
