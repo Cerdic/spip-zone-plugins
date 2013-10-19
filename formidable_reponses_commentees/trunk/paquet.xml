@@ -2,7 +2,7 @@
 	prefix="formidable_reponses_commentees"
 	categorie="communication"
 	version="0.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0-dev;3.0.*]"
 >
 
