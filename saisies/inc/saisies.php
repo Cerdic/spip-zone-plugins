@@ -245,10 +245,29 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 	return $erreurs;
 }
 
+/*
+ * Applatie une description tabulaire
+ * @param string $tab, le tableau à aplatir
+ * @return $nouveau_tab
+ */
+function saisies_aplatir_tableau($tab){
+    $nouveau_tab = array();
+    foreach($tab as $entree=>$contenu){
+        if (is_array($contenu)){
+            foreach ($contenu as $cle => $valeur){
+                $nouveau_tab[$cle] = $valeur;
+                }
+            }
+        else{
+            $nouveau_tab[$entree] = $contenu;
+            }
+        }
+    return $nouveau_tab;
+}
 
 /*
- * Applati une description chaînée, en supprimant les sous-groupes.
- * @param string $string, la chaîne à aplatir
+ * Applatie une description chaînée, en supprimant les sous-groupes.
+ * @param string $chaine, la chaîne à aplatir
  * @return $chaine
  */
 function saisies_aplatir_chaine($chaine){
