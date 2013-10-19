@@ -24,7 +24,7 @@ function liste_objets_coordonnees($quoi = '') {
 	);
 #	if ( test_plugin_actif('AGENDA') ) // Agenda 2
 #		$liste['evenement'] = array('titre'=>_T('agenda:evenements'),    'exec'=>'evenements_edit'); // ca marche, mais comme les evenements sont obligatoirement lies a un article et qu'ils ont des repetitions, il vaut mieux lier le contact directement a l'article
-	if ( test_plugin_actif('CONTACT') ) { // Contacts & Organisations
+	if ( test_plugin_actif('CONTACTS') ) { // Contacts & Organisations
 		$liste['contact'] = array('titre'=>_T('contacts:bouton_contacts'),     'exec'=>'contact');
 		$liste['organisation'] = array('titre'=>_T('contacts:bouton_organisations'),'exec'=>'organisation');
 	}

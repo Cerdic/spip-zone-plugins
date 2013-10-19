@@ -23,19 +23,19 @@
 			</div>
 			<div class="choix choix_breve">
 				<input name="objets[]" class="checkbox" id="champ_objets_breve" value="breve" type="checkbox"[(#VAL{breve}|in_array{#ENV{objets}}|oui) checked="checked"]>
-				<label for="champ_objet2_breve"><:ecrire:info_breves_03:></label>
+				<label for="champ_objets_breve"><:ecrire:info_breves_03:></label>
 			</div>
 			<div class="choix choix_site">
 				<input name="objets[]" class="checkbox" id="champ_objets_site" value="site" type="checkbox"[(#VAL{site}|in_array{#ENV{objets}}|oui) checked="checked"]>
 				<label for="champ_objets_site"><:ecrire:titre_page_sites_tous:></label>
 			</div>
-		[(#PLUGIN{contact}|oui)
+		[(#PLUGIN{contacts}|oui)
 			<div class="choix choix_contact">
-				<input name="objets&#91;&#92;" class="checkbox" id="champ_objets_contact" value="contact" type="checkbox"[(#VAL{contact}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<input name="objets&#91;&#93;" class="checkbox" id="champ_objets_contact" value="contact" type="checkbox"[(#VAL{contact}|in_array{#ENV{objets}}|oui) checked="checked"]>
 				<label for="champ_objets_contact"><:contacts:bouton_contacts:></label>
 			</div>
 			<div class="choix choix_organisation">
-				<input name="objets&#91;&#92;" class="checkbox" id="champ_objets_organisation" value="organisation" type="checkbox"[(#VAL{organisation}|in_array{#ENV{objets}}|oui) checked="checked"]>
+				<input name="objets&#91;&#93;" class="checkbox" id="champ_objets_organisation" value="organisation" type="checkbox"[(#VAL{organisation}|in_array{#ENV{objets}}|oui) checked="checked"]>
 				<label for="champ_objets_organisation"><:contacts:bouton_organisations:></label>
 			</div>
 		]
