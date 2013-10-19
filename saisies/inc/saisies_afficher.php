@@ -278,7 +278,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 
 /**
  * Génère, à partir d'un tableau de saisie le code javascript ajouté à la fin de #GENERER_SAISIES
- * pour produire un affichage conditionnel des saisies ayant une option afficher_si.
+ * pour produire un affichage conditionnel des saisies ayant une option afficher_si ou afficher_si_remplissage.
  *
  * @param array $saisies
  *     Tableau de descriptions des saisies
@@ -298,7 +298,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 					// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
 					// parce que li_class = 'tableau[nom][option]' ne fonctionne evidement pas
 					// lorsque le name est un tableau
-					if (isset($saisie['options']['afficher_si'])) {
+					if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
 						$i++;
 						// retrouver la classe css probable
 						switch ($saisie['saisie']) {
@@ -311,7 +311,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							default:
 								$class_li = 'editer_'.$saisie['options']['nom'];
 						}
-						$condition = $saisie['options']['afficher_si'];
+						$condition = $saisie['options']['afficher_si']."\n".$saisie['options']['afficher_si_remplissage'];
 						// retrouver l'identifiant
 						$identifiant = '';
 						if (isset($saisie['identifiant']) and $saisie['identifiant']) {
