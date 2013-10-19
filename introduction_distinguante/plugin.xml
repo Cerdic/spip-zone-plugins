@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Introduction distinguante</nom>
 	<etat>test</etat>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
 	<licence>GNU/GPL</licence>
     <prefix>introduction_distinguante</prefix>
