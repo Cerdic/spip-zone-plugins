@@ -91,6 +91,7 @@ Les utilisations avec ou sans module sont détectées.
 		<:sans_module_16{param=#GET{char}}|trim{/}:>
 		<:module:avec_module_17{param=#GET{char, valeur}}|trim{/, #ENV{position}}:>
 		<:sans_module_18{param=#GET{char, valeur}}|trim{/, #ENV{position}}:>
+		<:module:{=#GET{item_19}, param=valeur}:>
 	- regexp	: %<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s
 
 	- cas H2	: l'item est utilisé au travers de l'appel au filtre |singulier_ou_pluriel, à savoir,

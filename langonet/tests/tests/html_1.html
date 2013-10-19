@@ -31,6 +31,9 @@
 				<td><:verification:indefini_html_1{param=#GET{char, valeur}}|replace{/, #ENV{chaine}}|ucfirst:></td>
 				<!-- H1 / module : langonet / item : titre_page / repéré / défini  -->
 				<td><:langonet:titre_page{param1=valeur1, param2=valeur2}|ucfirst:></td>
+				<!-- H1 / module : verification / item : impossible à déterminer car entièrement variable
+				     / repéré mais pas mémorisé car inutile on ne peut pas s'en servir / --  -->
+				<td><:verification:{=#ENV{item},param=valeur}:> </td>
 			</tr>
 			<tr class="row_even">
 				<!-- H3 / module : verification / item : defini_html_2 / repéré / défini  -->
@@ -39,7 +42,7 @@
 				<td>[(#VAL{voir_en_}|concat{#ENV{numero, defaut}}|_T)]</td>
 				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / indéfini  -->
 				<td>[(#VAL{verification:indefini_html_partiel_}|concat{#ELEMENT}|concat{_}|concat{#ENV{numero, defaut}}|_T)]</td>
-				<!-- H3 / module : verification / item : indefini_html_partiel_?? partiellement identifié / repéré / défini  -->
+				<!-- H3 / module : verification / item : defini_html_partiel_?? partiellement identifié / repéré / défini  -->
 				<td>[(#VAL{verification:defini_html_partiel_}|ajouter_numero|_T)]</td>
 			</tr>
 </BOUCLE_verification>
