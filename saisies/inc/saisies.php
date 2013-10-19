@@ -470,4 +470,20 @@ function saisies_afficher_si($saisies) {
 	return false;
 }
 
+
+/*
+ * Le tableau de saisies a-t-il une option afficher_si_remplissage ?
+ *
+ * @param array $saisies Un tableau de saisies
+ * @return boolean
+ */
+function saisies_afficher_si_remplissage($saisies) {
+	$saisies = saisies_lister_par_nom($saisies,true);
+	// Dès qu'il y a au moins une option afficher_si_remplissage, on l'active
+	foreach ($saisies as $saisie) {
+		if (isset($saisie['options']['afficher_si_remplissage']))
+			return true;
+	}
+	return false;
+}
 ?>

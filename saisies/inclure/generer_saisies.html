@@ -42,5 +42,5 @@
 ]
 </BOUCLE_contenu>
 
-[(#REM) Ajout du script js pour l'option si des saisies ]
-[(#ENV{from_fieldset}|non|et{#ENV{saisies}|saisies_afficher_si}) #INCLURE{fond=inclure/js_afficher_si,env}]
+[(#REM) Ajout du script js pour les options si des saisies ]
+[(#ENV{from_fieldset}|non|et{#ENV{saisies}|saisies_afficher_si|ou{#ENV{saisies}|saisies_afficher_si_remplissage}}) #INCLURE{fond=inclure/js_afficher_si,env}]
