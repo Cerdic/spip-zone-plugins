@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Introduction distinguante</nom>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<version>0.1.0</version>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
 	<licence>GNU/GPL</licence>
