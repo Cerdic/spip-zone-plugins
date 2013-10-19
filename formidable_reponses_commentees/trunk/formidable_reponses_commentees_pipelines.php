@@ -19,15 +19,15 @@ function formidable_reponses_commentees_formulaire_verifier($flux){
 			return $flux;
 		}
         foreach ($flux['data'] as $config){
-    //        var_dump($config);
             if (gettype($config) == "array"){
+                $f = -1;
                 foreach ($config as $fieldset){
+                    $f++;
                     if ($fieldset['saisie'] == 'fieldset' and $fieldset['options']['label']=="<:saisies:option_groupe_affichage:>"){
-
-                        $flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
+                        $flux['data'][$nom][$f]['saisies'] = saisies_inserer($flux['data'][$nom][$f]['saisies'], array(
                                 'saisie' => 'textarea',
                                 'options' => array(
-                                    'nom' => "saisie_modifiee_${name}[affichage][commentaire_apres_reponse]",
+                                    'nom' => "saisie_modifiee_${name}[options][commentaire_apres_reponse]",
                                     'rows' => 10,
                                     'label' => _T('formidable_reponses_commentees:commentaire_apres_reponse_label'),
                                     'explication' => _T('formidable_reponses_commentees:commentaire_apres_reponse_explication')
