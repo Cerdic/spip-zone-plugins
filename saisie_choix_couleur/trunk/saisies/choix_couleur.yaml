@@ -117,6 +117,13 @@ options:
           label: '<:saisie_choix_couleur:analyse_moyenne_temperature_label:>'
           explication: '<:saisie_choix_couleur:analyse_moyenne_temperature_explication:>'
           defaut: ''
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'temperature_corps_noir'
+          label: '<:saisie_choix_couleur:temperature_corps_noir_label:>'
+          explication: '<:saisie_choix_couleur:temperature_corps_noir_explication:>'
+          defaut: ''
 defaut:
   options:
     label: '<:saisie_choix_couleur:choix_couleur_titre:>'

@@ -5,8 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
-    "analyse_moyenne_temperature_label"=>"Analyse : température de corps noirs",
-    "analyse_moyenne_temperature_explication"=>"Pour l'analyse des réponses, afficher la moyenne des températures de corps noirs.",
+    "analyse_moyenne_temperature_label"         =>"Analyse : température de corps noirs",
+    "analyse_moyenne_temperature_explication"   =>"Pour l'analyse des réponses, afficher la moyenne des températures de corps noirs.",
+    "temperature_corps_noir_label"              =>"Équivalence entre couleur perçue et température de corps noir",
+    "temperature_corps_noir_explication"        =>"Il n'existe pas de relation simple entre le maximum d'émission d'un corps noir et la couleur perçue par l'œil (voir <a href='http://media4.obspm.fr/public/FSU/pages_corps-noir/temperature-couleur-observer.html' class='spip_out'>l'explication de l'Observatoire de Paris-Meudon</a>). C'est pourquoi pour que l'analyse de la température de corps noirs soit correcte à partir des résultats du formulaire, il vous faut indiquer la correspondance entre la couleur visuelle et la temperature de corps noir, exprimée en K. Sous la forme <code>codecouleur|temperature</code> (une par ligne)." ,       
     "choix_couleur_datas_explication"=>"Vous devez indiquez un choix par ligne sous la forme <code>code couleur|Label du choix</code>. Le code couleur peut-être :
 	<br />
 	-Un code CSS/HTML non précédé de <code>#</code>. Par exemple <code>ffccff</code>.<br />
