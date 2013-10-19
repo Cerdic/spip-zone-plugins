@@ -4,19 +4,37 @@
 		#SET_MERGE{stats, #ARRAY{choix-#VALEUR, #GET{stats}|table_valeur{choix-#VALEUR}|sinon{0}|plus{1}}}
 	]
 </BOUCLE_reponses>
-
+#SET{nombre_reponses,#TOTAL_BOUCLE}
+</B_reponses>
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
 #SET{datas, #ENV*{datas}}
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
 
+[(#ENV{analyse_moyenne_temperature}|oui)
+    #SET{total_temperature,0}
+    [(#ENV**{temperature_corps_noir}|is_string|?{
+        #SET{temperature_corps_noir,#ENV**{temperature_corps_noir}|saisies_chaine2tableau},
+        #SET{temperature_corps_noir,#ENV**{temperature_corps_noir}}
+        })
+    ]
+]
 <BOUCLE_datas(POUR){tableau #GET{datas}}>
 [(#SET{nb,[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]})]
 <tr class="tr_liste">
 	<td class="choix">
 		<span class="choix_couleur_couleur" style="background-color:#[(#CLE|lambda_to_css_hexa)]"></span>
 		#VALEUR
+        [(#ENV{analyse_moyenne_temperature}|oui)
+           [((#GET{temperature_corps_noir}|table_valeur{#CLE})&nbsp;K)]
+        ]
 	</td>
 	<td class="stat"[ title="(#GET{nb}|titre_nb_reponses|attribut_html)"]>#GET{nb}</td>
+    [(#ENV{analyse_moyenne_temperature}|oui)
+        #SET{total_temperature,#GET{total_temperature}|plus{
+            #GET{temperature_corps_noir}|table_valeur{#CLE}|mult{#GET{nb}}
+            }
+        }
+    ]
 </tr>
 </BOUCLE_datas>
 
@@ -25,5 +43,11 @@
 <tr class="tr_liste">
 	<td class="choix"><:saisies:vue_sans_reponse:></td>
 	<td class="stat"[ title="(#GET{diff}|titre_nb_reponses|attribut_html)"]>#GET{diff}</td>
+</tr>
+]
+[(#ENV{analyse_moyenne_temperature}|oui)
+<tr class="tr_list">
+    <td class="choix"><:saisie_choix_couleur:temperature_moyenne:></td>
+    [<td>(#GET{total_temperature}|div{#GET{nombre_reponses}}|round)&nbsp;K </td>]
 </tr>
 ]
