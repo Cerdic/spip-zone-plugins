@@ -40,6 +40,9 @@
         ]
         [(#ENV{formidable_afficher_apres}|=={rien}|oui)
         ]
+        [(#ENV{formidable_afficher_apres}|=={stats}|oui)
+            #MODELE{formulaire_analyse,id_formulaire=#ENV{id}}
+        ]
     ]
     <br />
 </div>
