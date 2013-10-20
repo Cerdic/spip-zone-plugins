@@ -123,7 +123,11 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 		$index_fin = $debut + strlen($affiche);
 
 		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
-		$affiche = ($debut > 0 ? '&#8230;' : '') . $affiche . ($index_fin < strlen($ligne)-1 ? '&#8230;' : '');
+		// -- On détermine au préalable si le filtre de coloration_code va être appliqué ou pas pour éviter dans
+		//    ce cas de mettre les points de suspension typo
+		$informer = chercher_filtre('info_plugin');
+		$suspension = ($informer('coloration_code', 'est_actif') == 1) ? '...' : '&#8230;';
+		$affiche = ($debut > 0 ? $suspension : '') . $affiche . ($index_fin < strlen($ligne)-1 ? $suspension : '');
 	}
 
 	return $affiche;

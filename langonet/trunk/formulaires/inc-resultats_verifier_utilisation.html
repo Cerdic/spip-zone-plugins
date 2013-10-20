@@ -1,7 +1,17 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
-#SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}|implode{','}}
-<p><:langonet:info_verification_utilisation{arborescence=#GET{arborescence}}:></p>
+#SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}}
+<p>
+	[(#GET{arborescence}|count
+		|singulier_ou_pluriel{langonet:info_verification_utilisation_arbo_1, langonet:info_verification_utilisation_arbo_n})]
+</p>
+<B_arborescences>
+<ul class="liste arborescence">
+<BOUCLE_arborescences(DATA) {source table, #GET{arborescence}}>
+	<li><code>#VALEUR</code></li>
+</BOUCLE_arborescences>
+</ul>
+</B_arborescences>
 [<p>
 	(#ENV{corrections}|table_valeur{explication})
 	[(#BOUTON_ACTION{

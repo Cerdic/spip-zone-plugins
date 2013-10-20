@@ -11,17 +11,6 @@
 		parametre : url d'action --> ]
 		<p class="explication"><:langonet:info_verifier:></p>
 		<ul>
-			<li class="editer_version[(#ENV{erreurs}|table_valeur{version}|oui) erreur]">
-				<label>Version d'affichage</label>
-				<div class="choix">
-					<input type="radio" value="new" id="version_new" class="radio" name="version" [(#ENV{version, new}|=={new}|oui) checked="checked"] />
-					<label for="version_new">Nouvel affichage des r&eacute;sultats</label>
-				</div>
-				<div class="choix">
-					<input type="radio" value="old" id="version_old" class="radio" name="version" [(#ENV{version, new}|=={old}|oui) checked="checked"] />
-					<label for="version_old">Ancien affichage des r&eacute;sultats</label>
-				</div>
-			</li>
 			<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
 				<label><:langonet:label_verification:></label>
 				<div class="choix">

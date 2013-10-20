@@ -1,12 +1,11 @@
 <B_liste_items>
 <div class="liste-objets items_langue">
 	<table class="spip liste">
-		<caption>
+		<caption[ class="(#ENV{pertinence}|=={non}|?{error,notice})"]>
+			[(#CHEMIN_IMAGE{[(#ENV{pertinence}|=={non}|?{erreur,warning})-24.png]}|balise_img{'',cadre-icone})]
 			<strong class="caption">
-				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_1},
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_n},
-									sous_total})]
+				[(#TOTAL_BOUCLE
+					|singulier_ou_pluriel{#VAL{langonet:message_ok_utilises_}|concat{#ENV{pertinence}}|concat{_1}, #VAL{langonet:message_ok_utilises_}|concat{#ENV{pertinence}}|concat{_n}, nberr})]
 			</strong>
 		</caption>
 		<tbody>
@@ -21,4 +20,7 @@
 	</table>
 </div>
 </B_liste_items>
+#BOITE_OUVRIR{'', success}
+	[(#VAL{langonet:message_ok_utilises_}|concat{#ENV{pertinence}}|concat{_0}|_T)]
+#BOITE_FERMER
 <//B_liste_items>
