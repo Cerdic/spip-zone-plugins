@@ -10,10 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  */
 function fbantispam_verifier_formulaire_forum_dist($flux){
-	// echo "<h2>fbantispam_verifier_formulaire_forum_dist</h2>";
 	$ret = array();
 	$form = $flux['args']['form'];
-	// echo "<pre>";print_r($flux);echo "</pre>";
 	if ($form == "forum")
 	{
 		$texte = _request('texte');
@@ -27,11 +25,7 @@ function fbantispam_verifier_formulaire_forum_dist($flux){
 
 		if ($captcha != $cps) 
 		{
-			// echo "<h2>fbantispam_verifier_formulaire_forum_dist ERROR CAPTCHA=$captcha code=$cps</h2>";
 			$ret['message_erreur'] = '<p style="background:#ffffaa;padding:4px">ERREUR : le code anti-spam n\'est pas correct</p>';
-		}
-		else
-		{
 		}
 	}
 

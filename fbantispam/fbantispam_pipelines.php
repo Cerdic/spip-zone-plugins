@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  */
 function fbantispam_recuperer_fond($flux) {
-	// echo "<pre>";print_r($flux);echo "</pre>";
 	$fond = strval($flux['args']['fond']);
 	if (false !== $pos = strpos($fond, 'formulaires/forum')) 
 	{
@@ -27,7 +26,6 @@ function fbantispam_recuperer_fond($flux) {
 		$nobot = recuperer_fond("inclure/nobot", array('nobot' => ''));
 		$texte = substr_replace($texte, $nobot, $pos, 0);
 
-		//$pos = strrpos($texte, '<p class="boutons">', -$pos);
 		// On ajoute le champ 'captcha' avant le bouton de submit
 		// On commence de la fin, pour se positionner dans le formulaire de saisie et non dans
 		// celui de prévisualisation
@@ -65,12 +63,9 @@ function fbantispam_formulaire_charger($flux) {
 /**
  */
 function fbantispam_formulaire_verifier($flux) {
-	// echo "<h2>fbantispam_formulaire_verifier</h2>";
-	// echo "<pre>";print_r($flux);echo "</pre>";
 	$form = $flux['args']['form'];
 	$previsu = false;
 	if (isset($flux['data']['previsu']) && $flux['data']['previsu'] != '') $previsu = true;
-	// echo "<h2>fbantispam_formulaire_verifier form=$form previsu=$previsu</h2>";
 
 	$res = array();
 
@@ -83,16 +78,13 @@ function fbantispam_formulaire_verifier($flux) {
 		$cp2 = _request('c2');
 		$cp3 = _request('c3');
 		$cps = "$cp0"."$cp1"."$cp2"."$cp3";
-		// echo "<h4>fbantispam_formulaire_verifier VERIFIER... captcha=$captcha code=$cps</h4>";
 		if ($captcha == '')
 		{
-			// echo "<h2>return erreur</h2>";
 			$res['message_erreur'] = '<p style="background:#ffffaa;padding:4px">ERREUR : le code anti-spam n\'a pas été saisi</p>';
 			return $res;
 		}
 		if ($captcha != $cps) 
 		{
-			// echo "<h2>return erreur</h2>";
 			$res['message_erreur'] = '<p style="background:#ffffaa;padding:4px">ERREUR : le code anti-spam n\'est pas correct</p>';
 			return $res;
 			
@@ -100,7 +92,6 @@ function fbantispam_formulaire_verifier($flux) {
 		$cmod = _request('cmod');
 		if ($cmod != 'fbantispam') 
 		{
-			// echo "<h2>return erreur</h2>";
 			$res['message_erreur'] = '<p style="background:#ffffaa;padding:4px">ERREUR : message non accepté (identifié à un SPAM)</p>';
 			return $res;
 			
@@ -109,10 +100,11 @@ function fbantispam_formulaire_verifier($flux) {
 	return $flux;
 }
 
+/**
+ */
 function fbantispam_formulaire_traiter($flux) {
 	return $flux;
 }
-
 
 /**
  */
@@ -120,6 +112,8 @@ function fbantispam_pre_edition($flux) {
 	return $flux;
 }
 
+/**
+ */
 function fbantispam_get_captcha()
 {
 	$ret = array();
@@ -129,6 +123,5 @@ function fbantispam_get_captcha()
 	}
 	return $ret;
 }
-
 
 ?>
