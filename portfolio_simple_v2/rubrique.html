@@ -59,6 +59,8 @@
 					<div class="description">
 						<div class="#EDIT{descriptif}">[(#DESCRIPTIF)] &nbsp;</div>
 						<span class="#EDIT{credits}">[© (#CREDITS|?{#CREDITS, #NOM_SITE_SPIP}) -]&nbsp;</span> <span class="#EDIT{date}">[(#DATE|affdate{'d/m/Y'})]</span><br />
+						<div class="exif">[(#FICHIER|lire_exif{make})] [(#FICHIER|lire_exif{model})] - [(#FICHIER|lire_exif{exposureTime})] [(#FICHIER|lire_exif{fnumber})] - [(#FICHIER|lire_exif{isoEquiv}) ISO] - Focale [(#FICHIER|lire_exif{focalLength})]</div>
+						
 					</div>
 					
 					<div class="complements">
