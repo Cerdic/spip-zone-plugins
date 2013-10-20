@@ -72,6 +72,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
 	// précédemment constituée.
 	$utilises = collecter_occurrences($fichiers);
+	exporter_tableau($utilises['debug'], array('expression', 'module', 'raccourci', 'suffixe', 'ligne'));
 
 	// On charge le fichier de langue à vérifier qui doit exister dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
@@ -99,6 +100,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichiers;
+	$resultats['infos'] = $infos_occurrences;
 
 	return $resultats;
 }
@@ -198,12 +200,59 @@ function identifier_type_fichier($fichier) {
  * @param string $no_ligne
  * @param bool $eval
  */
+function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
+	include_spip('inc/langonet_utils');
+
+	if (!isset($occurrence[3]))
+		$occurrence[3] = '';
+	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
+
+	// Rechercher si l'occurrence trouvée est dynamique (existence d'un suffixe ou pas)
+	$item_variable = false;
+	if ($suite AND !$raccourci_regexp) {
+		$suite = '';
+		$raccourci_regexp = $occurrence[3];
+		$item_variable = true;
+	}
+
+	$avec_suffixe = false;
+	if ($suite) {
+		if ($expression[0] == '#') {
+			// Cas HTML #VAL{xxx}|yyy|_T dynamique
+			$avec_suffixe = true;
+		}
+		elseif ($expression[0] == '_'){
+			$avec_suffixe = true;
+		}
+	}
+	elseif ($expression[0] == '<') {
+		// Cas HTML <:xxx:yyy:> dynamique
+		if (($suite[0] == '{') AND ($suite[1] == '=')) {
+			// Aucun raccourci n'est défini, l'item est complètement dynamique, il faut créer un raccourci
+			$raccourci_regexp = str_replace(array('=','#',',','{','}',' ',"\t"), '_', $raccourci_regexp);
+			$item = '';
+		}
+	}
+
+	list($item, $args) = extraire_arguments($raccourci_regexp);
+	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
+	$raccourci_argumente .= $args;
+
+	$occurrence[] = $ligne;
+
+	$utilises['items'][$raccourci_argumente] = $item;
+	$utilises['modules'][$raccourci_argumente] = $module;
+	$utilises['item_tous'][$raccourci_argumente][$fichier][$no_ligne][] = $occurrence;
+	$utilises['suffixes'][$raccourci_argumente] = $eval;
+	$utilises['debug'][] = $occurrence;
+}
 function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
 		$occurrence[3] = '';
 	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
+
 	if (($expression[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
 		// $raccourci_regexp approximatif, mais pas grave: c'est pour le msg
 		$raccourci_regexp .= ' . ' . substr($suite,3);
@@ -223,6 +272,7 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 	$utilises['modules'][$raccourci_argumente] = $module;
 	$utilises['item_tous'][$raccourci_argumente][$fichier][$no_ligne][] = $occurrence;
 	$utilises['suffixes'][$raccourci_argumente] = $eval;
+	$utilises['debug'][] = $occurrence;
 
 }
 

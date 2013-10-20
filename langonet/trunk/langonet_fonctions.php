@@ -133,4 +133,27 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 	return $affiche;
 }
 
+function exporter_tableau($tableau, $colonnes, $separateur="\t") {
+	if ($tableau) {
+		$contenu = '';
+		if ($colonnes) {
+			foreach ($colonnes as $_colonne) {
+				$contenu .= $_colonne . $separateur;
+			}
+			$contenu = rtrim($contenu, $separateur) . "\n";
+		}
+
+		foreach ($tableau as $_ligne) {
+			for ($i=0; $i <= count($colonnes); $i++ ) {
+				$contenu .= $_ligne[$i] . $separateur;
+			}
+			$contenu = rtrim($contenu, $separateur) . "\n";
+		}
+
+		$fichier_csv = sous_repertoire(_DIR_TMP, "csv") . 'occurrences_' . date("Ymd_His") . '.csv';
+		if ($contenu)
+			ecrire_fichier($fichier_csv, $contenu);
+	}
+}
+
 ?>
