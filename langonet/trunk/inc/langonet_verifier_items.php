@@ -167,7 +167,7 @@ function collecter_occurrences($fichiers) {
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 					if (preg_match_all(_LANGONET_ITEM_G, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, true);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
 			}
 		}
@@ -200,7 +200,7 @@ function identifier_type_fichier($fichier) {
  * @param string $no_ligne
  * @param bool $eval
  */
-function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
+function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
@@ -208,45 +208,43 @@ function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $li
 	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
 
 	// Rechercher si l'occurrence trouvée est dynamique (existence d'un suffixe ou pas)
+	$avec_suffixe = false;
 	$item_variable = false;
+	// -- on commence par traiter le cas ou le raccourci est vide car détecté comme une suite
 	if ($suite AND !$raccourci_regexp) {
+		// Cas de la nouvelle écriture variable du raccourci <:xxx:{=#ENV{yyy}}:>
+		// -- on rétablit le raccourci à partir de la suite qui n'en est pas une.
+		$raccourci_regexp = $suite;
+//		$raccourci_regexp = str_replace(array('=','#',',','{','}',' ',"\t"), '_', $raccourci_regexp);
 		$suite = '';
-		$raccourci_regexp = $occurrence[3];
+		$item_variable = true;
+	}
+	// -- on continue en détectant les suites qui sont de vrais suffixes d'un raccourci incomplet
+	if ($suite) {
+		if (($expression[0] == '#') OR ($expression[0] == '_')){
+			// Cas HTML #VAL{xxx}|yyy|_T dynamique ou PHP _T("xxx:$yyy")
+			$avec_suffixe = true;
+		}
+	}
+	// -- on détecte enfin les raccourcis variables PHP
+	if ($raccourci_regexp[0] == '$') {
 		$item_variable = true;
 	}
 
-	$avec_suffixe = false;
-	if ($suite) {
-		if ($expression[0] == '#') {
-			// Cas HTML #VAL{xxx}|yyy|_T dynamique
-			$avec_suffixe = true;
-		}
-		elseif ($expression[0] == '_'){
-			$avec_suffixe = true;
-		}
-	}
-	elseif ($expression[0] == '<') {
-		// Cas HTML <:xxx:yyy:> dynamique
-		if (($suite[0] == '{') AND ($suite[1] == '=')) {
-			// Aucun raccourci n'est défini, l'item est complètement dynamique, il faut créer un raccourci
-			$raccourci_regexp = str_replace(array('=','#',',','{','}',' ',"\t"), '_', $raccourci_regexp);
-			$item = '';
-		}
-	}
-
 	list($item, $args) = extraire_arguments($raccourci_regexp);
-	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
-	$raccourci_argumente .= $args;
+	list($raccourci_unique, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
+//	$raccourci_unique .= $args;
+	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
 	$occurrence[] = $ligne;
 
-	$utilises['items'][$raccourci_argumente] = $item;
-	$utilises['modules'][$raccourci_argumente] = $module;
-	$utilises['item_tous'][$raccourci_argumente][$fichier][$no_ligne][] = $occurrence;
-	$utilises['suffixes'][$raccourci_argumente] = $eval;
+	$utilises['items'][$raccourci_unique] = $item;
+	$utilises['modules'][$raccourci_unique] = $module;
+	$utilises['item_tous'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
+	$utilises['suffixes'][$raccourci_unique] = $avec_suffixe;
 	$utilises['debug'][] = $occurrence;
 }
-function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
+function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
