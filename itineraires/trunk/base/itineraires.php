@@ -72,7 +72,6 @@ function itineraires_declarer_tables_objets_sql($tables) {
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
 			'publie'   => 'texte_statut_publie',
-			'refuse'   => 'texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',
 		),
 		'statut'=> array(
