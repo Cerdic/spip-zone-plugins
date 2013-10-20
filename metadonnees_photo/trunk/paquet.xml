@@ -1,7 +1,7 @@
 <paquet
 	prefix="photo_infos"
 	categorie="multimedia"
-	version="2.0.1"
+	version="2.0.2"
 	etat="stable"
 	compatibilite="[3.0.0-beta;3.0.*]"
 	logo="imgs_photo/logo-pb_plugin.png"

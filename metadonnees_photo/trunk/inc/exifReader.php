@@ -1388,7 +1388,8 @@ class phpExifReader {
                         $this->debug($this->errstr,1);
                     }
                 }else{
-                    if (strlen($SubdirStart) <= strlen($OffsetBase)+$ExifLength){
+                    if (strlen($SubdirStart) <= strlen($OffsetBase)+$ExifLength
+                      AND $SubdirStart!==$DirStart){
                         $this->ProcessExifDir($SubdirStart, $OffsetBase, $ExifLength);
                     }
                 }
