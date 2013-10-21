@@ -1,7 +1,7 @@
 <paquet
 	prefix="itineraires"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/itineraires-64.png"
@@ -28,6 +28,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/itineraires.php" />
 	<pipeline nom="affiche_milieu" inclure="itineraires_pipelines.php" /> 
 	<pipeline nom="affiche_auteurs_interventions" inclure="itineraires_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="itineraires_pipelines.php" /> 
 
 	<menu nom="itineraires" titre="itineraire:titre_itineraires" parent="menu_edition" icone="images/itineraire-16.png" action="itineraires" /> 
 	<menu nom="itineraire_creer" titre="itineraire:icone_creer_itineraire" parent="outils_rapides" icone="images/itineraire-new-16.png" action="itineraire_edit" parametres="new=oui" /> 

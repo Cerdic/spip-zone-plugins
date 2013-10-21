@@ -66,5 +66,31 @@ function itineraires_affiche_auteurs_interventions($flux) {
 	return $flux;
 }
 
+/**
+ * Optimiser la base de donnees en supprimant les trucs à la poubelle 
+ * et les liens orphelins
+ * et les locomotions
+ *
+ * @param array $flux
+ * @return array
+ */
+function itineraires_optimiser_base_disparus($flux){
+	include_spip('action/editer_liens');
+	
+	// Les itinéraires à la poubelle
+	$flux['data'] +=  sql_delete("spip_itineraires", "statut='poubelle' AND maj < ".$flux['args']['date']);
+	
+	// Les locomotions d'itinéraires qui n'existent plus
+	$flux['data'] += sql_delete(
+		'spip_itineraires_locomotions as L left join spip_itineraires as I on L.id_itineraire=I.id_itineraire', 
+		'I.id_itineraire is null'
+	); 
+	
+	// Les liens
+	$flux['data'] += objet_optimiser_liens(array('itineraire'=>'*'),'*');
+	
+	return $flux;
+}
+
 
 ?>
