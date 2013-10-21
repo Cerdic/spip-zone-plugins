@@ -81,9 +81,12 @@ function itineraires_optimiser_base_disparus($flux){
 	$flux['data'] +=  sql_delete("spip_itineraires", "statut='poubelle' AND maj < ".$flux['args']['date']);
 	
 	// Les locomotions d'itinéraires qui n'existent plus
-	$flux['data'] += sql_delete(
-		'spip_itineraires_locomotions as L left join spip_itineraires as I on L.id_itineraire=I.id_itineraire', 
-		'I.id_itineraire is null'
+	$flux['data'] += sql_query(
+		'delete L
+		from spip_itineraires_locomotions as L
+		left join spip_itineraires as I
+		on L.id_itineraire=I.id_itineraire
+		where I.id_itineraire is null'
 	); 
 	
 	// Les liens
