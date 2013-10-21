@@ -1,18 +1,27 @@
 function charger_image_responsive () {
+	var dPR = window.devicePixelRatio;
+
 	$(".image_responsive").each(function() {
-		var src = $(this).attr("data-src");
-		var w= parseInt($(this).width());
-		if(dPR = window.devicePixelRatio) {
+		var this_img = $(this);
+		var src = this_img.attr("data-src");
+		var w= parseInt(this_img.width());
+		if(dPR) {
 			w = parseInt(w*dPR);
 		}
 		
 		if (htactif) {
 			racine = src.substr(0, src.length-4);
 			terminaison = src.substr(src.length-3, 3);
-			$(this).attr("src", racine+"-resp"+w+"."+terminaison);
+			var url_img = racine+"-resp"+w+"."+terminaison;
 		} else {
-			$(this).attr("src", "index.php?action=image_responsive&img="+src+"&taille="+w);
+			var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
 		}
+		
+		$.ajax({
+		  url: url_img
+		}).done(function() {
+			this_img.attr("src", url_img);
+		});
 	});
 
 }
