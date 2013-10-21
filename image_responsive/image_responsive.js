@@ -5,19 +5,26 @@ function charger_image_responsive () {
 		var this_img = $(this);
 		var src = this_img.attr("data-src");
 		var w= parseInt(this_img.width());
-		if(dPR) {
-			w = parseInt(w*dPR);
-		}
 		
-		if (htactif) {
-			racine = src.substr(0, src.length-4);
-			terminaison = src.substr(src.length-3, 3);
-			var url_img = racine+"-resp"+w+"."+terminaison;
+		
+		if (w == 0) {
+		
 		} else {
-			var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
-		}
 		
-		this_img.attr("src", url_img);
+			if(dPR) {
+				w = parseInt(w*dPR);
+			}
+			
+			if (htactif) {
+				racine = src.substr(0, src.length-4);
+				terminaison = src.substr(src.length-3, 3);
+				var url_img = racine+"-resp"+w+"."+terminaison;
+			} else {
+				var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
+			}
+			
+			this_img.attr("src", url_img);
+		}
 
 	});
 
