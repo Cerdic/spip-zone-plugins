@@ -34,9 +34,6 @@ function action_image_responsive() {
 		$extension = str_replace("jpg", "jpeg", $terminaison);
 		$browser_cache = 60*60*24*7;
 
-
-		// Getting headers sent by the client.
-		$headers = apache_request_headers(); 
 	
 		header("Content-Type: image/".$extension);
 
