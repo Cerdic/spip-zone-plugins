@@ -17,11 +17,8 @@ function charger_image_responsive () {
 			var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
 		}
 		
-		$.ajax({
-		  url: url_img
-		}).done(function() {
-			this_img.attr("src", url_img);
-		});
+		this_img.attr("src", url_img);
+
 	});
 
 }

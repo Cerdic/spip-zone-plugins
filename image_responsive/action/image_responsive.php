@@ -10,6 +10,15 @@ function action_image_responsive() {
 		$base = sous_repertoire($base, "cache-".$taille);
 		$dest = md5($img);
 		$dest = $base."/".$dest.".".$terminaison;
+
+		if (file_exists($dest)) {
+			if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && 
+				strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($dest))
+			{
+				header('HTTP/1.0 304 Not Modified');
+				exit;
+			}
+		}
 		
 		
 		if (!file_exists($dest) OR filemtime($dest) < filemtime($img)) {
