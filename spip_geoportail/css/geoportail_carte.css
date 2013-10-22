@@ -50,8 +50,15 @@ img.gpGeocodeMatchCodeMatchType
 {	background-image: url("picto_options_on.png") !important;
 }
 
-.gpControlInformationMinimized {
-  height: 18px;
+.gpControlInformationMinimized 
+{	height: 18px;
+	width: 9px;
+	margin-left:50%;
+	overflow:visible;
+}
+
+.gpControlInformationMini
+{	left:-9px;
 }
 
 /** Affichage des images */
