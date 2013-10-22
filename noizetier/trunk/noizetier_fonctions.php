@@ -945,4 +945,3 @@ function noizetier_chemin_icone($icone){
 		return find_in_path($icone);
 	}
 }
-?>

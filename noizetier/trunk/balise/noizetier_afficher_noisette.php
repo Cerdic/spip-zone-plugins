@@ -11,7 +11,7 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	$noisette = champ_sql('noisette', $p);
 	$parametres = champ_sql('parametres', $p);
 	
-	// As-ton demandé explicitement à ne pas ajaxifier ? #NOIZETIER_AFFICHER_NOISETTE{noajax}
+	// As-t-on demandé explicitement à ne pas ajaxifier ? #NOIZETIER_AFFICHER_NOISETTE{noajax}
 	$_ajax = 'true';
 	if (($v = interprete_argument_balise(1,$p))!==NULL)
 		$_ajax = 'false';
@@ -44,5 +44,3 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	return $p;
     
 }
-
-?>

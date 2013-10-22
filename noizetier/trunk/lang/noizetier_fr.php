@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucune_noisette_selectionnee' => 'Vous devez sélectionner une noisette !',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',
+	'explication_code' => 'ATTENTION : pour utilisateur avancé. Vous pouvez saisir du code Spip (boucles et balises) qui sera interprété comme s\'il s\'agissait d\'un squelette. La noisette aura par ailleurs accès à toutes les variables de l\'environnement de la page.',
+	'explication_description_code' => 'À usage interne. Non affichée sur le site public.',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
@@ -89,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
+	'label_code' => 'Code Spip',
+	'label_description_code' => 'Description',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',
@@ -117,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigation',
 	'nom_bloctexte' => 'Bloc de texte libre',
+	'nom_codespip' => 'Code Spip libre',
 	'non' => 'Non',
 	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l’ordre des noisettes.',
 
