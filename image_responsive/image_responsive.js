@@ -4,6 +4,7 @@ function charger_image_responsive () {
 	$(".image_responsive").each(function() {
 		var this_img = $(this);
 		var src = this_img.attr("data-src");
+		var appliquer_dPR = this_img.attr("data-dpr");
 		var w= parseInt(this_img.width());
 		
 		
@@ -11,7 +12,7 @@ function charger_image_responsive () {
 		
 		} else {
 		
-			if(dPR) {
+			if(dPR && appliquer_dPR != 0) {
 				w = parseInt(w*dPR);
 			}
 			

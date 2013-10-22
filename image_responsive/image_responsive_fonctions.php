@@ -20,7 +20,7 @@ function image_responsive_insert_head($flux) {
 	return $flux;
 }
 
-function _image_responsive($img, $taille=120) {
+function _image_responsive($img, $taille=120, $dpr=1) {
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
@@ -44,7 +44,7 @@ function _image_responsive($img, $taille=120) {
 		
 		if ($taille == 0) $src = "rien.gif";
 		
-		
+		if ($dpr == 0) $img = inserer_attribut($img, "data-dpr", "0");
 
 
 		$img = inserer_attribut($img, "src", $src);
@@ -52,8 +52,8 @@ function _image_responsive($img, $taille=120) {
 	return $img;
 }
 
-function image_responsive($texte, $taille=120) {
-	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],'.$taille.');'), $texte);
+function image_responsive($texte, $taille=120, $dpr=1) {
+	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],'.$taille.','.$dpr.');'), $texte);
 
 }
 
