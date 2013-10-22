@@ -1,6 +1,34 @@
 /* @override 
-	http://portfolio.h2v.fr/squelettes/portfolio.css
+	http://portfolio.h2v.fr/plugins/auto/portfolio_simple_v2/v0.1.0/portfolio.css
 */
+
+/* @Feuille style spip 2.0 */
+html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
+h1 { font-size: 1.70em; color: #000; }
+h2 { font-size: 1.40em; font-weight: normal; }
+h2, h2 a, h2 a:focus, h2 a:hover, h2 a:active { color: #003; }
+h3 { font-size: 1.20em; font-weight: bold; }
+h3.spip {} /* Cf.: spip_style.css */
+hr.spip {} /* Cf.: spip_style.css */
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.90em; }
+/* Espaceur de blocs */
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+/* Portfolio */
+#documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
+#documents_portfolio .spip_logos { margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+#documents_portfolio a.on .spip_logos { border-color: #F57900; }
+#documents_portfolio a:focus .spip_logos,
+#documents_portfolio a:hover .spip_logos,
+#documents_portfolio a:active .spip_logos { border-color: #8B6F92; }
+
+/* @end */
 
 /* @group Toutes pages */
 
@@ -79,7 +107,7 @@ a, a:hover {
 
 #nom_site_spip, #nom_site_spip a, #entete .accueil {
 	text-decoration: none !important;
-	font-family: Lucida, "Lucida Grande", Verdana, sans-serif !important;
+	font: 150% Lucida, "Lucida Grande", Verdana, sans-serif !important;
 }
 
 #page {
