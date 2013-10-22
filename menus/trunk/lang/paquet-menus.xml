@@ -2,8 +2,9 @@
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/paquet-menus?lang_cible=ar" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-menus?lang_cible=de" total="4" traduits="2" relire="0" modifs="1" nouveaux="1" pourcent="50.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-menus?lang_cible=de" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-menus?lang_cible=en" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
