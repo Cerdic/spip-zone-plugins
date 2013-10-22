@@ -358,7 +358,7 @@ a.commentaire {
 }
 
 #formulaire_forum, .formulaire_ecrire_auteur {
-	width: 75%;
+	width: 80% !important;
 	margin: 39px auto auto;
 	border: thin solid silver;
 	padding: 19px;
