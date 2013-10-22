@@ -12,14 +12,13 @@
 	#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}
 <//B_un>
 
-
 #SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
 <h2><:agenda:agenda:></h2>
 <B_mots>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
 [(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+[(#GET{self}|parametre_url{date_debut,#GET{date_debut}}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
 
 <BOUCLE_mots(MOTS){type=Type}>
