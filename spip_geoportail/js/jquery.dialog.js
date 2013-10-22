@@ -188,8 +188,12 @@
 
 // Gestion des raccourcis clavier
 jQuery(document).keydown(function (e) 
-{	var code = (e.keyCode ? e.keyCode : e.which); 
-	if (jQuery("#jqDialog .jqDialogButtonOk").length && ! jQuery("textarea:focus").length && code == 13) { $.jqDialog.action('ok'); return false; }
-	if (jQuery("#jqDialog .jqCloseButton").length && code == 27) { $.jqDialog.action('undo'); return false; }
-	return true;
+{	// Dialogue actif ?
+	if (jQuery('#jqDialog').length)
+	{	if (jQuery('#jqDialog').css('display')=='none') return;
+		var code = (e.keyCode ? e.keyCode : e.which); 
+		if (jQuery("#jqDialog .jqDialogButtonOk").length && ! jQuery("textarea:focus").length && code == 13) { $.jqDialog.action('ok'); return false; }
+		if (jQuery("#jqDialog .jqCloseButton").length && code == 27) { $.jqDialog.action('undo'); return false; }
+		return true;
+	}
 });
