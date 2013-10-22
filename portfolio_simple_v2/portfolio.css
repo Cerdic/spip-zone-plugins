@@ -1,10 +1,13 @@
 /* @override 
 	http://portfolio.h2v.fr/plugins/auto/portfolio_simple_v2/v0.1.0/portfolio.css
+	http://portfolio.h2v.fr/plugins/auto/portfolio_simple_v2/v0.2.2/portfolio.css
 */
 
-/* @Feuille style spip 2.0 */
+
+/* @group spip 2.0 */
+
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
+body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: white; }
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
@@ -29,6 +32,7 @@ hr.spip {} /* Cf.: spip_style.css */
 #documents_portfolio a:active .spip_logos { border-color: #8B6F92; }
 
 /* @end */
+
 
 /* @group Toutes pages */
 
@@ -259,7 +263,9 @@ body, h1 {
 a.url, h2 {
 	color: white;
 }
-
+label, legend {
+	color: black;
+}
 
 
 /* @end */
@@ -291,7 +297,9 @@ a.url, h2 {
 	background: transparent !important;
 }
 
-
+.formulaire_spip textarea {
+	width: 99% !important;
+}
 
 /* @end */
 
