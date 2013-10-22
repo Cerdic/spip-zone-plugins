@@ -154,9 +154,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		
 		//on est au niveau de base
 		//on réinitialise les compteurs
-		for ($i=1; $i < count($cnt); $i++) {
-			$cnt[$i] = 0;
-		}
+		$cnt = array_slice($cnt,0,1);
 		
 		//on génère le titre et le numéros
 		$numeros = ++$cnt[0];
@@ -174,6 +172,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 				$numeros .= $cnt[$i].".";
 			}
 			$numeros = $numeros.(++$cnt[$i]);
+			// On réinitialise les niveaux inférieurs:
+			$cnt = array_slice($cnt,0,$i+1);
 			
 			//on génère le titre
 			//on teste si le level contient des # pour savoir si l'on affiche les
