@@ -1,7 +1,7 @@
 <paquet
 	prefix="Accessibilite"
 	categorie="navigation"
-	version="0.8.6"
+	version="0.8.7"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="img_pack/wcag1AAA.png"
