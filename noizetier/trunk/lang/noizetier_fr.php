@@ -91,8 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
-	'label_code' => 'Code Spip',
-	'label_description_code' => 'Description',
+	'label_code' => 'Code Spip :',
+	'label_description_code' => 'Description :',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',

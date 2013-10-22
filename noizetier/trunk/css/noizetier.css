@@ -13,3 +13,6 @@ ul.liste-noisettes li:hover .icone {display:block;}
 .valider_rang input.link{background:none;border:0;cursor:pointer;padding:0 0 1px;color:#444}
 .valider_rang input.link:hover{border-bottom:1px solid;padding:0}
 .formulaire_ajouter_noisette ul.liste-noisettes-disponibles {margin: 10px;}
+/* Pour la noisette code Spip libre */
+.formulaire_editer_noisette li.editer_description_code, .formulaire_editer_noisette li.editer_code {padding-left:10px;}
+.formulaire_editer_noisette li.editer_description_code label, .formulaire_editer_noisette li.editer_code label {width:100%; margin-left:0; float:none;}
