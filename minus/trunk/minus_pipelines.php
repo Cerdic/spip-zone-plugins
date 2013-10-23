@@ -22,7 +22,7 @@ function minus_formulaire_verifier($flux){
 
 function trop_majuscules(){
 	// return True s'il y a trop de majuscule dans le titre
-	$titre = _request("titre");
+	$titre = supprimer_numero(_request("titre"));
 	return (prop_minus($titre) < 0.7);
 	}
 function prop_minus($txt){
