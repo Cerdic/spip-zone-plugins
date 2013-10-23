@@ -32,5 +32,5 @@
 
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
 	<utilise nom="spipmotion" />
-	<lib nom="jquery-mousewheel-3.0.6" lien="https://github.com/downloads/brandonaaron/jquery-mousewheel/jquery-mousewheel-3.0.6.zip" />
+	<lib nom="jquery-mousewheel-3.0.6" lien="https://github.com/brandonaaron/jquery-mousewheel/archive/3.0.6.zip" />
 </paquet>
