@@ -21,5 +21,6 @@
 	  <inclure>minus_pipelines.php</inclure>
 	</pipeline>
     <utilise nom="agenda" />
+    <traduire module="minus" gestionnaire="salvatore" reference="fr" />
 
 </plugin>
