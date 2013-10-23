@@ -7,7 +7,7 @@
 	</nom>
 	<auteur>Amaury Adon</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.5.6</version>
+	<version>1.5.7</version>
 	<version_base>0.1</version_base>
 	<lien>http://www.spip-contrib.net/Seminaire-LATP</lien> 
 	<etat>stable</etat>
@@ -26,8 +26,6 @@ La gestion des &#233;v&#233;nements est assur&#233;e par le plugin Agenda 2.
 Each event is characterzed by keywords which define its type, seminar, workgroup..., and the responsible organisation. Events management is provided by Agenda 2 plugin.
 		</multi>
 	</description>
-
-	<lien>http://www.spip-contrib.net/Seminaire-LATP</lien>
 
 	<icon>images/logo_seminaire.png</icon>
 
