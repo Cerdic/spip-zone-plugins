@@ -5,7 +5,7 @@
 		<div class="explication"><:spipmotion:explications_extensions_sortie:></div>
 		<ul>
 			<li>
-				#SET{audio_extensions_sortie,#ARRAY|push{mp3}|push{ogg}}
+				#SET{audio_extensions_sortie,#LISTE{mp3,ogg}}
 				<label for="fichiers_audios_sortie"><:spipmotion:extensions_audio:></label>
 				<select name="fichiers_audios_sortie[]" multiple="multiple" size="2">
 					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}{par extension}>
@@ -16,12 +16,12 @@
 				<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
 			</li>
 			<li>
-				#SET{videos_sortie,#ARRAY|push{flv}|push{ogv}|push{mp4}|push{m4v}}
+				#SET{videos_sortie,#LISTE{flv,ogv,mp4,m4v}}
 				#SET{size,4}
 				[(#REM)
 					On teste si ffmpeg est compilé avec libvpx
 				]
-				#SET{spipmotion_compiler, #EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+				#SET{spipmotion_compiler,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
 				#SET{spipmotion_compiler,#GET{spipmotion_compiler}|unserialize|table_valeur{configuration}}
 				[(#GET{spipmotion_compiler}|is_array|oui)
 				[(#VAL{--enable-libvpx}|in_array{#GET{spipmotion_compiler}}|oui)

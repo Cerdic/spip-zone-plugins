@@ -1,3 +1,5 @@
+#SET{meta,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+#SET{meta_compil_config,#GET{meta}|unserialize|table_valeur{configuration}}
 <div id="encodage_#VALEUR" class="spipmotion_profil">
 	<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
 	<ul>
@@ -5,29 +7,29 @@
 			label=<:spipmotion:width_video:>,
 			defaut=640,
 			size=4})]
-	
+
 		[(#SAISIE{input,height_#ENV{valeur},
 			label=<:spipmotion:height_video:>,
 			defaut=480,
 			size=4})]
-	
+
 		[(#SAISIE{input,bitrate_#ENV{valeur},
 			label=<:spipmotion:bitrate:>,
 			defaut=600,
 			size=4})]
-	
+
 		[(#SAISIE{input,fps_#ENV{valeur},
 			label=<:spipmotion:framerate:>,
 			explication=<:spipmotion:explication_framerate:>,
 			defaut=25,
 			size=4})]
-	
+
 		#SET{acodecs_possibles,#ARRAY}
 		#SET{vcodecs_possibles,#ARRAY}
 		#SET{vorbis,''}
 		#SET{formats_possibles,#ARRAY}
 		#SET{presets_qualite,#ARRAY}
-		<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{ogv}|push{webm}}|oui}>
+		<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#LISTE{ogg,ogv,webm}}|oui}>
 			[(#ENV{valeur}|=={webm}|non)
 				[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
 					[(#SAISIE{selection,encodeur_#ENV{valeur},
@@ -56,10 +58,14 @@
 							9,9,
 							10,10}})]
 				]
-				#SET{vcodecs_possibles,#ARRAY|push{libtheora}|push{libdirac}}
+				[(#VAL{'--enable-libtheora'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libtheora}}]
+				[(#VAL{'--enable-libdirac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libdirac}}]
 			]
-			#SET{acodecs_possibles,#ARRAY|push{libvorbis}}
-			#SET{vorbis,oui}
+			[(#VAL{'--enable-libvorbis'}|in_array{#GET{meta_compil_config}}|oui)
+			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
+			[(#SET{vorbis,oui})]]
 			#SET{2_passes,oui}
 		<script>
 			var cache_#ENV{valeur} = function(){
@@ -98,35 +104,41 @@
 				On ne met pas adpcm car il n'est pas compatible avec le H264
 				et ca évite trop de tests
 			]
-			#SET{acodecs_possibles,#ARRAY|push{libmp3lame}|push{libfaac}|push{libspeex}}
-			#SET{vcodecs_possibles,#ARRAY|push{flv}|push{libx264}}
-			#SET{presets_qualite,#ARRAY|push{medium}|push{placebo}|push{ultrafast}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}|push{veryslow}}
+			[(#VAL{'--enable-libmp3lame'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
+			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libspeex'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libspeex}}]
+
+			#SET{vcodecs_possibles,#LISTE{flv}}
+			[(#VAL{'--enable-libx264'}|in_array{#GET{meta_compil_config}}|oui)
+				[(#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libx264}})]
+				[(#SET{presets_qualite,#LISTE{medium,placebo,ultrafast,superfast,faster,fast,slow,slower,veryslow}})]]
 			#SET{2_passes,oui}
 		</BOUCLE_flv>
-		<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{mov}|push{mp4}|push{m4v}}|oui}>
-			#SET{acodecs_possibles,#ARRAY|push{libfaac}|push{libmp3lame}}
-			#SET{vcodecs_possibles,#ARRAY|push{libx264}|push{mpeg4}}
-			#SET{formats_possibles,#ARRAY|push{ipod}|push{psp}|push{mp4}|push{m4v}}
-			#SET{presets_qualite,#ARRAY|push{medium}|push{placebo}|push{ultrafast}|push{superfast}|push{faster}|push{fast}|push{slow}|push{slower}|push{veryslow}}
+		<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#LISTE{mov,mp4,m4v}}|oui}>
+			[(#VAL{'--enable-libmp3lame'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
+			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libx264'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libx264}}
+				#SET{presets_qualite,#LISTE{medium,placebo,ultrafast,superfast,faster,fast,slow,slower,veryslow}}]
+			#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{mpeg4}}
+			#SET{formats_possibles,#LISTE{ipod,psp,mp4,m4v}}
 			#SET{2_passes,oui}
 		</BOUCLE_mp4>
 		<//B_flv>
 		<//B_ogg>
-	
-		[(#REM)
-			On récupère les codecs disponibles dans FFMPEG que l'on a mis dans les métas
-		]
-		#SET{acodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_audio_encode']}}
-		#SET{vcodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_video_encode']}}
-	
+
 		[(#REM)
 			On récupère l'intersection des codecs disponibles avec les codecs possibles
 		]
-		#SET{acodecs,#GET{acodecs_possibles,#ARRAY}|array_intersect{#GET{acodecs_existants,#ARRAY}|unserialize}}
-		#SET{vcodecs,#GET{vcodecs_possibles,#ARRAY}|array_intersect{#GET{vcodecs_existants,#ARRAY}|unserialize}}
+		#SET{acodecs,#GET{acodecs_possibles,#ARRAY}}
+		#SET{vcodecs,#GET{vcodecs_possibles,#ARRAY}}
 		#SET{acodec_defaut,#GET{acodec}|table_valeur{0}}
 		#SET{vcodec_defaut,#GET{vcodec}|table_valeur{0}}
-	
 		<BOUCLE_plusieurs_codecs(CONDITION){si #GET{vcodecs}|count|>{0}|oui}>
 			[(#GET{formats_possibles}|count|>{0}|oui)
 				[(#SAISIE{selection_valeur,format_#ENV{valeur},
@@ -166,21 +178,21 @@
 				</script>
 			</BOUCLE_pressets>
 		</BOUCLE_plusieurs_codecs>
-	
+
 		[(#GET{2_passes}|=={oui}|oui)
 			[(#SAISIE{selection,passes_#ENV{valeur},
 				label=<:spipmotion:label_passes_encodage:>,
 				cacher_option_intro=oui,
 				datas=#ARRAY{1,<:spipmotion:label_passes_1_encodage:>,2,<:spipmotion:label_passes_2_encodage:>}})]
 		]
-	
+
 		[(#GET{acodecs}|count|>{0}|oui)
 			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
 				label=<:spipmotion:label_codec_son:>,
 				cacher_option_intro=oui,
 				defaut=#GET{acodec_defaut},
 				datas=#GET{acodecs}})]
-	
+
 			[(#SAISIE{selection,frequence_audio_#ENV{valeur},
 				label=<:spipmotion:frequence_audio:>,
 				defaut=22050,
@@ -190,7 +202,7 @@
 					22050,22050 Hz,
 					44100,44100 Hz,
 					48000,48000 Hz}})]
-	
+
 			[(#REM)explication=<:spipmotion:explication_vorbis_qualite:>,]
 			[(#GET{vorbis}|=={oui}|oui)
 				[(#SAISIE{selection,qualite_audio_#ENV{valeur},
