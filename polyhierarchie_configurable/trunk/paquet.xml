@@ -1,0 +1,23 @@
+<paquet
+	prefix="polyconf"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/polyconf-64.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2013-10-17 11:00:12
+	-->
+
+	<nom>Polyhiérarchie configurable</nom>
+
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<pipeline nom="autoriser" inclure="polyconf_autorisations.php" />
+	<pipeline nom="afficher_complement_objet" inclure="polyconf_pipelines.php" />
+	<necessite nom="polyhier" compatibilite="[2.0.5;]" />
+	<necessite nom="saisies" compatibilite="[1.35.0;]" />
+</paquet>
