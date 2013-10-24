@@ -487,7 +487,7 @@
 						 * - augmente le volume de 10% lors d'un scroll haut avec la souris;
 						 * - si le volume est "muted", l'action ne fait rien sur le volume;
 						 */
-						if(wrapper && !options.volume_bloque && typeof($.fn.mousewheel != "undefined")){
+						if(wrapper && !options.volume_bloque && typeof($.fn.mousewheel) != "undefined"){
 							wrapper.mousewheel(function(event, delta) {
 								if(!id.muted && id.duration){
 									var volume_new = Math.round((id.volume + parseFloat((delta > 0) ? '0.1' : '-0.1'))*10)/10;
@@ -756,27 +756,30 @@
 				}else if(!id.muted){
 					var volume = id.volume,
 						sound_button = controls.find('.volume_button'),
-						class_remove = sound_button.attr('class').match('volume_button_[0-9]{1,3}');
+						class_remove = $(this)[0].controls ? sound_button.attr('class').match('volume_button_[0-9]{1,3}') : null;
 					if(options.volume_bloque && options.volume) volume = id.volume = (options.volume) ? id.volume : options.volume;
-					if((volume <= 0.66) && (volume > 0.33)){
-						if(class_remove != null) sound_button.removeClass(class_remove[0]);
-						sound_button.addClass('volume_button_66');
-					}else if((volume <= 1) && (volume > 0.66)){
-						if(class_remove != null) sound_button.removeClass(class_remove[0]);
-						sound_button.addClass('volume_button_100');
-					}else if((volume <= 0.33) && (volume > 0)){
-						if(class_remove != null) sound_button.removeClass(class_remove[0]);
-						sound_button.addClass('volume_button_33');
-					}else if(volume == 0){
-						if(class_remove != null) sound_button.removeClass(class_remove[0]);
-						sound_button.addClass('volume_button_0');
+					if($(this)[0].controls){
+						if((volume <= 0.66) && (volume > 0.33)){
+							if(class_remove != null) sound_button.removeClass(class_remove[0]);
+							sound_button.addClass('volume_button_66');
+						}else if((volume <= 1) && (volume > 0.66)){
+							if(class_remove != null) sound_button.removeClass(class_remove[0]);
+							sound_button.addClass('volume_button_100');
+						}else if((volume <= 0.33) && (volume > 0)){
+							if(class_remove != null) sound_button.removeClass(class_remove[0]);
+							sound_button.addClass('volume_button_33');
+						}else if(volume == 0){
+							if(class_remove != null) sound_button.removeClass(class_remove[0]);
+							sound_button.addClass('volume_button_0');
+						}
+						var volume_title = ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)';
+						controls.find('.volume_button').attr('title',volume_title);
+						if(id.slider && (typeof(id.slider_volume) == 'object')){
+							id.slider_volume.slider('value',(id.volume*100));
+							id.slider_volume.slider((options.volume_bloque) ? 'disable' : 'enable');
+						}
 					}
-					var volume_title = ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)';
-					controls.find('.volume_button').attr('title',volume_title);
-					if(id.slider && (typeof(id.slider_volume) == 'object')){
-						id.slider_volume.slider('value',(id.volume*100));
-						id.slider_volume.slider((options.volume_bloque) ? 'disable' : 'enable');
-					}
+
 					media.ms_messages('volume',volume_title);
 
 					if(cookies && options.cookie_volume)
