@@ -73,15 +73,12 @@ function spipmotion_post_edition($flux){
 
 		/**
 		 * Si les metadatas/* on renvoyé un id_gis_meta, on l'associe au document
+		 * Si on reçoit un id_gis_meta dans l'environnement,
+		 * c'est que cela vient d'une récupération de metas après upload de document
+		 * dans spipmotion par exemple
 		 */
-		if(defined('_DIR_PLUGIN_GIS') && intval(_request('id_gis_meta'))){
-			/**
-			 * Si on reçoit un id_gis_meta dans l'environnement,
-			 * c'est que cela vient d'une récupération de metas après upload de document
-			 * dans spipmotion par exemple
-			 */
+		if(defined('_DIR_PLUGIN_GIS') && intval(_request('id_gis_meta')))
 			lier_gis(intval(_request('id_gis_meta')), 'document', $id_document);
-		}
 
 		/**
 		 * Si on ajoute le document et que :
@@ -116,7 +113,6 @@ function spipmotion_post_edition($flux){
 		 * Il n'est pas nécessaire de récupérer la vignette d'une vignette ni d'un document distant
 		 * ni ses infos.
 		 */
-
 		if(($infos_doc['mode'] != 'vignette') && ($infos_doc['distant'] == 'non')){
 			if(!function_exists('lire_config'))
 				include_spip('inc/config');
@@ -164,6 +160,7 @@ function spipmotion_post_edition($flux){
  * Insertion dans le pipeline jqueryui_plugin (plugin jQuery UI)
  * 
  * On ajoute le chargement des js pour les tabs (utilisés dans la conf)
+ * uniquement dans l'espace privé
  * 
  * @param array $plugins 
  * 		Un tableau des scripts déjà demandé au chargement
@@ -171,7 +168,8 @@ function spipmotion_post_edition($flux){
  * 		Le tableau complété avec les scripts que l'on souhaite 
  */
 function spipmotion_jqueryui_plugins($plugins){
-	$plugins[] = "jquery.ui.tabs";
+	if(test_espace_prive())
+		$plugins[] = "jquery.ui.tabs";
 	return $plugins;
 }
 
@@ -198,9 +196,8 @@ function spipmotion_post_spipmotion_encodage($flux){
 				if($extension_nouveau == 'mp3'){
 					$images = array();
 					foreach($infos_origine as $info_origine => $info){
-						if(preg_match('/cover/',$info_origine)){
+						if(preg_match('/cover/',$info_origine))
 							$images[] = $info;
-						}
 					}
 				}
 				$infos_encode = array_intersect_key($infos_origine,$infos_write);
@@ -226,11 +223,10 @@ function spipmotion_formulaire_verifier($flux){
 	if($flux['args']['form'] == 'configurer_spipmotion'){
 		foreach($_POST as $key => $val){
 			if(preg_match('/(bitrate|height|width|frequence_audio|fps|passes|qualite_video|qualite_audio).*/',$key) && $val){
-				if(!ctype_digit($val)){
+				if(!ctype_digit($val))
 					$flux['data'][$key] = _T('spipmotion:erreur_valeur_int');
-				}else if(preg_match('/(height|width).*/',$key) && ($val < 100)){
+				else if(preg_match('/(height|width).*/',$key) && ($val < 100))
 					$flux['data'][$key] = _T('spipmotion:erreur_valeur_int_superieur',array('val'=> 100));
-				}
 			}
 		}
 		if(count($erreur) > 0)
