@@ -157,9 +157,8 @@ function encodage($source,$doc_attente){
 	 */
 	if($source['hasaudio'] == 'oui'){
 		$acodec = lire_config("spipmotion/acodec_$extension_attente") ? "--acodec ".lire_config("spipmotion/acodec_$extension_attente") :'';
-		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis")){
+		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis"))
 			$acodec = '--acodec libvorbis';
-		}
 		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
@@ -170,18 +169,16 @@ function encodage($source,$doc_attente){
 				if(!in_array($source['audiobitrate'],$audiobitrates)){
 					$bitrate_final = min($audiobitrates);
 					foreach($audiobitrates as $bitrate){
-						if($source['audiobitrate'] >= $bitrate){
+						if($source['audiobitrate'] >= $bitrate)
 							$bitrate_final = $bitrate;
-						}
 					}
 					$abitrate = $bitrate_final;
 				}else{
 					$abitrate = $source['audiobitrate'];
 				}
 				$abitrate = floor($abitrate/1000);
-			}else{
+			}else
 				$abitrate = lire_config("spipmotion/bitrate_audio_$extension_attente","64");
-			}
 			$texte .= "ab=".$abitrate."000\n";
 			$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate ".$abitrate;
 		}
@@ -221,14 +218,12 @@ function encodage($source,$doc_attente){
 			}else if(!in_array($source['audiosamplerate'],$audiosamplerates)){
 				$audiosamplerate_final = min($audiosamplerates);
 				foreach($audiosamplerates as $samplerate){
-					if($source['audiosamplerate'] >= $samplerate){
+					if($source['audiosamplerate'] >= $samplerate)
 						$audiosamplerate_final = $samplerate;
-					}
 				}
 				$samplerate = $audiosamplerate_final;
-			}else{
+			}else
 				$samplerate = $source['audiosamplerate'];
-			}
 		}else{
 			if(($source['audiochannels'] > 2) && ($encodeur != 'ffmpeg2theora')){
 				$samplerate = $source['audiosamplerate'];
@@ -236,9 +231,8 @@ function encodage($source,$doc_attente){
 					$acodec = '--acodec libfaac';
 					$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate 128";
 				}
-			}else{
+			}else
 				$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
-			}
 		}
 		$audiofreq = "--audiofreq ".$samplerate;
 		$texte .= "ar=$samplerate\n";
@@ -343,12 +337,10 @@ function encodage($source,$doc_attente){
 		 * divisibles par 2
 		 * On le fait pour tous les cas pour éviter toute erreur
 		 */
-		if(!is_int($width_finale/2)){
+		if(!is_int($width_finale/2))
 			$width_finale = $width_finale +1;
-		}
-		if(!is_int($height_finale/2)){
+		if(!is_int($height_finale/2))
 			$height_finale = $height_finale +1;
-		}
 
 		$video_size = "--size ".$width_finale."x".$height_finale;
 
@@ -484,7 +476,7 @@ function encodage($source,$doc_attente){
 					}
 					$metadatas_supp = '';
 					$metas_orig = @unserialize($source['metas']);
-					
+
 					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
 					$fichier_log = "$fichier_log-pass2.log";
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
@@ -533,7 +525,7 @@ function encodage($source,$doc_attente){
 		spip_log('le nouveau document est le '.$x,'spipmotion');
 		if(intval($x) > 1){
 			supprimer_fichier($fichier_temp);
-			
+
 			/**
 			 * Modification de la file d'attente
 			 * - On marque le document comme correctement encodé
@@ -565,17 +557,17 @@ function encodage($source,$doc_attente){
 				$champs_recup['id_licence'] = 0;
 			if(_DIR_PLUGIN_MEDIAS)
 				$champs_recup['credits'] = '';
-				
+
 			$modifs = array_intersect_key($source, $champs_recup);
-			
+
 			/**
 			 * On ajoute l'id dur document original id_orig
 			 */
 			$modifs['id_orig'] = $attente['id_document'];
-			
+
 			include_spip('inc/modifier');
 			revision_document($x, $modifs);
-			
+
 			$reussite = 'oui';
 		}else{
 			sql_updateq("spip_spipmotion_attentes",array('encode'=>'non'),"id_spipmotion_attente=".intval($doc_attente));
