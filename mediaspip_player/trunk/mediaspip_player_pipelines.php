@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le contenu du insert_head modifié
  */function mediaspip_player_insert_head($flux){
 	$flux .= '
-<script src="'.produire_fond_statique('mediaspip_medias_init.js',array('lang'=>$GLOBALS['spip_lang'])).'" type="text/javascript"></script>
+<script src="'.produire_fond_statique('mediaspip_player_lang.js',array('lang'=>$GLOBALS['spip_lang'])).'" type="text/javascript"></script>
 ';
 	return $flux;
 }
