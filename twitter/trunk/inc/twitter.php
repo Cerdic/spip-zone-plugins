@@ -150,8 +150,10 @@ function twitter_tokens($tokens=null){
 		if (isset($t['twitter_account']) AND isset($cfg['twitter_accounts'][$t['twitter_account']]))
 			$account = $t['twitter_account'];
 
-		if (!isset($cfg['twitter_accounts'][$account]) AND isset($cfg['twitter_accounts']))
-			$account = reset(array_keys($cfg['twitter_accounts']));
+		if (!isset($cfg['twitter_accounts'][$account]) AND isset($cfg['twitter_accounts'])){
+			$accounts = array_keys($cfg['twitter_accounts']);
+			$account = reset($accounts);
+		}
 
 		if (isset($cfg['twitter_accounts'][$account])){
 			$t['twitter_token'] = $cfg['twitter_accounts'][$account]['token'];

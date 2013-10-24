@@ -29,8 +29,10 @@ function action_supprimer_twitteraccount_dist($account = null) {
 		if (isset($cfg['twitter_accounts'][$account])){
 			unset($cfg['twitter_accounts'][$account]);
 			if (!isset($cfg['default_account'])
-			  OR !isset($cfg['twitter_accounts'][$cfg['default_account']]))
-				$cfg['default_account'] = reset(array_keys($cfg['twitter_accounts']));
+			  OR !isset($cfg['twitter_accounts'][$cfg['default_account']])){
+				$accounts = array_keys($cfg['twitter_accounts']);
+				$cfg['default_account'] = reset($accounts);
+			}
 
 			ecrire_meta("microblog", serialize($cfg));
 		}

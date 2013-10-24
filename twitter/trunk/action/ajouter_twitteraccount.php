@@ -75,8 +75,10 @@ function twitter_ajouter_twitteraccount($tokens){
 		spip_log("Echec account/verify_credentials lors de l'ajout d'un compte","twitter"._LOG_ERREUR);
 	}
 	if (!isset($cfg['default_account'])
-	  OR !isset($cfg['twitter_accounts'][$cfg['default_account']]))
-		$cfg['default_account'] = reset(array_keys($cfg['twitter_accounts']));
+	  OR !isset($cfg['twitter_accounts'][$cfg['default_account']])){
+		$accounts = array_keys($cfg['twitter_accounts']);
+		$cfg['default_account'] = reset($accounts);
+	}
 
 	ecrire_meta("microblog", serialize($cfg));
 
