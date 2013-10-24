@@ -1,7 +1,3 @@
-[(#REM)
-
-
-]
 <BOUCLE_document(DOCUMENTS){id_document=#ENV{id_document,#ENV{id}}}{statut==.*}>
 [(#MODE|!={conversion}|et{#MEDIA|in_array{#LISTE{video,audio}}}|oui)<div style="overflow:auto">
 <INCLURE{fond=prive/inclure/ajouter_conversion,id_objet=#ID_DOCUMENT,objet=document,env} />

@@ -1,7 +1,7 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.4.7"
+	version="1.4.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/html5_player_logo.png"
@@ -31,6 +31,11 @@
 	<pipeline nom="medias_documents_visibles" inclure="mediaspip_player_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
+	<utilise nom="jqueryui" />
+	<utilise nom="getid3" />
 	<utilise nom="spipmotion" />
+	<utilise nom="embed_code" />
+	
 	<lib nom="jquery-mousewheel-3.0.6" lien="https://github.com/brandonaaron/jquery-mousewheel/archive/3.0.6.zip" />
+	<menu nom="mediaspip_player" titre="mediaspip_player:cfg_titre_html5_player" parent="menu_squelette" icone="images/mediaspip_player-16.png" action="configurer_mediaspip_player" />
 </paquet>
