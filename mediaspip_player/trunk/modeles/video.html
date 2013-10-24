@@ -45,14 +45,14 @@
 	Si on a largeur et hauteur en base, on calcule un ratio pour la hauteur
 	
 ][(#ENV{largeur}
-	|et{#ENV{hauteur,''}|=={''}}
+	|et{#ENV{hauteur,''}|=={''}|oui}
 	|et{#ENV{largeur}|match{%}|non}
 	|et{#HAUTEUR}
 	|et{#LARGEUR}
-	|et{[(#LARGEUR|>{#ENV{largeur,''}})]}|oui)
+	|et{[(#LARGEUR|>{#ENV{largeur,0}})]}|oui)
 	[(#GET{ratio}|non)
-	[(#SET{ratio,[(#LARGEUR|div{#ENV{largeur}})]})]]
-	#SET{hauteur,#HAUTEUR|div{#GET{ratio}}|floor}
+	[(#SET{ratio,[(#LARGEUR|div{#HAUTEUR})]})]]
+	#SET{hauteur,#ENV{largeur}|div{#GET{ratio}}|floor}
 ][(#REM)
 	
 	Une hauteur est passée en paramètre
@@ -67,8 +67,8 @@
 	|et{#GET{ratio}|=={''}}
 	|et{[(#HAUTEUR|>{#ENV{hauteur}})]}|oui)
 	[(#GET{ratio}|non)
-	[(#SET{ratio,[(#HAUTEUR|div{#ENV{hauteur}})]})]]
-	#SET{largeur,#LARGEUR|div{#GET{ratio}}|floor}
+	[(#SET{ratio,[(#LARGEUR|div{#HAUTEUR})]})]]
+	#SET{largeur,#ENV{hauteur}|mult{#GET{ratio}}|floor}
 ][(#REM)
 
 	On a une rotation dans la base, on retourne le bazar

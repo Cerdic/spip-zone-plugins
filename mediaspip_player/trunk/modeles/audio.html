@@ -60,6 +60,7 @@
 [(#SET{id_document_voir, [(#ID_DOCUMENT)_][(#VAL{0}|rand{100000})]})]
 
 #SET{variantes,#ARRAY}
+
 <BOUCLE_variantes(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{statut==.*}>#SET{variantes,#GET{variantes}|push{#EXTENSION}}</BOUCLE_variantes>
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media audio'[
 	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',[(#ENV{largeur}|match{%}|oui)width:#ENV{largeur}]})']
