@@ -281,7 +281,7 @@
 
 						if(wrapper.height() < 100) options.messages = false;
 
-						if(!id.controls && options.messages){
+						if(id.addcontrols && options.messages){
 							bloc_messages = '<div class="messages" style="display:none"></div>';
 							wrapper.append(bloc_messages);
 						}
@@ -333,7 +333,7 @@
 								wrapper.removeClass('loading').addClass('player_error').find('.play_pause_button').attr('title',ms_player_lang.info_erreur);
 							}
 						}).bind("timeupdate", function(e){
-							if(control){
+							if(id.addcontrols){
 								if(id.percent_loaded != 100) media.ms_update_loaded(e);
 
 								var percent_time = ms_anything_to_percent(id.currentTime,id.duration);
@@ -350,9 +350,9 @@
 								media.ms_resize_controls();
 							}
 						}).bind("seeking",function(e){
-							if(control) wrapper.addClass('seeking').find('.play_pause_button').attr('title',ms_player_lang.bouton_seeking);
+							if(id.addcontrols) wrapper.addClass('seeking').find('.play_pause_button').attr('title',ms_player_lang.bouton_seeking);
 						}).bind("seeked",function(e){
-							if(control){
+							if(id.addcontrols){
 								wrapper.removeClass('seeking');
 								if(id.paused)
 									wrapper.find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_pause);
@@ -360,17 +360,17 @@
 									wrapper.find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_lire);
 							}
 						}).bind("progress", function(e){
-							if(control && id.percent_loaded != 100) media.ms_update_loaded(e);
+							if(id.addcontrols && id.percent_loaded != 100) media.ms_update_loaded(e);
 						}).bind("pause", function(e){
-							if(control) media.ms_buttons();
+							if(id.addcontrols) media.ms_buttons();
 						}).bind("play", function(e){
 							if(id.preload == 'none') id.preload = false;// Fix pour chromium
-							if(control){
+							if(id.addcontrols){
 								if(id.percent_loaded != 100) media.ms_update_loaded(e);
 								media.ms_buttons();
 							}
 						}).bind("ended", function(e){
-							if(control){
+							if(id.addcontrols){
 								if(!id.loop){
 									wrapper.addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
 									id.paused = true;
@@ -380,13 +380,13 @@
 								}
 							}
 						}).bind("loadeddata", function(e){
-							if(control) media.ms_update_loaded(e);
+							if(id.addcontrols) media.ms_update_loaded(e);
 						}).bind("volumechange", function(e){
 							media.ms_volume(false);
 						}).click(function(){
-							if(!id.controls) media.ms_play_pause();
+							if(id.addcontrols) media.ms_play_pause();
 						}).dblclick(function(e){
-							if(!id.controls) media.ms_fullscreen();
+							if(id.addcontrols) media.ms_fullscreen();
 							e.preventDefault();
 							e.stopPropagation();
 						});
@@ -434,7 +434,7 @@
 						 * - Le switch Mute/Unmute sur le click du bouton de volume
 						 * - Le switch fullscreen/normal screen sur le bouton adéquat
 						 */
-						if(control){
+						if(id.addcontrols){
 							control.find('.play_pause_button').click(function(){
 								media.ms_play_pause();
 							});
@@ -487,7 +487,7 @@
 						 * - augmente le volume de 10% lors d'un scroll haut avec la souris;
 						 * - si le volume est "muted", l'action ne fait rien sur le volume;
 						 */
-						if(wrapper && !options.volume_bloque && typeof($.fn.mousewheel) != "undefined"){
+						if(id.addcontrols && wrapper && !options.volume_bloque && typeof($.fn.mousewheel) != "undefined"){
 							wrapper.mousewheel(function(event, delta) {
 								if(!id.muted && id.duration){
 									var volume_new = Math.round((id.volume + parseFloat((delta > 0) ? '0.1' : '-0.1'))*10)/10;
@@ -508,9 +508,9 @@
 				id = media[0],
 				options = id.options,
 				wrapper = media.parent(),
-				control = !id.controls ? wrapper.find('.controls') : false,
-				elapsed_time = !id.controls ? control.find('.elapsed_time') : false,
-				remaining_time = !id.controls ? control.find('.remaining_time') : false;
+				control = id.addcontrols ? wrapper.find('.controls') : false,
+				elapsed_time = id.addcontrols ? control.find('.elapsed_time') : false,
+				remaining_time = id.addcontrols ? control.find('.remaining_time') : false;
 
 			if(!id.mediacanplay || action == 'loadedmetadata'){
 				if(wrapper.hasClass('player_error'))
@@ -573,7 +573,7 @@
 						wrapper.add(media).width(media.height()*id.ratio).removeAttr('width');
 				}
 
-				if(!id.controls){
+				if(id.addcontrols){
 					if(wrapper.hasClass('loading'))
 						wrapper.removeClass('loading').addClass('paused').find('.play_pause_button').attr('title',ms_player_lang.bouton_lire);
 
@@ -651,7 +651,7 @@
 					}
 				}
 			}
-			if(!id.controls){
+			if(id.addcontrols){
 				if(options.autoplay && id.mediacanplay){
 					wrapper.removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
 					id.play();
@@ -673,7 +673,7 @@
 			var media = $(this),
 				id = media[0],
 				wrapper = media.parent('.media_wrapper');
-			if(!id.controls){
+			if(id.addcontrols){
 				if(id.paused){
 					wrapper.removeClass('loading').addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
 					media.ms_messages('pause',ms_player_lang.statut_pause);
@@ -710,7 +710,7 @@
 		},
 		ms_play_pause : function(){
 			var id = $(this)[0];
-			if(!id.controls && id.mediacanplay && !id.seeking){
+			if(id.addcontrols && id.mediacanplay && !id.seeking){
 				if(id.paused || id.ended){
 					id.play();
 					$(this).parent().removeClass('paused');
@@ -733,7 +733,7 @@
 				id = media[0],
 				controls = media.parent().find('.controls'),
 				options = id.options;
-			if(!id.controls && id.mediacanplay){
+			if(id.addcontrols && id.mediacanplay){
 				if(mute){
 					if(id.muted){
 						media.ms_messages('mute',ms_player_lang.statut_unmute);
@@ -756,30 +756,28 @@
 				}else if(!id.muted){
 					var volume = id.volume,
 						sound_button = controls.find('.volume_button'),
-						class_remove = $(this)[0].controls ? sound_button.attr('class').match('volume_button_[0-9]{1,3}') : null;
+						class_remove = (controls.length > 0) ? sound_button.attr('class').match('volume_button_[0-9]{1,3}') : null;
 					if(options.volume_bloque && options.volume) volume = id.volume = (options.volume) ? id.volume : options.volume;
-					if($(this)[0].controls){
-						if((volume <= 0.66) && (volume > 0.33)){
-							if(class_remove != null) sound_button.removeClass(class_remove[0]);
-							sound_button.addClass('volume_button_66');
-						}else if((volume <= 1) && (volume > 0.66)){
-							if(class_remove != null) sound_button.removeClass(class_remove[0]);
-							sound_button.addClass('volume_button_100');
-						}else if((volume <= 0.33) && (volume > 0)){
-							if(class_remove != null) sound_button.removeClass(class_remove[0]);
-							sound_button.addClass('volume_button_33');
-						}else if(volume == 0){
-							if(class_remove != null) sound_button.removeClass(class_remove[0]);
-							sound_button.addClass('volume_button_0');
-						}
-						var volume_title = ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)';
-						controls.find('.volume_button').attr('title',volume_title);
-						if(id.slider && (typeof(id.slider_volume) == 'object')){
-							id.slider_volume.slider('value',(id.volume*100));
-							id.slider_volume.slider((options.volume_bloque) ? 'disable' : 'enable');
-						}
+					
+					if((volume <= 0.66) && (volume > 0.33)){
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
+						sound_button.addClass('volume_button_66');
+					}else if((volume <= 1) && (volume > 0.66)){
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
+						sound_button.addClass('volume_button_100');
+					}else if((volume <= 0.33) && (volume > 0)){
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
+						sound_button.addClass('volume_button_33');
+					}else if(volume == 0){
+						if(class_remove != null) sound_button.removeClass(class_remove[0]);
+						sound_button.addClass('volume_button_0');
 					}
-
+					var volume_title = ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)';
+					controls.find('.volume_button').attr('title',volume_title);
+					if(id.slider && (typeof(id.slider_volume) == 'object')){
+						id.slider_volume.slider('value',(id.volume*100));
+						id.slider_volume.slider((options.volume_bloque) ? 'disable' : 'enable');
+					}
 					media.ms_messages('volume',volume_title);
 
 					if(cookies && options.cookie_volume)
@@ -972,7 +970,7 @@
 		 * 
 		 */
 		ms_resize_controls : function(force){
-			if($(this)[0].controls) return;
+			if($(this)[0].controls || !$(this)[0].addcontrols) return;
 			var media = $(this), id = media[0], wrapper = media.parent(), 
 				id_wrapper = wrapper[0], controls = wrapper.find('.controls'),
 				play_width = controls.find('.buttons_left').outerWidth()+parseFloat(controls.find('.buttons_left').css('margin-left'))+parseFloat(controls.find('.buttons_left').css('margin-right')),
