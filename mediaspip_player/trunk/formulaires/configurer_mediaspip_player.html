@@ -18,6 +18,18 @@
 					<label for="cookie_volume_non"><:item_non:></label>
 				</div>
 			</li>
+			<li class="editer editer_mousewheel_non_charger [ (#ENV**{erreurs}|table_valeur{mousewheel_non_charger}|oui)erreur]">
+				<label for="mousewheel_non_charger"><:mediaspip_player:label_mousewheel_non_charger:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mousewheel_non_charger})</span>]
+				<p class="explication"><:mediaspip_player:explication_mousewheel_non_charger:></p>
+				<input type="checkbox" name="mousewheel_non_charger" id="mousewheel_non_charger"[(#ENV{mousewheel_non_charger}|=={on}|oui)checked="checked"] />
+			</li>
+			<li class="editer editer_slider_non_charger [ (#ENV**{erreurs}|table_valeur{slider_non_charger}|oui)erreur]">
+				<label for="slider_non_charger"><:mediaspip_player:label_slider_non_charger:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{slider_non_charger})</span>]
+				<p class="explication"><:mediaspip_player:explication_slider_non_charger:></p>
+				<input type="checkbox" name="slider_non_charger" id="slider_non_charger"[(#ENV{slider_non_charger}|=={on}|oui)checked="checked"] />
+			</li>
 			<li class="editer editer_slider_volume_orientation [ (#ENV**{erreurs}|table_valeur{slider_volume_orientation}|oui)erreur]">
 				<label><:mediaspip_player:label_slider_volume_orientation:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{slider_volume_orientation})</span>]

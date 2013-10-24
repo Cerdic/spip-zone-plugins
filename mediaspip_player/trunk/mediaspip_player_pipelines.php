@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
+ * 2010-2013 - Distribué sous licence GNU/GPL
  * 
  * Fichier de définition des différents pipelines
  * 
@@ -54,7 +54,11 @@ function mediaspip_player_header_prive($flux){
  * 		L'array des plugins mis à jour
  */
 function mediaspip_player_jqueryui_plugins($plugins){
-	$plugins[] = 'jquery.ui.slider';
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	if(lire_config('mediaspip_player/slider_non_charger','non') != 'on')
+		$plugins[] = 'jquery.ui.slider';
 	return $plugins;
 }
 
@@ -68,7 +72,11 @@ function mediaspip_player_jqueryui_plugins($plugins){
  * 		L'array des plugins mis à jour
  */
 function mediaspip_player_jquery_plugins($plugins){
-	$plugins[] = _DIR_LIB_MOUSEWHEEL.'jquery.mousewheel.js';
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	
+	if(lire_config('mediaspip_player/mousewheel_non_charger','non') != 'on')
+		$plugins[] = _DIR_LIB_MOUSEWHEEL.'jquery.mousewheel.js';
 	$plugins[] = 'javascript/flowplayer-3.2.12.min.js';
 	$plugins[] = 'javascript/mediaspip_player.js';
 	$plugins[] = 'javascript/mediaspip_fallback_flash.js';
