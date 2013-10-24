@@ -7,6 +7,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/session');
+include_spip('inc/mailsubscribers');
 
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
@@ -14,9 +15,13 @@ include_spip('inc/session');
 function formulaires_importer_mailsubscribers_charger_dist(){
 	$valeurs = array(
 		'file_import' => '',
+		'valid_subscribers' => '',
+		'listes_import_subscribers' => '',
 		'desactiver_notif' => '',
 		'vider_table' => '',
 	);
+
+	$valeurs['_listes_dispo'] = mailsubscribers_listes();
 	return $valeurs;
 }
 
@@ -49,7 +54,7 @@ function formulaires_importer_mailsubscribers_verifier_dist(){
 		$head = array_keys(reset($test));
 
 		$erreurs['test'] = "";
-		if (in_array("statut",$head)){
+		if (in_array("statut",$head) AND in_array("listes",$head)){
 			$erreurs['test'] .= "<p class='notice'>"._T('mailsubscriber:texte_avertissement_import')."</p>";
 		}
 		$erreurs['test'] .= "|{{".implode("}}|{{",$head)."}}|\n";
@@ -59,7 +64,14 @@ function formulaires_importer_mailsubscribers_verifier_dist(){
 			$erreurs['test'].="|".implode("|",$row)."|\n";
 		}
 		$erreurs['test'] .= "\n";
-		$erreurs['test'] .= "{{".singulier_ou_pluriel($count,'mailsubscriber:info_1_adresse_a_importer','mailsubscriber:info_nb_adresses_a_importer')."}}";
+		$erreurs['test'] .= "<p class='explication'>{{".singulier_ou_pluriel($count,'mailsubscriber:info_1_adresse_a_importer','mailsubscriber:info_nb_adresses_a_importer')."}}</p>";
+
+		if (!in_array("statut",$head)){
+			$erreurs['demander_statut'] = ' ';
+		}
+		if (!in_array("listes",$head)){
+			$erreurs['demander_listes'] = ' ';
+		}
 	}
 
 	return $erreurs;
@@ -79,7 +91,12 @@ function formulaires_importer_mailsubscribers_traiter_dist(){
 	}
 
 	$res = array('editable'=>true);
-	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'));
+	$options = array();
+	if (_request('valid_subscribers'))
+		$options['statut'] = 'valide';
+	if ($l = _request('listes_import_subscribers'))
+		$options['listes'] = $l;
+	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'), $options);
 
 	$message =
 		sinon(
@@ -167,19 +184,45 @@ function importer_mailsubscribers_data($filename){
 	// sinon on ne prend que la premiere colonne, comme un email
 	$data = array();
 	while ($data_raw AND count($data_raw)){
-		$d = array_shift($data_raw);
-		if ($d){
-			if (isset($d['email']))
-				$data[] = $d;
-			else
-				$data[] = array('email'=>reset($d));
+
+		$row = array_shift($data_raw);
+		$row = array_combine(array_map('strtolower',array_keys($row)),array_values($row));
+
+		$d = array();
+		if (isset($row['email']))
+			$d['email'] = $row['email'];
+		else
+			$d['email'] = reset($row);
+
+		foreach(array('nom','lang','listes','statut','date') as $k)
+			if (isset($row[$k]))
+				$d[$k] = $row[$k];
+
+		// Mailchimp
+		if (isset($row['prenom'])){
+			$d['nom'] = trim($row['prenom'] . (isset($d['nom'])?" ".$d['nom']:""));
 		}
+		if (isset($row['confirm_time']) AND !isset($d['date'])){
+			$d['date'] = $row['confirm_time'];
+			if (!isset($d['statut']))
+				$d['statut'] = 'valide';
+		}
+
+		$data[] = $d;
 	}
 
 	return $data;
 }
 
-function importer_mailsubscribers_importe($filename){
+/**
+ *
+ * @param string $filename
+ * @param array $options
+ *   statut
+ *   listes
+ * @return array
+ */
+function importer_mailsubscribers_importe($filename,$options=array()){
 	$res = array('count'=>0,'erreurs'=>array());
 
 	$data = importer_mailsubscribers_data($filename);
@@ -195,11 +238,16 @@ function importer_mailsubscribers_importe($filename){
 		// si pas de colonne email explicite, on prend la premiere colonne et on importe en mail si valide, tel quel
 		// mais graceful (sans forcer le reabonnement d'un desabonne)
 		$email = $d['email'];
-		if (email_valide($email) AND !mailsubscribers_test_email_obfusque($email)){
+		if ($email AND email_valide($email) AND !mailsubscribers_test_email_obfusque($email)){
 			$set = array();
 			if (isset($d['nom'])) $set['nom'] = $d['nom'];
 			if (isset($d['lang'])) $set['lang'] = $d['lang'];
 			if (isset($d['listes'])) $set['listes'] = explode(',',$d['listes']);
+
+			if (!isset($d['statut']) AND isset($options['statut']))
+				$d['statut'] = $options['statut'];
+			if (!isset($set['listes']) AND isset($options['listes']) AND is_array($options['listes']))
+				$set['listes'] = $options['listes'];
 
 			if (!isset($d['statut'])){
 				$set['graceful']=true;
@@ -211,9 +259,15 @@ function importer_mailsubscribers_importe($filename){
 			else {
 				if (isset($set['listes'])) $set['listes'] = implode(',',$set['listes']);
 				if (isset($d['date'])) $set['date'] = $d['date'];
-				if ($id = sql_getfetsel("id_mailsubscriber","spip_mailsubscribers","email=".sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)))){
+				if ($row = sql_fetsel("id_mailsubscriber,listes","spip_mailsubscribers","email=".sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)))
+				  AND $id = $row["id_mailsubscriber"]){
 					$set['email'] = $email; // si mail obfusque
 					$set['statut'] = $d['statut'];
+					// si la liste vient des options on la merge avec l'existante
+					if (!isset($d['listes']) AND isset($set['listes']) AND $row['listes']){
+						$l = array_unique(array_merge(explode(",",$row['listes']),explode(",",$set['listes'])));
+						$set['listes'] = implode(",",$l);
+					}
 					objet_modifier("mailsubscriber",$id,$set);
 					$res['count']++;
 				}
@@ -232,9 +286,16 @@ function importer_mailsubscribers_importe($filename){
 			}
 		}
 		else {
-			$res['erreurs'][] = "email invalide \"<tt>$email</tt>\"";
+			// ne pas produire une erreur pour un email vide
+			if ($email)
+				$res['erreurs'][] = "email invalide \"<tt>$email</tt>\"";
 		}
 	}
+
+	// debloquer les flags edition
+	include_spip('inc/drapeau_edition');
+	debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
+
 
 	return $res;
 }
