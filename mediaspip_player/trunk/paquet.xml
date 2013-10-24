@@ -36,6 +36,6 @@
 	<utilise nom="spipmotion" />
 	<utilise nom="embed_code" />
 	
-	<lib nom="jquery-mousewheel-3.0.6" lien="https://github.com/brandonaaron/jquery-mousewheel/archive/3.0.6.zip" />
+	<lib nom="jquery-mousewheel-3.1.4" lien="https://github.com/brandonaaron/jquery-mousewheel/archive/3.1.4.zip" />
 	<menu nom="mediaspip_player" titre="mediaspip_player:cfg_titre_html5_player" parent="menu_squelette" icone="images/mediaspip_player-16.png" action="configurer_mediaspip_player" />
 </paquet>
