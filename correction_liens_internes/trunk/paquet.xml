@@ -6,11 +6,11 @@
 	compatibilite="[3.0.0;3.0.*]"
 >	
 
-	<nom>Correction des liens interne</nom>
+	<nom>Correction des liens internes</nom>
 
 
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-
+    <pipeline nom="pre_edition" inclure="correction_liens_internes_pipelines.php" />
 </paquet>
