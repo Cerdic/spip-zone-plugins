@@ -13,23 +13,32 @@
 
 		<fieldset><legend><:urls_pages:label_rewritebase:></legend>
 			<ul>
-				[(#SAISIE{input, rewritebase,
-					label=<:urls_pages:label_rewritebase:>,
-					explication=<:urls_pages:explication_rewritebase:>})]
+				#SET{name,rewritebase} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:urls_pages:label_rewritebase:></label>
+					<p class="explication"><:urls_pages:explication_rewritebase:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" />
+				</li>
 			</ul>
 		</fieldset>
 
 		<fieldset><legend><:urls_pages:label_liste_pages:></legend>
 			<B_pages>
 			<ul>
-			<li><span class='explication'><:urls_pages:explication_ecriture_url{url_site=#URL_SITE_SPIP}:></span></li>
-			[(#REM) cle=page, valeur=répertoire ]
-			<BOUCLE_pages(DATA){source table, #ENV**{pages}}{!par valeur, cle}>
-			[(#REM) [ <li><span class='explication' title='<:urls_pages:explication_dossier:>'>(#VALEUR|unique)/</span></li> ] ]
-			[(#SAISIE{input, #CLE,
-				label=[<a href='#URL_PAGE{#CLE}'>(#CONFIG{urls_pages/#CLE}|?{[<strong title='[(#URL_PAGE{#CLE}|url_absolue)]'>(#CLE)</strong>],#CLE})</a>],
-				placeholder=#URL_PAGE{#CLE}})]
-			</BOUCLE_pages>
+				<li>
+					<span class='explication'><:urls_pages:explication_ecriture_url{url_site=#URL_SITE_SPIP}:></span>
+				</li>
+				[(#REM) cle=page, valeur=répertoire ]
+				<BOUCLE_pages(DATA){source table, #ENV**{pages}}{!par valeur, cle}>
+				[(#REM) [ <li><span class='explication' title='<:urls_pages:explication_dossier:>'>(#VALEUR|unique)/</span></li> ] ]
+				#SET{name,#CLE} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[<a href="[(#URL_PAGE{#CLE})]">(#CONFIG{urls_pages/#CLE}|?{[<strong title="[(#URL_PAGE{#CLE}|url_absolue)]">(#CLE)</strong>],#CLE})</a>]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="[(#URL_PAGE{#CLE})]"/>
+				</li>
+				</BOUCLE_pages>
 			</ul>
 			</B_pages>
 			<:urls_pages:info_aucun_squelette:>
@@ -37,12 +46,14 @@
 			<!-- pages obsolètes -->
 			<B_obsoletes>
 			<ul>
-			<li class='erreur'>Les pages suivantes sont enregistrées en configuration mais ne sont plus actives. Il est recommandé de vider ces champs.</li>
-			<BOUCLE_obsoletes(DATA){source table, #ENV**{obsoletes}}{!par valeur, cle}>
-			[(#SAISIE{input, #VALEUR,
-				label=#VALEUR,
-				li_class=erreur})]
-			</BOUCLE_obsoletes>
+				<li class='erreur'>Les pages suivantes sont enregistrées en configuration mais ne sont plus actives. Il est recommandé de vider ces champs.</li>
+				<BOUCLE_obsoletes(DATA){source table, #ENV**{obsoletes}}{!par valeur, cle}>
+				#SET{name,#VALEUR} #SET{defaut,''}
+				<li class="erreur editer editer_[(#GET{name})]">
+					<label for="#GET{name}">[(#VALEUR)]</label>
+					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" />
+				</li>
+				</BOUCLE_obsoletes>
 			</ul>
 			</B_obsoletes>
 		</fieldset>
