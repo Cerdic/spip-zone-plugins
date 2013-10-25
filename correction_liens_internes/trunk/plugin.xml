@@ -1,0 +1,21 @@
+<plugin>
+    <nom>Correction des liens internes</nom>
+	<prefix>correction_liens_internes</prefix>
+	<categorie>edition</categorie>
+	<version>0.2.0</version>
+	<etat>dev</etat>
+    <necessite id="SPIP" version="[2.1.0;3.0.99]" />
+
+	
+
+    <slogan>Liens internes : soyez beaux!</slogan>
+	<auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
+    <description>
+        Corrige automatiquement les liens internes insérés par copier-coller de l'url. <code>[texte->http://www.example.com/spip.php?article1]</code>, inséré dans le site <code>example.com</code> devient <code>[texte->article1]</code>.
+    </description>
+	<licence>[GPL 3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+    <pipeline>
+        <nom>pre_edition</nom>
+        <inclure>correction_liens_internes_pipelines.php</inclure>
+    </pipeline>
+</plugin>
