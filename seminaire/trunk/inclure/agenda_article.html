@@ -25,7 +25,7 @@
 <B_agenda>
 <h3>[(#DESCRIPTIF|attribut_html)]</h3>
 <ul class='liste_items evenements'>
-	<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
+	<BOUCLE_agenda(EVENEMENTS){par date_debut}{!evenement_passe #GET{date_debut}}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
 		<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 			[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
 		</li>
