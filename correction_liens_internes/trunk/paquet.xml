@@ -1,0 +1,16 @@
+<paquet
+	prefix="correction_liens_internes"
+	categorie="edition"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+>	
+
+	<nom>Correction des liens interne</nom>
+
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+</paquet>
