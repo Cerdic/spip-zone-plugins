@@ -11,6 +11,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
+if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
+if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',15);
 
 /**
  *
@@ -20,9 +23,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     width => file
  * @param int $width
  * @param int $height
+ * @param string $extension
  * @return string
  */
-function respim_markup($img, $rwd_images, $width, $height){
+function respim_markup($img, $rwd_images, $width, $height, $extension){
 	$class = extraire_attribut($img,"class");
 	if (strpos($class,"respim")!==false) return $img;
 	ksort($rwd_images);
@@ -51,7 +55,8 @@ function respim_markup($img, $rwd_images, $width, $height){
 		$mw = ($prev_width?"(min-width:{$prev_width}px)":"(max-width:{$w}px)");
 		$mw20 = ($prev_width?"(min-width:".round($prev_width/2)."px)":"(max-width:".round($w/2)."px)");
 		$mw15 = ($prev_width?"(min-width:".round($prev_width/1.5)."px)":"(max-width:".round($w/1.5)."px)");
-		$medias[$w] = "@media screen and $mw,screen and (-webkit-min-device-pixel-ratio: 2) and $mw20,screen and (-webkit-min-device-pixel-ratio: 1.5) and $mw15,screen and (min--moz-device-pixel-ratio: 2) and $mw20,screen and (min--moz-device-pixel-ratio: 1.5) and $mw15{b.$cid,b.$cid:after{background-image:url($file);}}";
+		$medias[$w] = "@media screen and $mw{b.$cid,b.$cid:after,.slow b.$cid,.slow b.$cid:after{background-image:url($file);}}";
+		$medias[$w."hr"] = "@media screen and (-webkit-min-device-pixel-ratio: 2) and $mw20,screen and (-webkit-min-device-pixel-ratio: 1.5) and $mw15,screen and (min--moz-device-pixel-ratio: 2) and $mw20,screen and (min--moz-device-pixel-ratio: 1.5) and $mw15{b.$cid,b.$cid:after{background-image:url($file);}}";
 		$prev_width = $w+1;
 	}
 	// en premier : la plus grande image par defaut
@@ -63,7 +68,7 @@ function respim_markup($img, $rwd_images, $width, $height){
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","respim $class");
 	$img = inserer_attribut($img,"onmousedown","var i=window.getComputedStyle(this.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');this.src=(i&&i!='none'?i:this.src);");
-	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid\">$img</b>\n<style>$style</style><!--[endif]-->";
+	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
 }
@@ -110,6 +115,9 @@ function respim_image($img, $bkpt = array(320,480,780)){
 	if (!file_exists($src))
 		return $img;
 
+	$parts = pathinfo($src);
+	$extension = $parts['extension'];
+
 	// calculer les variantes d'image sur les breakpoints
 	$large = "";
 	foreach($bkpt as $wk){
@@ -120,13 +128,13 @@ function respim_image($img, $bkpt = array(320,480,780)){
 
 	// l'image de fallback en jpg tres compresse
 	if (function_exists("image_aplatir")){
-		// image de fallback : la plus petite en jpg compresse
-		$fallback = image_aplatir($large,'jpg','ffffff',15);
+		// image de fallback : la plus grande en jpg tres compresse
+		$fallback = image_aplatir($large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,_RESPIM_LOWSRC_JPG_QUALITY);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
 	// generer le markup
-	return respim_markup($img,$images,$w,$h);
+	return respim_markup($img,$images,$w,$h,$extension);
 }
 
 /**
@@ -157,26 +165,33 @@ function respim_affichage_final($texte){
 			$ins = "<style type='text/css'>"."img.respim{opacity:0.70;max-width:100%;height:auto;}"
 			."b.respwrapper{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
 			."b.respwrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%;content:\"\"}"
-			."</style>";
-			// le script qui est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
+			."</style>\n";
+			// le script qui estime si la rapidite de connexion et pose une class slow sur <html> si connexion lente
+			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
 			$async_style = "html img.respim{opacity:0.01}html b.respwrapper:after{display:none;}";
-			$ins .= "<script>var respim_onload = function(){"
+			$length = strlen($texte)+1500; // ~1500 pour le JS qu'on va inserer
+			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
+				."var slowConnection = false;"
+				."if (typeof window.performance!==\"undefined\"){"
+				."var perfData = window.performance.timing;"
+				."var speed = ~~($length/(perfData.responseEnd - perfData.connectStart));" // approx, *1000/1024 to be exact
+				//."console.log(speed);"
+				."slowConnection = (speed && speed<50);" // speed n'est pas seulement une bande passante car prend en compte la latence de connexion initiale
+				."}else{"
+				//https://github.com/Modernizr/Modernizr/blob/master/feature-detects/network/connection.js
+				."var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;"
+				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
+				."}"
+				//."console.log(slowConnection);"
+				."if(slowConnection) (function(H){H.className=H.className+' slow'})(document.documentElement);\n"
+				."var respim_onload = function(){"
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
-			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);
-var lowBandWidth = false;
-if (typeof window.performance!==\"undefined\"){
-var perfData = window.performance.timing;
-var speed = ~~(document.getElementsByTagName('html')[0].innerHTML.length/(perfData.responseEnd - perfData.requestStart)); // approx, *1000/1024 to be exact
-lowBandWidth = (speed && speed<150);
-}else{
-//https://github.com/Modernizr/Modernizr/blob/master/feature-detects/network/connection.js
-var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-if (typeof connection!==\"undefined\") lowBandWidth = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));
-}
-console.log(lowBandWidth);
-				};"
-				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(respim_onload)}); else window.onload=respim_onload;</script>";
+			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
+				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(respim_onload)}); else window.onload=respim_onload;/*]]>*/</script>\n";
+			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
+			if (!_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
+				$ins .= "<noscript><style type='text/css'>.png img.respim,.gif img.respim{opacity:0.01}b.respwrapper.png:after,b.respwrapper.gif:after{display:none;}</style></noscript>";
 			// inserer abant le premier <script> ou <link a defaut
 			if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
 				$texte = substr_replace($texte,"<!--[if !IE]-->$ins<!--[endif]-->\n",$p,0);
