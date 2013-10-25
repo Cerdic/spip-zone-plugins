@@ -17,6 +17,10 @@ function correction_liens_internes_correction($texte){
     $match=array(); 
     preg_match_all("#\[(.*)->($url_site(.*))\]#U",$texte,$match,PREG_SET_ORDER); 
     include_spip("inc/urls");
+    $type_urls = ($GLOBALS['type_urls'] === 'page'
+                                AND $GLOBALS['meta']['type_urls'])
+                        ?  $GLOBALS['meta']['type_urls']
+                        :  $GLOBALS['type_urls'];
     foreach ($match as $lien){
         $mauvais_raccourci = $lien[0];
         $mauvaise_url = $lien[2];
@@ -25,12 +29,20 @@ function correction_liens_internes_correction($texte){
         if ($composants_url[0]){
             $objet      = $composants_url[1]["type"];
             $id_objet   = $composants_url[1]["id_$objet"];
+            }
+        
+        else if ($type_urls == 'simple'){
+            $composants_url =  parse_url($mauvaise_url);
+            parse_str($composants_url["query"],$composants_url);
+            $objet      =  $composants_url["page"];
+            $id_objet   =  $composants_url["id_$objet"];
+        }
+        if ($objet and $id_objet){
             $bonne_url  = $objet.$id_objet;
             $bon_raccourci = str_replace($mauvaise_url,$bonne_url,$mauvais_raccourci);
             $texte = str_replace($mauvais_raccourci,$bon_raccourci,$texte);
             }
         }
-    
     return $texte;
     }
 ?>
