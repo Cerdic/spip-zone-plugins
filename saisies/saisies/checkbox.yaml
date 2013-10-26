@@ -38,6 +38,18 @@ options:
           label: '<:saisies:option_defaut_label:>'
           rows: 10
           cols: 50
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'choix_alternatif'
+          label: '<:saisies:choix_alternatif_label:>'
+          defaut: '' 
+      -
+        saisie: 'input'
+        options:
+          nom: 'choix_alternatif_label'
+          label: '<:saisies:choix_alternatif_label_label:>'
+          defaut: '<:saisies:choix_alternatif_label_defaut:>'
   -
     saisie: 'fieldset'
     options:

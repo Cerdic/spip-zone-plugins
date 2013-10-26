@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque',
 
 	// C
+    'choix_alternatif_label'=>'Permettre de proposer un choix alternatif',
+    'choix_alternatif_label_label'=>'Label de ce choix alternatif',
+    'choix_alternatif_label_defaut'=>'Autre choix',
 	'construire_action_annuler' => 'Annuler',
 	'construire_action_configurer' => 'Configurer',
 	'construire_action_deplacer' => 'Déplacer',

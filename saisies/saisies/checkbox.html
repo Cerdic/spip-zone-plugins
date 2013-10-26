@@ -49,4 +49,14 @@
 	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ (#ENV*{attributs})] />
 	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE">[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)<strong>]#VALEUR[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)</strong>]</label>
 </div>
+
 </BOUCLE_checkbox>
+[(#ENV{choix_alternatif}|oui)
+    <div class="#ENV{choix,choix} choix_alternatif[ (#ENV{choix,choix})_alternatif]">
+        <input name="#ENV{nom}[(#VAL{91}|chr)]choix_alternatif[(#VAL{93}|chr)]" id="[champ_(#ENV{nom}|saisie_nom2classe)_choix_alternatif]" />
+        <label for="[champ_(#ENV{nom}|saisie_nom2classe)_choix_alternatif]">
+            #ENV{choix_alternatif_label}
+        </label>
+    </div>
+]
+</B_checkbox>
