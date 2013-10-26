@@ -2,7 +2,7 @@
     <nom>Correction des liens internes</nom>
 	<prefix>correction_liens_internes</prefix>
 	<categorie>edition</categorie>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<etat>test</etat>
     <necessite id="SPIP" version="[2.1.0;3.0.99]" />
 

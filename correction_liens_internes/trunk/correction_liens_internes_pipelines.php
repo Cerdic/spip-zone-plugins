@@ -38,6 +38,15 @@ function correction_liens_internes_correction($texte){
             $id_objet   =  $composants_url["id_$objet"];
         }
         if ($objet and $id_objet){
+            if ($objet == "article"){
+                $objet = "";
+                }
+            else if ($objet == "auteur"){
+                $objet = "aut";
+                }
+            else if ($objet =="rubrique"){
+                $objet = "rub";
+                }
             $bonne_url  = $objet.$id_objet;
             $bon_raccourci = str_replace($mauvaise_url,$bonne_url,$mauvais_raccourci);
             $texte = str_replace($mauvais_raccourci,$bon_raccourci,$texte);
