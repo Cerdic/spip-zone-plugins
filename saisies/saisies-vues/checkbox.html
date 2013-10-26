@@ -4,7 +4,7 @@
 <B_choix>
 <ul>
 	<BOUCLE_choix(POUR){tableau #GET{valeur}}>
-	<li class="choix">[(#GET{datas}|table_valeur{#VALEUR})]</li>
+        [<li class="choix">(#GET{datas}|table_valeur{#VALEUR})</li>]
 	</BOUCLE_choix>
 
     [<li class="choix"><em>#ENV{choix_alternatif_label}</em> : (#GET{valeur}|table_valeur{choix_alternatif})</li>]
