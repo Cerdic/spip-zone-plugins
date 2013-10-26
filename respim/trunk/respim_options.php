@@ -49,19 +49,38 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
 
 	$prev_width = 0;
 	$medias = array();
+	$lastw = array_keys($rwd_images);
+	$lastw = end($lastw);
+	$hasmax = true;
 	foreach ($rwd_images as $w=>$file){
+		if ($w==$lastw) {$hasmax=false;$islast = true;}
 		// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
-		// $file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
-		$mw = ($prev_width?"(min-width:{$prev_width}px)":"(max-width:{$w}px)");
-		$mw20 = ($prev_width?"(min-width:".round($prev_width/2)."px)":"(max-width:".round($w/2)."px)");
-		$mw15 = ($prev_width?"(min-width:".round($prev_width/1.5)."px)":"(max-width:".round($w/1.5)."px)");
-		$medias[$w] = "@media screen and $mw{b.$cid,b.$cid:after,.slow b.$cid,.slow b.$cid:after{background-image:url($file);}}";
-		$medias[$w."hr"] = "@media screen and (-webkit-min-device-pixel-ratio: 2) and $mw20,screen and (-webkit-min-device-pixel-ratio: 1.5) and $mw15,screen and (min--moz-device-pixel-ratio: 2) and $mw20,screen and (min--moz-device-pixel-ratio: 1.5) and $mw15{b.$cid,b.$cid:after{background-image:url($file);}}";
+		$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
+		// il faut utiliser une clause min-width and max-width pour que les regles soient exlusives
+		// sinon on a multiple load sous android 2.x
+		$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
+		$mw20 = $mw15 = "";
+		if ($w>=640 OR $islast){
+			$mw20 = ($prev_width?"and (min-width:".round($prev_width/2)."px)":"").($hasmax?" and (max-width:".round($w/2)."px)":"");
+		}
+		$mw15 = ($prev_width?"and (min-width:".round($prev_width/1.5)."px)":"").($hasmax?" and (max-width:".round($w/1.5)."px)":"");
+		$not = "html:not(.ahrdpi)";
+		if ($prev_width<800 AND ($w>800 OR $islast))
+			$not.=":not(.avp800)";
+		$not .= " ";
+		$medias[$w] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after,{$not}.slow b.$cid,{$not}.slow b.$cid:after{background-image:url($file);}}";
+		$mhr = array();
+		if ($mw20)
+			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 2) $mw20,screen and (min--moz-device-pixel-ratio: 2) $mw20";
+		if ($mw15)
+			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 1.5) $mw15,screen and (min--moz-device-pixel-ratio: 1.5) $mw15";
+		if (count($mhr)){
+			$mhr = implode(",",$mhr);
+			$medias[$w."hr"] = "@media $mhr{html:not(.avp800) b.$cid,html:not(.avp800) b.$cid:after{background-image:url($file) !important;}}";
+		}
 		$prev_width = $w+1;
 	}
-	// en premier : la plus grande image par defaut
-	$style .= "b.$cid,b.$cid:after{background-image:url($file)}";
-	// puis surcharge en Media Queries
+	// Media Queries
 	$style .= implode("",$medias);
 
 	$out = "<!--[if IE]>$img<![endif]-->\n";
@@ -171,6 +190,16 @@ function respim_affichage_final($texte){
 			$async_style = "html img.respim{opacity:0.01}html b.respwrapper:after{display:none;}";
 			$length = strlen($texte)+1500; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
+				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
+				// Android 2 media-queries bad support workaround
+				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
+				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
+				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
+				."if (android2) {"
+				."hAC('avp800');setTimeout(function(){(function(H){H.className=H.className.replace(/\bavp800\b/,'')})(document.documentElement)},1000);"
+				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('ahrdpi');"
+				."}\n"
+				// slowConnection detection
 				."var slowConnection = false;"
 				."if (typeof window.performance!==\"undefined\"){"
 				."var perfData = window.performance.timing;"
@@ -183,7 +212,9 @@ function respim_affichage_final($texte){
 				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
 				."}"
 				//."console.log(slowConnection);"
-				."if(slowConnection) (function(H){H.className=H.className+' slow'})(document.documentElement);\n"
+				."if(slowConnection) hAC('slow');\n"
+				// injecter un style async apres chargement des images
+			  // pour masquer les couches superieures (fallback et chargement)
 				."var respim_onload = function(){"
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
