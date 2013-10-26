@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
+ * 2010-2013 - Distribué sous licence GNU/GPL
  * 
  * Formulaire dynamique #FORMULAIRE_EMBED_CODE
  * Crée le code d'embed d'une video, d'un son
@@ -14,7 +14,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('base/abstract_sql');
 /**
  * Chargement des valeurs par defaut des champs du formulaire
  *
@@ -36,9 +35,8 @@ function formulaires_embed_code_charger_dist($id_objet=null, $objet='document'){
 	if($infos_doc && ($infos_doc['hauteur'] > 0) && ($infos_doc['largeur'] > 0)){
 		$valeurs['ratio'] = $infos_doc['largeur']/$infos_doc['hauteur'];
 		$valeurs['hauteur_ratio'] = $valeurs['hauteur'] = floor($valeurs['largeur']/$valeurs['ratio']);
-	}else{
+	}else
 		$valeurs['hauteur_ratio'] = $valeurs['hauteur'];
-	}
 	
 	return $valeurs;
 }

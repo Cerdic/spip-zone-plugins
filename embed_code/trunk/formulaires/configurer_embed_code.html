@@ -5,12 +5,16 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
-				[(#SAISIE{input,embed_largeur,
-					label=<:embed_code:cfg_label_largeur:>,
-					defaut=480})]
-				[(#SAISIE{input,embed_hauteur,
-					label=<:embed_code:cfg_label_hauteur:>,
-					defaut=360})]
+				<li class="editer editer_embed_largeur"[ (#ENV**{erreurs}|table_valeur{embed_largeur}|oui)erreur]">
+					<label for="embed_largeur"><:embed_code:cfg_label_largeur:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{embed_largeur})</span>]
+					<input type="text" name="embed_largeur" class="text" id="embed_largeur" value="#ENV{embed_largeur,480}" size="4" maxlength="4" />
+				</li>
+				<li class="editer editer_embed_hauteur"[ (#ENV**{erreurs}|table_valeur{embed_hauteur}|oui)erreur]">
+					<label for="embed_hauteur"><:embed_code:cfg_label_hauteur:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{embed_hauteur})</span>]
+					<input type="text" name="embed_hauteur" class="text" id="embed_hauteur" value="#ENV{embed_hauteur,360}" size="4" maxlength="4" />
+				</li>
 			</ul>
 			<p class="boutons">
 				<input type="submit" value="<:bouton_enregistrer:>" class="submit" />

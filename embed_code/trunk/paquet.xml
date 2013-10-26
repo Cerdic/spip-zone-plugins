@@ -1,8 +1,8 @@
 <paquet
 	prefix="embed_code"
 	categorie="multimedia"
-	version="0.4.3"
-	etat="test"
+	version="0.4.4"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="prive/themes/spip/images/embed_code.png"
 	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/embed-code-generateur-de-code-d"
@@ -21,7 +21,6 @@
 	<pipeline nom="intranet_pages_ok" inclure="embed_code_pipelines.php" />
 	
 	<necessite nom="medias" compatibilite="[1.6.12;[" />
-	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
-	<necessite nom="saisies" compatibilite="[1.30.0;[" />
+	<utilise nom="mediabox" compatibilite="[0.8.1;[" />
 	<utilise nom="mediaspip_player" />
 </paquet>

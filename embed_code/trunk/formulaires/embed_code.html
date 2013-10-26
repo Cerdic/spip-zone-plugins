@@ -10,7 +10,7 @@
 			<li class="editer embed_code">
 			[(#ENV*{erreurs}|table_valeur{largeur}|ou{#ENV*{erreurs}|table_valeur{hauteur}}|non)
 			<label for="code_embed_#ENV{id_objet}"><:embed_code:label_code_embed:></label>
-			<textarea id="code_embed_#ENV{id_objet}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly">[(#MODELE{embed_doc_player,download=non,buffer=10,id_objet=#ENV{id_objet},objet=#ENV{objet},largeur=#ENV{largeur},hauteur=#ENV{hauteur},env}|liens_absolus|trim)]</textarea>
+			<textarea id="code_embed_#ENV{id_objet}" class="code_embed copypaste" cols="#ENV{cols,40}" rows="#ENV{rows,6}" readonly="readonly">[(#MODELE{embed_doc_player,download=non,id_objet=#ENV{id_objet},objet=#ENV{objet},largeur=#ENV{largeur},hauteur=#ENV{hauteur},env}|liens_absolus|trim)]</textarea>
 			[(#PLUGIN{mediabox}|oui)
 			<p><a href="#" onclick="jQuery.colorbox({html:jQuery('#code_embed_#ENV{id_objet}').val()});return false;" class="spip_out"><:embed_code:lien_preview_embed:></a></p>]]
 			[(#ENV*{erreurs}|table_valeur{largeur}|ou{#ENV*{erreurs}|table_valeur{hauteur}}|oui)
@@ -28,7 +28,9 @@
 				<input type="text" class="text" name="hauteur" id="hauteur" value="#ENV{hauteur_ratio}" />
 			</li>
 		</ul>
-		<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
 	</div></form>
 </div>
 <script type="text/javascript">

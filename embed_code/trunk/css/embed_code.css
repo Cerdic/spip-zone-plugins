@@ -5,9 +5,9 @@
 @viewport { width: device-width;}
 
 body{
-    font: 90% Arial,sans-serif;
-    margin:0;
-    padding:0;
+	font: 90% Arial,sans-serif;
+	margin:0;
+	padding:0;
 	color: #4B4B4B;
 }
 
@@ -15,9 +15,9 @@ body.document_full{
 	background-color:#000;
 	color:#fff;
 	overflow: hidden;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+	position: absolute;
+	height: 100%;
+	width: 100%;
 }
 
 .player-container{
@@ -38,12 +38,12 @@ body.document_full{
 
 .infos_document{
 	background: none repeat scroll 0 0 white;
-    border: medium none;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 4px 18px #C8C8C8;
-    margin: 0px 20px 20px;
-    padding: 5px 10px;
-    overflow:auto;
+	border: medium none;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 4px 18px #C8C8C8;
+	margin: 0px 20px 20px;
+	padding: 5px 10px;
+	overflow:auto;
 }
 
 .infos_document .logo{
