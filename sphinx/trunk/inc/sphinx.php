@@ -30,7 +30,7 @@ function recherchesphinx_array_dist($recherche, $options) {
 /**
  * sphinx -> tableau
  * @param string $u "serialize(env)"
- * @param string $selection : indiquer quelle sélection on demande
+ * @param string $selection : indiquer quelle selection on demande
  * @return array|bool
  */
 function inc_sphinx_to_array_dist($u, $selection=null) {
@@ -42,16 +42,16 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	spip_timer('total');
 
 
-	// les trucs demandés
+	// les trucs demandes
 	$recherche = trim($env['recherche']);  # recherche fulltext
 
 	# bizarre le ? plante ; est-ce du a "extended wildcards"?
  	$recherche = str_replace('?', ' ', $recherche);
  
 	// appel par une page mot :
-	//   (ou limiter aux mots-clés)
+	//   (ou limiter aux mots-cles)
 	// ou par l'url &mots=italie ; &mots[]=italie&mots[]=economie
-	// sprintf('%u') necessaire car le crc32 en 32 bits n'est pas le même qu'en 64
+	// sprintf('%u') necessaire car le crc32 en 32 bits n'est pas le meme qu'en 64
 	if (is_string($env['mots'])) {
 		$env['mots'] = array($env['mots']);
 	}
@@ -72,7 +72,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 		$id_auteur = intval($env['id_auteur']);
 	}
 
-	# validité de la requête ?
+	# validite de la requete ?
 	if (!strlen($recherche)
 	AND !isset($cmot)
 	AND !$id_auteur
@@ -90,13 +90,13 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	$cl->SetFilter ( "visible", array(1) );
 
 	# limites
-	$max_pagination = 10;
+	$max_pagination = 20;
 
 	$debut = intval($env['debut_'.$selection]);
 	$cl->SetLimits($debut, $max_pagination);
 
 
-	# mots-clés sans fulltext
+	# mots-cles sans fulltext
 	if (isset($cmot)) {
 
 		# on veut un ET logique
@@ -170,7 +170,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 #			$cl->SetSelect("*, sum(lcs*user_weight) as w");
 #			$cl->SetSortMode ( SPH_SORT_EXPR, "sum(lcs*user_weight)" );
 #			break;
-		case 'points':  /* c'est le choix proposé aux visiteurs ! */
+		case 'points':  /* c'est le choix propose aux visiteurs ! */
 		case 'expr1':
 		default:
 			$cl->SetSortMode ( SPH_SORT_EXPR,
@@ -202,7 +202,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 		$f($cl,$sources,$query,$env);
 	}
 
-	# recuperer les données
+	# recuperer les donnees
 	$cl->SetArrayResult ( true );
 
 	# analyser la query
@@ -262,7 +262,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 			$n = 0;
 		}
 
-		# creer les extraits avec surlignement des mots demandés
+		# creer les extraits avec surlignement des mots demandes
 		if ($selection != '') {
 			sphinx_excerpts($r, $cl, $res['words'], $query, $sources);
 		}
