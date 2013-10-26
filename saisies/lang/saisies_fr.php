@@ -12,9 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque',
 
 	// C
-    'choix_alternatif_label'=>'Permettre de proposer un choix alternatif',
-    'choix_alternatif_label_label'=>'Label de ce choix alternatif',
-    'choix_alternatif_label_defaut'=>'Autre choix',
 	'construire_action_annuler' => 'Annuler',
 	'construire_action_configurer' => 'Configurer',
 	'construire_action_deplacer' => 'Déplacer',
@@ -68,6 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_autocomplete_off' => 'Désactiver',
 	'option_autocomplete_on' => 'Activer',
 	'option_cacher_option_intro_label' => 'Cacher le premier choix vide',
+    'option_choix_alternatif_label'=>'Permettre de proposer un choix alternatif',
+    'option_choix_alternatif_label_label'=>'Label de ce choix alternatif',
+    'option_choix_alternatif_label_defaut'=>'Autre choix',
 	'option_choix_destinataires_explication' => 'Un ou plusieurs auteurs parmis lesquels l’utilisateur pourra faire son choix. Si rien n’est sélectionné, c’est l’auteur qui a installé le site qui sera choisi.',
 	'option_choix_destinataires_label' => 'Destinataires possibles',
 	'option_class_label' => 'Classes CSS supplémentaires',

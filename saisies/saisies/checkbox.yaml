@@ -42,14 +42,14 @@ options:
         saisie: 'oui_non'
         options:
           nom: 'choix_alternatif'
-          label: '<:saisies:choix_alternatif_label:>'
+          label: '<:saisies:option_choix_alternatif_label:>'
           defaut: '' 
       -
         saisie: 'input'
         options:
           nom: 'choix_alternatif_label'
-          label: '<:saisies:choix_alternatif_label_label:>'
-          defaut: '<:saisies:choix_alternatif_label_defaut:>'
+          label: '<:saisies:option_choix_alternatif_label_label:>'
+          defaut: '<:saisies:option_choix_alternatif_label_defaut:>'
   -
     saisie: 'fieldset'
     options:
