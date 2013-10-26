@@ -11,7 +11,7 @@ function recherchesphinx_array_dist($recherche, $options) {
 
 	# router les recherches article vers la base sphinx
 	if ($table == 'article') {
-		# array ( id_article => score, id_article => score ... );
+		# array ( id_article => score, id_article => score É );
 		$u = serialize(array('recherche' => $recherche));
 		$a = array();
 		foreach(inc_sphinx_to_array_dist($u, $selection='ecrire') as $r) {
@@ -90,7 +90,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	$cl->SetFilter ( "visible", array(1) );
 
 	# limites
-	$max_pagination = 20;
+	$max_pagination = 100;
 
 	$debut = intval($env['debut_'.$selection]);
 	$cl->SetLimits($debut, $max_pagination);
