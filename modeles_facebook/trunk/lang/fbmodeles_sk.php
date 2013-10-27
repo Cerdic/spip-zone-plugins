@@ -54,7 +54,7 @@ Zásuvný modul ponúka aj informácie súvisiace s vytvorením šablóny {{Op
 <cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
 </cadre>
-', # MODIF
+',
 
 	// E
 	'exemple' => '{{{Príklad}}}
