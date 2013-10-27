@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'Reducir el tamaño de los logotipos',
 	'label_upload_document' => 'Autorizar que se agreguen documentos por arrastrar/depositar ("drag & drop") sobre el lápiz artículo.texto (article.texte)',
 	'label_yellow_fade' => 'Fundido',
+	'legend_controleur_fichier_remplacer' => 'Reemplazar este documento "@extension@"',
 	'legend_controleur_hyperlien' => 'Enlace hipertexto',
 	'legend_controleur_logo' => 'Elegir un logotipo:',
 	'legend_controleur_logo_remplacer' => 'Reemplazar este logotipo',
