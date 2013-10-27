@@ -101,7 +101,7 @@ function exec_ressources() {
 	$filtre_statut .= "</select>\n";
 	$filtre_motscles = '<select name="mot" onchange="form.submit()">';
 	$filtre_motscles .= '<option value="">' ._T('asso:entete_tous') .'</option>';
-	$query_mots = sql_select('id_mot, titre', 'spip_mots', 'id_groupe='.intval($GLOBALS['association']['groupemots_ressources']) );
+	$query_mots = sql_select('id_mot, titre', 'spip_mots', 'id_groupe='.intval($GLOBALS['association_metas']['groupemots_ressources']) );
 	while($data_mots = sql_fetch($query_mots)) {
 		$filtre_motscles .= '<option value="'.$data_mots['id_mot'].'"';
 		$filtre_motscles .= ($id_mot==$data_mots['id_mot']?' selected="selected"':'');

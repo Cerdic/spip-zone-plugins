@@ -133,7 +133,7 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
  */
 function comptabilite_liste_plancodes($id='') {
     if (!$id)
-	$id = $GLOBALS['association']['plan_comptable'];
+	$id = $GLOBALS['association_metas']['plan_comptable'];
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
 	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
@@ -157,7 +157,7 @@ function comptabilite_liste_plancodes($id='') {
  */
 function comptabilite_liste_planregles($id='') {
     if (!$id)
-	$id = $GLOBALS['association']['plan_comptable'];
+	$id = $GLOBALS['association_metas']['plan_comptable'];
     if (!$id)
 	return array('[0-9]', '[0-9]',
 	    'A' => array($GLOBALS['association_metas']['classe_produits'], $GLOBALS['association_metas']['classe_charges'],),

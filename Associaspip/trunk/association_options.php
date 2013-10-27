@@ -22,8 +22,7 @@ $GLOBALS['spip_pipeline']['associaspip'] = '';
  * @global array $GLOBALS['association_liste_des_statuts']
  * @name $association_liste_des_statuts
  */
-$GLOBALS['association_liste_des_statuts'] =
-  array('sorti','prospect','ok','echu','relance'); // Le premier element indique un ancien membre
+$GLOBALS['association_liste_des_statuts'] = array('sorti','prospect','ok','echu','relance'); // Le premier element indique un ancien membre
 
 /**
  * @global array $GLOBALS['association_styles_des_statuts']
@@ -335,7 +334,7 @@ function association_formater_nombre($nombre, $decimales=2, $css_class='', $html
 		$res = '';
 	setlocale(LC_NUMERIC, utiliser_langue_visiteur() );
 	$locale = localeconv();
-    $res .= number_format(floatval($nombre), $decimales, $locale['decimal_point'], $locale['thousands_sep']);
+	$res .= number_format(floatval($nombre), $decimales, $locale['decimal_point'], $locale['thousands_sep']);
 	return $res. ($html_abbr?"</$html_abbr>":'');
 }
 
@@ -1249,8 +1248,8 @@ function association_verifier_destinations($valeur, $req=TRUE) {
 	$id_inserted = array();
 	if (count($toutesDestinationsIds)>1) { // on a plusieurs destinations
 		foreach ($toutesDestinationsIds as $id => $id_destination) {
-		  // on verifie qu'il n'y a pas plusieurs fois
-		  // la meme destination, tout en recalculant le total
+			// on verifie qu'il n'y a pas plusieurs fois
+			// la meme destination, tout en recalculant le total
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination] = 0;
 			} else {
@@ -1264,7 +1263,7 @@ function association_verifier_destinations($valeur, $req=TRUE) {
 	} else { // une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base
 		if ($toutesDestinationsMontants[1]) { // quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur
 			if ( $montant_attendu!=association_recuperer_montant($toutesDestinationsMontants[1], FALSE) ) { // on verifie que le montant indique correspond au montant attendu
-			  $err = _T('asso:erreur_montant_destination');
+				$err = _T('asso:erreur_montant_destination');
 			}
 		}
 	}
@@ -1298,52 +1297,51 @@ function association_verifier_destinations($valeur, $req=TRUE) {
  * Selecteur d'exercice comptable
  */
 function filtre_selecteur_asso_exercice($sel='') {
-    $res = "<select name='exercice' onchange='form.submit()' id='asso_exercice'>\n";
-#    $res .= '<option value="0" ';
+	$res = "<select name='exercice' onchange='form.submit()' id='asso_exercice'>\n";
+#	$res .= '<option value="0" ';
 #	$res .= (!$el?' selected="selected"':'');
-#    $res .= '>'. _L("choisir l'exercice ?") ."</option>\n";
-    $sql = sql_select('id_exercice, intitule', 'spip_asso_exercices', '', 'intitule DESC');
-    while ($val = sql_fetch($sql)) {
+#	$res .= '>'. _L("choisir l'exercice ?") ."</option>\n";
+	$sql = sql_select('id_exercice, intitule', 'spip_asso_exercices', '', 'intitule DESC');
+	while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_exercice'].'" ';
 		$res .= ($sel==$val['id_exercice']?' selected="selected"':'');
 		$res .= '>'.$val['intitule']."</option>\n";
-    }
-    sql_free($sql);
-    return "$res</select>\n";
+	}
+	sql_free($sql);
+	return "$res</select>\n";
 }
 
 /**
  * Selecteur de destination comptable
  */
 function filtre_selecteur_asso_destination($sel='') {
-    if ( !$GLOBALS['association_metas']['destinations'])
+	if ( !$GLOBALS['association_metas']['destinations'])
  		return ''; // on n'affiche le selecteur que si l'utilisation des destinations est activee en configuration
-   $res = "<select name='destination' onchange='form.submit()' id='asso_destination'>n";
-    $res .= '<option value="0" ';
+	$res = "<select name='destination' onchange='form.submit()' id='asso_destination'>\n";
+	$res .= '<option value="0" ';
 	$res .= (!$sel?' selected="selected"':'');
-    $res .= '>'. _T('asso:toutes_destinations') ."</option>\n";
-    $intitule_destinations = array();
-    $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
-    while ($val = sql_fetch($sql)) {
-		$res .= '<option value="'.$val['id_destination'].'" ';
+	$res .= '>'. _T('asso:toutes_destinations') ."</option>\n";
+	$sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
+	while ($val = sql_fetch($sql)) {
+		$res .= '<option value="'.$val['id_destination'].'"';
 		$res .= ($sel==$val['id_destination']?' selected="selected"':'');
 		$res .= '>'.$val['intitule']."</option>\n";
-    }
-    sql_free($sql);
-    return "$sel</select>\n";
+	}
+	sql_free($sql);
+	return "$sel</select>\n";
 }
 
 /**
  * Selecteur de groupe de membres
  */
 function filtre_selecteur_asso_groupe($sel='') {
-    $sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
-    if ( !$sql || !sql_count($sql) )
+	$sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
+	if ( !$sql || !sql_count($sql) )
 		return '';  // ne proposer que s'il y a des groupes definis
 	$res = "<select name='groupe' onchange='form.submit()' id='asso_groupe'>\n";
 	$res .= '<option value=""';
 	$res .= (!$sel?' selected="selected"':'');
-    $res .= '>'. _T('asso:tous_les_groupes') ."</option>\n";
+	$res .= '>'. _T('asso:tous_les_groupes') ."</option>\n";
 	while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['id_groupe'].'"';
 		$res .= ($sel==$val['id_groupe']?' selected="selected"':'');
@@ -1361,14 +1359,14 @@ function filtre_selecteur_asso_groupe($sel='') {
  *   Idem instituer_adherent_ici
  */
 function filtre_selecteur_asso_statut($sel='') {
-    $res = "<select id='statut_interne' name='statut_interne' onchange='form.submit()' id='asso_statutinterne'>\n";
-#    $res .= '<option value="tous"';
-#    $res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
-#    $res .= '>'. _T('asso:entete_tous') ."</option>\n";
-    $res .= '<option value=""';
-    $res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
-    $res .= '>'. _T('asso:actifs') ."</option>\n";
-    foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
+	$res = "<select id='statut_interne' name='statut_interne' onchange='form.submit()' id='asso_statutinterne'>\n";
+#	$res .= '<option value="tous"';
+#	$res .= (($sel=='tous' || $sel=='%')?' selected="selected"':'');
+#	$res .= '>'. _T('asso:entete_tous') ."</option>\n";
+	$res .= '<option value=""';
+	$res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
+	$res .= '>'. _T('asso:actifs') ."</option>\n";
+	foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
 		$res .= ($sel==$statut?' selected="selected"':'');
 		$res .= '> '. _T('asso:adherent_entete_statut_'.$statut)
@@ -1382,7 +1380,7 @@ function filtre_selecteur_asso_statut($sel='') {
  */
 function filtre_selecteur_asso_id($sel='') {
 	$res = '<input type="text" name="id" onfocus=\'this.value=""\' size="5" '. (!$sel?'':'value="'.$sel.'" ') .'placeholder="'. _T('asso:entete_id') .'" />'; //!\ ''|0|FALSE|NULL sont traites pareil
-    return "$res\n";
+	return "$res\n";
 }
 
 //@}
@@ -1409,16 +1407,16 @@ function filtre_selecteur_asso_id($sel='') {
  *   Nom (sans prefixe "date_") du champ contenant les annees recherchees
  */
 function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
-    $pager = ' ';
-    if ( !$annee ) // annee non precisee (ou valant 0)
+	$pager = ' ';
+	if ( !$annee ) // annee non precisee (ou valant 0)
 		$annee = date('Y'); // on prend l'annee courante
-    $res = "<select name='annee' onchange='form.submit()' id='annee_$champ'>\n";
-    $an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$champ, '%Y')) AS an_max", "spip_$table", '');
-    $an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$champ, '%Y')) AS an_min", "spip_$table", '');
-    if ( $annee>$an_max || $annee<$an_min ) // si l'annee (courante) n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
+	$res = "<select name='annee' onchange='form.submit()' id='annee_$champ'>\n";
+	$an_max = sql_getfetsel("MAX(DATE_FORMAT(date_$champ, '%Y')) AS an_max", "spip_$table", '');
+	$an_min = sql_getfetsel("MIN(DATE_FORMAT(date_$champ, '%Y')) AS an_min", "spip_$table", '');
+	if ( $annee>$an_max || $annee<$an_min ) // si l'annee (courante) n'est pas disponible dans la liste deroulante on est mal positionne et le changement de valeur n'est pas top
 		$res .= '<option value="'.$annee.'" selected="selected">'.$annee."</option>\n";
-    $sql = sql_select("DATE_FORMAT(date_$champ, '%Y') AS annee", "spip_$table",'', 'annee DESC', 'annee');
-    while ($val = sql_fetch($sql)) {
+	$sql = sql_select("DATE_FORMAT(date_$champ, '%Y') AS annee", "spip_$table",'', 'annee DESC', 'annee');
+	while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['annee'].'"';
 		if ($annee==$val['annee']) {
 			$res .= ' selected="selected"';
@@ -1428,9 +1426,9 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
 		}
 		$res .= '>'.$val['annee']."</option>\n";
 		$pager .= ' ';
-    }
-    sql_free($sql);
-    return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
+	}
+	sql_free($sql);
+	return ($url?"<div class='choix'>$pager</div>\n":"$res</select>\n");
 }
 
 /**
@@ -1442,14 +1440,14 @@ function filtre_selecteur_asso_annee($annee='', $table, $champ, $url='') {
  *   Nom du champ contenant les initiales recherchees
  */
 function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
-    $lettre = strtoupper($lettre);
-    $pager = '';
-    $res = "<select name='lettre' onchange='form.submit()' id='lettre_champ'>\n";
+	$lettre = strtoupper($lettre);
+	$pager = '';
+	$res = "<select name='lettre' onchange='form.submit()' id='lettre_champ'>\n";
 	$res .= '<option value=""';
 	$res .= ((!$lettre||$lettre=='%')?' selected="selected"':'');
 	$res .='>'. _T('asso:entete_tous') ."</option>\n";
-    $sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '', 'init', 'init ASC'); // LEFT(field, n) ==  SUBSTRING(field, 1, n)
-    while ($val = sql_fetch($sql)) {
+	$sql = sql_select("UPPER( LEFT( $champ, 1 ) ) AS init", "spip_$table", '', 'init', 'init ASC'); // LEFT(field, n) ==  SUBSTRING(field, 1, n)
+	while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['init'].'"';
 		if ($lettre==$val['init']) {
 			$res .= ' selected="selected"';
@@ -1458,14 +1456,14 @@ function filtre_selecteur_asso_lettre($lettre='', $table, $champ, $url='') {
 			$pager .= ' <a href="'.$url.'&lettre='.$val['init'].'">'.$val['init'].'</a>';
 		}
 		$res .= '>'.$val['init']."</option>\n";
-    }
-    sql_free($sql);
-    if ( !$lettre || $lettre=='%' ) {
+	}
+	sql_free($sql);
+	if ( !$lettre || $lettre=='%' ) {
 		$pager .= ' <span class="on">'. _T('asso:entete_tous') .'</span>';
 	} else {
 		$pager .= ' <a href="'.$url.'&lettre=">'. _T('asso:entete_tous') .'</a>'; //!\ on s'assure que le parametre est vide s'il etait dans l'URL
 	}
-    return ($url?"<div class='choix'>$pager </div>\n":"$res</select>\n");
+	return ($url?"<div class='choix'>$pager </div>\n":"$res</select>\n");
 }
 
 /**
@@ -1496,8 +1494,8 @@ function filtre_selecteur_asso_periode($periode, $table, $champ, $url='') {
  *   Objet lie auquel restreindre la selection.
  */
 function filtre_selecteur_asso_type($type='', $coord='adresse', $objet='auteur', $lst=FALSE) {
-    $tbl = table_objet_sql($coord); // on le determine ici car 'site' est un alias de 'syndic' (dont la table n'a pas de S final et dont la boucle s'appelle 'syndication' !)
-    switch ($coord) {
+	$tbl = table_objet_sql($coord); // on le determine ici car 'site' est un alias de 'syndic' (dont la table n'a pas de S final et dont la boucle s'appelle 'syndication' !)
+	switch ($coord) {
 		case 'adresse':
 			$abreviation = 'adr';
 			break;
@@ -1523,21 +1521,21 @@ function filtre_selecteur_asso_type($type='', $coord='adresse', $objet='auteur',
 			break;
 	}
 	$res = $pager = '<em class="explication">'. _T("coordonnees:label_type_$coord") ."</em>\n";
-    $res .= "<select name='type_$coord' id='type_$coord'>\n";
-    $res .= '<option value="%"';
-    $pager .= "<div class='choix'><input name='type_$coord' id='type_{$coord}_tous' type='radio' value='%'";
-    $res .= (($type==' ' || $type=='%')?' selected="selected"':'');
-    $pager .= (($type==' ' || $type=='%')?' checked="checked"':'');
-    $res .= '>'. _T('asso:entete_tous') ."</option>\n";
-    $pager .= " /><label for='type_{$coord}_tous'>". _T('asso:entete_tous') ."</label></div>\n";
-    $sql = sql_select("type", $tbl.'_liens', ($objet?("objet=".sql_quote($objet)):''), 'objet, type', 'objet, type');
-    while ($val = sql_fetch($sql)) {
+	$res .= "<select name='type_$coord' id='type_$coord'>\n";
+	$res .= '<option value="%"';
+	$pager .= "<div class='choix'><input name='type_$coord' id='type_{$coord}_tous' type='radio' value='%'";
+	$res .= (($type==' ' || $type=='%')?' selected="selected"':'');
+	$pager .= (($type==' ' || $type=='%')?' checked="checked"':'');
+	$res .= '>'. _T('asso:entete_tous') ."</option>\n";
+	$pager .= " /><label for='type_{$coord}_tous'>". _T('asso:entete_tous') ."</label></div>\n";
+	$sql = sql_select("type", $tbl.'_liens', ($objet?("objet=".sql_quote($objet)):''), 'objet, type', 'objet, type');
+	while ($val = sql_fetch($sql)) {
 		$res .= '<option value="'.$val['type'].'"'
 		. ($type==$val['type']?' selected="selected"':'') .'> '. _T('coordonnees:type_'.$abreviation.'_'.$val['type']) . "</option>\n";
 		$pager .= "<div class='choix'><input name='type_$coord' id='type_$coord_". preg_replace('/\W/', '', $val['type']) ."' type='radio' value='$val[type]'". ($type==$val['type']?' checked="checked"':'') ." /><label for='type_$coord_". preg_replace('/\W/', '', $val['type']) ."'>". appliquer_filtre($val['type'], "logo_type_$abreviation") ."</label></div>\n";
 	}
 	sql_free($sql);
-    return ($lst?"$res</select>\n":$pager);
+	return ($lst?"$res</select>\n":$pager);
 }
 
 //@}
@@ -1557,20 +1555,20 @@ function filtre_selecteur_asso_type($type='', $coord='adresse', $objet='auteur',
 function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
 	if (!$GLOBALS['association_metas']['destinations'])
 		return FALSE;
-    $res1 = "<select name='destinations[]' multiple='multiple' onchange='form.submit()' id='asso_destinations'>";
-    $res2 = '';
-    $res1 .= '<option value="0" ';
-    $res2 .= '<div class="choix"><input type="checkbox" name="destinations[]" value="0" id="destination_0"';
-    if ( !(array_search(0, $sel)===FALSE) ) {
+	$res1 = "<select name='destinations[]' multiple='multiple' onchange='form.submit()' id='asso_destinations'>";
+	$res2 = '';
+	$res1 .= '<option value="0" ';
+	$res2 .= '<div class="choix"><input type="checkbox" name="destinations[]" value="0" id="destination_0"';
+	if ( !(array_search(0, $sel)===FALSE) ) {
 		$res1 .= ' selected="selected"';
 		$res2 .= ' checked="checked"';
-    }
-    $res1 .= '>'. _T('asso:toutes_destinations') ."</option>\n<option disabled='disabled'></option>\n";
-    $res2 .= ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>';
-    $res2 .= "<div class='choix'><hr /></div>\n";
-    $intitule_destinations = array();
-    $sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
-    while ($val = sql_fetch($sql)) {
+	}
+	$res1 .= '>'. _T('asso:toutes_destinations') ."</option>\n<option disabled='disabled'></option>\n";
+	$res2 .= ' /><label for="destination_0">'._T('asso:toutes_destinations').'</label></div>';
+	$res2 .= "<div class='choix'><hr /></div>\n";
+	$intitule_destinations = array();
+	$sql = sql_select('id_destination, intitule', 'spip_asso_destination','', 'intitule DESC');
+	while ($val = sql_fetch($sql)) {
 		$res1 .= '<option value="'.$val['id_destination'].'"';
 		$res2 .= '<div class="choix"><input type="checkbox" name="destinations[]" value="'.$val['id_destination'].'" id="destination_'.$val['id_destination'].'"';
 		if ( !(array_search($val['id_destination'], $sel)===FALSE) ) {
@@ -1580,9 +1578,9 @@ function filtre_selecteur_asso_destinations($sel='', $plus='', $lst=FALSE) {
 		$res1 .= '>'.$val['intitule']."</option>\n";
 		$res2 .= ' /><label for="destination_'.$val['id_destination'].'">'.$val['intitule']."</label></div>\n";
 		$intitule_destinations[$val['id_destination']] = $val['intitule'];
-    }
+	}
 	sql_free($sql);
-    return ($lst?"$res1</select>\n":$res2);
+	return ($lst?"$res1</select>\n":$res2);
 }
 
 /** @} */
@@ -2436,26 +2434,26 @@ function association_passeparam_periode($type='', $objet='', $id=0) {
  * @see association_passeparam_exercice
  */
 function association_passeparam_compta($classes=array()) {
-    $params = array(); // initialisation de la liste
-    list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
-    $params['type_periode'] = ($GLOBALS['association_metas']['exercices']?'exercice':'annee');
-    $params['destination'] = association_recuperer_entier('destination');
-    $params['type'] = _request('type');
-    if ( !$classes ) { // pas en parametre, on prend dans la requete
+	$params = array(); // initialisation de la liste
+	list($params['id_periode'], $params['sql_periode'], $params['debut_periode'], $params['fin_periode'], $params['titre_periode']) = association_passeparam_periode('operation', 'comptes', 0); // on ne fait que renommer les clees : http://stackoverflow.com/questions/9605143/how-to-rename-array-keys-in-php
+	$params['type_periode'] = ($GLOBALS['association_metas']['exercices']?'exercice':'annee');
+	$params['destination'] = association_recuperer_entier('destination');
+	$params['type'] = _request('type');
+	if ( !$classes ) { // pas en parametre, on prend dans la requete
 	$keys = association_recuperer_liste('classes');
 	if ( count($keys) ) {
-	    $vals = array_fill(0, count($keys) ,0);
-	    $params['classes'] = array_combine($keys, $vals);
+		$vals = array_fill(0, count($keys) ,0);
+		$params['classes'] = array_combine($keys, $vals);
 	} else {
-	    $params['classes'] = array();
+		$params['classes'] = array();
 	}
-    } elseif ( is_array($classes) ) { // c'est a priori bon
+	} elseif ( is_array($classes) ) { // c'est a priori bon
 	$params['classes'] = $classes;
-    } else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
+	} else { // c'est un tableau de classe_comptable=>type_operations qui est requis !
 	$params['classes'] = $classes ? array( $classes=>0 ) : array() ;
-    }
-    $params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
-    return $params;
+	}
+	$params['url'] = serialize($params); //!\ les cles numeriques peuvent poser probleme... <http://www.mail-archive.com/php-bugs@lists.php.net/msg100262.html> mais il semble qu'ici le souci vient de l'absence d'encodage lorsqu'on passe $var par URL...
+	return $params;
 }
 
 /** @} */
@@ -2565,10 +2563,10 @@ function affichage_div($type_operation, $list_operation) {
  *   ID de l'objet dont il veut recuperer aussi les donnees
  *   Par defaut : aucun (i.e. 0)
  * @return array $champsExtrasVoulus
- *   - si on ne veut pas de donnee :
- *     'nom_de_la_colonne'=>"Libelle du champ"
- *   - si on veut aussi les donnees :
- *     'nom_de_la_colonne'=>array( "Libelle du champ", "Donnee formatee", "Donnee brute SQL")
+ * - si on ne veut pas de donnee :
+ *   'nom_de_la_colonne'=>"Libelle du champ"
+ * - si on veut aussi les donnees :
+ *   'nom_de_la_colonne'=>array( "Libelle du champ", "Donnee formatee", "Donnee brute SQL")
  */
 function association_trouver_iextras($ObjetEtendu, $id=0) {
 	$champsExtrasVoulus = array();
