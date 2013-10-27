@@ -10,12 +10,12 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=es" total="370" traduits="360" relire="0" modifs="0" nouveaux="10" pourcent="97.30">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=es" total="370" traduits="370" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=fr" total="370" traduits="370" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="370" traduits="354" relire="0" modifs="0" nouveaux="16" pourcent="95.68">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="370" traduits="356" relire="0" modifs="0" nouveaux="14" pourcent="96.22">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
