@@ -57,6 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Apariencia multilingüe',
 	'option_afficher_si_explication' => 'Indique las condiciones para mostrar el campo en función del valor de los otros campos. El identificador de los otros campos debe ser indicarse entre <code>@</code>. <br />Ejemplo <code>@selection_1@=="Toto"</code> condiciona la visualización del campo a que el campo <code>selection_1</code> tenga por valor <code>Toto</code>.',
 	'option_afficher_si_label' => 'Visualización condicional',
+	'option_afficher_si_remplissage_explication' => 'Contrariamente a la opción anterior, ésta condiciona la visualización sólo al rellenar el formulario, no al mostrar los resultados. La sintaxis es la misma.',
+	'option_afficher_si_remplissage_label' => 'presentación condicional durante el rellenado',
 	'option_attention_explication' => 'Un mensaje más importante que la explicación.',
 	'option_attention_label' => 'Aviso',
 	'option_autocomplete_defaut' => 'Dejar por defecto',
