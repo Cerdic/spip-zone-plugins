@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_actualiser_boussoles' => 'Actualizovať kompasy',
+	'bouton_actualiser_boussoles' => 'Aktualizovať kompasy',
+	'bouton_actualiser_caches' => 'Aktualizovať dočasné pamäte',
 	'bouton_boussole' => 'Kompas',
 	'bouton_retirer_boussole' => 'Odstrániť kompas',
 	'bouton_retirer_serveur' => 'Odstrániť server',
@@ -41,11 +42,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
 	'info_boussole_manuelle' => 'Príručka ku Kompasu',
 	'info_cache_boussole' => 'Cache kompasu "@boussole@"',
+	'info_cache_boussoles' => 'Cache kompasov na serveri',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
+	'info_url_serveur' => 'Zadajte adresu stránky servera.',
 
 	// L
 	'label_1_boussole' => '@nb@ kompas',
@@ -95,11 +98,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
+	'message_nok_alias_boussole_manquant' => 'Prezývka kompasu nebola serveru "@serveur@" poskytnutá.',
+	'message_nok_aucune_boussole_hebergee' => 'Na serveri "@serveur@" sa stále nenachádza žiaden kompas.',
 	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
+	'message_nok_boussole_non_hebergee' => 'Kompas "@alias@" sa nenachádza na serveri "@serveur@".',
+	'message_nok_cache_boussole_indisponible' => 'Dočasný súbor kompasu «@alias@» nie je na serveri «@serveur@» dostupný.',
+	'message_nok_cache_liste_indisponible' => 'Dočasný súbor týchto kompasov nie je na serveri "@serveur@" dostupný.',
+	'message_nok_declaration_boussole_xml' => 'Manuálny kompas "@boussole@" sa nedá deklarovať, lebo sa nedá nájsť jeho súbor XML.',
 	'message_nok_ecriture_bdd' => 'Chyba pri zápise do databázy
 (tabuľka @table@).',
+	'message_nok_nom_serveur_spip' => 'Slovo "spip" ako názov servera je vylúčené. Zvoľte si iný názov.',
+	'message_nok_reponse_invalide' => 'Odpoveď servera "@serveur@" má nesprávnu podobu alebo zadanú adresu nemá žiaden aktívny server.',
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
 	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.',
+	'message_ok_boussole_manuelle_ajoutee' => 'Na serveri ste deklarovali manuálny kompas "@boussole@" a dočasné pamäte boli aktualizované.',
 	'message_ok_serveur_ajoute' => 'Server "@serveur@" bol pridaný (@url@).',
 	'modele_boussole_liste_avec_logo' => 'Zoznam odkazov s názvami, logami a opisom',
 	'modele_boussole_liste_par_groupe' => 'Zoznam textových odkazov podľa skupiny',
@@ -123,9 +135,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'LOGO KOMPASU',
 	'titre_form_ajouter_boussole' => 'Pridať alebo aktualizovať kompas',
 	'titre_form_ajouter_serveur' => 'Pridať server kompasov',
+	'titre_form_boussole_manuelle' => 'Deklarovať manuálny kompas',
 	'titre_form_configurer_serveur' => 'Nastaviť funkciu server',
 	'titre_formulaire_configurer' => 'Nastavenia zobrazenia kompasu',
 	'titre_liste_boussoles' => 'Zoznam dostupných kompasov',
+	'titre_liste_caches' => 'Zoznam dočasných pamätí kompasov na serveri',
 	'titre_liste_serveurs' => 'Zoznam prístupných serverov zo stránky',
 	'titre_page_boussole' => 'Riadenie kompasov',
 	'titre_page_configurer' => 'Nastavenia zásuvného modulu Kompas'

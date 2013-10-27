@@ -10,7 +10,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=fr" total="130" traduits="130" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=sk" total="130" traduits="106" relire="0" modifs="0" nouveaux="24" pourcent="81.54">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=sk" total="130" traduits="120" relire="0" modifs="0" nouveaux="10" pourcent="92.31">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
