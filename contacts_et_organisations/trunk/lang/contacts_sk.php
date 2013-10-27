@@ -8,6 +8,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'annuaire' => 'Adresár',
+	'annuaire_ajouter' => 'Pridať adresár',
+	'annuaire_aucun' => 'Žiaden adresár',
+	'annuaire_champ_descriptif_label' => 'Opis',
+	'annuaire_champ_identifiant_label' => 'Identifikátor',
+	'annuaire_champ_titre_label' => 'Nadpis',
+	'annuaire_creer' => 'Vytvoriť nový adresár',
+	'annuaire_creer_associer' => 'Vytvoriť a priradiť nový adresár',
+	'annuaire_editer' => 'Upraviť tento adresár',
+	'annuaire_logo' => 'Logo tohto adresára',
+	'annuaire_supprimer' => 'Vymazať adresár',
+	'annuaire_un' => '1 adresár',
+	'annuaires' => 'Adresáre',
+	'annuaires_nb' => '@nb@ adresárov',
+	'annuaires_tout' => 'Všetky adresáre',
 	'aucun_contact' => 'Neexistuje žiaden kontakt!',
 	'aucune_organisation' => 'Neexistuje žiadna organizácia!',
 	'auteur_associe_est_a_la_poubelle' => 'Autor je zaradený v smetnom koši! Tento autor bude odstránený za niekoľko dní.',
@@ -31,9 +46,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_associer_aux_auteurs' => 'Pripojiť autorov?',
 	'cfg_associer_aux_auteurs_explication' => 'Umožňuje prepájať kontakty na ľudí a organizácie s autormi. Pridá formulár na prepojenie autora na stránky s kontaktmi na ľudí alebo organizácie,
 		a aj opačne pridá formulár na prepojenie kontaktov na ľudí alebo organizácie so stránku s autormi.',
+	'cfg_lier_contacts_objets_label' => 'Priradiť kontakty',
+	'cfg_lier_organisations_objets_label' => 'Priradiť organizácie',
 	'cfg_relations_avec_auteurs' => 'Vzťah k autorom',
+	'cfg_relations_avec_objets' => 'Vzťahy s redakčnými objektami (okrem autorov)',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Vymazať kontakty na autorov, ktoré sa opakujú?',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Ak aktivujete túto možnosť, pri vymazaní kontaktu na osobu (alebo  organizáciu) autor priradený k tomuto kontaktu  bude presunutý do koša. Podobne pri vymazaní autora bude vymazaný aj kontakt naňho. To môže pomôcť k tomu, aby sa nehromadili neaktuálne kontakty, ale pozor: vymazanie je definitívne a autor bude presunutý do koša aj vtedy, ak napísal nejaké články.',
+	'cfg_utiliser_annuaires_label' => 'Používať viac adresárov',
+	'cfg_utiliser_organisations_arborescentes_label' => 'Pri organizáciách používať stromovú štruktúru',
 	'changer' => 'Zmeniť',
 	'chercher_contact' => 'Vyhľadať',
 	'chercher_organisation' => 'Vyhľadať',
@@ -51,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_aucun' => 'Žiaden kontakt',
 	'contact_creer' => 'Vytvoriť kontakt',
 	'contact_creer_associer' => 'Vytvoriť kontakt a prepojiť',
+	'contact_creer_dans_cet_annuaire' => 'Vytvoriť kontakt z tohto adresára',
 	'contact_editer' => 'Upraviť tento kontakt',
 	'contact_logo' => 'Logo kontaktu',
 	'contact_nouveau_titre' => 'Nový kontakt',
@@ -61,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'Zobraziť',
 	'contacts' => 'Kontakty',
 	'contacts_nb' => '@nb@ kontaktov',
+	'contacts_tout' => 'Všetky kontakty',
 	'creer_auteur_contact' => 'Zapísať nového autora a prepojiť ho s týmto kontaktom',
 	'creer_auteur_organisation' => 'Vytvoriť nového autora a prepojiť ho s touto organizáciou',
 
@@ -72,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'delier_organisation' => 'Zrušiť prepojenie',
 
 	// E
+	'erreur_annuaire_identifiant_existant' => 'Tento identifikátor už pri jednom zo svojich adresárov používate.',
 	'est_un_contact' => 'Tento autor je nastavený ako kontakt',
 	'est_une_organisation' => 'Tento autor je nastavený ako organizácia.',
 	'explication_activite' => 'Činnosť organizácie: mimovládna organizácia, vzdelávanie, publikovanie a pod.',
@@ -142,6 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_aucun' => 'Žiadna organizácia',
 	'organisation_creer' => 'Zapísať organizáciu',
 	'organisation_creer_associer' => 'Vytvoriť a pripojiť organizáciu',
+	'organisation_creer_dans_cet_annuaire' => 'Vytvoriť organizáciu z tohto adresára',
 	'organisation_creer_fille' => 'Zapísať podradenú organizáciu',
 	'organisation_editer' => 'Upraviť túto organizáciu',
 	'organisation_logo' => 'Logo organizácie',
@@ -153,6 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_voir' => 'Zobraziť',
 	'organisations' => 'Organizácie',
 	'organisations_nb' => '@nb@ organizácií',
+	'organisations_tout' => 'Všetky organizácie',
 
 	// P
 	'prenom' => 'Krstné meno',
@@ -160,6 +185,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'recherche_de' => 'Vyhľadať "@recherche@"',
 	'rechercher' => 'Vyhľadať',
+	'resume_annuaire' => 'Výpis z vášho adresára',
+	'resume_annuaires' => 'Výpis z vašich adresárov',
 
 	// S
 	'statut_juridique' => 'Právna forma',
