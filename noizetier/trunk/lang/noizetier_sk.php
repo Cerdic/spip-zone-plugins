@@ -35,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucune_noisette_selectionnee' => 'Musíte si vybrať oriešok!',
 	'erreur_doit_choisir_noisette' => 'Musíte si vybrať oriešok.',
 	'erreur_mise_a_jour' => 'Pri aktualizovaní databázy sa vyskytla chyba.',
+	'explication_code' => 'POZOR! Pre pokročilých používateľov. Môžete zadať kód SPIPu (cykly a tagy), ktorý sa zobrazí tak, akoby to bola šablóna. Oriešok bude mať prístup aj k všetkým premenným prostredia danej stránky.',
+	'explication_description_code' => 'Na interné použitie. Nezobrazí sa na verejne prístupnej stránke.',
 	'explication_glisser_deposer' => 'Môžete pridať oriešok alebo oriešky inak usporiadať jednoduchým kliknutím a uvoľnením myši.',
 	'explication_heritages_composition' => 'Tu môžete nastaviť rozmiestnenia, ktoré budú používať objekty danej vetvy.',
 	'explication_noizetier_css' => 'Oriešku môžete pridať hocijaké ďalšie triedy CSS',
@@ -91,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_afficher_titre_noisette' => 'Zobraziť názvy orieškov?',
+	'label_code' => 'Kód SPIPu:',
+	'label_description_code' => 'Opis:',
 	'label_niveau_titre' => 'Úroveň nadpisu:',
 	'label_noizetier_css' => 'Triedy CSS:',
 	'label_texte' => 'Text:',
@@ -119,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_bloc_extra' => 'Extra',
 	'nom_bloc_navigation' => 'Navigácia',
 	'nom_bloctexte' => 'Blok voľného textu',
+	'nom_codespip' => 'Voľný kód SPIPu',
 	'non' => 'Nie',
 	'notice_enregistrer_rang' => 'Ak chcete uložiť poradie orieškov, kliknite na tlačidlo Uložiť.',
 
