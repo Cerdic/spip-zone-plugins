@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
         como autores/as, secciones, artículos (cuando hay una interfaz que lo permite)...
         en un mismo universo (un racimo)',
 	'grappes_nom' => 'Racimos',
-	'grappes_slogan' => 'Reagrupar los objetos SPIP en un mismo universo' # MODIF
+	'grappes_slogan' => 'Reagrupar los objetos SPIP en un mismo universo'
 );
 
 ?>
