@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reduire_logo' => 'Zmenšiť logá',
 	'label_upload_document' => 'Povoliť pridávanie súborov pomocou farbičky article.texte',
 	'label_yellow_fade' => 'Tieň',
+	'legend_controleur_fichier_remplacer' => 'Premiestniť tento dokument "@extension@"',
 	'legend_controleur_hyperlien' => 'Hypertextový odkaz',
 	'legend_controleur_logo' => 'Vyberte logo:',
 	'legend_controleur_logo_remplacer' => 'Nahradiť toto logo',
