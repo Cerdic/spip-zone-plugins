@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_menus_editer' => 'Upraviť toto menu',
-	'editer_menus_explication' => 'Vytvorte a nastavte ponky menu pre svoju stránku.',
+	'editer_menus_explication' => 'Vytvorte a nastavte ponuky menu pre svoju stránku.',
 	'editer_menus_exporter' => 'Exportovať toto menu',
 	'editer_menus_nouveau' => 'Vytvoriť nové menu',
 	'editer_menus_titre' => 'Ponuky menu stránky',
