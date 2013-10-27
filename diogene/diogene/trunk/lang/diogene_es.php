@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_rubrique_statut' => 'Una sección se considera como visible (publicada) cuando dispone de al menos un objeto publicado.',
 	'explication_statut_auteur' => 'Este campo define el estatus mínimo para poder crear un objeto correspondiente a esta plantilla.',
 	'explication_statut_auteur_publier' => 'Este campo define el estatus mínimo para poder publicar definitivamente un objeto correspondiente a esta plantilla.',
+	'explication_workflow_simplifie' => 'Administrar solamente las acciones "Publicar" y "Eliminar"',
 
 	// F
 	'formulaire_modifier_diogene' => 'Modificar la plantilla (Diógenes)',
@@ -90,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_polyhier_desactiver' => 'Desactivar la polijerarquía',
 	'label_statut_auteur' => 'Estatus mínimo de los autores',
 	'label_statut_auteur_publier' => 'Estatus mínimo de los autores que pueden publicar de forma definitiva',
+	'label_workflow_simplifie' => 'Gestión simplificada del workflow de publicación',
 	'legende_champs_diogene' => 'Campos del formulario',
 	'legende_selecteur_statut' => 'Estatus',
 	'legende_statuts_diogene' => 'Estatus',
