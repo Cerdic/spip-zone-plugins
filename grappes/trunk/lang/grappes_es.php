@@ -9,13 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_inconnue' => 'Acción "@action@" desconocida',
-	'autoriser_associer_non' => 'No está autorizado para realizar esta acción.', # MODIF
+	'autoriser_associer_non' => 'No está autorizado para realizar esta acción.',
 
 	// B
 	'bouton_ajouter' => 'Añadir',
-	'bouton_checkbox_qui_administrateurs' => 'Administradores y administradoras del sitio',
-	'bouton_checkbox_qui_id_admin' => 'El creador del racimo (¿Usted?)', # MODIF
-	'bouton_checkbox_qui_redacteurs' => 'Redactoras y redactores',
+	'bouton_checkbox_qui_administrateurs' => 'Administradores del sitio',
+	'bouton_checkbox_qui_id_admin' => 'El creador del racimo (¿Usted?)',
+	'bouton_checkbox_qui_redacteurs' => 'Redactores',
 	'bouton_chercher' => 'Buscar',
 
 	// D
@@ -24,22 +24,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creation_grappe' => 'Crear un nuevo racimo',
+	'icone_dupliquer_grappe' => 'Duplicar este racimo',
 	'icone_modifier_grappe' => 'Modificar este racimo',
-	'icone_supprimer_grappe' => 'Suprimir este racimo',
+	'icone_supprimer_grappe' => 'Eliminar este racimo',
 	'icone_voir_toutes_grappes' => 'Ver todos los racimos',
 	'info_1_grappe' => '1 racimo',
 	'info_aucune_grappe' => 'Ningún racimo',
 	'info_changer_nom_grappe' => 'Cambiar el nombre del racimo',
-	'info_creation_grappes' => 'Crear o modificar racimos de elementos', # MODIF
-	'info_grappes_association' => '¿Qué objetos pueden asociarse al racimo?', # MODIF
+	'info_creation_grappes' => 'Crear o modificar racimos de elementos',
+	'info_grappes_association' => '¿Qué objetos pueden vincularse al racimo?',
 	'info_grappes_miennes' => 'Mis racimos',
 	'info_grappes_toutes' => 'Todos los racimos',
 	'info_nb_grappes' => '@nb@ racimos',
 	'info_nom_grappe' => 'Nombre del racimo',
-	'info_qui_peut_lier' => '¿Quién puede asociar objetos al racimo?', # MODIF
+	'info_qui_peut_lier' => '¿Quién puede vincular objetos al racimo?',
 	'info_rechercher' => 'Buscar',
 	'item_groupes_association_articles' => 'Los artículos',
-	'item_groupes_association_auteurs' => 'Las autoras y autores',
+	'item_groupes_association_auteurs' => 'Los autores',
 	'item_groupes_association_breves' => 'Las notas breves',
 	'item_groupes_association_documents' => 'Los documentos',
 	'item_groupes_association_grappes' => 'Los racimos',
