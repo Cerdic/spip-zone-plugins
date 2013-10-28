@@ -23,7 +23,7 @@ function exec_destination_comptable() {
 		// datation et raccourcis
 		echo association_navigation_raccourcis(array(
 			array('association_infos_contacts', 'assoc_qui.png', array('association'), array('voir_profil', 'association') ),
-			array('destination_nav_ajouter', 'euro-39.gif', array('edit_destination')),
+			array('destination_nav_ajouter', 'euro-39.gif', array('edit_destination'), array('gerer_compta', 'association') ),
 			array('plan_comptable', 'plan_compte.png', array('plan_comptable'), array('gerer_compta', 'association') ),
 			array('exercices_budgetaires_titre', 'calculatrice.gif', array('exercice_comptable'), $GLOBALS['association_metas']['exercices'] ? array('gerer_compta', 'association') : FALSE ),
 		) );
