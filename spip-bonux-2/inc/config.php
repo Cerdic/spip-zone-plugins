@@ -16,5 +16,9 @@ if (!defined('_DIR_PLUGIN_CFG')){
 			return spip_bonux_lire_config($cfg, $def, $unserialize);
 		}
 	}
+// charger celui de CFG si ce n'est pas le cas encore !
+} elseif (!function_exists('lire_config')) {
+	include_spip('inc/cfg_config');
 }
+
 ?>
