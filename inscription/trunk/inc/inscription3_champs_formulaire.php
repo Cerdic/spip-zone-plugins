@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © 2007-2013 - cmtmt, BoOz, kent1
  * Licence GPL v3
  */
 
@@ -16,7 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 	Un array contenant l'ensemble des champs
  */
 function inc_inscription3_champs_formulaire_dist($id_auteur=null,$type_formulaire=null) {
-	include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	$config_i3 = lire_config('inscription3',array());
 	$valeurs = array();
 
@@ -40,12 +41,10 @@ function inc_inscription3_champs_formulaire_dist($id_auteur=null,$type_formulair
 		 * - _fiche_mod_nocreation ou _nocreation pour les champs non gérés par inscription3 (extras 2)
 		 */
 		$suffixe = '';
-		if(is_numeric($id_auteur)){
+		if(is_numeric($id_auteur))
 			$suffixe = '_fiche_mod';
-		}
-		if(preg_match("/_(nocreation)/i", $clef)){
+		if(preg_match("/_(nocreation)/i", $clef))
 			$suffixe = $suffixe.'_nocreation';
-		}
 		
 		/**
 		 * On vire les suffixes potentiels des valeurs pour ne retourner que les champs réels
@@ -58,9 +57,8 @@ function inc_inscription3_champs_formulaire_dist($id_auteur=null,$type_formulair
 		 * -* ne pas être déjà présent dans l'array qui sera retourné
 		 * -* ne pas être dans les pipelines de restrictions au dessus
 		 */
-		if(($config_i3[$clef.$suffixe] == 'on') && !in_array($clef,$valeurs) && !in_array($clef,$exceptions_des_champs)) {
+		if(($config_i3[$clef.$suffixe] == 'on') && !in_array($clef,$valeurs) && !in_array($clef,$exceptions_des_champs))
 			$valeurs[] = $clef;
-		}
 	}
 	if($type_formulaire == "inscription"){
 		$valeurs[] = 'mail_inscription';
