@@ -8,11 +8,12 @@ function image_responsive_insert_head_css($flux) {
 
 function image_responsive_insert_head($flux) {
 	$type_urls = lire_meta("type_urls");
+	$htactif = 0;
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
-		$htactif = true;
+		$htactif = 1;
 	}
 	
-	$flux .= "<script>htactif=1;</script>";
+	$flux .= "<script>htactif=$htactif;</script>";
 	$flux .= "
 <script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
 		";
@@ -56,5 +57,25 @@ function image_responsive($texte, $taille=120, $dpr=1) {
 	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],'.$taille.','.$dpr.');'), $texte);
 
 }
+
+function image_proportions($img, $largeur=1, $hauteur=1) {
+	
+	$l_img = largeur ($img);
+	$h_img = hauteur($img);
+	$r_img = $h_img / $l_img;	
+	$r = $hauteur / $largeur;	
+	
+	if ($r_img < $r) {
+		include_spip("filtres/images_transforme");
+		$img = image_recadre($img, $h_img/$r, $h_img);
+	} else if ($r_img > $r) {
+		include_spip("filtres/images_transforme");
+		$img = image_recadre($img, $l_img, $l_img*$r);
+	}
+	
+	return $img;
+}
+
+
 
 ?>
