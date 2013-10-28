@@ -73,16 +73,16 @@ function formulaires_em_supprimer_media_traiter_dist($id_document,$type='',$obje
 		 * Si plus de documents on repasse l'article en statut "prepa"
 		 */
 		if(!$id_document = sql_getfetsel("id_document","spip_documents_liens","id_objet=$id_objet AND objet=".sql_quote($objet))){
+			include_spip('action/editer_objet');
+			include_spip('inc/config');
 			$id_table = id_table_objet($objet);
 			$table = table_objet_sql($objet);
 			$statut = sql_getfetsel("statut","$table","$id_table=$id_objet");
-			if(in_array($statut,array('prop','publie'))){
-				include_spip('action/editer_objet');
-				include_spip('inc/config');
-				if(lire_config('emballe_medias/fichiers/statut_article_apres_dernier_document','prepa') == 'poubelle')
-					$c = array('statut' => 'poubelle');
-				else
-					$c = array('statut' => 'prepa');
+			if(lire_config('emballe_medias/fichiers/statut_article_apres_dernier_document','prepa') == 'poubelle') {
+				$c = array('statut' => 'poubelle');
+				objet_instituer($objet,$id_objet, $c);
+			} else if(in_array($statut,array('prop','publie'))){
+				$c = array('statut' => 'prepa');
 				objet_instituer($objet,$id_objet, $c);
 			}
 		}
