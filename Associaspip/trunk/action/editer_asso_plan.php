@@ -15,14 +15,23 @@ function action_editer_asso_plan_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_plan = $securiser_action();
 	$code = _request('code');
+#	$classe = _request('classe');
+#	if (!strlen($classe))
+#		$classe = $code[0];
+	$intitule = _request('intitule');
+	if (!strlen($intitule)) {
+		include_spip('inc/association_comptabilite');
+		$intitule = comptabilite_reference_intitule($code);
+	}
 	$reference = _request('reference');
 	include_spip('base/association');
 	$champs = array(
 		'date_anterieure' => association_recuperer_date('date_anterieure'),
 		'active' => (_request('active')?TRUE:FALSE), // active est un booleen dans la base, et la request recupere l'etat de la checkbox
 		'code' => $code,
-		'intitule' => _request('intitule'),
-		'classe' => _request('classe'),
+		'intitule' => $intitule,
+#		'classe' => $classe,
+		'classe' => $code[0],
 		'solde_anterieur' => association_recuperer_montant('solde_anterieur'),
 		'commentaire' => _request('commentaire'),
 		'type_op' => _request('type_op'),

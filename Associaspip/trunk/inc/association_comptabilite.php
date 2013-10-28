@@ -642,7 +642,7 @@ function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') 
     if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
     if (sql_countsel('spip_asso_plan', "code='$code'")>1) // occurences multiples d'une meme reference
-	return _T('compta:erreur_plan_code_doublon');
+	return _T('compta:erreur_plan_code_doublon', array('code'=>$code,) );
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
     if ( $ruleC AND preg_match('/^('.$ruleC.')\w*$/', $code) AND $sens=='debit' ) // comptes uniquement créditeurs...
@@ -754,11 +754,12 @@ function filtre_selecteur_compta_code($code, $name='code', $ref='intitule') {
 	if ($ref)
 #	    $js .= ' document.getElementById(\''.$ref.'\').value=CurrentOption.options[CurrentOption.selectedIndex].text; '; // recopier l'intitule dans le champ prevu
 	    $js .= ' document.getElementById(\''.$ref.'\').value=currentVal[1]; '; // recopier l'intitule dans le champ prevu
-	$res = "<select name='$name' id='selecteur_$name' onchange='$js'>\n"; // malgre le JS, le selecteur est homonyme pour permettre de prendre la selection sans remplir quand JS est desactive. faut par contre le placer avant le champ libre pour que la valeur qui y est saisie remplace celle-ci (en l'ecrasant)
+	$res = "<select name='$name' id='selecteur_$name' onchange='$js' onclick='$js'>\n"; // malgre le JS, le selecteur est homonyme pour permettre de prendre la selection sans remplir quand JS est desactive. faut par contre le placer avant le champ libre pour que la valeur qui y est saisie remplace celle-ci (en l'ecrasant)
 	$res .= '<option value="">'. _T('compta:item_no_code') ."</option>\n"; // pas de valeur : pour ne rien choisir.
     }
     $optgroup = FALSE;
-    foreach (comptabilite_liste_plancodes() as $rc) {
+    $liste_codes = comptabilite_liste_plancodes();
+    foreach ($liste_codes as $rc) {
 	if (@!$GLOBALS['meta']['html5'] AND strlen($rc)==1) { // il s'agit d'une classe
 	    if ($optgroup) //
 		$lst .= "</optgroup>\n";
