@@ -58,7 +58,7 @@ function image_responsive($texte, $taille=120, $dpr=1) {
 
 }
 
-function image_proportions($img, $largeur=1, $hauteur=1) {
+function image_proportions($img, $largeur=1, $hauteur=1, $align="center") {
 	
 	$l_img = largeur ($img);
 	$h_img = hauteur($img);
@@ -67,10 +67,10 @@ function image_proportions($img, $largeur=1, $hauteur=1) {
 	
 	if ($r_img < $r) {
 		include_spip("filtres/images_transforme");
-		$img = image_recadre($img, $h_img/$r, $h_img);
+		$img = image_recadre($img, $h_img/$r, $h_img, $align);
 	} else if ($r_img > $r) {
 		include_spip("filtres/images_transforme");
-		$img = image_recadre($img, $l_img, $l_img*$r);
+		$img = image_recadre($img, $l_img, $l_img*$r, $align);
 	}
 	
 	return $img;
