@@ -6,7 +6,7 @@
  *
  * Utilisations de pipelines
  * 
- * @package SPIP\Mots\Pipelines
+ * @package SPIP\Inscription3\Pipelines
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -22,9 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inscription3_i3_exceptions_chargement_champs_auteurs_elargis($array){
 	// liste des champs pour lesquels on ne doit pas charger la valeur
-
 	$array[] = 'creation';
-	
 	return $array;
 }
 
@@ -134,9 +132,8 @@ function inscription3_affiche_droite($flux){
 		 || ($flux['args']['exec'] == 'configurer_inscription3')
 		 || (($flux['args']['exec'] == 'cfg') && ((_request('cfg') == 'inscription3') || preg_match('/^i3_/',_request('cfg'))))
 		)
-		 && ($flux['args']['exec'] != 'inscription3_adherents')){
-    	$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
-	}
+		 && ($flux['args']['exec'] != 'inscription3_adherents'))
+    		$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
 	return $flux;
 }
 
@@ -284,11 +281,10 @@ function inscription3_formulaire_charger($flux){
 			),array()
 		);
 		
-		if(is_array($flux['data'])){
+		if(is_array($flux['data']))
 			$flux['data'] = array_merge($flux['data'],$valeurs);
-		}else {
+		else
 			$flux['data'] = $valeurs;
-		}
 	}
 
 	return $flux;
@@ -327,7 +323,7 @@ function inscription3_formulaire_verifier($flux){
 	}
 	if (in_array($flux['args']['form'],array('editer_auteur','inscription'))){
 		/**
-		 * On inclue inscription3_mes_fonctions pour prendre en compte la surcharge de 
+		 * On inclue inscription3_fonctions pour prendre en compte la surcharge de 
 		 * formulaires_inscription_traiter en ajax
 		 */
 		$erreurs = $flux['data'];
@@ -367,12 +363,12 @@ function inscription3_formulaire_verifier($flux){
 		if(count($erreurs))
 			$erreurs_obligatoires = true;
 
-	    $valeurs = array();
+		$valeurs = array();
 
-	    $verifier = charger_fonction('verifier','inc',true);
+		$verifier = charger_fonction('verifier','inc',true);
 
-	    if($verifier){
-	    	/**
+		if($verifier){
+			/**
 			 * Vérification des champs de champs extras
 			 */
 			$options = array();
@@ -425,8 +421,8 @@ function inscription3_formulaire_verifier($flux){
 					$nom = $saisie['options']['nom'];
 					// verifier (api) + normalisation
 					if ($verifier
-					   AND isset($saisie['verifier']['type'])
-					   AND $verif = $saisie['verifier']['type']){
+						AND isset($saisie['verifier']['type'])
+						AND $verif = $saisie['verifier']['type']){
 						$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
 						$normaliser = null;
 						if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser))
@@ -494,9 +490,6 @@ function inscription3_formulaire_verifier($flux){
  * @return array $flux Le contexte d'environnement modifié
  */
 function inscription3_formulaire_traiter($flux){
-	include_spip('base/abstract_sql');
-	include_spip('inc/config');
-	$config_i3 = lire_config('inscription3',array());
 	if ($flux['args']['form']=='configurer_inscription3'){
 		/**
 		 * Crée les champs dans la table spip_auteurs dès la validation du CFG
@@ -517,7 +510,10 @@ function inscription3_formulaire_traiter($flux){
 		}
 	}
 	if ($flux['args']['form']=='inscription'){
-		include_spip('inscription3_mes_fonctions');
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
+		$config_i3 = lire_config('inscription3',array());
+		include_spip('inscription3_fonctions');
 		
 		$data = array();
 		/**
@@ -551,9 +547,9 @@ function inscription3_formulaire_traiter($flux){
 
 		foreach($champs as $clef => $valeur) {
 			$valeurs[$valeur] = _request($valeur);
-			if (is_array($valeurs[$valeur])) {
+			if (is_array($valeurs[$valeur]))
 				$valeurs[$valeur] = implode(',',$valeurs[$valeur]);
-			}
+
 			$valeurs[$valeur] = trim($valeurs[$valeur]);
 			if($valeur == 'naissance'){
 				$annee = trim(_request('naissance_annee'));
@@ -640,7 +636,6 @@ function inscription3_formulaire_traiter($flux){
 		$desc = $f($user['bio'], $mail, $valeurs['nom'], $user['id_auteur']);
 		
 		if (is_array($desc) AND $mail = $desc['email']){
-			include_spip('base/abstract_sql');
 			/**
 			 * On recrée le pass pour être sûr d'avoir le bon
 			 */
@@ -748,46 +743,49 @@ function inscription3_formulaire_traiter($flux){
  * @return array
  */
 function inscription3_recuperer_fond($flux){
-	include_spip('inc/config');
-	$config = lire_config('inscription3',array());
-	if ($flux['args']['fond']=='formulaires/inscription'){
-		$insc = recuperer_fond('formulaires/inc-inscription-inscription3',$flux['data']['contexte']);
-		$flux['data']['texte'] = preg_replace(",(<li [^>]*class=[\"']editer saisie_mail_inscription.*<\/li>),Uims","\\1".$insc,$flux['data']['texte'],1);
-		if(($texte_inscription = $config['inscription_texte']) && ($texte_inscription != 'origine')){
-			switch($texte_inscription){
-				case 'aucun' :
-					$flux['data']['texte'] = preg_replace(",<p [^>]*class=[\"']explication.*<\/p>,Uims",'',$flux['data']['texte'],1);
-					break;
-				case 'libre' :
-					$texte = PtoBR(propre($config['inscription_texte_libre']));
-					$flux['data']['texte'] = preg_replace(",(<p class=[\"']explication mode[\"']>)(.*)(<\/p>),Uims","\\1".$texte."\\3",$flux['data']['texte'],1);
-					break;
+	if(in_array($flux['args']['fond'],array('formulaires/inscription','formulaires/login','formulaires/mot_de_passe','formulaires/editer_auteur'))){
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
+		$config = lire_config('inscription3',array());
+		if ($flux['args']['fond']=='formulaires/inscription'){
+			$insc = recuperer_fond('formulaires/inc-inscription-inscription3',$flux['data']['contexte']);
+			$flux['data']['texte'] = preg_replace(",(<li [^>]*class=[\"']editer saisie_mail_inscription.*<\/li>),Uims","\\1".$insc,$flux['data']['texte'],1);
+			if(($texte_inscription = $config['inscription_texte']) && ($texte_inscription != 'origine')){
+				switch($texte_inscription){
+					case 'aucun' :
+						$flux['data']['texte'] = preg_replace(",<p [^>]*class=[\"']explication.*<\/p>,Uims",'',$flux['data']['texte'],1);
+						break;
+					case 'libre' :
+						$texte = PtoBR(propre($config['inscription_texte_libre']));
+						$flux['data']['texte'] = preg_replace(",(<p class=[\"']explication mode[\"']>)(.*)(<\/p>),Uims","\\1".$texte."\\3",$flux['data']['texte'],1);
+						break;
+				}
 			}
 		}
-	}
-	if ($flux['args']['fond']=='formulaires/login'){
-		if(($type_affordance = $config['affordance_form']) && ($type_affordance != 'login')){
-			switch($type_affordance){
-				case 'email' :
-					$label = _T('inscription3:votre_mail');
-					break;
-				case 'login_et_email' : 
-					$label = _T('inscription3:votre_login_mail');
-					break;
-				case 'libre' :
-					$label = $config['inscription3/affordance_form_libre'] ? $config['inscription3/affordance_form_libre'] : _T('login_login2');
-					break;
+		if ($flux['args']['fond']=='formulaires/login'){
+			if(($type_affordance = $config['affordance_form']) && ($type_affordance != 'login')){
+				switch($type_affordance){
+					case 'email' :
+						$label = _T('inscription3:votre_mail');
+						break;
+					case 'login_et_email' : 
+						$label = _T('inscription3:votre_login_mail');
+						break;
+					case 'libre' :
+						$label = $config['inscription3/affordance_form_libre'] ? $config['inscription3/affordance_form_libre'] : _T('login_login2');
+						break;
+				}
+				if($label)
+					$flux['data']['texte'] = preg_replace(",(<label.*for=\"var_login\">)(.*)(<\/label>),Uims","\\1".$label."\\3",$flux['data']['texte'],1);	
 			}
-			if($label)
-				$flux['data']['texte'] = preg_replace(",(<label.*for=\"var_login\">)(.*)(<\/label>),Uims","\\1".$label."\\3",$flux['data']['texte'],1);	
 		}
-	}
-	/**
-	 * On ajoute un vérificateur de complexité de mot de passe
-	 */
-	if(($config['inscription3/password_complexite'] == 'on') && in_array($flux['args']['fond'],array('formulaires/mot_de_passe','formulaires/editer_auteur'))){
-		$js = recuperer_fond('formulaires/inc-js_pass_verification',$flux['data']['contexte']);
-		$flux['data']['texte'] = preg_replace(",(<\/form>)(.*),Uims","\\1".$js."\\2",$flux['data']['texte'],1);
+		/**
+		 * On ajoute un vérificateur de complexité de mot de passe
+		 */
+		if(($config['inscription3/password_complexite'] == 'on') && in_array($flux['args']['fond'],array('formulaires/mot_de_passe','formulaires/editer_auteur'))){
+			$js = recuperer_fond('formulaires/inc-js_pass_verification',$flux['data']['contexte']);
+			$flux['data']['texte'] = preg_replace(",(<\/form>)(.*),Uims","\\1".$js."\\2",$flux['data']['texte'],1);
+		}
 	}
 	return $flux;
 }
@@ -804,21 +802,21 @@ function inscription3_editer_contenu_objet($flux){
 	$args = $flux['args'];
 	$type = $args['type'];
 	if ($type == 'auteur' && intval($args['id']) > 0 && !test_espace_prive()){
-		include_spip('inc/config');
+		if(!function_exists('lire_config'))
+			include_spip('inc/config');
 		$config = lire_config('inscription3',array());
 		$champs_spip = array('nom','email','bio','pgp','url_site','nom_site','login','pass');
 		$champs_vires = array();
 		$inserer_saisie = '';
 		foreach($champs_spip as $champ){
 			if($config[$champ.'_fiche_mod'] != 'on'){
-				if($champ == 'login'){
+				if($champ == 'login')
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ).*<\/li>),Uims","",$flux['data'],1);
-				}else if($champ == 'pass'){
+				else if($champ == 'pass'){
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ).*<\/li>),Uims","",$flux['data'],1);
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ)2.*<\/li>),Uims","",$flux['data'],1);
-				}else{
+				}else
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_($champ).*<\/li>),Uims","",$flux['data'],1);
-				}
 				$champs_vires[] = $champ;
 				if(in_array($champ, array('nom','email')))
 					$inserer_saisie .= "<input type='hidden' name='$champ' value='".$flux['args']['contexte'][$champ]."' />\n";				
@@ -830,22 +828,18 @@ function inscription3_editer_contenu_objet($flux){
 			 */
 			if($config['creation'] == 'on'){
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_creation.*<\/li>),Uims","",$flux['data'],1);
-				if($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00'){
+				if($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00')
 					$flux['args']['contexte']['creation'] = date('Y-m-d H:i:s');
-				}
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_cextra_creation.*<\/li>),Uims","",$flux['data'],1);
 				$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
 			}
 		}
-		if(in_array('url_site',$champs_vires) && in_array('nom_site',$champs_vires)){
+		if(in_array('url_site',$champs_vires) && in_array('nom_site',$champs_vires))
 			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_liens.*<\/li>),Uims","",$flux['data'],1);
-		}
-		if(in_array('pass',$champs_vires) && in_array('login',$champs_vires)){
+		if(in_array('pass',$champs_vires) && in_array('login',$champs_vires))
 			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_identification.*<\/li>),Uims","",$flux['data'],1);
-		}
-		if(strlen($inserer_saisie)){
+		if(strlen($inserer_saisie))
 			$flux['data'] = preg_replace('%(<!-- controles md5 -->)%is',$inserer_saisie."\n".'$1', $flux['data']);
-		}
 	}
 	return $flux;
 }

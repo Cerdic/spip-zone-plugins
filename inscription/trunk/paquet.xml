@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.3.6"
+	version="3.4.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="images/inscription3-64.png"
@@ -20,13 +20,13 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="i3_charger_formulaire" />
-	<pipeline nom="i3_verifier_formulaire" />
-	<pipeline nom="i3_traiter_formulaire" />
-	<pipeline nom="i3_form_fin" />
-	<pipeline nom="i3_form_debut" />
-	<pipeline nom="i3_validation_methods" />
-	<pipeline nom="i3_cfg_form" />
+	<pipeline nom="i3_charger_formulaire" action="" />
+	<pipeline nom="i3_verifier_formulaire" action="" />
+	<pipeline nom="i3_traiter_formulaire" action="" />
+	<pipeline nom="i3_form_fin" action="" />
+	<pipeline nom="i3_form_debut" action="" />
+	<pipeline nom="i3_validation_methods" action="" />
+	<pipeline nom="i3_cfg_form" action="" />
 	<pipeline nom="i3_exceptions_des_champs_auteurs_elargis" inclure="inscription3_pipelines.php" />
 	<pipeline nom="i3_exceptions_chargement_champs_auteurs_elargis" inclure="inscription3_pipelines.php" />
 	<pipeline nom="i3_verifications_specifiques" inclure="inscription3_pipelines.php" />
