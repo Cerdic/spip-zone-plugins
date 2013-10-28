@@ -28,12 +28,14 @@ function _image_responsive($img, $taille=120, $dpr=1) {
 		$htactif = true;
 	}
 	$src = extraire_attribut($img, "src");
+	$src = preg_replace(",\?[0-9]*$,", "", $src);
 	if (file_exists($src)) {
 
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
 		$img = vider_attribut($img, "style");
 	
+		//$img = inserer_attribut($img, "src", $src);
 		$img = inserer_attribut($img, "data-src", $src);
 		$img = inserer_attribut($img, "class", "image_responsive");
 		if ($htactif) {
@@ -58,7 +60,9 @@ function image_responsive($texte, $taille=120, $dpr=1) {
 
 }
 
-function image_proportions($img, $largeur=1, $hauteur=1, $align="center") {
+function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
+	
+	if (!$img || $hauteur == 0 || $largeur == 0) return;
 	
 	$l_img = largeur ($img);
 	$h_img = hauteur($img);
