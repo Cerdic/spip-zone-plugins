@@ -22,7 +22,7 @@ $pc_norme = array(
 // http://fr.wikipedia.org/wiki/Plan_comptable_marocain
 // http://www.becompta.be/modules/mydownloads/downloads-8-209.html
 //
-$GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
 
 	1 => "Comptes de financement permanent",
 	11 => "Capitaux propres",

@@ -385,8 +385,14 @@ function comptabilite_reference_intitule($code, $parent=0) {
     $nom = sql_getfetsel('intitule','spip_asso_plan','code='.sql_quote($code) ); // on tente de recuperer l'intitule defini...
     if ($nom) // on a trouve ! alors...
 	return extraire_multi($nom, $GLOBALS['spip_lang']); // ...renvoyer la traduction
-    if ($GLOBALS['association_metas']['plan_comptable']) // sinon si on a un plan comptable selectionne
-	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
+    if ($GLOBALS['association_metas']['plan_comptable']) { // sinon si on a un plan comptable selectionne
+	if (!strlen($GLOBALS[$GLOBALS['pcg']][1])) { // si le plan comptable n'est pas charge
+	    $id = $GLOBALS['association_metas']['plan_comptable'];
+	    $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
+	    include(find_in_path('lang/'.$trads[0])); //on charge le fichier du plan comptable
+	}
+	$nom = $GLOBALS[$GLOBALS['pcg']][$code];
+#	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
     if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
 	return $nom; // ...renvoyer la traduction
     $code = substr($code, 0, -1); // sinon on enleve le dernier caractere...

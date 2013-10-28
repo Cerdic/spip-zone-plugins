@@ -30,7 +30,7 @@ $pc_norme = array(
 // http://hal-auf.archives-ouvertes.fr/docs/00/58/46/10/PDF/BIGOU-LARE.pdf
 // http://www.ohada.org/documentation.html
 //
-$GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
 
 	1 => "Comptes de ressources durables",
 	10 => "Capital",

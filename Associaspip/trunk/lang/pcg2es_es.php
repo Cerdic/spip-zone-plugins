@@ -22,7 +22,7 @@ $pc_norme = array(
 // http://www.unexco-corral.com/spip.php?article56
 // http://www.focusifrs.com/content/download/6110/31919/version/1/file/35_39.pdf
 //
-$GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
 
 	100 => "Capital Social",
 	101 => "Fondo Social",

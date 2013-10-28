@@ -22,7 +22,7 @@ $pc_norme = array(
 // http://www.lpg-fiduciaire-de-suisse.ch/plan-comptable-pour-les-entreprises-suisses.html
 // http://campus.hesge.ch/desjacqc/doc/ID/2011/plan_comptable.pdf
 //
-$GLOBALS[$GLOBALS['idx_lang']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
 
 	1 => "Actif",
 	10 => "Patrimoine financier – Disponibilités",
