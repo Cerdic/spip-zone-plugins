@@ -14,6 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
 if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
 if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',10);
+// la derniere valeur defini la largeur maxi envoyee
+if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,780,1200,1560,10000');
 
 /**
  *
@@ -104,10 +106,12 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
  * @param array $bkpt
  * @return string
  */
-function respim_image($img, $bkpt = array(320,480,780)){
+function respim_image($img, $bkpt = null){
 	if (!$img) return $img;
 	if (strpos($img,"respim")!==false)
 		return $img;
+	if (is_null($bkpt) OR !is_array($bkpt))
+		$bkpt = explode(',',_RESPIM_DEFAULT_BKPTS);
 
 	if (!function_exists("taille_image"))
 		include_spip("inc/filtres");
@@ -128,7 +132,9 @@ function respim_image($img, $bkpt = array(320,480,780)){
 	if (strncmp($src,"data:",5)==0)
 		return $img;
 
-	$images = array($w=>$src);
+	$images = array();
+	if ($w<end($bkpt))
+		$images[$w] = $src;
 	$src=preg_replace(',[?][0-9]+$,','',$src);
 
 	// si on arrive pas a le lire, on ne fait rien
@@ -158,6 +164,40 @@ function respim_image($img, $bkpt = array(320,480,780)){
 }
 
 /**
+ * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a fournir
+ * [(#TEXTE|adaptative_images{1024})]
+ * @param string $texte
+ * @param null|int $max_width
+ * @return mixed
+ */
+function adaptative_images($texte,$max_width=null){
+	static $bkpts = array();
+	if ($max_width AND !isset($bkpts[$max_width])){
+		$b = explode(',',_RESPIM_DEFAULT_BKPTS);
+		while (count($b) AND end($b)>$max_width) array_pop($b);
+		if (!count($b) OR end($b)<$max_width) $b[] = $max_width;
+		$bkpts[$max_width] = $b;
+	}
+	$bkpt = (isset($bkpts[$max_width])?$bkpts[$max_width]:null);
+
+	$replace = array();
+	preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
+	if (count($matches)){
+		foreach($matches as $m){
+			$ri = respim_image($m[0],$bkpt);
+			if ($ri!==$m[0]){
+				$replace[$m[0]] = $ri;
+			}
+		}
+		if (count($replace)){
+			$texte = str_replace(array_keys($replace),array_values($replace),$texte);
+		}
+	}
+
+	return $texte;
+}
+
+/**
  * Traiter les images de la page et les passer en responsive
  * si besoin
  *
@@ -168,21 +208,8 @@ function respim_affichage_final($texte){
 	$respim_ins = false;
 	if ($GLOBALS['html']){
 		#spip_timer();
-		$replace = array();
-		preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
-		if (count($matches)){
-			foreach($matches as $m){
-				$ri = respim_image($m[0]);
-				if ($ri!==$m[0]){
-					$replace[$m[0]] = $ri;
-				}
-			}
-			if (count($replace)){
-				$respim_ins = true;
-				$texte = str_replace(array_keys($replace),array_values($replace),$texte);
-			}
-		}
-		if ($respim_ins OR strpos($texte,"respwrapper")!==false){
+		$texte = adaptative_images($texte);
+		if (strpos($texte,"respwrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
 			$ins = "<style type='text/css'>"."img.respim{opacity:0.70;max-width:100%;height:auto;}"
 			."b.respwrapper{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
