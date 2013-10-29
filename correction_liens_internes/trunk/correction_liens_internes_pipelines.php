@@ -11,8 +11,7 @@ function correction_liens_internes_pre_edition($flux){
     }
 
 function correction_liens_internes_correction($texte){
-    $url_site = url_de_base();
-    //$f=generer_url_entite("article2.html",$public=True);
+    $url_site = preg_quote(url_de_base());
     // on repère les mauvaises urls
     $match=array(); 
     preg_match_all("#\[(.*)->($url_site(.*))\]#U",$texte,$match,PREG_SET_ORDER); 

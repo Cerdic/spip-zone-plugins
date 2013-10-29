@@ -2,7 +2,7 @@
     <nom>Correction des liens internes</nom>
 	<prefix>correction_liens_internes</prefix>
 	<categorie>edition</categorie>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
     <necessite id="SPIP" version="[2.1.0;3.0.99]" />
     <lien>http://contrib.spip.net/4455</lien>
