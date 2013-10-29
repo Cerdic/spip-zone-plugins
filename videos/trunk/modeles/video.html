@@ -69,7 +69,7 @@
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
 
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+			<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="//www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 [(#REM)
@@ -78,7 +78,7 @@
 ]
 	[(#EXTENSION|=={dist_vimeo}|oui)
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe src="http://player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+			<iframe src="//player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 	
@@ -110,7 +110,7 @@
 ]
 	[(#EXTENSION|=={dist_youtu}|oui)
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+			<iframe width="#GET{largeur}" height="#GET{hauteur}" src="//www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 

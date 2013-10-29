@@ -11,8 +11,8 @@ function formulaires_insertion_video_charger_dist($id_objet,$objet){
 
 function formulaires_insertion_video_verifier_dist($id_objet,$objet){
 	$erreurs = array();
-	// Retirer les trucs qui emmerdent : tous les arguments d'ancre / les espaces foireux les http:// et les www. éventuels
-	$url = preg_replace('%(#.*$|http://|www.)%', '', trim(_request('video_url')));
+	// Retirer les trucs qui emmerdent : tous les arguments d'ancre / les espaces foireux les http://, https:// et les www. éventuels
+	$url = preg_replace('%(#.*$|https?://|www.)%', '', trim(_request('video_url')));
 
 	// ToDo : blinder un peu le controle des url
 	if(preg_match('/dailymotion/',$url)){
