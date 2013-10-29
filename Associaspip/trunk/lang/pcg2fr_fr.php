@@ -752,7 +752,7 @@ $GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
 	60212 => "Matières (ou groupe) D", // Ex. : Achat d’huile et de graisse
 	6022 => "Fournitures consommables", // Les organismes pour lesquels la distinction entre "Matières consommables" et "Fournitures consommables" n'est pas indispensable peuvent regrouper les comptes 6021 et 6022 sous le numéro 6021 dont l’intitulé est complété en conséquence : "Achat de matières et fournitures consommables".
 	60221 => "Combustibles",
-	69222 => "Produits d’entretien", // (produits de lavage)
+	60222 => "Produits d’entretien", // (produits de lavage)
 	60223 => "Fournitures d’atelier et d’usine",
 	60224 => "Fournitures de magasin",
 	60225 => "Fournitures de bureau",
