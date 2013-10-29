@@ -1,0 +1,31 @@
+/* quelques modifs de Chosen lorsque dans un tableau (les CSS de SPIP ennuient) */
+.liste-objets-associer .chzn-container { font-size:1em; top:3px; }
+.liste-objets-associer .chzn-container .chzn-results li { padding:5px 6px; }
+
+/* select multiple : correction d'une propriété css de SPIP */
+.chzn-container li {clear: none;}
+
+#SET{start,#999}#SET{stop,#888}
+
+/* couleurs de chosen */
+.chzn-container .chzn-results .highlighted {
+  background-color: #444;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#GET{start}', endColorstr='#GET{stop}', GradientType=0 );  
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #GET{start}), color-stop(90%, #GET{stop}));
+  background-image: -webkit-linear-gradient(top, [(#GET{start})] 20%, [(#GET{stop})] 90%);
+  background-image: -moz-linear-gradient(top, [(#GET{start})] 20%, [(#GET{stop})] 90%);
+  background-image: -o-linear-gradient(top, [(#GET{start})] 20%, [(#GET{stop})] 90%);
+  background-image: -ms-linear-gradient(top, [(#GET{start})] 20%, [(#GET{stop})] 90%);
+  background-image: linear-gradient(top, [(#GET{start})] 20%, [(#GET{stop})] 90%);
+  color: #fff;
+}
+.chzn-container-multi .chzn-choices {
+	border-color:#ccc;
+	background:white [url((#CHEMIN_IMAGE{ouvrir_chosen-16.png}|image_gamma{70}|extraire_attribut{src}|url_absolue))] right 50% no-repeat;
+}
+.chzn-container-multi .chzn-choices:hover {
+	background-image:[url((#CHEMIN_IMAGE{ouvrir_chosen-16.png}|url_absolue))];
+}
+.chzn-container-active .chzn-choices {
+	border-color:#999;
+}
