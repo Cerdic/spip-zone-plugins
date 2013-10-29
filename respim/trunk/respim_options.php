@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
 if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
-if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',15);
+if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',10);
 
 /**
  *
@@ -106,8 +106,7 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
  */
 function respim_image($img, $bkpt = array(320,480,780)){
 	if (!$img) return $img;
-	if (strpos($img,"respim")!==false
-	  OR strpos($img,"spip_logos")!==false)
+	if (strpos($img,"respim")!==false)
 		return $img;
 
 	if (!function_exists("taille_image"))
@@ -171,15 +170,17 @@ function respim_affichage_final($texte){
 		#spip_timer();
 		$replace = array();
 		preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
-		foreach($matches as $m){
-			$ri = respim_image($m[0]);
-			if ($ri!==$m[0]){
-				$replace[$m[0]] = $ri;
+		if (count($matches)){
+			foreach($matches as $m){
+				$ri = respim_image($m[0]);
+				if ($ri!==$m[0]){
+					$replace[$m[0]] = $ri;
+				}
 			}
-		}
-		if (count($replace)){
-			$respim_ins = true;
-			$texte = str_replace(array_keys($replace),array_values($replace),$texte);
+			if (count($replace)){
+				$respim_ins = true;
+				$texte = str_replace(array_keys($replace),array_values($replace),$texte);
+			}
 		}
 		if ($respim_ins OR strpos($texte,"respwrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
@@ -190,7 +191,7 @@ function respim_affichage_final($texte){
 			// le script qui estime si la rapidite de connexion et pose une class slow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
 			$async_style = "html img.respim{opacity:0.01}html b.respwrapper:after{display:none;}";
-			$length = strlen($texte)+1500; // ~1500 pour le JS qu'on va inserer
+			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
 				// Android 2 media-queries bad support workaround
@@ -225,9 +226,16 @@ function respim_affichage_final($texte){
 			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
 			if (!_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
 				$ins .= "<noscript><style type='text/css'>.png img.respim,.gif img.respim{opacity:0.01}b.respwrapper.png:after,b.respwrapper.gif:after{display:none;}</style></noscript>";
-			// inserer abant le premier <script> ou <link a defaut
+			// inserer avant le premier <script> ou <link a defaut
+
+			// regrouper tous les styles respim dans le head
+			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
+			if (count($matches[1])){
+				$texte = str_replace($matches[1],"",$texte);
+				$ins .= implode("\n",$matches[1]);
+			}
 			if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
-				$texte = substr_replace($texte,"<!--[if !IE]-->$ins<!--[endif]-->\n",$p,0);
+				$texte = substr_replace($texte,"<!--[if !IE]-->$ins\n<!--[endif]-->\n",$p,0);
 		}
 		#var_dump(spip_timer());
 	}
