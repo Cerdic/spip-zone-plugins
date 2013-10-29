@@ -61,14 +61,16 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
 		$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
 		$mw20 = $mw15 = "";
 		if ($w>=640 OR $islast){
-			$mw20 = ($prev_width?"and (min-width:".round($prev_width/2)."px)":"").($hasmax?" and (max-width:".round($w/2)."px)":"");
+			$mw20 = ($prev_width?"and (min-width:".floor(($prev_width-1)/2+1)."px)":"").($hasmax?" and (max-width:".floor($w/2)."px)":"");
 		}
-		$mw15 = ($prev_width?"and (min-width:".round($prev_width/1.5)."px)":"").($hasmax?" and (max-width:".round($w/1.5)."px)":"");
+		if ($w>=480 OR $islast){
+			$mw15 = ($prev_width?"and (min-width:".floor(($prev_width-1)/1.5+1)."px)":"").($hasmax?" and (max-width:".floor($w/1.5)."px)":"");
+		}
 		$not = "html:not(.ahrdpi)";
-		if ($prev_width<800 AND ($w>800 OR $islast))
+		if ($prev_width<=800 AND ($w>=800 OR $islast))
 			$not.=":not(.avp800)";
 		$not .= " ";
-		$medias[$w] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after,{$not}.slow b.$cid,{$not}.slow b.$cid:after{background-image:url($file);}}";
+		$medias[$w] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after{background-image:url($file);}}";
 		$mhr = array();
 		if ($mw20)
 			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 2) $mw20,screen and (min--moz-device-pixel-ratio: 2) $mw20";
@@ -76,7 +78,7 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
 			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 1.5) $mw15,screen and (min--moz-device-pixel-ratio: 1.5) $mw15";
 		if (count($mhr)){
 			$mhr = implode(",",$mhr);
-			$medias[$w."hr"] = "@media $mhr{html:not(.avp800) b.$cid,html:not(.avp800) b.$cid:after{background-image:url($file) !important;}}";
+			$medias[$w."hr"] = "@media $mhr{html:not(.slow):not(.avp800) b.$cid,html:not(.slow):not(.avp800) b.$cid:after{background-image:url($file) !important;}}";
 		}
 		$prev_width = $w+1;
 	}
