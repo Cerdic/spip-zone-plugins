@@ -174,7 +174,6 @@ function gravatar($email, $default='404') {
 	else
 		$gravatar_id = md5(strtolower($email).$GLOBALS['meta']['gravatar_salt']);
 	$gravatar_id .= ($default=='404'?"":"-$default");
-	var_dump("$gravatar_id::$md5_email");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
 	// inutile de rafraichir souvent les identicon etc qui ne changent en principe pas
