@@ -165,13 +165,20 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
 	foreach($bkpt as $wk){
 		if ($wk>$w) break;
 		$i = image_reduire($img,$wk,10000);
-		$large = $images[$wk] = extraire_attribut($i,"src");
+		$images[$wk] = extraire_attribut($i,"src");
+		if ($wk<=$max_width_1x) $large = $images[$wk];
 	}
 
 	// l'image de fallback en jpg tres compresse
 	if (function_exists("image_aplatir")){
 		// image de fallback : la plus grande en jpg tres compresse
-		$fallback = image_aplatir($large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,_RESPIM_LOWSRC_JPG_QUALITY);
+		// la qualite est reduite si la taille de l'image augmente, pour limiter le poids de l'image
+		// regle de 3 au feeling, _RESPIM_LOWSRC_JPG_QUALITY correspond a une image de 300kPx
+		// et on varie dans +/-50% de _RESPIM_LOWSRC_JPG_QUALITY
+		$q = round(_RESPIM_LOWSRC_JPG_QUALITY-((min($max_width_1x,$w)*$h/$w*min($max_width_1x,$w))/100000-3));
+		$q = min($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*1.5);
+		$q = max($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*0.5);
+		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]:$large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,$q);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
