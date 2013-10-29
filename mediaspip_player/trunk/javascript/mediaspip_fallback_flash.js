@@ -143,11 +143,11 @@
 							this.slider_done = false;
 							this.former_duration = 0;
 							
-				    		var player = this,
-				    			wrapper = $(this.getParent()).parents('.media_wrapper');
+							var player = this,
+								wrapper = $(this.getParent()).parents('.media_wrapper');
 
-				    		wrapper.removeClass('loading').addClass('paused');
-				    		
+							wrapper.removeClass('loading').addClass('paused');
+							
 							if(wrapper[0].options.isSound){
 								wrapper.find('.flowplayer').click(function(){
 									if (player.isLoaded() && !options.poster) player.toggle();
@@ -159,7 +159,7 @@
 							});
 							if($.inArray('volume',wrapper[0].options.boutons_caches) == '-1' && !wrapper[0].options.muted_bloque){
 								wrapper.find('.volume_button').click(function(e){
-					    			var status = player.getStatus();
+									var status = player.getStatus();
 									if(status.muted){
 										if(cookies && wrapper[0].options.cookie_volume) $.cookie('ms_volume_muted',null);
 										if(typeof(player.slider_volume) == 'object') player.slider_volume.slider('enable');
@@ -208,121 +208,121 @@
 										}
 									});
 								}
-				    		}
-				    		
+							}
+							
 							var handler_media_resize = function(){
 								if(wrapper[0].ratio)
 									wrapper.css({width:'auto'}).css({height:(wrapper.parent().width()/wrapper[0].ratio)+'px'}).flow_resize_controls();
-    						}
-    						$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
-    						
+							}
+							$(window).unbind('resize',handler_media_resize).bind('resize',handler_media_resize);
+							
 							wrapper.dblclick(function(e){ return false; });
 							wrapper.flow_resize_controls();
-				    	},
-				    	onClipAdd :function(clip){},
-				    	onError:function(error){},
-				    	onUnload:function(error){},
-				    	onBeforeKeyPress:function(e){
-				    		if(e == 76){
-				    			if($.inArray('loop',$(this.getParent()).parents('.media_wrapper')[0].options.boutons_caches) == '-1')
-				    				$(this.getParent()).parents('.media_wrapper').find('.loop_button').click();
-				    			return false;
-				    		}
-				    	},
-				    	onKeyPress: function(e){
-				    		var wrapper = $(this.getParent()).parents('.media_wrapper');
-				    		if(e == 39 || e == 37){
-				    			if(this.isPaused()){
-				    				this.topause = true;
-				    				this.play();
-				    			}
-				    		}
-				    		if(e == 70 && !this.isFullscreen())
-				    			this.toggleFullscreen();
+						},
+						onClipAdd :function(clip){},
+						onError:function(error){},
+						onUnload:function(error){},
+						onBeforeKeyPress:function(e){
+							if(e == 76){
+								if($.inArray('loop',$(this.getParent()).parents('.media_wrapper')[0].options.boutons_caches) == '-1')
+									$(this.getParent()).parents('.media_wrapper').find('.loop_button').click();
+								return false;
+							}
+						},
+						onKeyPress: function(e){
+							var wrapper = $(this.getParent()).parents('.media_wrapper');
+							if(e == 39 || e == 37){
+								if(this.isPaused()){
+									this.topause = true;
+									this.play();
+								}
+							}
+							if(e == 70 && !this.isFullscreen())
+								this.toggleFullscreen();
 
-				    		if(e == 38 || e == 40){
-				    			if(!wrapper[0].options.volume_bloque){
-					    			var volume = this.getVolume(),
+							if(e == 38 || e == 40){
+								if(!wrapper[0].options.volume_bloque){
+									var volume = this.getVolume(),
 										volume_diff = (e == 38) ? '10' : '-10',
 										volume_new = Math.round((volume + parseFloat(volume_diff))*10)/10;
-					    			wrapper.flow_change_volume(volume_new,this.slider_volume,false,wrapper[0].options);
-				    			}
-				    		}
-				    		if(e == 186 || e == 77){
-				    			if($.inArray('volume',this.options.boutons_caches) == '-1' && !wrapper[0].options.muted_bloque)
-				    				wrapper.find('.volume_button').click();
-				    		}
-				    	},
-			        clip:{
-			    		url:liens[0],
-			    		coverImage: options.poster,
-			            autoPlay:options.autoplay,
-			            scaling:'fit',
-			            autoBuffering: (options.isSound ? (options.autoplay ? true : false) : options.autoload),
-			            bufferLength:5,
-		            	onBeforeLoad:function(){},
-		            	onBeforeBegin:function(){},
-			            onBegin:function(clip){
-			            	var player = this,
-			            		wrapper = $(this.getParent()).parents('.media_wrapper');
-			            	if(wrapper[0].options.loop){
-			            		clip.looped = true;
-			            		wrapper.addClass('loop');
-			            	}
+									wrapper.flow_change_volume(volume_new,this.slider_volume,false,wrapper[0].options);
+								}
+							}
+							if(e == 186 || e == 77){
+								if($.inArray('volume',this.options.boutons_caches) == '-1' && !wrapper[0].options.muted_bloque)
+									wrapper.find('.volume_button').click();
+							}
+						},
+					clip:{
+						url:liens[0],
+						coverImage: options.poster,
+						autoPlay:options.autoplay,
+						scaling:'fit',
+						autoBuffering: (options.isSound ? (options.autoplay ? true : false) : options.autoload),
+						bufferLength:5,
+						onBeforeLoad:function(){},
+						onBeforeBegin:function(){},
+						onBegin:function(clip){
+							var player = this,
+								wrapper = $(this.getParent()).parents('.media_wrapper');
+							if(wrapper[0].options.loop){
+								clip.looped = true;
+								wrapper.addClass('loop');
+							}
 
-			            	if(typeof(clip.looped) == 'undefined')
-			            		clip.looped = false;
-			            	
-			            	if($.inArray('loop',wrapper[0].options.boutons_caches) == '-1'){
-					    		wrapper.find('.loop_button').unbind('click').click(function(e){
-					    			if(clip.looped){
-					    				clip.looped = false;
-					    				delete(wrapper[0].options.loop);
-					    				$(this).attr('title',ms_player_lang.bouton_loop);
-					    				wrapper.removeClass('loop').ms_messages('loop',ms_player_lang.statut_unloop,wrapper[0].options);
-					    			}else{
-					    				clip.looped = true;
-					    				$(this).attr('title',ms_player_lang.bouton_loop_looped);
-					    				wrapper.addClass('loop').ms_messages('loop',ms_player_lang.statut_loop,wrapper[0].options);
-					    			}
+							if(typeof(clip.looped) == 'undefined')
+								clip.looped = false;
+							
+							if($.inArray('loop',wrapper[0].options.boutons_caches) == '-1'){
+								wrapper.find('.loop_button').unbind('click').click(function(e){
+									if(clip.looped){
+										clip.looped = false;
+										delete(wrapper[0].options.loop);
+										$(this).attr('title',ms_player_lang.bouton_loop);
+										wrapper.removeClass('loop').ms_messages('loop',ms_player_lang.statut_unloop,wrapper[0].options);
+									}else{
+										clip.looped = true;
+										$(this).attr('title',ms_player_lang.bouton_loop_looped);
+										wrapper.addClass('loop').ms_messages('loop',ms_player_lang.statut_loop,wrapper[0].options);
+									}
 								});
-			            	}
-		            		if(typeof(clip.duration) != 'undefined'){
-		            			if(clip.duration){
-				            		var duration = ms_second_to_time(clip.duration);
-				            		if(wrapper.find(".remaining_time").is('.remaining'))
-				            			wrapper.find(".remaining_time").html('-'+duration);
+							}
+							if(typeof(clip.duration) != 'undefined'){
+								if(clip.duration){
+									var duration = ms_second_to_time(clip.duration);
+									if(wrapper.find(".remaining_time").is('.remaining'))
+										wrapper.find(".remaining_time").html('-'+duration);
 									else
 										wrapper.find(".remaining_time").html(duration);
 									wrapper.find(".elapsed_time").html(ms_second_to_time(0));
-		            			}
-		            			else
+								}
+								else
 									wrapper.find('.progress_back,.remaining_time').hide();
-		            		}else
-		            			wrapper.flow_resize_controls();
-		            		wrapper.flow_play_pause('play',wrapper[0].options);
-	            		},
-	            		onStart:function(clip) {
-	            			// clear previous timer
-				    		clearInterval(this.timer);
+							}else
+								wrapper.flow_resize_controls();
+							wrapper.flow_play_pause('play',wrapper[0].options);
+						},
+						onStart:function(clip) {
+							// clear previous timer
+							clearInterval(this.timer);
 
 							var player = this,
 								statustime = 0,
 								wrapper = $(this.getParent()).parents('.media_wrapper');
-				    		// begin timer
-				    		this.timer = setInterval(function(){
-				    			if(typeof(clip.duration) == 'undefined') return;
-				    			
-				    			var statustime = player.getStatus().time;
-				    			if (typeof(statustime) == 'undefined') return;
-				    			
-				    			if((typeof(statustime) != 'undefined')){
-				    				var duree = player.former_duration;
-				    				/**
-				    				 * On doit le mettre ici car on n'a pas de duration sur les mp3 dès le load
-				    				 */
-				    				if(!player.slider_done && slider){
-				    					var replay = false;
+							// begin timer
+							this.timer = setInterval(function(){
+								if(typeof(clip.duration) == 'undefined') return;
+								
+								var statustime = player.getStatus().time;
+								if (typeof(statustime) == 'undefined') return;
+								
+								if((typeof(statustime) != 'undefined')){
+									var duree = player.former_duration;
+									/**
+									 * On doit le mettre ici car on n'a pas de duration sur les mp3 dès le load
+									 */
+									if(!player.slider_done && slider){
+										var replay = false;
 										player.slider_control = wrapper.find('.progress_back').slider({
 											min: 0,
 											max: player.former_duration ? player.former_duration : 100,
@@ -362,9 +362,9 @@
 											}
 										});
 										player.slider_done = true;
-				    				}
-					    			if (!player.isPaused()) {
-					    				var timer2 = statustime / player.former_duration * 100,
+									}
+									if (!player.isPaused()) {
+										var timer2 = statustime / player.former_duration * 100,
 											position = Math.round(timer2);
 										wrapper.find('.progress_elapsed_time,.progress_back > .ui-slider-range').css('width',position+'%');
 										wrapper.find('.progress_indicator,.progress_back > .ui-slider-handle').css('left',position+'%');
@@ -372,149 +372,149 @@
 										if(wrapper.find(".remaining_time").is('.remaining'))
 											wrapper.find(".remaining_time").html('-'+ms_second_to_time(player.former_duration-statustime));
 										wrapper.flow_resize_controls();
-					    			}
-					    				
-					    			if(!player.bufferfull){
-					    				var buffer = ms_anything_to_percent(player.getStatus().bufferEnd,player.former_duration);
-					    				if(buffer > 100) buffer = 100;
-					    				if(buffer == 100) player.bufferfull = true;
+									}
+										
+									if(!player.bufferfull){
+										var buffer = ms_anything_to_percent(player.getStatus().bufferEnd,player.former_duration);
+										if(buffer > 100) buffer = 100;
+										if(buffer == 100) player.bufferfull = true;
 										wrapper.find('.progress_buffered').css('width',buffer+'%');
-					    			}
-				    			}
-				    		},100);
-				    		wrapper.find(".remaining_time").unbind('click').click(function(e){
+									}
+								}
+							},100);
+							wrapper.find(".remaining_time").unbind('click').click(function(e){
 								if($(this).is('.remaining'))
 									$(this).removeClass('remaining').addClass('total_time').attr('title',ms_player_lang.info_total).html(ms_second_to_time(Math.floor(player.former_duration)));
 								else
 									$(this).removeClass('total_time').addClass('remaining').attr('title',ms_player_lang.info_restant).html('-'+ms_second_to_time(Math.floor(player.former_duration) - statustime));
 								wrapper.flow_resize_controls();
-		    				});
-				    	},
-	            		onCuepoint:function(content) {},
-	            		onMetaData:function(clip) {
-	            			var wrapper = $(this.getParent()).parents('.media_wrapper'),
-	            				options = wrapper[0].options;
-	            			if(clip.duration)
-	            				wrapper.find('.progress_back,.remaining_time').show();
-	            			if((clip.duration != 'undefined') && (clip.duration != this.former_duration)){
-		            			this.former_duration = clip.duration;
-		            			var duration = ms_second_to_time(this.former_duration);
-		            			if(typeof(this.slider_control) == 'object')
-		            				this.slider_control.slider('option', 'max',this.former_duration);
-		            			if(wrapper.find(".remaining_time").is('.remaining'))
-			            			wrapper.find(".remaining_time").html('-'+duration);
+							});
+						},
+						onCuepoint:function(content) {},
+						onMetaData:function(clip) {
+							var wrapper = $(this.getParent()).parents('.media_wrapper'),
+								options = wrapper[0].options;
+							if(clip.duration)
+								wrapper.find('.progress_back,.remaining_time').show();
+							if((clip.duration != 'undefined') && (clip.duration != this.former_duration)){
+								this.former_duration = clip.duration;
+								var duration = ms_second_to_time(this.former_duration);
+								if(typeof(this.slider_control) == 'object')
+									this.slider_control.slider('option', 'max',this.former_duration);
+								if(wrapper.find(".remaining_time").is('.remaining'))
+									wrapper.find(".remaining_time").html('-'+duration);
 								else
 									wrapper.find(".remaining_time").html(duration);
-		            			wrapper.find(".elapsed_time").html(ms_second_to_time(this.getStatus().time || 0));
-		            		}
-	            			if(options.isVideo){
-	            				var ratio_video = clip.metaData.width/clip.metaData.height;
-	        					wrapper[0].ratio = options.ratio = ratio_video;
-	            				if(options.movieSize == 'adapt' && !wrapper.hasClass('noresize') && (options.movieSize != 'noresize')){
-	        						/**
-	        						 * En mode adapt :
-	        						 * - on dimensionne la largeur à 100%
-	        						 * - on dimensionne la hauteur à un ratio correspondant au ratio réel de la vidéo 
-	        						 * par rapport à la largeur du bloc parent
-	        						 */
-	        						width_container = wrapper.parent().width();
-	        						var ratio = (width_container/clip.metaData.width),
-	        							height_final = (clip.metaData.height*ratio).toFixed();
-	        						wrapper.animate({height:height_final+'px',width:'100%'},500,function(){
-	        							wrapper.flow_resize_controls();
-	        						});
-	        					}else if(!wrapper.hasClass('noresize') || options.movieSize != 'noresize'){
-	        						/**
-	        						 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
-	        						 * du ratio réel récupéré des métadonnées
-	        						 */
-	        						wrapper.css({'height':(wrapper.width()/wrapper[0].ratio)+'px'});
-	        					}
-	            			}
-	            			wrapper.flow_resize_controls();
-			            },
-			            onLastSecond:function(){},
-			            onBeforeFinish: function(clip) {},
-	            		onFinish:function(clip){
-	            			clearInterval(this.timer);
-	            			if(clip.looped) {this.play(clip);}
-	            			else{
-	            				var wrapper = $(this.getParent()).parents('.media_wrapper');
-	            				var duration = ms_second_to_time(this.former_duration);
-	            				wrapper.find(".remaining_time").html(duration);
-	            				wrapper.find(".elapsed_time").html('00:00');
-	            				if(typeof(this.slider_control) == 'object')
-			            			this.slider_control.slider('value', 0);
-	            				wrapper.flow_play_pause('stop',wrapper[0].options).flow_resize_controls();
-	            			}
-		            	},
-			            onPause:function(clip){
-			            	$(this.getParent()).parents('.media_wrapper').flow_play_pause('pause',wrapper[0].options);
-		            	},
-		            	onResume:function(clip){
-		            		$(this.getParent()).parents('.media_wrapper').flow_play_pause('play',wrapper[0].options).flow_resize_controls();
-		            	},
-		            	onBeforeSeek:function(clip,time){
-		            		this.former_time = this.getStatus().time;
-		            		$(this.getParent()).parents('.media_wrapper').addClass('seeking').find('.play_pause_button').attr('title',ms_player_lang.bouton_seeking);
+								wrapper.find(".elapsed_time").html(ms_second_to_time(this.getStatus().time || 0));
+							}
+							if(options.isVideo){
+								var ratio_video = clip.metaData.width/clip.metaData.height;
+								wrapper[0].ratio = options.ratio = ratio_video;
+								if(options.movieSize == 'adapt' && !wrapper.hasClass('noresize') && (options.movieSize != 'noresize')){
+									/**
+									 * En mode adapt :
+									 * - on dimensionne la largeur à 100%
+									 * - on dimensionne la hauteur à un ratio correspondant au ratio réel de la vidéo 
+									 * par rapport à la largeur du bloc parent
+									 */
+									width_container = wrapper.parent().width();
+									var ratio = (width_container/clip.metaData.width),
+										height_final = (clip.metaData.height*ratio).toFixed();
+									wrapper.animate({height:height_final+'px',width:'100%'},500,function(){
+										wrapper.flow_resize_controls();
+									});
+								}else if(!wrapper.hasClass('noresize') || options.movieSize != 'noresize'){
+									/**
+									 * En mode normal, on redimentionne la hauteur de la vidéo en fonction 
+									 * du ratio réel récupéré des métadonnées
+									 */
+									wrapper.css({'height':(wrapper.width()/wrapper[0].ratio)+'px'});
+								}
+							}
+							wrapper.flow_resize_controls();
+						},
+						onLastSecond:function(){},
+						onBeforeFinish: function(clip) {},
+						onFinish:function(clip){
+							clearInterval(this.timer);
+							if(clip.looped) {this.play(clip);}
+							else{
+								var wrapper = $(this.getParent()).parents('.media_wrapper');
+								var duration = ms_second_to_time(this.former_duration);
+								wrapper.find(".remaining_time").html(duration);
+								wrapper.find(".elapsed_time").html('00:00');
+								if(typeof(this.slider_control) == 'object')
+									this.slider_control.slider('value', 0);
+								wrapper.flow_play_pause('stop',wrapper[0].options).flow_resize_controls();
+							}
+						},
+						onPause:function(clip){
+							$(this.getParent()).parents('.media_wrapper').flow_play_pause('pause',wrapper[0].options);
+						},
+						onResume:function(clip){
+							$(this.getParent()).parents('.media_wrapper').flow_play_pause('play',wrapper[0].options).flow_resize_controls();
+						},
+						onBeforeSeek:function(clip,time){
+							this.former_time = this.getStatus().time;
+							$(this.getParent()).parents('.media_wrapper').addClass('seeking').find('.play_pause_button').attr('title',ms_player_lang.bouton_seeking);
 							if(this.isPlaying()) clip.status = 'playing';
 							else if(this.isPaused()) clip.status = 'paused';
-		            	},
-		            	onSeek:function(clip,time){
-		            		var wrapper = $(this.getParent()).parents('.media_wrapper'),
-		            			time_affiche = ms_second_to_time(time),
-		            			width = time/clip.duration*100;
-		            		
-		            		if(this.former_time < time)
-		            			wrapper.ms_messages('seek_to',ms_player_lang.statut_seek_to+' '+time_affiche,wrapper[0].options);
-		            		else
-			            		wrapper.ms_messages('seek_to',ms_player_lang.statut_seek_back+' '+time_affiche,wrapper[0].options);
-		            		if(clip.status == 'paused')
+						},
+						onSeek:function(clip,time){
+							var wrapper = $(this.getParent()).parents('.media_wrapper'),
+								time_affiche = ms_second_to_time(time),
+								width = time/clip.duration*100;
+							
+							if(this.former_time < time)
+								wrapper.ms_messages('seek_to',ms_player_lang.statut_seek_to+' '+time_affiche,wrapper[0].options);
+							else
+								wrapper.ms_messages('seek_to',ms_player_lang.statut_seek_back+' '+time_affiche,wrapper[0].options);
+							if(clip.status == 'paused')
 								wrapper.find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_pause);
 							else
 								wrapper.find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_lire);
-		            		if(this.topause){
-		            			this.topause = false;
-		            			this.pause();
-		            		}
-		            		
+							if(this.topause){
+								this.topause = false;
+								this.pause();
+							}
+							
 							if(wrapper.find(".remaining_time").is('.remaining'))
 								wrapper.find(".remaining_time").html('-'+ms_second_to_time(clip.duration-time));
 							
 							wrapper.find('.progress_elapsed_time,.progress_back > .ui-slider-range').css('width',width+'%');
 							wrapper.find('.progress_indicator,.progress_back > .ui-slider-handle').css('left',width+'%');
-		            		wrapper.removeClass('seeking').find(".elapsed_time").html(time_affiche).flow_resize_controls();
-		            	},
-		            	onStop:function(){
-		            		$(this.getParent()).parents('.media_wrapper').flow_play_pause('stop',wrapper[0].options);
-		            	},
-		            	onUpdate:function(clip){},
-		            	onBufferEmpty:function(clip){},
-		            	onBufferFull:function(clip){},
-		            	onBufferStop:function(){},
-		            	onNetStreamEvent:function(){}
-		            },
-		            canvas:{ 
-		            	background:'transparent',
-		            	backgroundGradient:'none'
-		     		},
-		     		play: { opacity: 0 },
-			        plugins: { controls: null }
-			    };
+							wrapper.removeClass('seeking').find(".elapsed_time").html(time_affiche).flow_resize_controls();
+						},
+						onStop:function(){
+							$(this.getParent()).parents('.media_wrapper').flow_play_pause('stop',wrapper[0].options);
+						},
+						onUpdate:function(clip){},
+						onBufferEmpty:function(clip){},
+						onBufferFull:function(clip){},
+						onBufferStop:function(){},
+						onNetStreamEvent:function(){}
+					},
+					canvas:{ 
+						background:'transparent',
+						backgroundGradient:'none'
+			 		},
+			 		play: { opacity: 0 },
+					plugins: { controls: null }
+				};
 				
-			    wrapper.find('.flowplayer').flowplayer({
-			    	cachebusting: $.browser.msie,
-			    	src:options.flowurl,
-			    	version: [10, 0],
-			    	wmode:'transparent',
-			    	allowfullscreen: allowfullscreen,
-			    	onFail: function() {
-			    		wrapper.removeClass('loading').addClass('player_error').css({height:''}).find('.controls').detach();
-			    		wrapper.find('.html5_cover').css('background-color','#ffffff').find('.img').fadeTo('slow', 0.4);
-			    		wrapper.find('.flowplayer').css('position','relative').html(' ');
-			    		wrapper.ms_messages('error',IS_MOBILE ? ms_player_lang.flash_error_mobile : ms_player_lang.flash_error);
-			    	}
-			    }, media_options);
+				wrapper.find('.flowplayer').flowplayer({
+					cachebusting: $.browser.msie,
+					src:options.flowurl,
+					version: [10, 0],
+					wmode:'transparent',
+					allowfullscreen: allowfullscreen,
+					onFail: function() {
+						wrapper.removeClass('loading').addClass('player_error').css({height:''}).find('.controls').detach();
+						wrapper.find('.html5_cover').css('background-color','#ffffff').find('.img').fadeTo('slow', 0.4);
+						wrapper.find('.flowplayer').css('position','relative').html(' ');
+						wrapper.ms_messages('error',IS_MOBILE ? ms_player_lang.flash_error_mobile : ms_player_lang.flash_error);
+					}
+				}, media_options);
 			}
 			
 			/**
@@ -593,15 +593,15 @@
 				progress_bar = $(this).find('.progress_bar'),
 				buttons_right_width = 0;
 
-		    $(this).find('.buttons_right').children().each(function(){
-		    	if($(this).is(':visible') && $(this).css('position') != 'absolute'){
-		    		buttons_right_width += isNaN(parseFloat($(this).outerWidth())) ? 0 : parseFloat($(this).outerWidth());
-		    		buttons_right_width += isNaN(parseFloat($(this).css('margin-left'))) ? 0 : parseFloat($(this).css('margin-left'));
-		    		buttons_right_width += isNaN(parseFloat($(this).css('margin-right'))) ? 0 : parseFloat($(this).css('margin-right'));
-		    	}
-		    });
-		    $(this).find('.buttons_right').width(buttons_right_width);
-		    
+			$(this).find('.buttons_right').children().each(function(){
+				if($(this).is(':visible') && $(this).css('position') != 'absolute'){
+					buttons_right_width += isNaN(parseFloat($(this).outerWidth())) ? 0 : parseFloat($(this).outerWidth());
+					buttons_right_width += isNaN(parseFloat($(this).css('margin-left'))) ? 0 : parseFloat($(this).css('margin-left'));
+					buttons_right_width += isNaN(parseFloat($(this).css('margin-right'))) ? 0 : parseFloat($(this).css('margin-right'));
+				}
+			});
+			$(this).find('.buttons_right').width(buttons_right_width);
+
 			var width_container = $(this).width(),
 				buttons_left = $(this).find('.buttons_left'),
 				buttons_right = $(this).find('.buttons_right'),

@@ -1054,7 +1054,7 @@
 					var sources = media.children("source");
 				$.each(sources, function(index, value){
 					var source = $(this);
-					if((source.attr('type').match('video/x-flv'))||(source.attr('type').match('video/mp4'))||(source.attr('type').match('audio/mpeg'))){
+					if((source.attr('type').match('video/x-flv'))||(source.attr('type').match('video/mp4'))||(source.attr('type').match('audio/mpeg'))||(source.attr('type').match('audio/mp4'))){
 						var defaults_flash = {
 							flowurl:options.flowurl,
 							flasherror:options.flasherror ? options.flasherror : '',

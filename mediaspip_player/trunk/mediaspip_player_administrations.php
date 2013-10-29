@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2010-2012 - Distribué sous licence GNU/GPL
+ * 2010-2013 - Distribué sous licence GNU/GPL
  *
  * Script d'installation
  *
