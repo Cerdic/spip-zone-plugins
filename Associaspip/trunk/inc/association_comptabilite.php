@@ -393,6 +393,7 @@ function comptabilite_reference_intitule($code, $parent=0) {
 	}
 	$nom = $GLOBALS[$GLOBALS['pcg']][$code];
 #	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
+    }
     if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
 	return $nom; // ...renvoyer la traduction
     $code = substr($code, 0, -1); // sinon on enleve le dernier caractere...
@@ -941,8 +942,7 @@ function association_calcul_soldes_comptes_classe($classe, $periode=0, $destinat
     return $query;
 }
 
-function export_compte($ids, $mode, $icone = true)
-{
+function export_compte($ids, $mode, $icone = true) {
 	// exports connus (a completer au besoin)
 	foreach(array('csv','ctx','dbk','json','tex','tsv','xml','yaml') as $t){
 			$args = $ids['id_periode'] . "-$mode-"
