@@ -32,13 +32,12 @@ function action_image_responsive() {
 			copy($img, $dest);
 		}
 		$extension = str_replace("jpg", "jpeg", $terminaison);
-		$browser_cache = 60*60*24*7;
-
+		$expires = 60*60*24*14;
 	
 		header("Content-Type: image/".$extension);
-
-		header("Cache-Control: private, max-age=".$browser_cache);
-		header('Expires: '.gmdate('D, d M Y H:i:s', time()+$browser_cache).' GMT');
+		header("Pragma: public");
+		header("Cache-Control: maxage=".$expires);
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 		header('Content-Length: '.filesize($dest));
 
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
