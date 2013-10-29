@@ -15,7 +15,7 @@ if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_
 if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
 if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',10);
 // la derniere valeur defini la largeur maxi envoyee
-if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,780,1200,1560,10000');
+if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,780,1200,1560,2048');
 
 /**
  *
@@ -26,9 +26,10 @@ if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,7
  * @param int $width
  * @param int $height
  * @param string $extension
+ * @param int $max_width_1x
  * @return string
  */
-function respim_markup($img, $rwd_images, $width, $height, $extension){
+function respim_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=null){
 	$class = extraire_attribut($img,"class");
 	if (strpos($class,"respim")!==false) return $img;
 	ksort($rwd_images);
@@ -53,26 +54,34 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
 	$medias = array();
 	$lastw = array_keys($rwd_images);
 	$lastw = end($lastw);
-	$hasmax = true;
+	if (!$max_width_1x) $max_width_1x = $lastw;
+	$max_width_15x = min($lastw,round(1.5*$max_width_1x));
+	$max_width_20x = min($lastw,round(2*$max_width_1x));
 	foreach ($rwd_images as $w=>$file){
-		if ($w==$lastw) {$hasmax=false;$islast = true;}
+		if ($w==$lastw) {$islast = true;}
 		// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
-		$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
+		//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
 		// il faut utiliser une clause min-width and max-width pour que les regles soient exlusives
 		// sinon on a multiple load sous android 2.x
-		$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
+		if ($prev_width<$max_width_1x){
+			$hasmax = (($islast OR $w>=$max_width_1x)?false:true);
+			$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
+			$not = "html:not(.ahrdpi)";
+			if ($prev_width<=800 AND ($w>=800 OR $islast))
+				$not.=":not(.avp800)";
+			$not .= " ";
+			$medias[$mw] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after{background-image:url($file);}}";
+		}
+
 		$mw20 = $mw15 = "";
-		if ($w>=640 OR $islast){
+		if ($prev_width<$max_width_20x AND ($w>=640 OR $islast)){
+			$hasmax = (($islast OR $w>=$max_width_20x)?false:true);
 			$mw20 = ($prev_width?"and (min-width:".floor(($prev_width-1)/2+1)."px)":"").($hasmax?" and (max-width:".floor($w/2)."px)":"");
 		}
-		if ($w>=480 OR $islast){
+		if ($prev_width<$max_width_15x AND ($w>=480 OR $islast)){
+			$hasmax = (($islast OR $w>=$max_width_15x)?false:true);
 			$mw15 = ($prev_width?"and (min-width:".floor(($prev_width-1)/1.5+1)."px)":"").($hasmax?" and (max-width:".floor($w/1.5)."px)":"");
 		}
-		$not = "html:not(.ahrdpi)";
-		if ($prev_width<=800 AND ($w>=800 OR $islast))
-			$not.=":not(.avp800)";
-		$not .= " ";
-		$medias[$w] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after{background-image:url($file);}}";
 		$mhr = array();
 		if ($mw20)
 			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 2) $mw20,screen and (min--moz-device-pixel-ratio: 2) $mw20";
@@ -90,6 +99,10 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
 	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","respim $class");
+	if ($max_width_1x<$width){
+		$img = inserer_attribut($img,"width",$max_width_1x);
+		$img = inserer_attribut($img,"height",round($height*$max_width_1x/$width));
+	}
 	$img = inserer_attribut($img,"onmousedown","var i=window.getComputedStyle(this.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');this.src=(i&&i!='none'?i:this.src);");
 	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
 
@@ -104,14 +117,17 @@ function respim_markup($img, $rwd_images, $width, $height, $extension){
  *
  * @param string $img
  * @param array $bkpt
+ * @param int $max_width_1x
  * @return string
  */
-function respim_image($img, $bkpt = null){
+function respim_image($img, $bkpt = null, $max_width_1x=null){
 	if (!$img) return $img;
 	if (strpos($img,"respim")!==false)
 		return $img;
 	if (is_null($bkpt) OR !is_array($bkpt))
 		$bkpt = explode(',',_RESPIM_DEFAULT_BKPTS);
+	if (!$max_width_1x)
+		$max_width_1x = round(end($bkpt)/2);
 
 	if (!function_exists("taille_image"))
 		include_spip("inc/filtres");
@@ -160,31 +176,35 @@ function respim_image($img, $bkpt = null){
 	}
 
 	// generer le markup
-	return respim_markup($img,$images,$w,$h,$extension);
+	return respim_markup($img,$images,$w, $h, $extension, $max_width_1x);
 }
 
 /**
- * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a fournir
+ * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
  * [(#TEXTE|adaptative_images{1024})]
  * @param string $texte
- * @param null|int $max_width
+ * @param null|int $max_width_1x
  * @return mixed
  */
-function adaptative_images($texte,$max_width=null){
+function adaptative_images($texte,$max_width_1x=null){
 	static $bkpts = array();
-	if ($max_width AND !isset($bkpts[$max_width])){
+	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
 		$b = explode(',',_RESPIM_DEFAULT_BKPTS);
-		while (count($b) AND end($b)>$max_width) array_pop($b);
-		if (!count($b) OR end($b)<$max_width) $b[] = $max_width;
-		$bkpts[$max_width] = $b;
+		while (count($b) AND end($b)>$max_width_1x) array_pop($b);
+		// la largeur maxi affichee
+		if (!count($b) OR end($b)<$max_width_1x) $b[] = $max_width_1x;
+		//  les resolutions 1.5x et 2x pour la largeur maxi
+		if (!count($b) OR end($b)<round($max_width_1x*1.5)) $b[] = round($max_width_1x*1.5);
+		if (!count($b) OR end($b)<$max_width_1x*2) $b[] = $max_width_1x*2;
+		$bkpts[$max_width_1x] = $b;
 	}
-	$bkpt = (isset($bkpts[$max_width])?$bkpts[$max_width]:null);
+	$bkpt = (isset($bkpts[$max_width_1x])?$bkpts[$max_width_1x]:null);
 
 	$replace = array();
 	preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
 	if (count($matches)){
 		foreach($matches as $m){
-			$ri = respim_image($m[0],$bkpt);
+			$ri = respim_image($m[0], $bkpt, $max_width_1x);
 			if ($ri!==$m[0]){
 				$replace[$m[0]] = $ri;
 			}
