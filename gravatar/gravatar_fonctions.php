@@ -162,7 +162,19 @@ function gravatar($email, $default='404') {
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
 
 	$md5_email = md5(strtolower($email));
-	$gravatar_id = $md5_email.($default=='404'?"":"-$default");
+	// privacy : http://archive.hack.lu/2013/dbongard_hacklu_2013.pdf
+	// eviter de rendre les emails retrouvables par simple reverse sur le md5 de gravatar
+	if (!isset($GLOBALS['meta']['gravatar_salt'])){
+		include_spip('inc/acces');
+		include_spip('auth/sha256.inc');
+		ecrire_meta('gravatar_salt', _nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
+	}
+	if (function_exists("sha1"))
+		$gravatar_id = sha1(strtolower($email).$GLOBALS['meta']['gravatar_salt']);
+	else
+		$gravatar_id = md5(strtolower($email).$GLOBALS['meta']['gravatar_salt']);
+	$gravatar_id .= ($default=='404'?"":"-$default");
+	var_dump("$gravatar_id::$md5_email");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
 	// inutile de rafraichir souvent les identicon etc qui ne changent en principe pas
