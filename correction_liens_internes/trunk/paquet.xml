@@ -1,0 +1,19 @@
+<paquet
+	prefix="correction_liens_internes"
+	categorie="edition"
+	version="1.0.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="correction_liens_internes.png"
+	documentation="http://contrib.spip.net/4455"
+>	
+
+	<nom>Correction des liens internes</nom>
+	<!-- Liens internes : soyez beaux! -->
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+    <credit lien="http://thenounproject.com/noun/link/#icon-No9265">Dmitry Mirolyubov sous Licence Creative Commons - Attribution</credit>
+	<pipeline nom="pre_edition" inclure="correction_liens_internes_pipelines.php" />
+</paquet>
