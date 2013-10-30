@@ -81,18 +81,6 @@ function diogene_mots_diogene_verifier($flux){
 			}
 		}
 	}
-	return $flux;
-}
-
-/**
- * Insertion dans le pipeline diogene_traiter (Diogene)
- * Fonction s'exécutant au traitement des formulaires modifiés par Diogene
- * 
- * @param array $flux Le contexte du pipeline
- * @return array $flux le contexte modifié passé aux suivants
- */
-function diogene_mots_diogene_traiter($flux){
-	$pipeline = pipeline('diogene_objets');
 	/* TODO : vérifier 
 	 * si des nouveaux mots ont été proposées (avec mots_creer_dans_public), pour chacun :
 	 *
@@ -116,8 +104,20 @@ function diogene_mots_diogene_traiter($flux){
 	 * - si erreur, arrêt du traitement, et retour sur le formulaire avec les messages d'erreur.
 	 *   - note : pas besoin de recréer artificiellement les <option>, puisque soit les mots auront été créés (en cas de réussite), soit ils doivent être retirés (et message d'erreur)
 	 *   - note2 : il faut par contre s'assurer que le paramètre "selected" des <option> sont bien positionnés (valeur des "groupe_ID" à renvoyer)
-	 * - sinon, on continue le traitement pour associer les mots clés à l'article
+	 * - sinon, aucun erreur, on passe au traitement pour associer les mots clés à l'article
 	 */
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline diogene_traiter (Diogene)
+ * Fonction s'exécutant au traitement des formulaires modifiés par Diogene
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux le contexte modifié passé aux suivants
+ */
+function diogene_mots_diogene_traiter($flux){
+	$pipeline = pipeline('diogene_objets');
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
 
