@@ -27,4 +27,6 @@
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
 	<necessite nom="mots" compatibilite="[2.4.6;[" />
 	<necessite nom="saisies" compatibilite="[1.26.2;[" />
+
+	<utilise nom="chosen" compatibilite="[1.3.0;[" />
 </paquet>
