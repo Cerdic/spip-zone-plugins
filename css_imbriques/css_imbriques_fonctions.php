@@ -98,18 +98,18 @@ function css_imbriques_couleurs_ie ($coul) {
 		$b = css_imbriques_conv_dec255($conv[3]);
 		$a = $conv[4];
 
-				$red = dechex($r);
-				$green = dechex($g);
-				$blue = dechex($b);
-				$alpha = dechex(round($a * 255));
-				
-				if (strlen($red) == 1) $red = "0".$red;
-				if (strlen($green) == 1) $green = "0".$green;
-				if (strlen($blue) == 1) $blue = "0".$blue;
-				if (strlen($alpha) == 1) $alpha = "0".$alpha;
+		$red = dechex($r);
+		$green = dechex($g);
+		$blue = dechex($b);
+		$alpha = dechex(round($a * 255));
+		
+		if (strlen($red) == 1) $red = "0".$red;
+		if (strlen($green) == 1) $green = "0".$green;
+		if (strlen($blue) == 1) $blue = "0".$blue;
+		if (strlen($alpha) == 1) $alpha = "0".$alpha;
 
 		
-		$coul = "$alpha$red$green$blue";
+		$coul = "#$alpha$red$green$blue";
 	}
 	
 	return $coul;
