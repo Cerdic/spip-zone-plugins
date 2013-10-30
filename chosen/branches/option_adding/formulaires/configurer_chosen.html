@@ -21,12 +21,6 @@
 				<p class="explication"><:chosen:explication_selecteur:></p>
 				<input type="text" name="selecteur_commun" class="text" id="selecteur_commun" size="60" value="#ENV*{selecteur_commun}" />
 			</li>
-			<li class="editer editer_classe_create_option[ (#ENV**{erreurs}|table_valeur{classe_create_option}|oui)erreur]">
-				<label for="classe_create_option"><:chosen:label_classe_create_option:></label>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{classe_create_option})</span>]
-				<p class="explication"><:chosen:explication_classe_create_option:></p>
-				<input type="text" name="classe_create_option" class="text" id="classe_create_option" size="60" value="#ENV*{classe_create_option}" />
-			</li>
 			<li class="editer editer_prefixe_create_option[ (#ENV**{erreurs}|table_valeur{prefixe_create_option}|oui)erreur]">
 				<label for="prefixe_create_option"><:chosen:label_prefixe_create_option:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{prefixe_create_option})</span>]

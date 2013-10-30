@@ -12,15 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chosen_titre' => 'Chosen',
 
 	// E
-	'explication_classe_create_option' => "<a href='https://github.com/harvesthq/chosen/pull/166'>Chosen permet</a> de créer de nouvelles options dans un &lt;select&gt; existant. Pour activer cette possibilité sur un &lt;select&gt;, il suffit de lui attribuer la classe suivante. Si ce champ est vide, la fonctionnalité est désactivée de fait.",
-	'explication_prefixe_create_option' => "Lorsque chosen crée une nouvelle option 'nouveau' (par ex.) dans un &lt;select&gt;, elle prend la forme suivante : <code>&lt;option selected='selected' value='[PREFIX]nouveau'&gt;nouveau&lt;/option&gt;</code>. Ce paramètre
+	'explication_prefixe_create_option' => "Chosen permet de <a href='https://github.com/harvesthq/chosen/pull/166'>créer de nouvelles options</a> dans un &lt;select&gt; existant, à condition qu'il ait la classe 'chosen-create-option'.
+Lorsque chosen crée une nouvelle &lt;option&gt; (le mot 'nouveau' par ex.) dans un &lt;select&gt;, celle-ci prend la forme suivante : <code>&lt;option selected='selected' value='[PREFIX]nouveau'&gt;nouveau&lt;/option&gt;</code>. Ce paramètre
 permet de choisir l'éventuel préfixe '[PREFIX]' pour la valeur.",
 	'explication_selecteur' => 'Indiquez la cible des éléments qui déclencheront chosen. (Expression CSS ou étendue jQuery)',
 
 	// L
 	'label_active' => 'Activer "Chosen" dans le site public',
-	'label_classe_create_option' => 'Classe pour permettre la création de nouvelles options',
-	'label_prefixe_create_option' => 'Préfixe pour la valeur des <option> créées',
+	'label_prefixe_create_option' => 'Préfixe pour la valeur des &lt;option&gt; créées',
 	'label_selecteur' => 'Sélecteur',
 	'lang_create_option' => 'Créer ',
 	'lang_no_result' => 'Aucun résultat',
