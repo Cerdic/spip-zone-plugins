@@ -1,0 +1,27 @@
+[(#REM)
+SVP crée 2 tables (spip_paquets et spip-plugins) pour stocker différentes informations relatives aux plugins installés
+Ces informations n'étant pas redondantes, il nous faut piocher dans l'une et l'autre
+D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des tables.
+
+fichier modele/apropos_nom.html
+]
+  
+
+
+<!-- affichage des informations synthétiques d'un plugin -->
+
+<!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
+#SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
+<div class='apropos'>
+
+<B_utilisation>
+<BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{prefixe=#GET{leprefixe}}>
+	<BOUCLE_plugin(PLUGINS) {prefixe=#GET{leprefixe}} {tout}>
+		#NOM
+	</BOUCLE_plugin>
+</BOUCLE_utilisation>
+</B_utilisation>
+<div class="apropos-erreur">
+</div>
+<//B_utilisation>
+</div>
