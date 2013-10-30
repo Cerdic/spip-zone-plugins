@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_legend_public' => 'Mots-clés',
 
 	// L
+	'label_mots_ajouter' => "Permettre d'ajouter de nouveaux mots dans ces groupes",
 	'label_mots_facultatifs' => 'Groupes de mots facultatifs',
 	'label_mots_obligatoires' => 'Groupes de mots obligatoires'
 );

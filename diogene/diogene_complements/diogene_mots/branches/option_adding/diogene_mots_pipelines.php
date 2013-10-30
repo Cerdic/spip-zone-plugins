@@ -189,6 +189,7 @@ function diogene_mots_diogene_champs_texte($flux){
 function diogene_mots_diogene_champs_pre_edition($array){
 	$array[] = 'mots_obligatoires';
 	$array[] = 'mots_facultatifs';
+	$array[] = 'mots_ajouter';
 	return $array;
 }
 
