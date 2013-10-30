@@ -1,0 +1,30 @@
+<paquet
+	prefix="diogene_mots"
+	categorie="edition"
+	version="1.2.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.99]"
+	logo="images/diogene-128.png"
+>	
+
+	<nom>Diogene - Mots</nom>
+	<!-- Complément mots-clés pour "Diogene" -->
+
+	<auteur>b_b</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2010-2012</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="diogene_champs_texte" inclure="diogene_mots_pipelines.php" />
+
+	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="mots" compatibilite="[2.4.6;[" />
+	<necessite nom="saisies" compatibilite="[1.26.2;[" />
+</paquet>
