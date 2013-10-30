@@ -3,12 +3,16 @@ function action_image_responsive() {
 
 	$img = _request("img");
 	$taille = _request("taille");
+	$dpr = _request("dpr");
 
 	if (file_exists($img)) {
 		$terminaison = substr($img, strlen($img)-3, 3);
 		$base = sous_repertoire(_DIR_VAR, "cache-responsive");
 		$base = sous_repertoire($base, "cache-".$taille);
 		$dest = md5($img);
+		if ($dpr > 1) $dest .= "$dest-$dpr";
+		else $dpr = false;
+		
 		$dest = $base."/".$dest.".".$terminaison;
 
 		if (file_exists($dest)) {
@@ -23,9 +27,20 @@ function action_image_responsive() {
 		
 		if (!file_exists($dest) OR filemtime($dest) < filemtime($img)) {
 			include_spip("filtres/images_transforme");
+			if ($dpr) $taille = $taille * $dpr;
+			
 			$img = image_reduire($img, $taille, 0);
 			
 			if (largeur($img) > 1.5*$taille) $img = image_renforcement($img, 0.1);
+			
+			// Si ecran HD, et image d'origine suffisamment grande, 
+			// on sur-compresse pour 
+			if ($dpr && largeur($img) > 0.75*$taille && $terminaison == "jpg") {
+				$img = image_aplatir($img, "jpg", "000000", 50);
+			}
+			
+			
+			
 			
 			$img = extraire_attribut($img, "src");
 			

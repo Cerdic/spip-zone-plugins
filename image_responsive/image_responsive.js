@@ -12,16 +12,21 @@ function charger_image_responsive () {
 		
 		} else {
 		
-			if(dPR && appliquer_dPR != 0) {
-				w = parseInt(w*dPR);
+			if(dPR && dPR > 1 && appliquer_dPR != 0) {
+				
+			} else {
+				dPR = false;
 			}
 			
 			if (htactif) {
 				racine = src.substr(0, src.length-4);
 				terminaison = src.substr(src.length-3, 3);
-				var url_img = racine+"-resp"+w+"."+terminaison;
+				var url_img = racine+"-resp"+w;
+				if (dPR) url_img = url_img + "-"+dPR;
+				url_img = url_img + "."+terminaison;
 			} else {
 				var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
+				if (dPR) url_img = url_img + "&dpr="+dPR;
 			}
 			
 			this_img.attr("src", url_img);

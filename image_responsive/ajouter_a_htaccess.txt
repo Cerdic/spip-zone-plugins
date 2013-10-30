@@ -1,4 +1,4 @@
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
 
-RewriteRule (.*)\-resp([0-9]+)\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$3&taille=$2
+RewriteRule (.*)\-resp([0-9]+)(\-([0-9\.]+))?\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$5&taille=$2&dpr=$4
