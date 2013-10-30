@@ -10,7 +10,7 @@
 			<li class="editer editer_groupe_#ID_GROUPE[(#ENV{groupe_obligatoire_#ID_GROUPE}|oui)obligatoire][(#ENV{erreurs}|table_valeur{groupe_#ID_GROUPE}|oui)erreur]">
 				<label for="groupe_#ID_GROUPE">#TITRE</label>
 				[<span class='erreur_message'>(#ENV{erreurs}|table_valeur{groupe_#ID_GROUPE})</span>]
-				<select name="groupe_#ID_GROUPE[(#GET{multiple}|=={oui}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="groupe_#ID_GROUPE"[(#GET{multiple}|=={oui}|oui) multiple="multiple"]>
+				<select name="groupe_#ID_GROUPE[(#GET{multiple}|=={oui}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="groupe_#ID_GROUPE"[(#GET{multiple}|=={oui}|oui) multiple="multiple"][(#MOTS_CREER_DANS_PUBLIC|=={on}|oui) class="chosen-create-option"]>
 					[(#GET{multiple}|=={oui}|non)
 						<option value="">--</option>
 					]

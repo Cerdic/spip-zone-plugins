@@ -46,6 +46,12 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 		if (is_array($valeurs_mots)) {
 			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$valeurs_mots);
 		}
+
+		/* Paramètre pour permettre de créer des nouveaux mots dans les groupes choisis */
+		/* TODO : seulement si l'auteur a le droit d'ajouter de nouveaux mots (peut être différent pour chaque groupe de mots ?) */
+		/* TODO : parametre par groupe au lieu d'un parametre general */
+		if ($flux['args']['options_complements']['mots_creer_dans_public'] == 'on')
+			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],array('mots_creer_dans_public' => $flux['args']['options_complements']['mots_creer_dans_public']));
 		
 		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_mots',$flux['args']['contexte']);
 	}
