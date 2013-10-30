@@ -38,7 +38,10 @@ function chosen_header_prive($texte) {
 				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'"
 			};
 			var chosen_create_option = {
-				create_option: true,
+				create_option: function(term) {
+					prefix = "' . trim($config['prefixe_create_option']) . '";
+					this.select_append_option( {value: prefix + term, text: term} );
+				},
 				persistent_create_option: true,
 				skip_no_results: true,
 				create_option_text: "'.texte_script(_T('chosen:lang_create_option')).'"
@@ -96,11 +99,15 @@ function chosen_insert_head($flux) {
 				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'"
 			};
 			var chosen_create_option = {
-				create_option: true,
+				create_option: function(term) {
+					prefix = "' . trim($config['prefixe_create_option']) . '";
+					this.select_append_option( {value: prefix + term, text: term} );
+				},
 				persistent_create_option: true,
 				skip_no_results: true,
 				create_option_text: "'.texte_script(_T('chosen:lang_create_option')).'"
 			};
+			var chosen_classe_create_option = "' . trim($config['classe_create_option']) . '";
 /* ]]> */</script>'."\n";
 	}
 	return $flux;

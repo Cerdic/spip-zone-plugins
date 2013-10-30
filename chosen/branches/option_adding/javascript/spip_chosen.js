@@ -47,11 +47,15 @@ jQuery(document).ready(function(){
 	spip_chosen = function() {
 		var selecteur = (typeof(selecteur_chosen) != 'undefined') ? selecteur_chosen+',' : '';
 		var options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {});
-		var extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
-		$.extend(extended_options, options);
 		var elts = $(selecteur +" select.chosen");
-		elts.not(".chosen-create-option").chosen(options);
-		elts.filter(".chosen-create-option").chosen(extended_options);
+		if (!chosen_classe_create_option) {
+			elts.chosen(options);
+		} else {
+			var extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
+			$.extend(extended_options, options);
+			elts.not("." + chosen_classe_create_option).chosen(options);
+			elts.filter("." + chosen_classe_create_option).chosen(extended_options);			
+		}
 		spip_chosen_title();
 		spip_chosen_visible();
 		spip_chosen_table_width();
