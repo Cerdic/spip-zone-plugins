@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_prefixe_create_option' => "Chosen permet de <a href='https://github.com/harvesthq/chosen/pull/166'>créer de nouvelles options</a> dans un &lt;select&gt; existant, à condition qu'il ait la classe 'chosen-create-option'.
 Lorsque chosen crée une nouvelle &lt;option&gt; (le mot 'nouveau' par ex.) dans un &lt;select&gt;, celle-ci prend la forme suivante : <code>&lt;option selected='selected' value='[PREFIX]nouveau'&gt;nouveau&lt;/option&gt;</code>. Ce paramètre
-permet de choisir l'éventuel préfixe '[PREFIX]' pour la valeur.",
+permet de choisir l'éventuel préfixe '[PREFIX]' pour la valeur, par exemple 'chosen_'",
 	'explication_selecteur' => 'Indiquez la cible des éléments qui déclencheront chosen. (Expression CSS ou étendue jQuery)',
 
 	// L
