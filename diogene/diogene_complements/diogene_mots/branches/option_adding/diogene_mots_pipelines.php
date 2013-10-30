@@ -81,6 +81,21 @@ function diogene_mots_diogene_verifier($flux){
 			}
 		}
 	}
+	/* TODO : vérifier 
+	 * si des nouveaux mots ont été proposées (avec mots_creer_dans_public)
+	 * et si un mot avec le même titre existe déjà dans un autre groupe (ie. création impossible)
+	 * 
+	 * si possible (ie. si cet autre groupe est dans les groupes de mots du diogene) :
+	 * - sélectionner ce mot dans cet autre groupe
+	 * - message en "warning" pour indiquer le changement
+	 * - et retour sur le formulaire pour obtenir la validation de l'utilisateur
+	 * sinon :
+	 * - erreur "impossible de créer le mot *** : ce mot existe déjà dans le groupe *** - contacter l'administrateur"
+	 * - et supprimer l'<option> correspondante
+	 * 
+	 * Dans les deux cas:
+	 * - retour sur le formulaire, avec création des <options> précédemment créées en javascript par chosen + leur paramètre "selected"
+	 */
 	return $flux;
 }
 
@@ -93,6 +108,14 @@ function diogene_mots_diogene_verifier($flux){
  */
 function diogene_mots_diogene_traiter($flux){
 	$pipeline = pipeline('diogene_objets');
+	/* TODO : si des nouveaux mots ont été proposées (avec mots_creer_dans_public), les créer dans le groupe de mots 
+	 * 
+	 * en cas d'erreur :
+	 * - les mots ***, ***, ... n'ont pas pu être créés - contacter l'administratrice
+	 * - arrêt du traitement, et retour sur le formulaire avec ce message
+	 * - note : pas besoin de recréer artificiellement les <option>, puisque soit les mots auront été créés (en cas de réussite), soit ils doivent être retirés (et message d'erreur)
+	 * - note2 : il faut par contre s'assurer que le paramètre "selected" des <option> sont bien positionnés
+	 */
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
 
