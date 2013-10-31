@@ -48,17 +48,17 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	// Seule la boussole SPIP sera réinstallée par défaut.
 	// Pour les autres il faudra de toute façon adapter la boussole avant de les réinstaller
 	$maj['0.2'] = array(
-		array('maj02')
+		array('maj02_boussole')
 	);
 
 	// A partir de ce schéma, le plugin migre ses globales en configuration
 	$maj['0.3'] = array(
-		array('maj03', $defaut_config_03)
+		array('maj03_boussole', $defaut_config_03)
 	);
 
 	// A partir de ce schéma, le plugin migre la constante _BOUSSOLE_ALIAS_SERVEUR en configuration
 	$maj['0.4'] = array(
-		array('maj04', $defaut_config_04)
+		array('maj04_boussole', $defaut_config_04)
 	);
 
 	include_spip('base/upgrade');
@@ -122,7 +122,7 @@ function boussole_vider_tables($nom_meta_base_version) {
  *
  * @return void
  */
-function maj02() {
+function maj02_boussole() {
 
 	// Ajout de la table
 	maj_tables(array('spip_boussoles_extras'));
@@ -153,7 +153,7 @@ function maj02() {
  *
  * @return void
  */
-function maj03($defaut_config) {
+function maj03_boussole($defaut_config) {
 
 	// On initialise la configuration ajoutée avec celle par défaut
 	$config = $defaut_config;
@@ -207,7 +207,7 @@ function maj03($defaut_config) {
  *
  * @return void
  */
-function maj04($defaut_config) {
+function maj04_boussole($defaut_config) {
 
 	// Initialisation de la configuration migrée avec la configuration existante.
 	include_spip('inc/config');
