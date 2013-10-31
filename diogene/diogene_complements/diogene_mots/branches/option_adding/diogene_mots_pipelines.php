@@ -190,17 +190,8 @@ function diogene_mots_diogene_verifier($flux){
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_mots_diogene_traiter($flux){
-	 /* 2./ créer les nouveaux mots dans le groupe de mots 
-	 * 
-	 * en cas d'erreur :
-	 * - les mots ***, ***, ... n'ont pas pu être créés - contacter l'administratrice (message_erreur + editable)
-	 *
-	 * à la fin de la boucle
-	 * - si erreur, arrêt du traitement, et retour sur le formulaire avec les messages d'erreur.
-	 *   - note : pas besoin de recréer artificiellement les <option>, puisque soit les mots auront été créés (en cas de réussite), soit ils doivent être retirés (et message d'erreur)
-	 *   - note2 : il faut par contre s'assurer que le paramètre "selected" des <option> sont bien positionnés (valeur des "groupe_ID" à renvoyer)
-	 * - sinon, aucun erreur, on passe au traitement pour associer les mots clés à l'article
-*/
+	// -> créer les mots dans la base.
+	// -> gérer les erreurs dans traiter() ? je ne crois pas qu'il puisse en avoir
 	$pipeline = pipeline('diogene_objets');
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
