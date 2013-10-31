@@ -28,24 +28,24 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 		
 		if (intval($id_objet)) {				
 			//On récupère les mots qui sont peut être associés
-			foreach($groupes_possibles as $groupe){
-				if(in_array($groupe,$mots_obligatoires)){
-					$valeurs_mots['groupe_obligatoire_'.$groupe] = 'oui';
+			foreach($groupes_possibles as $id_groupe){
+				if(in_array($id_groupe,$mots_obligatoires)){
+					$valeurs_mots['groupe_obligatoire_'.$id_groupe] = 'oui';
 				}
-				if (_request('groupe_'.$groupe)) {
+				if (_request('groupe_'.$id_groupe)) {
 					// Pour récupérer la selection courante en cas d'erreur dans vérifier() ou traiter()
-					$valeurs_mots['groupe_'.$groupe] = _request('groupe_'.$groupe);
-				} else if (sql_getfetsel('unseul','spip_groupes_mots','id_groupe='.intval($groupe))== 'oui') {
-					$valeurs_mots['groupe_'.$groupe] = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON (mot.id_mot=mots_liens.id_mot)','mots_liens.objet='.sql_quote($objet).' AND mots_liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($groupe));
+					$valeurs_mots['groupe_'.$id_groupe] = _request('groupe_'.$id_groupe);
+				} else if (sql_getfetsel('unseul','spip_groupes_mots','id_groupe='.intval($id_groupe))== 'oui') {
+					$valeurs_mots['groupe_'.$id_groupe] = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON (mot.id_mot=mots_liens.id_mot)','mots_liens.objet='.sql_quote($objet).' AND mots_liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($id_groupe));
 				}else {
-					$result = sql_select('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON mot.id_mot=mots_liens.id_mot','mots_liens.objet='.sql_quote($objet).' AND mot.id_groupe='.intval($groupe).' AND mots_liens.id_objet='.intval($id_objet));
+					$result = sql_select('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON mot.id_mot=mots_liens.id_mot','mots_liens.objet='.sql_quote($objet).' AND mot.id_groupe='.intval($id_groupe).' AND mots_liens.id_objet='.intval($id_objet));
 					while ($row = sql_fetch($result)) {
-						$valeurs_mots['groupe_'.$groupe][] = $row['id_mot'];
+						$valeurs_mots['groupe_'.$id_groupe][] = $row['id_mot'];
 					}
 				}
-				if (_request('nouveaux_groupe_'.$groupe)) {
+				if (_request('nouveaux_groupe_'.$id_groupe)) {
 					// Pour récupérer les nouveaux mots en cas d'erreur dans vérifier() ou traiter()
-					$valeurs_mots['nouveaux_groupe_'.$groupe] = _request('nouveaux_groupe_'.$groupe);
+					$valeurs_mots['nouveaux_groupe_'.$id_groupe] = _request('nouveaux_groupe_'.$id_groupe);
 				}
 			}
 		}
@@ -203,23 +203,23 @@ function diogene_mots_diogene_traiter($flux){
 		 * Si c'est une modification d'objet il se peut qu'il faille supprimer les anciens mots
 		 * On fait une vérifications sur chaque groupe
 		 */
-		foreach($groupes_possibles as $groupe){
+		foreach($groupes_possibles as $id_groupe){
 			$mots_multiples = array();
-			$requete_groupe = is_array(_request('groupe_'.$groupe)) ? _request('groupe_'.$groupe) : array('cle' => _request('groupe_'.$groupe));
+			$requete_id_groupe = is_array(_request('groupe_'.$id_groupe)) ? _request('groupe_'.$id_groupe) : array('cle' => _request('groupe_'.$id_groupe));
 
 			// On crée les mots nouveaux si nécessaire
 			if (test_plugin_actif('chosen')) {
 				include_spip('action/editer_mot');
 				$prefixe_chosen = "chosen_";
-				foreach($requete_groupe as $cle => $mot){
+				foreach($requete_id_groupe as $cle => $mot){
 					if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
 						// prefixe "chosen_" -> c'est un nouveau mot, on le crée
 						$titre = substr($mot, strlen($prefixe_chosen));
-						$id_mot = mot_inserer($groupe);
+						$id_mot = mot_inserer($id_groupe);
 						$c = array('titre' => $titre);
 						mot_modifier($id_mot, $c);
 						// on remplace le titre par le nouvel identifiant pour pouvoir associer le mot ensuite
-						$requete_groupe[$cle] = $id_mot;
+						$requete_id_groupe[$cle] = $id_mot;
 					}
 				}
 			}
@@ -227,12 +227,12 @@ function diogene_mots_diogene_traiter($flux){
 			/**
 			 * Si le select est multiple
 			 */
-			if(count($requete_groupe) > 1){
-				$result = sql_select('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
+			if(count($requete_id_groupe) > 1){
+				$result = sql_select('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
 				while ($row = sql_fetch($result)) {
 					$mots_multiples[] = $row['id_mot'];
 				}
-				foreach($requete_groupe as $cle => $mot){
+				foreach($requete_id_groupe as $cle => $mot){
 					/**
 					 * Si le mot est déja dans les mots, on le supprime juste
 					 * de l'array des mots originaux
@@ -249,8 +249,8 @@ function diogene_mots_diogene_traiter($flux){
 			 * Si le select est simple
 			 */
 			else{
-				$id_mot = array_pop($requete_groupe);
-				if(!is_array($mots_uniques = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON (mot.id_mot=liens.id_mot)','liens.objet="'.$flux['args']['type'].'" AND liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($groupe))))
+				$id_mot = array_pop($requete_id_groupe);
+				if(!is_array($mots_uniques = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON (mot.id_mot=liens.id_mot)','liens.objet="'.$flux['args']['type'].'" AND liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($id_groupe))))
 					$mots_uniques = array();
 				if(in_array($id_mot, $mots_uniques)){
 					unset($mots_uniques);
