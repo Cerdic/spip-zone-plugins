@@ -44,7 +44,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 		'titre' => "titre, '' AS lang",
 		'date' => '',
 		'principale' => 'oui',
-
+		
 		'field' => array(
 			'id_dictionnaire' => 'bigint(21) not null',
 			'titre' => 'text not null default ""',
@@ -63,7 +63,10 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'titre', 'descriptif',
 			'type_defaut','statut'
 		),
-
+		'rechercher_champs' => array(
+		  'titre' => 8, 'descriptif' => 5,
+		),
+		
 		'statut' => array(
 			array(
 				'champ'=>'statut',
@@ -124,6 +127,10 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'type', 'casse', 'statut',
 			'lang', 'date',
 		),
+		'rechercher_champs' => array(
+		  'titre' => 8, 'texte' => 4, 'termes' => 6,
+		),
+		
 		'statut' => array(
 			array(
 				'champ'=>'statut',
