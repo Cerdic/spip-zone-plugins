@@ -136,8 +136,28 @@ function diogene_mots_diogene_verifier($flux){
 					// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
 				}
 			}
-			// TODO : On cherche si ces nouveaux mots existent déjà dans d'autres groupes
+			$mots_nouveaux['groupe_'.$id_groupe] = $mots_nouveaux_groupe;
+			// Si ces nouveaux mots existent déjà dans d'autres groupes, on demande confirmation
+			if (!count($flux['data']['groupe_'.$id_groupe])) {
+				include_spip('base/abstract_sql');
+				$msg = '';
+				foreach ($mots_nouveaux_groupe as $titre){
+					// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
+					$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
+					if ($champs_mot['id_groupe'] !== $id_groupe) {
+						// Le mot existe déjà, dans un autre groupe
+						$msg = $msg . "Le mot '".$titre."' existe déjà dans le groupe '". $champs_mot['type'] . "'. ";
+					}
+				}
+				if ($msg AND !_request('confirm_groupe_'.$id_groupe)) {
+					// on demande confirmation pour la création
+					$flux['data']['groupe_'.$id_groupe] = $msg."Confirmer tout de même la création dans ce groupe ?".
+						" <input type='hidden' name='confirm_groupe_".$id_groupe."' value='1' />";
+				}
+			}
 		}
+		// Hack : pas d'autre moyen pour recréer les <option> dans le <select> que de passer la table dans les erreurs !
+		$flux['data']['liste_des_mots_nouveaux'] = $mots_nouveaux;
 	}
 	return $flux;
 }
