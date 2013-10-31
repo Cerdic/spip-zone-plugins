@@ -9,7 +9,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour le pipeline
-function tickets_notifications(){}
+function tickets_notifications($flux){
+	return $flux;
+}
 
 /**
  * 
