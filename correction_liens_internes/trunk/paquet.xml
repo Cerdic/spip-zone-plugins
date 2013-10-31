@@ -1,7 +1,7 @@
 <paquet
 	prefix="correction_liens_internes"
 	categorie="edition"
-	version="1.0.1"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.99]"
 	logo="correction_liens_internes.png"

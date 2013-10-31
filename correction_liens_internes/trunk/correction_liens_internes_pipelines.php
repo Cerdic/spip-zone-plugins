@@ -11,10 +11,17 @@ function correction_liens_internes_pre_edition($flux){
     }
 
 function correction_liens_internes_correction($texte){
-    $url_site = preg_quote(url_de_base());
+	// traiter d'autre domaines ?
+	if($domaines = correction_liens_internes_autres_domaines() ){
+		$domaines = array_unique(array_merge(array(url_de_base()),$domaines));
+		array_walk($domaines, function(&$v) { $v = preg_quote($v); });
+		$url_site = '('.join('|',$domaines).')';
+	} else {
+		$url_site = preg_quote(url_de_base());
+	}
     // on repère les mauvaises urls
-    $match=array(); 
-    preg_match_all("#\[(.*)->($url_site(.*))\]#U",$texte,$match,PREG_SET_ORDER); 
+    $match=array();
+    preg_match_all("#\[(.*)->($url_site(.*))\]#U",$texte,$match,PREG_SET_ORDER);
     include_spip("inc/urls");
     $type_urls = ($GLOBALS['type_urls'] === 'page'
                                 AND $GLOBALS['meta']['type_urls'])
@@ -53,4 +60,32 @@ function correction_liens_internes_correction($texte){
         }
     return $texte;
     }
-?>
+
+
+function correction_liens_internes_autres_domaines(){
+	$autres_domaines = array();
+	// si la constante est définie, prendre en compte les domaines déclarés
+	if( defined('CORRECTION_LIENS_INTERNES_AUTRES_DOMAINES')){
+		$autres_domaines = preg_split('#([\s,|])+#i',CORRECTION_LIENS_INTERNES_AUTRES_DOMAINES);
+	}
+	// si le plugin multidomaine est actif, prendre en compte tous les domaines déclarés
+	if(test_plugin_actif('multidomaines')){
+		$config_multi = lire_config('multidomaines');
+		foreach($config_multi as $key=>$value){
+			if(preg_match('#editer_url#',$key) && $value) {
+				$autres_domaines[] = $value;
+			}
+		}
+	}
+	// mettre en forme les domaines
+	array_walk($autres_domaines, function(&$v) {
+		// ajouter un slash final si nécessaire
+		if(substr($v,-1)!='/'){$v = $v.'/';}
+		// ajouter http:// par défaut si pas de scheme
+		$infos = parse_url($v);
+		if(!$infos['scheme']){
+			$v = 'http://'.$v;
+		}
+	});
+	return $autres_domaines;
+}
