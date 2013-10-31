@@ -1,11 +1,21 @@
 <B_boussoles_liees>
-#BOITE_OUVRIR{'', raccourcis}
-	[(#TOTAL_BOUCLE|singulier_ou_pluriel{boussole:info_site_boussole, boussole:info_site_boussoles})]
-	<ul>
+	<div class="liste-objets boussoles-liees">
+		<table class="spip liste">
+			[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{boussole:info_site_boussole, boussole:info_site_boussoles}})</strong></caption>]
+			<tbody>
 <BOUCLE_boussoles_liees(BOUSSOLES) {id_syndic}>
-		[(#SET{nom_boussole, [<a href="#URL_ECRIRE{boussoles, alias=#AKA_BOUSSOLE}">(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})</a>]})]
-		<li>#GET{nom_boussole}</li>
+				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+					<td class="titre principale">
+						<a[ href="(#URL_ECRIRE{boussole}|parametre_url{alias, #AKA_BOUSSOLE})"]>
+							[(#AKA_BOUSSOLE|boussole_traduire{nom_boussole})]
+						</a>
+					</td>
+					<td class="lien">
+						[(#BOUTON_ACTION{<:boussole:bouton_synchroniser:>, #URL_ACTION_AUTEUR{client_synchroniser_site, #AKA_BOUSSOLE:#ID_SYNDIC, #SELF}, '', '', ''})]
+					</td>
+				</tr>
 </BOUCLE_boussoles_liees>
-	</ul>
-#BOITE_FERMER
+			</tbody>
+		</table>
+	</div>
 </B_boussoles_liees>

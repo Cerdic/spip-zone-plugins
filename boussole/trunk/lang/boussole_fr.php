@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_retirer_boussole' => 'Retirer la boussole',
 	'bouton_retirer_serveur' => 'Retirer le serveur',
 	'bouton_supprimer' => 'Supprimer',
+	'bouton_synchroniser' => 'Synchroniser les données',
 	'bulle_afficher' => 'Afficher dans les modèles',
 	'bulle_aller_site' => 'Se rendre sur la page du site référencé',
 	'bulle_cacher' => 'Ne pas afficher dans les modèles',
