@@ -121,10 +121,10 @@ function diogene_mots_diogene_verifier($flux){
 		/**
 		 * On traite chaque groupe séparément
 		 */
-		$mots_nouveaux = array();
+		$valeurs_mots_nouveaux = array();
 		$valeurs_mots = array();
 		foreach($groupes_possibles as $id_groupe){
-			$mots_nouveaux_groupe = array();
+			$valeurs_mots_nouveaux_groupe = array();
 			$valeurs_mots_groupe = array();
 			// Trouver les nouveaux mots proposés
 			if (is_array(_request('groupe_'.$id_groupe))){
@@ -132,14 +132,14 @@ function diogene_mots_diogene_verifier($flux){
 					if ($prefixe_chosen_ok) {
 						// le préfixe est une chaine de caractères, on la retire quand elle existe
 						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
-							$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+							$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 						} else {
 							// c'est un mot existant
 							$valeurs_mots_groupe[] = $mot;
 						}
 					} else if (!is_numeric($mot)) {
 						// le préfixe n'existe pas ou est un entier, on le retire quand le mot n'est pas lui même un entier
-						$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+						$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 					} else {
 						// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
 						// on le garde par contre dans les valeurs_mots
@@ -147,13 +147,13 @@ function diogene_mots_diogene_verifier($flux){
 					}
 				}
 			}
-			$mots_nouveaux['groupe_'.$id_groupe] = $mots_nouveaux_groupe;
+			$valeurs_mots_nouveaux['groupe_'.$id_groupe] = $valeurs_mots_nouveaux_groupe;
 			$valeurs_mots['groupe_'.$id_groupe] = $valeurs_mots_groupe;
 			// Si ces nouveaux mots existent déjà dans d'autres groupes, on demande confirmation
 			if (!count($flux['data']['groupe_'.$id_groupe])) {
 				include_spip('base/abstract_sql');
 				$msg = '';
-				foreach ($mots_nouveaux_groupe as $titre){
+				foreach ($valeurs_mots_nouveaux_groupe as $titre){
 					// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
 					$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
 					if ($champs_mot['id_groupe'] !== $id_groupe) {
@@ -169,7 +169,7 @@ function diogene_mots_diogene_verifier($flux){
 			}
 		}
 		// Hack : pas d'autre moyen pour recréer les <option> dans le <select> que de passer la table dans les erreurs !
-		$flux['data']['liste_des_mots_nouveaux'] = $mots_nouveaux;
+		$flux['data']['valeurs_mots_nouveaux'] = $valeurs_mots_nouveaux;
 		$flux['data']['valeurs_mots'] = $valeurs_mots;
 	}
 	return $flux;
