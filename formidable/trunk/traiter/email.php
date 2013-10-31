@@ -69,7 +69,7 @@ function traiter_email_dist($args, $retours){
 			}
 			$nom_envoyeur = trim(_L($options['champ_nom'], $a_remplacer));
 		}
-		if (!$nom_envoyeur) $nom_envoyeur = $GLOBALS['meta']['nom_site'];
+		if (!$nom_envoyeur) $nom_envoyeur = $nom_site_spip;
 		
 		// On récupère le sujet s'il existe sinon on le construit
 		if ($options['champ_sujet']){
@@ -112,7 +112,7 @@ function traiter_email_dist($args, $retours){
 		$corps = array(
 			'html' => $html,
 			'texte' => $texte,
-			'nom_envoyeur' => $nom_envoyeur
+			'nom_envoyeur' => filtrer_entites($nom_envoyeur),
 		);
 		// Si l'utilisateur n'a pas indiqué autrement, on met le courriel de l'envoyeur dans
 		// Reply-To et on laisse le from par defaut de Facteur car sinon ca bloque sur les
@@ -173,7 +173,7 @@ function traiter_email_dist($args, $retours){
 			$corps = array(
 				'html' => $html_accuse,
 				'texte' => $texte,
-				'nom_envoyeur' => $nom_site_spip
+				'nom_envoyeur' => filtrer_entites($nom_site_spip),
 			);
 
 			$ok = $envoyer_mail($courriel_envoyeur, $sujet_accuse, $corps, $courriel_from, "X-Originating-IP: ".$GLOBALS['ip']);
