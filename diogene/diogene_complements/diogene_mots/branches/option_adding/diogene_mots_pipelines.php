@@ -127,9 +127,10 @@ function diogene_mots_diogene_verifier($flux){
 					}
 				}
 				// Mise à jour des variables
-				// TODO - verifier si on doit vraiment envoyer tout le temps, ou seulement en cas d'erreur
+				// On envoie même s'il n'y a pas d'erreur, ça servira à traiter()
 				set_request('groupe_'.$id_groupe, $valeurs_mots_groupe);
 				set_request('nouveaux_groupe_'.$id_groupe, $valeurs_mots_nouveaux_groupe);
+
 				// Est-ce que ces nouveaux mots existent déjà dans d'autres groupes ?
 				include_spip('base/abstract_sql');
 				$msg = '';
@@ -175,8 +176,8 @@ function diogene_mots_diogene_verifier($flux){
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_mots_diogene_traiter($flux){
-	// -> créer les mots dans la base.
-	// -> gérer les erreurs dans traiter() ? je ne crois pas qu'il puisse en avoir
+	include_spip('action/editer_mot');
+
 	$pipeline = pipeline('diogene_objets');
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
@@ -205,21 +206,19 @@ function diogene_mots_diogene_traiter($flux){
 		 */
 		foreach($groupes_possibles as $id_groupe){
 			$mots_multiples = array();
-			$requete_id_groupe = is_array(_request('groupe_'.$id_groupe)) ? _request('groupe_'.$id_groupe) : array('cle' => _request('groupe_'.$id_groupe));
-
+			$requete_id_groupe = _request('groupe_'.$id_groupe);
 			// On crée les mots nouveaux si nécessaire
 			if (test_plugin_actif('chosen')) {
-				include_spip('action/editer_mot');
 				$prefixe_chosen = "chosen_";
-				foreach($requete_id_groupe as $cle => $mot){
-					if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
-						// prefixe "chosen_" -> c'est un nouveau mot, on le crée
-						$titre = substr($mot, strlen($prefixe_chosen));
+				foreach(_request('nouveaux_groupe_'.$id_groupe) as $cle => $titre){
+					if ($titre_propre = corriger_caracteres(trim($titre))) {
 						$id_mot = mot_inserer($id_groupe);
-						$c = array('titre' => $titre);
-						mot_modifier($id_mot, $c);
-						// on remplace le titre par le nouvel identifiant pour pouvoir associer le mot ensuite
-						$requete_id_groupe[$cle] = $id_mot;
+						$c = array('titre' => $titre_propre);
+						// C'est sale - TODO - utiliser plutôt mot_modifier($id_mot, $c)
+						if (sql_updateq('spip_mots', $c, 'id_mot='.$id_mot)) {
+							// un fois créé, on ajoute l'identifiant pour pouvoir associer le mot ensuite
+							$requete_id_groupe[] = $id_mot;
+						}
 					}
 				}
 			}
