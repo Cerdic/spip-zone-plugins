@@ -118,11 +118,11 @@ function diogene_mots_diogene_verifier($flux){
 		/**
 		 * On traite chaque groupe séparément
 		 */
-		foreach($groupes_possibles as $groupe){
+		foreach($groupes_possibles as $id_groupe){
 			$mots_nouveaux = array();
 			// Trouver les nouveaux mots proposés
-			if (is_array(_request('groupe_'.$groupe))){
-				foreach(_request('groupe_'.$groupe) as $cle => $mot){
+			if (is_array(_request('groupe_'.$id_groupe))){
+				foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
 					if ($prefixe_chosen_ok) {
 						// le préfixe est une chaine de caractères, on la retire quand elle existe
 						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
