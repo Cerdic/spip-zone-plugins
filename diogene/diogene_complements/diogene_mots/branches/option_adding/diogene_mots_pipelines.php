@@ -122,6 +122,11 @@ function diogene_mots_diogene_verifier($flux){
 		// différencier les nouveaux mots des index "id_mot". On fera au mieux.
 		$prefixe_chosen_ok = ($prefixe_chosen && !is_numeric($prefixe_chosen));
 
+		// Champs cachés pour la confirmation
+		$champs_hidden = '';
+		$erreurs = array();
+		$au_moins_une_erreur = false;
+
 		/**
 		 * On traite chaque groupe séparément
 		 */
@@ -150,27 +155,39 @@ function diogene_mots_diogene_verifier($flux){
 				}
 			}
 			// Mise à jour des variables
+			// TODO - verifier si on doit vraiment envoyer tout le temps, ou seulement en cas d'erreur
 			set_request('groupe_'.$id_groupe, $valeurs_mots_groupe);
 			set_request('nouveaux_groupe_'.$id_groupe, $valeurs_mots_nouveaux_groupe);
-
-			// Si ces nouveaux mots existent déjà dans d'autres groupes, on demande confirmation
-			if (!count($flux['data']['groupe_'.$id_groupe])) {
-				include_spip('base/abstract_sql');
-				$msg = '';
-				foreach ($valeurs_mots_nouveaux_groupe as $titre){
-					// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
-					$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
-					if ($champs_mot['id_groupe'] !== $id_groupe) {
-						// Le mot existe déjà, dans un autre groupe
-						$msg = $msg . "Le mot '".$titre."' existe déjà dans le groupe '". $champs_mot['type'] . "'. ";
-					}
-				}
-				if ($msg AND !_request('confirm_groupe_'.$id_groupe)) {
-					// on demande confirmation pour la création
-					$flux['data']['groupe_'.$id_groupe] = $msg."Confirmer tout de même la création dans ce groupe ?".
-						" <input type='hidden' name='confirm_groupe_".$id_groupe."' value='1' />";
+			// Est-ce que ces nouveaux mots existent déjà dans d'autres groupes ?
+			include_spip('base/abstract_sql');
+			$msg = '';
+			foreach ($valeurs_mots_nouveaux_groupe as $titre){
+				// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
+				$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
+				if ($champs_mot['id_groupe'] !== $id_groupe) {
+					// Le mot existe déjà, dans un autre groupe
+					$msg = $msg . _T('diogene_mots:erreur_mot_dans_autre_groupe', array('mot' => $titre, 'groupe' => $champs_mot['type']));
 				}
 			}
+
+			if ($msg !== '') {
+				// Si oui, est-ce qu'on a déjà demandé confirmation pour les nouveaux mots ?
+				$valeurs_mots_nouveaux_groupe_hidden = unserialize(_request('confirm_nouveaux_groupe_'.$id_groupe));
+				if(!$valeurs_mots_nouveaux_groupe_hidden
+					|| array_diff($valeurs_mots_nouveaux_groupe_hidden, $valeurs_mots_nouveaux_groupe)
+					|| array_diff($valeurs_mots_nouveaux_groupe, $valeurs_mots_nouveaux_groupe_hidden)) {
+					// Pas de confirmation, puisqu'il y a eu un changement dans les mots nouveaux
+					// On envoie donc un message d'erreur pour confirmation
+					$msg = $msg . _T('diogene_mots:erreur_confirmer_creation_mots_nouveaux');
+					$au_moins_une_erreur = true;
+				}
+				// Et dans tous les cas, on prépare un champ <input> hidden avec les nouveaux mots
+				$erreurs['groupe_'.$id_groupe] = $msg . " <input type='hidden' name='confirm_nouveaux_groupe_".$id_groupe."' value='".serialize($valeurs_mots_nouveaux_groupe)."' />";
+			}
+		}
+		// S'il y a des erreurs, on les envoie, avec tous les champs cachés
+		if ($au_moins_une_erreur) {
+			$flux['data'] = array_merge($flux['data'], $erreurs);
 		}
 	}
 	return $flux;
