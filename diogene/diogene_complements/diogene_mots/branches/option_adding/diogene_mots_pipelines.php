@@ -79,7 +79,6 @@ function diogene_mots_diogene_verifier($flux){
 					$flux['data']['groupe_'.$id_groupe] = _T('info_obligatoire');
 				}
 			}
-			$mots_nouveaux['groupe_'.$id_groupe] = $mots_nouveaux_groupe;
 		}
 
 		/* TODO : vérifier 
