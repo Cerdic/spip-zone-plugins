@@ -149,11 +149,12 @@ function diogene_mots_diogene_verifier($flux){
 				include_spip('base/abstract_sql');
 				$msg = '';
 				foreach ($valeurs_mots_nouveaux_groupe as $titre){
-					// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
-					$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
-					if ($champs_mot['id_groupe'] && $champs_mot['id_groupe'] !== $id_groupe) {
+					$titre_groupe = sql_getfetsel('g.titre',
+						'spip_mots AS m LEFT JOIN spip_groupes_mots AS g ON m.id_groupe=g.id_groupe',
+						"m.titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
+					if ($titre_groupe) {
 						// Le mot existe déjà, dans un autre groupe
-						$msg = $msg . _T('diogene_mots:erreur_mot_dans_autre_groupe', array('mot' => $titre, 'groupe' => $champs_mot['type']));
+						$msg = $msg . _T('diogene_mots:erreur_mot_dans_autre_groupe', array('mot' => $titre, 'groupe' => $titre_groupe));
 					}
 				}
 
