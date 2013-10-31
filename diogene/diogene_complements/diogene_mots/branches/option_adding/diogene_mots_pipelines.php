@@ -32,7 +32,10 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 				if(in_array($groupe,$mots_obligatoires)){
 					$valeurs_mots['groupe_obligatoire_'.$groupe] = 'oui';
 				}
-				if (sql_getfetsel('unseul','spip_groupes_mots','id_groupe='.intval($groupe))== 'oui') {
+				if ($flux['args']['contexte']['erreurs']['valeurs_mots']['groupe_'.$groupe]) {
+					// Hack pour récupérer la selection en cas d'erreur dans vérifier() ou traiter()
+					$valeurs_mots['groupe_'.$groupe] = $flux['args']['contexte']['erreurs']['valeurs_mots']['groupe_'.$groupe];
+				} else if (sql_getfetsel('unseul','spip_groupes_mots','id_groupe='.intval($groupe))== 'oui') {
 					$valeurs_mots['groupe_'.$groupe] = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON (mot.id_mot=mots_liens.id_mot)','mots_liens.objet='.sql_quote($objet).' AND mots_liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($groupe));
 				}else {
 					$result = sql_select('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as mots_liens ON mot.id_mot=mots_liens.id_mot','mots_liens.objet='.sql_quote($objet).' AND mot.id_groupe='.intval($groupe).' AND mots_liens.id_objet='.intval($id_objet));
@@ -119,8 +122,10 @@ function diogene_mots_diogene_verifier($flux){
 		 * On traite chaque groupe séparément
 		 */
 		$mots_nouveaux = array();
+		$valeurs_mots = array();
 		foreach($groupes_possibles as $id_groupe){
 			$mots_nouveaux_groupe = array();
+			$valeurs_mots_groupe = array();
 			// Trouver les nouveaux mots proposés
 			if (is_array(_request('groupe_'.$id_groupe))){
 				foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
@@ -128,15 +133,22 @@ function diogene_mots_diogene_verifier($flux){
 						// le préfixe est une chaine de caractères, on la retire quand elle existe
 						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
 							$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+						} else {
+							// c'est un mot existant
+							$valeurs_mots_groupe[] = $mot;
 						}
 					} else if (!is_numeric($mot)) {
 						// le préfixe n'existe pas ou est un entier, on le retire quand le mot n'est pas lui même un entier
 						$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+					} else {
+						// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
+						// on le garde par contre dans les valeurs_mots
+						$valeurs_mots_groupe[] = $mot;
 					}
-					// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
 				}
 			}
 			$mots_nouveaux['groupe_'.$id_groupe] = $mots_nouveaux_groupe;
+			$valeurs_mots['groupe_'.$id_groupe] = $valeurs_mots_groupe;
 			// Si ces nouveaux mots existent déjà dans d'autres groupes, on demande confirmation
 			if (!count($flux['data']['groupe_'.$id_groupe])) {
 				include_spip('base/abstract_sql');
@@ -158,6 +170,7 @@ function diogene_mots_diogene_verifier($flux){
 		}
 		// Hack : pas d'autre moyen pour recréer les <option> dans le <select> que de passer la table dans les erreurs !
 		$flux['data']['liste_des_mots_nouveaux'] = $mots_nouveaux;
+		$flux['data']['valeurs_mots'] = $valeurs_mots;
 	}
 	return $flux;
 }
