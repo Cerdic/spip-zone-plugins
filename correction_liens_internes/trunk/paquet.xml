@@ -12,8 +12,10 @@
 	<!-- Liens internes : soyez beaux! -->
 
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
-
+    <auteur>Nicolas Dorigny</auteur>
+    
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
     <credit lien="http://thenounproject.com/noun/link/#icon-No9265">Dmitry Mirolyubov sous Licence Creative Commons - Attribution</credit>
 	<pipeline nom="pre_edition" inclure="correction_liens_internes_pipelines.php" />
+    <utilise nom="multidomaines" />
 </paquet>
