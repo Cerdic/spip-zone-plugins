@@ -103,12 +103,6 @@ function diogene_mots_diogene_verifier($flux){
 			include_spip('inc/editer_mots');
 			$groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
 
-			// Le préfixe ajouté par chosen sur les nouveaux mots proposés
-			$prefixe_chosen = lire_config('chosen/prefixe_create_option');
-			// S'il n'y a pas de préfixe, ou que le préfixe est un nombre, on ne peut pas
-			// différencier les nouveaux mots des index "id_mot". On fera au mieux.
-			$prefixe_chosen_ok = ($prefixe_chosen && !is_numeric($prefixe_chosen));
-
 			// Champs cachés pour la confirmation
 			$champs_hidden = '';
 			$erreurs = array();
@@ -121,24 +115,15 @@ function diogene_mots_diogene_verifier($flux){
 				// Lister les mots sélectionnés dans le groupe et séparer entre mots existants et mots nouveaux créés avec chosen
 				$valeurs_mots_groupe = array();
 				$valeurs_mots_nouveaux_groupe = array();
-				if (is_array(_request('groupe_'.$id_groupe))){
-					foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
-						if ($prefixe_chosen_ok) {
-							// le préfixe est une chaine de caractères, on la retire quand elle existe
-							if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
-								$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
-							} else {
-								// c'est un mot existant
-								$valeurs_mots_groupe[] = $mot;
-							}
-						} else if (!is_numeric($mot)) {
-							// le préfixe n'existe pas ou est un nombre, on le retire quand le mot n'est pas lui même un nombre
-							$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
-						} else {
-							// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
-							// on suppose donc que c'est un mot existant
-							$valeurs_mots_groupe[] = $mot;
-						}
+				$requete_groupe = is_array(_request('groupe_'.$id_groupe)) ? _request('groupe_'.$id_groupe) : array('cle' => _request('groupe_'.$id_groupe));
+				$prefixe_chosen = "chosen_";
+				foreach($requete_groupe as $cle => $mot){
+					if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
+						// prefixe "chosen_" -> c'est un mot ajouté
+						$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+					} else {
+						// c'est un mot existant
+						$valeurs_mots_groupe[] = $mot;
 					}
 				}
 				// Mise à jour des variables
