@@ -20,7 +20,7 @@
 					[(#GET{multiple}|=={oui}|non)
 					<option value="#ID_MOT"[(#ENV{groupe_#ID_GROUPE}|is_array|oui)[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]][(#ENV{groupe_#ID_GROUPE}|is_array|non)[(#ID_MOT|=={#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]]>[(#TITRE|supprimer_numero)]</option>]
 					</BOUCLE_mots>
-					<BOUCLE_mot_nouveaux(DATA){source table, #ENV{erreurs}|table_valeur{valeurs_mots_nouveaux}|table_valeur{groupe_#ID_GROUPE}}>
+					<BOUCLE_mot_nouveaux(DATA){source table, #ENV{nouveaux_groupe_#ID_GROUPE}}>
 						<option value="#VALEUR" selected="selected">#VALEUR</option>
 					</BOUCLE_mot_nouveaux>
 				</select>
