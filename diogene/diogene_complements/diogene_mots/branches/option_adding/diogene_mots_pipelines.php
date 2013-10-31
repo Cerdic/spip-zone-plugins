@@ -80,32 +80,64 @@ function diogene_mots_diogene_verifier($flux){
 				}
 			}
 		}
+
+		/* TODO : vérifier 
+		* si des nouveaux mots ont été proposées (avec mots_creer_dans_public), pour chacun :
+		*
+		* 1./ si un mot avec le même titre existe déjà dans un autre groupe (ie. création impossible)
+		* 
+		* 1a./ si possible (ie. si cet autre groupe est dans les groupes de mots du diogene) :
+		* - mettre "selected" sur ce mot dans l'autre groupe
+		* - message en "warning" pour indiquer le changement
+		* - et retour sur le formulaire pour obtenir la validation de l'utilisateur (message_erreur + editable)
+		* 1b./ sinon :
+		* - erreur "impossible de créer le mot *** : ce mot existe déjà dans le groupe *** - contacter l'administrateur"
+		* - supprimer l'<option> correspondante
+		* - retour sur le formulaire (message_erreur + editable)
+		* 
+		*/
+		$mots_obligatoires = is_array(unserialize($options_complements['mots_obligatoires']))
+			? unserialize($options_complements['mots_obligatoires'])
+			: array();
+		$mots_facultatifs = is_array(unserialize($options_complements['mots_facultatifs']))
+			? unserialize($options_complements['mots_facultatifs'])
+			: array();
+
+		/**
+		 * On traite les mots clés obligatoires ou pas
+		 */ 
+		include_spip('inc/editer_mots');
+		$groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
+
+		// Le préfixe ajouté par chosen sur les nouveaux mots proposés
+		$prefixe_chosen = lire_config('chosen/prefixe_create_option');
+		// S'il n'y a pas de préfixe, ou que le préfixe est un nombre, on ne peut pas 
+		// différencier les nouveaux mots des index "id_mot". On fera au mieux.
+		$prefixe_chosen_ok = ($prefixe_chosen && !is_numeric($prefixe_chosen));
+
+		/**
+		 * On traite chaque groupe séparément
+		 */
+		foreach($groupes_possibles as $groupe){
+			$mots_nouveaux = array();
+			// Trouver les nouveaux mots proposés
+			if (is_array(_request('groupe_'.$groupe))){
+				foreach(_request('groupe_'.$groupe) as $cle => $mot){
+					if ($prefixe_chosen_ok) {
+						// le préfixe est une chaine de caractères, on la retire quand elle existe
+						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
+							$mots_nouveaux[] = substr($mot, strlen($prefixe_chosen));
+						}
+					} else if (!is_numeric($mot)) {
+						// le préfixe n'existe pas ou est un entier, on le retire quand le mot n'est pas lui même un entier
+						$mots_nouveaux[] = substr($mot, strlen($prefixe_chosen));
+					}
+					// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
+				}
+			}
+			// TODO : On cherche si ces nouveaux mots existent déjà dans d'autres groupes
+		}
 	}
-	/* TODO : vérifier 
-	 * si des nouveaux mots ont été proposées (avec mots_creer_dans_public), pour chacun :
-	 *
-	 * 1./ si un mot avec le même titre existe déjà dans un autre groupe (ie. création impossible)
-	 * 
-	 * 1a./ si possible (ie. si cet autre groupe est dans les groupes de mots du diogene) :
-	 * - mettre "selected" sur ce mot dans l'autre groupe
-	 * - message en "warning" pour indiquer le changement
-	 * - et retour sur le formulaire pour obtenir la validation de l'utilisateur (message_erreur + editable)
-	 * 1b./ sinon :
-	 * - erreur "impossible de créer le mot *** : ce mot existe déjà dans le groupe *** - contacter l'administrateur"
-	 * - supprimer l'<option> correspondante
-	 * - retour sur le formulaire (message_erreur + editable)
-	 * 
-	 * 2./ créer les nouveaux mots dans le groupe de mots 
-	 * 
-	 * en cas d'erreur :
-	 * - les mots ***, ***, ... n'ont pas pu être créés - contacter l'administratrice (message_erreur + editable)
-	 *
-	 * à la fin de la boucle
-	 * - si erreur, arrêt du traitement, et retour sur le formulaire avec les messages d'erreur.
-	 *   - note : pas besoin de recréer artificiellement les <option>, puisque soit les mots auront été créés (en cas de réussite), soit ils doivent être retirés (et message d'erreur)
-	 *   - note2 : il faut par contre s'assurer que le paramètre "selected" des <option> sont bien positionnés (valeur des "groupe_ID" à renvoyer)
-	 * - sinon, aucun erreur, on passe au traitement pour associer les mots clés à l'article
-	 */
 	return $flux;
 }
 
@@ -117,6 +149,17 @@ function diogene_mots_diogene_verifier($flux){
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_mots_diogene_traiter($flux){
+	 /* 2./ créer les nouveaux mots dans le groupe de mots 
+	 * 
+	 * en cas d'erreur :
+	 * - les mots ***, ***, ... n'ont pas pu être créés - contacter l'administratrice (message_erreur + editable)
+	 *
+	 * à la fin de la boucle
+	 * - si erreur, arrêt du traitement, et retour sur le formulaire avec les messages d'erreur.
+	 *   - note : pas besoin de recréer artificiellement les <option>, puisque soit les mots auront été créés (en cas de réussite), soit ils doivent être retirés (et message d'erreur)
+	 *   - note2 : il faut par contre s'assurer que le paramètre "selected" des <option> sont bien positionnés (valeur des "groupe_ID" à renvoyer)
+	 * - sinon, aucun erreur, on passe au traitement pour associer les mots clés à l'article
+*/
 	$pipeline = pipeline('diogene_objets');
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
