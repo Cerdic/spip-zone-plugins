@@ -207,6 +207,23 @@ function diogene_mots_diogene_traiter($flux){
 			$mots_multiples = array();
 			$requete_groupe = is_array(_request('groupe_'.$groupe)) ? _request('groupe_'.$groupe) : array('cle' => _request('groupe_'.$groupe));
 
+			// On crée les mots nouveaux si nécessaire
+			if (test_plugin_actif('chosen')) {
+				include_spip('action/editer_mot');
+				$prefixe_chosen = "chosen_";
+				foreach($requete_groupe as $cle => $mot){
+					if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
+						// prefixe "chosen_" -> c'est un nouveau mot, on le crée
+						$titre = substr($mot, strlen($prefixe_chosen));
+						$id_mot = mot_inserer($groupe);
+						$c = array('titre' => $titre);
+						mot_modifier($id_mot, $c);
+						// on remplace le titre par le nouvel identifiant pour pouvoir associer le mot ensuite
+						$requete_groupe[$cle] = $id_mot;
+					}
+				}
+			}
+
 			/**
 			 * Si le select est multiple
 			 */
