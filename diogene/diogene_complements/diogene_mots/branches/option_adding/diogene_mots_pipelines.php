@@ -118,19 +118,20 @@ function diogene_mots_diogene_verifier($flux){
 		/**
 		 * On traite chaque groupe séparément
 		 */
+		$mots_nouveaux = array();
 		foreach($groupes_possibles as $id_groupe){
-			$mots_nouveaux = array();
+			$mots_nouveaux_groupe = array();
 			// Trouver les nouveaux mots proposés
 			if (is_array(_request('groupe_'.$id_groupe))){
 				foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
 					if ($prefixe_chosen_ok) {
 						// le préfixe est une chaine de caractères, on la retire quand elle existe
 						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
-							$mots_nouveaux[] = substr($mot, strlen($prefixe_chosen));
+							$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 						}
 					} else if (!is_numeric($mot)) {
 						// le préfixe n'existe pas ou est un entier, on le retire quand le mot n'est pas lui même un entier
-						$mots_nouveaux[] = substr($mot, strlen($prefixe_chosen));
+						$mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 					}
 					// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
 				}
