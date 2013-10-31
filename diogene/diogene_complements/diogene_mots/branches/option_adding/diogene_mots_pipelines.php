@@ -120,6 +120,7 @@ function diogene_mots_diogene_verifier($flux){
 				foreach($requete_groupe as $cle => $mot){
 					if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
 						// prefixe "chosen_" -> c'est un mot ajouté
+						// TODO : si l'auteur n'a pas le droit d'ajouter ce mot, on ne le prend pas en compte
 						$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 					} else {
 						// c'est un mot existant
@@ -211,6 +212,7 @@ function diogene_mots_diogene_traiter($flux){
 			if (test_plugin_actif('chosen')) {
 				$prefixe_chosen = "chosen_";
 				foreach(_request('nouveaux_groupe_'.$id_groupe) as $cle => $titre){
+					// TODO : si l'auteur n'a pas le droit d'ajouter ce mot, on ne le prend pas en compte
 					if ($titre_propre = corriger_caracteres(trim($titre))) {
 						$id_mot = mot_inserer($id_groupe);
 						$c = array('titre' => $titre_propre);
@@ -267,6 +269,10 @@ function diogene_mots_diogene_traiter($flux){
 			if(count($mots_multiples)>0){
 				sql_delete('spip_mots_liens','objet="'.$flux['args']['type'].'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
 			}
+
+			// On nettoie les variables mises à jour dans verifier()
+			set_request('groupe_'.$id_groupe, $requete_id_groupe);
+			set_request('nouveaux_groupe_'.$id_groupe, array());
 		}
 	}
 	return $flux;
