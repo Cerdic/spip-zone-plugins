@@ -29,6 +29,8 @@
 	- slogan_site :			indicateur oui/non d'affichage du slogan de chaque site. Vide correspond a non
 	- descriptif_site :		indicateur oui/non d'affichage du descriptif de chaque site. Vide correspond a non
 	- p_class :				classe css du p englobant chaque site. Vide correspond a aucune classe
+	- avant_liste :		contenu à afficher avant la liste
+	- apres_liste :		contenu à afficher après la liste
 -->]
 
 <BOUCLE_logo_boussole(BOUSSOLES_EXTRAS){aka_boussole=#ENV{boussole}}{type_objet=boussole}{aka_objet=#ENV{boussole}}>
@@ -51,6 +53,7 @@
 	</div>
 ]
 	<div class="surlignable">
+		[(#ENV*{avant_liste})]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 	[(#REM) <!-- Liste des site du groupe en cours -->]
 	<B_site>
@@ -75,6 +78,7 @@
 	</BOUCLE_site>
 	</B_site>
 </BOUCLE_groupe>
+		[(#ENV*{apres_liste})]
 	</div>
 </div>
 </B_groupe>

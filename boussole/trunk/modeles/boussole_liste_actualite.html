@@ -18,11 +18,14 @@
 	- ul_class :		classe css du ul englobant chaque liste. Vide correspond a aucune classe
 	- li_class :		classe css du li des elements de chaque la liste. Vide correspond a aucune classe
 	- aka_groupe :		filtre par groupe. Vide correspond a tous les groupes de la boussole
+	- avant_liste :		contenu à afficher avant la liste
+	- apres_liste :		contenu à afficher après la liste
 -->]
 
 <B_boussole>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 	[<h2 class="h2">(#ENV{titre_actualite})</h2>]
+	[(#ENV*{avant_liste})]
 <BOUCLE_boussole(BOUSSOLES)	{aka_boussole=#ENV{boussole}}
 							{aka_groupe?}
 							{id_syndic > 0}
@@ -40,5 +43,6 @@
 	</ul>
 	</B_syndication>
 </BOUCLE_boussole>
+	[(#ENV*{apres_liste})]
 </div>
 </B_boussole>

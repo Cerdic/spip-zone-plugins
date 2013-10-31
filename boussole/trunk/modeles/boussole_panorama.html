@@ -21,13 +21,15 @@
 	- div_class :		classe css du div englobant. Vide correspond a aucune classe
 	- a_class :			classe css de l'ancre englobant le logo. Vide correspond a aucune classe
 	- aka_groupe :		filtre par groupe. Vide correspond a tous les groupes de la boussole
+	- avant_liste :		contenu à afficher avant la liste
+	- apres_liste :		contenu à afficher après la liste
 -->]
 
 <B_boussole>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 [(#ENV{titre_boussole, non}|=={oui}|oui)
 	[<h2 class="h2">(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
-]
+][(#ENV*{avant_liste})]
 <BOUCLE_boussole(BOUSSOLES){aka_boussole=#ENV{boussole}}{affiche=oui}{aka_groupe?}{par rang_groupe, rang_site}>
 	[(#SET{bulle, [(#AKA_BOUSSOLE|boussole_traduire{#ENV{type_bulle, nom_slogan_site}, #AKA_SITE})]})]
 	<BOUCLE_logo_site(BOUSSOLES_EXTRAS){aka_boussole}{type_objet=site}{aka_objet=#AKA_SITE}>
@@ -40,5 +42,6 @@
 	</a>]
 	</BOUCLE_logo_site>
 </BOUCLE_boussole>
+	[(#ENV*{apres_liste})]
 </div>
 </B_boussole>

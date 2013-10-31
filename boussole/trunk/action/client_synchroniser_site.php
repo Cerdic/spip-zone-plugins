@@ -70,7 +70,7 @@ function action_client_synchroniser_site_dist(){
 				$iconifier = charger_fonction('iconifier_site', 'inc');
 				$iconifier($id, 'on', $donnees_site['logo_objet']);
 
-				spip_log("ACTION SYNCHRONISER SITE : id_site = $id_site - boussole = $boussole", 'boussole' . _LOG_INFO);
+				spip_log("ACTION SYNCHRONISER SITE : id_syndic = $id_site - boussole = $boussole", 'boussole' . _LOG_INFO);
 			}
 		}
 	}

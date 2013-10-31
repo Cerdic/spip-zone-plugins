@@ -25,13 +25,15 @@
 	- div_class :		classe css du div englobant. Vide correspond a aucune classe
 	- ul_class :		classe css du ul englobant chaque liste. Vide correspond a aucune classe
 	- li_class :		classe css du li des elements de chaque liste. Vide correspond a aucune classe
+	- avant_liste :		contenu à afficher avant la liste
+	- apres_liste :		contenu à afficher après la liste
 -->]
 
 <B_groupe>
 <div[ id="(#ENV{div_id})"][ class="(#ENV{div_class})"]>
 [(#ENV{titre_boussole, non}|=={oui}|oui)
 	[<h2 class="h2">(#ENV{boussole}|boussole_traduire{nom_boussole})</h2>]
-]
+][(#ENV*{avant_liste})]
 <BOUCLE_groupe(BOUSSOLES){fusion aka_groupe}{aka_boussole=#ENV{boussole}}{affiche=oui}{par rang_groupe}>
 	[(#REM) <!-- Liste des site du groupe en cours -->]
 	<B_site>
@@ -50,5 +52,6 @@
 	</ul>
 	</B_site>
 </BOUCLE_groupe>
+	[(#ENV*{apres_liste})]
 </div>
 </B_groupe>
