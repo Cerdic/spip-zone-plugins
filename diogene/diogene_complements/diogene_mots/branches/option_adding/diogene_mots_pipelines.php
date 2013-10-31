@@ -88,106 +88,94 @@ function diogene_mots_diogene_verifier($flux){
 			}
 		}
 
-		/* TODO : vérifier 
-		* si des nouveaux mots ont été proposées (avec mots_creer_dans_public), pour chacun :
-		*
-		* 1./ si un mot avec le même titre existe déjà dans un autre groupe (ie. création impossible)
-		* 
-		* 1a./ si possible (ie. si cet autre groupe est dans les groupes de mots du diogene) :
-		* - mettre "selected" sur ce mot dans l'autre groupe
-		* - message en "warning" pour indiquer le changement
-		* - et retour sur le formulaire pour obtenir la validation de l'utilisateur (message_erreur + editable)
-		* 1b./ sinon :
-		* - erreur "impossible de créer le mot *** : ce mot existe déjà dans le groupe *** - contacter l'administrateur"
-		* - supprimer l'<option> correspondante
-		* - retour sur le formulaire (message_erreur + editable)
-		* 
-		*/
-		$mots_obligatoires = is_array(unserialize($options_complements['mots_obligatoires']))
-			? unserialize($options_complements['mots_obligatoires'])
-			: array();
-		$mots_facultatifs = is_array(unserialize($options_complements['mots_facultatifs']))
-			? unserialize($options_complements['mots_facultatifs'])
-			: array();
+		// On vérifie les mots créés par chosen
+		if (test_plugin_actif('chosen')) {
+			$mots_obligatoires = is_array(unserialize($options_complements['mots_obligatoires']))
+				? unserialize($options_complements['mots_obligatoires'])
+				: array();
+			$mots_facultatifs = is_array(unserialize($options_complements['mots_facultatifs']))
+				? unserialize($options_complements['mots_facultatifs'])
+				: array();
 
-		/**
-		 * On traite les mots clés obligatoires ou pas
-		 */ 
-		include_spip('inc/editer_mots');
-		$groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
+			/**
+			 * On traite les mots clés obligatoires ou pas
+			 */
+			include_spip('inc/editer_mots');
+			$groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
 
-		// Le préfixe ajouté par chosen sur les nouveaux mots proposés
-		$prefixe_chosen = lire_config('chosen/prefixe_create_option');
-		// S'il n'y a pas de préfixe, ou que le préfixe est un nombre, on ne peut pas 
-		// différencier les nouveaux mots des index "id_mot". On fera au mieux.
-		$prefixe_chosen_ok = ($prefixe_chosen && !is_numeric($prefixe_chosen));
+			// Le préfixe ajouté par chosen sur les nouveaux mots proposés
+			$prefixe_chosen = lire_config('chosen/prefixe_create_option');
+			// S'il n'y a pas de préfixe, ou que le préfixe est un nombre, on ne peut pas
+			// différencier les nouveaux mots des index "id_mot". On fera au mieux.
+			$prefixe_chosen_ok = ($prefixe_chosen && !is_numeric($prefixe_chosen));
 
-		// Champs cachés pour la confirmation
-		$champs_hidden = '';
-		$erreurs = array();
-		$au_moins_une_erreur = false;
+			// Champs cachés pour la confirmation
+			$champs_hidden = '';
+			$erreurs = array();
+			$au_moins_une_erreur = false;
 
-		/**
-		 * On traite chaque groupe séparément
-		 */
-		foreach($groupes_possibles as $id_groupe){
-			// Lister les mots sélectionnés dans le groupe et séparer entre mots existants et mots nouveaux créés avec chosen
-			$valeurs_mots_groupe = array();
-			$valeurs_mots_nouveaux_groupe = array();
-			if (is_array(_request('groupe_'.$id_groupe))){
-				foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
-					if ($prefixe_chosen_ok) {
-						// le préfixe est une chaine de caractères, on la retire quand elle existe
-						if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
+			/**
+			 * On traite chaque groupe séparément
+			 */
+			foreach($groupes_possibles as $id_groupe){
+				// Lister les mots sélectionnés dans le groupe et séparer entre mots existants et mots nouveaux créés avec chosen
+				$valeurs_mots_groupe = array();
+				$valeurs_mots_nouveaux_groupe = array();
+				if (is_array(_request('groupe_'.$id_groupe))){
+					foreach(_request('groupe_'.$id_groupe) as $cle => $mot){
+						if ($prefixe_chosen_ok) {
+							// le préfixe est une chaine de caractères, on la retire quand elle existe
+							if (substr($mot, 0, strlen($prefixe_chosen)) == $prefixe_chosen) {
+								$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
+							} else {
+								// c'est un mot existant
+								$valeurs_mots_groupe[] = $mot;
+							}
+						} else if (!is_numeric($mot)) {
+							// le préfixe n'existe pas ou est un nombre, on le retire quand le mot n'est pas lui même un nombre
 							$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
 						} else {
-							// c'est un mot existant
+							// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
+							// on suppose donc que c'est un mot existant
 							$valeurs_mots_groupe[] = $mot;
 						}
-					} else if (!is_numeric($mot)) {
-						// le préfixe n'existe pas ou est un nombre, on le retire quand le mot n'est pas lui même un nombre
-						$valeurs_mots_nouveaux_groupe[] = substr($mot, strlen($prefixe_chosen));
-					} else {
-						// sinon: le mot est soit un index (mot existant), soit un nouveau mot du type "123". Tant pis, dans ce dernier cas, on ne le prend pas en compte.
-						// on suppose donc que c'est un mot existant
-						$valeurs_mots_groupe[] = $mot;
 					}
 				}
-			}
-			// Mise à jour des variables
-			// TODO - verifier si on doit vraiment envoyer tout le temps, ou seulement en cas d'erreur
-			set_request('groupe_'.$id_groupe, $valeurs_mots_groupe);
-			set_request('nouveaux_groupe_'.$id_groupe, $valeurs_mots_nouveaux_groupe);
-			// Est-ce que ces nouveaux mots existent déjà dans d'autres groupes ?
-			include_spip('base/abstract_sql');
-			$msg = '';
-			foreach ($valeurs_mots_nouveaux_groupe as $titre){
-				// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
-				$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
-				if ($champs_mot['id_groupe'] && $champs_mot['id_groupe'] !== $id_groupe) {
-					// Le mot existe déjà, dans un autre groupe
-					$msg = $msg . _T('diogene_mots:erreur_mot_dans_autre_groupe', array('mot' => $titre, 'groupe' => $champs_mot['type']));
+				// Mise à jour des variables
+				// TODO - verifier si on doit vraiment envoyer tout le temps, ou seulement en cas d'erreur
+				set_request('groupe_'.$id_groupe, $valeurs_mots_groupe);
+				set_request('nouveaux_groupe_'.$id_groupe, $valeurs_mots_nouveaux_groupe);
+				// Est-ce que ces nouveaux mots existent déjà dans d'autres groupes ?
+				include_spip('base/abstract_sql');
+				$msg = '';
+				foreach ($valeurs_mots_nouveaux_groupe as $titre){
+					// TODO faire une jointure pour trouver le nom du groupe (type n'est pas synchronisé si on change un mot de groupe)
+					$champs_mot = sql_fetsel(array('id_groupe','id_mot','titre','type'),'spip_mots',"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero($titre))."$"));
+					if ($champs_mot['id_groupe'] && $champs_mot['id_groupe'] !== $id_groupe) {
+						// Le mot existe déjà, dans un autre groupe
+						$msg = $msg . _T('diogene_mots:erreur_mot_dans_autre_groupe', array('mot' => $titre, 'groupe' => $champs_mot['type']));
+					}
 				}
-			}
 
-			if ($msg !== '') {
-				// Si oui, est-ce qu'on a déjà demandé confirmation pour les nouveaux mots ?
-				$valeurs_mots_nouveaux_groupe_hidden = unserialize(_request('confirm_nouveaux_groupe_'.$id_groupe));
-				if(!$valeurs_mots_nouveaux_groupe_hidden
-					|| array_diff($valeurs_mots_nouveaux_groupe_hidden, $valeurs_mots_nouveaux_groupe)
-					|| array_diff($valeurs_mots_nouveaux_groupe, $valeurs_mots_nouveaux_groupe_hidden)) {
-					// Pas de confirmation, puisqu'il y a eu un changement dans les mots nouveaux
-					// On envoie donc un message d'erreur pour confirmation
-					$msg = $msg . _T('diogene_mots:erreur_confirmer_creation_mots_nouveaux');
-					$au_moins_une_erreur = true;
+				if ($msg !== '') {
+					// Si oui, est-ce qu'on a déjà demandé confirmation pour les nouveaux mots ?
+					$valeurs_mots_nouveaux_groupe_hidden = unserialize(_request('confirm_nouveaux_groupe_'.$id_groupe));
+					if(!$valeurs_mots_nouveaux_groupe_hidden
+						|| array_diff($valeurs_mots_nouveaux_groupe_hidden, $valeurs_mots_nouveaux_groupe)
+						|| array_diff($valeurs_mots_nouveaux_groupe, $valeurs_mots_nouveaux_groupe_hidden)) {
+						// Pas de confirmation, puisqu'il y a eu un changement dans les mots nouveaux
+						// On envoie donc un message d'erreur pour confirmation
+						$msg = $msg . _T('diogene_mots:erreur_confirmer_creation_mots_nouveaux');
+						$au_moins_une_erreur = true;
+					}
+					// Et dans tous les cas, on prépare un champ <input> hidden avec les nouveaux mots
+					$erreurs['groupe_'.$id_groupe] = $msg . " <input type='hidden' name='confirm_nouveaux_groupe_".$id_groupe."' value='".serialize($valeurs_mots_nouveaux_groupe)."' />";
 				}
-				// Et dans tous les cas, on prépare un champ <input> hidden avec les nouveaux mots
-				$erreurs['groupe_'.$id_groupe] = $msg . " <input type='hidden' name='confirm_nouveaux_groupe_".$id_groupe."' value='".serialize($valeurs_mots_nouveaux_groupe)."' />";
 			}
-		}
-		// S'il y a des erreurs, on les envoie, avec tous les champs cachés
-		if ($au_moins_une_erreur) {
-			$flux['data'] = array_merge($flux['data'], $erreurs);
+			// S'il y a des erreurs, on les envoie, avec tous les champs cachés
+			if ($au_moins_une_erreur) {
+				$flux['data'] = array_merge($flux['data'], $erreurs);
+			}
 		}
 	}
 	return $flux;
