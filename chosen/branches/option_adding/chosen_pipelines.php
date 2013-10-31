@@ -39,8 +39,7 @@ function chosen_header_prive($texte) {
 			};
 			var chosen_create_option = {
 				create_option: function(term) {
-					prefix = "' . trim($config['prefixe_create_option']) . '";
-					this.select_append_option( {value: prefix + term, text: term} );
+					this.select_append_option( {value: "chosen_" + term, text: term} );
 				},
 				persistent_create_option: true,
 				skip_no_results: true,
@@ -100,8 +99,7 @@ function chosen_insert_head($flux) {
 			};
 			var chosen_create_option = {
 				create_option: function(term) {
-					prefix = "' . trim($config['prefixe_create_option']) . '";
-					this.select_append_option( {value: prefix + term, text: term} );
+					this.select_append_option( {value: "chosen_" + term, text: term} );
 				},
 				persistent_create_option: true,
 				skip_no_results: true,
