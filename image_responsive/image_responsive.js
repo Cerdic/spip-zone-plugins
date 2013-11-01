@@ -38,8 +38,12 @@ function charger_image_responsive () {
 var timeout_charger_image_responsive;
 $(document).ready(function() {
 	charger_image_responsive();
-	
-	$(window).on("resize",function() {
-		timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
-	});
+});
+// Plus rattrapage:
+$(document).on("ajaxComplete", function() {
+	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
+});
+
+$(window).on("resize load",function() {
+	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
