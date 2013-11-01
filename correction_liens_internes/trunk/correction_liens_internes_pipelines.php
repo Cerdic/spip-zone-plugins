@@ -56,7 +56,8 @@ function correction_liens_internes_correction($texte){
             $bonne_url  = $objet . $id_objet . $ancre;
             $bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
             $texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
-			spip_log(self()." : $mauvais_raccourci => $bon_raccourci", 'liens_internes.'._LOG_AVERTISSEMENT);
+			spip_log(self() . (_request('self')?' / '._request('self'):'') // pour crayons notamment...
+				. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
 		}
 	}
 	return $texte;
