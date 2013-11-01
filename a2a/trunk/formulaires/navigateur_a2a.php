@@ -38,8 +38,8 @@ function formulaires_navigateur_a2a_traiter($id_article){
 		$p = explode('|',$p);
 		if (preg_match('/^[a-z0-9_]+$/i', $objet=$p[0])){ // securite
 			$id_article_cible = intval($p[1]);
-			include_spip('formulaires/ajoute_a2a');
-			a2a_lier_article($id_article_cible, $id_article, $type, $type_liaison);
+			$action_a2a = charger_fonction('a2a_lier_article','action');
+			$action_a2a($id_article_cible, $id_article, $type_liaison, $type);
 		}
 	}
 

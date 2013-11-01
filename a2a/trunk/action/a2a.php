@@ -1,6 +1,6 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_a2a_dist(){
 
@@ -15,7 +15,7 @@ function action_a2a_dist(){
 		minipres(_L('Action a2a_'.$action.' introuvable'));
 	}
 
-	$action_a2a($id_article_cible, $id_article_source,  $type_liaison,$type);
+	$action_a2a($id_article_cible, $id_article_source, $type_liaison, $type);
 	
 	include_spip('inc/header');
 	if ($redirect = _request('redirect'))
@@ -24,13 +24,67 @@ function action_a2a_dist(){
 	redirige_par_entete(generer_url_ecrire("articles", "id_article=".$id_article_source, "&"));
 }
 
+function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $type_liaison='', $type=null){
+	include_spip('inc/config');
+	//on verifie que cet article n'est pas deja lie
+	if (
+		
+		!((!lire_config('a2a/types_differents')
+		and 
+		sql_countsel('spip_articles_lies', array(
+		'id_article=' . sql_quote($id_article_source),
+		'id_article_lie=' . sql_quote($id_article_cible)))
+		))
+		
+		or 
+		
+		!((lire_config('a2a/types_differents')
+		and 
+		sql_countsel('spip_articles_lies', array(
+		'id_article=' . sql_quote($id_article_source),
+		'id_article_lie=' . sql_quote($id_article_cible),'type_Liaison='.sql_quote($type_liaison)))
+		))
+		){
+			
+			//on recupere le rang le plus haut pour definir celui de l'article a lier
+			$rang = sql_getfetsel('MAX(rang)', 'spip_articles_lies', 'id_article='. sql_quote($id_article_source));
+			//on ajoute le lien vers l'article
+		
+			sql_insertq('spip_articles_lies', array(
+				'id_article' => $id_article_source,
+				'id_article_lie' => $id_article_cible,
+				'rang' => ++$rang,
+				'type_liaison' => $type_liaison,
+				));
+	}
+	if(
+	($type == 'both') && !sql_countsel('spip_articles_lies', array(
+		'id_article=' . sql_quote($id_article_cible),
+		'id_article_lie=' . sql_quote($id_article_source))) 
+		or 
+		(($type == 'both') and !((lire_config('a2a/types_differents')
+		and 
+		sql_countsel('spip_articles_lies', array(
+		'id_article=' . sql_quote($id_article_cible),
+		'id_article_lie=' . sql_quote($id_article_source),'type_Liaison='.sql_quote($type_liaison))))
+		))
+		){
+			//on recupere le rang le plus haut pour definir celui de l'article a lier
+			$rang = sql_getfetsel('MAX(rang)', 'spip_articles_lies', 'id_article='. sql_quote($id_article_cible));
+			
+			//on ajoute le lien vers l'article
+			sql_insertq('spip_articles_lies', array(
+				'id_article' => $id_article_cible,
+				'id_article_lie' => $id_article_source,
+				'rang' => ++$rang,
+				'type_liaison' => $type_liaison,
+				));
+	}
+	return true;
+}
 
-
-
-function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_liaison='',$type=null){
+function action_a2a_supprimer_lien_dist($id_article_cible, $id_article, $type_liaison='', $type=null){
 	include_spip('inc/utils');
-
-
 	
 	$rang = sql_getfetsel('rang', 'spip_articles_lies', 'id_article=' . sql_quote($id_article) . ' AND id_article_lie=' . sql_quote($id_article_cible) . ' AND type_liaison=' . sql_quote($type_liaison));
 
@@ -64,7 +118,7 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article,$type_lia
 }
 
 
-function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_liaison,$type_modif){
+function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_liaison, $type_modif){
 
 	if (!$type_modif){
 		list($type_modif,$type_liaison)=array($type_liaison,$type_modif);
@@ -90,6 +144,5 @@ function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_lia
 	
 	return true;
 }
-
 
 ?>
