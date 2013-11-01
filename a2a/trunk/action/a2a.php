@@ -17,7 +17,7 @@ function action_a2a_dist(){
 
 	$action_a2a($id_article_cible, $id_article_source, $type_liaison, $type);
 	
-	include_spip('inc/header');
+	include_spip('inc/headers');
 	if ($redirect = _request('redirect'))
 		redirige_par_entete(str_replace('&amp;','&',$redirect));
 		
