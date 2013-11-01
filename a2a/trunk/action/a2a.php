@@ -114,6 +114,9 @@ function action_a2a_supprimer_lien_dist($id_article_cible, $id_article, $type_li
 			'type_liaison=' . sql_quote($type_liaison)
 			));
 	}
+	// invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article'");	
 	return true;
 }
 
