@@ -38,7 +38,7 @@ function action_client_synchroniser_site_dist(){
 	// Synchronisation du nom et du descriptif du site avec les données du site idoine de la boussole
 	if ($arguments) {
 		list($boussole, $id_site) = explode(':', $arguments);
-		if ($boussole AND ($id = intval($id_site))) {
+		if ($boussole AND ($id_syndic = intval($id_site))) {
 			// Récupération des données du site dans la boussole
 			// -- trouver l'alias du site connaissant la boussole et son id_syndic
 			$site = sql_getfetsel(
@@ -46,7 +46,7 @@ function action_client_synchroniser_site_dist(){
 						'spip_boussoles',
 						array(
 							'aka_boussole=' . sql_quote($boussole),
-							'id_syndic=' . sql_quote($id)));
+							'id_syndic=' . sql_quote($id_syndic)));
 			$donnees_site = sql_fetsel(
 								array('nom_objet', 'slogan_objet', 'descriptif_objet', 'logo_objet'),
 								'spip_boussoles_extras',
@@ -64,11 +64,11 @@ function action_client_synchroniser_site_dist(){
 							array(
 								'nom_site'=> extraire_multi($donnees_site['nom_objet']),
 								'descriptif'=> extraire_multi($donnees_site['descriptif_objet'])),
-							'id_syndic=' . sql_quote($id));
+							'id_syndic=' . sql_quote($id_syndic));
 
 				// Mise à jour de son logo normal ("on")
 				$iconifier = charger_fonction('iconifier_site', 'inc');
-				$iconifier($id, 'on', $donnees_site['logo_objet']);
+				$iconifier($id_syndic, 'on', $donnees_site['logo_objet']);
 
 				spip_log("ACTION SYNCHRONISER SITE : id_syndic = $id_site - boussole = $boussole", 'boussole' . _LOG_INFO);
 			}

@@ -35,4 +35,24 @@ function boussole_affiche_milieu($flux){
 	return $flux;
 }
 
+
+/**
+ * Affiche dans la page d'accueil des sites référencés un raccourci pour importer l'ensemble
+ * des sites d'une boussole déjà installée.
+ *
+ * @pipeline affiche_gauche
+ *
+ * @param object $flux
+ * @return $flux
+ */
+function boussole_affiche_gauche($flux){
+	if ($flux['args']['exec'] == 'sites') {
+		$boussoles_ajoutees = sql_allfetsel('valeur', 'spip_meta', array('nom LIKE ' . sql_quote('boussole_infos%')));
+		if ($boussoles_ajoutees) {
+			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/sites_importer_boussole', array());
+		}
+	}
+	return $flux;
+}
+
 ?>
