@@ -111,7 +111,7 @@ function clients_header_prive($flux)
 	$flux .= '});';	
 	$flux .= '/* ]]> */</script>';
 
-    return $flux;
+	return $flux;
 }
  
 ?>
