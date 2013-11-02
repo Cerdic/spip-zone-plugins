@@ -24,7 +24,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 				'options' => array(
 					'nom' => 'civilite',
 					'label' => _T('contacts:label_civilite'),
-                    'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
+					'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
 					'datas' => $civ_t
 				)
 			);
@@ -36,7 +36,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 				'options' => array(
 					'nom' => 'civilite',
 					'label' => _T('contacts:label_civilite'),
-                    'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
+					'obligatoire' => in_array("obli_civilite", $conf) ? 'oui' : '',
 				)
 			);
 		}
@@ -49,7 +49,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 			'options' => array(
 				'nom' => 'numero',
 				'label' => _T('clients:label_tel'),
-                'obligatoire' => in_array("obli_numero", $conf) ? 'oui' : '',
+				'obligatoire' => in_array("obli_numero", $conf) ? 'oui' : '',
 			)
 		);
 	}
@@ -61,7 +61,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 			'options' => array(
 				'nom' => 'portable',
 				'label' => _T('clients:label_portable'),
-                'obligatoire' =>  in_array("obli_portable", $conf) ? 'oui' : '',
+				'obligatoire' =>  in_array("obli_portable", $conf) ? 'oui' : '',
 			)
 		);
 	}
@@ -95,14 +95,14 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 		$pays=array(
 			'saisie' => 'pays',
 			'options' => array(
-				'nom' => 'pays',				
+				'nom' => 'pays',
 				'code_pays' => 'oui',
 				'label' => _T('coordonnees:label_pays'),
 				'obligatoire' => in_array("obli_pays", $conf) ? 'oui' : '',
 			)
 		);
 	}
-	
+
 	return array(
 		$civilite,
 		array(

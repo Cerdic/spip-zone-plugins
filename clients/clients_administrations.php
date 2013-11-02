@@ -4,15 +4,18 @@
  * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+include_spip('inc/meta');
+
 function clients_upgrade($nom_meta_base_version, $version_cible){
-	include_spip('inc/meta');
 	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		$config = lire_config('clients');
-		if (!is_array($config)) {
+		if (!is_array($config))
 			$config = array();
-		}
+
 		$config = array_merge(array(
 				'elm' => array('complement', 'pays', 'obli_pays'),
 				'type_civ' => '',
@@ -24,7 +27,6 @@ function clients_upgrade($nom_meta_base_version, $version_cible){
 }
 
 function clients_vider_tables($nom_meta_base_version) {
-	
 	effacer_meta('clients');
 	effacer_meta($nom_meta_base_version);
 }

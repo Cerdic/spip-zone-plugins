@@ -2,10 +2,10 @@
 	<nom>Clients</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.7</version>
+	<version>0.6.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-   <slogan>
+	<slogan>
 		<multi>
 		[fr]Formulaires pour clients
 		[en]Shopper forms
@@ -14,7 +14,7 @@
 	<description>Permet l'inscription facile et configurable pour des clients, en les inscrivant comme utilisateurs et contacts dans le m&#234;me temps. Ils peuvent ensuite modifier leur profil.</description>
 	<categorie>auteur</categorie>
 	<icon>images/clients-32.png</icon>
-	<install>base/clients_install.php</install>
+	<install>clients_administrations.php</install>
 
 	<prefix>clients</prefix>
 	

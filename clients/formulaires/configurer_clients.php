@@ -1,5 +1,5 @@
 <?php
-                               
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
@@ -76,8 +76,7 @@ return array(
 function formulaires_configurer_clients_charger_dist($retour=''){
 	$contexte = lire_config('clients');	
 	if(!is_array($contexte))$contexte = array();
-	
-	
+
 	return $contexte;
 }
 
