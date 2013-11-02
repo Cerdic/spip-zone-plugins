@@ -282,6 +282,15 @@ function gis_post_edition($flux){
 	return $flux;
 }
 
+
+/**
+ * Insertion dans le pipeline taches_generales_cron
+ *
+ * Supprime les liens de spip_gis_liens qui pointent vers des objets inexistants
+ * 
+ * @param array $taches_generales Un array des tâches du cron de SPIP
+ * @return L'array des taches complété
+ */
 function gis_taches_generales_cron($taches_generales){
 	$taches_generales['gis_nettoyer_base'] = 3600*48;
 	return $taches_generales;
