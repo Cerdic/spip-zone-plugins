@@ -216,7 +216,17 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		// On ajoute des infos au contexte
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
-		set_request('type', 'principale');
+		
+		/**
+		 * Changement de coordonnées pour SPIP 3.0
+		 * Une des raisons de faire une version spécifique SPIP 3.0
+		 */
+		$type = 'principale';
+		$f = chercher_filtre('info_plugin');
+		$version_coordonnees = $f('coordonnees','version');
+		if(intval($version_coordonnees) >= 2)
+			$type = 'pref';
+		set_request('type', $type);
 
 		// On crée un contact pour cet utilisateur
 		$editer_contact = charger_fonction('editer_contact', 'action/');
@@ -233,7 +243,6 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 
 		// On crée le numero de tel
 		if (_request('numero')) {
-			set_request('type', 'principal');
 			$editer_numero = charger_fonction('editer_numero', 'action/');
 			$editer_numero('oui');
 		}
