@@ -1,5 +1,5 @@
-<div class="formulaire_spip formulaire_plugonet_generer" id="formulaire_plugonet_generer">
-	<h3 class="titrem"><:plugonet:titre_form_generer:></h3>
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:plugonet:titre_form_generer:></h3>
 
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
@@ -47,7 +47,7 @@
 							<INCLURE{fond=formulaires/inc-checkbox_xml, 
 								dossier=#EVAL{_DIR_RACINE},
 								regexp=plugin.xml$,
-								onglet=plugonet_generer,
+								operation=generer,
 								message_nok_xml=<:plugonet:message_nok_aucun_xml{dtd=plugin}:>,
 								env} />
 						</li>

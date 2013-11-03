@@ -1,8 +1,0 @@
-</B_credits>
-	<li>#ENV{titre}&nbsp;:&nbsp;
-<BOUCLE_credits(DATA){source table, #ENV{credits}}{', '}>
-		[(#SET{url, [(#VALEUR|table_valeur{url})]})]
-		[(#GET{url}|oui)<a href="#GET{url}">][(#VALEUR|table_valeur{nom})][(#GET{url}|oui)</a>]
-</BOUCLE_credits>
-	</li>
-</B_credits>

@@ -1,0 +1,11 @@
+[(#REM) <!-- Navigation dans les operations de Plugonet --> ]
+<ul class="liste-items sous_navigation">
+<BOUCLE_navigation_operations(DATA){liste verifier,generer,valider}{par cle}>
+	[<li class="item">
+		(#URL_ECRIRE{#ENV{exec}}|parametre_url{operation, #VALEUR}
+			|lien_ou_expose{
+				[(#VAL{plugonet:onglet_}|concat{#VALEUR}|_T)],
+				[(#ENV{operation, generer}|=={#VALEUR})]})
+	</li>]
+</BOUCLE_navigation_operations>
+</ul>

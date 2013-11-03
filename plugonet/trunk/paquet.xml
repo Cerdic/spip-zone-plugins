@@ -1,7 +1,7 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="0.7.0"
+	version="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="plugonet-64.png"
@@ -20,9 +20,5 @@
 
 	<necessite nom="langonet" compatibilite="[0.6.3;[" />
 
-	<menu nom="plugonet-21" titre="plugonet:bouton_plugonet" parent="bando_administration" icone="images/plugonet-16.png" action="plugonet_generer" />
-
-	<onglet nom="plugonet_verifier" titre="plugonet:onglet_verifier" parent="plugonet" icone="images/plugonet-verifier.png" action="plugonet_verifier" />
-	<onglet nom="plugonet_generer" titre="plugonet:onglet_generer" parent="plugonet" icone="images/plugonet-generer.png" action="plugonet_generer" />
-	<onglet nom="plugonet_valider" titre="plugonet:onglet_valider" parent="plugonet" icone="images/plugonet-valider.png" action="plugonet_valider" />
+	<menu nom="plugonet-21" titre="plugonet:bouton_plugonet" parent="bando_administration" icone="images/plugonet-16.png" action="plugonet" parametres="operation=generer" />
 </paquet>
