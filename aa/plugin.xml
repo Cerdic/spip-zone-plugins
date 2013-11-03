@@ -7,16 +7,15 @@
 	</nom>
 	<slogan>Coder un plugin simple avec cfg</slogan>
 	<prefix>aa</prefix>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>experimental</etat>
-	<icon>plugin-24.gif</icon>
+	<icon>aa.png</icon>
 	<categorie>navigation</categorie>
 
 	<auteur>cy_altern</auteur>
 	<licence>GNU/LGPL - (c) 2010</licence>
 
-	<description>Ce plugin extra-simple (aa) est le résultat d'un [tutoriel de spip-contrib->http://www.spip-contrib.net/?article1605] ayant pour sujet l'apprentissage du plugin CFG, qui permet de gérer les paramètres de configuration d’un plugin de façon simple</description>
-	<icon>aa.png</icon>
+	<description>Ce plugin extra-simple (aa) est le rÃ©sultat d'un [tutoriel de spip-contrib->http://www.spip-contrib.net/?article1605] ayant pour sujet l'apprentissage du plugin CFG, qui permet de gÃ©rer les paramÃ¨tres de configuration d'un plugin de faÃ§on simple</description>
 
 	<pipeline>
 		<nom>ajouter_boutons</nom>
