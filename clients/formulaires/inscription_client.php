@@ -243,6 +243,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 
 		// On crée le numero de tel
 		if (_request('numero')) {
+			set_request('type', 'principal'); 
 			$editer_numero = charger_fonction('editer_numero', 'action/');
 			$editer_numero('oui');
 		}
