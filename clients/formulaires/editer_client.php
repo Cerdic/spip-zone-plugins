@@ -5,16 +5,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/config');
 
+function type_adresse(){
+	$type_adresse = 'principale';
+	$f = chercher_filtre('info_plugin');
+	$version_coordonnees = $f('coordonnees','version');
+	if(intval($version_coordonnees) >= 2)
+		$type_adresse = 'pref';
+	return $type_adresse;
+}
+
 function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 	$conf=lire_config('clients/elm',array());
-	
+
 	$civilite=array();
 	$type_c = lire_config('clients/type_civ','i');
-	
-	if($type_c == 'c'){		
-		$civ=lire_config('clients/elm_civ',array('madame', 'monsieur'));	
+
+	if($type_c == 'c'){
+		$civ=lire_config('clients/elm_civ',array('madame', 'monsieur'));
 		$civ_t=array();
-		if (in_array("civilite", $conf)) {		
+		if (in_array("civilite", $conf)) {
 			foreach($civ as $v){
 				array_push($civ_t, "<:clients:label_$v:>");
 			}
@@ -41,7 +50,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 			);
 		}
 	}
-	
+
 	$numero=array();
 	if (in_array("numero", $conf)) {
 		$numero=array(
@@ -199,11 +208,10 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.intval($id_auteur),
-				'type = '.sql_quote('principale')
+				'type = '.sql_quote(type_adresse())
 			)
-		)) {
+		))
 			$contexte = array_merge($contexte, $adresse);
-		}
 
 		// S'il y a un numero principal, on charge les infos
 		if ($numero = sql_fetsel(
@@ -253,19 +261,18 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			)) {
 				foreach($fax as $c => $v){
 					if ($c == 'numero'){
-							$c = 'fax'; 
-							$_fax[$c] = $v;
-							}
-					}				
+						$c = 'fax'; 
+						$_fax[$c] = $v;
+					}
+				}
 				$contexte = array_merge($contexte, $_fax);
 			}
 		}
 	}
 
 	// Sinon rien
-	else {
+	else
 		$contexte['editable'] = false;
-	}
 
 	return $contexte;
 }
@@ -281,9 +288,9 @@ function formulaires_editer_client_verifier_dist($id_auteur, $retour=''){
 function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	// Si redirection demandée, on refuse le traitement en ajax
 	if ($retour) refuser_traiter_formulaire_ajax();
-	
+
 	$retours = array();
-	
+
 	// On modifie le contact
 	$id_contact = sql_getfetsel(
 		'id_contact',
@@ -313,7 +320,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	// On modifie l'auteur
 	$editer_auteur = charger_fonction('editer_auteur', 'action/');
 	$editer_auteur($id_auteur);
-
+	
 	// On modifie l'adresse
 	$id_adresse = sql_getfetsel(
 		'id_adresse',
@@ -321,7 +328,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		array(
 			'objet = '.sql_quote('auteur'),
 			'id_objet = '.$id_auteur,
-			'type = '.sql_quote('principale')
+			'type = '.sql_quote(type_adresse())
 		)
 	);
 
@@ -330,7 +337,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		$id_adresse = 'oui';
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
-		set_request('type', 'principale');
+		set_request('type', type_adresse());
 	}
 
 	$editer_adresse = charger_fonction('editer_adresse', 'action/');
