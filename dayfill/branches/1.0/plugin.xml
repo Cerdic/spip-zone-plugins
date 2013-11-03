@@ -1,11 +1,11 @@
 <plugin>
-	<nom><multi>[en]DayFill - Activities tracer[fr]Défile - Gestionnaire d'activité/multi></nom>
+	<nom><multi>[en]DayFill - Activities tracer[fr]D&eacute;file - Gestionnaire d'activit&eacute;s</multi></nom>
 	<icon>images/dayfill-64.png</icon>
-	<version>1.0.2</version>
-	<auteur>@ 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
+	<version>1.0.3</version>
+	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
 	<licence>GPL</licence>
 	<etat>dev</etat>
-	<description>Permet de noter au fil de l'eau les actions effectué aux cours d'une journée. Ce plugin nécessite SPIPMINE pour les tables des actions et des projets.
+	<description>Permet de noter au fil de l'eau les actions effectué aux cours d'une journ&eacute;e. Ce plugin nécessite SPIPMINE pour les tables des actions et des projets.
 	</description>
 	<lien></lien>
 	<prefix>dayfill</prefix>
