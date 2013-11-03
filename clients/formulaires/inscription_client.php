@@ -171,11 +171,13 @@ function formulaires_inscription_client_charger_dist($retour=''){
 	$erreurs = array();
 	// On récupère le formulaire classique d'inscription
 	$mode = tester_config(0);
+
 	$inscription_dist = charger_fonction('charger', 'formulaires/inscription');
 	$contexte = $inscription_dist($mode,'');
 
-	if(isset($contexte['editable']) && $contexte['editable']!=true){
+	if(!$contexte || (isset($contexte['editable']) && $contexte['editable']!=true)){
 		$contexte['message_erreur'] = _T('clients:erreur_inscription_visiteur');
+		$contexte['editable'] = false;
 	}
 
 	return $contexte;
