@@ -1,11 +1,11 @@
 <plugin>
-	<nom><multi>[en]DayFill - Activities tracer[fr]D&eacute;file - Gestionnaire d'activit&eacute;s</multi></nom>
-	<icon>images/dayfill-32.png</icon>
-	<version>1.0.1</version>
-	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
+	<nom><multi>[en]DayFill - Activities tracer[fr]Défile - Gestionnaire d'activité/multi></nom>
+	<icon>images/dayfill-64.png</icon>
+	<version>1.0.2</version>
+	<auteur>@ 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
 	<licence>GPL</licence>
 	<etat>dev</etat>
-	<description>Permet de noter au fil de l'eau les actions effectu&eacute; auy cours d'une journ&eacute;e. Ce plugin n&eacute;cessite SPIPMINE pour les tables des actions et des projets.
+	<description>Permet de noter au fil de l'eau les actions effectué aux cours d'une journée. Ce plugin nécessite SPIPMINE pour les tables des actions et des projets.
 	</description>
 	<lien></lien>
 	<prefix>dayfill</prefix>
@@ -29,8 +29,8 @@
 		<inclure>dayfill_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.1.0;2.1.99]]" />
-	<necessite id="cfg" version="[1.16.0;]" />
-	<utilise id="spimine" version="[1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="cfg" version="[1.16.0;[" />
+	<utilise id="spimine" version="[1.0;[" />
 
 </plugin>
