@@ -1,7 +1,7 @@
 <plugin>
-	<nom>Date de début, date de fin</nom>
+	<nom>Date de d&eacute;but, date de fin</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<etat>dev</etat>
 	<description>
 		Ajoute deux champs aux articles: #AGENDA (0 ou 1), #DATE_DEBUT et #DATE_FIN. 
@@ -31,4 +31,3 @@
 
 	<necessite id="SPIP" version="[3.0.10;3.0.*]" />
 </plugin>
-
