@@ -8,7 +8,7 @@
 	<icon>images/a2a-64.png</icon>
 	<description>
 		<multi>
-		[fr]Ce plugin permet de lier des articles de fa&#231;on ponctuelle sans avoir à utiliser les mots-cl&#233;s de SPIP. Il peut &#234;tre utilis&#233; pour mettre en place des liens de type « Lire aussi ».
+		[fr]Ce plugin permet de lier des articles de façon ponctuelle sans avoir à utiliser les mots-clés de SPIP. Il peut être utilisé pour mettre en place des liens de type « Lire aussi ».
 		[en]This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
 		</multi>
 	</description>

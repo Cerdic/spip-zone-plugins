@@ -23,4 +23,3 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/a2a.php" />
 	<menu nom="configurer_a2a" parent="menu_configuration" titre="a2a:cfg_a2a" icone="images/a2a-16.png" />
 </paquet>
-
