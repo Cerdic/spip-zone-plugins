@@ -5,13 +5,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/config');
 
-function type_adresse(){
-	$type_adresse = 'principale';
+function type_contact($objet='adresse'){
+	if($objet == 'adresse')
+		$type_contact = 'principale';
+	else if($objet == 'numero')
+		$type_contact = 'principal';
+	else if($objet == 'portable')
+		$type_contact = 'portable';
 	$f = chercher_filtre('info_plugin');
 	$version_coordonnees = $f('coordonnees','version');
-	if(intval($version_coordonnees) >= 2)
-		$type_adresse = 'pref';
-	return $type_adresse;
+	if(intval($version_coordonnees) >= 2){
+		if($objet == 'portable')
+			$type_contact = 'cell';
+		else
+			$type_contact = 'pref';
+	}
+	return $type_contact;
 }
 
 function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
@@ -208,7 +217,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.intval($id_auteur),
-				'type = '.sql_quote(type_adresse())
+				'type = '.sql_quote(type_contact('adresse'))
 			)
 		))
 			$contexte = array_merge($contexte, $adresse);
@@ -220,7 +229,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.intval($id_auteur),
-				'type = '.sql_quote('principal')
+				'type = '.sql_quote(type_contact('numero'))
 			)
 		)) {
 			$contexte = array_merge($contexte, $numero);
@@ -235,15 +244,15 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 				array(
 					'objet = '.sql_quote('auteur'),
 					'id_objet = '.intval($id_auteur),
-					'type = '.sql_quote('portable')
+					'type = '.sql_quote(type_contact('portable'))
 				)
 			)) {
 				foreach($portable as $c => $v){
 					if ($c == 'numero'){
-							$c = 'portable'; 
-							$_portable[$c] = $v;
-							}
-					}
+						$c = 'portable'; 
+						$_portable[$c] = $v;
+				}
+				}
 				$contexte = array_merge($contexte, $_portable);
 			}
 		}
@@ -328,7 +337,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		array(
 			'objet = '.sql_quote('auteur'),
 			'id_objet = '.$id_auteur,
-			'type = '.sql_quote(type_adresse())
+			'type = '.sql_quote(type_contact('adresse'))
 		)
 	);
 
@@ -337,7 +346,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		$id_adresse = 'oui';
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
-		set_request('type', type_adresse());
+		set_request('type', type_contact('numero'));
 	}
 
 	$editer_adresse = charger_fonction('editer_adresse', 'action/');
@@ -350,7 +359,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		array(
 			'objet = '.sql_quote('auteur'),
 			'id_objet = '.$id_auteur,
-			'type = '.sql_quote('principal')
+			'type = '.sql_quote(type_contact('numero'))
 		)
 	);
 
@@ -360,7 +369,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			$id_numero = 'oui';
 			set_request('objet', 'auteur');
 			set_request('id_objet', $id_auteur);
-			set_request('type', 'principal');
+			set_request('type', type_contact('numero'));
 		}
 
 		$editer_numero = charger_fonction('editer_numero', 'action/');
@@ -381,7 +390,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			array(
 				'objet = '.sql_quote('auteur'),
 				'id_objet = '.$id_auteur,
-				'type = '.sql_quote('portable')
+				'type = '.sql_quote(type_contact('portable'))
 			)
 		);
 
@@ -390,7 +399,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			$id_portable = 'oui';
 			set_request('objet', 'auteur');
 			set_request('id_objet', $id_auteur);
-			set_request('type', 'portable');
+			set_request('type', type_contact('portable'));
 		}
 
 		$editer_portable = charger_fonction('editer_numero', 'action/');
