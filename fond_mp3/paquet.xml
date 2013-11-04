@@ -11,7 +11,7 @@
 	categorie="multimedia" 
 	version="3.0.0" 
 	etat="test" 
-	compatibilite="[3.0.0-alpha2;[" 
+	compatibilite="[3.0.0;3.0.*]" 
 	logo="images/fmp3-64.png" 
 	documentation="http://www.quesaco.org/Illustration-sonore-mp3">
 	<nom>Fond MP3</nom>
