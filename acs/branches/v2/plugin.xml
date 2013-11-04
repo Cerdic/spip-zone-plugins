@@ -57,7 +57,7 @@ Some components take care of these optionnal plugins :
 
   <install>base/acs_install.php</install>
 
-	<!-- le pipeline ajouter_bouton est conservé pour la compatibilité avec les versions antérieures à SPIP 3 -->
+	<!-- le pipeline ajouter_bouton est conserv&#233; pour la compatibilit&#233; avec les versions ant&#233;rieures à SPIP 3 -->
   <pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBouton</action>
@@ -77,7 +77,7 @@ Some components take care of these optionnal plugins :
 		<inclure>inc/acs_pipeline_public.php</inclure>
 	</pipeline>
 
-	<necessite id='spip' version='[1.9.2;3.0.0]' />
+	<necessite id="spip" version="[1.9.2;2.1.99]" />
 
 	<categorie>outil</categorie>
 </plugin>

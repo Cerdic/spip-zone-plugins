@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="3.0.0"
 	etat="dev"
-	compatibilite="[3.0.0;*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/acs_32x32.gif"
 	documentation="http://acs.geomaticien.org">
 	<nom>ACS</nom>	
