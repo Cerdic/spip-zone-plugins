@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Articles vers Rubriques</nom>
 	<slogan>Convertir des articles en rubriques</slogan>
-	<auteur>mmmx adapté du Didier, [JLuc->http://www.ouhpla.net]</auteur>
+	<auteur>mmmx adapt&#233; du Didier, [JLuc->http://www.ouhpla.net]</auteur>
 	<licence>GNU/GLP</licence>
 	<description>
 	Transforme les articles d'un site en rubriques, les range dans une rubrique, fait suivre les logos et les documents, et convertit les liens raccourcis, permet d'assurer la redirection vis-&#224;-vis des moteurs de recherche.
@@ -26,6 +26,5 @@
 		<url>articles_vers_rubriques</url>
 		<titre>Articles vers Rubriques</titre>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
-
