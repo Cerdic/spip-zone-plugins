@@ -53,7 +53,7 @@ L.Geocoder = L.Class.extend({
 	},
 
 	_request: function (url, data) {
-		$.ajax({
+		jQuery.ajax({
 			cache: true,
 			context: this,
 			data: data,

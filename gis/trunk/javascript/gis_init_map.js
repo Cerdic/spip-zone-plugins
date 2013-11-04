@@ -162,7 +162,7 @@ gis_init_map = function(mapcfg) {
 			map.markers = new L.MarkerClusterGroup(options);
 
 			/* Pour chaque points présents, on crée un marqueur */
-			$.each(data.features, function(i, feature) {
+			jQuery.each(data.features, function(i, feature) {
 				if (feature.geometry.coordinates[0]) {
 					var latlng = new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
 					var marker = new L.Marker(latlng);
