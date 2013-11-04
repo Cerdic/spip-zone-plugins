@@ -25,6 +25,6 @@
         <inclure>fb_modeles_pipelines.php</inclure>
     </pipeline>
 	<traduire gestionnaire="salvatore" module="fbmodeles" reference="fr" />
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id='z' version='[1.0.0;]' />
 </plugin>
