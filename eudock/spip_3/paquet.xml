@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.22.0"
 	etat="test"
-	compatibilite="[2.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/euDock-red.png"
 	documentation="http://www.spip-contrib.net/?article3567"
 >	
