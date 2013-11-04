@@ -17,10 +17,10 @@ if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',
 
 // qualite de compression JPG pour les images 1.5x et 2x (on peut comprimer plus)
 if (!defined('_RESPIM_15x_JPG_QUALITY')) define('_RESPIM_15x_JPG_QUALITY',65);
-if (!defined('_RESPIM_20x_JPG_QUALITY')) define('_RESPIM_20x_JPG_QUALITY',50);
+if (!defined('_RESPIM_20x_JPG_QUALITY')) define('_RESPIM_20x_JPG_QUALITY',45);
 
 // Breakpoints de taille d'ecran pour lesquels on generent des images
-if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','160,320,480,640,800,1200,1600');
+if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','160,320,480,640,960,1440');
 // les images 1x sont au maximum en _RESPIM_MAX_WIDTH_1x px de large dans la page
 if (!defined('_RESPIM_MAX_WIDTH_1x')) define('_RESPIM_MAX_WIDTH_1x',640);
 // on ne traite pas les images de largeur inferieure a _RESPIM_MIN_WIDTH_1x px
