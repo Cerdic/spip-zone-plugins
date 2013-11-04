@@ -135,6 +135,7 @@ I will get the basket of the @date_distribution@ produced by @nom_producteur@
 	'paniers_disponibles' => 'Available baskets',
 	'paniers_disposition' => 'There are @nb@ baskets available',
 	'paniers_distribuer' => 'baskets to deliver',
+	'pas_article_agenda' => 'You have not created an article with the agenda.',
 	'pas_connecte_ou_reconnu' => 'You are not logged in or your details have not been recognised',
 	'pas_date_distributions' => 'No distribution date are filled in.',
 	'pas_paniers' => 'You do not have any baskets for this season. You have no contracts currently in process.',
