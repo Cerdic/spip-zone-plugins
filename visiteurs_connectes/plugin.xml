@@ -9,8 +9,9 @@
 	</multi></nom>
 	<slogan>Affiche le nombre de visiteurs connect&#233;s sur le site</slogan>
 	<auteur>Phil, superyms (traduction)</auteur>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<etat>stable</etat>
+	<icon>images/visiteurs_connectes-64.png</icon>
 	<description><multi>
 [fr]
 -* Un plugin gadget qui permet d'afficher le nombre de visiteurs connect&#233;s sur votre site.
