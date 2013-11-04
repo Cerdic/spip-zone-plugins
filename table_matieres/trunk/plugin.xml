@@ -11,8 +11,9 @@
 			[en]Create the summary of an article
 		</multi>
 	</slogan>
-	<version>2.2.3</version>
+	<version>2.2.4</version>
 	<prefix>tablematieres</prefix>
+	<icon>images/table_matieres-64.png</icon>
 	<fonctions>tablematieres_fonctions.php</fonctions>
 	<auteur>marcimat, Fil, James</auteur>
 	<licence>GNU/GPL</licence>
@@ -27,7 +28,7 @@
 	<etat>stable</etat>
 	<lien>http://contrib.spip.net/?article2365</lien>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="ancresdouces" />
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
