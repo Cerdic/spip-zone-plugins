@@ -24,6 +24,7 @@ if (!defined('_DIR_CODE')) {
 	 * @return string/array : page compilee et calculee
 	 */
 	function noizetier_recuperer_code($code, $contexte=array(), $options = array(), $connect=''){
+		if (!is_array($contexte)) $contexte = unserialize ($contexte);
 		$fond = _DIR_CODE . md5($code);
 		if(!file_exists($fond . 'html') || (defined('_VAR_MODE') && _VAR_MODE=='recalcul') || _request('var_mode')=='recalcul')
 			ecrire_fichier($fond . '.html', $code);

@@ -21,4 +21,3 @@ parametres:
       obligatoire: 'oui'
       class: 'pleine_largeur'
       rows: 25
-contexte: 'aucun'
