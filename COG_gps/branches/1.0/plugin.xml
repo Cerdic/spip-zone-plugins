@@ -11,7 +11,7 @@ Guillaume Wauquier &#169; 2012
 <etat>stable</etat>
 <prefix>coggps</prefix>
 <description>
-Outils pour ajouter faciliement la position GPS du centroid de chaque commune présente dans la table cog_communes
+Outils pour ajouter faciliement la position GPS du centroid de chaque commune pr&#233;sente dans la table cog_communes
 </description>
 <lien>http://contrib.spip.net/COG-Toutes-les-communes-departements-regions</lien> <!-- URI de documentation -->
 <install>base/coggps_install.php</install>
@@ -31,5 +31,5 @@ Outils pour ajouter faciliement la position GPS du centroid de chaque commune pr
 
 
 <necessite id="cog" version="[1.0;]" />
-<necessite id='SPIP' version='[2.0.0;]' />
+<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>

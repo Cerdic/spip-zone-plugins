@@ -3,14 +3,14 @@
 	categorie="divers"
 	version="2.0.1"
 	etat="stable"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/coggps-32.png"
 	schema="1.0"
 	documentation="http://contrib.spip.net/COG-GPS-Ajoutez-une-position-a-vos-communes"
 >
 
 	<nom>COG-GPS</nom>
-	<!-- Outils pour ajouter faciliement la position GPS du centroid de chaque commune présente dans la table cog_communes -->
+	<!-- Outils pour ajouter faciliement la position GPS du centroid de chaque commune pr&#233;sente dans la table cog_communes -->
 
 	<auteur>Guillaume Wauquier</auteur>
 
