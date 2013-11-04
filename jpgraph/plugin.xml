@@ -14,7 +14,7 @@
 	<icon>img/jpgraph.png</icon>
 	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
 	<fonctions>jpgraph_fonctions.php</fonctions>
-	<necessite id="SPIP" version='[2.0.0;3.1.99[' />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<necessite id="lib:jpgraph-3.0.7" src="http://jpgraph.net/download/download.php?p=1" />
 	<categorie>multimedia</categorie>
 </plugin>
