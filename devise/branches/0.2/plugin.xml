@@ -8,6 +8,7 @@
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>img/pig-64.png</icon>
 	<version>0.2.0</version>
+	<lien>http://contrib.spip.net/Plugin-Devise</lien>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description><multi>
