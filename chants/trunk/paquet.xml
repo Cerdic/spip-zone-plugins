@@ -3,7 +3,7 @@
         categorie="edition"
         version="0.9"
         etat="test"
-	compatibilite="[3.0.0-dev;["
+		compatibilite="[3.0.0;3.0.*]"
         logo="prive/themes/spip/images/chant-128.png"
         schema="0.7.6"
         documentation="http://www.spip-contrib.net/Plugin-Chants"
@@ -19,7 +19,7 @@
         <pipeline nom="declarer_tables_objets_sql" inclure="base/chants.php" />
         <pipeline nom="declarer_tables_auxiliaires" inclure="base/chants.php" />
         <pipeline nom="affiche_enfants" inclure="chants_pipelines.php" />
-	<pipeline nom="autoriser" inclure="chants_autoriser.php" />
+		<pipeline nom="autoriser" inclure="chants_autoriser.php" />
 
         <!-- facilitons les champs de formulaires -->
         <necessite nom="saisies" compatibilite="[1.23.0;]" />
