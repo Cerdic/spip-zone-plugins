@@ -3,8 +3,9 @@
 	<slogan>Switcheur de squelettes</slogan>
 	<auteur>Philippe Drouot, adaptation en plugin de la contrib switcher de Fil</auteur>
 	<licence>&#169; 2006, GNU/GPL</licence>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<etat>test</etat>
+	<icon>prive/themes/spip/images/switcher-64.png</icon>
 	<description>
 		<multi>
 		[fr]
@@ -14,7 +15,7 @@
 	
 		Pour se faire une id&#233;e, voir [d&#233;mo->http://spiptest.africa-web.org/].
 		[it]
-		Aggiunge un menù a tendina che permette di scegliere tra diversi modelli, quello di default del sito. La scelta &#232; tra i modelli della dist di SPIP e tutti i modelli contenuti nella cartelle squelettes-test (una sottocartella di modelli di prova). 
+		Aggiunge un men&#249; a tendina che permette di scegliere tra diversi modelli, quello di default del sito. La scelta &#232; tra i modelli della dist di SPIP e tutti i modelli contenuti nella cartelle squelettes-test (una sottocartella di modelli di prova). 
 		
 		Se desiderate modificare il nome della cartella che contiene i modelli, modificate il file inc/switcher_config.php. In questo file &#232; anche possibile precisare se assegnare ai non amministratori la possibilit&#224; di modificare le impostazioni di modelli, impostando FALSE la variabile <code>$afficherSeulementPourLesAdmins</code>.
 		
@@ -33,7 +34,7 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;2.9]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id="saisies" />
 	<categorie>maintenance</categorie>
 </plugin>
