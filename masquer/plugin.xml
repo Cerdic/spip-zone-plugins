@@ -15,6 +15,6 @@
 		<nom>pre_boucle</nom>
 		<inclure>masquer_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;3.99.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>navigation</categorie>
 </plugin>
