@@ -3,7 +3,7 @@
 	prefix="forms"
 	categorie="outil"
 	etat="stable"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img_pack/form-24.png"
 	documentation="http://contrib.spip.net/Form-Table-2-5"
 	>

@@ -85,6 +85,6 @@
 	<chemin dir="tables/" />
 	<chemin dir="crayons/" />
 	<chemin dir="snippets/" />
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>communication</categorie>
 </plugin>
