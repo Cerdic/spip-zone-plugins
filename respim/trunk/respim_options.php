@@ -14,8 +14,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
 if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
 if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',10);
-// la derniere valeur defini la largeur maxi envoyee
-if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,780,1200,1560,2048');
+
+// qualite de compression JPG pour les images 1.5x et 2x (on peut comprimer plus)
+if (!defined('_RESPIM_15x_JPG_QUALITY')) define('_RESPIM_15x_JPG_QUALITY',65);
+if (!defined('_RESPIM_20x_JPG_QUALITY')) define('_RESPIM_20x_JPG_QUALITY',50);
+
+// Breakpoints de taille d'ecran pour lesquels on generent des images
+if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','160,320,480,640,800,1200,1600');
+// les images 1x sont au maximum en _RESPIM_MAX_WIDTH_1x px de large dans la page
+if (!defined('_RESPIM_MAX_WIDTH_1x')) define('_RESPIM_MAX_WIDTH_1x',640);
+// on ne traite pas les images de largeur inferieure a _RESPIM_MIN_WIDTH_1x px
+if (!defined('_RESPIM_MIN_WIDTH_1x')) define('_RESPIM_MIN_WIDTH_1x',320);
 
 /**
  *
@@ -29,7 +38,7 @@ if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','320,480,7
  * @param int $max_width_1x
  * @return string
  */
-function respim_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=null){
+function respim_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 	$class = extraire_attribut($img,"class");
 	if (strpos($class,"respim")!==false) return $img;
 	ksort($rwd_images);
@@ -45,8 +54,10 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 		unset($rwd_images['fallback']);
 	}
 	// sinon on affiche la plus petite image
-	if (!$fallback_file)
+	if (!$fallback_file){
 		$fallback_file = reset($rwd_images);
+		$fallback_file = $fallback_file['10x'];
+	}
 	// embarquer le fallback en DATA URI si moins de 32ko (eviter une page trop grosse)
 	$fallback_file = filtre_embarque_fichier($fallback_file,"",32000);
 
@@ -54,45 +65,37 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 	$medias = array();
 	$lastw = array_keys($rwd_images);
 	$lastw = end($lastw);
-	if (!$max_width_1x) $max_width_1x = $lastw;
-	$max_width_15x = min($lastw,round(1.5*$max_width_1x));
-	$max_width_20x = min($lastw,round(2*$max_width_1x));
-	foreach ($rwd_images as $w=>$file){
+	foreach ($rwd_images as $w=>$files){
 		if ($w==$lastw) {$islast = true;}
-		// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
-		//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
 		// il faut utiliser une clause min-width and max-width pour que les regles soient exlusives
-		// sinon on a multiple load sous android 2.x
+		// sinon on a multiple download sous android 2.x
 		if ($prev_width<$max_width_1x){
 			$hasmax = (($islast OR $w>=$max_width_1x)?false:true);
 			$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
-			$not = "html:not(.ahrdpi)";
+			$htmlsel = "html";
 			if ($prev_width<=800 AND ($w>=800 OR $islast))
-				$not.=":not(.avp800)";
-			$not .= " ";
-			$medias[$mw] = "@media screen $mw{{$not}b.$cid,{$not}b.$cid:after{background-image:url($file);}}";
+				$htmlsel.=":not(.avp800)";
+			$htmlsel = array(
+				'10x' => "$htmlsel:not(.ahrdpi)",
+				'15x' => "$htmlsel:not(.slow)",
+				'20x' => "$htmlsel:not(.slow)",
+			);
 		}
-
-		$mw20 = $mw15 = "";
-		if ($prev_width<$max_width_20x AND ($w>=640 OR $islast)){
-			$hasmax = (($islast OR $w>=$max_width_20x)?false:true);
-			$mw20 = ($prev_width?"and (min-width:".floor(($prev_width-1)/2+1)."px)":"").($hasmax?" and (max-width:".floor($w/2)."px)":"");
-		}
-		if ($prev_width<$max_width_15x AND ($w>=480 OR $islast)){
-			$hasmax = (($islast OR $w>=$max_width_15x)?false:true);
-			$mw15 = ($prev_width?"and (min-width:".floor(($prev_width-1)/1.5+1)."px)":"").($hasmax?" and (max-width:".floor($w/1.5)."px)":"");
-		}
-		$mhr = array();
-		if ($mw20)
-			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 2) $mw20,screen and (min--moz-device-pixel-ratio: 2) $mw20";
-		if ($mw15)
-			$mhr[] = "screen and (-webkit-min-device-pixel-ratio: 1.5) $mw15,screen and (min--moz-device-pixel-ratio: 1.5) $mw15";
-		if (count($mhr)){
-			$mhr = implode(",",$mhr);
-			$medias[$w."hr"] = "@media $mhr{html:not(.slow):not(.avp800) b.$cid,html:not(.slow):not(.avp800) b.$cid:after{background-image:url($file) !important;}}";
+		$mwdpi = array(
+			'10x' => "screen $mw",
+			'15x' => "screen and (-webkit-min-device-pixel-ratio: 1.5) $mw,screen and (min--moz-device-pixel-ratio: 1.5) $mw",
+			'20x' => "screen and (-webkit-min-device-pixel-ratio: 2) $mw,screen and (min--moz-device-pixel-ratio: 2) $mw",
+		);
+		foreach($files as $kx=>$file){
+			// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
+			//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
+			$mw = $mwdpi[$kx];
+			$not = $htmlsel[$kx];
+			$medias[$mw] = "@media $mw{{$not} b.$cid,{$not} b.$cid:after{background-image:url($file);}}";
 		}
 		$prev_width = $w+1;
 	}
+
 	// Media Queries
 	$style .= implode("",$medias);
 
@@ -120,14 +123,12 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
  * @param int $max_width_1x
  * @return string
  */
-function respim_image($img, $bkpt = null, $max_width_1x=null){
+function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 	if (!$img) return $img;
 	if (strpos($img,"respim")!==false)
 		return $img;
 	if (is_null($bkpt) OR !is_array($bkpt))
 		$bkpt = explode(',',_RESPIM_DEFAULT_BKPTS);
-	if (!$max_width_1x)
-		$max_width_1x = round(end($bkpt)/2);
 
 	if (!function_exists("taille_image"))
 		include_spip("inc/filtres");
@@ -137,7 +138,7 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
 		include_spip("filtres/images_transforme");
 
 	list($h,$w) = taille_image($img);
-	if (!$w OR $w<=reset($bkpt)) return $img;
+	if (!$w OR $w<=_RESPIM_MIN_WIDTH_1x) return $img;
 
 	$src = trim(extraire_attribut($img, 'src'));
 	if (strlen($src) < 1){
@@ -150,7 +151,11 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
 
 	$images = array();
 	if ($w<end($bkpt))
-		$images[$w] = $src;
+		$images[$w] = array(
+			'10x'=>$src,
+			'15x'=>$src,
+			'20x'=>$src,
+		);
 	$src=preg_replace(',[?][0-9]+$,','',$src);
 
 	// si on arrive pas a le lire, on ne fait rien
@@ -162,11 +167,21 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
 
 	// calculer les variantes d'image sur les breakpoints
 	$large = "";
+	$dpi = array('10x'=>1,'15x'=>1.5,'20x'=>2);
 	foreach($bkpt as $wk){
 		if ($wk>$w) break;
-		$i = image_reduire($img,$wk,10000);
-		$images[$wk] = extraire_attribut($i,"src");
-		if ($wk<=$max_width_1x) $large = $images[$wk];
+		foreach($dpi as $k=>$x){
+			$wkx = intval(round($wk * $x));
+			if ($wkx>$w)
+				$images[$wk][$k] = $src;
+			else {
+				$i = image_reduire($img,$wkx,10000);
+				if ($extension=='jpg' AND $k!='10x')
+					$i = image_aplatir($i,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,constant('_RESPIM_'.$k.'_JPG_QUALITY'));
+				$images[$wk][$k] = extraire_attribut($i,"src");
+			}
+		}
+		if ($wk<=$max_width_1x) $large = $images[$wk]['10x'];
 	}
 
 	// l'image de fallback en jpg tres compresse
@@ -178,7 +193,7 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
 		$q = round(_RESPIM_LOWSRC_JPG_QUALITY-((min($max_width_1x,$w)*$h/$w*min($max_width_1x,$w))/100000-3));
 		$q = min($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*1.5);
 		$q = max($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*0.5);
-		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]:$large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,$q);
+		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]['10x']:$large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,$q);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
@@ -193,16 +208,13 @@ function respim_image($img, $bkpt = null, $max_width_1x=null){
  * @param null|int $max_width_1x
  * @return mixed
  */
-function adaptative_images($texte,$max_width_1x=null){
+function adaptative_images($texte,$max_width_1x=_RESPIM_MAX_WIDTH_1x){
 	static $bkpts = array();
 	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
 		$b = explode(',',_RESPIM_DEFAULT_BKPTS);
 		while (count($b) AND end($b)>$max_width_1x) array_pop($b);
 		// la largeur maxi affichee
 		if (!count($b) OR end($b)<$max_width_1x) $b[] = $max_width_1x;
-		//  les resolutions 1.5x et 2x pour la largeur maxi
-		if (!count($b) OR end($b)<round($max_width_1x*1.5)) $b[] = round($max_width_1x*1.5);
-		if (!count($b) OR end($b)<$max_width_1x*2) $b[] = $max_width_1x*2;
 		$bkpts[$max_width_1x] = $b;
 	}
 	$bkpt = (isset($bkpts[$max_width_1x])?$bkpts[$max_width_1x]:null);
@@ -248,12 +260,13 @@ function respim_affichage_final($texte){
 			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
+				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\b'+c+'\\b'),'')})(document.documentElement)}"
 				// Android 2 media-queries bad support workaround
 				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
 				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
 				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
 				."if (android2) {"
-				."hAC('avp800');setTimeout(function(){(function(H){H.className=H.className.replace(/\bavp800\b/,'')})(document.documentElement)},1000);"
+				."hAC('avp800');setTimeout(function(){hRC('avp800')},1000);"
 				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('ahrdpi');"
 				."}\n"
 				// slowConnection detection
@@ -269,7 +282,7 @@ function respim_affichage_final($texte){
 				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
 				."}"
 				//."console.log(slowConnection);"
-				."if(slowConnection) hAC('slow');\n"
+				."if(slowConnection) {hAC('slow');hRC('ahrdpi');}\n"
 				// injecter un style async apres chargement des images
 			  // pour masquer les couches superieures (fallback et chargement)
 				."var respim_onload = function(){"
