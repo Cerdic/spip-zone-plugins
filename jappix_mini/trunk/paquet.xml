@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.0.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/jappix.png"
 	documentation="http://www.spip-contrib.net/Jappix-Mini"
 >	
