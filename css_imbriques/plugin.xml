@@ -12,7 +12,7 @@
 		rapidement des comportements qui demandent des notations
 		diff&#233;rentes pour viser diff&#233;rents navigateurs.
 
-		Il permet &#233;galement d'ins&#233;rer des @media queries {&#224; l'int&#233;rieur} des classes elles-m&#234;êmes.
+		Il permet &#233;galement d'ins&#233;rer des @media queries {&#224; l'int&#233;rieur} des classes elles-m&#234;mes.
 	</description>
 	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css</lien>
 	<prefix>css_imbriques</prefix>
@@ -21,4 +21,3 @@
 	<necessite id="SPIP" version="[1.9.0;3.9.9]" />
 	<categorie>outil</categorie>
 </plugin>
-
