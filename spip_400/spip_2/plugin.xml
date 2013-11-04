@@ -7,10 +7,8 @@
  	<prefix>spip_400</prefix>
 	<chemin dir='public' type='public' />
 	<chemin dir='' />
-<!-- 
-	pas encore :-(
-	<lien>[Documentation->http://www.spip-contrib.net/?article3516]</lien>
--->
+	<lien>http://contrib.spip.net/SPIP-400-Gestion-des-erreurs-HTTP</lien>
+
 	<description>
 {{Gestion pouss&#233;e des erreurs HTTP (401, 404) pour SPIP}}
 
@@ -27,7 +25,7 @@ Une page de configuration est propos&#233;e en option si vous utilisez le plugin
 	<options>spip_400_options.php</options>
 	<categorie>navigation</categorie>
 	<traduire gestionnaire="salvatore" module="spip_400" reference="fr" />
-	<utilise id='z' version='[1.0.0;]' />
-	<utilise id="cfg" version='[1.0;]' />
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<utilise id="z" version="[1.0.0;]" />
+	<utilise id="cfg" version="[1.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>
