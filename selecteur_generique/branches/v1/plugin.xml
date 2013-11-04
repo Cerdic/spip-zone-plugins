@@ -12,9 +12,10 @@
 		</multi>
 	</slogan>	
 	<auteur>Fil, kent1</auteur>
-	<version>0.7.3</version>
+	<version>0.7.4</version>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
+	<icon>prive/themes/spip/images/selecteur_generique-64.png</icon>
 	<description>
 		<multi>
 			[fr]Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible.
@@ -30,10 +31,10 @@
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0;2.1.9]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.9]" />
 	<categorie>outil</categorie>
 </plugin>
-<plugin spip='[2.1.10;2.1.99]'>
+<plugin spip="[2.1.10;2.1.99]">
   <nom>
 		<multi>
 			[fr]S&#233;lecteur g&#233;n&#233;rique
@@ -47,9 +48,10 @@
 		</multi>
 	</slogan>	
 	<auteur>Fil, kent1</auteur>
-	<version>0.7.3</version>
+	<version>0.7.4</version>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
+	<icon>prive/themes/spip/images/selecteur_generique-64.png</icon>
 	<description>
 		<multi>
 			[fr]Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible.
