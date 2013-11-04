@@ -3,21 +3,21 @@
 	<auteur>Michel Bystranowski</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.1.3</version>
-	<slogan>Loger les erreurs javascript côté client</slogan>
+	<slogan>Loger les erreurs javascript c&#244;t&#233; client</slogan>
 	<description>
-	Ce plugin permet de récupérer les erreurs javascript qui se produisent
-	côté client. Un fichier <code>erreurs_js.log</code> sera créé dans le répertoire
+	Ce plugin permet de r&#233;cup&#233;rer les erreurs javascript qui se produisent
+	c&#244;t&#233; client. Un fichier <code>erreurs_js.log</code> sera cr&#233;e dans le r&#233;pertoire
 	contenant les autres logs, et contiendra ces erreurs. Suivant le
-	mécanisme de la fonction <code>spip_log()</code>, les erreurs qui se produisent
-	dans l'espace privé seront dans le fichier prive_erreurs_js.log
+	m&#233;canisme de la fonction <code>spip_log()</code>, les erreurs qui se produisent
+	dans l'espace priv&#233; seront dans le fichier prive_erreurs_js.log
 	</description>
 	<etat>dev</etat>
 	<prefix>js_log</prefix>
 	<categorie>outil</categorie>
 	<icon>logo_jslog-64.png</icon>
 
-	<necessite id="SPIP" version="[2.1.13;)" />
-	<necessite id="spip_bonux" version="[2.3.0;)" />
+	<necessite id="SPIP" version="[2.1.13;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
 
 	<pipeline>
 		<nom>insert_head</nom>
