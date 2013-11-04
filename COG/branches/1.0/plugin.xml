@@ -65,7 +65,7 @@
 		<inclure>cog_pipeline.php</inclure>
 	</pipeline>
 	<necessite id="CFG" version="[1.0;]" />
- 	<necessite id='SPIP' version='[2.0.0;]' />
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
  	<necessite id='spip_bonux' version='[2.3.0;]' />
  	<necessite id="jqueryui" version="[1.8.5;]" />
 	<categorie>Géographie</categorie>

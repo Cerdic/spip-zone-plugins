@@ -3,14 +3,14 @@
 	categorie="outil"
 	version="2.0.3"
 	etat="stable"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cog-32.png"
 	schema="1.0"
 	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
 >
 
 	<nom>Code Officiel Géographique</nom>
-	<!-- Ajouter à la base de données les codes officiels géographiques définis par l'Institut national de la statistique et des études économiques -->
+	<!-- Ajouter &#224; la base de donn&#233;es les codes officiels g&#233;ographiques d&#233;finis par l'Institut national de la statistique et des &#233;tudes &#233;conomiques -->
 
 	<auteur>Guillaume Wauquier</auteur>
 
@@ -28,7 +28,7 @@
 	<pipeline nom="autoriser" inclure="cog_autoriser.php" />
 	<pipeline nom="jqueryui_plugins" inclure="cog_pipeline.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[2.3.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.5;[" />
 
 
 	<menu nom="cog" titre="COG" parent="menu_edition" icone="images/cog-24.png" action="cog" />
