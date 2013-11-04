@@ -14,7 +14,7 @@
 	dev
 	</etat>
 	<description>
-	Faire des boucles sur des données google (google documents)
+	Faire des boucles sur des donn&#233;es google (google documents)
 	</description>
 	<prefix>
 	gdata
@@ -24,5 +24,5 @@
 	<chemin dir='' />
 	<fonctions>gdata_fonctions.php</fonctions>
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
