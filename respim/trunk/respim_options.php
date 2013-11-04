@@ -87,11 +87,13 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 			'20x' => "screen and (-webkit-min-device-pixel-ratio: 2) $mw,screen and (min--moz-device-pixel-ratio: 2) $mw",
 		);
 		foreach($files as $kx=>$file){
-			// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
-			//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
-			$mw = $mwdpi[$kx];
-			$not = $htmlsel[$kx];
-			$medias[$mw] = "@media $mw{{$not} b.$cid,{$not} b.$cid:after{background-image:url($file);}}";
+			if (isset($mwdpi[$kx])){
+				// $file = "filedelay.api/5/$file"; // debug : injecter une tempo dans le chargement de l'image pour tester l'enrichissement progressif
+				//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
+				$mw = $mwdpi[$kx];
+				$not = $htmlsel[$kx];
+				$medias[$mw] = "@media $mw{{$not} b.$cid,{$not} b.$cid:after{background-image:url($file);}}";
+			}
 		}
 		$prev_width = $w+1;
 	}
@@ -260,7 +262,7 @@ function respim_affichage_final($texte){
 			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
-				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\b'+c+'\\b'),'')})(document.documentElement)}"
+				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
 				// Android 2 media-queries bad support workaround
 				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
 				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
