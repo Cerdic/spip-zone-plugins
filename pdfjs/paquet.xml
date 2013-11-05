@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.3.1"
 	etat="test"
-	compatibilite="[2.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/pdfjs-32.png"
 	documentation="http://contrib.spip.net/?article4078"
 >	

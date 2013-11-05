@@ -8,6 +8,6 @@
 	<lien>http://contrib.spip.net/?article4078</lien>
 	<prefix>pdfjs</prefix>
 	<categorie>multimedia</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="gviewer" />
 </plugin>
