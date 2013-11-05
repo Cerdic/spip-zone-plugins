@@ -18,6 +18,6 @@ Une documentation interne est disponible lorsque le plugin est actif sur la page
  	<icon>img/euDock-red.png</icon>
  	<options>eudock_options.php</options>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
