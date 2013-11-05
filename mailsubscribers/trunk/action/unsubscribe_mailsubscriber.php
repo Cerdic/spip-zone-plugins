@@ -18,10 +18,22 @@ function action_unsubscribe_mailsubscriber_dist($email=null, $double_optin=true)
 	if (is_null($email)){
 		$email = _request('email');
 		$arg = _request('arg');
+		if (is_null($arg) AND strpos($_SERVER["QUERY_STRING"],"arg%")!==false){
+			$query = str_replace("arg%","arg=",$_SERVER["QUERY_STRING"]);
+			parse_str($query,$args);
+			$arg = strtolower($args['arg']);
+			if (strlen($arg)>40)
+				$arg = substr($arg,-40);
+		}
 		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
-		if (!$row
-			OR $arg!==mailsubscriber_cle_action("unsubscribe",$row['email'],$row['jeton'])){
-			$row = false;
+		if (!$row)
+			spip_log("unsubscribe_mailsubscriber : email $email pas dans la base spip_mailsubscribers","mailsubscribers");
+		else {
+			$cle = mailsubscriber_cle_action("unsubscribe",$row['email'],$row['jeton']);
+			if ($arg!==$cle){
+				spip_log("unsubscribe_mailsubscriber : cle $arg incorrecte pour email $email","mailsubscribers");
+				$row = false;
+			}
 		}
 	}
 	else {
