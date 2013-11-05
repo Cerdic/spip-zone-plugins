@@ -1,9 +1,9 @@
 <paquet
 	prefix="spip_thelia"
 	categorie="divers"
-	version="1.5"
+	version="1.5.0"
 	etat="stable"
-	compatibilite="[1.9.0;]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/logo_thelia.png"
 	documentation="http://www.spip-contrib.net/Plugin-Thelia"
 >	
