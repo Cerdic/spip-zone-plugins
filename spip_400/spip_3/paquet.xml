@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="0.22.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="stop_32.png"
 	documentation="http://www.spip-contrib.net/?article3884"
 >	
