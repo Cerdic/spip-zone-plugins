@@ -29,6 +29,6 @@
     </pipeline>	
     <options>pgn4spip_options.php</options>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<utilise id="cfg" version="[1.15.2]" />	
 </plugin>
