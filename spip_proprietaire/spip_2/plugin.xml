@@ -23,7 +23,7 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	<lien>http://www.spip-contrib.net/?article3516</lien>
 	<categorie>communication</categorie>
 	
-	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<traduire gestionnaire="salvatore" module="spipproprio" reference="fr" />
 	<traduire gestionnaire="salvatore" module="texteslegaux" reference="fr" />
 

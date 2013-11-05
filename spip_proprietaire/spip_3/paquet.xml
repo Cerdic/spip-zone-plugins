@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.70.0"
 	etat="stable"
-	compatibilite="[3.0.0-beta;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
 	documentation="http://www.spip-contrib.net/?article3516"
 >	
