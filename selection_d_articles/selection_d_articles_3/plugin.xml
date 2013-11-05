@@ -38,7 +38,6 @@
 		<inclure>pb_selection.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[3.0;]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
 	<categorie>navigation</categorie>
 </plugin>
-
