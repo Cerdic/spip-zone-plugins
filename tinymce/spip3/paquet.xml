@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.9.5"
 	etat="test"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/spip-tinymce-60.png"
 	documentation="http://www.spip-contrib.net/?article4276"
 >	

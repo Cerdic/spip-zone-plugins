@@ -36,5 +36,5 @@ il est necessaire de modifier Spip pour lui ajouter un id sur une div de l espac
 		<nom>pre_propre</nom>
 		<inclure>tinymce_acti_pre_propre.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.1;]" />
+	<necessite id="SPIP" version="[1.9.1;2.0.0]" />
 </plugin>
