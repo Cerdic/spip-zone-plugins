@@ -19,8 +19,8 @@ function trad_rub_header_prive($flux){
    $form = $flux['args']['form'];
    if ($form=='editer_rubrique' AND _request('new')=='oui'){
 
-	if(!$flux['data']['lang_dest'] = _request('lang_dest')){
-	    $flux['data']['lang_dest']=sql_getfetsel('lang','spip_rubriques','id_rubrique='._request('id_parent'));
+	if(!$flux['data']['lang_dest'] = _request('lang_dest') AND $id_rubrique=_request('id_parent')){
+	    $flux['data']['lang_dest']=sql_getfetsel('lang','spip_rubriques','id_rubrique='.$id_rubrique);
 	}
     if(isset($flux['data']['lang_dest']))
        $flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'.$flux['data']['lang_dest'].'"/>';
