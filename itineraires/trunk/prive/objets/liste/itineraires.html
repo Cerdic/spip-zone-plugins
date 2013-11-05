@@ -10,7 +10,6 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{itineraire:info_1_itineraire,itineraire:info_nb_itineraires}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class='titre' scope='col'>[(#TRI{titre,<:itineraire:champ_titre_label:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
@@ -20,7 +19,6 @@
 	<tbody>
 	<BOUCLE_liste_itineraires(ITINERAIRES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{itineraire-16.png}|balise_img)]</td>
 			<td class='statut'>[(#STATUT|puce_statut{itineraire,#ID_ITINERAIRE})]</td> 
 			<td class='titre principale'>[(#LOGO_ITINERAIRE|image_reduire{20,26})]<a href="[(#ID_ITINERAIRE|generer_url_entite{itineraire})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ITINERAIRE">[(#RANG). ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
