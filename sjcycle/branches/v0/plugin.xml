@@ -14,7 +14,7 @@
 </etat>
 <description>
 	<h3>Plugin Spip jQuery Cycle : sjcycle</h3>
-	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Diaporama paramétrable pour Spip basé sur la librairie javascript <a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a> et les plugins :
+	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Diaporama param&#233;trable pour Spip bas&#233; sur la librairie javascript <a href="http://jquery.com/" style="color:#999;text-decoration:underline;" title="Site officiel de jQuery">jQuery</a> et les plugins :
 	<ul>
 		<li><a href="http://malsup.com/jquery/cycle/" style="color:#999;text-decoration:underline;" title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;</li>
 		<li><a href="http://fancybox.net/" style="color:#999;text-decoration:underline;" title="Site officiel du jQuery FancyBox Plugin">FancyBox</a>;</li>
@@ -22,7 +22,7 @@
 	</ul>
 	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Int&eacute;gration pour Spip [2.0.x] 
 	<ul>
-		<li>basée sur les formulaires <a href="http://www.spip.net/fr_article3800.html" style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
+		<li>bas&#233;e sur les formulaires <a href="http://www.spip.net/fr_article3800.html" style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
 		<li>utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
 	</ul>
 </description>
@@ -52,6 +52,6 @@
   	<nom>affiche_gauche</nom>
   	<inclure>sjcycle_prive_pipelines.php</inclure>
 </pipeline>
-	<necessite id="SPIP" version="[2.0.x;]" />
+	<necessite id="SPIP" version="[2.0.99;]" />
 	<utilise id="cfg" version="[1.10;]" />
 </plugin>
