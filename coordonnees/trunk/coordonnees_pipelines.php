@@ -67,7 +67,7 @@ function coordonnees_affiche_auteurs_interventions($flux) {
  */
 function coordonnees_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('adresse'=>'*', 'telephone'=>'*', 'email'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('adresse'=>'*', 'numero'=>'*', 'email'=>'*'),'*');
 	return $flux;
 }
 
