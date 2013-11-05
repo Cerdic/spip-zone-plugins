@@ -104,11 +104,7 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","respim $class");
-	if ($max_width_1x<$width){
-		$img = inserer_attribut($img,"width",$max_width_1x);
-		$img = inserer_attribut($img,"height",round($height*$max_width_1x/$width));
-	}
-	$img = inserer_attribut($img,"onmousedown","var i=window.getComputedStyle(this.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');this.src=(i&&i!='none'?i:this.src);");
+	$img = inserer_attribut($img,"onmousedown","imgFix(this)");
 	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
@@ -199,6 +195,8 @@ function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
+	// l'image est reduite a la taille maxi (version IE)
+	$img = image_reduire($img,$max_width_1x,10000);
 	// generer le markup
 	return respim_markup($img,$images,$w, $h, $extension, $max_width_1x);
 }
@@ -253,8 +251,8 @@ function respim_affichage_final($texte){
 		if (strpos($texte,"respwrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
 			$ins = "<style type='text/css'>"."img.respim{opacity:0.70;max-width:100%;height:auto;}"
-			."b.respwrapper{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
-			."b.respwrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;background-size:100%;background-repeat:no-repeat;display:inline-block;max-width:100%;content:\"\"}"
+			."b.respwrapper,b.respwrapper:after{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
+			."b.respwrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."</style>\n";
 			// le script qui estime si la rapidite de connexion et pose une class slow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
@@ -263,6 +261,7 @@ function respim_affichage_final($texte){
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
 				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
+				."function imgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
 				// Android 2 media-queries bad support workaround
 				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
 				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
