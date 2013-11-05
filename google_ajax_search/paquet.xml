@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.1.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/google_but.png"
 	documentation="http://www.spip-contrib.net/Plugin-Google-Ajax-Search"
 >	
