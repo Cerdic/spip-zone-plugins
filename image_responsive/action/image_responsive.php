@@ -1,4 +1,4 @@
-<?
+<?php
 function action_image_responsive() {
 
 	$img = _request("img");
