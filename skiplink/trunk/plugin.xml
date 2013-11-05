@@ -11,8 +11,8 @@
 <slogan>Liens de navigation interne dans une page</slogan>
 <description>
 <multi>
-[fr]<strong>ATTENTION&nbsp;! Ceci est une version en développement, inachevée&nbsp;!</strong>
-_ Utilisez plutôt la version précédente, SkipLinks&nbsp;1 (jusque [révision 49858->http://zone.spip.org/trac/spip-zone/changeset/49858/_plugins_/skiplink] comprise), [présentée ici->http://www.spip-contrib.net/3008].
+[fr]<strong>ATTENTION&nbsp;! Ceci est une version en développement, inachev&#233;e&nbsp;!</strong>
+_ Utilisez plut&#244;t la version pr&#233;c&#233;dente, SkipLinks&nbsp;1 (jusque [r&#233;vision 49858->http://zone.spip.org/trac/spip-zone/changeset/49858/_plugins_/skiplink] comprise), [présent&#233;e ici->http://www.spip-contrib.net/3008].
 
 Ce plugin propose des liens facilitant la navigation dans la page (liens d'acc&#232;s rapide, retour en haut de page, dits &#171; skip navigation links &#187;) et leurs ancres. Ces liens sont indispensables pour les utilisateurs naviguant au clavier ou surfant sur t&#233;l&#233;phone portable.
 [en]Skip Navigation Links
@@ -31,5 +31,5 @@ Ce plugin propose des liens facilitant la navigation dans la page (liens d'acc&#
 	<nom>insert_head_css</nom>
 	<inclure>skiplink_pipelines.php</inclure>
 </pipeline>
-<necessite id='SPIP' version='[2.1.0;3.0.99]' />
+<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>

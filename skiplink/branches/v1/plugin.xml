@@ -23,5 +23,5 @@
 	<inclure>skiplink_pipelines.php</inclure>
 </pipeline>
 <categorie>navigation</categorie>
-<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
