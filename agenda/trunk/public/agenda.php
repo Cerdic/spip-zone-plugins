@@ -389,9 +389,9 @@ function agenda_calculer_date_reference($idb, &$boucles, $crit) {
  * @return object
  */
 function balise_NB_INSCRITS_dist($p) {
-        $id_evenement = champ_sql('id_evenement', $p);
-        $p->code = "sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement).' AND reponse=\'oui\'')";
-        return $p;
+	$id_evenement = champ_sql('id_evenement', $p);
+	$p->code = "sql_countsel('spip_evenements_participants','id_evenement='.intval($id_evenement).' AND reponse=\'oui\'')";
+	return $p;
 }
 
 ?>
