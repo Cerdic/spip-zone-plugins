@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.30.5"
 	etat="test"
-	compatibilite="[3.0.10;["
+	compatibilite="[3.0.10;3.0.*]"
 	logo="img/ico-pubban.png"
 	schema="0.9"
 	documentation="http://contrib.spip.net/?article3637"

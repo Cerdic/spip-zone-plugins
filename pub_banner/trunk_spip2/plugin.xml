@@ -38,8 +38,8 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	<!--
 	Infos SPIP-Zone
 	-->
- 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
-	<necessite id='spip_bonux' version='[1.3;]' />
+ 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="spip_bonux" version="[1.3;]" />
 	<categorie>multimedia</categorie>
 	<traduire gestionnaire="salvatore" module="pubban" reference="fr" />
 	<!--
