@@ -21,7 +21,7 @@
 	
 	<lien>http://www.quesaco.org/Illustration-sonore-mp3</lien>
 	
-	<version>1.11.2</version>
+	<version>3.0.0</version>
 	<etat>stable</etat>
 	<icon>images/fmp3-64.png</icon>
 	
@@ -48,7 +48,7 @@
 		<inclure>inc/fmp3_pipeline_insert_head.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	
 	<categorie>multimedia</categorie>
 	
