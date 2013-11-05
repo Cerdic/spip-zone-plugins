@@ -3,7 +3,7 @@
 	categorie="communication" 
 	version="3.0.11"
 	etat="test" 
-	compatibilite="[3.0.0-alpha2;[" 
+	compatibilite="[3.0.0;3.0.*]" 
 	logo="prive/themes/spip/images/spip-listes.png" 
 	schema="1.9923" 
 	documentation="http://www.spip-contrib.net/SPIP-Listes">
