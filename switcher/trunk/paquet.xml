@@ -3,7 +3,7 @@
         categorie="maintenance"
         version="0.2.2"
         etat="dev"
-        compatibilite="[3.0.0;3.0.*]"
+        compatibilite="[1.9.0;3.0.*]"
 		logo="prive/themes/spip/images/switcher-64.png"
         documentation="http://zine.spip.org/spip.php?article8"
 >       
