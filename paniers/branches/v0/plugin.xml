@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Paniers</nom>
 	<slogan>Cr&#233;er des s&#233;lections d'objets ayant un prix</slogan>
-	<auteur>[Les Développements Durables->http://www.ldd.fr], C&#233;dric Morin ([yterium.net->http://www.yterium.net])</auteur>
+	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr], C&#233;dric Morin ([yterium.net->http://www.yterium.net])</auteur>
 	<licence>GPL v3</licence>
 	<version>0.3.4</version>
 	<version_base>0.2</version_base>
