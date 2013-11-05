@@ -8,7 +8,7 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Squelettes HTML5 par défaut pour SPIP 3 + Z-core : modulaires et exemplaires.
+			[fr]Squelettes HTML5 par d&#233;faut pour SPIP 3 + Z-core : modulaires et exemplaires.
 			[en]HTML5 default skeleton for SPIP 3 + Z-core : modular and flexible
 		</multi>
 	</description>
@@ -16,6 +16,6 @@
 	<prefix>Z5</prefix>
 	<options>z5_options.php</options>
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[3.0-dev;]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.*]" />
 	<necessite id="Zcore" version="[2.0.0;]" />
 </plugin>
