@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.2.2"
 	etat="dev"
-	compatibilite="[2.1.8;3.1.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/paypal-32.png"
 	documentation=""
 	schema="0.1" 
@@ -12,7 +12,7 @@
 	<nom>Paypal</nom>
 	<!-- Paypal dans SPIP -->
 
-	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
 	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
 
 	<licence>GPL v3</licence>

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Paypal</nom>
 	<auteur>
-	[Matthieu Marcillaud->http://magraine.net/], [Les Développements Durables->http://www.ldd.fr]
+	[Matthieu Marcillaud->http://magraine.net/], [Les D&#233;veloppements Durables->http://www.ldd.fr]
 	</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2.2</version>
@@ -38,7 +38,7 @@
 		<url>configurer_paypal</url>
 	</bouton>
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
-	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.8;]" />
 	<utilise id="verifier" version="[0.1.6;]" />
