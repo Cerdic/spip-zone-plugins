@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.9.13"
 	etat="test"
-	compatibilite="[3.0.0-beta;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/oembed-32.png"
 	schema="0.4.0"
 	documentation="http://contrib.spip.net/4407"
