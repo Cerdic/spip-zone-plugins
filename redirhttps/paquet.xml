@@ -3,13 +3,13 @@
 	categorie="performance"
 	version="0.1.0"
 	etat="test"
-	compatibilite="[2.1.11;["
+	compatibilite="[2.1.11;3.0.*]"
 	logo="images/redirhttps-128.png"
 	documentation="http://www.spip-contrib.net/Rediriger-en-HTTPS-quand-l-utilisateur-est-connecte"
 >	
 
 	<nom>Redirections HTTPS</nom>
-	<!-- Sécuriser l'accès à certaines pages du site -->
+	<!-- Sécuriser l'acc&#232;s à certaines pages du site -->
 
 	<auteur>Severo</auteur>
 	<credit lien="http://www.iconfinder.com/icondetails/25388/128/high_security_thick_icon">Oliver Scholtz</credit>
