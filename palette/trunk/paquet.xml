@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="3.0.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/palette-128.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/Palette"
@@ -12,7 +12,7 @@
 	<nom>Palette</nom>
 	<!-- Sélecteur de couleurs -->
 
-	<auteur>Daniel FAIVRE (à partir de travaux de Marcimat)</auteur>
+	<auteur>Daniel FAIVRE (&#224; partir de travaux de Marcimat)</auteur>
 
 	<copyright>2008-2013</copyright>
 
