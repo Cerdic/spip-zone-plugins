@@ -13,7 +13,7 @@
 
 	<description>Ce plugin permet d'afficher un menu d&#233;roulant d'images et la s&#233;lection de l'une d'elles pour affichage. Les vignettes du menu d&#233;roulant sont accompagn&#233;es d'un effet de reflet. La navigation entre les images peut &#234;tre r&#233;alis&#233;e en d&#233;pla&#231;ant le curseur sur la ligne ou via la roulette de la souris.</description>
 	<lien>http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP</lien>
-	<version>1.31.0</version>
+	<version>2.0.0</version>
 	<etat>stable</etat>
 	<icon>images/imageflow.png</icon>
 	<prefix>imageflow</prefix>
@@ -30,6 +30,6 @@
 		<inclure>inc/imageflow_pipeline_header_prive.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
