@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.2.0"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.1.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/roles-64.png"
 	documentation="http://www.spip-contrib.net/?article4199"
 >
