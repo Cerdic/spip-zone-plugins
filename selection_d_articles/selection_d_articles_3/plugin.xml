@@ -2,7 +2,7 @@
 	<nom><multi>[fr]S&#233;lection d'articles pour SPIP 3[de]Artikelauswahl</multi></nom>
 	<slogan><multi>[fr]S&#233;lectionner des articles &#224; mettre en avant[de]W&#228;hle die Artikeln nach vorne</multi></slogan>
 	<auteur>ARNO*</auteur>
-	<version>3.0</version>
+	<version>3.0.0</version>
 	<version_base>0.3.1</version_base>
 	<etat>stable</etat>
 	<description>
