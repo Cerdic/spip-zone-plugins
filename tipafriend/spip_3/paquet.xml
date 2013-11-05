@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.6.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/letter_32.png"
 	documentation="http://www.spip-contrib.net/?article3638"
 >	
