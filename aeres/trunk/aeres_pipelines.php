@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function aeres_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 	if ($exec=='configurer_zotspip' && autoriser('webmestre'))
