@@ -63,6 +63,6 @@
 -->
 <!-- manque aussi le menu -->
 	<necessite id='tw' version='[0.8.0;]' />
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
