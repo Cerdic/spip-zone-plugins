@@ -1,7 +1,7 @@
 <paquet
 	prefix="openid"
 	categorie="auteur"
-	version="1.1.14"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.99]"
 	logo="images/openid-100.png"
@@ -29,7 +29,7 @@
 	<pipeline nom="pre_edition" inclure="openid_pipelines.php" />
 	<pipeline nom="recuperer_fond" />
 
-	<lib nom="openid-php-openid-782224d" lien="http://www.spip-contrib.net/IMG/zip/openid-php-openid-2.2.2-0-ga287b2d.zip" />
+	<lib nom="openid-php-openid-ee669c6" lien="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 
 <spip compatibilite="[2.1.0;3.0.99]">	
 
