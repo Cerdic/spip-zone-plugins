@@ -1,0 +1,10 @@
+#CACHE{0}
+#SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
+<BOUCLE_extras(DATA){source tableau, #GET{extras}}>
+#SET{champs_extras,#GET{champs_extras}|push{#VALEUR{options/nom}}
+</BOUCLE_extras>
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}>
+[(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{#SET{autoriser,1},#REM|sinon_interdire_acces})]#SET{id_evenement,#ARRAY}<BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>#SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}</BOUCLE_evenements>"<:reservation:label_reference:>","<:reservations_detail:label_descriptif:>","<:reservation:label_statut:>","<:reservation:label_date:>","<:reservation:label_nom:>","<:reservation:label_email:>",["(#GET{champs_extras}|implode{'","'})",]"<:reservations_detail:label_quantite:>"
+<BOUCLE_evt(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{par id_reservation}>#SET{id_auteur,''}<BOUCLE_res(RESERVATIONS){id_reservation}{tout}>#SET{nom,#NOM} #SET{email,#EMAIL**}#SET{id_auteur,#ID_AUTEUR}#SET{reference,#REFERENCE}#SET{donnees_auteur,#DONNEES_AUTEUR}</BOUCLE_res>#SET{descriptif,#DESCRIPTIF**}#SET{valeurs_extras,#ARRAY}<BOUCLE_participants(AUTEURS){id_auteur=#GET{id_auteur}}{id_auteur!=0}{tout}>#SET{nom,#NOM} #SET{email,#EMAIL**}<BOUCLE_aut_ext(DATA){source tableau, #GET{champs_extras}}>#SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR}|sinon{-}}}</BOUCLE_aut_ext></BOUCLE_participants><BOUCLE_aut_ext2(DATA){source tableau, #GET{donnees_auteur}|unserialize}>#SET{valeurs_extras,#GET{valeurs_extras}|push{#VALEUR|sinon{-}}}</BOUCLE_aut_ext2><//B_participants>"#GET{reference}","#GET{descriptif}","#STATUT","#MAJ","#GET{nom}","#GET{email}",["(#GET{valeurs_extras}|implode{'","'})",]"#QUANTITE"
+</BOUCLE_evt>
+</BOUCLE0>

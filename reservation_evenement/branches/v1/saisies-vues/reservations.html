@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_reservations_selectionnes>
+	<ul>
+	<BOUCLE_reservations_selectionnes(RESERVATIONS){id_reservation IN #GET*{valeur}}
+		{par num reference, reference}{statut?}{tout}>
+		<li class="choix">#REFERENCE (#ID_RESERVATION)</li>
+	</BOUCLE_reservations_selectionnes>
+	</ul>
+	</B_reservations_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_reservations_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_reservation_selectionne(RESERVATIONS){id_reservation=#ENV{valeur}}
+		{par num reference, reference}{statut?}{tout}>
+	  	<p>#REFERENCE (#ID_RESERVATION)</p>
+	</BOUCLE_reservation_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_reservation_selectionne>
+<//B_test_multiple>

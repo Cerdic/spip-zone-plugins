@@ -1,0 +1,14 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_articles(PRIX_OBJETS){par num titre, titre}{id_objet?}{objet?}{tout}>
+        [(#ENV{multiple}|oui)
+        <option data-prix_ht="#PRIX_HT**" data-prix_ht="#PRIX_HT**" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE[ - (#PRIX|>{0}|?{#PRIX,#PRIX_HT})]</option>]
+        [(#ENV{multiple}|non)
+        <option data-prix_ht="#PRIX_HT**" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE [ - (#PRIX|>{0}|?{#PRIX,#PRIX_HT})]</option>]
+
+	</BOUCLE_articles>
+</select>

@@ -1,0 +1,48 @@
+#HTTP_HEADER{Content-Type:text/html}
+#INCLURE{fond=emails/inc-haut}
+<BOUCLE_art(RESERVATIONS){id_reservation}{statut?}>
+#SET{nom_client,#NOM}
+#SET{extras,#DONNEES_AUTEUR|unserialize}
+ #SET{email,#EMAIL}
+<BOUCLE_contact(AUTEURS){id_auteur=#ID_AUTEUR}{si #ID_AUTEUR|!={0}|oui}{tout}>
+    #SET{nom_client,#NOM}
+    #SET{valeurs_extras,#ARRAY}
+    #SET{email,#EMAIL}
+    #SET{extras,#VAL|champs_extras_reservation}
+    <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
+    #SET{valeurs_extras,#GET{valeurs_extras}|array_merge{#ARRAY{#VALEUR{options/label},#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}}}
+    </BOUCLE_extras>
+</BOUCLE_contact>
+#SET{extras,#GET{valeurs_extras}}
+</B_contact>
+[(#ENV{qui}|=={client}|oui)
+<p><:reservation:bonjour:> #GET{nom_client}</p>
+<p><:reservation:merci_de_votre_reservation:></p>]
+[(#ENV{qui}|=={client}|non)
+<p><:reservation:une_reservation_de:> #GET{nom_client}</p>]
+
+<h3><:reservation:recapitulatif:></h3>
+
+<p><:reservation:reservation_numero:>#REFERENCE</p>
+<p><:reservation:reservation_date:>#DATE</p>
+<p><:reservation:label_email:> #GET{email}</p>
+<BOUCLE_champs_extras(DATA){source tableau, #GET{extras}}>
+<p>[(#CLE|extraire_multi)] : #VALEUR</p>    
+</BOUCLE_champs_extras>
+
+<p><:reservation:details_reservation:></p>
+<INCLURE{fond=inclure/reservation,id_reservation,format_envoi=#ENV{format_envoi}}>
+
+
+<p><:reservation:remerciement:></p>
+
+<p>#NOM_SITE_SPIP</p>
+
+<hr />
+<p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+</BOUCLE_art>
+[(#ENV{format_envoi}|=={plain}|oui)
+	#FILTRE{supprimer_tags|filtrer_entites|trim}]
+[(#ENV{format_envoi}|=={plain}|non)
+	#FILTRE{filtrer_entites|trim}]
+#INCLURE{fond=emails/inc-bas}

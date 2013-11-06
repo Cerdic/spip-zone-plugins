@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/reservations_details, par=id_reservation, env, ajax, sinon=<:reservations_detail:info_aucun_reservations_detail:>}>
+
+[(#AUTORISER{creer,reservations_detail})
+	[(#URL_ECRIRE{reservations_detail_edit,new=oui}|icone_verticale{<:reservations_detail:icone_creer_reservations_detail:>,reservations_detail,new,right})]
+]

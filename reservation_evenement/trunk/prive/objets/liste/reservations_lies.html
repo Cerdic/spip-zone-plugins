@@ -1,0 +1,63 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi reference,1,
+	date,-1, 
+	id_reservation,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutresl,#EVAL{_request("debutresl");}}}
+<B_liste_reservations>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutresl,#EVAL{_request("debutresl");}}}
+#SET{afficher_lettres,#TRI|=={'multi reference'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies reservations">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(RESERVATIONS){tout}{id_reservation IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi reference},#GET{defaut_tri}}{id_reservation==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#REFERENCE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutresl,@#ID_RESERVATION}|ancre_url{paginationresl}|afficher_initiale{#REFERENCE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='reference' scope='col'>[(#TRI{multi reference,<:reservation:label_reference:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_reservations(RESERVATIONS){id_reservation IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi reference},#GET{defaut_tri}}{pagination #ENV{nb,10} resl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#REFERENCE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_RESERVATION|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='statut'>[(#STATUT|puce_statut{reservation})]</td> 
+			<td class='reference'>[(#LOGO_RESERVATION|image_reduire{20,20})]<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]">#REFERENCE</a></td>
+
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\[reservation-#ID_RESERVATION-#OBJET-#ID_OBJET\]" value="X"><:reservation:retirer_lien_reservation:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_reservations>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[reservation-*-#OBJET-#ID_OBJET\]" value="X"><:reservation:retirer_tous_liens_reservations:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_reservations>
+<div class="liste-objets liste-objets-lies RESERVATIONS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:reservation:info_aucun_reservation:>})]</strong>
+</div>
+<//B_liste_reservations>

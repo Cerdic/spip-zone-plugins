@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,reservation,#ID_RESERVATION}|sinon_interdire_acces)]
+<BOUCLE_reservation(RESERVATIONS){id_reservation}{statut==.*}{si #ENV{exec}|=={reservation}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,reservation,#ID_RESERVATION})
+		[(#ID_RESERVATION|afficher_qui_edite{reservation}|non)
+			[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION}|icone_verticale{<:reservation:icone_modifier_reservation:>,reservation,edit,right ajax preload})]
+		]
+		[(#ID_RESERVATION|afficher_qui_edite{reservation}|oui)
+			[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION}|icone_verticale{#ID_RESERVATION|afficher_qui_edite{reservation},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#REFERENCE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{reservation-24.png}|balise_img{reservation,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{reservation,#ID_RESERVATION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/reservation,id=#ID_RESERVATION,id_reservation=#ID_RESERVATION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,reservation,#ID_RESERVATION})
+	[(#ID_RESERVATION|afficher_qui_edite{reservation}|non)
+		[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION}|icone_verticale{<:reservation:icone_modifier_reservation:>,reservation,edit,right ajax preload})]
+	]
+	[(#ID_RESERVATION|afficher_qui_edite{reservation}|oui)
+		[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION}|icone_verticale{#ID_RESERVATION|afficher_qui_edite{reservation},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,reservation,id,#ID_RESERVATION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+<INCLURE{fond=prive/objets/liste/reservations_details,id_reservation,par=id_evenement,env}/>
+
+[(#AUTORISER{creer,reservations_detail})
+    [(#URL_ECRIRE{reservations_detail_edit,new=oui&id_reservation=#ID_RESERVATION}|icone_verticale{<:reservations_detail:icone_creer_reservations_detail:>,reservations_detail,new,right})]
+]
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_reservation>
+[(#ENV**{exec}|=={reservation_edit}|?{#INCLURE{fond=prive/squelettes/contenu/reservation_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_reservation>

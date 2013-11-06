@@ -1,0 +1,25 @@
+#SET{id_evenement,#ARRAY}
+<B_evenements>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
+
+    <h3><:reservation_evenement:reservation_evenement_titre:></h3> 
+    
+    ,'simple personnel infos'})]    
+       <BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
+       [(#ENV{id_evenement}|oui)#SET{titre,#TITRE}]
+           <BOUCLE_article(ARTICLES){id_article=#ENV{id_article}}{unique}>
+            #SET{titre,#TITRE}
+           </BOUCLE_article>
+           <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{unique}>
+           #SET{titre,#TITRE}
+          </BOUCLE_rubrique>
+        #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
+       </BOUCLE_evenements>
+          [<h4>(#GET{titre})</h4>]      
+     
+    <INCLURE{fond=inclure/compteur_reservation_detail,id_evenement=#GET{id_evenement},env}/> 
+    
+#BOITE_FERMER     
+</B_evenements>
+

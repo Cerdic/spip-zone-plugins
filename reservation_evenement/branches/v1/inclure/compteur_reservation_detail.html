@@ -1,0 +1,27 @@
+#SET{reservations,#INCLURE{fond=inclure/compteur_reservations,env,multiple=oui}|unserialize}
+
+
+#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{reservations}|array_flip|implode{-}}}
+<ul>
+<BOUCLE_res(DATA){source tableau,#GET{reservations}}>
+    
+    <li>[(#VALEUR|oui)
+        [(#COMPTEUR_BOUCLE|=={1}|oui)
+        [(#ENV*{titre,#VALEUR|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})]
+        ]
+        [(#COMPTEUR_BOUCLE|=={1}|non)
+                [(#VALEUR)] [(#VAL{reservation:texte_statut_#CLE}|_T)]
+                #SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut,#CLE}}
+                ]
+
+         <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]" title="<:agenda:telecharger:>">[(#CHEMIN_IMAGE{telecharger-16.png}|image_reduire{13})]
+        </a>
+        [(#COMPTEUR_BOUCLE|=={1}|oui)
+        <div class="strong"><b><:par_auteur:> <:reservation:label_statut:></b></div>
+        ]
+     ]
+    [(#VALEUR|non)<:reservation:info_aucun_reservation:>]
+    </li>
+    
+</BOUCLE_res>
+</ul>

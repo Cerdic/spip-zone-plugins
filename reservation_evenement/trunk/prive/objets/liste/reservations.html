@@ -1,0 +1,8 @@
+#SET{id_evenement,#ARRAY}
+#SET{date_debut,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|agenda_dateplus{-1}}
+<BOUCLE_rub_ev(EVENEMENTS){evenement_a_venir #GET{date_debut}}{id_rubrique ?}{id_article ?}{fusion id_article}{inscription=1}{tout}>
+    #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}    
+</BOUCLE_rub_ev>
+
+<INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre=''}/>
+

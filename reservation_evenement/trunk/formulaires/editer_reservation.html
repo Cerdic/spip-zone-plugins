@@ -1,0 +1,32 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_reservation,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_reservation' value='#ENV{id_reservation}' />
+		<ul>
+
+			[(#SAISIE{auteurs, id_auteur, obligatoire=oui,
+				label=<:reservation:label_id_auteur:>})]
+				
+			[(#SAISIE{date, date_paiement,
+				label=<:reservation:label_date_paiement:>})]
+
+			[(#SAISIE{input, nom,
+				label=<:reservation:label_nom:>})]
+
+			[(#SAISIE{input, email,
+				label=<:reservation:label_email:>})]
+
+			[(#SAISIE{input, reference,
+				label=<:reservation:label_reference:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

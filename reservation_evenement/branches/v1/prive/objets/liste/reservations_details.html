@@ -1,0 +1,47 @@
+
+[(#SET{defaut_tri,#ARRAY{
+	descriptif,1, 
+	id_reservations_detail,1,
+	points,-1
+}})]<B_liste_reservations_details>
+#ANCRE_PAGINATION
+<div class="liste-objets reservations_details" id="liste_des_reservations">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#GRAND_TOTAL|singulier_ou_pluriel{reservations_detail:info_1_reservations_detail,reservations_detail:info_nb_reservations_details})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='descriptif' scope='col'>[(#TRI{descriptif,<:reservations_detail:label_descriptif:>,ajax})]</th>
+			<th class='reservation' scope='col'>[(#TRI{reference,<:reservation:label_reservation:>,ajax})]</th>	
+			<th class='nom' scope='col'><:reservation:label_nom:></th>						
+			<th class='id' scope='col'>[(#TRI{id_reservations_detail,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_reservations_details(RESERVATIONS_DETAILS reservations){id_reservation?}{id_evenement ?IN #ENV{id_evenement}}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num descriptif},#GET{defaut_tri}}{par descriptif}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{reservations_detail-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{reservations_detail,#ID_RESERVATIONS_DETAIL})]</td> 
+			<td class='descriptif principale'>[(#LOGO_RESERVATIONS_DETAIL|image_reduire{20,26})]<a href="[(#ID_RESERVATIONS_DETAIL|generer_url_entite{reservations_detail})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATIONS_DETAIL">[(#RANG). ]#DESCRIPTIF</a></td>
+            <td class='reservation'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:label_reference|attribut_html:> #REFERENCE">#REFERENCE</a></td>
+             <td class='nom'>
+               <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+                 <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="#NOM">#NOM</a>
+               </BOUCLE_auteur>
+                #NOM
+             <//B_auteur>
+           </td>           
+			<td class='id'>[(#AUTORISER{modifier,reservations_detail,#ID_RESERVATIONS_DETAIL}|?{
+				<a href="[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL})]">#ID_RESERVATIONS_DETAIL</a>,
+				#ID_RESERVATIONS_DETAIL
+			})]</td>
+		</tr>
+	</BOUCLE_liste_reservations_details>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_reservations_details>[
+<div class="liste-objets reservations_details caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_reservations_details>

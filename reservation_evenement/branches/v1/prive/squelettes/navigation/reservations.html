@@ -1,0 +1,86 @@
+#SET{id_evenement,#ARRAY}
+#SET{id_rubrique,#ARRAY}
+#SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}
+<B_evenements>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
+
+    <h3><:reservation_evenement:reservation_evenement_titre:></h3> 
+    
+    ,'simple personnel infos'})]  
+   
+       <BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
+        #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
+       [(#ENV{id_evenement}|oui)#SET{titre,#TITRE}]
+       </BOUCLE_evenements>
+          [<h4>(#GET{titre}|sinon{<:reservation:titre_reservations:>})</h4>]      
+#SET{reservations,#ARRAY}       
+#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},where,#ENV{where}}}
+<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{tout}>
+    #SET{reservations,#GET{reservations}|push{#QUANTITE}}   
+</BOUCLE_reservations>
+<ul>
+    <li>[(#ENV*{titre,#GET{reservations}|array_sum|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})] : <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]"><:reservation:texte_exporter:></a></li>
+    <li><:reservation:affichage_par:>
+        <ul class="selection" id="sel">
+            <li>[(#ENV{voir}|=={''}|non)#SET{a, </a>}
+                <a href="#URL_ECRIRE{evenements,voir=&par=reference}">]
+                    [(#CHEMIN_IMAGE{reservation_evenement-32.png}|image_reduire{16})] <:reservation:par_reservations:>
+                 #GET{a}  
+             </li>            
+            <li>[(#ENV{voir}|!={reservations_evenements}|oui)#SET{a, </a>}
+                <a href="#URL_ECRIRE{evenements,voir=reservations_evenements&par=date_debut&sense=-1}">]
+                    [(#CHEMIN_IMAGE{evenement-24.png}|image_reduire{16})] <:reservation:par_evenements:>
+                 #GET{a}  
+             </li>
+            <li>[(#ENV{voir}|!={reservations_articles}|oui)#SET{a, </a>}
+                <a href="#URL_ECRIRE{evenements,voir=reservations_articles&par=titre&sense=1}">]
+                    [(#CHEMIN_IMAGE{article-16.png}|image_reduire{16})] <:reservation:par_articles:>
+                 #GET{a}  
+             </li>             
+        </ul>
+    <li><a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">[(#CHEMIN_IMAGE{cfg-16.png}|image_reduire{16})] &nbsp;<:spip:icone_configuration_site:></a>   </li>
+</ul>
+#BOITE_FERMER     
+</B_evenements>
+
+<INCLURE{fond=inclure/reservation-rubriques,rubriques=#GET{id_rubrique},self=#GET{self},ajax,env}/>
+
+
+<script type="text/javascript">
+$(function() { 
+    $(".selection a").click(function() {
+        update_reservation(this);
+         return false;   
+        }); 
+  
+ });
+ 
+function update_reservation(link){
+    var voir = parametre_url(jQuery(link).attr('href'),'voir');
+    var par = parametre_url(jQuery(link).attr('href'),'par');
+    var sense = parametre_url(jQuery(link).attr('href'),'sense');        
+
+        ajaxReload(
+            'reservations', 
+                {
+                 callback:function(){
+                       $('#sel').ajaxReload( 
+                                {
+                                 args:{
+                                       voir:voir,par:par,sense:sense,
+                                       }              
+                                  }
+                                 
+                        ); 
+                    },
+                 args:{voir:voir,par:par,sense:sense }
+                 ,
+                 history:true  
+                 }            
+        );  
+    return false;
+}
+
+
+</script>

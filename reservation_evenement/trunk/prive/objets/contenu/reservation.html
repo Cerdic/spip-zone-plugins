@@ -1,0 +1,65 @@
+<BOUCLE_reservation(RESERVATIONS){id_reservation}{statut?}>
+
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<label><:reservation:label_date:></label>
+	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE)</span>
+</div>]
+
+[<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
+	<label><:reservation:label_date_paiement:></label>
+	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>(#DATE_PAIEMENT)</span>
+</div>]
+
+[<div class="champ contenu_type_paiement[ (#TYPE_PAIEMENT*|strlen|?{'',vide})]">
+	<label><:reservation:label_type_paiement:></label>
+	<span dir='#LANG_DIR' class='#EDIT{type_paiement} type_paiement'>(#TYPE_PAIEMENT)</span>
+</div>]
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<div class="champ contenu_nom">
+    <label><:reservation:label_nom:> </label>
+    <span dir='#LANG_DIR' class='#EDIT{nom} nom'><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></span>
+</div>
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+    <label><:reservation:label_email:></label>
+    <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+</div>]
+
+#SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
+    <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
+    <div class="champ contenu_#VALEUR{options/nom}">
+        <label>[(#VALEUR{options/label}|extraire_multi)]</label>
+        <span dir="#LANG_DIR" class="#CLE">[(#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}})]</span>
+    </div>    
+    </BOUCLE_extras>
+</BOUCLE_auteur>
+    [<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+        <label><:reservation:label_nom:></label>
+       <span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+    </div>]
+    
+    [<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+        <label><:reservation:label_email:></label>
+        <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+    </div>]
+ <//B_auteur>
+ 
+<BOUCLE_champs_extras(DATA){source tableau, #DONNEES_AUTEUR|unserialize}>
+<div class="champ contenu_#CLE">
+    <label>#CLE</label>
+    <span dir="#LANG_DIR" class="#CLE">#VALEUR</span>
+</div>    
+</BOUCLE_champs_extras>
+
+
+
+    
+
+
+[<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
+	<label><:reservation:label_reference:></label>
+	<span dir='#LANG_DIR' class='#EDIT{reference} reference'>(#REFERENCE)</span>
+</div>]
+
+</BOUCLE_reservation>

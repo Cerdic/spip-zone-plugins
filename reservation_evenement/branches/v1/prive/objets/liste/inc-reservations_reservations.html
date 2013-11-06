@@ -1,0 +1,49 @@
+[(#SET{defaut_tri,#ARRAY{
+    reference,-1, 
+    date,-1, 
+    id_reservation,1,
+    points,-1
+}})]<B_liste_reservations>
+#ANCRE_PAGINATION
+<div class="liste-objets reservations">
+<table class='spip liste'>
+    [<caption><strong class="caption">(#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations})</strong></caption>]
+    <thead>
+        <tr class='first_row'>
+            <th class='picto' scope='col'></th>
+            <th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+            <th class='reference' scope='col'>[(#TRI{reference,<:reservation:label_reference:>,ajax})]</th>
+            <th class='date' scope='col'><:reservation:reservation_de:></th>             
+            <th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+            <th class='id' scope='col'>[(#TRI{id_reservation,<:info_numero_abbreviation:>,ajax})]</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_liste_reservations(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+        <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+            <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
+            <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
+            <td class='reference principale'>[(#LOGO_RESERVATION|image_reduire{20,26})]<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">[(#RANG). ]#REFERENCE</a></td> 
+            <td class='auteur'>
+                   <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+                    <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a> -  
+                    <a href="mailto:#EMAIL">#EMAIL</a>
+                   </BOUCLE_auteur>
+                    #NOM - <a href="mailto:#EMAIL">#EMAIL</a>
+                 <//B_auteur>
+            </td>            
+
+            <td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+            <td class='id'>[(#AUTORISER{modifier,reservation,#ID_RESERVATION}|?{
+                <a href="[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION})]">#ID_RESERVATION</a>,
+                #ID_RESERVATION
+            })]</td>
+        </tr>
+    </BOUCLE_liste_reservations>
+    </tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_reservations>[
+<div class="liste-objets reservations caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_reservations>

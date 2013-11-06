@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,reservations_detail,#ID_RESERVATIONS_DETAIL}|sinon_interdire_acces)]
+<BOUCLE_reservations_detail(RESERVATIONS_DETAILS){id_reservations_detail}{statut==.*}{si #ENV{exec}|=={reservations_detail}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,reservations_detail,#ID_RESERVATIONS_DETAIL})
+		[(#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail}|non)
+			[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL}|icone_verticale{<:reservations_detail:icone_modifier_reservations_detail:>,reservations_detail,edit,right ajax preload})]
+		]
+		[(#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail}|oui)
+			[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL}|icone_verticale{#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#DESCRIPTIF|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{reservations_detail-24.png}|balise_img{reservations_detail,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{reservations_detail,#ID_RESERVATIONS_DETAIL}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/reservations_detail,id=#ID_RESERVATIONS_DETAIL,id_reservations_detail=#ID_RESERVATIONS_DETAIL,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,reservations_detail,#ID_RESERVATIONS_DETAIL})
+	[(#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail}|non)
+		[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL}|icone_verticale{<:reservations_detail:icone_modifier_reservations_detail:>,reservations_detail,edit,right ajax preload})]
+	]
+	[(#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail}|oui)
+		[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL}|icone_verticale{#ID_RESERVATIONS_DETAIL|afficher_qui_edite{reservations_detail},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,reservations_detail,id,#ID_RESERVATIONS_DETAIL},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_reservations_detail>
+[(#ENV**{exec}|=={reservations_detail_edit}|?{#INCLURE{fond=prive/squelettes/contenu/reservations_detail_edit,redirect='',titre=#DESCRIPTIF,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_reservations_detail>

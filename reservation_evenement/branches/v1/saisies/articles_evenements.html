@@ -1,0 +1,20 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_articles(ARTICLES){par num titre, titre}{id_article ?IN #ENV{id_article}}{id_rubrique ?IN #ENV{id_rubrique}}{statut?}{recherche?}{tout}>
+       <B_evenements>
+	   <optgroup label="#TITRE">#SET{titre,#TITRE}
+				  <BOUCLE_evenements(EVENEMENTS){id_article}>
+        [(#ENV{multiple}|oui)
+        <option data-id_article="#ID_ARTICLE" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>[(#TITRE|!={#GET{titre}}|oui)#TITRE ][(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</option>]
+        [(#ENV{multiple}|non)
+        <option data-id_article="#ID_ARTICLE"  value="#ID_EVENEMENT"[(#ID_EVENEMENT|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>[(#TITRE|!={#GET{titre}}|oui)#TITRE ][(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</option>]
+				  </BOUCLE_evenements>
+		</optgroup>		  
+       <B_evenements>				  
+
+	</BOUCLE_articles>
+</select>

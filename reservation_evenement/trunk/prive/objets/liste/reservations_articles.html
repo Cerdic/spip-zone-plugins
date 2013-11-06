@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{sense,-1},
+	titre,1,
+	id_article,1,
+	points,-1
+}})
+]<B_liste_evt>
+#ANCRE_PAGINATION
+<div class="liste-objets articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article,info_nb_articles}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='lieu' scope='col secondaire'><:reservation:titre_reservations:></th>			
+			<th class='id' scope='col'>[(#TRI{id_evenement,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evt(ARTICLES){id_article ?IN #ENV{id_article}}{id_rubrique?}{id_mot?}{id_evenement_source?}{where?}{statut?}{recherche?}{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+            <td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+                                                                                                                                                        title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></td>
+
+			<td class='reservations'>
+			        <INCLURE{fond=inclure/compteur_reservation_detail,id_article}/> 
+			</td>			
+            <td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+                <a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
+                #ID_ARTICLE
+            })]</td>
+		</tr>
+	</BOUCLE_liste_evt>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evt>[
+<div class="liste-objets evenements caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evt>

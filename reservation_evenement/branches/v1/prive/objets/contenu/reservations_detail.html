@@ -1,0 +1,43 @@
+<BOUCLE_reservations_detail(RESERVATIONS_DETAILS){id_reservations_detail}{statut?}>
+
+<div class="champ contenu_id_reservation[ (#ID_RESERVATION*|strlen|?{'',vide})]">
+	<label><:reservation:titre_reservation:></label>
+	<span dir='#LANG_DIR' class='#EDIT{id_reservation} id_reservation'><a href="#URL_ECRIRE{reservation,id_reservation=#ID_RESERVATION}">#INFO_TITRE{reservation,#ID_RESERVATION}</a></span>
+</div>
+
+<div class="champ contenu_id_evenement[ (#ID_EVENEMENT*|strlen|?{'',vide})]">
+	<label><:agenda:info_evenement:></label>
+	<span dir='#LANG_DIR' class='#EDIT{id_evenement} id_evenement'><a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">#INFO_TITRE{evenement,#ID_EVENEMENT}</a></span>
+</div>
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_descriptif:> </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_quantite[ (#QUANTITE*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_quantite:> </label>
+	<span dir='#LANG_DIR' class='#EDIT{quantite} quantite'>(#QUANTITE)</span>
+</div>]
+
+[<div class="champ contenu_prix_ht[ (#PRIX_HT*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_prix_ht:></label>
+	<span dir='#LANG_DIR' class='#EDIT{prix_ht} prix_ht'>(#PRIX_HT)</span>
+</div>]
+
+[<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_prix:></label>
+	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>(#PRIX)</span>
+</div>]
+
+[<div class="champ contenu_taxe[ (#TAXE*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_taxe:></label>
+	<span dir='#LANG_DIR' class='#EDIT{taxe} taxe'>(#TAXE)</span>
+</div>]
+
+[(#ID_PRIX_OBJET|oui)<div class="champ contenu_id_prix_objet[ (#ID_PRIX_OBJET*|strlen|?{'',vide})]">
+	<label><:reservations_detail:label_prix_objet:></label>
+	<span dir='#LANG_DIR' class='#EDIT{id_prix_objet} id_prix_objet'>#INFO_TITRE{prix_objet,#ID_PRIX_OBJET}</span>
+</div>]
+
+</BOUCLE_reservations_detail>

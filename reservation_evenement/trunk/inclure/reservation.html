@@ -1,0 +1,60 @@
+[(#REM) On peut donner soit un id_reservation, soit un tableau contenant la reservation]
+<BOUCLE_reservation(RESERVATIONS){id_reservation=#ID_RESERVATION}{tout}>
+	[(#REM) Si on trouve une reservation on prend ça comme base ]
+	#SET{details, #ARRAY}
+	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{tout}>
+	[(#SET_PUSH{details, [(#ARRAY{
+		descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
+		quantite, #QUANTITE,
+		prix, #PRIX*,
+		statut,#STATUT		
+	})]})]
+	</BOUCLE_reservation_details>
+	#SET{reservation, #ARRAY{details, #GET{details}}}
+</BOUCLE_reservation>
+#SET{reservation,#ENV{reservation}}
+<//B_reservation>[
+(#REM) Affichage du detail dans une table si format html demande
+
+]<BOUCLE_test(CONDITION){si #GET{reservation}|et{#GET{reservation}|is_array|oui}}>[
+(#REM) Version texte
+
+]<BOUCLE_test_format_texte(CONDITION){si #ENV{format_envoi}|=={plain}|oui}>[
+(#SET{total,0})
+]<BOUCLE_details_texte(POUR){tableau #GET{reservation}|table_valeur{details}}>[
+- (#VALEUR|table_valeur{descriptif}|trim|supprimer_tags)] : [(#VALEUR|table_valeur{prix}|prix_formater)][
+(#SET{total,[(#GET{total}|plus{[(#VALEUR|table_valeur{prix})]})]})
+]</BOUCLE_details_texte>
+
+<:prix:label_total_ttc:> : [(#GET{total}|prix_formater)]
+   </BOUCLE_test_format_texte>
+      <table class="reservation" cellspacing="0">
+         <thead>
+            <tr>
+               <th class="description"><:reservation:designation:></th>
+               <th class="montant"><:reservation:montant:></th>
+               <th class="statut"><:reservation:label_statut:></th>               
+            </tr>
+         </thead>
+         <tbody>
+            #SET{total,0}
+            <BOUCLE_details(POUR){tableau #GET{reservation}|table_valeur{details}}>
+            <tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+               <td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
+               <td class="montant">[(#VALEUR|table_valeur{prix}|prix_formater)]</td>
+               <td class="statut">
+                   [(#VAL{reservation:texte_statut[_(#VALEUR{statut}|trim)]}|_T)]
+                   </td>               
+            </tr>
+            [(#SET{total,[(#GET{total}|plus{[(#VALEUR|table_valeur{prix})]})]})]
+            </BOUCLE_details>
+         </tbody>
+         <tfoot>
+            <tr class="total_ttc">
+               <td class="descriptif"><:prix:label_total_ttc:></td>
+               <td class="montant">[(#GET{total}|prix_formater)]</td>
+            </tr>
+         </tfoot>
+      </table>
+   <//B_test_format_texte>
+</BOUCLE_test>

@@ -1,0 +1,13 @@
+<B_reservation>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
+    ,'simple personnel infos'})]  
+<BOUCLE_reservation(RESERVATIONS){id_reservation}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:reservation:titre_reservation:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION</p></div>
+[(#FORMULAIRE_INSTITUER_OBJET{reservation,#ID_RESERVATION})]
+</div>
+</BOUCLE_reservation>
+#BOITE_FERMER     
+</B_reservation>
