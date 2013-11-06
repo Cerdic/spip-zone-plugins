@@ -1,7 +1,7 @@
 <paquet
 	prefix="respim"
 	categorie="multimedia"
-	version="0.8.3"
+	version="0.8.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/respim-32.png"

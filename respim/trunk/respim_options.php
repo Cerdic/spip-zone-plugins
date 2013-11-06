@@ -83,7 +83,7 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 		}
 		$mwdpi = array(
 			'10x' => "screen $mw",
-			'15x' => "screen and (-webkit-min-device-pixel-ratio: 1.5) $mw,screen and (min--moz-device-pixel-ratio: 1.5) $mw",
+			'15x' => "screen and (-webkit-min-device-pixel-ratio: 1.5) and (-webkit-max-device-pixel-ratio: 1.99) $mw,screen and (min--moz-device-pixel-ratio: 1.5) and (max--moz-device-pixel-ratio: 1.99) $mw",
 			'20x' => "screen and (-webkit-min-device-pixel-ratio: 2) $mw,screen and (min--moz-device-pixel-ratio: 2) $mw",
 		);
 		foreach($files as $kx=>$file){
