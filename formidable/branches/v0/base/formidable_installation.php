@@ -51,7 +51,7 @@ function formidable_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		// Passer le champ saisies en longtext pour permettre d'y stocker des forumaires longs
+		// Passer le champ saisies en longtext pour permettre d'y stocker des formulaires longs
 		if (version_compare($version_actuelle,$version_cible='0.5.2','<')){	
 			include_spip('base/abstract_sql');
 			sql_alter('TABLE spip_formulaires CHANGE saisies saisies longtext NOT NULL default ""');

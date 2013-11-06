@@ -37,7 +37,7 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.5.0'] = array(array('maj_tables',array('spip_formulaires')));
 	// Modif du type du message de retour pour pouvoir mettre plus de chose
 	$maj['0.5.1'] = array(array('sql_alter','TABLE spip_formulaires CHANGE message_retour message_retour text NOT NULL default ""'));
-	// Passer le champ saisies en longtext pour permettre d'y stocker des forumaires longs
+	// Passer le champ saisies en longtext pour permettre d'y stocker des formulaires longs
 	$maj['0.5.2'] = array(array('sql_alter','TABLE spip_formulaires CHANGE saisies saisies longtext NOT NULL default ""'));
 
 	include_spip('base/upgrade');
