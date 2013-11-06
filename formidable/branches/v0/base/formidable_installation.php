@@ -50,6 +50,15 @@ function formidable_upgrade($nom_meta_version_base, $version_cible){
 			echo "Mise à jour du plugin formidable en version 0.5.1<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
+		
+		// Passer le champ saisies en longtext pour permettre d'y stocker des forumaires longs
+		if (version_compare($version_actuelle,$version_cible='0.5.2','<')){	
+			include_spip('base/abstract_sql');
+			sql_alter('TABLE spip_formulaires CHANGE saisies saisies longtext NOT NULL default ""');
+			
+			echo "Mise à jour du plugin formidable en version 0.5.2<br/>";
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
 	}
 	
 }
