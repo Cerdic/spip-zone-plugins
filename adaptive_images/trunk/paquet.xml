@@ -1,17 +1,14 @@
 <paquet
-	prefix="respim"
+	prefix="adaptive_images"
 	categorie="multimedia"
-	version="0.8.4"
+	version="0.9.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/respim-32.png"
+	logo="prive/themes/spip/images/adaptive_images-32.png"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2013-10-03 15:44:15
-	-->
 
-	<nom>Responsive Images</nom>
+	<nom>Adaptive Images</nom>
 
 	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cedric</auteur>
 

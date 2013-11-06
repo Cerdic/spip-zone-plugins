@@ -6,7 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
-	'respim_titre' => 'Responsive Images',
+	'adaptive_images_description' => '',
+	'adaptive_images_nom' => 'Adaptive Images',
+	'adaptive_images_slogan' => '<i lang="en">Adaptive Images</i> automagiques',
 );
 
 ?>

@@ -1,30 +1,31 @@
 <?php
 /**
- * Options du plugin Responsive Images
+ * Options du plugin Adaptive Images
  *
- * @plugin     Responsive Images
+ * @plugin     Adaptive Images
  * @copyright  2013
  * @author     Cedric
  * @licence    GNU/GPL
- * @package    SPIP\Respim\Options
+ * @package    SPIP\Adaptive_Images\Options
  */
+
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-if (!defined('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
-if (!defined('_RESPIM_LOWSRC_JPG_BG_COLOR')) define('_RESPIM_LOWSRC_JPG_BG_COLOR','ffffff');
-if (!defined('_RESPIM_LOWSRC_JPG_QUALITY')) define('_RESPIM_LOWSRC_JPG_QUALITY',10);
+if (!defined('_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING')) define('_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING',false);
+if (!defined('_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR')) define('_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR','ffffff');
+if (!defined('_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY')) define('_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY',10);
 
 // qualite de compression JPG pour les images 1.5x et 2x (on peut comprimer plus)
-if (!defined('_RESPIM_15x_JPG_QUALITY')) define('_RESPIM_15x_JPG_QUALITY',65);
-if (!defined('_RESPIM_20x_JPG_QUALITY')) define('_RESPIM_20x_JPG_QUALITY',45);
+if (!defined('_ADAPTIVE_IMAGES_15x_JPG_QUALITY')) define('_ADAPTIVE_IMAGES_15x_JPG_QUALITY',65);
+if (!defined('_ADAPTIVE_IMAGES_20x_JPG_QUALITY')) define('_ADAPTIVE_IMAGES_20x_JPG_QUALITY',45);
 
 // Breakpoints de taille d'ecran pour lesquels on generent des images
-if (!defined('_RESPIM_DEFAULT_BKPTS')) define('_RESPIM_DEFAULT_BKPTS','160,320,480,640,960,1440');
-// les images 1x sont au maximum en _RESPIM_MAX_WIDTH_1x px de large dans la page
-if (!defined('_RESPIM_MAX_WIDTH_1x')) define('_RESPIM_MAX_WIDTH_1x',640);
-// on ne traite pas les images de largeur inferieure a _RESPIM_MIN_WIDTH_1x px
-if (!defined('_RESPIM_MIN_WIDTH_1x')) define('_RESPIM_MIN_WIDTH_1x',320);
+if (!defined('_ADAPTIVE_IMAGES_DEFAULT_BKPTS')) define('_ADAPTIVE_IMAGES_DEFAULT_BKPTS','160,320,480,640,960,1440');
+// les images 1x sont au maximum en _ADAPTIVE_IMAGES_MAX_WIDTH_1x px de large dans la page
+if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MAX_WIDTH_1x',640);
+// on ne traite pas les images de largeur inferieure a _ADAPTIVE_IMAGES_MIN_WIDTH_1x px
+if (!defined('_ADAPTIVE_IMAGES_MIN_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MIN_WIDTH_1x',320);
 
 /**
  *
@@ -38,15 +39,15 @@ if (!defined('_RESPIM_MIN_WIDTH_1x')) define('_RESPIM_MIN_WIDTH_1x',320);
  * @param int $max_width_1x
  * @return string
  */
-function respim_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
+function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	$class = extraire_attribut($img,"class");
-	if (strpos($class,"respim")!==false) return $img;
+	if (strpos($class,"adaptimg")!==false) return $img;
 	ksort($rwd_images);
 	$cid = "c".crc32(serialize($rwd_images));
 	$style = "";
 	if ($class) $class = " $class";
 	$class = "$cid$class";
-	$img = inserer_attribut($img,"class","respim-fallback $class");
+	$img = inserer_attribut($img,"class","adaptimg-fallback $class");
 
 	// image de fallback fournie ?
 	if (isset($rwd_images['fallback'])){
@@ -103,9 +104,9 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
 
 	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
-	$img = inserer_attribut($img,"class","respim $class");
-	$img = inserer_attribut($img,"onmousedown","imgFix(this)");
-	$out .= "<!--[if !IE]--><b class=\"respwrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
+	$img = inserer_attribut($img,"class","adaptimg $class");
+	$img = inserer_attribut($img,"onmousedown","adaptimgFix(this)");
+	$out .= "<!--[if !IE]--><b class=\"adaptimg-wrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
 }
@@ -121,12 +122,12 @@ function respim_markup($img, $rwd_images, $width, $height, $extension, $max_widt
  * @param int $max_width_1x
  * @return string
  */
-function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
+function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	if (!$img) return $img;
-	if (strpos($img,"respim")!==false)
+	if (strpos($img,"adaptimg")!==false)
 		return $img;
 	if (is_null($bkpt) OR !is_array($bkpt))
-		$bkpt = explode(',',_RESPIM_DEFAULT_BKPTS);
+		$bkpt = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
 
 	if (!function_exists("taille_image"))
 		include_spip("inc/filtres");
@@ -136,7 +137,7 @@ function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 		include_spip("filtres/images_transforme");
 
 	list($h,$w) = taille_image($img);
-	if (!$w OR $w<=_RESPIM_MIN_WIDTH_1x) return $img;
+	if (!$w OR $w<=_ADAPTIVE_IMAGES_MIN_WIDTH_1x) return $img;
 
 	$src = trim(extraire_attribut($img, 'src'));
 	if (strlen($src) < 1){
@@ -175,7 +176,7 @@ function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 			else {
 				$i = image_reduire($img,$wkx,10000);
 				if ($extension=='jpg' AND $k!='10x')
-					$i = image_aplatir($i,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,constant('_RESPIM_'.$k.'_JPG_QUALITY'));
+					$i = image_aplatir($i,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,constant('_ADAPTIVE_IMAGES_'.$k.'_JPG_QUALITY'));
 				$images[$wk][$k] = extraire_attribut($i,"src");
 			}
 		}
@@ -186,19 +187,19 @@ function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
 	if (function_exists("image_aplatir")){
 		// image de fallback : la plus grande en jpg tres compresse
 		// la qualite est reduite si la taille de l'image augmente, pour limiter le poids de l'image
-		// regle de 3 au feeling, _RESPIM_LOWSRC_JPG_QUALITY correspond a une image de 300kPx
-		// et on varie dans +/-50% de _RESPIM_LOWSRC_JPG_QUALITY
-		$q = round(_RESPIM_LOWSRC_JPG_QUALITY-((min($max_width_1x,$w)*$h/$w*min($max_width_1x,$w))/100000-3));
-		$q = min($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*1.5);
-		$q = max($q,round(_RESPIM_LOWSRC_JPG_QUALITY)*0.5);
-		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]['10x']:$large,'jpg',_RESPIM_LOWSRC_JPG_BG_COLOR,$q);
+		// regle de 3 au feeling, _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY correspond a une image de 300kPx
+		// et on varie dans +/-50% de _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY
+		$q = round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY-((min($max_width_1x,$w)*$h/$w*min($max_width_1x,$w))/100000-3));
+		$q = min($q,round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY)*1.5);
+		$q = max($q,round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY)*0.5);
+		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]['10x']:$large,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,$q);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
 	// l'image est reduite a la taille maxi (version IE)
 	$img = image_reduire($img,$max_width_1x,10000);
 	// generer le markup
-	return respim_markup($img,$images,$w, $h, $extension, $max_width_1x);
+	return adaptive_images_markup($img,$images,$w, $h, $extension, $max_width_1x);
 }
 
 /**
@@ -208,10 +209,10 @@ function respim_image($img, $bkpt = null, $max_width_1x=_RESPIM_MAX_WIDTH_1x){
  * @param null|int $max_width_1x
  * @return mixed
  */
-function adaptative_images($texte,$max_width_1x=_RESPIM_MAX_WIDTH_1x){
+function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	static $bkpts = array();
 	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
-		$b = explode(',',_RESPIM_DEFAULT_BKPTS);
+		$b = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
 		while (count($b) AND end($b)>$max_width_1x) array_pop($b);
 		// la largeur maxi affichee
 		if (!count($b) OR end($b)<$max_width_1x) $b[] = $max_width_1x;
@@ -223,7 +224,7 @@ function adaptative_images($texte,$max_width_1x=_RESPIM_MAX_WIDTH_1x){
 	preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
 	if (count($matches)){
 		foreach($matches as $m){
-			$ri = respim_image($m[0], $bkpt, $max_width_1x);
+			$ri = adaptive_images_process_img($m[0], $bkpt, $max_width_1x);
 			if ($ri!==$m[0]){
 				$replace[$m[0]] = $ri;
 			}
@@ -243,25 +244,25 @@ function adaptative_images($texte,$max_width_1x=_RESPIM_MAX_WIDTH_1x){
  * @param $texte
  * @return mixed
  */
-function respim_affichage_final($texte){
-	$respim_ins = false;
+function adaptive_images_affichage_final($texte){
+	$adaptive_images_ins = false;
 	if ($GLOBALS['html']){
 		#spip_timer();
 		$texte = adaptative_images($texte);
-		if (strpos($texte,"respwrapper")!==false){
+		if (strpos($texte,"adaptimg-wrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
-			$ins = "<style type='text/css'>"."img.respim{opacity:0.70;max-width:100%;height:auto;}"
-			."b.respwrapper,b.respwrapper:after{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
-			."b.respwrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
+			$ins = "<style type='text/css'>"."img.adaptimg{opacity:0.70;max-width:100%;height:auto;}"
+			."b.adaptimg-wrapper,b.adaptimg-wrapper:after{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
+			."b.adaptimg-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."</style>\n";
 			// le script qui estime si la rapidite de connexion et pose une class slow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
-			$async_style = "html img.respim{opacity:0.01}html b.respwrapper:after{display:none;}";
+			$async_style = "html img.adaptimg{opacity:0.01}html b.adaptimg-wrapper:after{display:none;}";
 			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
 				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
-				."function imgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
+				."function adaptimgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
 				// Android 2 media-queries bad support workaround
 				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
 				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
@@ -286,17 +287,17 @@ function respim_affichage_final($texte){
 				."if(slowConnection) {hAC('slow');hRC('ahrdpi');}\n"
 				// injecter un style async apres chargement des images
 			  // pour masquer les couches superieures (fallback et chargement)
-				."var respim_onload = function(){"
+				."var adaptimg_onload = function(){"
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
 			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
-				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(respim_onload)}); else window.onload=respim_onload;/*]]>*/</script>\n";
+				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptimg_onload)}); else window.onload=adaptimg_onload;/*]]>*/</script>\n";
 			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
-			if (!_RESPIM_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
-				$ins .= "<noscript><style type='text/css'>.png img.respim,.gif img.respim{opacity:0.01}b.respwrapper.png:after,b.respwrapper.gif:after{display:none;}</style></noscript>";
+			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
+				$ins .= "<noscript><style type='text/css'>.png img.adaptimg,.gif img.adaptimg{opacity:0.01}b.adaptimg-wrapper.png:after,b.adaptimg-wrapper.gif:after{display:none;}</style></noscript>";
 			// inserer avant le premier <script> ou <link a defaut
 
-			// regrouper tous les styles respim dans le head
+			// regrouper tous les styles adaptimg dans le head
 			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
 			if (count($matches[1])){
 				$texte = str_replace($matches[1],"",$texte);
