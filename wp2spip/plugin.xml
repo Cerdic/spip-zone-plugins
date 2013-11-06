@@ -4,7 +4,7 @@
 	<icon>wp2spip.png</icon>
     <categorie>divers</categorie>
     <auteur>[Daniel Anic->http://www.anic.fr]</auteur>
-    <version>0.2</version>
+    <version>0.2.1</version>
  
   
     <etat>test</etat>
@@ -30,14 +30,14 @@
       
       
       
-      http://www.spip-contrib.net/Wordpress-2-SPIP
+      http://contrib.spip.net/Wordpress-2-SPIP
 	  
       </description>
       <prefix>wp2spip</prefix>
 
  
  <options>wp2spip_options.php</options>
- <lien>http://www.spip-contrib.net/Wordpress-2-SPIP</lien>
+ <lien>http://contrib.spip.net/Wordpress-2-SPIP</lien>
  
  <necessite id="SPIP" version="[2.1.0;2.1.99]" />
  <utilise id="pages" version="[0.3.7;]" />
