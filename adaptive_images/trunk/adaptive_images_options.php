@@ -278,12 +278,12 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 
 /**
  * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
- * [(#TEXTE|adaptative_images{1024})]
+ * [(#TEXTE|adaptive_images{1024})]
  * @param string $texte
  * @param null|int $max_width_1x
  * @return mixed
  */
-function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
+function adaptive_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	static $bkpts = array();
 	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
 		$b = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
@@ -309,6 +309,16 @@ function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	}
 
 	return $texte;
+}
+
+/**
+ * nommage alternatif
+ * @param $texte
+ * @param int $max_width_1x
+ * @return mixed
+ */
+function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
+	return adaptive_images($texte,$max_width_1x);
 }
 
 /**
