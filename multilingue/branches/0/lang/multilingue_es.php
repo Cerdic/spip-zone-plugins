@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desactiver_traduction_logo_objet' => 'Desactivar la posibilidad de que la baliza  #LOGO_OBJET incluya el logotipo del objeto de origen si no encuentra logotipo para el objeto en cuestión. ',
 
 	// E
-	'explication_desactiver_traduction_logo_objet' => 'Si lel objeto es traducido  (presencia  de un id_trad como por los artículos y secciones ) este  plugin actua de manera que la balisza #LOGO_ARTICLE p.ex busca  el logotipo de la traducción del artículo  (articculo de referencia) si este no dispone   de logotipo.', # Se puede decir 'logo' o 'logotipo'
+	'explication_desactiver_traduction_logo_objet' => 'Si el objeto es traducido  (presencia  de un id_trad como por los artículos y secciones ) este  plugin actua de manera que la balisza #LOGO_ARTICLE p.ex busca  el logotipo de la traducción del artículo  (articulo de referencia) si este no dispone   de logotipo.', # Se puede decir 'logo' o 'logotipo'
 
 	// L
 	'logo_objet' => 'Logotipo Objeto',
