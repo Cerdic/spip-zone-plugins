@@ -69,4 +69,21 @@ function responsive_logo($logo){
 	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"$hover> </span></span>";
 }
 
+/**
+ * Compatibilite : permet de remplacer les [(#TEXTE|image_reduire{500})] des squelettes
+ * par un simple [(#TEXTE|adaptive_images)]
+ * Avec le plugin adaptive_images cela produire des images adaptives
+ */
+if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')){
+	// les images 1x sont au maximum en _ADAPTIVE_IMAGES_MAX_WIDTH_1x px de large dans la page
+	if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MAX_WIDTH_1x',640);
+
+	function adaptive_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
+		if (!function_exists('filtrer'))
+			include_spip('inc/filtres');
+		$texte = filtrer('image_reduire',$texte,$max_width_1x,10000);
+		return filtrer('image_graver',$texte);
+	}
+}
+
 ?>
