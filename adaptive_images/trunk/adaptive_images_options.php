@@ -27,6 +27,68 @@ if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MAX_WIDT
 // on ne traite pas les images de largeur inferieure a _ADAPTIVE_IMAGES_MIN_WIDTH_1x px
 if (!defined('_ADAPTIVE_IMAGES_MIN_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MIN_WIDTH_1x',320);
 
+// Pour les ecrans plus petits, c'est la version mobile qui est fournie (recadree)
+if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION')) define('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION',320);
+
+/**
+ * Completer la page d'edition d'un document
+ * pour joindre sous-titrage, audio-desc et transcript sur les videos
+ *
+ * @param array $flux
+ * @return array
+ */
+function adaptive_images_affiche_milieu($flux){
+	if (in_array($flux['args']['exec'],array('document_edit','documents_edit'))
+	  AND $id_document=$flux['args']['id_document']){
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/adapter-image',array('id_document'=>$id_document));
+	}
+	return $flux;
+}
+
+/**
+ * Injecter data-src-mobile="..." sur les modeles img/doc/emb quand une variante mobile existe
+ *
+ * @param array $flux
+ * @return array
+ */
+function adaptive_images_recuperer_fond($flux){
+	if (
+		strncmp($flux['args']['fond'],"modeles/img",11)==0
+		OR strncmp($flux['args']['fond'],"modeles/doc",11)==0
+		OR strncmp($flux['args']['fond'],"modeles/emb",11)==0){
+		if ($id_document = intval($flux['args']['contexte']['id_document'])){
+			if ($mobileview = adaptive_images_variante($id_document,"mobileview")){
+				$src_mobile = get_spip_doc($mobileview['fichier']);
+				$imgs = extraire_balises($flux['data']['texte'],'img');
+				foreach($imgs as $img){
+					$src = extraire_attribut($img,"src");
+					$src = set_spip_doc($src);
+					if (sql_getfetsel("id_document","spip_documents","id_document=".intval($id_document)." AND fichier=".sql_quote($src))){
+						$img2 = inserer_attribut($img,"data-src-mobile",$src_mobile);
+						$flux['data']['texte'] = str_replace($img,$img2,$flux['data']['texte']);
+					}
+				}
+			}
+		}
+	}
+	return $flux;
+}
+
+
+/**
+ * Trouver la variante $mode d'une image
+ * @param int $id_document
+ * @param string $mode
+ *   mobileview
+ * @return array
+ */
+function adaptive_images_variante($id_document,$mode){
+	return sql_fetsel('*',
+		'spip_documents as d JOIN spip_documents_liens as L on L.id_document=d.id_document',
+		"L.objet='document' AND L.id_objet=".intval($id_document)." AND d.mode=".sql_quote($mode));
+}
+
+
 /**
  *
  * @param string $img
@@ -144,6 +206,8 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 		$src = $img;
 		$img = "<img src='$src' />";
 	}
+	$src_mobile = extraire_attribut($img, 'data-src-mobile');
+
 	// on ne touche pas aux data:uri
 	if (strncmp($src,"data:",5)==0)
 		return $img;
@@ -165,34 +229,43 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 	$extension = $parts['extension'];
 
 	// calculer les variantes d'image sur les breakpoints
-	$large = "";
+	$fallback = $src;
+	$wfallback = $w;
 	$dpi = array('10x'=>1,'15x'=>1.5,'20x'=>2);
 	foreach($bkpt as $wk){
 		if ($wk>$w) break;
+		$is_mobile = (($src_mobile AND $wk<=_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION)?true:false);
 		foreach($dpi as $k=>$x){
 			$wkx = intval(round($wk * $x));
 			if ($wkx>$w)
 				$images[$wk][$k] = $src;
 			else {
-				$i = image_reduire($img,$wkx,10000);
+				$i = image_reduire($is_mobile?$src_mobile:$img,$wkx,10000);
 				if ($extension=='jpg' AND $k!='10x')
 					$i = image_aplatir($i,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,constant('_ADAPTIVE_IMAGES_'.$k.'_JPG_QUALITY'));
 				$images[$wk][$k] = extraire_attribut($i,"src");
 			}
 		}
-		if ($wk<=$max_width_1x) $large = $images[$wk]['10x'];
+		if ($wk<=$max_width_1x AND ($is_mobile OR !$src_mobile)) {
+			$fallback = $images[$wk]['10x'];
+			$wfallback = $wk;
+		}
 	}
 
 	// l'image de fallback en jpg tres compresse
 	if (function_exists("image_aplatir")){
-		// image de fallback : la plus grande en jpg tres compresse
+		// image de fallback : la plus grande en jpg tres compresse ou la version mobile en jpg tres compresse
+		if ($wk>$w&&$w<$max_width_1x){
+			$fallback = $images[$w]['10x'];
+			$wfallback = $w;
+		}
 		// la qualite est reduite si la taille de l'image augmente, pour limiter le poids de l'image
-		// regle de 3 au feeling, _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY correspond a une image de 300kPx
+		// regle de 3 au feeling, _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY correspond a une image de 450kPx
 		// et on varie dans +/-50% de _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY
-		$q = round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY-((min($max_width_1x,$w)*$h/$w*min($max_width_1x,$w))/100000-3));
+		$q = round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY-((min($max_width_1x,$wfallback)*$h/$w*min($max_width_1x,$wfallback))/75000-6));
 		$q = min($q,round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY)*1.5);
 		$q = max($q,round(_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY)*0.5);
-		$fallback = image_aplatir($wk>$w&&$w<$max_width_1x?$images[$w]['10x']:$large,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,$q);
+		$fallback = image_aplatir($fallback,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,$q);
 		$images["fallback"] = extraire_attribut($fallback,"src");
 	}
 
@@ -201,6 +274,7 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 	// generer le markup
 	return adaptive_images_markup($img,$images,$w, $h, $extension, $max_width_1x);
 }
+
 
 /**
  * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x

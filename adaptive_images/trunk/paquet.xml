@@ -1,7 +1,7 @@
 <paquet
 	prefix="adaptive_images"
 	categorie="multimedia"
-	version="0.9.0"
+	version="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/adaptive_images-32.png"
@@ -13,6 +13,8 @@
 	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cedric</auteur>
 
 	<licence>GNU/GPL</licence>
+	<pipeline nom="affiche_milieu" />
+	<pipeline nom="recuperer_fond" />
 	<pipeline nom="affichage_final" />
 
 </paquet>
