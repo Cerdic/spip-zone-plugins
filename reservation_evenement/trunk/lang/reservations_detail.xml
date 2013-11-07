@@ -1,0 +1,8 @@
+<traduction module="reservations_detail" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=de" total="19" traduits="6" relire="0" modifs="0" nouveaux="13" pourcent="31.58">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=en" total="19" traduits="6" relire="0" modifs="0" nouveaux="13" pourcent="31.58">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>
