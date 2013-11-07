@@ -120,7 +120,7 @@ function exec_spiplistes_abonne_edit () {
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
 				_T('spiplistes:supprimer_ce_contact')
-				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE))
+				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE,'',false,true))
 				, 'redacteurs-24.gif'
 				, "supprimer.gif"
 				, "right"
