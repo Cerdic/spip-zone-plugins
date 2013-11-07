@@ -44,7 +44,7 @@
 ##
 backend default {
 	.host = "127.0.0.1";
-	.port = "80";
+	.port = "8080";
 	.first_byte_timeout = 300s;
 	.probe = {
 		# Ici mettre un hit vers un petit fichier fixe sur le backend 
@@ -58,6 +58,7 @@ backend default {
 		.window = 3;
 		.threshold = 2;
 	}
+	.max_connections = 50;
 }
 
 
@@ -125,7 +126,7 @@ sub vcl_recv {
 
 		## dans une application particulière, le cookie "blink" est traité
 		## côté client ; il ne nous intéresse pas, on le nettoie
-		set req.http.Cookie = regsuball(req.http.Cookie, "(^|; ) *(blink)=[^;]+;? *", "\1");
+		set req.http.Cookie = regsuball(req.http.Cookie, "(^|; ) *(blink|service_\w+)=[^;]+;? *", "\1");
 
 		## si le cookie résultant est vide, le supprimer
 		if (req.http.Cookie == "") {
@@ -136,7 +137,7 @@ sub vcl_recv {
 		## les cookies (ici, les répertoires SPIP & Drupal + les images
 		## css, scripts, etc.)
 		## (le ?\d+ final est un éventuel timestamp)
-		if (req.url ~ "^[^?]*\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3)(\?\d+)?$"
+		if (req.url ~ "^[^?]*\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3|ttf)(\?\d+)?$"
 		|| req.url ~ "^/(local|IMG|extensions|plugins|static)/") {
 			remove req.http.Cookie;
 		}
@@ -151,7 +152,7 @@ sub vcl_recv {
 	## en le concaténant avec un éventuel entête déjà existant
 	##
 	if (req.http.x-forwarded-for) {
-		set req.http.X-Forwarded-For = req.http.X-Forwarded-For ", " client.ip;
+		set req.http.X-Forwarded-For = req.http.X-Forwarded-For + ", " + client.ip;
 	} else {
 		set req.http.X-Forwarded-For = client.ip;
 	}
@@ -189,7 +190,8 @@ sub vcl_recv {
 
 	## -- DIVERS --
 	## certain robot fou demande host:127.0.0.1, on le jette immédiatement
-	if (req.http.host == "127.0.0.1") {
+	## note: si le client est local, on accepte (c'est pour munin)
+	if (req.http.host == "127.0.0.1" && client.ip != "127.0.0.1" ) {
 		error 500 "Unknown virtual host.";
 	}
 }
@@ -221,7 +223,7 @@ sub vcl_fetch {
 	##    rafraichir la page. Dans ce cas de figure on peut donc la mettre
 	##    en cache pour la durée indiquée (si elle est > 0)
 	## -2a la ressource est statique, on la cache un certain temps raisonnable
-	##     (sauf si un autre entete indique qu'elle n'est pas cacheable)
+	##     (sauf si un autre entete indique qu'elle n'est pas cachable)
 	## -2b la ressource est dynamique, on ne la cache pas
 
 	## L'entête X-VARNISH-TTL permet au backend de définir le ttl du cache
@@ -245,7 +247,7 @@ sub vcl_fetch {
 		## ne cacher que les css, js, jpg, gif, png, etc.
 		## le (?\d+) est un éventuel timestamp
 		## à noter : si apache est bien configuré, cette ligne est inutile
-		if (req.url ~ "\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3)(\?\d+)?$"
+		if (req.url ~ "\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3|ttf)(\?\d+)?$"
 		|| req.url ~ "^/(local|IMG|extensions|plugins|static)/") {
 			set beresp.ttl = 600s;
 			set beresp.http.Cache-Control = "max-age=600";
@@ -257,17 +259,17 @@ sub vcl_fetch {
 			(!beresp.http.Cache-Control && !beresp.http.Expires)
 			|| beresp.http.Cache-Control ~ "no-cache"
 			|| beresp.http.Cache-Control ~ "private" ) {
-				set beresp.cacheable = false;
+				set beresp.ttl = 0s;
 			}
 			#else {
-			#	set beresp.cacheable = false;
+			#	set beresp.ttl = 0s;
 			#	remove beresp.http.Cache-Control;
 			#}
 		}
 	}
 	## ne pas conserver une ressource servie vieille aux robots
 	if (beresp.http.X-Varnish-Stale) {
-		set beresp.cacheable = false;
+		set beresp.ttl = 0s;
 		#remove beresp.http.X-Varnish-Stale;
 	}
 
@@ -282,9 +284,9 @@ sub vcl_fetch {
 	## qu'il envoie un entête X-Varnish-Purge
 	##
 	if (beresp.http.X-Varnish-Purge) {
-		purge("req.http.host == " req.http.host);
+		ban("req.http.host == " + req.http.host);
 		remove beresp.http.X-Varnish-Purge;
-		set beresp.cacheable = false;
+		set beresp.ttl = 0s;
 	}
 
 
@@ -295,18 +297,18 @@ sub vcl_fetch {
 	## lorsqu'on modifie des CSS ou des images calculées
 	## En revanche un var_mode=calcul est plus léger
 	if (req.url ~ "[?&]var_mode=(recalcul|images)") {
-		purge ("req.http.host == " req.http.host);
-		set beresp.cacheable = false;
+		ban("req.http.host == " + req.http.host);
+		set beresp.ttl = 0s;
 	}
 	## si on demande un var_mode=calcul on va purger uniquement la page
 	## demandee, sans son var_mode
 	elsif (req.url ~ "[?&]var_mode=calcul") {
-		 purge ("req.http.host == " req.http.host " && req.url == " regsuball(req.url,"[&?]var_mode=.*$", ""));
-		set beresp.cacheable = false;
+		ban("req.http.host == " + req.http.host + " && req.url == " + regsuball(req.url,"[&?]var_mode=.*$", ""));
+		set beresp.ttl = 0s;
 	}
 
 	## -- GRACE --
-	## Si la réponse est cacheable, on peut la conserver pour un maximum d'1h
+	## Si la réponse est cachable, on peut la conserver pour un maximum d'1h
 	## au cas où on aurait une panne (maximum des "grace" définies dans RECV)
 	## http://varnish-cache.org/trac/wiki/VCLExampleGrace
 	set beresp.grace = 1h;
@@ -333,7 +335,6 @@ sub vcl_fetch {
 	## (à noter : avec les stats en js cette action disparaît)
 	if (req.url ~ "\?action=cron$") {
 		set beresp.ttl = 5s;
-		set beresp.cacheable = true;
 	}
 
 }
@@ -344,11 +345,11 @@ sub vcl_fetch {
 ## Cette fonction établit le nom du cache en fonction des caractéristiques
 ## de la requête
 sub vcl_hash {
-	set req.hash += req.url;
+	hash_data(req.url);
 	if (req.http.host) {
-		set req.hash += req.http.host;
+		hash_data(req.http.host);
 	} else {
-		set req.hash += server.ip;
+		hash_data(server.ip);
 	}
 	return (hash);
 }
@@ -361,8 +362,8 @@ sub vcl_hash {
 ## navigateur correct, n'utilise pas le cache : il conduit jusqu'au backend
 ## et met à jour le cache
 sub vcl_hit {
-	# non cacheable, on passe
-	if (!obj.cacheable) {
+	# non cachable, on passe
+	if (obj.ttl == 0s) {
 		return (pass);
 	}
 
@@ -413,7 +414,7 @@ sub vcl_error {
     synthetic {"
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>"} obj.status " " obj.response {"</title>
+<title>"} + obj.status + " " + obj.response + {"</title>
 <style type="text/css"> 
 body {
 	background: #689ab3;
@@ -468,7 +469,7 @@ Veuillez r&#233;essayer un peu plus tard.
 <p class="en">The service is currently unavailable. Please try again later.
 </p>
  
-<p class="fin"><small>Erreur "} obj.status {" | XID: "} req.xid {"</small></p> 
+<p class="fin"><small>Erreur "} + obj.status + {" | XID: "} + req.xid + {"</small></p> 
  
 </div> 
 
@@ -477,3 +478,4 @@ Veuillez r&#233;essayer un peu plus tard.
 "};
     return (deliver);
 }
+
