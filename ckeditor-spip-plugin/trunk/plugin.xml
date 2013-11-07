@@ -1,21 +1,21 @@
 <plugin>
 	<nom><multi>[fr]CKEditor pour SPIP[en]CKEditor for SPIP[ar]CKEDITOR &#1604; SPIP</multi></nom>
 	<auteur>Auteurs : [Fr&#233;d&#233;ric Bonnaud->mailto:fred@lea-linux.org], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com], [Emmanuel Dreyfus->mailto:manu@netbsd.org]</auteur>
-	<version>0.16.14</version>
+	<version>0.16.15</version>
 	<etat>test</etat>
 	<description>
-		<h3><multi>[fr]Int&#233;gration de l'&#233;diteur WYSIWYG CKEditor à SPIP 2.0.9+[en]Integration of WYSIWYG editor CKEditor with SPIP 2.0.9+[ar]&#1578;&#1603;&#1575;&#1605;&#1604; CKEditor &#1606;&#1575;&#1588;&#1585; &#1604;SPIP 2.0.9+ et SPIP 3.0.4+</multi></h3>
+		<h3><multi>[fr]Int&#233;gration de l'&#233;diteur WYSIWYG CKEditor &#224; SPIP 2.0.9+[en]Integration of WYSIWYG editor CKEditor with SPIP 2.0.9+[ar]&#1578;&#1603;&#1575;&#1605;&#1604; CKEditor &#1606;&#1575;&#1588;&#1585; &#1604;SPIP 2.0.9+ et SPIP 3.0.4+</multi></h3>
 <multi>
 [fr]
 		Cette int&#233;gration de l'&#233;diteur CKEditor est non invasive (ie: elle ne modifie pas le code de SPIP). Elle utilise le m&#233;chanisme des pipelines (ici, on utilise le pipeline : <code>editer_contenu_objet</code>). La version de CKeditor utilis&#233;e est la {{3.6.6.1}}.
 
-		On peut configurer la façon dont s'affiche l'&#233;diteur avec <a href='?exec=cfg&cfg=ckeditor'>CFG</a>.
+		On peut configurer la fa&#231;on dont s'affiche l'&#233;diteur avec <a href='?exec=cfg&cfg=ckeditor'>CFG</a>.
 
 		Le mode d'&#233;dition de SPIP reste disponible, et on peut configurer le plugin pour que ce mode soit le mode d'&#233;dition par d&#233;faut.
 
 		N&#233;cessite : spip-bonux et CFG
 
-		Les icones des onglets de configuration sont créées par [Patricia Clausnitzer->http://pc.de/icons/pc.de-berlin-icon-pack.zip].
+		Les icones des onglets de configuration sont cr&#233;&#233;es par [Patricia Clausnitzer->http://pc.de/icons/pc.de-berlin-icon-pack.zip].
 
 [en]
 		This integration of the editor CKEditor is noninvasive (it does not alter the SPIP code). It uses the mechanism of pipelines (here we use the pipeline: <code>editer_contenu_objet</code>). The version of CKeditor used is {{3.6.6.1}}. 
@@ -100,7 +100,7 @@ _ &#1608;&#1607;&#1606;&#1575; &#1606;&#1587;&#1578;&#1582;&#1583;&#1605; &#1575
 	</pipeline>
 
 	<icon>images/ckspip-logo.png</icon>
-	<necessite id='SPIP' version='[2.0.9;]' />
+	<necessite id="SPIP" version="[2.0.9;3.0.99]" />
 	<necessite id='saisies' version='[1.27.0;]' />
 	<necessite id='spip_bonux' version='[1.8.2;]' />
 	<necessite id='cfg' version='' />
