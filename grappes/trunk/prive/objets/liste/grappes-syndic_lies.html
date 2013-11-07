@@ -5,7 +5,7 @@
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_site,info_nb_sites}})</strong></caption>]
 	<tbody>
-	<BOUCLE_liste(SITES){id_syndic IN #GET{selection}}{pagination 10}{recherche ?}{tout}{statut?}>
+	<BOUCLE_liste(SITES){id_syndic IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
 		<tr class="tr_liste">
 			<td class='statut'>[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ]</td>
 			<td class='nom_site principale'>[(#LOGO_SITE|image_reduire{26,20})]#NOM_SITE</td>

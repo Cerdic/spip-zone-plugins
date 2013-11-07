@@ -5,7 +5,7 @@
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
 	<tbody>
-	<BOUCLE_liste(AUTEURS){id_auteur IN #GET{selection}}{pagination 10}{recherche ?}{tout}>
+	<BOUCLE_liste(AUTEURS){id_auteur IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom'>#NOM[ <small>((#LOGIN))</small>]</td>

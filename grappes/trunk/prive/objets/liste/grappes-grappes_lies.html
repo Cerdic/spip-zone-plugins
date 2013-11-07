@@ -6,7 +6,7 @@
 <table class='spip liste'>
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{grappes:info_1_grappe,grappes:info_nb_grappes}})</strong></caption>]
 	<tbody>
-	<BOUCLE_liste(GRAPPES){id_grappe IN #GET{selection}}{pagination 10}{recherche ?}{tout}>
+	<BOUCLE_liste(GRAPPES){id_grappe IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]"> #SET{id_grappe,#ID_GRAPPE}
 		<td class='picto'>[(#CHEMIN_IMAGE{grappe-16.png}|balise_img)]</td>
 		<td class='titre principale'>#TITRE</td>
