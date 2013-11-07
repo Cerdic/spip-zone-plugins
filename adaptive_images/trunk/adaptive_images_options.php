@@ -109,7 +109,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$style = "";
 	if ($class) $class = " $class";
 	$class = "$cid$class";
-	$img = inserer_attribut($img,"class","adapt-img-fallback $class");
+	$img = inserer_attribut($img,"class","adapt-img-ie $class");
 
 	// image de fallback fournie ?
 	if (isset($rwd_images['fallback'])){
