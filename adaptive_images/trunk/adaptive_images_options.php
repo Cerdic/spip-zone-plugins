@@ -103,13 +103,13 @@ function adaptive_images_variante($id_document,$mode){
  */
 function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, $max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	$class = extraire_attribut($img,"class");
-	if (strpos($class,"adaptimg")!==false) return $img;
+	if (strpos($class,"adapt-img")!==false) return $img;
 	ksort($rwd_images);
 	$cid = "c".crc32(serialize($rwd_images));
 	$style = "";
 	if ($class) $class = " $class";
 	$class = "$cid$class";
-	$img = inserer_attribut($img,"class","adaptimg-fallback $class");
+	$img = inserer_attribut($img,"class","adapt-img-fallback $class");
 
 	// image de fallback fournie ?
 	if (isset($rwd_images['fallback'])){
@@ -139,9 +139,9 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 			if ($prev_width<=800 AND ($w>=800 OR $islast))
 				$htmlsel.=":not(.avp800)";
 			$htmlsel = array(
-				'10x' => "$htmlsel:not(.ahrdpi)",
-				'15x' => "$htmlsel:not(.slow)",
-				'20x' => "$htmlsel:not(.slow)",
+				'10x' => "$htmlsel:not(.aihrdpi)",
+				'15x' => "$htmlsel:not(.aislow)",
+				'20x' => "$htmlsel:not(.aislow)",
 			);
 		}
 		$mwdpi = array(
@@ -166,9 +166,9 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 
 	$out = "<!--[if IE]>$img<![endif]-->\n";
 	$img = inserer_attribut($img,"src",$fallback_file);
-	$img = inserer_attribut($img,"class","adaptimg $class");
-	$img = inserer_attribut($img,"onmousedown","adaptimgFix(this)");
-	$out .= "<!--[if !IE]--><b class=\"adaptimg-wrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
+	$img = inserer_attribut($img,"class","adapt-img $class");
+	$img = inserer_attribut($img,"onmousedown","adaptImgFix(this)");
+	$out .= "<!--[if !IE]--><b class=\"adapt-img-wrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
 }
@@ -186,7 +186,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
  */
 function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
 	if (!$img) return $img;
-	if (strpos($img,"adaptimg")!==false)
+	if (strpos($img,"adapt-img")!==false)
 		return $img;
 	if (is_null($bkpt) OR !is_array($bkpt))
 		$bkpt = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
@@ -333,27 +333,27 @@ function adaptive_images_affichage_final($texte){
 	if ($GLOBALS['html']){
 		#spip_timer();
 		$texte = adaptative_images($texte);
-		if (strpos($texte,"adaptimg-wrapper")!==false){
+		if (strpos($texte,"adapt-img-wrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
-			$ins = "<style type='text/css'>"."img.adaptimg{opacity:0.70;max-width:100%;height:auto;}"
-			."b.adaptimg-wrapper,b.adaptimg-wrapper:after{display:inline-block;max-width:100%;position:relative;background-size:100%;background-repeat:no-repeat;}"
-			."b.adaptimg-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
+			$ins = "<style type='text/css'>"."img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
+			."b.adapt-img-wrapper,b.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;background-size:100%;}"
+			."b.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."</style>\n";
-			// le script qui estime si la rapidite de connexion et pose une class slow sur <html> si connexion lente
+			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
-			$async_style = "html img.adaptimg{opacity:0.01}html b.adaptimg-wrapper:after{display:none;}";
+			$async_style = "html img.adapt-img{opacity:0.01}html b.adapt-img-wrapper:after{display:none;}";
 			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
-				."function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
+				."function adaptImgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
+				."(function(){function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
 				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
-				."function adaptimgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
 				// Android 2 media-queries bad support workaround
 				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
-				// 2/ muliple rules = multiples downloads : put .ahrdpi on html to avoid lowres image loading if dpi>=1.5
+				// 2/ muliple rules = multiples downloads : put .aihrdpi on html to avoid lowres image loading if dpi>=1.5
 				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
 				."if (android2) {"
 				."hAC('avp800');setTimeout(function(){hRC('avp800')},1000);"
-				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('ahrdpi');"
+				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('aihrdpi');"
 				."}\n"
 				// slowConnection detection
 				."var slowConnection = false;"
@@ -368,20 +368,21 @@ function adaptive_images_affichage_final($texte){
 				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
 				."}"
 				//."console.log(slowConnection);"
-				."if(slowConnection) {hAC('slow');hRC('ahrdpi');}\n"
+				."if(slowConnection) {hAC('aislow');hRC('aihrdpi');}\n"
 				// injecter un style async apres chargement des images
 			  // pour masquer les couches superieures (fallback et chargement)
-				."var adaptimg_onload = function(){"
+				."var adaptImg_onload = function(){"
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
 			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
-				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptimg_onload)}); else window.onload=adaptimg_onload;/*]]>*/</script>\n";
+				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptImg_onload)}); else window.onload=adaptImg_onload;"
+			  ."})();/*]]>*/</script>\n";
 			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
 			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
-				$ins .= "<noscript><style type='text/css'>.png img.adaptimg,.gif img.adaptimg{opacity:0.01}b.adaptimg-wrapper.png:after,b.adaptimg-wrapper.gif:after{display:none;}</style></noscript>";
+				$ins .= "<noscript><style type='text/css'>.png img.adapt-img,.gif img.adapt-img{opacity:0.01}b.adapt-img-wrapper.png:after,b.adapt-img-wrapper.gif:after{display:none;}</style></noscript>";
 			// inserer avant le premier <script> ou <link a defaut
 
-			// regrouper tous les styles adaptimg dans le head
+			// regrouper tous les styles adapt-img dans le head
 			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
 			if (count($matches[1])){
 				$texte = str_replace($matches[1],"",$texte);
