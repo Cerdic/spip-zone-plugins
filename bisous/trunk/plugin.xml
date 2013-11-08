@@ -22,6 +22,6 @@
 	   <nom>affiche_gauche</nom>
 	   <inclure>bisous_pipelines.php</inclure>
     </pipeline>
-	<necessite id="SPIP" version="[3.0.0-dev;3.0.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
 	<categorie>communication</categorie>
 </plugin>
