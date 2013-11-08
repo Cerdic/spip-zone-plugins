@@ -1,3 +1,0 @@
-Passer par les fonction d'action/editer_mots
-
-Pouvoir utiliser ce plugin sur autre chose que les articles (sites/rubriques/etc)
