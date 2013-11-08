@@ -3,13 +3,13 @@
 	categorie="edition"
 	version="0.2.3"
 	etat="stable"
-	compatibilite="[1.9.0;3.0.99]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="images/bolo-128.png"
 	documentation="http://www.spip-contrib.net/Balise-BOLO"
 >
 
 	<nom>Bolo</nom>
-	<!-- Outils pour créer du faux texte -->
+	<!-- Outils pour cr&#233;er du faux texte -->
 
 	<auteur lien="http://www.cym.fr">Cyril MARION, Ateliers CYM</auteur>
 
