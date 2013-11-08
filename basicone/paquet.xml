@@ -3,12 +3,12 @@
 	categorie="theme"
 	version="0.1.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/basicone.png"
 	documentation="http://www.spip-contrib.net/basicone-icones-du-theme-prive"
 >	
 
-	<nom>Basicône</nom>
+	<nom>Basic&#244;ne</nom>
 
 	<auteur>chankalan</auteur>
 
