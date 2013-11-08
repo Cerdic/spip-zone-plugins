@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_par' => 'Ansicht nach:',
 	'ajouter_lien_reservation' => 'Eine Reservation hinzufügen',
 
 	// B
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_date' => 'Datum:',
 	'label_date_paiement' => 'Bezahlungsdatum:',
+	'label_donnees_auteur' => 'Daten Autor :',
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'Ich möchte mich auf der Site registrieren:',
 	'label_id_auteur' => 'Id auteur',
@@ -40,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mot_passe2' => 'Wiederholen Sie das Passwort:',
 	'label_nom' => 'Name:',
 	'label_reference' => 'Referenz:',
+	'label_reservation' => 'Anmeldung:',
 	'label_statut' => 'Status:',
 	'label_statut_defaut' => 'Standartstatus:',
 	'label_type_paiement' => 'Bezahlungsart:',
@@ -77,6 +80,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_label' => 'Reservant',
 	'notifications_vendeur_webmaster_label' => 'Eienen oder mehere Websmaster auswählen:',
 
+	// P
+	'par_articles' => 'Artikel',
+	'par_evenements' => 'Events',
+	'par_reservations' => 'Anmeldungen',
+
 	// R
 	'reaservation_montant' => 'Betrag',
 	'reaservation_nouvelle' => 'Neue Anmeldung',
@@ -95,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_exporter' => 'exportieren',
 	'texte_statut_accepte' => 'akzeptiert',
 	'texte_statut_attente' => 'in Warteliste',
+	'texte_statut_attente_paiement' => 'in Erwartung der Zahlung',
 	'texte_statut_encours' => 'laufend',
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
