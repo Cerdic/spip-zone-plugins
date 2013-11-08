@@ -54,6 +54,9 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$valeurs_mots);
 		}
 
+		if ($flux['args']['options_complements']['montrer_titre_et_descriptif'] == 'on')
+			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],array('montrer_titre_et_descriptif' => $flux['args']['options_complements']['montrer_titre_et_descriptif']));
+
 		/* Paramètre pour permettre de créer des nouveaux mots dans les groupes choisis */
 		/* TODO : seulement si l'auteur a le droit d'ajouter de nouveaux mots (peut être différent pour chaque groupe de mots ?) */
 		/* TODO : parametre par groupe au lieu d'un parametre general */
@@ -305,6 +308,7 @@ function diogene_mots_diogene_champs_pre_edition($array){
 	$array[] = 'mots_obligatoires';
 	$array[] = 'mots_facultatifs';
 	$array[] = 'mots_creer_dans_public';
+	$array[] = 'montrer_titre_et_descriptif';
 	return $array;
 }
 
