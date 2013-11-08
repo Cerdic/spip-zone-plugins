@@ -46,8 +46,12 @@ jQuery(document).ready(function(){
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
 		var selecteur = (typeof(selecteur_chosen) != 'undefined') ? selecteur_chosen+',' : '';
+		var elts = $(selecteur +" select.chosen");
 		var options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {});
-		$(selecteur +" select.chosen").chosen(options);
+		var extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
+		$.extend(extended_options, options);
+		elts.not(".chosen-create-option").chosen(options);
+		elts.filter(".chosen-create-option").chosen(extended_options);
 		spip_chosen_title();
 		spip_chosen_visible();
 		spip_chosen_table_width();

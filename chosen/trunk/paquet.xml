@@ -1,8 +1,8 @@
 <paquet
 	prefix="chosen"
 	categorie="navigation"
-	version="1.2.1"
-	etat="stable"
+	version="1.4.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/chosen-64.png"
 	documentation="http://contrib.spip.net/?article4438"
@@ -14,6 +14,7 @@
 
 	<credit lien="http://iconblock.com/">IconBlock (logo)</credit>
 	<credit lien="http://harvesthq.github.com/chosen/">Patrick Filler (Chosen)</credit>
+	<credit lien="http://github.com/koenpunt/chosen">Koen Punt (fork de Chosen)</credit>
 
 	<licence>GNU/GPL</licence>
 

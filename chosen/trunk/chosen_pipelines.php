@@ -36,7 +36,15 @@ function chosen_header_prive($texte) {
 				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
 				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
 				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'"
-			}
+			};
+			var chosen_create_option = {
+				create_option: function(term) {
+					this.select_append_option( {value: "chosen_" + term, text: term} );
+				},
+				persistent_create_option: true,
+				skip_no_results: true,
+				create_option_text: "'.texte_script(_T('chosen:lang_create_option')).'"
+				};
 /* ]]> */</script>'."\n";
 
 	return $texte;
@@ -87,8 +95,16 @@ function chosen_insert_head($flux) {
 			var langue_chosen = {
 				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
 				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",
-				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'",
-			}
+				no_results_text : "'.texte_script(_T('chosen:lang_no_result')).'"
+			};
+			var chosen_create_option = {
+				create_option: function(term) {
+					this.select_append_option( {value: "chosen_" + term, text: term} );
+				},
+				persistent_create_option: true,
+				skip_no_results: true,
+				create_option_text: "'.texte_script(_T('chosen:lang_create_option')).'"
+			};
 /* ]]> */</script>'."\n";
 	}
 	return $flux;
