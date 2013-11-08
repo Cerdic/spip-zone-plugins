@@ -168,6 +168,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","adapt-img $class");
 	$img = inserer_attribut($img,"onmousedown","adaptImgFix(this)");
+	// $img = inserer_attribut($img,"onkeydown","adaptImgFix(this)"); // usefull ?
 	$out .= "<!--[if !IE]><!--><span class=\"adapt-img-wrapper $cid $extension\">$img</span>\n<style>$style</style><!--<![endif]-->";
 
 	return $out;
@@ -227,6 +228,10 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 
 	$parts = pathinfo($src);
 	$extension = $parts['extension'];
+
+	// on ne touche pas aux GIF animes !
+	if ($extension=="gif" AND adaptive_images_is_animated_gif($src))
+		return $img;
 
 	// calculer les variantes d'image sur les breakpoints
 	$fallback = $src;
@@ -398,4 +403,44 @@ function adaptive_images_affichage_final($texte){
 	return $texte;
 }
 
+
+/**
+ * Detecter un GIF anime
+ * http://it.php.net/manual/en/function.imagecreatefromgif.php#59787
+ *
+ * @param string $filename
+ * @return bool
+ */
+function adaptive_images_is_animated_gif($filename){
+	$filecontents = file_get_contents($filename);
+
+	$str_loc = 0;
+	$count = 0;
+	while ($count<2) # There is no point in continuing after we find a 2nd frame
+	{
+
+		$where1 = strpos($filecontents, "\x00\x21\xF9\x04", $str_loc);
+		if ($where1===FALSE){
+			break;
+		} else {
+			$str_loc = $where1+1;
+			$where2 = strpos($filecontents, "\x00\x2C", $str_loc);
+			if ($where2===FALSE){
+				break;
+			} else {
+				if ($where1+8==$where2){
+					$count++;
+				}
+				$str_loc = $where2+1;
+			}
+		}
+	}
+
+	if ($count>1){
+		return (true);
+
+	} else {
+		return (false);
+	}
+}
 ?>
