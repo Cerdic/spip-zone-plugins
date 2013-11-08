@@ -3,12 +3,12 @@
 	categorie="auteur"
 	version="0.2.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	schema="0.2.0"
 >	
 
 	<nom>Auteurs pour les sites syndiqu&#233;s</nom>
-	<!-- Ajoute la possibilité d'ajouter des auteurs aux sites syndiqués -->
+	<!-- Ajoute la possibilit&#233; d'ajouter des auteurs aux sites syndiqu&#233;s -->
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 

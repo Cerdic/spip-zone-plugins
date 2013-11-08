@@ -34,6 +34,6 @@
 		<inclure>auteurs_syndic_autoriser.php</inclure>
 	</pipeline>
 	<install>base/auteurs_syndic_upgrade.php</install>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<categorie>auteur</categorie>
 </plugin>
