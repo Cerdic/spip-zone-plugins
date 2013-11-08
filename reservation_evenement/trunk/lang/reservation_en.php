@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_par' => ' View by:',
 	'ajouter_lien_reservation' => 'Add a booking',
 
 	// B
@@ -41,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mot_passe2' => 'Repeat the password:',
 	'label_nom' => 'Name:',
 	'label_reference' => 'Reference:',
+	'label_reservation' => 'Booking:',
 	'label_statut' => 'Status',
 	'label_statut_defaut' => 'Default Status:',
 	'label_type_paiement' => 'Payment type:',
@@ -78,13 +80,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_label' => 'Vendor',
 	'notifications_vendeur_webmaster_label' => 'Select one or more webmasters:',
 
+	// P
+	'par_articles' => 'articles',
+	'par_evenements' => 'events',
+	'par_reservations' => 'bookings',
+
 	// R
 	'reaservation_montant' => 'Amount',
 	'reaservation_nouvelle' => 'New booking',
 	'recapitulatif' => 'Booking summary:',
+	'remerciement' => 'Thank you for registering <br/> Regards',
 	'reservation_client' => 'Client',
 	'reservation_date' => 'Date:',
 	'reservation_de' => 'Booking from',
+	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.',
 	'reservation_numero' => 'Booking:',
 	'reservation_reference_numero' => 'Reference Nr ',
 
@@ -94,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_exporter' => 'export',
 	'texte_statut_accepte' => 'accepted',
 	'texte_statut_attente' => 'in waiting list',
+	'texte_statut_attente_paiement' => 'waiting for payment',
 	'texte_statut_encours' => 'ongoing',
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
