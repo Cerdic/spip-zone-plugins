@@ -10,7 +10,7 @@
 			<li class="editer editer_groupe_#ID_GROUPE[(#ENV{groupe_obligatoire_#ID_GROUPE}|oui)obligatoire][(#ENV{erreurs}|table_valeur{groupe_#ID_GROUPE}|oui)erreur]">
 				<label for="groupe_#ID_GROUPE">#TITRE</label>
 				[<span class='erreur_message'>(#ENV{erreurs}|table_valeur{groupe_#ID_GROUPE})</span>]
-				<select name="groupe_#ID_GROUPE[(#GET{multiple}|=={oui}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="groupe_#ID_GROUPE"[(#GET{multiple}|=={oui}|oui) multiple="multiple"]>
+				<select name="groupe_#ID_GROUPE[(#GET{multiple}|=={oui}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="groupe_#ID_GROUPE"[(#GET{multiple}|=={oui}|oui) multiple="multiple"][(#MOTS_CREER_DANS_PUBLIC|=={on}|oui) class="chosen-create-option"]>
 					[(#GET{multiple}|=={oui}|non)
 						<option value="">--</option>
 					]
@@ -20,6 +20,9 @@
 					[(#GET{multiple}|=={oui}|non)
 					<option value="#ID_MOT"[(#ENV{groupe_#ID_GROUPE}|is_array|oui)[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]][(#ENV{groupe_#ID_GROUPE}|is_array|non)[(#ID_MOT|=={#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]]>[(#TITRE|supprimer_numero)]</option>]
 					</BOUCLE_mots>
+					<BOUCLE_mot_nouveaux(DATA){source table, #ENV{nouveaux_groupe_#ID_GROUPE}}>
+						<option value="#CONFIG{'chosen/prefixe_create_option'}#VALEUR" selected="selected">#VALEUR</option>
+					</BOUCLE_mot_nouveaux>
 				</select>
 			</li>
 		</B_mots>
