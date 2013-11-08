@@ -11,13 +11,13 @@ Une adresse Jabber pour les auteurs
 	<description>
 Permet de disposer d'un champ "JID" (adresse Jabber) sur les auteurs de SPIP.
 
-Jabber est un système de messagerie instantanée (à la manière de MSN) et décentralisé (comme les mails).
-Il est basé sur le protocole ouvert XMPP.
+Jabber est un syst&#232;me de messagerie instantan&#233;e (&#224; la manière de MSN) et d&#233;centralis&#233; (comme les mails).
+Il est bas&#233; sur le protocole ouvert XMPP.
 
-Si vous ne connaissez pas encore ce réseau de messagerie, vous pourrez trouver des informations sur le
+Si vous ne connaissez pas encore ce r&#233;seau de messagerie, vous pourrez trouver des informations sur le
 site francophone [JabberFR->http://jabberfr.org/].
 
-Ce plugin fournit un champ supplémentaire dans le formulaire d'édition des informations d'un auteur. La
+Ce plugin fournit un champ suppl&#233;mentaire dans le formulaire d'&#233;dition des informations d'un auteur. La
 balise correspondante est <code>#JID</code> (appellation standard de l'identifiant Jabber).
 	</description>
 	<etat>test</etat>

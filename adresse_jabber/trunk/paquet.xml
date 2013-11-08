@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="2.0.0"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/chat.png"
 	schema="0.1.0"
 	documentation="http://www.spip-contrib.net/Adresse-Jabber"
@@ -14,6 +14,6 @@
 	<auteur lien="http://da.weeno.net/">davux</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="cextras" compatibilite="[2.0.0-dev;[" />
+	<necessite nom="cextras" compatibilite="[2.0.0;[" />
 	<pipeline nom="declarer_champs_extras" inclure="base/jabberid.php" />
 </paquet>
