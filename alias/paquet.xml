@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="0.1.1"
 	etat="stable"
-	compatibilite="[1.9.0;3.0.99]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/article-alias-32.png"
 	documentation="http://www.spip-contrib.net/Alias-d-Article,2854"
 >	
