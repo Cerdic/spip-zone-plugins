@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="1.0.3"
 	etat="dev"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="apropos.png"
 	documentation="http://www.spip-contrib.net/A-propos-des-plugins-actifs"
 	demonstration="http://www.jp.guihard.net/spip.php?article92"

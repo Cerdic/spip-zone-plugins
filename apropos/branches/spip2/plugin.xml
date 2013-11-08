@@ -1,5 +1,5 @@
 <plugin>
-    <nom>A propos des Plugins actifs</nom>
+    <nom>&#192; propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
     <version>0.2.1</version>
     <etat>stable</etat>
@@ -7,14 +7,14 @@
     <description>
 		<multi>
 [fr]Liste les plugins actifs et affiche une description sommaire de ceux-ci.
-_ Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
-_ Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 paramètres : <br />
--* soit vous écrivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
--* soit vous écrivez :  <code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />
--* soit vous écrivez :  <code>#APROPOS{plugins}</code> pour n'afficher que le nombre de plugins actifs.<br />
--* soit vous écrivez :  <code>#APROPOS{extensions}</code> pour n'afficher que le nombre d'extensions actives.<br />
-_ Pour personnaliser ce qui est affiché avant et après la liste des plugins actifs, modifiez le fichier modeles/apropos_liste.html que vous aurez préalablement copié dans le dossier squelettes/modeles.
-_ Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
+_ Il sert &#224; afficher sur une page de type « &#224; propos du site » un r&#233;capitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
+_ Vous pouvez utiliser la nouvelle balise #APROPOS dans vos squelettes. Cette balise a 4 param&#232;tres : <br />
+-* soit vous &#233;crivez :  <code>#APROPOS{liste}</code> pour retourner la liste des plugins, <br />
+-* soit vous &#233;crivez :  <code>#APROPOS{nombre}</code> pour n'afficher que le nombre de plugins ET d'extensions actifs.<br />
+-* soit vous &#233;crivez :  <code>#APROPOS{plugins}</code> pour n'afficher que le nombre de plugins actifs.<br />
+-* soit vous &#233;crivez :  <code>#APROPOS{extensions}</code> pour n'afficher que le nombre d'extensions actives.<br />
+_ Pour personnaliser ce qui est affich&#233; avant et apr&#232;s la liste des plugins actifs, modifiez le fichier modeles/apropos_liste.html que vous aurez pr&#233;alablement copi&#233; dans le dossier squelettes/modeles.
+_ Pour afficher la liste dans un article, il faut &#233;crire dans l'article <code><apropos|liste></code>.<br />
 _ Pour n'afficher que le nombre de plugins ET d'extensions actifs, utilisez <code><apropos|nombre></code>.<br />
 _ Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
 _ Pour n'afficher que le nombre d'extensions actives, utilisez <code><apropos|extensions></code>.

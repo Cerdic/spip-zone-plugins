@@ -1,5 +1,5 @@
 <plugin>
-    <nom>À propos des Plugins actifs</nom>
+    <nom>&#192; propos des Plugins actifs</nom>
     <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
     <version>1.0.3</version>
     <etat>Dev</etat>
@@ -8,7 +8,7 @@
     <multi>
 	[fr] Liste les plugins actifs et affiche une description sommaire de ceux-ci.
     
-    Il sert à afficher sur une page de type « à propos du site » un récapitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
+    Il sert &#224; afficher sur une page de type « &#224; propos du site » un r&#233;capitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
     <br />
 	Dans votre squelette, tapez les code suivant : <br />
 	
@@ -20,7 +20,7 @@
 	<code><INCLURE{fond=modeles/apropos_disponible></code> pour n\'afficher que le nombre total de plugins verrouill&eacute;s et de plugins de votre configuration.<br />
 	<code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code> si vous souhaitez afficher la description compl&egrave;te d\'un plugin sp&eacute;cifique, &eacute;crivez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>. Ainsi, par exemple, pour afficher dans un article la description compl&egrave;te de ce plugin, utilisez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>.<hr />
 	
-		Pour afficher la liste dans un article, il faut écrire dans l'article <code><apropos|liste></code>.<br />
+		Pour afficher la liste dans un article, il faut &#233;crire dans l'article <code><apropos|liste></code>.<br />
 	Pour n'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs, utilisez <code><apropos|nombre></code>.<br />
 	Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
 	Pour n'afficher que le nombre de plugins verrouill&eacute;s actifs, utilisez <code><apropos|extensions></code>.
@@ -49,6 +49,6 @@
 		<action>insert_head</action>
 		<inclure>apropos_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[3.0.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
 	<categorie>divers</categorie> 
 </plugin>
