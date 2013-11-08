@@ -10,7 +10,7 @@
 		<multi>
 			[fr][Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome.
 			[en][Cedric Morin->http://www.yterium.com] for the original contribution in the plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] to create the standalone plugin.
-			[es][Cedric Morin->http://www.yterium.com] por la contribución inicial en el plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] por transformarlo en un plugin autónomo.
+			[es][Cedric Morin->http://www.yterium.com] por la contribuci&#243;n inicial en el plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] por transformarlo en un plugin autónomo.
 		</multi>
 	</auteur>
 	<licence>GPL</licence>
@@ -42,7 +42,7 @@
 		<nom>affiche_milieu</nom>
 		<inclure>article_accueil_pipeline.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.0.6;2.1.99]' />
+ 	<necessite id="SPIP" version="[2.0.6;2.1.99]" />
 	<necessite id='spip_bonux' version='[1.8.10;]' />
 	<categorie>outil</categorie>
 </plugin>

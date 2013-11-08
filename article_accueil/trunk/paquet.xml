@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.1.1"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/article_accueil-48.png"
 	schema="0.1.0"
 	documentation="http://www.spip-contrib.net/?article3776"
