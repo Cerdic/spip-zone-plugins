@@ -2,7 +2,7 @@
 	<nom>Test Builder</nom>
 	<slogan>Construire des tests syst&#233;matiques</slogan>
 	<auteur>[Cedric->http://www.yterium.com]</auteur>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>
@@ -30,7 +30,7 @@ Ce plugin est un outil de d&#233;veloppement. Il a tout son int&#233;r&#234;t in
 	<nom>Test Builder</nom>
 	<slogan>Construire des tests syst&#233;matiques</slogan>
 	<auteur>[Cedric->http://www.yterium.com]</auteur>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>
