@@ -22,5 +22,5 @@
 	</pipeline>
 	<categorie>navigation</categorie>
 	<lien>http://www.spip-contrib.net/Ancres-douces</lien>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
