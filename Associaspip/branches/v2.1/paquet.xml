@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="2.1.17"
 	etat="stable"
-	compatibilite="[2.1.8;3.0.99]"
+	compatibilite="[2.1.8;3.0.*]"
 	logo="img_pack/annonce.gif"
 	schema="47731"
 	meta="association_metas"
@@ -15,7 +15,7 @@
 
 	<auteur>François de Montlivault (v:1.9)</auteur>
 	<auteur>Bernard Blazin (v:1.9.2-2.0)</auteur>
-	<auteur>Maïeul Roquette (v:2.0)</auteur>
+	<auteur>Ma&#239;eul Roquette (v:2.0)</auteur>
 	<auteur>Emmanuel Saint-James (v:2.0-2.1)</auteur>
 	<auteur>Jeannolapin (v:2.1)</auteur>
 	<auteur>Art-Logic (v:2.1)</auteur>

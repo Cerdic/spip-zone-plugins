@@ -8,7 +8,7 @@
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<slogan>Gestion d'associations</slogan>
-	<description>Plugin de gestion de petites associations avec : gestion des adhérents et des cotisations et dons ; gestion des ventes associatives et des activités.</description>
+	<description>Plugin de gestion de petites associations avec : gestion des adh&#233;rents et des cotisations et dons ; gestion des ventes associatives et des activit&#233;s.</description>
 	<prefix>association</prefix>
 	<install>association_administrations.php</install>
 	<lien>http://contrib.spip.net/3487</lien>
