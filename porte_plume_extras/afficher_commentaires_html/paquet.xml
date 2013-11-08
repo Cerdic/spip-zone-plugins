@@ -3,13 +3,13 @@
 	categorie="edition"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="images/afficher_commentaires_html.png"
 	documentation="http://www.spip-contrib.net/?article4184"
 >
 
 	<nom>Afficher les commentaires HTML</nom>
-	<!-- Affiche les commentaires HTML dans l'espace privé -->
+	<!-- Affiche les commentaires HTML dans l'espace priv&#233; -->
 
 	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
 
