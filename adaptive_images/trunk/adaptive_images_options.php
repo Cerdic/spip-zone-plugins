@@ -155,7 +155,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 				//$file = $file."?rwd"; // debug  : etre sur qu'on charge bien l'image issue des medias queries
 				$mw = $mwdpi[$kx];
 				$not = $htmlsel[$kx];
-				$medias[$mw] = "@media $mw{{$not} b.$cid,{$not} b.$cid:after{background-image:url($file);}}";
+				$medias[$mw] = "@media $mw{{$not} span.$cid,{$not} span.$cid:after{background-image:url($file);}}";
 			}
 		}
 		$prev_width = $w+1;
@@ -168,7 +168,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","adapt-img $class");
 	$img = inserer_attribut($img,"onmousedown","adaptImgFix(this)");
-	$out .= "<!--[if !IE]--><b class=\"adapt-img-wrapper $cid $extension\">$img</b>\n<style>$style</style><!--[endif]-->";
+	$out .= "<!--[if !IE]--><span class=\"adapt-img-wrapper $cid $extension\">$img</span>\n<style>$style</style><!--[endif]-->";
 
 	return $out;
 }
@@ -336,12 +336,12 @@ function adaptive_images_affichage_final($texte){
 		if (strpos($texte,"adapt-img-wrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
 			$ins = "<style type='text/css'>"."img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
-			."b.adapt-img-wrapper,b.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% 100%;background-size:100%;}"
-			."b.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
+			."span.adapt-img-wrapper,span.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% 100%;background-size:100%;}"
+			."span.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."</style>\n";
 			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
-			$async_style = "html img.adapt-img{opacity:0.01}html b.adapt-img-wrapper:after{display:none;}";
+			$async_style = "html img.adapt-img{opacity:0.01}html span.adapt-img-wrapper:after{display:none;}";
 			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function adaptImgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
@@ -379,7 +379,7 @@ function adaptive_images_affichage_final($texte){
 			  ."})();/*]]>*/</script>\n";
 			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
 			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
-				$ins .= "<noscript><style type='text/css'>.png img.adapt-img,.gif img.adapt-img{opacity:0.01}b.adapt-img-wrapper.png:after,b.adapt-img-wrapper.gif:after{display:none;}</style></noscript>";
+				$ins .= "<noscript><style type='text/css'>.png img.adapt-img,.gif img.adapt-img{opacity:0.01}span.adapt-img-wrapper.png:after,span.adapt-img-wrapper.gif:after{display:none;}</style></noscript>";
 			// inserer avant le premier <script> ou <link a defaut
 
 			// regrouper tous les styles adapt-img dans le head
