@@ -3,7 +3,7 @@
 		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
 		"id":"#ID_GIS",
 		"properties": {
-			"title":[(#TITRE_GIS*|sinon{#TITRE*}|supprimer_numero|json_encode)],
+			"title":[(#TITRE_GIS*|sinon{#TITRE*}|extraire_multi|supprimer_numero|json_encode)],
 			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][(#SET{logo_doc,''})]
 			[(#LOGO_GIS|oui)
 			[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]]
