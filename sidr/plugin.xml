@@ -2,7 +2,7 @@
 	<nom>Sidr</nom>
 	<slogan>Menu de côté responsive</slogan>
 	<auteur>[Sidr->http://www.berriart.com/sidr/], [Mis en plugin pour SPIP par RealET->http://www.pyrat.net], icone : [Responsive Web Design Logo->https://commons.wikimedia.org/wiki/File:Responsive_Web_Design_Logo.svg]</auteur>
-	<version>1.0.0</version>
+	<version>1.2.1</version>
 	<icon>prive/themes/spip/images/sidr-32.png</icon>
 	<etat>stable</etat>
 	<description>
