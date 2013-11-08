@@ -375,7 +375,8 @@ function adaptive_images_affichage_final($texte){
 			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
 			  ."sa.innerHTML = '$async_style';"
 			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
-				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptImg_onload)}); else window.onload=adaptImg_onload;"
+				."function addLoadEvent(func){var oldol=window.onload;if (typeof oldol != 'function'){window.onload=func;}else{window.onload=function(){if (oldol){oldol();} func();}}}"
+				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptImg_onload)}); else addLoadEvent(adaptImg_onload);"
 			  ."})();/*]]>*/</script>\n";
 			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
 			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
