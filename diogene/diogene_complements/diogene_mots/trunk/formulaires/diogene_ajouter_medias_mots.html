@@ -16,13 +16,9 @@
 					]
 					<BOUCLE_mots(MOTS){id_groupe}{par num titre,titre}>
 					[(#GET{multiple}|=={oui}|oui)
-					<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE,#ARRAY}}|oui) selected="selected"]>
-						[(#TITRE|supprimer_numero)][(#MONTRER_TITRE_ET_DESCRIPTIF|=={on}|oui)[ ((#DESCRIPTIF))]]
-					</option>]
+					<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE,#ARRAY}}|oui) selected="selected"]>[(#TITRE|supprimer_numero)][(#MONTRER_TITRE_ET_DESCRIPTIF|=={on}|oui)[ ((#DESCRIPTIF))]]</option>]
 					[(#GET{multiple}|=={oui}|non)
-					<option value="#ID_MOT"[(#ENV{groupe_#ID_GROUPE}|is_array|oui)[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]][(#ENV{groupe_#ID_GROUPE}|is_array|non)[(#ID_MOT|=={#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]]>
-						[(#TITRE|supprimer_numero)][(#MONTRER_TITRE_ET_DESCRIPTIF|=={on}|oui)[ ((#DESCRIPTIF))]]
-					</option>]
+					<option value="#ID_MOT"[(#ENV{groupe_#ID_GROUPE}|is_array|oui)[(#ID_MOT|in_array{#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]][(#ENV{groupe_#ID_GROUPE}|is_array|non)[(#ID_MOT|=={#ENV{groupe_#ID_GROUPE}}|oui)selected="selected"]]>[(#TITRE|supprimer_numero)][(#MONTRER_TITRE_ET_DESCRIPTIF|=={on}|oui)[ ((#DESCRIPTIF))]]</option>]
 					</BOUCLE_mots>
 					<BOUCLE_mot_nouveaux(DATA){source table, #ENV{nouveaux_groupe_#ID_GROUPE}}>
 						<option value="#CONFIG{'chosen/prefixe_create_option'}#VALEUR" selected="selected">#VALEUR</option>
