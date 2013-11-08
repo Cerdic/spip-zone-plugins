@@ -168,7 +168,7 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$img = inserer_attribut($img,"src",$fallback_file);
 	$img = inserer_attribut($img,"class","adapt-img $class");
 	$img = inserer_attribut($img,"onmousedown","adaptImgFix(this)");
-	$out .= "<!--[if !IE]--><span class=\"adapt-img-wrapper $cid $extension\">$img</span>\n<style>$style</style><!--[endif]-->";
+	$out .= "<!--[if !IE]><!--><span class=\"adapt-img-wrapper $cid $extension\">$img</span>\n<style>$style</style><!--<![endif]-->";
 
 	return $out;
 }
