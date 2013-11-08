@@ -245,6 +245,12 @@ function mutualisation_traiter_exec($site) {
 			require_once dirname(__FILE__).'/mutualiser_upgradeplugins.php';
 			mutualiser_upgradeplugins();
 		}
+		// Si une correction des acces à la base est demandee dans le site fils, et securise par md5
+		// depuis le panneau de controle, le faire directement
+		if (_request('credential') == 'oui') {
+			require_once dirname(__FILE__).'/mutualiser_correctdbcredential.php';
+			mutualiser_correctdbcredential();
+		}
 		if (_request('renouvelle_alea') == 'yo') {
 		    include_spip('inc/headers');
 		    http_status(204); // No Content

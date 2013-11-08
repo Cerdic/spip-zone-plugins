@@ -106,6 +106,7 @@ function exec_mutualisation_dist() {
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
 			$adminplugin = adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base);
+			$credential = test_credential_site($meta, $v);
 			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
 		}
 		else {
@@ -113,7 +114,7 @@ function exec_mutualisation_dist() {
 			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
-
+		
 		$compression = '';
 		if ($meta['auto_compress_css']=='oui')
 			$compression .= 'CSS';
@@ -131,7 +132,7 @@ function exec_mutualisation_dist() {
 
 		$page .= "<tr class='tr". $nsite % 2 ."'"
 			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>
-			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>
+			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$credential$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
 			<td><div id='IMG$nsite' class='taille loading'></div></td>
@@ -334,6 +335,30 @@ function mutualisation_lister_sites_dist() {
 	}
 	sort($sites);
 	return $sites;
+}
+
+// lister les sites qui ont des sites/xx/config/connect.php
+// avec 'connect.php' ne changeant pas de nom
+function test_credential_site($meta, $v) {
+	if (defined("_INSTALL_USER_DB_ROOT")) {
+		$file = file_get_contents('../'.$GLOBALS['mutualisation_dir'].'/'.$v.'/config/connect.php');
+		$credential = strpos($file, _INSTALL_USER_DB_ROOT);
+		if ($credential) {
+			$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
+			$secret = md5($secret);
+			return <<<EOF
+<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
+<div>
+<input type='hidden' name='secret' value='$secret' />
+<input type='hidden' name='exec' value='mutualisation' />
+<input type='hidden' name='credential' value='oui' />
+<input type='submit' value='Correct DB credential' />
+</div>
+</form>
+EOF;
+		}
+	}
+	return '';
 }
 
 /* autre exemple pour ceux qui mettent tous leurs fichiers de connexion
