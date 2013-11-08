@@ -3,13 +3,13 @@
 	categorie="multimedia"
 	version="2.0.0"
 	etat="dev"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/anythingslider.png"
 	documentation="http://www.spip-contrib.net/?article4283"
 >	
 
 	<nom>AnythingSlider</nom>
-	<!-- Faire défiler du contenu dans vos squelettes -->
+	<!-- Faire d&#233; filer du contenu dans vos squelettes -->
 
 	<auteur lien="http://css-tricks.com">Chris Coyier</auteur>
 	<auteur lien="https://github.com/CSS-Tricks/AnythingSlider-Themes">AnythingSlider-Themes</auteur>
