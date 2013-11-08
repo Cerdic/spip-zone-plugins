@@ -19,7 +19,6 @@
 		<inclure>pb_pagerank.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[3.0.0-dev;3.0.*]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.*]" />
 	<categorie>statistique</categorie>
 </plugin>
-
