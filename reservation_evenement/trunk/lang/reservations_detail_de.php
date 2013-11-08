@@ -7,13 +7,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_lien_reservations_detail' => 'Ein Anmeldungs Item',
+
+	// C
+	'choisir_prix' => 'Wählen Sie eine Preis aus',
+
 	// I
+	'icone_creer_reservations_detail' => 'Ein neues Anmeldungs Item anlegen',
+	'icone_modifier_reservations_detail' => 'Anmeldungs Item bearbeiten',
 	'info_1_reservations_detail' => 'Ein Anmeldungsdetail',
 	'info_aucun_reservations_detail' => 'Keine Anmeldungsdetail',
 	'info_nb_reservations_details' => '@nb@ Anmeldungsdetails',
 
 	// L
 	'label_descriptif' => 'Beschreibung',
+	'label_prix' => 'Preis:',
+	'label_prix_ht' => 'Preis ohne MwSt:',
+	'label_prix_objet' => 'Preistyp:',
+	'label_quantite' => 'Menge:',
+	'label_reservation' => 'Anmeldung:',
+	'label_taxe' => 'Steuern:',
 
 	// T
 	'titre_reservations_detail' => 'Anmeldungsdetail',
