@@ -3,13 +3,13 @@
 	categorie="edition"
 	version="2.0.0"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="boutonstexte-32.png"
 	documentation="http://www.spip-contrib.net/?article1474"
 >	
 
 	<nom>Boutons dans le Texte</nom>
-	<!-- Des boutons pour gérer la taille des caractères -->
+	<!-- Des boutons pour g&#233;rer la taille des caract&#232;res -->
 
 	<auteur lien="http://toggg.com/">Bertrand Gugger</auteur>
 
