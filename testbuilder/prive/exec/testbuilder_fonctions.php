@@ -18,15 +18,18 @@ function tb_dirs($dir=""){
 	if (!$dir
 			OR substr($dir,0,1)=="/"
 			OR substr($dir,strlen(_DIR_RACINE),2)==".."
-			OR !@is_dir($dir) OR !is_readable($dir) OR !$d = @opendir($dir))
+			OR !@is_dir($dir) OR !is_readable($dir) OR !$d = @opendir($dir)) {
 
 		$plugins_dist = defined('_DIR_PLUGINS_DIST')?_DIR_PLUGINS_DIST:_DIR_EXTENSIONS;
+		if ($d)
+			closedir($d);
 		return array(
 			basename(_DIR_RESTREINT_ABS)=>_DIR_RESTREINT?_DIR_RESTREINT:"./",
 			basename(_DIR_PLUGINS)=>_DIR_PLUGINS,
 			basename($plugins_dist)=>$plugins_dist,
 			"prive"=>_DIR_RACINE."prive/",
 		);
+	}
 
 	$dir = rtrim($dir,'/');
 	$dirs = array("../"=>($dir=="." OR dirname($dir)==rtrim(_DIR_RACINE,'/'))?"":rtrim(dirname($dir),'/')."/");
