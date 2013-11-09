@@ -36,7 +36,7 @@
 </onglet>
 <categorie>navigation</categorie>
 </plugin>
-<plugin spip="[3.0.0-dev;3.0.*]">
+<plugin spip="[3.0.0;3.0.99]">
 <nom>Liens explicites</nom>
 <slogan>Styles et pictos explicitant les liens du site</slogan>
 <icon>prive/themes/spip/images/links.png</icon>
