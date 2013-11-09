@@ -3,7 +3,7 @@
 	categorie="maintenance"
 	version="0.2.2"
 	etat="experimental"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="img_pack/icon.png"
 	documentation="http://www.spip-contrib.net/Plugin-Porte-plume-partout"
 >	

@@ -9,7 +9,7 @@
 	<description>Ce plugin permet de lire et afficher une bdd joomla avec SPIP. Il g&#232;re la conversion Joomla -> SPIP via un squelette</description>
 	<lien></lien>
 	<prefix>joomla2spip</prefix>
-	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>maintenance</categorie>
 	<fonctions>joomla2spip_fonctions.php</fonctions> 
 </plugin>
