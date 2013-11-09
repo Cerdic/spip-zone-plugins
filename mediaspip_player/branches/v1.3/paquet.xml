@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.3.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/html5_player_logo.png"
 	schema="0.1"
 	documentation="http://player.mediaspip.net/documentation/"
