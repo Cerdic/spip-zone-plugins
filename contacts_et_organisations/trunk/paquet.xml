@@ -15,7 +15,7 @@
 	<auteur>Cyril MARION</auteur>
 	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
 	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
-	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
 
 	<traduire module="contacts" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-contacts" reference="fr" gestionnaire="salvatore" />
