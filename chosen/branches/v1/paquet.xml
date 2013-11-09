@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/chosen-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Chosen-4438"
 >
 
 	<nom>Chosen</nom>
