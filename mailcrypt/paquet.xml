@@ -3,7 +3,7 @@
 	categorie="performance"
 	version="2.4.1"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="images/mailcrypt-256.png"
 	documentation="http://www.spip-contrib.net/?article3828"
 >	
