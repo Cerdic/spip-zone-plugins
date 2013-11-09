@@ -4,7 +4,7 @@
 _ Vilement inspir&eacute; du plugin CSVimport de C&eacute;dric Morin (2006)
 _ &#169; 2009 - Licence GPL
 	</auteur>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>i2_import</prefix>
@@ -16,7 +16,7 @@ _ &#169; 2009 - Licence GPL
 		<nom>affiche_droite</nom>
 		<inclure>i2_import_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.0.99]' />
 	<necessite id='inscription2' version='[0.71;]' />
 	<categorie>auteur</categorie>
 </plugin>

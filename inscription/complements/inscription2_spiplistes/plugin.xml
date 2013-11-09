@@ -4,7 +4,7 @@
 _ &#169; 2009 - Distribu&#233; sous licence GPL   
 	</auteur>
 	<lien></lien>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<etat>dev</etat>
     <description>
 		Gestion des listes de diffusion spip-listes dans le plugin inscription2
@@ -30,7 +30,7 @@ _ &#169; 2009 - Distribu&#233; sous licence GPL
 		<nom>i2_exceptions_des_champs_auteurs_elargis</nom>
 		<inclure>i2_spiplistes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.0.99]' />
 	<necessite id='inscription2' version='[0.71;]' />
 	<necessite id='spiplistes' version='[2.0101;]' />
 	<chemin dir='' />

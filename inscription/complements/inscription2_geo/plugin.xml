@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Inscription2 Geo</nom>
 	<auteur>Quentin Drouet</auteur>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<prefix>i2_geo</prefix>
@@ -24,7 +24,7 @@
 		<nom>i2_verifications_specifiques</nom>
 		<inclure>i2_geo_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.0.0]' />
 	<necessite id='inscription2' version='[0.71;]' />
 	<necessite id='geomap' version='[0.2;]' />
 	<categorie>auteur</categorie>

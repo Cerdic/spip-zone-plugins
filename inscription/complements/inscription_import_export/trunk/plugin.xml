@@ -16,7 +16,7 @@ _ &#169; 2009-2012 - Licence GPL
 		<nom>affiche_droite</nom>
 		<inclure>inscription_import_export_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.1.12;]' />
+	<necessite id="SPIP" version='[2.1.12;3.0.99]' />
 	<necessite id='inscription3' version='[3.0.15;]' />
 	<categorie>auteur</categorie>
 </plugin>

@@ -6,7 +6,7 @@
 		&copy; Azerttyu et kent1 - 2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.03
+		0.03.0
 	</version>
 	<version_base>
 		0.03
@@ -59,7 +59,7 @@
 		<inclure>inc/i2_societes_autoriser.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10.1;]" />
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.0.99]' />
 	<necessite id='inscription2' version='[0.6;]' />
 	<categorie>auteur</categorie>
 </plugin>
