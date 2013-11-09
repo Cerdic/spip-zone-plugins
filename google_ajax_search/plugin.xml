@@ -17,5 +17,5 @@
 		<inclure>googleajaxsearch_pipeline.php</inclure>
 	</pipeline>	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.0]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
