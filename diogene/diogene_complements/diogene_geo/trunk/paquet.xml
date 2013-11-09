@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.2.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
 >	
 

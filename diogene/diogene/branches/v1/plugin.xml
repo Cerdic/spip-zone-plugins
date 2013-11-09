@@ -7,18 +7,18 @@
 			[en]Forms templates creation for the objects
 		</multi>
 	</slogan>
-	<licence>© 2010-2011 GNU/GPL v3</licence>
+	<licence>&#64; 2010-2011 GNU/GPL v3</licence>
 	<version>0.4.15</version>
 	<version_base>0.3.2</version_base>
 	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr]Le plugin Diogène permet de créer des masques de formulaires spécifiques par secteur sur les trois objets spécifiques que sont :
+			[fr]Le plugin Diog&#232;ne permet de cr&#233;er des masques de formulaires sp&#233;cifiques par secteur sur les trois objets sp&#233;cifiques que sont :
 -* les articles;
 -* les rubriques;
 -* les sites
 
-Il permet ainsi de définir en fonction d’un secteur particulier, un masque de formulaire par objet, ajoutant ou enlevant ainsi des champs afin de rendre le formulaire d’édition conforme à ce que l’on souhaite réellement publier dans ces secteurs mais également rassemblant au sein d’un même formulaire d’édition l’ensemble des informations permettant de publier rapidement.
+Il permet ainsi de d&#233;finir en fonction d’un secteur particulier, un masque de formulaire par objet, ajoutant ou enlevant ainsi des champs afin de rendre le formulaire d’&#233;dition conforme à ce que l’on souhaite r&#233;ellement publier dans ces secteurs mais &#233;galement rassemblant au sein d’un m&#234;me formulaire d’&#233;dition l’ensemble des informations permettant de publier rapidement.
 			[en]The plugin Diogene permits to create sector-specific forms masks for the three specific object types:
 -* articles;
 -* sections;

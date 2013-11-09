@@ -3,14 +3,14 @@
 	categorie="edition"
 	version="1.4.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
 	schema="0.3.6"
 	documentation="http://www.mediaspip.net/spip.php?article50"
 >	
 
 	<nom>Diogene</nom>
-	<!-- Création de templates de formulaires pour les objets -->
+	<!-- Cr&#233;ation de templates de formulaires pour les objets -->
 
 	<auteur>b_b</auteur>
 	<auteur mail="kent1@arscenic.info" lien="http://www.kent1.info">kent1</auteur>

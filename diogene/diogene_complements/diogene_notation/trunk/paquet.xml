@@ -3,12 +3,12 @@
 	categorie="edition"
 	version="1.1.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
 >	
 
 	<nom>Diogene - Notations</nom>
-	<!-- Complément notation pour "Diogene" -->
+	<!-- Compl&#233;ment notation pour "Diogene" -->
 
 	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
