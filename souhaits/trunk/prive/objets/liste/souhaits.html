@@ -11,7 +11,6 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{souhait:info_1_souhait,souhait:info_nb_souhaits}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class='titre' scope='col'>[(#TRI{titre,<:souhait:label_titre:>,ajax})]</th>
 			<th class='prix' scope='col'>[(#TRI{prix,<:souhait:label_prix:>,ajax})]</th>
@@ -22,7 +21,6 @@
 	<tbody>
 	<BOUCLE_liste_souhaits(SOUHAITS){id_rubrique?}{id_secteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{souhait-16.png}|balise_img)]</td>
 			<td class='statut'>[(#STATUT|puce_statut{souhait,#ID_SOUHAIT,#ID_RUBRIQUE})]</td> 
 			<td class='titre principale'>[(#LOGO_SOUHAIT|image_reduire{20,26})]<a href="[(#ID_SOUHAIT|generer_url_entite{souhait})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SOUHAIT">[(#RANG). ]#TITRE</a></td>
 			<td class='prix secondaire'>[(#PRIX) €]</td> 

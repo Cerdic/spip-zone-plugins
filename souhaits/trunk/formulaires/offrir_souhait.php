@@ -114,7 +114,7 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 	include_spip('inc/session');
 	$retours = array();
 	
-	$souhait = sql_fetsel('titre,statut, propositions, prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
+	$souhait = sql_fetsel('titre,statut,propositions,prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
 	
 	// Méga crade : on émule le fait d'être un admin (spipCnul)
 	$statut = session_get('statut');

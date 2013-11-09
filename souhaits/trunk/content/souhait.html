@@ -2,13 +2,12 @@
 <article>
 	<header class="cartouche">
 		<BOUCLE_logodoc(DOCUMENTS){id_souhait}{extension IN jpg,gif,png,svg}{0,1}{par num titre,titre}{doublons}>#SET{logodoc,#FICHIER|balise_img|inserer_attribut{class,spip_logos}}</BOUCLE_logodoc>
-		[(#LOGO_ARTICLE|sinon{#GET{logodoc}}|image_reduire{200,200})]
+		[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|image_reduire{200,200})]
 		<h1><span class="#EDIT{titre}">#TITRE</span></h1>
 
 		<p class="info-publi"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
 		[(#REM) Inclure le modele des liens de traductions ]
 		<div class="meta-publi">
-			#MODELE{article_traductions}
 		<BOUCLE_nb_commentaires(FORUMS) {id_souhait}{plat} />[(#TOTAL_BOUCLE|oui)
 			<span class="comments">
 			<span class="sep">|</span>
