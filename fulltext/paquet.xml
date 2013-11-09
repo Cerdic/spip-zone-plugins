@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="0.7.1"
 	etat="test"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="images/fulltext-32.png"
 	schema="0.2"
 	documentation="http://www.spip-contrib.net/Fulltext"
