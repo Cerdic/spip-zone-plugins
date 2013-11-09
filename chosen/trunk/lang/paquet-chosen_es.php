@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'chosen_description' => '[Chosen->http://harvesthq.github.com/chosen/] es una biblioteca JavaScript que mejora la experiencia usuario de los selectores en los formularios HTML.
 
-La classe CSS <code>chosen</code> sur un <code><select></code> chargera automatiquement Chosen dessus.',
-	'chosen_nom' => 'Chosen',
-	'chosen_slogan' => 'Integrar la biblioteca Chosen en SPIP'
+La classe CSS <code>chosen</code> sur un <code><select></code> chargera automatiquement Chosen dessus.', # MODIF
+	'chosen_nom' => 'Chosen', # MODIF
+	'chosen_slogan' => 'Integrar la biblioteca Chosen en SPIP' # MODIF
 );
 
 ?>

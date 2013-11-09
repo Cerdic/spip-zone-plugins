@@ -9,9 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'chosen_description' => '[Chosen->http://harvesthq.github.com/chosen/] je javaScriptová knižnica, ktorá vylepšuje oddeľovače vo formulároch HTML.
-Trieda CSS <code>chosen</code> v prvku code><select></code> automaticky spustí modul Chosen.',
-	'chosen_nom' => 'Chosen',
-	'chosen_slogan' => 'Zaviesť knižnicu Chosen do SPIPu'
+Trieda CSS <code>chosen</code> v prvku code><select></code> automaticky spustí modul Chosen.', # MODIF
+	'chosen_nom' => 'Chosen', # MODIF
+	'chosen_slogan' => 'Zaviesť knižnicu Chosen do SPIPu' # MODIF
 );
 
 ?>
