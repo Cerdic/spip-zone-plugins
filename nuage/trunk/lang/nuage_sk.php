@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_niveau_titre' => 'Vybrať úroveň nadpisu',
 	'noisette_nom_noisette' => 'Nuage (mrak)',
 	'noisette_titre_defaut' => 'Tagy',
-	'noisette_titre_noisette' => 'Nadpis:'
+	'noisette_titre_noisette' => 'Titulok:'
 );
 
 ?>
