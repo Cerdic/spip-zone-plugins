@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.1"
 	etat="experimental"
-	compatibilite="[3.0.0-beta2;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 >
 
 	<nom>API Éditer Liens simples</nom>
