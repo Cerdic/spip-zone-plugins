@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="2.10.2"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/contacts-128.png"
 	schema="1.10.0"
 	documentation="http://www.spip-contrib.net/Plugin-Contacts-Organisations"
