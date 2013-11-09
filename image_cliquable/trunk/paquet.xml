@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="3.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.1.14;3.0.*]"
 	logo="image_cliquable.png"
 	documentation="http://contrib.spip.net/?article2084"
 >
