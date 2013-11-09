@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.1"
 	etat="experimental"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/dump-32.png"
 	documentation=""
 >	
