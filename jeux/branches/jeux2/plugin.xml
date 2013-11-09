@@ -96,6 +96,6 @@ Cr&#233;dits :
 	</bouton>
 	<install>base/jeux_upgrade.php</install>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<utilise id="cfg" version="[1.10.5;]" />
 </plugin>
