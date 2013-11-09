@@ -14,5 +14,5 @@
     <prefix>flickr_rand</prefix>
     <icon>img/logo_flickrnd_48.png</icon>  
     <options>flickr_rand_options.php</options> 
-  	<necessite id="SPIP" version="[2.1;2.1.99]" />
+  	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
