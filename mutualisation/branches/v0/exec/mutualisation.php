@@ -344,9 +344,12 @@ function test_credential_site($meta, $v) {
 		$file = file_get_contents('../'.$GLOBALS['mutualisation_dir'].'/'.$v.'/config/connect.php');
 		$credential = strpos($file, _INSTALL_USER_DB_ROOT);
 		if ($credential) {
-			$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
-			$secret = md5($secret);
-			return <<<EOF
+			preg_match("/.*^spip_connect_db\((.*)\);$/m", $file, $conn_string);
+			$var_connect = explode(',',str_replace("'",'',$conn_string[1]));
+			if (trim($var_connect[6])=='') {
+				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
+				$secret = md5($secret);
+				return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
@@ -356,6 +359,7 @@ function test_credential_site($meta, $v) {
 </div>
 </form>
 EOF;
+			}
 		}
 	}
 	return '';
