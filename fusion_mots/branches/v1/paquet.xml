@@ -5,7 +5,7 @@
 	etat="test" 
 	logo="images/fusion_mots_64.png" 
 	documentation="http://www.spip-contrib.net/Fusion-de-mots-clef" 
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 >
 
 	<nom>Fusion de mots-cl&#233;s</nom>
