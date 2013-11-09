@@ -1,12 +1,12 @@
 <plugin>
 	<nom>ez-css</nom>
-	<auteur> : Code original de [Thierry Koblentz->http://www.ez-css.org/] Copyright © 2009 - 2010. Port&eacute; pour SPIP par [Gilles Klein->http://63com.com]</auteur>
+	<auteur> : Code original de [Thierry Koblentz->http://www.ez-css.org/] Copyright Â© 2009 - 2010. Port&eacute; pour SPIP par [Gilles Klein->http://63com.com]</auteur>
 	<licence>GNU/GLP</licence>
 	<version>1.0.1</version>
 	<description>
 Framework CSS simple et efficace. Permet de constuire un site complexe pour tous les navigateurs r&eacute;cents. Contrairement aux autres framework qui utilisent une grille, celui-ci se sert de blocs que l'on peut imbriquer ou non. 
-Un framework CSS est utilis&eacute; essentiellement pour permettre &agrave; un site d'apparaitre de la même facon quelque soit le navigateur utilis&eacute; par le visiteur. 
-EZ-CSS (qui se prononce easy-css) rend cette fonctionnalit&eacute; très simple &agrave; mettre en place m&ecirc;me pour des sites tr&ecirc;s complexe.
+Un framework CSS est utilis&eacute; essentiellement pour permettre &agrave; un site d'apparaitre de la mÃªme facon quelque soit le navigateur utilis&eacute; par le visiteur. 
+EZ-CSS (qui se prononce easy-css) rend cette fonctionnalit&eacute; trÃ¨s simple &agrave; mettre en place m&ecirc;me pour des sites tr&ecirc;s complexe.
 </description>
 		<etat>stable</etat>
 	<lien>http://www.ez-css.org/</lien>
@@ -18,4 +18,6 @@ EZ-CSS (qui se prononce easy-css) rend cette fonctionnalit&eacute; très simple &
 	<inclure>ezcss_pipelines.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	
 </plugin>

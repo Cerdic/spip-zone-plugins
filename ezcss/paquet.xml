@@ -1,9 +1,9 @@
 <paquet
 	prefix="ezcss"
 	categorie="navigation"
-	version="0.1"
+	version="1.0.1"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/logo.jpg"
 	documentation="http://www.spip-contrib.fr/?article3538"
 >
