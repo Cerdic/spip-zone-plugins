@@ -2,9 +2,9 @@
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
     ,'simple personnel infos'})]  
-<BOUCLE_reservation(RESERVATIONS){id_reservation}{statut?}>
+<BOUCLE_reservation(RESERVATIONS_DETAILS){id_reservations_detail}{statut?}>
 <div class='infos'>
-[(#SET{texte_objet,<:reservation:titre_reservation:>})]
+[(#SET{texte_objet,<:reservations_detail:titre_reservations_detail:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION</p></div>
 [(#FORMULAIRE_INSTITUER_OBJET{reservation,#ID_RESERVATION})]
 #SET{envoi_differe,#CONFIG{reservation_evenement/envoi_differe,#ARRAY}}
@@ -12,7 +12,7 @@
 [(#GET{envoi_differe_count}|>{0}|oui)
     #SET{statuts,#GET{envoi_differe}|nom_statuts|implode{','}|trim}
    #BOITE_OUVRIR{'','notice'}
-    <:reservation:explication_envoi_differe{statuts=#GET{statuts}}:>
+    <:reservation:explication_envoi_differe_detail{statuts=#GET{statuts}}:>
    #BOITE_FERMER   
 ]
 </div>
