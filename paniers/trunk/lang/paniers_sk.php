@@ -30,11 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_lien_page_panier' => 'Zobraziť odkaz na stránku spip.php?page=panier?',
-	'noisette_label_afficher_titre_noisette' => 'Zobraziť nadpis?',
+	'noisette_label_afficher_titre_noisette' => 'Zobraziť titulok?',
 	'noisette_label_niveau_titre' => 'Vybrať úroveň nadpisu',
-	'noisette_label_titre_noisette' => 'Nadpis:',
-	'noisette_label_titre_noisette_perso' => 'Ak je nadpis vlastný:',
-	'noisette_titre_perso' => 'Vlastný nadpis',
+	'noisette_label_titre_noisette' => 'Titulok:',
+	'noisette_label_titre_noisette_perso' => 'Ak je titulok vlastný:',
+	'noisette_titre_perso' => 'Vlastný titulok',
 	'nom_bouton_plugin' => 'Paniers',
 	'nom_noisette' => 'Minivozík',
 
