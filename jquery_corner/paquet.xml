@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.4.2"
 	etat="test"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/jquerycorner-32.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/JQuery-Corner"
