@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Date de d&eacute;but, date de fin</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.1</version>
+	<version>1.1.0</version>
 	<etat>dev</etat>
 	<description>
 		Ajoute deux champs aux articles: #AGENDA (0 ou 1), #DATE_DEBUT et #DATE_FIN. 
@@ -29,5 +29,5 @@
 	<version_base>0.1.0</version_base>
 	<install>base/debut_fin.php</install>
 
-	<necessite id="SPIP" version="[3.0.10;3.0.*]" />
+	<necessite id="SPIP" version="[3.0.10;3.0.99]" />
 </plugin>
