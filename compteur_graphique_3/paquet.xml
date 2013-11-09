@@ -3,7 +3,7 @@
   categorie="statistique"
   version="0.5.5"
   etat="stable"
-  compatibilite="[3.0.0;3.0.99]"
+  compatibilite="[3.0.0;3.0.*]"
   logo="prive/themes/spip/images/CompteurGraphique.gif"
   documentation="http://www.spip-contrib.net/Plugin-Compteur-Graphique"
   schema="2012.11.23"
