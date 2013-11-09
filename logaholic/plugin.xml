@@ -3,7 +3,7 @@
 	<slogan>Utiliser le logiciel logaholic</slogan>
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org</auteur>
 	<version>0.0.2</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<description>
 		<multi>
@@ -21,7 +21,7 @@
 		<inclure>logaholic_insert_head.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<necessite id="cfg" />
 	
 	<categorie>statistique</categorie>
