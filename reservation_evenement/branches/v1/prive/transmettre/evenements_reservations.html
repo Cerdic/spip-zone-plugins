@@ -1,4 +1,3 @@
-#CACHE{0}
 #SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
 <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
 #SET{champs_extras,#GET{champs_extras}|push{#VALEUR{options/nom}}
