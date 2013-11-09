@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'longueur' => 'Dĺžka:',
 
 	// M
-	'min_intertitres' => 'Minimálny počet nadpisov',
+	'min_intertitres' => 'Minimálny počet titulkov',
 
 	// R
 	'retour_table_matiere' => 'Vrátiť sa na obsah',
