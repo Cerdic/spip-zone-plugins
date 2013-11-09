@@ -114,11 +114,13 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 	include_spip('inc/session');
 	$retours = array();
 	
-	$souhait = sql_fetsel('titre,statut,propositions,prix', 'spip_souhaits', 'id_souhait = '.$id_souhait);
+	$souhait = sql_fetsel('titre,statut,propositions,prix,id_rubrique', 'spip_souhaits', 'id_souhait = '.$id_souhait);
 	
-	// Méga crade : on émule le fait d'être un admin (spipCnul)
-	$statut = session_get('statut');
-	session_set('statut', '0minirezo');
+	// On ajoute les exceptions nécessaires pour pouvoir changer le statut sur un hit visiteur
+	include_spip('inc/autoriser');
+	autoriser_exception('modifier', 'souhait', $id_souhait);
+	autoriser_exception('instituer', 'souhait', $id_souhait);
+	autoriser_exception('publierdans', 'rubrique', $souhait['id_rubrique']);
 	
 	// Cadeau normal
 	if ($souhait['statut'] == 'libre'){
@@ -146,8 +148,10 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 		$erreur = objet_modifier('souhait', $id_souhait, $modifs);
 	}
 	
-	// On remet l'ancien statut
-	session_set('statut', $statut);
+	// On enlève les exceptions
+	autoriser_exception('publierdans', 'rubrique', $souhait['id_rubrique'], false);
+	autoriser_exception('instituer', 'souhait', $id_souhait, false);
+	autoriser_exception('modifier', 'souhait', $id_souhait, false);
 	
 	// S'il n'y a pas eu d'erreur, on envoie un courriel aux auteurs du souhait pour les prévenirs
 	if (!$erreur){
