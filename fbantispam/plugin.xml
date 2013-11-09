@@ -6,7 +6,7 @@
 	<auteur>Fabio Bertagnin - FBServices www.fbservices.fr</auteur>
 	<icon>images/beos-stop-icone-8929-32.png</icon>
 	<licence>(c) 2013 GPL</licence>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>test</etat>
 	<description>
 	Le plugin modifie le formulaire du forum, en ajoutant un champ pour saisir un captcha.
@@ -35,5 +35,5 @@
 		<inclure>fbantispam_pipelines.php</inclure>
 	</pipeline>
 	<categorie>outils</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
