@@ -9,7 +9,7 @@
 	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
 >
 
-	<nom>Code Officiel Géographique</nom>
+	<nom>Code Officiel G&#233;ographique</nom>
 	<!-- Ajouter &#224; la base de donn&#233;es les codes officiels g&#233;ographiques d&#233;finis par l'Institut national de la statistique et des &#233;tudes &#233;conomiques -->
 
 	<auteur>Guillaume Wauquier</auteur>
