@@ -41,7 +41,7 @@
 		<titre>forumsectorise:titre_menu</titre>
 		<url>configurer_forumsectorise</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<categorie>communication</categorie>

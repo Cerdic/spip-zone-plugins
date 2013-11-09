@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="0.6.0"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/forumsectorise-32.png"
 	schema="0.3"
 	documentation="http://www.spip-contrib.net/Forum-sectorise"
