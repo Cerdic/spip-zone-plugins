@@ -3,13 +3,13 @@
 	categorie="navigation"
 	version="1.3.2"
 	etat="stable"
-	compatibilite="[2.1;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="images/precedent_suivant-128.png"
 	documentation="http://www.spip-contrib.net/Criteres-precedent-et-suivant"
 >	
 
 	<nom>Crit&#232;res Suivant / Pr&#233;c&#233;dent</nom>
-	<!-- Ajoute des critères de boucles <code>{suivant}</code> et <code>{precedent}</code> -->
+	<!-- Ajoute des crit&#232;res de boucles <code>{suivant}</code> et <code>{precedent}</code> -->
 
 	<auteur>Matthieu Marcillaud</auteur>
 
