@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="3.3.4"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/composition-32.png"
 	schema="0.5.0"
 	documentation="http://contrib.spip.net/?article3777"
@@ -30,8 +30,8 @@
 	<pipeline nom="compositions_declarer_heritage"  inclure="compositions_pipeline.php" />
 
 	<utilise nom="Z" compatibilite="[1.7.10;[" />
-	<utilise nom="Zcore" compatibilite="[2.0.0-dev;[" />
-	<utilise nom="Zpip" compatibilite="[2.0.0-dev;[" />
+	<utilise nom="Zcore" compatibilite="[2.0.0;[" />
+	<utilise nom="Zpip" compatibilite="[2.0.0;[" />
 	
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 
