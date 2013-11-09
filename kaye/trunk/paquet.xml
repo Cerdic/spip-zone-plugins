@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="3.0.5"
 	etat="dev"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/kaye-64.png"
 	documentation=""
 	schema="1.0.0" 
