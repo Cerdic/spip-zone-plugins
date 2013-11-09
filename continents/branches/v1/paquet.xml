@@ -16,7 +16,7 @@
 	<nom>Continents</nom>
 
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
-	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
+	<auteur lien='http://websimple.be/'>Rainer M&#252;ller</auteur>
 
 	<licence>GNU/GPL</licence>
 	
