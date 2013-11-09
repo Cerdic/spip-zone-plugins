@@ -3,7 +3,7 @@
 	categorie="maintenance"
 	version="3.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cfg-128.png"
 	documentation=""
 >	
