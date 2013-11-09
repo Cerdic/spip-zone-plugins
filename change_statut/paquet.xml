@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.3.0"
 	etat="test"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/changestatut-32.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/Change-Statut"
