@@ -51,7 +51,7 @@ Internetovú stránku {{[@nom_site@->@url_site@]}} prevádzkuje jej šéfredakto
 ',
 
 	// M
-	'mention_cnil' => 'Tento nadpisom {{[@nom_site@->@url_site@]}} mal predmet  deklarácie u {{<abbr title="Francúzska štátna komisia pre počítačové slobody - Commission Nationale de l’informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} dňa @date_cnil@, zaregistrovaná pod číslom {{@numero_cnil@.}}',
+	'mention_cnil' => 'Tento nadpis alebo titulok {{[@nom_site@->@url_site@]}} má  deklaráciu {{<abbr title="Francúzska štátna komisia pre počítačové slobody - Commission Nationale de l’informatique et des Libertés - www.cnil.fr">CNIL</abbr>}} z(o) @date_cnil@ zaregistrovanú pod č.{{@numero_cnil@.}}',
 	'mentions_legales_copyright' => '{{{Obsah stránky a autorské práva}}}
 
 Podľa [paragrafov L. 111-1 a L. 123-1 francúzskeho zákona o duševnom vlastníctve|Zobraziť text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414] je celý obsah tejto stránky ({texty, obrázky, videá a akékoľvek multimédiá vo všeobecnosti}) {{chránený autorskými právami,}} ak nie je uvedené inak. Rozširovanie obsahu stránok tejto internetovej stránky, i čiatočné,  bez predchádzajúceho súhlasu  @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] je prísne zakázané.',
