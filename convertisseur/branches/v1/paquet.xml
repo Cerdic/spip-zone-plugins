@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.4.3"
 	etat="test"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="img_pack/convertisseur.png"
 	documentation="http://www.spip-contrib.net/Plugin-Convertisseur"
 >
