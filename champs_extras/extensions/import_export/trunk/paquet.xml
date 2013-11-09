@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.0"
 	etat="experimental"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/ieextras-64.png"
 	documentation="http://www.spip-contrib.net/Importer-Exporter-des-descriptions-de-champs-extras"
 >	
@@ -12,7 +12,7 @@
 	<!-- Importer / Exporter des descriptions de champs extras -->
 
 	<auteur lien="magraine.net">Matthieu Marcillaud</auteur>
-	<auteur lien="http://www.teddypayet.com">Teddy Payet</auteur><!-- Matthieu n'a pas à se faire taper sur les doigts pour le portage sous SPIP 3 -->
+	<auteur lien="http://www.teddypayet.com">Teddy Payet</auteur><!-- Matthieu n'a pas &#224; se faire taper sur les doigts pour le portage sous SPIP 3 -->
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
