@@ -14,7 +14,7 @@ Môžete pridať do hocijakej šablóny vo formulári:
 <code>#RECOMMANDER{nadpis stránky,adresa stránky,úvod stránky,hlavný text}</code>
 _ napríklad
 <code>#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}</code>
-_ adresa, úvod a hlavný text sú nepovnné',
+_ adresa, úvod a hlavný text sú nepovinné',
 	'recommander_nom' => 'Odporučiť priateľovi',
 	'recommander_slogan' => 'Funkcia Odporučiť stránku priateľovi'
 );
