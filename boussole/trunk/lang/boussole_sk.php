@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_nbr_sites' => 'Obsahuje',
 	'colonne_prefixe_plugin' => 'Zásuvný modul ?',
 	'colonne_serveur' => 'Server',
-	'colonne_titre' => 'Nadpis',
+	'colonne_titre' => 'Titulok',
 	'colonne_url' => 'URL',
 	'colonne_version' => 'Verzia',
 
