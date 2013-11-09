@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="2.0.2"
 	etat="stable"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs_photo/logo-pb_plugin.png"
 	documentation="http://www.spip-contrib.net/Metadonnees-Photo"
 >	
