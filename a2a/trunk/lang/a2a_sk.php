@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_arbo' => 'Vyhľadať v stromovej štruktúre',
 	'recherche_texte' => 'Textové vyhľadávanie',
 	'rechercher' => 'Hľadať',
-	'rechercher_seulement_titres' => 'Hľadať iba v nadpisoch',
+	'rechercher_seulement_titres' => 'Hľadať iba v titulkoch',
 	'rechercher_tip_articles_ids' => 'Ak chcete priamo zobraziť článok číslo 123, zadajte "art123".',
 	'rechercher_un_article_a_lier' => 'Nájsť článok:',
 
