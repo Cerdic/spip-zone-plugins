@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="0.11.1"
 	etat="stable"
-	compatibilite="[3.0.0-dev;3.1.0["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/contact-32.png"
 	schema="0.2.0"
 	documentation="http://www.spip-contrib.net/Formulaire-de-contact-avance"
