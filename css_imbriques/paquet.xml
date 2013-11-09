@@ -1,7 +1,7 @@
 <paquet
 	prefix="css_imbriques"
 	categorie="outil"
-	version="3.3.0"
+	version="3.3.1"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css"
 	etat="stable"
 	compatibilite="[1.9.0;3.*.*]"
