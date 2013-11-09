@@ -4,7 +4,7 @@
 	version="3.3.0"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-pre-processeur-de-css"
 	etat="stable"
-	compatibilite="[3.0.0;3.*.*]"
+	compatibilite="[1.9.0;3.*.*]"
 >	
 	<nom>CSS imbriqu&#233;s</nom>
 
