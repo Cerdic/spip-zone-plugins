@@ -20,6 +20,6 @@
 		- lame use gueule
 	-->
 
-	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="SPIP" version="[2.0.9;2.0.99]" />
 	<necessite id="couteau_suisse" version="[1.8.14.06;]" />
 </plugin>
