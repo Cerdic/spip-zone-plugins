@@ -19,6 +19,6 @@ _ Les param&#232;tres de personnalisation et de r&#233;glage sont accessibles vi
 	
 	<categorie>divers</categorie>
 
-	<necessite id="spip" version="[2.0.10;3.0.99]" />
+	<necessite id="spip" version="[2.0.9;3.0.99]" />
 	
 </plugin>
