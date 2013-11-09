@@ -165,42 +165,45 @@ function formulaires_offrir_souhait_traiter_dist($id_souhait, $retour=''){
 			
 			$destinataires = array();
 			foreach($auteurs as $auteur){
-				$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.$auteur['id_auteur']);
-				$destinataires[] = $email;
+				if ($email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur = '.$auteur['id_auteur'])){
+					$destinataires[] = $email;
+				}
 			}
-			$destinataires = join(',', $destinataires);
+			if ($destinataires){
+				$destinataires = join(',', $destinataires);
 			
-			if ($souhait['statut'] == 'cagnotte') {
-				$sujet = _T(
-					'souhait:offrir_courriel_sujet_cagnotte',
+				if ($souhait['statut'] == 'cagnotte') {
+					$sujet = _T(
+						'souhait:offrir_courriel_sujet_cagnotte',
+						array(
+							'souhait' => $souhait['titre'],
+							'contribution' => _request('contribution').' €',
+							'nom' => _request('nom')
+						)
+					);
+				}
+				else{
+					$sujet = _T(
+						'souhait:offrir_courriel_sujet_propose',
+						array(
+							'souhait' => $souhait['titre'],
+							'nom' => _request('nom')
+						)
+					);
+				}
+				$message = _request('message');
+			
+				$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
+				$envoyer_mail(	
+					$destinataires,
+					$sujet,
 					array(
-						'souhait' => $souhait['titre'],
-						'contribution' => _request('contribution').' €',
-						'nom' => _request('nom')
+						'texte' => $message."\n\n--\n"._T('souhait:offrir_courriel_merci')."\n".generer_url_ecrire_objet('souhait', $id_souhait, '', '', false),
+						'from' => _request('email'),
+						'nom_envoyeur' => _request('nom')
 					)
 				);
 			}
-			else{
-				$sujet = _T(
-					'souhait:offrir_courriel_sujet_propose',
-					array(
-						'souhait' => $souhait['titre'],
-						'nom' => _request('nom')
-					)
-				);
-			}
-			$message = _request('message');
-			
-			$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
-			$envoyer_mail(	
-				$destinataires,
-				$sujet,
-				array(
-					'texte' => $message."\n\n--\n"._T('souhait:offrir_courriel_merci')."\n".generer_url_ecrire_objet('souhait', $id_souhait, '', '', false),
-					'from' => _request('email'),
-					'nom_envoyeur' => _request('nom')
-				)
-			);
 		}
 	}
 	
