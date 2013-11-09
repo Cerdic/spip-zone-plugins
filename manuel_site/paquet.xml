@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.9.3"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/manuelsite-32.png"
 	schema="0.2"
 	documentation="http://www.spip-contrib.net/Manuel-de-redaction-du-site"
