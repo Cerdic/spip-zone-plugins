@@ -9,7 +9,7 @@
 	<nom>C(R)UD Interface</nom>
 	<!-- Interface de création, mise à jour et suppression d'un objet -->
 
-	<auteur>Cédric Morin</auteur>
+	<auteur>C&#233;dric Morin</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 </paquet>
