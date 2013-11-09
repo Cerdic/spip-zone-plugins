@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
+	documentation="http://www.mediaspip.net/documentation/les-plugins-utilises-par-mediaspip/diogene-managing-editorial-forms/diogene-additional-plugins/article/diogene-geo"
 >	
 
 	<nom>Diogene - G&#233;o</nom>

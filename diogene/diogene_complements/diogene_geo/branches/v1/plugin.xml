@@ -21,6 +21,7 @@
 			[en]Geolocation add-on for "Diogene".
 		</multi>
 	</description>
+	<lien>http://www.mediaspip.net/documentation/les-plugins-utilises-par-mediaspip/diogene-managing-editorial-forms/diogene-additional-plugins/article/diogene-geo</lien>
 	<prefix>
 	diogene_geo
 	</prefix>
