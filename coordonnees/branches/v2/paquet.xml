@@ -30,7 +30,7 @@
 	<!-- Autorisations -->
 	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
 
-	<!-- Éléments d'interface -->
+	<!-- &#201;l&#233;ments d'interface -->
 	<pipeline nom="affiche_milieu" inclure="coordonnees_pipelines.php" />
 
 
