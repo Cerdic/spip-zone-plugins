@@ -1,9 +1,9 @@
 <paquet
 	prefix="pp_codes_spip"
 	categorie="edition"
-	version="1.0.0-alpha"
+	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0-rc;3.1.0["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="icones_barre/porte_plume_codes_spip-128.png"
 	documentation=""
 >

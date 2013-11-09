@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="3.3.2"
 	etat="stable"
-	compatibilite="[2.0.3;3.0.99]"
+	compatibilite="[2.0.3;3.0.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
 	documentation="http://www.spip-contrib.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
 >	
