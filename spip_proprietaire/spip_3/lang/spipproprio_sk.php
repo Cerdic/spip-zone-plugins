@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'capital' => ' s hlavným mestom',
 	'capital_social_comment' => 'Uveďte peňažnú menu, ak je to vhodné (<i>€ &dollar;</i>).',
-	'capital_social_label' => 'Hlavné mesto',
+	'capital_social_label' => 'Spoločenské hlavné mesto',
 	'cnil_comment' => 'Ak ste vykonali deklaráciou do CNIL, uveďte s akým dátumom a číslom dokladu.',
 	'cnil_date_label' => 'Dátum podania',
 	'cnil_legend' => 'Informácie o CNIL',
