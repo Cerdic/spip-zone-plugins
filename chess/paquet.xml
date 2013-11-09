@@ -3,12 +3,12 @@
 	categorie="divers"
 	version="0.9.4"
 	etat="stable"
-	compatibilite="[1.9.0;3.0.99]"
+	compatibilite="[1.9.0;3.0.*]"
 	logo="chess32.png"
 	documentation="http://www.spip-contrib.net/Plugin-Chess"
 >
 	<nom>Chess (Echecs)</nom>
-	<!-- Pour afficher des parties d'échecs au format pgn -->
+	<!-- Pour afficher des parties d'&#233;checs au format pgn -->
 
 	<auteur>Sébastien Boureux</auteur>
 	<auteur>Jacques Bouthier</auteur>
