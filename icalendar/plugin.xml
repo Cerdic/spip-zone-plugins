@@ -10,6 +10,6 @@
 	<icon>icalendar.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-iCalendar</lien>
 	<categorie>date</categorie>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<utilise id="iterateurs" version="[0.6.1;[" />
 </plugin>
