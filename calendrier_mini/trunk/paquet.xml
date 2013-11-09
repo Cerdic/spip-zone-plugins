@@ -3,7 +3,7 @@
 	categorie="date"
 	version="2.3.5"
 	etat="test"
-	compatibilite="[3.0.0-beta;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="minical-32.png"
 	documentation="http://www.spip-contrib.net/Calendrier-Mini-2-0"
 >	
