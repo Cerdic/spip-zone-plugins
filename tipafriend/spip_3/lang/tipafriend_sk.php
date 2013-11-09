@@ -172,7 +172,7 @@ Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://contrib.spip.net/?r
 	'page_test_test_model_html' => 'Zobraziť model HTML s fiktívnymi hodnotami',
 	'page_test_title' => 'Test zásuvného modulu "Odporučiť priateľom"',
 	'page_test_titre_inclusion_model' => '— Vloženie šablóny "@model@" (<i>fiktívne hodnoty</i>)',
-	'page_test_titre_inclusion_objet' => '— Simulácia stránky @objet@ č. @id_objet@ (<i>nadpis + úvod</i>)',
+	'page_test_titre_inclusion_objet' => '— Simulácia stránky @objet@ č. @id_objet@ (<i>titulok + úvod</i>)',
 	'popup_name' => 'Poslať informáciu e-mailom',
 
 	// T
