@@ -117,22 +117,27 @@ function notifications_notifications_destinataires($flux){
 
 	}
 
-	// forum valide ou prive : prevenir les autres contributeurs du thread
+	// forum valide ou prive : prevenir les autres contributeurs du thread ou ceux qui ont déjà répondu à l'article
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
-		OR ($quoi=='forumvalide' AND $GLOBALS['notifications']['thread_forum'])
+		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] or $GLOBALS['notifications']['forum']))
 	){
 
 		$id_forum = $flux['args']['id'];
-
 		if ($t = $options['forum']
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum))
 		){
-
+            
 			// Tous les participants a ce *thread*, abonnes
 			// on prend les emails parmi notification_email (prioritaire si rempli) email_auteur ou email de l'auteur qd id_auteur connu
 			$s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
 				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL )");
+            // Eventuellement tout ceux qui ont répondu à cet article
+            if ($GLOBALS['notifications']['forum_article']){
+                $s = sql_select("F.email_auteur, F.notification_email, A.email",
+				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
+				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL )");                
+                }
 			while ($r = sql_fetch($s)){
 				if ($r['notification_email'])
 					$flux['data'][] = $r['notification_email'];
