@@ -16,7 +16,7 @@ _ <code><comarquage|categorie=particuliers|xml=N333.xml|xsl=spNoeud.xsl></code>
 Par exemple pour appeler la page principale de la rubrique 'Comment faire si' utilisez ce code :
 _ <code><comarquage|categorie=particuliers|xml=N13042.xml|xsl=spNoeud.xsl></code>
 
-Pour appeler la page principale de la rubrique 'Associations', insérez ce code :
+Pour appeler la page principale de la rubrique 'Associations', ins&#233;rez ce code :
 _ <code><comarquage|categorie=associations|xml=N20.xml|xsl=spNoeud.xsl></code>
 
 Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
