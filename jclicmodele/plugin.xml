@@ -2,7 +2,7 @@
 	<nom>Jclic Mod&#232;le</nom>
 	<slogan>Mod&#232;le permettant d&#8217;ins&#233;rer des activit&#233;s Jclic</slogan>
 	<auteur>Olivier Gautier</auteur>
-	<version>0.1.0</version>
+	<version>0.2.2</version>
 	<etat>stable</etat>
 	<description>
 	Ce plugin propose un mod&#232;le permettant d&#8217;ins&#233;rer des activit&#233;s Jclic dans votre site.
@@ -19,6 +19,6 @@
 		<nom>header_prive</nom>
 		<inclure>jclicmodele_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<categorie>divers</categorie>
 </plugin>

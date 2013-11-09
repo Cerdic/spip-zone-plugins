@@ -3,7 +3,7 @@
   categorie="divers"
   version="0.2.2"
   etat="stable"
-  compatibilite="[3.0.0;3.0.99]"
+  compatibilite="[1.9.2;3.0.*]"
   logo="img_pack/jclic_logo.png"
   documentation="http://www.spip-contrib.net/Jclic-Modele"
 >
