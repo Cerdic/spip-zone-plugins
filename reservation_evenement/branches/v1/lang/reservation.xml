@@ -1,0 +1,10 @@
+<traduction module="reservation" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=de" total="85" traduits="85" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=en" total="85" traduits="85" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=fr" total="85" traduits="85" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>
