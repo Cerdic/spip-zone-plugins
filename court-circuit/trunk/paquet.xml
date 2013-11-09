@@ -3,13 +3,13 @@
 	categorie="outil"
 	version="2.4.0"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="icon/courtcircuit-128.png"
 	documentation="http://www.spip-contrib.net/?article3831"
 >	
 
 	<nom>Court-circuit</nom>
-	<!-- Accês direct aux articles -->
+	<!-- Acc&#232;s direct aux articles -->
 
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
