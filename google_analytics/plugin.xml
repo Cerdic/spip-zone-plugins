@@ -21,7 +21,7 @@
 		<inclure>googleanalytics_insert_head.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<necessite id="cfg" />
 	
 	<categorie>statistique</categorie>
