@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_ajouter_zone' => 'Pridať oblasť',
 	'texte_creer_associer_zone' => 'Vytvoriť a prepojiť oblasť',
-	'titre' => 'Názov',
+	'titre' => 'Titulok',
 	'titre_ajouter_zone' => 'Pridať oblasť s obmedzeným prístupom',
 	'titre_boite_protegee_non' => 'Neobmedzený prístup',
 	'titre_boite_protegee_oui' => 'Obmedzený prístup',
