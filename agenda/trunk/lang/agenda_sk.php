@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_horaire' => 'Celý deň',
 	'evenement_lieu' => 'Miesto',
 	'evenement_repetitions' => 'Opakovania',
-	'evenement_titre' => 'Nadpis',
+	'evenement_titre' => 'Titulok',
 	'evenements' => 'Udalosti',
 	'evenements_a_venir' => 'Budúce',
 	'evenements_depuis_debut' => 'od začiatku',
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubriques' => 'Rubriky s kalendárom udalostí',
 
 	// S
-	'sans_titre' => '(bez nadpisu)',
+	'sans_titre' => '(bez titulku)',
 
 	// T
 	'telecharger' => 'Stiahnuť (csv)',
