@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="5.16.4"
 	etat="test"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/jquery_file_upload.png"
 	documentation="http://aquantum-demo.appspot.com/file-upload"
 >	
