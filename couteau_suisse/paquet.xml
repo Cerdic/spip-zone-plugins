@@ -3,7 +3,7 @@
 	categorie="maintenance"
 	version="1.8.142"
 	etat="stable"
-	compatibilite="[1.9.2;3.0.99]"
+	compatibilite="[1.9.2;3.0.*]"
 	logo="img/couteau-50.gif"
 	schema="1.11"
 	documentation="http://contrib.spip.net/Le-Couteau-Suisse"
@@ -17,7 +17,7 @@
 	<auteur>Patrice Vanneufville~&#169;~2007-2013</auteur>
 	<copyright>2007-2013</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
-	<credit>Collectif SPIP, Vincent Ramos, Maïeul Rouquette, Fil, Arnaud Ventre, Joseph Larmarange, Cerdic, Pierre Andrews (Mortimer), IZO, Phil, Jérôme Combaz, Bertrand Marne, Têtue, Aurélien Pierard, FredoMkb, Sylvain, BoOz, Alexis Roussel, Paolo, PatV, Yohann(potter64), Nicolas Hoizey, Piero Wbmstr, etc.</credit>
+	<credit>Collectif SPIP, Vincent Ramos, Ma&#239;eul Rouquette, Fil, Arnaud Ventre, Joseph Larmarange, Cerdic, Pierre Andrews (Mortimer), IZO, Phil, J&#233;r&#244;me Combaz, Bertrand Marne, T&#234;tue, Aur&#233;lien Pierard, FredoMkb, Sylvain, BoOz, Alexis Roussel, Paolo, PatV, Yohann(potter64), Nicolas Hoizey, Piero Wbmstr, etc.</credit>
 
 	<traduire module="couteau" reference="fr" gestionnaire="salvatore" />
 	<traduire module="couteauprive" reference="fr" gestionnaire="salvatore" />
