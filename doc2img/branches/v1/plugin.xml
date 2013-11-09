@@ -10,7 +10,7 @@
 		</multi>
 	</slogan>
     <description><multi>
-    	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou série d'images. Ces images sont ensuite exploitables via une boucle spécifique.
+    	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou s&#233;rie d'images. Ces images sont ensuite exploitables via une boucle sp&#233;cifique.
 		[en]This plugin will convert on the fly pdf, tiff and other kind of documents in image or serie of images. These images can then be used with a specific loop.
 	</multi></description>
     <lien>http://www.spip-contrib.net/doc2img</lien>

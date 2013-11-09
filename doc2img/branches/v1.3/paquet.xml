@@ -3,14 +3,14 @@
 	categorie="multimedia"
 	version="1.3.3"
 	etat="stable"
-	compatibilite="[2.1.14;3.0.99]"
+	compatibilite="[2.1.14;3.0.*]"
 	logo="images/doc2img-128.png"
 	schema="0.94"
 	documentation="http://www.spip-contrib.net/doc2img"
 >	
 
 	<nom>Documents en Images</nom>
-	<!-- Convertir des documents textuels à la volée -->
+	<!-- Convertir des documents textuels à la vol&#233;e -->
 
 	<auteur>Camille Lafitte</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
