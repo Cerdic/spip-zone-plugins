@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="2.2.0"
 	etat="test"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/etiquettes.png"
 	documentation="http://www.spip-contrib.net/Plugin-Etiquettes"
 >	
