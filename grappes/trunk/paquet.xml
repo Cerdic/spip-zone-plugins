@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="1.0.3"
 	etat="test"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
 	schema="0.2.4"
 	documentation="http://contrib.spip.net/4282"
