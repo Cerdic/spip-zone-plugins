@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.0.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/multilang-32.png"
 	schema="0.1"
 	documentation="http://contrib.spip.net/?article3498"
