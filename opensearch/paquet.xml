@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="0.2.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="images/opensearch-64.png"
 	documentation="http://www.spip-contrib.net/Plugin-OpenSearch"
 >	
