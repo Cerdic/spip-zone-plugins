@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="4.1.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/zip.png"
 	schema="0.5"
 	documentation="http://www.spip-contrib.net/Zippeur"
