@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.3.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="scrutin.png"
 	documentation="http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la"
 >	

@@ -28,7 +28,7 @@
 	   <inclure>scrut_prop_pip.php</inclure>
 	</pipeline>
 	<fonctions>scrut_prop_fonctions.php</fonctions>
-	<necessite id="spip" version="[2.0.0;2.1.99]" />
+	<necessite id="spip" version="[2.0.0;3.0.99]" />
 	<necessite id="spip_bonux" />
 
 	<categorie>communication</categorie>
