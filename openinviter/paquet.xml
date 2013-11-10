@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.1.0"
 	etat="stable"
-	compatibilite="[2.1.10;3.0.99]"
+	compatibilite="[2.1.10;3.0.*]"
 	logo="images/openinviter.gif"
 	documentation="http://contrib.spip.net/?article3979"
 >	
