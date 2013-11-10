@@ -3,7 +3,7 @@
 	<slogan>Int&#233;gration de l'impl&#233;mentation php de LESS</slogan>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<licence>MIT</licence>
-	<version>0.7.4</version>
+	<version>0.7.5</version>
 	<etat>test</etat>
 	<icon>img/lesscss-32.png</icon>
 	<description>
@@ -19,5 +19,5 @@ Ce plugin compile &#224; la vol&#233;e tous les fichiers .less.css ou .less du s
 	<pipeline>
 		<nom>insert_head</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.*]" />
 </plugin>
