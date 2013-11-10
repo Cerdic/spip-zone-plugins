@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.5.1"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[2.0.10;3.0.*]"
 	logo="yaml.png"
 	documentation="http://www.spip-contrib.net/Le-plugin-YAML"
 >
