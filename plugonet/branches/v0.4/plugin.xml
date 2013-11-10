@@ -59,7 +59,7 @@ une aide sur chaque balise de la nouvelle DTD.
 		<url>plugonet_valider</url>
 	</onglet>
 
-	<necessite id="SPIP" version="[2.1.10;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.1.10;3.0.0]" />
 	<necessite id="langonet" version="[0.6.3;]" />
 	<necessite id="Iterateurs" version="[0.3.0;]" />
 	<categorie>outil</categorie>
