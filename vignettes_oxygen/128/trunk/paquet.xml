@@ -3,9 +3,9 @@
 	categorie="multimedia"
 	version="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0-alpha2;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/oxygen.png"
-	documentation="http://www.spip-contrib.net/?article3970"
+	documentation="http://contrib.spip.net/?article3970"
 >
 	<nom>Vignettes Oxygen (128)</nom>
 	<!-- Collection d'icônes pour les documents -->

@@ -7,7 +7,7 @@
 	<version>0.2.0</version>
 	<etat>stable</etat>
 	<description>Ce plugin fournit un ensemble d'ic&#244;nes de documents en 128x128 pixels venant remplacer les ic&#244;nes par d&#233;faut de SPIP. Cette collection est bas&#233;es sur les ic&#244;nes du projet [Oxygen->http://www.softicons.com/free-icons/system-icons/oxygen-icons-by-oxygen]. Une version en 52x52 pixels est également disponible.</description>
-	<lien>http://www.spip-contrib.net/?article3970</lien>
+	<lien>http://contrib.spip.net/?article3970</lien>
 	<prefix>vignettes_oxygen</prefix>
 	<categorie>multimedia</categorie>
 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
