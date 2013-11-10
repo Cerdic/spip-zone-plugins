@@ -3,8 +3,8 @@
 // Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le titre de la tâche :
 // - #tag ou tag est un mot. Exemple : #courses ou #перевод-шаблон
 // - type:valeur ou type et valeur sont des mots. Pas utilisé pour l'instant
-if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|#)([\w.-]+)(?:\s|$)%Uu');
+if (!defined('_QR_REGEXP_INFOS_COMPLEMENTAIRES'))
+	define('_QR_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|#)([\w.-]+)(?:\s|$)%Uu');
 
 
 /**
@@ -74,78 +74,72 @@ function tw_qr($t) {
 				}
 				$premier = substr($texte, 0, 1);
 
-				if ($premier == '?') {
-					// Il faut tester si une question est en cours. Si c'est le cas il faut clore la question en cours
-					// avant de commencer la nouvelle
-					if ($question_en_cours) {
-						$faqs[$index_faq][$index_qr] = array(
-							'question' => $question,
-							'reponse' => trim($reponse),
-							'tags' => $tags,
-							'infos' => $infos,
-						);
-						$question_en_cours = false;
-						$index_qr += 1;
-					}
-
-					// On démarre une nouvelle question
-					// -- initialisation des variables de la question en cours
-					$tags = $infos = array();
-					$question_en_cours = true;
-					$reponse = '';
-					$texte = trim(substr($texte, 1, strlen($texte)-1));
-
-					// -- le texte de la question, que l'on sépare du reste des informations complémentaires éventuelles
-					if (preg_match_all(_TODO_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
-						// Extraction du titre
-						$question = trim(str_replace($infos_complementaires[0], '', $texte));
-
-						// Extraction des informations complémentaires
-						foreach($infos_complementaires[1] as $_cle => $_prefixe) {
-							$type = rtrim($_prefixe, ':');
-							$valeur = $infos_complementaires[2][$_cle];
-							if ($type == '@') {
-								// -- les étiquettes
-								$tags[] = $valeur;
-							}
-							else {
-								// -- les informations typées
-								if ($formater = charger_fonction("qr_formater_${type}", 'inc', true)) {
-									$infos[$type] = $formater($valeur);
-								}
-								else
-									$infos[$type] = $valeur;
-								if (!in_array($type, $types_info[$index_faq]))
-									$types_info[$index_faq][] = $type;
-							}
-						}
-					}
-					else
-						$question = $texte;
-				}
-				elseif ($premier == ':') {
-					if ($question_en_cours) {
-						$faqs[$index_faq][$index_qr] = array(
-							'question' => $question,
-							'reponse' => trim($reponse),
-							'tags' => $tags,
-							'infos' => $infos,
-						);
-						$question_en_cours = false;
-						$index_qr += 1;
-					}
-					// Titre d'une nouvelle faq incluse dans le bloc faq en cours de traitement
-					$index_faq += 1;
-					$titres[$index_faq] = trim(substr($texte, 1, strlen($texte)-1));
-					$index_qr = 0;
+				if (($premier != '?')
+				AND ($premier != ':')) {
+					// La ligne correspond à un texte de réponse non vide si une question est en cours
+					if ($question_en_cours)
+						$reponse .= $reponse ? "\n" . $texte : $texte;
 				}
 				else {
-					// Ajout d'une ligne de réponse avec un contenu
-					$reponse .= $reponse ? "\n" . $texte : $texte;
+					// Il faut tester si une question est en cours. Si c'est le cas il faut clore la question en cours
+					// avant de commencer la nouvelle question ('?') ou la nouvelle faq par son titre (':').
+					if ($question_en_cours) {
+						$faqs[$index_faq][$index_qr] = array(
+							'question' => $question,
+							'reponse' => trim($reponse),
+							'tags' => $tags,
+							'infos' => $infos,
+						);
+						$question_en_cours = false;
+						$index_qr += 1;
+					}
+
+					if ($premier == '?') {
+						// On démarre une nouvelle question
+						// -- initialisation des variables de la question en cours
+						$tags = $infos = array();
+						$question_en_cours = true;
+						$reponse = '';
+						$texte = trim(substr($texte, 1, strlen($texte)-1));
+
+						// -- le texte de la question, que l'on sépare du reste des informations complémentaires éventuelles
+						if (preg_match_all(_QR_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
+							// Extraction du titre
+							$question = trim(str_replace($infos_complementaires[0], '', $texte));
+
+							// Extraction des informations complémentaires
+							foreach($infos_complementaires[1] as $_cle => $_prefixe) {
+								$type = rtrim($_prefixe, ':');
+								$valeur = $infos_complementaires[2][$_cle];
+								if ($type == '#') {
+									// -- les étiquettes
+									$tags[] = $valeur;
+								}
+								else {
+									// -- les informations typées
+									if ($formater = charger_fonction("qr_formater_${type}", 'inc', true)) {
+										$infos[$type] = $formater($valeur);
+									}
+									else
+										$infos[$type] = $valeur;
+									if (!in_array($type, $types_info[$index_faq]))
+										$types_info[$index_faq][] = $type;
+								}
+							}
+						}
+						else
+							$question = $texte;
+					}
+					elseif ($premier == ':') {
+						// Titre d'une nouvelle faq incluse dans le bloc faq en cours de traitement
+						$index_faq += 1;
+						$titres[$index_faq] = trim(substr($texte, 1, strlen($texte)-1));
+						$index_qr = 0;
+					}
 				}
 			}
 			elseif ($question_en_cours) {
-				// Ajout d'une ligne vide incluse dans le texte de la réponse
+				// Ligne vide. Comme elle est incluse dans le texte de la réponse on la conserve
 				$reponse .= $reponse ? "\n" . $texte : $texte;
 			}
 		}
