@@ -42,3 +42,10 @@
 .formulaire_spip input.text {
     width: 100%;
 }
+
+/*
+*   Foundation donne une taille fixe aux textarea ce qui va en contradiction avec le système de saisie (basé sur row).
+*/
+textarea {
+    height: auto;
+}
