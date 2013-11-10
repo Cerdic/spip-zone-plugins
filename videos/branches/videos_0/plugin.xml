@@ -70,7 +70,7 @@
 		<url>configurer_videos</url>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="medias" version="[1.6.0;]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
 	

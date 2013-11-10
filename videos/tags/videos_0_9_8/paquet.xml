@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.9.8"
 	etat="dev"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="theme/img/videos-32.png"
 	schema="0.3"
 	documentation="http://www.spip-contrib.net/?article3636"
