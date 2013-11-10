@@ -1,0 +1,69 @@
+#!/bin/bash
+VERSION=1
+SANS_ARGS=0 
+E_ERREUROPTION=65
+
+if [ $# -eq "$SANS_ARGS" ]  # Script appelé sans argument?
+then
+  echo "Usage: `basename $0` options (-mnopqrs)"
+  exit $E_ERREUROPTION        # Sort et explique l'usage, si aucun argument(s)
+                              # n'est donné.
+fi  
+
+function F_aide(){
+echo "`basename $0`, version 1"
+echo ""
+echo "syntaxe: ..."
+echo "-h : help"
+echo "-v : version"
+echo "-l : liste tous les plugins, s'il y a un astérisque \"*\", le plugin est activé "
+echo "-a : activer un ou des plugins séparés par une \",\" : saisie,yaml"
+echo "-d : désactiver un ou des plugins séparés par une \",\" : saisie,yaml"
+echo "-t : svn checkout du plugin, on donne le nom du plugin (celui de la zone) et son repertoire ; trunk, branches, ou rien"
+echo "-f : svn checkout des plugins contenus dans le fichier telecharger.csv : colonne1=nom_plugin,colonne2=repertoire"
+}
+
+
+while getopts vhla:d:t:f option
+do
+    case $option in
+        v)   
+            echo "`basename $0` $VERSION"
+            ;;
+        h)
+            F_aide
+            ;;
+        l)
+            ./lister_plugins.php
+            ;;
+        a)
+            liste_plugins_activer=${OPTARG//,/" "}
+            ./activer_plugin.php $liste_plugins_activer
+            ./lister_plugins.php
+            ;;
+        d)
+            liste_plugins_desactiver=${OPTARG//,/" "}
+            ./desactiver_plugin.php $liste_plugins_desactiver
+            ./lister_plugins.php
+            ;;
+        t)
+            OLDIFS="$IFS"
+            IFS=,
+            set $OPTARG
+            IFS="$OLDIFS"; unset $OLDIFS
+            cd ..
+            svn checkout svn://zone.spip.org/spip-zone/_plugins_/${1}/${2} ${1}
+            cd spipenconsole
+            ;;
+        f)
+            cd ..
+            while IFS=, read nom dossier
+            do  
+                svn checkout svn://zone.spip.org/spip-zone/_plugins_/${nom}/${dossier} ${nom}
+            done < ./spipenconsole/telecharger.csv
+            cd spipenconsole
+            ./lister_plugins.php
+            ;;
+    esac
+done
+
