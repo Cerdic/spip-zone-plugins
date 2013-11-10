@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.3.3"
 	etat="test"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/mosaique-64.png"
 	documentation="http://contrib.spip.net/4232"
 	schema="0.0.1"
@@ -18,11 +18,11 @@
 
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 	<necessite nom="saisies" compatibilite="[1.25.3;[" />
-  <necessite nom="yaml" compatibilite="[1.5.1;[" />
+	<necessite nom="yaml" compatibilite="[1.5.1;[" />
  
-    <pipeline nom="declarer_champs_extras" inclure="base/mosaique.php" />
-    <pipeline nom="header_prive" inclure="mosaique_pipelines.php" />
-    <pipeline nom="insert_head" inclure="mosaique_pipelines.php" />
-    <pipeline nom="jqueryui_plugins" inclure="mosaique_pipelines.php" />
-    <pipeline nom="affiche_gauche" inclure="mosaique_pipelines.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/mosaique.php" />
+	<pipeline nom="header_prive" inclure="mosaique_pipelines.php" />
+	<pipeline nom="insert_head" inclure="mosaique_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="mosaique_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="mosaique_pipelines.php" />
 </paquet>
