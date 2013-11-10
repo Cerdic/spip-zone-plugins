@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.3.1"
 	etat="test"
-	compatibilite="[2.0.10;3.0.99]"
+	compatibilite="[2.0.10;3.0.*]"
 	logo="images/xmlrpc.png"
 >	
 
