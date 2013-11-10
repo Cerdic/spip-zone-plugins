@@ -4,7 +4,7 @@
 	version="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/qr-48.png"
+	logo="qr_logo-64.png"
 	documentation=""
 >
 

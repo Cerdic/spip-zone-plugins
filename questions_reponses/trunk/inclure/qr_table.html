@@ -1,0 +1,44 @@
+<B_faq>
+<table class="faq">
+	[<caption><strong class="caption">(#ENV{titre})</strong></caption>]
+	<thead>
+		<tr class="row_first">
+			<th class="question">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_faq,question})]" title="<:todo:tri_statut:>">?</a>
+			</th>
+			<th class="reponse">
+				<a class="ajax" href="[(#SELF|parametre_url{tri_faq,reponse})]" title="<:todo:tri_titre:>"><:todo:label_titre:></a>
+			</th>
+			<BOUCLE_th_complements(DATA){source table, #ENV{types_info}}{par cle}>
+				<th[ class="(#VALEUR)"]>
+					<a class="ajax" href="[(#SELF|parametre_url{tri_faq,#VALEUR})]"[ title="(#VAL{todo:tri_}|concat{#VALEUR}|_T)"]>
+						[(#VAL{todo:label_}|concat{#VALEUR}|_T)]
+					</a>
+				</th>
+			</BOUCLE_th_complements>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_faq(DATA){source table, #ENV{faq}}{par #ENV{tri_faq,cle}}>
+		<tr class="[(#VALEUR|table_valeur{statut/id})][ (#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
+			<td class="question">
+				[(#VALEUR|table_valeur{question})]
+			</td>
+			<td class="reponse">
+			<BOUCLE_tags(DATA){source table, #VALEUR|table_valeur{tags}}{par valeur}>
+				[(#COMPTEUR_BOUCLE|=={1}|oui)<ul class="liste-tags">]
+				<li class="tag">#VALEUR</li>
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)</ul>]
+			</BOUCLE_tags>
+				[(#VALEUR|table_valeur{reponse})]
+			</td>
+			<BOUCLE_td_complements(DATA){source table, #ENV{types_info}}{par cle}>
+				<td[ class="(#VALEUR)"]>
+					[(#_faq:VALEUR|table_valeur{infos/#VALEUR})]
+				</td>
+			</BOUCLE_td_complements>
+		</tr>
+</BOUCLE_faq>
+	</tbody>
+</table>
+</B_faq>
