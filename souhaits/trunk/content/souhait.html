@@ -32,26 +32,26 @@
 	<div class="main">
 		[<div class="#EDIT{descriptif} texte surlignable">(#DESCRIPTIF|image_reduire{500,0})</div>]
 
-		<p class="infos clear">
+		<p class="infos clear lead">
 			[<span class="prix">
-				<i class="icon-barcode"></i> (#PRIX|>{0}|?{#PRIX}) €
+				<i class="icon-barcode" style="vertical-align:baseline;"></i> (#PRIX|>{0}|?{#PRIX}) €
 			</span>]
 			[(#PRIX|et{#URL_SITE})<br/>]
 			[<span class="site">
-				<i class="icon-shopping-cart"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
+				<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 			</span>]
 		</p>
 	</div>
-
+	[
 	<footer>
-		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+		<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>
 	</footer>
-
+	]
 	<aside>
 		[(#REM) Gestion du portfolio et des documents ]
 		[(#INCLURE{fond=inclure/documents,objet=souhait,id_objet=#ID_SOUHAIT,doublons})]
 		
-		<div class="alert #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{alert-success,'',alert-error,alert-error,alert-info},#STATUT})]">
+		<div class="clear alert #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{alert-success,'',alert-error,alert-error,alert-info},#STATUT})]">
 		<h4>[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</h4>
 		[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]
 		</div>
