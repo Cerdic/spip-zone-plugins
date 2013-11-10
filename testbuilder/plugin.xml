@@ -26,7 +26,7 @@ Ce plugin est un outil de d&#233;veloppement. Il a tout son int&#233;r&#234;t in
 	</bouton>
 	<necessite id='spip_bonux' version='[1.9.0;]' />
 </plugin>
-<plugin spip='[3.0.0-dev;3.0.99]'>
+<plugin spip='[3.0.0;3.0.99]'>
 	<nom>Test Builder</nom>
 	<slogan>Construire des tests syst&#233;matiques</slogan>
 	<auteur>[Cedric->http://www.yterium.com]</auteur>
