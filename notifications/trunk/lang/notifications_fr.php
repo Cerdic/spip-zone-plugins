@@ -54,9 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Forums privés',
 	'forums_public' => 'Forums publics',
 	'forums_public_a_noter' => 'À noter : dans le cas des forums modérés à priori, seuls les auteurs ayant le droit de valider les forums sont notifiés lors de l’envoi du forum ; les autres destinataires sont notifiés lors de la validation du message par le modérateur.',
+	'forums_public_article' => '<strong>Réponse à l’article</strong> : les personnes ayant répondu publiquement à l’article recoivent les notifications des forums (publics) de l’article (utile pour les forums « à plat »).',
 	'forums_public_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site public.',
-	'forums_public_article' => '<strong>Réponse à l\'article</strong> : les personnes ayant répondu publiquement à l\'article recoivent les notifications des forums (publics) de l\'article (utile pour les forums «&nbsp;à plat&nbsp;»).',
-    'forums_public_moderateur' => 'Indiquez ci-dessous l’adresse email du modérateur des forums publics (ou plusieurs, séparés par des virgules).',
+	'forums_public_moderateur' => 'Indiquez ci-dessous l’adresse email du modérateur des forums publics (ou plusieurs, séparés par des virgules).',
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
