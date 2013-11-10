@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="0.6.2"
 	etat="test"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="images/parrainage-48.png"
 	schema="0.1.0"
 	documentation="http://contrib.spip.net/?article3978"
