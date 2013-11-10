@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="3.0.0"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/nivoslider-32.png"
 	documentation="http://www.spip-contrib.net/Nivo-Slider-pour-SPIP"
 >	
