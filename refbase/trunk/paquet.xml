@@ -3,9 +3,9 @@
 	categorie="edition"
 	version="2.1.2"
 	etat="stable"
-	compatibilite="[3.0.0-dev;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/refbase-48.png"
-	documentation="http://www.spip-contrib.net/spip.php?article3036"
+	documentation="http://contrib.spip.net/plugin-refbase"
 	schema="0.1.0"
 >
 

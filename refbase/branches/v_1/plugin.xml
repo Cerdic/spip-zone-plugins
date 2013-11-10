@@ -13,7 +13,7 @@
 in SPIP with a model called <code>refbase</code>.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3036</lien>
+	<lien>http://contrib.spip.net/plugin-refbase</lien>
 	<prefix>refbase</prefix>
 	<fonctions>refbase_balise.php</fonctions>
 	<pipeline>
