@@ -1,7 +1,7 @@
 <plugin>
 	<nom>jQuery Lazy Load</nom>
 	<auteur>b_b</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>
 	Ce plugin permet d'utiliser le script jQuery Lazy Load dans les pages publiques de votre site.
