@@ -20,6 +20,6 @@
 		<action>ajout_bouton</action>
 		<inclure>tradauto.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.0.10;2.1.99]' />
+	<necessite id='SPIP' version='[2.0.10;3.0.99]' />
 	<necessite id='spip_bonux' version='[2.3.0;]' />
 </plugin>

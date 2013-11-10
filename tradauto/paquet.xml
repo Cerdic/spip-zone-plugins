@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.0.4"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.0.10;3.0.*]"
 	logo="images/tradauto-64.png"
 	documentation="http://contrib.spip.net/?article4198"
 >
