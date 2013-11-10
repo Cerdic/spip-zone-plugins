@@ -19,5 +19,5 @@ Ce plugin compile &#224; la vol&#233;e tous les fichiers .less.css ou .less du s
 	<pipeline>
 		<nom>insert_head</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.*]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
