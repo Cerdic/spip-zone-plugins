@@ -98,6 +98,7 @@ function reservations_detail_inserer( $id_parent=null, $set=null) {
 
     if ($set)
         $champs = array_merge($champs, $set);
+    
 
     // Envoyer aux plugins
     $champs = pipeline('pre_insertion',
@@ -135,7 +136,6 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     $row = sql_fetsel('*','spip_reservations_details','id_reservations_detail='.intval($id_reservations_detail));
     $id_reservation=$row['id_reservation'];
     $id_evenement=$row['id_evenement'];
-	$id_auteur=_request('id_auteur');
 	$envoi_differe_actif=_request('envoi_differe_actif');	
 	
     if(!$places=$c[places]){
@@ -214,11 +214,10 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	         (in_array($s,$config['quand'])) &&
 	         ($notifications = charger_fonction('notifications', 'inc', true))
 	        ) {
-	        	if(!$id_auteur){
-	        		$row=sql_fetsel('id_auteur,email','spip_reservations','id_reservation='.$id_reservation);
-					$id_auteur=$row['id_auteur'];
-					$email=$row['email'];
-					}
+	        	$row=sql_fetsel('id_auteur,email','spip_reservations','id_reservation='.$id_reservation);
+				$id_auteur=$row['id_auteur'];
+				$email=$row['email'];
+				
 		        // Determiner l'expediteur
 		        $options = array('statut'=>$s,'id_reservations_detail'=>$id_reservations_detail);
 		        if( $config['expediteur'] != "facteur" )

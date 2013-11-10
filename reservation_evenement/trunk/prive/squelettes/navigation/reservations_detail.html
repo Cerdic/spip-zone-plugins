@@ -6,7 +6,7 @@
 <div class='infos'>
 [(#SET{texte_objet,<:reservations_detail:titre_reservations_detail:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION</p></div>
-[(#FORMULAIRE_INSTITUER_OBJET{reservation,#ID_RESERVATION})]
+[(#FORMULAIRE_INSTITUER_OBJET{reservations_detail,#ID_RESERVATION})]
 #SET{envoi_differe,#CONFIG{reservation_evenement/envoi_differe,#ARRAY}}
 #SET{envoi_differe_count,#GET{envoi_differe}|count}
 [(#GET{envoi_differe_count}|>{0}|oui)

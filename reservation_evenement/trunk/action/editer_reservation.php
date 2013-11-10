@@ -164,10 +164,13 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
             $set['id_prix_objet']=$id_prix_objet[$id_evenement];
         }
         else $id_reservations_detail=$reservations_detail['id_reservations_detail'];
-	
-        set_request('envoi_differe_actif','non');	
-        set_request('id_auteur',$row['id_auteur']);			
-		
+        
+        //Pour l'enregistrement
+        $set['id_evenement']=$id_evenement;
+	    
+        //eviter l'envoi d'une notification pour chaque détail   
+        set_request('envoi_differe_actif','non');			
+		 spip_log($set,'teste');
         $detail=$action($id_reservations_detail,'reservations_detail',$set);
 		
     }

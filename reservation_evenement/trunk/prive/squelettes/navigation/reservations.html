@@ -1,7 +1,7 @@
 #SET{id_evenement,#ARRAY}
 #SET{id_rubrique,#ARRAY}
 #SET{self,#SELF|parametre_url{id_evenement|date_debut|debut_liste_evt,''}
-<B_evenements>
+
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
 
@@ -14,13 +14,14 @@
        [(#ENV{id_evenement}|oui)#SET{titre,#TITRE}]
        </BOUCLE_evenements>
           [<h4>(#GET{titre}|sinon{<:reservation:titre_reservations:>})</h4>]      
-#SET{reservations,#ARRAY}       
+#SET{reservations,#ARRAY}    
+
 #SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},where,#ENV{where}}}
 <BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{tout}>
     #SET{reservations,#GET{reservations}|push{#QUANTITE}}   
 </BOUCLE_reservations>
-<ul>
-    <li>[(#ENV*{titre,#GET{reservations}|array_sum|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})] : <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]"><:reservation:texte_exporter:></a></li>
+<ul>#SET{res_tot,#GET{reservations}|array_sum}
+    <li>[(#ENV*{titre,#GET{res_tot}|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})] : <a href="[(#URL_PAGE{transmettre,[(#VAL{evenements_reservations}|param_low_sec{#GET{args}, '', 'transmettre'})]}|parametre_url{reponse,oui})]"><:reservation:texte_exporter:></a></li>
     <li><:reservation:affichage_par:>
         <ul class="selection" id="sel">
             <li>[(#ENV{voir}|=={''}|non)#SET{a, </a>}
@@ -41,8 +42,9 @@
         </ul>
     <li><a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">[(#CHEMIN_IMAGE{cfg-16.png}|image_reduire{16})] &nbsp;<:spip:icone_configuration_site:></a>   </li>
 </ul>
+</B_reservations>
 #BOITE_FERMER     
-</B_evenements>
+
 
 <INCLURE{fond=inclure/reservation-rubriques,rubriques=#GET{id_rubrique},self=#GET{self},ajax,env}/>
 
