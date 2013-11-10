@@ -4,7 +4,7 @@
 	version="0.2.2"
 	etat="stable"
 	logo="images/spipclear-128.png"
-	compatibilite="[2.0.6;3.0.99]"
+	compatibilite="[2.0.6;3.0.*]"
 	documentation="http://www.spip-contrib.net/SpipClear-2-1"
 >	
 

@@ -17,7 +17,7 @@
 		<nom>styliser</nom>
 		<inclure>spipclear_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.6;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.6;3.0.99]" />
 	<necessite id="CalendrierMini" version="[0.3;]" />
 	<categorie>squelette</categorie>
 	<bouton id="spipclear_cfg" parent="configuration">
