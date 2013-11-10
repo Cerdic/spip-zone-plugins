@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.2.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/podcast_64.png"
 	schema="0.1.0"
 	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/article/le-plugin-podcasts"
