@@ -4,7 +4,7 @@
 	version="1.1.0"
 	etat="test"
 	documentation="http://contrib.spip.net/Titres-typographies"
-	compatibilite="[3.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="titres_typographies.jpg"
 >	
 	<nom>Titres typographiés</nom>
