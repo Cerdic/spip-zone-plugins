@@ -28,8 +28,6 @@ function tw_qr($t) {
 	// - index 4 : la capture du texte compris entre les balises <faq> et </faq>
 	// --> Seuls les index 3 et 4 sont utilisés.
 	$lignes = explode("\n", trim($t[4]));
-//	array_shift($lignes);
-//	array_pop($lignes);
 
 	// Initialisation des variables propres à l'ensemble des faqs du bloc
 	$faqs = array();
@@ -41,13 +39,14 @@ function tw_qr($t) {
 	// Analyse de chaque ligne du bloc
 	while ($index_ligne <= count($lignes)){
 		// Initialisation des variables de la faq en cours
+		// (pour un bloc faq contenant plusieurs faq séparées par des titres)
 		if (($index_qr == 0) AND !$question_en_cours) {
 			$types_info[$index_faq] = array();
 		}
 
-		// On vérifie qu'on a pas atteint la fin du bloc
-		// -- si oui, on ajoute la question-reponse en cours si elle existe
-		// -- si non, on traite la nouvelle ligne
+		// On vérifie qu'on a atteint la fin du bloc de texte compris entre <faq> et </faq>.
+		// -- si c'est le cas, on ajoute la question-reponse en cours si elle existe
+		// -- sinon, on traite la nouvelle ligne
 		if ($index_ligne == count($lignes)) {
 			if ($question_en_cours) {
 				$faqs[$index_faq][$index_qr] = array(
@@ -60,9 +59,6 @@ function tw_qr($t) {
 			}
 		}
 		else {
-			// Initialisation des variables de la question en cours
-			$tags = $infos = array();
-
 			// Extraction de la nouvelle ligne à traiter
 			$texte = trim($lignes[$index_ligne]);
 
@@ -71,8 +67,8 @@ function tw_qr($t) {
 				// - l'indicateur du titre de la question,
 				// - l'indicateur d'un titre pour la faq,
 				// - et sinon la réponse comme un descriptif libre de la question précédente.
-				// Le caractère de question ? est traité par SPIP et précédés
-				// d'un &nbsp; qu'il faut au préalable le supprimer.
+				// Le caractère de question '?' est traité par SPIP et précédés
+				// d'un '&nbsp;' parfois à cause de la typographie et il faut donc au préalable le supprimer.
 				if (strpos($texte, '&nbsp;') === 0) {
 					$texte = substr($texte, 6, strlen($texte)-6);
 				}
@@ -93,6 +89,8 @@ function tw_qr($t) {
 					}
 
 					// On démarre une nouvelle question
+					// -- initialisation des variables de la question en cours
+					$tags = $infos = array();
 					$question_en_cours = true;
 					$reponse = '';
 					$texte = trim(substr($texte, 1, strlen($texte)-1));
@@ -126,17 +124,28 @@ function tw_qr($t) {
 						$question = $texte;
 				}
 				elseif ($premier == ':') {
-					// Projet
+					if ($question_en_cours) {
+						$faqs[$index_faq][$index_qr] = array(
+							'question' => $question,
+							'reponse' => trim($reponse),
+							'tags' => $tags,
+							'infos' => $infos,
+						);
+						$question_en_cours = false;
+						$index_qr += 1;
+					}
+					// Titre d'une nouvelle faq incluse dans le bloc faq en cours de traitement
 					$index_faq += 1;
 					$titres[$index_faq] = trim(substr($texte, 1, strlen($texte)-1));
 					$index_qr = 0;
 				}
 				else {
-					// Descriptif libre de la tâche précédente
+					// Ajout d'une ligne de réponse avec un contenu
 					$reponse .= $reponse ? "\n" . $texte : $texte;
 				}
 			}
 			elseif ($question_en_cours) {
+				// Ajout d'une ligne vide incluse dans le texte de la réponse
 				$reponse .= $reponse ? "\n" . $texte : $texte;
 			}
 		}
