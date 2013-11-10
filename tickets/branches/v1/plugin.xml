@@ -99,7 +99,7 @@
 	</bouton>
 
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;2.0.99)" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="saisies" version="[1.3;]" />
 	<!-- pour les boucles pour des "selections" de saisies, je suis vraiment sincerement desole -->
 	<necessite id="spip_bonux" version="[1.8;]" />
