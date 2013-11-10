@@ -15,5 +15,5 @@ Ce plug-in est sous licence GNU/GPL v3</description>
 		variantesarticles_options.php
 	</options>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.1.13;3.0.0]" />
+	<necessite id="SPIP" version="[2.1.13;3.0.99]" />
 </plugin>
