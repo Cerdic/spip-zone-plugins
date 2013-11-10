@@ -1,0 +1,25 @@
+<paquet
+	prefix="qr"
+	categorie="edition"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/qr-48.png"
+	documentation=""
+>
+
+	<nom>Questions-Réponses</nom>
+	<!-- Créer simplement une liste de questions et de réponses -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<credit lien="http://thenounproject.com/catalarem">Rémy Médard pour l'icône</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<necessite nom="tw" compatibilite="[0.3.1;[" />
+
+	<pipeline nom="insert_head_css" inclure="qr_pipelines.php" />
+	<pipeline nom="header_prive" inclure="qr_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="qr_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="qr_pipelines.php" />
+</paquet>
