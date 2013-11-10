@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="4.0.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="images/nuage-64.png"
 	documentation="http://www.spip-contrib.net/Nuage-de-mots-cles"
 >	
