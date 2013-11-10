@@ -27,5 +27,5 @@ _ D'apr&egrave;s le script jQuery &laquo;&nbsp;Tooltip&nbsp;&raquo;.</descriptio
 	<inclure>tooltip_pipelines.php</inclure>
 </pipeline>
 
-<necessite id="SPIP" version="[1.9.1;2.1.99]" />
+<necessite id="SPIP" version="[1.9.1;3.0.99]" />
 </plugin>
