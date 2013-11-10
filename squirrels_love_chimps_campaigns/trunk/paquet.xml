@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="2.0.1"
 	etat="test"
-	compatibilite="[2.0.15;3.0.*]"
+	compatibilite="[2.0.14;3.0.*]"
 	logo="prive/themes/spip/images/logo_slc_campaigns.png"
 	documentation="http://www.spip-contrib.net/Squirrels-Love-Chimps"
 >
