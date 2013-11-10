@@ -12,7 +12,7 @@
 	<install>base/zippeur.php</install>
    <prefix>zippeur</prefix>
 	<fonctions>zippeur_fonctions.php</fonctions>
-	<necessite id="spip" version="[2.0.0;2.1.99)" />
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<necessite id='cfg' version='[1.10.0;]' />
     <utilise id="albums" />
 	<pipeline>
@@ -25,7 +25,7 @@
    	</pipeline>
 	<licence>GPL</licence>
 </plugin>
-<plugin spip='[3.0.0-dev;3.0.99]'>
+<plugin spip='[3.0.0;3.0.99]'>
 	<nom>Zippeur</nom>
 	<slogan>Zippez facilement vos fichiers</slogan>
 	<auteur>[Maïeul Rouquette->http://www.maieul.net], Julien Coste-Louret</auteur>
