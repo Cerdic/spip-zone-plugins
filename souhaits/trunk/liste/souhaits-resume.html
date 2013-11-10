@@ -1,8 +1,15 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	date,-1, 
+	id_souhait,1,
+	points,-1,
+	prix,1
+}})]
 <B_souhaits>
 	#ANCRE_PAGINATION
 	[<h2 class="h2">(#ENV{titre})</h2>]
 	<ul class="liste-items">
-		<BOUCLE_souhaits(SOUHAITS){id_rubrique?} {!par date}{!id_souhait IN #ENV{souhaits_exclus,#ARRAY}} {pagination #ENV{nb,20}}>
+		<BOUCLE_souhaits(SOUHAITS){id_rubrique?}{statut?}{recherche?}{!id_souhait IN #ENV{souhaits_exclus,#ARRAY}}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,20}}>
 		<li class="item">#INCLURE{fond=inclure/resume/souhait,id_souhait}</li>
 		</BOUCLE_souhaits>
 	</ul>

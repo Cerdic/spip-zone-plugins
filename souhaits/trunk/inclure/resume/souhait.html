@@ -10,7 +10,7 @@
 	<strong class="h3-like entry-title"><a href="#URL_SOUHAIT" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_SOUHAIT_RUBRIQUE,#LOGO_SOUHAIT}|sinon{#GET{logodoc}}|image_reduire{150,100})]#TITRE<span
 		class="lire-la-suite hide"><i class="icon-chevron-right" title="<:zpip:lire_la_suite|attribut_html:><:zpip:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a>
 		<span class="label #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{label-success,label-warning,label-important,label-important,label-inverse},#STATUT})]" title="[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]">[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</span></strong>
-	<p class="info-publi">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+	<!--<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>-->
 	[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}}|paragrapher)</div>]
 	<p class="infos">
 		[<span class="prix">
@@ -24,7 +24,7 @@
 		</span>]
 		[(#PRIX|et{#URL_SITE})<br/>]
 		[<span class="site">
-			<i class="icon-shopping-cart"></i> <a href="(#URL_SITE)">[(#NOM_SITE|?{<:souhait:voir_en_ligne{nom_site=#NOM_SITE}:>,#URL_SITE})]</a>
+			<i class="icon-shopping-cart"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 		</span>]
 	</p>
 	<p class="meta-publi">

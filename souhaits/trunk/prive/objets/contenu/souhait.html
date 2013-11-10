@@ -11,13 +11,13 @@
 </div>]
 
 [<div class="champ contenu_prix[ (#PRIX*|strlen|?{'',vide})]">
-	<label><:souhait:label_prix:> : </label>
+	<label><strong><:souhait:label_prix:></strong> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>(#PRIX) €</span>
 </div>]
 
 [<div class="champ contenu_site[ (#URL_SITE*|strlen|?{'',vide})]">
 	<label><:entree_liens_sites:> : </label>
-	<a href="(#URL_SITE)"><span dir='#LANG_DIR' class='#EDIT{url_site} url_site'>[(#NOM_SITE|?{<:souhait:voir_en_ligne{nom_site=#NOM_SITE}:>,#URL_SITE})]</span></a>
+	<a href="(#URL_SITE)"><span dir='#LANG_DIR' class='#EDIT{url_site} url_site'>[(#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}})]</span></a>
 </div>]
 
 </BOUCLE_souhait>

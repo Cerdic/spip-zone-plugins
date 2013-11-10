@@ -5,9 +5,9 @@
 		[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|image_reduire{200,200})]
 		<h1><span class="#EDIT{titre}">#TITRE</span></h1>
 
-		<p class="info-publi"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+		<!--<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>-->
 		[(#REM) Inclure le modele des liens de traductions ]
-		<div class="meta-publi">
+		<div class="postmeta">
 		<BOUCLE_nb_commentaires(FORUMS) {id_souhait}{plat} />[(#TOTAL_BOUCLE|oui)
 			<span class="comments">
 			<span class="sep">|</span>
@@ -38,7 +38,7 @@
 			</span>]
 			[(#PRIX|et{#URL_SITE})<br/>]
 			[<span class="site">
-				<i class="icon-shopping-cart"></i> <a href="(#URL_SITE)">[(#NOM_SITE|?{<:souhait:voir_en_ligne{nom_site=#NOM_SITE}:>,#URL_SITE})]</a>
+				<i class="icon-shopping-cart"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 			</span>]
 		</p>
 	</div>
