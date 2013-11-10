@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	documentation="http://www.mediaspip.net/spip.php?article295"
 	logo="prive/themes/spip/images/piecon.png"
 >	
