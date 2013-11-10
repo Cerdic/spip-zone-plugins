@@ -9,7 +9,7 @@
 	<description>Gestion de mailing listes de [Mailchimp->http://mailchimp.com/] inspir&#233;e des fonctionnalit&#233;s du plugin Wordpress [Autochimp->http://wordpress.org/extend/plugins/autochimp/] avec quelques "emprunts" de code du plugin SPIP "MailChimp de [Ben->http://www.nursit.net]</description>
 	<prefix>squirrel_chimp_lists</prefix>
 	<icon>images/logo_slc_lists.png</icon>
-	<necessite id="SPIP" version="[2.0.14;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.14;3.0.99]" />
 	<necessite id="squirrel_chimp" version="[2.0.0;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<pipeline>
