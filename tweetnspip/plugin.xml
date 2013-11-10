@@ -15,7 +15,7 @@ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEA
 	<lien>http://www.wakzine.com</lien>
 	<categorie>communication</categorie>
 	<prefix>tweetnspip</prefix>
-	<necessite id="SPIP" version="[2.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<utilise id="bonux" version="[2.2;]" />
 	<fonctions>tweetnspip_fonctions.php</fonctions>
 	<pipeline>
