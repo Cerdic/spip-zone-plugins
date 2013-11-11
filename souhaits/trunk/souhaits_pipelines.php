@@ -143,4 +143,20 @@ function souhaits_post_edition($flux){
 	return $flux;
 }
 
+/**
+ * Optimiser la base (poubelle)
+ *
+ * @param array $flux
+ * @return array
+ */
+function souhaits_optimiser_base_disparus($flux){
+	// Souhaits à la poubelle
+	sql_delete("spip_souhaits", "statut='poubelle' AND maj < ".$flux['args']['date']);
+	
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array('document'=>'*'),array('souhait'=>'*'));
+
+	return $flux;
+}
+
 ?>
