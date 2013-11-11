@@ -27,7 +27,7 @@
 		<inclure>spip20/fancybox_pipelines.php</inclure>
 	</pipeline>
 </plugin>
-<plugin spip='[2.1.0-beta;2.1.99]' >
+<plugin spip='[2.1.0;2.1.99]' >
 	<categorie>multimedia</categorie>
 	<version>0.6.1</version>
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
