@@ -41,7 +41,7 @@
 		[<div class="#EDIT{descriptif} texte surlignable">(#DESCRIPTIF|image_reduire{500,0})</div>]
 
 		[<p class="site big">
-			<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
+			<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)" class="spip_out">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 		</p>]
 	</div>
 	[

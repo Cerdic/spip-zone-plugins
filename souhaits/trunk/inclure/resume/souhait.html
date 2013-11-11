@@ -7,7 +7,7 @@
 <BOUCLE_souhaits(SOUHAITS) {id_souhait} {statut?}>
 <BOUCLE_logodoc(DOCUMENTS){id_souhait}{extension IN jpg,gif,png,svg}{0,1}{par num titre,titre}>#SET{logodoc,#FICHIER|balise_img|inserer_attribut{class,spip_logos}}</BOUCLE_logodoc>
 <article class="entry souhait hentry">
-	<strong class="h3-like entry-title"><a href="#URL_SOUHAIT" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_SOUHAIT_RUBRIQUE,#LOGO_SOUHAIT}|sinon{#GET{logodoc}}|image_reduire{150,100}|inserer_attribut{class,img-rounded right})]#TITRE<span
+	<strong class="h3-like entry-title"><a href="#URL_SOUHAIT" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_SOUHAIT_RUBRIQUE,#LOGO_SOUHAIT}|sinon{#GET{logodoc}}|image_reduire{150,100}|inserer_attribut{class,img-rounded pull-right})]#TITRE<span
 		class="lire-la-suite hide"><i class="icon-chevron-right" title="<:zpip:lire_la_suite|attribut_html:><:zpip:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a>
 		<span class="label #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{label-success,label-warning,label-important,label-important,label-inverse},#STATUT})]" title="[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]">[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</span></strong>
 	<!--<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>-->
@@ -24,7 +24,7 @@
 		</span>]
 		[(#PRIX|et{#URL_SITE})<br/>]
 		[<span class="site">
-			<i class="icon-gift"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
+			<i class="icon-gift"></i> <a href="(#URL_SITE)" class="spip_out">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 		</span>]
 	</p>
 	<p class="meta-publi">
