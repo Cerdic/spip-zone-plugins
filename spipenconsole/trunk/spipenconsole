@@ -3,11 +3,10 @@ VERSION=1
 SANS_ARGS=0 
 E_ERREUROPTION=65
 
+# si en appelle spipenconsole sans argument, alors affiche la liste des plugins
 if [ $# -eq "$SANS_ARGS" ]  # Script appelé sans argument?
 then
-  echo "Usage: `basename $0` options (-mnopqrs)"
-  exit $E_ERREUROPTION        # Sort et explique l'usage, si aucun argument(s)
-                              # n'est donné.
+    ./lister_plugins.php
 fi  
 
 function F_aide(){
