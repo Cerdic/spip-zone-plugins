@@ -40,7 +40,16 @@ function qr_porte_plume_barre_pre_charger($barres){
 						"selectionType" => "line",
 						"forceMultiline" => true,
 						"display"     => true,
-					)
+					),
+					array(
+						"id"          => 'qr_titre',
+						"name"        => _T('qr:outil_inserer_titre'),
+						"replaceWith" => "function(h){ return outil_qr(h, ':Nouveau titre');}",
+						"className"   => 'outil_qr_titre',
+						"selectionType" => "line",
+						"forceMultiline" => true,
+						"display"     => true,
+					),
 				)
 			)
 		));
@@ -82,7 +91,8 @@ function qr_porte_plume_barre_pre_charger($barres){
 function qr_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
 		'outil_qr'=>'qr-16.png',
-		'outil_qr_question'=>'qr_question-16.png'
+		'outil_qr_question'=>'qr_question-16.png',
+		'outil_qr_titre'=>'qr_titre-16.png'
 	));
 }
 ?>

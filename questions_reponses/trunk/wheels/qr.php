@@ -1,15 +1,23 @@
 <?php
 
 // Regexp permettant de récupérer chacune des informations additionnelles qui peuvent compléter le titre de la tâche :
-// - #tag ou tag est un mot. Exemple : #courses ou #перевод-шаблон
+// - #tag ou @tag, tag étant un mot. Exemple : #courses ou @перевод-шаблон
 // - type:valeur ou type et valeur sont des mots. Pas utilisé pour l'instant
+// Cette regexp doit être instanciée suivant la globale $qr_indicateur_tag pour déterminer l'indicateur du tag
+// qui est soit # (défaut) soit @.
 if (!defined('_QR_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_QR_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|#)([\w.-]+)(?:\s|$)%Uu');
+	define('_QR_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|indicateur_tag)([\w.-]+)(?:\s|$)%Uu');
 
 
 /**
- * Analyse le contenu du bloc inclu entre les marqueurs de début et de fin de la FAQ
- * puis appelle un squelette avec les paramètres calculés
+ * Analyse du contenu d'un bloc FAQ inclu entre les marqueurs de début (<faq>) et de fin (</faq>)
+ * puis appelle du squelette avec les paramètres calculés.
+ *
+ * Un bloc de FAQ peut contenir plusieurs sous-FAQ qui sont séparées par un titre. Un titre commence sur
+ * une nouvelle ligne avec comme premier caractère ':'.
+ * Une question commence sur une nouvelle ligne avec comme premier caractère '?'. La réponse est constituée des lignes
+ * qui suivent la question jusqu'à la prochaine question, le prochain titre ou la fin du bloc.
+ * Il est possible de choisir le squelette de sortie en utilisant l'attribut format dans la balise <code><faq></code>.
  *
  * @param array	$t	l'index 4 représente le contenu du bloc, l'index 3 la valeur du format si il existe.
  * @return string	le html généré à partir d'un squelette
@@ -17,6 +25,14 @@ if (!defined('_QR_REGEXP_INFOS_COMPLEMENTAIRES'))
 function tw_qr($t) {
 	// Initialisation du html calculé
 	$html = $t;
+
+	// Instanciation de la regexp de repérage des informations complémentaires
+	global $qr_indicateur_tag;
+	$regexp_infos_complementaires = _QR_REGEXP_INFOS_COMPLEMENTAIRES;
+	if ($qr_indicateur_tag == '@')
+		$regexp_infos_complementaires = str_replace('indicateur_tag', '@', $regexp_infos_complementaires);
+	else
+		$regexp_infos_complementaires = str_replace('indicateur_tag', '#', $regexp_infos_complementaires);
 
 	// Extraction de lignes du texte
 	// La wheel renvoie un tableau à cette callback qui est le résultat d'un preg_match_all.
@@ -103,7 +119,7 @@ function tw_qr($t) {
 						$texte = trim(substr($texte, 1, strlen($texte)-1));
 
 						// -- le texte de la question, que l'on sépare du reste des informations complémentaires éventuelles
-						if (preg_match_all(_QR_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
+						if (preg_match_all($regexp_infos_complementaires, $texte, $infos_complementaires)) {
 							// Extraction du titre
 							$question = trim(str_replace($infos_complementaires[0], '', $texte));
 
