@@ -16,7 +16,7 @@ function action_wp2spip_dist(){
 		die('erreur');
 	
 	spip_log('wp2spip dump Start');
-	$wp2spip=recuperer_fond('wp2spip');
+	$wp2spip=recuperer_fond('inc/wp2spip_export');
 	$ou='wp2spip.xml';
 	if(!is_dir(_DIR_DUMP)){
 		include_spip('inc/flock');
