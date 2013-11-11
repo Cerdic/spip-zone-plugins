@@ -22,8 +22,9 @@ echo "\n";
 //Récupération du nom, préfixe et numéro de version des plugins disponibles
 //dans le répertoire plugins
 //Affichage formaté
+$racine=getcwd();
 foreach ($plugins as $key=>$repertoire) {
-    chdir($repertoire);
+    chdir("$racine/$repertoire");
     if (file_exists('paquet.xml')){
         $xml = simplexml_load_file('paquet.xml');
         $prefix=$xml->xpath("//@prefix");
