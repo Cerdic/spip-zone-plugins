@@ -2,7 +2,7 @@
 	<nom>Titre Court pour Rubriques</nom>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<description>
 	Ajoute un champ "titre_court" sur les rubriques de SPIP.
@@ -17,4 +17,4 @@
 		<inclure>base/titrecourt.php</inclure>
 	</pipeline>
 	<categorie>outil</categorie>
-</plugin>
+</plugin
