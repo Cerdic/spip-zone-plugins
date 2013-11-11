@@ -1,11 +1,20 @@
-<div class="formulaire_spip formulaire_recherche form-search[ (#ENV{class})]" id="formulaire_recherche">
-<form action="[(#ENV{action})]" method="get"><div>
+<div class="form-group clearfix[ (#ENV{class})]" id="formulaire_recherche">
+<form action="[(#ENV{action})]" method="get" role="form" class="form-inline">
+	<div>
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<label for="#ENV{_id_champ}" class="muted"><:info_rechercher_02:></label>
-	<div class="input-append">
-		<input type="[(#HTML5|?{search,text})]" class="search text search-query" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" />
-		<button type="submit" class="btn" title="<:info_rechercher|attribut_html:>" >&gt;&gt;</button>
+	<div class="row">
+		<div class="col-md-12">
+			<label for="#ENV{_id_champ}" class="muted"><:info_rechercher_02:></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<input type="[(#HTML5|?{search,text})]" class="form-control" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" />
+		</div>
+		<div class="col-md-3">
+			<button type="submit" class="btn input-group-btn" title="<:info_rechercher|attribut_html:>" >&gt;&gt;</button>
+		</div>
 	</div>
 </div></form>
 </div>
