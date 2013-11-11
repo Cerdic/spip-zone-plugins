@@ -1,19 +1,29 @@
-[(#REM) Balise qui lance le squelette wp2spip et déplace  wp2spip.xml vers /tmp/dump ]
+#CACHE{0}
 <!--#hierarchie-->
-
 <ul id="chemin">
-	<li><a href="/">Accueil</a> &gt; </li>
-	<li>Migration Wordpress 2 SPIP</li>
+	<li><a href="#URL_ECRIRE"><:info_racine_site:></a> &gt; </li>
+	<li><:wp2spip:titre_page_migration:></li>
 </ul>
-
 <!--/#hierarchie-->
 
 <h1>Migration Wordpress 2 SPIP</h1>
 
 [(#SESSION{webmestre}|=={oui}|oui)
-#WP2SPIP_DUMP
+[(#EVAL{_DIR_DUMP}|concat{wp2spip.xml}|file_exists|oui)
+	<p>
+		<:wp2spip:message_conversion_ok:>
+		<br/><br/>Rendez-vous à la page <a href='#URL_ECRIRE{admin_tech}' title=''>Maintenance</a> du site et importer la base wp2spip.xml
+	</p>
+	#BOITE_OUVRIR{'',important notice}
+	<:wp2spip:message_attention_import:>
+	#BOITE_FERMER]
+[(#EVAL{_DIR_DUMP}|concat{wp2spip.xml}|file_exists|non)
+	#BOITE_OUVRIR{'','error'}
+	<:wp2spip:erreur_fichier_non_cree:>
+	#BOITE_FERMER]
 ]
 [(#SESSION{webmestre}|=={oui}|non)
-Vous devez avoir les pouvoir de webmestre
+	#BOITE_OUVRIR{'','error'}
+	Vous devez avoir les droits de webmestre
+	#BOITE_FERMER
 ]
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
