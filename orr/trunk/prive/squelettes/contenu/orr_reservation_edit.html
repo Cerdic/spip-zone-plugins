@@ -13,7 +13,7 @@ toto
 	[(#GET{redirect}|icone_verticale{Retour,orr_reservation,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[
-		[(#ID_ORR_RESERVATION|?{<:orr_reservation:icone_modifier_orr_reservation:>,<:orr_reservation:icone_creer_orr_reservation:>})]
+		[(#ID_ORR_RESERVATION|?{<:orr:icone_modifier_orr:>,<:orr:icone_creer_orr:>})]
 		<h1>(#ENV{titre,#INFO_ORR_RESERVATION_NOM{orr_reservation,#ID_ORR_RESERVATION}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>

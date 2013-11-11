@@ -6,11 +6,12 @@
 #ANCRE_PAGINATION
 <div class="liste-objets orr_ressources">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{orr_ressource:info_1_orr_ressource,orr_ressource:info_nb_orr_ressources}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{orr:info_1_orr_ressource,orr:info_nb_orr_ressources}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='orr_ressource_nom' scope='col'>[(#TRI{orr_ressource_nom,<:orr_ressource:label_orr_ressource_nom:>,ajax})]</th>
+			<th class='orr_ressource_nom' scope='col'>[(#TRI{orr_ressource_nom,<:orr:label_orr_ressource_nom:>,ajax})]</th>
+			<th class='couleur' scope='col'><:orr:couleur:></th>
 			<th class='id' scope='col'>[(#TRI{id_orr_ressource,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -19,6 +20,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{orr_ressource-16.png}|balise_img)]</td>
 			<td class='orr_ressource_nom principale'>[(#LOGO_ORR_RESSOURCE|image_reduire{20,26})]<a href="[(#ID_ORR_RESSOURCE|generer_url_entite{orr_ressource})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ORR_RESSOURCE">[(#RANG). ]#ORR_RESSOURCE_NOM</a></td>
+			<td [style="background-color: (#ORR_RESSOURCE_COULEUR*);"]>#ORR_RESSOURCE_COULEUR</td>
 			<td class='id'>[(#AUTORISER{modifier,orr_ressource,#ID_ORR_RESSOURCE}|?{
 				<a href="[(#URL_ECRIRE{orr_ressource_edit,id_orr_ressource=#ID_ORR_RESSOURCE})]">#ID_ORR_RESSOURCE</a>,
 				#ID_ORR_RESSOURCE

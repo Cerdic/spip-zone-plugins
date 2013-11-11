@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
     'texte_creer_associer_orr_autorisation' => 'Créer et lier une autorisation',
+    'titre_orr_autorisations' => 'Autorisations ORR',
 
     //V
     'valeur_autorisation' => 'Valeur',

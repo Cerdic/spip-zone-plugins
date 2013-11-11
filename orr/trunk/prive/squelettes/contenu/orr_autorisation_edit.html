@@ -3,27 +3,28 @@
 ][(#ID_OBJET|non)
 	[(#AUTORISER{creer,orr_autorisation}|sinon_interdire_acces)]
 ]
- 
-#SET{redirect,#ENV{redirect}|sinon{#ID_ORR_AUTORISATION|?{#ID_ORR_AUTORISATION|generer_url_entite{orr_autorisation},#URL_ECRIRE{orr_autorisations}}}}
+
+#SET{redirect,#ENV{redirect,#URL_ECRIRE{orr_autorisations}}}
 
 <div class='cadre-formulaire-editer'>
-<div class="entete-formulaire">
-	[(#ID_ORR_AUTORISATION|oui)
-	[(#GET{redirect}|icone_verticale{Retour,orr_autorisation,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
-	]
-	[
-		[(#ID_ORR_AUTORISATION|?{<:orr_autorisation:icone_modifier_orr_autorisation:>,<:orr_autorisation:icone_creer_orr_autorisation:>})]
-		<h1>(#ENV{titre,#INFO_ORR_AUTORISATION_NOM{orr_autorisation,#ID_ORR_AUTORISATION}|sinon{<:info_sans_titre:>}})</h1>
-	]
-</div>
+	<div class="entete-formulaire">
+		[(#ID_ORR_AUTORISATION|oui)
+			[(#GET{redirect}|icone_verticale{Retour,orr_autorisations,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		
+			<h1>[(#ID_ORR_AUTORISATION|?{[(#INFO_ORR_AUTORISATION_NOM{orr_autorisation,#ID_ORR_AUTORISATION})]
+				,
+				<:info_sans_titre:>})]
+			</h1>
+	</div>
 
-#SET{redirect,#ENV{redirect,#ID_ORR_AUTORISATION|generer_url_entite{orr_autorisation}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
 
-		[(#FORMULAIRE_EDITER_ORR_AUTORISATION{#ENV{id_orr_autorisation,oui}, #GET{redirect}, #ENV{associer_objet}})]
+	[(#FORMULAIRE_EDITER_ORR_AUTORISATION{#ENV{id_orr_autorisation,oui}, #GET{redirect}, #ENV{associer_objet}})]
+		
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>

@@ -3,65 +3,63 @@
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 
-    <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+	<form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
     #ACTION_FORMULAIRE{#ENV{action}}
-        <ul>
-            [(#PLUGIN{GRAPPES}|?{
-        [(#SAISIE{radio, orr_statut}
-        {label=Quel type d'utilisateur voulez vous ?}
-        {datas=#ARRAY{
-            statut, Statut,
-            auteur, Auteur,
-            grappe, Grappe }})]
-            ,
-        [(#SAISIE{radio, orr_statut}
-        {label=Quel type d'utilisateur voulez vous ?}
-        {datas=#ARRAY{
-            statut, Statut,
-            auteur, Auteur}})]
-            })]
-
+		<ul>
+		[(#PLUGIN{GRAPPES}|?{
+			[(#SAISIE{radio, orr_type}
+				{label=Quel type d'utilisateur voulez vous ?}
+				{datas=#ARRAY{
+					statut, Statut,
+					auteur, Auteur,
+					grappe, Grappe}
+				}
+			)]
+			[(#SAISIE{hidden, val_grappe})]
+			,
+			[(#SAISIE{radio, orr_type}
+				{label=Quel type d'utilisateur voulez vous ?}
+				{defaut=}
+				{datas=#ARRAY{
+					statut, Statut,
+					auteur, Auteur}
+				}
+			)]
+        })]
             <INCLURE{fond=inc/formulaire_selection-type}{ajax=orr_type}>
 
             [(#SAISIE{checkbox, orr_droit}
                 {label=Sélectionnez les droits du statut sélectionné}
                 {defaut=2}
                 {datas=#ARRAY{
-                    2, Voir,
-                    4, Modifier,
-                    8, Créer,
-                    16, Supprimer} })]
-
-
+                    V, Voir,
+                    M, Modifier,
+                    C, Créer,
+                    S, Supprimer} }
+            )]
+            
+            [(#SAISIE{hidden, val_statut})]
+            [(#SAISIE{hidden, val_auteur})]
         </ul>
     <p class="boutons"><input type="submit" class="submit" value="Envoyer" /></p>
     </div></form>
 </div>
 <script type="text/javascript" charset="utf-8">
+	function aff_masque() {
+		var choixtype = jQuery("input[name='orr_type']:checked").val();
+		if (typeof(choixtype) != "undefined") {
+			var valtype = jQuery("input[name='val_" + choixtype + "']").val();
+			ajaxReload('orr_type', {
+				args:{
+					choix_type:choixtype,
+					val_type:valtype
+				},
+			});
+		}
+	}
+	
     jQuery(document).ready(function(){
-        jQuery("#champ_orr_statut_1").change(function(event){
-                var choixtype= jQuery(this).val();
-		        ajaxReload('orr_type', {
-                    args:{
-                        choix_type:choixtype,
-                    },
-                });
-        });
-        jQuery("#champ_orr_statut_2").change(function(event){
-                var choixtype= jQuery(this).val();
-		        ajaxReload('orr_type', {
-                    args:{
-                        choix_type:choixtype,
-                    },
-                });
-        });
-        jQuery("#champ_orr_statut_3").change(function(event){
-                var choixtype= jQuery(this).val();
-		        ajaxReload('orr_type', {
-                    args:{
-                        choix_type:choixtype,
-                    },
-                });
-        });
+		aff_masque();
+		jQuery("input[name='orr_type']").change(function(event){ aff_masque(); });
     });
 </script>

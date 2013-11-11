@@ -51,7 +51,7 @@ function orr_affiche_auteurs_interventions($flux) {
 
 		$flux['data'] .= recuperer_fond('prive/objets/liste/orr_reservations', array(
 			'id_auteur' => $id_auteur,
-			'titre'     => _T('orr_reservation:info_orr_reservations_auteur')
+			'titre'     => _T('orr:info_orr_reservations_auteur')
 		), array('ajax' => true));
 
 	}

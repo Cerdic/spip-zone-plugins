@@ -1,0 +1,25 @@
+<B_liste_autorisations>
+<div class="liste-objets autorisations">
+<table class='spip liste'>
+<caption><strong class="caption"><:orr:titre_liste_autorisations:>:</strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='titre principale' scope='col'><:info_titre:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_autorisations(ORR_AUTORISATIONS){par orr_autorisation_nom}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre principale'><a href="[(#URL_ECRIRE{orr_autorisations})]"
+				title="<:orr:voir_autorisations:>">#ORR_AUTORISATION_NOM</a></td>
+			<td class='id'>[(#AUTORISER{modifier,autorisation,#ID_ORR_AUTORISATION}|?{
+				<a href="[(#URL_ECRIRE{orr_autorisation_edit,id_orr_autorisation=#ID_ORR_AUTORISATION})]" title="<:orr:modifier:>">#ID_ORR_AUTORISATION</a>,
+				#ID_ORR_AUTORISATION
+			})]</td>
+		</tr>
+	</BOUCLE_liste_autorisations>
+	</tbody>
+</table>
+</div>
+</B_liste_autorisations>

@@ -6,11 +6,11 @@
 #ANCRE_PAGINATION
 <div class="liste-objets orr_reservations">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{orr_reservation:info_1_orr_reservation,orr_reservation:info_nb_orr_reservations}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{orr:info_1_orr_reservation,orr:info_nb_orr_reservations}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='orr_reservation_nom' scope='col'>[(#TRI{orr_reservation_nom,<:orr_reservation:label_orr_reservation_nom:>,ajax})]</th>
+			<th class='orr_reservation_nom' scope='col'>[(#TRI{orr_reservation_nom,<:orr:label_orr_reservation_nom:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_orr_reservation,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
