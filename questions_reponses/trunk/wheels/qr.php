@@ -23,6 +23,10 @@ if (!defined('_QR_REGEXP_INFOS_COMPLEMENTAIRES'))
  * @return string	le html généré à partir d'un squelette
  */
 function tw_qr($t) {
+	// Numéro d'appel de la fonction tw_qr dans le hit.
+	// -- sert à calculer une ancre unique pour la faq ou sous-faq sans nécessiter d'id ou de titre.
+	static $no_bloc = 0;
+
 	// Initialisation du html calculé
 	$html = $t;
 
@@ -173,6 +177,7 @@ function tw_qr($t) {
 					"inclure/qr_${format}",
 					array(
 						'titre' => (isset($titres[$_cle]) ? $titres[$_cle] : ''),
+						'ancre' => "faq_${no_bloc}_${_cle}",
 						'faq' => $_faq,
 						'types_info' => $types_info[$_cle]
 					),
@@ -182,6 +187,7 @@ function tw_qr($t) {
 				);
 			}
 		}
+		$no_bloc++;
 	}
 
 	return $html;

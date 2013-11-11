@@ -2,10 +2,9 @@
 	prefix="qr"
 	categorie="edition"
 	version="0.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="qr_logo-64.png"
-	documentation=""
 >
 
 	<nom>Questions-Réponses</nom>

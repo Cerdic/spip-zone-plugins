@@ -4,10 +4,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function qr_insert_head_css($flux){
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/qr.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
 function qr_header_prive($flux){
+//	$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
 	return $flux;
 }
 
