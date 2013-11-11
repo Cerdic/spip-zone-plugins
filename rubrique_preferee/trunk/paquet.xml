@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/rubriquepreferee-32.png"
 	schema="0.1"
 	documentation="http://www.spip-contrib.net/Rubrique-preferee"
