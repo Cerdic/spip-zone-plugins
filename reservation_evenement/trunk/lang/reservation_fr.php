@@ -18,9 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
-	'explication_envoi_differe' => 'Mode différe activé - le changement de statut d’un Détail de Réservation vers 
+	'explication_envoi_differe' => 'Le changement de statut d’un Détail de Réservation vers 
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
-	'explication_envoi_differe_detail' => 'Mode différe activé - le changement de statut vers <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
+	'explication_envoi_differe_detail' => 'Le changement de statut vers <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
 
 	// I
@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
 	'texte_voir' => 'voir',
+    'titre_envoi_differe' => 'Mode différe active',	
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
 

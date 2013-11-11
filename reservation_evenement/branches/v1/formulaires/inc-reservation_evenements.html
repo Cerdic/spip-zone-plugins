@@ -1,11 +1,10 @@
-<B_art_or>            
-<li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
+<B_art_or>            <li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
     [<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_evenement})</div>]
 <BOUCLE_art_or(DATA){source tableau,#ENV{evenements}}>
     [[(#COMPTEUR_BOUCLE|!={1}|oui)</li><li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>]
     <strong>[(#VALEUR{date_debut}|nom_jour), ](#VALEUR{date_debut}|affdate{d}|unique).[ (#VALEUR{date_debut}|nom_mois)][ (#VALEUR{date_debut}|affdate{Y})]</strong> ]
     <div class="choix">
-        <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{id_evenement}}|oui) checked="checked"]/>
+        <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{id_evenement}}|oui) checked="checked"]/> #VALEUR{prix}
         <label for="id_evenement_#ID_EVENEMENT">
             <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>
             [(#VALEUR{date_debut}|affdate{G:i}|>{0:00}|oui)

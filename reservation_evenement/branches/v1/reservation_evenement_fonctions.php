@@ -24,4 +24,16 @@ function champs_extras_reservation(){
     return $champs_extras_auteurs;
 }
 
+function nom_statuts($statuts){
+    $liste_objets=lister_tables_objets_sql();
+    
+    $statuts_selectionnees=array();
+    
+    if(is_array($statuts)){
+      foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
+         if(in_array($statut,$statuts))$statuts_selectionnees[$statut]=_T($label);
+        }                  
+    }
+    return $statuts_selectionnees;
+}
 ?>

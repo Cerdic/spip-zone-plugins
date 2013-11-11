@@ -7,6 +7,14 @@
 [(#SET{texte_objet,<:reservation:titre_reservation:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION</p></div>
 [(#FORMULAIRE_INSTITUER_OBJET{reservation,#ID_RESERVATION})]
+#SET{envoi_differe,#CONFIG{reservation_evenement/envoi_differe,#ARRAY}}
+#SET{envoi_differe_count,#GET{envoi_differe}|count}
+[(#GET{envoi_differe_count}|>{0}|oui)
+    #SET{statuts,#GET{envoi_differe}|nom_statuts|implode{','}|trim}
+   [(#BOITE_OUVRIR{<:reservation:titre_envoi_differe:>,'notice'})]
+    <:reservation:explication_envoi_differe{statuts=#GET{statuts}}:>
+   #BOITE_FERMER   
+]
 </div>
 </BOUCLE_reservation>
 #BOITE_FERMER     

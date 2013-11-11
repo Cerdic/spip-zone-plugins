@@ -205,7 +205,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
  	if($envoi_differe_actif!='non'){
 		include_spip('inc/config');	
 		$config = lire_config('reservation_evenement');
-		$envoi_differe_config=isset($config['envoi_differe'])?$config['envoi_differe']:''; 
+		$envoi_differe_config=isset($config['envoi_differe'])?$config['envoi_differe']:array(); 
 		
 		if(in_array($s, $envoi_differe_config)){
 			

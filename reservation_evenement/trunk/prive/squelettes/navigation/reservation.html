@@ -11,7 +11,7 @@
 #SET{envoi_differe_count,#GET{envoi_differe}|count}
 [(#GET{envoi_differe_count}|>{0}|oui)
     #SET{statuts,#GET{envoi_differe}|nom_statuts|implode{','}|trim}
-   #BOITE_OUVRIR{'','notice'}
+   [(#BOITE_OUVRIR{<:reservation:titre_envoi_differe:>,'notice'})]
     <:reservation:explication_envoi_differe{statuts=#GET{statuts}}:>
    #BOITE_FERMER   
 ]

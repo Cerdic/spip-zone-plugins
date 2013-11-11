@@ -105,16 +105,16 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
         'principale' => "oui", 
         'table_objet_surnoms' => array('reservationsdetail'), // table_objet('reservations_detail') => 'reservations_details' 
         'field'=> array(
-            "id_reservations_detail" => "bigint(21) NOT NULL",
-            "id_reservation"     => "bigint(21) NOT NULL DEFAULT '0'",
-            "id_evenement"       => "bigint(21) NOT NULL DEFAULT '0'",
-            "descriptif"         => "text NOT NULL",
-            "quantite"           => "int(11) NOT NULL DEFAULT '0'",
-            "prix_ht"   => "float NOT NULL DEFAULT '0'",
-            "prix"   => "float NOT NULL DEFAULT '0'",            
-            "taxe"               => "decimal(4,3) NOT NULL DEFAULT '0.000'",
-            "statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
-            "maj"                => "TIMESTAMP"
+            "id_reservations_detail"    => "bigint(21) NOT NULL",
+            "id_reservation"            => "bigint(21) NOT NULL DEFAULT '0'",
+            "id_evenement"              => "bigint(21) NOT NULL DEFAULT '0'",
+            "descriptif"                => "text NOT NULL",
+            "quantite"                  => "int(11) NOT NULL DEFAULT '0'",
+            "prix_ht"                   => "float NOT NULL DEFAULT '0'",
+            "prix"                      => "float NOT NULL DEFAULT '0'",            
+            "taxe"                      => "decimal(4,3) NOT NULL DEFAULT '0.000'",
+            "statut"                    => "varchar(20)  DEFAULT '0' NOT NULL", 
+            "maj"                       => "TIMESTAMP"
         ),
         'key' => array(
             "PRIMARY KEY"        => "id_reservations_detail",
@@ -154,10 +154,10 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
         
 
     );
-   if(test_plugin_actif('shop_prix')) {
-       $tables['spip_reservations_details']=array_merge($tables['spip_reservations_details'],array(
-        'field'=>array('id_prix_objet'=>"bigint(21) NOT NULL DEFAULT '0'"),
-        'champs_editables'  => array(
+   //adaptation de la déclaration si le plugin prix_objets est installé
+   if(test_plugin_actif('prix_objets')) {
+       $tables['spip_reservations_details']['field']=array_merge($tables['spip_reservations_details']['field'],array('id_prix_objet'=>"bigint(21) NOT NULL DEFAULT '0'"));
+       $tables['spip_reservations_details']['champs_editables']= array(
             'id_reservation',
             'id_evenement',
             'descriptif',
@@ -165,9 +165,9 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
             'prix_ht',
             'prix',
             'taxe',
-            'id_prix_objet'),
-        ));
-    }
+            'id_prix_objet'
+            );
+        }
 	return $tables;
 }
 ?>

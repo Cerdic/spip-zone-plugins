@@ -1,9 +1,15 @@
 #HTTP_HEADER{Content-Type:text/html}
 #INCLURE{fond=emails/inc-haut}
-<BOUCLE_art(RESERVATIONS){id_reservation}{statut?}>
+#SET{config,#CONFIG{reservation_evenement}}
+[(#SET{envoi_differe,#GET{config}|table_valeur{envoi_differe}})]
+[(#GET{envoi_differe}|is_array|oui)
+    [(#STATUT|in_array{#GET{envoi_differe}}|oui)#SET{statut,#STATUT}]
+]
+
+<BOUCLE_art(RESERVATIONS){id_reservation}{tout}>
 #SET{nom_client,#NOM}
 #SET{extras,#DONNEES_AUTEUR|unserialize}
- #SET{email,#EMAIL}
+#SET{email,#EMAIL}
 <BOUCLE_contact(AUTEURS){id_auteur=#ID_AUTEUR}{si #ID_AUTEUR|!={0}|oui}{tout}>
     #SET{nom_client,#NOM}
     #SET{valeurs_extras,#ARRAY}
@@ -31,8 +37,7 @@
 </BOUCLE_champs_extras>
 
 <p><:reservation:details_reservation:></p>
-<INCLURE{fond=inclure/reservation,id_reservation,format_envoi=#ENV{format_envoi}}>
-
+<INCLURE{fond=inclure/reservation,id_reservation,format_envoi=#ENV{format_envoi},statut=#GET{statut},id_reservations_detail=#ENV{id_reservations_detail}}/>
 
 <p><:reservation:remerciement:></p>
 

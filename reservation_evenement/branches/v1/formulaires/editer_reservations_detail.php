@@ -90,7 +90,7 @@ function formulaires_editer_reservations_detail_charger_dist($id_reservations_de
  */
 function formulaires_editer_reservations_detail_verifier_dist($id_reservations_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
     $obligatoire=array('id_evenement','id_reservation');
-    if(test_plugin_actif('shop_prix'))$obligatoire=array_merge($obligatoire,array('id_prix_objet'));
+    if(test_plugin_actif('prix_objets'))$obligatoire=array_merge($obligatoire,array('id_prix_objet'));
     
     return formulaires_editer_objet_verifier('reservations_detail',$id_reservations_detail,$obligatoire);
 }

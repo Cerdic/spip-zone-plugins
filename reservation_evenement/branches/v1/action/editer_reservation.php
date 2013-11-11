@@ -37,17 +37,15 @@ function reservation_inserer($id_parent=null, $set=null) {
 }
 
 function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
-    
-
-
     $table_sql = table_objet_sql('reservation');
     $trouver_table = charger_fonction('trouver_table','base');
-
 
     include_spip('inc/autoriser');
     include_spip('inc/rubriques');
     include_spip('inc/modifier');
-
+    include_spip('inc/config');	
+    $config = lire_config('reservation_evenement');
+	
     $row = sql_fetsel('statut,date,id_auteur,email','spip_reservations','id_reservation='.intval($id_reservation));
     $statut_ancien = $statut = $row['statut'];
     $date_ancienne = $date = $row['date'];
@@ -165,23 +163,27 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
             $id_reservations_detail='new';
             $set['id_prix_objet']=$id_prix_objet[$id_evenement];
         }
-        else$id_reservations_detail=$reservations_detail['id_reservations_detail'];
-
+        else $id_reservations_detail=$reservations_detail['id_reservations_detail'];
+        
+        //Pour l'enregistrement
         $set['id_evenement']=$id_evenement;
-
+	    
+        //eviter l'envoi d'une notification pour chaque détail   
+        set_request('envoi_differe_actif','non');			
+		 spip_log($set,'teste');
         $detail=$action($id_reservations_detail,'reservations_detail',$set);
+		
     }
 
     // Notifications
-    include_spip('inc/config');
-    $config = lire_config('reservation_evenement');
+
     if ((!$statut_ancien OR $statut != $statut_ancien ) &&
          ($config['activer']) &&
          (in_array($statut,$config['quand'])) &&
          ($notifications = charger_fonction('notifications', 'inc', true))
         ) {
         // Determiner l'expediteur
-        $options = array();
+        $options = array('statut'=>$statut);
         if( $config['expediteur'] != "facteur" )
             $options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 
@@ -191,8 +193,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
             //$row['email']=trim($row['email']);
                 if(intval($row['id_auteur']) AND $row['id_auteur']>0)$options['email']=sql_getfetsel('email','spip_auteurs','id_auteur='.$row['id_auteur']);
                 else $options['email']=$row['email'];
-
-            $options['statut']=$statut;
+				
             $notifications('reservation_client', $id_reservation, $options);
             }
             

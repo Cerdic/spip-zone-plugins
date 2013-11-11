@@ -10,18 +10,18 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 
     $liste_objets=lister_tables_objets_sql();
     $statuts=array();
-
-
+    $statuts_selectionnees=array();
+	include_spip('inc/config');
+	include_spip('inc/plugin');
+	$config = lire_config('reservation_evenement',array());
+	$quand=isset($config['quand'])?$config['quand']:array();
      
      //Le statuts du plugin
      foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
          $statuts[$statut]=_T($label);
+		 if(in_array($statut,$quand))$statuts_selectionnees[$statut]=_T($label);
      }
      
-	include_spip('inc/config');
-	include_spip('inc/plugin');
-	$config = lire_config('reservation_evenement');
-
 	$choix_expediteurs = array(
 			'webmaster' => _T('reservation:notifications_expediteur_choix_webmaster'),
 			'administrateur' => _T('reservation:notifications_expediteur_choix_administrateur'),
@@ -97,8 +97,19 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'datas' => $statuts,
 						'defaut' => $config['quand']
 					)
+					
 				),
-				
+				array(
+					'saisie' => 'selection_multiple',
+					'options' => array(
+						'nom' => 'envoi_differe',
+						'label' => _T('reservation:notifications_envoi_differe'),
+						'explication' => _T('reservation:notifications_envoi_differe_explication'),
+						'cacher_option_intro' => 'on',
+						'datas' => $statuts_selectionnees,
+						'defaut' => $config['envoi_differe']
+					)
+				),					
 				array(
 					'saisie' => 'selection',
 					'options' => array(
@@ -202,7 +213,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'explication' => _T('reservation:notifications_client_explication'),
 						'defaut' => $config['client'],
 					)
-				)
+				)											
 			)
 		)
 	);

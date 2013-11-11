@@ -6,11 +6,11 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
         include_spip('inc/filtres');
         $reservations_details=sql_fetsel('*','spip_reservations_details','id_reservations_detail='.$id_reservations_detail);
 
-   $id_evenement=isset($set['id_evenement'])?$set['id_evenement']:$reservations_details['id_evenement'];    
+        $id_evenement=isset($set['id_evenement'])?$set['id_evenement']:$reservations_details['id_evenement'];    
      // Les données de l'évènenement
 
-        $id_prix_objet=$set['id_prix_objet'];
         $evenement=sql_fetsel('*','spip_evenements','id_evenement='.$id_evenement);
+        
         $date_debut=$evenement['date_debut'];
         $date_fin=$evenement['date_fin'];
 
@@ -37,14 +37,16 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
         // Si le prix n'est pas fournit, on essaye de le trouver
         
         if(!isset($set['prix']) AND !isset($set['prix_ht'])){
-            /*Existence d'un prix via le plugin Shop Prix https://github.com/abelass/shop_prix_objet */
-            if($shop_prix=test_plugin_actif('shop_prix')){
+            /*Existence d'un prix via le plugin Shop Prix https://github.com/abelass/prix_objets_objet */
+            if($prix_objets=test_plugin_actif('prix_objets')){
                 $fonction_prix = charger_fonction('prix', 'inc/');
                 $fonction_prix_ht = charger_fonction('ht', 'inc/prix');
                  /*si le plugin déclinaison est active il peut y avoir plusieurs prix par évenement*/
                 if(test_plugin_actif('shop_declinaisons')){
                     if(is_array($id_prix_objet))$id_prix=isset($id_prix_objet[$id_evenement])?$id_prix_objet[$id_evenement]:'';
                     else $id_prix=$id_prix_objet;
+                    
+                    
                     
                     $p=sql_fetsel('prix_ht,id_prix_objet,id_declinaison','spip_prix_objets','id_prix_objet='.$id_prix); 
                     
@@ -55,7 +57,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
                 if(isset($p)){
                     $prix_ht = $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
                     $prix = $fonction_prix('prix_objet',$p['id_prix_objet']);
-                    $taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+                    if($prix_ht)$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
                     $set['prix_ht']=$prix_ht; 
                     $set['taxe']=$taxe;  
                     $set['id_prix_objet']=$id_prix;    

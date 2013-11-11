@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
+	'explication_envoi_differe' => 'Le changement de statut d’un Détail de Réservation vers 
+    <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
+	'explication_envoi_differe_detail' => 'Le changement de statut vers <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
 
 	// I
@@ -55,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Notifications',
 	'notifications_client_explication' => 'Envoyer les notifications au client ?',
 	'notifications_client_label' => 'Client',
+	'notifications_envoi_differe' => 'Activer l’envoi différé pour le statut :',
+	'notifications_envoi_differe_explication' => 'Permet de déclencher l’envoi des notifications pour chaque Détail de Résérvation séparément',
 	'notifications_expediteur_administrateur_label' => 'Choisir un administrateur :',
 	'notifications_expediteur_choix_administrateur' => 'un administrateur',
 	'notifications_expediteur_choix_email' => 'un email',
@@ -106,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
 	'texte_voir' => 'voir',
+    'titre_envoi_differe' => 'Mode différe active',	
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
 

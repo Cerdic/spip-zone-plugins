@@ -5,7 +5,7 @@
     label=<:agenda:info_evenement:>})]
     
     
-[(#PLUGIN{shop_prix}|oui)
+[(#PLUGIN{prix_objets}|oui)
     [(#SAISIE{prix_objets, id_prix_objet, obligatoire=oui,
         option_intro=<:reservations_detail:choisir_prix:>,
         id_objet=#ENV{id_article},
@@ -16,7 +16,7 @@
 [(#SAISIE{input, prix_ht,
     label=<:reservations_detail:label_prix_ht:>})]
 
-[(#PLUGIN{shop_prix}|oui)
+[(#PLUGIN{prix_objets}|oui)
 <script>
   $(function(){ 
 
