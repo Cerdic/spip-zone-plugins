@@ -7,17 +7,10 @@ Les pages wp multiniveaux:l'id de l'article parent d'un article est stocké dans
 
 A faire? une noisette xml pour le plugin menus qui porpose de composer un menu avec les pages uniques  et leur hierarchie]
 #CACHE{0}
-<BOUCLE_si_plugin_pages(meta){nom=plugin_installes}>
-#SET{meta_page,#VALEUR|explode{'"'}
 
-[(#GET{meta_page}|find{auto/pages}|oui)
+[(#PLUGIN{pages}|oui)
 #SET{pages,oui}
 ]
-[(#GET{meta_page}|find{pages}|oui)
-#SET{pages,oui}
-]
-
-</BOUCLE_si_plugin_pages>
 
 <BOUCLE_pages( wp_posts ){post_status=publish}{post_type=page}>
 <spip_articles>

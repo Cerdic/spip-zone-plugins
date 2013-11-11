@@ -6,13 +6,15 @@
 </ul>
 <!--/#hierarchie-->
 
-<h1>Migration Wordpress 2 SPIP</h1>
+<h1 class="grostitre"><:wp2spip:titre_page_migration:></h1>
 
 [(#SESSION{webmestre}|=={oui}|oui)
 [(#EVAL{_DIR_DUMP}|concat{wp2spip.xml}|file_exists|oui)
 	<p>
 		<:wp2spip:message_conversion_ok:>
-		<br/><br/>Rendez-vous à la page <a href='#URL_ECRIRE{admin_tech}' title=''>Maintenance</a> du site et importer la base wp2spip.xml
+	</p>
+	<p>
+		<:wp2spip:message_aller_maintenance{url=#URL_ECRIRE{admin_tech}}:>
 	</p>
 	#BOITE_OUVRIR{'',important notice}
 	<:wp2spip:message_attention_import:>
@@ -24,6 +26,6 @@
 ]
 [(#SESSION{webmestre}|=={oui}|non)
 	#BOITE_OUVRIR{'','error'}
-	Vous devez avoir les droits de webmestre
+	<:wp2spip:erreur_non_webmestre:>
 	#BOITE_FERMER
 ]
