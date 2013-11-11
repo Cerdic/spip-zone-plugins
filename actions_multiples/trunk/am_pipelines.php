@@ -29,6 +29,10 @@ function am_recuperer_fond($flux) {
 		$objet = array_pop(explode('/', $fond));
 
 		if ($fond == 'prive/objets/liste/articles') {
+			// TODO : il faut entourer la table d'un formulaire pour utiliser les checkbox
+			// -- peut etre que le plus facile serait d'inclure le texte de la table dans le formulaire
+			//    via un recuperer_fond
+
 			// Ajout d'une colonne en première position dans le thead
 			$thead = extraire_balise($texte, 'thead');
 			if (preg_match(_AM_PATTERN_TR, $thead, $balises_tr)) {
