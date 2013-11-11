@@ -1,0 +1,51 @@
+<plugin>
+	<nom>Quick vote</nom>
+	<slogan>Mini-sondages avec jeu de questions fermé</slogan>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<version>0.1.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>test</etat> 
+	<description>Mini-sondages avec jeu de questions fermé</description>
+	<lien>http://contrib.spip.net/4461</lien>
+	<licence>GPL v3</licence>
+  <categorie>communication</categorie>
+	<icon>prive/themes/spip/images/quickvote-128.png</icon>
+  
+  <prefix>quickvote</prefix>
+
+  <install>base/quickvote_upgrade.php</install>
+  <options>quickvote_options.php</options>
+  
+  <!-- Déclaration des objets -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/quickvote.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/quickvote.php</inclure>
+	</pipeline>
+  <pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>quickvote_pipelines.php</inclure>
+	</pipeline>
+  
+  <!-- Fonctionnalités dans le SPIP -->
+  <pipeline>
+    <nom>autoriser</nom>
+    <inclure>quickvote_autoriser.php</inclure>
+  </pipeline>
+
+  <bouton id='quickvotes' parent="naviguer">
+		<titre>quickvote:titre_quickvotes</titre>
+		<icone>prive/themes/spip/images/quickvote-24.png</icone>
+	</bouton>
+      
+
+  
+  <necessite id="spip" version="[2.1.20;2.1.99]" />
+  <necessite id="spip_bonux" version="[2.2.17;]" />
+  <necessite id="saisies" version="[1.20.0;]" />
+	<necessite id="afficher_objets" version="[1.2.1;]" />
+
+</plugin>

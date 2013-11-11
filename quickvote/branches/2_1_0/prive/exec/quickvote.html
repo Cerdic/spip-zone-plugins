@@ -1,0 +1,69 @@
+<BOUCLE_quickvote(QUICKVOTES){id_quickvote}{tous}>
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE{quickvotes}" class="racine"><:quickvote:titre_quickvotes:></a>
+	</span>
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		#TITRE
+	</span>
+</div>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+	[(#AUTORISER{modifier,quickvote,#ID_QUICKVOTE})
+		[(#URL_ECRIRE{quickvote_edit,id_quickvote=#ID_QUICKVOTE}|icone{<:quickvote:icone_modifier_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-24.png},right})]
+	]
+	<h1>#TITRE</h1>
+	
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/quickvote,id=#ID_QUICKVOTE,ajax=wysiwyg}>
+	</div>
+	
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,quickvote,id,#ID_QUICKVOTE},data,'<div class="nettoyeur"></div>'}}
+</div>
+
+
+
+
+
+[(#AUTORISER{supprimer, quickvote, #ID_QUICKVOTE}|oui)
+[<div class="actions">
+	(#URL_ACTION_AUTEUR{supprimer_quickvote,#ID_QUICKVOTE,#URL_ECRIRE{quickvotes}}|icone{<:quickvote:icone_supprimer_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-del-24.png},center})
+</div>]
+]
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:quickvote:info_numero_quickvote:>
+		<p>#ID_QUICKVOTE</p>
+    
+    <code>&lt;quickvote#ID_QUICKVOTE&gt;</code>
+	</div>
+	<ul class="instituer instituer_quickvote">
+		<li><:quickvote:champ_actif_label:>
+			<ul>
+				<li class="prop[ (#ACTIF|non)selected]">
+					[(#ACTIF|oui)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_quickvote, #ID_QUICKVOTE-0, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-orange.gif}">
+						<:quickvote:champ_actif_non:>
+					[(#ACTIF|oui)</a>]
+				</li>
+				<li class="publie[ (#ACTIF|oui)selected]">
+					[(#ACTIF|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_quickvote, #ID_QUICKVOTE-1, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:quickvote:champ_actif_oui:>
+					[(#ACTIF|non)</a>]
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_quickvote>

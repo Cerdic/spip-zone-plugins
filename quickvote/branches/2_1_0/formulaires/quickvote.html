@@ -1,0 +1,37 @@
+
+<BOUCLE_quickvote(QUICKVOTES){id_quickvote=#ENV{id}}>    
+#SET{reponse, #ARRAY{reponse1,#REPONSE1,reponse2,#REPONSE2}}  
+ 
+[(#REPONSE3|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse3,#REPONSE3}}})] ]
+[(#REPONSE4|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse4,#REPONSE4}}})] ]
+[(#REPONSE5|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse5,#REPONSE5}}})] ]
+[(#REPONSE6|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse6,#REPONSE6}}})] ] 
+[(#REPONSE7|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse7,#REPONSE7}}})] ] 
+[(#REPONSE8|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse8,#REPONSE8}}})] ]
+[(#REPONSE9|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse9,#REPONSE9}}})] ] 
+[(#REPONSE10|trim|oui)  [(#SET{reponse,#GET{reponse}|array_merge{#ARRAY{reponse10,#REPONSE10}}})] ]  
+
+[(#HASARD|oui)   [(#SET{reponse, #GET{reponse}|quickvote_shuffle})]  ]  
+
+
+<div class="formulaire_spip formulaire_quickvote ajax"> 
+        [(#ENV{skip_vote}|non)<div class="quickvote-question">#TITRE</div>]
+        [<div class="quickvotebilan">(#ENV*{message_ok})</div>] 
+        [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>] 
+      
+        [(#ENV**{editable}|oui)
+            <form action="#ENV{action}" method="post">
+            <div>
+                #ACTION_FORMULAIRE{#ENV{action}}
+                
+                <ul>
+                [(#SAISIE{radio, quickvote, 
+                                 datas=#GET{reponse}}
+                  )]
+                </ul>
+                <p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+            </div>
+            </form> 
+         ]
+</div>     
+</BOUCLE_quickvote>

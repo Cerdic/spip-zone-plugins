@@ -1,0 +1,11 @@
+[(#REM)
+
+  modèle pour insérer un quickvote
+  
+  paramètre:   
+  id ou id_quickvote:  id du quickvote
+
+][(#ENV{id_quickvote}|?{#SET{id_quickvote,#ENV{id_quickvote}},#SET{id_quickvote,#ENV{id}}})]
+<BOUCLE_quickvote(QUICKVOTES){id_quickvote=#GET{id_quickvote}}>
+#FORMULAIRE_QUICKVOTE{#ID_QUICKVOTE}
+</BOUCLE_quickvote>  

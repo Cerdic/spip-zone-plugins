@@ -1,0 +1,47 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,#ENV{date_sens,-1},
+	id_quickvote,1,
+	points,-1
+}})
+]<B_liste_quickvotes>
+#ANCRE_PAGINATION
+<div class="liste-elements liste-objets quickvotes">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{quickvote:info_1_quickvote,quickvote:info_nb_quickvotes}})</strong></caption>]
+	<thead>
+		<tr class="first_row"> 			
+      <th class="statut" scope="col">[(#TRI{actif,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+      <th class="titre principale" scope="col">[(#TRI{titre,<:quickvote:champ_titre_label:>,ajax})]</th>
+      <th class="vote" scope="col"><:quickvote:champ_vote_label:></th>
+      <th class="id" scope="col">[(#TRI{id_quickvote,<:info_numero_abbreviation:>,ajax})]</th>			
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_quickvotes(QUICKVOTES)
+		{recherche?}
+		{tri #ENV{par,#ENV{recherche}|?{points,titre}},#GET{defaut_tri}}
+		{pagination #ENV{pagination,10}}
+	>
+		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+       <td class="statut">[(#ACTIF|?{<:quickvote:champ_actif_oui:>, <:quickvote:champ_actif_non:>})]</td>        
+       <td class="titre principale">
+            <a href="[(#ID_QUICKVOTE|generer_url_entite{quickvote})]"
+				      title="<:info_numero_abbreviation|attribut_html:> #ID_QUICKVOTE">[(#RANG). ]#TITRE</a>
+        </td> 
+       <td class="vote"> 
+        <BOUCLE_nb_votes(QUICKVOTES_VOTES){id_quickvote}{tout}/>[(#TOTAL_BOUCLE|oui)[(#TOTAL_BOUCLE|singulier_ou_pluriel{quickvote:info_1_vote, quickvote:info_nb_votes})]]<//B_nb_votes>
+      </td>
+       <td class="id">[(#AUTORISER{modifier,quickvote,#ID_QUICKVOTE}|?{
+				<a href="[(#URL_ECRIRE{quickvote_edit,id_quickvote=#ID_QUICKVOTE})]">#ID_QUICKVOTE</a>,
+				#ID_QUICKVOTE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_quickvotes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_quickvotes>[
+<div class="liste-elements liste-objets quickvotes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_quickvotes>

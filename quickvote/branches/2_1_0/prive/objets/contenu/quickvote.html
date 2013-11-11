@@ -1,0 +1,10 @@
+<BOUCLE_afficher_contenu(QUICKVOTES){id_quickvote=#ENV{id}}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:quickvote:champ_titre_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+
+<div>            
+     #FORMULAIRE_QUICKVOTE{#ID_QUICKVOTE,true}
+</div>
+</BOUCLE_afficher_contenu>

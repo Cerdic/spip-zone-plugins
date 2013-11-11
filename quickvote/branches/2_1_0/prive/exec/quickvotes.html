@@ -1,0 +1,9 @@
+[(#REM) liste des sondages]
+
+<h1><:quickvote:titre_quickvotes:></h1>
+
+[(#INCLURE{fond=prive/objets/liste/quickvotes, sinon=<:quickvote:info_aucun_quickvote:>, env, ajax})]
+
+[(#AUTORISER{creer, quickvote}|oui)
+[(#URL_ECRIRE{quickvote_edit}|parametre_url{nouveau,oui}|icone{<:quickvote:icone_creer_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-add-24.png},#LANG_RIGHT})]
+]

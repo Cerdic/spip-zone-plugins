@@ -1,0 +1,52 @@
+<BOUCLE_autoriser(CONDITION){si #ENV{id_quickvote}|et{#AUTORISER{modifier,quickvote,#ENV{id_quickvote}}}|ou{#ENV{id_quickvote}|non|et{#AUTORISER{creer,quickvote}}}}>
+
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE{quickvotes}" class="racine"><:quickvote:titre_quickvotes:></a>
+	</span>
+	[(#ENV{id_quickvote}|oui)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<a href="[(#ENV{id_quickvote}|generer_url_entite{quickvote})]">#INFO_TITRE{quickvote,#ENV{id_quickvote}}</a>
+	</span>
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:quickvote:icone_modifier_quickvote:>
+	</span>
+	]
+	[(#ENV{id_quickvote}|non)
+	<span class="bloc">
+		<span class="sep">&gt;</span>
+		<:quickvote:info_nouveau_quickvote:>
+	</span>
+	]
+</div>
+<!--/#hierarchie-->
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{id_quickvote}|?{#ENV{id_quickvote}|generer_url_entite{quickvote},#URL_ECRIRE{quickvotes}}}}
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{prive/themes/spip/images/quickvote-24.png}})]
+		<:quickvote:icone_modifier_quickvote:>
+		<h1>
+			[(#ENV{id_quickvote}|oui)#INFO_TITRE{quickvote,#ENV{id_quickvote}}]
+			[(#ENV{id_quickvote}|non)<:quickvote:info_nouveau_quickvote:>]
+		</h1>
+	</div>
+	
+	#SET{redirect,#ENV{redirect,#ENV{id_quickvote}|generer_url_entite{quickvote}}}
+	<div class="">
+		#FORMULAIRE_EDITER_QUICKVOTE{#ENV{id_quickvote,oui},#GET{redirect}}
+	</div>
+</div>
+
+<!--#navigation-->
+
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_autoriser>
