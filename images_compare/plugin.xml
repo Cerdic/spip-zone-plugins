@@ -14,5 +14,5 @@
 		<nom>insert_head</nom>
 		<inclure>imgcompare_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.1;3.0.99]' />
+ 	<necessite id='SPIP' version='[2.1.0;3.0.99]' />
 </plugin>
