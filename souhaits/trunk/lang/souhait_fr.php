@@ -46,7 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'offrir_message_ok_merci' => 'Merci beaucoup d’avoir proposé ce cadeau.',
 	'offrir_message_ok_merci_cagnotte' => 'Merci beaucoup de participer à cette cagnotte.',
 	'offrir_nom_label' => 'Nom',
-
+	
+	// P
+	'proposition_par' => 'Proposé par @nom@',
+	'proposition_titre' => 'Proposition',
+	
 	// R
 	'retirer_lien_souhait' => 'Retirer ce souhait',
 	'retirer_tous_liens_souhaits' => 'Retirer tous les souhaits',
