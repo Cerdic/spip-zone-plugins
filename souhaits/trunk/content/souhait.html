@@ -2,7 +2,6 @@
 <article>
 	<header class="cartouche">
 		<BOUCLE_logodoc(DOCUMENTS){id_souhait}{extension IN jpg,gif,png,svg}{0,1}{par num titre,titre}{doublons}>#SET{logodoc,#FICHIER|balise_img|inserer_attribut{class,spip_logos}}</BOUCLE_logodoc>
-		[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|image_reduire{200,200})]
 		<h1><span class="#EDIT{titre}">#TITRE</span></h1>
 
 		<!--<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>-->
@@ -30,17 +29,20 @@
 	</header>
 
 	<div class="main">
+		<div class="well center pull-right">
+			<p>
+				<a href="[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|extraire_attribut{src})]" class="mediabox">[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|image_reduire{200,200}|inserer_attribut{alt,Illustration}|inserer_attribut{class,img-rounded})]</a>
+			</p>
+			[<p class="prix big">
+				<i class="icon-barcode" style="vertical-align:baseline;"></i> (#PRIX|>{0}|?{#PRIX}) €
+			</p>]
+		</div>
+	
 		[<div class="#EDIT{descriptif} texte surlignable">(#DESCRIPTIF|image_reduire{500,0})</div>]
 
-		<p class="infos clear lead">
-			[<span class="prix">
-				<i class="icon-barcode" style="vertical-align:baseline;"></i> (#PRIX|>{0}|?{#PRIX}) €
-			</span>]
-			[(#PRIX|et{#URL_SITE})<br/>]
-			[<span class="site">
-				<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
-			</span>]
-		</p>
+		[<p class="site big">
+			<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
+		</p>]
 	</div>
 	[
 	<footer>
@@ -52,7 +54,7 @@
 		[(#INCLURE{fond=inclure/documents,objet=souhait,id_objet=#ID_SOUHAIT,doublons})]
 		
 		<div class="clear alert #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{alert-success,'',alert-error,alert-error,alert-info},#STATUT})]">
-		<h4>[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</h4>
+		<h2>[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</h2>
 		[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]
 		</div>
 		
