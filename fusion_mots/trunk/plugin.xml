@@ -9,7 +9,7 @@
 	Permet aux administrateurs de remplacer en s&#233;rie des mots-clef par d'autres, pour diminuer le nombre de mots-clef et &#233;viter les redondances.
 	</description>
 	<etat>test</etat>
-	<necessite id="SPIP" version="[2.1;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<prefix>fusionmots</prefix>
 	<icon>images/fusion_mots_64.png</icon>
 
