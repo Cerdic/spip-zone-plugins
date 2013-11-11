@@ -1,0 +1,109 @@
+@import "bootstrap/css/thumbnails.less";
+
+// The Grid
+#thumbgrid {
+
+  .one () {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n-1) {width: auto;float:none;clear: none;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {width: auto;float:none;clear: none;margin-left: 0;}
+  }
+
+  .two (@width, @grid-gutter-width) {
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;/*width:calc(50% - (@grid-gutter-width/2));width:-moz-calc(50% - (@grid-gutter-width/2));*/float: left;}
+    .thumbnails li:nth-child(2n-1) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(2n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .three(@width, @grid-gutter-width){
+    .thumbnails {margin-left: 0;}
+    .thumbnails li {width: @width;/*width:calc(33%-(2*@grid-gutter-width/3));width:-moz-calc(33%-(2*@grid-gutter-width/3));*/float: left;}
+    .thumbnails li:nth-child(3n-2) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(3n-1) {clear: none;float: left;margin-left: (100% - 3*@width)/2 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(3n) {clear: none;float: right;margin-left: 0;}
+  }
+
+  .four(@width, @grid-gutter-width){
+    .thumbnails li {width: @width;/*width:calc(25% - (3*@grid-gutter-width/4));width:-moz-calc(25% - (3*@grid-gutter-width/4));*/float: left;}
+    .thumbnails li:nth-child(4n-3) {clear: both;float: left;margin-right: 0;margin-left: 0;}
+    .thumbnails li:nth-child(4n-2) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(4n-1) {clear: none;float: left;margin-left: (100% - 4*@width)/3 - 0.1%;/*margin-left:calc(@grid-gutter-width);margin-left:-moz-calc(@grid-gutter-width);*/margin-right: 0;}
+    .thumbnails li:nth-child(4n) {clear: none;float: right;margin-left: 0;}
+  }
+
+}
+
+/* mapper avec le plugin album */
+.album {#thumbgrid > .three(31%,@grid-gutter-width)}
+
+.loop-col-album-one(@index, @stop) when (@index =< @stop) {
+  .col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index} {
+        .album {#thumbgrid > .one()}
+  }
+  .loop-col-album-one(@index+1, @stop);
+}
+
+.loop-col-album-two(@index, @stop) when (@index =< @stop) {
+  .col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index} {
+        .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+  }
+  .loop-col-album-two(@index+1, @stop);
+}
+
+.loop-col-album-three(@index, @stop) when (@index =< @stop) {
+  .col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index} {
+        .album {#thumbgrid > .three(30%,@grid-gutter-width)}
+  }
+  .loop-col-album-three(@index+1, @stop);
+}
+
+.loop-col-album-four(@index, @stop) when (@index =< @stop) {
+  .col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index} {
+        .album {#thumbgrid > .four(22%,@grid-gutter-width)}
+  }
+  .loop-col-album-four(@index+1, @stop);
+}
+
+
+.loop-col-album-two(3,4);
+
+.loop-col-album-one(1,2);
+
+
+.thumbnails li img {max-width: 93%;}
+.thumbnails .caption {display:block;}
+.thumbnails .caption img {margin-top: -9px;margin-bottom: 9px;}
+.thumbnails figure {margin:0;}
+.album .thumbnail {text-align: center; min-height: 150+2*9+@line-height-base;}
+// Add a hover state for linked versions only
+.album .thumbnail:hover {
+  border-color: @link-color;
+  .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}
+
+
+@media (min-width: 1200px) {
+.loop-col-album-four(7,12);
+
+.loop-col-album-two(3,3);
+
+}
+@media (min-width: 768px) and (max-width: 979px) {
+.loop-col-album-three(7,7);
+
+.loop-col-album-two(5,5);
+
+.loop-col-album-one(3,3);
+
+}
+@media (max-width: 767px) {
+  .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+}
+@media (max-width: 450px) {
+  .album {#thumbgrid > .two(48%,@grid-gutter-width)}
+}
+@media (max-width: 380px) {
+  .album {#thumbgrid > .one()}
+}

@@ -1,0 +1,61 @@
+
+/* Habillage des forums
+---------------------------------------------- */
+
+@import "css/variables.less";
+@import "css/mixins.less";
+
+/* * Habillage des forums */
+//.comments { margin-bottom:/*@margin-bottom*/1.5em/*/@*/}
+
+/* comments list */
+.comments-items {list-style: none;margin-left: 0;}
+//.comments-items {border-bottom: 1px solid #eee;}
+.comments-items .comments-items {margin-left: @padding-base-horizontal*5+@grid-gutter-width;}
+.comments-items .comments-items .comments-items .comments-items .comments-items {margin-left: @grid-gutter-width;}
+
+//.comments-items .comment-item {border-top: 1px solid #eee;}
+//.comments-items .comment-item .comment-item {border-top: 0;}
+
+.comment {overflow:hidden;position: relative;padding-bottom: @line-height-base;}
+.comment-meta {
+  min-height: 20px;
+  padding: 19px;
+  background-color: @well-bg;
+  border: 1px solid darken(@well-bg, 7%);
+  .border-top-radius(@border-radius-base);
+  .border-right-radius(@border-radius-base);
+  .border-bottom-radius(@border-radius-base);
+  .border-left-radius(@border-radius-base);
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+  border:0;
+  margin-bottom: @line-height-base/2;
+}
+.comment-meta {padding-left: @padding-base-horizontal*5+2*@grid-gutter-width;position: relative;}
+.comment-meta .spip_logos {position:absolute;left: @grid-gutter-width;}
+.comment-meta .permalink { position: absolute;right: 0;font-size: 2em;color:@gray-light;}
+
+//.comment-item .comment-item .comment-meta {background : #f4f4f4;}
+.comment-meta .forum-titre {display: block;}
+.comment-content {background: transparent;padding-left: @padding-base-horizontal*5+2*@grid-gutter-width;max-height:60em;overflow:auto;overflow-x:none;}
+.comment-reply { clear: both; text-align: right; margin-bottom:0;margin-top: -@line-height-base/2;visibility: hidden;}
+.comment:hover .comment-reply {visibility: visible;position: relative;}
+/* avec plugin comments */
+.comment-item:hover >.comment-reply {visibility: visible;position: relative;}
+
+/* en thread */
+.comments-thread .comment-item {margin-bottom:@line-height-base;}
+.comments-thread .comment-item .comment-item {margin-bottom:0;}
+.comments-thread .permalink.in-reply-to {bottom:0;}
+
+/* avec plugin comments */
+//.comment-meta .permalink.picto {font-size:1em;right:/*@demi-margin-bottom*/0.75em/*/@*/;}
+//.comment {position:relative;}
+//.comment .spip-admin {position:absolute;left:0;bottom:0;visibility:hidden;}
+//.comment:hover .spip-admin {visibility:visible;}
+
+/* en list avec plugin comments */
+.comment-meta .item {display:block;}
+
+.boutons.modererforum {text-align: right;position: absolute;top: 0;right: 0;display: none;}
+.comment:hover .boutons.modererforum {display: block;}

@@ -1,0 +1,200 @@
+@import "bootstrap/css/forms.less";
+
+legend {h3}
+
+/* Surcharge RTL */
+.rtl {
+	.form-search .input-append .search-query {
+		.border-radius(0 14px 14px 0);
+	}
+	.form-search .input-append .btn {
+		.border-radius(14px 0 0 14px);
+	}
+	.form-search .input-prepend .search-query {
+		.border-radius(14px 0 0 14px);
+	}
+	.form-search .input-prepend .btn {
+		.border-radius(0 14px 14px 0);
+	}
+}
+
+
+/* Structure generale des formulaires
+----------------------------------------------- */
+.formulaire_spip {
+	clear: both; 
+	margin-bottom: @line-height-em; 
+	padding: @line-height-em; 
+	background-color: @well-bg;
+	position: relative;
+	form {
+		margin-bottom: 0
+	}
+	.boutons {
+		.form-actions;
+		margin: 0 -@line-height-em -@line-height-em; 
+		padding: @line-height-em;
+		text-align: right;
+	}
+	/* Explications */
+	.explication {
+		.help-block;
+	}
+	.editer {
+		clear: both;
+		margin: 0 -@line-height-em;
+		padding: @line-height-em/4 @line-height-em;
+	}
+	/* choix */
+	.choix {
+		label {
+			display:inline;
+			font-weight:normal;
+		}
+		input {
+			&.radio, .checkbox {
+				width:auto;
+				margin: @padding-small-horizontal;
+				margin-left:0;
+				margin-bottom: 1px;
+			}
+		}
+	}
+	/* Lignes */
+	> div, fieldset, form, form > div {
+		> ul {
+			margin-left: 0;
+			list-style: none;
+			.control-group;
+		}
+	}
+
+}
+.secondary {
+	.formulaire_spip {
+		padding: @line-height-em/2;
+		.boutons {
+			margin: 0 -@line-height-em/2 -@line-height-em/2; 
+			padding: @line-height-em/2;
+		}
+	}
+}
+
+input.submit {
+	.btn;
+}
+
+
+/* choix de mot dans le form forum notamment */
+.formulaire_spip .choix_mots {
+  .calc-grid(12,md,width);
+}
+.formulaire_spip .choix_mots .saisie_mot {
+	.input-block-level();
+	float: left;
+	margin-left: @grid-gutter-width;
+	.calc-grid(4,md,width);
+	
+	&:nth-child(3n-2) {
+		margin-left: 0;
+		clear: both;
+	}
+	label {
+		display: inline;
+		font-weight: normal;
+	}
+	input {
+		&.radio, .checkbox {
+			width:auto;
+			margin: @padding-small-horizontal;
+			margin-left:0;
+			margin-bottom: 1px;
+		}
+	}
+}
+
+
+/* Champs de saisie */
+/*
+.col-{@class}-9 form input.text { width: 80%;}
+.col-{@class}-8 form input.text { width: 80%;}
+.col-{@class}-7 form input.text { width: 80%;}
+.col-{@class}-6 form input.text { width: 80%;}
+.col-{@class}-5 form input.text { width: 80%;}
+.col-{@class}-4 form input.text { width: 80%;}
+.col-{@class}-3 form input.text { width: 80%;}
+.col-{@class}-2 form input.text { width: 80%;}
+*/
+form input.text { width: 80%;}
+/*
+.col-{@class}-8 form textarea { width: 80%;}
+.col-{@class}-7 form textarea { width: 80%;}
+.col-{@class}-6 form textarea { width: 80%;}
+.col-{@class}-5 form textarea { width: 80%;}
+.col-{@class}-4 form textarea { width: 80%;}
+.col-{@class}-3 form textarea { width: 80%;}
+.col-{@class}-2 form textarea { width: 80%;}
+*/
+form textarea { width: 80%;}
+.markItUp .markItUpContainer .markItUpHeader {width: 80%;padding-right: 6px;padding-left: 6px;}
+.markItUp .markItUpContainer .markItUpHeader + textarea {border-top-left-radius: 0;border-top-right-radius: 0;border-top:0;}
+
+/*
+.col-{@class}-9 form select { width: 80%;}
+.col-{@class}-8 form select { width: 80%;}
+.col-{@class}-7 form select { width: 80%;}
+.col-{@class}-6 form select { width: 80%;}
+.col-{@class}-5 form select { width: 80%;}
+.col-{@class}-4 form select { width: 80%;}
+.col-{@class}-3 form select { width: 80%;}
+.col-{@class}-2 form select { width: 80%;}
+*/
+form select { width: 80%;}
+
+
+/* Reponses, previsu et erreurs
+----------------------------------------------- */
+
+/* Champs obligatoires */
+.formulaire_spip li.obligatoire {}
+.formulaire_spip li.obligatoire label {font-weight: bold;}
+
+/* * Erreurs */
+.editer.erreur { background-color: @state-danger-bg; }
+.editer .erreur_message { display: block; color: @state-danger-text; font-weight: bold;}
+.editer .erreur_message label {display: inline;}
+.editer .erreur_message input {margin: 0;}
+
+/* Reponses */
+.reponse_formulaire {.alert;}
+.reponse_formulaire_ok {.alert-success;}
+.reponse_formulaire_erreur {.alert-danger;}
+
+/* Variantes et cas particuliers
+----------------------------------------------- */
+
+/* quelques fieldset.info qui ne sont pas des messages d'info */
+.formulaire_spip fieldset.info {
+  background-color: inherit;
+  color: inherit;
+  text-shadow:inherit;
+  .border-radius(inherit);
+  fieldset;
+}
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; border: 0;}
+//.formulaire_menu_lang form select {#grid > .core > .span(3)}
+
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche,.secondary .formulaire_recherche {.form-control}
+.formulaire_recherche,.secondary .formulaire_recherche { padding: 0; background: none; border: 0;}
+
+/* Formulaire de login dans une page */
+.formulaire_login form .editer {clear:left;}
+.formulaire_login form input.text,
+.formulaire_login form input.password {.calc-grid(5,md,width);}
+
+.formulaire_login form .editer_password .details {margin-bottom:0;}
+.formulaire_login #spip_logo_auteur {float:right;}
+
