@@ -23,7 +23,7 @@
 		<inclure>imgabo_pipelines.php</inclure>
 	</pipeline>
 	<categorie>outil</categorie>
-	<necessite id='SPIP' version='[2.0;2.1.99]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id="abonnement" version='[1.0;]'/>
 	<necessite id="medias" version='[1.4.5;]'/>
 </plugin>
