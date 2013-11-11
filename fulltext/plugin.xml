@@ -9,8 +9,8 @@
 	<auteur>Fil, Gael Chareyre</auteur>
 	<version>0.7.1</version>
 	<version_base>0.2</version_base>
-	<etat>dev</etat>
-	<licence>&#169; 2009-2011 GNU/GPL</licence>
+	<etat>test</etat>
+	<licence>&#169; 2009-2012 GNU/GPL</licence>
 	<description>
 Ce plugin permet d'une part d'exploiter le mode de recherche FULLTEXT de MySQL et d'am&#233;liorer ainsi &#233;norm&#233;ment les recherches par rapport au fonctionnement natif de SPIP, et d'autre part d'indexer le contenu de certains documents.
 -* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
