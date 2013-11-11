@@ -58,7 +58,7 @@
 		[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]
 		</div>
 		
-		<div class="ajax">#FORMULAIRE_OFFRIR_SOUHAIT{#ID_SOUHAIT}</div>
+		<div class="ajax">#FORMULAIRE_OFFRIR_SOUHAIT{#ID_SOUHAIT, #SELF}</div>
 		
 		[(#REM) Forum ]
 		<INCLURE{fond=comments,objet=souhait,id_objet=#ID_SOUHAIT,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum)} />
