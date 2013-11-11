@@ -60,24 +60,15 @@ WP: cat 1 par défaut por les posts non classés
 <p>Pas de mots clefs  trouvé!</p>
 <//B_mots>
 
-
-
-
-
-
-
 [(#REM)
 Les RUBRIQUES 
 ]
 #SET{count_cat,0}
 <BOUCLE_joint_cat( wp_term_taxonomy ){taxonomy IN category,link_category}>
 
-    <BOUCLE_cat( wp_terms ){term_id}>
+<BOUCLE_cat( wp_terms ){term_id}>
 #SET{count_cat,#GET{count_cat}|plus{1}}
-
- 
-
-    </BOUCLE_cat>
+</BOUCLE_cat>
 </BOUCLE_joint_cat>
 [(#GET{count_cat}|=={0}|oui)<p> Veuillez créer au moins une catégorie dans Wordpress!!!</p>
 ]
@@ -85,28 +76,19 @@ Les RUBRIQUES
 </B_joint_cat>
  Veuillez créer au moins une catégorie dans Wordpress!!!
 <//B_joint_cat>
-
-
 [(#REM) on liste les auteurs wp]
-
-
-
 #SET{liste_restreint_radac,#ARRAY}
 <BOUCLE_users_wp( wp_users ){tout}>
 
-  <BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>
+<BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>
 
-  #SET{tab_wp,#META_VALUE|explode{'"'}}
-  
-  </BOUCLE_cherche_statut>
-  			[(#REM) liste les admins restreint, il seront des redacteur pour le moment je trouve pas leur rubrique wp]
-	
-  [(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
-  
+#SET{tab_wp,#META_VALUE|explode{'"'}}
 
-  			#SET{liste_restreint_radac,#GET{liste_restreint_radac}|push{#ID}}
+</BOUCLE_cherche_statut>
+	[(#REM) liste les admins restreint, il seront des redacteur pour le moment je trouve pas leur rubrique wp]
 
-  ]
+[(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
+#SET{liste_restreint_radac,#GET{liste_restreint_radac}|push{#ID}}]
 
 </BOUCLE_users_wp>
 
@@ -127,10 +109,6 @@ pas d'users pas normal
 -admin wp restreint = rédacteurs SPIP, précisez leur statut après l'import
 </p>
 </B_new_redac>
-
-
-
-
 
 [(#REM) les posts]
 #SET{fils_valide,0}

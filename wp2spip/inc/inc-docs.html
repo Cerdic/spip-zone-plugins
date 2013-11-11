@@ -1,3 +1,4 @@
+#CACHE{0}
 <BOUCLE_post_documents( wp_posts ){post_type=attachment}{post_status=inherit}{post_parent>0}>
 <spip_documents>
 <id_document>#ID</id_document>
@@ -7,9 +8,9 @@
 </BOUCLE_ext>
 <extension>INCONNUE</extension>
 <//B_ext>
-<titre>[(#POST_TITLE|texte_backend)]</titre>
-<date>#POST_MODIFIED </date>
-<descriptif>[(#POST_CONTENT|texte_backend)]</descriptif>
+<titre>[(#POST_TITLE)]</titre>
+<date>#POST_MODIFIED</date>
+<descriptif>[(#POST_CONTENT|sale_wp2spip)]</descriptif>
 <fichier>#GUID</fichier>
 <taille></taille>
 <largeur></largeur>
@@ -21,15 +22,3 @@
 <extrait>non</extrait>
 </spip_documents>
 </BOUCLE_post_documents>
-
-
-
-
-
-
-
-
-
-
-
-

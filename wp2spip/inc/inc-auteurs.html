@@ -1,56 +1,36 @@
 [(#REM)
-voir
-http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
- ]
-  
 
+	voir http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
 
-
-
+]
+#CACHE{0}
+#SET{compte_users,0}
 <BOUCLE_users( wp_users ){tout}>
 <spip_auteurs>
 <id_auteur>#ID</id_auteur>
-<nom>#USER_NICENAME</nom>
+<nom>[(#USER_NICENAME|sale_wp2spip)]</nom>
 <bio></bio>
 <email>#USER_EMAIL</email>
 <nom_site></nom_site>
-<url_site>#USER_URL</url_site>
+<url_site>[(#USER_URL|str_replace{'http://',''}|=={''}|?{'',#USER_URL})]</url_site>
 <login>#USER_LOGIN</login>
 <pass></pass>
 <low_sec></low_sec>
+<BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>[(#SET{tab_wp,#META_VALUE|explode{'"'}})][(#GET{tab_wp}|table_valeur{1}|=={administrator}|oui)
+<statut>0minirezo</statut>
+][(#GET{tab_wp}|table_valeur{1}|=={editor}|oui)
+<statut>0minirezo</statut>
+][(#REM)
 
+	administrateur resteint, passe redacteur pour l'instant
 
-  <BOUCLE_cherche_statut(wp_usermeta){user_id=#ID}{meta_key=wp_capabilities}>
-
-  #SET{tab_wp,#META_VALUE|explode{'"'}}
-  </BOUCLE_cherche_statut>
-
-  [(#GET{tab_wp}|table_valeur{1}|=={administrator}|oui)
-  <statut>0minirezo</statut>
-  ]
-  
-
-  [(#GET{tab_wp}|table_valeur{1}|=={editor}|oui)
-  <statut>0minirezo</statut>
-  ]
-  
-  [(#REM)    administrateur restein, passe redacteur pour l'instant ]
-  
-  [(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
-  <statut>1comite</statut>
-  ]
-  
-
-  [(#GET{tab_wp}|table_valeur{1}|=={contributor}|oui)
-  <statut>1comite</statut>
-  ]
-
-   [(#GET{tab_wp}|table_valeur{1}|=={subscriber}|oui)
-   <statut>6forum</statut>
-   ]
-
-[(#GET{tab_wp}|table_valeur{1}|=={administrator}|oui)<webmestre>oui</webmestre>]
-[(#GET{tab_wp}|table_valeur{1}|=={administrator}|non)<webmestre>non</webmestre>]
+][(#GET{tab_wp}|table_valeur{1}|=={author}|oui)
+<statut>1comite</statut>
+][(#GET{tab_wp}|table_valeur{1}|=={contributor}|oui)
+<statut>1comite</statut>
+][(#GET{tab_wp}|table_valeur{1}|=={subscriber}|oui)
+<statut>6forum</statut>
+][(#GET{tab_wp}|table_valeur{1}|=={administrator}|?{<webmestre>oui</webmestre>,<webmestre>non</webmestre>})]</BOUCLE_cherche_statut>
 <maj>#USER_REGISTERED</maj>
 <pgp></pgp>
 <htpass></htpass>
@@ -69,8 +49,7 @@ http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
 #SET{compte_users,#TOTAL_BOUCLE}
 </B_users>
 
-
-<BOUCLE_auteur( AUTEURS ){tout}{id_auteur=#SESSION{id_auteur}}>
+<BOUCLE_auteur( AUTEURS ){id_auteur=#SESSION{id_auteur}}{tout}>
 <spip_auteurs>
 <id_auteur>[(#GET{compte_users}|plus{1})]</id_auteur>
 <nom>#NOM</nom>
@@ -82,7 +61,6 @@ http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
 <pass>#PASS</pass>
 <low_sec>#LOW_SEC</low_sec>
 <statut>#STATUT</statut>
-
 <webmestre>oui</webmestre>
 <maj>#MAJ</maj>
 <pgp>#PGP</pgp>
@@ -99,14 +77,8 @@ http://www.garyc40.com/2010/04/ultimate-guide-to-roles-and-capabilities/
 <extra></extra>
 </spip_auteurs>
 </BOUCLE_auteur>
-
-
-
-<BOUCLE_users_tout( wp_users ){tout}>
-<BOUCLE_qui( wp_posts){post_author=#ID}{post_status=publish}>
+<BOUCLE_users_tout( wp_users ){tout}><BOUCLE_qui( wp_posts){post_author=#ID}{post_status=publish}>
 <spip_auteurs_articles>
 <id_auteur>#POST_AUTHOR</id_auteur>
 <id_article>#ID</id_article>
-</spip_auteurs_articles>
-</BOUCLE_qui>
-</BOUCLE_users_tout>
+</spip_auteurs_articles></BOUCLE_qui></BOUCLE_users_tout>
