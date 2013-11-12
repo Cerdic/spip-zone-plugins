@@ -91,4 +91,9 @@
 .ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
+/* Hack - les lignes 14 à 18 font que dans les pages avec un formulaire qui contient une date, la bordure du div .ui-datepicker apparait en bas de la page
+ * Ce hack n'est peut être pas la meilleure façon de régler le problème
+ */
+.ui-datepicker.ui-helper-clearfix { display: none;}
+
 ]
