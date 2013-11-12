@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_config formulaire_config_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:orr:legend_affichage_planning:></legend>
+			<ul>
+				<li class="editer_vue_pardefaut">
+					<label><:orr:label_vue_pardefaut:>:</label>
+					<div class="choix">
+						 <input type="radio" name="vue_pardefaut" id="vue_pardefaut_semaine" value="semaine"[(#ENV{vue_pardefaut}|=={semaine}|oui)checked="checked"] />
+						 <label for="vue_pardefaut_semaine"><:orr:semaine:></label>
+					</div>
+					<div class="choix">
+						 <input type="radio" name="vue_pardefaut" id="vue_pardefaut_mois" value="mois"[(#ENV{vue_pardefaut}|=={mois}|oui)checked="checked"] />
+						 <label for="vue_pardefaut_mois"><:orr:mois:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

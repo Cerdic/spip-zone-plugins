@@ -2,124 +2,136 @@
 	<div id="motcle">
 		<INCLURE{fond=inc/affichage_selection-mots}>
 	</div>
-    <div id="choixaffichage">
-        &nbsp;
-        <h3 id="semaine">semaine</h3> &nbsp;&nbsp;&nbsp;&nbsp; <h3 id="mois">mois</h3>
-    </div>
 	<div id="datepick">
 		<div id = "datepickers"></div>
 	</div>
 </div>
-
-<div id="affichage_semaine" class="cacher">
-	<div id="icones" >
-		<span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
-	</div>
-	<div id="tableau_semaine">
-		<INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
-	</div>
-</div>
-
-<div id="affichage_mois" class="cacherii">
-	<div id="icones">
-		<span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="haut" /></span>&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}" alt="haut" /></span>&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}" alt="bas" /></span>
-	</div>
-	<div id="tableau_mois">
-		<INCLURE{fond=inc/affichage_mois,ajax=tableau}>
+<br class="nettoyeur" />
+<div id="tabs">
+	<ul>
+		<li><a href="#affichage_semaine" id="onglet_semaine"><:orr:affichage_semaine:></a></li>
+		<li><a href="#affichage_mois" id="onglet_mois"><:orr:affichage_mois:></a></li>
+	</ul>
+	<div id="affichage_semaine">
+		<div class="icones" >
+			<span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="<:orr:jour_precedent:>" title="<:orr:jour_precedent:>" /></span>
+			&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:aujourdhui:>" title="<:orr:aujourdhui:>" /></span>
+			&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}"  alt="<:orr:jour_suivant:>" title="<:orr:jour_suivant:>" /></span>
+		</div>
+		<div id="tableau_semaine">
+			<INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
+		</div>
+		</div>
+	<div id="affichage_mois">
+		<div class="icones" >
+			<span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="<:orr:mois_precedent:>" title="<:orr:mois_precedent:>" /></span>
+			&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:mois_actuel:>" title="<:orr:mois_actuel:>" /></span>
+			&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}"  alt="<:orr:mois_suivant:>" title="<:orr:mois_suivant:>" /></span>
+		</div>
+		<div id="tableau_mois">
+			<INCLURE{fond=inc/affichage_mois,ajax=tableau}>
+		</div>
 	</div>
 </div>
 
 <script>
+jQuery(function() {
+	jQuery( "#tabs" ).tabs();
+	// l'option {active:N} pour ouvrir le Nième onglet lors du chargement ne semble pas fonctionner avec cette version de jQuery + UI
+	// alors on déclenche l'ouverture du bon onglet par un trigger(click) 
+	jQuery("#onglet_[(#CONFIG{orr/vue_pardefaut})]").trigger( "click" );
+});
+jQuery(document).ready(function(){
+/*
+	jQuery("#mois").bind("click",function(event){
+	jQuery("#affichage_semaine").css("display","none");
+	jQuery("#affichage_mois").css("display","block");
+	});
+	jQuery("#semaine").bind("click",function(event){
+	jQuery("#affichage_semaine").css("display","block");
+	jQuery("#affichage_mois").css("display","none");
+	});
+*/
 
-	jQuery(document).ready(function(){
-        jQuery("#mois").bind("click",function(event){
-        jQuery("#affichage_semaine").css("display","none");
-        jQuery("#affichage_mois").css("display","block");
-        });
-        jQuery("#semaine").bind("click",function(event){
-        jQuery("#affichage_semaine").css("display","block");
-        jQuery("#affichage_mois").css("display","none");
-        });
+	[(#ENV{jourj}|?{
+		jourj = "[(#ENV{jourj})]"
+		console.log(jourj),
+		dateselectionne = new Date()
+		jourj = dateselectionne.toString('yyyy-MM-dd')})];
+		console.log(jourj);
+	tabAjax();
 
-		[(#ENV{jourj}|?{
-			jourj = "[(#ENV{jourj})]"
-			console.log(jourj),
-			dateselectionne = new Date()
-			jourj = dateselectionne.toString('yyyy-MM-dd')})];
-			console.log(jourj);
+	jQuery("#datepickers").datepicker({
+		dateFormat : 'yy-mm-dd',
+		onSelect : function (dateText){
+			dateselectionne = Date.parse(dateText);
+			jourj = dateselectionne.toString('yyyy-MM-dd');
+			tabAjax()
+		},
+	});
+	jQuery("#mois_precedent").bind("click",function(event){
+		dateselectionne=Date.parse(jourj);
+		dateselectionne = dateselectionne.addMonths(-1);
+		jourj = dateselectionne.toString('yyyy-MM-dd');
 		tabAjax();
+	});
+	jQuery("#jour_precedent").bind("click",function(event){
+		dateselectionne=Date.parse(jourj);
+		dateselectionne = dateselectionne.addDays(-1);
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+		tabAjax();
+	});
 
-		jQuery("#datepickers").datepicker({
-			dateFormat : 'yy-mm-dd',
-			onSelect : function (dateText){
-				dateselectionne = Date.parse(dateText);
-				jourj = dateselectionne.toString('yyyy-MM-dd');
-				tabAjax()
+	jQuery("#jour_suivant").bind("click",function(event){
+		dateselectionne=Date.parse(jourj);
+		dateselectionne = dateselectionne.addDays(1);
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+		tabAjax();
+	});
+	jQuery("#mois_suivant").bind("click",function(event){
+		dateselectionne=Date.parse(jourj);
+		dateselectionne = dateselectionne.addMonths(1);
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+		tabAjax();
+	});
+	jQuery("#aujourdhui").bind("click",function(event){
+		dateselectionne = new Date();
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+		tabAjax();
+	});
+	jQuery("#mois_actuel").bind("click",function(event){
+		dateselectionne = new Date();
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+		tabAjax();
+	});
+	jQuery("#envoyer").click(function(){
+		var motscle = jQuery("#motscles").val().toString();
+		motscle=motscle.replace(",",":");
+			ajaxReload('tableau', {
+				args:{
+					motcle:motscle,
+				},
+			});
+		return false;
+	});
+
+	jQuery("#tous").click(function(){
+		var motscle = "";
+		console.log(motscle);
+			ajaxReload('tableau', {
+				args:{
+					motcle:motscle,
+				},
+			});
+		return false;
+		});
+	});
+
+	function tabAjax(){
+		ajaxReload('tableau', {
+			args:{
+				jourj:jourj,
 			},
 		});
-		jQuery("#mois_precedent").bind("click",function(event){
-			dateselectionne=Date.parse(jourj);
-			dateselectionne = dateselectionne.addMonths(-1);
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-		jQuery("#jour_precedent").bind("click",function(event){
-			dateselectionne=Date.parse(jourj);
-			dateselectionne = dateselectionne.addDays(-1);
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-
-		jQuery("#jour_suivant").bind("click",function(event){
-			dateselectionne=Date.parse(jourj);
-			dateselectionne = dateselectionne.addDays(1);
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-		jQuery("#mois_suivant").bind("click",function(event){
-			dateselectionne=Date.parse(jourj);
-			dateselectionne = dateselectionne.addMonths(1);
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-		jQuery("#aujourdhui").bind("click",function(event){
-			dateselectionne = new Date();
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-		jQuery("#mois_actuel").bind("click",function(event){
-			dateselectionne = new Date();
-			jourj = dateselectionne.toString('yyyy-MM-dd');
-			tabAjax();
-		});
-		jQuery("#envoyer").click(function(){
-		    var motscle = jQuery("#motscles").val().toString();
-		    motscle=motscle.replace(",",":");
-			    ajaxReload('tableau', {
-					args:{
-						motcle:motscle,
-					},
-			    });
-		    return false;
-        });
-
-        jQuery("#tous").click(function(){
-		    var motscle = "";
-		    console.log(motscle);
-			    ajaxReload('tableau', {
-				    args:{
-					    motcle:motscle,
-				    },
-			    });
-		    return false;
-            });
-	    });
-
-        function tabAjax(){
-		    ajaxReload('tableau', {
-				args:{
-					jourj:jourj,
-				},
-		    });
-        }
+	}
 </script>

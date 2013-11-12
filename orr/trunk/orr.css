@@ -1,6 +1,13 @@
-/* BLOLC : partie haute */
+/* elements generaux */
+.icones img { cursor: pointer; }
+#orr { width: 100%; }
+#tabs { width: 100%; }
+#tableau_mois, #tableau_semaine { font-size: 0.95em; }
+
+/* BLOC : partie haute */
 div#choixaffichage h3#semaine, div#choixaffichage h3#mois{
     display:inline-block;
+    cursor: pointer;
 }
 #motscles, #motcle{
     width : 150px;
@@ -13,7 +20,7 @@ div#choixaffichage h3#semaine, div#choixaffichage h3#mois{
     padding-right:50px;
 }
 #datepick{
-	width : 200px;
+/*	width : 200px;*/
 	float:right;
 	}
 
@@ -62,7 +69,7 @@ table#semaine {
 	margin-left: -20% ;
 	}
 #tableau_orr th, #tableau_orr td{
-	padding : 5px;
+	padding : 0.5em 1.2em; text-align: center;
 }
 
 td#jour4, th#jour4th{

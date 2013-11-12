@@ -8,6 +8,15 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Ajout du plugin jquery-ui tabs
+ * 
+ */
+function orr_jqueryui_plugins($scripts){
+	$scripts[] = "jquery.ui.tabs";
+	return $scripts;
+}
+
+/**
  * Ajout de contenu sur certaines pages,
  * notamment des formulaires de liaisons entre objets
  */

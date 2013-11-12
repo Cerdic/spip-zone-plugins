@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'ajouter_lien_orr_autorisation' => 'Ajouter le lien de cette autorisation',
 	'ajouter_lien_orr_reservation' => 'Ajouter cette reservation',
 	'ajouter_lien_orr_ressource' => 'Ajouter cette ressource',
+	'affichage_semaine' => 'Vue semaine',
+	'affichage_mois' => 'Vue mois',
+	'aujourdhui' => 'Aujourd\'hui',
 	
 	// C
 	'couleur' => 'Couleur',
@@ -26,6 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_orr_date_fin' => 'Date de fin de la réservation',
 	'explication_orr_reservation_nom' => 'Nom de votre réservation (ex : réunion CA)',
 	'explication_orr_ressource_nom' => 'Nom de la ressource',
+	
+	// G 
+	'gerer_autorisations' => 'Gérer les autorisations',
 
     // I
     'info_aucun_orr_autorisation' => 'Aucune autorisation',
@@ -46,6 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_orr_ressources' => '@nb@ ressources',
 	'info_orr_ressources_auteur' => 'Les ressources de cet auteur',
 	'id_autorisation_incorrecte' => 'l\'identifiant de cette autorisation est incorrect',
+	
+	// J
+	'jour_precedent' => 'Jour précédent',
+	'jour_suivant' => 'Jour suivant',
 
     // L
     'label_orr_autorisation_nom'  => 'Nom de l\'autorisation',
@@ -54,9 +64,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_date_fin' => 'Date de fin',
 	'label_orr_reservation_nom' => 'Nom de la réservation',
 	'label_orr_ressource_nom' => 'Nom de la ressource',
+	'legend_affichage_planning' => 'Affichage du planning',
+	'label_vue_pardefaut' => 'Choix de la vue par défaut',
 	
 	// M
 	'modifier' => 'Modifier',
+	'mois_precedent' => 'Mois précédent',
+	'mois_suivant' => 'Mois suivant',
+	'mois_actuel' => 'Mois en cours',
+	'mois' => 'Mois',
 
     // N
     'nom_orr_autorisation_ressource' => 'Ressources associées',
@@ -77,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',
 	'suppression_autorisation_impossible_ressources_liees' => 'Cette autorisation est liée à des ressources: vous ne pouvez pas la supprimer',
 	'supprimer' => 'supprimer',
+	'semaine' => 'Semaine',
 
     // T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
@@ -100,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_autorisations' => 'Autorisations',
 	'titre_types_autorisations' => 'Les types d\'autorisations',
 	'type' => 'Type',
+	'titre_page_configurer' => 'Configurer ORR',
 
     // V
     'valeur_autorisation' => 'Droits',
