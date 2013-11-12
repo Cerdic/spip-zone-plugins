@@ -1,12 +1,10 @@
 #!/usr/bin/php
 <?php
-
 $activer = $argv;
 array_shift($activer);
+chdir($activer[count($activer)-1]);
+array_pop($activer);
 
-chdir('../');
-if (!is_dir('ecrire/') AND is_dir('../ecrire/')) chdir('../');
-chdir('ecrire/');
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', '');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
 

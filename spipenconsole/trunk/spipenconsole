@@ -3,10 +3,24 @@ VERSION=1
 SANS_ARGS=0 
 E_ERREUROPTION=65
 
-# si en appelle spipenconsole sans argument, alors affiche la liste des plugins
+#Récupération des differents chemins
+if [[ "${PWD##*/}" = "plugins" ]]; then
+    repertoire_executables=${PWD}/spipenconsole
+    repertoire_plugin=${PWD}
+    repertoire_racine=${PWD%/plugins}
+elif [[ "${PWD##*/}" = "spipenconsole" ]]; then
+    repertoire_executables=${PWD}
+    repertoire_plugin=${PWD%/*}
+    repertoire_racine=${PWD%/plugins/spipenconsole}
+else
+    repertoire_executables=${PWD}/plugins/spipenconsole
+    repertoire_plugin=${PWD}/plugins
+    repertoire_racine=${PWD}
+fi
+
 if [ $# -eq "$SANS_ARGS" ]  # Script appelé sans argument?
 then
-    ./lister_plugins.php
+    $repertoire_executables/lister_plugins.php "$repertoire_executables"
 fi  
 
 function F_aide(){
@@ -17,9 +31,15 @@ echo "-h : help"
 echo "-v : version"
 echo "-l : liste tous les plugins, s'il y a un astérisque \"*\", le plugin est activé "
 echo "-a : activer un ou des plugins séparés par une \",\" : saisie,yaml"
-echo "-d : désactiver un ou des plugins séparés par une \",\" : saisie,yaml"
-echo "-t : svn checkout du plugin, on donne le nom du plugin (celui de la zone) et son repertoire ; trunk, branches, ou rien"
+echo "-d : désactiver un ou des plugins séparés par une \",\" : saisie,yaml, l'argument --all désactive tous les plugins."
+echo "-t : svn checkout du plugin, on donne le nom du plugin (celui de la zone) et son repertoire : trunk, branches, ou rien"
 echo "-f : svn checkout des plugins contenus dans le fichier telecharger.csv : colonne1=nom_plugin,colonne2=repertoire"
+echo ""
+echo "Il est possible de faire un lien symbolique de cet exécutable soit :"
+echo "  - vers le répertoire plugins."
+echo "  - vers le répertoire racine." 
+echo "avec la commande  'ln -s plugins/spipenconsole/spipenconsole .'(si vous etes dans le répertoire racine)"
+
 }
 
 
@@ -33,35 +53,32 @@ do
             F_aide
             ;;
         l)
-            ./lister_plugins.php
+            $repertoire_executables/lister_plugins.php "$repertoire_executables"
             ;;
         a)
             liste_plugins_activer=${OPTARG//,/" "}
-            ./activer_plugin.php $liste_plugins_activer
-            ./lister_plugins.php
+            $repertoire_executables/activer_plugin.php $liste_plugins_activer "$repertoire_racine/ecrire"
+            $repertoire_executables/lister_plugins.php "$repertoire_executables"
             ;;
         d)
             liste_plugins_desactiver=${OPTARG//,/" "}
-            ./desactiver_plugin.php $liste_plugins_desactiver
-            ./lister_plugins.php
+            $repertoire_executables/desactiver_plugin.php $liste_plugins_desactiver "$repertoire_racine/ecrire"
+            $repertoire_executables/lister_plugins.php "$repertoire_executables"
             ;;
         t)
             OLDIFS="$IFS"
             IFS=,
             set $OPTARG
             IFS="$OLDIFS"; unset $OLDIFS
-            cd ..
-            svn checkout svn://zone.spip.org/spip-zone/_plugins_/${1}/${2} ${1}
-            cd spipenconsole
+            svn checkout svn://zone.spip.org/spip-zone/_plugins_/${1}/${2} $repertoire_plugin/${1}
             ;;
         f)
-            cd ..
             while IFS=, read nom dossier
             do  
-                svn checkout svn://zone.spip.org/spip-zone/_plugins_/${nom}/${dossier} ${nom}
-            done < ./spipenconsole/telecharger.csv
-            cd spipenconsole
-            ./lister_plugins.php
+                svn checkout svn://zone.spip.org/spip-zone/_plugins_/${nom}/${dossier} $repertoire_plugin/${nom}
+            done < $repertoire_executables/telecharger.csv
+            #cd $repertoire_plugin/spipenconsole
+            $repertoire_executables/lister_plugins.php "$repertoire_executables"
             ;;
     esac
 done

@@ -2,10 +2,9 @@
 <?php
 $desactiver = $argv;
 array_shift($desactiver);
+chdir($desactiver[count($desactiver)-1]);
+array_pop($desactiver);
 
-chdir('../');
-if (!is_dir('ecrire/') AND is_dir('../ecrire/')) chdir('../');
-chdir('ecrire/');
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', '');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
 

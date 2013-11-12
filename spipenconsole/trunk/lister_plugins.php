@@ -1,13 +1,14 @@
 #!/usr/bin/php
 
 <?php
-
+chdir($argv[1]);
 chdir('../../ecrire/');
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', '');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
 
 $nom_prefix_actifs = array();
 $plugins_actifs = unserialize($GLOBALS['meta']['plugin']);
+
 //recuperation d'un tableau de tous les prefix des plugins actifs
 foreach ($plugins_actifs as $prefix => $tab) {
     $nom_prefix_actifs[]=strtolower($prefix);
