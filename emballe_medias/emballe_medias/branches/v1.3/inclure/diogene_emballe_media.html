@@ -5,13 +5,17 @@
 <BOUCLE_diogene(DIOGENES){id_diogene}>
 	[(#SET{id_rubrique,[(#ENV{id_rubrique,#ID_SECTEUR})]})]
 	[(#REM)
-		Si on ne veut pas publier à la racine du secteur media, on choisi la premiere rubrique du secteur par défaut
+		Si on ne veut pas publier à la racine du secteur media, on choisit la premiere rubrique du secteur par défaut, ou si configurée, la rubrique de publication par défaut du diogène
 	]
 	<BOUCLE_autoriser_modifier_creer(CONDITION){si #ENV{id_article}|ou{#AUTORISER{creerdans,diogene,#ID_DIOGENE}}|oui}>
 		<BOUCLE_si_pas_secteur(CONDITION){si #GET{id_rubrique}|et{#GET{id_rubrique}|=={#ID_SECTEUR}}|et{#CONFIG{emballe_medias/fichiers/publier_dans_secteur,off}|!={on}}|oui}>
-			<BOUCLE_rubrique_defaut(RUBRIQUES){id_parent=#GET{id_rubrique}}{0,1}>
+			<BOUCLE_rubrique_defaut(RUBRIQUES){id_rubrique=#ID_RUBRIQUE_DEFAUT}{id_secteur=#GET{id_rubrique}}{0,1}>
 			[(#SET{id_rubrique,#ID_RUBRIQUE})]
 			</BOUCLE_rubrique_defaut>
+				<BOUCLE_premiere_rubrique(RUBRIQUES){id_parent=#GET{id_rubrique}}{0,1}>
+				[(#SET{id_rubrique,#ID_RUBRIQUE})]
+				</BOUCLE_premiere_rubrique>
+			<//B_rubrique_defaut>
 		</BOUCLE_si_pas_secteur>
 		[(#REM)
 			On vérifie tout d'abord que l'on ait bien les droits de création dans ce secteur
