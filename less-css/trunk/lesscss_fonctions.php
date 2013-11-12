@@ -27,6 +27,16 @@ function lesscss_compile($style, $contexte = array()){
 
 	try {
 		$out = $less->parse($style);
+
+		if (count($files = array_keys($less->allParsedFiles()))){
+			$l = strlen(_ROOT_RACINE);
+			foreach($files as $k=>$file){
+				if (strncmp($file,_ROOT_RACINE,$l)==0){
+					$files[$k] = substr($file,$l);
+				}
+			}
+			$out = "/*\n#@".implode("\n#@",$files)."\n*/\n" . $out;
+		}
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
