@@ -55,30 +55,32 @@ function quickvote_resultat($id_quickvote) {
 
 
 //
-//  CVT pour traiter le vote
+//  CVT pour traiter le vote    //
 //
 /**
  * Charger 
- * 
+ *    $id_quickvote:
+ *    $skip_vote : true: on passe le formulaire 
  */
 
-function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote=false){      
+function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non'){  
     $valeurs = "";
     $id_quickvote = intval($id_quickvote);    
     $valeurs['id'] = $id_quickvote;
     $ip	= $GLOBALS['ip'];
-    
+  
     // est ce que le sondage est cloturé ?
-    if ($row = sql_fetsel("actif", "spip_quickvotes", "id_quickvote = $id_quickvote AND actif = 0") || $skip_vote){
+    if (($row = sql_fetsel("actif", "spip_quickvotes", "id_quickvote = $id_quickvote AND actif = 0")) || ($skip_vote=='oui')){
   	        $valeurs['editable'] = false;             
             $valeurs['message_ok'] = quickvote_resultat($id_quickvote); 
-            $valeurs['skip_vote'] = $skip_vote;      
+            $valeurs['skip_vote'] = $skip_vote;                 
     }     
     // deja vote
     else if ($row = sql_fetsel("ip", "spip_quickvotes_votes", "id_quickvote = $id_quickvote AND ip='$ip'")){
   	      $valeurs['editable'] = false; 
-          $valeurs['message_ok'] = quickvote_resultat($id_quickvote);  
+          $valeurs['message_ok'] = quickvote_resultat($id_quickvote);           
     } 
+    
 
     return $valeurs;
 } 
@@ -110,7 +112,7 @@ function formulaires_quickvote_traiter_dist($id_quickvote){
 	   include_spip('inc/invalideur');
 	   suivre_invalideur("id='id_quickvote/$id_quickvote'");
      
-     // SQL        
+     // sql     
      $requete_sql = array();
      $requete_sql['id_quickvote']  = $id_quickvote;
      $requete_sql['reponse'] = _request('quickvote');
