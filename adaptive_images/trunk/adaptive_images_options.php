@@ -341,7 +341,7 @@ function adaptive_images_affichage_final($texte){
 		if (strpos($texte,"adapt-img-wrapper")!==false){
 			// les styles communs a toutes les images responsive en cours de chargement
 			$ins = "<style type='text/css'>"."img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
-			."span.adapt-img-wrapper,span.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% 100%;background-size:100%;}"
+			."span.adapt-img-wrapper,span.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% 100%;background-size:100%;background-repeat:none;}"
 			."span.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
 			."</style>\n";
 			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
