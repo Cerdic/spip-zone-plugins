@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/adaptive_images-32.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4458"
 >
 
 	<nom>Adaptive Images</nom>
