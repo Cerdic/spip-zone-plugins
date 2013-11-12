@@ -55,12 +55,12 @@ function quickvote_resultat($id_quickvote) {
 
 
 //
-//  CVT pour traiter le vote    //
+//  CVT pour traiter le vote   
 //
 /**
  * Charger 
- *    $id_quickvote:
- *    $skip_vote : true: on passe le formulaire 
+ *    
+ *    
  */
 
 function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non'){  
