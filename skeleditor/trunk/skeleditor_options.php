@@ -102,7 +102,6 @@ function skeleditor_extraire_css($texte){
 			else{
 				$file = preg_replace(",[?]\d+$,","",$src);
 				if (strncmp($file,_DIR_VAR,strlen(_DIR_VAR))==0){
-					var_dump($file);
 					lire_fichier($file,$c);
 					if (preg_match(",^\/\*\s*(#@.*)\s*\*\/,Uims",$c,$m)){
 						$inc = explode("#@",$m[1]);
