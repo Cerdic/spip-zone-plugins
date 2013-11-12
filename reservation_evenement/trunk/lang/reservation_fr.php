@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
 	'texte_voir' => 'voir',
-    'titre_envoi_differe' => 'Mode différe active',	
+	'titre_envoi_differe' => 'Mode différe active',
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
 
