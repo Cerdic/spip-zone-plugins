@@ -106,6 +106,11 @@ function formulaires_quickvote_verifier_dist($id_quickvote){
 function formulaires_quickvote_traiter_dist($id_quickvote){
 	   // Effectuer des traitements
      
+     	// invalider les caches
+	   include_spip('inc/invalideur');
+	   suivre_invalideur("id='id_quickvote/$id_quickvote'");
+     
+     // SQL        
      $requete_sql = array();
      $requete_sql['id_quickvote']  = $id_quickvote;
      $requete_sql['reponse'] = _request('quickvote');
