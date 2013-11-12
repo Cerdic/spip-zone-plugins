@@ -60,6 +60,7 @@ function diogene_declarer_tables_objets_sql($tables){
 			"titre"	=> "text DEFAULT '' NOT NULL",
 			"objet" => "varchar(25) DEFAULT '' NOT NULL",
 			"id_secteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"id_rubrique_defaut"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"champs_caches"	=> "text DEFAULT '' NOT NULL",
 			"champs_ajoutes"	=> "text DEFAULT '' NOT NULL",
 			"type" => "varchar(25) DEFAULT '' NOT NULL",
@@ -72,11 +73,12 @@ function diogene_declarer_tables_objets_sql($tables){
 			"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 		),
-		'champs_editables' => array('titre', 'objet', 'id_secteur', 'champs_caches','champs_ajoutes', 'type', 'description', 'statut_auteur', 'statut_auteur_publier','options_complements','menu','nombre_attente','id_auteur'),
+		'champs_editables' => array('titre', 'objet', 'id_secteur', 'id_rubrique_defaut', 'champs_caches','champs_ajoutes', 'type', 'description', 'statut_auteur', 'statut_auteur_publier','options_complements','menu','nombre_attente','id_auteur'),
 		'key' => array(
 			"PRIMARY KEY"	=> "id_diogene",
 			"KEY id_auteur"	=> "id_auteur",
 			"KEY id_secteur" => "id_secteur",
+			"KEY id_secteur" => "id_rubrique_defaut",
 			"KEY objet"	=> "objet",
 			"KEY type"	=> "type"
 		),
@@ -87,7 +89,7 @@ function diogene_declarer_tables_objets_sql($tables){
 		'rechercher_champs' => array(
 		  'titre' => 8, 'description' => 2, 'objet' => 1, 'type' => 1
 		),
-		'champs_versionnes' => array('id_secteur','champs_caches','champs_ajoutes','statut_auteur','statut_auteur_publier','options_complements','menu','id_auteur', 'titre', 'description', 'nombre_attente','objet', 'type'),
+		'champs_versionnes' => array('id_secteur','id_rubrique_defaut','champs_caches','champs_ajoutes','statut_auteur','statut_auteur_publier','options_complements','menu','id_auteur', 'titre', 'description', 'nombre_attente','objet', 'type'),
 	);
 	
 	// jointures sur les diogenes pour tous les objets

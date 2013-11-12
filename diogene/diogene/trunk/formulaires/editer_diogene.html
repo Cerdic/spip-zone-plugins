@@ -33,6 +33,10 @@
 				cacher_option_intro=oui,
 				label=<:diogene:label_limiter_secteur:>})]]
 			
+			[(#SAISIE{selecteur_rubrique,rubrique_defaut,
+				label=<:diogene:label_rubrique_par_defaut:>,
+				multiple=non})]
+
 			[(#ENV{objet}|in_array{#LISTE{article,emballe_media}}|oui)
 			[(#SAISIE{input,nombre_attente,
 				label=<:diogene:label_nombre_attente:>,

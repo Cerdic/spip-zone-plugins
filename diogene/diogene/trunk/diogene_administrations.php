@@ -46,6 +46,9 @@ function diogene_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.3.6'] = array(
 		array('maj_tables',array('spip_diogenes'))
 	);
+	$maj['0.3.7'] = array(
+		array('maj_tables',array('spip_diogenes'))
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
