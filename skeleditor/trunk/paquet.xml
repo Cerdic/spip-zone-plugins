@@ -1,8 +1,8 @@
 <paquet
 	prefix="skeleditor"
 	categorie="outil"
-	version="2.7.5"
-	etat="test"
+	version="2.7.6"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/skeleditor-32.png"
 	documentation="http://www.spip-contrib.net/SkelEditor-2-0"

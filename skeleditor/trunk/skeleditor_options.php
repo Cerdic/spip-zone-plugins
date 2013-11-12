@@ -99,8 +99,24 @@ function skeleditor_extraire_css($texte){
 			if ($r)
 				$css[$s] = explode('&',
 					str_replace('&amp;', '&', $r[2]), 2);
-			else
-				$css[$s] = preg_replace(",[?]\d+$,","",$src);
+			else{
+				$file = preg_replace(",[?]\d+$,","",$src);
+				if (strncmp($file,_DIR_VAR,strlen(_DIR_VAR))==0){
+					var_dump($file);
+					lire_fichier($file,$c);
+					if (preg_match(",^\/\*\s*(#@.*)\s*\*\/,Uims",$c,$m)){
+						$inc = explode("#@",$m[1]);
+						$inc = array_map('trim',$inc);
+						$inc = array_filter($inc);
+						foreach($inc as $i){
+							if (!in_array($i,$css))
+								$css["$s:$i"] = $i;
+						}
+					}
+				}
+				else
+					$css[$s] = $file;
+			}
 		}
 	}
 	return $css;
