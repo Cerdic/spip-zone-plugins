@@ -3,7 +3,7 @@
 	<slogan>Un livre d'or pour votre site.</slogan>
 	<auteur>[cpaulus->cpaulus@quesaco.org]</auteur>
 	<licence>GNU</licence>
-	<version>1.03.0</version>
+	<version>1.3.0</version>
 	<version_base>0.01</version_base>
 	<icon>images/lido-64.png</icon>
 	<etat>stable</etat>
