@@ -3,3 +3,6 @@
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+.chosen-drop .chosen-results .create-option a {
+  color: red;
+}
