@@ -4,9 +4,10 @@
 	<auteur>
 Pierre Andrews (mortimer.pa@free.fr)
 _ J&agrave;nos T&ograve;th.
+Anne-lise Martenot (elastick.net)
 	</auteur>
-	<licence>GPL 3 - &#169; 2006-2010</licence>
-	<version>0.1</version>
+	<licence>GPL 3 - &#169; 2006-2013</licence>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description> cf http://www.dynamicdrive.com/dynamicindex4/featuredzoomer.htm
 	  Ce plugin ajoute un mod&#232;le pour afficher une loupe et offrir un agrandissement localis&#233; : <code>&lt;img|zoom&gt;</code>.
