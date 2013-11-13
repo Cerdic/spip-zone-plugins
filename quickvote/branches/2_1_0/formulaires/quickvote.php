@@ -85,7 +85,7 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masq
           $valeurs['message_ok'] = quickvote_resultat($id_quickvote);           
     } 
     
-    $valeurs['time_invalidateur'] = time().'-'.rand();  // on passe une valeur pour invalider systematiquement le cache
+    $valeurs['time_invalidateur']=time().'-'.rand();  // on passe une valeur pour invalider systematiquement le cache
     return $valeurs;
 } 
 
@@ -112,16 +112,20 @@ function formulaires_quickvote_verifier_dist($id_quickvote){
 function formulaires_quickvote_traiter_dist($id_quickvote){
 	   // Effectuer des traitements
      
-     	// invalider les caches
+     	// invalider les caches  (utile ?)
 	   include_spip('inc/invalideur');
 	   suivre_invalideur("id='id_quickvote/$id_quickvote'");
      
-     // sql     
-     $requete_sql = array();
-     $requete_sql['id_quickvote']  = $id_quickvote;
-     $requete_sql['reponse'] = _request('quickvote');
-     $requete_sql['ip']	= $GLOBALS['ip'];
-     $n = sql_insertq('spip_quickvotes_votes', $requete_sql);
+     // SQL
+     $ip = $GLOBALS['ip'];
+     // sécurité le formulaire peut etre chargé à plusieurs endroits à la fois: on n'enregistre que le 1er vote de cette IP, les autres votes sont ignorés
+     if (!$row = sql_fetsel("ip", "spip_quickvotes_votes", "id_quickvote = $id_quickvote AND ip='$ip'"))  { 
+           $requete_sql = array();
+           $requete_sql['id_quickvote']  = $id_quickvote;
+           $requete_sql['reponse'] = _request('quickvote');
+           $requete_sql['ip']	= $ip;
+           $n = sql_insertq('spip_quickvotes_votes', $requete_sql);
+    }
  
     // Valeurs de retours
     return array(
