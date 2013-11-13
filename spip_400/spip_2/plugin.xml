@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SPIP 400</nom>
-	<version>0.21</version>
+	<version>0.21.0</version>
 	<etat>stable</etat>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<licence>&#169; 2011 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
