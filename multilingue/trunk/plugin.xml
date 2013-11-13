@@ -30,7 +30,7 @@
 	<prefix>multilingue</prefix>
 	<icon>prive/themes/spip/images/multilingue-64.png</icon>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />	
 	<necessite id="tradrub" version="[2.1.1;]" />	
 	<necessite id="languepreferee" version="[0.4.2;]" />	
