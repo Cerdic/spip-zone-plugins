@@ -10,18 +10,31 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_adapter_image_charger_dist($id_document,$mode){
 	$mode = preg_replace(',\W,','',$mode);
 	include_spip('inc/documents');
-	$valeurs = sql_fetsel('id_document,mode,extension','spip_documents','id_document='.intval($id_document));
-	if (!$valeurs)
+	$doc = sql_fetsel('id_document,mode,extension,largeur,hauteur','spip_documents','id_document='.intval($id_document));
+	if (!$doc)
 		return array('editable'=>false,'id'=>$id_document);
 
-	$valeurs['id'] = $id_document;
-	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
-	$valeurs['mode'] = $mode; // pour les id dans le dom
+	$valeurs = array(
+		'id_document' => $doc['id_document'],
+		'extension' => $doc['extension'],
+		'id' => $id_document,
+		'_hidden' => "<input name='id_document' value='$id_document' type='hidden' />",
+		'mode' => $mode, // pour les id dans le dom
+	);
 	$annexe = adaptive_images_variante($id_document,$mode);
-	if ($annexe)
+	if ($annexe){
 		$valeurs['id_annexe'] = $annexe['id_document'];
-	if ($annexe)
 		$annexe['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($annexe['extension']));
+
+		// verifier que les proportions de la version mobile et de la version desktop sont les memes
+		$h2 = intval(round($annexe['largeur']*$doc['hauteur']/$doc['largeur']));
+		if (abs(intval($h2-$annexe['hauteur']))>1){
+			$size1 = $annexe['largeur']." x {$h2} pixels";
+			$w2 = intval(round($annexe['hauteur']*$doc['largeur']/$doc['hauteur']));
+			$size2 = "{$w2} x ".$annexe['hauteur']." pixels";
+			$valeurs['_warning_ratio'] = _T('adaptive_images:warning_ratio_mobileview',array('size1'=>$size1,'size2'=>$size2));
+		}
+	}
 	$valeurs['annexe'] = $annexe;
 	$valeurs['_pipeline'] = array('editer_contenu_objet',array('type'=>'adapter_image','mode'=>$mode,'id'=>$id_document));
 

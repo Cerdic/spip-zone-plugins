@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fichier_mobileview' => 'Version mobile',
 	'aucun_mobileview' => 'Aucune version mobile.<br/><small>Vous pouvez fournir une version recadrée pour l\'affichage sur les petits écrans (<@width@px de large).
 L\'image doit faire au moins @width_hr@px de large.</small>',
-	'erreur_largeur_mobileview' => 'Cette image est trop petite. La version mobile doit être plus large que @width@px.'
+	'erreur_largeur_mobileview' => 'Cette image est trop petite. La version mobile doit être plus large que @width@px.',
+	'warning_ratio_mobileview' => 'Attention, cette variante n\'a pas les mêmes proportions que l\'image originale. Taille attendue : <b>@size1@</b> ou <b>@size2@</b>',
 );
 
 ?>

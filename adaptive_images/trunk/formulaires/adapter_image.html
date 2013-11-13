@@ -1,8 +1,9 @@
-<BOUCLE_logo(DOCUMENTS){id_document=#ID_ANNEXE}{mode?}{statut?}>#SET{logo,#LOGO_DOCUMENT}</BOUCLE_logo>
+<BOUCLE_logo(DOCUMENTS){id_document=#ID_ANNEXE}{mode?}{statut?}>#SET{logo,#LOGO_DOCUMENT}#SET{url,#URL_DOCUMENT}</BOUCLE_logo>
 <div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{mode}' id='formulaire_#FORM-#ENV{mode}-#ENV{id,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})	
+	[<p class="notice">(#ENV*{_warning_ratio})</p>]
+	[(#ENV{editable})
 	<form action="#ENV{action}#formulaire_annexer_document-#ENV{mode}-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
@@ -10,7 +11,7 @@
 				<label for="#ENV{mode}">[(#VAL{'adaptive_images:label_fichier_'}|concat{#ENV{mode}}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
-				[#GET{logo}
+				[<a href="#GET{url}">#GET{logo}</a>
 				<div class="fichier">(#ENV*{annexe}|table_valeur{fichier})</div>
 				<div class="infos">
 		  	[<span class='type'>(#ENV{annexe}|table_valeur{type_document}) - </span>]
