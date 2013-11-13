@@ -63,17 +63,21 @@ function quickvote_resultat($id_quickvote) {
  *    
  */
 
-function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non'){  
+function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masquer_question='non'){  
     $valeurs = "";
     $id_quickvote = intval($id_quickvote);    
     $valeurs['id'] = $id_quickvote;
     $ip	= $GLOBALS['ip'];
+    
+    // masque question ?
+    if ($masquer_question=='oui') {
+           $valeurs['masquer_question'] = 'oui'; 
+    }
   
     // est ce que le sondage est cloturé ?
     if (($row = sql_fetsel("actif", "spip_quickvotes", "id_quickvote = $id_quickvote AND actif = 0")) || ($skip_vote=='oui')){
   	        $valeurs['editable'] = false;             
-            $valeurs['message_ok'] = quickvote_resultat($id_quickvote); 
-            $valeurs['skip_vote'] = $skip_vote;                 
+            $valeurs['message_ok'] = quickvote_resultat($id_quickvote);
     }     
     // deja vote
     else if ($row = sql_fetsel("ip", "spip_quickvotes_votes", "id_quickvote = $id_quickvote AND ip='$ip'")){
@@ -81,7 +85,7 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non'){
           $valeurs['message_ok'] = quickvote_resultat($id_quickvote);           
     } 
     
-
+    // $valeurs['debug']=time();
     return $valeurs;
 } 
 
@@ -121,7 +125,7 @@ function formulaires_quickvote_traiter_dist($id_quickvote){
  
     // Valeurs de retours
     return array(
-       'message_ok' => quickvote_resultat($id_quickvote), // ou bien
+       'message_ok' => quickvote_resultat($id_quickvote), 
        'editable' => false
     );   
 }
