@@ -20,8 +20,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function lesscss_compile($style, $contexte = array()){
 	require_once 'lessphp/lessc.inc.php';
 
+	if (!class_exists("SPIPlessc")){
+		class SPIPlessc extends lessc {
+			protected function addParsedFile($file) {
+				$this->allParsedFiles[$file] = filemtime($file);
+			}
+		}
+	}
+
 	// le compilateur lessc compile le contenu
-	$less = new lessc();
+	$less = new SPIPlessc();
 	// lui transmettre le path qu'il utilise pour les @import
 	$less->importDir = _chemin();
 
