@@ -80,6 +80,55 @@ function action_adapt_img_dist(){
 	exit;
 }
 
+
+/** Filtre  ***********************************************************************************************************/
+
+
+/**
+ * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
+ * [(#TEXTE|adaptive_images{1024})]
+ * @param string $texte
+ * @param null|int $max_width_1x
+ * @return mixed
+ */
+function adaptive_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
+	static $bkpts = array();
+	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
+		$b = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
+		while (count($b) AND end($b)>$max_width_1x) array_pop($b);
+		// la largeur maxi affichee
+		if (!count($b) OR end($b)<$max_width_1x) $b[] = $max_width_1x;
+		$bkpts[$max_width_1x] = $b;
+	}
+	$bkpt = (isset($bkpts[$max_width_1x])?$bkpts[$max_width_1x]:null);
+
+	$replace = array();
+	preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
+	if (count($matches)){
+		foreach($matches as $m){
+			$ri = adaptive_images_process_img($m[0], $bkpt, $max_width_1x);
+			if ($ri!==$m[0]){
+				$replace[$m[0]] = $ri;
+			}
+		}
+		if (count($replace)){
+			$texte = str_replace(array_keys($replace),array_values($replace),$texte);
+		}
+	}
+
+	return $texte;
+}
+
+/**
+ * nommage alternatif
+ * @param $texte
+ * @param int $max_width_1x
+ * @return mixed
+ */
+function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
+	return adaptive_images($texte,$max_width_1x);
+}
+
 /** Pipelines  ********************************************************************************************************/
 
 /**
@@ -138,6 +187,85 @@ function adaptive_images_variante($id_document,$mode){
 	return sql_fetsel('*',
 		'spip_documents as d JOIN spip_documents_liens as L on L.id_document=d.id_document',
 		"L.objet='document' AND L.id_objet=".intval($id_document)." AND d.mode=".sql_quote($mode));
+}
+
+
+
+/**
+ * Traiter les images de la page et les passer en responsive
+ * si besoin
+ *
+ * @param $texte
+ * @return mixed
+ */
+function adaptive_images_affichage_final($texte){
+	$adaptive_images_ins = false;
+	if ($GLOBALS['html']){
+		#spip_timer();
+		$texte = adaptative_images($texte);
+		if (strpos($texte,"adapt-img-wrapper")!==false){
+			// les styles communs a toutes les images responsive en cours de chargement
+			$ins = "<style type='text/css'>"."img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
+			."span.adapt-img-wrapper,span.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% auto;background-size:100% auto;background-repeat:no-repeat;line-height:1px;}"
+			."span.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
+			."</style>\n";
+			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
+			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
+			$async_style = "html img.adapt-img{opacity:0.01}html span.adapt-img-wrapper:after{display:none;}";
+			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
+			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
+				."function adaptImgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
+				."(function(){function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
+				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
+				// Android 2 media-queries bad support workaround
+				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
+				// 2/ muliple rules = multiples downloads : put .aihrdpi on html to avoid lowres image loading if dpi>=1.5
+				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
+				."if (android2) {"
+				."hAC('avp800');setTimeout(function(){hRC('avp800')},1000);"
+				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('aihrdpi');"
+				."}\n"
+				// slowConnection detection
+				."var slowConnection = false;"
+				."if (typeof window.performance!==\"undefined\"){"
+				."var perfData = window.performance.timing;"
+				."var speed = ~~($length/(perfData.responseEnd - perfData.connectStart));" // approx, *1000/1024 to be exact
+				//."console.log(speed);"
+				."slowConnection = (speed && speed<50);" // speed n'est pas seulement une bande passante car prend en compte la latence de connexion initiale
+				."}else{"
+				//https://github.com/Modernizr/Modernizr/blob/master/feature-detects/network/connection.js
+				."var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;"
+				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
+				."}"
+				//."console.log(slowConnection);"
+				."if(slowConnection) {hAC('aislow');hRC('aihrdpi');}\n"
+				// injecter un style async apres chargement des images
+			  // pour masquer les couches superieures (fallback et chargement)
+				."var adaptImg_onload = function(){"
+			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
+			  ."sa.innerHTML = '$async_style';"
+			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
+				// http://www.webreference.com/programming/javascript/onloads/index.html
+				."function addLoadEvent(func){var oldol=window.onload;if (typeof oldol != 'function'){window.onload=func;}else{window.onload=function(){if (oldol){oldol();} func();}}}"
+				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptImg_onload)}); else addLoadEvent(adaptImg_onload);"
+			  ."})();/*]]>*/</script>\n";
+			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
+			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
+				$ins .= "<noscript><style type='text/css'>.png img.adapt-img,.gif img.adapt-img{opacity:0.01}span.adapt-img-wrapper.png:after,span.adapt-img-wrapper.gif:after{display:none;}</style></noscript>";
+			// inserer avant le premier <script> ou <link a defaut
+
+			// regrouper tous les styles adapt-img dans le head
+			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
+			if (count($matches[1])){
+				$texte = str_replace($matches[1],"",$texte);
+				$ins .= implode("\n",$matches[1]);
+			}
+			if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
+				$texte = substr_replace($texte,"<!--[if !IE]-->$ins\n<!--[endif]-->\n",$p,0);
+		}
+		#var_dump(spip_timer());
+	}
+	return $texte;
 }
 
 
@@ -435,130 +563,6 @@ function adaptive_images_bkpt_image_from_path($arg,&$mime){
 	$file = adaptive_images_bkpt_image($src, $wkpt, $wx, $x, $extension, true);
 	return $file;
 }
-
-
-/**
- * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
- * [(#TEXTE|adaptive_images{1024})]
- * @param string $texte
- * @param null|int $max_width_1x
- * @return mixed
- */
-function adaptive_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
-	static $bkpts = array();
-	if ($max_width_1x AND !isset($bkpts[$max_width_1x])){
-		$b = explode(',',_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
-		while (count($b) AND end($b)>$max_width_1x) array_pop($b);
-		// la largeur maxi affichee
-		if (!count($b) OR end($b)<$max_width_1x) $b[] = $max_width_1x;
-		$bkpts[$max_width_1x] = $b;
-	}
-	$bkpt = (isset($bkpts[$max_width_1x])?$bkpts[$max_width_1x]:null);
-
-	$replace = array();
-	preg_match_all(",<img\s[^>]*>,Uims",$texte,$matches,PREG_SET_ORDER);
-	if (count($matches)){
-		foreach($matches as $m){
-			$ri = adaptive_images_process_img($m[0], $bkpt, $max_width_1x);
-			if ($ri!==$m[0]){
-				$replace[$m[0]] = $ri;
-			}
-		}
-		if (count($replace)){
-			$texte = str_replace(array_keys($replace),array_values($replace),$texte);
-		}
-	}
-
-	return $texte;
-}
-
-/**
- * nommage alternatif
- * @param $texte
- * @param int $max_width_1x
- * @return mixed
- */
-function adaptative_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
-	return adaptive_images($texte,$max_width_1x);
-}
-
-/**
- * Traiter les images de la page et les passer en responsive
- * si besoin
- *
- * @param $texte
- * @return mixed
- */
-function adaptive_images_affichage_final($texte){
-	$adaptive_images_ins = false;
-	if ($GLOBALS['html']){
-		#spip_timer();
-		$texte = adaptative_images($texte);
-		if (strpos($texte,"adapt-img-wrapper")!==false){
-			// les styles communs a toutes les images responsive en cours de chargement
-			$ins = "<style type='text/css'>"."img.adapt-img{opacity:0.70;max-width:100%;height:auto;}"
-			."span.adapt-img-wrapper,span.adapt-img-wrapper:after{display:inline-block;max-width:100%;position:relative;-webkit-background-size:100% auto;background-size:100% auto;background-repeat:no-repeat;line-height:1px;}"
-			."span.adapt-img-wrapper:after{position:absolute;top:0;left:0;right:0;bottom:0;content:\"\"}"
-			."</style>\n";
-			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
-			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
-			$async_style = "html img.adapt-img{opacity:0.01}html span.adapt-img-wrapper:after{display:none;}";
-			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
-			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
-				."function adaptImgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
-				."(function(){function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
-				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
-				// Android 2 media-queries bad support workaround
-				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
-				// 2/ muliple rules = multiples downloads : put .aihrdpi on html to avoid lowres image loading if dpi>=1.5
-				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
-				."if (android2) {"
-				."hAC('avp800');setTimeout(function(){hRC('avp800')},1000);"
-				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('aihrdpi');"
-				."}\n"
-				// slowConnection detection
-				."var slowConnection = false;"
-				."if (typeof window.performance!==\"undefined\"){"
-				."var perfData = window.performance.timing;"
-				."var speed = ~~($length/(perfData.responseEnd - perfData.connectStart));" // approx, *1000/1024 to be exact
-				//."console.log(speed);"
-				."slowConnection = (speed && speed<50);" // speed n'est pas seulement une bande passante car prend en compte la latence de connexion initiale
-				."}else{"
-				//https://github.com/Modernizr/Modernizr/blob/master/feature-detects/network/connection.js
-				."var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;"
-				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
-				."}"
-				//."console.log(slowConnection);"
-				."if(slowConnection) {hAC('aislow');hRC('aihrdpi');}\n"
-				// injecter un style async apres chargement des images
-			  // pour masquer les couches superieures (fallback et chargement)
-				."var adaptImg_onload = function(){"
-			  ."var sa = document.createElement('style'); sa.type = 'text/css';"
-			  ."sa.innerHTML = '$async_style';"
-			  ."var s = document.getElementsByTagName('style')[0]; s.parentNode.insertBefore(sa, s);};"
-				// http://www.webreference.com/programming/javascript/onloads/index.html
-				."function addLoadEvent(func){var oldol=window.onload;if (typeof oldol != 'function'){window.onload=func;}else{window.onload=function(){if (oldol){oldol();} func();}}}"
-				."if (typeof jQuery!=='undefined') jQuery(function(){jQuery(window).load(adaptImg_onload)}); else addLoadEvent(adaptImg_onload);"
-			  ."})();/*]]>*/</script>\n";
-			// le noscript alternatif si pas de js pour desactiver le rendu progressif qui ne rend pas bien les PNG transparents
-			if (!_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING)
-				$ins .= "<noscript><style type='text/css'>.png img.adapt-img,.gif img.adapt-img{opacity:0.01}span.adapt-img-wrapper.png:after,span.adapt-img-wrapper.gif:after{display:none;}</style></noscript>";
-			// inserer avant le premier <script> ou <link a defaut
-
-			// regrouper tous les styles adapt-img dans le head
-			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
-			if (count($matches[1])){
-				$texte = str_replace($matches[1],"",$texte);
-				$ins .= implode("\n",$matches[1]);
-			}
-			if ($p = strpos($texte,"<link") OR $p = strpos($texte,"<script") OR $p = strpos($texte,"</head"))
-				$texte = substr_replace($texte,"<!--[if !IE]-->$ins\n<!--[endif]-->\n",$p,0);
-		}
-		#var_dump(spip_timer());
-	}
-	return $texte;
-}
-
 
 /**
  * Detecter un GIF anime
