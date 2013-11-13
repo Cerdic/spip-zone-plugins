@@ -7,12 +7,12 @@
 		</multi>
 	</slogan>
 	<auteur>Cedric Morin [yterium.com->http://www.yterium.com]</auteur>
-	<version>1.0.5</version>
+	<version>1.1.3</version>
 	<icon>img_pack/themes-128.png</icon>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin vous permet de g&#233;rer une galerie de th&#232;mes pour votre site, et d'en changer tr&#232;s facilement parmi ceux disponibles. Il n&#233;cessite d’utiliser les squelettes Zpip ou Sarka-SPIP qui supportent les th&#232;mes.
+		[fr]Ce plugin vous permet de g&#233;rer une galerie de th&#232;mes pour votre site, et d'en changer tr&#232;s facilement parmi ceux disponibles. Il n&#233;cessite d'utiliser les squelettes Zpip ou Sarka-SPIP qui supportent les th&#232;mes.
 		[en]This plugin lets you manage a gallery of themes for your site, and change easily among those available. It requires the use of the templates Zpip or Sarka-SPIP that support themes.
 		</multi>
 	</description>
@@ -54,7 +54,7 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin vous permet de g&#233;rer une galerie de th&#232;mes pour votre site, et d'en changer tr&#232;s facilement parmi ceux disponibles. Il n&#233;cessite d’utiliser les squelettes Zpip ou Sarka-SPIP qui supportent les th&#232;mes.
+		[fr]Ce plugin vous permet de g&#233;rer une galerie de th&#232;mes pour votre site, et d'en changer tr&#232;s facilement parmi ceux disponibles. Il n&#233;cessite d'utiliser les squelettes Zpip ou Sarka-SPIP qui supportent les th&#232;mes.
 		[en]This plugin lets you manage a gallery of themes for your site, and change easily among those available. It requires the use of the templates Zpip or Sarka-SPIP that support themes.
 		</multi>
 	</description>
