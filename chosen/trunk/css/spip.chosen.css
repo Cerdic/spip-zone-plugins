@@ -1,0 +1,5 @@
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
