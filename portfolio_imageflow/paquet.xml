@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="2.0.0"
 	schema="0.1.0"
-	etat="test"
+	etat="stable"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="images/imageflow.png"
 	documentation="http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP"
