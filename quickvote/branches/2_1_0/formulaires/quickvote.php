@@ -85,7 +85,7 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masq
           $valeurs['message_ok'] = quickvote_resultat($id_quickvote);           
     } 
     
-    $valeurs['time_invalidateur']=time();  // on passe une valeur pour invalider systematiquement le cache
+    $valeurs['time_invalidateur'] = time().'-'.rand();  // on passe une valeur pour invalider systematiquement le cache
     return $valeurs;
 } 
 
