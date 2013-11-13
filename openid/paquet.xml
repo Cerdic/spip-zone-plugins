@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.2.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="images/openid-100.png"
 	schema="0.2"
 	documentation="http://www.spip-contrib.net/Plugin-d-authentification-OpenID"
@@ -37,7 +37,7 @@
 </spip>
 
 
-<spip compatibilite="[2.0.0;2.1.0[">	
+<spip compatibilite="[2.0.0;2.0.99]">	
 
 	<pipeline nom="formulaire_traiter" inclure="openid_pipelines.php" />
 
