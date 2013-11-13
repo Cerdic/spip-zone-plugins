@@ -30,7 +30,7 @@ function exec_suppr_destination_args($id_destination, $destination) {
 		array('destination_comptable', 'grille-24.png', array('destination_comptable', "id=$id_destination"), array('gerer_compta', 'association') ),
 	) );
 	debut_cadre_association('euro-39.gif', 'suppression_de_destination');
-	echo association_form_suppression('destination',  $id_destination, 'destination_comptable');
+	echo association_form_suppression('destination', $id_destination, 'destination_comptable');
 	fin_page_association();
 }
 
