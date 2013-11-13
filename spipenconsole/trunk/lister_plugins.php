@@ -44,8 +44,8 @@ foreach ($plugins as $key=>$repertoire) {
     }
     chdir('../');
     // Si le plugin est actif, initialisation de la variable symbole et couleur
-    $symbole=array_search($prefix[0],$nom_prefix_actifs) ? "*" : " ";
-    $couleur=array_search($prefix[0],$nom_prefix_actifs) ? "\033[32m" : "\033[0m";
+    $symbole=array_search(strtolower($prefix[0]),$nom_prefix_actifs) ? "*" : " ";
+    $couleur=array_search(strtolower($prefix[0]),$nom_prefix_actifs) ? "\033[32m" : "\033[0m";
     //Affichage formaté
     if($i%2 == 1){
         echo $couleur;    
