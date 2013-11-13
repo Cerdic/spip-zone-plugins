@@ -30,6 +30,58 @@ if (!defined('_ADAPTIVE_IMAGES_MIN_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MIN_WIDT
 // Pour les ecrans plus petits, c'est la version mobile qui est fournie (recadree)
 if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION')) define('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION',320);
 
+// Pour generer chaque variante d'image uniquement quand elle est demandee pour la premiere fois
+// par defaut false : on genere toutes les images au calcul de la page (mais timeout possible)
+// pour passer a true : ajouter la rewrite rule suivante dans .htaccess
+/*
+###
+# Adaptive Images
+
+RewriteRule \badapt-img/(\d+/\d\dx/.*)$ spip.php?action=adapt_img&arg=$1 [QSA,L]
+
+# Fin des Adaptive Images
+###
+*/
+if (!defined('_ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION')) define('_ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION',false);
+
+
+/**
+ * ?action=adapt_img
+ * Production d'une image a la volee a partir de son URL
+ * arg
+ *   local/adapt-img/w/x/file
+ *   ex : 320/20x/file
+ *   w est la largeur affichee de l'image
+ *   x est la resolution (10x => 1, 15x => 1.5, 20x => 2)
+ *   file le chemin vers le fichier source
+ */
+function action_adapt_img_dist(){
+
+	$arg = _request('arg');
+	$mime = "";
+
+	$file = adaptive_images_bkpt_image_from_path($arg, $mime);
+	if (!$file
+	  OR !$mime){
+		http_status(404);
+		include_spip('inc/minipres');
+		echo minipres(_T('erreur').' 404',
+			_T('medias:info_document_indisponible'),"",true);
+		die();
+	}
+
+	header("Content-Type: ". $mime);
+	#header("Expires: 3600"); // set expiration time
+
+	if ($cl = filesize($file))
+		header("Content-Length: ". $cl);
+
+	readfile($file);
+	exit;
+}
+
+/** Pipelines  ********************************************************************************************************/
+
 /**
  * Completer la page d'edition d'un document
  * pour joindre sous-titrage, audio-desc et transcript sur les videos
@@ -88,6 +140,8 @@ function adaptive_images_variante($id_document,$mode){
 		"L.objet='document' AND L.id_objet=".intval($id_document)." AND d.mode=".sql_quote($mode));
 }
 
+
+/** Production des images  ********************************************************************************************/
 
 /**
  *
@@ -245,10 +299,7 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 			if ($wkx>$w)
 				$images[$wk][$k] = $src;
 			else {
-				$i = image_reduire($is_mobile?$src_mobile:$img,$wkx,10000);
-				if ($extension=='jpg' AND $k!='10x')
-					$i = image_aplatir($i,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,constant('_ADAPTIVE_IMAGES_'.$k.'_JPG_QUALITY'));
-				$images[$wk][$k] = extraire_attribut($i,"src");
+				$images[$wk][$k] = adaptive_images_bkpt_image($is_mobile?$src_mobile:$src,$wk,$wkx,$k,$extension);
 			}
 		}
 		if ($wk<=$max_width_1x AND ($is_mobile OR !$src_mobile)) {
@@ -264,6 +315,13 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 			$fallback = $images[$w]['10x'];
 			$wfallback = $w;
 		}
+
+		// l'image n'a peut etre pas ete produite car _ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION = true
+		// on la genere immediatement car on en a besoin
+		if (!file_exists($fallback)){
+			$mime = "";
+			adaptive_images_bkpt_image_from_path($fallback, $mime);
+		}
 		// la qualite est reduite si la taille de l'image augmente, pour limiter le poids de l'image
 		// regle de 3 au feeling, _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY correspond a une image de 450kPx
 		// et on varie dans +/-50% de _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY
@@ -278,6 +336,104 @@ function adaptive_images_process_img($img, $bkpt = null, $max_width_1x=_ADAPTIVE
 	$img = image_reduire($img,$max_width_1x,10000);
 	// generer le markup
 	return adaptive_images_markup($img,$images,$w, $h, $extension, $max_width_1x);
+}
+
+/**
+ * Preparer une image pour un breakpoint/resolution
+ * @param string $src
+ *   image source
+ * @param int $wkpt
+ *   largeur du breakpoint (largeur d'affichage) pour lequel l'image est produite
+ * @param int $wx
+ *   largeur en px de l'image reelle
+ * @param string $x
+ *   resolution 10x 15x 20x
+ * @param string $extension
+ *   extenstion
+ * @param bool $force
+ *   produire l'image immediatement si elle n'existe pas ou est trop vieille
+ * @return string
+ *   nom du fichier resultat
+ */
+function adaptive_images_bkpt_image($src, $wkpt, $wx, $x, $extension, $force=false){
+	$dest = _DIR_VAR."adapt-img/$wkpt/$x/$src";
+	if (($exist=file_exists($dest)) AND filemtime($dest)>=filemtime($src))
+		return $dest;
+
+	$force = ($force?true:!_ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION);
+
+	// si le fichier existe mais trop vieux et que l'on ne veut pas le produire immediatement : supprimer le vieux fichier
+	// ainsi le hit passera par la regexp et tommbera sur l'action adapt_img qui le produira
+	if ($exist AND !$force)
+		@unlink($dest);
+
+	if (!$force)
+		return $dest;
+
+	// creer l'arbo
+	$dirs = explode("/",$dest);
+	$d = "";
+	while(count($dirs)>1
+		AND (
+		  is_dir($f="$d".($sd=array_shift($dirs)))
+		  OR
+		  $f = sous_repertoire($d,$sd)
+		)
+	) $d = $f;
+
+	$i = image_reduire($src,$wx,10000);
+
+	if (in_array($extension,array('jpg','jpeg')) AND $x!='10x')
+		$i = image_aplatir($i,'jpg',_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR,constant('_ADAPTIVE_IMAGES_'.$x.'_JPG_QUALITY'));
+	$i = extraire_attribut($i,"src");
+	@copy($i,$dest);
+
+	return file_exists($dest)?$dest:$src;
+}
+
+/**
+ * Produire une image d'apres son URL
+ * utilise par ?action=adapt_img pour la premiere production a la volee
+ * ou depuis adaptive_images_process_img() si on a besoin de l'image tout de suite
+ *
+ * @param string $arg
+ * @param string $mime
+ * @return string
+ */
+function adaptive_images_bkpt_image_from_path($arg,&$mime){
+	$base = _DIR_VAR."adapt-img/";
+	if (strncmp($arg,$base,strlen($base))==0)
+		$arg = substr($arg,strlen($base));
+
+	$arg = explode("/",$arg);
+	$wkpt = intval(array_shift($arg));
+	$x = array_shift($arg);
+	$src = implode("/",$arg);
+
+	$parts = pathinfo($src);
+	$extension = strtolower($parts['extension']);
+	include_spip("base/typedoc");
+	if ($extension=="jpeg") $extension = "jpg";
+	$mime = (isset($GLOBALS['tables_mime'][$extension])?$GLOBALS['tables_mime'][$extension]:'');
+	$dpi = array('10x'=>1,'15x'=>1.5,'20x'=>2);
+
+	if (!$wkpt
+	  OR !isset($dpi[$x])
+	  OR !file_exists($src)
+	  OR !$mime){
+		return "";
+	}
+	$wx = intval(round($wkpt * $dpi[$x]));
+
+	if (!function_exists("taille_image"))
+		include_spip("inc/filtres");
+	if (!function_exists("image_reduire"))
+		include_spip("inc/filtres_images_mini");
+	if (!function_exists("image_aplatir"))
+		include_spip("filtres/images_transforme");
+
+	$file = adaptive_images_bkpt_image($src, $wkpt, $wx, $x, $extension, true);
+	return $file;
 }
 
 
