@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="2.0.1"
 	etat="test"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/moderation.png"
 	documentation="http://www.spip-contrib.net/Moderation-Moderee"
 	schema="1.0.0"
