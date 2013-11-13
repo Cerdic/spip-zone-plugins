@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.3.6"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/emballe_medias.png"
 	schema="0.2.3"
 >	

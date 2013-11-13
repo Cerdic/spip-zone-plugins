@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.1.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/swfupload_64.png"
 >	
 
