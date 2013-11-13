@@ -23,15 +23,15 @@ function minus_formulaire_verifier($flux){
 function trop_majuscules(){
 	// return True s'il y a trop de majuscule dans le titre
 	$titre = supprimer_numero(_request("titre"));
-	return (prop_minus($titre) < 0.7);
+	return (prop_maj($titre) >= 0.3);
 	}
-function prop_minus($txt){
+function prop_maj($txt){
   // return la proportion de minuscule
   if (mb_strlen($txt, 'UTF-8') > 0){
-    $nb_minuscule = levenshtein (mb_strtoupper($txt, 'UTF-8'),$txt);
-    return $nb_minuscule/mb_strlen($txt, 'UTF-8');
+    $nb_maj = levenshtein (mb_strtolower($txt, 'UTF-8'),$txt);
+    return $nb_maj/mb_strlen($txt, 'UTF-8');
     }
-  else return 1;
+  else return 0;
 }
 
 ?>
