@@ -4,7 +4,7 @@
 	version="2.0.2"
 	etat="dev"
 	documentation="http://contrib.spip.net/SpipService"
-	compatibilite="[3.0.0 ;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/spipservice.png"
 	schema="10">
 
