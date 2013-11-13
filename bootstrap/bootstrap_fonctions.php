@@ -17,6 +17,8 @@ if (!defined('_MENUS_EXTRA_CLASS')) define('_MENUS_EXTRA_CLASS','nav');
 function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 	if (strpos($nav,'nav-collapse')!==false) return $nav;
 
+	$respnav = '';
+
 	$uls = extraire_balises($nav,"ul");
 	$n = 1;
 	while ($ul = array_shift($uls)
