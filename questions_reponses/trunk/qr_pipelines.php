@@ -8,7 +8,7 @@ function qr_insert_head_css($flux){
 	return $flux;
 }
 
-function qr_header_prive($flux){
+function qr_insert_head($flux){
 	$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
 	return $flux;
 }
