@@ -212,19 +212,15 @@ function adaptive_images_affichage_final($texte){
 			// le script qui estime si la rapidite de connexion et pose une class aislow sur <html> si connexion lente
 			// et est appele post-chargement pour finir le rendu (rend les images enregistrables par clic-droit aussi)
 			$async_style = "html img.adapt-img{opacity:0.01}html span.adapt-img-wrapper:after{display:none;}";
-			$length = strlen($texte)+1900; // ~1500 pour le JS qu'on va inserer
+			$length = strlen($texte)+2000; // ~2000 pour le JS qu'on va inserer
 			$ins .= "<script type='text/javascript'>/*<![CDATA[*/"
 				."function adaptImgFix(n){var i=window.getComputedStyle(n.parentNode).backgroundImage.replace(/\W?\)$/,'').replace(/^url\(\W?|/,'');n.src=(i&&i!='none'?i:n.src);}"
 				."(function(){function hAC(c){(function(H){H.className=H.className+' '+c})(document.documentElement)}"
-				."function hRC(c){(function(H){H.className=H.className.replace(new RegExp('\\\\b'+c+'\\\\b'),'')})(document.documentElement)}"
 				// Android 2 media-queries bad support workaround
-				// 1/ viewport 800px is first rendered, then, after ~1s real viewport : put .avp800 on html to avoid viewport 800px loading during first second
-				// 2/ muliple rules = multiples downloads : put .aihrdpi on html to avoid lowres image loading if dpi>=1.5
-				."var android2 = (screen.width==800) && (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
-				."if (android2) {"
-				."hAC('avp800');setTimeout(function(){hRC('avp800')},1000);"
-				."if(window.devicePixelRatio !== undefined && window.devicePixelRatio>=1.5) hAC('aihrdpi');"
-				."}\n"
+				// muliple rules = multiples downloads : put .android2 on <html>
+				// use with simple css without media-queries and send compressive image
+				."var android2 = (/android 2[.]/i.test(navigator.userAgent.toLowerCase()));"
+				."if (android2) {hAC('android2');}\n"
 				// slowConnection detection
 				."var slowConnection = false;"
 				."if (typeof window.performance!==\"undefined\"){"
@@ -238,7 +234,7 @@ function adaptive_images_affichage_final($texte){
 				."if (typeof connection!==\"undefined\") slowConnection = (connection.type == 3 || connection.type == 4 || /^[23]g$/.test(connection.type));"
 				."}"
 				//."console.log(slowConnection);"
-				."if(slowConnection) {hAC('aislow');hRC('aihrdpi');}\n"
+				."if(slowConnection) {hAC('aislow');}\n"
 				// injecter un style async apres chargement des images
 			  // pour masquer les couches superieures (fallback et chargement)
 				."var adaptImg_onload = function(){"
@@ -310,18 +306,17 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$medias = array();
 	$lastw = array_keys($rwd_images);
 	$lastw = end($lastw);
+	$wandroid = 0;
 	foreach ($rwd_images as $w=>$files){
 		if ($w==$lastw) {$islast = true;}
+		if ($w<=_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION) $wandroid = $w;
 		// il faut utiliser une clause min-width and max-width pour que les regles soient exlusives
-		// sinon on a multiple download sous android 2.x
 		if ($prev_width<$max_width_1x){
 			$hasmax = (($islast OR $w>=$max_width_1x)?false:true);
 			$mw = ($prev_width?"and (min-width:{$prev_width}px)":"").($hasmax?" and (max-width:{$w}px)":"");
-			$htmlsel = "html";
-			if ($prev_width<=800 AND ($w>=800 OR $islast))
-				$htmlsel.=":not(.avp800)";
+			$htmlsel = "html:not(.android2)";
 			$htmlsel = array(
-				'10x' => "$htmlsel:not(.aihrdpi)",
+				'10x' => "$htmlsel",
 				'15x' => "$htmlsel:not(.aislow)",
 				'20x' => "$htmlsel:not(.aislow)",
 			);
@@ -341,6 +336,14 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 			}
 		}
 		$prev_width = $w+1;
+	}
+
+	// Une regle CSS simple pour android qui (selon les versions/nav) n'arrive pas a s'y retrouver dans les media-queries
+	// et charge toutes les images
+	// donc une seule image, JPG 320 - 1.5x (compromis)
+	if ($wandroid){
+		$file = $rwd_images[$wandroid]['15x'];
+		$medias['android2'] = "html.android2 span.$cid,html.android2 span.$cid:after{background-image:url($file);}";
 	}
 
 	// Media Queries
