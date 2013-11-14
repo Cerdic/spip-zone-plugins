@@ -180,14 +180,23 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 
 
 	//Trouver une jointure
+	$champ = "id_rubrique";
 	$desc = $boucle->show;
 	//Seulement si necessaire
-	if (!array_key_exists('id_rubrique', $desc['field'])) {
-		$cle = trouver_jointure_champ('id_rubrique', $boucle);
+	if (!array_key_exists($champ, $desc['field'])){
+		$cle = trouver_jointure_champ($champ, $boucle);
+		$trouver_table = charger_fonction("trouver_table", "base");
+		$desc = $trouver_table($boucle->from[$cle]);
+		if (count(trouver_champs_decomposes($champ, $desc))>1){
+			$decompose = decompose_champ_id_objet($champ);
+			$champ = array_shift($decompose);
+			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
+		}
 	}
 	else $cle = $boucle->id_table;
 
-	$c = "sql_in('$cle" . ".id_rubrique', \$b = calcul_branche_polyhier_in($arg,".($tous===true?'true':"'directs'").")"
+
+	$c = "sql_in('$cle" . ".$champ', \$b = calcul_branche_polyhier_in($arg,".($tous===true?'true':"'directs'").")"
 	  . ($not ? ", 'NOT'" : '') . ")";
 	$where[] = $c;
 	
