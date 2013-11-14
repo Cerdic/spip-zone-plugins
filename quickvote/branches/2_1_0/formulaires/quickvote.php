@@ -8,6 +8,11 @@ include_spip('base/abstract_sql');
 
 
 // générer les résultats du vote sous forme d'une chaine HTML
+//
+// alternative: 
+// au lieu de passer par PHP, on pourrait passer par un squelette (qui permettrait de faciliter la personnalisation)
+// l'appel de la fonction se limiterait à un recuperer_fond()
+// ... à tester pour la version SPIP3 et être attentif à la perf. si le cache de ce squelette est nul.
 function quickvote_resultat($id_quickvote) {
      include_spip('base/abstract_sql');
 
