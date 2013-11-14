@@ -2,6 +2,7 @@
 	<nom>Versioning</nom>
 	<version>1.0.0</version>
 	<prefix>versioning</prefix>
+	<etat>dev</etat>
 	<auteur>[Micha&#235;l Courcy->michael.courcy@netapsys.fr], [Mamadou Niagate->mamadou.niagate@netapsys.fr]</auteur>
 	<slogan>G&#233;rer deux versions d'un m&#234;me article</slogan>
 	<description>
