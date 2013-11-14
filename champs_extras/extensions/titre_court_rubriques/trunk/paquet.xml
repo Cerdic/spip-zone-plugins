@@ -1,15 +1,15 @@
 <paquet 
-		prefix="titrecourt"
-		categorie="outil"
-		version="1.2.0"
-		etat="stable"
-		compatibilite="[3.0.0;3.0.*]"
-		logo=""
-		schema="0.0.1"
+	prefix="titrecourt"
+	categorie="outil"
+	version="1.2.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo=""
+	schema="0.0.1"
 >
 	<nom>Titre Court pour Rubriques</nom>
 
-	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
