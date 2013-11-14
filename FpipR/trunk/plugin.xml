@@ -2,7 +2,7 @@
 	<nom>FpipR</nom>
 	<slogan>Int&#233;grer ses photos Flickr dans SPIP</slogan>
 	<auteur>[Pierre Andrews->mortimer.pa@free.fr], logo par [IZO->http://izo.aucuneid.com/]</auteur>
-	<version>0.4</version>
+	<version>0.4.0</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
