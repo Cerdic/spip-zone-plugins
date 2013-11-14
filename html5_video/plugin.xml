@@ -1,8 +1,9 @@
 <plugin>
 	<nom>Vid&#233;o HTML5</nom>
 	<slogan>Afficher des vid&#233;os en HTML5</slogan>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<prefix>html5_video</prefix>
+	<etat>dev</etat>
 	<auteur>[Pierre Rudloff->mailto:rudloff.p@gmail.com]</auteur>
 	<description>Ce plugin remplace la balise <code><video></code> par un lecteur en HTML5. Il utilise le code propos&#233; par [Video for Everybody!->http://camendesign.com/code/video_for_everybody].
 	
