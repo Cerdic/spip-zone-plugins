@@ -1,9 +1,12 @@
 <B_faq>
-[<a class="ancre" href="#ENV{ancre}" name="(#ENV{ancre})" id="#ENV{ancre}"></a>]
-[<h3 class="spip">(#ENV{titre})</h3>]
+[<h3 class="spip">
+	[<a class="ancre" href="##ENV{ancre}" name="(#ENV{ancre})" id="#ENV{ancre}"></a>]
+	(#ENV{titre})
+</h3>]
 <dl class="qr">
 <BOUCLE_faq(DATA){source table, #ENV{faq}}{par cle}>
 	<dt class="question">
+		[<a class="ancre" href="##ENV{ancre}_#CLE" name="(#ENV{ancre})_#CLE" id="#ENV{ancre}_#CLE"></a>]
 		[(#VALEUR|table_valeur{question})]
 [(#REM)<!--
 		[<a class="retour" rel="nofollow" href="#(#ENV{ancre})" title="début de la FAQ">^</a>]
