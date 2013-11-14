@@ -4,6 +4,7 @@
 	<auteur>Collectif Spip</auteur>
 	<prefix>spixplorer</prefix>
 	<version>0.0.1</version>
+	<etat>dev</etat>
 	<description>G&#233;rer ses fichiers comme le serveur et si besoin par FTP. Un fork, adapt&#233;, s&#233;curis&#233; et &#233;tendu de [quixplorer->http://quixplorer.sourceforge.net/]. Utilisation : bouton sous l'accueil.</description>
 	<icon>spixplorer.png</icon>
 	<pipeline>
