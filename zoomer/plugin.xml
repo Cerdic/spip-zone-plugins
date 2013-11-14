@@ -11,18 +11,9 @@ Anne-lise Martenot (elastick.net)
 	<etat>stable</etat>
 	<description> cf http://www.dynamicdrive.com/dynamicindex4/featuredzoomer.htm
 	  Ce plugin ajoute un mod&#232;le pour afficher une loupe et offrir un agrandissement localis&#233; : <code>&lt;img|zoom&gt;</code>.
-
-Encore mieux, on peut utiliser une image de plus forte r&#233;solution pour l'agrandissement, mais laisser une petite vignette pour l'image de base.
-
-La [page de configuration->./?exec=cfg&amp;cfg=zoomer] permet de sp&eacute;cifier un style pour la loupe et des styles personalis&eacute;s peuvent &ecirc;tre cr&eacute;&eacute;s.
-
-Le code est bas&eacute; sur [zoomer->http://valid.tjp.hu/zoomer/] par J&agrave;nos T&ograve;th.
-
-Le plugin ne marche qu'avec les squelettes utilisant la balise <code>#INSERT_HEAD</code>
-
-Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la biblioth&egrave;que javascript [zoomer->http://valid.tjp.hu/zoomer/zoomer.zip] et placer le contenu de l'archive dans un r&eacute;pertoire {zoomer} dans votre r&eacute;pertoire {squelettes}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
-	</description>
+</description>
 	<lien>http://www.spip-contrib.net/Une-loupe-pour-vos-vignette</lien>
+    <necessite id="SPIP" version="[1.9.2;2.0.99]" />
 	<prefix>zoomer</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>
