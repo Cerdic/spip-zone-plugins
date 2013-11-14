@@ -255,7 +255,7 @@ function adaptive_images_affichage_final($texte){
 			// inserer avant le premier <script> ou <link a defaut
 
 			// regrouper tous les styles adapt-img dans le head
-			preg_match_all(",<!--\[if !IE\]-->.*(<style[^>]*>.*</style>).*<!--\[endif\]-->,Ums",$texte,$matches);
+			preg_match_all(",<!--\[if !IE\]><!-->.*(<style[^>]*>.*</style>).*<!--<!\[endif\]-->,Ums",$texte,$matches);
 			if (count($matches[1])){
 				$texte = str_replace($matches[1],"",$texte);
 				$ins .= implode("\n",$matches[1]);
