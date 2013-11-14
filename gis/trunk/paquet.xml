@@ -27,7 +27,7 @@
 	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
-	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
+	<utilise nom="selecteurgenerique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
 
 	<pipeline

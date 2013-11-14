@@ -91,7 +91,7 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 		<nom>saisies_autonomes</nom>
 		<inclure>gis_pipelines.php</inclure>
 	</pipeline>
-	<utilise id="selecteur_generique" version="[1.12;]" />
+	<utilise id="selecteurgenerique" version="[1.12;]" />
 	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
 	<necessite id="saisies" version="[1.7.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
