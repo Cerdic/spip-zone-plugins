@@ -1,9 +1,9 @@
 <paquet
   prefix="dida"
   categorie="divers"
-  version="3.4"
+  version="3.4.0"
   etat="test"
-  compatibilite="[2.9.9;3.0.99]"
+  compatibilite="[2.0.9;3.0.99]"
   logo="img_pack/dida_ico.png"
   documentation="http://www.spip-contrib.net/Didaspip"
 >

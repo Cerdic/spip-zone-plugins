@@ -18,6 +18,7 @@ Pour cr&eacute;er le lien vers un projet didapages dans votre article, il suffit
 _ Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n'est pas obligatoire mais peut-&ecirc;tre utilis&eacute; selon l'affichage choisi.
 </description>
 	<necessite id='CFG' version='[1.0;]' />
+	<necessite id="SPIP" version="[2.0.9;3.0.99]" />
 	<lien>http://www.spip-contrib.net/Didaspip</lien>
 	<auteur>[Mo&iuml;se Maindron->mailto:moise.maindron@ac-nantes.fr]. Mis &agrave; jour pour SPIP 2.1 par [Olivier Gautier->mailto:olivier.gautier@ac-rouen.fr]</auteur>
 
