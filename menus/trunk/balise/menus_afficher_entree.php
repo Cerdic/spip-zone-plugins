@@ -16,7 +16,7 @@ function balise_MENUS_AFFICHER_ENTREE_dist($p) {
 	
 	$p->code =  "(!$id_menus_entree) ? _T('zbug_champ_hors_motif', array('champ'=>'AFFICHER_ENTREE', 'motif'=>'MENUS_ENTREES')) : recuperer_fond(
 		'menus/'.$type_entree,
-		array_merge(unserialize($parametres), array($contexte=>true, env=>\$Pile[0]))
+		array_merge(unserialize($parametres), array($contexte=>true, 'env'=>\$Pile[0]))
 	)";
 	
 	return $p;
