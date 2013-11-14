@@ -4,12 +4,18 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function qr_insert_head_css($flux){
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/qr.css').'" type="text/css" media="all" />';
+	include_spip('inc/config');
+	$charger_css = lire_config('qr/charger_css') ? true : false;
+	if ($charger_css)
+		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/qr.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
 function qr_insert_head($flux){
-	$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
+	include_spip('inc/config');
+	$charger_js = lire_config('qr/charger_js') ? true : false;
+	if ($charger_js)
+		$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
 	return $flux;
 }
 

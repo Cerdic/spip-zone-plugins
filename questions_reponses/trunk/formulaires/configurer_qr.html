@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_importer formulaire_#FORM">
+	<img src="#CHEMIN_IMAGE{qr-24.png}" class="cadre-icone" />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
+		[(#REM)  <!--declarer les hidden qui declencheront le service du formulaire parametre : url d'action -->]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			#SET{name,charger_js}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:qr:label_charger_js:></label>
+				</div>
+			</li>
+
+			#SET{name,charger_css}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:qr:label_charger_css:></label>
+				</div>
+			</li>
+	 	</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	</BOUCLE_editable>
+</div>
