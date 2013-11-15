@@ -1,6 +1,15 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/*
+ * récupère la valeur d'un champ extra
+ */
+function valeur_champs_extra($nom_champ,$id_resa){
+    $all = sql_allfetsel('"'.$nom_champ.'"','spip_orr_reservations','id_orr_reservation='. intval($id_resa) ); 
+    return $all[0][$nom_champ];
+}
+
+
 function orr_premierjourcalendrier($date){
 	list($annee,$mois,$jour)=explode('-',$date);
     $numero_premier_jour=date("N",mktime(0,0,0,$mois,1,intval($annee)));
