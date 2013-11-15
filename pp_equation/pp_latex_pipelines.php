@@ -5,16 +5,18 @@
 function pp_latex_porte_plume_barre_pre_charger($barres) {
 	$barre = &$barres['edition'];
 	/*
-	$barre->ajouterApres('sepCode', array(
-				"id" => "equation",
-				//"separator" => "---------------",
-				"display"   => true,
-	));*/
-	
-	
-	
-	$barre->ajouterApres('sepCode', array(
-		"id"          => 'equation',
+		per prima cosa aggiungo un separatore
+		
+		poi aggiungo dopo il separatore il bottone del mio gruppo
+	*/
+
+	$barre->ajouterApres('grpCaracteres', array(
+					"id" => "sepLatex",
+					"separator" => "---------------",
+					"display"   => $visible,
+		));
+	$barre->ajouterApres('sepLatex', array(
+		"id"          => 'grpEquation',
 		"name"        => _T('pp_latex:barre_equations'),
 		"className"   => 'outil_equation',
 		"dropMenu"    => ma_barre(),
@@ -246,9 +248,9 @@ return array(
                                 "openWith" => "\Leftrightarrow",
                                 "display"   => true
                         ), 
-						// leftARROW                     
+						// RightARROW                     
 						array(
-                                "id"        => 'leftarrow',
+                                "id"        => 'rrightarrow',
                                 "name"      => _T('pp_latex:barre_Rightarrow'),
                                 //"key"       => "",
                                 "className" => "outil_rrightarrow",
