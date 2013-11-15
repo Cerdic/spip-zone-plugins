@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_editer formulaire_editer_associer_projet_#ENV{objet} ajax">
+<div class="formulaire_spip formulaire_editer formulaire_editer_associer_projets_#ENV{objet} ajax">
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -9,8 +9,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			[(#SAISIE{liste_projets,id_projet,
-				option_intro=<:projet:aucun:>,
-				label=<:projet:label_selecteur_projet:>})]
+				option_intro=<:projets:aucun:>,
+				label=<:projets:label_selecteur_projets:>})]
 		</ul>
 		<p class='boutons' id="association_projet" style="display:none;">
 			<input type='submit' class='submit' value='<:bouton_associer:>' />

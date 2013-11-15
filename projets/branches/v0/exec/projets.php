@@ -26,7 +26,7 @@ function exec_projets_args($id_projet)
 	if (!$row
 	OR !autoriser('voir', 'projet', $id_projet)) {
 		include_spip('inc/minipres');
-		echo minipres(_T('projet:aucun_projet'));
+		echo minipres(_T('projets:aucun_projet'));
 	} else {
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
@@ -84,7 +84,7 @@ function projets_affiche($id_projet, $row, $cherche_auteur, $ids, $cherche_mot, 
 	changer_typo($row['lang']);
 
 	$actions =
-	  ($flag_editable ? bouton_modifier_projets($id_projet, $id_parent, $modif, _T('projet:avis_projet_modifie', $modif), chemin('prive/images/projet-24.gif'), "edit.gif",$spip_lang_right) : "");
+	  ($flag_editable ? bouton_modifier_projets($id_projet, $id_parent, $modif, _T('projets:avis_projets_modifie', $modif), chemin('prive/images/projets-24.gif'), "edit.gif",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>"
@@ -119,17 +119,17 @@ function projets_affiche($id_projet, $row, $cherche_auteur, $ids, $cherche_mot, 
 function bouton_modifier_projets($id_projet, $id_parent, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
-		return icone_inline(_T('projet:icone_modifier_projet'), generer_url_ecrire("projets_edit","id_projet=$id_projet"), $ip, $im, $align, false)
+		return icone_inline(_T('projets:icone_modifier_projet'), generer_url_ecrire("projet_edit","id_projet=$id_projet"), $ip, $im, $align, false)
 		. "<span class='arial1 spip_small'>$mode</span>";
 	}
-	else return icone_inline(_T('projet:icone_modifier_projet'), generer_url_ecrire("projets_edit","id_projet=$id_projet"), chemin("prive/images/projet-24.gif"), "edit.gif", $align);
+	else return icone_inline(_T('projets:icone_modifier_projet'), generer_url_ecrire("projet_edit","id_projet=$id_projet"), chemin("prive/images/projets-24.gif"), "edit.gif", $align);
 }
 
 function afficher_corps_projets($id_projet, $row)
 {
 	$res = '';
 	if ($row['statut'] == 'prop') {
-		$res .= "<p class='projet_prop'>"._T('projet:text_projet_propose_publication');
+		$res .= "<p class='projets_prop'>"._T('projets:text_projets_propose_publication');
 		$res.= "</p>";
 	}
 

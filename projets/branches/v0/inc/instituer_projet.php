@@ -20,7 +20,7 @@ function inc_instituer_projet_dist($id_projet, $statut, $id_parent)
 
 	$res .=
 	  "<ul id='instituer_projet-$id_projet' class='instituer_projet instituer'>"
-	  . "<li>" . _T('projet:texte_projet_statut')
+	  . "<li>" . _T('projets:texte_projets_statut')
 	  ."<ul>";
 
 	$href = redirige_action_auteur('instituer_projet',$id_projet,'projets', "id_projet=$id_projet");

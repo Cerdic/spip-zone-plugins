@@ -2,19 +2,26 @@
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- presentation=non -->
 <!-- nom=projet -->
-<!-- casier=autorisations -->
-<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_configurer_autorisations">
+<!-- casier=ligatures -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_configurer_ligatures">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		[(#SET{legendes,[(#ARRAY{0,<:projet:cfg_lgd_autorisation_creer:>,1,<:projet:cfg_lgd_autorisation_modifier:>,2,<:projet:cfg_lgd_autorisation_voir:>})]})]
-		#SET{prefixes,#ARRAY{0,creer_,1,modifier_,2,voir_}}
-		<INCLURE{fond=formulaires/inc-autorisation}
-			{prefixes=#GET{prefixes}}
-			{legendes=#GET{legendes}}
-			{env}>
+		<ul>
+			<B_ligatures>
+			<li class="editer_ligatures">
+			<label><:projets:cfg_lbl_ligatures:></label>
+			<BOUCLE_ligatures(POUR){tableau #REM|projets_lister_ligatures}>
+			<div class="choix">
+				<input type="checkbox" name="objets[]" id="ligatures_#CLE" value="#CLE"[(#CLE|in_array{#ENV{objets,#ARRAY}}|oui)checked="checked"] />
+				<label for="ligatures_#CLE">#VALEUR</label>
+			</div>
+			</BOUCLE_ligatures>
+			</li>
+			</B_ligatures>
+		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
 			<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
@@ -23,5 +30,5 @@
 </div>
 <div id="bloc_debug">
 	<h3> Debug - Etat des variables du fond:</h3>
-	#CFG_ARBO{projet/autorisations}
+	#CFG_ARBO{projets/ligatures}
 </div>

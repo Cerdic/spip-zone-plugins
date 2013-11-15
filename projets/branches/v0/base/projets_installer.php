@@ -10,19 +10,19 @@
 include_spip('inc/meta');
 include_spip('base/create');
 
-function projet_upgrade($nom_meta_base_version,$version_cible){
+function projets_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 
 	if ($current_version=="0.0") {
-		include_spip('base/projet_declarer');
+		include_spip('base/projets_declarer');
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 }
 
-function projet_vider_tables($nom_meta_base_version) {
+function projets_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_projets");
 	sql_drop_table("spip_projets_liens");
 	effacer_meta($nom_meta_base_version);

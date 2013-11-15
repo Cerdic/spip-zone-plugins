@@ -4,7 +4,7 @@
  *
  * @return
  */
-function projet_autoriser(){}
+function projets_autoriser(){}
 
 /**
  * Autorisation de creation d'un projet
@@ -16,9 +16,9 @@ function projet_autoriser(){}
  * @param object $opt
  * @return
  */
-function autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
-	$type = lire_config('projet/autorisations/creer_type', 'webmestre');
+	$type = lire_config('projets/autorisations/creer_type', 'webmestre');
 	switch($type) {
 		case 'webmestre':
 			// Webmestres uniquement
@@ -26,11 +26,11 @@ function autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt){
 			break;
 		case 'par_statut':
 			// Autorisation par statut
-			$autorise = in_array($qui['statut'], lire_config('projet/autorisations/creer_statuts',array()));
+			$autorise = in_array($qui['statut'], lire_config('projets/autorisations/creer_statuts',array()));
 			break;
 		case 'par_auteur':
 			// Autorisation par id d'auteurs
-			$autorise = in_array($qui['id_auteur'], lire_config('projet/autorisations/creer_auteurs',array()));
+			$autorise = in_array($qui['id_auteur'], lire_config('projets/autorisations/creer_auteurs',array()));
 			break;
 	}
 	return $autorise;
@@ -46,14 +46,14 @@ function autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt){
  * @param object $opt
  * @return
  */
-function autoriser_projet_modifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_projets_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 
-	if(autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt);
+	if(autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt)){
+		return autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt);
 	}
 	else{
-		$type = lire_config('projet/autorisations/modifier_type', 'webmestre');
+		$type = lire_config('projets/autorisations/modifier_type', 'webmestre');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -61,11 +61,11 @@ function autoriser_projet_modifier_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('projet/autorisations/modifier_statuts',array()));
+				$autorise = in_array($qui['statut'], lire_config('projets/autorisations/modifier_statuts',array()));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('projet/autorisations/modifier_auteurs',array()));
+				$autorise = in_array($qui['id_auteur'], lire_config('projets/autorisations/modifier_auteurs',array()));
 				break;
 		}
 	}
@@ -83,21 +83,21 @@ function autoriser_projet_modifier_dist($faire, $type, $id, $qui, $opt){
  * @param object $opt
  * @return
  */
-function autoriser_projet_voir_dist($faire, $type, $id, $qui, $opt){
+function autoriser_projets_voir_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 
 	// Eviter toute erreur de configuration
 
 	// Si on peut creer, on peut voir
-	if(autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt);
+	if(autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt)){
+		return autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt);
 	}
 	// Si on peut modifier, on peut voir également
-	else if(autoriser_projet_modifier_dist($faire, $type, $id, $qui, $opt)){
-		return autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt);
+	else if(autoriser_projets_modifier_dist($faire, $type, $id, $qui, $opt)){
+		return autoriser_projets_creer_dist($faire, $type, $id, $qui, $opt);
 	}
 	else{
-		$type = lire_config('projet/autorisations/creer_type', 'webmestre');
+		$type = lire_config('projets/autorisations/creer_type', 'webmestre');
 		switch($type) {
 			case 'webmestre':
 				// Webmestres uniquement
@@ -105,11 +105,11 @@ function autoriser_projet_voir_dist($faire, $type, $id, $qui, $opt){
 				break;
 			case 'par_statut':
 				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('projet/autorisations/voir_statuts',array()));
+				$autorise = in_array($qui['statut'], lire_config('projets/autorisations/voir_statuts',array()));
 				break;
 			case 'par_auteur':
 				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('projet/autorisations/voir_auteurs',array()));
+				$autorise = in_array($qui['id_auteur'], lire_config('projets/autorisations/voir_auteurs',array()));
 				break;
 		}
 	}
@@ -126,11 +126,11 @@ function autoriser_projet_voir_dist($faire, $type, $id, $qui, $opt){
  * @param object $opt
  * @return
  */
-function autoriser_projet_notifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_projets_notifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 
 	// On ne pourra de toute manière être notifié que losque l'on pourra voir le projet
-	if(autoriser_projet_voir_dist($faire, $type, $id, $qui, $opt)){
+	if(autoriser_projets_voir_dist($faire, $type, $id, $qui, $opt)){
 
 	}
 

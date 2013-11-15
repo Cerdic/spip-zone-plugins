@@ -14,13 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown $boutons_admin
  * @return unknown
  */
-function projet_ajouter_boutons($boutons_admin) {
+function projets_ajouter_boutons($boutons_admin) {
 	// si on est habilité à voir les projets
 	if (autoriser('voir','projet')) {
 	  // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu['projets_page']= new Bouton(
-		_DIR_PLUGIN_PROJET."/prive/images/projet-24.gif",  // icone
-		_T('projet:voir_projets')	// titre
+		_DIR_PLUGIN_PROJETS."/prive/images/projets-24.gif",  // icone
+		_T('projets:voir_projets')	// titre
 		);
 	}
 	return $boutons_admin;
@@ -31,7 +31,7 @@ function projet_ajouter_boutons($boutons_admin) {
  *
  * @param Array $flux
  */
-function projet_affiche_droite($flux){
+function projets_affiche_droite($flux){
 	return $flux;
 }
 
@@ -40,7 +40,7 @@ function projet_affiche_droite($flux){
  *
  * @param Array $flux
  */
-function projet_affiche_milieu($flux){
+function projets_affiche_milieu($flux){
 	include_spip('inc/autoriser');
 	$exec = $flux['args']['exec'];
 	switch($exec){
@@ -63,9 +63,9 @@ function projet_affiche_milieu($flux){
 			}
 		break;
 	}
-	if(in_array($type, lire_config('projet/ligatures/objets',array()))){
+	if(in_array($type, lire_config('projets/ligatures/objets',array()))){
 		$flux['data'] .= "<div id='pave_associer_projet'>";
-		$flux['data'] .= debut_cadre_enfonce("", true, "", _T('projet:titre_formulaire_associer'));
+		$flux['data'] .= debut_cadre_enfonce("", true, "", _T('projets:titre_formulaire_associer'));
 		$flux['data'] .= recuperer_fond('prive/contenu/inc-affiche_milieu', array('objet'=>$type,'id_objet'=>$id_type));
 		$flux['data'] .= fin_cadre_enfonce(true);
 		$flux['data'] .= "</div>";
@@ -78,7 +78,7 @@ function projet_affiche_milieu($flux){
  * @param string $flux
  * @return string $flux
  */
-function projet_accueil_informations($flux){
+function projets_accueil_informations($flux){
 	global $spip_lang_left;
 
 	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_projets', '', 'statut', '','', "COUNT(*)<>0");
@@ -99,7 +99,7 @@ function projet_accueil_informations($flux){
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
 		}
-		$res .= afficher_plus(generer_url_ecrire("projets_page",""))."<b>".ucfirst(_T('projet:projets'))."</b>";
+		$res .= afficher_plus(generer_url_ecrire("projets_page",""))."<b>".ucfirst(_T('projets:projets'))."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if (isset($cpt['prepa'])) $res .= "<li>"._T('texte_statut_en_cours_redaction').": ".$cpt2['prepa'].$cpt['prepa'] . '</li>';
 		if (isset($cpt['prop'])) $res .= "<li>"._T('texte_statut_attente_validation').": ".$cpt2['prop'] .$cpt['prop'] .'</li>';
@@ -116,11 +116,11 @@ function projet_accueil_informations($flux){
  * @param string $gadget
  * @return string $gadget
  */
-function projet_accueil_gadgets($gadget){
+function projets_accueil_gadgets($gadget){
 
 	include_spip('inc/tickets_autorisations');
 	if (autoriser('creer', 'projet')) {
-		$icone = icone_horizontale(_T('projet:bouton_creer_projet'), parametre_url(generer_url_ecrire('projets_edit','new=oui'),'redirect',self()), chemin('projet-24.gif','prive/images/'), 'creer.gif', false);
+		$icone = icone_horizontale(_T('projets:bouton_creer_projet'), parametre_url(generer_url_ecrire('projet_edit','new=oui'),'redirect',self()), chemin('projets-24.gif','prive/images/'), 'creer.gif', false);
 
 		$colonnes = extraire_balises($gadget, 'td');
 		$derniere_colonne = fmod(floor(count($colonnes)/2), 4) == 0 ? true : false;
@@ -141,26 +141,26 @@ function projet_accueil_gadgets($gadget){
  * @param Array $array L'array de description des objets
  * @return
  */
-function projet_gouverneur_infos_tables($array){
+function projets_gouverneur_infos_tables($array){
 	$array['spip_projets'] = array(
 								'table_objet' => 'projets',
 								'type' => 'projet',
 								'url_voir' => 'projets',
-								'texte_retour' => 'projet:icone_retour_projet',
-								'url_edit' => 'projets_edit',
-								'texte_modifier' => 'projet:icone_modifier_projet',
-								'icone_objet' => 'projet-24.png',
-								'texte_unique' => 'projet:projet',
-								'texte_multiple' => 'projet:projets',
+								'texte_retour' => 'projets:icone_retour_projet',
+								'url_edit' => 'projet_edit',
+								'texte_modifier' => 'projets:icone_modifier_projet',
+								'icone_objet' => 'projets-24.png',
+								'texte_unique' => 'projets:projet',
+								'texte_multiple' => 'projets:projets',
 								// Pour le plugin revisions en 2.1
 								'champs_versionnes' => array('id_parent', 'titre', 'descriptif', 'texte', 'date', 'date_modif', 'statut')
 							);
 	return $array;
 }
 
-function projet_editer_contenu_objet($flux){
+function projets_editer_contenu_objet($flux){
 	// recuperer les champs crees par les plugins
-	if (($flux['args']['type'] == 'rubrique') && in_array('rubrique',lire_config('projet/ligatures/objets',array()))) {
+	if (($flux['args']['type'] == 'rubrique') && in_array('rubrique',lire_config('projets/ligatures/objets',array()))) {
 
 		/*
 		 * Récupération de la saisie de projets
@@ -172,7 +172,7 @@ function projet_editer_contenu_objet($flux){
 		$contexte['nom'] = 'id_projet';
 		$contexte['type_saisie'] = 'liste_projets';
 		$contexte['option_intro'] = _T('projets:aucun');
-		$contexte['label'] = _T('projet:label_selecteur_projet');
+		$contexte['label'] = _T('projets:label_selecteur_projet');
 
 		$inserer_projet = recuperer_fond('saisies/_base', $contexte);
 
@@ -182,7 +182,7 @@ function projet_editer_contenu_objet($flux){
 	return $flux;
 }
 
-function projet_post_edition($flux){
+function projets_post_edition($flux){
 	if ($flux['args']['table'] == "spip_rubriques") {
 
 		if(_request('id_projet')){

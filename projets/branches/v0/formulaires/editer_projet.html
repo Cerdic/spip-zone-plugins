@@ -12,7 +12,7 @@
 			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:info_titre:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-				<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,#REM|concat{projet:info_nouveau_projet}|_T})]"
+				<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,#REM|concat{projets:info_nouveau_projet}|_T})]"
 				[(#ENV{titre,''}|non)onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 			</li>
 			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">

@@ -21,15 +21,15 @@ function img_puce_statut_projet($statut, $atts='') {
 	switch ($statut) {
 		case 'publie':
 			$img = 'puce-verte.gif';
-			$alt = _T('projet:bulle_puce_publie');
+			$alt = _T('projets:bulle_puce_publie');
 			return http_img_pack($img, $alt, $atts);
 		case 'prepa':
 			$img = 'puce-blanche.gif';
-			$alt = _T('projet:bulle_puce_preparation');
+			$alt = _T('projets:bulle_puce_preparation');
 			return http_img_pack($img, $alt, $atts);
 		case 'poubelle':
 			$img = 'puce-poubelle.gif';
-			$alt = _T('projet:bulle_puce_ferme');
+			$alt = _T('projets:bulle_puce_ferme');
 			return http_img_pack($img, $alt, $atts);
 	}
 	return http_img_pack($img, $alt, $atts);
@@ -39,15 +39,15 @@ function img_puce_statut_auteur($statut, $atts='') {
 	switch ($statut) {
 		case 'publie':
 			$img = 'puce-verte.gif';
-			$alt = _T('projet:bulle_puce_publie');
+			$alt = _T('projets:bulle_puce_publie');
 			return http_img_pack($img, $alt, $atts);
 		case 'prepa':
 			$img = 'puce-blanche.gif';
-			$alt = _T('projet:bulle_puce_preparation');
+			$alt = _T('projets:bulle_puce_preparation');
 			return http_img_pack($img, $alt, $atts);
 		case 'poubelle':
 			$img = 'puce-poubelle.gif';
-			$alt = _T('projet:bulle_puce_ferme');
+			$alt = _T('projets:bulle_puce_ferme');
 			return http_img_pack($img, $alt, $atts);
 	}
 	return http_img_pack($img, $alt, $atts);

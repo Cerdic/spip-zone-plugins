@@ -6,25 +6,25 @@
 		<ul>
 		[(#REM) <!-- Choix de la methode d'autorisation --> ]
 			[(#SAISIE{radio, [(#GET{prefixe})]type,
-				label=<:projet:cfg_lbl_type_autorisation:>,
-				explication=<:projet:cfg_inf_type_autorisation:>,
+				label=<:projets:cfg_lbl_type_autorisation:>,
+				explication=<:projets:cfg_inf_type_autorisation:>,
 				datas=#ARRAY{
-					webmestre,<:projet:cfg_lbl_autorisation_webmestre:>,
-					par_statut,<:projet:cfg_lbl_autorisation_statuts:>,
-					par_auteur,<:projet:cfg_lbl_autorisation_auteurs:>},
+					webmestre,<:projets:cfg_lbl_autorisation_webmestre:>,
+					par_statut,<:projets:cfg_lbl_autorisation_statuts:>,
+					par_auteur,<:projets:cfg_lbl_autorisation_auteurs:>},
 				defaut=webmestre})]
 		</ul>
 		[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
 		<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc">
 
 			[(#SAISIE{statuts_auteurs,[(#GET{prefixe})]statuts,
-				label=<:projet:cfg_lbl_statuts_auteurs:>,
+				label=<:projets:cfg_lbl_statuts_auteurs:>,
 				multiple=oui})]
 		</ul>
 		[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
 		<ul id="[(#GET{prefixe})]bloc_par_auteur" class="[(#GET{prefixe})]bloc">
 			[(#SAISIE{auteurs,[(#GET{prefixe})]auteurs,
-				label=<:projet:cfg_lbl_liste_auteurs:>,
+				label=<:projets:cfg_lbl_liste_auteurs:>,
 				multiple=oui,
 				option_statut=oui})]
 		</ul>

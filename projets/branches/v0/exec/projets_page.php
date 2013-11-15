@@ -19,11 +19,11 @@ function exec_projets_page_dist()
 
 	// Titre, partie, sous-partie (pour le menu)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('projet:titre_page_projets_page'), 'naviguer', 'projets');
+	echo $commencer_page(_T('projets:titre_page_projets_page'), 'naviguer', 'projets');
 
 	// Intitule de la page
 	echo"<br/><br/><br/>\n";//outch!aieaieaie!ausecours!
-	echo gros_titre(_T('projet:titre_contenu_projets_page'), '', false);
+	echo gros_titre(_T('projets:titre_contenu_projets_page'), '', false);
 
 	// Colonne gauche
 	echo debut_gauche('', true);
@@ -33,7 +33,7 @@ function exec_projets_page_dist()
 	// -- Afficher le bloc de raccourcis (cree la colonne aussi: echo creer_colonne_droite('', true);)
 	$bloc = NULL;
 	if (autoriser('creer', 'projet')) {
-		$bloc .= icone_horizontale(_T('projet:icone_ecrire_projet'), parametre_url(generer_url_ecrire('projets_edit','new=oui'),'redirect',self()), chemin('projet-24.gif','prive/images/'), 'creer.gif', false);
+		$bloc .= icone_horizontale(_T('projets:icone_ecrire_projet'), parametre_url(generer_url_ecrire('projet_edit','new=oui'),'redirect',self()), chemin('projets-24.gif','prive/images/'), 'creer.gif', false);
 	}
 	// Creer un pipeline pour ajouter des items dans le bloc des raccourcis
 	if ($bloc)

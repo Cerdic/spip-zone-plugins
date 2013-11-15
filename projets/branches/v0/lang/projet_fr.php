@@ -65,8 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 
 	// P
-	'projet_autorisations' => 'Configuration des autorisations',
-	'projet_ligatures' => 'Configuration des ligatures',
+	'projets_autorisations' => 'Configuration des autorisations',
+	'projets_ligatures' => 'Configuration des ligatures',
 	'projet' => 'projet',
 	'projets' => 'projets',
 
@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_modifier_projet' => 'Modifier le projet&nbsp;:',
-	'texte_projet_statut' => 'Ce projet est :',
+	'texte_projets_statut' => 'Ce projet est :',
 	'titre_contenu_projets_page' => 'Les projets que vous suivez',
 	'titre_page_projets_page' => 'Vos projets',
 	'titre_formulaire_associer' => 'PROJETS',

@@ -7,7 +7,7 @@
  * Lister les ligatures possibles avec un projet
  *
  */
-function projet_lister_ligatures(){
+function projets_lister_ligatures(){
 	global $tables_jointures;
 	
 	$recuperer_infos_tables = charger_fonction('gouverneur_infos_tables','inc');

@@ -7,7 +7,7 @@
  * Declaration des tables du plugin
  *
  */
-function projet_declarer_tables_principales($tables_principales){
+function projets_declarer_tables_principales($tables_principales){
 	$spip_projets = array(
 		"id_projet" 	=> "bigint(21) NOT NULL",
 		"id_parent"		=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -31,7 +31,7 @@ function projet_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function projet_declarer_tables_auxiliaires($tables_auxiliaires){
+function projets_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_projets_liens = array(
 		"id_projet" => "bigint(21) NOT NULL",
 		"id_objet" 	=> "bigint(21) NOT NULL",
@@ -49,7 +49,7 @@ function projet_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
-function projet_declarer_tables_interfaces($interface){
+function projets_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_projets'][] = 'projets_liens';
 	$interface['tables_jointures']['spip_auteurs'][] = 'projets_liens';
 	$interface['tables_jointures']['spip_articles'][] = 'projets_liens';

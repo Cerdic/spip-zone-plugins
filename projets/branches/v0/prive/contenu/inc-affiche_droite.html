@@ -1,7 +1,7 @@
 <BOUCLE_liens_projets(PROJETS){id_auteur=#SESSION{id_auteur}}{type=admin}{0,1}>
 <div class="cadre cadre-liste">
-	<img class="cadre-icone" alt="" src="#CHEMIN{prive/images/projet-24.gif}"/>
-	[(#VAL{projet:associer_au_projet}|_T|bouton_block_depliable{#GET{visible}|=={true}})]
+	<img class="cadre-icone" alt="" src="#CHEMIN{prive/images/projets-24.gif}"/>
+	[(#VAL{projets:associer_au_projet}|_T|bouton_block_depliable{#GET{visible}|=={true}})]
 	[(#VAL{true}|debut_block_depliable)]
 	<div class="ajax">
 	#FORMULAIRE_AJOUT_PROJET{#ENV{objet},#ENV{id_objet}}

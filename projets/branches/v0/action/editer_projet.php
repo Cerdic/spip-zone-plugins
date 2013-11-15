@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_editer_article_dist
-function action_editer_projet_dist() {
+function action_editer_projets_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -34,7 +34,7 @@ function action_editer_projet_dist() {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_projet > 0) $err = projets_set($id_projet);
+	if ($id_projet > 0) $err = projet_set($id_projet);
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
@@ -50,7 +50,7 @@ function action_editer_projet_dist() {
 // Appelle toutes les fonctions de modification d'un projet
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@articles_set
-function projets_set($id_projet) {
+function projet_set($id_projet) {
 	$err = '';
 
 	// unifier $texte en cas de texte trop long
@@ -174,7 +174,7 @@ function instituer_projet($id_projet, $c, $calcul_rub=true) {
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_projet/$id_projet'");
+	suivre_invalideur("id='id_projets/$id_projet'");
 
 	// Pipeline
 	pipeline('post_edition',

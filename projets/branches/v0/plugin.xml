@@ -1,65 +1,65 @@
 <plugin>
 	<nom>SPIP-Projet</nom>
 	<auteur>Eric Lupinacci</auteur>
-	<version>0.2.1</version>
-	<version_base>0.1.0</version_base>
+	<version>0.2.2</version>
+	<version_base>0.1.1</version_base>
 	<licence>GPL</licence>
 	<etat>dev</etat>
 	<prefix>projets</prefix>
-	<icon>images/projet-64.png</icon>
+	<icon>images/projets-64.png</icon>
 	<description>
 	Plugin de gestion de projets pour SPIP 2
 	</description>
-	<install>base/projet_installer.php</install>
-	<options>projet_options.php</options>
-	<fonctions>projet_fonctions.php</fonctions>
+	<install>base/projets_installer.php</install>
+	<options>projets_options.php</options>
+	<fonctions>projets_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/projet_declarer.php</inclure>
+		<inclure>base/projets_declarer.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/projet_declarer.php</inclure>
+		<inclure>base/projets_declarer.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/projet_declarer.php</inclure>
+		<inclure>base/projets_declarer.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>accueil_gadgets</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>accueil_informations</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>inc/projet_autorisations.php</inclure>
+		<inclure>inc/projets_autorisations.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_edition</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>gouverneur_infos_tables</nom>
-		<inclure>projet_pipelines.php</inclure>
+		<inclure>projets_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8;]" />

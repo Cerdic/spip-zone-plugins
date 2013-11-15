@@ -9,7 +9,7 @@
 
 <B_liste_projets>
 <div class="cadre cadre-liste">
-	<img class="cadre-icone" alt="" src="#CHEMIN{prive/images/projet-24.gif}"/>
+	<img class="cadre-icone" alt="" src="#CHEMIN{prive/images/projets-24.gif}"/>
 	[(#ENV{titre}|bouton_block_depliable{#GET{visible}|=={true}})]
 	[(#GET{visible}|=={true}|debut_block_depliable)]
 	[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
@@ -20,7 +20,7 @@
 			<td style="width: 11px;">[(#ID_PROJET|puce_changement_statut{#STATUT, 0, projet})]</td>
 			<td class="arial2">
 				<div>
-					<a href="#URL_ECRIRE{projets, id_projet=#ID_PROJET}" title="<:projet:bulle_modifier_projet:>">
+					<a href="#URL_ECRIRE{projets, id_projet=#ID_PROJET}" title="<:projets:bulle_modifier_projets:>">
 						#TITRE
 						[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#LOGO_PROJET||image_reduire{26,20})</span>]
 					</a>
@@ -34,7 +34,7 @@
 			</td>
 	</B_admins>
 			<td class="arial0" style="width: 100px;">[(#DATE|affdate_court)]</td>
-			<td class="arial1" style="width: 50px;"><a class="spip_xx-small" href="?exec=projets_edit&amp;id_projet=#ID_PROJET" title="<:projet:bulle_modifier_projet:>" style="float: right; padding-left: 4px; color: black;"><b>N&deg;&nbsp;#ID_PROJET</b></a></td>
+			<td class="arial1" style="width: 50px;"><a class="spip_xx-small" href="?exec=projet_edit&amp;id_projet=#ID_PROJET" title="<:projets:bulle_modifier_projets:>" style="float: right; padding-left: 4px; color: black;"><b>N&deg;&nbsp;#ID_PROJET</b></a></td>
 		</tr>
 </BOUCLE_liste_projets>
 	</tbody>
