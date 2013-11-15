@@ -30,6 +30,8 @@ function _image_responsive($img, $taille=120, $dpr=1) {
 	$src = extraire_attribut($img, "src");
 	$src = preg_replace(",\?[0-9]*$,", "", $src);
 	if (file_exists($src)) {
+		$l = largeur($src);
+		$h = hauteur($src);
 
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
@@ -46,8 +48,9 @@ function _image_responsive($img, $taille=120, $dpr=1) {
 		}
 		
 		if ($taille == 0) $src = "rien.gif";
-		
 		if ($dpr == 0) $img = inserer_attribut($img, "data-dpr", "0");
+		$img = inserer_attribut($img, "data-l", $l);
+		$img = inserer_attribut($img, "data-h", $h);
 
 
 		$img = inserer_attribut($img, "src", $src);
