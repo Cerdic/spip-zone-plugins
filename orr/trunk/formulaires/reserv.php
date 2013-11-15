@@ -1,6 +1,8 @@
 <?php
 
 function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$nom,$idresa){
+    include_spip('inc/config');
+    $valeurs = array();
     list($dated,$heured)            = explode(' ',$date_deb);
     list($anneed,$moisd,$jourd)     = explode('-',$dated);
     list($heured,$minuted,$econded) = explode(':',$heured);
@@ -17,6 +19,20 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$nom,$id
         "date_debut"      => $date_deb,
         "date_fin"        => $date_f,
     );
+    // Initialisation des valeurs des champs extra
+    if (lire_config("champs_extras_spip_orr_reservations")) {
+        // Récupération du nom des champs extra
+        $nom_champs_extra = array();
+        $nom_champs_extra = nom_champs_extra();
+        // récupération de la valeurs des champs extra, si on a une résa
+        $valeur_champs_extra = array();
+        if ($idresa) {
+            $valeur_champs_extra= sql_allfetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
+        }
+        foreach ($nom_champs_extra as $key) {
+            $valeurs[$key] = $valeur_champs_extra[0][$key];
+        } 
+    }
     return $valeurs;
 }
 
@@ -98,6 +114,12 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$nom,$id
         'orr_date_fin'        => $date_fin
     );
 
+    //récupération des valeurs des champs extra
+    $nom_champs_extra = array();
+    $nom_champs_extra = nom_champs_extra();
+    foreach ($nom_champs_extra as $key) {
+        $set[$key] = _request($key);
+    }
 	if ($idresa>"0"){
 		$id_objet=$idresa;
 	}else{
@@ -111,5 +133,12 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$nom,$id
     objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$idressource));
 
     return $retour;
+}
+/*
+ * Récupération du nom des champs extra
+ */
+function nom_champs_extra(){
+        $desc = sql_showtable('spip_orr_reservations', true);
+        return array_keys(array_slice($desc["field"],5));
 }
 ?>

@@ -28,6 +28,11 @@
                 <input type="text" id="date_fin" class="datepicker" name="date_fin" value="[(#ENV{date_fin})]" />
                 <span class="error-message"></span>
                 </li>
+
+                [(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/affichage_champs_extra}{env}>]
+
+
+
             </ul>
         [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!-- extra -->
