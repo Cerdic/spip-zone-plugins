@@ -300,7 +300,9 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 		$fallback_file = $fallback_file['10x'];
 	}
 	// embarquer le fallback en DATA URI si moins de 32ko (eviter une page trop grosse)
-	$fallback_file = filtre_embarque_fichier($fallback_file,"",32000);
+	if (!isset($GLOBALS['tables_mime']))
+		include_spip("base/typedoc");
+	$fallback_file = adaptive_images_filtre_embarque_fichier($fallback_file,"",32000);
 
 	$prev_width = 0;
 	$medias = array();
@@ -357,6 +359,55 @@ function adaptive_images_markup($img, $rwd_images, $width, $height, $extension, 
 	$out .= "<!--[if !IE]><!--><span class=\"adapt-img-wrapper $cid $extension\">$img</span>\n<style>$style</style><!--<![endif]-->";
 
 	return $out;
+}
+
+/**
+ * Embarquer sous forme URI Scheme un fichier
+ * fix temporaire pour filtre_embarque_fichier de compresseur_fonctions qui fait une requete SQL a chaque hit
+ * on utilise la globale tables_mime si chargee en memoire (a faire par l'appelant)
+ *
+ * Une URI Scheme est de la forme data:xxx/yyy;base64,....
+ *
+ * Experimental
+ *
+ * @filtre embarque_fichier
+ *
+ * @staticvar array $mime
+ *     Couples (extension de fichier => type myme)
+ * @param string $src
+ *     Chemin du fichier
+ * @param string $base
+ *     Le chemin de base à partir duquel chercher $src
+ * @param int $maxsize
+ *     Taille maximale des fichiers à traiter
+ * @return string
+ *     URI Scheme du fichier si la compression est faite,
+ *     URL du fichier sinon (la source)
+ */
+function adaptive_images_filtre_embarque_fichier ($src, $base="", $maxsize = 4096) {
+	static $mime = array();
+	$extension = substr(strrchr($src,'.'),1);
+	$filename = $base . $src;
+
+	if (!file_exists($filename)
+		OR filesize($filename)>$maxsize
+		OR !lire_fichier($filename, $contenu))
+		return $src;
+
+	if (!isset($mime[$extension])){
+		if (isset($GLOBALS['tables_mime']) AND isset($GLOBALS['tables_mime'][$extension]))
+			$mime[$extension] = $GLOBALS['tables_mime'][$extension];
+	}
+	if (!isset($mime[$extension])){
+		if (!function_exists("sql_getfetsel"))
+			include_spip("base/abstract_sql");
+		$mime[$extension] = sql_getfetsel('mime_type','spip_types_documents','extension='.sql_quote($extension));
+	}
+
+	$base64 = base64_encode($contenu);
+	$encoded = 'data:'.$mime[$extension].';base64,'.$base64;
+
+	return $encoded;
 }
 
 /**
