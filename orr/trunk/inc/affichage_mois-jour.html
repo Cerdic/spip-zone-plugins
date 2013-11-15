@@ -19,7 +19,8 @@
                         Date de debut : [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
                         Date de fin : [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>
                         Nom :  #GET{auteur} </br>
-                        <INCLURE{fond=inc/affichage_champs_extra-mois}{id_resa=#ID_ORR_RESERVATION}>
+                        [(#CONFIG*{champs_extras_spip_orr_reservations}|oui)
+                        <INCLURE{fond=inc/affichage_champs_extra-mois}{id_resa=#ID_ORR_RESERVATION}>]
                      </span>
                  </span> <br /> 
             </div>]
