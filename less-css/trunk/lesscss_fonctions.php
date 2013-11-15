@@ -36,7 +36,9 @@ function lesscss_compile($style, $contexte = array()){
 	try {
 		$out = $less->parse($style);
 
-		if (count($files = array_keys($less->allParsedFiles()))){
+		if ($files = $less->allParsedFiles()
+		  AND count($files)){
+			$files = array_keys($files);
 			$l = strlen(_ROOT_RACINE);
 			foreach($files as $k=>$file){
 				if (strncmp($file,_ROOT_RACINE,$l)==0){
