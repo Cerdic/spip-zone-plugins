@@ -176,6 +176,8 @@ function action_image_responsive() {
 	$img = _request("img");
 	$taille = _request("taille");
 	$dpr = _request("dpr");
+	
+	$xsendfile = _request("xsendfile");
 
 
 	if (file_exists($img)) {
@@ -186,7 +188,7 @@ function action_image_responsive() {
 		if ($dpr > 1) $dest .= "$dest-$dpr";
 		else $dpr = false;
 		
-		$dest = $base."/".$dest.".".$terminaison;
+		$dest = $base.$dest.".".$terminaison;
 
 		if (file_exists($dest)) {
 			if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && 
@@ -205,22 +207,31 @@ function action_image_responsive() {
 			//cette méthode permet d'accélérer par rapport à SPIP
 			// parce qu'on connait le nom du fichier à l'avance
 			// et on fait donc les tests sans déclencher la cavalerie
-			$img = image_reduire_net ($img, $taille, 0, $dpr);
-			$img = extraire_attribut($img, "src");
+			$img_new = image_reduire_net ($img, $taille, 0, $dpr);
+			$img_new = extraire_attribut($img_new, "src");
 			
-			copy($img, $dest);
+			copy($img_new, $dest);
+			if ($img_new != $img) unlink ($img_new);
 		}
 		$extension = str_replace("jpg", "jpeg", $terminaison);
 		$expires = 60*60*24*14;
 	
-		header("Content-Type: image/".$extension);
-		header("Pragma: public");
-		header("Cache-Control: maxage=".$expires);
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
-		header('Content-Length: '.filesize($dest));
-
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
-		readfile($dest);
+		if ($xsendfile == 1) {	
+			//$dest = "/var/www/beach-fashion/$dest";
+			//die($dest);
+			header("X-Sendfile: $dest");
+			header("Content-Type: image/".$extension);
+			exit;
+		} else {
+			header("Content-Type: image/".$extension);
+			header("Pragma: public");
+			header("Cache-Control: maxage=".$expires);
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+			header('Content-Length: '.filesize($dest));
+	
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
+			readfile($dest);
+		}
 	
 				
 	} else {

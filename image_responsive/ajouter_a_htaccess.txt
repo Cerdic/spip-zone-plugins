@@ -1,4 +1,10 @@
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
+## Si ça déconne, essayer de virer la partie des <ifModule>
+## si l'erreur vient de là, XSendfile est sans doute installé mais mal configuré.
 
+
+<IfModule xmod_sendfile.c>
+RewriteRule (.*)\-resp([0-9]+)(\-([0-9\.]+))?\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$5&taille=$2&dpr=$4&xsendfile=1
+</IfModule>
 RewriteRule (.*)\-resp([0-9]+)(\-([0-9\.]+))?\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$5&taille=$2&dpr=$4
