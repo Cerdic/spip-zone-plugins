@@ -18,7 +18,7 @@ include_spip('inc/plugin');
 chdir('../plugins');
 $plugins = liste_plugin_files();
 $i=1;
-echo sprintf ("%'_3s %3s %'_-30s %'_-20s %'_-20s"," n°","A","Nom","Version","Prefixe");
+echo sprintf ("%'_3s %3s %'_-30s %'_-10s %'_-15s"," n°","A","Nom","Version","Prefixe");
 echo "\n";
 //Récupération du nom, préfixe et numéro de version des plugins disponibles
 //dans le répertoire plugins
@@ -49,12 +49,12 @@ foreach ($plugins as $key=>$repertoire) {
     //Affichage formaté
     if($i%2 == 1){
         echo $couleur;    
-        echo sprintf ("%3s %3s %-30s %-20s %-30s",$i,$symbole,$nom[0],$version[0],$prefix[0]);
+        echo sprintf ("%3s %3s %-30s %-10s %-20s",$i,$symbole,$nom[0],$version[0],$prefix[0]);
         echo "\033[0m";
     }
     else{
         echo $couleur;    
-        echo sprintf ("%3s %3s %'--30s %'--20s %-30s",$i,$symbole,$nom[0],$version[0],$prefix[0]);
+        echo sprintf ("%3s %3s %'--30s %'--10s %-20s",$i,$symbole,$nom[0],$version[0],$prefix[0]);
         echo "\033[0m";
     }
     echo "\n";
