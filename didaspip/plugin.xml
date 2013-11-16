@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Didaspip</nom>
-	<version>2.9.4</version>
+	<version>3.4.0</version>
 	<prefix>dida</prefix>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<categorie>divers</categorie>
 	<slogan>Int&eacute;grer un projet Didapages dans SPIP</slogan>
 	<description>
