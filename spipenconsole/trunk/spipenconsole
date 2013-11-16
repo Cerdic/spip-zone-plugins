@@ -7,6 +7,8 @@ E_ERREUROPTION=65
 #Si on est dans le répertoire plugins ou dans un de ses sous répertoires ex : plugins/saisies
 if [[ "`pwd| grep plugins`" ]]; then
     repertoire_racine=${PWD%/plugins*}
+    repertoire_plugins=$repertoire_racine/plugins
+    repertoire_executables=$repertoire_plugins/spipenconsole
 # Si on est à la racine du spip
 elif [[ -d plugins-dist ]]; then
     repertoire_racine=${PWD}
