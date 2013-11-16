@@ -167,7 +167,7 @@ function tw_qr($t) {
 		$index_ligne++;
 	}
 
-	// Appel pour chaque todolist du modèle par défaut
+	// Appel pour chaque FAQ du modèle demandé ou par défaut
 	if ($faqs) {
 		$html = '';
 		$format = $t[3] ? $t[3] : 'dl';
