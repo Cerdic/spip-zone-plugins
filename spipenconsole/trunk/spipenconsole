@@ -4,18 +4,21 @@ SANS_ARGS=0
 E_ERREUROPTION=65
 
 #Récupération des differents chemins
-if [[ "${PWD##*/}" = "plugins" ]]; then
-    repertoire_executables=${PWD}/spipenconsole
-    repertoire_plugin=${PWD}
-    repertoire_racine=${PWD%/plugins}
-elif [[ "${PWD##*/}" = "spipenconsole" ]]; then
-    repertoire_executables=${PWD}
-    repertoire_plugin=${PWD%/*}
-    repertoire_racine=${PWD%/plugins/spipenconsole}
-else
-    repertoire_executables=${PWD}/plugins/spipenconsole
-    repertoire_plugin=${PWD}/plugins
+#Si on est dans le répertoire plugins ou dans un de ses sous répertoires ex : plugins/saisies
+if [[ "`pwd| grep plugins`" ]]; then
+    repertoire_racine=${PWD%/plugins*}
+# Si on est à la racine du spip
+elif [[ -d plugins-dist ]]; then
     repertoire_racine=${PWD}
+    repertoire_plugins=$repertoire_racine/plugins
+    repertoire_executables=$repertoire_plugins/spipenconsole
+else    
+    echo ""
+    echo "Vous devez vous placer soit :"
+    echo " - A la racine du spip,"
+    echo " - Dans le répertoire plugins ou l'un de ses sous répertoires ! (ex : plugins/saisies)"
+    echo ""
+    exit
 fi
 
 if [ $# -eq "$SANS_ARGS" ]  # Script appelé sans argument?
@@ -26,7 +29,13 @@ fi
 function F_aide(){
 echo "`basename $0`, version 1"
 echo ""
-echo "syntaxe: ..."
+echo "syntaxe: spipenconsole -[arguments][options]"
+echo "exemple : spipenconsole -a saisies,z  -> activera les plugins saisies et Z"
+echo ""
+echo "ATTENTION : spipenconsole fonctionne seulement si vous etes :"
+echo " - A la racine du spip,"
+echo " - Dans le répertoire plugins ou l'un de ses sous répertoires ! (ex : plugins/saisies)"
+echo ""
 echo "-h : help"
 echo "-v : version"
 echo "-l : liste tous les plugins, s'il y a un astérisque \"*\", le plugin est activé "
@@ -39,9 +48,9 @@ echo "Il est possible de faire un lien symbolique de cet exécutable soit :"
 echo "  - vers le répertoire plugins."
 echo "  - vers le répertoire racine." 
 echo "avec la commande  'ln -s plugins/spipenconsole/spipenconsole .'(si vous etes dans le répertoire racine)"
-
+echo ""
+echo "Il est possible aussi de créer un alias dans son .bashrc ou .zshrc ..."
 }
-
 
 while getopts vhla:d:t:f option
 do
@@ -70,16 +79,14 @@ do
             IFS=,
             set $OPTARG
             IFS="$OLDIFS"; unset $OLDIFS
-            svn checkout svn://zone.spip.org/spip-zone/_plugins_/${1}/${2} $repertoire_plugin/${1}
+            svn checkout svn://zone.spip.org/spip-zone/_plugins_/${1}/${2} $repertoire_plugins/${1}
             ;;
         f)
             while IFS=, read nom dossier
             do  
-                svn checkout svn://zone.spip.org/spip-zone/_plugins_/${nom}/${dossier} $repertoire_plugin/${nom}
+                svn checkout svn://zone.spip.org/spip-zone/_plugins_/${nom}/${dossier} $repertoire_plugins/${nom}
             done < $repertoire_executables/telecharger.csv
-            #cd $repertoire_plugin/spipenconsole
             $repertoire_executables/lister_plugins.php "$repertoire_executables"
             ;;
     esac
 done
-
