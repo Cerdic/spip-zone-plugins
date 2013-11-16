@@ -43,7 +43,7 @@ Some components take care of these optionnal plugins :
 	<auteur>Daniel FAIVRE</auteur>
 	<licence>GPL - (c) 2007-2012</licence>
 	<version>3.0.0</version>
-	<etat>stable</etat>
+	<etat>dev</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
@@ -83,7 +83,7 @@ Some components take care of these optionnal plugins :
 		<inclure>inc/acs_pipeline_public.php</inclure>
 	</pipeline>
 
-	<necessite id="spip" version="[1.9.2;3.0.99]" />
+	<necessite id="spip" version="[1.9.3;3.0.99]" />
 
-	<categorie>outil</categorie>
+	<categorie>edition</categorie>
 </plugin>
