@@ -22,7 +22,7 @@
 	<lien>http://www.quesaco.org/Illustration-sonore-mp3</lien>
 	
 	<version>3.0.0</version>
-	<etat>stable</etat>
+	<etat>test</etat>
 	<icon>images/fmp3-64.png</icon>
 	
 	<!-- espace de nommage -->
