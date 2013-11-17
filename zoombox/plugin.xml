@@ -27,7 +27,7 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	 <nom>insert_js</nom>
 	 <inclure>zoombox_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id='cfg' version='[1.16.0;]' />
 	<categorie>multimedia</categorie>
 </plugin>
