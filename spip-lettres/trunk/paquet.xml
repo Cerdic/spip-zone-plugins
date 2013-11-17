@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="5.8.0"
 	etat="dev"
-	compatibilite="[3.0.0-dev;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/lettre-48.png"
 	schema="5.4"
 	documentation="http://www.spip-contrib.net/Spip-Lettres-gestionnaire-de-newsletter"
