@@ -1,0 +1,19 @@
+<paquet
+	prefix="app"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="app.png"
+	documentation="http://www.spip-contrib.net/?articleXXXX"
+>
+	<nom>Atom Publishing Protocol</nom>
+	
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<copyright>2011</copyright>
+	<licence>GPL v3</licence>
+	
+	<traduire module="paquet-app" reference="fr" gestionnaire="salvatore" />
+	
+	<necessite nom="http" compatibilite="[0.1.0;0.1.*]" />
+</paquet>
