@@ -58,17 +58,17 @@ function update_spip_asso_membre($id_auteur) {
 	$modif = array();
 	$nom = $auteur['nom']; // on recupere les noms et prenoms dans le champ nom de l'auteur SPIP
 	if ($nom) {
-		/* selection du format d'import du champ non */
+		/* selection du format d'import du champ nom */
 		if ($GLOBALS['association_metas']['import_nom_auteur']=='prenom_nom') {
-			list($prenom, $nom) = preg_split('/\s+/', $nom, 2);
-			if (!$nom) { // il n'y avait qu'une seule chaine : on la met dans le nom et le prenom reste vide
+			list($prenom, $nom) = preg_split('/\s+/', $nom, 1);
+			if (!$nom) { // il n'y avait qu'un seul mot : on le met dans le nom et le prenom reste vide
 				$nom = $prenom;
 				$prenom = '';
 			}
 		} elseif ($GLOBALS['association_metas']['import_nom_auteur']=='nom') {
 			$prenom = '';
 		} else { // defaut: format nom prenom
-			list($nom, $prenom) = preg_split('/\s+/', $nom, 2); //!\ on ne sait pas gerer le cas ou le nom de famille contient un espace
+			list($nom, $prenom) = preg_split('/\s+/', $nom, 1); //!\ on ne sait pas gerer le cas ou le nom de famille contient un espace
 		}
 	} else { // s'il est vide, le nom sera Adherent XX
 		$nom = _T('asso:activite_entete_adherent').' '.$id_auteur;
