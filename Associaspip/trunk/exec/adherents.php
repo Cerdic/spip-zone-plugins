@@ -140,8 +140,8 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	include_spip('inc/filtres_images_mini');
 	$limit = intval(_request('debut')) . "," . _ASSOCIASPIP_LIMITE_SOUSPAGE;
-	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio',"spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure", $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
-//	echo "<div style='background:yellow; color:red;'>SQL WHERE : $critere</div>"; // query check
+	$from = "spip_asso_membres AS m LEFT JOIN spip_auteurs AS a ON m.id_auteur=a.id_auteur $jointure";
+	$query = sql_select('m.id_auteur AS id_auteur, a.email AS email, m.sexe, m.nom_famille, m.prenom, m.id_asso, a.statut AS statut, m.date_validite, m.statut_interne, m.id_categorie, a.bio AS bio', $from, $critere, '', 'm.nom_famille, m.prenom, m.date_validite', $limit);
 	$tbd = '';
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	while ($data = sql_fetch($query)) {
@@ -287,7 +287,7 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 		$nav .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 		.  '</td>';
 	}
-	$res .= association_form_souspage(array('spip_asso_membres', $critere), 'adherents', $args_url, $nav);
+	$res .= association_form_souspage(array($from, $critere), 'adherents', $args_url, $nav);
 // FIN
 	return generer_form_ecrire('action_adherents', $res);
 }

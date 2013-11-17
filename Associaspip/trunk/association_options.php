@@ -1942,13 +1942,13 @@ function association_form_filtres($liste_filtres, $exec='', $supplements='', $td
  *   Liste des elements a passer a "sql_countsel"
  * @param string $exec
  *   Nom du fichier appelant
- * @param string $params
- *   Autres informations passees par l'URL
+ * @param array $arg
+ *   Liste d'autres informations passees par l'URL
  * @param int $debut
  *   Numero du premier enregistrement (si $req est a faux)
  *   Nom du champ contenant ce numero (si $req est a vrai)
  * @param string $plus
- *   Autres cellules du tableau uniligne. (utilise dans comptess et adherents !)
+ *   Autres cellules du tableau uniligne. (utilise dans comptes et adherents !)
  * avec d'autres (FALSE)
  * @param bool $req
  * 	Cf. $debut
