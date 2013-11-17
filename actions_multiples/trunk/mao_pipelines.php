@@ -9,24 +9,25 @@ if (!defined('_AM_PATTERN_TR'))
 if (!defined('_AM_PATTERN_ID'))
 	define('_AM_PATTERN_ID', "%<td([^>]*(?:id=([\"'])([^\"']+)\2)[^>]*|)>\n(.*?)\n</td>%s");
 
-function am_insert_head_css($flux) {
+function mao_insert_head_css($flux) {
 //	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/qr.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
-function am_header_prive($flux) {
+function mao_header_prive($flux) {
 //	$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
 	return $flux;
 }
 
-$GLOBALS['am_listes'] = array(
+$GLOBALS['mao_listes'] = array(
 	'prive/objets/liste/articles',
 );
 
-function am_recuperer_fond($flux) {
+
+function mao_recuperer_fond($flux) {
 	include_spip('inc/filtres');
 
-	if (in_array($flux['args']['fond'], $GLOBALS['am_listes'])) {
+	if (in_array($flux['args']['fond'], $GLOBALS['mao_listes'])) {
 		$fond = $flux['args']['fond'];
 		$texte = $flux['data']['texte'];
 		$objet = array_pop(explode('/', $fond));
@@ -34,13 +35,13 @@ function am_recuperer_fond($flux) {
 		// Ajout d'une colonne en première position dans le thead pour coincider avec le tbody
 		$thead = extraire_balise($texte, 'thead');
 		if (preg_match(_AM_PATTERN_TR, $thead, $balises_tr)) {
-			$choix = recuperer_fond('inclure/am_th_choix', $contexte);
+			$choix = recuperer_fond('inclure/mao_th_choix', $contexte);
 			$texte = str_replace($balises_tr[2], $choix . $balises_tr[2], $texte);
 		}
 
 		// Ajout d'une ligne de boutons d'action en fin du thead de la table
 		$contexte = array();
-		$actions = recuperer_fond("inclure/am_$objet", $contexte);
+		$actions = recuperer_fond("inclure/mao_$objet", $contexte);
 		$texte = str_replace('</thead>', $actions . '</thead>', $texte);
 
 		// Ajout pour chaque ligne du body d'une colonne en première position afin de faire
@@ -53,7 +54,7 @@ function am_recuperer_fond($flux) {
 				if (preg_match(_AM_PATTERN_ID, $_balise, $matches)){
 					// Insérer la colonne de choix
 					$contexte = array('nom' => "ids_$objet", 'valeur' => 1);
-					$choix = recuperer_fond('inclure/am_td_choix', $contexte);
+					$choix = recuperer_fond('inclure/mao_td_choix', $contexte);
 					$texte = str_replace($_balise, $choix . $_balise, $texte);
 				}
 			}
