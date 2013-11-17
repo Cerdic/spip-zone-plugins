@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.4.1"
 	etat="test"
-	compatibilite="[3.0.0-alpha2;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="images/metas-24.png"
 	schema="1.2"
   documentation="http://www.spip-contrib.net/?rubrique1250"
