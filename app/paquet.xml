@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.1.0"
 	etat="dev"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="app.png"
 	documentation="http://www.spip-contrib.net/?articleXXXX"
 >
@@ -15,5 +15,5 @@
 	
 	<traduire module="paquet-app" reference="fr" gestionnaire="salvatore" />
 	
-	<necessite nom="http" compatibilite="[0.1.0;]" />
+	<necessite nom="http" compatibilite="[0.1.0;0.1.*]" />
 </paquet>
