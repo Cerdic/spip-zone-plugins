@@ -3,6 +3,10 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_once _DIR_PLUGIN_HTTP.'vendor/autoload.php';
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 /*
  * Porte d'entrée des API lecture/écriture orientés REST
  * Cette action gère donc la partie "serveur HTTP" en redirigeant les méthodes (GET, PUT, etc) vers les fonctions spécifiques
@@ -10,65 +14,77 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * http://www.site.tld/http.api/atom/patates => feed, GET=liste (critères possibles), POST=création
  * http://www.site.tld/http.api/atom/patates/1234 => entry, GET=lecture, PUT=mise à jour
  */
-function action_api_http_dist(){	
+function action_api_http_dist(){
+	// On crée les informations sur la requête cliente
+	$requete = Request::createFromGlobals();
+	// On crée déjà la réponse, mais totalement vide, qui sera modifiée et remplie au fil du temps
+	$reponse = new Response();
+	
 	// Il faut au moins le format dans l'argument sinon rien
-	if (!$arg = _request('arg')){
-		header('Status: 404 Not Found');
-		exit;
+	if (!$arg = $requete->query->get('arg')){
+		$reponse->setStatusCode('404');
 	}
 	else{
+		// On récupère les trois informations possibles, seul $format est obligatoire :
+		// http.api/json
+		// http.api/json/patates
+		// http.api/json/patates/1234
 		list($format, $collection, $ressource) = explode('/', $arg);
 		define('_SET_HTML_BASE', true);
 		
-		// Si le format n'a pas le bon format ou que le fichier avec l'implémentation n'existe pas, on arrête
+		// Si le format n'a pas le bon format, on arrête
 		if (!preg_match('/^[\w]+$/', $format)){
-			header('Status: 404 Not Found');
-			exit;
+			$reponse->setStatusCode('404');
 		}
-		
-		$methode = $_SERVER["REQUEST_METHOD"];
-		
-		// Si on est dans une méthode où il FAUT poster quelque chose
-		if (in_array($methode, array('POST', 'PUT', 'PATCH'))){
-			// On récupère le contenu
-			$contenu = trim(file_get_contents("php://input"));
-		}
-		
-		// On cherche ce qu'on est en train de demander avec cette URL
-		// S'il n'y a pas de collection c'est l'index
-		if (!$collection){
-			$type = 'index';
-		}
-		// Sinon s'il n'y a que la collection sans la ressource
-		elseif (!$ressource){
-			$type = 'collection';
-		}
-		// Sinon c'est une ressource
 		else{
-			$type = 'ressource';
-		}
-
-		// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
-		if ($methode == 'GET'
-			and $fonction = charger_fonction("get_$type", "http/$format/", true) // http_atom_get_index()
-		){
-			// On teste l'autorisation sinon 401
-			if (
-				autoriser("get_$type", $collection, $ressource) // autoriser_patates_get_collection_dist()
-			){
-				$fonction($collection, $ressource);
+			// On garde en mémoire dans la requête les infos trouvées précédemment
+			$requete->attributes->add(array(
+				'format' => $format,
+				'collection' => $collection,
+				'ressource' => $ressource,
+			));
+			$methode = $requete->getMethod();
+			
+			// Avec le format, on cherche une fonction d'erreur propre au format, qui est obligatoire
+			$fonction_erreur = charger_fonction('erreur', "http/$format/");
+			
+			// On cherche ce qu'on est en train de demander avec cette URL
+			// S'il n'y a pas de collection c'est l'index
+			if (!$collection){
+				$type_reponse = 'index';
 			}
+			// Sinon s'il n'y a que la collection sans la ressource
+			elseif (!$ressource){
+				$type_reponse = 'collection';
+			}
+			// Sinon c'est une ressource
 			else{
-				header('Status: 401 Unauthorized');
-				exit;
+				$type_reponse = 'ressource';
 			}
-		}
-		// Si la fonction n'existe pas ça n'existe pas
-		else{
-			header('Status: 404 Not Found');
-			exit;
+			
+			// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
+			if ($methode == 'GET'
+				and $fonction = charger_fonction("get_$type_reponse", "http/$format/", true) // http_atom_get_index()
+			){
+				// Si on a l'autorisation, on lance la fonction trouvée
+				if (
+					autoriser("get_$type_reponse", $collection, $ressource) // autoriser_patates_get_collection_dist()
+				){
+					$reponse = $fonction($requete, $reponse);
+				}
+				// Sinon on lève une 401
+				else{
+					$reponse = $fonction_erreur(401,$requete, $reponse);
+				}
+			}
+			// Si on a trouvé aucune fonction correspondant aux paramètres, ça n'existe pas
+			else{
+				$reponse = $fonction_erreur(404, $requete, $reponse);
+			}
 		}
 	}
+	
+	//  Enfin, s'il n'y a pas eu d'exit en amont, on envoie la réponse
+	$reponse->prepare($requete);
+	$reponse->send();
 }
-
-?>
