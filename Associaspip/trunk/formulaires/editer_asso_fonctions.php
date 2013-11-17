@@ -16,7 +16,7 @@ include_spip('inc/editer');
 
 function formulaires_editer_asso_fonctions_charger_dist($id_groupe=0, $id_auteur=0) {
 	$contexte['id_groupe'] = $id_groupe;
-	$contexte['_action'] = array('editer_membres_groupe', $id_groupe); // pour passer securiser action
+	$res['_action'] = array('editer_asso_fonctions', $id_groupe); // pour passer securiser action
 
 	return $contexte;
 }
