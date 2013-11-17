@@ -7,61 +7,70 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Implémentation d'un serveur REST pour APP (AtomPub)
  */ 
 
-
-/*
- * GET sur la racine du serveur Atom
- * http://site/rest.api/atom
+/**
+ * Rien, car en Atom il n'y a malheureusement pas de gestion des erreurs pour l'instant
+ *
+ * @param int $code Le code HTTP de l'erreur à générer
+ * @return string Retourne une chaîne vide
  */
-function http_atom_get_index_dist(){
-	
+function http_atom_erreur_dist($code, $requete, $reponse){
+	$reponse->setStatusCode($code);
+	$reponse->setContent('');
+	return $reponse;
 }
 
 /*
  * GET sur une collection
  * http://site/rest.api/atom/patates
  */
-function http_atom_get_collection_dist($collection){
+function http_atom_get_collection_dist($requete, $reponse){
+	$collection = $requete->attributes->get('collection');
+	$contexte = $requete->query->all();
+	
 	// Pour l'instant on va simplement chercher un squelette du nom de la collection
 	// Le squelette prend en contexte les paramètres du GET uniquement
-	if ($flux = recuperer_fond("http/atom/$collection", $_GET)){
-		header('Status: 200 OK');
-		header("Content-type: application/atom+xml; charset=utf-8");
-		echo $flux;
-		exit;
+	if ($flux = recuperer_fond("http/atom/$collection", $contexte)){
+		$reponse->setStatusCode(200);
+		$reponse->setCharset('utf-8');
+		$reponse->headers->set('Content-Type', 'application/atom+xml');
+		$reponse->setContent($flux);
 	}
 	// Si on ne trouve rien c'est que ça n'existe pas
 	else{
-		header('Status: 404 Not Found');
-		exit;
+		$reponse->setStatusCode(404);
 	}
+	
+	return $reponse;
 }
 
 /*
  * GET sur une ressource
  * http://site/rest.api/atom/patates
  */
-function http_atom_get_ressource_dist($collection, $ressource){
+function http_atom_get_ressource_dist($requete, $reponse){
 	// Pour l'instant on va simplement chercher un squelette du nom de la ressource
 	// Le squelette prend en contexte les paramètres du GET + l'identifiant de la ressource en essayant de faire au mieux
 	include_spip('base/objets');
+	$collection = $requete->attributes->get('collection');
+	$ressource = $requete->attributes->get('ressource');
 	$cle = id_table_objet($collection);
 	$contexte = array(
 		$cle => $ressource,
 		'ressource' => $ressource,
 	);
-	$contexte = array_merge($_GET, $contexte);
+	$contexte = array_merge($requete->query->all(), $contexte);
 	
 	if ($flux = recuperer_fond("http/atom/$collection-ressource", $contexte)){
-		header('Status: 200 OK');
-		header("Content-type: application/atom+xml; charset=utf-8");
-		echo $flux;
-		exit;
+		$reponse->setStatusCode(200);
+		$reponse->setCharset('utf-8');
+		$reponse->headers->set('Content-Type', 'application/atom+xml');
+		$reponse->setContent($flux);
 	}
 	// Si on ne trouve rien c'est que ça n'existe pas
 	else{
-		header('Status: 404 Not Found');
-		exit;
+		$reponse->setStatusCode(404);
 	}
+	
+	return $reponse;
 }
 
-?>

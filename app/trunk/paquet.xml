@@ -1,11 +1,10 @@
 <paquet
 	prefix="app"
 	categorie="outil"
-	version="0.1.0"
+	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="app.png"
-	documentation="http://www.spip-contrib.net/?articleXXXX"
 >
 	<nom>Atom Publishing Protocol</nom>
 	
@@ -15,5 +14,5 @@
 	
 	<traduire module="paquet-app" reference="fr" gestionnaire="salvatore" />
 	
-	<necessite nom="http" compatibilite="[0.1.0;0.1.*]" />
+	<necessite nom="http" compatibilite="[1.0.0;]" />
 </paquet>
