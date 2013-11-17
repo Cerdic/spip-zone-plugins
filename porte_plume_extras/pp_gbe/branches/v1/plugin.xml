@@ -1,9 +1,9 @@
 <plugin>
-	<nom> Caract&egrave;res Gbe pour Porte Plume </nom>
-	<auteur> [gilcot->http://http://www.spip-contrib.net/gilcot] -- [ajavio.org->http://ajavio.org/Postambule.html]</auteur>
-	<licence> GPL v3 </licence>
-	<version> 1.0.0 </version>
-	<etat> test </etat>
+	<nom> Caract&egrave;res Gbe pour Porte Plume</nom>
+	<auteur>[gilcot->http://http://www.spip-contrib.net/gilcot] -- [ajavio.org->http://ajavio.org/Postambule.html]</auteur>
+	<licence>GPL v3</licence>
+	<version>1.0.0</version>
+	<etat>test</etat>
 	<description>
 Ajout de boutons au porte plume afin de pouvoir ins&#233;rer facilement les caract&egrave;res propres &agrave; la famille des [?langues Gbe] (et plus de langues europ&eacute;ennes) avec n'importe quel clavier.
 	</description>
