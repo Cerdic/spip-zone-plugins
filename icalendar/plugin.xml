@@ -12,4 +12,5 @@
 	<categorie>date</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<utilise id="iterateurs" version="[0.6.1;[" />
+	<utilise id="http" version="[0.1.0;0.1.99]" />
 </plugin>
