@@ -22,7 +22,7 @@ $pc_norme = array(
 // http://stds.statcan.gc.ca/coa-pc/main-principal-fra.asp
 // http://www.economie.gouv.qc.ca/pageSingleCFile/bibliotheques/outils/gestion-dune-entreprise/gestion-financiere/plan-comptable-et-etats-financiers/?tx_igfileimagectypes_pi1%5Buid%5D=1124&tx_igfileimagectypes_pi1%5BdlImage%5D=1&tx_igfileimagectypes_pi1%5Bindex%5D=0
 //
-$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'1' => "Actif",
 	'1.1' => "Actifs financiers",

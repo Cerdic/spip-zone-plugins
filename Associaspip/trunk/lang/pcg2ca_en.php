@@ -21,7 +21,7 @@ $pc_norme = array(
 
 // http://stds.statcan.gc.ca/coa-pc/main-principal-eng.asp
 //
-$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'1' => "Assets",
 	'1.1' => "Financial Assets",

@@ -20,7 +20,7 @@ $pc_norme = array(
 // http://www.omc.be/fr/fin/fin_pcmn.htm
 // http://www.lacompta.org/articles/plan-comptable-francais-marocain-belge.php =>  http://www.lacompta.org/doc/plan-comptable-belgique.pdf
 // http://www.becompta.be/modules/mydownloads/downloads-cat-8.html
-$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'0' => "Droits & engagements hors bilan",
 	'00' => "Garanties constituées par des tiers pour compte de l'entreprise",

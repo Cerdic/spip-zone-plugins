@@ -136,8 +136,7 @@ function comptabilite_liste_plancodes($id='') {
 	$id = $GLOBALS['association_metas']['plan_comptable'];
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
-	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
-	return array_keys($pc_liste); // on ne veut que les cles
+	return array_keys($GLOBALS['i18n_'.substr($trads[0],0,-4)]); // on ne veut que les cles d'un des fichiers de langue
     } else { // $id===FALSE pour local...
 	$pc_liste = array(); // initialiser le tableau
 	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
@@ -391,8 +390,7 @@ function comptabilite_reference_intitule($code, $parent=0) {
 	    $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
 	    include(find_in_path('lang/'.$trads[0])); //on charge le fichier du plan comptable
 	}
-	$nom = $GLOBALS[$GLOBALS['pcg']][$code];
-#	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
+	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
     }
     if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
 	return $nom; // ...renvoyer la traduction

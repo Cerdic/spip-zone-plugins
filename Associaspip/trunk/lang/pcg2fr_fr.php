@@ -35,7 +35,7 @@ $pc_norme = array(
 //  http://dz.viadeo.com/fr/questions/repondre/?questionId=0021aox4cgt6v70a
 // Plan comptable général 2008, Éditions Economica, 2006 : ref.KPMG=1356 ; EAN=978-2-7178-5565-4
 //
-$GLOBALS[$GLOBALS['pcg']] = $pc_liste = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	1 => "Comptes de capitaux",
 	10 => "Fonds associatifs et réserves",
