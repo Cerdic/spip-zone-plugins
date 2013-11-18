@@ -70,7 +70,7 @@ function mao_recuperer_fond($flux) {
 
 		// Inclure le texte de la table dans un formulaire pour choisir les objets
 		$contexte = array('liste' => $texte, 'objet' => $objet);
-		$texte = recuperer_fond('formulaires/actionner', $contexte);
+		$texte = recuperer_fond('prive/squelettes/inclure/actionner', $contexte);
 
 		$flux['data']['texte'] = $texte;
 	}

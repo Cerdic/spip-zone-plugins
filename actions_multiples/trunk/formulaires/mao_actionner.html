@@ -1,0 +1,12 @@
+<div class="formulaire_spip formulaire_#FORM[ formulaire_(#FORM)_#ENV{objet}]"[ id="formulaire_(#FORM)_#ENV{objet}]">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#REM) <!-- Insertion de la liste modifiée des objets -->]
+		[(#ENV*{liste})]
+	</div></form>
+</div>
