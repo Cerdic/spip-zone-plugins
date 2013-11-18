@@ -1,4 +1,4 @@
-<BOUCLE_compte(EVENEMENTS){id_article}{0,1}>
+<BOUCLE_compte(EVENEMENTS){id_article}{0,1}>[(#REM)pour vérifier qu'un événment est bein associé à l'article]
 </BOUCLE_compte>
  <div id="seminaire">
 <BOUCLE_seminaire(ARTICLES){id_article}>
@@ -9,7 +9,7 @@
 #SET{date_debut,#DATE_DEBUT|affdate{Y-m-d}}
 </BOUCLE_un>
 	#SET{date_debut,#ENV{date}|affdate{Y-m-d}}
-	<!--#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}-->
+	#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}
 <//B_un>
 
 #SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
@@ -17,10 +17,8 @@
 <B_mots>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
-<div>
 [(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
-[(#GET{self}|parametre_url{date_debut,[(#ENV{date}|affdate{Y-m-d})]}|lien_ou_expose{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
-</div>
+[(#GET{self}|parametre_url{date_debut,#ENV{date}|affdate{Y-m-d}}|lien_ou_expose{<:agenda:evenements_a_venir:>,#GET{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
 
 <BOUCLE_mots(MOTS){type=Type}>
@@ -36,6 +34,7 @@
 	[<p class='pagination'>(#PAGINATION{page})</p>]
 </ul>
 </B_agenda>
+
 </BOUCLE_mots>
 
 <div class='espace'></div>
