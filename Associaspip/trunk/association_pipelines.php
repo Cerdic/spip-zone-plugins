@@ -68,7 +68,7 @@ function update_spip_asso_membre($id_auteur) {
 		} elseif ($GLOBALS['association_metas']['import_nom_auteur']=='nom') {
 			$prenom = '';
 		} else { // defaut: format nom prenom
-			list($nom, $prenom) = preg_split('/\s+/', $nom, 1); //!\ on ne sait pas gerer le cas ou le nom de famille contient un espace
+			list($nom, $prenom) = preg_split('/\s+/', $nom, 2); //!\ on ne sait pas gerer le cas ou le nom de famille contient un espace
 		}
 	} else { // s'il est vide, le nom sera Adherent XX
 		$nom = _T('asso:activite_entete_adherent').' '.$id_auteur;
