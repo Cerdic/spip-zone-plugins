@@ -14,12 +14,13 @@
        [(#ENV{id_evenement}|oui)#SET{titre,#TITRE}]
        </BOUCLE_evenements>
           [<h4>(#GET{titre}|sinon{<:reservation:titre_reservations:>})</h4>]      
-#SET{reservations,#ARRAY}    
+#SET{reservations,#ARRAY} 
 
-#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,attente-attente_paiement-accepte}}
+#SET{statuts,#LISTE{attente,attente_paiement,accepte}} 
 
+#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{statuts}|implode{-}}}
 <ul>
-<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{tout}>
+<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{statut IN #GET{statuts}}>
     #SET{reservations,#GET{reservations}|push{#QUANTITE}}   
 </BOUCLE_reservations>
 #SET{res_tot,#GET{reservations}|array_sum}
