@@ -136,7 +136,7 @@ function comptabilite_liste_plancodes($id='') {
 	$id = $GLOBALS['association_metas']['plan_comptable'];
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
-	return array_keys($GLOBALS['i18n_'.substr($trads[0],0,-4)]); // on ne veut que les cles d'un des fichiers de langue
+	return array_keys($GLOBALS['i18n_'.substr($trads[0],0,strlen($trad[0])-4)]); // on ne veut que les cles d'un des fichiers de langue
     } else { // $id===FALSE pour local...
 	$pc_liste = array(); // initialiser le tableau
 	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
@@ -164,9 +164,7 @@ function comptabilite_liste_planregles($id='') {
 	    'C' => $GLOBALS['association_metas']['classe_produits'],
 	    'D' => $GLOBALS['association_metas']['classe_charges'],
 	);
-    $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
-#    include_spip('lang/'. substr($trads[0], 0, -4)  ); // charger le premier fichier de langue SPIP
-    include(find_in_path('lang/'.$trads[0])); // charger le premier fichier de langue SPIP
+    include(find_in_path('inc/pcg2'.$id)); // charger le fichier de regles comptables
     return (array)$pc_norme; // retourner le tableau contenu dans le fichier
 }
 
@@ -385,11 +383,6 @@ function comptabilite_reference_intitule($code, $parent=0) {
     if ($nom) // on a trouve ! alors...
 	return extraire_multi($nom, $GLOBALS['spip_lang']); // ...renvoyer la traduction
     if ($GLOBALS['association_metas']['plan_comptable']) { // sinon si on a un plan comptable selectionne
-	if (!strlen($GLOBALS[$GLOBALS['pcg']][1])) { // si le plan comptable n'est pas charge
-	    $id = $GLOBALS['association_metas']['plan_comptable'];
-	    $trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) );
-	    include(find_in_path('lang/'.$trads[0])); //on charge le fichier du plan comptable
-	}
 	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
     }
     if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
@@ -867,10 +860,12 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
  * ce sont de fichiers de langue "lang/pcg2*.php"
  */
 function filtre_selecteur_compta_plan($pcg, $nom='plan_comptable') {
-    $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
+#    $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
+    $liste_plans = array_keys(find_all_in_path('inc/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
     foreach ($liste_plans as $pos=>$plan) {
 	$lang = strpos($plan, '_', 3); // l'indicateur de langue commence au premier underscore
-	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
+#	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
+	$liste_plans[$pos] = substr($plan, 4, strlen($plan)-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan.php" dont on ne veut garder ici que "IdPlan"
     }
     $desc_table = charger_fonction('trouver_table', 'base');
     $res = "<select name='$nom' id='selecteur_$nom'>\n";

@@ -9,16 +9,6 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-$pc_norme = array(
-	'[1-8S]', //0: classes
-	'[\.][1-9]', //1: sections (en fait [13][\.][1-4], 2[\.][1-9], [45][\.][12], [678S][\.][1-3], 9[\.][4-5], en gros)
-	'([\.][1-7])?', //2: groupes
-	'A' => array(4,5,6,7,9), // classes de gestion
-	'B' => array(1,2,3), // classes de bilan
-	'C' => '4|(9[\.]4)', // comptes au credit
-	'D' => '5|(9[\.]5)', // comptes au debit
-);
-
 // http://stds.statcan.gc.ca/coa-pc/main-principal-eng.asp
 //
 $GLOBALS[$GLOBALS['idx_lang']] = array(
