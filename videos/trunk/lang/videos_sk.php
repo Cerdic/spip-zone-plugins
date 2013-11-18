@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'Nastavenia HTML5/alternatívne',
 	'cfg_titre_configurations_vimeo' => 'Nastavenia pre Viméo',
 	'cfg_titre_configurations_youtube' => 'Nastavenia pre Youtube',
-	'confirmation_ajout' => 'Video "@type@:@titre@" bolo pridané. &lt;video@id_document@&gt;',
+	'confirmation_ajout' => 'Video "@type@:@titre@" bolo pridané. &lt;video@id_document@&gt;', # MODIF
 
 	// E
 	'erreur_adresse_invalide' => 'Táto adresa nie je platná. Ak skúsite nahrať súbor s videom (MP4 alebo iný), ďakujeme vám za využívanie pridávania de klasického súboru do SPIPu.',
