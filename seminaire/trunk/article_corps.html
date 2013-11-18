@@ -4,11 +4,14 @@
 
 <div class="groupetitre">
     [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-    <?php $niveau = [(#ID_RUBRIQUE|niveau)];?>
-    <?php if ($niveau <= 2): ?>
+<?php
+  // cas normal $niv2=2 ; si les traductions sont sectorisées, il y a un niveau en plus à la racine (1 rubrique par langue) => $niv2=3
+  $niv2 = [(#CONFIG{multi_secteurs}|=={oui}|?{3,2})];
+  $niveau = [(#ID_RUBRIQUE|niveau)];
+  if ($niveau <= $niv2): ?>
         [(#REM) Si l'article est dans une rubrique de niveau 1 (à la racine du site) ou 2, on affiche son titre en h2]
         [<h2 class="#EDIT{titre}">(#TITRE)</h2>]
-    <?php elseif ($niveau > 2): ?>
+<?php else: ?>
         <BOUCLE_plusieurs_articles(ARTICLES){id_rubrique}{par date}{inverse}{1,1}>
             [(#REM) Si l'article a des frères, on affiche le titre de la rubrique en h2,
                 la liste a puces des articles de la rubrique mère et le titre de l'article en h2]
@@ -31,7 +34,7 @@
             [(#REM) Si l'article est fils unique, on affiche son titre en h2]
             <h2 class="#EDIT{titre}">[(#TITRE)]</h2>
         <//B_plusieurs_articles>
-    <?php endif; ?>
+<?php endif; ?>
     [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
     [<p class="auteur"><:par_auteur:> (#LESAUTEURS)[ - (#DATE|affdate_jourcourt)]</p>]
     <B_motscles>
@@ -45,12 +48,9 @@
 
 [(#INCLURE{fond=inclure/agenda_article}{id_article}{env})]
 
-
-
-
 [<span class="vignette">(#LOGO_ARTICLE)</span>]
 [<div class="#EDIT{chapo} chapeau">(#CHAPO)</div>]
-[<div class="#EDIT{texte}">(#TEXTE|image_reduire{500})</div>]
+[<div class="#EDIT{texte}">(#TEXTE)</div>]
 [<p class="lien_article"><:voir_en_ligne:>&nbsp;: <a href="(#URL_SITE)">[(#NOM_SITE)]</a></p>]
 [<p class="#EDIT{ps} postscriptum"><:kitcnrs:post_scriptum:>&nbsp;: (#PS)</p>] 
 [<div class="separateur">
