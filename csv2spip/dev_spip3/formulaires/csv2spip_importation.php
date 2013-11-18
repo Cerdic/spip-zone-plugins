@@ -22,8 +22,13 @@ return $valeurs;
 }
 
 function formulaires_csv2spip_importation_verifier_dist(){
-        
     $erreurs = array();
+    // seuls les webmestres ont le droit d'utiliser cet outil!
+    if ($GLOBALS['visiteur_session']['webmestre'] != 'oui') {
+		$erreurs['message_erreur'] = _T('csv2spip:non_autorise');
+		return $erreurs;
+	}
+        
 	//champs obligatoire 
     if (!($_FILES['fichier_csv']['name'])) {
         $erreurs['fichier_csv'] = _T('csv2spip:obligatoire');
@@ -39,7 +44,8 @@ function formulaires_csv2spip_importation_verifier_dist(){
         if (!in_array($extension_upload,$extensions_valides)) $erreurs['fichier_csv'] = _T('csv2spip:extension');
     }
 	//Il y a des erreurs
-    if (count($erreurs)) $erreurs['message_erreur'] = _T('csv2spip:erreurs');
+    if (count($erreurs)) 
+		$erreurs['message_erreur'] = _T('csv2spip:erreurs');
 
     return $erreurs;
 }
@@ -171,7 +177,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
 
     // tableau CSV total
     $tableau_csv_total = array_merge($tableau_csv_visiteurs, $tableau_csv_redacs, $tableau_csv_admins);
-spip_log("tableau csv total","csvspip");
+//spip_log("tableau csv total","csvspip");
 //spip_log($tableau_csv_total,"csvspip");
 
     //récupération des auteurs de la bdd en 4 array
@@ -383,13 +389,10 @@ function csv2spip_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tcorre
 		if($champ == "zone"){
 			$T = explode('|',$valeur);
 			foreach($T as $zone){
-spip_log("zone","csvspip");
-spip_log("|".$zone."|","csvspip");
 				$Tzones[] = array_search(trim(rtrim(strtolower($zone))),$tableau_bdd_zones_admins);
 			}
-spip_log("tzone de id_auteur $id_auteur","csvspip");
-spip_log($tableau_bdd_zones_admins,"csvspip");
-spip_log($Tzones,"csvspip");
+//spip_log("tzone de id_auteur $id_auteur","csvspip");
+//spip_log($Tzones,"csvspip");
 
 		}
 		if(in_array($champ,$Tnom_champs_bdd)){

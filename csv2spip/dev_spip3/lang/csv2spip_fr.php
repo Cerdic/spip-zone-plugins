@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'nom_champs'=>'Sélectionnez les champs que vous souhaitez exporter',
     'nom_rubrique_archive'=>'Nom de la rubrique d\'archives :',
     'nom_nouvel_auteur'=>'(mot de passe idem login)',
+    'non_autorise' => 'Seuls les webmestres ont le droit d\'utiliser csv2spip: veuillez vous reconnecter avec un compte adapté',
     
     'obligatoire' => 'Ce champs est obligatoire !',
 

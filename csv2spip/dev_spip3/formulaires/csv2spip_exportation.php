@@ -2,7 +2,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_csv2spip_exportation_charger_dist(){
-
     $nom_champs=csv2spip_exportation();
     $valeurs = array(
         "choix_statut"=>"6forum",
@@ -15,6 +14,10 @@ return $valeurs;
 
 function formulaires_csv2spip_exportation_verifier_dist(){
     $erreurs = array();
+    // seuls les webmestres ont le droit d'utiliser cet outil!
+    if ($GLOBALS['visiteur_session']['webmestre'] != 'oui') {
+		$erreurs['message_erreur'] = _T('csv2spip:non_autorise');
+	}
     return $erreurs;
 }
 

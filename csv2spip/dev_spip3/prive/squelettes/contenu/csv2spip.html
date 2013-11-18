@@ -3,6 +3,7 @@
 <input type="radio"  name="choix" value="importer" checked> <:csv2spip:importer:><br>
 <input type="radio"  name="choix" value="exporter"> <:csv2spip:exporter:> <br>
 
+[(#SESSION{webmestre}|=={oui}|oui)
     <div id="exporter" class="aaa">
         #FORMULAIRE_CSV2SPIP_EXPORTATION
     </div>
@@ -10,6 +11,12 @@
     <div id="importer" class="ajax">
         #FORMULAIRE_CSV2SPIP_IMPORTATION
     </div>
+]
+[(#SESSION{webmestre}|=={oui}|non)
+	<div class="formulaire_spip formulaire_#FORM">
+		<p class="reponse_formulaire reponse_formulaire_erreur"><:csv2spip:non_autorise:></p>
+	</div>
+]
 
 
 <script type="text/javascript" charset="utf-8">
