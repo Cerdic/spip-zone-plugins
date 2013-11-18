@@ -16,7 +16,7 @@
           [<h4>(#GET{titre}|sinon{<:reservation:titre_reservations:>})</h4>]      
 #SET{reservations,#ARRAY}    
 
-#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},where,#ENV{where}}}
+#SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,attente-attente_paiement-accepte}}
 
 <ul>
 <BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{where?}{tout}>
