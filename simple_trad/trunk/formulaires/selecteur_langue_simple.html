@@ -1,0 +1,39 @@
+[(#REM)
+	Squelette permettant d'afficher un sélecteur de langues dans
+	le formulaire d'édition d'articles
+
+	Le select a pour attribut name "changer_lang" pour ne pas entrer en concurrence
+	avec la langue de l'environnement
+
+	Doit recevoir dans l'environnement :
+	- un id_article
+	- un array des langues disponibles
+
+]#CACHE{0}
+
+<li class="editer editer_langue">
+	<label for="langue"><:ecrire:info_multi_cet_article:></label>
+	#SET{langues_dispos,#ENV{langues_dispos}}
+	<BOUCLE_article(ARTICLES){id_article}{statut?}> #SET{langue_article,#LANG} </BOUCLE_article>
+	<BOUCLE_art(ARTICLES){id_article = #ENV{id_trad}}{statut?}>
+		<B_trads>
+		[(#SET{nb_langues,#COMPTEUR_BOUCLE})]
+		<p class="explication">
+			<:simpletrad:explication_article_deja_traduit:>
+			<a href="[(#_art:ID_ARTICLE|generer_url_entite{article})]" title="#_art:TITRE">[(#_art:LANG|traduire_nom_langue)]</a>,
+			[(#SET{langues_dispos,[(#GET{langues_dispos}|langue_unset{#_art:LANG})]})]
+			<BOUCLE_trads(ARTICLES){traduction}{id_article != #ENV{id_article}}{', '}{exclus}><a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="#TITRE">[(#LANG|traduire_nom_langue)][(#SET{langues_dispos,[(#GET{langues_dispos}|langue_unset{#LANG})]})]</a></BOUCLE_trads>
+		</p>
+		</B_trads>
+		[(#SET{nb_langues,1})]
+		<//B_trads>
+	</BOUCLE_art>
+	[(#SET{langue_defaut,#GET{langue_article,#ENV{lang}}})]
+	<B_langues>
+	<select id="langue" name="[(#REM|test_espace_prive|?{lang,changer_lang})]">
+		<BOUCLE_langues(DATA){source table,#GET{langues_dispos}}>
+		<option value="#VALEUR"[(#VALEUR|=={#GET{langue_defaut}}|oui) selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+		</BOUCLE_langues>
+	</select>
+	</B_langues>
+</li>

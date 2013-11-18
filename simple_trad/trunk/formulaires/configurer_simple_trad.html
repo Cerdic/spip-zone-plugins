@@ -1,0 +1,21 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_recuperer_auteur[(#ENV*{erreurs}|table_valeur{recuperer_auteur}|oui)erreur]">
+				<label for="recuperer_auteurs"><:simpletrad:label_recuperer_auteur:></label>
+				<p class='explication'><:simpletrad:explication_recuperer_auteur:></p>
+				[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{recuperer_auteur})</span>]
+				<div class="choix">
+					<input type="checkbox" name="recuperer_auteur" class="checkbox" id='recuperer_auteur'[(#ENV{recuperer_auteur,on}|=={on}|oui)checked='checked'] />
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

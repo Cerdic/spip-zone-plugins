@@ -1,0 +1,25 @@
+<paquet
+	prefix="simple_trad"
+	categorie="edition"
+	version="0.1.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/spip_lang.png"
+>
+
+	<nom>Traduction simplifiée</nom>
+	<!-- Simplifier la traduction d'un site -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/simple_trad.php" />
+	<pipeline nom="editer_contenu_objet" inclure="simple_trad_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="simple_trad_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="simple_trad_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="simple_trad_pipelines.php" />
+	<menu nom="configurer_simple_trad" titre="simpletrad:titre_simpletrad" parent="menu_configuration" icone="images/spip_lang-16.png" />
+</paquet>
