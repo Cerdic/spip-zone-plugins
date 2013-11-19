@@ -21,7 +21,7 @@ function http_atom_erreur_dist($code, $requete, $reponse){
 
 /*
  * GET sur une collection
- * http://site/rest.api/atom/patates
+ * http://site/http.api/atom/patates
  */
 function http_atom_get_collection_dist($requete, $reponse){
 	$collection = $requete->attributes->get('collection');
@@ -45,7 +45,7 @@ function http_atom_get_collection_dist($requete, $reponse){
 
 /*
  * GET sur une ressource
- * http://site/rest.api/atom/patates
+ * http://site/http.api/atom/patates/1234
  */
 function http_atom_get_ressource_dist($requete, $reponse){
 	// Pour l'instant on va simplement chercher un squelette du nom de la ressource
