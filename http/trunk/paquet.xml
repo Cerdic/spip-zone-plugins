@@ -1,7 +1,7 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="http.png"
@@ -13,5 +13,5 @@
 	<copyright>2013</copyright>
 	<licence>GPL v3</licence>
 	
-	<traduire module="paquet-http" reference="fr" gestionnaire="salvatore" />
+	<pipeline nom="autoriser" inclure="http_autorisations.php" />
 </paquet>
