@@ -7,6 +7,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/notation?lang_cible=fr" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/notation?lang_cible=nl" total="79" traduits="79" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/notation?lang_cible=ru" total="79" traduits="77" relire="0" modifs="2" nouveaux="0" pourcent="97.47">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 	</langue>
