@@ -3,7 +3,7 @@
 		<INCLURE{fond=inc/affichage_selection-mots}>
 	</div>
 	<div id="datepick">
-		<div id = "datepickers"></div>
+		<div id="datepickers"></div>
 	</div>
 </div>
 <br class="nettoyeur" />
@@ -14,9 +14,11 @@
 	</ul>
 	<div id="affichage_semaine">
 		<div class="icones" >
-			<span id="jour_precedent"><img src="#CHEMIN{img/precedent.png}" alt="<:orr:jour_precedent:>" title="<:orr:jour_precedent:>" /></span>
-			&nbsp;<span id="aujourdhui"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:aujourdhui:>" title="<:orr:aujourdhui:>" /></span>
-			&nbsp;<span id="jour_suivant"><img src="#CHEMIN{img/suivant.png}"  alt="<:orr:jour_suivant:>" title="<:orr:jour_suivant:>" /></span>
+			<span class="semaine_ico precedent"><img src="#CHEMIN{img/precedent_7.png}" alt="<:orr:semaine_precedente:>" title="<:orr:semaine_precedente:>" /></span>
+			&nbsp;<span class="jour_ico precedent"><img src="#CHEMIN{img/precedent_1.png}" alt="<:orr:jour_precedent:>" title="<:orr:jour_precedent:>" /></span>
+			&nbsp;<span class="maintenant"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:aujourdhui:>" title="<:orr:aujourdhui:>" /></span>
+			&nbsp;<span class="jour_ico suivant"><img src="#CHEMIN{img/suivant_1.png}"  alt="<:orr:jour_suivant:>" title="<:orr:jour_suivant:>" /></span>
+			&nbsp;<span class="semaine_ico suivant"><img src="#CHEMIN{img/suivant_7.png}" alt="<:orr:semaine_suivante:>" title="<:orr:semaine_suivante:>" /></span>
 		</div>
 		<div id="tableau_semaine">
 			<INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
@@ -24,9 +26,11 @@
 		</div>
 	<div id="affichage_mois">
 		<div class="icones" >
-			<span id="mois_precedent"><img src="#CHEMIN{img/precedent.png}" alt="<:orr:mois_precedent:>" title="<:orr:mois_precedent:>" /></span>
-			&nbsp;<span id="mois_actuel"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:mois_actuel:>" title="<:orr:mois_actuel:>" /></span>
-			&nbsp;<span id="mois_suivant"><img src="#CHEMIN{img/suivant.png}"  alt="<:orr:mois_suivant:>" title="<:orr:mois_suivant:>" /></span>
+			<span class="annee_ico precedent"><img src="#CHEMIN{img/precedent_12.png}" alt="<:orr:annee_precedent:>" title="<:orr:annee_precedente:>" /></span>
+			&nbsp;<span class="mois_ico precedent"><img src="#CHEMIN{img/precedent_1.png}" alt="<:orr:mois_precedent:>" title="<:orr:mois_precedent:>" /></span>
+			&nbsp;<span class="maintenant"><img src="#CHEMIN{img/aujourdhui.png}"  alt="<:orr:mois_actuel:>" title="<:orr:mois_actuel:>" /></span>
+			&nbsp;<span class="mois_ico suivant"><img src="#CHEMIN{img/suivant_1.png}"  alt="<:orr:mois_suivant:>" title="<:orr:mois_suivant:>" /></span>
+			&nbsp;<span class="annee_ico suivant"><img src="#CHEMIN{img/suivant_12.png}"  alt="<:orr:annee_suivante:>" title="<:orr:annee_suivante:>" /></span>
 		</div>
 		<div id="tableau_mois">
 			<INCLURE{fond=inc/affichage_mois,ajax=tableau}>
@@ -42,68 +46,52 @@ jQuery(function() {
 	jQuery("#onglet_[(#CONFIG{orr/vue_pardefaut})]").trigger( "click" );
 });
 jQuery(document).ready(function(){
-/*
-	jQuery("#mois").bind("click",function(event){
-	jQuery("#affichage_semaine").css("display","none");
-	jQuery("#affichage_mois").css("display","block");
-	});
-	jQuery("#semaine").bind("click",function(event){
-	jQuery("#affichage_semaine").css("display","block");
-	jQuery("#affichage_mois").css("display","none");
-	});
-*/
-
+	// NB: jourj doit être une variable js *globale*
 	[(#ENV{jourj}|?{
-		jourj = "[(#ENV{jourj})]"
-		console.log(jourj),
-		dateselectionne = new Date()
-		jourj = dateselectionne.toString('yyyy-MM-dd')})];
-		console.log(jourj);
+		jourj = "[(#ENV{jourj})]";
+		,
+		var dateselectionne = new Date();
+		jourj = dateselectionne.toString('yyyy-MM-dd');
+	})]
+//	console.log(jourj);
 	tabAjax();
 
 	jQuery("#datepickers").datepicker({
 		dateFormat : 'yy-mm-dd',
 		onSelect : function (dateText){
-			dateselectionne = Date.parse(dateText);
+			var dateselectionne = Date.parse(dateText);
 			jourj = dateselectionne.toString('yyyy-MM-dd');
 			tabAjax()
 		},
+		numberOfMonths: 1,
+		changeMonth: true,
+		changeYear: false,
 	});
-	jQuery("#mois_precedent").bind("click",function(event){
-		dateselectionne=Date.parse(jourj);
-		dateselectionne = dateselectionne.addMonths(-1);
+	
+	jQuery(".suivant, .precedent").bind("click",function(event) {
+		var dateselectionne=Date.parse(jourj);
+		
+		var plus_moins = (jQuery(this).hasClass("suivant") ? 1 : -1);
+		if (jQuery(this).hasClass("jour_ico"))
+			dateselectionne = dateselectionne.addDays(plus_moins);
+		else if (jQuery(this).hasClass("mois_ico"))
+			dateselectionne = dateselectionne.addMonths(plus_moins);
+		else if (jQuery(this).hasClass("semaine_ico"))
+			dateselectionne = dateselectionne.addWeeks(plus_moins);
+		else if (jQuery(this).hasClass("annee_ico"))
+			dateselectionne = dateselectionne.addYears(plus_moins);	
+						
 		jourj = dateselectionne.toString('yyyy-MM-dd');
+		jQuery("#datepickers").datepicker( "setDate", jourj );
 		tabAjax();
 	});
-	jQuery("#jour_precedent").bind("click",function(event){
-		dateselectionne=Date.parse(jourj);
-		dateselectionne = dateselectionne.addDays(-1);
+
+	jQuery(".maintenant").bind("click",function(event){
+		var dateselectionne = new Date();
 		jourj = dateselectionne.toString('yyyy-MM-dd');
 		tabAjax();
 	});
 
-	jQuery("#jour_suivant").bind("click",function(event){
-		dateselectionne=Date.parse(jourj);
-		dateselectionne = dateselectionne.addDays(1);
-		jourj = dateselectionne.toString('yyyy-MM-dd');
-		tabAjax();
-	});
-	jQuery("#mois_suivant").bind("click",function(event){
-		dateselectionne=Date.parse(jourj);
-		dateselectionne = dateselectionne.addMonths(1);
-		jourj = dateselectionne.toString('yyyy-MM-dd');
-		tabAjax();
-	});
-	jQuery("#aujourdhui").bind("click",function(event){
-		dateselectionne = new Date();
-		jourj = dateselectionne.toString('yyyy-MM-dd');
-		tabAjax();
-	});
-	jQuery("#mois_actuel").bind("click",function(event){
-		dateselectionne = new Date();
-		jourj = dateselectionne.toString('yyyy-MM-dd');
-		tabAjax();
-	});
 	jQuery("#envoyer").click(function(){
 		var motscle = jQuery("#motscles").val().toString();
 		motscle=motscle.replace(",",":");

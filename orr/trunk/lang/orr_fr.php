@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage_semaine' => 'Vue semaine',
 	'affichage_mois' => 'Vue mois',
 	'aujourdhui' => 'Aujourd\'hui',
+	'annee_precedente' => 'Année précédente',
+	'annee_suivante' => 'Année suivante',
 	
 	// C
 	'couleur' => 'Couleur',
@@ -94,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suppression_autorisation_impossible_ressources_liees' => 'Cette autorisation est liée à des ressources: vous ne pouvez pas la supprimer',
 	'supprimer' => 'supprimer',
 	'semaine' => 'Semaine',
+	'semaine_precedente' => 'Semaine précédente',
+	'semaine_suivante' => 'Semaine suivante',
 
     // T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',

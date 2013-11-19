@@ -72,10 +72,10 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$nom,$i
     }
 
     // les dates choisies sont libres
-    include_spip('inc/compare_date');
+//    include_spip('inc/compare_date');
     $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
-    $resultat=compare_date($date_debut,$date_fin,$idressource,$idresa);
+    $resultat = orr_compare_date($date_debut,$date_fin,$idressource,$idresa);
 	if ($resultat == "1"){
 		$erreurs['date_debut'] =_T('orr:erreur_reservation_date_occupe');
 		$erreurs['date_fin'] =_T('orr:erreur_reservation_date_occupe');

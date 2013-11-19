@@ -8,24 +8,28 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_auteur){
-$result= false;
-$res = sql_select(
-	array(
-		"auto.id_orr_autorisation AS idauto",
-		"auto.orr_type_objet AS type",
-		"auto.orr_statut AS statut",
-		"auto.id_auteur AS id_auteur",
-		"auto.orr_autorisation_valeur AS valeur"),
-	array(
-		"spip_orr_autorisations AS auto",
-		"spip_orr_autorisations_liens AS lien"),
-	array(
-		"auto.id_orr_autorisation = lien.id_orr_autorisation",
-		"lien.objet='orr_ressource'",
-		"lien.id_objet=$idressource"));
+	// zou! si on est webmestre, pas besoin d'aller plus loin: on est autorisé pour *tout*
+	if ($GLOBALS['visiteur_session']['webmestre'] == 'oui')
+		return true;
+
+	$result= false;
+	$res = sql_select(
+		array(
+			"auto.id_orr_autorisation AS idauto",
+			"auto.orr_type_objet AS type",
+			"auto.orr_statut AS statut",
+			"auto.id_auteur AS id_auteur",
+			"auto.orr_autorisation_valeur AS valeur"),
+		array(
+			"spip_orr_autorisations AS auto",
+			"spip_orr_autorisations_liens AS lien"),
+		array(
+			"auto.id_orr_autorisation = lien.id_orr_autorisation",
+			"lien.objet='orr_ressource'",
+			"lien.id_objet=$idressource")
+	);
 
 	while ($r=sql_fetch($res)) {
-
 	//  autorisation par statut    
         $valeur_statut=array("tous"=>"1","6forum"=>"2","1comite"=>"3","0minirezo"=>"4");
 		//if (($r['type'] == "statut") AND ($r['statut'] == "$statut_connecte") AND (strpos($r['valeur'], $autorisation) !== false)) $result = true;
