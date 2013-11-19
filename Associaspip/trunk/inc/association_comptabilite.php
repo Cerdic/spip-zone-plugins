@@ -136,7 +136,10 @@ function comptabilite_liste_plancodes($id='') {
 	$id = $GLOBALS['association_metas']['plan_comptable'];
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
-	return array_keys($GLOBALS['i18n_'.substr($trads[0],0,strlen($trad[0])-4)]); // on ne veut que les cles d'un des fichiers de langue
+	$lidx = 'i18n_'. substr($trads[0], 0, -4);
+	$GLOBALS['idx_lang'] = $lidx;
+	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
+	return array_keys($GLOBALS[$GLOBALS['idx_lang']]); // on ne veut que les cles du tableau
     } else { // $id===FALSE pour local...
 	$pc_liste = array(); // initialiser le tableau
 	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
@@ -164,7 +167,7 @@ function comptabilite_liste_planregles($id='') {
 	    'C' => $GLOBALS['association_metas']['classe_produits'],
 	    'D' => $GLOBALS['association_metas']['classe_charges'],
 	);
-    include(find_in_path('inc/pcg2'.$id)); // charger le fichier de regles comptables
+    include_spip('inc/pcg2'.$id); // charger le fichier de regles comptables
     return (array)$pc_norme; // retourner le tableau contenu dans le fichier
 }
 
