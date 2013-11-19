@@ -43,7 +43,8 @@
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=lb" total="50" traduits="14" relire="0" modifs="0" nouveaux="36" pourcent="28.00">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=nl" total="50" traduits="49" relire="0" modifs="0" nouveaux="1" pourcent="98.00">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=nl" total="50" traduits="50" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
