@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.10.0"
+	version="4.10.1"
 	schema="2.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -27,7 +27,7 @@
 	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
 
-	<utilise nom="selecteurgenerique" compatibilite="[1.12;]" />
+	<utilise nom="selecteurgenerique" compatibilite="[0.8.6;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
 
 	<pipeline
