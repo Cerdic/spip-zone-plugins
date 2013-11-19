@@ -22,6 +22,10 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="159" traduits="140" relire="0" modifs="2" nouveaux="17" pourcent="88.05">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="159" traduits="159" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="159" traduits="142" relire="0" modifs="2" nouveaux="15" pourcent="89.31">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
