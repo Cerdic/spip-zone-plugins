@@ -19,6 +19,9 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=it" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=nl" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=pt" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ru" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
