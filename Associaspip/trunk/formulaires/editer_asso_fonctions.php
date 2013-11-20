@@ -14,25 +14,24 @@ if (!defined('_ECRIRE_INC_VERSION'))
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_asso_fonctions_charger_dist($id_groupe=0, $id_auteur=0) {
+function formulaires_editer_asso_fonctions_charger_dist($id_groupe=0) {
 	$contexte['id_groupe'] = $id_groupe;
-	$res['_action'] = array('editer_asso_fonctions', $id_groupe); // pour passer securiser action
+	$contexte['_action'] = array('editer_asso_fonctions', $id_groupe); // pour passer securiser action
 
 	return $contexte;
 }
 
-function formulaires_editer_asso_fonctions_traiter($id_groupe=0, $id_auteur=0) {
+function formulaires_editer_asso_fonctions_traiter($id_groupe=0) {
 	// partie de code grandement inspiree du code de formulaires_editer_objet_traiter dans ecrire/inc/editer.php
-	$res=array();
+	$res = array();
 	// eviter la redirection forcee par l'action...
 	set_request('redirect');
 	if(_request('modifier')) {
-		$action_editer_membres = charger_fonction('editer_asso_fonctions','action');
-		$action_editer_membres($id_groupe);
+		$action_membres = charger_fonction('editer_asso_fonctions', 'action');
 	} elseif (_request('exclure')) {
-		$action_supprimer_membres = charger_fonction('supprimer_asso_fonctions','action');
-		$action_supprimer_membres($id_groupe);
+		$action_membres = charger_fonction('supprimer_asso_fonctions', 'action');
 	}
+	$res['message_erreur'] = $action_membres($id_groupe);
 	$res['message_ok'] = '';
 	$id_groupe = intval($id_groupe);
 	if ($id_groupe>0 && $id_groupe<100) {
