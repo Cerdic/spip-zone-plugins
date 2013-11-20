@@ -136,8 +136,7 @@ function comptabilite_liste_plancodes($id='') {
 	$id = $GLOBALS['association_metas']['plan_comptable'];
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
-	$lidx = 'i18n_'. substr($trads[0], 0, -4);
-	$GLOBALS['idx_lang'] = $lidx;
+	$GLOBALS['idx_lang'] = 'i18n_'. substr($trads[0], 0, -4);
 	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
 	return array_keys($GLOBALS[$GLOBALS['idx_lang']]); // on ne veut que les cles du tableau
     } else { // $id===FALSE pour local...
@@ -866,9 +865,7 @@ function filtre_selecteur_compta_plan($pcg, $nom='plan_comptable') {
 #    $liste_plans = array_keys(find_all_in_path('lang/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
     $liste_plans = array_keys(find_all_in_path('inc/', 'pcg2', FALSE) ); // '\\bpcg2.*\\b'
     foreach ($liste_plans as $pos=>$plan) {
-	$lang = strpos($plan, '_', 3); // l'indicateur de langue commence au premier underscore
-#	$liste_plans[$pos] = substr($plan, 4, ($lang?$lang:strlen($plan))-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan_CodeLang.php" dont on ne veut garder ici que "IdPlan"
-	$liste_plans[$pos] = substr($plan, 4, strlen($plan)-4 ); // le tableau contient des noms de fichier comme "pcg2IdPlan.php" dont on ne veut garder ici que "IdPlan"
+	$liste_plans[$pos] = substr($plan, 4, -4); // le tableau contient des noms de fichier comme "pcg2IdPlan.php" dont on ne veut garder ici que "IdPlan"
     }
     $desc_table = charger_fonction('trouver_table', 'base');
     $res = "<select name='$nom' id='selecteur_$nom'>\n";
