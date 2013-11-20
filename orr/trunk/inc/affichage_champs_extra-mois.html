@@ -1,4 +1,6 @@
-<BOUCLE_champs_extra(DATA){source table,#CONFIG*{champs_extras_spip_orr_reservations}|unserialize }>
-    #SET{champs_extra,#VALEUR|table_valeur{options}|table_valeur{nom}}
-    [(#VALEUR|table_valeur{options}|table_valeur{nom})] : [(#VALEUR|table_valeur{options}|table_valeur{nom}|valeur_champs_extra{#ENV{id_resa}})] <br>
+[
+	(#REM) affichage des champs extras de la réservation d'id #ENV{id_resa}
+
+]<BOUCLE_champs_extra(DATA){source table,#CONFIG*{champs_extras_spip_orr_reservations}|unserialize }>
+   [ [(#VALEUR|table_valeur{options}|table_valeur{label})]: (#VALEUR|table_valeur{options}|table_valeur{nom}|valeur_champs_extra{#ENV{id_resa}}) <br>]
 </BOUCLE_champs_extra>

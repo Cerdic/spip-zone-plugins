@@ -16,20 +16,24 @@
 .orr_stylo { float:left; }
 
 /* commun semaine/mois */    
-#tableau_mois, #tableau_semaine { font-size: 0.95em; text-align: center; vertical-align:top; border-collapse: collapse;}
-#tableau_mois th, #tableau_semaine th { width: 14%; }
-#affichage_semaine, #affichage_mois {  padding-top:20px;  clear:both; }
+#tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }
+#tableau_mois th, #tableau_semaine th { width: 14%; font-size: 0.95em;}
+#tableau_mois td, #tableau_semaine td { font-size: 0.75em;}
+#affichage_semaine, #affichage_mois {  padding-top:20px;  clear:both;  }
 #jour4, #jour4th, #id1couleur_jour_mois { background-color : #D6D6D6 ; }
 
 /* Affichage semaine */
-#tableau_semaine td, #tableau_semaine th {  padding : 0.5em 1.2em; }
-#premierjour {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; }
-#jourmilieu { border-top : 1px solid red ; border-bottom : 1px solid red ; }
-#dernierjour { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; }
+#tableau_semaine td { padding : 0.5em 0em; }
+#tableau_semaine th { padding : 0.5em 1em; }
+.premier {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; }
+.milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; }
+.dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; }
 
 /* Affichage-mois */
 #tab_affichage_mois { float:clear; }
-#couleur_ressource { float:left; padding-right:10px; }
+#couleur_ressource { font-size: 0.7em; line-height: 1em; text-align: left; }
+#couleur_ressource div { display: inline; line-height: 2em; padding: 0.2em; margin: 0 0.2em; }
+.hors_mois { color: #777; }
 
 /* affichage mois : infobulle */
 .tooltip { position: relative;  cursor: help; display: inline-block; text-decoration: none; color: #222; outline: none; }

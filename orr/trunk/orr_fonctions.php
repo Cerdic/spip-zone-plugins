@@ -2,11 +2,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /*
- * récupère la valeur d'un champ extra
+ * récupère la valeur d'un champ extra d'une resa
  */
 function valeur_champs_extra($nom_champ,$id_resa){
-    $all = sql_allfetsel('"'.$nom_champ.'"','spip_orr_reservations','id_orr_reservation='. intval($id_resa) ); 
-    return $all[0][$nom_champ];
+    return sql_getfetsel($nom_champ, 'spip_orr_reservations', 'id_orr_reservation='.intval($id_resa) ); 
 }
 
 function orr_premierjourcalendrier($date){
@@ -38,7 +37,7 @@ function orr_joursemaine($date, $jourvoulu, $format){
 		case "nom":
 			$format_mktime = "N";
 			break;
-		default:	// format = date
+		default:	// format envoyé = date
 			$format_mktime = "Y-m-d H:i:s";
 			break;
 	}
@@ -61,7 +60,7 @@ function orr_joursemaine($date, $jourvoulu, $format){
 		case "samedi":
 			$date = date($format_mktime, mktime(0,0,0,$mois,$jour+2, intval($annee)));
 			break;
-		default:
+		case"dimanche":
 			$date = date($format_mktime, mktime(0,0,0,$mois,$jour+3, intval($annee)));
 			break;
 	}
@@ -74,8 +73,8 @@ function orr_joursemaine($date, $jourvoulu, $format){
 /**
  * fonction de traduction entre numéro du jour et nom du jour
  * */
- function orr_traduction_jour($numero = 0){
-	 $Tjours = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+ function orr_traduction_jour($numero){
+	 $Tjours = array("","Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" );
 	 return $Tjours[intval($numero)];
 }
 
@@ -158,4 +157,17 @@ function orr_compare_date($date_debut, $date_fin, $idressource, $idresa){
 	}
 	return $retour;
 }
+
+/*
+ * Récupération du nom des champs extra d'une table
+ */
+function orr_nom_champs_extra($nom_table){
+	include_spip("inc/config");
+	$Tchamps = array();
+	$Ttout = lire_config("champs_extras_".$nom_table);
+	foreach ($Ttout as $champ)
+		$Tchamps[] = $champ['options']['nom'];
+	return $Tchamps;
+}
+
 ?>

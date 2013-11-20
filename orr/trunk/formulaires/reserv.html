@@ -5,46 +5,39 @@
 
     [(#ENV{editable}|oui)
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
+				<label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]
+				<input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
+				<span class="error-message"></span>
+			</li>
 
-            #ACTION_FORMULAIRE{#ENV{action}}
-            <ul>
-                <li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
-                <label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
-                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]
-                <input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
-                <span class="error-message"></span>
-                </li>
+			<li class="editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+				<label for="date_debut"><:orr:date_de_debut:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+				<input type="text" id="date_debut" class="datepicker" name="date_debut" value="[(#ENV{date_debut})]" />
+				<span class="error-message"></span>
+			</li>
 
-                <li class="editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
-                <label for="date_debut"><:orr:date_de_debut:></label>
-                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
-                <input type="text" id="date_debut" class="datepicker" name="date_debut" value="[(#ENV{date_debut})]" />
-                <span class="error-message"></span>
-                </li>
+			<li class="editer_date_fin obligatoire[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+				<label for="date_fin"><:orr:date_de_fin:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+				<input type="text" id="date_fin" class="datepicker" name="date_fin" value="[(#ENV{date_fin})]" />
+				<span class="error-message"></span>
+			</li>
 
-                <li class="editer_date_fin obligatoire[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
-                <label for="date_fin"><:orr:date_de_fin:></label>
-                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
-                <input type="text" id="date_fin" class="datepicker" name="date_fin" value="[(#ENV{date_fin})]" />
-                <span class="error-message"></span>
-                </li>
-
-                [(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/affichage_champs_extra}{env}>]
-
-
-
-            </ul>
-        [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!-- extra -->
-            <p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" />
-            </p>
+			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/formulaire_reservation_champs_extra}{env}>]
+		</ul>
+		<p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div></form>
     ]
 </div>
 
 <script>
-    $(function(){
-        $('.datepicker').datetimepicker({
+    jQuery(function(){
+        jQuery('.datepicker').datetimepicker({
             timeFormat: 'hh:mm:ss',
             stepHour: 1,
             stepMinute: 15,
@@ -69,7 +62,7 @@
 				$('#date_fin').datetimepicker('option', 'minDate', new Date(start.getTime()));
 			}
             });
-         $('#date_fin').datetimepicker({
+         jQuery('#date_fin').datetimepicker({
 			onClose: function(dateText, inst) {
 				var startDateTextBox = $('#date_debut');
 				if (startDateTextBox.val() != '') {
@@ -84,7 +77,7 @@
 			},
 			onSelect: function (selectedDateTime){
 				var end = $(this).datetimepicker('getDate');
-				$('#date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				jQuery('#date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
 			}
         });
     });

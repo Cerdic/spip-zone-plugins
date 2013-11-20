@@ -90,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_orr_reservations' => 'Retirer toutes les reservations',
 	'retirer_lien_orr_ressource' => 'Retirer cette ressource',
 	'retirer_tous_liens_orr_ressources' => 'Retirer toutes les ressources',
+	'reservation_enregistree' => 'La réservation est enregistrée',
 	
 	// S
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',
