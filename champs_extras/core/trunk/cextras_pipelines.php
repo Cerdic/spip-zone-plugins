@@ -293,7 +293,7 @@ function cextras_formulaire_verifier($flux){
 					// 
 					// Sauf que la donnée alors soumise à SQL sera une chaine vide,
 					// ce qui ne correspond pas toujours à ce qui est attendu.
-					if (is_string($valeur) and !strlen($valeur)
+					if ((is_string($valeur) and !strlen($valeur) or (is_array($valeur) and $saisie['saisie']=='date'))
 					  and isset($options['normaliser'])
 					  and $norme = $options['normaliser']) {
 						// Charger la fonction de normalisation théoriquement dans verifier/date
