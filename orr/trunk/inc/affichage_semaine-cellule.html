@@ -1,11 +1,11 @@
 [(#REM) Affichage des réservations selon le type (inf à une journée ou sur plusieurs jours)]
 
-#SET{jour,#ENV{jour}}
+#SET{jour,#ENV{jour}} 
 #SET{jourplusun,#ENV{jour}|orr_plusunjour}
 #SET{idressource,#ENV{idressource}}
 #SET{couleur,#INFO_ORR_RESSOURCE_COULEUR{orr_ressource,#ENV{idressource}}}
 
-<BOUCLE_affichreserv(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}>
+<BOUCLE_affichreserv(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut <= #ENV{jour}|affdate{Y-m-d 23:59:59}}{orr_date_fin >= #ENV{jour}|affdate{Y-m-d 00:00:00}}>
 	[(#REM) determiner le type de resa: jour unique ou plusieurs jours ]
 	[(#ORR_DATE_DEBUT|>={#GET{jour}}|et{#ORR_DATE_FIN|<{#GET{jourplusun}}}|oui) #SET{position,unique}]
 	[(#REM) resa plusieurs jours: position du jour premier/milieu/dernier ]
