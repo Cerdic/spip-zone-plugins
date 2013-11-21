@@ -23,10 +23,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_orr_ressource_couleur' => 'orr_ressource_couleur',
 	'label_orr_ressource_nom' => 'ORR type de ressource',
+    'liste_ressources' => 'Ajouter des ressources supplémentaires',
 
 	// R
 	'retirer_lien_orr_ressource' => 'Retirer cette ressource',
 	'retirer_tous_liens_orr_ressources' => 'Retirer toutes les ressources',
+    'ressource_active' => 'La ressource sélectionnée :',
+    'ressource_obligatoire' => 'Il faut sélectionner au moins une ressource !',
 
 	// T
 	'texte_ajouter_orr_ressource' => 'Ajouter une ressource',

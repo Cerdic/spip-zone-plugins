@@ -1,0 +1,8 @@
+#SET{tableau_ressources, #ARRAY}
+<BOUCLE_liste_ressources(ORR_RESSOURCES){!id_orr_ressource=#ENV{id_ressource}}>
+    #SET{tableau_ressources,#GET{tableau_ressources}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}}
+</BOUCLE_liste_ressources>
+
+[(#SAISIE*{checkbox,liste_ressources}
+    {label=<:orr_ressource:liste_ressources:>}
+    {datas=#GET{tableau_ressources}|array_flip})]

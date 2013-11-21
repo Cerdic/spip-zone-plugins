@@ -7,6 +7,17 @@
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
+            [(#REM)Détermine si c'est une mise à jour ou un ajout
+            Si c'est un ajout, choix entre toutes les ressources]
+
+            [(#ENV{idreservation}|?{#SET{affichage_ressource,cachee},#SET{affichage_ressource,visible}})]
+            <span class="ressource_#GET{affichage_ressource}">
+                [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
+                {label=<:orr_ressource:ressource_active:>})]
+
+                <INCLURE{fond=inc/liste_ressources}{id_ressource=#ENV{id_ressource}}>
+            </span>
+
 			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
 				<label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]

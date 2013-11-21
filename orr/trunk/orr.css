@@ -11,9 +11,10 @@
 
 /* Formulaire réservation */
 #poubelle {  float:right; padding-right:30px; }
-.poubelle_visible { display:auto; }
-.poubelle_cache { display:none; }
+.poubelle_visible, .ressource_visible { display:auto; }
+.poubelle_cache, .ressource_cachee { display:none; }
 .orr_stylo { float:left; }
+
 
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }

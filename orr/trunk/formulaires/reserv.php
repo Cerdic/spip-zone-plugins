@@ -16,12 +16,14 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
     // recup des valeurs si resa existante
 	if ($idresa)
 		$vals_resa = sql_fetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
-	
     $valeurs = array(
-        "nom_reservation" => ($idresa ? $vals_resa['orr_reservation_nom'] : ""),
-        "id_ressource"    => intval($idressource),
-        "date_debut"      => $date_deb,
-        "date_fin"        => $date_f,
+        "idreservation"          => intval($idresa),
+        "choix_ressource_active" => "on",
+        "liste_ressources"       => "",
+        "nom_reservation"        => ($idresa ? $vals_resa['orr_reservation_nom'] : ""),
+        "id_ressource"           => intval($idressource),
+        "date_debut"             => $date_deb,
+        "date_fin"               => $date_f,
     );
     // champs extra
     if (lire_config("champs_extras_spip_orr_reservations")) {
@@ -39,13 +41,15 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
     $date_debut      = _request('date_debut');
     $date_fin        = _request('date_fin');
     $erreurs = array();
-    
     //champs obligatoire
     foreach (array ('nom_reservation','date_debut','date_fin') as $obligatoire) {
         if (!_request($obligatoire)) 
             $erreurs[$obligatoire] = _T("info_obligatoire");
     }
-    
+    if (!_request('liste_ressources') AND !_request('choix_ressource_active')) {
+            $erreurs["choix_ressource_active"] = _T("orr_ressource:ressource_obligatoire");
+    }
+   
     //format de date correct
     if (!isset($erreurs['date_debut'])){
         list ($dated,$tempsd) = explode(' ',$date_debut);
@@ -65,29 +69,40 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
     // date de fin anterieur à la date de debut
     list($heured,$minuted,$seconded) = explode(':',$tempsd);
     list($heuref,$minutef,$secondef) = explode(':',$tempsf);
-    $timestampd = mktime($heured,$minuted,$seconded,$moisd,$jourd,$anneed);
-    $timestampf = mktime($heuref,$minutef,$secondef,$moisf,$jourf,$anneef);
+    $timestampd = mktime(intval($heured),$minuted,$seconded,$moisd,$jourd,$anneed);
+    $timestampf = mktime(intval($heuref),$minutef,$secondef,$moisf,$jourf,$anneef);
     if ($timestampd>=$timestampf){
         $erreurs['date_fin'] =_T('orr:erreur_reservation_date_fin_debut');
     }
 
     // les dates choisies sont libres
-//    include_spip('inc/compare_date');
-    $date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
-    $date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
+// manque le test si resa multiple !!!!
+    $date_debut = date("Y-m-d H:i:s", mktime (intval($heured),$minuted,0, $moisd, $jourd, $anneed));
+    $date_fin   = date("Y-m-d H:i:s", mktime (intval($heuref),$minutef,0, $moisf, $jourf, $anneef));
     $resultat = orr_compare_date($date_debut,$date_fin,$idressource,$idresa);
 	if ($resultat == "1"){
-		$erreurs['date_debut'] =_T('orr:erreur_reservation_date_occupe');
-		$erreurs['date_fin'] =_T('orr:erreur_reservation_date_occupe');
+		$erreurs['date_debut'] = _T('orr:erreur_reservation_date_occupe');
+		$erreurs['date_fin']   = _T('orr:erreur_reservation_date_occupe');
 	}
     return $erreurs;
 }
 
 
 function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa){
-	$nom_reservation = _request('nom_reservation');
-	$date_debut      = _request('date_debut');
-	$date_fin        = _request('date_fin');
+    $liste_ressources = array();
+	$nom_reservation        = _request('nom_reservation');
+	$date_debut             = _request('date_debut');
+	$date_fin               = _request('date_fin');
+    $choix_ressource_active = _request('choix_ressource_active');
+
+    // si C'est une mise à jour, on ne traite que de la ressource sélectionné)
+    if ($idresa)
+        $liste_ressources[] = $idressource;
+    // fabrique un array : liste_ressources de toutes les ressources
+    elseif ($choix_ressource_active){
+        $liste_ressources   = _request('liste_ressources');
+        $liste_ressources[] = $idressource;
+    }
 
 	list($jour_debut, $heure_debut) = explode(' ',$date_debut);
 	list($jour_fin, $heure_fin) = explode(' ',$date_fin);
@@ -103,34 +118,36 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
 	
 	$retour=array();
 	$retour['message_ok'] = _T("orr:reservation_enregistree");
-	$retour['redirect'] = "spip.php?page=orr&jourj=$jourj";
+	$retour['redirect']   = "spip.php?page=orr&jourj=$jourj";
 
 	// utilisation API editer_objet pour l'insertion en BDD
 	// champs standards
 	$objet = "orr_reservation";
 	include_spip('action/editer_objet');
-	$set = array (
-		'id_orr_ressource'    => $idressource,
-		'orr_reservation_nom' => $nom_reservation,
-		'orr_date_debut'      => $date_debut,
-		'orr_date_fin'        => $date_fin
-	);
-	// champs extras
-	$nom_champs_extra = orr_nom_champs_extra("spip_orr_reservations");
-	foreach ($nom_champs_extra as $key) 
-		$set[$key] = _request($key);
-	// enregistrement
-	if ($idresa)
-		$id_objet = $idresa;
-	else
-		$id_objet = objet_inserer($objet);
-	objet_modifier($objet, $id_objet, $set);
+    $set = array();
 
-	// utilisation de l'API editer_liens pour la gestion de la table de lien entre
-	// une reservation et une ressource
-	include_spip('action/editer_liens');
-	objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$idressource));
+    // enregistrement pour chaque ressource
+    foreach ($liste_ressources as $idressource) {
+	    $set = array (
+		    'id_orr_ressource'    => $idressource,
+		    'orr_reservation_nom' => $nom_reservation,
+		    'orr_date_debut'      => $date_debut,
+		    'orr_date_fin'        => $date_fin
+	    );
+	    // champs extras
+	    $nom_champs_extra = orr_nom_champs_extra("spip_orr_reservations");
+	    foreach ($nom_champs_extra as $key) 
+		    $set[$key] = _request($key);
 
+	    // enregistrement
+	    $id_objet=$idresa ? $idresa : objet_inserer($objet); 
+	    objet_modifier($objet, $id_objet, $set);
+
+	    // utilisation de l'API editer_liens pour la gestion de la table de lien entre
+	    // une reservation et une ressource
+	    include_spip('action/editer_liens');
+	    objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$idressource));
+    }
 	return $retour;
 }
 
