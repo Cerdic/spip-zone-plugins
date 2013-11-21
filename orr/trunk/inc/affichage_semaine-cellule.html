@@ -5,7 +5,7 @@
 #SET{idressource,#ENV{idressource}}
 #SET{couleur,#INFO_ORR_RESSOURCE_COULEUR{orr_ressource,#ENV{idressource}}}
 
-<BOUCLE_affichreserv(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut <= #ENV{jour}|affdate{Y-m-d 23:59:59}}{orr_date_fin >= #ENV{jour}|affdate{Y-m-d 00:00:00}}>
+<BOUCLE_affichreserv(ORR_RESERVATIONS){id_orr_ressource=#ENV{idressource}}{orr_date_debut <= #ENV{jour}|affdate{Y-m-d 23:59:59}}{orr_date_fin >= #ENV{jour}|affdate{Y-m-d 00:00:00}}{par orr_date_debut}>
 	[(#REM) determiner le type de resa: jour unique ou plusieurs jours ]
 	[(#ORR_DATE_DEBUT|>={#GET{jour}}|et{#ORR_DATE_FIN|<{#GET{jourplusun}}}|oui) #SET{position,unique}]
 	[(#REM) resa plusieurs jours: position du jour premier/milieu/dernier ]
@@ -20,14 +20,15 @@
 			<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox">
 			<img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>
 		]
-        <div class="dir_#ID_ORR_RESERVATION nomreservation visible" ><img class="changeclic" src="#CHEMIN{img/bas.png}" alt="bas" />#ORR_RESERVATION_NOM </div>
-        <div class="dir_#ID_ORR_RESERVATION cache">
-			[Nom : (#GET{auteur})]
-			[(#GET{position}|=={premier}|oui) <br />[(#ORR_DATE_DEBUT|affdate{'H:i'})]-->... ]
-			[(#GET{position}|=={milieu}|oui)  <br />...<-->... ]
-			[(#GET{position}|=={dernier}|oui) <br />...-->[(#ORR_DATE_FIN|affdate{"H:i"})] ]
-			
-			[<br />(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/affichage_champs_extra-mois}{id_resa=#ID_ORR_RESERVATION}>] 
-        </div>
+                <span class="tooltip">#ORR_RESERVATION_NOM     
+                    <span>
+                        Date de debut : [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
+                        Date de fin : [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>
+                        Nom :  #GET{auteur} </br>
+                        [(#CONFIG*{champs_extras_spip_orr_reservations}|oui)
+                        <INCLURE{fond=inc/affichage_champs_extra-mois}{id_resa=#ID_ORR_RESERVATION}>]
+                     </span>
+                 </span> <br /> 
     </div>]
+    <br>
 </BOUCLE_affichreserv>	
