@@ -18,6 +18,19 @@
 		<p><:wp2spip:info_nombre_pages{nb=#GET{total_pages}}:></p>
 		</B_pages>
 	</li>
+	#SET{nb_event,0}
+	<B_evenements>
+	<li>
+		[(#REM)
+			Evenements
+		]
+		<label><:wp2spip:label_evenements:></label>
+		<BOUCLE_evenements( wp_ec3_schedule )>
+		<BOUCLE_post( wp_posts ){id=#POST_ID}>  #SET{nb_event,#GET{nb_event}|plus{1}} </BOUCLE_post>
+		</BOUCLE_evenements>
+		<p><:wp2spip:info_nombre_evenements{nb=#GET{nb_event}}:></p>
+	</li>
+	</B_evenements>
 	<li>
 		[(#REM)
 			documents et documents orfelins
