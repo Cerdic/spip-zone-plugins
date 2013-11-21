@@ -29,55 +29,69 @@ function action_wp2spip_liens_internes_dist(){
 	if (!autoriser('configurer', 'plugins'))
 		die('erreur');
 	
-	$modifies = array();
-	// On va remplacer les ../?page_id=XX par ->artXX
-	$articles = sql_select('*','spip_articles','texte LIKE "%->../?page_id=%"');
-	while($article = sql_fetch($articles)){
-		$texte = $article['texte'];
-		preg_match_all("/->\.\.\/\?page_id=(\d*)]/Uims",$texte,$matches);
-		foreach($matches[1] as $i=>$id){
-			if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-				$texte = str_replace('->../?page_id='.$id.']','->art'.$id.']',$texte);
-		}
-		if($texte != $article['texte']){
-			sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
-			$modifies[] = $article['id_article'];
-		}
-	}
-	spip_log(count($modifies).' articles modifiés après correction des ../?page_id=...','wp2spip');
-	spip_log($modifies,'wp2spip');
-	
-	$modifies = array();
-	// On va remplacer les ->/?page_id=XX par ->artXX
-	$articles = sql_select('*','spip_articles','texte LIKE "%->/?page_id=%"');
-	while($article = sql_fetch($articles)){
-		$texte = $article['texte'];
-		preg_match_all("/->\/\?page_id=(\d*)]/Uims",$texte,$matches);
-		foreach($matches[1] as $i=>$id){
-			if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-				$texte = str_replace('->/?page_id='.$id.']','->art'.$id.']',$texte);
-		}
-		if($texte != $article['texte']){
-			sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
-			$modifies[] = $article['id_article'];
-		}
-	}
-	spip_log(count($modifies).' articles modifiés après correction des /?page_id=...','wp2spip');
-	spip_log($modifies,'wp2spip');
+	$articles_inexistants = array();
 	
 	$url_wordpress = sql_getfetsel('option_value','wp_options','option_name='.sql_quote('siteurl'));
 	$url = preg_quote($url_wordpress);
+
+	$modifies = array();
+	// On va remplacer les ../?page_id=XX ou /?page_id par ->artXX
+	$articles = sql_select('*','spip_articles','texte REGEXP "->\.*\.*/?page_id="');
+	while($article = sql_fetch($articles)){
+		$texte = $article['texte'];
+		preg_match_all("|->\.?\.?\/\?page_id=(\d{1,}).*?]|",$texte,$matches);
+		spip_log('recupération de ../?page_id ou /?page_id');
+		spip_log($matches);
+		foreach($matches[1] as $i=>$id){
+			if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
+				$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+			else{
+				$articles_inexistants[] = $id;
+			}
+		}
+		if($texte != $article['texte']){
+			sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
+			$modifies[] = $article['id_article'];
+		}
+	}
+	spip_log(count($modifies).' articles modifiés après correction des ../?page_id=... et /?page_id=','wp2spip');
+	spip_log($modifies,'wp2spip');
+
+	$modifies = array();
+	// On va remplacer les ?page_id=XX par ->artXX
+	$articles = sql_select('*','spip_articles','texte LIKE "%->?page_id=%"');
+	while($article = sql_fetch($articles)){
+		$texte = $article['texte'];
+		preg_match_all("|->\?page_id=(\d{1,}).*?]|",$texte,$matches);
+		if(is_array($matches)){
+			foreach($matches[1] as $i=>$id){
+				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
+					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+				else
+					$articles_inexistants[] = $id;
+			}
+			if($texte != $article['texte']){
+				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
+				$modifies[] = $article['id_article'];
+			}
+		}
+	}
+	spip_log(count($modifies).' articles modifiés après correction des ->?page_id=...','wp2spip');
+	spip_log($modifies,'wp2spip');
+
 	$modifies = array();
 	// On va remplacer les url/?page_id=XX par ->artXX
 	$articles = sql_select('*','spip_articles','texte LIKE "%->'.$url_wordpress.'/?page_id=%"');
 	while($article = sql_fetch($articles)){
 		$texte = $article['texte'];
-		$pattern = "->".preg_quote($url_wordpress)."\/\?page_id=(\d*)]";
+		$pattern = "->".$url_wordpress."\/\?page_id=(\d{1,}).*?]";
 		preg_match_all("|$pattern|",$texte,$matches);
 		if(is_array($matches)){
 			foreach($matches[1] as $i=>$id){
-				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-					$texte = str_replace('->'.$url_wordpress.'/?page_id='.$id.']','->art'.$id.']',$texte);
+				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))					
+					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+				else
+					$articles_inexistants[] = $id;
 			}
 			if($texte != $article['texte']){
 				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
@@ -93,12 +107,15 @@ function action_wp2spip_liens_internes_dist(){
 	$articles = sql_select('*','spip_articles','texte LIKE "%->'.$url_wordpress.'/?p=%"');
 	while($article = sql_fetch($articles)){
 		$texte = $article['texte'];
-		$pattern = "->".preg_quote($url_wordpress)."\/\?p=(\d*)]";
+		$pattern = "->".preg_quote($url_wordpress)."\/\?p=(\d{1,}).*?]";
 		preg_match_all("|$pattern|",$texte,$matches);
 		if(is_array($matches)){
+			spip_log($matches);
 			foreach($matches[1] as $i=>$id){
 				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-					$texte = str_replace('->'.$url_wordpress.'/?p='.$id.']','->art'.$id.']',$texte);
+					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+				else
+					$articles_inexistants[] = $id;
 			}
 			if($texte != $article['texte']){
 				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
@@ -110,15 +127,19 @@ function action_wp2spip_liens_internes_dist(){
 	spip_log($modifies,'wp2spip');
 	
 	$modifies = array();
-	// On va remplacer les ?page_id=XX par ->artXX
-	$articles = sql_select('*','spip_articles','texte LIKE "%->?page_id=%"');
+	// On va remplacer les ../?p=XX par ->artXX
+	$articles = sql_select('*','spip_articles','texte LIKE "%->../?p=%"');
 	while($article = sql_fetch($articles)){
 		$texte = $article['texte'];
-		preg_match_all("/->\?page_id=(\d*)]/Uims",$texte,$matches);
+		$pattern = "->..\/\?p=(\d{1,}).*?]";
+		preg_match_all("|$pattern|",$texte,$matches);
 		if(is_array($matches)){
 			foreach($matches[1] as $i=>$id){
-				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-					$texte = str_replace('->?page_id='.$id.']','->art'.$id.']',$texte);
+				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
+					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+					spip_log("On remplace ->../?p=$id] par ->art$id]");
+				}else
+					$articles_inexistants[] = $id;
 			}
 			if($texte != $article['texte']){
 				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
@@ -126,7 +147,33 @@ function action_wp2spip_liens_internes_dist(){
 			}
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des ?page_id=...','wp2spip');
+	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
 	spip_log($modifies,'wp2spip');
+	
+	$modifies = array();
+	// On va remplacer les ../?p=XX par ->artXX
+	$articles = sql_select('*','spip_articles','texte LIKE "%->/?p=%"');
+	while($article = sql_fetch($articles)){
+		$texte = $article['texte'];
+		$pattern = "->/\?p=(\d{1,}).*?]";
+		preg_match_all("|$pattern|",$texte,$matches);
+		if(is_array($matches)){
+			foreach($matches[1] as $i=>$id){
+				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
+					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+					spip_log("On remplace ->/?p=$id] par ->art$id]");
+				}
+			}
+			if($texte != $article['texte']){
+				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
+				$modifies[] = $article['id_article'];
+			}
+		}
+	}
+	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
+	spip_log($modifies,'wp2spip');
+	$articles_inexistants =  array_unique($articles_inexistants);
+	spip_log('Les articles suivants n existent pas :');
+	spip_log($articles_inexistants);
 }
 ?>
