@@ -1,17 +1,20 @@
-[(#REM) ajoute les pages wp comme article au sens PAGES UNIQUES
-si le plugin est actif, le statut des articles est 'publié' et ils sont des pages uniques
-sinon les articles ont statut 'proposé à la publication', visibles et éditables (id_rubrique=-1)
+[(#REM) 
 
-Les pages wp multiniveaux:l'id de l'article parent d'un article est stocké dans le champs #EXTRA, okazou 
+	Ajoute les pages wp comme article au sens PAGES UNIQUES
+	si le plugin est actif, le statut des articles est 'publié' et ils sont des pages uniques
+	sinon les articles ont statut 'proposé à la publication', visibles et éditables (id_rubrique=-1)
 
+	Les pages wp multiniveaux:
+		l'id de l'article parent d'un article est stocké dans le champs #EXTRA, okazou 
 
-A faire? une noisette xml pour le plugin menus qui porpose de composer un menu avec les pages uniques  et leur hierarchie]
-#CACHE{0}
+	A faire? 
+	-* une noisette xml pour le plugin menus qui propose de composer un menu avec les pages uniques et leur hierarchie
+
+]#CACHE{0}
 
 [(#PLUGIN{pages}|oui)
-#SET{pages,oui}
+	#SET{pages,oui}
 ]
-
 <BOUCLE_pages( wp_posts ){post_status=publish}{post_type=page}>
 <spip_articles>
 <id_article>#ID</id_article>

@@ -1,5 +1,6 @@
-[(#REM)        polyhierarchie  si des articles ont plusieurs rubriques ]
-#CACHE{0}
+[(#REM)
+	polyhierarchie  si des articles ont plusieurs rubriques
+]#CACHE{0}
 <BOUCLE_polyhierarchie( wp_posts ){post_status=publish}{post_type=post}>
 #SET{les_tags,#ARRAY}
 <BOUCLE_posts_tags( wp_term_relationships ){object_id=#ID}>
