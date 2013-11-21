@@ -16,11 +16,8 @@
 
 	[(#GET{position}|oui)
 	<div style="background-color:#GET{couleur}" class="#GET{position}">
-   	    [(#AUTORISER{modifier,orr_reservation,#ENV{idressource}})
-			<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox">
-			<img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>
-		]
                 <span class="tooltip">#ORR_RESERVATION_NOM     
+                    [(#AUTORISER{modifier,orr_reservation,#ENV{idressource}}) <a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>]
                     <span>
                         Date de debut : [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
                         Date de fin : [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>

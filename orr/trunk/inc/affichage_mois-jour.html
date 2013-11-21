@@ -14,7 +14,8 @@
         [(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
         #SET{couleur_ressource,#ORR_RESSOURCE_COULEUR}
             <div style="background-color:#GET{couleur_ressource}" >
-                <span class="tooltip">#ORR_RESERVATION_NOM     
+                <span class="tooltip">#ORR_RESERVATION_NOM
+                    [(#AUTORISER{modifier,orr_reservation,#ENV{idressource}}) <a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ID_ORR_RESSOURCE}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox"><img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>]
                     <span>Ressource : #ORR_RESSOURCE_NOM <br />
                         Date de debut : [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
                         Date de fin : [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>

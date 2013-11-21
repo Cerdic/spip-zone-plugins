@@ -43,17 +43,14 @@
 	</div>
 
 </div>
-<script type="text/javascript" charset="utf-8">
-    jQuery(document).ready(function(){
-        jQuery(".semaine").bind("click",function(event){
-            event.stopPropagation();
-            recupereDir(this);
-            var classe = idDir.split(" ");
-//        jQuery("#affichage_semaine").css("display","block");
-//        jQuery("#affichage_mois").css("display","none");
-        jourj = classe[1];
-        tabAjax();
-        });
-    });
-</script>
-[(#REM)  {si #GET{jourj}|orr_plusunjour|affdate{j}|>{7}|ou{#GET{cteur_lignes}|<{5}} } ]
+//<script type="text/javascript" charset="utf-8">
+//    jQuery(document).ready(function(){
+//        jQuery(".semaine").bind("click",function(event){
+//            event.stopPropagation();
+//            recupereDir(this);
+//            var classe = idDir.split(" ");
+//        jourj = classe[1];
+//        tabAjax();
+//        });
+//    });
+//</script>
