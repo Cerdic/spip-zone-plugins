@@ -18,10 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_aucune_rubrique' => 'Veuillez créer au moins une catégorie dans Wordpress.',
 	'info_nombre_documents' => '@nb@ documents.',
 	'info_nombre_documents_orphelins' => '@nb@ documents orphelins qui ne seront pas importés',
+	'info_nombre_evenements' => '@nb@ évènements.',
 	'info_nombre_posts' => '@nb@ posts ou articles publiés.',
 	'info_nombre_pages' => '@nb@ pages uniques (installez le plugin pages uniques si ce n\'est pas déjà fait, sinon ce seront des articles à classer et à publier).',
 
 	// L
+	'label_evenements' => 'Évènements',
 	'label_generer_fichier' => 'Générer le fichier au format SPIP',
 	
 	// M
