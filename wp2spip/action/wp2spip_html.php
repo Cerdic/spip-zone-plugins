@@ -27,8 +27,9 @@ function action_wp2spip_html_dist(){
 		 * 
 		 * cf : CF : http://wordpress.org/plugins/list-category-posts/other_notes/
 		 * 
-		 * Attention, ici on palie un bug de SPIP (au moins en 2.1.24 qui transforme le caractère 
-		 * d'échappement "\\" habituel de MySQL en simple "\", il le fait automatiquement
+		 * Attention : le sql_select produit du php qui va être interprété. 
+		 * Donc il faut bien slasher les \\ qu'on lui envoie (@denisb), donc 3 fois \ plutôt que 2
+		 *
 		 */
 		$articles = sql_select('texte,id_article','spip_articles',"texte REGEXP '\\\[catlist .*\\\]'");
 		spip_log(sql_count($articles).' articles trouvés ayant des [catlist ...]');
