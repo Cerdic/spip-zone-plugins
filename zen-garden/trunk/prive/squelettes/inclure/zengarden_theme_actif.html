@@ -8,7 +8,7 @@
 <div class='descriptif'>[(#VALEUR{description}|propre)]</div>
 <div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR{auteur}|implode{', '}|propre|PtoBR}})]</div>
 <div class='licence'>[<:intitule_licence:> (#VALEUR{licence}|implode{','}|propre|PtoBR)]</div>
-<p class='actions'>[<a class='ajax' href='#URL_ACTION_AUTEUR{zengarden_activer_theme,defaut:#CLE,#SELF}'><:zengarden:desactiver_ce_theme:></a>]</p>
+<p class='actions'><a class='ajax' href='#URL_ACTION_AUTEUR{zengarden_activer_theme,defaut:#CLE,#SELF}'>\[<:zengarden:desactiver_ce_theme:>\]</a></p>
 </li>
 </BOUCLE_sel>
 </ul>
