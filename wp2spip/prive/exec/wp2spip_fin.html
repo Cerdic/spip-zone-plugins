@@ -5,94 +5,109 @@
 </ul>
 <!--/#hierarchie-->
 
-<h1>Post récupération</h1>
+<h1 class="grostitre"><:wp2spip:titre_post_import:></h1>
+
+<p class="explication"><:wp2spip:explication_post_import:></p>
 
 #SET{url_wordpress,''}
 <BOUCLE_url_wordpress(wp_options){option_name = siteurl}>
 #SET{url_wordpress,#OPTION_VALUE}
 </BOUCLE_url_wordpress>
-<B_articles>
-<div>
-#GRAND_TOTAL
-<ul>
-<BOUCLE_articles(ARTICLES){texte == \/wp-content}>
-<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
-</BOUCLE_articles>
-</ul>
-[(#BOUTON_ACTION{Réparer liens documents,#URL_ACTION_AUTEUR{wp2spip_documents_internes,1,#SELF}})]
-</div>
-</B_articles>
 
+<B_articles_documents>
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+	<h2>#GRAND_TOTAL (wp-content)</h2>
+	<ul class="liste-items">
+		<BOUCLE_articles_documents(ARTICLES){texte == \/wp-content}{pagination 20}>
+		<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
+		</BOUCLE_articles_documents>
+	</ul>
+	<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_recuperer_documents:>,#URL_ACTION_AUTEUR{wp2spip_documents_internes,1,#SELF}})]</p>
+	</div>
+</div>
+</B_articles_documents>
 
 <B_articles_liens>
-<div>
-#GRAND_TOTAL (../?page_id=%)
-<ul class="liste-items">
-<BOUCLE_articles_liens(ARTICLES){texte LIKE %->../?page_id=%}{pagination 20}>
-<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
-</BOUCLE_articles_liens>
-</ul>
-[(#BOUTON_ACTION{Réparer liens internes,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL (../?page_id=%)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_liens(ARTICLES){texte LIKE %->../?page_id=%}{pagination 20}>
+			<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
+			</BOUCLE_articles_liens>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_liens_internes:>,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_liens>
 
 <B_articles_liens_page_id>
-<div>
-#GRAND_TOTAL (/?page_id=%)
-<ul>
-<BOUCLE_articles_liens_page_id(ARTICLES){texte LIKE %->/?page_id=%}{pagination 20}>
-<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
-</BOUCLE_articles_liens_page_id>
-</ul>
-[(#BOUTON_ACTION{Réparer liens internes,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL (/?page_id=%)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_liens_page_id(ARTICLES){texte LIKE %->/?page_id=%}{pagination 20}>
+			<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
+			</BOUCLE_articles_liens_page_id>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_liens_internes:>,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_liens_page_id>
 
 <B_articles_liens_url_page_id>
-<div>
-#GRAND_TOTAL ([(#GET{url_wordpress})]/?page_id=%)
-<ul>
-<BOUCLE_articles_liens_url_page_id(ARTICLES){texte LIKE %->#GET{url_wordpress}/?page_id=%}{pagination 20}>
-<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
-</BOUCLE_articles_liens_url_page_id>
-</ul>
-[(#BOUTON_ACTION{Réparer liens internes,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL ([(#GET{url_wordpress})]/?page_id=%)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_liens_url_page_id(ARTICLES){texte LIKE %->#GET{url_wordpress}/?page_id=%}{pagination 20}>
+				<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
+			</BOUCLE_articles_liens_url_page_id>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_liens_internes:>,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_liens_url_page_id>
 
 <B_articles_liens_p_rel>
-<div>
-#GRAND_TOTAL (/?p=XX)
-<ul>
-<BOUCLE_articles_liens_p_rel(ARTICLES){texte LIKE %->/?p=%}{pagination 20}>
-<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
-</BOUCLE_articles_liens_p_rel>
-</ul>
-[(#BOUTON_ACTION{Réparer liens internes,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL (/?p=XX)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_liens_p_rel(ARTICLES){texte LIKE %->/?p=%}{pagination 20}>
+			<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></li>
+			</BOUCLE_articles_liens_p_rel>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_liens_internes:>,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_liens_p_rel>
 
 <B_articles_liens_p>
-<div>
-#GRAND_TOTAL (../?p=XX)
-<ul>
-<BOUCLE_articles_liens_p(ARTICLES){texte LIKE %->../?p=%}>
-<li><a href="#URL_ARTICLE">#TITRE</a></li>
-</BOUCLE_articles_liens_p>
-</ul>
-[(#BOUTON_ACTION{Réparer liens internes,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL (../?p=XX)</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_liens_p(ARTICLES){texte LIKE %->../?p=%}{pagination 20}>
+			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles_liens_p>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_liens_internes:>,#URL_ACTION_AUTEUR{wp2spip_liens_internes,1,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_liens_p>
 
-
 <B_articles_catlist>
-<div>
-#GRAND_TOTAL ([catlist ...])
-<ul>
-<BOUCLE_articles_catlist(ARTICLES){texte == \\[catlist.*\\]}>
-<li><a href="#URL_ARTICLE">#TITRE</a></li>
-</BOUCLE_articles_catlist>
-</ul>
-[(#BOUTON_ACTION{Réparer le code html,#URL_ACTION_AUTEUR{wp2spip_html,catlist,#SELF}})]
+<div class="cadre cadre-r">
+	<div class="cadre_padding">
+		<h2>#GRAND_TOTAL ([catlist ...])</h2>
+		<ul class="liste-items">
+			<BOUCLE_articles_catlist(ARTICLES){texte == \\[catlist.*\\]}{pagination 20}>
+			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles_catlist>
+		</ul>
+		<p class="boutons">[(#BOUTON_ACTION{<:wp2spip:bouton_reparer_catlist:>,#URL_ACTION_AUTEUR{wp2spip_html,catlist,#SELF}})]</p>
+	</div>
 </div>
 </B_articles_catlist>

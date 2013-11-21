@@ -6,12 +6,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alerte_generation_fichier' => 'Le fichier de restauration sera place dans le répertoire tmp/dump',
 
+	// B
+	'bouton_recuperer_documents' => 'Récupérer les documents',
+	'bouton_reparer_catlist' => 'Réparer les listes de catégories',
+	'bouton_reparer_liens_internes' => 'Réparer les liens internes',
+	
 	// C
 	
 	// E
 	'erreur_aucun_tag' => 'Aucun tag trouvé.',
 	'erreur_fichier_non_cree' => 'Le fichier de restauration n\'a pas été créé.',
 	'erreur_non_webmestre' => 'Vous devez avoir les droits de webmestre.',
+	'explication_post_import' => 'Cette page permet de relever les incohérence suite à l\'importation de la base Wordpress.',
 	
 	// I
 	'info_erreur_aucun_mot' => 'Aucun mot-clé trouvé!',
@@ -39,5 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags' => '@nb@ tags',
 	'titre_contenu_base' => 'Contenu de la base de données Wordpress',
 	'titre_page_migration' => 'Migration de Wordpress vers SPIP',
+	'titre_post_import' => 'Actions de post-import de Wordpress',
 );
 ?>
