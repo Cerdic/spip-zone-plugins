@@ -143,7 +143,7 @@
 	[<div class='spip_doc_titre'><strong>(#GET{titre})</strong></div>]
 	[<div class='spip_doc_descriptif'>(#GET{descriptif})[(#GET{notes}|PtoBR)]</div>]]
 	[(#ENV{telecharger,non}|=={oui}|oui)
-		<div class='spip_download'><a href="(#URL_DOCUMENT|url_absolue)" rel="enclosure"><:bouton_download:></a></div>]
+		<div class='spip_download'><a href="[(#URL_DOCUMENT|url_absolue)]" rel="enclosure"><:bouton_download:></a></div>]
 </div>
 <script type="text/javascript">
 (function($) {
