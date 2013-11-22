@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_reservation_date_fin_debut'=>'date de fin antérieur  ou égale à la date de début',	
-	'erreur_reservation_date_occupe'=>'Vos dates de réservations ne sont pas libres !',
+	'erreur_reservation_date_occupe'=>'Pour @pluriel@ : @ressource@, vos dates de réservations ne sont pas libres !',
 	'erreur_reservation_format_date'=>'Ce format de date n\'est pas reconnu.',	
 	'explication_orr_date_debut' => 'Date de début de la réservation',
 	'explication_orr_date_fin' => 'Date de fin de la réservation',
@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_ressource_nom' => 'Nom de la ressource',
 	'legend_affichage_planning' => 'Affichage du planning',
 	'label_vue_pardefaut' => 'Choix de la vue par défaut',
+    'liste_ressources' => 'Ajouter des ressources supplémentaires',
 	
 	// M
 	'modifier' => 'Modifier',
@@ -91,6 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_lien_orr_ressource' => 'Retirer cette ressource',
 	'retirer_tous_liens_orr_ressources' => 'Retirer toutes les ressources',
 	'reservation_enregistree' => 'La réservation est enregistrée',
+    'ressource_obligatoire' => 'Il faut sélectionner au moins une ressource !',
+    'ressource_active' => 'La ressource sélectionnée :',
 	
 	// S
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',

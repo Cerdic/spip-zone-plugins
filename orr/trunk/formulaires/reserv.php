@@ -46,20 +46,21 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
         if (!_request($obligatoire)) 
             $erreurs[$obligatoire] = _T("info_obligatoire");
     }
+    // Il faut au moins une ressource !!
     if (!_request('liste_ressources') AND !_request('choix_ressource_active')) {
-            $erreurs["choix_ressource_active"] = _T("orr_ressource:ressource_obligatoire");
+            $erreurs["choix_ressource_active"] = _T("orr:ressource_obligatoire");
     }
    
     //format de date correct
     if (!isset($erreurs['date_debut'])){
-        list ($dated,$tempsd) = explode(' ',$date_debut);
+        list ($dated,$tempsd)        = explode(' ',$date_debut);
         list ($jourd,$moisd,$anneed) = explode('/',$dated);
         if (!intval($jourd)or!intval($moisd)or!intval($anneed)or!preg_match("#^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$#", $tempsd)) {
             $erreurs['date_debut'] = _T('orr:erreur_reservation_format_date');
         }
     }
     if (!isset($erreurs['date_fin'])){
-        list ($datef,$tempsf) = explode(' ',$date_fin);
+        list ($datef,$tempsf)        = explode(' ',$date_fin);
         list ($jourf,$moisf,$anneef) = explode('/',$datef);
         if (!intval($jourf)or!intval($moisf)or!intval($anneef)or!preg_match("#^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$#", $tempsf)) {
             $erreurs['date_fin'] = _T('orr:erreur_reservation_format_date');
@@ -76,14 +77,34 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
     }
 
     // les dates choisies sont libres
-// manque le test si resa multiple !!!!
+    $liste_ressources = array();
+    // Si C'est une mise à jour, on ne traite que de la ressource sélectionnée)
+    if ($idresa)
+        $liste_ressources[] = $idressource;
+    // fabrique un array : liste_ressources de toutes les ressources
+    elseif (_request('choix_ressource_active')){
+        $liste_ressources   = _request('liste_ressources');
+        $liste_ressources[] = $idressource;
+    }
     $date_debut = date("Y-m-d H:i:s", mktime (intval($heured),$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime (intval($heuref),$minutef,0, $moisf, $jourf, $anneef));
-    $resultat = orr_compare_date($date_debut,$date_fin,$idressource,$idresa);
-	if ($resultat == "1"){
-		$erreurs['date_debut'] = _T('orr:erreur_reservation_date_occupe');
-		$erreurs['date_fin']   = _T('orr:erreur_reservation_date_occupe');
-	}
+    
+    $resultat = array();
+    foreach ($liste_ressources as $idressource) {
+        if (orr_compare_date($date_debut,$date_fin,$idressource,$idresa))
+            $resultat[] = $idressource;
+    }
+    if ($resultat){
+        $nom_ressources = array();
+        $nom_ressources = sql_allfetsel('orr_ressource_nom', 'spip_orr_ressources', sql_in('id_orr_ressource', $resultat));
+        foreach ($nom_ressources as $ressource) {
+            $Tressources[] = $ressource['orr_ressource_nom'];
+        }
+        $pluriel = count($Tressources)>1 ? "les ressources" : "la ressource";
+        $affichage_ressource = implode(", ",$Tressources);
+        $erreurs['date_debut'] = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
+        $erreurs['date_fin']   = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
+    }
     return $erreurs;
 }
 
@@ -105,15 +126,15 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
     }
 
 	list($jour_debut, $heure_debut) = explode(' ',$date_debut);
-	list($jour_fin, $heure_fin) = explode(' ',$date_fin);
-	list($jourd,$moisd,$anneed) = explode('/',$jour_debut);
-	list($jourf,$moisf,$anneef) = explode('/',$jour_fin);
+	list($jour_fin, $heure_fin)     = explode(' ',$date_fin);
+	list($jourd,$moisd,$anneed)     = explode('/',$jour_debut);
+	list($jourf,$moisf,$anneef)     = explode('/',$jour_fin);
 
 	list($heured,$minuted) = explode(':',$heure_debut);
 	list($heuref,$minutef) = explode(':',$heure_fin);
 
 	$date_debut = date("Y-m-d H:i:s", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
-	$jourj = date("Y-m-d", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
+	$jourj      = date("Y-m-d", mktime ($heured,$minuted,0, $moisd, $jourd, $anneed));
 	$date_fin   = date("Y-m-d H:i:s", mktime ($heuref,$minutef,0, $moisf, $jourf, $anneef));
 	
 	$retour=array();

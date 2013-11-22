@@ -13,7 +13,7 @@
             [(#ENV{idreservation}|?{#SET{affichage_ressource,cachee},#SET{affichage_ressource,visible}})]
             <span class="ressource_#GET{affichage_ressource}">
                 [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
-                {label=<:orr_ressource:ressource_active:>})]
+                {label=<:orr:ressource_active:>})]
 
                 <INCLURE{fond=inc/liste_ressources}{id_ressource=#ENV{id_ressource}}>
             </span>
