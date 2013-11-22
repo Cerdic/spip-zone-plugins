@@ -1,0 +1,15 @@
+<paquet
+	prefix="collectionjson"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo=""
+>
+	<nom>API Collection+JSON</nom>
+	
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<credit lien="https://github.com/collection-json/spec">Spécifications Collection+JSON</credit>
+	<copyright>2013</copyright>
+	<licence>GPL v3</licence>
+</paquet>
