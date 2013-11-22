@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_auteur){
 	// zou! si on est webmestre, pas besoin d'aller plus loin: on est autorisé pour *tout*
-	if ($GLOBALS['visiteur_session']['webmestre'] == 'oui')
+	if (isset($GLOBALS['visiteur_session']['webmestre']) And $GLOBALS['visiteur_session']['webmestre'] == 'oui')
 		return true;
 
 	$result= false;
