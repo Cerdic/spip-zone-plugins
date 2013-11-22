@@ -1,6 +1,10 @@
 <?php
 
 function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=false){
+    // test si l'utilisateur à le droit de creer une résa pour la ressource active
+    if (!autoriser('creer','orr_ressource',$idressource))
+        return exit;
+
     include_spip('inc/config');
 
     list($dated,$heured)            = explode(' ',$date_deb);
@@ -17,7 +21,9 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
     //Récup des noms de ressource sauf la ressource active    
     $result= sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources','id_orr_ressource !='.intval($idressource));
     foreach ($result as $Tressource) {
-        $Tressources[$Tressource['id_orr_ressource']] = $Tressource['orr_ressource_nom'];
+        // Test si l'utilisateur à le droit de creer une résa pour cette ressource
+        if (autoriser('creer','orr_ressource',$idressource)) 
+            $Tressources[$Tressource['id_orr_ressource']] = $Tressource['orr_ressource_nom'];
     }
 
     // recup des valeurs si resa existante
@@ -157,6 +163,8 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
 
     // enregistrement pour chaque ressource
     foreach ($liste_ressources as $idressource) {
+        if (!autoriser('creer','orr_ressource',$idressource))
+            continue;
 	    $set = array (
 		    'id_orr_ressource'    => $idressource,
 		    'orr_reservation_nom' => $nom_reservation,
