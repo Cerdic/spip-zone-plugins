@@ -27,6 +27,7 @@
 	-* muted_bloque string  oui : 
 		si "oui" l'utilisateur ne peut switcher entre mute et unmute
 	-* boutons_caches string : liste de boutons séparés par des virgule (ex: fullscreen,loop,volume)
+	-* telecharger string "oui" : si oui affiche un lien de téléchargement 
 ]
 <BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>[
 (#REM) on trouvera plusieurs variable de hauteur/largeur
@@ -141,6 +142,8 @@
 	</video>[(#ENV{infos}|=={non}|non)
 	[<div class='spip_doc_titre'><strong>(#GET{titre})</strong></div>]
 	[<div class='spip_doc_descriptif'>(#GET{descriptif})[(#GET{notes}|PtoBR)]</div>]]
+	[(#ENV{telecharger,non}|=={oui}|oui)
+		<div class='spip_download'><a href="(#URL_DOCUMENT|url_absolue)" rel="enclosure"><:bouton_download:></a></div>]
 </div>
 <script type="text/javascript">
 (function($) {
