@@ -25,6 +25,8 @@
 					<BOUCLE_ligne(DATA){enum 1, 7}{si #GET{jourj}|orr_plusunjour|affdate{j}|>{7}|ou{#GET{cteur_lignes}|<{5}}}>
 						<td class="semaine #GET{jourj}[ (#GET{jourj}|affdate{m}|!={#GET{num_mois}}|oui) hors_mois]"[ id="id(#GET{jourj}|=={#GET{jour}})couleur_jour_mois"]> 
 							[(#GET{jourj}|affdate{j})] 
+                            [(#REM)Ajout du formulaire de réservation]
+						    <a  href="[(#URL_PAGE{formulaire_reservation}|parametre_url{ma_date,#GET{jourj}|affdate{'Y-m-d h:i:s'}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>
 							#SET{jourplusun,#GET{jourj}|orr_plusunjour} 
 							<INCLURE{fond=inc/affichage_mois-jour}{jourj=#GET{jourj}}{motcle=#ENV{motcle}}{jourplusun=#GET{jourplusun}}>
 							#SET{jourj,#GET{jourj}|orr_plusunjour} 

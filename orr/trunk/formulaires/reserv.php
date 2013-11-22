@@ -2,11 +2,10 @@
 
 function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=false){
     // test si l'utilisateur à le droit de creer une résa pour la ressource active
-    if (!autoriser('creer','orr_ressource',$idressource))
+    if ($idressource AND !autoriser('creer','orr_reservation',intval($idressource)))
         return exit;
 
     include_spip('inc/config');
-
     list($dated,$heured)            = explode(' ',$date_deb);
     list($anneed,$moisd,$jourd)     = explode('-',$dated);
     list($heured,$minuted,$econded) = explode(':',$heured);
@@ -20,12 +19,12 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
 
     //Récup des noms de ressource sauf la ressource active    
     $result= sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources','id_orr_ressource !='.intval($idressource));
+
     foreach ($result as $Tressource) {
         // Test si l'utilisateur à le droit de creer une résa pour cette ressource
-        if (autoriser('creer','orr_ressource',$idressource)) 
+        if (autoriser('creer','orr_reservation',intval($Tressource['id_orr_ressource']))) 
             $Tressources[$Tressource['id_orr_ressource']] = $Tressource['orr_ressource_nom'];
     }
-
     // recup des valeurs si resa existante
 	if ($idresa)
 		$vals_resa = sql_fetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
@@ -134,7 +133,7 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
     if ($idresa)
         $liste_ressources[] = $idressource;
     // fabrique un array : liste_ressources de toutes les ressources
-    elseif ($choix_ressource_active){
+    else {
         $liste_ressources   = _request('liste_ressources');
         $liste_ressources[] = $idressource;
     }
@@ -163,7 +162,7 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
 
     // enregistrement pour chaque ressource
     foreach ($liste_ressources as $idressource) {
-        if (!autoriser('creer','orr_ressource',$idressource))
+        if (!autoriser('creer','orr_reservation',intval($idressource)))
             continue;
 	    $set = array (
 		    'id_orr_ressource'    => $idressource,

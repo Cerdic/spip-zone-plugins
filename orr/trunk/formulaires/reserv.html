@@ -12,9 +12,10 @@
 
             [(#ENV{idreservation}|?{#SET{affichage_ressource,cachee},#SET{affichage_ressource,visible}})]
             <span class="ressource_#GET{affichage_ressource}">
-                [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
-                {label=<:orr:ressource_active:>})]
-
+                [(#ENV{id_ressource}|oui)
+                    [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
+                    {label=<:orr:ressource_active:>})]
+                ]
                 [(#SAISIE*{checkbox,liste_ressources}
                     {label=<:orr:liste_ressources:>}
                     {datas=#ENV{liste_ressources}})]
