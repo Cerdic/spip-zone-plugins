@@ -15,7 +15,9 @@
                 [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
                 {label=<:orr:ressource_active:>})]
 
-                <INCLURE{fond=inc/liste_ressources}{id_ressource=#ENV{id_ressource}}>
+                [(#SAISIE*{checkbox,liste_ressources}
+                    {label=<:orr:liste_ressources:>}
+                    {datas=#ENV{liste_ressources}})]
             </span>
 
 			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">

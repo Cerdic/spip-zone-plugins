@@ -12,7 +12,14 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
     list($anneef,$moisf,$jourf)     = explode('-',$datef);
     list($heuref,$minutef,$econdef) = explode(':',$heuref);
     $date_f = date("d/m/Y H:i:s", mktime($heuref, $minutef, $secondef, $moisf, $jourf, $anneef));
-    
+
+
+    //Récup des noms de ressource sauf la ressource active    
+    $result= sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources','id_orr_ressource !='.intval($idressource));
+    foreach ($result as $Tressource) {
+        $Tressources[$Tressource['id_orr_ressource']] = $Tressource['orr_ressource_nom'];
+    }
+
     // recup des valeurs si resa existante
 	if ($idresa)
 		$vals_resa = sql_fetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
@@ -24,6 +31,7 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
         "id_ressource"           => intval($idressource),
         "date_debut"             => $date_deb,
         "date_fin"               => $date_f,
+        "liste_ressources"       => $Tressources, 
     );
     // champs extra
     if (lire_config("champs_extras_spip_orr_reservations")) {
