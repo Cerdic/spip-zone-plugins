@@ -2,7 +2,7 @@
 	prefix="http"
 	categorie="outil"
 	version="1.2.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="http.png"
 >
