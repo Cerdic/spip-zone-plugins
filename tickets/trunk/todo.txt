@@ -1,9 +1,0 @@
-proposition d'améliorations
-
-1. Sélection des destinataires
-------------------------------
-
-En utilisant le plugin sur un site avec un grand nombre d'auteurs, par défaut tous reçoivent les messages d'ouverture/fermeture de ticket.
-Proposition : possibilité de paramétrage du plugin en sélectionnant les auteurs destinataires dans une liste, avec case à cocher.
-
-
