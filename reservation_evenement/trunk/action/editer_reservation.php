@@ -134,9 +134,9 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
     $evenements=_request('id_evenement');
 
     //Si les déclinaisons sont actives on récupère les évenements via le prix
-     if(test_plugin_actif('shop_declinaisons')){
+     if(test_plugin_actif('declinaisons')){
          $evenements=array();
-        if($id_prix_objet=$set['id_objet_prix']=_request('id_objet_prix')){
+        if($id_prix_objet=_request('id_objet_prix')){
             foreach(array_keys($id_prix_objet )AS $id_evenement){
                 $evenements[]=$id_evenement;
             }
@@ -157,6 +157,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
         set_request('evenements',$evenements);
         }
     //Pour chaque évenement on crée un détail de la réservation
+
     foreach($evenements AS  $id_evenement){ 
         // Si aucun détail n'est attaché à l'evénement, on le crée
         if(!$reservations_detail=sql_fetsel('*','spip_reservations_details','id_reservation='.$id_reservation.' AND id_evenement='.$id_evenement)) {
@@ -170,7 +171,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
 	    
         //eviter l'envoi d'une notification pour chaque détail   
         set_request('envoi_differe_actif','non');			
-		 spip_log($set,'teste');
+
         $detail=$action($id_reservations_detail,'reservations_detail',$set);
 		
     }
