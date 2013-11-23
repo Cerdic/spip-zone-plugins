@@ -64,13 +64,27 @@ function action_api_http_dist(){
 			}
 			
 			// Le GET peut se faire sur : la racine du serveur, une collection, une ressource
-			if ($methode == 'GET'
+			if (
+				$methode == 'GET'
 				and $fonction = charger_fonction("get_$type_reponse", "http/$format/", true) // http_atom_get_XXX()
 			){
 				// Si on a l'autorisation, on lance la fonction trouvée
-				if (
-					autoriser("get_$type_reponse", $collection, $ressource) // autoriser_patates_get_collection_dist()
-				){
+				if (autoriser("get_$type_reponse", $collection, $ressource)){ // autoriser_patates_get_XXX_dist()
+					$reponse = $fonction($requete, $reponse);
+				}
+				// Sinon on lève une 401
+				else{
+					$reponse = $fonction_erreur(401,$requete, $reponse);
+				}
+			}
+			// Pour le POST on ne gère que sur une collection (à voir si des gens ont des cas particuliers qui nécessiteraient plus...)
+			if (
+				$methode == 'POST'
+				and $type_reponse = 'collection'
+				and $fonction = charger_fonction("post_$type_reponse", "http/$format/", true)
+			){
+				// Si on a l'autorisation, on lance la fonction trouvée
+				if (autoriser("post_$type_reponse", $collection, $ressource)){ // autoriser_patates_post_collection_dist()
 					$reponse = $fonction($requete, $reponse);
 				}
 				// Sinon on lève une 401
