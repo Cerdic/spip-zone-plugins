@@ -80,7 +80,7 @@ function action_api_http_dist(){
 			// Pour le POST on ne gère que sur une collection (à voir si des gens ont des cas particuliers qui nécessiteraient plus...)
 			if (
 				$methode == 'POST'
-				and $type_reponse = 'collection'
+				and $type_reponse == 'collection'
 				and $fonction = charger_fonction("post_$type_reponse", "http/$format/", true)
 			){
 				// Si on a l'autorisation, on lance la fonction trouvée
