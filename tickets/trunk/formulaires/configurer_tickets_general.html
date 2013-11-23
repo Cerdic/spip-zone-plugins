@@ -102,23 +102,25 @@
 						priori,<:forum:bouton_radio_moderation_priori:>,
 						abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
 					})]})]
-				[(#SAISIE{radio,notif_destinataires,
-					label=<:tickets:cfg_lbl_notif_destinataires:>,
-					defaut=assigne,
-					explication=<:tickets:explication_notif_destinataire:>,
-					datas=[(#ARRAY{
-						assigne,<:tickets:cfg_notif_assigne:>,
-						webmestre,<:tickets:cfg_notif_webmestre:>,
-						0minirezo,<:tickets:cfg_notif_admin:>,
-						1comite,<:tickets:cfg_notif_auteur:>,
-						liste,<:tickets:cfg_notif_liste:>,
-					})]}
-				)]
+				[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
+					[(#SAISIE{radio,notif_destinataires,
+						label=<:tickets:cfg_lbl_notif_destinataires:>,
+						defaut=assigne,
+						explication=<:tickets:explication_notif_destinataire:>,
+						datas=[(#ARRAY{
+							assigne,<:tickets:cfg_notif_assigne:>,
+							webmestre,<:tickets:cfg_notif_webmestre:>,
+							0minirezo,<:tickets:cfg_notif_admin:>,
+							1comite,<:tickets:cfg_notif_auteur:>,
+							liste,<:tickets:cfg_notif_liste:>,
+						})]}
+					)]
 
-				[(#SAISIE{auteurs,notif_auteurs,
-					label=<:tickets:cfg_notif_liste_auteurs:>,
-					multiple=oui,
-					option_statut=oui})]
+					[(#SAISIE{auteurs,notif_auteurs,
+						label=<:tickets:cfg_notif_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				]
 		<script type="text/javascript">
 		//<![CDATA[
 			jQuery(document).ready(function() {
