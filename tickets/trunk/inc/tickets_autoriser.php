@@ -403,7 +403,7 @@ function autoriser_ticket_instituer_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
- * Autorisation de notification des tickets
+ * Autorisation de commenter des tickets
  * (défini qui doit être notifié)
  * 
  * @param string $faire : l'action à faire
