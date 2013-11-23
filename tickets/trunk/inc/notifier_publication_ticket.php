@@ -48,12 +48,16 @@ function inc_notifier_publication_ticket_dist($id_ticket,$statut_nouveau='',$sta
 			$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
 		$query_auteurs = sql_select($select, $from, $where);
 		
-		//Envoyer systématiquement un email à l'auteur du ticket et à la personne assignée
+		//Envoyer systématiquement un email à l'auteur du ticket et à la personne assignée, ainsi qu'aux personnes mentionnés dans via [->autxxx] ou [->auteurXXX] dans le corps du ticket
+		$match_auteurs_mentionnes=array();
+        preg_match_all("#\[(.*)->(aut|auteur)(\d*)\]#U",$datas['texte'],$match_auteurs_mentionnes);
+        $auteurs_mentionnes = $match_auteurs_mentionnes[3];
+		
 		$destinataires_forces = sql_allfetsel(
 								'email',
 								'spip_auteurs',
 								sql_in('id_auteur',
-										array($datas["id_auteur"],$datas["id_assigne"])));
+										array($auteurs_mentionnes,$datas["id_auteur"],$datas["id_assigne"])));
 		$emails_deja_faits = array();
 		foreach ($destinataires_forces as $dest){
 			$emails_deja_faits[] = $dest["email"];
