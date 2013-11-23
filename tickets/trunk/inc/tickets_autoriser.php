@@ -55,8 +55,10 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 
 	if($define){
 		$liste = explode(':', $define);
-		if (in_array('webmestre', $liste))
-			$aut['auteur'] = explode(':', _ID_WEBMESTRES);
+		if (in_array('webmestre', $liste)){
+			$webmestres = sql_allfetsel('id_auteur','spip_auteurs',"webmestre=".sql_quote(oui));
+			$aut['auteur'] = array_merge($webmestres,explode(':', _ID_WEBMESTRES));
+			}
 		else if (in_array('0minirezo', $liste))
 			$aut['statut'] = array('0minirezo');
 		else if (in_array('1comite', $liste))
