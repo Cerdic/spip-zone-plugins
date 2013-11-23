@@ -1,0 +1,12 @@
+[(#REM)
+  Ce squelette donne un exemple d'utilisation de la balise #MACRO.
+
+  La balise retourne un nom de squelette correspondant à la macro
+  donné par le premier argument de la balise. On passe ensuite ce nom de
+  squelette dans INCLURE pour compilation et évaluation par SPIP.
+  Dans ce cas, on utilisera la macro "macro.php" dans le dossier "demo".
+  Le deuxième argument de la balise est le contexte qui sera utilisé pour
+  évaluer la macro.
+]
+[(#INCLURE{fond=#MACRO{demo/macro, #ARRAY{objet, article}},
+           env})]

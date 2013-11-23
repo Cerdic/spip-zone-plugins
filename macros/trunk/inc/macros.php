@@ -39,7 +39,7 @@ function recuperer_macro ($nom_macro, $contexte) {
   }
 
   $hash_contexte = md5(serialize($contexte));
-  $nom_skel = $dir . '/' . $nom_macro . '_' . $hash_contexte;
+  $nom_skel = $dir . '/' . str_replace('/', '_', $nom_macro) . '_' . $hash_contexte;
   $path_fichier = $nom_skel . '.html';
 
   $skel = evaluer_macro($nom_macro, $contexte);
