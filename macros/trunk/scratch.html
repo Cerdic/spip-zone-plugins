@@ -1,0 +1,10 @@
+<?php
+
+include_spip('inc/macros');
+
+$skel = recuperer_macro('skel', array(
+                                  'objet' => 'article',
+                                  'var'   => 'ma_valeur',
+                                ));
+
+echo recuperer_fond($skel);
