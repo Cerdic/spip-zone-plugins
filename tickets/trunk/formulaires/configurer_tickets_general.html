@@ -102,6 +102,40 @@
 						priori,<:forum:bouton_radio_moderation_priori:>,
 						abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
 					})]})]
+				[(#SAISIE{radio,notif_destinataires,
+					label=<:tickets:cfg_notif_destinataires:>,
+					defaut=assigne,
+					datas=[(#ARRAY{
+						assigne,<:tickets:cfg_notif_assigne:>,
+						webmestre,<:tickets:cfg_notif_webmestre:>,
+						admin,<:tickets:cfg_notif_admin:>,
+						auteur,<:tickets:cfg_notif_auteur:>,
+						liste,<:tickets:cfg_notif_liste:>,
+					})]}
+				)]
+
+				[(#SAISIE{auteurs,notif_auteurs,
+					label=<:tickets:cfg_notif_liste_auteurs:>,
+					multiple=oui,
+					option_statut=oui})]
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(document).ready(function() {
+				// on cache la liste des auteurs
+				//jQuery("li.editer_notif_auteurs").not('.visible').hide();
+				function verifier_affichage_notif_auteurs(){
+					if(jQuery('input[name=notif_destinataires]:checked').val()=='liste'){
+						jQuery("li.editer_notif_auteurs").not('.visible').show();
+						}
+					else{
+						jQuery("li.editer_notif_auteurs").not('.visible').hide();
+					}
+				};
+				verifier_affichage_notif_auteurs();
+				jQuery("input[name=notif_destinataires]").change(function(){verifier_affichage_notif_auteurs()});
+			});
+		//]]>
+		</script>
 				</ul>
 				</fieldset>
 			</li>
