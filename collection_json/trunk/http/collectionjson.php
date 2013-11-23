@@ -22,6 +22,10 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 			$erreur['title'] = _T('http:erreur_404_titre');
 			$erreur['message'] = _T('http:erreur_404_message');
 			break;
+		case '415':
+			$erreur['title'] = _T('http:erreur_415_titre');
+			$erreur['message'] = _T('http:erreur_415_message');
+			break;
 		default:
 			$erreur = false;
 	}
@@ -47,7 +51,7 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 
 /**
  * GET sur une collection
- * http://site/http.api/json/patates
+ * http://site/http.api/collectionjson/patates
  * 
  * @param Request $requete L'objet Request contenant la requête HTTP
  * @param Response $reponse L'objet Response qui contiendra la réponse envoyée à l'utilisateur
@@ -64,12 +68,13 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		$reponse = $fonction_collection($requete, $reponse);
 	}
 	// Sinon on essaye de trouver différentes méthodes pour produire le JSON et en déduire les headers
+	// - pour l'instant seulement par un squelette
 	else {
 		// Allons chercher un squelette de base qui génère le JSON de la collection demandée
 		// Le squelette prend en contexte les paramètres du GET uniquement
 		if ($json = recuperer_fond("http/$format/$collection", $contexte)){
 			// On décode ce qu'on a trouvé
-			$json = json_decode($json);
+			$json = json_decode($json, true);
 			// Et on le passe dans un pipeline
 			$json = pipeline(
 				'http_collectionjson_get_collection_contenu',
@@ -102,14 +107,13 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 
 /*
  * GET sur une ressource
- * http://site/http.api/json/patates/1234
+ * http://site/http.api/collectionjson/patates/1234
  * 
  * @param Request $requete L'objet Request contenant la requête HTTP
  * @param Response $reponse L'objet Response qui contiendra la réponse envoyée à l'utilisateur
  * @return Response Retourne un objet Response modifié suivant ce qu'on a trouvé
  */
 function http_collectionjson_get_ressource_dist($requete, $reponse){
-	include_spip('base/objets');
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
 	
@@ -123,6 +127,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	// - par un squelette
 	// - par un échafaudage générique
 	else{
+		include_spip('base/objets');
 		$ressource = $requete->attributes->get('ressource');
 		$cle = id_table_objet($collection);
 		$contexte = array(
@@ -143,7 +148,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			// Le squelette prend en contexte les paramètres du GET + l'identifiant de la ressource en essayant de faire au mieux
 			if ($skel = trim(recuperer_fond("http/$format/$collection-ressource", $contexte))){
 				// On décode ce qu'on a trouvé pour avoir un tableau PHP
-				$json = json_decode($skel);
+				$json = json_decode($skel, true);
 			}
 		}
 	
@@ -213,6 +218,122 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
 			$fonction_erreur = charger_fonction('erreur', "http/$format/");
 			$reponse = $fonction_erreur(404, $requete, $reponse);
+		}
+	}
+	
+	return $reponse;
+}
+
+/**
+ * POST sur une collection : création d'une nouvelle ressource
+ * http://site/http.api/collectionjson/patates
+ *
+ * @param Request $requete
+ * @param Response $reponse
+ * @return Response
+ */
+function http_collectionjson_post_collection_dist($requete, $reponse){
+	$format = $requete->attributes->get('format');
+	$collection = $requete->attributes->get('collection');
+	
+	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
+	// Cette fonction doit donc évidemment renvoyer un objet Response valide
+	if ($fonction_ressource = charger_fonction('post_collection', "http/$format/$collection/", true)){
+		$reponse = $fonction_ressource($requete, $reponse);
+	}
+	// Sinon on échafaude en utilisant l'API des objets
+	else{
+		// Si la requête a bien un contenu et qu'on a bien un tableau PHP et qu'on a au moins le bon tableau "data"
+		if (
+			$json = $requete->getContent()
+			and $json = json_decode($json, true)
+			and is_array($json)
+			and isset($json['collection']['items'][0]['data'])
+			and $data = $json['collection']['items'][0]['data']
+			and is_array($data)
+		){
+			include_spip('inc/filtres');
+			include_spip('base/objets');
+			$type = objet_type($collection);
+			$cle_objet = id_table_objet($collection);
+		
+			// Pour chaque champ envoyé, on va faire un set_request() de SPIP
+			foreach ($data as $champ){
+				if (isset($champ['name']) and isset($champ['value'])){
+					set_request($champ['name'], $champ['value']);
+				}
+			}
+		
+			// On va chercher la fonction de vérification de cet objet
+			$erreurs = array();
+			if ($fonction_verifier = charger_fonction('verifier', "formulaires/editer_$type/", true)){
+				$erreurs = $fonction_verifier('new');
+			}
+			// On passe les erreurs dans le pipeline "verifier" (par exemple pour Saisies)
+			$erreurs = pipeline('formulaire_verifier', array(
+				'args' => array(
+					'form' => "editer_$type",
+					'args' => array('new'),
+				),
+				'data' => $erreurs,
+			));
+		
+			// S'il y a des erreurs, on va générer un JSON les listant
+			if ($erreurs){
+				$reponse->setStatusCode(400);
+				$reponse->headers->set('Content-Type', 'application/json');
+				$reponse->setCharset('utf-8');
+				$json_reponse = array(
+					'collection' => array(
+						'version' => '1.0',
+						'href' => url_absolue(self()),
+						'error' => array(
+							'title' => _T('erreur'),
+							'code' => 400,
+						),
+						'errors' => array(),
+					),
+				);
+				foreach ($erreurs as $nom => $erreur){
+					$json_reponse['collection']['errors'][$nom] = array(
+						'title' => $erreur,
+						'code' => 400,
+					);
+				}
+				$reponse->setContent(json_encode($json_reponse));
+			}
+			// Sinon on continue le traitement
+			else{
+				$retours = array();
+				if ($fonction_traiter = charger_fonction('traiter', "formulaires/editer_$type/", true)){
+					$retours = $fonction_traiter('new');
+				}
+				// On passe dans le pipeline "traiter"
+				$retours = pipeline('formulaire_traiter', array(
+					'args' => array(
+						'form' => "editer_$type",
+						'args' => array('new'),
+					),
+					'data' => $retours,
+				));
+			
+				// Si on a bien créé l'objet sans erreur
+				if (!$retours['message_erreur'] and $id_objet = $retours[$cle_objet]){
+					// On va cherche la fonction qui génère la vue d'une ressource
+					if ($fonction_ressource = charger_fonction('get_ressource', 'http/collectionjson/', true)){
+						// On ajoute à la requête, l'identitiant de la nouvelle ressource
+						$requete->attributes->set('ressource', $id_objet);
+						$reponse = $fonction_ressource($requete, $reponse);
+					}
+					// Le statut est 201 car bien créé
+					$reponse->setStatusCode(201);
+				}
+			}
+		}
+		else{
+			// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
+			$fonction_erreur = charger_fonction('erreur', "http/collectionjson/");
+			$reponse = $fonction_erreur(415, $requete, $reponse);
 		}
 	}
 	

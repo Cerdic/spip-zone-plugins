@@ -1,7 +1,7 @@
 <paquet
 	prefix="collectionjson"
 	categorie="outil"
-	version="1.0.0"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo=""
@@ -12,4 +12,6 @@
 	<credit lien="https://github.com/collection-json/spec">Spécifications Collection+JSON</credit>
 	<copyright>2013</copyright>
 	<licence>GPL v3</licence>
+	
+	<necessite nom="http" compatibilite="[1.1.0;]" />
 </paquet>
