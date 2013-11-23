@@ -26,8 +26,6 @@ function recuperer_macro ($nom_macro, $contexte = array()) {
     sous_repertoire($dir);
   }
 
-  /* echo '<h1>' . $nom_macro . '</h1>'; */
-
   $hash_contexte = md5(serialize($contexte));
   $nom_skel = $dir . '/' . str_replace('/', '_', $nom_macro) . '_' . $hash_contexte;
   $path_fichier = $nom_skel . '.html';
