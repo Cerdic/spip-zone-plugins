@@ -2,10 +2,10 @@
 	prefix="macros"
 	categorie="outil"
 	version="1.0.0"
-	etat="experimental"
+	etat="test"
 	compatibilite="[3.0.11;3.0.*]"
-	logo=""
-	documentation=""
+	documentation="https://github.com/bystrano/macros"
+	logo="prive/themes/images/macros-24.gif"
 >
 	<!--
 		Paquet genere le 2013-09-14 12:46:16
