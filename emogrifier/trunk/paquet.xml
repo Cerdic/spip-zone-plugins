@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	documentation="https://github.com/bystrano/emogrifier"
-	logo="prive/themes/spip/images/emogrifier-24.gif"
+	logo="prive/themes/images/emogrifier-24.gif"
 >
 	<!--
 		Paquet genere le 2013-08-29 17:21:47
