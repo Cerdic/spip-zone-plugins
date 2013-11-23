@@ -14,12 +14,12 @@ if (!defined('_MAO_PATTERN_A_ID'))
 
 
 function mao_insert_head_css($flux) {
-//	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/qr.css').'" type="text/css" media="all" />';
+//	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/mao.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
 function mao_header_prive($flux) {
-//	$flux .= '<script src="'.find_in_path('js/qr.js').'" type="text/javascript"></script>';
+//	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/mao.css').'" type="text/css" media="all" />';
 	return $flux;
 }
 
