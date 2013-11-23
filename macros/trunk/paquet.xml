@@ -1,0 +1,21 @@
+<paquet
+	prefix="macros"
+	categorie="outil"
+	version="1.0.0"
+	etat="experimental"
+	compatibilite="[3.0.11;3.0.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2013-09-14 12:46:16
+	-->
+
+	<nom>Macros</nom>
+
+	<auteur>Michel Bystranowski</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
