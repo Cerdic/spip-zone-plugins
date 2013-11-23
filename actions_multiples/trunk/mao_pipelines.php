@@ -28,7 +28,8 @@ function mao_recuperer_fond($flux) {
 	include_spip('inc/filtres');
 	$actions = lister_actions_multiples();
 
-	if (array_key_exists($flux['args']['fond'], $actions)) {
+	if (array_key_exists($flux['args']['fond'], $actions)
+	AND trim($flux['data']['texte'])) {
 		// Extraction de l'objet et du contenu de la liste
 		$fond = $flux['args']['fond'];
 		$objet = $actions[$fond]['objet'];
