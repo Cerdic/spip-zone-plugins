@@ -4,7 +4,7 @@
 .leaflet-pseudo-fullscreen { position: fixed !important; width: 100% !important; height: 100% !important; top: 0px !important; left: 0px !important; z-index: 99999; }
 
 /* MiniMap Plugin */
-.leaflet-control-minimap { border: solid rgba(255, 255, 255, 1.0) 3px; box-shadow: 0 1px 7px #999; background: #f8f8f9; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; transition: all .2s; }
+.leaflet-control-minimap { border: solid rgba(255, 255, 255, 1.0) 3px; box-shadow: 0 1px 7px #999; background: #f8f8f9; border-radius: 8px; transition: all .2s; }
 .leaflet-control-minimap a { background-color: rgba(255, 255, 255, 1.0); background-position: 1px 2px; background-repeat: no-repeat; display: block; outline: none; z-index: 99999; transition: all .2s; }
 .leaflet-control-minimap a:hover,
 .leaflet-control-minimap a:focus { background-color: rgba(255, 255, 255, 1.0); }

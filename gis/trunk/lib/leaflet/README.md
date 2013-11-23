@@ -20,8 +20,8 @@ Sources utilisées dans la lib :
 	* KML.js
 		* https://github.com/shramov/leaflet-plugins/blob/master/layer/vector/KML.js
 	* leaflet.markercluster.css
-		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.css
 		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.css
+		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.css
 	* leaflet.markercluster.ie.css
 		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.ie.css
 	* leaflet.markercluster-src.js
