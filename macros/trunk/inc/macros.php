@@ -53,3 +53,10 @@ function recuperer_macro ($nom_macro, $contexte = array()) {
 
   return $nom_skel;
 }
+
+function inclure_macro ($nom_macro, $contexte) {
+
+  include_spip('inc/flock');
+
+  return spip_file_get_contents(recuperer_macro($nom_macro, $contexte) . '.html');
+}
