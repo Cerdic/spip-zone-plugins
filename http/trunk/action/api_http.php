@@ -92,6 +92,21 @@ function action_api_http_dist(){
 					$reponse = $fonction_erreur(401,$requete, $reponse);
 				}
 			}
+			// Pour le PUT on ne gère que sur une ressource (pareil, à voir s'il faut quand même…)
+			if (
+				$methode == 'PUT'
+				and $type_reponse == 'ressource'
+				and $fonction = charger_fonction("put_$type_reponse", "http/$format/", true)
+			){
+				// Si on a l'autorisation, on lance la fonction trouvée
+				if (autoriser("put_$type_reponse", $collection, $ressource)){ // autoriser_patates_put_ressource_dist()
+					$reponse = $fonction($requete, $reponse);
+				}
+				// Sinon on lève une 401
+				else{
+					$reponse = $fonction_erreur(401,$requete, $reponse);
+				}
+			}
 			// Si on a trouvé aucune fonction correspondant aux paramètres, ça n'existe pas
 			else{
 				$reponse = $fonction_erreur(404, $requete, $reponse);
