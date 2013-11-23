@@ -26,19 +26,20 @@ function recuperer_macro ($nom_macro, $contexte = array()) {
     sous_repertoire($dir);
   }
 
+  /* echo '<h1>' . $nom_macro . '</h1>'; */
+
   $hash_contexte = md5(serialize($contexte));
   $nom_skel = $dir . '/' . str_replace('/', '_', $nom_macro) . '_' . $hash_contexte;
   $path_fichier = $nom_skel . '.html';
 
-  $skel = evaluer_macro($nom_macro, $contexte);
-
   $utiliser_cache = (!_NO_CACHE) && (!_NO_MACRO_CACHE) && is_readable($path_fichier);
 
   if (( ! $utiliser_cache)
-   && ( ! ecrire_fichier($path_fichier, $skel))) {
+   && ( ! ecrire_fichier($path_fichier, evaluer_macro($nom_macro, $contexte)))) {
     return;
   }
 
+  /* #INCLURE n'a pas le même path courant dans l'espace privé */
   include_spip('inc/utils');
   if (test_espace_prive()) {
     $nom_skel = substr($nom_skel, 3);
@@ -65,7 +66,14 @@ function inclure_macro ($nom_macro, $contexte) {
 
   include_spip('inc/flock');
 
-  return spip_file_get_contents(recuperer_macro($nom_macro, $contexte) . '.html');
+  $fichier_skel = recuperer_macro($nom_macro, $contexte) . '.html';
+
+  include_spip('inc/utils');
+  if (test_espace_prive()) {
+    $fichier_skel = '../' . $fichier_skel;
+  }
+
+  return spip_file_get_contents($fichier_skel);
 }
 
 /**
