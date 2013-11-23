@@ -31,7 +31,7 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 			$define = (defined('_TICKETS_AUTORISATION_ECRIRE')) ? _TICKETS_AUTORISATION_ECRIRE : ($utiliser_defaut ? '0minirezo':'');
 			break;
 		case 'notifier':
-			$define = (defined('_TICKETS_AUTORISATION_NOTIFIER')) ? _TICKETS_AUTORISATION_NOTIFIER : ($utiliser_defaut ? '0minirezo':'');
+			$define = (defined('_TICKETS_AUTORISATION_NOTIFIER')) ? _TICKETS_AUTORISATION_NOTIFIER : ($utiliser_defaut ? definir_notifications_tickets():'');
 			break;
 		case 'assigner':
 			$define = (defined('_TICKETS_AUTORISATION_ASSIGNER')) ? _TICKETS_AUTORISATION_ASSIGNER : ($utiliser_defaut ? '0minirezo':'');
@@ -68,6 +68,22 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 	return $aut;
 }
 
+/**
+Destinataires des notifications de publication des tickets
+@return 
+*/
+function definir_notifications_tickets(){
+	$cfg = lire_config('tickets/general/notif_destinataires');
+	if ($cfg == '1comite' or $cfg == '0minirezo' or $cfg == "webmestre"){
+		return $cfg;
+		}
+	else if ($cfg == 'liste'){
+		return implode(":",lire_config('tickets/general/notif_auteurs'));
+		}
+	else{
+		return '';
+		}
+}
 /**
  * Autorisation d'écrire des tickets
  * (défini qui peut créer un ticket)
