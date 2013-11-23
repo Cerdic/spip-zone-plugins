@@ -127,14 +127,6 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	// - par un squelette
 	// - par un échafaudage générique
 	else{
-		include_spip('base/objets');
-		$ressource = $requete->attributes->get('ressource');
-		$cle = id_table_objet($collection);
-		$contexte = array(
-			$cle => $ressource,
-			'ressource' => $ressource,
-		);
-		$contexte = array_merge($requete->query->all(), $requete->attributes->all(), $contexte);
 		$json = array();
 	
 		// S'il existe une fonction dédiée au contenu d'une ressource de cette collection, on l'utilise
@@ -146,6 +138,15 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 		else{
 			// Pour l'instant on va simplement chercher un squelette du type de la ressource
 			// Le squelette prend en contexte les paramètres du GET + l'identifiant de la ressource en essayant de faire au mieux
+			include_spip('base/objets');
+			$ressource = $requete->attributes->get('ressource');
+			$cle = id_table_objet($collection);
+			$contexte = array(
+				$cle => $ressource,
+				'ressource' => $ressource,
+			);
+			$contexte = array_merge($requete->query->all(), $requete->attributes->all(), $contexte);
+			
 			if ($skel = trim(recuperer_fond("http/$format/$collection-ressource", $contexte))){
 				// On décode ce qu'on a trouvé pour avoir un tableau PHP
 				$json = json_decode($skel, true);
