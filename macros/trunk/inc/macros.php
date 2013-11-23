@@ -1,7 +1,7 @@
 <?php
 
 /* retourne le résultat de l'évaluation du fichier "$nom.php" */
-function evaluer_macro ($nom, $contexte) {
+function evaluer_macro ($nom_macro, $contexte = array()) {
 
   /* Crée les variables du contexte */
   foreach ($contexte as $cle => $valeur) {
@@ -12,7 +12,7 @@ function evaluer_macro ($nom, $contexte) {
      $skel */
   $output = fopen('php://output', 'w');
   ob_start();
-  include find_in_path($nom . '.php');
+  include find_in_path($nom_macro . '.php');
   fclose($output);
   $skel = ob_get_clean();
 
@@ -28,7 +28,7 @@ function evaluer_macro ($nom, $contexte) {
  *                           array('nom_variable' => $valeur_variable)
  * @return string  un nom de squelette utilisable dans recuperer_fond()
  */
-function recuperer_macro ($nom_macro, $contexte) {
+function recuperer_macro ($nom_macro, $contexte = array()) {
 
   include_spip('inc/flock');
 
