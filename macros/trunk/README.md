@@ -10,7 +10,7 @@ ressemblent, et qu'il est parfois difficile de ne pas se répéter, ce qui
 en plus d'être un peu ennuyeux n'est pas top en terme de maintenabilité.
 Par exemple, pour des boucles sur des objets éditoriaux, on fait parfois la
 même boucle sur deux tables différentes, mais on est obligé d'écrire deux
-boucle. En hyper-condensé, ça donnerait :
+boucles. En hyper-condensé, ça donnerait :
 
     <BOUCLE_livres(LIVRES){par date}{id_rubrique}>
       #TITRE - #DATE
@@ -57,6 +57,11 @@ et on aurait alors un fichier `liste_titre.php` qui contiendrait :
 
     <?php endforeach; ?>
 
-Le cache peut-être désactivé par la constante `_NO_CACHE`, qui
-désactive aussi le cache des squelettes, ou alors par la constante
-`_NO_MACRO_CACHE`. Les macros seront alors ré-évaluées à chaque appel.
+Cache
+-----
+
+Les résultats d'évaluation des macros sont calculés une fois pour toute
+pour chaque contexte. Pendant le dévelopement d'une macro, ce cache
+peut-être désactivé par la constante `_NO_CACHE`, qui désactive aussi le
+cache des squelettes, ou alors par la constante `_NO_MACRO_CACHE`. Les
+macros seront alors ré-évaluées à chaque appel.
