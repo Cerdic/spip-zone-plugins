@@ -44,7 +44,7 @@ function recuperer_macro ($nom_macro, $contexte) {
 
   $skel = evaluer_macro($nom_macro, $contexte);
 
-  $utiliser_cache = (! _NO_CACHE) && (!_NO_MACRO_CACHE) && is_readable($path_fichier);
+  $utiliser_cache = (!_NO_CACHE) && (!_NO_MACRO_CACHE) && is_readable($path_fichier);
 
   if (( ! $utiliser_cache)
    && ( ! ecrire_fichier($path_fichier, $skel))) {
