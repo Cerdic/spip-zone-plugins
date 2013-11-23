@@ -39,6 +39,11 @@ function recuperer_macro ($nom_macro, $contexte = array()) {
     return;
   }
 
+  include_spip('inc/utils');
+  if (test_espace_prive()) {
+    $nom_skel = substr($nom_skel, 3);
+  }
+
   return $nom_skel;
 }
 
