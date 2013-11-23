@@ -1,6 +1,83 @@
 <?php
 
-/* retourne le résultat de l'évaluation du fichier "$nom.php" */
+/**
+ * retourne un nom de squelette correspondant à la macro évaluée avec le
+ * contexte donné.
+ *
+ * Si la macro est appelée pour la première fois avec ce contexte, on
+ * écrit le squelette résultant dans un fichier et on retourne le nom de
+ * ce fichier. Sinon, on utilise le fichier créé lors du premier appel.
+ *
+ * @param string $nom_macro  Le nom de la macro. Chemin vers le fichier
+ *                           php sans l'extention '.php'.
+ * @param array $contexte    Un tableau de variables, au format
+ *                           array($nom_variable => $valeur_variable)
+ *
+ * @return string            un nom de squelette utilisable dans
+ *                           recuperer_fond()
+ */
+function recuperer_macro ($nom_macro, $contexte = array()) {
+
+  include_spip('inc/flock');
+
+  $dir = _DIR_CACHE . 'macros';
+
+  if ( ! is_dir($dir)) {
+    sous_repertoire($dir);
+  }
+
+  $hash_contexte = md5(serialize($contexte));
+  $nom_skel = $dir . '/' . str_replace('/', '_', $nom_macro) . '_' . $hash_contexte;
+  $path_fichier = $nom_skel . '.html';
+
+  $skel = evaluer_macro($nom_macro, $contexte);
+
+  $utiliser_cache = (!_NO_CACHE) && (!_NO_MACRO_CACHE) && is_readable($path_fichier);
+
+  if (( ! $utiliser_cache)
+   && ( ! ecrire_fichier($path_fichier, $skel))) {
+    return;
+  }
+
+  return $nom_skel;
+}
+
+/**
+ * retourne le résultat de l'évaluation d'une macro
+ *
+ * Idem que recuperer_macro, mais retourne le contenu du squelette au
+ * lieu du nom de fichier.
+ *
+ * @param string $nom_macro  Le nom de la macro. Chemin vers le fichier
+ *                           php sans l'extention '.php'.
+ * @param array  $contexte   Un tableau de variables, au format
+ *                           array($nom_variable => $valeur_variable)
+ *
+ * @return string            Le résultat de l'évaluation de la macro
+ *
+ */
+function inclure_macro ($nom_macro, $contexte) {
+
+  include_spip('inc/flock');
+
+  return spip_file_get_contents(recuperer_macro($nom_macro, $contexte) . '.html');
+}
+
+/**
+ * retourne le résultat de l'évaluation d'une macro. Fonction interne,
+ * il vaut mieux utiliser inclure_macro
+ *
+ * Crée les variables définies dans le tableau $contexte, passe le
+ * fichier marco dans php et retourne le résultat.
+ *
+ * @param string $nom_macro  Le nom de la macro. Chemin vers le fichier
+ *                           php sans l'extention '.php'.
+ * @param array  $contexte   Un tableau de variables, au format
+ *                           array($nom_variable => $valeur_variable)
+ *
+ * @return string            Le résultat de l'évaluation de la macro
+ *
+ */
 function evaluer_macro ($nom_macro, $contexte = array()) {
 
   /* Crée les variables du contexte */
@@ -29,46 +106,4 @@ function evaluer_macro ($nom_macro, $contexte = array()) {
   $skel = ob_get_clean();
 
   return $skel;
-}
-
-/**
- * retourne un nom de squelette correspondant à la macro évaluée avec le
- * contexte donné.
- *
- * @param string $nom_macro  Le nom de la macro a évaluer
- * @param array $contexte    Un tableau encodant le contexte, de la forme
- *                           array('nom_variable' => $valeur_variable)
- * @return string  un nom de squelette utilisable dans recuperer_fond()
- */
-function recuperer_macro ($nom_macro, $contexte = array()) {
-
-  include_spip('inc/flock');
-
-  $dir = _DIR_CACHE . 'macros';
-
-  if ( ! is_dir($dir)) {
-    sous_repertoire($dir);
-  }
-
-  $hash_contexte = md5(serialize($contexte));
-  $nom_skel = $dir . '/' . str_replace('/', '_', $nom_macro) . '_' . $hash_contexte;
-  $path_fichier = $nom_skel . '.html';
-
-  $skel = evaluer_macro($nom_macro, $contexte);
-
-  $utiliser_cache = (!_NO_CACHE) && (!_NO_MACRO_CACHE) && is_readable($path_fichier);
-
-  if (( ! $utiliser_cache)
-   && ( ! ecrire_fichier($path_fichier, $skel))) {
-    return;
-  }
-
-  return $nom_skel;
-}
-
-function inclure_macro ($nom_macro, $contexte) {
-
-  include_spip('inc/flock');
-
-  return spip_file_get_contents(recuperer_macro($nom_macro, $contexte) . '.html');
 }
