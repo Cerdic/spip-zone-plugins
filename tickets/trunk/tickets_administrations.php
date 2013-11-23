@@ -51,6 +51,13 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.5.0'] = array(
 		array('tickets_supprimer_redac','')
 	);
+	
+	/**
+	* Interface graphique pour la notification des tickets
+	*/
+	$maj['1.6.0'] = array(
+		array('ticket_install_config_notifications')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -69,6 +76,9 @@ function tickets_existe() {
 		return true;
 }
 
+function ticket_install_config_notifications(){
+	ecrire_config('tickets/general/notif_destinataires','0minirezo');
+	}
 function tickets_supprimer_redac(){
 	sql_updateq('spip_tickets',array('statut' => 'ouvert'),array('statut'=>'redac'));
 }
