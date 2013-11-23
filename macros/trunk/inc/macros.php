@@ -5,7 +5,19 @@ function evaluer_macro ($nom_macro, $contexte = array()) {
 
   /* Crée les variables du contexte */
   foreach ($contexte as $cle => $valeur) {
-    ${$cle} = $valeur;
+    /* On vérifie si $cle est un nom de variable valide en php.
+       cf. http://www.php.net/manual/en/language.variables.basics.php */
+    if ((preg_match('#[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*#', $cle) === 1)
+        AND ($cle !== 'this')) {
+
+      ${$cle} = $valeur;
+
+    } else {
+      include_spip('inc/utils');
+      $erreur = _T('macros:erreur_nom_variable_invalide',
+                   array('nom_variable' => htmlspecialchars($cle)));
+      erreur_squelette($erreur);
+    }
   }
 
   /* récupère le résultat de l'évaluation de la macro dans la variable
