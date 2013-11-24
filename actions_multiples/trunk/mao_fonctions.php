@@ -1,6 +1,17 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+if (!defined('_MAO_PATTERN_TR'))
+	define('_MAO_PATTERN_TR', '%(<tr[^>]*>)(.*?)</tr>%s');
+
+if (!defined('_MAO_PATTERN_TD_ID'))
+	define('_MAO_PATTERN_TD_ID', "%<td([^>]*(?:class=([\"'])@classe@\\2)[^>]*|)>(.*?)</td>%Umis");
+
+if (!defined('_MAO_PATTERN_A_ID'))
+	define('_MAO_PATTERN_A_ID', "%<a\b[^>]*>(.*)</a\b>%Umis");
+
+
 function mao_lister_actions_multiples($objet='') {
 	static $actions = null;
 

@@ -3,18 +3,9 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-if (!defined('_MAO_PATTERN_TR'))
-	define('_MAO_PATTERN_TR', '%(<tr[^>]*>)(.*?)</tr>%s');
-
-if (!defined('_MAO_PATTERN_TD_ID'))
-	define('_MAO_PATTERN_TD_ID', "%<td([^>]*(?:class=([\"'])@classe@\\2)[^>]*|)>(.*?)</td>%Umis");
-
-if (!defined('_MAO_PATTERN_A_ID'))
-	define('_MAO_PATTERN_A_ID', "%<a\b[^>]*>(.*)</a\b>%Umis");
-
 
 function mao_header_prive($flux) {
-//	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/mao.css').'" type="text/css" media="all" />';
+//	$flux .= '<link rel="stylesheet" href="'.find_in_path('js/mao.js').'" type="text/css" media="all" />';
 	return $flux;
 }
 
