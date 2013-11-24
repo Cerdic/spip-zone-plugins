@@ -58,8 +58,8 @@ function mao_actionner($texte, $fond, $objet, $ids) {
 		}
 
 		// Ajout d'une ligne de boutons d'action en fin du thead de la table
-		$contexte = array('colspan' => $actions['nb_colonnes'] + 1);
-		$tr_actions = recuperer_fond("prive/squelettes/inclure/mao_${objet}", $contexte);
+		$contexte = array('colspan' => $actions['nb_colonnes'] + 1, 'objet' => $objet);
+		$tr_actions = recuperer_fond("prive/squelettes/inclure/mao_tr_actions", $contexte);
 		$texte = str_replace('</thead>', "${tr_actions}\n\t</thead>", $texte);
 
 		// Ajout pour chaque ligne du body d'une colonne en première position afin de faire
