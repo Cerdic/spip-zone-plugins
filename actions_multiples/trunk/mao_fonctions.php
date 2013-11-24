@@ -12,7 +12,7 @@ if (!defined('_MAO_PATTERN_A_ID'))
 	define('_MAO_PATTERN_A_ID', "%<a\b[^>]*>(.*)</a\b>%Umis");
 
 
-function mao_acquerir_configurations$objet='') {
+function mao_acquerir_configurations($objet='') {
 	static $actions = null;
 
 	if (is_null($actions)) {
@@ -44,7 +44,7 @@ function mao_acquerir_configurations$objet='') {
 }
 
 function mao_actionner($texte, $fond, $objet) {
-	$actions = mao_acquerir_configurations();
+	$actions = mao_acquerir_configurations($fond);
 
 	// Ajout d'une colonne en première position dans le thead pour coincider avec le tbody
 	$contexte = array();
@@ -55,14 +55,14 @@ function mao_actionner($texte, $fond, $objet) {
 	}
 
 	// Ajout d'une ligne de boutons d'action en fin du thead de la table
-	$contexte = array('colspan' => $actions[$fond]['nb_colonnes'] + 1);
+	$contexte = array('colspan' => $actions['nb_colonnes'] + 1);
 	$tr_actions = recuperer_fond("prive/squelettes/inclure/mao_${objet}", $contexte);
 	$texte = str_replace('</thead>', "${tr_actions}\n\t</thead>", $texte);
 
 	// Ajout pour chaque ligne du body d'une colonne en première position afin de faire
 	// les choix des objets.
 	$tbody = extraire_balise($texte, 'tbody');
-	$regexp_id = str_replace('@classe@', $actions[$fond]['colonne_id'], _MAO_PATTERN_TD_ID);
+	$regexp_id = str_replace('@classe@', $actions['colonne_id'], _MAO_PATTERN_TD_ID);
 	if (preg_match_all(_MAO_PATTERN_TR, $tbody, $balises_tr)) {
 		foreach($balises_tr[2] as $_balise) {
 			if (preg_match($regexp_id, $_balise, $td_id)){
