@@ -5,8 +5,7 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-
 		[(#REM) <!-- Insertion de la liste modifiée des objets -->]
-		[(#ENV*{_liste})]
+		[(#INCLURE{fond=#ENV{liste}, env}|mao_actionner{#ENV{liste}, #ENV{objet}})]
 	</div></form>
 </div>
