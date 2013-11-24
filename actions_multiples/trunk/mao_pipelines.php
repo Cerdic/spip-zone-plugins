@@ -14,7 +14,7 @@ function mao_recuperer_fond($flux) {
 	static $fonds = array();
 
 	// Acquerir la configuration des listes
-	$actions = mao_lister_actions_multiples();
+	$actions = mao_acquerir_configurations();
 	// Extraire le nom du fond en cours
 	$fond = $flux['args']['fond'];
 

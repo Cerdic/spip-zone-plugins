@@ -12,7 +12,7 @@ if (!defined('_MAO_PATTERN_A_ID'))
 	define('_MAO_PATTERN_A_ID', "%<a\b[^>]*>(.*)</a\b>%Umis");
 
 
-function mao_lister_actions_multiples($objet='') {
+function mao_acquerir_configurations$objet='') {
 	static $actions = null;
 
 	if (is_null($actions)) {
@@ -44,7 +44,7 @@ function mao_lister_actions_multiples($objet='') {
 }
 
 function mao_actionner($texte, $fond, $objet) {
-	$actions = mao_lister_actions_multiples();
+	$actions = mao_acquerir_configurations();
 
 	// Ajout d'une colonne en première position dans le thead pour coincider avec le tbody
 	$contexte = array();
