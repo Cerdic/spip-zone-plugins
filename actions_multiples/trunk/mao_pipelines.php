@@ -13,11 +13,6 @@ if (!defined('_MAO_PATTERN_A_ID'))
 	define('_MAO_PATTERN_A_ID', "%<a\b[^>]*>(.*)</a\b>%Umis");
 
 
-function mao_insert_head_css($flux) {
-//	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/mao.css').'" type="text/css" media="all" />';
-	return $flux;
-}
-
 function mao_header_prive($flux) {
 //	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/mao.css').'" type="text/css" media="all" />';
 	return $flux;
