@@ -6,6 +6,7 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#REM) <!-- Insertion de la liste modifiée des objets -->]
-		[(#INCLURE{fond=#ENV{liste}, env}|mao_actionner{#ENV{liste}, #ENV{objet}})]
+		#SET{ids, ids_#ENV{objet}}
+		[(#INCLURE{fond=#ENV{liste}, env}|mao_actionner{#ENV{liste}, #ENV{objet}, #ENV{#GET{ids}}})]
 	</div></form>
 </div>
