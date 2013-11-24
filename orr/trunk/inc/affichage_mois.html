@@ -54,3 +54,15 @@
 	</div>
 
 </div>
+<script type="text/javascript" charset="utf-8"> 
+    jQuery(document).on("click",".semaine",function(event){ 
+        event.stopPropagation(); 
+        recupereDir(this); 
+        var classe = idDir.split(" "); 
+        jourj = classe[1]; 
+        tabAjax(); 
+    }); 
+    function recupereDir(classe) { 
+	    idDir = jQuery(classe).attr("class"); 
+    } 
+</script> 
