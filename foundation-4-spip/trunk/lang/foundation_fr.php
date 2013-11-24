@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_page_configurer_foundation' => 'Configuration de Fondation',
     '3' => 'Foundation 3',
     '4' => 'Foundation 4',
+    '5' => 'Foundation 5',
     'activer_javascript' => 'Activer les javascripts de foundation ?',
     'activer_javascript_explication' => 'Si vous n\'utilisez pas les composants javascripts de foundation il est inutile de les charger dans SPIP.',
     'fichier_htc' => 'Activer le fichier boxsizing.htc ?',
