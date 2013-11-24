@@ -161,6 +161,7 @@ function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa)
     $set = array();
 
     // enregistrement pour chaque ressource
+    include_spip('inc/autoriser');
     foreach ($liste_ressources as $idressource) {
         if (!autoriser('creer','orr_reservation',intval($idressource)))
             continue;

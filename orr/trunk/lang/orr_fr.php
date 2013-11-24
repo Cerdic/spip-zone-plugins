@@ -14,13 +14,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aujourdhui' => 'Aujourd\'hui',
 	'annee_precedente' => 'Année précédente',
 	'annee_suivante' => 'Année suivante',
+	'auteur_resa' => 'Réservation par',
 	
 	// C
 	'couleur' => 'Couleur',
+	'ctrl_clic' => 'Ctrl + clic pour sélection multiple',
 
 	// D
-	'date_de_debut' => 'Date de début',    
+	'date_de_debut' => 'Date de début',
+	'date_debut' => 'Début', 
 	'date_de_fin' => 'Date de fin',
+	'date_fin' => 'Fin',
 	'droit' => 'Droit',	
 
 	// E
@@ -31,6 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_orr_date_fin' => 'Date de fin de la réservation',
 	'explication_orr_reservation_nom' => 'Nom de votre réservation (ex : réunion CA)',
 	'explication_orr_ressource_nom' => 'Nom de la ressource',
+	
+	// F 
+	'filtrer_par_mots' => 'Sélection des ressources par mots clés',
 	
 	// G 
 	'gerer_autorisations' => 'Gérer les autorisations',

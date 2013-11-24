@@ -5,7 +5,11 @@
 #tabs { width: 100%; }
 
 /* partie haute */
-#motscles, #motcle { width: 150px; float:left; }
+#motcle {float:left; padding: 0.2em; }
+#motcle .ui-widget-content { padding: 0.5em; border-top: 0; }
+#motcle .ui-widget-header { line-height: 1.8em; }
+#motcle #envoyer { float: right; }
+#ctrl_clic { font-size: 0.75em; color: #999; }
 #datepick{ float:right; }
 .ui-tpicker-grid-label { width: 154px ; margin-left: -20% ; }
 
@@ -15,20 +19,19 @@
 .poubelle_cache, .ressource_cachee { display:none; }
 .orr_stylo { float:left; }
 
-
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }
-#tableau_mois th, #tableau_semaine th { width: 14%; font-size: 0.95em;}
-#tableau_mois td, #tableau_semaine td { font-size: 0.75em;}
+#tableau_mois th, #tableau_semaine th { width: 14%; font-size: 0.95em; border-right: 1px solid #CCC; }
+#tableau_mois td, #tableau_semaine td { font-size: 0.75em; padding : 0.5em 0em; border-right: 1px solid #CCC; }
 #affichage_semaine, #affichage_mois {  padding-top:20px;  clear:both;  }
 #jour4, #jour4th, #id1couleur_jour_mois { background-color : #D6D6D6 ; }
-
-/* Affichage semaine */
-#tableau_semaine td { padding : 0.5em 0em; }
-#tableau_semaine th { padding : 0.5em 1em; }
+.tooltip a { float: left; }
 .premier {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; }
 .milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; }
 .dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; }
+
+/* Affichage semaine */
+#tableau_semaine th { padding : 0.5em 1em; }
 
 /* Affichage-mois */
 #tab_affichage_mois { float:clear; }
@@ -37,8 +40,8 @@
 .hors_mois { color: #777; }
 
 /* affichage mois : infobulle */
-.tooltip { position: relative;  cursor: help; display: inline-block; text-decoration: none; color: #222; outline: none; }
-.tooltip span { visibility: hidden; position: absolute; bottom: 30px; left: 50%; z-index: 999; width: 280px; margin-left: -127px; 
+.tooltip {  position: relative;  cursor: help; text-decoration: none; color: #222; outline: none; }
+.tooltip span { text-align: left; display: none; position: absolute; bottom: 50px; left: 50%; z-index: 999; width: 280px; margin-left: -127px; 
 	border: 2px solid #ccc;  background-color: #ddd;  padding: 10px;
 	opacity: .9; border-radius: 4px; -moz-border-radius: 4px;
 	background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
@@ -51,9 +54,11 @@
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
 	box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
 	text-shadow: 0 1px 0 rgba(255,255,255,.4); }
-.tooltip:hover { border: 0; /* IE6 fix */ }
-.tooltip:hover span { visibility: visible; }
+.tooltip:hover span { display: block; }
 .tooltip span:before, .tooltip span:after { content: ""; position: absolute; z-index: 1000; bottom: -7px; left: 50%; margin-left: -8px;
 	border-top: 8px solid #ddd; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 0; }
 .tooltip span:before { border-top-color: #CCC; bottom: -8px; }
-/* Fin infobulle */
+
+/* date-picker 
+#datepickers { font-size: 0.9em; }
+*/

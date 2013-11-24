@@ -1,7 +1,9 @@
 <div id="partiehaute">
-	<div id="motcle">
-		<INCLURE{fond=inc/affichage_selection-mots}>
-	</div>
+	<BOUCLE_test_mots(spip_mots_liens){objet = orr_ressource}>
+		<div id="motcle" class="ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+			<INCLURE{fond=inc/affichage_selection-mots}>
+		</div>
+	</BOUCLE_test_mots>
 	<div id="datepick">
 		<div id="datepickers"></div>
 	</div>
@@ -21,7 +23,7 @@
 			&nbsp;<span class="semaine_ico suivant"><img src="#CHEMIN{img/suivant_7.png}" alt="<:orr:semaine_suivante:>" title="<:orr:semaine_suivante:>" /></span>
 		</div>
 		<div id="tableau_semaine">
-			<INCLURE{fond=inc/affichage_semaine,ajax=tableau}>
+			<INCLURE{fond=inc/affichage_semaine,ajax=tableau,env}>
 		</div>
 		</div>
 	<div id="affichage_mois">
@@ -38,24 +40,35 @@
 	</div>
 </div>
 
-<script>
+<script type="text/javascript">
+// creation des onglets pour les vues semaine/mois
 jQuery(function() {
 	jQuery( "#tabs" ).tabs();
 	// l'option {active:N} pour ouvrir le Nième onglet lors du chargement ne semble pas fonctionner avec cette version de jQuery + UI
 	// alors on déclenche l'ouverture du bon onglet par un trigger(click) 
 	jQuery("#onglet_[(#CONFIG{orr/vue_pardefaut})]").trigger( "click" );
 });
+
+// la fonction de reload des vues semaine/mois
+function tabAjax(){
+	ajaxReload('tableau', {
+		args:{
+			jourj:jourj,
+		},
+	});
+}
+
 jQuery(document).ready(function(){
-	// NB: jourj doit être une variable js *globale*
+	// NB: pour que les vues mois et semaines fonctionnent, jourj doit être une variable js *globale*
 	[(#ENV{jourj}|?{
 		jourj = "[(#ENV{jourj})]";
 		,
 		var dateselectionne = new Date();
 		jourj = dateselectionne.toString('yyyy-MM-dd');
 	})]
-//	console.log(jourj);
 	tabAjax();
-
+	
+	// recup une date sélectionnée dans le datepicker et lancer la modif des vues mois et semaine
 	jQuery("#datepickers").datepicker({
 		dateFormat : 'yy-mm-dd',
 		onSelect : function (dateText){
@@ -68,6 +81,7 @@ jQuery(document).ready(function(){
 		changeYear: false,
 	});
 	
+	// modifs des vues mois et semaines avec les icones suivant/précédent/maintenant
 	jQuery(".suivant, .precedent").bind("click",function(event) {
 		var dateselectionne=Date.parse(jourj);
 		
@@ -85,41 +99,26 @@ jQuery(document).ready(function(){
 		jQuery("#datepickers").datepicker( "setDate", jourj );
 		tabAjax();
 	});
-
 	jQuery(".maintenant").bind("click",function(event){
 		var dateselectionne = new Date();
 		jourj = dateselectionne.toString('yyyy-MM-dd');
 		tabAjax();
 	});
-
+		
+	// le sélecteur de mots clés
 	jQuery("#envoyer").click(function(){
-		var motscle = jQuery("#motscles").val().toString();
-		motscle=motscle.replace(",",":");
-			ajaxReload('tableau', {
-				args:{
-					motcle:motscle,
-				},
-			});
-		return false;
-	});
-
-	jQuery("#tous").click(function(){
-		var motscle = "";
-		console.log(motscle);
-			ajaxReload('tableau', {
-				args:{
-					motcle:motscle,
-				},
-			});
-		return false;
-		});
-	});
-
-	function tabAjax(){
+		var motscle = '';
+		if (jQuery("#motscles").val() != null) 
+			motscle = jQuery("#motscles").val().toString();
+//		motscle = motscle.replace(",",":");
 		ajaxReload('tableau', {
 			args:{
-				jourj:jourj,
+				id_mot:motscle,
 			},
 		});
-	}
+		return false;
+	});
+	jQuery("#tous").click(function(){ jQuery("#motscles option").attr("selected", "selected"); });
+	jQuery("#aucun").click(function(){ jQuery("#motscles option").removeAttr("selected"); });
+});
 </script>
