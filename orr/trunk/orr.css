@@ -29,7 +29,7 @@
 .premier {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; }
 .milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; }
 .dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; }
-
+.unique { margin-bottom : 0.5em;}
 /* Affichage semaine */
 #tableau_semaine th { padding : 0.5em 1em; }
 
