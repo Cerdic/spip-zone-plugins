@@ -3,7 +3,7 @@
 	<slogan>Ajouter des images cliquables dans vos textes</slogan>
 	<auteur>Arnault PACHOT, [OpenStudio->http://www.openstudio.fr] et RealET, [Pyrat.net->http://www.pyrat.net/] et Bruno CAILLLARD pour le Hilight des zones, [Editions du MEGA-Bricoleur->http://www.mega-bricoleur.com/]</auteur>
 	<licence>GPL</licence>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<etat>test</etat>
 	<description>
 	Ce plugin permet d'ajouter des images cliquables dans le texte de vos articles, rubriques, br&#232;ves...
