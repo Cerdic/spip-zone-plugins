@@ -11,9 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser_boussoles' => 'Aktualizovať kompasy',
 	'bouton_actualiser_caches' => 'Aktualizovať dočasné pamäte',
 	'bouton_boussole' => 'Kompas',
+	'bouton_importer' => 'Nahrať',
+	'bouton_importer_boussole' => 'Nahrať stránky kompasu',
 	'bouton_retirer_boussole' => 'Odstrániť kompas',
 	'bouton_retirer_serveur' => 'Odstrániť server',
 	'bouton_supprimer' => 'Odstrániť',
+	'bouton_synchroniser' => 'Synchronizovať údaje',
 	'bulle_afficher' => 'Zobraziť v šablónach',
 	'bulle_aller_site' => 'Prejsť na odkazovanú stránku',
 	'bulle_cacher' => 'Nezobrazovať v šablónach',
@@ -46,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
+	'info_rubrique_parent' => 'Na vytváranie stránok kompasu si musíte vybrať titulnú rubriku.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
 	'info_site_boussoles' => 'Táto stránka je súčasťou kompasov:',
 	'info_url_serveur' => 'Zadajte adresu stránky servera.',
@@ -69,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_div_class' => 'Trieda globálneho divu',
 	'label_div_id' => 'Id globálneho divu',
 	'label_fichier_xml' => 'Súbor XML',
+	'label_langue_site' => 'Pre preložené údaje nahrajte len preklad do jazyka stránku.',
 	'label_li_class' => 'Trieda každého tagu li v zozname',
 	'label_logo' => 'Logo',
 	'label_max_articles' => 'Maximálny počet zobrazených článkov na stránku',
@@ -81,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom' => 'Názov',
 	'label_nom_serveur' => 'Názov servera',
 	'label_p_class' => 'Trieda odseku pri opise',
+	'label_publier_import' => 'Automaticky publikovať nové vytvorené stránky. Pred nahrávaním sa stav stránok nemení.',
 	'label_sepia' => 'Kód sépiovej farby (sans #)',
 	'label_slogan' => 'Slogan',
 	'label_taille_logo' => 'Maximálna veľkosť loga (v pixeloch)',
@@ -98,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Verzia',
 
 	// M
+	'message_nok_0_site_importe' => 'Z kompasu @boussole@ nebola nahratá žiadna stránka.',
 	'message_nok_alias_boussole_manquant' => 'Prezývka kompasu nebola serveru "@serveur@" poskytnutá.',
 	'message_nok_aucune_boussole_hebergee' => 'Na serveri "@serveur@" sa stále nenachádza žiaden kompas.',
 	'message_nok_boussole_inconnue' => 'Žiaden kompas nemá prezývku "@alias@"',
@@ -109,9 +116,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 (tabuľka @table@).',
 	'message_nok_nom_serveur_spip' => 'Slovo "spip" ako názov servera je vylúčené. Zvoľte si iný názov.',
 	'message_nok_reponse_invalide' => 'Odpoveď servera "@serveur@" má nesprávnu podobu alebo zadanú adresu nemá žiaden aktívny server.',
+	'message_ok_1_site_importe' => 'Jedna stránka bola nahraná z kom­pasu @boussole@.',
 	'message_ok_boussole_actualisee' => 'Kompas "@fichier@" bol aktualizovaný.',
 	'message_ok_boussole_ajoutee' => 'Kompas "@fichier@" bol pridaný.',
 	'message_ok_boussole_manuelle_ajoutee' => 'Na serveri ste deklarovali manuálny kompas "@boussole@" a dočasné pamäte boli aktualizované.',
+	'message_ok_n_sites_importes' => '@nb@ stránok bolo nahraných z kom­pasu @boussole@.',
 	'message_ok_serveur_ajoute' => 'Server "@serveur@" bol pridaný (@url@).',
 	'modele_boussole_liste_avec_logo' => 'Zoznam odkazov s názvami, logami a opisom',
 	'modele_boussole_liste_par_groupe' => 'Zoznam textových odkazov podľa skupiny',
@@ -142,7 +151,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_caches' => 'Zoznam dočasných pamätí kompasov na serveri',
 	'titre_liste_serveurs' => 'Zoznam prístupných serverov zo stránky',
 	'titre_page_boussole' => 'Riadenie kompasov',
-	'titre_page_configurer' => 'Nastavenia zásuvného modulu Kompas'
+	'titre_page_configurer' => 'Nastavenia zásuvného modulu Kompas',
+	'titre_page_importer_boussole' => 'Nahrávanie kompasu'
 );
 
 ?>
