@@ -274,8 +274,12 @@ function jeux_trouver_configuration_interne($texte, $param=false) {
 function jeux_trouver_configuration_defaut($jeu) {
 	if (!function_exists($fonc = 'jeux_'.$jeu))
 		include_spip('jeux/'.$jeu);
-	if (function_exists($init = $fonc.'_init'))
+	if (function_exists($init = $fonc.'_init')){
 		return jeux_trouver_configuration_interne('['._JEUX_CONFIG.']'.$init());
+	}
+	else{
+		return array();
+	}
 }
 
 // retourne la configuration generale du plugin (options par defaut gerees par CFG)
@@ -291,6 +295,7 @@ function jeux_configuration_generale($jeu='') {
 	}
 	if($jeu=='') return $configuration_generale;
 	// renvoyer la config par defaut du premier jeu decele
+	$configuration_generale = array();
 	$defaut = jeux_trouver_configuration_defaut($jeu);
 	foreach($defaut as $ligne) {
 		if ($regs = jeux_parse_ligne_config($ligne)) {
