@@ -7,11 +7,16 @@
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
+			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
+				<label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]
+				<input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
+				<span class="error-message"></span>
+			</li>
             [(#REM)Détermine si c'est une mise à jour ou un ajout
             Si c'est un ajout, choix entre toutes les ressources]
-
             [(#ENV{idreservation}|?{#SET{affichage_ressource,cachee},#SET{affichage_ressource,visible}})]
-            <span class="ressource_#GET{affichage_ressource}">
+            <li class="ressource_#GET{affichage_ressource}">
                 [(#ENV{id_ressource}|oui)
                     [(#SAISIE{oui_non, choix_ressource_active, obligatoire}
                     {label=<:orr:ressource_active:>})]
@@ -19,22 +24,13 @@
                 [(#SAISIE*{checkbox,liste_ressources}
                     {label=<:orr:liste_ressources:>}
                     {datas=#ENV{liste_ressources}})]
-            </span>
-
-			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
-				<label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]
-				<input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
-				<span class="error-message"></span>
-			</li>
-
+            </li>
 			<li class="editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
 				<label for="date_debut"><:orr:date_de_debut:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
 				<input type="text" id="date_debut" class="datepicker" name="date_debut" value="[(#ENV{date_debut})]" />
 				<span class="error-message"></span>
 			</li>
-
 			<li class="editer_date_fin obligatoire[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 				<label for="date_fin"><:orr:date_de_fin:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
@@ -68,7 +64,7 @@
 					endDateTextBox.val(dateText);
 				}
 				else {
-				endDateTextBox.val(dateText);
+					endDateTextBox.val(dateText);
 				}
 			},
 			onSelect: function (selectedDateTime){

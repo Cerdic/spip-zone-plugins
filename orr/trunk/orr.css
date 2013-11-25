@@ -18,6 +18,7 @@
 .poubelle_visible, .ressource_visible { display:auto; }
 .poubelle_cache, .ressource_cachee { display:none; }
 .orr_stylo { float:left; }
+h1.box_resa { background-color: #DDD; }
 
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }

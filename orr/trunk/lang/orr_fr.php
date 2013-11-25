@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_enregistree' => 'La réservation est enregistrée',
     'ressource_obligatoire' => 'Il faut sélectionner au moins une ressource !',
     'ressource_active' => 'La ressource sélectionnée :',
+    'reserver' => 'Réserver',
 	
 	// S
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',

@@ -16,9 +16,7 @@
 	</p>
 ]
 
-<h1 style="background-color: #INFO_ORR_RESSOURCE_COULEUR{orr_ressource,#ENV{id_ressource}}">
-	Ressource : <em>#INFO_ORR_RESSOURCE_NOM{orr_ressource,#ENV{id_ressource}}</em>
-</h1>
+<h1 class="box_resa"><:orr:reserver:></h1>
 <div class="ajax">
 	#FORMULAIRE_RESERV{#ENV{id_ressource},#GET{date_debut},#GET{date_fin},#GET{id}}
 </div>
