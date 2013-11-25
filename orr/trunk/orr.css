@@ -21,7 +21,7 @@
 
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }
-#tableau_mois th, #tableau_semaine th { width: 14%; font-size: 0.95em; border-right: 1px solid #CCC; }
+#tableau_mois th, #tableau_semaine th { width: 12%; font-size: 0.95em; border-right: 1px solid #CCC; }
 #tableau_mois td, #tableau_semaine td { font-size: 0.75em; padding : 0.5em 0em; border-right: 1px solid #CCC; }
 #affichage_semaine, #affichage_mois {  padding-top:20px;  clear:both;  }
 #jour4, #jour4th, #id1couleur_jour_mois { background-color : #D6D6D6 ; }
