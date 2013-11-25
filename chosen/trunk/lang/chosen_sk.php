@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_active' => 'Aktivovať "Vybrané"  na verejne prístupnej stránke',
 	'label_selecteur' => 'Volič',
+	'lang_create_option' => 'Vytvoriť ',
 	'lang_no_result' => 'Žiaden výsledok',
 	'lang_select_an_option' => 'Vyberte si jednu možnosť',
 	'lang_select_some_option' => 'Vyberte si jednu alebo viacej možností',
