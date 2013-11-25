@@ -27,10 +27,10 @@ h1.box_resa { background-color: #DDD; }
 #affichage_semaine, #affichage_mois {  padding-top:20px;  clear:both;  }
 #jour4, #jour4th, #id1couleur_jour_mois { background-color : #D6D6D6 ; }
 .tooltip a { float: left; }
-.premier {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; }
-.milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; }
-.dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; }
-.unique { margin-bottom : 0.5em;}
+.premier {  border-top : 1px solid red ; border-bottom : 1px solid red ; border-left : 1px solid red ; margin-bottom : 0.5em ;}
+.milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; margin-bottom : 0.5em ;}
+.dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; margin-bottom : 0.5em ;}
+.unique { margin-bottom : 0.5em ;}
 /* Affichage semaine */
 #tableau_semaine th { padding : 0.5em 1em; }
 
