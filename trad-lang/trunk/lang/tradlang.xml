@@ -15,7 +15,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=fr" total="370" traduits="370" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="370" traduits="356" relire="0" modifs="0" nouveaux="14" pourcent="96.22">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=sk" total="370" traduits="361" relire="0" modifs="0" nouveaux="9" pourcent="97.57">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

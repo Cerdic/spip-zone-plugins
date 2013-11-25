@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'aucune_distribution' => 'Žiadna jazyková verzia nie je k dispozícii.',
 	'aucunmodule' => 'Žiaden modul.',
 	'auteur_revision' => '@nb@ úprava prekladu.',
 	'auteur_revision_specifique' => '@nb@ úprava prekladu v jazyku <abbr title="@lang@">@langue_longue@</abbr>.',
@@ -106,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_originale' => 'Tento reťazec je reťazec originálu',
 	'info_choisir_langue' => 'V určitom jazyku',
 	'info_contributeurs' => 'Prispievatelia',
+	'info_distributions' => 'Jazykové verzie',
 	'info_edition_par_lot' => 'Súhrnné úpravy:',
 	'info_export' => 'Exporty:',
 	'info_filtrer_status' => 'Filtrovať podľa stavu:',
@@ -352,6 +354,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_changer_langues_affichees' => 'Zmeniť zobrazené jazyky',
 	'titre_commentaires_chaines' => 'Komentáre k tomuto reťazcu',
 	'titre_commenter_chaine' => 'Napísať komentár k tomuto reťazcu',
+	'titre_distributions' => 'Jazykové verzie',
 	'titre_form_import_step_1' => '1. krok: Pošlite svoj súbor',
 	'titre_form_import_step_2' => '2. krok: Potvrdenie vašich zmien',
 	'titre_inscription' => 'Registrácia',
@@ -375,7 +378,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_stats_vos' => 'Vaše štatistiky',
 	'titre_tradlang' => 'Trad-lang',
 	'titre_tradlang_chaines' => 'Jazykové reťazce',
+	'titre_tradlang_export' => 'Exportovať modul "@module@" v jazyku "@lang_longue@ (@lang@)"',
 	'titre_tradlang_export_traduire' => 'Na lokálne prekladanie',
+	'titre_tradlang_export_utiliser' => 'Na používanie pri vývoji',
 	'titre_tradlang_module' => 'Jazykový modul',
 	'titre_tradlang_modules' => 'Jazykové moduly',
 	'titre_tradlang_non_traduit' => '1 nepreložený jazykový reťazec',
