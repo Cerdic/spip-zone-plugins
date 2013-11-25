@@ -15,28 +15,29 @@ function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=
     list($anneef,$moisf,$jourf)     = explode('-',$datef);
     list($heuref,$minutef,$econdef) = explode(':',$heuref);
     $date_f = date("d/m/Y H:i:s", mktime($heuref, $minutef, $secondef, $moisf, $jourf, $anneef));
-
-
-    //Récup des noms de ressource sauf la ressource active    
-    $result= sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources','id_orr_ressource !='.intval($idressource));
-
+    
+    //Récup des noms de ressource, si c'est une mise à jour, on ne récupère que la ressource de la résa selectionnée
+    if ($idresa) {
+        $result    = sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources','id_orr_ressource='.intval($idressource));
+		$vals_resa = sql_fetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
+        $nom_resa  = $vals_resa['orr_reservation_nom'];
+    }
+    else {
+        $result   = sql_allfetsel('id_orr_ressource,orr_ressource_nom','spip_orr_ressources');
+        $nom_resa = "";
+    }
     foreach ($result as $Tressource) {
         // Test si l'utilisateur à le droit de creer une résa pour cette ressource
         if (autoriser('creer','orr_reservation',intval($Tressource['id_orr_ressource']))) 
             $Tressources[$Tressource['id_orr_ressource']] = $Tressource['orr_ressource_nom'];
     }
-    // recup des valeurs si resa existante
-	if ($idresa)
-		$vals_resa = sql_fetsel('*', 'spip_orr_reservations', 'id_orr_reservation='.intval($idresa));
+
     $valeurs = array(
-        "idreservation"          => intval($idresa),
-        "choix_ressource_active" => "on",
-        "liste_ressources"       => "",
-        "nom_reservation"        => ($idresa ? $vals_resa['orr_reservation_nom'] : ""),
-        "id_ressource"           => intval($idressource),
+        "nom_reservation"        => $nom_resa, 
+        "ressource_semaine"      => "$idressource",
+        "Tressources"            => $Tressources, 
         "date_debut"             => $date_deb,
         "date_fin"               => $date_f,
-        "liste_ressources"       => $Tressources, 
     );
     // champs extra
     if (lire_config("champs_extras_spip_orr_reservations")) {
@@ -124,18 +125,16 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
 
 function formulaires_reserv_traiter_dist($idressource,$date_deb,$date_f,$idresa){
     $liste_ressources = array();
-	$nom_reservation        = _request('nom_reservation');
-	$date_debut             = _request('date_debut');
-	$date_fin               = _request('date_fin');
-    $choix_ressource_active = _request('choix_ressource_active');
+	$nom_reservation  = _request('nom_reservation');
+	$date_debut       = _request('date_debut');
+	$date_fin         = _request('date_fin');
 
     // si C'est une mise à jour, on ne traite que de la ressource sélectionné)
     if ($idresa)
         $liste_ressources[] = $idressource;
     // fabrique un array : liste_ressources de toutes les ressources
     else {
-        $liste_ressources   = _request('liste_ressources');
-        $liste_ressources[] = $idressource;
+        $liste_ressources = _request('liste_ressources');
     }
 
 	list($jour_debut, $heure_debut) = explode(' ',$date_debut);

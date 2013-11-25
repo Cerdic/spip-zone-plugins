@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_ressource_nom' => 'Nom de la ressource',
 	'legend_affichage_planning' => 'Affichage du planning',
 	'label_vue_pardefaut' => 'Choix de la vue par défaut',
-    'liste_ressources' => 'Ajouter des ressources supplémentaires',
+    'liste_ressources' => 'Ajouter des ressources',
 	
 	// M
 	'modifier' => 'Modifier',
