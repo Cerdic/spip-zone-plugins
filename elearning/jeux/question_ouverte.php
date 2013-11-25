@@ -1,5 +1,13 @@
 <?php
 
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_question_ouverte_init() {
+	return "
+		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger'
+		bouton_refaire=recommencer // fond utilise pour le bouton 'Reset'
+	";
+}
+
 /*
 
 Exemple de syntaxe
@@ -17,9 +25,9 @@ Exemple de syntaxe
 </jeux>
 
 */
-function jeux_question_ouverte($texte, $indexJeux){
-	
+function jeux_question_ouverte($texte, $indexJeux, $form=true){
 	$titre = $html = $reponse = "";
+	$id_jeu = _request('id_jeu');
 	
 	// parcourir tous les [separateurs]
 	$tableau = jeux_split_texte('question_ouverte', $texte);
@@ -39,24 +47,33 @@ function jeux_question_ouverte($texte, $indexJeux){
 		
 	}
 	
-	$tete = '<div class="jeux_cadre">' . ($titre?'<div class="jeux_titre">'.$titre.'</div>':'');
+	$tete = '<div class="jeux_cadre question_ouverte">' . ($titre?'<div class="jeux_titre question_ouverte_titre">'.$titre.'</div>':'');
 	$pied = '</div>';
 	
 	// Avant envoi du formulaire
-	if (!isset($_POST["var_correction_".$indexJeux])) {
-	
-		$form = jeux_form_debut('question_ouverte', $indexJeux, 'noajax');
-		$form .= '<textarea name="reponse" class="forml" rows="20">'._T('question_ouverte:veuillez_repondre').'</textarea>';
-		$form .= '<p class="spip_bouton"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></p>'.jeux_form_fin();
+	if (!jeux_form_correction($indexJeux)) {
+		$champs = '<textarea name="reponse" class="forml" rows="20">'._T('question_ouverte:veuillez_repondre').'</textarea>';
 		
-		return $tete.$html.$form.$pied;
-	
+		if($form) {
+			$tete .= jeux_form_debut('question_ouverte', $indexJeux, '', 'post', self());
+			$pied = '<br />' . jeux_bouton(jeux_config('bouton_corriger'), $id_jeu) . jeux_form_fin() . $pied;
+		}
+		
+		return $tete.$html.$champs.$pied;
 	}
 	// Après envoi du formulaire
 	else{
-		find_in_path('jeux_ajouter_resultat.php', 'base/', true);
 		$reponse = _request('reponse');
-		jeux_ajouter_resultat(_request('id_jeu'), 0, 0, $reponse);
+		
+		if ($id_jeu){
+			//jeux_ajouter_resultat(_request('id_jeu'), 0, 0, $reponse);
+			jeux_afficher_score(0, 0, _request('id_jeu'), $reponse);
+		}
+		
+		if($form) {
+			$pied = jeux_bouton(jeux_config('bouton_refaire'), $id_jeu, $indexJeux) . $pied;
+		}
+		
 		return
 			$tete
 			.'<p>{{'._T('question_ouverte:merci').'}}</p>'
@@ -65,13 +82,7 @@ function jeux_question_ouverte($texte, $indexJeux){
 			.propre(_request('reponse'))
 			.'<h5>'._T('question_ouverte:correction').'</h5>'
 			.$correction
-			.jeux_bouton_reinitialiser()
 			.$pied;
-	
 	}
-	
-	return;
-	
 }
 
-?>
