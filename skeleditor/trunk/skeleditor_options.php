@@ -122,7 +122,14 @@ function skeleditor_extraire_css($texte){
 }
 
 function skeleditor_affichage_final($texte){
-	if (isset($_COOKIE['spip_admin']) AND $GLOBALS['html']){
+	if (isset($_COOKIE['spip_admin'])
+	  AND $GLOBALS['html']
+	  AND isset($GLOBALS['visiteur_session']['statut'])
+		AND $GLOBALS['visiteur_session']['statut']
+	  AND intval($GLOBALS['visiteur_session']['statut'])<"1comite"
+	  AND include_spip("inc/autoriser")
+	  AND autoriser("skeleditor")
+	){
 		if ((defined('_VAR_INCLURE') AND _VAR_INCLURE) OR $GLOBALS['var_inclure']){
 			$retour = self();
 			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
