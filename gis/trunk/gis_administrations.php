@@ -47,6 +47,17 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL'),
 	);
 	
+	// Augmenter la précision des champs de coordonnées
+	$maj['2.0.4'] = array(
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (lat)'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (lon)'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (pays(500))'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (code_pays)'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (region(500))'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (ville(500))'),
+		array('sql_alter', 'TABLE spip_gis ADD INDEX (code_postal)'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

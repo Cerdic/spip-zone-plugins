@@ -56,6 +56,13 @@ function gis_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_gis",
+			'KEY lat' => 'lat',
+			'KEY lon' => 'lon',
+			'KEY pays' => 'pays(500)',
+			'KEY code_pays' => 'code_pays',
+			'KEY region' => 'region(500)',
+			'KEY ville' => 'ville(500)',
+			'KEY code_postal' => 'code_postal',
 		),
 		'principale' => 'oui',
 		'modeles' => array('carte_gis', 'carte_gis_preview'),
