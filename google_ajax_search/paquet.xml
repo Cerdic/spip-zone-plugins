@@ -1,7 +1,7 @@
 <paquet
 	prefix="googleajaxsearch"
 	categorie="multimedia"
-	version="0.1.2"
+	version="0.2.0"
 	etat="stable"
 	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/google_but.png"

@@ -1,12 +1,12 @@
 <plugin>
-	<nom>Google Ajax Search</nom>
+	<nom>Google Custom Search</nom>
 	<slogan>Un formulaire de recherche Google dans votre site</slogan>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 	<version_base>0.1.1</version_base>
 	<etat>stable</etat>
 	<auteur>[erational->http://www.erational.org]</auteur>
-	<licence>(c) 2007-2012 GPL</licence>
-	<description>Ce plugin permet d'ajouter un moteur de recherche suppl&#233;mentaire &#224; votre SPIP pour remplacer ou compl&#233;ter le moteur de recherche existant.. {{R&#233;f&#233;rence :}} [API Google Search->http://code.google.com/apis/ajaxsearch/documentation/reference.html]
+	<licence>(c) 2007-2013 GPL</licence>
+	<description>Ajouter un moteur de recherche suppl&#233;mentaire &#224; votre SPIP pour remplacer ou compl&#233;ter le moteur de recherche existant.. {{R&#233;f&#233;rence :}} [API Google Custum Search->https://developers.google.com/custom-search/docs/element]
 	</description> 
 	<lien>http://www.spip-contrib.net/Plugin-Google-Ajax-Search</lien>
 	<prefix>googleajaxsearch</prefix>
