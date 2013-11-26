@@ -63,7 +63,7 @@ function projets_sites_header_prive($flux){
  */
 function projets_sites_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('projet_site'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('projets_site'=>'*'),'*');
 	return $flux;
 }
 

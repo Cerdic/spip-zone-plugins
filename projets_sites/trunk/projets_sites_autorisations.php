@@ -48,7 +48,7 @@ function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_projetsitecreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return autoriser('creer', 'projet_site', '', $qui, $opt);
+	return autoriser('creer', 'projets_site', '', $qui, $opt);
 } 
 
 /**

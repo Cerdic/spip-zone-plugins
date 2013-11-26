@@ -41,9 +41,9 @@ function projets_sites_declarer_tables_interfaces($interfaces) {
 function projets_sites_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_projets_sites'] = array(
-		'type' => 'projet_site',
+		'type' => 'projets_site',
 		'principale' => "oui", 
-		'table_objet_surnoms' => array('projetssite'), // table_objet('projet_site') => 'projets_sites' 
+		'table_objet_surnoms' => array('projetssite'), // table_objet('projets_site') => 'projets_sites' 
 		'field'=> array(
 			"id_site"            => "bigint(21) NOT NULL",
 			"logiciel_nom"       => "varchar(25) NOT NULL DEFAULT ''",

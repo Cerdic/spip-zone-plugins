@@ -14,7 +14,7 @@ a mis a jour la valeur avec la page reelle]
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-associer projets_sites">
 <table class='spip liste'>
-[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet_site:info_1_projet_site,projet_site:info_nb_projets_sites}})</strong>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong>
 <span class="recherche">
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
@@ -39,7 +39,7 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
 	
 		<tr class='first_row'>
-			<th class='type_site' scope='col'>[(#TRI{multi type_site,<:projet_site:label_type_site:>,ajax})]</th>
+			<th class='type_site' scope='col'>[(#TRI{multi type_site,<:projets_site:label_type_site:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
@@ -47,9 +47,9 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_projets_sites(PROJETS_SITES){!id_site IN #GET{exclus}}{where?}{recherche?}
 		{tri #ENV{par,multi type_site},#GET{defaut_tri}}{pagination #ENV{nb,10} proa}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TYPE_SITE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='type_site'>[(#LOGO_PROJET_SITE|image_reduire{20,20})]<a href="[(#ID_SITE|generer_url_entite{projet_site})]">#TYPE_SITE</a></td>
+			<td class='type_site'>[(#LOGO_PROJETS_SITE|image_reduire{20,20})]<a href="[(#ID_SITE|generer_url_entite{projets_site})]">#TYPE_SITE</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[projet_site-#ID_SITE-#OBJET-#ID_OBJET\]" value="+"><:projet_site:ajouter_lien_projet_site:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button class="button link add" name="ajouter_lien\[projets_site-#ID_SITE-#OBJET-#ID_OBJET\]" value="+"><:projets_site:ajouter_lien_projets_site:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_projets_sites>

@@ -44,9 +44,9 @@ function projets_sites_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_projets_sites_liens");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('projet_site')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('projet_site')));
-	sql_delete("spip_forum",                 sql_in("objet", array('projet_site')));
+	sql_delete("spip_versions",              sql_in("objet", array('projets_site')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('projets_site')));
+	sql_delete("spip_forum",                 sql_in("objet", array('projets_site')));
 
 	effacer_meta($nom_meta_base_version);
 }

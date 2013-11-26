@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_lien_projet_site' => 'Ajouter ce site',
+	'ajouter_lien_projets_site' => 'Ajouter ce site',
 
 	// E
 	'explication_moteur_recherche' => 'Exemples : Moteur interne au logiciel, Exalead, Google, etc.',
@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sso' => 'Méthode d\'authentification unique',
 
 	// I
-	'icone_creer_projet_site' => 'Créer un site',
-	'icone_modifier_projet_site' => 'Modifier ce site',
-	'info_1_projet_site' => 'Un site',
-	'info_aucun_projet_site' => 'Aucun site',
+	'icone_creer_projets_site' => 'Créer un site',
+	'icone_modifier_projets_site' => 'Modifier ce site',
+	'info_1_projets_site' => 'Un site',
+	'info_aucun_projets_site' => 'Aucun site',
 	'info_nb_projets_sites' => '@nb@ sites',
 	'info_projets_sites_auteur' => 'Les sites de cet auteur',
 
@@ -58,19 +58,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_site' => 'Type de site',
 
 	// R
-	'retirer_lien_projet_site' => 'Retirer ce site',
+	'retirer_lien_projets_site' => 'Retirer ce site',
 	'retirer_tous_liens_projets_sites' => 'Retirer tous les sites',
 
 	// S
 	'site_orphelin' => 'Site sans projet(s)',
 
 	// T
-	'texte_ajouter_projet_site' => 'Ajouter un site',
-	'texte_changer_statut_projet_site' => 'Ce site est :',
-	'texte_creer_associer_projet_site' => 'Créer et associer un site',
-	'titre_langue_projet_site' => 'Langue de ce site',
-	'titre_logo_projet_site' => 'Logo de ce site',
-	'titre_projet_site' => 'Site pour projets',
+	'texte_ajouter_projets_site' => 'Ajouter un site',
+	'texte_changer_statut_projets_site' => 'Ce site est :',
+	'texte_creer_associer_projets_site' => 'Créer et associer un site',
+	'titre_langue_projets_site' => 'Langue de ce site',
+	'titre_logo_projets_site' => 'Logo de ce site',
+	'titre_projets_site' => 'Site pour projets',
 	'titre_projets_sites' => 'Sites pour projets',
 	'titre_projets_sites_rubrique' => 'Sites de la rubrique',
 	'type_dev' => 'Environnement de développement',
