@@ -61,10 +61,6 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
         if (!_request($obligatoire)) 
             $erreurs[$obligatoire] = _T("info_obligatoire");
     }
-    // Il faut au moins une ressource !!
-    if (!_request('liste_ressources')) {
-            $erreurs["liste_ressources"] = _T("orr:ressource_obligatoire");
-    }
    
     //format de date correct
     if (!isset($erreurs['date_debut'])){
@@ -90,34 +86,39 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
     if ($timestampd>=$timestampf){
         $erreurs['date_fin'] =_T('orr:erreur_reservation_date_fin_debut');
     }
-
-    // les dates choisies sont libres
-    $liste_ressources = array();
-    // Si C'est une mise à jour, on ne traite que de la ressource sélectionnée)
-    if ($idresa)
-        $liste_ressources[] = $idressource;
-    // fabrique un array : liste_ressources de toutes les ressources
-    else 
-        $liste_ressources   = _request('liste_ressources');
-    
-    $date_debut = date("Y-m-d H:i:s", mktime (intval($heured),$minuted,0, $moisd, $jourd, $anneed));
-    $date_fin   = date("Y-m-d H:i:s", mktime (intval($heuref),$minutef,0, $moisf, $jourf, $anneef));
-    
-    $resultat = array();
-    foreach ($liste_ressources as $idressource) {
-        if (orr_compare_date($date_debut,$date_fin,$idressource,$idresa))
-            $resultat[] = $idressource;
+    // Il faut au moins une ressource !!
+    if (!_request('liste_ressources')) {
+        $erreurs["liste_ressources"] = _T("orr:ressource_obligatoire");
     }
-    if ($resultat){
-        $nom_ressources = array();
-        $nom_ressources = sql_allfetsel('orr_ressource_nom', 'spip_orr_ressources', sql_in('id_orr_ressource', $resultat));
-        foreach ($nom_ressources as $ressource) {
-            $Tressources[] = $ressource['orr_ressource_nom'];
+    else {
+        // les dates choisies sont libres
+        $liste_ressources = array();
+        // Si C'est une mise à jour, on ne traite que de la ressource sélectionnée)
+        if ($idresa)
+            $liste_ressources[] = $idressource;
+        // fabrique un array : liste_ressources de toutes les ressources
+        else 
+            $liste_ressources = _request('liste_ressources');
+
+        $date_debut = date("Y-m-d H:i:s", mktime (intval($heured),$minuted,0, $moisd, $jourd, $anneed));
+        $date_fin   = date("Y-m-d H:i:s", mktime (intval($heuref),$minutef,0, $moisf, $jourf, $anneef));
+
+        $resultat = array();
+        foreach ($liste_ressources as $idressource) {
+            if (orr_compare_date($date_debut,$date_fin,$idressource,$idresa))
+                $resultat[] = $idressource;
         }
-        $pluriel = count($Tressources)>1 ? "les ressources" : "la ressource";
-        $affichage_ressource = implode(", ",$Tressources);
-        $erreurs['date_debut'] = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
-        $erreurs['date_fin']   = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
+        if ($resultat){
+            $nom_ressources = array();
+            $nom_ressources = sql_allfetsel('orr_ressource_nom', 'spip_orr_ressources', sql_in('id_orr_ressource', $resultat));
+            foreach ($nom_ressources as $ressource) {
+                $Tressources[] = $ressource['orr_ressource_nom'];
+            }
+            $pluriel = count($Tressources)>1 ? "les ressources" : "la ressource";
+            $affichage_ressource = implode(", ",$Tressources);
+            $erreurs['date_debut'] = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
+            $erreurs['date_fin']   = _T('orr:erreur_reservation_date_occupe',array('ressource' => $affichage_ressource,'pluriel' => $pluriel));
+        }
     }
     return $erreurs;
 }
