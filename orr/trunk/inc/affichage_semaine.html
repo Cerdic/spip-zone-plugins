@@ -1,4 +1,12 @@
 #SET{jourj,#ENV{jourj}}
+#SET{lundi,#GET{jourj}|orr_joursemaine{lundi,date}} 
+#SET{mardi,#GET{jourj}|orr_joursemaine{mardi,date}} 
+#SET{mercredi,#GET{jourj}|orr_joursemaine{mercredi,date}} 
+#SET{jeudi,#GET{jourj}|orr_joursemaine{jeudi,date}} 
+#SET{vendredi,#GET{jourj}|orr_joursemaine{vendredi,date}} 
+#SET{samedi,#GET{jourj}|orr_joursemaine{samedi,date}} 
+#SET{dimanche,#GET{jourj}|orr_joursemaine{dimanche,date}} 
+#SET{plusun,#GET{jourj}|orr_joursemaine{plusun,date}} 
 
 <div id="tableau_orr">
 	<table id="tableau_semaine">
