@@ -7,12 +7,19 @@ function googleajaxsearch_insert_head($flux){
     $flux.='<!-- google search -->
     <script src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+				results = regex.exec(location.search);
+			return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
         google.load(\'search\', \'1\');
         google.setOnLoadCallback(function(){
-          new google.search.CustomSearchControl().draw(\'searchcontrol\');
-        }, true);
+          var searchControl = new google.search.CustomSearchControl();
+		  searchControl.draw(\'searchcontrol\');
+ 		  searchControl.execute(getParameterByName(\'recherche\'));
+       }, true);
     </script>';
-        
 	
 	return $flux;
 }
