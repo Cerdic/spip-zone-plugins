@@ -50,7 +50,7 @@ function _image_responsive($img, $taille=120, $lazy=0) {
 		}
 		
 		if ($taille == 0) $src = "rien.gif";
-		if ($lazy == 1) 		$classe .= " lazy";
+		if ($lazy == 1) $classe .= " lazy";
 		$img = inserer_attribut($img, "data-l", $l);
 		$img = inserer_attribut($img, "data-h", $h);
 
