@@ -2,6 +2,7 @@
 
 function formulaires_reserv_charger_dist($idressource,$date_deb,$date_f,$idresa=false){
     // test si l'utilisateur à le droit de creer une résa pour la ressource active
+    include_spip('inc/autoriser');
     if ($idressource AND !autoriser('creer','orr_reservation',intval($idressource)))
         return exit;
 
@@ -61,8 +62,8 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
             $erreurs[$obligatoire] = _T("info_obligatoire");
     }
     // Il faut au moins une ressource !!
-    if (!_request('liste_ressources') AND !_request('choix_ressource_active')) {
-            $erreurs["choix_ressource_active"] = _T("orr:ressource_obligatoire");
+    if (!_request('liste_ressources')) {
+            $erreurs["liste_ressources"] = _T("orr:ressource_obligatoire");
     }
    
     //format de date correct
@@ -96,10 +97,9 @@ function formulaires_reserv_verifier_dist($idressource,$date_deb,$date_f,$idresa
     if ($idresa)
         $liste_ressources[] = $idressource;
     // fabrique un array : liste_ressources de toutes les ressources
-    elseif (_request('choix_ressource_active')){
+    else 
         $liste_ressources   = _request('liste_ressources');
-        $liste_ressources[] = $idressource;
-    }
+    
     $date_debut = date("Y-m-d H:i:s", mktime (intval($heured),$minuted,0, $moisd, $jourd, $anneed));
     $date_fin   = date("Y-m-d H:i:s", mktime (intval($heuref),$minutef,0, $moisf, $jourf, $anneef));
     
