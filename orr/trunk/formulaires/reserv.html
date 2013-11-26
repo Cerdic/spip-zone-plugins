@@ -7,12 +7,8 @@
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer_nom_reservation obligatoire[ (#ENV**{erreurs}|table_valeur{nom_reservation}|oui)erreur]">
-				<label for="champ_nom_reservation"><:orr:nom_de_la_reservation:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_reservation})</span>]
-				<input type="text" id="champ_nom_reservation" name="nom_reservation" value="[(#ENV{nom_reservation})]" />
-				<span class="error-message"></span>
-			</li>
+            [(#SAISIE{input,nom_reservation,obligatoire}
+                {label=<:orr:nom_de_la_reservation:>})]
 
             [(#SAISIE{selection_multiple,liste_ressources}
                 {cacher_option_intro=true}
@@ -22,18 +18,13 @@
                 {datas=#ENV{Tressources}})]
 		    <span id="ctrl_clic">(<:orr:ctrl_clic:>)</span><br />
 
-			<li class="editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
-				<label for="date_debut"><:orr:date_de_debut:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
-				<input type="text" id="date_debut" class="datepicker" name="date_debut" value="[(#ENV{date_debut})]" />
-				<span class="error-message"></span>
-			</li>
-			<li class="editer_date_fin obligatoire[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
-				<label for="date_fin"><:orr:date_de_fin:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
-				<input type="text" id="date_fin" class="datepicker" name="date_fin" value="[(#ENV{date_fin})]" />
-				<span class="error-message"></span>
-			</li>
+            [(#SAISIE{input,date_debut,obligatoire}
+                {label=<:orr:date_de_debut:>}
+                {class=datepicker})]
+
+            [(#SAISIE{input,date_fin,obligatoire}
+                {label=<:orr:date_de_fin:>}
+                {class=datepicker})]
 
 			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/formulaire_reservation_champs_extra}{env}>]
 		</ul>
@@ -53,7 +44,7 @@
             addSliderAccess: true,
 			sliderAccessArgs: { touchonly: false },
 			onClose: function(dateText, inst) {
-				var endDateTextBox = $('#date_fin');
+				var endDateTextBox = $('#champ_date_fin');
 				if (endDateTextBox.val() != '') {
 					var testStartDate = new Date(dateText);
 					var testEndDate = new Date(endDateTextBox.val());
@@ -66,12 +57,12 @@
 			},
 			onSelect: function (selectedDateTime){
 				var start = $(this).datetimepicker('getDate');
-				$('#date_fin').datetimepicker('option', 'minDate', new Date(start.getTime()));
+				$('#champ_date_fin').datetimepicker('option', 'minDate', new Date(start.getTime()));
 			}
             });
-         jQuery('#date_fin').datetimepicker({
+         jQuery('#champ_date_fin').datetimepicker({
 			onClose: function(dateText, inst) {
-				var startDateTextBox = $('#date_debut');
+				var startDateTextBox = $('#champ_date_debut');
 				if (startDateTextBox.val() != '') {
 					var testStartDate = new Date(startDateTextBox.val());
 					var testEndDate = new Date(dateText);
@@ -84,7 +75,7 @@
 			},
 			onSelect: function (selectedDateTime){
 				var end = $(this).datetimepicker('getDate');
-				jQuery('#date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				jQuery('#champ_date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
 			}
         });
     });
