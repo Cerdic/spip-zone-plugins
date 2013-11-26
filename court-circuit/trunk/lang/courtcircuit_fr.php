@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Modifier l’URL des rubriques redirigées directement dans les squelettes ?',
 	'explication_regles' => 'Les différentes règles ci-dessous sont testées dans cet ordre. Si aucune règle ne définit une redirection, alors la rubrique sera affichée normalement.',
-	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la rediretion. Cette option n’est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.',
+	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la redirection. Cette option n’est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.',
 	'explication_sousrubrique' => 'Parcourir la première sous-rubrique (tri par numéro du titre et date) ? Les règles de redirection seront testées à nouveau dans cette sous-rubrique.',
 	'explication_variantes_squelettes' => 'Exemple : squelettes de la forme rubrique-2.html ou rubrique=3.html.',
 
