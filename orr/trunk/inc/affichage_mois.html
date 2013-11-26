@@ -1,6 +1,5 @@
 #SET{jour,#ENV{jourj}}
 #SET{jourj,#GET{jour}|orr_premierjourcalendrier}
-#SET{jourplusun,#GET{jourj}|orr_plusunjour}
 #SET{num_mois,#GET{jour}|affdate{m}}
 
 [(#REM) l'utilisateur à t'il le droit de créer sur au moins une ressource? ]
@@ -37,9 +36,7 @@
 							<strong>[(#GET{jourj}|affdate{j})]</strong> 
                             [(#REM) lien formulaire de réservation si autorisation pour au moins une ressource ]
                             [(#GET{aut_creer}|oui)
-						    <a  href="[(#URL_PAGE{formulaire_reservation}|parametre_url{ma_date,#GET{jourj}|affdate{'Y-m-d h:i:s'}})]" class="mediabox">
-								<img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
-							#SET{jourplusun,#GET{jourj}|orr_plusunjour}
+						    <a  href="[(#URL_PAGE{formulaire_reservation}|parametre_url{ma_date,#GET{jourj}|affdate{'Y-m-d h:i:s'}})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
 							<BOUCLE_ressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
 								[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
 								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jourj}} />]
