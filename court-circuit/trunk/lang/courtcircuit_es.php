@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => '¿Modificar la URL de las secciones redirigidas directamente en los esqueletos?',
 	'explication_regles' => 'Las diferentes reglas a continuación son probadas en este orden. Si ninguna regla define una redirección, entonces la sección será mostrada normalmente. ',
-	'explication_restreindre_langue' => 'Si esta opción está activada, sólo los artículos del idioma activo serán considerados para el cálculo de la redirección. Esta opción no es útil salvo si sus secciones contienen artículos de diferentes idiomas. No utilizar si su sitio está organizado en sectores de idioma o si utiliza los campos multi.',
+	'explication_restreindre_langue' => 'Si esta opción está activada, sólo los artículos del idioma activo serán considerados para el cálculo de la redirección. Esta opción no es útil salvo si sus secciones contienen artículos de diferentes idiomas. No utilizar si su sitio está organizado en sectores de idioma o si utiliza los campos multi.', # MODIF
 	'explication_sousrubrique' => '¿Navegar por la primera subsección (clasificación por número del título y fecha)? Las reglas de redirección se pondrán a prueba de nuevo en esta subsección. ',
 	'explication_variantes_squelettes' => 'Ejemplo: esqueletos de la forma rubrique-2.html o rubrique=3.html.',
 

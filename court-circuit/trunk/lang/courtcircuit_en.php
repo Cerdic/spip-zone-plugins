@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_liens_rubriques' => 'Change the URL of redirected sections directly into the skeletons?',
 	'explication_regles' => 'The different rules below are tested in that order. If no rule defines a redirection, then the section will be displayed normally.',
-	'explication_restreindre_langue' => 'If this option is enabled, only the sections of the active language will be taken into account for the calculation of the rediretion. This option is useful if your sections contain articles of different languages. Do not use if your site is organized into language sectors or if you use multi fields.',
+	'explication_restreindre_langue' => 'If this option is enabled, only the sections of the active language will be taken into account for the calculation of the rediretion. This option is useful if your sections contain articles of different languages. Do not use if your site is organized into language sectors or if you use multi fields.', # MODIF
 	'explication_sousrubrique' => 'Browse the first subsection (sort by title number and date)? Redirection rules will be tested again in this subsection.',
 	'explication_variantes_squelettes' => 'Example: skeletons of type rubrique-2.html or rubrique=3.html.',
 
