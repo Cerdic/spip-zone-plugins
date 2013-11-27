@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/projets_sites, par=type_site, env, ajax, sinon=<:projets_site:info_aucun_projets_site:>}>
-
-[(#AUTORISER{creer,projets_site})
-	[(#URL_ECRIRE{projets_site_edit,new=oui}|icone_verticale{<:projets_site:icone_creer_projets_site:>,projets_site,new,right})]
-]
