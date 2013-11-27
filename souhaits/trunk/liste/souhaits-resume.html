@@ -10,7 +10,7 @@
 	[<h2 class="h2">(#ENV{titre})</h2>]
 	<ul class="liste-items">
 		<BOUCLE_souhaits(SOUHAITS){id_rubrique?}{statut?}{recherche?}{!id_souhait IN #ENV{souhaits_exclus,#ARRAY}}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,20}}>
-		<li class="item">#INCLURE{fond=inclure/resume/souhait,id_souhait}</li>
+		<li class="item #STATUT">#INCLURE{fond=inclure/resume/souhait,id_souhait}</li>
 		</BOUCLE_souhaits>
 	</ul>
 	[<div class="pagination">(#PAGINATION)</div>]
