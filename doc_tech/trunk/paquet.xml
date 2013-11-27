@@ -1,0 +1,23 @@
+<paquet
+	prefix="doc_tech"
+	categorie="outil"
+	version="0.2.0"
+	etat="dev"
+	compatibilite="[3.0.9;3.0.*]"
+	logo="images/doc_tech-24.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2013-11-26 23:35:07
+	-->
+
+	<nom>Documentation technique</nom>
+
+	<auteur lien='http://www.teddypayet.com'>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="autoriser" inclure="doc_tech_autorisations.php" /> 
+
+	<menu parent="menu_administration" icone="images/doc_tech-16.png" titre="doc_tech:doc_tech_titre" nom="doc_tech" action="doc_tech" />
+
+</paquet>
