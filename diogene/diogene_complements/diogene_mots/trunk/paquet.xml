@@ -28,5 +28,5 @@
 	<necessite nom="mots" compatibilite="[2.4.6;[" />
 	<necessite nom="saisies" compatibilite="[1.26.2;[" />
 
-	<utilise nom="chosen" compatibilite="[1.4.0;[" />
+	<utilise nom="chosen" compatibilite="[1.4.3;[" />
 </paquet>
