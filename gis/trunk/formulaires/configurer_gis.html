@@ -8,6 +8,11 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
+		<li class="rechercher_adresse editer_map_config">
+			<label for="champ_map_config_geocoder"><:gis:label_rechercher_address:></label>
+			<input type="text" class="text" name="champ_map_config_geocoder" id="champ_map_config_geocoder" value="" />
+			<a id="map_config_rechercher_geocodage"><:info_rechercher:></a>
+		</li>
 		[(#SAISIE{input,lat,
 			label=<:gis:lat:>,
 			defaut=0,
@@ -87,18 +92,40 @@
 
 <script type="text/javascript">
 /*<![CDATA[*/
+
 (function($){
+	var map, map_container = 'map_config', geocoder, marker;
 	
-	var maj_inputs = function(map,pos) {
-		var zoom = map.getZoom();
-		$("#champ_lat").val(pos.lat);
-		$("#champ_lon").val(pos.lng);
-		$("#champ_zoom").val(zoom);
+	var maj_inputs = function(map,pos,action) {
+		if(action == 'click'){
+			var zoom = map.getZoom();
+			$("#champ_lat").val(pos.lat);
+			$("#champ_lon").val(pos.lng);
+			$("#champ_zoom").val(zoom);
+			annuler_geocoder = 1;
+		}else if(annuler_geocoder != 1){
+			if(pos.point == 'undefined'){
+				$('#champ_#ENV{champ_lat,lat}').val(pos.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(pos.lng);
+				map.panTo(pos);
+				marker.setLatLng(pos);
+			}else{
+				$('#champ_#ENV{champ_lat,lat}').val(pos.point.lat);
+				$('#champ_#ENV{champ_lon,lon}').val(pos.point.lng);
+				map.panTo(pos.point);
+				marker.setLatLng(pos.point);
+			}
+		}
 	}
 	
+	function geocode(query) {
+		if(!query.error)
+			maj_inputs(map,query,'geocoding');
+		else
+			alert('<:gis:erreur_geocoder:> '+query.search);
+	}
+
 	var init_config = function() {
-		var map;
-		var map_container = 'map_config';
 		map = new L.Map(map_container);
 		
 		map.attributionControl.setPrefix('');
@@ -121,22 +148,32 @@
 		</B_layers>
 
 		map.setView(new L.LatLng(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
-		
-		var marker = new L.Marker(new L.LatLng(#ENV{lat,0},#ENV{lon,0}));
+
+		marker = new L.Marker(new L.LatLng(#ENV{lat,0},#ENV{lon,0}));
 		map.addLayer(marker);
+		
+		geocoder = new L.Geocoder(geocode,{acceptLanguage:'#ENV{lang}'});
 		
 		// mettre a jour les coordonnees quand on clique la carte
 		map.on('click', function(e) {
+			annuler_geocoder = 0;
 			marker.setLatLng(e.latlng);
 			map.panTo(e.latlng);
-			maj_inputs(map,e.latlng);
+			maj_inputs(map,e.latlng,'click');
+		});
+		
+		// geocoder si clic...
+		$('a#map_config_rechercher_geocodage').css("cursor","pointer").click(function(){
+			var address = $("#champ_map_config_geocoder").attr("value");
+			annuler_geocoder = 0;
+			console.log('recherche de '+address);
+			geocoder.geocode(address);
 		});
 		
 		// mettre à jour le zoom quand on le modifie
 		map.on('zoomend', function(e) {
 			$("#champ_zoom").val(e.target._zoom);
 		});
-
 	}
 
 	$(function(){
