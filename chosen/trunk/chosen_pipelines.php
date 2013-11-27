@@ -7,21 +7,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-/**
- * Ajoute Chosen aux plugins JS chargés
- * 
- * @param array $flux
- *     Liste des js chargés
- * @return array
- *     Liste complétée des js chargés
-**/
-function chosen_jquery_plugins($flux) {
-	$flux[] = 'lib/chosen/chosen.jquery.js'; # lib originale
-	$flux[] = 'javascript/spip_chosen.js';   # chargements SPIP automatiques
-	return $flux;
-}
-
 /**
  * Ajoute Chosen aux css chargées dans le privé
  * 
@@ -30,6 +15,10 @@ function chosen_jquery_plugins($flux) {
  */
 function chosen_header_prive($texte) {
 	include_spip('inc/config');
+	$js = find_in_path('lib/chosen/chosen.jquery.js'); # lib originale
+	$texte .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+	$js = find_in_path('javascript/spip_chosen.js');   # chargements SPIP automatiques
+	$texte .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
 	$texte .= '<script type="text/javascript">/* <![CDATA[ */
 			var selecteur_chosen = "' . trim(lire_config('chosen/selecteur_commun')) . '";
 			var langue_chosen = {
@@ -94,6 +83,10 @@ function chosen_insert_head($flux) {
 	include_spip('inc/config');
 	$config = lire_config('chosen',array());
 	if (isset($config['active']) and $config['active']=='oui') {
+		$js = find_in_path('lib/chosen/chosen.jquery.js'); # lib originale
+		$flux .= '<script type="text/javascript" src="'.$js.'" /></script>'."\n";
+		$js = find_in_path('javascript/spip_chosen.js');   # chargements SPIP automatiques
+		$flux .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
 		$flux .= '<script type="text/javascript">/* <![CDATA[ */
 			var selecteur_chosen = "' . trim($config['selecteur_commun']) . '";
 			var langue_chosen = {
