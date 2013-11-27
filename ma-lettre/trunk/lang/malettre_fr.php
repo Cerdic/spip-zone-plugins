@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'ecrire_nouvelle' => 'Ecrire une lettre',
   'ecrire_nouvelle2' => 'Ecrire une nouvelle lettre',
   'edito'=>'Edito', #NEW
+  'edito_inconnu' => 'L\'édito que vous avez indiqué n\'existe pas',
   'edito_article_numero'=>'Num&eacute;ro de l\'article &eacute;dito<br />(<i>0: pas d\'édito</i>)',#NEW
   'erreur_ecriture' => '<strong>erreur:</strong> impossible de cr&eacute;er la lettre au format HTML, v&eacute;rifier le param&egrave;tre chemin d\'acc&egrave;s et les droits en &eacute;criture (chmod 777)',
   'erreur_ecriture_stockage' => 'R&eacutepertoire de stockage de la lettre impossible &agrave; cr&eacute;er',
@@ -83,6 +84,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // 0
   'obligatoire' => 'Champs obligatoire',
+  
+  //
+  'recharger_texte' => 'Recharger ce texte',
   
   // S
   'succes_envoi' => 'Lettre bien envoy&eacute;e !',

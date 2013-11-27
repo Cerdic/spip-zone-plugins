@@ -120,7 +120,7 @@ function formulaires_editer_malettre_traiter_dist(){
   
   // pas d'erreur, on passe à l'étape suivante: choix destinaires
   if (!$errorFlag) {
-      refuser_traiter_formulaire_ajax();
+      //refuser_traiter_formulaire_ajax();
       $redirect = parametre_url(generer_url_ecrire('malettre_envoi'),'lettre_title',$lettre_title );
   }
  
@@ -132,4 +132,4 @@ function formulaires_editer_malettre_traiter_dist(){
 	);
 }
 
-?> 
+?>

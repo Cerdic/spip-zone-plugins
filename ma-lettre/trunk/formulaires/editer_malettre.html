@@ -13,12 +13,11 @@
   	  <!-- titre -->
   	  [(#SAISIE{input,lettre_title,size=25,maxlength=255,label=<strong><:malettre:compose_sujet:></strong>})]
       
-      <!-- edito -->
+      <!-- edito -->  
+      [(#CONFIG{malettre/id_article_edito}|oui)            
       [(#CONFIG{malettre/id_article_edito}|=={0}|non)
-       <h5><:malettre:compose_contenu:> - <a href="[(#URL_ECRIRE{article}|parametre_url{id_article,#CONFIG{malettre/id_article_edito}})]" class="popin"><:malettre:compose_edito:></a></h5>
-       <INCLURE{fond=inclure/contenu_edito,ajax=edito} />
-       <p style="text-align:right;padding:0 10px;"><a href="#" onclick="ajaxReload('edito');" title="Après l'avoir édité, vous avez certainement besoin de mettre à jour cet affichage.">recharger ce texte</a></p>
-       ] 
+          <INCLURE{fond=inclure/contenu_edito_container} />
+      ]] 
       
       <!-- liste articles -->
       [(#CONFIG{malettre/lister_articles}|=={on}|oui)

@@ -1,0 +1,7 @@
+<BOUCLE_art(ARTICLES){id_article=#CONFIG{malettre/id_article_edito}}>
+<h5><:malettre:compose_contenu:> - <a href="[(#URL_ECRIRE{article}|parametre_url{id_article,#CONFIG{malettre/id_article_edito}})]" class="popin"><:malettre:compose_edito:></a></h5>
+<INCLURE{fond=inclure/contenu_edito,ajax=edito} />
+<p style="text-align:right;padding:0 10px;"><a href="#" onclick="ajaxReload('edito');" ><:malettre:recharger_texte:></a></p>
+</BOUCLE_art></B_art>
+<p><:malettre:edito_inconnu:></p>
+<//B_art>
