@@ -6,6 +6,6 @@
 .chosen-drop .chosen-results .create-option a {
   color: red;
 }
-.formulaire_spip {
-  overflow: visible !important; /* voir https://github.com/harvesthq/chosen/issues/86 pour le problème */
+.content-principal, .formulaire_spip {
+  overflow: visible; /* voir https://github.com/harvesthq/chosen/issues/86 pour le problème */
 }
