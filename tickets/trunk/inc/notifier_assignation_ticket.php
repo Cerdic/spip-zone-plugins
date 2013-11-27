@@ -65,7 +65,7 @@ function inc_notifier_assignation_ticket_dist($id_ticket,$options){
 								'email',
 								'spip_auteurs',
 								sql_in('id_auteur',
-										array($auteurs_mentionnes,$datas["id_auteur"],$datas["id_assigne"])));
+										array_merge((array)$auteurs_mentionnes,(array)$datas["id_auteur"],(array)$datas["id_assigne"])));
 		$emails_deja_faits = array();
 		foreach ($destinataires_forces as $dest){
 			$emails_deja_faits[] = $dest["email"];
