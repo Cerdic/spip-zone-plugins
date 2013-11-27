@@ -141,16 +141,23 @@ function formulaires_envoi_malettre_traiter_dist(){
                
             // recup destinataire
             $destinataire = array();
+            $destinataire_nom = array();
             $desti = _request('desti');
             foreach ($desti as $desti_item) {     // on lit la config pour retrouver l'email
                 $id_desti = intval(substr($desti_item,1)); 
                 $desti_email = lire_config("malettre/adresse_email$id_desti"); 
-                if ($desti_email !="") 
-                      $destinataire[] = $desti_email;            
+                $desti_nom = lire_config("malettre/adresse_nom$id_desti"); 
+                if ($desti_email !="") {
+                      $destinataire[$id_desti] = $desti_email; 
+                      $destinataire_nom[$id_desti] = $desti_nom; 
+                }           
             }
             
             $desti_more = _request('desti_more'); 
-            if ($desti_more!="") $destinataire[] = $desti_more;
+            if ($desti_more!="") { 
+                      $destinataire[] = $desti_more;
+                      $destinataire_nom[] = $desti_more;
+            }
              /*    FIXME:   a finaliser : if (!defined('_DIR_PLUGIN_MESABONNES ...
             if (_request('mes_abonnes')=='oui') {
                 if ($resultats = sql_select('email', 'spip_mesabonnes')) {
@@ -188,8 +195,13 @@ function formulaires_envoi_malettre_traiter_dist(){
 	                $mail->CharSet = "utf-8";
 
 	                $mail->Subject  =  "$lettre_title";
-	                $mail->Body     =  $recup;
-	                $mail->AltBody  =  $recup_txt;
+                  
+                  $adresse_nom = $destinataire_nom[$k];
+                  $recup_tmp = str_replace("{NOM_LISTE}",$adresse_nom,$recup);
+                  $recup_txt_tmp = str_replace("{NOM_LISTE}",$adresse_nom,$recup_txt);
+                  
+	                $mail->Body     =  $recup_tmp;
+	                $mail->AltBody  =  $recup_txt_tmp;
 		              $res = $mail->Send();
 	              } else {    // envoi via facteur
 		              $envoyer_mail = charger_fonction('envoyer_mail','inc');
@@ -203,12 +215,12 @@ function formulaires_envoi_malettre_traiter_dist(){
 	              }
 
                 if (!$res) {
-                    $message.= "<div style='color:red'><strong>$adresse</strong> - "._T('malettre:erreur_envoi')."</div>";  
+                    $message.= "<div style='color:red'><strong>$adresse_nom &lt;$adresse&gt;</strong> - "._T('malettre:erreur_envoi')."</div>";  
                     //$message.= "Mailer Error: " . $mail->ErrorInfo; 
                     $success_flag = false;
                     $j++;
                 } else {  
-                    $message.= "<div style='color:green'><strong>$adresse</strong> - <span style='color:green'>"._T('malettre:succes_envoi')."</span></div>";         
+                    $message.= "<div style='color:green'><strong>$adresse_nom &lt;$adresse&gt;</strong> - <span style='color:green'>"._T('malettre:succes_envoi')."</span></div>";         
                 }
                 echo $msg;
               }
