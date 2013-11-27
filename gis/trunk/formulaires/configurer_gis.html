@@ -166,7 +166,6 @@
 		$('a#map_config_rechercher_geocodage').css("cursor","pointer").click(function(){
 			var address = $("#champ_map_config_geocoder").attr("value");
 			annuler_geocoder = 0;
-			console.log('recherche de '+address);
 			geocoder.geocode(address);
 		});
 		
