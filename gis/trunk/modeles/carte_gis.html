@@ -53,6 +53,7 @@ Clustering (regroupement de points proches) :
 - cluster = oui                    Active le clustering
 - clusterMaxZoom = 11              Regroupe les points jusque à ce zoom, mais pas au delà
 - clusterShowCoverageOnHover = 0   1 pour afficher un dessin au survol de la zone couvertes par les points regroupés
+- maxClusterRadius = 80            Le rayon maximal (en pixels) qu'un cluster couvrira (80 pixels par defaut)
 ]
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
@@ -102,6 +103,7 @@ map_cfg["[(#GET{id})]"] = {
 "cluster":[(#ENV{cluster}|=={oui}|?{true,false})],
 "clusterMaxZoom":[(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
 "clusterShowCoverageOnHover":[(#ENV{clusterShowCoverageOnHover}|?{true,false})],
+"maxClusterRadius":[(#ENV{maxClusterRadius, 80})],
 "path_styles":[(#ENV*{path_styles}|json_encode)],
 "autocenterandzoom":[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
 "open_id":"[(#ENV{id_a_ouvrir,''})]",

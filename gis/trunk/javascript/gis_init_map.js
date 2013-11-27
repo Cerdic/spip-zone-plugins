@@ -158,6 +158,8 @@ gis_init_map = function(mapcfg) {
 				options.disableClusteringAtZoom = parseInt(mapcfg["clusterMaxZoom"]);
 			if (mapcfg["clusterShowCoverageOnHover"])
 				options.showCoverageOnHover = Boolean(mapcfg["clusterShowCoverageOnHover"]);
+			if (mapcfg["maxClusterRadius"])
+				options.maxClusterRadius = parseInt(mapcfg["maxClusterRadius"]);
 
 			map.markers = new L.MarkerClusterGroup(options);
 
