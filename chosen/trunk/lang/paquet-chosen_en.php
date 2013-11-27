@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chosen_description' => '[Chosen->http://harvesthq.github.com/chosen/] is a JavaScript library that enhances the user experience of selectors in HTML forms.
 
 The CSS class <code>chosen</code> on a <code><select></code> automatically load Chosen above.', # MODIF
-	'chosen_nom' => 'Chosen', # MODIF
-	'chosen_slogan' => 'Integrate the Chosen library in SPIP' # MODIF
+	'chosen_nom' => 'Chosen (koenpunt’s fork)',
+	'chosen_slogan' => 'Integrate the Chosen library in SPIP (koenpunt’s fork)'
 );
 
 ?>
