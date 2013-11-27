@@ -1,0 +1,123 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_site,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_site' value='#ENV{id_site}' />
+		<ul>
+
+			[(#SAISIE{input, logiciel_nom, obligatoire=oui,
+				label=<:projet_site:label_logiciel_nom:>})]
+
+			[(#SAISIE{input, logiciel_version, obligatoire=oui,
+				label=<:projet_site:label_logiciel_version:>})]
+
+			[(#SAISIE{selection, type_site, obligatoire=oui,
+				label=<:projet_site:label_type_site:>,
+				datas=[(#ARRAY{prod,<:projet_site:type_prod:>,rec,<:projet_site:type_recette:>,dev,<:projet_site:type_dev:>})]})]
+
+			[(#SAISIE{date, date_creation,
+				label=<:projet_site:label_date_creation:>})]
+
+			[(#SAISIE{fieldset, fo_fieldset,
+				label=<:projet_site:label_fo_fieldset:>})]
+
+			[(#SAISIE{input, fo_url,
+				label=<:projet_site:label_fo_url:>})]
+
+			[(#SAISIE{input, fo_login,
+				label=<:projet_site:label_fo_login:>})]
+
+			[(#SAISIE{input, fo_password,
+				label=<:projet_site:label_fo_password:>})]
+
+			[(#SAISIE{fieldset, bo_fieldset,
+				label=<:projet_site:label_bo_fieldset:>})]
+
+			[(#SAISIE{input, bo_url,
+				label=<:projet_site:label_bo_url:>})]
+
+			[(#SAISIE{input, bo_login,
+				label=<:projet_site:label_bo_login:>})]
+
+			[(#SAISIE{input, bo_password,
+				label=<:projet_site:label_bo_password:>})]
+
+			[(#SAISIE{fieldset, applicatif_fieldset,
+				label=<:projet_site:label_applicatif_fieldset:>})]
+
+			[(#SAISIE{input, applicatif_serveur,
+				label=<:projet_site:label_applicatif_serveur:>})]
+
+			[(#SAISIE{input, applicatif_path,
+				label=<:projet_site:label_applicatif_path:>})]
+
+			[(#SAISIE{input, applicatif_surveillance,
+				label=<:projet_site:label_applicatif_surveillance:>})]
+
+			[(#SAISIE{input, svn_path,
+				label=<:projet_site:label_svn_path:>})]
+
+			[(#SAISIE{input, svn_trac,
+				label=<:projet_site:label_svn_trac:>})]
+
+			[(#SAISIE{input, sas_dpi,
+				label=<:projet_site:label_sas_dpi:>})]
+
+			[(#SAISIE{fieldset, sgbd_fieldset,
+				label=<:projet_site:label_sgbd_fieldset:>})]
+
+			[(#SAISIE{input, sgbd_type,
+				label=<:projet_site:label_sgbd_type:>,
+				explication=<:projet_site:explication_sgbd_type:> })]
+
+			[(#SAISIE{input, sgbd_serveur,
+				label=<:projet_site:label_sgbd_serveur:>})]
+
+			[(#SAISIE{input, sgbd_nom,
+				label=<:projet_site:label_sgbd_nom:>})]
+
+			[(#SAISIE{input, sgbd_login,
+				label=<:projet_site:label_sgbd_login:>})]
+
+			[(#SAISIE{input, sgbd_password,
+				label=<:projet_site:label_sgbd_password:>})]
+
+			[(#SAISIE{fieldset, autres_fieldset,
+				label=<:projet_site:label_autres_fieldset:>})]
+
+			[(#SAISIE{input, sso,
+				label=<:projet_site:label_sso:>,
+				explication=<:projet_site:explication_sso:> })]
+
+			[(#SAISIE{textarea, perimetre_acces,
+				label=<:projet_site:label_perimetre_acces:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, statistiques,
+				label=<:projet_site:label_statistiques:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, moteur_recherche,
+				label=<:projet_site:label_moteur_recherche:>,
+				explication=<:projet_site:explication_moteur_recherche:> ,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, autres_outils,
+				label=<:projet_site:label_autres_outils:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, remarques,
+				label=<:projet_site:label_remarques:>,
+				explication=<:projet_site:explication_remarques:> ,
+				li_class=haut, class=inserer_barre_edition, rows=10})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

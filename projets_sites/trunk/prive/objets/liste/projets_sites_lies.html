@@ -1,0 +1,66 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi type_site,1,
+	date_creation,-1, 
+	id_site,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutprol,#EVAL{_request("debutprol");}}}
+<B_liste_projets_sites>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutprol,#EVAL{_request("debutprol");}}}
+#SET{afficher_lettres,#TRI|=={'multi type_site'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies projets_sites">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet_site:info_1_projet_site,projet_site:info_nb_projets_sites}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(PROJETS_SITES){tout}{id_site IN #GET{selection}}{where?}
+			{tri #ENV{par,multi type_site},#GET{defaut_tri}}{id_site==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TYPE_SITE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutprol,@#ID_SITE}|ancre_url{paginationprol}|afficher_initiale{#TYPE_SITE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		<tr class='first_row'>
+			<th class='id' scope='col'>[(#TRI{id_site,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='type_site' scope='col'>[(#TRI{multi type_site,<:projet_site:label_type_site:>,ajax})]</th>
+			<th class='action' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES){id_site IN #GET{selection}}
+		{tri #ENV{par,multi type_site},#GET{defaut_tri}}{pagination #ENV{nb,10} prol}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TYPE_SITE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_SITE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='id'>[(#AUTORISER{modifier,projet_site,#ID_SITE}|?{
+				<a href="[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
+				#ID_SITE
+			})]</td>
+			<td class='type_site'>[(#LOGO_PROJET_SITE|image_reduire{20,20})]<a href="[(#ID_SITE|generer_url_entite{projet_site})]">[(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)]</a></td>
+
+			<td class='action'>
+				[(#ENV{editable}|oui)
+					<button class="button link delete" name="supprimer_lien\[projet_site-#ID_SITE-#OBJET-#ID_OBJET\]" value="X"><:projet_site:retirer_lien_projet_site:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_projets_sites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[projet_site-*-#OBJET-#ID_OBJET\]" value="X"><:projet_site:retirer_tous_liens_projets_sites:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_projets_sites>
+<div class="liste-objets liste-objets-lies PROJETS_SITES caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:projet_site:info_aucun_projet_site:>})]</strong>
+</div>
+<//B_liste_projets_sites>
