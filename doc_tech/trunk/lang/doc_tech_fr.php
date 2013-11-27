@@ -21,8 +21,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nom_du_champ' => 'Nom du champ',
 
+	// P
 	'pas_de_tables_nom'=> 'Il n\'y a pas de tables correspondantes',
 
+	// S
+	'sommaire' => 'Sommaire',
 );
 
 ?>

@@ -4,7 +4,7 @@
 	<B_info_table>
 	<table>
 		<BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
-			<caption>#_tables:GET{spip_table}</caption>
+			<caption id="[(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</caption>
 		<thead>
 			<th><:doc_tech:nom_du_champ:></th>
 			<th><:doc_tech:definition_mysql:></th>
@@ -14,7 +14,7 @@
 			<B_label>
 			<tbody>
 				<BOUCLE_label(DATA) {source table, #VALEUR}>
-				<tr>
+				<tr id="[(#_tables:GET{spip_table}|attribut_html)_][(#CLE|attribut_html)]">
 					<td><strong>#CLE</strong></td>
 					<td><em>#VALEUR</em></td>
 					<td>[(#VAL{#_tables:VALEUR}|concat{':label_',#CLE}|_T)]</td>

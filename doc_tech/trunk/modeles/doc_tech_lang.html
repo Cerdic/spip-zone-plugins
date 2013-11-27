@@ -2,24 +2,22 @@
 <BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
 #SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
 	<B_info_table_label>
-<cadre>
-<pre>
+<textarea>
 <BOUCLE_info_table_label(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
 // ----------
 // [Objet : (#_tables:GET{spip_table})] 
 // <:doc_tech:chaines_a_placer_dans:> [(#_tables:VALEUR|concat{'s'})]/lang/[(#_tables:VALEUR|concat{'_',#LANG,'.php'})]<B_label_label>
 // ----------
-<BOUCLE_label_label(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE}|_T)'],
+<BOUCLE_label_label(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE}|_T|texte_script)'],
 </BOUCLE_label_label></B_label_label></BOUCLE_info_table_label>
 <BOUCLE_info_table_documentation(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}><B_label_documentation>
-<BOUCLE_label_documentation(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE,'_documentation'})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE,'_documentation'}|_T)'], 
+<BOUCLE_label_documentation(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE,'_documentation'})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE,'_documentation'}|_T|texte_script)'], 
 </BOUCLE_label_documentation></B_label_documentation></BOUCLE_info_table_documentation>
 // La chaine de langue 'explication' peut être utile sur les # SAISIES des pages d'édition de l'objet.
 <BOUCLE_info_table_explication(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}><B_label_explication>
-<BOUCLE_label_explication(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE,'_explication'})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE,'_explication'}|_T)'], 
+<BOUCLE_label_explication(DATA) {source table, #VALEUR}>['(#VAL{'label_'}|concat{#CLE,'_explication'})'] => ['(#VAL{#_tables:VALEUR}|concat{':label_',#CLE,'_explication'}|_T|texte_script)'], 
 </BOUCLE_label_explication></B_label_explication></BOUCLE_info_table_explication>
-</pre>
-</cadre>
+</textarea>
 	</B_info_table_label>
 	[(#BOITE_OUVRIR{'','notice'})]
 	<:doc_tech:pas_de_tables_nom:>
