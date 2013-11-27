@@ -56,6 +56,8 @@ Les pseudo-types disponibles sont :
 -* <tt>int8</tt> de 0 a 255
 -* <tt>float01</tt> flottant de 0 a 1
 -* <tt>string</tt>
+-* <tt>iso-string</tt> pour du texte avec des accents ISO-8859
+-* <tt>utf8-string</tt> pour du texte avec des accents UTF-8
 -* <tt>date</tt> pour une date textuelle
 -* <tt>time</tt> pour une date au format unix
 -* <tt>email</tt> pour des chaine au format adresse email
