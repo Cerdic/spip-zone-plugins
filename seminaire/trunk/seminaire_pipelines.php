@@ -43,7 +43,7 @@ function seminaire_formulaire_charger($flux){
 			$seminaire = sql_getfetsel('seminaire','spip_articles','id_article='.intval($id_parent));
 			$flux['data']['seminaire'] = $seminaire;
 		}
-		$flux['data']['id_mot_type'] = sql_getfetsel('lien.id_mot','spip_mots_liens as lien LEFT JOIN spip_mots as mots ON lien.id_mot=mots.id_mot LEFT JOIN spip_groupes_mots as groupe ON mots.id_groupe=groupe.id_groupe','lien.objet='.sql_quote('evenement').' AND groupe.id_groupe='.intval(lire_config('seminaire/groupe_mot_type')));
+		$flux['data']['id_mot'] = sql_getfetsel('lien.id_mot','spip_mots_liens as lien LEFT JOIN spip_mots as mots ON lien.id_mot=mots.id_mot LEFT JOIN spip_groupes_mots as groupe ON mots.id_groupe=groupe.id_groupe','lien.objet='.sql_quote('evenement').' AND groupe.id_groupe='.intval(lire_config('seminaire/groupe_mot_type')));
 	}
 	return $flux;
 }
