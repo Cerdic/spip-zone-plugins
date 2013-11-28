@@ -26,8 +26,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 			'nom' => 'seminaire',
 			'label' => _T('seminaire:label_seminaire'), 
 			'sql' => "varchar(3) NOT NULL DEFAULT 'non'", // declaration sql
-			'rechercher'=>false,
-			'defaut' => 'non',	
+			'rechercher'=>false
 	));
 	$champs['spip_evenements']['attendee'] = array(
 		'saisie' => 'input',// type de saisie
