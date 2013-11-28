@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.11.3"
+	version="4.12.0"
 	schema="2.0.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -30,6 +30,9 @@
 	<utilise nom="selecteurgenerique" compatibilite="[0.8.6;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
 
+	<pipeline
+		nom="gis_modele_parametres_autorises"
+	/>
 	<pipeline
 		nom="declarer_tables_interfaces"
 		inclure="base/gis.php"
