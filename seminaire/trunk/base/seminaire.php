@@ -20,6 +20,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 	La liste des champs extras complétés
  */
 function seminaire_declarer_champs_extras($champs = array()){
+	$champs['spip_articles']['seminaire'] = array(
+		'saisie' => 'oui_non',// type de saisie
+		'options' => array(
+			'nom' => 'seminaire',
+			'label' => _T('seminaire:label_seminaire'), 
+			'sql' => "varchar(3) NOT NULL DEFAULT 'non'", // declaration sql
+			'rechercher'=>false,
+			'defaut' => 'non',	
+	));
 	$champs['spip_evenements']['attendee'] = array(
 		'saisie' => 'input',// type de saisie
 		'options' => array(

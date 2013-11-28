@@ -51,7 +51,9 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.3'] = array(
 						array('sql_alter',"TABLE spip_evenements DROP id_mot"),
 					);
-					
+	
+	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['1.1.0']);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

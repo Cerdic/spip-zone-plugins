@@ -19,22 +19,24 @@
 			<label for="id_parent"><:agenda:evenement_article:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 			]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
-	  	</li>
-
-		<BOUCLE_groupe2(GROUPES_MOTS){id_groupe=#CONFIG{seminaire/groupe_mot_type}}>
-		<li class='editer_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]'>
-			<label for="id_mot">#TITRE</label>[
-			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>]
-			<p class="explication"><:seminaire:type_evenement:></p>
-			<select name="id_mot" id="id_mot">
-				<option></option>
-				<BOUCLE_mots2(MOTS){id_groupe}>
-				<option value="#ID_MOT"[(#ID_MOT|=={#ENV{id_mot}}|?{' selected="selected"',''})]>#TITRE</option>
-				</BOUCLE_mots2>
-			</select>
 		</li>
-		</BOUCLE_groupe2>
-	    <li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
+		
+		<BOUCLE_si_seminaire(CONDITION){si #ENV{seminaire,non}|=={on}}>
+			<BOUCLE_groupe2(GROUPES_MOTS){id_groupe=#CONFIG{seminaire/groupe_mot_type}}>
+			<li class='editer_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]'>
+				<label for="id_mot">#TITRE</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>]
+				<p class="explication"><:seminaire:type_evenement:></p>
+				<select name="id_mot" id="id_mot">
+					<option></option>
+					<BOUCLE_mots2(MOTS){id_groupe}>
+					<option value="#ID_MOT"[(#ID_MOT|=={#ENV{id_mot}}|?{' selected="selected"',''})]>#TITRE</option>
+					</BOUCLE_mots2>
+				</select>
+			</li>
+			</BOUCLE_groupe2>
+		</BOUCLE_si_seminaire>
+		<li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
 				<ul>
 					<li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
@@ -57,8 +59,8 @@
 						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
 					</li>
 				</ul>
-	    </fieldset></li>
-	    	<li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
+		</fieldset></li>
+			<li class="editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
 				(#ENV{repetitions}|non)<a href='#' onclick="$(this).hide().next().show('fast');return false;"><:agenda:ajouter_repetition:></a>
 				<div class='ajouter_repetitions none'>][
@@ -67,17 +69,16 @@
 				<textarea name='repetitions' id='repetitions' readonly="readonly">#ENV{repetitions}</textarea>[
 				(#ENV{repetitions}|non)</div>]
 			</li>
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-	   		<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:seminaire:abstract:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
-	    	</li>
-	    [
-		(#ENV{affiche_inscription,oui}|=={oui}|oui)
-	    <li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
-		    <div class='choix inscription'>
+			</li>
+			[(#ENV{affiche_inscription,oui}|=={oui}|oui)
+			<li class="editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
+			<div class='choix inscription'>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inscription})</span>]
 					<input type='checkbox' class='checkbox' name='inscription' id='inscription' value="1"[ (#ENV{inscription}|oui)checked="checked"] />
 					<label for="inscription"><:agenda:label_inscription:></label>
@@ -86,19 +87,19 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>
 				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
 				</div>
-	    </li>]
-	    <li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+			</li>]
+			<li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 				<label for="lieu"><:agenda:evenement_lieu:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
 				]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
-	    </li>
-	    <li class="editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+			</li>
+			<li class="editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
 				<label for="adresse"><:agenda:evenement_adresse:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
-	    </li>
-	  </ul>
-	  <p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+			</li>
+		</ul>
+		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
 	#INCLURE{fond=formulaires/dateur/inc-dateur}
 

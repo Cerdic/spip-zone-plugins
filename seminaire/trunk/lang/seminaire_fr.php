@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_groupe_mot_categorie' =>		'Mots sur les articles de séminaires',
 	'label_groupe_mot_type'		 =>		'Mots sur les évènements de séminaires',
 	'label_prodid'				 =>		'PRODID pour le calendrier (moins de 50 caractères)',
+	'label_seminaire'			 =>		'Séminaire ?',
 	'lien_tout_replier'			 =>		'Sans résumé',
 	'lien_tout_deplier'			 =>		'Avec résumé',
 	'lieu'						 =>		'Lieu',
