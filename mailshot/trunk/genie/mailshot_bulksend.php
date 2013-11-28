@@ -72,6 +72,8 @@ function genie_mailshot_bulksend_dist($t){
 			return -($t-$periode);
 	}
 	else {
+		if (!function_exists("mailshot_update_meta_processing"))
+			include_spip("inc/mailshot");
 		mailshot_update_meta_processing();
 	}
 	return 0;
