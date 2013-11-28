@@ -134,7 +134,7 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 
 
 	$id_evenement = $res['id_evenement'];
-	if ($res['redirect']) {
+	if ($res['redirect']){
 		if (strpos($res['redirect'],'article')!==false){
 			$id_article = sql_getfetsel('id_article','spip_evenements','id_evenement='.intval($id_evenement));
 			$res['redirect'] = parametre_url($res['redirect'],'id_article',$id_article);

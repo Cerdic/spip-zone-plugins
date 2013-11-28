@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Séminaire LATP
- * (c) 2012 Amaury Adon
+ * Plugin Séminaires
  * Licence GNU/GPL
+ * 
+ * @package SPIP\Seminaires\Administration
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
@@ -85,7 +85,7 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 						array('sql_update',"spip_evenements", array('attendee'=>'name')),
 						array('sql_alter',"TABLE spip_evenements DROP name")
 					);
-					
+
 	$maj['1.0.2'] = array(
 						array('sql_alter',"TABLE spip_evenements ADD id_mot integer NOT NULL"),
 					);

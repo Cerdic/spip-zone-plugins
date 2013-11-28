@@ -20,7 +20,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 			</li>
-	  	<li class='editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
+		<li class='editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
 	    	<label for="id_parent"><:agenda:evenement_article:></label>[
 	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>

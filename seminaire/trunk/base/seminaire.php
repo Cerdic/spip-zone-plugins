@@ -1,6 +1,24 @@
 <?php
+/**
+ * Plugin Séminaires
+ * 
+ * @package SPIP\Seminaires\Pipelines
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion dans le pipeline declarer_champs_extras (Plugin Champs Extras)
+ * 
+ * On ajoute trois champs à la table spip_evenements :
+ * -* attendee
+ * -* origin
+ * -* notes
+ * 
+ * @param array $champs
+ * 	La liste des champs extras
+ * @return array $champs
+ * 	La liste des champs extras complétés
+ */
 function seminaire_declarer_champs_extras($champs = array()){
 	$champs['spip_evenements']['attendee'] = array(
 		'saisie' => 'input',// type de saisie
