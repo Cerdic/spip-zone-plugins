@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nombre_attente' => 'Número máximo en espera',
 	'label_polyhier' => 'Polijerarquía',
 	'label_polyhier_desactiver' => 'Desactivar la polijerarquía',
+	'label_rubrique_par_defaut' => 'Publicar por omisión en la sección',
 	'label_statut_auteur' => 'Estatus mínimo de los autores',
 	'label_statut_auteur_publier' => 'Estatus mínimo de los autores que pueden publicar de forma definitiva',
 	'label_workflow_simplifie' => 'Gestión simplificada del workflow de publicación',
