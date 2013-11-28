@@ -13,7 +13,7 @@
 	<BOUCLE_document(DOCUMENTS){id_campagne}{0,1}{tout}>
 	<a href="#GET{url_action}" title="#_campagne:TITRE" target="_blank" style="position:relative; display:block; width:[(#_encart:LARGEUR)px]; height:[(#_encart:HAUTEUR)px];">
 	[(#EXTENSION|in_array{#LISTE{jpg,gif,png}}|oui)
-		<img src="[(#URL_DOCUMENT|image_reduire{#_encart:LARGEUR,#_encart:HAUTEUR}|extraire_attribut{src})]" border="0" alt="#_campagne:TITRE" />
+		<img src="[(#URL_DOCUMENT|image_reduire{#_encart:LARGEUR,#_encart:HAUTEUR}|extraire_attribut{src})]" border="0" alt="#_campagne:TITRE" width="#LARGEUR" height="#HAUTEUR" />
 	]
 
 	[(#EXTENSION|=={swf}|oui)
