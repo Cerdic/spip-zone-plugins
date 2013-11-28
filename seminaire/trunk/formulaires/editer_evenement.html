@@ -2,11 +2,6 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
-
-<BOUCLE_recup_id_mot(spip_mots_liens){id_objet=#ID_EVENEMENT}{objet=evenement}>
-	#SET{id_mot_recupere,#ID_MOT}
-</BOUCLE_recup_id_mot>
-
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -14,33 +9,31 @@
 		<input type='hidden' name='id_evenement' value='#ID_EVENEMENT' />
 		<input type='hidden' name='id_parent' value='#ENV{id_parent}' />
 
-	  <ul>
+		<ul>
 			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:agenda:evenement_titre:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 			</li>
 		<li class='editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
-	    	<label for="id_parent"><:agenda:evenement_article:></label>[
-	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
-	    	]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
+			<label for="id_parent"><:agenda:evenement_article:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+			]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
 	  	</li>
 
-	  	<li class='editer_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]'>
-	  		<label for="id_mot"><:seminaire:choix_mot:></label>[
-	    	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>
-	    	]
-	  		<p class="explication"><:seminaire:type_evenement:></p>
-	  		<select name="id_mot" id="id_mot">
-	  			<option></option>
-	  		<BOUCLE_groupe2(GROUPES_MOTS){titre=Type}>
+		<BOUCLE_groupe2(GROUPES_MOTS){id_groupe=#CONFIG{seminaire/groupe_mot_type}}>
+		<li class='editer_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_mot}|oui)erreur]'>
+			<label for="id_mot">#TITRE</label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_mot})</span>]
+			<p class="explication"><:seminaire:type_evenement:></p>
+			<select name="id_mot" id="id_mot">
+				<option></option>
 				<BOUCLE_mots2(MOTS){id_groupe}>
-				<option value="#ID_MOT" [(#ID_MOT|=={#GET{id_mot_recupere}}|?{' selected="selected"',''})]>#TITRE</option>
-				</BOUCLE_mots2>	
-	  		</BOUCLE_groupe2>	
-	  		</select>
-	  	</li>
-
+				<option value="#ID_MOT"[(#ID_MOT|=={#ENV{id_mot}}|?{' selected="selected"',''})]>#TITRE</option>
+				</BOUCLE_mots2>
+			</select>
+		</li>
+		</BOUCLE_groupe2>
 	    <li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
 				<ul>
 					<li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">

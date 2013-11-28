@@ -7,14 +7,23 @@
 
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
-	<div>
-	<ul>
-		#SAISIE{input, prodid, label=PRODID pour le calendrier (moins de 50 caractères), obligatoire=oui}	
+		<div>
+			<ul>
+				[(#SAISIE{input, prodid,
+					label=<:seminaire:label_prodid:>,
+					obligatoire=oui})]
+				[(#SAISIE{groupe_mots,groupe_mot_type,
+					label=<:seminaire:label_groupe_mot_type:>,
+					table_liaison=evenements,
+					obligatoire=oui})]
+				[(#SAISIE{groupe_mots,groupe_mot_categorie,
+					label=<:seminaire:label_groupe_mot_categorie:>,
+					table_liaison=articles,
+					obligatoire=oui})]
+			</ul>
 	
-	</ul>
-
-		<input type="hidden" name="_meta_casier" value="seminaire" />
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-	</div>
+			<input type="hidden" name="_meta_casier" value="seminaire" />
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
 	</form>
 </div>

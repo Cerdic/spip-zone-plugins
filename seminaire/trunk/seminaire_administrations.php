@@ -9,7 +9,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Fonction d'installation du plugin et de mise à jour.
-**/
+ * 
+ * On crée deux groupes de mots, un utilisé sur les évènements, un autres sur les articles séminaires
+ * On ajoute trois champs à la table spip_evenements
+ * 
+ * @param string $nom_meta_base_version
+ * 	Le nom de la meta d'installation
+ * @param float $version_cible
+ * 	Le numero de version de la base
+ */
 function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 
 	include_spip('inc/cextras');
@@ -18,62 +26,13 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 
 	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['create']);
 
-	/**
-	 * Activer les mots clés et leur configuration avancée s'ils ne le sont pas déjà
-	 */
-	if ($GLOBALS['meta']['articles_mots']!=oui){
-		ecrire_meta("articles_mots", "oui");
-		ecrire_meta("config_precise_groupes", "oui");
-		ecrire_meta("documents_objets", "spip_evenements");	
-	}
-	
-	
-	/**
-	 * Activer les révisions sur les événements
-	 */
-	// ce qui existe déjà
-	$versions = unserialize($GLOBALS['meta']['objets_versions']);
-	// ce que j'ajoute
-	$versionnage_des_evenements = array('spip_evenements');
-	// merge des 2
-	$versions = array_merge($versions,$versionnage_des_evenements);
-	// balançons dans meta
-	ecrire_meta('objets_versions',serialize($versions));
-
-	/**
-	 * Creer le groupe de mots clés Type pour les types d'événements
-	 */
-	if (sql_countsel('spip_mots', "titre IN ('seminaire','groupe de travail','evenement important')") == 0){
-		$id_groupe = sql_insertq('spip_groupes_mots', 
-									array('titre'=>'Type', 'descriptif'=>_T('seminaire:mots_cles_techniques_kitcnrs'),'tables_liees'=>'evenements', 'minirezo'=>'oui','comite'=>'oui')
-								);
-		if (sql_error() != '') die((_T('seminaire:erreur_install_groupe_technique')).sql_error());
-			$Tstatuts = array('séminaire','groupe de travail','événement important');
-		foreach ($Tstatuts as $st) {
-			sql_insertq('spip_mots', 
-							array('titre'=>$st, 'descriptif'=>$st, 'id_groupe'=>$id_groupe, 'type'=>'Type')
-						);
-			if (sql_error() != '') $Terreur[] = (_T('erreur_creation_mot_cle')).$st.': '.sql_error();
-		};
-	};
-
-	/** 
-	 * Création du groupe de mots clés Catégorie et de ses mots cles pours les équipes 
-	 */
-	if (sql_countsel('spip_mots', "titre IN ('Algèbre, Dynamique et Topologie','Analyse Appliquée', 'Analyse et Géométrie', 'FRUMAM', 'Géométrie et Singularités', 'Guide d’ondes et milieux stratiﬁés', 'Probabilités et statistiques', 'Séminaire des doctorants', 'Théorie des nombres')") == 0){
-		$id_groupe = sql_insertq('spip_groupes_mots',array('titre'=>'Catégorie', 'descriptif'=> _T('seminaire:mots_cles_categories'), 'tables_liees'=>'articles', 'minirezo'=>'oui','comite'=>'oui'));
-		if (sql_error() != '') die((_T('seminaire:erreur_install_groupe_coordonnees')).sql_error());
-		$Tstatuts = array('Algèbre, Dynamique et Topologie','Analyse Appliquée', 'Analyse et Géométrie', 'FRUMAM', 'Géométrie et Singularités', 'Guide d’ondes et milieux stratiﬁés', 'Probabilités et statistiques', 'Séminaire des doctorants', 'Théorie des nombres');
-		foreach ($Tstatuts as $st) {
-			sql_insertq('spip_mots',array('titre'=>$st, 'id_groupe'=>$id_groupe, 'type'=>'Catégorie'));
-			if (sql_error() != '') $Terreurs[] = (_T('erreur_creation_mot_cle')).$st.': '.sql_error();
-		}
-	}
-
 	$maj = array();
-	
-	$maj['create']= array(array('maj_tables',array('spip_evenements')));
-	
+
+	$maj['create']= array(
+						array('maj_tables',array('spip_evenements')),
+						array('seminaire_pre_configuration',array()),
+						array('seminaire_creation_groupes',array())
+					);
 	/**
 	 * Copie de abstract vers descriptif
 	 * on change name en attendee
@@ -97,7 +56,76 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+function seminaire_pre_configuration(){
+	include_spip('inc/config');
+	/**
+	 * Activer les mots clés et leur configuration avancée s'ils ne le sont pas déjà
+	 */
+	ecrire_config("articles_mots", "oui");
+	ecrire_config("config_precise_groupes", "oui");
+	/**
+	 * Ajouter la prise en compte des documents sur les évènements
+	 */
+	$documents_objets = explode(',',lire_config('documents_objets'));
+	if(!in_array('spip_evenements', $documents_objets)){
+		$documents_objets[] = 'spip_evenements';
+		ecrire_config('documents_objets',implode(',',$documents_objets));
+	}
+	
+	/**
+	 * Activer les révisions sur les événements
+	 */
+	$versions = lire_config('objets_versions');
+	if(!in_array('spip_evenements',$versions)){
+		$versions[] = 'spip_evenements';
+		ecrire_config('objets_versions',$versions);
+	}
+}
 
+function seminaire_creation_groupes(){
+
+	include_spip('action/editer_groupe_mots');
+	include_spip('action/editer_mot');
+	include_spip('inc/config');
+
+	$conf_seminaire = lire_config('seminaire',array());
+	
+	/**
+	 * Creer le groupe de mots clés Type pour les types d'événements
+	 */
+	if (!($id_groupe = lire_config('seminaire/groupe_type_seminaire'))){
+		$id_groupe_type = groupemots_inserer('evenements');
+		if(is_numeric($id_groupe_type)){
+			$infos_groupe_type = array('titre'=>'Type de séminaire', 'descriptif'=>_T('seminaire:mots_cles_techniques_kitcnrs'),'unseul' => 'oui', 'minirezo'=>'oui','comite'=>'oui');
+			$modif_groupe_type = groupemots_modifier($id_groupe_type, $infos_groupe_type);
+			$conf_seminaire['groupe_mot_type'] = $id_groupe_type;
+		}else
+			die((_T('seminaire:erreur_install_groupe_technique')));
+		
+		$types_statuts = array('Séminaire','Groupe de travail','Événement important');
+		foreach ($types_statuts as $type) {
+			$id_mot = mot_inserer($id_groupe_type);
+			if(is_numeric($id_mot)){
+				$modif_mot = array('titre'=>$type);
+				mot_modifier($id_mot,$modif_mot);
+			}
+		}
+	}
+
+	/** 
+	 * Création du groupe de mots clés Catégorie 
+	 */
+	if (!($id_groupe = lire_config('seminaire/groupe_categorie_seminaire'))){
+		$id_groupe_categorie = groupemots_inserer('articles');
+		if(is_numeric($id_groupe_categorie)){
+			$infos_groupe_categorie = array('titre'=>'Catégorie de séminaire', 'descriptif'=>_T('seminaire:mots_cles_categories'), 'unseul' => 'oui','minirezo'=>'oui','comite'=>'oui');
+			$modif_groupe_categorie = groupemots_modifier($id_groupe_categorie, $infos_groupe_categorie);
+			$conf_seminaire['groupe_mot_categorie'] = $id_groupe_categorie;
+		}
+	}
+	
+	ecrire_config('seminaire',$conf_seminaire);
+}
 /**
  * Fonction de désinstallation du plugin.
  */

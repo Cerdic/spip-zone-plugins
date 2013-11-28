@@ -17,11 +17,15 @@
 	<necessite nom="agenda" compatibilite="[3.5.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 	<necessite nom="mots" />
+	<necessite nom="saisies" />
 	<utilise nom="revisions" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="seminaire_pipelines.php" />
 	<pipeline nom="post_insertion" action="post_insertion" inclure="seminaire_pipelines.php" />
+	<pipeline nom="formulaire_charger" action="formulaire_charger" inclure="seminaire_pipelines.php" />
+	<pipeline nom="formulaire_verifier" action="formulaire_verifier" inclure="seminaire_pipelines.php" />
+	<pipeline nom="formulaire_traiter" action="formulaire_traiter" inclure="seminaire_pipelines.php" />
 
 	<menu nom="configurer_seminaire" titre="seminaire:titre_page_configurer_seminaire" parent="menu_squelette" icone="images/seminaire-16.png" />
 </paquet>
