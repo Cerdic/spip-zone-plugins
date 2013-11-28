@@ -1,0 +1,134 @@
+<BOUCLE_compte(EVENEMENTS){id_article}{0,1}>[(#REM)pour vérifier qu'un événment est bein associé à l'article]
+</BOUCLE_compte>
+ <div id="seminaire">
+<BOUCLE_seminaire(ARTICLES){id_article}>
+[(#REM) Se placer au debut du mois en cours par defaut]
+#SET{date_debut,#VAL{Y-m-}|date|concat{01}}
+<BOUCLE_un(EVENEMENTS){id_evenement}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}>
+[(#REM) Si un evenement passe, on commence par le jour de cet evenement]
+#SET{date_debut,#DATE_DEBUT|affdate{Y-m-d}}
+</BOUCLE_un>
+	#SET{date_debut,#ENV{date}|affdate{Y-m-d}}
+	#SET{date_debut,#ENV{date_debut,#GET{date_debut}}}
+<//B_un>
+
+#SET{self,#SELF|parametre_url{date_debut|id_evenement|debut_agenda,''}}#SET{yena,''}
+<h2><:agenda:agenda:></h2>
+<B_mots>
+<div class='pagination'>
+<div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+[(#GET{self}|parametre_url{date_debut,1900-01-01}|lien_ou_expose{<:seminaire:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+[(#GET{self}|parametre_url{date_debut,#ENV{date}|affdate{Y-m-d}}|lien_ou_expose{<:agenda:evenements_a_venir:>,#GET{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
+</div>
+
+<BOUCLE_mots(MOTS){type=Type}>
+<B_agenda>
+<h3>[(#DESCRIPTIF|attribut_html)]</h3>
+<ul class='liste_items evenements'>
+	<BOUCLE_agenda(EVENEMENTS){par date_debut}{!evenement_passe #GET{date_debut}}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
+		<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+			[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
+		</li>
+		<hr>
+	</BOUCLE_agenda>
+	[<p class='pagination'>(#PAGINATION{page})</p>]
+</ul>
+</B_agenda>
+
+</BOUCLE_mots>
+
+<div class='espace'></div>
+
+<span class="bouton">[(#REM)bouton de création d'événement]
+<a href="#URL_ECRIRE{evenement_edit,id_evenement=new&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+</span>
+
+<a class="google" href="http://www.google.com/calendar/render?cid=#URL_SITE_SPIP/%3Fpage%3Dseminaire_ical%26id_article%3D#ID_ARTICLE" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>
+<a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
+<div class='espace'></div>
+
+<script type="text/javascript" src="#CHEMIN{javascript/toggle.js}"></script>
+
+</BOUCLE_seminaire>
+
+<style type="text/css">
+.plier_deplier {
+float: right;
+font-size: 0.9em;
+}
+.resume {
+cursor: help;
+}
+.date {
+color: #5d8ba2;
+}
+#seminaire ul {
+margin: 5px 0px 5px 0px;
+list-style-position: inside;
+list-style-type: none !important;
+list-style-image: none !important;
+}
+.evenements li.item {
+padding-left: 20px;
+}
+.evenements li.item:hover {
+background: 
+#edf3fe;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+.bouton {
+background: 
+silver;
+color: 
+black;
+-webkit-box-shadow: 3px 3px 3px #888;
+-moz-box-shadow: 3px 3px 3px #888;
+box-shadow: 3px 3px 3px #888;
+padding: .3em .5em;
+margin-top: 10px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+.bouton:hover {
+background: 
+#B1C3D9;
+-webkit-box-shadow: 5px 5px 5px #888;
+-moz-box-shadow: 5px 5px 5px #888;
+box-shadow: 5px 5px 5px #888;
+}
+.bouton:active {
+background: 
+#808080;
+-webkit-box-shadow: 1px 1px 1px #888;
+-moz-box-shadow: 1px 1px 1px #888;
+box-shadow: 1px 1px 1px #888;
+}
+.bouton a {
+text-decoration: none;
+color: 
+#2E5B6B;
+}
+a.google {
+float: right;
+margin-right: 5px;
+}
+a.ical {
+float: right;
+width: 45px;
+text-decoration: none;
+text-align: center;
+}
+a.ical img {
+border: 0;
+width: 100%;
+margin-bottom: -28px;
+}
+</style>
+
+
+
+</div><!--fin du bloc seminaire-->
+</B_compte>

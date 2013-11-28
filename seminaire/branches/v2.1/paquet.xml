@@ -1,0 +1,24 @@
+<paquet
+	prefix="seminaire"
+	categorie="date"
+	version="2.1.9"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/seminaire-64.png"
+	documentation="http://www.spip-contrib.net/?article4288"
+	schema="1.0.3" 
+>
+	<nom>Séminaire</nom>
+
+	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury Adon</auteur>
+
+	<licence>GNU/GPL</licence>
+		<necessite nom="agenda" compatibilite="[3.5.1;]" />
+		<necessite nom="cextras" compatibilite="[3.0.5;[" />
+		<utilise nom="Z" compatibilite="[1.7.17;]" />
+		<utilise nom="kitcnrs" compatibilite="[4.0.10;]" />
+		<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
+		<pipeline nom="insert_head_css" action="insert_head_css" inclure="seminaire_pipelines.php" />
+		<pipeline nom="post_insertion" action="post_insertion" inclure="seminaire_pipelines.php" />
+
+</paquet>

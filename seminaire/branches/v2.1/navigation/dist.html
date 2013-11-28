@@ -1,0 +1,8 @@
+[(#REM) Menu de navigation par rubriques ]
+<INCLURE{fond=inclure/rubriques}{id_rubrique}>
+
+#FORMULAIRE_RECHERCHE
+<h2 class="menu-titre"><a href="[(#URL_PAGE{calendrier}|parametre_url{date_debut,#DATE|affdate{Y-m-01}})]"><:seminaire:titre_agenda:></a></h2>
+#CALENDRIER_MINI{#ENV{date},'date',#URL_PAGE{jour},#URL_PAGE{calendrier_mini_event.json}}
+[(#REM)connexion-->]
+#MODELE{connexion}
