@@ -1,7 +1,7 @@
 <paquet
 	prefix="doc_tech"
 	categorie="outil"
-	version="0.3.0"
+	version="0.3.3"
 	etat="dev"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/doc_tech-24.png"
@@ -17,7 +17,8 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="autoriser" inclure="doc_tech_autorisations.php" /> 
+	<pipeline nom="header_prive" inclure="doc_tech_pipelines.php" /> 
 
-	<menu parent="menu_administration" icone="prive/themes/spip/images/doc_tech-16.png" titre="doc_tech:doc_tech_titre" nom="doc_tech" action="doc_tech" />
+	<menu parent="menu_administration" icone="images/doc_tech-16.png" titre="doc_tech:doc_tech_titre" nom="doc_tech" action="doc_tech" />
 
 </paquet>

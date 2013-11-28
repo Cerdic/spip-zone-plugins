@@ -1,4 +1,8 @@
-.doc_tech_lang textarea {
+.doc_tech_lang #contenu textarea {
 	width:100%;
 	height:400px;
+}
+.doc_tech_lang #contenu .formulaire_spip,
+.doc_tech #contenu .formulaire_spip {
+	border: 0;
 }

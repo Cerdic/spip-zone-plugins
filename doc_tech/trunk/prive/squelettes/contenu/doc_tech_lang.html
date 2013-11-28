@@ -8,7 +8,7 @@
 [(#ENV{objets}|match{','}|non)
 #SET{tables, #LISTE{#ENV{objets}}}
 ]
-<form action='#SELF' method='get'>
+<form action='#SELF' method='get' class="formulaire_spip">
 	[(#SELF|parametre_url{objets,''}|form_hidden)]
 	<label>Vos objets :</label>
 	<input type='text' name='objets' value='#ENV{objets}' />

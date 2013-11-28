@@ -1,14 +1,20 @@
+[(#ENV{objets}|match{','}|oui)
+#SET{tables, #ENV{objets}|explode{','}}
+]
+[(#ENV{objets}|match{','}|non)
+#SET{tables, #LISTE{#ENV{objets}}}
+]
 <B_tables>
-<BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
+[(#BOITE_OUVRIR{<:doc_tech:sommaire:>,'simple','titrem'})]
+<BOUCLE_tables(DATA) {source table, #GET{tables}} {si #SESSION{webmestre}|=={oui}}>
 #SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
 	<B_info_table>
-	<:doc_tech:sommaire:>
 	<ul class="menu-liste menu-items">
 		<BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
 		<li class="menu-entree item"><a href="[#(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</a>
 			<B_label>
 			<ul class="menu-liste menu-items">
-				<BOUCLE_label(DATA) {source table, #VALEUR}>
+				<BOUCLE_label(DATA) {source table, #VALEUR}{par cle}>
 				<li class="menu-item item"><a href="[#(#_tables:GET{spip_table}|attribut_html)_][(#CLE|attribut_html)]">#CLE</a></li>
 				</BOUCLE_label>
 			</ul>
@@ -20,5 +26,6 @@
 
 	<//B_info_table>
 </BOUCLE_tables>
+	[(#BOITE_FERMER)]
 </B_tables>
 <//B_tables>
