@@ -60,7 +60,7 @@ function seminaire_formulaire_charger($flux){
  */
 function seminaire_formulaire_verifier($flux){
 	if(isset($flux['args']['form']) && $flux['args']['form'] == 'editer_evenement'){
-		if(!_request('id_mot'))
+		if(!_request('id_mot') && _request('seminaire'))
 			$flux['data']['id_mot'] = _T('seminaire:mot_obligatoire');
 	}
 	return $flux;
@@ -79,12 +79,12 @@ function seminaire_formulaire_verifier($flux){
 function seminaire_formulaire_traiter($flux){
 	if(isset($flux['args']['form']) && $flux['args']['form'] == 'editer_evenement'){
 		if(($id_mot = _request('id_mot')) && ($id_evenement = $flux['data']['id_evenement'])){
-			$id_mot_origine = sql_getfetsel('lien.id_mot','spip_mots_liens as lien LEFT JOIN spip_mots as mots ON lien.id_mot=mots.id_mot LEFT JOIN spip_groupes_mots as groupe ON mots.id_groupe=groupe.id_groupe','lien.objet='.sql_quote('evenement').' AND groupe.id_groupe='.intval(lire_config('seminaire/groupe_mot_type')));
-			if($id_mot_origine != $id_mot){
+			$id_mot_origine = sql_getfetsel('lien.id_mot','spip_mots_liens as lien LEFT JOIN spip_mots as mots ON lien.id_mot=mots.id_mot LEFT JOIN spip_groupes_mots as groupe ON mots.id_groupe=groupe.id_groupe','lien.objet='.sql_quote('evenement').' AND groupe.id_groupe='.intval(lire_config('seminaire/groupe_mot_type')).' AND lien.id_objet='.intval($id_evenement));
+			if(!$id_mot_origine || $id_mot_origine != $id_mot){
 				include_spip('action/editer_liens');
 				if($id_mot_origine)
 					objet_dissocier(array('mot'=>$id_mot_origine),array('evenement'=>$id_evenement));
-				objet_associer(array('mot'=>$id_mot),array('evenement'=>$id_evenement), $qualif = null);
+				objet_associer(array('mot'=>$id_mot),array('evenement'=>$id_evenement));
 			}
 		}
 	}

@@ -19,7 +19,6 @@ function seminaire_article_est_seminaire($objet, $id) {
 	else if($id_article = _request('id_article'))
 		$seminaire = sql_getfetsel('seminaire','spip_articles','id_article='.intval($id_article));
 
-	spip_log("$id_article - $seminaire",'test.'._LOG_ERREUR);
 	return ($seminaire == 'on');
 }
 
