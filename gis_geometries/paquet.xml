@@ -1,7 +1,7 @@
 <paquet
 	prefix="gisgeom"
 	categorie="divers"
-	version="1.3.2"
+	version="1.4.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
@@ -27,7 +27,6 @@
 	<pipeline nom="post_edition" inclure="gisgeom_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="gisgeom_pipelines.php" />
 
-	<necessite nom="gis" compatibilite="[4.9.0;[" />
+	<necessite nom="gis" compatibilite="[4.12.1;[" />
 	<lib nom="geoPHP-1.1" lien="https://github.com/phayes/geoPHP/archive/1.1.zip" />
-	<lib nom="Leaflet.draw-master" lien="https://github.com/Leaflet/Leaflet.draw/archive/master.zip" />
 </paquet>
