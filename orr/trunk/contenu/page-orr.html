@@ -35,7 +35,7 @@
 			&nbsp;<span class="annee_ico suivant"><img src="#CHEMIN{img/suivant_12.png}"  alt="<:orr:annee_suivante:>" title="<:orr:annee_suivante:>" /></span>
 		</div>
 		<div id="tableau_mois">
-			<INCLURE{fond=inc/affichage_mois,ajax=tableau}>
+			<INCLURE{fond=inc/affichage_mois,ajax=tableau,env}>
 		</div>
 	</div>
 </div>
@@ -120,5 +120,6 @@ jQuery(document).ready(function(){
 	});
 	jQuery("#tous").click(function(){ jQuery("#motscles option").attr("selected", "selected"); });
 	jQuery("#aucun").click(function(){ jQuery("#motscles option").removeAttr("selected"); });
+
 });
 </script>

@@ -14,11 +14,12 @@
 .ui-tpicker-grid-label { width: 154px ; margin-left: -20% ; }
 
 /* Formulaire réservation */
-#poubelle {  float:right; padding-right:30px; }
-.poubelle_visible, .ressource_visible { display:auto; }
-.poubelle_cache, .ressource_cachee { display:none; }
+#poubelle {  float:right; padding-right: 10px; }
+.ressource_visible { display:auto; }
+.ressource_cachee { display:none; }
 .orr_stylo { float:left; }
 h1.box_resa { background-color: #DDD; }
+.formulaire_reserv li label { font-weight: bold; }
 
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }
@@ -31,6 +32,7 @@ h1.box_resa { background-color: #DDD; }
 .milieu { border-top : 1px solid red ; border-bottom : 1px solid red ; margin-bottom : 0.5em ;}
 .dernier { border-top : 1px solid red ; border-bottom : 1px solid red ; border-right : 1px solid red ; margin-bottom : 0.5em ;}
 .unique { margin-bottom : 0.5em ;}
+
 /* Affichage semaine */
 #tableau_semaine th { padding : 0.5em 1em; }
 
@@ -62,4 +64,10 @@ h1.box_resa { background-color: #DDD; }
 
 /* date-picker 
 #datepickers { font-size: 0.9em; }
-*/
+
+
+/* mediabox pour le form de résa */
+#cboxTitle, #cboxCurrent, #cboxNext, #cboxPrevious, #cboxSlideshow { display: none !important; }
+
+/* timepicker dans la mediabox de resa */
+.ui-timepicker-div dl dd { margin-top: 15px; }

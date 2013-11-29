@@ -25,7 +25,10 @@
 				<INCLURE{fond=inc/affichage_champs_extra}{id_resa=#ID_ORR_RESERVATION}>]
 			</span>
 			[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}}) 
-				<a href="[(#URL_PAGE{formulaire_reservation}|parametre_url{'id_reservation',#ID_ORR_RESERVATION}|parametre_url{'id_ressource',#ENV{idressource}}|parametre_url{'date_debut',#ORR_DATE_DEBUT}|parametre_url{'date_fin',#ORR_DATE_FIN})]" class="mediabox">
+				<a href="[(#URL_PAGE{formulaire_reservation}
+					|parametre_url{'id_reservation',#ID_ORR_RESERVATION}
+					|parametre_url{'id_ressource',#ENV{idressource}}
+					|parametre_url{jourj,#ENV{jourj}})]" class="mediabox lien_reserver">
 				<img class="orr_stylo" src="#CHEMIN{img/crayon-16.png}" alt="orr_stylo" /></a>
 			]
 			#ORR_RESERVATION_NOM 

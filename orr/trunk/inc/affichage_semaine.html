@@ -26,9 +26,12 @@
 				<BOUCLE_ligne(DATA){liste lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche}{si #AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE}}>
 					<td id="jour#COMPTEUR_BOUCLE">[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE})
 						<a id="touche_#VALEUR_#ID_ORR_RESSOURCE" 
-							href="[(#URL_PAGE{formulaire_reservation}|parametre_url{id_ressource,#ID_ORR_RESSOURCE}|parametre_url{ma_date,#GET{#VALEUR}})]" 
-							class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
-						<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE,jour=#GET{#VALEUR}} />
+							href="[(#URL_PAGE{formulaire_reservation}
+								|parametre_url{id_ressource,#ID_ORR_RESSOURCE}
+								|parametre_url{ma_date,#GET{#VALEUR}}
+								|parametre_url{jourj,#ENV{jourj}})]" 
+							class="mediabox lien_reserver"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
+						<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{#VALEUR}, jourj=#ENV{jourj}} />
 					</td>
 				</BOUCLE_ligne>
 			</tr>

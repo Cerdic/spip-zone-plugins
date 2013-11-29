@@ -1,3 +1,4 @@
-<p>Voulez-vous supprimer la réservation : <br/>
-<em>#INFO_ORR_RESERVATION_NOM{orr_reservations,#ENV{idresa}}</em></p> <br/>
-<div class="ajax">#FORMULAIRE_VIDERESA{#ENV{idresa},#ENV{date_debut}}</div>
+<h1 class="box_resa"><:orr:supprimer:></h1>
+<div><:orr:supprimer_resa:><br/>
+<strong>#INFO_ORR_RESERVATION_NOM{orr_reservations,#ENV{idresa}}</strong>?</div>
+<div class="ajax">#FORMULAIRE_VIDERESA{#ENV{idresa},#ENV{id_ressource},#ENV{jour_aff}}</div>

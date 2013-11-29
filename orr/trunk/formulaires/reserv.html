@@ -1,23 +1,27 @@
 <div class="formulaire_spip formulaire_#FORM">
-
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-    [(#ENV{editable}|oui)
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-
-            [(#SAISIE{selection_multiple,liste_ressources}
-                {cacher_option_intro=true}
-                {size=4}
-                {label=<:orr:liste_ressources:>}
-                {defaut=#ENV{ressource_semaine}}
-                {datas=#ENV{Tressources}})]
-		    <span id="ctrl_clic">(<:orr:ctrl_clic:>)</span><br />
-
+            
+            [(#REM) pour les ressources on n'affiche que celles autorisées donc pas de SAISIE ]
+            <B_ressources>
+			<li class="editer editer_liste_ressources saisie_selection_multiple">
+				<label for="champ_liste_ressources"><:orr:liste_ressources:></label>
+				<select size="4" multiple="multiple" id="champ_liste_ressources" name="liste_ressources[]">
+            <BOUCLE_ressources(ORR_RESSOURCES){par orr_ressource_nom}{si !#ENV{id_reservation}}>
+				[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
+				<option value="#ID_ORR_RESSOURCE"[ (#ID_ORR_RESSOURCE|=={#ENV{id_ressource}}|oui)selected="selected"]>#ORR_RESSOURCE_NOM</option>]
+            </BOUCLE_ressources>
+				</select>
+				<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
+            </li>
+            </B_ressources>
+            
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
                 {class=datepicker})]
@@ -26,57 +30,59 @@
                 {label=<:orr:date_de_fin:>}
                 {class=datepicker})]
 
-			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) <INCLURE{fond=inc/formulaire_reservation_champs_extra}{env}>]
+			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) 
+				<INCLURE{fond=inc/formulaire_reservation_champs_extra}{env}>]
 		</ul>
 		<p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div></form>
-    ]
 </div>
 
-<script>
+<script type="text/javascript">
     jQuery(function(){
-        jQuery('.datepicker').datetimepicker({
-            timeFormat: 'hh:mm:ss',
-            stepHour: 1,
-            stepMinute: 15,
-            minuteGrid:15,
-            hourGrid:4,
-            addSliderAccess: true,
+		jQuery('#champ_date_debut').datetimepicker({
+			timeFormat: 'hh:mm:ss',
+			stepHour: 1,
+			stepMinute: 15,
+			minuteGrid:15,
+			hourGrid:4,
+			addSliderAccess: true,
 			sliderAccessArgs: { touchonly: false },
 			onClose: function(dateText, inst) {
-				var endDateTextBox = $('#champ_date_fin');
-				if (endDateTextBox.val() != '') {
-					var testStartDate = new Date(dateText);
-					var testEndDate = new Date(endDateTextBox.val());
-					if (testStartDate > testEndDate)
-					endDateTextBox.val(dateText);
+				if (jQuery('#champ_date_fin').val() != '') {
+					var date_debut = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
+					var date_fin = jQuery('#champ_date_fin').val();
+					date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_fin));
+					if (date_debut > date_fin)
+						jQuery('#champ_date_fin').val(dateText);
 				}
 				else {
-					endDateTextBox.val(dateText);
+					jQuery('#champ_date_fin').val(dateText);
 				}
-			},
-			onSelect: function (selectedDateTime){
-				var start = $(this).datetimepicker('getDate');
-				$('#champ_date_fin').datetimepicker('option', 'minDate', new Date(start.getTime()));
+				jQuery('#champ_date_fin').datetimepicker('option', 'minDate', date_debut);
 			}
-            });
-         jQuery('#champ_date_fin').datetimepicker({
+		});
+        jQuery('#champ_date_fin').datetimepicker({
+			timeFormat: 'hh:mm:ss',
+			stepHour: 1,
+			stepMinute: 15,
+			minuteGrid:15,
+			hourGrid:4,
+			addSliderAccess: true,
+			sliderAccessArgs: { touchonly: false },
 			onClose: function(dateText, inst) {
-				var startDateTextBox = $('#champ_date_debut');
-				if (startDateTextBox.val() != '') {
-					var testStartDate = new Date(startDateTextBox.val());
-					var testEndDate = new Date(dateText);
-					if (testStartDate > testEndDate)
-						startDateTextBox.val(dateText);
+				if (jQuery('#champ_date_debut').val() != '') {
+					var date_debut =jQuery('#champ_date_debut').val();
+					date_debut =  new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_debut));
+					var date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
+					if (date_debut > date_fin)
+						jQuery('#champ_date_debut').val(dateText);
 				}
 				else {
-					startDateTextBox.val(dateText);
+					jQuery('#champ_date_debut').val(dateText);
 				}
-			},
-			onSelect: function (selectedDateTime){
-				var end = $(this).datetimepicker('getDate');
-				jQuery('#champ_date_debut').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				jQuery('#champ_date_debut').datetimepicker('option', 'maxDate', date_fin);
 			}
         });
+
     });
 </script>

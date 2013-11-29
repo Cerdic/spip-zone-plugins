@@ -1,22 +1,16 @@
-#SET{id,#ENV{id_reservation}}
-[(#GET{id}|?{
-	#SET{affichage,poubelle_visible}
-	#SET{date_fin,#INFO_ORR_DATE_FIN{orr_reservation,#GET{id}}}
-	#SET{date_debut,#INFO_ORR_DATE_DEBUT{orr_reservation,#GET{id}}}
-	,
-	#SET{affichage,poubelle_cache}
-	#SET{date_fin,#ENV{ma_date}}
-	#SET{date_debut,#ENV{ma_date}}
-})]
-
-[(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
-	<p class="#GET{affichage}" id="poubelle">
-		<a class="mediabox" href="[(#URL_PAGE{formulaire_poubelle}|parametre_url{idresa,#GET{id}}|parametre_url{date_debut,#GET{date_debut}})]">
-		<img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="poubelle" /></a>
-	</p>
+[(#ENV{id_reservation}|oui)
+	[(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
+	<div id="poubelle">
+		<a class="mediabox" href="[(#URL_PAGE{formulaire_poubelle}
+			|parametre_url{idresa,#ENV{id_reservation}}
+			|parametre_url{id_ressource,#ENV{id_ressource}}
+			|parametre_url{jourj,#ENV{jourj}})]"
+			title="<:orr:supprimer:>">
+		<img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="<:orr:supprimer:>" />
+		<br /><:orr:supprimer:></a>
+	</div>]
 ]
-
 <h1 class="box_resa"><:orr:reserver:></h1>
 <div class="ajax">
-	#FORMULAIRE_RESERV{#ENV{id_ressource},#GET{date_debut},#GET{date_fin},#GET{id}}
+	#FORMULAIRE_RESERV{#ENV{id_ressource},#ENV{ma_date},#ENV{id_reservation},#ENV{jourj}}
 </div>

@@ -36,10 +36,13 @@
 							<strong>[(#GET{jourj}|affdate{j})]</strong> 
                             [(#REM) lien formulaire de réservation si autorisation pour au moins une ressource ]
                             [(#GET{aut_creer}|oui)
-						    <a  href="[(#URL_PAGE{formulaire_reservation}|parametre_url{ma_date,[(#GET{jourj}|affdate{'Y-m-d'}) 00:00:00]})]" class="mediabox"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
+						    <a  href="[(#URL_PAGE{formulaire_reservation}
+								|parametre_url{ma_date,[(#GET{jourj}|affdate{'Y-m-d'}) 00:00:00]}
+								|parametre_url{jourj,#ENV{jourj}})]" class="mediabox lien_reserver">
+								<img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
 							<BOUCLE_ressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
 								[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
-								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE,jour=#GET{jourj}} />]
+								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{jourj}, jourj=#ENV{jourj}} />]
 							</BOUCLE_ressource>
 							#SET{jourj,#GET{jourj}|orr_plusunjour} 
 						</td>

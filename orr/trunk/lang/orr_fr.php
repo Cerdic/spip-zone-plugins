@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'couleur' => 'Couleur',
 	'ctrl_clic' => 'Ctrl + clic pour sélection multiple',
+	'creation_autorisation_interdite' => 'Vous n\'avez pas les droits pour créer des réservations pour cette ressource',
 
 	// D
 	'date_de_debut' => 'Date de début',
@@ -28,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droit' => 'Droit',	
 
 	// E
-	'erreur_reservation_date_fin_debut'=>'date de fin antérieur  ou égale à la date de début',	
+	'erreur_reservation_date_fin_debut'=>'date de fin antérieur ou égale à la date de début',	
 	'erreur_reservation_date_occupe'=>'Pour @pluriel@ : @ressource@, vos dates de réservations ne sont pas libres !',
 	'erreur_reservation_format_date'=>'Ce format de date n\'est pas reconnu.',	
 	'explication_orr_date_debut' => 'Date de début de la réservation',
@@ -75,7 +76,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_ressource_nom' => 'Nom de la ressource',
 	'legend_affichage_planning' => 'Affichage du planning',
 	'label_vue_pardefaut' => 'Choix de la vue par défaut',
-    'liste_ressources' => 'Ajouter des ressources',
+    'liste_ressources' => 'Choix des ressources',
+	'legend_heures_defaut' => 'Heures par défaut de début et fin des réservations',
+	'label_heure_debut' => 'Heure de début',
+	'label_heure_fin' => 'Heure de fin',
+	
 	
 	// M
 	'modifier' => 'Modifier',
@@ -107,9 +112,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',
 	'suppression_autorisation_impossible_ressources_liees' => 'Cette autorisation est liée à des ressources: vous ne pouvez pas la supprimer',
 	'supprimer' => 'supprimer',
+	'supprimer_resa' => 'Voulez-vous supprimer la réservation',
 	'semaine' => 'Semaine',
 	'semaine_precedente' => 'Semaine précédente',
 	'semaine_suivante' => 'Semaine suivante',
+	'supprimer_parametre_incorrect' => 'un des parametres transmis est incorrect pour supprimer cette ressource',
 
     // T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
