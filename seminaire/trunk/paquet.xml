@@ -17,7 +17,7 @@
 	<necessite nom="agenda" compatibilite="[3.5.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 	<necessite nom="mots" />
-	<necessite nom="saisies" />
+	<necessite nom="saisies" compatibilite="[1.38.4;]" />
 	<utilise nom="revisions" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
