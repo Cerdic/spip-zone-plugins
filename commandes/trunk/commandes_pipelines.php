@@ -79,6 +79,31 @@ function commandes_accueil_encours($flux) {
 
 
 /**
+ * Liste des commandes sur la page d'un auteur
+ *
+ * @param array $flux
+ * @return array $flux
+**/
+function commandes_affiche_auteurs_interventions($flux) {
+	$texte = "";
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+		$texte .= recuperer_fond('prive/objets/liste/commandes', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('commandes:titre_commandes_auteur'),
+			'cacher_tri' => true
+			)
+		);
+	}
+	if ($texte) {
+		$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+
+
+/**
  * Mettre à jour les dates de paiement ou d'envoi
  * en amont de la modification du statut d'une commande
  *

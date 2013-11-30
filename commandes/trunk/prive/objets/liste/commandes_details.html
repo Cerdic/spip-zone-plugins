@@ -2,7 +2,7 @@
 [(#REM) On peut donner soit un id_commande, soit un tableau contenant la commande ]
 
 <BOUCLE_commande(COMMANDES){tous}{id_commande=#ENV{id_objet}}{statut?}>
-	[(#REM) Si on trouve une commande on prend ça comme base ]
+	[(#REM) Si on trouve une commande on prend Áa comme base ]
 	#SET{details, #ARRAY}
 	<BOUCLE_commande_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 	[(#SET_PUSH{details, [(#ARRAY{

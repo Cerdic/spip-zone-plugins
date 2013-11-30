@@ -138,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
 	'titre_commandes_a_envoyer' => 'Commandes à envoyer',
+	'titre_commandes_auteur' => 'Commandes de l\'auteur',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
