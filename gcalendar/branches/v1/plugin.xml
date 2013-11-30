@@ -1,6 +1,6 @@
 <plugin>
 	<nom>GCalendar</nom>
-	<slogan>Utiliser Google Calendar</slogan>
+	<slogan>Utiliser un calendrier Google</slogan>
 	<auteur>[Gilles Quiniou->mailto:gilles@quiniou.net], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
 	<categorie>date</categorie>
 	<licence>GNU/GPL</licence>
@@ -18,5 +18,4 @@
 	<icon>img_pack/logo_gc.gif</icon>
 	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
 	<necessite id='cfg' version='[1.4;]' />
-	<categorie>date</categorie>
 </plugin>

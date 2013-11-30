@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
-	'gcalendar_description' => 'affiche un calendrier google',
+	'gcalendar_description' => 'Le plugin Gcalendar permet d\'interfacer un site SPIP avec un agenda Google',
 	'gcalendar_nom' => 'Gcalendar',
-	'gcalendar_slogan' => '',
+	'gcalendar_slogan' => 'Utiliser un calendrier Google',
 );
 
 ?>
