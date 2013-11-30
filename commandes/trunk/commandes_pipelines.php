@@ -93,7 +93,7 @@ function commandes_affiche_auteurs_interventions($flux) {
 			'titre' => _T('commandes:titre_commandes_auteur'),
 			'cacher_tri' => true
 			),
-			'ajax' => true
+			array('ajax' => true)
 		);
 	}
 	if ($texte) {
