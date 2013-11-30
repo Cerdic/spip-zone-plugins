@@ -1,12 +1,13 @@
 <plugin>
 	<nom>SPIP-Projet</nom>
 	<auteur>Eric Lupinacci</auteur>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<version_base>0.1.1</version_base>
 	<licence>GPL</licence>
 	<etat>dev</etat>
 	<prefix>projets</prefix>
 	<icon>images/projets-64.png</icon>
+	<categorie>divers</categorie>
 	<description>
 	Plugin de gestion de projets pour SPIP 2
 	</description>
