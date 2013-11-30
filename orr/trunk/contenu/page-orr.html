@@ -1,10 +1,14 @@
 <div id="partiehaute">
 	<BOUCLE_test_mots(spip_mots_liens){objet = orr_ressource}{fusion objet}>
 		<div id="motcle" class="ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+			<div class="aff_masque" id="affiche_mots" title="<:orr:affiche_mots:>"><img src="#CHEMIN{img/affiche_mots.png}" alt="<:orr:affiche_mots:>" /></div>
+			<div class="aff_masque" id="masque_mots" title="<:orr:masque_mots:>"><img src="#CHEMIN{img/masque_mots.png}" alt="<:orr:masque_mots:>" /></div>
 			<INCLURE{fond=inc/affichage_selection-mots}>
 		</div>
 	</BOUCLE_test_mots>
 	<div id="datepick">
+		<div class="aff_masque" id="affiche_cal" title="<:orr:affiche_calendrier:>"><img src="#CHEMIN{img/affiche_cal.png}" alt="<:orr:affiche_calendrier:>" /></div>
+		<div class="aff_masque" id="masque_cal" title="<:orr:masque_calendrier:>"><img src="#CHEMIN{img/masque_cal.png}" alt="<:orr:masque_calendrier:>" /></div>
 		<div id="datepickers"></div>
 	</div>
 </div>
@@ -120,7 +124,6 @@ jQuery(document).ready(function(){
 		var motscle = '';
 		if (jQuery("#motscles").val() != null) 
 			motscle = jQuery("#motscles").val().toString();
-//		motscle = motscle.replace(",",":");
 		ajaxReload('tableau', {
 			args:{
 				id_mot:motscle,
@@ -130,6 +133,28 @@ jQuery(document).ready(function(){
 	});
 	jQuery("#tous").click(function(){ jQuery("#motscles option").attr("selected", "selected"); });
 	jQuery("#aucun").click(function(){ jQuery("#motscles option").removeAttr("selected"); });
+	
+	// afficher/masquer le datepicker et le sélecteur de mots + poser le cookie correspondant
+	jQuery("#affiche_cal, #masque_cal").click(function() {
+		jQuery("#datepickers table, #affiche_cal, #masque_cal").toggle();
+		if (jQuery("#masque_cal").css("display") == "none")
+			jQuery.cookie('aff_cal', 'masque', { expires: 70 });
+		else
+			jQuery.cookie('aff_cal', 'affiche', { expires: 70 });
+	});
+	jQuery("#affiche_mots, #masque_mots").click(function() {
+		jQuery("#motcle .ui-widget-content, #affiche_mots, #masque_mots").toggle();
+		if (jQuery("#masque_mots").css("display") == "none")
+			jQuery.cookie('aff_mots', 'masque', { expires: 70 });
+		else
+			jQuery.cookie('aff_mots', 'affiche', { expires: 70 });
+	});
+	// au chargement afficher/masquer en fonction du cookie enregistré
+	// au départ les 2 sont ouverts + boutons "afficher" masqués
+	if (jQuery.cookie('aff_cal') == 'masque') 
+		jQuery("#datepickers table, #affiche_cal, #masque_cal").toggle();
+	if (jQuery.cookie('aff_mots') == 'masque')
+		jQuery("#motcle .ui-widget-content, #affiche_mots, #masque_mots").toggle();
 
 });
 </script>

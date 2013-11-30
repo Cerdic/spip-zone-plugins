@@ -15,6 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annee_precedente' => 'Année précédente',
 	'annee_suivante' => 'Année suivante',
 	'auteur_resa' => 'Réservation par',
+	'affiche' => 'Affiché',
+	'affiche_mots' => 'afficher le sélecteur de mots clé',
+	'affiche_calendrier' => 'afficher le calendrier',
 	
 	// C
 	'couleur' => 'Couleur',
@@ -75,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_orr_reservation_nom' => 'Nom de la réservation',
 	'label_orr_ressource_nom' => 'Nom de la ressource',
 	'legend_affichage_planning' => 'Affichage du planning',
+	'label_affmasque_pardefaut' => 'Visibilité par défaut du datepicker et du sélecteur de mots clé',
 	'label_vue_pardefaut' => 'Choix de la vue par défaut',
     'liste_ressources' => 'Choix des ressources',
 	'legend_heures_defaut' => 'Heures par défaut de début et fin des réservations',
@@ -83,6 +87,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	
 	// M
+	'masque' => 'Masqué',
+	'masque_mots' => 'masquer le sélecteur de mots clé',
+	'masque_calendrier' => 'masquer le calendrier',
 	'modifier' => 'Modifier',
 	'mois_precedent' => 'Mois précédent',
 	'mois_suivant' => 'Mois suivant',

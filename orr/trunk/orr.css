@@ -12,6 +12,10 @@
 #ctrl_clic { font-size: 0.75em; color: #999; }
 #datepick{ float:right; }
 .ui-tpicker-grid-label { width: 154px ; margin-left: -20% ; }
+.aff_masque { cursor: pointer; }
+#affiche_mots, #masque_mots { float: right; margin-right: -42px; }
+#affiche_cal, #masque_cal { float: left; margin-left: -38px; }
+#affiche_cal, #affiche_mots { display: none; }
 
 /* Formulaire réservation */
 #poubelle {  float:right; padding-right: 10px; }
