@@ -1,0 +1,27 @@
+
+#SET{objets_precieux,#ARRAY}
+
+
+<BOUCLE_objets_precieux(PRIX)>
+    #SET{objets_precieux,#GET{objets_precieux}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#OBJET-#ID_OBJET-#GET{prix}-#GE}}}
+ </BOUCLE_objets_precieux>
+
+<B_objets_precieux>
+    <div class="vente liste_objets_precieux">
+        #ANCRE_PAGINATION
+    <h2><:shop:les_articles_precieux:></h2>
+    <table class="spip">
+        
+            [(#PRIX_HT|>{0}|?{
+                #SET{prix,#PRIX_TTC}
+                #SET{tax,ttc}
+                ,
+                #SET{prix,#PRIX_HT}
+                #SET{taxe,ht}
+            })]
+            <INCLURE{fond=inclure/les_objets_precieux_#OBJET,id_objet,prix=#GET{prix},ht=#GET{ht},id_declinaison}/>
+       
+    </table>
+    [<p class="pagination">(#PAGINATION)</p>]
+    </div>
+</B_objets_precieux>

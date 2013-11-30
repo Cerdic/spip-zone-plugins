@@ -1,0 +1,33 @@
+<paquet
+	prefix="declinaisons"
+	categorie="communication"
+	version="1.0.3"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/declinaisons-64.png"
+	documentation=""
+	schema="1.0.2" 
+>
+
+	<nom>Déclinaisons Produit</nom>
+
+	<auteur lien='http://mychacra.net/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<necessite nom="prix_objets" compatibilite="[1.3.0;]" /> 
+	<utilise nom="shop" compatibilite="[1.1.0;]" /> 
+	
+	
+	<pipeline nom="autoriser" inclure="declinaisons_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/declinaisons.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/declinaisons.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/declinaisons.php" />
+	<pipeline nom="recuperer_fond" inclure="declinaisons_pipelines.php" />  
+	<pipeline nom="formulaire_charger" inclure="declinaisons_pipelines.php" />  
+	
+	<menu nom="declinaisons" titre="declinaison:titre_declinaisons" parent="menu_edition" icone="images/declinaison-16.png" action="declinaisons" /> 
+	<menu nom="declinaison_creer" titre="declinaison:icone_creer_declinaison" parent="outils_rapides" icone="images/declinaison-new-16.png" action="declinaison_edit" parametres="new=oui" /> 
+</paquet>

@@ -1,0 +1,8 @@
+[(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
+<BOUCLE_declinaisons(DECLINAISONS){par num titre, titre}{id_parent}{tout}>
+	[(#ENV{multiple}|oui)
+	<option value="#ID_DECLINAISON"[(#ID_DECLINAISON|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	[(#ENV{multiple}|non)
+	<option value="#ID_DECLINAISON"[(#ID_DECLINAISON|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	<INCLURE{fond=saisies/_declinaisons_recurs,env,id_parent=#ID_DECLINAISON,separateur=#GET{separateur}} />
+</BOUCLE_declinaisons>

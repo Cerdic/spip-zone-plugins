@@ -1,0 +1,16 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_declinaisons(DECLINAISONS){par num titre, titre}{statut?}{racine}{id_parent?}{recherche?}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_DECLINAISON"[(#ID_DECLINAISON|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_DECLINAISON"[(#ID_DECLINAISON|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+		 
+		[(#ENV{recursif}|oui)
+		<INCLURE{fond=saisies/_declinaisons_recurs,valeur=#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}},id_parent=#ID_DECLINAISON,multiple} />]
+	</BOUCLE_declinaisons>
+</select>

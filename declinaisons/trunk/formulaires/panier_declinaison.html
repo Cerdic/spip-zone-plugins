@@ -1,0 +1,45 @@
+<B_selection>
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire'>
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+    <form method='post' action='#ENV{action}' id="editer_#FORM_#OBJET_PRODUIT_#ID_OBJET_PRODUIT"><div>
+    		#ACTION_FORMULAIRE{#ENV{action}}
+    		<input type="hidden" name="retour" value="#SELF"/>
+            <ul>
+                <li>
+					[(#TOTAL_BOUCLE|>{1}|oui)
+					   <select name="id_prix_objet">#SET{plusieurs,oui}
+					   <option value=""><:shop:choix_produit:></option>
+					   ]
+						<BOUCLE_selection(POUR){tableau #ENV{declinaisons}}>
+						[(#TOTAL_BOUCLE|>{1}|?{
+						<option value="[(#VALEUR{id_prix_objet})]">
+						    [(#VALEUR{titre})&nbsp;][(#VALEUR{prix}|filtres_prix_formater)][&nbsp;((#VALEUR{taxe}))]
+						</option>
+						,
+						<input type="hidden" name="id_prix_objet" value="[(#VALEUR{id_prix_objet})]"/>
+						[(#VALEUR{prix}|filtres_prix_formater)][&nbsp;((#VALEUR{taxe}))]
+						})]
+						</BOUCLE_selection>
+					[(#TOTAL_BOUCLE|>{1}|oui)</select>]
+				</li>
+			</ul>
+			
+
+
+		<p><input type="submit"  class="submit" value="<:paniers:action_ajouter:>" /></p></div>
+	</form>
+<br class="nettoyeur"/>
+
+
+</div>
+</B_selection>		
+[(#ENV{message_ok}|oui)
+ <script type="text/javascript">
+ 
+ $(function(){
+ ajaxReload('mon_panier');
+});
+</script>   
+]

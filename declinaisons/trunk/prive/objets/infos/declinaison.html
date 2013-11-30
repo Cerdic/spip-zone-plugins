@@ -1,0 +1,28 @@
+<BOUCLE_declinaison(DECLINAISONS){id_declinaison=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:declinaison:titre_declinaison:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_DECLINAISON</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{declinaisons,#ID_DECLINAISON})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(DECLINAISONS){id_declinaison}>
+	[(#VAL{redirect}
+		|generer_url_action{type=declinaisons&id=#ID_DECLINAISON}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,declinaisons,#ID_DECLINAISON,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=declinaisons&id=#ID_DECLINAISON}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_declinaison>
