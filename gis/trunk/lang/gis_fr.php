@@ -90,6 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adress' => 'Adresse',
+	'label_code_pays' => 'Code pays',
 	'label_code_postal' => 'Code postal',
 	'label_import' => 'Importer',
 	'label_inserer_modele_articles' => 'liés aux articles',

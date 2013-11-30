@@ -50,6 +50,7 @@ var geocoder;]
 		champ_ville = $('#champ_#ENV{champ_ville,ville}'),
 		champ_region = $('#champ_#ENV{champ_region,region}'),
 		champ_pays = $('#champ_#ENV{champ_pays,pays}'),
+		champ_code_pays = $('#champ_#ENV{champ_code_pays,code_pays}'),
 		marker;
 
 	var maj_inputs = function(map,data,action) {
@@ -93,6 +94,7 @@ var geocoder;]
 			$('#champ_#ENV{champ_ville,ville}').val(query.locality);
 			$('#champ_#ENV{champ_region,region}').val(query.region);
 			$('#champ_#ENV{champ_pays,pays}').val(query.country);
+			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
 			maj_inputs(form_map,query,'geocoding');
 		}else{
 			alert('<:gis:erreur_geocoder:> '+query.search);

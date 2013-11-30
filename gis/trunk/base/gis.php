@@ -75,7 +75,7 @@ function gis_declarer_tables_objets_sql($tables){
 		'url_voir' => 'gis',
 		'url_edit' => 'gis_edit',
 		'editable' => 'oui',
-		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'pays'),
+		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'pays', 'code_pays'),
 		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(

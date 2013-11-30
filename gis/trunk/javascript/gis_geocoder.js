@@ -85,6 +85,9 @@ L.Geocoder = L.Class.extend({
 			if (place.address.country) {
 				return_location.country = place.address.country;
 			}
+			if (place.address.country_code) {
+				return_location.country_code = place.address.country_code;
+			}
 			if (place.address.state) {
 				return_location.region = place.address.state;
 			}
