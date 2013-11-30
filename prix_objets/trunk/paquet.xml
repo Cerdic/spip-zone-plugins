@@ -1,0 +1,30 @@
+<paquet
+	prefix="prix_objets"
+	categorie="edition"
+	version="1.6.4"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo=""
+	documentation=""
+	schema="1.4.0" 
+>
+
+	<nom>Prix Objets</nom>
+
+	<auteur lien='http://mychacra.net'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+	<utilise nom="shop" compatibilite="[1.2.0;]" /> 	
+	<necessite nom="prix" compatibilite="[0.1.5;]" /> 
+
+		
+	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/prix_objets.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets.php" />
+	<pipeline nom="affiche_milieu" inclure="prix_objets_pipelines.php" /> 
+
+
+
+</paquet>
