@@ -38,11 +38,12 @@
                             [(#GET{aut_creer}|oui)
 						    <a  href="[(#URL_PAGE{formulaire_reservation}
 								|parametre_url{ma_date,[(#GET{jourj}|affdate{'Y-m-d'}) 00:00:00]}
-								|parametre_url{jourj,#ENV{jourj}})]" class="mediabox lien_reserver">
+								|parametre_url{jourj,#ENV{jourj}}
+								|parametre_url{vue,mois})]" class="mediabox lien_reserver">
 								<img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
 							<BOUCLE_ressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
 								[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
-								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{jourj}, jourj=#ENV{jourj}} />]
+								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{jourj}, jourj=#ENV{jourj}, vue=mois} />]
 							</BOUCLE_ressource>
 							#SET{jourj,#GET{jourj}|orr_plusunjour} 
 						</td>

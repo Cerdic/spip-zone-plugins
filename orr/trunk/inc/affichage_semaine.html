@@ -29,9 +29,10 @@
 							href="[(#URL_PAGE{formulaire_reservation}
 								|parametre_url{id_ressource,#ID_ORR_RESSOURCE}
 								|parametre_url{ma_date,#GET{#VALEUR}}
-								|parametre_url{jourj,#ENV{jourj}})]" 
+								|parametre_url{jourj,#ENV{jourj}}
+								|parametre_url{vue,semaine})]" 
 							class="mediabox lien_reserver"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
-						<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{#VALEUR}, jourj=#ENV{jourj}} />
+						<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{#VALEUR}, jourj=#ENV{jourj}, vue=semaine} />
 					</td>
 				</BOUCLE_ligne>
 			</tr>

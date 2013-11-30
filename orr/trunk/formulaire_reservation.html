@@ -4,7 +4,8 @@
 		<a class="mediabox" href="[(#URL_PAGE{formulaire_poubelle}
 			|parametre_url{idresa,#ENV{id_reservation}}
 			|parametre_url{id_ressource,#ENV{id_ressource}}
-			|parametre_url{jourj,#ENV{jourj}})]"
+			|parametre_url{jourj,#ENV{jourj}}
+			|parametre_url{vue,#ENV{vue}})]"
 			title="<:orr:supprimer:>">
 		<img id="poubelle" src="#CHEMIN{img/supprimer-32.png}" alt="<:orr:supprimer:>" />
 		<br /><:orr:supprimer:></a>
@@ -12,5 +13,5 @@
 ]
 <h1 class="box_resa"><:orr:reserver:></h1>
 <div class="ajax">
-	#FORMULAIRE_RESERV{#ENV{id_ressource},#ENV{ma_date},#ENV{id_reservation},#ENV{jourj}}
+	#FORMULAIRE_RESERV{#ENV{id_ressource},#ENV{ma_date},#ENV{id_reservation},#ENV{jourj},#ENV{vue}}
 </div>
