@@ -53,7 +53,7 @@ _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#157
 	</pipeline>
 	<chemin dir='' />
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.0]" />
+	<necessite id="SPIP" version="[1.9.0;3.99.99]" />
 	<!-- utilise id="cfg" version="[1.14.1;]" / -->
 	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
 </plugin>
