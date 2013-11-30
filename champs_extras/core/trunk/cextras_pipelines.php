@@ -188,11 +188,12 @@ function cextras_pre_edition($flux){
 function cextras_afficher_contenu_objet($flux){
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
+	$id_objet = $flux['args']['id_objet'] > 0 ? $flux['args']['id_objet'] : $flux['args']['contexte']['id'];
 	include_spip('inc/cextras');
 	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
 		// ajouter au contexte les noms et valeurs des champs extras
 		$saisies_sql = saisies_lister_avec_sql($saisies);
-		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($flux['args']['id_objet']));
+		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($id_objet));
 		if (!$valeurs) {
 			$valeurs = array();
 		} else {
@@ -222,6 +223,7 @@ function cextras_afficher_contenu_objet($flux){
 					'saisies' => $saisies,
 					'valeurs' => $valeurs,
 		)));
+
 	}
 
 	return $flux;
