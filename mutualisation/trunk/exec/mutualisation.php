@@ -205,33 +205,90 @@ function exec_mutualisation_dist() {
 
 		
 		$ustart_glob = memory_get_peak_usage(true);
+
 		// Ici on est en SPIP 3.
 		// En spip 3, avec SVP, on liste les plugins dans des sous-répertoires.
 		// Ca peut aller jusqu'a 3 sous-répertoires.
 		// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
 
-		$dir = _DIR_PLUGINS;
-		$dir_it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-		$it = new RecursiveIteratorIterator($dir_it, RecursiveIteratorIterator::SELF_FIRST);
-
-		foreach($it as $path => $fo) {
-
-		  if ( !$fo->isDir() ) {
-		    continue;
-		  }
-
-		  $path .= '/';
-
-		  foreach ($cfg as $k => $v) {
-		    if ( file_exists($path . $v['fn']) ) {
-		      $res = processConfig($cfg[$k], $lsplugs, $path);
-		      if (false !== $res) {
-		      	$inutile[] = $res;
-		      }
-		      break;
-		    }
-		  }
+		// Utiliser la classe si elle existe (PHP 5.3+)			
+		if (class_exists('FilesystemIterator')) {
+			$dir = _DIR_PLUGINS;
+			$dir_it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+			$it = new RecursiveIteratorIterator($dir_it, RecursiveIteratorIterator::SELF_FIRST);
+	
+			foreach($it as $path => $fo) {
+	
+			  if ( !$fo->isDir() ) {
+			    continue;
+			  }
+	
+			  $path .= '/';
+	
+			  foreach ($cfg as $k => $v) {
+			    if ( file_exists($path . $v['fn']) ) {
+			      $res = processConfig($cfg[$k], $lsplugs, $path);
+			      if (false !== $res) {
+			      	$inutile[] = $res;
+			      }
+			      break;
+			    }
+			  }
+			}
 		}
+		else {
+			// Pour php < 5.3
+			// correspond à plugins/nom_plugin/fichier.xml
+			if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE)) {
+				foreach (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+					$list[] = $value;
+				}
+			}
+			// correspond à plugins/auto/nom_plugin/fichier.xml
+			if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+				foreach (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+					$list[] = $value;
+				}
+			}
+			// correspond à plugins/auto/nom_plugin/x.y.z/fichier.xml
+			if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+				foreach (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
+					$list[] = $value;
+				}
+			}
+	
+	
+			// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
+			foreach ($list as $value) {
+				$extract[] = str_replace(array('plugin.xml','paquet.xml'), '', $value);
+			}
+			// On dédoublonne
+			$extract = array_unique($extract);
+			foreach ($extract as $url) {
+				// Et on refait une recherche pour paquet.xml d'abord
+				if(glob($url . 'paquet.xml', GLOB_NOSORT)) {
+					$result = glob($url . 'paquet.xml', GLOB_NOSORT);		
+					$result = $result[0] ;
+					// dans paquet.xml on cherche la valeur de l'attribut prefix
+					if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
+						AND !$lsplugs[strtolower(trim($r[1]))]){
+							preg_match('/version="([^"]*)"/i', file_get_contents($result), $n);
+							$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+					}
+	
+				} else { // Si pas de paquet.xml, on cherche plugin.xml
+					$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
+					$result = $result[0] ;
+					// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
+					if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
+						AND !$lsplugs[strtolower(trim($r[1]))]){
+							preg_match(',<version>([^<]+),ims', file_get_contents($result), $n);
+							$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+					}
+				}
+			}
+		}
+
 		$uend_glob = memory_get_peak_usage(true);
 			
 
