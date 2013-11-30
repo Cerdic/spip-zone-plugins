@@ -83,9 +83,8 @@ var geocoder;]
 				form_map.panTo(data.point);
 				marker.setLatLng(data.point);
 			}
-			[(#ENV{nodraw}|oui)
 			$('#champ_#ENV{champ_type,type}').val('Point');
-			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));]
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
 		}
 		if (!marker._map)
 			form_map.addLayer(marker);
@@ -249,18 +248,12 @@ var geocoder;]
 		form_map.on('draw:created', function(e) {
 			var type = e.layerType,
 				layer = e.layer;
-			console.log(e);
 			drawControl.removeFrom(form_map);
 			if (type === 'marker') {
-				marker = layer;
+				marker.setLatLng(layer._latlng);
 				$('#champ_#ENV{champ_type,type}').val('Point');
 				$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
 				maj_inputs(form_map,layer._latlng,'click');
-				layer.dragging.enable();
-				layer.on("dragend", function(e){
-					$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
-					maj_inputs(form_map,e.target._latlng,'click');
-				});
 			} else {
 				layer.addTo(form_map);
 				if (type === 'polygon')
@@ -288,11 +281,6 @@ var geocoder;]
 			maj_inputs(form_map,e.latlng,'click');
 			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
 		});
-		// mettre à jour les coordonnées quand on déplace le marker
-		marker.on('dragend', function(e){
-			maj_inputs(form_map,e.target._latlng,'click');
-			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
-		});
 		// mettre à jour le champ geosjon et le marker quand on change les valeur de lat ou lon
 		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').change(function(){
 			var new_lat = $('#champ_#ENV{champ_lat,lat}').val();
@@ -302,6 +290,12 @@ var geocoder;]
 			form_map.panTo(new_center);
 			$('#champ_#ENV{champ_geojson,geojson}').val('{"type":"Point","coordinates":\['+ new_lon +','+ new_lat +'\]}');
 		});]
+		// mettre à jour les coordonnées quand on déplace le marker
+		marker.on('dragend', function(e){
+			console.log('hop');
+			maj_inputs(form_map,e.target._latlng,'click');
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
+		});
 		<//B_gis>
 		
 		// mettre à jour le zoom quand on le modifie
