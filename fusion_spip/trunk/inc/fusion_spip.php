@@ -348,15 +348,15 @@ function fusion_spip_mettre_a_jour_liaisons($table, $objet, $cle_primaire, $obje
 	$res = sql_select('id_origine,id_final', 'spip_fusion_spip', 'objet='._q($objet).' and site_origine='._q($connect));
 	while ($obj_import = sql_fetch($res)) {
 		// retrouver l'id_liaison original
-		$ancien_id = sql_fetsel($cle_liaison, $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
-		if ($ancien_id[$cle_liaison]) {
+		$ancien_id = sql_getfetsel($cle_liaison, $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
+		if ($ancien_id) {
 			// déterminer le nouveau lien
-			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id[$cle_liaison]).' and objet='._q($objet_liaison));
+			$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id).' and objet='._q($objet_liaison));
 			// mettre à jour l'objet importé
-			if ($nouveau_id['id_final']) {
+			if ($nouveau_id) {
 				sql_updateq(
 					$table,
-					array($cle_liaison => $nouveau_id['id_final']),
+					array($cle_liaison => $nouveau_id),
 					$cle_primaire.' = '._q($obj_import['id_final'])
 				);
 			}
@@ -380,15 +380,15 @@ function fusion_spip_mettre_a_jour_liaisons_par_objet($table, $objet, $cle_prima
 	$res = sql_select('id_origine,id_final', 'spip_fusion_spip', 'objet='._q($objet).' and site_origine='._q($connect));
 	while ($obj_import = sql_fetch($res)) {
 		// retrouver l'id_liaison original
-		$ancien_id = sql_fetsel(array('id_objet', 'objet'), $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
-		if ($ancien_id['id_objet']) {
+		$ancien_objet = sql_fetsel(array('id_objet', 'objet'), $table, $cle_primaire.' = '._q($obj_import['id_origine']), '', '', '', '', $connect);
+		if ($ancien_objet['id_objet']) {
 			// déterminer le nouveau lien
-			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_id['id_objet']).' and objet='._q($ancien_id['objet']));
+			$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($ancien_objet['id_objet']).' and objet='._q($ancien_objet['objet']));
 			// mettre à jour l'objet importé
-			if ($nouveau_id['id_final']) {
+			if ($nouveau_id) {
 				sql_updateq(
 					$table,
-					array('id_objet' => $nouveau_id['id_final']),
+					array('id_objet' => $nouveau_id),
 					$cle_primaire.' = '._q($obj_import['id_final'])
 				);
 			}
@@ -432,11 +432,11 @@ function fusion_spip_vignettes_documents($connect) {
 		'objet="document" and site_origine='._q($connect).' and id_vignette <> 0'
 	);
 	while ($obj_import = sql_fetch($res)) {
-		$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_vignette']).' and objet="document"');
+		$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_vignette']).' and objet="document"');
 		if ($nouveau_id) {
 			sql_updateq(
 				'spip_documents',
-				array('id_vignette' => $nouveau_id['id_final']),
+				array('id_vignette' => $nouveau_id),
 				'id_document='._q($obj_import['id_final'])
 			);
 		} else {
@@ -518,9 +518,9 @@ function fusion_spip_import_documents($img_dir, $connect) {
 		$objet_logo = $logos_racines[$type_logo];
 		$id_objet = preg_replace('#([^0-9])*#', '', basename($logo));
 
-		$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($id_objet).' and objet='._q($objet_logo));
+		$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($id_objet).' and objet='._q($objet_logo));
 		if ($nouveau_id) {
-			$dest_logo = _DIR_IMG.$type_logo.$nouveau_id['id_final'].'.'.$ext_logo;
+			$dest_logo = _DIR_IMG.$type_logo.$nouveau_id.'.'.$ext_logo;
 			// @todo: il existe surement mieux que copy() ?
 			if (copy($logo, $dest_logo)) {
 				$logos_importes++;
@@ -606,11 +606,11 @@ function fusion_spip_maj_liens_internes($principales, $connect) {
 							$id_origine_lien = preg_replace('#[a-z]*#', '', $lien_trouve[4]);
 							$type_lien = preg_replace('#[0-9]*#', '', $lien_trouve[4]);
 							$objet_lien = $objets_liens[$type_lien];
-							$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
+							$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'id_origine='._q($id_origine_lien).' and objet="'.$objet_lien.'" and site_origine="'.$connect.'"');
 							if ($nouveau_id['id_final']) {
 								$pattern_cherche = '#\[([^][]*?([[]\w*[]][^][]*)*)->'.$type_lien.$id_origine_lien.'\]#';
 								// ajouter une signature pour éviter les remplacements en cascade
-								$pattern_remplace = '[$1->__final__'.$type_lien.$nouveau_id['id_final'].']';
+								$pattern_remplace = '[$1->__final__'.$type_lien.$nouveau_id.']';
 								$obj_import[$champ] = preg_replace($pattern_cherche, $pattern_remplace, $obj_import[$champ]);
 							}
 						}
