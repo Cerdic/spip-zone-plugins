@@ -8,10 +8,7 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION'))
-	return;
-
-$pc_norme = array(
+return array(
 	'[0-7]', //0: classes
 	'[0-9]', //1: sections (en fait, fins en : 9,8,9,7,9,8,9,9 ; et pas de 78)
 	'[0-9]', //2: groupes

@@ -6,10 +6,7 @@
  *  ../plugin.xml
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION'))
-	return;
-
-$pc_norme = array(
+return array(
 	'[1-9]', //0: classes
 	'[0-9]', //1: sections (en fait pas de : 09, 17, 27, 30, 31, 34, 35, 36, 38, 40, 41, 43 a 49, 50, 51, 53 a 59, 70 a 78, 81 a 84, 86, 88, 93 a 98)
 	'[0-9]', //2: groupes

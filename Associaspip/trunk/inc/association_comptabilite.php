@@ -166,8 +166,7 @@ function comptabilite_liste_planregles($id='') {
 	    'C' => $GLOBALS['association_metas']['classe_produits'],
 	    'D' => $GLOBALS['association_metas']['classe_charges'],
 	);
-    include_spip('inc/pcg2'.$id); // charger le fichier de regles comptables
-    return (array)$pc_norme; // retourner le tableau contenu dans le fichier
+    include_spip('inc/pcg2'.$id); // charger le fichier de regles comptables qui retourne un tableau
 }
 
 /** @} */
