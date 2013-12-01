@@ -217,10 +217,10 @@ function fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaire
 		// retrouver l'id_final de l'objet lié
 		foreach ($shema['field'] as $nom_champ => $valeur_champ) {
 			if (in_array($nom_champ, $cles_primaires)) {
-				$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import[$nom_champ]).' and objet='._q(objet_type($nom_champ)));
+				$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import[$nom_champ]).' and objet='._q(objet_type($nom_champ)));
 				// mettre à jour l'id de l'objet lié
-				if ($nouveau_id['id_final']) {
-					$obj_import[$nom_champ] = $nouveau_id['id_final'];
+				if ($nouveau_id) {
+					$obj_import[$nom_champ] = $nouveau_id;
 				} else {
 					// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
 					$skip_import_objet = true;
@@ -231,10 +231,10 @@ function fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaire
 		// si la table utilise une liaison par id_objet / objet
 		// retrouver l'id_final de l'objet lié
 		if ($shema['field']['id_objet'] && $shema['field']['objet']) {
-			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['objet']));
+			$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['objet']));
 			// mettre à jour l'id de l'objet lié
-			if ($nouveau_id['id_final']) {
-				$obj_import['id_objet'] = $nouveau_id['id_final'];
+			if ($nouveau_id) {
+				$obj_import['id_objet'] = $nouveau_id;
 			} else {
 				// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
 				$skip_import_objet = true;
@@ -243,10 +243,10 @@ function fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaire
 
 		// cas particulier pour spip_urls (id_objet / type au lieu de id_objet / objet)
 		if ($nom_table == 'spip_urls' && $shema['field']['id_objet'] && $shema['field']['type']) {
-			$nouveau_id = sql_fetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['type']));
+			$nouveau_id = sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '._q($connect).' and id_origine = '._q($obj_import['id_objet']).' and objet='._q($obj_import['type']));
 			// mettre à jour l'id de l'objet lié
-			if ($nouveau_id['id_final']) {
-				$obj_import['id_objet'] = $nouveau_id['id_final'];
+			if ($nouveau_id) {
+				$obj_import['id_objet'] = $nouveau_id;
 			} else {
 				// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
 				$skip_import_objet = true;
