@@ -17,7 +17,7 @@ include_spip('inc/editer');
 function formulaires_editer_asso_compte_charger_dist($id_compte=0) {
     $contexte = formulaires_editer_objet_charger('asso_compte', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
     if (!$id_compte) { // si c'est une nouvelle operation
-	$contexte['date'] = date('Y-m-d'); // on charge la date d'aujourd'hui
+	$contexte['date_operation'] = date('Y-m-d'); // on charge la date d'aujourd'hui
 	$contexte['type_operation'] = $GLOBALS['association_metas']['classe_charges']; // on fixe par defaut une depense
     } else { // si on edite une operation
 	// ToDo : dans une version suivante il faut mettre cette information dans le champ "type_op" du type enum dans lequel il faut ajouter 'financier' (pour un virement interne) et 'contribution_volontaire' en plus de 'credit', 'debit' et 'multi'

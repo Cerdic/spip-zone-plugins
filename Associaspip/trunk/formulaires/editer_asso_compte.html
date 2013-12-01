@@ -79,9 +79,9 @@
 				#SELECTEUR_IMPUTATION
 			</li>
 			<li class="editer_date">
-				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
-				<label for="date"><:asso:date_aaaa_mm_jj:></label>
-				<input type="[(#HTML5|?{date,text})]" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date" class="date" />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date_operation})</span>]
+				<label for="date_operation"><:asso:date_aaaa_mm_jj:></label>
+				<input type="[(#HTML5|?{date,text})]" name="date" [value="(#ENV{date_operation}|affdate{Y-m-d})"] id="date_operation" class="date" />
 			</li>
 			<li id="saisie_depense" class="editer_depense [(#ENV{type_operation}|affichage_div{charges-banques-contributions_volontaires})]">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{depense})</span>]

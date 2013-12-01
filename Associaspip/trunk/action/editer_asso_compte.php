@@ -17,7 +17,7 @@ function action_editer_asso_compte_dist() {
 	$id_compte = $securiser_action();
 	$erreur = '';
 	include_spip('inc/association_comptabilite');
-	$date = association_recuperer_date('date');
+	$date = association_recuperer_date('date_operation');
 	$imputation = _request('imputation');
 	$recette = association_recuperer_montant('recette');
 	$depense = association_recuperer_montant('depense');
