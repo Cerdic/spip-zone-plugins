@@ -104,6 +104,7 @@ function fusion_spip_lister_cles_primaires($tables) {
  */
 function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
 
+	$erreurs = array();
 	$tables = array_merge($principales, $auxiliaires);
 	foreach ($tables as $nom_table => $shema_table) {
 		// ne pas utiliser 'trouver_table' pour ne pas utiliser le cache
