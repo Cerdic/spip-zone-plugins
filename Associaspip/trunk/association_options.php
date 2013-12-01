@@ -836,8 +836,7 @@ function association_formater_telephones($id_objets, $objet='auteur', $html_span
 			}
 			if ($html_span) { // formatage HTML avec microformat
 				$telephones_string[$id_objet] .=  "<$html_span class='tel'>". appliquer_filtre($telephone['type'], 'logo_type_tel');
-				$tel_num = ($telephone['pays']?"+$telephone[pays]$telephone[region]$telephone[numero]":$telephone['numero']);
-				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $tel_num' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $tel_num) . ($href_pre?$href_post:'') ."' class='".($href_pre?'spip_out ':'')."value'>";
+				$telephones_string[$id_objet] .=  ($href_pre?("<a title='". _T('asso:composer_le') ." $telephone[numero]' href='$href_pre"):"<abbr title='"). preg_replace('/[^\d+]/', '', $telephone['numero']) . ($href_pre?$href_post:'') ."' class='".($href_pre?'spip_out ':'')."value'>";
 				unset($telephone['type']); // ne devrait plus etre traite par le modele
 				unset($telephone['id_objet']); // ne devrait plus etre traite par le modele
 				unset($telephone['id_numero']); // ne devrait pas etre utilise par le modele
@@ -1007,7 +1006,7 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				$courriel['email'] = $courriel;
 			}
 			if ($html_span) { // balisage HTML avec microformat
-				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_mel');
+				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_email');
 				if ( !in_array($courriel['format'],array('x400','ldap')) )
 					$href = TRUE;
 				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='".($href?'spip_out ':'')."value'>";
