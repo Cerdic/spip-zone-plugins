@@ -42,9 +42,9 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan=0) {
 	$erreurs = array();
 
 	$code = _request('code');
+	$classe = _request('classe');
 	if ($erreur = comptabilite_verifier_code($code, _request('type_op'), $classe) )
 		$erreurs['code'] = $erreur;
-	$classe = _request('classe');
 	if ($erreur = comptabilite_verifier_classe($classe) )
 		$erreurs['classe'] = $erreur;
 	if ($erreur = association_verifier_montant('solde_anterieur') )
