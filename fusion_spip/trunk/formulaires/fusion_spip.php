@@ -40,26 +40,30 @@ function formulaires_fusion_spip_verifier_dist() {
 	global $spip_version_base;
 	$erreurs = array();
 
-	$base = _request('base');
-	$traite_stats = (_request('stats') == 'on' ? true : false);
-	$traite_referers = (_request('referers') == 'on' ? true : false);
-	$traite_versions = (_request('versions') == 'on' ? true : false);
-
-	$bases = bases_referencees(_FILE_CONNECT_TMP);
-	$connect = $bases[$base];
-
-	$principales = fusion_spip_lister_tables_principales($connect, false);
-	$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers, $traite_versions);
-
 	// vérifier champs obligatoires
-	if (!_request('base')) {
+	if (!$base=_request('base')) {
 		$erreurs['base'] = _T('info_obligatoire');
 	}
 	else {
+		$traite_stats = (_request('stats') == 'on' ? true : false);
+		$traite_referers = (_request('referers') == 'on' ? true : false);
+		$traite_versions = (_request('versions') == 'on' ? true : false);
+
+		$bases = bases_referencees(_FILE_CONNECT_TMP);
+		$connect = $bases[$base];
+
+		$principales = fusion_spip_lister_tables_principales($connect, false);
+		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers, $traite_versions);
+
 		// vérifier la version de la base source
-		$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
-		if($spip_version_base != $vsource['valeur']){
-			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions', array('vhote'=>$spip_version_base, 'vsource'=>$vsource['valeur']));
+		if(!sql_showtable('spip_meta', false, $connect)){
+			$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions_impossible');
+		}
+		else {
+			$vsource = sql_fetsel('valeur', 'spip_meta', 'nom="version_installee"', '', '', '', '', $connect);
+			if($spip_version_base != $vsource['valeur']){
+				$erreurs['versions_bases'] = _T('fusion_spip:erreur_versions', array('vhote'=>$spip_version_base, 'vsource'=>$vsource['valeur']));
+			}
 		}
 		// vérifier la conformité du shéma de la base source
 		if( empty($erreurs) && _request('confirme_warning') != 'on' ){

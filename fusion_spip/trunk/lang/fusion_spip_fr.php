@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
 		<br/>- hôte est en v @vhote@
 		<br/>- source est en v @vsource@',
+	'erreur_versions_impossible' => 'Impossible de vérifier la version de la base de données importée (table spip_meta)',
 
 	// I
 	'img_dir' => 'Chemin physique des documents',
