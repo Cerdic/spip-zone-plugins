@@ -1398,7 +1398,7 @@ var spipGeoportail = jQuery.geoportail =
 	},
 	
 	/** Synchronisation de cartes */
-	synchro: function (id_map)
+	synchro: function (id_map, cursor)
 	{	if (id_map.constructor.toString().indexOf("Array") == -1) return;
 		var c = new Array;
 		var i;
@@ -1418,6 +1418,7 @@ var spipGeoportail = jQuery.geoportail =
 		for (i=0; i<c.length; i++) 
 		{	if (!c[i].synchro) c[i].synchro = {}
 			c[i].map.getMap().events.register('moveend', c[i], geoportail_moveSynchro);
+			if (cursor) c[i].map.getMap().events.register('mousemove', c[i], geoportail_cursorSynchro);
 			for (j=0; j<c.length; j++)
 				if (c[i].id != id_map[j]) c[i].synchro[id_map[j]] = c[j];
 		}
@@ -1560,6 +1561,35 @@ function geoportail_moveSynchro (e)
 			pt.transform(this.map.getMap().getProjectionObject(),c.getProjectionObject());
 			c.setCenter(pt,this.map.getMap().getZoom());
 		this.synchro[i].moving = false;
+	}
+}
+
+function geoportail_cursorSynchro (e)
+{	// Coordonees du curseur
+	var cur = this.map.getMap().getLonLatFromViewPortPx(e.xy) ;
+	var l = this.map.getMap().getLayersByName("_cursor");
+	if (l.length) l.pop().setVisibility(false);
+	var i;	
+	for (i in this.synchro)
+	{	var c = this.synchro[i].map.getMap()
+		var pt = cur.clone();
+		pt.transform(this.map.getMap().getProjectionObject(),c.getProjectionObject());
+		// Layer du centre
+		l = c.getLayersByName("_cursor");
+		if (l.length) 
+		{	l = l.pop();
+			l.setVisibility(true);
+		}
+		else
+		{	// Style de la couche
+			OpenLayers.Renderer.symbol.croix = [1,1,10,1,10,-1,1,-1,1,-10,-1,-10,-1,-1,-10,-1,-10,1,-1,1,-1,10,1,10,1,1];
+			var styleMap = new OpenLayers.StyleMap({"default": { pointRadius: 10, graphicName:'croix', fillColor:'#000', strokeColor:'#fff', strokeWidth:1 } });
+			// Rajoute une couche pour les points
+			l = new OpenLayers.Layer.Vector("_cursor", { styleMap: styleMap, displayInLayerSwitcher:false, opacity: 1, visibility: 1 });
+			c.addLayer(l);
+		}
+		l.removeAllFeatures();
+		l.addFeatures(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(cur.lon,cur.lat)));
 	}
 }
 
