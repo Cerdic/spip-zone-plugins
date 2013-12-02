@@ -73,6 +73,13 @@ function embed_url($url) {
 			$html = $json->{'html'};
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";	
 		} 
+		else if (preg_match("/^http\:\/\/(www\.)?prezi\.com\/([^\/]+)\//i", $url, $r)) {
+			$oembed = "http://prezi.com/api/embed/?id=".$r[2];
+			$json = join("",file($oembed));
+			$json = json_decode($json);
+			$img = $json->{'embed_preview'};
+			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' /></a><div>".$json->{'presentation'}->{'title'}."</div></div>";	
+		} 
 		else if (preg_match("/^http\:\/\/(www\.)?slideshare\.net/i", $url)) {
 			// Le JSON ne se décode pas correction,
 			// je passe donc en XML
