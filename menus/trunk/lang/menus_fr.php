@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Cochez les entrées que vous souhaitez <strong>masquer</strong> lors de la création d’un menu.',
+	'configurer_titre' => 'Configurer les entrées du plugin Menus',
 	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
 
 	// D

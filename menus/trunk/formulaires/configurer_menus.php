@@ -24,7 +24,7 @@ function formulaires_configurer_menus_saisies_dist(){
 			'saisie' => 'checkbox',
 			'options' => array(
 				'nom' => 'entrees_masquees',
-				'explication' => 'Cochez les entrées que vous voulez <strong>masquer</strong> lors de la création d\'un menu.',
+				'explication' => _T('menus:configurer_entrees_masquees_explication'),
 				'datas' => $data,
 				'li_class' => 'pleine_largeur',
 				'defaut' => lire_config('menus/entrees_masquees',array())
