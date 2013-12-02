@@ -1554,6 +1554,14 @@ array(
     'embed-height' => '255',
     'iframe-player' => 'http://www.qwiki.com/embed/$2',
   ),
+array(
+    'title' => 'Prezi',
+    'website' => 'http://www.prezi.com',
+    'url-match' => 'https?://(www\.)?prezi\.com/([^/]+)/.*/',
+    'embed-width' => '550',
+    'embed-height' => '400',
+    'iframe-player' => 'http://prezi.com/bin/preziloader.swf?prezi_id=$3&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0',
+  ),
 array( /*  http://500px.com/photo/4778494 */
     'title' => '500px',
     'website' => 'http://500px.com',
