@@ -66,13 +66,21 @@ function commandes_affiche_gauche($flux) {
  */
 function commandes_accueil_encours($flux) {
 
-	if ( $liste = recuperer_fond('prive/objets/liste/commandes', array(
-		'titre' => _T('commandes:titre_commandes_a_envoyer'),
-		'statut' => 'paye',
-		'cacher_tri' => true))
-	) {
-		$flux .= "<div class='commandes'>";
-		$flux .= $liste . "</div>";
+	$statuts = array('attente','partiel','paye');
+	foreach( $statuts as $statut ){
+		if ( $nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut)) ) {
+			$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, _T('commandes:info_1_commande_statut_'.$statut), _T('commandes:info_nb_commandes_statut_'.$statut, array('nb'=> $nb_{$statut})));
+			$liste .= recuperer_fond('prive/objets/liste/commandes', array(
+				'titre' => $titre_{$statut},
+				'statut' => $statut,
+				'cacher_tri' => true),
+				array( 'ajax' => true )
+			);
+		}
+	}
+
+	if ( isset($liste) ) {
+		$flux .= "<div class='commandes'>" . $liste . "</div>";
 	}
 	return $flux;
 }
