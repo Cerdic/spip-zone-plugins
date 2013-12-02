@@ -28,6 +28,12 @@ function balise_NOW_dist($p) {
 	return balise_MAINTENANT_dist($p);
 }
 
+// Appelle la balise #AUTORISER et renvoie une demande de login si niet
+function balise_AUTORISER_SINON_LOGIN_dist($p) {
+	function_exists('balise_AUTORISER')?balise_AUTORISER($p):balise_AUTORISER_dist($p);
+	$p->code = 'sinon_interdire_acces('.$p->code.', parametre_url(generer_url_public("login","",false),"url",self(),"&"))';
+	return $p;
+}
 
 function balise_LESMOTS_dist($p){
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;

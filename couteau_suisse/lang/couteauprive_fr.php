@@ -910,7 +910,9 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 
 @puce@ {{#CHR<html>{XX}</html>}} : balise équivalente à <code>#EVAL{"chr(XX)"}</code> et pratique pour coder des caractères spéciaux (le retour à la ligne par exemple) ou des caractères réservés par le compilateur de SPIP (les crochets ou les accolades).
 
-@puce@ {{#LESMOTS}} : ',
+@puce@ {{#AUTORISER_SINON_LOGIN<html>{XX}</html>}} : balise équivalente à <code>#AUTORISER{XX}|sinon_interdire_acces{[(#URL_PAGE{login}|parametre_url{url,#SELF,&})]}</code> et pratique pour lancer une demande de login lorsque le squelette demandé n\'est pas autorisé. Exemple qui restreint une page aux rédacteurs logués : <code>#AUTORISER_SINON_LOGIN{ecrire}</code>.
+
+@puce@ {{#LESMOTS}} : en cours de développement.',
 	'trousse_balises:nom' => 'Trousse à balises',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
 
