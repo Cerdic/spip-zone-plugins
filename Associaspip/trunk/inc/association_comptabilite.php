@@ -709,11 +709,11 @@ function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
  */
 function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code') {
     if (@!$GLOBALS['meta']['html5'] AND $ref) { // JavaScript sur le onChange
-	$js = ' var OptCurrVal = document.getElementById(\'selecteur_'.$name.'\').value; ';
-	$js .= ' var OptGroupElt = document.getElementById(\'PlanComptableClasse\'+OptCurrVal); '; // mettre le selecteur de code directement au debut de la classe selectionnée
-	$js .= ' if (OptGroupElt) { OptGroupElt.childNodes[0].selected=\'selected\'; document.getElementById(\'selecteur_'.$ref.'\').onchange(); } '; // appeler la fonction onChange du selecteur de code (pour repercuter la modification dans les champs lies)
+	$js = " var OptCurrVal = document.getElementById('selecteur_$name').value; ";
+	$js .= " var OptGroupElt = document.getElementById('PlanComptableClasse'+OptCurrVal); "; // mettre le selecteur de code directement au debut de la classe selectionnée
+	$js .= " if (OptGroupElt) { OptGroupElt.childNodes[0].selected='selected'; document.getElementById('selecteur_$ref').onchange(); } "; // appeler la fonction onChange du selecteur de code (pour repercuter la modification dans les champs lies)
     }
-    $res = "<select name='$name' id='selecteur_$name'". ($js?" onclick='$js'":'') .">\n";
+    $res = "<select name='$name' id='selecteur_$name'". ($js?" onchange=\"$js\"":'') .">\n";
     $res .= '<option value="">'. _T('compta:item_no_classe') ."</option>\n";
     $lc = ($GLOBALS['association_metas']['plan_comptable']?comptabilite_liste_plancodes():array(1,2,3,4,5,6,7,8,9,0));
     foreach ($lc as $code) {
@@ -748,12 +748,12 @@ function filtre_selecteur_compta_code($code, $name='code', $ref='intitule') {
 	$res .= "<select name='$name'>\n"; // fall-back
 	$res .= "<option value=''></option>\n"; // pas de valeur pour ne pas saisir une option indesiree, mais pas de texte pour ne pas parasiter la DataList
     } else { // the causual way
-#	$js = 'var CurrentOption=document.getElementById(\'selecteur_'.$name.'\'); document.getElementById(\''.$name.'\').value=CurrentOption.value; '; // recopier le code dans le champ prevu
-	$js = 'var currentVal=String(this.options[this.selectedIndex].text).split(\'-\'); document.getElementById(\''.$name.'\').value=currentVal[0]; '; // recopier le code dans le champ prevu
+#	$js = "var CurrentOption=document.getElementById('selecteur_$name'); document.getElementById('$name').value=CurrentOption.value; "; // recopier le code dans le champ prevu
+	$js = "var currentVal=String(this.options[this.selectedIndex].text).split('-'); document.getElementById('$name').value=currentVal[0]; "; // recopier le code dans le champ prevu
 	if ($ref)
-#	    $js .= ' document.getElementById(\''.$ref.'\').value=CurrentOption.options[CurrentOption.selectedIndex].text; '; // recopier l'intitule dans le champ prevu
-	    $js .= ' document.getElementById(\''.$ref.'\').value=currentVal[1]; '; // recopier l'intitule dans le champ prevu
-	$res = "<select name='$name' id='selecteur_$name' onchange='$js' onclick='$js'>\n"; // malgre le JS, le selecteur est homonyme pour permettre de prendre la selection sans remplir quand JS est desactive. faut par contre le placer avant le champ libre pour que la valeur qui y est saisie remplace celle-ci (en l'ecrasant)
+#	    $js .= " document.getElementById('$ref').value=CurrentOption.options[CurrentOption.selectedIndex].text; "; // recopier l'intitule dans le champ prevu
+	    $js .= " document.getElementById('$ref').value=currentVal[1]; "; // recopier l'intitule dans le champ prevu
+	$res = "<select name=\"$name\" id=\"selecteur_$name\" onchange=\"$js\" onclick=\"$js\">\n"; // malgre le JS, le selecteur est homonyme pour permettre de prendre la selection sans remplir quand JS est desactive. faut par contre le placer avant le champ libre pour que la valeur qui y est saisie remplace celle-ci (en l'ecrasant)
 	$res .= '<option value="">'. _T('compta:item_no_code') ."</option>\n"; // pas de valeur : pour ne rien choisir.
     }
     $optgroup = FALSE;
