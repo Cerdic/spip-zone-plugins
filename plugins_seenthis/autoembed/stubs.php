@@ -1557,7 +1557,7 @@ array(
 array(
     'title' => 'Prezi',
     'website' => 'http://www.prezi.com',
-    'url-match' => 'https?://(www\.)?prezi\.com/([^/]+)/.*/',
+    'url-match' => 'https?://(www\.)?prezi\.com/([^/]+)',
     'embed-width' => '550',
     'embed-height' => '400',
     'iframe-player' => 'http://prezi.com/bin/preziloader.swf?prezi_id=$3&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0',
