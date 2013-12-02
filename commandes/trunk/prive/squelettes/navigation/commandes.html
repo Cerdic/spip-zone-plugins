@@ -1,5 +1,5 @@
-[(#REM) message affiché si des commandes doivent être envoyées ou sont en attente de paiement ]
-<INCLURE{fond=prive/squelettes/inclure/info_commandes_actives}>
+[(#REM) message affiché si des commandes sont actives : payées (donc à envoyer), partiellement payées ou en attente de paiement ]
+<INCLURE{fond=prive/squelettes/inclure/info_commandes_actives, titre=<:commandes:titre_commandes_actives:>}>
 
 #BOITE_OUVRIR{'','simple commandes navigation'}
 
