@@ -1,0 +1,20 @@
+<paquet
+	prefix="scssphp"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="vignette.png"
+	documentation=""
+>
+
+	<nom>SCSS PHP</nom>
+	<auteur>Anne-lise Martenot</auteur>
+	<auteur lien="http://elastick.net">elastick.net</auteur>
+	<credit>Cédric Morin</credit>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head" action="insert_head" />
+	
+
+</paquet>
