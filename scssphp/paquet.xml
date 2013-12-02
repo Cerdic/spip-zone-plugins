@@ -1,10 +1,10 @@
 <paquet
 	prefix="scssphp"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="vignette.png"
+	logo="scssphp.png"
 	documentation=""
 >
 
