@@ -40,12 +40,17 @@ if (defined('_SPIP19300')) {
 }
 
 function remplace_points_de_suite($texte, $id, $racc) {
-	if (strpos($texte, _INTRODUCTION_CODE) === false) return $texte;
 	// des points de suite bien propres
-	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+	defined('_INTRODUCTION_SUITE') || define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+	defined('_INTRODUCTION_LIEN') || define('_INTRODUCTION_LIEN', 0);
+	defined('_INTRODUCTION_SUITE_SYSTEMATIQUE') || define('_INTRODUCTION_SUITE_SYSTEMATIQUE', 0);
+	if (strpos($texte, _INTRODUCTION_CODE) === false) {
+		if(!_INTRODUCTION_SUITE_SYSTEMATIQUE) return $texte;
+		$texte .= _INTRODUCTION_SUITE;
+	}
 	$intro_suite = cs_propre(_INTRODUCTION_SUITE);
 	// si les points de suite sont cliquables
-	if ($id && _INTRODUCTION_LIEN == 1) {
+	if ($id && _INTRODUCTION_LIEN) {
 		$url = (defined('_SPIP19300') && test_espace_prive())
 			?generer_url_entite_absolue($id, $racc, '', '', true):"$racc$id";
 		$intro_suite = strncmp($intro_suite, '<br />', 6)===0
@@ -56,19 +61,23 @@ function remplace_points_de_suite($texte, $id, $racc) {
 	return str_replace(_INTRODUCTION_CODE, $intro_suite, $texte);
 }
 
-// lgr>0 : aucun parametre, donc lgr par defaut
-// lgr<0 : parametre #INTRODUCTION{longeur}
+// lgr>0 : aucun paramètre, donc longueur par défaut
+// lgr<0 : paramètre spécifié #INTRODUCTION{longueur}
 // lgr=0 : pas possible
-// TODO : $connect est pour SPIP 2.0
+// TODO : $connect est pour SPIP>=2.0
 function cs_introduction($texte, $descriptif, $lgr, $id, $racc, $connect) {
-	@define('_INTRODUCTION_LGR', 100);
+	defined('_INTRODUCTION_LGR') || define('_INTRODUCTION_LGR', 100);
+	defined('_INTRODUCTION_DESCRIPTIF_ENTIER') || define('_INTRODUCTION_DESCRIPTIF_ENTIER', 0);
 	// fonction couper_intro
 	$couper = $GLOBALS['cs_couper_intro'];
 	if (strlen($descriptif))
-		# si descriptif contient juste des espaces ca produit une intro vide, 
-		# c'est une fonctionnalite, pas un bug
-		// ici le descriptif est coupe s'il est trop long
-		$texte = $lgr<0?propre($couper($descriptif, -$lgr, _INTRODUCTION_CODE)):propre($descriptif);
+		# si le descriptif ne contient que des espaces ça produit une intro vide, 
+		# c'est une fonctionnalité, pas un bug
+		// ici le descriptif est coupé s'il est trop long et si la config le permet
+		$texte = propre(
+			($lgr<0 && !_INTRODUCTION_DESCRIPTIF_ENTIER)
+				?$couper($descriptif, -$lgr, _INTRODUCTION_CODE):$descriptif
+		);
 	else {
 		// pas de maths dans l'intro...
 		$texte = preg_replace(',<math>.*</math>,imsU', '', $texte);

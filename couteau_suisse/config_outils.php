@@ -162,11 +162,21 @@ add_variables( array(
 	'defaut' => 100,
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);\n",
 ), array(
+	'nom' => 'coupe_descriptif',
+	'check' => 'couteauprive:introduction_coupe_descriptif',
+	'defaut' => 0,
+	'code:%s' => "define('_INTRODUCTION_DESCRIPTIF_ENTIER', 1);\n",
+), array(
 	'nom' => 'lien_introduction',
 	'format' => _format_NOMBRE,
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
-	'code' => "define('_INTRODUCTION_LIEN', %s);",
+	'code:%s' => "define('_INTRODUCTION_LIEN', 1);",
+), array(
+	'nom' => 'lien_systematique',
+	'check' => 'couteauprive:introduction_lien_systematique',
+	'defaut' => 0,
+	'code:%s' => "define('_INTRODUCTION_SUITE_SYSTEMATIQUE', 1);\n",
 ));
 add_outil( array(
 	'id' => 'introduction',
