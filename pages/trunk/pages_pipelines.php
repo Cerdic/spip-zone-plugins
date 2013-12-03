@@ -205,7 +205,7 @@ function pages_editer_contenu_objet($flux){
  * @return array $flux Le contexte modifié
  */
 function pages_pre_edition_ajouter_page($flux){
-	if (is_array($flux) and $flux['args']['type'] == 'article'){
+	if (is_array($flux) and isset($flux['args']['type']) && $flux['args']['type'] == 'article'){
 		if ((($page = _request('champ_page')) != '') AND ($page != 'article')){
 			/**
 			 * On ajoute le "champ_page" du formulaire qui deviendra "page" dans la table
