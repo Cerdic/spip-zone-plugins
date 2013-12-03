@@ -9,7 +9,6 @@
 #motcle .ui-widget-content { padding: 0.5em; border-top: 0; }
 #motcle .ui-widget-header { line-height: 1.8em; }
 #motcle #envoyer { float: right; }
-#ctrl_clic { font-size: 0.75em; color: #999; }
 #datepick{ float:right; }
 .ui-tpicker-grid-label { width: 154px ; margin-left: -20% ; }
 .aff_masque { cursor: pointer; }
@@ -19,6 +18,7 @@
 
 /* Formulaire réservation */
 #poubelle {  float:right; padding-right: 10px; }
+#ctrl_clic { font-size: 0.75em; color: #999; float: right; }
 .ressource_visible { display:auto; }
 .ressource_cachee { display:none; }
 .orr_stylo { float:left; }
@@ -67,8 +67,7 @@ h1.box_resa { background-color: #DDD; }
 .tooltip span:before { border-top-color: #CCC; bottom: -8px; }
 
 /* date-picker 
-#datepickers { font-size: 0.9em; }
-
+#datepickers { font-size: 0.9em; } */
 
 /* mediabox pour le form de résa */
 #cboxTitle, #cboxCurrent, #cboxNext, #cboxPrevious, #cboxSlideshow { display: none !important; }

@@ -20,9 +20,9 @@
 			<span>
 				<strong><:orr:date_debut:></strong>: [(#ORR_DATE_DEBUT|affdate)] à [(#ORR_DATE_DEBUT|affdate{"H:i"})]<br/>
 				<strong><:orr:date_fin:></strong>: [(#ORR_DATE_FIN|affdate)] à [(#ORR_DATE_FIN|affdate{"H:i"})]<br/>
-				<strong><:orr:auteur_resa:></strong>:  #GET{auteur} </br>
 				[(#CONFIG*{champs_extras_spip_orr_reservations}|oui)
 				<INCLURE{fond=inc/affichage_champs_extra}{id_resa=#ID_ORR_RESERVATION}>]
+				<strong><:orr:auteur_resa:></strong>:  #GET{auteur}				
 			</span>
 			[(#AUTORISER{modifier,orr_reservation,#ENV{idressource}}) 
 				<a href="[(#URL_PAGE{formulaire_reservation}
