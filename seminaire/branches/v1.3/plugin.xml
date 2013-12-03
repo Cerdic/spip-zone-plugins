@@ -7,7 +7,7 @@
 </nom>
 <auteur>Amaury Adon</auteur>
 <licence>GNU/GPL</licence>
-<version>1.3.2</version>
+<version>1.3.3</version>
 <etat>test</etat>
 <version_base>0.1</version_base>
 <description>
@@ -24,7 +24,6 @@ Surcouche au plugin Agenda2  pour  gérer les séminaires et autres événements
 
 	<necessite id="agenda" version="[2.0;]" src="http://files.spip.org/spip-zone/agenda2.zip"/>
 	<necessite id="cextras" version="[1.0.1;]" />
-	<necessite id="kitcnrs" version="[4.0.8;]" src="http://www.harmoweb.cnrs.fr/spip.php?article79"/>
 	<necessite id="SPIP" version="[2.0.10;]" />
 
 

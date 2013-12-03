@@ -7,7 +7,7 @@
 	</nom>
 	<auteur>Amaury Adon</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.5.8</version>
+	<version>1.5.9</version>
 	<version_base>0.1</version_base>
 	<lien>http://www.spip-contrib.net/Seminaire-LATP</lien> 
 	<etat>stable</etat>
@@ -28,30 +28,22 @@ Each event is characterzed by keywords which define its type, seminar, workgroup
 	</description>
 
 	<icon>images/logo_seminaire.png</icon>
-
 	<prefix>seminaire</prefix>
 
 	<necessite id="agenda" version="[2.0;]" />
 	<necessite id="cextras" version="[1.0.1;]" />
-
-	<utilise id="kitcnrs" version="[4.0.8;]" src="http://www.harmoweb.cnrs.fr/spip.php?article79"/>
-
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 
-
 	<options>seminaire_options.php</options>
-
 	<install>base/seminaire_install.php</install>
 	
 	<pipeline>
         <nom>declarer_champs_extras</nom>
         <inclure>base/seminaire.php</inclure>
 	</pipeline>
-	
 	<pipeline>
     	<nom>insert_head</nom>
    		<inclure>seminaire_pipelines.php</inclure>
 	</pipeline>
-
 	<categorie>date</categorie>
 </plugin>
