@@ -51,17 +51,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 commande',
-	'info_1_commande_statut_paye' => '1 commande payée',
-	'info_1_commande_statut_partiel' => '1 commande partiellement payée',
 	'info_1_commande_statut_attente' => '1 commande en attente de validation',
+	'info_1_commande_statut_partiel' => '1 commande partiellement payée',
+	'info_1_commande_statut_paye' => '1 commande payée',
 	'info_aucun_commande' => 'Aucune commande',
 	'info_commandes' => 'Commandes',
 	'info_date_envoi_vide' => 'commande non envoyée',
 	'info_date_paiement_vide' => 'commande non payée',
 	'info_nb_commandes' => '@nb@ commandes',
-	'info_nb_commandes_statut_paye' => '@nb@ commandes payées',
-	'info_nb_commandes_statut_partiel' => '@nb@ commandes partiellement payées',
 	'info_nb_commandes_statut_attente' => '@nb@ commandes en attente de validation',
+	'info_nb_commandes_statut_partiel' => '@nb@ commandes partiellement payées',
+	'info_nb_commandes_statut_paye' => '@nb@ commandes payées',
 	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_toutes_commandes' => 'Toutes les commandes',
 

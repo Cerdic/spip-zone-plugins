@@ -53,15 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 order',
-	'info_1_commande_attente_livraison' => '1 order to send',
-	'info_1_commande_attente_paiement' => '1 order awaiting confirmation',
 	'info_aucun_commande' => 'No orders',
 	'info_commandes' => 'Orders',
 	'info_date_envoi_vide' => 'order not sent',
 	'info_date_paiement_vide' => 'order not paid for',
 	'info_nb_commandes' => '@nb@ orders',
-	'info_nb_commandes_attente_livraison' => '@nb@ orders to send',
-	'info_nb_commandes_attente_paiement' => '@nb@ orders awaiting payment',
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_toutes_commandes' => 'All orders',
 
@@ -139,7 +135,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
-	'titre_commandes_a_envoyer' => 'Orders to send',
 
 	// U
 	'une_commande_de' => 'An order of: ',

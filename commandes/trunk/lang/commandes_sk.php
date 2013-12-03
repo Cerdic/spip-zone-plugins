@@ -53,15 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 objednávka',
-	'info_1_commande_attente_livraison' => '1 objednávka na odoslanie',
-	'info_1_commande_attente_paiement' => '1 objednávka čaká na schválenie',
 	'info_aucun_commande' => 'Žiadna objednávka',
 	'info_commandes' => 'Objednávky',
 	'info_date_envoi_vide' => 'neodoslaná objednávka',
 	'info_date_paiement_vide' => 'nezaplatená objednávka',
 	'info_nb_commandes' => '@nb@ objednávok',
-	'info_nb_commandes_attente_livraison' => '@nb@ objednávok na odoslanie',
-	'info_nb_commandes_attente_paiement' => '@nb@ objednávok, ktoré čakajú na schválenie',
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
@@ -139,7 +135,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
-	'titre_commandes_a_envoyer' => 'Objednávky na odoslanie',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
