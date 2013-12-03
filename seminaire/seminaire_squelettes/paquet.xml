@@ -16,7 +16,6 @@
 	<necessite nom="agenda" compatibilite="[3.5.1;]" />
 	<necessite nom="seminaire" compatibilite="[2.2.0;[" />
 	<utilise nom="Z" compatibilite="[1.7.17;]" />
-	<utilise nom="kitcnrs" compatibilite="[4.0.10;]" />
 
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="seminaire_skel_pipelines.php" />
 </paquet>
