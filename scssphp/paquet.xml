@@ -10,7 +10,7 @@
 
 	<nom>SCSS PHP</nom>
 	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
-	<credit>Cédric Morin</credit>
+	<credit>Jean-Baptiste Bourgoin</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="insert_head" action="insert_head" />
