@@ -77,7 +77,7 @@ function gis_afficher_contenu_objet($flux){
 }
 
 function gis_post_edition($flux){
-	if (($flux['args']['operation'] == 'ajouter_document') 
+	if (is_array($flux) && isset($flux['args']['operation']) && ($flux['args']['operation'] == 'ajouter_document') 
 		AND ($document = sql_fetsel("*","spip_documents","id_document=".intval($flux['args']['id_objet'])))
 	) {
 		if(in_array($document['extension'],array('jpg','kml','kmz'))){
@@ -269,7 +269,7 @@ function gis_post_edition($flux){
 			}
 		}
 	}
-	if (($flux['args']['operation'] == 'supprimer_document') 
+	if (is_array($flux) && isset($flux['args']['operation']) && ($flux['args']['operation'] == 'supprimer_document') 
 		AND ($id_document = intval($flux['args']['id_objet'])
 		AND ($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")))
 	) {
