@@ -21,6 +21,7 @@ add_outil(array(
 	'code:spip_options' => "%%radio_type_urls3%%%%spip_script%%
 switch(\$GLOBALS['type_urls']) {
 	case 'page':%%terminaison_urls_page%%%%separateur_urls_page%%break;
+	case 'simple':%%terminaison_urls_simple%%break;
 	case 'propres':%%url_max_propres%%%%debut_urls_propres%%%%terminaison_urls_propres%%%%marqueurs_urls_propres%%break;
 	case 'propres2':%%url_max_propres2%%%%debut_urls_propres2%%%%marqueurs_urls_propres2%%break;
 	case 'libres':%%url_max_libres%%%%debut_urls_libres%%%%terminaison_urls_libres%%break;
@@ -36,12 +37,13 @@ switch(\$GLOBALS['type_urls']) {
 	defined('_SPIP20100')
 		?'pipelinecode:arbo_creer_chaine_url, pipelinecode:propres_creer_chaine_url'
 		:'pipelinecode:creer_chaine_url'
-		 => "\$id = \$flux['objet']['id_objet']; \$ok = true;
+		 => "\$t = &\$flux['data']; \$id = \$flux['objet']['id_objet']; \$ok = true;
 if(%%urls_id_sauf_rubriques%%)  {\$ok = strpos(':%%urls_id_sauf_liste%%:',':'.\$flux['objet']['type'].':')===false;}
 if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
-if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$flux['data']=\$id._CS_URL_SEP.\$flux['data'];}
-if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$flux['data'].=_CS_URL_SEP.\$id;}
-if(%%urls_minuscules%%) {\$flux['data']=strtolower(\$flux['data']);}",
+if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$t=\$id._CS_URL_SEP.\$t;}
+if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$t.=_CS_URL_SEP.\$id;}
+// if(%%urls_nounderscore%%) {\$t=str_replace('_','',\$t);}
+if(%%urls_minuscules%%) {\$t=strtolower(\$t);}",
 	'pipelinecode:affiche_milieu' => "if(\$flux['args']['exec']==='configurer_urls') \$flux['data'] .= '<p><b>'._T('couteau:configurer').' > '.cs_lien(generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos'),couteauprive_T('type_urls:nom')).'</b></p>';",
 ));
 
@@ -52,7 +54,18 @@ add_variables(
 array(
 	'nom' => 'radio_type_urls3',
 	'format' => _format_CHAINE,
-	'radio' => defined('_SPIP19300')
+	'radio' => defined('_SPIP30000')
+				// a partir de SPIP 3.0
+				?array('page' => 'couteauprive:url_page',
+					 'simple' => 'couteauprive:url_simple', 
+					 'html' => 'couteauprive:url_html', 
+					 'propres' => 'couteauprive:url_propres',
+					 'propres2' => 'couteauprive:url_propres2',
+					 'libres'=> 'couteauprive:url_libres',
+					 'arbo'=> 'couteauprive:url_arbo',
+					 'standard' => 'couteauprive:url_standard',
+					 'propres_qs' => 'couteauprive:url_propres_qs')
+				:(defined('_SPIP19300')
 				// a partir de SPIP 2.0
 				?array('page' => 'couteauprive:url_page',
 					 'html' => 'couteauprive:url_html', 
@@ -68,7 +81,7 @@ array(
 					 'propres' => 'couteauprive:url_propres',
 					 'propres2' => 'couteauprive:url_propres2',
 					 'standard' => 'couteauprive:url_standard',
-					 'propres-qs' => 'couteauprive:url_propres-qs'),
+					 'propres-qs' => 'couteauprive:url_propres-qs')),
 	'radio/ligne' => 4,
 	'defaut' => "isset(\$GLOBALS['meta']['type_urls'])?\$GLOBALS['meta']['type_urls']:'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;\n",
@@ -106,6 +119,17 @@ array(
 	'format' => _format_CHAINE,
 	'defaut' => "''",
 	'code:strlen(%s)' => "define('_separateur_urls_page', %s);",
+),
+
+///////////  define('URLS_SIMPLE_EXEMPLE', 'spip.php?page=article&id_article=12');  /////////////////
+#define ('_debut_urls_simple', get_spip_script('./').'?'._SPIP_PAGE.'=');
+
+array(
+	'nom' => 'terminaison_urls_simple',
+	'format' => _format_CHAINE,
+	'defaut' => "''",
+	'label' => '<:label:terminaison_urls_page:>',
+	'code:strlen(%s)' => "define('_terminaison_urls_simple', %s);",
 ),
 
 ///////////  define('URLS_ARBO_EXEMPLE', '/article/Titre'); /////////////////
@@ -228,7 +252,11 @@ array(
 	'check' => 'couteauprive:urls_minuscules',
 	'label' => '@_CS_CHOIX@',
 	'defaut' => 0,
-), array(
+), array(/*
+	'nom' => 'urls_nounderscore',
+	'check' => 'couteauprive:urls_nounderscore',
+	'defaut' => 0,
+), array(*/
 	'nom' => 'urls_avec_id',
 	'check' => 'couteauprive:urls_avec_id',
 	'defaut' => 0,
