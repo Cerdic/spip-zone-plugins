@@ -1,6 +1,6 @@
 <paquet
 	prefix="seminaire_skel"
-	categorie="squelettes"
+	categorie="squelette"
 	version="0.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
