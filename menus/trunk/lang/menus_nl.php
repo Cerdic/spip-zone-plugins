@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Geef aan welke items je wilt <strong>verbergen</strong> bij het aanmaken van een menu.',
+	'configurer_titre' => 'Configureer de items van plugin Menus',
 	'confirmer_supprimer_entree' => 'Wil je deze regel inderdaad verwijderen?',
 
 	// D
