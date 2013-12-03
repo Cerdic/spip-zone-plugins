@@ -1,10 +1,18 @@
-Compile en CSS et mets en cache un fichier SCSS
+Compile en CSS et mets en cache un fichier Scss
 grace à http://leafo.net/scssphp/
-et dans l'idée d'utilise SASS
-avec diverses possibilités cf http://seenthis.net/messages/199765
+et dans l'idée d'utilise SASS avec diverses possibilités cf http://seenthis.net/messages/199765
 
-Exemple avec le fichier css/test.scss
+Doc Scss:
+http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html
+http://linkdd.github.io/blog/post/24.html
 
-[<link rel="stylesheet" href="(#CSS{css/test.css}|direction_css)" type="text/css" />]
+
+Inclusion du fichier css/scss_demo.scss dans un squelette SPIP
+[<link rel="stylesheet" href="(#CSS{css/scss_demo.css}|direction_css)" type="text/css" />]
+
+Appel de la démo
+?page=demo/test_scss
+
+
 
 
