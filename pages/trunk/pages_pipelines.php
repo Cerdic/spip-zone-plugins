@@ -62,11 +62,11 @@ function pages_affiche_milieu_ajouter_page($flux){
 function pages_affiche_milieu_identifiant($flux){
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
-	$id_article = $flux['args'][$e['id_table_objet']];
 
 	// Si on est sur la fiche d'un article...
-	if ( !$e['edition'] and $e['type']=='article' ) {
+	if (!$e['edition'] and $e['type']=='article' ) {
 		include_spip('base/abstract_sql');
+		$id_article = isset($flux['args'][$e['id_table_objet']]) ? $flux['args'][$e['id_table_objet']] : false;
 		// ... et s'il s'agit d'une page
 		if (
 			_request('modele') == 'page'
