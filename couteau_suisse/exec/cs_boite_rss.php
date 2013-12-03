@@ -27,7 +27,7 @@ function exec_cs_boite_rss_dist() {
 	include_spip('inc/xml');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
 	$c = function_exists('spip_xml_match_nodes')?spip_xml_match_nodes(',^item$,', $r, $r2)
-		:count($r2 = !is_array($r)?array():reset(reset(reset(reset($r)))));
+		:count($r2 = !is_array($r)?array():reset($r=reset($r=reset($r=reset($r)))));
 	if($c) {
 		$r3 = &$r2['item'];
 		$c = count($r3); $p='';
