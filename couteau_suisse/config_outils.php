@@ -1600,6 +1600,26 @@ function genie_nettoyer_sessions_anonymes() { include_spip(\'outils/sessions_ano
 	'version-max' => '17743', // SPIP 3.0 : c'est dans le core !
 ));
 
+add_variables( array(
+	'nom' => 'multidomaines',
+	'format' => _format_CHAINE,
+	'lignes' => 2,
+	'defaut' => '',
+	'label' => '@_CS_CHOIX@',
+	'code:strlen(%s)' => "define('CORRECTION_LIENS_INTERNES_AUTRES_DOMAINES', %s);"
+));
+add_outil( array(
+	'id' => 'liens_internes',
+	'categorie' => 'typo-corr',
+	'auteur' => 'Ma&iuml;eul Rouquette',
+	'code:options' => '%%multidomaines%%',
+	'pipeline:pre_edition' => 'correction_liens_internes_pre_edition',
+	// fichier distant pour le pipeline
+	'distant_pipelines' => 'http://zone.spip.org/trac/spip-zone/export/79119/_plugins_/correction_liens_internes/trunk/correction_liens_internes_pipelines.php',
+	'version-min' => '17743', // SPIP 3.0 mini
+	'pipelinecode:pre_description_outil' => 'if($id=="liens_internes") $texte=str_replace("@_DOMAINE@",url_de_base(),$texte);',
+));
+
 // Recuperer tous les outils (et leurs variables) de la forme outils/toto_config.xml
 foreach (find_all_in_path('outils/', '\w+_config\.xml$') as $f) {
 	add_outils_xml($f);

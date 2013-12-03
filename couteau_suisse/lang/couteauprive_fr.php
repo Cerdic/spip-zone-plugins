@@ -8,6 +8,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
+	'liens_internes:nom' =>  'Correction des liens internes',
+	'liens_internes:description' => 'A chaque modification d\'un contenu du site, cet outil corrige automatiquement en format abrégé SPIP les liens internes insérés par copier-coller de l\'URL.
+_ Exemple : <code>[texte->@_DOMAINE@spip.php?article1]</code> inséré deviendra ici : <code>[texte->1]</code>.
+
+Domaine en cours : {{@_DOMAINE@}}.
+_ En cas de multidomaines, notez ci-dessous la liste des domaines supplémentaires à traiter, séparés par une virgule.[[%multidomaines%]]
+
+Note : chaque correction est logguée (warning). Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».',
 
 	// S
 	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
@@ -910,9 +918,9 @@ _ Un modèle est également disponible pour vos contenus : placez <code><bolo300
 
 @puce@ {{#CHR<html>{XX}</html>}} : balise équivalente à <code>#EVAL{"chr(XX)"}</code> et pratique pour coder des caractères spéciaux (le retour à la ligne par exemple) ou des caractères réservés par le compilateur de SPIP (les crochets ou les accolades).
 
-@puce@ {{#AUTORISER_SINON_LOGIN<html>{XX}</html>}} : balise équivalente à <code>#AUTORISER{XX}|sinon_interdire_acces{[(#URL_PAGE{login}|parametre_url{url,#SELF,&})]}</code> et pratique pour lancer une demande de login lorsque le squelette demandé n\'est pas autorisé. Exemple qui restreint une page aux rédacteurs logués : <code>#AUTORISER_SINON_LOGIN{ecrire}</code>.
+@puce@ {{#AUTORISER_SINON_LOGIN<html>{XX}</html>}} (SPIP>=3.0) : balise équivalente à <code>#AUTORISER{XX}|sinon_interdire_acces{[(#URL_PAGE{login}|parametre_url{url,#SELF,&})]}</code> et pratique pour lancer une demande de login lorsque le squelette demandé n\'est pas autorisé. Exemple qui restreint une page aux rédacteurs logués : <code>#AUTORISER_SINON_LOGIN{ecrire}</code>.
 
-@puce@ {{#LESMOTS}} : en cours de développement.',
+@puce@ {{#LESMOTS}} : (en cours de développement).',
 	'trousse_balises:nom' => 'Trousse à balises',
 	'type_urls:description' => '@puce@ SPIP offre un choix sur plusieurs jeux d\'URLs pour fabriquer les liens d\'accès aux pages de votre site.
 
@@ -920,8 +928,11 @@ Plus d\'infos : [->http://www.spip.net/fr_article765.html]. L\'outil « [.->boi
 [[%radio_type_urls3%]]
 <q3>@_CS_ASTER@pour utiliser les formats {html}, {propres}, {propres2}, {libres} ou {arborescentes}, recopiez le fichier &quot;htaccess.txt&quot; du répertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention à ne pas écraser d\'autres réglages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-répertoire&quot;, vous devrez aussi éditer la ligne &quot;RewriteBase&quot; ce fichier. Les URLs définies seront alors redirigées vers les fichiers de SPIP.</q3>
 
-<radio_type_urls3 valeur="page">@puce@ {{URLs «page»}} : ce sont les liens par défaut, utilisés par SPIP depuis sa version 1.9x.
+<radio_type_urls3 valeur="page">@puce@ {{URLs «page»}} : ce sont les liens par défaut, utilisés par SPIP depuis sa version~1.9x.
 _ Exemple : <code>/spip.php?article123</code>[[%terminaison_urls_page%]][[%separateur_urls_page%]]</radio_type_urls3>
+
+<radio_type_urls3 valeur="simple">@puce@ {{URLs «simple»}} : les liens ont une forme explicite (à partir de {{SPIP~3.0}}).
+_ Exemple : <code>spip.php?page=article&id_article=12</code>[[%terminaison_urls_simple%]]</radio_type_urls3>
 
 <radio_type_urls3 valeur="html">@puce@ {{URLs «html»}} : les liens ont la forme des pages html classiques.
 _ Exemple : <code>/article123.html</code></radio_type_urls3>
@@ -977,6 +988,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'url_html' => 'html@_CS_ASTER@',
 	'url_libres' => 'libres@_CS_ASTER@',
 	'url_page' => 'page',
+	'url_simple' => 'simple',
 	'url_propres' => 'propres@_CS_ASTER@',
 	'url_propres-qs' => 'propres-qs',
 	'url_propres2' => 'propres2@_CS_ASTER@',
