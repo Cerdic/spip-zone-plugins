@@ -4,7 +4,7 @@
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=es" total="141" traduits="130" relire="0" modifs="0" nouveaux="11" pourcent="92.20">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole?lang_cible=es" total="141" traduits="141" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
