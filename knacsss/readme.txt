@@ -12,6 +12,7 @@ Appel de la démo
 ?page=demo/knacsss
 
 Warning
+Sauf l'ajout dans un unique fichier sass/knacss.css du chemin sass/ sur toutes les lignes @import 
 Le dossier sass n'a pas été modifié et n'a subit aucun mauvais traitement durant son passage dans la zone SPIP,
 il est conforme à l'original disponible sur https://github.com/HugoGiraudel/KNACSS-Sass
 
