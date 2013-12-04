@@ -42,6 +42,10 @@ if (defined('_ADAPTIVE_IMAGES_MIN_WIDTH_1x'))
 if (defined('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION'))
 	$AdaptiveImage->maxWidthMobileVersion = _ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION;
 
+// GD memory limit
+if (defined('_IMG_GD_MAX_PIXELS'))
+	$AdaptiveImage->maxImagePxGDMemoryLimit = _IMG_GD_MAX_PIXELS;
+
 // Pour generer chaque variante d'image uniquement quand elle est demandee pour la premiere fois
 // par defaut false : on genere toutes les images au calcul de la page (mais timeout possible)
 // pour passer a true : ajouter la rewrite rule suivante dans .htaccess
