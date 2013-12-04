@@ -168,7 +168,7 @@ function commandes_post_edition($flux){
 			if( $config['expediteur'] != "facteur" )
 				$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 
-			// Envoyer au vendeur et au client
+			// Envoyer au vendeur et optionnellement au client
 			$notifications('commande_vendeur', $id_commande, $options);
 			if($config['client'])
 				$notifications('commande_client', $id_commande, $options);

@@ -166,7 +166,6 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 	$champs['id_auteur'] = $id_auteur;
 
 	// Pipeline pre_edition
-	// Les dates de paiement et d'envoi sont mises à jour via cette pipeline
 	$champs = pipeline(
 		'pre_edition',
 		array(

@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_commandes' => 'Commandes',
 	'info_date_envoi_vide' => 'commande non envoyée',
 	'info_date_paiement_vide' => 'commande non payée',
+	'info_date_non_definie' => 'non définie',
 	'info_nb_commandes' => '@nb@ commandes',
 	'info_nb_commandes_statut_attente' => '@nb@ commandes en attente de validation',
 	'info_nb_commandes_statut_partiel' => '@nb@ commandes partiellement payées',
