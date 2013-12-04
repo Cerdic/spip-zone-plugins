@@ -18,4 +18,5 @@
 	<utilise nom="Z" compatibilite="[1.7.17;]" />
 
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="seminaire_skel_pipelines.php" />
+	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seminaire_skel_pipelines.php" />
 </paquet>
