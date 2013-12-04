@@ -1,0 +1,19 @@
+<paquet
+	prefix="knacsss"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="knacsss.png"
+	documentation=""
+>
+
+	<nom>KNACSS-Sass</nom>
+	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
+	<credit>http://knacss.com</credit>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head" action="insert_head" />
+	
+
+</paquet>
