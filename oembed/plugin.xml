@@ -7,7 +7,7 @@
 	<br />Licence: [GPL3->http://www.gnu.org/licenses/gpl-3.0.html]
 	</auteur>
 	<version>
-	1.0.1
+	1.0.2
 	</version>
 	<etat>
 	test
@@ -63,6 +63,6 @@
 -->
 <!-- manque aussi le menu -->
 	<necessite id='tw' version='[0.8.19;]' />
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>

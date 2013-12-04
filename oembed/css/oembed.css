@@ -12,7 +12,7 @@
 .oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
 
 /* Oembed generique */
-.oembed.oe-rich {display: block;background: #fff;padding: 10px;border: 1px solid #eee;margin: 1em 0;}
+.oembed.oe-rich {display: block;background: #f8f8f8;padding: 10px;border: 1px solid #eee;margin: 1em 0;text-align: left}
 .oembed.oe-link.oe-rich .oe-html {display: block;}
 .oe-rich > blockquote {font-style: normal;}
 

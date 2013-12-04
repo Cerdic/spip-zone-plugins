@@ -1,9 +1,9 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/oembed-32.png"
 	schema="0.4.0"
 	documentation="http://contrib.spip.net/4407"
