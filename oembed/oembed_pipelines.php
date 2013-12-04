@@ -180,6 +180,7 @@ function oembed_post_edition($flux) {
  * @return mixed
  */
 function oembed_pre_propre($texte) {
+	static $base = null;
 	include_spip('inc/config');
 	if (lire_config('oembed/embed_auto','oui')!='non') {
 		include_spip('inc/oembed');
@@ -188,9 +189,13 @@ function oembed_pre_propre($texte) {
 			# seuls les autoliens beneficient de la detection oembed
 			AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
 			AND (oembed_verifier_provider($url) OR (lire_config('oembed/detecter_lien','non')=='oui'))) {
-				$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
-				if ($fond = trim($fond))
-					$texte = str_replace($lien, echappe_html("<html>$fond</html>"), $texte);
+				if (is_null($base))
+				    $base = url_de_base();
+				if (strncmp($url,$base,strlen($base))!=0){
+					$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
+					if ($fond = trim($fond))
+						$texte = str_replace($lien, echappe_html("<html>$fond</html>"), $texte);
+				}
 			}
 		}
 	}
