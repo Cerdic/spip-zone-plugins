@@ -4,7 +4,7 @@
 	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]</auteur>
 	<licence>&#169; 2007 GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Enluminures-typographiques-V3-pour-SPIP-2-avec</lien>
-	<version>3.3.2</version>
+	<version>3.4.0</version>
 	<etat>stable</etat>
 	<description>Ce plugin ajoute des raccourcis typographiques et des boutons au porte plume. Par exemple :
 -* Paragraphes :
@@ -23,6 +23,7 @@
 	</description>
 	<prefix>typoenluminee</prefix>
 	<icon>img_pack/moinecopiste.gif</icon>
+	woptions>typoenluminee_options.php</options>
 
 	<pipeline>
 		<nom>pre_propre</nom>
