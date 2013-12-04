@@ -23,7 +23,7 @@ function scss_compile($style, $contexte = array()){
 	// le compilateur scssc compile le contenu
 	$scss = new scssc();
 	// lui transmettre le path qu'il utilise pour les @import
-	$scss->importDir = _chemin();
+	$scss->setImportPaths(_chemin());
 
 	try {
 		$out = $scss->compile($style);
