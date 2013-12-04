@@ -246,4 +246,35 @@ function oembed_detecter_lien($url) {
 		return false;
 }
 
+
+/**
+ * Embarquer un lien oembed si possible
+ * @param string $lien
+ * @return string
+ */
+function oembed_embarquer_lien($lien){
+	static $base = null;
+
+	$url = extraire_attribut($lien, 'href');
+	$texte = null;
+	if ($url
+	  AND (
+			oembed_verifier_provider($url)
+		  OR (lire_config('oembed/detecter_lien','non')=='oui'))
+	  ){
+		if (is_null($base))
+		    $base = url_de_base();
+		// on embarque jamais un lien de soi meme car c'est une mise en abime qui donne le tourni
+		// (et peut provoquer une boucle infinie de requetes http)
+		if (strncmp($url,$base,strlen($base))!=0){
+			$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
+			if ($fond = trim($fond)){
+				$texte = $fond;
+			}
+		}
+	}
+
+	return $texte;
+}
+
 ?>

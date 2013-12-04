@@ -71,4 +71,25 @@ function oembed($url, $maxwidth=0, $maxheight=0){
 	return $url;
 }
 
+
+function inc_ressource_dist($rac) {
+
+	include_spip('inc/lien');
+	$url = explode(' ', trim($rac, '<>'));
+	$url = $url[0];
+
+	$texte = null;
+	# <http://url/absolue>
+	if (preg_match(',^https?://,i', $url)){
+		include_spip('inc/oembed');
+		$lien = PtoBR(propre("[->".$url."]"));
+		// null si pas embedable
+		$texte = oembed_embarquer_lien($lien);
+		if ($texte){
+			$texte = "<html>$texte</html>";
+		}
+	}
+
+	return $texte;
+}
 ?>

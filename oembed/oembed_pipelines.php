@@ -180,23 +180,28 @@ function oembed_post_edition($flux) {
  * @return mixed
  */
 function oembed_pre_propre($texte) {
-	static $base = null;
 	include_spip('inc/config');
-	if (lire_config('oembed/embed_auto','oui')!='non') {
-		include_spip('inc/oembed');
-		foreach (extraire_balises($texte, 'a') as $lien) {
-			if ($url = extraire_attribut($lien, 'href')
-			# seuls les autoliens beneficient de la detection oembed
-			AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
-			AND (oembed_verifier_provider($url) OR (lire_config('oembed/detecter_lien','non')=='oui'))) {
-				if (is_null($base))
-				    $base = url_de_base();
-				if (strncmp($url,$base,strlen($base))!=0){
-					$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
-					if ($fond = trim($fond))
-						$texte = str_replace($lien, echappe_html("<html>$fond</html>"), $texte);
+
+	// si oembed/embed_auto==oui on oembed les liens qui sont tous seuls sur une ligne
+	// (mais jamais les liens inline dans le texte car ca casse trop l'ancien contenu)
+	if (stripos($texte,"<a")!==false
+		AND lire_config('oembed/embed_auto','oui')!='non') {
+		preg_match_all(",(\r?\n\r?\n)(<a\b[^>]*>.*</a>)(\r?\n\r?\n),Uims",$texte,$matches,PREG_SET_ORDER);
+		if (count($matches)){
+
+			$replace = array();
+
+			include_spip('inc/oembed');
+			foreach ($matches as $match) {
+				if (!isset($replace[$match[0]])
+				  AND preg_match(',\bauto\b,', extraire_attribut($match[2], 'class'))
+				  AND !is_null($emb = oembed_embarquer_lien($match[2]))) {
+					$replace[$match[0]] = $match[1] . echappe_html("<html>$emb</html>") . $match[3];
 				}
 			}
+
+			if (count($replace))
+				$texte = str_replace(array_keys($replace), array_values($replace), $texte);
 		}
 	}
 	return $texte;
@@ -205,4 +210,3 @@ function oembed_pre_propre($texte) {
 include_spip('inc/config');
 if (!function_exists('lire_config')) { function lire_config($a=null,$b=null) { return $b; } }
 
-?>
