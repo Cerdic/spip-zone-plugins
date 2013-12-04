@@ -15,8 +15,9 @@ function seminaire_skel_insert_head_css($flux) {
 
 function seminaire_skel_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/configurer_seminaire'){
-	$ajout = recuperer_fond('inc/choix_couleur');
-	$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);	}
+	$ajout = recuperer_fond('inc/choix_couleur',array('couleur_evenement' => lire_config('seminaire/couleur_evenement','#000000')));	
+	$flux['data'] = preg_replace('%(<!--extra-->)%is', $ajout."\n".'$1', $flux['data']);	}
 	return $flux;
 }
 ?>
+
