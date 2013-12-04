@@ -23,7 +23,7 @@
 	</description>
 	<prefix>typoenluminee</prefix>
 	<icon>img_pack/moinecopiste.gif</icon>
-	woptions>typoenluminee_options.php</options>
+	<options>typoenluminee_options.php</options>
 
 	<pipeline>
 		<nom>pre_propre</nom>
