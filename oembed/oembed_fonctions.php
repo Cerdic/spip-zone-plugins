@@ -73,6 +73,7 @@ function oembed($url, $maxwidth=0, $maxheight=0){
 
 
 function inc_ressource_dist($rac) {
+	static $null_allowed = null;
 
 	include_spip('inc/lien');
 	$url = explode(' ', trim($rac, '<>'));
@@ -89,7 +90,39 @@ function inc_ressource_dist($rac) {
 			$texte = "<html>$texte</html>";
 		}
 	}
+	// compat SPIP < 3.0.14
+	// sans le patch http://zone.spip.org/trac/spip-zone/changeset/79139/_core_/branches/spip-3.0/plugins/textwheel
+	if (is_null($texte)) {
+		if (is_null($null_allowed)){
+			if (version_compare($GLOBALS['spip_version_branche'],"3.0.14","<"))
+				$null_allowed = false;
+			else
+				$null_allowed = true;
+		}
+
+		if(!$null_allowed){
+			include_spip('inc/lien');
+			$url = explode(' ', trim($rac, '<>'));
+			$url = $url[0];
+			# <http://url/absolue>
+			if (preg_match(',^https?://,i', $url))
+				$texte = PtoBR(propre("<span class='ressource spip_out'>&lt;[->".$url."]&gt;</span>"));
+			# <url/relative>
+			elseif (false !== strpos($url, '/'))
+				$texte = PtoBR(propre("<span class='ressource spip_in'>&lt;[->".$url."]&gt;</span>"));
+			# <fichier.rtf>
+			else {
+				preg_match(',\.([^.]+)$,', $url, $regs);
+				if (file_exists($f = _DIR_IMG.$regs[1].'/'.$url)) {
+					$texte = PtoBR(propre("<span class='ressource spip_in'>&lt;[".$url."->".$f."]&gt;</span>"));
+				} else {
+					$texte = PtoBR(propre("<span class='ressource'>&lt;".$url."&gt;</span>"));
+				}
+			}
+
+		}
+	}
 
 	return $texte;
 }
-?>
+

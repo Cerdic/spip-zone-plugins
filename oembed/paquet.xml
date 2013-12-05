@@ -1,7 +1,7 @@
 <paquet
 	prefix="oembed"
 	categorie="multimedia"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/oembed-32.png"
@@ -28,5 +28,4 @@
 
 	<menu nom="configurer_oembed" titre="oembed:titre_oembed" parent="bando_configuration" icone="images/oembed-16.png" />
 	<necessite nom="medias" compatibilite="[2.7.1;]" />
-	<necessite nom="tw" compatibilite="[0.8.19;]" />
 </paquet>
