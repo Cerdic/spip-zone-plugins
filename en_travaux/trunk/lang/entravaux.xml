@@ -15,6 +15,9 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=it" total="11" traduits="7" relire="0" modifs="0" nouveaux="4" pourcent="63.64">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=nl" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/entravaux-193?lang_cible=ru" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
