@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
-	'zengarden_description' => ' Zie, proef en kies het juiste thema voor je site. ',
-	'zengarden_slogan' => 'Een Zen tuintje voor Zpip' # MODIF
+	'zengarden_description' => 'Bekijk, probeer en kies het juiste thema voor je site. ',
+	'zengarden_slogan' => 'SPIP in Zen-sferen'
 );
 
 ?>
