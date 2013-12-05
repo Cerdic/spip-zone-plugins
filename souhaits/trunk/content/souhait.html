@@ -33,16 +33,22 @@
 			<p>
 				<a href="[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|extraire_attribut{src})]" class="mediabox">[(#LOGO_SOUHAIT|sinon{#GET{logodoc}}|image_reduire{200,200}|inserer_attribut{alt,Illustration}|inserer_attribut{class,img-rounded})]</a>
 			</p>
+			[(#REM) Seulement si ce n'est pas déjà proposé ou acheté ]
+			[(#STATUT|in_array{#LISTE{propose, achete}}|non)
 			[<p class="prix big">
 				<i class="icon-barcode" style="vertical-align:baseline;"></i> <span class="#EDIT{prix}">(#PRIX|>{0}|?{#PRIX})</span> €
 			</p>]
+			]
 		</div>
 	
 		[<div class="#EDIT{descriptif} texte surlignable">(#DESCRIPTIF|image_reduire{500,0})</div>]
-
+		
+		[(#REM) Seulement si ce n'est pas déjà proposé ou acheté ]
+		[(#STATUT|in_array{#LISTE{propose, achete}}|non)
 		[<p class="site big">
 			<i class="icon-gift" style="vertical-align:baseline;"></i> <a href="(#URL_SITE)" class="spip_out">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 		</p>]
+		]
 	</div>
 	[
 	<footer>

@@ -12,6 +12,8 @@
 		<span class="label #STATUT[ (#LISTE{libre,cagnotte,propose,achete,poubelle}|str_replace{#LISTE{label-success,label-warning,label-important,label-important,label-inverse},#STATUT})]" title="[(#VAL{souhait:statut_}|concat{#STATUT,_explication}|_T)]">[(#VAL{souhait:statut_}|concat{#STATUT,_label}|_T|ucfirst)]</span></strong>
 	<!--<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="auteurs"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>-->
 	[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF|couper{#ENV{coupe,300}}|paragrapher)</div>]
+	[(#REM) Seulement si ce n'est pas déjà proposé ou acheté ]
+	[(#STATUT|in_array{#LISTE{propose, achete}}|non)
 	<p class="infos">
 		[<span class="prix">
 			<i class="icon-barcode"></i> (#PRIX|>{0}|?{#PRIX}) €
@@ -27,6 +29,7 @@
 			<i class="icon-gift"></i> <a href="(#URL_SITE)" class="spip_out">#SET{nom_site,#CHAMP_SQL{nom_site}|?{#NOM_SITE,#URL_SITE|parse_url|table_valeur{host}}}<:souhait:voir_en_ligne{nom_site=#GET{nom_site}}:></a>
 		</span>]
 	</p>
+	]
 	<p class="meta-publi">
 	<BOUCLE_nb_commentaires(FORUMS) {id_souhait}{plat} />[(#TOTAL_BOUCLE|oui)
 		<span class="comments">
