@@ -22,6 +22,16 @@ function seminaire_article_est_seminaire($objet, $id) {
 	return ($seminaire == 'on');
 }
 
+function autoriser_article_modifierextra_seminaire_dist($faire,$quoi,$id,$options){
+	include_spip('inc/autoriser');
+	return autoriser('creerevenementdans','article',$id);
+}
+
+function autoriser_article_voirextra_seminaire_dist($faire,$quoi,$id,$options){
+	include_spip('inc/autoriser');
+	return autoriser('creerevenementdans','article',$id);
+}
+
 // autorisations des champs extras d'évènements du séminaire
 foreach (array(
 	'attendee',
