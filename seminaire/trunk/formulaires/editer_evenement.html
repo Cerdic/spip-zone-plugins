@@ -30,7 +30,7 @@
 				<select name="id_mot" id="id_mot">
 					<option></option>
 					<BOUCLE_mots2(MOTS){id_groupe}>
-					<option value="#ID_MOT"[(#ID_MOT|=={#ENV{id_mot}}|?{' selected="selected"',''})]>#TITRE</option>
+					<option value="#ID_MOT"[(#ID_MOT|=={#ENV{id_mot}}|oui)selected="selected"]>#TITRE</option>
 					</BOUCLE_mots2>
 				</select>
 			</li>
