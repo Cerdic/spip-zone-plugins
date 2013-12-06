@@ -13,6 +13,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/pages?lang_cible=fr" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/pages?lang_cible=nl" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/pages?lang_cible=ru" total="12" traduits="6" relire="0" modifs="2" nouveaux="4" pourcent="50.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
