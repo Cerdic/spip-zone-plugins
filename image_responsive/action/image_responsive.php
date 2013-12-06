@@ -80,7 +80,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 		else {
 			if (_IMG_GD_MAX_PIXELS && $srcWidth*$srcHeight>_IMG_GD_MAX_PIXELS){
 				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
-				return $image;
+				return("<img src='$image'>");				
 			}
 			$destFormat = $format_sortie;
 			if (!$destFormat) {
