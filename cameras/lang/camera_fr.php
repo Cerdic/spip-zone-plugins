@@ -70,6 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_camera' => 'Ajouter cette caméra',
 	'lien_retirer_camera' => 'Retirer cette caméra',
 	'lien_retirer_cameras' => 'Retirer toutes les caméras',
+	'label_actualite_locale' => 'Actualité locale',
+	'label_actualite_globale' => 'Actualité globale',
 	
 	//M
 	'modifier' => 'Modifier',

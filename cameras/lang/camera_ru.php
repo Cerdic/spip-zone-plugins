@@ -67,6 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_camera' => 'Добавить камеру',
 	'lien_retirer_camera' => 'Удалить камеру',
 	'lien_retirer_cameras' => 'Удалить все камеры',
+	'label_actualite_locale' => 'местные новости',
+	'label_actualite_globale' => 'глобальные новости',
 	
 	//M
 	'modifier' => 'Изменить',
