@@ -3,7 +3,7 @@
 	categorie="divers"
 	version="0.1.7"
 	etat="experimental"
-	compatibilite="[3.0.0-rc;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/camera-128.png"
 	schema="0.6.1"
 	documentation="https://red.rebellyon.info/projects/carto/wiki"
