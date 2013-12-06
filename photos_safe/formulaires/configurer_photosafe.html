@@ -1,0 +1,20 @@
+[(#MAGICK_TEST)]
+
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:photosafe:photosafe_exif:></h3>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+		[(#SAISIE{case,rm_exif,label='Supprimer les données exif des photos'})]
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+	</div>
+	</form>
+</div>
