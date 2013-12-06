@@ -12,10 +12,14 @@ Appel de la démo
 ?page=demo/knacsss
 
 Warning
-Sauf l'ajout dans un unique fichier sass/knacss.css du chemin sass/ sur toutes les lignes @import 
-Le dossier sass n'a pas été modifié et n'a subit aucun mauvais traitement durant son passage dans la zone SPIP,
+
+Pour rester cohérent avec les bons usages SPIP, le dossier sass/ est renommé en css/ 
+sauf l'ajout dans un unique fichier css/knacss.css du chemin css/ sur toutes les lignes @import, 
+son contenu comme ses fichiers n'a pas été modifié et n'a subit aucun mauvais traitement lors du passage en zone SPIP,
 il est conforme à l'original disponible sur https://github.com/HugoGiraudel/KNACSS-Sass
 
+Surcharges
 
-
-
+Les surcharges .scss des squelettes (effectives aussi pour les @import) doivent reprendre le nom des dossiers du plugin
+exemple:
+squelettes/css/helpers/_reset.scss

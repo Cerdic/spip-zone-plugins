@@ -25,20 +25,20 @@ $base-font-size: 14 				!default; /* 4 */
 $regular-font-stack: "Helvetica", "Arial", sans-serif; /* 5 */
 $monospace-font-stack: "Consolas", "DejaVu Sans Mono", "Courier", monospace; /* 5 */
 
-@import "sass/helpers/mixins";          // Sass only
-@import "sass/helpers/reset";           // Home made reset
-@import "sass/helpers/spacing-helpers"; // A couple of spacing-related helper classes
-@import "sass/helpers/layout-helpers";  // A couple of layout-related helper classes and Sass placeholder 
-@import "sass/helpers/block-helpers";   // A couple of block-related helper classes
+@import "css/helpers/mixins";          // Sass only
+@import "css/helpers/reset";           // Home made reset
+@import "css/helpers/spacing-helpers"; // A couple of spacing-related helper classes
+@import "css/helpers/layout-helpers";  // A couple of layout-related helper classes and Sass placeholder 
+@import "css/helpers/block-helpers";   // A couple of block-related helper classes
 
-@import "sass/modules/grids";           // Small grid system
-@import "sass/modules/tables";          // Tables
-@import "sass/modules/forms";           // Forms
-@import "sass/modules/icons";           // Icons (unicode based) and bullets
-@import "sass/modules/messages";        // Message system
-@import "sass/modules/layout";          // Layout
-@import "sass/modules/flexbox";         // Flexbox helpers
-@import "sass/modules/typography";      // Typography baseline and vertical rythm
+@import "css/modules/grids";           // Small grid system
+@import "css/modules/tables";          // Tables
+@import "css/modules/forms";           // Forms
+@import "css/modules/icons";           // Icons (unicode based) and bullets
+@import "css/modules/messages";        // Message system
+@import "css/modules/layout";          // Layout
+@import "css/modules/flexbox";         // Flexbox helpers
+@import "css/modules/typography";      // Typography baseline and vertical rythm
 
-@import "sass/partials/iefix";          // Some IE fixes
-@import "sass/partials/print";          // Print stylesheet
+@import "css/partials/iefix";          // Some IE fixes
+@import "css/partials/print";          // Print stylesheet
