@@ -42,8 +42,8 @@ function calculer_top_image_responsive(this_img) {
 	this_img.attr("data-top", this_img.offset().top);
 }
 
-function charger_image_lazy() {
-	var top = $(window).scrollTop();
+function charger_image_lazy(top) {
+	if (!top) var top = $(window).scrollTop();
 	var height = $(window).height();
 	
 	var limite_haut = top - height;
@@ -60,7 +60,6 @@ function charger_image_lazy() {
 }
 
 function charger_image_responsive () {
-
 	// Premier passage: mettre les images inconnues au bon format
 	$("img[src$='rien.gif']").each(function() {
 		var this_img = $(this);
