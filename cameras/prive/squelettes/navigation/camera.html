@@ -1,0 +1,24 @@
+<BOUCLE_nav(cameras){id_camera}{statut==.*}{si #ENV{exec}|=={camera}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','camera','id',#ENV{id_camera}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+	<div class='formulaire_spip formulaire_editer formulaire_editer_logo formulaire_editer_logo_camera'>
+	[<h3 class="titrem">(#ENV{_options}|table_valeur{titre})</h3>]
+		<div class="apercu">
+			
+			[<div class="spip_logos"><a href="#ENV{logo}" class='mediabox'>(#LOGO_CAMERA|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{100})]}|inserer_attribut{alt,#ENV{quoi,logo_on}})</a></div>]
+			[(#SET{largeur,[(#LOGO_CAMERA|largeur)]})]
+			[(#SET{hauteur,[(#LOGO_CAMERA|hauteur)]})]
+			[<div class="titre">(#ENV{titre,''})</div>]
+			<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
+		</div>
+	</div>
+</div>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,camera,id,#ID_CAMERA},data,''}}
+
+</BOUCLE_nav>
+
+<//B_nav>

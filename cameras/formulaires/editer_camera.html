@@ -1,0 +1,105 @@
+#SET{tab_zones,#ARRAY}
+<BOUCLE_zones_cameras(cameras){tout}>
+	#SET{tab_zones, #GET{tab_zones}|array_merge{#ARRAY{#ZONE,#ZONE}}}
+</BOUCLE_zones_cameras>
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_camera,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_camera' value='#ENV{id_camera}' />
+			<ul>
+				[(#CONFIG{cameras/titre_auto}|=={on}|non)
+					[(#SAISIE{input, titre, label=<:camera:label_titre:>})]
+				]
+				[(#SESSION{statut}|=={0minirezo}|oui)
+				  [(#ENV{id_camera}|=={oui}|non)
+					[(#SAISIE{camera_select, zone,
+					label=<:camera:label_zone:>,
+					cacher_option_intro=oui,
+					valeur=#ENV{zone},
+					datas=#GET{tab_zones}})]
+				  ]
+				]
+			</ul>
+			
+		<div style="margin: -0.34625em -10px;">
+			[(#MODELE{carto-carte, source=page_editer_camera, id_camera=#ID_CAMERA})]
+		</div>	
+		
+		<fieldset>
+			<legend><:camera:titre_formulaire_technique:></legend>
+			
+			<ul>
+				[(#SAISIE{input, lat, label=<:camera:label_lat:>})]
+				[(#SAISIE{input, lon, label=<:camera:label_lon:>})]
+				[(#SAISIE{input, direction, label=<:camera:label_direction:>})]
+				[(#SAISIE{input, angle, label=<:camera:label_angle:>})]
+				[(#SAISIE{camera_select, apparence,
+					label=<:camera:label_apparence:>,
+					option_intro=<:camera:label_choisir_apparence:>,
+					valeur=#ENV{apparence},
+					datas=#ARRAY{
+						nue, <:camera:label_apparence_nue:>,
+						dome, <:camera:label_apparence_dome:>,
+						encastre, <:camera:label_apparence_encastre:>,
+						boite, <:camera:label_apparence_boite:>,
+						radar, <:camera:label_apparence_radar:>}})]
+				[(#SAISIE{camera_select, zoom, 
+					label=<:camera:label_zoom:>,
+					cacher_option_intro=oui,
+					valeur=#ENV{zoom},
+					datas=#ARRAY{
+					yes, <:camera:label_oui:>,
+					no, <:camera:label_non:>}})]
+				[(#SAISIE{camera_select, orientable, 
+					label=<:camera:label_orientable:>,
+					cacher_option_intro=oui,
+					valeur=#ENV{orientable},
+					datas=#ARRAY{
+					yes, <:camera:label_oui:>,
+					no, <:camera:label_non:>}})]
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend><:camera:titre_formulaire_social:></legend>
+			<ul>
+				[(#SAISIE{camera_select, op_type, 
+					label=<:camera:label_op_type:>,
+					option_intro=<:camera:label_op_choisir_type:>,
+					valeur=#ENV{op_type},
+					datas=#ARRAY{
+						public, <:camera:label_op_type_public:>,
+						private, <:camera:label_op_type_prive:>}})]
+				[(#SAISIE{input, op_name, label=<:camera:label_op_name:>})]
+				[(#SAISIE{camera_select, surveillance,
+					label=<:camera:label_surveillance:>,
+					option_intro=<:camera:label_surveillance_choisir_type:>,
+					valeur=#ENV{surveillance},
+					datas=#ARRAY{
+						municipale, <:camera:label_surveillance_type_municipale:>,
+						parking, <:camera:label_surveillance_type_parking:>,
+						traffic, <:camera:label_surveillance_type_traffic:>,
+						commerces, <:camera:label_surveillance_type_commerce:>,
+						banques, <:camera:label_surveillance_type_banque:>,
+						batiments, <:camera:label_surveillance_type_batiment:>}})]
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend><:camera:titre_formulaire_infos:></legend>
+			<ul>
+				[(#SAISIE{textarea, description, label=<:camera:label_description:>})]
+			</ul>
+		</fieldset>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,4 @@
+[(#SESSION{id_auteur}|oui)#SET{statuts,#ARRAY{1,prop,2,prepa,3,publie}}][(#SESSION{id_auteur}|non)#SET{statuts,#ARRAY{3,publie}}]
+<BOUCLE_liste_cameras(cameras){ id_camera }{statut IN #GET{statuts}}>
+	[(#MODELE{carto_carte_popup_camera, id_camera=#ID_CAMERA})]
+</BOUCLE_liste_cameras>

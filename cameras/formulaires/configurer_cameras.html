@@ -1,0 +1,69 @@
+[(#SET{defaut_tri,#ARRAY{
+		titre,1,
+        date,#ENV{date_sens,-1},
+        id_camera,1
+}})
+]
+#SET{ch_img,#EVAL{$GLOBALS['dossier_squelettes']}}
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem">Options du formulaire d'édition</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#SAISIE{case,auth_camedit,
+				label=<:camera:label_config_auth:>})]
+		</ul>
+		<ul>
+			[(#SAISIE{case,titre_auto,
+				label=<:camera:label_config_titre:>})]
+		</ul>
+		<ul>
+			[(#SAISIE{input, lat, label=<:camera:label_lat:>, defaut='46.5'})]
+			[(#SAISIE{input, lon, label=<:camera:label_lon:>, defaut='2.5'})]
+			[(#SAISIE{input, zoom, label='Zoom', defaut='8'})]
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>
+
+<B_liste_cameras>
+#ANCRE_PAGINATION
+<div class="liste-objets cameras">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{camera:info_1_camera,camera:info_nb_cameras}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:camera:label_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:camera:label_zone:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_camera,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	<BOUCLE_liste_cameras(cameras){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{camera,#ID_CAMERA})]</td>
+			<td class='titre principale'>[(#LOGO_CAMERA|?{#LOGO_CAMERA|image_reduire{20,26},<img class="spip_logos" alt="" src="[(#GET{ch_img}|replace{squelettes,IMG}|replace{#CAMERAS_ZONE,#ZONE}|replace{../../..}|concat{/cameraon#ID_CAMERA.png})]" width="20" height="20" style="">})]<a href="[(#ID_CAMERA|generer_url_entite{camera})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CAMERA">[(#RANG). ]#TITRE</a></td>
+			<td class='auteur'>#ZONE</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,camera,#ID_CAMERA}|?{
+				<a href="[(#URL_ECRIRE{camera_edit,id_camera=#ID_CAMERA})]">#ID_CAMERA</a>,
+				#ID_CAMERA
+			})]</td>
+		</tr>
+	</BOUCLE_liste_cameras>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_cameras>
+[<div class="liste-objets cameras caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>]
+<//B_liste_cameras>

@@ -1,0 +1,42 @@
+[(#SET{width,#ENV{width,100%}})]
+[(#SET{height,#ENV{height,200px}})]
+[(#SET{source,#ENV{source,'null'}})]
+[(#SET{type_objet,#ENV{type_objet,camera}})]
+[(#SET{id_objet,#ENV{id_objet,''}})]
+[(#SET{id_camera,#ENV{id_camera,''}})]
+
+<div id="carte_leaflet" style="width:#GET{width}; height:#GET{height}; z-index:1;"></div>
+
+<script type="text/javascript">
+$().ready(function() {
+	
+	// position de la carte :  env > pt cam > pt cookie > pt par défaut
+	var lat = ( $.cookie('spip_carto_lat') != null ) ? $.cookie('spip_carto_lat') : #CONFIG{cameras/lat,46.5};
+	var lon = ( $.cookie('spip_carto_lon') != null ) ? $.cookie('spip_carto_lon') : #CONFIG{cameras/lon,2.5};
+	var zoom = ( $.cookie('spip_carto_zoom') != null ) ? $.cookie('spip_carto_zoom') : #CONFIG{cameras/zoom,6};
+	// si on edite une cam on surcharge par sa position
+	<BOUCLE_lc(cameras){ id_camera }{tout}> lat = #LAT; lon = #LON; zoom = 17; </BOUCLE_lc>
+	// les variables #ENV surchargent le tout
+	[lat = (#ENV{lat});] [lon = (#ENV{lon});] [zoom = (#ENV{zoom});]
+	
+	carto.Lang = #MODELE{carto-lang};
+
+	var carte = new carto.Carte('carte_leaflet', {
+		errors : "#GET{error}",
+		source : "#GET{source}",
+		id_camera : "#GET{id_camera}",
+		edition : false,
+		visiteur_enregistre : [(#SESSION{id_auteur}|?{true,false})],
+		chemin_plugin : "#EVAL{_DIR_PLUGIN_CAMERAS}",
+		chemin_site : "#URL_SITE_SPIP",
+		chemin_pages : "#URL_PAGE{sommaire}".split("=")[0]+"=",
+		position : { "lat" : lat, "lon" : lon, "zoom" : zoom },
+		lang : "#LANG"
+	});
+	
+	if( "#GET{source}" == "page_editer_camera") carto.Editer_camera_prive(carte, {
+		operateurs : [<BOUCLE_liste_operateurs(cameras){", "}>["(#OP_NAME|replace{'"', '\"'}|unique)"]</BOUCLE_liste_operateurs>]
+	});
+	
+});
+</script>

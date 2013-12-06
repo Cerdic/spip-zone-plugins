@@ -1,0 +1,28 @@
+<BOUCLE_art(cameras){id_camera=#ENV{id}}{statut?}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:info_numero_camera:><p>#ID_CAMERA</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{camera,#ID_CAMERA})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(cameras){id_camera}>
+	[(#VAL{redirect}
+		|generer_url_action{type=camera&id=#ID_CAMERA}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,camera,#ID_CAMERA,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=camera&id=#ID_CAMERA}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+
+</div>
+</BOUCLE_art>

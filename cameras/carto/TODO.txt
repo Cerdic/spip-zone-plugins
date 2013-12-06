@@ -1,0 +1,26 @@
+todo
+====
+
+visu
+----
+- recup des données du formulaire spip a la creation de la camera
+- carte generale des cameras
+- modifier icones de la carte
+- "pointer" sur la carte en "one-shot" ? / modale avec "deplacer" ? -> déplacer défaut
+- icone et/ou explication détaillée sur certains champs
+
+- onglets pour les differents fieldsets ?
+- nettoyer code carto
+- déplacer fonctions d'edition dans un autre fichier
+
+données
+-------
+- ajout date d'implantation / retrait
+- "vague d'installation"
+	- lien vers décision municipale ? document ?
+	- champ "responsable de l'installation" -> conseil municipal du XX/XX/XX ? 
+
+
+done
+====
+- recup les infos pour les cams enregistrées

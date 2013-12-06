@@ -1,0 +1,52 @@
+<BOUCLE_afficher_contenu(cameras){id_camera}{statut?}>
+<h1></h1>
+[(#MODELE{carto-carte, source=page_camera, id_camera=#ID_CAMERA})]
+
+<div class="categorie">
+<h4><:camera:titre_formulaire_technique:></h4>
+	#BOITE_OUVRIR{'Position géographique','simple'}
+	<div class="encart">
+		<:camera:label_lat:> : #LAT | <:camera:label_lon:> : #LON
+	</div>
+	#BOITE_FERMER
+
+	#BOITE_OUVRIR{'Orientation','simple'}
+	<div class="encart">
+		<p><:camera:label_direction:> : [(#DIRECTION)][(#DIRECTION|non)<span style="color:red;"><:camera:label_non_renseignee:></span>]</p>
+		<p><:camera:label_angle:> : [(#ANGLE)][(#ANGLE|non)<span style="color:red;"><:camera:label_non_renseigne:></span>]</p>
+	</div>
+	#BOITE_FERMER
+	
+	#BOITE_OUVRIR{'Apparence','simple'}
+	<div class="encart">
+		<p><:camera:label_apparence:> : [(#APPARENCE)][(#APPARENCE|non)<span style="color:red;"><:camera:label_non_renseignee:></span>]</p>
+		<p><:camera:label_zoom:> : [(#ZOOM)][(#ZOOM|non)<span style="color:red;"><:camera:label_non_renseigne:></span>]</p>
+		<p><:camera:label_orientable:> : [(#ORIENTABLE)][(#ORIENTABLE|non)<span style="color:red;"><:camera:label_non_renseigne:></span>]</p>
+	</div>
+	#BOITE_FERMER
+</div>
+
+<div class="categorie">
+<h4><:camera:titre_formulaire_social:></h4>
+	[(#BOITE_OUVRIR{'Opérateur','simple'})]
+	<div class="encart">
+		<p><:camera:label_op_name:> : [(#OP_NAME)][(#OP_NAME|non)<span style="color:red;"><:camera:label_non_renseigne:></span>]</p>
+		<p><:camera:label_op_type:> : [(#OP_TYPE)][(#OP_TYPE|non)<span style="color:red;"><:camera:label_non_renseigne:></span>]</p>
+	</div>
+	#BOITE_FERMER
+	[(#BOITE_OUVRIR{<:camera:label_surveillance:>,'simple'})]
+	<div class="encart">
+		<p>[(#SURVEILLANCE)][(#SURVEILLANCE|non)<span style="color:red;"><:camera:label_non_renseignee:></span>]</p>
+	</div>
+	#BOITE_FERMER	
+</div>
+
+<div class="categorie">
+<h4><:camera:titre_formulaire_infos:></h4>
+	[(#BOITE_OUVRIR{<:camera:label_description:>,'simple'})]
+	<div class="encart">
+		[(#DESCRIPTION|image_reduire{500,0})][(#DESCRIPTION|non)<span style="color:red;"><:camera:label_aucune_description:></span>]
+	</div>
+	#BOITE_FERMER
+</div>
+</BOUCLE_afficher_contenu>

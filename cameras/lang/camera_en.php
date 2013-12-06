@@ -1,0 +1,95 @@
+<?php
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_pointer_sur_carte' => 'Point on the map',
+	'bouton_deplacer_camera' => 'Drag camera',
+	'bouton_saisie_manuelle' => 'Manual entry',
+
+	//C
+	'cfg_titre_menu_camera' => 'Cameras',
+	'cfg_titre_camera' => 'Camera plugin configuration',
+	'cameras_recents'	=> 'Most recent published cameras',
+
+	// I
+	'icone_creer_camera' => 'Create a camera',
+	'icone_modifier_camera' => 'Edit this camera',
+	'info_aucun_camera' => 'No cameras',
+	'info_1_camera' => 'One camera',
+	'info_nb_cameras' => '@nb@ cameras',
+	'info_cameras_valider' => 'Cameras requiring validation',
+	'info_cameras_auteur' => 'This authors\' cameras',
+	'info_inconnu' => 'unknown',
+	
+	// L
+	'label_config_rubrique' => 'Default section',
+	'label_config_rubrique_auto' => 'Automatic section',
+	'label_config_titre' => 'Automatic title',
+	'label_config_auth' => 'Disable camera edition',
+	'label_oui' => 'Yes',
+	'label_non' => 'No',
+	'label_titre' => 'Location',
+	'label_type' => 'Camera type',
+	'label_apparence' => 'Appearance',
+	'label_choisir_apparence' => 'Choose camera\'s apparence',
+	'label_apparence_nue' => 'Bare',
+	'label_apparence_dome' => 'Dome',
+	'label_apparence_encastre' => 'Embeded',
+	'label_apparence_boite' => 'Boxed',
+	'label_apparence_radar' => 'Radar',
+	'label_zone'	=>	'Zone',
+	'label_lat' => 'Latitude',
+	'label_lon' => 'Longitude',
+	'label_angle' => 'Angle/ground',
+	'label_direction' => 'Direction',
+	'label_zoom'	=> 'Zoomable?',
+	'label_orientable'	=>	'Orientable',
+	'label_description' => 'Description',
+	'label_non_renseigne' => 'No data entered',
+	'label_non_renseignee' => 'No data entered',
+	'label_aucune_description' => 'No description',
+	'label_op_type' => 'Operator type',
+	'label_op_choisir_type' => 'Public or private ?',
+	'label_op_type_public' => 'Public',
+	'label_op_type_prive' => 'Private',
+	'label_op_name' => 'Operator name',
+	'label_height' => 'Height',
+	'label_surveillance' => 'Surveillance',
+	'label_surveillance_choisir_type' => 'Which surveillance type ?',
+	'label_surveillance_type_municipale' => 'Town',
+	'label_surveillance_type_parking' => 'Parking',
+	'label_surveillance_type_traffic' => 'Traffic',
+	'label_surveillance_type_commerce' => 'Shop',
+	'label_surveillance_type_banque' => 'Bank',
+	'label_surveillance_type_batiment' => 'Building',
+	'label_date' => 'Camera signaled on',
+	'lien_ajouter_camera' => 'Add this camera',
+	'lien_retirer_camera' => 'Remove this camera',
+	'lien_retirer_cameras' => 'Remove all cameras',
+	
+	//M
+	'modifier' => 'Edit',
+
+	//S
+	'slogan_site_cameras'=>'Collaborative mapping and resources against video surveillance',
+	
+	// T
+	'titre_formulaire_social'	=> 'Social data',
+	'titre_formulaire_technique' => 'Technical data',
+	'titre_formulaire_infos'  => 'Additional information',
+	'titre_formulaire_position' => 'Camera coordinates',
+	'titre_camera' => 'Camera',
+	'titre_cameras' => 'Cameras',
+	'titre_cameras_rubrique' => 'This section\'s cameras',
+	'titre_langue_camera' => 'Camera language',
+	'titre_logo_camera' => 'Camera logo',
+	'texte_creer_associer' => 'Create and link a camera',
+	'texte_ajouter_camera' => 'Add a camera',
+	'texte_changer_statut' => 'This camera is :'
+	
+
+);
+
+?>

@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+		titre,1,
+        date,#ENV{date_sens,-1},
+        id_camera,1
+}})
+]<B_liste_cameras>
+#ANCRE_PAGINATION
+<div class="liste-objets cameras">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{camera:info_1_camera,camera:info_nb_cameras}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:camera:label_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_camera,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_cameras(cameras){id_mot?}{id_auteur?}{zone=#CAMERAS_ZONE}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{camera,#ID_CAMERA})]</td>
+			<td class='titre principale'>[(#LOGO_CAMERA|image_reduire{20,26})]<a href="[(#ID_CAMERA|generer_url_entite{camera})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CAMERA">[(#RANG). ]#TITRE</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_camera}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,camera,#ID_CAMERA}|?{
+				<a href="[(#URL_ECRIRE{camera_edit,id_camera=#ID_CAMERA})]">#ID_CAMERA</a>,
+				#ID_CAMERA
+			})]</td>
+		</tr>
+	</BOUCLE_liste_cameras>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_cameras>
+[<div class="liste-objets cameras caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>]
+<//B_liste_cameras>

@@ -1,0 +1,146 @@
+[(#CACHE{0})]
+<?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+/*
+ *		/!\ Page de test !! très peu spip !!
+ *		------------------------------------
+ *		
+ *		spipification :
+ *		- pipeline entête
+ *		- passage en squelette et récup des #ENV ? 
+		- recup des cams par boucle ?
+ *		- comment interface squelette et php ?
+		- verifier recalcul &var_mode=recalcul
+ */
+
+	setGlobals();
+
+	$tpad = 1; // nombre de tiles "autours" de la tile à prendre en compte (padding)
+	$tpx = 256; // largeur/hauteur en px
+	$debug = isset($_GET['debug']);
+	$recalcul_tuile = isset($_GET['recalcul_tuile']);
+	if(!$debug && $_GET['type'] == 'openstreetmap.org'){
+		$ti = array( "type"=>$_GET['type'], "z"=>intval($_GET['z']), "x"=>intval($_GET['x']), "y"=>intval($_GET['y']));
+		$page['entetes']['Content-Type'] = "image/png";
+		header("Content-type: image/png");
+		servir_tuile($ti, $tpad, $tpx);
+	}else{
+		if( isset($_GET['recalcul_tout']) ){
+		//	//function supprimer_repertoire($dir) {
+			recalcul_tout($tpad, $tpx);
+		}else{
+			echo('debug:');
+			servir_debug();
+		}
+	}
+
+
+	function servir_debug(){
+	   	$src = $_GET['url'];
+	   	//$ti = urlToTile( $src );
+		$ti = array( "type"=>$_GET['type'], "z"=>$_GET['z'], "x"=>$_GET['x'], "y"=>$_GET['y']);
+	   	$dir = sous_repertoires('cache-carto/'.$ti['type'].'-vue/'.$ti['z'].'/'.$ti['x']);
+		$fp = $dir.$ti['y'].'.png';
+		$lonlat = tuile_pour_longlat($ti['z'], $ti['x'], $ti['y']);
+
+		//if(is_callable(array('Imagick','rotateImage'))){
+
+		if( extension_loaded('magickwand')
+			|| function_exists("NewMagickWand")
+			|| is_callable(array('Imagick','rotateImage')) ){
+			trace('<p>Imagick trouvé</p>');
+		}else{
+			trace('<p>Imagick pas trouvé</p>');
+		}
+		
+		trace("camera:");
+		//recalculer_camera(10);
+		trace('<hr/>');
+		
+		/*
+		trace("tuiles adjacentes:");
+		$t = tuile_camera(10);
+		print_r( tuiles_adjacentes( $t['z'], $t['x'], $t['y'] ) );
+		trace('<hr/>');
+		*/
+		
+		//trace("on invalide les tuiles");
+		//invalider_tuiles_camera('81');
+		//trace('<hr/>');
+
+		//recalculer_camera(10);
+		//recalculer_camera(81);
+		//recalculer_camera(82);
+		//recalculer_camera(80);
+
+		exec("convert -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
+		trace("ImageMagick/convert : $rcode <br>"); //Print the return code: 0 if OK, nonzero if error.
+		print_r($out);
+
+
+		
+		trace('<div style="float:left; border:solid 1px #DDD;"><img src="spip.php?page=cameras_tiles&var_mode=recalcul&type=openstreetmap.org&z='.$ti['z'].'&x='.$ti['x'].'&y='.$ti['y'].'"/><br/>vue calculée</div>');
+		//trace('<img src="local/cache-carto/openstreetmap.org/'.$ti['z'].'/'.$ti['x'].'/'.$ti['y'].'.png"/>');
+		trace('<div style="float:left; border:solid 1px #DDD;"><img src="'.str_replace('-vue', '', $fp).'"/><br/>tile originale OSM</div>');
+		trace('<div style="float:left; border:solid 1px #DDD;"><img src="'.str_replace('-vue', '-hit', $fp).'"/><br/>filtrée</div>');
+		trace('<br style="clear:both;"/>');
+		trace("serveur de tiles : ".$ti['type'].'<br/>');
+		trace("<br/> Lon-lat: : ".$lonlat["lon"].'/'.$lonlat["lat"]);
+		trace(' <a href="http://www.openstreetmap.org/?mlat='.$lonlat["lat"].'&mlon='.$lonlat["lon"].'&zoom=18"/>voir</a>');
+		trace('<br/><a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://b.tile.openstreetmap.org/18/134596/93515.png"/>OSM</a> ');
+		trace('<a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://otile2.mqcdn.com/tiles/1.0.0/osm/18/134596/93515.png"/>mapquest</a>');
+
+		trace('<br/><a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://b.tile.openstreetmap.org/18/134597/93515.png"/>OSM</a> ');
+		trace('<a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://otile2.mqcdn.com/tiles/1.0.0/osm/18/134597/93515.png"/>mapquest</a>');
+		trace('<br/><a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://a.tile.openstreetmap.org/18/134593/93512.png"/>OSM</a> ');
+		trace('<a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://otile2.mqcdn.com/tiles/1.0.0/osm/18/134593/93512.png"/>mapquest</a>');
+		trace('<br/><a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://a.tile.openstreetmap.org/18/134598/93516.png"/>OSM</a> ');
+		trace('<a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&url=http://otile2.mqcdn.com/tiles/1.0.0/osm/18/134598/93516.png"/>mapquest</a>');
+
+		// deux tiles de large
+		$t1 = tuile_pour_longlat($ti['z'], $ti['x'], $ti['y']);
+		$t2 = tuile_pour_longlat($ti['z'], $ti['x']+1, $ti['y']+1);
+		$t_lat = $t1["lat"]-$t2["lat"];
+		$t_lon = $t2["lon"]-$t1["lon"];
+		trace("<br/><br/>Largeur d'une tile lat= ".$t_lat);
+		trace("<br/>Deux tiles de haut lon= ".$t_lon);
+
+		trace('<hr/>');
+		trace('<a href="spip.php?page=cameras_tiles&var_mode=recalcul&debug&recalcul_tout&url=http://a.tile.openstreetmap.org/18/134598/93516.png"/>recalcul du fond de carte</a>');
+	}
+
+	function recalcul_tout($tpad, $tpx){
+		echo('<h2>recalcul du fond de carte</h2>');
+		$res = sql_allfetsel('*', 'cameras');
+
+		for ($i = 0; $i < count($res); $i++) {
+
+			echo( '#'.$res[$i]["id_camera"].' : '.$res[$i]["titre"].'<br/>');
+
+			$tile = tuile_pour_longlat(18, $res[$i]["lon"], $res[$i]["lat"]);
+			$url = "http://a.tile.openstreetmap.org/".$tile['z']."/".$tile['x']."/".$tile['y'].".png";
+			//$ti = urlToTile($url);
+			$ti = array( "type"=>'openstreetmap.org', "z"=>$tile['z'], "x"=>$tile['x'], "y"=>$tile['y']);
+			$type = $ti['type'];
+			$x = $tile['x']; $y = $tile['y']; $z = $tile['z'];
+			$fp_tile = sous_repertoires('cache-carto/openstreetmap.org-vue-1/'.$z.'/'.$x).$y.'.png';
+
+			if (file_exists( $fp_tile )){
+				echo" --> existe déjà<br/>";
+				echo'<img src="'.$fp_tile.'">';
+			}else{
+				echo" --> <b>[ X ] n'existe pas</b><br/>";
+				echo" --> calcul de la tile...<br/>";	
+				calculer_tuile( $fp_tile, $tpx, $tpad, $ti);
+				echo" --> fp_tile:".$fp_tile." tpx:".$tpx." tpad:".$tpad." ti:".$ti." <br/>";
+				echo" --> calcul terminé<br/>";
+			}	
+			echo'<hr/>';
+		}
+	}
+
+
+?>
+

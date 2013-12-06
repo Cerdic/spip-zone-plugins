@@ -1,0 +1,53 @@
+<paquet
+	prefix="cameras"
+	categorie="divers"
+	version="0.1.7"
+	etat="experimental"
+	compatibilite="[3.0.0-rc;3.0.*]"
+	logo="prive/themes/spip/images/camera-128.png"
+	schema="0.6.1"
+	documentation="https://red.rebellyon.info/projects/carto/wiki/PluginCameras"
+>	
+	<nom>Cam&eacute;ras</nom>
+	<!-- Ajout d'un objet camera dans SPIP -->
+	<!-- bonne année 2013!!  -->
+	
+	<auteur>Collectif</auteur>
+	<copyright>2012</copyright>
+	<licence>GNU/GPL</licence>
+		
+	<credit lien="http://rebellyon.info">Rebellyon.info</credit>
+	
+	<pipeline nom="declarer_tables_interfaces" inclure="base/cameras.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/cameras.php" />
+	
+	<pipeline nom="autoriser" inclure="cameras_autorisations.php" /> 
+	
+	<!-- Ajoute l'objet camera dans la liste des objets proposs à la publication -->
+	<pipeline nom="accueil_encours" inclure="cameras_pipelines.php" />
+	
+	<!-- Actions à effectuer après ajout ou modification d'une caméra -->
+	<pipeline nom="post_edition" inclure="cameras_pipelines.php" />
+	<pipeline nom="post_insertion" inclure="cameras_pipelines.php" />
+	<!-- modifier ou complter le contenu des listes pr&eacute;sentant les enfants d'un objet dans l'espace priv -->
+	<pipeline nom="affiche_enfants" inclure="cameras_pipelines.php" />
+	<!-- affiche du contenu au centre de la page de l'espace priv -->
+	<pipeline nom="affiche_milieu" inclure="cameras_pipelines.php" />
+	<!-- Ajoute la liste des cameras associées à un auteur (sur la page auteur) -->
+	<pipeline nom="affiche_auteurs_interventions" inclure="cameras_pipelines.php" /> 
+	
+	<!-- insrer du code dans le head de l'espace priv -->
+	<pipeline nom="header_prive" inclure="cameras_pipelines.php" />
+	<!-- insrer du code dans le head de l'espace public -->
+	<pipeline nom="insert_head" inclure="cameras_pipelines.php" />
+	
+	
+	<!-- facilitons les champs de formulaires -->
+	<necessite nom="saisies" compatibilite="[1.14.0;]" />
+	
+	
+	<menu nom="cameras" titre="camera:titre_cameras" parent="menu_edition" icone="images/camera-16.png" />
+	<menu nom="configurer_cameras" titre="camera:cfg_titre_menu_camera" parent="menu_configuration" icone="images/camera-16.png" />
+	<menu nom="camera_creer" titre="camera:icone_creer_camera" parent="outils_rapides" icone="images/camera-new-16.png" action="camera_edit" parametres="new=oui" />
+	
+</paquet>

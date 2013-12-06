@@ -1,0 +1,36 @@
+[(#SESSION{id_auteur}|oui)#SET{statuts,#ARRAY{1,prop,2,prepa,3,publie}}][(#SESSION{id_auteur}|non)#SET{statuts,#ARRAY{3,publie}}]
+[(#CACHE{0})][(#HTTP_HEADER{Content-type: application/json[; charset=(#CHARSET)]})]{
+    "type": "FeatureCollection",
+    "features": [
+		<BOUCLE_liste_cameras(cameras)
+			{ id_camera ?}
+			{ id_camera !IN #ENV{exclure} }
+			{statut IN #GET{statuts}}
+			{apparence ?}
+			{op_name ?}
+			{op_type ?}
+			{","}>{
+	        "geometry": {
+				"type": "Point",
+				"coordinates": [#LON, #LAT]
+	        },
+	        "type": "Feature",
+	        "properties": {
+				"id_spip": "#ID_CAMERA",
+				"id_camera": "#ID_CAMERA",
+				[(#SESSION{id_auteur}|oui)"statut_spip": "#STATUT",
+				]"point": "#LON,#LAT",
+				"lon": "#LON",
+				"lat": "#LAT",
+				"title": "[(#TITRE|replace{'"', '\"'})][(#SESSION{id_auteur}|oui) <a href='#URL_SITE_SPIP/ecrire/?exec=camera_edit&amp;id_camera=#ID_CAMERA' target='_blank'>Editer</a>]",
+				"description": "[(#TEXTE|replace{'"', '\"'})]",
+				"apparence": "#APPARENCE",
+				"direction": "#DIRECTION",
+				"angle": "#ANGLE",
+				"op_name": "[(#OP_NAME|replace{'"', '\"'})]",
+				"op_type": "#OP_TYPE",
+				"contenu_popup": "[(#MODELE{carto_carte_popup_camera, id_camera=#ID_CAMERA}|replace{\n}|replace{\r}|replace{\t}|replace{'"', '\"'})]"
+	        }
+	    }</BOUCLE_liste_cameras>
+	]
+}

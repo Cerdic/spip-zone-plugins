@@ -1,0 +1,27 @@
+Pour modifier les icones :
+
+Sous inkscape :
+---------------
+
+- ouvrir le fichier marqueur.svg
+- modifier les visuels (calque "vue" et calque "icone")
+
+Les calques "export-###" contiennent les masques (des carrés rouges) qui délimitent la zone à exporter dans marqueurs/ et le nom du fichier, cela permet des les exporter par lot.
+
+Il est possible que le calque ait une opacité de 0, on peut la remonter pour voir ce qu'on sélectionne mais il faut le remettre à 0 avant l'export, sinon les images sont toutes rouges !!
+
+Une fois les modifs visuelles terminées, pour exporter :
+- se positionner sur le calque "export" correspondant (icone ou vue)
+- baisser son opacité à 0 pour pas exporter ses carrés rouges (les masques)
+- ctrl-A pour selectionner tous les masques
+- ctrl-shift-E pour exporter, et cocher "exporter les # elements par lot"
+
+- recommencer avec l'autre calque (icones ou vue)
+
+
+Créer les variations avec Image Magick
+--------------------------------------
+
+$ cd 'img/carte'
+$ sh variantes.sh
+

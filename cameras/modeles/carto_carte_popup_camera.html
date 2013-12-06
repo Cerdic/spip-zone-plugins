@@ -1,0 +1,33 @@
+[(#SESSION{id_auteur}|oui)#SET{statuts,#ARRAY{1,prop,2,prepa,3,publie}}][(#SESSION{id_auteur}|non)#SET{statuts,#ARRAY{3,publie}}]
+
+ [(#SET{lang_apparence, #ARRAY{
+ nue, <:camera:label_apparence_nue:>,
+dome, <:camera:label_apparence_dome:>,
+encastre, <:camera:label_apparence_encastre:>,
+boite, <:camera:label_apparence_boite:>,
+radar, <:camera:label_apparence_radar:>}})]
+						
+[(#SET{lang_surveillance, #ARRAY{
+municipale, <:camera:label_surveillance_type_municipale:>,
+parking, <:camera:label_surveillance_type_parking:>,
+traffic, <:camera:label_surveillance_type_traffic:>,
+commerces, <:camera:label_surveillance_type_commerce:>,
+banques, <:camera:label_surveillance_type_banque:>,
+batiments, <:camera:label_surveillance_type_batiment:>}})]
+
+[(#SET{lang_operateur, #ARRAY{
+public, <:camera:label_op_type_public:>, 
+private, <:camera:label_op_type_prive:>}})]
+
+<BOUCLE_liste_cameras(cameras){id_camera}{statut IN #GET{statuts}}>
+<h2>[(#TITRE)]</h2>
+<ul>
+	<li><:camera:label_op_name:> : [(#OP_NAME|sinon{<i><:camera:info_inconnu:></i>})] [- (#GET{lang_operateur}|table_valeur{#OP_TYPE})]</li>
+	<li><:camera:label_surveillance:> : [(#SURVEILLANCE|?{ #GET{lang_surveillance}|table_valeur{#SURVEILLANCE}, <:camera:info_inconnu:> })]</li>
+	[<li><:camera:label_apparence:> : (#GET{lang_apparence}|table_valeur{#APPARENCE})</li>]
+	<li><a href='[(#URL_SITE_SPIP|replace{#CAMERAS_ZONE,#ZONE})/?camera#ID_CAMERA]' target='_blank'><:spip:form_prop_description:></a></li>
+	[<li>(#SESSION{id_auteur}|oui) <a href='[(#URL_SITE_SPIP|replace{#CAMERAS_ZONE,#ZONE})/ecrire/?exec=camera_edit&amp;id_camera=#ID_CAMERA]' target='_blank'>
+		<:camera:modifier:>
+	</a></li>]
+</ul>
+</BOUCLE_liste_cameras>
