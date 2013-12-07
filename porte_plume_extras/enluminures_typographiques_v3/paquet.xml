@@ -1,7 +1,7 @@
 <paquet
 	prefix="typoenluminee"
 	categorie="edition"
-	version="3.4.0"
+	version="3.4.1"
 	etat="stable"
 	compatibilite="[2.0.3;3.0.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
