@@ -1,7 +1,7 @@
 <paquet
         prefix="spipmine"
         categorie="squelette"
-        version="2.0.0"
+        version="2.0.1"
         etat="dev"
         compatibilite="[3.0.5;3.0.*]"
         logo="spipmine_logo-64.png"
@@ -15,7 +15,12 @@
 
     <licence>GNU/GPL</licence>
 
-
     <necessite nom="projets" compatibilite="[1.0.0;1.9.99]" />
     <necessite nom="spipr_dist" compatibilite="[0.4.0;1.9.99]" />
+    <necessite nom="contacts" compatibilite="[2.10.2;]" />
+    <necessite nom="dayfill" compatibilite="[2.1.3;]" />
+    <necessite nom="dayfill_factures" compatibilite="[1.0.2;]" />
+    <necessite nom="factures" compatibilite="[1.0.14;]" />
+    <necessite nom='projets_organisations' compatibilite='[1.0.3;1.9.99]' />
+    <necessite nom='reglements' compatibilite='[1.0.4;1.9.99]' />
 </paquet>
