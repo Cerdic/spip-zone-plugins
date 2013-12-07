@@ -17,7 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conception_graphique_par' => 'Ontwerp (c)',
 
 	// D
-	'date_forum' => 'De @date@ om @heure@',
+	'date_forum' => 'Op @date@ om @heure@',
+
+	// I
+	'info_1_commentaire' => '1 reactie',
+	'info_nb_commentaires' => '@nb@ reacties',
 
 	// L
 	'lire_la_suite' => 'Lees meer',
@@ -26,15 +30,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'pagination_next' => 'Volgende »',
 	'pagination_pages' => 'Pagina’s',
-	'pagination_prev' => '« Vorig',
-	'personaliser_nav' => 'Personaliseer dit menu',
+	'pagination_prev' => '« Vorige',
+	'personaliser_nav' => 'Pas dit menu aan',
 
 	// S
 	'sous_licence' => 'onder licensie',
 
 	// Z
-	'zapl_loading' => 'Loading ...',
-	'zapl_reload_off' => 'Klik hier als de pagina is niet volledig (of schakel javascript in uw browser)'
+	'zapl_loading' => 'Wordt geladen...',
+	'zapl_reload_off' => 'Klik hier als de pagina niet volledig is (of activeer Javascript in uw browser)'
 );
 
 ?>
