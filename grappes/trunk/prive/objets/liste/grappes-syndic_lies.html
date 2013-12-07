@@ -9,7 +9,7 @@
 		<tr class="tr_liste">
 			<td class='statut'>[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ]</td>
 			<td class='nom_site principale'>[(#LOGO_SITE|image_reduire{26,20})]#NOM_SITE</td>
-			<td class='id'><a href="[(#ID_SITE|generer_url_entite{site})]"><:grappes:voir:></a></td>
+			<td class='id'><a href="[(#ID_SYNDIC|generer_url_entite{site})]"><:grappes:voir:></a></td>
 			[(#ENV{editable})
 			<td class='action'>[(#BOUTON_ACTION{<:grappes:delier:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})],#URL_ACTION_AUTEUR{lier_objets,delier/grappe/#ID_GRAPPE/syndic/#ID_SYNDIC,#SELF},ajax})]</td>
 		]</tr>
