@@ -1,7 +1,7 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.14"
+	version="1.0.15"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
@@ -18,6 +18,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+    <necessite nom="contacts" compatibilite="[2.10.2;]" />
 
 	<pipeline nom="autoriser" inclure="factures_autorisations.php" /> 
 
