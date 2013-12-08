@@ -31,10 +31,11 @@
 				[(#SAISIE{input, identification,
 					label=<:contacts:label_identification:>,
 					explication=<:contacts:explication_identification:>})]
-					
+				[(#SET{liste_activite,#ARRAY})]<BOUCLE_activite(ORGANISATIONS){par activite} {fusion activite}>[(#SET{liste_activite, #GET{liste_activite}|push{#ACTIVITE}})]</BOUCLE_activite>
 				[(#SAISIE{input, activite,
 					label=<:contacts:label_activite:>,
-					explication=<:contacts:explication_activite:>})]
+					explication=<:contacts:explication_activite:>,
+					datas=#GET{liste_activite}})]
 					
 				[(#SAISIE{date_jour_mois_annee, date_creation,
 					label=<:contacts:label_date_creation:>})]
