@@ -13,7 +13,7 @@ if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
  * Analyse le contenu du bloc inclu entre les marqueurs de début et de fin de la todolist
  * puis appelle un squelette avec les paramètres calculés
  *
- * @param array	$t	l'index 0 représente le contenu du bloc
+ * @param array	$t	l'index 4 représente le contenu du bloc, l'index 3 la valeur du format si il existe.
  * @return string	le html généré à partir d'un squelette
  */
 function tw_todo($t) {
@@ -29,9 +29,16 @@ function tw_todo($t) {
 	$regexp_infos_complementaires = str_replace('indicateur_tag', $indicateur_tag, _TODO_REGEXP_INFOS_COMPLEMENTAIRES);
 
 	// Extraction de lignes du texte
-	$lignes = explode("\n", trim($t[0]));
-	array_shift($lignes);
-	array_pop($lignes);
+	// La wheel renvoie un tableau à cette callback qui est le résultat d'un preg_match_all.
+	// Le contenu du tableau est le suivant :
+	// - index 0 : la capture du pattern complet
+	// - index 1 : la capture de l'attribut format si il existe
+	// - index 2 : la capture des quotes entourant la valeur de l'attribut format
+	// - index 3 : la capture de la valeur de l'attribut format
+	// - index 4 : la capture du texte compris entre les balises
+	// - index 5 : la balise fermante
+	// --> Seuls les index 3 et 4 sont utilisés.
+	$lignes = explode("\n", trim($t[4]));
 
 	// Initialisation des variables propres à l'ensemble des todos du bloc
 	$todos = array();
@@ -142,10 +149,11 @@ function tw_todo($t) {
 	// Appel pour chaque todolist du modèle par défaut
 	if ($todos) {
 		$html = '';
+		$format = $t[3] ? $t[3] : 'table';
 		foreach($todos as $_cle => $_taches) {
 			if ($_taches) {
 				$html .= recuperer_fond(
-					'inclure/todo',
+					"inclure/todo_${format}",
 					array(
 						'projet' => (isset($projets[$_cle]) ? $projets[$_cle] : ''),
 						'taches' => $_taches,
