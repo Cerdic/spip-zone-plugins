@@ -1,8 +1,8 @@
 <paquet
 	prefix="scssphp"
 	categorie="outil"
-	version="1.0.4"
-	etat="dev"
+	version="1.0.5"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="scssphp.png"
 	documentation=""
