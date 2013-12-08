@@ -4,8 +4,9 @@
 // - @p ou p=1..9 et désigne la priorité. Exemple : @1
 // - @tag ou tag est un mot. Exemple : @courses ou @перевод-шаблон
 // - type:valeur ou type et valeur sont des mots. Exemple : fin:2013-06-02 ou commit:z72324
+// il est possible d'utiliser @ ou # pour les tags et priorités, @ étant la valeur par défaut
 if (!defined('_TODO_REGEXP_INFOS_COMPLEMENTAIRES'))
-	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '#([\w-]+:|@)([\w.-]+)(?:\s|$)#Uu');
+	define('_TODO_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|indicateur_tag)([\w.-]+)(?:\s|$)%Uu');
 
 
 /**
@@ -21,6 +22,11 @@ function tw_todo($t) {
 
 	// Initialisation du html calculé
 	$html = $t;
+
+	// Instanciation de la regexp de repérage des informations complémentaires
+	global $todo_indicateur_tag;
+	$indicateur_tag = ($todo_indicateur_tag == '@') ? '@' : '#';
+	$regexp_infos_complementaires = str_replace('indicateur_tag', $indicateur_tag, _TODO_REGEXP_INFOS_COMPLEMENTAIRES);
 
 	// Extraction de lignes du texte
 	$lignes = explode("\n", trim($t[0]));
@@ -65,7 +71,7 @@ function tw_todo($t) {
 				$statut = $todo_statuts[$premier]['id'];
 
 				// -- le titre, que l'on sépare du reste des informations complémentaires éventuelles
-				if (preg_match_all(_TODO_REGEXP_INFOS_COMPLEMENTAIRES, $texte, $infos_complementaires)) {
+				if (preg_match_all($regexp_infos_complementaires, $texte, $infos_complementaires)) {
 					// Extraction du titre
 					$titre = trim(str_replace($infos_complementaires[0], '', $texte));
 
@@ -73,8 +79,8 @@ function tw_todo($t) {
 					foreach($infos_complementaires[1] as $_cle => $_prefixe) {
 						$type = rtrim($_prefixe, ':');
 						$valeur = $infos_complementaires[2][$_cle];
-						if ($type == '@') {
-							if (preg_match('#^[1-9]$#', $valeur, $m)) {
+						if ($type == $indicateur_tag) {
+							if (preg_match('%^[1-9]$%', $valeur, $m)) {
 								// -- la priorité
 								$priorite = $valeur;
 								$priorite_utilisee[$index_todo] = true;

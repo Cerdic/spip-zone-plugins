@@ -38,4 +38,8 @@ $GLOBALS['todo_statuts'] = array(
 			'alerte' => 'majeure')
 );
 
+// Définition surchargeable de l'indicateur de tag.
+// -- les valeurs possibles sont # (défaut) et @
+$GLOBALS['todo_indicateur_tag'] = '@';
+
 ?>
