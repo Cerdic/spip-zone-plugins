@@ -12,7 +12,7 @@ SCSS est une syntaxe SASS, un préprocesseur CSS qui permet d'ajouter des variab
 l'&#233;criture de feuilles de style complexes. [->http://leafo.net/scssphp/]
 
 	</description>
-	<prefix>scsscss</prefix>
+	<prefix>scssphp</prefix>
 	<categorie>outil</categorie>
 	<fonctions>scsscss_fonctions.php</fonctions>
 	<pipeline>

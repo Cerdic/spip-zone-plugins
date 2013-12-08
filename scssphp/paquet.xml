@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.5"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="scssphp.png"
 	documentation=""
 >
