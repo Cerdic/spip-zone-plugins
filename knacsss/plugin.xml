@@ -1,0 +1,22 @@
+<plugin>
+	<nom>KNACSS-Sass</nom>
+	<slogan>Utiliser le framework Knacss en version SCSS</slogan>
+	<auteur>Anne-lise Martenot, elastick.net</auteur>
+	<auteur>Jean-Baptiste Bourgoin</auteur>
+	<licence>GPL 3</licence>
+	<version>1.0.5</version>
+	<etat>dev</etat>
+	<icon>knacsss.png</icon>
+	<description>
+Ce plugin coupl&eacute; au plugin scssphp permet d'utiliser le framework CSS Knacss dans SPIP
+[->http://knacss.com]
+	</description>
+	<prefix>knacsss</prefix>
+	<lien>http://www.spip-contrib.net/CSS-facile-avec-LESSpip</lien>
+	<categorie>outil</categorie>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="scssphp" version="[1.0.4;]" />
+</plugin>
