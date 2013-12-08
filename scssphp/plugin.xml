@@ -6,7 +6,7 @@
 	<licence>GPL 3</licence>
 	<version>1.0.5</version>
 	<etat>test</etat>
-	<icon>img/scsscss-32.png</icon>
+	<icon>scsscss.png</icon>
 	<description>
 SCSS est une syntaxe SASS, un préprocesseur CSS qui permet d'ajouter des variables, classes, op&#233;rations, ou imbrications au langage. Facilitant ainsi
 l'&#233;criture de feuilles de style complexes. [->http://leafo.net/scssphp/]
