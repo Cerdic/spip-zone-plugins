@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.0.5"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="knacsss.png"
 	documentation=""
 >
