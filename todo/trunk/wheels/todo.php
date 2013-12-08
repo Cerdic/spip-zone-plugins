@@ -42,6 +42,7 @@ function tw_todo($t) {
 	foreach ($lignes as $_ligne){
 		// Initialisation des variables de la todolist en cours
 		if ($index_tache == 0) {
+			$todo_fermee[$index_todo] = true;
 			$types_info[$index_todo] = array();
 			$priorite_utilisee[$index_todo] = false;
 		}
@@ -112,6 +113,8 @@ function tw_todo($t) {
 					$titre = $texte;
 
 				// Ajout de la tâche dans la liste fournie au modèle
+				if (!$todo_statuts[$premier]['final'])
+					$todo_fermee[$index_todo] = false;
 				$todos[$index_todo][$index_tache] = array(
 					'statut' => array(
 									'id' =>$statut,
@@ -146,7 +149,8 @@ function tw_todo($t) {
 					array(
 						'projet' => (isset($projets[$_cle]) ? $projets[$_cle] : ''),
 						'taches' => $_taches,
-						'types_info' => ($priorite_utilisee[$_cle] ? array_merge($types_info[$_cle], array('priorite')) : $types_info[$_cle])
+						'types_info' => ($priorite_utilisee[$_cle] ? array_merge($types_info[$_cle], array('priorite')) : $types_info[$_cle]),
+						'fermee' => $todo_fermee[$_cle]
 					),
 					array(
 						'ajax' => true
