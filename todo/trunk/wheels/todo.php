@@ -81,7 +81,10 @@ function tw_todo($t) {
 							}
 							else {
 								// -- les étiquettes
-								$tags[] = $valeur;
+								if ($formater = charger_fonction("todo_formater_tag", 'inc', true))
+									$tags[] = $formater($valeur);
+								else
+									$tags[] = $valeur;
 							}
 						}
 						else {
