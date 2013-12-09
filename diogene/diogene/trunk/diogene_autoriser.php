@@ -292,7 +292,7 @@ if(defined('_DIR_PLUGIN_CEXTRAS') && _DIR_PLUGIN_CEXTRAS){
 				$diogene_parent = sql_fetsel('*','spip_diogenes','id_secteur='.intval($id_secteur).' AND '.sql_in('objet',$objets));
 				if(is_array(unserialize($diogene_parent['options_complements'])) && ($complements = unserialize($diogene_parent['options_complements'])) && is_array(unserialize($complements['cextras_enleves']))){
 					foreach(unserialize($complements['cextras_enleves']) as $enleve){
-						if($quoi == $opts['type'].'_'.$enleve){
+						if($opts['champ'] == $enleve){
 							return false;
 						}
 					}
