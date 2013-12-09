@@ -10,9 +10,11 @@
             
             [(#REM) pour les ressources on n'affiche que celles autorisées donc pas de SAISIE ]
             <B_ressources>
-			<li class="editer editer_liste_ressources saisie_selection_multiple">
+            #SET{erreurs,#ENV**{erreurs}|table_valeur{liste_ressources}}
+			<li class="editer erreur editer_liste_ressources saisie_selection_multiple">
 				<label for="champ_liste_ressources"><:orr:liste_ressources:></label>
 				<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
+                [<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select size="4" multiple="multiple" id="champ_liste_ressources" name="liste_ressources[]">
             <BOUCLE_ressources(ORR_RESSOURCES){par orr_ressource_nom}{si !#ENV{id_reservation}}>
 				[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)

@@ -71,10 +71,11 @@ function formulaires_reserv_verifier_dist($idressource, $date_deb, $idresa, $jou
     
 	// faire l'array des ressources à traiter 
 	$liste_ressources = array();
+    $recup_ressources = _request('liste_ressources');
 	if ($idresa)
 		$liste_ressources[] = intval($idressource);
-	else {
-		foreach (_request('liste_ressources') as $ress)
+	elseif ($recup_ressources) {
+		foreach ($recup_ressources as $ress)
 			$liste_ressources[] = intval($ress);
 	}
     // Il faut au moins une ressource !!
