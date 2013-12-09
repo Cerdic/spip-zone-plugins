@@ -1,0 +1,17 @@
+[(#REM) formulaire de selection des mots clefs:
+	n'afficher que les mots du groupe orr et ayant au moins une liaison avec une ressource ]
+<B_motscles>
+<form name="formulaire_motclef" method="GET" action="#SELF">
+	<div class="ui-widget-header ui-corner-all"><:orr:filtrer_par_mots:></div>
+	<div class="ui-widget-content ui-corner-bottom">
+		<select name="motscles[]" id="motscles" multiple="multiple">
+		<BOUCLE_motscles(MOTS mots_liens){type=orr}{objet=orr_ressource}>
+			<option value="#ID_MOT">#TITRE</option>
+		</BOUCLE_motscles>
+		</select>
+		<br /><span id="ctrl_clic">(<:orr:ctrl_clic:>)</span><br />
+		<input type="button" id="tous" class="submit" value="Tous" /> <input type="button" id="aucun" class="submit" value="Aucun" />
+		<input type="submit" id="envoyer" class="submit" value="Valider" />
+	</div>
+</form>
+</B_motscles>

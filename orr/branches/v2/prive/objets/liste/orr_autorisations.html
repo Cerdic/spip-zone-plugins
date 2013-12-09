@@ -1,0 +1,58 @@
+[(#SET{defaut_tri,#ARRAY{
+	orr_autorisation_nom,1, 
+	id_orr_autorisation,1,
+	points,-1
+}})]<B_liste_orr_autorisations>
+#ANCRE_PAGINATION
+<div class="liste-objets orr_autorisations">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#GRAND_TOTAL|singulier_ou_pluriel{orr:info_1_orr_autorisation,orr:info_nb_orr_autorisations})</strong></caption>]
+
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='orr_autorisation_nom' scope='col'>[(#TRI{orr_autorisation_nom,<:orr:label_orr_autorisation_nom:>,ajax})]</th>
+            <th class="orr_autorisation_valeur"><:orr:valeur_autorisation:></th>
+            <th class="orr_autorisation_ressource_associe"><:orr:nom_orr_autorisation_ressource:></th>
+            <th class='id' scope='col'><:info_numero_abbreviation:></th>
+            <th class='picto' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	    <BOUCLE_liste_orr_autorisations(ORR_AUTORISATIONS) {id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num orr_autorisation_nom},#GET{defaut_tri}}{par orr_autorisation_nom}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{orr_autorisation-16.png}|balise_img)]</td>
+			<td class='orr_autorisation_nom principale'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,26})][(#RANG). ]
+				[(#AUTORISER{modifier,orr_autorisation,#ID_ORR_AUTORISATION}|oui) <a href="#URL_ECRIRE{orr_autorisation_edit,id_orr_autorisation=#ID_ORR_AUTORISATION}" alt="<:orr:modifier:>" title="<:orr:modifier:>">]
+				#ORR_AUTORISATION_NOM
+				[(#AUTORISER{modifier,orr_autorisation,#ID_ORR_AUTORISATION}|oui)</a>]
+			</td>
+            <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
+			<td class="orr_autorisation_ressource_associe">
+				<BOUCLE_ressources(ORR_RESSOURCES){id_orr_autorisation}{"<br/>"}> 
+					[(#AUTORISER{modifier,ressource,#ID_ORR_RESSOURCE}|oui)<a href="#URL_ECRIRE{orr_ressource,id_orr_ressource=#ID_ORR_RESSOURCE}" title="<:orr:modifier:>">]
+					#ORR_RESSOURCE_NOM
+					[(#AUTORISER{modifier,ressource,#ID_ORR_RESSOURCE}|oui)</a>]</BOUCLE_ressources>
+				</B_ressources>#SET{suppression_id,#ID_ORR_AUTORISATION}<//B_ressources></td>
+			<td class="id">[(#AUTORISER{modifier,autorisation,#ID_ORR_AUTORISATION}|?{
+				<a href="[(#URL_ECRIRE{orr_autorisation_edit,id_orr_autorisation=#ID_ORR_AUTORISATION})]" title="<:orr:modifier:>">#ID_ORR_AUTORISATION</a>,
+				#ID_ORR_AUTORISATION
+			})]</td>
+			<td class="supprimer">[(#AUTORISER{modifier,orr_autorisation,#ID_ORR_AUTORISATION}|oui)
+				[(#GET{suppression_id}|=={#ID_ORR_AUTORISATION}|oui)<a class="ajax" href="[(#URL_ACTION_AUTEUR{orr_supprimer_autorisation,#ID_ORR_AUTORISATION,#SELF})]"><:orr:supprimer:></a>]]
+			</td>
+		</tr>
+	</BOUCLE_liste_orr_autorisations>
+	</tbody>
+</table>
+<div id="retour_suppression"></div>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_orr_autorisations>[
+<div class="liste-objets orr_autorisations caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_orr_autorisations>
+
+[(#AUTORISER{creer,orr_autorisation})
+	[(#URL_ECRIRE{orr_autorisation_edit,new=oui}|icone_verticale{<:orr:icone_creer_orr_autorisation:>,orr_ressource,new,right})]
+]
+

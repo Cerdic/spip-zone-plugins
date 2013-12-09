@@ -1,0 +1,43 @@
+#SET{jourj,#ENV{jourj}}
+#SET{lundi,#GET{jourj}|orr_joursemaine{lundi,date}} 
+#SET{mardi,#GET{jourj}|orr_joursemaine{mardi,date}} 
+#SET{mercredi,#GET{jourj}|orr_joursemaine{mercredi,date}} 
+#SET{jeudi,#GET{jourj}|orr_joursemaine{jeudi,date}} 
+#SET{vendredi,#GET{jourj}|orr_joursemaine{vendredi,date}} 
+#SET{samedi,#GET{jourj}|orr_joursemaine{samedi,date}} 
+#SET{dimanche,#GET{jourj}|orr_joursemaine{dimanche,date}} 
+#SET{plusun,#GET{jourj}|orr_joursemaine{plusun,date}} 
+
+<div id="tableau_orr">
+	<table id="tableau_semaine">
+		<caption>[(#GET{jeudi}|affdate_mois_annee|ucfirst)]</caption>
+		<thead>
+			<th>Ressources</th>
+			<BOUCLE_tete(DATA){liste lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche}>
+				<th[ (#VALEUR|=={jeudi}|oui) id="jour4th"]>[(#GET{jourj}|orr_joursemaine{#VALEUR,nom})] [(#GET{jourj}|orr_joursemaine{#VALEUR,jour})]</th>
+			</BOUCLE_tete>
+		</thead>
+		<tbody>
+		[(#REM) affichage semaine: une ligne par ressource + filtrage par mots clés éventuels ]
+		<BOUCLE_ressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
+			<B_ligne>
+			<tr class="tr_plus">
+				<td[ style="background-color:(#ORR_RESSOURCE_COULEUR);"]>#ORR_RESSOURCE_NOM</td>
+				<BOUCLE_ligne(DATA){liste lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche}{si #AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE}}>
+					<td id="jour#COMPTEUR_BOUCLE">[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE})
+						<a id="touche_#VALEUR_#ID_ORR_RESSOURCE" 
+							href="[(#URL_PAGE{formulaire_reservation}
+								|parametre_url{id_ressource,#ID_ORR_RESSOURCE}
+								|parametre_url{ma_date,#GET{#VALEUR}}
+								|parametre_url{jourj,#ENV{jourj}}
+								|parametre_url{vue,semaine})]" 
+							class="mediabox lien_reserver"><img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
+						<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{#VALEUR}, jourj=#ENV{jourj}, vue=semaine} />
+					</td>
+				</BOUCLE_ligne>
+			</tr>
+			</B_ligne>
+		</BOUCLE_ressource>
+		</tbody>
+	</table>
+</div>

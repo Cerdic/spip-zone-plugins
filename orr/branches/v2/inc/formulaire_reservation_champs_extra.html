@@ -1,0 +1,5 @@
+<BOUCLE_champs_extra(DATA){source table,#CONFIG*{champs_extras_spip_orr_reservations}|unserialize }>
+    [(#SAISIE{[(#VALEUR|table_valeur{saisie}|print_r{1})],[(#VALEUR|table_valeur{options}|table_valeur{nom}|print_r{1})]}
+    {label=[(#VALEUR|table_valeur{options}|table_valeur{label}|print_r{1})]}
+    )]
+</BOUCLE_champs_extra>

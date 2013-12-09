@@ -1,0 +1,4 @@
+&nbsp;
+[(#ENV{choix_type}|=={statut}|oui)<INCLURE{fond=inc/formulaire_selection-statut,val=#ENV{val_type}}>]
+[(#ENV{choix_type}|=={auteur}|oui)<INCLURE{fond=inc/formulaire_selection-auteur,val=#ENV{val_type}}>]
+[(#ENV{choix_type}|=={grappe}|oui)<INCLURE{fond=inc/formulaire_selection-grappe,val=#ENV{val_type}}>]

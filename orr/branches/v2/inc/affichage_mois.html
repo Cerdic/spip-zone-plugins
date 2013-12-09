@@ -1,0 +1,56 @@
+#SET{jour,#ENV{jourj}}
+#SET{jourj,#GET{jour}|orr_premierjourcalendrier}
+#SET{num_mois,#GET{jour}|affdate{m}}
+
+[(#REM) l'utilisateur à t'il le droit de créer sur au moins une ressource? ]
+#SET{aut_creer,0}
+<BOUCLE_aut_creer(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}) #SET{aut_creer,1}]</BOUCLE_aut_creer>
+<div>
+	<div id="couleur_ressource">
+		<div>Ressources:</div>
+		<BOUCLE_tableauressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
+			[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})<div style="background-color:#ORR_RESSOURCE_COULEUR">#ORR_RESSOURCE_NOM</div>]
+		</BOUCLE_tableauressource>
+	</div>
+    <div id="tab_affichage_mois">
+        <table id ="tableau_mois" border="1px">
+			<caption>[(#GET{jour}|affdate_mois_annee|ucfirst)] </caption>
+			<thead>
+				<tr>
+					<th>Lundi</th>
+					<th>Mardi</th>
+					<th>Mercredi</th>
+					<th>Jeudi</th>
+					<th>Vendredi</th>
+					<th>Samedi</th>
+					<th>Dimanche</th>
+				</tr>
+			</thead>
+			<tbody>#SET{cteur_lignes, 1}
+				[(#REM) on génére entre 4 et 6 lignes "semaine": à partir de la ligne 5 on teste si le mois est fini ou non (test {si...}) ]
+				<BOUCLE_tbody(DATA){enum 1, 6}>
+					<B_ligne><tr>
+					[(#REM) générer 7 cellules "jours" pour chaque ligne "semaine" ]
+					<BOUCLE_ligne(DATA){enum 1, 7}{si #GET{jourj}|orr_plusunjour|affdate{j}|>{7}|ou{#GET{cteur_lignes}|<{5}}}>
+						<td class="semaine #GET{jourj}[ (#GET{jourj}|affdate{m}|!={#GET{num_mois}}|oui) hors_mois]"[ id="id(#GET{jourj}|=={#GET{jour}})couleur_jour_mois"]> 
+							<strong>[(#GET{jourj}|affdate{j})]</strong> 
+                            [(#REM) lien formulaire de réservation si autorisation pour au moins une ressource ]
+                            [(#GET{aut_creer}|oui)
+						    <a  href="[(#URL_PAGE{formulaire_reservation}
+								|parametre_url{ma_date,[(#GET{jourj}|affdate{'Y-m-d'}) 00:00:00]}
+								|parametre_url{jourj,#ENV{jourj}}
+								|parametre_url{vue,mois})]" class="mediabox lien_reserver">
+								<img src="#CHEMIN{img/plus.png}" alt="plus"/></a>]
+							<BOUCLE_ressource(ORR_RESSOURCES){id_mot ?IN #ENV{id_mot}}>
+								[(#AUTORISER{voir,orr_reservation,#ID_ORR_RESSOURCE})
+								<INCLURE{fond=inc/affichage_resas}{idressource=#ID_ORR_RESSOURCE, jour=#GET{jourj}, jourj=#ENV{jourj}, vue=mois} />]
+							</BOUCLE_ressource>
+							#SET{jourj,#GET{jourj}|orr_plusunjour} 
+						</td>
+					</BOUCLE_ligne>#SET{cteur_lignes, #GET{cteur_lignes}|plus{1}}
+					</tr></B_ligne>    
+				</BOUCLE_tbody>
+			</tbody>
+        </table>
+    </div>
+</div>
