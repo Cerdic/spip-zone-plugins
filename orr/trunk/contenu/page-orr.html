@@ -111,6 +111,9 @@ jQuery(document).ready(function(){
 						
 		jourj = dateselectionne.toString('yyyy-MM-dd');
 		jQuery("#datepickers").datepicker( "setDate", jourj );
+		// gerer la visibilite du datepicker: le changement de date le rend visible quelque soit son etat affiche/masque
+		if (jQuery("#masque_cal").css("display") == "none")
+			jQuery("#datepickers table").css("display", "none");
 		tabAjax();
 	});
 	jQuery(".maintenant").bind("click",function(event){
