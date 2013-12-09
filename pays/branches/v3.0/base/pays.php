@@ -26,12 +26,14 @@ $tables['spip_pays'] = array(
 		'field'=> array(
 			"id_pays"		=> "smallint(6) NOT NULL auto_increment",
 			"code"			=> "varchar(2) NOT NULL default ''",
+			"code_alpha3"	=> "varchar(3) NOT NULL default ''",
+			"code_num"		=> "int(3) UNSIGNED ZEROFILL NOT NULL default 0",
 			"nom"			=> "text NOT NULL default ''",
 			"maj"			=> "TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"	=> "id_pays",
-			"UNIQUE KEY code"	=> "code"
+			"UNIQUE KEY"	=> "code,code_alpha3,code_num"
 		),
 		'champs_editables' => array(
 			"code", "nom"
@@ -47,8 +49,7 @@ $tables['spip_pays'] = array(
 		'info_1_objet' => "pays:info_1_pays",
 		'info_nb_objets' => "pays:info_nb_pays",
 		'texte_logo_objet' => "pays:texte_logo_pays"
-		
-	
+
 	);
 	
 	return $tables;
