@@ -40,10 +40,9 @@ switch(\$GLOBALS['type_urls']) {
 		 => "\$t = &\$flux['data']; \$id = \$flux['objet']['id_objet']; \$ok = true;
 if(%%urls_id_sauf_rubriques%%)  {\$ok = strpos(':%%urls_id_sauf_liste%%:',':'.\$flux['objet']['type'].':')===false;}
 if(%%urls_id_3_chiffres%%) {\$id = sprintf('%03d', \$id);}
-if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$t=\$id._CS_URL_SEP.\$t;}
-if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$t.=_CS_URL_SEP.\$id;}
-// if(%%urls_nounderscore%%) {\$t=str_replace('_','',\$t);}
-if(%%urls_minuscules%%) {\$t=strtolower(\$t);}",
+if(%%urls_avec_id2%%) {@define('_CS_URL_SEP','-'); if(\$ok) \$t = \$id._CS_URL_SEP.\$t;}
+if(%%urls_avec_id%%) {@define('_CS_URL_SEP',','); if(\$ok) \$t .= _CS_URL_SEP.\$id;}
+if(%%urls_minuscules%%) {\$t = strtolower(\$t);}",
 	'pipelinecode:affiche_milieu' => "if(\$flux['args']['exec']==='configurer_urls') \$flux['data'] .= '<p><b>'._T('couteau:configurer').' > '.cs_lien(generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=type_urls#cs_infos'),couteauprive_T('type_urls:nom')).'</b></p>';",
 ));
 
@@ -252,11 +251,7 @@ array(
 	'check' => 'couteauprive:urls_minuscules',
 	'label' => '@_CS_CHOIX@',
 	'defaut' => 0,
-), array(/*
-	'nom' => 'urls_nounderscore',
-	'check' => 'couteauprive:urls_nounderscore',
-	'defaut' => 0,
-), array(*/
+), array(
 	'nom' => 'urls_avec_id',
 	'check' => 'couteauprive:urls_avec_id',
 	'defaut' => 0,
