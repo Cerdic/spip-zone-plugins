@@ -28,7 +28,7 @@
 	<div id="navigation_liste" class="diogene_#ID_DIOGENE">
 		<B_selected>
 		<ul class="liste-items liste medias">
-		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut !IN 'poubelle','refuse'}{doublons selected}>
+		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut IN #ENV{statut,prepa}}{statut !IN 'poubelle','refuse'}{doublons selected}>
 		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
 			<INCLURE{fond=inclure/resume/choix_media_lot,id_article,statut} />
 		</li>
