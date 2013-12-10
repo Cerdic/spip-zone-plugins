@@ -27,6 +27,7 @@ function formulaires_reserv_charger_dist($idressource, $date_deb=false, $idresa=
         "id_ressource"      => $idressource,
         "date_debut"        => $date_debut,
         "date_fin"          => $date_fin,
+        "id_reservation"    => $idresa,
     );
     // champs extra
     if (lire_config("champs_extras_spip_orr_reservations")) {

@@ -7,12 +7,16 @@
 		<ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-
+            
             #SET{tableau_ressource, #ARRAY}
-            <BOUCLE_selection_grappe(ORR_RESSOURCES){par orr_ressource_nom}{si !#ENV{id_reservation}}>
+            <BOUCLE_ressource(ORR_RESSOURCES){id_orr_reservation=#ENV{id_reservation}}>
+                #SET{tableau_ressource,#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
+            </BOUCLE_ressource>
+            
+            <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}{si #ENV{id_reservation}|=={""}}>
                 [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
                 #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
-            </BOUCLE_selection_grappe>
+            </BOUCLE_selection_ressources>
 
             [(#SAISIE{selection_multiple, liste_ressources}
                 {label=<:orr:liste_ressources:>}
