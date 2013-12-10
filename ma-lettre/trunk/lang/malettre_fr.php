@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'lire_en_ligne' => 'Lire l\'article en ligne',
   'lister_articles'=>'Lister les articles',
   'lister_evenements'=>'Lister les &eacute;v&eacute;nements',
-  'lien_documentation' => '<a href="http://www.spip-contrib.net/2803" class="spip_out">Documentation</a>',#NEW
+  'lien_documentation' => '<a href="http://contrib.spip.net/2803" class="spip_out">Documentation</a>',#NEW
 
   // M
   'ma_lettre'=>'Ma lettre',

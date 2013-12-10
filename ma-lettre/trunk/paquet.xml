@@ -6,7 +6,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/malettre.png"
-	documentation="http://www.spip-contrib.net/Plugin-Ma-lettre"
+	documentation="http://contrib.spip.net/2803"
 >
 	<nom>Ma lettre</nom>  
 	<!-- Compose sur mesure une lettre d'information -->
