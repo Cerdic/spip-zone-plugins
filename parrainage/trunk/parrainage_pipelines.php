@@ -84,15 +84,13 @@ function parrainage_formulaire_verifier($flux){
 		include_spip('inc/config');
 		$code_invitation = _request('code_invitation');
 		// Si l'invitation est obligatoire
-		if ((lire_config('parrainage/invitation_obligatoire','') == 'on') and !$code_invitation){
+		if ((lire_config('parrainage/invitation_obligatoire','') == 'on') and !$code_invitation)
 			$flux['data']['code_invitation'] = _T('parrainage:erreur_invitation_obligatoire');
-		}
 		// Si le code d'invitation est dans l'URL mais ne correspond pas à l'email donné
 		elseif ($code_invitation && (!$email = sql_getfetsel('email', 'spip_filleuls', 'code_invitation = '.sql_quote($code_invitation))
 			or $email != _request('mail_inscription'))
-		){
+		)
 			$flux['data']['code_invitation'] = _T('parrainage:erreur_invitation_invalide');
-		}
 	}
 	return $flux;
 }
@@ -109,6 +107,7 @@ function parrainage_formulaire_verifier($flux){
  */
 function parrainage_formulaire_traiter($flux){
 	if ($flux['args']['form'] == 'inscription' and $code_invitation = _request('code_invitation')){
+		spip_log('On a un code d invitation?','test.'._LOG_ERREUR);
 		// On doit d'abord chercher l'id_auteur qui vient d'être créé
 		$email = _request('mail_inscription');
 		$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote($email));
