@@ -7,22 +7,19 @@
 		<ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-            
-            [(#REM) pour les ressources on n'affiche que celles autorisées donc pas de SAISIE ]
-            <B_ressources>
-            #SET{erreurs,#ENV**{erreurs}|table_valeur{liste_ressources}}
-			<li class="editer erreur editer_liste_ressources saisie_selection_multiple">
-				<label for="champ_liste_ressources"><:orr:liste_ressources:></label>
-				<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
-                [<span class='erreur_message'>(#GET{erreurs})</span>]
-				<select size="4" multiple="multiple" id="champ_liste_ressources" name="liste_ressources[]">
-            <BOUCLE_ressources(ORR_RESSOURCES){par orr_ressource_nom}{si !#ENV{id_reservation}}>
-				[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
-				<option value="#ID_ORR_RESSOURCE"[ (#ID_ORR_RESSOURCE|=={#ENV{id_ressource}}|oui)selected="selected"]>#ORR_RESSOURCE_NOM</option>]
-            </BOUCLE_ressources>
-				</select>
-            </li>
-            </B_ressources>
+
+            #SET{tableau_ressource, #ARRAY}
+            <BOUCLE_selection_grappe(ORR_RESSOURCES){par orr_ressource_nom}{si !#ENV{id_reservation}}>
+                [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
+                #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
+            </BOUCLE_selection_grappe>
+
+            [(#SAISIE{selection_multiple, liste_ressources}
+                {label=<:orr:liste_ressources:>}
+                {cacher_option_intro=true}
+                {defaut=#ENV{id_ressource} }
+                {datas=#GET{tableau_ressource}|array_flip})]
+			<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
             
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
