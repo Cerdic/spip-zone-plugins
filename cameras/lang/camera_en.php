@@ -89,7 +89,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_camera' => 'Camera logo',
 	'texte_creer_associer' => 'Create and link a camera',
 	'texte_ajouter_camera' => 'Add a camera',
-	'texte_changer_statut' => 'This camera is :'
+	'texte_changer_statut' => 'This camera is :',
+	'texte_explication_email_secu' => 'Your email will only be viewable by the website admin. In case of doubt, use a dedicated email adress.'
 	
 
 );

@@ -88,7 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_camera' => 'Логотип камеры',
 	'texte_creer_associer' => 'Создать и прикрепить камеру',
 	'texte_ajouter_camera' => 'Добавить камеру',
-	'texte_changer_statut' => 'Эта камера :'
+	'texte_changer_statut' => 'Эта камера :',
+	'texte_explication_email_secu' => 'После регистрации ваш почтовый ящик будет виден только администраторам ресурса.'
 	
 
 );

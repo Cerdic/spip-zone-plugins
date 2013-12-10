@@ -92,7 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_camera' => 'Logo caméra',
 	'texte_creer_associer' => 'Créer et lier une caméra',
 	'texte_ajouter_camera' => 'Ajouter une caméra',
-	'texte_changer_statut' => 'Cette caméra est :'
+	'texte_changer_statut' => 'Cette caméra est :',
+	'texte_explication_email_secu' => 'Votre email sera uniquement visible des administrateurs du site. En cas de doute, utilisez une adresse email dédiée.'
 	
 
 );
