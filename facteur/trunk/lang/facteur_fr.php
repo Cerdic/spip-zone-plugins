@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Ceci est un email de test accentué',
 
 	// E
+	'email_envoye_par' => 'Envoyé par @site@',
 	'email_test_envoye' => 'L’email de test a correctement été envoyé. Si vous ne le recevez pas correctement, vérifiez la configuration de votre serveur ou contactez un administrateur du serveur.',
 	'erreur' => 'Erreur',
 	'erreur_dans_log' => ' : consultez le fichier log pour plus de détails',
