@@ -40,8 +40,6 @@ function action_wp2spip_liens_internes_dist(){
 	while($article = sql_fetch($articles)){
 		$texte = $article['texte'];
 		preg_match_all("|->\.?\.?\/\?page_id=(\d{1,}).*?]|",$texte,$matches);
-		spip_log('recupération de ../?page_id ou /?page_id');
-		spip_log($matches);
 		foreach($matches[1] as $i=>$id){
 			if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
 				$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
@@ -54,8 +52,10 @@ function action_wp2spip_liens_internes_dist(){
 			$modifies[] = $article['id_article'];
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des ../?page_id=... et /?page_id=','wp2spip');
-	spip_log($modifies,'wp2spip');
+	if(count($modifies) > 0){
+		spip_log(count($modifies).' articles modifiés après correction des ../?page_id=... et /?page_id=','wp2spip');
+		spip_log($modifies,'wp2spip');
+	}
 
 	$modifies = array();
 	// On va remplacer les ?page_id=XX par ->artXX
@@ -76,20 +76,25 @@ function action_wp2spip_liens_internes_dist(){
 			}
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des ->?page_id=...','wp2spip');
-	spip_log($modifies,'wp2spip');
+	if(count($modifies) > 0){
+		spip_log(count($modifies).' articles modifiés après correction des ->?page_id=...','wp2spip');
+		spip_log($modifies,'wp2spip');
+	}
 
 	$modifies = array();
-	// On va remplacer les url/?page_id=XX par ->artXX
-	$articles = sql_select('*','spip_articles','texte LIKE "%->'.$url_wordpress.'/?page_id=%"');
+	// On va remplacer les url/?page_id=XX ou url/?p=XX par ->artXX
+	$articles = sql_select('*','spip_articles','texte REGEXP "->.*'.$url_wordpress.'/\\\?pa*g*e*_*i*d*=\d*"');
+	spip_log(sql_count($articles).' articles listés');
 	while($article = sql_fetch($articles)){
 		$texte = $article['texte'];
-		$pattern = "->".$url_wordpress."\/\?page_id=(\d{1,}).*?]";
+		$pattern = "->\s?".$url_wordpress."\/\?pa?g?e?_?i?d?=(\d{1,}).*?]";
 		preg_match_all("|$pattern|",$texte,$matches);
 		if(is_array($matches)){
 			foreach($matches[1] as $i=>$id){
-				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))					
+				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
 					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
+					spip_log('On remplace '.$matches[0][$i].' par ->art'.$id.']');
+				}
 				else
 					$articles_inexistants[] = $id;
 			}
@@ -99,33 +104,11 @@ function action_wp2spip_liens_internes_dist(){
 			}
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?page_id=...','wp2spip');
-	spip_log($modifies,'wp2spip');
-	
-	$modifies = array();
-	// On va remplacer les url/?p=XX par ->artXX
-	$articles = sql_select('*','spip_articles','texte LIKE "%->'.$url_wordpress.'/?p=%"');
-	while($article = sql_fetch($articles)){
-		$texte = $article['texte'];
-		$pattern = "->".preg_quote($url_wordpress)."\/\?p=(\d{1,}).*?]";
-		preg_match_all("|$pattern|",$texte,$matches);
-		if(is_array($matches)){
-			spip_log($matches);
-			foreach($matches[1] as $i=>$id){
-				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id)))
-					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
-				else
-					$articles_inexistants[] = $id;
-			}
-			if($texte != $article['texte']){
-				sql_updateq('spip_articles',array('texte'=>$texte),'id_article='.intval($article['id_article']));
-				$modifies[] = $article['id_article'];
-			}
-		}
+	if(count($modifies) > 0){
+		spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?page_id=...','wp2spip');
+		spip_log($modifies,'wp2spip');
 	}
-	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
-	spip_log($modifies,'wp2spip');
-	
+
 	$modifies = array();
 	// On va remplacer les ../?p=XX par ->artXX
 	$articles = sql_select('*','spip_articles','texte LIKE "%->../?p=%"');
@@ -137,7 +120,7 @@ function action_wp2spip_liens_internes_dist(){
 			foreach($matches[1] as $i=>$id){
 				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
 					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
-					spip_log("On remplace ->../?p=$id] par ->art$id]");
+					spip_log("On remplace ".$matches[0][$i]." par ->art$id]");
 				}else
 					$articles_inexistants[] = $id;
 			}
@@ -147,8 +130,10 @@ function action_wp2spip_liens_internes_dist(){
 			}
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
-	spip_log($modifies,'wp2spip');
+	if(count($modifies) > 0){
+		spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
+		spip_log($modifies,'wp2spip');
+	}
 	
 	$modifies = array();
 	// On va remplacer les ../?p=XX par ->artXX
@@ -161,7 +146,7 @@ function action_wp2spip_liens_internes_dist(){
 			foreach($matches[1] as $i=>$id){
 				if($id_article = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
 					$texte = str_replace($matches[0][$i],'->art'.$id.']',$texte);
-					spip_log("On remplace ->/?p=$id] par ->art$id]");
+					spip_log("On remplace ".$matches[0][$i]." par ->art$id]");
 				}
 			}
 			if($texte != $article['texte']){
@@ -170,10 +155,19 @@ function action_wp2spip_liens_internes_dist(){
 			}
 		}
 	}
-	spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
-	spip_log($modifies,'wp2spip');
-	$articles_inexistants =  array_unique($articles_inexistants);
-	spip_log('Les articles suivants n existent pas :');
-	spip_log($articles_inexistants);
+	if(count($modifies) > 0){
+		spip_log(count($modifies).' articles modifiés après correction des '.$url_wordpress.'/?p=...','wp2spip');
+		spip_log($modifies,'wp2spip');
+	}
+	
+	include_spip('inc/meta');
+	if(count($articles_inexistants)>0){
+		$articles_inexistants =  array_unique($articles_inexistants);
+		ecrire_meta('wp_posts_disparus',serialize($articles_inexistants));
+		spip_log('Les articles suivants n existent pas :');
+		spip_log($articles_inexistants);
+	}else{
+		effacer_meta('wp_posts_disparus');
+	}
 }
 ?>

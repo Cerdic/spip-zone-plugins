@@ -38,6 +38,10 @@ http://contrib.spip.net/Wordpress-2-SPIP
 
 	<bouton id="wp2spip" parent="configuration">
 		<icone>wp2spip.png</icone>
-		<titre>Migration depuis Wordpress</titre>
+		<titre>wp2spip:titre_page_migration</titre>
+	</bouton>
+	<bouton id="wp2spip_fin" parent="configuration">
+		<icone>wp2spip.png</icone>
+		<titre>wp2spip:titre_post_import</titre>
 	</bouton>
 </plugin>
