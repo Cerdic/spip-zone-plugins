@@ -147,15 +147,13 @@
 					nb_files_count=#GET{nb_files_count},
 					doc_uploaded=#GET{doc_uploaded}} />
 	
-				[<div id="em_upload_fichier"[ class="diogene_(#GET{id_diogene})"]>
-					(#INCLURE{fond=inc-media_uploaded,
+				#INCLURE{fond=inc-media_uploaded,
 						id_objet=#GET{id_article},
 						objet=article,
 						em_type=#GET{type},
 						id_diogene=#GET{id_diogene},
 						ajax,
-						env})
-				</div>]
+						env}
 				[<div id="formulaire_diogene">
 					(#INCLURE{fond=inclure/emballe_media_formulaire_article,
 						id_article=#GET{id_article},
