@@ -2,7 +2,7 @@
 	prefix="pays"
 	categorie="divers"
 	version="3.0.5"
-	etat="stable"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/pays-32.png"
 	schema="1.3.0"
