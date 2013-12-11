@@ -1,7 +1,7 @@
 <paquet
 	prefix="itineraires"
 	categorie="divers"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/itineraires-64.png"
