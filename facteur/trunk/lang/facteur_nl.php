@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Dit is een geaccentueerd testbericht',
 
 	// E
+	'email_envoye_par' => 'Verzonden door @site@',
 	'email_test_envoye' => 'Het testbericht is verzonden. Ontvang je het niet juist, controleer dan de configuratie van de server.',
 	'erreur' => 'Fout',
 	'erreur_dans_log' => ': meer details in het logbestand',
