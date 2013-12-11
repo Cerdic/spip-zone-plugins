@@ -70,7 +70,7 @@ function &Crayons_affichage_final(&$page) {
 	foreach ($regs as $reg) {
 		list(,$crayon,$type,$champ,$id) = $reg;
 		if (_DEBUG_CRAYONS) spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))","crayons_distant");
-		if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ,'agent'=>'crayons'))) {
+		if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
 			if(!isset($droits['.' . $crayon]))
 				$droits['.' . $crayon] = 0;
 			$droits['.' . $crayon]++;
