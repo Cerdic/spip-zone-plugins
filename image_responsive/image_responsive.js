@@ -98,4 +98,4 @@ $(document).on("ajaxComplete", function() {
 $(window).on("resize load",function() {
 	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
-$(window).on("scroll touchmove", charger_image_lazy);
+$(window).on("scroll", function() {charger_image_lazy();});
