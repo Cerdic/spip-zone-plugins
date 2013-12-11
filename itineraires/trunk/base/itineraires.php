@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function itineraires_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['itineraires'] = 'itineraires';
+	$interfaces['table_des_tables']['itineraires_locomotions'] = 'itineraires_locomotions';
 	$interfaces['table_des_traitements']['LONGUEUR']['itineraires'] = 'floatval(%s)';
 
 	return $interfaces;
