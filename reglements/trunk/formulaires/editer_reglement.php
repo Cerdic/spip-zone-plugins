@@ -6,7 +6,7 @@
  * @copyright  2013
  * @author     Cyril MARION
  * @licence    GNU/GPL
- * @package    SPIP\Reglements_factures\Formulaires
+ * @package    SPIP\Reglements\Formulaires
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -86,7 +86,7 @@ function formulaires_editer_reglement_charger_dist($id_reglement='new', $retour=
  *     Tableau des erreurs
  */
 function formulaires_editer_reglement_verifier_dist($id_reglement='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('reglement',$id_reglement);
+	return formulaires_editer_objet_verifier('reglement',$id_reglement, array('id_facture', 'montant'));
 }
 
 /**

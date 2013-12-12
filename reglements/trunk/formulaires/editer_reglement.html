@@ -8,6 +8,16 @@
 		<input type='hidden' name='id_reglement' value='#ENV{id_reglement}' />
 		<ul>
 
+			[(#SAISIE{factures, id_facture, obligatoire=oui,
+				label=<:reglement:label_id_facture:>})]
+
+			[(#SAISIE{input, montant, obligatoire=oui,
+				label=<:reglement:label_montant:>})]
+
+			[(#SAISIE{textarea, commentaires,
+				label=<:reglement:label_commentaires:>,
+				li_class=haut, class=inserer_barre_edition, rows=4})]
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_reglement' => 'Ajouter ce règlement',
 
 	// I
-	'icone_creer_reglement' => 'Saisir un nouveau règlement',
+	'icone_creer_reglement' => 'Créer un règlement',
 	'icone_modifier_reglement' => 'Modifier ce règlement',
 	'info_1_reglement' => 'Un règlement',
 	'info_aucun_reglement' => 'Aucun règlement',
@@ -19,8 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_commentaires' => 'Commentaires',
-	'label_date_reglement' => 'Date règlement',
-	'label_montant_reglement' => 'Montant règlement',
+	'label_date_reglement' => 'Date de règlement',
 	'label_id_facture' => 'Id facture',
 	'label_montant' => 'Montant',
 
@@ -29,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_reglements' => 'Retirer tous les règlements',
 
 	// T
-	'texte_ajouter_reglement' => 'Saisir un nouveau règlement',
+	'texte_ajouter_reglement' => 'Ajouter un règlement',
 	'texte_changer_statut_reglement' => 'Ce règlement est :',
 	'texte_creer_associer_reglement' => 'Créer et associer un règlement',
 	'titre_langue_reglement' => 'Langue de ce règlement',

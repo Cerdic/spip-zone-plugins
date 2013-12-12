@@ -6,7 +6,7 @@
  * @copyright  2013
  * @author     Cyril MARION
  * @licence    GNU/GPL
- * @package    SPIP\Reglements_factures\Pipelines
+ * @package    SPIP\Reglements\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -24,6 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function reglements_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['reglements'] = 'reglements';
+	$interfaces['table_des_traitements']['COMMENTAIRES'][] = _TRAITEMENT_RACCOURCIS;
 
 	return $interfaces;
 }
@@ -46,18 +47,17 @@ function reglements_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_reglement"       => "bigint(21) NOT NULL",
 			"id_facture"         => "int(11) NOT NULL DEFAULT '0'",
-			"date_reglement"     => "datetime DEFAULT NULL",
-			"montant"            => "decimal(18,2) DEFAULT NULL",
-			"commentaires"       => "text",
+			"montant"            => "decimal(18,2) DEFAULT NULL 0",
+			"commentaires"       => "text NOT NULL DEFAULT ''",
+			"date_reglement"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_reglement",
 		),
-		'titre' => "date_reglement AS titre, '' AS lang",
-		//'titre' => "CONCAT(montant,' ',date_reglement,' ',id_facture) AS titre, '' AS lang",
-		 #'date' => "",
-		'champs_editables'  => array(),
+		'titre' => "'' AS titre, '' AS lang",
+		'date' => "date_reglement",
+		'champs_editables'  => array('id_facture', 'date_reglement', 'montant', 'commentaires'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
