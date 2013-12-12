@@ -1,7 +1,7 @@
 <paquet
 	prefix="reglements"
 	categorie="divers"
-	version="1.0.6"
+	version="1.0.7"
 	etat="dev"
 	compatibilite="[3.0.7;3.0.*]"
 	logo="prive/themes/spip/images/reglements-64.png"
@@ -11,8 +11,8 @@
 
 	<nom>Règlements</nom>
 
-	<auteur>Cyril MARION</auteur>
-	<auteur>Teddy Payet</auteur>
+	<auteur lien="http://www.cym.fr/">Cyril MARION</auteur>
+	<auteur lien="http://www.teddypayet.com/">Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
