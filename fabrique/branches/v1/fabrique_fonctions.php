@@ -370,6 +370,7 @@ function champ_present($objet, $champ) {
 }
 
 
+
 /**
  * Indique si toutes les options sont présentes dans l'objet
  * 
@@ -466,6 +467,26 @@ function champ_option_presente($champ, $option) {
 		}
 	}
 
+	return false;
+}
+
+/**
+ * Indique si une saisie donnée est presente dans la définition d'un champ
+ * de la fabrique
+ *
+ * @param array $champ
+ *     Description d'un champ SQL d'un objet créé avec la fabrique
+ * @param string $saisie
+ *     Saisie testée
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si l'option est présente dans le champ de l'objet
+ *     - Chaîne vide sinon
+ */
+function champ_saisie_presente($champ, $saisie) {
+	if (isset($champ['saisie']) and $champ['saisie'] == $saisie) {
+		return " "; // true
+	}
 	return false;
 }
 
@@ -598,6 +619,27 @@ function champs_options_presentes($champs, $options, $type='') {
 	return _tableau_options_presentes('champ_option_presente', $champs, $options, $type);
 }
 
+/**
+ * Retourne des champs en fonction d'une option trouvée
+ *
+ * @example
+ *     #CHAMPS|champs_saisie_presente{date}
+ *
+ * @param array $champs
+ *     Liste des descriptions de champs d'un objet créé avec la fabrique
+ * @param string $saisie
+ *     Type de saisie sélectionnée
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description du champ
+ *     - clé dans la description du champ pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des champs sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les champs sélectionnés (si type défini)
+**/
+function champs_saisie_presente($champs, $saisie, $type='') {
+	return _tableau_option_presente('champ_saisie_presente', $champs, $saisie, $type);
+}
 
 /**
  * Fonction générique pour retourner une liste de choses dans un tableau
