@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // E
     'explication_rang'                         => 'Pour ordonner les critères. Indiquez un numéro de rang.',
+    'explication_ponderation'                  => "Pondère ce critère par rapport à l'évaluation globale",
 
     // F
     'fieldset_noter'                           => 'Note',
