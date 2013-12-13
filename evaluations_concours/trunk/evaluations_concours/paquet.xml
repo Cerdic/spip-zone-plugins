@@ -1,0 +1,22 @@
+<paquet
+        prefix="eval_concours"
+        categorie="squelette"
+        version="0.1.1"
+        etat="dev"
+        compatibilite="[3.0.5;3.0.*]"
+        logo="img/eval_concours-48.png"
+        documentation=""
+        >
+
+    <nom>Critique d'images - Concours photos</nom>
+
+    <auteur>Cyril Marion, [Ateliers CYM->http://cym.fr]</auteur>
+
+    <licence>GNU/GPL</licence>
+
+    <necessite nom="evaluations" compatibilite="[1.1.0;[" />
+    <necessite nom="compositions" compatibilite="[3.0.0;[" />
+    <necessite nom="Zcore" compatibilite="[2.2.1;]" />
+    <necessite nom="Zpip" compatibilite="[2.0.5;]" />
+
+</paquet>

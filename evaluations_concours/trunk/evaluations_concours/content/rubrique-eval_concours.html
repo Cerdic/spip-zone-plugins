@@ -1,0 +1,30 @@
+#SET{mes_docs,#ARRAY}
+
+<BOUCLE_r(RUBRIQUES){id_rubrique}>
+<h1>#TITRE</h1>
+
+    <BOUCLE_branche(RUBRIQUES){branche}>
+
+        <BOUCLE_photos_rubriques(documents){id_rubrique}{doublons}>
+        #SET_PUSH{mes_docs,#ID_DOCUMENT}
+        </BOUCLE_photos_rubriques>
+
+        <BOUCLE_articles(ARTICLES){id_rubrique}>
+            <BOUCLE_photos_articles(DOCUMENTS){id_article}{doublons}>
+            #SET_PUSH{mes_docs,#ID_DOCUMENT}
+            </BOUCLE_photos_articles>
+        </BOUCLE_articles>
+
+    </BOUCLE_branche>
+
+    <BOUCLE_documents(DOCUMENTS){id_document IN #GET{mes_docs}}>
+    <div>
+        [(#FICHIER|image_recadre{200,200}|image_reduire{200})]
+        <INCLURE{fond=inclure/evaluations,objet=document,id_objet=#ID_DOCUMENT, identifiant=#CONFIG{eval_concours/eval_concours}} />
+        #FORMULAIRE_EVALUATION{#CONFIG{eval_concours/eval_concours}}
+    </div>
+    </BOUCLE_documents>
+    <:concours:erreur_aucun_document{id_rubrique=#ID_RUBRIQUE}:>
+    <//B_documents>
+
+</BOUCLE_r>
