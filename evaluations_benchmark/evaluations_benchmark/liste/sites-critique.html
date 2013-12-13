@@ -1,0 +1,93 @@
+[(#SET{votant,[(#SESSION{id_auteur})]})]
+[(#SET{id_evaluation,#ENV{id_evaluation}})]
+[(#SET{a_vote,''})]
+[(#SET{sites,#ARAY})]
+
+<BOUCLE_sites_tries(SITES mots){id_rubrique}{par titre_mot}>#SET_PUSH{sites, #ID_SYNDIC}</BOUCLE_sites_tries>
+<BOUCLE_autres_sites(SITES){id_rubrique}{doublons sites_tries}>#SET_PUSH{sites, #ID_SYNDIC}</BOUCLE_autres_sites>
+
+
+<B_sites>
+<div class="liste sites-critique clearfix">
+	#ANCRE_PAGINATION
+	<h2 class="h2">[(#ENV{titre}) ](#GRAND_TOTAL)</h2>
+	<p>Tous ces sites sont évalués selon les critères de la campagne d'évaluation N&deg;#GET{id_evaluation}.</p>
+
+<div class="row-fluid">
+	<ul class="thumbnails">
+	<BOUCLE_sites(SITES){id_syndic IN #GET{sites}}{pagination 12}>
+
+		[(#SET{lien,[(#URL_PAGE{eval_benchmark}
+			|parametre_url{url,#URL_SITE}
+			|parametre_url{id_syndic,#ID_SYNDIC}
+			|parametre_url{retour,#ENV{retour}})]
+		})]
+
+		[(#REM)Toutes les critiques de ce site dans le cadre de cette évaluation ]
+		<BOUCLE_critiques(EVALUATIONS_CRITIQUES)
+		    {objet=site}
+		    {id_objet=#ID_SYNDIC}
+		    {id_evaluation=#GET{id_evaluation}}>
+				[(#REM) Est-ce que cette critique a été faite par l'auteur ?]
+				[(#ID_AUTEUR|=={#GET{votant}}|oui)[(#SET{a_vote,oui})]]
+		</BOUCLE_critiques>
+
+			[(#REM) Le nombre de votes pour cet objet]
+			[(#SET{votes,#TOTAL_BOUCLE})]
+
+		</B_critiques>
+
+		<li class="span4">
+			<div class="thumbnail">
+				[<a href="#GET{lien}"
+				    title="[(#GET{a_vote}|=={'oui'}|?{<:eval_benchmark:title_modifier_votre_avis:>,<:eval_benchmark:title_donner_votre_avis:>})]">(#VAL{#URL_SITE}|thumbshot|balise_img|image_passe_partout{180,180}|image_recadre{180,180})</a>]
+				<p class="caption #EDIT{nom_site}">
+				<a href="#GET{lien}"
+				    title="[(#GET{a_vote}|=={'oui'}|?{<:eval_benchmark:title_modifier_votre_avis:>,<:eval_benchmark:title_donner_votre_avis:>})]">#NOM_SITE</a></p>
+				<p>
+
+					[(#REM) Nombre d'avis ]
+					[(#GET{votes}|>{0}|?{
+					<a href="[(#URL_PAGE{evaluation_bilan}
+					            |parametre_url{id_evaluation,#GET{id_evaluation}}
+					            |parametre_url{objet,site}
+					            |parametre_url{id_objet,#ID_SYNDIC})]"
+                       title="<:eval_benchmark:title_voir_les_avis:>"
+                       class="btn btn-small btn-success">[(#GET{votes}) ]<:eval_benchmark:label_evaluations:></a>,
+					<a href="[(#GET{lien})]"
+					    title="<:eval_benchmark:title_aucun_avis:>"
+					    class="btn btn-small btn-warning"><i class="icon-white icon-warning-sign"></i> 0 <:eval_benchmark:label_evaluations:></a>})]
+
+					[(#REM) L'utilisateur a t'il voté ?]
+					[(#GET{a_vote}|=={'oui'}|?{
+					   <a class="btn btn-small btn-success" href="[(#GET{lien})]" title="<:eval_benchmark:title_modifier_votre_avis:>"><i class="icon-white icon-ok"></i> <:eval_benchmark:label_a_vote_oui:></a>,
+					   <a class="btn btn-small btn-warning" href="[(#GET{lien})]" title="<:eval_benchmark:title_donner_votre_avis:>"><i class="icon-white icon-warning-sign"></i> <:eval_benchmark:label_a_vote_non:></a>})]
+
+					[(#REM) Lien direct sans formulaire  ]
+					<a href="#URL_SITE"
+					    class="btn btn-small btn-info"
+					    title="<:eval_benchmark:title_voir_en_direct:>"><i class="icon-white icon-share-alt"></i> <:eval_benchmark:label_lien_direct:></a>
+
+				</p>
+
+			</div>
+		</li>
+
+	[(#SET{a_vote,''})]
+	[(#SET{votes,''})]
+	[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)
+	[(#COMPTEUR_BOUCLE|modulo{3}|non)
+	</ul>
+</div>
+<div class='row-fluid'>
+	<ul class='thumbnails'>
+	]
+	]
+
+	</BOUCLE_sites>
+	</ul>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+
+</div>
+</B_sites>

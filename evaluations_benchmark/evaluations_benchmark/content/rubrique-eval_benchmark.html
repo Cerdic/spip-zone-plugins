@@ -1,0 +1,27 @@
+
+<BOUCLE_r(RUBRIQUES){id_rubrique}>
+
+<BOUCLE_e(spip_evaluations_liens){id_objet==#ID_RUBRIQUE}{objet=='rubrique'}>
+#SET{id_evaluation,#ID_EVALUATION}
+
+<h1 class="#EDIT{titre}">#TITRE (évaluation N&deg;#GET{id_evaluation})</h1>
+
+<BOUCLE_accueil(ARTICLES){id_rubrique}{id_article_accueil}>
+[<h3 class="#EDIT{descriptif}">(#DESCRIPTIF)</h3>]
+<div class="#EDIT{texte}">#TEXTE</div>
+</BOUCLE_accueil>
+
+[(#REM) Les sites à analyser ]
+<INCLURE{fond=liste/sites-critique,
+	env,ajax,
+	id_article_accueil=#ID_ARTICLE_ACCUEIL,
+	id_evaluation=#GET{id_evaluation},
+	titre=<:eval_benchmark:sites_critique:>,
+	retour=#SELF
+	}/>
+
+</BOUCLE_e>
+<p><:eval_benchmark:erreur_aucune_evaluation_trouvee:>
+<br /><:eval_benchmark:erreur_lien_rubrique_evaluation{id_rubrique=#ID_RUBRIQUE}:></p>
+<//B_e>
+</BOUCLE_r>

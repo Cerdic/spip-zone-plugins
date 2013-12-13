@@ -1,0 +1,29 @@
+<paquet
+	prefix="eval_benchmark"
+	categorie="squelette"
+	version="0.3.1"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="img/eval_benchmark-48.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+    <nom>Critique de sites - Benchmarks</nom>
+
+    <auteur>Cyril Marion</auteur>
+
+    <licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css"  inclure="eval_benchmark_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="eval_benchmark_pipelines.php" />
+	<pipeline nom="affiche_milieu"   inclure="eval_benchmark_pipelines.php" />
+
+	<necessite nom="evaluations"    compatibilite="[1.1.0;[" />
+	<necessite nom="compositions"   compatibilite="[3.0.0;[" />
+	<necessite nom="spipr_dist"     compatibilite="[0.4.0;[" />
+
+	<necessite nom="article_accueil" compatibilite="[1.1.0;]" />
+	<necessite nom="thumbsites" compatibilite="[1.1.0;]" />
+
+</paquet>

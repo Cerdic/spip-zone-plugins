@@ -1,0 +1,11 @@
+#CACHE{0}
+
+#SET{mots,#ARRAY}
+<BOUCLE_mots_actifs(MOTS){id_groupe=1}{id_syndic}>
+#SET_PUSH{mots,#ID_MOT}
+</BOUCLE_mots_actifs>
+
+<ul>
+[(#SAISIE{ctags, content_#ENV{key}_ctags, id_groupe=1, class=crayons-active, valeur=#GET{mots},
+	label=<:eval_benchmark:label_categorie:>})]
+</ul>

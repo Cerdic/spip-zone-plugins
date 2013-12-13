@@ -1,0 +1,15 @@
+#FIL_ARIANE
+
+<h2>Ajouter des mots clé aux sites</h2>
+
+<ul>
+<BOUCLE_sites(SYNDIC){par id_syndic}>
+<li>
+	<span class="#EDIT{ctags}">
+	<BOUCLE_mc(MOTS){id_syndic}>#TITRE</BOUCLE_mc>[mot clé] <//B_mc>
+	</span>
+	 - #ID_SYNDIC - #NOM_SITE
+</li>
+
+</BOUCLE_sites>
+</ul>

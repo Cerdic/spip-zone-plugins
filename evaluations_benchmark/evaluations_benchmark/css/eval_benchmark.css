@@ -1,0 +1,29 @@
+/*
+.composition_eval_benchmark #content {width:auto}
+.composition_eval_benchmark #extra1,
+.composition_eval_benchmark #extra2,
+.composition_eval_benchmark #aside {display:none}
+*/
+.liste.sites-critique dl {width:22.000%;margin-right:1%;margin-bottom:1%;padding:1%;height:200px; overflow:hidden;float:left;position:relative}
+.liste.sites-critique dd.titre {width:100%;float:none;padding:1%;text-align:center;font-size:1.2em}
+.liste.sites-critique dd.vignette {float:none;text-align:center;margin-bottom:0.5em;}
+.liste.sites-critique dd.vignette .spip_logos {float:none;margin:0}
+
+.en_cours {
+    width:200px;
+    height:200px;
+    background-image:url(../img/wait.gif);
+    margin:auto;
+    margin-top:25%;
+
+}
+
+.liste.sites-critique dd.votes,
+.liste.sites-critique dd.a_vote {position:absolute;top:0; width:33.33%;max-height:2em;}
+.liste.sites-critique dd.votes {background-color:#82C93A;right:0}
+.liste.sites-critique dd.a_vote {background-color:#c3d9ff;left:0}
+
+
+/* on cache le lable de la saisie ctags */
+.crayon-html .saisie_ctags label {display:none;}
+.crayon-html .saisie_ctags {padding-left:10px;}
