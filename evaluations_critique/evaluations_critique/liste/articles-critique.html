@@ -1,0 +1,21 @@
+[(#REM)
+    Une liste des logos des articles évalués
+    avec un lie vers l'article en question
+    et éventuellement un résumé des notes de cet article
+]
+<B_articles>
+<div class="liste articles-critique clearfix">
+	#ANCRE_PAGINATION
+	<h2 class="h2">[(#ENV{titre}) ](#GRAND_TOTAL)</h2>
+    <BOUCLE_articles(ARTICLES){id_rubrique}{!id_article=3}{pagination 10}>
+	<dl class="liste-items">
+        <dd class="vignette avant">[(#LOGO_ARTICLE|#URL_ARTICLE|image_passe_partout{150}|image_reduire{150})]</dd>
+        <dd class="texte">
+            <h3 class="#EDIT{titre}"><a href="#URL_ARTICLE">#TITRE</a></h3>
+            <div class="#EDIT{texte}">[(#TEXTE|sinon{'...'})]</div>
+        </dd>
+	</dl>
+    </BOUCLE_articles>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles>

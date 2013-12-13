@@ -1,0 +1,9 @@
+.composition_eval_critique #content {background-color:#FFFFCC; width:auto}
+.composition_eval_critique #extra1,
+.composition_eval_critique #extra2 {display:none}
+
+.composition_eval_critique dl.liste-items {width:auto; float:none}
+.composition_eval_critique dl.liste-items:after {content:"."; display:block; clear:both; height:0; visibility:hidden;}
+.composition_eval_critique dl.liste-items dd {float:left}
+.composition_eval_critique dl.liste-items dd.vignette {width:30%}
+.composition_eval_critique dl.liste-items dd.texte {width:70%}

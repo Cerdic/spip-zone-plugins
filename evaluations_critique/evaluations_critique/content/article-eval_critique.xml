@@ -1,0 +1,5 @@
+<composition>
+	<nom>Article critique d'articles</nom>
+	<description>Affiche un contenu d'article standard, avec un formulaire d'évaluation.</description>
+	<icon>img/article-eval_critique.png</icon>
+</composition>

@@ -1,0 +1,6 @@
+<composition>
+	<nom>Rubrique critique d'articles</nom>
+	<description>Permet d'évaluer des articles SPIP</description>
+	<icon>img/rubrique-eval_critique.png</icon>
+    <branche type="article" composition="eval_critique" />
+</composition>
