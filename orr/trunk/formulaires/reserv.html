@@ -9,22 +9,18 @@
                 {label=<:orr:nom_de_la_reservation:>})]
             
             #SET{tableau_ressource, #ARRAY}
-            <BOUCLE_ressource(ORR_RESSOURCES){id_orr_reservation=#ENV{id_reservation}}>
-                #SET{tableau_ressource,#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
-            </BOUCLE_ressource>
-            
-            <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}{si #ENV{id_reservation}|=={""}}>
+            <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
                 [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
                 #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
             </BOUCLE_selection_ressources>
-
             [(#SAISIE{selection_multiple, liste_ressources}
                 {label=<:orr:liste_ressources:>}
                 {cacher_option_intro=true}
                 {defaut=#ENV{id_ressource} }
-                {datas=#GET{tableau_ressource}|array_flip})]
-			<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
-            
+                {datas=#GET{tableau_ressource}|array_flip}
+                {attention=<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>}
+                {size=[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]})]
+			
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
                 {class=datepicker})]

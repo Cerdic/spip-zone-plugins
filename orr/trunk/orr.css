@@ -19,6 +19,7 @@
 /* Formulaire réservation */
 #poubelle {  float:right; padding-right: 10px; }
 #ctrl_clic { font-size: 0.75em; color: #999; float: right; }
+#champ_liste_ressources { float: left; }
 .ressource_visible { display:auto; }
 .ressource_cachee { display:none; }
 .orr_stylo { float:left; }
