@@ -135,7 +135,7 @@ function verifier_sauvegarde ($archive) {
 	$buf_len = 1024; // la version doit etre dans le premier ko
 
 	if (!(@file_exists($archive) AND $f = $_fopen($archive, "rb")))
-		return _T('avis_probleme_archive', array('archive' => $archive));
+		return _T('dumpxml:avis_probleme_archive', array('archive' => $archive));
 
 	$buf = $_fread($f, $buf_len);
 
