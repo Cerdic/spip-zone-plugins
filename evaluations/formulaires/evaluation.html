@@ -1,0 +1,101 @@
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_evaluation,nouveau}'>
+
+	<h3>#INFO_TITRE{evaluation,#ID_EVALUATION}</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_si_editable(CONDITION){si #EDITABLE}>
+
+	[(#ENV{date_critique}|oui)
+	[(#SET{date_critique,[(#ENV{date_critique}|affdate)]})]
+		<p class="reponse_formulaire info">
+			<:evaluations:info_evaluation_deja_effectuee{date_critique=#GET{date_critique}}:>
+		</p>
+	]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_evaluation' value='#ENV{id_evaluation}' />
+
+		<ul>
+			<BOUCLE_criteres(EVALUATIONS_CRITERES){id_evaluation}{par num titre, titre}>
+			<li class="editer editer_critere">
+				<fieldset>
+					<h3 class='legend'>#TITRE</h3>
+
+					[<div class='explication'>(#TEXTE)</div>]
+
+					<BOUCLE_si_noter(CONDITION){si (#NOTER|oui)}>
+						#SET{quoi,note}
+						[(#SET{env,[(#ENV{critere/#ID_EVALUATIONS_CRITERE/[(#GET{quoi})]})]})]
+						[(#SET{name,[critere\[(#ID_EVALUATIONS_CRITERE)\]\[#GET{quoi}\]]})]
+						[(#SET{_name,[critere_(#ID_EVALUATIONS_CRITERE)_#GET{quoi}]})]
+
+						<label class='label_#GET{quoi}' for="#GET{_name}"><:evaluations:label_votre_note:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs/#GET{_name}})</span>
+						]
+						[<div class='explication'>(#AIDE_NOTER|propre)</div>]
+
+						[(#REM) classes CSS pour démarrer les étoiles de notations. Cf. javascript/notation.js ]
+						<div class='notation_note notation_note_on_load'>
+						<BOUCLE_etoiles(DATA){enum (#NOTE_MINI|?{#NOTE_MINI,1}), (#NOTE_MAXI|?{#NOTE_MAXI,5})}>
+							<input type='radio' class='radio star' name='#GET{name}' id='#GET{_name}' value="#VALEUR" title="#VALEUR"[ (#GET{env}|=={#VALEUR}|oui)checked='checked'] />
+						</BOUCLE_etoiles>
+						</div>
+					</BOUCLE_si_noter>
+
+					[(#COMMENTER|oui)
+						#SET{quoi,commentaire}
+						[(#SET{env,[(#ENV{critere/#ID_EVALUATIONS_CRITERE/[(#GET{quoi})]})]})]
+						[(#SET{name,[critere\[(#ID_EVALUATIONS_CRITERE)\]\[#GET{quoi}\]]})]
+						[(#SET{_name,[critere_(#ID_EVALUATIONS_CRITERE)_#GET{quoi}]})]
+
+						<label class='label_#GET{quoi}' for="#GET{_name}"><:evaluations:label_votre_commentaire:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs/#GET{_name}})</span>]
+						[<div class='explication'>(#AIDE_COMMENTER|propre)</div>]
+						<textarea name='#GET{name}' id='#GET{_name}' rows='4' cols='40'>#GET{env}</textarea>
+					]
+
+					[(#EVALUER|oui)
+
+						#SET{quoi,forces}
+						[(#SET{env,[(#ENV{critere/#ID_EVALUATIONS_CRITERE/[(#GET{quoi})]})]})]
+						[(#SET{name,[critere\[(#ID_EVALUATIONS_CRITERE)\]\[#GET{quoi}\]]})]
+						[(#SET{_name,[critere_(#ID_EVALUATIONS_CRITERE)_#GET{quoi}]})]
+
+						[<label for="#GET{_name}"><:evaluations_critere:label_evaluer:></label>
+						<div class='explication'>(#AIDE_EVALUER|propre)</div>]
+
+						<label class='label_#GET{quoi}' for="#GET{_name}"><:evaluations:label_points_forts:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs/#GET{_name}})</span>]
+						<textarea name='#GET{name}' id='#GET{_name}' rows='4' cols='40'>#GET{env}</textarea>
+
+						#SET{quoi,faiblesses}
+						[(#SET{env,[(#ENV{critere/#ID_EVALUATIONS_CRITERE/[(#GET{quoi})]})]})]
+						[(#SET{name,[critere\[(#ID_EVALUATIONS_CRITERE)\]\[#GET{quoi}\]]})]
+						[(#SET{_name,[critere_(#ID_EVALUATIONS_CRITERE)_#GET{quoi}]})]
+
+						<label class='label_#GET{quoi}' for="#GET{_name}"><:evaluations:label_points_faibles:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs/#GET{_name}})</span>]
+						<textarea name='#GET{name}' id='#GET{_name}' rows='4' cols='40'>#GET{env}</textarea>
+
+					]
+				</fieldset>
+
+
+
+
+
+
+			</li>
+			</BOUCLE_criteres>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+
+	</BOUCLE_si_editable>
+</div>

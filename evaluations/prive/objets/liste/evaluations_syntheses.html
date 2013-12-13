@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	synthese,1, 
+	date,-1, 
+	id_evaluations_synthese,1,
+	points,-1
+}})]<B_liste_evaluations_syntheses>
+#ANCRE_PAGINATION
+<div class="liste-objets evaluations_syntheses">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluations_synthese:info_1_evaluations_synthese,evaluations_synthese:info_nb_evaluations_syntheses}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='synthese' scope='col'>[(#TRI{synthese,<:evaluations_synthese:label_synthese:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_evaluations_synthese,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evaluations_syntheses(EVALUATIONS_SYNTHESES){id_evaluation?}{id_objet?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num synthese},#GET{defaut_tri}}{par synthese}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{evaluations_synthese-16.png}|balise_img)]</td>
+			<td class='synthese principale'>[(#LOGO_EVALUATIONS_SYNTHESE|image_reduire{20,26})]<a href="[(#ID_EVALUATIONS_SYNTHESE|generer_url_entite{evaluations_synthese})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVALUATIONS_SYNTHESE">[(#RANG). ]#SYNTHESE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,evaluations_synthese,#ID_EVALUATIONS_SYNTHESE}|?{
+				<a href="[(#URL_ECRIRE{evaluations_synthese_edit,id_evaluations_synthese=#ID_EVALUATIONS_SYNTHESE})]">#ID_EVALUATIONS_SYNTHESE</a>,
+				#ID_EVALUATIONS_SYNTHESE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_evaluations_syntheses>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations_syntheses>[
+<div class="liste-objets evaluations_syntheses caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations_syntheses>

@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/evaluations, par=titre, env, ajax, sinon=<:evaluation:info_aucun_evaluation:>}>
+
+[(#AUTORISER{creer,evaluation})
+	[(#URL_ECRIRE{evaluation_edit,new=oui}|icone_verticale{<:evaluation:icone_creer_evaluation:>,evaluation,new,right})]
+]

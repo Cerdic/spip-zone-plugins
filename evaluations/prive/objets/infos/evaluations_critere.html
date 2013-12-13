@@ -1,0 +1,14 @@
+<BOUCLE_evaluations_critere(EVALUATIONS_CRITERES){id_evaluations_critere=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:evaluations_critere:titre_evaluations_critere:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_EVALUATIONS_CRITERE</p></div>
+
+[(#AUTORISER{supprimer,evaluations_critere,#ID_EVALUATIONS_CRITERE}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_evaluations_critere,
+		#ID_EVALUATIONS_CRITERE,
+		#URL_ECRIRE{evaluation,id_evaluation=#ID_EVALUATION}}
+		|icone_horizontale{<:evaluations_critere:supprimer_evaluations_critere:>,evaluations_critere,del,'',
+			onclick="return confirm('<:evaluations_critere:confirmer_supprimer_evaluations_critere|attribut_html:>')"})]
+]
+</div>
+</BOUCLE_evaluations_critere>

@@ -1,0 +1,57 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	multi nom,1,
+	site,1,
+	compteur_articles,-1,
+	points,-1
+}})
+]
+#SET{ids,#ARRAY}
+<BOUCLE_auteurs(EVALUATIONS_CRITIQUES)
+	{id_evaluation ?}{id_evaluations_critere ?}{objet ?}{id_objet ?}
+	{fusion id_auteur}>[(#SET{ids,#GET{ids}|push{#ID_AUTEUR}})]</BOUCLE_auteurs>
+<B_liste_aut>
+#ANCRE_PAGINATION
+<div class="liste-objets auteurs">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
+	<thead>
+
+		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class='nombre' scope='col'>Nombre d'objets évalué</th>
+			<th class='action' scope='col'>Détails</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur IN #GET{ids}}{where?}{statut?}{recherche?}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} aut}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			<td class='nombre'>
+<BOUCLE_nb_evaluations_auteurs(EVALUATIONS_CRITIQUES)
+	{id_evaluation ?}{id_evaluations_critere ?}
+	{id_auteur}
+	{objet ?}{id_objet ?}
+	{fusion concat(objet,id_objet)}> </BOUCLE_nb_evaluations_auteurs>
+		#TOTAL_BOUCLE
+</B_nb_evaluations_auteurs>
+			</td>
+			<td class='action'>
+				<a href="[(#URL_ECRIRE{evaluations_auteur}
+					|parametre_url{id_evaluation,#ID_EVALUATION}
+					|parametre_url{id_auteur,#ID_AUTEUR}
+					)]">Voir</a>
+			</td>
+		</tr>
+	</BOUCLE_liste_aut>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_aut>[
+<div class="liste-objets auteurs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_aut>

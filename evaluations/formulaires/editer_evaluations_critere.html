@@ -1,0 +1,111 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_evaluations_critere,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_evaluations_critere' value='#ENV{id_evaluations_critere}' />
+		<ul>
+
+			[(#SAISIE{evaluations, id_evaluation, obligatoire=oui,
+				label=<:evaluations_critere:label_id_evaluation:>})]
+
+			[(#SAISIE{input, titre,
+				label=<:evaluations_critere:label_titre:>})]
+
+			[(#SAISIE{textarea, texte,
+				label=<:evaluations_critere:label_texte:>,
+				rows=4})]
+
+			<li class='fieldset'>
+				<fieldset>
+					<h3 class='legend'><:evaluations_critere:fieldset_noter:></h3>
+					<ul>
+						[(#SAISIE{oui_non, noter,
+							label=<:evaluations_critere:label_noter:>})]
+
+						[(#SAISIE{textarea, aide_noter,
+							label=<:evaluations_critere:label_aide_noter:>,
+							rows=2})]
+
+						[(#SAISIE{input, note_mini,
+							label=<:evaluations_critere:label_note_mini:>})]
+
+						[(#SAISIE{input, note_maxi,
+							label=<:evaluations_critere:label_note_maxi:>})]
+
+						[(#SAISIE{input, ponderation,
+							label=<:evaluations_critere:label_ponderation:>})]
+
+					</ul>
+				</fieldset>
+			</li>
+
+			<li class='fieldset'>
+				<fieldset>
+					<h3 class='legend'><:evaluations_critere:fieldset_commenter:></h3>
+					<ul>
+						[(#SAISIE{oui_non, commenter,
+							label=<:evaluations_critere:label_commenter:>})]
+
+						[(#SAISIE{textarea, aide_commenter,
+							label=<:evaluations_critere:label_aide_commenter:>,
+							rows=2})]
+					</ul>
+				</fieldset>
+			</li>
+
+			<li class='fieldset'>
+				<fieldset>
+					<h3 class='legend'><:evaluations_critere:fieldset_evaluer:></h3>
+					<ul>
+						[(#SAISIE{oui_non, evaluer,
+							label=<:evaluations_critere:label_evaluer:>})]
+
+						[(#SAISIE{textarea, aide_evaluer,
+							label=<:evaluations_critere:label_aide_evaluer:>,
+							rows=2})]
+					</ul>
+				</fieldset>
+			</li>
+
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.cacher_options_evaluations = function(quoi, champ) {
+				if ($(quoi).find(champ).prop('checked')) {
+					$(quoi).siblings('li').show('fast');
+				} else {
+					$(quoi).siblings('li').hide('fast');
+				}
+			}
+
+			/* cacher les options des notes */
+			$.cacher_options_evaluations(".formulaire_editer_evaluations_critere li.editer_noter", '#champ_noter_oui');
+			$(".formulaire_editer_evaluations_critere li.editer_noter").change(function(){
+				$.cacher_options_evaluations(this, '#champ_noter_oui');
+			});
+
+			/* cacher les options des commentaires */
+			$.cacher_options_evaluations(".formulaire_editer_evaluations_critere li.editer_commenter", '#champ_commenter_oui');
+			$(".formulaire_editer_evaluations_critere li.editer_commenter").change(function(){
+				$.cacher_options_evaluations(this, '#champ_commenter_oui');
+			});
+
+			/* cacher les options des evaluations */
+			$.cacher_options_evaluations(".formulaire_editer_evaluations_critere li.editer_evaluer", '#champ_evaluer_oui');
+			$(".formulaire_editer_evaluations_critere li.editer_evaluer").change(function(){
+				$.cacher_options_evaluations(this, '#champ_evaluer_oui');
+			});
+
+		});
+		</script>
+	]
+</div>

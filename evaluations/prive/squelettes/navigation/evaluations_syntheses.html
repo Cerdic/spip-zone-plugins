@@ -1,0 +1,39 @@
+
+#BOITE_OUVRIR{'',info}
+<div class='infos evaluations'>
+
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut?}>
+[(#SET{texte_objet,<:evaluation:titre_evaluation:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_EVALUATION</p></div>
+<div class='titre'>
+	<a href="[(#ID_EVALUATION|generer_url_entite{evaluation})]">#TITRE</a>
+</div>
+</BOUCLE_evaluation>
+	<div class='titre'>
+	Aucune évaluation sélectionnée.
+	</div>
+<//B_evaluation>
+
+</div>
+
+#BOITE_FERMER
+
+
+
+[(#BOITE_OUVRIR{Liste des évaluations})]
+	<B_objets>
+		<div class='liste'>
+		<ul class='liste-items'>
+	<BOUCLE_objets(EVALUATIONS){!par date_debut}{!par id_evaluation}{pagination 20}>
+		<li class='item #EXPOSE'>
+			<a href="[(#URL_ECRIRE{evaluations_syntheses}|parametre_url{id_evaluation,#ID_EVALUATION})]">
+				#TITRE
+			</a>
+		</li>
+	</BOUCLE_objets>
+		</ul>
+		</div>
+	</B_objets>
+#BOITE_FERMER
+
+

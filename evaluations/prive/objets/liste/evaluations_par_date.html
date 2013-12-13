@@ -1,0 +1,58 @@
+[(#REM) liste des dernières évaluations des objets par des auteurs ]
+[(#SET{defaut_tri,#ARRAY{
+	date,-1, 
+}})]<B_liste_evaluations_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluation:info_1_evaluation,evaluation:info_nb_evaluations}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>Objet</th>
+			<th class='auteur' scope='col'>Auteur</th>
+			<th class='date' scope='col'>Date</th>
+			<th class='action' scope='col'>Détails</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<BOUCLE_liste_evaluations_objets(EVALUATIONS_CRITIQUES)
+		{id_evaluation?}{id_evaluations_critere?}
+		{objet ?}{id_objet ?}
+		{id_auteur?}
+		{where?}{tri #ENV{par,date},#GET{defaut_tri}}
+		{!par date}
+		{fusion concat(objet,id_objet,id_auteur)}
+		{pagination #ENV{nb,10}}>
+
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{#OBJET|concat{-16.png}}|balise_img)]</td>
+			<td class='titre'>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET #ID_OBJET">
+					[(#INFO_TITRE{#OBJET,#ID_OBJET})]
+				</a>
+			</td>
+			<td class='auteur'>
+				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="auteur #ID_AUTEUR">
+					[(#INFO_TITRE{auteur,#ID_AUTEUR})]
+				</a>
+			</td> 
+			<td class='date'>[(#DATE|affdate)]</td> 
+			<td class='action'>
+				<a href="[(#URL_ECRIRE{evaluations_auteur}
+					|parametre_url{id_auteur,#ID_AUTEUR}
+					|parametre_url{id_evaluation,#ID_EVALUATION}
+					|parametre_url{objet,#OBJET}
+					|parametre_url{id_objet,#ID_OBJET}
+					)]">Voir</a>
+			</td> 
+		</tr>
+	</BOUCLE_liste_evaluations_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations_objets>[
+<div class="liste-objets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations_objets>

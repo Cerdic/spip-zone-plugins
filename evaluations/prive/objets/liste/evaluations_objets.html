@@ -1,0 +1,63 @@
+[(#REM) liste des objets qui ont été évalués ]
+[(#SET{defaut_tri,#ARRAY{
+	date,-1, 
+	points,-1
+}})]<B_liste_evaluations_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluation:info_1_element,evaluation:info_nb_elements}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'><:evaluation:label_titre:></th>
+			<th class='titre' scope='col'><:evaluation:nb_de_critiques:></th>
+			<th class='objet' scope='col'>Objet</th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+			<th class='action' scope='col'>Détails</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<BOUCLE_liste_evaluations_objets(EVALUATIONS_CRITIQUES)
+		{id_evaluation?}{id_evaluations_critere?}
+		{objet ?}{id_objet ?}
+		{id_auteur?}
+		{where?}{tri #ENV{par,id_objet},#GET{defaut_tri}}
+		{par objet,id_objet}
+		{fusion concat(objet,id_objet)}
+		{pagination #ENV{nb,10} (#ENV{objet}|concat{_liste_objet})}>
+
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{#OBJET|concat{-16.png}}|balise_img)]</td>
+			<td class='titre'>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#INFO_TITRE{#OBJET,#ID_OBJET})]
+				</a>
+			</td>
+			<td class='nb_critiques'>
+				<BOUCLE_nb_evaluations_objets(EVALUATIONS_CRITIQUES)
+					{id_evaluation?}{id_evaluations_critere?}
+					{objet}{id_objet}
+					{fusion id_auteur}> </BOUCLE_nb_evaluations_objets>
+					#TOTAL_BOUCLE
+				</B_nb_evaluations_objets>
+			</td> 
+			<td class='objet'>#OBJET</td> 
+			<td class='id'>#ID_OBJET</td>
+			<td class='action'>
+				<a href="[(#URL_ECRIRE{evaluations_auteur}
+					|parametre_url{id_evaluation,#ID_EVALUATION}
+					|parametre_url{objet,#OBJET}
+					|parametre_url{id_objet,#ID_OBJET}
+					)]">Voir</a>
+			</td>
+		</tr>
+	</BOUCLE_liste_evaluations_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations_objets>[
+<div class="liste-objets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations_objets>

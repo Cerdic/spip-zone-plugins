@@ -1,0 +1,15 @@
+[(#REM)
+    affiche la ou les évalutaions pour un objet donné
+]
+[(#SET{evaluation,[(#INFO_TITRE{evaluation,#ENV{identifiant}})]})]
+<h2><:evaluations:titre_bloc_critiques{objet=#ENV{objet}, id_objet=#ENV{id_objet}, titre=#ENV{titre}, evaluation=#GET{evaluation}}:></h2>
+
+<ul>
+<BOUCLE_critiques(EVALUATIONS_CRITIQUES){objet}{id_objet}{id_evaluation=#INFO_ID_EVALUATION{evaluation,#ENV{identifiant}}}>
+    <li>#INFO_NOM{auteur,#ID_AUTEUR}, le [(#DATE|affdate{'d/m/Y'})], a évalué #INFO_TITRE{evaluations_critere,#ID_EVALUATIONS_CRITERE}:</li>
+    [<li>(#NOTE)</li>]
+    [<li>(#COMMENTAIRE)</li>]
+    [<li><evaluations:label_points_forts:>(#FORCES)</li>]
+    [<li><evaluations:label_points_forts:>(#FAIBLESSES)</li>]
+</BOUCLE_critiques>
+</ul>

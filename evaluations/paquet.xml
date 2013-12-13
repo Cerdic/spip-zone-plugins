@@ -1,0 +1,36 @@
+<paquet
+	prefix="evaluations"
+	categorie="communication"
+	version="1.7.1"
+	etat="test"
+	compatibilite="[3.0.8;3.0.*]"
+	logo="prive/themes/spip/images/evaluations-64.png"
+	documentation=""
+	schema="1.2.0"
+>
+
+	<nom>Évaluations</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<credit>Cyril Marion (icones)</credit>
+	<credit lien="http://bogo-d.deviantart.com/">Mihaiciuc Bogdan (icone visualisation des réponses)</credit>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<!-- pour les js des étoiles -->
+	<necessite nom="notation" compatibilite="[2.0.6;]" />
+	<necessite nom="verifier" compatibilite="[1.0.0;]" />
+
+	<pipeline nom="autoriser" inclure="evaluations_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/evaluations.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/evaluations.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/evaluations.php" />
+	<pipeline nom="insert_head_css" inclure="evaluations_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="evaluations_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="evaluations_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="evaluations_pipelines.php" />
+
+	<menu nom="evaluations" titre="evaluation:titre_evaluations" parent="menu_edition" icone="images/evaluation-16.png" action="evaluations" />
+</paquet>

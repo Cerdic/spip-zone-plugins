@@ -1,0 +1,38 @@
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:evaluation:titre_evaluation:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_EVALUATION</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{evaluations,#ID_EVALUATION})]
+
+
+[(#URL_ECRIRE{evaluations_auteur}
+	|parametre_url{id_evaluation,#ID_EVALUATION}
+	|icone_horizontale{Voir les réponses,evaluations_reponses-24})]
+
+[(#URL_ECRIRE{evaluations_syntheses}
+	|parametre_url{id_evaluation,#ID_EVALUATION}
+	|icone_horizontale{Voir les synthèses,evaluations_syntheses_reponses-24})]
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(EVALUATIONS){id_evaluation}>
+	[(#VAL{redirect}
+		|generer_url_action{type=evaluations&id=#ID_EVALUATION}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,evaluations,#ID_EVALUATION,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=evaluations&id=#ID_EVALUATION}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_evaluation>

@@ -1,0 +1,73 @@
+<BOUCLE_evaluations_critere(EVALUATIONS_CRITERES){id_evaluations_critere}>
+
+<BOUCLE_evaluation(EVALUATIONS){id_evaluation}{statut?}>
+[<div class="champ contenu_id_evaluation">
+	<label><:evaluations_critere:label_id_evaluation:> : </label>
+	<span dir='#LANG_DIR' class='#_evaluations_critere:EDIT{id_evaluation} id_evaluation'>
+		<a href="[(#ID_EVALUATION|generer_url_entite{evaluation})]">#TITRE \((#ID_EVALUATION)\)</a></span>
+</div>]
+</BOUCLE_evaluation>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:evaluations_critere:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:evaluations_critere:label_texte:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_noter[ (#NOTER*|strlen|?{'',vide})]">
+	<label><:evaluations_critere:label_noter:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{noter} noter'>(#NOTER)</span>
+</div>]
+
+[(#NOTER|oui)
+	[<div class="champ contenu_aide_noter[ (#AIDE_NOTER*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_aide_noter:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{aide_noter} aide_noter'>(#AIDE_NOTER)</span>
+	</div>]
+
+	[<div class="champ contenu_note_mini[ (#NOTE_MINI*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_note_mini:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{note_mini} note_mini'>(#NOTE_MINI)</span>
+	</div>]
+
+	[<div class="champ contenu_note_maxi[ (#NOTE_MAXI*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_note_maxi:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{note_maxi} note_maxi'>(#NOTE_MAXI)</span>
+	</div>]
+
+	[<div class="champ contenu_ponderation[ (#PONDERATION*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_ponderation:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{ponderation} ponderation'>(#PONDERATION)</span>
+	</div>]
+]
+
+[<div class="champ contenu_commenter[ (#COMMENTER*|strlen|?{'',vide})]">
+	<label><:evaluations_critere:label_commenter:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{commenter} commenter'>(#COMMENTER)</span>
+</div>]
+
+[(#COMMENTER|oui)
+	[<div class="champ contenu_aide_commenter[ (#AIDE_COMMENTER*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_aide_commenter:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{aide_commenter} aide_commenter'>(#AIDE_COMMENTER)</span>
+	</div>]
+]
+
+[<div class="champ contenu_evaluer[ (#EVALUER*|strlen|?{'',vide})]">
+	<label><:evaluations_critere:label_evaluer:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{evaluer} evaluer'>(#EVALUER)</span>
+</div>]
+
+[(#EVALUER|oui)
+	[<div class="champ contenu_aide_evaluer[ (#AIDE_EVALUER*|strlen|?{'',vide})]">
+		<label><:evaluations_critere:label_aide_evaluer:> : </label>
+		<span dir='#LANG_DIR' class='#EDIT{aide_evaluer} aide_evaluer'>(#AIDE_EVALUER)</span>
+	</div>]
+]
+
+
+</BOUCLE_evaluations_critere>

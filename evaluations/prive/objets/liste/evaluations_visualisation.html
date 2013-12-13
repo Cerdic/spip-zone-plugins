@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,-1, 
+	titre,1, 
+	id_evaluation,1,
+}})]<B_liste_evaluations>
+#ANCRE_PAGINATION
+<div class="liste-objets evaluations">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{evaluation:info_1_evaluation,evaluation:info_nb_evaluations}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='titre' scope='col'>[(#TRI{titre,<:evaluation:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_debut,<:evaluation:label_date_debut:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_evaluation,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_evaluations(EVALUATIONS){statut?}{tri #ENV{par,date_debut},#GET{defaut_tri}}
+		{!par date_debut}{par num titre,titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{evaluation-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{evaluation,#ID_EVALUATION})]</td> 
+			<td class='titre principale'>
+				[(#LOGO_EVALUATION|image_reduire{20,26})]
+				<a href="[(#URL_ECRIRE{evaluations_auteur}|parametre_url{id_evaluation,#ID_EVALUATION})]"
+					title="<:info_numero_abbreviation|attribut_html:> #ID_EVALUATION">[(#RANG). ]#TITRE
+				</a>
+			</td>
+			<td class='date'>[(#DATE_DEBUT|affdate)]</td> 
+			<td class='id'>
+				<a href="[(#URL_ECRIRE{evaluations_auteur}|parametre_url{id_evaluation,#ID_EVALUATION})]">#ID_EVALUATION</a>
+			</td>
+		</tr>
+	</BOUCLE_liste_evaluations>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_evaluations>[
+<div class="liste-objets evaluations caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_evaluations>

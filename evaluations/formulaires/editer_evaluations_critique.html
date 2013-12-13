@@ -1,0 +1,48 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_evaluations_critique,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_evaluations_critique' value='#ENV{id_evaluations_critique}' />
+		<ul>
+
+			[(#SAISIE{evaluations, id_evaluation,
+				label=<:evaluations_critique:label_id_evaluation:>})]
+
+			[(#SAISIE{evaluations_criteres, id_evaluations_critere,
+				label=<:evaluations_critique:label_id_evaluations_critere:>,
+				id_evaluation=#ID_EVALUATION})]
+
+			[(#SAISIE{input, objet,
+				label=<:evaluations_critique:label_objet:>})]
+
+			[(#SAISIE{input, id_objet,
+				label=<:evaluations_critique:label_id_objet:>})]
+
+			[(#SAISIE{auteurs, id_auteur,
+				label=<:evaluations_critique:label_id_auteur:>})]
+
+			[(#SAISIE{input, note,
+				label=<:evaluations_critique:label_note:>})]
+
+			[(#SAISIE{textarea, commentaire,
+				label=<:evaluations_critique:label_commentaire:>,
+				li_class=haut})]
+
+			[(#SAISIE{textarea, forces,
+				label=<:evaluations_critique:label_forces:>,
+				li_class=haut})]
+
+			[(#SAISIE{textarea, faiblesses,
+				label=<:evaluations_critique:label_faiblesses:>,
+				li_class=haut})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
