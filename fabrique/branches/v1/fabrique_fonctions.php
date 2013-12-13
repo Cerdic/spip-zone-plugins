@@ -443,6 +443,30 @@ function option_presente($objet, $champ) {
 
 
 /**
+ * Indique si une saisie est présente dans l'objet
+ * 
+ * @param array $objet
+ *     Descrption de l'objet
+ * @param array $saisie
+ *     Nom de la saisie à tester
+ * @return string
+ *     Même retour que le filtre |oui :
+ *     - Un espace si l'option est présente dans l'objet
+ *     - Chaîne vide sinon
+**/
+function saisie_presente($objet, $saisie) {
+	if (isset($objet['champs']) and is_array($objet['champs'])) {
+		foreach ($objet['champs'] as $champ) {
+			if (isset($champ['saisie']) and $champ['saisie'] == $saisie) {
+				return " "; // true
+			}
+		}
+	}
+	return ""; // false
+}
+
+
+/**
  * Indique si une option donnée est presente dans la définition d'un champ
  * de la fabrique
  *
@@ -547,6 +571,32 @@ function objets_option_presente($objets, $option, $type='') {
 }
 
 
+
+/**
+ * Retourne les objets possédant une certaine saisie
+ * 
+ * @example 
+ *     #OBJETS|objets_saisie_presente{date}
+ *
+ *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *     #OBJETS|objets_saisie_presente{date, objet} // chats,souris
+ *
+ * @param array $objets
+ *     Liste des descriptions d'objets créés avec la fabrique
+ * @param string $saisie
+ *     Type de saisie sélectionnée
+ * @param string $type
+ *     Information de retour désiré :
+ *     - vide pour toute la description de l'objet
+ *     - clé dans la description de l'objet pour obtenir uniquement ces descriptions
+ * @return array
+ *     - tableau de description des objets sélectionnés (si type non défini)
+ *     - tableau les valeurs du type demandé dans les objets sélectionnés (si type défini)
+**/
+function objets_saisie_presente($objets, $saisie, $type='') {
+	return _tableau_option_presente('saisie_presente', $objets, $saisie, $type);
+}
+
 /**
  * Retourne les objets possédant plusieurs options
  * 
@@ -573,6 +623,8 @@ function objets_option_presente($objets, $option, $type='') {
 function objets_options_presentes($objets, $options, $type='') {
 	return _tableau_options_presentes('option_presente', $objets, $options, $type);
 }
+
+
 
 /**
  * Retourne des champs en fonction d'une option trouvée

@@ -43,7 +43,8 @@
 (#ENV*{paquet/inserer/paquet}|fabrique_tabulations{1})][
 	<necessite nom="saisies" compatibilite="\[1.24.0;\]" />(#OBJETS|count|oui)[
 	<necessite nom="roles"   compatibilite="\[1.1.0;\]" />(#OBJETS|objets_options_presentes{#LISTE{table_liens,roles}}|oui)]
-][
+][	<necessite nom="verifier" compatibilite="\[1.0.0;\]" />(#OBJETS|objets_saisie_presente{date}|oui)]
+[
 	<pipeline nom="autoriser" inclure="#ENV{prefixe}_autorisations.php" />(#VAL{autorisations}|in_any{#ENV{paquet/fichiers}})]
 <BOUCLE_pipelines_tables(DATA){liste
 	declarer_tables_objets_sql,
