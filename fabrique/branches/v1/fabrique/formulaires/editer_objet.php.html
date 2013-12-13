@@ -116,7 +116,13 @@ function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_r
  *     Tableau des erreurs
  */
 function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+<B_saisies_type_date>
+
+<BOUCLE_saisies_type_date(DATA){source tableau,#ENV{objet/champs}}{saisie = date}>
+</BOUCLE_saisies_type_date>
+</B_saisies_type_date>
 	return formulaires_editer_objet_verifier('#TYPE',$#ID_OBJET[, (#GET{obligatoires}|ecrire_tableau_sinon_rien)]);
+<//B_saisies_type_date>
 }
 
 /**

@@ -55,6 +55,7 @@
 	affiche_milieu,
 	affiche_auteurs_interventions,
 	afficher_contenu_objet,
+	objet_compte_enfants,
 	optimiser_base_disparus}>[
 	<pipeline nom="#VALEUR" inclure="[(#PREFIXE)]_pipelines.php" />(#OBJETS|fabrique_necessite_pipeline{#VALEUR}|oui)]</BOUCLE_pipelines>
 <BOUCLE_boutons(DATA){source tableau,#OBJETS}>[

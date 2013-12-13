@@ -814,6 +814,12 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			return false;
 			break;
 
+		case "objet_compte_enfants":
+			if (objets_options_presentes($objets, array('id_rubrique', 'statut_rubrique'))) {
+				return true;
+			}
+			break;
+
 		case "optimiser_base_disparus":
 			# nettoie depuis spip_{objet}_liens
 			# mais aussi les liaisions vers spip_{objet} (uniquement si une table de liens existe)

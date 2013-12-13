@@ -179,12 +179,12 @@ function [(#PREFIXE)]_objet_compte_enfants($flux) {
 		[(#STATUT|oui)
 		// juste les publiés ?
 		if (array_key_exists('statut', $flux\['args'\]) and ($flux\['args'\]\['statut'\] == 'publie')) {
-			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie')");
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie')");
 		} else {
-			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie' OR statut='prop')");
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut<>'poubelle')");
 		}
 		][(#STATUT|non)
-			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique));
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique));
 		]
 </BOUCLE_objet_compte_enfants>
 	}
