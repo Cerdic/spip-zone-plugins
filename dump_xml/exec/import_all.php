@@ -145,7 +145,7 @@ function verifier_sauvegarde ($archive) {
 		return ''; // c'est bon
 
 	$r = $regs[1] . ' ' . $regs[2];
-	return _T('avis_erreur_version_archive', 
+	return _T('dumpxml:avis_erreur_version_archive', 
 		array('archive' => str_replace('/', ' / ', $archive) . " ($r)",
 			'spipnet' => $GLOBALS['home_server']
 			. '/' .  $GLOBALS['spip_lang'] . '_article1489.html'
