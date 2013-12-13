@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     nefunkčnost různých částí webu atd. Neodesílejte
     tento požadavek na import.<p>Bližší informace
     viz dokumentace systému SPIP <a href="@spipnet@"></a>.',
+'avis_probleme_archive' => 'Chyba při čtení ze souboru @archive@',
 
 ?>

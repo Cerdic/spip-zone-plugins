@@ -17,6 +17,7 @@ inn ot versyon Spip sak ou la mi andan out sit.</b> Ou va giny gro traka :
 
 Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé plid zinformasyon, gèt <a href="@spipnet@">
 
-                                ladocumentasyon lo SPIP-la</a>.'
+                                ladocumentasyon lo SPIP-la</a>.',
+'avis_probleme_archive' => 'Astèr, néna inn kanard. Lé pa posib lir lo fisyé @archive@',
 
 ?>

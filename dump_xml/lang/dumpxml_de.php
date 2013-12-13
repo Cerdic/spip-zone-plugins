@@ -9,6 +9,7 @@ von SPIP.</b> Sie riskieren die Funktionalität
 Ihrer Website zu beeinträchtigen oder sogar die Datenbank
 zu zerstören. Bitte brechen Sie den Vorgang jetzt ab.
 <p> Mehr dazu finden Sie in der <a href="@spipnet@">
-französischen SPIP-Dokumentation</a>.'
+französischen SPIP-Dokumentation</a>.',
+'avis_probleme_archive' => 'Fehler beim Lesen der Archivdatei @archive@',
 
 ?>

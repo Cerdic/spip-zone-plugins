@@ -11,5 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     túto požiadavku na nahrávanie.<p>Bližšie informácie
     nájdete <a href="@spipnet@">
                               v dokumentácii k SPIPu.</a></p>',
+	'avis_probleme_archive' => 'Chyba pri čítaní v súbore @archive@',
 
 ?>

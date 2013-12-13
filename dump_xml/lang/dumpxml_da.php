@@ -11,5 +11,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     Fortsæt ikke indlæsningen.<p>For mere
     information henvises til <a href="@spipnet@">,
                                 SPIP-dokumentationen</A>.', # MODIF
-
+'avis_probleme_archive' => 'Læsefejl i filen @archive@',
 ?>

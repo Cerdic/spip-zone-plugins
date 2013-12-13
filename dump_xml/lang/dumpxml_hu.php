@@ -10,5 +10,6 @@ az Ön adatbázis megsemmisítése, honlap rossz működése, stb. Ne
     érvényesítse ezt az impotálási kérést.<p>több
     információról lásd <a href="@spipnet@">
 SPIP dokumentációja (franciául)</a>.', # MODIF
+	'avis_probleme_archive' => 'Olvasási hiba a @archive@ nevű fájlon',
 
 ?>

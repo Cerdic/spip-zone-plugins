@@ -9,5 +9,5 @@ rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d’importazione.<p>Per ulteriori
  informazioni, vedere <a href="@spipnet@">
 la documentazione di SPIP</a>.</p>', # MODIF
-
+	'avis_probleme_archive' => 'Problema di lettura del file @archive@',
 ?>

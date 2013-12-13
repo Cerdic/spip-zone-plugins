@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     diversajn retejajn misfunkciojn, ktp.
     Ne validigu tiun peton pri importo.<p>Por pli
     da informoj, vidu <a href="@spipnet@">
-                                la dokumentaron pri SPIP</a>.</p>'
+                                la dokumentaron pri SPIP</a>.</p>',
+'avis_probleme_archive' => 'Problemo por legi la dosieron @archive@',
 ?>

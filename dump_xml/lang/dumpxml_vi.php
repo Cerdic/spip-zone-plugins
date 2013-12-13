@@ -8,4 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  Xin đừng nộp bài này vào.<p> Để biết thêm chi tiết, xem bài <a href="@spipnet@">
 Hồ sơ SPIP</a>.', # MODIF
 
+'avis_probleme_archive' => 'Có lỗi khi đọc hồ sơ @archive@',
+
 ?>

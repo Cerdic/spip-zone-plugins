@@ -9,5 +9,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 förstöra din databas, tekniska fel för din
  webbplats, etc. Skicka inte den här begäran
 om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a> (På engelska).', # MODIF
-
+	'avis_probleme_archive' => 'Läsfel i filen @archive@',
 ?>

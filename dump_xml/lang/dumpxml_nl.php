@@ -5,5 +5,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 'avis_erreur_version_archive' => '<b>Aandacht! Het bestand @archive@is een andere versie van SPIP dan je hebt geïnstalleerd.</b> Dan kan tot grote problemen leiden : het risico van het vernietigen van je basis gegevens, het niet functioneren van de site, enz... Bevestig de vraag tot importeren niet.
 <p>Meer info kan je vinden op <a href="@spipnet@"> de documentatie van SPIP</a>.</p>',
-
+	'avis_probleme_archive' => 'Probleem om het bestand @archive@ te lezen.',
 ?>

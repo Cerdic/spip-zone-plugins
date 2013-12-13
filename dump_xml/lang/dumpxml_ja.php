@@ -10,5 +10,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 このインポートはリクエストしないでください。<p>詳細は、
 <a href="@spipnet@">
 SPIPドキュメント</a>をご覧ください。</p>', # MODIF
-
+	'avis_probleme_archive' => '@archive@ ファイルの読み込みに問題があります。',
 ?>

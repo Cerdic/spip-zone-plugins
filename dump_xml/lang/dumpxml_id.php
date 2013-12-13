@@ -11,5 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     kirim permohonan impor ini.<p>Untuk informasi
     lebih lanjut, silakan lihat <a href="@spipnet@">
                                 dokumentasi SPIP</a>.', # MODIF
+'avis_probleme_archive' => 'Kesalahan membaca pada berkas @archive@',
 
 ?>

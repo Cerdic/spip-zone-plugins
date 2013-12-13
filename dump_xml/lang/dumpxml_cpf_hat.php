@@ -9,5 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  : bazdone ke petèt kraze, ouswa sit w ke pa mache. Ann
  pa konfime domann lenpòtasyon-nan    .<p>W ke trouve kèk enfòmasyon sou paj 
  <a href="@spipnet@">
-                                 dokimantasyon SPIP la</a>.</p>'
+                                 dokimantasyon SPIP la</a>.</p>',
+'avis_probleme_archive' => 'Pwoblèm pou fè lekti fichyé @archive@',
+
 ?>

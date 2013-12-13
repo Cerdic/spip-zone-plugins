@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 أعطاب مختلفة في أداء الموقع، الخ. لا
 تصدّق على طلب الجلب.<p> لمزيد
 من المعلومات، الرجاء مراجعة <a href="@spipnet@">
-                                دليل SPIP</a>. '
+                                دليل SPIP</a>. ',
+	'avis_probleme_archive' => 'خطأ في قراءة الملف @archive@',
 ?>

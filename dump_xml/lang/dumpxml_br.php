@@ -7,5 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 gant ur stumm all eus SPIP disheñvel eus an hini staliet ganeoc’h.</b>
 Emaoc’h o vont da zegouezhout dirak diaezamantoù bras :
 riskl da zistrujañ ho tiaz titouroù, drougplegoù a bep seurt el lec’hienn, hag all.
-Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc’h a ditouroù, sellit ouzh <a href="@spipnet@">dielloù SPIP</a>.'
+Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc’h a ditouroù, sellit ouzh <a href="@spipnet@">dielloù SPIP</a>.',
+'avis_probleme_archive' => 'Kudenn evit lenn ar restr @archive@',
 ?>

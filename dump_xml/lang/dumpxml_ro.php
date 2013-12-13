@@ -4,5 +4,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 'avis_erreur_version_archive' => 'Atenţie! Fişierul @archive@ corespunde unei alte versiuni de SPIP faţă de cea pe care aţi instalat-o. Veţi întâmpina dificultăţi serioase: risc de distrugere a bazei de date, defecte în funcţionarea site-ului, ş.a.m.d. Nu validaţi importarea. Pentru informaţii suplimentare, consultaţi <a href="@spipnet@">                                documentaţia SPIP.</a>.',
+'avis_probleme_archive' => 'Problemă la citirea fişierului @archive@',
 
 ?>

@@ -9,5 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     <p>
     详细信息,请看 <a href="@spipnet@">
                                  SPIP 文档</a>.', # MODIF
+	'avis_probleme_archive' => '读取文件@archive@失败 ',
 
 ?>

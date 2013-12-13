@@ -8,5 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 Не стоит восстанавливать резервную версию.
      . <p> Для получения дополнительной информации
 обратитесь к . <a href="@spipnet@">документации по SPIP </a>.',
+'avis_probleme_archive' => 'Ошибка чтения файла @archive@',
 
 ?>

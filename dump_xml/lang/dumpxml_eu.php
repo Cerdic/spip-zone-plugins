@@ -8,5 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 @archive@ fitxategia beste SPIP bertsio bati dagokio, instalatutakoaren desberdina.
 </b>Arazo larriak edukitzeko arriskuan zaude: Zure datu-basearen suntsiketa, gunearen zenbait disfuntzio, eta abar.
 Ez balidatu inportazio galdera hau.
-<p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>'
+<p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>',
+'avis_probleme_archive' => '@archive@ fitxategiaren irakurketa-arazoa',
 ?>

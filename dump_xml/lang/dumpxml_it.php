@@ -10,5 +10,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     Non confermare questa richiesta d’importazione.<p>Per ulteriori
     informazioni, vedere <a href="@spipnet@">
     la documentazione di SPIP</a>.</p>',
-
+	'avis_probleme_archive' => 'Problema di lettura del file @archive@',
 ?>

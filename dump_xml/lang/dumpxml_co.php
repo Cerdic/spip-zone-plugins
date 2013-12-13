@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 		rìsicu di distruzzione di a vostra basa, gattivi funziunamenti vari di u situ, ecc.
 		Ùn cunfirmate micca sta dumanda d’impurtazione !
 		<p>Per sapè ne di più, andate à vede <a href="@spipnet@">
-		a ducumentazione di SPIP</a>.</p>'
+		a ducumentazione di SPIP</a>.</p>',
+'avis_probleme_archive' => 'Prublemu di lettura di u schedariu @archive@',
 
 ?>

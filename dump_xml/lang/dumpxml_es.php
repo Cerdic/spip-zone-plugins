@@ -8,5 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  dificultades: riesgo de destrucción de su base de
  datos, disfuncionamientos varios del sitio, etc. No
  valide esta importación.<p>Para mayor información, ver
- <a href="@spipnet@">la documentación de SPIP</a></p>.'
+ <a href="@spipnet@">la documentación de SPIP</a></p>.',
+'avis_probleme_archive' => 'Problema de lectura del archivo @archive@',
 ?>
