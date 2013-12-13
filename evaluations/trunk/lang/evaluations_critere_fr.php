@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_ponderation'                        => 'Poids',
     'label_rang'                               => 'Rang',
     'label_texte'                              => 'Texte',
-    'label_titre'                              => 'Titre',
+    'label_titre'                              => "Quelques mots d'explication sur le critère",
 
     // R
     'retirer_lien_evaluations_critere'         => 'Retirer ce critère d\'évaluation',
