@@ -14,8 +14,8 @@
 
     <licence>GNU/GPL</licence>
 
-    <necessite nom="evaluations" compatibilite="[1.1.0;[" />
-    <necessite nom="compositions" compatibilite="[3.0.0;[" />
+	<necessite nom="evaluations"    compatibilite="[1.1.0;[" />
+	<necessite nom="compositions"   compatibilite="[3.0.0;[" />
 	<necessite nom="spipr_dist"     compatibilite="[0.4.0;[" />
 
 </paquet>

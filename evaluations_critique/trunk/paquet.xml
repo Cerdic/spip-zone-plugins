@@ -16,9 +16,8 @@
 
     <pipeline nom="insert_head_css" inclure="eval_critique_pipelines.php" />
 
-    <necessite nom="evaluations" compatibilite="[1.1.0;[" />
-    <necessite nom="compositions" compatibilite="[3.0.0;[" />
-    <necessite nom="Zcore" compatibilite="[2.2.1;]" />
-    <necessite nom="Zpip" compatibilite="[2.0.5;]" />
+	<necessite nom="evaluations"    compatibilite="[1.1.0;[" />
+	<necessite nom="compositions"   compatibilite="[3.0.0;[" />
+	<necessite nom="spipr_dist"     compatibilite="[0.4.0;[" />
 
 </paquet>
