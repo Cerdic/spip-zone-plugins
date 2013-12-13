@@ -147,15 +147,17 @@ function chaine_de_langue($texte) {
  *     les fichiers de chaînes de langue, et pourrait être renommée
  * 
  * @example
+ *     ```
  *     cle_de_langue('titre_objets') => titre_chats
  *     cle_de_langue('icone_creer_objet') => icone_creer_chat
  *     cle_de_langue('prive/\objets/infos/objet.html') => prive/objets/infos/chat.html
+ *     ```
  * @param string $cle
  *     La clé à transformer
  * @param array $desc_objet
  *     Couples d'information sur l'objet en cours, avec les index
  *     'objet' et 'type' définis
- * @retrun string
+ * @return string
  *     La clé transformée
 **/
 function cle_de_langue($cle, $desc_objet) {

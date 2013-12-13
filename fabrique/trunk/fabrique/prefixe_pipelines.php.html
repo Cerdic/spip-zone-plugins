@@ -157,6 +157,44 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 
 
 
+	OBJET COMPTE ENFANT
+
+
+
+]
+<B_objet_compte_enfants>
+/**
+ * Compter les enfants d'une rubrique
+ *
+ * @pipeline objets_compte_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function [(#PREFIXE)]_objet_compte_enfants($flux) {
+	if ($flux['args']['objet']=='rubrique'
+		AND $id_rubrique=intval($flux['args']['id_objet'])) {
+
+		$id_rubrique = $flux['args']['id_rubrique'];
+<BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>
+		[(#STATUT|oui)
+		// juste les publiés ?
+		if (array_key_exists('statut', $flux\['args'\]) and ($flux\['args'\]\['statut'\] == 'publie')) {
+			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie')");
+		} else {
+			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie' OR statut='prop')");
+		}
+		][(#STATUT|non)
+			$flux\['data'\]\['#TYPE'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique));
+		]
+</BOUCLE_objet_compte_enfants>
+	}
+	return $flux;
+}
+</B_objet_compte_enfants>[
+(#REM)
+
+
+
 	OPTIMISER BASE DISPARUS
 
 

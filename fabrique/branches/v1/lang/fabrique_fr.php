@@ -205,6 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ_rubriques_explication' => 'Permet d\'affecter cet objet dans une rubrique',
 	'label_champ_statut' => 'Champ <strong>statut</strong>',
 	'label_champ_statut_explication' => 'Permet d\'utiliser des statuts de publication (proposé à publication, publié, poubelle…)',
+	'label_champ_statut_rubrique' => 'Affecter le statut des rubriques si cet élément est présent',
 	'label_champ_vue_rubrique' => 'Afficher la liste dans la rubrique',
 	'label_champ_titre' => 'Calculer les titres',
 	'label_champ_titre_explication' => 'Utilisez un des champs SQL que vous avez déclaré pour votre objet',

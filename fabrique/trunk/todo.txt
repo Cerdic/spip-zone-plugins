@@ -22,10 +22,6 @@ Le brouteur ne voit pas non plus les objets dedans
 - lorsqu'un objet est dans une rubrique, il faut ajouter le pipeline "objet_compte_entants"
 et "boite_infos"
 
-- lorsqu'on lie un objet à une rubrique vide,
-la rubrique ne se publie pas et peut être supprimée.
-Une option pour indiquer que cela publie la rubrique serait bien.
-
 - on pourrait générer des listes de résumés publiques pour un objet, comme ce que fait Z :
   liste/patates-resume.html +
   inclure/resume/patate.html

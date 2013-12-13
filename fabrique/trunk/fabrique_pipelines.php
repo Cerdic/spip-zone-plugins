@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Ajout de bulles de compagnon sur la page de création de plugins
  * depuis la Fabrique
  *
- * @param array $flux  Données du pipeline
+ * @param array $flu  Données du pipeline
  * @return array       Données du pipeline
 **/
 function fabrique_compagnon_messages($flux) {
