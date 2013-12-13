@@ -48,7 +48,7 @@
 
 \#BOITE_FERMER
 \[(\#EVAL{_AJAX}|oui)
-	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin');/*\\\]\\\]>*/</script>
+	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin,\#extra');/*\\\]\\\]>*/</script>
 \]
 \</BOUCLE_#TYPE>
 \[(\#ENV**{exec}|=={[(#TYPE)]_edit}|?{\#INCLURE{fond=prive/squelettes/contenu/[(#TYPE)]_edit,redirect='',env,retourajax=oui},\#REM|sinon_interdire_acces})\]
