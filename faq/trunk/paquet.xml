@@ -1,7 +1,7 @@
 <paquet
 	prefix="faq"
 	categorie="edition"
-	version="3.0.0"
+	version="3.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="faq_logo-128.png"
