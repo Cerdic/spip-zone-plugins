@@ -1,0 +1,103 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<img src="#CHEMIN_IMAGE{faq-24.png}" class="cadre-icone" />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM)  <!--declarer les hidden qui declencheront le service du formulaire parametre : url d'action -->]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<h2 class="titrem"><:faq:titre_form_configurer:></h2>
+		<p><:faq:info_config_faq:></p>
+
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:faq:legende_ancre_lien:></h3>
+					<ul>
+						#SET{name,ancrer_question}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							[<span class='erreur_message'>(#GET{erreurs})</span>]
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:faq:label_ancrer_question:></label>
+							</div>
+						</li>
+						#SET{name,lier_faq}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							[<span class='erreur_message'>(#GET{erreurs})</span>]
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:faq:label_lier_faq:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:faq:legende_css:></h3>
+					<ul>
+						#SET{name,charger_css}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							[<span class='erreur_message'>(#GET{erreurs})</span>]
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:faq:label_charger_css:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:faq:legende_comportement:></h3>
+					<ul>
+						#SET{name,charger_js}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							[<span class='erreur_message'>(#GET{erreurs})</span>]
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:faq:label_charger_js:></label>
+							</div>
+						</li>
+						#SET{name,iconifier_js}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" id="iconifier_js">
+							[<span class='erreur_message'>(#GET{erreurs})</span>]
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[ (#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:faq:label_iconifier_js:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	</BOUCLE_editable>
+</div>
+
+<script type="text/javascript">
+function toggle_charger_js(){
+	if (jQuery('#charger_js_1').prop('checked'))
+		jQuery('li.editer_iconifier_js').show();
+	else
+		jQuery('li.editer_iconifier_js').hide();
+}
+jQuery(document).ready(function(){
+	jQuery('#charger_js_1').bind('change',toggle_charger_js);
+	toggle_charger_js();
+});
+</script>
