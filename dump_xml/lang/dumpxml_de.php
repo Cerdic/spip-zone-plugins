@@ -11,5 +11,5 @@ zu zerstören. Bitte brechen Sie den Vorgang jetzt ab.
 <p> Mehr dazu finden Sie in der <a href="@spipnet@">
 französischen SPIP-Dokumentation</a>.',
 'avis_probleme_archive' => 'Fehler beim Lesen der Archivdatei @archive@',
-
+'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 ?>

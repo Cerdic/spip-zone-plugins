@@ -9,5 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 Hồ sơ SPIP</a>.', # MODIF
 
 'avis_probleme_archive' => 'Có lỗi khi đọc hồ sơ @archive@',
+'texte_compresse_ou_non' => '(có thể trong dạng nén hoặc dạng thường) ',
 
 ?>

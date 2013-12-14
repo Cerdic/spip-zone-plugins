@@ -19,5 +19,5 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 
                                 ladocumentasyon lo SPIP-la</a>.',
 'avis_probleme_archive' => 'Astèr, néna inn kanard. Lé pa posib lir lo fisyé @archive@',
-
+'texte_compresse_ou_non' => '(i pé konpèrs ali si ou vé)',
 ?>

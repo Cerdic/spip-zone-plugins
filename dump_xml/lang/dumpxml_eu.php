@@ -10,4 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 Ez balidatu inportazio galdera hau.
 <p>Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .</p>',
 'avis_probleme_archive' => '@archive@ fitxategiaren irakurketa-arazoa',
+'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
+
 ?>

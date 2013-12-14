@@ -5,5 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 'avis_erreur_version_archive' => '<b>توجه ! فايل @archive@ با نسخه ديگرى غير از نسخه اسپيپ شما مطابقت ميكند. </b> :شما به مشكلات عمده اى برخورد خواهيد كرد : از بين رفتن داده پى‌ها، اختلالات گوناگون در كار سايت، و غيره. درخواست واردات را a> تائيد نكنيد. براى اطلاعات بيشتر رجوع كنيد به <a>href="@spipnet@"> la documentation de SPIP</a>.',
 'avis_probleme_archive' => '@archive@  اشكال در خواندن فايل',
+'texte_compresse_ou_non' => '(از اين ميتوان بصورت فشرده يا غير فشرده استفاده كرد)',
 
 ?>

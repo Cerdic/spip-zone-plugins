@@ -7,4 +7,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 You are likely to encounter serious problems, including destroying your database, or serious site malfunctions.
 Do not submit this import request.<p>For more information, please see <a href="@spipnet@">the SPIP documentation</a>.</p>',
 	'avis_probleme_archive' => 'Read error in file @archive@',
+	'texte_compresse_ou_non' => '(compression optional)',
 ?>

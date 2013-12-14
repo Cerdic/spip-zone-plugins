@@ -12,5 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     nájdete <a href="@spipnet@">
                               v dokumentácii k SPIPu.</a></p>',
 	'avis_probleme_archive' => 'Chyba pri čítaní v súbore @archive@',
+	'texte_compresse_ou_non' => '(voliteľná kompresia)',
 
 ?>

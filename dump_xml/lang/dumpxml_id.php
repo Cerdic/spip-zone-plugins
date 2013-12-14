@@ -12,5 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     lebih lanjut, silakan lihat <a href="@spipnet@">
                                 dokumentasi SPIP</a>.', # MODIF
 'avis_probleme_archive' => 'Kesalahan membaca pada berkas @archive@',
+'texte_compresse_ou_non' => '(yang ini dapat dikompres atau tidak)',
 
 ?>

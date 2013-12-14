@@ -11,5 +11,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     tento požadavek na import.<p>Bližší informace
     viz dokumentace systému SPIP <a href="@spipnet@"></a>.',
 'avis_probleme_archive' => 'Chyba při čtení ze souboru @archive@',
-
+'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
 ?>

@@ -87,7 +87,7 @@ function admin_sauvegardes($dir_dump, $tri)
 		. _T('public:date')
 		. '</a></th></tr>');
 	  
-	$texte = _T('texte_compresse_ou_non')."&nbsp;";
+	$texte = _T('dumpxml:texte_compresse_ou_non')."&nbsp;";
 
 	$h = _T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>'));
 

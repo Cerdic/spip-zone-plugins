@@ -10,4 +10,6 @@ Non confermare questa richiesta d’importazione.<p>Per ulteriori
  informazioni, vedere <a href="@spipnet@">
 la documentazione di SPIP</a>.</p>', # MODIF
 	'avis_probleme_archive' => 'Problema di lettura del file @archive@',
+	'texte_compresse_ou_non' => '(può essere compresso o meno)',
+
 ?>

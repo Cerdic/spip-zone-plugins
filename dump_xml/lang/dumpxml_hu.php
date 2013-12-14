@@ -11,5 +11,5 @@ az Ön adatbázis megsemmisítése, honlap rossz működése, stb. Ne
     információról lásd <a href="@spipnet@">
 SPIP dokumentációja (franciául)</a>.', # MODIF
 	'avis_probleme_archive' => 'Olvasási hiba a @archive@ nevű fájlon',
-
+	'texte_compresse_ou_non' => '(ez tömörítve lehet, vagy nem)',
 ?>

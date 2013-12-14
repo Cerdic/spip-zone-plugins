@@ -7,5 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 risco de destruição da sua base de dados, mal funcionamento generalizado do site etc. Não valide este pedido de importação.    <p>Para mais informações, leia
     <a href="@spipnet@">a documentação do SPIP</a>.</p>',
 'avis_probleme_archive' => 'Problema de leitura do arquivo @archive@',
+'texte_compresse_ou_non' => '(pode ser compactado ou não)',
 
 ?>

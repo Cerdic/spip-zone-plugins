@@ -7,5 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 <a href="@spipnet@">
 la documentacion d’SPIP</a>.', # MODIF
 'avis_probleme_archive' => 'Problèma de lectura del fichièr @archive@',
+'texte_compresse_ou_non' => '(Aqueste se pòt comprimir o non)',
 
 ?>

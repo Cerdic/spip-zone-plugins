@@ -10,4 +10,5 @@ förstöra din databas, tekniska fel för din
  webbplats, etc. Skicka inte den här begäran
 om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a> (På engelska).', # MODIF
 	'avis_probleme_archive' => 'Läsfel i filen @archive@',
+	'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
 ?>

@@ -12,4 +12,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     information henvises til <a href="@spipnet@">,
                                 SPIP-dokumentationen</A>.', # MODIF
 'avis_probleme_archive' => 'Læsefejl i filen @archive@',
+'texte_compresse_ou_non' => '(denne kan være komprimeret eller ikke)',
 ?>

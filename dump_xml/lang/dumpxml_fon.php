@@ -5,4 +5,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 'avis_erreur_version_archive' => 'vlɛ ! xota @archive@  é jɛ do alɔ supipu tɔn dévo ji.Mi jan na kpé afɔ nyanya  ɖé lɛ, gblogbloji ɔ sin walɔ nyanya, mi mà na gbe sisɛ do é lɔ o. Nu mi na sè xo gɔ na', # MODIF
 'avis_probleme_archive' => 'xota xixā glo @archive@',
+'texte_compresse_ou_non' => '(E lɔ̂ yé síwú xóklpé)',
+
 ?>

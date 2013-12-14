@@ -12,4 +12,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     информация се обръщайте към <a href="@spipnet@">
                                 документацията на СПИП</a>.',
 'avis_probleme_archive' => 'Грешка при четене на файла @archive@',
+'texte_compresse_ou_non' => '(може да бъде или да не бъде компресиран)',
 ?>

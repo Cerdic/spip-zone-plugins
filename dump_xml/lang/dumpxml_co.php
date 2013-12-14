@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 		<p>Per sapè ne di più, andate à vede <a href="@spipnet@">
 		a ducumentazione di SPIP</a>.</p>',
 'avis_probleme_archive' => 'Prublemu di lettura di u schedariu @archive@',
+'texte_compresse_ou_non' => '(pò esse cumpressu o micca)',
 
 ?>

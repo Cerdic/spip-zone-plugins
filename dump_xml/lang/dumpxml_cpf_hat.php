@@ -11,5 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  <a href="@spipnet@">
                                  dokimantasyon SPIP la</a>.</p>',
 'avis_probleme_archive' => 'Pwoblèm pou fè lekti fichyé @archive@',
+'texte_compresse_ou_non' => '(li mèm se petèt konprese, petèt non)',
 
 ?>

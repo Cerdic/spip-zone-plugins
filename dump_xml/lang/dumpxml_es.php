@@ -10,4 +10,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  valide esta importación.<p>Para mayor información, ver
  <a href="@spipnet@">la documentación de SPIP</a></p>.',
 'avis_probleme_archive' => 'Problema de lectura del archivo @archive@',
+'texte_compresse_ou_non' => '(comprimido o no)',
 ?>

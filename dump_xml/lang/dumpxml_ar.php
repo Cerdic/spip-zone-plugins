@@ -12,4 +12,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 من المعلومات، الرجاء مراجعة <a href="@spipnet@">
                                 دليل SPIP</a>. ',
 	'avis_probleme_archive' => 'خطأ في قراءة الملف @archive@',
+	'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
 ?>

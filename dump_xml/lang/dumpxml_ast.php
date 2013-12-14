@@ -12,5 +12,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     mayor información, llee <a href="@spipnet@">
                                 la documentación de SPIP</a>.</p>',
 'avis_probleme_archive' => 'Problema de llectura del archivu @archive@',
-
+'texte_compresse_ou_non' => '(esti pue tar comprimíu o non)',
 ?>

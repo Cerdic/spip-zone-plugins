@@ -12,4 +12,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
     da informoj, vidu <a href="@spipnet@">
                                 la dokumentaron pri SPIP</a>.</p>',
 'avis_probleme_archive' => 'Problemo por legi la dosieron @archive@',
+'texte_compresse_ou_non' => '(tiu ĉi povas aŭ ne esti densigita)',
+
 ?>

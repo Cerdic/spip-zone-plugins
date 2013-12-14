@@ -11,4 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 <a href="@spipnet@">
 SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 	'avis_probleme_archive' => '@archive@ ファイルの読み込みに問題があります。',
+	'texte_compresse_ou_non' => '(これが圧縮できなかったか、違う)',
+
 ?>

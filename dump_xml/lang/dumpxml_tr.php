@@ -10,5 +10,6 @@ SPIP sürümüne uymuyor.</b> Büyük zorluklarla
 Bu ithal istemini onaylamayın.
 <p>Daha fazla bilgi için <a href="@spipnet@">SPIP kullanma kılavuzuna bakın.</a>', # MODIF
 'avis_probleme_archive' => '@archive@ dosyasını okurken sorun çıktı',
+'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
 
 ?>

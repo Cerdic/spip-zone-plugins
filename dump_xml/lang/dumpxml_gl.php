@@ -11,5 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
   informacións, consulte <a href="@spipnet@">
   a documentación de SPIP</A>.</p>',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
+'texte_compresse_ou_non' => '(comprimido ou non)',
 
 ?>
