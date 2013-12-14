@@ -8,18 +8,6 @@
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
             
-            #SET{tableau_ressource, #ARRAY}
-            <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
-                [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
-                #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
-            </BOUCLE_selection_ressources>
-            [(#SAISIE{selection_multiple, liste_ressources}
-                {label=<:orr:liste_ressources:>}
-                {cacher_option_intro=true}
-                {defaut=#ENV{id_ressource} }
-                {datas=#GET{tableau_ressource}|array_flip}
-                {attention=<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>}
-                {size=[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]})]
 			
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
@@ -28,9 +16,26 @@
             [(#SAISIE{input,date_fin,obligatoire}
                 {label=<:orr:date_de_fin:>}
                 {class=datepicker})]
+                
+			#SET{tableau_ressource, #ARRAY}
+            <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
+                [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
+                #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
+            </BOUCLE_selection_ressources>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{liste_ressources}}
+			<li class="editer erreur editer_liste_ressources saisie_selection_multiple">
+				<label for="champ_liste_ressources"><:orr:liste_ressources:></label>
+				<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
+                [<span class='erreur_message'>(#GET{erreurs})</span>]
+				<select id="select_multiple" size="4" multiple="multiple" class="champ_liste_ressources" name="liste_ressources[]"
+					size="[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]">
+					<INCLURE{fond=inc/formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
+				</select>				
+
+            </li>
 
 			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) 
-				<INCLURE{fond=inc/formulaire_reservation_champs_extra}{env}>]
+				<INCLURE{fond=inc/formulaire_reservation_champs_extra}{env} />]
 		</ul>
 		<p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div></form>
@@ -58,7 +63,21 @@
 					jQuery('#champ_date_fin').val(dateText);
 				}
 				jQuery('#champ_date_fin').datetimepicker('option', 'minDate', date_debut);
-			}
+				
+				// reafficher les options en desactivant celle non dispo sur le creneau horaire selectionné
+				var selected = sep = '';
+				jQuery("#select_multiple option").each(function(){
+					if (jQuery(this).attr("selected") == "selected" ){
+						selected += sep + jQuery(this).val();
+						sep = ",";
+					}
+				});
+				jQuery("#select_multiple").load("[(#URL_PAGE{inc/formulaire_selection_ressources})]",
+					{ "date_debut_ajax": date_debut,
+					"date_fin_ajax": date_fin,
+					"selected":selected
+					[(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});				
+				}
 		});
         jQuery('#champ_date_fin').datetimepicker({
 			timeFormat: 'hh:mm:ss',
@@ -80,8 +99,22 @@
 					jQuery('#champ_date_debut').val(dateText);
 				}
 				jQuery('#champ_date_debut').datetimepicker('option', 'maxDate', date_fin);
-			}
+				
+				// reafficher les options en desactivant celle non dispo sur le creneau horaire selectionné
+				var selected = sep = '';
+				jQuery("#select_multiple option").each(function(){
+					if (jQuery(this).attr("selected") == "selected" ){
+						selected += sep + jQuery(this).val();
+						sep = ",";
+					}
+				});
+				jQuery("#select_multiple").load("[(#URL_PAGE{inc/formulaire_selection_ressources})]",
+					{ "date_debut_ajax": date_debut,
+					"date_fin_ajax": date_fin,
+					"selected":selected
+					[(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});				
+				}
+			
         });
-
     });
 </script>
