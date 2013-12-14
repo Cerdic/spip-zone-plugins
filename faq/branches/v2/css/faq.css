@@ -1,0 +1,51 @@
+/* --------------------------------------------------------------
+
+   faq.css
+   Style des FAQ
+   by romy.tetue.net - 2009-2011
+
+-------------------------------------------------------------- */
+
+/*
+	Si ce n'est pas déjà fait,
+	commencez pas styler les dfn et dl, dt, dd,
+	soit en adoptant reset, framework et/ou theme CSS,
+	soit en copiant les lignes ci-dessous dans votre feuille de style :
+
+dfn { font-weight: bold; font-style: italic; }
+
+dl { margin-bottom: 1em; border-bottom: 1px solid #DDD; }
+dl dt,
+dl dd { padding: .5em; padding-left: 30px; }
+dl dt { background: url(img/puce-dt.png) no-repeat .4em .4em; border-top: 1px solid #DDD; font-weight: bold; color: #0366CB; }
+dl dd { padding-top: 0; }
+
+*/
+
+dl.faq {}
+dl.faq dt { /*background-image: url(img/faq-open.png);*/ background-repeat: no-repeat; cursor: pointer; }
+dl.faq dt.close { /*background-image: url(img/faq-close.png);*/ }
+dl.faq dd {}
+
+#faq {}
+#faq .ancres { margin-bottom: 3em; border-bottom: 1px solid #DDD; }
+#faq .ancres li { padding: .5em 1em .5em .1em; border-top: 1px solid #DDD; }
+#faq dl { border: 0; }
+#faq dl dt,
+#faq dl dd { padding: .4em; background: none; border: 0; }
+#faq dl dt { position: relative; padding-right: 3em; background: #DDD url(img/bg-dt.png) no-repeat left top; margin-bottom: .4em; }
+#faq dl dt .retour { display: block; position: absolute; top: 0; right: 0; padding: .2em .5em 0 0; text-align: right; font-weight: normal; }
+#faq dl dd { margin-bottom: 2em; padding-right: 1em; }
+
+/*	Rustine devenue inutile
+
+dl.spip_documents,
+.spip_documents dl,
+.spip_documents dt,
+.spip_documents dd { margin: 0 auto; padding: 0; background: 0; border: 0; }
+
+*/
+
+@media print { dl.faq dd { display: block !important; } }
+
+/* end */
