@@ -37,7 +37,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_art(ARTICLES){id_article IN #GET{id_articles}}{statut?}{recherche?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 	#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
 		<INCLURE{fond=prive/objets/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{exclus=}/>
 	</BOUCLE_liste_art>
