@@ -1,3 +1,21 @@
+[(#REM) Liste les changements de statuts qui déclenchent une notification, cf configuration de commandes]
 #BOITE_OUVRIR
-[(#INCLURE{fond=prive/objets/liste/commandes_details,objet=commande,id_objet=#ID_COMMANDE})]
+<B_data>
+<h4><:commandes:explications_notifications_statuts:></h4>
+	<ul>	
+		<BOUCLE_data(DATA){source table,#CONFIG{commandes/quand,#LISTE}}>
+		<li>[(#VAL{commandes:statut_}|concat{#VALEUR}|_T)] </li>
+		</BOUCLE_data>
+	</ul>
+</B_data>
+<:commandes:explications_notifications_statuts_aucune:>
+<//B_data>
+
+
+[(#AUTORISER{configurer,commandes}|oui)
+#BOITE_OUVRIR{'','raccourcis'}
+[(#URL_ECRIRE{configurer_commandes}|icone_horizontale{<:commandes:configurer_notifications_commandes:>,commandes-24})]
+#BOITE_FERMER
+]
+
 #BOITE_FERMER

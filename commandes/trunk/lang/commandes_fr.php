@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_nouvelle' => 'Nouvelle commande',
 	'commande_numero' => 'Commande ',
 	'commande_reference' => 'Référence',
-	'commande_reference_numero' => 'Référence n° ', # MODIF
+	'commande_reference_numero' => 'Référence n° ',
 	'commande_statut' => 'Statut',
 	'commandes_titre' => 'Commandes',
 	'configurer_notifications_commandes' => 'Configurer les notifications',
@@ -44,6 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'etat' => 'État',
+	'explications_notifications_statuts' => 'Notification lors du changement d\'état',
+	'explications_notifications_statuts_aucune' => 'Aucune notification lors du changement d\'état',
 
 	// F
 	'facture_date' => 'Date : <span>@date@</span>',
