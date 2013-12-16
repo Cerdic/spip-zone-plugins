@@ -6,11 +6,7 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 <div id="bloc-a">
 
-	<BOUCLE_contact(CONTACTS){id_auteur}>
-		<h4>#NOM #PRENOM</h4>
-	</BOUCLE_contact>
 		<h4>#NOM</h4>
-	<//B_contact>
 	
 	[(#REM) On cherche en priorité des adresses pour la commande, et sinon pour l'auteur ]
 	<B_adresses_comande>
@@ -37,7 +33,7 @@
 	<B_telephones>
 	<p class='telephone'>
 	<BOUCLE_telephones(NUMEROS){id_auteur}{'<br />'}>
-		#NUMERO
+	<strong>Tel</strong>	#NUMERO
 	</BOUCLE_telephones>
 	</p>
 	</B_telephones>
