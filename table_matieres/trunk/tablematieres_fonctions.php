@@ -219,7 +219,7 @@ function tdm_get_intertitres() {
 function tdm_stocker_intertitre($url='', $titre='', $vider = false) {
 	static $table = array();
 	static $cpt = 0;
-	if($vider_table) return ($table = array());
+	if($vider) return ($table = array());
 	if (!$url) return $table;
 	$cpt++;
 	$url = array_key_exists($url, $table) ? $url.$cpt : $url;
