@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_annuler' => 'Отменить',
 	'construire_action_configurer' => 'Настройки',
 	'construire_action_deplacer' => 'Переместить',
-	'construire_action_dupliquer' => 'Сделать копию',
+	'construire_action_dupliquer' => 'Скопировать',
 	'construire_action_dupliquer_copie' => '(копия)',
 	'construire_action_supprimer' => 'Удалить',
 	'construire_ajouter_champ' => 'Добавить поле',
@@ -92,11 +92,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_label_case_label' => 'Позиция чекбокса',
 	'option_label_explication' => 'Название поля',
 	'option_label_label' => 'Название',
-	'option_maxlength_explication' => 'Пользователь не может ввести больше знаков чем:',
+	'option_maxlength_explication' => 'Максимальное количество символов, которое можно добавить в поле:',
 	'option_maxlength_label' => 'Максимальное к-во символов',
 	'option_multiple_explication' => 'Пользователю предоставляется возможность выбрать несколько вариантов',
 	'option_multiple_label' => 'Множественный выбор',
-	'option_nom_explication' => 'ID компьютера , который идентифицирует поле. Он может содержать только строчные буквы и цифры и символ подчеркивания "_".',
+	'option_nom_explication' => 'Задать ID поля. Он может содержать только строчные буквы и цифры и символ подчеркивания "_". Далее, вы используете ID для вывода информации: #INPUT_1 etc',
 	'option_nom_label' => 'Название поля',
 	'option_obligatoire_label' => 'Поле обязательное для заполнения',
 	'option_option_intro_label' => 'Обозначение для пустого выбора',
@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_visiteurs' => 'Все посетители (в том числе не зарегистрированы)',
 
 	// V
-	'vue_sans_reponse' => '<i>Без ответа</i>',
+	'vue_sans_reponse' => '<i>ничего не задано</i>',
 
 	// Z
 	'z' => 'zzz'
