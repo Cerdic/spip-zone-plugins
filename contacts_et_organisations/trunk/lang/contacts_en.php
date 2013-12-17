@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucun_contact' => 'There is no contact !', # MODIF
-	'aucune_organisation' => 'There is no organization', # MODIF
+	'aucune_organisation' => 'There is no organisation', # MODIF
 	'auteur_associe_est_a_la_poubelle' => 'The associated author is in the rubbish bin! This author will be deleted in a few days.',
 	'auteur_associe_inexistant' => 'The associated author does not exist! The author must have been put in the rubbish bin and has been deleted.',
 	'auteur_lie' => 'Id of the linked author',
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Public skeleton of ZPIP v1',
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public skeletons for  ZPIP version 1, which allow to go to the contacts and organizations in the public space?', # MODIF
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public templates for ZPIP version 1, which allow to browse contacts and organisations in the public area?', # MODIF
 	'cfg_afficher_infos_sur_auteurs' => 'Detail display of the authors ?', # MODIF
 	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact or organisation information on the authors pages in the private area?', # RELIRE
 	'cfg_associer_aux_auteurs' => 'Associate to the authors ?', # MODIF
@@ -37,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Status',
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?', # MODIF
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?', # MODIF
-	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organization from this section?', # MODIF
-	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?', # MODIF
+	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organisation from this section?', # MODIF
+	'confirmer_supprimer_contact' => 'Are you sure you want to delete all information about this contact?', # MODIF
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?', # MODIF
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Add a contact',
