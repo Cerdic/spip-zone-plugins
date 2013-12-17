@@ -1,0 +1,40 @@
+<plugin>
+
+	<nom>Migrateur</nom>
+
+	<version>1.0.8</version>
+	<prefix>migrateur</prefix>
+	<etat>test</etat>
+	<categorie>outil</categorie>
+
+	<icon>prive/themes/spip/images/migrateur-64.png</icon>
+
+	<description>
+	Migrateur sert de base pour migrer des sites sur un même serveur lorsqu'on a un
+	site où l'on change de version majeure de SPIP
+	</description>
+
+	<shortdesc>Base le plugin pour aider à migrer des sites</shortdesc>
+
+	<licence>GNU/GPL</licence>
+
+	<auteur>Matthieu Marcillaud, Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>
+
+	<fonctions>migrateur_fonctions.php</fonctions>
+
+	<bouton id='migrateur' parent='configuration'>
+		<url>migrateur</url>
+		<icone>prive/themes/spip/images/migrateur-24.png</icone>
+		<titre>migrateur:migrateur_titre</titre>
+	</bouton>
+
+	<bouton id='migrateur_bando' parent='bando_administration'>
+		<url>migrateur</url>
+		<icone>prive/themes/spip/images/migrateur-16.png</icone>
+		<titre>migrateur:migrateur_titre</titre>
+	</bouton>
+
+	<necessite id="SPIP" version="[2.1;2.1.99]" />
+	<necessite id="spip_bonux" version="[2.3.0;]" />
+	<necessite id="step" version="[0.15.6;]" />
+</plugin>
