@@ -3,7 +3,7 @@
 
 #SET{objets,#VAL|lister_tables_objets_sql}
 #SET{id_evenement,#ARRAY}
-<BOUCLE_art(EVENEMENTS){id_article?}{id_evenement?}{id_rubrique?}>
+<BOUCLE_art(EVENEMENTS){id_article?}{id_evenement?}{id_rubrique?}{tout}>
     #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
 </BOUCLE_art>
 

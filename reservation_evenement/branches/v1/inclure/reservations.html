@@ -1,4 +1,5 @@
 #SET{id_evenement,#ARRAY}
+
 <B_evenements>
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{reservation_evenement-32.png}|balise_img{'','cadre-icone'})]
@@ -14,11 +15,10 @@
            <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{unique}>
            #SET{titre,#TITRE}
           </BOUCLE_rubrique>
-        #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
        </BOUCLE_evenements>
           [<h4>(#GET{titre})</h4>]      
      
-    <INCLURE{fond=inclure/compteur_reservation_detail,id_evenement=#GET{id_evenement},env}/> 
+    <INCLURE{fond=inclure/compteur_reservation_detail,env}/> 
     
 #BOITE_FERMER     
 </B_evenements>
