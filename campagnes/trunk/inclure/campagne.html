@@ -1,0 +1,25 @@
+<BOUCLE_campagne(CAMPAGNES){id_campagne}>
+	#SET{url_action, #URL_ACTION_AUTEUR{cliquer_campagne,#ID_CAMPAGNE}|parametre_url{referer,#SELF}}
+	[(#REM) On va chercher le document lié )]
+	<BOUCLE_document(DOCUMENTS){id_campagne}{0,1}{tout}>
+	<a href="#GET{url_action}" title="#_campagne:TITRE" target="_blank" style="position:relative; display:block; width:[(#ENV{largeur_max,#LARGEUR})px]; height:[(#ENV{hauteur_max,#HAUTEUR})px];">
+	[(#EXTENSION|in_array{#LISTE{jpg,gif,png}}|oui)
+		<img src="[(#URL_DOCUMENT|image_reduire{#ENV{largeur_max,#LARGEUR},#ENV{hauteur_max,#HAUTEUR}}|extraire_attribut{src})]" border="0" alt="#_campagne:TITRE" width="#ENV{largeur_max,#LARGEUR}" height="#ENV{hauteur_max,#HAUTEUR}" />
+	]
+
+	[(#EXTENSION|=={swf}|oui)
+	<span class="masque" style="position:absolute; left:0; top:0; width:[(#_encart:LARGEUR)px]; height:[(#_encart:HAUTEUR)px];"></span>
+	<object type="application/x-shockwave-flash" data="#URL_DOCUMENT" width="#_encart:LARGEUR" height="#_encart:HAUTEUR">
+		<param name="movie" value="#URL_DOCUMENT" />
+		<param name="wmode" value="transparent" />
+		<param name="quality" value="high" />
+		<param name="FlashVars" value="lien=#GET{url_action}&link=#GET{url_action}&url=#GET{url_action}" />
+		#_campagne:TITRE
+	</object>
+	]
+	</a>
+	</BOUCLE_document>
+	
+	[(#REM) On lance le compte des affichages ]
+	#CAMPAGNE_COMPTER_VUES
+</BOUCLE_campagne>
