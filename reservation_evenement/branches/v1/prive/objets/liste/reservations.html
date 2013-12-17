@@ -4,11 +4,15 @@
 
 <INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',statut=#LISTE{ attente,attente_paiement,accepte,encours,refuse}}/>
 
+<BOUCLE_liste_reservations(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut=poubelle}{recherche?}{0,1}>
+[(#BOITE_OUVRIR{'','basic highlight'})]
 [(#ENV{afficher}|!={poubelles}|?{
     <a class="ajax" href="[(#SELF|parametre_url{afficher,poubelles})]"><:reservation:info_voir_reservations_poubelle:></a>
     ,
+
     <a class="ajax"  href="[(#SELF|parametre_url{afficher,''})]"><:reservation:icone_cacher:></a>
         [(#INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',statut=#LISTE{poubelle}})]
     }
     )]
-
+#BOITE_FERMER
+</BOUCLE_liste_reservations>
