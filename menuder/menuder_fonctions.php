@@ -5,7 +5,7 @@ function menuder_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= "\n".'<link rel="stylesheet" href="'.find_in_path('css/menuder.css').'" type="text/css" media="projection, screen" />';
+		$flux .= "\n".'<link rel="stylesheet" href="'.direction_css(find_in_path('css/menuder.css')).'" type="text/css" media="projection, screen" />';
 	}
 	return $flux;
 }
