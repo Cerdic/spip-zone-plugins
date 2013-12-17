@@ -11,7 +11,7 @@
 #SET{liste,#ENV{voir,reservations}}
 #SET{sinon,#VAL{reservation:info_aucun_#GET{liste}}|_T}
 <div class="nettoyeur"></div>
-<INCLURE{fond=prive/objets/liste/#GET{liste}, par=#ENV{par,reference},id_evenement=#GET{id_evenement},id_article=#GET{id_article}, env, ajax, sinon=#GET{sinon}}>
+<INCLURE{fond=prive/objets/liste/#GET{liste}, par=#ENV{par,reference},id_evenement=#GET{id_evenement},id_article=#GET{id_article}, env, ajax, sinon=#GET{sinon},ajax}>
 
 [(#REM) désactivé pour le moment
 [(#AUTORISER{creer,reservation})

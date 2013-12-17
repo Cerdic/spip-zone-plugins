@@ -24,12 +24,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
 
 	// I
+	'icone_cacher' => 'Cacher',	
 	'icone_creer_reservation' => 'Créer une réservation',
 	'icone_modifier_reservation' => 'Modifier cette réservation',
 	'info_1_reservation' => 'Une réservation',
 	'info_aucun_reservation' => 'Aucune réservation',
 	'info_nb_reservations' => '@nb@ réservations',
 	'info_reservations_auteur' => 'Les réservations de cet auteur',
+	'info_voir_reservations_poubelle'=>'Voir les Résevations mises à la poubelle',	
 
 	// L
 	'label_date' => 'Date :',
