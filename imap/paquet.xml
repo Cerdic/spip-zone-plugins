@@ -11,4 +11,7 @@
 
 	<licence>GNU/GPL</licence>
 
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+
+	<menu nom="imap" titre="imap:imap_titre" parent="menu_squelette" action="configurer_imap" />
 </paquet>
