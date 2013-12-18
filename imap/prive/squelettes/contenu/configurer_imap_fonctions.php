@@ -27,6 +27,7 @@ function imap_test_connexion() {
 			return _T('imap:test_connexion_notok',array('connexion'=>$connexion));
 		} else {
 			return _T('imap:test_connexion_ok');
+			imap_close($mbox);
 		}
 	}
 
