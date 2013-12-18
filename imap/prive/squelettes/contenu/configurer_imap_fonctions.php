@@ -19,8 +19,8 @@ function imap_test_connexion() {
 		if (FALSE === $mbox) {
 			return _T('imap:test_connexion_notok',array('connexion'=>$connexion));
 		} else {
-			return _T('imap:test_connexion_ok');
 			imap_close($mbox);
+			return _T('imap:test_connexion_ok');
 		}
 	}
 
