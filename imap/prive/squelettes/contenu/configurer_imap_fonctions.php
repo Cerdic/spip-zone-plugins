@@ -14,9 +14,11 @@ function imap_test_connexion() {
 	$hote_options = lire_config('imap/hote_options');
 	$hote_inbox = lire_config('imap/inbox'); 
 
-	if (!function_exists("imap_open")) {
+	if ($hote_imap=="") {
+		return _T('imap:test_parametres_remplis_notok');
+	} else if (!function_exists("imap_open")) {
 		return _T('imap:test_librairie_installee_notok');
-	} else if ($hote_imap!="") {
+	} else {
 		// test connexion
 		$connexion = '{'.$hote_imap.':'.$hote_port.$hote_options.'}'.$hote_inbox;
 		$mbox = @imap_open($connexion, $email, $email_pwd);
