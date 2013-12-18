@@ -103,7 +103,7 @@
 				|inserer_attribut{title,#TITRE}
 				|inserer_attribut{data-thumb,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}}
 		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE}
-		    |inserer_attribut{class,no_image_filtrer}
+		    |inserer_attribut{class,'no_image_filtrer no-adapt-img'}
 		)]
 		[</a>(#GET{lien}|oui)
 	]</BOUCLE_doc>

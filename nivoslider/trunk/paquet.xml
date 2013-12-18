@@ -1,7 +1,7 @@
 <paquet
 	prefix="nivoslider"
 	categorie="multimedia"
-	version="3.0.0"
+	version="3.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/nivoslider-32.png"
