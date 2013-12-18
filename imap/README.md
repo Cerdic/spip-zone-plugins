@@ -11,4 +11,5 @@ Il utilisera la librairie [imap](http://php.net/manual/en/book.imap.php) de PHP.
 
 Le plugin pourrait aussi :
 
+* avoir un logo
 * ...
