@@ -4,7 +4,7 @@
  * Ouvrir un flux IMAP vers la boîte aux lettres définie dans la
  * configuration
  */
-function imap_open_depuis_configuration() {
+function imap_open_from_configuration() {
 	include_spip('inc/config');
 
 	$email = lire_config('imap/email');
