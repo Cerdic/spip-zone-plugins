@@ -127,6 +127,7 @@ function bigbrother_post_insertion($flux){
 			);
 		}
 	}
+	return $flux;
 }
 
 function bigbrother_jquery_plugins($array){
