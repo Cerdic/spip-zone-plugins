@@ -1,7 +1,7 @@
 <BOUCLE_rem(CONDITION){si #REM}>
 <!-- titre=<multi>[fr]Nouveautes[en]New Stories</multi> -->
 </BOUCLE_rem>
-<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}>
+<BOUCLE_newsletter(NEWSLETTERS){id_newsletter}{statut?}{lang_select}>
 #SET{nouveautes,''}
 <BOUCLE_hasnewarticles(ARTICLES){date<=#DATE}{date>#DATE_REDAC}{0,1}>#SET{nouveautes,' '}</BOUCLE_hasnewarticles>
 <BOUCLE_hasnewbreves(BREVES){date_heure<=#DATE}{date_heure>#DATE_REDAC}{0,1}>#SET{nouveautes,' '}</BOUCLE_hasnewbreves>
