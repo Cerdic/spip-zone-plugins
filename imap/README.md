@@ -1,15 +1,16 @@
 # Plugin IMAP
 
-Ce plugin fournira :
+Ce plugin fournit :
 
+* un test d'installation de la librairie [imap](http://php.net/manual/en/book.imap.php) de PHP,
+* des fonctions additionnelles pour récupérer les fichiers joints (pas d'URL de référence),
 * une page de configuration des données de connexion à un compte IMAP,
-* un bouton de test de connexion.
-
-Il utilisera la librairie [imap](http://php.net/manual/en/book.imap.php) de PHP.
-
-# Liste de noël
+* un test de connexion.
 
 Le plugin pourrait aussi :
 
 * avoir un logo
+* fournir une fonction pour lister les mails de la boîte
+* lancer un pipeline pour chaque mail (qui ne fait rien par défaut)
+* fournir un génie pour lister les mails régulièrement (et donc lancer les actions du pipeline)
 * ...
