@@ -13,4 +13,5 @@ Le plugin pourrait aussi :
 * fournir une fonction pour lister les mails de la boîte
 * lancer un pipeline pour chaque mail (qui ne fait rien par défaut)
 * fournir un génie pour lister les mails régulièrement (et donc lancer les actions du pipeline)
+* remplacer la classe de fonctions additionnelles par des fonctions plus "spip" (pas de classe, mettre dans imap_fonctions.php) et ne garder que ce qui est nécessaire.
 * ...
