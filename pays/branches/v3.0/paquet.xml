@@ -1,7 +1,7 @@
 <paquet
 	prefix="pays"
 	categorie="divers"
-	version="3.0.5"
+	version="3.0.7"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/pays-32.png"
