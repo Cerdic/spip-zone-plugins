@@ -1,7 +1,7 @@
 <paquet
 	prefix="gma"
 	categorie="navigation"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/gma-64.png"

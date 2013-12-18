@@ -193,7 +193,7 @@ function gma_post_insertion($flux) {
 				'id_groupe=' . sql_quote($id_groupe));
 		}
 	}
-
+	return $flux;
 }
 
 
