@@ -30,7 +30,7 @@
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="159" traduits="151" relire="0" modifs="0" nouveaux="8" pourcent="94.97">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=sk" total="159" traduits="156" relire="0" modifs="0" nouveaux="3" pourcent="98.11">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
