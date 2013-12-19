@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Súkromné diskusné fóra',
 	'forums_public' => 'Verejné diskusné fóra',
 	'forums_public_a_noter' => 'Poznámka: v prípade, že sa príspevky do diskusných fór kontrolujú pred ich zverejnením, o odoslaní príspevkov sú informovaní iba autori, ktorí majú právo schvaľovať príspevky; ostatní sú informovaní, až keď príspevky schvália títo moderátori.',
+	'forums_public_article' => '<strong>Reakcia na článok:</strong> ľudia, ktorí verejne reagovali na článok, dostanú oznamy z–(verejných) diskusných  fór článku (je to užitočné pre jednoduché diskusné fóra).',
 	'forums_public_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy odoslané z diskusných fór pod ich článkami na verejne prístupnej stránke.',
 	'forums_public_moderateur' => 'Zadajte e-mailovú adresu moderátora verejných diskusných fór (alebo viac, oddelených čiarkami).',
 	'forums_public_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlákne dostávajú oznamy z (verejných) diskusných fór.',
