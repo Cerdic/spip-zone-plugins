@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Toto je testovací e-mail s diakritikou',
 
 	// E
+	'email_envoye_par' => 'Odoslané z @site@',
 	'email_test_envoye' => 'Testovací e-mail bol úspešne odoslaný. Ak ho nedostanete, skontrolujte nastavenia svojho servera alebo sa obráťte na administrátora servera.',
 	'erreur' => 'Chyba',
 	'erreur_dans_log' => ' : viac podrobností nájdete v súbore log',
