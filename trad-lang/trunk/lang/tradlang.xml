@@ -1,5 +1,5 @@
 <traduction module="tradlang" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/trad-lang/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="370" traduits="367" relire="0" modifs="0" nouveaux="3" pourcent="99.19">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=ar" total="370" traduits="370" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/tradlang?lang_cible=en" total="370" traduits="345" relire="0" modifs="0" nouveaux="25" pourcent="93.24">
