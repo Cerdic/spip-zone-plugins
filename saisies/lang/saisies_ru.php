@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_parcourir_docs_article' => 'Посмотреть статью',
-	'bouton_parcourir_docs_breve' => 'Посмотреть новость',
-	'bouton_parcourir_docs_rubrique' => 'Посмотреть раздел',
-	'bouton_parcourir_mediatheque' => 'Изменить библиотеку мультимедиа',
+	'bouton_parcourir_docs_article' => 'Посмотреть статью', # MODIF
+	'bouton_parcourir_docs_breve' => 'Посмотреть новость', # MODIF
+	'bouton_parcourir_docs_rubrique' => 'Посмотреть раздел', # MODIF
+	'bouton_parcourir_mediatheque' => 'Изменить библиотеку мультимедиа', # MODIF
 
 	// C
 	'construire_action_annuler' => 'Отменить',
@@ -21,19 +21,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_dupliquer_copie' => '(копия)',
 	'construire_action_supprimer' => 'Удалить',
 	'construire_ajouter_champ' => 'Добавить поле',
-	'construire_attention_enregistrer' => 'Не забудьте сохранить внесенные изменения!',
-	'construire_attention_modifie' => 'На этой странице у вас есть возможность редактировать форму. Для того, чтобы вернуться к списку выбора форм, нажмите на кнопку ниже',
-	'construire_attention_supprime' => 'Изменения включают удаление полей. Пожалуйста, подтвердите регистрацию новой формы.',
-	'construire_aucun_champs' => 'На данный момент поля в форме отсутствуют',
-	'construire_confirmer_supprimer_champ' => 'Вы действительно хотите удалить это поле??',
-	'construire_info_nb_champs_masques' => '@nb@ скрытых полей',
-	'construire_position_explication' => 'На какое поле заменить?',
-	'construire_position_fin_formulaire' => 'В конце формы',
-	'construire_position_fin_groupe' => 'В конце группы @groupe@',
-	'construire_position_label' => 'Замена поля',
-	'construire_reinitialiser' => 'Вернуться назад',
-	'construire_reinitialiser_confirmer' => 'Вы действительно хотите вернуться назад?',
-	'construire_verifications_aucune' => 'Не проверять',
+	'construire_attention_enregistrer' => 'Обязательно нажмите кнопку СОХРАНИТЬ, если вы что то изменяли!',
+	'construire_attention_modifie' => 'На этой странице у вас есть возможность редактировать форму. Для того, чтобы вернуться к списку выбора форм, нажмите на кнопку ниже', # MODIF
+	'construire_attention_supprime' => 'Изменения включают удаление полей. Пожалуйста, подтвердите регистрацию новой формы.', # MODIF
+	'construire_aucun_champs' => 'На данный момент поля в форме отсутствуют', # MODIF
+	'construire_confirmer_supprimer_champ' => 'Вы действительно хотите удалить это поле?',
+	'construire_info_nb_champs_masques' => '@nb@ скрытых полей', # MODIF
+	'construire_position_explication' => 'На месте какого поля показывать?',
+	'construire_position_fin_formulaire' => 'В самом конце',
+	'construire_position_fin_groupe' => 'После группы @groupe@',
+	'construire_position_label' => 'Расположение',
+	'construire_reinitialiser' => 'Отменить изменения',
+	'construire_reinitialiser_confirmer' => 'Вы действительно хотите отменить все изменения? ',
+	'construire_verifications_aucune' => 'Не выполнять проверку',
 	'construire_verifications_label' => 'Тип проверки',
 
 	// E
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_option_nom_unique' => 'Такое название поля уже используется.',
 
 	// I
-	'info_configurer_saisies' => 'Тестовая страница формы',
+	'info_configurer_saisies' => 'Тестовая страница формы', # MODIF
 
 	// L
 	'label_annee' => 'Год',
@@ -49,46 +49,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mois' => 'Месяц',
 
 	// O
-	'option_aff_art_interface_explication' => 'Отображать только статьи в настройках языка пользователя',
-	'option_aff_art_interface_label' => 'Многоязычное отображение',
-	'option_aff_langue_explication' => 'Показать выбранный язык статьи или раздела перед названием',
-	'option_aff_langue_label' => 'Показать текущий язык',
-	'option_aff_rub_interface_explication' => 'Отображать только разделы в языковых настройках пользователя.',
-	'option_aff_rub_interface_label' => 'Многоязычное отображение',
-	'option_attention_explication' => 'Сообщение, которое является более важным нежели комментарий.',
-	'option_attention_label' => 'Примечание!',
+	'option_aff_art_interface_explication' => 'Отображать только статьи в настройках языка пользователя', # MODIF
+	'option_aff_art_interface_label' => 'Многоязычное отображение', # MODIF
+	'option_aff_langue_explication' => 'Показать выбранный язык статьи или раздела перед названием', # MODIF
+	'option_aff_langue_label' => 'Показать текущий язык', # MODIF
+	'option_aff_rub_interface_explication' => 'Отображать только разделы в языковых настройках пользователя.', # MODIF
+	'option_aff_rub_interface_label' => 'Многоязычное отображение', # MODIF
+	'option_attention_explication' => 'Сообщение, которое является более важным нежели комментарий.', # MODIF
+	'option_attention_label' => 'Примечание!', # MODIF
 	'option_autocomplete_defaut' => 'По умолчанию',
-	'option_autocomplete_explication' => 'При загрузке страницы браузер может предварительно заполнить поля на основании истории',
+	'option_autocomplete_explication' => 'При загрузке страницы браузер может предварительно заполнить поля на основании истории', # MODIF
 	'option_autocomplete_label' => 'Предварительное заполнение поля',
 	'option_autocomplete_off' => 'Отключить',
 	'option_autocomplete_on' => 'Включить',
-	'option_cacher_option_intro_label' => 'Не отображать первый пустой вариант',
-	'option_choix_destinataires_explication' => 'Один или несколько авторов, среди которых пользователь может сделать свой ​​выбор. Если ничего не выбрано, то то будет выбран автор, который сейчас на сайте.',
-	'option_choix_destinataires_label' => 'Возможные получатели',
+	'option_cacher_option_intro_label' => 'Не отображать первый пустой вариант', # MODIF
+	'option_choix_destinataires_explication' => 'Один или несколько авторов, среди которых пользователь может сделать свой ​​выбор. Если ничего не выбрано, то то будет выбран автор, который сейчас на сайте.', # MODIF
+	'option_choix_destinataires_label' => 'Возможные получатели', # MODIF
 	'option_class_label' => 'Дополнительные CSS классы',
-	'option_cols_explication' => 'Длина поля в символах. С помощью CSS возможно переопределить значение данного поля.',
+	'option_cols_explication' => 'Длина поля в символах. С помощью CSS возможно переопределить значение данного поля.', # MODIF
 	'option_cols_label' => 'Ширина',
 	'option_datas_explication' => 'Укажите возможные варианты в формате: ключ|вариант', # MODIF
-	'option_datas_label' => 'Список возможных вариантов',
-	'option_defaut_label' => 'Выводить по умолчанию',
-	'option_disable_avec_post_explication' => 'Такой же вариант как и предыдущий, но вносит значение в скрытое поле.',
-	'option_disable_avec_post_label' => 'Отключено, но опубликовано.',
+	'option_datas_label' => 'Список возможных вариантов', # MODIF
+	'option_defaut_label' => 'Значение по умолчанию',
+	'option_disable_avec_post_explication' => 'Такой же вариант как и предыдущий, но вносит значение в скрытое поле.', # MODIF
+	'option_disable_avec_post_label' => 'Отключено, но опубликовано.', # MODIF
 	'option_disable_explication' => 'Поле не может получить фокус',
 	'option_disable_label' => 'Сделать поле неактивным',
-	'option_erreur_obligatoire_explication' => 'Настройте сообщения об ошибке для обязательных полей (в противном случае - оставьте пустым) ',
-	'option_erreur_obligatoire_label' => 'Обязательное сообщение',
-	'option_explication_explication' => 'Краткое описание (по необходимости)',
-	'option_explication_label' => 'Комментарий',
-	'option_groupe_affichage' => 'Показать',
-	'option_groupe_description' => 'Описание',
-	'option_groupe_utilisation' => 'Использование',
-	'option_groupe_validation' => 'Валидация',
-	'option_info_obligatoire_explication' => 'Вы можете изменить стандартные настройки обязательного заполнения полей.. ',
-	'option_info_obligatoire_label' => 'Обязательное заполнение полей',
-	'option_inserer_barre_choix_edition' => 'Да',
-	'option_inserer_barre_choix_forum' => 'Только форум',
-	'option_inserer_barre_explication' => 'Вставить porte-plume?',
-	'option_inserer_barre_label' => 'Панель управления',
+	'option_erreur_obligatoire_explication' => 'Выводится, если поле не заполнено. Если оставить пустым - то выведется сообщение по умолчанию.',
+	'option_erreur_obligatoire_label' => 'Сообщение о ошибке',
+	'option_explication_explication' => 'Краткое описание (по необходимости)', # MODIF
+	'option_explication_label' => 'Комментарий', # MODIF
+	'option_groupe_affichage' => 'Вывод',
+	'option_groupe_description' => 'Основное',
+	'option_groupe_utilisation' => 'Свойства',
+	'option_groupe_validation' => 'Проверка',
+	'option_info_obligatoire_explication' => 'Вы можете изменить стандартные настройки обязательного заполнения полей.. ', # MODIF
+	'option_info_obligatoire_label' => 'Обязательное заполнение полей', # MODIF
+	'option_inserer_barre_choix_edition' => 'Добавить полную панель',
+	'option_inserer_barre_choix_forum' => 'Добавить сокращенную панель ',
+	'option_inserer_barre_explication' => 'Добавить панель для редактирования текста (кнопки стилей)?',
+	'option_inserer_barre_label' => 'Панель редактирования',
 	'option_label_case_label' => 'Позиция чекбокса',
 	'option_label_explication' => 'Название поля',
 	'option_label_label' => 'Название',
@@ -101,17 +101,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_obligatoire_label' => 'Поле обязательное для заполнения',
 	'option_option_intro_label' => 'Обозначение для пустого выбора',
 	'option_option_statut_label' => 'Показать статус',
-	'option_pliable_label' => 'Расширяемая',
+	'option_pliable_label' => 'Расширяемая', # MODIF
 	'option_pliable_label_case' => 'Группы полей могут быть расширены или сжаты.',
-	'option_plie_label' => 'Сжато.',
+	'option_plie_label' => 'Сжато.', # MODIF
 	'option_plie_label_case' => 'Если группу полей можно расширить или сжать, тогда эта опция их сожмет с отображением полей.',
-	'option_previsualisation_explication' => 'Создать вкладку для просмотра введенного текста?',
-	'option_previsualisation_label' => 'Просмотр',
-	'option_readonly_explication' => 'Поле можно просмотреть, выбрать, но изменить нельзя.',
-	'option_readonly_label' => 'Только чтение',
-	'option_rows_explication' => 'Высота поля в строках.',
-	'option_rows_label' => 'Высота',
-	'option_size_explication' => 'Длина поля в символах.',
+	'option_previsualisation_explication' => 'Добавить вкладку предварительного просмотра?',
+	'option_previsualisation_label' => 'Предварительный просмотр',
+	'option_readonly_explication' => 'Поле можно просмотреть, выбрать, но изменить нельзя.', # MODIF
+	'option_readonly_label' => 'Только для чтения',
+	'option_rows_explication' => 'Высота поля в строках.', # MODIF
+	'option_rows_label' => 'Высота', # MODIF
+	'option_size_explication' => 'Длина поля в символах.', # MODIF
 	'option_size_label' => 'Размер поля',
 	'option_type_choix_plusieurs' => 'Позволяет выбрать <strong>несколько</strong> получателей.',
 	'option_type_choix_tous' => 'Отметить <strong>всех</strong> авторов как получателей. Пользователю выбор не предоставляется.',
@@ -169,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vue_sans_reponse' => '<i>ничего не задано</i>',
 
 	// Z
-	'z' => 'zzz'
+	'z' => 'zzz' # MODIF
 );
 
 ?>

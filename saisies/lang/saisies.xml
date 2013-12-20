@@ -26,7 +26,7 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="159" traduits="142" relire="0" modifs="2" nouveaux="15" pourcent="89.31">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ru" total="159" traduits="106" relire="0" modifs="38" nouveaux="15" pourcent="66.67">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
