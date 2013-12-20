@@ -10,6 +10,9 @@
 	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=it" total="4" traduits="3" relire="0" modifs="0" nouveaux="1" pourcent="75.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=ru" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=sk" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
