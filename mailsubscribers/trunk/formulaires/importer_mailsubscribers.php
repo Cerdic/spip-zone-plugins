@@ -178,8 +178,22 @@ function importer_mailsubscribers_data($filename){
 		@fclose($handle);
 	}
 
-	$data_raw = $importer_csv($filename,$header);
-
+	$data_raw = $importer_csv($filename,$header,",",'"',null);
+	// verifier qu'on a pas affaire a un fichier avec des fins de lignes Windows mal interpretes
+	// corrige le cas du fichier texte 1 colonne, c'est mieux que rien
+	if (count($data_raw)==1
+	  AND count(reset($data_raw))==1){
+		$d = reset($data_raw);
+		$d = reset($d);
+		$d = explode("\r", $d);
+		$d = array_map('trim', $d);
+		$d = array_filter($d);
+		if (count($d)>1){
+			$data_raw = array();
+			foreach ($d as $v)
+				$data_raw[] = array($v);
+		}
+	}
 	// colonner : si colonne email on prend toutes les colonnes
 	// sinon on ne prend que la premiere colonne, comme un email
 	$data = array();
