@@ -11,6 +11,13 @@ options:
       forcer_type: [destinataires,hidden]
       env: true
   -
+    saisie: 'champ'
+    options:
+      nom: 'champ_courriel_destinataire_form'
+      label: '<:formidable:traiter_email_option_destinataires_champ_form_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_champ_form_explication:>'
+      env: true
+  -
     saisie: 'input'
     options:
       nom: 'destinataires_plus'

@@ -29,7 +29,12 @@ function traiter_email_dist($args, $retours){
 	}
 	if (!$destinataires)
 		$destinataires = array();
+	if ($options['champ_courriel_destinataire_form']) {
+		$courriel_champ_form = _request($options['champ_courriel_destinataire_form']);
+		$destinataires[] = $courriel_champ_form;
+	}
 	
+
 	// On ajoute les destinataires en plus
 	if ($options['destinataires_plus']){
 		$destinataires_plus = explode(',', $options['destinataires_plus']);
