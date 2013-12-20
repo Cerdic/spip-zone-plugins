@@ -11,10 +11,10 @@
    	[(#ENV*{sans_reponse}|propre)]
 	<//B_projets_sites_selectionnes>
 </BOUCLE_test_multiple>
-	<BOUCLE_projet_site_selectionne(PROJETS_SITES){id_site=#ENV{valeur}}
+	<BOUCLE_projets_site_selectionne(PROJETS_SITES){id_site=#ENV{valeur}}
 		{par num type_site, type_site}{tout}>
 	  	<p>#TYPE_SITE (#ID_SITE)</p>
-	</BOUCLE_projet_site_selectionne>
+	</BOUCLE_projets_site_selectionne>
    	[(#ENV*{sans_reponse}|propre)]
-	<//B_projet_site_selectionne>
+	<//B_projets_site_selectionne>
 <//B_test_multiple>

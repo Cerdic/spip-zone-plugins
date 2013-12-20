@@ -2,7 +2,7 @@
 /**
  * Fonctions du squelette associé
  *
- * @plugin     Projets - Sites internet
+ * @plugin     Sites pour projets
  * @copyright  2013
  * @author     Teddy Payet
  * @licence    GNU/GPL

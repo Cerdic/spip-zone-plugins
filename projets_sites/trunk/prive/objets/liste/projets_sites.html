@@ -7,28 +7,28 @@
 #ANCRE_PAGINATION
 <div class="liste-objets projets_sites">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet_site:info_1_projet_site,projet_site:info_nb_projets_sites}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='type_site' scope='col'>[(#TRI{type_site,<:projet_site:label_type_site:>,ajax})]</th>
 			<th class='nom' scope='col'><:projet:label_nom:></th>
+			<th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:label_type_site:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th> 
 			<th class='id' scope='col'>[(#TRI{id_site,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites(PROJETS_SITES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num type_site},#GET{defaut_tri}}{par type_site}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num type_site},#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{projet_site-16.png}|balise_img)]</td>
-			<td class='type_site principale'>[(#LOGO_PROJET_SITE|image_reduire{20,26})]<a href="[(#ID_SITE|generer_url_entite{projet_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ][(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)]</a></td>
-			[(#REM) Comme la table spip_projets a dÃ©jÃ  une table de liens, SPIP n'arrive pas Ã  faire la jointure avec spip_projets_sites_liens pour avoir cette requÃªte : 
+			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
+			[(#REM) Comme la table spip_projets a déjà une table de liens, SPIP n'arrive pas à faire la jointure avec spip_projets_sites_liens pour avoir cette requête : 
 			"SELECT projets.nom, projets.id_projet FROM spip_projets AS `projets` INNER JOIN spip_projets_sites_liens AS L1 ON ( L1.id_objet = projets.id_projet AND L1.objet='projet') WHERE (L1.id_site = 1) AND (L1.objet = 'projet')". 
 			De ce fait, on doit forcer la jointure :]
 			<td class='nom'><BOUCLE_projet(PROJETS projets_sites_liens) {tout} {id_site} {objet=projet}{par nom}{" / "}>[(#LOGO_PROJET|image_reduire{12,12})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></BOUCLE_projet> &mdash;<//B_projet></td>
+			<td class='type_site principale'>[(#LOGO_PROJET_SITE|image_reduire{20,26})]<a href="[(#ID_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ][(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)]</a></td>
 			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td> 
-			<td class='id'>[(#AUTORISER{modifier,projet_site,#ID_SITE}|?{
-				<a href="[(#URL_ECRIRE{projet_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
+			<td class='id'>[(#AUTORISER{modifier,projets_site,#ID_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
 				#ID_SITE
 			})]</td>
 		</tr>

@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
-	'projets_sites_titre' => 'Projets - Sites internet',
+	'projets_sites_titre' => 'Sites des projets',
 );
 
 ?>

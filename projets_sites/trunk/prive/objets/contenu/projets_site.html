@@ -1,143 +1,148 @@
-<BOUCLE_projet_site(PROJETS_SITES){id_site}>
+<BOUCLE_projets_site(PROJETS_SITES){id_site}>
 
 [<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_logiciel_nom:> : </div>
+	<div class="label visible"><:projets_site:label_logiciel_nom:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{logiciel_nom} logiciel_nom'>(#LOGICIEL_NOM)</div>
 </div>]
 
 [<div class="champ contenu_logiciel_version[ (#LOGICIEL_VERSION*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_logiciel_version:> : </div>
+	<div class="label visible"><:projets_site:label_logiciel_version:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
 </div>]
 
 [<div class="champ contenu_type_site[ (#TYPE_SITE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_type_site:> : </div>
-	<div dir='#LANG_DIR' class='#EDIT{type_site} type_site'>(#VAL{projet_site:type_}|concat{#TYPE_SITE}|_T)</div>
+	<div class="label visible"><:projets_site:label_type_site:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{type_site} type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
 </div>]
 
-<div class="champ fieldset"><h3 class="fo_fieldset"><:projet_site:label_fo_fieldset:></h3></div>
+[<div class="champ contenu_uniqid[ (#UNIQID*|strlen|?{'',vide})]">
+	<div class="label visible"><:projets_site:label_uniqid:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{uniqid} uniqid'>(#UNIQID)</div>
+</div>]
+
+<div class="champ fieldset"><h3 class="fo_fieldset"><:projets_site:label_fo_fieldset:></h3></div>
 
 [<div class="champ contenu_fo_url[ (#FO_URL*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_fo_url:> : </div>
+	<div class="label visible"><:projets_site:label_fo_url:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{fo_url} fo_url'>(#FO_URL)</div>
 </div>]
 
 [<div class="champ contenu_fo_login[ (#FO_LOGIN*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_fo_login:> : </div>
+	<div class="label visible"><:projets_site:label_fo_login:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{fo_login} fo_login'>(#FO_LOGIN)</div>
 </div>]
 
 [<div class="champ contenu_fo_password[ (#FO_PASSWORD*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_fo_password:> : </div>
+	<div class="label visible"><:projets_site:label_fo_password:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{fo_password} fo_password'>(#FO_PASSWORD)</div>
 </div>]
 
-<div class="champ fieldset"><h3 class="bo_fieldset"><:projet_site:label_bo_fieldset:></h3></div>
+<div class="champ fieldset"><h3 class="bo_fieldset"><:projets_site:label_bo_fieldset:></h3></div>
 
 [<div class="champ contenu_bo_url[ (#BO_URL*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_bo_url:> : </div>
+	<div class="label visible"><:projets_site:label_bo_url:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{bo_url} bo_url'>(#BO_URL)</div>
 </div>]
 
 [<div class="champ contenu_bo_login[ (#BO_LOGIN*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_bo_login:> : </div>
+	<div class="label visible"><:projets_site:label_bo_login:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{bo_login} bo_login'>(#BO_LOGIN)</div>
 </div>]
 
 [<div class="champ contenu_bo_password[ (#BO_PASSWORD*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_bo_password:> : </div>
+	<div class="label visible"><:projets_site:label_bo_password:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{bo_password} bo_password'>(#BO_PASSWORD)</div>
 </div>]
 
-<div class="champ fieldset"><h3 class="applicatif_fieldset"><:projet_site:label_applicatif_fieldset:></h3></div>
+<div class="champ fieldset"><h3 class="applicatif_fieldset"><:projets_site:label_applicatif_fieldset:></h3></div>
 
 [<div class="champ contenu_applicatif_serveur[ (#APPLICATIF_SERVEUR*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_applicatif_serveur:> : </div>
+	<div class="label visible"><:projets_site:label_applicatif_serveur:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{applicatif_serveur} applicatif_serveur'>(#APPLICATIF_SERVEUR)</div>
 </div>]
 
 [<div class="champ contenu_applicatif_path[ (#APPLICATIF_PATH*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_applicatif_path:> : </div>
+	<div class="label visible"><:projets_site:label_applicatif_path:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{applicatif_path} applicatif_path'>(#APPLICATIF_PATH)</div>
 </div>]
 
 [<div class="champ contenu_applicatif_surveillance[ (#APPLICATIF_SURVEILLANCE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_applicatif_surveillance:> : </div>
+	<div class="label visible"><:projets_site:label_applicatif_surveillance:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{applicatif_surveillance} applicatif_surveillance'>(#APPLICATIF_SURVEILLANCE)</div>
 </div>]
 
 [<div class="champ contenu_svn_path[ (#SVN_PATH*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_svn_path:> : </div>
+	<div class="label visible"><:projets_site:label_svn_path:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{svn_path} svn_path'>(#SVN_PATH)</div>
 </div>]
 
 [<div class="champ contenu_svn_trac[ (#SVN_TRAC*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_svn_trac:> : </div>
+	<div class="label visible"><:projets_site:label_svn_trac:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{svn_trac} svn_trac'>(#SVN_TRAC)</div>
 </div>]
 
 [<div class="champ contenu_sas_dpi[ (#SAS_DPI*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sas_dpi:> : </div>
+	<div class="label visible"><:projets_site:label_sas_dpi:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sas_dpi} sas_dpi'>(#SAS_DPI)</div>
 </div>]
 
-<div class="champ fieldset"><h3 class="sgbd_fieldset"><:projet_site:label_sgbd_fieldset:></h3></div>
+<div class="champ fieldset"><h3 class="sgbd_fieldset"><:projets_site:label_sgbd_fieldset:></h3></div>
 
 [<div class="champ contenu_sgbd_type[ (#SGBD_TYPE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sgbd_type:> : </div>
+	<div class="label visible"><:projets_site:label_sgbd_type:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sgbd_type} sgbd_type'>(#SGBD_TYPE)</div>
 </div>]
 
 [<div class="champ contenu_sgbd_serveur[ (#SGBD_SERVEUR*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sgbd_serveur:> : </div>
+	<div class="label visible"><:projets_site:label_sgbd_serveur:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sgbd_serveur} sgbd_serveur'>(#SGBD_SERVEUR)</div>
 </div>]
 
 [<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sgbd_nom:> : </div>
+	<div class="label visible"><:projets_site:label_sgbd_nom:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sgbd_nom} sgbd_nom'>(#SGBD_NOM)</div>
 </div>]
 
 [<div class="champ contenu_sgbd_login[ (#SGBD_LOGIN*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sgbd_login:> : </div>
+	<div class="label visible"><:projets_site:label_sgbd_login:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sgbd_login} sgbd_login'>(#SGBD_LOGIN)</div>
 </div>]
 
 [<div class="champ contenu_sgbd_password[ (#SGBD_PASSWORD*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sgbd_password:> : </div>
+	<div class="label visible"><:projets_site:label_sgbd_password:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sgbd_password} sgbd_password'>(#SGBD_PASSWORD)</div>
 </div>]
 
-<div class="champ fieldset"><h3 class="autres_fieldset"><:projet_site:label_autres_fieldset:></h3></div>
+<div class="champ fieldset"><h3 class="autres_fieldset"><:projets_site:label_autres_fieldset:></h3></div>
 
 [<div class="champ contenu_sso[ (#SSO*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_sso:> : </div>
+	<div class="label visible"><:projets_site:label_sso:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{sso} sso'>(#SSO)</div>
 </div>]
 
 [<div class="champ contenu_perimetre_acces[ (#PERIMETRE_ACCES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_perimetre_acces:> : </div>
+	<div class="label visible"><:projets_site:label_perimetre_acces:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{perimetre_acces} perimetre_acces'>(#PERIMETRE_ACCES)</div>
 </div>]
 
 [<div class="champ contenu_statistiques[ (#STATISTIQUES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_statistiques:> : </div>
+	<div class="label visible"><:projets_site:label_statistiques:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{statistiques} statistiques'>(#STATISTIQUES)</div>
 </div>]
 
 [<div class="champ contenu_moteur_recherche[ (#MOTEUR_RECHERCHE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_moteur_recherche:> : </div>
+	<div class="label visible"><:projets_site:label_moteur_recherche:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{moteur_recherche} moteur_recherche'>(#MOTEUR_RECHERCHE)</div>
 </div>]
 
 [<div class="champ contenu_autres_outils[ (#AUTRES_OUTILS*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_autres_outils:> : </div>
+	<div class="label visible"><:projets_site:label_autres_outils:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{autres_outils} autres_outils'>(#AUTRES_OUTILS)</div>
 </div>]
 
 [<div class="champ contenu_remarques[ (#REMARQUES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet_site:label_remarques:> : </div>
+	<div class="label visible"><:projets_site:label_remarques:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{remarques} remarques'>(#REMARQUES)</div>
 </div>]
 
-</BOUCLE_projet_site>
+</BOUCLE_projets_site>

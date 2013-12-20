@@ -1,0 +1,4 @@
+﻿<a href="#URL_ECRIRE{projets_sites}"><:projets_site:titre_projets_sites:></a>
+&gt;
+[(#INCLURE{fond=prive/objets/liste/projets_associes_nom,id_site=#ID_SITE})]
+<BOUCLE_projets_site(PROJETS_SITES){id_site}>&gt; [<strong>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE}|_T)</strong>]</BOUCLE_projets_site>
