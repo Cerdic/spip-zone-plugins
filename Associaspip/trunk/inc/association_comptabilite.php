@@ -153,7 +153,7 @@ function comptabilite_liste_plancodes($id='') {
  *
  * @param string $id
  *   Identifiant du plan comptable qui nous interesse
- * @return array $pc_norme
+ * @return array 
  *   Liste de : classe de depart, classe d'arrivee, longueur minimale d'une reference comptable
  */
 function comptabilite_liste_planregles($id='') {
