@@ -19,6 +19,15 @@
                                        label, Description,
                                        rows, 4}}
     })]
+
+    [(#SAISIE{liste_objets, liste_2,
+              label=1ère liste de test,
+              inclure=inclure/test,
+              saisies=#ARRAY{0, #ARRAY{saisie, hidden,
+                                       nom, id_article}},
+              defaut=#ARRAY{0, #ARRAY{id_article,1},
+                            1, #ARRAY{id_article,2}}
+    })]
     </ul>
 
     <input type='submit' name='ok' value='ok' />
