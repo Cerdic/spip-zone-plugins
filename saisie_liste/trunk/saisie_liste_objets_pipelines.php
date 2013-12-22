@@ -11,7 +11,7 @@ function saisie_liste_objets_jqueryui_plugins ($scripts) {
 function saisie_liste_objets_insert_head ($flux) {
 
   $flux .= '<link rel="stylesheet" href="' . find_in_path('saisie_liste_objets.css') . '" />';
-  $flux .= '<script src="' . find_in_path('js/jquery.saisie_liste_objets.js') . '" type="text/javascript"></script>';  
+  $flux .= '<script src="' . find_in_path('javascript/jquery.saisie_liste_objets.js') . '" type="text/javascript"></script>';  
 
   return $flux;
 }

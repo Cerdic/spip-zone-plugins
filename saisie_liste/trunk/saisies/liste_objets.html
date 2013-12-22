@@ -62,5 +62,13 @@
 </fieldset>
 
 <script type="text/javascript">
-  #INCLURE{fond=inclure/init-saisie-liste-objets.js, nom=#ENV{nom}}
+  [(#REM) s'il y a un fichier javascripts/saisie_NOM_DE_LA_SAISIE, on le
+          prend. ]
+  [(#CHEMIN{javascript/saisie_#ENV{nom}.js}|oui)
+    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}}
+  ]
+  [(#REM) sinon on prend le squelette par défaut.]
+  [(#CHEMIN{javascript/saisie_#ENV{nom}}|non)
+    #INCLURE{fond=javascript/saisie_liste_objets.js, nom=#ENV{nom}}
+  ]
 </script>

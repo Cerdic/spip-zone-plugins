@@ -111,5 +111,7 @@ Personnalisation du glisser-déposer
 -----------------------------------
 
 Pour personaliser l'appel au plugin jquerui.sortable, on peut surcharger
-le squelette inclure/init-saisie-liste-objets.js.html (voir le code de ce
-squelette pour plus d'infos).
+le squelette javascript/saisie_liste_objets.js.html (voir le code de ce
+squelette pour plus d'infos). On peut aussi créer un fichier
+javascript/saisie_ma-liste.js.html pour surcharger une saisie
+particulière.
