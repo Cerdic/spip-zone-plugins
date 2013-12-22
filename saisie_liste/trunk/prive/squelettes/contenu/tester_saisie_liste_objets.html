@@ -1,0 +1,21 @@
+[(#ENV{t}|non)
+  <h1>Tests de la saisie liste-objets</h1>
+  <ul>
+    <li><a href="[(#SELF|parametre_url{t, 1})]">
+        Test simple
+    </a></li>
+    <li><a href="[(#SELF|parametre_url{t, 2})]">
+        Test simple avec ajax
+    </a></li>
+  </ul>
+]
+
+[(#ENV{t}|=={1}|oui)
+  #FORMULAIRE_TESTER_SAISIE_LISTE_OBJETS
+]
+
+[(#ENV{t}|=={2}|oui)
+  <div class="ajax">
+    #FORMULAIRE_TESTER_SAISIE_LISTE_OBJETS_AJAX
+  </div>
+]
