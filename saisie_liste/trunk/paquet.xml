@@ -19,6 +19,7 @@
 
 	<licence>GNU/GPL</licence>
 
+  <pipeline nom="jquerui_plugins" inclure="saisie_liste_objets_pipeplines.php" />
 	<!--
 		Exemple de commandes
 		* dependances
