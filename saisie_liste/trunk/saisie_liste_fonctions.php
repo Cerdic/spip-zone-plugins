@@ -39,22 +39,36 @@ function joindre ($tableau, $liant) {
  */
 function preparer_tableau_saisie ($tableau_saisie) {
 
-  if (array_key_exists('saisie', $tableau_saisie)) {
-    $resultat = array(
-        'saisie'  => $tableau_saisie['saisie'],
-    );
-    if (isset($tableau_saisie['saisies'])) {
-      $resultat['saisies'] = $tableau_saisie['saisies'];
-    }
+  if (  ( ! isset($tableau_saisie['saisie'], $tableau_saisie) )
+    OR (  ( isset($tableau_saisie['saisies']) )
+      AND ( ! is_array($tableau_saisie['saisies']) ))
+    OR (  ( isset($tableau_saisie['options']) )
+      AND ( ! is_array($tableau_saisie['options']) ))) {
 
-    unset($tableau_saisie['saisie']);
-    unset($tableau_saisie['saisies']);
-    $resultat['options'] = $tableau_saisie;
-    return $resultat;
+    erreur_squelette(_T('erreur_saisie_invalide',
+                        array('tableau' => var_export($tableau_saisie,
+                                                      TRUE))));
+    return;
   }
-  else {
-    return 'ERREUR SAISIE LISTE : mauvais paramètres.';
+
+  $resultat = array(
+      'saisie'  => $tableau_saisie['saisie'],
+  );
+  if (isset($tableau_saisie['saisies'])) {
+      $resultat['saisies'] = $tableau_saisie['saisies'];
   }
+  if (isset($tableau_saisie['options'])) {
+      $resultat['options'] = $tableau_saisie['options'];
+  }
+
+  unset($tableau_saisie['saisie']);
+  unset($tableau_saisie['saisies']);
+  unset($tableau_saisie['options']);
+
+  foreach ($tableau_saisie as $option => $valeur) {
+      $resultat['options'][$option] = $valeur;
+  }
+  return $resultat;
 }
 
 /**

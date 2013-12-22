@@ -40,12 +40,7 @@
 
               #SET{saisie, #VALEUR}
 
-              [(#REM) si le tableau ne contient pas de clé "options", on
-                      suppose qu'il n'est pas au format de #GENERER_SAISIE.
-                      Il faut alors le convertir à ce format. ]
-              [(#GET{saisie}|table_valeur{options}|non)
-                [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
-              ]
+              [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
 
               [(#REM) charger les valeurs. ]
               [(#SET{saisie, #GET{saisie}|charger_valeurs{#GET{valeur}, #GET{compteur_objets}}})]
