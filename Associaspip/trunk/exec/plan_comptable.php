@@ -36,15 +36,13 @@ function exec_plan_comptable() {
 	debut_cadre_association('plan_compte.png',  'plan_comptable');
 /// AFFICHAGES_CENTRAUX : FILTRES
 	$filtre_activation = "<select name='active' onchange='form.submit()'>\n";
-	$filtre_activation .= '<option value="1" ';
-	if ($active) {
+	$filtre_activation .= '<option value="1"';
+	if ($active)
 		$filtre_activation .= ' selected="selected"';
-	}
 	$filtre_activation .= '> '. _T('asso:plan_libelle_comptes_actifs') ."</option>\n";
-	$filtre_activation .= '<option value="0" ';
-	if (!$active) {
+	$filtre_activation .= '<option value="0"';
+	if (!$active)
 		$filtre_activation .= ' selected="selected"';
-	}
 	$filtre_activation .= '> '. _T('asso:plan_libelle_comptes_desactives') ."</option>\n";
 	$filtre_activation .= "</select>\n";
 	echo association_form_filtres(array(
@@ -93,41 +91,13 @@ function exec_plan_comptable() {
 			$id_plan // selection
 		);
 	}
-
-/*
-	$query = sql_select('*', 'spip_asso_plan', 'classe LIKE '. sql_quote($classe) .' AND active=' . sql_quote($active), '', 'classe, code' );
-	$classe = '';
-	$i = 0;
-	while ($data = sql_fetch($query)) {
-		echo '<tr>';
-		if ($classe!=$data['classe']) {
-			if ($i!=0) {
-				echo '<th colspan="8" style="border:0;"><hr class="spip" /></th>';
-				echo "</tr>\n<tr>";
-			} else {
-				$i++;
-			}
-		$classe = $data['classe'];
-			echo '<td class="integer">'. $data['classe'] ."</td>\n";
-		} else {
-			echo '<td> </td>';
-		}
-		echo '<td class="text">'.$data['code']."</td>\n";
-		echo '<td class="text">'.$data['intitule']."</td>\n";
-		echo '<td class="decimal">'. association_formater_prix($data['solde_anterieur']) ."</td>\n";
-		echo '<td class="date">'. association_formater_date($data['date_anterieure'], 'dtstart') ."</td>\n";
-		echo association_bouton_suppr('plan', $data['id_plan']);
-		echo "\n";
-		echo association_bouton_edit('plan', $data['id_plan']);
-		echo "</tr>\n";
-	}
-*/
-	if (sql_countsel('spip_asso_plan', '', 'classe')<4) {
+	if (sql_countsel('spip_asso_plan', '', 'classe')<4) { // pas assez de classes pour activer la configuration de la compta...
 		echo '<tr class="row_first">';
 		echo '<th colspan="7" class="erreurs">' . _T('compta:erreur_plan_nombre_classes', array('nombre'=>4,) ) .'</th>';
 		echo "</tr>\n";
 	}
 	echo "$thd</table>\n";
+/// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
 }
 
