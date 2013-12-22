@@ -230,6 +230,9 @@ function traitements_liste_objets ($nom_saisie, $appelant) {
 
   static $interrompre_traitements_formulaire;
 
+  /* cette fonction est appellée dans vérifier, puis dans traiter.
+     La première fois on calcule la valeur de $interrompre_traitements_formulaire,
+     et la deuxième fois on ne fais que la retourner. */
   if ($appelant === 'verifier') {
     $interrompre_traitements_formulaire = FALSE;
   } else if ($appelant === 'traiter') {
@@ -252,7 +255,16 @@ function traitements_liste_objets ($nom_saisie, $appelant) {
 
 function liste_objets_verifier ($nom_saisie) {
 
-  return traitements_liste_objets($nom_saisie, 'verifier');
+  if (traitements_liste_objets($nom_saisie, 'verifier')) {
+    /* on retourne un tableau non vide, mais on ne met pas de message
+       d'erreur. On souhaite juste interrompre les traitments définis par
+       le formulaire*/
+    return array('stop' => 'oui');
+  } else {
+    /* Si on retourne un tableau vide, le traitement normal du
+       formulaire aura lieu. */
+    return array();
+  }
 }
 
 function liste_objets_traiter ($nom_saisie) {

@@ -1,0 +1,2 @@
+- Dans les exemples, il est impossible d'effacer tous les objet, on dirait
+  que les valeurs par défaut prennent le dessus sur les valeurs vides.
