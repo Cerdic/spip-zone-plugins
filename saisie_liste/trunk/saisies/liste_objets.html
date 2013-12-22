@@ -1,9 +1,9 @@
 #SET{valeur, #ARRAY}
+[(#ENV{defaut}|oui)
+  #SET{valeur, #ENV{defaut}}
+]
 [(#ENV{valeur}|oui)
   #SET{valeur, #ENV{valeur}}
-]
-[(#ENV{defaut}|oui)
-  #SET{valeur, #ENV{defaut}|array_merge{#GET{valeur}}}
 ]
 <fieldset>
   <legend>#ENV{label}</legend>
