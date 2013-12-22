@@ -2,7 +2,26 @@
 
     $.fn.saisieListeObjets = function( options ) {
 
-        var self = this;
+        var self = this,
+            defaut_sortable = {
+                // valeurs par défaut pour sortable
+                containement: 'parent',
+                cursor: 'move',
+                placeholder: 'ui-state-highlight'
+            },
+            options_sortable;
+
+        options = $.extend(true,
+                           {
+                               sortable: {
+                                   update: function () { return; }
+                               }
+                           },
+                           options
+                          );
+
+        options.sortable.update = calculerFonctionUpdate(options.sortable.update);
+        options.sortable = $.extend(defaut_sortable, options.sortable);
 
         this.nom = options.nom;
 
@@ -11,12 +30,9 @@
             $(li).data('index_objet', index);
         });
 
-        this.sortable({
-            containement: 'parent',
-            cursor: 'move',
-            placeholder: 'ui-state-highlight',
-            update: function (event, ui) {
-                $(this).find('input[name*="permutations"]')
+        function calculerFonctionUpdate (callback) {
+            return function (event, ui) {
+                self.parent().find('input[name*="permutations"]')
                     .attr('value', (function () {
                         var permutations = [];
 
@@ -25,8 +41,13 @@
                          });
                         return permutations.join(',');
                     })());
-            }
-        });
+                if (typeof(callback === 'function')) {
+                    callback.call(self, event, ui);
+                }
+            };
+        }
+
+        this.sortable(options.sortable);
 
         return this;
     };
