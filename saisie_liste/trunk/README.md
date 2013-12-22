@@ -26,8 +26,6 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
         - label   => Le label.
         - legende => La légende du fieldset qui contient la saisie.
         - saisies => La liste de saisies définissant un élément.
-        - inclure => Le chemin vers un squelette qui sera inclu au
-                     début de chaque élément. Vide par défaut.
         - defaut  => Le tableau des valeurs par défaut de la saisie.
 ]
 
