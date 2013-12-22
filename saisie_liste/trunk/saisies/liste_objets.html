@@ -11,54 +11,64 @@
   <input type="hidden" name="#ENV{nom}\[permutations\]"
          value="[(#GET{valeur}|count|enumerer|joindre{','})]" />
 
-  <ul id="liste-objets-#ENV{nom}" class="saisie-liste-objets">
+  <ul id="liste-objets-#ENV{nom}" class="liste-objets">
     <BOUCLE_liste_objets(DATA) {enum 0, #GET{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>
-        <fieldset>
+        <fieldset class="table">
         <legend>Objet #GET{compteur_objets}</legend>
 
-        [(#ENV{inclure}|oui)
-          #INCLURE{fond=#ENV{inclure}}
-        ]
+        <div class="boutons-bouger td">
+          <input type="submit"
+                 name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+                 value="Monter"
+                 class="bouton-monter" />
+          <input type="submit"
+                 name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+                 value="Descendre"
+                 class="bouton-descendre" />
+        </div>
 
-        <input type="submit"
-               name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
-               value="Monter"
-               class="bouton-monter" />
-        <input type="submit"
-               name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
-               value="Descendre"
-               class="bouton-descendre" />
-        <ul>
-          <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
+        <div class="td">
+          [(#ENV{inclure}|oui)
+           #INCLURE{fond=#ENV{inclure}}
+          ]
 
-            #SET{saisie, #VALEUR}
+          <ul class="liste-saisies-objet">
+            <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 
-            [(#REM) si le tableau ne contient pas de clé "options", on
-                    suppose qu'il n'est pas au format de #GENERER_SAISIE.
-                    Il faut alors le convertir à ce format. ]
-            [(#GET{saisie}|table_valeur{options}|non)
-              [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
-            ]
+              #SET{saisie, #VALEUR}
 
-            [(#REM) charger les valeurs. ]
-            [(#SET{saisie, #GET{saisie}|charger_valeurs{#GET{valeur}, #GET{compteur_objets}}})]
+              [(#REM) si le tableau ne contient pas de clé "options", on
+                      suppose qu'il n'est pas au format de #GENERER_SAISIE.
+                      Il faut alors le convertir à ce format. ]
+              [(#GET{saisie}|table_valeur{options}|non)
+                [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
+              ]
 
-            [(#REM) on renomme les saisies pour les grouper par objet. ]
-            [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
+              [(#REM) charger les valeurs. ]
+              [(#SET{saisie, #GET{saisie}|charger_valeurs{#GET{valeur}, #GET{compteur_objets}}})]
 
-            [(#GENERER_SAISIES{#ARRAY{0,#GET{saisie}}})]
+              [(#REM) on renomme les saisies pour les grouper par objet. ]
+              [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
 
-          </BOUCLE_saisies_objet>
-        </ul>
-        <input type="submit"
-               name="#ENV{nom}[action][supprimer-#GET{compteur_objets}]"
-               value="Supprimer" />
+              [(#GENERER_SAISIES{#ARRAY{0,#GET{saisie}}})]
+
+            </BOUCLE_saisies_objet>
+          </ul>
+        </div>
+
+        <div class="bouton-supprimer td">
+          <input type="submit"
+                 name="#ENV{nom}[action][supprimer-#GET{compteur_objets}]"
+                 value="Supprimer" />
+        </div>
       </fieldset></li>
     </BOUCLE_liste_objets>
   </ul>
+
   <input type="submit" name="#ENV{nom}[action][ajouter]" value="Ajouter Objet" />
+
 </fieldset>
 
 <script type="text/javascript">

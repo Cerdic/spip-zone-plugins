@@ -4,17 +4,55 @@
 /* premier niveau de li */
 .formulaire_spip li.saisie_liste_objets { padding-left: 15px; }
 /* deuxième niveau */
-.formulaire_spip ul.saisie-liste-objets li { padding-left: 15px; }
+.formulaire_spip ul.liste-objets li { padding-left: 15px; }
 
 li.saisie_liste_objets label { float: none; margin-left: 0; }
 
-.saisie-liste-objets.ui-sortable > li {
+.liste-objets.ui-sortable > li {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;
   margin: 5px;
 }
 
-.saisie-liste-objets.ui-sortable > li:hover {
+.liste-objets.ui-sortable > li:hover {
   background-color: #EBE7E7;
+}
+
+.table {
+  display: table;
+}
+
+.td {
+  display: table-cell;
+}
+
+.boutons-bouger {
+  vertical-align: middle;
+  width: 40px;
+}
+
+.bouton-monter {
+  background: url('images/up-icon-32x32.png');
+}
+
+.bouton-descendre {
+  background: url('images/down-icon-32x32.png');
+}
+
+.bouton-monter, .bouton-descendre {
+  width: 32px;
+  height: 32px;
+  margin: 8px 0;
+  border: none;
+  text-indent: -99999px;
+}
+
+.bouton-supprimer input {
+  background: url('images/delete-icon.png') no-repeat;
+  width: 24px;
+  height: 24px;
+  border: none;
+  text-indent: -99999px;
+  margin-left: 8px;
 }
