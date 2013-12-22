@@ -5,8 +5,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// S
-	'saisie_liste_titre' => 'Saisie liste',
+    // B
+    'bouton_ajouter' => 'Ajouter',
+    'bouton_descendre' => "Descendre",
+    'bouton_monter' => "Monter",
+    'bouton_supprimer' => "Supprimer",
+
+    // E
+    'erreur_saisie_invalide' => "Définition de saisie invalide : @tableau@.",
+
+    // S
+    'saisie_liste_titre' => 'Saisie liste',
+
+    // T
+    'titre_exemple_1' => "Liste réordonnable simple",
+    'titre_exemple_2' => "Liste d'objets + liste non-éditable ajax",
+    'titre_exemple_3' => "Liste pas réordonnable",
+    'titre_exemples' => "Exemples d'utilisation de la saisie liste",
 );
 
 ?>

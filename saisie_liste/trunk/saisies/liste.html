@@ -22,13 +22,13 @@
             [(#COMPTEUR_BOUCLE|=={1}|non)
               <input type="submit"
                      name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
-                     value="Monter"
+                     value="<:saisie_liste:bouton_monter:>"
                      class="bouton-monter" />
             ]
             [(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
               <input type="submit"
                      name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
-                     value="Descendre"
+                     value="<:saisie_liste:bouton_descendre:>"
                      class="bouton-descendre" />
             ]
           </div>
@@ -58,7 +58,7 @@
           <div class="bouton-supprimer td">
             <input type="submit"
                    name="#ENV{nom}\[action\]\[supprimer-#GET{compteur_objets}\]"
-                   value="Supprimer" />
+                   value="<:saisie_liste:bouton_supprimer:>" />
           </div>
         ]
       </fieldset></li>
@@ -66,7 +66,7 @@
   </ul>
 
   [(#ENV{interdire_ajout}|non)
-    <input type="submit" name="#ENV{nom}\[action\]\[ajouter\]" value="Ajouter" />
+    <input type="submit" name="#ENV{nom}\[action\]\[ajouter\]" value="<:saisie_liste:bouton_ajouter:>" />
   ]
 
 </fieldset>
