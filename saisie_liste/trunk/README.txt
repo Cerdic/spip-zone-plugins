@@ -1,16 +1,18 @@
-*========================*
+*=================*
 | La saisie liste |
-*========================*
+*=================*
 
 C'est quoi ?
 ------------
 
-Cette saisie permet de gérer des listes d'objets ordonnés. On passe à la
-saisie une liste de saisies qui définissent alors un objet, et la saisie
-générée permet à l'utilisateur de créer un ou plusieurs de ses objets
-et/ou de modifier leur ordre. Elle peut fonctionner sans javascript, mais
-pour les utilisateurs qui l'activent, on peux réordonner les objets par
-glisser-déposer via le plugin jqueryui.sortable.
+Cette saisie permet de gérer des listes. On passe à la saisie une liste
+de saisies qui définissent alors un élément de la liste, et la saisie
+générée permet à l'utilisateur d'éditer, de créer ou de supprimer des
+éléments de la liste et/ou de modifier leur ordre. Elle peut fonctionner
+sans javascript, mais pour les utilisateurs qui l'activent, on peux
+réordonner les éléments par glisser-déposer via le plugin
+jqueryui.sortable.
+
 On peut voir la saisie en plein action sur la page
 /ecrire/?exec=exemples_saisie_liste .
 
@@ -21,12 +23,13 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
 
   [(#REM)
     parametres :
-          - nom     => Le nom de la saisie.
+          - nom     => Le nom de la saisie. Obligatoire, le reste est
+                       optionnel.
           - label   => Le label.
           - legende => La légende du fieldset qui contient la saisie.
-          - saisies => La liste de saisies définissant un objet.
+          - saisies => La liste de saisies définissant un élément.
           - inclure => Le chemin vers un squelette qui sera inclu au
-                       début de chaque objet. Vide par défaut.
+                       début de chaque élément. Vide par défaut.
           - defaut  => Le tableau des valeurs par défaut de la saisie.
   ]
 
@@ -45,26 +48,27 @@ On peut aussi utiliser le format de la balise #GENERER_SAISIES :
   $ma-saisie = array(
       'saisie'  => 'liste',
       'options' => array(
-            'nom'     => 'ma-liste',
-            'label'   => 'Objets',
-            'saisies' => array(
-                array(
-                    'saisie'  => 'input',
-                    'options' => array(
-                        'label' => "Titre de l'objet",
-                        'nom'   => 'titre_objet',
-                    ),
-                ),
-                array(
-                    'saisie'  => 'textarea',
-                    'options' => array(
-                        'label' => "Description",
-                        'nom'   => 'description',
-                    ),
-                ),
-            ),
-        ),
-    );
+          'nom'     => 'ma-liste',
+          'label'   => 'Objets',
+      ),
+      'saisies' => array(
+          array(
+              'saisie'  => 'input',
+              'options' => array(
+                  'label' => "Titre de l'objet",
+                  'nom'   => 'titre_objet',
+              ),
+          ),
+          array(
+              'saisie'  => 'textarea',
+              'options' => array(
+                  'label' => "Description",
+                  'nom'   => 'description',
+              ),
+          ),
+      ),
+  );
+
 
 Traitement des valeurs postées
 ------------------------------
