@@ -14,11 +14,13 @@ function formulaires_tester_saisie_liste_objets_ajax_charger_dist () {
 
 function formulaires_tester_saisie_liste_objets_ajax_verifier_dist () {
 
-  if ($err = traitements_liste_objets('liste_1')) return $err;
+  if (liste_objets_verifier('liste_1')) return;
 
 }
 
 function formulaires_tester_saisie_liste_objets_ajax_traiter_dist () {
 
-  /* var_dump(_request('liste_1')); */
+  if (liste_objets_traiter('liste_1')) return;
+
+  var_dump(_request('liste_1'));
 }

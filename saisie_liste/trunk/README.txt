@@ -67,19 +67,21 @@ Traitement des valeurs postées
 
 Pour que la saisie puisse fonctionner correctement, notamment pour les
 utilisateurs qui n'ont pas activé le javascript, il faut executer des
-traitement au début de la fonction vérifier. Il est impératif de
+traitement au début des fonctions vérifier et traiter. Il est impératif de
 toujours commencer vos fonctions verifier par :
 
-  if ($err = traitements_liste_objets('ma-liste')) return $err;
+  if (liste_objets_verifier('ma-liste')) return;
+
+et vos fonctions traiter par :
+
+  if (liste_objets_traiter('ma-liste')) return;
 
 où 'ma-liste' est le nom de la saisie liste_objets que vous avez créé.
 Si le formulaire contient plusieurs saisies lister_objets, il faut
 executer ces traitements pour chacune d'entre elles.
-Ce code renvoie une erreur au formulaire si le bouton submit qui à été
-cliqué est spécifique à la saisie lister_objet. Cela permet de prendre la
-main sur les fonctions vérifier et traiter définies pour le formulaire
-quand l'utilisateur clique sur "monter", "supprimer" ou un autre submit
-spécifique à la saisie liste-objets.
+Ce code permet de prendre la main sur les fonctions vérifier et traiter
+définies pour le formulaire quand l'utilisateur clique sur "monter",
+"supprimer" ou un autre submit spécifique à la saisie liste-objets.
 
 Ceci fait, on peut récupérer les valeurs saisies en appelant
 
@@ -105,4 +107,5 @@ Personnalisation du glisser-déposer
 -----------------------------------
 
 Pour personaliser l'appel au plugin jquerui.sortable, on peut surcharger
-le squelette inclure/init-saisie-liste-objets.js.html.
+le squelette inclure/init-saisie-liste-objets.js.html (voir le code de ce
+squelette pour plus d'infos).
