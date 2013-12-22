@@ -48,7 +48,7 @@ function charger_valeurs ($tableau_saisie, $valeurs, $index_objet, $nom_objet) {
   return $tableau_saisie;
 }
 
-function traitements_liste_objets_ok ($nom_saisie) {
+function traitements_liste_objets ($nom_saisie) {
 
   $valeurs = _request($nom_saisie);
 
@@ -80,9 +80,9 @@ function traitements_liste_objets_ok ($nom_saisie) {
     }
 
     set_request($nom_saisie, filtrer_valeurs_vides($valeurs));
-    return FALSE;
+    return $erreurs = array($nom_saisie => $action . '-' . $index_objet . ' ok');
   }
 
   set_request($nom_saisie, filtrer_valeurs_vides($valeurs));
-  return TRUE;
+  return FALSE;
 }
