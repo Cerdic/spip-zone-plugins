@@ -1,5 +1,9 @@
 <?php
 
+/***********/
+/* Filtres */
+/***********/
+
 function enumerer ($max) {
 
   $resultat = array();
@@ -14,6 +18,97 @@ function joindre ($tableau, $liant) {
   return implode($liant, $tableau);
 }
 
+/**
+ * preparer_tableau_saisies - convertit un tableau définissant des saisies
+ *
+ * Convertit un tableau définissant une saisie au format :
+ *
+ *   array(
+ *         'saisie'             => 'type_saisie',
+ *         'nom'                => 'nom_saisie',
+ *         'un_autre_paramètre' => 'blabla',
+ *        )
+ *
+ * vers le format exigé par #GENERER_SAISIES.
+ *
+ * @param array $tableau_saisie
+ *     Un tableau au format ci-dessus
+ * @return array
+ *     Un tableau équivalent au format de #GENERER_SAISIES
+ */
+function preparer_tableau_saisie ($tableau_saisie) {
+
+  if (array_key_exists('saisie', $tableau_saisie)) {
+    $resultat = array('saisie' => $tableau_saisie['saisie']);
+    unset($tableau_saisie['saisie']);
+    $resultat['options'] = $tableau_saisie;
+    return $resultat;
+  }
+  else {
+    return 'ERREUR SAISIE LISTE_OBJETS : mauvais paramètres.';
+  }
+}
+
+/**
+ * charger_valeurs - charge des valeurs par défaut dans un tableau de saisies
+ *
+ * @param array $tableau_saisie
+ *     Un tableau de saisies au format de #GENERER_SAISIES représentant
+ *     un objet de la saisie liste_objets.
+ * @param array $valeurs
+ *     Les valeurs par défaut, pour la saisie liste_objets en entier.
+ * @param array $index_objet
+ *     L'index de l'objet dont on veut charger les valeurs.
+ * @return array
+ *     Un tableau de saisies au format de #GENERER_SAISIES représentant
+ *     un objet de la saisie liste_objets, dans lequel l'objet $index_objet
+ *     a comme valeurs par défaut les valeurs de la $index_objet-ième
+ *     ligne du tableau $valeurs.
+ */
+function charger_valeurs ($tableau_saisie, $valeurs, $index_objet) {
+
+  $tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
+
+  return $tableau_saisie;
+}
+
+/**
+ * renommer_saisies - renomme les saisies d'un objet d'une saisie liste_objet pour en faire des sous-saisies.
+ *
+ * Parcours les noms de l'objet, et change "nom" en
+ * "nom-saisie-liste-objet[$index_objet][nom]"
+ *
+ * @param array $tableau_saisie
+ *     Un tableau de saisies au format de #GENERER_SAISIES représentant
+ *     un objet de la saisie liste_objets.
+ * @param array $index_objet
+ *     L'index de l'objet en cours de traitement
+ * @param array $nom_saisie_liste_objets
+ *     Le nom de la saisie liste-objets
+ * @return array
+ *     Le tableau $tableau_saisie dans lequels on a renommé les saisies.
+ */
+function renommer_saisies ($tableau_saisie, $index_objet, $nom_objet) {
+
+  $tableau_saisie['options']['nom'] = $nom_objet . "[" . $index_objet . "][" . $tableau_saisie['options']['nom'] . "]";
+
+  return $tableau_saisie;
+}
+
+/****************************/
+/* Traitments du formulaire */
+/****************************/
+
+/**
+ * filtrer_valeurs - filtre un tableau de valeurs pour retirer les infos
+ *     qui n'importent que pour le fonctionnement interne de la saisie
+ *     liste-objets. Retire aussi les valeurs vides.
+ *
+ * @param array $valeurs
+ *     Les valeurs retournées par _request('nom-saisie-liste-objets')
+ * @return array
+ *     Les valeurs prêtes à être utilisées dans les fonctions verifier et traiter.
+ */
 function filtrer_valeurs ($valeurs) {
 
   $valeurs_filtrees = array();
@@ -38,33 +133,24 @@ function filtrer_valeurs ($valeurs) {
   return $valeurs_filtrees;
 }
 
-function preparer_tableau_saisie ($tableau_saisie) {
-
-  if (array_key_exists('saisie', $tableau_saisie)) {
-    $resultat = array('saisie' => $tableau_saisie['saisie']);
-    unset($tableau_saisie['saisie']);
-    $resultat['options'] = $tableau_saisie;
-    return $resultat;
-  }
-  else {
-    return 'ERREUR SAISIE LISTE_OBJETS : mauvais paramètres.';
-  }
-}
-
-function renommer_saisies ($tableau_saisie, $index_objet, $nom_objet) {
-
-  $tableau_saisie['options']['nom'] = $nom_objet . "[" . $index_objet . "][" . $tableau_saisie['options']['nom'] . "]";
-
-  return $tableau_saisie;
-}
-
-function charger_valeurs ($tableau_saisie, $valeurs, $index_objet, $nom_objet) {
-
-  $tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
-
-  return $tableau_saisie;
-}
-
+/**
+ * permuter - Permute les index d'un tableau selon un permutation donnée.
+ *
+ * @param array $tableau
+ *     un tableau indexé par des nombres entiers.
+ * @param array permutations
+ *     un tableau de même taille représentant une permutation.
+ *     P.ex ce tableau de permutation :
+ *         array(
+ *               0 => 2,
+ *               1 => 1,
+ *               2 => 0,
+ *              )
+ *     permet d'échanger les valeurs de la première et la dernière ligne
+ *     d'un tableau a 3 éléments.
+ * @return array
+ *     Le tableau après permutation.
+ */
 function permuter ($tableau, $permutations) {
 
   $resultat = array();
@@ -74,6 +160,16 @@ function permuter ($tableau, $permutations) {
   return $resultat;
 }
 
+/**
+ * executer_actions_liste_objet - execute les actions demandées par la
+ *     valeur associée à la clé 'action' d'un tableau de valeurs retourné
+ *     par une saisie liste_objets
+ *
+ * @param array $valeurs
+ *     un tableau de valeurs retourné par une saisie liste_objets
+ * @return array
+ *     Le tableau après execution des actions.
+ */
 function executer_actions_liste_objet ($valeurs) {
 
   $permutations = explode(',', $valeurs['permutations']);
@@ -95,13 +191,13 @@ function executer_actions_liste_objet ($valeurs) {
         // il faut opérer sur la liste des permutations, parce ce qu'elle
         // correspond à l'ordre des objets affichés quand l'utilisateur
         // a submit.
-        $index_objet = array_search($index_objet, $permutations);
+        $index_objet     = array_search($index_objet, $permutations);
         $objet_au_dessus = $permutations[$index_objet-1];
         $permutations[$index_objet-1] = $permutations[$index_objet];
         $permutations[$index_objet]   = $objet_au_dessus;
         break;
       case 'descendre':
-        $index_objet = array_search($index_objet, $permutations);
+        $index_objet      = array_search($index_objet, $permutations);
         $objet_en_dessous = $permutations[$index_objet+1];
         $permutations[$index_objet+1] = $permutations[$index_objet];
         $permutations[$index_objet]   = $objet_en_dessous;
@@ -112,6 +208,19 @@ function executer_actions_liste_objet ($valeurs) {
   return filtrer_valeurs(permuter($valeurs, $permutations));
 }
 
+/**
+ * traitements_liste_objets - execute les traitements nécessaire pour
+ *     le bon fonctionnement d'une saisie liste_objet.
+ *
+ * @param string $nom_saisie
+ *     le nom d'une saisie liste_objets
+ * @param string $appelant
+ *     le contexte dans lequel la fonction est appelée. Deux valeurs
+ *     sont possibles : 'verifier' ou 'traiter'
+ * @return bool
+ *     TRUE si l'on souhaite interrompre les traitements définis par les
+ *     fonctions verifier et traiter du formulaire. FALSE, sinon.
+ */
 function traitements_liste_objets ($nom_saisie, $appelant) {
 
   static $interrompre_traitements_formulaire;

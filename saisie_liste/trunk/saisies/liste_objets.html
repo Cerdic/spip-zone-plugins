@@ -31,7 +31,7 @@
             ]
 
             [(#REM) charger les valeurs. ]
-            [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}, #ENV{nom}}})]
+            [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}}})]
 
             [(#REM) on renomme les saisies pour les grouper par objet. ]
             [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]

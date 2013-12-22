@@ -1,11 +1,18 @@
-[(#REM) Appel du plugin jQuery saisieListeObjets.
+[(#REM)
+
+  Vous pouvez utiliser la variable d'environnement 'nom' pour connaître
+  le nom de la saisie qui appele ce squelette. Cela permet de personnaliser
+  les options saisie par saisie.
+
+  Appel du plugin jQuery saisieListeObjets.
+  -----------------------------------------
 
   Ce plugin accepte un objet js d'options en paramètre. Les clés possibles
   pour cet objet sont :
 
     - nom :      Le nom de la saisie en question
     - sortable : Un objet contenant les options qui seront passées à
-                 jquerui.sortable.
+                 jquerui.sortable (cf. http://api.jqueryui.com/sortable/)
 
   Exemple d'appel :
 
