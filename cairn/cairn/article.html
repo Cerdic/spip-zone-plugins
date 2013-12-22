@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="#CHARSET"?>
+<BOUCLE_a(ARTICLES){id_article}>
+<article lang="#LANG" traitement="artr" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink"><admin><infoarticle>
+<BOUCLE_dossier(RUBRIQUES){id_rubrique}><section_sommaire>#TITRE</section_sommaire></BOUCLE_dossier>
+<pagination>[<ppage>(#PAGE_DEBUT)</ppage>][<dpage>(#PAGE_FIN)</dpage>]</pagination>[<nbpage>(#PAGES_TOTAL)</nbpage>]<nbpara>[(#VAL{/<p /}|preg_split{#TEXTE*}|count)]</nbpara>
+<nbmot>[(#VAL{/\W+/}|preg_split{#TEXTE*}|count)]</nbmot>
+</infoarticle><revue id="[(#NOM_SITE_SPIP|match{\w+?})]"><titrerev>[(#NOM_SITE_SPIP|cdata)]</titrerev><titrerevabr>[(#NOM_SITE_SPIP|cdata)]</titrerevabr><idissn>#VAL{'issn'}</idissn><idissnnum>#VAL{'idissnum'}</idissnnum></revue><numero id="[(#NUMERO|replace{' ','_'}|cdata)]"><volume>#NUMERO</volume><pub><annee>[(#DATE_REDAC|sinon{#DATE}|annee)]</annee></pub><pubnum><date>[(#DATE_REDAC|sinon{#DATE}|affdate)]</date></pubnum><theme>[(#TITRE|filtrer_texte_cairn|cdata)]</theme><idisbn>#VAL{'isbn'}</idisbn></numero><editeur id="[(#NOM_SITE_SPIP|match{\w+?})]"><nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg></editeur><prodnum id="SPIP"><nomorg>Rezo/SPIP</nomorg></prodnum><diffnum id="CairnD"><nomorg>Cairn</nomorg></diffnum><dtd nom="Erudit Article" version="vCairn 1.0"/><droitsauteur>© <nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg>, [(#DATE_REDAC|sinon{#DATE}|annee)]</droitsauteur></admin>
+<liminaire>
+<grtitre>
+	<titre>[(#TITRE|filtrer_texte_cairn|cdata)]</titre>
+</grtitre>
+<B_auteurs>
+<grauteur>
+<BOUCLE_auteurs(AUTEURS){id_article}><auteur id="au#COMPTEUR_BOUCLE"><nompers>[(#NOM|cairn_prenom_nom)]</nompers></auteur>
+</BOUCLE_auteurs></grauteur></B_auteurs>
+[<resume lang="#LANG"><titre>Résumé</titre><alinea>(#INTRODUCTION||PtoBR|filtrer_texte_cairn)</alinea></resume>]
+<B_mots><grmotcle lang="#LANG"><titre>Mots-clés</titre><BOUCLE_mots(MOTS){id_article}{id_groupe!IN 5}><motcle>[(#TITRE|cdata)]</motcle></BOUCLE_mots></grmotcle></B_mots>
+</liminaire>
+
+<corps>
+[(#REM) on demande que le chapo soit en gras…]
+[(#SET{chapo,[(#CHAPO*|?{#VAL{"{{"}|concat{#CHAPO*}|concat{"}}
+
+"}})]})]
+
+[(#GET{chapo}|concat{#TEXTE*}|propre|cairn_traiter{reset})]
+
+[<partieann>
+<grnotes>
+(#NOTES|cairn_traiter_notes)
+</grnotes>
+</partieann>]
+
+</corps>
+
+</article>
+
+</BOUCLE_a>

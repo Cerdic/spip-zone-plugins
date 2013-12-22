@@ -1,0 +1,27 @@
+﻿#CACHE{0}
+[(#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET})]
+
+<h1>Enregistrement des fichiers pour Cairn</h1>
+
+[(#VAL{cairn}|mkdir)]
+[(#VAL{cairn/.htaccess}|ecrire_fichier{"Deny from all"})]
+
+
+<BOUCLE_meta(RUBRIQUES){id_parent=115}{!par id_rubrique}{0,8}>
+<h2>#ID_RUBRIQUE:#TITRE</h2>
+#SET{numero,#TITRE|match{\d+?}}
+[(#VAL{cairn/#GET{numero}}|mkdir)]
+<ul>
+<BOUCLE_numero(ARTICLES){branche}{par page_debut}>
+#SET{file,cairn/#GET{numero}/Vacarme#GET{numero}-#PAGE_DEBUT.xml}
+<li>#GET{file}:
+	[(#GET{file}|file_exists|?{
+		OK,
+		[<b>(#GET{file}|ecrire_fichier{
+			#INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE}
+		}|?{<span style='color:green'>sauvé</span>,<span style='color:red'>erreur</span>})</b>]
+	})]
+</li>
+</BOUCLE_numero>
+</ul>
+</BOUCLE_meta>
