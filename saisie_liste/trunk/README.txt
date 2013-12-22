@@ -1,15 +1,108 @@
+*========================*
+| La saisie liste-objets |
+*========================*
+
+C'est quoi ?
+------------
+
+Cette saisie permet de gérer des listes d'objets ordonnés. On passe à la
+saisie une liste de saisies qui définissent alors un objet, et la saisie
+générée permet à l'utilisateur de créer un ou plusieurs de ses objets
+et/ou de modifier leur ordre. Elle peut fonctionner sans javascript, mais
+pour les utilisateurs qui l'activent, on peux réordonner les objets par
+glisser-déposer via le plugin jqueryui.sortable.
+
+Appel de la saisie
+------------------
+
+La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
+
+  [(#REM)
+    parametres :
+          - nom     => Le nom de la saisie.
+          - label   => Le label.
+          - saisies => La liste de saisies définissant un objet.
+  ]
+
+  [(#SAISIE{liste_objets, ma-liste,
+            label=Objets,
+            saisies=#ARRAY{0, #ARRAY{saisie, input,
+                                     label, Titre de l'objet,
+                                     nom, titre_objet},
+                           1, #ARRAY{saisie, textarea,
+                                     nom, description,
+                                     label, Description}}
+  })]
+
+On peut aussi utiliser le format de la balise #GENERER_SAISIES :
+
+  $ma-saisie = array(
+      'saisie' => 'liste-objets',
+      'options' => array(
+            'nom'     => 'ma-liste',
+            'label'   => 'Objets',
+            'saisies' => array(
+                array(
+                    'saisie'  => 'input',
+                    'options' => array(
+                        'label' => "Titre de l'objet",
+                        'nom'   => 'titre_objet',
+                    ),
+                ),
+                array(
+                    'saisie'  => 'textarea',
+                    'options' => array(
+                        'label' => "Description",
+                        'nom'   => 'description',
+                    ),
+                ),
+            ),
+        ),
+    );
+
+(Voir les tests pour plus d'exemples…)
+
+Traitement des valeurs postées
+------------------------------
+
 Pour que la saisie puisse fonctionner correctement, notamment pour les
 utilisateurs qui n'ont pas activé le javascript, il faut executer des
 traitement au début de la fonction vérifier. Il est impératif de
 toujours commencer vos fonctions verifier par :
 
-  if ($err = traitements_liste_objets_ok('nom_saisie')) return $err;
+  if ($err = traitements_liste_objets('ma-liste')) return $err;
 
-où nom_saisie est le nom de la saisie liste_objets que vous avez créé.
+où 'ma-liste' est le nom de la saisie liste_objets que vous avez créé.
 Si le formulaire contient plusieurs saisies lister_objets, il faut
 executer ces traitements pour chacune d'entre elles.
 Ce code renvoie une erreur au formulaire si le bouton submit qui à été
 cliqué est spécifique à la saisie lister_objet. Cela permet de prendre la
-main sur les fonctions vérifier et traiter définies pour le formulaire.
-Si le bouton cliqué en est un autre, l'execution de vos fonctions de vos
-fonctions vérifier et traiter se passera comme d'habitude.
+main sur les fonctions vérifier et traiter définies pour le formulaire
+quand l'utilisateur clique sur "monter", "supprimer" ou un autre submit
+spécifique à la saisie liste-objets.
+
+Ceci fait, on peut récupérer les valeurs saisies en appelant
+
+     _request('ma-liste');
+
+qui aura la forme suivante (si on reprend l'exemple ci-dessus) :
+
+    array(
+        0 => array(
+            'titre_objet' => "Le premier titre saisi par l'utilisateur',
+            'description' => "Une longue description de l'objet…",
+        ),
+        1 => array(
+            'titre_objet' => "Le deuxièmer titre saisi par l'utilisateur',
+            'description' => "Une description du deuxième objet…",
+        ),
+    )
+
+On peut évidement utiliser un tableau de ce genre pour pré-remplir la
+saisie dans la fonction charger.
+
+Personnalisation du glisser-déposer
+-----------------------------------
+
+Pour personaliser l'appel au plugin jquerui.sortable, on peut surcharger
+le squelette inclure/init-saisie-liste-objets.js.html.
