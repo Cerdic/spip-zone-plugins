@@ -1,7 +1,11 @@
 <fieldset>
   <legend>#ENV{label}</legend>
 
-  <ul>
+  <ul id="liste-objets-#ENV{nom}">
+
+    <input type="hidden" name="#ENV{nom}\[permutations\]"
+           value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
+
     <BOUCLE_liste_objets(DATA) {enum 0, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li><fieldset>
@@ -45,5 +49,11 @@
       </fieldset></li>
     </BOUCLE_liste_objets>
   </ul>
-  <input type="submit" name="ajouter" value="ajouter objet" />
+  <input type="submit" name="#ENV{nom}[action][ajouter]" value="Ajouter Objet" />
 </fieldset>
+
+<script type="text/javascript">
+  $('#liste-objets-#ENV{nom}').saisieListeObjets({
+    nom: '#ENV{nom}'
+  });
+</script>

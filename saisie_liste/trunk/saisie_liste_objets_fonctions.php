@@ -1,16 +1,33 @@
 <?php
 
+function enumerer ($max) {
+
+  $resultat = array();
+  for ($i=0; $i<=$max; $i++) {
+    $resultat[] = $i;
+  }
+  return $resultat;
+}
+
+function joindre ($tableau, $liant) {
+
+  return implode($liant, $tableau);
+}
+
 function filtrer_valeurs_vides ($valeurs) {
 
   $valeurs_filtrees = array();
 
-  if (isset($valeurs['action'])) unset($valeurs['action']);
+  unset($valeurs['action']);
+  unset($valeurs['permutations']);
 
   foreach ($valeurs as $objet) {
     $objet_est_vide = TRUE;
-    foreach ($objet as $valeur) {
-      if ($valeur !== '') {
-        $objet_est_vide = FALSE;
+    if (is_array($objet)) {
+      foreach ($objet as $valeur) {
+        if ($valeur !== '') {
+          $objet_est_vide = FALSE;
+        }
       }
     }
     if ( ! $objet_est_vide) {
@@ -48,9 +65,19 @@ function charger_valeurs ($tableau_saisie, $valeurs, $index_objet, $nom_objet) {
   return $tableau_saisie;
 }
 
+function permuter ($tableau, $permutations) {
+
+  $resultat = array();
+  for ($i=0; $i<count($permutations); $i++) {
+    $resultat[$i] = $tableau[$permutations[$i]];
+  }
+  return $resultat;
+}
+
 function traitements_liste_objets ($nom_saisie) {
 
   $valeurs = _request($nom_saisie);
+  $permutations = explode(',', $valeurs['permutations']);
 
   if (array_key_exists('action', $valeurs)) {
     foreach ($valeurs['action'] as $details_action => $valeur_submit) {
@@ -63,26 +90,33 @@ function traitements_liste_objets ($nom_saisie) {
           break;
         case 'ajouter':
           // on n'as rien à faire pour ajouter un objet, il suffit de
-          // recharger le formulaire, et celui-ci affichera un objet vide
-          // prêt à remplir à la fin de la liste.
+          // recharger le formulaire
           break;
         case 'monter':
-          $objet_au_dessus = $valeurs[$index_objet-1];
-          $valeurs[$index_objet-1] = $valeurs[$index_objet];
-          $valeurs[$index_objet]   = $objet_au_dessus;
+          // il faut opérer sur la liste des permutations, parce ce qu'elle
+          // correspond à l'ordre des objets affichés quand l'utilisateur
+          // a submit.
+          $index_objet = array_search($index_objet, $permutations);
+          $objet_en_dessus = $permutations[$index_objet-1];
+          $permutations[$index_objet-1] = $permutations[$index_objet];
+          $permutations[$index_objet]   = $objet_au_dessus;
           break;
         case 'descendre':
-          $objet_en_dessous = $valeurs[$index_objet+1];
-          $valeurs[$index_objet+1] = $valeurs[$index_objet];
-          $valeurs[$index_objet]   = $objet_en_dessous;
+          $index_objet = array_search($index_objet, $permutations);
+          $objet_en_dessous = $permutations[$index_objet+1];
+          $permutations[$index_objet+1] = $permutations[$index_objet];
+          $permutations[$index_objet]   = $objet_en_dessous;
           break;
       }
     }
 
-    set_request($nom_saisie, filtrer_valeurs_vides($valeurs));
+    set_request($nom_saisie, filtrer_valeurs_vides(
+                                 permuter($valeurs, $permutations)));
+
     return $erreurs = array($nom_saisie => $action . '-' . $index_objet . ' ok');
   }
 
-  set_request($nom_saisie, filtrer_valeurs_vides($valeurs));
+  set_request($nom_saisie, filtrer_valeurs_vides(
+                               permuter($valeurs, $permutations)));
   return FALSE;
 }

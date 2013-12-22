@@ -20,5 +20,5 @@ function formulaires_tester_saisie_liste_objets_verifier_dist () {
 
 function formulaires_tester_saisie_liste_objets_traiter_dist () {
 
-  var_dump(_request('liste_1'));
+  /* var_dump(_request('liste_1')); */
 }
