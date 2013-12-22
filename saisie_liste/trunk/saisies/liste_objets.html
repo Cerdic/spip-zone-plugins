@@ -1,26 +1,23 @@
 <fieldset>
   <legend>#ENV{label}</legend>
 
-  <ul id="liste-objets-#ENV{nom}">
+  <input type="hidden" name="#ENV{nom}\[permutations\]"
+         value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
 
-    <input type="hidden" name="#ENV{nom}\[permutations\]"
-           value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
-
+  <ul id="liste-objets-#ENV{nom}" class="saisie-liste-objets">
     <BOUCLE_liste_objets(DATA) {enum 0, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li><fieldset>
         <legend>Objet #GET{compteur_objets}</legend>
 
-        [(#COMPTEUR_BOUCLE|!={1}|oui)
-          <input type="submit"
-                 name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
-                 value="Monter" />
-        ]
-        [(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)
-          <input type="submit"
-                 name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
-                 value="Descendre" />
-        ]
+        <input type="submit"
+               name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+               value="Monter"
+               class="bouton-monter" />
+        <input type="submit"
+               name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+               value="Descendre"
+               class="bouton-descendre" />
         <ul>
           <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 

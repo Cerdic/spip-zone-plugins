@@ -1,0 +1,2 @@
+.saisie-liste-objets li:first-child .bouton-monter { display: none; }
+.saisie-liste-objets li:last-child .bouton-descendre { display: none; }
