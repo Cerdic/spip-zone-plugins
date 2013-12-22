@@ -27,6 +27,17 @@ $.fn.saisieListe = function( options ) {
         $(li).data('index_objet', index);
     });
 
+    // s'assurer que presser enter dans un des champs de la saisie
+    // n'utilise pas un submit de la saisie liste
+    this.keypress(function (e) {
+        if ((e.which == 13)
+          // si on a pressé enter sur un submit, on ne change rien
+          && (e.target.type !== 'submit')) {
+            $(this).parents('form').submit();
+            return false;
+        }
+    });
+
     this.sortable(options.sortable);
 
     return this;
