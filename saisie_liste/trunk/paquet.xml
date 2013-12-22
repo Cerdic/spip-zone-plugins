@@ -22,6 +22,8 @@
   <pipeline nom="jquerui_plugins" inclure="saisie_liste_objets_pipelines.php" />
   <pipeline nom="insert_head" inclure="saisie_liste_objets_pipelines.php" />
   <pipeline nom="header_prive" inclure="saisie_liste_objets_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.31.4;]" />
 	<!--
 		Exemple de commandes
 		* dependances
