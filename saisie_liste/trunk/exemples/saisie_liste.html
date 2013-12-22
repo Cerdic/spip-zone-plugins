@@ -16,13 +16,27 @@
 ]
 
 [(#ENV{t}|=={2}|oui)
-  <div class="ajax">
-    #FORMULAIRE_DEMO_LISTE_2
-  </div>
+  [(#PLUGIN{yaml}|oui)
+    <div class="ajax">
+      #FORMULAIRE_DEMO_LISTE_2
+    </div>
+  ]
+  [(#PLUGIN{yaml}|non)
+    <div class="error">
+      <:saisie_liste:necessite_yaml:>
+    </div>
+  ]
 ]
 
 [(#ENV{t}|=={3}|oui)
-  <div class="ajax">
-    #FORMULAIRE_DEMO_LISTE_3
-  </div>
+  [(#PLUGIN{yaml}|oui)
+    <div class="ajax">
+      #FORMULAIRE_DEMO_LISTE_3
+    </div>
+  ]
+  [(#PLUGIN{yaml}|non)
+    <div class="error">
+      <:saisie_liste:necessite_yaml:>
+    </div>
+  ]
 ]

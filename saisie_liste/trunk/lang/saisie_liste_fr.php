@@ -14,6 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // E
     'erreur_saisie_invalide' => "Définition de saisie invalide : @tableau@.",
 
+    // N
+    'necessite_yaml' => 'Il faut installer le plugin yaml pour que cet exemple fonctionne.',
+
     // S
     'saisie_liste_titre' => 'Saisie liste',
 
