@@ -9,12 +9,12 @@ function formulaires_exemple_lo_ajax_yaml_charger_dist () {
 
 function formulaires_exemple_lo_ajax_yaml_verifier_dist () {
 
-  $erreurs = liste_objets_verifier('liste_1');
+  $erreurs = liste_verifier('liste_1');
 
   return $erreurs;
 }
 
 function formulaires_exemple_lo_ajax_yaml_traiter_dist () {
 
-  if (liste_objets_traiter('liste_1')) return;
+  if (liste_traiter('liste_1')) return;
 }

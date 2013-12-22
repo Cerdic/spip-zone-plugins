@@ -11,8 +11,8 @@
   <input type="hidden" name="#ENV{nom}\[permutations\]"
          value="[(#GET{valeur}|count|enumerer|joindre{','})]" />
 
-  <ul id="liste-objets-#ENV{nom}" class="liste-objets">
-    <BOUCLE_liste_objets(DATA) {enum 0, #GET{valeur}|count}>
+  <ul id="saisie-liste-#ENV{nom}" class="saisie-liste">
+    <BOUCLE_liste(DATA) {enum 0, #GET{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>
         <fieldset class="table">
@@ -67,7 +67,7 @@
                  value="Supprimer" />
         </div>
       </fieldset></li>
-    </BOUCLE_liste_objets>
+    </BOUCLE_liste>
   </ul>
 
   <input type="submit" name="#ENV{nom}[action][ajouter]" value="Ajouter Objet" />
@@ -82,6 +82,6 @@
   ]
   [(#REM) sinon on prend le squelette par défaut.]
   [(#CHEMIN{javascript/saisie_#ENV{nom}}|non)
-    #INCLURE{fond=javascript/saisie_liste_objets.js, nom=#ENV{nom}}
+    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}}
   ]
 </script>

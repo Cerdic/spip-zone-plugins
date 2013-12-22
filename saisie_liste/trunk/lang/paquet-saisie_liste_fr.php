@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'saisie_liste_objets_description' => '',
-	'saisie_liste_objets_nom' => 'Saisie liste d\'objets',
-	'saisie_liste_objets_slogan' => 'Une saisie pour des listes ordonnées d\'objets.',
+	'saisie_liste_description' => '',
+	'saisie_liste_nom' => 'Saisie liste',
+	'saisie_liste_slogan' => 'Une saisie pour toutes sortes de listes.',
 );
 
 ?>

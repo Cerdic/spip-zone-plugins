@@ -1,7 +1,7 @@
 <paquet
-	prefix="saisie_liste_objets"
+	prefix="saisie_liste"
 	categorie="outil"
-	version="1.0.1"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.10;3.0.*]"
 	logo=""
@@ -12,16 +12,16 @@
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
-	<nom>Saisie liste d&#039;objets</nom>
+	<nom>Saisie liste</nom>
 
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
-	<auteur>michel</auteur>
+	<auteur>bystrano</auteur>
 
 	<licence>GNU/GPL</licence>
 
-  <pipeline nom="jquerui_plugins" inclure="saisie_liste_objets_pipelines.php" />
-  <pipeline nom="insert_head" inclure="saisie_liste_objets_pipelines.php" />
-  <pipeline nom="header_prive" inclure="saisie_liste_objets_pipelines.php" />
+  <pipeline nom="jquerui_plugins" inclure="saisie_liste_pipelines.php" />
+  <pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
+  <pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.31.4;[" />
 	<utilise nom="formulaires_yaml" compatibilite="[1.0.2;[" />
@@ -32,18 +32,16 @@
 		<utilise nom="saisies" compatibilite="[1.21.0;]" />
 		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
 		* pipelines
-		<pipeline nom="autoriser" inclure="saisie_liste_objets_autorisations.php" />
-		<pipeline nom="insert_head" inclure="saisie_liste_objets_pipelines.php" />
+		<pipeline nom="autoriser" inclure="saisie_liste_autorisations.php" />
+		<pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
 		* declarer un pipeline 
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
 				menu_accueil (A eviter), menu_edition, menu_publication,
 				menu_activite, menu_squelette, menu_administration, menu_configuration 
-		<menu nom="saisie_liste_objets" titre="saisie_liste_objets:saisie_liste_objets_titre" parent="menu_edition"  icone="images/saisie_liste_objets-16.png" />
+		<menu nom="saisie_liste" titre="saisie_liste:saisie_liste_titre" parent="menu_edition"  icone="images/saisie_liste-16.png" />
 		* parents d'onglets... configuration, plugins, statistiques, ... 
-		<onglet nom="saisie_liste_objets" titre="saisie_liste_objets:saisie_liste_objets_titre" parent="configuration" icone="images/saisie_liste_objets-24.png" />
+		<onglet nom="saisie_liste" titre="saisie_liste:saisie_liste_titre" parent="configuration" icone="images/saisie_liste-24.png" />
 	-->
-
-
 
 </paquet>

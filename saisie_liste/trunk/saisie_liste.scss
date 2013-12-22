@@ -9,7 +9,7 @@
 }
 
 /* premier niveau de li */
-li.saisie_liste_objets {
+li.saisie_liste {
   padding: 0 10px;
   label {
     float: none;
@@ -17,7 +17,7 @@ li.saisie_liste_objets {
   }
 }
 
-.liste-objets {
+.saisie-liste {
   border: none;
   .objet {
     vertical-align: middle;
@@ -42,7 +42,7 @@ li.saisie_liste_objets {
 }
 
 /* effets pour jqueryui.sortable */
-.liste-objets.ui-sortable > li {
+.saisie-liste.ui-sortable > li {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;

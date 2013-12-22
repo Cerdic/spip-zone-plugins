@@ -1,5 +1,5 @@
 *========================*
-| La saisie liste-objets |
+| La saisie liste |
 *========================*
 
 C'est quoi ?
@@ -12,7 +12,7 @@ et/ou de modifier leur ordre. Elle peut fonctionner sans javascript, mais
 pour les utilisateurs qui l'activent, on peux réordonner les objets par
 glisser-déposer via le plugin jqueryui.sortable.
 On peut voir la saisie en plein action sur la page
-/ecrire/?exec=exemples_saisie_liste_objets .
+/ecrire/?exec=exemples_saisie_liste .
 
 Appel de la saisie
 ------------------
@@ -30,7 +30,7 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
           - defaut  => Le tableau des valeurs par défaut de la saisie.
   ]
 
-  [(#SAISIE{liste_objets, ma-liste,
+  [(#SAISIE{liste, ma-liste,
             label=Objets,
             saisies=#ARRAY{0, #ARRAY{saisie, input,
                                      label, Titre de l'objet,
@@ -43,7 +43,7 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
 On peut aussi utiliser le format de la balise #GENERER_SAISIES :
 
   $ma-saisie = array(
-      'saisie'  => 'liste_objets',
+      'saisie'  => 'liste',
       'options' => array(
             'nom'     => 'ma-liste',
             'label'   => 'Objets',
@@ -74,18 +74,18 @@ utilisateurs qui n'ont pas activé le javascript, il faut executer des
 traitement au début des fonctions vérifier et traiter. Il est impératif de
 toujours commencer vos fonctions verifier par :
 
-  if (liste_objets_verifier('ma-liste')) return;
+  if (liste_verifier('ma-liste')) return;
 
 et vos fonctions traiter par :
 
-  if (liste_objets_traiter('ma-liste')) return;
+  if (liste_traiter('ma-liste')) return;
 
-où 'ma-liste' est le nom de la saisie liste_objets que vous avez créé.
-Si le formulaire contient plusieurs saisies liste_objets, il faut
+où 'ma-liste' est le nom de la saisie liste que vous avez créé.
+Si le formulaire contient plusieurs saisies liste, il faut
 executer ces traitements pour chacune d'entre elles.
 Ce code permet de prendre la main sur les fonctions vérifier et traiter
 définies pour le formulaire quand l'utilisateur clique sur "monter",
-"supprimer" ou un autre submit spécifique à la saisie liste-objets.
+"supprimer" ou un autre submit spécifique à la saisie liste.
 
 Ceci fait, on peut récupérer les valeurs saisies en appelant
 
@@ -112,7 +112,7 @@ Personnalisation du glisser-déposer
 -----------------------------------
 
 Pour personaliser l'appel au plugin jquerui.sortable, on peut surcharger
-le squelette javascript/saisie_liste_objets.js.html (voir le code de ce
+le squelette javascript/saisie_liste.js.html (voir le code de ce
 squelette pour plus d'infos). On peut aussi créer un fichier
 javascript/saisie_ma-liste.js.html pour surcharger une saisie
 particulière.

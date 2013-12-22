@@ -1,4 +1,4 @@
-<h1>Page de test pour la saisie liste_objets</h1>
+<h1>Page de test pour la saisie liste</h1>
 
 <div class="formulaire_spip formulaire_exemple_lo">
 
@@ -9,7 +9,7 @@
     #ACTION_FORMULAIRE{#ENV{action}}
 
     <ul>
-    [(#SAISIE{liste_objets, liste_1,
+    [(#SAISIE{liste, liste_1,
               label=1ère liste de test,
               saisies=#ARRAY{0, #ARRAY{saisie, input,
                                        label, Titre de l'objet,
@@ -20,7 +20,7 @@
                                        rows, 4}}
     })]
 
-    [(#SAISIE{liste_objets, liste_2,
+    [(#SAISIE{liste, liste_2,
               label=2eme liste de test,
               inclure=exemples/inc,
               saisies=#ARRAY{0, #ARRAY{saisie, hidden,

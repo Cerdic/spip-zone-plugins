@@ -8,37 +8,37 @@
   vertical-align: top; }
 
 /* premier niveau de li */
-li.saisie_liste_objets {
+li.saisie_liste {
   padding: 0 10px; }
-  li.saisie_liste_objets label {
+  li.saisie_liste label {
     float: none;
     margin-left: 0; }
 
-.liste-objets {
+.saisie-liste {
   border: none; }
-  .liste-objets .objet {
+  .saisie-liste .objet {
     vertical-align: middle;
     text-align: center; }
-  .liste-objets .liste-saisies {
+  .saisie-liste .liste-saisies {
     margin: 0;
     padding: 0; }
-    .liste-objets .liste-saisies > li {
+    .saisie-liste .liste-saisies > li {
       padding: 5px;
       text-align: left; }
-  .liste-objets fieldset {
+  .saisie-liste fieldset {
     border: none;
     margin: 0;
     padding: 0; }
-  .liste-objets > li {
+  .saisie-liste > li {
     padding: 3px; }
 
 /* effets pour jqueryui.sortable */
-.liste-objets.ui-sortable > li {
+.saisie-liste.ui-sortable > li {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;
   margin: 5px; }
-  .liste-objets.ui-sortable > li:hover {
+  .saisie-liste.ui-sortable > li:hover {
     background-color: #EBE7E7;
     background-color: rgba(232, 232, 232, 0.69); }
 

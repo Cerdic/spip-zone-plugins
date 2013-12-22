@@ -53,7 +53,7 @@ function preparer_tableau_saisie ($tableau_saisie) {
     return $resultat;
   }
   else {
-    return 'ERREUR SAISIE LISTE_OBJETS : mauvais paramètres.';
+    return 'ERREUR SAISIE LISTE : mauvais paramètres.';
   }
 }
 
@@ -62,14 +62,14 @@ function preparer_tableau_saisie ($tableau_saisie) {
  *
  * @param array $tableau_saisie
  *     Un tableau de saisies au format de #GENERER_SAISIES représentant
- *     un objet de la saisie liste_objets.
+ *     un objet de la saisie liste.
  * @param array $valeurs
- *     Les valeurs par défaut, pour la saisie liste_objets en entier.
+ *     Les valeurs par défaut, pour la saisie liste en entier.
  * @param array $index_objet
  *     L'index de l'objet dont on veut charger les valeurs.
  * @return array
  *     Un tableau de saisies au format de #GENERER_SAISIES représentant
- *     un objet de la saisie liste_objets, dans lequel l'objet $index_objet
+ *     un objet de la saisie liste, dans lequel l'objet $index_objet
  *     a comme valeurs par défaut les valeurs de la $index_objet-ième
  *     ligne du tableau $valeurs.
  */
@@ -88,11 +88,11 @@ function charger_valeurs ($tableau_saisie, $valeurs, $index_objet) {
  *
  * @param array $tableau_saisie
  *     Un tableau de saisies au format de #GENERER_SAISIES représentant
- *     un objet de la saisie liste_objets.
+ *     un objet de la saisie liste.
  * @param array $index_objet
  *     L'index de l'objet en cours de traitement
- * @param array $nom_saisie_liste_objets
- *     Le nom de la saisie liste-objets
+ * @param array $nom_saisie_liste
+ *     Le nom de la saisie liste
  * @return array
  *     Le tableau $tableau_saisie dans lequels on a renommé les saisies.
  */
@@ -110,10 +110,10 @@ function renommer_saisies ($tableau_saisie, $index_objet, $nom_objet) {
 /**
  * filtrer_valeurs - filtre un tableau de valeurs pour retirer les infos
  *     qui n'importent que pour le fonctionnement interne de la saisie
- *     liste-objets. Retire aussi les valeurs vides.
+ *     liste. Retire aussi les valeurs vides.
  *
  * @param array $valeurs
- *     Les valeurs retournées par _request('nom-saisie-liste-objets')
+ *     Les valeurs retournées par _request('nom-saisie-liste')
  * @return array
  *     Les valeurs prêtes à être utilisées dans les fonctions verifier et traiter.
  */
@@ -171,10 +171,10 @@ function permuter ($tableau, $permutations) {
 /**
  * executer_actions_liste_objet - execute les actions demandées par la
  *     valeur associée à la clé 'action' d'un tableau de valeurs retourné
- *     par une saisie liste_objets
+ *     par une saisie liste
  *
  * @param array $valeurs
- *     un tableau de valeurs retourné par une saisie liste_objets
+ *     un tableau de valeurs retourné par une saisie liste
  * @return array
  *     Le tableau après execution des actions.
  */
@@ -217,11 +217,11 @@ function executer_actions_liste_objet ($valeurs) {
 }
 
 /**
- * traitements_liste_objets - execute les traitements nécessaire pour
+ * traitements_liste - execute les traitements nécessaire pour
  *     le bon fonctionnement d'une saisie liste_objet.
  *
  * @param string $nom_saisie
- *     le nom d'une saisie liste_objets
+ *     le nom d'une saisie liste
  * @param string $appelant
  *     le contexte dans lequel la fonction est appelée. Deux valeurs
  *     sont possibles : 'verifier' ou 'traiter'
@@ -229,7 +229,7 @@ function executer_actions_liste_objet ($valeurs) {
  *     TRUE si l'on souhaite interrompre les traitements définis par les
  *     fonctions verifier et traiter du formulaire. FALSE, sinon.
  */
-function traitements_liste_objets ($nom_saisie, $appelant) {
+function traitements_liste ($nom_saisie, $appelant) {
 
   static $interrompre_traitements_formulaire;
 
@@ -256,9 +256,9 @@ function traitements_liste_objets ($nom_saisie, $appelant) {
   return $interrompre_traitements_formulaire;
 }
 
-function liste_objets_verifier ($nom_saisie) {
+function liste_verifier ($nom_saisie) {
 
-  if (traitements_liste_objets($nom_saisie, 'verifier')) {
+  if (traitements_liste($nom_saisie, 'verifier')) {
     /* on retourne un tableau non vide, mais on ne met pas de message
        d'erreur. On souhaite juste interrompre les traitments définis par
        le formulaire*/
@@ -270,7 +270,7 @@ function liste_objets_verifier ($nom_saisie) {
   }
 }
 
-function liste_objets_traiter ($nom_saisie) {
+function liste_traiter ($nom_saisie) {
 
-  return traitements_liste_objets($nom_saisie, 'traiter');
+  return traitements_liste($nom_saisie, 'traiter');
 }

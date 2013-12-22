@@ -1,4 +1,4 @@
-$.fn.saisieListeObjets = function( options ) {
+$.fn.saisieListe = function( options ) {
 
     this.nom = options.nom;
 

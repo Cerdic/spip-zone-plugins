@@ -14,15 +14,15 @@ function formulaires_exemple_lo_charger_dist () {
 
 function formulaires_exemple_lo_verifier_dist () {
 
-  if (liste_objets_verifier('liste_1')) return;
-  if (liste_objets_verifier('liste_2')) return;
+  if (liste_verifier('liste_1')) return;
+  if (liste_verifier('liste_2')) return;
 
 }
 
 function formulaires_exemple_lo_traiter_dist () {
 
-  if (liste_objets_traiter('liste_1')) return;
-  if (liste_objets_traiter('liste_2')) return;
+  if (liste_traiter('liste_1')) return;
+  if (liste_traiter('liste_2')) return;
 
   return array(
            'message_ok' => var_export(_request('liste_1'), TRUE) . '<br>' .
