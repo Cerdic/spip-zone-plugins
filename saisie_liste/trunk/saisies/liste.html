@@ -59,11 +59,13 @@
           </ul>
         </div>
 
-        <div class="bouton-supprimer td">
-          <input type="submit"
-                 name="#ENV{nom}[action][supprimer-#GET{compteur_objets}]"
-                 value="Supprimer" />
-        </div>
+        [(#ENV{cacher_supprimer}|non)
+          <div class="bouton-supprimer td">
+            <input type="submit"
+                   name="#ENV{nom}\[action\]\[supprimer-#GET{compteur_objets}\]"
+                   value="Supprimer" />
+          </div>
+        ]
       </fieldset></li>
     </BOUCLE_liste>
   </ul>

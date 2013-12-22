@@ -5,12 +5,14 @@
     label: "Messages"
     legende: "Une liste de messages, dans l'ordre dans lequel ils ont été envoyés"
     ordre_fixe: oui
+    cacher_supprimer: oui
   saisies:
     - 
       saisie: input
       options:
         nom: msg
         label: Message
+        size: 50
     - 
       saisie: checkbox
       options:

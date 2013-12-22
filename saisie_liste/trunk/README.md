@@ -29,6 +29,8 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
         - defaut          => Le tableau des valeurs par défaut de la saisie
         - interdire_ajout => Interdit d'ajouter des éléments à la liste.
         - ordre_fixe      => Interdit de réordonner les éléments de la liste
+        - cacher_supprimer => Cache les boutons supprimer sur les éléments
+                              de la liste
 ]
 
 [(#SAISIE{liste, ma-liste,
