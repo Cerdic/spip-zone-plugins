@@ -21,12 +21,14 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
 ```
 [(#REM)
   parametres :
-        - nom     => Le nom de la saisie. Obligatoire, le reste est
-                     optionnel.
-        - label   => Le label.
-        - legende => La légende du fieldset qui contient la saisie.
-        - saisies => La liste de saisies définissant un élément.
-        - defaut  => Le tableau des valeurs par défaut de la saisie.
+        - nom             => Le nom de la saisie. Obligatoire, le reste est
+                             optionnel
+        - label           => Le label
+        - legende         => La légende du fieldset qui contient la saisie
+        - saisies         => La liste de saisies définissant un élément
+        - defaut          => Le tableau des valeurs par défaut de la saisie
+        - interdire_ajout => Interdit d'ajouter des éléments à la liste.
+        - ordre_fixe      => Interdit de réordonner les éléments de la liste
 ]
 
 [(#SAISIE{liste, ma-liste,

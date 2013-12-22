@@ -17,20 +17,22 @@
       <li>
         <fieldset class="table">
 
-        <div class="boutons-bouger td">
-          [(#COMPTEUR_BOUCLE|=={1}|non)
-            <input type="submit"
-                   name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
-                   value="Monter"
-                   class="bouton-monter" />
-          ]
-          [(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
-            <input type="submit"
-                   name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
-                   value="Descendre"
-                   class="bouton-descendre" />
-          ]
-        </div>
+        [(#ENV{ordre_fixe}|non)
+          <div class="boutons-bouger td">
+            [(#COMPTEUR_BOUCLE|=={1}|non)
+              <input type="submit"
+                     name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+                     value="Monter"
+                     class="bouton-monter" />
+            ]
+            [(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
+              <input type="submit"
+                     name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+                     value="Descendre"
+                     class="bouton-descendre" />
+            ]
+          </div>
+        ]
 
         <div class="objet td">
           <ul class="liste-saisies">
@@ -76,10 +78,10 @@
   [(#REM) s'il y a un fichier javascripts/saisie_NOM_DE_LA_SAISIE, on le
           prend. ]
   [(#CHEMIN{javascript/saisie_#ENV{nom}.js}|oui)
-    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}}
+    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}, ordre_fixe}
   ]
   [(#REM) sinon on prend le squelette par défaut.]
   [(#CHEMIN{javascript/saisie_#ENV{nom}}|non)
-    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}}
+    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}, ordre_fixe}
   ]
 </script>

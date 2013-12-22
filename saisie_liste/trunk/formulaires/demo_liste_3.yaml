@@ -4,6 +4,7 @@
     nom: messages
     label: "Messages"
     legende: "Une liste de messages, dans l'ordre dans lequel ils ont été envoyés"
+    ordre_fixe: oui
   saisies:
     - 
       saisie: input

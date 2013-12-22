@@ -2,7 +2,9 @@ $.fn.saisieListe = function( options ) {
 
     this.nom = options.nom;
 
-    var self = this,
+    if (options.sortable !== false) {
+
+        var self = this,
         defaut_sortable = {
             // valeurs par défaut pour sortable
             containement: 'parent',
@@ -10,22 +12,25 @@ $.fn.saisieListe = function( options ) {
             placeholder: 'ui-state-highlight'
         };
 
-    options = $.extend(true,
-                       {
-                           sortable: {
-                               update: function () { return; }
-                           }
-                       },
-                       options
-                      );
+        options = $.extend(true,
+                           {
+                               sortable: {
+                                   update: function () { return; }
+                               }
+                           },
+                           options
+                          );
 
-    options.sortable.update = calculerFonctionUpdate(options.sortable.update);
-    options.sortable = $.extend(defaut_sortable, options.sortable);
+        options.sortable.update = calculerFonctionUpdate(options.sortable.update);
+        options.sortable = $.extend(defaut_sortable, options.sortable);
 
-    // numéroter les li's
-    this.find('> li').each(function (index, li) {
-        $(li).data('index_objet', index);
-    });
+        // numéroter les li's
+        this.find('> li').each(function (index, li) {
+            $(li).data('index_objet', index);
+        });
+
+        this.sortable(options.sortable);
+    }
 
     // s'assurer que presser enter dans un des champs de la saisie
     // n'utilise pas un submit de la saisie liste
@@ -37,8 +42,6 @@ $.fn.saisieListe = function( options ) {
             return false;
         }
     });
-
-    this.sortable(options.sortable);
 
     return this;
 
