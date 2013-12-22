@@ -104,7 +104,7 @@ function renommer_saisies ($tableau_saisie, $index_objet, $nom_objet) {
 }
 
 /****************************/
-/* Traitments du formulaire */
+/* Traitements du formulaire */
 /****************************/
 
 /**
@@ -231,29 +231,27 @@ function executer_actions_liste_objet ($valeurs) {
  */
 function traitements_liste ($nom_saisie, $appelant) {
 
-  static $interrompre_traitements_formulaire;
+  static $interrompre_traitements_formulaire = array();
 
   /* cette fonction est appellée dans vérifier, puis dans traiter.
      La première fois on calcule la valeur de $interrompre_traitements_formulaire,
      et la deuxième fois on ne fais que la retourner. */
   if ($appelant === 'verifier') {
-    $interrompre_traitements_formulaire = FALSE;
+    $interrompre_traitements_formulaire[$nom_saisie] = FALSE;
   } else if ($appelant === 'traiter') {
-    return $interrompre_traitements_formulaire;
+      return $interrompre_traitements_formulaire[$nom_saisie];
   }
 
   $valeurs = _request($nom_saisie);
 
-  if (array_key_exists('action', $valeurs)) {
-
-    $interrompre_traitements_formulaire = TRUE;
-
+  if ($valeurs AND array_key_exists('action', $valeurs)) {
+    $interrompre_traitements_formulaire[$nom_saisie] = TRUE;
   }
 
   $valeurs = executer_actions_liste_objet ($valeurs);
   set_request($nom_saisie, $valeurs);
 
-  return $interrompre_traitements_formulaire;
+  return $interrompre_traitements_formulaire[$nom_saisie];
 }
 
 function liste_verifier ($nom_saisie) {
