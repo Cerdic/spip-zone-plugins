@@ -96,7 +96,7 @@ function exec_association_autorisations() {
 				echo '<td class="text">'. _T('asso:groupe_'.$groupe['id_groupe']) .'</td>';
 				echo '<td class="integer">'. $groupe['nbr'] .'</td>';
 				echo '<td class="text">'. $groupe['commentaire'] .'</td>';
-				echo association_bouton_edit('groupe_autorisations', $groupe['id_groupe']);
+				echo association_bouton_edit('groupe_autorisations', 'id='.$groupe['id_groupe']);
 				echo association_bouton_list('membres_groupe', $groupe['id_groupe']);
 				echo "</tr>\n";
 			}
