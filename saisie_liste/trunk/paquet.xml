@@ -19,7 +19,9 @@
 
 	<licence>GNU/GPL</licence>
 
-  <pipeline nom="jquerui_plugins" inclure="saisie_liste_objets_pipeplines.php" />
+  <pipeline nom="jquerui_plugins" inclure="saisie_liste_objets_pipelines.php" />
+  <pipeline nom="insert_head" inclure="saisie_liste_objets_pipelines.php" />
+  <pipeline nom="header_prive" inclure="saisie_liste_objets_pipelines.php" />
 	<!--
 		Exemple de commandes
 		* dependances
