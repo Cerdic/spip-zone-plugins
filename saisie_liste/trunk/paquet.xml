@@ -24,7 +24,7 @@
   <pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.31.4;[" />
-	<utilise nom="formulaires_yaml" compatibilite="[1.0.2;[" />
+	<necessite nom="yaml" compatibilite="[1.5.1;[" />
 	<!--
 		Exemple de commandes
 		* dependances

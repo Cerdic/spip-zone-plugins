@@ -78,11 +78,13 @@ utilisateurs qui n'ont pas activé le javascript, il faut executer des
 traitement au début des fonctions vérifier et traiter. Il est impératif de
 toujours commencer vos fonctions verifier par :
 
-  if (liste_verifier('ma-liste')) return;
+  if (liste_verifier('ma-liste'))
+      return array();
 
 et vos fonctions traiter par :
 
-  if (liste_traiter('ma-liste')) return;
+  if (liste_traiter('ma-liste'))
+      return array('editable' => 'oui');
 
 où 'ma-liste' est le nom de la saisie liste que vous avez créé.
 Si le formulaire contient plusieurs saisies liste, il faut
