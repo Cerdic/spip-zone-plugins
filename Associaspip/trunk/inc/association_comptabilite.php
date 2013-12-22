@@ -153,7 +153,7 @@ function comptabilite_liste_plancodes($id='') {
  *
  * @param string $id
  *   Identifiant du plan comptable qui nous interesse
- * @return array 
+ * @return array
  *   Liste de : classe de depart, classe d'arrivee, longueur minimale d'une reference comptable
  */
 function comptabilite_liste_planregles($id='') {
@@ -166,7 +166,10 @@ function comptabilite_liste_planregles($id='') {
 	    'C' => $GLOBALS['association_metas']['classe_produits'],
 	    'D' => $GLOBALS['association_metas']['classe_charges'],
 	);
-    include_spip('inc/pcg2'.$id); // charger le fichier de regles comptables qui retourne un tableau
+    else {
+	include_spip('inc/pcg2'.$id, true); // charger le fichier de regles comptables...
+	return $GLOBALS['ar']; // ...et renvoyer le tableau de Regles Comptables (Accounting Rules)
+    }
 }
 
 /** @} */
