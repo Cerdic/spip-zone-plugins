@@ -210,7 +210,7 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 			$tbd .= '<td class="given-name">'.$data['prenom'].'</td>';
 		if ($GLOBALS['association_metas']['aff_groupes']) {
 			$tbd .= '<td class="organisation-unit">';
-			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_auteur='.$id_auteur);
+			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_groupe>=100 AND l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
 				$tbd .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
 				while ($row_groupes = sql_fetch($query_groupes)) {
