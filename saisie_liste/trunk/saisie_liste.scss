@@ -30,6 +30,9 @@ li.saisie_liste {
       padding: 5px;
       text-align: left;
     }
+    & p {
+      margin-bottom: 0;
+    }
   }
   fieldset {
     border: none;

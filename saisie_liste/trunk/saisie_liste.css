@@ -25,6 +25,8 @@ li.saisie_liste {
     .saisie-liste .liste-saisies > li {
       padding: 5px;
       text-align: left; }
+    .saisie-liste .liste-saisies p {
+      margin-bottom: 0; }
   .saisie-liste fieldset {
     border: none;
     margin: 0;
