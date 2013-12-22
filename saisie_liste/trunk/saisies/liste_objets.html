@@ -1,2 +1,28 @@
+<fieldset>
+  <legend>#ENV{label}</legend>
+
+  <ul>
+    <BOUCLE_liste_objets(DATA) {enum 0,#ENV{valeur}|count}>
+      #SET{compteur_objets, #COMPTEUR_BOUCLE}
+      <li><fieldset>
+        <legend>Objet no #GET{compteur_objets}</legend>
+
+        <div class="bouton-effacer"></div>
+
+        <ul>
+          <BOUCLE_saisies_objet(DATA) {source table, #ENV{objet}}>
+            [(#REM) il semblerait que les traitements autos sur #VALEUR
+                    font des trucs bizarres, alors on récupère la valeur
+                    dans le tableau à la main. ]
+            [(#ENV{objet}|table_valeur{#CLE}
+              |liste_objets_numeroter_saisie{#ENV{nom}, #GET{compteur_objets}|moins{1}})]
+          </BOUCLE_saisies_objet>
+        </ul>
+      </fieldset></li>
+    </BOUCLE_liste_objets>
+  </ul>
+
+</fieldset>
+
 <?php var_dump($contexte); ?>
 
