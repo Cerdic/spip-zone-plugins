@@ -27,6 +27,7 @@ function joindre ($tableau, $liant) {
  *         'saisie'             => 'type_saisie',
  *         'nom'                => 'nom_saisie',
  *         'un_autre_paramètre' => 'blabla',
+ *         'saisies'            => array( … ),
  *        )
  *
  * vers le format exigé par #GENERER_SAISIES.
@@ -39,8 +40,12 @@ function joindre ($tableau, $liant) {
 function preparer_tableau_saisie ($tableau_saisie) {
 
   if (array_key_exists('saisie', $tableau_saisie)) {
-    $resultat = array('saisie' => $tableau_saisie['saisie']);
+    $resultat = array(
+        'saisie'  => $tableau_saisie['saisie'],
+        'saisies' => $tableau_saisie['saisies'],
+    );
     unset($tableau_saisie['saisie']);
+    unset($tableau_saisie['saisies']);
     $resultat['options'] = $tableau_saisie;
     return $resultat;
   }

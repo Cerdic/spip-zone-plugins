@@ -1,9 +1,13 @@
- -
+ - 
   saisie: liste_objets
   options:
     nom: liste_1
     label: "1ère liste de test"
-    saisies:
+    defaut:
+     -
+      nom: "une valeur par défaut"
+      description: "Description de la valeur par défaut"
+  saisies:
      -
       saisie: input
       options:
@@ -15,7 +19,3 @@
         nom: description
         label: Description
         rows: 4
-    defaut:
-     -
-      nom: "une valeur par défaut"
-      description: "Description de la valeur par défaut"
