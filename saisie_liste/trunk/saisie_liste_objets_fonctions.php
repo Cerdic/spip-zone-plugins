@@ -113,7 +113,10 @@ function traitements_liste_objets ($nom_saisie) {
     set_request($nom_saisie, filtrer_valeurs_vides(
                                  permuter($valeurs, $permutations)));
 
-    return $erreurs = array($nom_saisie => $action . '-' . $index_objet . ' ok');
+    // on envoie une erreur silencieuse au formulaire pour ne pas executer
+    // les traitements définis pour le vérifier et traiter
+    return $erreurs = array($nom_saisie =>
+                            '<div style="display: none;">' . $action . '-' . $index_objet . ' ok</div>');
   }
 
   set_request($nom_saisie, filtrer_valeurs_vides(
