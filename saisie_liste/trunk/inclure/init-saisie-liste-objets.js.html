@@ -1,0 +1,27 @@
+[(#REM) Appel du plugin jQuery saisieListeObjets.
+
+  Ce plugin accepte un objet js d'options en paramètre. Les clés possibles
+  pour cet objet sont :
+
+    - nom :      Le nom de la saisie en question
+    - sortable : Un objet contenant les options qui seront passées à
+                 jquerui.sortable.
+
+  Exemple d'appel :
+
+    $('#ma-saisie').saisieListeObjets({
+        nom: 'nom-de-ma-saisie',
+        sortable: {
+            update: function (event, ui) {
+                console.log(this);
+                console.log(event);
+                console.log(ui);
+            },
+            placeholder: 'une-classe-placeholder'
+        }
+    });
+
+]
+$('#liste-objets-#ENV{nom}').saisieListeObjets({
+    nom: '#ENV{nom}'
+});

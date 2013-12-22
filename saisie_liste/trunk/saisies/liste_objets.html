@@ -50,14 +50,5 @@
 </fieldset>
 
 <script type="text/javascript">
-  $('#liste-objets-#ENV{nom}').saisieListeObjets({
-    nom: '#ENV{nom}',
-    sortable: {
-      update: function (event, ui) {
-                console.log(this);
-                console.log(event);
-                console.log(ui);
-              }
-    }
-  });
+  #INCLURE{fond=inclure/init-saisie-liste-objets.js, nom=#ENV{nom}}
 </script>
