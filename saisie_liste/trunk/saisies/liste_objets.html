@@ -16,17 +16,20 @@
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>
         <fieldset class="table">
-        <legend>Objet #GET{compteur_objets}</legend>
 
         <div class="boutons-bouger td">
-          <input type="submit"
-                 name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
-                 value="Monter"
-                 class="bouton-monter" />
-          <input type="submit"
-                 name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
-                 value="Descendre"
-                 class="bouton-descendre" />
+          [(#COMPTEUR_BOUCLE|=={1}|non)
+            <input type="submit"
+                   name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+                   value="Monter"
+                   class="bouton-monter" />
+          ]
+          [(#COMPTEUR_BOUCLE|!=={#TOTAL_BOUCLE}|oui)
+            <input type="submit"
+                   name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+                   value="Descendre"
+                   class="bouton-descendre" />
+          ]
         </div>
 
         <div class="td">
