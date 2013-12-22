@@ -78,17 +78,21 @@ utilisateurs qui n'ont pas activé le javascript, il faut executer des
 traitement au début des fonctions vérifier et traiter. Il est impératif de
 toujours commencer vos fonctions verifier par :
 
-  if (liste_verifier('ma-liste'))
+  if (saisies_liste_verifier('ma-liste'))
       return array();
 
 et vos fonctions traiter par :
 
-  if (liste_traiter('ma-liste'))
+  if (saisies_liste_traiter('ma-liste'))
       return array('editable' => 'oui');
 
 où 'ma-liste' est le nom de la saisie liste que vous avez créé.
-Si le formulaire contient plusieurs saisies liste, il faut
-executer ces traitements pour chacune d'entre elles.
+Si le formulaire contient plusieurs saisies liste, il faut passer à ces
+fonctions un tableau des noms des saisies, p.ex :
+
+  if (saisies_liste_verifier(array('liste-1', 'liste-2', 'liste-3')))
+      return array();
+
 Ce code permet de prendre la main sur les fonctions vérifier et traiter
 définies pour le formulaire quand l'utilisateur clique sur "monter",
 "supprimer" ou un autre submit spécifique à la saisie liste.

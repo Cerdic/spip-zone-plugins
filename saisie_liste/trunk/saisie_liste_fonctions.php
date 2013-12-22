@@ -254,21 +254,50 @@ function traitements_liste ($nom_saisie, $appelant) {
   return $interrompre_traitements_formulaire[$nom_saisie];
 }
 
-function liste_verifier ($nom_saisie) {
+function traitements_listes($saisies, $appelant) {
 
-  if (traitements_liste($nom_saisie, 'verifier')) {
-    /* on retourne un tableau non vide, mais on ne met pas de message
-       d'erreur. On souhaite juste interrompre les traitments définis par
-       le formulaire*/
-    return array('stop' => 'oui');
-  } else {
-    /* Si on retourne un tableau vide, le traitement normal du
-       formulaire aura lieu. */
-    return array();
+  if ( ! is_array($saisies)) {
+    $saisies = array($saisies);
   }
+
+  $resultat = FALSE;
+
+  foreach ($saisies as $nom_saisie) {
+    if (traitements_liste($nom_saisie, $appelant)) {
+      $resultat = $nom_saisie;
+    }
+  }
+  return $resultat;
 }
 
-function liste_traiter ($nom_saisie) {
+/**
+ * verifier et préparer les valeurs de saisies liste
+ *
+ * @param mixed $saisies  Le nom d'une saisie liste ou une liste de nom de
+ *                        saisies liste.
+ * @return mixed   Retourne FALSE si le submit cliqué n'est pas un submit
+ *                 de saisie liste. On peut alors continuer les
+ *                 vérifications.
+ *                 Si le submit est un submit d'une saisie liste, on
+ *                 retourne le nom de la saisie en question.
+ */
+function saisies_liste_verifier ($saisies) {
 
-  return traitements_liste($nom_saisie, 'traiter');
+  return traitements_listes($saisies, 'verifier');
+}
+
+/**
+ * traiter les valeurs de saisies liste
+ *
+ * @param mixed $saisies  Le nom d'une saisie liste ou une liste de nom de
+ *                        saisies liste.
+ * @return mixed   Retourne FALSE si le submit cliqué n'est pas un submit
+ *                 de saisie liste. On peut alors continuer les
+ *                 vérifications.
+ *                 Si le submit est un submit d'une saisie liste, on
+ *                 retourne le nom de la saisie en question.
+ */
+function saisies_liste_traiter ($saisies) {
+
+  return traitements_listes($saisies, 'traiter');
 }

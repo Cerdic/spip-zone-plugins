@@ -14,14 +14,14 @@ function formulaires_exemple_lo_ajax_charger_dist () {
 
 function formulaires_exemple_lo_ajax_verifier_dist () {
 
-  if (liste_verifier('liste_1')) return array();
+  if (saisies_liste_verifier('liste_1')) return array();
 
   return array();
 }
 
 function formulaires_exemple_lo_ajax_traiter_dist () {
 
-  if (liste_traiter('liste_1'))
+  if (saisies_liste_traiter('liste_1'))
       return array('editable' => 'oui');
 
   return array('editable' => 'oui');

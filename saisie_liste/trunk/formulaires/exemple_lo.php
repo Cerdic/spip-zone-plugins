@@ -15,9 +15,10 @@ function formulaires_exemple_lo_charger_dist () {
 
 function formulaires_exemple_lo_verifier_dist () {
 
-  if (liste_verifier('liste_1')) return;
-  if (liste_verifier('liste_2')) return;
+  if (saisies_liste_verifier(array('liste_1', 'liste_2')))
+    return array();
 
+  return array();
 }
 
 function formulaires_exemple_lo_traiter_dist () {
@@ -27,8 +28,8 @@ function formulaires_exemple_lo_traiter_dist () {
                       var_export(_request('liste_2'), TRUE),
   );
 
-  if (liste_traiter('liste_1')) return;
-  if (liste_traiter('liste_2')) return;
+  if (saisies_liste_traiter(array('liste_1', 'liste_2')))
+    return array('editable' => 'oui');
 
   return $valeurs;
 }
