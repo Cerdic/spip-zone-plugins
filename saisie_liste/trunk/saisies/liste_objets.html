@@ -1,11 +1,18 @@
+#SET{valeur, #ARRAY}
+[(#ENV{valeur}|oui)
+  #SET{valeur, #ENV{valeur}}
+]
+[(#ENV{defaut}|oui)
+  #SET{valeur, #ENV{defaut}|array_merge{#GET{valeur}}}
+]
 <fieldset>
   <legend>#ENV{label}</legend>
 
   <input type="hidden" name="#ENV{nom}\[permutations\]"
-         value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
+         value="[(#GET{valeur}|count|enumerer|joindre{','})]" />
 
   <ul id="liste-objets-#ENV{nom}" class="saisie-liste-objets">
-    <BOUCLE_liste_objets(DATA) {enum 0, #ENV{valeur}|count}>
+    <BOUCLE_liste_objets(DATA) {enum 0, #GET{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>
         <fieldset>
@@ -30,13 +37,13 @@
 
             [(#REM) si le tableau ne contient pas de clé "options", on
                     suppose qu'il n'est pas au format de #GENERER_SAISIE.
-                    Il faut alors le convetir à ce format. ]
+                    Il faut alors le convertir à ce format. ]
             [(#GET{saisie}|find{options}|non)
               [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
             ]
 
             [(#REM) charger les valeurs. ]
-            [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}}})]
+            [(#SET{saisie, #GET{saisie}|charger_valeurs{#GET{valeur}, #GET{compteur_objets}}})]
 
             [(#REM) on renomme les saisies pour les grouper par objet. ]
             [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
