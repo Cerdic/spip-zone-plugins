@@ -14,5 +14,8 @@ function formulaires_tester_saisie_liste_objets_charger_dist () {
 
 function formulaires_tester_saisie_liste_objets_verifier_dist () {
 
+  if ( ! traitements_liste_objets_ok('liste_1')) return;
+
+
   var_dump(_request('liste_1'));
 }

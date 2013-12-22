@@ -2,14 +2,10 @@
   <legend>#ENV{label}</legend>
 
   <ul>
-    [(#SET{nb_objets_non_vides, #ENV{valeur}|compter_non_vides})]
-
-    <BOUCLE_liste_objets(DATA) {enum 0, #GET{nb_objets_non_vides}}>
+    <BOUCLE_liste_objets(DATA) {enum 0, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li><fieldset>
         <legend>Objet #GET{compteur_objets}</legend>
-
-        <div class="bouton-effacer"></div>
 
         <ul>
           <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
@@ -33,8 +29,11 @@
 
           </BOUCLE_saisies_objet>
         </ul>
+        <input type="submit"
+               name="#ENV{nom}[action][supprimer-#GET{compteur_objets}]"
+               value="Supprimer" />
       </fieldset></li>
     </BOUCLE_liste_objets>
   </ul>
-
+  <input type="submit" name="ajouter" value="ajouter objet" />
 </fieldset>
