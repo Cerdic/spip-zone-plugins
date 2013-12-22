@@ -58,7 +58,7 @@ li.saisie_liste_objets {
     width: 29px;
     height: 30px;
     background-position: 3px 4px;
-    margin: 8px 0; }
+    margin: 0; }
     .boutons-bouger input:hover, .boutons-bouger input:focus {
       box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
     .boutons-bouger input.bouton-monter {
