@@ -1,11 +1,11 @@
 <?php
 
-function formulaires_exemple_lo_ajax_saisies () {
+function formulaires_demo_liste_2_saisies () {
 
-  return decoder_yaml(find_in_path('formulaires/exemple_lo_ajax.yaml'));
+  return decoder_yaml(find_in_path('formulaires/demo_liste_2.yaml'));
 }
 
-function formulaires_exemple_lo_ajax_charger_dist () {
+function formulaires_demo_liste_2_charger_dist () {
 
   return array(
            'liste_1' => _request('liste_1'),
@@ -13,14 +13,14 @@ function formulaires_exemple_lo_ajax_charger_dist () {
          );
 }
 
-function formulaires_exemple_lo_ajax_verifier_dist () {
+function formulaires_demo_liste_2_verifier_dist () {
 
   if (saisies_liste_verifier(array('liste_1', 'liste_2'))) return array();
 
   return array();
 }
 
-function formulaires_exemple_lo_ajax_traiter_dist () {
+function formulaires_demo_liste_2_traiter_dist () {
 
   if (saisies_liste_traiter(array('liste_1', 'list_2')))
       return array('editable' => 'oui');

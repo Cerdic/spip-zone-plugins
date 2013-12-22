@@ -2,7 +2,6 @@
   saisie: liste
   options:
     nom: liste_1
-    label: "1ère liste de test"
     defaut:
     - 
       nom: "une valeur par défaut"

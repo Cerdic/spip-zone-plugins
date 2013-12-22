@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_exemple_lo_charger_dist () {
+function formulaires_demo_liste_1_charger_dist () {
 
   return array(
            'liste_1' => array(
@@ -14,7 +14,7 @@ function formulaires_exemple_lo_charger_dist () {
          );
 }
 
-function formulaires_exemple_lo_verifier_dist () {
+function formulaires_demo_liste_1_verifier_dist () {
 
   if (saisies_liste_verifier('liste_1'))
     return array();
@@ -22,11 +22,11 @@ function formulaires_exemple_lo_verifier_dist () {
   return array();
 }
 
-function formulaires_exemple_lo_traiter_dist () {
+function formulaires_demo_liste_1_traiter_dist () {
 
   $valeurs = array(
       'message_ok' => implode(', ',
-                        array_map(function ($el) { 
+                        array_map(function ($el) {
                                     return $el['titre_element'];
                                   },
                                   _request('liste_1'))),
