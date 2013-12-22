@@ -1,35 +1,28 @@
 <?php
 
-function liste_objets_numeroter_saisie ($saisie, $nom, $no) {
+function preparer_tableau_saisie ($tableau_saisie) {
 
-  $saisie = preg_replace('/name="([^"]+)"/i',
-                         'name="' . $nom . '[' . $no . ']' . '[$1]"',
-                         $saisie);
-
-  $saisie = preg_replace('/id="champ_([^"]+)"/i',
-                         'id="champ_' . $nom . '[' . $no . ']' . '[$1]"',
-                         $saisie);
-
-  return $saisie;
-}
-
-function extraire_nom_saisie ($saisie) {
-
-  preg_match('/name="([^"]+)"/xi', $saisie, $matches);
-  return $matches[1];
-}
-
-function liste_objets_charger_valeur_saisie ($saisie, $valeur) {
-
-  if (preg_match('/value="([^"]+)"/i', $saisie, $matches) === 1) {
-    $saisie = preg_replace('/value="([^"]+)"/i',
-                           'value="' . $valeur . '"',
-                           $saisie);
-  } else {
-    $saisie = preg_replace('/<input/i',
-                           '<input value="' . $valeur . '"',
-                           $saisie);
+  if (array_key_exists('saisie', $tableau_saisie)) {
+    $resultat = array('saisie' => $tableau_saisie['saisie']);
+    unset($tableau_saisie['saisie']);
+    $resultat['options'] = $tableau_saisie;
+    return $resultat;
   }
+  else {
+    return 'ERREUR SAISIE LISTE_OBJETS : mauvais paramètres.';
+  }
+}
 
-  return $saisie;
+function renommer_saisies ($tableau_saisie, $index_objet, $nom_objet) {
+
+  $tableau_saisie['options']['nom'] = $nom_objet . "[" . $index_objet . "][" . $tableau_saisie['options']['nom'] . "]";
+
+  return $tableau_saisie;
+}
+
+function charger_valeurs ($tableau_saisie, $valeurs, $index_objet, $nom_objet) {
+
+  $tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
+
+  return $tableau_saisie;
 }

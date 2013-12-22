@@ -5,25 +5,30 @@
     <BOUCLE_liste_objets(DATA) {enum 0,#ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li><fieldset>
-        <legend>Objet no #GET{compteur_objets}</legend>
+        <legend>Objet #GET{compteur_objets}</legend>
 
         <div class="bouton-effacer"></div>
 
         <ul>
-          <BOUCLE_saisies_objet(DATA) {source table, #ENV{objet}}>
-            [(#REM) il semblerait que les traitements autos sur #VALEUR
-                    font des trucs bizarres, alors on récupère la valeur
-                    dans le tableau à la main. ]
-            #SET{saisie, #ENV{objet}|table_valeur{#CLE}}
-            #SET{nom_saisie, #GET{saisie}|extraire_nom_saisie}
+          <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 
-            [(#GET{saisie}
-              |liste_objets_numeroter_saisie{#ENV{nom}, #GET{compteur_objets}}
-              |liste_objets_charger_valeur_saisie{
-                  #ENV{valeur}
-                    |table_valeur{#GET{compteur_objets}}
-                    |table_valeur{#GET{nom_saisie}}}
-            )]
+            #SET{saisie, #VALEUR}
+
+            [(#REM) si le tableau ne contient pas de clé "options", on
+                    suppose qu'il n'est pas au format de #GENERER_SAISIE.
+                    Il faut alors le convetir à ce format. ]
+            [(#GET{saisie}|find{options}|non)
+              [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
+            ]
+
+            [(#REM) charger les valeurs. ]
+            [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}, #ENV{nom}}})]
+
+            [(#REM) on renomme les saisies pour les grouper par objet. ]
+            [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
+
+            [(#GENERER_SAISIES{#ARRAY{0,#GET{saisie}}})]
+
           </BOUCLE_saisies_objet>
         </ul>
       </fieldset></li>
@@ -33,4 +38,3 @@
 </fieldset>
 
 <?php var_dump($contexte); ?>
-
