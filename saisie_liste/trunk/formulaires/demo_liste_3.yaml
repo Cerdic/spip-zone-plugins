@@ -1,0 +1,21 @@
+- 
+  saisie: liste
+  options:
+    nom: messages
+    label: "Messages"
+    legende: "Une liste de messages, dans l'ordre dans lequel ils ont été envoyés"
+  saisies:
+    - 
+      saisie: input
+      options:
+        nom: msg
+        label: Message
+    - 
+      saisie: checkbox
+      options:
+        nom: destinataires
+        label: Destinataires
+        datas:
+          - Alice
+          - Bob
+          - Charlie
