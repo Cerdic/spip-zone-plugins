@@ -1,2 +1,20 @@
 .saisie-liste-objets li:first-child .bouton-monter { display: none; }
 .saisie-liste-objets li:last-child .bouton-descendre { display: none; }
+
+/* premier niveau de li */
+.formulaire_spip li.saisie_liste_objets { padding-left: 15px; }
+/* deuxième niveau */
+.formulaire_spip ul.saisie-liste-objets li { padding-left: 15px; }
+
+li.saisie_liste_objets label { float: none; margin-left: 0; }
+
+.saisie-liste-objets.ui-sortable > li {
+  cursor: move;
+  border: 1px solid #D0D0D0;
+  background-color: #F4F4F4;
+  margin: 5px;
+}
+
+.saisie-liste-objets.ui-sortable > li:hover {
+  background-color: #EBE7E7;
+}
