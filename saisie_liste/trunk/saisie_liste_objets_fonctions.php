@@ -42,8 +42,11 @@ function preparer_tableau_saisie ($tableau_saisie) {
   if (array_key_exists('saisie', $tableau_saisie)) {
     $resultat = array(
         'saisie'  => $tableau_saisie['saisie'],
-        'saisies' => $tableau_saisie['saisies'],
     );
+    if (isset($tableau_saisie['saisies'])) {
+      $resultat['saisies'] = $tableau_saisie['saisies'];
+    }
+
     unset($tableau_saisie['saisie']);
     unset($tableau_saisie['saisies']);
     $resultat['options'] = $tableau_saisie;
