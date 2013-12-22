@@ -242,9 +242,9 @@ function traitements_liste ($nom_saisie, $appelant) {
       return $interrompre_traitements_formulaire[$nom_saisie];
   }
 
-  $valeurs = _request($nom_saisie);
+  $valeurs = _request($nom_saisie) ? _request($nom_saisie) : array();
 
-  if ($valeurs AND array_key_exists('action', $valeurs)) {
+  if (array_key_exists('action', $valeurs)) {
     $interrompre_traitements_formulaire[$nom_saisie] = TRUE;
   }
 
