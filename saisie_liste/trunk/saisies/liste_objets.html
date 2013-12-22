@@ -6,7 +6,7 @@
   #SET{valeur, #ENV{valeur}}
 ]
 <fieldset>
-  <legend>#ENV{legende}</legend>
+  [<legend>(#ENV{legende})</legend>]
 
   <input type="hidden" name="#ENV{nom}\[permutations\]"
          value="[(#GET{valeur}|count|enumerer|joindre{','})]" />
@@ -32,12 +32,12 @@
           ]
         </div>
 
-        <div class="td">
+        <div class="objet td">
           [(#ENV{inclure}|oui)
            #INCLURE{fond=#ENV{inclure}}
           ]
 
-          <ul class="liste-saisies-objet">
+          <ul class="liste-saisies">
             <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 
               #SET{saisie, #VALEUR}

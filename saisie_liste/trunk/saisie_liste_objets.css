@@ -1,58 +1,82 @@
-.saisie-liste-objets li:first-child .bouton-monter { display: none; }
-.saisie-liste-objets li:last-child .bouton-descendre { display: none; }
+/* classes de positionnement */
+.table {
+  display: table; }
+
+.td {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top; }
 
 /* premier niveau de li */
-.formulaire_spip li.saisie_liste_objets { padding-left: 15px; }
-/* deuxième niveau */
-.formulaire_spip ul.liste-objets li { padding-left: 15px; }
+li.saisie_liste_objets {
+  padding: 0 10px; }
+  li.saisie_liste_objets label {
+    float: none;
+    margin-left: 0; }
 
-li.saisie_liste_objets label { float: none; margin-left: 0; }
+.liste-objets {
+  border: none; }
+  .liste-objets .objet {
+    vertical-align: middle;
+    text-align: center; }
+  .liste-objets .liste-saisies {
+    margin: 0;
+    padding: 0; }
+    .liste-objets .liste-saisies > li {
+      padding: 5px;
+      text-align: left; }
+  .liste-objets fieldset {
+    border: none;
+    margin: 0;
+    padding: 0; }
+  .liste-objets > li {
+    padding: 3px; }
 
+/* effets pour jqueryui.sortable */
 .liste-objets.ui-sortable > li {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;
-  margin: 5px;
-}
+  margin: 5px; }
+  .liste-objets.ui-sortable > li:hover {
+    background-color: #EBE7E7;
+    background-color: rgba(232, 232, 232, 0.69); }
 
-.liste-objets.ui-sortable > li:hover {
-  background-color: #EBE7E7;
-}
-
-.table {
-  display: table;
-}
-
-.td {
-  display: table-cell;
-}
-
+/* Boutons */
 .boutons-bouger {
   vertical-align: middle;
   width: 40px;
-}
-
-.bouton-monter {
-  background: url('images/up-icon-32x32.png');
-}
-
-.bouton-descendre {
-  background: url('images/down-icon-32x32.png');
-}
-
-.bouton-monter, .bouton-descendre {
-  width: 32px;
-  height: 32px;
-  margin: 8px 0;
-  border: none;
-  text-indent: -99999px;
-}
+  padding-right: 5px; }
+  .boutons-bouger input {
+    border: none;
+    text-indent: -99999px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding: 0;
+    width: 29px;
+    height: 30px;
+    background-position: 3px 4px;
+    margin: 8px 0; }
+    .boutons-bouger input:hover, .boutons-bouger input:focus {
+      box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
+    .boutons-bouger input.bouton-monter {
+      background-image: url("images/up-icon-24x24.png"); }
+    .boutons-bouger input.bouton-descendre {
+      background-image: url("images/down-icon-24x24.png"); }
 
 .bouton-supprimer input {
-  background: url('images/delete-icon.png') no-repeat;
-  width: 24px;
-  height: 24px;
   border: none;
   text-indent: -99999px;
-  margin-left: 8px;
-}
+  cursor: pointer;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url("images/delete-icon.png");
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 4px; }
+  .bouton-supprimer input:hover, .bouton-supprimer input:focus {
+    box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
