@@ -7,8 +7,13 @@
   <ul id="liste-objets-#ENV{nom}" class="saisie-liste-objets">
     <BOUCLE_liste_objets(DATA) {enum 0, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
-      <li><fieldset>
+      <li>
+        <fieldset>
         <legend>Objet #GET{compteur_objets}</legend>
+
+        [(#ENV{inclure}|oui)
+          #INCLURE{fond=#ENV{inclure}}
+        ]
 
         <input type="submit"
                name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"

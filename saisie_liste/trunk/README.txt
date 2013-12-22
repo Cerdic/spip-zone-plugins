@@ -22,6 +22,8 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
           - nom     => Le nom de la saisie.
           - label   => Le label.
           - saisies => La liste de saisies définissant un objet.
+          - inclure => Le chemin vers un squelette qui sera inclu au
+                       début de chaque objet. Vide par défaut.
   ]
 
   [(#SAISIE{liste_objets, ma-liste,
