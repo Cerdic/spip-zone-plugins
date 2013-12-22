@@ -7,6 +7,16 @@
       <li><fieldset>
         <legend>Objet #GET{compteur_objets}</legend>
 
+        [(#COMPTEUR_BOUCLE|!={1}|oui)
+          <input type="submit"
+                 name="#ENV{nom}\[action\]\[monter-#GET{compteur_objets}\]"
+                 value="Monter" />
+        ]
+        [(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)
+          <input type="submit"
+                 name="#ENV{nom}\[action\]\[descendre-#GET{compteur_objets}\]"
+                 value="Descendre" />
+        ]
         <ul>
           <BOUCLE_saisies_objet(DATA) {source table, #ENV{saisies}}>
 

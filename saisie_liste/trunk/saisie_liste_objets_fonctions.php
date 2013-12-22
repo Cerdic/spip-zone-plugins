@@ -66,6 +66,16 @@ function traitements_liste_objets_ok ($nom_saisie) {
           // recharger le formulaire, et celui-ci affichera un objet vide
           // prêt à remplir à la fin de la liste.
           break;
+        case 'monter':
+          $objet_au_dessus = $valeurs[$index_objet-1];
+          $valeurs[$index_objet-1] = $valeurs[$index_objet];
+          $valeurs[$index_objet]   = $objet_au_dessus;
+          break;
+        case 'descendre':
+          $objet_en_dessous = $valeurs[$index_objet+1];
+          $valeurs[$index_objet+1] = $valeurs[$index_objet];
+          $valeurs[$index_objet]   = $objet_en_dessous;
+          break;
       }
     }
 
