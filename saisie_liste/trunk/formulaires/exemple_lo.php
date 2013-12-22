@@ -9,6 +9,7 @@ function formulaires_exemple_lo_charger_dist () {
                                  'description_objet' => 'bla bla bla bla',
                                ),
                         ),
+           'liste_2' => _request('liste_2'),
          );
 }
 
@@ -21,11 +22,13 @@ function formulaires_exemple_lo_verifier_dist () {
 
 function formulaires_exemple_lo_traiter_dist () {
 
+  $valeurs = array(
+      'message_ok' => var_export(_request('liste_1'), TRUE) . '<br>' .
+                      var_export(_request('liste_2'), TRUE),
+  );
+
   if (liste_traiter('liste_1')) return;
   if (liste_traiter('liste_2')) return;
 
-  return array(
-           'message_ok' => var_export(_request('liste_1'), TRUE) . '<br>' .
-                           var_export(_request('liste_2'), TRUE),
-         );
+  return $valeurs;
 }
