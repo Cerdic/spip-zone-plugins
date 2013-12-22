@@ -42,7 +42,7 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
 On peut aussi utiliser le format de la balise #GENERER_SAISIES :
 
   $ma-saisie = array(
-      'saisie'  => 'liste-objets',
+      'saisie'  => 'liste_objets',
       'options' => array(
             'nom'     => 'ma-liste',
             'label'   => 'Objets',
