@@ -6,7 +6,7 @@
   #SET{valeur, #ENV{valeur}}
 ]
 <fieldset>
-  <legend>#ENV{label}</legend>
+  <legend>#ENV{legende}</legend>
 
   <input type="hidden" name="#ENV{nom}\[permutations\]"
          value="[(#GET{valeur}|count|enumerer|joindre{','})]" />

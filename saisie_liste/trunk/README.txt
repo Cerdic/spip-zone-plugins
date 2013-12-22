@@ -23,6 +23,7 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
     parametres :
           - nom     => Le nom de la saisie.
           - label   => Le label.
+          - legende => La légende du fieldset qui contient la saisie.
           - saisies => La liste de saisies définissant un objet.
           - inclure => Le chemin vers un squelette qui sera inclu au
                        début de chaque objet. Vide par défaut.
