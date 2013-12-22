@@ -2,7 +2,9 @@
   <legend>#ENV{label}</legend>
 
   <ul>
-    <BOUCLE_liste_objets(DATA) {enum 0,#ENV{valeur}|count}>
+    [(#SET{nb_objets_non_vides, #ENV{valeur}|compter_non_vides})]
+
+    <BOUCLE_liste_objets(DATA) {enum 0, #GET{nb_objets_non_vides}}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li><fieldset>
         <legend>Objet #GET{compteur_objets}</legend>
@@ -36,5 +38,3 @@
   </ul>
 
 </fieldset>
-
-<?php var_dump($contexte); ?>

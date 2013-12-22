@@ -1,5 +1,19 @@
 <?php
 
+function compter_non_vides ($valeurs) {
+
+  $i = 0;
+  foreach ($valeurs as $objet) {
+    foreach ($objet as $valeur) {
+      if ($valeur !== '') {
+        $i = $i + 1;
+        break;
+      }
+    }
+  }
+  return $i;
+}
+
 function preparer_tableau_saisie ($tableau_saisie) {
 
   if (array_key_exists('saisie', $tableau_saisie)) {
