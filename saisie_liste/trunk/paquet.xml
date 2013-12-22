@@ -6,15 +6,11 @@
 	compatibilite="[3.0.10;3.0.*]"
 	logo=""
 	documentation=""
+  demonstration="?exec=exemples_saisie_liste"
 >
-	<!--
-		Paquet genere le 2013-06-23 11:16:04
-		(Vous pouvez bien entendu supprimer ces commentaires) 
-	-->
 
 	<nom>Saisie liste</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
 	<auteur>bystrano</auteur>
 
 	<licence>GNU/GPL</licence>
@@ -25,23 +21,5 @@
 
 	<necessite nom="saisies" compatibilite="[1.31.4;[" />
 	<necessite nom="yaml" compatibilite="[1.5.1;[" />
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="saisie_liste_autorisations.php" />
-		<pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
-		* declarer un pipeline 
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration 
-		<menu nom="saisie_liste" titre="saisie_liste:saisie_liste_titre" parent="menu_edition"  icone="images/saisie_liste-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ... 
-		<onglet nom="saisie_liste" titre="saisie_liste:saisie_liste_titre" parent="configuration" icone="images/saisie_liste-24.png" />
-	-->
 
 </paquet>
