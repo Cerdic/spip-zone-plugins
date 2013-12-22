@@ -1,5 +1,3 @@
-<h1>Page de test pour la saisie liste</h1>
-
 <div class="formulaire_spip formulaire_exemple_lo">
 
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,25 +10,8 @@
     [(#SAISIE{liste, liste_1,
               label=1ère liste de test,
               saisies=#ARRAY{0, #ARRAY{saisie, input,
-                                       label, Titre de l'objet,
-                                       nom, titre_objet},
-                             1, #ARRAY{saisie, textarea,
-                                       nom, description,
-                                       label, Description,
-                                       rows, 4}}
-    })]
-
-    [(#SAISIE{liste, liste_2,
-              label=2eme liste de test,
-              interdire_ajout=oui,
-              saisies=#ARRAY{0, #ARRAY{saisie, input,
-                                       nom, titre,
-                                       disable_avec_post,oui},
-                             1, #ARRAY{saisie, hidden,
-                                       nom, id_article}},
-              defaut=#ARRAY{0, #ARRAY{titre,"article 1",id_article,1},
-                            1, #ARRAY{titre,"article 2",id_article,2},
-                            2, #ARRAY{titre,"article 3",id_article,3}}
+                                       label, Titre de l'élément,
+                                       nom, titre_element}}
     })]
     </ul>
 

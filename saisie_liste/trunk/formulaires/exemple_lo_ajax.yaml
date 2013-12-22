@@ -19,3 +19,26 @@
         nom: description
         label: Description
         rows: 4
+- 
+  saisie: liste
+  saisies:
+    - 
+      saisie: input
+      nom: titre
+      disable_avec_post: oui
+    - 
+      saisie: hidden
+      nom: id
+  options:
+    nom: liste_2
+    interdire_ajout: oui
+    defaut:
+      - 
+        titre: "élément 1"
+        id: 1
+      - 
+        titre: "élément 2"
+        id: 2
+      - 
+        titre: "élément 3"
+        id: 3

@@ -1,14 +1,12 @@
-[(#ENV{t}|non)
-  <h1>Tests de la saisie liste</h1>
-  <ul>
-    <li><a href="[(#SELF|parametre_url{t, 1})]">
-        Test simple
-    </a></li>
-    <li><a href="[(#SELF|parametre_url{t, 2})]">
-        Test simple avec ajax
-    </a></li>
-  </ul>
-]
+<h1>Exemples d'utilisation de la saisie liste</h1>
+<ul>
+  <li><a class="ajax" href="[(#SELF|parametre_url{t, 1})]">
+      Liste ordonnée simple
+  </a></li>
+  <li><a class="ajax" href="[(#SELF|parametre_url{t, 2})]">
+      Liste d'objets + liste non-éditable ajax
+  </a></li>
+</ul>
 
 [(#ENV{t}|=={1}|oui)
   #FORMULAIRE_EXEMPLE_LO
