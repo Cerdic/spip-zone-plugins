@@ -641,7 +641,7 @@ function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') 
     unset($regles['A']); unset($regles['B']);
     $ruleC = $regles['C']; unset($regles['C']);
     $ruleD = $regles['D']; unset($regles['D']);
-    if ( !preg_match('/^'. implode('', $regles) .'\w*$/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
+    if ( !preg_match('/'. implode('', $regles) .'\w*/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
     if (sql_countsel('spip_asso_plan', "code='$code'")>1) // occurences multiples d'une meme reference
 	return _T('compta:erreur_plan_code_doublon', array('code'=>$code,) );
