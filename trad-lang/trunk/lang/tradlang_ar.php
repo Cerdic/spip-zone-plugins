@@ -243,7 +243,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_traduire_suivant_str_module' => 'ترجمة السلسلة غير المترجمة التالية من الوحدة «@module@»',
 	'lien_trier_langue_non' => 'عرض الجردة الاجمالية.',
 	'lien_utiliser_google_translate' => 'استخدام هذا الاصدار',
-	'lien_voir_bilan_lang' => 'عرضة جردة اللغة @langue_longue@ (@lang@)',
+	'lien_voir_bilan_lang' => 'عرض جردة اللغة @langue_longue@ (@lang@)',
 	'lien_voir_bilan_module' => 'عرض جردة الوحدة @nom_mod@ - @module@',
 	'lien_voir_toute_chaines_module' => 'عرض كل سلاسل الوحدة.',
 
