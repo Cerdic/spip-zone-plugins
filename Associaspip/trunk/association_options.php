@@ -2725,24 +2725,6 @@ function association_langue($chaine) {
 	return _T((strpos($head,':') ? '' : 'asso:').$head, $tail );
 }
 
-/**
- * Encapsulation de autoriser()
- *
- * @param string|array $aut
- *   Valeur de l'autorisation
- *   Liste des composantes de l'autorisation
- * @return bool
- *   Autorisation d'acces
- */
-function association_acces($aut) {
-	if ( is_array($aut) && count($aut) ) { // autorisation a calculer
-		return call_user_func_array('autoriser', $aut);
-	} elseif ( is_scalar($aut) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
-		return autoriser($aut);
-	} else // pas d'autorisation definie = autorise pour tous
-		return '';
-}
-
 function association_langue_index($index, $head) {
 	return _T((strpos($head,':') ? '' : 'asso:'). $head . $index);
 }
@@ -2762,7 +2744,7 @@ if (!include_spip('inc/filtres_ecrire') OR !function_exists('sinon_interdire_acc
 				ob_end_clean();
 			include_spip('inc/minipres');
 			echo minipres(); // generer le "403 Forbiden"
-			exit;
+			exit; // sortir du script : voir si on ne peut pas faire plus propre (juste fermer et retourner, de sorte a permettre divers usages/scenarios)
 		}
 	}
 }
