@@ -635,15 +635,18 @@ function comptabilite_verifier_classe($classe, $plan='') {
  *   credit|debit|multi : on s'assurera que la direction d'operation est bonnne
  * Cela est precise par les regles C (pour credit) et D (pour debit) du plan comptable
  * et dans tous les cas multi passe toujours...
+ * @param bool unicite
+ *   Indique s'il faut verifier l'unicite du compte
+ * (cas lors de l'ajout d'une reference, mais pas pour la verification du plan)
  */
-function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') {
+function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='', $unicite=TRUE) {
     $regles = comptabilite_liste_planregles($plan);
     unset($regles['A']); unset($regles['B']);
     $ruleC = $regles['C']; unset($regles['C']);
     $ruleD = $regles['D']; unset($regles['D']);
     if ( !preg_match('/'. implode('', $regles) .'\w*/', $code) ) // champ de longueur insuffisante ou ne commencant pas de facon adequate
 	return _T('compta:erreur_plan_code_format', array('nombre'=>count($regles),) );
-    if ( sql_countsel('spip_asso_plan', "code='$code'") ) // occurences multiples d'une meme reference
+    if ( sql_countsel('spip_asso_plan', "code='$code'") AND $unicite ) // occurences multiples d'une meme reference
 	return _T('compta:erreur_plan_code_doublon', array('code'=>$code,) );
     if ( $classe!==FALSE AND $classe!=='' AND $code[0]!=$classe ) // discordance avec la classe
 	return _T('compta:erreur_code_classe', array('nombre'=>$classe,) );
@@ -665,7 +668,7 @@ function comptabilite_verifier_code($code, $sens='multi', $classe='', $plan='') 
  * @note:ex
  *   association_valider_plan_comptable()
  */
-function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
+function comptabilite_verifier_plan($nbr=2, $plan='') {
     $classes = array(); // initialiser la liste des classes
     $codes = array(); // initialiser la liste des references
     $sql = sql_select('code, classe', 'spip_asso_plan'); // recupere la reference et la classe de tous les comptes du plan comptable
@@ -674,7 +677,7 @@ function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
 	if( array_key_exists($r['code'], $codes) ) // on a deux fois le meme code...
 	    return _T('compta:erreur_plan_code_doublon', array('code'=>$r['code'],) ); // ...on arrete sur cette erreur...
 	else { // c'est la 1ere occurence
-	    $codes[$r['code']] = comptabilite_verifier_code($r['code'], $r['type_op'], $r['classe'], $lang); // verifier qu'il est bien forme
+	    $codes[$r['code']] = comptabilite_verifier_code($r['code'], $r['type_op'], $r['classe'], $plan, FALSE); // verifier qu'il est bien forme
 	    if ($codes[$r['code']]) // mauvais format...
 		return $codes[$r['code']]; // ...on arrete sur cette erreur...
 	}
@@ -682,7 +685,7 @@ function comptabilite_verifier_plan($nbr=2, $plan='', $lang='') {
     if ( count($classes)<$nbr ) // on doit avoir au moins $nbr classes differentes
 	return _T('compta:erreur_plan_nombre_classes', array('nombre'=>$nbr,) ); // ...on arrete sur cette erreur...
     foreach($classes as $classe) // verifier chaque classe
-	if ( $erreur = comptabilite_verifier_classe($classe, $plan, $lang) )
+	if ( $erreur = comptabilite_verifier_classe($classe, $plan) )
 	    return $erreur; // ...renvoyer la premiere erreur rencontree...
     return '';
 }
