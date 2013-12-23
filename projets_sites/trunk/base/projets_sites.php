@@ -50,7 +50,6 @@ function projets_sites_declarer_tables_objets_sql($tables) {
 			"logiciel_version"   => "varchar(25) NOT NULL DEFAULT ''",
 			"type_site"          => "varchar(4) NOT NULL DEFAULT ''",
 			"uniqid"             => "varchar(255) NOT NULL DEFAULT ''",
-			"date_creation"      => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"fo_url"             => "varchar(255) NOT NULL DEFAULT ''",
 			"fo_login"           => "varchar(25) NOT NULL DEFAULT ''",
 			"fo_password"        => "varchar(25) NOT NULL DEFAULT ''",
