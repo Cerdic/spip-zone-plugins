@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Vyberte údaje, ktoré chcete <strong>skryť</strong> pri vytváraní menu.',
+	'configurer_titre' => 'Nastaviť údaje zásuvného modulu Menu',
 	'confirmer_supprimer_entree' => 'Chcete odstrániť tento záznam?',
 
 	// D
