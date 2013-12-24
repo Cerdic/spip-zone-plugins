@@ -5,18 +5,34 @@
  * 
  * @return flux_IMAP Flux imap vers la boîte aux lettres ouverte
  */
-function imap_open_from_configuration() {
+function imap_open_from_config() {
 	include_spip('inc/config');
 
 	$email = lire_config('imap/email');
 	$email_pwd = lire_config('imap/email_pwd');
+	$hote_inbox = lire_config('imap/inbox'); 
+	$connexion = imap_get_server_string_from_config().$hote_inbox;
+
+	return @imap_open($connexion, $email, $email_pwd);
+}
+
+/*
+ * Créer la chaîne de connexion au serveur configuré dans SPIP.
+ * 
+ * Sous la forme :
+ *     "{" nom_systeme_distant [":" port] [flags] "}"
+ * 
+ * @return string Chaîne de connexion au serveur
+ */
+function imap_get_server_string_from_config() {
+	include_spip('inc/config');
+
 	$hote_imap = lire_config('imap/hote_imap');
 	$hote_port = lire_config('imap/hote_port');
 	$hote_options = lire_config('imap/hote_options');
-	$hote_inbox = lire_config('imap/inbox'); 
 
-	$connexion = '{'.$hote_imap.':'.$hote_port.$hote_options.'}'.$hote_inbox;
-	return @imap_open($connexion, $email, $email_pwd);
+	$connexion = '{'.$hote_imap.':'.$hote_port.$hote_options.'}';
+	return $connexion;
 }
 
 /*

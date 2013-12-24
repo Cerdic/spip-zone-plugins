@@ -14,7 +14,7 @@ function imap_test_connexion() {
 		return _T('imap:test_librairie_installee_notok');
 	} else {
 		// test connexion
-		$mbox = imap_open_from_configuration();
+		$mbox = imap_open_from_config();
 
 		if (FALSE === $mbox) {
 			return _T('imap:test_connexion_notok',array('connexion'=>$connexion));
