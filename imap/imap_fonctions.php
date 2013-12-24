@@ -36,6 +36,23 @@ function imap_get_server_string_from_config() {
 }
 
 /*
+ * Lister les boîtes aux lettres accessibles depuis la configuration.
+ * 
+ * @return array Liste des noms de boîtes aux lettres (en clé et valeur)
+ */
+function imap_list_mailboxes_from_config() {
+	$flux = imap_open_from_config();
+	$connexion = imap_get_server_string_from_config();
+	$noms_complets = imap_list($flux, $connexion, "*");
+	$boites = array();
+	foreach ($noms_complets as $nom_complet) {
+		$nom = preg_replace('/{.*}/', '', $nom_complet, 1);
+		$boites[$nom] = $nom;
+	}
+	return $boites;
+}
+
+/*
  * Sauvegarder les pièces jointes sur le disque
  * 
  * @param flux_IMAP $mbox Un flux IMAP ouvert par imap_open()
