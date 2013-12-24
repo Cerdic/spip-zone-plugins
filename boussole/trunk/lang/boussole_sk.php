@@ -42,12 +42,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Stránka s podrobnými údajmi o kompase',
 
 	// I
+	'info_activite_serveur' => 'V predvolených nastaveniach nie je funkcia "server" zásuvného modulu aktivovaná. Môžete ju aktivovať zvolením príslušných nastavení a priradením názvu ',
 	'info_ajouter_boussole' => 'Pridaním kompasov do svojej databázy budete môcť využívať šablóny na zobrazenie verejne prístupných stránok.<br /> Ak už kompas existuje, tento formulár ho aktualizuje s tým, že nastavenia zobrazenia ponechá bezo zmeny.',
+	'info_ajouter_serveur' => 'Tento formulár vám umožňuje zadať server s kompasmi. Podľa predvolených nastavení sa dá stále dostať na server „spip“   z klientských stránok.',
+	'info_alias_boussole_manuelle' => 'Zadajte prezývku manuálneho kompasu, ako je definovaná v súbore XML.',
 	'info_boussole_manuelle' => 'Príručka ku Kompasu',
 	'info_cache_boussole' => 'Cache kompasu "@boussole@"',
 	'info_cache_boussoles' => 'Cache kompasov na serveri',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
 	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
+	'info_liste_aucun_serveur' => 'Pre klientsku stránku nebol nastavený žiaden server.',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_rubrique_parent' => 'Na vytváranie stránok kompasu si musíte vybrať titulnú rubriku.',
 	'info_site_boussole' => 'Táto stránka je súčasťou kompasu:',
