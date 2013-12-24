@@ -67,7 +67,7 @@ function exec_plan_comptable() {
 		echo '<tr style="border:0;">';
 		echo '<th class="text">'.$r['classe'].'</th>';
 		echo '<th></th>';
-		echo '<th class="text">'. comptabilite_reference_intitule($r['classe']).'</th>';
+		echo '<th class="text">'.  comptabilite_reference_intitule($r['classe'], 1) .'</th>';
 		echo '<th colspan="5"><hr class="spip" /></th>';
 		echo "</tr>\n";
 		$query = sql_select("id_plan, ' ' AS classe, code, intitule, solde_anterieur, date_anterieure", 'spip_asso_plan', 'classe='. sql_quote($r['classe']) .' AND active=' . sql_quote($active), '', 'code' );
@@ -92,8 +92,8 @@ function exec_plan_comptable() {
 		);
 	}
 	if (sql_countsel('spip_asso_plan', '', 'classe')<4) { // pas assez de classes pour activer la configuration de la compta...
-		echo '<tr class="row_first">';
-		echo '<th colspan="7" class="erreurs">' . _T('compta:erreur_plan_nombre_classes', array('nombre'=>4,) ) .'</th>';
+		echo '<tr>';
+		echo '<th colspan="7" class="erreurs center">' . _T('compta:erreur_plan_nombre_classes', array('nombre'=>4,) ) .'</th>';
 		echo "</tr>\n";
 	}
 	echo "$thd</table>\n";
