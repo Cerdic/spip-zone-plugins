@@ -376,7 +376,7 @@ function comptabilite_operation_ventiler($id_compte, $recette=0, $depense=0, $re
  *   La reference comptable dont on veut l'intitule
  * @param int $parent
  *   Le nombre maximum de niveau dont il faut remonter dans la recherche d'un
- * code parent lorsqu'on ne trouve pas le code exact demande.
+ * code parent lorsqu'on ne trouve pas le code exact demande. 0 si pas de limite.
  * @return string $nom
  *   L'intitule correspondant trouve
  * @note:ex
@@ -386,10 +386,9 @@ function comptabilite_reference_intitule($code, $parent=0) {
     $nom = sql_getfetsel('intitule','spip_asso_plan','code='.sql_quote($code) ); // on tente de recuperer l'intitule defini...
     if ($nom) // on a trouve ! alors...
 	return extraire_multi($nom, $GLOBALS['spip_lang']); // ...renvoyer la traduction
-    if ($GLOBALS['association_metas']['plan_comptable']) { // sinon si on a un plan comptable selectionne
+//    if ($GLOBALS['association_metas']['plan_comptable']) // sinon si on a un plan comptable selectionne
 	$nom = _T('pcg2'.$GLOBALS['association_metas']['plan_comptable'].':'.$code); // on tente de recuperer dans le plan choisi
-    }
-    if (str_replace('_', ' ',$code)!=$nom) // on a trouve alors...
+    if ( str_replace('_', ' ',$code)!=$nom ) // on a trouve alors...
 	return $nom; // ...renvoyer la traduction
     $code = substr($code, 0, -1); // sinon on enleve le dernier caractere...
     if (strlen($code) AND $parent) // ...et tant qu'il y a un caractere... et qu'on peut remonter...
@@ -726,7 +725,7 @@ function filtre_selecteur_compta_classe($classe, $name='classe', $ref='code') {
 	if (strlen($code)==1) { // il s'agit d'une classe
 	    $res .= '<option value="'.$code.'"';
 	    $res .= ($code==$classe) ? ' selected="selected"' : '';
-	    $res .= '>'.$code.' - '. comptabilite_reference_intitule($code) ;
+	    $res .= '>'.$code.' - '. comptabilite_reference_intitule($code, 1) ;
 	    $res .= "</option>\n";
 	}
     }
@@ -768,7 +767,7 @@ function filtre_selecteur_compta_code($code, $name='code', $ref='intitule') {
 	if (@!$GLOBALS['meta']['html5'] AND strlen($rc)==1) { // il s'agit d'une classe
 	    if ($optgroup) //
 		$lst .= "</optgroup>\n";
-	    $res .= '<optgroup id="PlanComptableClasse'.$rc.'" label="'.$rc.' - '.  comptabilite_reference_intitule($rc) ."\">\n";
+	    $res .= '<optgroup id="PlanComptableClasse'.$rc.'" label="'.$rc.' - '.  comptabilite_reference_intitule($rc, 1) ."\">\n";
 	    $optgroup = TRUE;
 	} else { // il s'agit d'une reference
 	    $res .= '<option value="'.$rc.'"';
