@@ -11,4 +11,6 @@ Le plugin pourrait aussi :
 
 * avoir un logo
 * remplacer la classe de fonctions additionnelles par des fonctions plus "spip" (pas de classe, mettre dans imap_fonctions.php) et ne garder que ce qui est nécessaire.
+* créer des tests unitaires sur les fonctions additionnelles
+* fournir une saisie sur les sous-répertoires d'une boite IMAP
 * ...
