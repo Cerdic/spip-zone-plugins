@@ -1,0 +1,35 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:pj2article:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#SET{boites,#REM|imap_list_mailboxes_from_config})]
+			[(#SAISIE{selection,inbox,
+				datas=#GET{boites},
+				label=<:pj2article:cfg_inbox:>,
+				explication=<:pj2article:cfg_inbox_explication:>,
+				defaut=INBOX})]
+			[(#SAISIE{selection,outbox,
+				datas=#GET{boites},
+				label=<:pj2article:cfg_outbox:>,
+				explication=<:pj2article:cfg_outbox_explication:>,
+				defaut=Trash})]
+			[(#SAISIE{selection,errorbox,
+				datas=#GET{boites},
+				label=<:pj2article:cfg_errorbox:>,
+				explication=<:pj2article:cfg_errorbox_explication:>,
+				defaut=Trash})]
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="pj2article" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
