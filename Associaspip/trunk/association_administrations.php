@@ -1180,10 +1180,14 @@ $GLOBALS['association_maj'][72938] = array(
 	array('maj_tables', 'spip_asso_groupes'), // + champ : id_zone
 );
 
+function association_maj_73025() {
+	$old = sql_getfetsel('valeur', 'spip_association_metas', "nom='plan_comptable_prerenseigne'");
+	sql_insertq('spip_association_metas', array('nom'=>'plan_comptable', 'valeur'=>$old,) );
+}
 $GLOBALS['association_maj'][73025] = array(
 	// plan comptable generalise
 	array('sql_update', 'spip_association_metas', array('valeur'=>'fr'), "nom='plan_comptable_prerenseigne' AND valeur<>'' "), // on met l'ID (on peut avoir autre chose que francais)
-	array('sql_insertq', 'spip_association_metas', array('nom'=>'plan_comptable', 'valeur'=>sql_getfetsel('valeur', 'spip_association_metas', "nom='plan_comptable_prerenseigne'"),) ), // nouveau nom de champ... : le creer et migrer la valeur
+	array('association_maj_73025'), // nouveau nom de champ... : le creer et migrer la valeur
 	array('sql_delete', 'spip_association_metas', "nom='plan_comptable_prerenseigne'"), // nouveau nom de champ... : effacer l'ancien
 );
 
