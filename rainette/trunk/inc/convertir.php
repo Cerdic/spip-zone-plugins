@@ -25,7 +25,7 @@ function angle2direction($angle) {
 	);
 
 	$direction = '';
-	if (is_int($angle))
+	if (is_numeric($angle))
 		$direction = $liste_directions[round($angle / 22.5) % 16];
 	elseif (in_array(strtoupper($angle), $liste_directions))
 		$direction = strtoupper($angle);
