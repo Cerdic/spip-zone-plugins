@@ -60,6 +60,7 @@ function weather_url2flux($url) {
 function weather_flux2previsions($flux, $lieu) {
 	$tableau = array();
 	$index = 0;
+	$date_maj = '';
 
 	$n = spip_xml_match_nodes(",^dayf,",$flux,$previsions);
 	if ($n==1){
@@ -102,12 +103,14 @@ function weather_flux2previsions($flux, $lieu) {
 				$index += 1;
 			}
 		}
-		// On stocke en fin de tableau la date de derniere mise a jour
-		$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	// On stocke en fin de tableau la date de derniere mise a jour et le nombre max de  jours de prévisions
+	$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
+	$tableau[$index]['max_jours'] = _RAINETTE_WEATHER_JOURS_PREVISION;
 
 	return $tableau;
 }

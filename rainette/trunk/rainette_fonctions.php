@@ -200,7 +200,20 @@ function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='pr
 			// Dans ce cas la variable $jour indique le numéro du jour demandé (0 pour aujourd'hui)
 			// Plutôt que de renvoyer une erreur si le numéro du jour est supérieur au nombre de jours en prévisions
 			// on renvoie au moins le jour max
-			$index_jour = min($jour, $index_extra-1);
+			// Sinon, si $jour désigne un jour précis on renvoie une erreur si ce jour ne fait pas partie des
+			// prévisions disponibles
+			if (($d = intval(strtotime(strval($jour)))) <= 0)
+				$index_jour = min($jour, $tableau[$index_extra]['max_jours']-1);
+			else {
+				$d = intval(ceil(($d-time())/(24*3600)));
+				if (($d < 0) OR ($d >= $tableau[$index_extra]['max_jours'])) {
+					$tableau[$index_extra]['erreur'] = 'jour';
+					$tableau[$index_extra]['date_erreur'] = affdate($jour);
+					$texte = recuperer_fond("modeles/erreur", $tableau[$index_extra]);
+					return $texte;
+				}
+				$index_jour = $d;
+			}
 
 			// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
 			// afin de gérer le passage des prévisions jour à celles de la nuit
@@ -223,7 +236,7 @@ function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='pr
 			if ($jour == 0) $jour = $index_extra;
 			$nb_jours = min($jour, $index_extra);
 
-			$texte = "";
+			$texte = '';
 			for ($i = 0; $i < $nb_jours; $i++) {
 				$contexte = array_merge($tableau[$i], $tableau[$index_extra]);
 				$texte .= recuperer_fond("modeles/$modele", $contexte);
@@ -299,7 +312,10 @@ function rainette_debug($lieu, $mode='previsions', $service='weather') {
 			$tableau['service'] = $service;
 		}
 
-		var_dump($tableau);
+		if (function_exists('bel_env'))
+			return bel_env(serialize($tableau));
+		else
+			var_dump($tableau);
 	}
 }
 

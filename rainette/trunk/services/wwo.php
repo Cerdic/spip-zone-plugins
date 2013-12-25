@@ -79,9 +79,13 @@ function wwo_url2flux($url) {
  */
 function wwo_flux2previsions($flux, $lieu) {
 	$tableau = array();
+	$index = 0;
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	// Ajout des informations communes dans l'index adéquat
+	$tableau[$index]['max_jours'] = _RAINETTE_WWO_JOURS_PREVISIONS;
 
 	return $tableau;
 }

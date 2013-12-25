@@ -5,8 +5,7 @@
 #SET{nom_service, #VAL{rainette:titre_service_}|concat{#ENV{service}}_T}
 
 <div class="notice">
-	[(#VAL{rainette:erreur_chargement_}|concat{#ENV{mode}}|_T{#ARRAY{service, #GET{nom_service}, lieu, #ENV{lieu}}})]
+	[(#VAL{rainette:erreur_}|concat{#ENV{erreur}}|concat{_}|concat{#ENV{mode}}|_T{#ARRAY{service, #GET{nom_service}, lieu, #ENV{lieu}, date, #ENV{date_erreur}}})]
 	<br />
-	<:rainette:erreur_chargement_conseil:>
+	[(#VAL{rainette:erreur_}|concat{#ENV{erreur}}|concat{_conseil}|_T{#ARRAY{max, #ENV{max_jours}}})]
 </div>
-

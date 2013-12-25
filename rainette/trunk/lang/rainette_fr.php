@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_chargement_infos' => 'Le service @service@ ne fournit actuellement aucune condition météorologique sur le lieu @lieu@.',
 	'erreur_chargement_previsions' => 'Le service @service@ ne fournit actuellement aucune prévision météorologique sur le lieu @lieu@.',
 	'erreur_chargement_conseil' => 'Veuillez vérifier le nom du lieu ou la disponibilité du service.',
+	'erreur_jour_previsions' => 'Le service @service@ ne fournit pas de prévision météorologique pour le @date@.',
+	'erreur_jour_conseil' => 'Ce service ne fournit que @max@ jours de prévisions.',
 
 	// H
 	'humidite' => 'humidité',

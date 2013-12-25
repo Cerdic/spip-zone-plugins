@@ -90,7 +90,10 @@ function owm_flux2previsions($flux, $lieu) {
 	$index = 0;
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	// Ajout des informations communes dans l'index adéquat
+	$tableau[$index]['max_jours'] = _RAINETTE_OWM_JOURS_PREVISIONS;
 
 	return $tableau;
 }

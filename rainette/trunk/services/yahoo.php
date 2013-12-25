@@ -107,11 +107,13 @@ function yahoo_flux2previsions($flux, $lieu) {
 						  : '';
 				$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 			}
+			// On stocke le nombre max de jours de prévisions pour le service
+			$tableau[$index]['max_jours'] = _RAINETTE_YAHOO_JOURS_PREVISION;
 		}
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
