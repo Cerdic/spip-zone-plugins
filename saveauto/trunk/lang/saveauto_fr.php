@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_impossible_liste_tables' => 'Impossible de lister les tables de la base.',
 	'erreur_probleme_donnees_corruption' => 'Probleme avec les donnees de @table@, corruption possible !',
 	'erreur_repertoire_inaccessible' => 'Le répertoire @rep@ est inaccessible en écriture.',
+	'erreur_repertoire_perso_inaccessible' => 'Le répertoire @rep@ configuré n\'est pas accessible: utilisation du répertoire des sauvegardes de SPIP à la place',
 
 	// H
 	'help_cfg_generale' => 'Ces paramètres de configuration s’appliquent à toutes les sauvegardes, manuelles ou automatiques.',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							données archivées. Les données <strong>plus récentes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong> !',
 	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format MySQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
 	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
+	'help_repertoire' => 'Pour utiliser un répertoire de stockage différent de celui des sauvegardes SPIP, indiquez son chemin depuis la racine du site (avec / à la fin)',
 
 	// I
 	'info_sql_auteur' => 'Auteur : ',
@@ -72,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes',
 	'legend_cfg_notification' => 'Notifications',
 	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
+	'label_repertoire_sauvegardes' => 'Répertoire',
 
 	// M
 	'message_aucune_sauvegarde' => 'Aucune sauvegarde disponible au téléchargement.',

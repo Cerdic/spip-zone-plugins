@@ -31,9 +31,14 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 
     /**
      * Faut-il sauver?
+     * Si un répertoire de stockage est configuré, tester son existence et basculer sur tmp/dump si absent
      * Vérifier l'existence du répertoire tmp/dump/, le créer si besoin et tester son accessibilité
      */
-	$dir_dump = _DIR_DUMP;
+	$dir_dump = (isset($repertoire_save) ? $repertoire_save : _DIR_DUMP);
+	if ($dir_dump != _DIR_DUMP AND !@file_exists($dir_dump)) {
+		$erreur .= _T('saveauto:erreur_repertoire_perso_inaccessible',array('rep' => $dir_dump));
+		$dir_dump = _DIR_DUMP;
+	}
 	if (!@file_exists($dir_dump)
 	AND !$dir_dump = sous_repertoire(_DIR_DUMP,'',false,true)) {
 		$dir_dump = preg_replace(','._DIR_TMP.',', '', _DIR_DUMP);

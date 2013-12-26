@@ -15,10 +15,11 @@ function inc_saveauto_cleaner_dist($options=array()){
 	include_spip('inc/config');
 	$jours_obso = intval(lire_config('saveauto/jours_obso', 15));
 	$auteur = $options['auteur'] ? $options['auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	$dir_dump = lire_config('saveauto/repertoire_save', _DIR_DUMP);
 
 	if($jours_obso > 0){
 		$prefixe = lire_config('saveauto/prefixe_save','sav').'_';
-	    $sauvegardes = preg_files(_DIR_DUMP, "${prefixe}.+\.(zip|sql)$");
+	    $sauvegardes = preg_files($dir_dump, "${prefixe}.+\.(zip|sql)$");
 	    $liste = array();
 	    foreach($sauvegardes as $sauvegarde) {
 			$date_fichier = filemtime($sauvegarde);

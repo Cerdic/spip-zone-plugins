@@ -8,6 +8,12 @@
 			<legend><:saveauto:legend_cfg_generale:></legend>
 			<p><:saveauto:help_cfg_generale:></p>
 			<ul>
+				<li class="editer editer_repertoire_save">
+					<label for="repertoire_save"><:saveauto:label_repertoire_sauvegardes:></label>
+					<p class="explication"><:saveauto:help_repertoire:></p>
+					<input type="text" name="repertoire_save" class="text" id="repertoire_save" value="[(#ENV{repertoire_save, #EVAL{'_DIR_DUMP'}})]" />
+				</li>
+
 				<li class="editer editer_prefixe_save obligatoire">
 					<label for="prefixe_save"><:saveauto:label_prefixe_sauvegardes:></label>
 					<p class="explication"><:saveauto:help_prefixe:></p>

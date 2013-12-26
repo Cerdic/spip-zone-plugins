@@ -20,7 +20,8 @@ function saveauto_mes_fichiers_a_sauver($flux){
     /**
      * Determination du repertoire de sauvegarde et du prefixe
      */
-    $tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/';
+//    $tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/';   
+    $tmp_dump = lire_config('saveauto/repertoire_save', (defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/'));
     $rep_save = lire_config('saveauto/rep_bases','');
     $prefixe = lire_config('saveauto/prefixe_save','');
     $rep_save = $rep_save ? $racine.$rep_save : $tmp_dump;
