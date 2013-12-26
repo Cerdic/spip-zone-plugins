@@ -1,0 +1,13 @@
+<paquet
+	prefix="cookie"
+	categorie="outil"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/cookie-64.png"
+	documentation=""
+>
+	<nom>balise_cookie</nom>
+	<auteur>cy_altern</auteur>
+	<licence>GNU/GPL</licence>
+</paquet>
