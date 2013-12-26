@@ -34,8 +34,8 @@ function balise_COOKIE_dist($p) {
 	
 	// si elle existe on récupère la valeur du cookie prefixe_nom_cookie
 	// sinon on prend celle du cookie nom_cookie (qu'il existe ou non)
-	$nom_cookie_pfx = $GLOBALS['cookie_prefix'].'_'.trim($nom_cookie,"'");
-	$nom_cookie = "(isset(\$_COOKIE['$nom_cookie_pfx']) AND \$_COOKIE['$nom_cookie_pfx'] != '') ? '$nom_cookie_pfx' : $nom_cookie";
+	$nom_cookie_pfx = "\$GLOBALS['cookie_prefix'].'_'.$nom_cookie";
+	$nom_cookie = "(isset(\$_COOKIE[$nom_cookie_pfx]) AND \$_COOKIE[$nom_cookie_pfx] != '') ? $nom_cookie_pfx : $nom_cookie";
 
 	if (!$p->etoile)
 		$p->code = "entites_html(\$_COOKIE[$nom_cookie])";
@@ -45,6 +45,7 @@ function balise_COOKIE_dist($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
 
 /**
  * Compile la balise #COOKIE_SET qui pose un cookie préfixé 
@@ -57,10 +58,9 @@ function balise_COOKIE_dist($p) {
  * @example
  *     ```
  *     #COOKIE_SET{truc,ma_valeur,ma_duree}	// crée le cookie "spip_truc" avec la valeur "ma_valeur" et la durée "ma_duree" (en secondes) avant expiration
- * 	   #COOKIE_SET{truc,ma_valeur}	// crée le cookie "spip_truc" pour la durée de la session uniquement
+ * 	   #COOKIE_SET{truc,ma_valeur}	// crée le cookie "spip_truc" pour la durée de la session
  * 	   #COOKIE_SET{truc}	// supprime le cookie "spip_truc"
  * 	   #COOKIE_SET{truc, ma_valeur, ma_duree, chemin, domaine, secure}	// tous les paramètres utilisés par spip_setcookie()
- * 	   
  *     ```
  * 
  * @param Champ $p
@@ -78,20 +78,18 @@ function balise_COOKIE_SET_dist($p) {
 		return $p;
 	}
 	
-	include_spip('inc/cookie');
-	// pour la gestion du prefixe par spip_setcookie, ajouter spip_ en préfixe
-	$nom_cookie = (strpos($nom_cookie,'spip_') !== 1 ? "'spip_".trim($nom_cookie,"'")."'" : $nom_cookie);
+	// pour la gestion automagique du prefixe par spip_setcookie, ajouter spip_ en préfixe
+	$nom_cookie_pfx = "(strpos($nom_cookie,'spip_') !== 0 ? 'spip_'.$nom_cookie : $nom_cookie)";
 	
 	$valeur_cookie = interprete_argument_balise(2,$p) ? interprete_argument_balise(2,$p) : "''";
-	$expire = interprete_argument_balise(3,$p) ? time() + str_replace("'", "",interprete_argument_balise(3,$p)) : "0";
+	$expire = interprete_argument_balise(3,$p) ? time() + trim(interprete_argument_balise(3,$p),"'" ) : "0";
 	$path = interprete_argument_balise(4,$p) ? interprete_argument_balise(4,$p) : "'AUTO'";
 	$domaine = interprete_argument_balise(5,$p) ? interprete_argument_balise(5,$p) : "''";
 	$secure = interprete_argument_balise(6,$p) ? interprete_argument_balise(6,$p) : "''";
 	
-	$p->code = "(spip_setcookie($nom_cookie, $valeur_cookie, $expire, $path, $domaine, $secure) ? ' ': '')";
+	$p->code = "((include_spip('inc/cookie') AND spip_setcookie($nom_cookie_pfx, $valeur_cookie, $expire, $path, $domaine, $secure)) ? ' ': '')";
 	$p->interdire_scripts = false;
 	return $p;
 }
-
 
 ?>
