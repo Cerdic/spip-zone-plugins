@@ -54,7 +54,7 @@ function exec_compte_resultat() {
 	echo comptabilite_tableau_balances($GLOBALS['association_metas']['classe_produits'], 'cpte_resultat', '+1', $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // liste des produits (recettes d'exploitation) cumules par comptes
 	echo comptabilite_tableau_resultat($regles['A'], $ids['debut_periode'], $ids['fin_periode'], $ids['destination']); // resultat comptable courant : c'est la difference entre les recettes et les depenses d'exploitation
 	// liste des contributions volontaires (emplois et ressources) par comptes
-	$contributions = association_liste_totaux_comptes_classes($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['id_periode'], $ids['destination']);
+	echo comptabilite_tableau_balances($GLOBALS['association_metas']['classe_contributions_volontaires'], 'cpte_benevolat', 0, $ids['id_periode'], $ids['destination']);
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
 }
