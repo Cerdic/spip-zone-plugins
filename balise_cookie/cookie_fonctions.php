@@ -37,10 +37,10 @@ function balise_COOKIE_dist($p) {
 	$nom_cookie_pfx = "\$GLOBALS['cookie_prefix'].'_'.$nom_cookie";
 	$nom_cookie = "(isset(\$_COOKIE[$nom_cookie_pfx]) AND \$_COOKIE[$nom_cookie_pfx] != '') ? $nom_cookie_pfx : $nom_cookie";
 
-	if (!$p->etoile)
-		$p->code = "entites_html(\$_COOKIE[$nom_cookie])";
-	else
+/*	if ($p->etoile)
 		$p->code = "\$_COOKIE[$nom_cookie]";
+	else
+*/		$p->code = "entites_html(\$_COOKIE[$nom_cookie])";
 
 	$p->interdire_scripts = false;
 	return $p;
