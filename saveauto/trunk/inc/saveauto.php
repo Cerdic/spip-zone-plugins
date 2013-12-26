@@ -72,7 +72,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 			$nom_fichier = $prefixe_save . '_' . $base. '_' . date("Ymd_His", $temps) . '.sql';
 			$chemin_fichier = $dir_dump . $nom_fichier;
 
-			// Identifiation de l'auteur de la sauvegarde (CRON ou un od_auteur)
+			// Identifiation de l'auteur de la sauvegarde (CRON ou un id_auteur)
 			$auteur = $options['auteur'] ? $options['auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 			if ($id = intval($auteur))
 				$auteur = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . sql_quote($id));

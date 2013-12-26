@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_contenu' => 'Choisissez les paramètres de contenu de votre fichier de sauvegarde.',
 	'help_contenu_auto' => 'Choisir le contenu des sauvegardes automatiques.',
 	'help_frequence' => 'Saisir la fréquence des sauvegardes automatiques en jours.',
-	'help_liste_tables' => 'Par défaut, toutes les tables sont exportées à l’exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder ouvrez la liste en décochant la case ci-dessous.',
+	'help_liste_tables' => 'Par défaut, toutes les tables SPIP sont exportées à l’exception des tables @noexport@. Si vous souhaitez choisir précisément les tables à sauvegarder (ainsi que des tables non SPIP) ouvrez la liste en décochant la case ci-dessous.',
 	'help_mail_max_size' => 'Saisir la taille maximale en Mo du fichier de sauvegarde au-delà de laquelle le mail ne sera pas envoyé (valeur à vérifier auprès de votre fournisseur de mail).',
 	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo. (Ce seuil est nécessaire pour ne pas planter le serveur par la confection d’un trop gros zip)',
 	'help_notif_active' => 'Si vous souhaitez être prévenus des traitements automatiques activez les notifications. Pour la sauvegarde automatique vous recevrez le fichier généré par mail si celui-ci n’est pas trop volumineux et que le plugin Facteur est activé.',
@@ -70,11 +70,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_prefixe_sauvegardes' => 'Préfixe',
 	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
 	'label_structure' => 'Structure des tables',
-	'label_toutes_tables' => 'Sauvegarder toutes les tables',
+	'label_toutes_tables' => 'Sauvegarder toutes les tables de SPIP',
 	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes',
 	'legend_cfg_notification' => 'Notifications',
 	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
 	'label_repertoire_sauvegardes' => 'Répertoire',
+	'label_tables_non_spip' => 'Tables non SPIP',
 
 	// M
 	'message_aucune_sauvegarde' => 'Aucune sauvegarde disponible au téléchargement.',

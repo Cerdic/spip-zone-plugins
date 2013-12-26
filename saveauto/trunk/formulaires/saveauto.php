@@ -17,6 +17,7 @@ function formulaires_saveauto_charger_dist(){
 		'_toutes_tables' => base_lister_toutes_tables('', array(), array(), true),
 		'_tables_export' => base_lister_toutes_tables('', array(), $exclude, true),
 		'_noexport' => implode(', ', $exclude),
+		'_tables_non_spip' => saveauto_lister_tables_ext('')
 	);
 
 	return $valeurs;
@@ -70,6 +71,25 @@ function formulaires_saveauto_traiter_dist() {
 	}
 
 	return $retour;
+}
+
+/**
+ * Lister les tables non-SPIP de la base
+ * @return array
+ **/ 
+ function saveauto_lister_tables_ext($serveur='') {
+	spip_connect($serveur);
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+
+	$p = '/^' . $prefixe . '/';
+	$res = array();
+	foreach(sql_alltable('%',$serveur) as $t) {
+		if (!preg_match($p, $t)) 
+			$res[]= $t;
+	}
+	sort($res);
+	return $res;
 }
 
 ?>

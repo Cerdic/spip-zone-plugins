@@ -22,6 +22,17 @@
 			</li>
 </BOUCLE_tables>
 		</ol>
+<B_tables_ext>
+		<label><:saveauto:label_tables_non_spip:></label>
+		<ol class="spip">
+<BOUCLE_tables_ext(DATA){source table, #ENV{_tables_non_spip}}>
+			<li class="choix">
+				<input type="checkbox" value="#VALEUR" name="tables_saveauto[]" id="#VALEUR#CLE" checked="checked" />
+				<label for="#VALEUR#CLE">#VALEUR</label>
+			</li>
+</BOUCLE_tables_ext>
+		</ol>
+</B_tables_ext>
 	</div>
 </li>
 </B_tables>
