@@ -28,6 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Public',
 
 	// L
+	'label_fichier' => 'Fichier',
+	'label_fonction' => 'Fonction',
+	'label_ligne' => 'Ligne',
 	'liste_fic' => 'Liste des journaux',
 	'logs' => 'Consultation des journaux',
 
