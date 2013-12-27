@@ -1,0 +1,16 @@
+<paquet
+	prefix="bonne_annee"
+	categorie="date"
+	version="0.1.1"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="bonne_annee.png"
+	documentation="http://www.spip-contrib.net/Plugin-Bonne-annee"
+>
+
+	<nom>Bonne ann&#233;e</nom>
+
+	<auteur>Phil</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>
