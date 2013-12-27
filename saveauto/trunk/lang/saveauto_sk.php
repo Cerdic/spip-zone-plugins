@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_contenu' => 'Zvoľte si vlastnosti obsahu svojho súboru zálohy.',
 	'help_contenu_auto' => 'Zvoľte si obsah automatických záloh.',
 	'help_frequence' => 'Zadajte frekvenciu automatického zálohovania v dňoch',
-	'help_liste_tables' => 'Podľa predvolených nastavení sa exportujú všetky tabuľky okrem tabuliek @noexport@. Ak chcete presne určiť, ktoré tabuľky sa majú zálohovať, odznačte toto políčko, čím otvoríte ich zoznam.',
+	'help_liste_tables' => 'Podľa predvolených nastavení sa exportujú všetky tabuľky okrem tabuliek @noexport@. Ak chcete presne určiť, ktoré tabuľky sa majú zálohovať, odznačte toto políčko, čím otvoríte ich zoznam.', # MODIF
 	'help_mail_max_size' => 'Zadajte maximálnu veľkosť súboru databázy v MB, po ktorej prekročení nebude odoslaný e-mail (hodnotu je dobré si overiť u poskytovateľa e-mailu).',
 	'help_max_zip' => 'Súbor zálohy bude automaticky "zazipovaný", ak jeho veľkosť bude menšia ako limit. Zadajte limit v megabytoch (Limit je potrebný na to, aby sa zabránilo zrúteniu servera preto, že bol vytvorený príliš veľký súbor zip)',
 	'help_notif_active' => 'Ak chcete mať prehľad o každom automatickom spracovaní, aktivujte si zasielanie oznamov. Pri automatickom zálohovaní dostanete na e-mail vygenerovaný súbor, či nie je príliš veľký a oznam o tom, že zásuvný modul Poštár je aktivovaný.',
@@ -71,7 +71,7 @@ Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej
 	'label_prefixe_sauvegardes' => 'Predpona',
 	'label_sauvegarde_reguliere' => 'Aktivovať pravidelné zálohovanie',
 	'label_structure' => 'Štruktúra tabuliek',
-	'label_toutes_tables' => 'Zálohovať všetky tabuľky',
+	'label_toutes_tables' => 'Zálohovať všetky tabuľky', # MODIF
 	'legend_cfg_generale' => 'Všeobecné vlastnosti databáz',
 	'legend_cfg_notification' => 'Oznamy',
 	'legend_cfg_sauvegarde_reguliere' => 'Automatické spracúvanie',

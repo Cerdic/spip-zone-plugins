@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_contenu' => 'Wählen Sie die inhaltlichen Einstellungen ihrer Backups.',
 	'help_contenu_auto' => 'Wählen Sie die Inhalte der automatischen Backups aus.',
 	'help_frequence' => 'Wählen Sie die Zeitabstände in Tagen zwischen den automatischen Backups.',
-	'help_liste_tables' => 'In der Grundeinstellung werden alle Tabellen außer  @noexport@ gesichert. Wenn Sie die zu sichernden Tabellen einzeln auswählen möchten, öffnen Sie die Liste, indem Sie das Häkchen weiter unten entfernen.',
+	'help_liste_tables' => 'In der Grundeinstellung werden alle Tabellen außer  @noexport@ gesichert. Wenn Sie die zu sichernden Tabellen einzeln auswählen möchten, öffnen Sie die Liste, indem Sie das Häkchen weiter unten entfernen.', # MODIF
 	'help_mail_max_size' => 'Angabe der Maximalgröße für Backupdateien, die per Mail verschickt wird. Der Wert ist abhängig von den Einstellungen Ihres Mailanbieters.',
 	'help_max_zip' => 'Die Sicherungsdatei wird automatisch als ZIP komprimiert, wenn sie kleiner als ein bestimmter Wert ist. Geben Sie diesen Wert in Megabyte an.',
 	'help_notif_active' => 'Sie werden auf Wunsch über automatische Vorgänge informiert. Bei automatischen backups wird Ihnen die Sicherungsdatei zugeschickt, wenn diese nicht größer als ein bestimmter Wert ist, und wenn das Plugin "Facteur" aktiviert ist.',
@@ -69,7 +69,7 @@ Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalt
 	'label_prefixe_sauvegardes' => 'Präfix',
 	'label_sauvegarde_reguliere' => 'Regelmäßige Sicherungen aktivieren',
 	'label_structure' => 'Tabellenstruktur',
-	'label_toutes_tables' => 'Alle Tabellen sichern',
+	'label_toutes_tables' => 'Alle Tabellen sichern', # MODIF
 	'legend_cfg_generale' => 'Allgemeine Sicherungseinstellungen',
 	'legend_cfg_notification' => 'Benachrichtigungen',
 	'legend_cfg_sauvegarde_reguliere' => 'Automatische Abläufe',

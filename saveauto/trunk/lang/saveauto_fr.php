@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_impossible_liste_tables' => 'Impossible de lister les tables de la base.',
 	'erreur_probleme_donnees_corruption' => 'Probleme avec les donnees de @table@, corruption possible !',
 	'erreur_repertoire_inaccessible' => 'Le répertoire @rep@ est inaccessible en écriture.',
-	'erreur_repertoire_perso_inaccessible' => 'Le répertoire @rep@ configuré n\'est pas accessible: utilisation du répertoire des sauvegardes de SPIP à la place',
+	'erreur_repertoire_perso_inaccessible' => 'Le répertoire @rep@ configuré n’est pas accessible : utilisation du répertoire des sauvegardes de SPIP à la place',
 
 	// H
 	'help_cfg_generale' => 'Ces paramètres de configuration s’appliquent à toutes les sauvegardes, manuelles ou automatiques.',
@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s’ajoutent à celle du webmestre du site.',
 	'help_obsolete' => 'Saisir la durée de conservation des sauvegardes en jours',
 	'help_prefixe' => 'Saisir le préfixe accolé au nom de chaque fichier de sauvegarde',
+	'help_repertoire' => 'Pour utiliser un répertoire de stockage différent de celui des sauvegardes SPIP, indiquez son chemin depuis la racine du site (avec / à la fin)',
 	'help_restauration' => '<strong>Attention !!!</strong> ces sauvegardes ne sont <strong>pas au format de celles de SPIP</strong> et ne peuvent pas être utilisées avec l’outil de restauration de la base de SPIP.<br /><br />
 							Pour toute restauration il faut donc utiliser l’interface <strong>phpmyadmin</strong> de votre
 							serveur de base de données.<br /><br />
@@ -38,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							données archivées. Les données <strong>plus récentes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong> !',
 	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format MySQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
 	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
-	'help_repertoire' => 'Pour utiliser un répertoire de stockage différent de celui des sauvegardes SPIP, indiquez son chemin depuis la racine du site (avec / à la fin)',
 
 	// I
 	'info_sql_auteur' => 'Auteur : ',
@@ -68,14 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_notif_mail' => 'Adresses email à notifier',
 	'label_obsolete_jours' => 'Conservation des sauvegardes',
 	'label_prefixe_sauvegardes' => 'Préfixe',
+	'label_repertoire_sauvegardes' => 'Répertoire',
 	'label_sauvegarde_reguliere' => 'Activer la sauvegarde régulière',
 	'label_structure' => 'Structure des tables',
+	'label_tables_non_spip' => 'Tables non SPIP',
 	'label_toutes_tables' => 'Sauvegarder toutes les tables de SPIP',
 	'legend_cfg_generale' => 'Paramètres généraux des sauvegardes',
 	'legend_cfg_notification' => 'Notifications',
 	'legend_cfg_sauvegarde_reguliere' => 'Traitements automatiques',
-	'label_repertoire_sauvegardes' => 'Répertoire',
-	'label_tables_non_spip' => 'Tables non SPIP',
 
 	// M
 	'message_aucune_sauvegarde' => 'Aucune sauvegarde disponible au téléchargement.',

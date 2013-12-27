@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_contenu' => 'Choose the settings of the contents of your backup file.',
 	'help_contenu_auto' => 'Choose the content of automatic backups.',
 	'help_frequence' => 'Enter the frequency of automatic backups in days.',
-	'help_liste_tables' => 'By default, all tables are exported with the exception of tables @noexport@. If you want to choose precisely the tables to save open the list by unchecking the box below.',
+	'help_liste_tables' => 'By default, all tables are exported with the exception of tables @noexport@. If you want to choose precisely the tables to save open the list by unchecking the box below.', # MODIF
 	'help_mail_max_size' => 'Enter the maximum size in MB of the backup file beyond which the mail will not be sent (value to check with your mail provider).',
 	'help_max_zip' => 'The backup file is automatically zipped if its size is less than a threshold. Enter the threshold in megabytes (This threshold is necessary to not crash the server by making a too big zip)',
 	'help_notif_active' => 'If you wish to be notified of automatic processing, enable the notifications. For automatic backup you will receive the generated file by mail if it is not too large and if the "Facteur" plugin is enabled.',
@@ -71,7 +71,7 @@ The backups contain an SQL formatted file with the commands used to <strong>dele
 	'label_prefixe_sauvegardes' => 'Prefix:',
 	'label_sauvegarde_reguliere' => 'Enable regular backup',
 	'label_structure' => 'Structure of the tables',
-	'label_toutes_tables' => 'Backup all tables',
+	'label_toutes_tables' => 'Backup all tables', # MODIF
 	'legend_cfg_generale' => 'General settings of the backups',
 	'legend_cfg_notification' => 'Notifications',
 	'legend_cfg_sauvegarde_reguliere' => 'Automatic processing',
