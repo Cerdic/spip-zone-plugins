@@ -5,6 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Compile la balise #COOKIE qui retourne la valeur d'un cookie préfixé 
  * si il existe (sinon du cookie sans le préfixe)
+ * Ne fonctionne que pour les visiteurs authentifiés
  * 
  * @balise
  * @see balise_SESSION_dist()
@@ -28,20 +29,21 @@ function balise_COOKIE_dist($p) {
 		return $p;
 	}
 	
-	// pour éviter les problèmes de valeur de cookie passé d'un utilisateur à l'autre via le cache
-	// sur le modele de la balise #SESSION lever le drapeau d'invalidation du cache en fonction de la session 
-	$p->descr['session'] = true;
+	// pour éviter les problèmes de valeur de cookie passé d'un utilisateur à l'autre via le cache:
+	//  . retourne une valeur vide si pas de session
+	// 	. sur le modele de la balise #SESSION lever le drapeau d'invalidation du cache en fonction de la session 
+	if ($GLOBALS["visiteur_session"] == '')
+		$p->code = "''";
+	else {
+		$p->descr['session'] = true;
+		
+		// si elle existe on récupère la valeur du cookie prefixe_nom_cookie
+		// sinon on prend celle du cookie nom_cookie (qu'il existe ou non)
+		$nom_cookie_pfx = "\$GLOBALS['cookie_prefix'].'_'.$nom_cookie";
+		$nom_cookie = "(isset(\$_COOKIE[$nom_cookie_pfx]) AND \$_COOKIE[$nom_cookie_pfx] != '') ? $nom_cookie_pfx : $nom_cookie";
+		$p->code = "entites_html(\$_COOKIE[$nom_cookie])";
+	}
 	
-	// si elle existe on récupère la valeur du cookie prefixe_nom_cookie
-	// sinon on prend celle du cookie nom_cookie (qu'il existe ou non)
-	$nom_cookie_pfx = "\$GLOBALS['cookie_prefix'].'_'.$nom_cookie";
-	$nom_cookie = "(isset(\$_COOKIE[$nom_cookie_pfx]) AND \$_COOKIE[$nom_cookie_pfx] != '') ? $nom_cookie_pfx : $nom_cookie";
-
-/*	if ($p->etoile)
-		$p->code = "\$_COOKIE[$nom_cookie]";
-	else
-*/		$p->code = "entites_html(\$_COOKIE[$nom_cookie])";
-
 	$p->interdire_scripts = false;
 	return $p;
 }

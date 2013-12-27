@@ -1,7 +1,7 @@
 <paquet
 	prefix="cookie"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cookie-64.png"

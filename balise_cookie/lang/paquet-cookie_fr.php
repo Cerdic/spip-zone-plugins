@@ -5,9 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cookie_description' => 'Fourni les balises #COOKIE et #COOKIE_SET intégrées à la version 3.1.
+	'cookie_description' => 'Fourni les balises #COOKIE et #COOKIE_SET
 Utilisation:
 <code>#COOKIE{truc}</code> retourne la valeur du cookie "spip_truc"  (ou du cookie "truc" si celui "spip_truc" n\'existe pas).
+/!\ Pour éviter les problèmes de partage des valeurs de cookie via le cache, cette balise ne fonctionne que pour les visiteurs authentifiés
 
 <code>#COOKIE_SET{truc,ma_valeur,ma_duree}</code> permet de créer le cookie "spip_truc" avec la valeur "ma_valeur" et la durée "ma_duree" (en secondes) avant expiration. 
 Seul le premier paramètre (le nom du cookie)  est obligatoire:
