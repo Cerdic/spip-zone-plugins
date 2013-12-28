@@ -22,8 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deuxjours' => 'Twee dagen',
 
 	// L
-	'liens' => 'artikel', # MODIF
-	'liens_pluriel' => 'artikelen', # MODIF
+	'liens' => '1 artikel',
+	'liens_pluriel' => '@nb@ artikelen',
 
 	// M
 	'masquer_resume' => 'De samenvattingen verbergen',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Maand',
 
 	// P
-	'pas_articles' => 'Geen artikel voor periode !',
+	'pas_articles' => 'Geen artikel voor deze periode!',
 	'pas_synchro' => 'Niet synchroniseren',
 	'preferences' => 'Voorkeuren',
 	'probleme_de_syndication' => 'syndicatie probleem',
