@@ -12,19 +12,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Permettre de rajouter des fichiers a sauvegarder dans le plugin Mes Fichiers 2
  */
 function saveauto_mes_fichiers_a_sauver($flux){
-	if(defined('_DIR_SITE')){
-		$racine = _DIR_SITE;
-	}else{
-		$racine = _DIR_RACINE;
-	}
     /**
      * Determination du repertoire de sauvegarde et du prefixe
      */
-//    $tmp_dump = defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/';   
-    $tmp_dump = lire_config('saveauto/repertoire_save', (defined('_DIR_DUMP') ? _DIR_DUMP: _DIR_TMP.'dump/'));
-    $rep_save = lire_config('saveauto/rep_bases','');
-    $prefixe = lire_config('saveauto/prefixe_save','');
-    $rep_save = $rep_save ? $racine.$rep_save : $tmp_dump;
+	$rep_save = lire_config('saveauto/repertoire_save');
+    $prefixe = lire_config('saveauto/prefixe_save');
 
     /**
      * le dernier fichier de dump de la base cree par saveauto

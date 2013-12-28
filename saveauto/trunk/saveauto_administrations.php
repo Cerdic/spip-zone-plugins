@@ -19,6 +19,9 @@ function saveauto_upgrade($nom_meta_base_version,$version_cible) {
 		array('effacer_meta', 'saveauto_creation'),
 		array('ecrire_config','saveauto', $defaut),
 	);
+	$maj['0.1.1'] = array(
+		array('ecrire_config','saveauto/repertoire_save', _DIR_DUMP),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -45,6 +48,7 @@ function saveauto_declarer_config() {
 		'mail_max_size'			=> 5,
 		'tout_saveauto'			=> 'oui',
 		'tables_saveauto'		=> $tables,
+		'repertoire_save'		=> _DIR_DUMP,
 	);
 
 	return $config;

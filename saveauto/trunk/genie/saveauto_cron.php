@@ -12,13 +12,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function saveauto_taches_generales_cron($taches_generales){
 	include_spip('inc/config');
 
-	$sauver_auto = (lire_config('saveauto/sauvegarde_reguliere', 'non') == 'oui');
+	$sauver_auto = (lire_config('saveauto/sauvegarde_reguliere') == 'oui');
 	if ($sauver_auto) {
-		$jour = lire_config('saveauto/frequence_maj', 1);
+		$jour = lire_config('saveauto/frequence_maj');
 		$taches_generales['saveauto'] = $jour*24*3600;
 	}
 
-	$laver_auto = (lire_config('saveauto/nettoyage_journalier', 'oui') == 'oui');
+	$laver_auto = (lire_config('saveauto/nettoyage_journalier') == 'oui');
 	if ($laver_auto) {
 		$taches_generales['saveauto_cleaner'] = 24*3600;
 	}

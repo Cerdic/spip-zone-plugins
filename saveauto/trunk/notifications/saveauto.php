@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notifications_saveauto_dist($quoi, $id, $options) {
 	include_spip('inc/config');
-	$notif_active = (lire_config('saveauto/notif_active', 'non') == 'oui');
+	$notif_active = (lire_config('saveauto/notif_active') == 'oui');
 
 	if ($notif_active
 	AND !$options['err']) {

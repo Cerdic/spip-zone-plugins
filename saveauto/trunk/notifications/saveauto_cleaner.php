@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notifications_saveauto_cleaner_dist($quoi, $id, $options) {
 	include_spip('inc/config');
-	$notif_active = (lire_config('saveauto/notif_active', 'non') == 'oui');
+	$notif_active = (lire_config('saveauto/notif_active') == 'oui');
 
 	if ($notif_active) {
 		/**
@@ -22,7 +22,7 @@ function notifications_saveauto_cleaner_dist($quoi, $id, $options) {
 						. _T('saveauto:message_cleaner_sujet');
 
 			// Construction du texte du mail
-			$duree = lire_config('saveauto/jours_obso', 15);
+			$duree = lire_config('saveauto/jours_obso');
 			$liste_fichiers = "\n\r";
 			foreach($options['liste'] as $_fichier){
 				$liste_fichiers .= "- ${_fichier}\n\r";

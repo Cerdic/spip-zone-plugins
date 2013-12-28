@@ -6,9 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function saveauto_a_telecharger() {
 	include_spip('inc/config');
 
-	$prefixe = lire_config('saveauto/prefixe_save','sav');
-	$laver_auto = (lire_config('saveauto/nettoyage_journalier', 'oui') == 'oui');
-	$dir_dump = lire_config('saveauto/repertoire_save', _DIR_DUMP);
+	$prefixe = lire_config('saveauto/prefixe_save');
+	$laver_auto = (lire_config('saveauto/nettoyage_journalier') == 'oui');
+	$dir_dump = lire_config('saveauto/repertoire_save');
 
 	$pattern = "${prefixe}.*\.(zip|sql)$";
 
