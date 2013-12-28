@@ -1012,13 +1012,13 @@ function association_formater_emails($id_objets, $objet='auteur', $html_span='di
 				$emails_string[$id_objet] .= "<$html_span class='email'>". appliquer_filtre($courriel['type'], 'logo_type_email');
 				if ( !in_array($courriel['format'],array('x400','ldap')) )
 					$href = TRUE;
-				$emails_string[$id_objet] .= ($href?("<a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='".($href?'spip_out ':'')."value'>";
+				$emails_string[$id_objet] .= ($href?("<html><a title='". _T('asso:ecrire_a') ." $courriel[email]' href='mailto:$courriel[email]'"):'<span') ." class='".($href?'spip_out ':'')."value'>";
 				unset($courriel['type']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_objet']); // ne devrait plus etre traite par le modele
 				unset($courriel['id_email']); // ne devrait pas etre utilise par le modele
 				$courriel['email'] = ( $courriel['titre'] ? $courriel['titre'] : ucwords(str_replace('@', ' ['._T('local:at').'] ', $courriel['email'])) ); // on affiche le titre si present sinon la valeur
 			}
-			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a':'span')."></$html_span>\n"):'');
+			$emails_string[$id_objet] .= $courriel['email']. ($html_span?('</'.($href?'a></html':'span')."></$html_span>\n"):'');
 		}
 		$emails_string[$id_objet] = $emails_string[$id_objet].$sep;
 	}
