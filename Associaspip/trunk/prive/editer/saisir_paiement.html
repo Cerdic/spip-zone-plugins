@@ -28,14 +28,14 @@ maj:2012-10-15; version:0.2.1; licence:GPL; copyleft:Jeannot Lapin, Marcel Bolla
 <:asso:compte_credite:>
 		</span>
 	</label>
-[(#REM) s'il n'y a qu'une seule destination comptable, pas de Select inepte
-]<BOUCLE_mode_paiement_c(ASSO_PLAN) {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}{0,2}>[(#TOTAL_BOUCLE|=={1}|?{<input name="journal" id="journal" value="#CODE" readonly="readonly" /> #INTITULE})]</BOUCLE_mode_paiement_c>
-<B_mode_paiement>
-	<select name="journal" id="journal" class="select">
-<BOUCLE_mode_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
-		<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option></BOUCLE_mode_paiement>
-	</select></B_mode_paiement>
-<//B_mode_paiement_c>
+	<B_modes_paiement>
+	[(#TOTAL_BOUCLE|=={1}|oui)<input name="journal" id="journal" value="#CODE" type="hidden" />]
+	<select name="journal" id="journal" class="select"[(#TOTAL_BOUCLE|=={1}|oui) disabled="disabled"]>
+	<BOUCLE_modes_paiement(ASSO_PLAN) {par code} {active=1}{classe=#META{/association/classe_banques}}{code!=#META{/association/pc_intravirements}}>
+		<option value="#CODE"[(#ENV{journal}|=={#CODE}|oui) selected="selected"]>#CODE - #INTITULE</option>
+	</BOUCLE_modes_paiement>
+	</select>
+	</B_modes_paiement>
 [
 </li>
 <li id="saisie_destination" class="editer_destinations[ (#ENV{type_operation}|affichage_div{charges-produits-contributions_volontaires})]">
