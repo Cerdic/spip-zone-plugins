@@ -7,7 +7,7 @@
 	<ul>
 		<li class="editer_comptes">
 			<div class="choix">
-				<input type="checkbox" name= "comptes" value="on"[(#ENV{comptes}|oui) checked="checked"] id="comptes" />
+				<input type="checkbox" name= "comptes" value="on"[(#ENV{comptes}|oui) checked="checked"] id="comptes" onclick="toggle('comptes', 'dons'); toggle('comptes', 'ventes'); toggle('comptes', 'activites'); toggle('comptes', 'prets');" />
 				<label for="comptes"><:asso:config_libelle_activer_comptes:></label>
 			</div>
 		</li>
