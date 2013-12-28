@@ -85,10 +85,10 @@ function frimousses_pre_propre($chaine) {
 			$r = "<img src=\"".find_in_path('frimousses/'.$file).'" width="16" height="16" alt="'.$alt.'" title="'.$alt.'" class="smiley" />';
 			// 4 regexp simples qui accrochent sur le premier char
 			// sont plus rapides qu'une regexp complexe qui oblige a des retour en arriere
-			$replace1['/^'.$smiley.'/imsS'] = "<html>$r</html>";
-			$replace1['/\s'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
-			$replace2['/^&nbsp;'.$smiley.'/imsS'] = "<html>$r</html>";
-			$replace2['/&nbsp;'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+			$replace1['/^'.$smiley.'/imsS'] = "$r";
+			$replace1['/\s'.$smiley.'/imsS'] = "&nbsp;$r";
+			$replace2['/^&nbsp;'.$smiley.'/imsS'] = "$r";
+			$replace2['/&nbsp;'.$smiley.'/imsS'] = "&nbsp;$r";
 		}
   }
 
