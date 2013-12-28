@@ -1,0 +1,9 @@
+<traduction module="bonne_annee" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/bonne_annee/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/bonne_annee?lang_cible=en" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/bonne_annee?lang_cible=fr" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/bonne_annee?lang_cible=nl" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
+</traduction>
