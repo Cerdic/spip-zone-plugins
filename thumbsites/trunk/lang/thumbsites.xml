@@ -21,6 +21,9 @@
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=gl" total="23" traduits="1" relire="0" modifs="0" nouveaux="22" pourcent="4.35">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=nl" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=pt_br" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
