@@ -133,15 +133,17 @@ function comptabilite_liste_comptesclasse($classe, $actives='') {
  */
 function comptabilite_liste_plancodes($id='') {
     if (!$id)
-	$id = $GLOBALS['association_metas']['plan_comptable'];
+	$id = strtolower($GLOBALS['association_metas']['plan_comptable']);
     if ($id) {
 	$trads = array_keys(find_all_in_path('lang/', "pcg2$id", FALSE) ); // recuperer la liste des traductions existantes
+	if ( !$trads[0] ) // pas de traduction trouvee
+	    return array(); // un tableau vide pour ne pas planter les traitements dependant de l'appel a cette fonction !
 	$GLOBALS['idx_lang'] = 'i18n_'. substr($trads[0], 0, -4);
 	include(find_in_path('lang/'.$trads[0])); // charger un des fichiers de langue
 	return array_keys($GLOBALS[$GLOBALS['idx_lang']]); // on ne veut que les cles du tableau
     } else { // $id===FALSE pour local...
 	$pc_liste = array(); // initialiser le tableau
-	$sql = sql_select('code, intitule', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
+	$sql = sql_select('code', 'spip_asso_plan', '', '', 'code'); // recuperer les elements du tableau
 	while( $r = sql_fetch($sql) ) // remplir le tableau
 	    $pc_liste[] = $r['code'];
 	return $pc_liste; // retourner le tableau
