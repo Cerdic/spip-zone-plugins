@@ -4,7 +4,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="159" traduits="143" relire="0" modifs="2" nouveaux="14" pourcent="89.94">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="159" traduits="149" relire="0" modifs="0" nouveaux="10" pourcent="93.71">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="159" traduits="159" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
