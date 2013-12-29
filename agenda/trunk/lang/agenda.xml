@@ -2,7 +2,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=de" total="117" traduits="91" relire="0" modifs="4" nouveaux="22" pourcent="77.78">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="117" traduits="114" relire="0" modifs="0" nouveaux="3" pourcent="97.44">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=en" total="117" traduits="117" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/agenda?lang_cible=es" total="117" traduits="117" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

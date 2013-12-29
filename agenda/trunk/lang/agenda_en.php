@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'connexion_necessaire_pour_inscription' => 'Please log in to register to this event.',
 	'creer_evenement' => 'Create an event',
 
+	// D
+	'date_fmt_agenda_label' => '<b class="month">@mois@</b> <b class="day">@jour@</b> <b class="year">@annee@</b>',
+
 	// E
 	'erreur_article_interdit' => 'You have no right to associate this event to this article',
 	'erreur_article_manquant' => 'You should link to an article',
@@ -58,6 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements' => 'Events',
 	'evenements_a_venir' => 'Next',
 	'evenements_depuis_debut' => 'All',
+	'explication_synchro_flux_ical' => 'Plugin Agenda supplies a flow of events in iCal format. Certain clients do not update an event unless a version number (also indicating any modification) is present in the flow. In order to have this number included in the generated iCal flow,  you can activate revisions for events (Configuration menu > Revisions).',
+	'explication_synchro_flux_ical_titre' => 'Synchronisation of iCal flow',
 
 	// F
 	'fermer' => 'close',
