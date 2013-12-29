@@ -85,7 +85,7 @@ Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalt
 	'message_telechargement_nok' => 'Übertragungsfehler',
 
 	// T
-	'titre_boite_historique' => 'Sicherungsgeschichte',
+	'titre_boite_historique' => 'Sicherungsgeschichte', # MODIF
 	'titre_boite_sauver' => 'MySQL Datensicherung anlegen',
 	'titre_page_configurer' => 'Konfiguration des Plugins saveauto',
 	'titre_page_saveauto' => 'Datenbank im SQL-Format sichern',

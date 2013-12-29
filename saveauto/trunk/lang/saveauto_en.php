@@ -87,7 +87,7 @@ The backups contain an SQL formatted file with the commands used to <strong>dele
 	'message_telechargement_nok' => 'Error downloading.',
 
 	// T
-	'titre_boite_historique' => 'MySQL backups available for download',
+	'titre_boite_historique' => 'MySQL backups available for download', # MODIF
 	'titre_boite_sauver' => 'Create a MySQL backup',
 	'titre_page_configurer' => 'Saveauto plugin configuration',
 	'titre_page_saveauto' => 'Backup the database in MySQL format',

@@ -87,7 +87,7 @@ Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej
 	'message_telechargement_nok' => 'Chyba pri sťahovaní.',
 
 	// T
-	'titre_boite_historique' => 'Zálohy MySQL dostupné na stiahnutie',
+	'titre_boite_historique' => 'Zálohy MySQL dostupné na stiahnutie', # MODIF
 	'titre_boite_sauver' => 'Vytvoriť zálohu MySQL',
 	'titre_page_configurer' => 'Nastavenia modulu Automatická záloha',
 	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL',
