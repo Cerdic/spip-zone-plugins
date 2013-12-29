@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_champ_page_doublon' => 'That ID is already in use',
-	'erreur_champ_page_format' => 'Lowercase alphanumeric caracters or "_" only', # RELIRE
+	'erreur_champ_page_format' => 'Lowercase alphanumerical characters or "_" only',
 	'erreur_champ_page_taille' => 'Up to 255 characters max',
 
 	// L
