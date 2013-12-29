@@ -11,8 +11,8 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-include_spip('inc/presentation'); // pour: debut_onglet, fin_onglet, icone_horizontal, onglet
-#include_spip('inc/autoriser'); // utile aux pages appelantes
+include_spip('inc/presentation'); // pour : debut_onglet, fin_onglet, icone_horizontal, onglet
+include_spip('inc/autoriser'); // pour les pages appelantes et : association_langue, association_aujourdhui,
 
 
 
@@ -51,13 +51,13 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 // Recuperation de la liste des ongles
 	// modules natifs toujours actifs
 	$modules_actifs = array(
-		array('menu2_titre_association', 'assoc_qui.png', array('association'), array('voir_profil','association'), ),
-		array('menu2_titre_gestion_membres', 'annonce.gif', array('adherents'), array('voir_membres','association'), ),
+		array('menu2_titre_association', 'assoc_qui.png', array('association'), autoriser('voir_profil','association'), ),
+		array('menu2_titre_gestion_membres', 'annonce.gif', array('adherents'), autoriser('voir_membres','association'), ),
 	);
 	// modules natifs actives en configuration
 	foreach ( array('dons'=>'dons-24.gif', 'ventes'=>'ventes.gif', 'activites'=>'activites.gif', 'ressources'=>'pret-24.gif', 'comptes'=>'finances-24.png') as $module=>$icone ) {
 		if ( $GLOBALS['association_metas'][$module=='ressources'?'prets':$module] )
-			$modules_actifs[] = array("menu2_titre_gestion_$module", $icone, array($module), array(($module='comptes'?'voir_compta':"voir_$module"),'association') );
+			$modules_actifs[] = array("menu2_titre_gestion_$module", $icone, array($module), autoriser(($module='comptes'?'voir_compta':"voir_$module"),'association') );
 	}
 	$modules_externes = pipeline('associaspip', array()); // Tableau des modules ajoutes par d'autres plugins : 'prefixe_plugin'=> array( 0=>array(bouton,onglet,actif), 1=>array(bouton,config,actif) )
 	foreach ( $modules_externes as $plugin=>$boutons ) {
@@ -67,7 +67,7 @@ function association_navigation_onglets($titre='', $top_exec='', $INSERT_HEAD=TR
 // Dessin de la liste des ongles
 	$onglets_actifs = '';
 	foreach ($modules_actifs as $module) {
-		if ( association_acces($module[3]) ) { // generation de l'onglet
+		if ( $module[3] ) { // acces autorise au module donc generer l'onglet
 			$chemin = _DIR_PLUGIN_ASSOCIATION_ICONES.$module[1]; // icone Associaspip
 			if ( !file_exists($chemin) )
 				$chemin = find_in_path($module[1]); // icone alternative
@@ -115,7 +115,11 @@ function association_navigation_raccourcis($raccourcis=array(), $identifiant='')
 	}
 	foreach($raccourcis as $params) {
 		list($titre, $image, $url, $aut) = $params;
-		if ( association_acces($aut) ) { // generation du raccourci
+		if ( is_array($aut) && count($aut) ) // autorisation a calculer
+			$aut = call_user_func_array('autoriser', $aut);
+		elseif ( !is_scalar($aut) ) // pas d'autorisation definie = autorise pour tous
+			$aut = '';
+		if ( $aut ) { // acces autorise a la page donc generer le raccourci
 			if (is_array($url))
 				$url = generer_url_ecrire($url[0],$url[1]);
 			$res .= association_navigation_raccourci1($titre, $image, $url);
@@ -187,22 +191,5 @@ function debut_cadre_association($icone, $titre, $DEBUT_DROITE=TRUE) {
 	debut_cadre_relief($chemin, FALSE, '', association_langue($titre) );
 }
 
-/**
- * Encapsulation de autoriser()
- *
- * @param string|array $aut
- *   Valeur de l'autorisation
- *   Liste des composantes de l'autorisation
- * @return bool
- *   Autorisation d'acces
- */
-function association_acces($aut) {
-	if ( is_array($aut) && count($aut) ) { // autorisation a calculer
-		return call_user_func_array('autoriser', $aut);
-	} elseif ( is_scalar($aut) ) { // autorisation deja calculee (chaine ou entier ou booleen, evalue en vrai/faux...)
-		return $aut;
-	} else // pas d'autorisation definie = autorise pour tous
-		return '';
-}
 
 ?>
