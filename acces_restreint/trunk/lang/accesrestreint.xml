@@ -12,7 +12,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=de" total="62" traduits="42" relire="0" modifs="2" nouveaux="18" pourcent="67.74">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=en" total="62" traduits="58" relire="0" modifs="2" nouveaux="2" pourcent="93.55">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=en" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
