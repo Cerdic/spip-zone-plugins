@@ -28,9 +28,10 @@ function url2flux_json($url) {
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
 
-	// TODO : à compléter avec le traitement JSON pour OpenWeatherMap
+	// On tranforme la chaine json en tableau associatif
+	$json = json_decode($flux, true);
 
-	return $xml;
+	return $json;
 }
 
 ?>
