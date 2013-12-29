@@ -4,6 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_ICONES_PATH'))
 	define ('_RAINETTE_ICONES_PATH','rainette/');
+if (!defined('_RAINETTE_ICONES_GRANDE_TAILLE'))
+	define ('_RAINETTE_ICONES_GRANDE_TAILLE', 110);
+if (!defined('_RAINETTE_ICONES_PETITE_TAILLE'))
+	define ('_RAINETTE_ICONES_PETITE_TAILLE', 28);
+if (!defined('_RAINETTE_DEBUG'))
+	define ('_RAINETTE_DEBUG', false);
 
 // Balises du plugin utilisables dans les squelettes et modeles
 function balise_RAINETTE_INFOS($p) {
@@ -39,44 +45,51 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
-function rainette_icone_meteo($icone, $taille='petit', $service='weather', $chemin='', $extension="png"){
+function rainette_icone_meteo($meteo, $taille='petit', $chemin='', $extension='png'){
+	$taille_defaut = ($taille == 'petit') ? _RAINETTE_ICONES_PETITE_TAILLE : _RAINETTE_ICONES_GRANDE_TAILLE;
 
-	if (is_array($icone)) {
+	if (is_array($meteo)) {
 		// Utilisation des icones natifs des services autres que weather.com
-		$file = $icone;
-		$icone = $icone['code'];
+		$resume = attribut_html(rainette_resume_meteo($meteo['code']));
+		$source = $meteo['url'];
 	}
 	else {
 		// Utilisation des icones weather.com
-		$file = ($icone AND (($icone >= 0) AND ($icone < 48))) ? strval($icone) : 'na';
-	}
-	return rainette_icone($file,
-			rainette_resume_meteo($icone),
-			$chemin,
-			$extension,
-			$taille);
-}
+		$resume = rainette_resume_meteo($meteo);
 
-function rainette_icone($nom, $texte, $chemin='', $extension="png", $taille=''){
-
-	if (is_array($icone)) {
-		$img = $icone['url'];
-	}
-	else {
-		if (!$chemin) $chemin = _RAINETTE_ICONES_PATH.$taille.'/';
-		$file = $nom . '.' . $extension;
+		$meteo = ($meteo AND (($meteo >= 0) AND ($meteo < 48))) ? strval($meteo) : 'na';
+		$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH . $taille . '/' : rtrim($chemin, '/') . '/';
+		$fichier = $meteo . '.' . $extension;
 		// Le dossier personnalise ou le dossier passe en argument
 		// a-t-il bien l'icone requise ?
-		$img = find_in_path($file, $chemin);
-		if (!$img) {
-		// Non, prendre l'icone par defaut dans le repertoire img_meteo
-			$img = find_in_path($file, 'img_meteo/'.$taille.'/');
-			if (!$img)  return ''; //???
+		$source = find_in_path($fichier, $chemin);
+		if (!$source) {
+			// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
+			$source = find_in_path($fichier, "img_meteo/$taille/");
 		}
 	}
-	$a = ($a = @getimagesize($img)) ? " width='$a[0]' height='$a[1]'":'';
-	$r = attribut_html($texte);
-	return "<img src='$img' alt='$r' title='$r'$a />";
+
+	// On retaille si nécessaire l'image pour qu'elle soit toujours de la même taille (grande ou petite)
+	list($largeur, $hauteur) = @getimagesize($source);
+	include_spip('filtres/images_transforme');
+	if (($largeur < $taille_defaut)
+	OR  ($hauteur < $taille_defaut)) {
+		// Image plus petite que celle par défaut :
+		// --> Il faut insérer et recadrer l'image dans une image plus grande à la taille par défaut
+		$source = extraire_attribut(image_recadre($source, $taille_defaut, $taille_defaut, 'center', 'transparent'), 'src');
+	}
+	elseif  (($largeur > $taille_defaut)
+	OR		 ($hauteur > $taille_defaut)) {
+		// Image plus grande que celle par défaut :
+		// --> Il faut reduire l'image à la taille par défaut
+		$source = extraire_attribut(image_reduire($source, $taille_defaut), 'src');
+	}
+
+	// On construit la balise img
+	$texte = attribut_html($resume);
+	$balise_img = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$taille_defaut\" height=\"$taille_defaut\" />";
+
+	return $balise_img;
 }
 
 function rainette_resume_meteo($meteo) {
@@ -117,11 +130,31 @@ function rainette_afficher_direction($direction) {
 
 function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', $extension="png"){
 
-	if ($methode == 'symbole') return _T('rainette:tendance_symbole_'.$tendance_en);
+	$tendance = '';
 
-	$t = _T('rainette:tendance_texte_'.$tendance_en);
+	if ($methode == 'texte') {
+		$tendance = _T('rainette:tendance_texte_'.$tendance_en);
+	}
+	else if ($methode == 'symbole') {
+		$tendance = _T('rainette:tendance_symbole_'.$tendance_en);
+	}
+	else if ($methode == 'icone') {
+		$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH . '/' : rtrim($chemin, '/') . '/';
+		$fichier = $tendance_en . '.' . $extension;
+		// Le dossier personnalise ou le dossier passe en argument
+		// a-t-il bien l'icone requise ?
+		$source = find_in_path($fichier, $chemin);
+		if (!$source) {
+			// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
+			$source = find_in_path($fichier, "img_meteo/");
+		}
 
-	return ($methode == 'texte') ? $t : rainette_icone($tendance_en, $t, $chemin, $extension);
+		list($largeur, $hauteur) = @getimagesize($source);
+		$texte = _T('rainette:tendance_texte_'.$tendance_en);
+		$balise_img = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$largeur\" height=\"$hauteur\" />";
+	}
+
+	return $tendance;
 }
 
 /**
@@ -149,21 +182,30 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 	include_spip('inc/config');
 	$unite = lire_config("rainette/${service}/unite", 'm');
 
-	$valeur_affichee = _T('rainette:valeur_indeterminee');
-	if ($valeur) {
-		// Détermination de l'arrondi si la donnée est stockée sous format réel
-		if (array_key_exists($type_valeur, $precision_defaut)) {
-			$precision = ($precision < 0) ? $precision_defaut[$type_valeur] : $precision;
-			$valeur = round($valeur, $precision);
-		}
-		$suffixe = ($type_valeur == 'population')
-					? ''
-					: (($unite == 'm') ? 'metrique' : 'standard');
-		$espace = (($type_valeur == 'temperature') ||
-				   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
-		$item = 'rainette:unite_' . $type_valeur . ($suffixe ? '_' . $suffixe : '');
-		$valeur_affichee = strval($valeur) . $espace . _T($item);
+	// On distingue la valeur NULL qui indique que la donnée météo n'est pas fournie par le service avec
+	// la valeur '' qui indique que la valeur n'est pas disponible temporairement
+	// Dans le cas NULL on n'affiche pas la valeur, dans le cas '' on affiche la non disponibilité
+	if ($valeur === NULL) {
+		$valeur_affichee = '';
 	}
+	else {
+		$valeur_affichee = _T('rainette:valeur_indeterminee');
+		if ($valeur) {
+			// Détermination de l'arrondi si la donnée est stockée sous format réel
+			if (array_key_exists($type_valeur, $precision_defaut)) {
+				$precision = ($precision < 0) ? $precision_defaut[$type_valeur] : $precision;
+				$valeur = round($valeur, $precision);
+			}
+			$suffixe = ($type_valeur == 'population')
+						? ''
+						: (($unite == 'm') ? 'metrique' : 'standard');
+			$espace = (($type_valeur == 'temperature') ||
+					   ($type_valeur == 'pourcentage') || ($type_valeur == 'angle')) ? '' : '&nbsp;';
+			$item = 'rainette:unite_' . $type_valeur . ($suffixe ? '_' . $suffixe : '');
+			$valeur_affichee = strval($valeur) . $espace . _T($item);
+		}
+	}
+
 	return $valeur_affichee;
 }
 
@@ -290,33 +332,35 @@ function rainette_coasser_infos($lieu, $modele='infos_ville', $service='weather'
 }
 
 function rainette_debug($lieu, $mode='previsions', $service='weather') {
+	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
-	$charger = charger_fonction('charger_meteo', 'inc');
-	$nom_fichier = $charger($lieu, $mode, $service);
-	if ($nom_fichier) {
-		lire_fichier($nom_fichier,$tableau);
-		$tableau = unserialize($tableau);
+	if (_RAINETTE_DEBUG AND function_exists('bel_env')) {
+		$charger = charger_fonction('charger_meteo', 'inc');
+		$nom_fichier = $charger($lieu, $mode, $service);
+		if ($nom_fichier) {
+			lire_fichier($nom_fichier,$tableau);
+			$tableau = unserialize($tableau);
 
-		// On ajoute le lieu, le mode et le service au contexte fourni au modele
-		if ($mode == 'previsions') {
-			// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
-			$index = count($tableau)-1;
-			$tableau[$index]['lieu'] = $lieu;
-			$tableau[$index]['mode'] = $mode;
-			$tableau[$index]['service'] = $service;
-		}
-		else {
-			$tableau['lieu'] = $lieu;
-			$tableau['mode'] = $mode;
-			$tableau['service'] = $service;
-		}
+			// On ajoute le lieu, le mode et le service au contexte fourni au modele
+			if ($mode == 'previsions') {
+				// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
+				$index = count($tableau)-1;
+				$tableau[$index]['lieu'] = $lieu;
+				$tableau[$index]['mode'] = $mode;
+				$tableau[$index]['service'] = $service;
+			}
+			else {
+				$tableau['lieu'] = $lieu;
+				$tableau['mode'] = $mode;
+				$tableau['service'] = $service;
+			}
 
-		if (function_exists('bel_env'))
-			return bel_env(serialize($tableau));
-		else
-			var_dump($tableau);
+			$debug = bel_env(serialize($tableau));
+		}
 	}
+
+	return $debug;
 }
 
 ?>

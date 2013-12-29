@@ -6,7 +6,7 @@
 <div class="rainette_conditions">
 	<div class="statut">
 		<div class="cadre">
-			<div class="icone">[(#ENV{icone}|rainette_icone_meteo{grand, #ENV{service}})]</div>
+			<div class="icone">[(#ENV{icone}|rainette_icone_meteo{grand})]</div>
 			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
 			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
 			<br style="clear:both" />

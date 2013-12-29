@@ -109,7 +109,7 @@ function owm_flux2conditions($flux, $lieu) {
 		$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
-		$tableau['station'] = '';
+		$tableau['station'] = NULL;
 
 		// Liste des conditions meteo
 		if ($conditions['wind'][0]['children']) {
@@ -124,12 +124,12 @@ function owm_flux2conditions($flux, $lieu) {
 		$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
-		$tableau['point_rosee'] = '';
+		$tableau['point_rosee'] = NULL;
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
-		$tableau['tendance_pression'] = '';
+		$tableau['tendance_pression'] = NULL;
 
-		$tableau['visibilite'] = '';
+		$tableau['visibilite'] = NULL;
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
@@ -166,7 +166,7 @@ function owm_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -182,16 +182,16 @@ function owm_flux2infos($flux, $lieu) {
 	if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
 		$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
 
-		$tableau['region'] = '';
+		$tableau['region'] = NULL;
 
 		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
 		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
 
-		$tableau['population'] = '';
+		$tableau['population'] = NULL;
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }

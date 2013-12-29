@@ -147,22 +147,21 @@ function weather_flux2conditions($flux, $lieu) {
 			$tableau['visibilite'] = floatval($conditions['vis'][0]);
 
 			$tableau['code_meteo'] = intval($conditions['icon'][0]);
-			$tableau['icon_meteo'] = '';
+			$tableau['icon_meteo'] = NULL;
 			$tableau['desc_meteo'] = $conditions['t'][0];
 
 			// TODO : determiner la periode jour ou nuit
-			$tableau['periode'] = '';
+			$tableau['periode'] = NULL;
 
 			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
 			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
 			$tableau['icone'] = $tableau['code_meteo'];
-			$tableau['code_icone'] = $tableau['code_meteo']; // compat ascendante
 			$tableau['resume'] = $tableau['code_meteo'];
 		}
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -177,16 +176,16 @@ function weather_flux2infos($flux, $lieu){
 		$infos = reset($infos['loc id="' . $lieu . '"']);
 		// recuperer la date de debut des conditions
 		$tableau['ville'] = $infos['dnam'][0];
-		$tableau['region'] = '';
+		$tableau['region'] = NULL;
 
 		$tableau['longitude'] = floatval($infos['lon'][0]);
 		$tableau['latitude'] = floatval($infos['lat'][0]);
 
-		$tableau['population'] = '';
+		$tableau['population'] = NULL;
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }

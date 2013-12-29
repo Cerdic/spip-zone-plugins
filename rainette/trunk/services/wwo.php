@@ -107,7 +107,7 @@ function wwo_flux2conditions($flux, $lieu) {
 		$date_maj = (isset($conditions['localobsdatetime'])) ? strtotime($conditions['localobsdatetime'][0]['text']) : '';
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
-		$tableau['station'] = '';
+		$tableau['station'] = NULL;
 
 		// Liste des conditions meteo extraite dans le systeme metrique
 		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? floatval($conditions['windspeedkmph'][0]['text']) : '';
@@ -118,10 +118,10 @@ function wwo_flux2conditions($flux, $lieu) {
 		$tableau['temperature_ressentie'] = (isset($conditions['temp_c'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';
-		$tableau['point_rosee'] = '';
+		$tableau['point_rosee'] = NULL;
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['text']) : '';
-		$tableau['tendance_pression'] = '';
+		$tableau['tendance_pression'] = NULL;
 
 		$tableau['visibilite'] = (isset($conditions['visibility'])) ? floatval($conditions['visibility'][0]['text']) : '';
 
@@ -174,7 +174,7 @@ function wwo_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -204,7 +204,7 @@ function wwo_flux2infos($flux, $lieu){
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }

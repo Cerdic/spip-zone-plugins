@@ -123,7 +123,6 @@ function wunderground_flux2conditions($flux, $lieu) {
 		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch'][0]['text']) : 0;
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
-		// TODO : pour l'instant le champ full n'est pas complet et a une virgule apres la ville - http://gsfn.us/t/329p4
 		$tableau['station'] = (isset($conditions['observation_location']))
 			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
 			: '';
@@ -196,7 +195,7 @@ function wunderground_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -212,16 +211,16 @@ function wunderground_flux2infos($flux, $lieu) {
 			$tableau['ville'] = $infos['city'][0]['text'];
 			$tableau['ville'] .= (isset($infos['country_name'])) ? ', ' . $infos['country_name'][0]['text'] : '';
 		}
-		$tableau['region'] = '';
+		$tableau['region'] = NULL;
 
 		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
 		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
 
-		$tableau['population'] = '';
+		$tableau['population'] = NULL;
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }

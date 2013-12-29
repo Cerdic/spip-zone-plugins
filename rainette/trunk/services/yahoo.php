@@ -145,7 +145,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		// --- la station n'est pas précisée par le service
 		$date_maj = (isset($conditions['date'])) ? strtotime($conditions['date']) : '';
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
-		$tableau['station'] = '';
+		$tableau['station'] = NULL;
 
 		// 3- Températures : réelle et ressentie
 		// --- La température ressentie est dans les données anémométriques
@@ -157,7 +157,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		// --- Il n'y a pas d'icône proposé par le service
 		// --- la description n'est pas utilisée car toujours en anglais. On utilise le code méteo
 		$tableau['code_meteo'] = (isset($conditions['code'])) ? intval($conditions['code']) : '';
-		$tableau['icon_meteo'] = '';
+		$tableau['icon_meteo'] = NULL;
 		$tableau['desc_meteo'] = (isset($conditions['text'])) ? $conditions['text'] : '';
 
 		// 5- Etat météorologique calculé : icône et résumé
@@ -172,7 +172,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		//     fonction de la période. Mais il est possible de la déterminer suivant l'heure de l'observation
 		//     pour souci de cohérence avec les autres services mais elle ne sera pas utilisée pour l'instant
 		//     TODO : determiner la periode jour ou nuit
-		$tableau['periode'] = '';
+		$tableau['periode'] = NULL;
 	}
 
 	if (isset($flux['children']['channel'][0]['children']['yweather:atmosphere'][0]['attributes'])) {
@@ -182,7 +182,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		// --- pas de point de rosée fourni par le service
 		// --- la tendance barométrique du service est convertie en texte comme pour les autres services
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
-		$tableau['point_rosee'] = '';
+		$tableau['point_rosee'] = NULL;
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
 		$tableau['tendance_pression'] = (isset($conditions['rising'])) ? $tendance[intval($conditions['rising'])] : '';
@@ -191,7 +191,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -216,12 +216,12 @@ function yahoo_flux2infos($flux, $lieu){
 			$tableau['longitude'] = (isset($infos['geo:long'])) ? floatval($infos['geo:long'][0]['text']) : '';
 			$tableau['latitude'] = (isset($infos['geo:lat'])) ? floatval($infos['geo:lat'][0]['text']) : '';
 
-			$tableau['population'] = '';
+			$tableau['population'] = NULL;
 		}
 	}
 
 	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? true : false;
+	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
