@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Public',
 
 	// L
+	'label_fichier' => 'File',
+	'label_fonction' => 'Function',
+	'label_ligne' => 'Line',
 	'liste_fic' => 'List of log files',
 	'logs' => 'Viewing logs',
 
