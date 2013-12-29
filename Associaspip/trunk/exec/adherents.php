@@ -280,7 +280,7 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 				."</option>\n<option value='delete'>"._T('asso:supprimer_adherent')."</option>\n";
 			}
 			if (autoriser('editer_groupes', 'association', 100)) {
-				$nav .= sql_countsel('spip_asso_groupes', '') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
+				$nav .= sql_countsel('spip_asso_groupes', 'id_groupe>100') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
 			}
 			$nav .= '</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
 		}
