@@ -326,6 +326,12 @@ function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
 	$compo_parent = '';
 	
 	$heritage = compositions_recuperer_heritage($type);
+
+	/* Si aucun héritage n'a été défini pour le type d'objet, ce
+	* n'est pas la peine d'aller plus loin. */
+	if(count($heritage) == 0)
+		return '';
+
 	$type_parent = $heritage['type_parent'];
 	$table_parent = $heritage['table_parent'];
 	$nom_id_parent = $heritage['nom_id_parent'];
