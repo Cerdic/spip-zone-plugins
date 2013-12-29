@@ -1,5 +1,6 @@
 <traduction module="chosen" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/chosen/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/chosen?lang_cible=en" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/chosen?lang_cible=en" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/chosen?lang_cible=es" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />

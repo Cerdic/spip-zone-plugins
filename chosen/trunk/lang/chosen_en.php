@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_active' => 'Activer Chosen dans le site public',
 	'label_selecteur' => 'Selector',
+	'lang_create_option' => 'Create',
 	'lang_no_result' => 'No results match',
 	'lang_select_an_option' => 'Select an option',
 	'lang_select_some_option' => 'Select some options',
