@@ -85,6 +85,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
 	}
 
 	// récupération du fichier csv
+    $separateur  = lire_config("csv2spip_separateur");
     $tmp_name    = $_FILES['fichier_csv']['tmp_name'];
     $destination = _DIR_TMP.basename($tmp_name);
     $resultat    = move_uploaded_file($tmp_name,$destination);
@@ -131,10 +132,10 @@ function formulaires_csv2spip_importation_traiter_dist(){
 	$Tadmin_complet = array_diff($Tadmin_tous, $Tadmin_restreint);
 	// traiter fichier CSV
 	$num_statut = $num_login = -1;
-    while (($data= fgetcsv($fichiercsv,"~")) !== FALSE){
+    while (($data= fgetcsv($fichiercsv,"$separateur")) !== FALSE){
        // petit hack car fgetcsv ne reconnait pas le ~ comme séparateur !!!
-       $data           = implode("~",$data);
-       $data           = explode("~",$data);
+       $data           = implode("$separateur",$data);
+       $data           = explode("$separateur",$data);
        $nombre_elements = count($data);
 		if ($i==0) {
 			for ($j = 0; $j < $nombre_elements; $j++) {

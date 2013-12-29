@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'nom_rubrique_archive'=>'Nom de la rubrique d\'archives :',
     'nom_nouvel_auteur'=>'(mot de passe idem login)',
     'non_autorise' => 'Seuls les webmestres ont le droit d\'utiliser csv2spip: veuillez vous reconnecter avec un compte adapté',
+    'nouveau_separateur' => 'Le nouveau séparateur de champs est : @separateur@',
     
     'obligatoire' => 'Ce champs est obligatoire !',
 
@@ -60,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'suppression_article_efface' => 'Traitement des articles des auteurs effacés :',
     'supprimer_articles' =>'Supprimer les articles des auteurs effacés',
     'supprimer_auteur' => 'suppression complète',
+    'separateur' => 'Choix du caractère de séparation de champs',
     
 
     'transfert' => 'Erreur lors du transfert !',

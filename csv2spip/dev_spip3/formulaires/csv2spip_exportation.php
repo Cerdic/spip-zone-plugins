@@ -126,8 +126,9 @@ function formulaires_csv2spip_exportation_traiter_dist(){
     }
     // création de la variable contenant l'intégralité des donnees
 	$a_ecrire = '';
+    $separateur = lire_config("csv2spip_separateur");
 	foreach ($tableau_csv as $ligne) {
-		$a_ecrire .= implode('~', $ligne);
+		$a_ecrire .= implode("$separateur", $ligne);
 		$a_ecrire .= "\r\n";
 	}
     // telechargement du fichier csv	

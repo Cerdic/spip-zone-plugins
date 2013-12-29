@@ -1,5 +1,11 @@
 <h3><:csv2spip:presentation_formulaire:></h3>
 
+[(#SESSION{webmestre}|=={oui}|oui)
+    <div id="separteur" class="ajax">
+        #FORMULAIRE_CSV2SPIP_SEPARATEUR
+    </div>
+]
+
 <input type="radio"  name="choix" value="importer" checked> <:csv2spip:importer:><br>
 <input type="radio"  name="choix" value="exporter"> <:csv2spip:exporter:> <br>
 
