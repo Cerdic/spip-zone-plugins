@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actualiser' => 'Werk de lijst bij',
 
 	// C
-	'clic_rafraichir' => 'Laadt het bestand opnieuw',
+	'clic_rafraichir' => 'Het bestand herladen',
 	'colonne_date' => 'Datum',
 	'colonne_gravite' => 'Ernst',
 	'colonne_hit' => 'Hit',
@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Openbaar',
 
 	// L
+	'label_fichier' => 'Bestand',
+	'label_fonction' => 'Functie',
+	'label_ligne' => 'Regel',
 	'liste_fic' => 'Lijst van logs',
 	'logs' => 'Logs raadplegen',
 
