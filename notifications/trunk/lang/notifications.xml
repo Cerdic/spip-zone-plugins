@@ -1,6 +1,7 @@
 <traduction module="notifications" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/notifications/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=en" total="80" traduits="79" relire="0" modifs="0" nouveaux="1" pourcent="98.75">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=en" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=es" total="80" traduits="79" relire="0" modifs="0" nouveaux="1" pourcent="98.75">
