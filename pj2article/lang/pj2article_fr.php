@@ -8,6 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_errorbox' => 'Boîte d’erreur',
 	'cfg_errorbox_explication' => 'Choisir dans quelle boîte aux lettres déplacer les emails après une erreur de traitement.',
+	'cfg_ignorebox' => 'Boîte de mails ignorés',
+	'cfg_ignorebox_explication' => 'Choisir dans quelle boîte aux lettres déplacer les emails ignorés (sans pièce jointe).',
 	'cfg_inbox' => 'Boîte d’entrée',
 	'cfg_inbox_explication' => 'Choisir depuis quelle boîte aux lettres les pièces jointes seront importées.',
 	'cfg_outbox' => 'Boîte de sortie',

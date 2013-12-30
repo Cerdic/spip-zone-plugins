@@ -29,6 +29,12 @@
 				explication=<:pj2article:cfg_errorbox_explication:>,
 				defaut=Trash,
 				valeur_forcee=#ENV{errorbox}|=={''}|?{Trash,#ENV{errorbox}}})]
+			[(#SAISIE{selection,ignorebox,
+				datas=#GET{boites},
+				label=<:pj2article:cfg_ignorebox:>,
+				explication=<:pj2article:cfg_ignorebox_explication:>,
+				defaut=Trash,
+				valeur_forcee=#ENV{ignorebox}|=={''}|?{Trash,#ENV{ignorebox}}})]
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="pj2article" />
