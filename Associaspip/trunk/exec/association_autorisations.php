@@ -16,9 +16,9 @@ function exec_association_autorisations() {
 	include_spip ('association_modules');
 /// INITIALISATIONS
 	$type = _request('type');
-	if ($type!=0) { // quand la restriction n'est pas explicitement sur les groupes...
+	if ($type!=='0') { // quand la restriction n'est pas explicitement sur les groupes...
 		$type = intval($type); // ...s'assurer qu'on a une valeur numerique (histoire de ne pas planter la requete)
-		if (!$type OR $type<0) { // un "0" serait alors qu'on a passe n'importe quoi...
+		if ($type<1) { // un "0" serait alors qu'on a passe n'importe quoi...
 			$type = ''; // ...on n'en tiendra pas compte...
 			$active = 1;
 		} else {
@@ -45,9 +45,9 @@ function exec_association_autorisations() {
 		$lt[1] = 'menu2_titre_gestion_comptes';
 	if ( $GLOBALS['association_metas']['dons'] )
 		$lt[4] = 'menu2_titre_gestion_dons';
-	if ( $GLOBALS['association_metas']['comptes'] )
-		$lt[5] = 'menu2_titre_gestion_ventes';
 	if ( $GLOBALS['association_metas']['ventes'] )
+		$lt[5] = 'menu2_titre_gestion_ventes';
+	if ( $GLOBALS['association_metas']['prets'] )
 		$lt[6] = 'menu2_titre_gestion_ressources';
 	if ( $GLOBALS['association_metas']['activites'] )
 		$lt[7] = 'menu2_titre_gestion_activites';
