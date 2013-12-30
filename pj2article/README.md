@@ -22,3 +22,4 @@ Ce plugin fournit :
 * logo
 * fonction d'import des fichiers sous forme d'articles
 * appliquer un cache sur la page de configuration (pour ne pas appeler le serveur IMAP à chaque visite) - éventuellement avec un bouton pour rafraîchir la liste des boîtes aux lettres disponibles.
+* surcharger tous les paramètres par des variables globales de type "@define('_PJ2ARTICLE_INTERVALLE_CRON',180)"
