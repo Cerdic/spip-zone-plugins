@@ -72,13 +72,16 @@ function imap_list_mailboxes_from_config() {
  * @param string $path Le répertoire où sauver les pièces jointes
  * @param array $allowed_types Types de pièces jointes autorisés. Par défaut tous les types sont autorisés (liste vide). Voir http://www.php.net/manual/fr/function.imap-fetchstructure.php pour la liste des types
  * 
- * @return array Liste des noms de fichiers sauvegardés dans $path
+ * @return array Liste des pièces jointes sauvegardées, sous forme de tableaux contenant :
+ *     - 'name' : le nom de la pièce jointe
+ *     - 'unique_name' : le nom de fichier unique où sauvegarder la pièce jointe
+ *     - 'saved' : true si le fichier a été sauvegardé avec succès
  */
 function imap_save_attachments($mbox, $mid, $path, $allowed_types=array()) {
 	if(!$mbox)
 		return false;
 
-	$pieces_jointes = array();
+	$attachments = array();
 	$structure = imap_fetchstructure($mbox, $mid);
 	if(isset($structure->parts)) {
 		foreach($structure->parts as $key => $value) {
@@ -86,9 +89,11 @@ function imap_save_attachments($mbox, $mid, $path, $allowed_types=array()) {
 			if((isset($structure->parts[$key]->ifdparameters)
 					AND $structure->parts[$key]->ifdparameters)
 					AND ((isset($structure->parts[$key]->subtype) AND in_array($structure->parts[$key]->subtype, $allowed_types)) OR count($allowed_types) == 0)) {
-				$name = $structure->parts[$key]->dparameters[0]->value;
-				imap_save_attachment($mbox, $mid, $key+1, $enc, $path, $name);
-				$pieces_jointes[] = $name;
+				$attachment = array();
+				$attachment['name'] = $structure->parts[$key]->dparameters[0]->value;
+				$attachment['unique_name'] = nom_fichier_copie_locale_piece_jointe($attachment['name'], $path);
+				$attachment['saved'] = imap_save_attachment($mbox, $mid, $key+1, $enc, $attachment['unique_name']);
+				$attachments[] = $attachment;
 			}
 			// Support for embedded attachments starts here
 			if(isset($structure->parts[$key]->parts)
@@ -96,16 +101,18 @@ function imap_save_attachments($mbox, $mid, $path, $allowed_types=array()) {
 				foreach($structure->parts[$key]->parts as $keyb => $valueb) {
 					$enc=$structure->parts[$key]->parts[$keyb]->encoding;
 					if($structure->parts[$key]->parts[$keyb]->ifdparameters) {
-						$name=$structure->parts[$key]->parts[$keyb]->dparameters[0]->value;
+						$attachment = array();
+						$attachment['name']=$structure->parts[$key]->parts[$keyb]->dparameters[0]->value;
 						$partnro = ($key+1).".".($keyb+1);
-						imap_save_attachment($mbox, $mid, $partnro, $enc, $path, $name);
-						$pieces_jointes[] = $name;
+						$attachment['unique_name'] = nom_fichier_copie_locale_piece_jointe($attachment['name'], $path);
+						$attachment['saved'] = imap_save_attachment($mbox, $mid, $partnro, $enc, $attachment['unique_name']);
+						$attachments[] = $attachment;
 					}
 				}
 			}
 		}
 	}
-	return $pieces_jointes;
+	return $attachments;
 }
 
 /*
@@ -115,12 +122,11 @@ function imap_save_attachments($mbox, $mid, $path, $allowed_types=array()) {
  * @param int $mid L'indice du mail à traiter
  * @param int $attid L'indice de la pièce jointe dans le mail
  * @param int $enc L'encodage de la pièce jointe (voir http://www.php.net/manual/fr/function.imap-fetchstructure.php pour la liste des encodages)
- * @param string $path Le répertoire où sauvegarder la pièce jointe
  * @param string $name Le nom du fichier sous lequel sera sauvegardée la pièce jointe
  *
  * @return void
  */
-function imap_save_attachment($mbox, $mid, $attid, $enc, $path, $name) {
+function imap_save_attachment($mbox, $mid, $attid, $enc, $name) {
 	$message = imap_fetchbody($mbox,$mid,$attid);
 	if ($enc == 0)
 		$message = imap_8bit($message);
@@ -134,7 +140,29 @@ function imap_save_attachment($mbox, $mid, $attid, $enc, $path, $name) {
 		$message = quoted_printable_decode($message);
 	if ($enc == 5)
 		$message = $message;
-	$fp=fopen($path.$name,"w");
-	fwrite($fp,$message);
-	fclose($fp);
+
+	include_spip('inc/flock');
+	// on se place tout le temps comme si on etait a la racine
+	return ecrire_fichier(_DIR_RACINE . $name, $message, true);
+}
+
+/**
+ * Calcule un nom unique pour la copie locale d'une pièce jointe
+ *
+ * @note
+ *   inspiré de la fonction nom_fichier_copie_locale() de 
+ *   ecrire/inc/distant.php
+ *
+ * @param string $name
+ *     Nom de la pièce jointe
+ * @param string $path
+ *     Répertoire dans lequel sera sauvé le fichier
+ * @return string
+ *     Nom du fichier pour copie locale
+**/
+function nom_fichier_copie_locale_piece_jointe($name, $path=_DIR_TRANSFERT){
+	// on se place tout le temps comme si on etait a la racine
+	if (_DIR_RACINE)
+		$path = preg_replace(',^' . preg_quote(_DIR_RACINE) . ',', '', $path);
+	return $path . uniqid() . '-' . basename($name);
 }
