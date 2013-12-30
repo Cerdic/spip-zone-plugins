@@ -1,9 +1,9 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.0.22"
+	version="2.0.23"
 	etat="dev"
-	compatibilite="[3.0.0;3.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="rainette-64.png"
 	documentation="http://www.spip-contrib.net/article3133"
 	developpement="http://blog.smellup.net/spip.php?rubrique23"

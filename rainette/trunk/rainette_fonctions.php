@@ -132,26 +132,28 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 
 	$tendance = '';
 
-	if ($methode == 'texte') {
-		$tendance = _T('rainette:tendance_texte_'.$tendance_en);
-	}
-	else if ($methode == 'symbole') {
-		$tendance = _T('rainette:tendance_symbole_'.$tendance_en);
-	}
-	else if ($methode == 'icone') {
-		$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH . '/' : rtrim($chemin, '/') . '/';
-		$fichier = $tendance_en . '.' . $extension;
-		// Le dossier personnalise ou le dossier passe en argument
-		// a-t-il bien l'icone requise ?
-		$source = find_in_path($fichier, $chemin);
-		if (!$source) {
-			// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
-			$source = find_in_path($fichier, "img_meteo/");
+	if ($tendance_en) {
+		if ($methode == 'texte') {
+			$tendance = _T('rainette:tendance_texte_'.$tendance_en);
 		}
+		else if ($methode == 'symbole') {
+			$tendance = _T('rainette:tendance_symbole_'.$tendance_en);
+		}
+		else if ($methode == 'icone') {
+			$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH : rtrim($chemin, '/') . '/';
+			$fichier = $tendance_en . '.' . $extension;
+			// Le dossier personnalise ou le dossier passe en argument
+			// a-t-il bien l'icone requise ?
+			$source = find_in_path($fichier, $chemin);
+			if (!$source) {
+				// Non, il faut donc prendre l'icone par defaut dans le repertoire img_meteo qui existe toujours
+				$source = find_in_path($fichier, "img_meteo/");
+			}
 
-		list($largeur, $hauteur) = @getimagesize($source);
-		$texte = _T('rainette:tendance_texte_'.$tendance_en);
-		$balise_img = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$largeur\" height=\"$hauteur\" />";
+			list($largeur, $hauteur) = @getimagesize($source);
+			$texte = _T('rainette:tendance_texte_'.$tendance_en);
+			$tendance = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$largeur\" height=\"$hauteur\" />";
+		}
 	}
 
 	return $tendance;
@@ -173,6 +175,7 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 
 	static $precision_defaut = array(
+						'temperature' => 0,
 						'pression' => 1,
 						'distance' => 1,
 						'angle' => 0,

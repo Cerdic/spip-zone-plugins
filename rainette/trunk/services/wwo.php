@@ -174,7 +174,7 @@ function wwo_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -204,7 +204,7 @@ function wwo_flux2infos($flux, $lieu){
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
