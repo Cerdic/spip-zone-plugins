@@ -67,6 +67,27 @@
 					</ul>
 				</fieldset>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:pj2article:cfg_titre_importation:></legend>
+					<ul>
+						[(#SAISIE{checkbox, importation,
+							label=<:pj2article:cfg_importation:>,
+							defaut=#ARRAY, 
+							datas=[(#ARRAY{
+								mail,[(#VAL{pj2article:cfg_importation_mail}|_T)],
+								zip,[(#VAL{pj2article:cfg_importation_zip}|_T)]})]})]
+						[(#SAISIE{input, intervalle_cron,
+							label=<:pj2article:cfg_intervalle_cron:>,
+							explication=<:pj2article:cfg_intervalle_cron_explication:>,
+							defaut=300})]
+						[(#SAISIE{input, nombre_mails,
+							label=<:pj2article:cfg_nombre_mails:>,
+							explication=<:pj2article:cfg_nombre_mails_explication:>,
+							defaut=10})]
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="pj2article" />
