@@ -1,19 +1,31 @@
 <?php
 
 /*
+ * Ouvrir un flux IMAP vers la boîte aux lettres donnée en paramètre
+ * 
+ * @para string $mbox Nom de la boîte aux lettres à ouvrir
+ * @return flux_IMAP Flux imap vers la boîte aux lettres ouverte
+ */
+function imap_open_mbox_from_config($mbox) {
+	include_spip('inc/config');
+
+	$email = lire_config('imap/email');
+	$email_pwd = lire_config('imap/email_pwd');
+	if (is_null($mbox)) {
+		$mbox = lire_config('imap/inbox');
+	}
+	$connexion = imap_get_server_string_from_config().$mbox;
+
+	return @imap_open($connexion, $email, $email_pwd);
+}
+
+/*
  * Ouvrir un flux IMAP vers la boîte aux lettres définie dans la configuration
  * 
  * @return flux_IMAP Flux imap vers la boîte aux lettres ouverte
  */
 function imap_open_from_config() {
-	include_spip('inc/config');
-
-	$email = lire_config('imap/email');
-	$email_pwd = lire_config('imap/email_pwd');
-	$hote_inbox = lire_config('imap/inbox'); 
-	$connexion = imap_get_server_string_from_config().$hote_inbox;
-
-	return @imap_open($connexion, $email, $email_pwd);
+	return imap_open_mbox_from_config();
 }
 
 /*
