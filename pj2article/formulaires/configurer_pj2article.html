@@ -10,31 +10,38 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-			[(#SET{boites,#REM|imap_list_mailboxes_from_config})]
-			[(#SAISIE{selection,inbox,
-				datas=#GET{boites},
-				label=<:pj2article:cfg_inbox:>,
-				explication=<:pj2article:cfg_inbox_explication:>,
-				defaut=INBOX,
-				valeur_forcee=#ENV{inbox}|=={''}|?{INBOX,#ENV{inbox}}})]
-			[(#SAISIE{selection,outbox,
-				datas=#GET{boites},
-				label=<:pj2article:cfg_outbox:>,
-				explication=<:pj2article:cfg_outbox_explication:>,
-				defaut=Trash,
-				valeur_forcee=#ENV{outbox}|=={''}|?{Trash,#ENV{outbox}}})]
-			[(#SAISIE{selection,errorbox,
-				datas=#GET{boites},
-				label=<:pj2article:cfg_errorbox:>,
-				explication=<:pj2article:cfg_errorbox_explication:>,
-				defaut=Trash,
-				valeur_forcee=#ENV{errorbox}|=={''}|?{Trash,#ENV{errorbox}}})]
-			[(#SAISIE{selection,ignorebox,
-				datas=#GET{boites},
-				label=<:pj2article:cfg_ignorebox:>,
-				explication=<:pj2article:cfg_ignorebox_explication:>,
-				defaut=Trash,
-				valeur_forcee=#ENV{ignorebox}|=={''}|?{Trash,#ENV{ignorebox}}})]
+			<li class="fieldset">
+				<fieldset>
+					<legend><:pj2article:cfg_titre_boites:></legend>
+					<ul>
+						[(#SET{boites,#REM|imap_list_mailboxes_from_config})]
+						[(#SAISIE{selection,inbox,
+							datas=#GET{boites},
+							label=<:pj2article:cfg_inbox:>,
+							explication=<:pj2article:cfg_inbox_explication:>,
+							defaut=INBOX,
+							valeur_forcee=#ENV{inbox}|=={''}|?{INBOX,#ENV{inbox}}})]
+						[(#SAISIE{selection,outbox,
+							datas=#GET{boites},
+							label=<:pj2article:cfg_outbox:>,
+							explication=<:pj2article:cfg_outbox_explication:>,
+							defaut=Trash,
+							valeur_forcee=#ENV{outbox}|=={''}|?{Trash,#ENV{outbox}}})]
+						[(#SAISIE{selection,errorbox,
+							datas=#GET{boites},
+							label=<:pj2article:cfg_errorbox:>,
+							explication=<:pj2article:cfg_errorbox_explication:>,
+							defaut=Trash,
+							valeur_forcee=#ENV{errorbox}|=={''}|?{Trash,#ENV{errorbox}}})]
+						[(#SAISIE{selection,ignorebox,
+							datas=#GET{boites},
+							label=<:pj2article:cfg_ignorebox:>,
+							explication=<:pj2article:cfg_ignorebox_explication:>,
+							defaut=Trash,
+							valeur_forcee=#ENV{ignorebox}|=={''}|?{Trash,#ENV{ignorebox}}})]
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="pj2article" />

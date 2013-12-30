@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inbox_explication' => 'Choisir depuis quelle boîte aux lettres les pièces jointes seront importées.',
 	'cfg_outbox' => 'Boîte de sortie',
 	'cfg_outbox_explication' => 'Choisir dans quelle boîte aux lettres déplacer les emails une fois traités.',
+	'cfg_titre_boites' => 'Boîtes aux lettres',
 	'cfg_titre_parametrages' => 'Paramètres d’importation des pièces jointes',
 
 	// P
