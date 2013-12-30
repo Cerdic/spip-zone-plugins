@@ -55,6 +55,15 @@
 							explication=<:doc2article:explication_rubrique:>,
 							recursif=oui,
 							obligatoire=oui})]
+						[(#SAISIE{selection,statut,
+							datas=#ARRAY{
+								prepa,#VAL{article}|statut_titre{prepa},
+								prop,#VAL{article}|statut_titre{prop},
+								publie,#VAL{article}|statut_titre{publie}},
+							label=<:pj2article:cfg_statut:>,
+							explication=<:pj2article:cfg_statut_explication:>,
+							defaut=prepa,
+							valeur_forcee=#ENV{statut}|=={''}|?{prepa,#ENV{statut}}})]
 					</ul>
 				</fieldset>
 			</li>
