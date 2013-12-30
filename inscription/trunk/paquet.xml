@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/inscription3-64.png"
-	schema="3.0.2"
+	schema="3.0.3"
 	documentation="http://www.mediaspip.net/spip.php?rubrique87"
 >	
 
