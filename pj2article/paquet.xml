@@ -11,6 +11,9 @@
 
 	<licence>GNU/GPL</licence>
 
+	<pipeline nom="taches_generales_cron" inclure="pj2article_pipelines.php" />
+	<pipeline nom="doc2article_preparer_article" inclure="pj2article_pipelines.php" />
+
 	<necessite nom="doc2article" compatibilite="[1.0.0;]" />
 	<necessite nom="imap" compatibilite="[0.1.0;]" />
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
