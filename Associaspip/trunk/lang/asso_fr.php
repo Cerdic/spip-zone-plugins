@@ -619,6 +619,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu2_titre_association' => 'L\'association',
 	'menu2_titre_gestion_activites' => 'Activités',
 	'menu2_titre_gestion_dons' => 'Dons',
+	'menu2_titre_gestion_groupes' => 'Groupes',
 	'menu2_titre_gestion_membres' => 'Membres',
 	'menu2_titre_gestion_ressources' => 'Prêts',
 	'menu2_titre_gestion_comptes' => 'Comptes',

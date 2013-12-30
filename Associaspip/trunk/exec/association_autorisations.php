@@ -16,14 +16,15 @@ function exec_association_autorisations() {
 	include_spip ('association_modules');
 /// INITIALISATIONS
 	$type = _request('type');
-	if ($type!=='0') { // quand la restriction n'est pas explicitement sur les groupes...
-		$type = intval($type); // ...s'assurer qu'on a une valeur numerique (histoire de ne pas planter la requete)
-		if ($type<1) { // un "0" serait alors qu'on a passe n'importe quoi...
-			$type = ''; // ...on n'en tiendra pas compte...
-			$active = 1;
-		} else {
-			$active = 0;
-		}
+	if ( $type<0 ) {
+		$type = ''; // ...on n'en tiendra pas compte...
+		$active = 1;
+	} else {
+		if ( is_numeric($type) )
+			$type = intval($type); // ...s'assurer qu'on a une valeur numerique (histoire de ne pas planter la requete)
+		else
+			$type = ''; // et sinon le comportement par defaut est de tout prendre
+		$active = 0;
 	}
 /// AFFICHAGES_LATERAUX (connexes)
 	echo association_navigation_onglets('gerer_les_autorisations', 'association');
@@ -37,7 +38,7 @@ function exec_association_autorisations() {
 	debut_cadre_association('annonce.gif', 'les_groupes_dacces');
 /// AFFICHAGES_CENTRAUX : FILTRES
 	$lt = array(
-		0 => 'groupes',
+		0 => 'menu2_titre_gestion_groupes',
 		2 => 'menu2_titre_association',
 		3 => 'menu2_titre_gestion_membres',
 	);
@@ -61,7 +62,7 @@ function exec_association_autorisations() {
 	}
 	$filtre_type .= "</optgroup>\n<optgroup label='-----'>\n";
 	$filtre_type .= '<option value=""';
-	if (!$active AND $type=='')
+	if (!$active AND $type==='')
 		$filtre_type .= ' selected="selected"';
 	$filtre_type .= '> '. _T('asso:entete_tous') ."</option>\n";
 	$filtre_type .= '<option value="-1"';
@@ -83,7 +84,7 @@ function exec_association_autorisations() {
 	$thd .= '<th colspan="2" class="actions">' . _T('asso:entete_actions') .'</th>';
 	$thd .= "</tr>\n";
 	echo $thd;
-	$lc = sql_allfetsel('FLOOR(id_groupe/10) AS type_groupe', 'spip_asso_'.($active?'fonctions':'groupes'), 'id_groupe<100'.($type?" AND FLOOR(id_groupe/10)=$type":''), 'type_groupe', 'type_groupe' );
+	$lc = sql_allfetsel('FLOOR(id_groupe/10) AS type_groupe', 'spip_asso_'.($active?'fonctions':'groupes'), 'id_groupe<100'.($type!==''?" AND FLOOR(id_groupe/10)=$type":''), 'type_groupe', 'type_groupe' );
 	foreach ($lc as $r) {
 		if ( $lt[$r['type_groupe']] ) {
 			echo '<tr style="border:0;">';
