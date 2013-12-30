@@ -35,7 +35,7 @@ function exec_compte_bilan() {
 	if(autoriser('exporter_compta', 'association')) { // on peut exporter : pdf, csv, xml, ...
 		echo debut_cadre_enfonce('', TRUE);
 		echo '<h3>'. _T('asso:cpte_bilan_mode_exportation') .'</h3>';
-		if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_impression')
+		if (test_plugin_actif('FPDF')) {  // impression en PDF : _T('asso:bouton_imprimer')
 			echo association_navigation_raccourci1('PDF', 'print-24.png', generer_action_auteur('pdf_comptesbilan', 0) );
 		}
 		export_compte($ids, 'bilan');

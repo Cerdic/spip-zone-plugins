@@ -35,7 +35,7 @@ function formulaires_mailing_membres_charger_dist() {
 		$contexte['id_groupe'] = $id_groupe;
 	}
 
-	$statut_interne = trim(_request('filtre_statut_interne')); 
+	$statut_interne = trim(_request('filtre_statut_interne'));
 	$relance = intval(_request('filtre_relance')); // si a 1, c'est un mail de relance
 	if ($relance != 0) { // on ne peut envoyer de relance qu'aux adherent echus
 		$statut_interne = 'echu';
@@ -115,14 +115,11 @@ function formulaires_mailing_membres_traiter_dist() {
 	list($nb_envoyes_ok, $nb_envoyes_echec, $nb_membres, $sans_emails) = $f(); // la fonction action retourne le nombre d'emails envoyes(ok et echec), le nombres de membres ayant un email et un tableau des auteurs sans email
 	$nb_envoyes = $nb_envoyes_ok+$nb_envoyes_echec;
 	if ($nb_envoyes>1) {
-		$message = $nb_envoyes . _T('asso:emails_envoyes').' '._T('asso:a').' '.$nb_membres.' ';
-		if ($nb_membres>1) {
-			$message .= _T('asso:membres').'.';
-		} else {
-			$message .= _T('asso:membre').'.';
-		}
+		$message = _T('asso:emails_envoyes', array('nombre'=>$nb_envoyes)).' / '.$nb_membres.' ';
+		$message .= ($nb_membres>1)_T('asso:membres'):_T('asso:libelle_membre');
+		$message .= '.';
 	} else {
-		$message = $nb_envoyes . _T('asso:email_envoye');
+		$message = _T('asso:email_envoye', array('nombre'=>$nb_envoyes));
 	}
 	if ($nb_envoyes_echec>0) {
 		$message .= ' '.$nb_envoyes_echec.' ';

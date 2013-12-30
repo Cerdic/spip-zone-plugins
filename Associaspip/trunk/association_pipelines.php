@@ -70,8 +70,8 @@ function update_spip_asso_membre($id_auteur) {
 		} else { // defaut: format nom prenom
 			list($nom, $prenom) = preg_split('/\s+/', $nom, 2); //!\ on ne sait pas gerer le cas ou le nom de famille contient un espace
 		}
-	} else { // s'il est vide, le nom sera Adherent XX
-		$nom = _T('asso:activite_entete_adherent').' '.$id_auteur;
+	} else { // s'il est vide, le nom sera "Membre XX"
+		$nom = _T('asso:libelle_membre').' '.$id_auteur;
 		$prenom = '';
 	}
 	$membre = sql_fetsel('id_auteur,statut_interne', 'spip_asso_membres', "id_auteur=$id_auteur");

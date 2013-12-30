@@ -1367,7 +1367,7 @@ function filtre_selecteur_asso_statut($sel='') {
 #	$res .= '>'. _T('asso:entete_tous') ."</option>\n";
 	$res .= '<option value=""';
 	$res .= (($sel=='defaut' || $sel=='')?' selected="selected"':'');
-	$res .= '>'. _T('asso:actifs') ."</option>\n";
+	$res .= '>'. _T('asso:adherent_entete_statut_defaut') ."</option>\n";
 	foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 		$res .= '<option value="'.$statut.'"';
 		$res .= ($sel==$statut?' selected="selected"':'');
