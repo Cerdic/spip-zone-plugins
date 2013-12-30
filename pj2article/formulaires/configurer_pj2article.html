@@ -42,6 +42,22 @@
 					</ul>
 				</fieldset>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:pj2article:cfg_titre_edition:></legend>
+					<ul>
+						[(#SAISIE{auteurs,auteur,
+							label=<:doc2article:label_auteur:>,
+							explication=<:doc2article:explication_auteur:>,
+							obligatoire=oui})]
+						[(#SAISIE{secteur,rubrique,
+							label=<:doc2article:label_rubrique:>,
+							explication=<:doc2article:explication_rubrique:>,
+							recursif=oui,
+							obligatoire=oui})]
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="pj2article" />
