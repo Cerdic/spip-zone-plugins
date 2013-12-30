@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramètres d’importation des pièces jointes',
 
 	// P
-	'pj2article_titre' => 'pj2article',
+	'pj2article_titre' => 'Importation des pièces jointes',
 
 	// T
 	'titre_page_configurer_pj2article' => 'Importation des pièces jointes'
