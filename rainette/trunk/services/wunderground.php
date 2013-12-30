@@ -67,7 +67,7 @@ function wunderground_service2url($lieu, $mode) {
 		.  '/' . $demande
 		.  ($code_langue ? '/lang:' . $code_langue : '')
 		.  '/q'
-		.  '/' . $query . '.xml';
+		.  '/' . $query . '.json';
 
 	return $url;
 }
@@ -83,7 +83,7 @@ function wunderground_service2reload_time($mode) {
 function wunderground_url2flux($url) {
 
 	include_spip('inc/phraser');
-	$flux = url2flux_xml($url, false);
+	$flux = url2flux_json($url);
 
 	return $flux;
 }
@@ -112,19 +112,19 @@ function wunderground_flux2previsions($flux, $lieu) {
 }
 
 function wunderground_flux2conditions($flux, $lieu) {
-	static $tendance = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
+	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children']['current_observation'][0]['children'])) {
-		$conditions = $flux['children']['current_observation'][0]['children'];
+	if (isset($flux['current_observation'])) {
+		$conditions = $flux['current_observation'];
 
 		// Date d'observation
-		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch'][0]['text']) : 0;
+		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch']) : 0;
 		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 		// Station d'observation
-		$tableau['station'] = (isset($conditions['observation_location']))
-			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
+		$tableau['station'] = (isset($conditions['observation_location']['full']))
+			? $conditions['observation_location']['full']
 			: '';
 
 		// Identification des suffixes d'unite pour choisir le bon champ
@@ -139,29 +139,31 @@ function wunderground_flux2conditions($flux, $lieu) {
 
 
 		// Liste des conditions meteo extraites dans le systeme demande
-		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv][0]['text']) : '';
-		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
-		// TODO : a confirmer suite a la reponse au post - http://gsfn.us/t/32w74
-		// -> La documentation indique que les directions uniques sont fournies sous forme de texte comme North
-		//    alors que les autres sont des acronymes. On passe donc tout en acronyme
-		$tableau['direction_vent'] = (isset($conditions['wind_dir']))
-			? (strlen($conditions['wind_dir'][0]['text']) <= 3 ? $conditions['wind_dir'][0]['text'] : strtoupper(substr($conditions['wind_dir'][0]['text'], 0, 1))) : '';
+		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv]) : '';
+		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees']) : '';
+		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
+		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
+		// --> Le mieux est donc de convertir à partir de l'angle
+		include_spip('inc/convertir');
+		$tableau['direction_vent'] = (isset($conditions['wind_degrees'])) ? angle2direction($tableau['angle_vent']) : '';
 
-		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? intval($conditions['temp_'.$ut][0]['text']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? intval($conditions['feelslike_'.$ut][0]['text']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? floatval($conditions['temp_'.$ut]) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? floatval($conditions['feelslike_'.$ut]) : '';
 
-		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
-		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
+		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity']) : '';
+		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut]) : '';
 
-		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'])) ? $tendance[$conditions['pressure_trend'][0]['text']] : '';
+		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up]) : '';
+		$tableau['tendance_pression'] = (isset($conditions['pressure_trend']) AND array_key_exists($conditions['pressure_trend'], $tendances))
+			? $tendances[$conditions['pressure_trend']]
+			: '';
 
-		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
+		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud]) : '';
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
-		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
-		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'] : '';
 
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
@@ -195,7 +197,7 @@ function wunderground_flux2conditions($flux, $lieu) {
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
@@ -204,23 +206,23 @@ function wunderground_flux2infos($flux, $lieu) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children']['location'][0]['children'])) {
-		$infos = $flux['children']['location'][0]['children'];
+	if (isset($flux['location'])) {
+		$infos = $flux['location'];
 
 		if (isset($infos['city'])) {
-			$tableau['ville'] = $infos['city'][0]['text'];
-			$tableau['ville'] .= (isset($infos['country_name'])) ? ', ' . $infos['country_name'][0]['text'] : '';
+			$tableau['ville'] = $infos['city'];
+			$tableau['ville'] .= (isset($infos['country_name'])) ? ', ' . $infos['country_name'] : '';
 		}
 		$tableau['region'] = NULL;
 
-		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
-		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
 
 		$tableau['population'] = NULL;
 	}
 
 	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
