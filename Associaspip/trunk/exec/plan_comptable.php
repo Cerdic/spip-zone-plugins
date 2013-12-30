@@ -53,7 +53,7 @@ function exec_plan_comptable() {
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	echo "<table width='100%' class='asso_tablo' id='liste_asso_plan'>\n";
 	$thd = '<tr class="row_first">';
-	$thd .= "\n<th scope='col'>". _T('asso:classe') .'</th>';
+	$thd .= "\n<th scope='col'>". _T('compta:label_classe') .'</th>';
 	$thd .= "\n<th scope='col'>". _T('asso:entete_code') .'</th>';
 	$thd .= "\n<th scope='col'>". _T('asso:entete_intitule') .'</th>';
 	$thd .= "\n<th scope='col'>". _T('asso:solde_initial') .'</th>';

@@ -62,10 +62,10 @@ function exec_ventes() {
 	$filtre_statut .= '<option value="">' ._T('asso:entete_tous') .'</option>';
 	$filtre_statut .= '<option value="encours"';
 	$filtre_statut .= ($etat=='encours'?' selected="selected"':'');
-	$filtre_statut .= '>'. _T('asso:ventes_enregistrees') .'</option>';
+	$filtre_statut .= '>'. _T('asso:ventes_libelle_enregistrees') .'</option>';
 	$filtre_statut .= '<option value="traites"';
 	$filtre_statut .= ($etat=='traites'?' selected="selected"':'');
-	$filtre_statut .= '>'. _T('asso:ventes_expediees') .'</option>';
+	$filtre_statut .= '>'. _T('asso:ventes_libelle_expediees') .'</option>';
 	$filtre_statut .= '</select>';
 	echo association_form_filtres(array(
 		'periode' => array($id_periode, 'asso_ventes', 'vente'),

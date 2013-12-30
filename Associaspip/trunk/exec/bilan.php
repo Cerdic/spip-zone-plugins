@@ -44,7 +44,7 @@ function exec_bilan() {
 	if ($GLOBALS['association_metas']['destinations']) { // on affiche une liste de choix de destinations
 		echo debut_cadre_enfonce('',TRUE);
 		echo '<h3>'. _T('plugins_vue_liste') .'</h3>';
-		echo association_selectionner_destinations($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '<p class="boutons"><input type="submit" value="'. _T('asso:compte_resultat') .'" /></p>', FALSE); // selecteur de destinations
+		echo association_selectionner_destinations($ids_destinations, 'bilan&'."$ids[type_periode]=$ids[id_periode]", '<p class="boutons"><input type="submit" value="'. _T('asso:cpte_resultat_titre_general') .'" /></p>', FALSE); // selecteur de destinations
 		echo fin_cadre_enfonce(TRUE);
 	}
 /// AFFICHAGES_CENTRAUX (corps)
@@ -69,7 +69,7 @@ function exec_bilan() {
 	);
 /// AFFICHAGES_CENTRAUX : TABLEAUX : bilans
 	foreach ($ids_destinations as $id_destination) { // on boucle sur le tableau des destinations en refaisant le fetch a chaque iteration
-		echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destination'):'') ) );
+		echo debut_cadre_relief('', TRUE, '', ($id_destination ? $intitule_destinations[$id_destination] : ($GLOBALS['association_metas']['destinations']?_T('asso:toutes_destinations'):'') ) );
 		echo comptabilite_tableau_balances($classes, 'cpte_resultat', 0, $ids['debut_periode'], $ids['fin_periode'], $id_destination);
 		if(autoriser('exporter_compta', 'association') && !$id_destination) { // on peut exporter : pdf, csv, xml, ...
 			echo "<div class='action'>\n",  _T('asso:cpte_resultat_mode_exportation');

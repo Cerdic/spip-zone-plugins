@@ -16,7 +16,7 @@
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
 						id="type_operation_depense" onclick="remplirSelectImputation(#META{/association/classe_charges}); afficheDiv('label_imputation','label_depense','depense','label_journal_depense','mode_paiement','justification','destination'); cacheDiv('label_destination','label_depense_evaluee','label_journal_recette','recette');" />
-					<label for="type_operation_depense"><:asso:depense:></label>
+					<label for="type_operation_depense"><:compta:label_depense:></label>
 				<BOUCLE_type_operation_depense(ASSO_PLAN){active=1}{classe=#META{/association/classe_charges}}>
 				</BOUCLE_type_operation_depense>
 					#SET{pc_ok,' '}
@@ -29,7 +29,7 @@
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
 						id="type_operation_recette" onclick="remplirSelectImputation(#META{/association/classe_produits}); afficheDiv('label_imputation','label_recette','recette','label_journal_recette','mode_paiement','justification','destination'); cacheDiv('label_destination','label_recette_evaluee','label_journal_depense','depense');" />
-					<label for="type_operation_recette"><:asso:recette:></label>
+					<label for="type_operation_recette"><:compta:label_recette:></label>
 				<BOUCLE_type_operation_recette(ASSO_PLAN){active=1}{classe=#META{/association/classe_produits}}>
 				</BOUCLE_type_operation_recette>
 					#SET{pc_ok,' '}
@@ -56,7 +56,7 @@
 							[(#ENV{id_compte}|oui) disabled="disabled"]
 						})]
 						id="type_operation_contribution_volontaire" onclick="remplirSelectImputation(#META{/association/classe_contributions_volontaires}); afficheDiv('label_imputation','label_depense_evaluee','label_recette_evaluee','depense','recette','justification','destination'); cacheDiv('label_destination','label_depense','label_recette','mode_paiement');" />
-					<label for="type_operation_contribution_volontaire">Contrib. volontaire</label>
+					<label for="type_operation_contribution_volontaire"><:compta:label_contrib_asso:></label>
 				<BOUCLE_type_operation_contribution_volontaire(ASSO_PLAN){active=1}{classe=#META{/association/classe_contributions_volontaires}}>
 				</BOUCLE_type_operation_contribution_volontaire>
 					#SET{pc_ok,' '}
@@ -109,7 +109,7 @@
 			</li>
 <INCLURE{fond=prive/editer/saisir_paiement, journal, type_operation, id_dest, montant_dest, defaut_dest, env} />
 			<li id="saisie_justification" class="editer_justification [(#ENV{type_operation}|affichage_div{charges-produits-banques-contributions_volontaires})]">
-				<label for="justification"><:asso:libelle_justification:></label>
+				<label for="justification"><:compta:label_justification:></label>
 				<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class="text" />
 			</li>
 		</ul>

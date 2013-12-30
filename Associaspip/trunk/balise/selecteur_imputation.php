@@ -40,7 +40,7 @@ function balise_SELECTEUR_IMPUTATION_dyn($id_compte, $type_operation, $imputatio
 	//--><!]]>
 	</script><noscript><div>
 	<select name="imputation" id="imputation" class="select">
-<option value="0">-- ' . _T('asso:choisir_ref_compte') . '</option>';
+<option value="0">' . _T('compta:item_no_code') . '</option>';
 
 	include_spip('inc/association_comptabilite');
 	$interne = $GLOBALS['association_metas']['pc_intravirements'];

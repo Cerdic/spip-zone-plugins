@@ -258,7 +258,7 @@ function comptabilite_operation_modifier($date, $recette, $depense, $justificati
     $id_operation = intval($id_operation);
     if ( sql_countsel('spip_asso_comptes', "id_compte=$id_operation AND vu ") ) { // il ne faut pas modifier une operation verouillee !!!
 	spip_log("modification d'operation comptable : id_compte=$id_operation, date=$date, recette=$recette, depense=$depense, imputation=$imputation, journal=$journal, id_journal=$id_journal, justification=$justification",'associaspip');
-	return $err = _T('asso:operation_non_modifiable');
+	return $err = _T('compta:erreur_operation_verouillee');
     }
     if ($GLOBALS['association_metas']['destinations']) { // Si on doit gerer les destinations
 	$err = comptabilite_operation_ventiler($id_operation, $recette, $depense);
@@ -847,9 +847,7 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
 	}
     return $script
       . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
-      . '<label>'
-      . _T('asso:destination')
-      . '</label>'
+      . '<label>'. _T('compta:destinations') . '</label>'
       . $res
       . ((intval($GLOBALS['association_metas']['destinations'])>1)? '' :
 	('<input type="hidden" id="idNextDestination" value="'.($idIndex+1).'" />'))
@@ -1051,8 +1049,8 @@ class ExportComptes_TXT {
 	    if (!$multi) {
 		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_montant')))) .$champFin.$lignesSeparateur;
 	    } else {
-		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_recette')))) .$champFin.$champsSeparateur;
-		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('asso:entete_depense')))) .$champFin.$lignesSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('compta:label_recette')))) .$champFin.$champsSeparateur;
+		$this->out .= $champDebut. str_replace(array_keys($echappements), array_values($echappements), utf8_decode(html_entity_decode(_T('compta:label_depense')))) .$champFin.$lignesSeparateur;
 	    }
 	}
 	foreach ($this->classes as $laClasse=>$laDirection) {
