@@ -15,7 +15,7 @@
 		'explication_auteur' => 'Sélectionnez l\'auteur des articles à créer.',
 		'explication_fichiers' => 'Sélectionnez les fichiers à traiter.',
 		'explication_file_attente' => 'Cette page liste les documents présents dans la file d\'attente. Ceux-ci seront importés automatiquement par CRON. Si vous le souhaitez, vous pouvez annuler ou forcer l\'import de chaque document.',
-		'explication_rubrique' => 'Sélectionnez la rubrique des articles créer.',
+		'explication_rubrique' => 'Sélectionnez la rubrique des articles à créer.',
 		
 		'icone_doc2article' => 'Importer les Medias',
 		
