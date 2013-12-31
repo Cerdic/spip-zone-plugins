@@ -6,11 +6,11 @@
 <div class="rainette_conditions">
 	<div class="statut">
 		<div class="cadre">
-			<div class="icone">[(#ENV{icone}|rainette_icone_meteo{grand})]</div>
+			<div class="icone">[(#ENV{icone}|rainette_afficher_icone{grand})]</div>
 			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
 			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
 			<br style="clear:both" />
-			<div class="resume">[(#ENV{resume}|rainette_resume_meteo)]</div>
+			<div class="resume">[(#ENV{resume}|rainette_afficher_resume)]</div>
 		</div>
 		<div class="maj">
 			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj, #VAL{Y-m-d H:i:s}|date}|affdate_heure)]<br/>

@@ -13,8 +13,8 @@
 <table class="spip">
 <BOUCLE_icones(DATA) {source glob, #GET{dir}}>
 	<tr>
-		<td>[(#VALEUR|basename{.png}|rainette_resume_meteo)]</td>
-		<td>[(#VALEUR|basename{.png}|rainette_icone_meteo{grand, weather})]</td>
+		<td>[(#VALEUR|basename{.png}|rainette_afficher_resume)]</td>
+		<td>[(#VALEUR|basename{.png}|rainette_afficher_icone{grand, weather})]</td>
 	</tr>
 </BOUCLE_icones>
 

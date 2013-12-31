@@ -45,17 +45,17 @@ function calculer_infos($lieu, $type, $service) {
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
-function rainette_icone_meteo($meteo, $taille='petit', $chemin='', $extension='png'){
+function rainette_afficher_icone($meteo, $taille='petit', $chemin='', $extension='png'){
 	$taille_defaut = ($taille == 'petit') ? _RAINETTE_ICONES_PETITE_TAILLE : _RAINETTE_ICONES_GRANDE_TAILLE;
 
 	if (is_array($meteo)) {
 		// Utilisation des icones natifs des services autres que weather.com
-		$resume = attribut_html(rainette_resume_meteo($meteo['code']));
+		$resume = attribut_html(rainette_afficher_resume($meteo['code']));
 		$source = $meteo['url'];
 	}
 	else {
 		// Utilisation des icones weather.com
-		$resume = rainette_resume_meteo($meteo);
+		$resume = rainette_afficher_resume($meteo);
 
 		$meteo = ($meteo AND (($meteo >= 0) AND ($meteo < 48))) ? strval($meteo) : 'na';
 		$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH . $taille . '/' : rtrim($chemin, '/') . '/';
@@ -92,7 +92,7 @@ function rainette_icone_meteo($meteo, $taille='petit', $chemin='', $extension='p
 	return $balise_img;
 }
 
-function rainette_resume_meteo($meteo) {
+function rainette_afficher_resume($meteo) {
 
 	if (is_numeric($meteo)) {
 		// On utilise l'option de _T permettant de savoir si un item existe ou pas
