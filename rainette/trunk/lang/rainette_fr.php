@@ -44,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'humidite' => 'humidité',
 
 	// I
+	'info_configurer_format' => 'Choisissez le format d\'échange dans lequel le service fournit les données. En général, la valeur par défaut n\'a pas à être modifiée car le format ne devrait pas influer sur la valeur des données météorologiques. Néanmoins, certains services ne garantissent pas cette cohérence et il peut être intéressant de tester les deux options.',
 	'info_configurer_unite' => 'Choisissez le système d\'unité dans lequel seront exprimées les données météorologiques.',
 	'info_configurer_cle_obligatoire' => 'Ce service nécessite une clé d\'inscription pour être utilisé. Veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
 	'info_configurer_cle_facultative' => 'Ce service <strong>ne nécessite pas une clé d\'inscription</strong> pour être utilisé mais vous pouvez en préciser une comme le recommande le fournisseur. Si vous le decidez, veuillez acquérir cette clé sur @url@ et la saisir ci-dessous.',
@@ -85,7 +86,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_condition' => 'Conditions météorologiques',
 	'label_condition_native' => 'Utilisation du résumé et de l\'icone fourni par ce service',
 	'label_condition_weather' => 'Utilisation du résumé et de l\'icone du service Weather.com (nécessite une conversion approximative de la condition)',
+	'label_format' => 'Format d\'échange',
+	'label_format_xml' => 'XML',
+	'label_format_json' => 'JSON',
 	'legende_configurer_affichage' => 'Affichages des données',
+	'legende_configurer_format' => 'Récupération des données',
 	'legende_configurer_inscription' => 'Enregistrement',
 	'legende_configurer_utilisation' => 'Conditions d\'utilisation',
 

@@ -7,7 +7,7 @@
 		<label for="#ENV{service}_condition_native"><:rainette:label_condition_native:></label>
 	</div>
 	<div class="choix">
-		<input type="radio" name="condition" class="radio" id="#ENV{service}_condition_weather" value="weather"[(#ENV{condition, #ENV{service}}|=={weather}|oui)checked="checked"] />
+		<input type="radio" name="condition" class="radio" id="#ENV{service}_condition_weather" value="weather"[(#ENV{condition, #ENV{service}}|=={weather}|oui)checked="checked"][ disabled="(#ENV{weather}|non)"] />
 		<label for="#ENV{service}_condition_weather"><:rainette:label_condition_weather:></label>
 	</div>
 </li>

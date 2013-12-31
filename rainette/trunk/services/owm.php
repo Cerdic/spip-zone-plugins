@@ -30,8 +30,9 @@ function owm_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
 
-	// Determination de la demande
+	// Determination de la demande et du format d'échange
 	$demande = ($mode == 'previsions') ? 'forecast/daily' : 'weather';
+	$format = lire_config('rainette/owm/format', 'xml');
 
 	// Identification du système d'unité
 	$unite = lire_config('rainette/owm/unite', 'm');
@@ -50,8 +51,8 @@ function owm_service2url($lieu, $mode) {
 	$url = _RAINETTE_OWM_URL_BASE_REQUETE
 		.  $demande. '?'
 		.  'q=' . trim($lieu)
-		.  '&mode=xml'
-		.  '&units=' . ('m' ? 'metric' : 'imperial')
+		.  '&mode=' . $format
+		.  '&units=' . ($unite == 'm' ? 'metric' : 'imperial')
 		.  ($mode == 'previsions' ? '&cnt=' . _RAINETTE_OWM_JOURS_PREVISIONS : '')
 		.  ($code_langue ? '&lang=' . $code_langue : '')
 		.  ($cle ? '&APPID=' . $cle : '');
@@ -69,8 +70,12 @@ function owm_service2reload_time($mode) {
 
 function owm_url2flux($url) {
 
+	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
+	include_spip('inc/config');
+	$format = lire_config('rainette/owm/format', 'xml');
+
 	include_spip('inc/phraser');
-	$flux = url2flux_xml($url, false);
+	$flux = ($format == 'xml') ? url2flux_xml($url, false) : url2flux_json($url);
 
 	return $flux;
 }
@@ -101,67 +106,148 @@ function owm_flux2previsions($flux, $lieu) {
 function owm_flux2conditions($flux, $lieu) {
 	$tableau = array();
 
-	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children'])) {
-		$conditions = $flux['children'];
+	// Identifier le format d'échange des données
+	include_spip('inc/config');
+	$format = lire_config('rainette/owm/format', 'xml');
 
-		// Date d'observation
-		$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
-		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
-		// Station d'observation
-		$tableau['station'] = NULL;
+	if ($format == 'xml') {
+		// Traitement du flux XML
+		if (isset($flux['children'])) {
+			$conditions = $flux['children'];
 
-		// Liste des conditions meteo
-		if ($conditions['wind'][0]['children']) {
-			$conditions_vent = $conditions['wind'][0]['children'];
+			// Date d'observation
+			$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
+			$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+			// Station d'observation
+			$tableau['station'] = NULL;
 
-			$tableau['vitesse_vent'] = (isset($conditions_vent['speed'])) ? floatval($conditions_vent['speed'][0]['attributes']['value']) : '';
-			$tableau['angle_vent'] = (isset($conditions_vent['direction'])) ? intval($conditions_vent['direction'][0]['attributes']['value']) : '';
-			$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
+			// Liste des conditions meteo
+			if ($conditions['wind'][0]['children']) {
+				$conditions_vent = $conditions['wind'][0]['children'];
+
+				$tableau['vitesse_vent'] = (isset($conditions_vent['speed'])) ? floatval($conditions_vent['speed'][0]['attributes']['value']) : '';
+				$tableau['angle_vent'] = (isset($conditions_vent['direction'])) ? intval($conditions_vent['direction'][0]['attributes']['value']) : '';
+				$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
+			}
+
+			$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? floatval($conditions['temperature'][0]['attributes']['value']) : '';
+			$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+
+			$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
+			$tableau['point_rosee'] = NULL;
+
+			$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
+			$tableau['tendance_pression'] = NULL;
+
+			$tableau['visibilite'] = NULL;
+
+			// Code meteo, resume et icone natifs au service
+			$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
+			$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
+			$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
+
+			// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+			// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+			// par "n" pour la nuit.
+			$icone = basename($tableau['icon_meteo']);
+			if (strpos($icone, 'n') === false)
+				$tableau['periode'] = 0; // jour
+			else
+				$tableau['periode'] = 1; // nuit
+
+			// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+			$condition = lire_config('rainette/owm/condition', 'owm');
+			if ($condition == 'owm') {
+				// On affiche les conditions natives fournies par le service.
+				// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+				$tableau['icone']['code'] = $tableau['code_meteo'];
+				$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+				$tableau['icone']['url'] = copie_locale($url);
+				$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+			}
+			else {
+				// On affiche les conditions traduites dans le systeme weather.com
+				// Pour le resume on stocke le code et non la traduction pour eviter de generer
+				// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+				$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
+				$tableau['icone'] = $meteo;
+				$tableau['resume'] = $meteo;
+			}
 		}
+	}
+	else {
+		// Traitement du flux JSON
+		if ($flux) {
+			$conditions = $flux;
 
-		$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? floatval($conditions['temperature'][0]['attributes']['value']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+			// Date d'observation
+			$date_maj = (isset($conditions['dt'])) ? intval($conditions['dt']) : 0;
+			$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+			// Station d'observation
+			$tableau['station'] = NULL;
 
-		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
-		$tableau['point_rosee'] = NULL;
+			// Liste des conditions meteo
+			if ($flux['wind']) {
+				$conditions = $flux['wind'];
 
-		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
-		$tableau['tendance_pression'] = NULL;
+				$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? floatval($conditions['speed']) : '';
+				$tableau['angle_vent'] = (isset($conditions['deg'])) ? intval($conditions['deg']) : '';
+				// Contrairement au flux XML le flux JSON ne fournit pas la direction abrégée en anglais
+				// --> on la calcule
+				$tableau['direction_vent'] = (isset($conditions['deg']))	? angle2direction($tableau['angle_vent']) : '';
+			}
 
-		$tableau['visibilite'] = NULL;
+			if (isset($flux['main'])) {
+				$conditions = $flux['main'];
 
-		// Code meteo, resume et icone natifs au service
-		$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
-		$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
-		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
+				$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? floatval($conditions['temp']) : '';
+				$tableau['temperature_ressentie'] = (isset($conditions['temp'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
-		// par "n" pour la nuit.
-		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, 'n') === false)
-			$tableau['periode'] = 0; // jour
-		else
-			$tableau['periode'] = 1; // nuit
+				$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
+				$tableau['point_rosee'] = NULL;
 
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/owm/condition', 'owm');
-		if ($condition == 'owm') {
-			// On affiche les conditions natives fournies par le service.
-			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
-			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-			$tableau['icone']['url'] = copie_locale($url);
-			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
-		}
-		else {
-			// On affiche les conditions traduites dans le systeme weather.com
-			// Pour le resume on stocke le code et non la traduction pour eviter de generer 
-			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-			$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
+				$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
+				$tableau['tendance_pression'] = NULL;
+
+				$tableau['visibilite'] = NULL;
+			}
+
+			if (isset($flux['weather'][0])) {
+				$conditions = $flux['weather'][0];
+
+				// Code meteo, resume et icone natifs au service
+				$tableau['code_meteo'] = (isset($conditions['id'])) ? $conditions['id'] : '';
+				$tableau['icon_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
+				$tableau['desc_meteo'] = (isset($conditions['description'])) ? $conditions['description'] : '';
+
+				// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+				// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+				// par "n" pour la nuit.
+				$icone = $tableau['icon_meteo'];
+				if (strpos($icone, 'n') === false)
+					$tableau['periode'] = 0; // jour
+				else
+					$tableau['periode'] = 1; // nuit
+
+				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+				$condition = lire_config('rainette/owm/condition', 'owm');
+				if ($condition == 'owm') {
+					// On affiche les conditions natives fournies par le service.
+					// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+					$tableau['icone']['code'] = $tableau['code_meteo'];
+					$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+					$tableau['icone']['url'] = copie_locale($url);
+					$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+				}
+				else {
+					// On affiche les conditions traduites dans le systeme weather.com
+					// Pour le resume on stocke le code et non la traduction pour eviter de generer
+					// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+					$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
+					$tableau['icone'] = $meteo;
+					$tableau['resume'] = $meteo;
+				}
+			}
 		}
 	}
 
@@ -174,20 +260,41 @@ function owm_flux2conditions($flux, $lieu) {
 function owm_flux2infos($flux, $lieu) {
 	$tableau = array();
 
-	// On stocke les informations disponibles dans un tableau standard
-	if (isset($flux['children']['city'][0]['attributes']['name'])) {
-		$tableau['ville'] = $flux['children']['city'][0]['attributes']['name'];
+	// Identifier le format d'échange des données
+	include_spip('inc/config');
+	$format = lire_config('rainette/owm/format', 'xml');
+
+	if ($format == 'xml') {
+		if (isset($flux['children']['city'][0]['attributes']['name'])) {
+			$tableau['ville'] = $flux['children']['city'][0]['attributes']['name'];
+		}
+
+		if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
+			$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
+
+			$tableau['region'] = NULL;
+
+			$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+			$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
+
+			$tableau['population'] = NULL;
+		}
 	}
+	else {
+		if (isset($flux['name'])) {
+			$tableau['ville'] = $flux['name'];
+		}
 
-	if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
-		$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
+		if (isset($flux['coord'])) {
+			$infos = $flux['coord'];
 
-		$tableau['region'] = NULL;
+			$tableau['region'] = NULL;
 
-		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
-		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
+			$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+			$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
 
-		$tableau['population'] = NULL;
+			$tableau['population'] = NULL;
+		}
 	}
 
 	// Traitement des erreurs de flux
@@ -244,195 +351,195 @@ function langue2code_owm($langue) {
 	static $langue2owm = array(
 		'aa' => array('', ''), 					// afar
 		'ab' => array('', ''), 					// abkhaze
-		'af' => array('AF', ''), 				// afrikaans
+		'af' => array('', ''), 				// afrikaans
 		'am' => array('', ''), 					// amharique
-		'an' => array('', 'SP'),				// aragonais
-		'ar' => array('AR', ''), 				// arabe
+		'an' => array('', 'sp'),				// aragonais
+		'ar' => array('', ''), 				// arabe
 		'as' => array('', ''), 					// assamais
-		'ast' => array('', 'SP'), 				// asturien - iso 639-2
+		'ast' => array('', 'sp'), 				// asturien - iso 639-2
 		'ay' => array('', ''), 					// aymara
-		'az' => array('AZ', ''), 				// azeri
+		'az' => array('', 'ru'), 				// azeri
 		'ba' => array('', ''),					// bashkir
-		'be' => array('BY', ''), 				// bielorusse
+		'be' => array('', 'ru'), 				// bielorusse
 		'ber_tam' => array('', ''),				// berbère
 		'ber_tam_tfng' => array('', ''),		// berbère tifinagh
-		'bg' => array('BU', ''), 				// bulgare
+		'bg' => array('bg', ''), 				// bulgare
 		'bh' => array('', ''),					// langues biharis
 		'bi' => array('', ''),					// bichlamar
 		'bm' => array('', ''),					// bambara
 		'bn' => array('', ''),					// bengali
 		'bo' => array('', ''),					// tibétain
-		'br' => array('', 'FR'),				// breton
+		'br' => array('', 'fr'),				// breton
 		'bs' => array('', ''),					// bosniaque
-		'ca' => array('CA', ''),				// catalan
-		'co' => array('', 'FR'),				// corse
-		'cpf' => array('', 'FR'), 				// créole réunionais
-		'cpf_dom' => array('', 'FR'), 			// créole ???
-		'cpf_hat' => array('HT', ''), 			// créole haïtien
-		'cs' => array('CZ', ''),				// tchèque
-		'cy' => array('CY', ''),				// gallois
-		'da' => array('DK', ''),				// danois
-		'de' => array('DL', ''),				// allemand
+		'ca' => array('', 'sp'),				// catalan
+		'co' => array('', 'fr'),				// corse
+		'cpf' => array('', 'fr'), 				// créole réunionais
+		'cpf_dom' => array('', 'sp'), 			// créole ???
+		'cpf_hat' => array('', 'fr'), 			// créole haïtien
+		'cs' => array('cz', ''),				// tchèque
+		'cy' => array('', 'en'),				// gallois
+		'da' => array('', ''),				// danois
+		'de' => array('de', ''),				// allemand
 		'dz' => array('', ''),					// dzongkha
-		'el' => array('GR', ''),				// grec moderne
-		'en' => array('EN', ''),				// anglais
-		'en_hx' => array('', 'EN'),				// anglais hacker
-		'en_sm' => array('', 'EN'),				// anglais smurf
-		'eo' => array('EO', ''),				// esperanto
-		'es' => array('SP', ''),				// espagnol
-		'es_co' => array('', 'SP'),				// espagnol colombien
-		'es_mx_pop' => array('', 'SP'),			// espagnol mexicain
-		'et' => array('ET', ''),				// estonien
-		'eu' => array('EU', ''),				// basque
-		'fa' => array('FA', ''),				// persan (farsi)
+		'el' => array('', ''),				// grec moderne
+		'en' => array('en', ''),				// anglais
+		'en_hx' => array('', 'en'),				// anglais hacker
+		'en_sm' => array('', 'en'),				// anglais smurf
+		'eo' => array('', ''),				// esperanto
+		'es' => array('sp', ''),				// espagnol
+		'es_co' => array('', 'sp'),				// espagnol colombien
+		'es_mx_pop' => array('', 'sp'),			// espagnol mexicain
+		'et' => array('', ''),				// estonien
+		'eu' => array('', 'fr'),				// basque
+		'fa' => array('', ''),				// persan (farsi)
 		'ff' => array('', ''),					// peul
-		'fi' => array('FI', ''),				// finnois
-		'fj' => array('', 'EN'),				// fidjien
-		'fo' => array('', 'DK'),				// féroïen
+		'fi' => array('fi', ''),				// finnois
+		'fj' => array('', 'en'),				// fidjien
+		'fo' => array('', ''),				// féroïen
 		'fon' => array('', ''),					// fon
-		'fr' => array('FR', ''),				// français
-		'fr_sc' => array('', 'FR'),				// français schtroumpf
-		'fr_lpc' => array('', 'FR'),			// français langue parlée
-		'fr_lsf' => array('', 'FR'),			// français langue des signes
-		'fr_spl' => array('', 'FR'),			// français simplifié
-		'fr_tu' => array('', 'FR'),				// français copain
-		'fy' => array('', 'DL'),				// frison occidental
-		'ga' => array('IR', ''),				// irlandais
-		'gd' => array('', 'EN'),				// gaélique écossais
-		'gl' => array('GZ', ''),				// galicien
+		'fr' => array('fr', ''),				// français
+		'fr_sc' => array('', 'fr'),				// français schtroumpf
+		'fr_lpc' => array('', 'fr'),			// français langue parlée
+		'fr_lsf' => array('', 'fr'),			// français langue des signes
+		'fr_spl' => array('', 'fr'),			// français simplifié
+		'fr_tu' => array('', 'fr'),				// français copain
+		'fy' => array('', 'de'),				// frison occidental
+		'ga' => array('', 'en'),				// irlandais
+		'gd' => array('', 'en'),				// gaélique écossais
+		'gl' => array('', 'sp'),				// galicien
 		'gn' => array('', ''),					// guarani
-		'grc' => array('', 'GR'),				// grec ancien
-		'gu' => array('GU', ''),				// goudjrati
+		'grc' => array('', ''),				// grec ancien
+		'gu' => array('', ''),				// goudjrati
 		'ha' => array('', ''),					// haoussa
-		'hac' => array('', 'KU'), 				// Kurdish-Horami
-		'hbo' => array('', 'IL'),				// hebreu classique ou biblique
-		'he' => array('IL', ''),				// hébreu
-		'hi' => array('HI', ''),				// hindi
-		'hr' => array('CR', ''),				// croate
-		'hu' => array('HU', ''),	 			// hongrois
-		'hy' => array('HY', ''), 				// armenien
+		'hac' => array('', ''), 				// Kurdish-Horami
+		'hbo' => array('', ''),				// hebreu classique ou biblique
+		'he' => array('', ''),				// hébreu
+		'hi' => array('', ''),				// hindi
+		'hr' => array('', ''),				// croate
+		'hu' => array('', ''),	 			// hongrois
+		'hy' => array('', ''), 				// armenien
 		'ia' => array('', ''),					// interlingua (langue auxiliaire internationale)
-		'id' => array('ID', ''),				// indonésien
+		'id' => array('', ''),				// indonésien
 		'ie' => array('', ''),					// interlingue
 		'ik' => array('', ''),					// inupiaq
-		'is' => array('IS', ''),				// islandais
-		'it' => array('IT', ''),				// italien
-		'it_fem' => array('', 'IT'),			// italien féminin
+		'is' => array('', ''),				// islandais
+		'it' => array('it', ''),				// italien
+		'it_fem' => array('', 'it'),			// italien féminin
 		'iu' => array('', ''),					// inuktitut
-		'ja' => array('JP', ''),				// japonais
-		'jv' => array('JW', ''),				// javanais
-		'ka' => array('KA', ''),				// géorgien
+		'ja' => array('', ''),				// japonais
+		'jv' => array('', ''),				// javanais
+		'ka' => array('', ''),				// géorgien
 		'kk' => array('', ''),					// kazakh
-		'kl' => array('', 'DK'),				// groenlandais
-		'km' => array('KM', ''),				// khmer central
+		'kl' => array('', ''),				// groenlandais
+		'km' => array('', ''),				// khmer central
 		'kn' => array('', ''),					// Kannada
-		'ko' => array('KR', ''),				// coréen
+		'ko' => array('', ''),				// coréen
 		'ks' => array('', ''),					// kashmiri
-		'ku' => array('KU', ''),				// kurde
+		'ku' => array('', ''),				// kurde
 		'ky' => array('', ''),					// kirghiz
-		'la' => array('LA', ''),				// latin
-		'lb' => array('', 'FR'),				// luxembourgeois
+		'la' => array('', ''),				// latin
+		'lb' => array('', 'fr'),				// luxembourgeois
 		'ln' => array('', ''),					// lingala
 		'lo' => array('', ''), 					// lao
-		'lt' => array('LT', ''),				// lituanien
+		'lt' => array('', ''),				// lituanien
 		'lu' => array('', ''),					// luba-katanga
-		'lv' => array('LV', ''),				// letton
-		'man' => array('GM', ''),				// mandingue
+		'lv' => array('', ''),				// letton
+		'man' => array('', ''),				// mandingue
 		'mfv' => array('', ''), 				// manjaque - iso-639-3
 		'mg' => array('', ''),					// malgache
-		'mi' => array('MI', ''),				// maori
-		'mk' => array('MK', ''),				// macédonien
+		'mi' => array('', ''),				// maori
+		'mk' => array('', ''),				// macédonien
 		'ml' => array('', ''),					// malayalam
-		'mn' => array('MN', ''),				// mongol
-		'mo' => array('', 'RO'),				// moldave ??? normalement c'est ro comme le roumain
+		'mn' => array('', ''),				// mongol
+		'mo' => array('', 'ro'),				// moldave ??? normalement c'est ro comme le roumain
 		'mos' => array('', ''),					// moré - iso 639-2
-		'mr' => array('MR', ''),				// marathe
+		'mr' => array('', ''),				// marathe
 		'ms' => array('', ''),					// malais
-		'mt' => array('MT', ''),				// maltais
-		'my' => array('MY', ''),				// birman
+		'mt' => array('', 'en'),				// maltais
+		'my' => array('', ''),				// birman
 		'na' => array('', ''),					// nauruan
-		'nap' => array('', 'IT'),				// napolitain - iso 639-2
+		'nap' => array('', 'it'),				// napolitain - iso 639-2
 		'ne' => array('', ''),					// népalais
 		'nqo' => array('', ''), 				// n’ko - iso 639-3
-		'nl' => array('NL', ''),				// néerlandais
-		'no' => array('NO', ''),				// norvégien
-		'nb' => array('', 'NO'),				// norvégien bokmål
-		'nn' => array('', 'NO'),				// norvégien nynorsk
-		'oc' => array('OC', ''),				// occitan
-		'oc_lnc' => array('', 'OC'),			// occitan languedocien
-		'oc_ni' => array('', 'OC'),				// occitan niçard
-		'oc_ni_la' => array('', 'OC'),			// occitan niçard
-		'oc_prv' => array('', 'OC'),			// occitan provençal
-		'oc_gsc' => array('', 'OC'),			// occitan gascon
-		'oc_lms' => array('', 'OC'),			// occitan limousin
-		'oc_auv' => array('', 'OC'),			// occitan auvergnat
-		'oc_va' => array('', 'OC'),				// occitan vivaro-alpin
+		'nl' => array('nl', ''),				// néerlandais
+		'no' => array('', ''),				// norvégien
+		'nb' => array('', ''),				// norvégien bokmål
+		'nn' => array('', ''),				// norvégien nynorsk
+		'oc' => array('', 'fr'),				// occitan
+		'oc_lnc' => array('', 'fr'),			// occitan languedocien
+		'oc_ni' => array('', 'fr'),				// occitan niçard
+		'oc_ni_la' => array('', 'fr'),			// occitan niçard
+		'oc_prv' => array('', 'fr'),			// occitan provençal
+		'oc_gsc' => array('', 'fr'),			// occitan gascon
+		'oc_lms' => array('', 'fr'),			// occitan limousin
+		'oc_auv' => array('', 'fr'),			// occitan auvergnat
+		'oc_va' => array('', 'fr'),				// occitan vivaro-alpin
 		'om' => array('', ''),					// galla
 		'or' => array('', ''),					// oriya
-		'pa' => array('PA', ''),				// pendjabi
+		'pa' => array('', ''),				// pendjabi
 		'pbb' => array('', ''),					// Nasa Yuwe (páez) - iso 639-3
-		'pl' => array('PL', ''),				// polonais
-		'ps' => array('PS', ''),				// pachto
-		'pt' => array('BR', ''),				// portugais
-		'pt_br' => array('', 'BR'),				// portugais brésilien
+		'pl' => array('pl', ''),				// polonais
+		'ps' => array('', ''),				// pachto
+		'pt' => array('pt', ''),				// portugais
+		'pt_br' => array('', 'pt'),				// portugais brésilien
 		'qu' => array('', ''),					// quechua
 		'rm' => array('', ''),					// romanche
 		'rn' => array('', ''),					// rundi
-		'ro' => array('RO', ''),				// roumain
-		'roa' => array('chti', ''),				// langues romanes (ch'ti) - iso 639-2
-		'ru' => array('RU', ''),				// russe
+		'ro' => array('ro', ''),				// roumain
+		'roa' => array('', 'fr'),				// langues romanes (ch'ti) - iso 639-2
+		'ru' => array('ru', ''),				// russe
 		'rw' => array('', ''),					// rwanda
 		'sa' => array('', ''),					// sanskrit
-		'sc' => array('', 'IT'),				// sarde
-		'scn' => array('', 'IT'),				// sicilien - iso 639-2
+		'sc' => array('', 'it'),				// sarde
+		'scn' => array('', 'it'),				// sicilien - iso 639-2
 		'sd' => array('', ''),					// sindhi
 		'sg' => array('', ''),					// sango
-		'sh' => array('', 'SR'),				// serbo-croate
-		'sh_latn' => array('', 'SR'),			// serbo-croate latin
-		'sh_cyrl' => array('', 'SR'),			// serbo-croate cyrillique
+		'sh' => array('', ''),				// serbo-croate
+		'sh_latn' => array('', ''),			// serbo-croate latin
+		'sh_cyrl' => array('', ''),			// serbo-croate cyrillique
 		'si' => array('', ''),					// singhalais
-		'sk' => array('SK', ''),				// slovaque
-		'sl' => array('SL', ''),				// slovène
-		'sm' => array('', ''),					// samoan
+		'sk' => array('', ''),				// slovaque
+		'sl' => array('', ''),				// slovène
+		'sm' => array('', 'en'),					// samoan
 		'sn' => array('', ''),					// shona
 		'so' => array('', ''),					// somali
-		'sq' => array('AL', ''), 				// albanais
-		'sr' => array('SR', ''),				// serbe
-		'src' => array('', 'IT'), 				// sarde logoudorien - iso 639-3
-		'sro' => array('', 'IT'), 				// sarde campidanien - iso 639-3
+		'sq' => array('', ''), 				// albanais
+		'sr' => array('', ''),				// serbe
+		'src' => array('', 'it'), 				// sarde logoudorien - iso 639-3
+		'sro' => array('', 'it'), 				// sarde campidanien - iso 639-3
 		'ss' => array('', ''),					// swati
 		'st' => array('', ''),					// sotho du Sud
 		'su' => array('', ''),					// soundanais
-		'sv' => array('SW', ''),				// suédois
-		'sw' => array('SI', ''),				// swahili
+		'sv' => array('se', ''),				// suédois
+		'sw' => array('', ''),				// swahili
 		'ta' => array('', ''), 					// tamoul
 		'te' => array('', ''),					// télougou
 		'tg' => array('', ''),					// tadjik
-		'th' => array('TH', ''),				// thaï
+		'th' => array('', ''),				// thaï
 		'ti' => array('', ''),					// tigrigna
-		'tk' => array('TK', ''),				// turkmène
-		'tl' => array('TL', ''),				// tagalog
+		'tk' => array('', ''),				// turkmène
+		'tl' => array('', ''),				// tagalog
 		'tn' => array('', ''),					// tswana
 		'to' => array('', ''),					// tongan (Îles Tonga)
-		'tr' => array('TR', ''),				// turc
+		'tr' => array('tr', ''),				// turc
 		'ts' => array('', ''),					// tsonga
-		'tt' => array('TT', ''),				// tatar
+		'tt' => array('', ''),				// tatar
 		'tw' => array('', ''),					// twi
-		'ty' => array('', 'FR'),			 	// tahitien
+		'ty' => array('', 'fr'),			 	// tahitien
 		'ug' => array('', ''),					// ouïgour
-		'uk' => array('UA', ''),				// ukrainien
+		'uk' => array('ua', ''),				// ukrainien
 		'ur' => array('', ''),					// ourdou
-		'uz' => array('UZ', ''),				// ouszbek
-		'vi' => array('VU', ''),				// vietnamien
+		'uz' => array('', ''),				// ouszbek
+		'vi' => array('', ''),				// vietnamien
 		'vo' => array('', ''),					// volapük
-		'wa' => array('', 'FR'),				// wallon
-		'wo' => array('SN', ''),				// wolof
+		'wa' => array('', 'fr'),				// wallon
+		'wo' => array('', ''),				// wolof
 		'xh' => array('', ''),					// xhosa
-		'yi' => array('YI', ''),				// yiddish
+		'yi' => array('', ''),				// yiddish
 		'yo' => array('', ''),					// yoruba
-		'za' => array('', 'CN'),				// zhuang
-		'zh' => array('CN', ''), 				// chinois (ecriture simplifiee)
-		'zh_tw' => array('TW', ''), 			// chinois taiwan (ecriture traditionnelle)
+		'za' => array('', 'zh_cn'),				// zhuang
+		'zh' => array('zh_cn', ''), 				// chinois (ecriture simplifiee)
+		'zh_tw' => array('zh_tw', ''), 			// chinois taiwan (ecriture traditionnelle)
 		'zu' => array('', '')					// zoulou
 	);
 

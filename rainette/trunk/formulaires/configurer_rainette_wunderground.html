@@ -18,6 +18,15 @@
 			</ul>
 		</fieldset>
 		<fieldset>
+			<legend><:rainette:legende_configurer_format:></legend>
+			<ul>
+				<INCLURE{fond=formulaires/inc-configurer_format,
+					service=owm,
+					defaut=json,
+					env} />
+			</ul>
+		</fieldset>
+		<fieldset>
 			<legend><:rainette:legende_configurer_affichage:></legend>
 			<ul>
 				<INCLURE{fond=formulaires/inc-configurer_unite,
@@ -26,6 +35,7 @@
 
 				<INCLURE{fond=formulaires/inc-configurer_condition,
 					service=wunderground,
+					weather=oui,
 					env } />
 
 				<li class="editer editer_theme[ (#ENV**{erreurs}|table_valeur{theme}|oui)erreur]" id="theme_wunderground">

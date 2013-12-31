@@ -1,0 +1,13 @@
+<li class="editer editer_format[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
+	<p class="explication"><:rainette:info_configurer_format:></p>
+	<label><:rainette:label_format:></label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{format})</span>]
+	<div class="choix">
+		<input type="radio" name="format" class="radio" id="#ENV{service}_format_xml" value="xml"[(#ENV{format, #ENV{defaut, xml}}|=={xml}|oui)checked="checked"] />
+		<label for="#ENV{service}_format_xml"><:rainette:label_format_xml:></label>
+	</div>
+	<div class="choix">
+		<input type="radio" name="format" class="radio" id="#ENV{service}_format_json" value="json"[(#ENV{format, #ENV{defaut, xml}}|=={json}|oui)checked="checked"] />
+		<label for="#ENV{service}_format_json"><:rainette:label_format_json:></label>
+	</div>
+</li>
