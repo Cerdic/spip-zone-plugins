@@ -1,6 +1,7 @@
 <traduction module="fbmodeles" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/modeles_facebook/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/fbmodeles?lang_cible=en" total="46" traduits="45" relire="0" modifs="1" nouveaux="0" pourcent="97.83">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/fbmodeles?lang_cible=en" total="46" traduits="46" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/fbmodeles?lang_cible=fr" total="46" traduits="46" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>

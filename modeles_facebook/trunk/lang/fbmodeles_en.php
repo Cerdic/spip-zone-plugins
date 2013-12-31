@@ -44,16 +44,16 @@ To include the tags "Open Graph" in the header of your public pages, you must in
 	'doc_titre_page' => 'Documentation page of the Facebook Models plugin',
 	'documentation' => '{{{Plugin use}}}
 
-As shown above, the models are directly included from the desired options.
+As shown above, the models are directly included with the desired options.
 
-Each model has a list of options, some of which are necessary for its display. For a complete list, refer to the information in the header models files in the directory "<code>modeles/</ code>" in the plugin.
+Each model has a list of options, some of which are mandatory for its display. For a complete list, refer to the information in the header models files in directory "<code>modeles/</code>" of the plugin.
 
-The plugin also provides a {{Open Graph}} model generating information, the meta information used by Facebook, specific to each object SPIP. To use it, you must manually "{{insert_head_og}}" add in the header of your skeleton model.
+The plugin also provides an {{Open Graph}} model generating information, the meta information used by Facebook, specific to each SPIP object. To use it, you must manually add "{{insert_head_og}}" in the header of your skeletons.
 
-{{Warning -}} This model needs to receive the current environment, you must include in each of the pages skeletons  ({"article.html", "rubrique.html" ...}) and not in the global header inclusion ({"inc_head.html"}) :
+{{Warning -}} This model needs to receive the current environment, you must include the following in each of the page skeletons  ({"article.html", "rubrique.html" ...}) and not in the global header inclusion ({"inc_head.html"}):
 <cadre class=\'spip\'>
 {{#MODELE{insert_head_og}{env}}}
-</cadre>', # MODIF
+</cadre>',
 
 	// E
 	'exemple' => '{{{Exemple}}}
