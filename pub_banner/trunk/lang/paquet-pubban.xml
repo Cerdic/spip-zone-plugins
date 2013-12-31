@@ -1,6 +1,7 @@
 <traduction module="paquet-pubban" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/pub_banner/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-pubban?lang_cible=en" total="2" traduits="1" relire="0" modifs="1" nouveaux="0" pourcent="50.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-pubban?lang_cible=en" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-pubban?lang_cible=fr" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
