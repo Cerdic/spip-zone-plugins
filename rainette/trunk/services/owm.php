@@ -8,6 +8,8 @@ if (!defined('_RAINETTE_OWM_URL_BASE_ICONE'))
 	define('_RAINETTE_OWM_URL_BASE_ICONE', 'http://openweathermap.org/img/w');
 if (!defined('_RAINETTE_OWM_JOURS_PREVISIONS'))
 	define('_RAINETTE_OWM_JOURS_PREVISIONS', 14);
+if (!defined('_RAINETTE_OWM_LANGUE_DEFAUT'))
+	define('_RAINETTE_OWM_LANGUE_DEFAUT', 'FR');
 
 
 function owm_service2cache($lieu, $mode) {
@@ -543,7 +545,7 @@ function langue2code_owm($langue) {
 		'zu' => array('', '')					// zoulou
 	);
 
-	$code = _RAINETTE_WUNDERGROUND_LANGUE_DEFAUT;
+	$code = _RAINETTE_OWM_LANGUE_DEFAUT;
 	if (array_key_exists($langue,  $langue2owm)) {
 		if ($c0 = $langue2owm[$langue][0])
 			$code = strtoupper($c0);
