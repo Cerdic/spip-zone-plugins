@@ -1330,7 +1330,7 @@ function filtre_selecteur_asso_destination($sel='') {
 		$res .= '>'.$val['intitule']."</option>\n";
 	}
 	sql_free($sql);
-	return "$sel</select>\n";
+	return "$res</select>\n";
 }
 
 /**
