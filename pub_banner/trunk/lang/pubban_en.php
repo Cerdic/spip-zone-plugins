@@ -316,7 +316,7 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'pas_banniere_selectionne' => 'You didn’t select any banner ...',
 	'perf_empl' => 'Banners performance',
 	'period' => 'Period from ',
-	'plugin_spip' => 'A plugin for <b>SPIP 2.0+</b>', # MODIF
+	'plugin_spip' => 'a plugin for <b>SPIP 3.0+</b>',
 	'poubelle' => 'In the bin',
 	'poubelle_contenu' => 'Bin content',
 	'pour' => 'For',
@@ -408,9 +408,9 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	'vider_trash' => 'Empty trash',
 	'view_pub' => 'Details of an advertising insert',
 	'voir_bordure' => 'See the borders banners',
-	'voir_les_statistiques' => 'Show Stats (popup window)', # MODIF
+	'voir_les_statistiques' => 'Show stats (popup window)',
 	'voir_page' => '<br /><b>See the page :</b>',
-	'voir_un_apercu' => 'See a preview (popup window)', # MODIF
+	'voir_un_apercu' => 'Show a preview (popup window)',
 
 	// W
 	'width' => 'Width'
