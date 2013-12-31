@@ -3,7 +3,8 @@
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=de" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=en" total="111" traduits="107" relire="0" modifs="4" nouveaux="0" pourcent="96.40">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=en" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/rainette?lang_cible=es" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />

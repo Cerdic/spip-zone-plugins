@@ -91,13 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_7' => 'mixed snow and sleet',
 	'meteo_8' => 'freezing drizzle',
 	'meteo_9' => 'drizzle',
-	'meteo_conditions' => 'current conditions', # MODIF
+	'meteo_conditions' => 'current conditions',
 	'meteo_consultation' => '@ville@ Weather',
 	'meteo_de' => '@ville@ weather',
 	'meteo_na' => 'unknown',
-	'meteo_previsions' => 'forecast conditions', # MODIF
-	'meteo_previsions_aujourdhui' => 'today forecast', # MODIF
-	'meteo_previsions_n_jours' => '@nbj@-days forecast', # MODIF
+	'meteo_previsions' => 'forecast for @date@',
+	'meteo_previsions_aujourdhui' => 'today`s forecast',
+	'meteo_previsions_n_jours' => '@nbj@-days forecast',
 
 	// N
 	'nuit' => 'night',
