@@ -115,7 +115,7 @@ function xmlObjToArr($objet_xml, $utiliser_namespace=false) {
 		$tableau = array(
 			'name'=>$name,
 		);
-		if ($text)
+		if (!is_null($text))
 			$tableau['text'] = $text;
 		if ($attributes)
 			$tableau['attributes'] = $attributes;

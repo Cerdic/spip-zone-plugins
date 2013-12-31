@@ -1,4 +1,10 @@
 <?php
+/**
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service Open Weather Map (owm).
+ * Ce service fournit des données au format XML ou JSON.
+ *
+ * @package SPIP\RAINETTE\OWM
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -12,8 +18,21 @@ if (!defined('_RAINETTE_OWM_LANGUE_DEFAUT'))
 	define('_RAINETTE_OWM_LANGUE_DEFAUT', 'FR');
 
 
-function owm_service2cache($lieu, $mode) {
+/**
+ * ------------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
+ * unique de chargement des données météorologiques `charger_meteo()`.
+ * PACKAGE SPIP\RAINETTE\OWM\API
+ * ------------------------------------------------------------------------------------------------
+ */
 
+
+/**
+ * @param $lieu
+ * @param $mode
+ * @return string
+ */
+function owm_service2cache($lieu, $mode) {
 	include_spip('inc/config');
 	$condition = lire_config('rainette/owm/condition');
 	$langue = $GLOBALS['spip_lang'];
@@ -28,8 +47,12 @@ function owm_service2cache($lieu, $mode) {
 	return $fichier_cache;
 }
 
+/**
+ * @param $lieu
+ * @param $mode
+ * @return string
+ */
 function owm_service2url($lieu, $mode) {
-
 	include_spip('inc/config');
 
 	// Determination de la demande et du format d'échange
@@ -63,15 +86,21 @@ function owm_service2url($lieu, $mode) {
 }
 
 
+/**
+ * @param $mode
+ * @return int
+ */
 function owm_service2reload_time($mode) {
-
 	static $reload = array('conditions' => 7200, 'previsions' => 10800);
 
 	return $reload[$mode];
 }
 
+/**
+ * @param $url
+ * @return array
+ */
 function owm_url2flux($url) {
-
 	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
@@ -105,53 +134,212 @@ function owm_flux2previsions($flux, $lieu) {
 	return $tableau;
 }
 
+/**
+ * @param $flux
+ * @param $lieu
+ * @return array
+ */
 function owm_flux2conditions($flux, $lieu) {
-	$tableau = array();
+	// Identifier le format d'échange des données
+	include_spip('inc/config');
+	$format = lire_config('rainette/owm/format', 'xml');
+
+	// Construire le tabelau standard des conditions météorologiques
+	$tableau = ($format == 'xml') ? xml2conditions_owm($flux) : json2conditions_owm($flux);
+
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	return $tableau;
+}
+
+/**
+ * @param $flux
+ * @param $lieu
+ * @return array
+ */
+function owm_flux2infos($flux, $lieu) {
 
 	// Identifier le format d'échange des données
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
 
-	if ($format == 'xml') {
-		// Traitement du flux XML
-		if (isset($flux['children'])) {
-			$conditions = $flux['children'];
+	// Construire le tabelau standard des conditions météorologiques
+	$tableau = ($format == 'xml') ? xml2infos_owm($flux) : json2infos_owm($flux);
 
-			// Date d'observation
-			$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
-			$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
-			// Station d'observation
-			$tableau['station'] = NULL;
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
-			// Liste des conditions meteo
-			if ($conditions['wind'][0]['children']) {
-				$conditions_vent = $conditions['wind'][0]['children'];
+	return $tableau;
+}
 
-				$tableau['vitesse_vent'] = (isset($conditions_vent['speed'])) ? floatval($conditions_vent['speed'][0]['attributes']['value']) : '';
-				$tableau['angle_vent'] = (isset($conditions_vent['direction'])) ? intval($conditions_vent['direction'][0]['attributes']['value']) : '';
-				$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
-			}
+/**
+ * @return array
+ */
+function owm_service2credits() {
 
-			$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? floatval($conditions['temperature'][0]['attributes']['value']) : '';
-			$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+	$credits = array('titre' => '', 'logo' => '');
+	$credits['lien'] = 'http://openweathermap.org/';
 
-			$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
+	return $credits;
+}
+
+
+/**
+ * -----------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont permettent le décodage des données météorologiques reçues au
+ * format XML. Ce sont des sous-fonctions internes appelées uniquement par les fonctions de l'API.
+ * PACKAGE SPIP\RAINETTE\OWM\XML
+ * -----------------------------------------------------------------------------------------------
+ */
+function xml2conditions_owm($flux) {
+	$tableau = array();
+
+	if (isset($flux['children'])) {
+		$conditions = $flux['children'];
+
+		// Date d'observation
+		$date_maj = (isset($conditions['lastupdate'])) ? strtotime($conditions['lastupdate'][0]['attributes']['value']) : 0;
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		// Station d'observation
+		$tableau['station'] = NULL;
+
+		// Liste des conditions meteo
+		if ($conditions['wind'][0]['children']) {
+			$conditions_vent = $conditions['wind'][0]['children'];
+
+			$tableau['vitesse_vent'] = (isset($conditions_vent['speed'])) ? floatval($conditions_vent['speed'][0]['attributes']['value']) : '';
+			$tableau['angle_vent'] = (isset($conditions_vent['direction'])) ? intval($conditions_vent['direction'][0]['attributes']['value']) : '';
+			$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
+		}
+
+		$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? floatval($conditions['temperature'][0]['attributes']['value']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+
+		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
+		$tableau['point_rosee'] = NULL;
+
+		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
+		$tableau['tendance_pression'] = NULL;
+
+		$tableau['visibilite'] = NULL;
+
+		// Code meteo, resume et icone natifs au service
+		$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
+
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+		// par "n" pour la nuit.
+		$icone = basename($tableau['icon_meteo']);
+		if (strpos($icone, 'n') === false)
+			$tableau['periode'] = 0; // jour
+		else
+			$tableau['periode'] = 1; // nuit
+
+		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		$condition = lire_config('rainette/owm/condition', 'owm');
+		if ($condition == 'owm') {
+			// On affiche les conditions natives fournies par le service.
+			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+			$tableau['icone']['code'] = $tableau['code_meteo'];
+			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+		}
+		else {
+			// On affiche les conditions traduites dans le systeme weather.com
+			// Pour le resume on stocke le code et non la traduction pour eviter de generer
+			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+			$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
+			$tableau['icone'] = $meteo;
+			$tableau['resume'] = $meteo;
+		}
+	}
+
+	return $tableau;
+}
+
+function xml2infos_owm($flux) {
+	$tableau = array();
+
+	if (isset($flux['children']['city'][0]['attributes']['name'])) {
+		$tableau['ville'] = $flux['children']['city'][0]['attributes']['name'];
+	}
+
+	if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
+		$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
+
+		$tableau['region'] = NULL;
+
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
+
+		$tableau['population'] = NULL;
+	}
+
+	return $tableau;
+}
+
+
+/**
+ * ------------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont permettent le décodage des données météorologiques reçues au
+ * format JSON. Ce sont des sous-fonctions internes appelées uniquement par les fonctions de l'API.
+ * PACKAGE SPIP\RAINETTE\OWM\JSON
+ * ------------------------------------------------------------------------------------------------
+ */
+function json2conditions_owm($flux) {
+	$tableau = array();
+
+	if ($flux) {
+		$conditions = $flux;
+
+		// Date d'observation
+		$date_maj = (isset($conditions['dt'])) ? intval($conditions['dt']) : 0;
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		// Station d'observation
+		$tableau['station'] = NULL;
+
+		// Liste des conditions meteo
+		if ($flux['wind']) {
+			$conditions = $flux['wind'];
+
+			$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? floatval($conditions['speed']) : '';
+			$tableau['angle_vent'] = (isset($conditions['deg'])) ? intval($conditions['deg']) : '';
+			// Contrairement au flux XML le flux JSON ne fournit pas la direction abrégée en anglais
+			// --> on la calcule
+			$tableau['direction_vent'] = (isset($conditions['deg']))	? angle2direction($tableau['angle_vent']) : '';
+		}
+
+		if (isset($flux['main'])) {
+			$conditions = $flux['main'];
+
+			$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? floatval($conditions['temp']) : '';
+			$tableau['temperature_ressentie'] = (isset($conditions['temp'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+
+			$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
 			$tableau['point_rosee'] = NULL;
 
-			$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['attributes']['value']) : '';
+			$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
 			$tableau['tendance_pression'] = NULL;
 
 			$tableau['visibilite'] = NULL;
+		}
+
+		if (isset($flux['weather'][0])) {
+			$conditions = $flux['weather'][0];
 
 			// Code meteo, resume et icone natifs au service
-			$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
-			$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
-			$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
+			$tableau['code_meteo'] = (isset($conditions['id'])) ? $conditions['id'] : '';
+			$tableau['icon_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
+			$tableau['desc_meteo'] = (isset($conditions['description'])) ? $conditions['description'] : '';
 
 			// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 			// Pour ce service le nom du fichier icone finit par "d" pour le jour et
 			// par "n" pour la nuit.
-			$icone = basename($tableau['icon_meteo']);
+			$icone = $tableau['icon_meteo'];
 			if (strpos($icone, 'n') === false)
 				$tableau['periode'] = 0; // jour
 			else
@@ -177,142 +365,40 @@ function owm_flux2conditions($flux, $lieu) {
 			}
 		}
 	}
-	else {
-		// Traitement du flux JSON
-		if ($flux) {
-			$conditions = $flux;
-
-			// Date d'observation
-			$date_maj = (isset($conditions['dt'])) ? intval($conditions['dt']) : 0;
-			$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
-			// Station d'observation
-			$tableau['station'] = NULL;
-
-			// Liste des conditions meteo
-			if ($flux['wind']) {
-				$conditions = $flux['wind'];
-
-				$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? floatval($conditions['speed']) : '';
-				$tableau['angle_vent'] = (isset($conditions['deg'])) ? intval($conditions['deg']) : '';
-				// Contrairement au flux XML le flux JSON ne fournit pas la direction abrégée en anglais
-				// --> on la calcule
-				$tableau['direction_vent'] = (isset($conditions['deg']))	? angle2direction($tableau['angle_vent']) : '';
-			}
-
-			if (isset($flux['main'])) {
-				$conditions = $flux['main'];
-
-				$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? floatval($conditions['temp']) : '';
-				$tableau['temperature_ressentie'] = (isset($conditions['temp'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
-
-				$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
-				$tableau['point_rosee'] = NULL;
-
-				$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
-				$tableau['tendance_pression'] = NULL;
-
-				$tableau['visibilite'] = NULL;
-			}
-
-			if (isset($flux['weather'][0])) {
-				$conditions = $flux['weather'][0];
-
-				// Code meteo, resume et icone natifs au service
-				$tableau['code_meteo'] = (isset($conditions['id'])) ? $conditions['id'] : '';
-				$tableau['icon_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
-				$tableau['desc_meteo'] = (isset($conditions['description'])) ? $conditions['description'] : '';
-
-				// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-				// Pour ce service le nom du fichier icone finit par "d" pour le jour et
-				// par "n" pour la nuit.
-				$icone = $tableau['icon_meteo'];
-				if (strpos($icone, 'n') === false)
-					$tableau['periode'] = 0; // jour
-				else
-					$tableau['periode'] = 1; // nuit
-
-				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-				$condition = lire_config('rainette/owm/condition', 'owm');
-				if ($condition == 'owm') {
-					// On affiche les conditions natives fournies par le service.
-					// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
-					$tableau['icone']['code'] = $tableau['code_meteo'];
-					$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-					$tableau['icone']['url'] = copie_locale($url);
-					$tableau['resume'] = ucfirst($tableau['desc_meteo']);
-				}
-				else {
-					// On affiche les conditions traduites dans le systeme weather.com
-					// Pour le resume on stocke le code et non la traduction pour eviter de generer
-					// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-					$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
-					$tableau['icone'] = $meteo;
-					$tableau['resume'] = $meteo;
-				}
-			}
-		}
-	}
-
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
 
-function owm_flux2infos($flux, $lieu) {
+function json2infos_owm($flux) {
 	$tableau = array();
 
-	// Identifier le format d'échange des données
-	include_spip('inc/config');
-	$format = lire_config('rainette/owm/format', 'xml');
-
-	if ($format == 'xml') {
-		if (isset($flux['children']['city'][0]['attributes']['name'])) {
-			$tableau['ville'] = $flux['children']['city'][0]['attributes']['name'];
-		}
-
-		if (isset($flux['children']['city'][0]['children']['coord'][0]['attributes'])) {
-			$infos = $flux['children']['city'][0]['children']['coord'][0]['attributes'];
-
-			$tableau['region'] = NULL;
-
-			$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
-			$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
-
-			$tableau['population'] = NULL;
-		}
-	}
-	else {
-		if (isset($flux['name'])) {
-			$tableau['ville'] = $flux['name'];
-		}
-
-		if (isset($flux['coord'])) {
-			$infos = $flux['coord'];
-
-			$tableau['region'] = NULL;
-
-			$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
-			$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
-
-			$tableau['population'] = NULL;
-		}
+	if (isset($flux['name'])) {
+		$tableau['ville'] = $flux['name'];
 	}
 
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+	if (isset($flux['coord'])) {
+		$infos = $flux['coord'];
+
+		$tableau['region'] = NULL;
+
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat']) : '';
+
+		$tableau['population'] = NULL;
+	}
 
 	return $tableau;
 }
 
-function owm_service2credits() {
 
-	$credits = array('titre' => '', 'logo' => '');
-	$credits['lien'] = 'http://openweathermap.org/';
 
-	return $credits;
-}
-
+/**
+ * ---------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
+ * de l'API.
+ * PACKAGE SPIP\RAINETTE\OWM\OUTILS
+ * ---------------------------------------------------------------------------------------------
+ */
 
 function meteo_owm2weather($meteo, $periode=0) {
 	static $owm2weather = array(
@@ -349,6 +435,10 @@ function meteo_owm2weather($meteo, $periode=0) {
 	return $icone;
 }
 
+/**
+ * @param $langue
+ * @return string
+ */
 function langue2code_owm($langue) {
 	static $langue2owm = array(
 		'aa' => array('', ''), 					// afar

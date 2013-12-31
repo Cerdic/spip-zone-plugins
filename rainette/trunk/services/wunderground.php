@@ -36,6 +36,7 @@ function wunderground_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
 	$cle = lire_config('rainette/wunderground/inscription');
+	$format = lire_config('rainette/wunderground/format', 'json');
 
 	// Determination de la demande
 	if ($mode == 'infos') {
@@ -67,7 +68,7 @@ function wunderground_service2url($lieu, $mode) {
 		.  '/' . $demande
 		.  ($code_langue ? '/lang:' . $code_langue : '')
 		.  '/q'
-		.  '/' . $query . '.json';
+		.  '/' . $query . '.' . $format;
 
 	return $url;
 }
@@ -82,8 +83,12 @@ function wunderground_service2reload_time($mode) {
 
 function wunderground_url2flux($url) {
 
+	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
+	include_spip('inc/config');
+	$format = lire_config('rainette/wunderground/format', 'json');
+
 	include_spip('inc/phraser');
-	$flux = url2flux_json($url);
+	$flux = ($format == 'xml') ? url2flux_xml($url, false) : url2flux_json($url);
 
 	return $flux;
 }
