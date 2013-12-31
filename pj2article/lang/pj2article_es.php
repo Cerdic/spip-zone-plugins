@@ -13,11 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inbox' => 'Buzón de entrada',
 	'cfg_inbox_explication' => 'Elegir desde que buzón importar los archivos adjuntos.',
 	'cfg_outbox' => 'Buzón de salida',
-	'cfg_outbox_explication' => 'Elegir en que buzón desplazar los emails una vez tratados.',
+	'cfg_outbox_explication' => 'Elegir en que buzón desplazar los emails una vez tratados.', # MODIF
 	'cfg_titre_parametrages' => 'Parámetros de importación de los archivos adjuntos',
 
 	// P
-	'pj2article_titre' => 'Importar adjuntos de emails como artículos',
+	'pj2article_titre' => 'Importar adjuntos de emails como artículos', # MODIF
 
 	// T
 	'titre_page_configurer_pj2article' => 'Importación de los archivos adjuntos a los emails'
