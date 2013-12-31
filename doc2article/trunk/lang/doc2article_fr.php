@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ajout_ok' => 'Les documents ont été ajoutés à la file d’attente.',
 
 	// N
-	'nb_file_attente' => '@nb@ docuement(s) dans la file d’attente.',
+	'nb_file_attente' => '@nb@ document(s) dans la file d’attente.',
 
 	// T
 	'titre_bloc_import' => 'Importation de medias',
