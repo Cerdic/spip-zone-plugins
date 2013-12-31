@@ -114,7 +114,7 @@ function wwo_flux2conditions($flux, $lieu) {
 		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';
 
-		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? intval($conditions['temp_c'][0]['text']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? floatval($conditions['temp_c'][0]['text']) : '';
 		$tableau['temperature_ressentie'] = (isset($conditions['temp_c'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';

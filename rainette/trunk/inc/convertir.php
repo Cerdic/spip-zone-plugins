@@ -79,9 +79,9 @@ function millibar2inch($millibar) {
  * Le calcul n'a de sens que pour des températures réelles supérieures à -50°C et inférieures à 10°C.
  * Au-delà de ces valeurs, la fonction renvoie la température réelle fournie en entrée.
  *
- * @param	int		$temperature	Temmpérature réelle mesurée en celsius
+ * @param	float	$temperature	Température réelle mesurée en celsius
  * @param	float	$vitesse_vent	Vitesse du vent
- * @return	int						Température ressentie arrondie en entier
+ * @return	float					Température ressentie arrondie en entier
  */
 function temperature2ressenti($temperature, $vitesse_vent) {
 
@@ -95,7 +95,7 @@ function temperature2ressenti($temperature, $vitesse_vent) {
 	else
 		$ressenti = $temperature;
 
-	return intval($ressenti);
+	return $ressenti;
 
 }
 

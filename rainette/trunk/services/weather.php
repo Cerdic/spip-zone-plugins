@@ -135,8 +135,8 @@ function weather_flux2conditions($flux, $lieu) {
 			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
 			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
 
-			$tableau['temperature_reelle'] = intval($conditions['tmp'][0]);
-			$tableau['temperature_ressentie'] = intval($conditions['flik'][0]);
+			$tableau['temperature_reelle'] = floatval($conditions['tmp'][0]);
+			$tableau['temperature_ressentie'] = floatval($conditions['flik'][0]);
 
 			$tableau['humidite'] = intval($conditions['hmid'][0]);
 			$tableau['point_rosee'] = intval($conditions['dewp'][0]);

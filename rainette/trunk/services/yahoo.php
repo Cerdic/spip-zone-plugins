@@ -135,7 +135,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 		$tableau['angle_vent'] = (isset($conditions['direction'])) ? intval($conditions['direction']) : '';
 		$tableau['direction_vent'] = (isset($conditions['direction'])) ? angle2direction($tableau['angle_vent']) : '';
 
-		$tableau['temperature_ressentie'] = (isset($conditions['chill'])) ? intval($conditions['chill']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['chill'])) ? floatval($conditions['chill']) : '';
 	}
 
 	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:condition'][0]['attributes'])) {
@@ -149,7 +149,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 
 		// 3- Températures : réelle et ressentie
 		// --- La température ressentie est dans les données anémométriques
-		$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? intval($conditions['temp']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? floatval($conditions['temp']) : '';
 
 		// 4- Etat météorologique natif : code, icône et résumé
 		//    Ces données sont stockées à titre conservatoire mais ne sont pas utilisées dans les modèles v2

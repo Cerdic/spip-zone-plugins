@@ -120,7 +120,7 @@ function owm_flux2conditions($flux, $lieu) {
 			$tableau['direction_vent'] = (isset($conditions_vent['direction']))	? $conditions_vent['direction'][0]['attributes']['code'] : '';
 		}
 
-		$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? intval($conditions['temperature'][0]['attributes']['value']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temperature'])) ? floatval($conditions['temperature'][0]['attributes']['value']) : '';
 		$tableau['temperature_ressentie'] = (isset($conditions['temperature'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['attributes']['value']) : '';
