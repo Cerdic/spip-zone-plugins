@@ -1,4 +1,10 @@
 <?php
+/**
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service Open Weather Map (owm).
+ * Ce service fournit des données au format XML ou JSON.
+ *
+ * @package SPIP\RAINETTE\WUNDERGROUND
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -16,8 +22,21 @@ if (!defined('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT'))
 	define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
 
 
-function wunderground_service2cache($lieu, $mode) {
+/**
+ * ------------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent définissent l'API standard du service et sont appelées par la fonction
+ * unique de chargement des données météorologiques `charger_meteo()`.
+ * PACKAGE SPIP\RAINETTE\WUNDERGROUND\API
+ * ------------------------------------------------------------------------------------------------
+ */
 
+
+/**
+ * @param $lieu
+ * @param $mode
+ * @return string
+ */
+function wunderground_service2cache($lieu, $mode) {
 	include_spip('inc/config');
 	$condition = lire_config('rainette/wunderground/condition');
 	$langue = $GLOBALS['spip_lang'];
@@ -32,8 +51,12 @@ function wunderground_service2cache($lieu, $mode) {
 	return $fichier_cache;
 }
 
+/**
+ * @param $lieu
+ * @param $mode
+ * @return string
+ */
 function wunderground_service2url($lieu, $mode) {
-
 	include_spip('inc/config');
 	$cle = lire_config('rainette/wunderground/inscription');
 	$format = lire_config('rainette/wunderground/format', 'json');
@@ -74,21 +97,27 @@ function wunderground_service2url($lieu, $mode) {
 }
 
 
+/**
+ * @param $mode
+ * @return mixed
+ */
 function wunderground_service2reload_time($mode) {
-
 	static $reload = array('conditions' => 1800, 'previsions' => 7200);
 
 	return $reload[$mode];
 }
 
+/**
+ * @param $url
+ * @return array
+ */
 function wunderground_url2flux($url) {
-
 	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
 	include_spip('inc/config');
 	$format = lire_config('rainette/wunderground/format', 'json');
 
 	include_spip('inc/phraser');
-	$flux = ($format == 'xml') ? url2flux_xml($url, false) : url2flux_json($url);
+	$flux = ($format == 'json') ? url2flux_json($url) : url2flux_xml($url, false);
 
 	return $flux;
 }
@@ -117,10 +146,173 @@ function wunderground_flux2previsions($flux, $lieu) {
 }
 
 function wunderground_flux2conditions($flux, $lieu) {
+	// Correspondance des tendances de pression dans le système standard
 	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
+
+	// Identification des suffixes d'unite pour choisir le bon champ
+	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
+	include_spip('inc/config');
+	$unite = lire_config('rainette/wunderground/unite', 'm');
+	if ($unite == 'm')
+		$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE);
+	else
+		$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD);
+
+	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
+	include_spip('inc/config');
+	$format = lire_config('rainette/wunderground/format', 'json');
+
+	// Construire le tableau standard des conditions météorologiques propres au service
+	$tableau = ($format == 'json') ? json2conditions_wunderground($flux, $tendances, $suffixes) : xml2conditions_wunderground($flux, $tendances, $suffixes);
+
+	// Compléter le tableau standard avec les états météorologiques calculés
+	if ($tableau['code_meteo']
+	AND $tableau['icon_meteo']
+	AND isset($tableau['desc_meteo'])) {
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
+		$icone = basename($tableau['icon_meteo']);
+		if (strpos($icone, 'nt_') === false)
+			$tableau['periode'] = 0; // jour
+		else
+			$tableau['periode'] = 1; // nuit
+
+		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		$condition = lire_config('rainette/wunderground/condition', 'wunderground');
+		if ($condition == 'wunderground') {
+			// On affiche les conditions natives fournies par le service.
+			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+			$tableau['icone']['code'] = $tableau['code_meteo'];
+			$theme = lire_config('rainette/wunderground/theme', 'a');
+			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme
+				 . '/' . ($tableau['periode'] == 1 ? 'nt_' : '') . $tableau['code_meteo'] . '.gif';
+			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+		}
+		else {
+			// On affiche les conditions traduites dans le systeme weather.com
+			// Pour le resume on stocke le code et non la traduction pour eviter de generer
+			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
+			$tableau['icone'] = $meteo;
+			$tableau['resume'] = $meteo;
+		}
+	}
+
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	return $tableau;
+}
+
+function wunderground_flux2infos($flux, $lieu) {
+	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
+	include_spip('inc/config');
+	$format = lire_config('rainette/wunderground/format', 'json');
+
+	// Construire le tableau standard des informations sur le lieu
+	$tableau = ($format == 'json') ? json2infos_wunderground($flux) : xml2infos_wunderground($flux);
+
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+
+	return $tableau;
+}
+
+function wunderground_service2credits() {
+
+	$credits = array('titre' => '');
+	$credits['lien'] = 'http://www.wunderground.com/';
+	$credits['logo'] = 'wunderground-126.png';
+
+	return $credits;
+}
+
+
+/**
+ * -----------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont permettent le décodage des données météorologiques reçues au
+ * format XML. Ce sont des sous-fonctions internes appelées uniquement par les fonctions de l'API.
+ * PACKAGE SPIP\RAINETTE\WUNDERGROUND\XML
+ * -----------------------------------------------------------------------------------------------
+ */
+function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 	$tableau = array();
 
-	// On stocke les informations disponibles dans un tableau standard
+	if (isset($flux['children']['current_observation'][0]['children'])) {
+		$conditions = $flux['children']['current_observation'][0]['children'];
+
+		// Date d'observation
+		$date_maj = (isset($conditions['observation_epoch'])) ? intval($conditions['observation_epoch'][0]['text']) : 0;
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		// Station d'observation
+		$tableau['station'] = (isset($conditions['observation_location']))
+			? trim($conditions['observation_location'][0]['children']['full'][0]['text'], ',')
+			: '';
+
+		// Liste des conditions meteo extraites dans le systeme demande
+		list($ut, $up, $ud, $uv) = $suffixes;
+		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv][0]['text']) : '';
+		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
+		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
+		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
+		// --> Le mieux est donc de convertir à partir de l'angle
+		include_spip('inc/convertir');
+		$tableau['direction_vent'] = (isset($conditions['wind_degrees'])) ? angle2direction($tableau['angle_vent']) : '';
+
+		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? intval($conditions['temp_'.$ut][0]['text']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? intval($conditions['feelslike_'.$ut][0]['text']) : '';
+
+		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
+		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
+
+		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
+		$tableau['tendance_pression'] = (isset($conditions['pressure_trend']) AND array_key_exists($conditions['pressure_trend'][0]['text'], $tendances))
+					? $tendances[$conditions['pressure_trend'][0]['text']]
+					: '';
+
+		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
+
+		// Code meteo, resume et icone natifs au service
+		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+	}
+
+	return $tableau;
+}
+
+function xml2infos_wunderground($flux) {
+	$tableau = array();
+
+	if (isset($flux['children']['location'][0]['children'])) {
+		$infos = $flux['children']['location'][0]['children'];
+
+		if (isset($infos['city'])) {
+			$tableau['ville'] = $infos['city'][0]['text'];
+			$tableau['ville'] .= (isset($infos['country_name'])) ? ', ' . $infos['country_name'][0]['text'] : '';
+		}
+		$tableau['region'] = NULL;
+
+		$tableau['longitude'] = (isset($infos['lon'])) ? floatval($infos['lon'][0]['text']) : '';
+		$tableau['latitude'] = (isset($infos['lat'])) ? floatval($infos['lat'][0]['text']) : '';
+
+		$tableau['population'] = NULL;
+	}
+
+	return $tableau;
+}
+
+/**
+ * ------------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont permettent le décodage des données météorologiques reçues au
+ * format JSON. Ce sont des sous-fonctions internes appelées uniquement par les fonctions de l'API.
+ * PACKAGE SPIP\RAINETTE\WUNDERGROUND\JSON
+ * ------------------------------------------------------------------------------------------------
+ */
+function json2conditions_wunderground($flux, $tendances, $suffixes) {
+	$tableau = array();
+
 	if (isset($flux['current_observation'])) {
 		$conditions = $flux['current_observation'];
 
@@ -132,18 +324,8 @@ function wunderground_flux2conditions($flux, $lieu) {
 			? $conditions['observation_location']['full']
 			: '';
 
-		// Identification des suffixes d'unite pour choisir le bon champ
-		// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
-		include_spip('inc/config');
-		$unite = lire_config('rainette/wunderground/unite', 'm');
-		if ($unite == 'm')
-			$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE);
-		else
-			$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD);
-		list($ut, $up, $ud, $uv) = $suffixes;
-
-
 		// Liste des conditions meteo extraites dans le systeme demande
+		list($ut, $up, $ud, $uv) = $suffixes;
 		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv]) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees']) : '';
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
@@ -169,45 +351,12 @@ function wunderground_flux2conditions($flux, $lieu) {
 		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
 		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'] : '';
 		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'] : '';
-
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
-		// TODO : prendre en compte a terme le nouvel indicateur de jour/nuit dans une prochaine version de WUI
-		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, 'nt_') === false)
-			$tableau['periode'] = 0; // jour
-		else
-			$tableau['periode'] = 1; // nuit
-
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/wunderground/condition', 'wunderground');
-		if ($condition == 'wunderground') {
-			// On affiche les conditions natives fournies par le service.
-			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
-			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$theme = lire_config('rainette/wunderground/theme', 'a');
-			$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme 
-				 . '/' . ($tableau['periode'] == 1 ? 'nt_' : '') . $tableau['code_meteo'] . '.gif';
-			$tableau['icone']['url'] = copie_locale($url);
-			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
-		}
-		else {
-			// On affiche les conditions traduites dans le systeme weather.com
-			// Pour le resume on stocke le code et non la traduction pour eviter de generer 
-			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-			$meteo = meteo_wunderground2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
-		}
 	}
-
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
 
-function wunderground_flux2infos($flux, $lieu) {
+function json2infos_wunderground($flux) {
 	$tableau = array();
 
 	// On stocke les informations disponibles dans un tableau standard
@@ -226,20 +375,17 @@ function wunderground_flux2infos($flux, $lieu) {
 		$tableau['population'] = NULL;
 	}
 
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
-
 	return $tableau;
 }
 
-function wunderground_service2credits() {
 
-	$credits = array('titre' => '');
-	$credits['lien'] = 'http://www.wunderground.com/';
-	$credits['logo'] = 'wunderground-126.png';
-
-	return $credits;
-}
+/**
+ * ---------------------------------------------------------------------------------------------
+ * Les fonctions qui suivent sont des utilitaires utilisés uniquement appelées par les fonctions
+ * de l'API.
+ * PACKAGE SPIP\RAINETTE\WUNDERGROUND\OUTILS
+ * ---------------------------------------------------------------------------------------------
+ */
 
 
 function meteo_wunderground2weather($meteo, $periode=0) {

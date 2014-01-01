@@ -55,8 +55,10 @@ function owm_service2cache($lieu, $mode) {
 function owm_service2url($lieu, $mode) {
 	include_spip('inc/config');
 
-	// Determination de la demande et du format d'échange
+	// Determination de la demande
 	$demande = ($mode == 'previsions') ? 'forecast/daily' : 'weather';
+
+	// Determination du format d'échange
 	$format = lire_config('rainette/owm/format', 'xml');
 
 	// Identification du système d'unité
@@ -144,8 +146,41 @@ function owm_flux2conditions($flux, $lieu) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
 
-	// Construire le tabelau standard des conditions météorologiques
+	// Construire le tableau standard des conditions météorologiques propres au service
 	$tableau = ($format == 'xml') ? xml2conditions_owm($flux) : json2conditions_owm($flux);
+
+	// Compléter le tableau standard avec les états météorologiques calculés
+	if ($tableau['code_meteo']
+	AND $tableau['icon_meteo']
+	AND isset($tableau['desc_meteo'])) {
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+		// par "n" pour la nuit.
+		$icone = $tableau['icon_meteo'];
+		if (strpos($icone, 'n') === false)
+			$tableau['periode'] = 0; // jour
+		else
+			$tableau['periode'] = 1; // nuit
+
+		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+		$condition = lire_config('rainette/owm/condition', 'owm');
+		if ($condition == 'owm') {
+			// On affiche les conditions natives fournies par le service.
+			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+			$tableau['icone']['code'] = $tableau['code_meteo'];
+			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
+			$tableau['icone']['url'] = copie_locale($url);
+			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
+		}
+		else {
+			// On affiche les conditions traduites dans le systeme weather.com
+			// Pour le resume on stocke le code et non la traduction pour eviter de generer
+			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
+			$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
+			$tableau['icone'] = $meteo;
+			$tableau['resume'] = $meteo;
+		}
+	}
 
 	// Traitement des erreurs de flux
 	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
@@ -164,7 +199,7 @@ function owm_flux2infos($flux, $lieu) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
 
-	// Construire le tabelau standard des conditions météorologiques
+	// Construire le tableau standard des informations sur le lieu
 	$tableau = ($format == 'xml') ? xml2infos_owm($flux) : json2infos_owm($flux);
 
 	// Traitement des erreurs de flux
@@ -228,34 +263,6 @@ function xml2conditions_owm($flux) {
 		$tableau['code_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['number'] : '';
 		$tableau['icon_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['icon'] : '';
 		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['attributes']['value'] : '';
-
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
-		// par "n" pour la nuit.
-		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, 'n') === false)
-			$tableau['periode'] = 0; // jour
-		else
-			$tableau['periode'] = 1; // nuit
-
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/owm/condition', 'owm');
-		if ($condition == 'owm') {
-			// On affiche les conditions natives fournies par le service.
-			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
-			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-			$tableau['icone']['url'] = copie_locale($url);
-			$tableau['resume'] = ucfirst($tableau['desc_meteo']);
-		}
-		else {
-			// On affiche les conditions traduites dans le systeme weather.com
-			// Pour le resume on stocke le code et non la traduction pour eviter de generer
-			// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-			$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
-		}
 	}
 
 	return $tableau;
@@ -302,10 +309,10 @@ function json2conditions_owm($flux) {
 		// Station d'observation
 		$tableau['station'] = NULL;
 
-		// Liste des conditions meteo
 		if ($flux['wind']) {
 			$conditions = $flux['wind'];
 
+			// Données anémométriques
 			$tableau['vitesse_vent'] = (isset($conditions['speed'])) ? floatval($conditions['speed']) : '';
 			$tableau['angle_vent'] = (isset($conditions['deg'])) ? intval($conditions['deg']) : '';
 			// Contrairement au flux XML le flux JSON ne fournit pas la direction abrégée en anglais
@@ -316,6 +323,7 @@ function json2conditions_owm($flux) {
 		if (isset($flux['main'])) {
 			$conditions = $flux['main'];
 
+			// Températures et données atmosphériques
 			$tableau['temperature_reelle'] = (isset($conditions['temp'])) ? floatval($conditions['temp']) : '';
 			$tableau['temperature_ressentie'] = (isset($conditions['temp'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
 
@@ -335,34 +343,6 @@ function json2conditions_owm($flux) {
 			$tableau['code_meteo'] = (isset($conditions['id'])) ? $conditions['id'] : '';
 			$tableau['icon_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
 			$tableau['desc_meteo'] = (isset($conditions['description'])) ? $conditions['description'] : '';
-
-			// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-			// Pour ce service le nom du fichier icone finit par "d" pour le jour et
-			// par "n" pour la nuit.
-			$icone = $tableau['icon_meteo'];
-			if (strpos($icone, 'n') === false)
-				$tableau['periode'] = 0; // jour
-			else
-				$tableau['periode'] = 1; // nuit
-
-			// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-			$condition = lire_config('rainette/owm/condition', 'owm');
-			if ($condition == 'owm') {
-				// On affiche les conditions natives fournies par le service.
-				// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
-				$tableau['icone']['code'] = $tableau['code_meteo'];
-				$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $tableau['icon_meteo'] . '.png';
-				$tableau['icone']['url'] = copie_locale($url);
-				$tableau['resume'] = ucfirst($tableau['desc_meteo']);
-			}
-			else {
-				// On affiche les conditions traduites dans le systeme weather.com
-				// Pour le resume on stocke le code et non la traduction pour eviter de generer
-				// un cache par langue comme pour le mode natif. La traduction est faite via les fichiers de langue
-				$meteo = meteo_owm2weather($tableau['code_meteo'], $tableau['periode']);
-				$tableau['icone'] = $meteo;
-				$tableau['resume'] = $meteo;
-			}
 		}
 	}
 
@@ -399,7 +379,7 @@ function json2infos_owm($flux) {
  * PACKAGE SPIP\RAINETTE\OWM\OUTILS
  * ---------------------------------------------------------------------------------------------
  */
-
+// TODO : mettre au point le transcodage omw vers weather
 function meteo_owm2weather($meteo, $periode=0) {
 	static $owm2weather = array(
 							'chanceflurries'=> array(41,46),
