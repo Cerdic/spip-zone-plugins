@@ -171,5 +171,5 @@ function latex_traiter_tableau($bloc) {
 	return "\n\n\begin/debutlongtable/fin$alignement\n"
 		. $debut_table
 		. $html
-		. "\end/debutlongtable/fin\n\n";
+		. "\\end/debutlongtable/fin\n\n";
 }

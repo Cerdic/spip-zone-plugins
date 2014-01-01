@@ -88,7 +88,7 @@ function latex_traiter_tableau($bloc) {
 	$rowspans = $numeric = array();
 	$n = count($lignes[0]);
 	$k = count($lignes);
-	// Si on va veur le HTML, on distingue les colonnes numeriques a point ou a virgule,
+	// Si on va vers le HTML, on distingue les colonnes numeriques a point ou a virgule,
 	// pour les alignements eventuels sur "," ou "."
 	// pour le moment on ne gère pas encore cela, car il faut que je regarde comme faire en latex
 	$numeric_class = array('.'=>'point',','=>'virgule');
@@ -171,5 +171,5 @@ function latex_traiter_tableau($bloc) {
 	return "\n\n\begin/debutlongtable/fin$alignement\n"
 		. $debut_table
 		. $html
-		. "\end/debutlongtable/fin\n\n";
+		. "\\end/debutlongtable/fin\n\n";
 }
