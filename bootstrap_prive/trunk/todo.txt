@@ -14,6 +14,7 @@ A corriger :
 
 - sous IE9, le petit carré de statut d'un objet éditorial est à couper en deux dans le sens de la hauteur (a croire qu’il est cacher car trop à gauche) (Franck_)
 
+- pour la pagination, prends modele sur ceux http://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/bootstrap2spip/modeles (cerdic via IRC)
 
 ----------
 Corrigé :

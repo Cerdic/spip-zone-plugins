@@ -6,7 +6,6 @@
 // Global values
 // --------------------------------------------------
 
-
 // Grays
 // -------------------------
 @black:                 #000;
@@ -299,3 +298,22 @@
 // 768px-979px
 @fluidGridColumnWidth768:      percentage(@gridColumnWidth768/@gridRowWidth768);
 @fluidGridGutterWidth768:      percentage(@gridGutterWidth768/@gridRowWidth768);
+
+
+// Pas beau de faire ça ici… Mais ça marche pour le moment.
+.pagination ul > li > strong,
+.pagination ul > li > strong.on {
+  float: left; // Collapse white-space
+  padding: 4px 12px;
+  line-height: @baseLineHeight;
+  text-decoration: none;
+  background-color: @paginationActiveBackground;
+  border: 1px solid @paginationBorder;
+  border-left-width: 0;
+  color: @grayDark;
+}
+
+#navigation .pagination ul > li > a, #navigation .pagination ul > li > span {
+	padding-left: 12px;
+}
+
