@@ -179,6 +179,8 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 						'pression' => 1,
 						'distance' => 1,
 						'angle' => 0,
+						'pourcentage' => 0,
+						'population' => 0,
 						'vitesse' => 0);
 
 	if (!$service) $service = 'weather';

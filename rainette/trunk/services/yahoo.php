@@ -79,20 +79,20 @@ function yahoo_flux2previsions($flux, $lieu) {
 				// 3- Prévisions pour le jour
 				$tableau[$index]['temperature_jour'] = (isset($prevision['high'])) ? intval($prevision['high']) : '';
 				$tableau[$index]['code_icone_jour'] = (isset($prevision['code'])) ? intval($prevision['code']) : '';
-				$tableau[$index]['vitesse_vent_jour'] = '';
-				$tableau[$index]['angle_vent_jour'] = '';
-				$tableau[$index]['direction_vent_jour'] = '';
-				$tableau[$index]['risque_precipitation_jour'] = '';
-				$tableau[$index]['humidite_jour'] = '';
+				$tableau[$index]['vitesse_vent_jour'] = NULL;
+				$tableau[$index]['angle_vent_jour'] = NULL;
+				$tableau[$index]['direction_vent_jour'] = NULL;
+				$tableau[$index]['risque_precipitation_jour'] = NULL;
+				$tableau[$index]['humidite_jour'] = NULL;
 
 				// 4- Prévisions pour la nuit
 				$tableau[$index]['temperature_nuit'] = (isset($prevision['low'])) ? intval($prevision['low']) : '';
 				$tableau[$index]['code_icone_nuit'] = '';
-				$tableau[$index]['vitesse_vent_nuit'] = '';
-				$tableau[$index]['angle_vent_nuit'] = '';
-				$tableau[$index]['direction_vent_nuit'] = '';
-				$tableau[$index]['risque_precipitation_nuit'] = '';
-				$tableau[$index]['humidite_nuit'] = '';
+				$tableau[$index]['vitesse_vent_nuit'] = NULL;
+				$tableau[$index]['angle_vent_nuit'] = NULL;
+				$tableau[$index]['direction_vent_nuit'] = NULL;
+				$tableau[$index]['risque_precipitation_nuit'] = NULL;
+				$tableau[$index]['humidite_nuit'] = NULL;
 
 				$index += 1;
 			}
