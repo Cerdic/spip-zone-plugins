@@ -605,7 +605,7 @@ function inscription3_formulaire_traiter($flux){
 				$val['htpass'] = $htpass;
 				$val['low_sec'] = '';
 			}
-			$val['statut'] = (strlen($flux['args']['args'][1]) > 1) ? $flux['args']['args'][1] : ($config_i3['statut_nouveau'] ? $config_i3['statut_nouveau'] : '6forum');
+			$val['statut'] = (strlen($flux['args']['args'][0]) > 1) ? $flux['args']['args'][0] : ($config_i3['statut_nouveau'] ? $config_i3['statut_nouveau'] : '6forum');
 
 		}
 		
@@ -625,7 +625,7 @@ function inscription3_formulaire_traiter($flux){
 		 * Si on a le champ bio dans le formulaire on force le statut
 		 */
 		else if(_request('bio'))
-			$val['statut'] = (strlen($flux['args']['args'][1]) > 1) ? $flux['args']['args'][1] : ($config_i3['statut_nouveau'] ? $config_i3['statut_nouveau'] : '6forum');
+			$val['statut'] = (strlen($flux['args']['args'][0]) > 1) ? $flux['args']['args'][0] : ($config_i3['statut_nouveau'] ? $config_i3['statut_nouveau'] : '6forum');
 
 		if(strlen($val['pass']) == 0)
 			unset($val['pass']);
