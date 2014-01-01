@@ -221,7 +221,6 @@ function wwo_service2credits() {
 function xml2conditions_wwo($flux) {
 	$tableau = array();
 
-	// On stocke les informations disponibles dans un tableau standard
 	if (isset($flux['children']['current_condition'][0]['children'])) {
 		include_spip('inc/convertir');
 		$conditions = $flux['children']['current_condition'][0]['children'];
@@ -289,6 +288,37 @@ function xml2infos_wwo($flux) {
 function json2conditions_wwo($flux) {
 	$tableau = array();
 
+	if (isset($flux['data']['current_condition'][0])) {
+		$conditions = $flux['data']['current_condition'][0];
+
+		// Date d'observation
+		$date_maj = (isset($conditions['localObsDateTime'])) ? strtotime($conditions['localObsDateTime']) : '';
+		$tableau['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
+		// Station d'observation
+		$tableau['station'] = NULL;
+
+		// Liste des conditions meteo extraite dans le systeme metrique
+		$tableau['vitesse_vent'] = (isset($conditions['windspeedKmph'])) ? floatval($conditions['windspeedKmph']) : '';
+		$tableau['angle_vent'] = (isset($conditions['winddirDegree'])) ? intval($conditions['winddirDegree']) : '';
+		$tableau['direction_vent'] = (isset($conditions['winddir16Point'])) ? $conditions['winddir16Point'] : '';
+
+		include_spip('inc/convertir');
+		$tableau['temperature_reelle'] = (isset($conditions['temp_C'])) ? floatval($conditions['temp_C']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['temp_C'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+
+		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
+		$tableau['point_rosee'] = NULL;
+
+		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
+		$tableau['tendance_pression'] = NULL;
+
+		$tableau['visibilite'] = (isset($conditions['visibility'])) ? floatval($conditions['visibility']) : '';
+
+		// Code meteo, resume et icone natifs au service
+		$tableau['code_meteo'] = (isset($conditions['weatherCode'])) ? intval($conditions['weatherCode']) : '';
+		$tableau['icon_meteo'] = (isset($conditions['weatherIconUrl'])) ? $conditions['weatherIconUrl'][0]['value'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weatherDesc'])) ? $conditions['weatherDesc'][0]['value'] : '';
+	}
 
 	return $tableau;
 }
