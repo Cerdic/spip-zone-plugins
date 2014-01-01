@@ -260,8 +260,8 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		include_spip('inc/convertir');
 		$tableau['direction_vent'] = (isset($conditions['wind_degrees'])) ? angle2direction($tableau['angle_vent']) : '';
 
-		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? intval($conditions['temp_'.$ut][0]['text']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? intval($conditions['feelslike_'.$ut][0]['text']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? floatval($conditions['temp_'.$ut][0]['text']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? floatval($conditions['feelslike_'.$ut][0]['text']) : '';
 
 		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';

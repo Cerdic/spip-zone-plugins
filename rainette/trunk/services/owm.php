@@ -194,7 +194,6 @@ function owm_flux2conditions($flux, $lieu) {
  * @return array
  */
 function owm_flux2infos($flux, $lieu) {
-
 	// Identifier le format d'échange des données
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
@@ -212,7 +211,6 @@ function owm_flux2infos($flux, $lieu) {
  * @return array
  */
 function owm_service2credits() {
-
 	$credits = array('titre' => '', 'logo' => '');
 	$credits['lien'] = 'http://openweathermap.org/';
 
@@ -227,6 +225,8 @@ function owm_service2credits() {
  * PACKAGE SPIP\RAINETTE\OWM\XML
  * -----------------------------------------------------------------------------------------------
  */
+
+
 function xml2conditions_owm($flux) {
 	$tableau = array();
 
@@ -297,6 +297,8 @@ function xml2infos_owm($flux) {
  * PACKAGE SPIP\RAINETTE\OWM\JSON
  * ------------------------------------------------------------------------------------------------
  */
+
+
 function json2conditions_owm($flux) {
 	$tableau = array();
 
@@ -317,7 +319,7 @@ function json2conditions_owm($flux) {
 			$tableau['angle_vent'] = (isset($conditions['deg'])) ? intval($conditions['deg']) : '';
 			// Contrairement au flux XML le flux JSON ne fournit pas la direction abrégée en anglais
 			// --> on la calcule
-			$tableau['direction_vent'] = (isset($conditions['deg']))	? angle2direction($tableau['angle_vent']) : '';
+			$tableau['direction_vent'] = (isset($conditions['deg'])) ? angle2direction($tableau['angle_vent']) : '';
 		}
 
 		if (isset($flux['main'])) {
@@ -379,6 +381,7 @@ function json2infos_owm($flux) {
  * PACKAGE SPIP\RAINETTE\OWM\OUTILS
  * ---------------------------------------------------------------------------------------------
  */
+
 // TODO : mettre au point le transcodage omw vers weather
 function meteo_owm2weather($meteo, $periode=0) {
 	static $owm2weather = array(
