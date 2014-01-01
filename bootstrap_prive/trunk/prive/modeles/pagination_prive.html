@@ -5,6 +5,7 @@
 #SET{pages,#GET{premiere}|range{#GET{derniere}}}
 #SET{sep,#ENV{separateur,' | '}}
 <B_pages>
+<div class="pagination">
 	[<span
   class='label'>(#ENV{label,''})</span>][
 
@@ -42,4 +43,5 @@
 	|parametre_url{#ENV{debut},-1}
 	|ancre_url{#ENV{ancre}}
 	|lien_ou_expose{<:lien_tout_afficher:>,#ENV{page_courante}|=={0},lien_pagination,'',nofollow})</span>]]
+</div>
 </B_pages>
