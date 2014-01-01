@@ -3,9 +3,9 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Amap
- * @copyright  2013
+ * @copyright  2010-2014
  * @author     Pierre KUHN
- * @licence    GNU/GPL
+ * @licence    sous licence GNU/GPL
  * @package    SPIP\Amap\Pipelines
  */
 

@@ -4,8 +4,8 @@
 * @author	Stephane Moulinet
 * @author	E-cosystems
 * @author	Pierre KUHN 
-* @copyright 2010-2013
-* @licence	GNU/GPL
+* @copyright 2010-2014
+* @licence	sous licence GNU/GPL
 *
 **/
 

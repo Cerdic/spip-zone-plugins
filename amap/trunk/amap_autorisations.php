@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Amap
  *
  * @plugin     Amap
- * @copyright  2010-2013
+ * @copyright  2010-2014
  * @author     Stephane Moulinet
  * @author     E-cosystems
  * @author     Pierre KUHN

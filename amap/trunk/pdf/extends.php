@@ -6,7 +6,7 @@
 * @author: E-cosystems
 * @author: Pierre KUHN 
 *
-* Copyright (c) 2010-2013
+* Copyright (c) 2010-2014
 * Logiciel distribue sous licence GPL.
 *
 **/
