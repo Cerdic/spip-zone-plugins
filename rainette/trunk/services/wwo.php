@@ -30,10 +30,12 @@ function wwo_service2url($lieu, $mode) {
 
 	include_spip('inc/config');
 	$cle = lire_config('rainette/wwo/inscription');
+	$format = lire_config('rainette/wwo/format', 'xml');
 
 	$url = _RAINETTE_WWO_URL_BASE
 		.  '?key=' . $cle
-		.  '&format=xml&extra=localObsTime'
+		.  '&format=' . $format
+		.  '&extra=localObsTime'
 		.  '&q=' . str_replace(' ', '', trim($lieu));
 	if ($mode == 'infos') {
 		$url .= '&includeLocation=yes&cc=no&fx=no';

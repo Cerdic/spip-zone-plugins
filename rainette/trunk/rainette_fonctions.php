@@ -123,7 +123,7 @@ function rainette_afficher_direction($direction) {
 	$direction = angle2direction($direction);
 
 	if ($direction)
-		return _T('rainette:direction_'.$direction);
+		return _T("rainette:direction_$direction");
 	else
 		return _T('rainette:valeur_indeterminee');
 }
@@ -132,12 +132,13 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 
 	$tendance = '';
 
-	if ($tendance_en) {
+	if (($tendance_en)
+	AND ($texte = _T("rainette:tendance_texte_$tendance_en", array(), array('force' => false)))) {
 		if ($methode == 'texte') {
-			$tendance = _T('rainette:tendance_texte_'.$tendance_en);
+			$tendance = $texte;
 		}
 		else if ($methode == 'symbole') {
-			$tendance = _T('rainette:tendance_symbole_'.$tendance_en);
+			$tendance = _T("rainette:tendance_symbole_$tendance_en");
 		}
 		else if ($methode == 'icone') {
 			$chemin = (!$chemin) ? _RAINETTE_ICONES_PATH : rtrim($chemin, '/') . '/';
@@ -151,7 +152,6 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
 			}
 
 			list($largeur, $hauteur) = @getimagesize($source);
-			$texte = _T('rainette:tendance_texte_'.$tendance_en);
 			$tendance = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$largeur\" height=\"$hauteur\" />";
 		}
 	}
