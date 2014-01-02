@@ -207,11 +207,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'point_rosee' => 'point de rosée',
 	'population' => 'population',
+	'precipitation' => 'précipitations',
 	'pression' => 'pression',
 
 	// R
 	'region' => 'region',
-	'risque_precipitation' => 'risque de precip.',
+	'risque_precipitation' => 'risque de précip.',
 
 	// S
 	'station_observation' => 'station',

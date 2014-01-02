@@ -1,4 +1,10 @@
 <?php
+/**
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service l'ancien service Weather.com (weather).
+ * Ce service fournit des données au format XML uniquement.
+ *
+ * @package SPIP\RAINETTE\WEATHER
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -84,21 +90,43 @@ function weather_flux2previsions($flux, $lieu) {
 				$sun = mktime($heure['hours'],$heure['minutes'],0,$date['mon'],$date['mday'],$date['year']);
 				$tableau[$index]['coucher_soleil'] = date('Y-m-d H:i:s',$sun);
 				// Previsions du jour
-				$tableau[$index]['temperature_jour'] = intval($p['hi'][0]) ? intval($p['hi'][0]) : 'N/D';
-				$tableau[$index]['code_icone_jour'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : 'N/D';
-				$tableau[$index]['vitesse_vent_jour'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? intval($p['part p="d"'][0]['wind'][0]['s'][0]) : 'N/D';
-				$tableau[$index]['angle_vent_jour'] = $p['part p="d"'][0]['wind'][0]['d'][0];
-				$tableau[$index]['direction_vent_jour'] = $p['part p="d"'][0]['wind'][0]['t'][0];
-				$tableau[$index]['risque_precipitation_jour'] = intval($p['part p="d"'][0]['ppcp'][0]);
-				$tableau[$index]['humidite_jour'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : 'N/D';
+				$tableau[$index][0]['temperature_max'] = intval($p['hi'][0]) ? floatval($p['hi'][0]) : '';
+				$tableau[$index][0]['temperature_min'] = intval($p['low'][0]) ? floatval($p['low'][0]) : '';
+				$tableau[$index][0]['vitesse_vent'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? floatval($p['part p="d"'][0]['wind'][0]['s'][0]) : '';
+				$tableau[$index][0]['angle_vent'] = $p['part p="d"'][0]['wind'][0]['d'][0];
+				$tableau[$index][0]['direction_vent'] = $p['part p="d"'][0]['wind'][0]['t'][0];
+				$tableau[$index][0]['risque_precipitation'] = intval($p['part p="d"'][0]['ppcp'][0]);
+				$tableau[$index][0]['precipitation'] = NULL;
+				$tableau[$index][0]['humidite'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : '';
+
+				$tableau[$index][0]['code_meteo'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : '';
+				$tableau[$index][0]['icon_meteo'] = NULL;
+				$tableau[$index][0]['desc_meteo'] = NULL;
+
+				// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+				// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
+				$tableau[$index][0]['icone'] = $tableau[$index][0]['code_meteo'];
+				$tableau[$index][0]['resume'] = $tableau[$index][0]['code_meteo'];
+
 				// Previsions de la nuit
-				$tableau[$index]['temperature_nuit'] = intval($p['low'][0]) ? intval($p['low'][0]) : 'N/D';
-				$tableau[$index]['code_icone_nuit'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : 'N/D';
-				$tableau[$index]['vitesse_vent_nuit'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? intval($p['part p="n"'][0]['wind'][0]['s'][0]) : 'N/D';
-				$tableau[$index]['angle_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['d'][0];
-				$tableau[$index]['direction_vent_nuit'] = $p['part p="n"'][0]['wind'][0]['t'][0];
-				$tableau[$index]['risque_precipitation_nuit'] = intval($p['part p="n"'][0]['ppcp'][0]);
-				$tableau[$index]['humidite_nuit'] = intval($p['part p="n"'][0]['hmid'][0]) ? intval($p['part p="n"'][0]['hmid'][0]) : 'N/D';
+				$tableau[$index][1]['temperature_max'] = intval($p['low'][0]) ? floatval($p['low'][0]) : '';
+				$tableau[$index][1]['temperature_min'] = NULL;
+				$tableau[$index][1]['vitesse_vent'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? floatval($p['part p="n"'][0]['wind'][0]['s'][0]) : '';
+				$tableau[$index][1]['angle_vent'] = $p['part p="n"'][0]['wind'][0]['d'][0];
+				$tableau[$index][1]['direction_vent'] = $p['part p="n"'][0]['wind'][0]['t'][0];
+				$tableau[$index][1]['risque_precipitation'] = intval($p['part p="n"'][0]['ppcp'][0]);
+				$tableau[$index][1]['precipitation'] = NULL;
+				$tableau[$index][1]['humidite'] = intval($p['part p="n"'][0]['hmid'][0]) ? intval($p['part p="n"'][0]['hmid'][0]) : '';
+
+				$tableau[$index][1]['code_meteo'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : '';
+				$tableau[$index][1]['icon_meteo'] = NULL;
+				$tableau[$index][1]['desc_meteo'] = NULL;
+
+				$tableau[$index][1]['icone'] = $tableau[$index][1]['code_meteo'];
+				$tableau[$index][1]['resume'] = $tableau[$index][1]['code_meteo'];
+
+				// Détermination du mode jour/nuit
+				$tableau[$index]['periode'] = (($index == 0) AND !$tableau[$index][0]['code_meteo']) ? 1 : 0;
 
 				$index += 1;
 			}

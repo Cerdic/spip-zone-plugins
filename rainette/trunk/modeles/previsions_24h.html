@@ -1,49 +1,30 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions d'un jour d'une ville
 	Il est appelee par le filtre rainette_coasser_previsions
- -->]
-<!-- Cellule de gauche: 
-	- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
+	- si aujourd'hui et que le service propose des valeurs nocturnes alors donnees du matin si l'heure est < 14:00
+	  ou du soir sinon. Aujourd'hui sel weather.com propose cette option
 	- si autre jour alors donnees du matin -->
-[(#ENV{index}|=={0}|non)
-	[(#SET{titre_max, <:rainette:temperature_max:>})]
-	[(#SET{code_icone, #ENV{code_icone_jour}})]
-	[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
-	[(#SET{temperature_min, #ENV{temperature_nuit}})]
-	[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
-	[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
-]
-[(#ENV{index}|=={0}|oui)
-	[(#ENV{temperature_jour}|=={N/D}|non)
-		[(#SET{titre_max, <:rainette:temperature_max:>})]
-		[(#SET{code_icone, #ENV{code_icone_jour}})]
-		[(#SET{temperature_max, #ENV{temperature_jour}|rainette_afficher_unite{temperature}})]
-		[(#SET{temperature_min, #ENV{temperature_nuit}})]
-		[(#SET{vitesse_vent, #ENV{vitesse_vent_jour}})]
-		[(#SET{risque_precipitation, #ENV{risque_precipitation_jour}})]
-	]
-	[(#ENV{temperature_jour}|=={N/D}|oui)
-		[(#SET{titre_max, <:rainette:nuit:>})]
-		[(#SET{code_icone, #ENV{code_icone_nuit}})]
-		[(#SET{temperature_max, ''})]
-		[(#SET{temperature_min, #ENV{temperature_nuit}})]
-		[(#SET{vitesse_vent, #ENV{vitesse_vent_nuit}})]
-		[(#SET{risque_precipitation, #ENV{risque_precipitation_nuit}})]
-	]
-]
+ -->]
+
+[(#SET{icone, #ENV{#ENV{periode}/icone}})]
+[(#SET{resume, #ENV{#ENV{periode}/resume}})]
+[(#SET{temperature_max, #ENV{#ENV{periode}/temperature_max}})]
+[(#SET{temperature_min, #ENV{#ENV{periode}/temperature_min}})]
+[(#SET{vitesse_vent, #ENV{#ENV{periode}/vitesse_vent}})]
+[(#SET{risque_precipitation, #ENV{#ENV{periode}/risque_precipitation}})]
+[(#SET{precipitation, #ENV{#ENV{periode}/precipitation}})]
+
 <div class="rainette_previsions_24h">
 	<div class="jour">[(#ENV{date}|nom_jour|ucfirst)]</div>
 	<div class="date">[(#ENV{date}|affdate_jourcourt)]</div>
 	<div class="contenu">
-		<div class="icone">[(#GET{code_icone}|rainette_afficher_icone{petit})]</div>
-		<div class="resume">
-			[(#GET{code_icone}|rainette_afficher_resume)]<br /><br />
-		</div>
+		<div class="icone">[(#GET{icone}|rainette_afficher_icone{petit})]</div>
+		<div class="resume">[(#GET{resume}|rainette_afficher_resume)]</div>
 		<div class="t_reelle">
-			[(#GET{titre_max}|ucfirst)]
-			[&nbsp;(#GET{temperature_max})]<br/>
-			<:rainette:temperature_min|ucfirst:>
-			[&nbsp;(#GET{temperature_min}|rainette_afficher_unite{temperature})]<br/>
+			[[(#ENV{periode}|=={0}|?{<:rainette:temperature_max|ucfirst:>, <:rainette:nuit|ucfirst:>})]
+			&nbsp;(#GET{temperature_max}|rainette_afficher_unite{temperature})<br/>]
+			[<:rainette:temperature_min|ucfirst:>
+			&nbsp;(#GET{temperature_min}|rainette_afficher_unite{temperature})<br/>]
 		</div>
 		<div class="details">
 			<ul>
@@ -54,6 +35,10 @@
 				[<li>
 					<span><:rainette:risque_precipitation|ucfirst:></span><br />
 					(#GET{risque_precipitation}|rainette_afficher_unite{pourcentage})
+				</li>]
+				[<li>
+					<span><:rainette:precipitation|ucfirst:></span><br />
+					(#GET{precipitation}|rainette_afficher_unite{precipitation})
 				</li>]
 			</ul>
 		</div>

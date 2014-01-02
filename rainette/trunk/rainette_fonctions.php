@@ -167,7 +167,8 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
  * @api
  *
  * @param int/float	$valeur			La valeur à afficher
- * @param string	$type_valeur	Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression', 'distance', 'vitesse', 'population'
+ * @param string	$type_valeur	Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression',
+ * 									'distance', 'vitesse', 'population', 'precipitation'
  * @param int		$precision		Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut
  *
  * @return string	La chaine calculée ou le texte désignant une valeur indéterminée
@@ -181,6 +182,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 						'angle' => 0,
 						'pourcentage' => 0,
 						'population' => 0,
+						'precipitation' => 1,
 						'vitesse' => 0);
 
 	if (!$service) $service = 'weather';
@@ -213,6 +215,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 
 	return $valeur_affichee;
 }
+
 
 /**
  * Charger le fichier des infos meteos jour par jour
@@ -265,14 +268,10 @@ function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='pr
 			// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
 			// afin de gérer le passage des prévisions jour à celles de la nuit
 			if ($index_jour == 0) {
-				$tableau[$index_jour]['lever_soleil_demain'] = $tableau[$index_jour+1]['lever_soleil'];
-				$tableau[$index_jour]['temperature_demain'] = $tableau[$index_jour+1]['temperature_jour'];
-				$tableau[$index_jour]['code_icone_demain'] = $tableau[$index_jour+1]['code_icone_jour'];
-				$tableau[$index_jour]['vitesse_vent_demain'] = $tableau[$index_jour+1]['vitesse_vent_jour'];
-				$tableau[$index_jour]['angle_vent_demain'] = $tableau[$index_jour+1]['angle_vent_jour'];
-				$tableau[$index_jour]['direction_vent_demain'] = $tableau[$index_jour+1]['direction_vent_jour'];
-				$tableau[$index_jour]['risque_precipitation_demain'] = $tableau[$index_jour+1]['risque_precipitation_jour'];
-				$tableau[$index_jour]['humidite_demain'] = $tableau[$index_jour+1]['humidite_jour'];
+				$tableau[$index_jour]['lever_soleil'] = $tableau[$index_jour+1]['lever_soleil'];
+				foreach ($tableau[$index_jour][0] as $_cle => $_valeur) {
+					$tableau[$index_jour][2][$_cle] = $tableau[$index_jour+1][0][$_cle];
+				}
 			}
 
 			// On ajoute les informations extra (date et crédits)

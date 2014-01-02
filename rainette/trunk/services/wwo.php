@@ -13,6 +13,10 @@ if (!defined('_RAINETTE_WWO_URL_BASE'))
 	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/free/v1/weather.ashx');
 if (!defined('_RAINETTE_WWO_JOURS_PREVISIONS'))
 	define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
+if (!defined('_RAINETTE_WWO_SUFFIXE_METRIQUE'))
+	define('_RAINETTE_WWO_SUFFIXE_METRIQUE', 'c:mm:kmph');
+if (!defined('_RAINETTE_WWO_SUFFIXE_STANDARD'))
+	define('_RAINETTE_WWO_SUFFIXE_STANDARD', 'f:in:miles');
 
 
 /**
@@ -97,10 +101,51 @@ function wwo_url2flux($url) {
  * @return array
  */
 function wwo_flux2previsions($flux, $lieu) {
-	$tableau = array();
-	$index = 0;
+	// Identifier le format d'échange des données
+	include_spip('inc/config');
+	$format = lire_config('rainette/wwo/format', 'xml');
+
+	// Identification des suffixes d'unite pour choisir le bon champ
+	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
+	include_spip('inc/config');
+	$unite = lire_config('rainette/wunderground/unite', 'm');
+	if ($unite == 'm')
+		$suffixes = explode(':', _RAINETTE_WWO_SUFFIXE_METRIQUE);
+	else
+		$suffixes = explode(':', _RAINETTE_WWO_SUFFIXE_STANDARD);
+
+	// Construire le tableau standard des prévisions météorologiques propres au service
+	$tableau = ($format == 'xml') ? xml2previsions_wwo($flux, $suffixes) : json2previsions_wwo($flux, $suffixes);
+
+	// Compléter le tableau standard avec les états météorologiques calculés pour chaque jour
+	foreach ($tableau as $_index => $_prevision) {
+		if ($_prevision[0]['code_meteo']
+		AND $_prevision[0]['icon_meteo']
+		AND isset($_prevision[0]['desc_meteo'])) {
+			// Le mode jour/nuit n'est pas supporté par ce service.
+			$tableau[$_index]['periode'] = 0; // jour
+
+			// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+			$condition = lire_config('rainette/wwo/condition', 'wwo');
+			if ($condition == 'wwo') {
+				// On affiche les prévisions natives fournies par le service.
+				// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
+				// de le traduire à partir des fichiers de langue SPIP.
+				$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
+				$tableau[$_index][0]['icone']['url'] = copie_locale($_prevision[0]['icon_meteo']);
+				$tableau[$_index][0]['resume'] = $_prevision[0]['code_meteo'];
+			}
+			else {
+				// On affiche les conditions traduites dans le systeme weather.com
+				$meteo = meteo_wwo2weather($_prevision[0]['code_meteo'], $tableau[$_index]['periode']);
+				$tableau[$_index][0]['icone'] = $meteo;
+				$tableau[$_index][0]['resume'] = $meteo;
+			}
+		}
+	}
 
 	// Traitement des erreurs de flux
+	$index = count($tableau);
 	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	// Ajout des informations communes dans l'index adéquat
@@ -217,6 +262,57 @@ function wwo_service2credits() {
  * PACKAGE SPIP\RAINETTE\WWO\XML
  * -----------------------------------------------------------------------------------------------
  */
+
+function xml2previsions_wwo($flux, $suffixes) {
+	$tableau = array();
+
+	if (isset($flux['children']['weather'])) {
+		$previsions = $flux['children']['weather'];
+		$maintenant = time();
+
+		if ($previsions) {
+			foreach ($previsions as $_index => $_prevision) {
+				if (isset($_prevision['children'])) {
+					$_prevision = $_prevision['children'];
+					// Index du jour et date du jour
+					$tableau[$_index]['index'] = $_index;
+					$tableau[$_index]['date'] = (isset($_prevision['date']))
+						? $_prevision['date'][0]['text']
+						: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+					// Date complete des lever/coucher du soleil
+					$tableau[$_index]['lever_soleil'] = NULL;
+					$tableau[$_index]['coucher_soleil'] = NULL;
+
+					// Previsions du jour
+					list($ut, $up, $uv) = $suffixes;
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["tempmax$ut"])) ? floatval($_prevision["tempmax$ut"][0]['text']) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["tempmin$ut"])) ? floatval($_prevision["tempmin$ut"][0]['text']) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision["windspeed$uv"])) ? floatval($_prevision["windspeed$uv"][0]['text']) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['winddirdegree'])) ? intval($_prevision['winddirdegree'][0]['text']) : '';
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddir16point'])) ? $_prevision['winddir16point'][0]['text'] : '';
+
+					$tableau[$_index][0]['risque_precipitation'] = NULL;
+					include_spip('inc/convertir');
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipmm'])) ? floatval($_prevision['precipmm'][0]['text']) : '';
+					if (($up == 'mm') AND $tableau[$_index][0]['precipitation'])
+						$tableau[$_index]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
+					$tableau[$_index][0]['humidite'] = NULL;
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['weathercode'])) ? intval($_prevision['weathercode'][0]['text']) : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['weathericonurl'])) ? $_prevision['weathericonurl'][0]['text'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['weatherdesc'])) ? $_prevision['weatherdesc'][0]['text'] : '';
+
+					// Previsions de la nuit si elle existe
+					$tableau[$_index][1] = NULL;
+				}
+			}
+		}
+	}
+
+	return $tableau;
+}
+
 
 function xml2conditions_wwo($flux) {
 	$tableau = array();
