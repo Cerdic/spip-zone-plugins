@@ -1,8 +1,3 @@
 #CACHE{0}
-[(#AUTORISER{configurer}|sinon_interdire_acces)]
-<h1 class="grostitre"><:rainette:titre_page_configurer:></h1>
-
-[<div class='ajax'>(#FORMULAIRE_CONFIGURER_RAINETTE_WEATHER)</div>]
-[<div class='ajax'>(#FORMULAIRE_CONFIGURER_RAINETTE_WWO)</div>]
-[<div class='ajax'>(#FORMULAIRE_CONFIGURER_RAINETTE_WUNDERGROUND)</div>]
-[<div class='ajax'>(#FORMULAIRE_CONFIGURER_RAINETTE_YAHOO)</div>]
+<INCLURE{fond=prive/squelettes/contenu/configurer_rainette,type-page=configurer_rainette,env} />
+<INCLURE{fond=prive/squelettes/navigation/configurer_rainette,env} />
