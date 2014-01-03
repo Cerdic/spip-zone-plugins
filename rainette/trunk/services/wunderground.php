@@ -13,11 +13,11 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE'))
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE'))
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 if (!defined('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS'))
-	define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 4);
+	define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 10);
 if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE'))
-	define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph');
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph|celsius:mm:kph');
 if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD'))
-	define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph');
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph|farenheit:in:mph');
 if (!defined('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT'))
 	define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
 
@@ -66,7 +66,7 @@ function wunderground_service2url($lieu, $mode) {
 		$demande = 'geolookup';
 	}
 	else {
-		$demande = ($mode == 'previsions') ? 'forecast/astronomy' : 'conditions';
+		$demande = ($mode == 'previsions') ? 'forecast10day/astronomy' : 'conditions';
 	}
 
 	// Identification et formatage du lieu
@@ -133,10 +133,53 @@ function wunderground_url2flux($url) {
  * @return array
  */
 function wunderground_flux2previsions($flux, $lieu) {
-	$tableau = array();
-	$index = 0;
+	// Identification des suffixes d'unite pour choisir le bon champ
+	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites. Néanmois, la liste n'est pas
+	//    la même pour les conditions et les prévisions
+	include_spip('inc/config');
+	$unites = (lire_config('rainette/wunderground/unite', 'm') == 'm')
+		? _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE
+		: _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD;
+	$unites = explode('|', $unites);
+	$unites = explode(':', $unites[1]);
+
+	// Identifier le format d'échange des données
+	$format = lire_config('rainette/wunderground/format', 'xml');
+
+	// Construire le tableau standard des conditions météorologiques propres au service
+	$tableau = ($format == 'json') ? json2previsions_wunderground($flux, $unites) : xml2previsions_wunderground($flux, $unites);
+
+	// Compléter le tableau standard avec les états météorologiques calculés
+	if ($tableau) {
+		$condition = lire_config('rainette/wunderground/condition', 'wunderground');
+		foreach ($tableau as $_index => $_prevision) {
+			if ($_prevision[0]['code_meteo']
+			AND $_prevision[0]['icon_meteo']
+			AND isset($_prevision[0]['desc_meteo'])) {
+				// Le mode jour/nuit n'est pas supporté par ce service.
+				$tableau[$_index]['periode'] = 0; // jour
+
+				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+				if ($condition == 'wunderground') {
+					// On affiche les prévisions natives fournies par le service.
+					// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
+					// de le traduire à partir des fichiers de langue SPIP.
+					$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
+					$tableau[$_index][0]['icone']['url'] = copie_locale($_prevision[0]['icon_meteo']);
+					$tableau[$_index][0]['resume'] = ucfirst($_prevision[0]['desc_meteo']);
+				}
+				else {
+					// On affiche les conditions traduites dans le systeme weather.com
+					$meteo = meteo_wunderground2weather($_prevision[0]['code_meteo'], $tableau[$_index]['periode']);
+					$tableau[$_index][0]['icone'] = $meteo;
+					$tableau[$_index][0]['resume'] = $meteo;
+				}
+			}
+		}
+	}
 
 	// Traitement des erreurs de flux
+	$index = count($tableau);
 	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	// Ajout des informations communes dans l'index adéquat
@@ -150,16 +193,16 @@ function wunderground_flux2conditions($flux, $lieu) {
 	static $tendances = array('0' => 'steady', '+' => 'rising', '-' => 'falling');
 
 	// Identification des suffixes d'unite pour choisir le bon champ
-	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
+	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites. Néanmois, la liste n'est pas
+	//    la même pour les conditions et les prévisions
 	include_spip('inc/config');
-	$unite = lire_config('rainette/wunderground/unite', 'm');
-	if ($unite == 'm')
-		$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE);
-	else
-		$suffixes = explode(':', _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD);
+	$unites = (lire_config('rainette/wunderground/unite', 'm') == 'm')
+		? _RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE
+		: _RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD;
+	$unites = explode('|', $unites);
+	$suffixes = explode(':', $unites[0]);
 
 	// Déterminer le format d'échange pour aiguiller vers la bonne conversion
-	include_spip('inc/config');
 	$format = lire_config('rainette/wunderground/format', 'json');
 
 	// Construire le tableau standard des conditions météorologiques propres au service
@@ -236,6 +279,60 @@ function wunderground_service2credits() {
  * PACKAGE SPIP\RAINETTE\WUNDERGROUND\XML
  * -----------------------------------------------------------------------------------------------
  */
+
+function xml2previsions_wunderground($flux) {
+	$tableau = array();
+
+	if (isset($flux['children']['forecast'][0]['children']['simpleforecast'][0]['children']['forecastdays'][0]['children']['forecastday'])) {
+		$previsions = $flux['children']['forecast'][0]['children']['simpleforecast'][0]['children']['forecastdays'][0]['children']['forecastday'];
+		$maintenant = time();
+
+		if ($previsions) {
+			foreach ($previsions as $_index => $_prevision) {
+				if ($_prevision) {
+					$_prevision = $_prevision['children'];
+
+					// Index du jour et date du jour
+					$tableau[$_index]['index'] = $_index;
+					$tableau[$_index]['date'] = (isset($_prevision['date'][0]['children']['epoch']))
+						? date($_prevision['date'][0]['children']['epoch'][0]['text'])
+						: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+					// Date complete des lever/coucher du soleil
+					$tableau[$_index]['lever_soleil'] = NULL;
+					$tableau[$_index]['coucher_soleil'] = NULL;
+
+					// Previsions du jour
+					list($ut, $ur, $uv) = $unites;
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision['high'][0]['children'])) ? floatval($_prevision['high'][0]['children'][$ut][0]['text']) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision['low'][0]['children'])) ? floatval($_prevision['low'][0]['children'][$ut][0]['text']) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision['avewind'][0]['children'])) ? floatval($_prevision['avewind'][0]['children'][$uv][0]['text']) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['avewind'][0]['children'])) ? intval($_prevision['avewind'][0]['children']['degrees'][0]['text']) : '';
+					// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
+					// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
+					// --> Le mieux est donc de convertir à partir de l'angle
+					include_spip('inc/convertir');
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['avewind'][0]['children'])) ? angle2direction($tableau[$_index][0]['angle_vent']) : '';
+
+					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['pop'])) ? intval($_prevision['pop'][0]['text']) : '';
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['qpf_allday'][0]['children'])) ? floatval($_prevision['qpf_allday'][0]['children'][$ur][0]['text']) : '';
+					$tableau[$_index][0]['humidite'] = (isset($_prevision['avehumidity'])) ? intval($_prevision['avehumidity'][0]['text']) : '';
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['icon'])) ? $_prevision['icon'][0]['text'] : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['icon_url'])) ? $_prevision['icon_url'][0]['text'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['conditions'])) ? $_prevision['conditions'][0]['text'] : '';
+
+					// Previsions de la nuit si elle existe
+					$tableau[$_index][1] = NULL;
+				}
+			}
+		}
+	}
+
+	return $tableau;
+}
+
+
 function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 	$tableau = array();
 
@@ -274,9 +371,9 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
-		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
-		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
+		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'] : '';
 	}
 
 	return $tableau;
@@ -310,6 +407,58 @@ function xml2infos_wunderground($flux) {
  * PACKAGE SPIP\RAINETTE\WUNDERGROUND\JSON
  * ------------------------------------------------------------------------------------------------
  */
+
+function json2previsions_wunderground($flux, $unites) {
+	$tableau = array();
+
+	if (isset($flux['forecast']['simpleforecast']['forecastday'])) {
+		$previsions = $flux['forecast']['simpleforecast']['forecastday'];
+		$maintenant = time();
+
+		if ($previsions) {
+			foreach ($previsions as $_index => $_prevision) {
+				if ($_prevision) {
+					// Index du jour et date du jour
+					$tableau[$_index]['index'] = $_index;
+					$tableau[$_index]['date'] = (isset($_prevision['date']))
+						? date($_prevision['date']['epoch'])
+						: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+					// Date complete des lever/coucher du soleil
+					$tableau[$_index]['lever_soleil'] = NULL;
+					$tableau[$_index]['coucher_soleil'] = NULL;
+
+					// Previsions du jour
+					list($ut, $ur, $uv) = $unites;
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision['high'])) ? floatval($_prevision['high'][$ut]) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision['low'])) ? floatval($_prevision['low'][$ut]) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision['avewind'])) ? floatval($_prevision['avewind'][$uv]) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['avewind'])) ? intval($_prevision['avewind']['degrees']) : '';
+					// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
+					// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
+					// --> Le mieux est donc de convertir à partir de l'angle
+					include_spip('inc/convertir');
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['avewind'])) ? angle2direction($tableau[$_index][0]['angle_vent']) : '';
+
+					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['pop'])) ? intval($_prevision['pop']) : '';
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['qpf_allday'])) ? floatval($_prevision['qpf_allday'][$ur]) : '';
+					$tableau[$_index][0]['humidite'] = (isset($_prevision['avehumidity'])) ? intval($_prevision['avehumidity']) : '';
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['icon'])) ? $_prevision['icon'] : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['icon_url'])) ? $_prevision['icon_url'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['conditions'])) ? $_prevision['conditions'] : '';
+
+					// Previsions de la nuit si elle existe
+					$tableau[$_index][1] = NULL;
+				}
+			}
+		}
+	}
+
+	return $tableau;
+}
+
+
 function json2conditions_wunderground($flux, $tendances, $suffixes) {
 	$tableau = array();
 
