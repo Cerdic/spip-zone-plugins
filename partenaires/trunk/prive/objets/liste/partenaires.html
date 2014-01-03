@@ -16,7 +16,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_partenaires(PARTENAIRES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_partenaires(PARTENAIRES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}{statut?}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#LOGO_PARTENAIRE|image_reduire{20,26})]</td>
             <td class='statut'>[(#STATUT|puce_statut{partenaire,#ID_PARTENAIRE})]</td> 			
