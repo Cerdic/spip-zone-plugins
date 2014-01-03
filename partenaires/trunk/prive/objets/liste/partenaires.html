@@ -10,6 +10,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
+            <th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 			
 			<th class='nom' scope='col'>[(#TRI{nom,<:partenaire:label_nom:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_partenaire,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -18,6 +19,7 @@
 	<BOUCLE_liste_partenaires(PARTENAIRES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#LOGO_PARTENAIRE|image_reduire{20,26})]</td>
+            <td class='statut'>[(#STATUT|puce_statut{partenaire,#ID_PARTENAIRE})]</td> 			
 			<td class='nom principale'><a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PARTENAIRE">[(#RANG). ]#NOM</a></td>
 			<td class='id'>[(#AUTORISER{modifier,partenaire,#ID_PARTENAIRE}|?{
 				<a href="[(#URL_ECRIRE{partenaire_edit,id_partenaire=#ID_PARTENAIRE})]">#ID_PARTENAIRE</a>,
