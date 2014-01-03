@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	//L
-	'label_selection_partenaires_objets'=>'Sélectionnez les objets auxquelles les partenaires peuvent être associés.',
+	'label_selection_partenaires_objets'=>'Sélectionnez les objets auxquels les partenaires peuvent être associés.',
 
 	// P
 	'partenaires_titre' => 'Partenaires',
