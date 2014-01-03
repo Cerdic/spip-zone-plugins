@@ -14,10 +14,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function partenaires_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_partenaires', 'spip_partenaires_types', 'spip_partenaires_types_liens')));
+	$maj['create'] = array(array('maj_tables', array('spip_partenaires', 'spip_partenaires_types', 'spip_partenaires_liens', 'spip_partenaires_types_liens')));
         include_spip('base/importer_spip_partenaires_types');
         $maj['create'][] = array('importer_spip_partenaires_types');
-
+	$maj['1.5.0'] = array(array('maj_tables', array('spip_partenaires','spip_partenaires_liens')));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -29,7 +29,8 @@ function partenaires_upgrade($nom_meta_base_version, $version_cible) {
 function partenaires_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_partenaires");
-	sql_drop_table("spip_partenaires_types");
+	sql_drop_table("spip_partenaires_types");	
+	sql_drop_table("spip_partenaires_liens");	
 	sql_drop_table("spip_partenaires_types_liens");
 
 	# Nettoyer les versionnages et forums

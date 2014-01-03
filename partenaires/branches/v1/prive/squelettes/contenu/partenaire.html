@@ -1,5 +1,5 @@
 [(#AUTORISER{voir,partenaire,#ID_PARTENAIRE}|sinon_interdire_acces)]
-<BOUCLE_partenaire(PARTENAIRES){id_partenaire}{si #ENV{exec}|=={partenaire}}>
+<BOUCLE_partenaire(PARTENAIRES){id_partenaire}{si #ENV{exec}|=={partenaire}}{statut?}>
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,partenaire,#ID_PARTENAIRE})
 		[(#ID_PARTENAIRE|afficher_qui_edite{partenaire}|non)
