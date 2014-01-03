@@ -178,7 +178,8 @@ function weather_flux2conditions($flux, $lieu) {
 			$tableau['icon_meteo'] = NULL;
 			$tableau['desc_meteo'] = $conditions['t'][0];
 
-			// TODO : determiner la periode jour ou nuit
+			// A priori la période de nuit commence à 14h et se termine à 5h.
+			// Cette données n'est pas utile pour les conditions de ce service, on la positionne à NULL : TODO
 			$tableau['periode'] = NULL;
 
 			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP

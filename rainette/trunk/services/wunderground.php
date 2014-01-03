@@ -388,6 +388,16 @@ function json2infos_wunderground($flux) {
  */
 
 
+/**
+ * @internal
+ *
+ * @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
+ * Transcodage issu du plugin Wordpress weather forecast.
+ *
+ * @param string $meteo
+ * @param int $periode
+ * @return string
+ */
 function meteo_wunderground2weather($meteo, $periode=0) {
 	static $wunderground2weather = array(
 							'chanceflurries'=> array(41,46),
@@ -418,6 +428,7 @@ function meteo_wunderground2weather($meteo, $periode=0) {
 							'overcast'=> array(26,26));
 
 	$icone = 'na';
+	$meteo = strtolower($meteo);
 	if (array_key_exists($meteo,  $wunderground2weather))
 		$icone = strval($wunderground2weather[$meteo][$periode]);
 	return $icone;

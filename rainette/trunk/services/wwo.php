@@ -295,8 +295,8 @@ function xml2previsions_wwo($flux, $suffixes) {
 					$tableau[$_index][0]['risque_precipitation'] = NULL;
 					include_spip('inc/convertir');
 					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipmm'])) ? floatval($_prevision['precipmm'][0]['text']) : '';
-					if (($up == 'mm') AND $tableau[$_index][0]['precipitation'])
-						$tableau[$_index]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
+					if (($up == 'in') AND $tableau[$_index][0]['precipitation'])
+						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
 					$tableau[$_index][0]['humidite'] = NULL;
 
 					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['weathercode'])) ? intval($_prevision['weathercode'][0]['text']) : '';
@@ -381,6 +381,55 @@ function xml2infos_wwo($flux) {
  * ------------------------------------------------------------------------------------------------
  */
 
+function json2previsions_wwo($flux, $suffixes) {
+	$tableau = array();
+
+	if (isset($flux['data']['weather'])) {
+		$previsions = $flux['data']['weather'];
+		$maintenant = time();
+
+		if ($previsions) {
+			foreach ($previsions as $_index => $_prevision) {
+				if ($_prevision) {
+					// Index du jour et date du jour
+					$tableau[$_index]['index'] = $_index;
+					$tableau[$_index]['date'] = (isset($_prevision['date']))
+						? $_prevision['date']
+						: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+					// Date complete des lever/coucher du soleil
+					$tableau[$_index]['lever_soleil'] = NULL;
+					$tableau[$_index]['coucher_soleil'] = NULL;
+
+					// Previsions du jour
+					list($ut, $up, $uv) = array_map('ucfirst', $suffixes);
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["tempMax$ut"])) ? floatval($_prevision["tempMax$ut"]) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["tempMin$ut"])) ? floatval($_prevision["tempMin$ut"]) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision["windspeed$uv"])) ? floatval($_prevision["windspeed$uv"]) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['winddirDegree'])) ? intval($_prevision['winddirDegree']) : '';
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddir16Point'])) ? $_prevision['winddir16Point'] : '';
+
+					$tableau[$_index][0]['risque_precipitation'] = NULL;
+					include_spip('inc/convertir');
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipMM'])) ? floatval($_prevision['precipMM']) : '';
+					if (($up == 'in') AND $tableau[$_index][0]['precipitation'])
+						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
+					$tableau[$_index][0]['humidite'] = NULL;
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['weatherCode'])) ? intval($_prevision['weatherCode']) : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['weatherIconUrl'])) ? $_prevision['weatherIconUrl'][0]['value'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['weatherDesc'])) ? $_prevision['weatherDesc'][0]['value'] : '';
+
+					// Previsions de la nuit si elle existe
+					$tableau[$_index][1] = NULL;
+				}
+			}
+		}
+	}
+
+	return $tableau;
+}
+
 function json2conditions_wwo($flux) {
 	$tableau = array();
 
@@ -451,6 +500,9 @@ function json2infos_wwo($flux) {
 
 /**
  * @internal
+ *
+ * @link http://plugins.trac.wordpress.org/browser/weather-and-weather-forecast-widget/trunk/gg_funx_.php
+ * Transcodage issu du plugin Wordpress weather forecast.
  *
  * @param string $meteo
  * @param int $periode
