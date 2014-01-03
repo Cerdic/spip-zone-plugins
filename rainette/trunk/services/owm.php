@@ -124,10 +124,48 @@ function owm_url2flux($url) {
  * @return array
  */
 function owm_flux2previsions($flux, $lieu) {
-	$tableau = array();
-	$index = 0;
+	// Identifier le format d'échange des données
+	include_spip('inc/config');
+	$format = lire_config('rainette/owm/format', 'xml');
+
+	// Identification des suffixes d'unite pour choisir le bon champ
+	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
+	$unite = lire_config('rainette/owm/unite', 'm');
+
+	// Construire le tableau standard des prévisions météorologiques propres au service
+	$tableau = ($format == 'xml') ? xml2previsions_owm($flux, $unite) : json2previsions_owm($flux, $unite);
+
+	// Compléter le tableau standard avec les états météorologiques calculés pour chaque jour
+	if ($tableau) {
+		$condition = lire_config('rainette/owm/condition', 'owm');
+		foreach ($tableau as $_index => $_prevision) {
+			if ($_prevision[0]['code_meteo']
+			AND $_prevision[0]['icon_meteo']
+			AND isset($_prevision[0]['desc_meteo'])) {
+				// Le mode jour/nuit n'est pas supporté par ce service.
+				$tableau[$_index]['periode'] = 0; // jour
+
+				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+				if ($condition == 'owm') {
+					// On affiche les prévisions natives fournies par le service.
+				// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+					$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
+					$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $_prevision[0]['icon_meteo'] . '.png';
+					$tableau[$_index][0]['icone']['url'] = copie_locale($url);
+					$tableau[$_index][0]['resume'] = ucfirst($_prevision[0]['desc_meteo']);
+				}
+				else {
+					// On affiche les conditions traduites dans le systeme weather.com
+					$meteo = meteo_owm2weather($_prevision[0]['code_meteo'], $tableau[$_index]['periode']);
+					$tableau[$_index][0]['icone'] = $meteo;
+					$tableau[$_index][0]['resume'] = $meteo;
+				}
+			}
+		}
+	}
 
 	// Traitement des erreurs de flux
+	$index = count($tableau);
 	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	// Ajout des informations communes dans l'index adéquat
@@ -227,6 +265,58 @@ function owm_service2credits() {
  */
 
 
+function xml2previsions_owm($flux, $unite) {
+	$tableau = array();
+
+	if (isset($flux['children']['forecast'][0]['children']['time'])) {
+		$previsions = $flux['children']['forecast'][0]['children']['time'];
+		$maintenant = time();
+
+		if ($previsions) {
+			foreach ($previsions as $_index => $_prevision) {
+				if (isset($_prevision['children'])) {
+					// Index du jour et date du jour
+					$tableau[$_index]['index'] = $_index;
+					$tableau[$_index]['date'] = (isset($_prevision['attributes']['day']))
+						? $_prevision['attributes']['day']
+						: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+					$_prevision = $_prevision['children'];
+					// Date complete des lever/coucher du soleil.
+					// OWM ne fournissant que ces données pour le jour courant, on ne les retient pas.
+					$tableau[$_index]['lever_soleil'] = NULL;
+					$tableau[$_index]['coucher_soleil'] = NULL;
+
+					// Previsions du jour
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision['temperature'][0]['attributes'])) ? floatval($_prevision['temperature'][0]['attributes']['max']) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision['temperature'][0]['attributes'])) ? floatval($_prevision['temperature'][0]['attributes']['min']) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision['windspeed'][0]['attributes'])) ? floatval($_prevision['windspeed'][0]['attributes']['mps']) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['winddirection'][0]['attributes'])) ? intval($_prevision['winddirection'][0]['attributes']['deg']) : '';
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddirection'][0]['attributes'])) ? $_prevision['winddirection'][0]['attributes']['code'] : '';
+
+					$tableau[$_index][0]['risque_precipitation'] = NULL;
+					include_spip('inc/convertir');
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipitation'][0]['attributes'])) ? floatval($_prevision['precipitation'][0]['attributes']['value']) : 0;
+					if (($unite == 's') AND $tableau[$_index][0]['precipitation'])
+						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
+					$tableau[$_index][0]['humidite'] = (isset($_prevision['humidity'][0]['attributes'])) ? intval($_prevision['humidity'][0]['attributes']['value']) : '';
+					$tableau[$_index][0]['pression'] = (isset($_prevision['pressure'][0]['attributes'])) ? floatval($_prevision['pressure'][0]['attributes']['value']) : '';
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['symbol'][0]['attributes'])) ? intval($_prevision['symbol'][0]['attributes']['number']) : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['symbol'][0]['attributes'])) ? $_prevision['symbol'][0]['attributes']['var'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['symbol'][0]['attributes'])) ? $_prevision['symbol'][0]['attributes']['name'] : '';
+
+					// Previsions de la nuit si elle existe
+					$tableau[$_index][1] = NULL;
+				}
+			}
+		}
+	}
+
+	return $tableau;
+}
+
+
 function xml2conditions_owm($flux) {
 	$tableau = array();
 
@@ -297,6 +387,55 @@ function xml2infos_owm($flux) {
  * PACKAGE SPIP\RAINETTE\OWM\JSON
  * ------------------------------------------------------------------------------------------------
  */
+
+
+function json2previsions_owm($flux, $unite) {
+	$tableau = array();
+
+	if (isset($flux['list'])) {
+		$previsions = $flux['list'];
+		$maintenant = time();
+
+		if ($previsions) {
+			include_spip('inc/convertir');
+			foreach ($previsions as $_index => $_prevision) {
+				// Index du jour et date du jour
+				$tableau[$_index]['index'] = $_index;
+				$tableau[$_index]['date'] = (isset($_prevision['dt']))
+					? date('Y-m-d', $_prevision['dt'])
+					: date('Y-m-d', $maintenant + 24*3600*$_index);
+
+				// Date complete des lever/coucher du soleil.
+				// OWM ne fournissant que ces données pour le jour courant, on ne les retient pas.
+				$tableau[$_index]['lever_soleil'] = NULL;
+				$tableau[$_index]['coucher_soleil'] = NULL;
+
+				// Previsions du jour
+				$tableau[$_index][0]['temperature_max'] = (isset($_prevision['temp'])) ? floatval($_prevision['temp']['max']) : '';
+				$tableau[$_index][0]['temperature_min'] = (isset($_prevision['temp'])) ? floatval($_prevision['temp']['min']) : '';
+				$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision['speed'])) ? floatval($_prevision['speed']) : '';
+				$tableau[$_index][0]['angle_vent'] = (isset($_prevision['deg'])) ? intval($_prevision['deg']) : '';
+				// le flux JSON ne fournit pas la direction en 16 points
+				$tableau[$_index][0]['direction_vent'] = (isset($_prevision['deg'])) ? angle2direction($tableau[$_index][0]['angle_vent']) : '';
+
+				$tableau[$_index][0]['risque_precipitation'] = NULL;
+				// le flux JSON ne fournit pas la précipitation en mm
+				$tableau[$_index][0]['precipitation'] = NULL;
+				$tableau[$_index][0]['humidite'] = (isset($_prevision['humidity'])) ? intval($_prevision['humidity']) : '';
+				$tableau[$_index][0]['pression'] = (isset($_prevision['pressure'])) ? floatval($_prevision['pressure']) : '';
+
+				$tableau[$_index][0]['code_meteo'] = (isset($_prevision['weather'][0])) ? intval($_prevision['weather'][0]['id']) : '';
+				$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['weather'][0])) ? $_prevision['weather'][0]['icon'] : '';
+				$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['weather'][0])) ? $_prevision['weather'][0]['description'] : '';
+
+				// Previsions de la nuit si elle existe
+				$tableau[$_index][1] = NULL;
+			}
+		}
+	}
+
+	return $tableau;
+}
 
 
 function json2conditions_owm($flux) {

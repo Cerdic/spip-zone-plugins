@@ -197,7 +197,7 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
 	}
 	else {
 		$valeur_affichee = _T('rainette:valeur_indeterminee');
-		if ($valeur) {
+		if ($valeur !== '') {
 			// Détermination de l'arrondi si la donnée est stockée sous format réel
 			if (array_key_exists($type_valeur, $precision_defaut)) {
 				$precision = ($precision < 0) ? $precision_defaut[$type_valeur] : $precision;

@@ -108,7 +108,7 @@ function wwo_flux2previsions($flux, $lieu) {
 	// Identification des suffixes d'unite pour choisir le bon champ
 	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
 	include_spip('inc/config');
-	$unite = lire_config('rainette/wunderground/unite', 'm');
+	$unite = lire_config('rainette/wwo/unite', 'm');
 	if ($unite == 'm')
 		$suffixes = explode(':', _RAINETTE_WWO_SUFFIXE_METRIQUE);
 	else
@@ -118,28 +118,30 @@ function wwo_flux2previsions($flux, $lieu) {
 	$tableau = ($format == 'xml') ? xml2previsions_wwo($flux, $suffixes) : json2previsions_wwo($flux, $suffixes);
 
 	// Compléter le tableau standard avec les états météorologiques calculés pour chaque jour
-	foreach ($tableau as $_index => $_prevision) {
-		if ($_prevision[0]['code_meteo']
-		AND $_prevision[0]['icon_meteo']
-		AND isset($_prevision[0]['desc_meteo'])) {
-			// Le mode jour/nuit n'est pas supporté par ce service.
-			$tableau[$_index]['periode'] = 0; // jour
+	if ($tableau) {
+		$condition = lire_config('rainette/wwo/condition', 'wwo');
+		foreach ($tableau as $_index => $_prevision) {
+			if ($_prevision[0]['code_meteo']
+			AND $_prevision[0]['icon_meteo']
+			AND isset($_prevision[0]['desc_meteo'])) {
+				// Le mode jour/nuit n'est pas supporté par ce service.
+				$tableau[$_index]['periode'] = 0; // jour
 
-			// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-			$condition = lire_config('rainette/wwo/condition', 'wwo');
-			if ($condition == 'wwo') {
-				// On affiche les prévisions natives fournies par le service.
-				// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
-				// de le traduire à partir des fichiers de langue SPIP.
-				$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
-				$tableau[$_index][0]['icone']['url'] = copie_locale($_prevision[0]['icon_meteo']);
-				$tableau[$_index][0]['resume'] = $_prevision[0]['code_meteo'];
-			}
-			else {
-				// On affiche les conditions traduites dans le systeme weather.com
-				$meteo = meteo_wwo2weather($_prevision[0]['code_meteo'], $tableau[$_index]['periode']);
-				$tableau[$_index][0]['icone'] = $meteo;
-				$tableau[$_index][0]['resume'] = $meteo;
+				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+				if ($condition == 'wwo') {
+					// On affiche les prévisions natives fournies par le service.
+					// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
+					// de le traduire à partir des fichiers de langue SPIP.
+					$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
+					$tableau[$_index][0]['icone']['url'] = copie_locale($_prevision[0]['icon_meteo']);
+					$tableau[$_index][0]['resume'] = $_prevision[0]['code_meteo'];
+				}
+				else {
+					// On affiche les conditions traduites dans le systeme weather.com
+					$meteo = meteo_wwo2weather($_prevision[0]['code_meteo'], $tableau[$_index]['periode']);
+					$tableau[$_index][0]['icone'] = $meteo;
+					$tableau[$_index][0]['resume'] = $meteo;
+				}
 			}
 		}
 	}
@@ -169,7 +171,6 @@ function wwo_flux2conditions($flux, $lieu) {
 
 	// Convertir les informations exprimées en système métrique dans le systeme US si la
 	// configuration le demande
-	include_spip('inc/config');
 	$unite = lire_config('rainette/wwo/unite', 'm');
 	if ($unite == 's') {
 		// Seules la température et la vitesse du vent sont fournies dans les deux systèmes.
