@@ -18,6 +18,7 @@ function partenaires_upgrade($nom_meta_base_version, $version_cible) {
         include_spip('base/importer_spip_partenaires_types');
         $maj['create'][] = array('importer_spip_partenaires_types');
 	$maj['1.5.0'] = array(array('maj_tables', array('spip_partenaires','spip_partenaires_liens')));
+	$maj['1.5.1'] = array(array('sql_updateq','spip_partenaires',array('statut'=>'publie'),'statut="" OR statut="0"'));	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
