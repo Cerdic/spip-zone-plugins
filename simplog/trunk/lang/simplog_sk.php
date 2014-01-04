@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hit_pub' => 'Verejne prístupná stránka',
 
 	// L
+	'label_fichier' => 'Súbor',
+	'label_fonction' => 'Funkčnosť',
+	'label_ligne' => 'Riadok',
 	'liste_fic' => 'Zoznam protokolov',
 	'logs' => 'Čítanie denníkov',
 

@@ -14,7 +14,7 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/simplog?lang_cible=sk" total="21" traduits="18" relire="0" modifs="0" nouveaux="3" pourcent="85.71">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/simplog?lang_cible=sk" total="21" traduits="21" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
