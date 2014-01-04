@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ajout_ok' => 'Los documentos fueron añadidos a la cola.',
 
 	// N
-	'nb_file_attente' => '@nb@ documento(s) en la cola.', # MODIF
+	'nb_file_attente' => '@nb@ documento(s) en la cola.',
 
 	// T
 	'titre_bloc_import' => 'Importación de medios',
