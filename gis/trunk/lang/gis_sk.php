@@ -92,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_adress' => 'Adresa',
+	'label_code_pays' => 'Kód krajiny',
 	'label_code_postal' => 'PSČ',
 	'label_import' => 'Nahrať',
 	'label_inserer_modele_articles' => 'prepojené s článkami',
