@@ -25,12 +25,18 @@
 					(#ENV{#ENV{periode}/vitesse_vent}|rainette_afficher_unite{vitesse})
 				</li>]
 				[<li>
-					<span><:rainette:risque_precipitation|ucfirst:></span><br />
-					(#ENV{#ENV{periode}/risque_precipitation}|rainette_afficher_unite{pourcentage})
-				</li>]
-				[<li>
 					<span><:rainette:precipitation|ucfirst:></span><br />
 					(#ENV{#ENV{periode}/precipitation}|rainette_afficher_unite{precipitation})
+				</li>
+				#SET{pluie, oui}]
+				[(#GET{pluie}|non)
+				[<li>
+					<span><:rainette:risque_precipitation|ucfirst:></span><br />
+					(#ENV{#ENV{periode}/risque_precipitation}|rainette_afficher_unite{pourcentage})
+				</li>]]
+				[<li>
+					<span><:rainette:humidite|ucfirst:></span><br />
+					(#ENV{#ENV{periode}/humidite}|rainette_afficher_unite{pourcentage})
 				</li>]
 			</ul>
 		</div>

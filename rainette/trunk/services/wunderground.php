@@ -128,7 +128,6 @@ function wunderground_url2flux($url) {
  * retournees en tableau jour par jour
  * utilise le parseur xml de Spip
  *
- * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
  * @param array $flux
  * @return array
  */
@@ -144,7 +143,7 @@ function wunderground_flux2previsions($flux, $lieu) {
 	$unites = explode(':', $unites[1]);
 
 	// Identifier le format d'échange des données
-	$format = lire_config('rainette/wunderground/format', 'xml');
+	$format = lire_config('rainette/wunderground/format', 'json');
 
 	// Construire le tableau standard des conditions météorologiques propres au service
 	$tableau = ($format == 'json') ? json2previsions_wunderground($flux, $unites) : xml2previsions_wunderground($flux, $unites);
@@ -164,8 +163,10 @@ function wunderground_flux2previsions($flux, $lieu) {
 					// On affiche les prévisions natives fournies par le service.
 					// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
 					// de le traduire à partir des fichiers de langue SPIP.
+					$theme = lire_config('rainette/wunderground/theme', 'a');
+					$url = _RAINETTE_WUNDERGROUND_URL_BASE_ICONE . '/' . $theme . '/' . basename($_prevision[0]['icon_meteo']);
 					$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
-					$tableau[$_index][0]['icone']['url'] = copie_locale($_prevision[0]['icon_meteo']);
+					$tableau[$_index][0]['icone']['url'] = copie_locale($url);
 					$tableau[$_index][0]['resume'] = ucfirst($_prevision[0]['desc_meteo']);
 				}
 				else {

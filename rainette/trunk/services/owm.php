@@ -296,7 +296,12 @@ function xml2previsions_owm($flux, $unite) {
 
 					$tableau[$_index][0]['risque_precipitation'] = NULL;
 					include_spip('inc/convertir');
-					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipitation'][0]['attributes'])) ? floatval($_prevision['precipitation'][0]['attributes']['value']) : 0;
+					// -- OWM utilise la balise precipitation pour le la pluie ou la neige. Il faut donc tester le type pour ne sélectionner
+					//    que la pluie.
+					$tableau[$_index][0]['precipitation'] =
+						(isset($_prevision['precipitation'][0]['attributes']) AND ($_prevision['precipitation'][0]['attributes']['type'] == 'rain'))
+							? floatval($_prevision['precipitation'][0]['attributes']['value'])
+							: 0;
 					if (($unite == 's') AND $tableau[$_index][0]['precipitation'])
 						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
 					$tableau[$_index][0]['humidite'] = (isset($_prevision['humidity'][0]['attributes'])) ? intval($_prevision['humidity'][0]['attributes']['value']) : '';
