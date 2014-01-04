@@ -10,7 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_pays' => '@nb@ pays',
 
 	// L
-	'label_code' => 'Code ISO3166-1',
+	'label_code' => 'Code ISO3166-1 Alpha 2',
+	'label_code_alpha3' => 'Code ISO3166-1 Alpha 3',
+	'label_code_num' => 'Code Numérique',
 	'label_id_pays' => 'ID',
 	'label_nom' => 'Nom du pays',
 	'label_infos' => 'Informations',

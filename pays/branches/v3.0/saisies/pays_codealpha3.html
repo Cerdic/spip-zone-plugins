@@ -14,7 +14,7 @@
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_pays(PAYS){par code_alpha3}>
+<BOUCLE_pays(PAYS){par multi nom, code_alpha3}>
 	#SET{pays,#CODE_ALPHA3}
 	<option value="#GET{pays}"[(#GET{pays}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>[(#GET{pays}). ]#NOM</option>
 </BOUCLE_pays>
