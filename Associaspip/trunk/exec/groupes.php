@@ -28,7 +28,7 @@ function exec_groupes() {
 	debut_cadre_association('annonce.gif', 'tous_les_groupes');
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	echo association_bloc_listehtml2('asso_groupes',
-		sql_select('*', 'spip_asso_groupes', 'id_groupe>=100','',  'nom'),
+		sql_select('*', 'spip_asso_groupes', 'id_groupe>99','',  'nom'),
 		array(
 #			'id_groupe' => array('asso:entete_id', 'entier'),
 			'nom' => array('asso:entete_nom', 'texte'),
@@ -43,7 +43,7 @@ function exec_groupes() {
 		'id_groupe' // champ portant la cle des lignes et des boutons
 	);
 /// AFFICHAGES_CENTRAUX : PAGINATION
-	echo association_form_souspage(array('spip_asso_groupes', 'id_groupe>100'), 'groupes' );
+	echo association_form_souspage(array('spip_asso_groupes', 'id_groupe>99'), 'groupes' );
 /// AFFICHAGES_CENTRAUX : FIN
 	fin_page_association();
 }

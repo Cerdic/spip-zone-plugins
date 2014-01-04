@@ -1009,7 +1009,7 @@ $GLOBALS['association_maj'][59886] = array(
 
 // Correction de l'erreur aux niveau de l'auto-increment des id_groupe presente pour les nouvelles installations effectuees entre la r53901  et r60035
 function association_maj_60038() {
-	association_change_ai('asso_groupes', 100); // reset de l'auto-increment meme s'il y a deja des groupes d'ID >100 car ca ne pose pas de probleme
+	association_change_ai('asso_groupes', 100); // reset de l'auto-increment meme s'il y a deja des groupes d'ID >99 car ca ne pose pas de probleme
 
 	$query = sql_select('id_groupe', 'spip_asso_groupes', "id_groupe<100 AND nom<>''", '', 'id_groupe'); // on verifie qu'on a des groupes d'ID <100 avec un nom <>''
 	if (sql_count($query)) {

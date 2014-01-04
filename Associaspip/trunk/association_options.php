@@ -1337,7 +1337,7 @@ function filtre_selecteur_asso_destination($sel='') {
  * Selecteur de groupe de membres
  */
 function filtre_selecteur_asso_groupe($sel='') {
-	$sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>=100', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
+	$sql = sql_select('id_groupe, nom', 'spip_asso_groupes', 'id_groupe>99', '', 'nom');  // on ne prend en consideration que les groupe d'id >= 100, les autres sont reserves a la gestion des autorisations
 	if ( !$sql || !sql_count($sql) )
 		return '';  // ne proposer que s'il y a des groupes definis
 	$res = "<select name='groupe' onchange='form.submit()' id='asso_groupe'>\n";

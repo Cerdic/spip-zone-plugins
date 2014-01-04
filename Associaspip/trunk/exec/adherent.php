@@ -46,7 +46,7 @@ function exec_adherent() {
 	if ($GLOBALS['association_metas']['id_asso']) {
 		$infos['adherent_libelle_reference_interne'] = ($data['id_asso']?$data['id_asso']:_T('asso:pas_de_reference_interne_attribuee')) ;
 	}
-	$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>=100 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
+	$query_groupes = sql_select('g.*, fonction', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'g.id_groupe>99 AND l.id_auteur='.$id_auteur, '', 'g.nom'); // Liste des groupes (on ignore les groupes d'id <100 qui sont dedies a la gestion des autorisations)
 	if ( autoriser('voir_groupes', 'association') AND sql_count($query_groupes) ) {
 		$liste_groupes = '<dl>';
 		while ( $row = sql_fetch($query_groupes) ) {

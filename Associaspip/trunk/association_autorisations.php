@@ -51,8 +51,8 @@ function is_in_groups($id_auteur, $id_groupes) {
  *
  * 0y Groupes ****************************
  * 01 => edition des groupes y compris ceux d'autorisation. defaut: webmestres
- * 02 => edition des groupes d'id>100. defaut : admin non restreints
- * 03 => voir les groupes d'id>100. defaut : redacteurs
+ * 02 => edition des groupes d'id>99. defaut : admin non restreints
+ * 03 => voir les groupes d'id>99. defaut : redacteurs
  * 1y Comptabilite ***********************
  * 10 => expert-comptable : toutes les autorisations sur la compta.
  * 11 => comptable/tresorier : peut enregistrer des ecritures mais pas modifier le plan comptable

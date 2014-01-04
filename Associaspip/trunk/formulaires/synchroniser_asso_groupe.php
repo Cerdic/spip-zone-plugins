@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function formulaires_synchroniser_asso_groupe_charger_dist($id_groupe=0) {
-	sinon_interdire_acces(autoriser(($id_groupe>=100)?'gerer_groupes':'gerer_autorisations', 'association'));
+	sinon_interdire_acces(autoriser(($id_groupe>99)?'gerer_groupes':'gerer_autorisations', 'association'));
 	$contexte['id_groupe'] = $id_groupe; // passer l'argument dans l'environnement
 	$contexte['id_zone'] = sql_getfetsel('id_zone', 'spip_asso_groupes', 'id_groupe='.sql_quote($id_groupe)); // passer le parametre dans l'environnement
 	if ( !$contexte['id_zone'] ) // pas de synchronisation possible...

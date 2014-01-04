@@ -19,10 +19,10 @@ function exec_synchronis_groupe() {
 		list($id_groupe, $groupe) = $r;
 		include_spip ('association_modules');
 /// AFFICHAGES_LATERAUX (connexes)
-		echo association_navigation_onglets('synchroniser_asso_membres', ($id_groupe>=100?'adherents':'association') );
+		echo association_navigation_onglets('synchroniser_asso_membres', ($id_groupe>99?'adherents':'association') );
 /// AFFICHAGES_LATERAUX : INTRO : Infos Groupe
 		$infos = array(); // reset...
-		if ($id_groupe>=100) {
+		if ($id_groupe>99) {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
 		$infos['entete_commentaire'] = $groupe['commentaire'];

@@ -18,9 +18,9 @@ function exec_membres_groupe() {
 /// INITIALISATIONS
 		list($id_groupe, $groupe) = $r;
 /// AFFICHAGES_LATERAUX (connexes)
-		echo association_navigation_onglets(($id_groupe>=100)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>=100?'adherents':'association') );
+		echo association_navigation_onglets(($id_groupe>99)?'gestion_groupes':'gerer_les_autorisations', ($id_groupe>99?'adherents':'association') );
 /// AFFICHAGES_LATERAUX : INFO
-		if ($id_groupe>=100) {
+		if ($id_groupe>99) {
 			$infos['ordre_affichage_groupe'] = $groupe['affichage'];
 		}
 		if (test_plugin_actif('ACCESRESTREINT') AND $groupe['id_zone'])

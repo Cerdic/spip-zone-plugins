@@ -1,0 +1,24 @@
+<B_membreHorsGroupes>
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form id="formulaire_#FORM" method="post" action="#ENV{action}">
+		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
+		<h3 class="legend"><:asso:ajouter_membre_groupes:></h3>
+		[<p class="pagination">(#PAGINATION{prive})</p>]
+		<ul>
+<BOUCLE_membreHorsGroupes(ASSO_GROUPES asso_fonctions){!id_auteur=#ENV{id_auteur}}{id_groupe>99}{par nom}{pagination 40}>
+		<li class="liste_auteurs">
+			<div class="choix">
+				<input type="checkbox" name="id_auteurs[]" value="#ID_GROUPE" id="groupe#ID_GROUPE" />
+				<label for="groupe#ID_GROUPE">[(#NOM)]</label>
+			</div>
+		</li>
+</BOUCLE_membreHorsGroupes>
+	</ul>
+<INCLURE{fond=prive/editer/bouton_validation, pass_ok=0} />
+	</form>
+</div>
+</B_membreHorsGroupes>
+<div class="erreur"><:asso:tous_les_membres_sont_dans_ce_groupe:></div>
+<//B_membreHorsGroupes>

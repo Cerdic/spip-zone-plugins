@@ -47,39 +47,6 @@
 		</ul>
 		[(#REM)<!-- ajouter les saisies supplementaires : extra et autre, a cet endroit -->]
 		<!--extra-->
-	<B_groupes_membre>
-		<p class="pagination">#PAGINATION</p>
-		<table class="formulaire_table_editable arial2" border="0" cellpadding="2" cellspacing="0" width="100%" style="border: 1px solid #aaaaaa;">
-			<tr style="background-color: #DBE1C5;">
-				<th><:asso:entete_nom:></th>
-				<th><:asso:fonction:></th>
-				<th><:asso:entete_action:></th>
-			</tr>
-	<BOUCLE_groupes_membre(ASSO_FONCTIONS asso_groupes){id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination}>
-			<tr class="[(#COMPTEUR_BOUCLE|alterner{'pair','impair'})]">
-				<td class="fn n"><a title="<:asso:adherent_label_voir_membre:>" href="#URL_ECRIRE{edit_groupe, id=#ID_GROUPE}">#NOM</a></td>
-				<td><input type="text" value="[(#FONCTION)]" name="fonctions[#ID_GROUPE]" /></td>
-				<td class="boutons"><a title="<:asso:exclure_du_groupe:>" href="#URL_ACTION_AUTEUR{exclure_membres_groupe, #VAL{#ID_GROUPE}-#ENV{id_auteur}, #SELF}"><img src="#CHEMIN{img_pack/suppr-12.gif}" alt='<:asso:supprimer_adherent:>' /></a></td>
-			</tr>
-	</BOUCLE_groupes_membre>
-		</table>
-	</B_groupes_membre>
-	<B_groupes_non_membre>
-		<div class="cadre_padding">
-			<h3 class="legend"><:asso:rejoindre_un_groupe:></h3>
-			<p class="pagination">#PAGINATION</p>
-			<ul>
-	<BOUCLE_groupes_non_membre(ASSO_GROUPES asso_fonctions){!id_auteur=#ENV{id_auteur}}{id_groupe>=100}{par nom}{pagination 40}>
-				<li class="liste_auteurs">
-					<div class="choix">
-						<input type="checkbox" name="id_groupes[]" value="#ID_GROUPE" />
-						<label>[(#NOM)]</label>
-					</div>
-				</li>
-	</BOUCLE_groupes_non_membre>
-			</ul>
-		</div>
-	</B_groupes_non_membre>
 <INCLURE{fond=prive/editer/bouton_validation, pass_ok=0 } />
     </form>
 </div>

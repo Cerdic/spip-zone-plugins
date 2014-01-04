@@ -77,7 +77,7 @@ function modification_adherents($tab, $action, $statut='') {
 	$res ='';
 	if ($action=='grouper' || $action=='degrouper') { // on ajoute une table des groupes si il y en a
 		$res .='<p class="titrem">'._T('asso:groupes_membre').'</p>';
-		$query = sql_select('id_groupe, nom','spip_asso_groupes', 'id_groupe>=100', '', 'nom'); // on ne considere que les groupes d'id >=100, les autres c'est pour la gestion des autorisations
+		$query = sql_select('id_groupe, nom','spip_asso_groupes', 'id_groupe>99', '', 'nom'); // on ne considere que les groupes d'id >=100, les autres c'est pour la gestion des autorisations
 		if (sql_count($query)) {
 			$res .='<table>';
 			while($data = sql_fetch($query)) {

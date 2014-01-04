@@ -74,7 +74,7 @@ function exec_adherents() {
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	echo association_navigation_raccourcis(array(
 		array('gerer_les_groupes', 'annonce.gif', array('groupes'), array('voir_groupes', 'association', 100) ), // l'id groupe passe en parametre est a 100 car ce sont les groupes utilisateurs et non les autorisations qu'on liste
-		array('menu2_titre_mailing', 'mail-24.png', array('mailing', ((intval($id_groupe)>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
+		array('menu2_titre_mailing', 'mail-24.png', array('mailing', (($id_groupe>99)?"&filtre_id_groupe=$id_groupe":'').($statut_interne?"&filtre_statut_interne=$statut_interne":'')), array('relancer_membres', 'association') ),
 		array('synchroniser_asso_membres', 'reload-32.png', array('synchroniser_asso_membres'), array('gerer_membres', 'association') ),
 	), 2);
 /// AFFICHAGES_LATERAUX : Forms-PDF
@@ -210,9 +210,9 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 			$tbd .= '<td class="given-name">'.$data['prenom'].'</td>';
 		if ($GLOBALS['association_metas']['aff_groupes']) {
 			$tbd .= '<td class="organisation-unit">';
-			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_groupe>=100 AND l.id_auteur='.$id_auteur);
+			$query_groupes = sql_select('g.nom as nom_groupe, g.id_groupe as id_groupe', 'spip_asso_groupes g LEFT JOIN spip_asso_fonctions l ON g.id_groupe=l.id_groupe', 'l.id_groupe>99 AND l.id_auteur='.$id_auteur);
 			if ($row_groupes = sql_fetch($query_groupes)) {
-				$tbd .= '<a href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
+				$tbd .= '<a title="'. _T('asso:adherent_label_voir_groupe') .'" href="'. generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']) .'">'.$row_groupes['nom_groupe'].'</a>';
 				while ($row_groupes = sql_fetch($query_groupes)) {
 					$tbd .= ', <a href="'.generer_url_ecrire('membres_groupe', 'id='.$row_groupes['id_groupe']).'">'.$row_groupes['nom_groupe'].'</a>';
 				}
@@ -280,12 +280,12 @@ function adherents_liste($critere, $statut_interne, $args_url, $jointure) {
 				."</option>\n<option value='delete'>"._T('asso:supprimer_adherent')."</option>\n";
 			}
 			if (autoriser('editer_groupes', 'association', 100)) {
-				$nav .= sql_countsel('spip_asso_groupes', 'id_groupe>100') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
+				$nav .= sql_countsel('spip_asso_groupes', 'id_groupe>99') ? '<option value="grouper">'._T('asso:rejoindre_groupe').'</option><option value="degrouper">'._T('asso:quitter_un_groupe')."</option>\n" : '';
 			}
 			$nav .= '</select><input type="submit" value="'._T('asso:bouton_confirmer').'" />';
 		}
 		$nav .= '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
-		.  '</td>';
+		. '</td>';
 	}
 	$res .= association_form_souspage(array($from, $critere), 'adherents', $args_url, $nav);
 // FIN

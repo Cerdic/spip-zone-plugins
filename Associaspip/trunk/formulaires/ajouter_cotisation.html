@@ -5,7 +5,6 @@
 		<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
 		<ul>
 		[(#META{/association/classe_banques}|et{#META{/association/comptes}}|oui)
-			[(#REM)<!-- s'il n'a pas de classe banques definie ou si la gestion comptable est desactivee, on ne propose pas les champs correspondants mais uniquement la validite qui la seule a pouvoir etre geree sans gestion comptable -->]
 			<li class="editer_date">
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{date})</span>]
 				<label for="saisie_date"><:asso:date_du_paiement_aaaa_mm_jj:></label>
@@ -23,6 +22,7 @@
 				<input type="text" name="justification" [value="(#ENV{justification})"] id="saisie_justification"  class="text"#ENV{readonly} />
 			</li>
 		]
+		[(#REM)<!-- s'il n'a pas de classe banques definie ou si la gestion comptable est desactivee, on ne propose pas les champs correspondants mais uniquement la validite qui la seule a pouvoir etre geree sans gestion comptable -->]
 		[(#META{/association/classe_banques}|et{#META{/association/comptes}}|non)
 			<li class="erreur">
 				<:asso:gestion_cotisations_limitee:>

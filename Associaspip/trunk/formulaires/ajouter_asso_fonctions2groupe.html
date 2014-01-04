@@ -4,10 +4,10 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form id="formulaire_#FORM" method="post" action="#ENV{action}">
 	<div>#ACTION_FORMULAIRE{#ENV{action}}</div>
-	<h3 class="legend"><:asso:ajouter_membres_au_groupe:></h3>
+	<h3 class="legend"><:asso:ajouter_membres_groupe:></h3>
 	[<p class="pagination">(#PAGINATION{prive})</p>]
 	<ul>
-<BOUCLE_membresHorsGroupe(asso_membres asso_fonctions){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe = #ENV{id_groupe}}{par nom_famille, prenom}{pagination 40}>
+<BOUCLE_membresHorsGroupe(asso_membres asso_fonctions){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe=#ENV{id_groupe}}{par nom_famille,prenom}{pagination 40}>
 		<li class="liste_auteurs">
 			<div class="choix">
 				<input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" id="auteur#ID_AUTEUR" />
