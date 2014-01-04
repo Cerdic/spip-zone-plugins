@@ -30,7 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference_numero' => 'Č. objednávky ',
 	'commande_statut' => 'Štádium',
 	'commandes_titre' => 'Objednávky',
-	'configurer_titre' => 'Nastaviť zásuvný modul Objednávka', # MODIF
+	'configurer_notifications_commandes' => 'Nastaviť oznamy',
+	'configurer_titre' => 'Nastaviť zásuvný modul Objednávky',
 	'confirmer_supprimer_commande' => 'Môžete potvrdiť odstránenie tejto objednávky?',
 	'contact_label' => 'Kontakt:',
 	'contenu' => 'Obsah',
@@ -45,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'etat' => 'Stav',
+	'explications_notifications_statuts' => 'Oznamy pri zmene stavu',
+	'explications_notifications_statuts_aucune' => 'Žiaden oznam pri zmene stavu',
 
 	// F
 	'facture_date' => 'Dátum: <span>@date@</span>',
@@ -53,11 +56,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 objednávka',
+	'info_1_commande_statut_attente' => '1 objednávka čaká na potvrdenie',
+	'info_1_commande_statut_partiel' => '1 objednávka bola čiastočne zaplatená',
+	'info_1_commande_statut_paye' => '1 objednávka bola zaplatená',
 	'info_aucun_commande' => 'Žiadna objednávka',
 	'info_commandes' => 'Objednávky',
 	'info_date_envoi_vide' => 'neodoslaná objednávka',
+	'info_date_non_definie' => 'nezadané',
 	'info_date_paiement_vide' => 'nezaplatená objednávka',
 	'info_nb_commandes' => '@nb@ objednávok',
+	'info_nb_commandes_statut_attente' => '@nb@ objednávok čaká na potvrdenie',
+	'info_nb_commandes_statut_partiel' => '@nb@ objednávok bolo čiastočne zaplatených',
+	'info_nb_commandes_statut_paye' => '@nb@ objednávok bolo zaplatených',
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
@@ -135,6 +145,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
+	'titre_commandes_actives' => 'Aktívne objednávky',
+	'titre_commandes_auteur' => 'Objednávky od zákazníka',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
