@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'forum' => 'Diskusné fóra sú podľa predvolených nastavení aktivované v článkoch  @complement@; dajú sa deaktivovať jedno po druhom. Návštevníci môžu reagovať na vaše články. Ak niekto pošle príspevok k vášmu článku, dostanete o tom oznam cez e-mail.  Malé negatívum: spamy nie je vždy ľahké nájsť, a tak ich budete musieť vytriediť manuálne. Ak chcete spracovať príspevok v diskusnom fóre (vymazať ho, ak sa vám nepáči, alebo ho označiť ako spam, ak to je spam):
--* Ak ste prihlásený (-á), na verejne prístupnej stránke na stránke s článkom sú zobrazené dve tlačidlá "Odstrániť príspevok" alebo "SPAM"
--* V súkromnej zóne prejdite do menu Aktivita / Riadiť diskusné fóra', # MODIF
+-* Ak ste prihlásený (-á), na verejne prístupnej stránke na stránke s článkom sú zobrazené 2 tlačidlá "Odstrániť príspevok" alebo "SPAM"
+-* V súkromnej zóne prejdite do menu Aktivita / Riadiť diskusné fóra',
 	'forum_q' => 'Ako riadiť diskusné fóra?',
 
 	// I
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Ak bude obrázok zaradený do textu článku, všetko závisí od jeho vlastností: ak je orientovaný na výšku, výška 200 px by mala stačiť, v opačnom prípade treba dať pozor na nedokonalosti v zobrazení; ak je orientovaný na šírku, môže mať maximálnu šírku až {{@largeur_max@}} pixelov.
 -* Ak bude obrázok súčasťou portfólia k článku, neodporúča sa prekročiť šírku 1000 pixelov a výšku 600 pixelov.
 
-{Pozor, maximálna veľkosť nesmie prekročiť 150 MB, inak sa obrázok nebude dať stiahnuť.}',
+{Pozor, maximálna veľkosť nesmie prekročiť {{@poids_max@}}, inak sa obrázok nebude dať stiahnuť.}',
 	'img_nombre' => 'Do článku sa dá poslať viac fotiek jedným klikom:
 -* Vybrané fotky skopírujte do priečinka na svojom pevnom disku
 -* Upravte ich veľkosť
