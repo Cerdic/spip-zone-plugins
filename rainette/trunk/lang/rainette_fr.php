@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'direction_WSW' => 'ouest sud-ouest',
 
 	// E
+	'erreur_affichage_modele' => 'Le modèle @modele@ n\'est pas compatible avec le service @service@.',
+	'erreur_affichage_conseil' => 'Veuillez utiliser un autre modèle.',
 	'erreur_chargement_conditions' => 'Le service @service@ ne fournit actuellement aucune information géographique sur le lieu @lieu@.',
 	'erreur_chargement_infos' => 'Le service @service@ ne fournit actuellement aucune condition météorologique sur le lieu @lieu@.',
 	'erreur_chargement_previsions' => 'Le service @service@ ne fournit actuellement aucune prévision météorologique sur le lieu @lieu@.',

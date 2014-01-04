@@ -1,7 +1,17 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions d'un jour d'une ville
 	Il est appelee par le filtre rainette_coasser_previsions
+
+	Ce modèle ne peut être utiliser qu'avec le service weather.com qui propose des données pour la nuit.
+	L'utiliser avec un autre service renvoie un message d'erreur plutôt qu'un affichage farfelu.
  -->]
+[(#ENV{service, weather}|=={weather}|non)
+	#INCLURE{fond=modeles/erreur,
+		service=#ENV{service},
+		erreur=affichage,
+		mode=modele,
+		modele=previsions_2x12h} />]
+[(#ENV{service, weather}|=={weather}|oui)
 <div class="rainette_previsions_2x12h">
 	<!-- Cellule de gauche: 
 		- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
@@ -156,3 +166,4 @@
 			env}
 	</div>
 </div>
+]

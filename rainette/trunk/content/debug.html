@@ -68,8 +68,25 @@
 	service=owm})]
 <br class="nettoyeur"/>
 
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=5}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=x_jours,
+	jour=5,
+	sous_modele=previsions_24h,
+	service=owm})]
+<br class="nettoyeur"/>
+[(#MODELE{rainette_previsions,
+	code=#GET{code},
+	type=1_jour,
+	jour=2014-01-12,
+	sous_modele=previsions_2x12h,
+	service=owm})]
+<br class="nettoyeur"/>
+
 [(#GET{code}|rainette_debug{infos, owm})]
 [(#GET{code}|rainette_debug{conditions, owm})]
+[(#GET{code}|rainette_debug{previsions, owm})]
 
 <br />
 <hr />
@@ -135,11 +152,11 @@
 	service=wunderground})]
 <br class="nettoyeur"/>
 
-<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=4}|ucfirst:></h2>
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=5}|ucfirst:></h2>
 [(#MODELE{rainette_previsions,
 	code=#GET{code},
 	type=x_jours,
-	jour=4,
+	jour=5,
 	sous_modele=previsions_24h,
 	service=wunderground})]
 <br class="nettoyeur"/>
@@ -178,11 +195,11 @@
 	service=yahoo})]
 <br class="nettoyeur"/>
 
-<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=2}|ucfirst:></h2>
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=5}|ucfirst:></h2>
 [(#MODELE{rainette_previsions,
 	code=#GET{code},
 	type=x_jours,
-	jour=2,
+	jour=5,
 	sous_modele=previsions_24h,
 	service=yahoo})]
 <br class="nettoyeur"/>

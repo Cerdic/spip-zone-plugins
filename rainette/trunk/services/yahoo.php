@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_RAINETTE_YAHOO_URL_BASE'))
 	define('_RAINETTE_YAHOO_URL_BASE', 'http://weather.yahooapis.com/forecastrss');
 if (!defined('_RAINETTE_YAHOO_JOURS_PREVISION'))
-	define('_RAINETTE_YAHOO_JOURS_PREVISION', 2);
+	define('_RAINETTE_YAHOO_JOURS_PREVISION', 5);
 
 
 function yahoo_service2cache($lieu, $mode) {
@@ -58,48 +58,48 @@ function yahoo_url2flux($url) {
  */
 function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
-	$index = 0;
 
 	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'])) {
 		$previsions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'];
 
-		foreach ($previsions as $attributes) {
-			if (isset($attributes['attributes'])) {
-				$prevision = $attributes['attributes'];
+		foreach ($previsions as $_index => $_prevision) {
+			if (isset($_prevision['attributes'])) {
+				$_prevision = $_prevision['attributes'];
 
 				// 1- Identifiants du jour : index dans le tableau et la date
-				$tableau[$index]['index'] = $index;
-				$date_jour = (isset($prevision['date'])) ? strtotime($prevision['date']) : '';
-				$tableau[$index]['date'] = date('Y-m-d', $date_jour);
+				$tableau[$_index]['index'] = $_index;
+				$tableau[$_index]['date'] = (isset($_prevision['date'])) ? date('Y-m-d', strtotime($_prevision['date'])) : '';
+				$tableau[$_index]['periode'] = 0;
 
 				// 2 Données astronomiques
-				$tableau[$index]['lever_soleil'] = '';
-				$tableau[$index]['coucher_soleil'] = '';
+				$tableau[$_index]['lever_soleil'] = NULL;
+				$tableau[$_index]['coucher_soleil'] = NULL;
 
 				// 3- Prévisions pour le jour
-				$tableau[$index]['temperature_jour'] = (isset($prevision['high'])) ? intval($prevision['high']) : '';
-				$tableau[$index]['code_icone_jour'] = (isset($prevision['code'])) ? intval($prevision['code']) : '';
-				$tableau[$index]['vitesse_vent_jour'] = NULL;
-				$tableau[$index]['angle_vent_jour'] = NULL;
-				$tableau[$index]['direction_vent_jour'] = NULL;
-				$tableau[$index]['risque_precipitation_jour'] = NULL;
-				$tableau[$index]['humidite_jour'] = NULL;
+				$tableau[$_index][0]['temperature_max'] = (isset($_prevision['high'])) ? floatval($_prevision['high']) : '';
+				$tableau[$_index][0]['temperature_min'] = (isset($_prevision['low'])) ? floatval($_prevision['low']) : '';
+				$tableau[$_index][0]['vitesse_vent'] = NULL;
+				$tableau[$_index][0]['angle_vent'] = NULL;
+				$tableau[$_index][0]['direction_vent'] = NULL;
+				$tableau[$_index][0]['precipitation'] = NULL;
+				$tableau[$_index][0]['risque_precipitation'] = NULL;
+				$tableau[$_index][0]['humidite'] = NULL;
+
+				$tableau[$_index][0]['code_meteo'] = (isset($_prevision['code'])) ? intval($_prevision['code']) : '';
+				$tableau[$_index][0]['icon_meteo'] = NULL;
+				$tableau[$_index][0]['desc_meteo'] = NULL;
+
+				$tableau[$_index][0]['icone'] = $tableau[$_index][0]['code_meteo'];
+				$tableau[$_index][0]['resume'] = $tableau[$_index][0]['code_meteo'];
 
 				// 4- Prévisions pour la nuit
-				$tableau[$index]['temperature_nuit'] = (isset($prevision['low'])) ? intval($prevision['low']) : '';
-				$tableau[$index]['code_icone_nuit'] = '';
-				$tableau[$index]['vitesse_vent_nuit'] = NULL;
-				$tableau[$index]['angle_vent_nuit'] = NULL;
-				$tableau[$index]['direction_vent_nuit'] = NULL;
-				$tableau[$index]['risque_precipitation_nuit'] = NULL;
-				$tableau[$index]['humidite_nuit'] = NULL;
-
-				$index += 1;
+				$tableau[$_index][1] = NULL;
 			}
 		}
 
 		// Date de la mise à jour des prévisions
 		// -- comme toutes les informations communes elles sont stockées dans un index supplémentaire en fin de tableau
+		$index = count($tableau);
 		if ($tableau) {
 			if (isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])) {
 				$date_maj = isset($flux['children']['channel'][0]['children']['lastbuilddate'][0]['text'])
