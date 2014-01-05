@@ -7,6 +7,6 @@
 	<etat>dev</etat>
 	<description>Proposer une fonction sale() qui permet de passer du (X)HTML vers du SPIP</description>
 	<fonctions>sale_fonctions.php </fonctions>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<categorie>outil</categorie>
 </plugin>
