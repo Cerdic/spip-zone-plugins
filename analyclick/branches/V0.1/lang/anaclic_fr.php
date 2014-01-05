@@ -12,6 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_afficher'					=> 'Afficher les statistiques de :', 
 'info_telechargement_30'		=> 'Afficher les statistiques de t&eacute;l&eacute;chargement <b>sur les 30 derniers jours</b> :',
 'info_telechargement'			=> 'Afficher les statistiques de t&eacute;l&eacute;chargement <b>depuis le d&eacute;but</b> :',
+
+'titre_evolution_stat'			=> '&Eacute;volution des t&eacute;l&eacute;chargements',
+'stat_journalieres'				=> 'Nombre de t&eacute;l&eacute;chargements par jour',
+'stat_mensuelles'				=> 'Nombre de t&eacute;l&eacute;chargements par mois',
+'stat_pour'						=> 'Satatitiques de t&eacute;l&eacute;chargements pour :',
+'statistiques_doc'				=> 't&eacute;l&eacute;chargements',
+
 'no_statistique'				=> 'Pas de statistique disponible'
 
 );

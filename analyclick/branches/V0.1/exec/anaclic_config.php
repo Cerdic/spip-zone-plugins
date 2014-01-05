@@ -25,7 +25,9 @@ function exec_anaclic_config_dist()
 	echo creer_colonne_droite('', true);
 	
 	if (autoriser('configurer'))
-	{	$res = icone_horizontale(_T('anaclic:statistiques_documents'), generer_url_ecrire("statistiques_anaclic"), "statistiques-24.gif","rien.gif", false);
+	{	if ($GLOBALS['spip_version_branche']>2)
+			$res = icone_horizontale(_T('anaclic:statistiques_documents'), generer_url_ecrire("statistiques_anaclic_v3"), "statistiques-24.gif","rien.gif", false);
+		else $res = icone_horizontale(_T('anaclic:statistiques_documents'), generer_url_ecrire("statistiques_anaclic"), "statistiques-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
 	}
 	

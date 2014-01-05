@@ -1,0 +1,147 @@
+<!--[if IE]>[<script type="text/javascript" src="(#CHEMIN{javascript/excanvas.js})"></script>]<![endif]-->
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.selection.js})"></script>]
+
+<h1><:anaclic:titre_evolution_stat:></h1>
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+<div class="box note">
+<b class="top"><b class="tl"></b><b class="tr"></b></b>
+<div class="inner"><div class="bd"><a title="Tout afficher" href="[(#SELF|parametre_url{id_document,''}|parametre_url{duree,''})]" class="annule_filtre"><img width="16" height="16" alt="Tout afficher" src="../prive/themes/spip/images/fermer-16.png"></a>
+	<:anaclic:stat_pour:>
+	<h2 class="objet_titre">Document ##ID_DOCUMENT[ : (#TITRE)]</h2>
+</div></div></div>
+</BOUCLE_doc>
+
+<p class="pagination">
+	<span class="dl" style="display:none">
+		<a class="noajax" href="">csv</a> |
+	</span>
+	[<span class="duree">(#ENV{duree,90}) jours</span> |]
+	<a href="[(#SELF|parametre_url{duree,#ENV{duree,90}|plus{25}})]">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
+	<a href="[(#SELF|parametre_url{duree,#ENV{duree,90}|moins{25}})]">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
+</p>
+
+<h3 class="caption"><:anaclic:stat_journalieres:></h3>
+<div id="stat_jour" style="width:100%; height:300px;"></div>
+
+<p></p>
+<h3 class="caption"><:anaclic:stat_mensuelles:></h3>
+<div id="stat_mois" style="width:100%; height:300px;"></div>
+
+<script type="text/javascript">
+(function($){
+   
+	$(document).ready(function()
+	{	var stat_jour = #STAT_JOUR;
+		for (var i=0; i<stat_jour.length; i++)
+		{	stat_jour[i][0] = new Date(stat_jour[i][0]).getTime();
+		}
+		var options =
+		{	grid:
+			{	// Tagger les weekends
+				markings: function (axes) 
+				{	var d = new Date(axes.xaxis.min);
+					// go to the first Saturday
+					d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
+					d.setUTCSeconds(0); d.setUTCMinutes(0); d.setUTCHours(0);
+					// Weekends
+					var markings = [];
+					for (var i = d.getTime(); i < axes.xaxis.max; i += 7 * 24 * 60 * 60 * 1000)
+					{	markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } });
+					}
+					return markings;
+				},
+				hoverable: true,     
+				mouseActiveRadius: 10  //specifies how far the mouse can activate an item
+			},
+			xaxes: 
+			[{	mode:"time",
+				minTickSize: [1, "day"],
+				timeformat: "%d/%m/%y",
+				monthNames: ["<:date_mois_1:>", "<:date_mois_2:>", "<:date_mois_3:>", "<:date_mois_4:>", "<:date_mois_5:>", "<:date_mois_6:>", 
+							"<:date_mois_7:>", "<:date_mois_8:>", "<:date_mois_9:>", "<:date_mois_10:>", "<:date_mois_11:>", "<:date_mois_12:>"]
+			}],
+			lines:
+			{	show: true
+			},
+			points:
+			{	show: true
+			}
+		};
+		$.plot($("#stat_jour"), [{data:stat_jour}], options);
+		
+		var stat_month = #STAT_MOIS;
+		for (var i=0; i<stat_month.length; i++)
+		{	stat_month[i][0] = new Date(stat_month[i][0]).getTime();
+		}
+		options =
+		{	grid:
+			{	hoverable: true,     
+				mouseActiveRadius: 10  //specifies how far the mouse can activate an item
+			},
+			xaxes:
+			[{	mode:"time", 
+				timeformat: "%b<br/>%y",
+				tickSize: [1, "month"],
+				monthNames: ["<:date_mois_1:>", "<:date_mois_2:>", "<:date_mois_3:>", "<:date_mois_4:>", "<:date_mois_5:>", "<:date_mois_6:>", 
+							"<:date_mois_7:>", "<:date_mois_8:>", "<:date_mois_9:>", "<:date_mois_10:>", "<:date_mois_11:>", "<:date_mois_12:>"]
+			}],
+			series: 
+			{	bars: 
+				{	show: true,
+					align: "center",
+					barWidth: 12*24*60*60*300*7
+				}
+			}
+		};
+		$.plot($("#stat_mois"), [{data:stat_month}], options);
+	});
+
+	$.fn.UseTooltip = function (mois) 
+	{	var previousPoint = null;
+	     
+		$(this).bind("plothover", function (event, pos, item) 
+		{	if (item) {
+				if (previousPoint != item.dataIndex) 
+				{	previousPoint = item.dataIndex;
+	 
+					$("#tooltip").remove();
+	                 
+					var x = new Date(item.datapoint[0]);
+					var y = item.datapoint[1];               
+					var monthNames = ["<:date_mois_1:>", "<:date_mois_2:>", "<:date_mois_3:>", "<:date_mois_4:>", "<:date_mois_5:>", "<:date_mois_6:>", 
+							"<:date_mois_7:>", "<:date_mois_8:>", "<:date_mois_9:>", "<:date_mois_10:>", "<:date_mois_11:>", "<:date_mois_12:>"]
+	                if (mois) x = monthNames[x.getMonth()] +" "+ x.getFullYear();
+	                else x = x.toLocaleDateString();
+	                
+					showTooltip(item.pageX, item.pageY, x + "<br/>" + "<strong>" + y + "</strong> <:anaclic:statistiques_doc:>");
+				}
+			}
+			else 
+			{	$("#tooltip").remove();
+				previousPoint = null;
+			}
+		});
+	};
+	 
+	function showTooltip(x, y, contents) {
+		$('<div id="tooltip">' + contents + '</div>').css({
+			position: 'absolute',
+			display: 'none',
+			top: y + 5,
+			left: x + 20,
+			border: '2px solid #4572A7',
+			padding: '2px',    
+			'font-size': '11px',
+			'background-color': '#fff',
+			opacity: 0.80
+		}).appendTo("body").fadeIn(200);
+	}
+
+	$("#stat_jour").UseTooltip();
+	$("#stat_mois").UseTooltip(true);
+ 
+})(jQuery);
+
+
+</script>

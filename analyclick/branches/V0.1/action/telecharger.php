@@ -10,7 +10,6 @@
 * Fonction comptage + renvoie du document
 *
 **/
-
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 include_spip("base/anaclic");
 
@@ -49,10 +48,12 @@ function action_telecharger()
 		$ip = $_SERVER["REMOTE_ADDR"];
 		// Suprime les anciens clics
 		$delai = (isset($GLOBALS['meta']['anaclic_delai']) ? $GLOBALS['meta']['anaclic_delai'] : 3600 );
+
 		if ($delai >= 0)
 		{ 	$time = time() -$delai;
 			sql_delete ("spip_doc_compteurs_fix", "time < $time");
 		}
+		$nb = 1;
 		// Pas de multi-clic (meme IP sur le meme document dans le laps de temps)
 		if (!sql_fetsel ("id_document","spip_doc_compteurs_fix","ip='$ip' AND id_document=$id"))
 		{	sql_insertq ("spip_doc_compteurs_fix", array("id_document"=>$id,"ip"=>$ip,"time"=>time()));
@@ -60,6 +61,7 @@ function action_telecharger()
 			// Incrementer le compteur
 			if ($row = sql_fetsel ("telechargement","spip_doc_compteurs","id_document=$id AND date='$date'"))
 			{	sql_updateq ("spip_doc_compteurs", array("telechargement"=>$row[telechargement]+1), "id_document=$id AND date='$date'");
+				$nb = $row[telechargement]+1;
 			}
 			// Nouvelle journee
 			else
@@ -70,7 +72,7 @@ function action_telecharger()
 		$url = str_replace ('&amp;', '&', $url);
 		@header ("Location: $url"); 
 
-		echo "<a href='$url'>$url</a>";
+		echo "<a href='$url'>$url (".$nb.")</a>";
 	}
 }
 ?>
