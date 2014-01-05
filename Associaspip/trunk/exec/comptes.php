@@ -174,7 +174,7 @@ function comptes_while($where, $limit, $id_compte) {
 				} else { // le reste est editable
 					$comptes .= association_bouton_edit('compte', 'id='.$data['id_compte']); // edition
 				}
-				$comptes .= association_bouton_suppr('comptes', 'id='.$data['id_compte']); // suppression
+				$comptes .= association_bouton_suppr('compte', 'id='.$data['id_compte']); // suppression
 			}
 			$comptes .= association_bouton_coch('valide', $data['id_compte']); // validation
 		}
