@@ -656,6 +656,7 @@ Merci de ne pas répondre directement à ce message automatique',
 	'nom_meta_utilisateur' => 'Nom',
 	'nombre_fois' => '@nombre@ fois',
 	'non_implemente' => 'Fonctionnalité non encore implémentée !',
+	'nouveaux_inscrits' => 'Nouveaux visiteurs jamais connecté',
 
 
 // O

@@ -15,23 +15,23 @@
 					<label><:ecrire:info_auteurs:></label>
 					<div class="choix">
 						<input type="checkbox" name="imp[]" value="nouveau" id="imp_nouveau" [(#ENV{nombre_statuts_nouveau}|non)disabled="disabled" ]/>
-						<label for="imp_nouveau"><!--<:ecrire:info_statut_auteur_autre:>--> <:perso:nouveau:> (#ENV{nombre_statuts_nouveau})</label>
+						<label for="imp_nouveau"><:asso:nouveaux_inscrits:> ([(#ENV{nombre_statuts_nouveau}|intval)])</label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="imp[]" value="6forum" id="imp_6forum" [(#ENV{nombre_statuts_6forum}|non)disabled="disabled" ]/>
-						<label for="imp_6forum"><:ecrire:item_choix_visiteurs:> (#ENV{nombre_statuts_6forum})</label>
+						<label for="imp_6forum"><:ecrire:item_choix_visiteurs:> ([(#ENV{nombre_statuts_6forum}|intval)])</label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="imp[]" value="1comite" id="imp_1comite" [(#ENV{nombre_statuts_1comite}|non)disabled="disabled" ]/>
-						<label for="imp_1comite"><:ecrire:item_choix_redacteurs:> (#ENV{nombre_statuts_1comite})</label>
+						<label for="imp_1comite"><:ecrire:item_choix_redacteurs:> ([(#ENV{nombre_statuts_1comite}|intval)])</label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="imp[]" value="0minirezo" id="imp_0minirezo" [(#ENV{nombre_statuts_0minirezo}|non)disabled="disabled" ]/>
-						<label for="imp_0minirezo"><:ecrire:item_choix_administrateurs:> (#ENV{nombre_statuts_0minirezo})</label>
+						<label for="imp_0minirezo"><:ecrire:item_choix_administrateurs:> ([(#ENV{nombre_statuts_0minirezo}|intval)])</label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="tous" value="tous" id="sync_t" onclick="var currentVal = this.checked; var checkboxList = document.getElementsByName('imp[]'); for (var i in checkboxList) {checkboxList[i].checked=currentVal;}" />
-						<label for="sync_t"><:spip:icone_tous_auteur:></label>
+						<label for="sync_t"><:spip:icone_tous_auteur:> ([(#ENV{nombre_statuts_0minirezo}|plus{#ENV{nombre_statuts_1comite}}|plus{#ENV{nombre_statuts_6forum}}|plus{#ENV{nombre_statuts_nouveau}}|plus{#ENV{nombre_statuts_autres})])</label>
 					</div>
 				</li>
 				<li class="editer_forcer">
