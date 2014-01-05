@@ -1,0 +1,50 @@
+<h1><:lister_config:titre_lister_exec:></h1>
+<p><:lister_config:description_lister_exec:></p>
+<div class="nettoyeur"></div>
+
+#SET{regex,"/([^/]*)$"}
+#SET{liste,#ARRAY}
+#SET{liste_exec,#ARRAY}
+#SET{blackliste,#ARRAY}
+
+<B_contenu_exec>
+<BOUCLE_contenu_exec(DATA) {source pregfiles, #EVAL{_DIR_RACINE}, '.*/squelettes/contenu/.*\.html'}>#SET{exec,#VALEUR|match{#GET{regex}}|replace{"/",''}|replace{".html",''}}
+[(#GET{exec}|match{'_edit$'}|oui)
+#SET{blackliste,#GET{blackliste}|push{#GET{exec}}}
+#SET{blackliste,#GET{blackliste}|push{#GET{exec}|replace{'_edit',''}}}
+]
+#SET{liste,#GET{liste}|push{#GET{exec}}}
+</BOUCLE_contenu_exec>
+</B_contenu_exec>
+
+<B_exec>
+<BOUCLE_exec(DATA) {source pregfiles, #EVAL{_DIR_RACINE}, '.*/exec/.*\.php'}>#SET{exec,#VALEUR|match{#GET{regex}}|replace{"/",''}|replace{".php",''}}
+[(#GET{exec}|match{'_edit$'}|oui)
+#SET{blackliste,#GET{blackliste}|push{#GET{exec}}}
+#SET{blackliste,#GET{blackliste}|push{#GET{exec}|replace{'_edit',''}}}
+]
+#SET{liste_exec,#GET{liste_exec}|push{#GET{exec}}}
+</BOUCLE_exec>
+</B_exec>
+
+[(#SET{liste,#GET{liste}|array_diff{#GET{blackliste}}})]
+[(#SET{liste_exec,#GET{liste_exec}|array_diff{#GET{liste}}})]
+
+<B_liste>
+<h2><:lister_config:intertitre_exec_contenu:></h2>
+<ul class="liste-items">
+<BOUCLE_liste(DATA) {source table, #GET{liste}} {par valeur}>
+<li class="item"><a href="#URL_ECRIRE{#VALEUR}">#VALEUR</a></li>
+</BOUCLE_liste>
+</ul>
+</B_liste>
+
+
+<B_liste_exec>
+<h2><:lister_config:intertitre_exec:></h2>
+<ul class="liste-items">
+<BOUCLE_liste_exec(DATA) {source table, #GET{liste_exec}} {par valeur}>
+<li class="item"><a href="#URL_ECRIRE{#VALEUR}">#VALEUR</a></li>
+</BOUCLE_liste_exec>
+</ul>
+</B_liste_exec>
