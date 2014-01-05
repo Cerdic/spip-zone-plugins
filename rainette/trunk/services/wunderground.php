@@ -372,9 +372,9 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
 
 		// Code meteo, resume et icone natifs au service
-		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';
-		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'] : '';
-		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'] : '';
+		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
+		$tableau['icon_meteo'] = (isset($conditions['icon_url'])) ? $conditions['icon_url'][0]['text'] : '';
+		$tableau['desc_meteo'] = (isset($conditions['weather'])) ? $conditions['weather'][0]['text'] : '';
 	}
 
 	return $tableau;
