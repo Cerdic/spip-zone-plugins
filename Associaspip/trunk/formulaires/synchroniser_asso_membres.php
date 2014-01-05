@@ -14,9 +14,12 @@ if (!defined('_ECRIRE_INC_VERSION'))
 function formulaires_synchroniser_asso_membres_charger_dist() {
 	sinon_interdire_acces( autoriser('gerer_membres', 'association') );
 	$contexte['_action'] = array('synchroniser_asso_membres',''); // pour passer securiser action
-	$q = sql_select('statut, COUNT(statut) AS nbr', 'spip_auteurs', "(statut IN ('0minirezo', '1comite', '6forum', 'nouveau')) OR (bio IN ('0minirezo', '1comite', '6forum', 'nouveau'))", 'statut');
+	$q = sql_select('statut, COUNT(statut) AS nbr', 'spip_auteurs', "statut IN ('0minirezo', '1comite', '6forum', 'nouveau')", 'statut');
 	while ( $rep = sql_fetch($q) )
 		$contexte['nombre_statuts_'.$rep['statut']] = intval($rep['nbr']);
+#	$contexte['nombre_statuts_6forum'] += sql_countsel('spip_auteurs', "bio LIKE '6forum'");
+#	$contexte['nombre_statuts_nouveau'] += sql_countsel('spip_auteurs', "bio LIKE 'nouveau'");
+	$contexte['nombre_statuts_autres'] = sql_countsel('spip_auteurs', "(statut NOT IN ('0minirezo', '1comite', '6forum', '5poubelle', 'nouveau')) AND (bio NOT IN ('0minirezo', '1comite', '6forum', '5poubelle', 'nouveau'))");
 	$contexte['nombre_statuts_autres'] = sql_countsel('spip_auteurs', "(statut NOT IN ('0minirezo', '1comite', '6forum', '5poubelle', 'nouveau')) AND (bio NOT IN ('0minirezo', '1comite', '6forum', '5poubelle', 'nouveau'))");
 
 	return $contexte;
