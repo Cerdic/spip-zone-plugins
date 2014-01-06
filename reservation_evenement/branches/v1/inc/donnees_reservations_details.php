@@ -2,7 +2,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return; 
 
 function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
-	        spip_log($set,'teste');
+
     if(count($set)>0){
         include_spip('inc/filtres');
         $reservations_details=sql_fetsel('*','spip_reservations_details','id_reservations_detail='.$id_reservations_detail);
@@ -41,7 +41,6 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
         	
             /*Existence d'un prix via le plugin Shop Prix https://github.com/abelass/prix_objets_objet */
             if($prix_objets=test_plugin_actif('prix_objets')){
-            	spip_log($id_evenement,'teste');
                 $fonction_prix = charger_fonction('prix', 'inc/');
                 $fonction_prix_ht = charger_fonction('ht', 'inc/prix');
                  /*si le plugin déclinaison est active il peut y avoir plusieurs prix par évenement*/
