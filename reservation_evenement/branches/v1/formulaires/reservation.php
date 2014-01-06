@@ -65,7 +65,7 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
     $valeurs['new_pass2']=_request('new_pass2');  
     $valeurs['new_login']=_request('new_login');       
 	$valeurs['statut'] = 'encours'; 
-    
+	   
     //les champs extras auteur
     include_spip('cextras_pipelines');
     
@@ -158,7 +158,7 @@ function formulaires_reservation_traiter_dist($id='',$id_article=''){
     include_spip('inc/session');    
     include_spip('inc/config');
     $config=lire_config('reservation_evenement');
-    $statut = $config['statut_defaut']?$config['statut_defaut']:'encours'; 
+    $statut = $config['statut_defaut']?$config['statut_defaut']:'attente'; 
 
     //Créer la réservation
     $action=charger_fonction('editer_objet','action');

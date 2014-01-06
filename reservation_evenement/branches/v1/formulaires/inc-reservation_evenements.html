@@ -4,14 +4,23 @@
     [[(#COMPTEUR_BOUCLE|!={1}|oui)</li><li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>]
     <strong>[(#VALEUR{date_debut}|nom_jour), ](#VALEUR{date_debut}|affdate{d}|unique).[ (#VALEUR{date_debut}|nom_mois)][ (#VALEUR{date_debut}|affdate{Y})]</strong> ]
     <div class="choix">
-        <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{id_evenement}}|oui) checked="checked"]/> #VALEUR{prix}
-        <label for="id_evenement_#ID_EVENEMENT">
-            <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>
-            [(#VALEUR{date_debut}|affdate{G:i}|>{0:00}|oui)
-               [(#VALEUR{date_debut}|affdate{G:i})][(#VALEUR{date_debut}|affdate{G:i}|!={[(#VALEUR{date_fin}|affdate{G:i})]}|oui)[ - (#VALEUR{date_fin}|affdate{G:i})]]][, (#VALEUR{lieu})]
+        <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{id_evenement}}|oui) checked="checked"]/> 
+        <label for="id_evenement_#ID_EVENEMENT">  
+            <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>      
+            ([(#VALEUR{date_debut}|affdate{G:i}|>{0:00}|oui)
+            [(#DATE_DEBUT|affdate{G:i})][(#VALEUR{date_debut}|affdate{G:i}|!={[(#VALEUR{date_fin}|affdate{G:i})]}|oui)[ - (#VALEUR{date_fin}|affdate{G:i})]]][, (#VALEUR{lieu})])
+            <BOUCLE_prix(PRIX_OBJETS){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
+             : <span class="prix">#PRIX</span>
+            </BOUCLE_prix>
+                <BOUCLE_prix_article(PRIX_OBJETS){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
+                 : <span class="prix">#PRIX</span>
+                </BOUCLE_prix_article>
+                    [ : <span class="prix">(#PRIX)</span>]  
+                 <//B_prix_article>                           
+            <//B_prix>                                        
     </label>
     </div>
 </BOUCLE_art_or>
 </li>
 </B_art_or>  
-      <!--extra_evenements-->
+<!--extra_evenements-->

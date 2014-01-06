@@ -16,15 +16,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'designation' => 'Beschreibung',
-	'details_reservation' => 'Details der Anmeldung:',
+	'details_reservation' => 'Anmeldungs Item:',
 
 	// E
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
+	'explication_envoi_differe' => 'Eine Status Veränderung eines Ameldungs Items zu
+    <div><b>"@statuts@"</b></div> lösst das Senden eines Benachrichtigungsmail aus!',
+	'explication_envoi_differe_detail' => 'Die Statusveränderung zu <div><b>"@statuts@"</b></div> lösst das Senden einer Benachrichtigungsmail aus!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
 
 	// I
+	'icone_cacher' => 'Ausblenden',
 	'icone_creer_reservation' => 'Eine Anmeldung erstellen',
-	'icone_modifier_reservation' => 'Diese Anmeldung verändern',
+	'icone_modifier_reservation' => 'Diese Anmeldung bearbeiten',
 	'info_1_reservation' => 'Eine Anmeldung',
 	'info_aucun_reservation' => 'Keine Anmeldung',
 	'info_nb_reservations' => '@nb@ Anmeldungen',

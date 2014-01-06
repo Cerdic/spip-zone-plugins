@@ -142,7 +142,6 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
             }
         }
      }
-
     // Si on n'est pas dans le cas d'une création, on récupère les détails attachées ' la réservation
     if(!is_array($evenements) OR (is_array($evenements) AND count($evenements)==0)){
             
