@@ -56,7 +56,7 @@ function Footer()
 	$this->SetTextColor(0,0,0);
 
 	// Copyright
-	$this->Cell(0,6,"Copyright © ".$conf_nom_site ,0,0,'L',0,$conf_url_site );
+	$this->Cell(0,6,texte_script(pdf_first_clean(_T('articlepdf:copyright'))).$conf_nom_site ,0,0,'L',0,$conf_url_site );
 	
 	//Numéro de page
 	$this->SetX($this->w-$this->rMargin*2-5);
@@ -80,7 +80,7 @@ function GenerateTitlePage()
 	
 	$this->SetFont('times','',12);
 	$this->SetXY($this->rMargin+25,$this->tMargin+6);
-	$this->MultiCell(0,5,"Extrait du " . $site);
+	$this->MultiCell(0,5, texte_script(pdf_first_clean(_T('articlepdf:extrait_de'))) . $site);
 	
 	$this->SetXY($this->rMargin+25,$this->tMargin+14);
 	$this->PutLink($conf_url_site,$conf_url_site);
@@ -125,14 +125,14 @@ function GenerateTitlePage()
 	{
 		$this->SetXY(110,184);
 		$DateMiseEnLigne = $this->unhtmlentities($DateMiseEnLigne);
-		$this->MultiCell(0,6,"Date de mise en ligne : $DateMiseEnLigne",0,'L',0);
+		$this->MultiCell(0,6, texte_script(pdf_first_clean(_T('articlepdf:date_de_mise_en_ligne')))."$DateMiseEnLigne",0,'L',0);
 	}
 	
 	if ($DateParution) 
 	{
 		$this->SetXY(110,190);
 		$DateParution = $this->unhtmlentities($DateParution);
-		$this->MultiCell(0,6,"Date de parution : $DateParution",0,'L',0);
+		$this->MultiCell(0,6,texte_script(pdf_first_clean(_T('articlepdf:date_de_parution')))."$DateParution",0,'L',0);
 	}
 	
 
@@ -143,7 +143,7 @@ function GenerateTitlePage()
 		$this->SetFont('helvetica','B',10) ;
 		$this->SetXY($this->rMargin+5,220);
 		$this->SetFont('helvetica', 'BU', 10);
-		$this->Write(5, 'Description :');
+		$this->Write(5, texte_script(pdf_first_clean(_T('articlepdf:description'))));
 		$this->Ln();
 		$this->SetFont('times', '', 8);
 		$this->WriteHTML($descriptif,5) ;
@@ -178,7 +178,7 @@ function GenerateText()
 	{
 		//ps
 		$this->SetFont('','I',8);
-		$this->WriteHTML("Post-scriptum : ",4);
+		$this->WriteHTML(texte_script(pdf_first_clean(_T('articlepdf:post_scriptum'))),4);
 		$this->WriteHTML($ps,4);
 		$this->Ln(8);
 	}

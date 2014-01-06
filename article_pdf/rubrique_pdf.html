@@ -40,7 +40,7 @@
 	[$ps='(#PS|pdf_first_clean|texte_script)';]
 	[$notes='(#NOTES|pdf_first_clean|texte_script)';]
 
-	$copyright = '[(#REM|texte{'Copyright (c) '}|pdf_first_clean|texte_script)][(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)][(#REM|texte{'\nTous droits réservés'}|pdf_first_clean|texte_script)]';
+	$copyright = '[(#VAL{articlepdf:copyright}|_T|pdf_first_clean|texte_script)][(#NOM_SITE_SPIP|pdf_first_clean|supprimer_tags|texte_script)][(#VAL{articlepdf:tous_droits_reserves}|_T|pdf_first_clean|texte_script)]';
 
 	$id_rubrique = "#ID_RUBRIQUE";
 
