@@ -5,7 +5,7 @@
     <version>0.7.0</version>
     <etat>test</etat>
     <categorie>outil</categorie>
-    
+    <slogan>Formidable : vous avez le choix de la couleur</slogan>
 	<description>
 		Une saisie de formulaire pour proposer plusieurs choix de couleurs.
 	</description>
