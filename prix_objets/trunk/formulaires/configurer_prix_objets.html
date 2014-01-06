@@ -3,7 +3,14 @@
 #SET{config,#CONFIG{prix_objets,#ARRAY}
 [(#VAL{inc/cookie}|include_spip|oui)]
 
-[(#GET{config}?{#SET{selected,#GET{config}|table_valeur{devises}},#SET{selected,#ARRAY}})#SET{selected,#GET{config}|table_valeur{devises}}]
+
+[(#GET{config}|table_valeur{devises}|?{
+    #SET{selected,#GET{config}|table_valeur{devises}}
+     ,
+     #SET{selected,#ARRAY}     
+})]
+
+
 
 #SET{devise_default,#ENV{devise_default,#GET{config}|table_valeur{devise_default}}
 
