@@ -7,13 +7,13 @@
 		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?}{objet ?}{id_objet ?}{par date}>
 		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)][(#ID_OBJET|me{#OBJET,#ID_AUTEUR})me]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE, thread=oui} />
-			[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+			[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="nofollow"><:forum:repondre_message:></a></p>]
 			<B_comments-fils>
 			<ul class="comments-ul comments-items">
 				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
 				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)][(#ID_OBJET|me{#OBJET,#ID_AUTEUR})me]">
 					<INCLURE{fond=inclure/comment,id_forum, thread=oui} />
-					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="nofollow"><:forum:repondre_message:></a></p>]
 					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
 				</li>
 				</BOUCLE_comments-fils>
