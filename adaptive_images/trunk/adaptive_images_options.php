@@ -43,49 +43,63 @@ $AdaptiveImages = SPIPAdaptiveImages::getInstance();
 // utiliser le progressive rendering sur PNG et GIF si pas de JS
 if (defined('_ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING'))
 	$AdaptiveImages->nojsPngGifProgressiveRendering = _ADAPTIVE_IMAGES_NOJS_PNGGIF_PROGRESSIVE_RENDERING;
-// couleur de background pour les images lowsrc
-if (defined('_ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR'))
-	$AdaptiveImages->lowsrcJpgBgColor = _ADAPTIVE_IMAGES_LOWSRC_JPG_BG_COLOR;
-// qualite des images lowsrc
-if (defined('_ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY'))
-	$AdaptiveImages->lowsrcJpgQuality = _ADAPTIVE_IMAGES_LOWSRC_JPG_QUALITY;
-// qualite de compression JPG pour les images 1.5x et 2x (on peut comprimer plus)
-if (defined('_ADAPTIVE_IMAGES_15x_JPG_QUALITY'))
-	$AdaptiveImages->x15JpgQuality = _ADAPTIVE_IMAGES_15x_JPG_QUALITY;
-if (defined('_ADAPTIVE_IMAGES_20x_JPG_QUALITY'))
-	$AdaptiveImages->x20JpgQuality = _ADAPTIVE_IMAGES_20x_JPG_QUALITY;
-// Breakpoints de taille d'ecran pour lesquels on generent des images
-if (defined('_ADAPTIVE_IMAGES_DEFAULT_BKPTS'))
-	$AdaptiveImages->defaultBkpts = explode(",",_ADAPTIVE_IMAGES_DEFAULT_BKPTS);
-// les images 1x sont au maximum en _ADAPTIVE_IMAGES_MAX_WIDTH_1x px de large dans la page
-if (defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x'))
-	$AdaptiveImages->maxWidth1x = _ADAPTIVE_IMAGES_MAX_WIDTH_1x;
-// on ne traite pas les images de largeur inferieure a _ADAPTIVE_IMAGES_MIN_WIDTH_1x px
-if (defined('_ADAPTIVE_IMAGES_MIN_WIDTH_1x'))
-	$AdaptiveImages->minWidth1x = _ADAPTIVE_IMAGES_MIN_WIDTH_1x;
-// Pour les ecrans plus petits, c'est la version mobile qui est fournie (recadree)
-if (defined('_ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION'))
-	$AdaptiveImages->maxWidthMobileVersion = _ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION;
+
+$settings = (isset($GLOBALS['meta']['adaptive_images'])?unserialize($GLOBALS['meta']['adaptive_images']):false);
+if ($settings){
+	// couleur de background pour les images lowsrc
+	if (isset($settings['lowsrc_jpg_bg_color']) AND $settings['lowsrc_jpg_bg_color'])
+		$AdaptiveImages->lowsrcJpgBgColor = $settings['lowsrc_jpg_bg_color'];
+	// qualite des images lowsrc
+	if (isset($settings['lowsrc_jpg_quality']) AND $q=intval($settings['lowsrc_jpg_quality']))
+		$AdaptiveImages->lowsrcJpgQuality= $q;
+	// qualite de compression JPG pour les images 1x
+	if (isset($settings['10x_jpg_quality']) AND $q=intval($settings['10x_jpg_quality']))
+		$AdaptiveImages->x10JpgQuality = $q;
+	// qualite de compression JPG pour les images 1.5x
+	if (isset($settings['15x_jpg_quality']) AND $q=intval($settings['15x_jpg_quality']))
+		$AdaptiveImages->x15JpgQuality = $q;
+	// qualite de compression JPG pour les images 2x
+	if (isset($settings['20x_jpg_quality']) AND $q=intval($settings['20x_jpg_quality']))
+		$AdaptiveImages->x20JpgQuality = $q;
+	// Breakpoints de taille d'ecran pour lesquels on generent des images
+	if (isset($settings['default_bkpts']) AND $settings['default_bkpts'])
+		$AdaptiveImages->defaultBkpts = explode(",",$settings['default_bkpts']);
+	// les images 1x sont au maximum en max_width_1x px de large dans la page
+	if (isset($settings['max_width_1x']) AND $v=intval($settings['max_width_1x']))
+		$AdaptiveImages->maxWidth1x = $v;
+	// Pour les ecrans plus petits, c'est la version mobile qui est fournie (recadree)
+	if (isset($settings['max_width_mobile_version']) AND $v=intval($settings['max_width_mobile_version']))
+		$AdaptiveImages->maxWidthMobileVersion = $v;
+
+	// on ne traite pas les images de largeur inferieure a min_width_1x px
+	if (isset($settings['min_width_1x']) AND $v=intval($settings['min_width_1x']))
+		$AdaptiveImages->minWidth1x = $v;
+	// on ne traite pas les images de poids inferieur a min_filesize ko
+	if (isset($settings['min_filesize']) AND $v=intval($settings['min_filesize']))
+		$AdaptiveImages->minFileSize = $v*1024;
+
+
+	// Pour generer chaque variante d'image uniquement quand elle est demandee pour la premiere fois
+	// par defaut false : on genere toutes les images au calcul de la page (mais timeout possible)
+	// pour passer a true : ajouter la rewrite rule suivante dans .htaccess
+	/*
+	###
+	# Adaptive Images
+
+	RewriteRule \badapt-img/(\d+/\d\dx/.*)$ spip.php?action=adapt_img&arg=$1 [QSA,L]
+
+	# Fin des Adaptive Images
+	###
+	*/
+	if (isset($settings['on_demand_production']) AND $settings['on_demand_production'])
+		$AdaptiveImages->onDemandImages = true;
+}
+
+
 
 // GD memory limit
 if (defined('_IMG_GD_MAX_PIXELS'))
 	$AdaptiveImages->maxImagePxGDMemoryLimit = _IMG_GD_MAX_PIXELS;
-
-// Pour generer chaque variante d'image uniquement quand elle est demandee pour la premiere fois
-// par defaut false : on genere toutes les images au calcul de la page (mais timeout possible)
-// pour passer a true : ajouter la rewrite rule suivante dans .htaccess
-/*
-###
-# Adaptive Images
-
-RewriteRule \badapt-img/(\d+/\d\dx/.*)$ spip.php?action=adapt_img&arg=$1 [QSA,L]
-
-# Fin des Adaptive Images
-###
-*/
-define('_ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION',true);
-if (defined('_ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION'))
-	$AdaptiveImages->onDemandImages = _ADAPTIVE_IMAGES_ON_DEMAND_PRODUCTION;
 
 // dossier de stockage des images adaptatives
 $AdaptiveImages->destDirectory = _DIR_VAR . "adapt-img/";

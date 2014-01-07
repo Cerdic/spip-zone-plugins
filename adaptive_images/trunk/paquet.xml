@@ -1,7 +1,7 @@
 <paquet
 	prefix="adaptive_images"
 	categorie="multimedia"
-	version="1.5.0"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/adaptive_images-32.png"
