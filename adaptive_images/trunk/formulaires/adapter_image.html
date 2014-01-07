@@ -2,9 +2,9 @@
 <div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{mode}' id='formulaire_#FORM-#ENV{mode}-#ENV{id,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[<p class="notice">(#ENV*{_warning_ratio})</p>]
 	[(#ENV{editable})
 	<form action="#ENV{action}#formulaire_annexer_document-#ENV{mode}-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
+		[<p class="notice">(#ENV*{_warning_ratio})</p>]
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
 			<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">

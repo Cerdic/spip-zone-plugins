@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 L\'image doit faire au moins @width_hr@px de large.</small>',
 	'erreur_largeur_mobileview' => 'Cette image est trop petite. La version mobile doit être plus large que @width@px.',
 	'warning_ratio_mobileview' => 'Attention, cette variante n\'a pas les mêmes proportions que l\'image originale. Taille attendue : <b>@size1@</b> ou <b>@size2@</b>',
+	'bouton_recadrer' => 'Recadrer',
 
 	'titre_configurer' => 'Configurer les Images Adaptatives',
 	'explication_configuration_doc' => 'Voir la <a href="http://contrib.spip.net/4458">documentation</a> pour le détail de la configuration.',

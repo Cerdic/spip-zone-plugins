@@ -33,6 +33,7 @@ function formulaires_adapter_image_charger_dist($id_document,$mode){
 			$w2 = intval(round($annexe['hauteur']*$doc['largeur']/$doc['hauteur']));
 			$size2 = "{$w2} x ".$annexe['hauteur']." pixels";
 			$valeurs['_warning_ratio'] = _T('adaptive_images:warning_ratio_mobileview',array('size1'=>$size1,'size2'=>$size2));
+			$valeurs['_warning_ratio'] .= " <input type='submit' name='recadrer' value='".attribut_html(_T('adaptive_images:bouton_recadrer'))."' />";
 		}
 	}
 	$valeurs['annexe'] = $annexe;
@@ -47,6 +48,9 @@ function formulaires_adapter_image_verifier_dist($id_document,$mode){
 	$mode = preg_replace(',\W,','',$mode);
 	$erreurs = array();
 	if (_request('supprimer')){
+
+	}
+	elseif (_request('recadrer')){
 
 	}
 	else {
@@ -68,6 +72,33 @@ function formulaires_adapter_image_traiter_dist($id_document,$mode){
 		if ($id)
 			$supprimer_document($id);
 		$res['message_ok'] = _T('adaptive_images:variante_'.$mode.'_supprimee');
+	}
+	elseif (_request('recadrer')){
+		$doc = sql_fetsel('id_document,mode,extension,largeur,hauteur','spip_documents','id_document='.intval($id_document));
+		$h2 = intval(round($annexe['largeur']*$doc['hauteur']/$doc['largeur']));
+		$w = $annexe['largeur'];
+		$h = $annexe['hauteur'];
+		if ($h2<$annexe['hauteur'])
+			$h = $h2;
+		else
+			$w = intval(round($annexe['hauteur']*$doc['largeur']/$doc['hauteur']));
+
+		include_spip("filtres/images_transforme");
+		include_spip("inc/documents");
+		$file = get_spip_doc($annexe['fichier']);
+		if (function_exists("image_recadre")){
+			$ir = extraire_attribut(image_recadre($file,$w,$h),'src');
+			list($h,$w) = taille_image($ir);
+			if ($ir AND $h AND $w){
+				@unlink($file);
+				@rename($ir,$file);
+				$set = array(
+					"hauteur" => $h,
+					"largeur" => $w,
+				);
+				sql_updateq("spip_documents",$set,"id_document=".intval($annexe['id_document']));
+			}
+		}
 	}
 	else {
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
@@ -106,9 +137,10 @@ function inc_verifier_document_mode_mobileview_dist($infos){
 
 function adaptive_images_width_from_mode($mode, &$valeurs){
 
+	include_spip("inc/config");
 	switch ($mode){
 		case 'mobileview':
-			$valeurs['_width'] = _ADAPTIVE_IMAGES_MAX_WIDTH_MOBILE_VERSION;
+			$valeurs['_width'] = lire_config("adaptive_images/max_width_mobile_version",320);
 			break;
 		default:
 			$valeurs['_width'] = 0;
