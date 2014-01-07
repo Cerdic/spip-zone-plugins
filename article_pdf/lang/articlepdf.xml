@@ -1,0 +1,12 @@
+<traduction module="articlepdf" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/article_pdf/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/articlepdf?lang_cible=de" total="8" traduits="1" relire="0" modifs="0" nouveaux="7" pourcent="12.50">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/articlepdf?lang_cible=en" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/articlepdf?lang_cible=fr" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/articlepdf?lang_cible=nl" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
+</traduction>
