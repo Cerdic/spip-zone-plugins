@@ -4,28 +4,26 @@
 <BOUCLE_art_or(DATA){source tableau,#ENV{evenements}}>
     #SET{prix,#VALEUR{prix}} 
     #SET{id_article,#ID_ARTICLE}
-    [[(#COMPTEUR_BOUCLE|!={1}|oui)</li><li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>]
-    <strong>[(#VALEUR{date_debut}|nom_jour), ](#VALEUR{date_debut}|affdate{d}|unique).[ (#VALEUR{date_debut}|nom_mois)][ (#VALEUR{date_debut}|affdate{Y})]</strong> ]
+    [(#COMPTEUR_BOUCLE|!={1}|oui)</li><li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>]
+    <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>                      
+    <strong>([(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})])</strong> 
     <div class="choix">
         <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{id_evenement}}|oui) checked="checked"]/> 
         <label for="id_evenement_#ID_EVENEMENT">  
-            <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>      
-            ([(#VALEUR{date_debut}|affdate{G:i}|>{0:00}|oui)
-            [(#DATE_DEBUT|affdate{G:i})][(#VALEUR{date_debut}|affdate{G:i}|!={[(#VALEUR{date_fin}|affdate{G:i})]}|oui)[ - (#VALEUR{date_fin}|affdate{G:i})]]][, (#VALEUR{lieu})])
             [(#REM) Si le plugin prix objets eest activé on regarde si il y a un prix attaché à l'évenement]
             <BOUCLE_prix(PRIX_OBJETS?){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
-             : <span class="prix">#PRIX</span>
+             #PRIX
             </BOUCLE_prix>
                 [(#REM) ou à l'article]
                 <BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
-                 : <span class="prix">#PRIX</span>
+                #PRIX
                 </BOUCLE_prix_article>
                  [(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]
                     <BOUCLE_art(ARTICLES){id_article=#GET{id_article}}{si #GET{prix}|>{0}|non}>
-                        [ : <span class="prix">(#PRIX)</span>]
+                        [(#PRIX)]
                     </BOUCLE_art>
                           [(#REM) sinon on prend le prix du champs prix de l'événement]  
-                          [ : <span class="prix">(#GET{prix}|prix_formater)</span>]                            
+                          [(#GET{prix}|prix_formater)]                            
                     <//B_art>
                  <//B_prix_article>                           
             <//B_prix>                                        
