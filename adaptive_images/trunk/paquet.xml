@@ -10,7 +10,7 @@
 
 	<nom>Adaptive Images</nom>
 
-	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cedric</auteur>
+	<auteur lien='http://www.nursit.com/Cedric-Morin'>Cédric</auteur>
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="affiche_milieu" />
