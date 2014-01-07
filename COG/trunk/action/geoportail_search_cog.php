@@ -40,9 +40,16 @@ function action_geoportail_search_cog_dist()
 	include_spip('inc/geoupload');
 
 	function select_match ($q, $zone, $code, $extended='normal')
-	{	switch ($extended)
+	{	
+		
+		$q=str_replace(array('é','è','à','œ'),array('e','e','a','oe'),$q);
+		$q = utf8_decode($q);
+		$q2=str_replace(array('oe'),array('œ'),$q);
+		
+		
+		switch ($extended)
 		{	// Recherche etendue
-			case 'extended': $query = "MATCH(nom) AGAINST ('*".addslashes($q)."*' IN BOOLEAN MODE) "; break;
+			case 'extended': $query = "MATCH(nom) AGAINST ('*".addslashes($q)."*' IN BOOLEAN MODE) OR MATCH(nom) AGAINST ('*".addslashes($q2)."*' IN BOOLEAN MODE)"; break;
 			// recherche stricte mais avec notion de pertinence
 			case 'normal': $query = "MATCH(nom) AGAINST ('".addslashes($q)."') "; break;
 			// Strict
@@ -51,7 +58,6 @@ function action_geoportail_search_cog_dist()
 		// Limiter la recheche
 		if ($zone && $zone !='') $query .= " AND departement = '".$zone."' ";
 		
-
 		// Pas trop !
 		$query .= " LIMIT 0,100";
 		// Lancer la recherche
@@ -77,7 +83,7 @@ function action_geoportail_search_cog_dist()
 	
 	// Recherche sur un toponyme
 	if ($q)
-	{	$q = utf8_decode($q);
+	{	
 		echo "[";//.$q."\n";
 
 		// Recherche de la commune 
