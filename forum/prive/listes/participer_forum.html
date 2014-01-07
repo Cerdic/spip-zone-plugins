@@ -39,7 +39,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 				})]
 				</BOUCLE_doc>
 				[(#ENV{repondre,'oui'}|=={non}|non)
-				[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:repondre_message:></a></p>]
+				[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="nofollow"><:repondre_message:></a></p>]
 				]
 			</div>
 		</div>
