@@ -10,7 +10,7 @@
 <BOUCLE_membresHorsGroupe(asso_membres asso_fonctions){statut_interne!=sorti}{asso_membres.id_auteur!=asso_fonctions.id_auteur}{!id_groupe=#ENV{id_groupe}}{par nom_famille,prenom}{pagination 40}>
 		<li class="liste_auteurs">
 			<div class="choix">
-				<input type="checkbox" name="id_auteurs[]" value="#ID_AUTEUR" id="auteur#ID_AUTEUR" />
+				<input type="checkbox" name="fonctions[#ID_AUTEUR]" value="" id="auteur#ID_AUTEUR" />
 				<label for="auteur#ID_AUTEUR">[(#SEXE|association_formater_nom{#PRENOM, #NOM_FAMILLE})]</label>
 			</div>
 		</li>

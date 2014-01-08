@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_fonctions2groupe_charger_dist($id_groupe=0) {
-	$contexte['id_groupe'] = $id_groupe;
+	$contexte['id_groupe'] = $id_groupe; // passer l'argument dans l'environnement
 	$contexte['_action'] = array('editer_asso_fonctions', $id_groupe); // pour passer securiser action
 
 	return $contexte;
@@ -32,11 +32,7 @@ function formulaires_editer_asso_fonctions2groupe_traiter($id_groupe=0) {
 	$res['message_erreur'] = $action_membres($id_groupe);
 	$res['message_ok'] = '';
 	$id_groupe = intval($id_groupe);
-	if ($id_groupe>0 && $id_groupe<100) {
-		$res['redirect'] = generer_url_ecrire('edit_groupe_autorisations', 'id='.$id_groupe);
-	} else {
-		$res['redirect'] = generer_url_ecrire('edit_groupe', 'id='.$id_groupe);
-	}
+	$res['redirect'] = generer_url_ecrire((($id_groupe>0 && $id_groupe<100)?'edit_groupe_autorisations':'edit_groupe'), 'id='.$id_groupe);
 	return $res;
 }
 

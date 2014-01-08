@@ -10,7 +10,7 @@
 <BOUCLE_membreHorsGroupes(ASSO_GROUPES asso_fonctions){!id_auteur=#ENV{id_auteur}}{id_groupe>99}{par nom}{pagination 40}>
 		<li class="liste_auteurs">
 			<div class="choix">
-				<input type="checkbox" name="id_auteurs[]" value="#ID_GROUPE" id="groupe#ID_GROUPE" />
+				<input type="checkbox" name="fonctions[#ID_GROUPE]" value="" id="groupe#ID_GROUPE" />
 				<label for="groupe#ID_GROUPE">[(#NOM)]</label>
 			</div>
 		</li>

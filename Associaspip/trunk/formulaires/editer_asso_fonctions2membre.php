@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_asso_fonctions2membre_charger_dist($id_auteur=0) {
-	$contexte['id_auteur'] = $id_auteur;
+	$contexte['id_auteur'] = $id_auteur; // passer l'argument dans l'environnement
 	$contexte['_action'] = array('editer_asso_fonctions', $id_auteur); // pour passer securiser action
 
 	return $contexte;
