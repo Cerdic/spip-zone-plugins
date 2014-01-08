@@ -55,7 +55,7 @@ function lettre_grille($chiffre) {
 
 // affiche la grille de mot croises, avec la solution au cas ou
 function affichage_grille_mc($tableau_grille, $indexJeux, $form, $solution=false){
-	$jeux_couleurs = _request('jeux_couleurs');
+	global $jeux_couleurs;
 	// les variables de la grille
 	$hauteur = sizeof($tableau_grille);
     $largeur = sizeof($tableau_grille[0]);
