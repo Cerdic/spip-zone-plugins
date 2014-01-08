@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function switcher_affichage_final($texte = ""){
 
     include_spip('inc/config');

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Affectation de la liste des squelettes disponibles
 // --------------------------------------------------
     //global
@@ -23,8 +26,9 @@
 	}
 	else {
 		$squelettes_alternatifs = array(
-		'defaut' => '',
-		'dist' => 'dist');
+			'defaut' => '',
+			'dist' => 'dist'
+		);
 	}
 
 

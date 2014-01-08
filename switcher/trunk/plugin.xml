@@ -3,7 +3,7 @@
 	<slogan>Switcheur de squelettes</slogan>
 	<auteur>Philippe Drouot, adaptation en plugin de la contrib switcher de Fil</auteur>
 	<licence>&#169; 2006, GNU/GPL</licence>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/switcher-64.png</icon>
 	<description>

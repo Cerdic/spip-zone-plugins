@@ -1,7 +1,7 @@
 <paquet
         prefix="switcher"
         categorie="maintenance"
-        version="0.2.2"
+        version="0.2.3"
         etat="test"
         compatibilite="[1.9.0;3.0.*]"
 		logo="prive/themes/spip/images/switcher-64.png"
