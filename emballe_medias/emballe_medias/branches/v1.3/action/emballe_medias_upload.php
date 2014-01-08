@@ -195,11 +195,12 @@ function action_emballe_medias_upload_dist(){
 				
 				/**
 				 * Si l'objet n'a pas de titre ou de texte, on lui donne celui du document
+				 * (à condition que l'objet auquel on lie ne soit pas lui-même un document)
 				 */
-				if(!$infos_objet['titre'])
+				if(!$infos_objet['titre'] and strcmp($objet,'document'))
 					$modification['titre'] = $infos_doc['titre'] ? $infos_doc['titre'] : $titre_doc;
 	
-				if(!$infos_objet['texte'])
+				if(!$infos_objet['texte'] and strcmp($objet,'document'))
 					$modification['texte'] = $infos_doc['descriptif'];
 				
 				objet_modifier($objet,$id_objet, $modification);

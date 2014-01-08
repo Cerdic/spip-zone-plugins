@@ -65,7 +65,7 @@
 {% } %}
 </script>
 <script type="text/javascript">
-<!--
+<!---->
 	var isUploading = false;
 	var nb_max = [(#ENV{file_upload_limite,1}|intval)];
 	var nb_files = 0;
@@ -342,7 +342,7 @@
 								that.enable();
 						}
 					});
-			   	},
+				},
 				maxFileSize : [(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100}|mult{1024}|mult{1024})],
 				autoUpload : [(#ENV{file_upload_limite}|=={1}|?{true,false})],
 				maxNumberOfFiles : #ENV{file_upload_limite,1},
@@ -429,7 +429,7 @@
 		};
 	});
 
--->
+<!---->
 </script>
 <div id="fileupload" class="formulaire_spip jfupload ui-fileupload ui-widget ui-widget-content ui-corner-all">
 	<form action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="POST" enctype="multipart/form-data">
