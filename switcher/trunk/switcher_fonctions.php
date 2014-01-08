@@ -6,7 +6,6 @@ function switcher_affichage_final($texte = ""){
 
     include_spip('inc/config');
 
-	global 	$html;
 	global $squelettes_alternatifs;
 	global $styleListeSwitcher;
 
@@ -16,10 +15,10 @@ function switcher_affichage_final($texte = ""){
 	if ($texte) {
 
         //Contrôler le cas visiteur authentifié
-	    $auteur_autorise = in_array($GLOBALS['visiteur_session']['id_auteur'],lire_config('switcher/auteurs_autorises',array())) ? true : false;
+	    $auteur_autorise = in_array($GLOBALS['visiteur_session']['id_auteur'],(function_exists('lire_config') ? lire_config('switcher/auteurs_autorises',array()) : array())) ? true : false;
 
 	    //Contrôler le cas "tout public"
-	    if (lire_config('switcher/switcher_public') == "on")
+	    if (function_exists('lire_config') && lire_config('switcher/switcher_public') == "on")
     	    $auteur_autorise = true;
 	
 		if (SWITCHER_AFFICHER || $auteur_autorise) {
@@ -32,7 +31,7 @@ function switcher_affichage_final($texte = ""){
 						}//]]>
 						</script>';	  
 			
-			// Insertion du selecteur de squelettes			
+			// Insertion du selecteur de squelettes	
 			$code.='<div id="plugin_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
 			$code.='<form action="" method="post">';
 			$code.='<fieldset style="margin:0;padding:0;border:0">';
