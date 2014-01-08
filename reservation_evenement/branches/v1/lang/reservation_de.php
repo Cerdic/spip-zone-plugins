@@ -21,8 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
 	'explication_envoi_differe' => 'Eine Status Veränderung eines Ameldungs Items zu
-    <div><b>"@statuts@"</b></div> lösst das Senden eines Benachrichtigungsmail aus!',
-	'explication_envoi_differe_detail' => 'Die Statusveränderung zu <div><b>"@statuts@"</b></div> lösst das Senden einer Benachrichtigungsmail aus!',
+    <div><strong>"@statuts@"</strong></div> lösst das Senden eines Benachrichtigungsmail aus!',
+	'explication_envoi_differe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
 
 	// I
@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_reservation' => 'Keine Anmeldung',
 	'info_nb_reservations' => '@nb@ Anmeldungen',
 	'info_reservations_auteur' => 'Die Anmeldungen dieses Authors',
+	'info_voir_reservations_poubelle' => 'Anmeldungen in Mülleimer einsehen',
 
 	// L
 	'label_date' => 'Datum:',
@@ -61,6 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Benachrichtigungen',
 	'notifications_client_explication' => 'Dem Kunden Benachrichtungen schicken?',
 	'notifications_client_label' => 'Kunde',
+	'notifications_envoi_differe' => 'Das einzeln Verschicken für den folgenden Status aktivieren :',
+	'notifications_envoi_differe_explication' => 'Erlaubt es  Benachrichtigungen für jedes einzelne Anmeldung Item zu verschicken',
 	'notifications_expediteur_administrateur_label' => 'Einen Adminsitrator auswählen:',
 	'notifications_expediteur_choix_administrateur' => 'ein Administrator',
 	'notifications_expediteur_choix_email' => 'eine Email',
@@ -112,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
 	'texte_voir' => 'einsehen',
+	'titre_envoi_differe' => 'Modus "Einzeln Verschicken" aktiviert',
 	'titre_reservation' => 'Anmeldung',
 	'titre_reservations' => 'Anmeldungen',
 

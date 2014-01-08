@@ -18,7 +18,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
      
      //Le statuts du plugin
      foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
-         $statuts[$statut]=_T($label);
+         if($statut!='encours')$statuts[$statut]=_T($label);
 		 if(in_array($statut,$quand))$statuts_selectionnees[$statut]=_T($label);
      }
      

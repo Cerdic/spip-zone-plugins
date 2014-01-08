@@ -20,15 +20,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
+	'explication_envoi_differe' => 'The modification of the status of a booking item towards
+    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
+	'explication_envoi_differe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
 	// I
+	'icone_cacher' => 'Hide',
 	'icone_creer_reservation' => 'Create a booking',
 	'icone_modifier_reservation' => 'Modify this booking',
 	'info_1_reservation' => 'One booking',
 	'info_aucun_reservation' => 'No booking',
 	'info_nb_reservations' => '@nb@ bookings',
 	'info_reservations_auteur' => 'This authors bookings',
+	'info_voir_reservations_poubelle' => 'View the Bookings in the dustbin',
 
 	// L
 	'label_date' => 'Date:',
@@ -57,6 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Alerts',
 	'notifications_client_explication' => 'Send the alerts to the customer?',
 	'notifications_client_label' => 'Client',
+	'notifications_envoi_differe' => 'Activate the separate sending of confirmation mails for the status:',
+	'notifications_envoi_differe_explication' => 'Allows to to trigger the sending of confirmation mail for each Booking item separately',
 	'notifications_expediteur_administrateur_label' => 'Select an administrator:',
 	'notifications_expediteur_choix_administrateur' => 'un administrateur',
 	'notifications_expediteur_choix_email' => 'an e-mail',
@@ -108,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
 	'texte_voir' => 'view',
+	'titre_envoi_differe' => 'Seperate modus activated',
 	'titre_reservation' => 'Booking',
 	'titre_reservations' => 'Bookings',
 

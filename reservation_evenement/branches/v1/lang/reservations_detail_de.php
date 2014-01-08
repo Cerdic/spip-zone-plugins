@@ -30,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taxe' => 'Steuern:',
 
 	// T
+	'texte_ajouter_reservations_detail' => 'Ein Anmeldung Item hinzufügen',
+	'texte_changer_statut_reservations_detail' => 'Dieses Anmeldung Item ist:',
+	'texte_creer_associer_reservations_detail' => 'Anmeldung Item anlegen und zuordnen',
 	'titre_reservations_detail' => 'Anmeldungsdetail',
 	'titre_reservations_details' => 'Anmeldungsdetails'
 );
