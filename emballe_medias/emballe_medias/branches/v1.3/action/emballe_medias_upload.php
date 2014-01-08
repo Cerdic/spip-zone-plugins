@@ -155,6 +155,11 @@ function action_emballe_medias_upload_dist(){
 			$mime = $files['Filedata']['type'];
 	
 			/**
+			 * On force la création d'un titre pour le nouveau document
+			 */
+			$files['Filedata']['titrer'] = true;
+			
+			/**
 			 * Ajout du document à l'objet en question
 			 * Si on a action_document = remplacer et un id_document, on remplace le document
 			 */
