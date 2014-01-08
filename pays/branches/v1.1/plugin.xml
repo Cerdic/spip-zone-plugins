@@ -1,0 +1,51 @@
+<plugin>
+	<nom><multi>[fr]Pays ISO 3166-1[en]Countries ISO 3166-1</multi></nom>
+	<slogan>
+		<multi>
+		[fr]Liste officielle des pays
+		[en]Official country names and codes list
+		[de]Offizielle Länderliste
+		</multi>
+	</slogan>
+
+	<auteur>Collectif SPIP, [Cyril MARION->http://www.cym.fr], [Ateliers CYM->http://www.cym.fr]</auteur>
+
+	<icon>img/pays_32x32.png</icon>
+
+	<licence>GNU/GPL</licence>
+
+	<version>1.1.0</version>
+
+	<version_base>1.2.1</version_base>
+
+	<etat>stable</etat>
+
+	<lien>http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1</lien>
+
+	<description>
+	<multi>
+	[fr]Ce plugin fournit la liste officielle des pays &#233;labor&#233;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La table des pays inclut le champ num&#233;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom du pays dans diff&#233;rents langages.
+	[en]This plugin includes the official country names and codes list provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The country table includes a primary key id_pays used by spip_geographie plugin, an ISO 3166-1 2 code as key, and country names in different languages.
+	</multi>
+	</description>
+
+	<prefix>pays</prefix>
+
+	<install>base/pays_upgrade.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pays_tables.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/pays_tables.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.0.9;3.0.99]" />
+	<utilise id="saisies" />
+
+	<categorie>divers</categorie>
+
+</plugin>

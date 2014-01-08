@@ -1,0 +1,11 @@
+	<BOUCLE_pays_code(PAYS){code = #ENV*{valeur_extra}}>
+[<div class="#ENV{champ_extra}">
+	<strong>#ENV{label_extra}</strong>
+	(#NOM|typo)
+</div>]
+	</BOUCLE_pays_code>
+[<div class="#ENV{champ_extra}">
+	<strong>#ENV{label_extra}</strong>
+	(#ENV{valeur_extra}|typo)
+</div>]
+	<//B_pays_code>
