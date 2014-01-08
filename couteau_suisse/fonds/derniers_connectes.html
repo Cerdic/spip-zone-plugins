@@ -48,7 +48,7 @@ ul.derniers_connectes a.suppr {color:#C00; font-weight:bold; }
     <div style="float:right">
     [(#EVAL{defined('_SPIP20100') && !defined('_SPIP30000')}|oui)
         <a href="#URL_ACTION_AUTEUR{auteur_poubelle,#ID_AUTEUR,#SELF#pagination_aut2}" class="suppr" title="<:texte_statut_poubelle|attribut_html:>">x</a>]
-    [(#EVAL{defined('_SPIP30000')}|oui)
+    [(#DEFINED{_SPIP30000}|oui)
         <a href="#URL_ACTION_AUTEUR{instituer_objet,auteur-#ID_AUTEUR-5poubelle,#SELF#pagination_aut2}" class="suppr" title="<:texte_statut_poubelle|attribut_html:>">x</a>]
     </div>]
     [(#VAL{'couteau:stats_auteur'}|_T{#ARRAY{icon,#GET{aide},nom,#GET{nom},date,#MAJ|cs_date_long}})]

@@ -172,7 +172,8 @@ function glossaire_parse($titre) {
 function glossaire_gogogo($texte, $mots, $limit, &$unicode) {
 	// prudence 2 : on protege TOUTES les balises HTML comprenant le mot
 	if (strpos($texte, '<')!==false)
-		$texte = preg_replace_callback(",<[^>]*(?:$mots)[^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
+		$texte = preg_replace_callback(",<[a-z][^>]*(?:$mots)[^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
+echo "lesmots : $lesmots"; static $iii; echo '<hr>TEXTE #',++$iii,'<hr>',$texte,'<hr>';
 	// prudence 3 : en iso-8859-1, (\W) comprend les accents, mais pas en utf-8... Donc on passe en unicode
 	if(($GLOBALS['meta']['charset'] != 'iso-8859-1') && !$unicode) 
 		{ $texte = charset2unicode($texte); $unicode = true; }
@@ -224,6 +225,9 @@ function cs_rempl_glossaire($texte, $liste=false) {
 		if(!$ok_regexp) 
 			spip_log(couteauprive_T('glossaire:nom').'. '.couteauprive_T('erreur_syntaxe').$titre);
 		elseif(count($les_regexp)) {
+			// prudence 2 : on protege QUELQUES balises HTML
+			if (strpos($texte, '<')!==false)
+				$texte = preg_replace_callback(",<(?:div|span|input) [^>]*>,Ui", 'glossaire_echappe_balises_callback', $texte);
 			// a chaque expression reconnue, on pose une balise temporaire cryptee
 			// ce remplacement est puissant, attention aux balises HTML ; par exemple, eviter : ,div,i
 			$texte = preg_replace_callback($les_regexp, 'glossaire_echappe_mot_callback', $texte, $limit);

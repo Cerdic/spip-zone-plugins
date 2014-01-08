@@ -15,7 +15,9 @@ cs_log("decoration_installe_dist()");
 	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();
 	foreach ($deco_balises as $balise) {
 		$balise = trim($balise);
-		if (preg_match('/^(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
+		// define('_decoration_BALISES_OK', 'quote|p'); # balises supplementaires ?
+		$preg = defined(_decoration_BALISES_OK)?'|'._decoration_BALISES_OK:''; 
+		if (preg_match('/^(span|div|auto'.$preg.')\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
 			list($auto, $div, $racc, $attr, $valeur) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]), trim($regs[4]));
 			if (defined('_SPIP20100') && $attr=='lang') {
@@ -38,7 +40,7 @@ cs_log("decoration_installe_dist()");
 					$remplace[] = $b = "</$div>"; $remplace[] = $a.$b;
 				}
 			}
-		} elseif (preg_match('/^(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
+		} elseif (preg_match('/^(span|div|auto'.$preg.')\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
 			list($auto, $div, $racc, $style) = array($regs[1]=='auto', $regs[1], trim($regs[2]), trim($regs[3]));
 			$BT[] = array($racc, $auto, $div);

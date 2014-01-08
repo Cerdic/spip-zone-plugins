@@ -24,6 +24,14 @@ function balise_CHR_dist($p) {
 	return $p;
 }
 
+function balise_DEFINED_dist($p) {
+	if (($v = interprete_argument_balise(1,$p))!==NULL){
+		$p->code = "defined($v)";
+		$p->type = 'php';
+	}
+	return $p;
+}
+
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
 function cs_introduire($texte) {
 	// liste de filtres qui sert a la balise #INTRODUCTION

@@ -688,7 +688,7 @@ function cs_get_code_php_variable($variable, $valeur) {
 // remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cs_variables['toto']['code:condition']
 // attention de bien declarer les variables a l'aide de add_variable()
 function cs_parse_code_php($code, $debut='%%', $fin='%%') {
-	global $metas_vars, $cs_variables;
+	global $metas_vars;
 	while(preg_match(",([']?)$debut([a-zA-Z_][a-zA-Z0-9_]*?)$fin([']?),", $code, $matches)) {
 		$cotes = $matches[1]=="'" && $matches[3]=="'";
 		$nom = $matches[2];
