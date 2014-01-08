@@ -11,25 +11,25 @@
 				<div class="transfer"></div>
 				<div class="time_remaining"></div>
 				<div class="statut"></div>
-	        {% if (file.error) { %}
-	            <div class="error message_erreur red"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</div>
-	        {% } else if (o.files.valid && !i) { %}
-	            <div>
-	                <div class="progress progress_container ui-progressbar .progress-animated progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-	                </div>
-	            </div>
-	            <div class="start">{% if (!o.options.autoUpload) { %}
-	                <button class="btn btn-primary">
-	                    <i class="icon-upload icon-white"></i>
-	                    <span>{%=locale.fileupload.start%}</span>
-	                </button>
-	            {% } %}</div>
-	        {% }%}
-	        <div class="cancel">{% if (!i) { %}
-	        	<button title="<:bouton_annuler:>" class="btn btn-warning "><span class="">{%=locale.fileupload.cancel%}</span></button>
-	        {% } %}</div>
-	     </div>
-    </div>
+			{% if (file.error) { %}
+				<div class="error message_erreur red"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</div>
+			{% } else if (o.files.valid && !i) { %}
+				<div>
+					<div class="progress progress_container ui-progressbar .progress-animated progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+					</div>
+				</div>
+				<div class="start">{% if (!o.options.autoUpload) { %}
+					<button class="btn btn-primary">
+						<i class="icon-upload icon-white"></i>
+						<span>{%=locale.fileupload.start%}</span>
+					</button>
+				{% } %}</div>
+			{% }%}
+			<div class="cancel">{% if (!i) { %}
+				<button title="<:bouton_annuler:>" class="btn btn-warning "><span class="">{%=locale.fileupload.cancel%}</span></button>
+			{% } %}</div>
+		 </div>
+	</div>
 {% } %}
 </script>
 
@@ -38,30 +38,30 @@
 ]
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        {% if (file.error) { %}
-            <td></td>
-            <td class="name"><span>{%=file.name%}</span></td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-        {% } else { %}
-            <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-            {% } %}</td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
-        {% } %}
-        <td class="delete">
-            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-                <i class="icon-trash icon-white"></i>
-                <span>{%=locale.fileupload.destroy%}</span>
-            </button>
-            <input type="checkbox" name="delete" value="1">
-        </td>
-    </tr>
+	<tr class="template-download fade">
+		{% if (file.error) { %}
+			<td></td>
+			<td class="name"><span>{%=file.name%}</span></td>
+			<td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+			<td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+		{% } else { %}
+			<td class="preview">{% if (file.thumbnail_url) { %}
+				<a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+			{% } %}</td>
+			<td class="name">
+				<a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+			</td>
+			<td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+			<td colspan="2"></td>
+		{% } %}
+		<td class="delete">
+			<button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+				<i class="icon-trash icon-white"></i>
+				<span>{%=locale.fileupload.destroy%}</span>
+			</button>
+			<input type="checkbox" name="delete" value="1">
+		</td>
+	</tr>
 {% } %}
 </script>
 <script type="text/javascript">
@@ -266,17 +266,17 @@
 			$('#divLoadingContent,#divLongLoading,#divAlternateContent,.swfupload').detach();
 			$('#fileupload').fileupload();
 			$('#fileupload').fileupload('option',{
-	            paramName: 'Filedata',
-	            done: function (e, data) {
-	            	var that = $(this).data('fileupload');
+				paramName: 'Filedata',
+				done: function (e, data) {
+					var that = $(this).data('fileupload');
 					isUploading = false;
 					if (data.context) {
 						var total = format_file_size(data.total);
 						data.context.find('.transfer').html(total+' / '+total);
-	                    data.context.find('.ui-progressbar').progressbar(
-	                        'value',
-	                        parseInt(100, 10)
-	                    );
+						data.context.find('.ui-progressbar').progressbar(
+							'value',
+							parseInt(100, 10)
+						);
 					}
 					jQuery('.em_charger_fichiers').tabs('enable',1);
 					nb_files++;
@@ -342,7 +342,7 @@
 								that.enable();
 						}
 					});
-	           	},
+			   	},
 				maxFileSize : [(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100}|mult{1024}|mult{1024})],
 				autoUpload : [(#ENV{file_upload_limite}|=={1}|?{true,false})],
 				maxNumberOfFiles : #ENV{file_upload_limite,1},
@@ -432,23 +432,23 @@
 -->
 </script>
 <div id="fileupload" class="formulaire_spip jfupload ui-fileupload ui-widget ui-widget-content ui-corner-all">
-    <form action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="POST" enctype="multipart/form-data">
-    	<input type="hidden" name="arg" value="#ENV{id_objet}" />
-    	<input type="hidden" name="objet" value="#ENV{objet}" />
+	<form action="[(#VAL{emballe_medias_upload}|generer_url_action|url_absolue)]" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="arg" value="#ENV{id_objet}" />
+		<input type="hidden" name="objet" value="#ENV{objet}" />
 		[<input type="hidden" name="id_rubrique" value="(#ENV{id_rubrique})" />]
 		[<input type="hidden" name="id_parent" value="(#ENV{id_parent,#ENV{id_rubrique}})" />]
 		[<input type="hidden" name="id_document" value="(#ENV{id_document})" />]
 		[<input type="hidden" name="action_document" value="(#ENV{action_document})" />]
-        <div class="fileupload-buttonbar ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-            <div class="fileinput-button" id="fileinput-button">
-                [<span>(#ENV{legende_upload,[(#ENV{file_upload_limite}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>})]})</span>]
-                <input type="file" name="files[]" id="fileupload_input" multiple>
-            </div>
-            <button type="submit" class="btn btn-primary start" style="display:none">Start upload</button>
-            <button type="reset" class="btn btn-warning cancel" style="display:none" title="<:bouton_annuler:>"><:emballe_medias:cancel_upload:></button>
-        </div>
-    </form>
-    <div class="fileupload-content fileupload-progress ui-fileupload-content">
+		<div class="fileupload-buttonbar ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<div class="fileinput-button" id="fileinput-button">
+				[<span>(#ENV{legende_upload,[(#ENV{file_upload_limite}|>{1}|?{<:emballe_medias:legend_mise_en_ligne_multiple:>,<:emballe_medias:legend_mise_en_ligne_unique:>})]})</span>]
+				<input type="file" name="files[]" id="fileupload_input" multiple>
+			</div>
+			<button type="submit" class="btn btn-primary start" style="display:none">Start upload</button>
+			<button type="reset" class="btn btn-warning cancel" style="display:none" title="<:bouton_annuler:>"><:emballe_medias:cancel_upload:></button>
+		</div>
+	</form>
+	<div class="fileupload-content fileupload-progress ui-fileupload-content">
 		<div id="em_message_attente" class="explication">
 			<:emballe_medias:verification_fichier:>
 		</div>
@@ -476,16 +476,16 @@
 				<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
 			</p>
 		</div>
-        <div class="files">
-        	<div id="divSWFUploadUI" >
+		<div class="files">
+			<div id="divSWFUploadUI" >
 				<div id="progress_bar_container">
 				</div>
 			</div>
-        </div>
+		</div>
 		[(#ENV{file_upload_limite}|>{1}|oui)
-        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-        </div>
-        <!-- The extended global progress information -->
-        <div class="progress-extended">&nbsp;</div>]
-    </div>
+		<div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		</div>
+		<!-- The extended global progress information -->
+		<div class="progress-extended">&nbsp;</div>]
+	</div>
 </div>
