@@ -290,13 +290,6 @@
 <description>Digg-like, news, en-us</description>
 </item>
 
-<item>
-<title>Nuouz</title>
-<author>nuouz</author>
-<link>http://www.nuouz.com/addNews.aspx?url=%u</link>
-<description>Digg-like, news, fr</description>
-</item>
-
 <!-- P -->
 <item>
 <title>Plaxo</title>
@@ -327,13 +320,6 @@
 
 <!-- S -->
 <item>
-<title>Scoopeo</title>
-<author>scoopeo</author>
-<link>http://www.scoopeo.com/scoop/new?newurl=%u&amp;title=%t</link>
-<description>Digg-like, news, fr</description>
-</item>
-
-<item>
 <title>Seenthis</title>
 <author>seenthis</author>
 <link>http://seenthis.net/#ajouter=%t&url_site=%u&extrait=%d</link>
@@ -344,13 +330,6 @@
 <title>Slashdot</title>
 <author>slashdot</author>
 <link>http://slashdot.org/bookmark.pl?url=%u&amp;title=%t</link>
-</item>
-
-<item>
-<title>Spurl</title>
-<author>spurl</author>
-<link>http://spurl.net/spurl.php?url=%u&amp;title=%t</link>
-<description>Bookmarks</description>
 </item>
 
 <item>
@@ -399,13 +378,6 @@
 <link>http://www.tumblr.com/share?v=3&amp;u=%u&amp;t=%t&s=</link>
 <description>Digg-like</description>
 <category>1</category>
-</item>
-
-<item>
-<title>TUTMarks</title>
-<author>tutmarks</author>
-<link>http://tutmarks.com/submit.php?url=%u</link>
-<description>Digg-like</description>
 </item>
 
 <item>
