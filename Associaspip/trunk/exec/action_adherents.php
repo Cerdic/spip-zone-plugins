@@ -74,11 +74,13 @@ function exec_action_adherents_args($id_auteurs, $action_adherents) {
 }
 
 function modification_adherents($tab, $action, $statut='') {
-	$res ='';
-	if ($action=='grouper' || $action=='degrouper') { // on ajoute une table des groupes si il y en a
+	$res = '';
+	if ( $action=='supprimer' ) {
+		$action_file = 'supprimer_asso_membres';
+	} elseif ( $action=='grouper' || $action=='degrouper' ) { // on ajoute une table des groupes si il y en a
 		$res .='<p class="titrem">'._T('asso:groupes_membre').'</p>';
 		$query = sql_select('id_groupe, nom','spip_asso_groupes', 'id_groupe>99', '', 'nom'); // on ne considere que les groupes d'id >=100, les autres c'est pour la gestion des autorisations
-		if (sql_count($query)) {
+		if ( sql_count($query) ) {
 			$res .='<table>';
 			while($data = sql_fetch($query)) {
 				$res .= '<tr><td>'.$data['nom'].'</td>'. association_bouton_coch('id_groupe', $data['id_groupe']) .'</tr>';
@@ -86,11 +88,7 @@ function modification_adherents($tab, $action, $statut='') {
 			$res .='</table>';
 			$res .='<p class="titrem">'._T('asso:adherents_dp').'</p>';
 		}
-		if ($action=='grouper') {
-			$action_file = 'ajouter_membres_groupe';
-		} else {
-			$action_file = 'supprimer_asso_fonctions';
-		}
+		$action_file = ( $action=='grouper' ) ? 'ajouter_membres_groupe' : 'supprimer_asso_fonctions';
 	} else {
 		$action_file = $action.'_adherents';
 	}
