@@ -45,6 +45,7 @@ echo "-a : activer un ou des plugins séparés par une \",\" : saisie,yaml"
 echo "-d : désactiver un ou des plugins séparés par une \",\" : saisie,yaml, l'argument --all désactive tous les plugins."
 echo "-t : svn checkout du plugin, on donne le nom du plugin (celui de la zone) et son repertoire : trunk, branches, ou rien"
 echo "-f : svn checkout des plugins contenus dans le fichier telecharger.csv : colonne1=nom_plugin,colonne2=repertoire"
+echo "-c : vider le cache : local et tmp/cache"
 echo ""
 echo "Il est possible de faire un lien symbolique de cet exécutable soit :"
 echo "  - vers le répertoire plugins."
@@ -54,7 +55,13 @@ echo ""
 echo "Il est possible aussi de créer un alias dans son .bashrc ou .zshrc ..."
 }
 
-while getopts vhla:d:t:f option
+function F_vider_cache(){
+    rm -rf $repertoire_racine/tmp/cache/*
+    rm -rf $repertoire_racine/local/*
+    echo "les repertoires tmp et local sont vides"
+}
+
+while getopts vhlca:d:t:f option
 do
     case $option in
         v)   
@@ -75,6 +82,9 @@ do
             liste_plugins_desactiver=${OPTARG//,/" "}
             $repertoire_executables/desactiver_plugin.php $liste_plugins_desactiver "$repertoire_racine/ecrire"
             $repertoire_executables/lister_plugins.php "$repertoire_executables"
+            ;;
+        c)
+            F_vider_cache
             ;;
         t)
             OLDIFS="$IFS"
