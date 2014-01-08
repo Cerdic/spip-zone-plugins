@@ -2,6 +2,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// pour compat cf http://zone.spip.org/trac/spip-zone/changeset/79911/
+define('_DIR_LIB_GIS',find_in_path('lib/leaflet/'));
+
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
 $config = @unserialize($GLOBALS['meta']['gis']);
