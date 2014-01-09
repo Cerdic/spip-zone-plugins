@@ -345,7 +345,8 @@ function diogene_formulaire_verifier($flux){
 		//if (_request('id_parent') < 0) return $flux;
 
 		if($objet == 'rubrique' &&
-			(_request('id_rubrique') == _request('id_parent'))){
+			!strcmp($flux['args']['form'], 'editer_rubrique') &&
+			($flux['args']['args'][0] == $flux['args']['args'][1])){
 				$flux['data']['id_parent'] = _T('diogene:erreur_id_parent_id_rubrique');
 		}
 			
