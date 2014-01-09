@@ -40,7 +40,7 @@ function cairn_decoupe_h3($texte, $reset) {
 
 	if (!strlen(trim($texte))) return '';
 
-	$sections = preg_split('/<h3\b[^>]*>/i', $texte);
+	$sections = preg_split('/<h[23]\b[^>]*>/i', $texte);
 
 	$t = array_shift($sections);
 	if (strlen($t)) {
@@ -73,7 +73,19 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 	$texte = preg_replace(',<(ol|ul)\b,iS', '<p>$0', $texte);
 	$texte = preg_replace(',</(ol|ul)\b[^>]*>,iS', '$0</p>', $texte);
 
-	$texte = preg_replace(',<br\b[^>]*>,iS', "\n", $texte);
+	// sauts de ligne
+	$texte = preg_replace(',<br\b[^>]*>,iS', _CHEVRONA."br /"._CHEVRONB."\n", $texte);
+
+	// liens a href
+	foreach (extraire_balises($texte, 'a') as $l) {
+		if (preg_match('/^http/', extraire_attribut($l, 'href'))) {
+			$lien = preg_replace(',<a,i', "<liensimple", $l);
+			$lien = str_replace('href=', "xlink:href=", $lien);
+			$lien = preg_replace(',</a,i', "</liensimple", $lien);
+			$lien = str_replace(array('<','>'), array(_CHEVRONA, _CHEVRONB), $lien);
+			$texte = str_replace($l, $lien, $texte);
+		}
+	}
 
 	$paragraphes = preg_split('/<p\b[^>]*>/i', $texte);
 
