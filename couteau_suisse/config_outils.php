@@ -981,7 +981,7 @@ add_outil( array(
 	'id' => 'pucesli',
 	'auteur' 	 => "J&eacute;r&ocirc;me Combaz pour l'id&eacute;e originale",
 	'categorie'	 => 'typo-corr',
-	'pipelinecode:pre_typo' => 'if(strpos($flux, "-")!==false OR strpos($flux, "*")!==false) $flux = cs_echappe_balises("", "pucesli_remplace", $flux);',
+	'pipelinecode:pre_typo' => 'if(strpos($flux, "-")!==false OR strpos($flux, "*")!==false) $flux = cs_echappe_balises("html|code|cadre|frame|script|cite|jeux", "pucesli_remplace", $flux);',
 	'code:options' => 'function pucesli_remplace($texte) {
 	if(%%puceSPIP%%) {$texte = preg_replace(\'/^[*]\s*/m\', \'- \', $texte);}
 	return preg_replace(\'/^-\s*(?![-*#])/m\', \'-* \', $texte);
