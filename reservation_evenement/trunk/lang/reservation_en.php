@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
 	'explication_envoi_differe' => 'The modification of the status of a booking item towards
     <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
-	'explication_envoi_differe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
+	'explication_envoi_differe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!', # MODIF
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
 	// I
