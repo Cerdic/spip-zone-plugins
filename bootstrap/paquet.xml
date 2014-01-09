@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="img/bootstrap-32.png"
-	documentation="http://twitter.github.com/bootstrap/"
+	documentation="http://getbootstrap.com/2.3.2/"
 >
 
 	<nom>Bootstrap</nom>
