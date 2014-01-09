@@ -4,7 +4,7 @@
 		<BOUCLE_rubrique_existante(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{id_secteur=#_diogene:ID_SECTEUR}{tout}>
 			<INCLURE{fond=inclure/diogene_rubrique_description,id_rubrique,id_diogene=#_diogene:ID_DIOGENE,ajax} />
 			<div class="ajax">
-				[(#FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#GET{id_rubrique,#ENV{id_rubrique,0}},#ENV{redirect},#ENV{lier_trad}})]
+				[(#FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#ENV{id_rubrique,0},#ENV{redirect},#ENV{lier_trad}})]
 			</div>
 		</BOUCLE_rubrique_existante>
 			<div class="ajax">
