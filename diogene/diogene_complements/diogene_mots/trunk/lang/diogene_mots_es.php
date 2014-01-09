@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_confirmer_creation_mots_nouveaux' => '¿Confirmar la creación en este grupo?', # RELIRE
+	'erreur_confirmer_creation_mots_nouveaux' => '¿Confirmar la creación en este grupo?',
 	'erreur_mot_dans_autre_groupe' => 'La palabra-clave @mot@ ya existe en el grupo @groupe@. ',
 
 	// F
