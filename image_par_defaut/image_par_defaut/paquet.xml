@@ -1,0 +1,17 @@
+<paquet
+    prefix="image_par_defaut"
+    categorie="outil"
+    version="1.0.0"
+    etat="test"
+    compatibilite="[3.0.5;3.0.*]"
+    logo="prive/themes/spip/images/image_par_defaut-32.png"
+    documentation=""
+>
+
+    <nom>Image par défaut</nom>
+
+    <auteur>Matthieu Marcillaud</auteur>
+
+    <licence>GNU/GPL</licence>
+
+</paquet>
