@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.7.3"
+	version="1.8.0"
 	etat="test"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
@@ -31,10 +31,11 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/reservation_evenement.php" /> 
-	
+		
 	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" /> 
-	<pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" /> 			
+	<pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" /> 	
+	<pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" /> 		
 
 	<menu nom="reservations" titre="reservation:titre_reservations" parent="menu_edition" icone="images/reservation-16.png" action="reservations" /> 
 

@@ -11,7 +11,7 @@ function notifications_reservation_client_dist($quoi,$id_reservation, $options) 
     $options['id_reservation']=$id_reservation;  
     $options['qui']='client';     
     $subject=_T('reservation:votre_reservation_sur',array('nom'=>$GLOBALS['meta']['nom_site']));
-
+    $email=$options['email']:
     $message=recuperer_fond('notifications/contenu_reservation_mail',$options);
      
     //
@@ -22,7 +22,25 @@ function notifications_reservation_client_dist($quoi,$id_reservation, $options) 
 
     $o=array('html'=>$message);
 
-    $envoyer_mail($options['email'],$subject,$o);
+    $envoyer_mail($email,$subject,$o);
+    
+
+
+    if ($archiver = charger_fonction('archiver_notification','inc',true)) {
+                $envoi='reussi';
+                if(!$envoyer_mail)$envoi='echec';
+
+            $o=array(
+                'quoi'=>$quoi,
+                'texte'=>$message,
+                'html'=>'oui',
+                'id_objet'=>$id_reservation,
+                'objet'=>'reservation',
+                'envoi'=>$envoi);
+            
+            
+        $archiver ($email, $subject, $o);
+    }    
 }
 
 ?>

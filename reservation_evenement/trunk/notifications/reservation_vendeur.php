@@ -32,7 +32,21 @@ function notifications_reservation_vendeur_dist($quoi,$id_reservation, $options)
         'html'=>$message)
        );
 
+        if ($archiver = charger_fonction('archiver_notification','inc',true)) {
+                $envoi='reussi';
+                if(!$envoyer_mail)$envoi='echec';
 
+            $o=array(
+                'quoi'=>$quoi,
+                'texte'=>$message,
+                'html'=>'oui',
+                'id_objet'=>$id_reservation,
+                'objet'=>'reservation',
+                'envoi'=>$envoi);
+            
+            
+        $archiver ($email, $subject, $o);
+    }
 
 }
 
