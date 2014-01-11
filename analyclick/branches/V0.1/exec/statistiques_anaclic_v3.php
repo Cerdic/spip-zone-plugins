@@ -141,6 +141,8 @@ function exec_statistiques_anaclic_args($id_document, $duree, $interval, $type, 
 	// Limiter a un document
 	$duree = intval(_request('duree'));
 	if (!$duree) $duree = 90;
+	$duree_mois = intval(_request('duree_mois'));
+	if (!$duree_mois) $duree_mois = 12;
 	$where = "date > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL $duree day)";
 	if ($id_document) $where .= " AND id_document=$id_document";
 	
@@ -148,17 +150,19 @@ function exec_statistiques_anaclic_args($id_document, $duree, $interval, $type, 
 	$result = sql_select("date, SUM(telechargement) AS total_absolu", "spip_doc_compteurs",$where,'date','date','','',$serveur);
 	$statj = array();
 	while ($row = sql_fetch($result)) 
-	{	array_push ($statj, [ $row['date'], $row['total_absolu'] ]);
+	{	array_push ($statj, array ( $row['date'], $row['total_absolu'] ));
 	}
 	// Calcul des statistiques / mois
+	$where = "date > DATE_SUB(".sql_quote(date('Y-m-1')).",INTERVAL $duree_mois month)";
+	if ($id_document) $where .= " AND id_document=$id_document";
 	$result = sql_select("YEAR(date) as year, MONTH(date) as month, SUM(telechargement) AS total_absolu", "spip_doc_compteurs",$where,'year,month','date','','',$serveur);
 	$statm = array();
 	while ($row = sql_fetch($result)) 
-	{	array_push ($statm, [ $row[year]."-".($row['month']<10?'0':'').$row['month'], $row['total_absolu'] ]);
+	{	array_push ($statm, array ( $row[year]."-".($row['month']<10?'0':'').$row['month'], $row['total_absolu'] ));
 	}
 	// Affichage
 	echo debut_cadre_sous_rub('statistique-24.png',true,'','', 'statistiques');
-	echo recuperer_fond ('fonds/statistiques_anaclic_v3', array('id_document'=>$id_document, 'duree'=>$duree, 'stat_jour' => json_encode($statj), 'stat_mois' => json_encode($statm) ));
+	echo recuperer_fond ('fonds/statistiques_anaclic_v3', array('id_document'=>$id_document, 'duree'=>$duree, 'duree_mois'=>$duree_mois, 'stat_jour' => json_encode($statj), 'stat_mois' => json_encode($statm) ));
 	echo fin_cadre_relief(true);
 
 	echo fin_gauche(), fin_page();	
