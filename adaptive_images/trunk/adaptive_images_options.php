@@ -99,7 +99,7 @@ if ($settings){
 
 // GD memory limit
 if (defined('_IMG_GD_MAX_PIXELS'))
-	$AdaptiveImages->maxImagePxGDMemoryLimit = _IMG_GD_MAX_PIXELS;
+	$AdaptiveImages->maxImagePxGDMemoryLimit = intval(_IMG_GD_MAX_PIXELS);
 
 // dossier de stockage des images adaptatives
 $AdaptiveImages->destDirectory = _DIR_VAR . "adapt-img/";
