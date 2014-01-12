@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Foros privados',
 	'forums_public' => 'Foros públicos',
 	'forums_public_a_noter' => 'Nota: en el caso de los foros moderados a priori, sólo aquellos autores que tienen derecho de aprobar los foros son notificados cuando se crea un foro; los otros destinatarios son notificados cuando el mensaje ha sido aprobado por el moderador.',
+	'forums_public_article' => '<strong>Respuesta al artículo</strong>: las personas que hayan respondido públicamente al artículos reciben notificaciones de los foros (públicos) del artículo (útil para los foros «planos»).',
 	'forums_public_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones de aquellos foros derivados de sus artículos en en el sitio públicos.',
 	'forums_public_moderateur' => 'Indique a continuación el correo electrónico del moderador de los foros públicos (si son varios, separe con comas).',
 	'forums_public_thread' => '<strong>Hilo de discusión</strong>: los participantes de un mismo hilo de discusión reciben notificaciones de los foros (públicos).',
