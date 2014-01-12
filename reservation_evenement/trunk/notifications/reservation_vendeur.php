@@ -37,7 +37,7 @@ function notifications_reservation_vendeur_dist($quoi,$id_reservation, $options)
                 if(!$envoyer_mail)$envoi='echec';
 
             $o=array(
-                'recipients'=>$email,                         
+                'recipients'=>implode(',',$email),                         
                 'sujet'=>$subject,
                 'texte'=>$message,
                 'html'=>'oui',

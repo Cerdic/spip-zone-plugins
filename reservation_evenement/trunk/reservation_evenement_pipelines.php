@@ -64,7 +64,7 @@ function reservation_evenement_affiche_milieu($flux) {
 function reservation_evenement_notifications_archive($flux){
     $flux=array_merge($flux,array(
     'reservation_client'=>array(
-        'activer'=>'oui',
+        'activer'=>'on',
         'duree'=>'180'  
         ),
     'reservation_vendeur'=>array(
