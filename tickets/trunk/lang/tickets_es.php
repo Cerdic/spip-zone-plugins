@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_jalons' => 'Hitos',
 	'cfg_lbl_joindre_fichiers' => 'Adjuntar uno o varios archivos',
 	'cfg_lbl_liste_auteurs' => 'Autores del sitio',
+	'cfg_lbl_notif_destinataires' => 'Destinatarios de la notificación de creación',
 	'cfg_lbl_notification_publique' => 'Notificación pública',
 	'cfg_lbl_projets' => 'Proyectos',
 	'cfg_lbl_selecteur_navigateur' => 'Selector del navegador',
@@ -65,6 +66,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_champs_optionnels' => 'Campos opcionales',
 	'cfg_lgd_champs_options_autres' => 'Otras opciones',
 	'cfg_lgd_notifs_forums' => 'Foros y notificaciones',
+	'cfg_notif_admin' => 'Todos los administradores del sitio',
+	'cfg_notif_assigne' => 'Sólo la persona asignada al ticket',
+	'cfg_notif_auteur' => 'Todos los autores del sitio',
+	'cfg_notif_liste' => 'Una lista de autores',
+	'cfg_notif_liste_auteurs' => 'Lista de autores recibiendo las notificaciones',
+	'cfg_notif_webmestre' => 'Todos los webmasters',
 	'cfg_titre_tickets' => 'Tickets - Configuración del plugin',
 	'champ_assigner' => 'Asignar a:',
 	'champ_composant' => 'Componente:',
@@ -138,6 +145,7 @@ Si se trata de un problema de visualización, precise con qué navegador lo expe
 	'explication_description_ticket_ss_nav' => 'Describa lo más concretamente posible la necesidad o el problema. 
 Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'explication_fichier' => 'Adjuntar un archivo a su ticket.',
+	'explication_notif_destinataire' => 'El autor del ticket y la persona asignada reciben sistemáticamente la notificación.',
 	'explication_redaction' => 'Cuando haya finalizado la redacción de su ticket, seleccione el estatus «abierto y discutido».',
 	'explication_url_exemple' => 'Indique aquí la dirección de URL de una página a la que concierna este ticket.',
 
