@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Marque las entradas que desee <strong>esconder</strong> cuando cree un menú.',
+	'configurer_titre' => 'Configurar las entradas del plugin Menus',
 	'confirmer_supprimer_entree' => '¿Quiere realmente eliminar esta entrada?',
 
 	// D
