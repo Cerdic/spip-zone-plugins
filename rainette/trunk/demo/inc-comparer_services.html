@@ -1,0 +1,36 @@
+[(#REM) <!--
+	Afficher les données de chaque service concerné dans un tableau permettant de comparer les valeurs et les types.
+	Arguments :
+	- mode : infos, conditions ou prévisions
+	- jeu : tableau du jeu de données service => lieu
+	- donnees : tableau global des données du mode pour chaque service concerné par le jeu
+-->]
+
+<B_comparer>
+<table class="spip">
+	<caption><strong>Comparaisons des donn&eacute;es de type #ENV{mode}</strong></caption>
+	<thead>
+		<tr>
+			<th>Donn&eacute;es</th>
+		<BOUCLE_head(DATA) {source table, #ENV{jeu}}>
+			<th>#CLE</th>
+		</BOUCLE_head>
+		</tr>
+	</thead>
+	<tbody>
+<BOUCLE_comparer(DATA) {source table, #ENV{donnees}}>
+	<tr>
+		<td>#CLE</td>
+		<BOUCLE_valeur(DATA) {source table, #ENV{jeu}}>
+			<td>
+				[(#_comparer:VALEUR|table_valeur{#CLE})]
+				[<br />
+				(#_comparer:VALEUR|table_valeur{#CLE}|gettype)]
+			</td>
+		</BOUCLE_valeur>
+	</tr>
+</BOUCLE_comparer>
+	</tbody>
+</table>
+</B_comparer>
+<//B_comparer>

@@ -8,8 +8,6 @@ if (!defined('_RAINETTE_ICONES_GRANDE_TAILLE'))
 	define ('_RAINETTE_ICONES_GRANDE_TAILLE', 110);
 if (!defined('_RAINETTE_ICONES_PETITE_TAILLE'))
 	define ('_RAINETTE_ICONES_PETITE_TAILLE', 28);
-if (!defined('_RAINETTE_DEBUG'))
-	define ('_RAINETTE_DEBUG', false);
 
 // Balises du plugin utilisables dans les squelettes et modeles
 function balise_RAINETTE_INFOS($p) {
@@ -335,36 +333,6 @@ function rainette_coasser_infos($lieu, $modele='infos_ville', $service='weather'
 	return $texte;
 }
 
-function rainette_debug($lieu, $mode='previsions', $service='weather') {
-	$debug = '';
-
-	// Recuperation du tableau des conditions courantes
-	if (_RAINETTE_DEBUG AND function_exists('bel_env')) {
-		$charger = charger_fonction('charger_meteo', 'inc');
-		$nom_fichier = $charger($lieu, $mode, $service);
-		if ($nom_fichier) {
-			lire_fichier($nom_fichier,$tableau);
-			$tableau = unserialize($tableau);
-
-			// On ajoute le lieu, le mode et le service au contexte fourni au modele
-			if ($mode == 'previsions') {
-				// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
-				$index = count($tableau)-1;
-				$tableau[$index]['lieu'] = $lieu;
-				$tableau[$index]['mode'] = $mode;
-				$tableau[$index]['service'] = $service;
-			}
-			else {
-				$tableau['lieu'] = $lieu;
-				$tableau['mode'] = $mode;
-				$tableau['service'] = $service;
-			}
-
-			$debug = bel_env(serialize($tableau));
-		}
-	}
-
-	return $debug;
-}
+include_spip('inc/debusquer');
 
 ?>

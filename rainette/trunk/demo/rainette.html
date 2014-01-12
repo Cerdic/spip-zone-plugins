@@ -5,46 +5,135 @@
 <head>
 	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
 	<title>Rainette - Demo</title>
+	<style type="text/css">
+		/* Layout Gala 24 */
+		html,body{margin:0;padding:0}
+		body{font: 76% arial,sans-serif}
+		p{margin:0 10px 10px}
+		a{display:block;color: #981793;padding:10px}
+		div#header h1{height:80px;line-height:80px;margin:0;
+		  padding-left:10px;background: #EEE;color: #79B30B}
+		div#content p{line-height:1.4}
+		div#navigation{background:#B9CAFF}
+		div#extra{background:#FF8539}
+		div#footer{background: #333;color: #FFF}
+		div#footer p{margin:0;padding:5px 10px}
+		div#wrapper{float:right;width:100%;margin-left:-200px}
+		div#content{margin-left:200px;}
+		div#navigation{float:left;width:200px}
+		div#extra{float:left;clear:left;width:200px}
+		div#footer{clear:both;width:100%}
+		/* Personnalisation pour la demo */
+		div#header h1{color:#798F74}
+		div#content{padding-left:20px;padding-bottom:40px;}
+		div#footer{padding:20px;}
+		h2{text-align:center;border-bottom:1px solid #000;}
+		table{border:1px solid #000000;border-collapse:collapse;}
+		caption {background:#333;color:#eee;}
+		th {font-weight: bold;border-bottom:1px solid #000}
+		thead th {background: #DDD;}
+		th,td,caption {padding: 0.75em;}
+		tbody tr:nth-child(even) th,
+		tbody tr:nth-child(even) td,
+		tbody tr.even th,
+		tbody tr.even td {background: #EEE;}
+		.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+		.clearfix{display:inline-table;}
+		div.clearfix{margin-bottom:30px;}
+		div.notice{padding:1em;color: #514721;border:2px solid #FFD324;background-color:#FFF6BF;}
+	</style>
 	#INSERT_HEAD
 </head>
-<body style="color: #000000;font-family: Arial,Helvetica,sans-serif;font-size: 11px;margin: auto;width: 640px;">
-	<div style="float: left; margin-right: 20px;">
-		<img height="32" width="32" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
+<body>
+	<div id="container">
+	<div id="header">
+		<h1>
+			<img height="48" width="48" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
+			PLUGIN RAINETTE[ ((#PLUGIN{RAINETTE, version}))] - [Service (#ENV{service, weather})]
+		</h1>
 	</div>
-	<h1 style="margin-bottom: 20px; color: #798F74;">PLUGIN RAINETTE[ ((#PLUGIN{RAINETTE, version}))] - [Service (#ENV{service, weather})]</h1>
-	<p style="font-size: 12px;">Pour appeler la page de demo:</p>
-	<ul>
-		<li><strong>http://monsite/spip.php?page=demo/rainette</strong> (Paris par d&eacute;faut) ou</li>
-		<li><strong>http://monsite/spip.php?page=demo/rainette&amp;ville=FRXXnnnn&amp;service=xxx</strong> pour pr&eacute;ciser la ville voire le service</li>
-	</ul>
-	<p style="font-size: 12px;">Pour chercher le code d'une ville pour utiliser weather.com composer l'url:</p>
-	<ul><li><strong>http://xoap.weather.com/search/search?where=nom_de_la_ville</strong></li></ul>
+	<div id="wrapper">
+		<div id="content">
+			#SET{jeu, #ARRAY{
+						'weather', 'FRXX0076',
+						'owm', 'Paris,Fr',
+						'wwo', 'Paris,France',
+						'wunderground', 'Paris,France',
+						'yahoo', '615702'}}
+			#SET{service, #ENV{service, weather}}
+			#SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
 
-	<div id="#ENV{ville, FRXX0076}" style="margin-top:5em">
-		<p id='rainette_infos' style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_infos</strong></p>
-		[(#MODELE{rainette_infos,code=#ENV{ville, FRXX0076},sous_modele=infos_ville, service=#ENV{service, weather}})]
-		<br style="clear:both" />
-		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>RAINETTE_INFOS</strong></p>
-		<ul>
-			<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#ENV{ville, FRXX0076}, VILLE}</strong></li>
- 			<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, longitude, #ENV{service, weather}})</strong>]</li>
-			<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, latitude, #ENV{service, weather}}|rainette_afficher_unite{angle})</strong>]</li>
-			<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076, '', #ENV{service, weather}}})</strong>]</li>
-			<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
-		</ul>
-		<br style="clear:both" />
-		<p id='rainette_conditions' style="font-size: 12px; margin-top:2em;">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_conditions</strong></p>
-		[(#MODELE{rainette_conditions,code=#ENV{ville, FRXX0076},sous_modele=conditions_tempsreel, service=#ENV{service, weather}})]
-		<br style="clear:both" />
-		<p style="font-size: 12px; margin-top:2em;">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)<br />
-		Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
- 		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=0,sous_modele=previsions_2x12h, service=#ENV{service, weather}})]
-		<br style="clear:both" />
-		<p id='rainette_previsions_2x12' style="font-size: 12px; margin-top:2em;">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</p>
- 		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=1_jour,jour=2,sous_modele=previsions_2x12h, service=#ENV{service, weather}})]
-		<br style="clear:both" />
- 		<p id='rainette_previsions_24' style="font-size: 12px; margin-top:2em;">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</p>
-		[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=x_jours,jour=5,sous_modele=previsions_24h, service=#ENV{service, weather}})]
+			<h2>UTILISATIONS DES INFORMATIONS METEO</h2>
+			<a name="infos" href="#"></a>
+			<div class="clearfix">
+				<div class="clearfix">
+					<h3>Utilisation du mod&eacute;le <strong>rainette_infos</strong></h3>
+					[(#MODELE{rainette_infos,code=#GET{lieu},sous_modele=infos_ville, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
+					<h3>Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
+					<ul>
+						<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#GET{lieu}, VILLE}</strong></li>
+						<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, longitude, #GET{service}})</strong>]</li>
+						<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, latitude, #GET{service}}|rainette_afficher_unite{angle})</strong>]</li>
+						<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076, '', #GET{service}}})</strong>]</li>
+						<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
+					</ul>
+				</div>
+			</div>
+
+			<h2>UTILISATIONS DES CONDITIONS METEO</h2>
+			<a name="conditions" href="#"></a>
+			<div class="clearfix">
+				<h3>Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
+				[(#MODELE{rainette_conditions,code=#GET{lieu},sous_modele=conditions_tempsreel, service=#GET{service}})]
+			</div>
+
+
+			<h2>UTILISATIONS DES PREVISIONS METEO</h2>
+			<a name="previsions" href="#"></a>
+			<div class="clearfix">
+				<div class="clearfix">
+					<h3>&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</h3>
+					[(#MODELE{rainette_previsions,code=#GET{lieu},type=x_jours,jour=5,sous_modele=previsions_24h, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
+					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)</h3>
+					<p>Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
+					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=0,sous_modele=previsions_2x12h, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
+					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</h3>
+					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=2,sous_modele=previsions_2x12h, service=#GET{service}})]
+				</div>
+			</div>
+
+			<h2>COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
+			<a name="comparaison" href="#"></a>
+			<div class="clearfix">
+				#SET{donnees, #VAL{conditions}|rainette_debug_comparer{#GET{jeu}}}
+				#INCLURE{fond=demo/inc-comparer_services,
+					jeu=#GET{jeu},
+					donnees=#GET{donnees}}
+			</div>
+		</div>
 	</div>
+
+	<div id="navigation">
+	<p><strong>2) Navigation here.</strong> long long fill filler very fill column column silly filler very filler fill fill filler text fill very silly fill text filler silly silly filler fill very make fill column text column very very column fill fill very silly column silly silly fill fill long filler </p>
+	</div>
+
+	<div id="extra">
+	<p><strong>3) More stuff here.</strong> very text make long column make filler fill make column column silly filler text silly column fill silly fill column text filler make text silly filler make filler very silly make text very very text make long filler very make column make silly column fill silly column long make silly filler column filler silly long long column fill silly column very </p>
+	</div>
+
+	<div id="footer">
+		<p>Pour appeler la page de demo:</p>
+		<ul>
+			<li><strong>http://monsite/spip.php?page=demo/rainette</strong> (Paris par d&eacute;faut) ou</li>
+			<li><strong>http://monsite/spip.php?page=demo/rainette&amp;ville=FRXXnnnn&amp;service=xxx</strong> pour pr&eacute;ciser la ville voire le service</li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>
