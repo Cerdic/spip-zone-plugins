@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.12.4"
+	version="4.13.0"
 	schema="2.0.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -20,7 +20,7 @@
 	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
-	<copyright>2011-2013</copyright>
+	<copyright>2011-2014</copyright>
 	<licence>GPL v3</licence>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
 

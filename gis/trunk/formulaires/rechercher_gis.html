@@ -3,7 +3,7 @@
 <BOUCLE_si_recherche(CONDITION){si #ENV{recherche_gis}}>
 <B_recherche>
 	<ul class="liste_items">
-	<BOUCLE_recherche(GIS){titre LIKE %(#ENV{recherche_gis})%}{doublons objet}>#SET{id_gis,#ID_GIS}
+	<BOUCLE_recherche(GIS){recherche #ENV{recherche_gis}}{doublons objet}>#SET{id_gis,#ID_GIS}
 	#SET{ou, #LISTE{#VILLE, #PAYS}|array_filter|join{", "}}
 	[<li class="item">(#TITRE)[ ((#GET{ou}))]
 		<div class="actions">
