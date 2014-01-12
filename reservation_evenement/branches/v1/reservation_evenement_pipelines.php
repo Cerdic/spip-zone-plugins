@@ -60,5 +60,19 @@ function reservation_evenement_affiche_milieu($flux) {
 
     return $flux;
 }
+// Définitions des notifications pour https://github.com/abelass/notifications_archive
+function reservation_evenement_notifications_archive($flux){
+    $flux=array_merge($flux,array(
+    'reservation_client'=>array(
+        'activer'=>'on',
+        'duree'=>'180'  
+        ),
+    'reservation_vendeur'=>array(
+        'duree'=>'180'  
+        )        
+    ));
+       
+    return $flux;   
+}
 
 ?>

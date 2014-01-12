@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
 	'explication_envoi_differe' => 'Eine Status Veränderung eines Ameldungs Items zu
     <div><strong>"@statuts@"</strong></div> lösst das Senden eines Benachrichtigungsmail aus!',
-	'explication_envoi_differe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
+	'explication_envoi_differe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!', # MODIF
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
 
 	// I
