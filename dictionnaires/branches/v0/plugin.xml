@@ -3,9 +3,9 @@
 	<slogan>Cr&#233;er des dictionnaires</slogan>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.3</version>
+	<version>0.3.4</version>
 	<version_base>0.3.0</version_base>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>Permet la cr&#233;ation de dictionnaires regroupant des d&#233;finitions. Les termes définis sont automatiquement détect&#233;s dans les textes du site et il est alors possible de les ins&#233;rer dans le HTML du texte de mani&#232;re accessible.</description>
 	<categorie>divers</categorie>
 	<icon>prive/themes/spip/images/dictionnaire-32.png</icon>
