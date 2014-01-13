@@ -28,7 +28,7 @@
 [(#REM) valeur peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
 #SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
 
-<select name="#ENV{nom}[]" id="champ_[(#ENV{nom}|saisie_nom2classe)]" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size,10})"][ (#ENV*{attributs})]>
+<select name="#ENV{nom}[]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size,10})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
 	<option value="#CLE" [(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>#VALEUR</option>

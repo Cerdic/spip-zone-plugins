@@ -13,7 +13,7 @@
 	[(#SAISIE{pays, pays,
 		label=<:plugin:info_pays:>})] 
 ]
-<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+<select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_pays(GEO_PAYS){par multi nom}>
 	<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#NOM</option>

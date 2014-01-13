@@ -16,7 +16,7 @@
   apres selection du document. L'id du document sera alors passe par URL.
 ]
 
-<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
+<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
 
 [(#REM) Si la mediatheque est presente ]
 [(#PLUGIN{medias}|oui)

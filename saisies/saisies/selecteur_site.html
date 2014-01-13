@@ -15,7 +15,7 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
 
 ]
-<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ (#ENV*{attributs})]>
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="0">[(#ENV{option_intro})]</option>]
 	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>

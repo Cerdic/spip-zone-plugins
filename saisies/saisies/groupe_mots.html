@@ -19,7 +19,7 @@
 		multiple=oui,
 		table_liaison=articles})] 
 ]
-<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="0">[(#ENV{option_intro})]</option>]
 	<BOUCLE_groupes(GROUPES_MOTS){id_groupe !IN #ENV{groupes_exclus,#ARRAY}}{par num titre, titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table_liaison,.*},'($|,)'}}{tout}>

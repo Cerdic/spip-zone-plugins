@@ -1,4 +1,4 @@
-<select name="#ENV{nom}" id="champ_#ENV{nom}">
+<select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">
 	#SET{tab,#ENV{formulaire}}
 	#SET{tab_par_nom,#ENV{formulaire}|saisies_lister_par_nom}
 	#SET{padding,0}

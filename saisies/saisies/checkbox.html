@@ -39,24 +39,23 @@
 ]
 [(#ENV{tout_selectionner}|oui)
 	<div class="[(#ENV{choix,choix})] none-nojs">
-		<input type="checkbox" name="#ENV{nom}_tout" class="checkbox" id="champ_[(#ENV{nom}|saisie_nom2classe)]_tout" value="on" onChange="if (jQuery(this).attr('checked')=='checked') jQuery(this).parent('div').parent().find('input').attr('checked','checked'); else jQuery(this).parent('div').parent().find('input').removeAttr('checked');"/>
-		<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_tout"><:saisies:tout_selectionner:></label>
+		<input type="checkbox" name="#ENV{nom}_tout" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout" value="on" onChange="if (jQuery(this).attr('checked')=='checked') jQuery(this).parent('div').parent().find('input').attr('checked','checked'); else jQuery(this).parent('div').parent().find('input').removeAttr('checked');"/>
+		<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout"><:saisies:tout_selectionner:></label>
 	</div>
 ]
 
 <BOUCLE_checkbox(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}[ (#ENV{choix,choix})_#CLE]">
-	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ (#ENV*{attributs})] />
-	<label for="champ_[(#ENV{nom}|saisie_nom2classe)]_#COMPTEUR_BOUCLE">[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)<strong>]#VALEUR[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)</strong>]</label>
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ (#ENV*{attributs})] />
+	<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_#COMPTEUR_BOUCLE">[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)<strong>]#VALEUR[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)</strong>]</label>
 </div>
-
 </BOUCLE_checkbox>
 [(#ENV{choix_alternatif}|oui)
-    <div class="#ENV{choix,choix} choix_alternatif[ (#ENV{choix,choix})_alternatif]">
-        <input name="#ENV{nom}[(#VAL{91}|chr)]choix_alternatif[(#VAL{93}|chr)]" id="[champ_(#ENV{nom}|saisie_nom2classe)_choix_alternatif]" />
-        <label for="[champ_(#ENV{nom}|saisie_nom2classe)_choix_alternatif]">
-            #ENV{choix_alternatif_label}
-        </label>
-    </div>
+<div class="#ENV{choix,choix} choix_alternatif[ (#ENV{choix,choix})_alternatif]">
+    <input name="#ENV{nom}[(#VAL{91}|chr)]choix_alternatif[(#VAL{93}|chr)]" id="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]" />
+    <label for="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]">
+        #ENV{choix_alternatif_label, <:saisies:option_choix_alternatif_label_defaut:>}
+    </label>
+</div>
 ]
 </B_checkbox>

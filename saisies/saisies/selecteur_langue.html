@@ -11,7 +11,7 @@
 ]
 [(#SET{valeur,[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}}})]})]
 [(#SET{langues,[(#VAL{changer_lang}|liste_options_langues{#GET{valeur}})]})]
-<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+<select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 <BOUCLE_si_spip2(CONDITION){si (#GET{langues}|is_array|non)}>
 #GET{langues}
 </BOUCLE_si_spip2>

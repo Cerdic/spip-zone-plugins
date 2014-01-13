@@ -18,4 +18,4 @@
 [(#REM) Si la valeur est un tableau, le plugin sait le transformer en chaine, plutôt que d'afficher "Array" ]
 #SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
 #SET{valeur, #GET{valeur}|is_array|?{(#GET{valeur}|saisies_tableau2chaine), #GET{valeur}}}
-<textarea name="#ENV{nom}" class="[(#ENV{class}) ][inserer_barre_(#ENV{inserer_barre}) ][(#ENV{previsualisation}|oui)inserer_previsualisation]" id="champ_[(#ENV{nom}|saisie_nom2classe)]" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|et{#HTML5}|oui) required="required"][ (#ENV*{attributs})]>#GET{valeur}</textarea>
+<textarea name="#ENV{nom}" class="[(#ENV{class}) ][inserer_barre_(#ENV{inserer_barre}) ][(#ENV{previsualisation}|oui)inserer_previsualisation]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|et{#HTML5}|oui) required="required"][ (#ENV*{attributs})]>#GET{valeur}</textarea>
