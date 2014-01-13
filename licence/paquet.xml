@@ -1,13 +1,13 @@
 <paquet
 	prefix="licence"
 	categorie="divers"
-	version="0.4.7"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="img_pack/licence_logo.png"
 	schema="0.2.0"
 	documentation="http://contrib.spip.net/2147"
->	
+>
 
 	<nom>Licence</nom>
 	<!-- Une Licence pour articles et documents -->
